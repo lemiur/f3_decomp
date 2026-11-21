@@ -1,0 +1,6 @@
+evidence/
+*.obj
+*.exe
+*.pdb
+*.ilk
+out/
