@@ -11,7 +11,8 @@
  *            globals: non-extern declarations; types: struct/class/enum definitions and typedefs).
  *   marker:  appended to the end of every declaration line of a renamed global or type.
  * Location list (TSV, optional): address, file, first_line (1-based) of a function definition; where given and the
- *   new name appears within 15 lines past blank/comment lines, the comment goes there instead of the syntactic site.
+ *   line (past blank and comment lines) starts a statement naming the function, the comment goes there instead of
+ *   the syntactic site; other rows fall back to the syntactic search.
  * Report (TSV): kind address old new status reason files units comments markers
  *   status: applied | ambiguous | collision | not-found; files: every file touched (';'), build/units.json included;
  *   units: the units whose recipe entry changed.
@@ -1627,7 +1628,7 @@ static void apply_ops(FileWork *w, Buf *out)
 }
 
 /* comments at the locations the rule checker reports: first_line, past blank and comment lines, must reach a line
- * holding the new name within 15 lines */
+ * that starts a statement naming the function before its first ';' or '{' */
 static int place_by_locations(FileWork *w, int r)
 {
     Rename *R = &g_ren.a[r];
@@ -1640,12 +1641,16 @@ static int place_by_locations(FileWork *w, int r)
         line = l->line - 1;
         if (line >= (int)w->ls.n) continue;
         while (line < (int)w->ls.n && line_is_blank_or_comment(w->d, w->n, &w->ls, line, &inb)) line++;
-        for (k = line; k < line + 15 && k < (int)w->ls.n; k++) {
-            size_t a = (size_t)w->ls.a[k], b = k + 1 < (int)w->ls.n ? (size_t)w->ls.a[k + 1] : w->n, p;
-            for (p = a; p + R->nl <= b; p++)
-                if (!memcmp(w->d + p, R->nw, (size_t)R->nl) && (p == 0 || !is_id_char((unsigned char)w->d[p - 1])) &&
-                    (p + R->nl >= w->n || !is_id_char((unsigned char)w->d[p + R->nl]))) { ok = 1; break; }
-            if (ok) break;
+        /* the statement starting on that line must name the function before its first ';', '{' or '}' */
+        for (k = 0; k < (int)w->toks.n && (int)w->toks.a[k].line < line; k++) {}
+        if (k < (int)w->toks.n && (int)w->toks.a[k].line != line) k = (int)w->toks.n;
+        for (; k < (int)w->toks.n && (int)w->toks.a[k].line < line + 15; k++) {
+            const Tok *tk = &w->toks.a[k];
+            if (tk->t == ';' || tk->t == '{' || tk->t == '}') break;
+            if (tk->t == T_ID && tk->len == (uint32_t)R->nl && !memcmp(w->d + tk->s, R->nw, (size_t)R->nl)) {
+                ok = 1;
+                break;
+            }
         }
         if (!ok) continue;
         placed = 1;
