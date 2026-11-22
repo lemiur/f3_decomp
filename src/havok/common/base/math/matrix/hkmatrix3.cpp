@@ -80,7 +80,7 @@ struct Matrix3x4
 class CMatrixOps
 {
   public:
-    bool FUN_00cd4e90(float epsilon);
+    bool FUN_00cd4e90(struct S_91db00* arInfo);
 
   private:
     Matrix3x4 m_mat;
@@ -141,25 +141,26 @@ class CMatrixOpsBridge
     void FUN_0091d450(const float* pB, const float* pA, float f);
 };
 
+// The capsule's construction info: the radius and the two end points.
+struct S_91db00
+{
+    int unk00;
+    float m_04;
+    int unk08;
+    int unk0C;
+    float m_10;
+    float m_14;
+    float m_18;
+    float m_1c;
+    float m_20;
+    float m_24;
+    float m_28;
+    float m_2c;
+};
 // pdb: bhkCapsuleShape::Init | bhkCapsuleShape.obj | fnv360_0822_retail, objopen_prop, low
 // pdb params: arInfo
-bool CMatrixOps::FUN_00cd4e90(float epsilon)
+bool CMatrixOps::FUN_00cd4e90(S_91db00* p)
 {
-    struct S_91db00
-    {
-        char pad_00[4];
-        float m_04;
-        char pad_08[8];
-        float m_10;
-        float m_14;
-        float m_18;
-        float m_1c;
-        float m_20;
-        float m_24;
-        float m_28;
-        float m_2c;
-    };
-    S_91db00* p = *reinterpret_cast<S_91db00**>(&epsilon);
     if (p != 0)
     {
         __declspec(align(16)) float a[4];
@@ -413,7 +414,7 @@ Actor* Ctl::FUN_007abac0()
     float best = 0.0f;
     Actor* sel = 0;
     float v = unk38;
-    if (!(v > best)) {} else { sel = unk0C; best = v; }
+    if (v > best) { sel = unk0C; best = v; }
     v = unk3C;
     if (v > best) { sel = unk10; best = v; }
     v = unk40;
