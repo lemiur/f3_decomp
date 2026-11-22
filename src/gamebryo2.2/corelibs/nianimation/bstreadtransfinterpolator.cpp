@@ -2,10 +2,23 @@
 // src/gamebryo2.2/corelibs/nianimation/bstreadtransfinterpolator.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/_fallout3/platforms/common/code/gamebryo2.2/corelibs/nianimation/bstreadtransfinterpolator.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-struct FUN_00a43560_shell
+// NiFloatData's key fields (FNV360_PDB).
+struct LerpData_00a43560
 {
-    unsigned char m_auiShapeKeys[0x20];
-    void* m_ptr_20;
+    void* unk00;
+    unsigned int unk04;
+    int m_uiNumKeys;  // src: FNV360_PDB NiFloatData +0x8
+    void* m_pkKeys;  // src: FNV360_PDB NiFloatData +0xC
+    void* m_eType;  // src: FNV360_PDB NiFloatData +0x10
+    unsigned char m_ucKeySize;  // src: FNV360_PDB NiFloatData +0x14
+};
+struct TreadTransf_00a43560
+{
+    unsigned char unk00[0x20];
+    LerpData_00a43560* spLerpData;  // src: FNV360_PDB BSTreadTransfInterpolator +0x20
+};
+struct FUN_00a43560_shell : TreadTransf_00a43560
+{
     int __thiscall FUN_00a43560(short arg);
 };
 
@@ -14,15 +27,15 @@ int __thiscall FUN_00a43560_shell::FUN_00a43560(short arg)
 {
     if (arg == 0)
     {
-        if (this->m_ptr_20)
+        if (spLerpData)
         {
-            return *reinterpret_cast<int*>(reinterpret_cast<char*>(this->m_ptr_20) + 8);
+            return spLerpData->m_uiNumKeys;
         }
     }
     return 0;
 }
 
-struct FUN_00a43580_shell
+struct FUN_00a43580_shell : TreadTransf_00a43560
 {
     void* __thiscall FUN_00a43580(unsigned short flag);
 };
@@ -32,14 +45,14 @@ void* FUN_00a43580_shell::FUN_00a43580(unsigned short flag)
 {
     if (!flag)
     {
-        void* p = *reinterpret_cast<void**>(reinterpret_cast<unsigned char*>(this) + 0x20);
+        LerpData_00a43560* p = spLerpData;
         if (p)
-            return *reinterpret_cast<void**>(reinterpret_cast<unsigned char*>(p) + 0x10);
+            return p->m_eType;
     }
     return 0;
 }
 
-struct FUN_00a435a0_shell
+struct FUN_00a435a0_shell : TreadTransf_00a43560
 {
     void* FUN_00a435a0(short arg1);
 };
@@ -49,9 +62,9 @@ void* FUN_00a435a0_shell::FUN_00a435a0(short arg1)
 {
     if (arg1 != 0)
         return 0;
-    void* obj = *reinterpret_cast<void**>(reinterpret_cast<char*>(this) + 0x20);
+    LerpData_00a43560* obj = spLerpData;
     if (obj)
-        return *reinterpret_cast<void**>(reinterpret_cast<char*>(obj) + 0xc);
+        return obj->m_pkKeys;
     return 0;
 }
 
@@ -72,10 +85,8 @@ void* BSTreadTransfInterpolator::FUN_00a43a50(unsigned int flags)
     return this;
 }
 
-struct FUN_00a435c0_shell
+struct FUN_00a435c0_shell : TreadTransf_00a43560
 {
-    unsigned char m_auiShapeKeys[0x20];
-    void* m_ptr_20;
     char __thiscall FUN_00a435c0(short arg);
 };
 
@@ -84,9 +95,9 @@ char __thiscall FUN_00a435c0_shell::FUN_00a435c0(short arg)
 {
     if (arg != 0)
         return 0;
-    void* p = m_ptr_20;
+    LerpData_00a43560* p = spLerpData;
     if (p)
-        return *reinterpret_cast<unsigned char*>(reinterpret_cast<unsigned char*>(p) + 0x14);
+        return p->m_ucKeySize;
     return 0;
 }
 

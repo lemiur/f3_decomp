@@ -35,13 +35,17 @@ struct FUN_00a35e90_shell : public BSMultiTargetTreadTransfController
 // @fnv 0x00a35e90
 char* FUN_00a35e90_shell::FUN_00a35e90(unsigned short ausIndex)
 {
-    char** arr = *(char***)((char*)this + 0x3c);
-    char* p = arr[ausIndex];
-    char** q = *(char***)((char*)p + 4);
+    LinkAVObj* p = pLinksA[ausIndex];
+    char** q = (char**)p->pTarget;
     return q[2];
 }
 
-struct FUN_00a35fc0_shell
+struct AVObjectFlags_00a35fc0
+{
+    unsigned char unk00[0x30];
+    int m_uFlags;  // src: FNV360_PDB NiAVObject +0x30
+};
+struct FUN_00a35fc0_shell : BSMultiTargetTreadTransfController
 {
     void __thiscall SetSlotValue(unsigned short idx, void* val);
 };
@@ -50,11 +54,10 @@ struct FUN_00a35fc0_shell
 // @fnv 0x00a35fc0
 void __thiscall FUN_00a35fc0_shell::SetSlotValue(unsigned short usIndex, void* pValue)
 {
-    void* arr = *(void**)((char*)this + 0x3c);
-    void* slot = *(void**)((char*)arr + usIndex * 4);
-    *(void**)((char*)slot + 4) = pValue;
+    LinkAVObj* slot = pLinksA[usIndex];
+    slot->pTarget = pValue;
     if (pValue)
-        *(int*)((char*)pValue + 0x30) |= 0x80;
+        ((AVObjectFlags_00a35fc0*)pValue)->m_uFlags |= 0x80;
 }
 
 struct NiInterpController
@@ -62,7 +65,7 @@ struct NiInterpController
     static unsigned short INVALID_INDEX;
 };
 
-struct FUN_00a35910_shell
+struct FUN_00a35910_shell : BSMultiTargetTreadTransfController
 {
     unsigned short __thiscall FindIndexByValue(unsigned short a);
 };
@@ -72,13 +75,13 @@ struct FUN_00a35910_shell
 unsigned short __thiscall FUN_00a35910_shell::FindIndexByValue(unsigned short a)
 {
     unsigned short i = 0;
-    unsigned short n = *(unsigned short*)((char*)this + 0x40);
+    unsigned short n = usNumLinks;
     if (i < n)
     {
-        unsigned int* arr = *(unsigned int**)((char*)this + 0x3c);
+        LinkAVObj** arr = pLinksA;
         do
         {
-            if (*(unsigned int*)(arr[i] + 4) == *(unsigned int*)&a)
+            if (*(unsigned int*)&arr[i]->pTarget == *(unsigned int*)&a)
                 return i;
             ++i;
         } while (i < n);
@@ -123,19 +126,18 @@ unsigned short Holder_00a35f30::FindLinkIndex(const Arg_00a35f30& arName)
     return NiInterpController::INVALID_INDEX;
 }
 
-struct FUN_00a35f70_struct
+struct FUN_00a35f70_struct : BSMultiTargetTreadTransfController
 {
     void __thiscall SetSlotEntry(unsigned short, void*, unsigned short, void*);
 };
 // @fnv 0x00a35f70
 void __thiscall FUN_00a35f70_struct::SetSlotEntry(unsigned short usIndex, void* a2, unsigned short a3, void* a4)
 {
-    int iOffset = usIndex * 4;
-    *(void**)(*(char**)((char*)*(char***)((char*)this + 0x3c) + iOffset) + 4) = a2;
-    *(void**)(*(char**)((char*)*(char***)((char*)this + 0x3c) + iOffset) + 8) = a4;
-    *(unsigned short*)*(char**)((char*)*(char***)((char*)this + 0x3c) + iOffset) = a3;
+    pLinksA[usIndex]->pTarget = a2;
+    pLinksA[usIndex]->pLink = a4;
+    pLinksA[usIndex]->usBlendIdx = a3;
     if (a2)
-        *(int*)((char*)a2 + 0x30) |= 0x80;
+        ((AVObjectFlags_00a35fc0*)a2)->m_uFlags |= 0x80;
 }
 
 struct S_00a36050

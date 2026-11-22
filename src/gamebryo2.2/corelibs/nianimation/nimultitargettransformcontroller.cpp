@@ -45,8 +45,9 @@ class NiMultiTargetTransformController
   public:
     virtual NiInterpolator* GetInterpolatorAtIndex(unsigned short);
     char m_ucUnknownByte[0x30];
-    void* m_pkBlendInterpolators;
-    NiAVObject** m_ppTargetObjects;
+    void* m_pkBlendInterps;  // src: FNV360_PDB +0x34 (old: m_pkBlendInterpolators)
+    NiAVObject** m_ppkTargets;  // src: FNV360_PDB +0x38 (old: m_ppTargetObjects)
+    unsigned short m_usNumInterps;  // src: FNV360_PDB +0x3C
 };
 
 struct NiMultiTargetTransformController__PoseSource
@@ -61,7 +62,7 @@ struct NiMultiTargetTransformController__PoseSource
 NiInterpolator* NiMultiTargetTransformController::GetInterpolatorAtIndex(unsigned short index)
 {
     NiMultiTargetTransformController__PoseSource* source =
-        (NiMultiTargetTransformController__PoseSource*)m_ppTargetObjects[index];
+        (NiMultiTargetTransformController__PoseSource*)m_ppkTargets[index];
     NiQuaternion rotate;
     NiQuatTransform transform;
     rotate.FromRotationMatrix(source->m_kOrientation);
@@ -79,7 +80,7 @@ struct FUN_00a2fd40_shell : public NiMultiTargetTransformController
 // @fnv 0x00a2fd40
 char* FUN_00a2fd40_shell::FUN_00a2fd40(unsigned short usIndex)
 {
-    return *((char**)m_ppTargetObjects[usIndex] + 2);
+    return *((char**)m_ppkTargets[usIndex] + 2);
 }
 
 void __fastcall DestroyInterpolatorArray(void* pThis);
@@ -150,10 +151,10 @@ struct Helper2
 void FUN_00a30070_shell::CloneTo(NiMultiTargetTransformController* pkDest, CloningProcess* kCloning)
 {
     ((NiTransformController*)this)->FUN_00a2f8a0((NiTransformController*)pkDest, *kCloning);
-    ((Helper1*)pkDest)->FUN_00a2feb0(*(unsigned short*)((char*)this + 0x3c));
-    for (unsigned short us = 0; us < *(unsigned short*)((char*)this + 0x3c); ++us)
+    ((Helper1*)pkDest)->FUN_00a2feb0(m_usNumInterps);
+    for (unsigned short us = 0; us < m_usNumInterps; ++us)
     {
-        ((Helper2*)this->m_pkBlendInterpolators)[us].FUN_00a40aa0(&((Helper2*)pkDest->m_pkBlendInterpolators)[us],
+        ((Helper2*)this->m_pkBlendInterps)[us].FUN_00a40aa0(&((Helper2*)pkDest->m_pkBlendInterps)[us],
                                                                   kCloning);
     }
 }
@@ -231,17 +232,17 @@ void FUN_00a300d0_shell::FUN_00a300d0(CloningProcess* kCloning)
     ((NiTStringPointerMap<ShaderBufferRecord*>*)kCloning->m_pCloneMap)->GetAt((const char*)this, pkClone);
     NiMultiTargetTransformController* pkDest = (NiMultiTargetTransformController*)pkClone;
 
-    unsigned short m_usPassCountLocal = *(unsigned short*)((char*)this + 0x3C);
+    unsigned short m_usPassCountLocal = m_usNumInterps;
     for (unsigned short us = 0; us < m_usPassCountLocal; us++)
     {
-        ((NiBlendTransformInterpolator_Stub*)m_pkBlendInterpolators)[us].ProcessClone(*kCloning);
-        if (m_ppTargetObjects[us] != 0)
+        ((NiBlendTransformInterpolator_Stub*)m_pkBlendInterps)[us].ProcessClone(*kCloning);
+        if (m_ppkTargets[us] != 0)
         {
             bool bFound = ((NiTStringPointerMap<ShaderBufferRecord*>*)kCloning->m_pCloneMap)
-                              ->GetAt((const char*)m_ppTargetObjects[us], pkClone);
-            pkDest->m_ppTargetObjects[us] = bFound ? (NiAVObject*)pkClone : 0;
+                              ->GetAt((const char*)m_ppkTargets[us], pkClone);
+            pkDest->m_ppkTargets[us] = bFound ? (NiAVObject*)pkClone : 0;
         }
-        m_usPassCountLocal = *(unsigned short*)((char*)this + 0x3C);
+        m_usPassCountLocal = m_usNumInterps;
     }
 }
 }  // namespace fnv_00a300d0
@@ -691,21 +692,21 @@ void FUN_00a2fbe0_shell::UpdateTargets(NiUpdateData* UpdateData)
         kTransform.m_kTranslate = DAT_011a8400;
         kTransform.m_kRotate = DAT_011f3704;
         kTransform.m_fScale = DAT_01096b8c;
-        for (int us = 0; us < *(unsigned short*)((char*)this + 0x3c); us++)
+        for (int us = 0; us < m_usNumInterps; us++)
         {
-            if (((Target_a2fbe0**)m_ppTargetObjects)[us] &&
-                ((Target_a2fbe0**)m_ppTargetObjects)[us]->GetSelectiveUpdate())
+            if (((Target_a2fbe0**)m_ppkTargets)[us] &&
+                ((Target_a2fbe0**)m_ppkTargets)[us]->GetSelectiveUpdate())
             {
-                if (((Blend_a2fbe0*)m_pkBlendInterpolators)[us].Update(
-                        UpdateData->fTime, (NiAVObject*)((Target_a2fbe0**)m_ppTargetObjects)[us], kTransform))
+                if (((Blend_a2fbe0*)m_pkBlendInterps)[us].Update(
+                        UpdateData->fTime, (NiAVObject*)((Target_a2fbe0**)m_ppkTargets)[us], kTransform))
                 {
                     if (kTransform.m_kTranslate.x != -3.4028234663852886e+38)
-                        ((Target_a2fbe0**)m_ppTargetObjects)[us]->m_kTranslate = kTransform.m_kTranslate;
+                        ((Target_a2fbe0**)m_ppkTargets)[us]->m_kTranslate = kTransform.m_kTranslate;
                     if (kTransform.m_kRotate.m_fVectorY != -3.4028234663852886e+38)
                         ((QuatHelper_a2fbe0*)&kTransform.m_kRotate)
-                            ->ToRotationMatrix(((Target_a2fbe0**)m_ppTargetObjects)[us]->m_kRotate);
+                            ->ToRotationMatrix(((Target_a2fbe0**)m_ppkTargets)[us]->m_kRotate);
                     if (kTransform.m_fScale != -3.4028234663852886e+38)
-                        ((Target_a2fbe0**)m_ppTargetObjects)[us]->m_fScale = (float)fabs(kTransform.m_fScale);
+                        ((Target_a2fbe0**)m_ppkTargets)[us]->m_fScale = (float)fabs(kTransform.m_fScale);
                 }
             }
         }
@@ -866,7 +867,6 @@ struct TimeFlags
 };
 struct NiMultiTargetTimeShell : public NiMultiTargetTransformController
 {
-    unsigned short m_usNumTargets;
     bool GetManagerControlled() const
     {
         return (reinterpret_cast<const unsigned short*>(m_ucUnknownByte + 4)[0] >> 5) & 1;
@@ -889,11 +889,11 @@ void NiMultiTargetTimeShell::UpdateTimeRange()
     {
         LoKeyTime() = DAT_0109643c;
         HiKeyTime() = DAT_01015f5c;
-        for (unsigned short index = 0; index < m_usNumTargets; ++index)
+        for (unsigned short index = 0; index < m_usNumInterps; ++index)
         {
             float endTime = DAT_01015f5c;
             float startTime = DAT_0109643c;
-            static_cast<NiBlendInterpolator*>(m_pkBlendInterpolators)[index].GetTimeRange(&startTime, &endTime);
+            static_cast<NiBlendInterpolator*>(m_pkBlendInterps)[index].GetTimeRange(&startTime, &endTime);
             if (startTime < LoKeyTime())
                 LoKeyTime() = startTime;
             if (endTime > HiKeyTime())
@@ -1125,7 +1125,7 @@ class A30440Controller
 class A30440MultiTarget : public A30440Controller
 {
   public:
-    A30440Object** m_ppTargetObjects;
+    A30440Object** m_ppkTargets;  // src: FNV360_PDB +0x38 (old: m_ppTargetObjects)
     unsigned short m_usTargetCount;
 
     void FUN_00a30440(A30440Stream& kStream);
@@ -1139,7 +1139,7 @@ void A30440MultiTarget::FUN_00a30440(A30440Stream& kStream)
     A30440Controller::SaveBinary(kStream);
     A30440SaveBinary(kStream, m_usTargetCount);
     for (unsigned short us = 0; us < m_usTargetCount; us++)
-        kStream.SaveLinkID(m_ppTargetObjects[us]);
+        kStream.SaveLinkID(m_ppkTargets[us]);
 }
 
 struct FUN_00a304b0_arr
@@ -1244,7 +1244,7 @@ struct NiMultiTargetTransformControllerStandIn : public NiMultiTargetTransformCo
 // @fnv 0x00a2fa20
 unsigned short __thiscall NiMultiTargetTransformControllerStandIn::FUN_00a2fa20()
 {
-    return *reinterpret_cast<unsigned short*>(reinterpret_cast<unsigned char*>(this) + 0x3C);
+    return m_usNumInterps;
 }
 
 class NiBinaryStream
@@ -1428,12 +1428,11 @@ inline void ReadBinaryValue(NiStream& kStream, unsigned short& usValue)
 class NiMultiTargetTransformControllerA30 : public NiMultiTargetTransformController
 {
   public:
-    unsigned short m_usNumInterps;
     void FUN_00a2f910(NiStream& kStream);
     void FUN_00a2feb0(unsigned short ausNumInterps);
     void FUN_00a303d0(NiStream& kStream);
 };
-// Calls FUN_00a2f910, reads m_usNumInterps, passes it to FUN_00a2feb0, then assigns returned pointers to m_ppTargetObjects.
+// Calls FUN_00a2f910, reads m_usNumInterps, passes it to FUN_00a2feb0, then assigns returned pointers to m_ppkTargets.
 // @fnv 0x00a303d0
 void NiMultiTargetTransformControllerA30::FUN_00a303d0(NiStream& kStream)
 {
@@ -1441,7 +1440,7 @@ void NiMultiTargetTransformControllerA30::FUN_00a303d0(NiStream& kStream)
     ReadBinaryValue(kStream, m_usNumInterps);
     FUN_00a2feb0(m_usNumInterps);
     for (unsigned short us = 0; us < m_usNumInterps; us++)
-        m_ppTargetObjects[us] = kStream.FUN_00a64620();
+        m_ppkTargets[us] = kStream.FUN_00a64620();
 }
 
 struct MemoryManager
