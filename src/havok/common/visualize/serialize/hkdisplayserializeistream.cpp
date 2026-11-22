@@ -21,15 +21,15 @@ struct DdabeBase
     virtual void calcContentStatistics(hkStatisticsCollector* collector, const hkClass* cls) const;
 };
 
-struct FUN_00ddabe0 : DdabeBase
+struct hkDisplaySerializeIStreamDDAB : DdabeBase
 {
-    FUN_00ddabe0(int a);
+    hkDisplaySerializeIStreamDDAB(int a);
 };
 
 // @fnv 0x00ddabe0
 // pdb: hkDisplaySerializeIStream::hkDisplaySerializeIStream | hkDisplaySerializeIStream.obj | fnv360_0822_retail, uvref, medium
 // pdb params: reader
-FUN_00ddabe0::FUN_00ddabe0(int a) : DdabeBase(a, DdabeTag())
+hkDisplaySerializeIStreamDDAB::hkDisplaySerializeIStreamDDAB(int a) : DdabeBase(a, DdabeTag())
 {}
 
 struct FUN_00ddac60_Obj

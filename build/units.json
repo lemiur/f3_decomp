@@ -570290,7 +570290,7 @@
     "?FUN_00d87650@hkStringMapXdbdd40@@QAEHPBDPAH@Z": "0x009b0fb0",
     "_FUN_00cb1410": "0x00923640",
     "?FUN_00d874d0@hkStringMapXdbdd40@@QAEXPBDH@Z": "0x009b0e60",
-    "?FUN_00dbd9f0@@YAIPAUDbFirst@@PAUDbSecond@@I@Z": "0x00a4a540",
+    "?FUN_00dbd9f0@@YAIPAUDbFirst@@PAUhkVtableClassRegistryDBD9@@I@Z": "0x00a4a540",
     "?FUN_00a4a630@E150RegisterProxy@@QAEHPAX0@Z": "0x00a4a630",
     "?FUN_00922710@MapSetE150@@QAEXPBXH@Z": "0x00922710",
     "?FUN_00a4a8a0@E150RegisterProxy@@QAEXPAX0000@Z": "0x00a4a8a0",
@@ -570319,7 +570319,7 @@
     },
     {
      "address": "0x00a4a540",
-     "symbol": "?FUN_00dbd9f0@@YAIPAUDbFirst@@PAUDbSecond@@I@Z",
+     "symbol": "?FUN_00dbd9f0@@YAIPAUDbFirst@@PAUhkVtableClassRegistryDBD9@@I@Z",
      "size": 46
     },
     {
@@ -572179,7 +572179,7 @@
     "?FUN_00cb2d90@CB2FC0Object@@QAEXPAX@Z": "0x00924b40",
     "?FUN_00dd8fe0@FUN_00ddacd0_shell@@QAEXPAXHH@Z": "0x00a60ca0",
     "??0DdabeBase@@QAE@HUDdabeTag@@@Z": "0x00a60e10",
-    "??_7FUN_00ddabe0@@6B@": "0x00e86d68",
+    "??_7hkDisplaySerializeIStreamDDAB@@6B@": "0x00e86d68",
     "?FUN_00dd8fe0@@YGXPAUFUN_00ddac60_Obj@@HH@Z": "0x00a60ca0",
     "_FUN_00901e90": "0x00901e90",
     "?FUN_00a62980@F3ArrayReader@@QAEXPAX@Z": "0x00a62980",
@@ -572198,7 +572198,7 @@
    "functions": [
     {
      "address": "0x00a62900",
-     "symbol": "??0FUN_00ddabe0@@QAE@H@Z",
+     "symbol": "??0hkDisplaySerializeIStreamDDAB@@QAE@H@Z",
      "size": 31
     },
     {
@@ -572218,7 +572218,7 @@
     "?FUN_00cb2d90@CB2FC0Object@@QAEXPAX@Z": "0x00924b40",
     "?FUN_00dd8fe0@FUN_00ddacd0_shell@@QAEXPAXHH@Z": "0x00a60ca0",
     "??0DdabeBase@@QAE@HUDdabeTag@@@Z": "0x00a60e10",
-    "??_7FUN_00ddabe0@@6B@": "0x00e86d68",
+    "??_7hkDisplaySerializeIStreamDDAB@@6B@": "0x00e86d68",
     "?FUN_00dd8fe0@@YGXPAUFUN_00ddac60_Obj@@HH@Z": "0x00a60ca0"
    }
   },
@@ -585119,7 +585119,7 @@
     },
     {
      "address": "0x00929b20",
-     "symbol": "?hkpConstraintOwner_subConstraintInfo@FUN_00cb7480_cls@@QAEXPAUhkpConstraintInstanceCB74@@PAUFUN_00cb7480_delta@@@Z",
+     "symbol": "?hkpConstraintOwner_subConstraintInfo@hkpConstraintOwnerCB74@@QAEXPAUhkpConstraintInstanceCB74@@PAUFUN_00cb7480_delta@@@Z",
      "size": 70
     },
     {

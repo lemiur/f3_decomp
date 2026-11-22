@@ -2324,7 +2324,7 @@ struct FUN_00cb7480_delta
     int m_0c;
 };
 
-struct FUN_00cb7480_cls
+struct hkpConstraintOwnerCB74
 {
     int unk00;
     int unk04;
@@ -2339,7 +2339,7 @@ struct FUN_00cb7480_cls
 // Subtracts the delta's m_04, m_08 and m_0c from m_0c, m_10 and m_14, and from the node's m_14, m_16 and m_18, when the constraint has its internal record.
 // @f3 0x00929b20 (community match, verified in this file)
 // pdb: hkpConstraintOwner::subConstraintInfo | hkpWorldOperationUtil.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_gap_sim), high
-void FUN_00cb7480_cls::hkpConstraintOwner_subConstraintInfo(hkpConstraintInstanceCB74* apHolder, FUN_00cb7480_delta* apDelta)
+void hkpConstraintOwnerCB74::hkpConstraintOwner_subConstraintInfo(hkpConstraintInstanceCB74* apHolder, FUN_00cb7480_delta* apDelta)
 {
     if (apHolder->m_internal != 0)
     {

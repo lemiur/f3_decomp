@@ -192,9 +192,9 @@ class hkClass;
 class hkStatisticsCollector;
 // hkVtableClassRegistry: the five slots of its Fallout 3 vtable (0x00e7e5d0), named as the New Vegas Xbox 360 PDB
 // names them.
-struct DbSecond
+struct hkVtableClassRegistryDBD9
 {
-    virtual ~DbSecond();
+    virtual ~hkVtableClassRegistryDBD9();
     virtual const hkClass* getClassType() const;
     virtual void calcContentStatistics(hkStatisticsCollector* collector, const hkClass* cls) const;
     virtual void registerVtable(const void* vtable, const hkClass* klass);
@@ -204,7 +204,7 @@ struct DbSecond
 // Calls first->GetLastNodeFlag; if its first character is nonzero, returns second->vf10(arg) or 0; otherwise returns the first pointer.
 // @fnv 0x00dbd9f0
 // pdb: getExactClass | hkPackfileWriter.obj | fnv360_0822_retail, call_gap, medium
-static __declspec(noinline) unsigned int FUN_00dbd9f0(DbFirst* first, DbSecond* second, unsigned int arg)
+static __declspec(noinline) unsigned int FUN_00dbd9f0(DbFirst* first, hkVtableClassRegistryDBD9* second, unsigned int arg)
 {
     bool bFlag;
     char* result = first->GetLastNodeFlag(&bFlag);
@@ -219,13 +219,13 @@ static __declspec(noinline) unsigned int FUN_00dbd9f0(DbFirst* first, DbSecond* 
 }
 
 DbFirst* volatile g_dbd_first;
-DbSecond* volatile g_dbd_second;
+hkVtableClassRegistryDBD9* volatile g_dbd_second;
 unsigned int volatile g_dbd_arg;
 unsigned int volatile g_dbd_sink;
 
 void dbd9f0_probe_caller(void)
 {
-    g_dbd_sink = FUN_00dbd9f0((DbFirst*)g_dbd_first, (DbSecond*)g_dbd_second, g_dbd_arg);
+    g_dbd_sink = FUN_00dbd9f0((DbFirst*)g_dbd_first, (hkVtableClassRegistryDBD9*)g_dbd_second, g_dbd_arg);
 }
 
 class hkMemoryAllocatorDB7;
@@ -1066,7 +1066,7 @@ void OwnerE150::hkPackfileWriter_addObject(void* a1, void* a2, void* a3, void* a
 {
     FUN_00cb18f0_t* pm = &map14;
     if (pm->FindSlot((int)a1) <= pm->unk08) return;
-    void* result = (void*)FUN_00dbd9f0((DbFirst*)a2, (DbSecond*)a3, (unsigned int)a1);
+    void* result = (void*)FUN_00dbd9f0((DbFirst*)a2, (hkVtableClassRegistryDBD9*)a3, (unsigned int)a1);
     if (result)
     {
         void* next = a1;
