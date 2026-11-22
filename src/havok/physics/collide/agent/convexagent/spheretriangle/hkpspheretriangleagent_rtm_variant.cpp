@@ -202,7 +202,8 @@ struct S00d3d6b0_BodyB {
 };
 struct S00d3d6b0_BodyHolderB { S00d3d6b0_BodyB* obj; int unk04; S00d3d6b0_XForm* xf; };
 struct S00d3d6b0_HitInfo { S00d3d6b0_Vec4 pt,nrm; S00d3d6b0_BodyHolderB* a; S00d3d6b0_BodyHolderB* b; };
-struct S00d3d6b0_Sink { virtual void unk00(); virtual void unk04(S00d3d6b0_HitInfo*); };
+// hkpCdPointCollector: its two Fallout 3 slots (0x00de6e68), with the New Vegas Xbox 360 PDB's names.
+struct S00d3d6b0_Sink { virtual ~S00d3d6b0_Sink(); virtual void addCdPoint(S00d3d6b0_HitInfo*); };
 struct S00d3d6b0_Input { int unk00,unk04; float tolerance; };
 extern void __cdecl FUN_00cd7850(S00d3d6b0_Vec4* v, void* tri, float* f, S00d3d6b0_Res* out, void* flag);
 class S00d3d6b0_SphereTriAgent {
@@ -322,7 +323,7 @@ void S00d3d6b0_SphereTriAgent::hkpSphereTriangleAgent_getClosestPoints(S00d3d6b0
     hit.a = a;
     hit.b = b;
     if (GetSphereTriHit(a, b, input, &unk10, hit)) {
-        sink->unk04(&hit);
+        sink->addCdPoint(&hit);
     }
     {
         S00d3d6b0_ProfBuf* buffer = static_cast<S00d3d6b0_ProfBuf*>(TlsGetValue(DAT_0116913c));
