@@ -140,10 +140,10 @@ class NiGeometryData : public NiObject
         TEXTURE_SET_MASK = 1
     };
 
-    void SetDataConsistency(Consistency eConsistency);
-    void SetDirtyFlags(unsigned int uiDirtyFlags);
+    void SetConsistency(Consistency eConsistency);
+    void MarkAsChanged(unsigned int uiDirtyFlags);
     void SetCompressFlags(unsigned char ucCompressFlags);
-    bool IsGeometryDataStreamable(bool bWrite);
+    bool LockPackedVertexData(bool bWrite);
     virtual void LinkObject(NiStream& kStream);
     virtual bool RegisterStreamables(NiStream& kStream);
 

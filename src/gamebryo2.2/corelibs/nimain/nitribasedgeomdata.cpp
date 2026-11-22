@@ -204,13 +204,14 @@ struct S_00a8a9c0_Base
 struct S_00a8a9c0 : S_00a8a9c0_Base
 {
     unsigned short m_usTriangles;
-    unsigned char MatchesTriangleCount(const S_00a8a9c0_Base* pkObject);
+    unsigned char NiTriBasedGeomData_IsEqual(const S_00a8a9c0_Base* pkObject);
 };
 // Returns false if NiGeometryData_IsEqual fails, otherwise returns whether m_usTriangles equals the passed object's m_usTriangles.
 // @fnv 0x00a8a9c0
 // pdb: NiTriBasedGeomData::IsEqual | NiTriBasedGeomData.obj | fnv360_0822_retail, caller_sim, high
 // pdb params: pkObject
-unsigned char S_00a8a9c0::MatchesTriangleCount(const S_00a8a9c0_Base* pkObject)
+// pdb: NiTriBasedGeomData::IsEqual | NiTriBasedGeomData.obj | fnv360_0822_retail, caller_sim, high (was: MatchesTriangleCount)
+unsigned char S_00a8a9c0::NiTriBasedGeomData_IsEqual(const S_00a8a9c0_Base* pkObject)
 {
     if (!NiGeometryData_IsEqual(pkObject))
         return false;

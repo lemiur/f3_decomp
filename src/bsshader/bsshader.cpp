@@ -1577,14 +1577,15 @@ class BBDF6C0Shader
         return (m_uiFlags2 & (1 << (uiBit - 32))) > 0;
     }
 
-    void AddPasses(BBDF6C0Geometry* pkGeometry, bool bSkipDefault);
+    void BSShaderPPLightingProperty_AddSilhouettePass_2x(BBDF6C0Geometry* pkGeometry, bool bSkipDefault);
 };
 
 // Adds a render pass chosen by shader flags (or the geometry's default pass) and sets the first pass's lighting type from the flags.
 // @fnv 0x00bdf6c0
 // pdb: BSShaderPPLightingProperty::AddSilhouettePass_2x | BSShaderPPLightingProperty_Passes_2x.obj | fnv360_0822_retail, objrun, high
 // pdb params: apGeom, abSkinned
-void BBDF6C0Shader::AddPasses(BBDF6C0Geometry* pkGeometry, bool bSkipDefault)
+// pdb: BSShaderPPLightingProperty::AddSilhouettePass_2x | BSShaderPPLightingProperty_Passes_2x.obj | fnv360_0822_retail, objrun, high (was: AddPasses)
+void BBDF6C0Shader::BSShaderPPLightingProperty_AddSilhouettePass_2x(BBDF6C0Geometry* pkGeometry, bool bSkipDefault)
 {
     if (GetFlag(14))
     {

@@ -573,12 +573,13 @@ struct S_00a533c0_Class
     unsigned char unk0c;
     S_00a533c0_Data* unk10;
     unsigned char unk14;
-    bool __thiscall UpdateValue(float fValue, int iValue, unsigned char* pOut);
+    bool __thiscall NiBoolInterpolator_Update(float fValue, int iValue, unsigned char* pOut);
 };
 // @fnv 0x00a533c0
 // pdb: NiBoolInterpolator::Update | NiBoolInterpolator.obj | fnv360_0822_retail, objrun_prop, high
 // pdb params: fTime, pkInterpTarget, bValue
-bool __thiscall S_00a533c0_Class::UpdateValue(float fValue, int iValue, unsigned char* pucOut)
+// pdb: NiBoolInterpolator::Update | NiBoolInterpolator.obj | fnv360_0822_retail, objrun_prop, high (was: UpdateValue)
+bool __thiscall S_00a533c0_Class::NiBoolInterpolator_Update(float fValue, int iValue, unsigned char* pucOut)
 {
     if (unk08 == fValue)
     {

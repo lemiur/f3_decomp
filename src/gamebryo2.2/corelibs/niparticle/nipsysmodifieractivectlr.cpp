@@ -97,7 +97,7 @@ struct NiObjectNET;
 struct NiPSysModifier;
 struct BaseStandIn
 {
-    bool IsTargetParticleSystem(NiObjectNET*);
+    bool NiPSysModifierCtlr_InterpTargetIsCorrectType(NiObjectNET*);
 };
 struct PsStandIn
 {
@@ -112,7 +112,7 @@ struct StandIn
 bool StandIn::FUN_00c29dd0(NiObjectNET* pkTarget)
 {
     NiPSysModifier* pkModifier;
-    if (!((BaseStandIn*)this)->IsTargetParticleSystem(pkTarget))
+    if (!((BaseStandIn*)this)->NiPSysModifierCtlr_InterpTargetIsCorrectType(pkTarget))
         return false;
     pkModifier = ((PsStandIn*)pkTarget)->FUN_00c1b0f0((void*)((char*)this + 0x38));
     return pkModifier;

@@ -18,7 +18,8 @@ void ShadowSceneNode::AddObject(NiAVObject* apObject)
 // Releases each shadow light's texture, clears the shadow light list, and resets the shadow counts to zero.
 // @fnv 0x00b5c3c0
 // pdb: ShadowSceneNode::RemoveAllShadowLights | ShadowSceneNode.obj | fnv360_0822_retail, call_seq, high
-void ShadowSceneNode::UpdateShadowLights()
+// pdb: ShadowSceneNode::RemoveAllShadowLights | ShadowSceneNode.obj | fnv360_0822_retail, call_seq, high (was: UpdateShadowLights)
+void ShadowSceneNode::RemoveAllShadowLights()
 {
     ShadowListItem* item = shadowLights.head;
     while (item)
@@ -470,7 +471,7 @@ struct FUN_00b5c450_item
 {
     unsigned char pad[0xf8];
     int key;
-    void SetShadowEnabled(int v);
+    void ShadowSceneLight_SetCastShadow(int v);
 };
 struct FUN_00b5c450_node
 {
@@ -484,7 +485,7 @@ struct FUN_00b5c450_self
     FUN_00b5c450_node* head;
 };
 
-// Walks the linked list from self->head and, for the first item whose key matches, calls SetShadowEnabled with flag.
+// Walks the linked list from self->head and, for the first item whose key matches, calls ShadowSceneLight_SetCastShadow with flag.
 // @fnv 0x00b5c450
 // pdb: ShadowSceneNode::SetLightCastShadows | ShadowSceneNode.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: Actor::CanAddActiveEffect)
 // pdb params: apLight, abCastShadows
@@ -498,7 +499,7 @@ void __fastcall CallItemMethodByKey(FUN_00b5c450_self* self, int unused, int key
         FUN_00b5c450_item* it = *pp;
         if (it && it->key == key)
         {
-            it->SetShadowEnabled(flag);
+            it->ShadowSceneLight_SetCastShadow(flag);
             return;
         }
     }
@@ -1128,7 +1129,7 @@ struct FUN_00b9dcb0_Class
     char pad_ed[0x1f];
     TexturePtr m_spShadowTexture;
 
-    void __thiscall SetShadowEnabled(bool bEnable);
+    void __thiscall ShadowSceneLight_SetCastShadow(bool bEnable);
 };
 
 // @f3 0x00b20030 (community match, verified in this file)
@@ -1156,7 +1157,8 @@ struct AutoMemContextFixed
 
 // pdb: ShadowSceneLight::SetCastShadow | ShadowSceneLight.obj | fnv360_0822_retail, call_seq, high
 // pdb params: abCastShadow
-void FUN_00b9dcb0_Class::SetShadowEnabled(bool bEnable)
+// pdb: ShadowSceneLight::SetCastShadow | ShadowSceneLight.obj | fnv360_0822_retail, call_seq, high (was: SetShadowEnabled)
+void FUN_00b9dcb0_Class::ShadowSceneLight_SetCastShadow(bool bEnable)
 {
     AutoMemContextFixed memContext(0x20);
 
@@ -6468,7 +6470,7 @@ struct LightEx : public NiRefObject
     }
     void FUN_00b9bb10(float, int);
     void FUN_00b5af30(void* key);
-    void SetShadowEnabled(bool);
+    void ShadowSceneLight_SetCastShadow(bool);
 };
 
 struct ActiveLightList : public NiTPointerListBase<NiTPointerAllocator<unsigned int>, NiPointer<NiRefObject> >
@@ -6586,7 +6588,7 @@ class S00b5cd00_Param
     long m_iObjectReferenceCount;
 
     void FUN_00b9dda0(S00b5cd00_Light* light);
-    void SetShadowEnabled(bool value);
+    void ShadowSceneLight_SetCastShadow(bool value);
 };
 
 // Reference-taking argument wrapper: the constructor adds a reference; the caller drops it after the call.
@@ -6674,7 +6676,7 @@ S00b5cd00_Param* S00b5cd00_Owner::FUN_00b5cd00(S00b5cd00_Param* param)
     S00b5cd00_Light* light = new S00b5cd00_Light;
     light->m_flags &= ~1u;
     param->FUN_00b9dda0(light);
-    param->SetShadowEnabled(true);
+    param->ShadowSceneLight_SetCastShadow(true);
     reinterpret_cast<unsigned char*>(param)[0xED] = 0;
     m_kNode.FUN_00a5a310(param);
     if (InterlockedDecrement(&param->m_iObjectReferenceCount) == 0)

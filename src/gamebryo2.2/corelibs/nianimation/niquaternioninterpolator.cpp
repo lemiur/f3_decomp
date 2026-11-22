@@ -90,7 +90,8 @@ struct NiQuaternionInterpolator;
 
 // @fnv 0x00a48d70
 // pdb: NiQuaternionInterpolator::CreateObject | NiQuaternionInterpolator.obj | fnv360_0721_beta, objrun, high
-NiQuaternionInterpolator* __cdecl CreateNiQuaternionInterpolator()
+// pdb: NiQuaternionInterpolator::CreateObject | NiQuaternionInterpolator.obj | fnv360_0721_beta, objrun, high (was: CreateNiQuaternionInterpolator)
+NiQuaternionInterpolator* __cdecl NiQuaternionInterpolator_CreateObject()
 {
     NiQuaternionInterpolator* p = (NiQuaternionInterpolator*)BSFadeNode::operator new(0x24);
     if (p)

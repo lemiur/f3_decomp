@@ -264,7 +264,7 @@ struct GeomData
     virtual void s38();
     virtual void s39();
     virtual void s40();
-    void SetDirtyFlags(unsigned int);
+    void MarkAsChanged(unsigned int);
     int pad[8];
     int f24;
 };
@@ -289,7 +289,7 @@ void __fastcall FUN_00a3aba0(FUN_00a3aba0_t* self, int)
     if (self->tgt && self->need)
     {
         GeomData* pData = self->tgt->data;
-        pData->SetDirtyFlags(1);
+        pData->MarkAsChanged(1);
         if ((self->flags & 1) && pData->f24)
             pData->s40();
         self->need = false;
@@ -453,12 +453,13 @@ struct MorphGeom
 
 struct FUN_00a3b010_shell : public NiGeomMorpherController
 {
-    MorphPoint3* GetMorphVertices();
+    MorphPoint3* NiGeomMorpherController_GetVertexData();
 };
 
 // @fnv 0x00a3b010
 // pdb: NiGeomMorpherController::GetVertexData | NiGeomMorpherController.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, high
-MorphPoint3* FUN_00a3b010_shell::GetMorphVertices()
+// pdb: NiGeomMorpherController::GetVertexData | NiGeomMorpherController.obj | fnv360_0822_retail, bridge_fnvpc, high (was: GetMorphVertices)
+MorphPoint3* FUN_00a3b010_shell::NiGeomMorpherController_GetVertexData()
 {
     MorphGeom* pkGeom = (MorphGeom*)m_pkTarget;
     if (!pkGeom)
@@ -538,7 +539,7 @@ struct NiPoint3
 typedef char _sizecheck_NiPoint3[sizeof(NiPoint3) == 12 ? 1 : -1];
 struct FUN_00a3aa10_shell : public NiGeomMorpherController
 {
-    void UpdateMorphWeights(float);
+    void NiGeomMorpherController_GenMorphInterp(float);
 };
 
 struct InterpV
@@ -658,7 +659,7 @@ struct TgtV
 };
 struct GeomData
 {
-    void SetDirtyFlags(unsigned int);
+    void MarkAsChanged(unsigned int);
 };
 struct GMItem
 {
@@ -706,13 +707,14 @@ struct GMSelf
     }
 };
 void* _fnv_zlib_memset(void*, int, unsigned int);
-void AddScaledPoints(NiPoint3*, float, NiPoint3*, int);
+void NiPoint3_PointsPlusEqualFloatTimesPoints(NiPoint3*, float, NiPoint3*, int);
 extern const float runtimeFloatSettingDefault166;
 
 // @fnv 0x00a3aa10
 // pdb: NiGeomMorpherController::GenMorphInterp | NiGeomMorpherController.obj | fnv360_0822_retail, caller_sim, high
 // pdb params: fTime
-void FUN_00a3aa10_shell::UpdateMorphWeights(float fTime)
+// pdb: NiGeomMorpherController::GenMorphInterp | NiGeomMorpherController.obj | fnv360_0822_retail, caller_sim, high (was: UpdateMorphWeights)
+void FUN_00a3aa10_shell::NiGeomMorpherController_GenMorphInterp(float fTime)
 {
     GMSelf* self = (GMSelf*)this;
     bool bupdate;
@@ -752,13 +754,13 @@ void FUN_00a3aa10_shell::UpdateMorphWeights(float fTime)
             if (fFrac >= 0.001f || fFrac <= runtimeFloatSettingDefault166)
             {
                 NiPoint3* pkDeltaVerts = self->pkMorph->pTargets[uiIndex].pkVerts;
-                AddScaledPoints(pkVerts, fFrac, pkDeltaVerts, iVertexDataArraySize);
+                NiPoint3_PointsPlusEqualFloatTimesPoints(pkVerts, fFrac, pkDeltaVerts, iVertexDataArraySize);
                 bupdate = true;
             }
         }
     }
     if (bupdate && self->pkTarget->IsVis())
-        ((GeomData*)*(void**)((char*)self->pkTarget + 0xb8))->SetDirtyFlags(1);
+        ((GeomData*)*(void**)((char*)self->pkTarget + 0xb8))->MarkAsChanged(1);
 }
 }  // namespace fnv_00a3aa10
 
@@ -1414,12 +1416,13 @@ struct MorpherController
     {
         return *reinterpret_cast<Geometry* const*>(reinterpret_cast<const char*>(this) + 0x2c);
     }
-    void UpdateGeometryBound();
+    void NiGeomMorpherController_CalculateMorphBound();
 };
 
 // @fnv 0x00a3abe0
 // pdb: NiGeomMorpherController::CalculateMorphBound | NiGeomMorpherController.obj | fnv360_0822_retail, objrun, high
-void MorpherController::UpdateGeometryBound()
+// pdb: NiGeomMorpherController::CalculateMorphBound | NiGeomMorpherController.obj | fnv360_0822_retail, objrun, high (was: UpdateGeometryBound)
+void MorpherController::NiGeomMorpherController_CalculateMorphBound()
 {
     NiBound morphBound;
     const unsigned int count = GetMorphData()->targetCount;

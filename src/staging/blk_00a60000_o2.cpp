@@ -1688,14 +1688,15 @@ struct FUN_00a674b0_cls
     unsigned char unk38;
     unsigned char unk39;
     unsigned char m_3a;
-    void __thiscall GetOutRec(OutRec674* out);
+    void __thiscall NiGeometryData_GetBlendWeightsIterator(OutRec674* out);
 };
 
 // If m_3a is set, optionally queries m_30 via FUN_00a72720 and writes the resulting a, b and 0 into out.
 // @fnv 0x00a674b0
 // pdb: NiGeometryData::GetBlendWeightsIterator | NiGeometryData.obj | fnv360_0822_retail, objrun, high
 // pdb params: arIterator
-void FUN_00a674b0_cls::GetOutRec(OutRec674* out)
+// pdb: NiGeometryData::GetBlendWeightsIterator | NiGeometryData.obj | fnv360_0822_retail, objrun, high (was: GetOutRec)
+void FUN_00a674b0_cls::NiGeometryData_GetBlendWeightsIterator(OutRec674* out)
 {
     if (m_3a != 0)
     {
@@ -2446,7 +2447,7 @@ SceneFactoryObject* CreateSceneFactoryObject()
 
 struct CallTarget_00a74e10
 {
-    int SetFromFrustum(int, int);
+    int NiFrustumPlanes_Set(int, int);
 };
 struct SearchObject
 {
@@ -2457,7 +2458,7 @@ struct SearchObject
 int SearchObject::FUN_00a755d0(unsigned int arg0)
 {
     unsigned int callResult0 =
-        (unsigned int)((CallTarget_00a74e10*)this)->SetFromFrustum((int)(arg0 + 220u), (int)(104u + arg0));
+        (unsigned int)((CallTarget_00a74e10*)this)->NiFrustumPlanes_Set((int)(arg0 + 220u), (int)(104u + arg0));
     return (int)callResult0;
 }
 
@@ -3512,13 +3513,14 @@ struct BSFaceGenModel
 
 struct Q67530Cls : FUN_00a674b0_cls
 {
-    void FillOutRec674(OutRec674* out);
+    void NiGeometryData_GetBlendIndicesIterator(OutRec674* out);
 };
 
 // @fnv 0x00a67530
 // pdb: NiGeometryData::GetBlendIndicesIterator | NiGeometryData.obj | fnv360_0822_retail, objrun, high
 // pdb params: arIterator
-void Q67530Cls::FillOutRec674(OutRec674* out)
+// pdb: NiGeometryData::GetBlendIndicesIterator | NiGeometryData.obj | fnv360_0822_retail, objrun, high (was: FillOutRec674)
+void Q67530Cls::NiGeometryData_GetBlendIndicesIterator(OutRec674* out)
 {
     if (m_3a)
     {
@@ -3873,7 +3875,7 @@ struct NiStreamA606
     virtual void V10();
     virtual void V11();
     virtual void SaveLinkID(void* pkObject);
-    void WriteObjectLink(void* pkString);
+    void NiStream_SaveFixedString(void* pkString);
 };
 
 struct ControllerA606
@@ -3902,7 +3904,7 @@ void ControllerA606::FUN_00a60600(NiStream& kStream)
     FUN_00a5d7b0(kStream);
     bool bNoTargets = !m_pkTarget1 && !m_pkTarget2;
     SerializeValue(kStream, bNoTargets);
-    ((NiStreamA606*)&kStream)->WriteObjectLink(&m_kName);
+    ((NiStreamA606*)&kStream)->NiStream_SaveFixedString(&m_kName);
     if (m_bUseFirst)
         ((NiStreamA606*)&kStream)->SaveLinkID(m_pkTarget1);
     else
@@ -4743,7 +4745,8 @@ struct Vec3
 // @fnv 0x00a7ec90
 // pdb: NiPoint3::PointsPlusEqualFloatTimesPoints | NiPoint3_Xenon.obj | fnv360_0822_retail, call_seq, high
 // pdb params: pkDst, f, pkSrc, uiVerts
-void __cdecl AddScaledPoints(NiPoint3* dest, float scale, const NiPoint3* src, unsigned int count)
+// pdb: NiPoint3::PointsPlusEqualFloatTimesPoints | NiPoint3_Xenon.obj | fnv360_0822_retail, call_seq, high (was: AddScaledPoints)
+void __cdecl NiPoint3_PointsPlusEqualFloatTimesPoints(NiPoint3* dest, float scale, const NiPoint3* src, unsigned int count)
 {
     Vec3* d = reinterpret_cast<Vec3*>(dest);
     const Vec3* s = reinterpret_cast<const Vec3*>(src);
@@ -5040,14 +5043,15 @@ struct Plane
 struct Planes
 {
     Plane data[6];
-    void SetFromFrustum(const Frustum*, const Transform*);
+    void NiFrustumPlanes_Set(const Frustum*, const Transform*);
 };
 
 // Computes six frustum planes from a Frustum and Transform, using orthographic or perspective projection formulas.
 // @fnv 0x00a74e10
 // pdb: NiFrustumPlanes::Set | NiFrustumPlanes.obj | fnv360_0822_retail, call_seq, high
 // pdb params: kFrust, kXform
-void Planes::SetFromFrustum(const Frustum* apFrustum, const Transform* transform)
+// pdb: NiFrustumPlanes::Set | NiFrustumPlanes.obj | fnv360_0822_retail, call_seq, high (was: SetFromFrustum)
+void Planes::NiFrustumPlanes_Set(const Frustum* apFrustum, const Transform* transform)
 {
 
     Vector position = transform->position;
@@ -5628,7 +5632,7 @@ struct PivotGeometry
     float* colors;
     float* texcoords;
     __declspec(noinline) int CompareVertices(unsigned short a, unsigned short b, unsigned char ctx);
-    int MedianOfThree(unsigned short* arr, unsigned char ctx, int lo, int hi);
+    int NiGeometryData_ChoosePivot(unsigned short* arr, unsigned char ctx, int lo, int hi);
 };
 __declspec(noinline) int PivotGeometry::CompareVertices(unsigned short a, unsigned short b, unsigned char ctx)
 {
@@ -5667,7 +5671,8 @@ __declspec(noinline) int PivotGeometry::CompareVertices(unsigned short a, unsign
 // @fnv 0x00a672b0
 // pdb: NiGeometryData::ChoosePivot | NiGeometryData.obj | fnv360_0822_retail, objrun, high
 // pdb params: pusIndex, mask, l, r
-int PivotGeometry::MedianOfThree(unsigned short* apIndices, unsigned char ctx, int lo, int hi)
+// pdb: NiGeometryData::ChoosePivot | NiGeometryData.obj | fnv360_0822_retail, objrun, high (was: MedianOfThree)
+int PivotGeometry::NiGeometryData_ChoosePivot(unsigned short* apIndices, unsigned char ctx, int lo, int hi)
 {
     int mid = (lo + hi) >> 1;
     if (CompareVertices(apIndices[lo], apIndices[mid], ctx) < 0)

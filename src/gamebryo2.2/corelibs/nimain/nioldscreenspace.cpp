@@ -578,7 +578,8 @@ struct ObjA8F260 : BaseA8F260
 // @fnv 0x00a8f260
 // pdb: Ni2DBuffer::Create | Ni2DBuffer.obj | fnv360_0822_retail, call_gap_sim, high
 // pdb params: uiWidth, uiHeight
-void* __cdecl CreateObjA8F260(int aiValue08, int aiValue0c)
+// pdb: Ni2DBuffer::Create | Ni2DBuffer.obj | fnv360_0822_retail, call_gap_sim, high (was: CreateObjA8F260)
+void* __cdecl Ni2DBuffer_Create(int aiValue08, int aiValue0c)
 {
     ObjA8F260* p = new ObjA8F260();
     p->m_08 = aiValue08;

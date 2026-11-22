@@ -1125,14 +1125,15 @@ struct StandInNode
     StandInNode** m_pBase;  // src: FNV360_PDB +0x4 (old: m_children)
     unsigned short m_usCapacity;
     unsigned short m_usSize;  // src: FNV360_PDB +0xA (old: m_usArraySize)
-    void ApplyTransformToChildren(const ThreeByThreeMatrix& kMat, const StandInPt3& kTrn, bool bOnLeft);
+    void NiNode_ApplyTransform(const ThreeByThreeMatrix& kMat, const StandInPt3& kTrn, bool bOnLeft);
 };
 
 // Applies a transform to each child node, composing the matrix and translation with this node's own when bOnLeft is set.
 // @fnv 0x00a5d940
 // pdb: NiNode::ApplyTransform | NiNode.obj | fnv360_0822_retail, vtable, high
 // pdb params: kMat, kTrn, bOnLeft
-void StandInNode::ApplyTransformToChildren(const ThreeByThreeMatrix& kMat, const StandInPt3& kTrn, bool bOnLeft)
+// pdb: NiNode::ApplyTransform | NiNode.obj | fnv360_0822_retail, vtable, high (was: ApplyTransformToChildren)
+void StandInNode::NiNode_ApplyTransform(const ThreeByThreeMatrix& kMat, const StandInPt3& kTrn, bool bOnLeft)
 {
     StandInNode* pkChild;
     unsigned int i;
@@ -1441,7 +1442,7 @@ class NiRefObject
     virtual ~NiRefObject();
     virtual void DeleteThis();
     unsigned int m_uiRefCount;
-    void SetParent(void* owner);
+    void NiAVObject_AttachParent(void* owner);
 };
 
 class FUN_00a5edc0_sub
@@ -1494,7 +1495,7 @@ class FUN_00a5edc0_cls
     unsigned int unk98;
     FUN_00a5edc0_sub m_sub;
 
-    void SetParent(void* owner);
+    void NiAVObject_AttachParent(void* owner);
     void NiNode_InsertChildAt(NiRefObject* a1, NiRefObject* a2);
 };
 
@@ -1508,7 +1509,7 @@ void FUN_00a5edc0_cls::NiNode_InsertChildAt(NiRefObject* apArg, NiRefObject* apR
         long(__stdcall * pfnDecRef)(volatile long*) = InterlockedDecrement;
         volatile long* rc = (volatile long*)&apRefObject->m_uiRefCount;
         pfnIncRef(rc);
-        apRefObject->SetParent(this);
+        apRefObject->NiAVObject_AttachParent(this);
         NiRefObject* pRefObject = apRefObject;
         pfnIncRef(rc);
         m_sub.FUN_00a5ebe0(apArg, &pRefObject);
@@ -2554,7 +2555,7 @@ struct ChildObj
     int unk10;
     int unk14;
     ChildNode* m_pkParent;  // src: FNV360_PDB +0x18 (old: m_pParentNode)
-    void SetParent(ChildNode* pkParent) throw();
+    void NiAVObject_AttachParent(ChildNode* pkParent) throw();
     void IncRefCount() throw()
     {
         InterlockedIncrement(&m_uiRefCount);
@@ -2713,7 +2714,7 @@ void ChildNode::FUN_00a5ed10(ChildObj* pkChild, bool firstAvailable)
     if (pkChild)
     {
         pkChild->IncRefCount();
-        pkChild->SetParent(this);
+        pkChild->NiAVObject_AttachParent(this);
         if (firstAvailable)
         {
             m_kChildren.FUN_00a5eb20(pkChild);

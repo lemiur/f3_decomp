@@ -742,7 +742,8 @@ extern "C" NiObject* __cdecl FUN_00944990();
 extern const char DAT_00e321e0[];
 
 // pdb: bhkWorld::InitSystem | bhkWorld.obj | fnv360_0822_retail, ustr, high
-void InitHavokPhysics() {
+// pdb: bhkWorld::InitSystem | bhkWorld.obj | fnv360_0822_retail, ustr, high (was: InitHavokPhysics)
+void bhkWorld_InitSystem() {
     DAT_01169108.a=DAT_010f2a90.value;
     DAT_01169108.b=DAT_010f2a9c.value;
     DAT_01169108.c=DAT_010f2aa8.value;
@@ -2156,14 +2157,15 @@ class NiStreamA63E
     int unk240, unk244, unk248, unk24C;
     NiBinaryStreamA63E* m_pkOstr;  // src: FNV360_PDB +0x250 (old: m_pBackingStream)
 
-    bool SaveLinkIDs(unsigned int uiStartPos);
+    bool NiStream_SaveObjectSizeTable(unsigned int uiStartPos);
 };
 
 // Seeks the backing stream back to uiStartPos and writes each link ID from m_puiLinkIDs to the stream.
 // @fnv 0x00a63e60
 // pdb: NiStream::SaveObjectSizeTable | NiStream.obj | fnv360_0822_retail, vtable, high
 // pdb params: uiStartOffset
-bool NiStreamA63E::SaveLinkIDs(unsigned int uiStartPos)
+// pdb: NiStream::SaveObjectSizeTable | NiStream.obj | fnv360_0822_retail, vtable, high (was: SaveLinkIDs)
+bool NiStreamA63E::NiStream_SaveObjectSizeTable(unsigned int uiStartPos)
 {
     unsigned int uiDelta = m_pkOstr->GetPosition() - uiStartPos;
     m_pkOstr->Seek(-(int)uiDelta);
@@ -2673,14 +2675,15 @@ struct FUN_00a641f0_cls
     int unk24C;
     NiStreamW* m_250;
     unsigned int GetObjectLinkId(void* p);
-    void WriteObjectLink(void* a1);
+    void NiStream_SaveFixedString(void* a1);
 };
 
 // Writes four bytes: DAT_0109bc30 if the argument's first pointer matches DAT_0109b220, otherwise its object link ID.
 // @fnv 0x00a641f0
 // pdb: NiStream::SaveFixedString | NiStream.obj | fnv360_0822_retail, call_seq, high
 // pdb params: kString
-void FUN_00a641f0_cls::WriteObjectLink(void* apObject)
+// pdb: NiStream::SaveFixedString | NiStream.obj | fnv360_0822_retail, call_seq, high (was: WriteObjectLink)
+void FUN_00a641f0_cls::NiStream_SaveFixedString(void* apObject)
 {
     unsigned int id;
     if (*(void**)apObject == DAT_0109b220)
@@ -3330,12 +3333,13 @@ struct LinkLoader
     unsigned int unk244;
     unsigned int unk248;
     BinaryInput* input;
-    bool ReadLinks();
+    bool NiStream_LoadObjectSizeTable();
 };
 // Reads linkCount 4-byte values from input into the links array and returns true.
 // @fnv 0x00a64740
 // pdb: NiStream::LoadObjectSizeTable | NiStream.obj | fnv360_0822_retail, vtable, high
-bool LinkLoader::ReadLinks()
+// pdb: NiStream::LoadObjectSizeTable | NiStream.obj | fnv360_0822_retail, vtable, high (was: ReadLinks)
+bool LinkLoader::NiStream_LoadObjectSizeTable()
 {
     links.FUN_00864280(linkCount);
     for (unsigned int index = 0; index < linkCount; ++index)
@@ -3495,7 +3499,7 @@ struct NiBinaryStreamStandIn
         unsigned int uiSize = sizeof(T);
         return BinaryWrite(pArray, sizeof(T) * ItemUpdateArray, &uiSize, 1);
     }
-    void AdvanceChars(const char* pcLine);
+    void NiBinaryStream_PutS(const char* pcLine);
 };
 
 extern unsigned int g_uiNifMaxVersion_011a9b0c;
@@ -3515,16 +3519,17 @@ struct NiStreamImpl
     char pad1fc[0x250 - 0x1fc];
     NiBinaryStreamStandIn* m_pkOstr;  // src: FNV360_PDB +0x250 (old: m_pBackingStream)
 
-    void WriteHeader();
+    void NiStream_SaveHeader();
 };
 
 // Writes the NIF header (version, endianness, object count, and optional creator/export info) to the backing stream.
 // @fnv 0x00a64940
 // pdb: NiStream::SaveHeader | NiStream.obj | fnv360_0822_retail, vtable, high
-void NiStreamImpl::WriteHeader()
+// pdb: NiStream::SaveHeader | NiStream.obj | fnv360_0822_retail, vtable, high (was: WriteHeader)
+void NiStreamImpl::NiStream_SaveHeader()
 {
     m_pkOstr->SetEndianSwap(false);
-    m_pkOstr->AdvanceChars("Gamebryo File Format, Version 20.2.0.7\n");
+    m_pkOstr->NiBinaryStream_PutS("Gamebryo File Format, Version 20.2.0.7\n");
     m_pkOstr->Write(&g_uiNifMaxVersion_011a9b0c);
     m_pkOstr->Write(&m_bLittleEndian);
     m_pkOstr->Write(&g_uiNifMaxUserVersion_011a9b10);
@@ -3660,7 +3665,7 @@ class ImageSpaceShaderParam
 class ImageSpaceShaderW
 {
   public:
-    void UpdateTextureSwapList();
+    void NiStream_UpdateObjectGroups();
     unsigned int FindTexture(ImageSpaceTexture* pkTexture) const
     {
         for (unsigned int k = 0; k < m_kTextureSwapList.m_usSize; k++)
@@ -3800,7 +3805,8 @@ class ImageSpaceShaderW
 // Rebuilds m_kTextureSwapList from shader params and accumulates GetCount into each texture's m_uiValueBeforeCount.
 // @fnv 0x00a64b80
 // pdb: NiStream::UpdateObjectGroups | NiStream.obj | fnv360_0822_retail, call_seq, high
-void ImageSpaceShaderW::UpdateTextureSwapList()
+// pdb: NiStream::UpdateObjectGroups | NiStream.obj | fnv360_0822_retail, call_seq, high (was: UpdateTextureSwapList)
+void ImageSpaceShaderW::NiStream_UpdateObjectGroups()
 {
     m_kTextureSwapList.SetSize(1);
     m_kTextureSwapList.SetAt(0, 0);
@@ -4488,13 +4494,14 @@ struct NiStreamImpl
     unsigned int m_uiLastError;  // src: FNV360_PDB +0x3B8 (old: m_uiNativeThreadId)
     char m_acLastErrorMessage[0x104];  // src: FNV360_PDB +0x3BC (old: m_acSecondPathBuffer)
 
-    bool ReadNifHeader();
+    bool NiStream_LoadHeader();
 };
 
 // Reads and validates the NIF file header from m_pkIstr, storing version, endian, and object count, returning false on any validation failure.
 // @fnv 0x00a65400
 // pdb: NiStream::LoadHeader | NiStream.obj | fnv360_0822_retail, vtable, high
-bool NiStreamImpl::ReadNifHeader()
+// pdb: NiStream::LoadHeader | NiStream.obj | fnv360_0822_retail, vtable, high (was: ReadNifHeader)
+bool NiStreamImpl::NiStream_LoadHeader()
 {
     char acBuffer[0x80];
     m_pkIstr->ReadLine(acBuffer, 0x80);
@@ -4758,7 +4765,7 @@ class ObjectLoadStream
     ObjectReferenceArray topObjects;
     unsigned int unk234, unk238, unk23c, unk240, unk244, unk248;
     ReadStream* input;
-    void LoadTopObjects();
+    void NiStream_LoadTopLevelObjects();
     ReadObject* GetLoadedObject(unsigned int id)
     {
         return id == 0xffffffff ? 0 : objects[id];
@@ -4767,7 +4774,8 @@ class ObjectLoadStream
 // Reads a count and object IDs from input, populates topObjects with ObjectReference entries, and removes references from loaded objects.
 // @fnv 0x00a65720
 // pdb: NiStream::LoadTopLevelObjects | NiStream.obj | fnv360_0822_retail, vtable, high
-void ObjectLoadStream::LoadTopObjects()
+// pdb: NiStream::LoadTopLevelObjects | NiStream.obj | fnv360_0822_retail, vtable, high (was: LoadTopObjects)
+void ObjectLoadStream::NiStream_LoadTopLevelObjects()
 {
     unsigned int count;
     LoadValue(input, count);
@@ -6885,13 +6893,14 @@ struct RtStream
     RtBinaryStream* m_pkOstr;  // src: FNV360_PDB +0x250 (old: m_pBackingStream)
 
     void NiStream_SaveCString(const char* pcString);
-    void WriteRTTIHeader();
+    void NiStream_SaveRTTI();
 };
 
 // Writes the RTTI name table and per-object RTTI IDs (with clone flag) to the backing stream.
 // @fnv 0x00a665f0
 // pdb: NiStream::SaveRTTI | NiStream.obj | fnv360_0822_retail, call_seq, high
-void RtStream::WriteRTTIHeader()
+// pdb: NiStream::SaveRTTI | NiStream.obj | fnv360_0822_retail, call_seq, high (was: WriteRTTIHeader)
+void RtStream::NiStream_SaveRTTI()
 {
     RtStringMap kRTTIMap;
     unsigned int i;
@@ -7051,9 +7060,9 @@ struct VStream
     virtual void v20();
     virtual unsigned int GetStartingOffset();
     virtual void BackPatch(unsigned int);
-    void WriteRTTIHeader();
+    void NiStream_SaveRTTI();
     void NiStream_SaveFixedStringTable();
-    void UpdateTextureSwapList();
+    void NiStream_UpdateObjectGroups();
     void WriteData();
 };
 
@@ -7067,10 +7076,10 @@ bool FUN_00a66850_shell::NiStream_SaveStream()
     SizeArray& kObjectSizes = *(SizeArray*)&m_kObjectSizes;
     kObjectSizes.SetSize(m_kObjects.m_uiSize);
     pkThis->SaveHeader();
-    pkThis->WriteRTTIHeader();
+    pkThis->NiStream_SaveRTTI();
     unsigned int uiStartingOffset = pkThis->GetStartingOffset();
     pkThis->NiStream_SaveFixedStringTable();
-    pkThis->UpdateTextureSwapList();
+    pkThis->NiStream_UpdateObjectGroups();
     pkThis->WriteData();
     for (unsigned int i = 0; i < m_kObjects.m_uiSize; i++)
     {

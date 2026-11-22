@@ -105,13 +105,14 @@ unsigned short __thiscall FUN_00c25db0_shell::FUN_00c25db0(unsigned short index)
 
 struct FUN_00c25de0_shell : BSStripPSysData
 {
-    float __thiscall GetEntryFloat(unsigned short idx);
+    float __thiscall BSStripPSysData_GetPointLastUpdateTime(unsigned short idx);
 };
 
 // @fnv 0x00c25de0
 // pdb: BSStripPSysData::GetPointLastUpdateTime | BSStripPSysData.obj | fnv360_0822_retail, call_seq, high
 // pdb params: ausParticle
-float __thiscall FUN_00c25de0_shell::GetEntryFloat(unsigned short usIndex)
+// pdb: BSStripPSysData::GetPointLastUpdateTime | BSStripPSysData.obj | fnv360_0822_retail, call_seq, high (was: GetEntryFloat)
+float __thiscall FUN_00c25de0_shell::BSStripPSysData_GetPointLastUpdateTime(unsigned short usIndex)
 {
     return pStripList[usIndex].fLastTime;
 }
@@ -168,13 +169,14 @@ struct S20_25e20
 };
 struct FUN_00c25e20_shell : BSStripPSysData
 {
-    float __thiscall GetInnerValue(unsigned short, unsigned short);
+    float __thiscall BSStripPSysData_GetPointSize(unsigned short, unsigned short);
 };
 // Indexes base[a].p to an inner object and returns its float field at index b.
 // @fnv 0x00c25e20
 // pdb: BSStripPSysData::GetPointSize | BSStripPSysData.obj | fnv360_0822_retail, objrun, high
 // pdb params: ausParticle, ausPoint
-float __thiscall FUN_00c25e20_shell::GetInnerValue(unsigned short ausOuterIndex, unsigned short ausInnerIndex)
+// pdb: BSStripPSysData::GetPointSize | BSStripPSysData.obj | fnv360_0822_retail, objrun, high (was: GetInnerValue)
+float __thiscall FUN_00c25e20_shell::BSStripPSysData_GetPointSize(unsigned short ausOuterIndex, unsigned short ausInnerIndex)
 {
     return pStripList[ausOuterIndex].pPointList[ausInnerIndex].fSize;
 }

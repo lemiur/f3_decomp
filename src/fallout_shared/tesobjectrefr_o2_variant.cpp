@@ -3843,7 +3843,7 @@ struct Obj86060
     virtual void vac();
     virtual void vb0();
     virtual Info* GetInfo(void**);
-    void SaveSerializeData(Stream86060&);
+    void bhkSerializable_SaveBinary(Stream86060&);
     void FUN_00c86060(Stream86060&);
 };
 // @f3 0x008f9de0 (community match, verified in this file)

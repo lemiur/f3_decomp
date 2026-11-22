@@ -14009,7 +14009,7 @@ public:
     void FUN_007a3270();
 };
 
-// pdb: CombatGroup::UpdateTargets | CombatGroup.obj | fnv360_0822_retail, call_gap, low
+// pdb: CombatGroup::NiMultiTargetTransformController_Update | CombatGroup.obj | fnv360_0822_retail, call_gap, low
 void PathOwner::FUN_007a3270()
 {
     unsigned int count = unk10;

@@ -97,14 +97,14 @@ struct SObj
     char pad[4];
     float v;
 };
-void __cdecl CallAnimCallback(SStream*, SObj*);
-// Calls CallAnimCallback, then writes the float at a2->v into the stream's output via its fn callback and advances pos by the bytes written.
+void __cdecl NiAnimationKey_SaveBinary(SStream*, SObj*);
+// Calls NiAnimationKey_SaveBinary, then writes the float at a2->v into the stream's output via its fn callback and advances pos by the bytes written.
 // @fnv 0x00a26ef0
 // pdb: NiFloatKey::SaveBinary | NiFloatKey.obj | fnv360_0822_retail, objopen_prop, medium
 // pdb params: stream, pkKey
 void WriteFloatToStream(SStream* pStream, SObj* pObj)
 {
-    CallAnimCallback(pStream, pObj);
+    NiAnimationKey_SaveBinary(pStream, pObj);
     SOut* __restrict output = pStream->out;
     unsigned int size = 4;
     output->pos += output->fn(output, &pObj->v, 4, &size, 1);
@@ -237,7 +237,8 @@ static inline const S00a26b40_Key& S00a26b40_At(const S00a26b40_Key* keys, unsig
 // @fnv 0x00a26b40
 // pdb: NiFloatKey::GenInterp | NiFloatKey.obj | fnv360_0822_retail, call_seq, high
 // pdb params: fTime, pkKeys, eType, uiNumKeys, uiLastIdx, ucSize
-float __cdecl InterpolateKey(float time, const S00a26b40_Key* keys, unsigned int type, unsigned int count,
+// pdb: NiFloatKey::GenInterp | NiFloatKey.obj | fnv360_0822_retail, call_seq, high (was: InterpolateKey)
+float __cdecl NiFloatKey_GenInterp(float time, const S00a26b40_Key* keys, unsigned int type, unsigned int count,
                              unsigned int* lastIndex, unsigned char keySize)
 {
     if (count == 1 || time == -3.4028234663852886e+38)

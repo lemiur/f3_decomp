@@ -572,13 +572,14 @@ struct NiPSysModifierSaveBase
 };
 struct FUN_00c2f260_shell
 {
-    void SaveAgeDeathModifier(NiStream* stream);
+    void NiPSysAgeDeathModifier_SaveBinary(NiStream* stream);
 };
 // Calls the base modifier save, writes the spawn-on-death flag to the stream's binary output, then writes the spawn modifier link.
 // @fnv 0x00c2f260
 // pdb: NiPSysAgeDeathModifier::SaveBinary | NiPSysAgeDeathModifier.obj | fnv360_0822_retail, objrun, high
 // pdb params: kStream
-void FUN_00c2f260_shell::SaveAgeDeathModifier(NiStream* stream)
+// pdb: NiPSysAgeDeathModifier::SaveBinary | NiPSysAgeDeathModifier.obj | fnv360_0822_retail, objrun, high (was: SaveAgeDeathModifier)
+void FUN_00c2f260_shell::NiPSysAgeDeathModifier_SaveBinary(NiStream* stream)
 {
     reinterpret_cast<NiPSysModifierSaveBase*>(this)->FUN_00c31950(stream);
     NiPSysAgeDeathModifierClone* modifier = reinterpret_cast<NiPSysAgeDeathModifierClone*>(this);

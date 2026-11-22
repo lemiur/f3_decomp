@@ -869,11 +869,12 @@ struct C082d30
     void* data;
     unsigned int size;
     unsigned int count;
-    void AppendMatchingIndices(int, void*, unsigned int);
+    void NiSkinPartition_TriangleSet_AddTriangles(int, void*, unsigned int);
     void Grow(unsigned int);
 };
 
-__declspec(noinline) void C082d30::AppendMatchingIndices(int partition, void* assignments, unsigned int triangleTotal)
+// pdb: NiSkinPartition::TriangleSet::AddTriangles | NiSkinPartition.obj | fnv360_0822_retail, call_gap_sim, high (was: AppendMatchingIndices)
+__declspec(noinline) void C082d30::NiSkinPartition_TriangleSet_AddTriangles(int partition, void* assignments, unsigned int triangleTotal)
 {
     const int* map = static_cast<const int*>(assignments);
     for (unsigned int triangle = 0; triangle < triangleTotal; ++triangle)
@@ -909,7 +910,7 @@ struct FUN_00a81ba0
     {}
     unsigned short* BuildVertexRemapTable(C082d30*, SourceGeometry*);
     void BuildTriangleList(C082d30*, SourceGeometry*, unsigned short*);
-    void PopulateSkinData(C082d30*, Holder*, SourceGeometry*, TempRecord*, bool, bool, unsigned char, unsigned int);
+    void NiSkinPartition_Partition_Create(C082d30*, Holder*, SourceGeometry*, TempRecord*, bool, bool, unsigned char, unsigned int);
 };
 typedef FUN_00a81ba0 OutputRecord;
 
@@ -927,14 +928,15 @@ struct GeometryBuilder
     unsigned int unk00, unk04, count;
     OutputRecord* output;
     TempRecord* NiSkinPartition_CreateVertexInteractions(unsigned int, SkinBuildData*);
-    bool ReduceGroupWeights(SourceGeometry*, unsigned char, unsigned char, TempRecord*);
-    bool BuildTriangleSetMapping(SourceGeometry*, SkinBuildData*, unsigned char, TempRecord*, HolderArray*, void**,
+    bool NiSkinPartition_RemoveExcessInteractions(SourceGeometry*, unsigned char, unsigned char, TempRecord*);
+    bool NiSkinPartition_MakeBoneSets(SourceGeometry*, SkinBuildData*, unsigned char, TempRecord*, HolderArray*, void**,
                       OutputRecord**);
     bool NiSkinPartition_MakePartitions(SourceGeometry*, SkinBuildData*, unsigned char, unsigned char, bool, OutputRecord**,
                       unsigned short*, unsigned char*);
 };
 
-__declspec(noinline) void FUN_00a81ba0::PopulateSkinData(C082d30* triangles, Holder* bones, SourceGeometry* geometry,
+// pdb: NiSkinPartition::Partition::Create | NiSkinPartition.obj | fnv360_0822_retail, call_gap_sim, high (was: PopulateSkinData)
+__declspec(noinline) void FUN_00a81ba0::NiSkinPartition_Partition_Create(C082d30* triangles, Holder* bones, SourceGeometry* geometry,
                                                          TempRecord* interactions, bool padBones, bool makePalette,
                                                          unsigned char width, unsigned int totalBones)
 {
@@ -1053,10 +1055,10 @@ bool GeometryBuilder::NiSkinPartition_MakePartitions(SourceGeometry* source, Ski
         return false;
     }
 
-    bool success = ReduceGroupWeights(source, first, second, records);
+    bool success = NiSkinPartition_RemoveExcessInteractions(source, first, second, records);
     if (success)
     {
-        success = BuildTriangleSetMapping(source, other, first, records, &holders, &data, outputs);
+        success = NiSkinPartition_MakeBoneSets(source, other, first, records, &holders, &data, outputs);
         if (outputs && indices && changes)
         {
             for (unsigned int i = 0; i < holders.count; ++i)
@@ -1086,9 +1088,9 @@ bool GeometryBuilder::NiSkinPartition_MakePartitions(SourceGeometry* source, Ski
         scratch.count = 0;
         for (unsigned int i = 0; i < count; ++i)
         {
-            scratch.AppendMatchingIndices(i, data, source->GetTriangleCount());
+            scratch.NiSkinPartition_TriangleSet_AddTriangles(i, data, source->GetTriangleCount());
             Holder* current = const_cast<Holder**&>(holders.data)[i];
-            result[i].PopulateSkinData(&scratch, current, source, records, padBones, mode, second,
+            result[i].NiSkinPartition_Partition_Create(&scratch, current, source, records, padBones, mode, second,
                                        (*(SkinBuildData* volatile*)&other)->boneCount);
             scratch.count = 0;
             delete current;

@@ -9118,13 +9118,14 @@ class FUN_00bb8890_cls
     int unk18;
     B5270Item** m_1c;
     void SetEffectParams(int index);
-    void ProcessItem(int a1, int a2, int a3, int a4);
+    void ImageSpaceEffectInterface_Render(int a1, int a2, int a3, int a4);
 };
 
 // @fnv 0x00bb8890
 // pdb: ImageSpaceEffectInterface::Render | ImageSpaceEffectInterface.obj | fnv360_0822_retail, udata, high
 // pdb params: apGeometry, apRenderer, apParam, abEndFrame
-void FUN_00bb8890_cls::ProcessItem(int a1, int a2, int a3, int a4)
+// pdb: ImageSpaceEffectInterface::Render | ImageSpaceEffectInterface.obj | fnv360_0822_retail, udata, high (was: ProcessItem)
+void FUN_00bb8890_cls::ImageSpaceEffectInterface_Render(int a1, int a2, int a3, int a4)
 {
     v4(a3);
     B5270Item* item = m_1c[DAT_012007fc];
@@ -9902,14 +9903,15 @@ struct RenderPassShader_bae7b0
     {
         return m_type == 2 || m_type == 4;
     }
-    BSShaderProperty__RenderPassArray* BuildRenderPasses(NiGeometry* geom, int a2, int a3, int a4, int a5, int a6);
+    BSShaderProperty__RenderPassArray* SkyShaderProperty_GetRenderPasses(NiGeometry* geom, int a2, int a3, int a4, int a5, int a6);
 };
 
 // Selects and adds render passes to m_passes based on m_type and global flags, returning the pass array.
 // @fnv 0x00bae7b0
 // pdb: SkyShaderProperty::GetRenderPasses | SkyShaderProperty.obj | fnv360_0822_retail, udata, high
 // pdb params: apGeom, aiEnabledPasses, asCount, auiRenderMode, apAccumulator, abUpdateList
-BSShaderProperty__RenderPassArray* RenderPassShader_bae7b0::BuildRenderPasses(NiGeometry* geom, int aiUnused2,
+// pdb: SkyShaderProperty::GetRenderPasses | SkyShaderProperty.obj | fnv360_0822_retail, udata, high (was: BuildRenderPasses)
+BSShaderProperty__RenderPassArray* RenderPassShader_bae7b0::SkyShaderProperty_GetRenderPasses(NiGeometry* geom, int aiUnused2,
                                                                               int aiUnused3, int aiUnused4,
                                                                               int aiUnused5, int aiUnused6)
 {

@@ -296,7 +296,7 @@ struct StrListObj
     int m_iIndex;
 
     void FUN_00a7b330(StrListObj* dst, void* arg2);
-    void CopyStringList(StrListObj* dst, void* arg2);
+    void NiSwitchStringExtraData_CopyMembers(StrListObj* dst, void* arg2);
 };
 
 void* __cdecl FUN_00aa1070(unsigned int size);
@@ -305,7 +305,8 @@ void __cdecl FUN_00ec65a6(void* dst, unsigned int size, void* src);
 // @fnv 0x00a937a0
 // pdb: NiSwitchStringExtraData::CopyMembers | NiSwitchStringExtraData.obj | fnv360_0822_retail, caller_sim, high
 // pdb params: pDest, kCloning
-void StrListObj::CopyStringList(StrListObj* dst, void* arg2)
+// pdb: NiSwitchStringExtraData::CopyMembers | NiSwitchStringExtraData.obj | fnv360_0822_retail, caller_sim, high (was: CopyStringList)
+void StrListObj::NiSwitchStringExtraData_CopyMembers(StrListObj* dst, void* arg2)
 {
     FUN_00a7b330(dst, arg2);
     if (m_ppStrings == 0 || m_uiCount <= 0)
@@ -429,7 +430,7 @@ struct SSE_Node : NiExtraData
 struct SSE_Owner : NiSwitchStringExtraData
 {
     SSE_Node* CreateNode(unsigned int);
-    void CopyStringList(SSE_Node*, unsigned int);
+    void NiSwitchStringExtraData_CopyMembers(SSE_Node*, unsigned int);
 };
 // @fnv 0x00a938d0
 // pdb: NiSwitchStringExtraData::CreateClone | NiSwitchStringExtraData.obj | fnv360_0822_retail, caller_sim, high
@@ -437,7 +438,7 @@ struct SSE_Owner : NiSwitchStringExtraData
 SSE_Node* SSE_Owner::CreateNode(unsigned int arg)
 {
     SSE_Node* obj = new SSE_Node;
-    CopyStringList(obj, arg);
+    NiSwitchStringExtraData_CopyMembers(obj, arg);
     return obj;
 }
 

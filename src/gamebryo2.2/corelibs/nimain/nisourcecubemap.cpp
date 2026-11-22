@@ -1220,11 +1220,12 @@ struct ShaderPass_a60
     NiPointer<NiGPUProgram> m_spShaderProgram;
     int unk40;
     void* m_pvDefines;
-    void EnsureProgramCreated();
+    void NiSourceCubeMap_LoadPixelDataFromFile();
 };
 // @fnv 0x00a608c0
 // pdb: NiSourceCubeMap::LoadPixelDataFromFile | NiSourceCubeMap.obj | fnv360_0822_retail, caller_sim, high
-void ShaderPass_a60::EnsureProgramCreated()
+// pdb: NiSourceCubeMap::LoadPixelDataFromFile | NiSourceCubeMap.obj | fnv360_0822_retail, caller_sim, high (was: EnsureProgramCreated)
+void ShaderPass_a60::NiSourceCubeMap_LoadPixelDataFromFile()
 {
     if (m_spShaderProgram == 0 && m_pcProgramName != DAT_0109b220)
     {

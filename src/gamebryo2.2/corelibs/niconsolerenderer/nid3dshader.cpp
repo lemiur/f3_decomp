@@ -168,7 +168,7 @@ struct VirtHelper
 };
 struct GroupStandIn
 {
-    void ApplyGroupEntries();
+    void NiD3DRenderStateGroup_SetRenderStates();
 };
 struct StateStandIn
 {
@@ -196,7 +196,7 @@ unsigned int ShaderStandIn::FUN_00e81170(void* a1, void* a2, void* a3, void* a4,
     }
     GroupStandIn* pGroup = *(GroupStandIn**)((char*)this + 0x2c);
     if (pGroup)
-        pGroup->ApplyGroupEntries();
+        pGroup->NiD3DRenderStateGroup_SetRenderStates();
     return 0;
 }
 

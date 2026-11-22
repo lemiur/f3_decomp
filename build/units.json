@@ -759,7 +759,7 @@
     },
     {
      "address": "0x00b43610",
-     "symbol": "?EnsurePassAndUpdate@@YI_NPAD@Z",
+     "symbol": "?BoltShader_LoadStagesAndPasses@@YI_NPAD@Z",
      "size": 38
     },
     {
@@ -852,7 +852,7 @@
    "functions": [
     {
      "address": "0x00b447f0",
-     "symbol": "?AddValue@Ring216@@QAEXMMMM@Z",
+     "symbol": "?BoltShaderProperty_UpdateAndMoveBolt@Ring216@@QAEXMMMM@Z",
      "size": 364
     }
    ],
@@ -1867,7 +1867,7 @@
     },
     {
      "address": "0x00b61950",
-     "symbol": "?AddPasses@BBDF6C0Shader@@QAEXPAVBBDF6C0Geometry@@_N@Z",
+     "symbol": "?BSShaderPPLightingProperty_AddSilhouettePass_2x@BBDF6C0Shader@@QAEXPAVBBDF6C0Geometry@@_N@Z",
      "size": 204
     },
     {
@@ -2124,7 +2124,7 @@
     "?UpdatePasses@AccumStub@fnv_00b65c60@@QAEX_N@Z": "0x00ae7de0",
     "?SetDepthBufferEnabled@BSRenderStateManager@fnv_00b65c60@@SAX_NH@Z": "0x00b0dbf0",
     "?DAT_011f9fc1@fnv_00b65ae0@@3_NA": "0x0116fd49",
-    "?CreateRenderPassesNode@AccumView@fnv_00b65ae0@@QAEPAXXZ": "0x00ae6ce0",
+    "?BSShaderAccumulator_CreateRenderPassTree@AccumView@fnv_00b65ae0@@QAEPAXXZ": "0x00ae6ce0",
     "?DAT_011fa008@fnv_00b65ae0@@3UGO@1@A": "0x0116fd90",
     "??4GO@fnv_00b65ae0@@QAEXPAX@Z": "0x008e9650",
     "?_FUN_00b98280@fnv_00b65ae0@@YAXHHHHHHH@Z": "0x00b0ded0",
@@ -2172,7 +2172,7 @@
     "?FUN_00b639e0@FUN_00b64a00_Pass@@QAEXHH@Z": "0x00ae72a0",
     "?PollQuery@QueryOwner_b64d@@QAEXI@Z": "0x00ae6e00",
     "?DAT_011f9fc1@@3_NA": "0x0116fd49",
-    "?CreateRenderPassesNode@AccumWIP2@@QAEPAXXZ": "0x00ae6ce0",
+    "?BSShaderAccumulator_CreateRenderPassTree@AccumWIP2@@QAEPAXXZ": "0x00ae6ce0",
     "?DAT_011fa008@@3UNP@@A": "0x0116fd90",
     "??4NP@@QAEAAU0@PAX@Z": "0x008e9650",
     "?FUN_00b63a50@AccumWIP2@@QAEXXZ": "0x00ae7310",
@@ -2213,7 +2213,7 @@
     "__real@3f800000": "0x00db39b8",
     "??3@YAXPAX@Z": "0x00401010",
     "?AddHead@NodePoolView@@QAEPAXXZ": "0x00423640",
-    "__ehhandler$?CreateRenderPassesNode@@YAPAUNiNode@@XZ": "0x00c7828a",
+    "__ehhandler$?BSShaderAccumulator_CreateRenderPassTree@@YAPAUNiNode@@XZ": "0x00c7828a",
     "__ehhandler$?RenderGeometryPass@Candidate@@QAEXPAXI0@Z": "0x00c782c3",
     "__tls_array": "0x0000002c",
     "__tls_index": "0x01179af4",
@@ -2255,7 +2255,7 @@
     },
     {
      "address": "0x00ae6ce0",
-     "symbol": "?CreateRenderPassesNode@@YAPAUNiNode@@XZ",
+     "symbol": "?BSShaderAccumulator_CreateRenderPassTree@@YAPAUNiNode@@XZ",
      "size": 211
     },
     {
@@ -2446,7 +2446,7 @@
     "?UpdatePasses@AccumStub@fnv_00b65c60@@QAEX_N@Z": "0x00ae7de0",
     "?SetDepthBufferEnabled@BSRenderStateManager@fnv_00b65c60@@SAX_NH@Z": "0x00b0dbf0",
     "?DAT_011f9fc1@fnv_00b65ae0@@3_NA": "0x0116fd49",
-    "?CreateRenderPassesNode@AccumView@fnv_00b65ae0@@QAEPAXXZ": "0x00ae6ce0",
+    "?BSShaderAccumulator_CreateRenderPassTree@AccumView@fnv_00b65ae0@@QAEPAXXZ": "0x00ae6ce0",
     "?DAT_011fa008@fnv_00b65ae0@@3UGO@1@A": "0x0116fd90",
     "??4GO@fnv_00b65ae0@@QAEXPAX@Z": "0x008e9650",
     "?_FUN_00b98280@fnv_00b65ae0@@YAXHHHHHHH@Z": "0x00b0ded0",
@@ -2494,7 +2494,7 @@
     "?FUN_00b639e0@FUN_00b64a00_Pass@@QAEXHH@Z": "0x00ae72a0",
     "?PollQuery@QueryOwner_b64d@@QAEXI@Z": "0x00ae6e00",
     "?DAT_011f9fc1@@3_NA": "0x0116fd49",
-    "?CreateRenderPassesNode@AccumWIP2@@QAEPAXXZ": "0x00ae6ce0",
+    "?BSShaderAccumulator_CreateRenderPassTree@AccumWIP2@@QAEPAXXZ": "0x00ae6ce0",
     "?DAT_011fa008@@3UNP@@A": "0x0116fd90",
     "??4NP@@QAEAAU0@PAX@Z": "0x008e9650",
     "?FUN_00b63a50@AccumWIP2@@QAEXXZ": "0x00ae7310",
@@ -2535,7 +2535,7 @@
     "__real@3f800000": "0x00db39b8",
     "??3@YAXPAX@Z": "0x00401010",
     "?AddHead@NodePoolView@@QAEPAXXZ": "0x00423640",
-    "__ehhandler$?CreateRenderPassesNode@@YAPAUNiNode@@XZ": "0x00c7828a",
+    "__ehhandler$?BSShaderAccumulator_CreateRenderPassTree@@YAPAUNiNode@@XZ": "0x00c7828a",
     "__ehhandler$?RenderGeometryPass@Candidate@@QAEXPAXI0@Z": "0x00c782c3",
     "__tls_array": "0x0000002c",
     "__tls_index": "0x01179af4",
@@ -2804,7 +2804,7 @@
     },
     {
      "address": "0x00b03cb0",
-     "symbol": "?BuildStringArray@StringOwner@@QAEXI@Z",
+     "symbol": "?BSShaderBloodSplatterProperty_GetViewerStrings@StringOwner@@QAEXI@Z",
      "size": 183
     }
    ],
@@ -4258,7 +4258,7 @@
     "??2Material@@SAPAXI@Z": "0x0089eb90",
     "??0Material@@QAE@XZ": "0x0083fc40",
     "?AttachProperty@Walker@@QAEXPAUMaterial@@@Z": "0x004236f0",
-    "?UpdateShaderProperty@@YAXPAVNiAVObjectB57B@@W4eObjectType@BSShaderManager@@_N2@Z": "0x00addeb0",
+    "?BSShaderManager_PrepareGeometry@@YAXPAVNiAVObjectB57B@@W4eObjectType@BSShaderManager@@_N2@Z": "0x00addeb0",
     "?FUN_00b62a20@CleanupState@fnv_00b54630@@YAXXZ": "0x00ae0cc0",
     "?ClearCachedEntryMap@CleanupState@fnv_00b54630@@YAXXZ": "0x00ad53a0",
     "?FUN_00ba50d0@CleanupState@fnv_00b54630@@YAXXZ": "0x00b27390",
@@ -5242,12 +5242,12 @@
     },
     {
      "address": "0x00ad5970",
-     "symbol": "?GetRenderModeName@BSShaderManager@@SAPADXZ",
+     "symbol": "?GetShaderLevelString@BSShaderManager@@SAPADXZ",
      "size": 104
     },
     {
      "address": "0x00ad5a70",
-     "symbol": "?BuildTexturePath@BSShaderManager@@SAXPADPBD1_N@Z",
+     "symbol": "?GetModifiedTextureFilename@BSShaderManager@@SAXPADPBD1_N@Z",
      "size": 291
     },
     {
@@ -5302,7 +5302,7 @@
     },
     {
      "address": "0x00addeb0",
-     "symbol": "?UpdateShaderProperty@@YAXPAUAVObj@@_N11@Z",
+     "symbol": "?BSShaderManager_PrepareGeometry@@YAXPAUAVObj@@_N11@Z",
      "size": 487
     },
     {
@@ -6151,7 +6151,7 @@
     "??2Material@@SAPAXI@Z": "0x0089eb90",
     "??0Material@@QAE@XZ": "0x0083fc40",
     "?AttachProperty@Walker@@QAEXPAUMaterial@@@Z": "0x004236f0",
-    "?UpdateShaderProperty@@YAXPAVNiAVObjectB57B@@W4eObjectType@BSShaderManager@@_N2@Z": "0x00addeb0",
+    "?BSShaderManager_PrepareGeometry@@YAXPAVNiAVObjectB57B@@W4eObjectType@BSShaderManager@@_N2@Z": "0x00addeb0",
     "?FUN_00b62a20@CleanupState@fnv_00b54630@@YAXXZ": "0x00ae0cc0",
     "?ClearCachedEntryMap@CleanupState@fnv_00b54630@@YAXXZ": "0x00ad53a0",
     "?FUN_00ba50d0@CleanupState@fnv_00b54630@@YAXXZ": "0x00b27390",
@@ -8286,7 +8286,7 @@
     },
     {
      "address": "0x00b44960",
-     "symbol": "?DispatchFloatPair@@YGXMMM_N@Z",
+     "symbol": "?BoltShaderProperty_UpdateBolt@@YGXMMM_N@Z",
      "size": 56
     },
     {
@@ -9182,7 +9182,7 @@
     },
     {
      "address": "0x00b4f340",
-     "symbol": "?ApplyShaderInputToPass@@YGXPAUShaderInput@@@Z",
+     "symbol": "?GeometryDecalShader_SetupGeometryTextures@@YGXPAUShaderInput@@@Z",
      "size": 37
     },
     {
@@ -10601,7 +10601,7 @@
     },
     {
      "address": "0x00b11ab0",
-     "symbol": "?ShutdownAllEffects@ImageSpaceManager_b8b@@QAEXXZ",
+     "symbol": "?ImageSpaceManager_ShutdownEffects@ImageSpaceManager_b8b@@QAEXXZ",
      "size": 112
     },
     {
@@ -10696,7 +10696,7 @@
     },
     {
      "address": "0x00b1c490",
-     "symbol": "?CreateMenuBackgroundGeometry@ImageSpaceManager@@QAEXXZ",
+     "symbol": "?InitGeometry@ImageSpaceManager@@QAEXXZ",
      "size": 564
     },
     {
@@ -10850,7 +10850,7 @@
     "__real@3f800000": "0x00db39b8",
     "??3@YAXPAX@Z": "0x00401010",
     "??2@YAPAXI@Z": "0x00401000",
-    "__ehhandler$?CreateMenuBackgroundGeometry@ImageSpaceManager@@QAEXXZ": "0x00c7a1e9",
+    "__ehhandler$?InitGeometry@ImageSpaceManager@@QAEXXZ": "0x00c7a1e9",
     "__ehhandler$??0FUN_00b8bce0@@QAE@XZ": "0x00c79a48",
     "?g_011fed88_arg1@@3QBDB": "0x0117a620",
     "__ehhandler$??0FUN_00b8bea0@fnv_00b8bea0@@QAE@XZ": "0x00c79a48",
@@ -11734,7 +11734,7 @@
     "?DAT_011f952c@@3HA": "0x0116f31c",
     "?GetTableValue@@YAHH@Z": "0x00b27320",
     "?SetupPass@FUN_00bbb820_cls@@QAEPAUResultStandIn@@HH@Z": "0x00b8d170",
-    "?ApplyGroupEntries@GroupStandIn@@QAEXXZ": "0x00890030",
+    "?NiD3DRenderStateGroup_SetRenderStates@GroupStandIn@@QAEXXZ": "0x00890030",
     "?DAT_01200bf8@@3UFogQuad@@A": "0x01176998",
     "?DAT_01200c08@@3UFogQuad@@A": "0x011769a8",
     "?DAT_01200be8@@3MA": "0x01176988",
@@ -12010,7 +12010,7 @@
     },
     {
      "address": "0x00b3e4d0",
-     "symbol": "?UpdateFogPlanes@fnv_00bbbe80@@YAXXZ",
+     "symbol": "?Lighting30Shader_SetupGeometryConstants_WaterFog@fnv_00bbbe80@@YAXXZ",
      "size": 462
     },
     {
@@ -12178,7 +12178,7 @@
     "?DAT_011f952c@@3HA": "0x0116f31c",
     "?GetTableValue@@YAHH@Z": "0x00b27320",
     "?SetupPass@FUN_00bbb820_cls@@QAEPAUResultStandIn@@HH@Z": "0x00b8d170",
-    "?ApplyGroupEntries@GroupStandIn@@QAEXXZ": "0x00890030",
+    "?NiD3DRenderStateGroup_SetRenderStates@GroupStandIn@@QAEXXZ": "0x00890030",
     "?DAT_01200bf8@@3UFogQuad@@A": "0x01176998",
     "?DAT_01200c08@@3UFogQuad@@A": "0x011769a8",
     "?DAT_01200be8@@3MA": "0x01176988",
@@ -12424,7 +12424,7 @@
     },
     {
      "address": "0x00b0d830",
-     "symbol": "?StartRenderingTaskThread@TaskThreadManager@@QAEXXZ",
+     "symbol": "?MTRenderingSystem_CreateThreads@TaskThreadManager@@QAEXXZ",
      "size": 38
     }
    ],
@@ -12927,7 +12927,7 @@
     "?FUN_004b4500@PickMover@@QAEPAUPickVector@@PAU2@PBU2@@Z": "0x004752c0",
     "?FUN_00a67360@PickShape@@QAE_NH@Z": "0x00831680",
     "?NiGeometryData_GetVerticesIterator@PickShape@@QAEXPAX@Z": "0x00831730",
-    "?GetBounds@PickShape@@QAEXPAX@Z": "0x008318d0",
+    "?NiGeometryData_GetNormalsIterator@PickShape@@QAEXPAX@Z": "0x008318d0",
     "?NiGeometryData_UnlockPackedVertexData@PickShape@@QAEXXZ": "0x008316f0",
     "?FUN_00524c40@PickMover@@QAEPAUPickVector@@PAU2@PBU2@@Z": "0x004bbdf0",
     "?NiPoint3_ZERO@@3UNiPoint3@@A": "0x0108ec68",
@@ -12997,7 +12997,7 @@
     },
     {
      "address": "0x00b296c0",
-     "symbol": "?EnsureShaderArrayEntries@ShaderArrayOwner@@QAEPAUShaderArrayHolder@@HHHHHH@Z",
+     "symbol": "?ParticleShaderProperty_GetRenderPasses@ShaderArrayOwner@@QAEPAUShaderArrayHolder@@HHHHHH@Z",
      "size": 118
     },
     {
@@ -13061,7 +13061,7 @@
     "?FUN_004b4500@PickMover@@QAEPAUPickVector@@PAU2@PBU2@@Z": "0x004752c0",
     "?FUN_00a67360@PickShape@@QAE_NH@Z": "0x00831680",
     "?NiGeometryData_GetVerticesIterator@PickShape@@QAEXPAX@Z": "0x00831730",
-    "?GetBounds@PickShape@@QAEXPAX@Z": "0x008318d0",
+    "?NiGeometryData_GetNormalsIterator@PickShape@@QAEXPAX@Z": "0x008318d0",
     "?NiGeometryData_UnlockPackedVertexData@PickShape@@QAEXXZ": "0x008316f0",
     "?FUN_00524c40@PickMover@@QAEPAUPickVector@@PAU2@PBU2@@Z": "0x004bbdf0",
     "?NiPoint3_ZERO@@3UNiPoint3@@A": "0x0108ec68",
@@ -13570,12 +13570,12 @@
     },
     {
      "address": "0x00b21ab0",
-     "symbol": "?ProcessShadowObject@ShadowSceneLight@@QAEXPAVNiAVObject@@@Z",
+     "symbol": "?ParseObjectAddFrustum@ShadowSceneLight@@QAEXPAVNiAVObject@@@Z",
      "size": 230
     },
     {
      "address": "0x00b21ba0",
-     "symbol": "?AddShadowObject@ShadowSceneLight@@QAEXPAVNiAVObject@@@Z",
+     "symbol": "?ParseObjectAddRadius@ShadowSceneLight@@QAEXPAVNiAVObject@@@Z",
      "size": 223
     },
     {
@@ -13783,7 +13783,7 @@
     },
     {
      "address": "0x00b20030",
-     "symbol": "?SetShadowEnabled@FUN_00b9dcb0_Class@@QAEX_N@Z",
+     "symbol": "?ShadowSceneLight_SetCastShadow@FUN_00b9dcb0_Class@@QAEX_N@Z",
      "size": 232
     }
    ],
@@ -13815,7 +13815,7 @@
     "?FUN_00cb9ce0@@YIXPAX@Z": "0x0046e640",
     "?FUN_00cb9930@ArrOps@@QAEXPAI0I@Z": "0x005e30b0",
     "?ProcessNodeChildren@FUN_00b5b150_Struct@@QAEXPAVNiNode@@@Z": "0x00ae19c0",
-    "?SetShadowEnabled@FUN_00b5c450_item@@QAEXH@Z": "0x00b20030",
+    "?ShadowSceneLight_SetCastShadow@FUN_00b5c450_item@@QAEXH@Z": "0x00b20030",
     "?_Call_439090@PosD@@QAE_NPBUV3D@@@Z": "0x00914770",
     "?SetTripleInts@LightD@@QAEXUV3D@@@Z": "0x00ae13e0",
     "?FUN_00b5d300@OwnerD@@QAEXPAULightD@@@Z": "0x00ae3ab0",
@@ -13895,7 +13895,7 @@
     "?FUN_00a5a310@?$S5c6e0_PointerList@V?$NiPointer@VNiRefObject@@@@@@QAEXABV?$S5c6e0_RefArg@VNiRefObject@@@@@Z": "0x00827100",
     "??0S00b5cd00_Light@@QAE@XZ": "0x00847f00",
     "?FUN_00b9dda0@S00b5cd00_Param@@QAEXPAVS00b5cd00_Light@@@Z": "0x00b20120",
-    "?SetShadowEnabled@S00b5cd00_Param@@QAEX_N@Z": "0x00b20030",
+    "?ShadowSceneLight_SetCastShadow@S00b5cd00_Param@@QAEX_N@Z": "0x00b20030",
     "?FUN_00a5a310@S00b5cd00_List@@QAEXABV?$S00b5cd00_Ptr@VS00b5cd00_Param@@@@@Z": "0x00827100",
     "?FUN_00c1b4a0@MyShadowList@@QAEXPAX@Z": "0x00af0680",
     "?MoveNodeBefore@MyShadowList@@QAEXPAUMyShadowListItem@@0@Z": "0x00af2fb0",
@@ -14007,7 +14007,7 @@
     "?DAT_011f4a98@@3UNiRTTI_b5@@A": "0x0108f498",
     "?FUN_00af3160@DrainCandidate@@QAEPAUDrainEntry@@PAPAX@Z": "0x00af3160",
     "?FUN_00b221a0@DrainEntry@@QAEXPAUDrainOwner@@_N@Z": "0x00b221a0",
-    "__ehhandler$?SetShadowEnabled@FUN_00b9dcb0_Class@@QAEX_N@Z": "0x00c273f8",
+    "__ehhandler$?ShadowSceneLight_SetCastShadow@FUN_00b9dcb0_Class@@QAEX_N@Z": "0x00c273f8",
     "__tls_index": "0x01179af4",
     "__tls_array": "0x0000002c",
     "?g_fixedTls@@3UTLSDataFixed@@A": "0x0117c000",
@@ -14160,7 +14160,7 @@
     },
     {
      "address": "0x00ae2c10",
-     "symbol": "?UpdateShadowLights@ShadowSceneNode@@QAEXXZ",
+     "symbol": "?RemoveAllShadowLights@ShadowSceneNode@@QAEXXZ",
      "size": 129
     },
     {
@@ -14282,7 +14282,7 @@
     "?FUN_00cb9ce0@@YIXPAX@Z": "0x0046e640",
     "?FUN_00cb9930@ArrOps@@QAEXPAI0I@Z": "0x005e30b0",
     "?ProcessNodeChildren@FUN_00b5b150_Struct@@QAEXPAVNiNode@@@Z": "0x00ae19c0",
-    "?SetShadowEnabled@FUN_00b5c450_item@@QAEXH@Z": "0x00b20030",
+    "?ShadowSceneLight_SetCastShadow@FUN_00b5c450_item@@QAEXH@Z": "0x00b20030",
     "?_Call_439090@PosD@@QAE_NPBUV3D@@@Z": "0x00914770",
     "?SetTripleInts@LightD@@QAEXUV3D@@@Z": "0x00ae13e0",
     "?FUN_00b5d300@OwnerD@@QAEXPAULightD@@@Z": "0x00ae3ab0",
@@ -14362,7 +14362,7 @@
     "?FUN_00a5a310@?$S5c6e0_PointerList@V?$NiPointer@VNiRefObject@@@@@@QAEXABV?$S5c6e0_RefArg@VNiRefObject@@@@@Z": "0x00827100",
     "??0S00b5cd00_Light@@QAE@XZ": "0x00847f00",
     "?FUN_00b9dda0@S00b5cd00_Param@@QAEXPAVS00b5cd00_Light@@@Z": "0x00b20120",
-    "?SetShadowEnabled@S00b5cd00_Param@@QAEX_N@Z": "0x00b20030",
+    "?ShadowSceneLight_SetCastShadow@S00b5cd00_Param@@QAEX_N@Z": "0x00b20030",
     "?FUN_00a5a310@S00b5cd00_List@@QAEXABV?$S00b5cd00_Ptr@VS00b5cd00_Param@@@@@Z": "0x00827100",
     "?FUN_00c1b4a0@MyShadowList@@QAEXPAX@Z": "0x00af0680",
     "?MoveNodeBefore@MyShadowList@@QAEXPAUMyShadowListItem@@0@Z": "0x00af2fb0",
@@ -14685,7 +14685,7 @@
     },
     {
      "address": "0x00b250d0",
-     "symbol": "?AttachAll@Struct00b884b0@@QAEXXZ",
+     "symbol": "?SkyShader_ClearPassStages@Struct00b884b0@@QAEXXZ",
      "size": 43
     },
     {
@@ -15572,7 +15572,7 @@
     },
     {
      "address": "0x00b2eba0",
-     "symbol": "?SetShaderParams@BSParticleShader@@QAEXPAUParam1@@@Z",
+     "symbol": "?TallGrassShader_SetupGeometryConstants@BSParticleShader@@QAEXPAUParam1@@@Z",
      "size": 826
     },
     {
@@ -55904,7 +55904,7 @@
     "?AttachProperty@LandNode@f3m_004cfe50@@QAEXPAULandProperty@2@@Z": "0x004236f0",
     "?FUN_004c90a0@Land@f3m_004cfe50@@QAEPAULandShape@2@H@Z": "0x004c90a0",
     "?ComputeFromPoints@LandBound@f3m_004cfe50@@QAEXHPBULandPoint3@2@@Z": "0x00849dd0",
-    "?SetDirtyFlags@LandGeomData@f3m_004cfe50@@QAEXI@Z": "0x008313b0",
+    "?MarkAsChanged@LandGeomData@f3m_004cfe50@@QAEXI@Z": "0x008313b0",
     "?FUN_004cd550@Land@f3m_004cfe50@@QAE?AULandRange@2@H@Z": "0x004cd550",
     "__real@44800000": "0x00dbf408",
     "__real@3fe0000000000000": "0x00db7de8",
@@ -55918,7 +55918,7 @@
     "?FUN_004cba00@Land@f3m_004cfe50@@QAEXXZ": "0x004cba00",
     "?FUN_004c9980@Land@f3m_004cfe50@@QAEXXZ": "0x004c9980",
     "?FUN_004ce6b0@Land@f3m_004cfe50@@QAEXXZ": "0x004ce6b0",
-    "?SetDataConsistency@LandGeomData@f3m_004cfe50@@QAEXH@Z": "0x00831380",
+    "?SetConsistency@LandGeomData@f3m_004cfe50@@QAEXH@Z": "0x00831380",
     "?DAT_0108f048@f3m_004cfe50@@3PAULandRenderer@1@A": "0x0108f048",
     "?FUN_008790c0@LandRenderer@f3m_004cfe50@@QAEXXZ": "0x008790c0",
     "?Update@LandNode@f3m_004cfe50@@QAEXAAULandUpdateData@2@@Z": "0x008264c0",
@@ -61063,7 +61063,7 @@
     "__real@3f91df46a0000000": "0x00dc2df0",
     "__CItan": "0x00c046e0",
     "??0FrustumPlanes@f3m_004fd4e0@@QAE@XZ": "0x00432cb0",
-    "?SetFromFrustum@FrustumPlanes@f3m_004fd4e0@@QAEXPBUNiFrustum@2@PBUNiTransform@2@@Z": "0x0083ecb0",
+    "?NiFrustumPlanes_Set@FrustumPlanes@f3m_004fd4e0@@QAEXPBUNiFrustum@2@PBUNiTransform@2@@Z": "0x0083ecb0",
     "?FUN_004d5230@Mgr@f3m_004fd4e0@@QAEPAUCellOwner@2@XZ": "0x004d5230",
     "?FUN_004c9f80@Obj30@f3m_004fd4e0@@QAE?AUNiPoint3@2@HHHH@Z": "0x004c9f80",
     "?DAT_0108edc8@f3m_004fd4e0@@3UNiBound@1@A": "0x0108edc8",
@@ -91559,7 +91559,7 @@
     "?FUN_00ba50e0@TreeData59@@QAEXPAUTextureInfo59@@@Z": "0x00ba50e0",
     "?DAT_00dfcd1c@@3QBDB": "0x00dfcd1c",
     "?DAT_00dbfbf8@@3QBDB": "0x00dbfbf8",
-    "?BuildTexturePath@BSShaderManager@@SAXPADPBD1_N@Z": "0x00ad5a70",
+    "?GetModifiedTextureFilename@BSShaderManager@@SAXPADPBD1_N@Z": "0x00ad5a70",
     "??2NiMemObject@@SAPAXI@Z": "0x0089eb90",
     "??0BSShaderTextureSet@@QAE@XZ": "0x004bb570",
     "?FUN_008e9650@SetRef59@@QAEXPAVBSShaderTextureSet@@@Z": "0x008e9650",
@@ -223447,7 +223447,7 @@
     "?FUN_008f6d30@Alloc50@f3m_00a50bd0@@QAEPAUSub50@2@IH@Z": "0x008f6d30",
     "?FUN_00e84ba4@@3PAXA": "0x00e84ba4",
     "?TokArrayReserve@f3m_00a4a360_cand@f3m_00a4a360@@YAXPAXHH@Z": "0x00901e90",
-    "?SkipWhitespace@f3m_00a4a360_cand@f3m_00a4a360@@YAXPAUTokStreamReader@12@@Z": "0x00a49c50",
+    "?eatWhiteSpace@f3m_00a4a360_cand@f3m_00a4a360@@YAXPAUTokStreamReader@12@@Z": "0x00a49c50",
     "?ReadChar@TokStreamReader@f3m_00a4a360_cand@f3m_00a4a360@@QAEHXZ": "0x00922ff0",
     "?TokArrayReserveMore@f3m_00a4a360_cand@f3m_00a4a360@@YAXPAXH@Z": "0x00901f10",
     "?TokStrLen@f3m_00a4a360_cand@f3m_00a4a360@@YAHPBD@Z": "0x009233f0",
@@ -232182,9 +232182,9 @@
     "?FUN_00abbc50@Base@f3m_00ab5180@2@QAEXPAUNiStream@22@@Z": "0x00abbc50",
     "?FUN_00845bc0@f3m_00ab0c70@@YGXH@Z": "0x00845bc0",
     "?FUN_00823eb0@Ab0c70Part@f3m_00ab0c70@@QAEXH@Z": "0x00823eb0",
-    "?SetFromFrustum@Planes@FrustumPlanes@f3m_00aa7c50@@QAEXPBUFrustum@23@PBUTransform@23@@Z": "0x0083ecb0",
-    "?GetEntryFloat@FUN_00c25de0_shell@f3m_00ab5fe0@@QAEMG@Z": "0x00ac53e0",
-    "?AddTrailPoint@TrailSystem@f3m_00ab5fe0@@QAEXGM@Z": "0x00ac5720",
+    "?NiFrustumPlanes_Set@Planes@FrustumPlanes@f3m_00aa7c50@@QAEXPBUFrustum@23@PBUTransform@23@@Z": "0x0083ecb0",
+    "?BSStripPSysData_GetPointLastUpdateTime@FUN_00c25de0_shell@f3m_00ab5fe0@@QAEMG@Z": "0x00ac53e0",
+    "?BSStripPSysData_UpdatePoints@TrailSystem@f3m_00ab5fe0@@QAEXGM@Z": "0x00ac5720",
     "__ehhandler$?FUN_00aa5f20@@YAXXZ": "0x00c6906b",
     "?DAT_01090a78@f3m_00aa5f20@@3UHeap@1@A": "0x01090a78",
     "?FUN_0086b930@Heap@f3m_00aa5f20@@QAEPAXI@Z": "0x0086b930",
@@ -510053,7 +510053,7 @@
     "?FUN_00e802b0@NiD3DPass_Standin@@QAEXIPAUStageReturn@@@Z": "0x00888d30",
     "?FUN_00e7f5d0@@YAPAUD3DRenderStateGroup@@XZ": "0x00890750",
     "?FUN_00e80190@NiD3DPass_Standin@@QAEXXZ": "0x00888c10",
-    "?SaveSerializeData@FUN_00c868b0_cls@@QAEXPAUC868_Iface@@@Z": "0x008f8060",
+    "?bhkSerializable_SaveBinary@FUN_00c868b0_cls@@QAEXPAUC868_Iface@@@Z": "0x008f8060",
     "??2TESObjectDoorController@@SAPAXI@Z": "0x0089eb90",
     "?Initialize@bhkRefObject@@QAEPAV1@XZ": "0x008f7c10",
     "?DAT_0102016c@@3HA": "0x00dc050c",
@@ -510223,7 +510223,7 @@
     "?FUN_00e802b0@NiD3DPass_Standin@@QAEXIPAUStageReturn@@@Z": "0x00888d30",
     "?FUN_00e7f5d0@@YAPAUD3DRenderStateGroup@@XZ": "0x00890750",
     "?FUN_00e80190@NiD3DPass_Standin@@QAEXXZ": "0x00888c10",
-    "?SaveSerializeData@FUN_00c868b0_cls@@QAEXPAUC868_Iface@@@Z": "0x008f8060",
+    "?bhkSerializable_SaveBinary@FUN_00c868b0_cls@@QAEXPAUC868_Iface@@@Z": "0x008f8060",
     "??2TESObjectDoorController@@SAPAXI@Z": "0x0089eb90",
     "?Initialize@bhkRefObject@@QAEPAV1@XZ": "0x008f7c10",
     "?DAT_0102016c@@3HA": "0x00dc050c",
@@ -512564,12 +512564,12 @@
     },
     {
      "address": "0x008beb70",
-     "symbol": "?LinkObjects@CA449C0Container@@QAEXAAVCA449C0Stream@@@Z",
+     "symbol": "?BSAnimNotes_LinkObject@CA449C0Container@@QAEXAAVCA449C0Stream@@@Z",
      "size": 75
     },
     {
      "address": "0x008bebe0",
-     "symbol": "?ReadBinaryFields@LoadObj@@QAEXPAULoadStream@@@Z",
+     "symbol": "?BSAnimNote_LoadBinary@LoadObj@@QAEXPAULoadStream@@@Z",
      "size": 96
     },
     {
@@ -512948,7 +512948,7 @@
     "?DAT_01097d34@@3HA": "0x00e2e79c",
     "?FUN_00a84c70@BSAnimNote_shell@@QAEDAAUNiStream@@@Z": "0x00845af0",
     "?CopyMembersStreamAndFields@FUN_00a44850_holder@@QAEXPAU1@PAUCloningProcess@@@Z": "0x008be9f0",
-    "?ReadBinaryFields@S_00a44530_Class@@QAEXPAUS_00a44530_Stream@@@Z": "0x008bebe0",
+    "?BSAnimNote_LoadBinary@S_00a44530_Class@@QAEXPAUS_00a44530_Stream@@@Z": "0x008bebe0",
     "?BSAnimNote_SaveBinary@FUN_00a445c0_cls@@QAEXPAUStreamOwner@@@Z": "0x008bec40",
     "?BaseGetViewerStrings@ArmNoteBase@@QAEXPAUViewerStrings@@@Z": "0x008bed90",
     "??_C@_04KPCPLBPL@Left?$AA@": "0x00de2f90",
@@ -513007,7 +513007,7 @@
     },
     {
      "address": "0x008be160",
-     "symbol": "?CreateLookIKNote@fnv_00a43fb0@@YAPAUBSLookIKNote@1@XZ",
+     "symbol": "?BSLookIKNote_CreateObject@fnv_00a43fb0@@YAPAUBSLookIKNote@1@XZ",
      "size": 60
     },
     {
@@ -513017,7 +513017,7 @@
     },
     {
      "address": "0x008be200",
-     "symbol": "?ParseLookIKKey@LookIKKeyHandler@@QAE_NPAVTimedTextEntry@@@Z",
+     "symbol": "?BSLookIKNote_ParseTextKey@LookIKKeyHandler@@QAE_NPAVTimedTextEntry@@@Z",
      "size": 222
     },
     {
@@ -513049,7 +513049,7 @@
     "?FUN_00a43fa0@BSLookIKNote@fnv_00a43fb0@@QAEXXZ": "0x00825800",
     "?DAT_01097c8c@fnv_00a43fb0@@3HA": "0x00e2e6f4",
     "?IsEqual@BSLookIKNote@fnv_00a43f30@@QAE_NPAUNiObject@2@@Z": "0x008bea20",
-    "?ReadBinaryFields@S_00a44130_Base@@QAEXAAUS_00a44130_Stream@@@Z": "0x008bebe0",
+    "?BSAnimNote_LoadBinary@S_00a44130_Base@@QAEXAAUS_00a44130_Stream@@@Z": "0x008bebe0",
     "?BSAnimNote_SaveBinary@S_00a44190_Base@@QAEXAAUS_00a44190_Stream@@@Z": "0x008bec40",
     "??2A43FF0Object@@SAPAXI@Z": "0x0089eb90",
     "??0A43FF0Object@@QAE@XZ": "0x00825800",
@@ -513161,7 +513161,7 @@
     },
     {
      "address": "0x008b4550",
-     "symbol": "?FindLinkIndex@Holder_00a35f30@@QAEGABUArg_00a35f30@@@Z",
+     "symbol": "?BSMultiTargetTreadTransfController_GetInterpolatorIndexFx@Holder_00a35f30@@QAEGABUArg_00a35f30@@@Z",
      "size": 59
     },
     {
@@ -513281,7 +513281,7 @@
     },
     {
      "address": "0x008bdc90",
-     "symbol": "?UpdateRotValue@FUN_00a43ac0_Class@@QAEXH@Z",
+     "symbol": "?BSRotAccumTransfInterpolator_LinkObject@FUN_00a43ac0_Class@@QAEXH@Z",
      "size": 64
     },
     {
@@ -513335,7 +513335,7 @@
     "?FUN_00a6df40@QuaternionValue@@QAEXPBX@Z": "0x00837260",
     "?FUN_00a38560@QuaternionValue@@QAEXXZ": "0x008af830",
     "?FUN_00a3f9e0@RotAccumInterpolator@@QAEPAXPAIPAHPAE@Z": "0x008b9c30",
-    "?InterpolateKey@@YAMMPAXHIAAIE@Z": "0x008a1080",
+    "?NiFloatKey_GenInterp@@YAMMPAXHIAAIE@Z": "0x008a1080",
     "?BaseCleanup@FUN_00a43df0_cls@@QAEXXZ": "0x008b6c10"
    }
   },
@@ -513357,7 +513357,7 @@
     },
     {
      "address": "0x008bd670",
-     "symbol": "?UpdateSampleValue@FUN_00a434b0_shell@@QAE_NMHH@Z",
+     "symbol": "?BSTreadTransfInterpolator_Update@FUN_00a434b0_shell@@QAE_NMHH@Z",
      "size": 163
     },
     {
@@ -513408,7 +513408,7 @@
     "__real@3ff0000000000000": "0x00db38a8",
     "___Dummy_00b6fef0": "0x0089ec10",
     "??1BSTreadTransfInterpolator@@QAE@XZ": "0x00825830",
-    "?InterpolateKey@@YAMMPAM0IPAIUTrackFlags@@@Z": "0x008a1080",
+    "?NiFloatKey_GenInterp@@YAMMPAM0IPAIUTrackFlags@@@Z": "0x008a1080",
     "?SaveBinaryBase@A43600Base@@QAEXAAVA43600Stream@@@Z": "0x00aad680",
     "?SerializeString@A43600Stream@@QAEXPAX@Z": "0x0082b000",
     "?SaveBinary@A43600Color@@QAEXAAVA43600Stream@@@Z": "0x008afe30",
@@ -513618,7 +513618,7 @@
     "?DAT_011f3758@@3PAEA": "0x01091fa0",
     "?DAT_011f3810@@3PAP6AXMPAPAXPAH@ZA": "0x01092058",
     "?Set@Inner_00a6db50@@QAEXMMMM@Z": "0x00836cd0",
-    "?SetChannelValues@DerivedSlotState@@QAEXPAXHH0HH0HH@Z": "0x008b6e50",
+    "?NiEulerRotKey_Initialize@DerivedSlotState@@QAEXPAXHH0HH0HH@Z": "0x008b6e50",
     "?DAT_011f3930@@3PAP6APAXH@ZA": "0x01092178",
     "?DAT_011f39c0@@3PAP6AXPAX0@ZA": "0x01092208",
     "__real@00000000": "0x00eaad58"
@@ -513642,7 +513642,7 @@
     },
     {
      "address": "0x008a8130",
-     "symbol": "?ShutdownAnimationClasses@@YAXXZ",
+     "symbol": "?NiAnimationSDM_Shutdown@@YAXXZ",
      "size": 771
     }
    ],
@@ -513678,19 +513678,19 @@
     "?DAT_01095f70@@3QBDB": "0x00e2cb40",
     "?CreateNiKeyBasedInterpolator@@YAXXZ": "0x008cd3b0",
     "?DAT_01095f5c@@3QBDB": "0x00e2cb2c",
-    "?CreateBoolInterpolator@@YAXXZ": "0x008cceb0",
+    "?NiBoolTimelineInterpolator_CreateObject@@YAXXZ": "0x008cceb0",
     "?DAT_01095f40@@3QBDB": "0x00e2cb10",
-    "?CreateNiSplineImpl@@YAXXZ": "0x008cca70",
+    "?NiBSplineBasisData_CreateObject@@YAXXZ": "0x008cca70",
     "?DAT_01095f2c@@3QBDB": "0x00e2cafc",
     "?FUN_00a51e10@@YAXXZ": "0x008cbcf0",
     "?DAT_01095f1c@@3QBDB": "0x00e2caec",
     "?FUN_00a51c60@@YAXXZ": "0x008cbb40",
     "?DAT_01095f00@@3QBDB": "0x00e2cad0",
-    "?CreateSplineCompColorInterpolator@@YAXXZ": "0x008cb7b0",
+    "?NiBSplineCompColorInterpolator_CreateObject@@YAXXZ": "0x008cb7b0",
     "?DAT_01095ee0@@3QBDB": "0x00e2cab0",
     "?NiBSplineCompFloatInterpolator_CreateObject@@YAXXZ": "0x008cb4e0",
     "?DAT_01095ec0@@3QBDB": "0x00e2ca90",
-    "?CreateComp4@@YAXXZ": "0x008cb270",
+    "?NiBSplineCompPoint3Interpolator_CreateObject@@YAXXZ": "0x008cb270",
     "?DAT_01095ea0@@3QBDB": "0x00e2ca70",
     "?CreateEvaluator@@YAXXZ": "0x008cadb0",
     "?DAT_01095e7c@@3QBDB": "0x00e2ca4c",
@@ -513700,7 +513700,7 @@
     "?DAT_01095e44@@3QBDB": "0x00e2ca14",
     "?NiBSplineTransformInterpolator_CreateObject@@YAXXZ": "0x008ca060",
     "?DAT_01095e24@@3QBDB": "0x00e2c9f4",
-    "?CreateNiColorData@@YAXXZ": "0x008b60f0",
+    "?NiColorData_CreateObject@@YAXXZ": "0x008b60f0",
     "?DAT_01095e18@@3QBDB": "0x00e2c9e8",
     "?FUN_00a4fac0@@YAXXZ": "0x008c9ab0",
     "?DAT_01095dfc@@3QBDB": "0x00e2c9cc",
@@ -513752,7 +513752,7 @@
     "?DAT_01095bf0@@3QBDB": "0x00e2c7d4",
     "?FUN_00a49020@@YAXXZ": "0x008c2f60",
     "?DAT_01095be4@@3QBDB": "0x00e2c7c8",
-    "?CreateNiQuaternionInterpolator@@YAXXZ": "0x008c2cf0",
+    "?NiQuaternionInterpolator_CreateObject@@YAXXZ": "0x008c2cf0",
     "?DAT_01095bc8@@3QBDB": "0x00e2c7ac",
     "?FUN_00a48750@@YAXXZ": "0x008c2720",
     "?DAT_01095bb4@@3QBDB": "0x00e2c798",
@@ -513782,11 +513782,11 @@
     "?DAT_01095ac8@@3QBDB": "0x00e2c6ac",
     "?BSGrabIKNote_CreateObject@@YAXXZ": "0x008be530",
     "?DAT_01095ab8@@3QBDB": "0x00e2c69c",
-    "?CreateLookIKNote@@YAXXZ": "0x008be160",
+    "?BSLookIKNote_CreateObject@@YAXXZ": "0x008be160",
     "?DAT_01095aa8@@3QBDB": "0x00e2c68c",
     "?CreateRotAccumTransfInterpolator@@YAXXZ": "0x008be010",
     "?DAT_01095a88@@3QBDB": "0x00e2c66c",
-    "?CreateDerivedA43370@@YAXXZ": "0x008bd530",
+    "?BSTreadTransfInterpolator_CreateObject@@YAXXZ": "0x008bd530",
     "?DAT_01095a6c@@3QBDB": "0x00e2c650",
     "?FUN_00a42f90@@YAXXZ": "0x008bd150",
     "?DAT_01095a4c@@3QBDB": "0x00e2c630",
@@ -513913,7 +513913,7 @@
     },
     {
      "address": "0x008b2ca0",
-     "symbol": "?UpdateInterpolator@Target395@@QAEXMPAX@Z",
+     "symbol": "?NiBlendAccumTransformInterpolator_CalculateSingleValue@Target395@@QAEXMPAX@Z",
      "size": 449
     },
     {
@@ -513943,7 +513943,7 @@
     },
     {
      "address": "0x008b3630",
-     "symbol": "?ResizeItems@Self@fnv_00a39ec0@@QAE_NXZ",
+     "symbol": "?NiBlendAccumTransformInterpolator_ReallocateArrays@Self@fnv_00a39ec0@@QAE_NXZ",
      "size": 147
     },
     {
@@ -513963,7 +513963,7 @@
     },
     {
      "address": "0x008b3cf0",
-     "symbol": "?UpdateInterpolators@Self@fnv_00a3a580@@QAE_NMPAUNiObjectNET@2@AAUNiQuatTransform@2@@Z",
+     "symbol": "?NiBlendAccumTransformInterpolator_Update@Self@fnv_00a3a580@@QAE_NMPAUNiObjectNET@2@AAUNiQuatTransform@2@@Z",
      "size": 223
     },
     {
@@ -514008,7 +514008,7 @@
     "?FUN_00a39230@Obj@fnv_00a39700@@QAEPAXXZ": "0x008b29a0",
     "?FUN_00a37ec0@FUN_00a37ec0_tgt@@QAEXPAUNiStream@@@Z": "0x008b1ee0",
     "?NiQuatTransform_SaveBinary@FUN_00a38b60_tgt@@QAEXPAUNiStream@@@Z": "0x008afe30",
-    "?ReadMatrixFromStream@FUN_00a59a90_tgt@@QAEXPAUNiStream@@@Z": "0x00823d60",
+    "?NiMatrix3_SaveBinary@FUN_00a59a90_tgt@@QAEXPAUNiStream@@@Z": "0x00823d60",
     "?FUN_00a36fd0@STUB_6FD0@@QAE_NPAUNiObject@@@Z": "0x008b1000",
     "?Equals@STUB_91C0@@QAEDPAX@Z": "0x008b2930",
     "?NiBlendInterpolator_ReallocateArrays@Base@fnv_00a39ec0@@QAE_NXZ": "0x008b16b0",
@@ -514140,7 +514140,7 @@
     },
     {
      "address": "0x008d02c0",
-     "symbol": "?UpdateInterpBool@M76Obj@fnv_00a566a0@@QAE_NMPAXPA_N@Z",
+     "symbol": "?NiBlendBoolInterpolator_StoreSingleValue@M76Obj@fnv_00a566a0@@QAE_NMPAXPA_N@Z",
      "size": 108
     },
     {
@@ -514247,7 +514247,7 @@
     },
     {
      "address": "0x008cfd30",
-     "symbol": "?GetColorAtTime@FUN_00a56110_shell@@QAE_NMPAUNiObjectNET@@PAUFUN_00a56110_color@@@Z",
+     "symbol": "?NiBlendColorInterpolator_StoreSingleValue@FUN_00a56110_shell@@QAE_NMPAUNiObjectNET@@PAUFUN_00a56110_color@@@Z",
      "size": 169
     },
     {
@@ -514288,7 +514288,7 @@
     "?LoadBinary@NiBlendInterpolator@fnv_00a56460@@QAEXAAUNiStream@@@Z": "0x008b19a0",
     "?LoadBinary@NiColorA_Helper@fnv_00a56460@@QAEXAAUNiStream@@@Z": "0x0083faa0",
     "??9NiColorA_Compare@fnv_00a56460@@QAE_NPBURgbaColor@@@Z": "0x0046c400",
-    "?GetColorAtTime@FUN_00a56400_shell@@QAE_NMPAUNiObjectNET@@PAURgbaColor@@@Z": "0x008cfd30",
+    "?NiBlendColorInterpolator_StoreSingleValue@FUN_00a56400_shell@@QAE_NMPAUNiObjectNET@@PAURgbaColor@@@Z": "0x008cfd30",
     "?UpdateNormalizedWeights@FUN_00a37260_shell@@QAEXXZ": "0x008b1280",
     "?UpdateBlend@FUN_00a56400_shell@@QAE_NMPAUNiObjectNET@@PAURgbaColor@@@Z": "0x008cfde0",
     "?FUN_00a36fd0@@YG_NPAX@Z": "0x008b1000",
@@ -514449,7 +514449,7 @@
     },
     {
      "address": "0x008b0df0",
-     "symbol": "?CollapseAllInterps@@YIXPAUBlendInterpS@@H@Z",
+     "symbol": "?NiBlendInterpolator_Collapse@@YIXPAUBlendInterpS@@H@Z",
      "size": 71
     },
     {
@@ -514793,7 +514793,7 @@
     },
     {
      "address": "0x008cf140",
-     "symbol": "?CloneInterpolator@FUN_00a55510_shell@@QAEPAXPAX@Z",
+     "symbol": "?NiBlendQuaternionInterpolator_CreateClone@FUN_00a55510_shell@@QAEPAXPAX@Z",
      "size": 118
     },
     {
@@ -514886,7 +514886,7 @@
     },
     {
      "address": "0x008bac90",
-     "symbol": "?CreateBlendObject@FUN_00a40a50_cls@@QAEPAUNiBlendObject_b9169@@H@Z",
+     "symbol": "?NiBlendTransformInterpolator_CreateClone@FUN_00a40a50_cls@@QAEPAUNiBlendObject_b9169@@H@Z",
      "size": 75
     },
     {
@@ -515396,7 +515396,7 @@
     },
     {
      "address": "0x008cd270",
-     "symbol": "?UpdateValue@S_00a533c0_Class@@QAE_NMHPAE@Z",
+     "symbol": "?NiBoolInterpolator_Update@S_00a533c0_Class@@QAE_NMHPAE@Z",
      "size": 182
     },
     {
@@ -515504,7 +515504,7 @@
    "symbols": {
     "__real@c7efffffe0000000": "0x00db7268",
     "__real@00000000": "0x00eaad58",
-    "?CallAnimCallback@@YAXPAUSStream@@PAUSObj@@@Z": "0x008b7370",
+    "?NiAnimationKey_SaveBinary@@YAXPAUSStream@@PAUSObj@@@Z": "0x008b7370",
     "?DAT_011f3d08@@3PAP6AXMPBUAnimationKey@@0PAX@ZA": "0x01092550",
     "?WriteFloatToStream@sa27320@@YAXAAUStream@1@PBUKey@1@@Z": "0x008a1400"
    }
@@ -515542,7 +515542,7 @@
     },
     {
      "address": "0x008ccc40",
-     "symbol": "?EvaluateBoolAtTime@Timeline@@QAE_NMPAXAA_N@Z",
+     "symbol": "?NiBoolTimelineInterpolator_Update@Timeline@@QAE_NMPAXAA_N@Z",
      "size": 386
     },
     {
@@ -515562,7 +515562,7 @@
     },
     {
      "address": "0x008cceb0",
-     "symbol": "?CreateBoolInterpolator@@YAPAUNiBoolInterpolator@@XZ",
+     "symbol": "?NiBoolTimelineInterpolator_CreateObject@@YAPAUNiBoolInterpolator@@XZ",
      "size": 51
     },
     {
@@ -515632,12 +515632,12 @@
     },
     {
      "address": "0x008cca10",
-     "symbol": "?CreateSplineObj@SplineOwner@@QAEPAVSplineObj@@E@Z",
+     "symbol": "?NiBSplineBasisData_CreateClone@SplineOwner@@QAEPAVSplineObj@@E@Z",
      "size": 94
     },
     {
      "address": "0x008cca70",
-     "symbol": "?CreateNiSplineImpl@@YAPAVNiSplineImpl@@XZ",
+     "symbol": "?NiBSplineBasisData_CreateObject@@YAPAVNiSplineImpl@@XZ",
      "size": 68
     },
     {
@@ -515824,7 +515824,7 @@
     },
     {
      "address": "0x008cb7b0",
-     "symbol": "?CreateSplineCompColorInterpolator@@YAPAXXZ",
+     "symbol": "?NiBSplineCompColorInterpolator_CreateObject@@YAPAXXZ",
      "size": 59
     },
     {
@@ -515928,7 +515928,7 @@
     "?DAT_010997f4@@3HA": "0x00e3021c",
     "?SerializeToStrings@BaseX@@QAEXPAUStrArr@@@Z": "0x008b6de0",
     "?IsInterpEqual@FUN_00a50b30_shell@@QAE_NPAX@Z": "0x008ca9d0",
-    "?LoadFloatInterpolator@BaseShell@@QAEXPAX@Z": "0x008cab10",
+    "?NiBSplineFloatInterpolator_SaveBinary@BaseShell@@QAEXPAX@Z": "0x008cab10",
     "?FUN_00a526b0@NiBSplineEvalTarget2@@QAEXMPAMHIIMM@Z": "0x008cc5b0",
     "??0FBase@@QAE@HHH@Z": "0x008ca8c0",
     "??_7FObj@@6B@": "0x00e30554",
@@ -515958,7 +515958,7 @@
     },
     {
      "address": "0x008cb130",
-     "symbol": "?EvaluateSplineAtTime@SplineEvaluationState@@QAE_NMIPAUVec3@@@Z",
+     "symbol": "?NiBSplineCompPoint3Interpolator_Update@SplineEvaluationState@@QAE_NMIPAUVec3@@@Z",
      "size": 209
     },
     {
@@ -515968,7 +515968,7 @@
     },
     {
      "address": "0x008cb270",
-     "symbol": "?CreateComp4@@YAPAXXZ",
+     "symbol": "?NiBSplineCompPoint3Interpolator_CreateObject@@YAPAXXZ",
      "size": 59
     },
     {
@@ -516189,12 +516189,12 @@
     },
     {
      "address": "0x008ca900",
-     "symbol": "?GetHandleByIndex@@YIIPAUCPX@@HG@Z",
+     "symbol": "?NiBSplineFloatInterpolator_GetControlHandle@@YIIPAUCPX@@HG@Z",
      "size": 19
     },
     {
      "address": "0x008ca920",
-     "symbol": "?SetHandleIfFirstIndex@fnv_00a50a80@@YIXPAUCPX@1@HIG@Z",
+     "symbol": "?NiBSplineFloatInterpolator_SetControlHandle@fnv_00a50a80@@YIXPAUCPX@1@HIG@Z",
      "size": 18
     },
     {
@@ -516214,7 +516214,7 @@
     },
     {
      "address": "0x008cab10",
-     "symbol": "?LoadFloatInterpolator@FUN_00a50c70_cls@@QAEXAAVNiStream@@@Z",
+     "symbol": "?NiBSplineFloatInterpolator_SaveBinary@FUN_00a50c70_cls@@QAEXAAVNiStream@@@Z",
      "size": 96
     },
     {
@@ -516487,7 +516487,7 @@
     },
     {
      "address": "0x008ca0e0",
-     "symbol": "?EvaluateSpline@SplineWork@@QAE_NMPAXAAUSplineTransform@@@Z",
+     "symbol": "?NiBSplineTransformInterpolator_Update@SplineWork@@QAE_NMPAXAAUSplineTransform@@@Z",
      "size": 468
     },
     {
@@ -516578,7 +516578,7 @@
     },
     {
      "address": "0x008b60f0",
-     "symbol": "?CreateNiColorData@fnv_00a3d150@@YAPAXXZ",
+     "symbol": "?NiColorData_CreateObject@fnv_00a3d150@@YAPAXXZ",
      "size": 59
     },
     {
@@ -516691,7 +516691,7 @@
     },
     {
      "address": "0x008c9c90",
-     "symbol": "?UpdateColorController@NiColorControllerA4F@@QAEXAAVNiUpdateDataA4F@@@Z",
+     "symbol": "?NiColorExtraDataController_Update@NiColorControllerA4F@@QAEXAAVNiUpdateDataA4F@@@Z",
      "size": 175
     }
    ],
@@ -516830,12 +516830,12 @@
     },
     {
      "address": "0x008b75c0",
-     "symbol": "?CollapseConstantColorKeys@HostA3BDC0@@QAEXXZ",
+     "symbol": "?NiColorInterpolator_Collapse@HostA3BDC0@@QAEXXZ",
      "size": 306
     },
     {
      "address": "0x008b7700",
-     "symbol": "?CreateClippedInterpolator@FUN_00a3bef0_shell@@QAEPAVNiColorInterpolator@@MM@Z",
+     "symbol": "?NiColorInterpolator_GetSequenceInterpolator@FUN_00a3bef0_shell@@QAEPAVNiColorInterpolator@@MM@Z",
      "size": 188
     },
     {
@@ -517082,7 +517082,7 @@
     "?FUN_00a2ed80@FnvStandInB@@QAEPAHHH@Z": "0x00838e30",
     "??_7FUN_00a414f0_NiTPrimitiveArray@@6B@": "0x00e2e07c",
     "?FUN_00a2e7d0@CtrlSeqOwner@@QAEXPAVNiRefObject@@PAPAV2@@Z": "0x00827230",
-    "?StartSequence@Sequence@sa2e280@@QAE_NHHMMHH@Z": "0x008aecd0",
+    "?NiControllerSequence_Activate@Sequence@sa2e280@@QAE_NHHMMHH@Z": "0x008aecd0",
     "?SetSize@SeqArr@fnv_00a2ec90@@QAEXI@Z": "0x00896360",
     "?SetAt@SeqArr@fnv_00a2ec90@@QAEXIABV?$NiPtr@VNiControllerSequence@@@2@@Z": "0x008a8ab0",
     "?FUN_00aa13e0@S00a2f170_Seq@fnv_00a2f170@@SAPAXI@Z": "0x0089eb90",
@@ -517430,7 +517430,7 @@
     "?FUN_00a2ed80@FnvStandInB@@QAEPAHHH@Z": "0x00838e30",
     "??_7FUN_00a414f0_NiTPrimitiveArray@@6B@": "0x00e2e07c",
     "?FUN_00a2e7d0@CtrlSeqOwner@@QAEXPAVNiRefObject@@PAPAV2@@Z": "0x00827230",
-    "?StartSequence@Sequence@sa2e280@@QAE_NHHMMHH@Z": "0x008aecd0",
+    "?NiControllerSequence_Activate@Sequence@sa2e280@@QAE_NHHMMHH@Z": "0x008aecd0",
     "?SetSize@SeqArr@fnv_00a2ec90@@QAEXI@Z": "0x00896360",
     "?SetAt@SeqArr@fnv_00a2ec90@@QAEXIABV?$NiPtr@VNiControllerSequence@@@2@@Z": "0x008a8ab0",
     "?FUN_00aa13e0@S00a2f170_Seq@fnv_00a2f170@@SAPAXI@Z": "0x0089eb90",
@@ -517532,7 +517532,7 @@
     "?FUN_00a305b0@@YAXPADIPBD111@Z": "0x007ff7e0",
     "?FUN_00ec65a6@@YAXPADIPBD@Z": "0x00c007fc",
     "?IsNotInChain@FUN_00a30c80_shell@@QAE_KPAX@Z": "0x008aa5c0",
-    "?MatchesTextKeys@@YG_NPAX@Z": "0x008aaa70",
+    "?NiControllerSequence_VerifyMatchingMorphKeys@@YG_NPAX@Z": "0x008aaa70",
     "?NiObject_RegisterStreamables@ObjectView@@QAE_NAAUStreamView@@@Z": "0x008257d0",
     "?ClearIdentifiers@FUN_00a312d0@@QAEXXZ": "0x008aa5f0",
     "?DAT_0109b220@@3HA": "0x00e207a8",
@@ -517587,7 +517587,7 @@
     "?FindOrAdd@UpdateActiveArray@@QAEXABQAUAnimationSequence@@@Z": "0x008ac980",
     "?FUN_00a30970@AnimationSequence@@QAEMM_N@Z": "0x008aa930",
     "?NiControllerSequence_SetInterpsWeightAndTime@AnimationSequence@@QAEXMMM@Z": "0x008ac200",
-    "?DispatchByKey@UpdateNoteManager@@QAEXPAUUpdateNote@@@Z": "0x008bb4b0",
+    "?BSAnimNoteListener_Update@UpdateNoteManager@@QAEXPAUUpdateNote@@@Z": "0x008bb4b0",
     "?FUN_00a63430@NiSequenceSource@@QAEPAURefObject@@XZ": "0x0082a280",
     "?FUN_00a64620@A33950Stream@@QAEPAUA33950RefObject@@XZ": "0x0082b5d0",
     "?FUN_00a33570@FUN_00a344f0_cls@@QAEXPAXI@Z": "0x008ad530",
@@ -517741,7 +517741,7 @@
     },
     {
      "address": "0x008aaa70",
-     "symbol": "?MatchesTextKeys@NiControllerSequenceT@@QAE_NPAU1@@Z",
+     "symbol": "?NiControllerSequence_VerifyMatchingMorphKeys@NiControllerSequenceT@@QAE_NPAU1@@Z",
      "size": 464
     },
     {
@@ -517756,7 +517756,7 @@
     },
     {
      "address": "0x008aad00",
-     "symbol": "?LoadFromPalette@SeqIDTagOffsets@@QAEXPAUNiStringPalette@@H@Z",
+     "symbol": "?NiControllerSequence_IDTag_HandleDeprecatedExtraData@SeqIDTagOffsets@@QAEXPAUNiStringPalette@@H@Z",
      "size": 348
     },
     {
@@ -517806,7 +517806,7 @@
     },
     {
      "address": "0x008abf70",
-     "symbol": "?GetMorphedTime@AnimationSequence@@QAEMPAU1@M@Z",
+     "symbol": "?NiControllerSequence_FindCorrespondingMorphFrame@AnimationSequence@@QAEMPAU1@M@Z",
      "size": 642
     },
     {
@@ -517886,7 +517886,7 @@
     },
     {
      "address": "0x008aecd0",
-     "symbol": "?StartSequence@SeqA34f20@@QAE_ND_NMMPAU1@0@Z",
+     "symbol": "?NiControllerSequence_Activate@SeqA34f20@@QAE_ND_NMMPAU1@0@Z",
      "size": 263
     },
     {
@@ -517965,7 +517965,7 @@
     "?FUN_00a305b0@@YAXPADIPBD111@Z": "0x007ff7e0",
     "?FUN_00ec65a6@@YAXPADIPBD@Z": "0x00c007fc",
     "?IsNotInChain@FUN_00a30c80_shell@@QAE_KPAX@Z": "0x008aa5c0",
-    "?MatchesTextKeys@@YG_NPAX@Z": "0x008aaa70",
+    "?NiControllerSequence_VerifyMatchingMorphKeys@@YG_NPAX@Z": "0x008aaa70",
     "?NiObject_RegisterStreamables@ObjectView@@QAE_NAAUStreamView@@@Z": "0x008257d0",
     "?ClearIdentifiers@FUN_00a312d0@@QAEXXZ": "0x008aa5f0",
     "?DAT_0109b220@@3HA": "0x00e207a8",
@@ -518020,7 +518020,7 @@
     "?FindOrAdd@UpdateActiveArray@@QAEXABQAUAnimationSequence@@@Z": "0x008ac980",
     "?FUN_00a30970@AnimationSequence@@QAEMM_N@Z": "0x008aa930",
     "?NiControllerSequence_SetInterpsWeightAndTime@AnimationSequence@@QAEXMMM@Z": "0x008ac200",
-    "?DispatchByKey@UpdateNoteManager@@QAEXPAUUpdateNote@@@Z": "0x008bb4b0",
+    "?BSAnimNoteListener_Update@UpdateNoteManager@@QAEXPAUUpdateNote@@@Z": "0x008bb4b0",
     "?FUN_00a63430@NiSequenceSource@@QAEPAURefObject@@XZ": "0x0082a280",
     "?FUN_00a64620@A33950Stream@@QAEPAUA33950RefObject@@XZ": "0x0082b5d0",
     "?FUN_00a33570@FUN_00a344f0_cls@@QAEXPAXI@Z": "0x008ad530",
@@ -518223,7 +518223,7 @@
     "?LinkObject@NiObject@@QAEXAAUNiStream@@@Z": "0x0078c030",
     "?FUN_00ec65a6@@YAXPADIPBD@Z": "0x00c007fc",
     "?DAT_01096548@@3MA": "0x00e2cfc0",
-    "?LoadFromPalette@LegacyTag@@QAEXPAURefObj@@AAUNiStream@@@Z": "0x008aad00",
+    "?NiControllerSequence_IDTag_HandleDeprecatedExtraData@LegacyTag@@QAEXPAURefObj@@AAUNiStream@@@Z": "0x008aad00",
     "?DAT_01096688@@3IA": "0x00e2d104",
     "?ResetStrings@LegacyTag@@QAEXXZ": "0x008aa5f0",
     "?SetEntry@LegacyArray@@QAEXIABUS00a352f0_Hold@@@Z": "0x008ac8c0",
@@ -518245,7 +518245,7 @@
    "functions": [
     {
      "address": "0x008b6e50",
-     "symbol": "?SetChannelValues@ChannelState@@QAEXPAXHI0HI0HI@Z",
+     "symbol": "?NiEulerRotKey_Initialize@ChannelState@@QAEXPAXHI0HI0HI@Z",
      "size": 132
     }
    ],
@@ -518908,7 +518908,7 @@
     },
     {
      "address": "0x008b65b0",
-     "symbol": "?CollapseConstantKeys@FUN_00a3c420_cls@@QAEXXZ",
+     "symbol": "?NiFloatInterpolator_Collapse@FUN_00a3c420_cls@@QAEXXZ",
      "size": 216
     },
     {
@@ -519022,7 +519022,7 @@
     },
     {
      "address": "0x008a1080",
-     "symbol": "?InterpolateKey@@YAMMPBUS00a26b40_Key@@IIPAIE@Z",
+     "symbol": "?NiFloatKey_GenInterp@@YAMMPBUS00a26b40_Key@@IIPAIE@Z",
      "size": 560
     },
     {
@@ -519054,7 +519054,7 @@
    "symbols": {
     "__real@c7efffffe0000000": "0x00db7268",
     "__real@00000000": "0x00eaad58",
-    "?CallAnimCallback@@YAXPAUSStream@@PAUSObj@@@Z": "0x008b7370",
+    "?NiAnimationKey_SaveBinary@@YAXPAUSStream@@PAUSObj@@@Z": "0x008b7370",
     "?AreRecordsEqual@@YA_NABUAnimationKey@@0@Z": "0x008a1040",
     "?g_bA26E20Registered@@3_NA": "0x01091ea4",
     "?g_apfnA26E20CurvesCopy@@3PAP6AXPAX@ZA": "0x01092568",
@@ -519102,7 +519102,7 @@
     },
     {
      "address": "0x008c8f70",
-     "symbol": "?CreateInterpStub@FUN_00a4ef70_shell@@QAEPAUInterpStub@@G@Z",
+     "symbol": "?NiFloatsExtraDataController_CreatePoseInterpolator@FUN_00a4ef70_shell@@QAEPAUInterpStub@@G@Z",
      "size": 55
     },
     {
@@ -519193,7 +519193,7 @@
     },
     {
      "address": "0x008c8ad0",
-     "symbol": "?BuildAndDispatchVec12@FUN_00a4eb50_cls@@QAEHH@Z",
+     "symbol": "?NiFloatsExtraDataPoint3Controller_CreatePoseInterpolator@FUN_00a4eb50_cls@@QAEHH@Z",
      "size": 125
     },
     {
@@ -519310,7 +519310,7 @@
     "?DAT_011f3724@@3_NA": "0x01091f74",
     "?FUN_00a5d3f0@NiInterpolator@@QAEPAV1@AAUCloningProcess@@@Z": "0x00825850",
     "?FUN_00a3c390@NiFloatInterpolator@@QAEPAU1@M@Z": "0x008b6510",
-    "?SetDirtyFlags@GeomData@@QAEXI@Z": "0x008313b0",
+    "?MarkAsChanged@GeomData@@QAEXI@Z": "0x008313b0",
     "?g_011f3728@fnv_00a3afd0@@3UGlobalObjectO2_00a7b610@1@A": "0x0116d998",
     "?g_011f4a48_arg1@@3UFUN_00a3afe0_rtti@@A": "0x0108f4d4",
     "?FUN_00a66bb0@MorphGeomData@@QAEXGPAUMorphPoint3@@PAX11II@Z": "0x00830ee0",
@@ -519320,8 +519320,8 @@
     "?_fnv_zlib_memset@fnv_00a3aa10@@YAPAXPAXHI@Z": "0x00c00610",
     "__real@3a83126f": "0x00db7df0",
     "?runtimeFloatSettingDefault166@fnv_00a3aa10@@3MB": "0x00e01a68",
-    "?AddScaledPoints@fnv_00a3aa10@@YAXPAUNiPoint3@1@M0H@Z": "0x00849550",
-    "?SetDirtyFlags@GeomData@fnv_00a3aa10@@QAEXI@Z": "0x008313b0",
+    "?NiPoint3_PointsPlusEqualFloatTimesPoints@fnv_00a3aa10@@YAXPAUNiPoint3@1@M0H@Z": "0x00849550",
+    "?MarkAsChanged@GeomData@fnv_00a3aa10@@QAEXI@Z": "0x008313b0",
     "?LinkObject@FUN_00a3b5a0_shell@@QAEXAAUNiStream@@@Z": "0x00914720",
     "?GetLoadedObject@NiStream@@QAEPAXXZ": "0x0082a280",
     "?ClearInterpolatorArray@FUN_00a3b5a0_shell@@QAEXXZ": "0x008b5450",
@@ -519434,7 +519434,7 @@
     },
     {
      "address": "0x008b4a10",
-     "symbol": "?UpdateMorphWeights@FUN_00a3aa10_shell@fnv_00a3aa10@@QAEXM@Z",
+     "symbol": "?NiGeomMorpherController_GenMorphInterp@FUN_00a3aa10_shell@fnv_00a3aa10@@QAEXM@Z",
      "size": 391
     },
     {
@@ -519444,7 +519444,7 @@
     },
     {
      "address": "0x008b4be0",
-     "symbol": "?UpdateGeometryBound@MorpherController@@QAEXXZ",
+     "symbol": "?NiGeomMorpherController_CalculateMorphBound@MorpherController@@QAEXXZ",
      "size": 205
     },
     {
@@ -519474,7 +519474,7 @@
     },
     {
      "address": "0x008b5000",
-     "symbol": "?GetMorphVertices@FUN_00a3b010_shell@@QAEPAUMorphPoint3@@XZ",
+     "symbol": "?NiGeomMorpherController_GetVertexData@FUN_00a3b010_shell@@QAEPAUMorphPoint3@@XZ",
      "size": 111
     },
     {
@@ -519569,7 +519569,7 @@
     "?DAT_011f3724@@3_NA": "0x01091f74",
     "?FUN_00a5d3f0@NiInterpolator@@QAEPAV1@AAUCloningProcess@@@Z": "0x00825850",
     "?FUN_00a3c390@NiFloatInterpolator@@QAEPAU1@M@Z": "0x008b6510",
-    "?SetDirtyFlags@GeomData@@QAEXI@Z": "0x008313b0",
+    "?MarkAsChanged@GeomData@@QAEXI@Z": "0x008313b0",
     "?g_011f3728@fnv_00a3afd0@@3UGlobalObjectO2_00a7b610@1@A": "0x0116d998",
     "?g_011f4a48_arg1@@3UFUN_00a3afe0_rtti@@A": "0x0108f4d4",
     "?FUN_00a66bb0@MorphGeomData@@QAEXGPAUMorphPoint3@@PAX11II@Z": "0x00830ee0",
@@ -519579,8 +519579,8 @@
     "?_fnv_zlib_memset@fnv_00a3aa10@@YAPAXPAXHI@Z": "0x00c00610",
     "__real@3a83126f": "0x00db7df0",
     "?runtimeFloatSettingDefault166@fnv_00a3aa10@@3MB": "0x00e01a68",
-    "?AddScaledPoints@fnv_00a3aa10@@YAXPAUNiPoint3@1@M0H@Z": "0x00849550",
-    "?SetDirtyFlags@GeomData@fnv_00a3aa10@@QAEXI@Z": "0x008313b0",
+    "?NiPoint3_PointsPlusEqualFloatTimesPoints@fnv_00a3aa10@@YAXPAUNiPoint3@1@M0H@Z": "0x00849550",
+    "?MarkAsChanged@GeomData@fnv_00a3aa10@@QAEXI@Z": "0x008313b0",
     "?LinkObject@FUN_00a3b5a0_shell@@QAEXAAUNiStream@@@Z": "0x00914720",
     "?GetLoadedObject@NiStream@@QAEPAXXZ": "0x0082a280",
     "?ClearInterpolatorArray@FUN_00a3b5a0_shell@@QAEXXZ": "0x008b5450",
@@ -519970,7 +519970,7 @@
     },
     {
      "address": "0x008d0cb0",
-     "symbol": "?GetKeyTimeRange@FUN_00a57030_shell@@QAEXPAM0@Z",
+     "symbol": "?NiInterpolator_GetActiveTimeRange@FUN_00a57030_shell@@QAEXPAM0@Z",
      "size": 17
     },
     {
@@ -520155,7 +520155,7 @@
    "functions": [
     {
      "address": "0x008c7190",
-     "symbol": "?EvaluateAndApplyOutput@NiTimeController@@QAEXAAM@Z",
+     "symbol": "?NiLightColorController_Update@NiTimeController@@QAEXAAM@Z",
      "size": 356
     }
    ],
@@ -520297,7 +520297,7 @@
    "functions": [
     {
      "address": "0x008c6ee0",
-     "symbol": "?UpdateDimmer@NiLightDimmerControllerW@@QAEXABM@Z",
+     "symbol": "?NiLightDimmerController_Update@NiLightDimmerControllerW@@QAEXABM@Z",
      "size": 145
     }
    ],
@@ -520589,7 +520589,7 @@
     "?ReadStringTableEntry@C630Stream@@QAEXAAVC630FixedString@@@Z": "0x0082bee0",
     "?LoadBinary@C630Transform@@QAEXAAVC630Stream@@@Z": "0x008afe80",
     "?FUN_00a724d0@Interpolator341@@QAEXPAUStream341@@@Z": "0x008cbd30",
-    "?WriteObjectLink@Stream341@@QAEXPBX@Z": "0x0082b000",
+    "?NiStream_SaveFixedString@Stream341@@QAEXPBX@Z": "0x0082b000",
     "?NiQuatTransform_SaveBinary@Transform341@@QAEXPAUStream341@@@Z": "0x008afe30",
     "?FUN_00a57050@S_00a4ba30_Cls@@QAEPAU1@MM@Z": "0x008d0cd0",
     "??_7FUN_00a4bcf0@@6B@": "0x00e2f574",
@@ -520756,7 +520756,7 @@
     "?ReadStringTableEntry@C630Stream@@QAEXAAVC630FixedString@@@Z": "0x0082bee0",
     "?LoadBinary@C630Transform@@QAEXAAVC630Stream@@@Z": "0x008afe80",
     "?FUN_00a724d0@Interpolator341@@QAEXPAUStream341@@@Z": "0x008cbd30",
-    "?WriteObjectLink@Stream341@@QAEXPBX@Z": "0x0082b000",
+    "?NiStream_SaveFixedString@Stream341@@QAEXPBX@Z": "0x0082b000",
     "?NiQuatTransform_SaveBinary@Transform341@@QAEXPAUStream341@@@Z": "0x008afe30",
     "?FUN_00a57050@S_00a4ba30_Cls@@QAEPAU1@MM@Z": "0x008d0cd0",
     "??_7FUN_00a4bcf0@@6B@": "0x00e2f574",
@@ -521173,7 +521173,7 @@
     },
     {
      "address": "0x008a9cb0",
-     "symbol": "?UpdateTargets@FUN_00a2fbe0_shell@@QAEXPAUNiUpdateData@@@Z",
+     "symbol": "?NiMultiTargetTransformController_Update@FUN_00a2fbe0_shell@@QAEXPAUNiUpdateData@@@Z",
      "size": 345
     },
     {
@@ -521183,12 +521183,12 @@
     },
     {
      "address": "0x008a9e30",
-     "symbol": "?FindItemIndexByName@BA2FD60Controller@@QBEGPBD@Z",
+     "symbol": "?NiMultiTargetTransformController_GetInterpolatorIndex@BA2FD60Controller@@QBEGPBD@Z",
      "size": 117
     },
     {
      "address": "0x008a9eb0",
-     "symbol": "?UpdateTimeRange@NiMultiTargetTimeShell@@QAEXXZ",
+     "symbol": "?NiMultiTargetTransformController_ResetTimeExtrema@NiMultiTargetTimeShell@@QAEXXZ",
      "size": 207
     },
     {
@@ -521420,7 +521420,7 @@
     "__CIfmod": "0x00c0345a",
     "?FUN_00aa1070@@YAPAXI@Z": "0x0089e810",
     "__CIatan": "0x00c03350",
-    "?InterpolateKey@@YAMMPAXHIAAIE@Z": "0x008a1080",
+    "?NiFloatKey_GenInterp@@YAMMPAXHIAAIE@Z": "0x008a1080",
     "__real@00000000": "0x00eaad58",
     "?FUN_00a6d220@@YIXPAX@Z": "0x00837e10",
     "?DAT_011f3ca8@@3PAP6AXMPBUAnimationKey@@0PAX@ZA": "0x010924f0",
@@ -521439,7 +521439,7 @@
     "?NiTimeController_DontDoUpdate@PathCtlr@@QAE_NM@Z": "0x008b0270",
     "?NiPathController_GetLoc@PathCtlr@@QAEXMPAH0PAM@Z": "0x008c4b10",
     "?NiPathController_CalcRefFrame@PathCtlr@@QAEXHHMPAUThreeByThreeMatrix@@@Z": "0x008c3dc0",
-    "?InvokeIndexedCallback@PathCtlr@@QAEXPAUNiPoint3@@HHM@Z": "0x008c3d60",
+    "?NiPathController_GenPathInterp@PathCtlr@@QAEXPAUNiPoint3@@HHM@Z": "0x008c3d60",
     "?DAT_011f3c18@@3PAP6AXMPBUAnimationKey@@0PAX@ZA": "0x01092460",
     "?DAT_0109893c@@3HA": "0x00e2f3a4",
     "?DAT_01012054@@3MA": "0x00db38b8",
@@ -521453,7 +521453,7 @@
     "?GetTotalLength@PathCtl@@QAEMXZ": "0x008c4890",
     "_memcpy": "0x00bffa60",
     "?DAT_011a9448@fnv_00a49e70@@3UPathMatrix@1@B": "0x00f72574",
-    "?ComputeFrenetFrame@fnv_00a49e70@@YAXMPBUAnimationKey@@0HPAVNiPoint3@1@11PAM@Z": "0x008a1c60",
+    "?NiPosKey_CoordinateFrame@fnv_00a49e70@@YAXMPBUAnimationKey@@0HPAVNiPoint3@1@11PAM@Z": "0x008a1c60",
     "?FUN_004a3760@fnv_00a49e70@@YA?AVNiPoint3@1@MABV21@@Z": "0x00468cd0",
     "??HNiPoint3@fnv_00a49e70@@QBE?AV01@ABV01@@Z": "0x00422970",
     "?FUN_004a0c10@NiPoint3@fnv_00a49e70@@QAEXXZ": "0x00468d00",
@@ -521500,7 +521500,7 @@
     },
     {
      "address": "0x008c3d60",
-     "symbol": "?InvokeIndexedCallback@FUN_00a49e10_shell@@QAEPAXPAXHHM@Z",
+     "symbol": "?NiPathController_GenPathInterp@FUN_00a49e10_shell@@QAEPAXPAXHHM@Z",
      "size": 81
     },
     {
@@ -521545,7 +521545,7 @@
     },
     {
      "address": "0x008c4d80",
-     "symbol": "?SetSpawnedArgs@FUN_00a4adc0_cls@@QAEXPAUSpawnedArg@@@Z",
+     "symbol": "?NiPathController_LinkObject@FUN_00a4adc0_cls@@QAEXPAUSpawnedArg@@@Z",
      "size": 227
     },
     {
@@ -521555,7 +521555,7 @@
     },
     {
      "address": "0x008c4f60",
-     "symbol": "?UpdatePathTarget@PathCtlr@@QAEXPAM@Z",
+     "symbol": "?NiPathController_Update@PathCtlr@@QAEXPAM@Z",
      "size": 271
     },
     {
@@ -521583,7 +521583,7 @@
     "__CIfmod": "0x00c0345a",
     "?FUN_00aa1070@@YAPAXI@Z": "0x0089e810",
     "__CIatan": "0x00c03350",
-    "?InterpolateKey@@YAMMPAXHIAAIE@Z": "0x008a1080",
+    "?NiFloatKey_GenInterp@@YAMMPAXHIAAIE@Z": "0x008a1080",
     "__real@00000000": "0x00eaad58",
     "?FUN_00a6d220@@YIXPAX@Z": "0x00837e10",
     "?DAT_011f3ca8@@3PAP6AXMPBUAnimationKey@@0PAX@ZA": "0x010924f0",
@@ -521602,7 +521602,7 @@
     "?NiTimeController_DontDoUpdate@PathCtlr@@QAE_NM@Z": "0x008b0270",
     "?NiPathController_GetLoc@PathCtlr@@QAEXMPAH0PAM@Z": "0x008c4b10",
     "?NiPathController_CalcRefFrame@PathCtlr@@QAEXHHMPAUThreeByThreeMatrix@@@Z": "0x008c3dc0",
-    "?InvokeIndexedCallback@PathCtlr@@QAEXPAUNiPoint3@@HHM@Z": "0x008c3d60",
+    "?NiPathController_GenPathInterp@PathCtlr@@QAEXPAUNiPoint3@@HHM@Z": "0x008c3d60",
     "?DAT_011f3c18@@3PAP6AXMPBUAnimationKey@@0PAX@ZA": "0x01092460",
     "?DAT_0109893c@@3HA": "0x00e2f3a4",
     "?DAT_01012054@@3MA": "0x00db38b8",
@@ -521616,7 +521616,7 @@
     "?GetTotalLength@PathCtl@@QAEMXZ": "0x008c4890",
     "_memcpy": "0x00bffa60",
     "?DAT_011a9448@fnv_00a49e70@@3UPathMatrix@1@B": "0x00f72574",
-    "?ComputeFrenetFrame@fnv_00a49e70@@YAXMPBUAnimationKey@@0HPAVNiPoint3@1@11PAM@Z": "0x008a1c60",
+    "?NiPosKey_CoordinateFrame@fnv_00a49e70@@YAXMPBUAnimationKey@@0HPAVNiPoint3@1@11PAM@Z": "0x008a1c60",
     "?FUN_004a3760@fnv_00a49e70@@YA?AVNiPoint3@1@MABV21@@Z": "0x00468cd0",
     "??HNiPoint3@fnv_00a49e70@@QBE?AV01@ABV01@@Z": "0x00422970",
     "?FUN_004a0c10@NiPoint3@fnv_00a49e70@@QAEXXZ": "0x00468d00",
@@ -521665,7 +521665,7 @@
     "__real@3ff0000000000000": "0x00db38a8",
     "__CIfmod": "0x00c0345a",
     "__CIatan": "0x00c03350",
-    "?InterpolateKey@@YAMMPAXHIAAIE@Z": "0x008a1080",
+    "?NiFloatKey_GenInterp@@YAMMPAXHIAAIE@Z": "0x008a1080",
     "??0NiKeyBasedInterpolator@@QAE@XZ": "0x008b6bf0",
     "__imp_?InterlockedDecrement@@YGJPAJ@Z": "0x00d9b064",
     "__imp_?InterlockedIncrement@@YGJPAJ@Z": "0x00d9b068",
@@ -521700,14 +521700,14 @@
     "?NiPathInterpolator_PathLength@FUN_00a3e680_shell@@QAEMHHM@Z": "0x008b8780",
     "?FUN_00a95ca0@PathInterpLink@@QAEXAAVNiStream@@@Z": "0x00aad680",
     "?FUN_00a63430@NiStream@@QAEPAVNiObj2@@XZ": "0x0082a280",
-    "?GetAccumulatedValue@PathInterpLink@@QAEMXZ": "0x008b8af0",
+    "?NiPathInterpolator_GetTotalPathLength@PathInterpLink@@QAEMXZ": "0x008b8af0",
     "?DAT_011f3d38@@3PAP6AMPAUMyPosKey@@I@ZA": "0x01092580",
-    "?FindKeyPair@NiPathInterpQ@@QAEXMAAH0AAM@Z": "0x008b8d90",
-    "?EvaluateBasis@NiPathInterpQ@@QAEXHHMAAVNiMatrix3Q@@@Z": "0x008b7f40",
+    "?NiPathInterpolator_GetLoc@NiPathInterpQ@@QAEXMAAH0AAM@Z": "0x008b8d90",
+    "?NiPathInterpolator_CalcRefFrame@NiPathInterpQ@@QAEXHHMAAVNiMatrix3Q@@@Z": "0x008b7f40",
     "?FUN_00a6df40@NiQuatQ@@QAEXABVNiMatrix3Q@@@Z": "0x00837260",
     "?NiPathInterpolator_GenPathInterp@NiPathInterpQ@@QAE?AVNiPoint3@@HHM@Z": "0x008b7ee0",
     "?DAT_011a9448@fnv_00a3de50@@3DA": "0x00f72574",
-    "?ComputeFrenetFrame@fnv_00a3de50@@YAXMPAUMyPosKey@@0IPAUFV3@1@11PAM@Z": "0x008a1c60",
+    "?NiPosKey_CoordinateFrame@fnv_00a3de50@@YAXMPAUMyPosKey@@0IPAUFV3@1@11PAM@Z": "0x008a1c60",
     "?FUN_004a3760@fnv_00a3de50@@YA?AUFV3@1@MABU21@@Z": "0x00468cd0",
     "?FUN_00439e90@FV3@fnv_00a3de50@@QBE?AU12@ABU12@@Z": "0x00422970",
     "?FUN_004a0c10@FV3@fnv_00a3de50@@QAEXXZ": "0x00468d00",
@@ -521719,8 +521719,8 @@
     "?FUN_0043f8d0@FM3@fnv_00a3de50@@QBE?AU12@ABU12@@Z": "0x00424020",
     "__real@3f800000": "0x00db39b8",
     "_kInvalidValue": "0x00db7260",
-    "?$S1@?CL@??EvaluateBasis@PathMotion@fnv_00a3de50@@QAEXIIMPAUFM3@3@@Z@4IA": "0x01092694",
-    "?bankFactor@?CL@??EvaluateBasis@PathMotion@fnv_00a3de50@@QAEXIIMPAUFM3@3@@Z@4MB": "0x01092690",
+    "?$S1@?CL@??NiPathInterpolator_CalcRefFrame@PathMotion@fnv_00a3de50@@QAEXIIMPAUFM3@3@@Z@4IA": "0x01092694",
+    "?bankFactor@?CL@??NiPathInterpolator_CalcRefFrame@PathMotion@fnv_00a3de50@@QAEXIIMPAUFM3@3@@Z@4MB": "0x01092690",
     "?IsEqual@NiKeyBasedInterpolatorStub@@UAE_NPAUNiObjectStub@@@Z": "0x0092a8e0",
     "?GetPathKeys@NiPathInterpolatorStub@@QAEHAAH0AAD@Z": "0x008b7df0"
    }
@@ -521813,7 +521813,7 @@
     },
     {
      "address": "0x008b7f40",
-     "symbol": "?EvaluateBasis@PathMotion@fnv_00a3de50@@QAEXIIMPAUFM3@2@@Z",
+     "symbol": "?NiPathInterpolator_CalcRefFrame@PathMotion@fnv_00a3de50@@QAEXIIMPAUFM3@2@@Z",
      "size": 1958
     },
     {
@@ -521823,7 +521823,7 @@
     },
     {
      "address": "0x008b8d90",
-     "symbol": "?FindKeyPair@PathInterpExt@@QAEXMAAI0AAM@Z",
+     "symbol": "?NiPathInterpolator_GetLoc@PathInterpExt@@QAEXMAAI0AAM@Z",
      "size": 351
     },
     {
@@ -521848,7 +521848,7 @@
     },
     {
      "address": "0x008b9280",
-     "symbol": "?UpdateTransform@NiPathInterpQ@@QAE_NMPAVNiObjectNETQ@@AAVNiQuatTransformQ@@@Z",
+     "symbol": "?NiPathInterpolator_Update@NiPathInterpQ@@QAE_NMPAVNiObjectNETQ@@AAVNiQuatTransformQ@@@Z",
      "size": 464
     },
     {
@@ -521871,7 +521871,7 @@
     "__real@3ff0000000000000": "0x00db38a8",
     "__CIfmod": "0x00c0345a",
     "__CIatan": "0x00c03350",
-    "?InterpolateKey@@YAMMPAXHIAAIE@Z": "0x008a1080",
+    "?NiFloatKey_GenInterp@@YAMMPAXHIAAIE@Z": "0x008a1080",
     "??0NiKeyBasedInterpolator@@QAE@XZ": "0x008b6bf0",
     "__imp_?InterlockedDecrement@@YGJPAJ@Z": "0x00d9b064",
     "__imp_?InterlockedIncrement@@YGJPAJ@Z": "0x00d9b068",
@@ -521906,14 +521906,14 @@
     "?NiPathInterpolator_PathLength@FUN_00a3e680_shell@@QAEMHHM@Z": "0x008b8780",
     "?FUN_00a95ca0@PathInterpLink@@QAEXAAVNiStream@@@Z": "0x00aad680",
     "?FUN_00a63430@NiStream@@QAEPAVNiObj2@@XZ": "0x0082a280",
-    "?GetAccumulatedValue@PathInterpLink@@QAEMXZ": "0x008b8af0",
+    "?NiPathInterpolator_GetTotalPathLength@PathInterpLink@@QAEMXZ": "0x008b8af0",
     "?DAT_011f3d38@@3PAP6AMPAUMyPosKey@@I@ZA": "0x01092580",
-    "?FindKeyPair@NiPathInterpQ@@QAEXMAAH0AAM@Z": "0x008b8d90",
-    "?EvaluateBasis@NiPathInterpQ@@QAEXHHMAAVNiMatrix3Q@@@Z": "0x008b7f40",
+    "?NiPathInterpolator_GetLoc@NiPathInterpQ@@QAEXMAAH0AAM@Z": "0x008b8d90",
+    "?NiPathInterpolator_CalcRefFrame@NiPathInterpQ@@QAEXHHMAAVNiMatrix3Q@@@Z": "0x008b7f40",
     "?FUN_00a6df40@NiQuatQ@@QAEXABVNiMatrix3Q@@@Z": "0x00837260",
     "?NiPathInterpolator_GenPathInterp@NiPathInterpQ@@QAE?AVNiPoint3@@HHM@Z": "0x008b7ee0",
     "?DAT_011a9448@fnv_00a3de50@@3DA": "0x00f72574",
-    "?ComputeFrenetFrame@fnv_00a3de50@@YAXMPAUMyPosKey@@0IPAUFV3@1@11PAM@Z": "0x008a1c60",
+    "?NiPosKey_CoordinateFrame@fnv_00a3de50@@YAXMPAUMyPosKey@@0IPAUFV3@1@11PAM@Z": "0x008a1c60",
     "?FUN_004a3760@fnv_00a3de50@@YA?AUFV3@1@MABU21@@Z": "0x00468cd0",
     "?FUN_00439e90@FV3@fnv_00a3de50@@QBE?AU12@ABU12@@Z": "0x00422970",
     "?FUN_004a0c10@FV3@fnv_00a3de50@@QAEXXZ": "0x00468d00",
@@ -521925,8 +521925,8 @@
     "?FUN_0043f8d0@FM3@fnv_00a3de50@@QBE?AU12@ABU12@@Z": "0x00424020",
     "__real@3f800000": "0x00db39b8",
     "_kInvalidValue": "0x00db7260",
-    "?$S1@?CL@??EvaluateBasis@PathMotion@fnv_00a3de50@@QAEXIIMPAUFM3@3@@Z@4IA": "0x01092694",
-    "?bankFactor@?CL@??EvaluateBasis@PathMotion@fnv_00a3de50@@QAEXIIMPAUFM3@3@@Z@4MB": "0x01092690"
+    "?$S1@?CL@??NiPathInterpolator_CalcRefFrame@PathMotion@fnv_00a3de50@@QAEXIIMPAUFM3@3@@Z@4IA": "0x01092694",
+    "?bankFactor@?CL@??NiPathInterpolator_CalcRefFrame@PathMotion@fnv_00a3de50@@QAEXIIMPAUFM3@3@@Z@4MB": "0x01092690"
    }
   },
   {
@@ -522288,7 +522288,7 @@
     },
     {
      "address": "0x008a1c60",
-     "symbol": "?ComputeFrenetFrame@@YAXMPBVAnimationKey@@0W4KeyType@1@AAVNiPoint3@@22AAM@Z",
+     "symbol": "?NiPosKey_CoordinateFrame@@YAXMPBVAnimationKey@@0W4KeyType@1@AAVNiPoint3@@22AAM@Z",
      "size": 721
     }
    ],
@@ -522366,7 +522366,7 @@
     },
     {
      "address": "0x008c2cf0",
-     "symbol": "?CreateNiQuaternionInterpolator@@YAPAUNiQuaternionInterpolator@@XZ",
+     "symbol": "?NiQuaternionInterpolator_CreateObject@@YAPAUNiQuaternionInterpolator@@XZ",
      "size": 86
     },
     {
@@ -522663,7 +522663,7 @@
     "?FUN_00a57970@@YAXXZ": "0x005958b0",
     "?NiTimeController_DontDoUpdate@NiRollControllerA485@@QAE_NM@Z": "0x008b0270",
     "?GetFloatKeys@NiRollControllerA485@@QAEPAUNiFloatKeyA485@@AAIAAHAAE@Z": "0x008d15a0",
-    "?InterpolateKey@NiFloatKeyA485@@SAMMPAU1@HIAAIE@Z": "0x008a1080",
+    "?NiFloatKey_GenInterp@NiFloatKeyA485@@SAMMPAU1@HIAAIE@Z": "0x008a1080",
     "??DNiMatrix3A485@@QBE?AV0@ABV0@@Z": "0x00424020",
     "__real@3f800000": "0x00db39b8",
     "??3@YAXPAX@Z": "0x00401010",
@@ -522798,7 +522798,7 @@
     },
     {
      "address": "0x008b8af0",
-     "symbol": "?GetAccumulatedValue@FUN_00a3e9a0_cls@@QAEMXZ",
+     "symbol": "?NiPathInterpolator_GetTotalPathLength@FUN_00a3e9a0_cls@@QAEMXZ",
      "size": 147
     }
    ],
@@ -522984,7 +522984,7 @@
     },
     {
      "address": "0x008b2650",
-     "symbol": "?UpdateKeyTimes@NiTimeControllerA38@@QAEXXZ",
+     "symbol": "?NiSingleInterpController_ResetTimeExtrema@NiTimeControllerA38@@QAEXXZ",
      "size": 45
     },
     {
@@ -523167,7 +523167,7 @@
    "symbols": {
     "?ReadFixedString@NiStream@@QAEXAAVNiFixedString@@@Z": "0x0082bf90",
     "?ReadStringTableEntry@NiStream@@QAEXAAVNiFixedString@@@Z": "0x0082bee0",
-    "?WriteObjectLink@FNVStream@@QAEXAAVNiFixedString@@@Z": "0x0082b000"
+    "?NiStream_SaveFixedString@FNVStream@@QAEXAAVNiFixedString@@@Z": "0x0082b000"
    }
   },
   {
@@ -523686,17 +523686,17 @@
     },
     {
      "address": "0x008c8300",
-     "symbol": "?SetRotationKeys@NiTransformData@@QAEXPAVTimedRotationKey@@IW4KeyType@AnimationKey@@@Z",
+     "symbol": "?ReplaceRotAnim@NiTransformData@@QAEXPAVTimedRotationKey@@IW4KeyType@AnimationKey@@@Z",
      "size": 107
     },
     {
      "address": "0x008c8370",
-     "symbol": "?SetPositionKeys@NiTransformData@@QAEXPAVPositionKeyInterpolator@@IW4KeyType@AnimationKey@@@Z",
+     "symbol": "?ReplacePosAnim@NiTransformData@@QAEXPAVPositionKeyInterpolator@@IW4KeyType@AnimationKey@@@Z",
      "size": 91
     },
     {
      "address": "0x008c83d0",
-     "symbol": "?SetScaleKeys@NiTransformData@@QAEXPAVTimedAnimationKey@@IW4KeyType@AnimationKey@@@Z",
+     "symbol": "?ReplaceScaleAnim@NiTransformData@@QAEXPAVTimedAnimationKey@@IW4KeyType@AnimationKey@@@Z",
      "size": 91
     },
     {
@@ -524049,7 +524049,7 @@
     "?FUN_00a6cfe0@MyNiUVController@@QAEXPAXI@Z": "0x00837bc0",
     "?FUN_00a2c623@MyUVData@@QAEXPAURefObj_00a45fa0@@@Z": "0x008c0130",
     "?GetDataFromMember@UVController@@QAEPAUUVKey@@AAIAAHAAE@Z": "0x008bfb40",
-    "?InterpolateKey@@YAMMPAUUVKey@@HIPAIE@Z": "0x008a1080",
+    "?NiFloatKey_GenInterp@@YAMMPAUUVKey@@HIPAIE@Z": "0x008a1080",
     "?GetSomeData@UVController@@QAEPAUUVKey@@AAIAAHAAE@Z": "0x008bfb90",
     "?GetSomeValues@UVController@@QAEPAUUVKey@@AAIAAHAAE@Z": "0x008bfbe0",
     "?GetSomePtrValues@UVController@@QAEPAUUVKey@@AAIAAHAAE@Z": "0x008bfc30",
@@ -524193,7 +524193,7 @@
     "?FUN_00a6cfe0@MyNiUVController@@QAEXPAXI@Z": "0x00837bc0",
     "?FUN_00a2c623@MyUVData@@QAEXPAURefObj_00a45fa0@@@Z": "0x008c0130",
     "?GetDataFromMember@UVController@@QAEPAUUVKey@@AAIAAHAAE@Z": "0x008bfb40",
-    "?InterpolateKey@@YAMMPAUUVKey@@HIPAIE@Z": "0x008a1080",
+    "?NiFloatKey_GenInterp@@YAMMPAUUVKey@@HIPAIE@Z": "0x008a1080",
     "?GetSomeData@UVController@@QAEPAUUVKey@@AAIAAHAAE@Z": "0x008bfb90",
     "?GetSomeValues@UVController@@QAEPAUUVKey@@AAIAAHAAE@Z": "0x008bfbe0",
     "?GetSomePtrValues@UVController@@QAEPAUUVKey@@AAIAAHAAE@Z": "0x008bfc30",
@@ -524519,7 +524519,7 @@
     "?FUN_00439e90@SweepPoint@@QBE?AV1@ABV1@@Z": "0x00422970",
     "?FUN_004a3760@@YA?AVSweepPoint@@MABV1@@Z": "0x00468cd0",
     "?FUN_00439ef0@SweepPoint@@QBE?AV1@ABV1@@Z": "0x004229a0",
-    "?ClampPositionToBoxes@@YAXMPBUSweepBox@@PBVSweepPoint@@01AAMAAV2@@Z": "0x0080a490",
+    "?NiBoxBV_RefinePoint@@YAXMPBUSweepBox@@PBVSweepPoint@@01AAMAAV2@@Z": "0x0080a490",
     "?DotProduct@SweepPoint@@QBEMABV1@@Z": "0x00475250",
     "?FUN_004b3800@SweepPoint@@QBE?AV1@ABV1@@Z": "0x00475280",
     "__real@3f800000": "0x00db39b8",
@@ -524632,7 +524632,7 @@
     },
     {
      "address": "0x0080a490",
-     "symbol": "?ClampPositionToBoxes@@YAXMPBUCollisionBox@@PBUPt3@@01PBMPAU2@@Z",
+     "symbol": "?NiBoxBV_RefinePoint@@YAXMPBUCollisionBox@@PBUPt3@@01PBMPAU2@@Z",
      "size": 1494
     },
     {
@@ -524740,7 +524740,7 @@
     "?FUN_00439e90@SweepPoint@@QBE?AV1@ABV1@@Z": "0x00422970",
     "?FUN_004a3760@@YA?AVSweepPoint@@MABV1@@Z": "0x00468cd0",
     "?FUN_00439ef0@SweepPoint@@QBE?AV1@ABV1@@Z": "0x004229a0",
-    "?ClampPositionToBoxes@@YAXMPBUSweepBox@@PBVSweepPoint@@01AAMAAV2@@Z": "0x0080a490",
+    "?NiBoxBV_RefinePoint@@YAXMPBUSweepBox@@PBVSweepPoint@@01AAMAAV2@@Z": "0x0080a490",
     "?DotProduct@SweepPoint@@QBEMABV1@@Z": "0x00475250",
     "?FUN_004b3800@SweepPoint@@QBE?AV1@ABV1@@Z": "0x00475280",
     "__real@3f800000": "0x00db39b8",
@@ -525453,7 +525453,7 @@
    "functions": [
     {
      "address": "0x007fcea0",
-     "symbol": "?RaycastGeometry@@YA_NPBUP3@@0PAUPick@@PAUGeometry@@@Z",
+     "symbol": "?NiCollisionTraversals_FindIntersectionsTriShapeFastPath@@YA_NPBUP3@@0PAUPick@@PAUGeometry@@@Z",
      "size": 4707
     },
     {
@@ -525514,7 +525514,7 @@
     "?GetTexture@HitList@@QAEPAUHit@@PAUGeometry@@@Z": "0x007fbf40",
     "?GetKeyAndMode@GeometryData@@QAEXIPAUBuffer@@@Z": "0x00831a40",
     "?DAT_0108f390@@3VNiPoint2@@A": "0x0108f390",
-    "?GetBounds@GeometryData@@QAEXPAUBuffer@@@Z": "0x008318d0",
+    "?NiGeometryData_GetNormalsIterator@GeometryData@@QAEXPAUBuffer@@@Z": "0x008318d0",
     "?FUN_00468d00@RayPointCalls@@QAEXXZ": "0x00468d00",
     "?FUN_004752c0@RayMatrixCalls@@QAE?AUP3@@PBU2@@Z": "0x004752c0",
     "?FUN_00831980@RayDataCalls@@QAEXPAUBuffer@@@Z": "0x00831980",
@@ -525525,7 +525525,7 @@
     "?DAT_0108f414@w324@fnv_00e9b4f0@@3UZType@12@A": "0x0108f414",
     "?DAT_0108f440@w324@fnv_00e9b4f0@@3HA": "0x0108f440",
     "?FUN_00424d20@w324@fnv_00e9b4f0@@YA_NPBXPAUShape@12@@Z": "0x00424d20",
-    "?RaycastGeometry@w324@fnv_00e9b4f0@@YA_NPBVNiPoint3@12@0PAUOptions@12@PAUShape@12@@Z": "0x007fcea0",
+    "?NiCollisionTraversals_FindIntersectionsTriShapeFastPath@w324@fnv_00e9b4f0@@YA_NPBVNiPoint3@12@0PAUOptions@12@PAUShape@12@@Z": "0x007fcea0",
     "?NiCollisionTraversals_FindIntersectionsOneStripFastPath@w324@fnv_00e9b4f0@@YA_NPBVNiPoint3@12@0PAUOptions@12@PAUShape@12@@Z": "0x007fbff0",
     "?FUN_00475320@w324@fnv_00e9b4f0@@YA?AVNiPoint3@12@ABV312@PBUMatrix@12@@Z": "0x00475320",
     "?FUN_00831680@GeometryData@w324@fnv_00e9b4f0@@QAE_N_N@Z": "0x00831680",
@@ -528245,7 +528245,7 @@
     },
     {
      "address": "0x0087ce70",
-     "symbol": "?DecodeVertexData@@YAIPAUNormalizedStream@@@Z",
+     "symbol": "?NiD3DShaderDeclaration_Pack_LongToFloat@@YAIPAUNormalizedStream@@@Z",
      "size": 526
     },
     {
@@ -528513,7 +528513,7 @@
     "__imp__fnv_InterlockedDecrement@4": "0x00d9b064",
     "_FUN_00b71a40": "0x00870a80",
     "?FUN_00e72c20@FUN_00e744b0_cls@@QAE_NPAUFUN_00e744b0_Src@@H@Z": "0x00877d60",
-    "?ProcessCollector@FUN_00e744b0_obj@@QAEXIIIIHH@Z": "0x0088b120",
+    "?NiD3DGeometryGroupManager_AddObjectToGroup@FUN_00e744b0_obj@@QAEXIIIIHH@Z": "0x0088b120",
     "?DrawStrip@FUN_00e744b0_cls@@QAEXPAUFUN_00e744b0_Src@@IIPAUFUN_00e744b0_Blk52@@PAUFUN_00e744b0_Blk16@@@Z": "0x008769d0",
     "?DrawMesh@FUN_00e744b0_cls@@QAEXPAUFUN_00e744b0_Src@@IIPAUFUN_00e744b0_Blk52@@PAUFUN_00e744b0_Blk16@@I@Z": "0x008766d0",
     "??0NiPropertyState@fnv_00e750e0@@QAE@XZ": "0x00854e20",
@@ -528618,7 +528618,7 @@
     "?BSStripPSysData_GetTexCoordDelta@SrcObj@@QAEMG@Z": "0x00ac54b0",
     "?GetElementField@SrcObj@@QAEPBUPointE69@@GG@Z": "0x00ac5470",
     "?BSStripPSysData_GetPointNorms@SrcObj@@QAEPBUPointE69@@GG@Z": "0x00ac5490",
-    "?GetParticleColor@SrcObj@@QAEPBUColorF@@GG@Z": "0x00ac5960",
+    "?BSStripPSysData_GetPointColor@SrcObj@@QAEPBUColorF@@GG@Z": "0x00ac5960",
     "?WriteVertex@MeshGenerator@@QAEPAMPAMABUPointE69@@1IMMM@Z": "0x0086ec30",
     "?ConvertNiToD3D@@YAXPAUXD3DMatrix@@PBUXMatrix3@@PBUXPoint3@@M@Z": "0x00870a80",
     "?DAT_011f49d8@@3HA": "0x0108f3cc",
@@ -528797,7 +528797,7 @@
     "?FUN_00e6c240@InitRenderer@@QAE_NPAUInitPresent@@@Z": "0x00871760",
     "?FUN_00e7d6b0@@YAPAUInitCaps@@PAUInitDevice@@PAUInitPresent@@PAPAX@Z": "0x00883100",
     "?FUN_00e7d850@@YAXPAUInitDevice@@PAPAX@Z": "0x00883240",
-    "?CreateShaderLevel@@YAPAUInitState@@IPAUInitRenderer@@@Z": "0x00c222a0",
+    "?NiRenderTargetGroup_Create@@YAPAUInitState@@IPAUInitRenderer@@@Z": "0x00c222a0",
     "?FUN_00b6aed0@InitSmartState@@QAEXPAUInitState@@@Z": "0x0045c640",
     "?FUN_00e72cf0@InitStateMap@@QAEXIUInitSmartState@@@Z": "0x00877e30",
     "?MapCodeToIndex@@YAII@Z": "0x0086edd0",
@@ -528843,7 +528843,7 @@
     "?FUN_00884fd0@LineStreamAccess@@QAEXPAULineBufferData@@I@Z": "0x00884fd0",
     "?FUN_00885020@LineStreamAccess@@QAEPAMPAXIII@Z": "0x00885020",
     "?CopyAndRelease@LineVBManager@@QAE_NPAX@Z": "0x00885100",
-    "?ProcessCollector@RendererContext@@QAEXPAXPAUParticleGeometry@@HHHH@Z": "0x0088b120",
+    "?NiD3DGeometryGroupManager_AddObjectToGroup@RendererContext@@QAEXPAXPAUParticleGeometry@@HHHH@Z": "0x0088b120",
     "?NiGeometryBufferData_SetStreamCount@VertexData@@QAEXH@Z": "0x008890b0",
     "?AcquireCachedResource@RendererStorage@@QAEPAUIndexBuffer@@IHHH@Z": "0x00889df0",
     "?EnsureIndexBuffer@RendererStorage@@QAEPAUIndexBuffer@@IIHHH@Z": "0x00889580",
@@ -528856,7 +528856,7 @@
     "?FUN_00e696a0@RendererE70140@@QAEPAUFakeCOM_00e8f040@@XZ": "0x0086e7a0",
     "?FUN_00e69ea0@RendererE70140@@QAEXIIIIIII@Z": "0x0086f030",
     "?FUN_00ac53b0@W124GEO@@QAEGI@Z": "0x00ac53b0",
-    "?ProcessCollector@StripPackManager@@QAEXPAXPAUStripGeometryData@@0000@Z": "0x0088b120",
+    "?NiD3DGeometryGroupManager_AddObjectToGroup@StripPackManager@@QAEXPAXPAUStripGeometryData@@0000@Z": "0x0088b120",
     "?FUN_008890b0@W124RD@@QAEXI@Z": "0x008890b0",
     "?FUN_0086e880@W124REN@@QAEIXZ": "0x0086e880",
     "?FUN_0086e7a0@W124REN@@QAEIXZ": "0x0086e7a0",
@@ -529293,7 +529293,7 @@
     },
     {
      "address": "0x00873d60",
-     "symbol": "?ShutdownE6EC20@@YAXXZ",
+     "symbol": "?NiDX9Renderer__SDMShutdown@@YAXXZ",
      "size": 103
     },
     {
@@ -529528,7 +529528,7 @@
     },
     {
      "address": "0x0087c5e0",
-     "symbol": "?PackVertexColors@@YAHPAUStream_e78910@@@Z",
+     "symbol": "?NiD3DShaderDeclaration_Pack_ShortToUByteColor@@YAHPAUStream_e78910@@@Z",
      "size": 335
     },
     {
@@ -529553,12 +529553,12 @@
     },
     {
      "address": "0x0087d250",
-     "symbol": "?ConvertNormalizedShortsToFloats@@YAIPAUNormalizedStream@@@Z",
+     "symbol": "?NiD3DShaderDeclaration_Pack_ShortToFloat@@YAIPAUNormalizedStream@@@Z",
      "size": 546
     },
     {
      "address": "0x0087d650",
-     "symbol": "?ConvertByteFloatStream@@YAIPAUByteFloatStream@@@Z",
+     "symbol": "?NiD3DShaderDeclaration_Pack_ByteToFloat@@YAIPAUByteFloatStream@@@Z",
      "size": 546
     },
     {
@@ -529573,7 +529573,7 @@
     },
     {
      "address": "0x0087ddf0",
-     "symbol": "?ConvertColorStream@@YAIPAUColorStream@@@Z",
+     "symbol": "?NiD3DShaderDeclaration_Pack_UnsignedByteToUByteColor@@YAIPAUColorStream@@@Z",
      "size": 311
     },
     {
@@ -529971,7 +529971,7 @@
     "__imp__fnv_InterlockedDecrement@4": "0x00d9b064",
     "_FUN_00b71a40": "0x00870a80",
     "?FUN_00e72c20@FUN_00e744b0_cls@@QAE_NPAUFUN_00e744b0_Src@@H@Z": "0x00877d60",
-    "?ProcessCollector@FUN_00e744b0_obj@@QAEXIIIIHH@Z": "0x0088b120",
+    "?NiD3DGeometryGroupManager_AddObjectToGroup@FUN_00e744b0_obj@@QAEXIIIIHH@Z": "0x0088b120",
     "?DrawStrip@FUN_00e744b0_cls@@QAEXPAUFUN_00e744b0_Src@@IIPAUFUN_00e744b0_Blk52@@PAUFUN_00e744b0_Blk16@@@Z": "0x008769d0",
     "?DrawMesh@FUN_00e744b0_cls@@QAEXPAUFUN_00e744b0_Src@@IIPAUFUN_00e744b0_Blk52@@PAUFUN_00e744b0_Blk16@@I@Z": "0x008766d0",
     "??0NiPropertyState@fnv_00e750e0@@QAE@XZ": "0x00854e20",
@@ -530076,7 +530076,7 @@
     "?BSStripPSysData_GetTexCoordDelta@SrcObj@@QAEMG@Z": "0x00ac54b0",
     "?GetElementField@SrcObj@@QAEPBUPointE69@@GG@Z": "0x00ac5470",
     "?BSStripPSysData_GetPointNorms@SrcObj@@QAEPBUPointE69@@GG@Z": "0x00ac5490",
-    "?GetParticleColor@SrcObj@@QAEPBUColorF@@GG@Z": "0x00ac5960",
+    "?BSStripPSysData_GetPointColor@SrcObj@@QAEPBUColorF@@GG@Z": "0x00ac5960",
     "?WriteVertex@MeshGenerator@@QAEPAMPAMABUPointE69@@1IMMM@Z": "0x0086ec30",
     "?ConvertNiToD3D@@YAXPAUXD3DMatrix@@PBUXMatrix3@@PBUXPoint3@@M@Z": "0x00870a80",
     "?DAT_011f49d8@@3HA": "0x0108f3cc",
@@ -530883,7 +530883,7 @@
     },
     {
      "address": "0x0088b120",
-     "symbol": "?ProcessCollector@@YG_NPAUHkCollector@@PAUHkBody@@PAUHkInput@@_NHH@Z",
+     "symbol": "?NiD3DGeometryGroupManager_AddObjectToGroup@@YG_NPAUHkCollector@@PAUHkBody@@PAUHkInput@@_NHH@Z",
      "size": 125
     },
     {
@@ -530913,7 +530913,7 @@
     "?_NiFreeAlias@@YAXPAX@Z": "0x0089e890",
     "?FUN_00a7f810@NiD3DGeometryGroupManager@@QAEXXZ": "0x008496f0",
     "?DAT_010ef718@@3PAPAXA": "0x00e2b024",
-    "?ProcessCollector@@YI_NPAXHPAVNiGeometryGroup@@PAUNiGeometryData@@PAUNiSkinInstance@@_NII@Z": "0x0088b120",
+    "?NiD3DGeometryGroupManager_AddObjectToGroup@@YI_NPAXHPAVNiGeometryGroup@@PAUNiGeometryData@@PAUNiSkinInstance@@_NII@Z": "0x0088b120",
     "?FUN_00e94290@@YAXXZ": "0x00899900",
     "?FUN_00a7f820@Holder@@QAEXXZ": "0x00849700",
     "?FUN_00e88d60@FUN_00e88e90_shell@@QAEXXZ": "0x00824ed0",
@@ -531631,7 +531631,7 @@
     },
     {
      "address": "0x00890160",
-     "symbol": "?FindNodeByKey@@YIPAUNode_00e7f000@@PAUSelf_00e7f000@@HHAA_N@Z",
+     "symbol": "?NiD3DRenderStateGroup_FindRenderStateEntry@@YIPAUNode_00e7f000@@PAUSelf_00e7f000@@HHAA_N@Z",
      "size": 70
     },
     {
@@ -532085,7 +532085,7 @@
     },
     {
      "address": "0x00890030",
-     "symbol": "?ApplyGroupEntries@Group00e7eed0@@QAEIXZ",
+     "symbol": "?NiD3DRenderStateGroup_SetRenderStates@Group00e7eed0@@QAEIXZ",
      "size": 100
     },
     {
@@ -532153,7 +532153,7 @@
     "_str_010a93ec": "0x00e2a544",
     "_str_010b5c64": "0x00e9c63c",
     "?SetNodeValue@RenderState@@QAEXIII@Z": "0x008905a0",
-    "?FindNodeByKey@StateGroup@@QAEPAUStateNode@@IAA_N@Z": "0x00890160",
+    "?NiD3DRenderStateGroup_FindRenderStateEntry@StateGroup@@QAEPAUStateNode@@IAA_N@Z": "0x00890160",
     "?FUN_00e7efc0@StateGroup@@QAEXPAUStateNode@@@Z": "0x00890120",
     "?FUN_00e7ef80@StateGroup@@QAEXPAUStateNode@@@Z": "0x008900e0",
     "?DAT_0126f71c@@3PAV?$ObjectPool@UStateNode@@V?$NiTNewInterface@UStateNode@@@@@@A": "0x01091abc",
@@ -532316,7 +532316,7 @@
     "?ms_pRenderer@NiRenderer@@2PAV1@A": "0x0108f048",
     "?SetStageValue@BeamTextureState@@QAEXII_N@Z": "0x0088e690",
     "?EmptyFS@@3VNiFixedString@@A": "0x00e207a8",
-    "?ApplyGroupEntries@GroupStandIn@@QAEXXZ": "0x00890030",
+    "?NiD3DRenderStateGroup_SetRenderStates@GroupStandIn@@QAEXXZ": "0x00890030",
     "__real@00000000": "0x00eaad58",
     "?GetHRESULTText@@YAPADI@Z": "0x0088ae00",
     "?DAT_0126f0d8@@3PAUDepthDevice@@A": "0x010912f4",
@@ -532459,7 +532459,7 @@
     "?ClearShaderConstantEntries@NiD3DShaderConstantMap@@QAEXPAV?$NiTObjectArray@V?$NiPointer@VNiShaderConstantMapEntry@@@@@@@Z": "0x00895f00",
     "?FindConstantMapping@NiShaderConstantMap@@SA_NPBDAAI1@Z": "0x00866830",
     "?g_0126f7c4@@3UGlobalObjectO2_00a7b610@@A": "0x01091b14",
-    "?LookupShaderConstantMapping@@YA_NIAAPAX@Z": "0x00866950",
+    "?NiShaderConstantMap_LookUpObjectMapping@@YA_NIAAPAX@Z": "0x00866950",
     "?GetAttributeTypeForMapping@@YAIPAXPAI1@Z": "0x00866530",
     "?DAT_011f5fb4@@3PAEA": "0x010909bc",
     "?FUN_00e81c00@@YIXPAX@Z": "0x00890a70",
@@ -532816,7 +532816,7 @@
     "?ClearShaderConstantEntries@NiD3DShaderConstantMap@@QAEXPAV?$NiTObjectArray@V?$NiPointer@VNiShaderConstantMapEntry@@@@@@@Z": "0x00895f00",
     "?FindConstantMapping@NiShaderConstantMap@@SA_NPBDAAI1@Z": "0x00866830",
     "?g_0126f7c4@@3UGlobalObjectO2_00a7b610@@A": "0x01091b14",
-    "?LookupShaderConstantMapping@@YA_NIAAPAX@Z": "0x00866950",
+    "?NiShaderConstantMap_LookUpObjectMapping@@YA_NIAAPAX@Z": "0x00866950",
     "?GetAttributeTypeForMapping@@YAIPAXPAI1@Z": "0x00866530",
     "?DAT_011f5fb4@@3PAEA": "0x010909bc",
     "?FUN_00e81c00@@YIXPAX@Z": "0x00890a70",
@@ -533465,7 +533465,7 @@
     "?vftable_NiRefObject@@3HA": "0x00db7764",
     "?DAT_0109f584@@3HA": "0x00e24eac",
     "?NiShaderFactory_ReleaseAllShaders@@YAXXZ": "0x0086a890",
-    "?DestroyProgram@@YAXXZ": "0x00897b80",
+    "?NiD3DShaderProgramFactory_Shutdown@@YAXXZ": "0x00897b80",
     "?FUN_00a8f490@@YIXPAUObj@@@Z": "0x0085a2f0",
     "?DAT_010ef39c@fnv_00e81ab0@@3HA": "0x00e2b194",
     "?FUN_00a8f490@fnv_00e81ab0@@YIXPAUObj@1@@Z": "0x0085a2f0",
@@ -534095,7 +534095,7 @@
     },
     {
      "address": "0x00897b80",
-     "symbol": "?DestroyProgram@@YAXXZ",
+     "symbol": "?NiD3DShaderProgramFactory_Shutdown@@YAXXZ",
      "size": 29
     },
     {
@@ -534372,12 +534372,12 @@
     },
     {
      "address": "0x0089aa50",
-     "symbol": "?CreateBufferSetData@@YAPAUMemoryAllocationProvider@@IPAXII@Z",
+     "symbol": "?NiVBDynamicSet_Create@@YAPAUMemoryAllocationProvider@@IPAXII@Z",
      "size": 129
     },
     {
      "address": "0x0089ad50",
-     "symbol": "?CreateBufferData@UnsharedGroupStub@@QAEXPAUGeomDataStub@@_NPAUPartitionStub@@@Z",
+     "symbol": "?NiDynamicGeometryGroup_AddObject@UnsharedGroupStub@@QAEXPAUGeomDataStub@@_NPAUPartitionStub@@@Z",
      "size": 317
     },
     {
@@ -534397,7 +534397,7 @@
     },
     {
      "address": "0x0089e5b0",
-     "symbol": "?AllocateStream@S_00e987c0_Class@@QAEPAUS_00e987c0_Stream@@IPAI0EE@Z",
+     "symbol": "?NiVBDynamicSet_AllocateBufferSpace@S_00e987c0_Class@@QAEPAUS_00e987c0_Stream@@IPAI0EE@Z",
      "size": 198
     },
     {
@@ -534456,7 +534456,7 @@
     "?FUN_00a90180@?$Array@UMemoryAllocationProvider@@@@QAEXI@Z": "0x00555790",
     "?FUN_00a90180@?$Array@UChip@@@@QAEXI@Z": "0x00555790",
     "?FUN_00ba3aa0@?$Array@UMemoryAllocationProvider@@@@QAEXIABQAUMemoryAllocationProvider@@@Z": "0x005b3880",
-    "?AllocateStream@MemoryAllocationProvider@@QAEPAXIPAI0_NUByteFlag@@@Z": "0x0089e5b0",
+    "?NiVBDynamicSet_AllocateBufferSpace@MemoryAllocationProvider@@QAEPAXIPAI0_NUByteFlag@@@Z": "0x0089e5b0",
     "?FUN_00537d60@@YAPAUChip@@IPAXIII@Z": "0x004ca620",
     "?FUN_00ba3aa0@?$Array@UChip@@@@QAEXIABQAUChip@@@Z": "0x005b3880",
     "?FUN_00a53c30@?$Map@UMemoryAllocationProvider@@@@QAE_NIAAPAUMemoryAllocationProvider@@@Z": "0x00bea7b0",
@@ -534880,14 +534880,14 @@
     },
     {
      "address": "0x0089e2f0",
-     "symbol": "?FreeVBBlock@@YIIPAUNiVBBlock@@PAXI@Z",
+     "symbol": "?NiVBBlock_FreeChip@@YIIPAUNiVBBlock@@PAXI@Z",
      "size": 151
     }
    ],
    "symbols": {
     "?FUN_00aa13e0@@YAPAXI@Z": "0x0089eb90",
     "_FUN_00aa10f0": "0x0089e890",
-    "?FreeVBBlock@NiVBBlock@@QAEXI@Z": "0x0089e2f0",
+    "?NiVBBlock_FreeChip@NiVBBlock@@QAEXI@Z": "0x0089e2f0",
     "?RemoveNode@NiVBSet@@QAEXPAUNiVBBlock@@@Z": "0x00899770",
     "?FUN_00a93c50@NiVBSetBlockArray@@QAEXI@Z": "0x008997c0",
     "?NiVBSet_FreeBlock@NiVBSet@@QAEXPAUNiVBBlock@@@Z": "0x008999a0",
@@ -534962,7 +534962,7 @@
     "?SetSize@?$NiTPrimitiveArray@PAD@@QAEXI@Z": "0x00555790",
     "??0_Call_a5d3a0@@QAE@XZ": "0x00825800",
     "?DAT_01069a84@@3HA": "0x00dff9ac",
-    "?CopyRefCountedPointers@S00a6c720@@QAEXPAU1@PAX@Z": "0x00850720",
+    "?NiSkinInstance_CopyMembers@S00a6c720@@QAEXPAU1@PAX@Z": "0x00850720",
     "?_g_memoryManager@@3UP03MM@@A": "0x01090a78",
     "?FUN_00a6c720@S00a6c7c0@@QAEXPAU1@AAUCloningProcess@@@Z": "0x00836760",
     "?LoadBinary@A6C900SkinBase@@QAEXAAVA6C900Stream@@@Z": "0x00850400",
@@ -534995,7 +534995,7 @@
    "functions": [
     {
      "address": "0x00849c40",
-     "symbol": "?SaveFields@FUN_00a7f680_cls@@QAEXPAX@Z",
+     "symbol": "?BSPackedAdditionalGeometryData_SaveBinary@FUN_00a7f680_cls@@QAEXPAX@Z",
      "size": 96
     },
     {
@@ -535157,7 +535157,7 @@
     "?Free@DynamicMemoryAllocator@@QAEXPAX@Z": "0x0086ba60",
     "?FUN_00aa3e40@DynamicMemoryAllocator@@QAEPAXI@Z": "0x0086b930",
     "?FUN_00a744a0@FUN_00a744a0_shell@@QAEXXZ": "0x0083f520",
-    "?CopyEntries@FUN_00a871a0_shell@@QAEXPAXI@Z": "0x00851ad0",
+    "?BSSegmentedTriShape_CopyMembers@FUN_00a871a0_shell@@QAEXPAXI@Z": "0x00851ad0",
     "?FUN_00a98ea0@S_a873b0_Base@fnv_00a873b0@@QAEXPAUS_a873b0_Stream@2@@Z": "0x00863100",
     "?DAT_011f6238@fnv_00a873b0@@3US_a873b0_Alloc@1@A": "0x01090a78",
     "?FUN_00aa4060@S_a873b0_Alloc@fnv_00a873b0@@QAEXPAX@Z": "0x0086ba60",
@@ -535201,7 +535201,7 @@
     },
     {
      "address": "0x00851ad0",
-     "symbol": "?CopyEntries@FUN_00a871a0_cls@@QAEXPAUTarget@@I@Z",
+     "symbol": "?BSSegmentedTriShape_CopyMembers@FUN_00a871a0_cls@@QAEXPAUTarget@@I@Z",
      "size": 228
     },
     {
@@ -535226,7 +535226,7 @@
     },
     {
      "address": "0x00851e50",
-     "symbol": "?ReadEntries@FUN_00a87520_shell@@QAEXPAX@Z",
+     "symbol": "?BSSegmentedTriShape_SaveBinary@FUN_00a87520_shell@@QAEXPAX@Z",
      "size": 246
     }
    ],
@@ -535244,7 +535244,7 @@
     "?Free@DynamicMemoryAllocator@@QAEXPAX@Z": "0x0086ba60",
     "?FUN_00aa3e40@DynamicMemoryAllocator@@QAEPAXI@Z": "0x0086b930",
     "?FUN_00a744a0@FUN_00a744a0_shell@@QAEXXZ": "0x0083f520",
-    "?CopyEntries@FUN_00a871a0_shell@@QAEXPAXI@Z": "0x00851ad0",
+    "?BSSegmentedTriShape_CopyMembers@FUN_00a871a0_shell@@QAEXPAXI@Z": "0x00851ad0",
     "?FUN_00a98ea0@S_a873b0_Base@fnv_00a873b0@@QAEXPAUS_a873b0_Stream@2@@Z": "0x00863100",
     "?DAT_011f6238@fnv_00a873b0@@3US_a873b0_Alloc@1@A": "0x01090a78",
     "?FUN_00aa4060@S_a873b0_Alloc@fnv_00a873b0@@QAEXPAX@Z": "0x0086ba60",
@@ -535551,7 +535551,7 @@
     },
     {
      "address": "0x00823d60",
-     "symbol": "?ReadMatrixFromStream@FUN_00a59a90_cls@@QAEXPAX@Z",
+     "symbol": "?NiMatrix3_SaveBinary@FUN_00a59a90_cls@@QAEXPAX@Z",
      "size": 96
     }
    ],
@@ -535730,7 +535730,7 @@
    ],
    "symbols": {
     "?Cross@NiPoint3@@QBE?AV1@ABV1@@Z": "0x00475280",
-    "?EnsureNormals@NiTriShapeDataStandIn@@QAEX_N@Z": "0x00830d30",
+    "?NiGeometryData_CreateNormals@NiTriShapeDataStandIn@@QAEX_N@Z": "0x00830d30",
     "?FUN_00525340@NiPoint3@@SAXAAV1@@Z": "0x004bbc10",
     "?NormalizePoints@NiPoint3@@SAXPAV1@II@Z": "0x00849220",
     "?FUN_00a67090@NiTriShapeDataStandIn@@QAEXI@Z": "0x008313b0"
@@ -535749,12 +535749,12 @@
    "functions": [
     {
      "address": "0x00855960",
-     "symbol": "?GenerateNormals@S_00a8ab40_NiTriStripsData@@QAEXXZ",
+     "symbol": "?NiTriStripsData_CalculateNormals@S_00a8ab40_NiTriStripsData@@QAEXXZ",
      "size": 552
     }
    ],
    "symbols": {
-    "?EnsureNormals@S_00a8ab40_NiTriStripsData@@QAEXH@Z": "0x00830d30",
+    "?NiGeometryData_CreateNormals@S_00a8ab40_NiTriStripsData@@QAEXH@Z": "0x00830d30",
     "?FUN_00525340@@YAXAAVNiPoint3_S@@@Z": "0x004bbc10",
     "?NormalizePoints@@YAXPAVNiPoint3_S@@II@Z": "0x00849220",
     "?FUN_00a67090@S_00a8ab40_NiTriStripsData@@QAEXH@Z": "0x008313b0"
@@ -536323,7 +536323,7 @@
     },
     {
      "address": "0x008bd530",
-     "symbol": "?CreateDerivedA43370@@YAPAUDerived_a43370@@XZ",
+     "symbol": "?BSTreadTransfInterpolator_CreateObject@@YAPAUDerived_a43370@@XZ",
      "size": 63
     },
     {
@@ -536702,7 +536702,7 @@
     "?FUN_00a5c180@FUN_00a59f00_cls@@QAE_NPAX@Z": "0x00824e10",
     "?SaveNiObjectLinks@Base00a5c5b0@fnv_00a5a900@@QAEXAAUNiStream@2@@Z": "0x00825240",
     "?SaveBinary@NiColor@fnv_00a5a900@@QAEXAAUNiStream@2@@Z": "0x0083fa20",
-    "?ReadMatrixFromStream@Sub34@fnv_00a5a900@@QAEXAAUNiStream@2@@Z": "0x00823d60",
+    "?NiMatrix3_SaveBinary@Sub34@fnv_00a5a900@@QAEXAAUNiStream@2@@Z": "0x00823d60",
     "?NiMalloc@fnv_00a5a900@@YAPAXI@Z": "0x0089e810",
     "?NiFree@fnv_00a5a900@@YAXPAX@Z": "0x0089e890",
     "??_7FUN_00a5aa20_cls@@6B@": "0x00e20b2c",
@@ -536807,7 +536807,7 @@
     },
     {
      "address": "0x00826560",
-     "symbol": "?SetParent@FUN_00a59d00_shell@@QAEXPAUNiNode@@@Z",
+     "symbol": "?NiAVObject_AttachParent@FUN_00a59d00_shell@@QAEXPAUNiNode@@@Z",
      "size": 43
     },
     {
@@ -536997,7 +536997,7 @@
     "?FUN_00a5c180@FUN_00a59f00_cls@@QAE_NPAX@Z": "0x00824e10",
     "?SaveNiObjectLinks@Base00a5c5b0@fnv_00a5a900@@QAEXAAUNiStream@2@@Z": "0x00825240",
     "?SaveBinary@NiColor@fnv_00a5a900@@QAEXAAUNiStream@2@@Z": "0x0083fa20",
-    "?ReadMatrixFromStream@Sub34@fnv_00a5a900@@QAEXAAUNiStream@2@@Z": "0x00823d60",
+    "?NiMatrix3_SaveBinary@Sub34@fnv_00a5a900@@QAEXAAUNiStream@2@@Z": "0x00823d60",
     "?NiMalloc@fnv_00a5a900@@YAPAXI@Z": "0x0089e810",
     "?NiFree@fnv_00a5a900@@YAXPAX@Z": "0x0089e890",
     "??_7FUN_00a5aa20_cls@@6B@": "0x00e20b2c",
@@ -537170,7 +537170,7 @@
     },
     {
      "address": "0x0086b270",
-     "symbol": "?QuickSort@NiBackToFrontAccumulator@@QAEXHH@Z",
+     "symbol": "?SortObjectsByDepth@NiBackToFrontAccumulator@@QAEXHH@Z",
      "size": 192
     },
     {
@@ -537884,7 +537884,7 @@
     },
     {
      "address": "0x0083af80",
-     "symbol": "?UpdateWorldToCamera@S00a70ba0_Cam@@QAEXXZ",
+     "symbol": "?NiCamera_WorldToCameraMatrix@S00a70ba0_Cam@@QAEXXZ",
      "size": 947
     },
     {
@@ -538217,7 +538217,7 @@
     "?g_memoryManager@@3UMemoryManager@@A": "0x01090a78",
     "??_H@YGXPAXIHP6EPAX0@Z@Z": "0x00401020",
     "__real@00000000": "0x00eaad58",
-    "?SetFromFrustum@H74e10@@QAEXPAX0@Z": "0x0083ecb0",
+    "?NiFrustumPlanes_Set@H74e10@@QAEXPAX0@Z": "0x0083ecb0",
     "??_7FUN_00a69400@@6B@": "0x00e21a24",
     "??0A69400Frustum@@QAE@MMMMMM_N@Z": "0x0083bf60",
     "??0A69400Plane@@QAE@XZ": "0x00832f20",
@@ -538280,7 +538280,7 @@
     "?g_memoryManager@@3UMemoryManager@@A": "0x01090a78",
     "??_H@YGXPAXIHP6EPAX0@Z@Z": "0x00401020",
     "__real@00000000": "0x00eaad58",
-    "?SetFromFrustum@H74e10@@QAEXPAX0@Z": "0x0083ecb0",
+    "?NiFrustumPlanes_Set@H74e10@@QAEXPAX0@Z": "0x0083ecb0",
     "??_7FUN_00a69400@@6B@": "0x00e21a24",
     "??0A69400Frustum@@QAE@MMMMMM_N@Z": "0x0083bf60",
     "??0A69400Plane@@QAE@XZ": "0x00832f20",
@@ -538421,7 +538421,7 @@
     },
     {
      "address": "0x00857f90",
-     "symbol": "?ReadPixelData@DDSReader@@QAEPAUPixelData@@PAUImageStream@@PAU2@@Z",
+     "symbol": "?NiDDSReader_ReadFile@DDSReader@@QAEPAUPixelData@@PAUImageStream@@PAU2@@Z",
      "size": 904
     },
     {
@@ -538906,7 +538906,7 @@
     },
     {
      "address": "0x00844be0",
-     "symbol": "?ConvertMipLevel@NiDevImageConverter@@UAE_NAAVNiPixelData@@ABV2@H@Z",
+     "symbol": "?ConvertPixelDataFormat@NiDevImageConverter@@UAE_NAAVNiPixelData@@ABV2@H@Z",
      "size": 2437
     }
    ],
@@ -539005,7 +539005,7 @@
     "?ExpandPixelData@PixelDataExpander@@QAEPAVNiPixelData@@ABV2@@Z": "0x00856cd0",
     "??4?$NiPointer@VNiPixelData@@@@QAEAAV0@PAVNiPixelData@@@Z": "0x008e9650",
     "?FUN_00a77920@@YA_NI@Z": "0x00841fb0",
-    "?GenerateMipmaps@NiDevImageConverterEx@@QAEPAVNiPixelData@@PBV2@PAV2@@Z": "0x00842720",
+    "?NiDevImageConverter_GenerateMipmapLevels@NiDevImageConverterEx@@QAEPAVNiPixelData@@PBV2@PAV2@@Z": "0x00842720",
     "??1?$NiPointer@VNiPixelData@@@@QAE@XZ": "0x00424aa0",
     "?ms_pFreeList@?$PoolAllocatorBase@I@@2PAULinkedListEntry@1@A": "0x0106e588",
     "??0NiPalette@@QAE@ABV0@@Z": "0x00855ee0",
@@ -539088,7 +539088,7 @@
     },
     {
      "address": "0x00842260",
-     "symbol": "?ReadFileWithReader@Converter@fnv_00a77bd0@@QAE_NPBDAAH1111@Z",
+     "symbol": "?NiDevImageConverter_ReadImageFileInfo@Converter@fnv_00a77bd0@@QAE_NPBDAAH1111@Z",
      "size": 319
     },
     {
@@ -539098,22 +539098,22 @@
     },
     {
      "address": "0x008424d0",
-     "symbol": "?CanConvertPixelFormat@NiDevImageConverter@@UAE_NABVNiPixelFormat@@0@Z",
+     "symbol": "?CanConvertPixelData@NiDevImageConverter@@UAE_NABVNiPixelFormat@@0@Z",
      "size": 459
     },
     {
      "address": "0x008426a0",
-     "symbol": "?IsSupportedDestinationFormat@NiDevImageConverter@@UAE_NABVNiPixelFormat@@@Z",
+     "symbol": "?IsAnAlphaSupportedMipmapGenerationFormat@NiDevImageConverter@@UAE_NABVNiPixelFormat@@@Z",
      "size": 63
     },
     {
      "address": "0x008426e0",
-     "symbol": "?IsSupportedSourceFormat@NiDevImageConverter@@UAE_NABVNiPixelFormat@@@Z",
+     "symbol": "?IsANonAlphaSupportedMipmapGenerationFormat@NiDevImageConverter@@UAE_NABVNiPixelFormat@@@Z",
      "size": 63
     },
     {
      "address": "0x00842720",
-     "symbol": "?GenerateMipmaps@Converter@Mipmap@@QAEPAUImage@2@PAU32@0@Z",
+     "symbol": "?NiDevImageConverter_GenerateMipmapLevels@Converter@Mipmap@@QAEPAUImage@2@PAU32@0@Z",
      "size": 1290
     },
     {
@@ -539123,7 +539123,7 @@
     },
     {
      "address": "0x00842ce0",
-     "symbol": "?SelectPlatformFormat@FUN_00a78630_shell@@QAEPAXHPAX00@Z",
+     "symbol": "?NiDevImageConverter_FindClosestPixelFormat@FUN_00a78630_shell@@QAEPAXHPAX00@Z",
      "size": 164
     },
     {
@@ -539133,7 +539133,7 @@
     },
     {
      "address": "0x00842fc0",
-     "symbol": "?SelectFormat@ImageConverter_a78910@@QAEPBVNiPixelFormat@@ABUFormatPrefs_a78910@@ABV2@1@Z",
+     "symbol": "?NiDevImageConverter_FindClosestPixelFormatXenon@ImageConverter_a78910@@QAEPBVNiPixelFormat@@ABUFormatPrefs_a78910@@ABV2@1@Z",
      "size": 317
     },
     {
@@ -539312,7 +539312,7 @@
     "?ExpandPixelData@PixelDataExpander@@QAEPAVNiPixelData@@ABV2@@Z": "0x00856cd0",
     "??4?$NiPointer@VNiPixelData@@@@QAEAAV0@PAVNiPixelData@@@Z": "0x008e9650",
     "?FUN_00a77920@@YA_NI@Z": "0x00841fb0",
-    "?GenerateMipmaps@NiDevImageConverterEx@@QAEPAVNiPixelData@@PBV2@PAV2@@Z": "0x00842720",
+    "?NiDevImageConverter_GenerateMipmapLevels@NiDevImageConverterEx@@QAEPAVNiPixelData@@PBV2@PAV2@@Z": "0x00842720",
     "??1?$NiPointer@VNiPixelData@@@@QAE@XZ": "0x00424aa0",
     "?ms_pFreeList@?$PoolAllocatorBase@I@@2PAULinkedListEntry@1@A": "0x0106e588",
     "??0NiPalette@@QAE@ABV0@@Z": "0x00855ee0",
@@ -539683,7 +539683,7 @@
     },
     {
      "address": "0x008649c0",
-     "symbol": "?CloneFloatExtraData@NiExtraData@@QAEPAXPAX@Z",
+     "symbol": "?NiFloatExtraData_CreateClone@NiExtraData@@QAEPAXPAX@Z",
      "size": 68
     },
     {
@@ -539796,7 +539796,7 @@
     },
     {
      "address": "0x00864670",
-     "symbol": "?CopyFloatsExtraData@NiFloatsExtraData_shell@@QAEXPAUNiFloatsExtraData@@PAUCloningProcess@@@Z",
+     "symbol": "?NiFloatsExtraData_CopyMembers@NiFloatsExtraData_shell@@QAEXPAUNiFloatsExtraData@@PAUCloningProcess@@@Z",
      "size": 108
     },
     {
@@ -540060,7 +540060,7 @@
     "?CopyMemberData@NiAVObject@@QAEXXZ": "0x00854cd0",
     "?NiAVObject_SetSelectiveUpdateFlags@FUN_00a5a450_helper@@QAEXPA_N_N0@Z": "0x00826c40",
     "?ms_pRenderer@NiRenderer@fnv_00a80930@@2PAURendererView@2@A": "0x0108f048",
-    "?SetDataConsistency@ConsStub@fnv_00a80930@@QAEXH@Z": "0x00831380",
+    "?SetConsistency@ConsStub@fnv_00a80930@@QAEXH@Z": "0x00831380",
     "?FUN_00a59f00@FUN_00a80430_Holder@@QAE_NAAVNiStream@@@Z": "0x00826760",
     "?FUN_00a59e50@BaseStub@@QAEXPAUNiRenderer@@@Z": "0x008266b0",
     "?NiAVObject_IsEqual@S_00a80470_Owner@@QAE_NPAUS_00a80470_Data@@@Z": "0x00826ad0",
@@ -540170,7 +540170,7 @@
     },
     {
      "address": "0x0084b4a0",
-     "symbol": "?UpdateSelectiveUpdateFlags@FUN_00a808f0_shell@@QAEXPA_N_N0@Z",
+     "symbol": "?NiGeometry_SetSelectiveUpdateFlags@FUN_00a808f0_shell@@QAEXPA_N_N0@Z",
      "size": 54
     },
     {
@@ -540242,7 +540242,7 @@
     "?CopyMemberData@NiAVObject@@QAEXXZ": "0x00854cd0",
     "?NiAVObject_SetSelectiveUpdateFlags@FUN_00a5a450_helper@@QAEXPA_N_N0@Z": "0x00826c40",
     "?ms_pRenderer@NiRenderer@fnv_00a80930@@2PAURendererView@2@A": "0x0108f048",
-    "?SetDataConsistency@ConsStub@fnv_00a80930@@QAEXH@Z": "0x00831380",
+    "?SetConsistency@ConsStub@fnv_00a80930@@QAEXH@Z": "0x00831380",
     "?FUN_00a59f00@FUN_00a80430_Holder@@QAE_NAAVNiStream@@@Z": "0x00826760",
     "?FUN_00a59e50@BaseStub@@QAEXPAUNiRenderer@@@Z": "0x008266b0",
     "?NiAVObject_IsEqual@S_00a80470_Owner@@QAE_NPAUS_00a80470_Data@@@Z": "0x00826ad0",
@@ -540345,7 +540345,7 @@
     "?FUN_00aa3e40@FUN_00a5e3a0_Helper@fnv_00a66a60@@QAEPAXI@Z": "0x0086b930",
     "?DeallocateAlias@MemoryManager@fnv_00a66a60@@QAEXPAX@Z": "0x0086ba60",
     "?FUN_00a72720@NiRenderObj30@@QAEXIPAI00000@Z": "0x0083cac0",
-    "?MedianOfThree@FUN_00a67dd0_cls@@QAEIPAGIHH@Z": "0x008315d0",
+    "?NiGeometryData_ChoosePivot@FUN_00a67dd0_cls@@QAEIPAGIHH@Z": "0x008315d0",
     "?CompareVertices@FUN_00a67dd0_cls@@QAEHIII@Z": "0x008310e0",
     "?DAT_011f4880@fnv_00a68520@@3PAVNiObjectGroup@1@A": "0x0108f280",
     "?FUN_00a634f0@SaveStream@fnv_00a68520@@QAEIPAVNiObjectGroup@2@@Z": "0x0082a340",
@@ -540406,7 +540406,7 @@
     },
     {
      "address": "0x00830d30",
-     "symbol": "?EnsureNormals@GeomNormals@@QAEX_N@Z",
+     "symbol": "?NiGeometryData_CreateNormals@GeomNormals@@QAEX_N@Z",
      "size": 106
     },
     {
@@ -540451,17 +540451,17 @@
     },
     {
      "address": "0x00831380",
-     "symbol": "?SetDataConsistency@NiGeometryData@@QAEXW4Consistency@1@@Z",
+     "symbol": "?SetConsistency@NiGeometryData@@QAEXW4Consistency@1@@Z",
      "size": 45
     },
     {
      "address": "0x008313b0",
-     "symbol": "?SetDirtyFlags@NiGeometryData@@QAEXI@Z",
+     "symbol": "?MarkAsChanged@NiGeometryData@@QAEXI@Z",
      "size": 41
     },
     {
      "address": "0x00831680",
-     "symbol": "?IsGeometryDataStreamable@NiGeometryData@@QAE_N_N@Z",
+     "symbol": "?LockPackedVertexData@NiGeometryData@@QAE_N_N@Z",
      "size": 105
     },
     {
@@ -540471,7 +540471,7 @@
     },
     {
      "address": "0x008318d0",
-     "symbol": "?GetBounds@RenderOwner@@QAEXPAUBoundOut@@@Z",
+     "symbol": "?NiGeometryData_GetNormalsIterator@RenderOwner@@QAEXPAUBoundOut@@@Z",
      "size": 169
     },
     {
@@ -540607,7 +540607,7 @@
     "?FUN_00aa3e40@FUN_00a5e3a0_Helper@fnv_00a66a60@@QAEPAXI@Z": "0x0086b930",
     "?DeallocateAlias@MemoryManager@fnv_00a66a60@@QAEXPAX@Z": "0x0086ba60",
     "?FUN_00a72720@NiRenderObj30@@QAEXIPAI00000@Z": "0x0083cac0",
-    "?MedianOfThree@FUN_00a67dd0_cls@@QAEIPAGIHH@Z": "0x008315d0",
+    "?NiGeometryData_ChoosePivot@FUN_00a67dd0_cls@@QAEIPAGIHH@Z": "0x008315d0",
     "?CompareVertices@FUN_00a67dd0_cls@@QAEHIII@Z": "0x008310e0",
     "?DAT_011f4880@fnv_00a68520@@3PAVNiObjectGroup@1@A": "0x0108f280",
     "?FUN_00a634f0@SaveStream@fnv_00a68520@@QAEIPAVNiObjectGroup@2@@Z": "0x0082a340",
@@ -541095,7 +541095,7 @@
     },
     {
      "address": "0x008410a0",
-     "symbol": "?CreateImageConverter@@YAXXZ",
+     "symbol": "?NiImageConverter__SDMInit@@YAXXZ",
      "size": 127
     }
    ],
@@ -541144,7 +541144,7 @@
     "??3FUN_00a76bb0@fnv_00a76bb0@@SAXPAXI@Z": "0x0089ec10",
     "??0PathParts@@QAE@PBD@Z": "0x008a04f0",
     "?FUN_00aa1a20@InputFile@@SAPAU1@PBDHI@Z": "0x0089f1d0",
-    "?CreateImageConverter@@YAXXZ": "0x008410a0",
+    "?NiImageConverter__SDMInit@@YAXXZ": "0x008410a0",
     "??3@YAXPAX@Z": "0x00401010",
     "?DAT_012003f4@@3PAURefCounted@@A": "0x0108f47c",
     "?GetFile@NiFile@@SAPAV1@PBDW4OpenMode@1@I@Z": "0x0089f1d0",
@@ -541179,12 +541179,12 @@
     },
     {
      "address": "0x00840db0",
-     "symbol": "?LoadImage@ImageOwner@@QAEPAUImageResult@@PBDPAU2@PAUInputFile@@@Z",
+     "symbol": "?NiImageConverter_ReadImageFile@ImageOwner@@QAEPAUImageResult@@PBDPAU2@PAUInputFile@@@Z",
      "size": 200
     },
     {
      "address": "0x00840e80",
-     "symbol": "?ArePixelFormatsEqual@@YG_NPAX0@Z",
+     "symbol": "?NiImageConverter_CanConvertPixelData@@YG_NPAX0@Z",
      "size": 17
     },
     {
@@ -541263,7 +541263,7 @@
     "??3FUN_00a76bb0@fnv_00a76bb0@@SAXPAXI@Z": "0x0089ec10",
     "??0PathParts@@QAE@PBD@Z": "0x008a04f0",
     "?FUN_00aa1a20@InputFile@@SAPAU1@PBDHI@Z": "0x0089f1d0",
-    "?CreateImageConverter@@YAXXZ": "0x008410a0",
+    "?NiImageConverter__SDMInit@@YAXXZ": "0x008410a0",
     "??3@YAXPAX@Z": "0x00401010",
     "?DAT_012003f4@@3PAURefCounted@@A": "0x0108f47c",
     "?GetFile@NiFile@@SAPAV1@PBDW4OpenMode@1@I@Z": "0x0089f1d0"
@@ -541287,7 +541287,7 @@
     },
     {
      "address": "0x00863ef0",
-     "symbol": "?CreateIntegerExtraData@ExtraDataOwner@@QAEPAVNiIntegerExtraData@@I@Z",
+     "symbol": "?NiIntegerExtraData_CreateClone@ExtraDataOwner@@QAEPAVNiIntegerExtraData@@I@Z",
      "size": 70
     },
     {
@@ -541967,7 +541967,7 @@
     "?FreeMemoryList@@YAXXZ": "0x008547a0",
     "?FUN_00a5b660@@YAXXZ": "0x00824200",
     "?FUN_00a5b630@@YAXXZ": "0x008243a0",
-    "?InitTrigTables@@YAXXZ": "0x0084bd30",
+    "?CreateSinTable@@YAXXZ": "0x0084bd30",
     "?FUN_00a9c2a0@@YAXXZ": "0x00866b20",
     "?FUN_00a927e0@@YAXXZ": "0x0085e590",
     "?NiAlphaProperty__SDMInit@@YAXXZ": "0x00826100",
@@ -541982,14 +541982,14 @@
     "?DAT_011f426c@@3UVector3@@A": "0x0108ec68",
     "?DAT_011f4294@@3MA": "0x0108edd4",
     "?DAT_011f4288@@3UVector3@@A": "0x0108edc8",
-    "?CreateImageConverter@@YAXXZ": "0x008410a0",
+    "?NiImageConverter__SDMInit@@YAXXZ": "0x008410a0",
     "?NiStream__SDMInit@@YAXXZ": "0x0082ce80",
     "?FUN_00a7f740@@YAXXZ": "0x00849ca0",
     "?DAT_0109df08@@3DB": "0x00e2387c",
     "?FUN_00a64900@@YAXPBXP6AXXZ@Z": "0x0082b9e0",
     "?FUN_00a73e20@@YAXXZ": "0x0083d510",
     "?DAT_0109d378@@3DB": "0x00e22c40",
-    "?CreateNiAlphaAccumulator@@YAXXZ": "0x00865d30",
+    "?NiAlphaAccumulator_CreateObject@@YAXXZ": "0x00865d30",
     "?DAT_0109f220@@3DB": "0x00e24a2c",
     "?CreateNiAlphaProperty@@YAXXZ": "0x008260d0",
     "?DAT_0109b4e0@@3DB": "0x00e20b14",
@@ -542052,7 +542052,7 @@
     "?DAT_0109f0d4@@3DB": "0x00e2467c",
     "?DAT_0109f0c4@@3DB": "0x00e248b4",
     "?FUN_00a982d0@@YAXXZ": "0x008624e0",
-    "?CreateSpawnedPixelData@@YAXXZ": "0x00846c00",
+    "?NiPixelData_CreateObject@@YAXXZ": "0x00846c00",
     "?DAT_0109dc94@@3DB": "0x00e235a4",
     "?FUN_00a7d6e0@@YAXXZ": "0x00847f70",
     "?DAT_0109de0c@@3DB": "0x00e23724",
@@ -542447,7 +542447,7 @@
    "functions": [
     {
      "address": "0x0084bd30",
-     "symbol": "?InitTrigTables@fnv_00a813c0@@YAXXZ",
+     "symbol": "?CreateSinTable@fnv_00a813c0@@YAXXZ",
      "size": 106
     }
    ],
@@ -542545,7 +542545,7 @@
     },
     {
      "address": "0x0082d750",
-     "symbol": "?ApplyTransformToChildren@StandInNode@@QAEXABUThreeByThreeMatrix@@ABUStandInPt3@@_N@Z",
+     "symbol": "?NiNode_ApplyTransform@StandInNode@@QAEXABUThreeByThreeMatrix@@ABUStandInPt3@@_N@Z",
      "size": 487
     },
     {
@@ -542761,7 +542761,7 @@
     "?SetAt@ChildArray@@QAEXIABQAUChildObj@@@Z": "0x00470f10",
     "?SetSize@?$NiTArrayA5E@V?$NiPointerA5E@VNiObjectA5E@@@@@@QAEXI@Z": "0x005574c0",
     "?SetAt@?$NiTArrayA5E@V?$NiPointerA5E@VNiObjectA5E@@@@@@QAEXIABV?$NiPointerA5E@VNiObjectA5E@@@@@Z": "0x00470f10",
-    "?SetParent@NiRefObject@@QAEXPAX@Z": "0x00826560",
+    "?NiAVObject_AttachParent@NiRefObject@@QAEXPAX@Z": "0x00826560",
     "?FUN_00a5ebe0@FUN_00a5edc0_sub@@QAEXPAVNiRefObject@@PAPAV2@@Z": "0x0082e990",
     "??2BA5EFA0AVObject@@SAPAXI@Z": "0x0089eb90",
     "??0BA5EFA0AVObject@@QAE@XZ": "0x00827190",
@@ -542787,7 +542787,7 @@
     "?FUN_0060bef0@ObjectArray@sa5e9d0@@QAEXI@Z": "0x005574c0",
     "?FUN_00a63430@Stream@sa5e9d0@@QAEPAUObject@2@XZ": "0x0082a280",
     "__imp_?InterlockedIncrement@fnv_00a5ed10@@YGJPCJ@Z": "0x00d9b068",
-    "?SetParent@ChildObj@fnv_00a5ed10@@QAEXPAUChildNode@2@@Z": "0x00826560",
+    "?NiAVObject_AttachParent@ChildObj@fnv_00a5ed10@@QAEXPAUChildNode@2@@Z": "0x00826560",
     "?FUN_00a5eb20@ChildArray@fnv_00a5ed10@@QAEXABUHeldChild@2@@Z": "0x0082e8d0",
     "?FUN_0060bef0@ChildArray@fnv_00a5ed10@@QAEXI@Z": "0x005574c0",
     "?FUN_004b0310@ChildArray@fnv_00a5ed10@@QAEXIABUHeldChild@2@@Z": "0x00470f10",
@@ -542849,7 +542849,7 @@
     },
     {
      "address": "0x00824c30",
-     "symbol": "?ClearExtraData@FUN_00a5bfa0_shell@@QAEXXZ",
+     "symbol": "?NiObjectNET_RemoveAllExtraData@FUN_00a5bfa0_shell@@QAEXXZ",
      "size": 93
     },
     {
@@ -542955,7 +542955,7 @@
     "?AddExtraData@NiObjectNET@@QAE_NPAVNiExtraData@@@Z": "0x00824920",
     "?DeleteExtraData@NiExtraDataDeleteProxy@@QAEXG@Z": "0x00824610",
     "?DAT_0109b23c@@3HA": "0x00db97d4",
-    "?WriteObjectLink@VStream@fnv_00a5c5b0@@QAEXPAVNiFixedString@@@Z": "0x0082b000",
+    "?NiStream_SaveFixedString@VStream@fnv_00a5c5b0@@QAEXPAVNiFixedString@@@Z": "0x0082b000",
     "?CreateVertexBufferSet@FUN_00a5d450_holder@fnv_00a5c290@@QAEXPAVNiBinaryExtraData@2@PAUCloningProcess@2@@Z": "0x008258b0",
     "?_EmptyFS@fnv_00a5c290@@3PADA": "0x00e207a8",
     "?strcpy_s@fnv_00a5c290@@YAHPADIPBD@Z": "0x00c007fc",
@@ -543242,7 +543242,7 @@
     },
     {
      "address": "0x0085a0f0",
-     "symbol": "?CreateObjA8F260@@YAPAXHH@Z",
+     "symbol": "?Ni2DBuffer_Create@@YAPAXHH@Z",
      "size": 87
     },
     {
@@ -543758,7 +543758,7 @@
     "?FUN_00a80580@@YAXXZ": "0x0084b120",
     "?NiGeometry_PurgeRendererData@HackBase@@QAEXPAVNiRenderer@@@Z": "0x0084b560",
     "?FUN_00a9b2e0@Caller@@QAEXPAU?$NiTPrimitiveArray@PADU?$NiTMallocInterface@PAD@@@@@Z": "0x008b2830",
-    "?UpdateSelectiveUpdateFlags@FUN_00a808f0_shell@@QAEXPA_N_N0@Z": "0x0084b4a0",
+    "?NiGeometry_SetSelectiveUpdateFlags@FUN_00a808f0_shell@@QAEXPA_N_N0@Z": "0x0084b4a0",
     "?UpdatePropertiesDownwardPass@NiGeometry@fnv_00a99040@@UAEXPAUNiPropertyState@2@@Z": "0x0084b3c0",
     "?FUN_00a59f90@S_00a98e30@@QAEXPAUS_00a98e30_Val@@H@Z": "0x008267f0",
     "?UpdateDownwardPassIfSelective@S_00a98e50_Base@@QAEXAAUS_00a98e50_UpdateData@@@Z": "0x00826830",
@@ -543766,7 +543766,7 @@
     "?DAT_010a0a6c@@3DB": "0x00e26274",
     "?FUN_00a9b140@FUN_00a98f00_shell@@QAEXPAUCreatedObj@@PAX@Z": "0x00853ec0",
     "?UpdateWorldData@A98F60AVObject@@UAEXAAUNiUpdateData@@@Z": "0x00833110",
-    "?UpdateParticleMeshes@A98F60Renderer@@QAEXXZ": "0x00862ef0",
+    "?NiParticleMeshesData_UpdateParticles@A98F60Renderer@@QAEXXZ": "0x00862ef0",
     "?FUN_00a5a040@A98F60AVObject@@QAEXXZ": "0x008268a0",
     "?FUN_00a29680@A98F60AVObject@@QAEXXZ": "0x00c24b70",
     "??3@YAXPAX@Z": "0x00401010",
@@ -543807,7 +543807,7 @@
     },
     {
      "address": "0x00862d20",
-     "symbol": "?IsMeshNodeEqual@Holder@@QAE_NPAX@Z",
+     "symbol": "?NiParticleMeshesData_IsEqual@Holder@@QAE_NPAX@Z",
      "size": 47
     },
     {
@@ -543822,12 +543822,12 @@
     },
     {
      "address": "0x00862e40",
-     "symbol": "?RemoveParticleMesh@A98BF0ParticleMeshesData@@QAEXG@Z",
+     "symbol": "?NiParticleMeshesData_RemoveParticle@A98BF0ParticleMeshesData@@QAEXG@Z",
      "size": 162
     },
     {
      "address": "0x00862ef0",
-     "symbol": "?UpdateParticleMeshes@FUN_00a98c90_shell@@QAEXXZ",
+     "symbol": "?NiParticleMeshesData_UpdateParticles@FUN_00a98c90_shell@@QAEXXZ",
      "size": 154
     },
     {
@@ -543917,7 +543917,7 @@
     "?_FUN_00a7d330@@YAPADPBD@Z": "0x00847b50",
     "?SetSize@StrArr@@QAEXI@Z": "0x00555790",
     "?SetAt@StrArr@@QAEXIAAPAD@Z": "0x005b3880",
-    "?SetDataConsistency@NiGeometryData@@QAEXW4Consistency@1@@Z": "0x00831380",
+    "?SetConsistency@NiGeometryData@@QAEXW4Consistency@1@@Z": "0x00831380",
     "?FUN_00a80580@DtorObj@@QAEXXZ": "0x0084b120",
     "?FUN_00a80610@FUN_00a80610_This@@QAEXPAX@Z": "0x0084b1b0",
     "?FUN_00a80e70@@YGXPAUStrArr@@@Z": "0x00838420",
@@ -543968,7 +543968,7 @@
     "?CreateDebugString@@YAPADPBDG@Z": "0x00847ce0",
     "?FUN_00a67c00@@YIXPAX@Z": "0x00831f30",
     "?DAT_010a05e4@@3PADA": "0x00e24fb4",
-    "?SetDataConsistency@NiGeometryData_SetConsistency_View@@QAEXH@Z": "0x00831380",
+    "?SetConsistency@NiGeometryData_SetConsistency_View@@QAEXH@Z": "0x00831380",
     "?FUN_00a96800@@YAXXZ": "0x0085a770",
     "?FUN_00a966c0@ParticleViewData@@QAEXHH@Z": "0x0085a630",
     "?FUN_00a67050@Obj_a96@@QAEXH@Z": "0x00831380",
@@ -544034,7 +544034,7 @@
     },
     {
      "address": "0x0085a810",
-     "symbol": "?SetRotations@NiParticlesData@@QAEXPAVNiQuaternion@@@Z",
+     "symbol": "?ReplaceRotations@NiParticlesData@@QAEXPAVNiQuaternion@@@Z",
      "size": 28
     },
     {
@@ -544091,7 +544091,7 @@
     "?CreateDebugString@@YAPADPBDG@Z": "0x00847ce0",
     "?FUN_00a67c00@@YIXPAX@Z": "0x00831f30",
     "?DAT_010a05e4@@3PADA": "0x00e24fb4",
-    "?SetDataConsistency@NiGeometryData_SetConsistency_View@@QAEXH@Z": "0x00831380",
+    "?SetConsistency@NiGeometryData_SetConsistency_View@@QAEXH@Z": "0x00831380",
     "?FUN_00a96800@@YAXXZ": "0x0085a770",
     "?FUN_00a966c0@ParticleViewData@@QAEXHH@Z": "0x0085a630",
     "?FUN_00a67050@Obj_a96@@QAEXH@Z": "0x00831380",
@@ -544396,7 +544396,7 @@
     },
     {
      "address": "0x00846c00",
-     "symbol": "?CreateSpawnedPixelData@@YAPAXXZ",
+     "symbol": "?NiPixelData_CreateObject@@YAPAXXZ",
      "size": 82
     },
     {
@@ -544850,7 +544850,7 @@
     },
     {
      "address": "0x00837410",
-     "symbol": "?SnapSmallComponentsToZero@NiQuaternionA6E@@QAEXXZ",
+     "symbol": "?NiQuaternion_Snap@NiQuaternionA6E@@QAEXXZ",
      "size": 148
     },
     {
@@ -544914,7 +544914,7 @@
     "?DAT_011F3FF0@@3MA": "0x0108f3e8",
     "__real@3fed496aa0000000": "0x00e21f98",
     "__real@3f26f151": "0x00e21f90",
-    "?SnapSmallComponentsToZero@FUN_00a6e4a0_shell@@QAEXXZ": "0x00837410",
+    "?NiQuaternion_Snap@FUN_00a6e4a0_shell@@QAEXXZ": "0x00837410",
     "?DAT_0101a6b0@@3NA": "0x00dc0438",
     "?DAT_0109c9c4@@3MA": "0x00e21f74",
     "?FUN_00a2bcf0@Quaternion@@QAEPAU1@PAU1@PBU1@@Z": "0x00836e40",
@@ -545299,7 +545299,7 @@
     },
     {
      "address": "0x00c222a0",
-     "symbol": "?CreateShaderLevel@@YAPAVShaderLevelEE8@@IPAVRendererEE8@@@Z",
+     "symbol": "?NiRenderTargetGroup_Create@@YAPAVShaderLevelEE8@@IPAVRendererEE8@@@Z",
      "size": 72
     },
     {
@@ -545468,7 +545468,7 @@
     "?FUN_00ec44d0@@YAPAXPAXPBXI@Z": "0x00bffa60",
     "?FUN_00a7d5a0@@YAPADPBDPAX@Z": "0x00847e20",
     "?FUN_00a7d490@@YAPADPBDG@Z": "0x00847ce0",
-    "?SetDirtyFlags@NiGeometryData@@QAEXI@Z": "0x008313b0",
+    "?MarkAsChanged@NiGeometryData@@QAEXI@Z": "0x008313b0",
     "?FUN_00a66960@NiGeometryData@@QAEPAVNiPoint2@@G@Z": "0x00830ca0",
     "?DAT_0109ea94@@3HA": "0x00e241e4",
     "?AppendTriListInfo@Obj@@QAEXPAUStrArr@@@Z": "0x00846510",
@@ -545531,7 +545531,7 @@
     },
     {
      "address": "0x00852c60",
-     "symbol": "?LoadScreenElementsData@FUN_00a88410_shell@@QAEXAAUNiStream485@@@Z",
+     "symbol": "?NiScreenElementsData_LoadBinary@FUN_00a88410_shell@@QAEXAAUNiStream485@@@Z",
      "size": 381
     },
     {
@@ -545556,7 +545556,7 @@
     "?FUN_00ec44d0@@YAPAXPAXPBXI@Z": "0x00bffa60",
     "?FUN_00a7d5a0@@YAPADPBDPAX@Z": "0x00847e20",
     "?FUN_00a7d490@@YAPADPBDG@Z": "0x00847ce0",
-    "?SetDirtyFlags@NiGeometryData@@QAEXI@Z": "0x008313b0",
+    "?MarkAsChanged@NiGeometryData@@QAEXI@Z": "0x008313b0",
     "?FUN_00a66960@NiGeometryData@@QAEPAVNiPoint2@@G@Z": "0x00830ca0",
     "?DAT_0109ea94@@3HA": "0x00e241e4",
     "?AppendTriListInfo@Obj@@QAEXPAUStrArr@@@Z": "0x00846510",
@@ -546101,7 +546101,7 @@
     },
     {
      "address": "0x00866950",
-     "symbol": "?LookupShaderConstantMapping@@YA_NPBDPAI@Z",
+     "symbol": "?NiShaderConstantMap_LookUpObjectMapping@@YA_NPBDPAI@Z",
      "size": 73
     },
     {
@@ -546726,7 +546726,7 @@
     },
     {
      "address": "0x00850d60",
-     "symbol": "?GetGlobalAddress@@YAHXZ",
+     "symbol": "?NiSkinData_GetRTTI@@YAHXZ",
      "size": 6
     },
     {
@@ -546970,7 +546970,7 @@
     "_FNV_cmp_us_821f0": "0x0084cff0",
     "_FNV_search_821f0": "0x00c01467",
     "?FUN_00a82050@WeightedMap@@QAEXPAXM@Z": "0x0084d630",
-    "?BuildBoneLODControllerSets@SkinBuilder@@QAEXPAUSkinGeom@@PAXPAUSkinItems@@PAH@Z": "0x0084f3e0",
+    "?NiSkinPartition_CreateInitialBoneSets@SkinBuilder@@QAEXPAUSkinGeom@@PAXPAUSkinItems@@PAH@Z": "0x0084f3e0",
     "?NiSkinPartition_MergeBoneSets@SkinBuilder@@QAEXIPAUSkinItems@@@Z": "0x0084f040",
     "??_7SkinMap@@6B@": "0x00dbf220",
     "??_7SkinPointerMap@@6B@": "0x00dbf2e0",
@@ -547125,17 +547125,17 @@
     },
     {
      "address": "0x0084dee0",
-     "symbol": "?PopulateSkinData@Skp_00a828d0_cls@@QAEXPAUGeomData@@PAUSkp_00a828d0_src@@PAXPAUSkp_00a828d0_grp@@_N4EI@Z",
+     "symbol": "?NiSkinPartition_Partition_Create@Skp_00a828d0_cls@@QAEXPAUGeomData@@PAUSkp_00a828d0_src@@PAXPAUSkp_00a828d0_grp@@_N4EI@Z",
      "size": 935
     },
     {
      "address": "0x0084e2b0",
-     "symbol": "?FindMatchingItem@@YAHPAUItemSet@@PBGPBXPAEE@Z",
+     "symbol": "?NiSkinPartition_AssignTriangle@@YAHPAUItemSet@@PBGPBXPAEE@Z",
      "size": 95
     },
     {
      "address": "0x0084e350",
-     "symbol": "?AppendMatchingIndices@C082d30@@QAEXHPAHI@Z",
+     "symbol": "?NiSkinPartition_TriangleSet_AddTriangles@C082d30@@QAEXHPAHI@Z",
      "size": 84
     },
     {
@@ -547155,7 +547155,7 @@
     },
     {
      "address": "0x0084e9f0",
-     "symbol": "?ReduceGroupWeights@Processor@SkinWeights@@QAE_NPAUGeometry@2@EEPAUGroup@2@@Z",
+     "symbol": "?NiSkinPartition_RemoveExcessInteractions@Processor@SkinWeights@@QAE_NPAUGeometry@2@EEPAUGroup@2@@Z",
      "size": 1612
     },
     {
@@ -547165,12 +547165,12 @@
     },
     {
      "address": "0x0084f3e0",
-     "symbol": "?BuildBoneLODControllerSets@@YGXPAUScriptProgram@@PAUBoneWeights@@PAU?$BoneArray@PAUBoneLODControllerArray@@@@PAI@Z",
+     "symbol": "?NiSkinPartition_CreateInitialBoneSets@@YGXPAUScriptProgram@@PAUBoneWeights@@PAU?$BoneArray@PAUBoneLODControllerArray@@@@PAI@Z",
      "size": 1521
     },
     {
      "address": "0x0084f9e0",
-     "symbol": "?BuildTriangleSetMapping@SkinBuilder@@QAE_NPAUSkinGeom@@PAXI1PAUSkinItems@@PAPAHPAH@Z",
+     "symbol": "?NiSkinPartition_MakeBoneSets@SkinBuilder@@QAE_NPAUSkinGeom@@PAXI1PAUSkinItems@@PAPAHPAH@Z",
      "size": 970
     },
     {
@@ -547241,7 +547241,7 @@
     "_FNV_cmp_us_821f0": "0x0084cff0",
     "_FNV_search_821f0": "0x00c01467",
     "?FUN_00a82050@WeightedMap@@QAEXPAXM@Z": "0x0084d630",
-    "?BuildBoneLODControllerSets@SkinBuilder@@QAEXPAUSkinGeom@@PAXPAUSkinItems@@PAH@Z": "0x0084f3e0",
+    "?NiSkinPartition_CreateInitialBoneSets@SkinBuilder@@QAEXPAUSkinGeom@@PAXPAUSkinItems@@PAH@Z": "0x0084f3e0",
     "?NiSkinPartition_MergeBoneSets@SkinBuilder@@QAEXIPAUSkinItems@@@Z": "0x0084f040",
     "??_7SkinMap@@6B@": "0x00dbf220",
     "??_7SkinPointerMap@@6B@": "0x00dbf2e0",
@@ -547470,7 +547470,7 @@
     },
     {
      "address": "0x00830080",
-     "symbol": "?EnsureProgramCreated@ShaderPass_a60@@QAEXXZ",
+     "symbol": "?NiSourceCubeMap_LoadPixelDataFromFile@ShaderPass_a60@@QAEXXZ",
      "size": 68
     },
     {
@@ -547757,7 +547757,7 @@
     },
     {
      "address": "0x00860190",
-     "symbol": "?WriteSpotLightData@LightSerialization@@QAEXPAUNiStreamArg@@@Z",
+     "symbol": "?NiSpotLight_SaveBinary@LightSerialization@@QAEXPAUNiStreamArg@@@Z",
      "size": 141
     }
    ],
@@ -548003,7 +548003,7 @@
     },
     {
      "address": "0x008d5000",
-     "symbol": "?InitHavokPhysics@@YAXXZ",
+     "symbol": "?bhkWorld_InitSystem@@YAXXZ",
      "size": 1289
     },
     {
@@ -548107,7 +548107,7 @@
     "??2BSFadeNode@fnv_00a647f0@@SAPAXI@Z": "0x0089eb90",
     "?FUN_00a8a620@QGroupCtor@fnv_00a647f0@@QAEPAUNiObjectGroup@2@I@Z": "0x00854e50",
     "??_C@_0CI@PHDLJOH@Gamebryo?5File?5Format?0?5Version?520@": "0x00e211cc",
-    "?AdvanceChars@NiBinaryStreamStandIn@@QAEXPBD@Z": "0x0089f770",
+    "?NiBinaryStream_PutS@NiBinaryStreamStandIn@@QAEXPBD@Z": "0x0089f770",
     "?g_uiNifMaxVersion_011a9b0c@@3IA": "0x00f72bd4",
     "?g_uiNifMaxUserVersion_011a9b10@@3IA": "0x00f72bd8",
     "?SetSize@?$NiTArray@PAVImageSpaceTexture@fnv_00a64b80@@V?$NiTMallocInterface@PAVImageSpaceTexture@fnv_00a64b80@@@2@@fnv_00a64b80@@QAEXI@Z": "0x00555790",
@@ -548202,9 +548202,9 @@
     "?FUN_00aa10f0@fnv_00a665f0@@YAXPAX@Z": "0x0089e890",
     "?FUN_00a63910@RtMapBase@fnv_00a665f0@@QAEXXZ": "0x0082a780",
     "?SetSize@?$NiTLargeArray@PAVTESForm@fnv_00a66850@@V?$NiTMallocInterface@PAVTESForm@fnv_00a66850@@@2@@fnv_00a66850@@QAEXI@Z": "0x006dc4b0",
-    "?WriteRTTIHeader@VStream@fnv_00a66850@@QAEXXZ": "0x0082d370",
+    "?NiStream_SaveRTTI@VStream@fnv_00a66850@@QAEXXZ": "0x0082d370",
     "?NiStream_SaveFixedStringTable@VStream@fnv_00a66850@@QAEXXZ": "0x0082ace0",
-    "?UpdateTextureSwapList@VStream@fnv_00a66850@@QAEXXZ": "0x0082bc60",
+    "?NiStream_UpdateObjectGroups@VStream@fnv_00a66850@@QAEXXZ": "0x0082bc60",
     "?WriteData@VStream@fnv_00a66850@@QAEXXZ": "0x0082ae20",
     "?RemoveAll@NiStreamTopObjects@fnv_00a66850@@QAEXXZ": "0x0082b150",
     "?RemoveAll@NiTMapBaseStub@fnv_00a66850@@QAEXXZ": "0x006bd950",
@@ -548234,7 +548234,7 @@
     "?FUN_00a63430@S_00ca76b0_Stream@@QAEPAUS_00ca76b0_Obj@@XZ": "0x0082a280",
     "?FreeBuffer@S_00ca76b0_Obj@@QAEXXZ": "0x00831330",
     "?FUN_00c84cc0@S_00ca76b0_Cls@@QAEXPAUS_00ca76b0_Stream@@@Z": "0x008f7450",
-    "__ehhandler$?InitHavokPhysics@@YAXXZ": "0x00c72a21",
+    "__ehhandler$?bhkWorld_InitSystem@@YAXXZ": "0x00c72a21",
     "?DAT_010f2a90@@3USettingValueOld@@A": "0x010f2a90",
     "?DAT_010f3408@@3_NA": "0x010f3408",
     "?DAT_010f2a9c@@3USettingValueOld@@A": "0x010f2a9c",
@@ -548539,7 +548539,7 @@
     },
     {
      "address": "0x0082ac60",
-     "symbol": "?SaveLinkIDs@NiStreamA63E@@QAE_NI@Z",
+     "symbol": "?NiStream_SaveObjectSizeTable@NiStreamA63E@@QAE_NI@Z",
      "size": 122
     },
     {
@@ -548559,7 +548559,7 @@
     },
     {
      "address": "0x0082b000",
-     "symbol": "?WriteObjectLink@FUN_00a641f0_cls@@QAEXPAX@Z",
+     "symbol": "?NiStream_SaveFixedString@FUN_00a641f0_cls@@QAEXPAX@Z",
      "size": 91
     },
     {
@@ -548594,7 +548594,7 @@
     },
     {
      "address": "0x0082b6b0",
-     "symbol": "?ReadLinks@LinkLoader@@QAE_NXZ",
+     "symbol": "?NiStream_LoadObjectSizeTable@LinkLoader@@QAE_NXZ",
      "size": 180
     },
     {
@@ -548619,12 +548619,12 @@
     },
     {
      "address": "0x0082ba20",
-     "symbol": "?WriteHeader@NiStreamImpl@@QAEXXZ",
+     "symbol": "?NiStream_SaveHeader@NiStreamImpl@@QAEXXZ",
      "size": 565
     },
     {
      "address": "0x0082bc60",
-     "symbol": "?UpdateTextureSwapList@ImageSpaceShaderW@fnv_00a64b80@@QAEXXZ",
+     "symbol": "?NiStream_UpdateObjectGroups@ImageSpaceShaderW@fnv_00a64b80@@QAEXXZ",
      "size": 295
     },
     {
@@ -548674,12 +548674,12 @@
     },
     {
      "address": "0x0082c470",
-     "symbol": "?ReadNifHeader@NiStreamImpl@fnv_00a65400@@QAE_NXZ",
+     "symbol": "?NiStream_LoadHeader@NiStreamImpl@fnv_00a65400@@QAE_NXZ",
      "size": 793
     },
     {
      "address": "0x0082c790",
-     "symbol": "?LoadTopObjects@ObjectLoadStream@fnv_00a65720@@QAEXXZ",
+     "symbol": "?NiStream_LoadTopLevelObjects@ObjectLoadStream@fnv_00a65720@@QAEXXZ",
      "size": 221
     },
     {
@@ -548709,7 +548709,7 @@
     },
     {
      "address": "0x0082d370",
-     "symbol": "?WriteRTTIHeader@RtStream@fnv_00a665f0@@QAEXXZ",
+     "symbol": "?NiStream_SaveRTTI@RtStream@fnv_00a665f0@@QAEXXZ",
      "size": 600
     },
     {
@@ -548833,7 +548833,7 @@
     "??2BSFadeNode@fnv_00a647f0@@SAPAXI@Z": "0x0089eb90",
     "?FUN_00a8a620@QGroupCtor@fnv_00a647f0@@QAEPAUNiObjectGroup@2@I@Z": "0x00854e50",
     "??_C@_0CI@PHDLJOH@Gamebryo?5File?5Format?0?5Version?520@": "0x00e211cc",
-    "?AdvanceChars@NiBinaryStreamStandIn@@QAEXPBD@Z": "0x0089f770",
+    "?NiBinaryStream_PutS@NiBinaryStreamStandIn@@QAEXPBD@Z": "0x0089f770",
     "?g_uiNifMaxVersion_011a9b0c@@3IA": "0x00f72bd4",
     "?g_uiNifMaxUserVersion_011a9b10@@3IA": "0x00f72bd8",
     "?SetSize@?$NiTArray@PAVImageSpaceTexture@fnv_00a64b80@@V?$NiTMallocInterface@PAVImageSpaceTexture@fnv_00a64b80@@@2@@fnv_00a64b80@@QAEXI@Z": "0x00555790",
@@ -548928,9 +548928,9 @@
     "?FUN_00aa10f0@fnv_00a665f0@@YAXPAX@Z": "0x0089e890",
     "?FUN_00a63910@RtMapBase@fnv_00a665f0@@QAEXXZ": "0x0082a780",
     "?SetSize@?$NiTLargeArray@PAVTESForm@fnv_00a66850@@V?$NiTMallocInterface@PAVTESForm@fnv_00a66850@@@2@@fnv_00a66850@@QAEXI@Z": "0x006dc4b0",
-    "?WriteRTTIHeader@VStream@fnv_00a66850@@QAEXXZ": "0x0082d370",
+    "?NiStream_SaveRTTI@VStream@fnv_00a66850@@QAEXXZ": "0x0082d370",
     "?NiStream_SaveFixedStringTable@VStream@fnv_00a66850@@QAEXXZ": "0x0082ace0",
-    "?UpdateTextureSwapList@VStream@fnv_00a66850@@QAEXXZ": "0x0082bc60",
+    "?NiStream_UpdateObjectGroups@VStream@fnv_00a66850@@QAEXXZ": "0x0082bc60",
     "?WriteData@VStream@fnv_00a66850@@QAEXXZ": "0x0082ae20",
     "?RemoveAll@NiStreamTopObjects@fnv_00a66850@@QAEXXZ": "0x0082b150",
     "?RemoveAll@NiTMapBaseStub@fnv_00a66850@@QAEXXZ": "0x006bd950",
@@ -548959,7 +548959,7 @@
    "functions": [
     {
      "address": "0x00c24030",
-     "symbol": "?AllocStringHandle@@YAPADPBD@Z",
+     "symbol": "?NiString_AllocateAndCopy@@YAPADPBD@Z",
      "size": 112
     },
     {
@@ -549116,7 +549116,7 @@
     "??_C@_0O@NEBMHGGI@m_ppcValue?$FLi?$FN?$AA@": "0x00e259d0",
     "?ViewerStringStr@@YAPADPBD0@Z": "0x00847e70",
     "?FUN_00a7b2e0@CloneObject@@QAEXXZ": "0x008459f0",
-    "?CopyStringsExtraData@CloneSource@@QAEXPAUCloneObject@@PAX@Z": "0x0085fb20",
+    "?NiStringsExtraData_CopyMembers@CloneSource@@QAEXPAUCloneObject@@PAX@Z": "0x0085fb20",
     "?SaveBinary@NiExtraDataA949@@QAEXAAVNiStreamA949@@@Z": "0x008459d0",
     "?WriteStreamString@NiStreamA949@@QAEXPBD@Z": "0x0082af70",
     "_g_011f5ebc": "0x010908ac"
@@ -549150,7 +549150,7 @@
     },
     {
      "address": "0x0085fb20",
-     "symbol": "?CopyStringsExtraData@FUN_00a94880_shell@@QAEXPAUNiStringsExtraData@@PAX@Z",
+     "symbol": "?NiStringsExtraData_CopyMembers@FUN_00a94880_shell@@QAEXPAUNiStringsExtraData@@PAX@Z",
      "size": 172
     },
     {
@@ -549198,7 +549198,7 @@
     "??_C@_0O@NEBMHGGI@m_ppcValue?$FLi?$FN?$AA@": "0x00e259d0",
     "?ViewerStringStr@@YAPADPBD0@Z": "0x00847e70",
     "?FUN_00a7b2e0@CloneObject@@QAEXXZ": "0x008459f0",
-    "?CopyStringsExtraData@CloneSource@@QAEXPAUCloneObject@@PAX@Z": "0x0085fb20",
+    "?NiStringsExtraData_CopyMembers@CloneSource@@QAEXPAUCloneObject@@PAX@Z": "0x0085fb20",
     "?SaveBinary@NiExtraDataA949@@QAEXAAVNiStreamA949@@@Z": "0x008459d0",
     "?WriteStreamString@NiStreamA949@@QAEXPBD@Z": "0x0082af70"
    }
@@ -549420,7 +549420,7 @@
     "?FUN_00ec65a6@@YAXPAXI0@Z": "0x00c007fc",
     "?NiExtraData_SaveBinary@NiExtraDataView@@QAEXAAUNiStreamView@@@Z": "0x008459d0",
     "?NiStream_SaveCString@NiStreamView@@QAEXI@Z": "0x0082af70",
-    "?CopyStringList@SSE_Owner@@QAEXPAUSSE_Node@@I@Z": "0x0085f580",
+    "?NiSwitchStringExtraData_CopyMembers@SSE_Owner@@QAEXPAUSSE_Node@@I@Z": "0x0085f580",
     "?FUN_00a7b4a0@NiExtraDataA939@@QAEXAAVNiStreamA939@@@Z": "0x00845bc0",
     "?NiStream_LoadCString@NiStreamA939@@QAEXPAPAVNiObjectA939@@@Z": "0x0082bdd0",
     "?ReleaseObjectArray@@YAXPAX@Z": "0x0089e890",
@@ -549461,7 +549461,7 @@
     },
     {
      "address": "0x0085f580",
-     "symbol": "?CopyStringList@StrListObj@@QAEXPAU1@PAX@Z",
+     "symbol": "?NiSwitchStringExtraData_CopyMembers@StrListObj@@QAEXPAU1@PAX@Z",
      "size": 201
     },
     {
@@ -549511,7 +549511,7 @@
     "?FUN_00ec65a6@@YAXPAXI0@Z": "0x00c007fc",
     "?NiExtraData_SaveBinary@NiExtraDataView@@QAEXAAUNiStreamView@@@Z": "0x008459d0",
     "?NiStream_SaveCString@NiStreamView@@QAEXI@Z": "0x0082af70",
-    "?CopyStringList@SSE_Owner@@QAEXPAUSSE_Node@@I@Z": "0x0085f580",
+    "?NiSwitchStringExtraData_CopyMembers@SSE_Owner@@QAEXPAUSSE_Node@@I@Z": "0x0085f580",
     "?FUN_00a7b4a0@NiExtraDataA939@@QAEXAAVNiStreamA939@@@Z": "0x00845bc0",
     "?NiStream_LoadCString@NiStreamA939@@QAEXPAPAVNiObjectA939@@@Z": "0x0082bdd0",
     "?ReleaseObjectArray@@YAXPAX@Z": "0x0089e890",
@@ -550747,7 +550747,7 @@
     },
     {
      "address": "0x00837920",
-     "symbol": "?ResetTiming@FUN_00a6cd30_cls@@QAEXXZ",
+     "symbol": "?NiTimeController_Stop@FUN_00a6cd30_cls@@QAEXXZ",
      "size": 30
     },
     {
@@ -550787,7 +550787,7 @@
     },
     {
      "address": "0x00837f80",
-     "symbol": "?StartControllersRecursive@@YAXPAUTCAV@@M@Z",
+     "symbol": "?NiTimeController_StartAnimations@@YAXPAUTCAV@@M@Z",
      "size": 191
     },
     {
@@ -550817,7 +550817,7 @@
     },
     {
      "address": "0x008a3af0",
-     "symbol": "?CopyGlobalsToBuffer@@YAPAHHHHPAH@Z",
+     "symbol": "?NiColorKey_Interpolate@@YAPAHHHHPAH@Z",
      "size": 40
     },
     {
@@ -550859,7 +550859,7 @@
     "?FUN_00a7d5a0@@YAPADPBDPAX@Z": "0x00847e20",
     "?RegisterStreamables@NiObject@@UAE_NAAVNiStream@@@Z": "0x008257d0",
     "?FUN_00a29680@@YAXXZ": "0x00c24b70",
-    "?SetDataConsistency@NiGeometryData@@QAEXW4Consistency@1@@Z": "0x00831380",
+    "?SetConsistency@NiGeometryData@@QAEXW4Consistency@1@@Z": "0x00831380",
     "?ReplaceControllers@NiObjectNET@@QAEXPAVNiTimeController@@@Z": "0x00825110",
     "?AddController@NiObjectNET@@QAEXPAVNiTimeController@@@Z": "0x00825090",
     "?IsSameAs@TCEq@@QAE_NPAVNiObject@@@Z": "0x008258d0",
@@ -551075,7 +551075,7 @@
     "?LoadBinary@NiPoint3@@QAEXAAVNiStream@@@Z": "0x00823eb0",
     "?FUN_004d9ae0@TransformMatrix@@QBE_NABU1@@Z": "0x0048eb70",
     "?FUN_00439090@TransformPoint@@QBE_NABU1@@Z": "0x00914770",
-    "?ReadMatrixFromStream@TransformRotationSaver@@QAEXPAVNiStream@@@Z": "0x00823d60",
+    "?NiMatrix3_SaveBinary@TransformRotationSaver@@QAEXPAVNiStream@@@Z": "0x00823d60",
     "?FUN_00a69780@TransformTranslationSaver@@QAEXAAVNiStream@@@Z": "0x0083fa20",
     "__real@3f800000": "0x00db39b8"
    }
@@ -551197,7 +551197,7 @@
     },
     {
      "address": "0x008557e0",
-     "symbol": "?MatchesTriangleCount@S_00a8a9c0@@QAEEPBUS_00a8a9c0_Base@@@Z",
+     "symbol": "?NiTriBasedGeomData_IsEqual@S_00a8a9c0@@QAEEPBUS_00a8a9c0_Base@@@Z",
      "size": 39
     },
     {
@@ -551818,7 +551818,7 @@
     "_str_0109d960": "0x00e23268",
     "?NiTriBasedGeomData_LoadBinary@BaseLoad@fnv_00a761c0@@QAEXAAUNiStream@2@@Z": "0x00855850",
     "?FUN_00aa1070@fnv_00a761c0@@YAPAXI@Z": "0x0089e810",
-    "?MatchesTriangleCount@FUN_00a8a9c0_s@@QAE_NPAVNiObject@@@Z": "0x008557e0",
+    "?NiTriBasedGeomData_IsEqual@FUN_00a8a9c0_s@@QAE_NPAVNiObject@@@Z": "0x008557e0",
     "??_7FUN_00a76040@NiTriStripsDataImpl@@6B@": "0x00e231b4",
     "?FUN_00a669c0@FUN_00a76040@NiTriStripsDataImpl@@UAEPAUNiSharedDataA76@@XZ": "0x00830d00",
     "?FUN_00a8a670@NiSharedDataA76@@QAEXXZ": "0x00854ea0",
@@ -552598,7 +552598,7 @@
     },
     {
      "address": "0x00ac53e0",
-     "symbol": "?GetEntryFloat@FUN_00c25de0_shell@@QAEMG@Z",
+     "symbol": "?BSStripPSysData_GetPointLastUpdateTime@FUN_00c25de0_shell@@QAEMG@Z",
      "size": 18
     },
     {
@@ -552608,7 +552608,7 @@
     },
     {
      "address": "0x00ac5420",
-     "symbol": "?GetInnerValue@FUN_00c25e20_shell@@QAEMGG@Z",
+     "symbol": "?BSStripPSysData_GetPointSize@FUN_00c25e20_shell@@QAEMGG@Z",
      "size": 32
     },
     {
@@ -552736,7 +552736,7 @@
     },
     {
      "address": "0x00ac1520",
-     "symbol": "?ApplyToAllObjects@C21A10Owner@@QAEXPAX@Z",
+     "symbol": "?NiMeshPSysData_PurgeRendererDataForPools@C21A10Owner@@QAEXPAX@Z",
      "size": 112
     },
     {
@@ -552751,7 +552751,7 @@
     },
     {
      "address": "0x00ac16a0",
-     "symbol": "?TailViaMid@FUN_00c21b90_cls@@QAEXH@Z",
+     "symbol": "?NiMeshParticleSystem_OnVisible@FUN_00c21b90_cls@@QAEXH@Z",
      "size": 19
     },
     {
@@ -552761,12 +552761,12 @@
     },
     {
      "address": "0x00ac1700",
-     "symbol": "?CopyFromNode@Ps21Node@@QAEXI@Z",
+     "symbol": "?NiMeshParticleSystem_UpdateWorldData@Ps21Node@@QAEXI@Z",
      "size": 111
     },
     {
      "address": "0x00ac1770",
-     "symbol": "?CopySourceToOutput@FUN_00c21c60_cls@@QAEXXZ",
+     "symbol": "?NiMeshParticleSystem_UpdateWorldBound@FUN_00c21c60_cls@@QAEXXZ",
      "size": 66
     },
     {
@@ -552791,7 +552791,7 @@
     },
     {
      "address": "0x00ac5960",
-     "symbol": "?GetParticleColor@NiMeshParticleSystem@fnv_00c26350@@QAEPAURgbaColor@2@GG@Z",
+     "symbol": "?BSStripPSysData_GetPointColor@NiMeshParticleSystem@fnv_00c26350@@QAEPAURgbaColor@2@GG@Z",
      "size": 46
     }
    ],
@@ -552827,7 +552827,7 @@
     "?Refresh@FUN_00c21c60_cls@@QAEXXZ": "0x00abad70",
     "?DAT_011f4288@@3UFUN_00c21c60_src@@A": "0x0108edc8",
     "?NiGeometry_PurgeRendererData@NiObject@@QAEXI@Z": "0x0084b560",
-    "?ApplyToAllObjects@NiObject@@QAEXI@Z": "0x00ac1520",
+    "?NiMeshPSysData_PurgeRendererDataForPools@NiObject@@QAEXI@Z": "0x00ac1520",
     "_DAT_01202500": "0x0116ebf8",
     "_DAT_01202530": "0x0116ec18",
     "??0C1B5C0Base@@QAE@XZ": "0x00853ea0",
@@ -553282,7 +553282,7 @@
    "functions": [
     {
      "address": "0x00ac6670",
-     "symbol": "?FindModifier@NiParticleSystem@@QAEXXZ",
+     "symbol": "?NiPSysModifierCtlr_GetModifierPointerFromName@NiParticleSystem@@QAEXXZ",
      "size": 51
     }
    ],
@@ -553399,7 +553399,7 @@
     },
     {
      "address": "0x00acf6c0",
-     "symbol": "?SaveAgeDeathModifier@FUN_00c2f260_shell@@QAEXPAUNiStream@@@Z",
+     "symbol": "?NiPSysAgeDeathModifier_SaveBinary@FUN_00c2f260_shell@@QAEXPAUNiStream@@@Z",
      "size": 83
     },
     {
@@ -553508,7 +553508,7 @@
     "__real@0000000000000000": "0x00db38b0",
     "__real@00000000": "0x00eaad58",
     "?_FUN_00a7d330@@YAPADH@Z": "0x00847b50",
-    "?IsTargetParticleSystem@BaseStandIn@@QAE_NPAUNiObjectNET@@@Z": "0x00ac6740",
+    "?NiPSysModifierCtlr_InterpTargetIsCorrectType@BaseStandIn@@QAE_NPAUNiObjectNET@@@Z": "0x00ac6740",
     "?FUN_00c1b0f0@PsStandIn@@QAEPAUNiPSysModifier@@PAX@Z": "0x00abaf00",
     "?g_012027a8@@3UGlobalObjectO2_00a7b610@@A": "0x0116eea0",
     "?FUN_00c32d80@SpawnedObject@@QAEXXZ": "0x00ad2610",
@@ -553608,12 +553608,12 @@
     },
     {
      "address": "0x00acfaa0",
-     "symbol": "?UpdateParticleAirFriction@Cls_00c2f650@@QAEXMPAUNiPSysData@@@Z",
+     "symbol": "?NiPSysAirFieldModifier_UpdateNoAttenuationNoInheritNoSpread@Cls_00c2f650@@QAEXMPAUNiPSysData@@@Z",
      "size": 633
     },
     {
      "address": "0x00acfd20",
-     "symbol": "?UpdateAirFriction@S00c2f8d0_Mod@@QAEXMPAUNiPSysData@@@Z",
+     "symbol": "?NiPSysAirFieldModifier_UpdateNoAttenuationNoInheritNoSpreadNoMaxDistance@S00c2f8d0_Mod@@QAEXMPAUNiPSysData@@@Z",
      "size": 510
     },
     {
@@ -553692,8 +553692,8 @@
     "??DNiTransform@@QBE?AU0@ABU0@@Z": "0x0056fe20",
     "?LoadFromStream@S00c30170_Obj@@QAEXPAUNiStream@@@Z": "0x00ad1980",
     "?FUN_00a59be0@S00c30170_Pt@@QAEXPAUNiStream@@@Z": "0x00823eb0",
-    "?UpdateParticleAirFriction@AirModifier@@QAEXMPAUAirParticles@@@Z": "0x00acfaa0",
-    "?UpdateAirFriction@AirModifier@@QAEXMPAUAirParticles@@@Z": "0x00acfd20",
+    "?NiPSysAirFieldModifier_UpdateNoAttenuationNoInheritNoSpread@AirModifier@@QAEXMPAUAirParticles@@@Z": "0x00acfaa0",
+    "?NiPSysAirFieldModifier_UpdateNoAttenuationNoInheritNoSpreadNoMaxDistance@AirModifier@@QAEXMPAUAirParticles@@@Z": "0x00acfd20",
     "?FUN_004b4880@AirTransform@@QBEXPAU1@@Z": "0x00477790",
     "?FUN_0062c250@AirTransform@@QAEXPBU1@0@Z": "0x0056fe20",
     "?FUN_004b4500@AirMatrix@@QBE?AUAirPoint3@@PBU2@@Z": "0x004752c0",
@@ -553924,7 +553924,7 @@
     "?FUN_00c25db0@FUN_00c25db0_shell@@QAEGG@Z": "0x00ac53b0",
     "?GetSlotData@TESBoundObjectBounds@@QAEPAVNiPoint3@@GG@Z": "0x00ac5400",
     "?BSStripPSysData_GetPointRadii@FUN_00c25e40_shell@@QAEMGG@Z": "0x00ac5440",
-    "?GetInnerValue@FUN_00c25e20_shell@@QAEMGG@Z": "0x00ac5420",
+    "?BSStripPSysData_GetPointSize@FUN_00c25e20_shell@@QAEMGG@Z": "0x00ac5420",
     "?NiPoint3_ZERO@@3ULocalPoint3@@A": "0x0108ec68",
     "?FUN_00c2d720@BoundUpdateModifier@@QAEXH@Z": "0x00acdbb0",
     "?FUN_00c2dce0@BoundUpdateModifier@@QAEXMPAUNiPSysData@@@Z": "0x00ace180",
@@ -554419,7 +554419,7 @@
     },
     {
      "address": "0x00abf7a0",
-     "symbol": "?LoadCylinderEmitter@FUN_00c1fca0_cls@@QAEXAAVNiStream@@@Z",
+     "symbol": "?NiPSysCylinderEmitter_SaveBinary@FUN_00c1fca0_cls@@QAEXAAVNiStream@@@Z",
      "size": 96
     },
     {
@@ -554503,7 +554503,7 @@
     "?FUN_00a7d490@@YAPADPBDG@Z": "0x00847ce0",
     "?NiParticlesData_IsEqual@HookBase@@QAE_NPAX@Z": "0x0085a9b0",
     "?DAT_010a05e4@@3PADA": "0x00e24fb4",
-    "?SetDataConsistency@NiGeometryData_SetConsistency_View@@QAEXH@Z": "0x00831380",
+    "?SetConsistency@NiGeometryData_SetConsistency_View@@QAEXH@Z": "0x00831380",
     "??0FUN_00a67c00@@QAE@XZ": "0x00831f30",
     "?FUN_00a964c0@NiPSysData_StandIn@@QAEXG@Z": "0x0085a440",
     "?DAT_010be254@@3HA": "0x00e8cedc",
@@ -554525,7 +554525,7 @@
     "__fnv_zlib_memcpy": "0x00bffa60",
     "??0RgbaColor@@QAE@XZ": "0x0046c350",
     "?Replace@NiPSysData_View@@QAEXGPAVNiPoint3@@0PAVRgbaColor@@PAXG2@Z": "0x008313e0",
-    "?SetRotations@NiParticlesData@@QAEXPAVNiQuaternion@@@Z": "0x0085a810",
+    "?ReplaceRotations@NiParticlesData@@QAEXPAVNiQuaternion@@@Z": "0x0085a810",
     "?ReplaceSizes@NiPSysData_View@@QAEXPAM@Z": "0x0085a3e0",
     "?ReplaceRadii@NiPSysData_View@@QAEXPAM@Z": "0x0085a3c0",
     "?ReplaceRotationAngles@NiPSysData_View@@QAEXPAM@Z": "0x0085a400",
@@ -554638,7 +554638,7 @@
     "?FUN_00a7d490@@YAPADPBDG@Z": "0x00847ce0",
     "?NiParticlesData_IsEqual@HookBase@@QAE_NPAX@Z": "0x0085a9b0",
     "?DAT_010a05e4@@3PADA": "0x00e24fb4",
-    "?SetDataConsistency@NiGeometryData_SetConsistency_View@@QAEXH@Z": "0x00831380",
+    "?SetConsistency@NiGeometryData_SetConsistency_View@@QAEXH@Z": "0x00831380",
     "??0FUN_00a67c00@@QAE@XZ": "0x00831f30",
     "?FUN_00a964c0@NiPSysData_StandIn@@QAEXG@Z": "0x0085a440",
     "?DAT_010be254@@3HA": "0x00e8cedc",
@@ -554660,7 +554660,7 @@
     "__fnv_zlib_memcpy": "0x00bffa60",
     "??0RgbaColor@@QAE@XZ": "0x0046c350",
     "?Replace@NiPSysData_View@@QAEXGPAVNiPoint3@@0PAVRgbaColor@@PAXG2@Z": "0x008313e0",
-    "?SetRotations@NiParticlesData@@QAEXPAVNiQuaternion@@@Z": "0x0085a810",
+    "?ReplaceRotations@NiParticlesData@@QAEXPAVNiQuaternion@@@Z": "0x0085a810",
     "?ReplaceSizes@NiPSysData_View@@QAEXPAM@Z": "0x0085a3e0",
     "?ReplaceRadii@NiPSysData_View@@QAEXPAM@Z": "0x0085a3c0",
     "?ReplaceRotationAngles@NiPSysData_View@@QAEXPAM@Z": "0x0085a400",
@@ -554773,7 +554773,7 @@
     },
     {
      "address": "0x00acd2b0",
-     "symbol": "?InvokeCallbackAndUpdate@FUN_00c2ce10_owner@@QAEXPAX@Z",
+     "symbol": "?NiPSysDragFieldModifier_LoadBinary@FUN_00c2ce10_owner@@QAEXPAX@Z",
      "size": 83
     },
     {
@@ -555042,7 +555042,7 @@
    "functions": [
     {
      "address": "0x00abbd40",
-     "symbol": "?GetObjectValueByKey@C1BF90Owner@@QAEHXZ",
+     "symbol": "?NiPSysEmitterCtlr_GetEmitterActiveInterpolator@C1BF90Owner@@QAEHXZ",
      "size": 92
     }
    ],
@@ -555086,7 +555086,7 @@
     "?LinkObject@NiBoolInterpController@@QAEPAVNiBoolInterpolator@@PAVNiStream@@@Z": "0x008cd130",
     "?SetAnimationKeys@NiBoolInterpolator@@QAEXPAXII@Z": "0x00abbcc0",
     "??_7FUN_00a38e00@@6B@": "0x00e2d564",
-    "?ResetTiming@NiTimeControllerStop@@QAEXXZ": "0x00837920",
+    "?NiTimeController_Stop@NiTimeControllerStop@@QAEXXZ": "0x00837920",
     "??4?$NiPointer@VNiInterpolator@@@@QAEAAV0@PAVNiInterpolator@@@Z": "0x008e9650",
     "?DAT_0109a1d4@@3HA": "0x00e30bfc",
     "?DAT_011ae754@@3HA": "0x01066f54",
@@ -555099,7 +555099,7 @@
     "?FUN_00c1b0f0@B00c1bff0@@QAEPAXPAX@Z": "0x00abaf00",
     "?g_01202500_arg1@@3HA": "0x0116ec38",
     "?FUN_00c1beb0@S240@@QAEXI@Z": "0x00ab4c30",
-    "?IsTargetParticleSystem@S_00c31530@fnv_00c2b7d0@@QAE_NPAX@Z": "0x00ac6740",
+    "?NiPSysModifierCtlr_InterpTargetIsCorrectType@S_00c31530@fnv_00c2b7d0@@QAE_NPAX@Z": "0x00ac6740",
     "?FUN_00c1b0f0@S_00c1b0f0@fnv_00c2b7d0@@QAEPAXPAX@Z": "0x00abaf00",
     "?g_01202500_arg1@fnv_00c2b7d0@@3URTTI_00c2b7d0@1@A": "0x0116ec38",
     "?NiSingleInterpController_GuaranteeTimeRange@CallBase@@QAEXMM@Z": "0x008b2620",
@@ -555126,9 +555126,9 @@
     "?FUN_00c1bd30@NiPSysEmitterCtlrC1C5@@QAEXPAV1@AAVCloningProcessC1C5@@@Z": "0x00abbb40",
     "?NiTimeController_DontDoUpdate@C630Ctlr@@QAE_NM@Z": "0x008b0270",
     "?UpdateNormalizedWeights@C630Blend@@QAEXXZ": "0x008b1280",
-    "?FindHighestWeightIndex@C630Blend@@QAEEXZ": "0x008b0920",
+    "?NiBlendInterpolator_GetHighestWeightedIndex@C630Blend@@QAEEXZ": "0x008b0920",
     "?GetValueForIndex@C630Blend@@QAEME@Z": "0x00abb9a0",
-    "?GetObjectValueByKey@C630Ctlr@@QAEPAUC630Interp@@XZ": "0x00abbd40",
+    "?NiPSysEmitterCtlr_GetEmitterActiveInterpolator@C630Ctlr@@QAEPAUC630Interp@@XZ": "0x00abbd40",
     "?FUN_00639b60@C630Ctlr@@QAEPAUC630Interp@@XZ": "0x00577f70",
     "?FUN_00a52d20@C630Interp@@QAEPAUActiveKey@@AAI0AAE@Z": "0x004c4c50",
     "?EmitParticlesInInterval@C630Ctlr@@QAEXMMMMMM@Z": "0x00abc080",
@@ -555141,7 +555141,7 @@
     "?AppendModifierInfo@@YGXPAUStrArr@@@Z": "0x00ac67c0",
     "_kNegInfinity": "0x00db7260",
     "?FUN_00424d50@@YAPAUC1BF90Result@@PBXPAUC1BF90Target@@@Z": "0x00424d50",
-    "?FindHighestWeightIndex@C1BF90Result@@QAEEXZ": "0x008b0920"
+    "?NiBlendInterpolator_GetHighestWeightedIndex@C1BF90Result@@QAEEXZ": "0x008b0920"
    }
   },
   {
@@ -555157,7 +555157,7 @@
    "functions": [
     {
      "address": "0x008b0920",
-     "symbol": "?FindHighestWeightIndex@FUN_00a368f0_cls@nsa@@QAEEXZ",
+     "symbol": "?NiBlendInterpolator_GetHighestWeightedIndex@FUN_00a368f0_cls@nsa@@QAEEXZ",
      "size": 98
     },
     {
@@ -555202,12 +555202,12 @@
     },
     {
      "address": "0x00abb890",
-     "symbol": "?GetInterpControllerIndex@@YGGPBD@Z",
+     "symbol": "?NiPSysEmitterCtlr_GetInterpolatorIndex@@YGGPBD@Z",
      "size": 65
     },
     {
      "address": "0x00abb8e0",
-     "symbol": "?CreateInterpolatorByIndex@@YGPAVNiInterpolator@@G@Z",
+     "symbol": "?NiPSysEmitterCtlr_CreatePoseInterpolator@@YGPAVNiInterpolator@@G@Z",
      "size": 80
     },
     {
@@ -555232,7 +555232,7 @@
     },
     {
      "address": "0x00abbaa0",
-     "symbol": "?GetInterpolatorByIndex@ThisStruct@@QAEPAVNiInterpolator@@G@Z",
+     "symbol": "?NiPSysEmitterCtlr_GetInterpolator@ThisStruct@@QAEPAVNiInterpolator@@G@Z",
      "size": 33
     },
     {
@@ -555252,7 +555252,7 @@
     },
     {
      "address": "0x00abbc20",
-     "symbol": "?RegisterEmitterInterpolatorStreamables@FUN_00c1be10_shell@@QAE_NAAVNiStream@@@Z",
+     "symbol": "?NiPSysEmitterCtlr_RegisterStreamables@FUN_00c1be10_shell@@QAE_NAAVNiStream@@@Z",
      "size": 45
     },
     {
@@ -555361,7 +555361,7 @@
     "?LinkObject@NiBoolInterpController@@QAEPAVNiBoolInterpolator@@PAVNiStream@@@Z": "0x008cd130",
     "?SetAnimationKeys@NiBoolInterpolator@@QAEXPAXII@Z": "0x00abbcc0",
     "??_7FUN_00a38e00@@6B@": "0x00e2d564",
-    "?ResetTiming@NiTimeControllerStop@@QAEXXZ": "0x00837920",
+    "?NiTimeController_Stop@NiTimeControllerStop@@QAEXXZ": "0x00837920",
     "??4?$NiPointer@VNiInterpolator@@@@QAEAAV0@PAVNiInterpolator@@@Z": "0x008e9650",
     "?DAT_0109a1d4@@3HA": "0x00e30bfc",
     "?DAT_011ae754@@3HA": "0x01066f54",
@@ -555374,7 +555374,7 @@
     "?FUN_00c1b0f0@B00c1bff0@@QAEPAXPAX@Z": "0x00abaf00",
     "?g_01202500_arg1@@3HA": "0x0116ec38",
     "?FUN_00c1beb0@S240@@QAEXI@Z": "0x00ab4c30",
-    "?IsTargetParticleSystem@S_00c31530@fnv_00c2b7d0@@QAE_NPAX@Z": "0x00ac6740",
+    "?NiPSysModifierCtlr_InterpTargetIsCorrectType@S_00c31530@fnv_00c2b7d0@@QAE_NPAX@Z": "0x00ac6740",
     "?FUN_00c1b0f0@S_00c1b0f0@fnv_00c2b7d0@@QAEPAXPAX@Z": "0x00abaf00",
     "?g_01202500_arg1@fnv_00c2b7d0@@3URTTI_00c2b7d0@1@A": "0x0116ec38",
     "?NiSingleInterpController_GuaranteeTimeRange@CallBase@@QAEXMM@Z": "0x008b2620",
@@ -555401,9 +555401,9 @@
     "?FUN_00c1bd30@NiPSysEmitterCtlrC1C5@@QAEXPAV1@AAVCloningProcessC1C5@@@Z": "0x00abbb40",
     "?NiTimeController_DontDoUpdate@C630Ctlr@@QAE_NM@Z": "0x008b0270",
     "?UpdateNormalizedWeights@C630Blend@@QAEXXZ": "0x008b1280",
-    "?FindHighestWeightIndex@C630Blend@@QAEEXZ": "0x008b0920",
+    "?NiBlendInterpolator_GetHighestWeightedIndex@C630Blend@@QAEEXZ": "0x008b0920",
     "?GetValueForIndex@C630Blend@@QAEME@Z": "0x00abb9a0",
-    "?GetObjectValueByKey@C630Ctlr@@QAEPAUC630Interp@@XZ": "0x00abbd40",
+    "?NiPSysEmitterCtlr_GetEmitterActiveInterpolator@C630Ctlr@@QAEPAUC630Interp@@XZ": "0x00abbd40",
     "?FUN_00639b60@C630Ctlr@@QAEPAUC630Interp@@XZ": "0x00577f70",
     "?FUN_00a52d20@C630Interp@@QAEPAUActiveKey@@AAI0AAE@Z": "0x004c4c50",
     "?EmitParticlesInInterval@C630Ctlr@@QAEXMMMMMM@Z": "0x00abc080",
@@ -555844,7 +555844,7 @@
     "?SetSize@StrArr@@QAEXI@Z": "0x00555790",
     "?SetAt@StrArr@@QAEXIAAPAD@Z": "0x005b3880",
     "?FUN_00a7d330@@YAPADPAD@Z": "0x00847b50",
-    "?IsTargetParticleSystem@BaseStandIn@@QAE_NPAUNiObjectNET@@@Z": "0x00ac6740",
+    "?NiPSysModifierCtlr_InterpTargetIsCorrectType@BaseStandIn@@QAE_NPAUNiObjectNET@@@Z": "0x00ac6740",
     "?FUN_00c1b0f0@B00c1bff0@@QAEPAXPAX@Z": "0x00abaf00",
     "?NiMemAlloc@@YAPAXI@Z": "0x0089eb90",
     "??0FieldCtlrBase@@QAE@XZ": "0x00ad2610",
@@ -556273,7 +556273,7 @@
     }
    ],
    "symbols": {
-    "?IsTargetParticleSystem@BaseStandIn@@QAE_NPAUNiObjectNET@@@Z": "0x00ac6740",
+    "?NiPSysModifierCtlr_InterpTargetIsCorrectType@BaseStandIn@@QAE_NPAUNiObjectNET@@@Z": "0x00ac6740",
     "?FUN_00c1b0f0@B00c1bff0@@QAEPAXPAX@Z": "0x00abaf00",
     "?g_01202548@@3UNiRTTI@@A": "0x0116ec40",
     "?FUN_00c32f60@fnv_00c2a960@@YGXPAUStrArr@1@@Z": "0x008f7a20",
@@ -556369,7 +556369,7 @@
     },
     {
      "address": "0x00acaa80",
-     "symbol": "?LoadGrowFadeModifier@FUN_00c2a610_cls@@QAEXAAVNiStream@@@Z",
+     "symbol": "?NiPSysGrowFadeModifier_SaveBinary@FUN_00c2a610_cls@@QAEXAAVNiStream@@@Z",
      "size": 207
     }
    ],
@@ -556427,7 +556427,7 @@
     "?FUN_00aa13e0@@YAPAXI@Z": "0x0089eb90",
     "?SetSize@StrArr@@QAEXI@Z": "0x00555790",
     "?SetAt@StrArr@@QAEXIAAPAD@Z": "0x005b3880",
-    "?IsTargetParticleSystem@BaseStandIn@@QAE_NPAUNiObjectNET@@@Z": "0x00ac6740",
+    "?NiPSysModifierCtlr_InterpTargetIsCorrectType@BaseStandIn@@QAE_NPAUNiObjectNET@@@Z": "0x00ac6740",
     "?FUN_00c32d80@SpawnedObject@@QAEXXZ": "0x00ad2610",
     "?FUN_00c1b0f0@B00c1bff0@@QAEPAXPAX@Z": "0x00abaf00",
     "?_g_01202528@@3UNiRTTI@@A": "0x0116ec28",
@@ -556600,7 +556600,7 @@
     "?GetLinkID@NiStream@fnv_00c1f990@@QAEIXZ": "0x0082a2b0",
     "?FUN_00c1e9a0@GeomEmitterArray@NiPSysMeshEmitter@fnv_00c1f990@@QAEXI@Z": "0x00896360",
     "?GetLoadedObject@NiStream@fnv_00c1f990@@QAEPAUNiObject@2@XZ": "0x0082a280",
-    "?SetSkinGeom@NiPSysMeshEmitter@fnv_00c1f990@@QAEXPAUNiGeometry@2@@Z": "0x00abf2a0",
+    "?NiPSysMeshEmitter_AddGeometryEmitter@NiPSysMeshEmitter@fnv_00c1f990@@QAEXPAUNiGeometry@2@@Z": "0x00abf2a0",
     "?EnsureSkinPartition@NiSkinInstance@@QAEXPAUNiGeometry@@@Z": "0x00abce40",
     "?FUN_00c1e080@FUN_00c1f5f0_shell@@QAEXPAUNiSkinInstance@@PAUNiGeometry@@AAUNiPoint3@@2@Z": "0x00abdcb0",
     "?EmitFromMesh@FUN_00c1f5f0_shell@@QAEXPAUNiGeometry@@AAUNiPoint3@@1@Z": "0x00abe5d0",
@@ -556653,7 +556653,7 @@
     "?PickEmitterParticle@MeshEmitterCandidate@fnv_00c1eb20@@QAE_NPAUNiGeometry@@AAUMeshPoint@2@1@Z": "0x00abd700",
     "?FUN_00c317e0@CloneEmitter@@QAEXAAUCloneProcess@@@Z": "0x00ac5ed0",
     "?FUN_00a53c30@CloneMap@@QAE_NPAXPAPAX@Z": "0x00bea7b0",
-    "?SetSkinGeom@CloneOut@@QAEXPAX@Z": "0x00abf2a0",
+    "?NiPSysMeshEmitter_AddGeometryEmitter@CloneOut@@QAEXPAX@Z": "0x00abf2a0",
     "?FUN_00c1f360@NiSkinSlot790@@QAEXPAPAUNiSkinGeom790@@@Z": "0x00abee90",
     "?FUN_00c1cf20@NiSkinRaw790@@QAEPAUNiSkinObj790@@XZ": "0x00abcbf0",
     "?FUN_0066b0d0@NiSkinSub790@@QAEXI@Z": "0x008e9650",
@@ -556815,7 +556815,7 @@
     },
     {
      "address": "0x00abf2a0",
-     "symbol": "?SetSkinGeom@FUN_00c1f790_cls@@QAEXPAUNiSkinGeom790@@@Z",
+     "symbol": "?NiPSysMeshEmitter_AddGeometryEmitter@FUN_00c1f790_cls@@QAEXPAUNiSkinGeom790@@@Z",
      "size": 233
     },
     {
@@ -556877,7 +556877,7 @@
     "?GetLinkID@NiStream@fnv_00c1f990@@QAEIXZ": "0x0082a2b0",
     "?FUN_00c1e9a0@GeomEmitterArray@NiPSysMeshEmitter@fnv_00c1f990@@QAEXI@Z": "0x00896360",
     "?GetLoadedObject@NiStream@fnv_00c1f990@@QAEPAUNiObject@2@XZ": "0x0082a280",
-    "?SetSkinGeom@NiPSysMeshEmitter@fnv_00c1f990@@QAEXPAUNiGeometry@2@@Z": "0x00abf2a0",
+    "?NiPSysMeshEmitter_AddGeometryEmitter@NiPSysMeshEmitter@fnv_00c1f990@@QAEXPAUNiGeometry@2@@Z": "0x00abf2a0",
     "?EnsureSkinPartition@NiSkinInstance@@QAEXPAUNiGeometry@@@Z": "0x00abce40",
     "?FUN_00c1e080@FUN_00c1f5f0_shell@@QAEXPAUNiSkinInstance@@PAUNiGeometry@@AAUNiPoint3@@2@Z": "0x00abdcb0",
     "?EmitFromMesh@FUN_00c1f5f0_shell@@QAEXPAUNiGeometry@@AAUNiPoint3@@1@Z": "0x00abe5d0",
@@ -556930,7 +556930,7 @@
     "?PickEmitterParticle@MeshEmitterCandidate@fnv_00c1eb20@@QAE_NPAUNiGeometry@@AAUMeshPoint@2@1@Z": "0x00abd700",
     "?FUN_00c317e0@CloneEmitter@@QAEXAAUCloneProcess@@@Z": "0x00ac5ed0",
     "?FUN_00a53c30@CloneMap@@QAE_NPAXPAPAX@Z": "0x00bea7b0",
-    "?SetSkinGeom@CloneOut@@QAEXPAX@Z": "0x00abf2a0",
+    "?NiPSysMeshEmitter_AddGeometryEmitter@CloneOut@@QAEXPAX@Z": "0x00abf2a0",
     "?FUN_00c1f360@NiSkinSlot790@@QAEXPAPAUNiSkinGeom790@@@Z": "0x00abee90",
     "?FUN_00c1cf20@NiSkinRaw790@@QAEPAUNiSkinObj790@@XZ": "0x00abcbf0",
     "?FUN_0066b0d0@NiSkinSub790@@QAEXI@Z": "0x008e9650",
@@ -557010,9 +557010,9 @@
     "?FUN_00a63430@ReferenceSource@@QAEPAUNiRefObject@@XZ": "0x0082a280",
     "?FUN_004b0310@ReferenceArray@@QAEXIPAPAUNiRefObject@@@Z": "0x00470f10",
     "?FUN_00c31830@NiPSysModifierC212@@QAE_NPAVNiObjectC212@@@Z": "0x00ac5f20",
-    "?GetMeshHandle@Lk2_c21@@QAEXIPAUCloneHandle@@@Z": "0x00ac0500",
+    "?NiMeshPSysData_RemoveFromPool@Lk2_c21@@QAEXIPAUCloneHandle@@@Z": "0x00ac0500",
     "?NiObject_Clone@Src_c21@@QAEPAVMesh_c21@@XZ": "0x00825a70",
-    "?StartControllersRecursive@@YAXPAVMesh_c21@@M@Z": "0x00837f80",
+    "?NiTimeController_StartAnimations@@YAXPAVMesh_c21@@M@Z": "0x00837f80",
     "?FUN_00c31780@S_c21770_Mod@@QAEXPAV1@AAVNiCloningProcess_c217@@@Z": "0x00ac5e70",
     "?SetMeshAt@S_c21770_Mod@@QAEXIPAVMyMeshObj@@AAUOldSlot@@@Z": "0x00ac07a0",
     "?FUN_00a89af0@C21550LinkBase@@QAEXAAVNiStream@@@Z": "0x0078c030",
@@ -557051,7 +557051,7 @@
     },
     {
      "address": "0x00ac0380",
-     "symbol": "?WriteMeshUpdate@MeshUpdateStreamWriter@@QAEXPAVNiStream@@@Z",
+     "symbol": "?NiPSysMeshUpdateModifier_SaveBinary@MeshUpdateStreamWriter@@QAEXPAVNiStream@@@Z",
      "size": 104
     },
     {
@@ -557066,7 +557066,7 @@
     },
     {
      "address": "0x00ac0500",
-     "symbol": "?GetMeshHandle@MeshLookup@@QAEXIPAUCloneHandle@@@Z",
+     "symbol": "?NiMeshPSysData_RemoveFromPool@MeshLookup@@QAEXIPAUCloneHandle@@@Z",
      "size": 184
     },
     {
@@ -557076,7 +557076,7 @@
     },
     {
      "address": "0x00ac0690",
-     "symbol": "?CopyReferencesFromSource@ReferenceContainer@@QAEXPAUReferenceSource@@@Z",
+     "symbol": "?NiPSysMeshUpdateModifier_LinkObject@ReferenceContainer@@QAEXPAUReferenceSource@@@Z",
      "size": 132
     },
     {
@@ -557096,7 +557096,7 @@
     },
     {
      "address": "0x00ac0940",
-     "symbol": "?CloneInto@S_c21770_Mod@@QAEXPAV1@AAVNiCloningProcess_c217@@@Z",
+     "symbol": "?NiPSysMeshUpdateModifier_CopyMembers@S_c21770_Mod@@QAEXPAV1@AAVNiCloningProcess_c217@@@Z",
      "size": 123
     },
     {
@@ -557148,9 +557148,9 @@
     "?FUN_00a63430@ReferenceSource@@QAEPAUNiRefObject@@XZ": "0x0082a280",
     "?FUN_004b0310@ReferenceArray@@QAEXIPAPAUNiRefObject@@@Z": "0x00470f10",
     "?FUN_00c31830@NiPSysModifierC212@@QAE_NPAVNiObjectC212@@@Z": "0x00ac5f20",
-    "?GetMeshHandle@Lk2_c21@@QAEXIPAUCloneHandle@@@Z": "0x00ac0500",
+    "?NiMeshPSysData_RemoveFromPool@Lk2_c21@@QAEXIPAUCloneHandle@@@Z": "0x00ac0500",
     "?NiObject_Clone@Src_c21@@QAEPAVMesh_c21@@XZ": "0x00825a70",
-    "?StartControllersRecursive@@YAXPAVMesh_c21@@M@Z": "0x00837f80",
+    "?NiTimeController_StartAnimations@@YAXPAVMesh_c21@@M@Z": "0x00837f80",
     "?FUN_00c31780@S_c21770_Mod@@QAEXPAV1@AAVNiCloningProcess_c217@@@Z": "0x00ac5e70",
     "?SetMeshAt@S_c21770_Mod@@QAEXIPAVMyMeshObj@@AAUOldSlot@@@Z": "0x00ac07a0",
     "?FUN_00a89af0@C21550LinkBase@@QAEXAAVNiStream@@@Z": "0x0078c030",
@@ -557353,7 +557353,7 @@
     "?SetSize@StrArr@@QAEXI@Z": "0x00555790",
     "?SetAt@StrArr@@QAEXIAAPAD@Z": "0x005b3880",
     "_FUN_00a7d330": "0x00847b50",
-    "?IsTargetParticleSystem@BaseStandIn@@QAE_NPAUNiObjectNET@@@Z": "0x00ac6740",
+    "?NiPSysModifierCtlr_InterpTargetIsCorrectType@BaseStandIn@@QAE_NPAUNiObjectNET@@@Z": "0x00ac6740",
     "?FUN_00c1b0f0@PsStandIn@@QAEPAUNiPSysModifier@@PAX@Z": "0x00abaf00",
     "?FUN_00c31260@@YIXPAX@Z": "0x00825800",
     "?DAT_010c0d2c@@3HA": "0x00e27b64",
@@ -557476,7 +557476,7 @@
     },
     {
      "address": "0x00ac6740",
-     "symbol": "?IsTargetParticleSystem@NiPSysModifierCtlrRuntime@fnv_00c31530@@QAE_NPAUNiParticleSystemRuntime@2@@Z",
+     "symbol": "?NiPSysModifierCtlr_InterpTargetIsCorrectType@NiPSysModifierCtlrRuntime@fnv_00c31530@@QAE_NPAUNiParticleSystemRuntime@2@@Z",
      "size": 92
     },
     {
@@ -557499,7 +557499,7 @@
     "?DAT_0109b220@@3HA": "0x00e207a8",
     "?SetTarget@NiTimeController@@UAEXPAUNiObjectNET@@@Z": "0x00838040",
     "?ProcessClone@NiSingleInterpController@@UAEXAAVCloningProcess@@@Z": "0x008b26e0",
-    "?FindModifier@NiParticleSystem@@QAEXXZ": "0x00ac6670",
+    "?NiPSysModifierCtlr_GetModifierPointerFromName@NiParticleSystem@@QAEXXZ": "0x00ac6670",
     "?FUN_00a39010@FUN_00a39010_shell@@QAEXAAUNiStream@@@Z": "0x008b27a0",
     "?IsCompatibleWith@S_00a39030_Callee@@QAE_NPAUS_00c313a0@@@Z": "0x008b27c0",
     "?DAT_010c08ac@@3HA": "0x00e8d364",
@@ -557662,7 +557662,7 @@
     },
     {
      "address": "0x00ac97f0",
-     "symbol": "?ApplyPlanarCollision@PlanarColliderResponse@@QAEXMPAUBoundDataBlock@@G@Z",
+     "symbol": "?NiPSysPlanarCollider_Update@PlanarColliderResponse@@QAEXMPAUBoundDataBlock@@G@Z",
      "size": 291
     },
     {
@@ -557991,7 +557991,7 @@
     },
     {
      "address": "0x00ac88f0",
-     "symbol": "?CreateCloneableObject@FUN_00c28430_class@@QAEPAUFUN_00c28430_Object@@RAX@Z",
+     "symbol": "?NiPSysResetOnLoopCtlr_CreateClone@FUN_00c28430_class@@QAEPAUFUN_00c28430_Object@@RAX@Z",
      "size": 84
     },
     {
@@ -558247,7 +558247,7 @@
     },
     {
      "address": "0x00abf930",
-     "symbol": "?GenerateSpherePoint@SphereEmitter00c1fe20@@QAEXAAUSphereMatrix3@@AAUSpherePoint3@@1@Z",
+     "symbol": "?NiPSysSphereEmitter_ComputeVolumeInitialPositionAndVelocity@SphereEmitter00c1fe20@@QAEXAAUSphereMatrix3@@AAUSpherePoint3@@1@Z",
      "size": 377
     },
     {
@@ -558397,7 +558397,7 @@
     },
     {
      "address": "0x00ac8280",
-     "symbol": "?ResolveSphericalCollision@NiPSysSphericalColliderX@@QAEXMPAUNiPSysData@@G@Z",
+     "symbol": "?NiPSysSphericalCollider_Update@NiPSysSphericalColliderX@@QAEXMPAUNiPSysData@@G@Z",
      "size": 316
     },
     {
@@ -558417,7 +558417,7 @@
     },
     {
      "address": "0x00ac8580",
-     "symbol": "?ReadSphericalCollider@SphericalColliderReader@@QAEXAAUNiStream@@@Z",
+     "symbol": "?NiPSysSphericalCollider_SaveBinary@SphericalColliderReader@@QAEXAAUNiStream@@@Z",
      "size": 71
     },
     {
@@ -558437,7 +558437,7 @@
     },
     {
      "address": "0x00ac8760",
-     "symbol": "?CreateCollider@@YAPAUCollider@@XZ",
+     "symbol": "?NiPSysSphericalCollider_CreateObject@@YAPAUCollider@@XZ",
      "size": 46
     },
     {
@@ -558527,7 +558527,7 @@
     },
     {
      "address": "0x00ac7bb0",
-     "symbol": "?ReadFloatAndComputeInverse@FUN_00c27700_class@@QAEXPAX@Z",
+     "symbol": "?NiPSysTurbulenceFieldModifier_LoadBinary@FUN_00c27700_class@@QAEXPAX@Z",
      "size": 99
     },
     {
@@ -558810,7 +558810,7 @@
     },
     {
      "address": "0x00ac6350",
-     "symbol": "?ComputeEmitterInitialPositionAndVelocity@FUN_00c31cf0_shell@@QAEXPAUNiPoint3@@0@Z",
+     "symbol": "?NiPSysVolumeEmitter_ComputeInitialPositionAndVelocity@FUN_00c31cf0_shell@@QAEXPAUNiPoint3@@0@Z",
      "size": 185
     },
     {
@@ -559680,7 +559680,7 @@
    "functions": [
     {
      "address": "0x0089fd20",
-     "symbol": "?ResolveSearchPath@NiSearchPathS@@QAE_NPADI@Z",
+     "symbol": "?NiSearchPath_GetNextSearchPath@NiSearchPathS@@QAE_NPADI@Z",
      "size": 400
     }
    ],
@@ -559832,12 +559832,12 @@
     },
     {
      "address": "0x008a0bf0",
-     "symbol": "?AllocateStandardAllocator@fnv_00aa3430@@YAXXZ",
+     "symbol": "?NiStandardAllocator_Initialize@fnv_00aa3430@@YAXXZ",
      "size": 48
     },
     {
      "address": "0x008a0c20",
-     "symbol": "?DestroySmallAllocPools@@YAXXZ",
+     "symbol": "?NiStandardAllocator_Shutdown@@YAXXZ",
      "size": 75
     },
     {
@@ -559990,7 +559990,7 @@
     "?FUN_00a29680@@YAXXZ": "0x00c24b70",
     "?DAT_011f3668@@3DA": "0x01091eb8",
     "?DAT_011f3dd0@@3PAXA": "0x01092618",
-    "?LoadBezPosKeys@@YAXXZ": "0x008a2680",
+    "?NiBezPosKey_CreateFromStream@@YAXXZ": "0x008a2680",
     "?DAT_011f3a70@@3PAXA": "0x010922b8",
     "?SaveKeyArray@@YAXXZ": "0x008a2700",
     "?DAT_011f39e0@@3PAXA": "0x01092228",
@@ -560010,7 +560010,7 @@
     "?FUN_00a2aa50@@YAXHH@Z": "0x008a4ef0",
     "?DAT_011f3695@fnv_00a2bb90@@3EA": "0x01091ee5",
     "?DAT_011f3dd4@fnv_00a2bb90@@3HA": "0x0109261c",
-    "_AllocateElement76Array": "0x008a5f20",
+    "_NiTCBPosKey_CreateFromStream": "0x008a5f20",
     "?DAT_011f3a74@fnv_00a2bb90@@3HA": "0x010922bc",
     "_FUN_00a2bb60": "0x008a5f80",
     "?DAT_011f39e4@fnv_00a2bb90@@3HA": "0x0109222c",
@@ -560070,7 +560070,7 @@
     "?DAT_011f3c08@@3PAXA": "0x01092450",
     "?DAT_011f3b78@@3PAXA": "0x010923c0",
     "?DAT_011f3db8@@3PAXA": "0x01092600",
-    "?LoadFloatKeys@@YAXXZ": "0x008a1700",
+    "?NiBezFloatKey_CreateFromStream@@YAXXZ": "0x008a1700",
     "?DAT_011f3a58@@3PAXA": "0x010922a0",
     "?SaveKeys@@YAXXZ": "0x008a17d0",
     "?DAT_011f39c8@@3PAXA": "0x01092210",
@@ -560159,7 +560159,7 @@
     "?DAT_011f3c0c@@3HA": "0x01092454",
     "?DAT_011f3b7c@@3HA": "0x010923c4",
     "?DAT_011f3dbc@@3PAXA": "0x01092604",
-    "?AllocateKeyframeElements@@YAXXZ": "0x008a6dc0",
+    "?NiTCBFloatKey_CreateFromStream@@YAXXZ": "0x008a6dc0",
     "?DAT_011f3a5c@@3PAXA": "0x010922a4",
     "?FUN_00a2cb50@@YAXXZ": "0x008a6e20",
     "?DAT_011f39cc@@3PAXA": "0x01092214",
@@ -560270,7 +560270,7 @@
     "?FUN_00a29680@@YAXPAUColorAnimationKey@@@Z": "0x00c24b70",
     "?DAT_011f376a@@3EA": "0x01091fb2",
     "?DAT_011f3cd8@@3R6APAHHHHPAH@ZA": "0x01092520",
-    "?CopyGlobalsToBuffer@@YAPAHHHHPAH@Z": "0x008a3af0",
+    "?NiColorKey_Interpolate@@YAPAHHHHPAH@Z": "0x008a3af0",
     "?DAT_011f3b28@@3R6A_NPBUHelper@@0@ZA": "0x01092370",
     "?CompareHelpers@@YA_NPBUHelper@@0@Z": "0x008a2f30",
     "?DAT_011f3690@@3EA": "0x01091ee0",
@@ -560282,7 +560282,7 @@
     "?DAT_011f3a90@@3P6AXXZA": "0x010922d8",
     "?FUN_00a2a0e0@@YAXXZ": "0x008a4520",
     "?DAT_011f3a00@@3P6AXXZA": "0x01092248",
-    "?CopyKeyData@@YAXXZ": "0x008a4130",
+    "?NiEulerRotKey_Copy@@YAXXZ": "0x008a4130",
     "?DAT_011f3970@@3P6AXXZA": "0x010921b8",
     "?FUN_00a29db0@@YAXXZ": "0x008a41f0",
     "?DAT_011f38e0@@3P6AXXZA": "0x01092128",
@@ -560294,7 +560294,7 @@
     "?DAT_011f37c0@@3P6AXXZA": "0x01092008",
     "?DispatchEntryCallbacks@@YAXXZ": "0x008a4240",
     "?DAT_011f3850@@3P6AXXZA": "0x01092098",
-    "?UpdateArrayElements@@YAXXZ": "0x008a4280",
+    "?NiEulerRotKey_Insert@@YAXXZ": "0x008a4280",
     "?DAT_011f3691@@3EA": "0x01091ee1",
     "?DAT_011f3d6c@@3HA": "0x010925b4",
     "?DAT_011f3c4c@@3HA": "0x01092494",
@@ -564345,7 +564345,7 @@
    "functions": [
     {
      "address": "0x0095e380",
-     "symbol": "?IsSupportedRagdollConstraint@@YA_NPAUObj@@_N@Z",
+     "symbol": "?_isConstraintSupported@@YA_NPAUObj@@_N@Z",
      "size": 153
     }
    ],
@@ -567407,7 +567407,7 @@
     },
     {
      "address": "0x009eea50",
-     "symbol": "?WriteArray@hkOArchive@fnv_00d60ac0@@QAEXPBXI@Z",
+     "symbol": "?writeArray64@hkOArchive@fnv_00d60ac0@@QAEXPBXI@Z",
      "size": 20
     },
     {
@@ -569472,7 +569472,7 @@
     },
     {
      "address": "0x009b3760",
-     "symbol": "?WriteUIntArray@@YAXPBIHPAUWriter@@H@Z",
+     "symbol": "?writeUlongArray@@YAXPBIHPAUWriter@@H@Z",
      "size": 146
     },
     {
@@ -570991,7 +570991,7 @@
    "functions": [
     {
      "address": "0x009b2550",
-     "symbol": "?GetMemberSize@@YAHPAULay_cls@@PAEH@Z",
+     "symbol": "?computeMemberSize@@YAHPAULay_cls@@PAEH@Z",
      "size": 435
     },
     {
@@ -571021,7 +571021,7 @@
     "?F86940@Lay_cls@@QAEHXZ": "0x0093d8c0",
     "?F86910@Lay_cls@@QAEHXZ": "0x0093d890",
     "?F470d0@Mem_cls@@QAEHXZ": "0x009b0760",
-    "?GetMemberSize@@YAHPAULay_cls@@PAEH@Z": "0x009b2550",
+    "?computeMemberSize@@YAHPAULay_cls@@PAEH@Z": "0x009b2550",
     "?Init@StrBuf_cls@@QAEXPAXI@Z": "0x00923070",
     "??_C@_0DP@DKMHGPJE@Unknown?5class?5member?5type?5in?5str@": "0x00e7e6ac",
     "?Assign@StrBuf_cls@@QAEXPBD@Z": "0x00943710",
@@ -575859,7 +575859,7 @@
     },
     {
      "address": "0x009cb280",
-     "symbol": "?ComputeExtendedResult@@YAMPAULocalSource@@PAXPAUFNVFlags@@@Z",
+     "symbol": "?separatingDistanceUsingCapsuleRepresentations@@YAMPAULocalSource@@PAXPAUFNVFlags@@@Z",
      "size": 442
     }
    ],
@@ -591350,7 +591350,7 @@
    "functions": [
     {
      "address": "0x0047b400",
-     "symbol": "?InvokeFromRequest@RequestReceiver@@QAEXIIII@Z",
+     "symbol": "?GridCellArray_MoveItem@RequestReceiver@@QAEXIIII@Z",
      "size": 90
     }
    ],
@@ -591718,8 +591718,8 @@
     "?ReadUnsignedInteger@NiStream@@QAEIXZ": "0x0082b620",
     "?FUN_00c319e0@Base00c319e0@@QAEXPAUStrArr@@@Z": "0x00ac60d0",
     "_g_fRadiansPerRevolution": "0x01067218",
-    "?$S1@?6??UpdateRotationAngles@@YGXMPAUNiPSysData@@@Z@4IA": "0x0116ec24",
-    "?fMaxAngle@?6??UpdateRotationAngles@@YGXMPAUNiPSysData@@@Z@4MA": "0x0116ec20",
+    "?$S1@?6??NiPSysRotationModifier_Update@@YGXMPAUNiPSysData@@@Z@4IA": "0x0116ec24",
+    "?fMaxAngle@?6??NiPSysRotationModifier_Update@@YGXMPAUNiPSysData@@@Z@4MA": "0x0116ec20",
     "?DAT_0116ec28@@3PBDB": "0x0116ec28",
     "?DAT_00e8c968@@3QBDB": "0x00e8c968",
     "?DAT_00e8c944@@3QBDB": "0x00e8c944",
@@ -591758,12 +591758,12 @@
     },
     {
      "address": "0x00ac0bc0",
-     "symbol": "?UpdateRotationAngles@@YGXMPAUNiPSysData@@@Z",
+     "symbol": "?NiPSysRotationModifier_Update@@YGXMPAUNiPSysData@@@Z",
      "size": 230
     },
     {
      "address": "0x00ac0cb0",
-     "symbol": "?UpdateParticleRotation@FUN_00c207a0_shell@@QAEXPAUNiPSysData@@G@Z",
+     "symbol": "?NiPSysRotationModifier_Initialize@FUN_00c207a0_shell@@QAEXPAUNiPSysData@@G@Z",
      "size": 470
     },
     {
@@ -591833,8 +591833,8 @@
     "?ReadUnsignedInteger@NiStream@@QAEIXZ": "0x0082b620",
     "?FUN_00c319e0@Base00c319e0@@QAEXPAUStrArr@@@Z": "0x00ac60d0",
     "_g_fRadiansPerRevolution": "0x01067218",
-    "?$S1@?6??UpdateRotationAngles@@YGXMPAUNiPSysData@@@Z@4IA": "0x0116ec24",
-    "?fMaxAngle@?6??UpdateRotationAngles@@YGXMPAUNiPSysData@@@Z@4MA": "0x0116ec20"
+    "?$S1@?6??NiPSysRotationModifier_Update@@YGXMPAUNiPSysData@@@Z@4IA": "0x0116ec24",
+    "?fMaxAngle@?6??NiPSysRotationModifier_Update@@YGXMPAUNiPSysData@@@Z@4MA": "0x0116ec20"
    }
   },
   {
@@ -593471,7 +593471,7 @@
     "_ReadBlockEntries": "0x008a4420",
     "_SaveKey": "0x008a5e30",
     "?FUN_00a312d0@@YGXHHHHH@Z": "0x008ab230",
-    "_GetAccumulatedValue": "0x008b8af0",
+    "_NiPathInterpolator_GetTotalPathLength": "0x008b8af0",
     "?FindKeyIndex@@YA_NMPAUTCBKeyS@@IPAII@Z": "0x008b6ee0",
     "?GetKeyPosAtTime@@YA?AUVec3R@@MPAUTCBKeyS@@HII@Z": "0x008a1b40",
     "?FUN_00a420e0@@YAXMMPAMMM0MM00@Z": "0x008bc340",
@@ -593510,7 +593510,7 @@
     "?GenInterpFloat@@YAMMPAUBezFloatKey@@HII@Z": "0x008a12b0",
     "?Allocate@A27250Heap@@QAEPAXI@Z": "0x0086b930",
     "?LoadBinary@A27250FloatKey@@QAEXAAVA27250Stream@@@Z": "0x008a13c0",
-    "?CallAnimCallback@@YAXHPAX@Z": "0x008b7370",
+    "?NiAnimationKey_SaveBinary@@YAXHPAX@Z": "0x008b7370",
     "?Apply@AnimNode@@QAEXH@Z": "0x0083fa20",
     "?A27BD0KeyEqual@@YA_NABUA27BD0Key@@0@Z": "0x008a1c00",
     "?IsEqual@A27BD0Point3@@QBE_NABU1@@Z": "0x00914730",
@@ -593522,7 +593522,7 @@
     "?LoadBinary@A281E0Point3@@QAEXAAVA281E0Stream@@@Z": "0x00823eb0",
     "?ApplyAnimToTarget@@YAXAAUNiStream@@PAUA28260Key@@@Z": "0x008a1900",
     "?Set@Inner_b5508@@QAEPAUVec4_b5508@@MMMM@Z": "0x00836cd0",
-    "?CallAnimCallback@@YAXPAX0@Z": "0x008b7370",
+    "?NiAnimationKey_SaveBinary@@YAXPAX0@Z": "0x008b7370",
     "?NiQuaternion_SaveBinary@FUN_00a28720_target@@QAEXPAX@Z": "0x008377c0",
     "?FUN_00a28740@@YAXPAXM00IPAIE@Z": "0x008a2be0",
     "_DAT_011f366c": "0x01091ebc",
@@ -593544,7 +593544,7 @@
     "?FUN_00a291a0@@YAXXZ": "0x008a3650",
     "?g_akA291F0Interp@@3PAY05P6AXXZA": "0x01091fc8",
     "?g_akA291F0Cubic@@3PAY05P6AXXZA": "0x01092058",
-    "?CallAnimCallback@@YAXPAXPAUOuter@@@Z": "0x008b7370",
+    "?NiAnimationKey_SaveBinary@@YAXPAXPAUOuter@@@Z": "0x008b7370",
     "?NiColorA_SaveBinary@Inner@@QAEXPAX@Z": "0x0083fb40",
     "_FNV_element_ctor": "0x008a3eb0",
     "_FNV_array_ctor_iterator@16": "0x00401020",
@@ -593631,7 +593631,7 @@
     "?Negate@NiQuaternion@@QBE?AV1@XZ": "0x00836d50",
     "?InterpolateColor@@YA?AUNiColorA_K@@MPAUNiColorKey_K@@IIAAIE@Z": "0x008a3b20",
     "?DAT_011f3680@@3UNiColorA_K@@A": "0x01091ed0",
-    "?InterpolateKey@@YAMMIIPAXPAIE@Z": "0x008a1080",
+    "?NiFloatKey_GenInterp@@YAMMIIPAXPAIE@Z": "0x008a1080",
     "?g_compareTable@@3PAP6A_NII@ZA": "0x01092328",
     "?FUN_00a2b1d0@PositionSplineKey@@QAEXABUNiPoint3@@0MM@Z": "0x008a55f0",
     "_Clear": "0x008a7150",
@@ -593741,7 +593741,7 @@
     },
     {
      "address": "0x008a1700",
-     "symbol": "?LoadFloatKeys@@YAPAVA27250FloatKey@@AAVA27250Stream@@I@Z",
+     "symbol": "?NiBezFloatKey_CreateFromStream@@YAPAVA27250FloatKey@@AAVA27250Stream@@I@Z",
      "size": 195
     },
     {
@@ -593791,7 +593791,7 @@
     },
     {
      "address": "0x008a2680",
-     "symbol": "?LoadBezPosKeys@@YAPAVA281E0BezPosKey@@AAVA281E0Stream@@I@Z",
+     "symbol": "?NiBezPosKey_CreateFromStream@@YAPAVA281E0BezPosKey@@AAVA281E0Stream@@I@Z",
      "size": 121
     },
     {
@@ -593891,7 +593891,7 @@
     },
     {
      "address": "0x008a4130",
-     "symbol": "?CopyKeyData@@YAXPAX0@Z",
+     "symbol": "?NiEulerRotKey_Copy@@YAXPAX0@Z",
      "size": 185
     },
     {
@@ -593901,12 +593901,12 @@
     },
     {
      "address": "0x008a4280",
-     "symbol": "?UpdateArrayElements@@YA_NMPAPAXPAH@Z",
+     "symbol": "?NiEulerRotKey_Insert@@YA_NMPAPAXPAH@Z",
      "size": 191
     },
     {
      "address": "0x008a4340",
-     "symbol": "?LoadKeyData@A29F00KeyData@@QAEXAAVA29F00Stream@@@Z",
+     "symbol": "?NiEulerRotKey_LoadBinary@A29F00KeyData@@QAEXAAVA29F00Stream@@@Z",
      "size": 223
     },
     {
@@ -594041,7 +594041,7 @@
     },
     {
      "address": "0x008a5c70",
-     "symbol": "?InsertBezPosKey@@YA_NMPAPAUBezPosKey@@PAI@Z",
+     "symbol": "?NiTCBPosKey_Insert@@YA_NMPAPAUBezPosKey@@PAI@Z",
      "size": 300
     },
     {
@@ -594056,7 +594056,7 @@
     },
     {
      "address": "0x008a5f20",
-     "symbol": "?AllocateElement76Array@fnv_00a2bb00@@YAPAXHI@Z",
+     "symbol": "?NiTCBPosKey_CreateFromStream@fnv_00a2bb00@@YAPAXHI@Z",
      "size": 95
     },
     {
@@ -594091,7 +594091,7 @@
     },
     {
      "address": "0x008a65d0",
-     "symbol": "?SaveExtraFields@S_a2c300_Obj@@QAEXPAUS_a2c300_Stream@@@Z",
+     "symbol": "?NiTCBRotKey_LoadBinary@S_a2c300_Obj@@QAEXPAUS_a2c300_Stream@@@Z",
      "size": 132
     },
     {
@@ -594146,7 +594146,7 @@
     },
     {
      "address": "0x008a6dc0",
-     "symbol": "?AllocateKeyframeElements@@YAPAUKeyframeElement@@PAXI@Z",
+     "symbol": "?NiTCBFloatKey_CreateFromStream@@YAPAUKeyframeElement@@PAXI@Z",
      "size": 95
     },
     {
@@ -594316,7 +594316,7 @@
     },
     {
      "address": "0x008b7370",
-     "symbol": "?CallAnimCallback@@YAHPAUFUN_00a3da50_Owner@@H@Z",
+     "symbol": "?NiAnimationKey_SaveBinary@@YAHPAUFUN_00a3da50_Owner@@H@Z",
      "size": 47
     },
     {
@@ -594393,7 +594393,7 @@
     "_ReadBlockEntries": "0x008a4420",
     "_SaveKey": "0x008a5e30",
     "?FUN_00a312d0@@YGXHHHHH@Z": "0x008ab230",
-    "_GetAccumulatedValue": "0x008b8af0",
+    "_NiPathInterpolator_GetTotalPathLength": "0x008b8af0",
     "?FindKeyIndex@@YA_NMPAUTCBKeyS@@IPAII@Z": "0x008b6ee0",
     "?GetKeyPosAtTime@@YA?AUVec3R@@MPAUTCBKeyS@@HII@Z": "0x008a1b40",
     "?FUN_00a420e0@@YAXMMPAMMM0MM00@Z": "0x008bc340",
@@ -594432,7 +594432,7 @@
     "?GenInterpFloat@@YAMMPAUBezFloatKey@@HII@Z": "0x008a12b0",
     "?Allocate@A27250Heap@@QAEPAXI@Z": "0x0086b930",
     "?LoadBinary@A27250FloatKey@@QAEXAAVA27250Stream@@@Z": "0x008a13c0",
-    "?CallAnimCallback@@YAXHPAX@Z": "0x008b7370",
+    "?NiAnimationKey_SaveBinary@@YAXHPAX@Z": "0x008b7370",
     "?Apply@AnimNode@@QAEXH@Z": "0x0083fa20",
     "?A27BD0KeyEqual@@YA_NABUA27BD0Key@@0@Z": "0x008a1c00",
     "?IsEqual@A27BD0Point3@@QBE_NABU1@@Z": "0x00914730",
@@ -594444,7 +594444,7 @@
     "?LoadBinary@A281E0Point3@@QAEXAAVA281E0Stream@@@Z": "0x00823eb0",
     "?ApplyAnimToTarget@@YAXAAUNiStream@@PAUA28260Key@@@Z": "0x008a1900",
     "?Set@Inner_b5508@@QAEPAUVec4_b5508@@MMMM@Z": "0x00836cd0",
-    "?CallAnimCallback@@YAXPAX0@Z": "0x008b7370",
+    "?NiAnimationKey_SaveBinary@@YAXPAX0@Z": "0x008b7370",
     "?NiQuaternion_SaveBinary@FUN_00a28720_target@@QAEXPAX@Z": "0x008377c0",
     "?FUN_00a28740@@YAXPAXM00IPAIE@Z": "0x008a2be0",
     "_DAT_011f366c": "0x01091ebc",
@@ -594466,7 +594466,7 @@
     "?FUN_00a291a0@@YAXXZ": "0x008a3650",
     "?g_akA291F0Interp@@3PAY05P6AXXZA": "0x01091fc8",
     "?g_akA291F0Cubic@@3PAY05P6AXXZA": "0x01092058",
-    "?CallAnimCallback@@YAXPAXPAUOuter@@@Z": "0x008b7370",
+    "?NiAnimationKey_SaveBinary@@YAXPAXPAUOuter@@@Z": "0x008b7370",
     "?NiColorA_SaveBinary@Inner@@QAEXPAX@Z": "0x0083fb40",
     "_FNV_element_ctor": "0x008a3eb0",
     "_FNV_array_ctor_iterator@16": "0x00401020",
@@ -594553,7 +594553,7 @@
     "?Negate@NiQuaternion@@QBE?AV1@XZ": "0x00836d50",
     "?InterpolateColor@@YA?AUNiColorA_K@@MPAUNiColorKey_K@@IIAAIE@Z": "0x008a3b20",
     "?DAT_011f3680@@3UNiColorA_K@@A": "0x01091ed0",
-    "?InterpolateKey@@YAMMIIPAXPAIE@Z": "0x008a1080",
+    "?NiFloatKey_GenInterp@@YAMMIIPAXPAIE@Z": "0x008a1080",
     "?g_compareTable@@3PAP6A_NII@ZA": "0x01092328",
     "?FUN_00a2b1d0@PositionSplineKey@@QAEXABUNiPoint3@@0MM@Z": "0x008a55f0",
     "_Clear": "0x008a7150",
@@ -594636,7 +594636,7 @@
     "??3@YAXPAX@Z": "0x00401010",
     "?FUN_00a2c6a0@@YAXPAUKey@@MMMM@Z": "0x008a6970",
     "??0LoadKey48@@QAE@XZ": "0x008a3eb0",
-    "?LoadKeyData@LoadKey48@@QAEXAAVA29F00Stream@@@Z": "0x008a4340",
+    "?NiEulerRotKey_LoadBinary@LoadKey48@@QAEXAAVA29F00Stream@@@Z": "0x008a4340",
     "??0LoadKey20@@QAE@XZ": "0x008a7150",
     "?FUN_00a29640@LoadKey20@@QAEXPAUS_a2c300_Stream@@@Z": "0x008a3ab0",
     "??0ArrayElementA2BE60@@QAE@XZ": "0x008a7870"
@@ -594798,7 +594798,7 @@
     "?FUN_00a2c130@@YAXPAUFUN_00a2bdb0@@II@Z": "0x008a6400",
     "?FUN_00aa3e40@Alloc@na2c@fnv_00a2c420@@QAEPAXI@Z": "0x0086b930",
     "??0FUN_00a2bdb0@fnv_00a2c420@@QAE@XZ": "0x008a7870",
-    "?SaveExtraFields@FUN_00a2bdb0@fnv_00a2c420@@QAEXPAUS_a2c300_Stream@@@Z": "0x008a65d0",
+    "?NiTCBRotKey_LoadBinary@FUN_00a2bdb0@fnv_00a2c420@@QAEXPAUS_a2c300_Stream@@@Z": "0x008a65d0",
     "?FindKeyIndex@@YA_NMPAUScalarKeyA2@@IPAII@Z": "0x008b6ee0",
     "?GetValueAtTime@@YAMMPAUScalarKeyA2@@HII@Z": "0x008a12b0",
     "?FUN_00a2c7a0@@YAXPAUScalarKeyA2@@II@Z": "0x008a6a70",
@@ -595178,7 +595178,7 @@
     },
     {
      "address": "0x008bb4b0",
-     "symbol": "?DispatchByKey@FUN_00a41410_cls@@QAEXPAUHandlerArg@@@Z",
+     "symbol": "?BSAnimNoteListener_Update@FUN_00a41410_cls@@QAEXPAUHandlerArg@@@Z",
      "size": 60
     },
     {
@@ -595734,7 +595734,7 @@
     "?FUN_00ba3aa0@IndexedObjects@@QAEXIPAI@Z": "0x005b3880",
     "?Initialize@SceneFactoryObject@@QAEXXZ": "0x0084b0e0",
     "?DAT_0109d55c@@3HA": "0x00e22e94",
-    "?SetFromFrustum@CallTarget_00a74e10@@QAEHHH@Z": "0x0083ecb0",
+    "?NiFrustumPlanes_Set@CallTarget_00a74e10@@QAEHHH@Z": "0x0083ecb0",
     "?BuildSqrtLut@@YAPAXXZ": "0x00823e20",
     "?GetPrefixLengthA61@@YAIPBDH@Z": "0x00bc8570",
     "?HashNameA61@@YAIPBD@Z": "0x00828cf0",
@@ -595750,7 +595750,7 @@
     "?FUN_00a5fc10@A5FC10Stub@@QAEPAU1@XZ": "0x008c7a30",
     "?FUN_00a5fca0@FUN_00a5fca0_cls@@QAEXXZ": "0x0082f460",
     "?FUN_00a5d7b0@ControllerA606@@QAEXAAUNiStream@@@Z": "0x00825c30",
-    "?WriteObjectLink@NiStreamA606@@QAEXPAX@Z": "0x0082b000",
+    "?NiStream_SaveFixedString@NiStreamA606@@QAEXPAX@Z": "0x0082b000",
     "?FUN_00af4170@@YAIPBDH@Z": "0x00bc8570",
     "?FUN_00a5c180@@YI_NPAXHPAUNiStream@@@Z": "0x006482c0",
     "?FUN_00a5c820@EqBase@@QAE_NPAX@Z": "0x0065d8c0",
@@ -596044,17 +596044,17 @@
     },
     {
      "address": "0x008315d0",
-     "symbol": "?MedianOfThree@PivotGeometry@@QAEHPAGEHH@Z",
+     "symbol": "?NiGeometryData_ChoosePivot@PivotGeometry@@QAEHPAGEHH@Z",
      "size": 176
     },
     {
      "address": "0x008317d0",
-     "symbol": "?GetOutRec@FUN_00a674b0_cls@@QAEXPAUOutRec674@@@Z",
+     "symbol": "?NiGeometryData_GetBlendWeightsIterator@FUN_00a674b0_cls@@QAEXPAUOutRec674@@@Z",
      "size": 124
     },
     {
      "address": "0x00831850",
-     "symbol": "?FillOutRec674@Q67530Cls@@QAEXPAUOutRec674@@@Z",
+     "symbol": "?NiGeometryData_GetBlendIndicesIterator@Q67530Cls@@QAEXPAUOutRec674@@@Z",
      "size": 124
     },
     {
@@ -596159,7 +596159,7 @@
     },
     {
      "address": "0x0083ecb0",
-     "symbol": "?SetFromFrustum@Planes@FrustumPlanes@@QAEXPBUFrustum@2@PBUTransform@2@@Z",
+     "symbol": "?NiFrustumPlanes_Set@Planes@FrustumPlanes@@QAEXPBUFrustum@2@PBUTransform@2@@Z",
      "size": 1974
     },
     {
@@ -596299,7 +596299,7 @@
     },
     {
      "address": "0x00849550",
-     "symbol": "?AddScaledPoints@@YAXPAUNiPoint3@@MPBU1@I@Z",
+     "symbol": "?NiPoint3_PointsPlusEqualFloatTimesPoints@@YAXPAUNiPoint3@@MPBU1@I@Z",
      "size": 413
     },
     {
@@ -596454,7 +596454,7 @@
     "?FUN_00ba3aa0@IndexedObjects@@QAEXIPAI@Z": "0x005b3880",
     "?Initialize@SceneFactoryObject@@QAEXXZ": "0x0084b0e0",
     "?DAT_0109d55c@@3HA": "0x00e22e94",
-    "?SetFromFrustum@CallTarget_00a74e10@@QAEHHH@Z": "0x0083ecb0",
+    "?NiFrustumPlanes_Set@CallTarget_00a74e10@@QAEHHH@Z": "0x0083ecb0",
     "?BuildSqrtLut@@YAPAXXZ": "0x00823e20",
     "?GetPrefixLengthA61@@YAIPBDH@Z": "0x00bc8570",
     "?HashNameA61@@YAIPBD@Z": "0x00828cf0",
@@ -596470,7 +596470,7 @@
     "?FUN_00a5fc10@A5FC10Stub@@QAEPAU1@XZ": "0x008c7a30",
     "?FUN_00a5fca0@FUN_00a5fca0_cls@@QAEXXZ": "0x0082f460",
     "?FUN_00a5d7b0@ControllerA606@@QAEXAAUNiStream@@@Z": "0x00825c30",
-    "?WriteObjectLink@NiStreamA606@@QAEXPAX@Z": "0x0082b000",
+    "?NiStream_SaveFixedString@NiStreamA606@@QAEXPAX@Z": "0x0082b000",
     "?FUN_00af4170@@YAIPBDH@Z": "0x00bc8570",
     "?FUN_00a5c180@@YI_NPAXHPAUNiStream@@@Z": "0x006482c0",
     "?FUN_00a5c820@EqBase@@QAE_NPAX@Z": "0x0065d8c0",
@@ -596998,7 +596998,7 @@
     },
     {
      "address": "0x00850720",
-     "symbol": "?CopyRefCountedPointers@CloneObject@@QAEXPAU1@PAX@Z",
+     "symbol": "?NiSkinInstance_CopyMembers@CloneObject@@QAEXPAU1@PAX@Z",
      "size": 136
     },
     {
@@ -597253,7 +597253,7 @@
     },
     {
      "address": "0x00865d30",
-     "symbol": "?CreateNiAlphaAccumulator@@YAPAUNiAlphaAccumulator@@XZ",
+     "symbol": "?NiAlphaAccumulator_CreateObject@@YAPAUNiAlphaAccumulator@@XZ",
      "size": 50
     },
     {
@@ -597288,7 +597288,7 @@
     },
     {
      "address": "0x0086a790",
-     "symbol": "?ProcessArgWithObj@@YAHPAUFUN_00a9ff00_Arg@@PAUFUN_00a9ff00_Obj@@@Z",
+     "symbol": "?NiDepthStencilBuffer_CreateCompatible@@YAHPAUFUN_00a9ff00_Arg@@PAUFUN_00a9ff00_Obj@@@Z",
      "size": 90
     },
     {
@@ -597599,11 +597599,11 @@
     "??0FUN_00a8b110@@QAE@_NIPBUBmpColor@@@Z": "0x00855f70",
     "?DAT_011aa2a0@@3VNiPixelFormat@@B": "0x00f734c0",
     "?NiSkinPartition_CreateVertexInteractions@GeometryBuilder@@QAEPAUTempRecord@@IPAUSkinBuildData@@@Z": "0x0084fee0",
-    "?ReduceGroupWeights@GeometryBuilder@@QAE_NPAUSourceGeometry@@EEPAUTempRecord@@@Z": "0x0084e9f0",
-    "?BuildTriangleSetMapping@GeometryBuilder@@QAE_NPAUSourceGeometry@@PAUSkinBuildData@@EPAUTempRecord@@PAUHolderArray@@PAPAXPAPAUFUN_00a81ba0@@@Z": "0x0084f9e0",
+    "?NiSkinPartition_RemoveExcessInteractions@GeometryBuilder@@QAE_NPAUSourceGeometry@@EEPAUTempRecord@@@Z": "0x0084e9f0",
+    "?NiSkinPartition_MakeBoneSets@GeometryBuilder@@QAE_NPAUSourceGeometry@@PAUSkinBuildData@@EPAUTempRecord@@PAUHolderArray@@PAPAXPAPAUFUN_00a81ba0@@@Z": "0x0084f9e0",
     "??0FUN_00a81ba0@@QAE@XZ": "0x0084d010",
-    "?AppendMatchingIndices@C082d30@@QAEXHPAXI@Z": "0x0084e350",
-    "?PopulateSkinData@FUN_00a81ba0@@QAEXPAUC082d30@@PAUHolder@@PAUSourceGeometry@@PAUTempRecord@@_N4EI@Z": "0x0084dee0"
+    "?NiSkinPartition_TriangleSet_AddTriangles@C082d30@@QAEXHPAXI@Z": "0x0084e350",
+    "?NiSkinPartition_Partition_Create@FUN_00a81ba0@@QAEXPAUC082d30@@PAUHolder@@PAUSourceGeometry@@PAUTempRecord@@_N4EI@Z": "0x0084dee0"
    }
   },
   {
@@ -597816,7 +597816,7 @@
     },
     {
      "address": "0x0089eb20",
-     "symbol": "?NormalizePathSeparators@@YAXPAD@Z",
+     "symbol": "?NiStandardizeFilePath@@YAXPAD@Z",
      "size": 101
     },
     {
@@ -597851,7 +597851,7 @@
     },
     {
      "address": "0x0089f770",
-     "symbol": "?AdvanceChars@FUN_00aa1fd0_cls@@QAEIPAD@Z",
+     "symbol": "?NiBinaryStream_PutS@FUN_00aa1fd0_cls@@QAEIPAD@Z",
      "size": 69
     },
     {
@@ -599151,7 +599151,7 @@
     "?FUN_00b6a6c0@EntityManagerB6@@QAEXPAUFUN_00b6abb0@@H@Z": "0x00aeda60",
     "?DAT_012708e4@@3VNiRTTI@@A": "0x0117a5e0",
     "?DAT_011f9508@@3PAUNiRenderer_b6d170@@A": "0x0116f2f8",
-    "?ProcessArgWithObj@@YAPAUFUN_00b6b180_Tex@@PAU1@PAUNiRenderer_b6d170@@@Z": "0x0086a790",
+    "?NiDepthStencilBuffer_CreateCompatible@@YAPAUFUN_00b6b180_Tex@@PAU1@PAUNiRenderer_b6d170@@@Z": "0x0086a790",
     "?DAT_010ade50@@3HA": "0x00e94814",
     "?DAT_011f4748@gfxB6BA@@3PAURendererSurfaceB6BA@@A": "0x0108f048",
     "?SetFromCamera@RendererSurfaceB6BA@@QAEXPAVNiCamera@@@Z": "0x00493150",
@@ -599729,7 +599729,7 @@
     },
     {
      "address": "0x00ae9930",
-     "symbol": "?ApplyRenderMode@FUN_00b66520_class@@QAEXXZ",
+     "symbol": "?BSShaderAccumulator_FinishAccumulatingPreResolveDepth@FUN_00b66520_class@@QAEXXZ",
      "size": 68
     },
     {
@@ -599884,7 +599884,7 @@
     },
     {
      "address": "0x00aef4d0",
-     "symbol": "?ReleaseStringHolders@@YAXXZ",
+     "symbol": "?BSShaderUtil_KillSDM@@YAXXZ",
      "size": 103
     },
     {
@@ -600361,7 +600361,7 @@
     "?FUN_00b6a6c0@EntityManagerB6@@QAEXPAUFUN_00b6abb0@@H@Z": "0x00aeda60",
     "?DAT_012708e4@@3VNiRTTI@@A": "0x0117a5e0",
     "?DAT_011f9508@@3PAUNiRenderer_b6d170@@A": "0x0116f2f8",
-    "?ProcessArgWithObj@@YAPAUFUN_00b6b180_Tex@@PAU1@PAUNiRenderer_b6d170@@@Z": "0x0086a790",
+    "?NiDepthStencilBuffer_CreateCompatible@@YAPAUFUN_00b6b180_Tex@@PAU1@PAUNiRenderer_b6d170@@@Z": "0x0086a790",
     "?DAT_010ade50@@3HA": "0x00e94814",
     "?DAT_011f4748@gfxB6BA@@3PAURendererSurfaceB6BA@@A": "0x0108f048",
     "?SetFromCamera@RendererSurfaceB6BA@@QAEXPAVNiCamera@@@Z": "0x00493150",
@@ -601085,7 +601085,7 @@
     "??1FUN_00b8a8e0_base@@UAE@XZ": "0x00496a20",
     "??_C@_0O@JGNBHEMG@DISPLAY_HIGHW?$AA@": "0x00e9e3f4",
     "??_C@_0BA@GADPNANO@FFTDISPLAYHIGHW?$AA@": "0x00e9e3e4",
-    "?ShutdownAllEffects@FUN_00b97690@@QAEXXZ": "0x00b11ab0",
+    "?ImageSpaceManager_ShutdownEffects@FUN_00b97690@@QAEXXZ": "0x00b11ab0",
     "?ClearTextures@FUN_00b97690@@QAEXXZ": "0x00b1c9b0",
     "_DAT_01202410": "0x011781a0",
     "@FUN_00b8a7e0@4": "0x00b23c00",
@@ -601577,7 +601577,7 @@
     },
     {
      "address": "0x00b12d30",
-     "symbol": "?CreateBlur7Shader@FUN_00b8dca0_cls@@QAEXXZ",
+     "symbol": "?ImageSpaceShaderBlur7_ReloadShaders@FUN_00b8dca0_cls@@QAEXXZ",
      "size": 145
     },
     {
@@ -601597,7 +601597,7 @@
     },
     {
      "address": "0x00b12e80",
-     "symbol": "?CreateBlur9Shader@FUN_00b8ddf0_cls@@QAEXXZ",
+     "symbol": "?ImageSpaceShaderBlur9_ReloadShaders@FUN_00b8ddf0_cls@@QAEXXZ",
      "size": 145
     },
     {
@@ -601787,7 +601787,7 @@
     },
     {
      "address": "0x00b148e0",
-     "symbol": "?CreateDepthOfFieldShaders@B8F850ImageSpaceEffect@@QAEXXZ",
+     "symbol": "?ImageSpaceShaderDepthOfField_ReloadShaders@B8F850ImageSpaceEffect@@QAEXXZ",
      "size": 147
     },
     {
@@ -601807,7 +601807,7 @@
     },
     {
      "address": "0x00b14a30",
-     "symbol": "?InitRadialBlurShader@FUN_00b8f9a0_cls@@QAEXXZ",
+     "symbol": "?ImageSpaceShaderRadialBlur_ReloadShaders@FUN_00b8f9a0_cls@@QAEXXZ",
      "size": 147
     },
     {
@@ -602970,7 +602970,7 @@
     "??1FUN_00b8a8e0_base@@UAE@XZ": "0x00496a20",
     "??_C@_0O@JGNBHEMG@DISPLAY_HIGHW?$AA@": "0x00e9e3f4",
     "??_C@_0BA@GADPNANO@FFTDISPLAYHIGHW?$AA@": "0x00e9e3e4",
-    "?ShutdownAllEffects@FUN_00b97690@@QAEXXZ": "0x00b11ab0",
+    "?ImageSpaceManager_ShutdownEffects@FUN_00b97690@@QAEXXZ": "0x00b11ab0",
     "?ClearTextures@FUN_00b97690@@QAEXXZ": "0x00b1c9b0",
     "_DAT_01202410": "0x011781a0",
     "@FUN_00b8a7e0@4": "0x00b23c00",
@@ -604598,7 +604598,7 @@
     },
     {
      "address": "0x00b30990",
-     "symbol": "?BuildRenderPasses@RenderPassShader_bae7b0@@QAEPAUBSShaderProperty__RenderPassArray@@PAVNiGeometry@@HHHHH@Z",
+     "symbol": "?SkyShaderProperty_GetRenderPasses@RenderPassShader_bae7b0@@QAEPAUBSShaderProperty__RenderPassArray@@PAVNiGeometry@@HHHHH@Z",
      "size": 372
     },
     {
@@ -605078,7 +605078,7 @@
     },
     {
      "address": "0x00b3a940",
-     "symbol": "?ProcessItem@FUN_00bb8890_cls@@QAEXHHHH@Z",
+     "symbol": "?ImageSpaceEffectInterface_Render@FUN_00bb8890_cls@@QAEXHHHH@Z",
      "size": 107
     },
     {
@@ -608779,7 +608779,7 @@
     },
     {
      "address": "0x00ac5720",
-     "symbol": "?AddTrailPoint@TrailSystem@@QAEXGM@Z",
+     "symbol": "?BSStripPSysData_UpdatePoints@TrailSystem@@QAEXGM@Z",
      "size": 561
     },
     {
@@ -609089,7 +609089,7 @@
     },
     {
      "address": "0x00568600",
-     "symbol": "?InvokeInterfaceCall@ScriptX@@QAEXHHHH@Z",
+     "symbol": "?bhkShapePhantom_SetPositionAndLinearCast@ScriptX@@QAEXHHHH@Z",
      "size": 85
     },
     {
@@ -609164,7 +609164,7 @@
     },
     {
      "address": "0x008f4500",
-     "symbol": "?InitializeSelectionMasks@fnv_00c828f0@@YAXXZ",
+     "symbol": "?bhkCollisionFilter_InitFlags@fnv_00c828f0@@YAXXZ",
      "size": 6934
     },
     {
@@ -609194,7 +609194,7 @@
     },
     {
      "address": "0x008f8060",
-     "symbol": "?SaveSerializeData@BC87850RefObject@@QAEXAAVBC87850Stream@@@Z",
+     "symbol": "?bhkSerializable_SaveBinary@BC87850RefObject@@QAEXAAVBC87850Stream@@@Z",
      "size": 112
     },
     {
@@ -609284,7 +609284,7 @@
     },
     {
      "address": "0x008fcd00",
-     "symbol": "?ProcessFileContext@H_00c8b1d0@@QAEXPAUFileContext@@@Z",
+     "symbol": "?bhkListShape_LoadBinary@H_00c8b1d0@@QAEXPAUFileContext@@@Z",
      "size": 114
     },
     {
@@ -609549,11 +609549,11 @@
     "??_C@_05FPFLNKKJ@?9PART?$AA@": "0x00e33e70",
     "??_C@_06INKDOBHO@?9NOCOL?$AA@": "0x00e33e68",
     "??_C@_07DFEKIPKP@?9SCALED?$AA@": "0x00e33e60",
-    "?SaveSerializeData@FUN_00c84d50_cls@@QAEXPAX@Z": "0x008f8060",
+    "?bhkSerializable_SaveBinary@FUN_00c84d50_cls@@QAEXPAX@Z": "0x008f8060",
     "??_C@_07OLNDEMML@Chain01?$AA@": "0x00e34510",
     "?Update@NiAVObject@@QAEXABVNiUpdateData@@@Z": "0x008264c0",
     "?bhkWorld_SetMotion@@YAXPAVNiNode@@H_N11@Z": "0x008d7b90",
-    "?SaveSerializeData@RefChainOwner@@QAEXPAVDispatcher@@@Z": "0x008f8060",
+    "?bhkSerializable_SaveBinary@RefChainOwner@@QAEXPAVDispatcher@@@Z": "0x008f8060",
     "?FUN_00c87c30@Base_00c8ae60@@QAEXXZ": "0x008f7c10",
     "?DAT_01030bf4@@3HA": "0x00dcdbac",
     "?DAT_010c44e4@@3HA": "0x00e3348c",
@@ -609610,7 +609610,7 @@
     "?g_global@@3UGlobalObject@@A": "0x010f3430",
     "__ehhandler$??1FUN_00c8adf0_cls@@UAE@XZ": "0x00c73568",
     "__ehhandler$??1FUN_00c9ad60_cls@@UAE@XZ": "0x00c74848",
-    "__ehhandler$?UpdateChainCollision@@YAXPAVNiAVObject@@@Z": "0x00c73e88",
+    "__ehhandler$?WeaponObject_UpdateChain@@YAXPAVNiAVObject@@@Z": "0x00c73e88",
     "__ehhandler$?FUN_00c8ae60@@YAPAUObject_00c8ae60@@XZ": "0x00c73d6f",
     "?DispatchToTarget@@YAXXZ": "0x00459e40",
     "__ehhandler$??1FUN_00c8a720@@UAE@XZ": "0x00c73fc8",
@@ -610157,7 +610157,7 @@
     },
     {
      "address": "0x008f7f20",
-     "symbol": "?TailOne@FUN_00c876d0_cls@@QAEXH@Z",
+     "symbol": "?bhkSerializable_PostInit@FUN_00c876d0_cls@@QAEXH@Z",
      "size": 18
     },
     {
@@ -610187,12 +610187,12 @@
     },
     {
      "address": "0x008fa4f0",
-     "symbol": "?AccumulateParentTransforms@@YAXPAUFNVTraversalNode@@0PAUFNVTraversalOutput@@@Z",
+     "symbol": "?GetTransformRecursive@@YAXPAUFNVTraversalNode@@0PAUFNVTraversalOutput@@@Z",
      "size": 83
     },
     {
      "address": "0x008fa770",
-     "symbol": "?UpdateChainCollision@@YAXPAVNiAVObject@@@Z",
+     "symbol": "?WeaponObject_UpdateChain@@YAXPAVNiAVObject@@@Z",
      "size": 274
     },
     {
@@ -610557,11 +610557,11 @@
     "??_C@_05FPFLNKKJ@?9PART?$AA@": "0x00e33e70",
     "??_C@_06INKDOBHO@?9NOCOL?$AA@": "0x00e33e68",
     "??_C@_07DFEKIPKP@?9SCALED?$AA@": "0x00e33e60",
-    "?SaveSerializeData@FUN_00c84d50_cls@@QAEXPAX@Z": "0x008f8060",
+    "?bhkSerializable_SaveBinary@FUN_00c84d50_cls@@QAEXPAX@Z": "0x008f8060",
     "??_C@_07OLNDEMML@Chain01?$AA@": "0x00e34510",
     "?Update@NiAVObject@@QAEXABVNiUpdateData@@@Z": "0x008264c0",
     "?bhkWorld_SetMotion@@YAXPAVNiNode@@H_N11@Z": "0x008d7b90",
-    "?SaveSerializeData@RefChainOwner@@QAEXPAVDispatcher@@@Z": "0x008f8060",
+    "?bhkSerializable_SaveBinary@RefChainOwner@@QAEXPAVDispatcher@@@Z": "0x008f8060",
     "?FUN_00c87c30@Base_00c8ae60@@QAEXXZ": "0x008f7c10",
     "?DAT_01030bf4@@3HA": "0x00dcdbac",
     "?DAT_010c44e4@@3HA": "0x00e3348c",
@@ -610618,7 +610618,7 @@
     "?g_global@@3UGlobalObject@@A": "0x010f3430",
     "__ehhandler$??1FUN_00c8adf0_cls@@UAE@XZ": "0x00c73568",
     "__ehhandler$??1FUN_00c9ad60_cls@@UAE@XZ": "0x00c74848",
-    "__ehhandler$?UpdateChainCollision@@YAXPAVNiAVObject@@@Z": "0x00c73e88",
+    "__ehhandler$?WeaponObject_UpdateChain@@YAXPAVNiAVObject@@@Z": "0x00c73e88",
     "__ehhandler$?FUN_00c8ae60@@YAPAUObject_00c8ae60@@XZ": "0x00c73d6f",
     "?DispatchToTarget@@YAXXZ": "0x00459e40",
     "__ehhandler$??1FUN_00c8a720@@UAE@XZ": "0x00c73fc8",
@@ -610929,7 +610929,7 @@
     },
     {
      "address": "0x00918270",
-     "symbol": "?CollectLeafObjects@@YGXPAUWalkLeaf@@PAUWalkArray@@1@Z",
+     "symbol": "?bhkRagdollPenetrationUtil_AddToArrays@@YGXPAUWalkLeaf@@PAUWalkArray@@1@Z",
      "size": 534
     },
     {
@@ -611226,7 +611226,7 @@
     "?DAT_011b1734@@3IA": "0x00f7a818",
     "?DAT_011b1730@@3IA": "0x00f7a814",
     "?FUN_00a89af0@@YGXPAX@Z": "0x0078c030",
-    "?WriteObjectLink@FUN_00a641f0_class@@QAEXPAX@Z": "0x0082b000",
+    "?NiStream_SaveFixedString@FUN_00a641f0_class@@QAEXPAX@Z": "0x0082b000",
     "?DAT_011f6238@@3UPoolFree_t@@A": "0x01090a78",
     "?FUN_00aa4060@MemMgr_00aa4060@@QAEXPAUFUN_00ca0ca0_Class@@@Z": "0x0086ba60",
     "?FUN_00c84ec0@@YAHH@Z": "0x008b1530",
@@ -611414,7 +611414,7 @@
     "??1CB920Base@@UAE@XZ": "0x008f87c0",
     "?hkpCharacterProxy_getShapePhantom@FUN_00cac980_Holder@@QAEPAXXZ": "0x0091ddd0",
     "?hkpCharacterProxy_getShapePhantom@S_00cac0b0_Obj@@QAEPAUS_00cac0b0_Inner@@XZ": "0x0091ddd0",
-    "?SaveSerializeData@S_00cac0b0_cls@@QAEXPAUS_00cac0b0_Arg@@@Z": "0x008f8060",
+    "?bhkSerializable_SaveBinary@S_00cac0b0_cls@@QAEXPAUS_00cac0b0_Arg@@@Z": "0x008f8060",
     "?FUN_00c84d00@CA5940@@QAEXPAUReadStream@@@Z": "0x008f7490",
     "__ehhandler$?GetOrCreateShapeData@MyObj@@QAEPAUShapeData@@PA_N@Z": "0x00c7466b",
     "?g_heapAllocator@@3UHeapAllocator@@A": "0x01090a78",
@@ -611517,7 +611517,7 @@
     "$LN8": "0x0090cb45",
     "$LN16": "0x0090ca15",
     "$LN9": "0x0090cb2a",
-    "__ehhandler$?CollectLeafObjects@@YGXPAUWalkLeaf@@PAUWalkArray@@1@Z": "0x00c74928",
+    "__ehhandler$?bhkRagdollPenetrationUtil_AddToArrays@@YGXPAUWalkLeaf@@PAUWalkArray@@1@Z": "0x00c74928",
     "?DAT_010f2c30@@3UWalkRTTI@@A": "0x010f2c30",
     "?FUN_00477900@LeafOwner918@@QAEPAULeafLookup918@@PAU2@PBX@Z": "0x00477900",
     "?DAT_010f31e4@@3UWalkRTTI@@A": "0x010f31e4",
@@ -612416,7 +612416,7 @@
     "?DAT_011b1734@@3IA": "0x00f7a818",
     "?DAT_011b1730@@3IA": "0x00f7a814",
     "?FUN_00a89af0@@YGXPAX@Z": "0x0078c030",
-    "?WriteObjectLink@FUN_00a641f0_class@@QAEXPAX@Z": "0x0082b000",
+    "?NiStream_SaveFixedString@FUN_00a641f0_class@@QAEXPAX@Z": "0x0082b000",
     "?DAT_011f6238@@3UPoolFree_t@@A": "0x01090a78",
     "?FUN_00aa4060@MemMgr_00aa4060@@QAEXPAUFUN_00ca0ca0_Class@@@Z": "0x0086ba60",
     "?FUN_00c84ec0@@YAHH@Z": "0x008b1530",
@@ -617737,7 +617737,7 @@
     },
     {
      "address": "0x00a49c50",
-     "symbol": "?SkipWhitespace@@YAXPAUTokenReader@@@Z",
+     "symbol": "?eatWhiteSpace@@YAXPAUTokenReader@@@Z",
      "size": 139
     },
     {
@@ -618016,7 +618016,7 @@
    ],
    "symbols": {
     "__allmul": "0x00c01d00",
-    "?SkipWhitespace@@YAXPAUS00dcc240_Stream@@@Z": "0x00a49c50"
+    "?eatWhiteSpace@@YAXPAUS00dcc240_Stream@@@Z": "0x00a49c50"
    }
   },
   {
@@ -621410,7 +621410,7 @@
     "?DAT_00fdf1c0@@3P6GJPAX@ZA": "0x00d9b068",
     "??_C@_0CM@JMLOCBEM@AddToBatch?$DO?5No?5shader?5found?5for?5@": "0x00e28f80",
     "?FUN_00e72c20@E74Accumulator@@QAE_NPAUE74Geometry@@PAUE74RefShader@@@Z": "0x00877d60",
-    "?ProcessCollector@E74GroupMgr@@QAE_NPAXPAUE74GeomData@@PAUE74SkinInstance@@_NII@Z": "0x0088b120",
+    "?NiD3DGeometryGroupManager_AddObjectToGroup@E74GroupMgr@@QAE_NPAXPAUE74GeomData@@PAUE74SkinInstance@@_NII@Z": "0x0088b120",
     "?FUN_00e7acb0@@YAHH@Z": "0x00880e40",
     "?MapCodeToIndex@@YAHH@Z": "0x0086edd0",
     "?DAT_011aaa80@@3UPixelTemplate@@B": "0x00f73ca0",
@@ -622101,7 +622101,7 @@
     "?DAT_00fdf1c0@@3P6GJPAX@ZA": "0x00d9b068",
     "??_C@_0CM@JMLOCBEM@AddToBatch?$DO?5No?5shader?5found?5for?5@": "0x00e28f80",
     "?FUN_00e72c20@E74Accumulator@@QAE_NPAUE74Geometry@@PAUE74RefShader@@@Z": "0x00877d60",
-    "?ProcessCollector@E74GroupMgr@@QAE_NPAXPAUE74GeomData@@PAUE74SkinInstance@@_NII@Z": "0x0088b120",
+    "?NiD3DGeometryGroupManager_AddObjectToGroup@E74GroupMgr@@QAE_NPAXPAUE74GeomData@@PAUE74SkinInstance@@_NII@Z": "0x0088b120",
     "?FUN_00e7acb0@@YAHH@Z": "0x00880e40",
     "?MapCodeToIndex@@YAHH@Z": "0x0086edd0",
     "?DAT_011aaa80@@3UPixelTemplate@@B": "0x00f73ca0",
@@ -623643,7 +623643,7 @@
     "_FUN_00e80630": "0x0088d420",
     "_DestroyGlobalQueues": "0x00890790",
     "?FUN_00e89740@@YAXXZ": "0x0088ee40",
-    "_ShutdownE6EC20": "0x00873d60",
+    "_NiDX9Renderer__SDMShutdown": "0x00873d60",
     "?FreeNodeList@@YAXXZ": "0x0089e420",
     "?FUN_00e98640@FUN_00e98640_Class@@QAEXXZ": "0x0089e390",
     "?FUN_00e9e840@FUN_00e9e840_Class@@QAE_NH@Z": "0x00801ea0",
@@ -623708,7 +623708,7 @@
     "_FUN_00e80630": "0x0088d420",
     "_DestroyGlobalQueues": "0x00890790",
     "?FUN_00e89740@@YAXXZ": "0x0088ee40",
-    "_ShutdownE6EC20": "0x00873d60",
+    "_NiDX9Renderer__SDMShutdown": "0x00873d60",
     "?FreeNodeList@@YAXXZ": "0x0089e420",
     "?FUN_00e98640@FUN_00e98640_Class@@QAEXXZ": "0x0089e390",
     "?FUN_00e9e840@FUN_00e9e840_Class@@QAE_NH@Z": "0x00801ea0"
@@ -624373,7 +624373,7 @@
     },
     {
      "address": "0x00900ce0",
-     "symbol": "?ApplyHavokOperation@@YAXPAUHavokObject@@HPAX@Z",
+     "symbol": "?bhkRigidBody_SetFixed@@YAXPAUHavokObject@@HPAX@Z",
      "size": 135
     },
     {
@@ -624460,7 +624460,7 @@
     "?FUN_00a68bf0@HavokObject@@QAEXXZ": "0x008330a0",
     "?FUN_00c8f080@HavokShape@@QAEXXZ": "0x00900bb0",
     "?FUN_00c8eb20@HavokShape@@QAEXPAX@Z": "0x00900320",
-    "?ApplyHavokOperation@@YAXPAUHavokObject@@HPAX@Z": "0x00900ce0",
+    "?bhkRigidBody_SetFixed@@YAXPAUHavokObject@@HPAX@Z": "0x00900ce0",
     "__ehhandler$?FUN_00c8da40@Shell_c8da40@@QAEXXZ": "0x00c6dac2",
     "??_7View470@@6B@": "0x00e15d9c",
     "?FUN_00723670@Body470@@QAEXXZ": "0x00723670",

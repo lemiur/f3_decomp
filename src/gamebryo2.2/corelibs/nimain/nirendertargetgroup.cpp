@@ -450,7 +450,8 @@ class ShaderLevelEE8
 // @fnv 0x00ee8710
 // pdb: NiRenderTargetGroup::Create | NiRenderTargetGroup.obj | fnv360_0822_retail, call_gap_sim, high
 // pdb params: uiNumBuffers, apkRenderer
-ShaderLevelEE8* __cdecl CreateShaderLevel(unsigned int uiTreeBlockIndex, RendererEE8* pkRenderer)
+// pdb: NiRenderTargetGroup::Create | NiRenderTargetGroup.obj | fnv360_0822_retail, call_gap_sim, high (was: CreateShaderLevel)
+ShaderLevelEE8* __cdecl NiRenderTargetGroup_Create(unsigned int uiTreeBlockIndex, RendererEE8* pkRenderer)
 {
     if (!pkRenderer)
         return 0;

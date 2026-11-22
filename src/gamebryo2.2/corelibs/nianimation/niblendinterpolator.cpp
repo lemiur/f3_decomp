@@ -558,7 +558,8 @@ struct BlendInterpS : InterpS
 };
 // @fnv 0x00a36dc0
 // pdb: NiBlendInterpolator::Collapse | NiBlendInterpolator.obj | fnv360_0721_beta, objrun, high
-void __fastcall CollapseAllInterps(BlendInterpS* self, int)
+// pdb: NiBlendInterpolator::Collapse | NiBlendInterpolator.obj | fnv360_0721_beta, objrun, high (was: CollapseAllInterps)
+void __fastcall NiBlendInterpolator_Collapse(BlendInterpS* self, int)
 {
     if (self->m_ucInterpCount == 1)
     {

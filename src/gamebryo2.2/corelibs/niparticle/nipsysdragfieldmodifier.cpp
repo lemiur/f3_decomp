@@ -226,12 +226,13 @@ struct Subobject
 };
 struct FUN_00c2ce10_owner
 {
-    void __thiscall InvokeCallbackAndUpdate(void* object);
+    void __thiscall NiPSysDragFieldModifier_LoadBinary(void* object);
 };
 // @fnv 0x00c2ce10
 // pdb: NiPSysDragFieldModifier::LoadBinary | NiPSysDragFieldModifier.obj | fnv360_0822_retail, caller_sim, high
 // pdb params: kStream
-void FUN_00c2ce10_owner::InvokeCallbackAndUpdate(void* object)
+// pdb: NiPSysDragFieldModifier::LoadBinary | NiPSysDragFieldModifier.obj | fnv360_0822_retail, caller_sim, high (was: InvokeCallbackAndUpdate)
+void FUN_00c2ce10_owner::NiPSysDragFieldModifier_LoadBinary(void* object)
 {
     void* original = object;
     LoadFromStream(original);

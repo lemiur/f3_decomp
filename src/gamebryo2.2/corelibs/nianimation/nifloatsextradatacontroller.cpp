@@ -43,12 +43,13 @@ struct FUN_00a4ef70_shell
     char _pad[60];
     ExtraStub* e;
     int idx;
-    InterpStub* CreateInterpStub(unsigned short);
+    InterpStub* NiFloatsExtraDataController_CreatePoseInterpolator(unsigned short);
 };
 // @fnv 0x00a4ef70
 // pdb: NiFloatsExtraDataController::CreatePoseInterpolator | NiFloatsExtraDataController.obj | fnv360_0822_retail, objrun_prop, high
 // pdb params: usIndex
-InterpStub* FUN_00a4ef70_shell::CreateInterpStub(unsigned short usIndex)
+// pdb: NiFloatsExtraDataController::CreatePoseInterpolator | NiFloatsExtraDataController.obj | fnv360_0822_retail, objrun_prop, high (was: CreateInterpStub)
+InterpStub* FUN_00a4ef70_shell::NiFloatsExtraDataController_CreatePoseInterpolator(unsigned short usIndex)
 {
     InterpStub* p = (InterpStub*)BSFadeNode::operator new(0x18);
     if (p)

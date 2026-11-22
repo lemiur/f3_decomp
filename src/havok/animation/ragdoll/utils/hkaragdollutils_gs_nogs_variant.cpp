@@ -44,7 +44,7 @@ struct hkError
     virtual int message(int type, int id, const char* desc, const char* file, int line) throw();
 };
 extern hkError* DAT_01268360;
-static bool IsSupportedRagdollConstraint(Obj* obj, bool reportError) throw();
+static bool _isConstraintSupported(Obj* obj, bool reportError) throw();
 
 struct Builder390
 {
@@ -229,7 +229,8 @@ struct List
     int count;
 };
 
-static __declspec(noinline) bool IsSupportedRagdollConstraint(Obj* obj, bool reportError) throw()
+// pdb: _isConstraintSupported | hkaRagdollUtils.obj | fnv360_0822_retail, call_gap, high (was: IsSupportedRagdollConstraint)
+static __declspec(noinline) bool _isConstraintSupported(Obj* obj, bool reportError) throw()
 {
     Inner* inner = obj->inner;
     int t = inner->getSomething();

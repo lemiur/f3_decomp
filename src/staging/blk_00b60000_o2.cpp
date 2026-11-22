@@ -464,11 +464,12 @@ extern void(__cdecl* DAT_011f9f40[])(void*);
 void __cdecl FUN_00b65ae0(void*);
 struct FUN_00b66520_class
 {
-    void ApplyRenderMode();
+    void BSShaderAccumulator_FinishAccumulatingPreResolveDepth();
 };
 // @fnv 0x00b66520
 // pdb: BSShaderAccumulator::FinishAccumulatingPreResolveDepth | BSShaderAccumulator.obj | fnv360_0822_retail, udata, high
-void FUN_00b66520_class::ApplyRenderMode()
+// pdb: BSShaderAccumulator::FinishAccumulatingPreResolveDepth | BSShaderAccumulator.obj | fnv360_0822_retail, udata, high (was: ApplyRenderMode)
+void FUN_00b66520_class::BSShaderAccumulator_FinishAccumulatingPreResolveDepth()
 {
     BSShaderManagerRenderMode::SetRenderMode(*(unsigned int*)((char*)this + 0x19c));
     if (!*(int*)((char*)this + 0x19c))
@@ -8541,7 +8542,7 @@ struct FUN_00b6b180_Obj : NiObjectStub
     FUN_00b6b180_Tex* unk4c;
 };
 
-FUN_00b6b180_Tex* __cdecl ProcessArgWithObj(FUN_00b6b180_Tex* apTex, NiRenderer_b6d170* apRenderer);
+FUN_00b6b180_Tex* __cdecl NiDepthStencilBuffer_CreateCompatible(FUN_00b6b180_Tex* apTex, NiRenderer_b6d170* apRenderer);
 
 // @fnv 0x00b6b180
 // pdb: BSRenderedTexture::GetDepthStencilBuffer | BSRenderedTexture.obj | fnv360_0822_retail, callee_sim, low
@@ -8566,12 +8567,12 @@ FUN_00b6b180_Tex* __cdecl FUN_00b6b180(FUN_00b6b180_Obj* apObj, FUN_00b6b180_Tex
                 }
             }
         }
-        return ProcessArgWithObj(apObj->GetBuffer(), DAT_011f9508);
+        return NiDepthStencilBuffer_CreateCompatible(apObj->GetBuffer(), DAT_011f9508);
     }
     FUN_00b6b180_Tex* pTarget = apObj->unk4c;
     if (apOther && apOther->unk08 >= pTarget->unk08 && apOther->unk0c >= pTarget->unk0c)
         return apOther;
-    return ProcessArgWithObj(pTarget, DAT_011f9508);
+    return NiDepthStencilBuffer_CreateCompatible(pTarget, DAT_011f9508);
 }
 
 struct FUN_00b6fd20_cls
@@ -10838,7 +10839,8 @@ static inline void DeleteHolder(StrHolder_b6c130* p)
 // Releases the two global string holders and nulls their pointers.
 // @fnv 0x00b6c130
 // pdb: BSShaderUtil::KillSDM | BSShaderUtil.obj | fnv360_0822_retail, call_seq, high
-void __cdecl ReleaseStringHolders()
+// pdb: BSShaderUtil::KillSDM | BSShaderUtil.obj | fnv360_0822_retail, call_seq, high (was: ReleaseStringHolders)
+void __cdecl BSShaderUtil_KillSDM()
 {
     DeleteHolder(DAT_011fa050);
     DeleteHolder(DAT_011fa054);

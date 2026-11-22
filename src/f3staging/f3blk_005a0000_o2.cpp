@@ -9288,7 +9288,7 @@ struct Owner5bcc40 {
     bool FUN_005bcc40(V3_5bcc40* out1, V3_5bcc40* out2);
 };
 
-// pdb: NavMesh::GetBounds | NavMesh_Util.obj | fnv360_0822_retail, call_gap, low
+// pdb: NavMesh::NiGeometryData_GetNormalsIterator | NavMesh_Util.obj | fnv360_0822_retail, call_gap, low
 // pdb params: aRetMin, aRetMax
 bool Owner5bcc40::FUN_005bcc40(V3_5bcc40* out1, V3_5bcc40* out2)
 {

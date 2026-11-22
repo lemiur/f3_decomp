@@ -408,7 +408,7 @@ struct NiTimeController
     unsigned int flags38;
 
     bool __thiscall NiTimeController_DontDoUpdate(float value);
-    void __thiscall EvaluateAndApplyOutput(float& parameter);
+    void __thiscall NiLightColorController_Update(float& parameter);
 };
 
 // Evaluates the controller output into a clamped 0..1 vector and writes it to the output object, swapping vector/color when flags38 bit 0 is set.
@@ -426,7 +426,8 @@ void* __cdecl FUN_00424d50(FakeRTTI* type, NiObject* obj);
 
 // pdb: NiLightColorController::Update | NiLightColorController.obj | fnv360_0822_retail, caller_sim, high
 // pdb params: UpdateData
-void NiTimeController::EvaluateAndApplyOutput(float& parameter)
+// pdb: NiLightColorController::Update | NiLightColorController.obj | fnv360_0822_retail, caller_sim, high (was: EvaluateAndApplyOutput)
+void NiTimeController::NiLightColorController_Update(float& parameter)
 {
     if ((unsigned char)(flags08 >> 5) & 1)
         value28 = DAT_01096324;

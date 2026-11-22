@@ -29,7 +29,8 @@ struct CPX
 // @fnv 0x00a50a60
 // pdb: NiBSplineFloatInterpolator::GetControlHandle | NiBSplineFloatInterpolator.obj | fnv360_1110_retail, objrun, high
 // pdb params: usChannel
-unsigned int __fastcall GetHandleByIndex(CPX* self, int, unsigned short idx)
+// pdb: NiBSplineFloatInterpolator::GetControlHandle | NiBSplineFloatInterpolator.obj | fnv360_1110_retail, objrun, high (was: GetHandleByIndex)
+unsigned int __fastcall NiBSplineFloatInterpolator_GetControlHandle(CPX* self, int, unsigned short idx)
 {
     unsigned int r = 0xffff;
     if (idx == 0)
@@ -46,7 +47,8 @@ struct CPX
 // @fnv 0x00a50a80
 // pdb: NiBSplineFloatInterpolator::SetControlHandle | NiBSplineFloatInterpolator.obj | fnv360_1110_retail, objrun, high
 // pdb params: kControlHandle, usChannel
-void __fastcall SetHandleIfFirstIndex(CPX* self, int, unsigned int h, unsigned short idx)
+// pdb: NiBSplineFloatInterpolator::SetControlHandle | NiBSplineFloatInterpolator.obj | fnv360_1110_retail, objrun, high (was: SetHandleIfFirstIndex)
+void __fastcall NiBSplineFloatInterpolator_SetControlHandle(CPX* self, int, unsigned int h, unsigned short idx)
 {
     if (idx == 0)
         self->handle = h;
@@ -208,14 +210,15 @@ struct NiBSplineInterpolatorStand
 
 struct FUN_00a50c70_cls : NiBSplineFloatInterpolator
 {
-    void LoadFloatInterpolator(NiStream& stream);
+    void NiBSplineFloatInterpolator_SaveBinary(NiStream& stream);
 };
 
 // Loads the base interpolator stream, then reads m_fFloatValue and m_kFloatCPHandle from the stream's binary view.
 // @fnv 0x00a50c70
 // pdb: NiBSplineFloatInterpolator::SaveBinary | NiBSplineFloatInterpolator.obj | fnv360_0822_retail, caller_sim, high
 // pdb params: kStream
-void FUN_00a50c70_cls::LoadFloatInterpolator(NiStream& stream)
+// pdb: NiBSplineFloatInterpolator::SaveBinary | NiBSplineFloatInterpolator.obj | fnv360_0822_retail, caller_sim, high (was: LoadFloatInterpolator)
+void FUN_00a50c70_cls::NiBSplineFloatInterpolator_SaveBinary(NiStream& stream)
 {
     reinterpret_cast<NiBSplineInterpolatorStand*>(this)->LoadStream(stream);
     FloatInterpStreamView* s = reinterpret_cast<FloatInterpStreamView*>(&stream);

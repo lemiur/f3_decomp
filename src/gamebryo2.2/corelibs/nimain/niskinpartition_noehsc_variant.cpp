@@ -74,7 +74,7 @@ struct C082d30
     unsigned int f4;
     unsigned int f8;
     void FUN_00a82710(unsigned int);
-    void AppendMatchingIndices(int, int*, unsigned int);
+    void NiSkinPartition_TriangleSet_AddTriangles(int, int*, unsigned int);
 };
 struct Dummy13
 {
@@ -287,7 +287,7 @@ struct ItemSet
     unsigned int m_u4;
     unsigned int m_uiItemCount;
 };
-int __cdecl FindMatchingItem(ItemSet* set, const unsigned short* a2, const void* a3, unsigned char* flags,
+int __cdecl NiSkinPartition_AssignTriangle(ItemSet* set, const unsigned short* a2, const void* a3, unsigned char* flags,
                              unsigned char key);
 // FUN_00a833a0 : constructor of a three-dword value object; zeroes all members.
 struct FUN_00a833a0_cls
@@ -565,9 +565,9 @@ struct SkinBuilder
     int unk00;
     int unk04;
     unsigned int count;
-    __declspec(nothrow) void BuildBoneLODControllerSets(SkinGeom*, void*, SkinItems*, int*) throw();
+    __declspec(nothrow) void NiSkinPartition_CreateInitialBoneSets(SkinGeom*, void*, SkinItems*, int*) throw();
     __declspec(nothrow) void NiSkinPartition_MergeBoneSets(unsigned int, SkinItems*) throw();
-    bool BuildTriangleSetMapping(SkinGeom*, void*, unsigned int, void*, SkinItems*, int**, int*) throw();
+    bool NiSkinPartition_MakeBoneSets(SkinGeom*, void*, unsigned int, void*, SkinItems*, int**, int*) throw();
 };
 template <class T> class SkinTArray
 {
@@ -712,7 +712,7 @@ struct Skp_00a828d0_cls : NiSkinPartition::Partition
 {
     unsigned short* SplitTriangles(GeomData* pkData, void* pkSet);
     void ExpandTriangles(void* pkSet, void* pkSource, unsigned short* pusRemap);
-    void PopulateSkinData(GeomData* pkData, Skp_00a828d0_src* pkSrc, void* pkSet, Skp_00a828d0_grp* pkGroups,
+    void NiSkinPartition_Partition_Create(GeomData* pkData, Skp_00a828d0_src* pkSrc, void* pkSet, Skp_00a828d0_grp* pkGroups,
                           bool bWeights, bool bZeroPalette, unsigned char ucBonesPerVertex, unsigned int uiBones);
 };
 void* __cdecl AllocBlock(unsigned int uiSize);

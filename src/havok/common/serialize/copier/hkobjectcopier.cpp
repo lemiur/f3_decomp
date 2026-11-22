@@ -155,7 +155,8 @@ struct UIntArrayArena {
 };
 
 // pdb: writeUlongArray | hkObjectCopier.obj | fnv360_0822_retail, call_gap, high
-static void WriteUIntArray(const unsigned int* data, int count, Writer* pWriter, int elemSize)
+// pdb: writeUlongArray | hkObjectCopier.obj | fnv360_0822_retail, call_gap, high (was: WriteUIntArray)
+static void writeUlongArray(const unsigned int* data, int count, Writer* pWriter, int elemSize)
 {
     if (elemSize == 4) {
         pWriter->write(data, 4, count);
@@ -186,13 +187,13 @@ static void WriteUIntArray(const unsigned int* data, int count, Writer* pWriter,
 
 void WriteUIntArray_keep_9b3760(Writer* w, int elemSize, const unsigned int* data, int count)
 {
-    WriteUIntArray(data, count, w, elemSize);
+    writeUlongArray(data, count, w, elemSize);
 }
 
 
 void e03300_driver(Writer* w, int elemSize, const unsigned int* data, int count)
 {
-    WriteUIntArray(data, count, w, elemSize);
+    writeUlongArray(data, count, w, elemSize);
 }
 
 // AppendListEntry
@@ -706,7 +707,7 @@ static __declspec(noinline) void writePodArray(Target* obj, unsigned int type, u
     }
 }
 
-static __declspec(noinline) void WriteUIntArray(int count, const unsigned int* data, Writer* w, int elemSize) {
+static __declspec(noinline) void writeUlongArray(int count, const unsigned int* data, Writer* w, int elemSize) {
     if (elemSize == 4) {
         w->write(data, elemSize, count);
         return;
@@ -775,7 +776,7 @@ int Host::FUN_00e036b0(StreamObj* apSourceStream, StreamObj* apLookupStream, Str
                 int x = FUN_00e03100(nb);
                 int y = FUN_00e03100(pItem);
                 int r = FUN_00e049c0(x, y);
-                WriteUIntArray(r, (const unsigned int*)iSourceOffset, (Writer*)apOutputStream, (int)this->f0c);
+                writeUlongArray(r, (const unsigned int*)iSourceOffset, (Writer*)apOutputStream, (int)this->f0c);
                 break;
             }
             case 23: {

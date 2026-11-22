@@ -21,12 +21,12 @@ void ShadowSceneLight::AddObject(NiAVObject* object)
                 goto AddDisplayGeometry;
             if (m_bSkipLightObject)
             {
-                ProcessShadowObject(reinterpret_cast<NiAVObject*>(node));
+                ParseObjectAddFrustum(reinterpret_cast<NiAVObject*>(node));
                 return;
             }
             else
             {
-                AddShadowObject(reinterpret_cast<NiAVObject*>(node));
+                ParseObjectAddRadius(reinterpret_cast<NiAVObject*>(node));
                 return;
             }
         }
@@ -39,7 +39,8 @@ void ShadowSceneLight::AddObject(NiAVObject* object)
 // @fnv 0x00b9f6a0
 // pdb: ShadowSceneLight::ParseObjectAddRadius | ShadowSceneLight.obj | fnv360_0822_retail, call_seq, high
 // pdb params: apObject
-void ShadowSceneLight::AddShadowObject(NiAVObject* object)
+// pdb: ShadowSceneLight::ParseObjectAddRadius | ShadowSceneLight.obj | fnv360_0822_retail, call_seq, high (was: AddShadowObject)
+void ShadowSceneLight::ParseObjectAddRadius(NiAVObject* object)
 {
     unsigned int active = m_kFrustumPlanes.m_uiActivePlaneMask;
     if (!((unsigned char)(object->m_uiObjectFlags >> 11) & 1))
@@ -65,7 +66,7 @@ void ShadowSceneLight::AddShadowObject(NiAVObject* object)
                      (child->m_kWorldBound &&
                       reinterpret_cast<ShadowBoundRadiusView*>(child->m_kWorldBound)->m_fBoundRadius)) &&
                     !((unsigned char)flags & 1))
-                    AddShadowObject(child);
+                    ParseObjectAddRadius(child);
             }
         }
         else if (reinterpret_cast<ShadowObjectSlots*>(object)->GetTriBasedGeom())
@@ -77,7 +78,8 @@ done:
 // @fnv 0x00b9f5b0
 // pdb: ShadowSceneLight::ParseObjectAddFrustum | ShadowSceneLight.obj | fnv360_0822_retail, call_seq, high
 // pdb params: apObject
-void ShadowSceneLight::ProcessShadowObject(NiAVObject* object)
+// pdb: ShadowSceneLight::ParseObjectAddFrustum | ShadowSceneLight.obj | fnv360_0822_retail, call_seq, high (was: ProcessShadowObject)
+void ShadowSceneLight::ParseObjectAddFrustum(NiAVObject* object)
 {
     unsigned int active = m_kFrustumPlanes.m_uiActivePlaneMask;
     if (object == m_pLightNode.m_pObject || !((unsigned char)~(object->m_uiObjectFlags >> 23) & 1))
@@ -104,7 +106,7 @@ void ShadowSceneLight::ProcessShadowObject(NiAVObject* object)
                      (child->m_kWorldBound &&
                       reinterpret_cast<ShadowBoundRadiusView*>(child->m_kWorldBound)->m_fBoundRadius)) &&
                     !((unsigned char)flags & 1))
-                    ProcessShadowObject(child);
+                    ParseObjectAddFrustum(child);
             }
         }
         else if (reinterpret_cast<ShadowObjectSlots*>(object)->GetTriBasedGeom())

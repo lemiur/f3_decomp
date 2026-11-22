@@ -404,7 +404,8 @@ struct NiAlphaAccumulator {
 // Allocates a 0x34-byte NiAlphaAccumulator, runs its constructor, sets the vtable and initializes bytes at offsets 0x30-0x32, returning the object or null.
 // @fnv 0x00a9b4b0
 // pdb: NiAlphaAccumulator::CreateObject | NiAlphaAccumulator.obj | fnv360_0822_retail, objrun, high
-NiAlphaAccumulator* CreateNiAlphaAccumulator()
+// pdb: NiAlphaAccumulator::CreateObject | NiAlphaAccumulator.obj | fnv360_0822_retail, objrun, high (was: CreateNiAlphaAccumulator)
+NiAlphaAccumulator* NiAlphaAccumulator_CreateObject()
 {
     NiAlphaAccumulator* p = static_cast<NiAlphaAccumulator*>(BSFadeNode::operator new(0x34));
     if (p) {
@@ -1162,13 +1163,14 @@ struct CloneObject {
     RefCountedObject* second;
 
     void CreateVertexBufferSet(CloneObject* destination, void* process);
-    void CopyRefCountedPointers(CloneObject* destination, void* process);
+    void NiSkinInstance_CopyMembers(CloneObject* destination, void* process);
 };
 
 // @fnv 0x00a86660
 // pdb: NiSkinInstance::CopyMembers | NiSkinInstance.obj | fnv360_0822_retail, call_seq, high
 // pdb params: pkDest, kCloning
-void CloneObject::CopyRefCountedPointers(CloneObject* destination, void* process)
+// pdb: NiSkinInstance::CopyMembers | NiSkinInstance.obj | fnv360_0822_retail, call_seq, high (was: CopyRefCountedPointers)
+void CloneObject::NiSkinInstance_CopyMembers(CloneObject* destination, void* process)
 {
     CreateVertexBufferSet(destination, process);
 
@@ -2053,7 +2055,8 @@ int __cdecl FUN_00a9fe90(int a, int b, FUN_00a9ff00_Obj* c, int d, int e);
 // @fnv 0x00a9ff00
 // pdb: NiDepthStencilBuffer::CreateCompatible | NiDepthStencilBuffer.obj | fnv360_0721_beta, objrun_prop, high
 // pdb params: pkBuffer, apkRenderer
-int __cdecl ProcessArgWithObj(FUN_00a9ff00_Arg* a, FUN_00a9ff00_Obj* pObj)
+// pdb: NiDepthStencilBuffer::CreateCompatible | NiDepthStencilBuffer.obj | fnv360_0721_beta, objrun_prop, high (was: ProcessArgWithObj)
+int __cdecl NiDepthStencilBuffer_CreateCompatible(FUN_00a9ff00_Arg* a, FUN_00a9ff00_Obj* pObj)
 {
     if (a == 0 || pObj == 0)
     {

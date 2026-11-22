@@ -18050,8 +18050,8 @@ struct LandGeomData {
     int unk24, unk28, unk2C, unk30, unk34;
     unsigned char consistency38;
     unsigned char keepFlags39;
-    void SetDirtyFlags(unsigned int flags);
-    void SetDataConsistency(int consistency);
+    void MarkAsChanged(unsigned int flags);
+    void SetConsistency(int consistency);
 };
 
 struct LandShader {
@@ -18267,7 +18267,7 @@ void Land::FUN_004cfe50()
                 data->nodes[quad]->SetAt(0, shape);
                 LandGeomData* geom = shape->modelData;
                 geom->bound.ComputeFromPoints(geom->vertexCount, geom->vertices);
-                shape->modelData->SetDirtyFlags(15);
+                shape->modelData->MarkAsChanged(15);
                 LandChild* child = ((LandNodeHolder*)data->nodes[quad])->holderAC->child;
                 LandRange range = FUN_004cd550(quad);
                 child->SetExtent(LandPoint3(1024.0f, 1024.0f, (range.max - range.min) / 2.0));
@@ -18292,7 +18292,7 @@ void Land::FUN_004cfe50()
         for (int index = 0; index < 4; index++) {
             if (shapes[index]) {
                 LandGeomData* geom = shapes[index]->modelData;
-                geom->SetDataConsistency(0x4000);
+                geom->SetConsistency(0x4000);
                 geom->keepFlags39 = 1;
                 geom->consistency38 = 0x17;
                 LandShader* shader = shapes[index]->shader;
@@ -30255,7 +30255,8 @@ struct Entry {
     static void operator delete[](void* p) { DAT_01090a78.FUN_0086ba60(p); }
 };
 
-__forceinline void CopyEntries(Entry* dst, const Entry* src, unsigned int n)
+// pdb: BSSegmentedTriShape::CopyMembers | BSSegmentedTriShape.obj | fnv360_0822_retail, objrun_prop, high (was: CopyEntries)
+__forceinline void BSSegmentedTriShape_CopyMembers(Entry* dst, const Entry* src, unsigned int n)
 {
     memcpy(dst, src, n * sizeof(Entry));
 }
@@ -30301,7 +30302,7 @@ void Owner::FUN_004c16f0()
     TlsGuard guard(6);
     unsigned int n = source->count->count * 3;
     Entry* entries = new Entry[n];
-    CopyEntries(entries, ((Source* volatile*)&source)[0]->data, n);
+    BSSegmentedTriShape_CopyMembers(entries, ((Source* volatile*)&source)[0]->data, n);
     Node* newHead = 0;
     unsigned int newCount = 0;
     while (head)

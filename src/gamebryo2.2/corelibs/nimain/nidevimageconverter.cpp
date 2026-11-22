@@ -21,7 +21,8 @@ void __cdecl FUN_00841a00(unsigned, unsigned, unsigned, unsigned char*, const Ni
 void __cdecl FUN_008448e0(unsigned, unsigned, unsigned, unsigned char*, const NiPalette*, const NiDevImageConverter::PixelFormatBitLayout&, const unsigned char*, const NiDevImageConverter::PixelFormatBitLayout&);
 // pdb: NiDevImageConverter::ConvertPixelDataFormat | NiDevImageConverter.obj | fnv360_0822_retail, caller_sim, high
 // pdb params: kDest, kSrc, iMipmapLevel
-bool NiDevImageConverter::ConvertMipLevel(NiPixelData& dst, const NiPixelData& src, int mip) throw()
+// pdb: NiDevImageConverter::ConvertPixelDataFormat | NiDevImageConverter.obj | fnv360_0822_retail, caller_sim, high (was: ConvertMipLevel)
+bool NiDevImageConverter::ConvertPixelDataFormat(NiPixelData& dst, const NiPixelData& src, int mip) throw()
 {
     typedef NiDevImageConverter::PixelFormatBitLayout PixelFormatBitLayout;
     const NiPixelFormat& sf = src.m_kPixelFormat;
@@ -300,7 +301,8 @@ bool NiDevImageConverter::ConvertMipLevel(NiPixelData& dst, const NiPixelData& s
 // @fnv 0x00a77e40
 // pdb: NiDevImageConverter::CanConvertPixelData | NiDevImageConverter.obj | fnv360_0822_retail, caller_sim, high
 // pdb params: kSrcFmt, kDestFmt
-bool NiDevImageConverter::CanConvertPixelFormat(const NiPixelFormat& sf, const NiPixelFormat& df)
+// pdb: NiDevImageConverter::CanConvertPixelData | NiDevImageConverter.obj | fnv360_0822_retail, caller_sim, high (was: CanConvertPixelFormat)
+bool NiDevImageConverter::CanConvertPixelData(const NiPixelFormat& sf, const NiPixelFormat& df)
 {
     NiPixelFormat::Format dstFormat = df.GetFormat();
     unsigned dstBpp = df.GetBitsPerPixel();
@@ -364,7 +366,8 @@ bool NiDevImageConverter::CanConvertPixelFormat(const NiPixelFormat& sf, const N
 // @fnv 0x00a78050
 // pdb: NiDevImageConverter::IsANonAlphaSupportedMipmapGenerationFormat | NiDevImageConverter.obj | fnv360_0822_retail, objrun, high
 // pdb params: kSrcFmt
-bool NiDevImageConverter::IsSupportedSourceFormat(const NiPixelFormat& format)
+// pdb: NiDevImageConverter::IsANonAlphaSupportedMipmapGenerationFormat | NiDevImageConverter.obj | fnv360_0822_retail, objrun, high (was: IsSupportedSourceFormat)
+bool NiDevImageConverter::IsANonAlphaSupportedMipmapGenerationFormat(const NiPixelFormat& format)
 {
     if (format == DAT_011aa180 || format == DAT_011aa210 || format == DAT_011aa2e8)
         return true;
@@ -374,7 +377,8 @@ bool NiDevImageConverter::IsSupportedSourceFormat(const NiPixelFormat& format)
 // @fnv 0x00a78010
 // pdb: NiDevImageConverter::IsAnAlphaSupportedMipmapGenerationFormat | NiDevImageConverter.obj | fnv360_0822_retail, objrun, high
 // pdb params: kSrcFmt
-bool NiDevImageConverter::IsSupportedDestinationFormat(const NiPixelFormat& format)
+// pdb: NiDevImageConverter::IsAnAlphaSupportedMipmapGenerationFormat | NiDevImageConverter.obj | fnv360_0822_retail, objrun, high (was: IsSupportedDestinationFormat)
+bool NiDevImageConverter::IsAnAlphaSupportedMipmapGenerationFormat(const NiPixelFormat& format)
 {
     if (format == DAT_011aa1c8 || format == DAT_011aa258 || format == SOURCE_FORMAT_RGB)
         return true;
@@ -383,14 +387,15 @@ bool NiDevImageConverter::IsSupportedDestinationFormat(const NiPixelFormat& form
 
 struct FUN_00a78630_shell : public NiDevImageConverter
 {
-    void* SelectPlatformFormat(int, void*, void*, void*);
+    void* NiDevImageConverter_FindClosestPixelFormat(int, void*, void*, void*);
 };
 
 // Dispatches on ePlatform: returns gNiPoint3StartupSrc or kDesiredFmt for case 0, calls virtual slots 18-20 for platforms 6/4/5, else returns 0.
 // @fnv 0x00a78630
 // pdb: NiDevImageConverter::FindClosestPixelFormat | NiDevImageConverter.obj | fnv360_0822_retail, objrun, high
 // pdb params: ePlatform, kFmtPrefs, kSrcFmt, kDesiredFmt
-void* FUN_00a78630_shell::SelectPlatformFormat(int ePlatform, void* kFmtPrefs, void* kSrcFmt, void* kDesiredFmt)
+// pdb: NiDevImageConverter::FindClosestPixelFormat | NiDevImageConverter.obj | fnv360_0822_retail, objrun, high (was: SelectPlatformFormat)
+void* FUN_00a78630_shell::NiDevImageConverter_FindClosestPixelFormat(int ePlatform, void* kFmtPrefs, void* kSrcFmt, void* kDesiredFmt)
 {
     typedef void*(__thiscall * VFn)(void*, void*, void*, void*);
 
@@ -1389,7 +1394,7 @@ static inline bool IsPalettized_a78910(const NiPixelFormat& kFmt)
 
 struct ImageConverter_a78910 : public NiDevImageConverter
 {
-    const NiPixelFormat* SelectFormat(const FormatPrefs_a78910& kPrefs, const NiPixelFormat& kSrcFmt,
+    const NiPixelFormat* NiDevImageConverter_FindClosestPixelFormatXenon(const FormatPrefs_a78910& kPrefs, const NiPixelFormat& kSrcFmt,
                                       const NiPixelFormat& kDestFmt);
 };
 
@@ -1397,7 +1402,8 @@ struct ImageConverter_a78910 : public NiDevImageConverter
 // @fnv 0x00a78910
 // pdb: NiDevImageConverter::FindClosestPixelFormatXenon | NiDevImageConverter.obj | fnv360_0822_retail, objrun, high
 // pdb params: kFmtPrefs, kSrcFmt, kDesiredFmt
-const NiPixelFormat* ImageConverter_a78910::SelectFormat(const FormatPrefs_a78910& kPrefs, const NiPixelFormat& kSrcFmt,
+// pdb: NiDevImageConverter::FindClosestPixelFormatXenon | NiDevImageConverter.obj | fnv360_0822_retail, objrun, high (was: SelectFormat)
+const NiPixelFormat* ImageConverter_a78910::NiDevImageConverter_FindClosestPixelFormatXenon(const FormatPrefs_a78910& kPrefs, const NiPixelFormat& kSrcFmt,
                                                          const NiPixelFormat& kDestFmt)
 {
     bool bAlpha;
@@ -3134,12 +3140,13 @@ struct Converter
     unsigned int unk988;
     unsigned int unk98c;
     ReaderNode* head;
-    bool ReadFileWithReader(const char*, int&, int&, int&, int&, int&);
+    bool NiDevImageConverter_ReadImageFileInfo(const char*, int&, int&, int&, int&, int&);
 };
 // @fnv 0x00a77bd0
 // pdb: NiDevImageConverter::ReadImageFileInfo | NiDevImageConverter.obj | fnv360_0721_beta, objrun, high
 // pdb params: pcFilename, kFmt, bMipmap, uiWidth, uiHeight, uiNumFaces
-bool Converter::ReadFileWithReader(const char* apPath, int& a2, int& a3, int& a4, int& a5, int& a6)
+// pdb: NiDevImageConverter::ReadImageFileInfo | NiDevImageConverter.obj | fnv360_0721_beta, objrun, high (was: ReadFileWithReader)
+bool Converter::NiDevImageConverter_ReadImageFileInfo(const char* apPath, int& a2, int& a3, int& a4, int& a5, int& a6)
 {
     ReaderNode* node = head;
     char acFilePath[260];
@@ -3178,7 +3185,7 @@ struct ImageConverterBase
     virtual void vfn_04();
     virtual void vfn_08();
     virtual void vfn_0c();
-    virtual bool CanConvertPixelFormat(const NiPixelFormat& kSrc, const NiPixelFormat& kDest);
+    virtual bool CanConvertPixelData(const NiPixelFormat& kSrc, const NiPixelFormat& kDest);
     virtual NiPixelData* ConvertImageData(const NiPixelData& kSrc, const NiPixelFormat& kDest, NiPixelData* pkOptDest,
                                           bool bMipmap);
     virtual void vfn_18();
@@ -3187,7 +3194,7 @@ struct ImageConverterBase
     virtual void vfn_24();
     virtual void vfn_28();
     virtual void vfn_2c();
-    virtual bool ConvertMipLevel(NiPixelData& kDest, const NiPixelData& kSrc, int iMipmapLevel);
+    virtual bool ConvertPixelDataFormat(NiPixelData& kDest, const NiPixelData& kSrc, int iMipmapLevel);
     virtual void vfn_34();
     virtual void vfn_38();
     virtual const NiPixelFormat* GetDestinationPixelFormat(int a1, int a2, const NiPixelFormat& kSrc, int a4);
@@ -3213,11 +3220,11 @@ NiPixelData* ImageConverterBase::NiDevImageConverter_ConvertForPlatform(int a1, 
         return 0;
     if (*pkFmt == kSrc.m_kPixelFormat)
         return (NiPixelData*)&kSrc;
-    if (!CanConvertPixelFormat(kSrc.m_kPixelFormat, *pkFmt))
+    if (!CanConvertPixelData(kSrc.m_kPixelFormat, *pkFmt))
         return 0;
     NiPixelData* pkDest =
         new NiPixelData(kSrc.GetWidth(), kSrc.GetHeight(), *pkFmt, PixelDataMipmapLevels(kSrc), PixelDataFaces(kSrc));
-    return ConvertMipLevel(*pkDest, kSrc, -1) ? pkDest : 0;
+    return ConvertPixelDataFormat(*pkDest, kSrc, -1) ? pkDest : 0;
 }
 
 // Allocates destination pixel data and fills it using differences between neighboring source bytes.
@@ -3575,14 +3582,15 @@ struct Converter
     virtual void slot2c();
     virtual bool Convert(Image*, Image*, int);
 
-    Image* GenerateMipmaps(Image*, Image*);
+    Image* NiDevImageConverter_GenerateMipmapLevels(Image*, Image*);
 };
 
 // Generates RGB or RGBA mip levels by averaging pixels from the preceding level.
 // @fnv 0x00a78090
 // pdb: NiDevImageConverter::GenerateMipmapLevels | NiDevImageConverter.obj | fnv360_0822_retail, caller_sim, high
 // pdb params: pkSrc, pkOptDest
-Image* Converter::GenerateMipmaps(Image* source, Image* destination)
+// pdb: NiDevImageConverter::GenerateMipmapLevels | NiDevImageConverter.obj | fnv360_0822_retail, caller_sim, high (was: GenerateMipmaps)
+Image* Converter::NiDevImageConverter_GenerateMipmapLevels(Image* source, Image* destination)
 {
     const Format& sourceFormat = source->format;
     Format format;
@@ -3911,7 +3919,7 @@ struct ConverterView
 
 struct NiDevImageConverterEx : NiDevImageConverter
 {
-    NiPixelData* GenerateMipmaps(const NiPixelData* pkSrc, NiPixelData* pkDst) throw();
+    NiPixelData* NiDevImageConverter_GenerateMipmapLevels(const NiPixelData* pkSrc, NiPixelData* pkDst) throw();
     NiPixelData* NiDevImageConverter_ConvertPixelData(const NiPixelData& kSrc, const NiPixelFormat& kDstFmt, NiPixelData* pkDst,
                               bool bWithMipmaps) throw();
 };
@@ -3940,7 +3948,7 @@ NiPixelData* NiDevImageConverterEx::NiDevImageConverter_ConvertPixelData(const N
         (kDstFmt.GetFormat() == NiPixelFormat::FORMAT_RGB || kDstFmt.GetFormat() == NiPixelFormat::FORMAT_RGBA ||
          kDstFmt.GetFormat() == NiPixelFormat::FORMAT_BUMP || kDstFmt.GetFormat() == NiPixelFormat::FORMAT_BUMPLUMA))
     {
-        spMipmap = GenerateMipmaps(pkSrc, pkDst);
+        spMipmap = NiDevImageConverter_GenerateMipmapLevels(pkSrc, pkDst);
         if (spMipmap)
             mipSource = spMipmap;
         else
@@ -3972,7 +3980,7 @@ NiPixelData* NiDevImageConverterEx::NiDevImageConverter_ConvertPixelData(const N
 
     NiPixelData* pkNew = new NiPixelData(bumpSource->GetWidth(), bumpSource->GetHeight(), kDstFmt,
                                          GetNumMipmapLevels(bumpSource), GetFaceTotal(bumpSource));
-    if (ConvertMipLevel(*pkNew, *bumpSource, -1))
+    if (ConvertPixelDataFormat(*pkNew, *bumpSource, -1))
         return pkNew;
     return 0;
 }

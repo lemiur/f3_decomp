@@ -430,7 +430,7 @@ class hkOstreamDA30
     void FUN_00cb1600(void* pvBuffer, int iSize) throw();
     void FUN_00cc00e0() throw();
     hkOstreamDA30& FUN_00cc01c0(const char* pcString) throw();
-    hkOstreamDA30& InvokeFromRequest(const hkStringBufDA30& kString) throw();
+    hkOstreamDA30& GridCellArray_MoveItem(const hkStringBufDA30& kString) throw();
     hkOstreamDA30& WriteInt(int i) throw();
 
     hkOstreamDA30(void* pvBuffer, int iSize)

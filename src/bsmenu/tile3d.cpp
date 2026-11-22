@@ -493,11 +493,11 @@ struct Tile3DCalc
     ModelPath filename;
     const char* GetString(int);
     bool InitControllers(NiNode*);
-    void CreateMenuBackgroundGeometry(NiNode*);
+    void InitGeometry(NiNode*);
     void InitProperties(NiNode*);
     void SetValue(int, float, bool);
     bool GetBool(int);
-    void UpdateValue(int);
+    void NiBoolInterpolator_Update(int);
     void LoadTile()
     {
         const char* name = GetString(0xfcc);
@@ -522,7 +522,7 @@ struct Tile3DCalc
             model = CopyTileModel(model);
         InitControllers(model);
         node.m_pObject->m_kChildList.RemoveAll();
-        CreateMenuBackgroundGeometry(model);
+        InitGeometry(model);
         InitProperties(model);
         node.m_pObject->AttachChildInAvailableSlot(model, true);
         SetValue(0xfa8, 1.0f, true);
@@ -533,7 +533,7 @@ struct Tile3DCalc
         node->UpdateModel();
         if (flags & 0x40)
             flags ^= 0x40;
-        UpdateValue(9);
+        NiBoolInterpolator_Update(9);
         FinishTileModel(1);
         FlushTileModel();
     }

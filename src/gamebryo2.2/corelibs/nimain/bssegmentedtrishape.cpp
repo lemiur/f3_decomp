@@ -261,13 +261,14 @@ struct EntryPod70
 struct FUN_00a871a0_cls : Target
 {
     void FUN_00a744c0(Target* apDst, unsigned int aFlag);
-    void CopyEntries(Target* apDst, unsigned int aFlag);
+    void BSSegmentedTriShape_CopyMembers(Target* apDst, unsigned int aFlag);
 };
 // Calls FUN_00a744c0, frees apDst->entries, then copies unkC8 and active and deep-copies the entries array into apDst, or clears it when entries is null.
 // @fnv 0x00a871a0
 // pdb: BSSegmentedTriShape::CopyMembers | BSSegmentedTriShape.obj | fnv360_0822_retail, objrun_prop, high
 // pdb params: pkDest, kCloning
-void FUN_00a871a0_cls::CopyEntries(Target* apDst, unsigned int aFlag)
+// pdb: BSSegmentedTriShape::CopyMembers | BSSegmentedTriShape.obj | fnv360_0822_retail, objrun_prop, high (was: CopyEntries)
+void FUN_00a871a0_cls::BSSegmentedTriShape_CopyMembers(Target* apDst, unsigned int aFlag)
 {
     FUN_00a744c0(apDst, aFlag);
     if (apDst->entries != 0)
@@ -300,7 +301,7 @@ struct FUN_00a744a0_shell
 
 struct FUN_00a871a0_shell
 {
-    void CopyEntries(void* a, unsigned int b);
+    void BSSegmentedTriShape_CopyMembers(void* a, unsigned int b);
 };
 
 struct FUN_00a87340_cls
@@ -327,7 +328,7 @@ Target* FUN_00a87340_cls::CreateTarget(unsigned int volatile flags)
     {
         obj = 0;
     }
-    reinterpret_cast<FUN_00a871a0_shell*>(self)->CopyEntries(obj, flags);
+    reinterpret_cast<FUN_00a871a0_shell*>(self)->BSSegmentedTriShape_CopyMembers(obj, flags);
     return obj;
 }
 
@@ -613,13 +614,14 @@ struct StreamFor87520
 void __stdcall FUN_00a71d10(void* owner);
 struct FUN_00a87520_shell : Target
 {
-    void ReadEntries(void* owner);
+    void BSSegmentedTriShape_SaveBinary(void* owner);
 };
 // Reads a count, then reads one byte and two four-byte values for each 20-byte entry from the stream at owner+0x250.
 // @fnv 0x00a87520
 // pdb: BSSegmentedTriShape::SaveBinary | BSSegmentedTriShape.obj | fnv360_0721_beta, objrun, high
 // pdb params: kStream
-void FUN_00a87520_shell::ReadEntries(void* owner)
+// pdb: BSSegmentedTriShape::SaveBinary | BSSegmentedTriShape.obj | fnv360_0721_beta, objrun, high (was: ReadEntries)
+void FUN_00a87520_shell::BSSegmentedTriShape_SaveBinary(void* owner)
 {
     FUN_00a71d10(owner);
     StreamFor87520* stream = *(StreamFor87520**)((char*)owner + 0x250);

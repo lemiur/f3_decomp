@@ -6,7 +6,8 @@
 #pragma optimize("gty", on)
 // @fnv 0x00ba3720
 // pdb: MTRenderingSystem::CreateThreads | MTRenderingSystem.obj | fnv360_0822_retail, ustr, high
-void TaskThreadManager::StartRenderingTaskThread()
+// pdb: MTRenderingSystem::CreateThreads | MTRenderingSystem.obj | fnv360_0822_retail, ustr, high (was: StartRenderingTaskThread)
+void TaskThreadManager::MTRenderingSystem_CreateThreads()
 {
     if (DAT_011f94b4)
         LaunchWorkerThread(1, DAT_01200080, FUN_00ba3190, "Rendering Task Thread 2", 0x20000);

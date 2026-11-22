@@ -120,12 +120,13 @@ struct This_00a35f30
 };
 struct Holder_00a35f30
 {
-    unsigned short FindLinkIndex(const Arg_00a35f30& arName);
+    unsigned short BSMultiTargetTreadTransfController_GetInterpolatorIndexFx(const Arg_00a35f30& arName);
 };
 // @fnv 0x00a35f30
 // pdb: BSMultiTargetTreadTransfController::GetInterpolatorIndexFx | BSMultiTargetTreadTransfController.obj | fnv360_0822_retail, objrun, high
 // pdb params: arName
-unsigned short Holder_00a35f30::FindLinkIndex(const Arg_00a35f30& arName)
+// pdb: BSMultiTargetTreadTransfController::GetInterpolatorIndexFx | BSMultiTargetTreadTransfController.obj | fnv360_0822_retail, objrun, high (was: FindLinkIndex)
+unsigned short Holder_00a35f30::BSMultiTargetTreadTransfController_GetInterpolatorIndexFx(const Arg_00a35f30& arName)
 {
     unsigned short us;
     for (us = 0; us < ((This_00a35f30*)this)->num; ++us)

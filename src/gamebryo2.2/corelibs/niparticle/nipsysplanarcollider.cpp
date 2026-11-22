@@ -126,13 +126,14 @@ struct BoundDataBlock
 struct PlanarColliderResponse : NiPSysPlanarCollider
 {
     void NiPSysCollider_Update(float, BoundDataBlock*, unsigned short);
-    void ApplyPlanarCollision(float, BoundDataBlock*, unsigned short);
+    void NiPSysPlanarCollider_Update(float, BoundDataBlock*, unsigned short);
 };
 // Projects the particle velocity onto the plane normal and reflects or removes the normal component, then calls NiPSysCollider_Update.
 // @fnv 0x00c29320
 // pdb: NiPSysPlanarCollider::Update | NiPSysPlanarCollider.obj | fnv360_0822_retail, objrun, high
 // pdb params: fTime, pkData, usCurParticle
-void PlanarColliderResponse::ApplyPlanarCollision(float time, BoundDataBlock* particles, unsigned short index)
+// pdb: NiPSysPlanarCollider::Update | NiPSysPlanarCollider.obj | fnv360_0822_retail, objrun, high (was: ApplyPlanarCollision)
+void PlanarColliderResponse::NiPSysPlanarCollider_Update(float time, BoundDataBlock* particles, unsigned short index)
 {
     NiPoint3& velocity = particles->velocities[index].velocity;
     float dot = m_kHalfSpacePlane.m_kPlaneNormal.Dot(velocity);

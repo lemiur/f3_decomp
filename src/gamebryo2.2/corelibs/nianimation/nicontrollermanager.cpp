@@ -1903,7 +1903,7 @@ class Sequence
     int unk040;
     int m_iActive;
 
-    bool StartSequence(int iArg0, int iArg1, float fDuration, float fTime, int iArg2, int iArg3);
+    bool NiControllerSequence_Activate(int iArg0, int iArg1, float fDuration, float fTime, int iArg2, int iArg3);
 };
 
 // Deactivates pkSource and starts pkDest with the given arguments when pkSource is active and pkDest is not.
@@ -1915,7 +1915,7 @@ bool __stdcall NiControllerManager_CrossFade(Sequence* pkSource, Sequence* pkDes
     if (!pkSource->m_iActive || pkDest->m_iActive)
         return false;
     pkSource->Deactivate(fTime, 0);
-    return pkDest->StartSequence(iArg0, iArg1, fDuration, fTime, iArg2, 0);
+    return pkDest->NiControllerSequence_Activate(iArg0, iArg1, fDuration, fTime, iArg2, 0);
 }
 
 }

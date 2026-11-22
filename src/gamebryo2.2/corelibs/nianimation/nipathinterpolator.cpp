@@ -1050,13 +1050,14 @@ static __forceinline MyPosKey* GetKey(MyPosKey* pkKeys, unsigned int uiIndex, un
 struct PathInterpExt : public NiPathInterp
 {
     void __thiscall NiPathInterpolator_GetPercentLoc(float fTime, unsigned int& ruiKey0, unsigned int& ruiKey1, float& rfNormTime);
-    void FindKeyPair(float fTime, unsigned int& ruiKey0, unsigned int& ruiKey1, float& rfNormTime);
+    void NiPathInterpolator_GetLoc(float fTime, unsigned int& ruiKey0, unsigned int& ruiKey1, float& rfNormTime);
 };
 
 // @fnv 0x00a3ec30
 // pdb: NiPathInterpolator::GetLoc | NiPathInterpolator.obj | fnv360_0822_retail, call_seq, high
 // pdb params: fTime, uiI1, uiI2, fNormTime
-void PathInterpExt::FindKeyPair(float fTime, unsigned int& ruiKey0, unsigned int& ruiKey1, float& rfNormTime)
+// pdb: NiPathInterpolator::GetLoc | NiPathInterpolator.obj | fnv360_0822_retail, call_seq, high (was: FindKeyPair)
+void PathInterpExt::NiPathInterpolator_GetLoc(float fTime, unsigned int& ruiKey0, unsigned int& ruiKey1, float& rfNormTime)
 {
     if (GetBit(0x10))
     {
@@ -1327,7 +1328,7 @@ struct PathInterpLink : public NiPathInterp
         SetBit(x, 1);
     }
     void FUN_00a95ca0(NiStream&);
-    float GetAccumulatedValue();
+    float NiPathInterpolator_GetTotalPathLength();
     void FUN_00a3ee80(NiStream&);
 };
 // Reads path data from a stream, updates constant-velocity state, and computes curvature from the path object's position keys.
@@ -1342,7 +1343,7 @@ void PathInterpLink::FUN_00a3ee80(NiStream& stream)
     SetCVDataNeedsUpdate(true);
     if (GetConstVelocity() && GetCVDataNeedsUpdate())
     {
-        m_fTotalPathLength = GetAccumulatedValue();
+        m_fTotalPathLength = NiPathInterpolator_GetTotalPathLength();
         SetCVDataNeedsUpdate(false);
     }
     if (m_pPathObject)
@@ -1425,7 +1426,7 @@ class NiPosDataQ : public NiObj2
     unsigned char m_ucKeyDataSize;
 };
 
-float InterpolateKey(float fTime, void* pkKeys, int eType, unsigned int uiNumKeys, unsigned int& uiLastIdx,
+float NiFloatKey_GenInterp(float fTime, void* pkKeys, int eType, unsigned int uiNumKeys, unsigned int& uiLastIdx,
                      unsigned char ucSize);
 
 class NiObjectNETQ;
@@ -1465,18 +1466,19 @@ class NiPathInterpQ
         return (bool)GetField(0x20, 5);
     }
 
-    __declspec(noalias) void FindKeyPair(float fTime, int& iI1, int& iI2, float& fNormTime);
-    void EvaluateBasis(int iI1, int iI2, float fTime, NiMatrix3Q& kRot);
+    __declspec(noalias) void NiPathInterpolator_GetLoc(float fTime, int& iI1, int& iI2, float& fNormTime);
+    void NiPathInterpolator_CalcRefFrame(int iI1, int iI2, float fTime, NiMatrix3Q& kRot);
     NiPoint3 NiPathInterpolator_GenPathInterp(int iI1, int iI2, float fTime);
 
-    bool UpdateTransform(float fTime, NiObjectNETQ* pkTarget, NiQuatTransformQ& kValue);
+    bool NiPathInterpolator_Update(float fTime, NiObjectNETQ* pkTarget, NiQuatTransformQ& kValue);
 };
 
 // Computes the path position and optional rotation at fTime, writes them into kValue, and returns whether the transform was updated.
 // @fnv 0x00a3f120
 // pdb: NiPathInterpolator::Update | NiPathInterpolator.obj | fnv360_0822_retail, caller_sim, high
 // pdb params: fTime, pkInterpTarget, kValue
-bool NiPathInterpQ::UpdateTransform(float fTime, NiObjectNETQ* pkTarget, NiQuatTransformQ& kValue)
+// pdb: NiPathInterpolator::Update | NiPathInterpolator.obj | fnv360_0822_retail, caller_sim, high (was: UpdateTransform)
+bool NiPathInterpQ::NiPathInterpolator_Update(float fTime, NiObjectNETQ* pkTarget, NiQuatTransformQ& kValue)
 {
     if (!TimeHasChanged(fTime))
     {
@@ -1504,15 +1506,15 @@ bool NiPathInterpQ::UpdateTransform(float fTime, NiObjectNETQ* pkTarget, NiQuatT
         pkPathKeys = m_pPathObject->m_pKeyArray;
     if (!pkPathKeys)
         return false;
-    float fPct = InterpolateKey(fTime, pkKeys, eType, uiNumKeys, m_uiPercentKeyCount, ucSize);
+    float fPct = NiFloatKey_GenInterp(fTime, pkKeys, eType, uiNumKeys, m_uiPercentKeyCount, ucSize);
 
     int iI1, iI2;
-    FindKeyPair(fPct, iI1, iI2, fPct);
+    NiPathInterpolator_GetLoc(fPct, iI1, iI2, fPct);
 
     if (GetFollow())
     {
         NiMatrix3Q kRot;
-        EvaluateBasis(iI1, iI2, fPct, kRot);
+        NiPathInterpolator_CalcRefFrame(iI1, iI2, fPct, kRot);
         m_kRotationMatrix.FUN_00a6df40(kRot);
     }
 
@@ -1764,7 +1766,7 @@ extern "C" void* __cdecl memcpy(void*, const void*, unsigned int);
 extern PathBasis DAT_011a9484;
 extern float DAT_01097304;
 extern "C" double __cdecl atan(double);
-extern void __cdecl ComputeFrenetFrame(float, MyPosKey*, MyPosKey*, unsigned int, FV3*, FV3*, FV3*, float*);
+extern void __cdecl NiPosKey_CoordinateFrame(float, MyPosKey*, MyPosKey*, unsigned int, FV3*, FV3*, FV3*, float*);
 extern FV3 __cdecl FUN_004a3760(float, const FV3&);
 struct PathMotion : NiKeyBasedInterpolatorStub
 {
@@ -1797,7 +1799,7 @@ struct PathMotion : NiKeyBasedInterpolatorStub
         stride = 0;
         return 0;
     }
-    void __thiscall EvaluateBasis(unsigned int first, unsigned int second, float time, FM3* out);
+    void __thiscall NiPathInterpolator_CalcRefFrame(unsigned int first, unsigned int second, float time, FM3* out);
 };
 
 extern "C" double __cdecl sqrt(double);
@@ -1818,7 +1820,8 @@ __declspec(noinline) FV3 PathBasis::FUN_0053d1a0(const FV3& v) const
 // @fnv 0x00a3de50
 // pdb: NiPathInterpolator::CalcRefFrame | NiPathInterpolator.obj | fnv360_0822_retail, call_seq, high
 // pdb params: ui1, ui2, fNormTime, kRefFrame
-void __thiscall PathMotion::EvaluateBasis(unsigned int aiFirstKey, unsigned int aiSecondKey, float time, FM3* out)
+// pdb: NiPathInterpolator::CalcRefFrame | NiPathInterpolator.obj | fnv360_0822_retail, call_seq, high (was: EvaluateBasis)
+void __thiscall PathMotion::NiPathInterpolator_CalcRefFrame(unsigned int aiFirstKey, unsigned int aiSecondKey, float time, FM3* out)
 {
     FM3 transform;
     memcpy(&transform, &DAT_011a9448, 36);
@@ -1835,7 +1838,7 @@ void __thiscall PathMotion::EvaluateBasis(unsigned int aiFirstKey, unsigned int 
         float curvature, otherCurvature;
         if (GetBit(4))
         {
-            ComputeFrenetFrame(time, GetKey(pKeys, aiFirstKey, stride), GetKey(pKeys, aiSecondKey, stride), type,
+            NiPosKey_CoordinateFrame(time, GetKey(pKeys, aiFirstKey, stride), GetKey(pKeys, aiSecondKey, stride), type,
                                &vPosition, &vTangent, &normal, &curvature);
             if (smoothing != 0.0f)
             {
@@ -1852,10 +1855,10 @@ void __thiscall PathMotion::EvaluateBasis(unsigned int aiFirstKey, unsigned int 
                         FV3 vOtherPos, vOtherTangent;
                         firstWeight = (smoothing + (1.0f - time)) / (2.0f * smoothing);
                         secondWeight = 1.0f - firstWeight;
-                        ComputeFrenetFrame(1.0f - smoothing, GetKey(pKeys, aiFirstKey, stride),
+                        NiPosKey_CoordinateFrame(1.0f - smoothing, GetKey(pKeys, aiFirstKey, stride),
                                            GetKey(pKeys, aiSecondKey, stride), type, &vOtherPos, &vTangent, &normal,
                                            &curvature);
-                        ComputeFrenetFrame(smoothing, GetKey(pKeys, index, stride), GetKey(pKeys, index + 1, stride),
+                        NiPosKey_CoordinateFrame(smoothing, GetKey(pKeys, index, stride), GetKey(pKeys, index + 1, stride),
                                            type, &vOtherPos, &vOtherTangent, &normal, &otherCurvature);
                         vTangent =
                             FUN_004a3760(firstWeight, vTangent).FUN_00439e90(FUN_004a3760(secondWeight, vOtherTangent));
@@ -1875,10 +1878,10 @@ void __thiscall PathMotion::EvaluateBasis(unsigned int aiFirstKey, unsigned int 
                         FV3 vOtherPos, vOtherTangent;
                         secondWeight = (smoothing - time) / (2.0f * smoothing);
                         firstWeight = 1.0f - secondWeight;
-                        ComputeFrenetFrame(smoothing, GetKey(pKeys, aiFirstKey, stride),
+                        NiPosKey_CoordinateFrame(smoothing, GetKey(pKeys, aiFirstKey, stride),
                                            GetKey(pKeys, aiSecondKey, stride), type, &vOtherPos, &vTangent, &normal,
                                            &curvature);
-                        ComputeFrenetFrame(1.0f - smoothing, GetKey(pKeys, index - 1, stride),
+                        NiPosKey_CoordinateFrame(1.0f - smoothing, GetKey(pKeys, index - 1, stride),
                                            GetKey(pKeys, index, stride), type, &vOtherPos, &vOtherTangent, &normal,
                                            &otherCurvature);
                         vTangent =
@@ -1895,7 +1898,7 @@ void __thiscall PathMotion::EvaluateBasis(unsigned int aiFirstKey, unsigned int 
         }
         else
         {
-            ComputeFrenetFrame(time, GetKey(pKeys, aiFirstKey, stride), GetKey(pKeys, aiSecondKey, stride), type,
+            NiPosKey_CoordinateFrame(time, GetKey(pKeys, aiFirstKey, stride), GetKey(pKeys, aiSecondKey, stride), type,
                                &vPosition, &vTangent, &normal, &curvature);
             transform.SetCol(0, vPosition);
             FV3 vBasis = DAT_011a9484.FUN_0053d1a0(vPosition);

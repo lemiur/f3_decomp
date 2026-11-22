@@ -4961,7 +4961,7 @@ struct S_00cac0b0_cls
     int unk04;
     S_00cac0b0_Obj* unk08;
     void FUN_00cac0b0(S_00cac0b0_Arg* a);
-    void SaveSerializeData(S_00cac0b0_Arg* a);
+    void bhkSerializable_SaveBinary(S_00cac0b0_Arg* a);
 };
 
 // @f3 0x0092ab40 (community match, verified in this file)
@@ -4973,7 +4973,7 @@ void S_00cac0b0_cls::FUN_00cac0b0(S_00cac0b0_Arg* a)
     if (this && unk08)
         node = unk08->hkpCharacterProxy_getShapePhantom();
     a->v0c(node ? node->unk0c : 0);
-    SaveSerializeData(a);
+    bhkSerializable_SaveBinary(a);
 }
 
 
@@ -8779,7 +8779,7 @@ struct FUN_00cb9d80_stream
 
 struct FUN_00a641f0_class
 {
-    void __thiscall WriteObjectLink(void* object);
+    void __thiscall NiStream_SaveFixedString(void* object);
 };
 
 void __stdcall FUN_00a89af0(void* context);
@@ -8813,7 +8813,7 @@ void __thiscall FUN_00cb9d80_class::ReadFromStream(void* context)
 {
     FUN_00a89af0(context);
     unsigned int count = unk14;
-    ((FUN_00a641f0_class*)context)->WriteObjectLink(&unk08);
+    ((FUN_00a641f0_class*)context)->NiStream_SaveFixedString(&unk08);
 
     unsigned int size = 4;
 
@@ -9494,7 +9494,8 @@ struct LeafNode918
 };
 // pdb: bhkRagdollPenetrationUtil::AddToArrays | bhkRagdollPenetrationUtil.obj | fnv360_0822_retail, call_seq, high
 // pdb params: apRB, arRigidBodies, arConstraints
-void __stdcall CollectLeafObjects(WalkLeaf* leafIn, WalkArray* outObjectsIn, WalkArray* outBodiesIn)
+// pdb: bhkRagdollPenetrationUtil::AddToArrays | bhkRagdollPenetrationUtil.obj | fnv360_0822_retail, call_seq, high (was: CollectLeafObjects)
+void __stdcall bhkRagdollPenetrationUtil_AddToArrays(WalkLeaf* leafIn, WalkArray* outObjectsIn, WalkArray* outBodiesIn)
 {
     LeafNode918* leaf = (LeafNode918*)leafIn;
     LeafArray918* outObjects = (LeafArray918*)outObjectsIn;

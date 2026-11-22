@@ -3438,7 +3438,7 @@ struct Shader
     void FUN_00bdf650(Geom*, bool, bool, Context*);
     void FUN_00bda060(Geom*, bool, bool);
     void SetPassEnabled(Geom*, bool, bool);
-    void AddPasses(Geom*, bool);
+    void BSShaderPPLightingProperty_AddSilhouettePass_2x(Geom*, bool);
     bool GetFlag(int n)
     {
         return ((Fake_FUN_004a2020*)this)->GetFlag(n);

@@ -5,7 +5,7 @@
 struct NiObjectNET;
 struct BaseStandIn
 {
-    bool IsTargetParticleSystem(NiObjectNET*);
+    bool NiPSysModifierCtlr_InterpTargetIsCorrectType(NiObjectNET*);
 };
 struct B00c1bff0
 {
@@ -31,7 +31,7 @@ struct NiPSysFieldAttenuationCtlr : BaseStandIn
 // pdb params: pkTarget
 bool NiPSysFieldAttenuationCtlr::FUN_00c2b290(NiObjectNET* pkTarget)
 {
-    if (!BaseStandIn::IsTargetParticleSystem(pkTarget))
+    if (!BaseStandIn::NiPSysModifierCtlr_InterpTargetIsCorrectType(pkTarget))
         return false;
     NiPSysModifier* pkModifier = (NiPSysModifier*)pkTarget->FUN_00c1b0f0((void*)((char*)this + 0x38));
     if (!pkModifier)

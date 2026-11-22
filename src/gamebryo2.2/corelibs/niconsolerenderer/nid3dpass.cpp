@@ -190,7 +190,8 @@ struct Self_00e7f000
 // @fnv 0x00e7f000
 // pdb: NiD3DRenderStateGroup::FindRenderStateEntry | NiD3DRenderStateGroup.obj | fnv360_0822_retail, call_seq, high
 // pdb params: uiState, bInSaveList
-Node_00e7f000* __fastcall FindNodeByKey(Self_00e7f000* self, int, int key, bool& foundInSecond)
+// pdb: NiD3DRenderStateGroup::FindRenderStateEntry | NiD3DRenderStateGroup.obj | fnv360_0822_retail, call_seq, high (was: FindNodeByKey)
+Node_00e7f000* __fastcall NiD3DRenderStateGroup_FindRenderStateEntry(Self_00e7f000* self, int, int key, bool& foundInSecond)
 {
     for (Node_00e7f000* pNode = self->list1; pNode; pNode = pNode->next)
     {

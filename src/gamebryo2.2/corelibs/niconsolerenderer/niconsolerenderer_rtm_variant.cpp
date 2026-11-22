@@ -3810,7 +3810,7 @@ extern void* g_hE6EC20Module;
 extern void* (__stdcall* g_pfnE6EC20Create)(unsigned int uiVersion);
 extern int (__stdcall* g_pfnE6EC20FreeLibrary)(void* hModule);
 extern E6EC20List g_kE6EC20List;
-void ShutdownE6EC20();
+void NiDX9Renderer__SDMShutdown();
 // Renderer resource setup: original C++ reconstructed from InitializeRendererResources.
 struct RendererStateSlot;
 struct ResourceDescriptor { unsigned char unknown00; unsigned char format; };
@@ -4141,7 +4141,7 @@ struct FUN_00e744b0_Src {
     FUN_00e744b0_VObj* m_b8;
     unsigned int m_bc;
 };
-struct FUN_00e744b0_obj { void ProcessCollector(unsigned int a, unsigned int b, unsigned int c, unsigned int d, int e, int f); };
+struct FUN_00e744b0_obj { void NiD3DGeometryGroupManager_AddObjectToGroup(unsigned int a, unsigned int b, unsigned int c, unsigned int d, int e, int f); };
 struct FUN_00e744b0_cls {
     unsigned int unk000;
     unsigned int unk004;
@@ -8184,7 +8184,7 @@ static inline unsigned int PackColor_e78910(const short* v, unsigned short comps
         a = (unsigned short)v[3];
     return (((short)a & 0xff00) << 16) | ((v[0] & 0xff00) << 8) | (v[1] & 0xff00) | ((v[2] >> 8) & 0xff);
 }
-int PackVertexColors(Stream_e78910* aStream);
+int NiD3DShaderDeclaration_Pack_ShortToUByteColor(Stream_e78910* aStream);
 extern const char DAT_010ee7cc[];
 void __cdecl FUN_00aa1490(void* apMemory, unsigned int auiSize);
 struct FUN_00e78be0_cls {
@@ -10864,7 +10864,7 @@ struct ByteFloatStream {
  unsigned unk14, sourceStride, elementSize, destStride, unk24, unk28;
  unsigned char* dest;
 };
-unsigned __cdecl ConvertByteFloatStream(ByteFloatStream* pStream);
+unsigned __cdecl NiD3DShaderDeclaration_Pack_ByteToFloat(ByteFloatStream* pStream);
 struct ColorStream {
     unsigned int unk00;
     unsigned short type, unk06, count, unk0a;
@@ -10874,7 +10874,7 @@ struct ColorStream {
     unsigned char* dst;
 };
 void* _fnv_zlib_memset(void*, int, unsigned int);
-unsigned int ConvertColorStream(ColorStream* pStream);
+unsigned int NiD3DShaderDeclaration_Pack_UnsignedByteToUByteColor(ColorStream* pStream);
 struct D3DMATRIX_Custom {
     float _11, _12, _13, _14;
     float _21, _22, _23, _24;
@@ -12363,7 +12363,7 @@ struct FUN_00e759c0_cls {
     unsigned char unk5e3;
     void FUN_00e759c0(float* out);
 };
-unsigned int __cdecl ConvertNormalizedShortsToFloats(NormalizedStream* pStream);
+unsigned int __cdecl NiD3DShaderDeclaration_Pack_ShortToFloat(NormalizedStream* pStream);
 struct E6F310Rect {
     int x1;
     int y1;
@@ -16261,7 +16261,7 @@ struct SrcObj {
     float BSStripPSysData_GetTexCoordDelta(unsigned short row);
     const PointE69* GetElementField(unsigned short row, unsigned short col);
     const PointE69* BSStripPSysData_GetPointNorms(unsigned short row, unsigned short col);
-    const ColorF* GetParticleColor(unsigned short row, unsigned short col);
+    const ColorF* BSStripPSysData_GetPointColor(unsigned short row, unsigned short col);
 };
 static inline int WrapIndex(int i, int n)
 {
@@ -18673,7 +18673,7 @@ struct Stream78 {
  char* pucDest;
 };
 unsigned int NiD3DShaderDeclaration_Pack_Float_ExtraOutsToZero(Stream78* pkInfo);
-unsigned int __cdecl DecodeVertexData(NormalizedStream* s);
+unsigned int __cdecl NiD3DShaderDeclaration_Pack_LongToFloat(NormalizedStream* s);
 struct E7Context {
     unsigned int destFormat, sourceFormat;
     unsigned short count;
@@ -21445,7 +21445,7 @@ bool __cdecl SetModeFlags(unsigned,unsigned*,unsigned*);
 unsigned __cdecl MapCodeToIndex(unsigned);
 InitCaps* __cdecl FUN_00e7d6b0(InitDevice*,InitPresent*,void**);
 void __cdecl FUN_00e7d850(InitDevice*,void**);
-InitState* __cdecl CreateShaderLevel(unsigned,InitRenderer*);
+InitState* __cdecl NiRenderTargetGroup_Create(unsigned,InitRenderer*);
 InitVertexManager* __cdecl CreateRenderer(InitRenderer*,void*,unsigned);
 void __cdecl FUN_00e81940(InitRenderer*);
 InitManager* __cdecl FUN_00e88eb0(InitDevice*,InitTextureManager*);
@@ -22801,7 +22801,7 @@ struct StripGeometry {
     unsigned int unk0BC;
     StripShaderX* shader;
 };
-struct StripPackManager { void ProcessCollector(void*,StripGeometryData*,void*,void*,void*,void*); };
+struct StripPackManager { void NiD3DGeometryGroupManager_AddObjectToGroup(void*,StripGeometryData*,void*,void*,void*,void*); };
 struct StripVertexManager {
     void FUN_00e8bfa0(StripRendererData*,bool);
     void* FUN_00e8bff0(void*,unsigned int,unsigned int,unsigned int);

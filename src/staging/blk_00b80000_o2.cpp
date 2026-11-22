@@ -3597,13 +3597,14 @@ class FUN_00b8dca0_cls
     virtual void v51();
     virtual void v52();
     virtual void v53();
-    void CreateBlur7Shader();
+    void ImageSpaceShaderBlur7_ReloadShaders();
 };
 
 // Fills two shader descriptor structs with HLSL paths and technique names, then calls v4F to create the "BLUR7" shader and v53.
 // @fnv 0x00b8dca0
 // pdb: ImageSpaceShaderBlur7::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, udata, high
-void FUN_00b8dca0_cls::CreateBlur7Shader()
+// pdb: ImageSpaceShaderBlur7::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, udata, high (was: CreateBlur7Shader)
+void FUN_00b8dca0_cls::ImageSpaceShaderBlur7_ReloadShaders()
 {
     SS1 s1;
     SS0 s0;
@@ -3721,13 +3722,14 @@ class FUN_00b8ddf0_cls
     virtual void v51();
     virtual void v52();
     virtual void v53();
-    void CreateBlur9Shader();
+    void ImageSpaceShaderBlur9_ReloadShaders();
 };
 
 // Fills a shader parameter frame with the base vertex shader and blur2 pixel shader paths, then calls v4F to create the "BLUR9" shader and v53.
 // @fnv 0x00b8ddf0
 // pdb: ImageSpaceShaderBlur9::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, udata, high
-void FUN_00b8ddf0_cls::CreateBlur9Shader()
+// pdb: ImageSpaceShaderBlur9::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, udata, high (was: CreateBlur9Shader)
+void FUN_00b8ddf0_cls::ImageSpaceShaderBlur9_ReloadShaders()
 {
     FUN_00b8ddf0_frame f;
     f.unk4C = "imagespace\\1x\\v\\base.v.hlsl";
@@ -4831,13 +4833,14 @@ class B8F850ImageSpaceEffect
     virtual void vfunc52();
     virtual void SetupShaders();
 
-    void CreateDepthOfFieldShaders();
+    void ImageSpaceShaderDepthOfField_ReloadShaders();
 };
 
 // Builds the base vertex and DepthOfField pixel shader file descriptors and calls CreateShaders with "DOF", then SetupShaders.
 // @fnv 0x00b8f850
 // pdb: ImageSpaceShaderDepthOfField::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, ustr_rel, high
-void B8F850ImageSpaceEffect::CreateDepthOfFieldShaders()
+// pdb: ImageSpaceShaderDepthOfField::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, ustr_rel, high (was: CreateDepthOfFieldShaders)
+void B8F850ImageSpaceEffect::ImageSpaceShaderDepthOfField_ReloadShaders()
 {
     B8F850ShaderFile kVertexDelta;
     kVertexDelta.m_pcFile = "imagespace\\1x\\v\\base.v.hlsl";
@@ -4969,13 +4972,14 @@ class FUN_00b8f9a0_cls
     virtual void v51();
     virtual void v52();
     virtual void v53();
-    void InitRadialBlurShader();
+    void ImageSpaceShaderRadialBlur_ReloadShaders();
 };
 
 // Fills a shader-source frame with base.v.hlsl and RadialBlur.p.hlsl paths, zeroes the remaining fields, then calls v4F with RBLUR/vs_1_1/ps_2_0 and v53.
 // @fnv 0x00b8f9a0
 // pdb: ImageSpaceShaderRadialBlur::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, ustr_rel, high
-void FUN_00b8f9a0_cls::InitRadialBlurShader()
+// pdb: ImageSpaceShaderRadialBlur::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, ustr_rel, high (was: InitRadialBlurShader)
+void FUN_00b8f9a0_cls::ImageSpaceShaderRadialBlur_ReloadShaders()
 {
     FUN_00b8f9a0_frame f;
 
@@ -14487,18 +14491,18 @@ struct FUN_00b97690
     int unk310;
     int unk314;
     unsigned int m_textureId;
-    void ShutdownAllEffects();
+    void ImageSpaceManager_ShutdownEffects();
     void ClearTextures();
     ~FUN_00b97690();
 };
-// If active, calls ShutdownAllEffects, ClearTextures and FUN_00b8a7e0, clears active, and passes m_textureId to DAT_011f91a8->FUN_00b6da10.
+// If active, calls ImageSpaceManager_ShutdownEffects, ClearTextures and FUN_00b8a7e0, clears active, and passes m_textureId to DAT_011f91a8->FUN_00b6da10.
 // @fnv 0x00b97690
 // pdb: ImageSpaceManager::~ImageSpaceManager | ImageSpaceManager.obj | fnv360_0822_retail, call_gap_sim, medium
 FUN_00b97690::~FUN_00b97690()
 {
     if (active)
     {
-        ShutdownAllEffects();
+        ImageSpaceManager_ShutdownEffects();
         ClearTextures();
         FUN_00b8a7e0(&DAT_01202410);
         active = false;

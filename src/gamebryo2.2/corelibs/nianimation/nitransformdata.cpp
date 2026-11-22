@@ -7,7 +7,8 @@
 // @fnv 0x00a4e2e0
 // pdb: NiTransformData::ReplaceRotAnim | NiTransformData.obj | fnv360_0822_retail, call_gap_sim, high
 // pdb params: pkKeys, uiNumKeys, eType
-void NiTransformData::SetRotationKeys(TimedRotationKey* keys, unsigned int count, AnimationKey::KeyType type)
+// pdb: NiTransformData::ReplaceRotAnim | NiTransformData.obj | fnv360_0822_retail, call_gap_sim, high (was: SetRotationKeys)
+void NiTransformData::ReplaceRotAnim(TimedRotationKey* keys, unsigned int count, AnimationKey::KeyType type)
 {
     TimedRotationKey* oldKeys = m_pkRotationKeys;
     if (oldKeys)
@@ -35,7 +36,8 @@ void NiTransformData::SetRotationKeys(TimedRotationKey* keys, unsigned int count
 // @fnv 0x00a4e350
 // pdb: NiTransformData::ReplacePosAnim | NiTransformData.obj | fnv360_0822_retail, call_gap_sim, high
 // pdb params: pkKeys, uiNumKeys, eType
-void NiTransformData::SetPositionKeys(PositionKeyInterpolator* keys, unsigned int count, AnimationKey::KeyType eKeyType)
+// pdb: NiTransformData::ReplacePosAnim | NiTransformData.obj | fnv360_0822_retail, call_gap_sim, high (was: SetPositionKeys)
+void NiTransformData::ReplacePosAnim(PositionKeyInterpolator* keys, unsigned int count, AnimationKey::KeyType eKeyType)
 {
     if (m_pkPositionKeys)
         DAT_011f38b8[m_ePositionKeyType](m_pkPositionKeys);
@@ -59,7 +61,8 @@ void NiTransformData::SetPositionKeys(PositionKeyInterpolator* keys, unsigned in
 // @fnv 0x00a4e3b0
 // pdb: NiTransformData::ReplaceScaleAnim | NiTransformData.obj | fnv360_0822_retail, call_gap_sim, high
 // pdb params: pkKeys, uiNumKeys, eType
-void NiTransformData::SetScaleKeys(TimedAnimationKey* keys, unsigned int count, AnimationKey::KeyType type)
+// pdb: NiTransformData::ReplaceScaleAnim | NiTransformData.obj | fnv360_0822_retail, call_gap_sim, high (was: SetScaleKeys)
+void NiTransformData::ReplaceScaleAnim(TimedAnimationKey* keys, unsigned int count, AnimationKey::KeyType type)
 {
     if (m_pkScaleKeyArray)
         DAT_011f38a0[m_eScaleKeyType](m_pkScaleKeyArray);
@@ -957,7 +960,7 @@ void TransformDataLoader::NiTransformData_LoadBinary(NiStream& stream)
             numKeys = 65535;
             FUN_00a29680("Transform data loading has more than 65535 rotation keys!");
         }
-        SetRotationKeys(keys, numKeys, type);
+        ReplaceRotAnim(keys, numKeys, type);
     }
     reinterpret_cast<TransformDataInputView&>(stream).Read(&numKeys, 4);
     if (numKeys > 0)
@@ -972,7 +975,7 @@ void TransformDataLoader::NiTransformData_LoadBinary(NiStream& stream)
             numKeys = 65535;
             FUN_00a29680("Transform data loading has more than 65535 position keys!");
         }
-        SetPositionKeys(keys, numKeys, type);
+        ReplacePosAnim(keys, numKeys, type);
     }
     reinterpret_cast<TransformDataInputView&>(stream).Read(&numKeys, 4);
     if (numKeys > 0)
@@ -987,6 +990,6 @@ void TransformDataLoader::NiTransformData_LoadBinary(NiStream& stream)
             numKeys = 65535;
             FUN_00a29680("Transform data loading has more than 65535 scale keys!");
         }
-        SetScaleKeys(keys, numKeys, type);
+        ReplaceScaleAnim(keys, numKeys, type);
     }
 }

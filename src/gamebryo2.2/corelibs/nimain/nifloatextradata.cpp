@@ -54,12 +54,13 @@ struct NiExtraData
 {
     void FUN_00a7b2e0();
     void FUN_00a7b330(void*, void*);
-    void* CloneFloatExtraData(void*);
+    void* NiFloatExtraData_CreateClone(void*);
 };
 // @fnv 0x00a9a430
 // pdb: NiFloatExtraData::CreateClone | NiFloatExtraData.obj | fnv360_0822_retail, objrun, high
 // pdb params: kCloning
-void* NiExtraData::CloneFloatExtraData(void* kCloning)
+// pdb: NiFloatExtraData::CreateClone | NiFloatExtraData.obj | fnv360_0822_retail, objrun, high (was: CloneFloatExtraData)
+void* NiExtraData::NiFloatExtraData_CreateClone(void* kCloning)
 {
     NiFloatExtraData* pkObject;
     pkObject = (NiFloatExtraData*)BSFadeNode::operator new(0x10);

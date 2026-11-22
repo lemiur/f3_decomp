@@ -106,13 +106,14 @@ void __thiscall FUN_00a59c90_shell::FUN_00a59c90(NiUpdateData& aUpdateData)
 struct NiNode;
 struct FUN_00a59d00_shell
 {
-    void __thiscall SetParent(NiNode* pkParent);
+    void __thiscall NiAVObject_AttachParent(NiNode* pkParent);
 };
 typedef void(__thiscall* FUN_00a59d00_Fn)(NiNode*, void*);
 // @fnv 0x00a59d00
 // pdb: NiAVObject::AttachParent | NiAVObject.obj | fnv360_0822_retail, call_seq, high
 // pdb params: pkParent
-void __thiscall FUN_00a59d00_shell::SetParent(NiNode* pkParent)
+// pdb: NiAVObject::AttachParent | NiAVObject.obj | fnv360_0822_retail, call_seq, high (was: SetParent)
+void __thiscall FUN_00a59d00_shell::NiAVObject_AttachParent(NiNode* pkParent)
 {
     NiNode* pkOldParent = *(NiNode**)((char*)this + 0x18);
     if (pkOldParent)
@@ -1213,7 +1214,7 @@ struct Sub34
     int unk18;
     int unk1c;
     int unk20;
-    void ReadMatrixFromStream(NiStream&);
+    void NiMatrix3_SaveBinary(NiStream&);
 };
 
 struct ListNode
@@ -1258,7 +1259,7 @@ void Obj00a5a900::FUN_00a5a900(NiStream& kStream)
     SaveNiObjectLinks(kStream);
     SerializeValue(kStream, unk30);
     unk58.SaveBinary(kStream);
-    unk34.ReadMatrixFromStream(kStream);
+    unk34.NiMatrix3_SaveBinary(kStream);
     SerializeValue(kStream, unk64);
     long iNumObjects = m_uiCount;
     SerializeValue(kStream, iNumObjects);

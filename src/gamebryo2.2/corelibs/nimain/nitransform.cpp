@@ -55,7 +55,7 @@ unsigned int Transform3D::FUN_00a86c30(const Transform3D& other) const
 
 struct TransformRotationSaver : ThreeByThreeMatrix
 {
-    void ReadMatrixFromStream(NiStream* stream);
+    void NiMatrix3_SaveBinary(NiStream* stream);
 };
 
 struct TransformTranslationSaver : NiPoint3
@@ -87,7 +87,7 @@ struct TransformSaver : NiTransform
 // pdb: NiTransform::SaveBinary | NiTransform.obj | fnv360_0822_retail, caller_sim + bridge(hash|caller_sim) + skyrim(caller_sim), high
 void TransformSaver::NiTransform_SaveBinary(NiStream& stream)
 {
-    static_cast<TransformRotationSaver&>(m_kOrientation).ReadMatrixFromStream(&stream);
+    static_cast<TransformRotationSaver&>(m_kOrientation).NiMatrix3_SaveBinary(&stream);
     static_cast<TransformTranslationSaver&>(m_kTranslation).FUN_00a69780(stream);
     static_cast<TransformOutputStream&>(stream).output->SaveScale(&m_fScale);
 }

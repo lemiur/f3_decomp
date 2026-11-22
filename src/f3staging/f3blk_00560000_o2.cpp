@@ -19787,7 +19787,7 @@ virtual void slot10();
 virtual void slot11();
 virtual void slot12();
 virtual void slot13();
-virtual void GetBounds(const void*,Bounds*); };
+virtual void NiGeometryData_GetNormalsIterator(const void*,Bounds*); };
 struct BoundsGeometry {void* unk00; int unk04; BoundsShape* unk08;};
 struct BoundsLink {int unk00; int unk04; BoundsGeometry* unk08;};
 struct BoundsEntry {BoundsGeometry* unk00; int unk04; int unk08; int unk0c; int unk10; BoundsTransform transform;};
@@ -19953,7 +19953,7 @@ bool __stdcall FUN_0056d2d0(BoundsInput* input,BoundsGrid* grid,Bounds* output)
   for(int k=0;k<array->count;++k) {
    BoundsEntry* entry=reinterpret_cast<BoundsEntry*>(reinterpret_cast<char*>(array->data[k])+0x10);
    if(entry->unk00) {
-    scene->shape->GetBounds(&entry->transform,&temp);
+    scene->shape->NiGeometryData_GetNormalsIterator(&entry->transform,&temp);
     Accumulate(lower,upper,temp);
    }
   }
@@ -19968,7 +19968,7 @@ bool __stdcall FUN_0056d2d0(BoundsInput* input,BoundsGrid* grid,Bounds* output)
       SceneObject* child=children->data[k];
       BoundsEntry* entry=EntryOf(child);
       if(entry->unk00) {
-       if(child->GetScene()) scene->shape->GetBounds(&entry->transform,&temp);
+       if(child->GetScene()) scene->shape->NiGeometryData_GetNormalsIterator(&entry->transform,&temp);
        else {
         __declspec(align(16)) BoundsTransform transform;
         children->data[k]->GetTransform(&transform);

@@ -8195,8 +8195,8 @@ struct Timer
 extern Timer DAT_011f6394;
 extern Node* DAT_011e0410;
 void __cdecl bhkWorld_SetMotion(Node*, int, int, int, int);
-void __cdecl ApplyHavokOperation(Node*, int);
-void __cdecl ApplyHavokOperation(Node*, int, int);
+void __cdecl bhkRigidBody_SetFixed(Node*, int);
+void __cdecl bhkRigidBody_SetFixed(Node*, int, int);
 void __cdecl FUN_005b5e40(const char*, ...);
 void __cdecl FUN_00c9bdf0(Node*, float);
 struct Flag
@@ -9210,7 +9210,7 @@ struct Actor920b80
     Face920b80* FUN_008adcb0();
 };
 
-void __cdecl ApplyHavokOperation(Node920b80*, bool, bool);
+void __cdecl bhkRigidBody_SetFixed(Node920b80*, bool, bool);
 void __cdecl FUN_00c9bdf0(Node920b80*, float);
 extern Actor920b80* g_thePlayer;
 

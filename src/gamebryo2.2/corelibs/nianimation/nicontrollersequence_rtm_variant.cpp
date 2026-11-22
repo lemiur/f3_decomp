@@ -333,7 +333,7 @@ struct FUN_00a30c80_shell
     unsigned __int64 __thiscall IsNotInChain(void* arg);
     bool __thiscall NiControllerSequence_CanSyncTo(void* arg);
 };
-bool __stdcall MatchesTextKeys(void* arg);
+bool __stdcall NiControllerSequence_VerifyMatchingMorphKeys(void* arg);
 struct FUN_00a30cc0_target
 {
     virtual void V00();
@@ -803,7 +803,7 @@ struct SeqA34f20
         return bWasInactive;
     }
 
-    bool StartSequence(char m_ucRegionPriority, bool bStartOver, float fWeight, float fEaseInTime,
+    bool NiControllerSequence_Activate(char m_ucRegionPriority, bool bStartOver, float fWeight, float fEaseInTime,
                        SeqA34f20* pkTimeSyncSeq, bool bTransition);
 };
 struct SomeObjectB3718
@@ -1132,7 +1132,7 @@ struct UpdateNote
 };
 struct UpdateNoteManager
 {
-    void DispatchByKey(UpdateNote* note);
+    void BSAnimNoteListener_Update(UpdateNote* note);
 };
 struct UpdateOwner
 {
@@ -1194,7 +1194,7 @@ struct AnimationSequence : S_00a30880_Base
     unsigned short unk6a;
     UpdateNote** notes;
     unsigned short noteCount;
-    float GetMorphedTime(AnimationSequence*, float);
+    float NiControllerSequence_FindCorrespondingMorphFrame(AnimationSequence*, float);
     float FUN_00a30970(float, bool);
     void NiControllerSequence_SetInterpsWeightAndTime(float, float, float);
     void FUN_00a34ba0(float time, bool update);
@@ -1437,7 +1437,7 @@ struct SeqIDTagOffsets
     OffsetString m_kCtlrType;
     OffsetString m_kCtlrID;
     OffsetString m_kInterpolatorID;
-    void LoadFromPalette(NiStringPalette* pkPalette, int iUnused);
+    void NiControllerSequence_IDTag_HandleDeprecatedExtraData(NiStringPalette* pkPalette, int iUnused);
 };
 __declspec(dllimport) long __stdcall InterlockedDecrement(long* plAddend);
 struct A31500Ref
@@ -2211,7 +2211,7 @@ struct NiControllerSequenceT
     void* m_pkIDTags;
     float m_fWeight;
     NiTextKeyExtraData* m_spTextKeyData;
-    bool MatchesTextKeys(NiControllerSequenceT* pkOther);
+    bool NiControllerSequence_VerifyMatchingMorphKeys(NiControllerSequenceT* pkOther);
 };
 struct StaticKeyB5652
 {
@@ -3011,7 +3011,7 @@ struct LegacyTag
     char* type;
     char* controller;
     char* interpolator;
-    void LoadFromPalette(RefObj*, NiStream&);
+    void NiControllerSequence_IDTag_HandleDeprecatedExtraData(RefObj*, NiStream&);
     void ResetStrings();
 };
 struct LegacyController : RefObj
@@ -3153,7 +3153,7 @@ void LegacySequence::FUN_00a352f0(NiStream& stream)
     if (stringPalette)
     {
         for (unsigned int i = 0; i < count; ++i)
-            tags[i].LoadFromPalette(stringPalette, stream);
+            tags[i].NiControllerSequence_IDTag_HandleDeprecatedExtraData(stringPalette, stream);
         if (stringPalette)
         {
             RefObj* palette = stringPalette;

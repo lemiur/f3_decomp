@@ -476,7 +476,7 @@ FUN_00c9aeb0_t* FUN_00c9b020()
 struct ScriptX
 {
     void GetLocalData();
-    void InvokeInterfaceCall(int a, int b, int c, int d);
+    void bhkShapePhantom_SetPositionAndLinearCast(int a, int b, int c, int d);
 };
 extern void(__stdcall* DAT_0126820c_enter)(int*);
 extern void(__stdcall* DAT_0126820c_leave)(int*);
@@ -512,7 +512,8 @@ struct ScriptXLayout
 
 // pdb: bhkShapePhantom::SetPositionAndLinearCast | bhkShapePhantom.obj | fnv360_0822_retail, call_seq, high
 // pdb params: arPos, arIn, arPnts, apStart
-void ScriptX::InvokeInterfaceCall(int aiArg1, int aiArg2, int aiArg3, int aiArg4)
+// pdb: bhkShapePhantom::SetPositionAndLinearCast | bhkShapePhantom.obj | fnv360_0822_retail, call_seq, high (was: InvokeInterfaceCall)
+void ScriptX::bhkShapePhantom_SetPositionAndLinearCast(int aiArg1, int aiArg2, int aiArg3, int aiArg4)
 {
     if (this)
     {
@@ -2763,7 +2764,7 @@ void __thiscall FUN_00c87600_Obj::bhkSerializable_CopyMembers(void* pTarget, voi
     this->vfA4(1);
 }
 
-// TailOne: thiscall, 18 bytes. Self virtual call at slot 0xa4 (index 41) tail-jumped with constant 1 in the stack arg.
+// bhkSerializable_PostInit: thiscall, 18 bytes. Self virtual call at slot 0xa4 (index 41) tail-jumped with constant 1 in the stack arg.
 struct FUN_00c876d0_cls
 {
     virtual void v00();
@@ -2808,13 +2809,14 @@ struct FUN_00c876d0_cls
     virtual void v9c();
     virtual void va0();
     virtual void Tail(int a);
-    void TailOne(int a);
+    void bhkSerializable_PostInit(int a);
 };
 
 // @fnv 0x00c876d0
 // pdb: bhkSerializable::PostInit | bhkSerializable.obj | fnv360_0822_retail, vtable, high
 // pdb params: __formal
-void FUN_00c876d0_cls::TailOne(int a)
+// pdb: bhkSerializable::PostInit | bhkSerializable.obj | fnv360_0822_retail, vtable, high (was: TailOne)
+void FUN_00c876d0_cls::bhkSerializable_PostInit(int a)
 {
     this->Tail(1);
 }
@@ -3302,14 +3304,15 @@ class BC87850RefObject
     virtual char* GetSerializeData(int* piHandle);
 
     void BaseSaveBinary(BC87850Stream& kStream);
-    void SaveSerializeData(BC87850Stream& kStream);
+    void bhkSerializable_SaveBinary(BC87850Stream& kStream);
 };
 
 // Gets the serialize data buffer and handle, saves the base binary, writes the buffer to the stream, then frees the serialize data.
 // @f3 0x008f8060 (community match, verified in this file)
 // pdb: bhkSerializable::SaveBinary | bhkSerializable.obj | fnv360_0822_retail, call_seq, high
 // pdb params: arStream
-void BC87850RefObject::SaveSerializeData(BC87850Stream& kStream)
+// pdb: bhkSerializable::SaveBinary | bhkSerializable.obj | fnv360_0822_retail, call_seq, high (was: SaveSerializeData)
+void BC87850RefObject::bhkSerializable_SaveBinary(BC87850Stream& kStream)
 {
     int iHandle;
     char* pSerializeData = GetSerializeData(&iHandle);
@@ -3495,7 +3498,8 @@ struct FNVTraversalOutput : FNVTransformState
 // @fnv 0x00c884c0
 // pdb: GetTransformRecursive | WeaponObject.obj | fnv360_0822_retail, caller_sim, high
 // pdb params: apObject, apRoot, aWorldTransform
-void __cdecl AccumulateParentTransforms(FNVTraversalNode* node, FNVTraversalNode* stop, FNVTraversalOutput* output)
+// pdb: GetTransformRecursive | WeaponObject.obj | fnv360_0822_retail, caller_sim, high (was: AccumulateParentTransforms)
+void __cdecl GetTransformRecursive(FNVTraversalNode* node, FNVTraversalNode* stop, FNVTraversalOutput* output)
 {
     if (node == 0)
         return;
@@ -3504,7 +3508,7 @@ void __cdecl AccumulateParentTransforms(FNVTraversalNode* node, FNVTraversalNode
         output->FUN_00a86bf0();
         return;
     }
-    AccumulateParentTransforms(node->parent, stop, output);
+    GetTransformRecursive(node->parent, stop, output);
     static_cast<FNVTransformState&>(*output) = output->FUN_0062c250(&node->state);
 }
 
@@ -5775,14 +5779,15 @@ struct H_00c8b1d0
     virtual void reservedVirtual44();
     virtual char* GetDataPosition(FileContext* volatile* object);
     void FUN_00c84d00(FileContext* object);
-    void ProcessFileContext(FileContext* object);
+    void bhkListShape_LoadBinary(FileContext* object);
 };
 void __cdecl FUN_00cf0930(char* data, void* shared, char* component);
 void __cdecl LoadIntArray(FileContext* object, char* component);
 // @f3 0x008fcd00 (community match, verified in this file)
 // pdb: bhkListShape::LoadBinary | bhkListShape.obj | fnv360_0822_retail, caller_sim, high
 // pdb params: arStream
-void H_00c8b1d0::ProcessFileContext(FileContext* volatile object)
+// pdb: bhkListShape::LoadBinary | bhkListShape.obj | fnv360_0822_retail, caller_sim, high (was: ProcessFileContext)
+void H_00c8b1d0::bhkListShape_LoadBinary(FileContext* volatile object)
 {
     FileContext* stableObject = object;
     stableObject->NiStream_ReadMultipleLinkIDs();
@@ -8296,7 +8301,7 @@ struct FUN_00c84d50_cls
     int m_unk0c;
     unsigned int m_flags;
 
-    void SaveSerializeData(void* arg);
+    void bhkSerializable_SaveBinary(void* arg);
     void bhkShape_SaveBinary(void* arg);
 };
 
@@ -8313,7 +8318,7 @@ void FUN_00c84d50_cls::bhkShape_SaveBinary(void* arg)
     if (data->m_unk1e4 != 1)
         *result = _byteswap_ulong(value);
 
-    SaveSerializeData(arg);
+    bhkSerializable_SaveBinary(arg);
 
     if (data->m_unk1e4 != 1)
         *result = _byteswap_ulong(*result);
@@ -8827,7 +8832,8 @@ void bhkWorld_SetMotion(NiNode* apNode, int aiArg, bool abA, bool abB, bool abC)
 // @fnv 0x00c88810
 // pdb: WeaponObject::UpdateChain | WeaponObject.obj | fnv360_0822_retail, ustr, high
 // pdb params: apWeaponObj, apWorld
-void UpdateChainCollision(NiAVObject* apObject)
+// pdb: WeaponObject::UpdateChain | WeaponObject.obj | fnv360_0822_retail, ustr, high (was: UpdateChainCollision)
+void WeaponObject_UpdateChain(NiAVObject* apObject)
 {
     NiNode* pkRoot = apObject->IsSceneNode();
     if (!pkRoot)
@@ -8995,11 +9001,11 @@ class RefChainOwner
     int unk00;
     int unk04;
     Mid* m_08;
-    void SaveSerializeData(Dispatcher* p);
+    void bhkSerializable_SaveBinary(Dispatcher* p);
     void DispatchChainNodes(Dispatcher* arg);
 };
 
-// Dispatches the m_0c payloads of the m_18 and m_1c nodes reached through m_08, then calls SaveSerializeData.
+// Dispatches the m_0c payloads of the m_18 and m_1c nodes reached through m_08, then calls bhkSerializable_SaveBinary.
 // @fnv 0x00c8aac0
 // pdb: bhkBinaryAction::SaveBinary | bhkBinaryAction.obj | fnv360_0822_retail, caller_sim, low
 // pdb params: arStream
@@ -9031,7 +9037,7 @@ void RefChainOwner::DispatchChainNodes(Dispatcher* pDispatcher)
     }
     pDispatcher->Dispatch(r);
 
-    SaveSerializeData(pDispatcher);
+    bhkSerializable_SaveBinary(pDispatcher);
 }
 
 extern void* __cdecl FUN_00aa13e0(unsigned int size);
@@ -14020,9 +14026,10 @@ void FUN_008f4400(unsigned int uiIndexA, unsigned int uiIndexB, bool bSelected);
 void __cdecl FUN_008f4480(unsigned int uiIndex, unsigned __int64 uiMask);
 void __cdecl FUN_00c00610(void* pDest, int iValue, unsigned int uiSize);
 
-void InitializeSelectionMasks();
-namespace fnv_00c828f0 { void InitializeSelectionMasks(); }
-void ::fnv_00c828f0::InitializeSelectionMasks()
+void bhkCollisionFilter_InitFlags();
+namespace fnv_00c828f0 { void bhkCollisionFilter_InitFlags(); }
+// pdb: bhkCollisionFilter::InitFlags | bhkCollisionFilter.obj | fnv360_0822_retail, udata, high (was: InitializeSelectionMasks)
+void ::fnv_00c828f0::bhkCollisionFilter_InitFlags()
 {
     struct SelectionMaskWords { unsigned int low; unsigned int high; };
     FUN_00c00610(DAT_010f30f0, 0, 128);

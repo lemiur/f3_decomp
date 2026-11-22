@@ -805,7 +805,7 @@ void FUN_00bbdcd0_shell::ApplyTextureStages(FUN_00bbdcd0_Arg1* pTextureSource, F
 
 struct GroupStandIn
 {
-    void ApplyGroupEntries();
+    void NiD3DRenderStateGroup_SetRenderStates();
 };
 
 struct ResultStandIn
@@ -830,7 +830,7 @@ void FUN_00bbb820_cls::FUN_00bbb820(int param_1, int param_2)
 {
     ResultStandIn* pResult = this->SetupPass(param_1, param_2);
     DAT_0126f74c = (int)pResult;
-    pResult->m_pGroup->ApplyGroupEntries();
+    pResult->m_pGroup->NiD3DRenderStateGroup_SetRenderStates();
 }
 
 struct FogColorA
@@ -2359,7 +2359,8 @@ extern ResultVector DAT_01201bc0, DAT_01201bd0;
 // When DAT_012010e4->bOn, computes a fog plane from DAT_011f9604 and camera position, and sets DAT_01201bd0 from DAT_011f9614/DAT_011f9618.
 // @fnv 0x00bbbe80
 // pdb: Lighting30Shader::SetupGeometryConstants_WaterFog | Lighting30Shader.obj | fnv360_0822_retail, udata, high
-void UpdateFogPlanes()
+// pdb: Lighting30Shader::SetupGeometryConstants_WaterFog | Lighting30Shader.obj | fnv360_0822_retail, udata, high (was: UpdateFogPlanes)
+void Lighting30Shader_SetupGeometryConstants_WaterFog()
 {
     if (DAT_012010e4->bOn)
     {
@@ -5350,7 +5351,7 @@ struct Shadow
     void FUN_00bbe9c0(const char* n, P0c* p, Arg* a, int mode);
     void ApplyLightSource(int p8, P0c* p);
     void FUN_00bbbdf0(P0c* p);
-    void UpdateFogPlanes();
+    void Lighting30Shader_SetupGeometryConstants_WaterFog();
     Renderer* GetRenderer() const
     {
         return r18;

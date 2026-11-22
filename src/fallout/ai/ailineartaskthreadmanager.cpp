@@ -43,7 +43,7 @@ class AIThreadManager
     void* threadHandles1[12];
     void* threadHandles2[8];
     void LaunchWorkerThread(AI_THREAD_INDEX, unsigned int, AIThreadFunction, const char*, BSThread::StackSize);
-    void StartRenderingTaskThread();
+    void MTRenderingSystem_CreateThreads();
     static void SetThreadingEnabled(bool);
 };
 

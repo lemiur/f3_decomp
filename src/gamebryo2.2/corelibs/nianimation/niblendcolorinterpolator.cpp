@@ -254,7 +254,7 @@ struct FUN_00a37260_shell
 
 struct FUN_00a56400_shell : NiBlendColorInterpolator
 {
-    bool GetColorAtTime(float fTime, NiObjectNET* pkTarget, RgbaColor* kValue);
+    bool NiBlendColorInterpolator_StoreSingleValue(float fTime, NiObjectNET* pkTarget, RgbaColor* kValue);
     bool UpdateBlend(float fTime, NiObjectNET* pkTarget, RgbaColor* kValue);
     bool InterpolateValue(float fTime, NiObjectNET* pkInterpTarget, RgbaColor& kValue);
 };
@@ -268,7 +268,7 @@ bool FUN_00a56400_shell::InterpolateValue(float fTime, NiObjectNET* pkInterpTarg
     unsigned char ucInterpCount = m_ucInterpCount;
     if (ucInterpCount == 1)
     {
-        bReturnValue = GetColorAtTime(fTime, pkInterpTarget, &kValue);
+        bReturnValue = NiBlendColorInterpolator_StoreSingleValue(fTime, pkInterpTarget, &kValue);
     }
     else if (ucInterpCount > 0)
     {
@@ -348,13 +348,14 @@ struct FUN_00a56110_shell
     int unk28;
     int unk2c;
     FUN_00a56110_color color30;
-    bool GetColorAtTime(float fTime, NiObjectNET* pkTarget, FUN_00a56110_color* kOut);
+    bool NiBlendColorInterpolator_StoreSingleValue(float fTime, NiObjectNET* pkTarget, FUN_00a56110_color* kOut);
 };
 
 // @fnv 0x00a56110
 // pdb: NiBlendColorInterpolator::StoreSingleValue | NiBlendColorInterpolator.obj | fnv360_0822_retail, objrun, high
 // pdb params: fTime, pkInterpTarget, kValue
-bool FUN_00a56110_shell::GetColorAtTime(float fTime, NiObjectNET* pkTarget, FUN_00a56110_color* kOut)
+// pdb: NiBlendColorInterpolator::StoreSingleValue | NiBlendColorInterpolator.obj | fnv360_0822_retail, objrun, high (was: GetColorAtTime)
+bool FUN_00a56110_shell::NiBlendColorInterpolator_StoreSingleValue(float fTime, NiObjectNET* pkTarget, FUN_00a56110_color* kOut)
 {
     if (flags0c & 1)
     {

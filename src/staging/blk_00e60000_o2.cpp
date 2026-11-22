@@ -4784,7 +4784,7 @@ struct E74Node
 };
 struct E74GroupMgr
 {
-    bool ProcessCollector(void* pkGroup, E74GeomData* pkData, E74SkinInstance* pkSkin, bool bHasAnimation,
+    bool NiD3DGeometryGroupManager_AddObjectToGroup(void* pkGroup, E74GeomData* pkData, E74SkinInstance* pkSkin, bool bHasAnimation,
                           unsigned int a, unsigned int b);
 };
 extern int DAT_0126f0ec;
@@ -4840,7 +4840,7 @@ void FUN_00e74a40_shell::AddGeometryToBatch(E74Geometry* pkGeom)
     if (!pkData->GetActiveCount())
         return;
     bool bHasAnimation = FUN_00e72c20(pkGeom, m_pGeometryShader);
-    m_pkGroupMgr->ProcessCollector(m_pkActorGroup, pkData, pkSkin, bHasAnimation, 0, 0);
+    m_pkGroupMgr->NiD3DGeometryGroupManager_AddObjectToGroup(m_pkActorGroup, pkData, pkSkin, bHasAnimation, 0, 0);
     if (bHasAnimation)
     {
         E74SkinPartition* pkPartition = pkSkin->m_pkSkinMeshPartition;

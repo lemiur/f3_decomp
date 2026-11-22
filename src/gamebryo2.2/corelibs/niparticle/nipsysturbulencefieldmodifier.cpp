@@ -199,13 +199,14 @@ struct FUN_00c27700_class
     int unk18, unk1c, unk20, unk24, unk28, unk2c;
     float m_uiFilterValue, m_inverse;
     void __thiscall LoadFromStream(void* object);
-    void __thiscall ReadFloatAndComputeInverse(void* object);
+    void __thiscall NiPSysTurbulenceFieldModifier_LoadBinary(void* object);
 };
 // Reads a float from the stream at object+0x24c and stores its reciprocal, or a fallback constant when the value is below DAT_01032980.
 // @fnv 0x00c27700
 // pdb: NiPSysTurbulenceFieldModifier::LoadBinary | NiPSysTurbulenceFieldModifier.obj | fnv360_0822_retail, caller_sim, high
 // pdb params: kStream
-void __thiscall FUN_00c27700_class::ReadFloatAndComputeInverse(void* object)
+// pdb: NiPSysTurbulenceFieldModifier::LoadBinary | NiPSysTurbulenceFieldModifier.obj | fnv360_0822_retail, caller_sim, high (was: ReadFloatAndComputeInverse)
+void __thiscall FUN_00c27700_class::NiPSysTurbulenceFieldModifier_LoadBinary(void* object)
 {
     LoadFromStream(object);
     FieldReadState* stream = *(FieldReadState**)((char*)object + 0x24c);

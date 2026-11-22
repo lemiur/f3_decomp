@@ -705,7 +705,7 @@ static __forceinline MyPosKey* GetKey(MyPosKey* pkKeys, unsigned int uiIndex, un
 struct PathInterpExt : public NiPathInterp
 {
     void __thiscall NiPathInterpolator_GetPercentLoc(float fTime, unsigned int& ruiKey0, unsigned int& ruiKey1, float& rfNormTime);
-    void FindKeyPair(float fTime, unsigned int& ruiKey0, unsigned int& ruiKey1, float& rfNormTime);
+    void NiPathInterpolator_GetLoc(float fTime, unsigned int& ruiKey0, unsigned int& ruiKey1, float& rfNormTime);
 };
 static const float kNegMax = -3.402823466e+38f;
 class NiPoint3

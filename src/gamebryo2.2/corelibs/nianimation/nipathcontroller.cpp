@@ -16,13 +16,14 @@ struct FUN_00a49e10_shell
         int idx;
         unsigned char sz;
     }* p;
-    void* InvokeIndexedCallback(void* a1, int a2, int a3, float f);
+    void* NiPathController_GenPathInterp(void* a1, int a2, int a3, float f);
 };
 // Reads idx, sz and base from p (or zeros), calls DAT_011f3ca8[idx] with f and two base+sz*index pointers, and returns a1.
 // @fnv 0x00a49e10
 // pdb: NiPathController::GenPathInterp | NiPathController.obj | fnv360_0822_retail, call_seq, high
 // pdb params: iI1, iI2, fNormTime
-void* FUN_00a49e10_shell::InvokeIndexedCallback(void* a1, int iIndexA, int iIndexB, float fValue)
+// pdb: NiPathController::GenPathInterp | NiPathController.obj | fnv360_0822_retail, call_seq, high (was: InvokeIndexedCallback)
+void* FUN_00a49e10_shell::NiPathController_GenPathInterp(void* a1, int iIndexA, int iIndexB, float fValue)
 {
     Inner* pInner = p;
     int idx;
@@ -621,7 +622,7 @@ struct PathKeyData
     }
 };
 
-float __cdecl InterpolateKey(float fTime, void* pkKeys, int eType, unsigned int uiNumKeys, unsigned int& uiLastIdx,
+float __cdecl NiFloatKey_GenInterp(float fTime, void* pkKeys, int eType, unsigned int uiNumKeys, unsigned int& uiLastIdx,
                              unsigned char ucSize);
 
 struct PathCtlr
@@ -652,15 +653,16 @@ struct PathCtlr
     bool NiTimeController_DontDoUpdate(float fTime);
     void NiPathController_GetLoc(float fPct, int* piIdx1, int* piIdx2, float* pfPct);
     void NiPathController_CalcRefFrame(int iIdx1, int iIdx2, float fPct, ThreeByThreeMatrix* pkRot);
-    void InvokeIndexedCallback(NiPoint3* result, int iIdx1, int iIdx2, float fPct);
-    void UpdatePathTarget(float* pfTime);
+    void NiPathController_GenPathInterp(NiPoint3* result, int iIdx1, int iIdx2, float fPct);
+    void NiPathController_Update(float* pfTime);
 };
 
 // Evaluates the percent and path keys at controller time, writes translation to m_pkTarget, and writes rotation when follow is enabled.
 // @fnv 0x00a4afa0
 // pdb: NiPathController::Update | NiPathController.obj | fnv360_0822_retail, caller_sim, high
 // pdb params: UpdateData
-void PathCtlr::UpdatePathTarget(float* apfTime)
+// pdb: NiPathController::Update | NiPathController.obj | fnv360_0822_retail, caller_sim, high (was: UpdatePathTarget)
+void PathCtlr::NiPathController_Update(float* apfTime)
 {
     if (!m_pPathInterp)
         return;
@@ -679,7 +681,7 @@ void PathCtlr::UpdatePathTarget(float* apfTime)
     if (NiTimeController_DontDoUpdate(*apfTime))
         return;
 
-    float fPct = InterpolateKey(m_fControllerTime, pkPctKeys, ePctType, uiNumPctKeys, m_uiPercentKeyCount, ucPathSize);
+    float fPct = NiFloatKey_GenInterp(m_fControllerTime, pkPctKeys, ePctType, uiNumPctKeys, m_uiPercentKeyCount, ucPathSize);
     {
         PathIndices stIndices;
         NiPathController_GetLoc(fPct, (int*)&stIndices.first, (int*)&stIndices.second, &fPct);
@@ -691,7 +693,7 @@ void PathCtlr::UpdatePathTarget(float* apfTime)
             m_pkTarget->m_kRotate = kRot;
         }
         NiPoint3 kPos;
-        InvokeIndexedCallback(&kPos, stIndices.first, i2, fPct);
+        NiPathController_GenPathInterp(&kPos, stIndices.first, i2, fPct);
         m_pkTarget->m_kTranslate = kPos;
     }
 }
@@ -1027,14 +1029,15 @@ struct FUN_00a4adc0_cls
 
     float GetTotalLength();
     void FUN_00a6d500(SpawnedArg* a);
-    void SetSpawnedArgs(SpawnedArg* a);
+    void NiPathController_LinkObject(SpawnedArg* a);
 };
 
 // Updates m_40 and m_44 from a SpawnedArg, sets a flag in m_34, and computes m_4c and m_5c from the current m_40 sample data.
 // @fnv 0x00a4adc0
 // pdb: NiPathController::LinkObject | NiPathController.obj | fnv360_0822_retail, objrun, high
 // pdb params: kStream
-void FUN_00a4adc0_cls::SetSpawnedArgs(SpawnedArg* apSpawnedArg)
+// pdb: NiPathController::LinkObject | NiPathController.obj | fnv360_0822_retail, objrun, high (was: SetSpawnedArgs)
+void FUN_00a4adc0_cls::NiPathController_LinkObject(SpawnedArg* apSpawnedArg)
 {
     FUN_00a6d500(apSpawnedArg);
 
@@ -1337,7 +1340,7 @@ struct PathMatrix
 extern const PathMatrix DAT_011a9448;
 extern const NiPoint3 DAT_011a9484;
 extern float DAT_01097304;
-void __cdecl ComputeFrenetFrame(float, const AnimationKey*, const AnimationKey*, int, NiPoint3*, NiPoint3*, NiPoint3*,
+void __cdecl NiPosKey_CoordinateFrame(float, const AnimationKey*, const AnimationKey*, int, NiPoint3*, NiPoint3*, NiPoint3*,
                                 float*);
 inline float& GetBankFactor()
 {
@@ -1423,7 +1426,7 @@ void PathController::NiPathController_CalcRefFrame(unsigned aiFirstKey, unsigned
         if (IsFollow())
         {
             float otherCurvature;
-            ComputeFrenetFrame(afTime, (const AnimationKey*)((const char*)base + size * aiFirstKey),
+            NiPosKey_CoordinateFrame(afTime, (const AnimationKey*)((const char*)base + size * aiFirstKey),
                                (const AnimationKey*)((const char*)base + size * aiSecondKey), type, &position,
                                &vTangent, &normal, &curvature);
             if (smoothing != 0.0f)
@@ -1440,10 +1443,10 @@ void PathController::NiPathController_CalcRefFrame(unsigned aiFirstKey, unsigned
                         w0 = (1.0f - afTime + smoothing) / (smoothing * 2.0f);
                         w1 = 1.0f - w0;
                         float u = 1.0f - smoothing;
-                        ComputeFrenetFrame(u, (const AnimationKey*)((const char*)base + size * aiFirstKey),
+                        NiPosKey_CoordinateFrame(u, (const AnimationKey*)((const char*)base + size * aiFirstKey),
                                            (const AnimationKey*)((const char*)base + size * aiSecondKey), type,
                                            &vScratch, &vTangent, &normal, &curvature);
-                        ComputeFrenetFrame(smoothing, (const AnimationKey*)((const char*)base + size * adjacent),
+                        NiPosKey_CoordinateFrame(smoothing, (const AnimationKey*)((const char*)base + size * adjacent),
                                            (const AnimationKey*)((const char*)base + size * (adjacent + 1)), type,
                                            &vScratch, &vOther, &normal, &otherCurvature);
                         vTangent = FUN_004a3760(w0, vTangent) + FUN_004a3760(w1, vOther);
@@ -1459,11 +1462,11 @@ void PathController::NiPathController_CalcRefFrame(unsigned aiFirstKey, unsigned
                     {
                         w1 = (smoothing - afTime) / (smoothing * 2.0f);
                         w0 = 1.0f - w1;
-                        ComputeFrenetFrame(smoothing, (const AnimationKey*)((const char*)base + size * aiFirstKey),
+                        NiPosKey_CoordinateFrame(smoothing, (const AnimationKey*)((const char*)base + size * aiFirstKey),
                                            (const AnimationKey*)((const char*)base + size * aiSecondKey), type,
                                            &vScratch, &vTangent, &normal, &curvature);
                         float u = 1.0f - smoothing;
-                        ComputeFrenetFrame(u, (const AnimationKey*)((const char*)base + size * (adjacent - 1)),
+                        NiPosKey_CoordinateFrame(u, (const AnimationKey*)((const char*)base + size * (adjacent - 1)),
                                            (const AnimationKey*)((const char*)base + size * adjacent), type, &vScratch,
                                            &vOther, &normal, &otherCurvature);
                         vTangent = FUN_004a3760(w0, vTangent) + FUN_004a3760(w1, vOther);
@@ -1479,7 +1482,7 @@ void PathController::NiPathController_CalcRefFrame(unsigned aiFirstKey, unsigned
         }
         else
         {
-            ComputeFrenetFrame(afTime, (const AnimationKey*)((const char*)base + size * aiFirstKey),
+            NiPosKey_CoordinateFrame(afTime, (const AnimationKey*)((const char*)base + size * aiFirstKey),
                                (const AnimationKey*)((const char*)base + size * aiSecondKey), type, &position,
                                &vTangent, &normal, &curvature);
             result.Set0(position);

@@ -1000,13 +1000,14 @@ struct DDSReader
     unsigned int height, width, levels;
     unsigned char swap, unk10d, unk10e, unk10f;
     NiPixelFormat format;
-    PixelData* ReadPixelData(ImageStream*, PixelData*);
+    PixelData* NiDDSReader_ReadFile(ImageStream*, PixelData*);
 };
 // Reads DDS pixel data for all faces and mip levels from stream into result, converting pixel format if it differs from the requested format.
 // @fnv 0x00a8d0d0
 // pdb: NiDDSReader::ReadFile | NiDDSReader.obj | fnv360_0822_retail, caller_sim, high
 // pdb params: kIst, pkOptDest
-PixelData* DDSReader::ReadPixelData(ImageStream* stream, PixelData* apPixelData)
+// pdb: NiDDSReader::ReadFile | NiDDSReader.obj | fnv360_0822_retail, caller_sim, high (was: ReadPixelData)
+PixelData* DDSReader::NiDDSReader_ReadFile(ImageStream* stream, PixelData* apPixelData)
 {
     unsigned int uiWidth, uiHeight, faceCount;
     bool headerFlag;

@@ -85,7 +85,7 @@ struct Pair {
     unsigned int hi;
 };
 extern "C" unsigned int* __cdecl FNV_e03300_arena();
-static void WriteUIntArray(const unsigned int* data, int count, Writer* pWriter, int elemSize);
+static void writeUlongArray(const unsigned int* data, int count, Writer* pWriter, int elemSize);
 void e03300_driver(Writer* w, int elemSize, const unsigned int* data, int count);
 // AppendListEntry
 //
@@ -417,7 +417,8 @@ __declspec(noinline) static int FUN_00e03100(Obj* p)
     return n ? p->m() : 1;
 }
 
-__declspec(noinline) static void WriteUIntArray(const unsigned int* data, int count, Writer* w, int elemSize)
+// pdb: writeUlongArray | hkObjectCopier.obj | fnv360_0822_retail, call_gap, high (was: WriteUIntArray)
+__declspec(noinline) static void writeUlongArray(const unsigned int* data, int count, Writer* w, int elemSize)
 {
     if (elemSize == 4) { w->write(data, elemSize, count); return; }
     {

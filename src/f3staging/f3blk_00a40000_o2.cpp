@@ -6881,7 +6881,8 @@ struct TokStreamReader
 
 
 
-static __declspec(noinline) void SkipWhitespace(TokStreamReader* reader)
+// pdb: eatWhiteSpace | hkIStream.obj | fnv360_0822_retail, call_seq, high (was: SkipWhitespace)
+static __declspec(noinline) void eatWhiteSpace(TokStreamReader* reader)
 {
     char buf[64];
     int n;
@@ -6927,7 +6928,7 @@ TokIstream& TokIstream::FUN_00a4a360(TokString& str)
 
     buf.reserve(64);
 
-    SkipWhitespace(m_streamReader);
+    eatWhiteSpace(m_streamReader);
 
     m_streamReader->setMark(1);
 

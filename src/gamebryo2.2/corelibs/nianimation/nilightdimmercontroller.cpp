@@ -194,7 +194,7 @@ class NiLightDimmerControllerW
         return ((m_uiObjectFlags >> 5) & 1) != 0;
     }
     bool NiTimeController_DontDoUpdate(float fTime);
-    void UpdateDimmer(const float& fTime);
+    void NiLightDimmerController_Update(const float& fTime);
 };
 
 // @f3 0x008c6ee0 (community match, verified in this file)
@@ -202,7 +202,8 @@ extern int DAT_0108f41c;
 void* __cdecl FUN_00424d50(const void* pkType, void* pkObject);
 // pdb: NiLightDimmerController::Update | NiLightDimmerController.obj | fnv360_0822_retail, caller_sim, high
 // pdb params: UpdateData
-void NiLightDimmerControllerW::UpdateDimmer(const float& fTime)
+// pdb: NiLightDimmerController::Update | NiLightDimmerController.obj | fnv360_0822_retail, caller_sim, high (was: UpdateDimmer)
+void NiLightDimmerControllerW::NiLightDimmerController_Update(const float& fTime)
 {
     if (GetManagerControlled())
     {

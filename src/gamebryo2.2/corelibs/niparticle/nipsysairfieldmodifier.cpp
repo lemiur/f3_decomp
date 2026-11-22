@@ -682,7 +682,7 @@ struct Cls_00c2f650
     char unk63;
     float unk64;
 
-    void UpdateParticleAirFriction(float fTime, NiPSysData* pkData);
+    void NiPSysAirFieldModifier_UpdateNoAttenuationNoInheritNoSpread(float fTime, NiPSysData* pkData);
 };
 
 inline void* operator new(unsigned int, void* pv)
@@ -694,7 +694,8 @@ inline void* operator new(unsigned int, void* pv)
 // @fnv 0x00c2f650
 // pdb: NiPSysAirFieldModifier::UpdateNoAttenuationNoInheritNoSpread | NiPSysAirFieldModifier.obj | fnv360_0822_retail, objrun, high
 // pdb params: fTime, pkData
-void Cls_00c2f650::UpdateParticleAirFriction(float fTime, NiPSysData* pkData)
+// pdb: NiPSysAirFieldModifier::UpdateNoAttenuationNoInheritNoSpread | NiPSysAirFieldModifier.obj | fnv360_0822_retail, objrun, high (was: UpdateParticleAirFriction)
+void Cls_00c2f650::NiPSysAirFieldModifier_UpdateNoAttenuationNoInheritNoSpread(float fTime, NiPSysData* pkData)
 {
     if (m_fInfluence == 0.0f)
         return;
@@ -856,14 +857,15 @@ struct S00c2f8d0_Mod
     char unk63;
     float unk64;
 
-    void UpdateAirFriction(float fTime, NiPSysData* pkData);
+    void NiPSysAirFieldModifier_UpdateNoAttenuationNoInheritNoSpreadNoMaxDistance(float fTime, NiPSysData* pkData);
 };
 
 // When influence is nonzero, transforms the field direction and adjusts particle velocities using air friction and the time delta.
 // @fnv 0x00c2f8d0
 // pdb: NiPSysAirFieldModifier::UpdateNoAttenuationNoInheritNoSpreadNoMaxDistance | NiPSysAirFieldModifier.obj | fnv360_0822_retail, objrun, high
 // pdb params: fTime, pkData
-void S00c2f8d0_Mod::UpdateAirFriction(float fTime, NiPSysData* pkData)
+// pdb: NiPSysAirFieldModifier::UpdateNoAttenuationNoInheritNoSpreadNoMaxDistance | NiPSysAirFieldModifier.obj | fnv360_0822_retail, objrun, high (was: UpdateAirFriction)
+void S00c2f8d0_Mod::NiPSysAirFieldModifier_UpdateNoAttenuationNoInheritNoSpreadNoMaxDistance(float fTime, NiPSysData* pkData)
 {
     if (m_fInfluence == 0.0f)
         return;
@@ -1016,8 +1018,8 @@ struct AirModifier
     bool unk61;
     bool enableSpread;
     float spread;
-    void UpdateParticleAirFriction(float, AirParticles*);
-    void UpdateAirFriction(float, AirParticles*);
+    void NiPSysAirFieldModifier_UpdateNoAttenuationNoInheritNoSpread(float, AirParticles*);
+    void NiPSysAirFieldModifier_UpdateNoAttenuationNoInheritNoSpreadNoMaxDistance(float, AirParticles*);
     void NiPSysAirFieldModifier_Update(float, AirParticles*);
 };
 // Updates particle velocities using the field direction and magnitude, with optional spread, distance limiting, attenuation, and inherited velocity.
@@ -1030,9 +1032,9 @@ void AirModifier::NiPSysAirFieldModifier_Update(float time, AirParticles* apPart
     if (attenuation == 0.0f && inheritVelocity == 0.0f && !enableSpread)
     {
         if (useMaxDistance)
-            UpdateParticleAirFriction(time, apParticles);
+            NiPSysAirFieldModifier_UpdateNoAttenuationNoInheritNoSpread(time, apParticles);
         else
-            UpdateAirFriction(time, apParticles);
+            NiPSysAirFieldModifier_UpdateNoAttenuationNoInheritNoSpreadNoMaxDistance(time, apParticles);
         return;
     }
     AirTransform sourceWorld = source->world;

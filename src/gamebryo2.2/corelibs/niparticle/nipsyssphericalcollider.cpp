@@ -89,7 +89,8 @@ struct Collider : BSFadeNode
 };
 // @fnv 0x00c282a0
 // pdb: NiPSysSphericalCollider::CreateObject | NiPSysSphericalCollider.obj | fnv360_0822_retail, objrun, high
-Collider* CreateCollider()
+// pdb: NiPSysSphericalCollider::CreateObject | NiPSysSphericalCollider.obj | fnv360_0822_retail, objrun, high (was: CreateCollider)
+Collider* NiPSysSphericalCollider_CreateObject()
 {
     Collider* p = (Collider*)BSFadeNode::operator new(0xb0);
     if (p)
@@ -366,13 +367,14 @@ struct SphericalColliderReader : NiPSysCollider
         return *reinterpret_cast<float*>(reinterpret_cast<char*>(this) + 0x30);
     }
     void NiPSysCollider_SaveBinary(NiStream& stream);
-    void ReadSphericalCollider(NiStream& stream);
+    void NiPSysSphericalCollider_SaveBinary(NiStream& stream);
 };
 // Reads the base collider data, then reads the link id and radius float from the stream.
 // @fnv 0x00c280c0
 // pdb: NiPSysSphericalCollider::SaveBinary | NiPSysSphericalCollider.obj | fnv360_0822_retail, caller_sim, high
 // pdb params: kStream
-void SphericalColliderReader::ReadSphericalCollider(NiStream& stream)
+// pdb: NiPSysSphericalCollider::SaveBinary | NiPSysSphericalCollider.obj | fnv360_0822_retail, caller_sim, high (was: ReadSphericalCollider)
+void SphericalColliderReader::NiPSysSphericalCollider_SaveBinary(NiStream& stream)
 {
     NiPSysCollider_SaveBinary(stream);
     StreamView& reader = reinterpret_cast<StreamView&>(stream);
@@ -492,13 +494,14 @@ struct NiPSysSphericalColliderX : NiPSysColliderBase
     float m_fSphereRadius;
     int unk38;
     NiPoint3 m_kPathOffset;
-    void ResolveSphericalCollision(float fInitialTime, NiPSysData* pkData, unsigned short usCurrentParticle);
+    void NiPSysSphericalCollider_Update(float fInitialTime, NiPSysData* pkData, unsigned short usCurrentParticle);
 };
 
 // @fnv 0x00c27e20
 // pdb: NiPSysSphericalCollider::Update | NiPSysSphericalCollider.obj | fnv360_0721_beta, objrun, high
 // pdb params: fTime, pkData, usCurParticle
-void NiPSysSphericalColliderX::ResolveSphericalCollision(float fInitialTime, NiPSysData* pkData,
+// pdb: NiPSysSphericalCollider::Update | NiPSysSphericalCollider.obj | fnv360_0721_beta, objrun, high (was: ResolveSphericalCollision)
+void NiPSysSphericalColliderX::NiPSysSphericalCollider_Update(float fInitialTime, NiPSysData* pkData,
                                                          unsigned short usCurrentParticle)
 {
     Point3ParameterData* pkCurrentParticle = &pkData->m_pkParticleInfo[usCurrentParticle];

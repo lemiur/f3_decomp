@@ -1657,7 +1657,7 @@ class FUN_00c868b0_cls
   public:
     int unk00, unk04;
     C868_L2* m_08;
-    void SaveSerializeData(C868_Iface* a1);
+    void bhkSerializable_SaveBinary(C868_Iface* a1);
     void FUN_00c868b0(C868_Iface* a1);
 };
 
@@ -1680,7 +1680,7 @@ void FUN_00c868b0_cls::FUN_00c868b0(C868_Iface* a1)
         z = 0;
 
     a1->vfn_30(z);
-    this->SaveSerializeData(a1);
+    this->bhkSerializable_SaveBinary(a1);
 }
 
 extern int DAT_01268154;

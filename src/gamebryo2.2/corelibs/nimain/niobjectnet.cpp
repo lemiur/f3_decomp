@@ -222,7 +222,7 @@ void __fastcall AssignFixedString(char* pThis, int, char** ppkName)
 
 struct FUN_00a5bfa0_shell : public NiObjectNET
 {
-    void ClearExtraData();
+    void NiObjectNET_RemoveAllExtraData();
 };
 
 extern "C" __declspec(dllimport) void __stdcall EnterCriticalSection(void*);
@@ -236,7 +236,8 @@ struct NiExtraDataDeleteProxy : public NiObjectNET
 // Under the extra-data lock, deletes all extra data entries, frees the extra data array, and resets the count and max size.
 // @fnv 0x00a5bfa0
 // pdb: NiObjectNET::RemoveAllExtraData | NiObjectNET.obj | fnv360_0721_beta, call_seq, high
-void FUN_00a5bfa0_shell::ClearExtraData()
+// pdb: NiObjectNET::RemoveAllExtraData | NiObjectNET.obj | fnv360_0721_beta, call_seq, high (was: ClearExtraData)
+void FUN_00a5bfa0_shell::NiObjectNET_RemoveAllExtraData()
 {
     EnterCriticalSection(&g_NiObjectNETExtraDataLock);
     for (short i = static_cast<short>(m_usExtraDataCount) - 1; i >= 0; --i)
@@ -455,7 +456,7 @@ struct VStream
     virtual void SaveLinkID(void*);
     char pad[0x250 - 4];
     VOut* out;
-    void WriteObjectLink(NiFixedString*);
+    void NiStream_SaveFixedString(NiFixedString*);
 };
 // @fnv 0x00a5c5b0
 // pdb: NiObjectNET::SaveBinary | NiObjectNET.obj | fnv360_0822_retail, call_gap, high
@@ -463,7 +464,7 @@ struct VStream
 void __fastcall SaveNiObjectLinks(char* self, int, VStream* kStream)
 {
     reinterpret_cast<NiObject*>(self)->NiObject::LinkObject(*reinterpret_cast<NiStream*>(kStream));
-    kStream->WriteObjectLink(reinterpret_cast<NiFixedString*>(self + 8));
+    kStream->NiStream_SaveFixedString(reinterpret_cast<NiFixedString*>(self + 8));
     unsigned int uiStreamableExtraCount = 0;
     unsigned short i;
     for (i = 0; i < *reinterpret_cast<unsigned short*>(self + 0x14); i++)

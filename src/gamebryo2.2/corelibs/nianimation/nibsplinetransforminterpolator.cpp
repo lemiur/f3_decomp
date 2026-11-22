@@ -335,13 +335,14 @@ struct SplineWork
     void* basis;
     SplineTransform transform;
     unsigned translationHandle, rotationHandle, scaleHandle;
-    bool EvaluateSpline(float, void*, SplineTransform&);
+    bool NiBSplineTransformInterpolator_Update(float, void*, SplineTransform&);
 };
 // Samples translation, rotation and scale from the spline data at the given time, caches the transform, and returns whether it is valid.
 // @fnv 0x00a50200
 // pdb: NiBSplineTransformInterpolator::Update | NiBSplineTransformInterpolator.obj | fnv360_0822_retail, objrun, high
 // pdb params: fTime, pkInterpTarget, kValue
-bool SplineWork::EvaluateSpline(float time, void*, SplineTransform& output)
+// pdb: NiBSplineTransformInterpolator::Update | NiBSplineTransformInterpolator.obj | fnv360_0822_retail, objrun, high (was: EvaluateSpline)
+bool SplineWork::NiBSplineTransformInterpolator_Update(float time, void*, SplineTransform& output)
 {
     if (lastTime == time)
     {

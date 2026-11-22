@@ -35,7 +35,7 @@ struct FUN_00e88fa0_shell : public NiD3DGeometryGroupManager
     bool FUN_00e88fa0(NiGeometryGroup*, NiGeometryData*, NiSkinInstance*, bool, unsigned int, unsigned int);
 };
 
-bool __fastcall ProcessCollector(void*, int, NiGeometryGroup*, NiGeometryData*, NiSkinInstance*, bool, unsigned int,
+bool __fastcall NiD3DGeometryGroupManager_AddObjectToGroup(void*, int, NiGeometryGroup*, NiGeometryData*, NiSkinInstance*, bool, unsigned int,
                                  unsigned int);
 
 struct FUN_00e88dc0_caller
@@ -46,7 +46,7 @@ struct FUN_00e88dc0_caller
     }
 };
 
-// Forwards the geometry group, data and skin instance to ProcessCollector along with the bool at pThis+0x18 and two zero arguments.
+// Forwards the geometry group, data and skin instance to NiD3DGeometryGroupManager_AddObjectToGroup along with the bool at pThis+0x18 and two zero arguments.
 // @fnv 0x00e88fa0
 // pdb: NiD3DGeometryGroupManager::AddObjectToGroup | NiD3DGeometryGroupManager.obj | tesv_win, hash, low
 bool __fastcall FUN_00e88fa0(void* pThis, int, NiGeometryGroup* pkGroup, NiGeometryData* pkData,
@@ -54,7 +54,7 @@ bool __fastcall FUN_00e88fa0(void* pThis, int, NiGeometryGroup* pkGroup, NiGeome
 {
     typedef bool(__thiscall * Fn)(void*, NiGeometryGroup*, NiGeometryData*, NiSkinInstance*, bool, unsigned int,
                                   unsigned int);
-    return ((Fn)&ProcessCollector)(pThis, pkGroup, pkData, pkSkinInstance, *((bool*)pThis + 0x18), 0, 0);
+    return ((Fn)&NiD3DGeometryGroupManager_AddObjectToGroup)(pThis, pkGroup, pkData, pkSkinInstance, *((bool*)pThis + 0x18), 0, 0);
 }
 
 struct FUN_00e88c90_shell : public NiD3DGeometryGroupManager
@@ -529,7 +529,8 @@ struct HkCollector
 // @fnv 0x00e88dc0
 // pdb: NiD3DGeometryGroupManager::AddObjectToGroup | NiD3DGeometryGroupManager.obj | fnv360_0822_retail, call_seq, high
 // pdb params: pkGroup, pkData, pkSkinInstance, bHWSkinning, __formal, __formal
-bool __stdcall ProcessCollector(HkCollector* collector, HkBody* body, HkInput* input, bool flag, int unused1,
+// pdb: NiD3DGeometryGroupManager::AddObjectToGroup | NiD3DGeometryGroupManager.obj | fnv360_0822_retail, call_seq, high (was: ProcessCollector)
+bool __stdcall NiD3DGeometryGroupManager_AddObjectToGroup(HkCollector* collector, HkBody* body, HkInput* input, bool flag, int unused1,
                                 int unused2)
 {
     if (input && flag && input->unk0c)

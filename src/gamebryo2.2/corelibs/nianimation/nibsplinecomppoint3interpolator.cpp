@@ -85,12 +85,13 @@ struct SplineEvaluationState
     float scale;
     float bias;
 
-    bool __thiscall EvaluateSplineAtTime(float time, unsigned int unused, Vec3* out);
+    bool __thiscall NiBSplineCompPoint3Interpolator_Update(float time, unsigned int unused, Vec3* out);
 };
 // @fnv 0x00a51280
 // pdb: NiBSplineCompPoint3Interpolator::Update | NiBSplineCompPoint3Interpolator.obj | fnv360_0721_retail, objrun, high
 // pdb params: fTime, pkInterpTarget, kValue
-bool SplineEvaluationState::EvaluateSplineAtTime(float time, unsigned int unused, Vec3* out)
+// pdb: NiBSplineCompPoint3Interpolator::Update | NiBSplineCompPoint3Interpolator.obj | fnv360_0721_retail, objrun, high (was: EvaluateSplineAtTime)
+bool SplineEvaluationState::NiBSplineCompPoint3Interpolator_Update(float time, unsigned int unused, Vec3* out)
 {
     if (lastTime == time)
     {
@@ -257,7 +258,8 @@ struct Comp4 : Base506
 // Allocates and returns a new Comp4 instance on the heap.
 // @fnv 0x00a513c0
 // pdb: NiBSplineCompPoint3Interpolator::CreateObject | NiBSplineCompPoint3Interpolator.obj | fnv360_0822_retail, objrun, high
-void* __cdecl CreateComp4()
+// pdb: NiBSplineCompPoint3Interpolator::CreateObject | NiBSplineCompPoint3Interpolator.obj | fnv360_0822_retail, objrun, high (was: CreateComp4)
+void* __cdecl NiBSplineCompPoint3Interpolator_CreateObject()
 {
     return new Comp4();
 }

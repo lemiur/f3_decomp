@@ -4204,7 +4204,7 @@ struct hkOstream : DispatcherReferencedObject
     void* m_pStreamWriter;
     hkOstream(void*, int);
     virtual ~hkOstream();
-    void InvokeFromRequest(const InlineStorageString&);
+    void GridCellArray_MoveItem(const InlineStorageString&);
     void FUN_00cc01c0(const char*);
 };
 struct DispatcherAgentFuncs

@@ -70,7 +70,7 @@ struct S00a6c720
     BytePairWord* m_pEntries;
     bool m_bStateFlag;
 
-    void CopyRefCountedPointers(S00a6c720* pkDest, void* kCloning);
+    void NiSkinInstance_CopyMembers(S00a6c720* pkDest, void* kCloning);
     void FUN_00a6c720(S00a6c720* pkDest, void* kCloning);
 };
 
@@ -79,7 +79,7 @@ struct S00a6c720
 // pdb params: pkDest, kCloning
 void S00a6c720::FUN_00a6c720(S00a6c720* pkDest, void* kCloning)
 {
-    CopyRefCountedPointers(pkDest, kCloning);
+    NiSkinInstance_CopyMembers(pkDest, kCloning);
 
     pkDest->m_uiNumEntries = m_uiNumEntries;
     if (m_uiNumEntries > 0)

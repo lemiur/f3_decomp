@@ -13373,7 +13373,7 @@ struct PRKE_546
     unsigned char b;
 };
 
-// pdb: BGSPerk::PerkEntryPrioritySortFunction | BGSPerk.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: BGSEntryPointPerkEntry::SetParent)
+// pdb: BGSPerk::PerkEntryPrioritySortFunction | BGSPerk.obj | fnv360_0822_retail, objrun, low, conflict (skyrim: BGSEntryPointPerkEntry::NiAVObject_AttachParent)
 // pdb params: apPerkEntry1, apPerkEntry2
 int __cdecl FUN_00546be0(PRKE_546* lhs, PRKE_546* rhs)
 {

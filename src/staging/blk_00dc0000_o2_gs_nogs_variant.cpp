@@ -597,12 +597,12 @@ struct S_00dcc790_Class
 
     S_00dcc790_Class* __thiscall ReadSignedValue(unsigned short* result);
 };
-extern "C" void __cdecl SkipWhitespace(void);
+extern "C" void __cdecl eatWhiteSpace(void);
 // pdb: readInteger64 | hkIStream.obj | fnv360_0822_retail, caller_sim + skyrim(caller_sim), high
 static __declspec(noinline) unsigned short readInteger64(unsigned char* ok, S_00dcc240_Reader* reader)
 {
     *ok = 0;
-    SkipWhitespace();
+    eatWhiteSpace();
     return reader->unk08;
 }
 typedef __int64 FNVInt64;

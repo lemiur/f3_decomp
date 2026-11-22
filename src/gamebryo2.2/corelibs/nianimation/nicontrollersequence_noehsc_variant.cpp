@@ -334,7 +334,7 @@ struct FUN_00a30c80_shell
     unsigned __int64 __thiscall IsNotInChain(void* arg);
     bool __thiscall NiControllerSequence_CanSyncTo(void* arg);
 };
-bool __stdcall MatchesTextKeys(void* arg);
+bool __stdcall NiControllerSequence_VerifyMatchingMorphKeys(void* arg);
 struct FUN_00a30cc0_target
 {
     virtual void V00();
@@ -804,7 +804,7 @@ struct SeqA34f20
         return bWasInactive;
     }
 
-    bool StartSequence(char m_ucRegionPriority, bool bStartOver, float fWeight, float fEaseInTime,
+    bool NiControllerSequence_Activate(char m_ucRegionPriority, bool bStartOver, float fWeight, float fEaseInTime,
                        SeqA34f20* pkTimeSyncSeq, bool bTransition);
 };
 struct SomeObjectB3718
@@ -1133,7 +1133,7 @@ struct UpdateNote
 };
 struct UpdateNoteManager
 {
-    void DispatchByKey(UpdateNote* note);
+    void BSAnimNoteListener_Update(UpdateNote* note);
 };
 struct UpdateOwner
 {
@@ -1195,7 +1195,7 @@ struct AnimationSequence : S_00a30880_Base
     unsigned short unk6a;
     UpdateNote** notes;
     unsigned short noteCount;
-    float GetMorphedTime(AnimationSequence*, float);
+    float NiControllerSequence_FindCorrespondingMorphFrame(AnimationSequence*, float);
     float FUN_00a30970(float, bool);
     void NiControllerSequence_SetInterpsWeightAndTime(float, float, float);
     void FUN_00a34ba0(float time, bool update);

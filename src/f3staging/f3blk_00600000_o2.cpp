@@ -940,7 +940,7 @@ struct BoundRadiusSource {
     virtual void Slot59();
     virtual void Slot60();
     virtual void Slot61();
-    virtual const BoundResult* GetBounds();
+    virtual const BoundResult* NiGeometryData_GetNormalsIterator();
 };
 struct BoundSource {
     unsigned int unknown00;
@@ -1003,7 +1003,7 @@ BoundResult* __stdcall FUN_00611b60(BoundResult* result, const BoundSource* sour
     bounds.lower.y += bounds.offset.y;
     bounds.lower.z += bounds.offset.z;
 
-    const float extra = source->radiusSource->GetBounds()->radius;
+    const float extra = source->radiusSource->NiGeometryData_GetNormalsIterator()->radius;
     result->center = bounds.lower;
     bounds.offset.x = bounds.upper.x - bounds.lower.x;
     bounds.offset.y = bounds.upper.y - bounds.lower.y;

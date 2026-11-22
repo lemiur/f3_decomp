@@ -28922,7 +28922,8 @@ struct SceneNode : public A43FF0Object {
     int field088,field08c,field090,field094,field098,field09c;
     SceneNode** children;
     int field0a4,field0a8;
-    const Bounds& GetBounds() const { if(bounds) return *bounds; return DAT_0108edc8; }
+    // pdb: NiGeometryData::GetNormalsIterator | NiGeometryData.obj | fnv360_0822_retail, objrun, high (was: GetBounds)
+    const Bounds& NiGeometryData_GetNormalsIterator() const { if(bounds) return *bounds; return DAT_0108edc8; }
     void SetRotate(const ThreeByThreeMatrix& r) { rotate = r; }
     void SetScale(float s) { scale = s; }
     SceneNode* GetChild(unsigned int i) { return children[i]; }
@@ -29473,7 +29474,7 @@ UiObject* __cdecl FUN_0064ecb0() {
         DAT_01076350->FUN_008264c0(compassUpdate);
         DAT_01076340=((HudSceneAccessor*)DAT_010762b4)->FUN_00647f30();
         DAT_0116efbc->virtual55(DAT_01076350,1);
-        float radius=(float)(DAT_01076350->GetBounds().GetRadius()*3.0);
+        float radius=(float)(DAT_01076350->NiGeometryData_GetNormalsIterator().GetRadius()*3.0);
         ((SceneNode*)DAT_0116efbc)->FUN_00ae32a0(DAT_01076350,radius);
         SceneNode* breath=(SceneNode*)DAT_010762b4->field148->field02c;
         Controller* controller=breath->children[0]->FUN_00825200(&DAT_01091f04);

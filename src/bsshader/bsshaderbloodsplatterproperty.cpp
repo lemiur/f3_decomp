@@ -333,7 +333,7 @@ struct StringOwner
     unsigned int children[2];
 
     void WriteToSettingArray(StringArray* a1);
-    void BuildStringArray(unsigned int a1);
+    void BSShaderBloodSplatterProperty_GetViewerStrings(unsigned int a1);
 };
 
 extern unsigned int DAT_011ff0f4;
@@ -347,7 +347,8 @@ extern const char str_010ae79c[];
 // @fnv 0x00b81520
 // pdb: BSShaderBloodSplatterProperty::GetViewerStrings | BSShaderBloodSplatterProperty.obj | fnv360_0822_retail, ustr_rel, high
 // pdb params: apStrings
-void StringOwner::BuildStringArray(unsigned int apArray)
+// pdb: BSShaderBloodSplatterProperty::GetViewerStrings | BSShaderBloodSplatterProperty.obj | fnv360_0822_retail, ustr_rel, high (was: BuildStringArray)
+void StringOwner::BSShaderBloodSplatterProperty_GetViewerStrings(unsigned int apArray)
 {
     StringArray* pArray = (StringArray*)apArray;
     WriteToSettingArray(pArray);

@@ -982,7 +982,7 @@ void __thiscall Holder::FUN_00a45bc0()
 
 
 struct UVKey;
-float __cdecl InterpolateKey(float fTime, UVKey* pkKeys, int eType, unsigned int uiNumKeys, unsigned int* puiLastIdx,
+float __cdecl NiFloatKey_GenInterp(float fTime, UVKey* pkKeys, int eType, unsigned int uiNumKeys, unsigned int* puiLastIdx,
                              unsigned char ucSize);
 struct UVPoint
 {
@@ -1128,22 +1128,22 @@ void UVController::UpdateUVTransform()
         fAnimOffsetU = 0.0f;
         pkKeys = GetDataFromMember(uiNumKeys, eType, ucSize);
         if (pkKeys)
-            fAnimOffsetU = InterpolateKey(m_fControllerTime, pkKeys, eType, uiNumKeys, &m_uiLastIdx0, ucSize);
+            fAnimOffsetU = NiFloatKey_GenInterp(m_fControllerTime, pkKeys, eType, uiNumKeys, &m_uiLastIdx0, ucSize);
 
         fAnimOffsetV = 0.0f;
         pkKeys = GetSomeData(uiNumKeys, eType, ucSize);
         if (pkKeys)
-            fAnimOffsetV = InterpolateKey(m_fControllerTime, pkKeys, eType, uiNumKeys, &m_uiLastIdx2, ucSize);
+            fAnimOffsetV = NiFloatKey_GenInterp(m_fControllerTime, pkKeys, eType, uiNumKeys, &m_uiLastIdx2, ucSize);
 
         fAnimTilingU = 1.0f;
         pkKeys = GetSomeValues(uiNumKeys, eType, ucSize);
         if (pkKeys)
-            fAnimTilingU = InterpolateKey(m_fControllerTime, pkKeys, eType, uiNumKeys, &m_uiLastIdx1, ucSize);
+            fAnimTilingU = NiFloatKey_GenInterp(m_fControllerTime, pkKeys, eType, uiNumKeys, &m_uiLastIdx1, ucSize);
 
         fAnimTilingV = 1.0f;
         pkKeys = GetSomePtrValues(uiNumKeys, eType, ucSize);
         if (pkKeys)
-            fAnimTilingV = InterpolateKey(m_fControllerTime, pkKeys, eType, uiNumKeys, &m_uiLastIdx3, ucSize);
+            fAnimTilingV = NiFloatKey_GenInterp(m_fControllerTime, pkKeys, eType, uiNumKeys, &m_uiLastIdx3, ucSize);
     }
 
     float fScaleU = fAnimTilingU / m_pData->m_fTilingU;

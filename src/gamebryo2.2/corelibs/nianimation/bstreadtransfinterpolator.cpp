@@ -109,7 +109,7 @@ struct SampleTrack
     float* values;
     TrackFlags flags;
 };
-float __cdecl InterpolateKey(float, float*, float*, unsigned int, unsigned int*, TrackFlags);
+float __cdecl NiFloatKey_GenInterp(float, float*, float*, unsigned int, unsigned int*, TrackFlags);
 struct FUN_00a434b0_shell
 {
     unsigned int unk00;
@@ -121,13 +121,14 @@ struct FUN_00a434b0_shell
     float valueDelta;
     unsigned int sampleIndex;
     SampleTrack* track;
-    bool __thiscall UpdateSampleValue(float time, int, int);
+    bool __thiscall BSTreadTransfInterpolator_Update(float time, int, int);
 };
 // Samples the track at time, updates sampleIndex, computes valueDelta from the previous value, stores previousValue and previousTime, and returns true.
 // @fnv 0x00a434b0
 // pdb: BSTreadTransfInterpolator::Update | BSTreadTransfInterpolator.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, high
 // pdb params: afTime, apInterpTarget, arValue
-bool __thiscall FUN_00a434b0_shell::UpdateSampleValue(float time, int, int)
+// pdb: BSTreadTransfInterpolator::Update | BSTreadTransfInterpolator.obj | fnv360_0822_retail, bridge_fnvpc, high (was: UpdateSampleValue)
+bool __thiscall FUN_00a434b0_shell::BSTreadTransfInterpolator_Update(float time, int, int)
 {
     SampleTrack* pTrack = track;
     unsigned int count = pTrack->count;
@@ -137,7 +138,7 @@ bool __thiscall FUN_00a434b0_shell::UpdateSampleValue(float time, int, int)
     if (count > 0)
     {
         unsigned int index = sampleIndex;
-        float value = InterpolateKey(time, times, values, count, &index, flags);
+        float value = NiFloatKey_GenInterp(time, times, values, count, &index, flags);
         sampleIndex = index;
         if (previousTime > time && previousValue > value)
         {

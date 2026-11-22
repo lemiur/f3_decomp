@@ -86,7 +86,7 @@ bool __thiscall FUN_00a514e0_shell::Equals(void* pkObject)
 
 struct BaseShell
 {
-    void __thiscall LoadFloatInterpolator(void*);
+    void __thiscall NiBSplineFloatInterpolator_SaveBinary(void*);
 };
 struct BinaryOutputStream
 {
@@ -106,7 +106,7 @@ struct FUN_00a516a0_shell
 // pdb params: kStream
 void __thiscall FUN_00a516a0_shell::WriteToStream(void* kStream)
 {
-    ((BaseShell*)this)->LoadFloatInterpolator(kStream);
+    ((BaseShell*)this)->NiBSplineFloatInterpolator_SaveBinary(kStream);
     BinaryOutputStream* __restrict pkOstr = *(BinaryOutputStream**)((char*)kStream + 0x250);
     unsigned int size = 4;
     pkOstr->m_pos += pkOstr->m_write(pkOstr, m_data, 8, &size, 1);

@@ -335,13 +335,14 @@ struct PartitionStub
 struct UnsharedGroupStub
 {
     void AddToBuffer(BuffDataStub* pkBuffData);
-    void CreateBufferData(GeomDataStub* pkData, bool bHasAnimation, PartitionStub* pkPartition);
+    void NiDynamicGeometryGroup_AddObject(GeomDataStub* pkData, bool bHasAnimation, PartitionStub* pkPartition);
 };
 
 // @fnv 0x00e953c0
 // pdb: NiDynamicGeometryGroup::AddObject | NiDynamicGeometryGroup.obj | fnv360_0822_retail, caller_sim, high
 // pdb params: pkData, pkSkinInstance, pkPartition
-void UnsharedGroupStub::CreateBufferData(GeomDataStub* pkData, bool abUnused, PartitionStub* pkPartition)
+// pdb: NiDynamicGeometryGroup::AddObject | NiDynamicGeometryGroup.obj | fnv360_0822_retail, caller_sim, high (was: CreateBufferData)
+void UnsharedGroupStub::NiDynamicGeometryGroup_AddObject(GeomDataStub* pkData, bool abUnused, PartitionStub* pkPartition)
 {
     BuffDataStub* pkBuffData;
     if (pkPartition)
@@ -394,7 +395,7 @@ struct ByteFlag
 };
 struct MemoryAllocationProvider
 {
-    void* AllocateStream(unsigned int, unsigned int*, unsigned int*, bool, ByteFlag);
+    void* NiVBDynamicSet_AllocateBufferSpace(unsigned int, unsigned int*, unsigned int*, bool, ByteFlag);
 };
 struct Chip
 {
@@ -405,7 +406,7 @@ struct Chip
     unsigned int offset;
     unsigned int stride;
 };
-MemoryAllocationProvider* __cdecl CreateBufferSetData(unsigned int, void*, unsigned int, unsigned int);
+MemoryAllocationProvider* __cdecl NiVBDynamicSet_Create(unsigned int, void*, unsigned int, unsigned int);
 Chip* __cdecl FUN_00537d60(unsigned int, void*, unsigned int, unsigned int, unsigned int);
 template <class T> struct Map
 {
@@ -468,11 +469,11 @@ Chip* Group::GetOrCreateChip(Data* data, unsigned int stream)
         MemoryAllocationProvider* set = streamSets.data[nextIndex];
         if (!set)
         {
-            set = CreateBufferSetData(2048, device, 0, 0);
+            set = NiVBDynamicSet_Create(2048, device, 0, 0);
             streamSets.FUN_00ba3aa0(nextIndex, set);
         }
         ByteFlag flag(data->flag);
-        void* buffer = set->AllocateStream(stride, &size, &offset, true, flag);
+        void* buffer = set->NiVBDynamicSet_AllocateBufferSpace(stride, &size, &offset, true, flag);
         Chip* branchChip = streamChips.data[nextIndex];
         if (!branchChip)
         {
@@ -498,11 +499,11 @@ Chip* Group::GetOrCreateChip(Data* data, unsigned int stream)
         unsigned int mapKey = key ? key : length | 0x80000000;
         if (!sets.FUN_00a53c30(mapKey, set) || !set)
         {
-            set = CreateBufferSetData(2048, device, key, 0);
+            set = NiVBDynamicSet_Create(2048, device, key, 0);
             sets.InsertOrUpdate(mapKey, set);
         }
         ByteFlag flag(data->flag);
-        void* buffer = set->AllocateStream(stride, &size, &offset, false, flag);
+        void* buffer = set->NiVBDynamicSet_AllocateBufferSpace(stride, &size, &offset, false, flag);
         chips.FUN_00a53c30(mapKey, chip);
         Chip* result = chip;
         if (!result)
@@ -586,7 +587,8 @@ struct BufferSetData
 // @fnv 0x00e95230
 // pdb: NiVBDynamicSet::Create | NiDynamicGeometryGroup.obj | fnv360_0822_retail, call_gap, high
 // pdb params: uiBlockSize, pkD3DDevice, uiFVF, uiIndex
-MemoryAllocationProvider* __cdecl CreateBufferSetData(unsigned int size, void* buffer, unsigned int flags,
+// pdb: NiVBDynamicSet::Create | NiDynamicGeometryGroup.obj | fnv360_0822_retail, call_gap, high (was: CreateBufferSetData)
+MemoryAllocationProvider* __cdecl NiVBDynamicSet_Create(unsigned int size, void* buffer, unsigned int flags,
                                                       unsigned int kind)
 {
     BufferSetData* set = new BufferSetData;
@@ -685,7 +687,7 @@ struct S_00e987c0_Class
     S_00e987c0_Stream* unk10;
     unsigned int unk14;
 
-    S_00e987c0_Stream* __thiscall AllocateStream(unsigned int uiStream, unsigned int* lpOffset, unsigned int* lpFlags,
+    S_00e987c0_Stream* __thiscall NiVBDynamicSet_AllocateBufferSpace(unsigned int uiStream, unsigned int* lpOffset, unsigned int* lpFlags,
                                                  unsigned char bForceFallback, unsigned char bUseSpecialFlags);
 };
 
@@ -693,7 +695,8 @@ struct S_00e987c0_Class
 // @fnv 0x00e987c0
 // pdb: NiVBDynamicSet::AllocateBufferSpace | NiVBDynamicSet_Xenon.obj | fnv360_0822_retail, call_gap, high
 // pdb params: uiSize, uiOffset, uiFlags, bForceDiscard, bSoftwareVP
-S_00e987c0_Stream* __thiscall S_00e987c0_Class::AllocateStream(unsigned int uiStream, unsigned int* lpOffset,
+// pdb: NiVBDynamicSet::AllocateBufferSpace | NiVBDynamicSet_Xenon.obj | fnv360_0822_retail, call_gap, high (was: AllocateStream)
+S_00e987c0_Stream* __thiscall S_00e987c0_Class::NiVBDynamicSet_AllocateBufferSpace(unsigned int uiStream, unsigned int* lpOffset,
                                                                unsigned int* lpFlags, unsigned char bForceFallback,
                                                                unsigned char bUseSpecialFlags)
 {

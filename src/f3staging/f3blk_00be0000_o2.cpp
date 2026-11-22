@@ -20935,7 +20935,7 @@ public:
     void FUN_00beea70(Tile* newParent, Tile* sibling);
 };
 
-// pdb: Tile::SetParent | Tile.obj | fnv360_0822_debug, caller, medium
+// pdb: Tile::NiAVObject_AttachParent | Tile.obj | fnv360_0822_debug, caller, medium
 // pdb params: apParent, apReplacedTile
 void Tile::FUN_00beea70(Tile* newParent, Tile* sibling) {
     if (parent && !parent->IsLocked()) {

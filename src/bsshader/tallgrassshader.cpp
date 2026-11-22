@@ -2835,14 +2835,15 @@ int __cdecl FUN_00b97f20(unsigned int a, unsigned int b, int c);
 struct BSParticleShader : FUN_00bacd00
 {
     void FUN_00baaf40(GeomStub* geom, Param2* p2);
-    void SetShaderParams(Param1* p1);
+    void TallGrassShader_SetupGeometryConstants(Param1* p1);
 };
 
 // Sets particle shader uniforms from p1 and p2, calls the base vfunc24, and dispatches pass handlers when enabled.
 // @fnv 0x00bac9c0
 // pdb: TallGrassShader::SetupGeometryConstants | TallGrassShader.obj | fnv360_0822_retail, udata, high
 // pdb params: apState
-void BSParticleShader::SetShaderParams(Param1* p1)
+// pdb: TallGrassShader::SetupGeometryConstants | TallGrassShader.obj | fnv360_0822_retail, udata, high (was: SetShaderParams)
+void BSParticleShader::TallGrassShader_SetupGeometryConstants(Param1* p1)
 {
     GeomStub* geom = *DAT_011f91e0;
     void* world = &geom->m_kWorldSpaceTransform;

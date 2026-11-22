@@ -144,7 +144,7 @@ struct VF
     virtual void Op(int);
 };
 void NiShaderFactory_ReleaseAllShaders();
-void DestroyProgram();
+void NiD3DShaderProgramFactory_Shutdown();
 // @fnv 0x00e819f0
 // pdb: NiD3DShaderInterface::ShutdownShaderSystem | NiD3DShaderInterface.obj | fnv360_0822_retail, caller_sim, low
 int FUN_00e819f0()
@@ -158,7 +158,7 @@ int FUN_00e819f0()
     FUN_00e7f920(0);
     FUN_00e7e8d0(0);
     DAT_0126f99c = 0;
-    DestroyProgram();
+    NiD3DShaderProgramFactory_Shutdown();
     FUN_00e92f70(0);
     FUN_00e93f50(0);
     NiD3DPass::SetActiveRenderer(0);

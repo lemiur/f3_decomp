@@ -707,7 +707,7 @@ struct FUN_00a30c80_shell
     unsigned __int64 __thiscall IsNotInChain(void* arg);
     bool __thiscall NiControllerSequence_CanSyncTo(void* arg);
 };
-bool __stdcall MatchesTextKeys(void* arg);
+bool __stdcall NiControllerSequence_VerifyMatchingMorphKeys(void* arg);
 // @fnv 0x00a30c80
 // pdb: NiControllerSequence::CanSyncTo | NiControllerSequence.obj | fnv360_0721_beta, objrun + bridge(hash|objrun), high
 bool FUN_00a30c80_shell::NiControllerSequence_CanSyncTo(void* arg)
@@ -724,7 +724,7 @@ bool FUN_00a30c80_shell::NiControllerSequence_CanSyncTo(void* arg)
                 goto failure;
             arg = reinterpret_cast<void*>(static_cast<unsigned int>(result >> 32));
         }
-        if (MatchesTextKeys(arg))
+        if (NiControllerSequence_VerifyMatchingMorphKeys(arg))
             return true;
     }
 failure:
@@ -1607,14 +1607,15 @@ struct SeqA34f20
         return bWasInactive;
     }
 
-    bool StartSequence(char m_ucRegionPriority, bool bStartOver, float fWeight, float fEaseInTime,
+    bool NiControllerSequence_Activate(char m_ucRegionPriority, bool bStartOver, float fWeight, float fEaseInTime,
                        SeqA34f20* pkTimeSyncSeq, bool bTransition);
 };
 
 // @fnv 0x00a34f20
 // pdb: NiControllerSequence::Activate | NiControllerSequence.obj | fnv360_0822_retail, call_seq, high
 // pdb params: cPriority, bStartOver, fWeight, fEaseInTime, pkTimeSyncSeq, bTransition
-bool SeqA34f20::StartSequence(char m_ucRegionPriority, bool bStartOver, float fWeight, float fEaseInTime,
+// pdb: NiControllerSequence::Activate | NiControllerSequence.obj | fnv360_0822_retail, call_seq, high (was: StartSequence)
+bool SeqA34f20::NiControllerSequence_Activate(char m_ucRegionPriority, bool bStartOver, float fWeight, float fEaseInTime,
                               SeqA34f20* pkTimeSyncSeq, bool bTransition)
 {
     if (m_eAnimationState != 0)
@@ -2288,7 +2289,7 @@ struct UpdateNote
 };
 struct UpdateNoteManager
 {
-    void DispatchByKey(UpdateNote* note);
+    void BSAnimNoteListener_Update(UpdateNote* note);
 };
 struct UpdateOwner
 {
@@ -2350,7 +2351,7 @@ struct AnimationSequence : S_00a30880_Base
     unsigned short unk6a;
     UpdateNote** notes;
     unsigned short noteCount;
-    float GetMorphedTime(AnimationSequence*, float);
+    float NiControllerSequence_FindCorrespondingMorphFrame(AnimationSequence*, float);
     float FUN_00a30970(float, bool);
     void NiControllerSequence_SetInterpsWeightAndTime(float, float, float);
     void FUN_00a34ba0(float time, bool update);
@@ -2432,7 +2433,7 @@ void AnimationSequence::FUN_00a34ba0(float time, bool update)
         }
         break;
     case 6: {
-        float partnerTime = partner->GetMorphedTime(this, time + offset);
+        float partnerTime = partner->NiControllerSequence_FindCorrespondingMorphFrame(this, time + offset);
         partnerTime /= partner->frequency;
         partner->offset = partnerTime - time;
         SetState(4);
@@ -2464,7 +2465,7 @@ void AnimationSequence::FUN_00a34ba0(float time, bool update)
         {
             if (partner->lastTime != time + partner->offset)
                 partner->FUN_00a34ba0(time, false);
-            localTime = GetMorphedTime(partner, time + partner->offset);
+            localTime = NiControllerSequence_FindCorrespondingMorphFrame(partner, time + partner->offset);
             localTime /= frequency;
         }
         else
@@ -2479,7 +2480,7 @@ void AnimationSequence::FUN_00a34ba0(float time, bool update)
                 if (!(notes[i]->time < localTime))
                     break;
                 noteIndex = i;
-                owner->noteManager->DispatchByKey(notes[i]);
+                owner->noteManager->BSAnimNoteListener_Update(notes[i]);
             }
         }
     }
@@ -2803,7 +2804,7 @@ bool FUN_00a350d0_seq::FUN_00a350d0(SeqA34f20* pkTarget, float fTime, float m_fT
     m_fStartTime = 0.0f;
     m_fLastTime = DAT_01015f5c;
 
-    if (!pkTarget->StartSequence((char)iPriority, false, fTargetWeight, fTime, pkPartner, true))
+    if (!pkTarget->NiControllerSequence_Activate((char)iPriority, false, fTargetWeight, fTime, pkPartner, true))
         return false;
 
     ((S_00a30880_Base*)this)->Target(fTime, 1);
@@ -2853,14 +2854,15 @@ struct SeqIDTagOffsets
     OffsetString m_kCtlrType;
     OffsetString m_kCtlrID;
     OffsetString m_kInterpolatorID;
-    void LoadFromPalette(NiStringPalette* pkPalette, int iUnused);
+    void NiControllerSequence_IDTag_HandleDeprecatedExtraData(NiStringPalette* pkPalette, int iUnused);
 };
 
 // Resolves five string offsets against pkPalette->m_pString, assigning each to the matching OffsetString field when the offset is not -1.
 // @fnv 0x00a30d40
 // pdb: NiControllerSequence::IDTag::HandleDeprecatedExtraData | NiControllerSequence.obj | fnv360_0822_retail, call_gap, high
 // pdb params: pkPalette, kStream
-void SeqIDTagOffsets::LoadFromPalette(NiStringPalette* pkPalette, int iUnused)
+// pdb: NiControllerSequence::IDTag::HandleDeprecatedExtraData | NiControllerSequence.obj | fnv360_0822_retail, call_gap, high (was: LoadFromPalette)
+void SeqIDTagOffsets::NiControllerSequence_IDTag_HandleDeprecatedExtraData(NiStringPalette* pkPalette, int iUnused)
 {
     int iAVObjectNameOffset = (int)m_kAVObjectName.m_kHandle;
     int iPropertyTypeOffset = (int)m_kPropertyType.m_kHandle;
@@ -3480,7 +3482,8 @@ int __cdecl FUN_00aa1360(const char*, const char*);
 // @fnv 0x00a32010
 // pdb: NiControllerSequence::FindCorrespondingMorphFrame | NiControllerSequence.obj | fnv360_0822_debug, udata, high
 // pdb params: pkSourceSequence, fSourceSequenceTime
-float AnimationSequence::GetMorphedTime(AnimationSequence* pkPartnerSequence, float fFrameTime)
+// pdb: NiControllerSequence::FindCorrespondingMorphFrame | NiControllerSequence.obj | fnv360_0822_debug, udata, high (was: GetMorphedTime)
+float AnimationSequence::NiControllerSequence_FindCorrespondingMorphFrame(AnimationSequence* pkPartnerSequence, float fFrameTime)
 {
     TimedTextEntry* pkNextKey = 0;
     float fPartnerTime = pkPartnerSequence->FUN_00a30970(fFrameTime, false);
@@ -4213,14 +4216,15 @@ struct NiControllerSequenceT
     void* m_pkIDTags;
     float m_fWeight;
     NiTextKeyExtraData* m_spTextKeyData;
-    bool MatchesTextKeys(NiControllerSequenceT* pkOther);
+    bool NiControllerSequence_VerifyMatchingMorphKeys(NiControllerSequenceT* pkOther);
 };
 
 // Returns true when both sequences have eligible text keys and each eligible key occurs in the other sequence.
 // @fnv 0x00a30ab0
 // pdb: NiControllerSequence::VerifyMatchingMorphKeys | NiControllerSequence.obj | fnv360_0721_beta, udata, high
 // pdb params: pkTimeSyncSeq
-bool NiControllerSequenceT::MatchesTextKeys(NiControllerSequenceT* pkOther)
+// pdb: NiControllerSequence::VerifyMatchingMorphKeys | NiControllerSequence.obj | fnv360_0721_beta, udata, high (was: MatchesTextKeys)
+bool NiControllerSequenceT::NiControllerSequence_VerifyMatchingMorphKeys(NiControllerSequenceT* pkOther)
 {
     NiTextKeyExtraData* pkKeys = m_spTextKeyData;
     NiTextKeyExtraData* pkOtherKeys;

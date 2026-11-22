@@ -113,13 +113,14 @@ struct FUN_00a7f680_cls : S_00a7f680_Base
     int unk28;
     int unk2c;
     int unk30;
-    void SaveFields(void* p);
+    void BSPackedAdditionalGeometryData_SaveBinary(void* p);
 };
 
 // @fnv 0x00a7f680
 // pdb: BSPackedAdditionalGeometryData::SaveBinary | BSPackedAdditionalGeometryData.obj | fnv360_0822_retail, vtable, high
 // pdb params: kStream
-void FUN_00a7f680_cls::SaveFields(void* p)
+// pdb: BSPackedAdditionalGeometryData::SaveBinary | BSPackedAdditionalGeometryData.obj | fnv360_0822_retail, vtable, high (was: SaveFields)
+void FUN_00a7f680_cls::BSPackedAdditionalGeometryData_SaveBinary(void* p)
 {
     NiAdditionalGeometryData_SaveBinary(p);
     S_00a7f680_Save(*(S_00a7f680_Out**)((char*)p + 0x250), &unk2c);

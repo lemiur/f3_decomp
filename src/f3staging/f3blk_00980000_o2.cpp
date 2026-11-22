@@ -9,8 +9,8 @@
 // @f3 0x00992c40 (community match, verified in this file)
 struct Serializer92 {
     virtual void v0();
-    virtual void WriteHeader(const char*, int, void*);
-    virtual void WriteArray(const char*, int, const void*, unsigned int, unsigned int);
+    virtual void NiStream_SaveHeader(const char*, int, void*);
+    virtual void writeArray64(const char*, int, const void*, unsigned int, unsigned int);
     virtual void v0c();
     virtual void v10();
     virtual void v14();
@@ -40,17 +40,17 @@ extern const char DAT_00e7dd1c[];
 // pdb: hkp3AxisSweep::calcContentStatistics | hkp3AxisSweep.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc + skyrim(ustr), high
 void Container92::hkp3AxisSweep_calcContentStatistics(Serializer92* writer)
 {
-    writer->WriteHeader(DAT_00e7dd2c,4,this);
-    if ((a.capacity & 0x80000000u) == 0) writer->WriteArray(DAT_00e7dd24,4,a.data,a.count*16,(a.capacity&0x3fffffff)*16);
-    if ((b.capacity & 0x80000000u) == 0) writer->WriteArray(DAT_00de0378,4,b.data,b.count*4,(b.capacity&0x3fffffff)*4);
-    if ((c.capacity & 0x80000000u) == 0) writer->WriteArray(DAT_00de0378,4,c.data,c.count*4,(c.capacity&0x3fffffff)*4);
-    if ((d.capacity & 0x80000000u) == 0) writer->WriteArray(DAT_00de0378,4,d.data,d.count*4,(d.capacity&0x3fffffff)*4);
-    if (count != 0) writer->WriteArray(DAT_00e7dd1c,4,rows,count*16,0);
+    writer->NiStream_SaveHeader(DAT_00e7dd2c,4,this);
+    if ((a.capacity & 0x80000000u) == 0) writer->writeArray64(DAT_00e7dd24,4,a.data,a.count*16,(a.capacity&0x3fffffff)*16);
+    if ((b.capacity & 0x80000000u) == 0) writer->writeArray64(DAT_00de0378,4,b.data,b.count*4,(b.capacity&0x3fffffff)*4);
+    if ((c.capacity & 0x80000000u) == 0) writer->writeArray64(DAT_00de0378,4,c.data,c.count*4,(c.capacity&0x3fffffff)*4);
+    if ((d.capacity & 0x80000000u) == 0) writer->writeArray64(DAT_00de0378,4,d.data,d.count*4,(d.capacity&0x3fffffff)*4);
+    if (count != 0) writer->writeArray64(DAT_00e7dd1c,4,rows,count*16,0);
     for (int i=0;i<count;i++)
     {
         Array92* r = (Array92*)((char*)rows + i*16 + 4);
         if((r->capacity & 0x80000000u) == 0)
-            writer->WriteArray(DAT_00e7dd1c,8,r->data,r->count*2,(r->capacity&0x3fffffff)*2);
+            writer->writeArray64(DAT_00e7dd1c,8,r->data,r->count*2,(r->capacity&0x3fffffff)*2);
     }
     writer->Finish();
 }
@@ -228,10 +228,10 @@ void Container989a20::hkpPhantom_calcContentStatistics(Serializer92* writer)
 {
     hkpWorldObject_calcContentStatistics(writer);
     if ((arr1.capacity & 0x80000000u) == 0) {
-        writer->WriteArray(DAT_00e7d998, 4, arr1.data, arr1.count * 4, (arr1.capacity & 0x3fffffff) * 4);
+        writer->writeArray64(DAT_00e7d998, 4, arr1.data, arr1.count * 4, (arr1.capacity & 0x3fffffff) * 4);
     }
     if ((arr2.capacity & 0x80000000u) == 0) {
-        writer->WriteArray(DAT_00e7d988, 4, arr2.data, arr2.count * 4, (arr2.capacity & 0x3fffffff) * 4);
+        writer->writeArray64(DAT_00e7d988, 4, arr2.data, arr2.count * 4, (arr2.capacity & 0x3fffffff) * 4);
     }
 }
 
@@ -7823,8 +7823,8 @@ extern const char DAT_00e7d9e0[];
 namespace f3m_0098aef0 {
 struct Writer98a {
     virtual void v00();
-    virtual void WriteHeader(const char* name, int kind, void* obj);
-    virtual void WriteArray(const char* name, int kind, const void* data, unsigned int size, unsigned int capacity);
+    virtual void NiStream_SaveHeader(const char* name, int kind, void* obj);
+    virtual void writeArray64(const char* name, int kind, const void* data, unsigned int size, unsigned int capacity);
     virtual void WritePointer(const char* name, int kind, void* ptr);
     virtual void BeginObject(const char* name);
     virtual void EndObject();
@@ -7916,17 +7916,17 @@ struct Group98a {
 // pdb: hkpSimulationIsland::calcContentStatistics | hkpSimulationIsland.obj | fnv360_0822_retail, ustr + bridge(ustr|vtable) + skyrim(ustr), high
 void Group98a::hkpSimulationIsland_calcContentStatistics(Writer98a* writer)
 {
-    writer->WriteHeader(0, 8, this);
+    writer->NiStream_SaveHeader(0, 8, this);
     if ((itemCapacity & 0x80000000u) == 0)
-        writer->WriteArray(DAT_00e7da2c, 8, items, itemCount * 4, (itemCapacity & 0x3fffffff) * 4);
+        writer->writeArray64(DAT_00e7da2c, 8, items, itemCount * 4, (itemCapacity & 0x3fffffff) * 4);
     for (int i = 0; i < itemCount; i++) {
         Item98a* item = items[i];
         writer->WritePointer(DAT_00e35dd0, 2, item);
         writer->BeginObject(DAT_00e7bf1c);
         if ((item->elemCapacity & 0x8000) == 0)
-            writer->WriteArray(DAT_00e7da20, 8, item->elems, item->elemCount * 48, (item->elemCapacity & 0x3fff) * 48);
+            writer->writeArray64(DAT_00e7da20, 8, item->elems, item->elemCount * 48, (item->elemCapacity & 0x3fff) * 48);
         if ((item->wordCapacity & 0x80000000u) == 0)
-            writer->WriteArray(DAT_00e7da14, 8, item->words, item->wordCount * 4, (item->wordCapacity & 0x3fffffff) * 4);
+            writer->writeArray64(DAT_00e7da14, 8, item->words, item->wordCount * 4, (item->wordCapacity & 0x3fffffff) * 4);
         for (int j = 0; j < item->elemCount; j++) {
             if (item->elems[j].first->flags & 0x7fff)
                 writer->WritePointer(DAT_00e7da08, 2, item->elems[j].first);
@@ -7934,11 +7934,11 @@ void Group98a::hkpSimulationIsland_calcContentStatistics(Writer98a* writer)
                 writer->WritePointer(DAT_00e7da00, 1, item->elems[j].first->link);
         }
         if ((item->byteCapacity & 0x80000000u) == 0)
-            writer->WriteArray(DAT_00e7d9f8, 4, item->bytes, item->byteCount, item->byteCapacity & 0x3fffffff);
+            writer->writeArray64(DAT_00e7d9f8, 4, item->bytes, item->byteCount, item->byteCapacity & 0x3fffffff);
         writer->EndObject();
     }
     if ((refCapacity & 0x80000000u) == 0)
-        writer->WriteArray(DAT_00e7d9ec, 8, refs, refCount * 4, (refCapacity & 0x3fffffff) * 4);
+        writer->writeArray64(DAT_00e7d9ec, 8, refs, refCount * 4, (refCapacity & 0x3fffffff) * 4);
     for (int k = 0; k < refCount; k++)
         writer->WritePointer(DAT_00e3277c, 2, refs[k]);
     FUN_00a26e70(&sub, writer);
@@ -8586,8 +8586,8 @@ namespace f3m_00985ef0 {
 
 struct Serializer {
     virtual void v00();
-    virtual void WriteHeader(const char* name, int a, void* obj);
-    virtual void WriteArray(const char* name, int a, const void* data, int size, int capSize);
+    virtual void NiStream_SaveHeader(const char* name, int a, void* obj);
+    virtual void writeArray64(const char* name, int a, const void* data, int size, int capSize);
     virtual void WritePointer(const char* name, int a, void* ptr);
     virtual void v10();
     virtual void v14();
@@ -8621,7 +8621,7 @@ struct Dispatcher {
 // pdb: hkpCollisionDispatcher::calcContentStatistics | hkpCollisionDispatcher.obj | fnv360_0822_retail, ustr + bridge(ustr|vtable) + skyrim(ustr), high
 void Dispatcher::hkpCollisionDispatcher_calcContentStatistics(Serializer* writer)
 {
-    writer->WriteHeader(0, 2, this);
+    writer->NiStream_SaveHeader(0, 2, this);
     if (debugTable0) {
         writer->FUN_008f69e0("DebugTable", 4, debugTable0);
         writer->FUN_008f69e0("DebugTable", 4, debugTable1);
@@ -8629,7 +8629,7 @@ void Dispatcher::hkpCollisionDispatcher_calcContentStatistics(Serializer* writer
         writer->FUN_008f69e0("DebugTable", 4, debugTable3);
     }
     if ((shapeInheritanceCapacity & 0x80000000u) == 0) {
-        writer->WriteArray("shapeInheritanceArray", 4, shapeInheritanceData, shapeInheritanceCount * 8, (shapeInheritanceCapacity & 0x3fffffff) * 8);
+        writer->writeArray64("shapeInheritanceArray", 4, shapeInheritanceData, shapeInheritanceCount * 8, (shapeInheritanceCapacity & 0x3fffffff) * 8);
     }
     for (int i = 0; i < 8; ++i) {
         for (int j = 0; j < 8; ++j) {

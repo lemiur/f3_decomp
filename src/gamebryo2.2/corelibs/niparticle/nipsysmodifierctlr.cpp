@@ -28,7 +28,7 @@ struct NiTimeController
 };
 struct NiParticleSystem
 {
-    void FindModifier();
+    void NiPSysModifierCtlr_GetModifierPointerFromName();
 };
 struct NiPSysModifierCtlr_shell : public NiTimeController, public NiParticleSystem
 {
@@ -43,7 +43,7 @@ void NiPSysModifierCtlr_shell::FUN_00c31500(NiObjectNET* pkTarget)
     *(void**)((char*)this + 0x3c) = 0;
     NiTimeController::SetTarget(pkTarget);
     if (*(void**)((char*)this + 0x2c))
-        ((NiParticleSystem*)((char*)this + 0))->FindModifier();
+        ((NiParticleSystem*)((char*)this + 0))->NiPSysModifierCtlr_GetModifierPointerFromName();
 }
 
 struct NiStream
@@ -234,13 +234,14 @@ struct NiParticleSystemRuntime
 
 struct NiPSysModifierCtlrRuntime : NiPSysModifierCtlr
 {
-    bool IsTargetParticleSystem(NiParticleSystemRuntime* pkTarget);
+    bool NiPSysModifierCtlr_InterpTargetIsCorrectType(NiParticleSystemRuntime* pkTarget);
 };
 
 // @fnv 0x00c31530
 // pdb: NiPSysModifierCtlr::InterpTargetIsCorrectType | NiPSysModifierCtlr.obj | fnv360_0822_retail, call_seq, high
 // pdb params: pkTarget
-bool NiPSysModifierCtlrRuntime::IsTargetParticleSystem(NiParticleSystemRuntime* pkTarget)
+// pdb: NiPSysModifierCtlr::InterpTargetIsCorrectType | NiPSysModifierCtlr.obj | fnv360_0822_retail, call_seq, high (was: IsTargetParticleSystem)
+bool NiPSysModifierCtlrRuntime::NiPSysModifierCtlr_InterpTargetIsCorrectType(NiParticleSystemRuntime* pkTarget)
 {
     if (pkTarget != 0)
     {

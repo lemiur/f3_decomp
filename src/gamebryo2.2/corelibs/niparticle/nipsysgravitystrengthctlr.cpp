@@ -40,7 +40,7 @@ struct B00c1bff0
 };
 struct BaseStandIn
 {
-    bool IsTargetParticleSystem(NiObjectNET*);
+    bool NiPSysModifierCtlr_InterpTargetIsCorrectType(NiObjectNET*);
     char _pad[0x38];
 };
 struct NiPSysGravityStrengthCtlr : BaseStandIn
@@ -53,7 +53,7 @@ struct NiPSysGravityStrengthCtlr : BaseStandIn
 // pdb params: pkTarget
 bool NiPSysGravityStrengthCtlr::FUN_00c2a910(NiObjectNET* pkTarget)
 {
-    if (!BaseStandIn::IsTargetParticleSystem(pkTarget))
+    if (!BaseStandIn::NiPSysModifierCtlr_InterpTargetIsCorrectType(pkTarget))
         return false;
     NiPSysModifier* pkModifier = (NiPSysModifier*)((B00c1bff0*)pkTarget)->FUN_00c1b0f0((void*)&m_p38);
     if (!pkModifier)

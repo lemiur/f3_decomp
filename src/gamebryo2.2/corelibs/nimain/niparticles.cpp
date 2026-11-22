@@ -7,7 +7,7 @@ struct NiGeometryData
     enum Consistency
     {
     };
-    void SetDataConsistency(Consistency);
+    void SetConsistency(Consistency);
 };
 
 struct NiParticles
@@ -20,7 +20,7 @@ struct NiParticles
 void NiParticles::CalculateConsistency(bool bTool)
 {
     NiGeometryData* p = *(NiGeometryData**)((char*)this + 0xb8);
-    p->SetDataConsistency((NiGeometryData::Consistency)0);
+    p->SetConsistency((NiGeometryData::Consistency)0);
 }
 
 struct DtorObj

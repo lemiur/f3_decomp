@@ -368,13 +368,14 @@ struct MeshLookup
     MeshObject** meshes;
     unsigned short unk90;
     unsigned short meshCount;
-    void __thiscall GetMeshHandle(unsigned int index, CloneHandle* result);
+    void __thiscall NiMeshPSysData_RemoveFromPool(unsigned int index, CloneHandle* result);
 };
 // If index is within meshCount and meshes[index] is non-null, assigns a clone handle of that mesh to result; otherwise clears result.
 // @fnv 0x00c21340
 // pdb: NiMeshPSysData::RemoveFromPool | NiPSysMeshUpdateModifier.obj | fnv360_0822_retail, call_gap, high
 // pdb params: uiGeneration, aspAVObject
-void MeshLookup::GetMeshHandle(unsigned int index, CloneHandle* result)
+// pdb: NiMeshPSysData::RemoveFromPool | NiPSysMeshUpdateModifier.obj | fnv360_0822_retail, call_gap, high (was: GetMeshHandle)
+void MeshLookup::NiMeshPSysData_RemoveFromPool(unsigned int index, CloneHandle* result)
 {
     if (index >= meshCount)
     {
@@ -737,13 +738,14 @@ class MeshUpdateStreamWriter : public NiPSysMeshUpdateModifier
 {
   public:
     void FUN_00c31950(NiStream*);
-    void WriteMeshUpdate(NiStream*);
+    void NiPSysMeshUpdateModifier_SaveBinary(NiStream*);
 };
 // Writes the mesh count to the stream, then registers each mesh object with the stream.
 // @fnv 0x00c211c0
 // pdb: NiPSysMeshUpdateModifier::SaveBinary | NiPSysMeshUpdateModifier.obj | fnv360_0822_retail, caller_sim, high
 // pdb params: kStream
-void MeshUpdateStreamWriter::WriteMeshUpdate(NiStream* stream)
+// pdb: NiPSysMeshUpdateModifier::SaveBinary | NiPSysMeshUpdateModifier.obj | fnv360_0822_retail, caller_sim, high (was: WriteMeshUpdate)
+void MeshUpdateStreamWriter::NiPSysMeshUpdateModifier_SaveBinary(NiStream* stream)
 {
     FUN_00c31950(stream);
     unsigned int meshCount = m_usNumMeshes;
@@ -775,13 +777,14 @@ struct ReferenceContainer
     int unk14;
     ReferenceArray array;
     void FUN_00c31650(ReferenceSource* source);
-    void CopyReferencesFromSource(ReferenceSource* source);
+    void NiPSysMeshUpdateModifier_LinkObject(ReferenceSource* source);
 };
 // Resizes the array to the source's count, then copies each referenced object into the array while adjusting its reference count.
 // @fnv 0x00c214c0
 // pdb: NiPSysMeshUpdateModifier::LinkObject | NiPSysMeshUpdateModifier.obj | fnv360_0822_retail, caller_sim, high
 // pdb params: kStream
-void ReferenceContainer::CopyReferencesFromSource(ReferenceSource* source)
+// pdb: NiPSysMeshUpdateModifier::LinkObject | NiPSysMeshUpdateModifier.obj | fnv360_0822_retail, caller_sim, high (was: CopyReferencesFromSource)
+void ReferenceContainer::NiPSysMeshUpdateModifier_LinkObject(ReferenceSource* source)
 {
     FUN_00c31650(source);
     unsigned int count = source->NiStream_GetNumberOfLinkIDs();
@@ -1244,11 +1247,11 @@ struct Entry_c21
     unsigned short m_1a;
 };
 
-void __cdecl StartControllersRecursive(Mesh_c21* pkMesh, float fTime);
+void __cdecl NiTimeController_StartAnimations(Mesh_c21* pkMesh, float fTime);
 
 struct Lk2_c21
 {
-    __declspec(noalias) void GetMeshHandle(unsigned int index, CloneHandle* result);
+    __declspec(noalias) void NiMeshPSysData_RemoveFromPool(unsigned int index, CloneHandle* result);
 };
 class FUN_00c21400_cls
 {
@@ -1272,7 +1275,7 @@ void FUN_00c21400_cls::AttachMesh(MeshLookup* pkLookup, unsigned short usIndex)
     if (usMesh >= m_usElementCount)
         usMesh = m_usElementCount - 1;
     Mesh_c21* pkOut = 0;
-    ((Lk2_c21*)pkLookup)->GetMeshHandle(usMesh, (CloneHandle*)&pkOut);
+    ((Lk2_c21*)pkLookup)->NiMeshPSysData_RemoveFromPool(usMesh, (CloneHandle*)&pkOut);
     if (!pkOut)
     {
         Mesh_c21* pkClone = m_1c[usMesh]->NiObject_Clone();
@@ -1284,7 +1287,7 @@ void FUN_00c21400_cls::AttachMesh(MeshLookup* pkLookup, unsigned short usIndex)
     }
     Mesh_c21* pkMesh = pkOut;
     pkMesh->m_uiValue1 |= 1;
-    StartControllersRecursive(pkMesh, 0.0f);
+    NiTimeController_StartAnimations(pkMesh, 0.0f);
     ((Sink_c21*)pkLookup->unk7c)->Attach(usIndex, pkMesh);
     pkMesh->SetTarget(m_10 + 0x9c);
     if (DAT_00fdf1c4((void*)&pkMesh->m_lRefCount) == 0)
@@ -1336,13 +1339,14 @@ class S_c21770_Mod
     MyMeshPtrArray m_kSceneObjects;
     void FUN_00c31780(S_c21770_Mod* pkDest, NiCloningProcess_c217& kCloning) throw();
     void SetMeshAt(unsigned int uiIndex, MyMeshObj* pkMesh, OldSlot& spOld) throw();
-    void CloneInto(S_c21770_Mod* pkDest, NiCloningProcess_c217& kCloning);
+    void NiPSysMeshUpdateModifier_CopyMembers(S_c21770_Mod* pkDest, NiCloningProcess_c217& kCloning);
 };
 // Calls FUN_00c31780 on pkDest, then clones each non-null entry of m_kSceneObjects via MakeClone and stores it in pkDest with SetMeshAt.
 // @fnv 0x00c21770
 // pdb: NiPSysMeshUpdateModifier::CopyMembers | NiPSysMeshUpdateModifier.obj | fnv360_0822_retail, caller_sim, high
 // pdb params: pkDest, kCloning
-void S_c21770_Mod::CloneInto(S_c21770_Mod* pkDest, NiCloningProcess_c217& kCloning)
+// pdb: NiPSysMeshUpdateModifier::CopyMembers | NiPSysMeshUpdateModifier.obj | fnv360_0822_retail, caller_sim, high (was: CloneInto)
+void S_c21770_Mod::NiPSysMeshUpdateModifier_CopyMembers(S_c21770_Mod* pkDest, NiCloningProcess_c217& kCloning)
 {
     FUN_00c31780(pkDest, kCloning);
     for (unsigned int ui = 0; ui < m_kSceneObjects.GetSize(); ui++)

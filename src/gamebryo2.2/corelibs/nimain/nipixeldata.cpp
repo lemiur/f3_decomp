@@ -223,7 +223,8 @@ struct SpawnedPixelData : NiObject
 // Allocates and constructs a new SpawnedPixelData object, returning it as a void pointer.
 // @fnv 0x00a7c3f0
 // pdb: NiPixelData::CreateObject | NiPixelData.obj | fnv360_0822_retail, objrun, high
-void* __cdecl CreateSpawnedPixelData()
+// pdb: NiPixelData::CreateObject | NiPixelData.obj | fnv360_0822_retail, objrun, high (was: CreateSpawnedPixelData)
+void* __cdecl NiPixelData_CreateObject()
 {
     return new SpawnedPixelData();
 }

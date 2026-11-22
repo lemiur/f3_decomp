@@ -119,7 +119,7 @@ struct NiPoint3
 typedef char _sizecheck_NiPoint3[sizeof(NiPoint3) == 12 ? 1 : -1];
 struct FUN_00c31cf0_shell : public NiPSysVolumeEmitter
 {
-    void ComputeEmitterInitialPositionAndVelocity(NiPoint3*, NiPoint3*);
+    void NiPSysVolumeEmitter_ComputeInitialPositionAndVelocity(NiPoint3*, NiPoint3*);
 };
 
 struct NiTransform
@@ -136,7 +136,8 @@ typedef void(__thiscall* ComputeVolumeInitialPositionAndVelocity_t)(void*, NiTra
 // @fnv 0x00c31cf0
 // pdb: NiPSysVolumeEmitter::ComputeInitialPositionAndVelocity | NiPSysVolumeEmitter.obj | fnv360_0822_retail, vtable, high
 // pdb params: kPosition, kVelocity
-void FUN_00c31cf0_shell::ComputeEmitterInitialPositionAndVelocity(NiPoint3* kPosition, NiPoint3* kMotionVelocity)
+// pdb: NiPSysVolumeEmitter::ComputeInitialPositionAndVelocity | NiPSysVolumeEmitter.obj | fnv360_0822_retail, vtable, high (was: ComputeEmitterInitialPositionAndVelocity)
+void FUN_00c31cf0_shell::NiPSysVolumeEmitter_ComputeInitialPositionAndVelocity(NiPoint3* kPosition, NiPoint3* kMotionVelocity)
 {
     if (m_pkEmitterObject)
     {

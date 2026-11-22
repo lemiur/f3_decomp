@@ -152,9 +152,9 @@ class BSShaderManager
         OBJECT_1 = 1
     };
     static void GetTexture(const char*, bool, NiPointer<NiTexture>&, bool, bool);
-    static void BuildTexturePath(char*, const char*, const char*, bool);
+    static void GetModifiedTextureFilename(char*, const char*, const char*, bool);
     static void SetFOV(float);
-    static char* GetRenderModeName();
+    static char* GetShaderLevelString();
     static void SetRenderMode(unsigned int);
     static void UpdateObjectTypeRecurse(NiAVObject*, bool, bool);
     static void SetObjectTypeRecursively(NiAVObject*, eObjectType, bool, bool);
@@ -190,7 +190,8 @@ void BSShaderManager::SetRenderMode(unsigned int mode)
 
 // @fnv 0x00b4f4a0
 // pdb: BSShaderManager::GetShaderLevelString | BSShaderManager.obj | fnv360_0721_beta, ustr, high
-char* BSShaderManager::GetRenderModeName()
+// pdb: BSShaderManager::GetShaderLevelString | BSShaderManager.obj | fnv360_0721_beta, ustr, high (was: GetRenderModeName)
+char* BSShaderManager::GetShaderLevelString()
 {
     switch (fnv_particle_shader_renderer_level)
     {
@@ -218,7 +219,8 @@ char* BSShaderManager::GetRenderModeName()
 // @fnv 0x00b4f5e0
 // pdb: BSShaderManager::GetModifiedTextureFilename | BSShaderManager.obj | fnv360_0822_retail, call_gap, high
 // pdb params: apDstFileName, apSrcFileName, apPostfix, abCheckData
-void BSShaderManager::BuildTexturePath(char* acOutPath, const char* acInputPath, const char* suffix,
+// pdb: BSShaderManager::GetModifiedTextureFilename | BSShaderManager.obj | fnv360_0822_retail, call_gap, high (was: BuildTexturePath)
+void BSShaderManager::GetModifiedTextureFilename(char* acOutPath, const char* acInputPath, const char* suffix,
                                        bool abAddDataPrefix)
 {
     char filename[260];
@@ -2626,7 +2628,8 @@ Shader* __cdecl FUN_00b55560(void*);
 // @fnv 0x00b579e0
 // pdb: BSShaderManager::PrepareGeometry | BSShaderManager.obj | fnv360_0822_retail, ustr, high
 // pdb params: apGeometry, aeObjectType, abFaceGenModel, abSkipPreCache
-void __cdecl UpdateShaderProperty(AVObj* obj, bool abUnused, bool abFlag8, bool a3)
+// pdb: BSShaderManager::PrepareGeometry | BSShaderManager.obj | fnv360_0822_retail, ustr, high (was: UpdateShaderProperty)
+void __cdecl BSShaderManager_PrepareGeometry(AVObj* obj, bool abUnused, bool abFlag8, bool a3)
 {
     char buf[1000];
     ShProp* prop = (ShProp*)obj->GetProperty(3);
@@ -2910,7 +2913,7 @@ class NiNodeB57B : public NiAVObjectB57B
     NiTArrayB57B<NiAVObjectB57B*> m_kChildList;
 };
 
-void __cdecl UpdateShaderProperty(NiAVObjectB57B* pkObject, BSShaderManager::eObjectType eType, bool bArg2, bool bArg3);
+void __cdecl BSShaderManager_PrepareGeometry(NiAVObjectB57B* pkObject, BSShaderManager::eObjectType eType, bool bArg2, bool bArg3);
 
 // Recursively applies a shader property to a NiAVObject, descending into child nodes when the object is not geometry.
 // @fnv 0x00b57bd0
@@ -2921,7 +2924,7 @@ void __cdecl BSShaderManager_PrepareObjectRecurse(NiAVObjectB57B* pkObject, BSSh
     {
         if (pkObject->IsGeometry())
         {
-            UpdateShaderProperty(pkObject, eType, bArg2, bArg3);
+            BSShaderManager_PrepareGeometry(pkObject, eType, bArg2, bArg3);
         }
         else
         {

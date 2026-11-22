@@ -20,7 +20,8 @@ void __stdcall FUN_00bc1cc0(float, float);
 // @fnv 0x00bc28b0
 // pdb: BoltShaderProperty::UpdateBolt | BoltShaderProperty.obj | fnv360_0721_beta, objrun, high
 // pdb params: afTimeDelta, afDesiredBoltDistance, afSpeed, abCleanup
-void __stdcall DispatchFloatPair(float afFirst, float afSecond, float afThird, bool abUseThird)
+// pdb: BoltShaderProperty::UpdateBolt | BoltShaderProperty.obj | fnv360_0721_beta, objrun, high (was: DispatchFloatPair)
+void __stdcall BoltShaderProperty_UpdateBolt(float afFirst, float afSecond, float afThird, bool abUseThird)
 {
     if (!abUseThird)
     {

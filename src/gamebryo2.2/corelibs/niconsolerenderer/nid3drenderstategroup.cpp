@@ -81,12 +81,13 @@ struct Group00e7eed0
 {
     char _pad0[16];
     Entry00e7ef40* m_pkSaved;
-    unsigned int ApplyGroupEntries();
+    unsigned int NiD3DRenderStateGroup_SetRenderStates();
 };
 // Iterates the group's entry list calling DAT_0126f714->Set with flag 0, then the saved list with flag 1, and returns 0.
 // @fnv 0x00e7eed0
 // pdb: NiD3DRenderStateGroup::SetRenderStates | NiD3DRenderStateGroup.obj | fnv360_0822_retail, objrun_sim, high
-unsigned int Group00e7eed0::ApplyGroupEntries()
+// pdb: NiD3DRenderStateGroup::SetRenderStates | NiD3DRenderStateGroup.obj | fnv360_0822_retail, objrun_sim, high (was: ApplyGroupEntries)
+unsigned int Group00e7eed0::NiD3DRenderStateGroup_SetRenderStates()
 {
     Entry00e7ef40* entry = *(Entry00e7ef40**)((char*)this + 8);
     while (entry)
@@ -275,7 +276,7 @@ struct StateGroup
     StateNode* tailA;
     unsigned int countB;
     StateNode* tailB;
-    StateNode* FindNodeByKey(unsigned int, bool&);
+    StateNode* NiD3DRenderStateGroup_FindRenderStateEntry(unsigned int, bool&);
     void FUN_00e7efc0(StateNode*);
     void FUN_00e7ef80(StateNode*);
     void AddA(StateNode* node)
@@ -308,7 +309,7 @@ struct StateGroup
 void StateGroup::SetNodeValue(unsigned int key, unsigned int value, bool target)
 {
     bool foundType = false;
-    StateNode* node = FindNodeByKey(key, foundType);
+    StateNode* node = NiD3DRenderStateGroup_FindRenderStateEntry(key, foundType);
     if (node)
     {
         bool currentType = foundType;
@@ -432,7 +433,7 @@ struct StateGroupE7F5 : public StateGroup
 void StateGroupE7F5::RemoveNodeByKey(unsigned int uiKey)
 {
     bool bInB = false;
-    StateNode* pkNode = FindNodeByKey(uiKey, bInB);
+    StateNode* pkNode = NiD3DRenderStateGroup_FindRenderStateEntry(uiKey, bInB);
     if (pkNode)
     {
         if (bInB)

@@ -198,12 +198,13 @@ struct Mem_cls
 };
 
 extern Log_cls* DAT_01268360;
-int GetMemberSize(Lay_cls* a1, unsigned char* a2, int a3);
+int computeMemberSize(Lay_cls* a1, unsigned char* a2, int a3);
 
 // Returns the byte size of a structure member based on its type code, recursing for type 18 and logging an error for unknown types.
 // @f3 0x009b2550 (community match, verified in this file)
 // pdb: computeMemberSize | hkStructureLayout.obj | fnv360_0822_retail, ustr, high
-int GetMemberSize(Lay_cls* pLayout, unsigned char* pMemberData, int iType)
+// pdb: computeMemberSize | hkStructureLayout.obj | fnv360_0822_retail, ustr, high (was: GetMemberSize)
+int computeMemberSize(Lay_cls* pLayout, unsigned char* pMemberData, int iType)
 {
     int r = 0;
     switch (iType - 1)
@@ -255,7 +256,7 @@ int GetMemberSize(Lay_cls* pLayout, unsigned char* pMemberData, int iType)
         break;
     case 18: {
         int t = pLayout->m_type;
-        r = GetMemberSize(pLayout, pMemberData, t);
+        r = computeMemberSize(pLayout, pMemberData, t);
         break;
     }
     case 26:

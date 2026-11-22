@@ -270,7 +270,7 @@ struct ImageSpaceManager
     void* GetCustomViewport();
     BSRenderedTexture* GetSwapTarget();
     void InitEffects();
-    void CreateMenuBackgroundGeometry();
+    void InitGeometry();
     void ShutdownEffects();
     void ShutdownGeometry();
     void PrepareEndOfFrameEffects();

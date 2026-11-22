@@ -81,7 +81,7 @@ struct Inner_00a6db50
 
 struct DerivedSlotState : SlotState
 {
-    void SetChannelValues(void*, int, int, void*, int, int, void*, int, int);
+    void NiEulerRotKey_Initialize(void*, int, int, void*, int, int, void*, int, int);
 };
 
 struct RefSlotState
@@ -147,7 +147,7 @@ void NiAnimationKey_CopySequence(int a1, int a2, void* apData, int aiCount, floa
         *apOut = pNewState;
         *apiOutCount = 1;
         ((DerivedSlotState*)*apOut)
-            ->SetChannelValues(local_bufs[0], local_counts[0], local_m20[0], local_bufs[1], local_counts[1],
+            ->NiEulerRotKey_Initialize(local_bufs[0], local_counts[0], local_m20[0], local_bufs[1], local_counts[1],
                                local_m20[1], local_bufs[2], local_counts[2], local_m20[2]);
         return;
     }

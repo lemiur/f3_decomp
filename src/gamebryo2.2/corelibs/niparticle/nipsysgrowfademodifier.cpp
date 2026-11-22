@@ -154,14 +154,15 @@ struct NiPSysModifierStand
 
 struct FUN_00c2a610_cls : NiPSysGrowFadeModifier
 {
-    void LoadGrowFadeModifier(NiStream& stream);
+    void NiPSysGrowFadeModifier_SaveBinary(NiStream& stream);
 };
 
 // Loads the base modifier stream, then reads five values from the stream into the grow/fade modifier's fields.
 // @fnv 0x00c2a610
 // pdb: NiPSysGrowFadeModifier::SaveBinary | NiPSysGrowFadeModifier.obj | fnv360_0822_retail, caller_sim, high
 // pdb params: kStream
-void FUN_00c2a610_cls::LoadGrowFadeModifier(NiStream& stream)
+// pdb: NiPSysGrowFadeModifier::SaveBinary | NiPSysGrowFadeModifier.obj | fnv360_0822_retail, caller_sim, high (was: LoadGrowFadeModifier)
+void FUN_00c2a610_cls::NiPSysGrowFadeModifier_SaveBinary(NiStream& stream)
 {
     reinterpret_cast<NiPSysModifierStand*>(this)->LoadStream(stream);
     GrowFadeStreamView* pStreamView = reinterpret_cast<GrowFadeStreamView*>(&stream);

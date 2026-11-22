@@ -356,14 +356,15 @@ class FUN_00aa1fd0_cls
     int m_04;
     unsigned int unk08;
     int(__cdecl* m_0c)(FUN_00aa1fd0_cls* self, char* s, int a, int* out, int b);
-    unsigned int AdvanceChars(char* s);
+    unsigned int NiBinaryStream_PutS(char* s);
 };
 
 // Advances through the string, calling m_0c per character, accumulating its result into m_04, and returns the number of successfully consumed characters.
 // @fnv 0x00aa1fd0
 // pdb: NiBinaryStream::PutS | NiBinaryStream.obj | fnv360_0822_retail, call_seq, high
 // pdb params: pBuffer
-unsigned int FUN_00aa1fd0_cls::AdvanceChars(char* s)
+// pdb: NiBinaryStream::PutS | NiBinaryStream.obj | fnv360_0822_retail, call_seq, high (was: AdvanceChars)
+unsigned int FUN_00aa1fd0_cls::NiBinaryStream_PutS(char* s)
 {
     unsigned int count = 0;
     if (*s != 0)
@@ -911,7 +912,8 @@ static const char kForwardSlash = 0x2f;
 // @fnv 0x00aa1380
 // pdb: NiStandardizeFilePath | NiSystem.obj | fnv360_0822_retail, call_seq, high
 // pdb params: pcTempPath
-void __cdecl NormalizePathSeparators(char* pcPath)
+// pdb: NiStandardizeFilePath | NiSystem.obj | fnv360_0822_retail, call_seq, high (was: NormalizePathSeparators)
+void __cdecl NiStandardizeFilePath(char* pcPath)
 {
     if (!pcPath)
         return;

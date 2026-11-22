@@ -305,13 +305,14 @@ static __forceinline void S_BinRead(S_00a59a90_Bin* bin, void* v, unsigned int b
 struct FUN_00a59a90_cls {
     float m[9];
     void ZeroSmallValues();
-    void ReadMatrixFromStream(void* pOther);
+    void NiMatrix3_SaveBinary(void* pOther);
 };
 // Calls ZeroSmallValues, then reads nine floats from the stream at pOther+0x250 into the 3x3 matrix m.
 // @fnv 0x00a59a90
 // pdb: NiMatrix3::SaveBinary | NiMatrix3.obj | fnv360_0822_retail, call_seq, high
 // pdb params: stream
-void FUN_00a59a90_cls::ReadMatrixFromStream(void* pOther)
+// pdb: NiMatrix3::SaveBinary | NiMatrix3.obj | fnv360_0822_retail, call_seq, high (was: ReadMatrixFromStream)
+void FUN_00a59a90_cls::NiMatrix3_SaveBinary(void* pOther)
 {
     char* pObj = (char*)pOther;
     ZeroSmallValues();

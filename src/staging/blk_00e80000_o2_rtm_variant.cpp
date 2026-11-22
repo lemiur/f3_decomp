@@ -2720,7 +2720,7 @@ void ShaderManagerRelease093::FUN_00e8ceb0()
 }
 
 
-extern "C" void __cdecl ShutdownE6EC20();
+extern "C" void __cdecl NiDX9Renderer__SDMShutdown();
 extern "C" void __cdecl DestroyBucketTable();
 extern "C" void __cdecl DestroyGlobalQueues();
 extern "C" void __cdecl FUN_00e80630();
@@ -2770,7 +2770,7 @@ void __cdecl FUN_00e91c80()
         FUN_00e80630();
         DestroyGlobalQueues();
         FUN_00e89740();
-        ShutdownE6EC20();
+        NiDX9Renderer__SDMShutdown();
     }
 }
 

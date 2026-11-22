@@ -5640,7 +5640,8 @@ extern E6EC20List g_kE6EC20List;
 // Releases the E6EC20 device, deletes the cache, frees the module, clears the create function pointer and empties the list.
 // @fnv 0x00e6ec20
 // pdb: NiDX9Renderer::_SDMShutdown | NiDX9Renderer.obj | tesv_win, udata, high
-void ShutdownE6EC20()
+// pdb: NiDX9Renderer::_SDMShutdown | NiDX9Renderer.obj | tesv_win, udata, high (was: ShutdownE6EC20)
+void NiDX9Renderer__SDMShutdown()
 {
     if (g_pkE6EC20Device) {
         g_pkE6EC20Device->Release();
@@ -6207,7 +6208,7 @@ struct FUN_00e744b0_Src {
     FUN_00e744b0_VObj* m_b8;
     unsigned int m_bc;
 };
-struct FUN_00e744b0_obj { void ProcessCollector(unsigned int a, unsigned int b, unsigned int c, unsigned int d, int e, int f); };
+struct FUN_00e744b0_obj { void NiD3DGeometryGroupManager_AddObjectToGroup(unsigned int a, unsigned int b, unsigned int c, unsigned int d, int e, int f); };
 struct FUN_00e744b0_cls {
     unsigned int unk000;
     unsigned int unk004;
@@ -6790,7 +6791,7 @@ void FUN_00e744b0_cls::ProcessVObj(FUN_00e744b0_Src* apSrc)
             unsigned int esi = (unsigned int)vo;
             unsigned int edi = bc;
             bool r = FUN_00e72c20(apSrc, 0);
-            ((FUN_00e744b0_obj*)m_8ac)->ProcessCollector(m_8b0, esi, edi, *(unsigned int*)&r, 0, 0);
+            ((FUN_00e744b0_obj*)m_8ac)->NiD3DGeometryGroupManager_AddObjectToGroup(m_8b0, esi, edi, *(unsigned int*)&r, 0, 0);
             if (r) {
                 DrawStrip(apSrc, esi, edi, &B, &A);
             } else {
@@ -11506,7 +11507,8 @@ static inline unsigned int PackColor_e78910(const short* v, unsigned short comps
 // @fnv 0x00e78910
 // pdb: NiD3DShaderDeclaration::Pack_ShortToUByteColor | NiD3DShaderDeclaration.obj | fnv360_0822_retail, objrun, high
 // pdb params: kParams
-int PackVertexColors(Stream_e78910* aStream)
+// pdb: NiD3DShaderDeclaration::Pack_ShortToUByteColor | NiD3DShaderDeclaration.obj | fnv360_0822_retail, objrun, high (was: PackVertexColors)
+int NiD3DShaderDeclaration_Pack_ShortToUByteColor(Stream_e78910* aStream)
 {
     unsigned short* indices = aStream->indices;
     unsigned int* dst = (unsigned int*)aStream->dst;
@@ -15548,7 +15550,8 @@ struct ByteFloatStream {
 // @fnv 0x00e79920
 // pdb: NiD3DShaderDeclaration::Pack_ByteToFloat | NiD3DShaderDeclaration.obj | fnv360_0822_retail, objrun, high
 // pdb params: kParams
-unsigned __cdecl ConvertByteFloatStream(ByteFloatStream* pStream) {
+// pdb: NiD3DShaderDeclaration::Pack_ByteToFloat | NiD3DShaderDeclaration.obj | fnv360_0822_retail, objrun, high (was: ConvertByteFloatStream)
+unsigned __cdecl NiD3DShaderDeclaration_Pack_ByteToFloat(ByteFloatStream* pStream) {
  unsigned total = 0;
  signed char* source = pStream->source;
  unsigned short* indices = pStream->indices;
@@ -15614,7 +15617,8 @@ void* _fnv_zlib_memset(void*, int, unsigned int);
 // @fnv 0x00e7a0a0
 // pdb: NiD3DShaderDeclaration::Pack_UnsignedByteToUByteColor | NiD3DShaderDeclaration.obj | fnv360_0822_retail, objrun, high
 // pdb params: kParams
-unsigned int ConvertColorStream(ColorStream* pStream) {
+// pdb: NiD3DShaderDeclaration::Pack_UnsignedByteToUByteColor | NiD3DShaderDeclaration.obj | fnv360_0822_retail, objrun, high (was: ConvertColorStream)
+unsigned int NiD3DShaderDeclaration_Pack_UnsignedByteToUByteColor(ColorStream* pStream) {
     unsigned char* src = pStream->src;
     unsigned short* indices = pStream->indices;
     unsigned char* dst = pStream->dst;
@@ -17418,7 +17422,8 @@ void FUN_00e759c0_cls::FUN_00e759c0(float* out) {
 // @fnv 0x00e79540
 // pdb: NiD3DShaderDeclaration::Pack_ShortToFloat | NiD3DShaderDeclaration.obj | fnv360_0822_retail, objrun, high
 // pdb params: kParams
-unsigned int __cdecl ConvertNormalizedShortsToFloats(NormalizedStream* pStream)
+// pdb: NiD3DShaderDeclaration::Pack_ShortToFloat | NiD3DShaderDeclaration.obj | fnv360_0822_retail, objrun, high (was: ConvertNormalizedShortsToFloats)
+unsigned int __cdecl NiD3DShaderDeclaration_Pack_ShortToFloat(NormalizedStream* pStream)
 {
     unsigned int uiBytesWritten = 0;
     unsigned char* pucSrc = pStream->source;
@@ -22312,7 +22317,7 @@ struct SrcObj {
     float BSStripPSysData_GetTexCoordDelta(unsigned short row);
     const PointE69* GetElementField(unsigned short row, unsigned short col);
     const PointE69* BSStripPSysData_GetPointNorms(unsigned short row, unsigned short col);
-    const ColorF* GetParticleColor(unsigned short row, unsigned short col);
+    const ColorF* BSStripPSysData_GetPointColor(unsigned short row, unsigned short col);
 };
 
 static inline int WrapIndex(int i, int n)
@@ -22363,7 +22368,7 @@ void MeshGenerator::FUN_00e6d3a0(float* pDest, unsigned short* pIndex, SrcObj* p
                 const PointE69* pPos = pSrc->GetElementField(usRow, usCol);
                 const PointE69* pNorm = pSrc->BSStripPSysData_GetPointNorms(usRow, usCol);
 
-                unsigned int uiColor = (((fnv_FloatToInt(pSrc->GetParticleColor(usRow, usCol)->a * 255.0) << 8 | fnv_FloatToInt(pSrc->GetParticleColor(usRow, usCol)->r * 255.0)) << 8 | fnv_FloatToInt(pSrc->GetParticleColor(usRow, usCol)->g * 255.0)) << 8) | fnv_FloatToInt(pSrc->GetParticleColor(usRow, usCol)->b * 255.0);
+                unsigned int uiColor = (((fnv_FloatToInt(pSrc->BSStripPSysData_GetPointColor(usRow, usCol)->a * 255.0) << 8 | fnv_FloatToInt(pSrc->BSStripPSysData_GetPointColor(usRow, usCol)->r * 255.0)) << 8 | fnv_FloatToInt(pSrc->BSStripPSysData_GetPointColor(usRow, usCol)->g * 255.0)) << 8) | fnv_FloatToInt(pSrc->BSStripPSysData_GetPointColor(usRow, usCol)->b * 255.0);
 
                 float fW = pAlpha ? (float)pAlpha[usRow] : -1.0f;
 
@@ -25355,7 +25360,8 @@ static const double DAT_00dc2748 = 4.656612873077393e-10;
 // @fnv 0x00e79160
 // pdb: NiD3DShaderDeclaration::Pack_LongToFloat | NiD3DShaderDeclaration.obj | fnv360_0822_retail, objrun, high
 // pdb params: kParams
-unsigned int __cdecl DecodeVertexData(NormalizedStream* apStream)
+// pdb: NiD3DShaderDeclaration::Pack_LongToFloat | NiD3DShaderDeclaration.obj | fnv360_0822_retail, objrun, high (was: DecodeVertexData)
+unsigned int __cdecl NiD3DShaderDeclaration_Pack_LongToFloat(NormalizedStream* apStream)
 {
     unsigned int bytes = 0;
     unsigned char* dest = apStream->dest;
@@ -28687,7 +28693,7 @@ bool __cdecl SetModeFlags(unsigned,unsigned*,unsigned*);
 unsigned __cdecl MapCodeToIndex(unsigned);
 InitCaps* __cdecl FUN_00e7d6b0(InitDevice*,InitPresent*,void**);
 void __cdecl FUN_00e7d850(InitDevice*,void**);
-InitState* __cdecl CreateShaderLevel(unsigned,InitRenderer*);
+InitState* __cdecl NiRenderTargetGroup_Create(unsigned,InitRenderer*);
 InitVertexManager* __cdecl CreateRenderer(InitRenderer*,void*,unsigned);
 void __cdecl FUN_00e81940(InitRenderer*);
 InitManager* __cdecl FUN_00e88eb0(InitDevice*,InitTextureManager*);
@@ -29560,7 +29566,7 @@ bool InitRenderer::FUN_00e72e60(unsigned width,unsigned height,unsigned options,
  color=0; depth=0;
  InitCaps* caps=FUN_00e7d6b0(device,&present,&color);
  if(present.enableAutoDepthStencil) FUN_00e7d850(device,&depth);
- state=CreateShaderLevel(1,this);
+ state=NiRenderTargetGroup_Create(1,this);
  state->SetColor(color,0);
  state->SetDepth(depth);
  stateMap.FUN_00e72cf0(deviceWindow,InitSmartState(state));
@@ -30661,7 +30667,7 @@ struct StripGeometry {
     unsigned int unk0BC;
     StripShaderX* shader;
 };
-struct StripPackManager { void ProcessCollector(void*,StripGeometryData*,void*,void*,void*,void*); };
+struct StripPackManager { void NiD3DGeometryGroupManager_AddObjectToGroup(void*,StripGeometryData*,void*,void*,void*,void*); };
 struct StripVertexManager {
     void FUN_00e8bfa0(StripRendererData*,bool);
     void* FUN_00e8bff0(void*,unsigned int,unsigned int,unsigned int);
@@ -31286,7 +31292,7 @@ void StripRenderer::FUN_00e70720(StripGeometry* geometry)
     }
     StripShaderX* shader = geometry->shader;
     if (!numVertices || !shader) return;
-    packManager->ProcessCollector(bufferState,data,0,0,0,0);
+    packManager->NiD3DGeometryGroupManager_AddObjectToGroup(bufferState,data,0,0,0,0);
     StripRendererData* rd = data->rendererData;
     ((W124RD*)rd)->FUN_008890b0(1);
     rd->maxPrimitives = rd->primitiveCount = numIndices - 2;
@@ -34553,7 +34559,7 @@ struct VertexData : Holder_00e8f040 {
 
 };
 
-struct RendererContext {void ProcessCollector(void*,ParticleGeometry*,int,int,int,int);};
+struct RendererContext {void NiD3DGeometryGroupManager_AddObjectToGroup(void*,ParticleGeometry*,int,int,int,int);};
 
 struct RendererStorage {
 
@@ -34832,7 +34838,7 @@ void RendererE70140::FUN_00e70140(SceneArg* apSceneArg)
 
     Overlay* overlayArg;
     overlayArg = apSceneArg->overlay;
-    ctx8ac->ProcessCollector(extra8b4, a, 0, 0, 0, 0);
+    ctx8ac->NiD3DGeometryGroupManager_AddObjectToGroup(extra8b4, a, 0, 0, 0, 0);
 
     overlay = (unsigned int)(unsigned short)primitiveCount * 4;
     VertexData* buffer = a->vertex;

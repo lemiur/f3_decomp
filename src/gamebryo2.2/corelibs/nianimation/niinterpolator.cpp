@@ -10,13 +10,14 @@ NiInterpolator::NiInterpolator() : m_fLastTime(DAT_01015f5c)
 
 struct FUN_00a57030_shell : public NiInterpolator
 {
-    void GetKeyTimeRange(float*, float*);
+    void NiInterpolator_GetActiveTimeRange(float*, float*);
 };
 
 // @fnv 0x00a57030
 // pdb: NiInterpolator::GetActiveTimeRange | NiInterpolator.obj | fnv360_0822_retail, objrun, high
 // pdb params: fBeginKeyTime, fEndKeyTime
-void FUN_00a57030_shell::GetKeyTimeRange(float* fBeginKeyTime, float* fEndKeyTime)
+// pdb: NiInterpolator::GetActiveTimeRange | NiInterpolator.obj | fnv360_0822_retail, objrun, high (was: GetKeyTimeRange)
+void FUN_00a57030_shell::NiInterpolator_GetActiveTimeRange(float* fBeginKeyTime, float* fEndKeyTime)
 {
     *fBeginKeyTime = 0.0f;
     *fEndKeyTime = 0.0f;

@@ -52,7 +52,7 @@ struct NiUpdateOwner_b9169
 };
 struct FUN_00a40a50_cls : NiUpdateOwner_b9169
 {
-    NiBlendObject_b9169* CreateBlendObject(int a1);
+    NiBlendObject_b9169* NiBlendTransformInterpolator_CreateClone(int a1);
 };
 extern unsigned int DAT_011a8400;
 extern unsigned int DAT_011a8404;

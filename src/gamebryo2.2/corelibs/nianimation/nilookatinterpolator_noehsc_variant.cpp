@@ -879,7 +879,7 @@ struct Stream341
     unsigned int unk248;
     unsigned int unk24c;
     BinaryOutput341* output;
-    void WriteObjectLink(const void* name);
+    void NiStream_SaveFixedString(const void* name);
 };
 struct Transform341
 {

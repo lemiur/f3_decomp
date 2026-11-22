@@ -574,13 +574,14 @@ struct LightBaseSerialization
 };
 struct LightSerialization
 {
-    void WriteSpotLightData(NiStreamArg* stream);
+    void NiSpotLight_SaveBinary(NiStreamArg* stream);
 };
 // Calls the base light serialization, then writes m_f0108, m_f010c and m_f0110 to the stream's writer, accumulating byte counts.
 // @fnv 0x00a94ee0
 // pdb: NiSpotLight::SaveBinary | NiSpotLight.obj | fnv360_0822_retail, caller_sim, high
 // pdb params: stream
-void LightSerialization::WriteSpotLightData(NiStreamArg* stream)
+// pdb: NiSpotLight::SaveBinary | NiSpotLight.obj | fnv360_0822_retail, caller_sim, high (was: WriteSpotLightData)
+void LightSerialization::NiSpotLight_SaveBinary(NiStreamArg* stream)
 {
     ((LightBaseSerialization*)this)->SavePointLight(stream);
     NiSpotLight* spot = (NiSpotLight*)this;

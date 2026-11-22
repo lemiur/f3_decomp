@@ -78,13 +78,14 @@ struct NiSearchPathS
     unsigned int m_uiSearchPathValue;
     char m_acFilePathBuffer[260];
     char m_acResolvedPath[260];
-    bool ResolveSearchPath(char* pcPath, unsigned int uiStringLen);
+    bool NiSearchPath_GetNextSearchPath(char* pcPath, unsigned int uiStringLen);
 };
 // Builds a full path from the stored path and search-path mode, writes it to pcPath, standardizes it, and advances the mode counter.
 // @f3 0x0089fd20 (community match, verified in this file)
 // pdb: NiSearchPath::GetNextSearchPath | NiSearchPath.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, high
 // pdb params: pcPath, uiStringLen
-bool NiSearchPathS::ResolveSearchPath(char* pcOutPath, unsigned int uiOutLen)
+// pdb: NiSearchPath::GetNextSearchPath | NiSearchPath.obj | fnv360_0822_retail, bridge_fnvpc, high (was: ResolveSearchPath)
+bool NiSearchPathS::NiSearchPath_GetNextSearchPath(char* pcOutPath, unsigned int uiOutLen)
 {
     FileNameComponents kFullPath(m_acFilePathBuffer);
     switch (m_uiSearchPathValue)

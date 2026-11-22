@@ -18483,7 +18483,7 @@ struct Player {
     void FUN_007f9d80(int priority);
     void MoviePlayer_StartSequence(void* parameter, bool flag, int priority);
 };
-// pdb: MoviePlayer::StartSequence | MoviePlayer_Xenon.obj | fnv360_0822_debug, ustr + bridge(ustr|ustr) + skyrim(ustr), high
+// pdb: MoviePlayer::NiControllerSequence_Activate | MoviePlayer_Xenon.obj | fnv360_0822_debug, ustr + bridge(ustr|ustr) + skyrim(ustr), high
 void Player::MoviePlayer_StartSequence(void* parameter, bool flag, int priority) {
     DWORD threadId;
     thread = CreateThread(0, 0, (LPTHREAD_START_ROUTINE)::MoviePlayer_PlaySequenceThread, parameter, 4, &threadId);

@@ -130,11 +130,12 @@ struct Struct00b884b0
     virtual void vattach(void*);
     char _pad[104];
     void* m_aiIndexedValues[11];
-    void AttachAll();
+    void SkyShader_ClearPassStages();
 };
 // @fnv 0x00b884b0
 // pdb: SkyShader::ClearPassStages | SkyShader.obj | fnv360_0822_retail, objrun_sim, high
-void Struct00b884b0::AttachAll()
+// pdb: SkyShader::ClearPassStages | SkyShader.obj | fnv360_0822_retail, objrun_sim, high (was: AttachAll)
+void Struct00b884b0::SkyShader_ClearPassStages()
 {
     void** p = m_aiIndexedValues;
     int n = 11;

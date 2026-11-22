@@ -4863,7 +4863,7 @@ extern void* g_hE6EC20Module;
 extern void*(__stdcall* g_pfnE6EC20Create)(unsigned int uiVersion);
 extern int(__stdcall* g_pfnE6EC20FreeLibrary)(void* hModule);
 extern E6EC20List g_kE6EC20List;
-void ShutdownE6EC20();
+void NiDX9Renderer__SDMShutdown();
 // Renderer resource setup: original C++ reconstructed from InitializeRendererResources.
 struct RendererStateSlot;
 struct ResourceDescriptor
@@ -5241,7 +5241,7 @@ struct FUN_00e744b0_Src
 };
 struct FUN_00e744b0_obj
 {
-    void ProcessCollector(unsigned int a, unsigned int b, unsigned int c, unsigned int d, int e, int f);
+    void NiD3DGeometryGroupManager_AddObjectToGroup(unsigned int a, unsigned int b, unsigned int c, unsigned int d, int e, int f);
 };
 struct FUN_00e744b0_cls
 {
@@ -9587,7 +9587,7 @@ static inline unsigned int PackColor_e78910(const short* v, unsigned short comps
         a = (unsigned short)v[3];
     return (((short)a & 0xff00) << 16) | ((v[0] & 0xff00) << 8) | (v[1] & 0xff00) | ((v[2] >> 8) & 0xff);
 }
-int PackVertexColors(Stream_e78910* s);
+int NiD3DShaderDeclaration_Pack_ShortToUByteColor(Stream_e78910* s);
 extern const char DAT_010ee7cc[];
 void __cdecl FUN_00aa1490(void* apMemory, unsigned int auiSize);
 struct FUN_00e78be0_cls
@@ -12385,7 +12385,7 @@ struct ByteFloatStream
     unsigned unk14, sourceStride, elementSize, destStride, unk24, unk28;
     unsigned char* dest;
 };
-unsigned __cdecl ConvertByteFloatStream(ByteFloatStream* s);
+unsigned __cdecl NiD3DShaderDeclaration_Pack_ByteToFloat(ByteFloatStream* s);
 struct ColorStream
 {
     unsigned int unk00;
@@ -12396,7 +12396,7 @@ struct ColorStream
     unsigned char* dst;
 };
 void* _fnv_zlib_memset(void*, int, unsigned int);
-unsigned int ConvertColorStream(ColorStream* s);
+unsigned int NiD3DShaderDeclaration_Pack_UnsignedByteToUByteColor(ColorStream* s);
 struct D3DMATRIX_Custom
 {
     float _11, _12, _13, _14;
@@ -15002,7 +15002,7 @@ struct FUN_00e759c0_cls
     unsigned char unk5e3;
     void FUN_00e759c0(float* out);
 };
-unsigned int __cdecl ConvertNormalizedShortsToFloats(NormalizedStream* s);
+unsigned int __cdecl NiD3DShaderDeclaration_Pack_ShortToFloat(NormalizedStream* s);
 
 extern "C" __declspec(dllimport) long __stdcall InterlockedDecrement(long volatile*);
 extern "C" const char* __stdcall FUN_00ee6e2e(void* pDevice);

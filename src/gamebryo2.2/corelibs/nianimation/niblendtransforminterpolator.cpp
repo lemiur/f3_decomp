@@ -99,13 +99,14 @@ struct NiUpdateOwner_b9169
 
 struct FUN_00a40a50_cls : NiUpdateOwner_b9169
 {
-    NiBlendObject_b9169* CreateBlendObject(int a1);
+    NiBlendObject_b9169* NiBlendTransformInterpolator_CreateClone(int a1);
 };
 
 // @fnv 0x00a40a50
 // pdb: NiBlendTransformInterpolator::CreateClone | NiBlendTransformInterpolator.obj | fnv360_0822_retail, objrun, high
 // pdb params: kCloning
-NiBlendObject_b9169* FUN_00a40a50_cls::CreateBlendObject(int aiValue)
+// pdb: NiBlendTransformInterpolator::CreateClone | NiBlendTransformInterpolator.obj | fnv360_0822_retail, objrun, high (was: CreateBlendObject)
+NiBlendObject_b9169* FUN_00a40a50_cls::NiBlendTransformInterpolator_CreateClone(int aiValue)
 {
     NiBlendObject_b9169* p = new NiBlendObjectDerived_b9169();
     FUN_00a37510(p, aiValue);

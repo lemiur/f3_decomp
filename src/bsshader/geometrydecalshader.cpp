@@ -470,7 +470,8 @@ extern GlobalRendererState* DAT_0126f74c;
 // @fnv 0x00bcbcb0
 // pdb: GeometryDecalShader::SetupGeometryTextures | GeometryDecalShader.obj | fnv360_0822_retail, objrun, high
 // pdb params: apState
-void __stdcall ApplyShaderInputToPass(ShaderInput* apInput)
+// pdb: GeometryDecalShader::SetupGeometryTextures | GeometryDecalShader.obj | fnv360_0822_retail, objrun, high (was: ApplyShaderInputToPass)
+void __stdcall GeometryDecalShader_SetupGeometryTextures(ShaderInput* apInput)
 {
     NiD3DPass_Ex* pPass = DAT_0126f74c->unk24->unk04;
     pPass->unk08 = apInput->unk0c->unk7c;

@@ -54,7 +54,7 @@ void __cdecl IsLightEqual();
 void __cdecl FUN_00a2af70();
 void __cdecl ComputeInterpolatedPosition();
 void __cdecl FUN_00a2b130();
-void __cdecl InsertBezPosKey();
+void __cdecl NiTCBPosKey_Insert();
 typedef int(__stdcall* FnInterlockedDecrement)(void*);
 struct NiStream
 {
@@ -317,7 +317,7 @@ class A27250FloatKey
     float m_fForwardTangent;
     float m_fBackwardTangent;
 };
-// ApplyAnimToTarget: forwards two arguments to CallAnimCallback, then calls the
+// ApplyAnimToTarget: forwards two arguments to NiAnimationKey_SaveBinary, then calls the
 // member at +4 of the second argument with the first argument.
 struct AnimNode
 {
@@ -328,7 +328,7 @@ struct AnimTarget
     int unk00;
     AnimNode m_node;
 };
-void __cdecl CallAnimCallback(int a, void* b);
+void __cdecl NiAnimationKey_SaveBinary(int a, void* b);
 void __cdecl ApplyAnimToTarget(int a, AnimTarget* b);
 struct A27BD0Point3
 {
@@ -484,7 +484,7 @@ struct A28260Key
     int unk3C;
 };
 void __cdecl ApplyAnimToTarget(NiStream& kStream, A28260Key* pkKey);
-void __cdecl CallAnimCallback(void* a, void* b);
+void __cdecl NiAnimationKey_SaveBinary(void* a, void* b);
 void __cdecl FUN_00a28720(void* a, void* b);
 struct FUN_00a289b0_Vec4
 {
@@ -575,8 +575,8 @@ struct Outer
     int unk00;
     Inner inner04;
 };
-void __cdecl CallAnimCallback(void* target, Outer* source);
-// Reconstruction of UpdateArrayElements (0x00a29e40, 189 bytes).
+void __cdecl NiAnimationKey_SaveBinary(void* target, Outer* source);
+// Reconstruction of NiEulerRotKey_Insert (0x00a29e40, 189 bytes).
 //
 // The original does two things:
 //
@@ -2130,7 +2130,7 @@ struct FUN_00a3da50_Owner
     int m_unk24C;
     FUN_00a3da50_Anim* m_pAnim;
 };
-int __cdecl CallAnimCallback(FUN_00a3da50_Owner* pOwner, int iIndex);
+int __cdecl NiAnimationKey_SaveBinary(FUN_00a3da50_Owner* pOwner, int iIndex);
 __declspec(dllimport) long __stdcall InterlockedDecrement(volatile long*);
 struct S_a3dd40_Obj
 {
@@ -2196,7 +2196,7 @@ struct BezPosKey
         g_memoryManager.Deallocate(p);
     }
 };
-bool InsertBezPosKey(float t, BezPosKey** pKeys, unsigned int* pCount);
+bool NiTCBPosKey_Insert(float t, BezPosKey** pKeys, unsigned int* pCount);
 class NiAnimationKeyA3D
 {
   public:
@@ -2657,7 +2657,7 @@ struct FUN_00a2bdb0
     {
         DAT_011f6238.Free(apBlock);
     }
-    void SaveExtraFields(S_a2c300_Stream* s);
+    void NiTCBRotKey_LoadBinary(S_a2c300_Stream* s);
 };
 
 // @fnv 0x00a2c420
@@ -2666,7 +2666,7 @@ FUN_00a2bdb0* __cdecl FUN_00a2c420(S_a2c300_Stream* s, unsigned int count)
 {
     FUN_00a2bdb0* arr = new FUN_00a2bdb0[count];
     for (unsigned int i = 0; i < count; i++)
-        arr[i].SaveExtraFields(s);
+        arr[i].NiTCBRotKey_LoadBinary(s);
     return arr;
 }
 }  // namespace fnv_00a2c420

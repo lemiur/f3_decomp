@@ -139,7 +139,7 @@ struct NiPSysMeshEmitter : NiPSysEmitter
     {
         void FUN_00c1e9a0(unsigned int);
     } m_kGeometryEmitters;
-    void SetSkinGeom(NiGeometry*);
+    void NiPSysMeshEmitter_AddGeometryEmitter(NiGeometry*);
     void NiPSysMeshEmitter_LinkObject(NiStream&);
 };
 // @fnv 0x00c1f990
@@ -156,7 +156,7 @@ void NiPSysMeshEmitter::NiPSysMeshEmitter_LinkObject(NiStream& kStream)
         for (i = 0; i < uiSize; i++)
         {
             pkChild = (NiGeometry*)kStream.GetLoadedObject();
-            SetSkinGeom(pkChild);
+            NiPSysMeshEmitter_AddGeometryEmitter(pkChild);
         }
     }
 }
@@ -2542,7 +2542,7 @@ bool MeshEmitterCandidate::EmitFromMesh(NiGeometry* geometry, MeshPoint& positio
 
 struct CloneOut
 {
-    void __thiscall SetSkinGeom(void* item);
+    void __thiscall NiPSysMeshEmitter_AddGeometryEmitter(void* item);
 };
 struct CloneMap
 {
@@ -2606,9 +2606,9 @@ void __thiscall CloneEmitter::CloneItems(CloneProcess& process)
         if (item)
         {
             if (process.map->FUN_00a53c30(item, &clone))
-                output->SetSkinGeom(clone);
+                output->NiPSysMeshEmitter_AddGeometryEmitter(clone);
             else
-                output->SetSkinGeom(item);
+                output->NiPSysMeshEmitter_AddGeometryEmitter(item);
         }
     }
 }
@@ -2767,14 +2767,15 @@ void* __cdecl FUN_00aa13e0(unsigned int size);
 
 struct FUN_00c1f790_cls : NiPSysMeshEmitter
 {
-    void __thiscall SetSkinGeom(NiSkinGeom790* pkGeom);
+    void __thiscall NiPSysMeshEmitter_AddGeometryEmitter(NiSkinGeom790* pkGeom);
 };
 
 // Sets skin geometry on the emitter, updating m_54 and m_64 slots, and sets flags 0x33 on the geometry's flags.
 // @fnv 0x00c1f790
 // pdb: NiPSysMeshEmitter::AddGeometryEmitter | NiPSysMeshEmitter.obj | fnv360_0822_retail, call_seq, high
 // pdb params: pkGeomEmitter
-void __thiscall FUN_00c1f790_cls::SetSkinGeom(NiSkinGeom790* pkGeom)
+// pdb: NiPSysMeshEmitter::AddGeometryEmitter | NiPSysMeshEmitter.obj | fnv360_0822_retail, call_seq, high (was: SetSkinGeom)
+void __thiscall FUN_00c1f790_cls::NiPSysMeshEmitter_AddGeometryEmitter(NiSkinGeom790* pkGeom)
 {
     NiSkinGeom790* pSkinGeom = pkGeom;
     if (pSkinGeom != 0)

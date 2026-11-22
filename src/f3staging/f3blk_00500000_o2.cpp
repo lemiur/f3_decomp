@@ -41509,7 +41509,8 @@ class TESWorldSpace : public TESForm, public TESFullName, public TESTexture
     void SetWaterNoise(unsigned int value) { waterNoise = value; }
     void SetWaterType(unsigned int value) { waterType = value; }
     void SetWaterHeight(float value) { waterHeight = value; }
-    void SetParent(unsigned int value) { parent = value; if (!value) field4E = 0; }
+    // pdb: NiAVObject::AttachParent | NiAVObject.obj | fnv360_0822_retail, call_seq, high (was: SetParent)
+    void NiAVObject_AttachParent(unsigned int value) { parent = value; if (!value) field4E = 0; }
     void SetMusic(unsigned int value) { music = value; }
     bool GetSmallWorld() { return (flags4C & 1) != 0; }
     bool FUN_00505020(TESFile* file);
@@ -41620,7 +41621,7 @@ bool TESWorldSpace::FUN_00505020(TESFile* file)
         case 0x4d414e57: {
             unsigned int value = 0;
             file->FUN_00448800(&value);
-            SetParent(value);
+            NiAVObject_AttachParent(value);
             field4E = 0xffff;
             break;
         }

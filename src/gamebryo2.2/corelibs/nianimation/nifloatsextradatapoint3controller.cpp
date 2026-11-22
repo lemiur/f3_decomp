@@ -134,14 +134,15 @@ struct FUN_00a4eb50_cls {
     ExtraStub* m_3c;
     int m_40;
 
-    int BuildAndDispatchVec12(int unused);
+    int NiFloatsExtraDataPoint3Controller_CreatePoseInterpolator(int unused);
 };
 
 // Reads three values from the stub at m_40, packs them into a Vec12, allocates a 0x20-byte sink and passes the vector to it.
 // @fnv 0x00a4eb50
 // pdb: NiFloatsExtraDataPoint3Controller::CreatePoseInterpolator | NiFloatsExtraDataPoint3Controller.obj | fnv360_0822_retail, objrun_prop, high
 // pdb params: usIndex
-int FUN_00a4eb50_cls::BuildAndDispatchVec12(int unused)
+// pdb: NiFloatsExtraDataPoint3Controller::CreatePoseInterpolator | NiFloatsExtraDataPoint3Controller.obj | fnv360_0822_retail, objrun_prop, high (was: BuildAndDispatchVec12)
+int FUN_00a4eb50_cls::NiFloatsExtraDataPoint3Controller_CreatePoseInterpolator(int unused)
 {
     ExtraStub* stub = m_3c;
     Vec12 v;

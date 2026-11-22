@@ -30,7 +30,7 @@ struct FNVBinaryInput
 
 struct FNVStream
 {
-    void WriteObjectLink(NiFixedString& value);
+    void NiStream_SaveFixedString(NiFixedString& value);
 
     FNVBinaryInput* GetInput() const
     {
@@ -52,5 +52,5 @@ struct NiTextKeyFnv
 void NiTextKeyFnv::ReadFromStream(FNVStream& stream)
 {
     stream.GetInput()->Read(&m_fTime, sizeof(m_fTime));
-    stream.WriteObjectLink(m_kText);
+    stream.NiStream_SaveFixedString(m_kText);
 }

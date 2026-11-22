@@ -166,14 +166,14 @@ struct SObj
     unsigned int state;
     bool enabled;
 };
-void CallAnimCallback(SStream*, SObj*);
-// Calls CallAnimCallback, then writes the object's enabled flag as one byte to the stream's output and adds the written count.
+void NiAnimationKey_SaveBinary(SStream*, SObj*);
+// Calls NiAnimationKey_SaveBinary, then writes the object's enabled flag as one byte to the stream's output and adds the written count.
 // @fnv 0x00a295f0
 // pdb: NiBoolKey::SaveBinary | NiBoolKey.obj | fnv360_0822_retail, objrun_open, medium
 // pdb params: stream, pkKey
 void WriteEnabledFlag(SStream* stream, SObj* object)
 {
-    CallAnimCallback(stream, object);
+    NiAnimationKey_SaveBinary(stream, object);
     bool enabled = object->enabled != 0;
     unsigned int size;
     OutputStream* output = stream->output;

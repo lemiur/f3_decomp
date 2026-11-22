@@ -167,12 +167,12 @@ struct S_00dcc240_Reader
     int unk04;
     unsigned short unk08;
 };
-extern "C" void __cdecl SkipWhitespace(void);
+extern "C" void __cdecl eatWhiteSpace(void);
 // pdb: readInteger64 | hkIStream.obj | fnv360_0822_retail, caller_sim + skyrim(caller_sim), high
 static __declspec(noinline) __int64 readInteger64(unsigned char* ok, S_00dcc240_Reader* reader)
 {
     *ok = 0;
-    SkipWhitespace();
+    eatWhiteSpace();
     return reader->unk08;
 }
 typedef __int64 FNVInt64;
@@ -434,7 +434,7 @@ struct S_00dcc820_Class
 
     S_00dcc820_Class* __thiscall FUN_00dcc820(int* result);
 };
-extern "C" void __cdecl SkipWhitespace(void);
+extern "C" void __cdecl eatWhiteSpace(void);
 // @fnv 0x00dcc820
 // pdb: hkIstream::operator>> | hkIStream.obj | tesv_win, objrun_sim, low
 S_00dcc820_Class* __thiscall S_00dcc820_Class::FUN_00dcc820(int* result)

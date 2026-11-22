@@ -15,7 +15,7 @@ class ChannelState
     unsigned char encoded[3];
     void* values[3];
     int unk3c, unk40, unk44;
-    void SetChannelValues(void* value0, int present0, unsigned type0, void* value1, int present1, unsigned type1,
+    void NiEulerRotKey_Initialize(void* value0, int present0, unsigned type0, void* value1, int present1, unsigned type1,
                           void* value2, int present2, unsigned type2);
 };
 extern void(__cdecl* DAT_011f38a0[])(void*);
@@ -34,7 +34,8 @@ void ChannelState::ClearFloatKeys()
 // @fnv 0x00a3d540
 // pdb: NiEulerRotKey::Initialize | NiAnimationKey.obj | fnv360_0822_retail, caller_sim, high
 // pdb params: pkX, uiNumX, eTypeX, pkY, uiNumY, eTypeY, pkZ, uiNumZ, eTypeZ
-void ChannelState::SetChannelValues(void* value0, int present0, unsigned type0, void* value1, int present1,
+// pdb: NiEulerRotKey::Initialize | NiAnimationKey.obj | fnv360_0822_retail, caller_sim, high (was: SetChannelValues)
+void ChannelState::NiEulerRotKey_Initialize(void* value0, int present0, unsigned type0, void* value1, int present1,
                                     unsigned type1, void* value2, int present2, unsigned type2)
 {
     ClearFloatKeys();

@@ -3391,14 +3391,14 @@ struct RecordWriter
     virtual int __stdcall WriteRecord(Vector4f header, int type, int group, int property, int setting, int flags,
                                       Vector4f attachment, int attachmentKind) = 0;
     virtual int __stdcall WriteLink(Vector4f header, int type, Vector4f first, Vector4f second) = 0;
-    virtual int __stdcall WriteHeader(Vector4f header) = 0;
+    virtual int __stdcall NiStream_SaveHeader(Vector4f header) = 0;
 };
 // @fnv 0x009fb290
 int __stdcall WriteRecordSet(const RecordSet* source, RecordWriter* writer, int includeRecords)
 {
     if (source == 0)
         return 1;
-    int result = writer->WriteHeader(*source->root);
+    int result = writer->NiStream_SaveHeader(*source->root);
     if (includeRecords)
     {
         result = writer->BeginSet(*source->root, source->category, source->version);

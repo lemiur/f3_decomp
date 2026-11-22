@@ -33,7 +33,8 @@ extern int g_011f5b24;
 // Returns the address of the global variable g_011f5b24.
 // @fnv 0x00a84d20
 // pdb: NiSkinData::GetRTTI | NiSkinData.obj | fnv360_0822_retail, udata, high
-int __cdecl GetGlobalAddress()
+// pdb: NiSkinData::GetRTTI | NiSkinData.obj | fnv360_0822_retail, udata, high (was: GetGlobalAddress)
+int __cdecl NiSkinData_GetRTTI()
 {
     return (int)&g_011f5b24;
 }

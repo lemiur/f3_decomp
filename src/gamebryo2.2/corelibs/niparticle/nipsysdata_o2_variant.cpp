@@ -19,7 +19,7 @@ struct FUN_00a67c00
 extern char* DAT_010a05e4;
 struct NiGeometryData_SetConsistency_View
 {
-    void SetDataConsistency(int);
+    void SetConsistency(int);
 };
 struct FUN_00a963f0 : FUN_00a67c00
 {
@@ -40,7 +40,7 @@ FUN_00a963f0::FUN_00a963f0()
     *(int*)((char*)this + 0x68) = 0;
     *(unsigned char*)((char*)this + 0x6c) = 0;
     *(unsigned char*)((char*)this + 0x40) = 0;
-    ((NiGeometryData_SetConsistency_View*)this)->SetDataConsistency(0);
+    ((NiGeometryData_SetConsistency_View*)this)->SetConsistency(0);
     *(unsigned char*)((char*)this + 0x3c) = 0;
 }
 
@@ -573,7 +573,7 @@ void NiPSysData_View::NiPSysData_CopyMembers(NiPSysData_View* pkDest, void* kClo
         pkRotations = new ParticleRotation[m_usVertices];
         _fnv_zlib_memcpy(pkRotations, m_pkRotations, sizeof(NiQuaternion) * m_usVertices);
     }
-    pkDest->SetRotations(pkRotations);
+    pkDest->ReplaceRotations(pkRotations);
 
     float* pfSizes = (float*)_NiMalloc(sizeof(float) * m_usVertices);
     unsigned int uiFloatSize = sizeof(float) * m_usVertices;
@@ -684,7 +684,7 @@ void S00c25340_Data::NiPSysData_LoadBinary(NiStream& stream)
         m_pkRotationAxes = (NiPoint3*)new (g_memoryManager) S00c25340_Pt3[m_usVertices];
         for (unsigned short i = 0; i < m_usVertices; ++i)
             m_pkRotations[i].GetAngleAxis(m_pfRotationAngles[i], m_pkRotationAxes[i]);
-        SetRotations(0);
+        ReplaceRotations(0);
     }
     m_pkParticleInfo = (Point3ParameterData*)new (g_memoryManager) S00c25340_Info[m_usVertices];
     if (stream.m_kHeader.uiVersion < 0x13)

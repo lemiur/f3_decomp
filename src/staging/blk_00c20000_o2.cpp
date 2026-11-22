@@ -1103,13 +1103,14 @@ struct TrailSystem
     int unk74, unk78;
     TrailBuffer* buffers;
     unsigned short maxCount;
-    void AddTrailPoint(unsigned short index, float unused);
+    void BSStripPSysData_UpdatePoints(unsigned short index, float unused);
 };
 // Adds a new trail record at the particle's current position, updating the ring buffer's count, first, and next indices.
 // @fnv 0x00c26120
 // pdb: BSStripPSysData::UpdatePoints | BSStripPSysData.obj | fnv360_0822_retail, call_seq, high
 // pdb params: ausParticle, afTime
-void TrailSystem::AddTrailPoint(unsigned short index, float unused)
+// pdb: BSStripPSysData::UpdatePoints | BSStripPSysData.obj | fnv360_0822_retail, call_seq, high (was: AddTrailPoint)
+void TrailSystem::BSStripPSysData_UpdatePoints(unsigned short index, float unused)
 {
     if (particles[index].age > particles[index].lifetime)
         return;

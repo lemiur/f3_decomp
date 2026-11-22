@@ -65,7 +65,8 @@ extern hkError* DAT_01268360;
 // Returns true if obj->inner->getSomething() is one of 0,1,2,6,7,8; otherwise optionally reports an unsupported-constraint error and returns false.
 // @f3 0x0095e380 (community match, verified in this file)
 // pdb: _isConstraintSupported | hkaRagdollUtils.obj | fnv360_0822_retail, call_gap, high
-static __declspec(noinline) bool IsSupportedRagdollConstraint(Obj* obj, bool reportError) throw()
+// pdb: _isConstraintSupported | hkaRagdollUtils.obj | fnv360_0822_retail, call_gap, high (was: IsSupportedRagdollConstraint)
+static __declspec(noinline) bool _isConstraintSupported(Obj* obj, bool reportError) throw()
 {
     extern hkError* DAT_010f3364;
     int val = ((int (__thiscall*)(Inner*))(*(void***)obj->inner)[4])(obj->inner);
@@ -93,13 +94,13 @@ static __declspec(noinline) bool IsSupportedRagdollConstraint(Obj* obj, bool rep
 
 void caller_of_IsSupportedRagdollConstraint(Obj* obj, bool reportError)
 {
-    IsSupportedRagdollConstraint(obj, reportError);
+    _isConstraintSupported(obj, reportError);
 }
 
 
 void caller(Obj* obj)
 {
-    IsSupportedRagdollConstraint(obj, true);
+    _isConstraintSupported(obj, true);
 }
 
 struct SpawnedAllocator

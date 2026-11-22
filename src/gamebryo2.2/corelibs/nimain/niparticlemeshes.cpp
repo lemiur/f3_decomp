@@ -126,7 +126,7 @@ void Caller::AppendString(StrArr2* pkStrings)
 
 struct FUN_00a808f0_shell
 {
-    void UpdateSelectiveUpdateFlags(bool*, bool, bool*);
+    void NiGeometry_SetSelectiveUpdateFlags(bool*, bool, bool*);
 };
 struct NiNode
 {
@@ -180,7 +180,7 @@ struct FUN_00a99000_shell
 // pdb: NiParticleMeshes::SetSelectiveUpdateFlags | NiParticleMeshes.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun) + skyrim(objopen_prop), high
 void FUN_00a99000_shell::NiParticleMeshes_SetSelectiveUpdateFlags(bool& bSelectiveUpdate, bool bSelectiveUpdateTransforms, bool& bRigid)
 {
-    ((FUN_00a808f0_shell*)this)->UpdateSelectiveUpdateFlags(&bSelectiveUpdate, true, &bRigid);
+    ((FUN_00a808f0_shell*)this)->NiGeometry_SetSelectiveUpdateFlags(&bSelectiveUpdate, true, &bRigid);
     NiNode* pkParticlesContainer = *(NiNode**)((char*)*(void**)((char*)this + 0xb8) + 0x70);
     pkParticlesContainer->SetSelectiveUpdateFlags(&bSelectiveUpdate, true, &bRigid);
     bRigid = false;
@@ -633,7 +633,7 @@ struct A98F60Renderer
     A98F60Camera* m_pkAccumulationCamera;
     bool m_bValueAt0C;
 
-    void UpdateParticleMeshes();
+    void NiParticleMeshesData_UpdateParticles();
 };
 
 struct A98F60AVObject
@@ -695,7 +695,7 @@ void FUN_00a98f60::UpdateWorldData(NiUpdateData& kData)
     A98F60AVObject::UpdateWorldData(kData);
     A98F60Renderer* pkRenderer = m_pOwnerShader;
     A98F60Camera* pkCamera = pkRenderer->m_pkAccumulationCamera;
-    pkRenderer->UpdateParticleMeshes();
+    pkRenderer->NiParticleMeshesData_UpdateParticles();
     pkCamera->m_kWorldRotate = m_kWorldRotate;
     pkCamera->m_kWorldTranslate = m_kWorldTranslate;
     pkCamera->m_fWorldScale = A98F60Abs(m_fWorldScale);

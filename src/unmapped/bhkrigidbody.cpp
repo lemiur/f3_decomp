@@ -976,7 +976,8 @@ extern char DAT_012043f8;
 // @f3 0x00900ce0 (community match, verified in this file)
 // pdb: bhkRigidBody::SetFixed | bhkRigidBody.obj | fnv360_0721_retail, call_seq, high
 // pdb params: apObject, abFix, abAddRemainingConstraints
-void __cdecl ApplyHavokOperation(HavokObject* object, int operation, void* context)
+// pdb: bhkRigidBody::SetFixed | bhkRigidBody.obj | fnv360_0721_retail, call_seq, high (was: ApplyHavokOperation)
+void __cdecl bhkRigidBody_SetFixed(HavokObject* object, int operation, void* context)
 {
     HavokLookup* __cdecl FUN_00424fe0(HavokObject* object);
     if (object != 0)
@@ -994,7 +995,7 @@ void __cdecl ApplyHavokOperation(HavokObject* object, int operation, void* conte
         if (node)
         {
             for (unsigned int index = 0; index < node->childCount; ++index)
-                ApplyHavokOperation(node->children[index], operation, context);
+                bhkRigidBody_SetFixed(node->children[index], operation, context);
         }
     }
 }

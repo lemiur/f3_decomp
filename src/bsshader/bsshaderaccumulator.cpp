@@ -1092,7 +1092,7 @@ extern int DAT_011a9608;
 void __cdecl _FUN_00b98280(int, int, int, int, int, int, int);
 struct AccumView
 {
-    void* CreateRenderPassesNode();
+    void* BSShaderAccumulator_CreateRenderPassTree();
     void FUN_00b63a50();
     void UpdatePasses(bool);
     void FUN_00b64e30();
@@ -1124,7 +1124,7 @@ void __cdecl FUN_00b65ae0(AccumWIP* pAccum)
         pAccum->SetShaderPassEnabled(10, false);
         if (DAT_011f9fc1 && *(int*)(raw + 0x19c) != 7)
         {
-            DAT_011fa008 = ((AccumView*)pAccum)->CreateRenderPassesNode();
+            DAT_011fa008 = ((AccumView*)pAccum)->BSShaderAccumulator_CreateRenderPassTree();
             DAT_011f9fc1 = false;
         }
         if (*(bool*)(raw + 0x164))
@@ -1207,7 +1207,8 @@ struct NiFixedString
 // Creates a NiNode named "RenderPasses", initializes a NiUpdateData with zeroed flags, updates the node, and returns it.
 // @fnv 0x00b63420
 // pdb: BSShaderAccumulator::CreateRenderPassTree | BSShaderAccumulator.obj | fnv360_0822_retail, ustr, high
-NiNode* __cdecl CreateRenderPassesNode()
+// pdb: BSShaderAccumulator::CreateRenderPassTree | BSShaderAccumulator.obj | fnv360_0822_retail, ustr, high (was: CreateRenderPassesNode)
+NiNode* __cdecl BSShaderAccumulator_CreateRenderPassTree()
 {
     NiUpdateData UpdateData;
     NiNode* pNode = new NiNode(0);
@@ -2660,7 +2661,7 @@ void __fastcall FUN_00b64e30(AccumWIP*);
 class AccumWIP2 : public AccumWIP
 {
   public:
-    void* CreateRenderPassesNode();
+    void* BSShaderAccumulator_CreateRenderPassTree();
     void FUN_00b63a50();
     void UpdatePasses(int);
 };
@@ -2722,7 +2723,7 @@ void __cdecl RenderAccumulationPasses(AccumWIP2* apAccumWIP)
 
     if (DAT_011f9fc1)
     {
-        DAT_011fa008 = apAccumWIP->CreateRenderPassesNode();
+        DAT_011fa008 = apAccumWIP->BSShaderAccumulator_CreateRenderPassTree();
         DAT_011f9fc1 = false;
     }
 

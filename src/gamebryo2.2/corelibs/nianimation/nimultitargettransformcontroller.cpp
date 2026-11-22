@@ -574,7 +574,7 @@ struct NiUpdateData
 typedef char _sizecheck_NiUpdateData[sizeof(NiUpdateData) == 12 ? 1 : -1];
 struct FUN_00a2fbe0_shell : public NiMultiTargetTransformController
 {
-    void UpdateTargets(NiUpdateData*);
+    void NiMultiTargetTransformController_Update(NiUpdateData*);
 };
 
 extern "C" double __cdecl fabs(double);
@@ -679,7 +679,8 @@ extern float DAT_01096b8c;
 // @fnv 0x00a2fbe0
 // pdb: NiMultiTargetTransformController::Update | NiMultiTargetTransformController.obj | fnv360_0822_retail, caller_sim, high
 // pdb params: UpdateData
-void FUN_00a2fbe0_shell::UpdateTargets(NiUpdateData* UpdateData)
+// pdb: NiMultiTargetTransformController::Update | NiMultiTargetTransformController.obj | fnv360_0822_retail, caller_sim, high (was: UpdateTargets)
+void FUN_00a2fbe0_shell::NiMultiTargetTransformController_Update(NiUpdateData* UpdateData)
 {
     if (((CtlFlags_a2fbe0*)this)->GetActive())
     {
@@ -871,11 +872,12 @@ struct NiMultiTargetTimeShell : public NiMultiTargetTransformController
         return *reinterpret_cast<float*>(m_ucUnknownByte + 0x14);
     }
     void ResetIfFlagClear();
-    void UpdateTimeRange();
+    void NiMultiTargetTransformController_ResetTimeExtrema();
 };
 // @fnv 0x00a2fde0
 // pdb: NiMultiTargetTransformController::ResetTimeExtrema | NiMultiTargetTransformController.obj | fnv360_0822_retail, objrun, high
-void NiMultiTargetTimeShell::UpdateTimeRange()
+// pdb: NiMultiTargetTransformController::ResetTimeExtrema | NiMultiTargetTransformController.obj | fnv360_0822_retail, objrun, high (was: UpdateTimeRange)
+void NiMultiTargetTimeShell::NiMultiTargetTransformController_ResetTimeExtrema()
 {
     if (!GetManagerControlled())
     {
@@ -1148,7 +1150,7 @@ struct BA2FD60Item
 class BA2FD60Controller
 {
   public:
-    unsigned short FindItemIndexByName(const char* pcName) const;
+    unsigned short NiMultiTargetTransformController_GetInterpolatorIndex(const char* pcName) const;
 
     int unk00;
     int unk04;
@@ -1174,7 +1176,8 @@ class BA2FD60Controller
 // @fnv 0x00a2fd60
 // pdb: NiMultiTargetTransformController::GetInterpolatorIndex | NiMultiTargetTransformController.obj | fnv360_0822_retail, objrun, high
 // pdb params: pcID
-unsigned short BA2FD60Controller::FindItemIndexByName(const char* pcName) const
+// pdb: NiMultiTargetTransformController::GetInterpolatorIndex | NiMultiTargetTransformController.obj | fnv360_0822_retail, objrun, high (was: FindItemIndexByName)
+unsigned short BA2FD60Controller::NiMultiTargetTransformController_GetInterpolatorIndex(const char* pcName) const
 {
     if (!pcName)
         return INVALID_INDEX;

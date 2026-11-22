@@ -44,7 +44,8 @@ struct Program
 extern Program* DAT_0126fa10;
 // @fnv 0x00e92ec0
 // pdb: NiD3DShaderProgramFactory::Shutdown | NiD3DShaderProgramFactory.obj | fnv360_0822_retail, call_seq, high
-void DestroyProgram()
+// pdb: NiD3DShaderProgramFactory::Shutdown | NiD3DShaderProgramFactory.obj | fnv360_0822_retail, call_seq, high (was: DestroyProgram)
+void NiD3DShaderProgramFactory_Shutdown()
 {
     if (DAT_0126fa10)
         DAT_0126fa10->Destroy(1);

@@ -360,7 +360,7 @@ struct blob16
 };
 struct FUN_00a808f0_shell : public NiGeometry
 {
-    void UpdateSelectiveUpdateFlags(bool*, bool, bool*);
+    void NiGeometry_SetSelectiveUpdateFlags(bool*, bool, bool*);
 };
 
 struct FUN_00a5a450_helper
@@ -372,7 +372,8 @@ struct FUN_00a5a450_helper
 // @fnv 0x00a808f0
 // pdb: NiGeometry::SetSelectiveUpdateFlags | NiGeometry.obj | fnv360_0822_debug, vtable, high
 // pdb params: bSelectiveUpdate, bSelectiveUpdateTransforms, bRigid
-void FUN_00a808f0_shell::UpdateSelectiveUpdateFlags(bool* bSelectiveUpdate, bool bSelectiveUpdateTransforms,
+// pdb: NiGeometry::SetSelectiveUpdateFlags | NiGeometry.obj | fnv360_0822_debug, vtable, high (was: UpdateSelectiveUpdateFlags)
+void FUN_00a808f0_shell::NiGeometry_SetSelectiveUpdateFlags(bool* bSelectiveUpdate, bool bSelectiveUpdateTransforms,
                                                     bool* bRigid)
 {
     ((FUN_00a5a450_helper*)this)->NiAVObject_SetSelectiveUpdateFlags(bSelectiveUpdate, bSelectiveUpdateTransforms, bRigid);
@@ -575,7 +576,7 @@ struct SkinView
 };
 struct ConsStub
 {
-    void SetDataConsistency(int);
+    void SetConsistency(int);
 };
 struct NiRenderer
 {
@@ -616,7 +617,7 @@ void FUN_00a80930_shell::NiGeometry_CalculateConsistency(bool bTool)
                 eConsistency = 0;
         }
     }
-    ((ConsStub*)m_spModelData.m_pObject)->SetDataConsistency(eConsistency);
+    ((ConsStub*)m_spModelData.m_pObject)->SetConsistency(eConsistency);
 }
 }  // namespace fnv_00a80930
 

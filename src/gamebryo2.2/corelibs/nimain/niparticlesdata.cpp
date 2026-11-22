@@ -8,7 +8,8 @@ extern MemoryManager g_memoryManager;
 // @fnv 0x00a968a0
 // pdb: NiParticlesData::ReplaceRotations | NiParticlesData.obj | fnv360_0822_retail, call_seq, high
 // pdb params: pkRotations
-void NiParticlesData::SetRotations(NiQuaternion* pkRotations)
+// pdb: NiParticlesData::ReplaceRotations | NiParticlesData.obj | fnv360_0822_retail, call_seq, high (was: SetRotations)
+void NiParticlesData::ReplaceRotations(NiQuaternion* pkRotations)
 {
     g_memoryManager.Deallocate(m_pkRotations);
     m_pkRotations = pkRotations;
@@ -58,7 +59,7 @@ void __fastcall FUN_00a67c00(void* object);
 
 struct NiGeometryData_SetConsistency_View
 {
-    void SetDataConsistency(int consistency);
+    void SetConsistency(int consistency);
 };
 
 struct BSFadeNode
@@ -101,7 +102,7 @@ void* FUN_00a96600()
         p->field_54[5] = 0;
         p->field_6c = 0;
         p->field_40 = 0;
-        p->SetDataConsistency(0);
+        p->SetConsistency(0);
         p->field_3c = 0;
         return p;
     }

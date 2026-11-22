@@ -80,7 +80,8 @@ extern int vftable_NiColorData;
 // Allocates a 0x18-byte object, runs its constructor, installs the NiColorData vtable and zeroes three int fields at offsets 8, 0xc and 0x10.
 // @fnv 0x00a3d150
 // pdb: NiColorData::CreateObject | NiColorData.obj | fnv360_0822_retail, objrun, high
-void* CreateNiColorData()
+// pdb: NiColorData::CreateObject | NiColorData.obj | fnv360_0822_retail, objrun, high (was: CreateNiColorData)
+void* NiColorData_CreateObject()
 {
     char* p = (char*)A51BF0Base::operator new(0x18);
     if (p)

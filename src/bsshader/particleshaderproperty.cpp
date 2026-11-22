@@ -401,14 +401,15 @@ struct ShaderArrayOwner
     int unk38;
     ShaderArrayHolder* m_pHolder;
     void Prep(int);
-    ShaderArrayHolder* EnsureShaderArrayEntries(int, int, int, int, int, int);
+    ShaderArrayHolder* ParticleShaderProperty_GetRenderPasses(int, int, int, int, int, int);
 };
 
 // Calls Prep(-1); if the holder's count is zero, inserts two entries (0x41 and 0x241) and sets each new entry's m_06 to 0xe and 1, then returns the holder.
 // @fnv 0x00ba7420
 // pdb: ParticleShaderProperty::GetRenderPasses | ParticleShaderProperty.obj | fnv360_0822_retail, objrun, high
 // pdb params: apGeom, aiEnabledPasses, asCount, auiRenderMode, apAccumulator, abUpdateList
-ShaderArrayHolder* ShaderArrayOwner::EnsureShaderArrayEntries(int p1, int, int, int, int, int)
+// pdb: ParticleShaderProperty::GetRenderPasses | ParticleShaderProperty.obj | fnv360_0822_retail, objrun, high (was: EnsureShaderArrayEntries)
+ShaderArrayHolder* ShaderArrayOwner::ParticleShaderProperty_GetRenderPasses(int p1, int, int, int, int, int)
 {
     Prep(-1);
     ShaderArrayHolder* h = m_pHolder;
@@ -698,7 +699,7 @@ struct PickShape
     PickMesh* m_pMesh;
     bool FUN_00a67360(int);
     void NiGeometryData_GetVerticesIterator(void*);
-    void GetBounds(void*);
+    void NiGeometryData_GetNormalsIterator(void*);
     void NiGeometryData_UnlockPackedVertexData();
 };
 
@@ -836,7 +837,7 @@ void EmitterPick::PickParticle(int aiIndex)
                 if (pShape->FUN_00a67360(1) != 0)
                 {
                     pShape->NiGeometryData_GetVerticesIterator(&scratch.work.view);
-                    pShape->GetBounds(&scratch.other.view);
+                    pShape->NiGeometryData_GetNormalsIterator(&scratch.other.view);
                     PickVector* __restrict pVecA =
                         (PickVector*)((char*)scratch.work.view.base + scratch.work.view.stride * uiRemainder);
                     a = *pVecA;

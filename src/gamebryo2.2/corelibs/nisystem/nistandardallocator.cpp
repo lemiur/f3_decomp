@@ -37,7 +37,8 @@ struct NiStandardAllocator
 
 // @fnv 0x00aa3430
 // pdb: NiStandardAllocator::Initialize | NiStandardAllocator.obj | fnv360_0822_retail, uconst, high
-void __cdecl AllocateStandardAllocator()
+// pdb: NiStandardAllocator::Initialize | NiStandardAllocator.obj | fnv360_0822_retail, uconst, high (was: AllocateStandardAllocator)
+void __cdecl NiStandardAllocator_Initialize()
 {
     void* p = g_memoryManager.Allocate(0x10080);
     if (p)
@@ -264,7 +265,8 @@ struct AA3460Pools
 // Deletes the AA3460Pools object at DAT_011f622c and clears the pointer.
 // @fnv 0x00aa3460
 // pdb: NiStandardAllocator::Shutdown | NiStandardAllocator.obj | fnv360_0822_retail, objrun_open, high
-void __cdecl DestroySmallAllocPools()
+// pdb: NiStandardAllocator::Shutdown | NiStandardAllocator.obj | fnv360_0822_retail, objrun_open, high (was: DestroySmallAllocPools)
+void __cdecl NiStandardAllocator_Shutdown()
 {
     delete reinterpret_cast<AA3460Pools*>(DAT_011f622c);
     DAT_011f622c = 0;

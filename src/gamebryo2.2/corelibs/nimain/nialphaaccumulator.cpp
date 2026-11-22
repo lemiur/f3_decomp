@@ -245,7 +245,8 @@ struct Derived_a43370 : Base1_a43370
 // Allocates and default-constructs a Derived_a43370 object via its operator new and returns the pointer.
 // @fnv 0x00a43370
 // pdb: BSTreadTransfInterpolator::CreateObject | BSTreadTransfInterpolator.obj | fnv360_0822_retail, objrun, high
-Derived_a43370* __cdecl CreateDerivedA43370()
+// pdb: BSTreadTransfInterpolator::CreateObject | BSTreadTransfInterpolator.obj | fnv360_0822_retail, objrun, high (was: CreateDerivedA43370)
+Derived_a43370* __cdecl BSTreadTransfInterpolator_CreateObject()
 {
     return new Derived_a43370();
 }

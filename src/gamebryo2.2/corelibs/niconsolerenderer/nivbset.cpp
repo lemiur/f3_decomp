@@ -11,7 +11,7 @@ struct NiVBBlock
     unsigned int m_uiValue20;
     unsigned int m_uiValue24;
     unsigned int m_uiValue28;
-    void FreeVBBlock(unsigned int);
+    void NiVBBlock_FreeChip(unsigned int);
 };
 
 void __stdcall InsertSortedNode(NiVBBlock*);
@@ -46,7 +46,7 @@ void NiVBSet::FUN_00e94490(unsigned int uiArrayIndex, unsigned int uiChipIndex)
     if (!pkVBBlock)
         return;
     uiPreFreeSpace = pkVBBlock->m_uiValue24;
-    pkVBBlock->FreeVBBlock(uiChipIndex);
+    pkVBBlock->NiVBBlock_FreeChip(uiChipIndex);
     if (uiPreFreeSpace == pkVBBlock->m_uiValue24)
         return;
     RemoveNode(pkVBBlock);
@@ -263,7 +263,8 @@ extern VBLayout* g_pkFreeList;
 // @fnv 0x00e98500
 // pdb: NiVBBlock::FreeChip | NiVBBlock.obj | fnv360_0822_retail, call_seq, high
 // pdb params: uiChipIndex
-unsigned int __fastcall FreeVBBlock(NiVBBlock* object, void*, unsigned int index)
+// pdb: NiVBBlock::FreeChip | NiVBBlock.obj | fnv360_0822_retail, call_seq, high (was: FreeVBBlock)
+unsigned int __fastcall NiVBBlock_FreeChip(NiVBBlock* object, void*, unsigned int index)
 {
     VBLayout* pLayout = reinterpret_cast<VBLayout*>(object);
     unsigned int result = 0;

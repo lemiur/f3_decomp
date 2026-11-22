@@ -1238,7 +1238,7 @@ class NiTimeController
 class BSShaderManager
 {
   public:
-    static void BuildTexturePath(char*, const char*, const char*, bool);
+    static void GetModifiedTextureFilename(char*, const char*, const char*, bool);
 };
 extern "C" const char kMeshesFolder[];
 class Animation

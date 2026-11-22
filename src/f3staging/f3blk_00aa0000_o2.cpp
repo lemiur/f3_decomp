@@ -11351,7 +11351,7 @@ namespace f3m_00aa7c50 {
 namespace FrustumPlanes {
 struct Frustum { int unk00; };
 struct Transform { int unk00; };
-class Planes { public: void SetFromFrustum(const Frustum* frustum, const Transform* transform); };
+class Planes { public: void NiFrustumPlanes_Set(const Frustum* frustum, const Transform* transform); };
 }
 namespace f3m_00aa7c50 {
 struct Triple_a7c50 { int a, b, c; };
@@ -11422,7 +11422,7 @@ void Owner_00aa7c50::FUN_00aa7c50(Owner_00aa7c50* other)
 {
     if (other)
     {
-        reinterpret_cast<FrustumPlanes::Planes*>(&unk30)->SetFromFrustum(
+        reinterpret_cast<FrustumPlanes::Planes*>(&unk30)->NiFrustumPlanes_Set(
             reinterpret_cast<FrustumPlanes::Frustum*>(&other->unkDC),
             reinterpret_cast<FrustumPlanes::Transform*>(&other->unk68));
         *(Triple_a7c50*)&unk94 = *(Triple_a7c50*)&other->unk8C;
@@ -11444,13 +11444,13 @@ public:
     int unk00, unk04, unk08, unk0C, unk10, unk14, unk18, unk1C, unk20, unk24, unk28, unk2C, unk30, unk34, unk38, unk3C;
     int unk40, unk44, unk48, unk4C;
     unsigned short cnt50;
-    float GetEntryFloat(unsigned short idx);
+    float BSStripPSysData_GetPointLastUpdateTime(unsigned short idx);
 };
 
 class TrailSystem
 {
 public:
-    void AddTrailPoint(unsigned short idx, float v);
+    void BSStripPSysData_UpdatePoints(unsigned short idx, float v);
 };
 
 struct TrailOwnerAB5
@@ -11467,9 +11467,9 @@ void TrailOwnerAB5::BSPSysStripUpdateModifier_Update(float a, FUN_00c25de0_shell
     for (unsigned short i = 0; i < n; i++)
     {
         double ad = a;
-        float d = (float)(ad - obj->GetEntryFloat(i));
+        float d = (float)(ad - obj->BSStripPSysData_GetPointLastUpdateTime(i));
         if (d > this->unk18)
-            ((TrailSystem*)obj)->AddTrailPoint(i, a);
+            ((TrailSystem*)obj)->BSStripPSysData_UpdatePoints(i, a);
     }
 }
 }   // namespace f3m_00ab5fe0
@@ -33491,7 +33491,8 @@ struct Entry {
     static void operator delete[](void* p) { DAT_01090a78.FUN_0086ba60(p); }
 };
 
-__forceinline void CopyEntries(Entry* dst, const Entry* src, unsigned int n)
+// pdb: BSSegmentedTriShape::CopyMembers | BSSegmentedTriShape.obj | fnv360_0822_retail, objrun_prop, high (was: CopyEntries)
+__forceinline void BSSegmentedTriShape_CopyMembers(Entry* dst, const Entry* src, unsigned int n)
 {
     memcpy(dst, src, n * sizeof(Entry));
 }
@@ -33537,7 +33538,7 @@ void Owner::FUN_00aa3000()
     TlsGuard guard(6);
     unsigned int n = source->count->count * 3;
     Entry* entries = new Entry[n];
-    CopyEntries(entries, ((Source* volatile*)&source)[0]->data, n);
+    BSSegmentedTriShape_CopyMembers(entries, ((Source* volatile*)&source)[0]->data, n);
     Node* newHead = 0;
     unsigned int newCount = 0;
     while (head)

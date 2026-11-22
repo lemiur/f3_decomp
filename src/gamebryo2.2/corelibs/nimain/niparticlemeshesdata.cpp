@@ -225,13 +225,14 @@ struct Holder
 {
     char _pad[0x70];
     MeshNode* m_pMeshNode;
-    bool IsMeshNodeEqual(void* pkObject);
+    bool NiParticleMeshesData_IsEqual(void* pkObject);
 };
 // Checks the base hook against pkObject, then compares this holder's mesh node with the other holder's mesh node via IsEqual.
 // @fnv 0x00a98ad0
 // pdb: NiParticleMeshesData::IsEqual | NiParticleMeshesData.obj | fnv360_0822_retail, caller_sim, high
 // pdb params: pkObject
-bool Holder::IsMeshNodeEqual(void* pkObject)
+// pdb: NiParticleMeshesData::IsEqual | NiParticleMeshesData.obj | fnv360_0822_retail, caller_sim, high (was: IsMeshNodeEqual)
+bool Holder::NiParticleMeshesData_IsEqual(void* pkObject)
 {
     Holder* pkPart = (Holder*)pkObject;
     if (!((HookBase*)this)->NiParticlesData_IsEqual(pkObject))
@@ -572,13 +573,14 @@ struct A98BF0ParticleMeshesData : A98BF0ParticlesData
     int unk6C;
     A98BF0Node* m_pMeshNode;
 
-    void RemoveParticleMesh(unsigned short usParticle);
+    void NiParticleMeshesData_RemoveParticle(unsigned short usParticle);
 };
 
 // @fnv 0x00a98bf0
 // pdb: NiParticleMeshesData::RemoveParticle | NiParticleMeshesData.obj | fnv360_0822_retail, objrun, high
 // pdb params: usParticle
-void A98BF0ParticleMeshesData::RemoveParticleMesh(unsigned short usParticle)
+// pdb: NiParticleMeshesData::RemoveParticle | NiParticleMeshesData.obj | fnv360_0822_retail, objrun, high (was: RemoveParticleMesh)
+void A98BF0ParticleMeshesData::NiParticleMeshesData_RemoveParticle(unsigned short usParticle)
 {
     unsigned short usFinalIndex = m_usActiveVertices - 1;
     if (usParticle == usFinalIndex)
@@ -719,12 +721,13 @@ struct FUN_00a98c90_shell
     int unk6C;
     MeshNode_a98* m_pkParticleMeshes;
 
-    void UpdateParticleMeshes();
+    void NiParticleMeshesData_UpdateParticles();
 };
 
 // @fnv 0x00a98c90
 // pdb: NiParticleMeshesData::UpdateParticles | NiParticleMeshesData.obj | fnv360_0822_retail, call_seq, high
-void FUN_00a98c90_shell::UpdateParticleMeshes()
+// pdb: NiParticleMeshesData::UpdateParticles | NiParticleMeshesData.obj | fnv360_0822_retail, call_seq, high (was: UpdateParticleMeshes)
+void FUN_00a98c90_shell::NiParticleMeshesData_UpdateParticles()
 {
     for (unsigned int i = 0; i < m_usActiveVertices; i++)
     {

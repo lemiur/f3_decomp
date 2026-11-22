@@ -12323,7 +12323,7 @@ struct Loader {
     char pad[0x250];
     Stream* stream;
     void Read(unsigned int* p);
-    void WriteObjectLink(unsigned int* p);
+    void NiStream_SaveFixedString(unsigned int* p);
 };
 struct Obj {
     int unk0, unk4;

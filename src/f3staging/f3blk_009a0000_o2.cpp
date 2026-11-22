@@ -360,7 +360,7 @@ public:
     virtual void unk10();
     virtual void unk14();
     virtual void unk18();
-    virtual void ProcessItem(void* item, bool flag);
+    virtual void ImageSpaceEffectInterface_Render(void* item, bool flag);
     void hkDynamicClassNameRegistry_merge(ItemSource* src);
 };
 
@@ -373,7 +373,7 @@ void FUN_009b0100_cls::hkDynamicClassNameRegistry_merge(ItemSource* src)
     arr.capAndFlags = 0x80000000;
     src->GetItems(&arr);
     for (int i = 0; i < arr.size; i++)
-        ProcessItem(arr.data[i], false);
+        ImageSpaceEffectInterface_Render(arr.data[i], false);
     if (arr.capAndFlags & 0x80000000)
         return;
     unsigned int n = arr.capAndFlags & 0x3fffffff;

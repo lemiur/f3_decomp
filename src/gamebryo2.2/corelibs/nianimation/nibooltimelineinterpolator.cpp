@@ -20,7 +20,8 @@ struct BSFadeNode
 // Allocates a 0x20-byte NiBoolInterpolator, initialises its vtable, clears the field at offset 0x18 and the byte at 0x1c, and returns it (or null).
 // @fnv 0x00a52fe0
 // pdb: NiBoolTimelineInterpolator::CreateObject | NiBoolTimelineInterpolator.obj | fnv360_0822_retail, objrun, high
-NiBoolInterpolator* __cdecl CreateBoolInterpolator()
+// pdb: NiBoolTimelineInterpolator::CreateObject | NiBoolTimelineInterpolator.obj | fnv360_0822_retail, objrun, high (was: CreateBoolInterpolator)
+NiBoolInterpolator* __cdecl NiBoolTimelineInterpolator_CreateObject()
 {
     NiBoolInterpolator* p = static_cast<NiBoolInterpolator*>(BSFadeNode::operator new(0x20));
     if (p)
@@ -149,13 +150,14 @@ struct Timeline
     BoolData* data;
     unsigned int index, previousIndex;
     unsigned char previousValue;
-    bool EvaluateBoolAtTime(float, void*, bool&);
+    bool NiBoolTimelineInterpolator_Update(float, void*, bool&);
 };
 // Evaluates the boolean key timeline at time, updating index, cached and previousValue, and returns whether a value is available via out.
 // @fnv 0x00a52d80
 // pdb: NiBoolTimelineInterpolator::Update | NiBoolTimelineInterpolator.obj | fnv360_0822_retail, objrun, high
 // pdb params: fTime, pkInterpTarget, bValue
-bool Timeline::EvaluateBoolAtTime(float time, void*, bool& out)
+// pdb: NiBoolTimelineInterpolator::Update | NiBoolTimelineInterpolator.obj | fnv360_0822_retail, objrun, high (was: EvaluateBoolAtTime)
+bool Timeline::NiBoolTimelineInterpolator_Update(float time, void*, bool& out)
 {
     if (lastTime == time)
     {

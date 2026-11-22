@@ -57,7 +57,8 @@ struct BSLookIKNote
 
 // @fnv 0x00a43fb0
 // pdb: BSLookIKNote::CreateObject | BSLookIKNote.obj | fnv360_0822_retail, objrun, high
-BSLookIKNote* __cdecl CreateLookIKNote()
+// pdb: BSLookIKNote::CreateObject | BSLookIKNote.obj | fnv360_0822_retail, objrun, high (was: CreateLookIKNote)
+BSLookIKNote* __cdecl BSLookIKNote_CreateObject()
 {
     BSLookIKNote* pNote = static_cast<BSLookIKNote*>(BSLookIKNote::operator new(0x18));
     if (pNote)
@@ -288,7 +289,7 @@ struct S_00a44130_Stream
 
 struct S_00a44130_Base
 {
-    void ReadBinaryFields(S_00a44130_Stream& kStream);
+    void BSAnimNote_LoadBinary(S_00a44130_Stream& kStream);
 };
 
 struct S_00a44130_Note : S_00a44130_Base
@@ -307,7 +308,7 @@ struct S_00a44130_Note : S_00a44130_Base
 // pdb: BSLookIKNote::LoadBinary | BSLookIKNote.obj | fnv360_0822_retail, caller_sim + bridge(vtable|objrun) + skyrim(objrun_prop), high
 void S_00a44130_Note::BSLookIKNote_LoadBinary(S_00a44130_Stream& kStream)
 {
-    S_00a44130_Base::ReadBinaryFields(kStream);
+    S_00a44130_Base::BSAnimNote_LoadBinary(kStream);
     S_00a44130_StreamSaveBinary(*kStream.m_pBackingStream, m_10);
     S_00a44130_StreamSaveBinary(*kStream.m_pBackingStream, m_14);
 }
@@ -602,7 +603,7 @@ class TextKeyHandlerBase
 class LookIKKeyHandler : public TextKeyHandlerBase
 {
   public:
-    bool ParseLookIKKey(TimedTextEntry* pkKey);
+    bool BSLookIKNote_ParseTextKey(TimedTextEntry* pkKey);
 
     float m_fValue;
     int m_iMode;
@@ -612,7 +613,8 @@ class LookIKKeyHandler : public TextKeyHandlerBase
 // @fnv 0x00a44050
 // pdb: BSLookIKNote::ParseTextKey | BSLookIKNote.obj | fnv360_0822_retail, ustr, high
 // pdb params: apTextKey
-bool LookIKKeyHandler::ParseLookIKKey(TimedTextEntry* pkKey)
+// pdb: BSLookIKNote::ParseTextKey | BSLookIKNote.obj | fnv360_0822_retail, ustr, high (was: ParseLookIKKey)
+bool LookIKKeyHandler::BSLookIKNote_ParseTextKey(TimedTextEntry* pkKey)
 {
     bool bResult = ParseKey(pkKey);
     const char* pcText = pkKey->m_kText;

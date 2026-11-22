@@ -52,7 +52,8 @@ extern ImageSpaceManager* DAT_011f91ac;
 // Creates a NiScreenElementsData and NiScreenElements, configures its data, names it "Imagespace Effect Geometry", and updates it with zero time.
 // @fnv 0x00b8c170
 // pdb: ImageSpaceManager::InitGeometry | ImageSpaceManager.obj | fnv360_0822_retail, ustr, high
-void ImageSpaceManager::CreateMenuBackgroundGeometry()
+// pdb: ImageSpaceManager::InitGeometry | ImageSpaceManager.obj | fnv360_0822_retail, ustr, high (was: CreateMenuBackgroundGeometry)
+void ImageSpaceManager::InitGeometry()
 {
     m_pMenuBackgroundScreenElementsData = new NiScreenElementsData(false, false, 1, 1, 1, 4, 1, 2, 1);
     m_pMenuBackgroundScreenGeometry = new NiScreenElements(m_pMenuBackgroundScreenElementsData);
@@ -1609,13 +1610,14 @@ struct ImageSpaceManager_b8b
 {
     int unk;
     NiTPrimitiveArray_ImageSpaceEffect___ m_kEffects;
-    void ShutdownAllEffects();
+    void ImageSpaceManager_ShutdownEffects();
 };
 
 // Shuts down and destroys each effect in m_kEffects, clears the array entries, and resets its size counters to zero.
 // @fnv 0x00b8b2e0
 // pdb: ImageSpaceManager::ShutdownEffects | ImageSpaceManager.obj | fnv360_0822_retail, call_seq, high
-void ImageSpaceManager_b8b::ShutdownAllEffects()
+// pdb: ImageSpaceManager::ShutdownEffects | ImageSpaceManager.obj | fnv360_0822_retail, call_seq, high (was: ShutdownAllEffects)
+void ImageSpaceManager_b8b::ImageSpaceManager_ShutdownEffects()
 {
     for (int i = 0; i < ImageSpaceManager__ImageSpaceEffectEnum_EFFECT_COUNT; i++)
     {

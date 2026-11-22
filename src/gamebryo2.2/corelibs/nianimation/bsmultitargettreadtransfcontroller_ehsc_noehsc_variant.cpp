@@ -47,7 +47,7 @@ struct This_00a35f30
 };
 struct Holder_00a35f30
 {
-    unsigned short FindLinkIndex(const Arg_00a35f30& arName);
+    unsigned short BSMultiTargetTreadTransfController_GetInterpolatorIndexFx(const Arg_00a35f30& arName);
 };
 struct FUN_00a35f70_struct : BSMultiTargetTreadTransfController
 {

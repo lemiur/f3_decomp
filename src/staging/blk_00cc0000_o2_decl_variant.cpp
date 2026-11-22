@@ -6932,7 +6932,7 @@ struct Loader
     char pad[0x250];
     Stream* stream;
     void Read(unsigned int* p);
-    void WriteObjectLink(unsigned int* p);
+    void NiStream_SaveFixedString(unsigned int* p);
 };
 static inline void ReadU(Loader* l, void* p)
 {

@@ -41,7 +41,8 @@ void __fastcall ConfigurePassRenderStates(char* pThis);
 // Ensures the NiD3DPass pointer at pThis+0x168 is set, then calls ConfigurePassRenderStates(pThis) and returns true.
 // @fnv 0x00bc1570
 // pdb: BoltShader::LoadStagesAndPasses | BoltShader.obj | fnv360_0822_retail, objrun, high
-bool __fastcall EnsurePassAndUpdate(char* pThis)
+// pdb: BoltShader::LoadStagesAndPasses | BoltShader.obj | fnv360_0822_retail, objrun, high (was: EnsurePassAndUpdate)
+bool __fastcall BoltShader_LoadStagesAndPasses(char* pThis)
 {
     NiPointer<NiD3DPass>& pass = *(NiPointer<NiD3DPass>*)(pThis + 0x168);
     if (!pass.m_pObject)

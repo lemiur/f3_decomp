@@ -83,7 +83,7 @@ struct FUN_00a38b60_tgt
 };
 struct FUN_00a59a90_tgt
 {
-    void ReadMatrixFromStream(NiStream*);
+    void NiMatrix3_SaveBinary(NiStream*);
 };
 struct NiObject;
 struct NiMemObject
@@ -188,7 +188,7 @@ struct Target395
     int unk18, unk1c, unk20, unk24, unk28, unk2c;
     Transform395 accumulated;
     Item395* items;
-    void UpdateInterpolator(float, void*);
+    void NiBlendAccumTransformInterpolator_CalculateSingleValue(float, void*);
 };
 
 extern const AccumRotationMatrix DAT_011a9448;

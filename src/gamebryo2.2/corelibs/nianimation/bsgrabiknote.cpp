@@ -316,16 +316,16 @@ struct S_00a44530_Class
     int unk10;
     int unk14;
     int unk18;
-    void __thiscall ReadBinaryFields(S_00a44530_Stream* stream);
+    void __thiscall BSAnimNote_LoadBinary(S_00a44530_Stream* stream);
     void __thiscall LoadFromStream(S_00a44530_Stream* stream);
 };
-// Calls ReadBinaryFields, then reads three 4-byte values from the stream into unk10, unk14 and unk18.
+// Calls BSAnimNote_LoadBinary, then reads three 4-byte values from the stream into unk10, unk14 and unk18.
 // @fnv 0x00a44530
 // pdb: BSGrabIKNote::LoadBinary | BSGrabIKNote.obj | fnv360_0822_retail, caller_sim, high
 // pdb params: arStream
 void __thiscall S_00a44530_Class::LoadFromStream(S_00a44530_Stream* stream)
 {
-    ReadBinaryFields(stream);
+    BSAnimNote_LoadBinary(stream);
     S_00a44530_Load(stream, &unk10);
     S_00a44530_Load(stream, &unk14);
     S_00a44530_Load(stream, &unk18);

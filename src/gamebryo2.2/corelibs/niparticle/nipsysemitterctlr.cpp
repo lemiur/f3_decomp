@@ -144,7 +144,7 @@ void* __cdecl FUN_00a537e0()
 
 struct NiTimeControllerStop
 {
-    void ResetTiming();
+    void NiTimeController_Stop();
 };
 struct NiPSysEmitterCtlr_Stop : NiTimeControllerStop
 {
@@ -156,7 +156,7 @@ struct NiPSysEmitterCtlr_Stop : NiTimeControllerStop
 void __fastcall NiPSysEmitterCtlr_Stop(NiPSysEmitterCtlr_Stop* self, int unused)
 {
     self->m48 = DAT_01015f5c;
-    self->ResetTiming();
+    self->NiTimeController_Stop();
 }
 
 extern int DAT_011ae754;
@@ -224,7 +224,8 @@ extern const unsigned short DAT_NiInterpController_INVALID_INDEX;
 // @fnv 0x00c1ba80
 // pdb: NiPSysEmitterCtlr::GetInterpolatorIndex | NiPSysEmitterCtlr.obj | fnv360_0822_retail, vtable, high
 // pdb params: pcID
-unsigned short __stdcall GetInterpControllerIndex(const char* pcControllerID)
+// pdb: NiPSysEmitterCtlr::GetInterpolatorIndex | NiPSysEmitterCtlr.obj | fnv360_0822_retail, vtable, high (was: GetInterpControllerIndex)
+unsigned short __stdcall NiPSysEmitterCtlr_GetInterpolatorIndex(const char* pcControllerID)
 {
     if (NiStricmp(pcControllerID, (const char*)DAT_011ae754) == 0)
         return 0;
@@ -248,7 +249,8 @@ struct S2
 // @fnv 0x00c1bad0
 // pdb: NiPSysEmitterCtlr::CreatePoseInterpolator | NiPSysEmitterCtlr.obj | fnv360_0822_retail, vtable, high
 // pdb params: usIndex
-NiInterpolator* __stdcall CreateInterpolatorByIndex(unsigned short usInterpolatorIndex)
+// pdb: NiPSysEmitterCtlr::CreatePoseInterpolator | NiPSysEmitterCtlr.obj | fnv360_0822_retail, vtable, high (was: CreateInterpolatorByIndex)
+NiInterpolator* __stdcall NiPSysEmitterCtlr_CreatePoseInterpolator(unsigned short usInterpolatorIndex)
 {
     if (usInterpolatorIndex == 0)
     {
@@ -295,13 +297,14 @@ float S_00c1bb90::GetValueForIndex(unsigned char a)
 
 struct ThisStruct : NiPSysEmitterCtlr
 {
-    NiInterpolator* GetInterpolatorByIndex(unsigned short usIndex);
+    NiInterpolator* NiPSysEmitterCtlr_GetInterpolator(unsigned short usIndex);
 };
 // Returns the NiInterpolator pointer stored at offset 0x34 for index 0, at 0x40 for index 1, otherwise null.
 // @fnv 0x00c1bc90
 // pdb: NiPSysEmitterCtlr::GetInterpolator | NiPSysEmitterCtlr.obj | fnv360_0822_retail, vtable, high
 // pdb params: usIndex
-NiInterpolator* ThisStruct::GetInterpolatorByIndex(unsigned short usIndex)
+// pdb: NiPSysEmitterCtlr::GetInterpolator | NiPSysEmitterCtlr.obj | fnv360_0822_retail, vtable, high (was: GetInterpolatorByIndex)
+NiInterpolator* ThisStruct::NiPSysEmitterCtlr_GetInterpolator(unsigned short usIndex)
 {
     if (usIndex == 0)
         return m_spInterpolator.m_pObject;
@@ -338,13 +341,14 @@ struct FakeInterp00c1be10
 };
 struct FUN_00c1be10_shell : NiPSysEmitterCtlr
 {
-    bool RegisterEmitterInterpolatorStreamables(NiStream& kStream);
+    bool NiPSysEmitterCtlr_RegisterStreamables(NiStream& kStream);
 };
 // Calls FUN_00a57780, then if the interpolator at offset 0x40 is non-null, registers its streamables with kStream; returns true.
 // @fnv 0x00c1be10
 // pdb: NiPSysEmitterCtlr::RegisterStreamables | NiPSysEmitterCtlr.obj | fnv360_0822_retail, call_seq, high
 // pdb params: kStream
-bool FUN_00c1be10_shell::RegisterEmitterInterpolatorStreamables(NiStream& kStream)
+// pdb: NiPSysEmitterCtlr::RegisterStreamables | NiPSysEmitterCtlr.obj | fnv360_0822_retail, call_seq, high (was: RegisterEmitterInterpolatorStreamables)
+bool FUN_00c1be10_shell::NiPSysEmitterCtlr_RegisterStreamables(NiStream& kStream)
 {
     if (!FUN_00a57780(kStream))
         return false;
@@ -522,7 +526,7 @@ struct RTTI_00c2b7d0
 extern RTTI_00c2b7d0 g_01202500_arg1;
 struct S_00c31530
 {
-    bool IsTargetParticleSystem(void* pkTarget);
+    bool NiPSysModifierCtlr_InterpTargetIsCorrectType(void* pkTarget);
 };
 struct S_00c1b0f0
 {
@@ -538,14 +542,14 @@ struct Holder00c2b7d0 : NiPSysEmitterCtlr
 {
     bool FUN_00c2b7d0(void* pkTarget);
 };
-// Checks the target via IsTargetParticleSystem, resolves a modifier from this+0x38, then walks its RTTI base chain looking for g_01202500_arg1.
+// Checks the target via NiPSysModifierCtlr_InterpTargetIsCorrectType, resolves a modifier from this+0x38, then walks its RTTI base chain looking for g_01202500_arg1.
 // @fnv 0x00c2b7d0
 // pdb: NiPSysEmitterCtlr::InterpTargetIsCorrectType | NiPSysEmitterCtlr.obj | fnv360_0822_retail, vtable, medium
 // pdb params: pkTarget
 bool Holder00c2b7d0::FUN_00c2b7d0(void* pkTarget)
 {
     void* pkModifier;
-    if (!((S_00c31530*)this)->IsTargetParticleSystem(pkTarget))
+    if (!((S_00c31530*)this)->NiPSysModifierCtlr_InterpTargetIsCorrectType(pkTarget))
         return false;
     pkModifier = ((S_00c1b0f0*)pkTarget)->FUN_00c1b0f0((void*)&m_kModifierName);
     if (!pkModifier)
@@ -782,7 +786,7 @@ struct C1BF90Result
     int unk10;
     C1BF90Entry* unk14;
     int unk18;
-    unsigned char FindHighestWeightIndex();
+    unsigned char NiBlendInterpolator_GetHighestWeightedIndex();
 };
 
 struct C1BF90Target
@@ -868,7 +872,7 @@ struct C1BF90Base
 struct C1BF90Owner : C1BF90Base
 {
     C1BF90Target* unk40;
-    int GetObjectValueByKey();
+    int NiPSysEmitterCtlr_GetEmitterActiveInterpolator();
 };
 
 extern unsigned char DAT_01096968;
@@ -879,7 +883,8 @@ extern GlobalObjectO2_00a7b610 DAT_011f407c;
 C1BF90Result* __cdecl FUN_00424d50(const void* objectType, C1BF90Target* target);
 
 // pdb: NiPSysEmitterCtlr::GetEmitterActiveInterpolator | NiPSysEmitterCtlr.obj | fnv360_0822_retail, caller_sim, high
-int C1BF90Owner::GetObjectValueByKey()
+// pdb: NiPSysEmitterCtlr::GetEmitterActiveInterpolator | NiPSysEmitterCtlr.obj | fnv360_0822_retail, caller_sim, high (was: GetObjectValueByKey)
+int C1BF90Owner::NiPSysEmitterCtlr_GetEmitterActiveInterpolator()
 {
     int iVf54Result = this->unk40->vf54();
     if (iVf54Result == 0)
@@ -888,7 +893,7 @@ int C1BF90Owner::GetObjectValueByKey()
         C1BF90Result* pResult = FUN_00424d50(&DAT_011f407c, target);
         if (pResult != 0)
         {
-            unsigned char key = pResult->FindHighestWeightIndex();
+            unsigned char key = pResult->NiBlendInterpolator_GetHighestWeightedIndex();
             if (key != DAT_01096968)
             {
                 if (pResult->unk0E == 1 && key == pResult->unk0F)
@@ -1276,14 +1281,15 @@ struct FUN_00a368f0_cls
     unsigned char fixedIndex;
     int uNewnk;
     Entry_a36* entries;
-    unsigned char FindHighestWeightIndex();
+    unsigned char NiBlendInterpolator_GetHighestWeightedIndex();
 };
 }
 
 // Returns fixedIndex if fixed is 1, otherwise scans entries for the highest weight and returns its index, or 0xff if none exceed zero.
 // @fnv 0x00a368f0
 // pdb: NiBlendInterpolator::GetHighestWeightedIndex | NiBlendInterpolator.obj | fnv360_0822_retail, call_gap, high
-unsigned char nsa::FUN_00a368f0_cls::FindHighestWeightIndex()
+// pdb: NiBlendInterpolator::GetHighestWeightedIndex | NiBlendInterpolator.obj | fnv360_0822_retail, call_gap, high (was: FindHighestWeightIndex)
+unsigned char nsa::FUN_00a368f0_cls::NiBlendInterpolator_GetHighestWeightedIndex()
 {
     if (fixed == 1)
         return fixedIndex;
@@ -1536,7 +1542,7 @@ struct C630Interp
 struct C630Blend
 {
     void UpdateNormalizedWeights();
-    unsigned char FindHighestWeightIndex();
+    unsigned char NiBlendInterpolator_GetHighestWeightedIndex();
     float GetValueForIndex(unsigned char);
 };
 struct C630Modifier
@@ -1587,7 +1593,7 @@ struct C630Ctlr
     void EmitParticlesInInterval(float a, float b, float c, float d, float e, float f);
 
     bool NiTimeController_DontDoUpdate(float);
-    C630Interp* GetObjectValueByKey();
+    C630Interp* NiPSysEmitterCtlr_GetEmitterActiveInterpolator();
     C630Interp* FUN_00639b60();
     bool Manager() const
     {
@@ -1618,18 +1624,18 @@ void C630Ctlr::NiPSysEmitterCtlr_Update(float* time)
     {
         C630Blend* blend = (C630Blend*)m_spEmitterActiveInterpolator.m_pObject;
         blend->UpdateNormalizedWeights();
-        unsigned char index = blend->FindHighestWeightIndex();
+        unsigned char index = blend->NiBlendInterpolator_GetHighestWeightedIndex();
         if (index != DAT_01096968)
             activeBlendTime = blend->GetValueForIndex(index);
     }
-    C630Interp* emitterActive = GetObjectValueByKey();
+    C630Interp* emitterActive = NiPSysEmitterCtlr_GetEmitterActiveInterpolator();
     bool activeTimeSet = activeBlendTime != DAT_010241b0;
     float birthRateTime = DAT_01015f5c;
     if (FUN_0043b300(&DAT_011f3e58, m_spInterpolator))
     {
         C630Blend* blend = (C630Blend*)m_spInterpolator.m_pObject;
         blend->UpdateNormalizedWeights();
-        unsigned char index = blend->FindHighestWeightIndex();
+        unsigned char index = blend->NiBlendInterpolator_GetHighestWeightedIndex();
         if (index != DAT_01096968)
             birthRateTime = blend->GetValueForIndex(index);
     }

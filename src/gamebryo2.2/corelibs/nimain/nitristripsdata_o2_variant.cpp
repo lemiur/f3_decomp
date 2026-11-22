@@ -785,7 +785,7 @@ void TSD::FUN_00a75e40(unsigned short i, unsigned short& i0, unsigned short& i1,
 
 struct FUN_00a8a9c0_s
 {
-    bool MatchesTriangleCount(NiObject* pkObject);
+    bool NiTriBasedGeomData_IsEqual(NiObject* pkObject);
 };
 
 class NiTriStripsDataA75F : public NiTriStripsData
@@ -799,7 +799,7 @@ class NiTriStripsDataA75F : public NiTriStripsData
 // pdb params: pkObject
 bool NiTriStripsDataA75F::FUN_00a75f80(NiObject* pkObject)
 {
-    if (!((FUN_00a8a9c0_s*)this)->MatchesTriangleCount(pkObject))
+    if (!((FUN_00a8a9c0_s*)this)->NiTriBasedGeomData_IsEqual(pkObject))
         return false;
 
     NiTriStripsData* pkData = (NiTriStripsData*)pkObject;

@@ -765,7 +765,8 @@ extern int __cdecl _NiStricmp(const char*, const char*);
 // @fnv 0x00a9c0e0
 // pdb: NiShaderConstantMap::LookUpObjectMapping | NiShaderConstantMap.obj | fnv360_0822_retail, udata, high
 // pdb params: pcMapping, uiMappingID
-bool __cdecl LookupShaderConstantMapping(const char* pcName, unsigned int* uiMappingID)
+// pdb: NiShaderConstantMap::LookUpObjectMapping | NiShaderConstantMap.obj | fnv360_0822_retail, udata, high (was: LookupShaderConstantMapping)
+bool __cdecl NiShaderConstantMap_LookUpObjectMapping(const char* pcName, unsigned int* uiMappingID)
 {
     unsigned int uiIndex;
     const NiShaderConstantMap::ShaderConstantMapEntry* pkMapping;

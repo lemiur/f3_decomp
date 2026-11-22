@@ -210,7 +210,7 @@ template <class T> inline void SerializeValue(NiStream& kStream, const T& value)
 
 struct FUN_00a6e4a0_shell : public NiQuaternion
 {
-    void SnapSmallComponentsToZero();
+    void NiQuaternion_Snap();
     void NiQuaternion_SaveBinary(NiStream& kStream);
 };
 
@@ -218,7 +218,7 @@ struct FUN_00a6e4a0_shell : public NiQuaternion
 // pdb: NiQuaternion::SaveBinary | NiQuaternion.obj | fnv360_0822_retail, call_gap + bridge(hash|call_gap) + skyrim(call_gap), high
 void FUN_00a6e4a0_shell::NiQuaternion_SaveBinary(NiStream& kStream)
 {
-    SnapSmallComponentsToZero();
+    NiQuaternion_Snap();
     SerializeValue(kStream, m_fVectorX);
     SerializeValue(kStream, m_fVectorY);
     SerializeValue(kStream, m_fVectorZ);
@@ -295,7 +295,7 @@ static const float g_fSnapEpsilonA6E = 1e-08f;
 class NiQuaternionA6E
 {
   public:
-    void SnapSmallComponentsToZero();
+    void NiQuaternion_Snap();
 
     float m_fVectorX;
     float m_fVectorY;
@@ -306,7 +306,8 @@ class NiQuaternionA6E
 // Sets each quaternion component to zero when its absolute value is at most g_fSnapEpsilonA6E but not already zero.
 // @fnv 0x00a6e0f0
 // pdb: NiQuaternion::Snap | NiQuaternion.obj | fnv360_0822_retail, call_seq, high
-void NiQuaternionA6E::SnapSmallComponentsToZero()
+// pdb: NiQuaternion::Snap | NiQuaternion.obj | fnv360_0822_retail, call_seq, high (was: SnapSmallComponentsToZero)
+void NiQuaternionA6E::NiQuaternion_Snap()
 {
     if (NiAbsA6E(m_fVectorY) <= g_fSnapEpsilonA6E && m_fVectorY != 0.0f)
         m_fVectorY = 0.0f;

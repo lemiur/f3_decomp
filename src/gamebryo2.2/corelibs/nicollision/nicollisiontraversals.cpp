@@ -654,7 +654,7 @@ struct GeometryData
     bool FUN_00a67360(bool);
     void NiGeometryData_UnlockPackedVertexData();
     void NiGeometryData_GetVerticesIterator(Buffer*);
-    void GetBounds(Buffer*);
+    void NiGeometryData_GetNormalsIterator(Buffer*);
     void FUN_00a67660(Buffer*);
     void GetKeyAndMode(unsigned, Buffer*);
     unsigned short* FUN_00a7b850();
@@ -812,7 +812,8 @@ struct RayOriginMatrix : Matrix
 
 // pdb: NiCollisionTraversals::FindIntersectionsTriShapeFastPath | NiCollisionTraversals.obj | fnv360_0822_retail, objrun, high
 // pdb params: kOrigin, kDir, kPick, pkTBG
-bool __cdecl RaycastGeometry(const P3* origin, const P3* direction, Pick* pick, Geometry* geometry)
+// pdb: NiCollisionTraversals::FindIntersectionsTriShapeFastPath | NiCollisionTraversals.obj | fnv360_0822_retail, objrun, high (was: RaycastGeometry)
+bool __cdecl NiCollisionTraversals_FindIntersectionsTriShapeFastPath(const P3* origin, const P3* direction, Pick* pick, Geometry* geometry)
 {
     Transform& worldTransform = geometry->world;
     P3 delta;
@@ -916,7 +917,7 @@ bool __cdecl RaycastGeometry(const P3* origin, const P3* direction, Pick* pick, 
         if (pick->GetPlaneNormal())
         {
             Buffer normalBuffer;
-            data->GetBounds(&normalBuffer);
+            data->NiGeometryData_GetNormalsIterator(&normalBuffer);
             if (normalBuffer.data)
             {
                 P3 n0 = normalBuffer.Point(i0), n1 = normalBuffer.Point(i1), n2 = normalBuffer.Point(i2);
@@ -1466,7 +1467,7 @@ struct Mesh
 
     void GetKeyAndMode(int, BufferView*);
 
-    void GetBounds(BufferView*);
+    void NiGeometryData_GetNormalsIterator(BufferView*);
 
     void FUN_00a67660(BufferView*);
 };
@@ -1736,7 +1737,7 @@ struct Mesh
     void NiGeometryData_GetVerticesIterator(BufferView*);
     void NiGeometryData_UnlockPackedVertexData();
     void GetKeyAndMode(int, BufferView*);
-    void GetBounds(BufferView*);
+    void NiGeometryData_GetNormalsIterator(BufferView*);
     void FUN_00a67660(BufferView*);
 };
 
@@ -1763,7 +1764,7 @@ struct Shape
 };
 
 bool FUN_0043b300(const void*, Shape*);
-bool __cdecl RaycastGeometry(const NiPoint3*, const NiPoint3*, Options*, Shape*);
+bool __cdecl NiCollisionTraversals_FindIntersectionsTriShapeFastPath(const NiPoint3*, const NiPoint3*, Options*, Shape*);
 
 extern bool __cdecl FUN_00eadb90(const NiPoint3*, const NiPoint3*, const NiPoint3*, const NiPoint3*, const NiPoint3*,
                                  bool, NiPoint3*, float*, float*, float*);
@@ -2110,7 +2111,7 @@ extern const NiPoint3 DAT_0108ec68;
 
 
 
-bool __cdecl RaycastGeometry(const NiPoint3*,const NiPoint3*,Options*,Shape*);
+bool __cdecl NiCollisionTraversals_FindIntersectionsTriShapeFastPath(const NiPoint3*,const NiPoint3*,Options*,Shape*);
 
 
 struct ZType { int unk00; ZType* parent; };
@@ -2155,7 +2156,7 @@ bool __cdecl ::fnv_00e9b4f0::RaycastShape(const ::fnv_00e9b4f0::NiPoint3* startA
                 return w324::NiCollisionTraversals_FindIntersectionsOneStripFastPath(rayStart, rayDirection, options, shape);
         }
         else if (w324::FUN_00424d20(&w324::DAT_0108f440, shape))
-            return w324::RaycastGeometry(rayStart, rayDirection, options, shape);
+            return w324::NiCollisionTraversals_FindIntersectionsTriShapeFastPath(rayStart, rayDirection, options, shape);
         const w324::Transform& xform = shape->world;
         float invScale;
         w324::NiPoint3 localStart = w324::ZLocalStart(*rayStart,xform,invScale);

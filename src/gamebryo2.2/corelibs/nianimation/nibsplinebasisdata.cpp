@@ -175,13 +175,14 @@ struct SplineOwner
     unsigned int unk04;
     SplineBlock m_08;
     void CreateVertexBufferSet(SplineObj* pObj, unsigned char flags);
-    SplineObj* CreateSplineObj(unsigned char flags);
+    SplineObj* NiBSplineBasisData_CreateClone(unsigned char flags);
 };
 
 // @fnv 0x00a52b00
 // pdb: NiBSplineBasisData::CreateClone | NiBSplineBasisData.obj | fnv360_0822_retail, caller_sim, high
 // pdb params: kCloning
-SplineObj* SplineOwner::CreateSplineObj(unsigned char flags)
+// pdb: NiBSplineBasisData::CreateClone | NiBSplineBasisData.obj | fnv360_0822_retail, caller_sim, high (was: CreateSplineObj)
+SplineObj* SplineOwner::NiBSplineBasisData_CreateClone(unsigned char flags)
 {
     SplineObj* pResult = new SplineObj;
     CreateVertexBufferSet(pResult, flags);
@@ -229,7 +230,8 @@ class NiSplineImpl : public NiSplineBase
 // Allocates and constructs a NiSplineImpl via its operator new and returns the new object.
 // @fnv 0x00a52b60
 // pdb: NiBSplineBasisData::CreateObject | NiBSplineBasisData.obj | fnv360_0822_retail, objrun, high
-NiSplineImpl* CreateNiSplineImpl()
+// pdb: NiBSplineBasisData::CreateObject | NiBSplineBasisData.obj | fnv360_0822_retail, objrun, high (was: CreateNiSplineImpl)
+NiSplineImpl* NiBSplineBasisData_CreateObject()
 {
     return new NiSplineImpl;
 }

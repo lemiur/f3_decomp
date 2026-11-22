@@ -355,7 +355,7 @@ FNV_STATIC_ASSERT(offsetof(NiRect_float_, m_fMaximumV) == 12);
 class ImageSpaceManager
 {
   public:
-    void CreateMenuBackgroundGeometry();
+    void InitGeometry();
     static bool m_bHasEndOfFrameEffects;
     void BeginParamModifiers();
     void SetupEffects();

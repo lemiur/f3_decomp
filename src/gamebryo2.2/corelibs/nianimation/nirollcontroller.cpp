@@ -177,7 +177,7 @@ public:
 };
 
 struct NiFloatKeyA485 {
-    static float __cdecl InterpolateKey(float fTime, NiFloatKeyA485* pkKeys, int eType, unsigned int uiNumKeys, unsigned int& uiLastIdx, unsigned char ucSize);
+    static float __cdecl NiFloatKey_GenInterp(float fTime, NiFloatKeyA485* pkKeys, int eType, unsigned int uiNumKeys, unsigned int& uiLastIdx, unsigned char ucSize);
 };
 
 class NiRollControllerA485 {
@@ -208,7 +208,7 @@ void NiRollControllerA485::FUN_00a485e0(NiUpdateDataA485& kUpdateData)
     int eType;
     unsigned char ucSize;
     NiFloatKeyA485* pkKeys = GetFloatKeys(uiNumKeys, eType, ucSize);
-    float fRoll = NiFloatKeyA485::InterpolateKey(m_fControllerTime, pkKeys, eType, uiNumKeys, m_uiLastKeyIndex, ucSize);
+    float fRoll = NiFloatKeyA485::NiFloatKey_GenInterp(m_fControllerTime, pkKeys, eType, uiNumKeys, m_uiLastKeyIndex, ucSize);
 
     NiMatrix3A485 kRot = m_pkTarget->m_kRotate;
     NiMatrix3A485 kRoll;

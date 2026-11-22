@@ -4756,7 +4756,7 @@ extern int DAT_00f62310;
 extern int DAT_00f6231c;
 namespace f3m_005850f0 {
 
-// pdb: GamePlayFormulas::GetRequiredExperiencePoints | GamePlayFormulas.obj | fnv360_0822_retail, call_seq, medium, conflict (skyrim: QuickSort<class TESForm *,int __cdecl(class TESForm *,class TESForm *),class BSTArrayHeapAllocator>)
+// pdb: GamePlayFormulas::GetRequiredExperiencePoints | GamePlayFormulas.obj | fnv360_0822_retail, call_seq, medium, conflict (skyrim: SortObjectsByDepth<class TESForm *,int __cdecl(class TESForm *,class TESForm *),class BSTArrayHeapAllocator>)
 // pdb params: aiWhichLevel
 int FUN_005850f0(int count)
 {
@@ -11665,7 +11665,7 @@ struct Context59 {
     ~Context59() {DAT_0117c298=old;}
 };
 struct GuardObject59 {void IncRefCount(); void DecRefCount();};
-struct BSShaderManager {static void BuildTexturePath(char*,const char*,const char*,bool);};
+struct BSShaderManager {static void GetModifiedTextureFilename(char*,const char*,const char*,bool);};
 struct Manager59 {void FUN_004353f0(const char*,SetRef59*,int,int);};
 extern Manager59* DAT_0107a0d8;
 extern const char DAT_00dfcd1c[],DAT_00dfcd04[],DAT_00dbfbf8[];
@@ -11711,7 +11711,7 @@ void Owner59::FUN_0059f1b0(Tree59* tree)
         strcat_s(path,260,info.path);
         unsigned n=(unsigned)strlen(path);
         path[n-3]='d';path[n-2]='d';path[n-1]='s';
-        BSShaderManager::BuildTexturePath(normal,path,DAT_00dbfbf8,true);
+        BSShaderManager::GetModifiedTextureFilename(normal,path,DAT_00dbfbf8,true);
         branch.FUN_008e9650(new BSShaderTextureSet);
         branch.ptr->SetTexture(0,path);
         branch.ptr->SetTexture(1,normal);

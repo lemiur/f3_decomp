@@ -526,7 +526,7 @@ struct Inner_t
     int unk04;
     RefLeaf_t* m_08;
 };
-// TailOne: thiscall, 18 bytes. Self virtual call at slot 0xa4 (index 41) tail-jumped with constant 1 in the stack arg.
+// bhkSerializable_PostInit: thiscall, 18 bytes. Self virtual call at slot 0xa4 (index 41) tail-jumped with constant 1 in the stack arg.
 class C87710BinaryStream
 {
   public:
@@ -3879,7 +3879,7 @@ inline void* __cdecl operator new[](unsigned int size)
 }
 struct GeometryData
 {
-    void EnsureNormals(bool);
+    void NiGeometryData_CreateNormals(bool);
 };
 class NiMemObject
 {

@@ -39,7 +39,7 @@ struct NiObjectNET : B00c1bff0
 };
 struct BaseStandIn
 {
-    bool IsTargetParticleSystem(NiObjectNET*);
+    bool NiPSysModifierCtlr_InterpTargetIsCorrectType(NiObjectNET*);
 };
 struct NiPSysInitialRotAngleCtlr : BaseStandIn
 {
@@ -50,7 +50,7 @@ struct NiPSysInitialRotAngleCtlr : BaseStandIn
 // pdb params: pkTarget
 bool NiPSysInitialRotAngleCtlr::IsModifierOfType(NiObjectNET* pkTarget)
 {
-    if (!BaseStandIn::IsTargetParticleSystem(pkTarget))
+    if (!BaseStandIn::NiPSysModifierCtlr_InterpTargetIsCorrectType(pkTarget))
         return false;
     NiPSysModifier* pkModifier = (NiPSysModifier*)pkTarget->FUN_00c1b0f0((void*)((char*)this + 0x38));
     if (!pkModifier)

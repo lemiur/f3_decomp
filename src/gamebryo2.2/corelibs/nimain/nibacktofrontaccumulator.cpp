@@ -34,7 +34,8 @@ float NiBackToFrontAccumulator::GetPivotValue(int left, int right)
 // @fnv 0x00aa0b40
 // pdb: NiBackToFrontAccumulator::SortObjectsByDepth | NiBackToFrontAccumulator.obj | fnv360_0721_beta, objopen_prop, high
 // pdb params: l, r
-void NiBackToFrontAccumulator::QuickSort(int left, int right)
+// pdb: NiBackToFrontAccumulator::SortObjectsByDepth | NiBackToFrontAccumulator.obj | fnv360_0721_beta, objopen_prop, high (was: QuickSort)
+void NiBackToFrontAccumulator::SortObjectsByDepth(int left, int right)
 {
     if (right > left)
     {
@@ -61,11 +62,11 @@ void NiBackToFrontAccumulator::QuickSort(int left, int right)
             m_pfGeometrySortValues[i] = fTempDepth;
         }
         if (i == right)
-            QuickSort(left, i - 1);
+            SortObjectsByDepth(left, i - 1);
         else
         {
-            QuickSort(left, i);
-            QuickSort(i + 1, right);
+            SortObjectsByDepth(left, i);
+            SortObjectsByDepth(i + 1, right);
         }
     }
 }

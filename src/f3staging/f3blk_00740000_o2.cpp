@@ -80993,7 +80993,7 @@ public:
     virtual void Slot5dc();
     virtual void Slot5e0();
     virtual void Slot5e4();
-    virtual ActorBounds_745d10* GetBounds();
+    virtual ActorBounds_745d10* NiGeometryData_GetNormalsIterator();
 };
 
 struct CellExtra_745d10
@@ -81890,11 +81890,11 @@ inline void* GetWorld_745d10(Cell_745d10* cell)
 // pdb params: apActor
 void Controller_745d10::FUN_00745d10(Actor_745d10* actor)
 {
-    if (actor->process->GetBounds())
+    if (actor->process->NiGeometryData_GetNormalsIterator())
     {
         if (!body.Get())
         {
-            Point3_745d10 half = *actor->process->GetBounds()->GetHalfExtents();
+            Point3_745d10 half = *actor->process->NiGeometryData_GetNormalsIterator()->GetHalfExtents();
             float scale = actor->FUN_004e6d80();
             if (half.y > half.z)
                 half.y = half.y * scale;

@@ -396,13 +396,14 @@ inline ColorAnimationKey* ComputePositionAtTime(NiColorData* d, unsigned int& n,
 
 struct HostA3BDC0 : NiColorInterpolator
 {
-    void CollapseConstantColorKeys();
+    void NiColorInterpolator_Collapse();
 };
 
 // If the color data has zero or one key, or all keys are equal for linear/step interpolation, clears m_spColorData and stores the single color value.
 // @fnv 0x00a3bdc0
 // pdb: NiColorInterpolator::Collapse | NiColorInterpolator.obj | fnv360_0822_retail, objrun, high
-void HostA3BDC0::CollapseConstantColorKeys()
+// pdb: NiColorInterpolator::Collapse | NiColorInterpolator.obj | fnv360_0822_retail, objrun, high (was: CollapseConstantColorKeys)
+void HostA3BDC0::NiColorInterpolator_Collapse()
 {
     if (m_spColorData)
     {
@@ -450,13 +451,14 @@ struct FUN_00a3d270_helper : NiColorData
 };
 struct FUN_00a3bef0_shell : NiColorInterpolator
 {
-    NiColorInterpolator* CreateClippedInterpolator(float startTime, float endTime);
+    NiColorInterpolator* NiColorInterpolator_GetSequenceInterpolator(float startTime, float endTime);
 };
 // Creates a color interpolator for the given time range and, if color data exists, clips it and assigns the clipped data to the new interpolator.
 // @fnv 0x00a3bef0
 // pdb: NiColorInterpolator::GetSequenceInterpolator | NiColorInterpolator.obj | fnv360_0721_retail, objrun, high
 // pdb params: fStartTime, fEndTime
-NiColorInterpolator* FUN_00a3bef0_shell::CreateClippedInterpolator(float startTime, float endTime)
+// pdb: NiColorInterpolator::GetSequenceInterpolator | NiColorInterpolator.obj | fnv360_0721_retail, objrun, high (was: CreateClippedInterpolator)
+NiColorInterpolator* FUN_00a3bef0_shell::NiColorInterpolator_GetSequenceInterpolator(float startTime, float endTime)
 {
     NiColorInterpolator* interpolator = reinterpret_cast<FUN_00a57050_helper*>(this)->FUN_00a57050(startTime, endTime);
     if (m_spColorData.m_pObject)

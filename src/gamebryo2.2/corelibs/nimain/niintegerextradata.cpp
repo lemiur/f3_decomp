@@ -124,12 +124,13 @@ struct ExtraDataOwner
     int unk08;
     int m_iValue;
     void __thiscall FUN_00a7b330(NiIntegerExtraData*, unsigned int);
-    NiIntegerExtraData* __thiscall CreateIntegerExtraData(unsigned int);
+    NiIntegerExtraData* __thiscall NiIntegerExtraData_CreateClone(unsigned int);
 };
 // @fnv 0x00a99c80
 // pdb: NiIntegerExtraData::CreateClone | NiIntegerExtraData.obj | fnv360_0822_retail, vtable, high
 // pdb params: kCloning
-NiIntegerExtraData* ExtraDataOwner::CreateIntegerExtraData(unsigned int argument)
+// pdb: NiIntegerExtraData::CreateClone | NiIntegerExtraData.obj | fnv360_0822_retail, vtable, high (was: CreateIntegerExtraData)
+NiIntegerExtraData* ExtraDataOwner::NiIntegerExtraData_CreateClone(unsigned int argument)
 {
     NiIntegerExtraData* result;
     NiIntegerExtraData* allocated = (NiIntegerExtraData*)FUN_00aa13e0(16);

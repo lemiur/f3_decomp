@@ -35,7 +35,7 @@ struct hkErrStream
     ~hkErrStream() throw();
     hkErrStream& operator<<(const char* str) throw();
 };
-static bool IsSupportedRagdollConstraint(Obj* obj, bool reportError) throw();
+static bool _isConstraintSupported(Obj* obj, bool reportError) throw();
 struct Node
 {
     int unk00, unk04, unk08, unk0c, unk10;
@@ -235,7 +235,8 @@ struct List
     int count;
 };
 
-static __declspec(noinline) bool IsSupportedRagdollConstraint(Obj* obj, bool reportError) throw()
+// pdb: _isConstraintSupported | hkaRagdollUtils.obj | fnv360_0822_retail, call_gap, high (was: IsSupportedRagdollConstraint)
+static __declspec(noinline) bool _isConstraintSupported(Obj* obj, bool reportError) throw()
 {
     return obj->inner != 0 && reportError;
 }

@@ -639,7 +639,7 @@ struct FUN_00c25e40_shell
 };
 struct FUN_00c25e20_shell
 {
-    float GetInnerValue(unsigned short, unsigned short);
+    float BSStripPSysData_GetPointSize(unsigned short, unsigned short);
 };
 struct TESBoundObjectBounds
 {
@@ -691,7 +691,7 @@ void BoundUpdater::FUN_00c2d880(float time, TESBoundObjectBounds* apBounds)
         {
             NiPoint3* p = apBounds->GetSlotData((unsigned short)i, j);
             float r = ((FUN_00c25e40_shell*)apBounds)->BSStripPSysData_GetPointRadii((unsigned short)i, j) *
-                      ((FUN_00c25e20_shell*)apBounds)->GetInnerValue((unsigned short)i, j);
+                      ((FUN_00c25e20_shell*)apBounds)->BSStripPSysData_GetPointSize((unsigned short)i, j);
             double fTemp;
             fTemp = p->x - r;
             lx = kFirstBoundsPointEntry(lx, (float)fTemp);

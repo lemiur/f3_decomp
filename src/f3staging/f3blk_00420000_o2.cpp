@@ -9007,7 +9007,7 @@ struct RefHolderStandIn
     void FUN_00427860(RefObjectStandIn* value);
 };
 
-// pdb: QueuedFile::SetParent | ModelLoader.obj | fnv360_0721_beta, call_gap, low
+// pdb: QueuedFile::NiAVObject_AttachParent | ModelLoader.obj | fnv360_0721_beta, call_gap, low
 // pdb params: apParent
 void RefHolderStandIn::FUN_00427860(RefObjectStandIn* value)
 {
@@ -32713,7 +32713,8 @@ struct Entry {
     static void* operator new[](unsigned int bytes) { return DAT_01090a78.FUN_0086b930(bytes); }
     static void operator delete[](void* p) { DAT_01090a78.FUN_0086ba60(p); }
 };
-__forceinline void CopyEntries(Entry* dst, const Entry* src, unsigned int n)
+// pdb: BSSegmentedTriShape::CopyMembers | BSSegmentedTriShape.obj | fnv360_0822_retail, objrun_prop, high (was: CopyEntries)
+__forceinline void BSSegmentedTriShape_CopyMembers(Entry* dst, const Entry* src, unsigned int n)
 {
     memcpy(dst, src, n * sizeof(Entry));
 }
@@ -32739,7 +32740,7 @@ void Owner::FUN_0042bbb0()
     TlsGuard guard(6);
     unsigned int n = source->count->count * 2;
     Entry* entries = new Entry[n];
-    CopyEntries(entries, ((Source* volatile*)&source)[0]->data, n);
+    BSSegmentedTriShape_CopyMembers(entries, ((Source* volatile*)&source)[0]->data, n);
     Node* newHead = 0;
     unsigned int newCount = 0;
     while (head)
@@ -36707,7 +36708,7 @@ struct ItemOwner
     virtual void v08();
     virtual void v0c();
     virtual void v10();
-    virtual bool ProcessItem(void* item);
+    virtual bool ImageSpaceEffectInterface_Render(void* item);
     int unk004; int unk008; int unk00c; int unk010; int unk014; int unk018; int unk01c; int unk020;
     int unk024; int unk028; int unk02c; int unk030; int unk034; int unk038; int unk03c; int unk040;
     int unk044; int unk048; int unk04c; int unk050; int unk054; int unk058; int unk05c; int unk060;
@@ -36732,7 +36733,7 @@ bool ItemOwner::FUN_0042b6e0()
         for (ListNode* node = &items; node; node = node->next)
         {
             if (node->item)
-                result &= ProcessItem(node->item);
+                result &= ImageSpaceEffectInterface_Render(node->item);
         }
     }
     return result;
@@ -40747,7 +40748,8 @@ struct Entry {
     static void operator delete[](void* p) { DAT_01090a78.FUN_0086ba60(p); }
 };
 
-__forceinline void CopyEntries(Entry* dst, const Entry* src, unsigned int n)
+// pdb: BSSegmentedTriShape::CopyMembers | BSSegmentedTriShape.obj | fnv360_0822_retail, objrun_prop, high (was: CopyEntries)
+__forceinline void BSSegmentedTriShape_CopyMembers(Entry* dst, const Entry* src, unsigned int n)
 {
     memcpy(dst, src, n * sizeof(Entry));
 }
@@ -40793,7 +40795,7 @@ void Owner::FUN_004276f0()
     TlsGuard guard(6);
     unsigned int n = source->count->count * 3;
     Entry* entries = new Entry[n];
-    CopyEntries(entries, ((Source* volatile*)&source)[0]->data, n);
+    BSSegmentedTriShape_CopyMembers(entries, ((Source* volatile*)&source)[0]->data, n);
     Node* newHead = 0;
     unsigned int newCount = 0;
     while (head)

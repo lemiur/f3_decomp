@@ -1110,13 +1110,13 @@ struct S_00dcc790_Class
     S_00dcc790_Class* __thiscall ReadSignedValue(unsigned short* result);
 };
 
-extern "C" void __cdecl SkipWhitespace(void);
+extern "C" void __cdecl eatWhiteSpace(void);
 
 // pdb: readInteger64 | hkIStream.obj | fnv360_0822_retail, caller_sim + skyrim(caller_sim), high
 static __declspec(noinline) unsigned short readInteger64(unsigned char* ok, S_00dcc240_Reader* reader)
 {
     *ok = 0;
-    SkipWhitespace();
+    eatWhiteSpace();
     return reader->unk08;
 }
 
@@ -1595,7 +1595,8 @@ struct TokenReader
 // Reads 64-byte chunks from stream, skipping whitespace until a non-space character is found, then resets and skips to that position.
 // @fnv 0x00dcc1b0
 // pdb: eatWhiteSpace | hkIStream.obj | fnv360_0822_retail, call_seq, high
-static __declspec(noinline) void SkipWhitespace(TokenReader* stream)
+// pdb: eatWhiteSpace | hkIStream.obj | fnv360_0822_retail, call_seq, high (was: SkipWhitespace)
+static __declspec(noinline) void eatWhiteSpace(TokenReader* stream)
 {
     int buffer[16];
     stream->prepare(64);
@@ -1622,7 +1623,7 @@ static __declspec(noinline) void SkipWhitespace(TokenReader* stream)
 extern TokenReader* volatile inputStream;
 void MatchCaller()
 {
-    SkipWhitespace(inputStream);
+    eatWhiteSpace(inputStream);
 }
 
 struct CpuOpaque;
@@ -1977,7 +1978,7 @@ static float FUN_00dcc3b0(TokenReader* stream)
         int w[64];
     };
     Buf256 buf;
-    SkipWhitespace(stream);
+    eatWhiteSpace(stream);
     int n = 0;
     stream->prepare(255);
     int len = stream->read(buf.w, 255);
@@ -2042,7 +2043,7 @@ struct TokenStream
 extern "C" void _ReadWriteBarrier(void);
 void __cdecl ResizeAudioStream(int alloc, TokenBuffer* buf, int n);
 namespace TokenParsing {
-static __declspec(noinline) void SkipWhitespace(TokenStream* stream)
+static __declspec(noinline) void eatWhiteSpace(TokenStream* stream)
 {
     unsigned __int64 storage[8];
     char* buffer = reinterpret_cast<char*>(storage);
@@ -2089,7 +2090,7 @@ TokenReader* TokenReader::ReadToken(TokenOwner* owner)
     const int one = 1;
     owner->FUN_00d61cc0();
     TokenBuffer* buf = owner->FUN_00d61470();
-    TokenParsing::SkipWhitespace(m_08);
+    TokenParsing::eatWhiteSpace(m_08);
     m_08->v07(one);
     int c = m_08->ReadChar();
     if (c != -1)

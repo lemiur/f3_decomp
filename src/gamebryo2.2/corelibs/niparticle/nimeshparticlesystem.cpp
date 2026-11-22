@@ -264,12 +264,13 @@ struct RgbaColor
 extern RgbaColor DAT_011a9be0;
 struct NiMeshParticleSystem
 {
-    RgbaColor* __thiscall GetParticleColor(unsigned short, unsigned short);
+    RgbaColor* __thiscall BSStripPSysData_GetPointColor(unsigned short, unsigned short);
 };
 // @fnv 0x00c26350
 // pdb: BSStripPSysData::GetPointColor | BSStripPSysData.obj | fnv360_0822_retail, objrun, high
 // pdb params: ausParticle, ausPoint
-RgbaColor* __thiscall NiMeshParticleSystem::GetParticleColor(unsigned short ausBlockIndex, unsigned short ausColorIndex)
+// pdb: BSStripPSysData::GetPointColor | BSStripPSysData.obj | fnv360_0822_retail, objrun, high (was: GetParticleColor)
+RgbaColor* __thiscall NiMeshParticleSystem::BSStripPSysData_GetPointColor(unsigned short ausBlockIndex, unsigned short ausColorIndex)
 {
     if (*(int*)((char*)this + 0x28))
     {
@@ -483,14 +484,15 @@ class C21A10Owner
     unsigned short m_usMaxGroups;
     unsigned short m_usGroups;
 
-    void ApplyToAllObjects(void* pvArg);
+    void NiMeshPSysData_PurgeRendererDataForPools(void* pvArg);
 };
 
 // Iterates every group and its objects, calling Apply(pvArg) on each non-null object.
 // @fnv 0x00c21a10
 // pdb: NiMeshPSysData::PurgeRendererDataForPools | NiMeshParticleSystem.obj | fnv360_0721_beta, objrun, high
 // pdb params: pkRenderer
-void C21A10Owner::ApplyToAllObjects(void* pvArg)
+// pdb: NiMeshPSysData::PurgeRendererDataForPools | NiMeshParticleSystem.obj | fnv360_0721_beta, objrun, high (was: ApplyToAllObjects)
+void C21A10Owner::NiMeshPSysData_PurgeRendererDataForPools(void* pvArg)
 {
     unsigned int uiGroups = m_usGroups;
     for (unsigned int i = 0; i < uiGroups; i++)
@@ -652,13 +654,14 @@ struct FUN_00c21b90_cls
     int unkB0;
     int unkB4;
     Mid* m_B8;
-    void __thiscall TailViaMid(int a);
+    void __thiscall NiMeshParticleSystem_OnVisible(int a);
 };
 
 // @fnv 0x00c21b90
 // pdb: NiMeshParticleSystem::OnVisible | NiMeshParticleSystem.obj | fnv360_0822_retail, objrun, high
 // pdb params: kCuller
-void FUN_00c21b90_cls::TailViaMid(int aiValue)
+// pdb: NiMeshParticleSystem::OnVisible | NiMeshParticleSystem.obj | fnv360_0822_retail, objrun, high (was: TailViaMid)
+void FUN_00c21b90_cls::NiMeshParticleSystem_OnVisible(int aiValue)
 {
     m_B8->m_7C->Tail(aiValue);
 }
@@ -768,12 +771,13 @@ struct FUN_00c21c60_cls
     unsigned int unkB4;
     FUN_00c21c60_x* m_b8;
     void Refresh();
-    void CopySourceToOutput();
+    void NiMeshParticleSystem_UpdateWorldBound();
 };
 // Calls Refresh, then copies m_00, m_04, m_08 and m_0c from the source record (or DAT_011f4288 if null) into m_20.
 // @fnv 0x00c21c60
 // pdb: NiMeshParticleSystem::UpdateWorldBound | NiMeshParticleSystem.obj | fnv360_0721_beta, objrun, high
-void FUN_00c21c60_cls::CopySourceToOutput()
+// pdb: NiMeshParticleSystem::UpdateWorldBound | NiMeshParticleSystem.obj | fnv360_0721_beta, objrun, high (was: CopySourceToOutput)
+void FUN_00c21c60_cls::NiMeshParticleSystem_UpdateWorldBound()
 {
     Refresh();
     FUN_00c21c60_y* y = m_b8->m_7c;
@@ -823,7 +827,7 @@ struct NiObject
     {
         return *(NiObject * * const*)((const char*)this + 0x1c);
     }
-    void __thiscall ApplyToAllObjects(unsigned int);
+    void __thiscall NiMeshPSysData_PurgeRendererDataForPools(unsigned int);
     void __thiscall NiGeometry_PurgeRendererData(unsigned int);
     void __thiscall FUN_00c21cb0(unsigned int);
 };
@@ -851,7 +855,7 @@ void __thiscall NiObject::FUN_00c21cb0(unsigned int value)
         NiObject* child = *(NiObject**)((char*)pLinkedObject + 0x7c);
         if (child)
             child->Update(value);
-        pLinkedObject->ApplyToAllObjects(value);
+        pLinkedObject->NiMeshPSysData_PurgeRendererDataForPools(value);
     }
     for (NiObjectNode* node = *(NiObjectNode**)((char*)this + 0xc8); node;)
     {
@@ -1336,14 +1340,15 @@ struct Ps21Node
     Ps21Owner* m_b8;
 
     void FUN_00c1add0(unsigned int a1);
-    void CopyFromNode(unsigned int a1);
+    void NiMeshParticleSystem_UpdateWorldData(unsigned int a1);
 };
 
 // Copies several fields and the absolute value of m_98 to the owner's target, then calls its virtual method.
 // @fnv 0x00c21bf0
 // pdb: NiMeshParticleSystem::UpdateWorldData | NiMeshParticleSystem.obj | fnv360_0822_retail, objrun, high
 // pdb params: UpdateData
-void Ps21Node::CopyFromNode(unsigned int a1)
+// pdb: NiMeshParticleSystem::UpdateWorldData | NiMeshParticleSystem.obj | fnv360_0822_retail, objrun, high (was: CopyFromNode)
+void Ps21Node::NiMeshParticleSystem_UpdateWorldData(unsigned int a1)
 {
     FUN_00c1add0(a1);
     Ps21Owner* owner = m_b8;

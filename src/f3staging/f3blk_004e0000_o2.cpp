@@ -30035,7 +30035,7 @@ struct FrustumPlanes
     NiPlane m_akPlanes[6];
     unsigned int m_uiActive;
     FrustumPlanes();
-    void SetFromFrustum(const NiFrustum* apFrustum, const NiTransform* apTransform);
+    void NiFrustumPlanes_Set(const NiFrustum* apFrustum, const NiTransform* apTransform);
 };
 
 struct CellForm
@@ -30214,7 +30214,7 @@ void __cdecl FUN_004fd4e0(Mgr* apMgr, int aiParam, NiPoint3 akPos, NiPoint3 akDi
     kFrust.m_fFar = kView.m_fFar;
     kFrust.m_fNear = kView.m_fNear;
     FrustumPlanes kTester;
-    kTester.SetFromFrustum(&kFrust, GetSceneRoot()->GetCamera()->GetWorld());
+    kTester.NiFrustumPlanes_Set(&kFrust, GetSceneRoot()->GetCamera()->GetWorld());
     for (iQuad = 0; iQuad < 4; iQuad++)
     {
         Node45* pCell = apMgr->GetCellNodeAt(iQuad);
@@ -57415,7 +57415,8 @@ struct BGSPrimitive
     {
         return m_eType;
     }
-    NiPoint3 GetBounds() const
+    // pdb: NiGeometryData::GetNormalsIterator | NiGeometryData.obj | fnv360_0822_retail, objrun, high (was: GetBounds)
+    NiPoint3 NiGeometryData_GetNormalsIterator() const
     {
         return m_kBounds;
     }
@@ -57561,9 +57562,9 @@ void TESObjectREFR::FUN_004f7b70()
     {
         bhkAabbPhantomCinfo kInfo;
         hkVector4 kPoint;
-        NI2HK(pPrimitive->GetBounds() + kTransform.m_Translate, kPoint);
+        NI2HK(pPrimitive->NiGeometryData_GetNormalsIterator() + kTransform.m_Translate, kPoint);
         kInfo.m_kMax = kPoint;
-        NI2HK(pPrimitive->GetBounds() * -1.0f + kTransform.m_Translate, kPoint);
+        NI2HK(pPrimitive->NiGeometryData_GetNormalsIterator() * -1.0f + kTransform.m_Translate, kPoint);
         kInfo.m_kMin = kPoint;
         kInfo.m_ucMotionType = 2;
         kInfo.m_uiFilterInfo = uiLayer | 0x50000;
@@ -57574,11 +57575,11 @@ void TESObjectREFR::FUN_004f7b70()
         if (pPrimitive->GetType() == 1)
         {
             hkVector4 kHalfExtents;
-            NI2HK(pPrimitive->GetBounds(), kHalfExtents);
+            NI2HK(pPrimitive->NiGeometryData_GetNormalsIterator(), kHalfExtents);
             pShape = new bhkBoxShape(kHalfExtents);
         }
         if (pPrimitive->GetType() == 2)
-            pShape = new bhkSphereShape(NI2HK(pPrimitive->GetBounds().x), 0);
+            pShape = new bhkSphereShape(NI2HK(pPrimitive->NiGeometryData_GetNormalsIterator().x), 0);
 
         bhkSimpleShapePhantomCinfo kInfo;
         kInfo.m_pShape = pShape->GetHavokShape();

@@ -331,7 +331,7 @@ class NiTimeControllerA4F
 class NiColorControllerA4F : public NiTimeControllerA4F
 {
   public:
-    void UpdateColorController(NiUpdateDataA4F& kUpdateData);
+    void NiColorExtraDataController_Update(NiUpdateDataA4F& kUpdateData);
 
     int unk30;
     NiInterpolatorA4F* m_spControllerInterpolator;
@@ -342,7 +342,8 @@ class NiColorControllerA4F : public NiTimeControllerA4F
 // @fnv 0x00a4fce0
 // pdb: NiColorExtraDataController::Update | NiColorExtraDataController.obj | fnv360_0822_retail, objrun_open, high
 // pdb params: UpdateData
-void NiColorControllerA4F::UpdateColorController(NiUpdateDataA4F& kUpdateData)
+// pdb: NiColorExtraDataController::Update | NiColorExtraDataController.obj | fnv360_0822_retail, objrun_open, high (was: UpdateColorController)
+void NiColorControllerA4F::NiColorExtraDataController_Update(NiUpdateDataA4F& kUpdateData)
 {
     if (GetManagerControlled())
     {

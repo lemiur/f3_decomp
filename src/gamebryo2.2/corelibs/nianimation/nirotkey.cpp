@@ -101,7 +101,7 @@ class FUN_00a3e9a0_cls
     float m_24;
 
     float NiPathInterpolator_PathLength(unsigned int a, unsigned int b, float c);
-    float GetAccumulatedValue();
+    float NiPathInterpolator_GetTotalPathLength();
 };
 
 void __cdecl FUN_00aa10f0(float* p);
@@ -110,7 +110,8 @@ void* __cdecl FUN_00aa1070(unsigned int n);
 // If m_24 is negative, allocates a float array sized from m_18->m_08, fills running sums via NiPathInterpolator_PathLength, stores the last value in m_24, and returns m_24.
 // @fnv 0x00a3e9a0
 // pdb: NiPathInterpolator::GetTotalPathLength | NiPathInterpolator.obj | fnv360_0822_retail, call_seq, high
-float FUN_00a3e9a0_cls::GetAccumulatedValue()
+// pdb: NiPathInterpolator::GetTotalPathLength | NiPathInterpolator.obj | fnv360_0822_retail, call_seq, high (was: GetAccumulatedValue)
+float FUN_00a3e9a0_cls::NiPathInterpolator_GetTotalPathLength()
 {
     if (m_24 < 0.0f)
     {

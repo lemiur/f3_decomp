@@ -148,7 +148,8 @@ inline NiPoint3 InitialCrossCurveVectors(const NiPoint3& a, const NiPoint3& b)
 // Evaluates curve velocity and acceleration at time, then derives the tangent, normal, binormal and curvature for the animation key pair.
 // @fnv 0x00a277c0
 // pdb: NiPosKey::CoordinateFrame | NiPosKey.obj | tesv_win, udata, high
-void __cdecl ComputeFrenetFrame(float time, const AnimationKey* key0, const AnimationKey* key1,
+// pdb: NiPosKey::CoordinateFrame | NiPosKey.obj | tesv_win, udata, high (was: ComputeFrenetFrame)
+void __cdecl NiPosKey_CoordinateFrame(float time, const AnimationKey* key0, const AnimationKey* key1,
                                 AnimationKey::KeyType type, NiPoint3& tangent, NiPoint3& normal, NiPoint3& binormal,
                                 float& curvature)
 {

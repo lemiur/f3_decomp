@@ -196,7 +196,8 @@ struct LocalSource70
 };
 
 // pdb: separatingDistanceUsingCapsuleRepresentations | hkpPredGskCylinderAgent3.obj | fnv360_0822_retail, caller_sim, high
-float __cdecl ComputeExtendedResult(LocalSource* source, void* apArg, FNVFlags* apFlags)
+// pdb: separatingDistanceUsingCapsuleRepresentations | hkpPredGskCylinderAgent3.obj | fnv360_0822_retail, caller_sim, high (was: ComputeExtendedResult)
+float __cdecl separatingDistanceUsingCapsuleRepresentations(LocalSource* source, void* apArg, FNVFlags* apFlags)
 {
     LocalSource70 local_source;
     ((LocalSource*)&local_source)->CopyBase(source);

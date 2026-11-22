@@ -6,7 +6,8 @@
 // @fnv 0x00a67050
 // pdb: NiGeometryData::SetConsistency | NiGeometryData.obj | fnv360_0822_retail, call_seq, high
 // pdb params: eConsistency
-void NiGeometryData::SetDataConsistency(Consistency eConsistency)
+// pdb: NiGeometryData::SetConsistency | NiGeometryData.obj | fnv360_0822_retail, call_seq, high (was: SetDataConsistency)
+void NiGeometryData::SetConsistency(Consistency eConsistency)
 {
     if (m_spAdditionalGeomData.m_pObject != NULL && m_spAdditionalGeomData.m_pObject->IsPacked())
     {
@@ -19,7 +20,8 @@ void NiGeometryData::SetDataConsistency(Consistency eConsistency)
 // @fnv 0x00a67090
 // pdb: NiGeometryData::MarkAsChanged | NiGeometryData.obj | fnv360_0822_retail, call_seq, high
 // pdb params: usFlags
-void NiGeometryData::SetDirtyFlags(unsigned int uiDirtyFlags)
+// pdb: NiGeometryData::MarkAsChanged | NiGeometryData.obj | fnv360_0822_retail, call_seq, high (was: SetDirtyFlags)
+void NiGeometryData::MarkAsChanged(unsigned int uiDirtyFlags)
 {
     if (m_spAdditionalGeomData.m_pObject != NULL && m_spAdditionalGeomData.m_pObject->IsPacked())
     {
@@ -69,7 +71,8 @@ void NiGeometryData::LinkObject(NiStream& kStream)
 // @fnv 0x00a67360
 // pdb: NiGeometryData::LockPackedVertexData | NiGeometryData.obj | fnv360_1110_retail, call_seq, high
 // pdb params: bWriteAccess
-bool NiGeometryData::IsGeometryDataStreamable(bool bWrite)
+// pdb: NiGeometryData::LockPackedVertexData | NiGeometryData.obj | fnv360_1110_retail, call_seq, high (was: IsGeometryDataStreamable)
+bool NiGeometryData::LockPackedVertexData(bool bWrite)
 {
     if (m_bIsDynamic)
         return false;
@@ -931,13 +934,14 @@ struct NormalVec
 
 struct GeomNormals : public NiGeometryData
 {
-    void EnsureNormals(bool bZero);
+    void NiGeometryData_CreateNormals(bool bZero);
 };
 
 // @fnv 0x00a669f0
 // pdb: NiGeometryData::CreateNormals | NiGeometryData.obj | fnv360_0822_retail, call_gap_sim, high
 // pdb params: bInitialize
-void GeomNormals::EnsureNormals(bool bZero)
+// pdb: NiGeometryData::CreateNormals | NiGeometryData.obj | fnv360_0822_retail, call_gap_sim, high (was: EnsureNormals)
+void GeomNormals::NiGeometryData_CreateNormals(bool bZero)
 {
     unsigned int uiMul = 1;
     if ((m_usTrianglePoints & 0xf000) != 0)
@@ -1400,14 +1404,15 @@ struct RenderOwner
     unsigned char unk38;
     unsigned char unk39;
     bool m_bFlag3a;
-    void GetBounds(BoundOut* pOut);
+    void NiGeometryData_GetNormalsIterator(BoundOut* pOut);
 };
 
 // When m_bFlag3a is set, fills pOut from m_pObj30 or falls back to m_uiField24 and count 0xc.
 // @fnv 0x00a675b0
 // pdb: NiGeometryData::GetNormalsIterator | NiGeometryData.obj | fnv360_0822_retail, objrun, high
 // pdb params: arIterator
-void RenderOwner::GetBounds(BoundOut* pOut)
+// pdb: NiGeometryData::GetNormalsIterator | NiGeometryData.obj | fnv360_0822_retail, objrun, high (was: GetBounds)
+void RenderOwner::NiGeometryData_GetNormalsIterator(BoundOut* pOut)
 {
     if (m_bFlag3a)
     {
@@ -1497,7 +1502,7 @@ void __cdecl FUN_00a67aa0(NiStreamA67& kStream, const NiPoint2A67* pkValue, unsi
 class FUN_00a67dd0_cls
 {
   public:
-    unsigned int MedianOfThree(unsigned short* pBase, unsigned int uiKey, int iLo, int iHi);
+    unsigned int NiGeometryData_ChoosePivot(unsigned short* pBase, unsigned int uiKey, int iLo, int iHi);
     int CompareVertices(unsigned int uiA, unsigned int uiB, unsigned int uiKey);
     void FUN_00a67dd0(unsigned short* pArr, unsigned int uiKey, int iLo, int iHi);
 };
@@ -1516,7 +1521,7 @@ void FUN_00a67dd0_cls::FUN_00a67dd0(unsigned short* pArr, unsigned int uiKey, in
     {
         int j = iHi + 1;
         int i = iLo - 1;
-        unsigned int pivot = MedianOfThree(pBase, uiKey, iLo, iHi);
+        unsigned int pivot = NiGeometryData_ChoosePivot(pBase, uiKey, iLo, iHi);
         for (;;)
         {
             do

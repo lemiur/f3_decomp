@@ -1734,7 +1734,7 @@ struct ObjectWriter {
     virtual void slot08();
     virtual void WriteValue(char* name, void* value, int flags);
     virtual void slot10();
-    virtual void WriteArray(int kind, char* name, void* array, int length, void* bounded);
+    virtual void writeArray64(int kind, char* name, void* array, int length, void* bounded);
     virtual void OpenBlock(char* name);
     virtual void CloseBlock();
     int m_unknown04;

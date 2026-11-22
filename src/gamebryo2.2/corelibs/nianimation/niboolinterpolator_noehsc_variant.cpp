@@ -381,7 +381,7 @@ struct S_00a533c0_Class
     unsigned char unk0c;
     S_00a533c0_Data* unk10;
     unsigned char unk14;
-    bool __thiscall UpdateValue(float fValue, int iValue, unsigned char* pOut);
+    bool __thiscall NiBoolInterpolator_Update(float fValue, int iValue, unsigned char* pOut);
 };
 void __cdecl FUN_00aa1000();
 void __cdecl FUN_00aa0ab0();

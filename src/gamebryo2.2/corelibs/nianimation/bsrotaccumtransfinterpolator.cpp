@@ -176,14 +176,15 @@ struct FUN_00a43ac0_Class : BaseInterp
     int unk30[6];
     NiQuaternion m_kRotValue;
 
-    void __thiscall UpdateRotValue(int a);
+    void __thiscall BSRotAccumTransfInterpolator_LinkObject(int a);
 };
 
 // Calls FUN_00a43330, then copies the first rotation key's quaternion into m_kRotValue when rotation keys exist.
 // @fnv 0x00a43ac0
 // pdb: BSRotAccumTransfInterpolator::LinkObject | BSRotAccumTransfInterpolator.obj | fnv360_0822_retail, caller_sim, high
 // pdb params: arStream
-void FUN_00a43ac0_Class::UpdateRotValue(int a)
+// pdb: BSRotAccumTransfInterpolator::LinkObject | BSRotAccumTransfInterpolator.obj | fnv360_0822_retail, caller_sim, high (was: UpdateRotValue)
+void FUN_00a43ac0_Class::BSRotAccumTransfInterpolator_LinkObject(int a)
 {
     FUN_00a43330(a);
     unsigned int uiNumKeys;
@@ -294,7 +295,7 @@ struct TransformValue
 ConjugateValue __cdecl FUN_00a6dc00(const QuaternionValue&);
 PositionValue __cdecl FUN_00a27490(float, void*, int, unsigned int, unsigned int&, unsigned char);
 QuaternionValue __cdecl FUN_00a28740(float, void*, int, unsigned int, unsigned int&, unsigned char);
-float __cdecl InterpolateKey(float, void*, int, unsigned int, unsigned int&, unsigned char);
+float __cdecl NiFloatKey_GenInterp(float, void*, int, unsigned int, unsigned int&, unsigned char);
 struct RotationObject
 {
     int unk00, unk04, unk08, unk0c, unk10, unk14, unk18, unk1c, unk20, unk24, unk28, unk2c, unk30;
@@ -374,7 +375,7 @@ bool RotAccumInterpolator::Evaluate(float time, RotationObject* object, Transfor
         if (count > 0)
         {
             index = scaleIndex;
-            value.scale = InterpolateKey(time, keys, scaleType, count, index, stride);
+            value.scale = NiFloatKey_GenInterp(time, keys, scaleType, count, index, stride);
             scaleIndex = (unsigned short)index;
         }
     }

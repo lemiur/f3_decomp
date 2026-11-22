@@ -1078,7 +1078,8 @@ static __forceinline void ClampSecondBox(const CollisionBox& box, const Pt3& dir
 // @fnv 0x00ea7730
 // pdb: NiBoxBV::RefinePoint | NiBoxBV.obj | fnv360_0822_retail, objrun, high
 // pdb params: fTime, pkBBV0, pkV0, pkBBV1, pkV1, fIntrTime, kIntrPt0
-void __cdecl ClampPositionToBoxes(float threshold, const CollisionBox* firstBox, const Pt3* firstDirection,
+// pdb: NiBoxBV::RefinePoint | NiBoxBV.obj | fnv360_0822_retail, objrun, high (was: ClampPositionToBoxes)
+void __cdecl NiBoxBV_RefinePoint(float threshold, const CollisionBox* firstBox, const Pt3* firstDirection,
                                   const CollisionBox* secondBox, const Pt3* secondDirection, const float* distance,
                                   Pt3* position)
 {
@@ -3532,7 +3533,7 @@ inline float NiAbs(float fValue)
 {
     return float(fabs(fValue));
 }
-void __cdecl ClampPositionToBoxes(float fTime, const SweepBox* pkBox0, const SweepPoint* pkV0, const SweepBox* pkBox1,
+void __cdecl NiBoxBV_RefinePoint(float fTime, const SweepBox* pkBox0, const SweepPoint* pkV0, const SweepBox* pkBox1,
                                   const SweepPoint* pkV1, float& fIntrTime, SweepPoint& kPoint);
 
 // Tests two moving boxes over maxTime and writes hitTime and hitPoint, with normal outputs when requested.
@@ -4113,7 +4114,7 @@ bool __cdecl FUN_00ea7d40(float maxTime, const SweepBox& box0, const SweepPoint&
             hitPoint[k] = b1.GetNavMeshData()[k] + (hitTime * vel1[k]) + y[0] * b1.GetAxis(0)[k] +
                           y[1] * b1.GetAxis(1)[k] + y[2] * b1.GetAxis(2)[k];
         }
-        ClampPositionToBoxes(maxTime, &b1, &vel1, &b0, &vel0, hitTime, hitPoint);
+        NiBoxBV_RefinePoint(maxTime, &b1, &vel1, &b0, &vel0, hitTime, hitPoint);
         if (wantNormals)
         {
             if (side < 0)
@@ -4151,7 +4152,7 @@ bool __cdecl FUN_00ea7d40(float maxTime, const SweepBox& box0, const SweepPoint&
             hitPoint[k] = b0.GetNavMeshData()[k] + (hitTime * vel0[k]) + x[0] * b0.GetAxis(0)[k] +
                           x[1] * b0.GetAxis(1)[k] + x[2] * b0.GetAxis(2)[k];
         }
-        ClampPositionToBoxes(maxTime, &b0, &vel0, &b1, &vel1, hitTime, hitPoint);
+        NiBoxBV_RefinePoint(maxTime, &b0, &vel0, &b1, &vel1, hitTime, hitPoint);
         if (wantNormals)
         {
             if (side < 0)
@@ -4205,7 +4206,7 @@ bool __cdecl FUN_00ea7d40(float maxTime, const SweepBox& box0, const SweepPoint&
             hitPoint[k] = b0.GetNavMeshData()[k] + (hitTime * vel0[k]) + x[0] * b0.GetAxis(0)[k] +
                           x[1] * b0.GetAxis(1)[k] + x[2] * b0.GetAxis(2)[k];
         }
-        ClampPositionToBoxes(maxTime, &b0, &vel0, &b1, &vel1, hitTime, hitPoint);
+        NiBoxBV_RefinePoint(maxTime, &b0, &vel0, &b1, &vel1, hitTime, hitPoint);
         if (wantNormals)
         {
             if (side < 0)
@@ -4258,7 +4259,7 @@ bool __cdecl FUN_00ea7d40(float maxTime, const SweepBox& box0, const SweepPoint&
             hitPoint[k] = b0.GetNavMeshData()[k] + (hitTime * vel0[k]) + x[0] * b0.GetAxis(0)[k] +
                           x[1] * b0.GetAxis(1)[k] + x[2] * b0.GetAxis(2)[k];
         }
-        ClampPositionToBoxes(maxTime, &b0, &vel0, &b1, &vel1, hitTime, hitPoint);
+        NiBoxBV_RefinePoint(maxTime, &b0, &vel0, &b1, &vel1, hitTime, hitPoint);
         if (wantNormals)
         {
             if (side < 0)
@@ -4311,7 +4312,7 @@ bool __cdecl FUN_00ea7d40(float maxTime, const SweepBox& box0, const SweepPoint&
             hitPoint[k] = b0.GetNavMeshData()[k] + (hitTime * vel0[k]) + x[0] * b0.GetAxis(0)[k] +
                           x[1] * b0.GetAxis(1)[k] + x[2] * b0.GetAxis(2)[k];
         }
-        ClampPositionToBoxes(maxTime, &b0, &vel0, &b1, &vel1, hitTime, hitPoint);
+        NiBoxBV_RefinePoint(maxTime, &b0, &vel0, &b1, &vel1, hitTime, hitPoint);
         if (wantNormals)
         {
             if (side < 0)
@@ -4364,7 +4365,7 @@ bool __cdecl FUN_00ea7d40(float maxTime, const SweepBox& box0, const SweepPoint&
             hitPoint[k] = b0.GetNavMeshData()[k] + (hitTime * vel0[k]) + x[0] * b0.GetAxis(0)[k] +
                           x[1] * b0.GetAxis(1)[k] + x[2] * b0.GetAxis(2)[k];
         }
-        ClampPositionToBoxes(maxTime, &b0, &vel0, &b1, &vel1, hitTime, hitPoint);
+        NiBoxBV_RefinePoint(maxTime, &b0, &vel0, &b1, &vel1, hitTime, hitPoint);
         if (wantNormals)
         {
             if (side < 0)
@@ -4417,7 +4418,7 @@ bool __cdecl FUN_00ea7d40(float maxTime, const SweepBox& box0, const SweepPoint&
             hitPoint[k] = b0.GetNavMeshData()[k] + (hitTime * vel0[k]) + x[0] * b0.GetAxis(0)[k] +
                           x[1] * b0.GetAxis(1)[k] + x[2] * b0.GetAxis(2)[k];
         }
-        ClampPositionToBoxes(maxTime, &b0, &vel0, &b1, &vel1, hitTime, hitPoint);
+        NiBoxBV_RefinePoint(maxTime, &b0, &vel0, &b1, &vel1, hitTime, hitPoint);
         if (wantNormals)
         {
             if (side < 0)
@@ -4470,7 +4471,7 @@ bool __cdecl FUN_00ea7d40(float maxTime, const SweepBox& box0, const SweepPoint&
             hitPoint[k] = b0.GetNavMeshData()[k] + (hitTime * vel0[k]) + x[0] * b0.GetAxis(0)[k] +
                           x[1] * b0.GetAxis(1)[k] + x[2] * b0.GetAxis(2)[k];
         }
-        ClampPositionToBoxes(maxTime, &b0, &vel0, &b1, &vel1, hitTime, hitPoint);
+        NiBoxBV_RefinePoint(maxTime, &b0, &vel0, &b1, &vel1, hitTime, hitPoint);
         if (wantNormals)
         {
             if (side < 0)
@@ -4523,7 +4524,7 @@ bool __cdecl FUN_00ea7d40(float maxTime, const SweepBox& box0, const SweepPoint&
             hitPoint[k] = b0.GetNavMeshData()[k] + (hitTime * vel0[k]) + x[0] * b0.GetAxis(0)[k] +
                           x[1] * b0.GetAxis(1)[k] + x[2] * b0.GetAxis(2)[k];
         }
-        ClampPositionToBoxes(maxTime, &b0, &vel0, &b1, &vel1, hitTime, hitPoint);
+        NiBoxBV_RefinePoint(maxTime, &b0, &vel0, &b1, &vel1, hitTime, hitPoint);
         if (wantNormals)
         {
             if (side < 0)
@@ -4576,7 +4577,7 @@ bool __cdecl FUN_00ea7d40(float maxTime, const SweepBox& box0, const SweepPoint&
             hitPoint[k] = b0.GetNavMeshData()[k] + (hitTime * vel0[k]) + x[0] * b0.GetAxis(0)[k] +
                           x[1] * b0.GetAxis(1)[k] + x[2] * b0.GetAxis(2)[k];
         }
-        ClampPositionToBoxes(maxTime, &b0, &vel0, &b1, &vel1, hitTime, hitPoint);
+        NiBoxBV_RefinePoint(maxTime, &b0, &vel0, &b1, &vel1, hitTime, hitPoint);
         if (wantNormals)
         {
             if (side < 0)
@@ -4629,7 +4630,7 @@ bool __cdecl FUN_00ea7d40(float maxTime, const SweepBox& box0, const SweepPoint&
             hitPoint[k] = b0.GetNavMeshData()[k] + (hitTime * vel0[k]) + x[0] * b0.GetAxis(0)[k] +
                           x[1] * b0.GetAxis(1)[k] + x[2] * b0.GetAxis(2)[k];
         }
-        ClampPositionToBoxes(maxTime, &b0, &vel0, &b1, &vel1, hitTime, hitPoint);
+        NiBoxBV_RefinePoint(maxTime, &b0, &vel0, &b1, &vel1, hitTime, hitPoint);
         if (wantNormals)
         {
             if (side < 0)

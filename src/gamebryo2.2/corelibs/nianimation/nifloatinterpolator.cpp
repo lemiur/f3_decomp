@@ -636,13 +636,14 @@ extern float DAT_0109a918;
 class FUN_00a3c420_cls : public NiFloatInterpolator
 {
   public:
-    void CollapseConstantKeys();
+    void NiFloatInterpolator_Collapse();
 };
 
 // When the key data is empty or collapsible, clears m_spFloatData and stores a float value in m_fFloatValue.
 // @fnv 0x00a3c420
 // pdb: NiFloatInterpolator::Collapse | NiFloatInterpolator.obj | fnv360_0822_retail, objrun, high
-void FUN_00a3c420_cls::CollapseConstantKeys()
+// pdb: NiFloatInterpolator::Collapse | NiFloatInterpolator.obj | fnv360_0822_retail, objrun, high (was: CollapseConstantKeys)
+void FUN_00a3c420_cls::NiFloatInterpolator_Collapse()
 {
     if (m_spFloatData.m_pObject)
     {

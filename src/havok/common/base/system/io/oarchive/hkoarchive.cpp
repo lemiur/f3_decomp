@@ -83,12 +83,13 @@ namespace fnv_00d60ac0 {
 struct hkOArchive
 {
     void WriteSwapped(const void* data, unsigned int size, unsigned int elementCount);
-    void WriteArray(const void* data, unsigned int elementCount);
+    void writeArray64(const void* data, unsigned int elementCount);
 };
 // @fnv 0x00d60ac0
 // pdb: hkOArchive::writeArray64 | hkOArchive.obj | fnv360_0822_retail, objrun, high
 // pdb params: array, nelem
-void hkOArchive::WriteArray(const void* data, unsigned int elementCount)
+// pdb: hkOArchive::writeArray64 | hkOArchive.obj | fnv360_0822_retail, objrun, high (was: WriteArray)
+void hkOArchive::writeArray64(const void* data, unsigned int elementCount)
 {
     WriteSwapped(data, 8, elementCount);
 }

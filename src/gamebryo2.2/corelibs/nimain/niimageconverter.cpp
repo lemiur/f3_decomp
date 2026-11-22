@@ -48,7 +48,8 @@ inline void Rel(NiRefObject2* o)
 struct RefCounted;
 extern RefCounted* DAT_012003f4;
 // pdb: NiImageConverter::_SDMInit | NiImageConverter.obj | fnv360_0822_retail, call_gap, high
-void CreateImageConverter()
+// pdb: NiImageConverter::_SDMInit | NiImageConverter.obj | fnv360_0822_retail, call_gap, high (was: CreateImageConverter)
+void NiImageConverter__SDMInit()
 {
     NiRefObject2* p = new NiImageConverter2();
     if ((NiRefObject2*)DAT_012003f4 != p)
@@ -139,7 +140,8 @@ struct FUN_00a76890_eq
 // @fnv 0x00a76890
 // pdb: NiImageConverter::CanConvertPixelData | NiImageConverter.obj | fnv360_0822_retail, objrun, high
 // pdb params: kSrcFmt, kDestFmt
-bool __stdcall ArePixelFormatsEqual(void* apFormatA, void* apFormatB)
+// pdb: NiImageConverter::CanConvertPixelData | NiImageConverter.obj | fnv360_0822_retail, objrun, high (was: ArePixelFormatsEqual)
+bool __stdcall NiImageConverter_CanConvertPixelData(void* apFormatA, void* apFormatB)
 {
     NiPixelFormat& a = *(NiPixelFormat*)apFormatA;
     NiPixelFormat& b = *(NiPixelFormat*)apFormatB;
@@ -650,13 +652,14 @@ struct ImageOwner
     int unk78;
     int unk7c;
     ImageLoader loader;
-    ImageResult* LoadImage(const char* name, ImageResult* destination, InputFile* supplied);
+    ImageResult* NiImageConverter_ReadImageFile(const char* name, ImageResult* destination, InputFile* supplied);
 };
 // Loads an image from a file path using the loader, returning the result or null on failure.
 // @fnv 0x00a767c0
 // pdb: NiImageConverter::ReadImageFile | NiImageConverter.obj | fnv360_0822_retail, objrun, high
 // pdb params: pcFilename, pkOptDest, apFile
-ImageResult* ImageOwner::LoadImage(const char* apPath, ImageResult* destination, InputFile* apInputFile)
+// pdb: NiImageConverter::ReadImageFile | NiImageConverter.obj | fnv360_0822_retail, objrun, high (was: LoadImage)
+ImageResult* ImageOwner::NiImageConverter_ReadImageFile(const char* apPath, ImageResult* destination, InputFile* apInputFile)
 {
 
     PathParts pathParts(apPath);

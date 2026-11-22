@@ -17,7 +17,7 @@ struct SevenInts
 };
 struct H74e10
 {
-    void __thiscall SetFromFrustum(void*, void*);
+    void __thiscall NiFrustumPlanes_Set(void*, void*);
 };
 struct S694a0
 {
@@ -29,14 +29,14 @@ struct S694a0
     int _8c;
     void __thiscall FUN_00a694a0(void*);
 };
-// If _0c is set, copies seven ints from src into _10, calls SetFromFrustum on _10 and _0c+0x68, then sets _8c to 63.
+// If _0c is set, copies seven ints from src into _10, calls NiFrustumPlanes_Set on _10 and _0c+0x68, then sets _8c to 63.
 // @fnv 0x00a694a0
 void __thiscall S694a0::FUN_00a694a0(void* pSource)
 {
     if (_0c)
     {
         *(SevenInts*)_10 = *(SevenInts*)pSource;
-        _2c.SetFromFrustum(_10, _0c + 0x68);
+        _2c.NiFrustumPlanes_Set(_10, _0c + 0x68);
         _8c = 63;
     }
 }

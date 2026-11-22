@@ -107,7 +107,7 @@ class NiTriShapeDataStandIn
     NiSharedNormal* m_pkSharedNormalArray;
     unsigned short m_usSharedNormalCount;
 
-    void EnsureNormals(bool bInitialize);
+    void NiGeometryData_CreateNormals(bool bInitialize);
     void FUN_00a67090(unsigned int uiMask);
     void RecalculateNormals();
 };
@@ -116,7 +116,7 @@ class NiTriShapeDataStandIn
 // pdb: NiTriShapeData::CalculateNormals | NiTriShapeData_Xenon.obj | fnv360_0822_retail, caller_sim, low
 void NiTriShapeDataStandIn::RecalculateNormals()
 {
-    EnsureNormals(true);
+    NiGeometryData_CreateNormals(true);
     unsigned short* pusTriList = m_pusTriList;
     unsigned short usTriangleCount = GetNumberOfVertices();
     for (unsigned short i = 0; i < usTriangleCount; i++)

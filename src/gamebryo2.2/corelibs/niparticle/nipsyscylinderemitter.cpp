@@ -169,14 +169,15 @@ struct NiPSysVolumeEmitterStand
 
 struct FUN_00c1fca0_cls : NiPSysCylinderEmitter
 {
-    void LoadCylinderEmitter(NiStream& stream);
+    void NiPSysCylinderEmitter_SaveBinary(NiStream& stream);
 };
 
 // Loads the volume emitter base stream, then reads two values from the stream into the cylinder emitter.
 // @fnv 0x00c1fca0
 // pdb: NiPSysCylinderEmitter::SaveBinary | NiPSysCylinderEmitter.obj | fnv360_0822_retail, caller_sim, high
 // pdb params: kStream
-void FUN_00c1fca0_cls::LoadCylinderEmitter(NiStream& stream)
+// pdb: NiPSysCylinderEmitter::SaveBinary | NiPSysCylinderEmitter.obj | fnv360_0822_retail, caller_sim, high (was: LoadCylinderEmitter)
+void FUN_00c1fca0_cls::NiPSysCylinderEmitter_SaveBinary(NiStream& stream)
 {
     reinterpret_cast<NiPSysVolumeEmitterStand*>(this)->LoadStream(stream);
     CylinderEmitterStreamView* s = reinterpret_cast<CylinderEmitterStreamView*>(&stream);

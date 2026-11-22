@@ -261,7 +261,7 @@ struct SphereMatrix3
 
 struct SphereEmitter00c1fe20 : NiPSysSphereEmitter
 {
-    void GenerateSpherePoint(SphereMatrix3& kRotate, SpherePoint3& kPosition, SpherePoint3& kMotionVelocity);
+    void NiPSysSphereEmitter_ComputeVolumeInitialPositionAndVelocity(SphereMatrix3& kRotate, SpherePoint3& kPosition, SpherePoint3& kMotionVelocity);
 };
 
 static inline float UnitRandom()
@@ -272,7 +272,8 @@ static inline float UnitRandom()
 // @fnv 0x00c1fe20
 // pdb: NiPSysSphereEmitter::ComputeVolumeInitialPositionAndVelocity | NiPSysSphereEmitter.obj | fnv360_0822_retail, objrun, high
 // pdb params: kEmitterToPSys, kPosition, kVelocity
-void SphereEmitter00c1fe20::GenerateSpherePoint(SphereMatrix3& kRotate, SpherePoint3& kPosition,
+// pdb: NiPSysSphereEmitter::ComputeVolumeInitialPositionAndVelocity | NiPSysSphereEmitter.obj | fnv360_0822_retail, objrun, high (was: GenerateSpherePoint)
+void SphereEmitter00c1fe20::NiPSysSphereEmitter_ComputeVolumeInitialPositionAndVelocity(SphereMatrix3& kRotate, SpherePoint3& kPosition,
                                                 SpherePoint3& kMotionVelocity)
 {
     float fRadius = m_fBoundRadius * UnitRandom();

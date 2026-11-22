@@ -514,7 +514,7 @@ class NiTimeControllerA38
         return (bool)(GetField(MANAGERCONTROLLED_MASK, MANAGERCONTROLLED_POS) & 1);
     }
     void AdvanceControllerTime();
-    void UpdateKeyTimes();
+    void NiSingleInterpController_ResetTimeExtrema();
 
     void* m_ppVirtualMethodTable;
     int unk04;
@@ -535,7 +535,8 @@ class NiTimeControllerA38
 
 // @fnv 0x00a38ec0
 // pdb: NiSingleInterpController::ResetTimeExtrema | NiSingleInterpController.obj | fnv360_0822_retail, objrun, high
-void NiTimeControllerA38::UpdateKeyTimes()
+// pdb: NiSingleInterpController::ResetTimeExtrema | NiSingleInterpController.obj | fnv360_0822_retail, objrun, high (was: UpdateKeyTimes)
+void NiTimeControllerA38::NiSingleInterpController_ResetTimeExtrema()
 {
     if (GetManagerControlled())
         return;

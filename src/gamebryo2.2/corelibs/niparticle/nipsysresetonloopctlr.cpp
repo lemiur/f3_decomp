@@ -88,12 +88,13 @@ struct FUN_00c28430_Object : CloneableObj
 };
 struct FUN_00c28430_class : CloneableObj
 {
-    FUN_00c28430_Object* CreateCloneableObject(void* volatile argument);
+    FUN_00c28430_Object* NiPSysResetOnLoopCtlr_CreateClone(void* volatile argument);
 };
 // @fnv 0x00c28430
 // pdb: NiPSysResetOnLoopCtlr::CreateClone | NiPSysResetOnLoopCtlr.obj | fnv360_0822_retail, caller_sim, high
 // pdb params: kCloning
-FUN_00c28430_Object* FUN_00c28430_class::CreateCloneableObject(void* volatile argument)
+// pdb: NiPSysResetOnLoopCtlr::CreateClone | NiPSysResetOnLoopCtlr.obj | fnv360_0822_retail, caller_sim, high (was: CreateCloneableObject)
+FUN_00c28430_Object* FUN_00c28430_class::NiPSysResetOnLoopCtlr_CreateClone(void* volatile argument)
 {
     FUN_00c28430_Object* object = (FUN_00c28430_Object*)NiMemObject::operator new(0x38);
     if (object)

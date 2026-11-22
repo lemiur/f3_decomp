@@ -84,7 +84,7 @@ struct FUN_00a94880_shell
     unsigned int m_uiSize;
     char** m_ppcValue;
 
-    void __thiscall CopyStringsExtraData(NiStringsExtraData* pDest, void* pCloning);
+    void __thiscall NiStringsExtraData_CopyMembers(NiStringsExtraData* pDest, void* pCloning);
 };
 
 struct NiExtraDataFUN_00a7b330_shell
@@ -99,7 +99,8 @@ extern "C" unsigned int __cdecl strlen(const char*);
 // @fnv 0x00a94880
 // pdb: NiStringsExtraData::CopyMembers | NiStringsExtraData.obj | fnv360_0822_retail, caller_sim, high
 // pdb params: pDest, kCloning
-void __thiscall FUN_00a94880_shell::CopyStringsExtraData(NiStringsExtraData* pDest, void* pCloning)
+// pdb: NiStringsExtraData::CopyMembers | NiStringsExtraData.obj | fnv360_0822_retail, caller_sim, high (was: CopyStringsExtraData)
+void __thiscall FUN_00a94880_shell::NiStringsExtraData_CopyMembers(NiStringsExtraData* pDest, void* pCloning)
 {
     unsigned int i;
     unsigned int uiLen;
@@ -306,7 +307,7 @@ struct CloneObject
 
 struct CloneSource
 {
-    void CopyStringsExtraData(CloneObject* pDest, void* pCloning);
+    void NiStringsExtraData_CopyMembers(CloneObject* pDest, void* pCloning);
     CloneObject* NiStringsExtraData_CreateClone(void* pCloning);
 };
 
@@ -315,7 +316,7 @@ struct CloneSource
 CloneObject* CloneSource::NiStringsExtraData_CreateClone(void* pCloning)
 {
     CloneObject* p = new CloneObject;
-    CopyStringsExtraData(p, pCloning);
+    NiStringsExtraData_CopyMembers(p, pCloning);
     return p;
 }
 

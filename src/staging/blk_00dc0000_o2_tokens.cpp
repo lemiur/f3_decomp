@@ -15,7 +15,8 @@ struct S00dcc240_Stream
     virtual void Mark(int n);
     virtual void Restore();
 };
-static __declspec(noinline) void SkipWhitespace(S00dcc240_Stream* stream)
+// pdb: eatWhiteSpace | hkIStream.obj | fnv360_0822_retail, call_seq, high (was: SkipWhitespace)
+static __declspec(noinline) void eatWhiteSpace(S00dcc240_Stream* stream)
 {
     int storage[16];
     char* buffer = (char*)storage;
@@ -51,7 +52,7 @@ static __declspec(noinline) unsigned __int64 readInteger64(S00dcc240_Stream* str
 {
     int storage[64];
 
-    SkipWhitespace(stream);
+    eatWhiteSpace(stream);
     *negative = false;
     unsigned __int64 value = 0;
     int cursor = 0;

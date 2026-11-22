@@ -1215,7 +1215,7 @@ struct Stream341
     unsigned int unk248;
     unsigned int unk24c;
     BinaryOutput341* output;
-    void WriteObjectLink(const void* name);
+    void NiStream_SaveFixedString(const void* name);
 };
 struct Transform341
 {
@@ -1249,7 +1249,7 @@ void LookAt341::SaveToStream(Stream341* stream)
     FUN_00a724d0(stream);
     SaveBinary341(*stream->output, flags);
     stream->SaveLink(target);
-    stream->WriteObjectLink(&targetName);
+    stream->NiStream_SaveFixedString(&targetName);
     transform.NiQuatTransform_SaveBinary(stream);
     for (unsigned int i = 0; i < 3; ++i)
         stream->SaveLink(interpolators[i]);

@@ -19654,7 +19654,8 @@ struct NavMeshInfo {
     NavMesh* pNavMesh;
     Bounds* pBounds;
     bool GetDisabled() const { return (uiFlags >> 4) & 1; }
-    Bounds* GetBounds() const { return pBounds; }
+    // pdb: NiGeometryData::GetNormalsIterator | NiGeometryData.obj | fnv360_0822_retail, objrun, high (was: GetBounds)
+    Bounds* NiGeometryData_GetNormalsIterator() const { return pBounds; }
     bool GetNavMesh(NiPointer<NavMesh>& ar_spNavMesh) const {
         if (GetDisabled())
             return false;
@@ -19744,7 +19745,7 @@ bool FUN_005fc5a0::FUN_005fdde0()
         pNavMeshes->FUN_00602700(&kInfos);
         for (unsigned int i = 0; i < kInfos.GetSize(); ++i) {
             const NavMeshInfo* pInfo = kInfos.GetAt(i);
-            Bounds* pBounds = pInfo->GetBounds();
+            Bounds* pBounds = pInfo->NiGeometryData_GetNormalsIterator();
             if (pBounds) {
                 if (pBounds->FUN_005c2870(&Location)) {
                     kInfos.Clear();

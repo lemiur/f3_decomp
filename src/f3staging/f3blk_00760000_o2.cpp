@@ -28998,7 +28998,7 @@ virtual void v5d8();
 virtual void v5dc();
 virtual void v5e0();
 virtual void v5e4();
-virtual Bounds*GetBounds();};struct Owner{
+virtual Bounds*NiGeometryData_GetNormalsIterator();};struct Owner{
 unsigned int unk00;
 unsigned int unk04;
 unsigned int unk08;
@@ -29025,7 +29025,7 @@ unsigned int unk58;
 unsigned int unk5c;
 Provider*provider;Vector FUN_004ed620();Vector FUN_00765c80();};
 // pdb: MobileObject::GetBoundMin | MobileObject.obj | fnv360_0822_retail, vtable, medium
-Vector Owner::FUN_00765c80(){if(provider&&provider->GetBounds()){Bounds*b=provider->GetBounds();DAT_0107b894=b->first-b->second;return DAT_0107b894;}return FUN_004ed620();}
+Vector Owner::FUN_00765c80(){if(provider&&provider->NiGeometryData_GetNormalsIterator()){Bounds*b=provider->NiGeometryData_GetNormalsIterator();DAT_0107b894=b->first-b->second;return DAT_0107b894;}return FUN_004ed620();}
 }
 }   // namespace f3m_00765c80
 

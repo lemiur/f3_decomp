@@ -616,7 +616,8 @@ struct NiPSysData
 // @fnv 0x00c206b0
 // pdb: NiPSysRotationModifier::Update | NiPSysRotationModifier.obj | fnv360_0822_retail, uconst, high
 // pdb params: fTime, pkData
-void __stdcall UpdateRotationAngles(float fTime, NiPSysData* pkData)
+// pdb: NiPSysRotationModifier::Update | NiPSysRotationModifier.obj | fnv360_0822_retail, uconst, high (was: UpdateRotationAngles)
+void __stdcall NiPSysRotationModifier_Update(float fTime, NiPSysData* pkData)
 {
     float* pfRotationAngles = pkData->m_pfRotationAngles;
     if (pfRotationAngles)
@@ -766,14 +767,15 @@ static inline void FastSinCos(float fAngleDifference, float& fCos, float& fSin)
 
 struct FUN_00c207a0_shell : public NiPSysRotationModifier
 {
-    void UpdateParticleRotation(NiPSysData* pkData, unsigned short usNewParticle);
+    void NiPSysRotationModifier_Initialize(NiPSysData* pkData, unsigned short usNewParticle);
 };
 
 // Sets the rotation axis and initial rotation angle/speed for a new particle, using random values or the modifier's configured defaults.
 // @fnv 0x00c207a0
 // pdb: NiPSysRotationModifier::Initialize | NiPSysRotationModifier.obj | fnv360_0822_retail, objrun, high
 // pdb params: pkData, usNewParticle
-void FUN_00c207a0_shell::UpdateParticleRotation(NiPSysData* pkSysData, unsigned short usNewParticle)
+// pdb: NiPSysRotationModifier::Initialize | NiPSysRotationModifier.obj | fnv360_0822_retail, objrun, high (was: UpdateParticleRotation)
+void FUN_00c207a0_shell::NiPSysRotationModifier_Initialize(NiPSysData* pkSysData, unsigned short usNewParticle)
 {
     RotationPSysData* pkData = (RotationPSysData*)pkSysData;
     NiPoint3* pkAxes = pkData->m_pkRotationAxes;

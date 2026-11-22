@@ -220,7 +220,8 @@ struct NiBSplineCompColorInterpolator51 : FUN_00a51ab0
 // Allocates and returns a new NiBSplineCompColorInterpolator51 with default scalar values.
 // @fnv 0x00a518f0
 // pdb: NiBSplineCompColorInterpolator::CreateObject | NiBSplineCompColorInterpolator.obj | fnv360_0822_retail, objrun, high
-void* CreateSplineCompColorInterpolator()
+// pdb: NiBSplineCompColorInterpolator::CreateObject | NiBSplineCompColorInterpolator.obj | fnv360_0822_retail, objrun, high (was: CreateSplineCompColorInterpolator)
+void* NiBSplineCompColorInterpolator_CreateObject()
 {
     return new NiBSplineCompColorInterpolator51;
 }

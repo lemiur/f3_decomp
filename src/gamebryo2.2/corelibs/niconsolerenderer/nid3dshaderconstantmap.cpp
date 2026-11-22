@@ -147,7 +147,7 @@ struct FUN_00e82ac0_e
     unsigned int v20;
 };
 extern unsigned char DAT_011f5fb4[];
-bool __cdecl LookupShaderConstantMapping(unsigned int, void*&);
+bool __cdecl NiShaderConstantMap_LookUpObjectMapping(unsigned int, void*&);
 unsigned int __cdecl GetAttributeTypeForMapping(void*, unsigned int*, unsigned int*);
 // Looks up the entry's key, stores a byte from DAT_011f5fb4 indexed by the result into flags, and on success stores the pointer and y into p10 and v20.
 // @fnv 0x00e82ac0
@@ -159,7 +159,7 @@ unsigned int __stdcall UpdateEntryFromKey(FUN_00e82ac0_e* pEntry)
     unsigned int uiKey = pEntry->key;
     unsigned int y = 0;
     unsigned int z;
-    if (LookupShaderConstantMapping(uiKey, x))
+    if (NiShaderConstantMap_LookUpObjectMapping(uiKey, x))
     {
         unsigned int idx = GetAttributeTypeForMapping(x, &y, &z);
         pEntry->flags = (pEntry->flags & 0xffffff00) | DAT_011f5fb4[idx];

@@ -635,7 +635,7 @@ struct Obj
     Obj* next;
     Obj* Cast(const RTT*) throw();
     bool FUN_00a5bf50(unsigned short) throw();
-    void ClearExtraData() throw();
+    void NiObjectNET_RemoveAllExtraData() throw();
     void Inc() throw()
     {
         InterlockedIncrement(&refs);

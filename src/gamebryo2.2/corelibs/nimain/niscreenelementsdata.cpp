@@ -33,7 +33,7 @@ bool NiScreenElementsData::SetRectangle(int iPolygon, float fLeft, float fTop, f
     GetVertices()[i].x = fRight;
     GetVertices()[i].y = fTop;
     GetVertices()[i].z = 0.0f;
-    SetDirtyFlags(1);
+    MarkAsChanged(1);
     m_bGeometryInitialized = true;
     return true;
 }
@@ -61,7 +61,7 @@ bool NiScreenElementsData::SetRectangleBounds(int iPolygonIndex, unsigned short 
                 pkTexture[2].y = fBottom;
                 pkTexture[3].x = fRight;
                 pkTexture[3].y = fTop;
-                SetDirtyFlags(8);
+                MarkAsChanged(8);
                 return true;
             }
         }
@@ -443,12 +443,13 @@ void* __cdecl FUN_00aa1070(unsigned int bytes);
 struct FUN_00a88410_shell : NiScreenElementsData
 {
     void NiTriShapeData_LoadBinary(NiStream485& kStream);
-    void LoadScreenElementsData(NiStream485& kStream);
+    void NiScreenElementsData_LoadBinary(NiStream485& kStream);
 };
 // @fnv 0x00a88410
 // pdb: NiScreenElementsData::LoadBinary | NiScreenElementsData.obj | fnv360_0822_retail, objrun, high
 // pdb params: kStream
-void FUN_00a88410_shell::LoadScreenElementsData(NiStream485& kStream)
+// pdb: NiScreenElementsData::LoadBinary | NiScreenElementsData.obj | fnv360_0822_retail, objrun, high (was: LoadScreenElementsData)
+void FUN_00a88410_shell::NiScreenElementsData_LoadBinary(NiStream485& kStream)
 {
     NiTriShapeData_LoadBinary(kStream);
     NiStreamLoadBinary485(kStream, m_usMaxPQuantity);

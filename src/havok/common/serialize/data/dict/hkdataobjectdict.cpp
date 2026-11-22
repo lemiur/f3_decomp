@@ -2583,7 +2583,7 @@ class hkObjDCB
     hkEntryDCB* m_entries;
 
     hkResultDCB FUN_00dcba40(int iKey, int iType) throw();
-    float GetEntryFloat(int iKey) throw();
+    float BSStripPSysData_GetPointLastUpdateTime(int iKey) throw();
 };
 
 }  // namespace fnv_00dcbd10

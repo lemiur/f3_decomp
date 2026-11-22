@@ -188,7 +188,7 @@ struct FUN_00a38b60_tgt
 };
 struct FUN_00a59a90_tgt
 {
-    void ReadMatrixFromStream(NiStream*);
+    void NiMatrix3_SaveBinary(NiStream*);
 };
 
 // @fnv 0x00a39720
@@ -202,7 +202,7 @@ void FUN_00a39720_shell::NiBlendAccumTransformInterpolator_SaveBinary(NiStream* 
         char* p = *(char**)((char*)this + 0x50) + uc * 0x68;
         ((FUN_00a38b60_tgt*)(p + 4))->NiQuatTransform_SaveBinary(kStream);
         ((FUN_00a38b60_tgt*)(p + 0x24))->NiQuatTransform_SaveBinary(kStream);
-        ((FUN_00a59a90_tgt*)(p + 0x44))->ReadMatrixFromStream(kStream);
+        ((FUN_00a59a90_tgt*)(p + 0x44))->NiMatrix3_SaveBinary(kStream);
     }
     ((FUN_00a38b60_tgt*)((char*)this + 0x30))->NiQuatTransform_SaveBinary(kStream);
 }
@@ -264,12 +264,13 @@ struct Self : Base
 {
     char pad[0x40];
     Item* items;
-    bool ResizeItems();
+    bool NiBlendAccumTransformInterpolator_ReallocateArrays();
 };
 // Calls NiBlendInterpolator_ReallocateArrays; if it succeeds, allocates a new Item array of size count, copies the old items over, frees the old array and stores the new one.
 // @fnv 0x00a39ec0
 // pdb: NiBlendAccumTransformInterpolator::ReallocateArrays | NiBlendAccumTransformInterpolator.obj | fnv360_0822_retail, objrun, high
-bool Self::ResizeItems()
+// pdb: NiBlendAccumTransformInterpolator::ReallocateArrays | NiBlendAccumTransformInterpolator.obj | fnv360_0822_retail, objrun, high (was: ResizeItems)
+bool Self::NiBlendAccumTransformInterpolator_ReallocateArrays()
 {
     unsigned char ucOldCount = count;
     bool bResized = NiBlendInterpolator_ReallocateArrays();
@@ -420,12 +421,13 @@ struct Self
     bool UpdateAccumulatedTransform(float, NiObjectNET*, NiQuatTransform&);
     void FUN_00a39f60(unsigned char, float, NiObjectNET*);
     bool FUN_00a39960(float, NiObjectNET*, NiQuatTransform&);
-    bool UpdateInterpolators(float fTime, NiObjectNET* pkInterpTarget, NiQuatTransform& kValue);
+    bool NiBlendAccumTransformInterpolator_Update(float fTime, NiObjectNET* pkInterpTarget, NiQuatTransform& kValue);
 };
 // @fnv 0x00a3a580
 // pdb: NiBlendAccumTransformInterpolator::Update | NiBlendAccumTransformInterpolator.obj | fnv360_0822_retail, objrun, high
 // pdb params: fTime, pkInterpTarget, kValue
-bool Self::UpdateInterpolators(float fTime, NiObjectNET* pkInterpTarget, NiQuatTransform& kValue)
+// pdb: NiBlendAccumTransformInterpolator::Update | NiBlendAccumTransformInterpolator.obj | fnv360_0822_retail, objrun, high (was: UpdateInterpolators)
+bool Self::NiBlendAccumTransformInterpolator_Update(float fTime, NiObjectNET* pkInterpTarget, NiQuatTransform& kValue)
 {
     bool bResult = false;
     unsigned char uc;
@@ -617,13 +619,14 @@ struct Target395
     int unk18, unk1c, unk20, unk24, unk28, unk2c;
     Transform395 accumulated;
     Item395* items;
-    void UpdateInterpolator(float, void*);
+    void NiBlendAccumTransformInterpolator_CalculateSingleValue(float, void*);
 };
 // Updates the interpolator at the current index with the given time and object, accumulating a cycle transform when time moves backwards.
 // @fnv 0x00a39530
 // pdb: NiBlendAccumTransformInterpolator::CalculateSingleValue | NiBlendAccumTransformInterpolator.obj | fnv360_0822_retail, objrun, high
 // pdb params: fTime, pkInterpTarget
-void Target395::UpdateInterpolator(float time, void* object)
+// pdb: NiBlendAccumTransformInterpolator::CalculateSingleValue | NiBlendAccumTransformInterpolator.obj | fnv360_0822_retail, objrun, high (was: UpdateInterpolator)
+void Target395::NiBlendAccumTransformInterpolator_CalculateSingleValue(float time, void* object)
 {
     Interpolator395* interp = entries[index].object;
     Item395& item = items[index];

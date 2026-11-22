@@ -52,7 +52,7 @@ void NiTimeController::SetTarget(NiObjectNET* pkTarget)
         if (IsGeometryController())
         {
             NiGeometry* pkGeometry = (NiGeometry*)m_pkTarget;
-            pkGeometry->GetModelData()->SetDataConsistency(NiGeometryData::STATIC);
+            pkGeometry->GetModelData()->SetConsistency(NiGeometryData::STATIC);
         }
     }
 
@@ -82,7 +82,7 @@ void NiTimeController::LinkObject(NiStream& kStream)
         if (IsGeometryController() && m_pkTarget)
         {
             NiGeometry* pkGeometry = (NiGeometry*)m_pkTarget;
-            pkGeometry->GetModelData()->SetDataConsistency(NiGeometryData::STATIC);
+            pkGeometry->GetModelData()->SetConsistency(NiGeometryData::STATIC);
         }
     }
 }
@@ -98,7 +98,8 @@ extern int DAT_011a9bdc;
 // @fnv 0x00a29690
 // pdb: NiColorKey::Interpolate | NiColorKey.obj | fnv360_0721_retail, objrun, high
 // pdb params: fTime, pKey0, pKey1, pResult
-int* __cdecl CopyGlobalsToBuffer(int, int, int, int* pDest)
+// pdb: NiColorKey::Interpolate | NiColorKey.obj | fnv360_0721_retail, objrun, high (was: CopyGlobalsToBuffer)
+int* __cdecl NiColorKey_Interpolate(int, int, int, int* pDest)
 {
     pDest[0] = DAT_011a9bd0;
     pDest[1] = DAT_011a9bd4;
@@ -210,12 +211,13 @@ class FUN_00a6cd30_cls
     float m_fStartTime;
     float m_fLastTime;
 
-    void ResetTiming();
+    void NiTimeController_Stop();
 };
 
 // @fnv 0x00a6cd30
 // pdb: NiTimeController::Stop | NiTimeController.obj | fnv360_0822_retail, vtable, high
-void FUN_00a6cd30_cls::ResetTiming()
+// pdb: NiTimeController::Stop | NiTimeController.obj | fnv360_0822_retail, vtable, high (was: ResetTiming)
+void FUN_00a6cd30_cls::NiTimeController_Stop()
 {
     m_uiObjectFlags &= 0xfff7;
     m_fLastTime = kNegInfinity;
@@ -299,7 +301,8 @@ struct TCAV : TCBase
 // @fnv 0x00a6d390
 // pdb: NiTimeController::StartAnimations | NiTimeController.obj | fnv360_0721_beta, objrun, high
 // pdb params: pkObj, fTime
-void __cdecl StartControllersRecursive(TCAV* p, float fTime)
+// pdb: NiTimeController::StartAnimations | NiTimeController.obj | fnv360_0721_beta, objrun, high (was: StartControllersRecursive)
+void __cdecl NiTimeController_StartAnimations(TCAV* p, float fTime)
 {
     NiTimeController* c = p->m_pControllers.m_pObject;
     while (c != 0)
@@ -328,7 +331,7 @@ L_0048: {
             TCAV* item = *pp;
             node = node->m_pNext;
             if (*pp != 0 && (*pp)->m_pControllers.m_pObject != 0)
-                StartControllersRecursive(*pp, fTime);
+                NiTimeController_StartAnimations(*pp, fTime);
         } while (node != 0);
     }
 }
@@ -343,7 +346,7 @@ L_0076:
                 TCAV** arr = p->m_ppChildren;
                 TCAV* child = arr[i];
                 if (child != 0)
-                    StartControllersRecursive(child, fTime);
+                    NiTimeController_StartAnimations(child, fTime);
                 i++;
             } while (i < p->m_usChildCount);
         }

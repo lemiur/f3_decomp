@@ -230,12 +230,13 @@ struct M76Obj
     float m_fLastTime;
     char pad24[0xc];
     unsigned char m_bBoolValue;
-    bool UpdateInterpBool(float, void*, bool*);
+    bool NiBlendBoolInterpolator_StoreSingleValue(float, void*, bool*);
 };
 // @fnv 0x00a566a0
 // pdb: NiBlendBoolInterpolator::StoreSingleValue | NiBlendBoolInterpolator.obj | fnv360_0822_retail, objrun, high
 // pdb params: fTime, pkInterpTarget, bValue
-bool M76Obj::UpdateInterpBool(float fTime, void* pkInterpTarget, bool* bValue)
+// pdb: NiBlendBoolInterpolator::StoreSingleValue | NiBlendBoolInterpolator.obj | fnv360_0822_retail, objrun, high (was: UpdateInterpBool)
+bool M76Obj::NiBlendBoolInterpolator_StoreSingleValue(float fTime, void* pkInterpTarget, bool* bValue)
 {
     if (m_uiValue1 & 1)
         fTime = m_fLastTime;

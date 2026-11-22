@@ -265,7 +265,7 @@ class CA449C0Base
 class CA449C0Container : public CA449C0Base
 {
   public:
-    void LinkObjects(CA449C0Stream& kStream);
+    void BSAnimNotes_LinkObject(CA449C0Stream& kStream);
 
     CA449C0Object** m_ppkObjects;
     unsigned short m_usNumObjects;
@@ -275,7 +275,8 @@ class CA449C0Container : public CA449C0Base
 // @fnv 0x00a449c0
 // pdb: BSAnimNotes::LinkObject | BSAnimNote.obj | fnv360_0822_retail, objrun, high
 // pdb params: arStream
-void CA449C0Container::LinkObjects(CA449C0Stream& kStream)
+// pdb: BSAnimNotes::LinkObject | BSAnimNote.obj | fnv360_0822_retail, objrun, high (was: LinkObjects)
+void CA449C0Container::BSAnimNotes_LinkObject(CA449C0Stream& kStream)
 {
     CA449C0Base::LinkObject(kStream);
     for (int i = 0; i < m_usNumObjects; i++)
@@ -887,13 +888,14 @@ class LoadObj
     unsigned int unk08;
     unsigned int unk0C;
     void ReadGroup(LoadStream* s);
-    void ReadBinaryFields(LoadStream* s);
+    void BSAnimNote_LoadBinary(LoadStream* s);
 };
 // Reads a group from the load stream, then binary-reads two unsigned int fields (unk08, unk0C) into the object.
 // @fnv 0x00a44a30
 // pdb: BSAnimNote::LoadBinary | BSAnimNote.obj | fnv360_0822_retail, caller_sim, high
 // pdb params: arStream
-void LoadObj::ReadBinaryFields(LoadStream* apLoadStream)
+// pdb: BSAnimNote::LoadBinary | BSAnimNote.obj | fnv360_0822_retail, caller_sim, high (was: ReadBinaryFields)
+void LoadObj::BSAnimNote_LoadBinary(LoadStream* apLoadStream)
 {
     ReadGroup(apLoadStream);
     StreamLoadBinary(*apLoadStream->GetIstr(), unk08);

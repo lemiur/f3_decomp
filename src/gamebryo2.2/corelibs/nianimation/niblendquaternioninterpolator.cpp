@@ -179,12 +179,13 @@ struct CloneOwner
 };
 struct FUN_00a55510_shell : NiBlendQuaternionInterpolator
 {
-    void* CloneInterpolator(void* kCloning);
+    void* NiBlendQuaternionInterpolator_CreateClone(void* kCloning);
 };
 // @fnv 0x00a55510
 // pdb: NiBlendQuaternionInterpolator::CreateClone | NiBlendQuaternionInterpolator.obj | fnv360_0721_beta, objrun, high
 // pdb params: kCloning
-void* FUN_00a55510_shell::CloneInterpolator(void* kCloning)
+// pdb: NiBlendQuaternionInterpolator::CreateClone | NiBlendQuaternionInterpolator.obj | fnv360_0721_beta, objrun, high (was: CloneInterpolator)
+void* FUN_00a55510_shell::NiBlendQuaternionInterpolator_CreateClone(void* kCloning)
 {
     void* pkObject = BSFadeNode::operator new(0x40);
     if (pkObject)

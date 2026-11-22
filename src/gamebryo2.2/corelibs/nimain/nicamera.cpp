@@ -731,7 +731,7 @@ class S00a70ba0_Cam : public NiAVObject
     float m_fMinNearPlaneDist, m_fMaxFarNearRatio;
     NiRect<float> m_kPort;
     float m_fTrailingValue;
-    void UpdateWorldToCamera();
+    void NiCamera_WorldToCameraMatrix();
     void Right(float& x, float& y, float& z) const
     {
         x = m_kWorldSpaceTransform.m_kOrientation.m_afEntries[0][2];
@@ -764,7 +764,8 @@ class S00a70ba0_Cam : public NiAVObject
 // Computes the m_afWorldToCamera matrix from the camera orientation, translation, and view frustum for orthographic or perspective projection.
 // @fnv 0x00a70ba0
 // pdb: NiCamera::WorldToCameraMatrix | NiCamera.obj | fnv360_0822_retail, call_gap, high
-void S00a70ba0_Cam::UpdateWorldToCamera()
+// pdb: NiCamera::WorldToCameraMatrix | NiCamera.obj | fnv360_0822_retail, call_gap, high (was: UpdateWorldToCamera)
+void S00a70ba0_Cam::NiCamera_WorldToCameraMatrix()
 {
     CameraVector kWorldPosition;
     Rotation().GetCol(0, kWorldPosition);

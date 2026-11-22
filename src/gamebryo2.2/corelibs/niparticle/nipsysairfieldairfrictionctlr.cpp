@@ -42,7 +42,7 @@ template <class T, class A> struct NiTPrimitiveArray
 struct NiObjectNET;
 struct BaseStandIn
 {
-    bool IsTargetParticleSystem(NiObjectNET*);
+    bool NiPSysModifierCtlr_InterpTargetIsCorrectType(NiObjectNET*);
 };
 struct NiPSysModifier;
 struct PsStandIn
@@ -74,7 +74,7 @@ struct FUN_00c306f0_class : BaseStandIn
 // pdb params: pkTarget
 bool FUN_00c306f0_class::HasModifierAfter(NiObjectNET* target)
 {
-    if (!IsTargetParticleSystem(target))
+    if (!NiPSysModifierCtlr_InterpTargetIsCorrectType(target))
         return false;
     NiPSysModifier* modifier = target->FUN_00c1b0f0((char*)this + 0x38);
     if (!modifier)

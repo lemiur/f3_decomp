@@ -38,7 +38,7 @@ struct CloningProcess
 };
 struct NiFloatsExtraData_shell : NiFloatsExtraData
 {
-    void __thiscall CopyFloatsExtraData(NiFloatsExtraData* pDest, CloningProcess* pCloning);
+    void __thiscall NiFloatsExtraData_CopyMembers(NiFloatsExtraData* pDest, CloningProcess* pCloning);
     void __thiscall FUN_00a7b330(NiFloatsExtraData*, CloningProcess*);
 };
 
@@ -46,7 +46,8 @@ struct NiFloatsExtraData_shell : NiFloatsExtraData
 // @fnv 0x00a89040
 // pdb: NiFloatsExtraData::CopyMembers | NiFloatsExtraData.obj | fnv360_0822_retail, caller_sim, high
 // pdb params: pDest, kCloning
-void __thiscall NiFloatsExtraData_shell::CopyFloatsExtraData(NiFloatsExtraData* pDest, CloningProcess* pCloning)
+// pdb: NiFloatsExtraData::CopyMembers | NiFloatsExtraData.obj | fnv360_0822_retail, caller_sim, high (was: CopyFloatsExtraData)
+void __thiscall NiFloatsExtraData_shell::NiFloatsExtraData_CopyMembers(NiFloatsExtraData* pDest, CloningProcess* pCloning)
 {
     FUN_00a7b330(pDest, pCloning);
     if (!m_pfValue || m_uiSize <= 0)

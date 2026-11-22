@@ -8556,7 +8556,7 @@ struct Bounds { Vec4 low,high; };
 struct Pose { float m00,m04,m08,m0c,m10,m14,m18,m1c,m20; float x,y,z,scale; };
 struct Source { int unk00,unk04,unk08,unk0c,unk10,unk14,unk18,unk1c,unk20,unk24,unk28,unk2c,unk30,unk34,unk38,unk3c,unk40,unk44,unk48,unk4c,unk50,unk54,unk58,unk5c,unk60,unk64; Pose pose; void FUN_008330a0(); };
 struct BoundsTarget {
- virtual void v00(); virtual void v04(); virtual void v08(); virtual void v0c(); virtual void v10(); virtual void v14(); virtual void GetBounds(Bounds*);
+ virtual void v00(); virtual void v04(); virtual void v08(); virtual void v0c(); virtual void v10(); virtual void v14(); virtual void NiGeometryData_GetNormalsIterator(Bounds*);
  void hkpAabbPhantom_setAabb(Bounds*);
 };
 struct Node { int unk00,unk04; BoundsTarget* target; void FUN_00c24b70(); };
@@ -8573,7 +8573,7 @@ void Owner::FUN_008f96c0() {
  if(!initial) return;
  Pose pose=src->pose;
  Bounds b;
- initial->GetBounds(&b);
+ initial->NiGeometryData_GetNormalsIterator(&b);
  b.high.x-=b.low.x; b.high.y-=b.low.y; b.high.z-=b.low.z; b.high.w-=b.low.w;
  b.high.x*=0.5; b.high.y*=0.5; b.high.z*=0.5; b.high.w*=0.5;
  b.low.x=b.high.x * -1.0; b.low.y=b.high.y * -1.0; b.low.z=b.high.z * -1.0; b.low.w=b.high.w * -1.0;

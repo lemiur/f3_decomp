@@ -764,14 +764,15 @@ class FUN_00a41410_cls
     unsigned short unk08;
     unsigned short m_uiItemCount;
 
-    void DispatchByKey(HandlerArg* a1);
+    void BSAnimNoteListener_Update(HandlerArg* a1);
 };
 
 // Iterates the entry table and calls Handle on each entry whose m_key matches the argument's m_key.
 // @fnv 0x00a41410
 // pdb: BSAnimNoteListener::Update | BSAnimNoteListener.obj | fnv360_0822_retail, call_seq, high
 // pdb params: apNote
-void FUN_00a41410_cls::DispatchByKey(HandlerArg* a1)
+// pdb: BSAnimNoteListener::Update | BSAnimNoteListener.obj | fnv360_0822_retail, call_seq, high (was: DispatchByKey)
+void FUN_00a41410_cls::BSAnimNoteListener_Update(HandlerArg* a1)
 {
     for (unsigned int i = 0; i < m_uiItemCount; ++i)
     {
@@ -2496,7 +2497,7 @@ struct Obj
     Obj* next;
     Obj* Cast(const RTT*) throw();
     bool FUN_00a5bf50(unsigned short) throw();
-    void ClearExtraData() throw();
+    void NiObjectNET_RemoveAllExtraData() throw();
     void Inc() throw()
     {
         InterlockedIncrement(&refs);
