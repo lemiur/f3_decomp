@@ -5,7 +5,26 @@
 
 extern "C" void __cdecl hkAgent1nMachine_InvalidateTim(void*, void*);
 
-struct hkpConvexListAgent
+// hkpGskfAgent and hkpConvexListAgent: the members the agent's functions here use, at their Fallout 3 offsets (names
+// from the New Vegas Xbox 360 PDB). Outside GSK mode the agent keeps its hkpAgent1nTrack in the bytes of the GSK
+// manifold, whose first word is the track's sector array.
+struct hkpGskfAgent
+{
+    int unk00;
+    int unk04;
+    void* m_contactMgr;         // +0x08
+    char unk0C[0x24];
+    char m_manifold[0x50];      // +0x30
+    void __thiscall AddPotential(int a);
+};
+struct hkpConvexListAgentData : hkpGskfAgent
+{
+    void* m_dispatcher;         // +0x80
+    char m_inGskMode;           // +0x84 hkBool
+    char m_processFunctionCalled;
+    short m_inStreamModeCounter;
+};
+struct hkpConvexListAgent : hkpConvexListAgentData
 {
     void __thiscall RemovePoint(int a);
     void __thiscall FUN_00d33770(int a);
@@ -16,10 +35,10 @@ struct hkpConvexListAgent
 // pdb params: input
 void __thiscall hkpConvexListAgent::FUN_00d33770(int a)
 {
-    if (*(char*)((char*)this + 0x84))
+    if (m_inGskMode)
         RemovePoint(a);
     else
-        hkAgent1nMachine_InvalidateTim(this + 0x30, (void*)a);
+        hkAgent1nMachine_InvalidateTim(m_manifold, (void*)a);
 }
 
 extern "C" void __cdecl FUN_00d339d0(int, int, int, int);
@@ -56,7 +75,7 @@ void __thiscall FUN_00d33c80_class::hkpConvexListAgent_getPenetrations(void* apA
 extern void* __cdecl CreateConvexListAgent();
 extern void* __cdecl FUN_00d33ca0();
 
-struct FUN_00d337f0_self
+struct FUN_00d337f0_self : hkpConvexListAgentData
 {
     void __thiscall FUN_00dacb20(int a);
     void __thiscall hkpConvexListAgent_removePoint(int a);
@@ -66,16 +85,11 @@ struct FUN_00d337f0_self
 // pdb: hkpConvexListAgent::removePoint | hkpConvexListAgent.obj | fnv360_0822_retail, vtable_prefix + bridge(vtable_prefix|vtable) + skyrim(vtable_prefix), high
 void __thiscall FUN_00d337f0_self::hkpConvexListAgent_removePoint(int a)
 {
-    if (*(char*)((char*)this + 0x84))
+    if (m_inGskMode)
         FUN_00dacb20(a);
 }
 
-struct hkpGskfAgent
-{
-    void __thiscall AddPotential(int a);
-};
-
-struct FUN_00d33810_cls : hkpGskfAgent
+struct FUN_00d33810_cls : hkpConvexListAgentData
 {
     void __thiscall hkpConvexListAgent_commitPotential(int a);
 };
@@ -84,7 +98,7 @@ struct FUN_00d33810_cls : hkpGskfAgent
 // pdb: hkpConvexListAgent::commitPotential | hkpConvexListAgent.obj | fnv360_0822_retail, vtable_prefix + bridge(vtable_prefix|vtable) + skyrim(vtable_prefix), high
 void FUN_00d33810_cls::hkpConvexListAgent_commitPotential(int a)
 {
-    if (*(char*)((char*)this + 0x84))
+    if (m_inGskMode)
         hkpGskfAgent::AddPotential(a);
 }
 
@@ -107,37 +121,37 @@ void __thiscall FUN_00d33830_cls::FUN_00d33830(int aiArg)
 }
 }  // namespace fnv_00d33830
 
-struct FUN_00d33740_cls
+struct FUN_00d33740_cls : hkpConvexListAgentData
 {
     void __thiscall FUN_00d33740(int a);
 };
 
-// If the byte at offset 0x84 is zero, calls FUN_00d97250 with this+0x30, the pointer at a+8 and a.
+// Outside GSK mode, passes the agent track, the pointer at a+4 and a to FUN_00a26d90.
 // @f3 0x009bd500 (community match, verified in this file)
 extern void __cdecl FUN_00a26d90(void*, void*, void*);
 
 void __thiscall FUN_00d33740_cls::FUN_00d33740(int a)
 {
-    if (*(char*)((char*)this + 0x84) == 0)
+    if (m_inGskMode == 0)
     {
-        FUN_00a26d90((char*)this + 0x30, *(void**)(a + 4), (void*)a);
+        FUN_00a26d90(m_manifold, *(void**)(a + 4), (void*)a);
     }
 }
 
 
 void __cdecl hkAgent1nMachine_Destroy(void*, int, int, int);
-struct FUN_00d33850_cls
+struct FUN_00d33850_cls : hkpConvexListAgentData
 {
     void __thiscall hkpConvexListAgent_switchToGskMode(int a);
 };
-// Calls hkAgent1nMachine_Destroy with fields at offsets 0x30, 0x80 and 8 plus a, then clears the field at 0x30 and sets the byte at 0x84 to 1.
+// Destroys the agent track with the dispatcher and contact manager, clears it and switches to GSK mode.
 // @fnv 0x00d33850
 // pdb: hkpConvexListAgent::switchToGskMode | hkpConvexListAgent.obj | fnv360_0822_retail, objrun + bridge(hash|objrun) + skyrim(hash), high
 void __thiscall FUN_00d33850_cls::hkpConvexListAgent_switchToGskMode(int a)
 {
-    hkAgent1nMachine_Destroy(this + 0x30, *(int*)(this + 0x80), *(int*)(this + 8), a);
-    *(int*)(this + 0x30) = 0;
-    *(char*)(this + 0x84) = 1;
+    hkAgent1nMachine_Destroy(m_manifold, (int)m_dispatcher, (int)m_contactMgr, a);
+    *(int*)m_manifold = 0;
+    m_inGskMode = 1;
 }
 
 // Forwards all five arguments to FUN_00d33ca0 and returns its result.
