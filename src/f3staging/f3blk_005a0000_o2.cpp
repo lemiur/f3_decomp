@@ -4,6 +4,7 @@
 // src/f3staging/f3blk_005a0000_o2.cpp - Fallout 3 STAGING unit (f3_staging_units.py, 3 Nov 2026) for functions with no New Vegas counterpart
 // (128 KB address window, o2 code style). Not a real source path: move functions to their real units once identified.
 
+#include "../../include/BSCoreDefines.h"
 #include "../../include/layout_support.h"
 #include "../../include/fnv_asm_helpers.h"
 
@@ -2447,9 +2448,9 @@ namespace f3m_005ad670 {
 
 struct EndianRecord5ad670 {
     int unk00;
-    volatile unsigned int unk04;
-    volatile unsigned int unk08;
-    volatile unsigned int unk0C;
+    unsigned int unk04;
+    unsigned int unk08;
+    unsigned int unk0C;
 
     void FUN_005ad670();
 };
@@ -2457,9 +2458,9 @@ struct EndianRecord5ad670 {
 // pdb: PACK_TARG_FILE::Endian | PackageTarget.obj | fnv360_0822_retail, call_gap, low
 void EndianRecord5ad670::FUN_005ad670()
 {
-    unk04 = _byteswap_ulong(unk04);
-    unk08 = _byteswap_ulong(unk08);
-    unk0C = _byteswap_ulong(unk0C);
+    BSEndian((char*)&unk04, BSIntToType<4>());
+    BSEndian((char*)&unk08, BSIntToType<4>());
+    BSEndian((char*)&unk0C, BSIntToType<4>());
 }
 }   // namespace f3m_005ad670
 
@@ -2905,15 +2906,15 @@ namespace f3m_005acc30 {
 
 struct FUN_005acc30_Holder {
     int unk0;
-    volatile unsigned int unk4;
-    volatile unsigned int unk8;
+    unsigned int unk4;
+    unsigned int unk8;
     void FUN_005acc30();
 };
 
 // pdb: PACK_LOC_FILE::Endian | PackageLocation.obj | fnv360_0822_retail, call_gap, low
 void FUN_005acc30_Holder::FUN_005acc30() {
-    unk4 = _byteswap_ulong(unk4);
-    unk8 = _byteswap_ulong(unk8);
+    BSEndian((char*)&unk4, BSIntToType<4>());
+    BSEndian((char*)&unk8, BSIntToType<4>());
 }
 }   // namespace f3m_005acc30
 
@@ -4698,20 +4699,20 @@ void __stdcall FUN_005bd070(Record5bd070* record, int first, unsigned short seco
 #include <stdlib.h>
 namespace f3m_005aa010 {
 struct Data5aa010 {
-    volatile unsigned long a;
-    volatile unsigned long b;
+    unsigned long a;
+    unsigned long b;
     int unk08;
-    volatile unsigned long d;
+    unsigned long d;
     int unk10;
-    volatile unsigned long c;
+    unsigned long c;
     void FUN_005aa010();
 };
 // pdb: PACK_DIALOGUE_DATA::Endian | PackageDataDialogue.obj | fnv360_0822_retail, call_gap_sim, low
 void Data5aa010::FUN_005aa010() {
-    a = _byteswap_ulong(a);
-    b = _byteswap_ulong(b);
-    c = _byteswap_ulong(c);
-    d = _byteswap_ulong(d);
+    BSEndian((char*)&a, BSIntToType<4>());
+    BSEndian((char*)&b, BSIntToType<4>());
+    BSEndian((char*)&c, BSIntToType<4>());
+    BSEndian((char*)&d, BSIntToType<4>());
 }
 
 }   // namespace f3m_005aa010
@@ -5889,23 +5890,23 @@ namespace f3m_005ae3e0 {
 
 struct S {
     int unk0;
-    volatile unsigned int unk4;
-    volatile unsigned short unk8;
-    volatile unsigned int unkC;
-    volatile unsigned int unk10;
-    volatile unsigned int unk14;
-    volatile unsigned int unk18;
+    unsigned int unk4;
+    unsigned short unk8;
+    unsigned int unkC;
+    unsigned int unk10;
+    unsigned int unk14;
+    unsigned int unk18;
 
     void FUN_005ae3e0();
 };
 
 void S::FUN_005ae3e0() {
-    unk4 = _byteswap_ulong(unk4);
-    unk18 = _byteswap_ulong(unk18);
-    unk14 = _byteswap_ulong(unk14);
-    unk8 = _byteswap_ushort(unk8);
-    unkC = _byteswap_ulong(unkC);
-    unk10 = _byteswap_ulong(unk10);
+    BSEndian((char*)&unk4, BSIntToType<4>());
+    BSEndian((char*)&unk18, BSIntToType<4>());
+    BSEndian((char*)&unk14, BSIntToType<4>());
+    BSEndian((char*)&unk8, BSIntToType<2>());
+    BSEndian((char*)&unkC, BSIntToType<4>());
+    BSEndian((char*)&unk10, BSIntToType<4>());
 }
 }   // namespace f3m_005ae3e0
 

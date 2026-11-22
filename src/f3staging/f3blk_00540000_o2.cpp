@@ -1,6 +1,7 @@
 // src/f3staging/f3blk_00540000_o2.cpp - Fallout 3 STAGING unit (f3_staging_units.py, 3 Nov 2026) for functions with no New Vegas counterpart
 // (128 KB address window, o2 code style). Not a real source path: move functions to their real units once identified.
 
+#include "../../include/BSCoreDefines.h"
 #include "../../include/layout_support.h"
 #include "../../include/fnv_asm_helpers.h"
 
@@ -632,14 +633,14 @@ void Owner::FUN_00545320()
 #include <intrin.h>
 namespace f3m_00547cd0 {
 struct Words986 {
-    volatile unsigned short first00, second02, third04, fourth06;
+    unsigned short first00, second02, third04, fourth06;
     void FUN_00547cd0();
 };
 void Words986::FUN_00547cd0() {
-    first00 = _byteswap_ushort(first00);
-    second02 = _byteswap_ushort(second02);
-    third04 = _byteswap_ushort(third04);
-    fourth06 = _byteswap_ushort(fourth06);
+    BSEndian((char*)&first00, BSIntToType<2>());
+    BSEndian((char*)&second02, BSIntToType<2>());
+    BSEndian((char*)&third04, BSIntToType<2>());
+    BSEndian((char*)&fourth06, BSIntToType<2>());
 }
 }   // namespace f3m_00547cd0
 
@@ -11304,42 +11305,42 @@ void Owner84::FUN_005477e0(){
 #include <stdlib.h>
 namespace f3m_00541d20 {
 struct Owner90{
-volatile unsigned int field00;
-volatile unsigned int field04;
-volatile unsigned int field08;
-volatile unsigned int field0c;
-volatile unsigned int field10;
-volatile unsigned int field14;
-volatile unsigned int field18;
-volatile unsigned int field1c;
-volatile unsigned int field20;
-volatile unsigned int field24;
-volatile unsigned int field28;
-volatile unsigned int field2c;
-volatile unsigned int field30;
-volatile unsigned int field34;
-volatile unsigned int field38;
-volatile unsigned int field3c;
-volatile unsigned int field40;
-volatile unsigned int field44;
-volatile unsigned int field48;
-volatile unsigned int field4c;
-volatile unsigned int field50;
+unsigned int field00;
+unsigned int field04;
+unsigned int field08;
+unsigned int field0c;
+unsigned int field10;
+unsigned int field14;
+unsigned int field18;
+unsigned int field1c;
+unsigned int field20;
+unsigned int field24;
+unsigned int field28;
+unsigned int field2c;
+unsigned int field30;
+unsigned int field34;
+unsigned int field38;
+unsigned int field3c;
+unsigned int field40;
+unsigned int field44;
+unsigned int field48;
+unsigned int field4c;
+unsigned int field50;
 void FUN_00541d20();
 };
 // pdb: TESModelPSA::~TESModelPSA | BGSBodyPart.obj | fnv360_1110_debug, objopen_prop, low
 void Owner90::FUN_00541d20(){
-field00=_byteswap_ulong(field00);
-field14=_byteswap_ulong(field14);
-field18=_byteswap_ulong(field18);
-field28=_byteswap_ulong(field28);
-field2c=_byteswap_ulong(field2c);
-field30=_byteswap_ulong(field30);
-field34=_byteswap_ulong(field34);
-field38=_byteswap_ulong(field38);
-field3c=_byteswap_ulong(field3c);
-field40=_byteswap_ulong(field40);
-field50=_byteswap_ulong(field50);
+BSEndian((char*)&field00, BSIntToType<4>());
+BSEndian((char*)&field14, BSIntToType<4>());
+BSEndian((char*)&field18, BSIntToType<4>());
+BSEndian((char*)&field28, BSIntToType<4>());
+BSEndian((char*)&field2c, BSIntToType<4>());
+BSEndian((char*)&field30, BSIntToType<4>());
+BSEndian((char*)&field34, BSIntToType<4>());
+BSEndian((char*)&field38, BSIntToType<4>());
+BSEndian((char*)&field3c, BSIntToType<4>());
+BSEndian((char*)&field40, BSIntToType<4>());
+BSEndian((char*)&field50, BSIntToType<4>());
 }
 
 }   // namespace f3m_00541d20
@@ -14555,28 +14556,28 @@ FUN_004554f0('FKRP');
 namespace f3m_00547d00 {
 
 // Header of a serialized record: three 16-bit fields, a 16-bit field left alone,
-// then four 32-bit fields. All the fields it swaps are read as volatile so the
+// then four 32-bit fields. All the fields it swaps are read as so the
 // compiler keeps the read/swap/write order of the original.
 struct DataSwap {
-    volatile unsigned short a;
-    volatile unsigned short b;
-    volatile unsigned short c;
+    unsigned short a;
+    unsigned short b;
+    unsigned short c;
     unsigned short unk06;
-    volatile unsigned int d;
-    volatile unsigned int e;
-    volatile unsigned int f;
-    volatile unsigned int g;
+    unsigned int d;
+    unsigned int e;
+    unsigned int f;
+    unsigned int g;
     void FUN_00547d00();
 };
 
 void DataSwap::FUN_00547d00() {
-    a = _byteswap_ushort(a);
-    b = _byteswap_ushort(b);
-    c = _byteswap_ushort(c);
-    d = _byteswap_ulong(d);
-    e = _byteswap_ulong(e);
-    f = _byteswap_ulong(f);
-    g = _byteswap_ulong(g);
+    BSEndian((char*)&a, BSIntToType<2>());
+    BSEndian((char*)&b, BSIntToType<2>());
+    BSEndian((char*)&c, BSIntToType<2>());
+    BSEndian((char*)&d, BSIntToType<4>());
+    BSEndian((char*)&e, BSIntToType<4>());
+    BSEndian((char*)&f, BSIntToType<4>());
+    BSEndian((char*)&g, BSIntToType<4>());
 }
 }   // namespace f3m_00547d00
 
@@ -14716,18 +14717,18 @@ namespace f3m_005414b0 {
 struct Data5414b0
 {
     int unk00;
-    volatile unsigned long v04;
-    volatile unsigned short v08;
-    volatile unsigned short v0a;
-    volatile unsigned short v0c;
-    volatile unsigned short v0e;
-    volatile unsigned short v10;
-    volatile unsigned short v12;
-    volatile unsigned short v14;
-    volatile unsigned short v16;
-    volatile unsigned long v18;
-    volatile unsigned long v1c;
-    volatile unsigned long v20;
+    unsigned long v04;
+    unsigned short v08;
+    unsigned short v0a;
+    unsigned short v0c;
+    unsigned short v0e;
+    unsigned short v10;
+    unsigned short v12;
+    unsigned short v14;
+    unsigned short v16;
+    unsigned long v18;
+    unsigned long v1c;
+    unsigned long v20;
 
     void FUN_005414b0();
 };
@@ -14735,18 +14736,18 @@ struct Data5414b0
 // pdb: TESSound::SOUND_DATA::Endian | TESSound.obj | fnv360_0822_retail, call_gap, low
 void Data5414b0::FUN_005414b0()
 {
-    v04 = _byteswap_ulong(v04);
-    v08 = _byteswap_ushort(v08);
-    v0a = _byteswap_ushort(v0a);
-    v0c = _byteswap_ushort(v0c);
-    v0e = _byteswap_ushort(v0e);
-    v10 = _byteswap_ushort(v10);
-    v12 = _byteswap_ushort(v12);
-    v14 = _byteswap_ushort(v14);
-    v16 = _byteswap_ushort(v16);
-    v18 = _byteswap_ulong(v18);
-    v1c = _byteswap_ulong(v1c);
-    v20 = _byteswap_ulong(v20);
+    BSEndian((char*)&v04, BSIntToType<4>());
+    BSEndian((char*)&v08, BSIntToType<2>());
+    BSEndian((char*)&v0a, BSIntToType<2>());
+    BSEndian((char*)&v0c, BSIntToType<2>());
+    BSEndian((char*)&v0e, BSIntToType<2>());
+    BSEndian((char*)&v10, BSIntToType<2>());
+    BSEndian((char*)&v12, BSIntToType<2>());
+    BSEndian((char*)&v14, BSIntToType<2>());
+    BSEndian((char*)&v16, BSIntToType<2>());
+    BSEndian((char*)&v18, BSIntToType<4>());
+    BSEndian((char*)&v1c, BSIntToType<4>());
+    BSEndian((char*)&v20, BSIntToType<4>());
 }
 }   // namespace f3m_005414b0
 

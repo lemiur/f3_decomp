@@ -6,6 +6,7 @@
 // src/f3staging/f3blk_00400000_o2.cpp - Fallout 3 STAGING unit (f3_staging_units.py, 3 Nov 2026) for functions with no New Vegas counterpart
 // (128 KB address window, o2 code style). Not a real source path: move functions to their real units once identified.
 
+#include "../../include/BSCoreDefines.h"
 #include "../../include/layout_support.h"
 #include "../../include/fnv_asm_helpers.h"
 
@@ -142,19 +143,19 @@ struct ByteOrderRecord {
     unsigned long unkac;
     unsigned long unkb0;
     unsigned long unkb4;
-    volatile unsigned long unkb8;
+    unsigned long unkb8;
     unsigned long unkbc;
-    volatile unsigned long unkc0;
-    volatile unsigned long unkc4;
-    volatile unsigned long unkc8;
+    unsigned long unkc0;
+    unsigned long unkc4;
+    unsigned long unkc8;
     void FUN_00401650();
 };
 // pdb: AlchemyItem::Endian | AlchemyItem.obj | fnv360_0822_retail, objrun, medium
 void ByteOrderRecord::FUN_00401650() {
-    unkb8 = _byteswap_ulong(unkb8);
-    unkc0 = _byteswap_ulong(unkc0);
-    unkc4 = _byteswap_ulong(unkc4);
-    unkc8 = _byteswap_ulong(unkc8);
+    BSEndian((char*)&unkb8, BSIntToType<4>());
+    BSEndian((char*)&unkc0, BSIntToType<4>());
+    BSEndian((char*)&unkc4, BSIntToType<4>());
+    BSEndian((char*)&unkc8, BSIntToType<4>());
 }
 
 // @f3 0x00401500 (community match, verified in this file)
@@ -1514,7 +1515,7 @@ struct RecordTail
 };
 struct EffectRecord
 {
-    volatile unsigned int value00, value04, value08, value0c, value10;
+    unsigned int value00, value04, value08, value0c, value10;
     int unk14, unk18;
     RecordTail tail;
     void FUN_00401ff0();
@@ -1524,20 +1525,20 @@ void EffectRecord::FUN_00401ff0()
 {
     if (DAT_0106dd0e)
     {
-        value00 = _byteswap_ulong(value00);
-        value04 = _byteswap_ulong(value04);
-        value08 = _byteswap_ulong(value08);
-        value0c = _byteswap_ulong(value0c);
-        value10 = _byteswap_ulong(value10);
+        BSEndian((char*)&value00, BSIntToType<4>());
+        BSEndian((char*)&value04, BSIntToType<4>());
+        BSEndian((char*)&value08, BSIntToType<4>());
+        BSEndian((char*)&value0c, BSIntToType<4>());
+        BSEndian((char*)&value10, BSIntToType<4>());
     }
     TESForm___AddChunkData(0x54494645, this, 20);
     if (DAT_0106dd0e)
     {
-        value00 = _byteswap_ulong(value00);
-        value04 = _byteswap_ulong(value04);
-        value08 = _byteswap_ulong(value08);
-        value0c = _byteswap_ulong(value0c);
-        value10 = _byteswap_ulong(value10);
+        BSEndian((char*)&value00, BSIntToType<4>());
+        BSEndian((char*)&value04, BSIntToType<4>());
+        BSEndian((char*)&value08, BSIntToType<4>());
+        BSEndian((char*)&value0c, BSIntToType<4>());
+        BSEndian((char*)&value10, BSIntToType<4>());
     }
     tail.WriteIfPresent();
 }
@@ -16995,15 +16996,15 @@ bool ExtraRadius::ExtraRadius_Compare(BSExtraData* other)
 namespace f3m_00409df0 {
 
 struct FUN_00409df0_Obj {
-    volatile unsigned long unk00;
-    volatile unsigned long unk04;
-    volatile unsigned long unk08;
-    volatile unsigned long unk0c;
-    volatile unsigned long unk10;
-    volatile unsigned long unk14;
-    volatile unsigned long unk18;
-    volatile unsigned long unk1c;
-    volatile unsigned long unk20;
+    unsigned long unk00;
+    unsigned long unk04;
+    unsigned long unk08;
+    unsigned long unk0c;
+    unsigned long unk10;
+    unsigned long unk14;
+    unsigned long unk18;
+    unsigned long unk1c;
+    unsigned long unk20;
 
     void FUN_00409df0();
 };
@@ -17012,15 +17013,15 @@ struct FUN_00409df0_Obj {
 // pdb params: apRef, aIntersect, aNormal
 void FUN_00409df0_Obj::FUN_00409df0()
 {
-    unk00 = _byteswap_ulong(unk00);
-    unk04 = _byteswap_ulong(unk04);
-    unk08 = _byteswap_ulong(unk08);
-    unk0c = _byteswap_ulong(unk0c);
-    unk10 = _byteswap_ulong(unk10);
-    unk14 = _byteswap_ulong(unk14);
-    unk18 = _byteswap_ulong(unk18);
-    unk1c = _byteswap_ulong(unk1c);
-    unk20 = _byteswap_ulong(unk20);
+    BSEndian((char*)&unk00, BSIntToType<4>());
+    BSEndian((char*)&unk04, BSIntToType<4>());
+    BSEndian((char*)&unk08, BSIntToType<4>());
+    BSEndian((char*)&unk0c, BSIntToType<4>());
+    BSEndian((char*)&unk10, BSIntToType<4>());
+    BSEndian((char*)&unk14, BSIntToType<4>());
+    BSEndian((char*)&unk18, BSIntToType<4>());
+    BSEndian((char*)&unk1c, BSIntToType<4>());
+    BSEndian((char*)&unk20, BSIntToType<4>());
 }
 }   // namespace f3m_00409df0
 

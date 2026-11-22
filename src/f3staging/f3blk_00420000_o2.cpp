@@ -3,6 +3,7 @@
 // src/f3staging/f3blk_00420000_o2.cpp - Fallout 3 STAGING unit (f3_staging_units.py, 3 Nov 2026) for functions with no New Vegas counterpart
 // (128 KB address window, o2 code style). Not a real source path: move functions to their real units once identified.
 
+#include "../../include/BSCoreDefines.h"
 #include "../../include/layout_support.h"
 #include "../../include/fnv_asm_helpers.h"
 
@@ -2573,17 +2574,17 @@ FUN_00424d90::~FUN_00424d90() {}
 #include <stdlib.h>
 class EndianWords {
 public:
-    volatile unsigned long unk00, unk04, unk08, unk0C, unk10, unk14, unk18;
+    unsigned long unk00, unk04, unk08, unk0C, unk10, unk14, unk18;
     void FUN_00423890();
 };
 void EndianWords::FUN_00423890() {
-    unk00 = _byteswap_ulong(unk00);
-    unk04 = _byteswap_ulong(unk04);
-    unk08 = _byteswap_ulong(unk08);
-    unk0C = _byteswap_ulong(unk0C);
-    unk10 = _byteswap_ulong(unk10);
-    unk14 = _byteswap_ulong(unk14);
-    unk18 = _byteswap_ulong(unk18);
+    BSEndian((char*)&unk00, BSIntToType<4>());
+    BSEndian((char*)&unk04, BSIntToType<4>());
+    BSEndian((char*)&unk08, BSIntToType<4>());
+    BSEndian((char*)&unk0C, BSIntToType<4>());
+    BSEndian((char*)&unk10, BSIntToType<4>());
+    BSEndian((char*)&unk14, BSIntToType<4>());
+    BSEndian((char*)&unk18, BSIntToType<4>());
 }
 
 // @f3 0x00434400 (community match, verified in this file)

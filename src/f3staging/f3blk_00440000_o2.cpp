@@ -7,6 +7,7 @@
 // src/f3staging/f3blk_00440000_o2.cpp - Fallout 3 STAGING unit (f3_staging_units.py, 3 Nov 2026) for functions with no New Vegas counterpart
 // (128 KB address window, o2 code style). Not a real source path: move functions to their real units once identified.
 
+#include "../../include/BSCoreDefines.h"
 #include "../../include/layout_support.h"
 #include "../../include/fnv_asm_helpers.h"
 
@@ -19145,14 +19146,14 @@ void n452920::Owner::FUN_00452920(float dt)
 namespace f3m_00446e90 {
 class C {
 public:
-    volatile unsigned long value00;
-    volatile unsigned short value04;
+    unsigned long value00;
+    unsigned short value04;
     void FUN_00446e90();
 };
 // pdb: CHUNK::Endian | TESFile.obj | fnv360_0822_retail, call_dedup, low
 void C::FUN_00446e90() {
-    value00 = _byteswap_ulong(value00);
-    value04 = _byteswap_ushort(value04);
+    BSEndian((char*)&value00, BSIntToType<4>());
+    BSEndian((char*)&value04, BSIntToType<2>());
 }
 }   // namespace f3m_00446e90
 
