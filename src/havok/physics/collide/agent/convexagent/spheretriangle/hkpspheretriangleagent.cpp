@@ -62,20 +62,24 @@ void __cdecl FUN_00d3e110(int a, int b, int aiArg3, int d)
     FUN_00d3d8c0(b, a, aiArg3, &f);
 }
 
+class hkClass;
+class hkStatisticsCollector;
+// hkpContactMgr, up to removeContactPointImpl (names from the New Vegas Xbox 360 PDB).
 struct SpawnedInner
 {
-    virtual void unk00();
-    virtual void unk04();
-    virtual void unk08();
-    virtual void unk0C();
-    virtual void unk10();
-    virtual void unk14(unsigned short flags, void* param);
+    virtual ~SpawnedInner();
+    virtual const hkClass* getClassType() const;
+    virtual void calcContentStatistics(hkStatisticsCollector* collector, const hkClass* cls) const;
+    virtual unsigned short addContactPointImpl();
+    virtual int reserveContactPointsImpl(int numPoints);
+    virtual void removeContactPointImpl(unsigned short cpId, void* constraintOwner);
 };
 
+// hkpSphereTriangleAgent (cleanup is slot 7 of its Fallout 3 vtable, 0x00e7f1c8)
 class FUN_00d3d200_cls
 {
   public:
-    virtual void unk00(int flags);
+    virtual ~FUN_00d3d200_cls();
     int m_unk04;              // +0x04
     SpawnedInner* m_pInner;   // +0x08
     unsigned short m_wFlags;  // +0x0C
@@ -83,16 +87,16 @@ class FUN_00d3d200_cls
     void hkpSphereTriangleAgent_cleanup(void* param);
 };
 
-// If m_wFlags is not 0xFFFF, forwards m_wFlags and param to m_pInner->unk14, then calls unk00(1) on this object.
+// Removes the agent's contact point from the contact manager if it has one, then deletes the agent.
 // @fnv 0x00d3d200
 // pdb: hkpSphereTriangleAgent::cleanup | hkpSphereTriangleAgent.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
 void FUN_00d3d200_cls::hkpSphereTriangleAgent_cleanup(void* param)
 {
     if (m_wFlags != 0xFFFF)
     {
-        m_pInner->unk14(m_wFlags, param);
+        m_pInner->removeContactPointImpl(m_wFlags, param);
     }
-    this->unk00(1);
+    delete this;
 }
 
 struct hkMemory
@@ -320,10 +324,11 @@ struct BodyHolderB
     XForm* xf;
 };
 
+// hkpCdBodyPairCollector
 struct Sink
 {
-    virtual void unk00();
-    virtual void unk04(BodyHolderB& a, BodyHolderB& b);
+    virtual ~Sink();
+    virtual void addCdBodyPair(BodyHolderB& a, BodyHolderB& b);
 };
 
 extern void __cdecl FUN_00cd7850(Vec4* v, void* tri, float* f, Res* out, void* flag);
@@ -386,7 +391,7 @@ void SphereTriAgent::FUN_00d3d2a0(BodyHolderB* a, BodyHolderB* b, int c_, Sink* 
     hkpCollideTriangleUtil_closestPointTriangle(&projected, (char*)tri+0x20, (const hkVector4q*)&unk10, &result);
     float combined = sphere->unk10 + tri->unk10;
     if (result.d < combined)
-        sink->unk04(*a, *b);
+        sink->addCdBodyPair(*a, *b);
 
     HK_TIMER_END();
 }
