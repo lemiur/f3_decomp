@@ -14,14 +14,16 @@ struct __declspec(align(16)) MeshShapeBuffer
 {
     hkVector4 storage[32];
 };
+// hkpShapeContainer: the slots of hkpMeshShape's Fallout 3 container vtable (0x00e861b8) up to getChildShape, named
+// as the New Vegas Xbox 360 PDB names them.
 struct MeshShapeVTable
 {
-    virtual void vf00();
-    virtual void vf04();
-    virtual void vf08();
-    virtual int vf0c(unsigned int key);
-    virtual void vf10();
-    virtual MeshShapeTriangle* vf14(unsigned int key, MeshShapeBuffer* storage);
+    virtual ~MeshShapeVTable();
+    virtual int getNumChildShapes() const;
+    virtual unsigned int getFirstKey() const;
+    virtual int getNextKey(unsigned int key) const;
+    virtual unsigned int getCollisionFilterInfo(unsigned int key) const;
+    virtual MeshShapeTriangle* getChildShape(unsigned int key, MeshShapeBuffer* storage) const;
 };
 extern float DAT_011b2e90;
 extern "C" hkBool* __cdecl IsDegenerateTriangle(hkBool* result, const hkVector4* v0, const hkVector4* v1,
@@ -37,11 +39,11 @@ int MeshShapeDCCBC0::FUN_00dccbc0()
     if (*reinterpret_cast<unsigned int*>(&m_kScaling.z) == 0)
         return -1;
     MeshShapeBuffer buffer;
-    MeshShapeTriangle* triangle = ((MeshShapeVTable*)this)->vf14(0, &buffer);
+    MeshShapeTriangle* triangle = ((MeshShapeVTable*)this)->getChildShape(0, &buffer);
     hkBool result;
     if (!*IsDegenerateTriangle(&result, &triangle->vertex0, &triangle->vertex1, &triangle->vertex2, DAT_011b2e90))
         return 0;
-    return ((MeshShapeVTable*)this)->vf0c(0);
+    return ((MeshShapeVTable*)this)->getNextKey(0);
 }
 
 struct hkBoolDCC
@@ -198,10 +200,11 @@ class Base0DCCD
     int unk04[3];
 };
 
+// hkpShapeContainer (the hkpMeshShape subobject at +0x10)
 class Base1DCCD
 {
   public:
-    virtual void vf00();
+    virtual ~Base1DCCD();
     void* FindValue(unsigned int uiKey);
 };
 
