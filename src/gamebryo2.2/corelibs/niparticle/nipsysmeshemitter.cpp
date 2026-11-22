@@ -13,6 +13,8 @@ int* __cdecl FUN_00c1f4f0()
 struct NiAVObject;
 struct NiPSysVolumeEmitter
 {
+    unsigned char unk00[0x54];
+    NiAVObject* m_pkEmitterObj;  // src: FNV360_PDB +0x54
     NiPSysVolumeEmitter();
     void FUN_00c1fa30(NiAVObject* pkEmitterObj);
 };
@@ -20,7 +22,7 @@ struct NiPSysVolumeEmitter
 // @fnv 0x00c1fa30
 void NiPSysVolumeEmitter::FUN_00c1fa30(NiAVObject* pkEmitterObj)
 {
-    *(NiAVObject**)((char*)this + 0x54) = pkEmitterObj;
+    m_pkEmitterObj = pkEmitterObj;
 }
 
 extern void* g_01202508;
@@ -33,8 +35,8 @@ void* __cdecl FUN_00c1fa40()
 
 struct NiPSysCylinderEmitter : NiPSysVolumeEmitter
 {
-    float m_fCylinderRadius;
-    float m_fCylinderHeight;
+    float m_fEmitterRadius;  // src: FNV360_PDB +0x58 (old: m_fCylinderRadius)
+    float m_fEmitterHeight;  // src: FNV360_PDB +0x5C (old: m_fCylinderHeight)
     bool __thiscall FUN_00c31b80(NiAVObject* pkObject);
     bool __thiscall FUN_00c1f9e0(NiAVObject* pkObject);
 };
@@ -42,8 +44,8 @@ struct NiPSysCylinderEmitter : NiPSysVolumeEmitter
 bool __thiscall NiPSysCylinderEmitter::FUN_00c1f9e0(NiAVObject* pkObject)
 {
     NiPSysCylinderEmitter* pkDest = (NiPSysCylinderEmitter*)pkObject;
-    if (FUN_00c31b80(pkObject) && ((float*)((char*)this + 0x58))[0] == ((float*)((char*)pkDest + 0x58))[0] &&
-        ((float*)((char*)this + 0x5c))[0] == ((float*)((char*)pkDest + 0x5c))[0])
+    if (FUN_00c31b80(pkObject) && m_fEmitterRadius == pkDest->m_fEmitterRadius &&
+        m_fEmitterHeight == pkDest->m_fEmitterHeight)
         return true;
     return false;
 }

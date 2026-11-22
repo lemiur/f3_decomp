@@ -19,17 +19,22 @@ const void* __cdecl FUN_00c2f3d0()
     return &g_012027a0;
 }
 
+struct AirField_00c2f3e0
+{
+    unsigned char unk00[0x64];
+    float m_fSpread;  // src: FNV360_PDB NiPSysAirFieldModifier +0x64
+};
 struct NiPSysAirFieldSpreadCtlr
 {
+    unsigned char unk00[0x3c];
+    AirField_00c2f3e0* m_pkModifier;  // src: FNV360_PDB NiPSysModifierCtlr +0x3C
     void __thiscall FUN_00c2f3e0(float& fValue);
 };
 
 // @fnv 0x00c2f3e0
 void __thiscall NiPSysAirFieldSpreadCtlr::FUN_00c2f3e0(float& fValue)
 {
-    unsigned char* base = reinterpret_cast<unsigned char*>(this);
-    int* ptr = reinterpret_cast<int*>(*(reinterpret_cast<int*>(base + 0x3c)));
-    fValue = *reinterpret_cast<float*>(reinterpret_cast<unsigned char*>(ptr) + 0x64);
+    fValue = m_pkModifier->m_fSpread;
 }
 
 struct NiStream
@@ -181,6 +186,11 @@ char* __cdecl FUN_00a7d330(char*);
 char* __cdecl FUN_00a7d370(char const*, bool);
 char* __cdecl FUN_00a7d5e0(char const*, char const*);
 extern char const* const g_011d1f8c_arg1;
+struct SpawnModifier_00c2f2c0
+{
+    unsigned char unk00[0x8];
+    const char* m_kName;  // src: FNV360_PDB NiPSysModifier +0x8
+};
 struct FUN_00c2f2c0_shell : Base00c319e0
 {
     char _pad[0x18];
@@ -203,7 +213,7 @@ void FUN_00c2f2c0_shell::FUN_00c2f2c0(StrArr* pkStrings)
         pkStrings->SetSize(((unsigned short*)pkStrings)[7] + uiIndex);
     pkStrings->SetAt(uiIndex, pcString);
     char const* pcModifierName =
-        m_pSpawnModifier ? *(char const**)((char*)m_pSpawnModifier + 8) : (char const*)&g_011d1f8c_arg1;
+        m_pSpawnModifier ? ((SpawnModifier_00c2f2c0*)m_pSpawnModifier)->m_kName : (char const*)&g_011d1f8c_arg1;
     pcString = FUN_00a7d5e0("Spawn Modifier", pcModifierName);
     uiIndex = ((unsigned short*)pkStrings)[5];
     if (uiIndex >= ((unsigned short*)pkStrings)[4])

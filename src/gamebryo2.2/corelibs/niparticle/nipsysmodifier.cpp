@@ -11,11 +11,11 @@ void NiPSysModifier::LoadBinary(NiStream& kStream)
     else
         kStream.ReadStringTableEntry(m_kName);
 
-    NiBinaryStreamLoad(*kStream.m_pUnderlyingStream, &m_uiUpdateOrder);
+    NiBinaryStreamLoad(*kStream.m_pUnderlyingStream, &m_uiOrder);
     kStream.ResetStreamState();
     unsigned char ucActive;
     NiBinaryStreamLoad(*kStream.m_pUnderlyingStream, &ucActive);
-    m_bModifierActive = ucActive != 0;
+    m_bActive = ucActive != 0;
 }
 
 // @fnv 0x00C31780
@@ -32,8 +32,8 @@ void NiPSysModifier::CopyMemberData(NiPSysModifier* pkDest, CloningProcess& kClo
             InterlockedDecrement(reinterpret_cast<volatile long*>(pcOldName - 8));
         pkDest->m_kName.m_kHandle = pcName;
     }
-    pkDest->m_uiUpdateOrder = m_uiUpdateOrder;
-    pkDest->m_bModifierActive = m_bModifierActive;
+    pkDest->m_uiOrder = m_uiOrder;
+    pkDest->m_bActive = m_bActive;
 }
 
 // @fnv 0x00C317E0
@@ -54,7 +54,7 @@ void NiPSysModifier::LinkObject(NiStream& kStream)
     kStream.GetLoadedObject();
 }
 
-struct NiPSysModifier_shell
+struct NiPSysModifier_shell : NiPSysModifier
 {
     void FUN_00c31640(NiParticleSystem* pkTarget);
 };
@@ -62,8 +62,7 @@ struct NiPSysModifier_shell
 // @fnv 0x00c31640
 void NiPSysModifier_shell::FUN_00c31640(NiParticleSystem* pkTarget)
 {
-    *reinterpret_cast<unsigned int*>(reinterpret_cast<unsigned int*>(this) + 4) =
-        reinterpret_cast<unsigned int>(pkTarget);
+    m_pkTarget = pkTarget;
 }
 
 extern const char* const g_01202528_arg1;
@@ -75,7 +74,7 @@ const char* const* __cdecl FUN_00c31710()
 }
 
 bool __stdcall IsSameAs(NiObject* pkObject);
-struct MyIsEqual
+struct MyIsEqual : NiPSysModifier
 {
     bool FUN_00c31830(NiObject* pkObject);
 };
@@ -84,9 +83,8 @@ struct MyIsEqual
 bool MyIsEqual::FUN_00c31830(NiObject* pkObject)
 {
     NiPSysModifier* pkDest = (NiPSysModifier*)pkObject;
-    if (IsSameAs(pkObject) && *(void**)((char*)this + 8) == *(void**)((char*)pkDest + 8) &&
-        *(unsigned int*)((char*)this + 0xc) == *(unsigned int*)((char*)pkDest + 0xc) &&
-        *(unsigned char*)((char*)this + 0x14) == *(unsigned char*)((char*)pkDest + 0x14))
+    if (IsSameAs(pkObject) && *(void**)&m_kName == *(void**)&pkDest->m_kName &&
+        m_uiOrder == pkDest->m_uiOrder && m_bActive == pkDest->m_bActive)
         return true;
     return false;
 }
@@ -107,7 +105,7 @@ struct StreamHack
     virtual void vf7();
     virtual void vf8(void*);
 };
-struct X
+struct X : NiPSysModifier
 {
     bool FUN_00c31670(NiStream&);
 };
@@ -117,7 +115,7 @@ bool X::FUN_00c31670(NiStream& kStream)
 {
     if (!((NiObjectBase*)this)->RegisterStreamables(kStream))
         return false;
-    ((StreamHack*)&kStream)->vf8((char*)this + 8);
+    ((StreamHack*)&kStream)->vf8(&m_kName);
     return true;
 }
 

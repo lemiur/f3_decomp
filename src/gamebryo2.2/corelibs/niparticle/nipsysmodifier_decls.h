@@ -92,9 +92,9 @@ class NiPSysModifier : public NiObject
     void CopyMemberData(NiPSysModifier* pkDest, CloningProcess& kCloning);
 
     NiFixedString m_kName;
-    unsigned int m_uiUpdateOrder;
+    unsigned int m_uiOrder;  // src: FNV360_PDB +0xC (old: m_uiUpdateOrder)
     NiParticleSystem* m_pkTarget;
-    bool m_bModifierActive;
+    bool m_bActive;  // src: FNV360_PDB +0x14 (old: m_bModifierActive)
 };
 
 FNV_STATIC_ASSERT(sizeof(NiObject) == 8);
@@ -104,8 +104,8 @@ FNV_STATIC_ASSERT(offsetof(NiStream, m_uiNifVersion) == 0xD8);
 FNV_STATIC_ASSERT(offsetof(NiStream, m_pUnderlyingStream) == 0x24C);
 FNV_STATIC_ASSERT(sizeof(NiPSysModifier) == 24);
 FNV_STATIC_ASSERT(offsetof(NiPSysModifier, m_kName) == 8);
-FNV_STATIC_ASSERT(offsetof(NiPSysModifier, m_uiUpdateOrder) == 12);
+FNV_STATIC_ASSERT(offsetof(NiPSysModifier, m_uiOrder) == 12);
 FNV_STATIC_ASSERT(offsetof(NiPSysModifier, m_pkTarget) == 16);
-FNV_STATIC_ASSERT(offsetof(NiPSysModifier, m_bModifierActive) == 20);
+FNV_STATIC_ASSERT(offsetof(NiPSysModifier, m_bActive) == 20);
 
 #endif
