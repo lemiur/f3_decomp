@@ -3,8 +3,17 @@
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
 extern "C" void __cdecl FUN_00d21a60(void* atom, unsigned short index, unsigned int arg);
+// hkpSimpleContactConstraintAtom: m_sizeOfAllAtoms at +0x02 (New Vegas Xbox 360 PDB).
+struct D927B0Atom
+{
+    unsigned short m_type;
+    unsigned short m_sizeOfAllAtoms;
+};
+// hkpSimpleContactConstraintData: m_atom at +0x28 (New Vegas Xbox 360 PDB).
 struct FUN_00d927b0_class
 {
+    char unk00[0x28];
+    D927B0Atom* m_atom;
     void FUN_00d927b0(unsigned int arg);
 };
 // @fnv 0x00d927b0
@@ -12,8 +21,7 @@ struct FUN_00d927b0_class
 // pdb params: infoOut
 void FUN_00d927b0_class::FUN_00d927b0(unsigned int arg)
 {
-    void* atom = *(void**)((char*)this + 0x28);
-    FUN_00d21a60(atom, *(unsigned short*)((char*)atom + 2), arg);
+    FUN_00d21a60(m_atom, m_atom->m_sizeOfAllAtoms, arg);
 }
 
 // @fnv 0x00d927d0

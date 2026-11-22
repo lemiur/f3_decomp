@@ -4,7 +4,7 @@
 
 #include "havok/hkpGroupFilter.h"
 
-struct FUN_00e48970_struct
+struct FUN_00e48970_struct : public hkpGroupFilter
 {
     void ClearMaskedBits(unsigned int, unsigned int);
 };
@@ -15,7 +15,7 @@ struct FUN_00e48970_struct
 void FUN_00e48970_struct::ClearMaskedBits(unsigned int auiMaskA, unsigned int auiMaskB)
 {
     int i = 0;
-    unsigned int* mask = reinterpret_cast<unsigned int*>(reinterpret_cast<char*>(this) + 0x34);
+    unsigned int* mask = m_uiCollisionGroupMasks;
 
     for (; i < 32; ++i)
     {

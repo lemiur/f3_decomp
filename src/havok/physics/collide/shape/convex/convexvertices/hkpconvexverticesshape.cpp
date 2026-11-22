@@ -22,26 +22,20 @@ void FUN_00d58d60_t::hkpConvexVerticesShape_getFirstVertex(float* out)
     out[3] = 0.0f;
 }
 
-struct FUN_00d591d0_class
+struct FUN_00d591d0_class : public hkpConvexVerticesShape
 {
     void FUN_00d591d0(void*, float, int);
 };
 
 void __cdecl FUN_00d26230(void*, void*, void*, float, int);
 
-// Calls FUN_00d26230 with this+0x20, this+0x30, the float at this+0x10 plus b, and c.
+// Transforms the local AABB (half extents and centre) to world space, grown by the radius plus the tolerance.
 // @fnv 0x00d591d0
 // pdb: hkpConvexVerticesShape::getAabbImpl | hkpConvexVerticesShape.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, medium
 // pdb params: localToWorld, tolerance, out
 void FUN_00d591d0_class::FUN_00d591d0(void* a, float afDelta, int c)
 {
-    FUN_00d26230(
-        a,
-        reinterpret_cast<void*>(reinterpret_cast<char*>(this) + 0x20),
-        reinterpret_cast<void*>(reinterpret_cast<char*>(this) + 0x30),
-        *reinterpret_cast<float*>(reinterpret_cast<char*>(this) + 0x10) + afDelta,
-        c
-    );
+    FUN_00d26230(a, &m_kAabbHalfExtents, &m_kAabbCenter, m_fSphereRadius + afDelta, c);
 }
 
 struct Vec4 { float x, y, z, w; };
