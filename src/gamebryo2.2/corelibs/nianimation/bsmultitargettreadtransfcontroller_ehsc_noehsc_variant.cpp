@@ -369,13 +369,6 @@ struct Holder
     void AssignInterpolatorRef(unsigned int idx, SmartPtr<RefObj>& out) throw();
     void FUN_00a32b80(unsigned int idx);
 };
-void Holder::AssignInterpolatorRef(unsigned int idx, SmartPtr<RefObj>& out) throw()
-{
-    SmartPtr<RefObj> sp = m_14[idx].m_p;
-    m_14[idx].Clear();
-    m_18[idx].Clear();
-    out = sp;
-}
 struct NiStream;
 extern void __cdecl LoadBinary(NiStream*);
 void __cdecl FUN_00a35840(NiStream* stream);

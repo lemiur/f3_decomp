@@ -1,4 +1,4 @@
-// gamebryo2.2/corelibs/niparticle/nipsysvolumeemitter.cpp: NiPSysVolumeEmitter (10 functions)
+// gamebryo2.2/corelibs/niparticle/nipsysvolumeemitter.cpp: NiPSysVolumeEmitter (8 functions)
 #include "f3_common.h"
 #include "nipsysvolumeemitter_match_types.h"
 
@@ -167,15 +167,6 @@ struct FUN_00c31c70_shell
     void* __thiscall DestroyIfFlagged(unsigned int flags);
 };
 
-// @fnv 0x00c31c70
-void* __thiscall FUN_00c31c70_shell::DestroyIfFlagged(unsigned int flags)
-{
-    FUN_00c31750();
-    if (flags & 1)
-        operator delete(this, 0x58);
-    return this;
-}
-
 struct FakeStream_00c31b60
 {
     virtual void f0();
@@ -319,15 +310,3 @@ struct FUN_00c31bd0 : FUN_00c31bd0_base
     virtual ~FUN_00c31bd0();
     NiAVObject* m_pkEmitterObject;
 };
-
-FUN_00c31bd0::FUN_00c31bd0(const char* pcName, NiAVObject* pkEmitterObj, float fSpeed, float fSpeedVar,
-                           float fDeclination, float fDeclinationVar, float fPlanarAngle, float fPlanarAngleVar,
-                           RgbaColor kInitialColor, float fInitialRadius, float fLifeSpan, float fLifeSpanVar,
-                           float fRadiusVar)
-    // Constructs a particle system modifier by delegating to the base class and storing the emitter object pointer.
-// @fnv 0x00c31bd0
-    : FUN_00c31bd0_base(pcName, 1000, fSpeed, fSpeedVar, fDeclination, fDeclinationVar, fPlanarAngle, fPlanarAngleVar,
-                        kInitialColor, fInitialRadius, fLifeSpan, fLifeSpanVar, fRadiusVar)
-{
-    m_pkEmitterObject = pkEmitterObj;
-}

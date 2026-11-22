@@ -4,12 +4,6 @@
 
 extern "C" const void* g_012026a0;
 
-// @fnv 0x00c281f0
-const void* __cdecl FUN_00c281f0()
-{
-    return &g_012026a0;
-}
-
 struct NiBinaryStream
 {
     unsigned int _0;

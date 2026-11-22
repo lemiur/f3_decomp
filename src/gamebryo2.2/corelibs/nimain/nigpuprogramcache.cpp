@@ -38,18 +38,6 @@ struct SomeClass
 {
     void* FUN_00ee90b0(unsigned int);
 };
-// @fnv 0x00ee90b0
-void* SomeClass::FUN_00ee90b0(unsigned int uiFlags)
-{
-    *(int*)this = (int)&DAT_01101388;
-    ((NiTFixedStringMap_NiAVObject___*)this)->RemoveAll();
-    *(int*)this = (int)&DAT_01101378;
-    ((NiTFixedStringMap_NiAVObject___*)this)->RemoveAll();
-    _NiFreeAlias(*(void**)((char*)this + 8));
-    if (uiFlags & 1)
-        g_memoryManager._DeallocateAlias(this);
-    return this;
-}
 
 void __cdecl FUN_00ee9a60();
 void __cdecl operator delete(void*, unsigned int);

@@ -1,4 +1,4 @@
-// gamebryo2.2/corelibs/niconsolerenderer/nid3dgpuprogramcache.cpp: NiD3DGPUProgramCache, NiFixedString, Holder, ShaderLoader8e (15 functions)
+// gamebryo2.2/corelibs/niconsolerenderer/nid3dgpuprogramcache.cpp: NiD3DGPUProgramCache, NiFixedString, Holder, ShaderLoader8e (13 functions)
 #include "f3_common.h"
 #include "nid3dgpuprogramcache_decls.h"
 // Returns the vertex shader profile string matching fnv_particle_shader_renderer_level, or null for other values.
@@ -70,19 +70,7 @@ void FUN_00a644a0(char** p)
     }
 }
 
-// @fnv 0x00e8dd60
-const char* __cdecl FUN_00e8dd60()
-{
-    return "hlsl";
-}
-
 extern "C" void* g_01270920;
-
-// @fnv 0x00e8ea10
-void* __cdecl FUN_00e8ea10()
-{
-    return &g_01270920;
-}
 
 struct RefCounted
 {

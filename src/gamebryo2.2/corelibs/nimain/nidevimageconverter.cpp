@@ -1,4 +1,4 @@
-// gamebryo2.2/corelibs/nimain/nidevimageconverter.cpp: NiDevImageConverter, Converter, NiDevImageConverterStandIn, ImageConverterBase and more (34 functions)
+// gamebryo2.2/corelibs/nimain/nidevimageconverter.cpp: NiDevImageConverter, Converter, NiDevImageConverterStandIn, ImageConverterBase and more (33 functions)
 #include "f3_common.h"
 #include "nidevimageconverter_decls.h"
 
@@ -3819,33 +3819,6 @@ struct Format_a7a1f0
 };
 
 void __cdecl FUN_00ec44d0(void* destination, const void* source, unsigned int size);
-
-// @fnv 0x00a7a1f0
-void __cdecl FUN_00a7a1f0(unsigned int width, unsigned int height, unsigned int unused, unsigned char* destination,
-                          unsigned int unused2, unsigned int FlushUsageData, unsigned char* source,
-                          Format_a7a1f0* format)
-{
-    if (format->unk04 != 0xff00)
-        return;
-
-    if (format->unk00 == reinterpret_cast<unsigned int>(&DAT_00ff0000))
-    {
-        for (unsigned int row = 0; row < height; ++row)
-        {
-            for (unsigned int column = 0; column < width; ++column)
-            {
-                *destination++ = source[2];
-                *destination++ = source[1];
-                *destination++ = source[0];
-                source += 3;
-            }
-        }
-    }
-    else if (format->unk00 == 0xff)
-    {
-        FUN_00ec44d0(destination, source, width * height * 3);
-    }
-}
 
 extern "C" __declspec(dllimport) long __stdcall InterlockedIncrement(volatile long*) throw();
 

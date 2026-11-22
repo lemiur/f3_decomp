@@ -4,12 +4,6 @@
 
 extern int g_01270908;
 
-// @fnv 0x00ee89a0
-int* __cdecl FUN_00ee89a0()
-{
-    return &g_01270908;
-}
-
 extern int DAT_0110129c;
 void __cdecl NiFreeAlias(void*);
 struct FUN_00a7b300_shell

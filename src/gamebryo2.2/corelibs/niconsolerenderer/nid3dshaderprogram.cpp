@@ -9,16 +9,6 @@ struct NiD3DShaderProgram
     void* DestroyIfFlagged(unsigned int flags);
 };
 
-// Calls FUN_00e89840, then deletes this with size 0x2c when flags has bit 1 set, and returns this.
-// @fnv 0x00e898a0
-void* NiD3DShaderProgram::DestroyIfFlagged(unsigned int flags)
-{
-    FUN_00e89840();
-    if (flags & 1)
-        _delete(this, 0x2c);
-    return this;
-}
-
 struct NiTMapBase
 {
     bool RemoveAt(char const*);

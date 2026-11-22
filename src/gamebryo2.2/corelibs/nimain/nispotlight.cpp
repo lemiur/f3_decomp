@@ -7,12 +7,6 @@ struct GlobalObjectO2_00a7b610
 };
 extern GlobalObjectO2_00a7b610 g_011f5ec4;
 
-// @fnv 0x00a94d50
-GlobalObjectO2_00a7b610* __cdecl FUN_00a94d50()
-{
-    return &g_011f5ec4;
-}
-
 struct NiSpotLight;
 
 extern "C" void __cdecl _FUN_00a72010();

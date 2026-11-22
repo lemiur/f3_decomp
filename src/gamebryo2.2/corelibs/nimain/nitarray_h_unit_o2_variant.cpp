@@ -115,18 +115,6 @@ struct TLSGuard
     }
 };
 
-// @fnv 0x00cf46e0
-void __stdcall FUN_00cf46e0(StrArr* array)
-{
-    TLSGuard guard;
-    char* value = _FUN_00a7d330(g_01268740);
-    unsigned int index = array->m_00a;
-
-    if (index >= array->m_008)
-        array->SetSize(static_cast<unsigned int>(index + array->m_00e));
-
-    array->SetAt(index, value);
-}
 }  // namespace fnv_00cf46e0
 
 struct CharPtrArr
@@ -219,15 +207,6 @@ class FUN_00c8ad40_cls
     void FUN_00c8ad40(BC8AD40StringArray* pkArray);
 };
 
-// @fnv 0x00c8ad40
-void FUN_00c8ad40_cls::FUN_00c8ad40(BC8AD40StringArray* pkArray)
-{
-    BC8AD40AllocTagScope kScope(0x10);
-    C8AD40BaseGetViewerStrings(pkArray);
-    char* pcName = FUN_00a7d330(g_pcC8AD40Name);
-    pkArray->Add(pcName);
-}
-
 namespace fnv_00cc31c0 {
 extern __declspec(thread) int g_iCC31C0MemContext;
 
@@ -280,13 +259,6 @@ class CC31C0Object
     void FUN_00cc31c0(CC31C0StrArray* pkStrings);
 };
 
-// @fnv 0x00cc31c0
-void CC31C0Object::FUN_00cc31c0(CC31C0StrArray* pkStrings)
-{
-    CC31C0MemContext kContext(0x10);
-    GetViewerStringsBase(pkStrings);
-    pkStrings->Add(FUN_00a7d330(g_pcCC31C0ClassName));
-}
 }  // namespace fnv_00cc31c0
 
 struct ViewerObject
@@ -409,15 +381,6 @@ class CC4740Derived : public CC4740Base
     void FUN_00cc4740(BCC4740StringArray* pkArray);
 };
 
-// @fnv 0x00cc4740
-void CC4740Derived::FUN_00cc4740(BCC4740StringArray* pkArray)
-{
-    BCC4740AllocTagScope kScope(0x10);
-    CC4740Base::GetViewerStrings(pkArray);
-    char* pcName = FUN_00a7d330(g_pcCC4740Name);
-    pkArray->Add(pcName);
-}
-
 extern __declspec(thread) int g_iCC4740AllocTag;
 struct CF4520AllocTagScope
 {
@@ -453,13 +416,6 @@ struct CF4520Array
         return index;
     }
 };
-// @fnv 0x00cf4520
-void __stdcall FUN_00cf4520(CF4520Array* array)
-{
-    CF4520AllocTagScope tag(16);
-    char* element = FUN_00a7d330(DAT_01268738);
-    array->Add(element);
-}
 
 extern __declspec(thread) int g_iCCCFD0AllocTag;
 struct BCCCFD0AllocTagScope
@@ -516,14 +472,6 @@ class CCCFD0Derived : public CCCFD0Base
   public:
     void FUN_00cccfd0(BCCCFD0StringArray* pkStrings);
 };
-
-// @fnv 0x00cccfd0
-void CCCFD0Derived::FUN_00cccfd0(BCCCFD0StringArray* pkStrings)
-{
-    BCCCFD0AllocTagScope kScope(0x10);
-    CCCFD0Base::GetViewerStrings(pkStrings);
-    pkStrings->Add(FUN_00a7d330(g_pcCCCFD0Name));
-}
 
 extern "C" void _ReadWriteBarrier();
 struct CAA010Inner

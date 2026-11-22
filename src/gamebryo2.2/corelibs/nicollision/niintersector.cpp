@@ -8,11 +8,6 @@ struct VTableObject
     virtual void __fastcall AddRef(int value);
     virtual void __fastcall Release(int value);
 };
-// @fnv 0x00eae6e0
-void __fastcall FUN_00eae6e0(VTableObject* object, int value)
-{
-    object->Release(value);
-}
 
 static const float g_fltDefault = 3.402823466e+38f;
 

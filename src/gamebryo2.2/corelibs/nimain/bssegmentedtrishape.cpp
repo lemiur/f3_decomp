@@ -4,21 +4,8 @@
 
 extern "C" void* g_011f5b40;
 
-// @fnv 0x00a86fe0
-void* __cdecl FUN_00a86fe0()
-{
-    return &g_011f5b40;
-}
-
 void __cdecl FinalizeEntries();
 void __cdecl FUN_00a745c0();
-
-// @fnv 0x00a87120
-void __cdecl FUN_00a87120()
-{
-    FinalizeEntries();
-    FUN_00a745c0();
-}
 
 struct FUN_00a86ff0_shell
 {
@@ -138,13 +125,6 @@ void Target::DisableEntry(unsigned int index)
 
 void __cdecl FinalizeEntries();
 void __cdecl FUN_00a74600();
-// Calls FinalizeEntries then FUN_00a74600 in sequence.
-// @fnv 0x00a87130
-void __cdecl FUN_00a87130()
-{
-    FinalizeEntries();
-    FUN_00a74600();
-}
 
 struct InputState
 {

@@ -3,12 +3,6 @@
 
 extern "C" void* g_01202730;
 
-// @fnv 0x00c2b460
-void* __cdecl FUN_00c2b460()
-{
-    return &g_01202730;
-}
-
 struct NiPSysEmitterPlanarAngleVarCtlr
 {
     void __thiscall FUN_00c2b470(float fValue);
@@ -53,17 +47,6 @@ struct StrArr
 };
 void __stdcall FUN_00c32f60(StrArr*);
 char* __cdecl _FUN_00a7d330(void*);
-// Appends the string returned by _FUN_00a7d330(g_01202730) to the end of pkStrings, growing the array if it is full.
-// @fnv 0x00c2b4d0
-void __stdcall FUN_00c2b4d0(StrArr* pkStrings)
-{
-    FUN_00c32f60(pkStrings);
-    char* pcString = _FUN_00a7d330(g_01202730);
-    unsigned int uiIndex = pkStrings->m_usSize;
-    if (uiIndex >= pkStrings->m_usMaxSize)
-        pkStrings->SetSize(uiIndex + pkStrings->m_usGrowBy);
-    pkStrings->SetAt(uiIndex, pcString);
-}
 
 struct NiMemObject
 {

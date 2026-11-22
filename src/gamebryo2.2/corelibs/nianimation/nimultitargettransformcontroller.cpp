@@ -359,11 +359,6 @@ void __fastcall FUN_00a2fa70(Ctl* self, int, float afValueA, float afValueB)
 }
 
 extern int DAT_011f36bc;
-// @fnv 0x00a2fbd0
-int* __cdecl FUN_00a2fbd0()
-{
-    return &DAT_011f36bc;
-}
 
 namespace fnv_00a30240 {
 struct NiFixedString
@@ -534,15 +529,6 @@ struct Stream
     char pad[0x24c];
     BinStream* ostr;
 };
-// Writes 2 bytes from data through the stream's BinStream write callback and advances its position by the bytes written.
-// @fnv 0x00a30370
-void __cdecl FUN_00a30370(Stream* apStream, const void* data)
-{
-    BinStream* o = apStream->ostr;
-    unsigned int(__cdecl * fn)(BinStream*, const void*, unsigned int, void*, unsigned int) = o->write;
-    *reinterpret_cast<unsigned int*>(&apStream) = 2;
-    o->pos += fn(o, data, 2, &apStream, 1);
-}
 
 namespace fnv_00a303a0 {
 struct BinStream
@@ -557,15 +543,6 @@ struct Stream
     char pad[0x250];
     BinStream* ostr;
 };
-// Writes 2 bytes from data through the stream's write callback and advances the stream position by the bytes written.
-// @fnv 0x00a303a0
-void __cdecl FUN_00a303a0(Stream* apStream, const void* data)
-{
-    BinStream* o = apStream->ostr;
-    unsigned int(__cdecl * fn)(BinStream*, const void*, unsigned int, void*, unsigned int) = o->write;
-    *reinterpret_cast<unsigned int*>(&apStream) = 2;
-    o->pos += fn(o, data, 2, &apStream, 1);
-}
 }  // namespace fnv_00a303a0
 
 struct NiUpdateData
@@ -1166,27 +1143,6 @@ struct FUN_00a304b0_cls
 void* __cdecl FUN_00a7d330(int);
 void* __cdecl FUN_00a7d490(const char*, unsigned short);
 extern int DAT_011f36bc;
-
-// @fnv 0x00a304b0
-void FUN_00a304b0_cls::FUN_00a304b0(FUN_00a304b0_arr* pArr)
-{
-    WriteManagerControlledFlag(pArr);
-    void* pItem = FUN_00a7d330(DAT_011f36bc);
-    unsigned int usIndex = pArr->m_usElementCount;
-    if (usIndex >= pArr->m_usCapacity)
-    {
-        pArr->FUN_0096ad30(usIndex + pArr->m_usGrow);
-    }
-    pArr->FUN_0096ae90(usIndex, &pItem);
-
-    pItem = FUN_00a7d490("m_usNumInterps", m_usNumInterps);
-    usIndex = pArr->m_usElementCount;
-    if (usIndex >= pArr->m_usCapacity)
-    {
-        pArr->FUN_0096ad30(usIndex + pArr->m_usGrow);
-    }
-    pArr->FUN_0096ae90(usIndex, &pItem);
-}
 
 extern "C" int __cdecl strcmp(const char* pcA, const char* pcB);
 

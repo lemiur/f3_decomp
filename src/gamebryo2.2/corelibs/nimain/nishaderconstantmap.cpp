@@ -1,4 +1,4 @@
-// gamebryo2.2/corelibs/nimain/nishaderconstantmap.cpp: NiShaderConstantMap (10 functions)
+// gamebryo2.2/corelibs/nimain/nishaderconstantmap.cpp: NiShaderConstantMap (8 functions)
 #include "f3_common.h"
 #include "nishaderconstantmap_decls.h"
 
@@ -728,63 +728,6 @@ enum NiShaderAttributeDesc_AttributeType
     NiShaderAttributeDesc_AttributeType_23 = 23,
     NiShaderAttributeDesc_AttributeType_24 = 24
 };
-
-// Maps a 1-based mapping ID to an attribute type, setting the register and float counts, returning type 0 for unknown IDs.
-// @fnv 0x00a9bcd0
-NiShaderAttributeDesc_AttributeType __cdecl GetAttributeTypeForMapping(unsigned int uiMappingID,
-                                                                       unsigned int& uiRegCount,
-                                                                       unsigned int& uiFloatCount)
-{
-    uiMappingID--;
-    uiRegCount = 1;
-    uiFloatCount = 4;
-    if (uiMappingID > 0x17)
-        return NiShaderAttributeDesc_AttributeType_0;
-    switch (uiMappingID)
-    {
-    case 0:
-    case 21:
-        uiFloatCount = 1;
-        return NiShaderAttributeDesc_AttributeType_4;
-    case 1:
-    case 2:
-    case 3:
-    case 4:
-    case 5:
-    case 6:
-    case 7:
-    case 8:
-    case 9:
-    case 10:
-    case 13:
-    case 14:
-    case 17:
-    case 18:
-    case 19:
-    case 20:
-        return NiShaderAttributeDesc_AttributeType_7;
-    case 11:
-    case 12:
-    case 22:
-    case 23:
-        uiRegCount = 4;
-        uiFloatCount = 0x10;
-        return NiShaderAttributeDesc_AttributeType_9;
-    case 15:
-    case 16:
-        uiRegCount = 3;
-        uiFloatCount = 0xc;
-        return NiShaderAttributeDesc_AttributeType_8;
-    default:
-        return NiShaderAttributeDesc_AttributeType_0;
-    }
-}
-
-// @fnv 0x00a9bd60
-unsigned int __stdcall FUN_00a9bd60(const char*, unsigned int, unsigned int, const char*)
-{
-    return 0x30;
-}
 
 // @fnv 0x00a9bd70
 int __stdcall FUN_00a9bd70(int a, int b, int c, int d, int e, int f, int g, int h, int i, int j)

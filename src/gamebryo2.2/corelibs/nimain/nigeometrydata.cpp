@@ -1,4 +1,4 @@
-// gamebryo2.2/corelibs/nimain/nigeometrydata.cpp: NiGeometryData, NiGeometryDataRecovered, NiGeometryDataCmp, GeomData and more (36 functions)
+// gamebryo2.2/corelibs/nimain/nigeometrydata.cpp: NiGeometryData, NiGeometryDataRecovered, NiGeometryDataCmp, GeomData and more (32 functions)
 #include "f3_common.h"
 #include "nigeometrydata_decls.h"
 
@@ -80,11 +80,6 @@ bool NiGeometryData::IsGeometryDataStreamable(bool bWrite)
 }
 
 #pragma optimize("", off)
-// @fnv 0x004410f0
-void NiGeometryData::SetCompressFlags(unsigned char ucCompressFlags)
-{
-    m_ucCompressFlags = ucCompressFlags;
-}
 #pragma optimize("", on)
 
 struct FUN_00a673d0_shell : public NiGeometryData
@@ -108,18 +103,8 @@ void FUN_00a673d0_shell::FUN_00a673d0()
 }
 
 extern NiObjectGroup* DAT_011f4880;
-// @fnv 0x00a669c0
-NiObjectGroup* __cdecl FUN_00a669c0()
-{
-    return DAT_011f4880;
-}
 
 extern NiObjectGroup* DAT_011f4880;
-// @fnv 0x00a669d0
-void __stdcall FUN_00a669d0(NiObjectGroup* pkGroup)
-{
-    DAT_011f4880 = pkGroup;
-}
 
 struct MemoryManager
 {
@@ -2363,26 +2348,6 @@ class ObjEA0
     unsigned int m_uiRefCount;
 };
 
-__forceinline void ReadEA0(StreamEA0& kStream, void* pvDest, int iTotal, int iElem)
-{
-    ReaderEA0* pkReader = kStream.m_pkReader;
-    pkReader->BinaryRead(pvDest, iTotal, iElem);
-}
-
-__forceinline void ReadNormalEA0(StreamEA0& stream, void* data, int count)
-{
-    ReaderEA0* reader = stream.m_pkReader;
-    reader->ReadWrapped(data, count * 12, 4);
-}
-
-__forceinline void ReadPoint2EA0(StreamEA0& stream, void* data, unsigned int count)
-{
-    ReaderEA0* reader = stream.m_pkReader;
-    for (unsigned int i = 0; i < 3; ++i)
-        count += count;
-    reader->BinaryRead(data, count, 4);
-}
-
 void* FUN_00ec61c0(void* pvDest, int iValue, unsigned int uiSize);
 typedef void*(__thiscall* CtorStubEA0)(void*);
 extern "C" void __stdcall _vector_constructor_iterator(void* apvArray, unsigned int uiElemSize, int iCount,
@@ -2421,181 +2386,4 @@ class GeomEA0 : public ObjEA0
     void ReadBinary(StreamEA0& kStream);
 };
 
-// Reads geometry arrays and bound data from the stream, using buffer storage when available and otherwise allocating arrays.
-// @fnv 0x00a67ea0
-void GeomEA0::ReadBinary(StreamEA0& kStream)
-{
-    void* pvCur;
-    ObjEA0::ReadGroup(kStream);
-    if (kStream.m_uiFileVersion >= 0x0a010072)
-    {
-        int pkBuff;
-        ReadEA0(kStream, &pkBuff, 4, 4);
-        DAT_011f4880 = kStream.FUN_00a634e0(pkBuff);
-    }
-    ReadEA0(kStream, &m_usVertices, 2, 2);
-    if (kStream.m_uiFileVersion >= 0x0a000110)
-    {
-        ReadEA0(kStream, &m_ucKeepFlags, 1, 1);
-        ReadEA0(kStream, &m_ucCompressFlags, 1, 1);
-    }
-    bool r;
-    if (kStream.m_uiFileVersion < 0x04010000)
-    {
-        ReadEA0(kStream, &m_pkVertex, 4, 4);
-        r = m_pkVertex != 0;
-    }
-    else
-    {
-        ReadEA0(kStream, &r, 1, 1);
-    }
-    if (r)
-    {
-        if ((pvCur = GetBuffData()) != 0)
-        {
-            int iTotal = 12 * m_usVertices;
-            BuffEA0* tmp = GetBuffData();
-            pvCur = tmp->m_pCurrent;
-            tmp->m_pCurrent = (char*)pvCur + iTotal;
-            tmp->m_iArrayLength++;
-            m_pkVertex = (Point3EA0*)pvCur;
-        }
-        else
-        {
-            m_pkVertex = new Point3EA0[m_usVertices];
-        }
-        if (kStream.m_uiUserVersion >= 0x13 && !m_bVerticesDirty)
-            FUN_00ec61c0(m_pkVertex, 0, m_usVertices * 12);
-        else
-            ReadEA0(kStream, m_pkVertex, m_usVertices * 12, 4);
-    }
-    int iNormalCount = m_usVertices;
-    if (kStream.m_uiFileVersion >= 0x0a000002)
-    {
-        ReadEA0(kStream, &m_usTrianglePoints, 2, 2);
-        if (m_usTrianglePoints & 0xf000)
-            iNormalCount = iNormalCount * 3;
-    }
-    bool uiTexCount;
-    if (kStream.m_uiFileVersion < 0x04010000)
-    {
-        ReadEA0(kStream, &m_pkNormal, 4, 4);
-        uiTexCount = m_pkNormal != 0;
-    }
-    else
-    {
-        ReadEA0(kStream, &uiTexCount, 1, 1);
-    }
-    if (uiTexCount)
-    {
-        if ((pvCur = GetBuffData()) != 0)
-        {
-            BuffEA0* tmp = GetBuffData();
-            pvCur = tmp->m_pCurrent;
-            unsigned int iTotal;
-            iTotal = iNormalCount * 12;
-            tmp->m_pCurrent = (char*)pvCur + iTotal;
-            tmp->m_iArrayLength++;
-            m_pkNormal = (Point3EA0*)pvCur;
-        }
-        else
-        {
-            m_pkNormal = new Point3EA0[iNormalCount];
-        }
-        if (kStream.m_uiUserVersion < 0x13 || m_bVerticesDirty)
-            ReadNormalEA0(kStream, m_pkNormal, iNormalCount);
-    }
-    m_kBound.FUN_00a69ac0(kStream);
-    bool bHasColor;
-    if (kStream.m_uiFileVersion < 0x04010000)
-    {
-        ReadEA0(kStream, &m_pkColor, 4, 4);
-        bHasColor = m_pkColor != 0;
-    }
-    else
-    {
-        ReadEA0(kStream, &bHasColor, 1, 1);
-    }
-    if (bHasColor)
-    {
-        if ((pvCur = GetBuffData()) != 0)
-        {
-            int iTotal = m_usVertices * 16;
-            BuffEA0* tmp = GetBuffData();
-            pvCur = tmp->m_pCurrent;
-            tmp->m_pCurrent = (char*)pvCur + iTotal;
-            tmp->m_iArrayLength++;
-            m_pkColor = (ColorEA0*)pvCur;
-        }
-        else
-        {
-            unsigned int uiColorCount = m_usVertices;
-            ColorEA0* pkColors = new ColorEA0[uiColorCount];
-            if (pkColors)
-                _vector_constructor_iterator(pkColors, 16, uiColorCount, (CtorStubEA0)&UNK_004a7800);
-            else
-                pkColors = 0;
-            m_pkColor = pkColors;
-        }
-        if (kStream.m_uiUserVersion < 0x13 || m_bVerticesDirty)
-            ReadEA0(kStream, m_pkColor, m_usVertices * 16, 4);
-    }
-    if (kStream.m_uiFileVersion < 0x0500000a)
-    {
-        unsigned short usTempFlags;
-        ReadEA0(kStream, &usTempFlags, 2, 2);
-        unsigned short bHasVertex = (usTempFlags ^ m_usTrianglePoints) & 1;
-        m_usTrianglePoints ^= bHasVertex;
-    }
-    else if (kStream.m_uiFileVersion < 0x0a000002)
-    {
-        ReadEA0(kStream, &m_usTrianglePoints, 2, 2);
-    }
-    if (kStream.m_uiFileVersion < 0x04010000)
-        ReadEA0(kStream, &m_pkTexture, 4, 4);
-    unsigned int uiTextureFlags;
-    if (kStream.m_uiUserVersion < 0x1b)
-    {
-        uiTextureFlags = m_usTrianglePoints & 0x1f;
-        if ((unsigned short)uiTextureFlags > 1)
-            m_usTrianglePoints |= 1;
-    }
-    else
-    {
-        uiTextureFlags = 0;
-    }
-    if ((unsigned short)(m_usTrianglePoints & 1) > 0)
-    {
-        unsigned int bHasNormal = (m_usTrianglePoints & 1) * m_usVertices;
-        if ((pvCur = GetBuffData()) != 0)
-        {
-            BuffEA0* tmp = GetBuffData();
-            int iTotal = bHasNormal * 8;
-            pvCur = tmp->m_pCurrent;
-            ++tmp->m_iArrayLength;
-            tmp->m_pCurrent = (char*)pvCur + iTotal;
-            m_pkTexture = (Point2EA0*)pvCur;
-        }
-        else
-        {
-            m_pkTexture = new Point2EA0[bHasNormal];
-        }
-        if (kStream.m_uiUserVersion < 0x13 || m_bVerticesDirty)
-        {
-            ReadPoint2EA0(kStream, m_pkTexture, bHasNormal);
-            if ((unsigned short)uiTextureFlags > 1)
-            {
-                unsigned int uiExtraCount = ((unsigned short)uiTextureFlags - 1) * m_usVertices;
-                Point2EA0* pkTemp = new Point2EA0[uiExtraCount];
-                FUN_00a67aa0(kStream, pkTemp, uiExtraCount);
-                g_memoryManager.Deallocate(pkTemp);
-                FUN_00a29680(&UNK_0109c040, &kStream.m_cName, (uiExtraCount * 8) >> 10);
-            }
-        }
-    }
-    if (kStream.m_uiFileVersion >= 0x0500000a)
-        ReadEA0(kStream, &m_usDirtyFlags, 2, 2);
-    if (kStream.m_uiFileVersion >= 0x0a030007)
-        kStream.FUN_00a645b0();
-}
 }  // namespace fnv_00a67ea0

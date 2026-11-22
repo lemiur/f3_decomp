@@ -33,32 +33,6 @@ bool NiFile::Flush()
     return true;
 }
 
-// Unmatched reconstruction retained for the next pass. See NOTES.md.
-unsigned int NiBinaryStream::GetLine(char* buffer, unsigned int maxChars)
-{
-    unsigned int total = 0;
-    unsigned int position = 0;
-    while (position + 1 < maxChars)
-    {
-        char ch;
-        unsigned int size = 1;
-        unsigned int read = m_pfnRead(this, &ch, 1, &size, 1);
-        m_uiStreamFlags += read;
-        total += read;
-        if (read == 1)
-        {
-            if (ch == '\n')
-                break;
-            if (ch != '\r')
-                buffer[position++] = ch;
-        }
-        else
-            break;
-    }
-    buffer[position] = 0;
-    return total;
-}
-
 int __cdecl _ftell(void*);
 int __cdecl _fseek(void*, int, int);
 struct S_00aa15f0

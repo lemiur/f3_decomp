@@ -236,14 +236,6 @@ inline void FUN_00a435e0_shell::v37()
 {}
 inline void FUN_00a435e0_shell::v38(int)
 {}
-bool FUN_00a435e0_shell::FUN_00a435e0(int arg)
-{
-    if (unk20 != 0)
-    {
-        v38(arg);
-    }
-    return false;
-}
 class A43600BinaryStream
 {
   public:

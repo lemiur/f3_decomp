@@ -5,12 +5,6 @@
 struct GlobalObjectO2_00a7b610;
 extern GlobalObjectO2_00a7b610 g_011f5f0c;
 
-// @fnv 0x00a98b00
-GlobalObjectO2_00a7b610* __cdecl FUN_00a98b00()
-{
-    return &g_011f5f0c;
-}
-
 struct NiStream
 {
     void ResetStreamState();
@@ -765,18 +759,6 @@ struct FUN_0096ad30_This
 };
 void __stdcall FUN_00a97420(void*);
 void* __cdecl FUN_00a7d330(void*);
-// Calls FUN_00a97420 on p, fetches an item via FUN_00a7d330, grows the container if count reaches capacity, then stores the item at index count.
-// @fnv 0x00a98de0
-void __stdcall FUN_00a98de0(FUN_0096ad30_This* pContainer)
-{
-    FUN_00a97420(pContainer);
-    void* item = FUN_00a7d330(*(void**)&g_011f5f0c);
-    unsigned int count = pContainer->m_uiItemCount;
-    unsigned int capacity = pContainer->m_pRayCursor;
-    if (count >= capacity)
-        pContainer->FUN_0096ad30((unsigned int)pContainer->m_growth + count);
-    pContainer->FUN_0096ae90(count, &item);
-}
 
 #include <windows.h>
 struct S_00a98b90_Ref

@@ -80,12 +80,6 @@ void NiBlendQuaternionInterpolator::FUN_00a554e0(NiStream* kStream)
 
 extern int g_011f4064;
 
-// @fnv 0x00a55500
-int* __cdecl FUN_00a55500()
-{
-    return &g_011f4064;
-}
-
 void __fastcall FUN_00a36890(void*);
 extern int DAT_011f4208;
 extern int DAT_011f420c;
@@ -277,31 +271,6 @@ struct FUN_00a55980_shell : NiBlendQuaternionInterpolator
 {
     void AppendInterpolatorStrings(StrArr*);
 };
-
-// @fnv 0x00a55980
-void FUN_00a55980_shell::AppendInterpolatorStrings(StrArr* pkStrings)
-{
-    reinterpret_cast<FUN_00a38080_shell*>(this)->FUN_00a38080(pkStrings);
-
-    char* pString = _FUN_00a7d330(g_011f4064);
-
-    unsigned int uiIndex = pkStrings->m_uiCount;
-    unsigned int uiSize = pkStrings->m_uiSize;
-    if (uiIndex >= uiSize)
-        pkStrings->SetSize(pkStrings->m_uiGrowSize + uiIndex);
-
-    pkStrings->SetAt(uiIndex, pString);
-
-    pString = reinterpret_cast<FUN_00a6e190_shell*>(reinterpret_cast<unsigned char*>(this) + 0x30)
-                  ->FUN_00a6e190(str_01098800);
-
-    uiIndex = pkStrings->m_uiCount;
-    uiSize = pkStrings->m_uiSize;
-    if (uiIndex >= uiSize)
-        pkStrings->SetSize(pkStrings->m_uiGrowSize + uiIndex);
-
-    pkStrings->SetAt(uiIndex, pString);
-}
 
 struct FUN_00a55590_sub
 {

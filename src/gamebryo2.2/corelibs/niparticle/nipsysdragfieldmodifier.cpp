@@ -9,12 +9,6 @@ extern "C"
 struct GlobalObjectO2_00a7b610;
 extern GlobalObjectO2_00a7b610 g_01202770;
 
-// @fnv 0x00c2c800
-GlobalObjectO2_00a7b610* __cdecl FUN_00c2c800()
-{
-    return &g_01202770;
-}
-
 void __cdecl FUN_00c31750(void);
 void __cdecl __Dummy_00b6fef0(void*, int);
 

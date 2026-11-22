@@ -492,21 +492,6 @@ class A93DD0Node
     void RemoveChild(unsigned int uiIndex, A93DD0AVObjectPtr& pChild);
 };
 
-// @fnv 0x00a93dd0
-void A93DD0Node::RemoveChild(unsigned int uiIndex, A93DD0AVObjectPtr& spChildOut)
-{
-    m_bValueAt0C = 1;
-    if (uiIndex < m_usChildCount)
-        m_kBlocks.Remove(uiIndex);
-
-    A93DD0AVObjectPtr spChild;
-    DetachChildInternal(uiIndex, spChild);
-
-    if (m_iLastChild > -1 && (m_iLastChild >= m_usChildCount || !m_ppkChildren[m_iLastChild]))
-        m_iLastChild = -1;
-
-    spChildOut = spChild;
-}
 }  // namespace fnv_00a93dd0
 
 struct SwitchChildB10050

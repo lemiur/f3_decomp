@@ -1,4 +1,4 @@
-// gamebryo2.2/corelibs/nimain/nidefaultavobjectpalette.cpp: NiDefaultAVObjectPalette, Map, PaletteOwner, PaletteShell and more (18 functions)
+// gamebryo2.2/corelibs/nimain/nidefaultavobjectpalette.cpp: NiDefaultAVObjectPalette, Map, PaletteOwner, PaletteShell and more (15 functions)
 #include "f3_common.h"
 #include "nidefaultavobjectpalette_types_NiDefaultAVObjectPalette.h"
 #include "nidefaultavobjectpalette_types_NiAVObject.h"
@@ -34,16 +34,6 @@ void AddObjectToPalette(NiAVObject* object, NiDefaultAVObjectPalette* palette)
         NiDefaultPaletteNodeChildren* children = (NiDefaultPaletteNodeChildren*)node;
         for (unsigned int i = 0; i < children->m_usArraySize; ++i)
             AddObjectToPalette(children->m_children[i], palette);
-    }
-}
-
-// @fnv 0x00a6e960
-void NiDefaultAVObjectPalette::BuildPalette()
-{
-    if (m_pkScene)
-    {
-        m_kObjectMap.RemoveAll();
-        AddObjectToPalette(m_pkScene, this);
     }
 }
 
@@ -140,20 +130,6 @@ struct FUN_00a6eb20_Holder
 {
     void* __thiscall DestroyHolder(unsigned int);
 };
-// Resets the two embedded maps, frees the pointer at offset 8, and optionally deallocates the object when flag bit 0 is set.
-// @fnv 0x00a6eb20
-void* __thiscall FUN_00a6eb20_Holder::DestroyHolder(unsigned int auiFlags)
-{
-    NiTFixedStringMap_NiAVObject___* p = (NiTFixedStringMap_NiAVObject___*)this;
-    *(void**)this = (void*)&DAT_0109ca18;
-    p->RemoveAll();
-    *(void**)this = (void*)&DAT_0109ca08;
-    p->RemoveAll();
-    NiFree(*(void**)((char*)this + 8));
-    if (auiFlags & 1)
-        ((MemoryManager*)&g_memoryManager)->Deallocate(this);
-    return this;
-}
 
 struct NodeChildrenView_cls
 {
@@ -537,12 +513,6 @@ void PaletteShell::FUN_00a6e5b0(CloningProcess& kCloning)
 }
 
 bool __stdcall FUN_00a84c70(void*);
-
-// @fnv 0x00a6e540
-bool __stdcall FUN_00a6e540(void* p)
-{
-    return FUN_00a84c70(p);
-}
 
 extern char* DAT_0109b220;
 extern "C" void(__stdcall* DAT_00fdf1c4)(void*);

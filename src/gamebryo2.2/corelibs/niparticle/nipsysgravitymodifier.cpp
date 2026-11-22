@@ -714,40 +714,6 @@ inline VectorC22 operator*(float scale, const VectorC22& point)
     return VectorC22(point.x * scale, point.y * scale, point.z * scale);
 }
 
-__declspec(noinline) void __fastcall FUN_004a0c10(VectorC22* point)
-{
-    float length = point->Length();
-    if (length > 9.999999974752427e-07)
-    {
-        float inverse = 1.0f / length;
-        point->x *= inverse;
-        point->y *= inverse;
-        point->z *= inverse;
-    }
-    else
-    {
-        point->x = point->y = point->z = 0.0f;
-    }
-}
-
-__declspec(noinline) float __fastcall FUN_00457910(VectorC22* point)
-{
-    float length = point->Length();
-    if (length > 9.999999974752427e-07)
-    {
-        float inverse = 1.0f / length;
-        point->x *= inverse;
-        point->y *= inverse;
-        point->z *= inverse;
-    }
-    else
-    {
-        point->x = point->y = point->z = 0.0f;
-        length = 0.0f;
-    }
-    return length;
-}
-
 struct MatrixC22
 {
 

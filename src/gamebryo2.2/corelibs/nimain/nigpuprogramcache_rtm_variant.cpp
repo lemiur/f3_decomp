@@ -795,27 +795,6 @@ struct OwnerMap : public FixedStringMap
     MapItem* FUN_00ee8ac0();
     void GetNextEntry(MapItem*& pos, NiFixedString& key, NiObjPtr& val);
 };
-__declspec(noinline) void OwnerMap::GetNextEntry(MapItem*& pos, NiFixedString& key, NiObjPtr& val)
-{
-    MapItem* item = pos;
-    key = item->m_key;
-    val = item->m_val;
-    if (item->m_pkNext)
-    {
-        pos = item->m_pkNext;
-        return;
-    }
-    unsigned int bucket = (unsigned int)item->m_key.m_kHandle % m_uiHashSize + 1;
-    for (; bucket < m_uiHashSize; ++bucket)
-    {
-        if (m_ppkHashTable[bucket])
-        {
-            pos = m_ppkHashTable[bucket];
-            return;
-        }
-    }
-    pos = 0;
-}
 struct PathString
 {
     char* handle;

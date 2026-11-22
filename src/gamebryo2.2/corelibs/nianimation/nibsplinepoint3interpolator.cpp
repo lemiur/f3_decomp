@@ -1,4 +1,4 @@
-// gamebryo2.2/corelibs/nianimation/nibsplinepoint3interpolator.cpp: NiBSplinePoint3Interpolator, NiBSplineTransformInterpolator (13 functions)
+// gamebryo2.2/corelibs/nianimation/nibsplinepoint3interpolator.cpp: NiBSplinePoint3Interpolator, NiBSplineTransformInterpolator (11 functions)
 #include "f3_common.h"
 #include "nibsplinepoint3interpolator_decls.h"
 // Loads the base interpolator, the point3 value, and the control point handle from the stream.
@@ -40,12 +40,6 @@ struct FUN_00a506b0_shell : public NiBSplinePoint3Interpolator
 };
 
 extern char const* const g_011f4014_arg1;
-
-// @fnv 0x00a506b0
-void* FUN_00a506b0_shell::FUN_00a506b0()
-{
-    return (void*)&g_011f4014_arg1;
-}
 
 void __fastcall FUN_00a57f80(void*);
 void __cdecl __Dummy_00b6fef0(void*, int);
@@ -199,35 +193,6 @@ struct FUN_00a50960_shell
 
     void FUN_00a50960(StrArr* pkStrings);
 };
-
-// @fnv 0x00a50960
-void FUN_00a50960_shell::FUN_00a50960(StrArr* pkStrings)
-{
-    reinterpret_cast<Base*>(this)->FUN_00a58200(
-        reinterpret_cast<NiTPrimitiveArray<char*, NiTMallocInterface<char*> >*>(pkStrings));
-
-    char* pcString = _FUN_00a7d330(g_011f4014_arg1);
-
-    {
-        unsigned int index = pkStrings->m_iElementCount;
-
-        if (index >= pkStrings->m_pRayCursor)
-            pkStrings->SetSize(index + pkStrings->m_growSize);
-
-        pkStrings->SetAt(index, pcString);
-    }
-
-    pcString = FUN_00a7d510("m_kPoint3CPHandle", m_kPoint3CPHandle);
-
-    {
-        unsigned int index = pkStrings->m_iElementCount;
-
-        if (index >= pkStrings->m_pRayCursor)
-            pkStrings->SetSize(index + pkStrings->m_growSize);
-
-        pkStrings->SetAt(index, pcString);
-    }
-}
 
 struct Point3
 {

@@ -112,12 +112,6 @@ S* __fastcall FUN_00e9efb0(void* self)
 // the original six-byte "mov eax, <imm32> ; ret" shape byte for byte.
 extern int g_fnv_00e9ecc0_value_anchor;
 
-// @fnv 0x00e9ecc0
-int FUN_00e9ecc0()
-{
-    return (int)(&g_fnv_00e9ecc0_value_anchor) + 4;
-}
-
 #pragma optimize("gty", on)
 class S00e9e860_Item
 {

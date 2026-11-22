@@ -125,17 +125,6 @@ struct S
     void* f4;
     void* FUN_00e94a80(unsigned int);
 };
-// Sets f0 to DAT_010f0f84, frees f4, and if flag bit 0 is set deallocates this via g_memoryManager, returning this.
-// @fnv 0x00e94a80
-void* S::FUN_00e94a80(unsigned int flag)
-{
-    void* tmp = f4;
-    f0 = &DAT_010f0f84;
-    _NiFreeAlias(tmp);
-    if (flag & 1)
-        g_memoryManager._DeallocateAlias(this);
-    return this;
-}
 
 namespace fnv_00e94d00 {
 struct NiGeometryBufferData
@@ -744,20 +733,3 @@ struct NiStaticGeometryGroup_00e94a30 : NiStaticGeometryGroup
     void FUN_00e98730(void*);
     void FUN_00e94a30(NiScreenTexture*);
 };
-// Allocates and initializes a B00e947c0 buffer when pkScreenTexture->m_pkGeometryRendererData is null, then calls FUN_00e98730.
-// @fnv 0x00e94a30
-void NiStaticGeometryGroup_00e94a30::FUN_00e94a30(NiScreenTexture* pkScreenTexture)
-{
-    if (!pkScreenTexture->m_pkGeometryRendererData)
-    {
-        void* p = reinterpret_cast<P03MM*>(&g_memoryManager)->Allocate(0x54);
-        B00e947c0* pkBuffData;
-        if (p)
-            pkBuffData = new (p) B00e947c0;
-        else
-            pkBuffData = 0;
-        pkBuffData->m_eRequestType = 4;
-        pkBuffData->m_uiValue1 = &DAT_01400000;
-        FUN_00e98730(pkBuffData);
-    }
-}

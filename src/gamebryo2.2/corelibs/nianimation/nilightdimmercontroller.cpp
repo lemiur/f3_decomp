@@ -34,12 +34,6 @@ struct GlobalObjectO2_00a7b610;
 
 extern GlobalObjectO2_00a7b610 g_011f3fa0;
 
-// @fnv 0x00a4cf90
-GlobalObjectO2_00a7b610* __cdecl FUN_00a4cf90()
-{
-    return &g_011f3fa0;
-}
-
 struct BSFadeNode
 {
     static void* __cdecl operator new(unsigned int);
@@ -81,16 +75,6 @@ template <typename T, typename A> struct NiTPrimitiveArray
 };
 void __stdcall FUN_00a576c0(NiTPrimitiveArray<char*, NiTMallocInterface<char*> >*);
 char* __cdecl FUN_00a7d330(const char*);
-// @fnv 0x00a4d100
-void __stdcall FUN_00a4d100(NiTPrimitiveArray<char*, NiTMallocInterface<char*> >* pkStrings)
-{
-    FUN_00a576c0(pkStrings);
-    char* pszStr = FUN_00a7d330(*(const char**)&g_011f3fa0);
-    unsigned int uIdx = pkStrings->m_iElementCount;
-    if (uIdx >= pkStrings->m_pRayCursor)
-        pkStrings->SetSize(uIdx + pkStrings->m_grow);
-    pkStrings->SetAt(uIdx, pszStr);
-}
 
 extern "C" void* __cdecl FUN_00aa13e0(unsigned int size);
 

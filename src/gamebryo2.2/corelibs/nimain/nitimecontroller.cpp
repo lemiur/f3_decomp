@@ -833,10 +833,6 @@ void TCController::FUN_00a6d830(NiViewerStringsArray* pkViewerStrings)
     pkViewerStrings->Add(FUN_00a7d370("Play Backwards", bBack));
 }
 
-// @fnv 0x00a29680
-void __cdecl FUN_00a29680()
-{}
-
 class NiTimeControllerA362
 {
   public:

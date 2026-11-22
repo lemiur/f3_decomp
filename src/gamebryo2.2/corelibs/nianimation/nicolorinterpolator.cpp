@@ -1,4 +1,4 @@
-// gamebryo2.2/corelibs/nianimation/nicolorinterpolator.cpp: NiColorInterpolator (17 functions)
+// gamebryo2.2/corelibs/nianimation/nicolorinterpolator.cpp: NiColorInterpolator (16 functions)
 #include "f3_common.h"
 #include "NiObject.h"
 
@@ -135,12 +135,6 @@ struct FUN_00a3bd70_shell : public NiColorInterpolator
 };
 
 extern "C" void* g_011f3730;
-
-// @fnv 0x00a3bd70
-void* FUN_00a3bd70_shell::FUN_00a3bd70()
-{
-    return &g_011f3730;
-}
 
 struct FUN_00a487f0_shell
 {

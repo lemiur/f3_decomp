@@ -4,12 +4,6 @@
 
 extern "C" void* g_011f4044;
 
-// @fnv 0x00a52d70
-void* __cdecl FUN_00a52d70()
-{
-    return &g_011f4044;
-}
-
 struct NiStream
 {
 };
@@ -100,17 +94,6 @@ struct NiBoolTimelineInterpolator : NiBoolInterpolator
 {
     void AppendString(StrArr*);
 };
-// Appends the string returned by _FUN_00a7d330(g_011f4044) to pkStrings, growing it via SetSize when full, after calling FUN_00a536d0.
-// @fnv 0x00a53020
-void NiBoolTimelineInterpolator::AppendString(StrArr* pkStrings)
-{
-    ((Proxy536d0*)this)->FUN_00a536d0(pkStrings);
-    char* pszStr = _FUN_00a7d330((const char*)g_011f4044);
-    unsigned int uiSize = pkStrings->m_usSize;
-    if (uiSize >= pkStrings->m_usMaxSize)
-        pkStrings->SetSize(uiSize + pkStrings->m_usGrowSize);
-    pkStrings->SetAt(uiSize, pszStr);
-}
 
 struct NiKeyBasedInterpolator
 {
@@ -342,11 +325,6 @@ void A53480Object::CloneTo(A53480Object* pkDest, A53480CloningProcess& kCloning)
 }
 
 void __cdecl FUN_00a43330();
-// @fnv 0x00a514d0
-void __cdecl FUN_00a514d0()
-{
-    FUN_00a43330();
-}
 
 void __cdecl SaveToStream();
 

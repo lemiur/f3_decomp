@@ -1,4 +1,4 @@
-// gamebryo2.2/corelibs/nimain/nialphaaccumulator.cpp: NiAlphaAccumulator, CloneAccumulator (17 functions)
+// gamebryo2.2/corelibs/nimain/nialphaaccumulator.cpp: NiAlphaAccumulator, CloneAccumulator (15 functions)
 #include "f3_common.h"
 #include "nialphaaccumulator_decls.h"
 
@@ -401,18 +401,8 @@ bool FUN_00a43340::IsEqual(const FUN_00a43340& apObject)
 }
 
 void __cdecl FUN_00aa0ac0();
-// @fnv 0x00a9b4f0
-void __cdecl FUN_00a9b4f0()
-{
-    FUN_00aa0ac0();
-}
 
 void __cdecl FUN_00aa0ad0();
-// @fnv 0x00a9b500
-void __cdecl FUN_00a9b500()
-{
-    FUN_00aa0ad0();
-}
 
 struct S00a9b570_Pt
 {

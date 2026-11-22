@@ -50,12 +50,6 @@ struct FUN_00c299d0_shell : public NiPSysPlanarCollider
 struct GlobalObjectO2_00a7b610;
 extern GlobalObjectO2_00a7b610 g_012026c8;
 
-// @fnv 0x00c299d0
-void* FUN_00c299d0_shell::FUN_00c299d0()
-{
-    return &g_012026c8;
-}
-
 void __cdecl _delete(void*, unsigned int);
 struct FUN_00c299e0_Holder
 {
@@ -634,10 +628,6 @@ bool FUN_00c28d00_cls::FUN_00c28d00(void* a1)
 
 extern "C" double __cdecl fabs(double);
 extern "C" double __cdecl pow(double, double);
-inline float absf(float x)
-{
-    return (float)fabs(x);
-}
 extern "C" const double DAT_01012060;
 extern "C" unsigned int DAT_012026c4;
 extern "C" float DAT_012026c0;
@@ -702,25 +692,6 @@ inline PlaneVector operator*(float s, const PlaneVector& p)
     return r;
 }
 
-inline PlaneVector ScaleVectorD(const PlaneVector& v, float s)
-{
-    PlaneVector r;
-    const float* a = &v.z;
-    float* b = &r.z;
-    for (int i = -2; i < 1; ++i)
-        b[i] = s * a[i];
-    return r;
-}
-inline float SpecialLength(const PlaneVector& p)
-{
-    double b = p.y;
-    double a = p.x;
-    double c = p.z;
-    double d = a * a;
-    d += b * b;
-    d += c * c;
-    return d;
-}
 struct CollisionPlane : NiPlane
 {
     float Distance(const NiPoint3& p) const
@@ -738,121 +709,6 @@ struct PlanarColliderExt : NiPSysPlanarCollider
     NiPSysCollider* FUN_00c28d10(float time, float* collisionTime, BoundDataBlock* data, unsigned short particleId);
     NiPSysCollider* ResolveTail(float time, float* collisionTime, BoundDataBlock* data, unsigned short particleId);
 };
-// Tests a particle against the planar collider's half-space plane, computes a collision fraction if crossing, and falls back to ResolveTail.
-// @fnv 0x00c28d10
-NiPSysCollider* PlanarColliderExt::FUN_00c28d10(float time, float* collisionTime, BoundDataBlock* data,
-                                                unsigned short particleId)
-{
-    bool bCollided = false;
-    const PlaneVector& particle = reinterpret_cast<const PlaneVector*>(data->unk20)[particleId];
-    const PlaneVector& velocity = reinterpret_cast<const PlaneVector&>(data->velocities[particleId].velocity);
-    const PlaneVector& normal = reinterpret_cast<const PlaneVector&>(m_kHalfSpacePlane.m_kPlaneNormal);
-    double planeSum;
-    planeSum = normal.y * particle.y;
-    const float* planeN = &normal.y;
-    const float* planeP = &particle.y;
-    for (int i = 2; i < 3; ++i)
-        planeSum += planeN[i - 3] * planeP[i - 3];
-    const float* nz = &normal.y;
-    const float* pz = &particle.z;
-    for (int j = 0; 1 > j; ++j)
-        planeSum += nz[j + 1] * pz[j + 0];
-    float distance = (float)planeSum;
-    distance -= m_kHalfSpacePlane.m_fPlaneConstant;
-    if (DAT_010beaf8 > distance && DAT_010beaf8 > -distance)
-    {
-        PlaneVector relative = particle - reinterpret_cast<const PlaneVector&>(m_kPathOffset);
-        PlaneVector xAxis, yAxis;
-        reinterpret_cast<RotationHelper*>(layoutPadding74)->FUN_004b4500(&xAxis, &m_kFirstVector);
-        reinterpret_cast<RotationHelper*>(layoutPadding74)->FUN_004b4500(&yAxis, &m_kSecondPlaneVector);
-        NiPoint3 kAlongX = (NiPoint3)xAxis * (double)(relative * xAxis);
-        NiPoint3 kAlongY = (NiPoint3)yAxis * (double)(yAxis * relative);
-        if (kAlongX.Dot(kAlongX) < m_fWidthSquared && kAlongY.Dot(kAlongY) < m_fHeightSquared)
-        {
-            *collisionTime = time;
-            m_fSpawnRate = time;
-            reinterpret_cast<PlaneVector&>(m_kCollisionPosition) = particle;
-            return this;
-        }
-    }
-    else
-    {
-        float duration;
-        duration = *collisionTime - time;
-        PlaneVector delta;
-        delta.x = duration * velocity.x;
-        delta.y = duration * velocity.y;
-        delta.z = duration * velocity.z;
-        double projectedSum = delta.y * planeN[0];
-        const float* nn1 = &normal.x;
-        const float* dd1 = &delta.x;
-        for (int l1 = 2; l1 < 3; ++l1)
-            projectedSum += nn1[l1 - (2)] * dd1[l1 - (2)];
-        const float* nn2 = &normal.z;
-        const float* dd2 = &delta.z;
-        for (int l2 = 2; l2 < 3; ++l2)
-            projectedSum += nn2[l2 - (2)] * dd2[l2 - (2)];
-        float projected = (float)projectedSum;
-        float terminalDistance = projected + distance;
-        if (absf(terminalDistance) < DAT_010beaf8)
-            terminalDistance = 0.0f;
-        if (terminalDistance * distance < DAT_01012060)
-        {
-            float fraction = (-distance * duration) / projected;
-            PlaneVector hitDelta;
-            hitDelta.x = fraction * velocity.x;
-            hitDelta.y = fraction * velocity.y;
-            hitDelta.z = fraction * velocity.z;
-            PlaneVector hit;
-            hit.x = particle.x + hitDelta.x;
-            hit.y = particle.y + hitDelta.y;
-            hit.z = particle.z + hitDelta.z;
-            if (!(DAT_012026c4 & 1u))
-            {
-                DAT_012026c4 |= 1u;
-                double fTolInit = (float)pow(2.0, -21.0);
-                DAT_012026c0 = fTolInit;
-            }
-            float adjustedDistance;
-            adjustedDistance = reinterpret_cast<const CollisionPlane&>(m_kHalfSpacePlane).Distance(hit);
-            if (adjustedDistance * distance < DAT_01012060)
-            {
-                double absX = absf(hit.x);
-                float maxCoord = absX;
-                float fAbsY = absf(hit.y);
-                if (fAbsY > maxCoord)
-                    maxCoord = fAbsY;
-                float fAbsZ;
-                fAbsZ = absf(hit.z);
-                maxCoord = (fAbsZ > maxCoord) ? fAbsZ : maxCoord;
-                if (distance < 0.0f)
-                {
-                    hit -= ScaleVectorD(normal, maxCoord * DAT_012026c0);
-                }
-                else
-                {
-                    hit += (maxCoord * DAT_012026c0) * normal;
-                }
-            }
-            PlaneVector relative = hit - reinterpret_cast<const PlaneVector&>(m_kPathOffset);
-            PlaneVector xAxis, yAxis;
-            reinterpret_cast<RotationHelper*>(layoutPadding74)->FUN_004b4500(&xAxis, &m_kFirstVector);
-            reinterpret_cast<RotationHelper*>(layoutPadding74)->FUN_004b4500(&yAxis, &m_kSecondPlaneVector);
-            PlaneVector kAlongX = xAxis * (relative * xAxis);
-            PlaneVector kAlongY = yAxis * (yAxis * relative);
-            if (SpecialLength(kAlongX) < m_fWidthSquared && SpecialLength(kAlongY) < m_fHeightSquared)
-            {
-                *collisionTime = fraction + time;
-                reinterpret_cast<PlaneVector&>(m_kCollisionPosition) = hit;
-                bCollided = true;
-                m_fSpawnRate = fraction + time;
-            }
-        }
-    }
-    NiPSysCollider* result;
-    result = ResolveTail(time, collisionTime, data, particleId);
-    return result ? result : (bCollided ? this : 0);
-}
 
 struct Mat36
 {

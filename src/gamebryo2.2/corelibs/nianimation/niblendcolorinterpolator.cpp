@@ -34,12 +34,6 @@ void NiBlendColorInterpolator::FUN_00a56040(NiStream& kStream)
 
 extern "C" void* g_011f4074;
 
-// @fnv 0x00a56060
-void* __cdecl FUN_00a56060()
-{
-    return &g_011f4074;
-}
-
 void __fastcall FUN_00a36890(void*);
 struct BSFadeNode
 {
@@ -420,22 +414,6 @@ struct FUN_00a564d0_shell
     void FUN_00a38080(ArraySource* source);
     void AppendTwoEntries(ArraySource* source);
 };
-// Calls FUN_00a38080, then appends the result of FUN_00a7d330 and a member lookup from offset 0x30 into the array source, growing it as needed.
-// @fnv 0x00a564d0
-void FUN_00a564d0_shell::AppendTwoEntries(ArraySource* pArraySource)
-{
-    FUN_00a38080(pArraySource);
-    void* result = FUN_00a7d330(g_011f4074);
-    unsigned int index = pArraySource->m_usSize;
-    if (index >= pArraySource->m_usMaxSize)
-        pArraySource->FUN_0096ad30(index + pArraySource->m_usGrowBy);
-    pArraySource->FUN_0096ae90(index, &result);
-    result = reinterpret_cast<AssignmentMember*>(reinterpret_cast<char*>(this) + 0x30)->ToString(&DAT_01096f1c);
-    index = pArraySource->m_usSize;
-    if (index >= pArraySource->m_usMaxSize)
-        pArraySource->FUN_0096ad30(index + pArraySource->m_usGrowBy);
-    pArraySource->FUN_0096ae90(index, &result);
-}
 
 struct CA61c0
 {

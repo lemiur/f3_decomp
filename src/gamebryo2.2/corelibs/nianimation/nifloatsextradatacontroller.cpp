@@ -5,12 +5,6 @@
 
 extern "C" void* g_011f3fcc;
 
-// @fnv 0x00a4ef60
-void* __cdecl FUN_00a4ef60()
-{
-    return &g_011f3fcc;
-}
-
 int* __fastcall InitTimeController(int*);
 extern int DAT_0109928c;
 extern int EmptyFS;
@@ -163,17 +157,6 @@ struct NiFloatsExtraDataController
     int unk40;
     void ApplyInterpolatorValue(NiInterpolator*, unsigned short);
 };
-// Casts the interpolator to a float interpolator and applies the value obtained from unk3c->GetValueAt(unk40).
-// @fnv 0x00a4f080
-void NiFloatsExtraDataController::ApplyInterpolatorValue(NiInterpolator* pkInterp, unsigned short usIndex)
-{
-    NiFloatInterpolator* pkFloatInterp;
-    if (!pkInterp)
-        pkFloatInterp = 0;
-    else
-        pkFloatInterp = (NiFloatInterpolator*)pkInterp->DynamicCast((const NiRTTI*)&g_011f3738);
-    pkFloatInterp->SetFloatValue(unk3c->GetValueAt(unk40));
-}
 }  // namespace fnv_00a4f080
 
 namespace fnv_00a4f150 {
@@ -244,22 +227,6 @@ struct ControllerStub
     void* unk40;
     void FUN_00a4f1e0(StreamStub* stream);
 };
-
-// @fnv 0x00a4f1e0
-void ControllerStub::FUN_00a4f1e0(StreamStub* stream)
-{
-    FUN_00a57420(stream);
-    void* value = FUN_00a7d330(g_011f3fcc);
-    unsigned int index = stream->unk0A;
-    if (index >= stream->unk08)
-        stream->FUN_0096ad30(index + stream->unk0E);
-    stream->FUN_0096ae90(index, &value);
-    value = FUN_00a7d4d0(&DAT_01099270, unk40);
-    index = stream->unk0A;
-    if (index >= stream->unk08)
-        stream->FUN_0096ad30(index + stream->unk0E);
-    stream->FUN_0096ae90(index, &value);
-}
 
 extern char* DAT_0109b220;
 extern "C" unsigned int __cdecl strlen(const char*);

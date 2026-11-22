@@ -44,18 +44,6 @@ struct NiPSysModifierBoolCtlr
     void FUN_00c32c70(NiInterpolator*, unsigned short);
 };
 extern unsigned int DAT_011f404c;
-// @fnv 0x00c32c70
-void NiPSysModifierBoolCtlr::FUN_00c32c70(NiInterpolator* pkInterp, unsigned short usIndex)
-{
-    bool bValue;
-    NiBoolInterpolator* pkBoolInterp;
-    if (pkInterp == 0)
-        pkBoolInterp = 0;
-    else
-        pkBoolInterp = (NiBoolInterpolator*)pkInterp->DynamicCast(&DAT_011f404c);
-    ((void(__thiscall*)(NiPSysModifierBoolCtlr*, bool*))(*(void***)this)[60])(this, &bValue);
-    pkBoolInterp->SetBoolValue(bValue);
-}
 
 namespace fnv_00c32d30 {
 struct StrArr

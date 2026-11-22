@@ -31,12 +31,6 @@ const char* __thiscall FUN_00a4d1b0_shell::GetLightTypeName()
 struct GlobalObjectO2_00a7b610;
 extern GlobalObjectO2_00a7b610 g_011f3fa8;
 
-// @fnv 0x00a4d200
-GlobalObjectO2_00a7b610* __cdecl FUN_00a4d200()
-{
-    return &g_011f3fa8;
-}
-
 struct BSFadeNode
 {
     static void* __cdecl operator new(unsigned int);
@@ -48,21 +42,6 @@ struct NiLightColorController
 };
 
 extern int DAT_01098dd4;
-
-// @fnv 0x00a4d500
-void* __cdecl FUN_00a4d500()
-{
-    void* p = BSFadeNode::operator new(0x3c);
-    if (p)
-    {
-        NiLightColorController* pController = (NiLightColorController*)p;
-        pController->FUN_00a57c80();
-        *(short*)((char*)p + 0x38) = 0;
-        *(void**)p = &DAT_01098dd4;
-        return p;
-    }
-    return 0;
-}
 
 struct NiPoint3
 {
@@ -171,21 +150,6 @@ struct H462
 {
     void* __thiscall DestroyAndFree(unsigned int);
 };
-// @fnv 0x00a4d460
-void* __thiscall H462::DestroyAndFree(unsigned int auiFlags)
-{
-    *(void* volatile*)this = (void*)&DAT_01098dd4;
-    void* p = *(void* volatile*)((char*)this + 0x34);
-    if (p)
-    {
-        if (InterlockedDecrement((long volatile*)((char*)p + 4)) == 0)
-            ((R462*)p)->f1();
-    }
-    ((B462*)this)->FUN_00a6d290();
-    if (auiFlags & 1)
-        _delete(this, 0x3c);
-    return this;
-}
 
 struct CloningProcess
 {
@@ -229,16 +193,6 @@ struct StrArr
 };
 void __stdcall FUN_00a57d10(StrArr*);
 char* __cdecl FUN_00a7d330(GlobalObjectO2_00a7b610*);
-// @fnv 0x00a4d5a0
-void __stdcall FUN_00a4d5a0(StrArr* pkStrings)
-{
-    FUN_00a57d10(pkStrings);
-    char* p = FUN_00a7d330(*(GlobalObjectO2_00a7b610**)&g_011f3fa8);
-    unsigned int uiIndex = ((unsigned short*)pkStrings)[5];
-    if (uiIndex >= ((unsigned short*)pkStrings)[4])
-        pkStrings->SetSize(((unsigned short*)pkStrings)[7] + uiIndex);
-    pkStrings->SetAt(uiIndex, p);
-}
 
 struct NiBinaryStream
 {

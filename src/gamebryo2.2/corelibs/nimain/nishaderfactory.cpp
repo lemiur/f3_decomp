@@ -1,12 +1,6 @@
-// gamebryo2.2/corelibs/nimain/nishaderfactory.cpp: NiShaderFactory, NiRefObject (11 functions)
+// gamebryo2.2/corelibs/nimain/nishaderfactory.cpp: NiShaderFactory, NiRefObject (9 functions)
 #include "f3_common.h"
 #include "nishaderfactory_types.h"
-
-// @fnv 0x00a9fff0
-NiShaderFactory* __cdecl NiShaderFactory::GetInstance()
-{
-    return ms_pShaderFactory;
-}
 
 void __cdecl __Dummy_00b6fef0(void* p, unsigned int size);
 struct FUN_00aa06c0
@@ -110,11 +104,6 @@ struct FUN_00e89830_shell : public NiD3DShaderProgram
 };
 
 extern char const* const g_0126f9ac_arg1;
-// @fnv 0x00e89830
-void* FUN_00e89830_shell::FUN_00e89830()
-{
-    return (void*)&g_0126f9ac_arg1;
-}
 
 struct NiFileHack
 {

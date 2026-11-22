@@ -1,4 +1,4 @@
-// gamebryo2.2/corelibs/nimain/nitrishapedata.cpp: Obj, Blk, HolderA, HolderB and more (17 functions)
+// gamebryo2.2/corelibs/nimain/nitrishapedata.cpp: Obj, Blk, HolderA, HolderB and more (15 functions)
 #include "f3_common.h"
 #include "nitrishapedata_decls.h"
 
@@ -93,12 +93,6 @@ void __fastcall FUN_00a7b760(FUN_00a7b760_T* self, int, unsigned short* p1, unsi
 }
 
 extern const char* const g_011f5af4_arg1;
-
-// @fnv 0x00a7b860
-const char* const* __fastcall FUN_00a7b860(void* self, int)
-{
-    return &g_011f5af4_arg1;
-}
 
 struct FUN_00a7b870_T
 {
@@ -590,41 +584,6 @@ struct NameA7b7e0 : BaseA7b7e0
 
     bool FUN_00a7b7e0(const NameA7b7e0* pkOther);
 };
-
-// @fnv 0x00a7b7e0
-bool NameA7b7e0::FUN_00a7b7e0(const NameA7b7e0* pkOther)
-{
-    if (!BaseA7b7e0::MatchesTriangleCount(pkOther))
-        return false;
-    if (m_uiNameHash != pkOther->m_uiNameHash)
-        return false;
-    unsigned int uiBytes = m_uiNameHash * 2;
-    unsigned int* pB = (unsigned int*)pkOther->m_pReferencedObject;
-    unsigned int* pA = (unsigned int*)m_pReferencedObject;
-    while (uiBytes >= 4)
-    {
-        if (*pA != *pB)
-            return false;
-        uiBytes -= 4;
-        pB++;
-        pA++;
-    }
-    if (uiBytes != 0)
-    {
-        char* cA = (char*)pA;
-        char* pcB = (char*)pB;
-        if (pcB[0] != cA[0])
-            return false;
-        if (uiBytes > 1)
-        {
-            if (pcB[1] != cA[1])
-                return false;
-            if (uiBytes > 2 && pcB[2] != cA[2])
-                return false;
-        }
-    }
-    return true;
-}
 
 namespace fnv_00ba3d30 {
 extern "C" char DAT_010b7fe4;

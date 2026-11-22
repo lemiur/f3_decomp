@@ -25,12 +25,6 @@ void __thiscall NiTriShapeDynamicData::FUN_00a81730(unsigned short& usStrips, co
 
 extern void* g_011f5af4;
 
-// @fnv 0x00a81800
-void* __cdecl FUN_00a81800()
-{
-    return &g_011f5af4;
-}
-
 namespace fnv_00a81820 {
 struct NiTriShapeDynamicData
 {

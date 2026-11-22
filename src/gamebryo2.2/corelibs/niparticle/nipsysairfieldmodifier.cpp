@@ -4,12 +4,6 @@
 
 extern "C" void* g_012027a8;
 
-// @fnv 0x00c2f590
-void* __cdecl FUN_00c2f590()
-{
-    return &g_012027a8;
-}
-
 void __cdecl FUN_00c31750(void);
 void __cdecl __Dummy_00b6fef0(void* p, unsigned int flags);
 
@@ -508,41 +502,6 @@ struct FUN_00c303c0_cls
     void FUN_0096ae90(unsigned int index, void** value);
     void BuildViewerStrings(ViewerStrings* s);
 };
-
-static void AddViewerString(ViewerStrings* s, void* value)
-{
-    FUN_00c303c0_cls* arr = reinterpret_cast<FUN_00c303c0_cls*>(s);
-    unsigned int count = s->m_0a;
-    if (count >= s->m_08)
-    {
-        arr->FUN_0096ad30(count + s->m_0e);
-    }
-    arr->FUN_0096ae90(count, &value);
-}
-
-// @fnv 0x00c303c0
-void FUN_00c303c0_cls::BuildViewerStrings(ViewerStrings* s)
-{
-    FUN_00c322b0(s);
-    void* v = FUN_00a7d330(g_012027a8);
-    AddViewerString(s, v);
-    v = m_40.FUN_00a59af0("Direction");
-    AddViewerString(s, v);
-    v = m_4c.FUN_00a59af0("Unit Direction");
-    AddViewerString(s, v);
-    v = FUN_00a7d550("AirFriction", m_58);
-    AddViewerString(s, v);
-    v = FUN_00a7d550("Inherit Velocity", m_5c);
-    AddViewerString(s, v);
-    v = FUN_00a7d370("Inherit Rotation", m_60);
-    AddViewerString(s, v);
-    v = FUN_00a7d370("Component Only", m_61);
-    AddViewerString(s, v);
-    v = FUN_00a7d370("Enable Spread", m_62);
-    AddViewerString(s, v);
-    v = FUN_00a7d550("Spread", m_64);
-    AddViewerString(s, v);
-}
 
 struct AirFieldModifier
 {

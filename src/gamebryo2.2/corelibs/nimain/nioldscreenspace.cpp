@@ -1,4 +1,4 @@
-// gamebryo2.2/corelibs/nimain/nioldscreenspace.cpp: NiScreenPolygon, NiScreenGeometry, Holder, HolderBase and more (45 functions)
+// gamebryo2.2/corelibs/nimain/nioldscreenspace.cpp: NiScreenPolygon, NiScreenGeometry, Holder, HolderBase and more (40 functions)
 #include "f3_common.h"
 extern "C" void* __cdecl memset(void*, int, unsigned int);
 #pragma intrinsic(memset)
@@ -13,12 +13,6 @@ NiScreenPolygon::NiScreenPolygon(const NiScreenPolygon& other)
 
 struct GlobalObjectO2_00a7b610;
 extern GlobalObjectO2_00a7b610 g_011f5e5c;
-// Returns the address of the global object g_011f5e5c.
-// @fnv 0x00a8ff70
-GlobalObjectO2_00a7b610* __cdecl FUN_00a8ff70()
-{
-    return &g_011f5e5c;
-}
 
 struct BSFadeNode
 {
@@ -42,13 +36,6 @@ void* __cdecl FUN_00a8ff80()
 
 struct GlobalObjectO2_00a7b610;
 extern GlobalObjectO2_00a7b610 g_011f5e64;
-
-// Returns the address of the global object g_011f5e64.
-// @fnv 0x00a8ffb0
-GlobalObjectO2_00a7b610* __cdecl FUN_00a8ffb0()
-{
-    return &g_011f5e64;
-}
 
 namespace fnv_00a8ffc0 {
 struct _Call_a5d3a0
@@ -116,12 +103,6 @@ struct GlobalObjectO2_00a7b610
 {
 };
 extern GlobalObjectO2_00a7b610 g_011f5e6c;
-
-// @fnv 0x00a91690
-GlobalObjectO2_00a7b610* FUN_00a91690()
-{
-    return &g_011f5e6c;
-}
 
 struct ImageSpaceTexture
 {
@@ -311,18 +292,6 @@ struct Outer913a0 : Caller74690
 {
     void __thiscall AppendGlobalString(StrArr*);
 };
-// Appends the string returned by _FUN_00a7d330(g_011f5e5c) to pkStrings, growing the array by its grow amount when full.
-// @fnv 0x00a913a0
-void __thiscall Outer913a0::AppendGlobalString(StrArr* pkStrings)
-{
-    FUN_00a74690(pkStrings);
-    char* psz = _FUN_00a7d330(*(const char**)&g_011f5e5c);
-    unsigned int uiSize = pkStrings->GetSize();
-    unsigned int uiMax = pkStrings->GetAlloc();
-    if (uiSize >= uiMax)
-        pkStrings->SetSize(uiSize + pkStrings->GetGrow());
-    pkStrings->SetAt(uiSize, psz);
-}
 
 namespace fnv_00a91890 {
 struct StrArr
@@ -339,19 +308,6 @@ struct Cam : BaseCam
     void __thiscall FUN_00a91890(StrArr*);
 };
 char* __cdecl _FUN_00a7d330(const char*);
-// Calls the base implementation, then appends the string returned by _FUN_00a7d330 to pkStrings, growing it if needed.
-// @fnv 0x00a91890
-void __thiscall Cam::FUN_00a91890(StrArr* pkStrings)
-{
-    FUN_00a71920(pkStrings);
-    char* tmp = _FUN_00a7d330(*(const char**)&g_011f5e6c);
-    unsigned int sz = *(unsigned short*)((char*)pkStrings + 0xa);
-    if (sz >= *(unsigned short*)((char*)pkStrings + 8))
-    {
-        pkStrings->SetSize(*(unsigned short*)((char*)pkStrings + 0xe) + sz);
-    }
-    pkStrings->SetAt(sz, tmp);
-}
 }  // namespace fnv_00a91890
 
 void __cdecl _delete(void*, unsigned int);

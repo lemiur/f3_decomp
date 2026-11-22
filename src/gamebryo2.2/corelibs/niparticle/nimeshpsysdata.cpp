@@ -7,12 +7,6 @@ extern "C"
     extern void* g_012027c0;
 }
 
-// @fnv 0x00c30a80
-void* __cdecl FUN_00c30a80()
-{
-    return &g_012027c0;
-}
-
 struct NiPSysData
 {
     virtual ~NiPSysData();
@@ -247,17 +241,6 @@ struct StrArr
 };
 void __stdcall FUN_00c255b0(StrArr*);
 char* __cdecl _FUN_00a7d330(const char*);
-// @fnv 0x00c31210
-void __stdcall FUN_00c31210(StrArr* pkStrings)
-{
-    FUN_00c255b0(pkStrings);
-    char* pszStr = _FUN_00a7d330((const char*)g_012027c0);
-    unsigned int uiSize = pkStrings->m_usSize;
-    unsigned int uiAlloc = pkStrings->m_usAlloc;
-    if (uiSize >= uiAlloc)
-        pkStrings->SetSize(uiSize + pkStrings->m_usGrow);
-    pkStrings->SetAt(uiSize, pszStr);
-}
 
 struct CloningProcess;
 
@@ -1046,11 +1029,6 @@ class FUN_00c30c00_cls : public BC30C00Base
     int unk84;
     BC30C00ObjectArray m_kArray;
 };
-
-// Initializes the object with m_pkTarget set to null.
-// @fnv 0x00c30c00
-FUN_00c30c00_cls::FUN_00c30c00_cls() throw() : m_pkTarget(0)
-{}
 
 __declspec(dllimport) long __stdcall InterlockedIncrement(long*);
 __declspec(dllimport) long __stdcall InterlockedDecrement(long*);

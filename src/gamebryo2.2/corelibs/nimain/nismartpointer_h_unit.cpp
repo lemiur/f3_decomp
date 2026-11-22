@@ -1,4 +1,4 @@
-// gamebryo2.2/corelibs/nimain/nismartpointer_h_unit.cpp: free functions (1 function)
+// gamebryo2.2/corelibs/nimain/nismartpointer_h_unit.cpp: free functions (0 functions)
 #include "f3_common.h"
 #include "nismartpointer.h"
 
@@ -15,12 +15,3 @@ struct Struct6c89e0
     NavMeshPtr fC;
     Struct6c89e0& AssignFrom(Struct6c89e0 const*);
 };
-// @fnv 0x006c89e0
-Struct6c89e0& Struct6c89e0::AssignFrom(Struct6c89e0 const* apSource)
-{
-    f0 = apSource;
-    f4 = apSource->f4;
-    f8 = apSource->f8;
-    fC = apSource->fC;
-    return *this;
-}

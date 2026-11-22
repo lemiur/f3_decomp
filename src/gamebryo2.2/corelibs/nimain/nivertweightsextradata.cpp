@@ -36,22 +36,6 @@ struct BSFadeNode
 
 extern void* DAT_0109ee9c;
 
-// @fnv 0x00a89b80
-void* __cdecl CreateNiExtraData()
-{
-    NiExtraData* p = (NiExtraData*)BSFadeNode::operator new(0xc);
-    if (p)
-    {
-        p->FUN_00a7b2e0();
-        *reinterpret_cast<void**>(p) = &DAT_0109ee9c;
-    }
-    else
-    {
-        p = 0;
-    }
-    return p;
-}
-
 struct NiVertWeightsExtraData : NiExtraData
 {
     void* FUN_00a89bb0(unsigned int);
@@ -61,15 +45,6 @@ struct FUN_00a7b300_shell
     void FUN_00a7b300();
 };
 void __cdecl _delete(void*, unsigned int);
-// @fnv 0x00a89bb0
-void* NiVertWeightsExtraData::FUN_00a89bb0(unsigned int flags)
-{
-    *(void**)this = (void*)&DAT_0109ee9c;
-    ((FUN_00a7b300_shell*)this)->FUN_00a7b300();
-    if (flags & 1)
-        _delete(this, 12);
-    return this;
-}
 
 struct A89C70RTTI
 {
@@ -141,23 +116,6 @@ struct FUN_00a89b30_cls
     void FUN_00a7b330(void* obj, unsigned int a1);
     void* FUN_00a89b30(unsigned int a1);
 };
-
-// @fnv 0x00a89b30
-void* FUN_00a89b30_cls::FUN_00a89b30(unsigned int a1)
-{
-    FUN_00a89b30_cls* p = (FUN_00a89b30_cls*)FUN_00aa13e0(0xc);
-    if (p != 0)
-    {
-        ((NiExtraData*)p)->FUN_00a7b2e0();
-        p->m_vtbl = (void*)&DAT_0109ee9c;
-    }
-    else
-    {
-        p = 0;
-    }
-    this->FUN_00a7b330(p, a1);
-    return p;
-}
 
 struct S_00a89be0_Bin
 {

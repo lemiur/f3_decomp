@@ -396,22 +396,6 @@ class A36590Controller
     void FUN_00a36590(A36590Object* pkObject, int iUnused);
 };
 
-// @fnv 0x00a36590
-void A36590Controller::FUN_00a36590(A36590Object* pkObject, int iUnused)
-{
-    A36590Node* pkNode = !pkObject ? 0 : (A36590Node*)pkObject->DynamicCast(&g_kA36590NodeRTTI);
-    A36590AVObject* pkSource = m_pkSource;
-
-    A36590Quaternion kRotate;
-    kRotate.FromRotationMatrix(pkSource->m_kRotate);
-
-    A36590QuatTransform kTransform;
-    kTransform.m_kTranslate = pkSource->m_kTranslate;
-    kTransform.m_kRotate = kRotate;
-    kTransform.m_fScale = pkSource->m_fScale;
-    pkNode->SetTargetTransform(kTransform);
-}
-
 extern "C" void* __cdecl FUN_00aa13e0(unsigned int size);
 
 class NiTransformInitA

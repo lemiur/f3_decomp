@@ -4,12 +4,6 @@
 
 extern "C" void* g_01202700;
 
-// @fnv 0x00c2a8a0
-void* __cdecl FUN_00c2a8a0()
-{
-    return &g_01202700;
-}
-
 struct NiRTTI
 {
     const char* m_pcName;
@@ -84,17 +78,6 @@ struct NiPSysGravityStrengthCtlr
 {
     void FUN_00c2a960(StrArr*);
 };
-// Appends the string returned by _FUN_00a7d330(g_01202700) to pkStrings, growing the array if it is full.
-// @fnv 0x00c2a960
-void NiPSysGravityStrengthCtlr::FUN_00c2a960(StrArr* pkStrings)
-{
-    FUN_00c32f60(pkStrings);
-    char* pStr = _FUN_00a7d330(g_01202700);
-    unsigned int uiSize = pkStrings->m_usSize;
-    if (uiSize >= pkStrings->m_usMaxSize)
-        pkStrings->SetSize(uiSize + pkStrings->m_usGrowSize);
-    pkStrings->SetAt(uiSize, pStr);
-}
 }  // namespace fnv_00c2a960
 
 class C2A8C0CloningProcess;

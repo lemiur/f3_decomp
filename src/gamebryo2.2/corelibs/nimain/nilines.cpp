@@ -1,4 +1,4 @@
-// gamebryo2.2/corelibs/nimain/nilines.cpp: NiLines, LinesCloneSource (8 functions)
+// gamebryo2.2/corelibs/nimain/nilines.cpp: NiLines, LinesCloneSource (7 functions)
 #include "f3_common.h"
 #include "nilines_decls.h"
 // Sets the geometry data on dest from model, then calls NiAVObject::FUN_00a5ac90 with dest and process.
@@ -148,12 +148,6 @@ struct FUN_00e68810_shell : public NiLines
 {
     NiLines* FUN_00e68810();
 };
-
-// @fnv 0x00e68810
-NiLines* FUN_00e68810_shell::FUN_00e68810()
-{
-    return this;
-}
 
 void __cdecl FUN_00a80470();
 // @fnv 0x00a89770

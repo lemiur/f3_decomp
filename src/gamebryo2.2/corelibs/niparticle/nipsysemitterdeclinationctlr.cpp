@@ -16,12 +16,6 @@ void __thiscall NiPSysEmitterDeclinationCtlr::FUN_00c2a1b0(float& fValue)
 
 extern "C" void* g_01202758;
 
-// @fnv 0x00c2b9a0
-void* __cdecl FUN_00c2b9a0()
-{
-    return &g_01202758;
-}
-
 namespace fnv_00c2b9b0 {
 struct NiPSysEmitterDeclinationCtlr
 {
@@ -64,14 +58,6 @@ struct FUN_00c2ba10_class
     __declspec(nothrow) void FUN_00c32f60(ObjArray* arr);
     void FUN_00c2ba10(ObjArray* arr);
 };
-
-// @fnv 0x00c2ba10
-void FUN_00c2ba10_class::FUN_00c2ba10(ObjArray* pArray)
-{
-    FUN_00c32f60(pArray);
-    NiObject* obj = FUN_00a7d330(g_01202758);
-    pArray->Add(obj);
-}
 
 struct S_00c2b9c0_Base
 {

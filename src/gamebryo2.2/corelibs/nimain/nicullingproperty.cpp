@@ -5,12 +5,6 @@
 struct GlobalObjectO2_00a7b610;
 extern GlobalObjectO2_00a7b610 g_011f5d20;
 
-// @fnv 0x00a8f520
-GlobalObjectO2_00a7b610* __cdecl FUN_00a8f520()
-{
-    return &g_011f5d20;
-}
-
 struct BSFadeNode
 {
     static void* __cdecl operator new(unsigned int);
@@ -165,26 +159,6 @@ struct GlobalObjectO2_00a7b610
     int unk04;
     NiPointerProperty cullingProperty;
 };
-
-// Allocates a NiPropertyMem, initialises it via FUN_00a5c200, clears flag bit 0, sets its vtable, and assigns it to g_011f5d20.cullingProperty.
-// @fnv 0x00a8f5b0
-void __cdecl CreateCullingProperty()
-{
-    NiPropertyMem* allocated = static_cast<NiPropertyMem*>(FUN_00aa13e0(sizeof(NiPropertyMem)));
-    NiPropertyMem* fresh;
-    if (allocated)
-    {
-        FUN_00a5c200(allocated);
-        allocated->flags &= 0xfffe;
-        allocated->vtable = &DAT_0109f68c;
-        fresh = allocated;
-    }
-    else
-    {
-        fresh = 0;
-    }
-    g_011f5d20.cullingProperty = fresh;
-}
 
 struct NiRefCountedObj
 {

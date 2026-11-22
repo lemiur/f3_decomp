@@ -597,12 +597,6 @@ bool __thiscall S_00a533c0_Class::UpdateValue(float fValue, int iValue, unsigned
 
 void __cdecl FUN_00aa1000();
 
-// @fnv 0x00aa0ab0
-void __cdecl FUN_00aa0ab0()
-{
-    FUN_00aa1000();
-}
-
 class CloningProcessA535;
 
 class TESObjectDoorController

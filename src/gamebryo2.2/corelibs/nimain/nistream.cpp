@@ -1,4 +1,4 @@
-// gamebryo2.2/corelibs/nimain/nistream.cpp: NiStream, NiStreamImpl, ThisObj, Receiver and more (64 functions)
+// gamebryo2.2/corelibs/nimain/nistream.cpp: NiStream, NiStreamImpl, ThisObj, Receiver and more (59 functions)
 #include "nistream_cpp_decls.h"
 
 // @fnv 0x00A634E0
@@ -7422,29 +7422,6 @@ struct MemContextScope
     }
 };
 
-// Registers the calling thread in the task manager by allocating a 0x5000 stack and initializing its memory router under a critical section.
-// @fnv 0x00c68050
-void FUN_00c68050_shell::RegisterThread()
-{
-    TaskManager* pThis = reinterpret_cast<TaskManager*>(this);
-    EnterCriticalSection(&pThis->m_cs);
-    if (pThis->m_uiNumThreads < 16)
-    {
-        MemContextScope scope(16);
-        AudioTlsState* thread = &pThis->m_threads[pThis->m_uiNumThreads];
-        hkMemorySystem::GetMonitorStream()->InitializeThreadRouter(&thread->m_router, "bhkTaskletThread", Flag(1));
-        NineIntegerRecord& router = thread->m_router;
-        PointerCallback::HandlePointer(&router);
-        void* pStack = thread->m_router.m_pThreadAllocator->AllocateMemoryBlock(0x5000);
-        thread->m_pStackBuffer = pStack;
-        router.m_stackCurrent = pStack;
-        router.m_stackStart = pStack;
-        router.m_stackEnd = (char*)pStack + 0x5000;
-        thread->m_uiMemoryContextId = GetCurrentThreadId();
-        pThis->m_uiNumThreads++;
-    }
-    LeaveCriticalSection(&pThis->m_cs);
-}
 }  // namespace fnv_00c68050
 
 struct GlobalObjectO2_00c67fe0
@@ -7452,11 +7429,6 @@ struct GlobalObjectO2_00c67fe0
     void RegisterThread();
 };
 extern GlobalObjectO2_00c67fe0 g_01267830;
-// @fnv 0x00c681b0
-void FUN_00c681b0()
-{
-    g_01267830.RegisterThread();
-}
 
 #include <xmmintrin.h>
 // ---------------------------------------------------------------------------
@@ -7553,21 +7525,6 @@ struct FUN_00c681c0_bhkWorldCinfo : public FNV_bhkBaseCinfo
 {
     FUN_00c681c0_bhkWorldCinfo();
 };
-
-// Constructs a bhkWorldCinfo by initializing the vtable, scalar fields, and a vector with constant values.
-// @fnv 0x00c681c0
-FUN_00c681c0_bhkWorldCinfo::FUN_00c681c0_bhkWorldCinfo() : FNV_bhkBaseCinfo()
-{
-    m_vtbl = &FNV_vtbl_010c3c44;
-    m_b29 = 0;
-    m_f54 = FNV_k_0101e2bc.f;
-    m_f24 = FNV_k_0104da48.f;
-    m_vec = _mm_setr_ps(FNV_k_01011d78.f, FNV_k_011afed4.f, FNV_k_01011d78.f, FNV_k_01011d78.f);
-    m_bd1 = FNV_b_011afe5c;
-    m_ba7 = 0;
-    m_b28 = 3;
-    m_f68 = FNV_f_01267b38;
-}
 
 struct Thing
 {
@@ -7890,21 +7847,6 @@ struct LinkedHolder : ExtraBase
     void LinkObjects(NiStream& stream);
 };
 
-// Links the holder's own object and then adds each loaded object from the link stream as a linked object.
-// @fnv 0x00cc21f0
-void LinkedHolder::LinkObjects(NiStream& stream)
-{
-    HeapContextGuard guard(0x10);
-    ExtraBase::LinkObject(stream);
-    unsigned int ItemUpdateArray = ((LinkStream&)stream).GetLinkID();
-    for (unsigned int i = 0; i < ItemUpdateArray; i++)
-    {
-        NiObject* pObj = ((LinkStream&)stream).GetLoadedObject();
-        if (pObj)
-            AddLinked(pObj);
-    }
-}
-
 struct S_00cc4870_Stream
 {
     int FUN_00a63460();
@@ -7961,17 +7903,6 @@ struct S_00cc4870
     void FUN_00c89860(S_00cc4870_Stream* stream);
     void FUN_00cc4870(S_00cc4870_Stream* stream);
 };
-// Calls vfn_b4 and FUN_00c89860, then calls FUN_00a63460 once and FUN_00a63430 twice.
-// @fnv 0x00cc4870
-void S_00cc4870::FUN_00cc4870(S_00cc4870_Stream* stream)
-{
-    char tmp;
-    vfn_b4(&tmp);
-    FUN_00c89860(stream);
-    stream->FUN_00a63460();
-    stream->FUN_00a63430();
-    stream->FUN_00a63430();
-}
 
 namespace fnv_00a64df0 {
 #include <windows.h>

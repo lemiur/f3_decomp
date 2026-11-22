@@ -4,12 +4,6 @@
 
 extern int g_011f5e84;
 
-// @fnv 0x00a92070
-int* __cdecl FUN_00a92070()
-{
-    return &g_011f5e84;
-}
-
 struct NiObject
 {
     virtual ~NiObject();
@@ -48,15 +42,6 @@ struct Holder00a92080
 void __cdecl FUN_00a7b300();
 void __cdecl _delete(void*, unsigned int);
 extern int DAT_0109fb94;
-// @fnv 0x00a92080
-void* Holder00a92080::FUN_00a92080(unsigned int flags)
-{
-    *(void**)this = (void*)&DAT_0109fb94;
-    FUN_00a7b300();
-    if (flags & 1)
-        _delete(this, 0x1c);
-    return this;
-}
 
 struct NiExtraData
 {
@@ -75,29 +60,6 @@ struct FUN_00a920b0_shell : NiVectorExtraData
 {
     NiObject* FUN_00a920b0(CloningProcess&);
 };
-// Allocates a NiVectorExtraData, initialises its four floats to zero, copies this object's four floats into it and returns it.
-// @fnv 0x00a920b0
-NiObject* FUN_00a920b0_shell::FUN_00a920b0(CloningProcess& kCloning)
-{
-    NiVectorExtraData* pkObject = (NiVectorExtraData*)BSFadeNode::operator new(sizeof(NiVectorExtraData));
-    if (pkObject)
-    {
-        ((NiExtraData*)pkObject)->FUN_00a7b2e0();
-        *(void**)pkObject = (void*)&DAT_0109fb94;
-        pkObject->m_afVectorComponents[0] = pkObject->m_afVectorComponents[1] = pkObject->m_afVectorComponents[2] =
-            pkObject->m_afVectorComponents[3] = 0.0f;
-    }
-    else
-    {
-        pkObject = 0;
-    }
-    ((NiExtraData*)this)->FUN_00a7b330(pkObject, &kCloning);
-    pkObject->m_afVectorComponents[0] = m_afVectorComponents[0];
-    pkObject->m_afVectorComponents[1] = m_afVectorComponents[1];
-    pkObject->m_afVectorComponents[2] = m_afVectorComponents[2];
-    pkObject->m_afVectorComponents[3] = m_afVectorComponents[3];
-    return pkObject;
-}
 
 struct StrArr
 {

@@ -1,4 +1,4 @@
-// gamebryo2.2/corelibs/niconsolerenderer/nid3dpass.cpp: NiD3DPass, Node, MyCls, Shader and more (53 functions)
+// gamebryo2.2/corelibs/niconsolerenderer/nid3dpass.cpp: NiD3DPass, Node, MyCls, Shader and more (46 functions)
 #include "f3_common.h"
 #include "nid3dpass_types_NiD3DPass.h"
 #include "nid3dpass_types_NiTArray_NiPointer_NiD3DTextureStage__NiTNewInterface_NiPointer_NiD3DTextureStage_____.h"
@@ -237,23 +237,6 @@ void* __cdecl FUN_00c1d790(unsigned int);
 extern int DAT_010ef35c;
 extern int DAT_010ef378;
 
-// @fnv 0x00e80020
-void* __fastcall FUN_00e80020(void* pThis, int, unsigned int uiMaxSize, unsigned int uiGrowBy)
-{
-    *(int**)pThis = &DAT_010ef35c;
-    unsigned short usMaxSize = (unsigned short)uiMaxSize;
-    *(unsigned short*)((char*)pThis + 0x8) = usMaxSize;
-    *(unsigned short*)((char*)pThis + 0xe) = (unsigned short)uiGrowBy;
-    *(unsigned short*)((char*)pThis + 0xa) = 0;
-    *(unsigned short*)((char*)pThis + 0xc) = 0;
-    if (usMaxSize > 0)
-        *(void**)((char*)pThis + 4) = FUN_00c1d790(usMaxSize);
-    else
-        *(void**)((char*)pThis + 4) = 0;
-    *(int**)pThis = &DAT_010ef378;
-    return pThis;
-}
-
 class NiMemObject
 {
   public:
@@ -346,11 +329,6 @@ struct GlobalObjectO2_00a7b610
     int x;
 };
 extern GlobalObjectO2_00a7b610 g_0126f5c4;
-// @fnv 0x00e7d9c0
-GlobalObjectO2_00a7b610* __cdecl FUN_00e7d9c0()
-{
-    return &g_0126f5c4;
-}
 
 namespace fnv_00e7e7a0 {
 struct MemoryManager
@@ -422,25 +400,10 @@ unsigned int __fastcall FUN_00e7f7d0(PassLike* self, int edx, unsigned int uiPas
 }
 
 extern int DAT_011bf558;
-// @fnv 0x00e7f830
-void __cdecl FUN_00e7f830(int v)
-{
-    DAT_011bf558 = v;
-}
 
 extern int DAT_011bf55c;
-// @fnv 0x00e7f840
-void __cdecl FUN_00e7f840(int v)
-{
-    DAT_011bf55c = v;
-}
 
 extern int DAT_011bf560;
-// @fnv 0x00e7f850
-void __cdecl FUN_00e7f850(int v)
-{
-    DAT_011bf560 = v;
-}
 
 namespace fnv_00e7f900 {
 struct MemoryManager
@@ -521,30 +484,6 @@ struct FUN_00e800f0
     int f64;
     FUN_00e800f0();
 };
-// @fnv 0x00e800f0
-FUN_00e800f0::FUN_00e800f0()
-{
-    f14 = 0;
-    f18 = 0;
-    f1c = 0;
-    sub.FUN_00e80020(DAT_011bf558, 4);
-    f30 = 0;
-    f34 = 0;
-    f38 = 0;
-    f3c = 0;
-    f40 = 0;
-    f44 = 0;
-    f48 = 0;
-    b4c = 0;
-    f50 = 0;
-    f54 = 0;
-    f58 = 0;
-    f5c = 0;
-    b60 = 0;
-    b61 = 0;
-    f64 = 0;
-    b4 = 0;
-}
 
 extern "C" int __cdecl AllocatePoolItem();
 
@@ -1388,33 +1327,6 @@ class DispatchObject
     virtual void v36();
     virtual void v_dc(int a, int b);
 };
-
-// For each index from start up to DAT_011bf558, calls v_dc and v30 with fixed arguments; then calls v_dc for remaining indices up to DAT_011bf560.
-// @fnv 0x00e7dd50
-void __cdecl FUN_00e7dd50(int start)
-{
-    unsigned int i = (unsigned int)start;
-    if (i < (unsigned int)DAT_011bf558)
-    {
-        do
-        {
-            DispatchObject* obj = (DispatchObject*)DAT_0126f6c8;
-            obj->v_dc((int)i, 0);
-            obj = (DispatchObject*)DAT_0126f6c8;
-            obj->v30((int)i, 1, 1, 0);
-            obj = (DispatchObject*)DAT_0126f6c8;
-            obj->v30((int)i, 4, 1, 0);
-            obj = (DispatchObject*)DAT_0126f6c8;
-            obj->v30((int)i, 0x18, 0, 0);
-        } while (++i < (unsigned int)DAT_011bf558);
-    }
-    while (i < (unsigned int)DAT_011bf560)
-    {
-        DispatchObject* obj = (DispatchObject*)DAT_0126f6c8;
-        obj->v_dc((int)i, 0);
-        ++i;
-    }
-}
 
 struct E7DE90State
 {

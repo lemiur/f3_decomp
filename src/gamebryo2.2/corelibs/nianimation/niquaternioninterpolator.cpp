@@ -67,12 +67,6 @@ void NiQuaternionInterpolator::FUN_00a48960(float m_fStartTime, float m_fMaximum
 
 extern "C" const void* g_011f3f60;
 
-// @fnv 0x00a48ab0
-const void* __cdecl FUN_00a48ab0()
-{
-    return &g_011f3f60;
-}
-
 struct BSFadeNode
 {
     static void* __cdecl operator new(unsigned int);
@@ -526,30 +520,6 @@ struct QuaternionInterpolator
     void __thiscall FUN_00a3cbf0(Stream* stream);
     void __thiscall FUN_00a48ea0(Stream* stream);
 };
-
-// @fnv 0x00a48ea0
-void QuaternionInterpolator::FUN_00a48ea0(Stream* stream)
-{
-    FUN_00a3cbf0(stream);
-    void* value = FUN_00a7d330(g_011f3f60);
-    unsigned int index = stream->unk0a;
-    if (index >= stream->unk08)
-        stream->FUN_0096ad30(index + stream->unk0e);
-    stream->FUN_0096ae90(index, &value);
-
-    value = unk0c.FUN_00a6e190(&DAT_01098800);
-    index = stream->unk0a;
-    if (index >= stream->unk08)
-        stream->FUN_0096ad30(index + stream->unk0e);
-    stream->FUN_0096ae90(index, &value);
-
-    void* payload = unk1c;
-    value = FUN_00a7d5a0(&DAT_010987ec, payload);
-    index = stream->unk0a;
-    if (index >= stream->unk08)
-        stream->FUN_0096ad30(index + stream->unk0e);
-    stream->FUN_0096ae90(index, &value);
-}
 
 struct Quat48c
 {

@@ -1,4 +1,4 @@
-// gamebryo2.2/corelibs/nimain/nitribasedgeom.cpp: BSTextureSet, NiGeometry, NiTriBasedGeom (5 functions)
+// gamebryo2.2/corelibs/nimain/nitribasedgeom.cpp: BSTextureSet, NiGeometry, NiTriBasedGeom (3 functions)
 #include "nitribasedgeom_decls.h"
 #pragma optimize("", off)
 // @fnv 0x0051d190
@@ -17,11 +17,6 @@ NiGeometry::NiGeometry()
 }
 
 #pragma optimize("", off)
-// @fnv 0x0051d020
-void NiTriBasedGeom::SetBitfield(unsigned short value, unsigned short mask, unsigned short shift)
-{
-    flags = (flags & ~mask) | (value << shift);
-}
 
 struct DummyClass
 {
@@ -32,12 +27,6 @@ struct StackByte
 {
     unsigned char v;
 };
-
-// @fnv 0x0051d060
-void __fastcall FUN_0051d060(DummyClass* _this, StackByte aByteValue)
-{
-    _this->FUN_0051d080_mem(aByteValue.v, 8);
-}
 
 class NiMemObject
 {

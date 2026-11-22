@@ -288,13 +288,6 @@ struct FUN_00a3adc0_t
     char pad[0x38];
     FUN_00a3adc0_md* md;
 };
-// @fnv 0x00a3adc0
-unsigned short __fastcall FUN_00a3adc0(FUN_00a3adc0_t* self, int)
-{
-    if (self->md)
-        return self->md->count;
-    return 0;
-}
 
 struct CloningProcess;
 struct NiFloatData;

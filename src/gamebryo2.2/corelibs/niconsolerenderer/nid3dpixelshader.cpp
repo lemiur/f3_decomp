@@ -102,12 +102,6 @@ struct FUN_00e898d0_shell : NiD3DPixelShader
     void FUN_00e898d0();
 };
 
-// @fnv 0x00e898d0
-void __thiscall FUN_00e898d0_shell::FUN_00e898d0()
-{
-    FUN_00e92f30(this);
-}
-
 // ---- stand-ins for identities not defined in this unit ----
 struct FakeShader;
 struct FakeRenderer

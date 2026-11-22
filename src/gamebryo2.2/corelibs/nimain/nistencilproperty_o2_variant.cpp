@@ -70,22 +70,6 @@ struct BSFadeNode
     static void* __cdecl operator new(unsigned int);
 };
 
-// @fnv 0x00a6f410
-void* __cdecl FUN_00a6f410()
-{
-    void* p = BSFadeNode::operator new(0x24);
-    if (p)
-    {
-        ((NiProperty*)p)->NiPropertyCtor();
-        *(unsigned short*)((char*)p + 0x18) = 0x4180;
-        *(void**)p = &DAT_0101e07c;
-        *(int*)((char*)p + 0x1c) = 0;
-        *(int*)((char*)p + 0x20) = 0xffffffff;
-        return p;
-    }
-    return 0;
-}
-
 struct S00a6f4d0
 {
     virtual void f0();

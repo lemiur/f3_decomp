@@ -1,4 +1,4 @@
-// gamebryo2.2/corelibs/nianimation/nisingleinterpcontroller.cpp: NiSingleInterpController, BSMultiTargetTreadTransfControllerStandIn (20 functions)
+// gamebryo2.2/corelibs/nianimation/nisingleinterpcontroller.cpp: NiSingleInterpController, BSMultiTargetTreadTransfControllerStandIn (19 functions)
 #include "f3_common.h"
 #include "nisingleinterpcontroller_decls.h"
 // Calls the base NiTimeController::ProcessClone, then forwards the clone process to the interpolator if one is set.
@@ -47,12 +47,6 @@ struct FUN_00a38e20_shell : public NiSingleInterpController
 };
 
 extern const char* const g_011f36ec_arg1;
-
-// @fnv 0x00a38e20
-void* FUN_00a38e20_shell::FUN_00a38e20()
-{
-    return const_cast<void*>(static_cast<const void*>(&g_011f36ec_arg1));
-}
 
 struct NiBlendInterpolator;
 struct CloningProcess;

@@ -122,19 +122,6 @@ class NiBoolInterpController : public NiSingleInterpController
   public:
     void SetBoolInterpolatorValue(NiInterpolator*, unsigned short);
 };
-// Casts pkInterp to a NiBoolInterpolator, reads the pose value and passes it to the interpolator's setter.
-// @fnv 0x00a577c0
-void NiBoolInterpController::SetBoolInterpolatorValue(NiInterpolator* pkInterp, unsigned short usIndex)
-{
-    bool bPoseValue;
-    NiBoolInterpolator* pkBoolInterp;
-    if (pkInterp == 0)
-        pkBoolInterp = 0;
-    else
-        pkBoolInterp = (NiBoolInterpolator*)pkInterp->DynamicCast((const NiRTTI*)&DAT_011f404c);
-    GetPoseValue(bPoseValue);
-    pkBoolInterp->SetBoolValue(bPoseValue);
-}
 
 class S2
 {

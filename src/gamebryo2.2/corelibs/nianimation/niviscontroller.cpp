@@ -22,12 +22,6 @@ void NiVisController::GetVisibility(bool& abVisible)
 
 extern void* g_011f3f08;
 
-// @fnv 0x00a44eb0
-void* __cdecl FUN_00a44eb0()
-{
-    return &g_011f3f08;
-}
-
 struct BSFadeNode
 {
     static void* __cdecl operator new(unsigned int);
@@ -130,13 +124,6 @@ struct FUN_00a57640_shell : NiTimeController
 {
     FUN_00a57640_shell* __thiscall FUN_00a57640();
 };
-// @fnv 0x00a57640
-FUN_00a57640_shell* __thiscall FUN_00a57640_shell::FUN_00a57640()
-{
-    SetControllerActive();
-    *(void**)(char*)this = &DAT_0109ab44;
-    return this;
-}
 
 extern int DAT_0109ac54;
 
@@ -160,21 +147,6 @@ struct StrArr
 
 void __stdcall FUN_00a57800(StrArr*);
 char* __cdecl _FUN_00a7d330(void*);
-
-// @fnv 0x00a44f40
-void __stdcall FUN_00a44f40(StrArr* pkStrings)
-{
-    FUN_00a57800(pkStrings);
-    char* pcStr = _FUN_00a7d330(g_011f3f08);
-    unsigned int uiElementCount = *(unsigned short*)((char*)pkStrings + 0xa);
-    unsigned int uiSize = *(unsigned short*)((char*)pkStrings + 8);
-    if (uiElementCount >= uiSize)
-    {
-        unsigned int uiGrow = *(unsigned short*)((char*)pkStrings + 0xe);
-        pkStrings->SetSize(uiGrow + uiElementCount);
-    }
-    pkStrings->SetAt(uiElementCount, pcStr);
-}
 
 extern "C" __declspec(dllimport) long __stdcall InterlockedIncrement(long volatile* plValue);
 extern "C" __declspec(dllimport) long __stdcall InterlockedDecrement(long volatile* plValue);

@@ -6,12 +6,6 @@ struct NiRTTI;
 
 extern NiRTTI g_011f5eac;
 
-// @fnv 0x00a93740
-NiRTTI* __cdecl FUN_00a93740()
-{
-    return &g_011f5eac;
-}
-
 struct NiExtraData
 {
     void FUN_00a7b2e0();

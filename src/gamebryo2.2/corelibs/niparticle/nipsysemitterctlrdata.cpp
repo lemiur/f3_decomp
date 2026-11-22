@@ -4,12 +4,6 @@
 
 extern "C" void* g_01202760;
 
-// @fnv 0x00c2baa0
-void* __cdecl FUN_00c2baa0()
-{
-    return &g_01202760;
-}
-
 extern void(__cdecl* DAT_011f38a0[])(void*);
 extern unsigned char DAT_011f3758[];
 struct FUN_00c2bb70_shell

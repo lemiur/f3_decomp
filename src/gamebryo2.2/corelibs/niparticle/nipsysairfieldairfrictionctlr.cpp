@@ -4,12 +4,6 @@
 
 extern int g_012027b8;
 
-// @fnv 0x00c307c0
-int* __cdecl FUN_00c307c0()
-{
-    return &g_012027b8;
-}
-
 struct NiPSysModifierFloatCtlr
 {
     NiPSysModifierFloatCtlr();
@@ -55,20 +49,6 @@ template <class T, class A> struct NiTPrimitiveArray
 };
 void __stdcall FUN_00c32f60(StrArr*);
 char* __cdecl _FUN_00a7d330(int);
-// @fnv 0x00c30880
-void __stdcall FUN_00c30880(StrArr* pkStrings)
-{
-    FUN_00c32f60(pkStrings);
-    char* pcStr = _FUN_00a7d330(g_012027b8);
-    unsigned int uiSize = pkStrings->m_usSize;
-    unsigned int uiAlloc = pkStrings->m_usAlloc;
-    typedef NiTPrimitiveArray<char*, NiTMallocInterface<char*> > Arr;
-    if (uiSize >= uiAlloc)
-    {
-        ((Arr*)pkStrings)->SetSize(uiSize + ((Arr*)pkStrings)->m_usGrow);
-    }
-    ((Arr*)pkStrings)->SetAt(uiSize, pcStr);
-}
 
 struct NiObjectNET;
 struct BaseStandIn
@@ -232,9 +212,3 @@ void __cdecl FUN_00c2b8a0()
 }
 
 bool __cdecl FUN_00c32df0(int, int);
-
-// @fnv 0x00c2a190
-bool __cdecl FUN_00c2a190(int param_1, int param_2)
-{
-    return FUN_00c32df0(param_1, param_2);
-}

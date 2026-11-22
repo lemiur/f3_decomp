@@ -1,4 +1,4 @@
-// gamebryo2.2/corelibs/niparticle/nipsyspositionmodifier.cpp: NiPSysPositionModifier, Helper, NiPSysModifier (9 functions)
+// gamebryo2.2/corelibs/niparticle/nipsyspositionmodifier.cpp: NiPSysPositionModifier, Helper, NiPSysModifier (7 functions)
 #include "f3_common.h"
 #include "nipsyspositionmodifier_decls.h"
 
@@ -12,12 +12,6 @@ NiPSysPositionModifier::NiPSysPositionModifier()
 }
 
 extern "C" void* g_012026b8;
-
-// @fnv 0x00c28b90
-void* __cdecl FUN_00c28b90()
-{
-    return &g_012026b8;
-}
 
 void __cdecl FUN_00c31750(void);
 void __cdecl _delete(void*, unsigned int);
@@ -54,16 +48,6 @@ struct Holder00c28cb0 : Base00c319e0
 {
     void AppendString(StrArr*);
 };
-// @fnv 0x00c28cb0
-void Holder00c28cb0::AppendString(StrArr* pkStrings)
-{
-    FUN_00c319e0(pkStrings);
-    char* pcStr = FUN_00a7d330((const char*)g_012026b8);
-    unsigned int uiIdx = pkStrings->_sa;
-    if (uiIdx >= pkStrings->_s8)
-        pkStrings->SetSize(uiIdx + pkStrings->_se);
-    pkStrings->SetAt(uiIdx, pcStr);
-}
 
 struct FnvV3
 {

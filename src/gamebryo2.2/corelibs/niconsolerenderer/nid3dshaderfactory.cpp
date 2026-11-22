@@ -1,4 +1,4 @@
-// gamebryo2.2/corelibs/niconsolerenderer/nid3dshaderfactory.cpp: NiD3DShaderFactory, ShaderFactoryView, TMapHolder, FakeCls and more (46 functions)
+// gamebryo2.2/corelibs/niconsolerenderer/nid3dshaderfactory.cpp: NiD3DShaderFactory, ShaderFactoryView, TMapHolder, FakeCls and more (38 functions)
 #include "f3_common.h"
 #include "nid3dshaderfactory_decls.h"
 
@@ -10,70 +10,6 @@ void NiD3DShaderFactory::ShutdownPoint3()
     m_ppVirtualMethodTable = 0;
     UpdateShaderMaterialCache(DAT_011f4a64);
     m_shutdown = true;
-}
-
-// Allocates a NiD3DShaderFactory, calls Create to store it in DAT_0126fa0c and DAT_011f6044, and reports failure if the factory is null.
-// @fnv 0x00e92e60
-void NiD3DShaderFactory::InitializePoint3()
-{
-    if (DAT_0126fa0c == 0)
-    {
-        NiD3DShaderFactory* factory = static_cast<NiD3DShaderFactory*>(NiMemObject::operator new(0x100));
-        NiShaderFactory* result;
-        if (factory)
-            result = factory->Create();
-        else
-            result = 0;
-        DAT_0126fa0c = result;
-        DAT_011f6044 = result;
-    }
-    if (DAT_011f6044 == 0)
-        NiD3DDefaultShader::SetShaderName(kFailedShaderFactoryMessage);
-}
-
-// Initializes the shader factory's vtable and state, allocates two string-map storages for shaders and libraries, and returns this.
-// @fnv 0x00e92cf0
-NiShaderFactory* NiD3DShaderFactory::Create()
-{
-    FUN_00aa0390();
-    m_ppVirtualMethodTable = &kVtbl_NiD3DShaderFactory;
-    m_pOwnerShader = 0;
-    DAT_00fdf054(m_kShaderMap);
-
-    NiStringMapStorage* shaderMap;
-    NiStringMapStorage* shaderStorage =
-        static_cast<NiStringMapStorage*>(g_memoryManager.Allocate(sizeof(NiStringMapStorage)));
-    if (shaderStorage)
-    {
-        shaderStorage->m_ppVirtualMethodTable = &DAT_010f0bc0;
-        shaderStorage->m_hashSize = 0x3b;
-        shaderStorage->m_unused = 0;
-        shaderStorage->m_hashTable = NiMalloc(0xec);
-        fnv_zlib_memset(shaderStorage->m_hashTable, 0, shaderStorage->m_hashSize * 4);
-        shaderStorage->m_sState = true;
-        shaderStorage->m_ppVirtualMethodTable = &DAT_010f0c80;
-        shaderMap = shaderStorage;
-    }
-    else
-        shaderMap = 0;
-    m_pShaderMapStorage = shaderMap;
-
-    NiStringMapStorage* libraryStorage =
-        static_cast<NiStringMapStorage*>(g_memoryManager.Allocate(sizeof(NiStringMapStorage)));
-    if (libraryStorage)
-    {
-        libraryStorage->m_ppVirtualMethodTable = &DAT_010f0c20;
-        libraryStorage->m_hashSize = 0x25;
-        libraryStorage->m_unused = 0;
-        libraryStorage->m_hashTable = NiMalloc(0x94);
-        fnv_zlib_memset(libraryStorage->m_hashTable, 0, libraryStorage->m_hashSize * 4);
-        libraryStorage->m_sState = false;
-        libraryStorage->m_ppVirtualMethodTable = &DAT_010f0ca0;
-        m_pShaderLibraryStorage = libraryStorage;
-        return this;
-    }
-    m_pShaderLibraryStorage = 0;
-    return this;
 }
 
 struct FUN_00e91f40_shell : public NiD3DShaderFactory
@@ -156,12 +92,6 @@ unsigned int __stdcall FUN_00e91ef0(unsigned int a, unsigned int b)
     return ((0xFFFFFE00 | a) << 8) | b;
 }
 
-// @fnv 0x00e91f10
-void* __cdecl FUN_00e91f10()
-{
-    return DAT_0126fa0c;
-}
-
 namespace fnv_00e91f20 {
 struct FUN_00e91f20_shell : public NiD3DShaderFactory
 {
@@ -217,12 +147,6 @@ void __stdcall FUN_00e91f80(char* pacDirectory)
         pkFactory->LoadProgramByName(pacDirectory);
 }
 }  // namespace fnv_00e91f80
-
-// @fnv 0x00e91fc0
-const char* __cdecl FUN_00e91fc0()
-{
-    return "DX9";
-}
 
 extern char $SG6379[];
 extern int __cdecl NiSprintf(char*, unsigned int, char const*, ...);
@@ -358,17 +282,6 @@ struct TMapHolder
     void* f8;
     void* DestroyTMapHolder(unsigned int);
 };
-// Resets f0 to DAT_010f0bc0, calls RemoveAll, frees f8, and deallocates this when flags has bit 0 set; returns this.
-// @fnv 0x00e92610
-void* TMapHolder::DestroyTMapHolder(unsigned int flags)
-{
-    f0 = (void*)&DAT_010f0bc0;
-    ((NiTMapBaseStub*)(void*)this)->RemoveAll();
-    _NiFreeAlias(f8);
-    if (flags & 1)
-        g_memoryManager.Deallocate(this);
-    return this;
-}
 }  // namespace fnv_00e92610
 
 namespace fnv_00e92650 {
@@ -385,19 +298,6 @@ struct FUN_00e92650_Holder
     void* unk8;
     void* DestroyHolder(unsigned int);
 };
-// Resets two embedded map bases, frees unk8, and optionally deallocates the object when flags bit 0 is set.
-// @fnv 0x00e92650
-void* FUN_00e92650_Holder::DestroyHolder(unsigned int flags)
-{
-    unk0 = &DAT_010f0be0;
-    ((NiTMapBaseStub*)this)->RemoveAll();
-    unk0 = &DAT_010f0bc0;
-    ((NiTMapBaseStub*)this)->RemoveAll();
-    _NiFreeAlias(unk8);
-    if (flags & 1)
-        g_memoryManager.Deallocate(this);
-    return this;
-}
 }  // namespace fnv_00e92650
 
 namespace fnv_00e926b0 {
@@ -441,19 +341,6 @@ struct FakeCls
     void* f08;
     void* FUN_00e926f0(unsigned int);
 };
-// Resets two map bases via RemoveAll, frees f08, and deallocates this when a1 has bit 0 set, returning this.
-// @fnv 0x00e926f0
-void* FakeCls::FUN_00e926f0(unsigned int auiFlags)
-{
-    vf = (void*)&DAT_010f0c40;
-    ((NiTMapBaseStub*)this)->RemoveAll();
-    vf = (void*)&DAT_010f0c20;
-    ((NiTMapBaseStub*)this)->RemoveAll();
-    _NiFreeAlias(f08);
-    if (auiFlags & 1)
-        g_memoryManager.Deallocate(this);
-    return this;
-}
 }  // namespace fnv_00e926f0
 
 class NiRTTI;
@@ -525,19 +412,6 @@ class NiD3DShaderInterface
     virtual void f56();
     virtual bool IsDefault();
 };
-// Casts pkShader to NiD3DShaderInterface and returns whether it is the default shader, or false if the cast fails.
-// @fnv 0x00e92730
-bool __stdcall IsDefaultShader(class NiShader* pkShader)
-{
-    if (pkShader)
-    {
-        NiD3DShaderInterface* pkShaderIf =
-            (NiD3DShaderInterface*)pkShader->DynamicCast((NiRTTI const*)&g_0126f754_arg1);
-        if (pkShaderIf)
-            return pkShaderIf->IsDefault();
-    }
-    return false;
-}
 
 void __cdecl operator delete(void* p, unsigned int);
 
@@ -1643,9 +1517,6 @@ struct S_00e92be0_Factory
 
     S_00e92be0_Ref* FUN_00e92be0();
 };
-
-void S_00e92be0_Ref::f0()
-{}
 
 void S_00e92be0_Ref::f1()
 {}

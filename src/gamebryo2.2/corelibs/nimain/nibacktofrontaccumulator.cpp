@@ -1,4 +1,4 @@
-// gamebryo2.2/corelibs/nimain/nibacktofrontaccumulator.cpp: NiBackToFrontAccumulator, BackToFront_aa0 (12 functions)
+// gamebryo2.2/corelibs/nimain/nibacktofrontaccumulator.cpp: NiBackToFrontAccumulator, BackToFront_aa0 (10 functions)
 #include "f3_common.h"
 #include "nibacktofrontaccumulator_decls.h"
 
@@ -378,11 +378,6 @@ BackToFront_aa0* BackToFront_aa0::FUN_00aa0f50(CloningProcess& kCloning)
 }
 
 void __cdecl FUN_00a88a40();
-// @fnv 0x00aa0ac0
-void __cdecl FUN_00aa0ac0()
-{
-    FUN_00a88a40();
-}
 
 extern S_00aa0d00_Aux DAT_011c5f80;
 extern S_00aa0d00_Node* DAT_011c5f58;
@@ -613,58 +608,7 @@ typedef PoolAllocatorBase<NiBackToFrontListItem> NiBackToFrontItemPool;
 
 void FUN_0043a080();
 
-static inline NiBackToFrontListItem* NewListItem()
-{
-    NiBackToFrontItemPool::ms_kPoolState.Lock(0);
-    NiBackToFrontItemPool::LinkedListEntry* pkReturn = NiBackToFrontItemPool::ms_pFreeList;
-    if (pkReturn == 0)
-    {
-        FUN_0043a080();
-        pkReturn = NiBackToFrontItemPool::ms_pFreeList;
-    }
-    NiBackToFrontItemPool::ms_pFreeList = NiBackToFrontItemPool::ms_pFreeList->m_pkNext;
-    NiBackToFrontListItem* pkItem = reinterpret_cast<NiBackToFrontListItem*>(pkReturn);
-    pkItem->m_pInventoryEntryData = 0;
-    pkItem->m_pkNext = 0;
-    pkItem->m_pkPrevious = 0;
-    if (--NiBackToFrontItemPool::ms_kPoolState.m_uiCount == 0)
-    {
-        NiBackToFrontItemPool::ms_kPoolState.m_uiLock = 0;
-    }
-    return pkItem;
-}
-
-static inline void AddNodeTail(NiBackToFrontGeometryList& kList, NiBackToFrontListItem* pkNode)
-{
-    pkNode->m_pkNext = 0;
-    pkNode->m_pkPrevious = kList.m_pkTail;
-    if (kList.m_pkTail)
-        kList.m_pkTail->m_pkNext = pkNode;
-    else
-        kList.m_pkHead = pkNode;
-    kList.m_pkTail = pkNode;
-    kList.m_uiCount++;
-}
-
-static inline void AddTail(NiBackToFrontGeometryList& kList, void* element)
-{
-    NiBackToFrontListItem* pkNode = NewListItem();
-    pkNode->m_pInventoryEntryData = element;
-    AddNodeTail(kList, pkNode);
-}
-
 struct FUN_00aa0e60_cls : NiBackToFrontAccumulator
 {
     void AddGeometries(NiBackToFrontItemsArg* pkArg);
 };
-
-// Appends each geometry pointer in pkArg->m_ppGeometries to m_kUnsortedGeometryList via AddTail.
-// @fnv 0x00aa0e60
-void FUN_00aa0e60_cls::AddGeometries(NiBackToFrontItemsArg* pkArg)
-{
-    unsigned int ItemUpdateArray = pkArg->m_iArrayLength;
-    for (unsigned int uiIndex = 0; uiIndex < ItemUpdateArray; uiIndex++)
-    {
-        AddTail(m_kUnsortedGeometryList, pkArg->m_ppGeometries[uiIndex]);
-    }
-}

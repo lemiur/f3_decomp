@@ -6,12 +6,6 @@ typedef void NiRTTI;
 
 extern NiRTTI* g_011f3f80;
 
-// @fnv 0x00a49e00
-NiRTTI* __cdecl FUN_00a49e00()
-{
-    return &g_011f3f80;
-}
-
 struct AnimationKey;
 extern void(__cdecl* DAT_011f3ca8[])(float, AnimationKey const*, AnimationKey const*, void*);
 struct FUN_00a49e10_shell
@@ -80,17 +74,6 @@ struct NiPathController
 {
     void AppendString(StrArr*);
 };
-// Appends a string obtained from g_011f3f80 to pkStrings, growing the array by its capacity step when it is full.
-// @fnv 0x00a4b2e0
-void NiPathController::AppendString(StrArr* pkStrings)
-{
-    FUN_00a6d830(pkStrings);
-    char* pStr = _FUN_00a7d330((const char*)g_011f3f80);
-    unsigned int nSize = *(unsigned short*)((char*)pkStrings + 0xa);
-    if (nSize >= *(unsigned short*)((char*)pkStrings + 8))
-        pkStrings->SetSize(nSize + *(unsigned short*)((char*)pkStrings + 0xe));
-    pkStrings->SetAt(nSize, pStr);
-}
 
 namespace fnv_00a49c80 {
 struct NiMemObject

@@ -86,23 +86,6 @@ struct FUN_00a75e20_shell
 
 extern int DAT_0109fc54;
 
-// Allocates a 0x54-byte BSFadeNode, runs its constructor, zeroes the two ushort fields at offsets 0x50 and 0x52, sets the vtable, and returns the object or null.
-// @fnv 0x00a923f0
-void* __cdecl FUN_00a923f0()
-{
-    void* pNode = BSFadeNode::operator new(0x54);
-    if (pNode)
-    {
-        char* pBytes = (char*)pNode;
-        ((FUN_00a75e20_shell*)pBytes)->FUN_00a75e20();
-        *(unsigned short*)(pBytes + 0x50) = 0;
-        *(int*)pBytes = (int)&DAT_0109fc54;
-        *(unsigned short*)(pBytes + 0x52) = 0;
-        return pNode;
-    }
-    return 0;
-}
-
 struct FUN_00a92490_shell
 {
     unsigned char unk00[0x44];

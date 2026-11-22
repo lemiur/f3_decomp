@@ -1,4 +1,4 @@
-// gamebryo2.2/corelibs/nianimation/nibsplinecomppoint3interpolator.cpp: NiBSplineCompPoint3Interpolator, SplineEvaluationState (8 functions)
+// gamebryo2.2/corelibs/nianimation/nibsplinecomppoint3interpolator.cpp: NiBSplineCompPoint3Interpolator, SplineEvaluationState (6 functions)
 #include "f3_common.h"
 #include "nibsplinecomppoint3interpolator_decls.h"
 // Calls the base LoadBinary, then reads 8 bytes from the stream's input into the interpolator's data.
@@ -11,12 +11,6 @@ void NiBSplineCompPoint3Interpolator::LoadBinary(NiStream& stream)
 }
 
 extern "C" void* g_011f4014;
-
-// @fnv 0x00a51270
-void* __cdecl FUN_00a51270()
-{
-    return &g_011f4014;
-}
 
 struct NiObject
 {
@@ -60,18 +54,6 @@ struct StrArr
 };
 void __stdcall FUN_00a50960(StrArr*);
 char* __cdecl _FUN_00a7d330(const char*);
-// Grows the string array if it is full, then appends the string returned by _FUN_00a7d330(g_011f4014) at the current size index.
-// @fnv 0x00a51480
-void __stdcall FUN_00a51480(StrArr* pkStrings)
-{
-    FUN_00a50960(pkStrings);
-    char* pszStr = _FUN_00a7d330((const char*)g_011f4014);
-    unsigned int uiSize = pkStrings->m_usSize;
-    unsigned int uiMax = pkStrings->m_usMax;
-    if (uiSize >= uiMax)
-        pkStrings->SetSize(uiSize + pkStrings->m_usGrow);
-    pkStrings->SetAt(uiSize, pszStr);
-}
 
 struct Vec3
 {

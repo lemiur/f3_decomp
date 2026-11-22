@@ -1,4 +1,4 @@
-// gamebryo2.2/corelibs/niparticle/nipsyssphereemitter.cpp: NiPSysSphereEmitter, PSysSphereEmitter (10 functions)
+// gamebryo2.2/corelibs/niparticle/nipsyssphereemitter.cpp: NiPSysSphereEmitter, PSysSphereEmitter (9 functions)
 #include "f3_common.h"
 #include "nipsyssphereemitter_decls.h"
 // Calls the base LoadBinary, then reads a 4-byte value from the stream into a member and advances the stream position.
@@ -72,16 +72,6 @@ struct Holder00c1fde0 : Base00c1fde0
     float m_fCylinderRadius;
     bool __thiscall FUN_00c1fde0(void* pkObject);
 };
-// @fnv 0x00c1fde0
-bool __thiscall Holder00c1fde0::FUN_00c1fde0(void* pkObject)
-{
-    Holder00c1fde0* pkDest = (Holder00c1fde0*)pkObject;
-    if (!FUN_00c31b80(pkObject))
-        return false;
-    if (m_fCylinderRadius != pkDest->m_fCylinderRadius)
-        return false;
-    return true;
-}
 
 struct FUN_00c1ffa0_s
 {

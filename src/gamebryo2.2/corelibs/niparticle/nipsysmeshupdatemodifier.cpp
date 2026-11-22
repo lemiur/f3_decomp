@@ -4,12 +4,6 @@
 
 extern "C" void* g_01202530;
 
-// @fnv 0x00c21720
-void* __cdecl FUN_00c21720()
-{
-    return &g_01202530;
-}
-
 class CloningProcess;
 class NiPSysModifier
 {
@@ -177,17 +171,6 @@ struct NiPSysMeshUpdateModifier : BaseMod
 {
     void AppendString(StrArr*);
 };
-// Calls the base handler, then appends the string returned by _FUN_00a7d330(g_01202530) to pkStrings, growing it if full.
-// @fnv 0x00c21840
-void NiPSysMeshUpdateModifier::AppendString(StrArr* pkStrings)
-{
-    FUN_00c319e0(pkStrings);
-    char* pcStr = _FUN_00a7d330(g_01202530);
-    unsigned int uiSize = pkStrings->m_usSize;
-    if (uiSize >= pkStrings->m_usMax)
-        pkStrings->SetSize(uiSize + pkStrings->m_usGrow);
-    pkStrings->SetAt(uiSize, pcStr);
-}
 }  // namespace fnv_00c21840
 
 extern "C" __declspec(dllimport) long __stdcall InterlockedIncrement(volatile long*);

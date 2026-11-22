@@ -100,23 +100,6 @@ struct Holder00 {
 struct FUN_00a4ed50_shell : NiFloatsExtraDataPoint3Controller {
     void SetInterpolatorPoint3(NiObject* pkInterp, unsigned short usIndex);
 };
-// @fnv 0x00a4ed50
-void FUN_00a4ed50_shell::SetInterpolatorPoint3(NiObject* pkInterp, unsigned short usIndex)
-{
-    NiObject* pkFloatInterp;
-    ExtraStub* pkFloatsED;
-    Vec12 kPt;
-    if (!pkInterp) {
-        pkFloatInterp = 0;
-    } else {
-        pkFloatInterp = pkInterp->DynamicCast((const NiRTTI*)&g_011f3f70);
-    }
-    pkFloatsED = (ExtraStub*)*(int*)((char*)this + 0x3c);
-    kPt.x = pkFloatsED->GetValueAt(m_iFloatsExtraDataIndex);
-    kPt.y = pkFloatsED->GetValueAt(m_iFloatsExtraDataIndex + 1);
-    kPt.z = pkFloatsED->GetValueAt(m_iFloatsExtraDataIndex + 2);
-    ((Holder00*)pkFloatInterp)->FUN_00a494b0(kPt);
-}
 
 struct StrArr {
     void* m_data;
@@ -144,31 +127,6 @@ struct FUN_00a4eed0_shell : Base57420 {
 
     void FUN_00a4eed0(StrArr* strings);
 };
-
-// @fnv 0x00a4eed0
-void FUN_00a4eed0_shell::FUN_00a4eed0(StrArr* strings)
-{
-    Base57420::FUN_00a57420(strings);
-
-    {
-        char* value = _FUN_00a7d330(g_011f3fc4);
-        unsigned int index = strings->m_iElementCount;
-        unsigned int capacity = strings->m_pRayCursor;
-        if (index >= capacity)
-            strings->SetSize(index + strings->m_growth);
-        strings->SetAt(index, value);
-    }
-
-    {
-        char* value = FUN_00a7d4d0("m_iFloatsExtraDataIndex",
-                                    m_iFloatsExtraDataIndex);
-        unsigned int index = strings->m_iElementCount;
-        unsigned int capacity = strings->m_pRayCursor;
-        if (index >= capacity)
-            strings->SetSize(index + strings->m_growth);
-        strings->SetAt(index, value);
-    }
-}
 
 int* __fastcall InitTimeController(int*);
 extern int DAT_0109917c;

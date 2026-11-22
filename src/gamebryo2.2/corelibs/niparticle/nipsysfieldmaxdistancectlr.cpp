@@ -3,12 +3,6 @@
 
 extern const void* g_01202710;
 
-// @fnv 0x00c2b040
-const void* __cdecl FUN_00c2b040()
-{
-    return &g_01202710;
-}
-
 struct NiPSysModifierFloatCtlr
 {
 };
@@ -38,16 +32,6 @@ struct StrArr
 };
 void __stdcall FUN_00c32f60(StrArr*);
 char* __cdecl _FUN_00a7d330(const char*);
-// @fnv 0x00c2b0c0
-void __stdcall FUN_00c2b0c0(StrArr* pkStrings)
-{
-    FUN_00c32f60(pkStrings);
-    char* psz = _FUN_00a7d330((const char*)g_01202710);
-    unsigned int uSize = pkStrings->m_usSize;
-    if (uSize >= pkStrings->m_usMaxSize)
-        pkStrings->SetSize(uSize + pkStrings->m_usGrowBy);
-    pkStrings->SetAt(uSize, psz);
-}
 
 extern "C" void* __cdecl FUN_00aa13e0(unsigned int);
 extern char DAT_010bf354[];

@@ -15,12 +15,6 @@ void __cdecl FUN_00a62ae0()
 
 extern char const* const g_0126f0f0_arg1;
 
-// @fnv 0x00a62b50
-char const* const* __cdecl FUN_00a62b50()
-{
-    return &g_0126f0f0_arg1;
-}
-
 void __cdecl FUN_00a62b60();
 void __cdecl _delete(void* p, unsigned int flags);
 struct FUN_00a63230_shell
@@ -44,18 +38,6 @@ struct StrArr
 };
 void __stdcall AppendCameraPathEntries(StrArr*);
 char* __cdecl _FUN_00a7d330(const char*);
-// Appends the string returned by _FUN_00a7d330 to the StrArr, growing its size when it is full.
-// @fnv 0x00a63260
-void __stdcall FUN_00a63260(StrArr* pkStrings)
-{
-    AppendCameraPathEntries(pkStrings);
-    char* psz = _FUN_00a7d330(g_0126f0f0_arg1);
-    unsigned int uSize = *(unsigned short*)((char*)pkStrings + 0xA);
-    unsigned int uMax = *(unsigned short*)((char*)pkStrings + 8);
-    if (uSize >= uMax)
-        pkStrings->SetSize(uSize + *(unsigned short*)((char*)pkStrings + 0xE));
-    pkStrings->SetAt(uSize, psz);
-}
 
 struct CriticalSectionA62
 {

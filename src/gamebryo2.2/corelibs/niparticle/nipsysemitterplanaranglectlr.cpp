@@ -4,12 +4,6 @@
 
 extern void* g_01202738;
 
-// @fnv 0x00c2b550
-void* __cdecl FUN_00c2b550()
-{
-    return &g_01202738;
-}
-
 struct NiPSysModifierFloatCtlr
 {
 };
@@ -37,17 +31,6 @@ struct StrArr
 };
 void __stdcall FUN_00c32f60(StrArr*);
 char* __cdecl _FUN_00a7d330(const char*);
-// Grows pkStrings if full, then appends the string returned by _FUN_00a7d330(g_01202738) at index m_usSize.
-// @fnv 0x00c2b5d0
-void __stdcall FUN_00c2b5d0(StrArr* pkStrings)
-{
-    FUN_00c32f60(pkStrings);
-    char* pcString = _FUN_00a7d330((const char*)g_01202738);
-    unsigned int uiSize = pkStrings->m_usSize;
-    if (uiSize >= pkStrings->m_usAlloc)
-        pkStrings->SetSize(uiSize + pkStrings->m_usGrowBy);
-    pkStrings->SetAt(uiSize, pcString);
-}
 
 struct PlanarAngleControllerData
 {

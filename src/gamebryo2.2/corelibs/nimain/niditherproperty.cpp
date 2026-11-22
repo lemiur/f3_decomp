@@ -4,12 +4,6 @@
 
 extern void* g_011f5f48;
 
-// @fnv 0x00a9a5e0
-void* __cdecl FUN_00a9a5e0()
-{
-    return &g_011f5f48;
-}
-
 // @fnv 0x00dc9bc0
 int __cdecl FUN_00dc9bc0()
 {
@@ -27,21 +21,6 @@ struct BSFadeNode
 };
 
 extern void* DAT_010a0f6c;
-
-// @fnv 0x00a9a640
-void* __cdecl FUN_00a9a640()
-{
-    void* p = BSFadeNode::operator new(0x1c);
-    if (p)
-    {
-        NiProperty* property = static_cast<NiProperty*>(p);
-        property->FUN_00a9a640_ctor();
-        *(short*)((char*)p + 0x18) = 0;
-        *(void**)((char*)p + 0) = &DAT_010a0f6c;
-        return p;
-    }
-    return 0;
-}
 
 struct CloningProcess;
 struct NiCullingProperty : NiProperty
@@ -115,21 +94,3 @@ union Temporary
     char* text;
     bool flag;
 };
-// Appends the g_011f5f48 string and a formatted "m_bDither" flag value to the array, growing it as needed.
-// @fnv 0x00a9a670
-void Owner::AppendDitherSettings(StrArr* array)
-{
-    AppendString(array);
-    Temporary value;
-    value.text = FUN_00a7d330((char const*)g_011f5f48);
-    unsigned int index = array->size;
-    if (index >= array->capacity)
-        array->SetSize(index + array->growth);
-    array->SetAt(index, value.text);
-    value.flag = (m_bDither & 1) != 0;
-    value.text = FUN_00a7d370("m_bDither", value.flag);
-    index = array->size;
-    if (index >= array->capacity)
-        array->SetSize(index + array->growth);
-    array->SetAt(index, value.text);
-}

@@ -4,12 +4,6 @@
 
 extern "C" void* g_011f5b60;
 
-// @fnv 0x00a89120
-void* __cdecl FUN_00a89120()
-{
-    return &g_011f5b60;
-}
-
 struct NiExtraData
 {
     void FUN_00a7b2e0();
@@ -19,22 +13,6 @@ struct BSFadeNode
 {
     static void* __cdecl operator new(unsigned int);
 };
-
-// @fnv 0x00a89190
-void* __cdecl FUN_00a89190()
-{
-    void* p = BSFadeNode::operator new(0x14);
-    if (p != 0)
-    {
-        NiExtraData* pExtraData = static_cast<NiExtraData*>(p);
-        pExtraData->FUN_00a7b2e0();
-        *static_cast<void**>(p) = (void*)0x0109ec0c;
-        *(int*)(static_cast<char*>(p) + 0x10) = 0;
-        *(int*)(static_cast<char*>(p) + 0x0c) = 0;
-        return p;
-    }
-    return 0;
-}
 
 struct NiFloatsExtraData
 {
@@ -695,15 +673,3 @@ struct A89130Owner : NiFloatsExtraData_shell
 {
     NiFloatsExtraData* CreateNiFloatsExtraData(CloningProcess* pCloning);
 };
-// @fnv 0x00a89130
-NiFloatsExtraData* A89130Owner::CreateNiFloatsExtraData(CloningProcess* pCloning)
-{
-    NiFloatsExtraData* pExtraData = (NiFloatsExtraData*)FUN_00aa13e0(0x14);
-    NiFloatsExtraData* ret =
-        pExtraData
-            ? (((NiExtraData*)pExtraData)->FUN_00a7b2e0(), ((A89130Layout*)pExtraData)->m_ppVirtualMethodTable = (void*)&DAT_0109ec0c,
-               ((A89130Layout*)pExtraData)->m_pfValue = 0, ((A89130Layout*)pExtraData)->m_uiSize = 0, pExtraData)
-            : 0;
-    CopyFloatsExtraData(ret, pCloning);
-    return ret;
-}

@@ -12,12 +12,6 @@ const char* const* __cdecl FUN_00a485a0()
 
 extern void* g_011f3f58;
 
-// @fnv 0x00a485b0
-void* __cdecl FUN_00a485b0()
-{
-    return &g_011f3f58;
-}
-
 struct BSFadeNode {
     static void* __cdecl operator new(unsigned int);
 };
@@ -69,18 +63,6 @@ char* __cdecl _FUN_00a7d330(const char*);
 struct NiRollController {
     void FUN_00a48790(StrArr*);
 };
-// Appends the string returned by _FUN_00a7d330(g_011f3f58) to the StrArr, growing it via SetSize when full, then stores it with SetAt.
-// @fnv 0x00a48790
-void NiRollController::FUN_00a48790(StrArr* pStrArr)
-{
-    FUN_00a6d830(pStrArr);
-    char* pkString = _FUN_00a7d330((const char*)g_011f3f58);
-    unsigned int uiSize = pStrArr->m_usSize;
-    unsigned int uiMaxSize = pStrArr->m_usMaxSize;
-    if (uiSize >= uiMaxSize)
-        pStrArr->SetSize(uiSize + pStrArr->m_usGrowBy);
-    pStrArr->SetAt(uiSize, pkString);
-}
 
 typedef unsigned int A486F0size_t;
 

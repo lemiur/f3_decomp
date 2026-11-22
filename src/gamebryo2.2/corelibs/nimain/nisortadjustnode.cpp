@@ -20,16 +20,6 @@ struct NiSortAdjustNode
     void* __thiscall Destructor(unsigned int flags);
 };
 
-// @fnv 0x00a95320
-void* __thiscall NiSortAdjustNode::Destructor(unsigned int flags)
-{
-    m_vftable = &DAT_010a0384;
-    FUN_00a5e930(this);
-    if (flags & 1)
-        __Dummy_00b6fef0(this, 0xb0);
-    return this;
-}
-
 struct NiNode
 {
     NiNode(unsigned short) throw();
@@ -44,19 +34,6 @@ inline void* __cdecl operator new(unsigned int, void* p) throw()
 }
 inline void __cdecl operator delete(void*, void*) throw()
 {}
-// @fnv 0x00a952a0
-void* __cdecl FUN_00a952a0()
-{
-    void* p = BSFadeNode::operator new(0xB0);
-    if (p)
-    {
-        new (p) NiNode(0);
-        *(void**)p = (void*)&DAT_010a0384;
-        *(int*)((char*)p + 0xAC) = 0;
-        return p;
-    }
-    return 0;
-}
 
 namespace fnv_00a95410 {
 class NiObject;

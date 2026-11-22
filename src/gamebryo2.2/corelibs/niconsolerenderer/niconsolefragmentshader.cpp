@@ -70,12 +70,6 @@ char FUN_00e8d230_shell::EnsureInitialized(int arg)
 
 extern char const* const g_01270918_arg1;
 
-// @fnv 0x00e8d360
-char const* const* __cdecl FUN_00e8d360()
-{
-    return &g_01270918_arg1;
-}
-
 extern int DAT_010efeb4;
 
 struct MemoryManager
@@ -90,34 +84,12 @@ struct NiShaderInstanceDescriptor
     void* __thiscall FUN_00e8d370(unsigned int mode);
 };
 
-// Sets m_p to the address of DAT_010efeb4 and, when mode has bit 0 set, deallocates this via g_memoryManager, then returns this.
-// @fnv 0x00e8d370
-void* __thiscall NiShaderInstanceDescriptor::FUN_00e8d370(unsigned int mode)
-{
-    m_p = &DAT_010efeb4;
-    if (mode & 1)
-        g_memoryManager._DeallocateAlias(this);
-    return this;
-}
-
 extern "C" void* g_01270918;
-
-// @fnv 0x00e8d530
-void* __cdecl FUN_00e8d530()
-{
-    return &g_01270918;
-}
 
 struct GlobalObjectO2_00a7b610
 {
 };
 extern GlobalObjectO2_00a7b610 g_0126f9d8;
-
-// @fnv 0x00e8d580
-GlobalObjectO2_00a7b610* __cdecl FUN_00e8d580()
-{
-    return &g_0126f9d8;
-}
 
 struct NodePoolView
 {
@@ -204,16 +176,6 @@ struct NiFragmentShaderInstanceDescriptor
     void* m_pDescriptorData;
     void* __thiscall FUN_00e8d540(unsigned int);
 };
-// @fnv 0x00e8d540
-void* __thiscall NiFragmentShaderInstanceDescriptor::FUN_00e8d540(unsigned int flags)
-{
-    if ((int)m_pDescriptorData != EmptyFS)
-        InterlockedDecrement((long volatile*)((int)m_pDescriptorData - 8));
-    *(int*)this = (int)&DAT_010efeb4;
-    if (flags & 1)
-        g_memoryManager._DeallocateAlias(this);
-    return this;
-}
 
 struct NiRefObject;
 struct BSShaderBloodSplatter
@@ -289,23 +251,6 @@ struct FragHost
     int FUN_00e8d260(unsigned int p1, unsigned int p2, Rec24* p3, unsigned int p4, unsigned int p5, unsigned int p6,
                      unsigned int p7, unsigned int p8);
 };
-
-// @fnv 0x00e8d260
-int FragHost::FUN_00e8d260(unsigned int p1, unsigned int p2, Rec24* pRec, unsigned int p4, unsigned int p5,
-                           unsigned int p6, unsigned int p7, unsigned int p8)
-{
-    if (pRec != 0)
-    {
-        if (m38 == 0)
-        {
-            m18->FUN_00e6fe30(p2, p7, 1, 3, 1);
-        }
-        m1c->v11(pRec->m24);
-        m18->FUN_00e6fbb0(p7, 0);
-        return 0;
-    }
-    return FUN_00e807d0(p1, p2, 0, p4, p5, p6, p7, p8);
-}
 
 struct FUN_00e8d3a0_sub
 {
@@ -446,19 +391,7 @@ struct FUN_00e8db90 : BaseObj_e8db90, FieldsMid_e8db90
     FUN_00e8db90(unsigned int a);
 };
 
-// @fnv 0x00e8db90
-FUN_00e8db90::FUN_00e8db90(unsigned int a)
-{
-    m_3c.m_inner.FUN_00ee8a10(a);
-}
-
 unsigned int __stdcall FUN_00e805b0(void* a, void* b, void* c, void* d, void* e, void* f, void* g);
-
-// @fnv 0x00e8d250
-unsigned int __stdcall FUN_00e8d250(void* a, void* b, void* c, void* d, void* e, void* f, void* g)
-{
-    return FUN_00e805b0(a, b, c, d, e, f, g);
-}
 
 void __cdecl FUN_00e811d0();
 // @fnv 0x00e8d2e0
@@ -595,11 +528,6 @@ struct FUN_00bd16e0_shell : ShaderStandIn
 {
     unsigned int __thiscall FUN_00bd16e0(void* a, void* b, void* c, void* d, void* e, void* f, void* g);
 };
-// @fnv 0x00bd16e0
-unsigned int __thiscall FUN_00bd16e0_shell::FUN_00bd16e0(void* a, void* b, void* c, void* d, void* e, void* f, void* g)
-{
-    return FUN_00e81170(a, b, c, d, e, f, g);
-}
 
 // Object cached in BSShaderBloodSplatter+0x30; receives SetNodeValue / RemoveNodeByKey as this.
 struct BloodMap
@@ -727,21 +655,6 @@ struct ShaderObj
     void FUN_00e806c0();
     ShaderObj* Release(unsigned int uiFlags);
 };
-
-// Releases the device reference, calls FUN_00e806c0, and optionally deletes this when uiFlags has bit 0 set.
-// @fnv 0x00e8dbe0
-ShaderObj* ShaderObj::Release(unsigned int uiFlags)
-{
-    m_vft0 = (unsigned int)&DAT_010eff44;
-    void* pvDevice = m_40;
-    if (pvDevice != DAT_0109b220)
-        InterlockedDecrement((volatile long*)pvDevice - 2);
-    m_vft3c = (unsigned int)&DAT_010efeb4;
-    FUN_00e806c0();
-    if (uiFlags & 1)
-        operator delete(this, sizeof(ShaderObj));
-    return this;
-}
 
 class ShaderConstantEntryE8D
 {

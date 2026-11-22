@@ -7,12 +7,6 @@ extern "C"
     extern void* g_011f3fdc;
 }
 
-// @fnv 0x00a4fb00
-void* __cdecl FUN_00a4fb00()
-{
-    return &g_011f3fdc;
-}
-
 extern "C" void __cdecl FUN_00a572d0(void);
 extern "C" void __cdecl __Dummy_00b6fef0(void* p, int size);
 
@@ -131,16 +125,6 @@ struct NiColorExtraDataController
     NiColorExtraData* m_pkExtra;
     void FUN_00a4fc90(NiInterpolator* pkInterp, unsigned short usIndex);
 };
-// @fnv 0x00a4fc90
-void NiColorExtraDataController::FUN_00a4fc90(NiInterpolator* pkInterp, unsigned short usIndex)
-{
-    NiColorInterpolator* pkColorInterp;
-    if (!pkInterp)
-        pkColorInterp = 0;
-    else
-        pkColorInterp = (NiColorInterpolator*)pkInterp->DynamicCast(&_g_011f3730);
-    pkColorInterp->SetColorValue(m_pkExtra->m_kFogTint);
-}
 
 struct StrArr
 {
@@ -161,17 +145,6 @@ struct FUN_00a4fd90_shell : Base57420
 {
     void __thiscall AppendString(StrArr*);
 };
-// Appends the string returned by _FUN_00a7d330(g_011f3fdc) to pkStrings, growing the array if its size has reached its allocation.
-// @fnv 0x00a4fd90
-void __thiscall FUN_00a4fd90_shell::AppendString(StrArr* pkStrings)
-{
-    FUN_00a57420(pkStrings);
-    char* pcString = _FUN_00a7d330((const char*)g_011f3fdc);
-    unsigned int uiIndex = pkStrings->m_usSize;
-    if (uiIndex >= pkStrings->m_usAlloc)
-        pkStrings->SetSize(uiIndex + pkStrings->m_usGrow);
-    pkStrings->SetAt(uiIndex, pcString);
-}
 
 // Stand-in with the target virtual at vtable slot 0xB4/4 = 45
 struct InterpVT_00a4faa0

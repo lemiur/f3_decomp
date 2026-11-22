@@ -717,21 +717,6 @@ struct BSFadeNode
 
 extern int DAT_0109e274;
 
-// @fnv 0x00a814e0
-BSFadeNode* FUN_00a814e0()
-{
-    BSFadeNode* node = static_cast<BSFadeNode*>(BSFadeNode::operator new(0x20));
-    if (node)
-    {
-        ((NiProperty*)node)->NiProperty::NiProperty();
-        *(unsigned short*)((char*)node + 0x18) = 1;
-        node->pProperty = (NiProperty*)&DAT_0109e274;
-        *(int*)((char*)node + 0x1c) = -1;
-        return node;
-    }
-    return 0;
-}
-
 struct NiObject
 {
 };

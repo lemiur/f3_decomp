@@ -4,12 +4,6 @@
 
 extern "C" void* g_011f5ebc;
 
-// @fnv 0x00a94820
-void* __cdecl FUN_00a94820()
-{
-    return &g_011f5ebc;
-}
-
 struct NiExtraData
 {
     void __thiscall FUN_00a7b2e0(void);

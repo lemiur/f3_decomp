@@ -1,12 +1,6 @@
-// gamebryo2.2/corelibs/nisystem/nimemobject.cpp: NiPoint2 (3 functions)
+// gamebryo2.2/corelibs/nisystem/nimemobject.cpp: NiPoint2 (2 functions)
 #include "f3_common.h"
 #include "nimemobject_decls.h"
-
-// @fnv 0x004393c0
-void Flag512Receiver::SetFlag512(bool enabled)
-{
-    FUN_00633ba0(enabled, 0x200);
-}
 
 // Initializes the point's x and y components from the two float arguments.
 // @fnv 0x00452dc0

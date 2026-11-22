@@ -12,14 +12,6 @@ struct FUN_00a543f0_shell
     void FUN_00a543f0();
 };
 
-// @fnv 0x00a543f0
-void FUN_00a543f0_shell::FUN_00a543f0()
-{
-    void* p = m_ptr;
-    m_kPointA = &DAT_0109a2a4;
-    _NiFreeAlias(p);
-}
-
 struct GlobalObjectO2_00a7b610
 {
 };
@@ -76,25 +68,6 @@ struct NiStreamLinkIDSetShell
 {
     void AppendLinkID(unsigned int* value);
 };
-
-// Grows the set's storage when full, then stores the given value at the end and increments the count.
-// @fnv 0x00a543b0
-void NiStreamLinkIDSetShell::AppendLinkID(unsigned int* value)
-{
-    NiStreamLinkIDSet* set = reinterpret_cast<NiStreamLinkIDSet*>(this);
-    if (set->m_pRayCursor == set->m_uiItemCount)
-    {
-        unsigned int size = set->m_uiItemCount;
-        if (size > 0)
-            size *= 2;
-        else
-            size = 1;
-        set->Realloc(size);
-    }
-    unsigned int* puiData = reinterpret_cast<unsigned int*>(set->m_kPointA);
-    puiData[set->m_pRayCursor] = *value;
-    set->m_pRayCursor++;
-}
 
 namespace fnv_00a54410 {
 extern int DAT_0109a2ac;
@@ -168,23 +141,6 @@ struct NiBoneLODController
 {
     void* FUN_00a553f0(unsigned int);
 };
-// @fnv 0x00a553f0
-void* NiBoneLODController::FUN_00a553f0(unsigned int flags)
-{
-    *(void**)this = (void*)&DAT_0109a2d4;
-    ((S55190*)this)->ClearEntries();
-    _NiFreeAlias(*(void**)((char*)this + 0x5c));
-    void* p1 = *(void**)((char*)this + 0x50);
-    *(void**)((char*)this + 0x4c) = (void*)&DAT_0109a2ac;
-    _NiFreeAlias(p1);
-    void* p2 = *(void**)((char*)this + 0x40);
-    *(void**)((char*)this + 0x3c) = (void*)&DAT_0109a2a4;
-    _NiFreeAlias(p2);
-    ((S6D290*)this)->FUN_00a6d290();
-    if (flags & 1)
-        _delete(this, 0x68);
-    return this;
-}
 }  // namespace fnv_00a553f0
 
 namespace fnv_00a54340 {

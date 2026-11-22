@@ -55,19 +55,6 @@ struct S
     void __thiscall CreateScreenTextureBufferData(NiScreenTexture* pkScreenTexture);
     void __thiscall FUN_00e98730(NiGeometryBufferData* pkBuffData);
 };
-// @fnv 0x00e94de0
-void __thiscall S::CreateScreenTextureBufferData(NiScreenTexture* pkScreenTexture)
-{
-    if (*(int*)((char*)pkScreenTexture + 0x1c) == 0)
-    {
-        void* pMemory = g_memoryManager.Allocate(0x54);
-        NiGeometryBufferData* pkBuffData = pMemory ? new (pMemory) NiGeometryBufferData() : 0;
-        *(int*)((char*)pkBuffData + 0x3c) = 4;
-        *(NiGeometryBufferData**)((char*)pkScreenTexture + 0x1c) = pkBuffData;
-        *(int*)((char*)pkBuffData + 4) = (int)&DAT_01400000;
-        FUN_00e98730(pkBuffData);
-    }
-}
 
 struct FakeVB
 {

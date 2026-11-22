@@ -1,4 +1,4 @@
-// gamebryo2.2/corelibs/niconsolerenderer/nigeometrybufferdata.cpp: NiGeometryBufferData, RendererData, NiSlotSetE8E (8 functions)
+// gamebryo2.2/corelibs/niconsolerenderer/nigeometrybufferdata.cpp: NiGeometryBufferData, RendererData, NiSlotSetE8E (7 functions)
 #include "f3_common.h"
 #include <cstddef>
 #include "nigeometrybufferdata.h"
@@ -114,15 +114,6 @@ struct RendererData
 {
     void* FUN_00e8ee80(unsigned int);
 };
-// Sets the object's vtable pointer to DAT_010f0170 and, if bit 0 of a1 is set, deallocates the object via g_memoryManager, then returns this.
-// @fnv 0x00e8ee80
-void* RendererData::FUN_00e8ee80(unsigned int auiFlags)
-{
-    *(void**)this = (void*)&DAT_010f0170;
-    if (auiFlags & 1)
-        g_memoryManager._DeallocateAlias(this);
-    return this;
-}
 
 struct IUnk_00e8f010
 {

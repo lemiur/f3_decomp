@@ -1,4 +1,4 @@
-// gamebryo2.2/corelibs/nicollision/nipick.cpp: Results, NiPick (10 functions)
+// gamebryo2.2/corelibs/nicollision/nipick.cpp: Results, NiPick (8 functions)
 #include "f3_common.h"
 #include "nipick_decls.h"
 
@@ -71,16 +71,6 @@ struct FUN_00e98fd0_shell : NiPick::Results
     void* DestroyResults(bool free);
 };
 
-// Calls Clear, then frees this object through g_memoryManager when free is set, and returns this.
-// @fnv 0x00e98fd0
-void* FUN_00e98fd0_shell::DestroyResults(bool free)
-{
-    Clear();
-    if (free & 1)
-        g_memoryManager.Deallocate(this);
-    return this;
-}
-
 extern int DAT_0126fa60;
 void __cdecl InitNiStreamCallbacks();
 void __cdecl FUN_00e99260();
@@ -90,18 +80,6 @@ struct FUN_00e99300_shell
 {
     void* __thiscall FUN_00e99300();
 };
-
-// Increments DAT_0126fa60 and, when the previous value was zero, registers InitNiStreamCallbacks and FUN_00e99260 via FUN_00aa2080; returns this.
-// @fnv 0x00e99300
-void* __thiscall FUN_00e99300_shell::FUN_00e99300()
-{
-    void* result = this;
-    int iPreviousCount = DAT_0126fa60;
-    DAT_0126fa60 = DAT_0126fa60 + 1;
-    if (iPreviousCount == 0)
-        FUN_00aa2080((void*)InitNiStreamCallbacks, (void*)FUN_00e99260);
-    return result;
-}
 
 struct NiObject;
 struct NiStream

@@ -18,12 +18,6 @@ unsigned int NiBSplineColorInterpolator::FUN_00a51a20(unsigned short usChannel)
 
 extern char const* const g_011f4024_arg1;
 
-// @fnv 0x00a51aa0
-char const* const* __cdecl FUN_00a51aa0()
-{
-    return &g_011f4024_arg1;
-}
-
 struct BSFadeNode
 {
     static void* __cdecl operator new(unsigned int);
@@ -348,21 +342,6 @@ struct Owner : Base
     unsigned int value2c;
     void AppendColorACPHandleStrings(StringArray*);
 };
-// @fnv 0x00a51d80
-void Owner::AppendColorACPHandleStrings(StringArray* array)
-{
-    FUN_00a58200(array);
-    char* value = FUN_00a7d330(g_011f4024_arg1);
-    unsigned int index = array->size;
-    if (index >= array->capacity)
-        array->SetSize(index + array->growth);
-    array->SetAt(index, value);
-    value = FUN_00a7d510("m_kColorACPHandle", value2c);
-    index = array->size;
-    if (index >= array->capacity)
-        array->SetSize(index + array->growth);
-    array->SetAt(index, value);
-}
 
 struct S_00a50610_Obj
 {

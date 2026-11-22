@@ -28,12 +28,6 @@ int __thiscall FUN_00ee8230_shell::FUN_00ee8230()
 
 extern "C" void* DAT_012708e4;
 
-// @fnv 0x00ee82a0
-void* __cdecl FUN_00ee82a0()
-{
-    return &DAT_012708e4;
-}
-
 void __cdecl operator delete(void* p, size_t size);
 void* __cdecl operator new(size_t);
 struct NiRenderedCubeMap

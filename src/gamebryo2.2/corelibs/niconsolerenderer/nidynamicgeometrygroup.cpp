@@ -1,4 +1,4 @@
-// gamebryo2.2/corelibs/niconsolerenderer/nidynamicgeometrygroup.cpp: NiDynamicGeometryGroup, SomeClass, UnsharedGroupStub, Group and more (17 functions)
+// gamebryo2.2/corelibs/niconsolerenderer/nidynamicgeometrygroup.cpp: NiDynamicGeometryGroup, SomeClass, UnsharedGroupStub, Group and more (16 functions)
 #include "f3_common.h"
 #include "nidynamicgeometrygroup_decls.h"
 // Constructs a NiDynamicGeometryGroup and initializes nextIndex to 0.
@@ -250,21 +250,6 @@ struct FUN_00e95500_Class
     void __thiscall FUN_00e98730(Buffer*);
     void __thiscall EnsureBuffer(Destination*);
 };
-// If destination->buffer1c is null, allocates a 0x54-byte Buffer, initializes it, stores it in buffer1c, calls FUN_00e98730, and sets index18 to 0xffff.
-// @fnv 0x00e95500
-void FUN_00e95500_Class::EnsureBuffer(Destination* destination)
-{
-    if (destination->buffer1c == 0)
-    {
-        Buffer* ptr = static_cast<Buffer*>(DAT_011f6238.FUN_00aa3e40(0x54));
-        Buffer* newBuffer = ptr ? ptr->FUN_00e947c0() : 0;
-        newBuffer->unk3c = 4;
-        destination->buffer1c = newBuffer;
-        newBuffer->unk04 = &DAT_01400000;
-        FUN_00e98730(newBuffer);
-        destination->index18 = 0xffff;
-    }
-}
 }  // namespace fnv_00e95500
 
 struct RttiStub

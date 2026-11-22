@@ -1,4 +1,4 @@
-// gamebryo2.2/corelibs/nimain/ninode.cpp: NiNode, ChildNode, ChildArray, NiPointLight and more (37 functions)
+// gamebryo2.2/corelibs/nimain/ninode.cpp: NiNode, ChildNode, ChildArray, NiPointLight and more (35 functions)
 #include "f3_common.h"
 #include "ninode_packet_decls.h"
 
@@ -227,13 +227,6 @@ void NiNode::UpdateSelectedDownwardPass(NiUpdateData& aUpdateData, unsigned int 
 }
 
 #pragma optimize("", off)
-// Stores v into value and calls FUN_004bc2c0.
-// @fnv 0x0050dd20
-void NiPointLight::FUN_0050dd20(float afValue)
-{
-    value = afValue;
-    FUN_004bc2c0();
-}
 #pragma optimize("", on)
 
 struct BSTempEffect;
@@ -1833,12 +1826,6 @@ class FUN_00a59dc0_shell
     void SetBoundObject(void*);
     void FUN_00a7fdb0(void*);
 };
-
-// @fnv 0x00a7fdb0
-void FUN_00a59dc0_shell::FUN_00a7fdb0(void* pValue)
-{
-    SetBoundObject(pValue);
-}
 
 struct NiBinaryStreamA5E8
 {

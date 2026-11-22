@@ -6,12 +6,6 @@ struct GlobalObjectO2_00a7b610;
 
 extern GlobalObjectO2_00a7b610 g_01202690;
 
-// @fnv 0x00c27130
-GlobalObjectO2_00a7b610* __cdecl FUN_00c27130()
-{
-    return &g_01202690;
-}
-
 extern char const* const g_011dfe40_arg1;
 
 // @fnv 0x00a6d280
@@ -182,20 +176,6 @@ struct GlobalObjectO2_00a7b610
 {
     const char* m_pcName;
 };
-
-// Appends the string returned by FUN_00a7d330(g_01202690.m_pcName) to pkStrings, growing it via SetSize when full and storing at index m_usSize.
-// @fnv 0x00c27300
-void __stdcall FUN_00c27300(StrArr* pkStrings)
-{
-    FUN_00a6d830(pkStrings);
-    char* str = FUN_00a7d330(g_01202690.m_pcName);
-    unsigned int size = pkStrings->m_usSize;
-    if (size >= pkStrings->m_usAlloc)
-    {
-        pkStrings->SetSize(size + pkStrings->m_usGrowBy);
-    }
-    pkStrings->SetAt(size, str);
-}
 
 struct S_a6d590_RefObject
 {

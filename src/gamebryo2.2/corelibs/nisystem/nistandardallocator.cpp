@@ -2,21 +2,6 @@
 // src/gamebryo2.2/corelibs/nisystem/nistandardallocator.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/_fallout3/platforms/common/code/gamebryo2.2/corelibs/nisystem/nistandardallocator.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-// Swaps two adjacent ints at a and b when the pointers differ.
-// @fnv 0x00aa3530
-void __cdecl SwapIntPairs(int* paiFirst, int* paiSecond)
-{
-    if (paiFirst != paiSecond)
-    {
-        int tmp0 = *paiFirst;
-        int tmp1 = *(paiFirst + 1);
-        *paiFirst = *paiSecond;
-        *(paiFirst + 1) = *(paiSecond + 1);
-        *(paiSecond + 1) = tmp1;
-        *paiSecond = tmp0;
-    }
-}
-
 struct P03MM
 {
     void Deallocate(void*);

@@ -6,12 +6,6 @@ struct NiRTTI;
 
 extern NiRTTI g_012708ec;
 
-// @fnv 0x00ee8530
-NiRTTI* __cdecl FUN_00ee8530()
-{
-    return &g_012708ec;
-}
-
 struct NiPixelFormat;
 struct NiRenderTargetGroup
 {
@@ -134,11 +128,6 @@ struct NiRenderTargetGroup : NiMemObject
     void __thiscall FUN_00ee8550(bool abResolve);
 };
 
-// @fnv 0x00ee8550
-void __thiscall NiRenderTargetGroup::FUN_00ee8550(bool abResolve)
-{
-    m_bNeedsResolve = abResolve;
-}
 }  // namespace fnv_00ee8550
 
 namespace fnv_00ee86e0 {

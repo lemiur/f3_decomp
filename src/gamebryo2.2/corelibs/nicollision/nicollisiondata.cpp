@@ -4,12 +4,6 @@
 
 extern void* g_0126fab4;
 
-// @fnv 0x00eacd20
-void* __cdecl FUN_00eacd20()
-{
-    return &g_0126fab4;
-}
-
 extern "C" void* __cdecl _NiMalloc(unsigned int);
 extern "C" unsigned int __cdecl strlen(const char*);
 int __cdecl NiSprintf(char*, unsigned int, const char*, ...);
@@ -377,18 +371,6 @@ struct NiCollisionData
     void FUN_00a81100(StrArr*);
     void FUN_00ead870(StrArr*);
 };
-// @fnv 0x00ead870
-void NiCollisionData::FUN_00ead870(StrArr* pkStrings)
-{
-    FUN_00a81100(pkStrings);
-    char* pszDup = _FUN_00a7d330((const char*)g_0126fab4);
-    unsigned int uiSize = pkStrings->GetSize();
-    unsigned int uiMax = pkStrings->GetAllocatedSize();
-    if (uiSize >= uiMax)
-        pkStrings->SetSize(uiSize + pkStrings->GetGrowSize());
-    pkStrings->SetAt(uiSize, pszDup);
-    VirtAt64(pkStrings);
-}
 }  // namespace fnv_00ead870
 
 // FUN_00eacd00 - forwards its single argument to the collection's stream
@@ -773,71 +755,6 @@ struct FUN_00ead2b0_cls
     bool __thiscall Probe(void* p);
     bool __thiscall MatchesOther(FUN_00ead2b0_cls* other);
 };
-
-// Checks Probe(other), a node list for g_0126fab4, equal m_28/m_24, and equal m_2c unk0c values; returns true on match, false otherwise.
-// @fnv 0x00ead2b0
-bool FUN_00ead2b0_cls::MatchesOther(FUN_00ead2b0_cls* other)
-{
-    FUN_00ead2b0_node* node;
-    FUN_00ead2b0_cls* a;
-    FUN_00ead2b0_cls* b;
-    if (!Probe(other))
-    {
-        goto fail;
-    }
-    if (other == 0)
-    {
-        goto fail;
-    }
-    node = other->unk08();
-    if (node == 0)
-    {
-        goto fail;
-    }
-    do
-    {
-        if (node == (FUN_00ead2b0_node*)&g_0126fab4)
-        {
-            goto found;
-        }
-        node = node->m_04;
-    } while (node != 0);
-    goto fail;
-found:
-    if (other->m_28 != m_28)
-    {
-        goto fail;
-    }
-    if (other->m_24 != m_24)
-    {
-        goto fail;
-    }
-    a = other->m_2c;
-    if (a == 0)
-    {
-        goto tail;
-    }
-    b = m_2c;
-    if (b != 0)
-    {
-        int ra = a->unk0c();
-        int rb = b->unk0c();
-        if (ra == rb)
-        {
-            goto ok;
-        }
-        goto fail;
-    }
-tail:
-    if (a != m_2c)
-    {
-        goto fail;
-    }
-ok:
-    return true;
-fail:
-    return false;
-}
 
 struct NiRTTI
 {

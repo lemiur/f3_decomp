@@ -7,12 +7,6 @@ extern "C"
     extern void* g_012026a8;
 }
 
-// @fnv 0x00c28400
-void* __cdecl FUN_00c28400()
-{
-    return &g_012026a8;
-}
-
 void __cdecl FUN_00a6d290();
 void __cdecl _delete(void* p, unsigned int size);
 
@@ -75,20 +69,6 @@ struct StrArr
 };
 void __stdcall FUN_00a6d830(StrArr*);
 char* __cdecl _FUN_00a7d330(void*);
-// Appends the string returned by _FUN_00a7d330(g_012026a8) to pkStrings, growing the array if the position is at or past its size.
-// @fnv 0x00c28520
-void __stdcall FUN_00c28520(StrArr* pkStrings)
-{
-    FUN_00a6d830(pkStrings);
-    char* pcString = _FUN_00a7d330(g_012026a8);
-    unsigned int uiPos = pkStrings->_sA;
-    unsigned int uiSize = pkStrings->_s8;
-    if (uiPos >= uiSize)
-    {
-        pkStrings->SetSize(uiPos + pkStrings->_sE);
-    }
-    pkStrings->SetAt(uiPos, pcString);
-}
 
 struct NiMemObject
 {

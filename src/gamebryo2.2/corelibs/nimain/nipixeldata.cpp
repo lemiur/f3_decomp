@@ -1,4 +1,4 @@
-// gamebryo2.2/corelibs/nimain/nipixeldata.cpp: NiPixelData, NiPixelDataSerialization, NiPixelDataLoad, NiPixelDataEq (13 functions)
+// gamebryo2.2/corelibs/nimain/nipixeldata.cpp: NiPixelData, NiPixelDataSerialization, NiPixelDataLoad, NiPixelDataEq (12 functions)
 #include "f3_common.h"
 #include "nipixeldata_decls.h"
 
@@ -108,11 +108,6 @@ struct GlobalObjectO2_00a7b610
     int pad;
 };
 extern GlobalObjectO2_00a7b610 g_011f4a90;
-// @fnv 0x00a7c020
-GlobalObjectO2_00a7b610* __cdecl FUN_00a7c020()
-{
-    return &g_011f4a90;
-}
 
 struct FUN_00a7bee0_target
 {

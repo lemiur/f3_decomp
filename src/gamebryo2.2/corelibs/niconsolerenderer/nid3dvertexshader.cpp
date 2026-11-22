@@ -34,12 +34,6 @@ void FUN_00e89ac0_Class::FUN_00e89ac0()
 
 extern void __cdecl FUN_00e92ee0(int value);
 
-// @fnv 0x00e89ad0
-void __fastcall FUN_00e89ad0(int value)
-{
-    FUN_00e92ee0(value);
-}
-
 extern "C" void* __cdecl memmove(void* pvDest, const void* pvSrc, unsigned int uiSize);
 
 extern int g_aiE89C70ConstantTypes[];

@@ -1,4 +1,4 @@
-// gamebryo2.2/corelibs/nianimation/nifloatextradatacontroller.cpp: NiFloatExtraDataController (9 functions)
+// gamebryo2.2/corelibs/nianimation/nifloatextradatacontroller.cpp: NiFloatExtraDataController (8 functions)
 #include "f3_common.h"
 #include "nifloatextradatacontroller_decls.h"
 
@@ -223,17 +223,3 @@ struct FUN_00a412d0_cls : public NiFloatExtraDataController
 {
     void ApplyFadeValue(FadeNode* pFadeNode, int iIndex);
 };
-
-// Looks up the fade node for g_011f3738 and sets its value from this controller's float extra data.
-// @fnv 0x00a412d0
-void FUN_00a412d0_cls::ApplyFadeValue(FadeNode* pFadeNode, int iIndex)
-{
-    FadeNode* pTarget;
-    if (pFadeNode == 0)
-        pTarget = 0;
-    else
-        pTarget = pFadeNode->LookupNode(&g_011f3738);
-
-    NiFloatExtraData* pExtraData = static_cast<NiFloatExtraData*>(this->m_pExtraData.operator->());
-    pTarget->SetValue(pExtraData->m_fValue);
-}

@@ -149,20 +149,6 @@ struct NiFloatInterpController : NiSingleInterpController
 {
     void SetInterpolatorValue(NiInterpolator*, unsigned short);
 };
-// Casts pkInterp to a NiFloatInterpolator, reads the controller value via GetValue and passes it to the interpolator's SetFloatValue.
-// @fnv 0x00a57670
-void NiFloatInterpController::SetInterpolatorValue(NiInterpolator* pkInterp, unsigned short usIndex)
-{
-    NiFloatInterpolator* pkFloatInterp;
-    float fValue;
-    if (!pkInterp)
-        pkFloatInterp = 0;
-    else
-        pkFloatInterp =
-            reinterpret_cast<NiFloatInterpolator*>(pkInterp->DynamicCast(reinterpret_cast<const NiRTTI*>(&g_011f3738)));
-    GetValue(&fValue);
-    pkFloatInterp->SetFloatValue(fValue);
-}
 }  // namespace fnv_00a57670
 
 struct NiStream;

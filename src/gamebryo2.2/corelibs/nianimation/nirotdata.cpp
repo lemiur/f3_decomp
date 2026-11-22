@@ -6,12 +6,6 @@ struct NiRTTI;
 
 extern const NiRTTI g_011f3f50;
 
-// @fnv 0x00a48150
-const NiRTTI* __cdecl FUN_00a48150()
-{
-    return &g_011f3f50;
-}
-
 class AnimationKey
 {
   public:
@@ -346,27 +340,6 @@ struct FUN_00a484c0_shell
 
     void AppendNumKeysToStringArray(StrArr* apViewerStrings);
 };
-
-// @fnv 0x00a484c0
-void FUN_00a484c0_shell::AppendNumKeysToStringArray(StrArr* apViewerStrings)
-{
-    AppendCameraPathEntries(apViewerStrings);
-
-    char* pString =
-        static_cast<char*>(_FUN_00a7d330(reinterpret_cast<const NiRTTIAccess*>(&g_011f3f50)->m_pIntegerData));
-
-    unsigned int uiSize = apViewerStrings->m_uiSize;
-    if (uiSize >= apViewerStrings->m_uiCapacity)
-        apViewerStrings->SetSize(uiSize + apViewerStrings->m_uiGrowSize);
-    apViewerStrings->SetAt(uiSize, pString);
-
-    pString = FUN_00a7d510("m_uiNumKeys", m_uiNumKeys);
-
-    uiSize = apViewerStrings->m_uiSize;
-    if (uiSize >= apViewerStrings->m_uiCapacity)
-        apViewerStrings->SetSize(uiSize + apViewerStrings->m_uiGrowSize);
-    apViewerStrings->SetAt(uiSize, pString);
-}
 
 struct FUN_00b66620_cls
 {

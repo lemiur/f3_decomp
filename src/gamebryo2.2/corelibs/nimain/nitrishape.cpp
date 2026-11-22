@@ -1,4 +1,4 @@
-// gamebryo2.2/corelibs/nimain/nitrishape.cpp: NiTriShape (16 functions)
+// gamebryo2.2/corelibs/nimain/nitrishape.cpp: NiTriShape (11 functions)
 #include "f3_common.h"
 #include "nitrishape_decls.h"
 
@@ -85,9 +85,6 @@ struct FUN_00a744a0 : NiTriStrips
     FUN_00a744a0();
     virtual ~FUN_00a744a0();
 };
-// @fnv 0x00a744a0
-FUN_00a744a0::FUN_00a744a0()
-{}
 
 namespace fnv_00a744d0 {
 struct BSFadeNode
@@ -323,17 +320,8 @@ struct FUN_00a74480 : public NiTriBasedGeom
     explicit FUN_00a74480(NiTriBasedGeomData* geometry);
     virtual ~FUN_00a74480();
 };
-// @fnv 0x00a74480
-FUN_00a74480::FUN_00a74480(NiTriBasedGeomData* geometry) : NiTriBasedGeom(geometry)
-{}
 
 extern void __cdecl FUN_00a9b140();
-
-// @fnv 0x00a744c0
-void __cdecl FUN_00a744c0()
-{
-    FUN_00a9b140();
-}
 
 void FUN_00a9b190();
 // @fnv 0x00a74500
@@ -343,11 +331,6 @@ void FUN_00a74500()
 }
 
 void FUN_00a89770();
-// @fnv 0x00a74510
-void FUN_00a74510()
-{
-    FUN_00a89770();
-}
 
 class NiStream;
 
@@ -360,9 +343,3 @@ void FUN_00a98eb0(NiStream& stream)
 }
 
 void __cdecl FUN_00a9b1a0();
-
-// @fnv 0x00a71d10
-void __cdecl FUN_00a71d10()
-{
-    FUN_00a9b1a0();
-}

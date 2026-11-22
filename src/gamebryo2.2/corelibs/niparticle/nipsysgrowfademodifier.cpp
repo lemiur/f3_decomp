@@ -1,4 +1,4 @@
-// gamebryo2.2/corelibs/niparticle/nipsysgrowfademodifier.cpp: NiPSysGrowFadeModifier (8 functions)
+// gamebryo2.2/corelibs/niparticle/nipsysgrowfademodifier.cpp: NiPSysGrowFadeModifier (7 functions)
 #include "f3_common.h"
 #include "nipsysgrowfademodifier_decls.h"
 // Loads the modifier's base data, then four fields and, for stream version above 16, one more field from the stream.
@@ -16,12 +16,6 @@ void NiPSysGrowFadeModifier::LoadBinary(NiStream& stream)
 
 struct GlobalObjectO2_00a7b610;
 extern GlobalObjectO2_00a7b610 g_012026f8;
-
-// @fnv 0x00c2a360
-GlobalObjectO2_00a7b610* __cdecl FUN_00c2a360()
-{
-    return &g_012026f8;
-}
 
 void __cdecl FUN_00c31750();
 void __cdecl operator delete(void*, unsigned int);

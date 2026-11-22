@@ -10,14 +10,6 @@ struct P03MM
 };
 extern P03MM g_memoryManager;
 
-// @fnv 0x00a72510
-void* __stdcall FUN_00a72510(unsigned int size)
-{
-    if (size)
-        return g_memoryManager.Allocate(size);
-    return 0;
-}
-
 namespace fnv_00a727c0 {
 struct P03MM
 {

@@ -1,4 +1,4 @@
-// gamebryo2.2/corelibs/nimain/niscreenloddata.cpp: NiScreenLODData, Fake, Holder, LodPart_cls and more (17 functions)
+// gamebryo2.2/corelibs/nimain/niscreenloddata.cpp: NiScreenLODData, Fake, Holder, LodPart_cls and more (16 functions)
 #include "f3_common.h"
 #include "niscreenloddata_decls.h"
 // @fnv 0x00a86530
@@ -33,12 +33,6 @@ struct FUN_00a95cb0_shell : public NiScreenLODData
 };
 
 extern "C" void* g_011f5ee8;
-
-// @fnv 0x00a95cb0
-void* FUN_00a95cb0_shell::FUN_00a95cb0()
-{
-    return &g_011f5ee8;
-}
 
 struct FUN_00a95c80_shell : public NiScreenLODData
 {

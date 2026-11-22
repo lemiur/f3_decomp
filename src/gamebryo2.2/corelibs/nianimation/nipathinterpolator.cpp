@@ -377,15 +377,6 @@ struct FUN_00a3f060_shell
     void* __thiscall FUN_00a3f060(short, short);
 };
 
-// @fnv 0x00a3f4b0
-void* __cdecl CreateA51BF0Base()
-{
-    void* p = A51BF0Base::operator new(0x5c);
-    if (p)
-        return ((FUN_00a3f060_shell*)p)->FUN_00a3f060(0, 0);
-    return 0;
-}
-
 extern float DAT_01097170;
 extern float DAT_01015f5c;
 extern double DAT_010231b0;
@@ -1022,14 +1013,6 @@ class NiOwnerA3F
     void CopyMemberData(NiObjectA3F* pkDest, NiCloningProcessA3F& kCloning);
     NiObjectA3F* CloneObject(NiCloningProcessA3F& kCloning);
 };
-
-// @fnv 0x00a3f520
-NiObjectA3F* NiOwnerA3F::CloneObject(NiCloningProcessA3F& kCloning)
-{
-    NiObjectA3F* pkClone = new NiObjectA3F(0, 0);
-    CopyMemberData(pkClone, kCloning);
-    return pkClone;
-}
 
 struct MyPosKey
 {

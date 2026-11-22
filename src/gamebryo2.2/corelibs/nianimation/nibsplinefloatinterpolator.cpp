@@ -1,4 +1,4 @@
-// gamebryo2.2/corelibs/nianimation/nibsplinefloatinterpolator.cpp: NiBSplineFloatInterpolator (12 functions)
+// gamebryo2.2/corelibs/nianimation/nibsplinefloatinterpolator.cpp: NiBSplineFloatInterpolator (10 functions)
 #include "f3_common.h"
 #include "nibsplinefloatinterpolator_decls.h"
 // Calls the base NiBSplineInterpolator::LoadBinary, then reads m_fFloatValue and m_kFloatCPHandle from the stream input.
@@ -71,11 +71,6 @@ struct GlobalObjX
     int x;
 };
 extern GlobalObjX g_011f401c_arg1;
-// @fnv 0x00a50b70
-GlobalObjX* FUN_00a50b70()
-{
-    return &g_011f401c_arg1;
-}
 
 void __fastcall FUN_00a57f80(void*);
 void __cdecl __Dummy_00b6fef0(void*, unsigned int);
@@ -162,36 +157,6 @@ struct FUN_00a50d30_shell : Base
 
     void SerializeToStrings(StrArr* strings);
 };
-
-// @fnv 0x00a50d30
-void FUN_00a50d30_shell::SerializeToStrings(StrArr* strings)
-{
-    this->FUN_00a58200(strings);
-
-    char* value = _FUN_00a7d330(reinterpret_cast<char const*>(g_011f401c_arg1.x));
-
-    unsigned int index = strings->m_usElementCount;
-    if (index >= strings->m_usSize)
-        strings->SetSize(index + strings->m_usGrowth);
-
-    strings->SetAt(index, value);
-
-    value = FUN_00a7d550("m_fFloatValue", m_fFloatValue);
-
-    index = strings->m_usElementCount;
-    if (index >= strings->m_usSize)
-        strings->SetSize(index + strings->m_usGrowth);
-
-    strings->SetAt(index, value);
-
-    value = FUN_00a7d510("m_kFloatCPHandle", reinterpret_cast<char const*>(m_kFloatCPHandle));
-
-    index = strings->m_usElementCount;
-    if (index >= strings->m_usSize)
-        strings->SetSize(index + strings->m_usGrowth);
-
-    strings->SetAt(index, value);
-}
 
 struct NiBSplineEvalTarget
 {

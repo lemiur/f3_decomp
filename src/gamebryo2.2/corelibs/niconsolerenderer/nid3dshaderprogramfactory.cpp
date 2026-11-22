@@ -1,4 +1,4 @@
-// gamebryo2.2/corelibs/niconsolerenderer/nid3dshaderprogramfactory.cpp: NiD3DShaderProgramFactory, ProgFactoryDirs, ShaderEntryOwner (26 functions)
+// gamebryo2.2/corelibs/niconsolerenderer/nid3dshaderprogramfactory.cpp: NiD3DShaderProgramFactory, ProgFactoryDirs, ShaderEntryOwner (23 functions)
 #include "f3_common.h"
 #include "nid3dshaderprogramfactory_packet.h"
 // @fnv 0x00e93000
@@ -32,11 +32,6 @@ bool NiD3DShaderProgramFactory::RegisterCreator(const char* pcName, NiD3DShaderP
 
 struct Program;
 extern Program* DAT_0126fa10;
-// @fnv 0x00e92eb0
-Program* FUN_00e92eb0()
-{
-    return DAT_0126fa10;
-}
 
 struct Program
 {
@@ -63,18 +58,6 @@ struct Lst
     int b;
     Nd* head;
 };
-// @fnv 0x00e92fe0
-int __fastcall FUN_00e92fe0(Lst* l, int, Nd** apNext)
-{
-    Nd* n = l->head;
-    *apNext = n;
-    if (n)
-    {
-        *apNext = n->next;
-        return n->data;
-    }
-    return 0;
-}
 
 // @fnv 0x00e93df0
 void FUN_00e93df0()
@@ -411,33 +394,6 @@ void __thiscall FUN_00e937f0_shell::AddShader(ShaderArg* pkShader)
 extern int DAT_0126fa18;
 extern int DAT_0126fa1c;
 extern int DAT_0126fa20;
-
-// @fnv 0x00e92f70
-void FUN_00e92f70(int param_1)
-{
-    DAT_0126fa1c = param_1;
-    if (param_1 != 0)
-    {
-        int* piVar1 = *(int**)(param_1 + 0x288);
-        if (DAT_0126fa18 != 0)
-        {
-            (**(void(__stdcall**)(int))(*(int*)DAT_0126fa18 + 8))(DAT_0126fa18);
-        }
-        DAT_0126fa18 = (int)piVar1;
-        if (piVar1 != 0)
-        {
-            (**(void(__stdcall**)(int*))(*(int*)piVar1 + 4))(piVar1);
-        }
-        DAT_0126fa20 = *(int*)(DAT_0126fa1c + 0x8b8);
-        return;
-    }
-    DAT_0126fa20 = 0;
-    if (DAT_0126fa18 != 0)
-    {
-        (**(void(__stdcall**)(int))(*(int*)DAT_0126fa18 + 8))(DAT_0126fa18);
-    }
-    DAT_0126fa18 = 0;
-}
 
 extern "C" int __cdecl strcmp(const char*, const char*);
 extern "C" unsigned int __cdecl strlen(const char*);

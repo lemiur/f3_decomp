@@ -4,12 +4,6 @@
 
 extern "C" const void* g_011f5f1c;
 
-// @fnv 0x00a994c0
-const void* __cdecl FUN_00a994c0()
-{
-    return &g_011f5f1c;
-}
-
 struct BSFadeNode
 {
     static void* __cdecl operator new(unsigned int);

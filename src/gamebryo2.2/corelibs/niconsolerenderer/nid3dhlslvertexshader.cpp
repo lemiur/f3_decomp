@@ -1,4 +1,4 @@
-// gamebryo2.2/corelibs/niconsolerenderer/nid3dhlslvertexshader.cpp: MyHolder, ShaderWrap, NiD3DHLSLVertexShader, ArrayShader (8 functions)
+// gamebryo2.2/corelibs/niconsolerenderer/nid3dhlslvertexshader.cpp: MyHolder, ShaderWrap, NiD3DHLSLVertexShader, ArrayShader (6 functions)
 #include "f3_common.h"
 #include "nid3dhlslvertexshader_decls.h"
 // Constructs a NiTPrimitiveArray by forwarding the size and grow arguments to the NiTArray base constructor.
@@ -42,17 +42,6 @@ struct MyHolder
     void FUN_00e89ac0();
     void ReleaseConstTable();
 };
-// Releases the held const table if present, clears the pointer, then calls FUN_00e89ac0.
-// @fnv 0x00e97210
-void MyHolder::ReleaseConstTable()
-{
-    if (m_pShaderConstantTable)
-    {
-        m_pShaderConstantTable->Release();
-        m_pShaderConstantTable = 0;
-    }
-    FUN_00e89ac0();
-}
 
 struct MyDesc
 {
@@ -75,16 +64,6 @@ struct ShaderWrap
     MyTable* m_pShaderConstantTable;
     unsigned int GetConstants();
 };
-// Returns the shader's Constants from its descriptor, or 0 if the table is null or GetDesc fails.
-// @fnv 0x00e97250
-unsigned int ShaderWrap::GetConstants()
-{
-    MyDesc kDesc;
-    if (!m_pShaderConstantTable)
-        return 0;
-    long hr = m_pShaderConstantTable->GetDesc(&kDesc);
-    return hr < 0 ? 0 : kDesc.Constants;
-}
 
 struct _D3DXCONSTANT_DESC
 {

@@ -12,18 +12,6 @@ struct NiTexture_RendererData : NiRefObject
 
 extern "C" void _delete(void* p, unsigned int size);
 
-// Sets the vtable pointer, calls the NiRefObject destructor, and frees the object with _delete when flags has bit 0 set; returns pThis.
-// @fnv 0x00a981a0
-void* __thiscall NiTexture_RendererData::FUN_00a981a0(unsigned int flags)
-{
-    NiTexture_RendererData* pThis = this;
-    *reinterpret_cast<void**>(pThis) = reinterpret_cast<void*>(0x010a080c);
-    pThis->NiRefObject::~NiRefObject();
-    if (flags & 1)
-        _delete(pThis, 0x60);
-    return pThis;
-}
-
 struct S_00a981d0_Base
 {
     S_00a981d0_Base() throw();

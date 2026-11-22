@@ -1,4 +1,4 @@
-// gamebryo2.2/corelibs/niparticle/nipsysmodifierfloatctlr.cpp: NiPSysModifierFloatCtlr, ThisCtlr (7 functions)
+// gamebryo2.2/corelibs/niparticle/nipsysmodifierfloatctlr.cpp: NiPSysModifierFloatCtlr, ThisCtlr (4 functions)
 #include "f3_common.h"
 #include "nipsysmodifierfloatctlr_decls.h"
 // @fnv 0x00c32e10
@@ -23,12 +23,6 @@ void NiPSysModifierFloatCtlr::LinkObject(NiStream& stream)
 
 extern const char* const g_012026d8_arg1;
 
-// @fnv 0x00c32e00
-const char* const* __cdecl FUN_00c32e00()
-{
-    return &g_012026d8_arg1;
-}
-
 struct FUN_00a3a710_shell
 {
     void __thiscall CallVirtualMethodAtOffsetA8(void* arg, void* dummy);
@@ -49,19 +43,6 @@ struct StrArr
 };
 char* __cdecl _FUN_00a7d330(const char*);
 void __stdcall AppendModifierInfo(StrArr*);
-// Appends the string returned by _FUN_00a7d330(g_012026d8_arg1) to pkStrings, growing the array if its count reaches capacity.
-// @fnv 0x00c32f60
-void __stdcall FUN_00c32f60(StrArr* pkStrings)
-{
-    AppendModifierInfo(pkStrings);
-    char* pString = _FUN_00a7d330(g_012026d8_arg1);
-    unsigned int n = *(unsigned short*)((char*)pkStrings + 0xa);
-    if (n >= *(unsigned short*)((char*)pkStrings + 8))
-    {
-        pkStrings->SetSize(*(unsigned short*)((char*)pkStrings + 0xe) + n);
-    }
-    pkStrings->SetAt(n, pString);
-}
 
 struct DynCastHelper
 {
@@ -137,18 +118,6 @@ struct ThisCtlr
     virtual void GetValue(float*);
     void __thiscall FUN_00c32e90(NiObject*, unsigned short);
 };
-// @fnv 0x00c32e90
-void __thiscall ThisCtlr::FUN_00c32e90(NiObject* pkInterp, unsigned short usIndex)
-{
-    NiObject* pkFloatInterp;
-    float fValue;
-    if (pkInterp == 0)
-        pkFloatInterp = 0;
-    else
-        pkFloatInterp = ((DynCastHelper*)pkInterp)->DynamicCast(&g_011f3738);
-    GetValue(&fValue);
-    ((PoseInterpStub*)pkFloatInterp)->SetFloatValue(fValue);
-}
 
 extern const float DAT_01096324;
 

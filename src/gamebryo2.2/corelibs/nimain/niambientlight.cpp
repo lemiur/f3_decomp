@@ -55,12 +55,6 @@ void __cdecl FUN_00a75c00()
 
 void FUN_00a90010();
 
-// @fnv 0x00a75c10
-void FUN_00a75c10()
-{
-    FUN_00a90010();
-}
-
 class CloningProcessA9B3;
 
 class TESObjectDoorController

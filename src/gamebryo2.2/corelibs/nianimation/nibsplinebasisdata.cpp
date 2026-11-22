@@ -1,4 +1,4 @@
-// gamebryo2.2/corelibs/nianimation/nibsplinebasisdata.cpp: NiBSplineBasisData, SplineOwner (10 functions)
+// gamebryo2.2/corelibs/nianimation/nibsplinebasisdata.cpp: NiBSplineBasisData, SplineOwner (9 functions)
 #include "f3_common.h"
 #include "nibsplinebasisdata_decls.h"
 
@@ -262,24 +262,3 @@ struct FUN_00a54190_cls
     unsigned short m_0e;
     FUN_00a54190_cls* FUN_00a54190(int n, short a2);
 };
-
-// Sets object fields and allocates 4 times m_08 bytes when m_08 is positive.
-// @fnv 0x00a54190
-FUN_00a54190_cls* FUN_00a54190_cls::FUN_00a54190(int n, short a2)
-{
-    m_vt = (int)&DAT_0109a2a4;
-    m_08 = n;
-    m_0e = a2;
-    m_0a = 0;
-    m_0c = 0;
-    if (m_08 > 0)
-    {
-        unsigned int sz = m_08;
-        m_04 = NiMalloc(sz * 4);
-    }
-    else
-    {
-        m_04 = 0;
-    }
-    return this;
-}

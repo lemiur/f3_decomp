@@ -1,4 +1,4 @@
-// gamebryo2.2/corelibs/niparticle/nipsysmodifieractivectlr.cpp: NiPSysAirFieldAirFrictionCtlr, StandIn, NiPSysModifierActiveCtlr (13 functions)
+// gamebryo2.2/corelibs/niparticle/nipsysmodifieractivectlr.cpp: NiPSysAirFieldAirFrictionCtlr, StandIn, NiPSysModifierActiveCtlr (12 functions)
 #include "f3_common.h"
 #include "nipsysmodifieractivectlr_decls.h"
 
@@ -77,12 +77,6 @@ void __thiscall FUN_00c29d50_shell::FUN_00c29d50(char* pOut)
 
 struct GlobalObjectO2_00a7b610;
 extern GlobalObjectO2_00a7b610 g_012026d0;
-
-// @fnv 0x00c29d40
-GlobalObjectO2_00a7b610* __cdecl FUN_00c29d40()
-{
-    return &g_012026d0;
-}
 
 extern char const* const g_012026d0_arg1;
 

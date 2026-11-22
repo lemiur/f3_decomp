@@ -4,12 +4,6 @@
 
 extern "C" void* g_01202538;
 
-// @fnv 0x00c21e10
-void* __cdecl FUN_00c21e10()
-{
-    return &g_01202538;
-}
-
 struct BSFadeNode
 {
     static void* __cdecl operator new(unsigned int);
@@ -232,17 +226,6 @@ struct NiMeshParticleSystem : NiParticleSystem
 {
     void __thiscall AppendString(StrArr*);
 };
-// Calls the base particle system handler, then appends the string returned by _FUN_00a7d330 to pkStrings, growing it if full.
-// @fnv 0x00c21dc0
-void __thiscall NiMeshParticleSystem::AppendString(StrArr* pkStrings)
-{
-    NiParticleSystem::WriteParticleSystemInfo(pkStrings);
-    char* pcString = _FUN_00a7d330(g_01202538);
-    unsigned int uiSize = pkStrings->m_usSize;
-    if (uiSize >= pkStrings->m_usMaxSize)
-        pkStrings->SetSize(uiSize + pkStrings->m_usGrowBy);
-    pkStrings->SetAt(uiSize, pcString);
-}
 }  // namespace fnv_00c21dc0
 
 namespace fnv_00c21ed0 {

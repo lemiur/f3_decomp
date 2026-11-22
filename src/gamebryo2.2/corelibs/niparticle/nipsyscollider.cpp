@@ -1,4 +1,4 @@
-// gamebryo2.2/corelibs/niparticle/nipsyscollider.cpp: NiPSysCollider, NiPSysColliderStandin (9 functions)
+// gamebryo2.2/corelibs/niparticle/nipsyscollider.cpp: NiPSysCollider, NiPSysColliderStandin (8 functions)
 #include "f3_common.h"
 #include "nipsyscollider_decls.h"
 
@@ -68,11 +68,6 @@ struct FUN_00c327e0_shell : public NiPSysCollider
 };
 
 extern const char* const g_012026a0_arg1;
-// @fnv 0x00c327e0
-void* FUN_00c327e0_shell::FUN_00c327e0()
-{
-    return (void*)&g_012026a0_arg1;
-}
 
 struct StrArr
 {

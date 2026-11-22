@@ -4,12 +4,6 @@
 
 extern "C" void* g_01202720;
 
-// @fnv 0x00c2b230
-void* __cdecl FUN_00c2b230()
-{
-    return &g_01202720;
-}
-
 struct NiObjectNET;
 struct BaseStandIn
 {
@@ -126,15 +120,3 @@ struct StrArr
 };
 char* __cdecl FUN_00a7d330(char*);
 void __stdcall FUN_00c32f60(StrArr*);
-// Appends the string returned by FUN_00a7d330(g_01202720) to the array, growing it if the index reaches capacity.
-// @fnv 0x00c2b2e0
-void __stdcall FUN_00c2b2e0(StrArr* array)
-{
-    FUN_00c32f60(array);
-    char* value = FUN_00a7d330(static_cast<char*>(g_01202720));
-    unsigned int index = array->index;
-    unsigned int capacity = array->capacity;
-    if (index >= capacity)
-        array->SetSize(index + array->growBy);
-    array->SetAt(index, value);
-}

@@ -16,12 +16,6 @@ void NiPSysSpawnModifier::LoadBinary(NiStream& kStream)
     ReadBinaryValue(kStream, m_fLifeSpanVariation);
 }
 
-// @fnv 0x00c2d6d0
-void NiPSysBoundUpdateModifier::LinkObject(NiStream& kStream)
-{
-    NiPSysModifier::LinkObject(kStream);
-}
-
 // @fnv 0x00c2d6e0
 bool NiPSysBoundUpdateModifier::IsEqual(NiObject* pkObject)
 {
@@ -39,12 +33,6 @@ const NiRTTI* NiPSysBoundUpdateModifier::GetRTTI() const
 }
 
 extern "C" const NiRTTI g_01202550;
-
-// @fnv 0x00c23ce0
-const NiRTTI* __cdecl FUN_00c23ce0()
-{
-    return &g_01202550;
-}
 
 extern "C" void __cdecl __Dummy_00b6fef0(void*, int);
 void __cdecl FUN_00c31750();

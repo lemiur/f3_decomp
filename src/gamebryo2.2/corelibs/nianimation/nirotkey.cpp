@@ -1,4 +1,4 @@
-// gamebryo2.2/corelibs/nianimation/nirotkey.cpp: TimedRotationKey (5 functions)
+// gamebryo2.2/corelibs/nianimation/nirotkey.cpp: TimedRotationKey (4 functions)
 #include "f3_common.h"
 #include "nirotkey_decls.h"
 
@@ -75,13 +75,6 @@ struct FUN_00a3ca30_shell
     void* m;
     void FUN_00a3ca30();
 };
-
-// @fnv 0x00a3ca30
-void FUN_00a3ca30_shell::FUN_00a3ca30()
-{
-    m = &_DAT_01097054;
-    FUN_00a57010();
-}
 
 extern void* _DAT_011f3740;
 

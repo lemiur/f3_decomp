@@ -4,12 +4,6 @@
 
 extern "C" void* g_012027b0;
 
-// @fnv 0x00c30630
-void* __cdecl FUN_00c30630()
-{
-    return &g_012027b0;
-}
-
 struct NiPSysModifierFloatCtlr
 {
     float m_fValue;
@@ -135,15 +129,3 @@ struct StrArr
 };
 char* __cdecl FUN_00a7d330(char*);
 void __stdcall FUN_00c32f60(StrArr*);
-// Grows the array if its index has reached capacity, then stores the string returned by FUN_00a7d330 at that index.
-// @fnv 0x00c30740
-void __stdcall FUN_00c30740(StrArr* array)
-{
-    FUN_00c32f60(array);
-    char* value = FUN_00a7d330(static_cast<char*>(g_012027b0));
-    unsigned int index = array->index;
-    unsigned int capacity = array->capacity;
-    if (index >= capacity)
-        array->SetSize(index + array->growBy);
-    array->SetAt(index, value);
-}

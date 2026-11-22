@@ -1,4 +1,4 @@
-// gamebryo2.2/corelibs/nianimation/nibsplinecomptransforminterpolator.cpp: NiBSplineCompTransformInterpolator, Holder, SThis (11 functions)
+// gamebryo2.2/corelibs/nianimation/nibsplinecomptransforminterpolator.cpp: NiBSplineCompTransformInterpolator, Holder, SThis (9 functions)
 #include "f3_common.h"
 #include "nibsplinecomptransforminterpolator_decls.h"
 #include "nibsplinecomptransforminterpolator_types_NiBSplineCompTransformInterpolator.h"
@@ -104,12 +104,6 @@ void* __fastcall FUN_00a50e50(void* pThis, int, unsigned int flags)
 
 extern int g_011f4004;
 
-// @fnv 0x00a50e40
-int* __cdecl FUN_00a50e40()
-{
-    return &g_011f4004;
-}
-
 struct FUN_00a501b0_caller
 {
     bool FUN_00a501b0(NiObject*);
@@ -146,20 +140,6 @@ struct Holder
     void LoadBSplineTransform(StrArr*);
     void AppendString(StrArr*);
 };
-// @fnv 0x00a511c0
-void Holder::AppendString(StrArr* pkStrings)
-{
-    LoadBSplineTransform(pkStrings);
-    char* s = _FUN_00a7d330((const char*)g_011f4004);
-    unsigned int uiSize = *(unsigned short*)((char*)pkStrings + 0xa);
-    unsigned int uiCapacity = *(unsigned short*)((char*)pkStrings + 8);
-    if (uiSize >= uiCapacity)
-    {
-        unsigned int grow = *(unsigned short*)((char*)pkStrings + 0xe);
-        pkStrings->SetSize(uiSize + grow);
-    }
-    pkStrings->SetAt(uiSize, s);
-}
 
 struct SOut
 {

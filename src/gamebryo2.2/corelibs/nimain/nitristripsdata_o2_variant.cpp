@@ -877,19 +877,3 @@ struct StripFactoryHeader
 {
     const void* vtable;
 };
-
-// @fnv 0x00a75ec0
-NiTriBasedGeomData* __fastcall FUN_00a75ec0(NiTriBasedGeomData*)
-{
-    NiTriStripsData* p = (NiTriStripsData*)BSFadeNode::operator new(sizeof(NiTriStripsData));
-    if (p)
-    {
-        InitializeTriBasedGeomData(p);
-        p->m_usStrips = 0;
-        p->m_pusStripLengths = 0;
-        p->m_pusStripLists = 0;
-        ((StripFactoryHeader*)p)->vtable = &DAT_0109d8ac;
-        return p;
-    }
-    return 0;
-}

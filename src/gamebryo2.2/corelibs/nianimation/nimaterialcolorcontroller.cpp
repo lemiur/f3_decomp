@@ -19,21 +19,6 @@ void __cdecl FUN_00a57c80(void*);
 
 extern int DAT_01098a14;
 
-// Allocates a 0x3c-byte BSFadeNode, runs its constructor, zeroes the field at offset 0x38, sets its vtable, and returns the object or null.
-// @fnv 0x00a4b790
-void* __cdecl FUN_00a4b790()
-{
-    void* p = BSFadeNode::operator new(0x3c);
-    if (p)
-    {
-        ((void(__thiscall*)(void*))FUN_00a57c80)(p);
-        *(unsigned short*)((char*)p + 0x38) = 0;
-        *(void**)p = &DAT_01098a14;
-        return p;
-    }
-    return 0;
-}
-
 namespace fnv_00a4b880 {
 struct StrArr
 {
@@ -373,19 +358,6 @@ struct FUN_00a4b4b0_cls : StreamableBase
     void FUN_00a4b4b0(NiStreamLike* apStream);
 };
 
-// @fnv 0x00a4b4b0
-void FUN_00a4b4b0_cls::FUN_00a4b4b0(NiStreamLike* apStream)
-{
-    StreamableBase::FUN_00a57630(apStream);
-
-    if (apStream->m_uiFormatVersion < 0xa010068)
-    {
-        Source* pSource = apStream->FUN_00a63430();
-        m_spThing = new Thing(pSource);
-        m_spThing.m_pObject->Refresh();
-    }
-}
-
 namespace fnv_00a4b540 {
 struct NiObject
 {
@@ -624,22 +596,6 @@ struct S00a4b6f0
     RefObj* volatile m_ptr;
     void* Release(unsigned int);
 };
-// Sets the vtable pointer, decrements p->m_ref and calls p->f1() at zero, calls FUN_00a6d290, then conditionally deletes this.
-// @fnv 0x00a4b6f0
-void* S00a4b6f0::Release(unsigned int uiFlags)
-{
-    *(void* volatile*)this = (void*)&DAT_01098a14;
-    RefObj* p = m_ptr;
-    if (p)
-    {
-        if (InterlockedDecrement((volatile long*)&p->m_ref) == 0)
-            p->f1();
-    }
-    ((BaseB*)this)->FUN_00a6d290();
-    if (uiFlags & 1)
-        _delete(this, 0x3c);
-    return this;
-}
 
 namespace fnv_00a4b740 {
 struct CloningProcess;
@@ -657,25 +613,6 @@ struct NiMaterialColorController
     unsigned short m_uiObjectFlags;
     NiMaterialColorController* Clone(CloningProcess&);
 };
-// Allocates a new NiMaterialColorController, initializes it, copies member data from this, and returns the new object.
-// @fnv 0x00a4b740
-NiMaterialColorController* NiMaterialColorController::Clone(CloningProcess& kCloning)
-{
-    NiMaterialColorController* pkObject = (NiMaterialColorController*)BSFadeNode::operator new(0x3c);
-    if (pkObject)
-    {
-        ((NiLightColorController*)pkObject)->FUN_00a57c80();
-        *(void**)pkObject = (void*)&DAT_01098a14;
-        pkObject->m_uiObjectFlags = 0;
-    }
-    else
-    {
-        pkObject = 0;
-    }
-    ((NiAlphaController*)this)->CopyMemberData((NiAlphaController*)pkObject, kCloning);
-    pkObject->m_uiObjectFlags = m_uiObjectFlags;
-    return pkObject;
-}
 }  // namespace fnv_00a4b740
 
 struct StreamRecord

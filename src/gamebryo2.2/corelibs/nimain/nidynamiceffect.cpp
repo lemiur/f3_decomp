@@ -1,4 +1,4 @@
-// gamebryo2.2/corelibs/nimain/nidynamiceffect.cpp: EffectObject, FNVEffect (7 functions)
+// gamebryo2.2/corelibs/nimain/nidynamiceffect.cpp: EffectObject, FNVEffect (6 functions)
 #include "f3_common.h"
 #include "nidynamiceffect_decls.h"
 
@@ -24,33 +24,6 @@ void NiDynamicEffect::LoadBinary(NiStream& stream)
     }
     if (stream.m_uiNifVersion >= 0x0a00010e)
         stream.ReadUnsignedInteger();
-}
-
-// @fnv 0x00a69070
-void NiDynamicEffect::LinkObject(NiStream& stream)
-{
-    NiAVObject::LinkObject(stream);
-    if (stream.m_uiNifVersion >= 0x0a00010e)
-    {
-        unsigned int count = stream.GetLinkID();
-        while (count--)
-        {
-            NiNode* node = reinterpret_cast<NiNode*>(stream.GetLoadedObject());
-            if (node)
-            {
-                NiTListItem<NiNode*>* item = NiDynamicEffectNewListItem();
-                item->m_element = node;
-                item->m_pkPrev = 0;
-                item->m_pkNext = m_kAffectedNodes.m_pkHead;
-                if (m_kAffectedNodes.m_pkHead)
-                    m_kAffectedNodes.m_pkHead->m_pkPrev = item;
-                else
-                    m_kAffectedNodes.m_pkTail = item;
-                ++m_kAffectedNodes.m_kItemCount.m_uiCount;
-                m_kAffectedNodes.m_pkHead = item;
-            }
-        }
-    }
 }
 
 // @fnv 0x00a69320

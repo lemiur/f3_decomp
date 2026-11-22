@@ -17,16 +17,6 @@ struct FUN_00e96cd0_shell : BaseFake
     CT* m_pShaderConstantTable;
     void __thiscall ReleaseAndReset();
 };
-// @fnv 0x00e96cd0
-void __thiscall FUN_00e96cd0_shell::ReleaseAndReset()
-{
-    if (m_pShaderConstantTable)
-    {
-        m_pShaderConstantTable->Release();
-        m_pShaderConstantTable = 0;
-    }
-    FUN_00e898c0();
-}
 
 struct _D3DXCONSTANTTABLE_DESC
 {
@@ -49,14 +39,6 @@ struct NiD3DHLSLPixelShader
     FakeConstantTable00e96d10* m_pShaderConstantTable;
     unsigned int FUN_00e96d10();
 };
-// @fnv 0x00e96d10
-unsigned int NiD3DHLSLPixelShader::FUN_00e96d10()
-{
-    _D3DXCONSTANTTABLE_DESC kDesc;
-    if (!m_pShaderConstantTable)
-        return 0;
-    return m_pShaderConstantTable->GetDesc(&kDesc) < 0 ? 0 : kDesc.Constants;
-}
 
 struct FUN_00e96d40_Class
 {

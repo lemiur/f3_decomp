@@ -44,12 +44,6 @@ void NiTextureEffect::InitializePoint3()
 
 extern int g_011f5e94;
 
-// @fnv 0x00a927d0
-int* __cdecl FUN_00a927d0()
-{
-    return &g_011f5e94;
-}
-
 extern long DAT_011f5ea0;
 extern long DAT_011f5ea4;
 extern long DAT_011f5ea8;

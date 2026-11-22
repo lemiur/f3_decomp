@@ -71,15 +71,6 @@ struct ST_00a99980 : NiExtraData
 {
     ST_00a99980* FUN_00a99980(int a, int b);
 };
-// @fnv 0x00a99980
-ST_00a99980* ST_00a99980::FUN_00a99980(int a, int b)
-{
-    ((PB_00a7b2e0*)this)->FUN_00a7b2e0();
-    *(int*)this = (int)&DAT_010a0c7c;
-    *(int*)((char*)this + 0x10) = 0;
-    ((PB_00a99800*)this)->AssignPointerArray(a, b);
-    return this;
-}
 
 extern int DAT_010a0c7c;
 struct BSFadeNode

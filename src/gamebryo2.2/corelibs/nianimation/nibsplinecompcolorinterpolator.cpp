@@ -13,12 +13,6 @@ char __stdcall FUN_00a51210(char acValue)
 
 extern "C" void* g_011f4024;
 
-// @fnv 0x00a51770
-void* __cdecl FUN_00a51770()
-{
-    return &g_011f4024;
-}
-
 struct CloningProcess;
 struct FUN_00a50110_obj
 {
@@ -191,13 +185,6 @@ struct NiBSplineCompColorInterpolator : BaseDummy
 {
     void FUN_00a519b0(NiTPrimitiveArray<char*, NiTMallocInterface<char*> >*);
 };
-// @fnv 0x00a519b0
-void NiBSplineCompColorInterpolator::FUN_00a519b0(NiTPrimitiveArray<char*, NiTMallocInterface<char*> >* pkStrings)
-{
-    AppendColorACPHandleStrings(pkStrings);
-    char* pcString = _FUN_00a7d330((const char*)g_011f4024);
-    pkStrings->Add(pcString);
-}
 }  // namespace fnv_00a519b0
 
 static const float DAT_01099c2c = 3.402823466e+38f;

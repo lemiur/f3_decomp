@@ -4,12 +4,6 @@
 
 extern "C" void* g_01202780;
 
-// @fnv 0x00c2d540
-void* __cdecl FUN_00c2d540()
-{
-    return &g_01202780;
-}
-
 struct NiPSysPositionModifier
 {
     void* vfn[6];
@@ -378,17 +372,6 @@ struct NiPSysColliderManager : BaseMod
     NiPSysCollider* m_pFirstCollider;
     void FUN_00c2d630(StrArr*);
 };
-// @fnv 0x00c2d630
-void NiPSysColliderManager::FUN_00c2d630(StrArr* pkStrings)
-{
-    BaseMod::FUN_00c319e0(pkStrings);
-    char* pcString = _FUN_00a7d330(g_01202780);
-    unsigned int uiSize = pkStrings->_a;
-    if (uiSize >= pkStrings->_8)
-        pkStrings->SetSize(uiSize + pkStrings->_e);
-    pkStrings->SetAt(uiSize, pcString);
-    m_pFirstCollider->GetViewerStrings(pkStrings);
-}
 }  // namespace fnv_00c2d630
 
 struct Owner

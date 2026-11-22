@@ -1,4 +1,4 @@
-// gamebryo2.2/corelibs/nimain/niplane.cpp: NiSphere, NiPlane (4 functions)
+// gamebryo2.2/corelibs/nimain/niplane.cpp: NiSphere, NiPlane (3 functions)
 #include "niplane_decls.h"
 
 // Constructs a NiPlane with normal set to NiPoint3::ZERO and constant set to 0.0f.
@@ -12,14 +12,6 @@ void NiSphere::LoadBinary(NiStream& stream)
 {
     center.LoadBinary(stream);
     stream.input->Read(&radius);
-}
-
-// Saves the sphere's center and radius to the stream's output.
-// @fnv 0x00eb5410
-void NiSphere::SaveBinary(NiStream& stream)
-{
-    center.SaveBinary(stream);
-    stream.output->Write(&radius);
 }
 
 extern "C" unsigned int __cdecl strlen(const char*);

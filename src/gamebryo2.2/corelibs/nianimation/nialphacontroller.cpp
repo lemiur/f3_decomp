@@ -1,4 +1,4 @@
-// gamebryo2.2/corelibs/nianimation/nialphacontroller.cpp: NiAlphaController, Holder, FloatCtlr (9 functions)
+// gamebryo2.2/corelibs/nianimation/nialphacontroller.cpp: NiAlphaController, Holder, FloatCtlr (7 functions)
 #include "f3_common.h"
 #include "nialphacontroller_decls.h"
 
@@ -22,12 +22,6 @@ void __thiscall FUN_00a569f0_shell::FUN_00a569f0(float& fValue)
 }
 
 extern int g_011f4084;
-
-// @fnv 0x00a56a80
-int* __cdecl FUN_00a56a80()
-{
-    return &g_011f4084;
-}
 
 struct BSFadeNode
 {
@@ -101,17 +95,6 @@ template <class T, class Alloc> struct NiTPrimitiveArray
 };
 void __stdcall FUN_00a576c0(NiTPrimitiveArray<char*, NiTMallocInterface<char*> >*);
 char* __cdecl _FUN_00a7d330(const char*);
-// Grows pkStrings if full, then appends the string returned by _FUN_00a7d330(g_011f4084) at the current size index.
-// @fnv 0x00a56b60
-void __stdcall FUN_00a56b60(NiTPrimitiveArray<char*, NiTMallocInterface<char*> >* pkStrings)
-{
-    FUN_00a576c0(pkStrings);
-    char* pszStr = _FUN_00a7d330((const char*)g_011f4084);
-    unsigned int uiSize = pkStrings->m_usSize;
-    if (uiSize >= pkStrings->m_usMaxSize)
-        pkStrings->SetSize(uiSize + pkStrings->m_usGrowBy);
-    pkStrings->SetAt(uiSize, pszStr);
-}
 
 extern int DAT_0109a76c;
 struct NiNew

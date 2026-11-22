@@ -87,12 +87,6 @@ void NiPSysData_StandIn::FUN_00c24cc0(unsigned short usParticle)
 
 extern const char* const g_01202680_arg1;
 
-// @fnv 0x00c24e90
-const char* const* __cdecl FUN_00c24e90()
-{
-    return &g_01202680_arg1;
-}
-
 extern int DAT_010be254;
 void _NiFreeAlias(void*);
 void _delete(void*, unsigned int);
@@ -336,29 +330,6 @@ struct NiPSysData_CountView : NiPSysData
 {
     unsigned int FUN_00c24ea0();
 };
-// @fnv 0x00c24ea0
-unsigned int NiPSysData_CountView::FUN_00c24ea0()
-{
-    unsigned short count = m_usNumActive;
-    if (count == 0)
-    {
-        unsigned short first = m_usActive;
-        m_usNumParticles = first;
-        if (first < m_usVertices)
-        {
-            return (unsigned short)(first + m_usNumActive++);
-        }
-    }
-    else
-    {
-        unsigned short base = m_usNumParticles;
-        if (m_usNumParticles + m_usNumActive < m_usVertices)
-        {
-            return (unsigned short)(base + m_usNumActive++);
-        }
-    }
-    return 0xffff;
-}
 
 struct NiParticlesDataWriter : NiParticlesData
 {

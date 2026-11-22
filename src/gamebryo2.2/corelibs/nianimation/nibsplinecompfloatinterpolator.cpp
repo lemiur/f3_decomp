@@ -1,4 +1,4 @@
-// gamebryo2.2/corelibs/nianimation/nibsplinecompfloatinterpolator.cpp: NiBSplineCompFloatInterpolator, FObj (10 functions)
+// gamebryo2.2/corelibs/nianimation/nibsplinecompfloatinterpolator.cpp: NiBSplineCompFloatInterpolator, FObj (8 functions)
 #include "f3_common.h"
 #include "nibsplinecompfloatinterpolator_decls.h"
 // Calls the base NiBSplineFloatInterpolator::LoadBinary and then reads a value from the stream input into a member.
@@ -10,12 +10,6 @@ void NiBSplineCompFloatInterpolator::LoadBinary(NiStream& stream)
 }
 
 extern int g_011f401c;
-
-// @fnv 0x00a51520
-int* __cdecl FUN_00a51520()
-{
-    return &g_011f401c;
-}
 
 struct FUN_00a52d20_shell
 {
@@ -79,20 +73,6 @@ struct FUN_00a516e0_shell : BaseX
 {
     void __thiscall AppendString(StrArr*);
 };
-// Calls the base handler, gets a string from g_011f401c, grows pkStrings if full, and stores the string at the next free index.
-// @fnv 0x00a516e0
-void __thiscall FUN_00a516e0_shell::AppendString(StrArr* pkStrings)
-{
-    SerializeToStrings(pkStrings);
-    char* pszString = _FUN_00a7d330((const char*)g_011f401c);
-    unsigned int uiSize = pkStrings->m_usSize;
-    unsigned int uiMax = pkStrings->m_usMaxSize;
-    if (uiSize >= uiMax)
-    {
-        pkStrings->SetSize(uiSize + pkStrings->m_usGrowBy);
-    }
-    pkStrings->SetAt(uiSize, pszString);
-}
 
 struct FUN_00a50b30_shell
 {

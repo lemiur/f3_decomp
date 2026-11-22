@@ -5,12 +5,6 @@
 struct NiRTTI;
 extern NiRTTI g_01202798;
 
-// @fnv 0x00c2efe0
-const NiRTTI* __cdecl FUN_00c2efe0()
-{
-    return &g_01202798;
-}
-
 extern "C" const void* g_012027a0;
 
 // @fnv 0x00c2f3d0
@@ -159,18 +153,6 @@ extern int DAT_010c03cc;
 inline void* __cdecl operator new(unsigned int, void* p)
 {
     return p;
-}
-// @fnv 0x00c2f3a0
-FUN_00c32d80* __cdecl FUN_00c2f3a0()
-{
-    FUN_00c32d80* p = (FUN_00c32d80*)BSFadeNode::operator new(0x40);
-    if (p)
-    {
-        new (p) FUN_00c32d80();
-        *(int*)p = (int)&DAT_010c03cc;
-        return p;
-    }
-    return 0;
 }
 
 struct StrArr
@@ -638,23 +620,6 @@ struct Host2f440
     void FUN_00c32de0(FUN_00c32d80* obj, int arg);
     FUN_00c32d80* CreateAndInit(int arg);
 };
-// Allocates a 0x40-byte object, constructs it with a vtable, initializes it via FUN_00c32de0 with arg, and returns it (or null on allocation failure).
-// @fnv 0x00c2f440
-FUN_00c32d80* Host2f440::CreateAndInit(int arg)
-{
-    FUN_00c32d80* p = (FUN_00c32d80*)FUN_00aa13e0(0x40);
-    if (p)
-    {
-        new (p) FUN_00c32d80;
-        *(int**)p = &DAT_010c03cc;
-    }
-    else
-    {
-        p = 0;
-    }
-    FUN_00c32de0(p, arg);
-    return p;
-}
 
 void __cdecl FUN_00c31670();
 

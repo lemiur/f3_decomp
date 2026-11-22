@@ -123,11 +123,6 @@ void __fastcall FUN_00e902f0(char* self, int, bool v)
 
 struct GlobalObjectO2_00a7b610;
 extern GlobalObjectO2_00a7b610 g_0126f9f0;
-// @fnv 0x00e90550
-GlobalObjectO2_00a7b610* FUN_00e90550()
-{
-    return &g_0126f9f0;
-}
 
 extern "C" void __cdecl FUN_00e87a50();
 
@@ -244,11 +239,6 @@ char __stdcall FUN_00e91710(int a)
 
 struct GlobalObjectO2_00a7b610;
 extern GlobalObjectO2_00a7b610 g_0126f9f8;
-// @fnv 0x00e91740
-GlobalObjectO2_00a7b610* FUN_00e91740()
-{
-    return &g_0126f9f8;
-}
 
 struct FUN_00e90e40_Class : NiDX9RenderState
 {
@@ -2428,13 +2418,6 @@ int FUN_00e68ef0(void* tex, void* renderer);
 
 extern RendererStub* DAT_011f4748;
 
-static inline bool IsPowerOfTwo(unsigned int v)
-{
-    if (v == 0)
-        return false;
-    return (v & (v - 1)) == 0;
-}
-
 struct FUN_00e90b10_shell
 {
     int unk00;
@@ -2444,58 +2427,6 @@ struct FUN_00e90b10_shell
     void* GetTextureData(Texture* pkTexture, bool* pbChanged, bool* pbMipmap, bool* pbNonPow2);
 };
 
-// @fnv 0x00e90b10
-void* FUN_00e90b10_shell::GetTextureData(Texture* pkTexture, bool* pbChanged, bool* pbMipmap, bool* pbNonPow2)
-{
-    *pbChanged = false;
-    *pbMipmap = false;
-    *pbNonPow2 = false;
-    if (!pkTexture)
-        return 0;
-
-    RendererStub* pkR = DAT_011f4748;
-    pkR->Lock();
-    TexData* pkData = pkTexture->m_pTextureRendererData;
-    if (!pkData)
-    {
-        NiObject* pkSrc = pkTexture->DynamicCast(&DAT_011f444c);
-        if (pkSrc)
-        {
-            pkData = (TexData*)FUN_00e68ef0(pkSrc, m_pOwnerShader);
-            *pbChanged = true;
-        }
-        else
-        {
-            pkR->Unlock();
-            return 0;
-        }
-    }
-    pkR->Unlock();
-
-    *pbNonPow2 = (IsPowerOfTwo(pkData->m_uiImageWidth) && IsPowerOfTwo(pkData->m_uiImageHeight)) ? false : true;
-
-    TexData* pkOther = pkData->GetAsRendered();
-    if (!pkOther)
-        pkOther = pkData->GetAsDynamic();
-    if (pkOther)
-        return pkOther->GetD3DTexture();
-
-    TexData* pkSource = pkData->GetAsSourceTexture();
-    if (pkSource)
-    {
-        if (!pkData->GetD3DTexture())
-        {
-            pkSource->Update();
-            *pbChanged = true;
-        }
-        else if (!pkTexture->m_bIsStatic)
-        {
-            pkSource->Update();
-        }
-    }
-    *pbMipmap = pkData->GetLevels() > 1;
-    return pkData->GetD3DTexture();
-}
 }  // namespace fnv_00e90b10
 
 namespace fnv_00e91590 {
@@ -4032,36 +3963,6 @@ struct FnvRendererOwner
     bool IsObjectStatic(FnvObject* obj, void* arg2, void* arg3);
 };
 
-// @fnv 0x00e90c70
-bool FnvRendererOwner::IsObjectStatic(FnvObject* obj, void* arg2, void* arg3)
-{
-    if (!obj)
-        return false;
-    FnvRenderGlobal* pRenderGlobal = g_pFnvRenderGlobal;
-    pRenderGlobal->m_kCriticalSection.Enter();
-    FnvData* data = obj->m_pUserData;
-    if (!data)
-    {
-        FnvObject* found = obj->DynamicCast(&g_kFnvDataRTTI);
-        if (found)
-            data = (FnvData*)FUN_00e68ef0(found, m_pBinaryStream);
-        else
-        {
-            pRenderGlobal->m_kCriticalSection.Leave();
-            return false;
-        }
-    }
-    pRenderGlobal->m_kCriticalSection.Leave();
-    FnvData* p = data->m_vA4();
-    if (!p)
-        p = data->m_vAC();
-    if (p)
-    {
-        bool bStatic = p->m_v9C() != 0;
-        return bStatic;
-    }
-    return true;
-}
 }  // namespace fnv_00e90c70
 
 struct StatePair
@@ -4549,11 +4450,6 @@ struct NiPersistentSrcTextureRendererData_s
     void FUN_00a984b0(NiStream&);
     void FUN_00e91730(NiStream& stream);
 };
-// @fnv 0x00e91730
-void NiPersistentSrcTextureRendererData_s::FUN_00e91730(NiStream& stream)
-{
-    FUN_00a984b0(stream);
-}
 
 extern "C" int __cdecl rand();
 extern const double DAT_01029790;

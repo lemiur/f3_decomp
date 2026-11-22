@@ -18,12 +18,6 @@ void __thiscall FUN_00a893b0_shell::SetValues(int aiValue0, int aiValue1, int ai
 
 extern void* g_011f5b68;
 
-// @fnv 0x00a893f0
-void* __cdecl FUN_00a893f0()
-{
-    return &g_011f5b68;
-}
-
 extern "C" void __cdecl _FUN_00a7b300();
 extern void __cdecl _delete(void*, unsigned int);
 extern int DAT_0109eccc;
@@ -32,16 +26,6 @@ struct NiColorExtraData_shell
 {
     NiColorExtraData_shell* __thiscall Destroy(unsigned int flags);
 };
-
-// @fnv 0x00a89560
-NiColorExtraData_shell* __thiscall NiColorExtraData_shell::Destroy(unsigned int flags)
-{
-    *reinterpret_cast<int**>(this) = &DAT_0109eccc;
-    _FUN_00a7b300();
-    if (flags & 1)
-        _delete(this, 0x1c);
-    return this;
-}
 
 struct NiStream;
 
@@ -237,29 +221,6 @@ class ClaimCls
     void WriteColorToStream(StreamShell& kStream);
 };
 
-// Writes a pointer obtained from g_011f5b68 and the result of ToString("Color = ") into kStream, growing the stream when its position reaches its size.
-// @fnv 0x00a895c0
-void ClaimCls::WriteColorToStream(StreamShell& kStream)
-{
-    FUN_00a7b580(&kStream);
-    void* p = FUN_00a7d330(g_011f5b68);
-    unsigned int uiPos = kStream.m_usPos;
-    unsigned int uiSize = kStream.m_usSize;
-    if (uiPos >= uiSize)
-    {
-        kStream.FUN_0096ad30(uiPos + kStream.m_usAdd);
-    }
-    kStream.FUN_0096ae90(uiPos, &p);
-    p = m_sink.ToString("Color = ");
-    uiPos = kStream.m_usPos;
-    uiSize = kStream.m_usSize;
-    if (uiPos >= uiSize)
-    {
-        kStream.FUN_0096ad30(uiPos + kStream.m_usAdd);
-    }
-    kStream.FUN_0096ae90(uiPos, &p);
-}
-
 #include <stddef.h>
 struct NiExtraData_StandIn
 {
@@ -273,38 +234,3 @@ extern int DAT_011a9bd0;
 extern int DAT_011a9bd4;
 extern int DAT_011a9bd8;
 extern int DAT_011a9bdc;
-
-// Obtains a 0x1c byte block, calls a method on it, writes a global pointer and four global values, and returns it.
-// @fnv 0x00a89490
-unsigned int* __cdecl FUN_00a89490()
-{
-    unsigned int* ptr = (unsigned int*)FUN_00aa13e0(0x1c);
-
-    if (ptr != NULL)
-    {
-        ((NiExtraData_StandIn*)ptr)->FUN_00a7b2e0();
-
-        ptr[0] = (unsigned int)&DAT_0109eccc;
-
-        float f[4];
-        f[0] = 0.0f;
-        f[1] = 0.0f;
-        f[2] = 0.0f;
-        f[3] = 0.0f;
-
-        volatile float* vf = (volatile float*)&ptr[3];
-        vf[0] = f[0];
-        vf[1] = f[1];
-        vf[2] = f[2];
-        vf[3] = f[3];
-
-        ptr[3] = DAT_011a9bd0;
-        ptr[4] = DAT_011a9bd4;
-        ptr[5] = DAT_011a9bd8;
-        ptr[6] = DAT_011a9bdc;
-
-        return ptr;
-    }
-
-    return NULL;
-}

@@ -8,12 +8,6 @@ struct GlobalObjectO2_00a7b610
 
 extern GlobalObjectO2_00a7b610 g_011f5f40;
 
-// @fnv 0x00a9a420
-GlobalObjectO2_00a7b610* __cdecl FUN_00a9a420()
-{
-    return &g_011f5f40;
-}
-
 struct NiFloatExtraData
 {
     void* m_ppVirtualMethodTable;
@@ -179,28 +173,3 @@ struct FUN_00a9a520_shell : A89C70Base
 
     void AppendViewerStrings(A89C70StringArray* strings);
 };
-
-// @fnv 0x00a9a520
-void FUN_00a9a520_shell::AppendViewerStrings(A89C70StringArray* strings)
-{
-    GetViewerStrings(strings);
-
-    char* value =
-        _FUN_00a7d330(reinterpret_cast<GlobalObjectO2_00a7b610*>(*reinterpret_cast<unsigned int*>(&g_011f5f40)));
-
-    unsigned int index = strings->m_nextIndex;
-
-    if (index >= strings->m_pRayCursor)
-        strings->SetSize(index + strings->m_growSize);
-
-    strings->SetAt(index, value);
-
-    value = FUN_00a7d550("m_fValue", m_fValue);
-
-    index = strings->m_nextIndex;
-
-    if (index >= strings->m_pRayCursor)
-        strings->SetSize(index + strings->m_growSize);
-
-    strings->SetAt(index, value);
-}

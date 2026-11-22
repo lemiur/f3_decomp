@@ -4,12 +4,6 @@
 
 extern char const* const g_011f5f14_arg1;
 
-// @fnv 0x00a9b1b0
-char const* const* __cdecl FUN_00a9b1b0()
-{
-    return &g_011f5f14_arg1;
-}
-
 struct NiGeometryData
 {
     enum Consistency
@@ -88,18 +82,6 @@ struct StrArr
 };
 void __stdcall FUN_00a80e70(StrArr*);
 char* _FUN_00a7d330(const char*);
-// Grows the StrArr if it is full, then appends the string returned by _FUN_00a7d330(g_011f5f14_arg1) at the current size.
-// @fnv 0x00a9b2e0
-void __stdcall FUN_00a9b2e0(StrArr* apStrArr)
-{
-    FUN_00a80e70(apStrArr);
-    char* psz = _FUN_00a7d330(g_011f5f14_arg1);
-    unsigned int uiSize = apStrArr->m_usSize;
-    unsigned int uiMax = apStrArr->m_usMax;
-    if (uiSize >= uiMax)
-        apStrArr->SetSize(apStrArr->m_usGrow + uiSize);
-    apStrArr->SetAt(uiSize, psz);
-}
 
 void* __cdecl FUN_00aa13e0(unsigned int size);
 extern int DAT_010a11d4;

@@ -1,4 +1,4 @@
-// gamebryo2.2/corelibs/nimain/niintegerextradata.cpp: NiIntegerExtraData, ExtraDataOwner (7 functions)
+// gamebryo2.2/corelibs/nimain/niintegerextradata.cpp: NiIntegerExtraData, ExtraDataOwner (6 functions)
 #include "f3_common.h"
 #include "niintegerextradata_decls.h"
 // Calls NiExtraData::LoadBinary then reads m_iValue from the stream.
@@ -25,13 +25,6 @@ struct FUN_00a99c70_shell
     int* m_val;
     void __thiscall FUN_00a99c70();
 };
-
-// @fnv 0x00a99c70
-void __thiscall FUN_00a99c70_shell::FUN_00a99c70()
-{
-    m_val = &DAT_010a0d24;
-    FUN_00a7b300();
-}
 
 struct BSFadeNode
 {

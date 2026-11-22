@@ -112,12 +112,6 @@ struct FUN_00a7e610_shell : NiBillboardNode
 {
     void FUN_00a7e610(NiCullingProcess* process);
 };
-// @fnv 0x00a7e610
-void FUN_00a7e610_shell::FUN_00a7e610(NiCullingProcess* process)
-{
-    ((FUN_00a7de40_shell*)this)->FUN_00a7de40(*(NiCullingProcess**)((char*)process + 0xc));
-    ((DummyNode*)this)->FUN_00a5dbe0(process);
-}
 
 struct NiAVObject
 {

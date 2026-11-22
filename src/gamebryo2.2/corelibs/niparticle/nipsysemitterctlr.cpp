@@ -1,4 +1,4 @@
-// gamebryo2.2/corelibs/niparticle/nipsysemitterctlr.cpp: NiPSysEmitterCtlr, NiBoolData, ThisStruct, Host and more (39 functions)
+// gamebryo2.2/corelibs/niparticle/nipsysemitterctlr.cpp: NiPSysEmitterCtlr, NiBoolData, ThisStruct, Host and more (34 functions)
 #include "f3_common.h"
 #include "nipsysemitterctlr_types_NiPSysEmitterCtlr.h"
 #include "nipsysemitterctlr_types_NiStream.h"
@@ -149,24 +149,9 @@ void __fastcall FUN_00c1ba30(FUN_00c1ba30* self, int unused)
 }
 
 extern const char* const g_01203340_arg1;
-// @fnv 0x00c1c2f0
-const char* const* __cdecl FUN_00c1c2f0()
-{
-    return &g_01203340_arg1;
-}
 
 extern int DAT_011ae754;
 extern int DAT_011ae758;
-
-// @fnv 0x00c1ba50
-const char* const* __stdcall FUN_00c1ba50(unsigned short usIndex)
-{
-    if (usIndex == 0)
-        return reinterpret_cast<const char* const*>(DAT_011ae754);
-    int r = (usIndex != 1) - 1;
-    r = r & DAT_011ae758;
-    return reinterpret_cast<const char* const*>(r);
-}
 
 struct NiPSysEmitterCtlr_shell : NiPSysEmitterCtlr
 {
@@ -483,16 +468,6 @@ struct S_00c1c300
     void FUN_00c1c300();
     void FUN_00c312a0();
 };
-// Frees the pointer at offset 0x50, decrements the ref count of the interpolator at offset 0x40, then calls FUN_00c312a0.
-// @fnv 0x00c1c300
-void S_00c1c300::FUN_00c1c300()
-{
-    _NiFreeAlias(*(void**)((char*)this + 0x50));
-    NiInterpolator* p = *(NiInterpolator**)((char*)this + 0x40);
-    if (p)
-        p->DecRefCount();
-    FUN_00c312a0();
-}
 
 void __cdecl _NiFreeAlias(void*);
 void __cdecl _delete(void*, unsigned int);
@@ -680,28 +655,6 @@ struct FUN_00c1ce70_shell : NiPSysEmitterCtlr
 {
     void FUN_00c1ce70(StrArr* pkStrings);
 };
-
-// @fnv 0x00c1ce70
-void FUN_00c1ce70_shell::FUN_00c1ce70(StrArr* pkStrings)
-{
-    AppendModifierInfo(pkStrings);
-    char* pcString = _FUN_00a7d330((char*)g_01203340_arg1);
-    unsigned int uiIndex = *(unsigned short*)((char*)pkStrings + 0xa);
-    unsigned int uiSize = *(unsigned short*)((char*)pkStrings + 8);
-    if (uiIndex >= uiSize)
-    {
-        unsigned int uiGrow = *(unsigned short*)((char*)pkStrings + 0xe);
-        pkStrings->SetSize(uiGrow + uiIndex);
-    }
-    pkStrings->SetAt(uiIndex, pcString);
-    NiInterpolator* pkInterp = *(NiInterpolator**)((char*)this + 0x40);
-    if (pkInterp)
-    {
-        void** vtbl = *(void***)pkInterp;
-        void(__thiscall * fn)(NiInterpolator*, StrArr*) = (void(__thiscall*)(NiInterpolator*, StrArr*))vtbl[0x60 / 4];
-        fn(pkInterp, pkStrings);
-    }
-}
 
 extern int DAT_0109a864;
 
@@ -1017,11 +970,6 @@ class FUN_00c1c280_cls : public BC1C280Base
     BC1C280Tracker m_kTracker;
     BC1C280Links m_kLinks;
 };
-
-// Constructs the object by forwarding pcName to the BC1C280Base base-class constructor.
-// @fnv 0x00c1c280
-FUN_00c1c280_cls::FUN_00c1c280_cls(const char* pcName) throw() : BC1C280Base(pcName)
-{}
 
 class NiInterpolatorC1B
 {

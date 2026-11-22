@@ -1,13 +1,6 @@
-// gamebryo2.2/corelibs/niparticle/nipsyscolormodifier.cpp: NiPSysColorModifier, Host, NiPSysColorModifierLocal (9 functions)
+// gamebryo2.2/corelibs/niparticle/nipsyscolormodifier.cpp: NiPSysColorModifier, Host, NiPSysColorModifierLocal (7 functions)
 #include "f3_common.h"
 #include "NiPSysColorModifier.h"
-
-// @fnv 0x00C2CF90
-void NiPSysColorModifier::LoadBinary(NiStream& kStream)
-{
-    NiPSysModifier::LoadBinary(kStream);
-    kStream.ResetStreamState();
-}
 
 extern "C" void* g_01202778;
 
@@ -218,28 +211,6 @@ struct S00c2d240
 };
 
 extern "C" void* __cdecl Alloc00c2d240(unsigned int);
-
-// @fnv 0x00c2d240
-void* S00c2d240::CreateAndInit(int arg)
-{
-    void* pObject = Alloc00c2d240(0x24);
-    if (pObject)
-    {
-        ((Ctor00c2d240*)pObject)->Ctor();
-        *(void**)pObject = (void*)0x010bffe4;
-        *(volatile int*)((char*)pObject + 0x18) = 0;
-        *(volatile float*)((char*)pObject + 0x1c) = 0.0f;
-        *(volatile float*)((char*)pObject + 0x20) = 0.0f;
-    }
-    else
-    {
-        pObject = 0;
-    }
-    this->FUN_00c31780(pObject, arg);
-    void* tmp = *(void**)((char*)this + 0x18);
-    ((HostLike*)pObject)->SetColorData(tmp);
-    return pObject;
-}
 
 struct ColorDataStandIn
 {

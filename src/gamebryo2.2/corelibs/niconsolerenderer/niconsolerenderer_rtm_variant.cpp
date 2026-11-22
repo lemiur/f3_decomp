@@ -17053,7 +17053,6 @@ struct Block { int unk0,unk4;unsigned int count;StripMesh* meshes; };
 struct Vis { unsigned char active,nextState,unk2,unk3; };
 extern int DAT_011f49d8;
 struct Shape {virtual void v0();virtual void v4();virtual void* GetRTTI();int unk4,unk8;Block* block;int unk10,unk14,unk18,unk1c,unk20,unk24,unk28,unk2c,unk30,unk34;Vis* visibility; bool IsKind(); };
-bool IsExact(void* type,Shape* p) { if(p) return p->GetRTTI()==type; return false; }
 struct Flags {int unk0,unk4,unk8;unsigned short unkc,flags;};
 struct StripState {
  virtual void v0();
@@ -22297,12 +22296,6 @@ void __cdecl cb_e79f40();
 void __cdecl cb_e7a0a0();
 void __cdecl cb_e7cd40();
 struct CallbackArray { void* vtable; int* data; unsigned short capacity,size,used,grow; __declspec(noinline) void SetAt(unsigned int, int&); };
-void CallbackArray::SetAt(unsigned int index,int& value) {
- if(index>=size) {size=(unsigned short)(index+1);if(value!=0)++used;}
- else if(value!=0) {if(data[index]==0)++used;}
- else if(data[index]!=0)--used;
- data[index]=value;
-}
 struct CallbackBucket { int key; CallbackArray callbacks; };
 struct CallbackRegistry { int unk00; CallbackBucket** buckets; };
 extern void* DAT_0126f550;
@@ -25025,113 +25018,6 @@ struct Renderer {unsigned int unk0;unsigned int unk4;unsigned int unk8;unsigned 
 
 v634=DAT_011a946c;v640=DAT_011a9478;v64c=DAT_011a946c;v658=DAT_011a9478;unk684=0.1f;}
 void FUN_00e6b990();};
-
-// @fnv 0x00e6b990
-void Renderer::FUN_00e6b990(){unk288=0;FUN_00ec61c0(&unk28c,0,0x130);
-
-unk5e4=1.0f;unk3bc=0;b3c4=false;ResetColors();unk688=100.0f;FUN_00ec61c0(&matrix,0,64);matrix.data[0]=matrix.data[5]=matrix.data[10]=matrix.data[15]=1.0f;unk620=0;unk624=0;memset(&unk6cc,0,24);unk6cc=0;unk6d0=0;unk6d4=1;unk6d8=1;unk6dc=0.0f;unk6e0=1.0f;
-
-for(unsigned int i=0;i<4;++i){states[i].Clear();counters[i]=0;refs[i].Clear();}
-
-unk96c=unk95c=unk94c=0.0f;unk97c=1.0f;unk880=22;unk888=0;unk88c=0;unk8bc=0;unk8c0=0;unk8c4=0;unk8b8=0;unk8c8=0;unk8ac=0;unk8b0=0;unk8b4=0;unka80=0;unka84=0;unka88=0;unka90=0;wA8c=0;unka94=0;unk280=0;unk284=0;FUN_00ec61c0(DAT_0126efd8,0,118);
-
-DAT_0126efd8[20]=24;
-
-DAT_0126efd8[21]=32;
-
-DAT_0126efd8[22]=32;
-
-DAT_0126efd8[23]=16;
-
-DAT_0126efd8[24]=16;
-
-DAT_0126efd8[25]=16;
-
-DAT_0126efd8[26]=16;
-
-DAT_0126efd8[27]=8;
-
-DAT_0126efd8[28]=8;
-
-DAT_0126efd8[29]=16;
-
-DAT_0126efd8[30]=16;
-
-DAT_0126efd8[31]=32;
-
-DAT_0126efd8[32]=32;
-
-DAT_0126efd8[33]=32;
-
-DAT_0126efd8[34]=32;
-
-DAT_0126efd8[35]=32;
-
-DAT_0126efd8[36]=64;
-
-DAT_0126efd8[40]=16;
-
-DAT_0126efd8[41]=8;
-
-DAT_0126efd8[50]=8;
-
-DAT_0126efd8[51]=16;
-
-DAT_0126efd8[52]=8;
-
-DAT_0126efd8[60]=16;
-
-DAT_0126efd8[61]=16;
-
-DAT_0126efd8[62]=32;
-
-DAT_0126efd8[63]=32;
-
-DAT_0126efd8[64]=32;
-
-DAT_0126efd8[67]=32;
-
-DAT_0126efd8[70]=16;
-
-DAT_0126efd8[71]=32;
-
-DAT_0126efd8[73]=16;
-
-DAT_0126efd8[75]=32;
-
-DAT_0126efd8[77]=32;
-
-DAT_0126efd8[79]=32;
-
-DAT_0126efd8[80]=16;
-
-DAT_0126efd8[82]=32;
-
-DAT_0126efd8[83]=32;
-
-DAT_0126efd8[81]=16;
-
-DAT_0126efd8[101]=16;
-
-DAT_0126efd8[102]=32;
-
-DAT_0126efd8[110]=64;
-
-DAT_0126efd8[111]=16;
-
-DAT_0126efd8[112]=32;
-
-DAT_0126efd8[113]=64;
-
-DAT_0126efd8[114]=32;
-
-DAT_0126efd8[115]=64;
-
-DAT_0126efd8[116]=128;
-
-DAT_0126efd8[117]=16;
-
-}
 
 }
 struct NiRTTIStub { const char* m_pcName; const NiRTTIStub* m_pBaseRTTI; };

@@ -2933,12 +2933,6 @@ struct A170Node
     A170Node* m_pListObject;
     A170Obj* m_element;
 };
-inline A170Obj* const& A170GetNext(A170Node*& pos)
-{
-    A170Obj* const& elem = pos->m_element;
-    pos = pos->m_pNext;
-    return elem;
-}
 
 struct A170Lock
 {
@@ -2973,37 +2967,6 @@ struct FUN_00a5a170_cls
     void FUN_00a5a170(A170Set* a1, bool a2, A170Set** out);
 };
 
-// Copies elements with index <= 7 from the internal list into a new or existing A170Set, optionally allocating a new set first.
-// @fnv 0x00a5a170
-void FUN_00a5a170_cls::FUN_00a5a170(A170Set* apSource, bool abAllocate, A170Set** apResult)
-{
-    if (!m_2c)
-    {
-        *apResult = apSource;
-        return;
-    }
-    DAT_011f42a0.FUN_0040fbf0(0);
-    A170Set* result;
-    if (abAllocate)
-    {
-        void* p = DAT_011f6238.FUN_00aa3e40(0x1c);
-        result = p ? ((A170Set*)p)->FUN_00a89810(apSource) : 0;
-    }
-    else
-    {
-        result = apSource;
-    }
-    A170Ptr* slots = (A170Ptr*)result;
-    A170Node* node = m_24;
-    while (node)
-    {
-        A170Obj* pElement = A170GetNext(node);
-        if (pElement && pElement->GetIndex() <= 7)
-            slots[pElement->GetIndex()] = pElement;
-    }
-    DAT_011f42a0.Unlock();
-    *apResult = result;
-}
 }  // namespace fnv_00a5a170
 
 // @f3twin 0x00a72c10 of 0x008dae70

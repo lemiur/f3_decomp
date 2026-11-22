@@ -35,12 +35,6 @@ extern "C"
     extern const void* g_01202708;
 }
 
-// @fnv 0x00c2a9b0
-const void* __cdecl FUN_00c2a9b0()
-{
-    return &g_01202708;
-}
-
 void __cdecl FUN_00c31750(void);
 void __cdecl _delete(void*, unsigned int);
 struct FUN_00c2a9c0_Holder
@@ -254,28 +248,6 @@ struct FUN_00c2af80_Obj
 {
     void __thiscall FUN_00c2af80(NiStream* stream);
 };
-
-// @fnv 0x00c2af80
-void __thiscall FUN_00c2af80_Obj::FUN_00c2af80(NiStream* stream)
-{
-    reinterpret_cast<FUN_00c322b0_Obj*>(this)->FUN_00c322b0(stream);
-
-    FUN_00c2af80_Array* array = reinterpret_cast<FUN_00c2af80_Array*>(stream);
-
-    void* item = FUN_00a7d330(const_cast<void*>(g_01202708));
-
-    unsigned int count = array->unk0A;
-    if (count >= array->unk08)
-        array->FUN_0096ad30(array->unk0E + count);
-    array->FUN_0096ae90(count, &item);
-
-    item = reinterpret_cast<FUN_00a59af0_Point*>(reinterpret_cast<char*>(this) + 0x30)->FUN_00a59af0("Direction");
-
-    count = array->unk0A;
-    if (count >= array->unk08)
-        array->FUN_0096ad30(array->unk0E + count);
-    array->FUN_0096ae90(count, &item);
-}
 
 struct Vec3
 {

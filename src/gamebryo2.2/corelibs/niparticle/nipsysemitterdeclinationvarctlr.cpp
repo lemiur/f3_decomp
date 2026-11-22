@@ -3,12 +3,6 @@
 
 extern "C" void* g_01202750;
 
-// @fnv 0x00c2b8b0
-void* __cdecl FUN_00c2b8b0()
-{
-    return &g_01202750;
-}
-
 struct NiPSysModifierFloatCtlr
 {
     char _pad[0x24];
@@ -67,14 +61,6 @@ struct StrArr
 };
 void __stdcall FUN_00c32f60(StrArr* pArr);
 char* FUN_00a7d330(char* s);
-
-// @fnv 0x00c2b920
-void __stdcall FUN_00c2b920(StrArr* pStringArray)
-{
-    FUN_00c32f60(pStringArray);
-    char* s = FUN_00a7d330((char*)g_01202750);
-    pStringArray->Add(s);
-}
 
 extern int DAT_010bfb54;
 

@@ -29,11 +29,6 @@ void* __fastcall FUN_00a57c20(void* self, int, unsigned short usIndex)
 }
 
 extern const char* const g_011f3f88_arg1;
-// @fnv 0x00a57ca0
-const char* const* FUN_00a57ca0()
-{
-    return &g_011f3f88_arg1;
-}
 
 namespace fnv_00a57cb0 {
 class NiRTTI;
@@ -54,16 +49,6 @@ struct NiPoint3InterpolatorStandIn
 };
 typedef void(__thiscall* GetPoint3Fn)(void*, NiPoint3*);
 
-// Casts pkInterp to a NiPoint3 interpolator, reads a NiPoint3 from self via a virtual call, and passes it to the interpolator.
-// @fnv 0x00a57cb0
-void __fastcall FUN_00a57cb0(void* self, int, NiObject* pkInterp, int)
-{
-    NiPoint3InterpolatorStandIn* pkPoint3Interp =
-        !pkInterp ? 0 : (NiPoint3InterpolatorStandIn*)pkInterp->DynamicCast((const NiRTTI*)&g_011f3f70);
-    NiPoint3 kValue;
-    (*(GetPoint3Fn**)self)[0xec / 4](self, &kValue);
-    pkPoint3Interp->FUN_00a494b0(kValue);
-}
 }  // namespace fnv_00a57cb0
 
 struct ActorCombatGroup;
@@ -79,17 +64,6 @@ typedef NiTArray<ActorCombatGroup*, NiTMallocInterface<ActorCombatGroup*> > Comb
 extern const char* const g_011f3f88_arg1;
 void __stdcall FUN_00a390a0(CombatGroupArray* a);
 ActorCombatGroup* __cdecl FUN_00a7d330(const char* s);
-
-// @fnv 0x00a57d10
-void __stdcall FUN_00a57d10(CombatGroupArray* pCombatGroups)
-{
-    FUN_00a390a0(pCombatGroups);
-    ActorCombatGroup* pGroup = FUN_00a7d330(g_011f3f88_arg1);
-    unsigned int uiIndex = *(unsigned short*)((char*)pCombatGroups + 0xa);
-    if (uiIndex >= *(unsigned short*)((char*)pCombatGroups + 8))
-        pCombatGroups->SetSize(*(unsigned short*)((char*)pCombatGroups + 0xe) + uiIndex);
-    pCombatGroups->SetAt(uiIndex, pGroup);
-}
 
 extern unsigned int DAT_011f404c;
 

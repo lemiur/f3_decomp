@@ -4,12 +4,6 @@
 
 void* g_01202560;
 
-// @fnv 0x00c257c0
-void* __cdecl FUN_00c257c0()
-{
-    return &g_01202560;
-}
-
 struct NiRenderer
 {
     void* _vt;
@@ -43,17 +37,6 @@ struct BSStripParticleSystem
     void WriteParticleSystemInfo(StrArr*);
     void AppendString(StrArr*);
 };
-// Calls WriteParticleSystemInfo, gets a string from g_01202560, grows pkStrings if its count reached capacity, then stores the string at the current count.
-// @fnv 0x00c25770
-void BSStripParticleSystem::AppendString(StrArr* pkStrings)
-{
-    WriteParticleSystemInfo(pkStrings);
-    char* s = _FUN_00a7d330(g_01202560);
-    unsigned int n = *(unsigned short*)((char*)pkStrings + 0xa);
-    if (n >= *(unsigned short*)((char*)pkStrings + 8))
-        pkStrings->SetSize(n + *(unsigned short*)((char*)pkStrings + 0xe));
-    pkStrings->SetAt(n, s);
-}
 
 extern "C" void* __cdecl FUN_00aa13e0(unsigned int size);
 extern unsigned int UNK_010be35c;

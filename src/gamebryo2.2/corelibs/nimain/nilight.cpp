@@ -1,4 +1,4 @@
-// gamebryo2.2/corelibs/nimain/nilight.cpp: NiLight, Standin (11 functions)
+// gamebryo2.2/corelibs/nimain/nilight.cpp: NiLight, Standin (10 functions)
 #include "f3_common.h"
 #include "nilight_decls.h"
 
@@ -28,12 +28,6 @@ struct FUN_00a72000_shell : public NiLight
 };
 
 extern const char* const g_011f4a68_arg1;
-
-// @fnv 0x00a72000
-void* FUN_00a72000_shell::FUN_00a72000()
-{
-    return (void*)&g_011f4a68_arg1;
-}
 
 extern int DAT_0109ce4c;
 struct NiDynamicEffect;

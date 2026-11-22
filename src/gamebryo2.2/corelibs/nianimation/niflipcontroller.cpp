@@ -7,18 +7,6 @@ struct FUN_00a4f300_shell
     void* GetEntryAt(int idx);
 };
 
-// @fnv 0x00a4f300
-void* FUN_00a4f300_shell::GetEntryAt(int uiIndex)
-{
-    unsigned short size = *(unsigned short*)((char*)this + 0x42);
-    if ((unsigned int)uiIndex < size)
-    {
-        void** arr = *(void***)((char*)this + 0x3C);
-        return arr[uiIndex];
-    }
-    return 0;
-}
-
 extern "C" const void* g_011f3fd4;
 
 // @fnv 0x00a4f5d0

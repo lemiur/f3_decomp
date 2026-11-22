@@ -83,17 +83,6 @@ bool NiFloatsExtraDataPoint3Controller::ControlsTransform(NiInterpolator* interp
     return interpolator->IsPoint3ValueSupported();
 }
 
-// Returns true if the base controller and the floats extra data index both match the given object's.
-// @fnv 0x00a4eb10
-bool NiFloatsExtraDataController::IsEqual(NiObject* object) const
-{
-    if (!NiExtraDataController::IsEqual(object))
-        return false;
-    if (m_iFloatsExtraDataIndex != static_cast<NiFloatsExtraDataController*>(object)->m_iFloatsExtraDataIndex)
-        return false;
-    return true;
-}
-
 // @fnv 0x00a4eb40
 const NiRTTI* NiFloatsExtraDataPoint3Controller::GetRTTI() const
 {
@@ -222,29 +211,6 @@ struct Obj : _Call_a5d3a0
     Obj() throw();
 };
 
-inline Obj::Obj() throw()
-{
-    mS08 = 0;
-    mI20 = 0;
-    mI10 = 0;
-    mC1c = 0;
-    mI24 = 0;
-    mI14 = 0;
-    mC1d = 0;
-    mI28 = 0;
-    mI18 = 0;
-    mC1e = 0;
-    mVtable = &DAT_01099004;
-    mS0a = 0;
-    mS0c = 0;
-}
-
-// Allocates and default-constructs a new Obj, returning the pointer.
-// @fnv 0x00a4e040
-Obj* FUN_00a4e040()
-{
-    return new Obj;
-}
 }  // namespace fnv_00a4e040
 
 // Iterates three slots, deletes each non-null key via the function at DAT_011f38a0 indexed by the slot's index, then zeroes the key, index and count fields.
@@ -272,49 +238,11 @@ struct FUN_00a4e0b0_Holder
 {
     void FUN_00a4e0b0(void*, int, char*);
 };
-// Stores a1, a2 and a3 into fields at offsets 0x24, 0xa and 0x14, plus a byte from a3, or clears them when a1 or a2 is null.
-// @fnv 0x00a4e0b0
-void FUN_00a4e0b0_Holder::FUN_00a4e0b0(void* a1, int a2, char* a3)
-{
-    if (a1 && a2)
-    {
-        *(short*)((char*)this + 0xa) = (short)a2;
-        *(void**)((char*)this + 0x24) = a1;
-        *(void**)((char*)this + 0x14) = a3;
-        *(char*)((char*)this + 0x1d) = a3[0x11f375e];
-    }
-    else
-    {
-        *(short*)((char*)this + 0xa) = 0;
-        *(void**)((char*)this + 0x24) = 0;
-        *(void**)((char*)this + 0x14) = 0;
-        *(char*)((char*)this + 0x1d) = 0;
-    }
-}
 
 struct FUN_00a4e0f0_shell
 {
     void InitFromParams(unsigned int, unsigned int, unsigned int);
 };
-
-// @fnv 0x00a4e0f0
-void FUN_00a4e0f0_shell::InitFromParams(unsigned int a, unsigned int b, unsigned int pSource)
-{
-    if (a && b)
-    {
-        *(unsigned short*)((char*)this + 0xc) = (unsigned short)b;
-        *(unsigned int*)((char*)this + 0x28) = a;
-        *(unsigned int*)((char*)this + 0x18) = pSource;
-        *(unsigned char*)((char*)this + 0x1e) = *(unsigned char*)((char*)pSource + 0x11f3758);
-    }
-    else
-    {
-        *(unsigned short*)((char*)this + 0xc) = 0;
-        *(unsigned int*)((char*)this + 0x28) = 0;
-        *(unsigned char*)((char*)this + 0x1e) = 0;
-        *(unsigned int*)((char*)this + 0x18) = 0;
-    }
-}
 
 namespace fnv_00a4e990 {
 struct FUN_00a4e990_shell : public NiTransformData
@@ -804,12 +732,6 @@ struct FUN_00a4eb00_Caller : FUN_00a57100_Caller
 {
     bool FUN_00a4eb00(NiStream&);
 };
-
-// @fnv 0x00a4eb00
-bool FUN_00a4eb00_Caller::FUN_00a4eb00(NiStream& kStream)
-{
-    return FUN_00a57100(kStream);
-}
 
 struct TransformDataBinaryInputView
 {

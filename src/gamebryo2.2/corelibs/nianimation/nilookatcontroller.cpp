@@ -4,12 +4,6 @@
 
 extern "C" void* g_011f3f98;
 
-// @fnv 0x00a4cd30
-void* __cdecl FUN_00a4cd30()
-{
-    return &g_011f3f98;
-}
-
 struct NiTimeController
 {
     virtual ~NiTimeController();
@@ -48,20 +42,6 @@ struct Holder : NiLookAtController
 {
     void AppendString(StrArr*);
 };
-// Appends the string returned by _FUN_00a7d330(g_011f3f98) to pkStrings, growing its size first if it is full.
-// @fnv 0x00a4cef0
-void Holder::AppendString(StrArr* pkStrings)
-{
-    ((BaseStub*)this)->FUN_00a6d830(pkStrings);
-    char* s = _FUN_00a7d330((const char*)g_011f3f98);
-    unsigned int sz = *(unsigned short*)((char*)pkStrings + 0xa);
-    if (sz >= *(unsigned short*)((char*)pkStrings + 8))
-    {
-        unsigned int gr = *(unsigned short*)((char*)pkStrings + 0xe);
-        pkStrings->SetSize(gr + sz);
-    }
-    pkStrings->SetAt(sz, s);
-}
 
 namespace fnv_00a4c840 {
 struct NiObject

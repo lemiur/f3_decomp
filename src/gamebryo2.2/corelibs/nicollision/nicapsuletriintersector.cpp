@@ -126,13 +126,3 @@ class Native856
     float scale, p, q;
     float Evaluate(const Point856* a, const Point856* b, float s);
 };
-// @fnv 0x00eb3640
-float Native856::Evaluate(const Point856* apOffset, const Point856* b, float s)
-{
-    Pair856 pair = source->pair;
-    Triple856 localTriple = triple;
-    pair.points[0] += *apOffset * s;
-    localTriple.points[0] += *b * s;
-    float time;
-    return (float)((double)(FUN_00eb1d20(pair.points, localTriple.points, &time, &p, &q) * scale) - DAT_01012070);
-}

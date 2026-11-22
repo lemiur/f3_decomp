@@ -1,4 +1,4 @@
-// gamebryo2.2/corelibs/nimain/nitexturingproperty.cpp: Holder, NiTexturingProperty, Map, MyThis and more (44 functions)
+// gamebryo2.2/corelibs/nimain/nitexturingproperty.cpp: Holder, NiTexturingProperty, Map, MyThis and more (40 functions)
 #include "f3_common.h"
 #include "nitexturingproperty_decls.h"
 
@@ -305,18 +305,6 @@ struct FUN_00a6bb00_holder
 {
     void CloneTo(NiTexturingProperty*, CloningProcess*);
 };
-// @fnv 0x00a6c610
-NiObject* FUN_00a6c610_shell::CloneTexturingProperty(CloningProcess* pCloningProcess)
-{
-    if (*reinterpret_cast<unsigned int*>(reinterpret_cast<unsigned char*>(this) + 0xc))
-    {
-        NiTexturingProperty* p = new NiTexturingProperty;
-        reinterpret_cast<FUN_00a6bb00_holder*>(this)->CloneTo(p, pCloningProcess);
-        return reinterpret_cast<NiObject*>(p);
-    }
-    reinterpret_cast<NiObject*>(this)->CopyMembersStream(reinterpret_cast<NiObject*>(this), pCloningProcess);
-    return reinterpret_cast<NiObject*>(this);
-}
 
 struct Elem4
 {
@@ -436,16 +424,6 @@ struct S00a6a050
     void* p;
     void* FUN_00a6a050(unsigned int);
 };
-// @fnv 0x00a6a050
-void* S00a6a050::FUN_00a6a050(unsigned int auiFlags)
-{
-    void* t = p;
-    vf = (void*)&DAT_0109c394;
-    _NiFreeAlias(t);
-    if (auiFlags & 1)
-        ((DeallocHelper*)&g_memoryManager)->_DeallocateAlias(this);
-    return this;
-}
 
 void _NiFreeAlias(void*);
 extern int DAT_0109c39c;
@@ -698,13 +676,6 @@ class FUN_00a69fb0 : public NiTexturingProperty::Map
     FUN_00a69fb0() throw();
     virtual ~FUN_00a69fb0();
 };
-
-// Initializes the map's luma scale/offset and bump matrix fields to their default values.
-// @fnv 0x00a69fb0
-FUN_00a69fb0::FUN_00a69fb0() throw()
-    : m_fLumaScale(1.0f), m_fLumaOffset(0.0f), m_fBumpMat00(0.5f), m_fBumpMat01(0.0f), m_fBumpMat10(0.0f),
-      m_fBumpMat11(0.5f)
-{}
 
 class NiTexture
 {
@@ -2128,12 +2099,6 @@ struct BSDismemberSkinInstance : NiSkinInstance
 void BSDismemberSkinInstance::FUN_00a6c670(NiStream& stream)
 {
     NiSkinInstance::FUN_00a6c670(stream);
-}
-
-// @fnv 0x00e7cd40
-int __cdecl FUN_00e7cd40()
-{
-    return 0;
 }
 
 // NiTexturingProperty::Map constructor.

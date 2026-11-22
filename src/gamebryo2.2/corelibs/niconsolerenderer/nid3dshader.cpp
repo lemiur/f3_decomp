@@ -1,14 +1,8 @@
-// gamebryo2.2/corelibs/niconsolerenderer/nid3dshader.cpp: NiD3DShader, NiDX9AdditionalDepthStencilBufferData, ShaderStandIn, ShaderPrepQ (31 functions)
+// gamebryo2.2/corelibs/niconsolerenderer/nid3dshader.cpp: NiD3DShader, NiDX9AdditionalDepthStencilBufferData, ShaderStandIn, ShaderPrepQ (26 functions)
 #include "f3_common.h"
 #include "nid3dshader_types_NiD3DShader.h"
 #include "nid3dshader_types_NiGlobalStringTable.h"
 #include "nid3dshader_decls.h"
-
-// @fnv 0x00e80580
-unsigned int NiD3DShader::IsRendererActive()
-{
-    return DAT_0126f74c != 0;
-}
 
 // @fnv 0x00e81100
 void NiD3DShader::InitializePoint3()
@@ -99,22 +93,8 @@ NiDX9AdditionalDepthStencilBufferData* NiDX9AdditionalDepthStencilBufferData::Cr
 extern "C" void __cdecl FUN_00e80150();
 extern "C" void __cdecl CreateStagePool();
 
-// @fnv 0x00e80620
-void __cdecl FUN_00e80620()
-{
-    FUN_00e80150();
-    CreateStagePool();
-}
-
 extern "C" void __cdecl ClearSpawnedObject();
 extern "C" void __cdecl DestroyStagePool();
-
-// @fnv 0x00e80630
-void __cdecl FUN_00e80630()
-{
-    ClearSpawnedObject();
-    DestroyStagePool();
-}
 
 // @fnv 0x00e80690
 void ResetGlobalString()
@@ -183,12 +163,6 @@ struct FUN_00e818c0_shell : public NiD3DShaderInterface
 };
 
 extern const char* const g_0126f754_arg1;
-
-// @fnv 0x00e818c0
-void* FUN_00e818c0_shell::FUN_00e818c0()
-{
-    return (void*)&g_0126f754_arg1;
-}
 
 struct FUN_00e81880_shell : public NiD3DShader
 {
@@ -1996,11 +1970,6 @@ struct FnvCpu_FUN_00eea530_CpuObject
     int value;
     int FUN_00eea530();
 };
-// @fnv 0x00eea530
-int FnvCpu_FUN_00eea530_CpuObject::FUN_00eea530()
-{
-    return value;
-}
 
 // Sets two render-state stage values, then writes m_kWorldView using pkRot, the second shadow matrix, and pkTrans.
 // @fnv 0x00e80860

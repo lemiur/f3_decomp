@@ -18,12 +18,6 @@ bool __stdcall FUN_00a60850(NiStream& kStream)
 struct GlobalObjectO2_00a7b610;
 extern GlobalObjectO2_00a7b610 g_011f4454;
 
-// @fnv 0x00a60cb0
-GlobalObjectO2_00a7b610* __cdecl FUN_00a60cb0()
-{
-    return &g_011f4454;
-}
-
 struct NiSourceTexture
 {
     NiSourceTexture();
@@ -38,21 +32,6 @@ struct BSFadeNode
 {
     static void* __cdecl operator new(unsigned int);
 };
-
-// @fnv 0x00a60f30
-NiSourceCubeMap* __cdecl CreateNiSourceCubeMap()
-{
-    void* p = BSFadeNode::operator new(0x4c);
-    if (p)
-    {
-        NiSourceCubeMap* n = static_cast<NiSourceCubeMap*>(p);
-        n->NiSourceTexture::NiSourceTexture();
-        *(unsigned int*)(n) = 0x0109babc;
-        *(unsigned int*)((char*)n + 0x48) = 0;
-        return n;
-    }
-    return 0;
-}
 
 struct NiObject;
 
@@ -213,20 +192,6 @@ struct Host61480 : Base60770
 {
     void AppendGlobalString(StrArr*);
 };
-// @fnv 0x00a61480
-void Host61480::AppendGlobalString(StrArr* pkStrings)
-{
-    GetFileStrings(pkStrings);
-    char* psz = _FUN_00a7d330(*(char**)&g_011f4454);
-    unsigned int uiSize = *(unsigned short*)((char*)pkStrings + 0xa);
-    unsigned int uiCap = *(unsigned short*)((char*)pkStrings + 8);
-    if (uiSize >= uiCap)
-    {
-        unsigned int uiGrow = *(unsigned short*)((char*)pkStrings + 0xe);
-        pkStrings->SetSize(uiSize + uiGrow);
-    }
-    pkStrings->SetAt(uiSize, psz);
-}
 
 namespace fnv_00a60ba0 {
 extern "C" void* __cdecl memset(void*, int, unsigned int);

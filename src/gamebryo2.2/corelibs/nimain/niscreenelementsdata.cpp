@@ -1,4 +1,4 @@
-// gamebryo2.2/corelibs/nimain/niscreenelementsdata.cpp: NiScreenElementsData, NiScreenElementsDataShell (10 functions)
+// gamebryo2.2/corelibs/nimain/niscreenelementsdata.cpp: NiScreenElementsData, NiScreenElementsDataShell (8 functions)
 #include "f3_common.h"
 #include "niscreenelementsdata_decls.h"
 
@@ -68,12 +68,6 @@ bool NiScreenElementsData::SetRectangleBounds(int iPolygonIndex, unsigned short 
 struct GlobalObjectO2_00a7b610;
 extern GlobalObjectO2_00a7b610 g_011f5b50;
 
-// @fnv 0x00a87a90
-GlobalObjectO2_00a7b610* __cdecl FUN_00a87a90()
-{
-    return &g_011f5b50;
-}
-
 void __fastcall FUN_00a7b8c0(void*);
 void __cdecl _NiFreeAlias(void*);
 void __cdecl _delete(void*, unsigned int);
@@ -122,77 +116,6 @@ struct Obj
 char* __cdecl _FUN_00a7d330(void*);
 char* __cdecl FUN_00a7d490(char const*, unsigned short);
 char* __cdecl FUN_00a7d5a0(char const*, void*);
-
-// Appends the object's member names and values to the string array, growing it as needed via SetSize and SetAt.
-// @fnv 0x00a886f0
-void FUN_00a886f0_shell::AppendMemberDescriptions(void* pkStrings)
-{
-    StrArr* strings = static_cast<StrArr*>(pkStrings);
-    char* value;
-    unsigned int index;
-
-    reinterpret_cast<Obj*>(this)->AppendTriListInfo(strings);
-
-    value = _FUN_00a7d330(*reinterpret_cast<void**>(&g_011f5b50));
-    index = strings->m_usSize;
-    if (index >= strings->m_usCapacity)
-        strings->SetSize(index + strings->m_usGrowBy);
-    strings->SetAt(index, value);
-
-    value = FUN_00a7d5a0("m_akPolygon", this->m_akPolygon);
-    index = strings->m_usSize;
-    if (index >= strings->m_usCapacity)
-        strings->SetSize(index + strings->m_usGrowBy);
-    strings->SetAt(index, value);
-
-    value = FUN_00a7d5a0("m_ausPIndexer", this->m_ausPIndexer);
-    index = strings->m_usSize;
-    if (index >= strings->m_usCapacity)
-        strings->SetSize(index + strings->m_usGrowBy);
-    strings->SetAt(index, value);
-
-    value = FUN_00a7d490("m_usMaxPQuantity", this->m_usMaxPQuantity);
-    index = strings->m_usSize;
-    if (index >= strings->m_usCapacity)
-        strings->SetSize(index + strings->m_usGrowBy);
-    strings->SetAt(index, value);
-
-    value = FUN_00a7d490("m_usPGrowBy", this->m_usPGrowBy);
-    index = strings->m_usSize;
-    if (index >= strings->m_usCapacity)
-        strings->SetSize(index + strings->m_usGrowBy);
-    strings->SetAt(index, value);
-
-    value = FUN_00a7d490("m_usPQuantity", this->m_usPQuantity);
-    index = strings->m_usSize;
-    if (index >= strings->m_usCapacity)
-        strings->SetSize(index + strings->m_usGrowBy);
-    strings->SetAt(index, value);
-
-    value = FUN_00a7d490("m_usMaxVQuantity", this->m_usMaxVQuantity);
-    index = strings->m_usSize;
-    if (index >= strings->m_usCapacity)
-        strings->SetSize(index + strings->m_usGrowBy);
-    strings->SetAt(index, value);
-
-    value = FUN_00a7d490("m_usVGrowBy", this->m_usVGrowBy);
-    index = strings->m_usSize;
-    if (index >= strings->m_usCapacity)
-        strings->SetSize(index + strings->m_usGrowBy);
-    strings->SetAt(index, value);
-
-    value = FUN_00a7d490("m_usMaxIQuantity", this->m_usMaxIQuantity);
-    index = strings->m_usSize;
-    if (index >= strings->m_usCapacity)
-        strings->SetSize(index + strings->m_usGrowBy);
-    strings->SetAt(index, value);
-
-    value = FUN_00a7d490("m_usIGrowBy", this->m_usIGrowBy);
-    index = strings->m_usSize;
-    if (index >= strings->m_usCapacity)
-        strings->SetSize(index + strings->m_usGrowBy);
-    strings->SetAt(index, value);
-}
 
 class RgbaColor
 {

@@ -1,4 +1,4 @@
-// gamebryo2.2/corelibs/niparticle/nipsysmodifier.cpp: NiPSysModifier, MyIsEqual, ParticleModifierBinary, ParticleModifier (8 functions)
+// gamebryo2.2/corelibs/niparticle/nipsysmodifier.cpp: NiPSysModifier, MyIsEqual, ParticleModifierBinary, ParticleModifier (6 functions)
 #include "f3_common.h"
 #include "nipsysmodifier_decls.h"
 
@@ -66,12 +66,6 @@ void NiPSysModifier_shell::FUN_00c31640(NiParticleSystem* pkTarget)
 }
 
 extern const char* const g_01202528_arg1;
-
-// @fnv 0x00c31710
-const char* const* __cdecl FUN_00c31710()
-{
-    return &g_01202528_arg1;
-}
 
 bool __stdcall IsSameAs(NiObject* pkObject);
 struct MyIsEqual : NiPSysModifier
@@ -198,26 +192,6 @@ struct ParticleModifier
     void __thiscall FUN_00a5d3a0();
     ParticleModifier* __thiscall FUN_00c316a0(char* volatile* newName, unsigned int newOrder);
 };
-// @fnv 0x00c316a0
-ParticleModifier* __thiscall ParticleModifier::FUN_00c316a0(char* volatile* newName, unsigned int newOrder)
-{
-    FUN_00a5d3a0();
-    vtable = &DAT_010c09cc;
-    name = DAT_0109b220;
-    order = newOrder;
-    target = 0;
-    active = true;
-    char* pNewName = *newName;
-    if (name != pNewName)
-    {
-        if (pNewName != DAT_0109b220)
-            DAT_00fdf1c0(pNewName - 8);
-        if (name != DAT_0109b220)
-            DAT_00fdf1c4(name - 8);
-        name = pNewName;
-    }
-    return this;
-}
 
 struct StrArr
 {

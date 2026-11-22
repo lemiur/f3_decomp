@@ -4,12 +4,6 @@
 
 extern "C" void* g_01202748;
 
-// @fnv 0x00c2b750
-void* __cdecl FUN_00c2b750()
-{
-    return &g_01202748;
-}
-
 struct NiPSysModifierFloatCtlr
 {
     float m_fValue;
@@ -56,17 +50,6 @@ struct StrArr
 };
 void __stdcall FUN_00c32f60(StrArr*);
 char* __cdecl _FUN_00a7d330(const char*);
-// Appends the string returned by _FUN_00a7d330(g_01202748) to pkStrings, growing it via SetSize when full and storing it with SetAt.
-// @fnv 0x00c2b820
-void __stdcall FUN_00c2b820(StrArr* pkStrings)
-{
-    FUN_00c32f60(pkStrings);
-    char* psz = _FUN_00a7d330((const char*)g_01202748);
-    unsigned int uiIdx = pkStrings->m_usSize;
-    if (uiIdx >= pkStrings->m_usMaxSize)
-        pkStrings->SetSize(uiIdx + pkStrings->m_usGrow);
-    pkStrings->SetAt(uiIdx, psz);
-}
 
 class NiPSysBaseC2B
 {

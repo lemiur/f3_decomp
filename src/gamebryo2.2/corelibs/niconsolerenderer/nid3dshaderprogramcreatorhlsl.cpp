@@ -66,37 +66,9 @@ struct FUN_00c7b0f0_shell
     void FUN_00c7b0f0();
 };
 
-// @fnv 0x00c7b0f0
-void FUN_00c7b0f0_shell::FUN_00c7b0f0()
-{
-    void* p = FUN_00c85750();
-    VTableObj* pTarget = *(VTableObj**)((char*)p + 0x10);
-    m_kPointB = 0;
-    unsigned int uiFlags = m_iThirdValue;
-    if (!(uiFlags & 0x80000000))
-    {
-        int size = (uiFlags & 0x3fffffff) * 4;
-        pTarget->Call(m_kPointA, size);
-    }
-    m_kPointA = 0;
-    m_iThirdValue = 0x80000000;
-}
-
 extern "C" void* g_0126fa40;
 
-// @fnv 0x00e95cc0
-void* __cdecl FUN_00e95cc0()
-{
-    return &g_0126fa40;
-}
-
 extern const void* g_0126fa48;
-
-// @fnv 0x00e95df0
-const void* __cdecl FUN_00e95df0()
-{
-    return &g_0126fa48;
-}
 
 extern void(__cdecl* DAT_fdf3f0)();
 
@@ -457,36 +429,6 @@ extern "C" int __cdecl strcmp(const char* psz1, const char* psz2);
 void __cdecl _NiFree(void*);
 int __cdecl _strcpy_s(char* str, unsigned int numberOfElements, const char* source);
 
-// @fnv 0x00be09e0
-void FUN_00be09e0_shell::FUN_00be09e0(const char* pszName)
-{
-    if (!pszName || strcmp(pszName, $SG3295) == 0)
-    {
-        _NiFree(m_pkShaderProgramName);
-        m_pkShaderProgramName = 0;
-        return;
-    }
-
-    unsigned int uiNewLen = strlen(pszName) + 1;
-
-    if (m_pkShaderProgramName)
-    {
-        unsigned int uiOldLen = strlen(m_pkShaderProgramName);
-        if (uiOldLen < uiNewLen)
-        {
-            _NiFree(m_pkShaderProgramName);
-            m_pkShaderProgramName = 0;
-        }
-    }
-
-    if (!m_pkShaderProgramName)
-    {
-        m_pkShaderProgramName = (char*)_NiMalloc(uiNewLen);
-    }
-
-    _strcpy_s(m_pkShaderProgramName, uiNewLen, pszName);
-}
-
 void _NiFree(void*);
 int _strcpy_s(char*, unsigned int, const char*);
 
@@ -583,17 +525,6 @@ struct S_00e58ea0_cls
     void FUN_00e58a20(S_00e58ea0_Gen* a, S_00e58ea0_Gen* b, S_00e58ea0_Arr* pkOut);
     S_00e58ea0_Gen* FUN_00e58ea0(S_00e58ea0_Gen* a1, S_00e58ea0_Gen* a2);
 };
-
-// @fnv 0x00e58ea0
-S_00e58ea0_Gen* S_00e58ea0_cls::FUN_00e58ea0(S_00e58ea0_Gen* a1, S_00e58ea0_Gen* a2)
-{
-    a1->InitFloatArray(a2->FUN_00cc0760(), a2->FUN_00e587a0(), 0.0f);
-    S_00e58ea0_Arr tmpArr;
-    tmpArr.InitFloatArray(FUN_00dbbc00(), a2->FUN_00e587a0(), 0.0f);
-    FUN_00e58a20(a1, a2, &tmpArr);
-    tmpArr.FUN_00c7b0f0();
-    return a1;
-}
 
 struct IUnk_e95
 {
@@ -864,40 +795,6 @@ struct MatrixNm
 };
 
 MatResult __cdecl SolveVector(void* solver, MatrixNm& x, MatrixNm& b, int maxIter, float tolerance);
-
-// Solves each column of x against b by copying it into single-column matrices, calling SolveVector, and writing the result back.
-// @fnv 0x00e590f0
-MatResult __cdecl SolveMatrixColumns(void* solver, MatrixNm& x, MatrixNm& b, int maxIter, float tolerance)
-{
-    MatResult result;
-    MatrixNm xColumn(x.GetNumRows(), 1);
-    MatrixNm bColumn(b.GetNumRows(), 1);
-    for (int col = 0; col < x.GetNumCols(); col++)
-    {
-        int row;
-        for (row = 0; row < x.GetNumRows(); row++)
-        {
-            *xColumn.GetVecPtr(row) = *x.GetPtr(row, col);
-            float fValue = b.Get(row, col);
-            *bColumn.GetVecPtr(row) = fValue;
-        }
-        if (!SolveVector(solver, xColumn, bColumn, maxIter, tolerance).m_ok)
-        {
-            result.m_ok = false;
-            bColumn.Release();
-            xColumn.Release();
-            return result;
-        }
-        for (row = 0; row < x.GetNumRows(); row++)
-        {
-            *x.GetPtr(row, col) = *xColumn.GetVecPtr(row);
-        }
-    }
-    result.m_ok = true;
-    bColumn.Release();
-    xColumn.Release();
-    return result;
-}
 
 bool __cdecl NiShaderFindFile(const char* pcFile, char* pcPath, unsigned int uiLen);
 extern "C" long __stdcall D3DXCompileShaderFromFileA(const char* pSrcFile, const void* pDefines, void* pInclude,
@@ -1340,60 +1237,6 @@ __declspec(noalias) void FUN_00e58960(SolverVector*, float*, SolverVector*);
 void FUN_00e589a0(SolverVector*, SolverVector*);
 void NegateElements(SolverVector*);
 __declspec(noalias) void FUN_00e58900(SolverVector*, SolverVector*, float*, SolverVector*);
-// Runs up to count iterations, returning true when the squared residual is below tolerance squared at an iteration check.
-// @fnv 0x00e58f10
-bool* ConjugateGradientSolve(bool* abConverged, SolverMatrix* matrix, SolverVector* apInitialGuess, SolverVector* apRhs,
-                             int aiMaxIterations, float tolerance)
-{
-    int size = apInitialGuess->FUN_00cc0760();
-    SolverVector temp;
-    SolverVector pResidual, p, pMatVec, x;
-    apRhs->FUN_00e58e80(&pResidual, matrix->FUN_00e58ea0(&temp, apInitialGuess));
-    temp.FUN_00c7b0f0();
-    p.CopyFrom(&pResidual);
-    pMatVec.InitArray(size, 1);
-    x.InitArray(matrix->FUN_00dbbc00(), 1);
-    float fResidualNormSq = DotProduct(&pResidual, &pResidual);
-    float fToleranceSq = tolerance * tolerance;
-    int i = 0;
-    if (aiMaxIterations > 0)
-        do
-        {
-            if (fResidualNormSq < fToleranceSq)
-            {
-                *abConverged = true;
-                goto done;
-            }
-            matrix->FUN_00e58b10(&pMatVec, &p, &x);
-            {
-                float fStepSize = (float)((double)fResidualNormSq / DotProduct(&p, &pMatVec));
-                FUN_00e58960(apInitialGuess, &fStepSize, &p);
-                ++i;
-                if (i % 50 == 0)
-                {
-                    FUN_00e589a0(&pResidual, apRhs);
-                    matrix->FUN_00e58a20(&pResidual, apInitialGuess, &x);
-                    NegateElements(&pResidual);
-                }
-                else
-                {
-                    fStepSize = -fStepSize;
-                    FUN_00e58960(&pResidual, &fStepSize, &pMatVec);
-                }
-            }
-            float fPrevResidualNormSq = fResidualNormSq;
-            fResidualNormSq = DotProduct(&pResidual, &pResidual);
-            float beta = fResidualNormSq / fPrevResidualNormSq;
-            FUN_00e58900(&p, &pResidual, &beta, &p);
-        } while (i < aiMaxIterations);
-    *abConverged = false;
-done:
-    x.FUN_00c7b0f0();
-    pMatVec.FUN_00c7b0f0();
-    p.FUN_00c7b0f0();
-    pResidual.FUN_00c7b0f0();
-    return abConverged;
-}
 
 struct ConstTableE95
 {

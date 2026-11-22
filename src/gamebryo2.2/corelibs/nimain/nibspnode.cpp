@@ -52,12 +52,6 @@ struct GlobalObjectO2_00a7b610
 };
 extern GlobalObjectO2_00a7b610 g_011f5f54;
 
-// @fnv 0x00a9adc0
-GlobalObjectO2_00a7b610* __cdecl FUN_00a9adc0()
-{
-    return &g_011f5f54;
-}
-
 struct Unk_00a5e930
 {
     void FUN_00a5e930();
@@ -123,27 +117,6 @@ struct FUN_00a9acf0_shell : NiBSPNode
 {
     void AppendPlaneNames(StrArr* apViewerStrings);
 };
-
-// @fnv 0x00a9acf0
-void FUN_00a9acf0_shell::AppendPlaneNames(StrArr* apViewerStrings)
-{
-    ((FUN_00c51570_Class*)this)->FUN_00a5ea70(apViewerStrings);
-    char* pName = _FUN_00a7d330(*(GlobalObjectO2_00a7b610**)&g_011f5f54);
-    unsigned int uiIndex = *(unsigned short*)((char*)apViewerStrings + 0xa);
-    if (uiIndex >= *(unsigned short*)((char*)apViewerStrings + 0x8))
-        apViewerStrings->SetSize(uiIndex + *(unsigned short*)((char*)apViewerStrings + 0xe));
-    apViewerStrings->SetAt(uiIndex, pName);
-    pName = ((FUN_00a69a60_Owner*)((char*)this + 0xac))->FUN_00a69a60("m_kModelPlane");
-    uiIndex = *(unsigned short*)((char*)apViewerStrings + 0xa);
-    if (uiIndex >= *(unsigned short*)((char*)apViewerStrings + 0x8))
-        apViewerStrings->SetSize(uiIndex + *(unsigned short*)((char*)apViewerStrings + 0xe));
-    apViewerStrings->SetAt(uiIndex, pName);
-    pName = ((FUN_00a69a60_Owner*)((char*)this + 0xbc))->FUN_00a69a60("m_kWorldPlane");
-    uiIndex = *(unsigned short*)((char*)apViewerStrings + 0xa);
-    if (uiIndex >= *(unsigned short*)((char*)apViewerStrings + 0x8))
-        apViewerStrings->SetSize(uiIndex + *(unsigned short*)((char*)apViewerStrings + 0xe));
-    apViewerStrings->SetAt(uiIndex, pName);
-}
 
 struct NiStream;
 

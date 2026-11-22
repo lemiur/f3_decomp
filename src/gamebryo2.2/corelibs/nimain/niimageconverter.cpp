@@ -1,12 +1,6 @@
-// gamebryo2.2/corelibs/nimain/niimageconverter.cpp: NiImageConverter, ImageOwner (17 functions)
+// gamebryo2.2/corelibs/nimain/niimageconverter.cpp: NiImageConverter, ImageOwner (13 functions)
 #include "f3_common.h"
 #include "niimageconverter_worker.h"
-
-// @fnv 0x00a76640
-NiImageConverter* NiImageConverter::GetSharedImageConverter()
-{
-    return DAT_011f4a7c;
-}
 
 __declspec(dllimport) long __stdcall InterlockedIncrement(long volatile*);
 __declspec(dllimport) long __stdcall InterlockedDecrement(long volatile*);
@@ -120,12 +114,6 @@ struct FUN_00a76650 : NiRefObject
     FUN_00a76650();
     virtual ~FUN_00a76650();
 };
-// Constructs the object and calls FUN_00a8ae50 on the Sub80 subobject at offset 0x80.
-// @fnv 0x00a76650
-FUN_00a76650::FUN_00a76650()
-{
-    ((Sub80*)((char*)this + 0x80))->FUN_00a8ae50();
-}
 }  // namespace fnv_00a76650
 
 namespace fnv_00a76680 {
@@ -149,15 +137,6 @@ struct FUN_00a76680 : NiRefObject
 {
     virtual ~FUN_00a76680();
 };
-// Frees the global DAT_011f4a78, clears it, then calls FUN_00a8ada0 on the sub-object at offset 0x80.
-// @fnv 0x00a76680
-FUN_00a76680::~FUN_00a76680()
-{
-    if (DAT_011f4a78)
-        _NiFreeAlias(DAT_011f4a78);
-    DAT_011f4a78 = 0;
-    ((Sub80*)((char*)this + 0x80))->FUN_00a8ada0();
-}
 }  // namespace fnv_00a76680
 
 struct FUN_00a76890_eq
@@ -235,16 +214,6 @@ struct RefObj
             Unk1();
     }
 };
-// If the global RefObj pointer DAT_011f4a7c is set, decrements its reference count and clears the pointer.
-// @fnv 0x00a76b30
-void FUN_00a76b30()
-{
-    if (DAT_011f4a7c)
-    {
-        ((RefObj*)DAT_011f4a7c)->DecRef();
-        DAT_011f4a7c = 0;
-    }
-}
 }  // namespace fnv_00a76b30
 
 namespace fnv_00a76b60 {

@@ -16,10 +16,6 @@ void NiInterpController::LoadBinary(NiStream& stream)
     }
 }
 // @fnv 0x00c9a6b0
-void NiInterpController::LinkObject(NiStream& stream)
-{
-    NiTimeController::LinkObject(stream);
-}
 // @f3 0x00914ad0 (community match, verified in this file)
 extern const double DAT_00dba730;
 void NiInterpControllerTriple::ResetTriple() {

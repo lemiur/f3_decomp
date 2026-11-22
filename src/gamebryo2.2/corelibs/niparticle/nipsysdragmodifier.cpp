@@ -1,4 +1,4 @@
-// gamebryo2.2/corelibs/niparticle/nipsysdragmodifier.cpp: NiPSysDragModifier, NiPSysDragShell (7 functions)
+// gamebryo2.2/corelibs/niparticle/nipsysdragmodifier.cpp: NiPSysDragModifier, NiPSysDragShell (6 functions)
 #include "f3_common.h"
 #include "nipsysdragmodifier_decls.h"
 
@@ -31,11 +31,6 @@ void* __cdecl FUN_00c2c080()
 
 struct GlobalObjectO2_00a7b610;
 extern GlobalObjectO2_00a7b610 g_01202768;
-// @fnv 0x00c2c0a0
-void* __cdecl FUN_00c2c0a0()
-{
-    return &g_01202768;
-}
 
 namespace fnv_00c2c0b0 {
 struct CloningProcess

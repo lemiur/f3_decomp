@@ -1,4 +1,4 @@
-// gamebryo2.2/corelibs/niparticle/nipsysemitter.cpp: NiPSysEmitter, Emitter (9 functions)
+// gamebryo2.2/corelibs/niparticle/nipsysemitter.cpp: NiPSysEmitter, Emitter (6 functions)
 #include "f3_common.h"
 #include "nipsysemitter_decls.h"
 #include "nipsysemitter_types.h"
@@ -44,12 +44,6 @@ struct FUN_00c21fd0_shell : public NiPSysEmitter
 
 extern char const* const g_01202500_arg1;
 
-// @fnv 0x00c21fd0
-void* __thiscall FUN_00c21fd0_shell::FUN_00c21fd0()
-{
-    return (void*)&g_01202500_arg1;
-}
-
 struct StrArr
 {
     void* m_pPadding[2];
@@ -91,87 +85,6 @@ struct FUN_00c22780_shell : public Base00c319e0
 {
     void FUN_00c22780(StrArr* pkStrings);
 };
-
-// @fnv 0x00c22780
-void FUN_00c22780_shell::FUN_00c22780(StrArr* pkStrings)
-{
-    char* pString;
-    unsigned int index;
-
-    Base00c319e0::FUN_00c319e0(pkStrings);
-
-    pString = _FUN_00a7d330(g_01202500_arg1);
-    index = pkStrings->m_usElementCount;
-    if (index >= pkStrings->m_usCapacity)
-        pkStrings->SetSize(index + pkStrings->m_usGrowBy);
-    pkStrings->SetAt(index, pString);
-
-    pString = FUN_00a7d550(str_01044b18, *reinterpret_cast<float*>(reinterpret_cast<char*>(this) + 0x18));
-    index = pkStrings->m_usElementCount;
-    if (index >= pkStrings->m_usCapacity)
-        pkStrings->SetSize(index + pkStrings->m_usGrowBy);
-    pkStrings->SetAt(index, pString);
-
-    pString = FUN_00a7d550(str_010bdfd0, *reinterpret_cast<float*>(reinterpret_cast<char*>(this) + 0x1c));
-    index = pkStrings->m_usElementCount;
-    if (index >= pkStrings->m_usCapacity)
-        pkStrings->SetSize(index + pkStrings->m_usGrowBy);
-    pkStrings->SetAt(index, pString);
-
-    pString = FUN_00a7d550(str_010bdfc4, *reinterpret_cast<float*>(reinterpret_cast<char*>(this) + 0x20));
-    index = pkStrings->m_usElementCount;
-    if (index >= pkStrings->m_usCapacity)
-        pkStrings->SetSize(index + pkStrings->m_usGrowBy);
-    pkStrings->SetAt(index, pString);
-
-    pString = FUN_00a7d550(str_010bdfac, *reinterpret_cast<float*>(reinterpret_cast<char*>(this) + 0x24));
-    index = pkStrings->m_usElementCount;
-    if (index >= pkStrings->m_usCapacity)
-        pkStrings->SetSize(index + pkStrings->m_usGrowBy);
-    pkStrings->SetAt(index, pString);
-
-    pString = FUN_00a7d550(str_010bdf9c, *reinterpret_cast<float*>(reinterpret_cast<char*>(this) + 0x28));
-    index = pkStrings->m_usElementCount;
-    if (index >= pkStrings->m_usCapacity)
-        pkStrings->SetSize(index + pkStrings->m_usGrowBy);
-    pkStrings->SetAt(index, pString);
-
-    pString = FUN_00a7d550(str_010bdf84, *reinterpret_cast<float*>(reinterpret_cast<char*>(this) + 0x2c));
-    index = pkStrings->m_usElementCount;
-    if (index >= pkStrings->m_usCapacity)
-        pkStrings->SetSize(index + pkStrings->m_usGrowBy);
-    pkStrings->SetAt(index, pString);
-
-    pString = reinterpret_cast<FUN_00a69720_shell*>(reinterpret_cast<char*>(this) + 0x30)->ToString(str_010bdf74);
-    index = pkStrings->m_usElementCount;
-    if (index >= pkStrings->m_usCapacity)
-        pkStrings->SetSize(index + pkStrings->m_usGrowBy);
-    pkStrings->SetAt(index, pString);
-
-    pString = FUN_00a7d550(str_010bdf64, *reinterpret_cast<float*>(reinterpret_cast<char*>(this) + 0x40));
-    index = pkStrings->m_usElementCount;
-    if (index >= pkStrings->m_usCapacity)
-        pkStrings->SetSize(index + pkStrings->m_usGrowBy);
-    pkStrings->SetAt(index, pString);
-
-    pString = FUN_00a7d550(str_010bdf50, *reinterpret_cast<float*>(reinterpret_cast<char*>(this) + 0x44));
-    index = pkStrings->m_usElementCount;
-    if (index >= pkStrings->m_usCapacity)
-        pkStrings->SetSize(index + pkStrings->m_usGrowBy);
-    pkStrings->SetAt(index, pString);
-
-    pString = FUN_00a7d550(str_010bdf44, *reinterpret_cast<float*>(reinterpret_cast<char*>(this) + 0x48));
-    index = pkStrings->m_usElementCount;
-    if (index >= pkStrings->m_usCapacity)
-        pkStrings->SetSize(index + pkStrings->m_usGrowBy);
-    pkStrings->SetAt(index, pString);
-
-    pString = FUN_00a7d550(str_010bdf30, *reinterpret_cast<float*>(reinterpret_cast<char*>(this) + 0x4c));
-    index = pkStrings->m_usElementCount;
-    if (index >= pkStrings->m_usCapacity)
-        pkStrings->SetSize(index + pkStrings->m_usGrowBy);
-    pkStrings->SetAt(index, pString);
-}
 
 // Equals: thiscall bool compare of two objects (float fields + sub-object)
 
@@ -558,19 +471,6 @@ class FUN_00c21fe0_cls : public BC21FE0Modifier
     float m_fLifeSpanVariation;
     float m_fScale;
 };
-
-// Constructs a particle emitter modifier, storing emission speed, declination, planar angle, color, radius, life span and their variations.
-// @fnv 0x00c21fe0
-FUN_00c21fe0_cls::FUN_00c21fe0_cls(const char* pcName, unsigned int uiOrder, float fEmissionSpeed, float fSpeedVar,
-                                   float fDeclination, float fDeclinationVar, float fPlanarAngle, float fPlanarAngleVar,
-                                   BC21FE0Color kInitialColor, float fInitialRadius, float fLifeSpan,
-                                   float fLifeSpanVar, float fRadiusVar) throw()
-    : BC21FE0Modifier(pcName, uiOrder), m_fEmissionSpeed(fEmissionSpeed), m_fSpeedVariation(fSpeedVar),
-      m_fEmissionDeclination(fDeclination), m_fDeclinationVariation(fDeclinationVar),
-      m_fEmissionPlanarAngle(fPlanarAngle), m_fPlanarAngleVariation(fPlanarAngleVar), m_kParticleColor(kInitialColor),
-      m_fEmissionRadius(fInitialRadius), m_fRadiusVariation(fRadiusVar), m_fYValue(fLifeSpan),
-      m_fLifeSpanVariation(fLifeSpanVar), m_fScale(1.0f)
-{}
 
 struct EmitterColorWriter
 {

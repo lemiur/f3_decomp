@@ -1,4 +1,4 @@
-// gamebryo2.2/corelibs/nianimation/bsmultitargettreadtransfcontroller.cpp: Holder, BSMultiTargetTreadTransfController, TreadController (20 functions)
+// gamebryo2.2/corelibs/nianimation/bsmultitargettreadtransfcontroller.cpp: Holder, BSMultiTargetTreadTransfController, TreadController (19 functions)
 #include "f3_common.h"
 #include "bsmultitargettreadtransfcontroller_decls.h"
 // @fnv 0x00a358a0
@@ -365,14 +365,6 @@ struct TreadController
     TreadInterpolator* __thiscall CreateInterpolator(unsigned int index);
     void __thiscall FUN_00a2f8a0(TreadInterpolator* interp, unsigned int index);
 };
-
-// @fnv 0x00a35a10
-TreadInterpolator* TreadController::CreateInterpolator(unsigned int index)
-{
-    TreadInterpolator* interp = new TreadInterpolator;
-    FUN_00a2f8a0(interp, index);
-    return interp;
-}
 
 struct TreadElem_00a35b90
 {

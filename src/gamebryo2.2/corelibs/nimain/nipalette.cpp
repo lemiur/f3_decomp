@@ -4,12 +4,6 @@
 
 extern "C" void* g_011f5c08;
 
-// @fnv 0x00a8b070
-void* __cdecl FUN_00a8b070()
-{
-    return &g_011f5c08;
-}
-
 extern "C" __declspec(dllimport) void __stdcall EnterCriticalSection(void*);
 extern "C" __declspec(dllimport) void __stdcall LeaveCriticalSection(void*);
 struct FUN_00a8b010_Node
@@ -127,20 +121,6 @@ template <class T, class A> struct NiTPrimitiveArray
 };
 void __stdcall AppendCameraPathEntries(NiTPrimitiveArray<char*, NiTMallocInterface<char*> >*);
 char* __cdecl _FUN_00a7d330(void*);
-// @fnv 0x00a8b460
-void __stdcall FUN_00a8b460(NiTPrimitiveArray<char*, NiTMallocInterface<char*> >* pkStrings)
-{
-    AppendCameraPathEntries(pkStrings);
-    char* pszString = _FUN_00a7d330(g_011f5c08);
-    unsigned int uiSize = *(unsigned short*)((char*)pkStrings + 10);
-    unsigned int uiCapacity = *(unsigned short*)((char*)pkStrings + 8);
-    if (uiSize >= uiCapacity)
-    {
-        unsigned int uiGrow = *(unsigned short*)((char*)pkStrings + 14);
-        pkStrings->SetSize(uiGrow + uiSize);
-    }
-    pkStrings->SetAt(uiSize, pszString);
-}
 
 struct FUN_00a8af40_cls
 {

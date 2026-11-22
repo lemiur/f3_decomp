@@ -1,4 +1,4 @@
-// gamebryo2.2/corelibs/nimain/niobjectnet.cpp: NiObjectNET, ShortArray, MorphTarget, bhkSphereShape and more (26 functions)
+// gamebryo2.2/corelibs/nimain/niobjectnet.cpp: NiObjectNET, ShortArray, MorphTarget, bhkSphereShape and more (24 functions)
 #include "f3_common.h"
 #include "niobjectnet_decls.h"
 
@@ -51,11 +51,6 @@ void NiObjectNET::LoadBinary(NiStream& kStream)
 }
 
 #pragma optimize("", off)
-// @fnv 0x0043b480
-void NiObjectNET::GetNumChildren()
-{
-    m_kArray.GetSize();
-}
 #pragma optimize("", on)
 
 // Calls NiObject::ProcessClone, then ProcessClone on each extra data entry and on the time controller.
@@ -128,12 +123,6 @@ void NiMorphData::MorphTarget::SetTargetInterpolator(NiInterpolator* pInterpolat
 }
 
 #pragma optimize("", off)
-// Sets the flags on this object by calling FUN_00439360 with mask 0x1c00 and shift 10.
-// @fnv 0x004393e0
-void NiObjectNET::SetFlags(unsigned short flags)
-{
-    FUN_00439360(flags, 0x1c00, 10);
-}
 #pragma optimize("", on)
 
 // @fnv 0x00a5c400

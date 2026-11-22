@@ -1,4 +1,4 @@
-// gamebryo2.2/corelibs/nimain/nicamera.cpp: NiCamera, ComparableCamera, CamLook, ScreenCamera and more (20 functions)
+// gamebryo2.2/corelibs/nimain/nicamera.cpp: NiCamera, ComparableCamera, CamLook, ScreenCamera and more (16 functions)
 #include "f3_common.h"
 #include "fnv_a3d_camera.h"
 
@@ -169,11 +169,6 @@ void NiCamera::UpdateWorldBound()
 }
 
 #pragma optimize("", off)
-// @fnv 0x0045BBE0
-const NiFrustum& NiCamera::GetViewFrustum() const
-{
-    return m_kViewFrustum;
-}
 #pragma optimize("", on)
 
 extern int DAT_0109cb9c;
@@ -195,11 +190,6 @@ void* __fastcall DestroyCamera(int* pThis, int, unsigned int flags)
 }
 
 extern const char* const g_011f5e6c_arg1;
-// @fnv 0x00a70040
-const char* const* __cdecl FUN_00a70040()
-{
-    return &g_011f5e6c_arg1;
-}
 
 struct CloningProcess
 {
@@ -437,28 +427,6 @@ class FUN_00a6fb90_cls
     float m_fBottomBound;
     void FUN_00a6fb90(float scale, unsigned char flag);
 };
-
-// Recomputes the four float members from the current pair, scaled by scale and DAT_01011588, swapping which pair is updated based on flag.
-// @fnv 0x00a6fb90
-void FUN_00a6fb90_cls::FUN_00a6fb90(float scale, unsigned char flag)
-{
-    if (flag != 0)
-    {
-        float d = m_fRightBound - m_fLeftBound;
-        float tc = (float)((d / scale) * DAT_01011588);
-        float fSum = (float)((m_fBottomBound + m_fTopBound) * DAT_01011588);
-        m_fTopBound = fSum + tc;
-        m_fBottomBound = fSum - tc;
-    }
-    else
-    {
-        float d = m_fTopBound - m_fBottomBound;
-        float tc = (float)((d * scale) * DAT_01011588);
-        float fSum = (float)((m_fRightBound + m_fLeftBound) * DAT_01011588);
-        m_fRightBound = fSum + tc;
-        m_fLeftBound = fSum - tc;
-    }
-}
 
 struct ComparableCamera : NiCamera
 {
@@ -768,171 +736,10 @@ struct CrossPoint : NiPoint3
     __declspec(noalias) NiPoint3 CrossProduct(const NiPoint3& vector) const;
 };
 
-inline NiPoint3 Scaled(float radius, const NiPoint3& unit)
-{
-    NiPoint3 result;
-    result.x = radius * unit.x;
-    result.y = radius * unit.y;
-    result.z = radius * unit.z;
-    return result;
-}
-
-__forceinline NiPoint3 Added(const NiPoint3& a, const NiPoint3& b)
-{
-    NiPoint3 result;
-    result.x = a.x + b.x;
-    result.y = a.y + b.y;
-    result.z = a.z + b.z;
-    return result;
-}
-
-__forceinline void ClampBounds(float& lower, float& upper, float minimum, float maximum)
-{
-    if (lower < minimum)
-    {
-        lower = minimum;
-        if (upper < minimum)
-            upper = minimum;
-        else if (upper > maximum)
-            upper = maximum;
-    }
-    else if (upper > maximum)
-    {
-        upper = maximum;
-        if (lower > maximum)
-            lower = maximum;
-    }
-}
-
-__forceinline void FullBound(NiPoint3& lo, NiPoint3& hi)
-{
-    lo.y = -1.0f;
-    lo.x = -1.0f;
-    hi.y = 1.0f;
-    hi.x = 1.0f;
-}
-
 struct CameraBoundMatcher : public NiCamera
 {
     void FUN_00a705f0(const NiBound& bound, NiPoint3& kMinBoundsCur, NiPoint3& kMaxPoint, float fTolerance);
 };
-
-// @fnv 0x00a705f0
-void CameraBoundMatcher::FUN_00a705f0(const NiBound& bound, NiPoint3& kMinPoint, NiPoint3& kMaxPoint, float fTolerance)
-{
-    NiPoint3 kTargetCenter = bound.m_kCenter;
-    float fRadius = bound.m_fBoundRadius;
-    NiPoint3 kScratch;
-    kScratch.x = kTargetCenter.x - m_kWorldSpaceTransform.m_kTranslation.x;
-    kScratch.y = kTargetCenter.y - m_kWorldSpaceTransform.m_kTranslation.y;
-    kScratch.z = kTargetCenter.z - m_kWorldSpaceTransform.m_kTranslation.z;
-    float fInv = 1.0f / (m_kViewFrustum.m_fFarPlane - m_kViewFrustum.m_fNearPlane);
-    NiPoint3 kCol0;
-    kCol0.x = m_kWorldSpaceTransform.m_kOrientation.m_afEntries[0][0];
-    kCol0.y = m_kWorldSpaceTransform.m_kOrientation.m_afEntries[1][0];
-    kCol0.z = m_kWorldSpaceTransform.m_kOrientation.m_afEntries[2][0];
-    float m_fProjectionDepth = kCol0.x * kScratch.x + kCol0.y * kScratch.y + kCol0.z * kScratch.z;
-    m_fProjectionDepth = m_fProjectionDepth - m_kViewFrustum.m_fNearPlane;
-    if (m_kViewFrustum.m_bOrthographic)
-    {
-        kMinPoint.z = 0.0f;
-        kMaxPoint.z = 0.0f;
-    }
-    else
-    {
-        kMinPoint.z = float(m_fProjectionDepth - fRadius) * fInv;
-        kMaxPoint.z = float(m_fProjectionDepth + fRadius) * fInv;
-    }
-    {
-        NiPoint3 kRel;
-        kRel.x = m_kWorldSpaceTransform.m_kOrientation.m_afEntries[0][1];
-        kRel.y = m_kWorldSpaceTransform.m_kOrientation.m_afEntries[1][1];
-        kRel.z = m_kWorldSpaceTransform.m_kOrientation.m_afEntries[2][1];
-        NiPoint3 kCross = Scaled(fRadius, ((const CrossPoint&)kScratch).CrossProduct(kRel));
-        NiPoint3 kPt;
-        kPt.x = kTargetCenter.x - kCross.x;
-        kPt.y = kTargetCenter.y - kCross.y;
-        kPt.z = kTargetCenter.z - kCross.z;
-        float fW = kPt.x * m_afWorldToCamera[3][0] + (double)(kPt.y * m_afWorldToCamera[3][1]) +
-                   (double)(kPt.z * m_afWorldToCamera[3][2]) + m_afWorldToCamera[3][3];
-        if (fW > fTolerance)
-        {
-        }
-        else
-        {
-            FullBound(kMinPoint, kMaxPoint);
-            ClampBounds(kMinPoint.z, kMaxPoint.z, 0.0f, 1.0f);
-            return;
-        }
-        float coordinateX = kPt.x;
-        float coordinateZ = kPt.z;
-        kMinPoint.x = (coordinateX * m_afWorldToCamera[0][0] + kPt.y * m_afWorldToCamera[0][1] +
-                       coordinateZ * m_afWorldToCamera[0][2] + m_afWorldToCamera[0][3]) /
-                      fW;
-        NiPoint3 kPositive = Added(kTargetCenter, kCross);
-        float fWMax = kPositive.x * m_afWorldToCamera[3][0] + kPositive.y * m_afWorldToCamera[3][1] +
-                      kPositive.z * m_afWorldToCamera[3][2] + m_afWorldToCamera[3][3];
-        if (fWMax > fTolerance)
-        {
-        }
-        else
-        {
-            FullBound(kMinPoint, kMaxPoint);
-            ClampBounds(kMinPoint.z, kMaxPoint.z, 0.0f, 1.0f);
-            return;
-        }
-        kMaxPoint.x = (kPositive.x * m_afWorldToCamera[0][0] + kPositive.y * m_afWorldToCamera[0][1] +
-                       kPositive.z * m_afWorldToCamera[0][2] + m_afWorldToCamera[0][3]) /
-                      fWMax;
-    }
-    {
-        NiPoint3 kRel;
-        kRel.x = m_kWorldSpaceTransform.m_kOrientation.m_afEntries[0][2];
-        kRel.y = m_kWorldSpaceTransform.m_kOrientation.m_afEntries[1][2];
-        kRel.z = m_kWorldSpaceTransform.m_kOrientation.m_afEntries[2][2];
-        NiPoint3 kCross = Scaled(fRadius, ((const CrossPoint&)kRel).CrossProduct(kScratch));
-        NiPoint3 kPt;
-        kPt.x = kTargetCenter.x - kCross.x;
-        kPt.y = kTargetCenter.y - kCross.y;
-        kPt.z = kTargetCenter.z - kCross.z;
-        float fW = kPt.x * m_afWorldToCamera[3][0] + kPt.y * m_afWorldToCamera[3][1] + kPt.z * m_afWorldToCamera[3][2] +
-                   m_afWorldToCamera[3][3];
-        if (fW > fTolerance)
-        {
-        }
-        else
-        {
-            FullBound(kMinPoint, kMaxPoint);
-            ClampBounds(kMinPoint.z, kMaxPoint.z, 0.0f, 1.0f);
-            return;
-        }
-        kMinPoint.y = ((double)(kPt.x * m_afWorldToCamera[1][0]) + (double)(kPt.y * m_afWorldToCamera[1][1]) +
-                       kPt.z * m_afWorldToCamera[1][2] + m_afWorldToCamera[1][3]) /
-                      fW;
-        NiPoint3 kPositive;
-        kPositive.x = kTargetCenter.x + kCross.x;
-        kPositive.y = kTargetCenter.y + kCross.y;
-        kPositive.z = kTargetCenter.z + kCross.z;
-        float fWMax = kPositive.x * m_afWorldToCamera[3][0] + kPositive.y * m_afWorldToCamera[3][1] +
-                      kPositive.z * m_afWorldToCamera[3][2] + m_afWorldToCamera[3][3];
-        if (fWMax > fTolerance)
-        {
-        }
-        else
-        {
-            FullBound(kMinPoint, kMaxPoint);
-            ClampBounds(kMinPoint.z, kMaxPoint.z, 0.0f, 1.0f);
-            return;
-        }
-        kMaxPoint.y = (kPositive.x * m_afWorldToCamera[1][0] + kPositive.y * m_afWorldToCamera[1][1] +
-                       kPositive.z * m_afWorldToCamera[1][2] + m_afWorldToCamera[1][3]) /
-                      fWMax;
-    }
-    ClampBounds(kMinPoint.x, kMaxPoint.x, -1.0f, 1.0f);
-    ClampBounds(kMinPoint.y, kMaxPoint.y, -1.0f, 1.0f);
-
-    ClampBounds(kMinPoint.z, kMaxPoint.z, 0.0f, 1.0f);
-}
 
 struct CameraVector
 {

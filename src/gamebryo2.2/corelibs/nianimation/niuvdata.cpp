@@ -4,27 +4,12 @@
 
 extern const void* g_011f3f10;
 
-// @fnv 0x00a45010
-const void* __cdecl FUN_00a45010()
-{
-    return &g_011f3f10;
-}
-
 struct NiUVData
 {
     void Destructor();
     void* FUN_00a45200(unsigned int);
 };
 void __cdecl _delete(void*, unsigned int);
-// Calls Destructor, then frees this with _delete when flags has bit 1 set, and returns this.
-// @fnv 0x00a45200
-void* NiUVData::FUN_00a45200(unsigned int flags)
-{
-    Destructor();
-    if (flags & 1)
-        _delete(this, 0x4C);
-    return this;
-}
 
 extern void(__cdecl* DAT_011f38a0[])(void*);
 extern unsigned char DAT_011f3758[];
@@ -225,45 +210,6 @@ struct FUN_00a457d0_shell
 
     void AppendKeyNames(StrArr*);
 };
-
-// @fnv 0x00a457d0
-void FUN_00a457d0_shell::AppendKeyNames(StrArr* apViewerStrings)
-{
-    char* pString;
-    unsigned int nIndex;
-
-    AppendCameraPathEntries(apViewerStrings);
-
-    pString = _FUN_00a7d330(const_cast<char*>(static_cast<const char*>(g_011f3f10)));
-    nIndex = apViewerStrings->m_uiSize;
-    if (nIndex >= apViewerStrings->m_uiCapacity)
-        apViewerStrings->SetSize(apViewerStrings->m_uiGrowSize + nIndex);
-    apViewerStrings->SetAt(nIndex, pString);
-
-    pString = FUN_00a7d510("m_uiNumUOffsetKeys", m_uiNumUOffsetKeys);
-    nIndex = apViewerStrings->m_uiSize;
-    if (nIndex >= apViewerStrings->m_uiCapacity)
-        apViewerStrings->SetSize(apViewerStrings->m_uiGrowSize + nIndex);
-    apViewerStrings->SetAt(nIndex, pString);
-
-    pString = FUN_00a7d510("m_uiNumUTilingKeys", m_uiNumUTilingKeys);
-    nIndex = apViewerStrings->m_uiSize;
-    if (nIndex >= apViewerStrings->m_uiCapacity)
-        apViewerStrings->SetSize(apViewerStrings->m_uiGrowSize + nIndex);
-    apViewerStrings->SetAt(nIndex, pString);
-
-    pString = FUN_00a7d510("m_uiNumVOffsetKeys", m_uiNumVOffsetKeys);
-    nIndex = apViewerStrings->m_uiSize;
-    if (nIndex >= apViewerStrings->m_uiCapacity)
-        apViewerStrings->SetSize(apViewerStrings->m_uiGrowSize + nIndex);
-    apViewerStrings->SetAt(nIndex, pString);
-
-    pString = FUN_00a7d510("m_uiNumVTilingKeys", m_uiNumVTilingKeys);
-    nIndex = apViewerStrings->m_uiSize;
-    if (nIndex >= apViewerStrings->m_uiCapacity)
-        apViewerStrings->SetSize(apViewerStrings->m_uiGrowSize + nIndex);
-    apViewerStrings->SetAt(nIndex, pString);
-}
 
 extern bool(__cdecl* DAT_011f3ae0[])(void*, void*);
 

@@ -1,4 +1,4 @@
-// gamebryo2.2/corelibs/nianimation/niinterpolator.cpp: NiInterpolator, NiKeyBasedInterpolator (8 functions)
+// gamebryo2.2/corelibs/nianimation/niinterpolator.cpp: NiInterpolator, NiKeyBasedInterpolator (4 functions)
 #include "f3_common.h"
 #include "niinterpolator_decls.h"
 
@@ -28,12 +28,6 @@ void FUN_00a57030_shell::GetKeyTimeRange(float* fBeginKeyTime, float* fEndKeyTim
 
 extern "C" const char* const g_011f36fc_arg1;
 
-// @fnv 0x00a57070
-const char* const* __cdecl FUN_00a57070()
-{
-    return &g_011f36fc_arg1;
-}
-
 struct NiRefObject
 {
     virtual ~NiRefObject();
@@ -43,12 +37,6 @@ struct NiKeyBasedInterpolator : public NiRefObject
 {
     void FUN_00a57010();
 };
-// @fnv 0x00a57010
-void NiKeyBasedInterpolator::FUN_00a57010()
-{
-    *reinterpret_cast<void**>(this) = NiInterpolator_VTable;
-    NiRefObject::~NiRefObject();
-}
 
 template <class T> struct NiTMallocInterface
 {
@@ -65,20 +53,6 @@ template <class T, class A> struct NiTPrimitiveArray
 };
 void __stdcall AppendCameraPathEntries(NiTPrimitiveArray<char*, NiTMallocInterface<char*> >*);
 char* _FUN_00a7d330(const char*);
-// Appends the string returned by _FUN_00a7d330(g_011f36fc_arg1) to pkStrings, growing the array when full.
-// @fnv 0x00a570b0
-void __stdcall FUN_00a570b0(NiTPrimitiveArray<char*, NiTMallocInterface<char*> >* pkStrings)
-{
-    AppendCameraPathEntries(pkStrings);
-    char* pcString = _FUN_00a7d330(g_011f36fc_arg1);
-    unsigned int uiSize = pkStrings->m_usSize;
-    unsigned int uiMaxSize = pkStrings->m_usMaxSize;
-    if (uiSize >= uiMaxSize)
-    {
-        pkStrings->SetSize(uiSize + pkStrings->m_usGrowBy);
-    }
-    pkStrings->SetAt(uiSize, pcString);
-}
 
 // Reconstructed: 26-byte stdcall wrapper that grabs an object from a
 // factory-like helper and calls one virtual on it (vtable slot 0xD0).
@@ -161,13 +135,3 @@ struct FUN_00a57080_Owner
 {
     void* Destroy(unsigned int);
 };
-// Sets the vtable to NiInterpolator, calls the NiRefObject destructor, and frees the object when a1 has bit 0 set.
-// @fnv 0x00a57080
-void* FUN_00a57080_Owner::Destroy(unsigned int auiFlags)
-{
-    *(void**)this = (void*)NiInterpolator_VTable;
-    ((NiRefObject*)this)->NiRefObject::~NiRefObject();
-    if (auiFlags & 1)
-        ::operator delete(this, 0xc);
-    return this;
-}
