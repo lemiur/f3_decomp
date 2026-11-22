@@ -476,25 +476,35 @@ struct E02A80Helper
     const char* Name();
 };
 
+class hkClass;
+class hkStatisticsCollector;
+// hkObjectCopier: the slots of its Fallout 3 vtable (0x00e7e8a0) up to copyObject (New Vegas Xbox 360 PDB names).
 struct E02A80Iface
 {
-    virtual void unk00();
-    virtual void unk04();
-    virtual void unk08();
-    virtual int unk0C(void* a, void* b, void* c, void* d, void* e);
+    virtual ~E02A80Iface();
+    virtual const hkClass* getClassType() const;
+    virtual void calcContentStatistics(hkStatisticsCollector* collector, const hkClass* cls) const;
+    virtual int copyObject(void* dataIn, void* klassIn, void* dataOut, void* klassOut, void* reloc);
 };
 
+// hkBool: a class with a constructor, so it comes back through a hidden result pointer.
+struct E02A80Bool
+{
+    char m_bool;
+    E02A80Bool(bool b) : m_bool((char)b) {}
+};
+// hkStreamWriter: the slots of the Fallout 3 vtables up to tell (New Vegas Xbox 360 PDB names).
 struct E02A80Arg
 {
-    virtual void unk00();
-    virtual void unk04();
-    virtual void unk08();
-    virtual char* unk0C(void* out);
-    virtual void unk10();
-    virtual void unk14();
-    virtual void unk18();
-    virtual void unk1C();
-    virtual int unk20();
+    virtual ~E02A80Arg();
+    virtual const hkClass* getClassType() const;
+    virtual void calcContentStatistics(hkStatisticsCollector* collector, const hkClass* cls) const;
+    virtual E02A80Bool isOk() const;
+    virtual int write(const void* buf, int nbytes);
+    virtual void flush();
+    virtual E02A80Bool seekTellSupported() const;
+    virtual int seek(int offset, int whence);
+    virtual int tell() const;
 };
 
 struct E02A80Local
@@ -529,8 +539,8 @@ struct E02A80_cls
 {
     int unk00;
     int unk04;
-    E02A80Iface* unk08;
-    E02A80Helper* unk0c;
+    E02A80Iface* m_copier;   // +0x08
+    E02A80Helper* m_cache;   // +0x0C
 
     int hkPlatformObjectWriter_writeObject(E02A80Arg* arg1, int arg2, E02A80Helper* arg3, int arg4);
 };
@@ -541,7 +551,7 @@ struct E02A80_cls
 int E02A80_cls::hkPlatformObjectWriter_writeObject(E02A80Arg* apArg, int aiValue, E02A80Helper* apHelper, int arg4)
 {
     E02A80Helper* pResolvedHelper;
-    E02A80Helper* pHelper = unk0c;
+    E02A80Helper* pHelper = m_cache;
     if (pHelper != 0)
     {
         pResolvedHelper = pHelper->Resolve(apHelper, reinterpret_cast<E02A80LayoutView*>(this)->FUN_00e02a70());
@@ -553,11 +563,11 @@ int E02A80_cls::hkPlatformObjectWriter_writeObject(E02A80Arg* apArg, int aiValue
     E02A80Local a;
     void* b;
     E02A80Arg* e;
-    if (unk0c != 0 && FUN_00cb0fa0(pResolvedHelper->Name(), str_010d66fc) == 0)
+    if (m_cache != 0 && FUN_00cb0fa0(pResolvedHelper->Name(), str_010d66fc) == 0)
     {
-        b = unk0c->Resolve(reinterpret_cast<void*>(aiValue), reinterpret_cast<E02A80LayoutView*>(this)->FUN_00e02a70());
+        b = m_cache->Resolve(reinterpret_cast<void*>(aiValue), reinterpret_cast<E02A80LayoutView*>(this)->FUN_00e02a70());
         e = apArg;
-        a.Seek(e->unk20(), 0);
+        a.Seek(e->tell(), 0);
         E02A80Box box;
         box.unk08 = (int)0x80000000;
         box.unk14 = (int)0x80000000;
@@ -565,14 +575,14 @@ int E02A80_cls::hkPlatformObjectWriter_writeObject(E02A80Arg* apArg, int aiValue
         box.unk2c = (int)0x80000000;
         box.unk00 = 0;
         box.unk04 = 0;
-        box.unk0c = 0;
+        box.m_cache = 0;
         box.unk10 = 0;
         box.unk18 = 0;
         box.unk1c = 0;
         box.unk24 = 0;
         box.unk28 = 0;
         box.unk30 = 0;
-        unk08->unk0C(b, apHelper, apArg, pResolvedHelper, &box);
+        m_copier->copyObject(b, apHelper, apArg, pResolvedHelper, &box);
         e = reinterpret_cast<E02A80Arg*>(&a);
         box.Finish();
     }
@@ -580,7 +590,6 @@ int E02A80_cls::hkPlatformObjectWriter_writeObject(E02A80Arg* apArg, int aiValue
     {
         e = apArg;
     }
-    unk08->unk0C(reinterpret_cast<void*>(aiValue), apHelper, e, pResolvedHelper, reinterpret_cast<void*>(arg4));
-    char* p = e->unk0C(&apHelper);
-    return *p == 0;
+    m_copier->copyObject(reinterpret_cast<void*>(aiValue), apHelper, e, pResolvedHelper, reinterpret_cast<void*>(arg4));
+    return e->isOk().m_bool == 0;
 }
