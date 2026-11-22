@@ -11,8 +11,9 @@ struct ThresholdHolder
 {
     unsigned int unk00;
     unsigned int unk04;
-    unsigned int unk08;
+        unsigned int unk08;
     ThresholdRecord* record;
+    float unk10;
     unsigned char* WriteThresholdFlag(unsigned char* output);
 };
 // Writes 1 to output when record->value is below 1.0f, otherwise 0, and returns output.
@@ -21,7 +22,7 @@ struct ThresholdHolder
 // pdb params: __that
 unsigned char* ThresholdHolder::WriteThresholdFlag(unsigned char* output) {
     unsigned char result;
-    if (*(float*)((char*)this + 16) < 1.0f)
+    if (unk10 < 1.0f)
         result = 1;
     else
         result = 0;

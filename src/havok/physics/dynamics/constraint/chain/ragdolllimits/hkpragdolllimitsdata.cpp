@@ -27,7 +27,7 @@ void __stdcall FUN_00d4f150(int aiUnused, int* b)
     b[0] = 0x1c;
 }
 
-struct hkPragdollLimitsData
+struct hkPragdollLimitsData : public hkpRagdollLimitsData
 {
     void __thiscall FUN_00d4f270(bool value);
 };
@@ -37,7 +37,7 @@ struct hkPragdollLimitsData
 // pdb params: enable
 void __thiscall hkPragdollLimitsData::FUN_00d4f270(bool value)
 {
-    ((char*)this)[0x9a] = (unsigned char)((value ? 1 : 0) << 4);
+    m_kBridgeAtoms.m_kConeLimit.m_memOffsetToAngleOffset = (unsigned char)((value ? 1 : 0) << 4);
 }
 
 // @fnv 0x00d4f290

@@ -475,26 +475,40 @@ void* __thiscall FUN_00c98350_Class::InitAndMaybeFree(int flags)
 extern "C" __declspec(dllimport) void __stdcall EnterCriticalSection(void*);
 extern "C" __declspec(dllimport) void __stdcall LeaveCriticalSection(void*);
 
+// hkCriticalSection: m_section (a CRITICAL_SECTION) and two words the Fallout 3 build resets on leave.
+struct ForEachLock
+{
+    char m_section[0x18];
+    int unk18;
+    int unk1C;
+    void __thiscall FUN_00908a00();
+};
+// A listener array (data, size, capacity at +0x08) guarded by the critical section at +0x14.
 struct FUN_00c983e0_Class {
+    int unk00, unk04;
+    void** m_data;
+    int m_size;
+    int m_capacityAndFlags;
+    ForEachLock* m_lock;
     void ForEachCall(int a, int b, int c, int d, int e);
 };
 
 // Locks the critical section, calls the second virtual method of each object in the array with the five arguments, then unlocks.
 // @f3 0x00909470 (community match, verified in this file)
-struct ForEachLock { void __thiscall FUN_00908a00(); };
+
 void FUN_00c983e0_Class::ForEachCall(int aiArg1, int aiArg2, int aiArg3, int aiArg4, int aiArg5)
 {
-    void* lock = *(void**)((char*)this + 0x14);
-    ((ForEachLock*)lock)->FUN_00908a00();
-    for (int i = 0; i < *(int*)((char*)this + 0xc); ++i) {
-        void* obj = *(void**)(*(char**)((char*)this + 8) + i * 4);
+        ForEachLock* lock = m_lock;
+    lock->FUN_00908a00();
+    for (int i = 0; i < m_size; ++i) {
+        void* obj = m_data[i];
         void** vtbl = *(void***)obj;
         typedef void (__thiscall* Fn)(void*, int, int, int, int, int);
         ((Fn)vtbl[9])(obj, aiArg1, aiArg2, aiArg3, aiArg4, aiArg5);
     }
-    lock = *(void**)((char*)this + 0x14);
-    *(int*)((char*)lock + 0x18) = -1;
-    *(int*)((char*)lock + 0x1c) = -1;
+        lock = m_lock;
+    lock->unk18 = -1;
+    lock->unk1C = -1;
     LeaveCriticalSection(lock);
 }
 
@@ -3158,19 +3172,23 @@ public:
 };
 
 // @f3 0x00909410 (community match, verified in this file)
+// hkCriticalSection: m_section (a CRITICAL_SECTION) and two words the Fallout 3 build resets on leave.
 struct ListenerLockStand
 {
+    char m_section[0x18];
+    int unk18;
+    int unk1C;
     void __thiscall FUN_00908a00();
 };
 void hkpListenerListC986::FUN_00c98670(int aiArg0, int aiArg1, int aiArg2, int aiArg3)
 {
-    void* lock = m_pWorldLock;
-    ((ListenerLockStand*)lock)->FUN_00908a00();
+    ListenerLockStand* lock = (ListenerLockStand*)m_pWorldLock;
+    lock->FUN_00908a00();
     for (int i = 0; i < m_iElementCount; i++)
         m_data[i]->notify(aiArg0, aiArg1, aiArg2, aiArg3);
-    lock = m_pWorldLock;
-    *(int*)((char*)lock + 0x18) = -1;
-    *(int*)((char*)lock + 0x1c) = -1;
+    lock = (ListenerLockStand*)m_pWorldLock;
+    lock->unk18 = -1;
+    lock->unk1C = -1;
     LeaveCriticalSection(lock);
 }
 

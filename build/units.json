@@ -568370,7 +568370,7 @@
     },
     {
      "address": "0x009af660",
-     "symbol": "?hkStdioStreamWriter_flush@@YIXPAXH@Z",
+     "symbol": "?hkStdioStreamWriter_flush@@YIXPAUStdioWriterD2BE@@H@Z",
      "size": 15
     },
     {

@@ -31,9 +31,15 @@ extern int DAT_010ce6f4;
 void __cdecl FUN_00ecda70(void*);
 // @fnv 0x00d2bec0
 // pdb: hkStdioStreamWriter::flush | hkStdioStreamWriter.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
-void __fastcall hkStdioStreamWriter_flush(void* self, int)
+// hkStdioStreamWriter: m_handle (the FILE*) at +0x08 (New Vegas Xbox 360 PDB).
+struct StdioWriterD2BE
 {
-    void* p = *(void**)((char*)self + 8);
+    int unk00, unk04;
+    void* m_handle;
+};
+void __fastcall hkStdioStreamWriter_flush(StdioWriterD2BE* self, int)
+{
+    void* p = self->m_handle;
     if (p)
         FUN_00ecda70(p);
 }
