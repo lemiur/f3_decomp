@@ -31,6 +31,7 @@ template <class T> class NiTPrimitiveArray;
 class NiObject : public NiRefObject
 {
   public:
+    NiObject();
     virtual ~NiObject();
     virtual const NiRTTI* GetRTTI() const;                                         //  2
     virtual NiNode* IsNode();                                                      //  3

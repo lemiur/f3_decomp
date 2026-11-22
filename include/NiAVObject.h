@@ -57,6 +57,52 @@ class NiAVObject : public NiObjectNET
     virtual void OnVisible(NiCullingProcess&);                                               // 53
     virtual void PurgeRendererData(NiRenderer* apkRenderer);                                 // 54
 
+    // Inline accessors (FNV360_PDB, 0822 debug build; inline in the retail builds).
+    NiNode* GetParent()
+    {
+        return m_pkParent;
+    }
+    NiCollisionObject* GetCollisionObject() const
+    {
+        return m_spCollisionObject;
+    }
+    const NiTransform& GetLocalTransform() const
+    {
+        return m_kLocal;
+    }
+    const NiTransform& GetWorldTransform() const
+    {
+        return m_kWorld;
+    }
+    const NiPoint3& GetTranslate() const
+    {
+        return m_kLocal.m_Translate;
+    }
+    const NiMatrix3& GetRotate() const
+    {
+        return m_kLocal.m_Rotate;
+    }
+    float GetScale() const
+    {
+        return m_kLocal.m_fScale;
+    }
+    const NiPoint3& GetWorldTranslate() const
+    {
+        return m_kWorld.m_Translate;
+    }
+    const NiMatrix3& GetWorldRotate() const
+    {
+        return m_kWorld.m_Rotate;
+    }
+    float GetWorldScale() const
+    {
+        return m_kWorld.m_fScale;
+    }
+    bool GetBit(unsigned int uMask) const
+    {
+        return (m_uFlags & uMask) != 0;
+    }
+
     void AttachParent(NiNode* pkParent);
     void AttachProperty(NiProperty* pkProperty);
     void DetachProperty(NiProperty* pkProperty);

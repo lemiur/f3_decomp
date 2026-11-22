@@ -538001,7 +538001,7 @@
     "/MT",
     "/O2",
     "/GS",
-    "/EHsc",
+    "/EHs-c-",
     "/Gy"
    ],
    "functions": [
@@ -538022,22 +538022,22 @@
     },
     {
      "address": "0x0084a770",
-     "symbol": "?FUN_00a81010@MyColl@@QAE_NAAVNiStream@@@Z",
+     "symbol": "?RegisterStreamables@NiCollisionObject@@UAE_NAAVNiStream@@@Z",
      "size": 47
     },
     {
      "address": "0x0084a7a0",
-     "symbol": "?FUN_00a81040@FakeThis00a81040@@QAEXAAVNiStream@@@Z",
+     "symbol": "?SaveBinary@NiCollisionObject@@UAEXAAVNiStream@@@Z",
      "size": 32
     },
     {
      "address": "0x0084a7c0",
-     "symbol": "?FUN_00a81060@T_00a81060@@QAE_NPAVNiObject@@@Z",
+     "symbol": "?IsEqual@NiCollisionObject@@UAE_NPAVNiObject@@@Z",
      "size": 51
     },
     {
      "address": "0x0084a810",
-     "symbol": "?SetSceneObject@NiCollisionObject@@QAEXPAVNiAVObject@@@Z",
+     "symbol": "?SetSceneGraphObject@NiCollisionObject@@UAEXPAVNiAVObject@@@Z",
      "size": 30
     },
     {
@@ -538047,37 +538047,38 @@
     },
     {
      "address": "0x0084a8c0",
-     "symbol": "?WriteToStream@ClaimCls@@QAEXAAUStreamShell@@@Z",
+     "symbol": "?AddViewerStrings@NiCollisionObject@@UAEXPAV?$NiTPrimitiveArray@PAD@@@Z",
      "size": 134
     },
     {
      "address": "0x00945080",
-     "symbol": "?LoadBinary@NiCollisionObject@@UAEXAAVNiStream@@@Z",
+     "symbol": "?FUN_00a80fd0@FUN_00a80fd0_shell@@QAEXAAVNiStream@@@Z",
      "size": 22
     }
    ],
    "symbols": {
     "?FUN_00a7d330@@YAPADPBD@Z": "0x00847b50",
-    "?ResetStreamState@NiStream@@QAEXXZ": "0x0082b620",
-    "?GetLoadedObject@NiStream@@QAEPAVNiObject@@XZ": "0x0082a280",
-    "?FUN_00a7d330@@YAPAXPAX@Z": "0x00847b50",
     "?LoadBinary@NiObject@@UAEXAAVNiStream@@@Z": "0x00845bc0",
-    "?FUN_00a7d5a0@@YAPAXPBDPAX@Z": "0x00847e20",
-    "?IsSameAs@@YG_NPAVNiObject@@@Z": "0x008258d0",
     "?LinkObject@NiObject@@UAEXAAVNiStream@@@Z": "0x0078c030",
     "??0NiObject@@QAE@XZ": "0x00825800",
-    "?AssignCollisionObject@NiAVObject@@QAEXPAVNiCollisionObject@@@Z": "0x0056ff10",
     "??_7NiCollisionObject@@6B@": "0x00e23964",
-    "?RegisterStreamables@NiObjectBase@@QAE_NAAVNiStream@@@Z": "0x008257d0",
     "?BaseGetViewerStrings@BA81100Base@@QAEXPAVBA81100StringArray@@@Z": "0x0084a860",
     "?g_pcA81100Name@@3PBDB": "0x0108ec3c",
     "?SetSize@BA81100StringArray@@QAEXI@Z": "0x00555790",
     "?SetAt@BA81100StringArray@@QAEXIABQAD@Z": "0x005b3880",
-    "?g_011f4ad4@@3PAXA": "0x0108f4cc",
-    "?FUN_0096ad30@StreamShell@@QAEXI@Z": "0x00555790",
-    "?FUN_0096ae90@StreamShell@@QAEXIPAX@Z": "0x005b3880",
     "??_C@_0BA@GKHLMDOM@m_pkSceneObject?$AA@": "0x00e23a04",
-    "?g_01267b70_arg1@@3QBDB": "0x0108f414"
+    "?g_01267b70_arg1@@3QBDB": "0x0108f414",
+    "?GetObjectFromLinkID@NiStream@@QAEPAVNiObject@@XZ": "0x0082a280",
+    "?RegisterStreamables@NiObject@@UAE_NAAVNiStream@@@Z": "0x008257d0",
+    "?SaveBinary@NiObject@@UAEXAAVNiStream@@@Z": "0x0078c030",
+    "?SetCollisionObject@NiAVObject@@QAEXPAVNiCollisionObject@@@Z": "0x0056ff10",
+    "?ReadLinkID@NiStream@@QAEXXZ": "0x0082b620",
+    "?IsEqual@NiObject@@UAE_NPAV1@@Z": "0x008258d0",
+    "?ms_RTTI@NiCollisionObject@@2VNiRTTI@@B": "0x0108f4cc",
+    "?NiGetViewerString@@YAPADPBD@Z": "0x00847b50",
+    "?SetSize@?$NiTPrimitiveArray@PAD@@QAEXI@Z": "0x00555790",
+    "?SetAt@?$NiTPrimitiveArray@PAD@@QAEXIABQAD@Z": "0x005b3880",
+    "?NiGetViewerString@@YAPADPBDPAX@Z": "0x00847e20"
    }
   },
   {

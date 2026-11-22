@@ -10,6 +10,7 @@ class NiUpdateData;
 class NiCollisionObject : public NiObject
 {
   public:
+    NiCollisionObject(NiAVObject* pkSceneObject);
     virtual ~NiCollisionObject();
     virtual const NiRTTI* GetRTTI() const;
     virtual void LoadBinary(NiStream& kStream);
