@@ -188,13 +188,17 @@ struct DbFirst
     char* __thiscall GetLastNodeFlag(void* out);
 };
 
+class hkClass;
+class hkStatisticsCollector;
+// hkVtableClassRegistry: the five slots of its Fallout 3 vtable (0x00e7e5d0), named as the New Vegas Xbox 360 PDB
+// names them.
 struct DbSecond
 {
-    virtual void vf00();
-    virtual void vf04();
-    virtual void vf08();
-    virtual void vf0C();
-    virtual unsigned int vf10(unsigned int value);
+    virtual ~DbSecond();
+    virtual const hkClass* getClassType() const;
+    virtual void calcContentStatistics(hkStatisticsCollector* collector, const hkClass* cls) const;
+    virtual void registerVtable(const void* vtable, const hkClass* klass);
+    virtual unsigned int getClassFromVirtualInstance(unsigned int obj) const;
 };
 
 // Calls first->GetLastNodeFlag; if its first character is nonzero, returns second->vf10(arg) or 0; otherwise returns the first pointer.
@@ -208,7 +212,7 @@ static __declspec(noinline) unsigned int FUN_00dbd9f0(DbFirst* first, DbSecond* 
     if (*result != 0)
     {
         if (second != 0)
-            return second->vf10(arg);
+            return second->getClassFromVirtualInstance(arg);
         return 0;
     }
     return (unsigned int)first;
@@ -729,30 +733,33 @@ struct hkPointerMapE4D
     int m_iPairCount;
 };
 
+// hkBuiltinTypeRegistry: the slots of the Fallout 3 hkDefaultBuiltinTypeRegistry vtable (0x00e37634) up to
+// getVtableClassRegistry.
 struct Mgr
 {
-    virtual void v0();
-    virtual void v1();
-    virtual void v2();
-    virtual void v3();
-    virtual void v4();
-    virtual void* vf5();
+    virtual ~Mgr();
+    virtual const hkClass* getClassType() const;
+    virtual void calcContentStatistics(hkStatisticsCollector* collector, const hkClass* cls) const;
+    virtual void* getTypeInfoRegistry();
+    virtual void* getClassNameRegistry();
+    virtual void* getVtableClassRegistry();
 };
 extern Mgr* DAT_01268b08;
+// hkPackfileWriter: the slots of its Fallout 3 vtable (0x00e86658) up to setContentsWithRegistry.
 struct Cls
 {
-    virtual void v0();
-    virtual void v1();
-    virtual void v2();
-    virtual void vf3(void* a, void* b, void* r, void* c);
+    virtual ~Cls();
+    virtual const hkClass* getClassType() const;
+    virtual void calcContentStatistics(hkStatisticsCollector* collector, const hkClass* cls) const;
+    virtual void setContentsWithRegistry(void* object, void* klass, void* registry, void* listener);
     void hkPackfileWriter_setContents(void* a, void* b, void* c);
 };
-// Invokes vf3 on the object, passing a, b, the result of DAT_01268b08->vf5(), and c.
+// Invokes setContentsWithRegistry on the object, passing a, b, the builtin registry's vtable class registry, and c.
 // @fnv 0x00dbda50
 // pdb: hkPackfileWriter::setContents | hkPackfileWriter.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
 void Cls::hkPackfileWriter_setContents(void* apArg1, void* apArg2, void* apArg3)
 {
-    vf3(apArg1, apArg2, DAT_01268b08->vf5(), apArg3);
+    setContentsWithRegistry(apArg1, apArg2, DAT_01268b08->getVtableClassRegistry(), apArg3);
 }
 
 struct S00dbddc0_Base
