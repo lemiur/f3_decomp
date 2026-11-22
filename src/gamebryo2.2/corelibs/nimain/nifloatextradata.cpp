@@ -2,12 +2,6 @@
 // src/gamebryo2.2/corelibs/nimain/nifloatextradata.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/_fallout3/platforms/common/code/gamebryo2.2/corelibs/nimain/nifloatextradata.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-struct GlobalObjectO2_00a7b610
-{
-};
-
-extern GlobalObjectO2_00a7b610 g_011f5f40;
-
 struct NiFloatExtraData
 {
     void* m_ppVirtualMethodTable;
@@ -139,37 +133,3 @@ void Cls_00a9a4e0::FUN_00a9a4e0(NiStream& stream)
     output->m_pos += output->write(output, &m_fValue, 4, &size, 1);
 }
 }  // namespace fnv_00a9a4e0
-
-struct StrArr
-{
-    char _pad00[8];
-    unsigned short m_pRayCursor;
-    unsigned short m_nextIndex;
-    unsigned short _pad0c;
-    unsigned short m_growSize;
-
-    void SetSize(unsigned int size);
-    void SetAt(unsigned int index, char*& value);
-};
-
-struct A89C70StringArray : StrArr
-{
-};
-
-struct A89C70Base
-{
-    void* m_ppVirtualMethodTable;
-    char _pad04[8];
-
-    void GetViewerStrings(A89C70StringArray* strings);
-};
-
-char* __cdecl _FUN_00a7d330(GlobalObjectO2_00a7b610* object);
-char* __cdecl FUN_00a7d550(char const* name, float value);
-
-struct FUN_00a9a520_shell : A89C70Base
-{
-    float m_fValue;
-
-    void AppendViewerStrings(A89C70StringArray* strings);
-};

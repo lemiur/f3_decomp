@@ -236,7 +236,6 @@ struct NiObjectNET;
 struct NiBlendColorInterpolator;
 
 struct FUN_00a56110_shell;
-struct FUN_00a561c0_shell;
 
 struct FUN_00a37260_shell
 {
@@ -391,29 +390,6 @@ bool FUN_00a564a0_cls::FUN_00a564a0(void* pkOther)
 }
 
 extern "C" void* g_011f4074;
-extern int DAT_01096f1c;
-void* __cdecl FUN_00a7d330(void*);
-
-struct ArraySource
-{
-    virtual ~ArraySource();
-    void* m_pBase;
-    unsigned short m_usMaxSize;
-    unsigned short m_usSize;
-    unsigned short m_usESize;
-    unsigned short m_usGrowBy;
-    void FUN_0096ad30(unsigned int newSize);
-    void FUN_0096ae90(unsigned int index, void** result);
-};
-struct AssignmentMember
-{
-    void* ToString(const int*);
-};
-struct FUN_00a564d0_shell
-{
-    void FUN_00a38080(ArraySource* source);
-    void AppendTwoEntries(ArraySource* source);
-};
 
 struct CA61c0
 {

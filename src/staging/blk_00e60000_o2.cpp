@@ -101,9 +101,6 @@ void __thiscall FUN_00e67fd0_cls::ClearEntries()
 
 typedef void*(__stdcall* DepthDevice)(unsigned int);
 typedef int(__stdcall* CreateExFn)(unsigned int, DepthDevice**);
-extern void* DAT_0126f0d4;
-extern DepthDevice DAT_0126f0dc;
-extern CreateExFn DAT_0126f0e0;
 extern void*(__stdcall* DAT_00fdf0ac)(void*, const char*);
 extern void*(__stdcall* DAT_00fdf0b0)(const char*);
 
@@ -113,12 +110,6 @@ struct MemoryManager
     void __thiscall Deallocate(void*);
 };
 extern int DAT_010eec74;
-struct FUN_00e7b200_Class
-{
-    int vtbl;
-    int m_p;
-    FUN_00e7b200_Class* __thiscall FUN_00e7b200(int);
-};
 
 struct FUN_00e7d490_Class
 {
@@ -492,31 +483,6 @@ void __thiscall FUN_00e7d560_Class::FUN_00e7d560()
     }
 }
 
-struct FUN_00e673f0_shell
-{
-    int __thiscall GetPrimitiveCount();
-};
-struct FUN_00e613f0
-{
-    int _00;
-    int _04;
-    int _08;
-    FUN_00e673f0_shell** _0c;
-    int _10;
-    int __thiscall Sum();
-};
-
-int __cdecl CompareStringsCaseInsensitive(int, int);
-
-struct FUN_00e63ec0_Class
-{
-    int _00;
-    int _04;
-    int* _08;
-    int _0c;
-    int __thiscall FUN_00e63ec0(int a, int* out);
-};
-
 struct NiTMapBaseStub
 {
     void RemoveAll();
@@ -583,13 +549,6 @@ FUN_00e7b000_Class* __thiscall FUN_00e7b000_Class::FUN_00e7b000(int deleting)
 void* __cdecl _NiFree(void*);
 extern int DAT_010eec4c;
 extern MemoryManager _g_memoryManager;
-
-struct FUN_00e7b230_Class
-{
-    void* vtbl;
-    void* m_p;
-    void* __thiscall FUN_00e7b230(unsigned char flags);
-};
 
 namespace fnv_00e7bb50 {
 void __cdecl _NiFree(void* p);
@@ -867,29 +826,6 @@ void __cdecl DestroyArrayElements(void* p)
     }
 }
 
-struct FUN_00e611d0_Object
-{
-    unsigned char unk00;
-    unsigned char unk01;
-    unsigned char unk02;
-    unsigned char unk03;
-    unsigned char unk04;
-    unsigned char unk05;
-    unsigned char unk06;
-    unsigned char unk07;
-    int unk08;
-    int unk0C;
-    unsigned char unk10;
-    unsigned char unk11;
-    unsigned char unk12;
-    unsigned char unk13;
-    unsigned char unk14;
-    unsigned char unk15;
-    unsigned char unk16;
-    unsigned char unk17;
-    int unk18;
-};
-
 struct FUN_00c85750_Result
 {
     int unk00;
@@ -900,32 +836,7 @@ struct FUN_00c85750_Result
 };
 
 FUN_00c85750_Result* __cdecl FUN_00c85750();
-void __cdecl AppendIndexSequence(int, int, int, int, int);
 void __cdecl AppendIndices(int, int, int, int, int);
-
-struct FUN_00e61230_Buffer
-{
-    unsigned int field00;
-    unsigned int field04;
-    unsigned int field08;
-    unsigned int field0c;
-    unsigned int field10;
-    unsigned int field14;
-    unsigned int field18;
-    unsigned int field1c;
-    unsigned int field20;
-    unsigned int field24;
-};
-struct FUN_00e61230_Receiver
-{
-    virtual void unknown0() = 0;
-    virtual void unknown1() = 0;
-    virtual void unknown2() = 0;
-    virtual void unknown3() = 0;
-    virtual void begin(void* value, unsigned int mode, FUN_00e61230_Buffer* buffer) = 0;
-    virtual void end(FUN_00e61230_Buffer* buffer) = 0;
-};
-extern "C" void __cdecl FUN_00e611d0(FUN_00e61230_Buffer* buffer, unsigned int stage);
 
 struct E65000Entry
 {
@@ -946,41 +857,6 @@ float E65000Swap(E65000Entry* pkEntries, int iIndex, float fValue)
 {
     return FUN_00e65000(pkEntries, iIndex, fValue);
 }
-
-class E673F0Geometry
-{
-  public:
-    int unk00;
-    int unk04;
-    char m_cPrimitiveType;
-    char unk09;
-    char unk0A;
-    char unk0B;
-    int unk0C;
-    int m_iIndexCount;
-    int unk14;
-    int unk18;
-    int m_iVertexCount;
-
-    int GetPrimitiveCount();
-};
-
-struct IndexSource_e67420
-{
-    int unk00;
-    int unk04;
-    char m_cType;
-    char unk09;
-    char unk0a;
-    char unk0b;
-    unsigned short* m_pusIndices;
-    int m_iShortCount;
-    int unk14;
-    unsigned int* m_puiIndices;
-    int m_iIntCount;
-
-    bool FUN_00e67420(unsigned int iIndex, unsigned int* p0, unsigned int* p1, unsigned int* p2);
-};
 
 class FUN_00e67660_cls;
 class FnvEnt67;
@@ -1932,8 +1808,6 @@ class FUN_00e67660_cls
     FnvNode67* m_de0[100];
     int FUN_00e67660(FnvNode67* a1, int a2, int* a3, FnvEnt67** a4);
 };
-
-extern float DAT_0104da48;
 
 void* __cdecl _memmove(void*, const void*, unsigned);
 struct CopyDesc
@@ -3062,16 +2936,6 @@ template <class TKEY, class TVAL> class BE7B040Map : public BE7B040MapBase<TKEY,
     }
 };
 
-class FUN_00e7b040_cls
-{
-  public:
-    ~FUN_00e7b040_cls() throw();
-
-    int unk00;
-    int unk04;
-    BE7B040Map<unsigned int, BE7B040Value*> m_kValues;
-};
-
 struct Entry
 {
     unsigned int identifier;
@@ -4020,9 +3884,6 @@ void FUN_00e7d180_cls::FUN_00e7d180()
     m_0c = 0;
 }
 
-struct CpuOpaque;
-extern CpuOpaque DAT_0126f5a4;
-
 extern "C" __declspec(dllimport) long __stdcall InterlockedIncrement(volatile long* value);
 
 struct D3DSurfaceDesc_e7d250
@@ -4278,8 +4139,6 @@ void FUN_00e7d4e0_cls::FUN_00e7d4e0()
 }
 }  // namespace fnv_00e7d4e0
 
-extern int DAT_0126f5e0;
-
 namespace fnv_00e7d620 {
 extern "C" __declspec(dllimport) long __stdcall InterlockedDecrement(volatile long* value);
 
@@ -4335,8 +4194,6 @@ FUN_00e7d620_cls* FUN_00e7d620_cls::FUN_00e7d620(unsigned char acFlags)
     return this;
 }
 }  // namespace fnv_00e7d620
-
-extern int DAT_0126f5b4;
 
 namespace fnv_00e7eb50 {
 extern "C" void* __cdecl FUN_00e7e880(unsigned int count);
@@ -6313,52 +6170,16 @@ struct U16Array
     }
 };
 
-struct IndexSource
-{
-    unsigned char type;
-    unsigned char unk01;
-    unsigned char unk02;
-    unsigned char unk03;
-    int unk04;
-    int count;
-    int unk0c;
-    int unk10;
-    unsigned char mode;
-    unsigned char unk15;
-    unsigned char unk16;
-    unsigned char unk17;
-    int unk18;
-};
-
 inline void* __cdecl operator new(unsigned int, void* p) throw()
 {
     return p;
 }
-void __cdecl FUN_00e60e40(int type, int count, int data, IntArray* out);
-void __cdecl FUN_00e60f50(int type, int data, int count, int base, IntArray* out);
 void __cdecl AppendIndices(int type, int data, int count, int base, U16Array* out);
 
 enum hkResultE63E
 {
     HK_SUCCESS_E63E = 0,
     HK_FAILURE_E63E = 1
-};
-
-struct hkPairE63E
-{
-    void* m_key;
-    unsigned int m_uiFilterValue;
-};
-
-class hkMapE63E
-{
-  public:
-    int unk00;
-    int unk04;
-    hkPairE63E* m_pairs;
-    int m_numPairs;
-
-    hkResultE63E FindValue(void* key, unsigned int* out) const;
 };
 
 struct FnvCpu_FUN_00e687f0_CpuObject
@@ -6509,30 +6330,8 @@ template <class T> class hkArrayE60F
     }
 };
 
-extern "C" double DAT_010229b8;
-
 volatile unsigned g_e62ac0_seed = 12345u;
 volatile float g_e62ac0_sink;
-
-// SetVec3FromHelper - 36 bytes at 0x00e62af0 (/MT /O2 /GS /EHsc /Gy)
-// void body: out receives the same float three times, and out arrives in
-// EDX: this function only exists under a compiler-chosen custom calling
-// convention (static callee, caller built the stack args and cleans them,
-// hence the plain `ret`).  The convention register is steered by the exact
-// clobber set of the in-TU callee: helper() visibly clobbers EAX and ECX
-// (imul / shl with a variable count), so `out`, which must live across the
-// call, gets the only remaining volatile register: EDX.
-//   call 0xe62ac0            ; helper, result in st(0)
-//   fld  [esp+4] / fld st(0) / faddp st(2) / fsubr [esp+8] / fmulp st(1)
-//   fstp [esp+4] / fld [esp+4]
-//   fst [edx] / fst [edx+4] / fstp [edx+8]
-//   ret
-struct Vec3
-{
-    float x;
-    float y;
-    float z;
-};
 
 int g_cn = 5;
 int g_c2 = 7;
@@ -7408,11 +7207,7 @@ class GlobalObject_0096a2d0
     void Lock(const char*);
 };
 
-extern ListNode* DAT_011c5f58;
-
 extern GlobalObject_0096a2d0 g_011c5f80;
-
-extern unsigned int DAT_011c5f84;
 
 void __cdecl FUN_0043a080();
 
@@ -7852,10 +7647,6 @@ extern "C" __m128 _mm_mul_ps(__m128, __m128);
 extern "C" __m128 _mm_add_ss(__m128, __m128);
 extern "C" __m128 _mm_shuffle_ps(__m128, __m128, int);
 extern "C" void _mm_store_ss(float*, __m128);
-struct BarycentricResult
-{
-    float u, v, w;
-};
 
 namespace fnv_00e63af0 {
 union __declspec(intrin_type) __declspec(align(16)) __m128
@@ -7867,8 +7658,6 @@ extern "C" __m128 _mm_mul_ps(__m128, __m128);
 extern "C" __m128 _mm_shuffle_ps(__m128, __m128, int);
 extern "C" __m128 _mm_add_ss(__m128, __m128);
 extern "C" void _mm_store_ss(float*, __m128);
-
-extern double DAT_0109a3a0;
 
 __declspec(align(16)) class ClipPlane
 {
@@ -7886,7 +7675,6 @@ __declspec(align(16)) class ClipPlane
 namespace se695c0 {
 
 struct Block;
-int SelectFormatTileValue(int iArg, Block* pkBlock);
 
 struct Block
 {
@@ -8470,9 +8258,6 @@ int FUN_00e7ccf0(unsigned int index)
 }
 
 
-class GlobalObjectO2_00a7b610;
-extern GlobalObjectO2_00a7b610 g_0126f59c;
-
 class FUN_00e7a5e0_Object
 {
   public:
@@ -8833,11 +8618,6 @@ struct FormatPrefsQ
     int m_eMipFlag;
 };
 
-struct MemoryManagerQ : MemoryManager
-{
-    void* FUN_00aa3e40(unsigned int uiSize);
-};
-
 template <class T> __forceinline T NiMaxQ(T a, T b)
 {
     return (a > b) ? a : b;
@@ -8856,17 +8636,11 @@ __forceinline bool IsBumpFormatQ(int eFormat)
 int __cdecl FUN_00ec65a6(char* pcDest, unsigned int uiDestSize, const char* pcSrc);
 void __cdecl FUN_00aa2a00(char* pcPath);
 int __cdecl FUN_00aa1360(const char* s1, const char* s2);
-NiFileQ* __cdecl FUN_00aa1a20(const char* pcName, int eMode, unsigned int uiBufferSize);
 void* __cdecl FUN_00aa1070(unsigned int uiSize);
 void __cdecl FUN_00aa10f0(void* pvMem);
 void* __cdecl FUN_00ec44d0(void* pvDest, const void* pvSrc, unsigned int uiSize);
-long __stdcall FUN_00ee6e22(const void* pvSrc, unsigned int uiSize, D3DXImageInfoQ* pkInfo);
 __declspec(noalias) long __stdcall FUN_00ee6e1c(void* pkDevice, const void* pvSrc, unsigned int uiSize,
                                                 D3DBaseTextureQ** ppkTexture);
-long __stdcall FUN_00ee6e16(void* pkDevice, const void* pvSrc, unsigned int uiSize, D3DBaseTextureQ** ppkTexture);
-long __stdcall FUN_00ee6e10(void* pkDevice, const void* pvSrc, unsigned int uiSize, D3DBaseTextureQ** ppkTexture);
-extern unsigned int DAT_0126efc4;
-extern unsigned int DAT_0126efc8;
 
 struct LocalGroup2
 {
@@ -9671,8 +9445,6 @@ struct LockApi { void FUN_00409a80(const char* name=0) throw(); };
 
 
 
-extern unsigned int DAT_0106e5a4;
-
 struct NewPool {
 
  static ListItem* Allocate() throw() {
@@ -9933,9 +9705,7 @@ namespace fnv_00e68010 {
 #include <d3d9.h>
 
 struct NiPixelFormatStub;
-D3DFORMAT GetD3DFormat(const NiPixelFormatStub* kFormat);
 const char* GetErrorString(HRESULT hr);
-void DebugOut(const char* fmt, ...);
 
 extern unsigned int DAT_0126efc0;
 extern bool DAT_0126f0d0;
@@ -10650,21 +10420,8 @@ SwapChainBufferData* __cdecl FUN_00e7d6b0(DeviceE7D6B0* pkDevice, PresentParamsE
 }
 
 extern "C" __m128 _mm_xor_ps(__m128, __m128);
-extern "C" __m128 _mm_unpacklo_ps(__m128, __m128);
-extern "C" __m128 _mm_unpackhi_ps(__m128, __m128);
-extern "C" __m128 _mm_movelh_ps(__m128, __m128);
-extern "C" __m128 _mm_movehl_ps(__m128, __m128);
-extern "C" __m128 _mm_add_ps(__m128, __m128);
 extern "C" void _mm_store_ps(float*, __m128);
 extern "C" __m128 _mm_load_ps(const float*);
-extern __m128 DAT_010c44d0;
-
-class XfCallee
-{
-  public:
-    virtual void v0();
-    virtual void v1(void* a, void* b);
-};
 
 __declspec(align(16)) struct XfVecBuf
 {
@@ -10674,27 +10431,8 @@ __declspec(align(16)) struct XfVecBuf
     unsigned int m_w;
 };
 
-class XfTransformBlock
-{
-  public:
-    __m128 m_row0;
-    __m128 m_row1;
-    __m128 m_row2;
-    __m128 m_row3;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    XfCallee* m_pCalleeA;
-    XfCallee* m_pCalleeB;
-    void FUN_00e62b20(__m128* in, __m128* out);
-};
-
 extern "C" __m128 _mm_xor_ps(__m128, __m128);
 extern "C" __m128 _mm_sub_ss(__m128, __m128);
-extern "C" __m128 _mm_max_ps(__m128, __m128);
-extern "C" int _mm_movemask_ps(__m128);
 
 struct __declspec(align(16)) Vector
 {
@@ -10707,14 +10445,6 @@ struct __declspec(align(16)) Vector
     {
         value = v;
     }
-};
-struct Id
-{
-    unsigned int v;
-};
-union IdUnion
-{
-    unsigned int v;
 };
 struct IdCtor
 {
@@ -10744,28 +10474,10 @@ template <class T> struct Arg
     Arg(T* value) : p(value)
     {}
 };
-struct PodDir
-{
-    const Vector* p;
-};
-union UnionDir
-{
-    const Vector* p;
-};
-struct PodDst
-{
-    SupportResult* p;
-};
-struct SupportOwner
-{
-    void FUN_00e62b20(const Vector* direction, SupportResult* result);
-    __m128* FUN_00e62c60(Arg<__m128> out, const Vector* direction, Arg<const __m128> point, Arg<SupportResult> result);
-};
 
 extern "C"
 {
     __m128 _mm_load_ps(const float*);
-    __m128 _mm_load_ss(const float*);
     void _mm_store_ps(float*, __m128);
     void _mm_store_ss(float*, __m128);
     __m128 _mm_mul_ps(__m128, __m128);
@@ -10778,14 +10490,7 @@ extern "C"
     __m128 _mm_shuffle_ps(__m128, __m128, int);
     __m128 _mm_rsqrt_ss(__m128);
     __m128 _mm_set_ss(float);
-    __m128 _mm_set_ps1(float);
-    void _ReadWriteBarrier();
-    void _WriteBarrier();
 }
-
-extern const float DAT_01011d78;
-extern const float DAT_01017718;
-extern const float DAT_01016248;
 
 struct PlaneVector
 {
@@ -10832,38 +10537,9 @@ struct PlaneVector
         return value;
     }
 };
-struct TrianglePlane
-{
-    PlaneVector m_00;
-    PlaneVector* m_10;
-    int m_14;
-    int m_18;
-    int m_1c;
-    PlaneVector* m_20;
-    int m_24;
-    int m_28;
-    int m_2c;
-    PlaneVector* m_30;
-    int m_34;
-    int m_38;
-    int m_3c;
-    float m_40;
-
-    void FUN_00e67570();
-};
-
-extern "C" __m128 _mm_sqrt_ss(__m128);
-
-struct S00e61d30_TriVerts
-{
-    __m128 v0;
-    __m128 v1;
-    __m128 v2;
-};
 
 extern "C"
 {
-    double __cdecl fabs(double x);
 }
 
 struct S00e67ae0_HullFace;
@@ -10882,12 +10558,6 @@ struct S00e67ae0_HullFace
     S00e67ae0_HullEdge m_kEdges[3];
     float m_fClosestPointDistanceSquared;
     int m_uiContentCount;
-};
-
-struct S00e67ae0_HullWalker
-{
-    void ClearEntries();
-    S00e67ae0_HullFace* FUN_00e67ae0(S00e67ae0_HullFace* start);
 };
 
 extern "C" Ni2DBufferStub* __cdecl FUN_00a9ff60(unsigned int width, unsigned int height, RendererDataStub* data);

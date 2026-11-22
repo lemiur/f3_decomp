@@ -360,12 +360,6 @@ struct TreadInterpolator : FUN_00a2f8c0
     }
 };
 
-struct TreadController
-{
-    TreadInterpolator* __thiscall CreateInterpolator(unsigned int index);
-    void __thiscall FUN_00a2f8a0(TreadInterpolator* interp, unsigned int index);
-};
-
 struct TreadElem_00a35b90
 {
     char unk00[0x34];

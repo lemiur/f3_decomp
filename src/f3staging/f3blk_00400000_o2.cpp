@@ -1121,7 +1121,6 @@ void FlagHolder41dc80::FUN_0041dc80(unsigned int bit, bool set)
 }
 
 // @f3 0x00409fc0 (community match, verified in this file)
-struct Quad409fc0 { unsigned int v[4]; };
 struct Obj409fc0 {
     int unk00;
     int unk04;
@@ -19781,8 +19780,6 @@ struct F3Base {
     int unk04, unk08, unk0c, unk10, unk14, unk18, unk1c, unk20, unk24, unk28, unk2c;
 };
 
-struct F3Pad { int a, b, c; };
-
 struct F3Obj : F3Base, F3SubA, F3SubB, F3SubC, F3SubD, F3SubE, F3SubF, F3SubG, F3SubH {
     virtual ~F3Obj();
     void FUN_00c24b70();
@@ -20114,7 +20111,6 @@ Multi405930::Multi405930()
 
 // @f3 0x0041da40 (community match, verified in this file)
 namespace f3m_0041da40 {
-extern unsigned long DAT_0106ab70;
 
 class ExtraListManager;
 extern ExtraListManager* DAT_01079ca4;
@@ -23081,7 +23077,6 @@ void FixupList::FUN_00419d30(FixupStream* stream, TESForm* base)
 // @f3 0x0040e420 (community match, verified in this file)
 extern int DAT_00db5940;
 namespace f3m_0040e420 {
-struct Heap1253{void* FUN_0086b930(unsigned int);void FUN_0086ba60(void*);};
 struct Base1253{virtual ~Base1253();unsigned char type,unk05;unsigned short unk06;Base1253* next;Base1253(unsigned char t){type=t;next=0;}};
 struct Portal1253{void* navMesh;unsigned short triangle;Portal1253(){}Portal1253(const Portal1253& p):navMesh(p.navMesh),triangle(p.triangle){}};
 struct Source1253{int unk00,unk04,unk08;Portal1253 portal;};
@@ -25115,8 +25110,6 @@ public:
         static_cast<NativeListHead74*>(this)->FUN_006c8220();
     }
 };
-
-struct Table74 { void* table; };
 
 class FUN_004074b0 : public TESFullName74, public EffectItemList74 {
 public:

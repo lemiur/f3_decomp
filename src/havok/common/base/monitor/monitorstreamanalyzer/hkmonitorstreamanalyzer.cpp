@@ -382,7 +382,6 @@ void Owner::ClearItems()
 }  // namespace fnv_00e0d0a0
 
 extern "C" void __cdecl FUN_00e0c700(void* object, int index, float amount);
-extern "C" void __cdecl FUN_00e0d180(void* first, void* second, int index, int limit, float amount);
 // Calls FUN_00e0c700 on first, then FUN_00e0d180 on first and second with index, limit and amount.
 // @f3 0x00a8d310 (community match, verified in this file)
 __declspec(noinline) void __cdecl FUN_00a8c360(void* first, int index, float amount)
@@ -425,9 +424,7 @@ inline AudioMgr* audio()
 
 extern "C" void __cdecl FUN_00c908c0(hkMemoryAllocator* alloc, void* arr, int capacity, int elemSize);
 
-extern float DAT_010eaa58;
 extern float DAT_011bdd84;
-extern char DAT_010cb2c0[];
 
 struct hkArrayChar
 {
@@ -456,35 +453,9 @@ struct hkArrayChar
     }
 };
 
-struct FUN_00e0f800
-{
-    hkArrayChar m00;
-    hkArrayChar m0c;
-    int m18;
-    int m1c;
-    void* m20;
-    FUN_00e0f800(int n, int a, int b);
-    void FUN_00e0f710(int a, int b);
-};
-
 }  // namespace fnv_00e0f800
 
-int __cdecl Vsnprintf(char* buffer, unsigned int size, const char* format, ...);
 void __cdecl FUN_00cc0410(void* stream, const char* format, ...);
-
-struct S_00e0bfe0_Item
-{
-    float values[8];
-    unsigned short counts[8];
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    const char* name;
-};
 
 extern "C" void __cdecl FUN_00cb1280(void* dst, int c, int n);
 
@@ -719,16 +690,6 @@ struct SpawnedEntry
     int unk08;
 };
 
-struct FUN_00e0ccf0_cls
-{
-    SpawnedEntry* m_entries;
-    int m_uiItemCount;
-    int unk08;
-    int unk0C;
-    int m_unk10;
-    void FUN_00e0ccf0();
-};
-
 // Proxy used to force MSVC 2008 to materialise the element address in a register
 // (base + byte offset) instead of folding it into the store's addressing mode.
 struct EntryRef
@@ -738,15 +699,6 @@ struct EntryRef
     {
         p->unk04 = value;
     }
-};
-
-struct Singleton
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    void* unk10;
 };
 
 struct Sink
@@ -828,82 +780,6 @@ struct S_Flag
 };
 
 void* __cdecl FUN_00e0ee00(void* apSelf, int aIndex, S_Flag aFlag);
-void __cdecl FUN_00e0fec0(int a0, void* pArray, int a2, int a3, int a4, int a5, int a6);
-
-struct FUN_00e0d0a0_s
-{
-    void ClearItems();
-};
-
-struct Array_e10630
-{
-    void** m_data;
-    int m_iElementCount;
-    unsigned int m_iCapacityState;
-};
-
-struct FUN_00e10630_cls
-{
-    int unk00;
-    int m_count04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int m_18;
-    int m_1c;
-    int m_20;
-    void ProcessItems(int a1, int a2);
-};
-
-struct FUN_00e0f700_s
-{
-    void* FUN_00e0f700(int dummy);
-};
-
-struct S00e0c690_entry
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int m_4c;
-};
-
-struct FUN_00e0c690_owner
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    S00e0c690_entry** m_30;
-    int m_34;
-};
-
-extern FUN_00e0c690_owner* g_00e0c690_owner;
 
 extern "C" int __cdecl FUN_00cb0fa0(int a, unsigned int b);
 
@@ -1077,48 +953,6 @@ void __cdecl FUN_00e0c8e0(void* stream, Node_e0c8e0* item, int depth, float scal
         FUN_00e0c8e0(stream, item->children[i], depth + 1, scale);
 }
 
-
-struct S_00e0cbe0_Entry
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-};
-
-struct S_00e0cbe0_Owner
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    S_00e0cbe0_Entry** unk30;
-    int unk34;
-};
 
 int __cdecl FUN_00cb0fa0(int a, int b);
 
@@ -1304,11 +1138,6 @@ struct FUN_00e0d000Total : FUN_00e0d000
     FUN_00e0d000Array childFUN_00e0d000;
     FUN_00e0d000Total() : FUN_00e0d000(0, 0, 0)
     {}
-};
-struct FUN_00e0d000Map
-{
-    FUN_00e0d000Total* GetValue(const char*, int);
-    void FUN_00d874d0(const char*, FUN_00e0d000Total*);
 };
 int __cdecl FUN_00cb0fa0(const char*, const char*);
 void __cdecl FUN_00c908c0(FUN_00e0d000Heap*, FUN_00e0d000Array*, int, int);
@@ -1610,10 +1439,6 @@ struct NameArg
 {
     const char* value;
 };
-struct IntArg
-{
-    int value;
-};
 struct BoolArg
 {
     bool value;
@@ -1688,41 +1513,6 @@ struct FUN_00e108b0
         clearAndFree(a);
     }
 };
-struct DumpFrame
-{
-    const char* heading;
-    int a, b;
-    int time;
-    int d, e;
-    int thread;
-    int begin, end;
-};
-struct DumpFrames
-{
-    DumpFrame* data;
-    int size, capacity;
-};
-struct DumpCommand
-{
-    const char* name;
-    union
-    {
-        unsigned int timer;
-        float value;
-        void* pointer;
-    } first;
-    unsigned int second;
-    const char* split;
-};
-struct DumpState
-{
-    DumpFrames* frames;
-    int count, capacity;
-    char* commands;
-    int size, cap;
-    int threads, spus;
-    void FUN_00e0eef0(void* stream);
-};
 
 namespace fnv_00e0fec0 {
 struct TimerObj;
@@ -1751,11 +1541,6 @@ struct TimerObj
     const char* m_name;
 };
 typedef TimerObj ThreadObj;
-struct ArrayArg
-{
-    ThreadObj** m_data;
-    int m_iElementCount;
-};
 struct AggObj
 {
     int unk00;
@@ -1802,45 +1587,6 @@ struct Alloc2
     virtual void v0c();
     virtual void free2(void* p, int bytes);
 };
-struct Router2
-{
-    int m_fMinimumV;
-    int unk04;
-    int unk08;
-    int unk0c;
-    Alloc2* m_pStreamAllocator;
-};
-struct AggArray
-{
-    AggObj** m_data;
-    int m_iElementCount;
-    int m_iCapacityState;
-    AggObj** m_originalData;
-};
-struct CfgObj
-{
-    int unk00;
-    int f04;
-    int f08;
-    int f0c;
-    char b10;
-    char unk11;
-    char unk12;
-    char unk13;
-    char unk14;
-    char unk15;
-    char unk16;
-    char unk17;
-    char unk18;
-    char unk19;
-    char b1a;
-    char unk1b;
-};
-void __cdecl ext_merge(int, int);
-struct SearchKey
-{
-    int value;
-};
 int __cdecl FUN_00cb0fa0(const char*, const char*);
 void __cdecl ext_show(void*, int, int, float);
 __declspec(noinline) void __cdecl FUN_00e0c8e0(void* stream, void* agg, int a, float f)
@@ -1848,16 +1594,10 @@ __declspec(noinline) void __cdecl FUN_00e0c8e0(void* stream, void* agg, int a, f
     ext_show(stream, ((AggObj*)agg)->unk08, a, f);
 }
 void __cdecl FUN_00e0d280(void* first, void* second, int index, int limit, float amount);
-void __cdecl FUN_00e0d640(void* a, int a2, int a3, void* stream, CfgObj* cfg);
 
 void __cdecl FUN_00c908c0(Alloc2* alloc, void* arr, int count, int elemSize);
 extern "C" void __cdecl FUN_00cb1280(void* dst, int c, int n);
-void* __cdecl fnv_zlib_memset(void* dst, int c, int n);
 
-struct RootArg
-{
-    void* node;
-};
 struct TypeMap
 {
     int unk00;
@@ -1892,41 +1632,9 @@ struct TypeItem
     int otherCapacity;
     void FUN_00e10930();
 };
-struct TypeArray
-{
-    TypeItem** data;
-    int size;
-    int capacity;
-};
-struct RouterFx
-{
-    int top;
-    int unk04;
-    int unk08;
-    Alloc2* temp;
-    Alloc2* heap;
-    Alloc2* debug;
-};
 void __cdecl FUN_00e0f880(void* node, TypeMap* map);
 int __cdecl FUN_00e10740(const TypeItem*, const TypeItem*);
 void __cdecl FUN_00e10760(TypeItem** data, int lo, int hi, int(__cdecl* compare)(const TypeItem*, const TypeItem*));
-
-struct WorkSlot
-{
-    AggObj agg;
-};
-struct ReportMetrics
-{
-    float total;
-    int row;
-    union
-    {
-        float pct;
-        int flag8;
-    };
-    TimerArray* first;
-    const char* name;
-};
 
 }  // namespace fnv_00e0fec0
 
@@ -2298,7 +2006,6 @@ struct FloatArray
     }
 };
 
-extern double DAT_0103c7c8;
 extern float DAT_011bdd84;
 extern double DAT_010ea718;
 extern float DAT_010ea710;
@@ -2421,8 +2128,6 @@ struct PixelSource
     int m_10;
     int m_14;
 };
-int __cdecl FUN_00e0e0c0(int a1, PixelSource* a2, int a3, void** out1, int* out2, int a6);
-void __cdecl FUN_00c856c0(S_e0ce00_Alloc* alloc, void* p);
 // Calls FUN_00e0e0c0, passes its output buffer and q to WriteTgaImage, then calls FUN_00c856c0 with the allocator and buffer.
 // @f3 0x00a8dea0 (community match, verified in this file)
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long);
@@ -2694,17 +2399,6 @@ struct StatsValue
     {}
 };
 
-struct StatsAllocator
-{
-    virtual void unused();
-    virtual void* allocate(unsigned int size);
-};
-
-struct NodeInitializer
-{
-    FUN_00e0d000* FUN_00e0d000(int parent, const char* name, StatsValue value);
-};
-
 __forceinline int asLocal(const volatile int& v)
 {
     return v;
@@ -2767,13 +2461,6 @@ struct S_e0d980_Arr
             new (p) S_e0d980_Item(it);
         size++;
     }
-};
-struct S_e0d980_Obj
-{
-    int unk0;
-    int unk4;
-    S_e0d980_Arr arr;
-    void FUN_00e0d980(int a, int b) throw();
 };
 }  // namespace fnv_00e0d980
 
@@ -2923,10 +2610,6 @@ __declspec(nothrow) S_e0ce00_Router* __cdecl FUN_00c85750();
 __declspec(nothrow) void __cdecl ResizeAudioStream(S_e0ce00_Alloc*, void*, int);
 __declspec(nothrow) void __cdecl FUN_00c908c0(S_e0ce00_Alloc*, void*, int, int);
 __declspec(nothrow) int __cdecl FUN_00cb0fa0(const char*, const char*);
-struct AccumNode
-{
-    __declspec(nothrow) void Accumulate(AxisData*, Point*, Point*);
-};
 struct StatsHeap
 {
     virtual ~StatsHeap();
@@ -2970,16 +2653,6 @@ struct Record
     const char* name;
     unsigned int x;
     unsigned int y;
-};
-struct ExtendedRecord
-{
-    Record timer;
-    const char* extraName;
-};
-struct MetricRecord
-{
-    const char* name;
-    float value;
 };
 struct RecordArray
 {
@@ -3025,11 +2698,6 @@ struct RecordArray
     }
 };
 
-struct S00e0ee00_Heap
-{
-    virtual void v00();
-    virtual void* v04(unsigned int size);
-};
 struct S00e0ee00_Children
 {
     E0C860Node** m_data;
@@ -3070,8 +2738,6 @@ struct S00e0ee00_Root
     S00e0ee00_Children m_children;
     S00e0ee00_Root(int a, const char* name, int b);
 };
-extern const char DAT_01063cbc[];
-E0C860Node* __cdecl FUN_00e0e630(char* begin, char* end, S_e0ce00_Block* record, int unk0, S_e0ce00_Bool flag);
 
 struct S00e0ee00_Analyzer : public S_e0ce00
 {
@@ -3103,22 +2769,6 @@ inline void* AllocateChunk()
     }
     return memory->FUN_008f6800(6, 0x1b);
 }
-struct Block {
-    int unk00;
-    char pad04[0x18];
-    int unk1C;
-    int unk20;
-};
-struct BlockArray {
-    Block* m_data;
-    int m_size;
-    int m_capacityAndFlags;
-};
-struct BlockArrays {
-    BlockArray* m_data;
-    int m_size;
-    int m_capacityAndFlags;
-};
 void __cdecl FUN_00901e90(void* array, int capacity, int elementSize);
 struct NodeArray {
     E0C860Node** m_data;
@@ -3148,10 +2798,6 @@ struct FUN_00a8d060 {
     static void* operator new(unsigned int size, void* where) throw() { return where; }
 };
 E0C860Node* __cdecl FUN_00a8e070(char* begin, char* end, S_e0ce00_Block* block, int type, S_e0ce00_Bool flag);
-struct Analyzer {
-    BlockArrays m_arrays;
-    char* m_buf;
-};
 }
 
 S00e0ee00_Root* __cdecl S00e0ee00_Analyzer::FUN_00e0ee00(int aIndex, S_e0ce00_Bool aFlag)
@@ -3220,51 +2866,9 @@ struct S_00e0f710_Elem
     }
 };
 
-struct S_00e0f710_Cls
-{
-    S_00e0f710_Elem* m_data;
-    int m_iElementCount;
-    unsigned int m_cap;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int m_kPointA;
-    int m_kPointB;
-
-    void FUN_00e0ccf0();
-    void FUN_00e0f710(int a, int b);
-};
-
 }  // namespace fnv_00e0f710
 
 namespace fnv_00e10930 {
-struct S_00e0d0a0
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-
-    void ClearItems();
-};
 
 struct S_00e0c85750_Object
 {
@@ -3286,18 +2890,6 @@ struct S_00c85750_Result
 };
 
 S_00c85750_Result* FUN_00c85750();
-
-struct S_00e10930_Foo : S_00e0d0a0
-{
-    S_00e0d0a0* unk58;
-    int unk5c;
-    int unk60;
-    S_00e0d0a0* unk64;
-    int unk68;
-    int unk6c;
-
-    void FUN_00e10930();
-};
 
 }  // namespace fnv_00e10930
 

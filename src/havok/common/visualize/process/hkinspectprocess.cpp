@@ -10,15 +10,7 @@ void __stdcall GetPunctuationChars(char** apOutString, int* apiLength)
 }
 
 struct hkInspectProcess;
-struct hkProcess;
-extern hkProcess* DAT_01269cd0;
 extern hkInspectProcess* DAT_01269cd4;
-void __cdecl FUN_00ddb710(hkProcess*);
-struct hkProcessFactory
-{
-    hkInspectProcess* __thiscall RegisterProcess(const char*, void(__cdecl*)(hkProcess*));
-};
-extern hkProcessFactory* FUN_00dd9380;
 
 struct hkInspectProcessStandIn
 {
@@ -40,9 +32,7 @@ void __cdecl FUN_00ddb5d0(void* object, int type, char addObject, int flags, hkI
     }
 }
 
-void __cdecl CreateImpl(hkProcess*);
 struct hkInspectProcess;
-extern hkInspectProcess* DAT_01269cd8;
 
 struct hkInspectProcess;
 extern hkInspectProcess* DAT_01269cd4;
@@ -280,19 +270,6 @@ FUN_00ddb670::~FUN_00ddb670() throw()
 }  // namespace fnv_00ddb670
 
 struct FnvCpu_FUN_00ddb710_CpuBlock;
-struct FnvCpu_FUN_00ddb710_CpuAllocator
-{
-    virtual void slot00();
-    virtual void* Invoke(unsigned int size);
-};
-struct FnvCpu_FUN_00ddb710_CpuHolder
-{
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0c;
-    FnvCpu_FUN_00ddb710_CpuAllocator* allocator;
-};
 void* __cdecl FUN_00c85750();
 struct FnvCpu_FUN_00ddb710_CpuBlock
 {
@@ -301,33 +278,7 @@ struct FnvCpu_FUN_00ddb710_CpuBlock
     FnvCpu_FUN_00ddb710_CpuBlock* FUN_00ddb600(unsigned int value);
 };
 
-struct MemoryManager
-{
-    virtual void unk0();
-    virtual void unk4();
-    virtual void deallocate(void* p, unsigned int size);
-};
-
-struct ThreadMemory
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    MemoryManager* memoryManager;
-};
-
 void* __cdecl FUN_00c85750();
-
-struct TestClass
-{
-    void* vtable;
-    unsigned short m_usAllocationSize;
-    unsigned short m_iObjectReferenceCount;
-
-    void FUN_00ddb670();
-    void* FUN_00ddbed0(char flags);
-};
 
 class hkClass;
 class hkStatisticsCollector;
@@ -410,7 +361,6 @@ struct LayoutRulesDDB3
     unsigned char m_bReusePaddingOptimization;
     unsigned char m_bEmptyBaseClassOptimization;
 };
-extern const LayoutRulesDDB3 DAT_011b7b88;
 
 class GlobalObjectO2_00d472a0;
 extern GlobalObjectO2_00d472a0 g_0126cae8;
@@ -487,7 +437,6 @@ struct ProcessHeaderWriter
 };
 
 extern const LayoutRulesDDB3 DAT_01061524;
-extern char DAT_0116a994;
 
 struct Entry8DDB3
 {
@@ -910,10 +859,6 @@ struct hkClassMember
 struct hkClass
 {
     const hkClassMember& __thiscall FUN_00d46f20(int i) const;
-};
-struct hkPathArray
-{
-    unsigned short* unk00;
 };
 
 }  // namespace fnv_00ddb450

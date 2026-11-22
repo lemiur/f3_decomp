@@ -3,13 +3,6 @@
 // produce (frameless code in an /Od unit). Declarations copied from that unit's skeleton; move the functions to their real unit once identified.
 
 #include "tesobjectrefr_decls.h"
-GarbageCollectorUpdateState* FUN_00446ef0();
-void* FUN_0056a8c0();
-void FUN_005743f0();
-void FUN_00575c90(unsigned char value);
-float FUN_005790b0();
-float FUN_005790d0();
-void FUN_0057acc0(unsigned int index);
 
 struct FUN_00c9c240_holder
 {
@@ -43,10 +36,6 @@ struct bhkRefObject
     int f10;
     unsigned char f14;
     bhkRefObject* Initialize();
-};
-struct FUN_0056e2d0
-{
-    virtual ~FUN_0056e2d0();
 };
 extern const void* vftable_FUN_0056e2d0;
 struct FUN_00c6d190 : bhkRefObject
@@ -92,15 +81,6 @@ struct hkReferencedObject
     void removeReference();
 };
 void FUN_00c876a0();
-struct FUN_00c9d4c0_holder
-{
-    void* m0;
-    void* m4;
-    void* m8;
-    void FUN_00c9d4c0();
-    void FUN_00c9c240();
-    void FUN_00c9d600();
-};
 
 struct CallRet
 {
@@ -164,10 +144,6 @@ struct FUN_00c876a0_holder
 {
     virtual ~FUN_00c876a0_holder();
     void FUN_00c876a0();
-};
-struct bhkWorldObject
-{
-    void FUN_00c85790();
 };
 struct FUN_00c9f3b0 : FUN_00c876a0_holder
 {
@@ -333,58 +309,6 @@ struct bhkSphereShape
     void __thiscall FUN_00ca0740(void* a, ArgB* b);
 };
 
-struct S_00cb3070
-{
-    virtual void v00();
-    virtual void v01();
-    virtual void v02();
-    virtual void v03();
-    virtual void v04();
-    virtual void v05();
-    virtual void v06();
-    virtual void v07();
-    virtual void v08();
-    virtual void v09();
-    virtual void v10();
-    virtual void v11();
-    virtual void v12();
-    virtual void v13();
-    virtual void v14();
-    virtual void v15();
-    virtual void v16();
-    virtual void v17();
-    virtual void v18();
-    virtual void v19();
-    virtual void v20();
-    virtual void v21();
-    virtual void v22();
-    virtual void v23();
-    virtual void v24();
-    virtual void v25();
-    virtual void v26();
-    virtual void v27();
-    virtual void v28();
-    virtual void v29();
-    virtual void v30();
-    virtual void v31();
-    virtual void v32();
-    virtual void v33();
-    virtual void v34();
-    virtual void v35();
-    virtual void v36();
-    virtual void v37();
-    virtual void v38();
-    virtual void v39();
-    virtual void v40();
-    virtual void v41();
-    virtual void v42();
-    virtual void v43();
-    virtual void v43b();
-    virtual void v44(int*);
-    void FUN_00c8ea30(int);
-    void FUN_00cb3070(int);
-};
-
 struct MM
 {
     void Deallocate(void* p);
@@ -452,14 +376,6 @@ FUN_00cb3860::FUN_00cb3860()
 }  // namespace fnv_00cb3860
 
 extern int DAT_012681fc;
-struct FUN_00c9d620_holder : FUN_00c876a0_holder
-{
-    void* m0;
-    void* m4;
-    void* m8;
-    FUN_00c9d620_holder();
-    ~FUN_00c9d620_holder();
-};
 
 extern int DAT_01268250;
 struct FUN_0056e780_Class
@@ -481,15 +397,6 @@ FUN_00c9fb00::~FUN_00c9fb00()
 extern int DAT_012680f8;
 extern int DAT_01268250;
 extern int DAT_0126825c;
-extern int DAT_01268274;
-extern void* DAT_0103093c;
-extern void* DAT_01030a24;
-extern void* DAT_01030b0c;
-extern void* DAT_01030bf4;
-struct FUN_00c9fde0 : bhkRefObject
-{
-    FUN_00c9fde0();
-};
 
 struct A51BF0Base
 {
@@ -579,7 +486,6 @@ FUN_00c85790::~FUN_00c85790()
 
 extern __declspec(thread) unsigned int g_havokThreadMode;
 
-struct CollisionObject;
 struct CollisionResult
 {
     unsigned short kind;
@@ -668,57 +574,6 @@ struct ScopedMode
     {
         g_havokThreadMode = oldValue;
     }
-};
-struct WorldObjectView
-{
-    virtual void v00();
-    virtual void v01();
-    virtual void v02();
-    virtual void v03();
-    virtual void v04();
-    virtual void v05();
-    virtual void v06();
-    virtual void v07();
-    virtual void v08();
-    virtual void v09();
-    virtual void v10();
-    virtual void v11();
-    virtual void v12();
-    virtual void v13();
-    virtual void v14();
-    virtual void v15();
-    virtual void v16();
-    virtual void v17();
-    virtual void v18();
-    virtual void v19();
-    virtual void v20();
-    virtual void v21();
-    virtual void v22();
-    virtual void v23();
-    virtual void v24();
-    virtual void v25();
-    virtual void v26();
-    virtual void v27();
-    virtual void v28();
-    virtual void v29();
-    virtual void v30();
-    virtual void v31();
-    virtual void v32();
-    virtual void v33();
-    virtual void v34();
-    virtual void v35();
-    virtual void v36();
-    virtual void v37();
-    virtual void v38();
-    virtual void v39();
-    virtual void v40();
-    virtual void v41();
-    virtual void v42();
-    virtual void v43();
-    virtual void v44();
-    virtual CollisionResult* GetResult(unsigned char* used);
-    void FUN_00c87600(int a, int b);
-    void FUN_00c85900(int a, int b);
 };
 
 struct NiRTTI
@@ -910,11 +765,6 @@ namespace fnv_00c9eec0 {
 struct FUN_00c9eb30 : FUN_00c876a0_holder
 {
     virtual ~FUN_00c9eb30();
-};
-
-struct FUN_00c9eec0 : FUN_00c9eb30
-{
-    virtual ~FUN_00c9eec0();
 };
 
 }  // namespace fnv_00c9eec0
@@ -1123,12 +973,6 @@ inline void* operator new(unsigned int n)
 {
     return FUN_00aa13e0(n);
 }
-
-struct FUN_00c9efa0_cls
-{
-    void FUN_00c85900(FUN_00c6d190* p, unsigned int flag);
-    bhkRefObject* FUN_00c9efa0(unsigned int flag);
-};
 
 struct S_00c9f1e0_Shape
 {
@@ -1548,7 +1392,6 @@ class C9F270MemContext
     int m_iPrevious;
 };
 
-extern const char* g_pcC9F270ClassName;
 extern "C" char* __cdecl FUN_00a7d330(const char* pcName);
 
 class C9F270StrArray
@@ -1572,13 +1415,6 @@ class C9F270StrArray
     unsigned short m_usSize;
     unsigned short m_usESize;
     unsigned short m_usGrowBy;
-};
-
-class C9F270Object
-{
-  public:
-    void GetViewerStringsBase(C9F270StrArray* pkStrings);
-    void FUN_00c9f270(C9F270StrArray* pkStrings);
 };
 
 __declspec(thread) int tlsMode = 0x3b;
@@ -1680,50 +1516,6 @@ struct LinkedObject
     {
         return *reinterpret_cast<PhysicsAction* const*>(reinterpret_cast<const char*>(this) + 0x350);
     }
-};
-struct FUN_00c9f420_Class
-{
-    virtual void slot0();
-    virtual void slot1();
-    virtual void slot2();
-    virtual void slot3();
-    virtual void slot4();
-    virtual void slot5();
-    virtual void slot6();
-    virtual void slot7();
-    virtual void slot8();
-    virtual void slot9();
-    virtual void slot10();
-    virtual void slot11();
-    virtual void slot12();
-    virtual void slot13();
-    virtual void slot14();
-    virtual void slot15();
-    virtual void slot16();
-    virtual void slot17();
-    virtual void slot18();
-    virtual void slot19();
-    virtual void slot20();
-    virtual void slot21();
-    virtual void slot22();
-    virtual void slot23();
-    virtual void slot24();
-    virtual void slot25();
-    virtual void slot26();
-    virtual void slot27();
-    virtual void slot28();
-    virtual void slot29();
-    virtual void slot30();
-    virtual void slot31();
-    virtual void slot32();
-    virtual void slot33();
-    virtual void slot34();
-    virtual void slot35();
-    virtual void slot36();
-    virtual LinkedObject* ResolveLinkedObject();
-    int unk4;
-    void* handle;
-    bool FUN_00c9f420();
 };
 
 void __cdecl FUN_00c876f0();
@@ -1987,64 +1779,6 @@ struct FUN_00cf2cb0
     FUN_00cf2cb0(void* contents, int tag);
 };
 extern "C" void __fastcall FUN_00c905b0(FUN_00cf2cb0*);
-struct Input
-{
-    int tag;
-    int unk4, unk8, unkc, unk10, unk14, unk18, unk1c;
-    int payload;
-};
-struct Receiver
-{
-    virtual void v0();
-    virtual void v1();
-    virtual void v2();
-    virtual void v3();
-    virtual void v4();
-    virtual void v5();
-    virtual void v6();
-    virtual void v7();
-    virtual void v8();
-    virtual void v9();
-    virtual void v10();
-    virtual void v11();
-    virtual void v12();
-    virtual void v13();
-    virtual void v14();
-    virtual void v15();
-    virtual void v16();
-    virtual void v17();
-    virtual void v18();
-    virtual void v19();
-    virtual void v20();
-    virtual void v21();
-    virtual void v22();
-    virtual void v23();
-    virtual void v24();
-    virtual void v25();
-    virtual void v26();
-    virtual void v27();
-    virtual void v28();
-    virtual void v29();
-    virtual void v30();
-    virtual void v31();
-    virtual void v32();
-    virtual void v33();
-    virtual void v34();
-    virtual void dispatch(void*);
-    virtual void v36();
-    virtual void v37();
-    virtual void v38();
-    virtual void v39();
-    virtual void v40();
-    virtual void v41();
-    virtual void v42();
-    virtual void v43();
-    virtual void v44();
-    virtual void v45();
-    virtual void v46();
-    virtual void finish(void*);
-    void FUN_00c9f890(Input* input);
-};
 
 extern __declspec(thread) int g_iC9F970AllocTag;
 
@@ -2089,16 +1823,7 @@ class BC9F970StringArray
     unsigned short m_usGrowBy;
 };
 
-extern const char* g_pcC9F970Name;
-
 char* __cdecl FUN_00a7d330(const char* pcString);
-
-class FUN_00c9f970_cls
-{
-  public:
-    void FUN_00c9f480(BC9F970StringArray* pkArray);
-    void FUN_00c9f970(BC9F970StringArray* pkArray);
-};
 
 struct MemContextTLS
 {
@@ -2150,7 +1875,6 @@ char* CreateDebugString(const char* pcText);
 char* CreateDebugString(const char* pcPrefix, float fValue);
 
 extern float DAT_010c72bc;
-extern float DAT_011b15c0;
 
 struct SphereHkShape
 {
@@ -2190,18 +1914,6 @@ void SphereShape::FUN_00c9fc50(ViewerStringArray* apViewerStrings)
 
 extern int DAT_0126825c;
 
-class FUN_00c9fd70_cls : public FUN_00c9fb00
-{
-  public:
-    virtual ~FUN_00c9fd70_cls();
-    void FUN_00c876a0();
-};
-
-struct SphereScaleFields
-{
-    unsigned int m_00, m_04, m_08, m_0c;
-    float m_10, m_14, m_18, m_1c;
-};
 struct SphereScalingMethod : bhkSphereShape
 {
     void __thiscall FUN_00c9fea0(void* first, ArgB* second);
@@ -2410,8 +2122,6 @@ extern __declspec(thread) Tls_ca0090 g_tls_ca0090;
 
 extern float DAT_010c72bc;
 extern char DAT_011f6238;
-extern char DAT_01267e30;
-extern int DAT_0126fd98;
 
 struct TlsGuard_ca0090
 {
@@ -2425,26 +2135,6 @@ struct TlsGuard_ca0090
     {
         g_tls_ca0090.m_2b4 = m_saved;
     }
-};
-
-struct MemMgr_ca0090
-{
-    void* FUN_00aa3e40(unsigned int size);
-};
-
-struct Sub_ca0090
-{
-    void FUN_004b4db0(void* a);
-};
-
-struct FUN_00ca0090_cls
-{
-    unsigned int unk00;
-    unsigned int unk04;
-    void* m08;
-    void* m0C;
-    void FUN_00c9fb70(void* a);
-    void* FUN_00ca0090(unsigned char* out);
 };
 
 namespace fnv_00ca0410 {
@@ -2481,49 +2171,6 @@ struct ViewerStrings
             SetSize(uiIndex + m_usGrowBy);
         SetAt(uiIndex, element);
     }
-};
-
-struct HalfExtentVec
-{
-    float x, y, z, w;
-};
-
-struct PhantomPoint3
-{
-    float x, y, z;
-    char* FormatToBuffer(const char* pcPrefix);
-};
-
-PhantomPoint3 ConvertHalfExtent(const HalfExtentVec& v);
-extern HalfExtentVec g_zeroHalfExtent;
-
-struct AabbHavokObj
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    HalfExtentVec halfExtent;
-};
-
-char* NiGetViewerStringName(const char* pcName);
-extern const char* g_aabbPhantomRttiName;
-
-struct ShapePhantomBase
-{
-    int unk00;
-    int unk04;
-    AabbHavokObj* m_pHavok;
-    void GetViewerStringsBase(ViewerStrings* apViewerStrings);
-};
-
-struct AabbPhantomVS : ShapePhantomBase
-{
-    void FUN_00ca0410(ViewerStrings* apViewerStrings);
 };
 
 }  // namespace fnv_00ca0410
@@ -2594,16 +2241,7 @@ class BCA05B0StringArray
     unsigned short m_usGrowBy;
 };
 
-extern const char* g_pcCA05B0Name;
-
 char* __cdecl FUN_00a7d330(const char* pcString);
-
-class FUN_00ca05b0_cls
-{
-  public:
-    void FUN_00c851c0(BCA05B0StringArray* pkArray);
-    void FUN_00ca05b0(BCA05B0StringArray* pkArray);
-};
 
 extern int DAT_01268280;
 
@@ -2669,18 +2307,6 @@ class CA0840Output
 
     void* m_pkTarget;
     float m_fValue;
-};
-
-class CA0840Constraint
-{
-  public:
-    int unk00;
-    int unk04;
-    void* m_pkWorld;
-    CA0840Output* m_pkOutput;
-
-    void SetOutput(CA0840Output* pkOutput);
-    CA0840Output* FUN_00ca0840(bool* pbCreated);
 };
 
 class CAACF0Base
@@ -2754,75 +2380,6 @@ struct ThreadRouterScope
         threadMode = previousMode;
     }
 };
-struct World
-{
-    virtual void m00();
-    virtual void m01();
-    virtual void m02();
-    virtual void m03();
-    virtual void m04();
-    virtual void m05();
-    virtual void m06();
-    virtual void m07();
-    virtual void m08();
-    virtual void m09();
-    virtual void m10();
-    virtual void m11();
-    virtual void m12();
-    virtual void m13();
-    virtual void m14();
-    virtual void m15();
-    virtual void m16();
-    virtual void m17();
-    virtual void m18();
-    virtual void m19();
-    virtual void m20();
-    virtual void m21();
-    virtual void m22();
-    virtual void m23();
-    virtual void m24();
-    virtual void m25();
-    virtual void m26();
-    virtual void m27();
-    virtual void m28();
-    virtual void m29();
-    virtual void m30();
-    virtual void m31();
-    virtual void m32();
-    virtual void m33();
-    virtual void m34();
-    virtual void m35();
-    virtual void m36();
-    virtual void m37();
-    virtual void m38();
-    virtual void m39();
-    virtual void m40();
-    virtual void m41();
-    virtual void m42();
-    virtual void m43();
-    virtual void m44();
-    virtual void m45();
-    virtual void m46();
-    virtual void m47();
-    virtual void m48();
-    virtual void m49();
-    virtual void m50();
-    virtual void m51();
-    virtual void m52();
-    virtual void m53();
-    virtual void m54();
-    virtual void m55();
-    virtual void m56();
-    virtual void m57();
-    virtual void m58();
-    virtual void m59();
-    virtual void m60();
-    virtual void m61();
-    virtual void m62();
-    virtual void m63(int active);
-    void FUN_00cb30d0(FUN_00cb3860* object, int flags);
-    FUN_00cb3860* FUN_00cb3a40(int flags);
-};
 }  // namespace fnv_00cb3a40
 
 class CC2350Base
@@ -2847,22 +2404,6 @@ FUN_00cc2350::~FUN_00cc2350()
     Release();
     --g_iCC2350Count;
 }
-
-extern int DAT_01268660;
-
-struct FUN_00cca8d0 : FUN_00c9fb00
-{
-    virtual ~FUN_00cca8d0();
-    void FUN_00c876a0();
-};
-
-extern int DAT_0126868c;
-
-struct FUN_00ccd080 : FUN_00c9fb00
-{
-    int unk04;
-    virtual ~FUN_00ccd080();
-};
 
 extern int DAT_0126869c;
 
@@ -2901,12 +2442,6 @@ FUN_00cce900::~FUN_00cce900()
     Release();
     --g_iCCE900Count;
 }
-
-struct FUN_00ccf4f0_cls : FUN_00c9fb00
-{
-    int unk04;
-    virtual ~FUN_00ccf4f0_cls();
-};
 
 extern int DAT_012686c0;
 
@@ -2953,45 +2488,14 @@ NiObjectC9E* NiControllerC9E::FUN_00c9ef30()
     return new NiControllerC9E;
 }
 
-extern const char* DAT_0126823c;
-
 extern "C" __declspec(dllimport) long __stdcall InterlockedIncrement(volatile long*);
 extern "C" __declspec(dllimport) long __stdcall InterlockedDecrement(volatile long*);
-struct HkResult_c6b
-{
-    int m_00;
-    int m_04;
-    HkResult_c6b();
-};
 struct HkFlags_c6b
 {
     int m_iFlags;
     HkFlags_c6b(int i) : m_iFlags(i)
     {}
 };
-struct HkWorld_c6b
-{
-    HkResult_c6b FUN_00cd2a50(const void* apKey);
-    void AddEntry(const void* apKey, void* apListener, HkFlags_c6b kFlags);
-};
-extern char DAT_01267b70[];
-struct World_c6b
-{
-    virtual void v00();
-    virtual void DeleteThis();
-    volatile long m_lRefCount;
-    HkWorld_c6b* m_pkWorld;
-    void Lock();
-    void Unlock();
-};
-struct FUN_00c6b980_cls
-{
-    int unk00, unk04, unk08, unk0c;
-    World_c6b* m_spWorld;
-    void FUN_00c6b980(World_c6b* apWorld);
-};
-
-extern int DAT_011f4280;
 
 struct S_00c85c10_pair
 {
@@ -3660,13 +3164,6 @@ ObjectCA06* __cdecl FUN_00ca06d0()
     return new ObjectCA06;
 }
 
-extern const char* DAT_01268288;
-
-struct FUN_00ca0ac0_class : SphereShape
-{
-    void FUN_00ca0ac0(ViewerStringArray* strings);
-};
-
 extern int DAT_012686d0;
 
 struct FUN_00cd2de0 : FUN_00c84c50
@@ -3680,14 +3177,6 @@ FUN_00cd2de0::~FUN_00cd2de0()
     FUN_00c876a0();
     --DAT_012686d0;
 }
-
-extern int DAT_01268f8c;
-
-struct FUN_00d54e60 : FUN_00c84c50
-{
-    virtual ~FUN_00d54e60();
-    void FUN_00c876a0();
-};
 
 extern "C" unsigned long __cdecl _byteswap_ulong(unsigned long);
 struct LoadStream
@@ -3846,7 +3335,6 @@ struct MemRouter
         return *m_pStreamAllocator;
     }
 };
-MemRouter* MemRouter_getInstance();
 struct LoadObject
 {
     virtual void v0();
@@ -4190,7 +3678,6 @@ struct Info
     unsigned int unk08;
     hkArr<Pair8> arr;
 };
-void __cdecl FUN_00cf0930(Info*, int, hkArr<Pair8>*);
 struct Stream86060
 {
     virtual void v0();
@@ -4438,11 +3925,6 @@ void Obj86060::FUN_00c86060(Stream86060& stream)
 
 
 extern int DAT_01268244;
-
-struct FUN_00c9f530 : FUN_00c9f3b0
-{
-    virtual ~FUN_00c9f530();
-};
 
 struct Arg
 {
@@ -5777,60 +5259,6 @@ struct FUN_0094dbb0
         return FUN_00aa13e0(size);
     }
 };
-struct CA0780Owner
-{
-    virtual void vf00();
-    virtual void vf01();
-    virtual void vf02();
-    virtual void vf03();
-    virtual void vf04();
-    virtual void vf05();
-    virtual void vf06();
-    virtual void vf07();
-    virtual void vf08();
-    virtual void vf09();
-    virtual void vf10();
-    virtual void vf11();
-    virtual void vf12();
-    virtual void vf13();
-    virtual void vf14();
-    virtual void vf15();
-    virtual void vf16();
-    virtual void vf17();
-    virtual void vf18();
-    virtual void vf19();
-    virtual void vf20();
-    virtual void vf21();
-    virtual void vf22();
-    virtual void vf23();
-    virtual void vf24();
-    virtual void vf25();
-    virtual void vf26();
-    virtual void vf27();
-    virtual void vf28();
-    virtual void vf29();
-    virtual void vf30();
-    virtual void vf31();
-    virtual void vf32();
-    virtual void vf33();
-    virtual void vf34();
-    virtual void vf35();
-    virtual void vf36();
-    virtual void vf37();
-    virtual void vf38();
-    virtual void vf39();
-    virtual void vf40();
-    virtual void vf41();
-    virtual void vf42();
-    virtual void vf43();
-    virtual void vf44();
-    virtual void vf45();
-    virtual void vf46();
-    virtual void vf47();
-    virtual void vf48();
-    virtual void vf49(FUN_0094dbb0* object, unsigned int argument);
-    FUN_0094dbb0* FUN_00ca0780(unsigned int argument);
-};
 
 extern int DAT_012682cc;
 
@@ -6026,10 +5454,6 @@ FUN_00cb38c0::FUN_00cb38c0(bhkRigidBodyBase* source)
 
 
 struct FUN_00cbe9f0_Target;
-struct FUN_00c85c80_Class
-{
-    int FUN_00c85c80(int a);
-};
 struct S00cbe9f0_cls
 {
     int unk00;
@@ -6412,10 +5836,7 @@ struct StringArray
         SetAt(index, value);
     }
 };
-extern const char* DAT_01268200;
 char* __cdecl FUN_00a7d330(const char*);
-char* __cdecl FUN_00a7d370(const char*, bool);
-char* __cdecl FUN_00a7d5e0(const char*, const char*);
 struct Body
 {
     int unk00;
@@ -6604,7 +6025,6 @@ struct S_00ca09e0_Target
     virtual void v54();
     virtual void v55(S_00ca09e0_Shape* s, int f);
 };
-S_00ca09e0_Shape* __cdecl FUN_00c56680(float a, int b, int c, int d);
 char* __cdecl FUN_00a5b690(const char* s);
 extern char* _EmptyFS;
 struct S_00ca09e0_Str
@@ -6620,7 +6040,6 @@ struct S_00ca09e0_Str
             InterlockedDecrement((long*)(p - 8));
     }
 };
-extern float DAT_011b15c8;
 struct S_00ca09e0_Obj
 {
     int unk0;
@@ -6825,8 +6244,6 @@ void S00ca0900_cls::FUN_00ca0900(S00ca0900_Arg* arg)
 namespace fnv_00cb3b20 {
 extern __declspec(thread) unsigned int tlsMode;
 extern void* DAT_012683c8;
-extern const char str_010c88a8[];
-extern const char str_010c889c[];
 void* FUN_00a7d330(void*);
 struct OutputList
 {
@@ -6843,17 +6260,6 @@ struct OutputList
         FUN_0096ae90(index, &value);
     }
 };
-struct RotationValue
-{
-    float w, x, y, z;
-    void* FUN_00a6e190(const char*);
-};
-struct PositionValue
-{
-    float x, y, z;
-    void* FUN_00a59af0(const char*);
-};
-void FUN_00458620(PositionValue*, const void*);
 struct ModeScope
 {
     unsigned int saved;
@@ -6935,72 +6341,4 @@ struct ShapeViewerFields
         return collisionFlags & 0x1f;
     }
     void FUN_00c851c0(BCA05B0StringArray* output);
-};
-
-extern const char DAT_010c59cc[];
-extern "C" const char* DAT_01268100;
-char* __cdecl FUN_00a7d4d0(const char*, unsigned int);
-
-struct Q00c9fde0
-{
-    void* m_pVtable;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0C;
-    unsigned int unk10;
-    Q00c9fde0();
-};
-struct C9FFD0Owner
-{
-    virtual void vf00();
-    virtual void vf01();
-    virtual void vf02();
-    virtual void vf03();
-    virtual void vf04();
-    virtual void vf05();
-    virtual void vf06();
-    virtual void vf07();
-    virtual void vf08();
-    virtual void vf09();
-    virtual void vf10();
-    virtual void vf11();
-    virtual void vf12();
-    virtual void vf13();
-    virtual void vf14();
-    virtual void vf15();
-    virtual void vf16();
-    virtual void vf17();
-    virtual void vf18();
-    virtual void vf19();
-    virtual void vf20();
-    virtual void vf21();
-    virtual void vf22();
-    virtual void vf23();
-    virtual void vf24();
-    virtual void vf25();
-    virtual void vf26();
-    virtual void vf27();
-    virtual void vf28();
-    virtual void vf29();
-    virtual void vf30();
-    virtual void vf31();
-    virtual void vf32();
-    virtual void vf33();
-    virtual void vf34();
-    virtual void vf35();
-    virtual void vf36();
-    virtual void vf37();
-    virtual void vf38();
-    virtual void vf39();
-    virtual void vf40();
-    virtual void vf41();
-    virtual void vf42();
-    virtual void vf43();
-    virtual void vf44();
-    virtual void vf45();
-    virtual void vf46();
-    virtual void vf47();
-    virtual void vf48();
-    virtual void vf49(Q00c9fde0* object, unsigned int argument);
-    Q00c9fde0* FUN_00c9ffd0(unsigned int argument);
 };

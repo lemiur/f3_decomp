@@ -7096,9 +7096,6 @@ void Owner::FUN_00656640(int index)
 // @f3 0x0065df00 (community match, verified in this file)
 extern char DAT_00e03f3c[];
 extern char DAT_00e03f50[];
-extern void* DAT_01076c64;
-extern void* DAT_01076c68;
-extern unsigned char DAT_01076c6c;
 namespace f3m_0065df00 {
 
 
@@ -8291,7 +8288,6 @@ struct Node { Item* item; Node* next; };
 int __cdecl FUN_00bea9e0(const char*);
 int __cdecl FUN_00becd70(const char*, int);
 float __cdecl FUN_0047ca30(float, float);
-int __cdecl FUN_00c00690(float);
 
 struct FUN_00655ff0_cls {
     Node list;
@@ -9390,7 +9386,6 @@ extern Global640* DAT_010761d0;
 extern const float DAT_00eaad58;
 extern const float DAT_00db39b8;
 extern const double DAT_00dd2760;
-extern const double DAT_00e05278;
 struct Menu640 {
     virtual void v00();
     virtual void v04();
@@ -11623,7 +11618,6 @@ extern MemoryManager DAT_01090a78;
 extern const char DAT_00e054dc[];
 extern const double DAT_00e05e78;
 extern const double DAT_00dcd110;
-extern const float DAT_00dc2324;
 extern const float DAT_00dc1e3c;
 int __cdecl FUN_00bea9e0(const char* name);
 void __cdecl FUN_0064bfd0(Tile* a, Tile* b, Tile* c, Tile* d);
@@ -17816,11 +17810,6 @@ struct xUpdateData
     float m_t;
     bool m_kPointA, m_kPointB, m_iThirdValue, m_iFourthElementInteger, m_usTrailingValue;
 };
-struct xRTTI
-{
-    int m_iWordAt00;
-};
-extern xRTTI xg_rtti_11f36ac;
 struct xSeq
 {
     unsigned int pad00_000;
@@ -18184,11 +18173,6 @@ struct xOS
     xControls* FUN_006e4eb0();
 };
 extern xOS* xg_os_11dea0c;
-struct ClockSource
-{
-    int FUN_00825c00();
-};
-extern ClockSource xg_timer_11f6394;
 struct xStrSetting
 {
     int unk00;
@@ -18202,7 +18186,6 @@ struct xFltSetting
 extern xStrSetting DAT_00f64f7c;
 extern xFltSetting DAT_00f5eeb0;
 extern xFltSetting DAT_00f64fac;
-extern xFltSetting xg_f_11d0de0;
 struct xForm
 {
     void* vtbl;
@@ -18744,10 +18727,7 @@ extern bool xg_bMsg_11da2a4;
 extern int xg_iTileId_11da1f8;
 extern int xg_iTileId2_11da1fc;
 static int DAT_00f6af2c = 1;
-int xF790290();
-int xF78e080();
 __forceinline float xF408820(float value) { return (float)fabs(value); }
-bool xF5d4a40();
 float FUN_00401e20(float, float);
 float FUN_0090d870(float, float);
 void FUN_0048c3a0(int, int);

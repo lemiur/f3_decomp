@@ -256,11 +256,6 @@ class TESForm
     virtual ~TESForm();
 };
 
-struct LightColor32
-{
-    unsigned char r, g, b, a;
-};
-
 class TESObjectLIGH : public TESForm
 {
   public:
@@ -2969,13 +2964,11 @@ void __fastcall FUN_006a8f30(Owner* pThis, int, NiRefObject* pObj)
 // @f3 0x006b6c90 (community match, verified in this file)
 namespace f3m_006b6c90 {
 struct Info6b6{char pad[0xc];void* mc;};
-class Base6b6a{public:char pad[0x80];};
 class Sub6b6{
 public:
     virtual void v0();virtual Info6b6* v1();virtual void v2();virtual bool v3();
     void* FUN_006b6c90();
 };
-class Full6b6:public Base6b6a,public Sub6b6{};
 void* Sub6b6::FUN_006b6c90(){
     void** full=(void**)((char*)this-0x80);
     if(v3())return *full;
@@ -13929,7 +13922,6 @@ struct Globals { char pad[0x5b8]; bool unk5b8; };
 extern Globals* DAT_0107a104;
 extern bool DAT_0107801c;
 extern float DAT_00f62bbc;
-extern float DAT_00eaad58;
 int __cdecl FUN_006a6520(float value, int unk);
 void __cdecl FUN_004c2700(int id);
 struct Handler { virtual void v0(); virtual void v1(); virtual int v2(int type); };
@@ -15942,7 +15934,6 @@ struct SourceTable {void* unk00;void* (__thiscall *get)(Source*);};
 struct Source {SourceTable* table;};
 struct Checker {bool FUN_005ae140(void*,int);};
 struct Holder {int unk00,unk04,unk08,unk0C,unk10,unk14,unk18;Checker checker;};
-struct Boundary {float value;};
 inline float Evaluate(float value) {return (float)FUN_00c00d40(value);}
 struct Owner {
  int unk00;
@@ -31350,7 +31341,6 @@ void FUN_006b7a20_Owner::FUN_006b7a20() {
 
 // @f3 0x006b0900 (community match, verified in this file)
 #include <intrin.h>
-extern unsigned int DAT_0106ab70;
 extern float FUN_00f62970;
 extern double FUN_00db38b0;
 extern float DAT_01078750;
@@ -34654,14 +34644,6 @@ class FUN_006b29b0 : public NiMemObject { public:
 };
 struct TaskManager { void FUN_00793f90(FUN_006b29b0*); };
 extern TaskManager DAT_0107c0a0;
-struct FloatSelector {
- virtual void v000();
- virtual void v004();
- virtual void v008();
- virtual void v00c();
- virtual void v010();
- virtual void* select(float);
-};
 struct Root { 
  int unk00;
  int unk04;
@@ -45270,7 +45252,6 @@ struct Actor : Base0, Base80 {
     bool flag5a8;
 };
 extern Actor* DAT_0107a104;
-extern const float DAT_00dbe1e0;
 struct Source {
     virtual void s00(); virtual void s01(); virtual void s02(); virtual void s03(); virtual void s04(); virtual void s05(); virtual void s06(); virtual void s07();
     virtual void s08(); virtual void s09(); virtual void s10();
@@ -48768,11 +48749,6 @@ struct Base98_95d0 {
     int unk84;
     int unk88;
     Form98_95d0* unk8C;
-};
-struct Sub95d0 {
-    int unk00;
-    int unk04;
-    int unk08;
 };
 struct Snd95d0 {
     int unk00;
@@ -55097,11 +55073,6 @@ void S006b22b0_Fade::FUN_006b22b0(float dt) {
 // @f3 0x006a13f0 (community match, verified in this file)
 extern char DAT_00e09cdc;
 namespace ActiveEffectCtorC {
-struct ItemDispatch {
-    void* unk00; void* unk04; void* unk08; void* unk0c;
-    void* unk10; void* unk14;
-    int (__thiscall* GetType)(void*);
-};
 struct EffectView {
     int unk00; int unk04; int unk08; int unk0c;
     int unk10; int unk14; int unk18;
@@ -63137,10 +63108,6 @@ struct S006aa2b0_Model {
     int unk04;
     int unk08;
     void *data0c;
-};
-
-struct S006aa2b0_Ref {
-    int unk00[0x1d];
 };
 
 struct S006aa2b0_Form {

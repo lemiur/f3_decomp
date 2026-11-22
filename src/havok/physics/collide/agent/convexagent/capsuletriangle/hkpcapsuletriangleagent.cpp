@@ -2,7 +2,6 @@
 // src/havok/physics/collide/agent/convexagent/capsuletriangle/hkpcapsuletriangleagent.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/physics/collide/agent/convexagent/capsuletriangle/hkpcapsuletriangleagent.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-void CreateObjectFromFactory();
 void FUN_00d3a8c0();
 void FUN_00d3a280();
 void FUN_00daf8e0();
@@ -23,31 +22,10 @@ void __cdecl FUN_00d3ab90(void** apTable)
     ((unsigned char*)apTable)[0x11] = 0;
 }
 
-void __cdecl CreateTriAgent2();
-void __cdecl FUN_00d38ac0();
-void __cdecl FUN_00d38ed0();
 void __cdecl FUN_00d3ac80();
-void __cdecl CreateTriAgent();
-void __cdecl FUN_00d38130();
-void __cdecl FUN_00d386c0();
 void __cdecl FUN_00daf8e0();
 
 typedef void (__cdecl *S_00d389f0_Func)();
-
-struct S_00d389f0_AgentFuncs
-{
-    S_00d389f0_Func m_pCreateFunc;
-    S_00d389f0_Func m_pQueryPenetrationsFunc;
-    S_00d389f0_Func m_getClosestPointsFunc;
-    S_00d389f0_Func m_pLinearCastFunc;
-    bool m_bIsFlipped;
-    bool m_bIsPredictive;
-};
-
-struct S_00d389f0_Dispatcher
-{
-    void FUN_00cfbbe0(S_00d389f0_AgentFuncs& f, int typeA, int typeB);
-};
 
 struct ReceiverBase { virtual void Release(unsigned int value); int unk04; };
 struct NoteDispatcher {
@@ -174,44 +152,6 @@ struct hkVector4 {
     void addMul4(const hkVector4& a, const hkVector4& b) { m_vComponents = _mm_add_ps(m_vComponents, _mm_mul_ps(a.m_vComponents, b.m_vComponents)); }
     void setNeg4(const hkVector4& v) { m_vComponents = _mm_xor_ps(v.m_vComponents, DAT_010c4c00); }
     void neg() { m_vComponents = _mm_xor_ps(m_vComponents, DAT_010c4c00); }
-};
-
-struct Elem_d3b260 {
-    hkVector4 m_pos;
-    hkVector4 m_dir;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-};
-
-struct Buffer_d3b260 {
-    Elem_d3b260* m_kRayEnd;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    Elem_d3b260 m_pElements[256];
-    hkVector4 m_vHitNormal;
-    float m_fHitFraction;
-    int unk3034;
-    int unk3038;
-    int unk303c;
-    unsigned short m_idx[4];
-    unsigned char m_kPointA;
-    unsigned char m_kPointB;
-    unsigned char m_ucLowNibble : 4;
-    unsigned char m_ucHighNibble : 4;
-};
-
-
-
-struct Agent_d3b260 {
-    void FUN_00d3ad70(int b, int a, int c, Buffer_d3b260* buf);
-    void FUN_00d3b260(int a, int b, int c, Buffer_d3b260* buf);
 };
 
 struct __declspec(align(16)) FourWord {
@@ -407,13 +347,6 @@ struct __declspec(align(16)) ScalarVector {
 struct Xf {
     ScalarVector r0, r1, r2, t;
 };
-struct Vt {
-    void* f00; void* f04; void* f08; void* f0c;
-    void* f10; void* f14; void* f18; void* f1c;
-    void* f20; void* f24; void* f28; void* f2c;
-    void* f30; void* f34; void* f38; void* f3c;
-    int (__thiscall *fn)(void*, void*, void*, void*, void*, void*, void*, void*);
-};
 struct ShapeInterface {
     virtual void slot00();
     virtual void slot04();
@@ -443,22 +376,6 @@ struct Shape : ShapeInterface {
     int unk1c;
     hkVector4 vertices[3];
 };
-struct Obj {
-    Shape* base;
-    int u;
-    Xf* xf;
-};
-struct Par {
-    float a;
-    int flag;
-    float c;
-};
-struct Info {
-    unsigned char count;
-    unsigned char type;
-    unsigned short feature;
-    int index;
-};
 struct Contact {
     __m128 normal;
     __m128 position;
@@ -487,13 +404,8 @@ static __forceinline void xform(const Xf& m, const __m128* src, __m128* dst, int
     }
 }
 
-struct CollisionWorkspace { __m128 la[2]; __m128 lb[3]; };
-
 #include <windows.h>
 extern DWORD DAT_0126835c;
-
-extern "C" void _ReadWriteBarrier(void);
-unsigned __int64 __cdecl __rdtsc(void);
 
 struct ProfRec
 {
@@ -537,13 +449,6 @@ struct HitRec
     ManifoldPoint pt0;
     ManifoldPoint pt1;
     ManifoldPoint pt2;
-};
-
-struct Context
-{
-    HitRec hit;
-    __m128 capsule[2];
-    __m128 triangle[3];
 };
 
 extern "C" void __cdecl FUN_00cd6520(void* out1, float fx, void* out2, float fy, void* p, float afDepth, int zero, HitRec* hit, int zero2);
@@ -868,17 +773,10 @@ done:
 }
 
 extern char DAT_010cef80[], DAT_010c41f8[];
-struct Timer { char* volatile name; unsigned time; unsigned extra; };
-struct TimerPair { int unused; Timer* current; int unused2; Timer* end; };
 struct Body { Shape* shape; int unused; Mat4* matrix; };
 struct Input { int unk00,unk04; float tolerance; };
 struct PenetrationCollector { virtual void unused(); virtual void add(Body*, Body*); };
-struct AlignedPairData { Vec4 position, normal; };
-struct Result { AlignedPairData points[3]; };
 struct Cache { float inverseEdge0,inverseEdge1,inverseEdge2,inverseNormal,normalLength; };
-struct OutputA { Vec4 points[2]; };
-struct OutputB { Vec4 points[3]; };
-struct Locals { Result result; OutputA outA; OutputB outB; };
 static __forceinline void mytransform(Vec4* out, const Shape* shape, int count, const Mat4* m)
 {
     struct Rows { Vec4 p3,p2,p1,p0; } p;

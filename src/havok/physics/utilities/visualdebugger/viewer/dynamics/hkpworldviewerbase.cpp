@@ -63,32 +63,6 @@ FUN_00ddcc60::~FUN_00ddcc60()
     }
 }
 
-struct CpuAllocator
-{
-    virtual void slot00();
-    virtual void slot04();
-    virtual void Invoke(void* block, unsigned int size);
-};
-struct CpuAllocatorHolder
-{
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0c;
-    CpuAllocator* allocator;
-};
-CpuAllocatorHolder* __cdecl FUN_00c85750();
-struct CpuObject
-{
-    unsigned int unk00;
-    unsigned short size;
-    void FUN_00ddcc60();
-    CpuObject* DestroyOrFree(unsigned int flags);
-};
-
-extern double DAT_010cd5a8;
-extern double DAT_0101ff40;
-
 int __cdecl FUN_00cb0fa0(const char* pcA, const char* pcB);
 
 class __declspec(novtable) BDDCCB0ReferencedObject
@@ -213,12 +187,6 @@ Flag __cdecl FUN_00ddcda0(Item* left, Item* right) {
 
 
 #include <math.h>
-struct DDCE80Point
-{
-    float x;
-    float y;
-    float z;
-};
 
 struct DDCE80Bool
 {
@@ -233,8 +201,6 @@ struct DDCE80Bool
 #include <xmmintrin.h>
 #include <math.h>
 namespace fnv_00ddd040 {
-extern "C" double __cdecl fabs(double);
-extern double DAT_0103c7c8;
 struct S_V
 {
     __m128 q;
@@ -248,11 +214,6 @@ struct S_P
     }
 };
 }  // namespace fnv_00ddd040
-
-struct FUN_00ddcc40
-{
-    virtual ~FUN_00ddcc40();
-};
 
 struct Base1
 {
@@ -277,23 +238,3 @@ struct Derived : Base1, Base2
 };
 Derived::Derived()
 {}
-
-// FUN_00ddcd60 : MSVC this-adjusting thunk  (sub ecx, 0x08 ; jmp <impl>)
-struct A1_00ddcd60
-{
-    A1_00ddcd60();
-    virtual void FUN_00ddcd60();
-    char pad[0x04];
-};
-struct A2_00ddcd60
-{
-    A2_00ddcd60();
-    virtual void FUN_00ddcd60();
-};
-struct Own_00ddcd60 : A1_00ddcd60, A2_00ddcd60
-{
-    Own_00ddcd60();
-    virtual void key_fn();
-// @fnv 0x00ddcd60
-    void FUN_00ddcd60();
-};

@@ -132,10 +132,6 @@ hkUint32 hkpMeshShapeDCC::GetNextNonDegenerateTriangleKey(hkUint32 auiKey) const
 }
 
 
-class hkClassDCD1;
-
-extern const hkClassDCD1 DAT_01269198;
-
 int __cdecl FUN_00d06f80(const void* pvChunk, int iNumBytes) throw();
 
 template <class T> class hkArrayDCD1
@@ -180,51 +176,6 @@ class hkStatisticsCollectorDCD1
             AddMemoryChunk(3, pcName, kArray.m_data, kArray.GetLogicalSize() * sizeof(T), iAllocated);
         }
     }
-};
-
-struct hkSubpartDCD1
-{
-    int m_00;
-    int m_04;
-    int m_08;
-    int m_0c;
-    int m_10;
-    int m_14;
-    int m_18;
-    int m_1c;
-    int m_20;
-    int m_24;
-    int m_28;
-    int m_2c;
-    int m_30;
-    int m_34;
-};
-
-class hkpShapeDCD1
-{
-  public:
-    void FUN_00d213e0(hkStatisticsCollectorDCD1* pkCollector, const hkClassDCD1* pkClass) const throw();
-};
-
-class hkObjDCD1 : public hkpShapeDCD1
-{
-  public:
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    hkArrayDCD1<hkSubpartDCD1> m_kSubparts;
-
-    void CollectSubPartsStats(hkStatisticsCollectorDCD1* pkCollector, const hkClassDCD1* pkClass) const throw();
 };
 
 struct PageDCCD
@@ -548,64 +499,6 @@ template <class T> struct hkArrayDCD3
     {}
 };
 
-class hkBaseObjectDCD3
-{
-  public:
-    virtual ~hkBaseObjectDCD3() throw();
-};
-
-class hkReferencedObjectDCD3 : public hkBaseObjectDCD3
-{
-  public:
-    virtual ~hkReferencedObjectDCD3() throw();
-
-    unsigned short m_usMemSizeAndFlags;
-    short m_sReferenceCount;
-};
-
-class hkpShapeDCD3 : public hkReferencedObjectDCD3
-{
-  public:
-    virtual ~hkpShapeDCD3() throw();
-
-    unsigned long m_ulUserData;
-    unsigned int m_type;
-};
-
-class hkpShapeContainerDCD3
-{
-  public:
-    virtual ~hkpShapeContainerDCD3() throw();
-};
-
-class FUN_00d21410 : public hkpShapeDCD3, public hkpShapeContainerDCD3
-{
-  public:
-    FUN_00d21410(unsigned int uiType, unsigned char ucCollectionType) throw();
-    virtual ~FUN_00d21410() throw();
-
-    char m_bDisableWelding;
-    unsigned char m_eCollectionType;
-};
-
-struct hkpMeshShapeSubpartDCD3;
-
-class FUN_00dcd310 : public FUN_00d21410
-{
-  public:
-    FUN_00dcd310(float fRadius, int iNumBitsForSubpartIndex) throw();
-    virtual ~FUN_00dcd310() throw();
-
-    unsigned int unk18, unk1C;
-    hkVector4DCD3 m_kScaling;
-    int m_iNumBitsForSubpartIndex;
-    hkArrayDCD3<hkpMeshShapeSubpartDCD3> m_kSubparts;
-    hkArrayDCD3<unsigned short> m_kWeldingInfo;
-    unsigned char m_eWeldingType;
-    float m_fSphereRadius;
-    int m_auiShapeKeys[3];
-};
-
 }  // namespace fnv_00dcd310
 
 struct PageDCD4
@@ -775,17 +668,9 @@ class S00dcd380_Mesh : public S00dcd380_Collection
     int m_iCapacityState;
 };
 
-class S00dcd380_Host
-{
-  public:
-    S00dcd380_Mesh* FUN_00dcd380(int finishing);
-};
-
 struct MeshAabb;
-extern "C" void _ReadWriteBarrier();
 
 extern "C" __m128 _mm_set_ps1(float);
-extern "C" __m128 _mm_shuffle_ps(__m128, __m128, int);
 extern "C" __m128 _mm_sub_ps(__m128, __m128);
 extern "C" __m128 _mm_add_ps(__m128, __m128);
 struct hkpMeshShapeSubpart
@@ -893,13 +778,3 @@ void MeshShapeHelper::FUN_00dccdd0(const hkTransform& transform, hkReal toleranc
     out.m_kMaximumCorner.m_vComponents.m128_f32[2] += pad;
     out.m_kMaximumCorner.m_vComponents.m128_f32[3] += pad;
 }
-
-
-extern "C" __m128 _mm_load_ps(const float*);
-extern "C" void _mm_store_ps(float*, __m128);
-
-class MeshScalingSetter : public hkpMeshShape
-{
-  public:
-    void FUN_00dccf40(const hkVector4& value);
-};

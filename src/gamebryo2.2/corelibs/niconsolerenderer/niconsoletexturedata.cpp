@@ -1,17 +1,5 @@
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-struct NiRefObject
-{
-    virtual ~NiRefObject();
-};
-
-struct NiTexture_RendererData : NiRefObject
-{
-    void* __thiscall FUN_00a981a0(unsigned int flags);
-};
-
-extern "C" void _delete(void* p, unsigned int size);
-
 struct S_00a981d0_Base
 {
     S_00a981d0_Base() throw();

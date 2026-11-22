@@ -35,15 +35,10 @@ struct NiObject
 struct NiInterpolator : NiObject
 {
 };
-struct NiBoolInterpolator : NiInterpolator
-{
-    void SetBoolValue(bool);
-};
 struct NiPSysModifierBoolCtlr
 {
     void FUN_00c32c70(NiInterpolator*, unsigned short);
 };
-extern unsigned int DAT_011f404c;
 
 namespace fnv_00c32d30 {
 struct StrArr

@@ -15,10 +15,6 @@ struct BSFadeNode
     static void* __cdecl operator new(unsigned int);
 };
 
-void __cdecl FUN_00a57c80(void*);
-
-extern int DAT_01098a14;
-
 namespace fnv_00a4b880 {
 struct StrArr
 {
@@ -272,92 +268,6 @@ struct ThingPtr
     }
 };
 
-struct NiStreamLike
-{
-    int unk000;
-    int unk004;
-    int unk008;
-    int unk00c;
-    int unk010;
-    int unk014;
-    int unk018;
-    int unk01c;
-    int unk020;
-    int unk024;
-    int unk028;
-    int unk02c;
-    int unk030;
-    int unk034;
-    int unk038;
-    int unk03c;
-    int unk040;
-    int unk044;
-    int unk048;
-    int unk04c;
-    int unk050;
-    int unk054;
-    int unk058;
-    int unk05c;
-    int unk060;
-    int unk064;
-    int unk068;
-    int unk06c;
-    int unk070;
-    int unk074;
-    int unk078;
-    int unk07c;
-    int unk080;
-    int unk084;
-    int unk088;
-    int unk08c;
-    int unk090;
-    int unk094;
-    int unk098;
-    int unk09c;
-    int unk0a0;
-    int unk0a4;
-    int unk0a8;
-    int unk0ac;
-    int unk0b0;
-    int unk0b4;
-    int unk0b8;
-    int unk0bc;
-    int unk0c0;
-    int unk0c4;
-    int unk0c8;
-    int unk0cc;
-    int unk0d0;
-    int unk0d4;
-    unsigned int m_uiFormatVersion;
-
-    Source* FUN_00a63430();
-};
-
-struct StreamableBase
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    void FUN_00a57630(NiStreamLike* apStream);
-};
-
-struct FUN_00a4b4b0_cls : StreamableBase
-{
-    ThingPtr m_spThing;
-
-    void FUN_00a4b4b0(NiStreamLike* apStream);
-};
-
 namespace fnv_00a4b540 {
 struct NiObject
 {
@@ -579,34 +489,9 @@ void NiMaterialColorControllerA4B5::FUN_00a4b580(NiUpdateDataA4B5& kUpdateData)
 
 
 extern "C" __declspec(dllimport) long __stdcall InterlockedDecrement(volatile long*);
-void __cdecl _delete(void*, unsigned int);
-struct RefObj
-{
-    virtual void f0();
-    virtual void f1();
-    long m_ref;
-};
-struct BaseB
-{
-    void FUN_00a6d290();
-};
-struct S00a4b6f0
-{
-    char _0[0x34];
-    RefObj* volatile m_ptr;
-    void* Release(unsigned int);
-};
 
 namespace fnv_00a4b740 {
 struct CloningProcess;
-struct NiAlphaController
-{
-    void CopyMemberData(NiAlphaController*, CloningProcess&);
-};
-struct NiLightColorController
-{
-    void FUN_00a57c80();
-};
 struct NiMaterialColorController
 {
     char _pad[0x38];
@@ -637,7 +522,6 @@ struct NiStream
     }
     void FUN_00a645b0();
 };
-void __stdcall FUN_00a57c70(NiStream*);
 struct Stand840
 {
     unsigned int unk00, unk04, unk08, unk0c, unk10, unk14, unk18, unk1c;

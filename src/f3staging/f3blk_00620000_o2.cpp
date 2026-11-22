@@ -2295,8 +2295,6 @@ struct Base60 {
 };
 struct E4 { int v; ~E4(); };
 struct E20 { int v0,v1,v2,v3,v4,v5,v6,v7; ~E20(); };
-struct E2c { int v0,v1,v2,v3,v4,v5,v6,v7,v8,v9,v10; ~E2c(); };
-struct E10 { int v0,v1,v2,v3; ~E10(); };
 struct FUN_00630cb0 : Base60 {
     E20 a60[9];
     E4 a180[11];
@@ -2563,9 +2561,6 @@ tail:
 }
 
 // @f3 0x0062d290 (community match, verified in this file)
-extern unsigned int DAT_01075df4;
-extern unsigned int DAT_01075df0;
-extern unsigned int DAT_01075dec;
 extern char DAT_00e03f50[];
 extern char DAT_00e03f3c[];
 extern float DAT_00db38b8;
@@ -11217,7 +11212,6 @@ FUN_0062dc00::~FUN_0062dc00() {
 }   // namespace f3m_0062dc00
 
 // @f3 0x0062dd40 (community match, verified in this file)
-extern char DAT_00e0467c;
 namespace f3m_0062dd40 {
 namespace f3_0624 {
 struct FUN_00625590 {
@@ -14458,9 +14452,6 @@ void __stdcall FUN_0062afd0(Node* node){node->text.~String();delete node;}}
 }   // namespace f3m_0062afd0
 
 // @f3 0x0062d140 (community match, verified in this file)
-extern unsigned int DAT_01075de0;
-extern unsigned int DAT_01075de4;
-extern unsigned char DAT_01075de8;
 extern char DAT_00e03f50[];
 extern char DAT_00e03f3c[];
 extern float DAT_00db38b8;
@@ -15278,7 +15269,6 @@ return 0;
 // @f3 0x00630120 (community match, verified in this file)
 namespace f3m_00630120 {
 extern int DAT_00e04808;
-extern int DAT_00e0481c;
 typedef void (__thiscall *FreeFn)(void* self, void* arg);
 extern FreeFn DAT_00e04810;
 extern FreeFn DAT_00e04824;
@@ -16719,7 +16709,6 @@ struct ContainerMenu : Tile { int unk04; int unk08; int unk0c; int unk10; int un
 struct BookMenu : Tile { int unk04; int unk08; int unk0c; int unk10; int unk14; int unk18; int unk1c; int unk20; int unk24; int unk28; int unk2c; int unk30; };
 struct TESBoundObject { virtual void v0(); };
 struct TESObjectBOOK : TESBoundObject { };
-struct Tile2 { int unk00; };
 struct Node24 { int unk00; int unk04; int unk08; int unk0c; int unk10; int unk14; int unk18; int unk1c; int unk20; int unk24; TESBoundObject* GetBase(){return (TESBoundObject*)unk1c;} };
 struct UIFlags { int unk00; int unk04; int unk08; int unk0c; int unk10; int unk14; int unk18; int unk1c; int unk20; int unk24; int unk28; int unk2c; int unk30; int unk34; int unk38; int unk3c; int unk40; int unk44; int unk48; int unk4c; int unk50; int unk54; int unk58; int unk5c; int unk60; int unk64; int unk68; int unk6c; int unk70; int unk74; int unk78; int unk7c; int unk80; int unk84; int unk88; int unk8c; int unk90; int unk94; int unk98; int unk9c; int unka0; int unka4; int unka8; int unkac; int unkb0; int unkb4; int unkb8; int unkbc; int unkc0; int unkc4; int unkc8; int unkcc; int unkd0; int unkd4; int unkd8; int unkdc; int unke0; int unke4; int unke8; int unkec; int unkf0; int unkf4; int unkf8; int unkfc; int unk100; int unk104; int unk108; int unk10c; int unk110; int unk114; int unk118; int unk11c; int unk120; int unk124; int unk128; int unk12c; int unk130; int unk134; int unk138; int unk13c; int unk140; int unk144; int unk148; int unk14c; int unk150; int unk154; int unk158; int unk15c; int unk160; int unk164; int unk168; int unk16c; int unk170; int unk174; int unk178; int unk17c; int unk180; int unk184; int unk188; int unk18c; int unk190; int unk194; int unk198; int unk19c; int unk1a0; };
 extern UIFlags* DAT_010770ac;
@@ -17025,7 +17014,6 @@ namespace f3m_00636250 {
 struct Allocator { void* FUN_0086b930(unsigned int size); };
 extern Allocator DAT_01090a78;
 extern float FUN_00db38b8;
-extern float FUN_00eaad58;
 extern char DAT_00e03fac[];
 
 unsigned int __cdecl FUN_00becd70(const char* name, int def);
@@ -21871,7 +21859,6 @@ int __cdecl FUN_00becd70(const char* name, int len);
 struct Pool { void* FUN_0086b930(unsigned); };
 extern Pool DAT_01090a78;
 extern const float DAT_00db38b8;
-extern float DAT_00eaad58;
 struct Item {
     Tile* tile;
     int unk04;
@@ -24112,9 +24099,6 @@ void g3_Menu::FUN_0063de00()
 }   // namespace f3m_0063de00
 
 // @f3 0x0062d3e0 (community match, verified in this file)
-extern unsigned int DAT_01075e00;
-extern unsigned int DAT_01075dfc;
-extern unsigned int DAT_01075df8;
 extern char DAT_00e03f50[];
 extern char DAT_00e03f3c[];
 extern float DAT_00db38b8;
@@ -24475,12 +24459,7 @@ Tile753* root; Tile753* Root(){return root;}
 extern Manager753* DAT_01075b24;
 Menu753* __cdecl FUN_00beaf00(int);
 float __cdecl FUN_00bea750();
-void __cdecl FNV_Warning(const char*);
 int __cdecl FUN_00bea9e0(const char*);
-struct Setting753
-{
-    const char* Text();
-};
 extern const char* DAT_00f63b10; extern const char* DAT_00f62d3c;
 struct List753
 {
@@ -24673,12 +24652,6 @@ public:
     float f40;
     double FUN_0061f480();
     void FUN_006214c0(Dst* p1, int p2, int p3);
-};
-
-union Val
-{
-    double d;
-    float  f;
 };
 
 extern StateObj* DAT_01075b24;
@@ -28380,7 +28353,6 @@ struct Camera { int unk00; int unk04; int unk08; int unk0c; int unk10; int unk14
  int unk80; int unk84; int unk88; int unk8c; int unk90; int unk94; int unk98; int unk9c;
  int unka0; int unka4; int unka8; struct Ray* ray; void FUN_00aaeaf0(float,int,int,int); };
 struct Ray { bool FUN_0083b460(int,int,Point&,Point&,void*); };
-struct System { void FUN_00aaeaf0(float,int,int,int); };
 extern RefRoot* DAT_0107a0d8; extern Settings* DAT_0107a104; extern Camera* DAT_0107a224;
 extern void* FUN_004e7b90(void*);
 struct Owner { int unk00,unk04,unk08,unk0c,unk10,unk14,unk18,unk1c,unk20,unk24,unk28,unk2c,unk30,unk34; float x; int unk3c; float y;

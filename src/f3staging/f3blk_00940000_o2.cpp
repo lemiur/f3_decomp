@@ -1709,7 +1709,6 @@ int S::FUN_00955070() {
 // @f3 0x00946a90 (community match, verified in this file)
 extern void* DAT_0116916c;
 extern char DAT_00e7a5b0;
-extern char DAT_00e2e78c;
 namespace f3m_00946a90 {
 // FUN_00946a90: thiscall (Owner*), one stack param (Args*), ret 4.
 struct Sub {
@@ -2138,11 +2137,6 @@ struct EntryList {
 struct Obj {
     int unk00;
     Elem12* data;
-};
-
-struct OutBuf {
-    int unk00, unk04, unk08, unk0c, unk10, unk14;
-    Elem12 first;
 };
 
 struct NameLookup {
@@ -8052,7 +8046,6 @@ struct S_00cc7dc0_B : S_00cc7dc0_A {
     S_00cc7dc0_B() { DAT_011697b4++; }
     virtual ~S_00cc7dc0_B();
 };
-struct S_00cc7dc0_Init { void FUN_008fc4a0(S_00cc7dc0_Arg* a); };
 struct FUN_00cc7dc0 : S_00cc7dc0_B {
     FUN_00cc7dc0(S_00cc7dc0_Arg* a);
     void FUN_008fc4a0(S_00cc7dc0_Arg* a);
@@ -16908,15 +16901,7 @@ struct hkErrStream : public hkOstream {
     void destroy();                   // FUN_00943a60
 };
 
-struct hkError {
-    virtual void v00();
-    virtual void v01();
-    virtual void v02();
-    virtual int message(int type, int id, const char* desc, const char* file, int line) throw();
-};
-
 struct hkpEntity;
-struct hkpRigidBody;
 struct hkpConstraintInstance {
     void* vtbl;
     int unk04;
@@ -17452,7 +17437,6 @@ FUN_0095b330::FUN_0095b330(Bind97* p) : Obj97(p) {
 
 // @f3 0x00959600 (community match, verified in this file)
 extern double DAT_00dc0438;
-extern float DAT_00de6e70;
 namespace f3m_00959600 {
 namespace Interpolate431 {
 

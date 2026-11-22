@@ -66,12 +66,6 @@ bool __fastcall IsInterpEqual(FInterpX* self, int, FInterpX* other)
     return other->h == self->h ? true : false;
 }
 
-struct GlobalObjX
-{
-    int x;
-};
-extern GlobalObjX g_011f401c_arg1;
-
 void __fastcall FUN_00a57f80(void*);
 void __cdecl __Dummy_00b6fef0(void*, unsigned int);
 // @fnv 0x00a50b80
@@ -126,37 +120,6 @@ FUN_00a50c20Cls* FUN_00a50c20Cls::Clone(CloningProcess& kCloning)
     pkObject->m_kFloatCPHandle = m_kFloatCPHandle;
     return pkObject;
 }
-
-struct StrArr
-{
-    unsigned char pad[8];
-    unsigned short m_usSize;
-    unsigned short m_usElementCount;
-    unsigned char pad2[2];
-    unsigned short m_usGrowth;
-
-    void SetSize(unsigned int size);
-    void SetAt(unsigned int index, char*& value);
-};
-
-struct Base
-{
-    unsigned char pad[0x1c];
-
-    void FUN_00a58200(StrArr* strings);
-};
-
-char* __cdecl _FUN_00a7d330(char const* value);
-char* __cdecl FUN_00a7d550(char const* name, float value);
-char* __cdecl FUN_00a7d510(char const* name, char const* value);
-
-struct FUN_00a50d30_shell : Base
-{
-    float m_fFloatValue;
-    unsigned int m_kFloatCPHandle;
-
-    void SerializeToStrings(StrArr* strings);
-};
 
 struct NiBSplineEvalTarget
 {

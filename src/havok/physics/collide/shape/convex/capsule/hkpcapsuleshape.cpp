@@ -4,9 +4,6 @@
 
 #include "havok/hkpCapsuleShape.h"
 
-extern char const* const g_01268970_arg1;
-void __cdecl FUN_00c90360(char const* const* arg1, char const* const* arg2);
-
 // @fnv 0x00d22350
 int __cdecl FUN_00d22350()
 {
@@ -23,14 +20,7 @@ union __declspec(intrin_type) __declspec(align(16)) __m128
 {
     float m128_f32[4];
 };
-extern "C" __m128 _mm_load_ps(float const* p);
 extern "C" void _mm_store_ps(float* p, __m128 v);
-
-class FUN_00d223f0_cls
-{
-  public:
-    void GatherIndexedVectors(unsigned short const* indices, int count, hkVector4* out);
-};
 
 struct __declspec(align(16)) hkVector4D224
 {
@@ -44,43 +34,6 @@ struct __declspec(align(16)) hkVector4D224
     }
 };
 
-class FUN_00d22480_cls
-{
-  public:
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    hkVector4D224 m_vector;
-
-    hkVector4D224 FUN_00d22480() const;
-};
-
-struct FUN_00d224a0_Data
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    __m128 unk20;
-    __m128 unk30;
-
-    void __thiscall FUN_00d224a0(__m128* result);
-};
-
-extern int DAT_010ce25c;
 union __declspec(align(16)) AlignedHKVector4
 {
     __m128 simd;
@@ -89,50 +42,17 @@ union __declspec(align(16)) AlignedHKVector4
         float x, y, z, w;
     };
 };
-struct FUN_00d22590_Class : hkpCapsuleShape
-{
-    FUN_00d22590_Class* __thiscall FUN_00d22590(const AlignedHKVector4& first, const AlignedHKVector4& second,
-                                                float radius);
-};
 
 struct __declspec(align(16)) Point4
 {
     float x, y, z, w;
 };
-struct ClosestLineResult
-{
-    float distance;
-    float fractionA;
-    float fractionB;
-    float extraValue;
-    Point4 pointA;
-    Point4 pointB;
-};
-void __cdecl FUN_00d231b0(const Point4& a, const Point4& b, const Point4& c, const Point4& d, ClosestLineResult* out);
 
 extern "C" __m128 _mm_add_ps(__m128, __m128);
 extern "C" __m128 _mm_mul_ps(__m128, __m128);
 extern "C" __m128 _mm_shuffle_ps(__m128, __m128, int);
 extern "C" __m128 _mm_load_ss(const float*);
 extern "C" void _mm_store_ps(float*, __m128);
-extern float DAT_01016248;
-
-class Aabb_d22440
-{
-  public:
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    __m128 m_kMin;
-    __m128 m_kMax;
-
-    void __thiscall FUN_00d22440(__m128* pkCenter) const;
-};
 
 extern "C" __m128 _mm_sub_ps(__m128, __m128);
 extern "C" __m128 _mm_mul_ps(__m128, __m128);
@@ -183,32 +103,6 @@ struct hkVector4D223
     {
         reinterpret_cast<int*>(&m_vComponents)[3] = i | 0x3f000000;
     }
-};
-
-class hkBaseObjectD223
-{
-  public:
-    virtual ~hkBaseObjectD223() throw();
-};
-
-class hkReferencedObjectD223 : public hkBaseObjectD223
-{
-  public:
-    unsigned short m_usMemSizeAndFlags;
-    short m_sReferenceCount;
-};
-
-class hkpCapsuleShapeD223 : public hkReferencedObjectD223
-{
-  public:
-    void FUN_00d22370(const hkVector4D223& kDirection, hkVector4D223& kSupportingVertexOut) const;
-
-    unsigned int m_ulUserData;
-    unsigned int m_type;
-    float m_fSphereRadius;
-    unsigned int unk14, unk18, unk1C;
-    hkVector4D223 m_kVertexA;
-    hkVector4D223 m_kVertexB;
 };
 
 extern "C" __m128 _mm_min_ps(__m128, __m128);
@@ -289,15 +183,3 @@ __forceinline void hkVector4q::SetTransformedPoint(const hkTransformq& a, const 
     const __m128 r2 = _mm_mul_ps(a.m_kColumn2.m_vComponents, b2);
     m_vComponents = _mm_add_ps(_mm_add_ps(r0, r1), _mm_add_ps(r2, a.m_vTranslation.m_vComponents));
 }
-
-struct hkAabbq
-{
-    hkVector4q m_kMinimumCorner;
-    hkVector4q m_kMaximumCorner;
-};
-
-class hkpCapsuleShapeAabb : public hkpCapsuleShape
-{
-  public:
-    void FUN_00d225e0(const hkTransform& localToWorld, hkReal tolerance, hkAabbq& out) const;
-};

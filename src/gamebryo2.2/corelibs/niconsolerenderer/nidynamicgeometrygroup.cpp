@@ -11,7 +11,6 @@ struct NiObject
 {
     virtual void LinkObject(NiStream&);
 };
-struct Direct3D9RenderSystem;
 struct NiVBChip
 {
     unsigned int m_uiPosition;
@@ -229,27 +228,6 @@ struct MemoryManager
     void* __thiscall FUN_00aa3e40(unsigned int);
 };
 extern MemoryManager DAT_011f6238;
-extern char DAT_01400000;
-struct Buffer
-{
-    unsigned int unk00;
-    const char* unk04;
-    unsigned int unk08, unk0c, unk10, unk14, unk18, unk1c;
-    unsigned int unk20, unk24, unk28, unk2c, unk30, unk34, unk38, unk3c;
-    unsigned int unk40, unk44, unk48, unk4c, unk50;
-    Buffer* __thiscall FUN_00e947c0();
-};
-struct Destination
-{
-    unsigned int unk00, unk04, unk08, unk0c, unk10, unk14;
-    unsigned short index18, unk1a;
-    Buffer* buffer1c;
-};
-struct FUN_00e95500_Class
-{
-    void __thiscall FUN_00e98730(Buffer*);
-    void __thiscall EnsureBuffer(Destination*);
-};
 }  // namespace fnv_00e95500
 
 struct RttiStub

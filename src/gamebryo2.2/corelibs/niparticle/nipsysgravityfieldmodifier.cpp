@@ -32,7 +32,6 @@ void NiPSysGravityFieldModifier::FUN_00c267f0(NiStream& stream)
 
 extern "C"
 {
-    extern const void* g_01202708;
 }
 
 void __cdecl FUN_00c31750(void);
@@ -214,40 +213,6 @@ void FUN_00c2aa70_Class::FUN_00c2aa70(NiStream& aStream)
     *b = *(NiPoint3*)a;
     ((FUN_00c2aa70_Unit*)b)->FUN_004a0c10();
 }
-
-struct FUN_00c322b0_Obj
-{
-    void __thiscall FUN_00c322b0(NiStream* stream);
-};
-
-struct FUN_00c2af80_Array
-{
-    void* unk00;
-    void* unk04;
-    unsigned short unk08;
-    unsigned short unk0A;
-    unsigned short unk0C;
-    unsigned short unk0E;
-
-    void __thiscall FUN_0096ad30(unsigned int size);
-    void __thiscall FUN_0096ae90(unsigned int index, void** item);
-};
-
-struct FUN_00a59af0_Point
-{
-    float x;
-    float y;
-    float z;
-
-    void* __thiscall FUN_00a59af0(const char* value);
-};
-
-void* __cdecl FUN_00a7d330(void* value);
-
-struct FUN_00c2af80_Obj
-{
-    void __thiscall FUN_00c2af80(NiStream* stream);
-};
 
 struct Vec3
 {

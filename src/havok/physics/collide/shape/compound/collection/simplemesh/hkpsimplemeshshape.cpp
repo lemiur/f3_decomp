@@ -24,44 +24,6 @@ struct FUN_00dfd080Manager
     {}
 };
 
-struct FUN_00dfd080Router
-{
-    void* m_unknown00;
-    void* m_unknown04;
-    void* m_unknown08;
-    void* m_unknown0C;
-    FUN_00dfd080Manager* m_manager;
-};
-
-FUN_00dfd080Router* _D1A0E0GetMemoryRouter();
-
-struct FUN_00e3c240_s
-{
-    void FUN_00e3c240(int ai, unsigned short aw);
-};
-
-struct CpuObject
-{
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0c;
-    unsigned int unk10;
-    unsigned int unk14;
-    unsigned int unk18;
-    unsigned int unk1c;
-    unsigned int unk20;
-    unsigned int unk24;
-    unsigned int unk28;
-    unsigned int unk2c;
-    unsigned int unk30;
-    unsigned int unk34;
-    unsigned int unk38;
-    unsigned int unk3c;
-    unsigned char value;
-    void FUN_00e3c260(unsigned char arg0);
-};
-
 class hkMemoryAllocatorDFCF
 {
   public:
@@ -133,11 +95,6 @@ class ListenerDFCF : public hkReferencedObject
   public:
     int unk08, unk0C;
     hkpShapeContainer m_kContainer;
-};
-
-struct Elem12DFCF
-{
-    int unk00, unk04, unk08;
 };
 
 struct Elem16DFCF
@@ -281,43 +238,6 @@ class FUN_00de10b0 : public hkpConvexShapeE3C4
     hkVector4E3C4 m_kVertexTransform;
 };
 
-class hkpShapeContainerE3C4
-{
-  public:
-    virtual ~hkpShapeContainerE3C4() throw();
-    virtual const hkpShapeE3C4* GetTriangleShape(unsigned int uiKey, unsigned char* pucBuffer) const = 0;
-};
-
-class hkpShapeCollectionE3C4 : public hkpShapeE3C4, public hkpShapeContainerE3C4
-{
-  public:
-    virtual ~hkpShapeCollectionE3C4() throw();
-
-    char m_bDisableWelding;
-    unsigned char m_eCollectionType;
-};
-
-struct hkpSimpleMeshShapeTriangleE3C4
-{
-    int m_kPointA;
-    int m_kPointB;
-    int m_iThirdValue;
-    unsigned short m_kWeldingInfo;
-};
-
-class hkpSimpleMeshShapeE3C4 : public hkpShapeCollectionE3C4
-{
-  public:
-    virtual ~hkpSimpleMeshShapeE3C4() throw();
-    virtual const hkpShapeE3C4* GetTriangleShape(unsigned int uiKey, unsigned char* pucBuffer) const;
-
-    hkArrayE3C4<hkVector4E3C4> m_kVertices;
-    hkArrayE3C4<hkpSimpleMeshShapeTriangleE3C4> m_uiTriangleCount;
-    hkArrayE3C4<unsigned char> m_kMaterialIndices8;
-    float m_fSphereRadius;
-    unsigned char m_eWeldingType;
-};
-
 struct hkBoolQ
 {
     hkBoolQ(bool b)
@@ -392,17 +312,8 @@ template <class T> struct ArrE3C
         return m_iCapacityState & 0x3fffffff;
     }
 };
-struct Vec4E3C
-{
-    float v[4];
-};
-struct TriE3C
-{
-    int a, b, c, d;
-};
 
 int __cdecl FUN_00d06f80(const void* p, int bytes);
-extern char DAT_01269198;
 
 struct StatsCollectorE3C
 {
@@ -423,16 +334,6 @@ struct StatsCollectorE3C
             AddMemoryChunk(type, name, a.m_data, a.m_iElementCount * (int)sizeof(T), allocated);
         }
     }
-};
-
-struct MeshShapeE3C
-{
-    int pad[6];
-    ArrE3C<Vec4E3C> m_kVertices;
-    ArrE3C<TriE3C> m_uiTriangleCount;
-    ArrE3C<unsigned char> m_materialIds;
-    void FUN_00d213e0(StatsCollectorE3C* collector, const void* cls) const;
-    void FUN_00e3c4e0(StatsCollectorE3C* collector, const void* cls) const;
 };
 
 // sub ecx,0x10; jmp target  ==  MSVC adjustor thunk: Derived overrides a virtual that both of its bases

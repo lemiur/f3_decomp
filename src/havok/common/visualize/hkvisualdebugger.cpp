@@ -48,24 +48,6 @@ BSFadeNode* FUN_00ccf890()
 
 class hkVisualDebugger;
 
-struct FUN_00cd1e40_target
-{
-    virtual void FUN_00cd1e40_virtual0() = 0;
-    virtual void FUN_00cd1e40_virtual1() = 0;
-    virtual void FUN_00cd1e40_virtual2(hkVisualDebugger*, unsigned short) = 0;
-};
-
-struct FUN_00cd1e40_router
-{
-    unsigned int m_iWordAt00;
-    unsigned int m_iWordAt04;
-    unsigned int m_8;
-    unsigned int m_iThirdValue;
-    FUN_00cd1e40_target* m_10;
-};
-
-FUN_00cd1e40_router* _D1A0E0GetMemoryRouter();
-
 struct hkVisualDebugger
 {
     unsigned int m_iWordAt00;
@@ -366,17 +348,6 @@ struct FUN_00cb1600 : hkOstreamCD11
     FUN_00cb1600(char* pcBuffer, int iSize) throw();
 };
 
-struct hkVisualDebuggerCD11 : hkVisualDebugger
-{
-    hkSocketCD11* m_pkServer;
-    int m_iUnk0c;
-    void** m_ppClients;
-    int m_iNumClients;
-    void ActivateEntry(int iClient, float fUnused);
-    void RemovePair(int iClient);
-    void FUN_00cd11a0();
-};
-
 }  // namespace fnv_00cd11a0
 
 struct FUN_00cd12e0_element
@@ -401,10 +372,6 @@ struct FUN_00cd12e0_router
 };
 FUN_00cd12e0_router* FUN_00c85750();
 void __cdecl ResizeAudioStream(void*, FUN_00cd12e0_array*, int);
-struct FUN_00cd12e0_owner
-{
-    void FUN_00cd12e0();
-};
 
 namespace fnv_00cd1330 {
 void* FUN_00c85750();
@@ -417,13 +384,6 @@ struct Router
     int unk08;
     int unk0c;
     void* m_10;
-};
-
-struct Elem
-{
-    int m_iWordAt00;
-    int m_iWordAt04;
-    int m_8;
 };
 
 template <typename T> struct hkArray
@@ -467,26 +427,6 @@ class hkBool
 };
 
 typedef void (*CallbackFn)(int, int, hkBool, int, void*);
-
-struct FUN_00cd1330_cls
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-
-    hkArray<Elem> m_ppData;
-    hkArray<CallbackFn> m_kCallbackFunctions;
-    hkArray<void*> m_kCallbackUserHandles;
-
-    void AddElementAndNotify(int a1, int a2, int a3, int a4);
-};
 
 }  // namespace fnv_00cd1330
 
@@ -536,16 +476,6 @@ template <class T> class hkArrayXcd13c0
     }
 };
 
-class hkOwnerXcd13c0
-{
-  public:
-    int unk00[13];
-    hkArrayXcd13c0<void*> m_listA;
-    hkArrayXcd13c0<void*> m_listB;
-
-    void FUN_00cd13c0(void* a, void* b);
-};
-
 class hkMemoryAllocatorCD17;
 
 struct hkMemoryRouterCD17
@@ -564,40 +494,6 @@ struct hkMemoryRouterCD17
 namespace fnvc_adapt {
 extern "C" hkMemoryRouterCD17& __cdecl FUN_00c85750() throw();
 }
-
-struct ItemCD17
-{
-    char unk00[0x38];
-    int m_i38;
-    int m_i3C;
-};
-
-struct EntryCD17
-{
-    int unk00;
-    ItemCD17* m_pInventoryEntryData;
-};
-
-class SinkCD17
-{
-  public:
-    int unk00;
-    int m_i04;
-    void Search(hkMemoryAllocatorCD17& kAlloc, int iValue, int iA, int iB);
-};
-
-class FUN_00cd1710_C
-{
-  public:
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    EntryCD17* m_pEntries;
-    int m_iNumEntries;
-
-    void FUN_00cd1710(SinkCD17* pkSink);
-};
 
 class hkMemoryAllocatorC19
 {
@@ -764,21 +660,6 @@ class hkOstreamCD1
     void* m_pStreamWriter;
 };
 
-class hkErrorCD1
-{
-  public:
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual int message(int eType, int aiSoundId, const char* pcDescription, const char* pcFile, int iLine) throw();
-    virtual void v10();
-    virtual void v14();
-    virtual void v18();
-    virtual void BeginSection(int aiSoundId, const char* pcSectionName) throw();
-    virtual void EndSection() throw();
-};
-extern hkErrorCD1* g_pkErrorCD1;
-
 class hkStringBufCD1
 {
   public:
@@ -829,17 +710,6 @@ class hkStreamWriterCD1
     unsigned short m_usMemSizeAndFlags;
     short m_sReferenceCount;
 };
-
-class hkFileSystemCD1
-{
-  public:
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual void v0c();
-    virtual hkStreamWriterCD1* OpenWriter(const char* pcName) throw();
-};
-extern hkFileSystemCD1* g_pkFileSystemCD1;
 
 class hkProcessHandlerCD1
 {
@@ -1271,7 +1141,6 @@ struct Router_cd14
     static Router_cd14& __cdecl FUN_00c85750() throw();
 };
 void __cdecl FUN_00c908c0(Heap_cd14* heap, void* array, int numElements, int sizeOfElement) throw();
-void __cdecl WriteCompilerInfo(void* p) throw();
 
 template <class T> struct hkArray_cd14
 {
@@ -1438,9 +1307,6 @@ void Server_cd14::AddEntry(const char* name, void* a, void* apCompilerInfo)
 
 
 unsigned __int64 __cdecl FUN_00d60570();
-
-extern const char DAT_010cafd8[];
-extern const char DAT_010cae1c[];
 
 struct hkStopwatchCD15
 {
@@ -1879,22 +1745,6 @@ FUN_00cd1780::FUN_00cd1780(const hkArrayC17<hkProcessContextC17*>& kContexts,
 
 
 namespace fnv_00cd1610 {
-struct DefaultProcessSlot
-{
-    unsigned int taggedPtr;
-    void FUN_00cb0c00();
-};
-extern "C" int __cdecl FUN_00cb0fa0(unsigned int taggedObject, unsigned int wanted);
-struct ErrorMessage
-{
-    void* m_pHeadNode;
-    void* m_iSecondInteger;
-    unsigned int m_fRestLength;
-    unsigned int storage[128];
-    void FUN_00cb1600(char* destination, unsigned int capacity);
-    ErrorMessage* FUN_00cc01c0(const char* text);
-    void FUN_00cc00e0();
-};
 struct ErrorService
 {
     virtual void V00();
@@ -1908,30 +1758,4 @@ struct ErrorService
     virtual void V08();
 };
 extern "C" ErrorService* DAT_01268360;
-struct FUN_00cd1610_cls
-{
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0c;
-    unsigned int unk10;
-    unsigned int unk14;
-    unsigned int unk18;
-    unsigned int unk1c;
-    unsigned int unk20;
-    unsigned int unk24;
-    unsigned int unk28;
-    unsigned int unk2c;
-    unsigned int unk30;
-    unsigned int unk34;
-    unsigned int unk38;
-    unsigned int unk3c;
-    unsigned int unk40;
-    unsigned int unk44;
-    unsigned int unk48;
-    unsigned int unk4c;
-    DefaultProcessSlot* m_processes;
-    int m_uiItemCount;
-    void FUN_00cd1610(unsigned int wanted);
-};
 }  // namespace fnv_00cd1610

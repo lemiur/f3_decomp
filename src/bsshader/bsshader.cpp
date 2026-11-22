@@ -1871,38 +1871,6 @@ ShaderDerived::~ShaderDerived()
 }  // namespace fnv_00be0f10
 
 namespace fnv_00be0fe0 {
-class VertexShaderFile
-{
-  public:
-    virtual ~VertexShaderFile();
-    virtual void FileMethod1();
-    virtual void FileMethod2();
-    virtual void FileMethod3();
-    virtual void FileMethod4();
-    virtual void FileMethod5();
-    virtual void FileMethod6();
-    virtual void FileMethod7();
-    virtual void FileMethod8();
-    virtual void FileMethod9();
-    virtual unsigned int GetSize();
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0c;
-    unsigned int unk10;
-    unsigned int unk14;
-    unsigned int unk18;
-    unsigned int unk1c;
-    unsigned int unk20;
-    unsigned int unk24;
-    unsigned int unk28;
-    bool valid;
-    unsigned int ReadBytes(void*, unsigned int);
-};
-struct CacheEntryView
-{
-    char name[260];
-    char data[1];
-};
 class VertexDevice
 {
   public:
@@ -2170,65 +2138,8 @@ class VertexRendererView
         return device;
     }
 };
-class FUN_00be0b30 : public NiMemObjectAllocation
-{
-  public:
-    FUN_00be0b30(GraphicsRenderer*);
-    virtual void ShaderMethod0();
-    virtual void ShaderMethod1();
-    virtual void ShaderMethod2();
-    virtual void ShaderMethod3();
-    virtual void ShaderMethod4();
-    virtual void ShaderMethod5();
-    virtual void ShaderMethod6();
-    virtual void ShaderMethod7();
-    virtual void ShaderMethod8();
-    virtual void ShaderMethod9();
-    virtual void ShaderMethod10();
-    virtual void ShaderMethod11();
-    virtual void ShaderMethod12();
-    virtual void ShaderMethod13();
-    virtual void ShaderMethod14();
-    virtual void ShaderMethod15();
-    virtual void ShaderMethod16();
-    virtual void ShaderMethod17();
-    virtual void ShaderMethod18();
-    virtual void ShaderMethod19();
-    virtual void ShaderMethod20();
-    virtual void ShaderMethod21();
-    virtual void ShaderMethod22();
-    virtual void ShaderMethod23();
-    virtual void ShaderMethod24();
-    virtual void ShaderMethod25();
-    virtual void ShaderMethod26();
-    virtual void ShaderMethod27();
-    virtual void ShaderMethod28();
-    virtual void ShaderMethod29();
-    virtual void ShaderMethod30();
-    virtual void ShaderMethod31();
-    virtual void ShaderMethod32();
-    virtual void ShaderMethod33();
-    virtual void SetShader(void*);
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0c;
-    unsigned int unk10;
-    unsigned int unk14;
-    unsigned int unk18;
-    unsigned int unk1c;
-    unsigned int unk20;
-    unsigned int unk24;
-    unsigned int unk28;
-    unsigned int unk2c;
-    unsigned int unk30;
-    unsigned int unk34;
-    unsigned int unk38;
-};
 extern "C" void HasFileInArchives(const char*);
-extern "C" void _ReadWriteBarrier();
 extern "C" void BuildCachePath(char*, const char*, const char*, const char*);
-extern "C" int FUN_00406d00(char*, int, const char*, ...);
-extern "C" void* memset(void*, int, unsigned int);
 class FileView;
 struct FileViewMethods
 {

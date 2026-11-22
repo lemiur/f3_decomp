@@ -2,9 +2,6 @@
 #include "f3_common.h"
 extern "C" int __cdecl _strnicmp(const char*, const char*, unsigned int);
 extern "C" int __cdecl strcat_s(char*, unsigned int, const char*);
-extern "C" int __cdecl _strlwr_s(char*, unsigned int);
-extern "C" const char kDataPrefix[];
-extern "C" const char kTexturePrefix[];
 
 // PC file-stream hierarchy (PC layouts and vtable slot order from the PC RTTI vftables, slot names and member names
 struct _iobuf;
@@ -98,161 +95,11 @@ typedef char _sizecheck_BSFile[sizeof(BSFile) == 0x158 ? 1 : -1];
 typedef char _sizecheck_ArchiveFile[sizeof(ArchiveFile) == 0x160 ? 1 : -1];
 typedef char _sizecheck_CompressedArchiveFile[sizeof(CompressedArchiveFile) == 0x178 ? 1 : -1];
 
-class bhkCharacterController;
-
 struct NiPoint3
 {
     float x, y, z;
     NiPoint3 operator-(const NiPoint3&) const;
 };
-
-struct MobileObject
-{
-    virtual void Slot0();
-    virtual void Slot1();
-    virtual void Slot2();
-    virtual void Slot3();
-    virtual void Slot4();
-    virtual void Slot5();
-    virtual void Slot6();
-    virtual void Slot7();
-    virtual void Slot8();
-    virtual void Slot9();
-    virtual void Slot10();
-    virtual void Slot11();
-    virtual void Slot12();
-    virtual void Slot13();
-    virtual void Slot14();
-    virtual void Slot15();
-    virtual void Slot16();
-    virtual void Slot17();
-    virtual void Slot18();
-    virtual void Slot19();
-    virtual void Slot20();
-    virtual void Slot21();
-    virtual void Slot22();
-    virtual void Slot23();
-    virtual void Slot24();
-    virtual void Slot25();
-    virtual void Slot26();
-    virtual void Slot27();
-    virtual void Slot28();
-    virtual void Slot29();
-    virtual void Slot30();
-    virtual void Slot31();
-    virtual void Slot32();
-    virtual void Slot33();
-    virtual void Slot34();
-    virtual void Slot35();
-    virtual void Slot36();
-    virtual void Slot37();
-    virtual void Slot38();
-    virtual void Slot39();
-    virtual void Slot40();
-    virtual void Slot41();
-    virtual void Slot42();
-    virtual void Slot43();
-    virtual void Slot44();
-    virtual void Slot45();
-    virtual void Slot46();
-    virtual void Slot47();
-    virtual void Slot48();
-    virtual void Slot49();
-    virtual void Slot50();
-    virtual void Slot51();
-    virtual void Slot52();
-    virtual void Slot53();
-    virtual void Slot54();
-    virtual void Slot55();
-    virtual void Slot56();
-    virtual void Slot57();
-    virtual void Slot58();
-    virtual void Slot59();
-    virtual void Slot60();
-    virtual void Slot61();
-    virtual void Slot62();
-    virtual void Slot63();
-    virtual void Slot64();
-    virtual void Slot65();
-    virtual void Slot66();
-    virtual void Slot67();
-    virtual void Slot68();
-    virtual void Slot69();
-    virtual void Slot70();
-    virtual void Slot71();
-    virtual void Slot72();
-    virtual void Slot73();
-    virtual void Slot74();
-    virtual void Slot75();
-    virtual void Slot76();
-    virtual void Slot77();
-    virtual void Slot78();
-    virtual void Slot79();
-    virtual void Slot80();
-    virtual void Slot81();
-    virtual void Slot82();
-    virtual void Slot83();
-    virtual void Slot84();
-    virtual void Slot85();
-    virtual void Slot86();
-    virtual void Slot87();
-    virtual void Slot88();
-    virtual void Slot89();
-    virtual void Slot90();
-    virtual void Slot91();
-    virtual void Slot92();
-    virtual void Slot93();
-    virtual void Slot94();
-    virtual void Slot95();
-    virtual void Slot96();
-    virtual void Slot97();
-    virtual void Slot98();
-    virtual void Slot99();
-    virtual void Slot100();
-    virtual void Slot101();
-    virtual void Slot102();
-    virtual void Slot103();
-    virtual void Slot104();
-    virtual void Slot105();
-    virtual void Slot106();
-    virtual void Slot107();
-    virtual void Slot108();
-    virtual void Slot109();
-    virtual void Slot110();
-    virtual void Slot111();
-    virtual void Slot112();
-    virtual void Slot113();
-    virtual void Slot114();
-    virtual void Slot115();
-    virtual void Slot116();
-    virtual void Slot117();
-    virtual void Slot118();
-    virtual void Slot119();
-    virtual void Slot120();
-    virtual void Slot121();
-    virtual void Slot122();
-    virtual void Slot123();
-    virtual void Slot124();
-    virtual const NiPoint3& Slot125();
-
-    bhkCharacterController* GetPhysicsCharacterController(void);
-    float GetActorHeight(void) const;
-    bool FUN_008b2f90(const NiPoint3& targetPos, float radius, bool addCharRadius, bool check3D);
-};
-
-int __fastcall FUN_005c0880(bhkCharacterController*);
-float __fastcall GetSettingFloat(bhkCharacterController*);
-float __cdecl FUN_004587d0(float);
-bool __fastcall FUN_008a5170(void*);
-int __cdecl FUN_004b5470(const NiPoint3&, float);
-
-extern double gModifierZero;
-extern double DAT_0101db88;
-
-class NavMesh;
-class Actor;
-class TESPackage;
-class NavMeshEdgeSegment;
 
 template <class T, unsigned int N = 1024> class BSSimpleArray
 {
@@ -263,37 +110,10 @@ template <class T, unsigned int N = 1024> class BSSimpleArray
     unsigned int Add(T const&);
 };
 
-class TESObjectREFRHelper
-{
-  public:
-    void SetTargetingState(bool);
-};
-
-class TESObjectREFR
-{
-  public:
-    TESObjectREFR* GetLinkedRef();
-};
-
-class PatrolActorPackageData
-{
-  public:
-    static TESObjectREFR* __cdecl GetPatrolReference(Actor*, TESPackage*);
-    bool IsPatrolling();
-};
-
-bool __cdecl FUN_009a3830(NavMesh* const&, NavMesh* const&);
-
 extern int DAT_011acdfc;
 extern int DAT_011ace00;
 extern int DAT_011ace04;
 
-struct BSFileCache
-{
-    char pad[0x5c];
-    int state;
-    static BSFileCache& GetRandomGenerator();
-};
 struct Arc
 {
     void LoadNames();
@@ -305,10 +125,7 @@ struct LNode
 };
 extern LNode* DAT_011f8160;
 
-int __cdecl FindArchiveForFile(int a1, int a2);
-
 unsigned int __cdecl _strlen(const char*);
-int __cdecl LookupExtensionType(const char*);
 
 struct S_af9
 {
@@ -338,11 +155,6 @@ bool __fastcall FUN_00afb170(void* pThis, FUN_00afb170_Args args)
     return args.param_2;
 }
 
-struct FUN_00afb670_shell : public ArchiveFile
-{
-    void FUN_00afb670(int, int);
-};
-
 struct S_afbb
 {
     char pad[0x150];
@@ -350,11 +162,6 @@ struct S_afbb
     unsigned int size;
     int FUN_00b01800(void*, unsigned int);
     int FUN_00afbbf0(void*, unsigned int);
-};
-
-struct Dummy_00afbbf0
-{
-    int FUN_00afbbf0(int, int);
 };
 
 struct ZlibStreamPeer;
@@ -376,10 +183,6 @@ struct ZlibStream
     unsigned long reserved;
 };
 typedef char _sizecheck_z_stream_s[sizeof(ZlibStream) == 56 ? 1 : -1];
-struct FUN_00afbfe0_shell : public CompressedArchiveFile
-{
-    void DestroyCompressedArchiveFile();
-};
 
 class MemoryManager
 {
@@ -389,18 +192,6 @@ class MemoryManager
 extern MemoryManager g_memoryManager;
 extern int DAT_010a464c;
 int __cdecl _inflateEnd(ZlibStream* kReadStream);
-void __fastcall FUN_00afb520(void* pThis);
-
-struct FUN_00afc060_shell2 : public CompressedArchiveFile
-{
-    bool AttachFileStream(bool, bool);
-    bool FUN_00afc060(bool a1, bool a2);
-};
-
-struct S
-{
-    void __thiscall FUN_00afc0e0(int, int);
-};
 
 namespace fnv_00afc6c0 {
 class MemoryManager
@@ -411,11 +202,6 @@ class MemoryManager
 
 extern MemoryManager g_memoryManager;
 void __fastcall DestroyCompressedArchiveFile(void* pThis);
-
-struct FUN_00afc6c0_shell2 : public CompressedArchiveFile
-{
-    void* FUN_00afc6c0(unsigned int flags);
-};
 
 }  // namespace fnv_00afc6c0
 
@@ -428,11 +214,6 @@ class MemoryManager
 
 extern MemoryManager g_memoryManager;
 void __fastcall DestroyCompressedArchiveFile(void* pThis);
-
-struct FUN_00afc6f0_shell2 : public CompressedArchiveFile
-{
-    void* FUN_00afc6f0(unsigned int flags);
-};
 
 }  // namespace fnv_00afc6f0
 
@@ -468,11 +249,6 @@ struct Pointee
 {
     char pad[0x158];
     RefObj ro;
-};
-struct NP_afd
-{
-    Pointee* p;
-    NP_afd* FUN_00afd1b0(Pointee*);
 };
 }  // namespace fnv_00afd1b0
 
@@ -548,33 +324,12 @@ class MemoryManager
     void _DeallocateAlias(void*);
 };
 extern MemoryManager g_memoryManager;
-int __cdecl _inflateInit_(void*, const char*, int);
 int __cdecl _inflateEnd(void*);
 extern int DAT_010a464c;
 extern unsigned int DAT_011f8164;
 struct S_afbb
 {
     int FUN_00afbbf0(void*, unsigned int);
-};
-struct P03Z
-{
-    void* m_pNextInputByte;
-    unsigned int m_uiAvailableInputBytes;
-    char pad08[0x14];
-    void* state;
-    void* m_pAllocateCallback;
-    void* m_pFreeCallback;
-    void* opaque;
-};
-struct P03CAF
-{
-    char pad[0x160];
-    P03Z* pStream;
-    void* pBuffer;
-    unsigned int uiBufSize;
-    unsigned int uiCap;
-    int f170;
-    int f174;
 };
 struct FUN_00afb300
 {
@@ -608,21 +363,6 @@ extern bool DAT_011f8154;
 extern int DAT_011acdfc;
 extern int DAT_011ace00;
 extern int DAT_011ace04;
-struct ArgPair
-{
-    char c0, c1, c2;
-    bool b;
-    int i;
-};
-struct ArchiveStandIn
-{
-    char pad[0x16c];
-    unsigned int uiFlags;
-    char pad170[0x10];
-    unsigned short usTypes;
-    bool FUN_00afb170(bool, int);
-    bool FUN_00afd020();
-};
 
 class MemoryManager;
 extern MemoryManager g_memoryManager;
@@ -640,18 +380,6 @@ extern unsigned int DAT_011f8164;
 
 namespace fnv_00af7db0 {
 int __cdecl _stricmp(const char*, const char*);
-struct ExtEntry_00af7db0
-{
-    char acExt[4];
-    unsigned int uiType;
-};
-struct ExtType_00af7db0
-{
-    unsigned int uiType;
-    char acPad[4];
-};
-extern ExtEntry_00af7db0 str_011ace08[];
-extern ExtType_00af7db0 DAT_011ace0c[];
 }  // namespace fnv_00af7db0
 
 namespace fnv_00af6340 {
@@ -687,10 +415,6 @@ struct Archive
     char pad[0x158];
     ArchiveRefCount rc;
     ArchiveFile* CreateArchiveFile(BSFileEntry*, unsigned int, unsigned int);
-};
-struct ArchiveManager
-{
-    static Archive* __cdecl FindArchiveForFileEntry(BSFileEntry*, ARCHIVE_TYPE);
 };
 struct ArchiveSmartPtr
 {
@@ -741,12 +465,6 @@ struct Entry16
     int c;
     unsigned int d;
 };
-struct FUN_00af9b60_shell
-{
-    char pad[0x184];
-    Entry16* entries;
-    unsigned int FUN_00af9b60(unsigned int index, unsigned int value);
-};
 
 struct FUN_00af9ba0_shell
 {
@@ -768,13 +486,6 @@ struct FUN_00afac20_entry
         bits = (v & 0x7fffffff) | (bits & 0x80000000);
     }
 };
-struct FUN_00afac20_group
-{
-    int a;
-    int b;
-    int c;
-    FUN_00afac20_entry* entries;
-};
 struct S_af9
 {
     bool FUN_00af9bf0(int, int, int*, int*, int);
@@ -794,13 +505,6 @@ struct FUN_00afac90_entry
         bits = (v & 0x7fffffff) | (bits & 0x80000000);
     }
 };
-struct FUN_00afac90_group
-{
-    int a;
-    int b;
-    int c;
-    FUN_00afac90_entry* entries;
-};
 struct S_af9
 {
     bool FUN_00afa120(int, int, int*, int, int);
@@ -808,43 +512,7 @@ struct S_af9
 };
 }  // namespace fnv_00afac90
 
-struct FUN_00afbf50_shell
-{
-    unsigned int FUN_00afbf50(void* a, unsigned int b);
-};
-
-struct FUN_00afc3e0_shell
-{
-    unsigned int FUN_00afc3e0(void* a, unsigned int b);
-};
-
-struct FUN_00afc3f0_shell
-{
-    unsigned int FUN_00afc3f0(void* a, unsigned int b);
-};
-
-struct FUN_00afc400_shell
-{
-    int FUN_00afc400(int a, int b);
-};
-
 extern "C" __declspec(dllimport) int __stdcall TryEnterCriticalSection(void* cs);
-struct Inner
-{
-    virtual void Slot0();
-    virtual void Slot1();
-    int field;
-};
-struct Outer
-{
-    char pad[0x158];
-    Inner inner;
-};
-struct FUN_00afc720_shell
-{
-    Outer* owner;
-    void EnterInnerCriticalSection();
-};
 
 namespace fnv_00afcd10 {
 class MemoryManager
@@ -853,10 +521,6 @@ class MemoryManager
     void* Allocate(unsigned int size);
 };
 extern MemoryManager g_memoryManager;
-struct FUN_00afcd10_shell
-{
-    void* FUN_00afcd10(unsigned int count);
-};
 }  // namespace fnv_00afcd10
 
 namespace fnv_00afcd40 {
@@ -866,10 +530,6 @@ class MemoryManager
     void _DeallocateAlias(void* ptr);
 };
 extern MemoryManager g_memoryManager;
-struct FUN_00afcd40_shell
-{
-    void FUN_00afcd40(void* ptr);
-};
 }  // namespace fnv_00afcd40
 
 namespace fnv_00afcd60 {
@@ -879,13 +539,7 @@ class MemoryManager
     void* Reallocate(void* p, unsigned int size);
 };
 extern MemoryManager g_memoryManager;
-struct FUN_00afcd60_shell
-{
-    void* FUN_00afcd60(void* p, unsigned int count);
-};
 }  // namespace fnv_00afcd60
-
-extern "C" int __cdecl FUN_00ec8a19(const char*, const char*, unsigned int);
 
 namespace fnv_00af5700 {
 extern "C" int __cdecl strcpy_s(char*, unsigned int, const char*);
@@ -1066,22 +720,6 @@ struct FUN_00afd390_class
     void* __thiscall FUN_00afd390(const char*, int);
 };
 
-struct FUN_00afcf00_class
-{
-    int __thiscall FUN_00afcf00(void*);
-};
-
-struct Local28
-{
-    void* a;
-    void* b;
-    void* c;
-    void* d;
-    void* e;
-    FUN_00afd390_class obj;
-    void* f;
-};
-
 }  // namespace fnv_00af7e80
 
 namespace fnv_00afcce0 {
@@ -1233,24 +871,12 @@ struct S_af9
 
 extern int DAT_010a469c;
 
-struct _BSAHelper
-{
-    void Clear(bool b);
-};
-
-struct FUN_00afcdc0_StandIn
-{
-    void* vptr;
-    void FUN_00afcdc0();
-};
-
 namespace fnv_00af5320 {
 struct _RTL_CRITICAL_SECTION;
 extern "C" __declspec(dllimport) void __stdcall EnterCriticalSection(_RTL_CRITICAL_SECTION*);
 extern "C" __declspec(dllimport) void __stdcall LeaveCriticalSection(_RTL_CRITICAL_SECTION*);
 extern "C" __declspec(dllimport) long __stdcall InterlockedIncrement(volatile long*);
 extern "C" __declspec(dllimport) long __stdcall InterlockedDecrement(volatile long*);
-int __stricmp(const char*, const char*);
 
 class BSRefCountedSI
 {
@@ -1303,7 +929,6 @@ struct ArchiveListNode
     ArchivePtr<Archive> spItem;
     ArchiveListNode* pNext;
 };
-extern ArchiveListNode* _DAT_011f8160;
 extern _RTL_CRITICAL_SECTION DAT_011f8170;
 
 }  // namespace fnv_00af5320
@@ -1464,14 +1089,6 @@ template <class T> struct NiPointer
             m_pObject->DecrementReferenceCount();
         }
     }
-};
-
-struct FUN_00afc7f0
-{
-    NiPointer<Archive> m_spArchive;
-
-    ~FUN_00afc7f0();
-    void FUN_00afcaf0();
 };
 
 }  // namespace fnv_00afc7f0
@@ -1759,7 +1376,6 @@ struct DeallocMM_00affd80
 };
 extern MemMgr_00affd80 _g_memoryManager;
 extern int DAT_010a2480;
-extern unsigned int DAT_011acff8;
 extern __declspec(thread) int DAT_tls_memctx;
 __forceinline void* operator new[](unsigned int auiSize)
 {
@@ -1789,10 +1405,6 @@ struct MemCtxScope_00affd80
     {
         SetMemCtx_00affd80(iOld);
     }
-};
-struct FUN_00affd80_t : public BSFile
-{
-    bool SetBufferSize(unsigned int auiSize);
 };
 
 namespace fnv_00af96d0 {
@@ -2446,11 +2058,6 @@ class ArchiveRefObject
     }
 };
 
-struct ArchiveFileBase
-{
-    int unk000;
-};
-
 class ArchiveObj : public BSFile, public ArchiveRefObject
 {
 };
@@ -2532,11 +2139,6 @@ struct RefCounted_af5
     }
 };
 
-struct ArchiveRef_af5 : public BSFile, public RefCounted_af5
-{
-    bool HasFile(FileNameHash* apDirHash, FileNameHash* apFileHash, const char* apName);
-};
-
 template <class T> struct ArcPtr_af5
 {
     T* m_pObject;
@@ -2558,12 +2160,6 @@ template <class T> struct ArcPtr_af5
     {
         return m_pObject;
     }
-};
-
-struct ArcNode_af5
-{
-    ArchiveRef_af5* item;
-    ArcNode_af5* next;
 };
 
 namespace fnv_00af6690 {
@@ -2626,13 +2222,6 @@ template <class T> struct ArchivePtr
         return m_pObject;
     }
 };
-
-struct ArchiveNode
-{
-    ArchivePtr<ArchiveStub> spItem;
-    ArchiveNode* next;
-};
-extern ArchiveNode* g_pArchiveList;
 
 }  // namespace fnv_00af6690
 
@@ -2752,7 +2341,6 @@ __forceinline unsigned int CountEntries(LNode* input)
     }
     return node;
 }
-void** __cdecl FUN_00af7060(ArchiveView*, unsigned int, void**, FileNameHash*, FileNameHash*, LNode*, const char*);
 
 struct SortKey
 {
@@ -2922,9 +2510,6 @@ struct ArchiveNode_af7
         return !pNext && (bool)(int)(pItem == 0);
     }
 };
-
-extern ArchiveNode_af7* g_pArchiveList_af7;
-extern long g_ArchiveListLock_af7;
 
 struct ArchiveNames : BSFile
 {
@@ -3153,11 +2738,6 @@ struct ArchiveNames
 extern "C" void __cdecl FUN_00ecbc5b(char*, unsigned int);
 extern int __cdecl _stricmp(const char*, const char*);
 void __cdecl FNV_Warning(const char*, ...);
-extern const char DAT_010a4518[];
-struct MemoryManagerDealloc
-{
-    void Deallocate(void*);
-};
 struct ArchiveSearch : ArchiveStub
 {
     int unk1a0, unk1a4, unk1a8, unk1ac, unk1b0;
@@ -3217,17 +2797,12 @@ struct Group97
         return count;
     }
 };
-struct Hash97
-{
-    int FUN_00afce90(const Entry97&);
-};
 struct MM97
 {
     void* FUN_00aa3e40(unsigned int);
     void FUN_00aa4060(void*);
 };
 extern MM97 DAT_011f6238;
-extern char DAT_010a454c[];
 inline void Copy97(char* d, unsigned int n, const char* s)
 {
     strcpy_s(d, n, s);
@@ -3243,125 +2818,6 @@ inline unsigned int Length97(const char* s)
 }
 extern "C" char* __cdecl strtok_s(char*, const char*, char**);
 extern "C" int __cdecl _stricmp(const char*, const char*);
-void __cdecl FUN_005b5e40(const char*, ...);
-struct Archive97
-{
-    int unk000;
-    int unk004;
-    int unk008;
-    int unk00c;
-    int unk010;
-    int unk014;
-    int unk018;
-    int unk01c;
-    int unk020;
-    int unk024;
-    int unk028;
-    int unk02c;
-    int unk030;
-    int unk034;
-    int unk038;
-    int unk03c;
-    int unk040;
-    int unk044;
-    int unk048;
-    int unk04c;
-    int unk050;
-    int unk054;
-    int unk058;
-    int unk05c;
-    int unk060;
-    int unk064;
-    int unk068;
-    int unk06c;
-    int unk070;
-    int unk074;
-    int unk078;
-    int unk07c;
-    int unk080;
-    int unk084;
-    int unk088;
-    int unk08c;
-    int unk090;
-    int unk094;
-    int unk098;
-    int unk09c;
-    int unk0a0;
-    int unk0a4;
-    int unk0a8;
-    int unk0ac;
-    int unk0b0;
-    int unk0b4;
-    int unk0b8;
-    int unk0bc;
-    int unk0c0;
-    int unk0c4;
-    int unk0c8;
-    int unk0cc;
-    int unk0d0;
-    int unk0d4;
-    int unk0d8;
-    int unk0dc;
-    int unk0e0;
-    int unk0e4;
-    int unk0e8;
-    int unk0ec;
-    int unk0f0;
-    int unk0f4;
-    int unk0f8;
-    int unk0fc;
-    int unk100;
-    int unk104;
-    int unk108;
-    int unk10c;
-    int unk110;
-    int unk114;
-    int unk118;
-    int unk11c;
-    int unk120;
-    int unk124;
-    int unk128;
-    int unk12c;
-    int unk130;
-    int unk134;
-    int unk138;
-    int unk13c;
-    int unk140;
-    int unk144;
-    int unk148;
-    int unk14c;
-    int unk150;
-    int unk154;
-    int unk158;
-    int unk15c;
-    int unk160;
-    int unk164;
-    int unk168;
-    unsigned int flags;
-    int unk170;
-    int unk174;
-    int unk178;
-    int unk17c;
-    int unk180;
-    Group97* groups;
-    int unk188;
-    int unk18c;
-    int unk190;
-    int unk194;
-    unsigned int cached;
-    int unk19c;
-    int unk1a0;
-    int unk1a4;
-    int unk1a8;
-    int unk1ac;
-    int unk1b0;
-    unsigned char status;
-    unsigned char unk1b5, unk1b6, unk1b7;
-    bool IsFileEntryValid(Entry97*, bool);
-    bool FUN_00afb190(Entry97*, const char*);
-    const char* FUN_00af96d0(unsigned int, unsigned int);
-    bool FUN_00afa120(unsigned int, Hash97*, unsigned int*, const char*, bool);
-};
 }  // namespace fnv_00afa120
 
 namespace fnv_00afad00 {
@@ -3371,10 +2827,7 @@ template <unsigned int N> inline int strcat_s(char (&dest)[N], const char* src)
 {
     return strcat_s(dest, N, src);
 }
-int __cdecl FUN_00ecbf05(const char*, int);
-extern const char DAT_010a4580[];
 extern char DAT_011f8050[];
-extern const char DAT_010a4346[];
 struct BSHashA
 {
     unsigned char cLast;
@@ -3495,119 +2948,11 @@ struct ThisAD
 
 extern "C" int __cdecl _strnicmp(const char*, const char*, unsigned int);
 
-struct FUN_00afb520_base
-{
-    virtual void unk00();
-    ~FUN_00afb520_base();
-};
-
 struct FUN_00afb520_mm
 {
     void FUN_00aa4060(void* p);
 };
 extern FUN_00afb520_mm DAT_011f6238;
-
-struct FUN_00afb520_sub
-{
-    virtual void Slot0();
-    virtual void Slot1();
-    int unk08;
-};
-
-class FUN_00afb520_cls : public FUN_00afb520_base
-{
-  public:
-    virtual ~FUN_00afb520_cls();
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    void* m_pBuffer;
-    int unk24;
-    int unk28;
-    unsigned char m_bGood;
-    unsigned char unk2D;
-    unsigned char unk2E;
-    unsigned char unk2F;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5C;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6C;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7C;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8C;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9C;
-    int unkA0;
-    int unkA4;
-    int unkA8;
-    int unkAC;
-    int unkB0;
-    int unkB4;
-    int unkB8;
-    int unkBC;
-    int unkC0;
-    int unkC4;
-    int unkC8;
-    int unkCC;
-    int unkD0;
-    int unkD4;
-    int unkD8;
-    int unkDC;
-    int unkE0;
-    int unkE4;
-    int unkE8;
-    int unkEC;
-    int unkF0;
-    int unkF4;
-    int unkF8;
-    int unkFC;
-    int unk100;
-    int unk104;
-    int unk108;
-    int unk10C;
-    int unk110;
-    int unk114;
-    int unk118;
-    int unk11C;
-    int unk120;
-    int unk124;
-    int unk128;
-    int unk12C;
-    int unk130;
-    int unk134;
-    int unk138;
-    int unk13C;
-    int unk140;
-    int unk144;
-    int unk148;
-    int unk14C;
-    int unk150;
-    int unk154;
-    int m_spArchive;
-};
 
 extern int DAT_010a2484;
 void* __cdecl FUN_00ec44d0(void*, const void*, unsigned int);
@@ -4011,9 +3356,6 @@ struct LNode_af5480
     }
 };
 
-extern LNode_af5480* g_pNode_11f8160;
-extern char g_kCS_11f8170[];
-
 }  // namespace fnv_00af5480
 
 namespace fnv_00af5550 {
@@ -4131,10 +3473,7 @@ struct LNode
     }
 };
 
-extern LNode* g_pLNode;
 struct _RTL_CRITICAL_SECTION;
-extern _RTL_CRITICAL_SECTION g_cs;
-extern NiPointer<MyArchiveFile> g_activeFile;
 extern NiPointer<MyArchiveFile> g_files[2][9];
 
 inline NiPointer<MyArchiveFile>& GetFile(int j, unsigned int i)
@@ -4145,8 +3484,6 @@ inline NiPointer<MyArchiveFile>& GetFile(int j, unsigned int i)
 }  // namespace fnv_00af5550
 
 namespace fnv_00af4550 {
-extern const char DAT_010a4398[];
-extern const char DAT_010a43a8[];
 extern unsigned char DAT_011acdf8;
 extern const char* DAT_011f8158;
 extern const char* DAT_011f815c;
@@ -4157,13 +3494,8 @@ extern "C" __declspec(dllimport) unsigned long __stdcall GetTickCount();
 extern "C" __declspec(dllimport) long __stdcall InterlockedIncrement(long*);
 extern "C" __declspec(dllimport) long __stdcall InterlockedDecrement(long*);
 extern "C" int __cdecl _stricmp(const char*, const char*);
-extern "C" int __cdecl fopen_s(_iobuf**, const char*, const char*);
-extern "C" int __cdecl feof(_iobuf*);
-extern "C" char* __cdecl fgets(char*, int, _iobuf*);
 extern "C" char* __cdecl strstr(const char*, const char*);
-extern "C" int __cdecl _access(const char*, int);
 extern "C" char* __cdecl strtok_s(char*, const char*, char**);
-int __cdecl sprintf_s(char*, unsigned int, const char*, ...);
 struct ArchiveRef
 {
     virtual void slot0();
@@ -4231,25 +3563,17 @@ template <class T> struct ArchivePointer
     }
     void FUN_00afd1b0(T*);
 };
-struct ArchiveName
-{
-    char name[8];
-};
-extern ArchiveName DAT_011ace08[26];
 inline unsigned int MainArchiveGroup()
 {
     return 0;
 }
 extern ArchivePointer<Archive> DAT_011f8190[2][9];
-extern unsigned int DAT_011aced8[9];
 struct ArchiveMemory
 {
     void* Allocate(unsigned int);
     void Deallocate(void*);
 };
 extern ArchiveMemory DAT_011f6238;
-void __cdecl FUN_00af5ab0(const char*);
-void* __cdecl FUN_00af4be0(const char*, int, int);
 inline char* AllocationResult(char* const& result)
 {
     return result;
@@ -4278,7 +3602,6 @@ struct FileNameHash
     unsigned char unk00, unk01, unk02, unk03;
     unsigned int unk04;
 };
-int __cdecl FUN_00ec67aa(int);
 extern char DAT_011acfbc[6][10];
 }  // namespace fnv_00afd4e0
 
@@ -4291,16 +3614,9 @@ extern MemoryManagerAllocHelper g_memoryManager;
 struct LNode;
 extern LNode* DAT_011f8160;
 static const char emptyPathWarning[] = "Loading a user created or misnamed BSA";
-extern const char DAT_010a4454[];
-extern const char DAT_010a444c[];
-extern const char DAT_010a4444[];
-extern const char DAT_010a443c[];
-extern const char DAT_010a4434[];
-extern const char DAT_010a442c[];
 extern bool DAT_011acdf8;
 int __cdecl strcpy_s(char*, unsigned int, const char*);
 unsigned int __cdecl strlen(const char*);
-const char* __cdecl FUN_00ec7750(const char*, const char*);
 void __cdecl FNV_Warning(const char*);
 __declspec(dllimport) long __stdcall InterlockedIncrement(volatile long*);
 __declspec(dllimport) long __stdcall InterlockedDecrement(volatile long*);
@@ -4488,18 +3804,6 @@ struct OpenFinder
     int Find(const char*, char*, int, int);
 };
 extern OpenFinder* g_fileFinder;
-struct OpenPaths
-{
-    virtual void v0();
-    virtual void v1();
-    virtual void v2();
-    virtual void v3();
-    virtual void v4();
-    virtual void v5();
-    virtual void Resolve(const char*, char*);
-    bool Check(int);
-};
-OpenPaths* __cdecl GetOpenPaths();
 __forceinline void SetOpenNode(OpenNode* const& p)
 {
     DAT_011f8160 = (LNode*)p;
@@ -4700,10 +4004,6 @@ struct DirectoryRecord
         return count;
     }
 };
-struct Filter
-{
-    int FUN_00afcf00(FileRecord*);
-};
 struct ArchiveSearch
 {
     int unk000;
@@ -4810,7 +4110,6 @@ struct ArchiveSearch
     bool IsFileEntryValid(FileRecord*, bool);
     const char* FUN_00af96d0(int, unsigned int);
 };
-void QuickSortSortKeys(HashKey**, unsigned int, unsigned int);
 }  // namespace fnv_00af7060
 
 namespace fnv_00af7eb0 {
@@ -4836,7 +4135,6 @@ inline void __cdecl operator delete(void* p)
 {
     _g_memoryManager.Deallocate(p);
 }
-extern unsigned int DAT_011f81d8;
 extern volatile long DAT_011f4400;
 extern unsigned char DAT_011acdf9;
 extern bool DAT_011f8154;
@@ -4845,7 +4143,6 @@ extern "C" __declspec(dllimport) long __stdcall InterlockedIncrement(volatile lo
 extern "C" unsigned int __cdecl strlen(const char*);
 extern "C" __declspec(dllimport) unsigned long __stdcall GetTickCount();
 extern void(__stdcall* DAT_00fdf054)(void*);
-struct Directory077;
 struct Entry077
 {
     unsigned int hashLow, hashHigh, size;
@@ -4955,15 +4252,6 @@ struct Critical077
     }
     ~Critical077();
 };
-struct FileStat077
-{
-    unsigned int dev;
-    unsigned short inode, mode, links, uid, gid, alignment;
-    unsigned int rdev, size;
-    unsigned __int64 atime, mtime, ctime;
-};
-int __cdecl FUN_00ec923c(const char*, FileStat077*);
-void __cdecl ProcessFilesByType(Entry077*, Entry077*, unsigned int);
 struct ArcStream077;
 typedef unsigned int(__cdecl* ArcReadFn077)(ArcStream077*, void*, unsigned int, unsigned int*, unsigned int);
 struct ArcStream077
@@ -5118,12 +4406,8 @@ struct PoolY
 };
 extern PoolY DAT_011f6238;
 extern bool DAT_011f8154;
-extern "C" int __cdecl FUN_00ec7f1e(const char* path, char* drive, unsigned int drvsz, char* dir, unsigned int dirsz,
-                                    char* fname, unsigned int fnsz, char* ext, unsigned int extsz);
-extern "C" unsigned int __cdecl FUN_00ec6130(const char* s);
 extern "C" int __cdecl FUN_00ec65a6(char* dst, unsigned int sz, const char* src);
 extern "C" int __cdecl FUN_00ecbc5b(char* s, unsigned int sz);
-extern "C" char* __cdecl FUN_00ec68e4(const char* a, const char* b);
 inline void* AllocNY(unsigned int n)
 {
     return DAT_011f6238.FUN_00aa3e40(n + 1);
@@ -5284,7 +4568,6 @@ extern "C"
 
 unsigned int __cdecl strlen(const char*);
 int __cdecl _strcpy_s(char*, unsigned int, const char*);
-const char* __cdecl _strrchr(const char*, int);
 
 const char* __cdecl SkipDataPrefix(const char*);
 int __cdecl FUN_00af7d80(const char*);
@@ -5530,18 +4813,6 @@ struct ArchiveStreamFile : public ArchiveStreamBase, public StreamSecondary
 };
 ArchiveStreamFile::ArchiveStreamFile()
 {}
-
-unsigned char __fastcall FUN_00afcfe0(void*);
-
-struct FUN_00afcf00_t
-{
-    char pad_0[2];
-    unsigned char field_2;
-    unsigned char field_3;
-    unsigned int field_4;
-
-    int FUN_00afcf00(FUN_00afcf00_t* other);
-};
 
 namespace fnv_00af7800 {
 struct RecursiveMutex
@@ -5897,12 +5168,6 @@ struct PathArchivePointer
     }
 };
 
-struct PathArchiveNode
-{
-    PathArchivePointer value;
-    PathArchiveNode* next;
-};
-
 const char* SkipDataPrefix(const char*);
 
 }  // namespace fnv_00af7800
@@ -5921,9 +5186,7 @@ inline void* operator new(unsigned int, void* memory)
 {
     return memory;
 }
-extern const char DAT_010a445c[];
 extern "C" char* __cdecl strstr(const char*, const char*);
-BSFile* __cdecl FUN_00afdf00(const char*, int, unsigned int);
 struct FUN_00afd390
 {
     unsigned int low;
@@ -6020,24 +5283,6 @@ struct ArchiveListStream : BSFile
         m_uiStreamFlags += result;
         return result;
     }
-};
-
-struct ArcInflateReadState
-{
-    unsigned char* m_pNextInputByte;
-    unsigned int m_uiAvailableInputBytes;
-    unsigned int m_ulTotalInputBytes;
-    unsigned char* m_pNextOutputByte;
-    unsigned int m_uiAvailableOutputBytes;
-};
-extern "C" void* __cdecl memcpy(void*, const void*, unsigned int);
-int __cdecl FUN_00b44000(ArcInflateReadState* state, int flush);
-int __cdecl FUN_00b45db0(ArcInflateReadState* state);
-struct DecompReadFile : public CompressedArchiveFile
-{
-    void FUN_00aa15a0();
-    unsigned int ReadAtOffset(void* buffer, unsigned int size, int mode);
-    unsigned int FUN_00afc0e0(char* buffer, unsigned int size);
 };
 
 namespace archive_master_lookup {

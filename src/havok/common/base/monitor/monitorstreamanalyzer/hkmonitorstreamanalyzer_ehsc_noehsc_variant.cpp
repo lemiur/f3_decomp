@@ -11,34 +11,8 @@
 // @fnv 0x00e0c290
 // @fnv 0x00e0c2c0
 // @fnv 0x00e0c2e0
-struct FUN_00e0f6e0
-{
-    int a;
-    int b;
-    int c;
-    FUN_00e0f6e0();
-};
 // @fnv 0x00e0f6e0
-struct FUN_00e0c310_s
-{
-    int FUN_00e0c310();
-};
 // @fnv 0x00e0c310
-struct SubObject
-{
-    virtual void* unk00();
-    virtual void* unk04();
-    virtual void* unk08();
-    virtual void* unk0c();
-    virtual void __thiscall invoke(int* value, int mode);
-};
-struct FUN_00cc01a0_class
-{
-    int unk00;
-    int unk04;
-    SubObject* unk08;
-    FUN_00cc01a0_class* __thiscall InvokeSubObject(int value);
-};
 // @fnv 0x00cc01a0
 struct Bins
 {
@@ -68,30 +42,8 @@ struct Point
 };
 // Adds scaled start-to-end deltas into the weight/count bins at data's x and y indices, and sets value from start based on mode.
 // @fnv 0x00e0c5e0
-struct Node
-{
-    float value0;
-    float value1;
-    float value2;
-    float value3;
-    float value4;
-    float value5;
-    float value6;
-    float value7;
-    unsigned short flag0;
-    unsigned short flag1;
-    unsigned short flag2;
-    unsigned short flag3;
-    unsigned short flag4;
-    unsigned short flag5;
-    unsigned short flag6;
-    unsigned short flag7;
-    Node** children;
-    int childCount;
-};
 // Multiplies the value at index by factor, clears the matching flag, and recurses into all children.
 // @fnv 0x00e0c700
-extern "C" int __cdecl FUN_00cb10d0(const char* str);
 struct E0C860Node;
 struct E0C860NodeArray
 {
@@ -150,7 +102,6 @@ struct S_e0ce00_Router
 };
 S_e0ce00_Router* __cdecl FUN_00c85750();
 void __cdecl ResizeAudioStream(S_e0ce00_Alloc* alloc, void* arr, int elemSize);
-void __cdecl FUN_00cb1260(void* dst, const void* src, int n);
 struct S_e0ce00_Block
 {
     int unk0;
@@ -185,111 +136,17 @@ struct S_e0ce00_Bool
         m_cBooleanValue = b;
     }
 };
-struct S_e0ce00
-{
-    S_e0ce00_Array* m_arrays;
-    int unk4;
-    int unk8;
-    char* m_buf;
-    int m_iElementCount;
-    int m_iCapacityState;
-    S_e0ce00_Bool AppendBlock(const char* begin, const char* end, const S_e0ce00_Block& b);
-};
 // Appends a copy of the bytes from begin to end into m_buf at the current offset and records a block in m_arrays[b.unk18] with that offset and length.
 // @fnv 0x00e0ce00
-extern "C" void __cdecl FUN_00e0c700(void* object, int index, float amount);
-extern "C" void __cdecl FUN_00e0d180(void* first, void* second, int index, int limit, float amount);
 // Calls FUN_00e0c700 on first, then FUN_00e0d180 on first and second with index, limit and amount.
 // @fnv 0x00e0d280
-int __cdecl Vsnprintf(char* buffer, unsigned int size, const char* format, ...);
 void __cdecl FUN_00cc0410(void* stream, const char* format, ...);
-struct S_00e0bfe0_Item
-{
-    float values[8];
-    unsigned short counts[8];
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    const char* name;
-};
 // Formats the item's name, max count and percentage into a buffer, then writes the values with nonzero counts to the stream.
 // @fnv 0x00e0bfe0
 extern "C" void __cdecl FUN_00cb1280(void* dst, int c, int n);
-struct E0C150TgaHeader
-{
-    unsigned char m_idLength;
-    unsigned char m_colorMapType;
-    unsigned char m_imageType;
-    unsigned char m_colorMapStartLo;
-    unsigned char m_colorMapStartHi;
-    unsigned char m_colorMapLengthLo;
-    unsigned char m_colorMapLengthHi;
-    unsigned char m_colorMapDepth;
-    unsigned char m_xOriginLo;
-    unsigned char m_xOriginHi;
-    unsigned char m_yOriginLo;
-    unsigned char m_yOriginHi;
-    unsigned short m_fMaxFriction;
-    unsigned short m_height;
-    unsigned char m_bitsPerPixel;
-    unsigned char m_descriptor;
-};
-struct E0C150Stream
-{
-    int write(const void* buf, int nbytes);
-};
 // Builds a 32-bit uncompressed TGA header from width and height, writes the header and pixel data to the stream, and returns true.
 // @fnv 0x00e0c150
-class FUN_00e0c320_cls
-{
-  public:
-    const char* m_pName;
-    int m_i04;
-    int m_i08;
-    int m_i0c;
-    float m_f10;
-    float m_f14;
-    int m_i18;
-    int m_i1c;
-    int m_i20;
-    FUN_00e0c320_cls* InitHeading();
-};
 // @fnv 0x00e0c320
-struct S_00e0c750_Keys
-{
-    bool m_vStart;
-    bool m_down;
-    bool m_fMinimumU;
-    bool m_fMaximumU;
-};
-struct S_00e0c750_Node
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    S_00e0c750_Node** m_children;
-    int m_numChildren;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    S_00e0c750_Node* m_parent;
-    const char* m_name;
-    unsigned int m_expanded : 1;
-};
 // Moves from node p through the tree according to the keys flags (up, down, collapse, expand) and returns the resulting node.
 // @fnv 0x00e0c750
 struct E0CC40Node
@@ -322,15 +179,6 @@ struct SpawnedEntry
     int unk04;
     int unk08;
 };
-struct FUN_00e0ccf0_cls
-{
-    SpawnedEntry* m_entries;
-    int m_uiItemCount;
-    int unk08;
-    int unk0C;
-    int m_unk10;
-    void FUN_00e0ccf0();
-};
 // Proxy used to force MSVC 2008 to materialise the element address in a register
 // (base + byte offset) instead of folding it into the store's addressing mode.
 struct EntryRef
@@ -342,18 +190,6 @@ struct EntryRef
     }
 };
 // @fnv 0x00e0ccf0
-struct Singleton
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    void* unk10;
-};
-struct Sink
-{
-    void FUN_00cb1870(void* a, int b, int c);
-};
 // @fnv 0x00e0cd20
 struct S_e0ce00_Alloc
 {
@@ -375,94 +211,11 @@ struct S_Flag
         b = o.b;
     }
 };
-void* __cdecl FUN_00e0ee00(void* apSelf, int aIndex, S_Flag aFlag);
-void __cdecl FUN_00e0fec0(int a0, void* pArray, int a2, int a3, int a4, int a5, int a6);
-struct FUN_00e0d0a0_s
-{
-    void ClearItems();
-};
-struct Array_e10630
-{
-    void** m_data;
-    int m_iElementCount;
-    unsigned int m_iCapacityState;
-};
-struct FUN_00e10630_cls
-{
-    int unk00;
-    int m_count04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int m_18;
-    int m_1c;
-    int m_20;
-    void ProcessItems(int a1, int a2);
-};
 // Collects m_count04 items via FUN_00e0ee00 into a temporary array, passes it to FUN_00e0fec0, then calls ClearItems and frees each item through the allocator.
 // @fnv 0x00e10630
-struct FUN_00e0f700_s
-{
-    void* FUN_00e0f700(int dummy);
-};
 // @fnv 0x00e0f700
-struct S00e0c690_entry
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int m_4c;
-};
-struct FUN_00e0c690_owner
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    S00e0c690_entry** m_30;
-    int m_34;
-};
-extern FUN_00e0c690_owner* g_00e0c690_owner;
 extern "C" int __cdecl FUN_00cb0fa0(int a, unsigned int b);
 // @fnv 0x00e0c690
-struct Node_e0c8e0
-{
-    float values[8];
-    unsigned short counts[8];
-    Node_e0c8e0** children;
-    int childCount;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    const char* name;
-};
 struct __declspec(align(64)) LineBuf_e0c8e0
 {
     int c00;
@@ -517,49 +270,8 @@ struct __declspec(align(64)) LineBuf_e0c8e0
     int g09;
 };
 // @fnv 0x00e0c8e0
-struct S_00e0cbe0_Entry
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-};
-struct S_00e0cbe0_Owner
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    S_00e0cbe0_Entry** unk30;
-    int unk34;
-};
 int __cdecl FUN_00cb0fa0(int a, int b);
 // @fnv 0x00e0cbe0
-void __cdecl FUN_00e0e470(void* array, void* name, void* owner, int argument, int flags);
 void __cdecl FUN_00c908c0(S_e0ce00_Alloc* alloc, void* array, int count, int size);
 struct TempArray830
 {
@@ -590,12 +302,6 @@ struct TempArray830
     }
 };
 void __cdecl FUN_00c908c0(S_e0ce00_Alloc* alloc, void* array, int count, int size);
-struct Owner830
-{
-    void* data;
-    int count;
-    void FUN_00e0f5e0(void* name, int argument);
-};
 // @fnv 0x00e0f5e0
 struct FUN_00e0d000;
 struct FUN_00e0d000Array
@@ -653,18 +359,10 @@ struct FUN_00e0d000Total : FUN_00e0d000
     FUN_00e0d000Total() : FUN_00e0d000(0, 0, 0)
     {}
 };
-struct FUN_00e0d000Map
-{
-    FUN_00e0d000Total* GetValue(const char*, int);
-    void FUN_00d874d0(const char*, FUN_00e0d000Total*);
-};
 int __cdecl FUN_00cb0fa0(const char*, const char*);
 void __cdecl FUN_00c908c0(FUN_00e0d000Heap*, FUN_00e0d000Array*, int, int);
 // @fnv 0x00e0f880
 extern unsigned int DAT_011bdea0[];
-extern "C" unsigned int e0c1c0_tblidx(void);
-extern volatile int g_e0c1c0_stride;
-extern unsigned int* volatile g_e0c1c0_out;
 // @fnv 0x00e0c1c0
 static __declspec(noinline) void FUN_00e0c1c0(unsigned int idx, int stride, unsigned int* out)
 {
@@ -721,33 +419,6 @@ static __declspec(noinline) void __cdecl FUN_00e0c210(int value, S00e0c210_Obj* 
         cur += 7;
     } while (place >= 1);
 }
-union CommandWord
-{
-    unsigned int tag;
-    const char* name;
-};
-struct CommandTimingEntry
-{
-    CommandWord command;
-    unsigned int time0;
-    unsigned int time1;
-};
-struct NamedCommand
-{
-    CommandWord command;
-    unsigned int time0;
-    unsigned int time1;
-    CommandWord object;
-};
-struct ValueCommand
-{
-    CommandWord command;
-    float value;
-};
-struct SomeMap
-{
-    int __thiscall LookupBucketValue(unsigned int key, const char** out);
-};
 struct hkBool
 {
     char m_cBooleanValue;
@@ -801,10 +472,6 @@ struct RecBox
     int unk2c;
     RecEntry** unk30;
     int unk34;
-};
-struct NameArg
-{
-    const char* unk00;
 };
 // @fnv 0x00e0cb80
 volatile int g_in_name;
@@ -862,41 +529,6 @@ struct FUN_00e108b0
         clearAndFree(a);
     }
 };
-struct DumpFrame
-{
-    const char* heading;
-    int a, b;
-    int time;
-    int d, e;
-    int thread;
-    int begin, end;
-};
-struct DumpFrames
-{
-    DumpFrame* data;
-    int size, capacity;
-};
-struct DumpCommand
-{
-    const char* name;
-    union
-    {
-        unsigned int timer;
-        float value;
-        void* pointer;
-    } first;
-    unsigned int second;
-    const char* split;
-};
-struct DumpState
-{
-    DumpFrames* frames;
-    int count, capacity;
-    char* commands;
-    int size, cap;
-    int threads, spus;
-    void FUN_00e0eef0(void* stream);
-};
 // @fnv 0x00e0eef0
 // FUN_00e0cc90 - __thiscall member of a lookup table object.
 //
@@ -911,21 +543,6 @@ struct DumpState
 // key, and returns the value of the first entry the helper rejects; if the
 // helper accepts every entry, the fallback at +0x14 is returned.
 int __cdecl CompareStringsCaseInsensitive(unsigned int key, int arg);
-struct FUN_00e0cc90_cls
-{
-    int unk00;
-    int unk04;
-    struct Entry
-    {
-        unsigned int key;
-        int value;
-    };
-    Entry* m_pEntries;  // +0x08
-    int m_iArrayLength;       // +0x0c
-    int unk10;
-    int m_iFallback;  // +0x14
-    int FUN_00e0cc90(int arg);
-};
 // @fnv 0x00e0cc90
 struct S00e0d180_Node;
 struct S00e0d180_Array
@@ -970,49 +587,6 @@ struct S00e0d180_Node
     S00e0d180_Node(S00e0d180_Node* parent, const char* name, int flags);
 };
 // @fnv 0x00e0d180
-struct PrintArray
-{
-    char* data;
-    int size;
-    int m_iCapacity;
-};
-struct PrintStream
-{
-    int unk00;
-    short unk04;
-    short unk06;
-    int unk08;
-    void __thiscall FUN_00cc0630(PrintArray* a1);
-    void __thiscall InvokeSubObject(char a1);
-    void __thiscall FUN_00cc01c0(const char* a1);
-    void __thiscall FUN_00cc00e0();
-};
-struct PrintNode
-{
-    float values[8];
-    unsigned short counts[8];
-    PrintNode** children;
-    int childCount;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    const char* name;
-    unsigned int flags;
-};
-struct PrintConfig
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    bool unk10;
-    PrintNode* unk14;
-    char unk18;
-    char unk19;
-    bool unk1a;
-};
 // @fnv 0x00e0d2c0
 struct MonNode;
 struct MonNodeArray
@@ -1257,7 +831,6 @@ struct PixelSource
     int m_14;
 };
 int __cdecl FUN_00e0e0c0(int a1, PixelSource* a2, int a3, void** out1, int* out2, int a6);
-void __cdecl FUN_00c856c0(S_e0ce00_Alloc* alloc, void* p);
 // @fnv 0x00e0e470
 struct ReportFlag
 {
@@ -1343,9 +916,6 @@ struct ReportArray
             heap.freeBuffer(data, (capacity & 0x3fffffff) * 4);
     }
 };
-bool __cdecl FUN_00e10740(ReportNode*, ReportNode*);
-void __cdecl FUN_00e10760(ReportNode**, int, int, bool(__cdecl*)(ReportNode*, ReportNode*));
-void __cdecl FUN_00e0f880(FUN_00e0d000*, ReportMap*);
 // @fnv 0x00e0fc50
 volatile FUN_00e0d000* reportRoot;
 void* volatile reportStream;
@@ -1526,10 +1096,6 @@ struct Se0e0c0_SampleInfo
     float m_fValueAt00;
 };
 
-void __cdecl Se0e0c0_outputStatsForFrame(Se0e0c0_Node* root, float start, float samplesPerTick, int count,
-                                         Se0e0c0_ArrayBase<Se0e0c0_Node*>& out, int timer);
-void Se0e0c0_reserveExactly(Se0e0c0_ArrayBase<Se0e0c0_Node*>& a, int n);
-int __cdecl Se0e0c0_strCasecmp(const char* a, const char* b);
 extern const int* Se0e0c0_numbers[10];
 
 static void __cdecl FUN_00e0c1c0(int digit, int y, int width, int* texture);

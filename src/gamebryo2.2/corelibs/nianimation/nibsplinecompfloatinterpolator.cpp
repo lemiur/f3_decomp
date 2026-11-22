@@ -9,8 +9,6 @@ void NiBSplineCompFloatInterpolator::LoadBinary(NiStream& stream)
     stream.input->Read(m_afOffsetAndHalfRange);
 }
 
-extern int g_011f401c;
-
 struct FUN_00a52d20_shell
 {
     int* m_p;
@@ -52,27 +50,6 @@ FUN_00a509f0_shell* __thiscall FUN_00a509f0_shell::FUN_00a509f0(int aiArg1, int 
     *(int*)((char*)this + 0x20) = b;
     return this;
 }
-
-char* __cdecl _FUN_00a7d330(const char*);
-struct StrArr
-{
-    void* m_pData;
-    int _unk4;
-    unsigned short m_usMaxSize;
-    unsigned short m_usSize;
-    unsigned short _unkC;
-    unsigned short m_usGrowBy;
-    void __thiscall SetSize(unsigned int);
-    void __thiscall SetAt(unsigned int, char*&);
-};
-struct BaseX
-{
-    void __thiscall SerializeToStrings(StrArr*);
-};
-struct FUN_00a516e0_shell : BaseX
-{
-    void __thiscall AppendString(StrArr*);
-};
 
 struct FUN_00a50b30_shell
 {

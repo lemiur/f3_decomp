@@ -54,11 +54,6 @@ struct ArrayPair
     ArrayRecord first;
     ArrayRecord second;
 };
-struct BSAudio
-{
-};
-BSAudio* __cdecl FUN_00c85750();
-extern "C" void __cdecl FUN_00c908c0(void*, void*, int, int);
 struct FUN_00ddacd0_shell
 {
     void __thiscall FUN_00dd8fe0(void* output, int elementSize, int count);
@@ -125,33 +120,6 @@ void __thiscall FUN_00ddacd0_shell::FUN_00ddacd0(ArrayPair* arrays)
     }
 }
 
-
-struct AudioAllocator
-{
-    virtual void v00();
-    virtual void v04();
-    virtual void Free(void* apMemory, unsigned int auiSize) throw();
-};
-
-struct AudioHolder
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    AudioAllocator* m_pAllocator;
-};
-
-struct FUN_00dd9210_cls
-{
-    int unk00;
-    unsigned short m_uSize;
-    unsigned short m_u06;
-
-    void FUN_00dd91f0();
-
-    FUN_00dd9210_cls* FUN_00dd9210(unsigned char acFlags);
-};
 
 #include <xmmintrin.h>
 struct __declspec(align(16)) Vec4

@@ -2,8 +2,6 @@
 // src/gamebryo2.2/corelibs/niparticle/nipsysgravitystrengthctlr.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/_fallout3/platforms/common/code/gamebryo2.2/corelibs/niparticle/nipsysgravitystrengthctlr.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-extern "C" void* g_01202700;
-
 struct NiRTTI
 {
     const char* m_pcName;
@@ -72,8 +70,6 @@ struct StrArr
     void SetSize(unsigned int);
     void SetAt(unsigned int, char*&);
 };
-void __stdcall FUN_00c32f60(StrArr*);
-char* __cdecl _FUN_00a7d330(void*);
 struct NiPSysGravityStrengthCtlr
 {
     void FUN_00c2a960(StrArr*);

@@ -13,7 +13,6 @@ extern "C" __m128 _mm_sub_ps(__m128 a, __m128 b);
 extern "C" __m128 _mm_mul_ps(__m128 a, __m128 b);
 extern "C" __m128 _mm_add_ss(__m128 a, __m128 b);
 extern "C" __m128 _mm_shuffle_ps(__m128 a, __m128 b, unsigned int imm);
-extern "C" __m128 _mm_load_ps1(const float* p);
 extern "C" __m128 _mm_load_ss(const float* p);
 extern "C" void _mm_store_ss(float* p, __m128 a);
 
@@ -63,7 +62,6 @@ struct hkVector4D230
 };
 
 #include <math.h>
-extern "C" __m128 _mm_set_ps1(float);
 
 typedef float hkReal;
 

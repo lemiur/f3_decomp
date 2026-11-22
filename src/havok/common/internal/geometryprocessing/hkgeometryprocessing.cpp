@@ -2,15 +2,6 @@
 // src/havok/common/internal/geometryprocessing/hkgeometryprocessing.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/build/20091222_000100_aianbecldeph/source/common/internal/geometryprocessing/hkgeometryprocessing.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-extern "C" void __cdecl Deallocate(void*);
-extern int DAT_010d9fc4;
-
-struct FUN_00dee620
-{
-    void* m_pVTable;
-    __thiscall FUN_00dee620(int testFlag);
-};
-
 extern "C" void __cdecl FUN_00dedf10(void*, void*, void*, void*, int, int);
 // Forwards the four pointers to FUN_00dedf10 with two trailing int arguments set to 0.
 // @fnv 0x00dee5f0
@@ -18,40 +9,6 @@ void __cdecl FUN_00dee5f0(void* first, void* second, void* third, void* fourth)
 {
     FUN_00dedf10(first, second, third, fourth, 0, 0);
 }
-
-struct FUN_00dee6b0_Class
-{
-    int unk00;
-    float unk04;
-    float FUN_00dee6b0(int testFlag);
-};
-
-extern int DAT_010cd664;
-
-struct AudioAllocator
-{
-    virtual void v00();
-    virtual void v04();
-    virtual void Free(void* apMemory, unsigned int auiSize) throw();
-};
-
-struct AudioHolder
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    AudioAllocator* m_pAllocator;
-};
-
-AudioHolder* __cdecl FUN_00c85750() throw();
-
-struct FUN_00dee6c0_cls
-{
-    int m_vptr;
-
-    FUN_00dee6c0_cls* FUN_00dee6c0(unsigned char acFlags);
-};
 
 union __declspec(intrin_type) __declspec(align(16)) __m128
 {
@@ -68,7 +25,6 @@ extern "C"
     __m128 _mm_sub_ps(__m128 a, __m128 b);
     __m128 _mm_mul_ps(__m128 a, __m128 b);
     __m128 _mm_shuffle_ps(__m128 a, __m128 b, unsigned int imm);
-    __m128 _mm_load_ps1(const float* p);
     void _mm_store_ss(float* p, __m128 a);
 }
 
@@ -141,8 +97,6 @@ extern "C" __m128 _mm_and_ps(__m128, __m128);
 extern "C" __m128 _mm_andnot_ps(__m128, __m128);
 extern "C" __m128 _mm_or_ps(__m128, __m128);
 
-extern float DAT_0104e148;
-
 struct hkVector4Comparisonq
 {
     __m128 m_uiMask;
@@ -200,40 +154,9 @@ struct hkVector4q
     }
 };
 
-struct hkFourTransposedPointsq
-{
-    hkVector4q m_kVertices[3];
-};
-
-struct FourPointsArray
-{
-    hkFourTransposedPointsq* m_data;
-    int m_iElementCount;
-};
-
-extern hkVector4q DAT_010d9fe0;
-extern hkVector4q DAT_010d0fa0;
-
 }  // namespace fnv_00dea810
 
 extern __m128 DAT_010c71d0;
-
-struct FUN_00dee640_cls
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    __m128 m_vec10;
-    float m_fDist20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    void* m_pTag30;
-    float UpdateNearestDistance(void* pair);
-};
-
-extern __m128 DAT_01267e30;
 
 struct Vertex
 {
@@ -291,55 +214,6 @@ struct Edge
     }
 };
 
-struct PendingBlock
-{
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0C;
-    unsigned int unk10;
-    unsigned int unk14;
-    unsigned int unk18;
-    unsigned int unk1C;
-    unsigned int unk20;
-    unsigned int unk24;
-    unsigned int unk28;
-    unsigned int unk2C;
-    unsigned int unk30;
-    unsigned int unk34;
-    unsigned int unk38;
-    unsigned int unk3C;
-    int m_40;
-    int m_44;
-    unsigned int unk48;
-    unsigned int unk4C;
-};
-
-struct Sub08_cls
-{
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0C;
-    unsigned int unk10;
-    unsigned int unk14;
-    Vertex* PushFront(PendingBlock* out);
-};
-
-struct Sub20_cls
-{
-    Triangle* FUN_00e241a0(Triangle* node);
-};
-
-struct FUN_00e19200_cls
-{
-    unsigned int unk00;
-    unsigned int unk04;
-    Sub08_cls m_08;
-    Sub20_cls m_20;
-    void FUN_00e19200(Triangle* a, const __m128* b, int c);
-};
-
 namespace fnv_00dea6b0 {
 union __declspec(intrin_type) __declspec(align(16)) __m128
 {
@@ -386,7 +260,6 @@ extern "C"
     __m128 _mm_setr_ps(float, float, float, float);
 }
 extern __m128 DAT_01017d10;
-extern float DAT_01011d78;
 
 struct CubeVector
 {
@@ -435,16 +308,8 @@ struct CubeBox
 
 #include <math.h>
 extern const float DAT_0104da4c = 1.1920928955078125e-7f;
-extern float DAT_0104da48;
 extern "C" __m128 _mm_sqrt_ss(__m128);
-extern "C" __m128 _mm_set_ps1(float);
 extern "C" __m128 _mm_load_ss(const float*);
-
-extern const float DAT_0101622c;
-struct Vec4
-{
-    __m128 value;
-};
 
 extern "C"
 {
@@ -582,7 +447,6 @@ class GeomVector
         data = _mm_mul_ps(x.spread(), data);
     }
 };
-float __cdecl FUN_00de9e10(const GeomVector&, const GeomVector&, const GeomVector&, GeomVector&, float*);
 
 #include <float.h>
 extern "C"
@@ -599,19 +463,4 @@ extern "C"
     void _mm_store_ss(float*, __m128);
 }
 
-struct S00dea980_Vec
-{
-    __m128 m_vComponents;
-};
-
-extern float DAT_01016248;
-extern __m128 DAT_010ec7f0;
-
-extern "C" __m128 _mm_load_ps(const float*);
-
 extern const float DAT_0106c2e0;
-
-struct CentroidVector
-{
-    __m128 value;
-};

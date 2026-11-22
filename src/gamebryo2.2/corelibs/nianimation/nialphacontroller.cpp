@@ -21,8 +21,6 @@ void __thiscall FUN_00a569f0_shell::FUN_00a569f0(float& fValue)
     fValue = p[0x3c / 4];
 }
 
-extern int g_011f4084;
-
 struct BSFadeNode
 {
     static void* __cdecl operator new(unsigned int);
@@ -93,8 +91,6 @@ template <class T, class Alloc> struct NiTPrimitiveArray
     void __thiscall SetSize(unsigned int);
     void __thiscall SetAt(unsigned int, T&);
 };
-void __stdcall FUN_00a576c0(NiTPrimitiveArray<char*, NiTMallocInterface<char*> >*);
-char* __cdecl _FUN_00a7d330(const char*);
 
 extern int DAT_0109a76c;
 struct NiNew

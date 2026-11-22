@@ -2,8 +2,6 @@
 // src/havok/common/serialize/packfile/hkpackfilewriter.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/common/serialize/packfile/hkpackfilewriter.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-extern "C" void __cdecl Vsnprintf(void*, void*, const char*, int, int, int, const char*);
-
 struct FUN_00dbdd40_s
 {
     int __thiscall GetOrAddString(int a);
@@ -30,24 +28,9 @@ void __thiscall FUN_00dbdf30_s::FUN_00dbdf30(int pNameSource, int a)
     ((FUN_00d874d0_s*)((char*)this + 0xa8))->FUN_00d874d0(name, idx);
 }
 
-struct MemoryRouter
-{
-    void* m0;
-    void* m4;
-    void* m8;
-    void* mc;
-    void* m10;
-};
-extern "C" MemoryRouter* __cdecl D1A0E0GetMemoryRouter();
 struct DepthLimit
 {
     void FUN_00cb1870(void*, void*, int);
-};
-struct FUN_00dbdae0
-{
-    char m[0x2c];
-    DepthLimit m_dl;
-    void FUN_00dbdae0_0(void* a, int b);
 };
 
 namespace fnv_00dbdf00 {
@@ -63,11 +46,6 @@ struct FUN_00dbdf00_router
 };
 
 FUN_00dbdf00_router* __cdecl _D1A0E0GetMemoryRouter();
-
-struct FUN_00dbdf00_s
-{
-    void __thiscall FUN_00dbdf00(void*, int);
-};
 
 }  // namespace fnv_00dbdf00
 
@@ -103,15 +81,6 @@ struct FUN_00dbe760_s : public FUN_00dbc6e0_s
 struct FUN_00cb1930_s
 {
     int LookupHashEntry(const void* key, int defaultValue);
-};
-struct FUN_00c85750_s
-{
-    void* m00;
-    void* m04;
-    void* m08;
-    void* m0c;
-    void* allocator;
-    static FUN_00c85750_s* __cdecl FUN_00c85750();
 };
 struct TrackedElement
 {
@@ -264,17 +233,11 @@ struct hkMemoryRouterDB7
         return *m_pStreamAllocator;
     }
 };
-hkMemoryRouterDB7& __cdecl GetMemoryRouterDB7() throw();
-int __cdecl hkStrCmpDB7(const char* pcA, const char* pcB) throw();
 class hkClassDB7
 {
   public:
     const char* getName() const throw();
     unsigned int CalculateDatabaseSignature(int iFlags) const throw();
-};
-struct hkClassEnumDB7
-{
-    const char* m_name;
 };
 class hkOstreamDB7
 {
@@ -287,15 +250,6 @@ class hkOstreamDB7
     short m_sReferenceCount;
     void* m_pStreamWriter;
 };
-class hkErrorDB7
-{
-  public:
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual int message(int eType, int aiSoundId, const char* pcDescription, const char* pcFile, int iLine) throw();
-};
-extern hkErrorDB7* g_pkErrorDB7;
 struct hkPointerMapDB7
 {
     int FindValueForKey(const void* pvKey, int iDefault) const throw();
@@ -558,7 +512,6 @@ struct S00dbde40_Obj : public S00dbde40_Base
 
 void* __cdecl FUN_00c85750(void);
 void __cdecl ResizeAudioStream(void* a, void* b, int c);
-extern char DAT_0126cae8;
 
 // Calls FUN_00dbddc0, builds an S00dbde40_Entry, appends it to arr, and increments unk98 or unk94 depending on b.
 // @f3 0x00a4a8a0 (community match, verified in this file)
@@ -734,9 +687,6 @@ struct hkMemoryRouterE4D
     }
 };
 hkMemoryRouterE4D& __cdecl GetMemoryRouterE4D() throw();
-struct hkContainerHeapAllocatorE4D
-{
-};
 class hkReferencedObjectE4D
 {
   public:
@@ -767,47 +717,6 @@ struct hkPointerMapE4D
     void* m_kPrimitiveElement;
     int m_iCapacityFlags;
     int m_iPairCount;
-};
-struct hkStringMapE4D
-{
-    hkStringMapE4D(hkContainerHeapAllocatorE4D kAlloc);
-    void* m_kPrimitiveElement;
-    int m_iCapacityFlags;
-    int m_iPairCount;
-    int m_hashFunc;
-};
-struct hkPackfileSectionTableE4D
-{
-    hkPackfileSectionTableE4D();
-};
-struct hkClassE4D
-{
-};
-extern hkClassE4D g_kClassAE4D;
-extern hkClassE4D g_kClassBE4D;
-extern hkClassE4D g_kClassCE4D;
-class FUN_00dbe4d0 : public hkReferencedObjectE4D
-{
-  public:
-    FUN_00dbe4d0() throw();
-    virtual ~FUN_00dbe4d0();
-    hkArrayE4D<void*> m_sections;
-    hkPointerMapE4D m_kObjectNameMap;
-    hkPointerMapE4D m_kObjectIndexMap;
-    hkPointerMapE4D m_kClassMap;
-    hkStringMapE4D m_kClassNameMap;
-    hkStringMapE4D m_classNames;
-    hkPointerMapE4D m_kObjectMap;
-    hkArrayE4D<void*> m_pendingObjects;
-    hkStringMapE4D m_kImports;
-    hkArrayE4D<void*> m_kExports;
-    int m_iContentsSection;
-    int m_iDataSection;
-    void* m_pvContents;
-    void* m_pvContentsClass;
-    hkPointerMapE4D m_objectsWritten;
-    hkStringMapE4D m_classesWritten;
-    hkPackfileSectionTableE4D m_kSectionTable;
 };
 
 struct Mgr
@@ -972,7 +881,6 @@ struct S00dbe680_Glob
 };
 
 extern S00dbe680_Glob* DAT_01268b08;
-extern void* DAT_011b7ae8;
 
 struct Class_00dbe680
 {
@@ -1067,192 +975,6 @@ struct PairListE150
     PairE150* m_data;
     int m_uiItemCount;
     int m_pRayCursor;
-};
-struct Arg4ObjE150
-{
-    virtual void v0();
-    virtual void v1();
-    virtual void v2();
-    virtual void v3(void* a, void* b);
-};
-struct EntryE150
-{
-    int unk00;
-    void* m04;
-    void* m08;
-    int m0c;
-};
-struct BufObjE150
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    EntryE150* m_data;
-    int m_uiItemCount;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    void __thiscall FUN_00dbd870();
-    void __thiscall FUN_00e028e0();
-};
-struct StreamObjE150
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    void __thiscall FUN_00cb1600(char* buf, int n);
-    StreamObjE150* __thiscall FUN_00cc01c0(const char* s);
-    void __thiscall FUN_00cc00e0();
-};
-struct LogObjE150
-{
-    virtual void v0();
-    virtual void v1();
-    virtual void v2();
-    virtual int __thiscall v3(int a, int magic, const char* buf, const char* f, int line);
-};
-extern LogObjE150* DAT_01268360;
-extern int DAT_011b7aec;
-extern const char DAT_010d6734;
-extern const char DAT_010d6760;
-extern const char DAT_010d67a8;
-extern const char DAT_010d67e0;
-extern const char DAT_010d664c;
-struct ErrBufE150
-{
-    int f000;
-    int f001;
-    int f002;
-    int f003;
-    int f004;
-    int f005;
-    int f006;
-    int f007;
-    int f008;
-    int f009;
-    int f010;
-    int f011;
-    int f012;
-    int f013;
-    int f014;
-    int f015;
-    int f016;
-    int f017;
-    int f018;
-    int f019;
-    int f020;
-    int f021;
-    int f022;
-    int f023;
-    int f024;
-    int f025;
-    int f026;
-    int f027;
-    int f028;
-    int f029;
-    int f030;
-    int f031;
-    int f032;
-    int f033;
-    int f034;
-    int f035;
-    int f036;
-    int f037;
-    int f038;
-    int f039;
-    int f040;
-    int f041;
-    int f042;
-    int f043;
-    int f044;
-    int f045;
-    int f046;
-    int f047;
-    int f048;
-    int f049;
-    int f050;
-    int f051;
-    int f052;
-    int f053;
-    int f054;
-    int f055;
-    int f056;
-    int f057;
-    int f058;
-    int f059;
-    int f060;
-    int f061;
-    int f062;
-    int f063;
-    int f064;
-    int f065;
-    int f066;
-    int f067;
-    int f068;
-    int f069;
-    int f070;
-    int f071;
-    int f072;
-    int f073;
-    int f074;
-    int f075;
-    int f076;
-    int f077;
-    int f078;
-    int f079;
-    int f080;
-    int f081;
-    int f082;
-    int f083;
-    int f084;
-    int f085;
-    int f086;
-    int f087;
-    int f088;
-    int f089;
-    int f090;
-    int f091;
-    int f092;
-    int f093;
-    int f094;
-    int f095;
-    int f096;
-    int f097;
-    int f098;
-    int f099;
-    int f100;
-    int f101;
-    int f102;
-    int f103;
-    int f104;
-    int f105;
-    int f106;
-    int f107;
-    int f108;
-    int f109;
-    int f110;
-    int f111;
-    int f112;
-    int f113;
-    int f114;
-    int f115;
-    int f116;
-    int f117;
-    int f118;
-    int f119;
-    int f120;
-    int f121;
-    int f122;
-    int f123;
-    int f124;
-    int f125;
-    int f126;
-    int f127;
 };
 
 struct OwnerE150

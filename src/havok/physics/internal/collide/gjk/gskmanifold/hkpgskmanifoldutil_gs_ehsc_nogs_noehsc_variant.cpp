@@ -19,16 +19,6 @@ struct S_00dad640_Set
     unsigned char unk3;
     S_00dad640_Entry entries[1];
 };
-struct S_00dad640_Target
-{
-    virtual void unk0();
-    virtual void unk4();
-    virtual void unk8();
-    virtual void unkC();
-    virtual void unk10();
-    virtual void Release(unsigned short id, void* arg);
-};
-void ReleaseAllEntries(S_00dad640_Set* set, S_00dad640_Target* target, void* arg);
 struct S_00dad4d0_Key
 {
     unsigned short ids[4];
@@ -43,11 +33,6 @@ struct S_00dad4d0_Entry
     unsigned char unk3;
     unsigned char offs[4];
 };
-struct S_00dad4d0_Raw
-{
-    unsigned int lo;
-    unsigned int hi;
-};
 struct S_00dad4d0_Set
 {
     unsigned char unk0;
@@ -61,12 +46,9 @@ struct S_00dad4d0_Set
         return *(unsigned short*)((char*)&entries[count] + (off >> 3));
     }
 };
-bool FindAndPromoteEntry(S_00dad4d0_Set* set, S_00dad4d0_Key* key);
 void __fastcall FUN_00dae220(int unused, S_00dad640_Set* set);
-void __cdecl FUN_00dae340(S_00dad640_Set* set, unsigned int index);
 
 #include <xmmintrin.h>
-extern float DAT_0104da48;
 
 struct __declspec(align(16)) S_00daee00_Vec
 {
@@ -95,52 +77,6 @@ struct __declspec(align(16)) S_00daee00_Vec
         _mm_store_ss(&f, r);
     }
 };
-
-struct S_00daee00_Point
-{
-    S_00daee00_Vec pos;
-    float unk10;
-    float unk14;
-    float unk18;
-    float unk1C;
-    float unk20;
-    float unk24;
-    float unk28;
-    float unk2C;
-};
-
-struct S_00daee00
-{
-    S_00daee00_Point points[5];
-    int FUN_00daee00();
-};
-
-struct S_00dad720_Vec
-{
-    __m128 m_afExtents[16];
-    __m128 m_v100;
-    int unk110;
-    int unk114;
-    int unk118;
-    float m_pFreeList;
-};
-
-struct S_00dad720_Out
-{
-    __m128 m_v0;
-    __m128 m_v10;
-    __m128 m_v20;
-};
-
-struct S_00dad720_Rec
-{
-    int unk0;
-    unsigned char m_kPointA;
-    unsigned char m_kPointB;
-    unsigned char m_iThirdValue;
-};
-
-extern const __m128 DAT_010ec7f0;
 
 // @fnv 0x00dad720
 volatile int g_rec;

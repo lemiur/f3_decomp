@@ -2279,12 +2279,7 @@ static __declspec(noinline) void FUN_00eb5010(AxisValues* point, int axis1, int 
         point->value[axis2] = box->extent[axis2];
     }
 }
-extern AxisValues* volatile probePoint;
 extern int volatile probeAxis0, probeAxis1, probeAxis2;
-extern float* volatile probeSquared;
-extern float* volatile probeParameter;
-extern const ExtentBox* volatile probeBox;
-extern const AxisValues* volatile probeDirection;
 
 struct Alloc139
 {
@@ -2633,18 +2628,6 @@ static void FUN_00eb4cd0(LBPoint3& rkPnt, const LBPoint3& rkDir, const LBBox& rk
             FUN_00eb4590_LB(rkBox, 2, 0, 1, rkPnt, rkDir, kPmE, pfLParam, rfSqrDistance);
     }
 }
-
-struct LBLine3
-{
-    LBPoint3 m_kStartPoint;
-    LBPoint3 m_kLightVector;
-};
-
-void LBCase0(int i0, int i1, int i2, LBPoint3& rkPnt, const LBPoint3& rkDir, const LBBox& rkBox, float* pfLParam,
-             float& rfSqrDistance);
-void LBCase00(int i0, int i1, int i2, LBPoint3& rkPnt, const LBPoint3& rkDir, const LBBox& rkBox, float* pfLParam,
-              float& rfSqrDistance);
-void LBCase000(LBPoint3& rkPnt, const LBBox& rkBox, float& rfSqrDistance);
 
 static float Dot(const LBPoint3& a, const LBPoint3& b)
 {
@@ -3791,42 +3774,3 @@ FUN_00eb3750::FUN_00eb3750(float* apFloats, FloatVec3Local* apVecA, FloatVec3Loc
     m_60 = 1.0f / (apFloats[14] * apFloats[14]);
     m_68 = m_64 = fltmax_eb3750::DAT_010f1ad0;
 }
-
-extern NiPoint3 DAT_011a9490;
-extern NiPoint3 DAT_011f426c;
-extern NiPoint3 DAT_011a946c;
-extern NiPoint3 DAT_011a9478;
-extern NiPoint3 DAT_011a9484;
-
-struct NiBoundingVolume
-{
-    virtual void LoadBinary(void* apStream);
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-};
-
-class Helper
-{
-  public:
-    NiBoundingVolume* __thiscall FUN_00ea0820(const NiPoint3& akExtents, const NiPoint3& akCenter,
-                                              const NiPoint3& akAxis0, const NiPoint3& akAxis1,
-                                              const NiPoint3& akAxis2);
-};
-
-struct MemoryManagerAllocHelper
-{
-    void* Allocate(unsigned int auiSize);
-};

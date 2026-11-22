@@ -41,37 +41,6 @@ void FUN_00d591d0_class::FUN_00d591d0(void* a, float afDelta, int c)
     );
 }
 
-struct RefObj { void RetainReference(); void removeReference(); };
-struct DDCC60World { void removeReference(); };
-struct FUN_00d5a320 {
-    void FUN_00d59f40();
-    void AssignReference(RefObj* p, bool b);
-};
-
-struct MemoryManager {
-    virtual void Method0();
-    virtual void Method1();
-    virtual void Free(void* object, unsigned short size);
-};
-
-struct MemoryRouter {
-    unsigned char m_auiShapeKeys[0x10];
-    MemoryManager* m_pMemoryManager;
-};
-
-MemoryRouter* _D1A0E0GetMemoryRouter();
-
-struct FUN_00d5a4e0_Base {
-    void FUN_00d59870();
-};
-
-struct FUN_00d5a4e0_StandIn : public FUN_00d5a4e0_Base {
-    unsigned char m_auiShapeKeys[4];
-    unsigned short m_iElementCount;
-
-    FUN_00d5a4e0_StandIn* FUN_00d5a4e0(unsigned char deleting);
-};
-
 struct Vec4 { float x, y, z, w; };
 
 // @fnv 0x00d58d40
@@ -113,13 +82,6 @@ int FnvCpu_FUN_00d58d10_CpuObject::FUN_00d58d10()
 {
     return value;
 }
-
-struct FnvCpu_FUN_00d58d50_CpuObject { char* FUN_00d58d50(); };
-
-struct CallTarget_00d5a410 { int FUN_00d5a410(int, int, int, int, int); };
-struct SearchObject {
-    int FUN_00d5a4c0(unsigned int arg0, unsigned int arg1, unsigned int arg2, unsigned int arg3);
-};
 
 union __declspec(intrin_type) __declspec(align(16)) __m128 { float m128_f32[4]; unsigned __int64 m128_u64[2]; };
 extern "C" __m128 _mm_setr_ps(float, float, float, float);
@@ -203,18 +165,6 @@ struct hkMatrix3q
     hkVector4q m_kColumn2;
 };
 
-struct hkTransformq
-{
-    hkMatrix3q m_rotation;
-    hkVector4q m_vTranslation;
-};
-
-union hkVector4U
-{
-    hkVector4 m_vec;
-    hkQuadReal m_vComponents;
-};
-
 struct hkMemoryAllocatorq
 {
     virtual void v00() throw();
@@ -296,41 +246,6 @@ struct hkLocalArrayq : public hkArrayq<T>
     }
 };
 
-class hkpConvexVerticesShapeq : public hkpShape
-{
-public:
-    virtual void v01() throw();
-    virtual void v02() throw();
-    virtual void v03() throw();
-    virtual void v04() throw();
-    virtual void v05() throw();
-    virtual void v06() throw();
-    virtual void v07() throw();
-    virtual void v08() throw();
-    virtual void v09() throw();
-    virtual void v0a() throw();
-    virtual int getNumCollisionSpheres() const throw();
-
-    float m_fSphereRadius;
-    int unk14;
-    int unk18;
-    int unk1c;
-    hkVector4 m_kAabbHalfExtents;
-    hkVector4 m_kAabbCenter;
-    void* m_kRotatedVertices;
-    int m_rotatedSize;
-    int m_rotatedCapacity;
-    int m_iStridedVertexCount;
-    void* m_pConvexPiece;
-    hkVector4q* m_planeData;
-    int m_iPlaneCount;
-    int m_planeCapacity;
-
-    void FUN_00d59200(hkArrayq<hkVector4q>& vertices) const throw();
-    void FUN_00d59900(const float* vertices, int striding, int numVertices) throw();
-    void Transform(const hkTransform& t);
-};
-
 }  // namespace fnv_00d59cc0
 
 struct AllocatorD5A360 {
@@ -380,40 +295,6 @@ template <class T> struct ArrayD5A360 {
     T* m_data;
     int m_iElementCount;
     int m_iCapacityState;
-};
-struct ConvexD5A360 {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    ArrayD5A360<Vector4D5A360> m_kVertices;
-    int m_iConnectivity;
-    void FUN_00d59f40();
-    void SetVertices(const ArrayD5A360<Vector4D5A360>& kVertices);
-};
-
-struct FUN_00d58d20
-{
-    char pad[0x30];
-    __m128 m_kAabbCenter; // +0x30
-    void GetCentre(__m128* out);
 };
 
 class hkpConvexVerticesShapeFourVectors
@@ -465,15 +346,7 @@ void hkpConvexVerticesShapeImpl::FUN_00d59060(const hkpVertexId* ids, int numIds
 }
 
 class SpliceAllocator;
-struct AlignedSpliceVector {__m128 value;};
 void __cdecl FUN_00c908c0(SpliceAllocator& allocator,void* array,int capacity,int elementBytes);
-void __cdecl FUN_00d2cc70(void* destination,const void* source,unsigned bytes);
-struct VectorSpliceArray {
-    AlignedSpliceVector* data;
-    int size;
-    int capacityAndFlags;
-    void FUN_00d5a410(SpliceAllocator& allocator,int first,int removeCount,const AlignedSpliceVector* source,int insertCount);
-};
 
 class hkMemoryAllocatorD598 {
 public:
@@ -605,45 +478,9 @@ struct MatchVector
 void setInt24W(int value) { ((int*)&m_vComponents)[3] = value | 0x3f000000; }
 };
 
-extern const MatchVector DAT_010d9fe0;
-extern const MatchVector DAT_010d0fa0;
-
-struct hkFourTransposedPointsQ
-{
-    MatchVector m_uiX;
-    MatchVector m_uiY;
-    MatchVector m_uiZ;
-};
-
-struct MatchShape : public hkpShape
-{
-    float m_fSphereRadius;
-    int unk14;
-    int unk18;
-    int unk1c;
-    hkVector4 m_kAabbHalfExtents;
-    hkVector4 m_kAabbCenter;
-    hkFourTransposedPointsQ* m_kRotatedVertices;
-    int m_rotatedSize;
-    int m_rotatedCapacity;
-    int m_iStridedVertexCount;
-
-    void FUN_00d58ee0(const MatchVector& direction, MatchVector& supportingVertexOut) const;
-};
-
 extern void* DAT_010d0fc4;
 extern "C" void _ReadWriteBarrier();
 
-
-struct InputValues {
-    int x;
-    int y;
-    int z;
-};
-
-struct FinalCall {
-    void FUN_00d59900(int x, int z, int y);
-};
 
 template<class T> struct ConstructedArray : ArrayD5A360<T> {
     __forceinline ConstructedArray() : ArrayD5A360<T>() {
@@ -671,60 +508,21 @@ struct ConvexPart : SpherePart {
     float radius;
     __forceinline ConvexPart(int shapeType, float r) : SpherePart(shapeType) { radius = r; }
 };
-struct FUN_00d59bd0 : ConvexPart {
-    int unk14;
-    int unk18;
-    int unk1C;
-    Vector4D5A360 halfExtents;
-    Vector4D5A360 center;
-    ConstructedArray<Vector4D5A360> rotated;
-    int numVertices;
-    int convexPiece;
-    ConstructedArray<Vector4D5A360> planes;
-    int connectivity;
 
-    FUN_00d59bd0(
-        InputValues* input,
-        const ArrayD5A360<Vector4D5A360>& source,
-        float r);
-};
-
-
-extern "C" __m128 _mm_set_ss(float);
-extern "C" float _mm_cvtss_f32(__m128);
 extern "C" __m128 _mm_setzero_ps(void);
 extern "C" __m128 _mm_load_ps(const float*);
-extern "C" __m128 _mm_loadu_ps(const float*);
-extern "C" void _mm_store_ps(float*, __m128);
 extern "C" void _mm_store_ss(float*, __m128);
 extern "C" __m128 _mm_add_ss(__m128, __m128);
-extern "C" __m128 _mm_sub_ss(__m128, __m128);
-extern "C" __m128 _mm_mul_ss(__m128, __m128);
 extern "C" __m128 _mm_add_ps(__m128, __m128);
 extern "C" __m128 _mm_sub_ps(__m128, __m128);
 extern "C" __m128 _mm_mul_ps(__m128, __m128);
-extern "C" __m128 _mm_rsqrt_ss(__m128);
-extern "C" __m128 _mm_cmpeq_ss(__m128, __m128);
 extern "C" __m128 _mm_andnot_ps(__m128, __m128);
 extern "C" __m128 _mm_shuffle_ps(__m128, __m128, unsigned int);
 extern "C" void _ReadWriteBarrier(void);
-extern "C" void _ReadBarrier(void);
-extern "C" void _WriteBarrier(void);
-extern "C" unsigned __int64 __rdtsc(void);
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long);
-
-extern "C" unsigned long DAT_0126835c;
-extern float DAT_01011d78;
-extern float DAT_01017718;
-extern float DAT_01016248;
-extern __m128 DAT_010c7160;
-extern float DAT_01012054;
 
 struct ConvexPiece;
 
-
-struct TimerRec { const char* m_name; unsigned int m_uiCommandId; unsigned int unk08; };
-struct TimerStream { int unk00; TimerRec* m_cur; int unk08; TimerRec* m_kRayEnd; };
 
 struct hkBoolRet {
     char m_cBooleanValue;
@@ -732,11 +530,6 @@ struct hkBoolRet {
 };
 
 struct __declspec(align(16)) V4 { float x, y, z, w; };
-struct FourVecs { float xs[4]; float ys[4]; float zs[4]; };
-
-void __cdecl ResizeAudioStream(void*, void*, int);
-
-struct PlaneArr { V4* m_data; int m_iElementCount; int m_iCapacityState; };
 
 struct ConvexPiece {
     int unk00, unk04, unk08, unk0c, unk10, unk14, unk18;
@@ -744,27 +537,6 @@ struct ConvexPiece {
     int unk20, unk24;
     const unsigned short* m_kIndices;
     int m_numFaces;
-};
-
-struct RayInput { V4 m_vFrom; V4 m_vTo; };
-struct RayOutput {
-    V4 m_vHitNormal;
-    float m_fHitFraction;
-    int unk14, unk18, unk1c;
-    int m_uiShapeKeys[8];
-    int m_uiShapeKeyIndex;
-};
-
-struct ConvexVertsShape {
-    int unk00, unk04, unk08, unk0c, unk10, unk14, unk18, unk1c;
-    int unk20, unk24, unk28, unk2c, unk30, unk34, unk38, unk3c;
-    FourVecs* m_rotated;
-    int m_rotatedSize;
-    int m_rotatedCap;
-    int m_iStridedVertexCount;
-    ConvexPiece* m_piece;
-    PlaneArr m_kPlaneArray;
-    hkBoolRet FUN_00d592a0(const RayInput& input, RayOutput& results);
 };
 
 static __forceinline float Dot4xyz1(const V4& p, const V4& v)

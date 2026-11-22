@@ -40,11 +40,6 @@ void D2B3D0Owner::FUN_00d2b3d0()
     m_map.clear();
 }
 
-struct FUN_00cb18f0_t
-{
-    int FUN_00cb1fb0(int value);
-    void FUN_00cb1870(int managerValue, int value, int flag);
-};
 struct FUN_00c85750_return
 {
     int unk00;
@@ -54,13 +49,6 @@ struct FUN_00c85750_return
     int unk10;
 };
 FUN_00c85750_return* __cdecl FUN_00c85750();
-struct FUN_00d2b5c0_class
-{
-    int unk00;
-    int unk04;
-    FUN_00cb18f0_t sub;
-    void FUN_00d2b5c0(int value, char flag);
-};
 
 namespace fnv_00d2b710 {
 struct ManagerVTable
@@ -76,17 +64,6 @@ struct AudioState
     int unk08;
     int unk0C;
     ManagerVTable* unk10;
-};
-struct Base
-{
-    void ClearAndReset();
-};
-struct Widget : Base
-{
-    int unk00;
-    unsigned short unk04;
-    int unk06;
-    void* GetSelfWithNotify(unsigned char flags);
 };
 extern AudioState* __cdecl FUN_00c85750();
 }  // namespace fnv_00d2b710
@@ -141,92 +118,6 @@ struct D2B600ObjectArray
         m_iElementCount++;
     }
 };
-
-struct D2B600Container
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    D2B600ObjectArray m_kTrackedObjects;
-
-    void AppendObject(D2B600Object* object, int iUnused);
-};
-
-extern char DAT_010ce5d4[];
-
-struct D2B640Sub
-{
-    unsigned int m_00;
-    unsigned int m_04;
-    unsigned int m_08;
-
-    void EnsureCapacity(int first, int second);
-};
-
-struct D2B640Object
-{
-    void* m_vtbl;
-    unsigned short unk04;
-    unsigned short m_06;
-    D2B640Sub m_08;
-    unsigned int m_14;
-    unsigned int m_18;
-    unsigned int m_1c;
-    unsigned int m_20;
-    unsigned int m_24;
-
-    D2B640Object* Initialize(int a1, int a2);
-};
-
-struct D2B6Allocator
-{
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual void v0C();
-    virtual void FreeArray(void* apMemory, unsigned int auiSize) throw();
-};
-
-struct D2B6Sub
-{
-    int unk00;
-    int unk04;
-    int unk08;
-
-    void ProcessArgument(int value);
-    void FUN_00a29680();
-};
-
-extern int DAT_0102e388;
-
-struct FUN_00d2b6b0_cls
-{
-    int m_vptr00;
-    int unk04;
-    D2B6Sub m_sub;
-    void* m_pData;
-    int m_iArrayLength;
-    unsigned int m_uCapBits;
-
-    void ClearAndReset();
-};
-
-extern "C" int __cdecl Vsnprintf(char* buf, unsigned size, const char* fmt, ...);
-
-struct S_00d2b3e0_Mgr
-{
-    unsigned short unk00;
-    unsigned short unk02;
-    unsigned short unk04;
-    unsigned short unk06;
-    void ReleaseReference();
-    int FUN_00da2b20(void** trace, int max);
-    void FUN_00da2990(void** trace, int count, void(__cdecl* cb)(const char*, int), int user);
-};
-extern S_00d2b3e0_Mgr* DAT_01269a84;
-S_00d2b3e0_Mgr* __cdecl FUN_00da2bc0();
 
 struct S_00d2b3e0
 {

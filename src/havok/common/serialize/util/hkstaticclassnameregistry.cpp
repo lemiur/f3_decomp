@@ -42,49 +42,6 @@ SlotEntry* FUN_00db7ae0_cls::FindSlotByKey(void* apKey)
     return 0;
 }
 
-struct FUN_00db7b40
-{
-    virtual void v0();
-    unsigned short unk04;
-    unsigned short unk06;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    FUN_00db7b40(int a, int b, int c);
-};
-
-struct FUN_00db7b70_Array
-{
-    void** data;
-    int count;
-    int capacity;
-};
-
-struct FUN_00c85750_Obj
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    void* unk10;
-};
-
-struct FUN_00db7b70_Class
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    void** unk0c;
-    int unk10;
-    int unk14;
-    void EnsureInitialized();
-    void AppendToArray(FUN_00db7b70_Array* p);
-};
-
-void* FUN_00c85750();
-void __cdecl FUN_00c908c0(void* mm, FUN_00db7b70_Array* arr, int count, int size);
-
 struct FnvCpu_FUN_00db7a70_CpuObject
 {
     unsigned int unk00;

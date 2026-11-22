@@ -32,88 +32,6 @@ void FUN_00ca88c0_Class::FUN_00ca88c0(float afValue)
 }
 
 
-struct FUN_00ca80c0_Class
-{
-    int __fastcall FUN_00ca80c0();
-};
-
-struct FUN_00ca8900_Class
-{
-    void FUN_00ca8900(float f, int i);
-};
-
-struct FUN_00ca8910_class
-{
-    void FUN_00ca8910(float v);
-};
-
-struct FUN_00ca80b0_cls
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5c;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6c;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7c;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8c;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9c;
-    int unka0;
-    int unka4;
-    int unka8;
-    int unkac;
-    int unkb0;
-    int unkb4;
-    int unkb8;
-    int unkbc;
-    int unkc0;
-    int unkc4;
-    int unkc8;
-    int unkcc;
-    int unkd0;
-    int unkd4;
-    int unkd8;
-    int unkdc;
-    int unke0;
-    int unke4;
-    int unke8;
-    int unkec;
-    int m_iValueAtF0;
-
-    int* FUN_00ca80b0();
-};
-
 extern float DAT_01016248;
 struct Vector3
 {
@@ -259,142 +177,6 @@ void Owner::FUN_00ca85f0(unsigned int value)
     ((FUN_00ca85f0_Self*)this)->FUN_0090c830(self->m_unk10, &vec);
 }
 
-
-struct CA86E0Object
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5C;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6C;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7C;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8C;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9C;
-    int unkA0;
-    int unkA4;
-    int unkA8;
-    int unkAC;
-    int unkB0;
-    int unkB4;
-    int unkB8;
-    int unkBC;
-    int unkC0;
-    int unkC4;
-    int unkC8;
-    int unkCC;
-    int unkD0;
-    int unkD4;
-    int unkD8;
-    int unkDC;
-    int unkE0;
-    int unkE4;
-    unsigned char unkE8;
-    unsigned char unkE9;
-    unsigned char unkEA;
-    unsigned char unkEB;
-    int unkEC;
-    int unkF0;
-    int unkF4;
-    int unkF8;
-    int unkFC;
-    int unk100;
-    int unk104;
-    int unk108;
-    int unk10C;
-    int unk110;
-    int unk114;
-    int unk118;
-    int unk11C;
-    int unk120;
-    int unk124;
-    int unk128;
-    int unk12C;
-    int unk130;
-    int unk134;
-    int unk138;
-    int unk13C;
-    int unk140;
-    int unk144;
-    int unk148;
-    int unk14C;
-    int unk150;
-    int unk154;
-    int unk158;
-    int unk15C;
-    int unk160;
-    int unk164;
-    int unk168;
-    int unk16C;
-    int unk170;
-    int unk174;
-    int unk178;
-    int unk17C;
-    int unk180;
-    int unk184;
-    int unk188;
-    int unk18C;
-    int unk190;
-    int unk194;
-    int unk198;
-    int unk19C;
-    int unk1A0;
-    int unk1A4;
-    int unk1A8;
-    int unk1AC;
-    int unk1B0;
-    int unk1B4;
-    int unk1B8;
-    int unk1BC;
-    int unk1C0;
-    int unk1C4;
-    int unk1C8;
-    int unk1CC;
-    int unk1D0;
-    int unk1D4;
-    int unk1D8;
-    int unk1DC;
-    int unk1E0;
-    int unk1E4;
-    int unk1E8;
-    int unk1EC;
-    int unk1F0;
-    int unk1F4;
-    void* unk1F8;
-
-    void* FUN_00ca86e0();
-};
 
 struct AudioInterface;
 struct AudioInterfaceVTable
@@ -690,170 +472,6 @@ void FUN_00ca8860_cls::FUN_00ca8860(int aiFirst, int aiSecond)
 }
 
 
-struct CA8B80Point3
-{
-    float x;
-    float y;
-    float z;
-};
-
-struct CA8B80Command
-{
-    unsigned char m_type;
-    void* m_pOwnerObject;
-    float x;
-    float y;
-    float z;
-};
-
-struct CA8B80Queue
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5C;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6C;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7C;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8C;
-    int unk90;
-    void* m_bSlotEnabled;
-
-    void Push(CA8B80Command* pkCommand);
-};
-
-struct CA8B80Handler
-{
-    virtual void vfunc000();
-    virtual void vfunc004();
-    virtual void vfunc008();
-    virtual void vfunc00C();
-    virtual void vfunc010();
-    virtual void vfunc014();
-    virtual void vfunc018();
-    virtual void vfunc01C();
-    virtual void vfunc020();
-    virtual void vfunc024();
-    virtual void vfunc028();
-    virtual void vfunc02C();
-    virtual void vfunc030();
-    virtual void vfunc034();
-    virtual void vfunc038();
-    virtual void vfunc03C();
-    virtual void vfunc040();
-    virtual void vfunc044();
-    virtual void vfunc048();
-    virtual void vfunc04C();
-    virtual void vfunc050();
-    virtual void SetPosition(const CA8B80Point3& kPos);
-};
-
-struct CA8B80Object
-{
-    int unk00;
-    int unk04;
-    CA8B80Queue* m_queue;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5C;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6C;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7C;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8C;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9C;
-    int unkA0;
-    int unkA4;
-    int unkA8;
-    int unkAC;
-    int unkB0;
-    int unkB4;
-    int unkB8;
-    int unkBC;
-    int unkC0;
-    int unkC4;
-    int unkC8;
-    int unkCC;
-    int unkD0;
-    int unkD4;
-    int unkD8;
-    int unkDC;
-    CA8B80Handler m_handler;
-
-    void Update();
-    void FUN_00ca8b80(const CA8B80Point3& kPos);
-};
-
-struct FUN_00ca9240_Base
-{
-    int unk04;
-    unsigned char type;
-    FUN_00ca9240_Base(int a, int b, int c);
-    virtual void unk00();
-};
-
-struct FUN_00ca9240 : FUN_00ca9240_Base
-{
-    FUN_00ca9240(int a, int b);
-    virtual void unk04();
-};
-
 struct BaseRecord
 {
     virtual void v00();
@@ -875,16 +493,6 @@ FUN_00ca9270::FUN_00ca9270(void* apFirst, void* apSecond) : BaseRecord(apFirst, 
 {
     m_c08 = 2;
 }
-
-struct FUN_00ca80a0_base
-{
-    virtual ~FUN_00ca80a0_base();
-};
-
-struct FUN_00ca80a0_cls : FUN_00ca80a0_base
-{
-    virtual ~FUN_00ca80a0_cls();
-};
 
 struct S_00ca8630_Owner
 {
@@ -1540,78 +1148,6 @@ struct CA8890Object
     void FUN_00ca8890(int value);
 };
 
-struct SpawnedSub
-{
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual void v0C();
-    virtual void v10(float f);
-};
-
-struct FUN_00ca88e0_cls
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5C;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6C;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7C;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8C;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9C;
-    int unkA0;
-    int unkA4;
-    int unkA8;
-    int unkAC;
-    int unkB0;
-    int unkB4;
-    int unkB8;
-    int unkBC;
-    int unkC0;
-    int unkC4;
-    int unkC8;
-    int unkCC;
-    int unkD0;
-    int unkD4;
-    int unkD8;
-    int unkDC;
-    SpawnedSub m_sub;
-
-    void FUN_00ca88e0(float f);
-};
-
 struct CA92A0Allocator;
 
 struct CA92A0MemoryRouter
@@ -1740,8 +1276,6 @@ struct CA92A0Allocator
     virtual void* Alloc(unsigned int auiSize);
 };
 
-extern int DAT_010c6c64;
-
 static __forceinline void memCpy16NonEmpty(void* dst, const void* src, int numQuads)
 {
     const unsigned int* s = (const unsigned int*)src;
@@ -1808,19 +1342,6 @@ __declspec(align(16)) struct FnvScratch
     int unkB8;
     int unkBC;
     void FUN_00cf5ea0();
-};
-
-struct FnvSubObj
-{
-    void FUN_00cb0c10(unsigned int auiFlags);
-};
-
-struct FnvThing
-{
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual void* v0C(void* pOwner);
 };
 
 struct FUN_00ca90c0_cls
@@ -1912,45 +1433,6 @@ class hkBoolCA8B
     char m_cBooleanValue;
 };
 
-class hkpShapeContainerCA8B
-{
-  public:
-    virtual ~hkpShapeContainerCA8B();
-    virtual int GetNumChildShapes() const;
-};
-
-class hkpShapeCA8B
-{
-  public:
-    virtual ~hkpShapeCA8B();
-    virtual void vfn04();
-    virtual void vfn08();
-    virtual void vfn0C();
-    virtual const hkpShapeContainerCA8B* GetShapeContainer() const;
-    int unk04;
-    int unk08;
-    int m_type;
-};
-
-class hkpShapeCollectionCA8B : public hkpShapeCA8B, public hkpShapeContainerCA8B
-{
-};
-
-class HostCA8B
-{
-  public:
-    int unk00, unk04, unk08, unk0C;
-    const hkpShapeCA8B* m_pCollisionShape;
-    int unk14, unk18, unk1C, unk20, unk24, unk28, unk2C, unk30, unk34, unk38, unk3C;
-    int unk40, unk44, unk48, unk4C, unk50, unk54, unk58, unk5C, unk60, unk64, unk68, unk6C;
-    int unk70, unk74, unk78, unk7C, unk80, unk84, unk88, unk8C, unk90, unk94, unk98, unk9C;
-    int unkA0, unkA4, unkA8, unkAC, unkB0, unkB4, unkB8, unkBC, unkC0, unkC4, unkC8, unkCC;
-    int unkD0, unkD4, unkD8, unkDC, unkE0, unkE4;
-    unsigned char m_bFlag;
-
-    hkBoolCA8B FUN_00ca8bf0() const;
-};
-
 struct S_00ca84b0_Shape
 {
     void RetainReference();  // FUN_00c90510
@@ -2037,10 +1519,6 @@ struct S_00ca84b0_Vector4
     float x, y, z, w;
 };
 
-void FUN_00cb5c10(S_00ca84b0_World* world, S_00ca84b0_Entity* entity);
-void FUN_00cb59f0(S_00ca84b0_World* world, S_00ca84b0_Entity* entity);
-void NotifyShapeSet(S_00ca84b0_World* world, S_00ca84b0_Entity* entity);
-void FUN_00cffcf0(S_00ca84b0_Entity* entity);
 // Same-unit static helper (0x00ca80d0): the allowed penetration depth is a fifth of the
 // smallest extent, or 0.1 once that extent reaches 0.5.
 static __declspec(noinline) void ComputeScaledMinimum(void* pvCollidable, const S_00ca84b0_Vector4& kExtent)
@@ -2271,146 +1749,6 @@ struct AllocHolder
 
 AllocHolder* __cdecl FUN_00c85750() throw();
 
-struct EventBlock
-{
-    unsigned char m_type;
-    void* m_pSender;
-    void* m_pData;
-};
-
-struct EventDispatcher
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5C;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6C;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7C;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8C;
-    int unk90;
-    int m_94;
-
-    void FUN_00c91160(EventBlock* ev);
-};
-
-struct EventSub
-{
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual void v0C();
-    virtual void v10();
-    virtual void v14();
-    virtual void v18();
-    virtual void v1C();
-    virtual void v20();
-    virtual void v24();
-    virtual void v28();
-    virtual void v2C();
-    virtual void v30();
-    virtual void v34();
-    virtual void v38();
-    virtual void v3C();
-    virtual void v40();
-    virtual void v44();
-    virtual void v48();
-    virtual void v4C();
-    virtual void v50(void* a1, void* a2);
-};
-
-struct FUN_00ca8af0_cls
-{
-    int unk00;
-    int unk04;
-    EventDispatcher* m_08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5C;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6C;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7C;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8C;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9C;
-    int unkA0;
-    int unkA4;
-    int unkA8;
-    int unkAC;
-    int unkB0;
-    int unkB4;
-    int unkB8;
-    int unkBC;
-    int unkC0;
-    int unkC4;
-    int unkC8;
-    int unkCC;
-    int unkD0;
-    int unkD4;
-    int unkD8;
-    int unkDC;
-    EventSub m_e0;
-
-    void DispatchEvent(void* a1, void* a2);
-    void FUN_00c9c1d0();
-};
-
 }  // namespace fnv_00ca8af0
 
 struct S_00ca8f50_Vec
@@ -2460,7 +1798,6 @@ struct S_00ca8f50_Sub
     int unk38;
     int unk3C;
 };
-extern float DAT_010c7948[];
 struct S_00ca8f50_Info
 {
     int m0;
@@ -2715,12 +2052,6 @@ struct S_00ca9210_RefObj
         S_00ca9210_RefObj* b = static_cast<S_00ca9210_RefObj*>(p);
         FUN_00c85750()->heap().ReleaseBlock(p, b->m_usMemSizeAndFlags);
     }
-};
-
-struct FUN_00ca9210 : S_00ca9210_RefObj
-{
-    FUN_00ca9210();
-    virtual ~FUN_00ca9210() throw();
 };
 
 }  // namespace fnv_00ca9210

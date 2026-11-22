@@ -1,8 +1,6 @@
 // src/gamebryo2.2/corelibs/niparticle/nipsysfieldmaxdistancectlr.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/_fallout3/platforms/common/code/gamebryo2.2/corelibs/niparticle/nipsysfieldmaxdistancectlr.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-extern const void* g_01202710;
-
 struct NiPSysModifierFloatCtlr
 {
 };
@@ -19,19 +17,6 @@ void NiPSysFieldMaxDistanceCtlr::FUN_00c2b050(float fValue)
     p[0xA] = fValue;
     p[0xB] = fValue * fValue;
 }
-
-struct StrArr
-{
-    unsigned char _0[8];
-    unsigned short m_usMaxSize;
-    unsigned short m_usSize;
-    unsigned char _c[2];
-    unsigned short m_usGrowBy;
-    void SetSize(unsigned int);
-    void SetAt(unsigned int, char*&);
-};
-void __stdcall FUN_00c32f60(StrArr*);
-char* __cdecl _FUN_00a7d330(const char*);
 
 extern "C" void* __cdecl FUN_00aa13e0(unsigned int);
 extern char DAT_010bf354[];

@@ -18,10 +18,8 @@ __m128 _mm_sub_ps(__m128,__m128);
 __m128 _mm_sub_ss(__m128,__m128);
 __m128 _mm_shuffle_ps(__m128,__m128,int);
 __m128 _mm_rsqrt_ss(__m128);
-__m128 _mm_set_ss(float);
 __m128 _mm_cmpeq_ss(__m128,__m128);
 __m128 _mm_andnot_ps(__m128,__m128);
-void _mm_store_ss(float*,__m128);
 void _ReadWriteBarrier();
 }
 struct Vertex { __m128 position; __m128 supportA; __m128 supportB; int flags; int unk34; int unk38; int unk3c; };
@@ -41,11 +39,7 @@ struct Face {
     int unk4c;
     __declspec(noinline) Vertex* ComputePlane();
 };
-extern float DAT_01011d78;
-extern float DAT_01017718;
-extern float DAT_01016248;
 struct InitEntry { int vertexOffset; int faceOffset; int edgeOffset; };
-extern InitEntry DAT_010ed0f0[];
 struct Hull {
     int unk00; int unk04; int unk08; int unk0c;
     int faceCount; int unk14; int unk18; int unk1c;
@@ -58,8 +52,6 @@ struct Hull {
 struct FaceCall {
     void FUN_00a98f70();
 };
-
-extern "C" InitEntry DAT_00e88e68[];
 
 struct __declspec(align(16)) Delta48 {
     float x, y, z, w;
@@ -108,12 +100,6 @@ void Hull::FUN_00e2d440() {
 }
 
 
-struct E29Src { int idx[4]; int n; };
-struct E29SrcList { E29Src* data; int count; };
-struct E29Item { __m128 a; __m128 b; char flag20; int val24; };
-struct E29Out1 { E29Item item; void* ptr30; int one34; int zero38; char unk3c; char flag3d; };
-struct E29Out2 { E29Item items[4]; int count; char flagC4; void* ptrs[4]; int unkD8; int unkDC; int zeros[4]; int unkF0; };
-
 namespace fnv_00e2ab00 {
 typedef union __declspec(intrin_type) __declspec(align(16)) __m128 { float m128_f32[4]; } __m128;
 extern "C" { __m128 _mm_load_ps(const __m128*); void _mm_store_ps(__m128*,__m128); __m128 _mm_shuffle_ps(__m128,__m128,int); void _ReadWriteBarrier(); }
@@ -149,24 +135,10 @@ template <class T> struct hkArray_e3a1 {
     }
 };
 
-struct Track_e3a1 {
-    int unk00, unk04;
-    int m_numKeys;
-    int m_pRayCursor;
-    hkArray_e3a1<Key_e3a1> m_keys;
-    void FUN_00e3a1e0(int numKeys);
-};
-
-extern "C" __m128 _mm_load_ss(const float*);
-extern "C" __m128 _mm_unpacklo_ps(__m128, __m128);
 extern "C" void _mm_store_ps(float*, __m128);
-extern "C" __m128 _mm_setr_ps(float, float, float, float);
 
 extern int DAT_010dbacc, DAT_010dbad8, DAT_010dbae4, DAT_010dbaf8;
 extern int DAT_010ccfac, DAT_010ccfa0, DAT_010ccf8c, DAT_010c3bb8;
-extern void* DAT_011b3830[];
-void __cdecl FUN_00d1bb50(void*, void*, void*, void*, void*, void*, void*, void*, void*, int) throw();
-void __cdecl FUN_00d1d490(void*, void*, int, void*, void*, void*) throw();
 typedef __m128 FourFloatVector;
 __forceinline FourFloatVector packFractions(float x,float y,float z,float w) { FourFloatVector v; v.m128_f32[0]=x; v.m128_f32[1]=y; v.m128_f32[2]=z; v.m128_f32[3]=w; return v; }
 struct RaySource {
@@ -174,14 +146,6 @@ struct RaySource {
     unsigned char enable; unsigned char unk21; unsigned short unk22;
     unsigned filter;
     unsigned unk28, unk2c;
-};
-struct RayBatch {
-    RaySource rays[4];
-    unsigned type;
-    unsigned char flag; unsigned char unkc5; unsigned short unkc6;
-    void* filters[4];
-    unsigned unkd8, unkdc;
-    void* hits[4];
 };
 struct LocalRay {
     FourFloatVector from, to;
@@ -222,60 +186,8 @@ ray.mode=m;         return r;
         unk50 = 0; unk54 = 0; unk60 = 0; ray.hit = 0;
     }
 };
-struct Bundle {
-    FourFloatVector fromX, fromY, fromZ, toX, toY, toZ;
-    void* dispatch;
-};
-struct FractionValues { float x,y,z,w; };
-struct FractionArg { FourFloatVector* ptr; };
-struct Owner { unsigned unk00, unk04, unk08, unk0c; void* context; };
 
 extern "C" void _ReadWriteBarrier(void);
-
-extern DWORD DAT_0126835c;
-
-unsigned __int64 __cdecl __rdtsc(void);
-
-struct ProfRec
-{
-    const char* m_pName;
-    DWORD m_iTick;
-    DWORD unk08;
-};
-
-struct ProfRec2
-{
-    const char* m_pName;
-    DWORD m_iTick;
-    DWORD unk08;
-    const char* m_pName2;
-};
-
-struct ProfBuf
-{
-    DWORD unk00;
-    char* m_pCur;
-    DWORD unk08;
-    char* m_pRecordEnd;
-};
-
-class ScrapAllocator
-{
-public:
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual void* Alloc(int& aiSize);
-    virtual void Free(void* p, unsigned int size);
-};
-
-struct ScrapHolder
-{
-    DWORD unk00, unk04, unk08, unk0C;
-    ScrapAllocator* m_pAllocationContext;
-};
-
-
 
 template <class T> struct ScrapArr
 {
@@ -326,56 +238,7 @@ struct __declspec(align(16)) AutoJob
     int m_i6C;
 };
 
-struct JobSource
-{
-    DWORD unk00, unk04, unk08, unk0C;
-    JobTarget* m_p10;
-    int m_i14;
-    int unk18;
-    int m_i1C;
-    int unk20;
-    int m_i24;
-    int unk28;
-    int m_i2C;
-    int unk30;
-    int m_i34;
-    int m_i38;
-    int m_i3C;
-    int m_i40;
-};
-
-class JobQueue
-{
-public:
-    void AddObjectCopy(AutoJob* pJob, int iFlag);
-};
-
-class JobWaiter
-{
-public:
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual void Start(JobQueue* m_pPrimaryTaskProcessor, int iType);
-    virtual void Wait();
-};
-
-struct SplitOut
-{
-    int unk00, unk04, unk08, unk0C;
-};
-
-struct SplitResult
-{
-    int unk00, unk04, unk08, unk0C, unk10, unk14, unk18, unk1C;
-};
-
-void __cdecl FUN_00e29b80(int a, int b, int n, void* p1, void* p2, void* p3, SplitResult* pOut);
-
-extern "C" __m128 _mm_max_ps(__m128, __m128);
 namespace SplineMax {
-struct Vec { __m128 value; };
-struct Points { Vec* data; int count; int capacity; };
 }
 
 namespace S31470_Intrinsics {
@@ -385,8 +248,4 @@ extern "C" ::__m128 (_mm_min_ps)(::__m128, ::__m128);
 struct MinVec4 {
     __m128 m_vComponents;
     void setMin4(const MinVec4& a, const MinVec4& b) { m_vComponents = (S31470_Intrinsics::_mm_min_ps)(a.m_vComponents, b.m_vComponents); }
-};
-struct MinVec4Array {
-    MinVec4* m_data;
-    int m_iElementCount;
 };

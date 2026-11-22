@@ -318,8 +318,3 @@ FUN_00dabf10* __cdecl FUN_00dacc00(int a, int b, int unused, int c)
 __declspec(noinline) void __cdecl InitVtable(FUN_00dacc70_vt* p);
 
 typedef FUN_00dacc70_vt D41FD0AgentFuncs;
-
-struct D41FD0CollisionDispatcher
-{
-    void registerCollisionAgent(D41FD0AgentFuncs& funcs, int a, int b);
-};

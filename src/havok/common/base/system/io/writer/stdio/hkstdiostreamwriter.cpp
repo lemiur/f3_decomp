@@ -24,14 +24,6 @@ bool FUN_00d2bf00_class::Seek(long offset, int whence)
 }
 
 extern int DAT_010ce6f4;
-extern int DAT_0102e388;
-
-struct FUN_00d2bfb0_class
-{
-    int* vtbl;
-    void FUN_00d2bfb0();
-    void __thiscall FUN_00d2be50();
-};
 
 void __cdecl FUN_00ecda70(void*);
 // @fnv 0x00d2bec0
@@ -190,9 +182,4 @@ struct S_00d2bfd0_RefObj
         S_00d2bfd0_RefObj* b = static_cast<S_00d2bfd0_RefObj*>(p);
         S_00d2bfd0_Router::GetMonitorStream().heap().ReleaseBlock(p, b->m_usMemSizeAndFlags);
     }
-};
-struct FUN_00d2bfd0 : S_00d2bfd0_RefObj
-{
-    FUN_00d2bfd0();
-    virtual ~FUN_00d2bfd0();
 };

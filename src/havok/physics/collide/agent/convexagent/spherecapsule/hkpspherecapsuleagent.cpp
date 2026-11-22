@@ -12,27 +12,8 @@ typedef void (*S_00d3ef70_GetPenetrationsFunc)(const S_00d3ef70_CdBody&, const S
 typedef void (*S_00d3ef70_GetClosestPointsFunc)(const S_00d3ef70_CdBody&, const S_00d3ef70_CdBody&, const S_00d3ef70_Input&, S_00d3ef70_Collector&);
 typedef void (*S_00d3ef70_LinearCastFunc)(const S_00d3ef70_CdBody&, const S_00d3ef70_CdBody&, const S_00d3ef70_Input&, S_00d3ef70_Collector&, S_00d3ef70_Collector*);
 
-struct S_00d3ef70_AgentFuncs {
-    S_00d3ef70_CreateFunc m_pCreateFunc;
-    S_00d3ef70_GetPenetrationsFunc m_pQueryPenetrationsFunc;
-    S_00d3ef70_GetClosestPointsFunc m_getClosestPointsFunc;
-    S_00d3ef70_LinearCastFunc m_pLinearCastFunc;
-    bool m_bIsFlipped;
-    bool m_bIsPredictive;
-};
-
-struct S_00d3ef70_Dispatcher {
-    void registerCollisionAgent(S_00d3ef70_AgentFuncs& f, int typeA, int typeB);
-};
-
-S_00d3ef70_Agent* FUN_00d3e2f0(const S_00d3ef70_CdBody&, const S_00d3ef70_CdBody&, const S_00d3ef70_Input&, void*);
 void FUN_00d3f040(const S_00d3ef70_CdBody&, const S_00d3ef70_CdBody&, const S_00d3ef70_Input&, S_00d3ef70_Collector&);
-void FUN_00d3f4c0(const S_00d3ef70_CdBody&, const S_00d3ef70_CdBody&, const S_00d3ef70_Input&, S_00d3ef70_Collector&);
-void FUN_00d3ac80(const S_00d3ef70_CdBody&, const S_00d3ef70_CdBody&, const S_00d3ef70_Input&, S_00d3ef70_Collector&, S_00d3ef70_Collector*);
-S_00d3ef70_Agent* FUN_00d3e270(const S_00d3ef70_CdBody&, const S_00d3ef70_CdBody&, const S_00d3ef70_Input&, void*);
 void FUN_00d3e330(const S_00d3ef70_CdBody&, const S_00d3ef70_CdBody&, const S_00d3ef70_Input&, S_00d3ef70_Collector&);
-void FUN_00d3ebe0(const S_00d3ef70_CdBody&, const S_00d3ef70_CdBody&, const S_00d3ef70_Input&, S_00d3ef70_Collector&);
-void FUN_00daf8e0(const S_00d3ef70_CdBody&, const S_00d3ef70_CdBody&, const S_00d3ef70_Input&, S_00d3ef70_Collector&, S_00d3ef70_Collector*);
 
 class InnerCls {
 public:
@@ -70,31 +51,6 @@ void FUN_00d3e2b0_cls::FUN_00d3e2b0(int a1)
     }
     v0(1);
 }
-
-struct AllocHolder {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    void* m_pAllocator;
-};
-
-struct ObjAllocator {
-    virtual void unk00();
-    virtual void* Alloc(unsigned int size);
-};
-
-struct SmallRecord {
-    void* m_vptr;
-    unsigned short m_w04;
-    unsigned short m_w06;
-    int m_i08;
-    unsigned short m_w0C;
-};
-
-extern char DAT_010cf018[];
-
-AllocHolder* FUN_00c85750();
 
 void __cdecl FUN_00d3e330(int a, int b, int c, int d);
 
@@ -150,34 +106,8 @@ union __declspec(intrin_type) __declspec(align(16)) __m128 {
     float m128_f32[4];
     unsigned __int64 m128_u64[2];
 };
-extern "C" __m128 _mm_load_ps(const float*);
-extern "C" __m128 _mm_mul_ps(__m128 a, __m128 b);
-extern "C" __m128 _mm_add_ps(__m128 a, __m128 b);
-extern "C" __m128 _mm_sub_ps(__m128 a, __m128 b);
-extern "C" __m128 _mm_add_ss(__m128 a, __m128 b);
-extern "C" __m128 _mm_shuffle_ps(__m128 a, __m128 b, unsigned int imm);
-extern "C" void _mm_store_ss(float* p, __m128 a);
 
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long);
-extern "C" unsigned __int64 __rdtsc(void);
-extern "C" void _ReadWriteBarrier(void);
-
-extern unsigned long DAT_0126835c;
-extern const char str_010cf158[];
-extern const char str_010c41f8[];
-
-struct SphCap_Mon {
-    char* m_kRayStart;
-    char* m_kRayEnd;
-    char* m_cap;
-    char* m_capMinus16;
-};
-
-struct SphCap_Timer {
-    const char* m_name;
-    unsigned int m_ticks;
-    unsigned int m_unk08;
-};
 
 struct SphCap_Vector4 {
     __m128 m_vComponents;
@@ -195,26 +125,6 @@ struct __declspec(align(16)) SphCap_Vector4F {
     float y;
     float z;
     float w;
-};
-
-struct SphCap_TransformF {
-    SphCap_Vector4F c0;
-    SphCap_Vector4F c1;
-    SphCap_Vector4F c2;
-    SphCap_Vector4F c3;
-};
-
-struct SphCap_SegResult {
-    SphCap_Vector4 m_kClosestPoint;
-};
-
-struct SphCap_Frame {
-    SphCap_SegResult closest;
-    SphCap_Vector4F t0;
-    SphCap_Vector4F t1;
-    SphCap_Vector4F t2;
-    SphCap_Vector4F t3;
-    SphCap_Vector4 points[2];
 };
 
 struct SphCap_Shape {
@@ -239,17 +149,6 @@ struct S_00d3ef70_CdBody {
 struct S_00d3ef70_Collector {
     virtual void slot00();
     virtual void AddCdBodyPair(const S_00d3ef70_CdBody& a, const S_00d3ef70_CdBody& b);
-};
-
-int __cdecl FUN_00d230e0(const SphCap_Vector4& pos, const SphCap_Vector4& a, const SphCap_Vector4& b, SphCap_SegResult& out);
-
-struct Group1 {
-    SphCap_Vector4F t0;
-    SphCap_Vector4F t1;
-};
-struct Group2 {
-    SphCap_Vector4F t2;
-    SphCap_Vector4F t3;
 };
 
 // @f3 0x009c80e0 (community match, verified in this file)

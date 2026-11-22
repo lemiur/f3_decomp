@@ -37,33 +37,12 @@ struct MemoryManager
     virtual void Free(void* object, unsigned short size) = 0;
 };
 
-struct MemoryRouter
-{
-    unsigned char unknown1[16];
-    MemoryManager* manager;
-};
-
-struct FUN_00c9e1b0_class
-{
-    void* vftable;
-    unsigned short size;
-
-    int FUN_00c9db80();
-    void* FUN_00c9e1b0(unsigned char flags);
-};
-
-MemoryRouter* __cdecl _D1A0E0GetMemoryRouter();
-
 // FUN_00c9e1a0: __stdcall stub returning constant 0x30 (two unused stack params).
 // @fnv 0x00c9e1a0
 int __stdcall FUN_00c9e1a0(int a1, int a2)
 {
     return 0x30;
 }
-
-extern "C" int DAT_01268940;
-
-void __cdecl FUN_00c90360(int a, int* b);
 
 struct hkAabb;
 
@@ -80,8 +59,6 @@ void __thiscall FUN_00c9dc10_class::GetAabb(const hkTransform& transform, hkReal
 {
     ComputeAabbFromTransform(transform, m_vHalfExtents, m_fSphereRadius + tolerance, out);
 }
-
-extern void* DAT_010c70b4;
 
 struct VectorExtents { float x, y, z, w; };
 
@@ -121,18 +98,10 @@ CenteredPointBounds* CenteredPointBounds::SetExtentsAndRadius(const float* exten
 union __declspec(intrin_type) __declspec(align(16)) __m128 { float m128_f32[4]; unsigned __int64 m128_u64[2]; };
 extern "C" __m128 _mm_and_ps(__m128, __m128);
 extern "C" __m128 _mm_xor_ps(__m128, __m128);
-extern "C" __m128 _mm_cmplt_ps(__m128, __m128);
 extern "C" __m128 _mm_setzero_ps(void);
-extern "C" __m128 _mm_load_ps(const float*);
-extern "C" void _mm_store_ps(float*, __m128);
 extern "C" int _mm_movemask_ps(__m128);
 
 extern float DAT_010c44d0[4];
-
-struct S00c9dc40_Box : public hkpBoxShape
-{
-    void __thiscall FUN_00c9dc40(const float* src, float* dst);
-};
 
 namespace fnv_00c9e120 {
 union __declspec(intrin_type) __declspec(align(16)) __m128 {
@@ -231,26 +200,10 @@ void hkpBoxShape_Local::SetHalfExtents(const hkVector4& halfExtents)
 }
 
 
-struct FUN_00c9dbf0_class
-{
-    unsigned char m_ucUnknownByte[0x20];
-    hkVector4 m_vHalfExtents;
-
-    void GetHalfExtents(hkVector4& result) const;
-};
-
 extern "C" __m128 _mm_mul_ps(__m128, __m128);
-
-extern "C" const __m128 DAT_010c7030[8];
-
-struct BoxShapeHelper : public hkpBoxShape
-{
-    void* FUN_00c9dd30(__m128* sphereBuffer) const;
-};
 
 extern "C"
 {
-    unsigned __int64 __rdtsc(void);
     void _ReadWriteBarrier(void);
     __m128 _mm_set_ps1(float);
     __m128 _mm_add_ps(__m128, __m128);
@@ -344,12 +297,6 @@ struct BRBool
     BRBool(bool b) : m_cBooleanValue(b) {}
 };
 
-struct BRRayCastInput
-{
-    BRVector4 m_vFrom;
-    BRVector4 m_vTo;
-};
-
 struct BRRayCastOutput
 {
     BRVector4 m_vHitNormal;
@@ -360,9 +307,4 @@ struct BRRayCastOutput
     int m_uiShapeKeyIndex;
 
     void setKey(hkUint32 key) { m_uiShapeKeys[m_uiShapeKeyIndex] = key; }
-};
-
-struct RayBoxShape : hkpBoxShape
-{
-    BRBool FUN_00c9de40(const BRRayCastInput& input, BRRayCastOutput& results) const;
 };

@@ -70,8 +70,6 @@ void FUN_00a644a0(char** p)
     }
 }
 
-extern "C" void* g_01270920;
-
 struct RefCounted
 {
     virtual void f0();

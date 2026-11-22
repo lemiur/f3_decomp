@@ -62,7 +62,6 @@ void CreateImageConverter()
 
 
 struct NiFile;
-struct NiImageReader;
 struct NiPixelData;
 struct NiPixelFormat;
 struct NiStream;
@@ -109,11 +108,6 @@ struct NiRefObject
     }
     virtual ~NiRefObject();
 };
-struct FUN_00a76650 : NiRefObject
-{
-    FUN_00a76650();
-    virtual ~FUN_00a76650();
-};
 }  // namespace fnv_00a76650
 
 namespace fnv_00a76680 {
@@ -132,10 +126,6 @@ struct NiRefObject
     {
         InterlockedDecrement(&DAT_011f4400);
     }
-};
-struct FUN_00a76680 : NiRefObject
-{
-    virtual ~FUN_00a76680();
 };
 }  // namespace fnv_00a76680
 

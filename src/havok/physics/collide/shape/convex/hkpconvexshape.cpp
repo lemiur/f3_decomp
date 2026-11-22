@@ -64,15 +64,6 @@ class hkpSingleShapeContainerC9E3 : public hkpShapeContainerC9E3
     FUN_00d1df70* m_pContainedShape;
 };
 
-class FUN_00c9e340 : public hkpConvexShapeC9E3
-{
-  public:
-    hkpSingleShapeContainerC9E3 m_pContainedShape;
-
-    FUN_00c9e340(int iType, hkReal fRadius, FUN_00d1df70* pkChild, int iRef) throw();
-    virtual ~FUN_00c9e340() throw();
-};
-
 #include <xmmintrin.h>
 struct S00c9e1f0_Obj
 {
@@ -125,24 +116,6 @@ struct Mat3
     Vec4 c0, c1, c2;
 };
 
-struct Out
-{
-    Vec4 v;
-    float t;
-    int flags;
-    int unk01;
-    int unk02;
-    int b;
-    int unk03;
-    int unk04;
-    int unk05;
-    int unk06;
-    int unk07;
-    int unk08;
-    int unk09;
-    int c;
-};
-
 struct P2
 {
     int unk0;
@@ -161,23 +134,4 @@ struct Cb
 {
     VTable* vt;
     float f;
-};
-
-class Shape
-{
-  public:
-    virtual void v0();
-    virtual void v1();
-    virtual void v2();
-    virtual void v3();
-    virtual void v4();
-    virtual void v5();
-    virtual void v6();
-    virtual void v7();
-    virtual void v8(bool* ok, void* p1, Out* out);
-};
-
-struct FN : public Shape
-{
-    void FUN_00c9e2a0(int p1, int p2, Cb* p3);
 };

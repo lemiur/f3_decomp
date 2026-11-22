@@ -5,14 +5,6 @@
 #include "teswater_decls.h"
 #include "teswater_work.h"
 
-extern int DAT_0109cb9c;
-void __fastcall FUN_00a5a390(void* p);
-
-struct FUN_00a6fae0_Class
-{
-    void __thiscall FUN_00a6fae0();
-};
-
 // Lazily create the shader property for this geometry, picking the shader type by whether the geometry is skinned.
 
 class B9F30MemoryManager

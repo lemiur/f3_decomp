@@ -148,32 +148,7 @@ void Dispatcher::DispatchItemByMode(DispatchItem* item) {
 struct S_00e10760_Item;
 typedef bool (*S_00e10760_Less)(S_00e10760_Item* a, S_00e10760_Item* b);
 
-struct OwnerDest
-{
-    void FUN_00c91a70(void* p);
-    void ClearValue(void* p);
-};
-
-struct NodeHdr
-{
-    void FUN_00c905b0();
-};
-
-struct FUN_00d0b530_cls
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    OwnerDest* m_0C;
-
-    void FUN_00d0b530(int unused);
-};
-
 struct D0B630Entity;
-
-int __cdecl CompareByOffsetD4(const void* a, const void* b);
-void __cdecl FUN_00e10760(D0B630Entity** data, int lo, int hi, int(__cdecl* cmp)(const void*, const void*));
-void __cdecl FUN_00c90740(D0B630Entity** objects, int numObjects, int strideInBytes);
 
 class D0B630Primary
 {
@@ -289,12 +264,6 @@ struct D0B6A0Collidable
     }
 };
 
-struct D0B6A0Event
-{
-    int unk00;
-    const D0B6A0Collidable* m_kCollidable;
-};
-
 struct D0B6A0EntityArray
 {
     D0B6A0Entity** m_data;
@@ -322,90 +291,15 @@ struct D0B6A0EntityArray
     }
 };
 
-class D0B6A0Primary
-{
-  public:
-    virtual void vfunc00();
-    virtual void vfunc04();
-    virtual void vfunc08();
-    virtual void entityAdded(D0B6A0Entity* entity);
-
-    int unk04;
-    int unk08;
-};
-
-class D0B6A0Secondary
-{
-  public:
-    virtual void HandleEvent(const D0B6A0Event& event);
-};
-
-class D0B6A0Collector : public D0B6A0Primary, public D0B6A0Secondary
-{
-  public:
-    virtual void HandleEvent(const D0B6A0Event& event);
-
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    bool m_deferAdds;
-    D0B6A0EntityArray m_deferredEntities;
-};
-
 namespace fnv_00d0bb20 {
-struct AudioAllocator
-{
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual void v0C();
-    virtual void FreeArray(void* apMemory, unsigned int auiSize) throw();
-};
-
-struct AudioHolder
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    AudioAllocator* m_pAllocator;
-};
 
 struct BSAudio;
 BSAudio* __cdecl FUN_00c85750();
 
-extern int DAT_010cd3c4;
-extern int DAT_010cd3b4;
-extern int DAT_010cd3a4;
-extern int DAT_010cd394;
 extern int DAT_010ccf7c;
 extern int DAT_010c925c;
 extern int DAT_010cb1c4;
 extern int DAT_0102e388;
-
-struct FUN_00d0bb20_cls
-{
-    int m_vptr00;
-    int unk04;
-    int m_vptr08;
-    int m_vptr0c;
-    int m_vptr10;
-    int unk14;
-    hkReferencedObject* m_entries[6];
-    int unk30;
-    int unk34;
-    void* m_pData;
-    int m_iArrayLength;
-    unsigned int m_uCapBits;
-
-    void Destroy();
-};
 
 static inline void ResetBaseVptrs(int* vptrs)
 {
@@ -531,20 +425,3 @@ struct FUN_00d0bbf0
 FUN_00d0bbf0::~FUN_00d0bbf0()
 {}
 }  // namespace fnv_00d0bbf0
-
-struct BorderDeletePrimary : D0B6A0Primary
-{
-    virtual void* FUN_00d0bbd0(unsigned int flags);
-};
-
-struct BorderDeleteSecondary
-{
-    virtual void* FUN_00d0bbd0(unsigned int flags);
-};
-
-struct BorderDelete : BorderDeletePrimary, BorderDeleteSecondary
-{
-    BorderDelete();
-// @fnv 0x00d0bbd0
-    virtual void* FUN_00d0bbd0(unsigned int flags);
-};

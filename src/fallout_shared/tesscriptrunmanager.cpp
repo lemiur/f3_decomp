@@ -21,8 +21,6 @@ extern void DebugLog(const char* format, ...);
 extern bool IsScriptDebuggingEnabled();
 extern const char* PrepareScriptMessage(const char* message, bool localized);
 
-void* __cdecl memset(void*, int, unsigned int);
-
 struct TLSData_005e23f0
 {
     char pad[0x268];
@@ -30,38 +28,6 @@ struct TLSData_005e23f0
 };
 
 static __declspec(thread) TLSData_005e23f0 s_tlsData_005e23f0;
-
-int __cdecl FUN_00407000(char* buffer, char const* format, char* varArgs);
-
-struct FUN_005e24b0_shell
-{
-    char pad[0x18];
-    void* m_18;
-    void SetPointer(void* a, void* b);
-};
-
-extern void __cdecl _Deallocate(void*);
-
-struct FUN_005e2550_shell
-{
-    void* m_00;
-    void* m_04;
-    void Release();
-};
-
-struct FUN_005e2730_shell : public ScriptExecutor
-{
-    bool FUN_005e2730(Script*, TESObjectREFR*, ScriptLocals*);
-};
-
-struct FUN_005e2850_class
-{
-    bool FUN_005e2850();
-};
-struct FUN_005e1160_shell
-{
-    void RunScript(Script*, TESObjectREFR*, ScriptLocals*);
-};
 
 namespace fnv_005e1160 {
 class TESObjectREFR

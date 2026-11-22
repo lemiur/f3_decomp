@@ -15,28 +15,9 @@ void __thiscall FUN_00d37690_Class::ForwardToFunction(int aiArg1, int aiArg2, in
     FUN_00d374f0(aiArg1, aiArg2, aiArg3, aiArg4);
 }
 
-void FUN_00d37740(int a, int b, int c, int d);
-void FUN_00d37780(int a, int b, int c, int d);
 void FUN_00d37860(int a, int b, int c, int d);
 void FUN_00d378a0(int a, int b, int c, int d);
 void FUN_00d37280(int a, int b, int c, int d);
-void FUN_00daf8e0();
-void FUN_00d3ac80();
-
-struct FUN_00cfbbe0_Arg
-{
-    void* f0;
-    void* f1;
-    void* f2;
-    void* f3;
-    char f4;
-    char f5;
-};
-
-struct FUN_00cfbbe0_Class
-{
-    void __thiscall FUN_00cfbbe0(FUN_00cfbbe0_Arg* a, int b, int c);
-};
 
 struct Handler
 {

@@ -2,20 +2,6 @@
 // src/fallout_shared/tesproduceform.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/_fallout3/platforms/common/code/fallout shared/tesproduceform.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-void* __cdecl memset(void* p, int c, unsigned int n);
-
-struct FUN_0048b590_shell
-{
-    void ClearFields();
-};
-
-extern "C" void* __cdecl __memcpy(void* dst, const void* src, unsigned int count);
-
-struct FUN_0048b670_shell
-{
-    void CopyFromSource(void* src);
-};
-
 // Copies 4 bytes from src into this object at offset 8 when src is non-null.
 // @f3 0x00bb0380 (community match, verified in this file)
 namespace f3m_00bb0380 {
@@ -31,38 +17,11 @@ void __cdecl FUN_00bb0380(Elem_00bb0380* first, Elem_00bb0380* last, int value) 
 }   // namespace f3m_00bb0380
 
 
-void __cdecl FUN_004856f0(unsigned int, void*, unsigned int);
-void __cdecl _FUN_00485910(unsigned int, unsigned int);
-struct RefObj0084e3a0
-{
-    unsigned int _ref_0084e3a0();
-};
-struct FUN_0048b5c0_shell
-{
-    int unk0;
-    RefObj0084e3a0* unk4;
-    int unk8;
-    void FUN_0048b5c0();
-};
-
 struct BaseFormComponent
 {
     virtual ~BaseFormComponent();
 };
-struct TESProduceForm : BaseFormComponent
-{
-    void FUN_0048b610(BaseFormComponent* apCopyFC);
-};
-struct TESRaceForm
-{
-    void Initialize(unsigned int);
-};
-struct CombatNode
-{
-    unsigned int FUN_00726070();
-};
 
-extern "C" int __cdecl memcmp(const void* a, const void* b, unsigned int n);
 struct ProduceFormData : BaseFormComponent
 {
     void* pIngredient;
@@ -156,23 +115,11 @@ struct FUN_00485b60_Cls
     unsigned int Deallocate();
 };
 
-void ResolveFormID(unsigned int* apFormID, TESFile* apFile);
 struct TESForm;
-TESForm* FUN_004839c0(unsigned int aFormID);
-void FNV_Warning(const char* apMsg, ...);
-
-extern const char DAT_0101d2b4[];
-extern const char DAT_0101d2f8[];
-extern const char DAT_0101d340[];
 
 struct TESForm
 {
     virtual ~TESForm();
-};
-
-struct IngredientItem : TESForm
-{
-    int m_04;
 };
 
 struct FUN_0048b720_Cls : ProduceFormData

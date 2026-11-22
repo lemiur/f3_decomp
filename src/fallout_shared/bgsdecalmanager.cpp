@@ -170,19 +170,12 @@ struct ThreeByThreeMatrix
     char m_afEntries[48];
 };
 typedef char _sizecheck_NiMatrix3[sizeof(ThreeByThreeMatrix) == 48 ? 1 : -1];
-struct FUN_004769c0_shell : public ThreeByThreeMatrix
-{
-    void FUN_004769c0(unsigned int, float*);
-};
 
 class Date
 {
   public:
     ~Date();
 };
-
-void __fastcall FUN_0082f1b0(void*);
-int __fastcall CallNestedAtOffset80(void*);
 
 namespace fnv_004a03c0 {
 struct RecursiveLock
@@ -193,44 +186,13 @@ struct Date
 {
     ~Date();
 };
-struct DD : Date
-{
-    int CallNestedAtOffset80();
-    void FUN_004a03c0();
-};
 }  // namespace fnv_004a03c0
-
-struct P3
-{
-    float x, y, z;
-    void Set(float, float, float);
-    P3* FUN_004a0bd0(P3*);
-};
 
 template <> class NiPointer<NiNode>
 {
   public:
     NiNode* m_pObject;
     NiPointer<NiNode>& operator=(NiNode*);
-};
-
-struct FUN_004a0fd0_shell
-{
-    char pad[0xc4];
-    NiPointer<NiNode> m_pController;
-    void FUN_004a0fd0(NiNode* apNode);
-};
-
-struct BSA_
-{
-    void FUN_004a1020(void*);
-};
-
-struct FUN_004a1040_Helper
-{
-    char pad[0x19c];
-    int field_19c;
-    void Set(int val);
 };
 
 struct Fake_FUN_004a2020
@@ -252,12 +214,6 @@ bool Fake_FUN_004a2020::GetFlag(unsigned int aiFlag) const
     return (ulFlags[uiindex] & uimask) > 0;
 }
 
-class BGSTerrainManager
-{
-  public:
-    unsigned int GetMinLevel();
-};
-
 struct __declspec(align(16)) VectorComponentValue
 {
     char pad[16];
@@ -267,11 +223,6 @@ struct __declspec(align(16)) VectorComponentValue
 struct hkVector4
 {
     VectorComponentValue& FUN_00458700(VectorComponentValue&, int) const;
-};
-
-struct NiPoint3_local
-{
-    float x, y, z;
 };
 
 struct CFilter
@@ -297,10 +248,6 @@ struct CFilter
     unsigned int iFilter;
 };
 typedef char _sizecheck_CFilter[sizeof(CFilter) == 4 ? 1 : -1];
-struct FUN_004a39f0_shell : public CFilter
-{
-    void FUN_004a39f0(int);
-};
 
 namespace fnv_004a3a20 {
 struct CFilter
@@ -326,10 +273,6 @@ struct CFilter
     unsigned int iFilter;
 };
 typedef char _sizecheck_CFilter[sizeof(CFilter) == 4 ? 1 : -1];
-struct FUN_004a3a20_shell : public CFilter
-{
-    unsigned int FUN_004a3a20();
-};
 
 }  // namespace fnv_004a3a20
 
@@ -339,31 +282,8 @@ class TESObjectREFR
     unsigned int GetFlags();
 };
 
-void __fastcall FUN_004a3b70(void*);
-
-struct Base_004a3b30
-{
-    int pad[3];
-    Base_004a3b30();
-    virtual ~Base_004a3b30();
-};
-
-struct Member_004a4730
-{
-    Member_004a4730(int);
-    ~Member_004a4730();
-};
-
-struct FUN_004a3a70 : Base_004a3b30
-{
-    Member_004a4730 m;
-    FUN_004a3a70();
-    virtual ~FUN_004a3a70();
-};
-
 namespace fnv_004a3da0 {
 struct NiAVObject;
-struct FourComponentNumericValue;
 struct hkVector4;
 struct hkpAllRayHitCollector;
 struct hkpClosestRayHitCollector;
@@ -376,10 +296,6 @@ struct blob1
 struct blob4
 {
     char b[4];
-};
-struct blob16
-{
-    char b[16];
 };
 struct WorldRayCastInput
 {
@@ -455,10 +371,6 @@ struct BhkPickData : public WorldRayCastInput, public WorldRayCastOutput
     char _pad_ad[3];
 };
 typedef char _sizecheck_bhkPickData[sizeof(BhkPickData) == 176 ? 1 : -1];
-struct FUN_004a3da0_shell : public BhkPickData
-{
-    void FUN_004a3da0(void*);
-};
 
 struct __declspec(align(16)) hkVector4
 {
@@ -466,24 +378,12 @@ struct __declspec(align(16)) hkVector4
     void _ref_006815c0();
 };
 
-struct FUN_0056d340_helper
-{
-    void FUN_0056d340(hkVector4&);
-};
-
-hkVector4& __cdecl FUN_004a3e00(hkVector4&, NiPoint3 const&);
-
 }  // namespace fnv_004a3da0
 
 void* FUN_00458b20();
 struct T_
 {
     void FUN_004a3f10(void*);
-};
-struct PD_
-{
-    void ForwardToSubObject(void*);
-    void FUN_004a3f40(void*);
 };
 
 struct Flt
@@ -601,10 +501,6 @@ struct BhkPickData : public WorldRayCastInput, public WorldRayCastOutput
     char _pad_ad[3];
 };
 typedef char _sizecheck_bhkPickData[sizeof(BhkPickData) == 176 ? 1 : -1];
-struct FUN_004a3fb0_shell : public BhkPickData
-{
-    void FUN_004a3fb0(hkpAllRayHitCollector*);
-};
 
 struct NiSourceTexture;
 struct ScriptCompiler;
@@ -652,21 +548,6 @@ struct ConsoleManager
     char m_acOutputFilename[260];
 };
 typedef char _sizecheck_MenuConsole[sizeof(ConsoleManager) == 2324 ? 1 : -1];
-struct FUN_004a4020_shell : public ConsoleManager
-{
-    bool FUN_004a4020();
-};
-
-struct M3_
-{
-    void FUN_004b4660(unsigned int, float, float, float);
-};
-
-struct S3e60
-{
-    bool GetFlag(unsigned int) const;
-    bool FUN_0056d340(unsigned int f);
-};
 
 namespace fnv_008cdd90 {
 struct NiAVObject;
@@ -757,54 +638,16 @@ struct BhkPickData : public WorldRayCastInput, public WorldRayCastOutput
     char _pad_ad[3];
 };
 typedef char _sizecheck_bhkPickData[sizeof(BhkPickData) == 176 ? 1 : -1];
-struct FUN_008cdd90_shell : public BhkPickData
-{
-    hkpAllRayHitCollector* FUN_008cdd90();
-};
 
 }  // namespace fnv_008cdd90
 
-struct BSCompoundFrustum;
-struct BSFadeNode;
-struct BSMultiBoundNode;
-struct BSResizableTriShape;
-struct BSSegmentedTriShape;
 struct NiAVObject;
-struct NiAccumulator;
-struct NiCullingProcess;
 struct NiGeometry;
-struct NiLines;
 struct NiNode;
-struct NiParticles;
-struct NiTriBasedGeom;
-struct NiTriShape;
-struct NiTriStrips;
-struct NiVisibleArray;
-struct bhkBlendCollisionObject;
-struct bhkLimitedHingeConstraint;
-struct bhkNiCollisionObject;
-struct bhkRigidBody;
 
 struct GO
 {
     GO(int);
-};
-struct FUN_00a69400
-{
-    FUN_00a69400(NiVisibleArray*);
-    virtual ~FUN_00a69400();
-    char pad04[0x8c];
-};
-class FUN_004a0eb0 : public FUN_00a69400
-{
-  public:
-    int i90;
-    char pad94[0x28];
-    int ibc;
-    int ic0;
-    GO go;
-    FUN_004a0eb0(NiVisibleArray* apVisibleSet);
-    virtual ~FUN_004a0eb0();
 };
 
 struct FUN_004a4440
@@ -826,13 +669,6 @@ class FUN_004a3bc0 : public FUN_004a3ae0
 FUN_004a3bc0::~FUN_004a3bc0()
 {}
 
-extern int g_012030a8;
-
-struct FUN_004a0f50_shell
-{
-    int* __thiscall GetGlobalIntPtr();
-};
-
 struct GlobalObject_0044f440
 {
     float FUN_00450410(void);
@@ -850,47 +686,11 @@ GlobalObject_0044f440 g_011c7588;
 
 }  // namespace fnv_004a1a00
 
-void __fastcall FUN_004a47b0(int __this);
-
-struct FUN_00acbb70_shell
-{
-    void FUN_00acbb70();
-};
-
-struct FUN_004a03a0_shell
-{
-    void CallNestedAtOffset80();
-};
-
-struct FUN_004a0d30_shell
-{
-    char m_auiShapeKeys[0x34];
-    NiPoint3 m_kPoint;
-    NiPoint3& FUN_004a0d30(NiPoint3& akDest);
-};
-
-struct NiPoint3_Set
-{
-    void Set(float x, float y, float z);
-};
-
 extern int DAT_0101e594;
-
-struct FUN_004a3ae0_shell
-{
-    void FUN_004a3ae0();
-};
 
 extern int DAT_0101e594;
 void __fastcall FUN_004a3b50(void*);
 
-struct FUN_004a3b30_shell
-{
-    int* m_vftable;
-    void* InitializeVftable();
-};
-
-void __fastcall FUN_00626870(void* p);
 void __fastcall FUN_004a3b50(void* p);
 
 namespace fnv_004a3f90 {
@@ -910,45 +710,9 @@ struct MersenneTwister
 };
 }
 
-struct FUN_004a3fe0_shell
-{
-    void __thiscall FUN_004a3fe0(void* a, int b, char c);
-};
-
-void __cdecl FUN_00ec6f20(int, int, int, int);
-struct FUN_0049f560_Holder
-{
-    int _00;
-    int _04;
-    int _08;
-    void CallWithTwelve(int);
-};
-
-void __cdecl FUN_004a0010();
-struct S004a03f0
-{
-    void CleanupDecalEmitters();
-};
-
-void _Deallocate(void*);
-struct StandIn
-{
-    void FUN_004a2cf0();
-    void* FUN_004a0490(unsigned int);
-};
-
-struct BSCullingProcess
-{
-    void FUN_004a0f60();
-    void* FUN_004a0ff0(unsigned int flags);
-};
 void _Deallocate(void*);
 
-void __cdecl SetSelectionMask(int, int, int);
-struct Unk
-{
-    void __thiscall FUN_004a1a10(int, unsigned char);
-};
+void _Deallocate(void*);
 
 namespace fnv_004a3b00 {
 void _Deallocate(void*);
@@ -965,33 +729,9 @@ struct FUN_004a3bc0
 {
     virtual ~FUN_004a3bc0();
 };
-struct XHolder : FUN_004a3bc0
-{
-    void* DestroyAndMaybeDeallocate(unsigned int);
-};
 }  // namespace fnv_004a3b90
 
-struct FUN_004a0350_shell
-{
-    char bUnk2d;
-    char GetByteAt2D();
-};
-
-struct FUN_00456630_helper
-{
-    bool FUN_00456630(unsigned int);
-};
-
-struct FUN_004a19d0_shell
-{
-    void FUN_004a19d0();
-};
-
 namespace fnv_004a1a50 {
-struct M788
-{
-    void FUN_004ed8c0(void*);
-};
 struct bsrandom_singleton
 {
     struct MersenneTwister
@@ -1005,13 +745,6 @@ namespace fnv_004a0330 {
 struct Flt
 {
     operator unsigned int() const;
-};
-
-struct FUN_004a0330_shell
-{
-    char pad[0x10c];
-    Flt f;
-    unsigned int FUN_004a0330();
 };
 
 }  // namespace fnv_004a0330
@@ -1074,33 +807,9 @@ struct GO
     GO& operator=(void*);
 };
 
-struct FUN_004a2c00_shell
-{
-    char pad[0x34];
-    GO m_go;
-    void AssignGo(void* arg);
-};
-
 }  // namespace fnv_004a2c00
 
-struct FUN_004a3cc0_Class
-{
-    FUN_004a3cc0_Class* FUN_004a3cc0(void);
-};
-
-struct Holder
-{
-    void FUN_004a3c90(Holder*);
-};
-
-void* __fastcall FUN_004a3d00(void*);
 void* __cdecl FUN_00458b20(void);
-
-struct FUN_004a3c20
-{
-    FUN_004a3c20();
-    ~FUN_004a3c20();
-};
 
 struct StatefulObject
 {
@@ -1125,263 +834,12 @@ struct BGSDecalEmitterList
     void FUN_0049f590(DecalEmitterNode** cursor);
 };
 
-struct PendingDecalList
-{
-    void* head;
-    void* tail;
-    unsigned int count;
-};
-
-struct DecalCleanupOwner
-{
-    void* queryTexture;
-    unsigned int clearQueryTexture;
-    PendingDecalList pendingSimpleDecals;
-    BGSDecalEmitterList decalEmitters;
-    void CleanupDecalEmitters();
-};
-
-class FUN_004a0f60_sub
-{
-  public:
-    ~FUN_004a0f60_sub();
-};
-
-class FUN_004a0f60_base
-{
-  public:
-    virtual void Update();
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0c;
-    unsigned int unk10;
-    unsigned int unk14;
-    unsigned int unk18;
-    unsigned int unk1c;
-    unsigned int unk20;
-    unsigned int unk24;
-    unsigned int unk28;
-    unsigned int unk2c;
-    unsigned int unk30;
-    unsigned int unk34;
-    unsigned int unk38;
-    unsigned int unk3c;
-    unsigned int unk40;
-    unsigned int unk44;
-    unsigned int unk48;
-    unsigned int unk4c;
-    unsigned int unk50;
-    unsigned int unk54;
-    unsigned int unk58;
-    unsigned int unk5c;
-    unsigned int unk60;
-    unsigned int unk64;
-    unsigned int unk68;
-    unsigned int unk6c;
-    unsigned int unk70;
-    unsigned int unk74;
-    unsigned int unk78;
-    unsigned int unk7c;
-    unsigned int unk80;
-    unsigned int unk84;
-    unsigned int unk88;
-    unsigned int unk8c;
-    unsigned int unk90;
-    unsigned int unk94;
-    unsigned int unk98;
-    unsigned int unk9c;
-    unsigned int unka0;
-    unsigned int unka4;
-    unsigned int unka8;
-    unsigned int unkac;
-    unsigned int unkb0;
-    unsigned int unkb4;
-    unsigned int unkb8;
-    unsigned int unkbc;
-    unsigned int unkc0;
-    virtual ~FUN_004a0f60_base();
-};
-
-class FUN_004a0f60_cls : public FUN_004a0f60_base
-{
-  public:
-    FUN_004a0f60_sub m_c4;
-    virtual ~FUN_004a0f60_cls();
-};
-
 namespace CameraPass {
-struct Vec
-{
-    float x, y, z;
-    void FUN_006815c0();
-    void FUN_004a0c10();
-    void FUN_00439180(float);
-    Vec FUN_00439e90(const Vec&);
-    Vec FUN_004a0bd0();
-    Vec ApplyScaled(float);
-};
-struct Matrix
-{
-    float xx, xy, xz, yx, yy, yz, zx, zy, zz;
-    void FUN_006815c0();
-    void FUN_004a0c90(float);
-    Matrix FUN_0043f8d0(const Matrix&);
-    void FUN_00476930(int, Vec&);
-    void FUN_004769c0(int, const Vec&);
-};
-void FUN_00c4b600(Matrix*, Vec);
-struct Frustum
-{
-    float left, right, top, bottom, nearValue, farValue;
-    bool ortho;
-    Frustum(int);
-};
-struct Update
-{
-    unsigned int unk0, unk4, unk8;
-    Update(float, int, int);
-};
-struct Color
-{
-    float r, g, b, a;
-    Color(float, float, float, float);
-};
-struct Name
-{
-    const char* FUN_0043b1b0();
-};
-struct Ref
-{
-    float FUN_008d01e0();
-    Name* FUN_00413f40();
-};
-struct Query
-{
-    unsigned int unk0;
-    Query();
-    void FUN_00c4ed70();
-    void FUN_00c4edb0();
-};
-struct Input
-{
-    unsigned int unk0, unk4, unk8, unkc, unk10, unk14;
-    char unk18, unk19, unk1a;
-    bool alternate;
-    Query* query;
-    Vec FUN_004a0d60();
-    Vec FUN_004a0d30();
-    float FUN_004e3d00();
-    float FUN_00507b20();
-    float GetField11C();
-    float GetFloatAt120();
-    Ref* FUN_004a0330();
-};
-struct Scene
-{
-    void FUN_00440460(const Vec&);
-    void FUN_0043fa80(const Matrix&);
-    void FUN_00a6faf0(const Frustum&);
-    void FUN_00a59c60(Update*);
-    Vec FUN_0045bba0();
-    void* FUN_004a0d10();
-};
-struct ScenePtr
-{
-    Scene* ptr;
-    Scene* FUN_00559450();
-};
-struct Node
-{
-    void FUN_004a1020(void*);
-    void FUN_004a1040(int);
-};
-struct NodePtr
-{
-    Node* ptr;
-    Node* FUN_00559450();
-};
-struct Render
-{
-    void* FUN_00b6b260();
-};
-struct RenderPtr
-{
-    Render* ptr;
-    Render* FUN_00559450();
-    void FUN_0066b0d0(Render*);
-};
-struct Factory
-{
-    Render* FUN_00b6e110();
-};
-int __stdcall FUN_004a0e90(int);
-Factory* __stdcall FUN_004a0ea0(int, int, int, int);
-void FUN_00b6b8d0(int, void*);
 struct Resource
 {
     void FUN_004a0dd0();
 };
 Resource* __stdcall FUN_0043c4b0(void*);
-void* FUN_00450b80(int);
-struct Cull
-{
-    unsigned int unk0;
-    unsigned int unk4;
-    unsigned int unk8;
-    unsigned int unkc;
-    unsigned int unk10;
-    unsigned int unk14;
-    unsigned int unk18;
-    unsigned int unk1c;
-    unsigned int unk20;
-    unsigned int unk24;
-    unsigned int unk28;
-    unsigned int unk2c;
-    unsigned int unk30;
-    unsigned int unk34;
-    unsigned int unk38;
-    unsigned int unk3c;
-    unsigned int unk40;
-    unsigned int unk44;
-    unsigned int unk48;
-    unsigned int unk4c;
-    unsigned int unk50;
-    unsigned int unk54;
-    unsigned int unk58;
-    unsigned int unk5c;
-    unsigned int unk60;
-    unsigned int unk64;
-    unsigned int unk68;
-    unsigned int unk6c;
-    unsigned int unk70;
-    unsigned int unk74;
-    unsigned int unk78;
-    unsigned int unk7c;
-    unsigned int unk80;
-    unsigned int unk84;
-    unsigned int unk88;
-    unsigned int unk8c;
-    unsigned int unk90;
-    unsigned int unk94;
-    unsigned int unk98;
-    unsigned int unk9c;
-    unsigned int unka0;
-    unsigned int unka4;
-    unsigned int unka8;
-    unsigned int unkac;
-    unsigned int unkb0;
-    unsigned int unkb4;
-    unsigned int unkb8;
-    unsigned int unkbc;
-    unsigned int unkc0;
-    unsigned int unkc4;
-    Cull(int);
-    ~Cull();
-    void FUN_004a0fd0(Node*);
-};
-void FUN_00b6bee0(Scene*, Ref*, Cull*);
-void FUN_00b6c0d0(Scene*, Node*, int);
-void FUN_00b6b790();
 struct Setting
 {
     bool* FUN_00408d60();
@@ -1392,30 +850,11 @@ extern float DAT_0101b268, DAT_0101e2bc, DAT_01018f5c;
 extern double DAT_01011590, DAT_0101e2c0;
 extern char DAT_0101e298, DAT_0101e274, DAT_0101e24c, DAT_0101e1f8;
 void FUN_005b5e40(const char*, ...);
-void* FUN_004b3890(const Vec&, const Color&, const Vec&, const Color&, int);
-struct World
-{
-    void FUN_00458e20(void*, float);
-};
-extern World* DAT_011dea10;
-struct Camera
-{
-    RenderPtr render;
-    unsigned int unk4, unk8, unkc, unk10, unk14, unk18, unk1c;
-    NodePtr node;
-    ScenePtr scene;
-    void UpdateCamera(Input*);
-};
 }
 
 struct TESForm
 {
     unsigned int GetFormType();
-};
-class Refr_C
-{
-  public:
-    TESForm* GetAcousticSpace();
 };
 
 extern "C" __declspec(dllimport) int __stdcall QueryPerformanceFrequency(__int64* apFrequency);
@@ -1423,412 +862,29 @@ extern "C" __declspec(dllimport) int __stdcall QueryPerformanceCounter(__int64* 
 
 namespace DecalAdd {
 
-struct DecalPoint
-{
-    float x, y, z;
-    void FUN_006815c0();
-    DecalPoint FUN_00439ef0(const DecalPoint& arOther) const;
-    DecalPoint FUN_00439e90(const DecalPoint& arOther) const;
-    float FUN_00457990() const;
-    void FUN_004a0c10();
-    DecalPoint ApplyScaled(float afScale) const;
-};
-
-union DecalTicks
-{
-    struct
-    {
-        unsigned int LowPart;
-        int HighPart;
-    };
-    __int64 QuadPart;
-};
-
-struct DecalRotation
-{
-    DecalPoint FUN_004a0bd0() const;
-};
-
-struct DecalBound
-{
-    float fData[4];
-    DecalPoint* FUN_006815c0();
-    float FUN_0084d030();
-};
-
-struct DecalNode
-{
-    virtual void v00();
-    virtual void v01();
-    virtual void v02();
-    virtual DecalNode* GetNode();
-    bool FUN_004a19d0();
-    DecalBound* FUN_0043d450();
-    void* FUN_004543c0();
-};
-
-struct DecalHolder
-{
-    virtual void v00();
-    virtual void v01();
-    virtual void v02();
-    virtual void v03();
-    virtual void v04();
-    virtual void v05();
-    virtual void v06();
-    virtual void v07();
-    virtual void v08();
-    virtual void v09();
-    virtual void v0a();
-    virtual void v0b();
-    virtual void v0c();
-    virtual void v0d();
-    virtual void v0e();
-    virtual void v0f();
-    virtual void v10();
-    virtual void v11();
-    virtual void v12();
-    virtual void v13();
-    virtual void v14();
-    virtual void v15();
-    virtual void v16();
-    virtual void v17();
-    virtual void v18();
-    virtual void v19();
-    virtual void v1a();
-    virtual void v1b();
-    virtual void v1c();
-    virtual void v1d();
-    virtual void v1e();
-    virtual void v1f();
-    virtual void v20();
-    virtual void v21();
-    virtual void v22();
-    virtual void v23();
-    virtual void v24();
-    virtual void v25();
-    virtual void v26();
-    virtual void v27();
-    virtual void v28();
-    virtual void v29();
-    virtual void v2a();
-    virtual void v2b();
-    virtual void v2c();
-    virtual void v2d();
-    virtual void v2e();
-    virtual void v2f();
-    virtual void v30();
-    virtual void v31();
-    virtual void v32();
-    virtual void v33();
-    virtual void v34();
-    virtual void v35();
-    virtual void v36();
-    virtual void v37();
-    virtual void v38();
-    virtual void v39();
-    virtual void v3a();
-    virtual void v3b();
-    virtual void v3c();
-    virtual void v3d();
-    virtual void v3e();
-    virtual void v3f();
-    virtual void v40();
-    virtual void v41();
-    virtual void v42();
-    virtual void v43();
-    virtual void v44();
-    virtual void v45();
-    virtual void v46();
-    virtual void v47();
-    virtual void v48();
-    virtual void v49();
-    virtual void v4a();
-    virtual void v4b();
-    virtual void v4c();
-    virtual void v4d();
-    virtual void v4e();
-    virtual void v4f();
-    virtual void v50();
-    virtual void v51();
-    virtual void v52();
-    virtual void v53();
-    virtual void v54();
-    virtual void v55();
-    virtual void v56();
-    virtual void v57();
-    virtual void v58();
-    virtual void v59();
-    virtual void v5a();
-    virtual void v5b();
-    virtual void v5c();
-    virtual void v5d();
-    virtual void v5e();
-    virtual void v5f();
-    virtual void v60();
-    virtual void v61();
-    virtual void v62();
-    virtual void v63();
-    virtual void v64();
-    virtual void v65();
-    virtual void v66();
-    virtual void v67();
-    virtual void v68();
-    virtual void v69();
-    virtual void v6a();
-    virtual void v6b();
-    virtual void v6c();
-    virtual void v6d();
-    virtual void v6e();
-    virtual void v6f();
-    virtual void v70();
-    virtual void v71();
-    virtual void v72();
-    virtual void v73();
-    virtual DecalNode* Get3D();
-};
-
-struct DecalPlayer
-{
-    virtual void v00();
-    virtual void v01();
-    virtual void v02();
-    virtual void v03();
-    virtual void v04();
-    virtual void v05();
-    virtual void v06();
-    virtual void v07();
-    virtual void v08();
-    virtual void v09();
-    virtual void v0a();
-    virtual void v0b();
-    virtual void v0c();
-    virtual void v0d();
-    virtual void v0e();
-    virtual void v0f();
-    virtual void v10();
-    virtual void v11();
-    virtual void v12();
-    virtual void v13();
-    virtual void v14();
-    virtual void v15();
-    virtual void v16();
-    virtual void v17();
-    virtual void v18();
-    virtual void v19();
-    virtual void v1a();
-    virtual void v1b();
-    virtual void v1c();
-    virtual void v1d();
-    virtual void v1e();
-    virtual void v1f();
-    virtual void v20();
-    virtual void v21();
-    virtual void v22();
-    virtual void v23();
-    virtual void v24();
-    virtual void v25();
-    virtual void v26();
-    virtual void v27();
-    virtual void v28();
-    virtual void v29();
-    virtual void v2a();
-    virtual void v2b();
-    virtual void v2c();
-    virtual void v2d();
-    virtual void v2e();
-    virtual void v2f();
-    virtual void v30();
-    virtual void v31();
-    virtual void v32();
-    virtual void v33();
-    virtual void v34();
-    virtual void v35();
-    virtual void v36();
-    virtual void v37();
-    virtual void v38();
-    virtual void v39();
-    virtual void v3a();
-    virtual void v3b();
-    virtual void v3c();
-    virtual void v3d();
-    virtual void v3e();
-    virtual void v3f();
-    virtual void v40();
-    virtual void v41();
-    virtual void v42();
-    virtual void v43();
-    virtual void v44();
-    virtual void v45();
-    virtual void v46();
-    virtual void v47();
-    virtual void v48();
-    virtual void v49();
-    virtual void v4a();
-    virtual void v4b();
-    virtual void v4c();
-    virtual void v4d();
-    virtual void v4e();
-    virtual void v4f();
-    virtual void v50();
-    virtual void v51();
-    virtual void v52();
-    virtual void v53();
-    virtual void v54();
-    virtual void v55();
-    virtual void v56();
-    virtual void v57();
-    virtual void v58();
-    virtual void v59();
-    virtual void v5a();
-    virtual void v5b();
-    virtual void v5c();
-    virtual void v5d();
-    virtual void v5e();
-    virtual void v5f();
-    virtual void v60();
-    virtual void v61();
-    virtual void v62();
-    virtual void v63();
-    virtual void v64();
-    virtual void v65();
-    virtual void v66();
-    virtual void v67();
-    virtual void v68();
-    virtual void v69();
-    virtual void v6a();
-    virtual void v6b();
-    virtual void v6c();
-    virtual void v6d();
-    virtual void v6e();
-    virtual void v6f();
-    virtual void v70();
-    virtual void v71();
-    virtual void v72();
-    virtual void v73();
-    virtual void v74();
-    virtual void v75();
-    virtual void v76();
-    virtual void v77();
-    virtual void v78();
-    virtual void v79();
-    virtual void v7a();
-    virtual void v7b();
-    virtual void v7c();
-    virtual DecalPoint* GetPos();
-};
-
-struct DecalRequest
-{
-    DecalPoint kPos;
-    DecalPoint kWorldPosition;
-    char pad18[0xc];
-    DecalHolder* pHolder;
-    DecalNode* pTarget;
-    char pad2c[0xc];
-    float m_fGlyphWidthInPixels;
-    float m_fGlyphExtent;
-    char pad40[8];
-    DecalNode* pParent;
-    char pad4c[0x25];
-    unsigned char bRefresh;
-    char pad72[5];
-    unsigned char bForce;
-};
-
-struct DecalHitList
-{
-    int iData[3];
-    DecalHitList();
-    ~DecalHitList();
-    int FUN_0049c680(DecalNode** appNode, int aiFlags);
-    void FUN_0076b660(DecalNode** appNode);
-    void FUN_004ed900();
-};
-
-struct DecalEmitter
-{
-    void FUN_004a1a10(int aiFlag, int aiValue);
-    void FUN_006231a0(void* apNode);
-    int FUN_00622f80(DecalRequest* apRequest, const DecalPoint& arPos, float afRange);
-    DecalNode* GetCollisionFlags(int aiIndex);
-    void SetTileSetValues(int aiIndex, DecalPoint* apPos, DecalPoint* apNormal);
-};
-
-struct DecalMemContext
-{
-    int iOldContext;
-    DecalMemContext(int aiContext, bool abPush, const char* apFile, int aiLine);
-    ~DecalMemContext();
-};
-
 struct DecalBoolSetting
 {
     unsigned char* FUN_00408d60();
 };
-struct DecalIntSetting
-{
-    unsigned int* FUN_0043d4d0();
-};
 
-extern DecalPlayer* DAT_011dea3c;
-extern DecalBoolSetting DAT_011c5834;
-extern DecalBoolSetting DAT_011c5884;
-extern DecalBoolSetting DAT_011c58bc;
 extern DecalBoolSetting DAT_011c5904;
-extern DecalIntSetting DAT_011c58e4;
 extern unsigned int DAT_011c57f0;
-extern DecalEmitter* DAT_011c57e0;
-extern DecalRotation DAT_011a9484;
 
-float __cdecl FUN_004a19f0();
-float __cdecl FUN_004a1a00();
 int __cdecl FUN_005b5e40(const char* apFormat, ...);
-int __cdecl FUN_00406d00(char* apBuffer, unsigned int auiSize, const char* apFormat, ...);
-void __cdecl FUN_0040fbe0(const char* apText, int aiFlags);
-float __cdecl FUN_00404010(float a, float b);
-DecalEmitter* __cdecl FUN_00622a70(float afSize, int aiFlags);
-void* __cdecl FUN_0056f930(DecalNode* apNode);
-bool __cdecl IsAcousticSpaceFormTypeAllowed(void* apGeometry, int aiFlags);
 
 static const char s_szSourceFile[] = "D:\\_Fallout3\\Platforms\\Common\\Code\\Fallout Shared\\BGSDecalManager.cpp";
 static const char s_szSimpleDecal[] = "DECAL: Simple Decal Instantiated";
 static const char s_szTiming[] = "AddGeometryDecalRecurse: Ticks: %I64d, Microseconds: %f";
 static const char s_szSkinLimit[] = "DECAL: Reached Max Skin Decal Limit! : %d";
 
-struct DecalManager
-{
-    int iPad00;
-    bool m_bDecalsEnabled;
-
-    void FUN_004a1a70(DecalRequest* apRequest);
-    void FUN_004a2070(DecalRequest* apRequest);
-    void AddGeometryDecal(DecalRequest* apRequest, int aiType, bool abForce);
-};
-
 }
 
 // 0x004a1a70   /MT /Od /Oy- /GS /EHsc /Gy /GF
 // thiscall (ret 4), bool return.
-extern "C" int DAT_011c57e4;
 extern "C" char DAT_011c5874;
-extern "C" char DAT_011c5890;
-extern "C" char DAT_011c58a8;
-extern "C" char DAT_011c5904x;
-extern "C" char DAT_011f4a20;
 extern "C" char DAT_011c7d34[];
-extern "C" double DAT_01012060;
-extern "C" char DAT_0101e420[];
-extern "C" char DAT_0101e450[];
-extern "C" char DAT_0101e460[];
-extern "C" char DAT_0101e468[];
-extern "C" char DAT_0101e474[];
-extern "C" char DAT_0101e47c[];
-extern "C" char DAT_0101e484[];
-extern "C" char DAT_0101e490[];
 
 int FUN_005b5e40(const char* fmt, ...);
-int FUN_00ec8a19(const char* text, const char* prefix, int len);
 
 struct XObj
 {
@@ -1869,24 +925,6 @@ struct XNode
     char pad4[0xac - 4];
     XList* m_ac;
 };
-struct XTopicInfo
-{
-    unsigned int FUN_0043b480();
-    XNode* GetAt(unsigned int idx);
-};
-struct XMenuTopic
-{
-    XTopicInfo* GetTopicInfo();
-};
-struct XSetting
-{
-    int* Int();
-    unsigned char* Bool();
-};
-struct XGA
-{
-    float FUN_00450410();
-};
 
 struct XRef
 {
@@ -1907,12 +945,6 @@ struct XRef
 };
 
 struct XDoor;
-struct XLoc
-{
-    XLoc(XDoor* d);
-    ~XLoc();
-    char pad[4];
-};
 struct XDoor
 {
     XDoor(XObj* p, float f, XRef* r);
@@ -1923,25 +955,9 @@ struct XDoor
     unsigned char m1b;
     char pad2[0x144 - 0x1c];
 };
-struct XNL
-{
-    void FUN_0057c590(const XLoc& o);
-};
-struct XMgr
-{
-    char pad0[4];
-    unsigned char m4;
-    char pad5[3];
-    XNL m8;
-    bool FUN_004a1a70(XRef* ref);
-};
 
 bool FUN_0043b300(const void* rtti, XNode* obj);
 bool FUN_0045bad0(const void* name, XNode* obj);
-struct NiPoint3Sq : NiPoint3
-{
-};
-NiPoint3Sq MultiplyComponents(const NiPoint3& a, const NiPoint3& b);
 
 #include <string.h>
 namespace fnv_004a2070 {
@@ -2315,18 +1331,7 @@ struct DSetting
 extern DSetting DAT_011c5874, DAT_011c5858, DAT_011c589c;
 extern int DAT_011c57e8, DAT_011c57f0;
 extern unsigned DAT_011f444c, DAT_011c7d34;
-struct DManager
-{
-    void FUN_00973fd0(DObj*);
-};
-extern DManager DAT_011e0e80;
 bool FUN_0043b300(const void*, DObj*);
 bool FUN_0045bad0(const void*, DObj*);
 void FUN_005b5e40(const char*, ...);
-CStringProvider* FUN_004a2c60();
-int FUN_004a2c20(DProp*);
-struct DWork
-{
-    bool FUN_004a2070(DArg*);
-};
 }  // namespace fnv_004a2070

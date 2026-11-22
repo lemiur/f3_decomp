@@ -5,29 +5,12 @@
 // src/havok/common/internal/geometryprocessing/mesh/hkgpmesh.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/build/20091222_000100_aianbecldeph/source/common/internal/geometryprocessing/mesh/hkgpmesh.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-struct FUN_00e12140_cls {
-    void FUN_00e12140();
-};
-
 extern "C" void __cdecl Deallocate(void*);
-extern int DAT_010eadfc;
-
-struct FUN_00e22450 {
-    void* m_p;
-    FUN_00e22450(char f);
-};
 
 struct FUN_00e234e0_ { void FreeAllItems(); };
-struct FUN_00e238e0_ {
-    void FUN_00e238e0();
-};
 
 void __cdecl ProcessEntries();
 void __cdecl FUN_00e23a10();
-
-struct FUN_00e24a80_Class {
-    void __thiscall FUN_00e24a80();
-};
 
 struct Subobject { virtual void Release(unsigned int flags); };
 struct FUN_00e114c0_Class {
@@ -80,27 +63,6 @@ struct S_00e120e0_Collector
     virtual void Add();
 };
 void __cdecl FUN_00d1d570(void* pWorld, const S_00e120e0_Vec& kData, S_00e120e0_Collector* pCollector);
-struct S_00e120e0
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    bool TestShapeHit(S_00e120e0_Shape* pShape, float fValue, bool bFlag);
-};
 
 struct E122D0Face {
     E122D0Face* m_next;
@@ -114,23 +76,6 @@ struct E122D0Edge {
 
     E122D0Edge() {}
     E122D0Edge(E122D0Face* face, int index) : m_face(face), m_uiEdgeIndex(index) {}
-};
-
-struct E122D0Mesh {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    E122D0Face* m_faces;
-
-    E122D0Edge FindEdge(int vertexA, int vertexB);
 };
 
 struct Allocator { virtual void v00(); virtual void* allocate(int); virtual void v08(); virtual void v0c(); __declspec(nothrow) virtual void freeBlock(void*,int); };
@@ -150,75 +95,8 @@ struct FUN_00d76ca0 {__declspec(nothrow) virtual ~FUN_00d76ca0(); unsigned short
  __declspec(nothrow) void FUN_00d771c0(FourFloatVector*,int,const Options&);
  __declspec(nothrow) int FUN_00d74e10();
 };
-struct Hull {
-unsigned int unk00;
-unsigned int unk04;
-unsigned int unk08;
-unsigned int unk0c;
-unsigned int unk10;
-unsigned int unk14;
-int count;
-unsigned int unk1c;
-unsigned int unk20;
-unsigned int unk24;
-unsigned int unk28;
-unsigned int unk2c;
-unsigned int unk30;
-unsigned int unk34;
-unsigned int unk38;
-unsigned int unk3c;
-unsigned int unk40;
-unsigned int unk44;
-unsigned int unk48;
-unsigned int unk4c;
-unsigned int unk50;
-unsigned int unk54;
-unsigned int unk58;
-unsigned int unk5c;
-unsigned int unk60;
-unsigned int unk64;
-unsigned int unk68;
-unsigned int unk6c;
-unsigned int unk70;
-unsigned int unk74;
-unsigned int unk78;
-unsigned int unk7c;
-unsigned int unk80;
-unsigned int unk84;
-unsigned int unk88;
-unsigned int unk8c;
-unsigned int unk90;
-unsigned int unk94;
-unsigned int unk98;
-unsigned int unk9c;
-unsigned int unka0;
-unsigned int unka4;
-unsigned int unka8;
-unsigned int unkac;
-unsigned int unkb0;
-unsigned int unkb4;
-unsigned int unkb8;
-unsigned int unkbc;
-unsigned int unkc0;
-unsigned int unkc4;
-unsigned int unkc8;
-unsigned int unkcc;
-unsigned int unkd0;
-unsigned int unkd4;
-unsigned int unkd8;
-unsigned int unkdc;
-unsigned int unke0;
-FUN_00d76ca0* builder;
- __declspec(nothrow) void ReleaseSubobject();
- __declspec(nothrow) void FUN_00e12640(VectorArray&);
- bool BuildHull();
-};
 
 void __cdecl __debugbreak();
-int __stdcall FUN_00e230f0(int);
-extern char DAT_0103d078[];
-extern char DAT_010eaf08[];
-extern char DAT_010eaeb4[];
 struct CharBuffer
 {
     char* begin;
@@ -238,94 +116,6 @@ struct ErrorReporter
 };
 extern ErrorReporter* DAT_01268360;
 
-struct FUN_00e14fe0_node {
-    FUN_00e14fe0_node* m_pNext;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    void* m_pKey34;
-};
-
-struct FUN_00e14fe0_cls {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    FUN_00e14fe0_node* m_pHead2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5c;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6c;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7c;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8c;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9c;
-    int unka0;
-    int unka4;
-    int unka8;
-    int unkac;
-    int unkb0;
-    int unkb4;
-    int unkb8;
-    int unkbc;
-    int unkc0;
-    int unkc4;
-    int unkc8;
-    int unkcc;
-    int unkd0;
-    int unkd4;
-    int unkd8;
-    int unkdc;
-    int unke0;
-    int unke4;
-    int unke8;
-    int unkec;
-    int unkf0;
-    int unkf4;
-    int unkf8;
-    int unkfc;
-    char m_b100;
-    char m_b101;
-    void RemoveTriangle(FUN_00e14fe0_node* apNode);
-    void FUN_00e14fe0(void* apKey);
-};
-
 extern int DAT_01268370;
 
 struct ArrayHeader {
@@ -339,33 +129,7 @@ struct ArrayHeader {
     }
 };
 
-struct ArrayPair {
-    ArrayHeader m_kFirst;
-    ArrayHeader m_kSecond;
-
-    ~ArrayPair() throw();
-};
-
-struct Builder {
-    void FUN_00d76410(int aiFlag, ArrayPair* apPair) throw();
-};
-
-struct FUN_00e1d900_cls {
-    void FUN_00e1ce10(ArrayPair* apPair, int* apGlobal, int aiValue) throw();
-    void FUN_00e1d900(Builder* apBuilder);
-};
-
-struct QueryObject { virtual void First(); virtual float Evaluate(int first, int second, int mode); int IsBelowThreshold(int first, int second, float threshold); };
-
 namespace fnv_00e22520 {
-struct hkErrStreamE {
-    int m_kPointA;
-    int m_kPointB;
-    int m_iThirdValue;
-    void Init(void* buf, int size);
-    hkErrStreamE& Put(const char* s);
-    void Finish();
-};
 struct hkErrorE {
     virtual void v0();
     virtual void v1();
@@ -373,8 +137,6 @@ struct hkErrorE {
     virtual int message(int type, int id, const char* desc, const char* file, int line);
 };
 extern hkErrorE* DAT_01268360;
-extern const char s_10eae6c[];
-extern const char s_10eae18[];
 
 }  // namespace fnv_00e22520
 
@@ -388,49 +150,10 @@ struct S_00e22580_Tri {
     int unk4;
     S_00e22580_Item* m_items[3];
 };
-struct S_00e22580_Obj {
-    int unk0; int unk4; int unk8; int unkC; int unk10; int unk14; int unk18; int unk1C;
-    S_00e22580_Tri* m_20;
-};
 struct S_00e22580_Wrap {
     S_00e22580_Tri* m_tri;
     S_00e22580_Wrap(S_00e22580_Tri* t) : m_tri(t) {}
     virtual void Dummy();
-};
-struct S_00e22580_Tester {
-    virtual void v0();
-    virtual void v1();
-    virtual bool Test(S_00e22580_Wrap* a, S_00e22580_Wrap* b, float f);
-};
-struct S_00e22580_Self {
-    int unk0;
-    int m_iWordAt04;
-    int m_8;
-    S_00e22580_Tester* m_iThirdValue;
-    bool TrianglesShareItem(S_00e22580_Obj* a, S_00e22580_Obj* b);
-};
-
-struct DataBlock {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int m_i10;
-    int m_i14;
-    int m_i18;
-    int m_i1c;
-    int m_i20;
-    int m_i24;
-    int m_i28;
-    int m_i2c;
-    int m_i30;
-    int m_i34;
-    int m_i38;
-    int m_i3c;
-    int m_i40;
-    int m_i44;
-
-    DataBlock& FUN_00e22ec0(const DataBlock& arSource);
 };
 
 struct StateBlock {
@@ -792,17 +515,6 @@ struct Node
     Node* FUN_00e22ec0(Node* source);
 };
 struct Manager {};
-struct Object { Manager* manager; };
-struct This
-{
-    Object* object;
-    int ready;
-    int unk08;
-    Node* head;
-    unsigned int count;
-    Manager* FUN_00e23530();
-    void PushFront(Node* volatile source);
-};
 
 namespace fnv_00e247c0 {
 struct Node {
@@ -1035,12 +747,6 @@ struct CpuAllocatorHolder {
     CpuAllocator* allocator;
 };
 CpuAllocatorHolder* __cdecl FUN_00c85750();
-struct CpuObject {
-    unsigned int unk00;
-    unsigned short size;
-    void FUN_00e18a50();
-    CpuObject* FUN_00e24f70(unsigned int flags);
-};
 }  // namespace fnv_00e24f70
 
 struct S_00e25f00_Alloc {
@@ -1108,39 +814,6 @@ S_00e25f00* S_00e25f00::FUN_00e25f00(unsigned int flags)
         S_00e25f00_Router::GetMonitorStream().heap().ReleaseBlock(this, sizeof(S_00e25f00));
     return this;
 }
-
-struct E25FB0Node {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    unsigned int m_ppLinks[3];
-};
-
-struct E25FB0Edge {
-    E25FB0Node* m_node;
-    unsigned int m_uiEdgeIndex;
-};
-
-struct E25FB0Item {
-    char m_enabled;
-    char unk01;
-    char unk02;
-    char unk03;
-    int m_data;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-};
-
-struct E25FB0Mesh {
-    void FUN_00e25cd0(E25FB0Edge* edge, const int* data);
-    void ProcessItems(E25FB0Edge edge, const E25FB0Item* items);
-};
 
 // ---------------------------------------------------------------------------
 // hkgpMesh::IConvexOverlap - accessor for the hull the overlap was built for.
@@ -1290,23 +963,6 @@ struct ListNode {
     int m_i34;
 };
 
-struct FUN_00e12230_cls {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    ListNode* m_pHead;
-
-    void ReplaceValueInList(int oldValue, int newValue);
-};
-
 // Walks the linked list from m_pHead and replaces every node's m_i34 equal to oldValue with newValue.
 // @f3 0x00736dc0 (community match, verified in this file)
 namespace f3m_00736dc0 {
@@ -1350,17 +1006,6 @@ S_736dc0_Rec* FUN_736dc0_cls::FUN_00736dc0(int oldValue, int newValue)
 }
 }   // namespace f3m_00736dc0
 
-
-struct S_00e12920_Node {
-    S_00e12920_Node* next;
-    int unk04, unk08, unk0C, unk10;
-    unsigned int flags[3];
-};
-struct S_00e12920 {
-    int unk00,unk04,unk08,unk0C,unk10,unk14,unk18,unk1C,unk20,unk24,unk28;
-    S_00e12920_Node* head;
-    bool FUN_00e12920();
-};
 
 typedef unsigned int hkUint32;
 
@@ -1437,78 +1082,6 @@ struct ListNode {
     int m_iKey;
 };
 
-struct FUN_00e14fa0_cls {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    ListNode* m_pHead;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5c;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6c;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7c;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8c;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9c;
-    int unka0;
-    int unka4;
-    int unka8;
-    int unkac;
-    int unkb0;
-    int unkb4;
-    int unkb8;
-    int unkbc;
-    int unkc0;
-    int unkc4;
-    int unkc8;
-    int unkcc;
-    int unkd0;
-    int unkd4;
-    int unkd8;
-    int unkdc;
-    int unke0;
-    int unke4;
-    int unke8;
-    int unkec;
-    int unkf0;
-    int unkf4;
-    int unkf8;
-    int unkfc;
-    char unk100;
-    char m_bFlag;
-
-    void RemoveTriangle(ListNode* apNode);
-    void FUN_00e14fa0(int aiKey);
-};
-
 }  // namespace fnv_00e14fa0
 
 // CreateTriangle (0x00e19cf0, 101 bytes)
@@ -1567,25 +1140,6 @@ struct __declspec(align(16)) HullTriangle {
     int unk44;
     int unk48;
     int unk4C;
-};
-
-struct HullTrianglePool {
-    HullTriangle* FUN_00e241a0(HullTriangle* storage);
-};
-
-struct FUN_00e19cf0_cls {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    HullTrianglePool m_kNodePool;
-
-    void FUN_00e11710(float* a, float* b, float* c, HullPlane* out, char normalize);
-    HullTriangle* CreateTriangle(HullVertex* a, HullVertex* b, HullVertex* c);
 };
 
 extern "C" double __cdecl sqrt(double);
@@ -1696,38 +1250,11 @@ public:
     int unk08;
 };
 
-class E21CE0Error {
-public:
-    virtual void unk00();
-    virtual void unk04();
-    virtual void unk08();
-    virtual int message(int type, int id, const char* description, const char* file, int line);
-};
-
-extern E21CE0Error* g_E21CE0Error;
-
 struct VecData;
 struct Components { int x,y,z,w; void copy(const VecData* from); };
 struct VecData { int unk00,unk04,unk08,unk0c,x,y,z,w; };
-struct VectorGroup { int unk00,unk04; VecData* first; VecData* second; VecData* third; };
-struct InputPacket { int unk00,unk04,unk08,unk0c,unk10,unk14,unk18,unk1c; VectorGroup* group; };
 struct Triple { Components first,second,third; };
 int __cdecl FUN_00deab10(void*,const Triple*);
-struct FUN_00e22270_Class { int unk00; unsigned int flags; int unk08,unk0c,output; float FUN_00e22270(InputPacket*); };
-
-struct Target
-{
-    virtual void v00();
-    virtual void v01();
-    virtual void Forward(int a);
-};
-
-struct FUN_00e22470_cls
-{
-    int unk00;
-    Target* m_04;
-    void FUN_00e22470(int a);
-};
 
 struct FUN_00e22970_Item {
     int m_data[12];
@@ -1742,7 +1269,6 @@ struct FUN_00e22970_Cls {
 };
 
 void __cdecl FUN_00c908c0(void* apArg1, FUN_00e22970_Cls* apThis, int aCapacity, int aElemSize);
-extern "C" void* __cdecl memcpy(void* apDst, const void* apSrc, unsigned int aCount);
 
 struct FUN_00e229f0_cls {
     int* m_data;
@@ -1774,114 +1300,11 @@ void FUN_00e229f0_cls::AppendInts(int a1, int* pSource, int iCount)
     m_uiItemCount = newSize;
 }
 
-struct FUN_00e22c80_cls {
-    unsigned int m_00;
-    unsigned int m_04;
-    unsigned int m_08;
-
-    FUN_00e22c80_cls* FUN_00e22c80(unsigned int value, FUN_00e22c80_cls* src);
-};
-
 extern unsigned int DAT_01267e30;
-extern unsigned int DAT_01267e34;
-extern unsigned int DAT_01267e38;
-extern unsigned int DAT_01267e3c;
 extern float DAT_0104da48;
 extern unsigned int DAT_0126ebf0;
 extern unsigned int DAT_0126ebe8;
 extern unsigned int DAT_0126ebec;
-
-struct FUN_00e22ca0_cls {
-    unsigned int m_00;
-    unsigned int m_04;
-    unsigned int m_08;
-    unsigned int m_0c;
-    unsigned int m_10;
-    unsigned int m_14;
-    unsigned int m_18;
-    unsigned int m_1c;
-    unsigned int m_20;
-    unsigned int m_24;
-    unsigned int m_28;
-    unsigned int m_2c;
-    unsigned int m_30;
-    unsigned int m_34;
-    unsigned int m_38;
-    unsigned int m_3c;
-    float m_40;
-    unsigned char m_44;
-    unsigned int m_48;
-    unsigned int m_4c;
-    unsigned int m_50;
-    FUN_00e22ca0_cls();
-};
-
-struct FUN_00e22f20_cls {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    FUN_00e22f20_cls& FUN_00e22f20(const FUN_00e22f20_cls& src);
-};
-
-struct SearchItem { int unk00; int unk04; unsigned int hashX; unsigned int hashY; };
-struct SearchPath { SearchItem** nodes; int depth; };
-struct HashEntry { SearchItem* left; SearchItem* right; int result; };
-struct HashBucket { HashEntry* entries; int count; int unk08; };
-struct HashTableBase { HashBucket* buckets; unsigned int bucketCount; };
-struct SearchOwner { int LookupPairResult(SearchPath* path); };
-
-struct Entry {
-    Entry* next;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    unsigned int links[3];
-    unsigned int flags;
-};
-
-struct Ref {
-    unsigned int value;
-    unsigned int extra;
-};
-
-struct Tally {
-    int good;
-    int bad;
-};
-
-struct Scanner {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    Entry* head;
-    bool CheckLinks();
-    int Visit(Ref* ref);
-};
 
 struct PoolNode;
 
@@ -2546,28 +1969,6 @@ struct Holder
 
 FreeCtx* __cdecl FUN_00e23530(void);
 
-class FUN_00e241a0_cls
-{
-public:
-    Holder* m_00;
-    int m_04;
-    int unk08;
-    PoolNode* m_0c;
-    int m_10;
-
-    void FUN_00e241a0(void* value);
-};
-
-struct FUN_00e247a0_cls {
-    unsigned char m_00;
-    unsigned char unk01;
-    unsigned char unk02;
-    unsigned char unk03;
-    char* m_04;
-    unsigned int m_08;
-    unsigned int m_0c;
-    FUN_00e247a0_cls* FUN_00e247a0();
-};
 extern "C" void _ReadWriteBarrier(void);
 
 struct E24850Element {
@@ -2692,80 +2093,11 @@ struct AudioHolder {
 struct BSAudio;
 namespace fnvc_adapt { BSAudio* __cdecl FUN_00c85750(); }
 
-struct FUN_00d9be30_cls { int m_vptr; void FUN_00d9be30(); };
-struct FUN_00d9c010_cls { void ClearBuffers(); };
-struct FUN_00e23860_cls { void FreeAllBlocks(); };
-
 extern int DAT_010eb000;
 extern int DAT_010eaf50;
 extern int DAT_0102e388;
-extern int DAT_010d40a4;
-
-struct FUN_00e18a50_cls {
-    int m_vptr00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int m_vptr40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5c;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6c;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7c;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8c;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9c;
-    int unkA0;
-    int unkA4;
-    int unkA8;
-    int unkAc;
-    int unkB0;
-    int unkB4;
-    int unkB8;
-    int unkBc;
-    int m_data3;
-    int m_cnt3;
-    unsigned int m_cap3;
-    int m_data2;
-    int m_cnt2;
-    unsigned int m_cap2;
-    int m_data1;
-    int m_cnt1;
-    unsigned int m_cap1;
-
-    void FUN_00e18a50();
-    void ResetState();
-};
 
 namespace fnv_00e21e00 {
-extern int DAT_010eacf4;
 
 struct AudioAllocator {
     virtual void v00();
@@ -2782,12 +2114,6 @@ struct AudioHolder {
 };
 
 namespace fnvc_adapt { AudioHolder* __cdecl FUN_00c85750() throw(); }
-
-struct FUN_00e21e00_cls {
-    int m_vptr;
-
-    FUN_00e21e00_cls* FUN_00e21e00(unsigned char acFlags);
-};
 
 }  // namespace fnv_00e21e00
 
@@ -2809,12 +2135,6 @@ struct AudioHolder {
 };
 
 namespace fnvc_adapt { AudioHolder* __cdecl FUN_00c85750() throw(); }
-
-struct FUN_00e22d80_cls {
-    int m_vptr;
-
-    FUN_00e22d80_cls* FUN_00e22d80(unsigned char acFlags);
-};
 
 }  // namespace fnv_00e22d80
 
@@ -3055,15 +2375,6 @@ struct AllocHolder {
 
 namespace fnvc_adapt { AllocHolder* FUN_00c85750(); }
 
-struct FUN_00e24760_cls {
-    int unk00;
-    void* m_pData;
-    unsigned int m_08;
-    unsigned int m_0C;
-
-    void ClearAndFreeBuffer();
-};
-
 }  // namespace fnv_00e24760
 
 namespace fnv_00e27df0 {
@@ -3087,182 +2398,6 @@ namespace fnvc_adapt { AudioHolder* __cdecl FUN_00c85750() throw(); }
 extern int DAT_010eb0e0;
 extern int DAT_010eb088;
 extern int DAT_0102e388;
-
-struct FUN_00e27df0_sub10 {
-    int unk00;
-    int unk04;
-    int unk08;
-
-    void ProcessEntries();
-    void ClearAndFreeItems();
-};
-
-struct FUN_00e27df0_sub28 {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-
-    void FUN_00e23a10();
-    void FUN_00e23d70();
-};
-
-struct FUN_00e27df0_sub250 {
-    int unk00;
-
-    void FUN_00e23c70();
-};
-
-struct FUN_00e27df0_cls {
-    int m_vptr00;
-    unsigned short m_uSize;
-    unsigned short m_u06;
-    int m_vptr08;
-    int unk0c;
-    FUN_00e27df0_sub10 m_sub10;
-    int unk1c;
-    int unk20;
-    int unk24;
-    FUN_00e27df0_sub28 m_sub28;
-    void** m_pEntryData;
-    int m_iArrayLength;
-    unsigned int m_uCapBits;
-    int unk4C;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5C;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6C;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7C;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8C;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9C;
-    int unkA0;
-    int unkA4;
-    int unkA8;
-    int unkAC;
-    int unkB0;
-    int unkB4;
-    int unkB8;
-    int unkBC;
-    int unkC0;
-    int unkC4;
-    int unkC8;
-    int unkCC;
-    int unkD0;
-    int unkD4;
-    int unkD8;
-    int unkDC;
-    int unkE0;
-    int unkE4;
-    int unkE8;
-    int unkEC;
-    int unkF0;
-    int unkF4;
-    int unkF8;
-    int unkFC;
-    int unk100;
-    int unk104;
-    int unk108;
-    int unk10C;
-    int unk110;
-    int unk114;
-    int unk118;
-    int unk11C;
-    int unk120;
-    int unk124;
-    int unk128;
-    int unk12C;
-    int unk130;
-    int unk134;
-    int unk138;
-    int unk13C;
-    int unk140;
-    int unk144;
-    int unk148;
-    int unk14C;
-    int unk150;
-    int unk154;
-    int unk158;
-    int unk15C;
-    int unk160;
-    int unk164;
-    int unk168;
-    int unk16C;
-    int unk170;
-    int unk174;
-    int unk178;
-    int unk17C;
-    int unk180;
-    int unk184;
-    int unk188;
-    int unk18C;
-    int unk190;
-    int unk194;
-    int unk198;
-    int unk19C;
-    int unk1A0;
-    int unk1A4;
-    int unk1A8;
-    int unk1AC;
-    int unk1B0;
-    int unk1B4;
-    int unk1B8;
-    int unk1BC;
-    int unk1C0;
-    int unk1C4;
-    int unk1C8;
-    int unk1CC;
-    int unk1D0;
-    int unk1D4;
-    int unk1D8;
-    int unk1DC;
-    int unk1E0;
-    int unk1E4;
-    int unk1E8;
-    int unk1EC;
-    int unk1F0;
-    int unk1F4;
-    int unk1F8;
-    int unk1FC;
-    int unk200;
-    int unk204;
-    int unk208;
-    int unk20C;
-    int unk210;
-    int unk214;
-    int unk218;
-    int unk21C;
-    int unk220;
-    int unk224;
-    int unk228;
-    int unk22C;
-    int unk230;
-    int unk234;
-    int unk238;
-    int unk23C;
-    int unk240;
-    int unk244;
-    int unk248;
-    int unk24C;
-    FUN_00e27df0_sub250 m_sub250;
-
-    void FUN_00e275d0(int aiFlag);
-    FUN_00e27df0_cls* FUN_00e27df0(unsigned char acFlags);
-};
 
 }  // namespace fnv_00e27df0
 
@@ -3296,14 +2431,12 @@ extern "C" __m128 _mm_add_ss(__m128 a, __m128 b);
 extern "C" __m128 _mm_sub_ss(__m128 a, __m128 b);
 #endif
 #ifndef _INCLUDED_MM2
-extern "C" __m128 _mm_div_ss(__m128 a, __m128 b);
 #endif
 #ifndef _INCLUDED_MM2
 extern "C" __m128 _mm_shuffle_ps(__m128 a, __m128 b, unsigned int imm);
 #endif
 
 extern __m128 DAT_010c7160;    // constant vector (zero)
-extern float DAT_010c8440;     // point-in-triangle tolerance (-FLT_EPSILON)
 
 typedef __m128 SimdReal;
 static inline float ToReal(SimdReal v) { float f; _mm_store_ss(&f, v); return f; }
@@ -3330,11 +2463,6 @@ struct CastTri {
     int unk1c;
     Vec4f m_kTriangleNormal;
 };
-struct CastBody {
-    int unk00, unk04, unk08, unk0c, unk10, unk14, unk18, unk1c;
-    CastTri* m_tri;
-};
-bool __cdecl FUN_00dea6b0(const Vec4f* pkPoint, const Vec4f& kA, const Vec4f& kB, const Vec4f& kC, float fTolerance);
 
 static inline SimdReal Dot3(__m128 a, __m128 b)
 {
@@ -3342,77 +2470,16 @@ static inline SimdReal Dot3(__m128 a, __m128 b)
     return _mm_add_ss(_mm_shuffle_ps(m, m, 0xaa), _mm_add_ss(_mm_shuffle_ps(m, m, 0x55), m));
 }
 
-struct TriRayCaster {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    Vec4f m_kRayStart;
-    Vec4f m_dir;
-    CastTri* m_hitTri;
-    float m_fHitDistance;
-    float RayCastBody(CastBody* pkBody);
-};
-
-struct SceneVec {
-    float x;
-    float y;
-    float z;
-    float w;
-};
-
-struct SceneBone {
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0c;
-    SceneVec m_10;
-    __m128 m_20;
-    __m128 m_30;
-};
-
-struct SceneSet {
-    unsigned int unk00;
-    unsigned int unk04;
-    SceneBone* m_08;
-    SceneBone* m_0c;
-    SceneBone* m_10;
-};
-
 void __cdecl FUN_00cbeb70(void* v, int count, void* p);
 
 typedef unsigned int BufferAddress138;
-struct FUN_00e227f0_cls {
-    unsigned int unk00;
-    SceneSet* m_04;
-    void* FUN_00e227f0(BufferAddress138 bufferAddress);
-};
 
 struct __declspec(align(16)) S_Vec {
     float v[4];
 };
 
-struct S_00e11910_Src {
-    int unk00;
-    int unk04;
-    float* m_pVtxA;
-    float* m_pVtxB;
-    float* m_pVtxC;
-    int unk14;
-    int unk18;
-    int unk1C;
-    S_Vec m_vHitNormal;
-};
-
-struct S_00e11910_Cls {
-    char FUN_00e11710(float* a, float* b, float* c, S_Vec* out, int normalize);
-    char FUN_00e11910(S_00e11910_Src* self);
-};
-
 namespace fnv_00e11a60 {
 struct ListNode;
-
-extern __m128 g_01267e30;
 
 void __stdcall FUN_00e11910(ListNode* apNode);
 
@@ -3428,49 +2495,12 @@ struct ListNode {
     __m128 m_kVector;
 };
 
-struct FUN_00e11a60_cls {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    ListNode* m_pHead;
-    void ResetNodeVectors();
-};
-
 }  // namespace fnv_00e11a60
 
 struct E11B00Vector4 {
     __m128 m_vComponents;
 
     void mul4(const E11B00Vector4& v) { m_vComponents = _mm_mul_ps(m_vComponents, v.m_vComponents); }
-};
-
-struct E11B00Vertex {
-    E11B00Vertex* m_next;
-    int unk04;
-    int unk08;
-    int unk0C;
-    E11B00Vector4 m_vContactPosition;
-};
-
-struct E11B00Hull {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    E11B00Vertex* m_kVertices;
-
-    void updateFaces();
-    static void updateStatistics();
-    void FUN_00e11b00(const E11B00Vector4& scale);
 };
 
 __declspec(align(16)) struct S_00e12260_Vector4
@@ -3513,28 +2543,6 @@ struct S_00e12260_Collector : S_00e12260_CollectorBase
 
 void FUN_00cbeb70(const S_00e12260_Vector4* verts, int numVerts, S_00e12260_Aabb& aabbOut);
 void FUN_00d1d570(void* tree, const S_00e12260_Aabb& aabb, S_00e12260_Collector* collector);
-
-struct S_00e12260
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int FUN_00e12260(const S_00e12260_Vector4& a, const S_00e12260_Vector4& b, const S_00e12260_Vector4& c);
-};
 
 namespace fnv_00e12640 {
 struct E12640Allocator;
@@ -3582,57 +2590,7 @@ struct E12640VectorArray {
     }
 };
 
-struct E12640Vertex {
-    E12640Vertex* m_next;
-    int unk04;
-    int unk08;
-    int unk0C;
-    E12640Vector4 m_vContactPosition;
-};
-
-struct E12640Mesh {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    E12640Vertex* m_kVertices;
-    int m_iStridedVertexCount;
-
-    int FUN_00e12640(E12640VectorArray& out);
-};
-
 }  // namespace fnv_00e12640
-
-struct S_00e13660_Res {
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0c;
-    unsigned int unk10;
-    unsigned int unk14;
-    unsigned int unk18;
-    unsigned int unk1c;
-    unsigned int unk20;
-    unsigned int unk24;
-    unsigned int unk28;
-    unsigned int unk2c;
-    unsigned int unk30;
-    unsigned int unk34;
-    unsigned int unk38;
-    unsigned int unk3c;
-    float m_40;
-    unsigned char m_44;
-    unsigned int unk48;
-    unsigned int unk4c;
-    unsigned int unk50;
-    S_00e13660_Res();
-};
-
-struct FUN_00e13660_cls {
-    void FUN_00e13210(unsigned int a1, S_00e13660_Res* out);
-    float FUN_00e13660(unsigned int a1, __m128* out, bool* flag);
-};
 
 namespace fnv_00e136c0 {
 // FUN_00e136c0 (134 bytes) - Fallout: New Vegas
@@ -3673,8 +2631,6 @@ namespace fnv_00e136c0 {
 // out of the source shape.
 
 
-
-extern double DAT_01034208;               // 0x01034208 = __real@4018000000000000
 
 // A holder object: the three per-node values live in the member at +0x10.
 struct VecHolder
@@ -3725,26 +2681,6 @@ struct ListNode
     VecHolder* m_10;
 };
 
-class FUN_00e136c0_cls
-{
-public:
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0C;
-    unsigned int unk10;
-    unsigned int unk14;
-    unsigned int unk18;
-    unsigned int unk1C;
-    unsigned int unk20;
-    unsigned int unk24;
-    unsigned int unk28;
-    ListNode* m_2c;
-
-    bool FUN_00e12920();
-    float FUN_00e136c0() throw();
-};
-
 }  // namespace fnv_00e136c0
 
 typedef unsigned int HullU32;
@@ -3784,12 +2720,6 @@ struct HullTriListAN
         m_iAllocatedCount--;
         release(t);
     }
-};
-struct HullImplAN
-{
-    int unk00, unk04, unk08, unk0c, unk10, unk14, unk18, unk1c;
-    HullTriListAN m_uiTriangleCount;
-    void RemoveTriangle(HullTriAN* t);
 };
 
 namespace fnv_00e157f0 {
@@ -3889,90 +2819,17 @@ void* FUN_00e191a0_cls::FUN_00e191a0(void* pResult, unsigned int a2, unsigned in
 }
 }  // namespace fnv_00e191a0
 
-struct WeightedVertex {
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0c;
-    __m128 position;
-};
-
-struct VertexTriple {
-    unsigned int unk00;
-    unsigned int unk04;
-    WeightedVertex* first;
-    WeightedVertex* second;
-    WeightedVertex* third;
-};
-
-struct FUN_00e21ed0_Class {
-    unsigned int unk00;
-    VertexTriple* vertices;
-    void SelectDominantVertex(const __m128* direction, __m128* output);
-};
-
 static __forceinline __m128 Dot3(__m128 product)
 {
     __m128 xy = _mm_add_ss(_mm_shuffle_ps(product, product, 0x55), product);
     return _mm_add_ss(_mm_shuffle_ps(product, product, 0xaa), xy);
 }
 
-struct Vec4 {
-    __m128 m_vComponents;
-};
-
 struct __declspec(align(16)) Float4 {
     float x;
     float y;
     float z;
     float w;
-};
-
-struct FUN_00e221e0_Vertex {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    Vec4 unk10;
-};
-
-struct FUN_00e221e0_Triangle {
-    int unk00;
-    int unk04;
-    FUN_00e221e0_Vertex* unk08;
-    FUN_00e221e0_Vertex* unk0C;
-    FUN_00e221e0_Vertex* unk10;
-};
-
-struct FUN_00e221e0_Input {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    FUN_00e221e0_Triangle* unk20;
-};
-
-float __cdecl FUN_00de9f10(const Vec4* point, const Vec4* a, const Vec4* b, const Vec4* c, Float4* closest, Float4* weights);
-
-struct FUN_00e221e0_Collector {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    Vec4 unk10;
-    float unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    Vec4 unk30;
-    Vec4 unk40;
-    FUN_00e221e0_Triangle* unk50;
-
-    float UpdateClosestPoint(FUN_00e221e0_Input* input);
 };
 
 struct PoolItemAB {
@@ -4041,27 +2898,6 @@ void FUN_00e22f90_cls::FUN_00e22f90(PoolItemAB* item)
 #ifndef _INCLUDED_MM2
 extern "C" __m128 _mm_sub_ps(__m128 a, __m128 b);
 #endif
-extern int DAT_010eade0;
-struct FUN_00e121c0_probe {
-    int m_vptr;
-    int unk04;
-    int unk08;
-    int unk0c;
-    float m_v10x;
-    float m_v10y;
-    float m_v10z;
-    float m_v10w;
-    float m_v20x;
-    float m_v20y;
-    float m_v20z;
-    float m_v20w;
-    int m_i30;
-    float m_f34;
-};
-void __cdecl FUN_00d1d0b0(void* owner, const void* a, const void* b, FUN_00e121c0_probe* out, float f);
-struct FUN_00e121c0_cls {
-    float FUN_00e121c0(const __m128* a, const __m128* b, int* outI);
-};
 
 struct TriangleNode {
     TriangleNode* m_next;
@@ -4163,56 +2999,6 @@ struct __declspec(align(16)) hkVector4E15 {
     float z;
     float w;
 };
-struct hkAabbE15 {
-    hkVector4E15 m_kMinimumCorner;
-    hkVector4E15 m_kMaximumCorner;
-};
-struct TriangleE15 {
-    hkVector4E15 m_kVertices[3];
-};
-struct VertexE15 {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    hkVector4E15 m_vContactPosition;
-};
-struct TriangleEntryE15 {
-    int unk00;
-    int unk04;
-    VertexE15* m_pkVertices[3];
-};
-void __cdecl CalcAabbE15(const hkVector4E15* pkPoints, int iNumPoints, hkAabbE15& kAabbOut);
-int __cdecl TrianglesOverlapE15(const TriangleE15* pkA, const TriangleE15* pkB);
-class AabbCollectorE15 {
-public:
-    virtual void AddHit(TriangleEntryE15* pkEntry);
-    hkArrayE15<TriangleEntryE15*> m_kHits;
-};
-struct BroadPhaseE15 {
-};
-void __cdecl QueryAabbE15(BroadPhaseE15* pkBroadPhase, const hkAabbE15& kAabb, AabbCollectorE15* pkCollector);
-class TriangleQueryE15 {
-public:
-    void FUN_00e15220(const hkVector4E15& kA, const hkVector4E15& kB, const hkVector4E15& kC, hkArrayE15<TriangleEntryE15*>* pkOverlapsOut) throw();
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    BroadPhaseE15 m_kBroadPhase;
-};
 
 namespace fnv_00e15ab0 {
 struct MeshFaceList {
@@ -4230,7 +3016,6 @@ struct MeshFaceList {
         FUN_00e22f90(face);
     }
 };
-struct FanAnchor474 { S_00e13910_Triangle* triangle; void* vertex; unsigned int index; };
 struct EdgeMesh {
     int unk00, unk04, unk08, unk0c, unk10, unk14, unk18, unk1c;
     MeshFaceList faces;
@@ -4243,90 +3028,11 @@ struct hkVector4 {
     __m128 v;
 };
 
-struct FUN_00e21d40_cls {
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0C;
-    hkVector4 m_10;
-    hkVector4 m_20;
-
-    void FUN_00e21d40(const hkVector4* dir, hkVector4* out);
-};
-
-struct T27Node {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    unsigned int m_ppLinks[3];
-};
-
-struct T27Edge {
-    T27Node* m_node;
-    unsigned int m_uiEdgeIndex;
-};
-
-struct T27Slot {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    void Assign(unsigned int value);
-};
-
-struct T27Item {
-    char m_enabled;
-    char unk01;
-    char unk02;
-    char unk03;
-    T27Slot m_data;
-};
-
-struct T27Cls {
-    unsigned int LookupPairResult(T27Edge* path);
-    void FUN_00e27450(T27Edge* path);
-    unsigned __int64 FUN_00e27ae0(T27Edge edge, T27Item* items);
-};
-
 struct __declspec(align(16)) S_00e11a90_Vec {
     int x;
     int y;
     int z;
     int w;
-};
-
-struct FUN_00c7f640_Obj {
-    int x;
-    int y;
-    int z;
-    int w;
-
-    void __thiscall FUN_00c7f640(int value, S_00e11a90_Vec* data);
-};
-
-struct S_00e11a90_Node {
-    S_00e11a90_Node* next;
-    int unk04;
-    int unk08;
-    int unk0C;
-    FUN_00c7f640_Obj vec;
-};
-
-struct S_00e11a90_Class {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    S_00e11a90_Node* head;
-
-    void ResetNodeVectors();
-    void __thiscall FUN_00e11a90(int value);
 };
 
 __declspec(nothrow) void ReleaseSubobject();
@@ -4337,27 +3043,6 @@ extern "C" __m128 _mm_sub_ps(__m128 a, __m128 b);
 #ifndef _INCLUDED_MM2
 extern "C" __m128 _mm_sqrt_ss(__m128 a);
 #endif
-
-struct S_00e12360_Vtx {
-    int unk00, unk04, unk08, unk0c;
-    __m128 pos;
-};
-struct S_00e12360_Node {
-    S_00e12360_Node* next;
-    S_00e12360_Node* prev;
-    S_00e12360_Vtx* v0;
-    S_00e12360_Vtx* v1;
-    S_00e12360_Vtx* v2;
-};
-struct S_00e12360_Mesh {
-    int unk00, unk04, unk08, unk0c, unk10, unk14, unk18, unk1c;
-    int unk20, unk24, unk28;
-    S_00e12360_Node* head;
-};
-
-struct S_00e12360_This : S_00e12360_Mesh {
-    void FUN_00e12360(float scale);
-};
 
 struct HullFloodTriangle {
     HullFloodTriangle* m_next;
@@ -4396,12 +3081,6 @@ inline void HullFloodStack::AddBack(const HullFloodEdge& edge) {
     ::new (static_cast<void*>(m_data + m_iElementCount)) HullFloodEdge(edge);
     m_iElementCount++;
 }
-struct HullConnectivity {
-    int unk00; int unk04; int unk08; int unk0c; int unk10; int unk14; int unk18; int unk1c;
-    int unk20; int unk24; int unk28;
-    HullFloodTriangle* m_pFirstNode;
-    int FUN_00e12960();
-};
 
 struct Vertex {
     Vertex* m_next;
@@ -4480,19 +3159,6 @@ struct VertexList {
     }
 };
 
-struct HullMesh {
-    int unk00;
-    int unk04;
-    VertexList m_kVertices;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    Triangle* m_uiTriangleCount;
-
-    void FUN_00e12bc0(Vertex* from, Vertex* to);
-};
-
 #ifndef _INCLUDED_MM2
 extern "C" __m128 _mm_load_ss(const float *p);
 #endif
@@ -4500,47 +3166,12 @@ extern "C" __m128 _mm_load_ss(const float *p);
 extern "C" __m128 _mm_set_ps1(float f);
 #endif
 
-extern const float DAT_0104a494;
 extern float DAT_0106c2e0;
 
 struct S_00e14160_Vec {
     float x, y, z, w;
     __m128& quad() { return reinterpret_cast<__m128&>(*this); }
     const __m128& quad() const { return reinterpret_cast<const __m128&>(*this); }
-};
-
-struct S_00e14160_Node {
-    S_00e14160_Node* m_next;
-    int unk04;
-    int unk08;
-    int unk0c;
-    S_00e14160_Vec m_pos;
-};
-
-struct S_00e14160_Tri {
-    S_00e14160_Tri* m_next;
-    int unk04;
-    S_00e14160_Node* m_kPointA;
-    S_00e14160_Node* m_kPointB;
-    S_00e14160_Node* m_iThirdValue;
-};
-
-struct S_00e14160 {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    S_00e14160_Node* m_kNodeCollection;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    S_00e14160_Tri* m_tris;
-
-    float FUN_00e13660(const S_00e14160_Vec& p, S_00e14160_Vec* out, int flag);
-    float FUN_00e14160(const S_00e14160_Vec& dir, float limit);
 };
 
 #ifndef _INCLUDED_MM2
@@ -4668,20 +3299,6 @@ struct E14a90List {
     }
 };
 
-struct E14a90Owner {
-    int unk;
-    int unkCur;
-    E14a90List m_verts;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    E14a90Node* m_tris;
-
-    void ReleaseSubobject();
-    int FUN_00e14a90();
-};
-
 #ifndef _INCLUDED_MM2
 extern "C" __m128 _mm_load_ss(const float*);
 #endif
@@ -4690,41 +3307,7 @@ extern float DAT_01012054;
 
 void __cdecl ResizeAudioStream(void* alloc, void* sizePtr, int elemSize) throw();
 
-struct EdgeNode : S_00e13910_Triangle {
-    __m128 m_20;
-    int m_30;
-};
-
 typedef S_00e13910_Edge PairItem;
-
-struct PairArray {
-    PairItem* m_data;
-    int m_iElementCount;
-    int m_cap;
-};
-
-struct EdgeMeshFlip {
-    int unk00, unk04, unk08, unk0c, unk10, unk14, unk18, unk1c, unk20, unk24, unk28;
-    EdgeNode* m_2c;
-    int unk30; int unk34; int unk38; int unk3c;
-    int unk40; int unk44; int unk48; int unk4c;
-    int unk50; int unk54; int unk58; int unk5c;
-    int unk60; int unk64; int unk68; int unk6c;
-    int unk70; int unk74; int unk78; int unk7c;
-    int unk80; int unk84; int unk88; int unk8c;
-    int unk90; int unk94; int unk98; int unk9c;
-    int unka0; int unka4; int unka8; int unkac;
-    int unkb0; int unkb4; int unkb8; int unkbc;
-    int unkc0; int unkc4; int unkc8; int unkcc;
-    int unkd0; int unkd4; int unkd8; int unkdc;
-    int unke0; int unke4; int unke8; int unkec;
-    int unkf0; int unkf4; int unkf8; int unkfc;
-    unsigned char unk100;
-    unsigned char m_101;
-
-    void FUN_00e124d0(PairArray* arr);
-    void FUN_00e150e0(int a1);
-};
 
 #ifndef _INCLUDED_MM2
 extern "C" __m128 _mm_sub_ps(__m128 a, __m128 b);
@@ -4802,19 +3385,6 @@ struct E153F0Edge
     const E153F0Vector4& end() const { return ((E153F0Vertex*)m_face->m_kVertices[next(m_uiEdgeIndex)])->m_vContactPosition; }
 };
 
-struct E153F0Edges
-{
-    E153F0Edge* m_data;
-    int m_iElementCount;
-};
-
-struct E153F0Aabb
-{
-    E153F0Vector4 m_kMinimumCorner;
-    E153F0Vector4 m_kMaximumCorner;
-};
-
-
 struct __declspec(align(16)) VecE21F {
     float x, y, z, w;
 };
@@ -4825,34 +3395,6 @@ struct __declspec(align(16)) AabbE21F {
 };
 
 void __cdecl FUN_00cbeb70(const VecE21F* pElementBuffer, int iNumPoints, AabbE21F& kAabbOut);
-
-struct VertE21F {
-    int unk;
-    int unkCur;
-    int unkValue;
-    int unk0c;
-    VecE21F m_pos;
-};
-
-struct TriE21F {
-    int unk;
-    int unkCur;
-    VertE21F* m_verts[3];
-};
-
-class FUN_00e21fc0_cls {
-public:
-    int unk;
-    TriE21F* m_tri;
-
-    AabbE21F FUN_00e21fc0() const;
-};
-
-struct FUN_00e226b0_cls {
-    unsigned int unk00;
-    SceneSet* m_04;
-    void FUN_00e226b0(SceneVec* v, SceneVec* out);
-};
 
 #ifndef _INCLUDED_MM2
 extern "C" __m128 _mm_sub_ps(__m128 a, __m128 b);
@@ -4913,164 +3455,10 @@ struct FUN_00e25ba0_Table {
 
 extern "C" void __cdecl FUN_00c908c0(MemAllocator* alloc, FUN_00e25ba0_Table* table, int newCap, int elemSize);
 
-struct FUN_00e25ba0_cls {
-    int unk0000;
-    int unk0004;
-    int unk0008;
-    int unk000C;
-    int unk0010;
-    int unk0014;
-    int unk0018;
-    int unk001C;
-    int unk0020;
-    int unk0024;
-    int unk0028;
-    int unk002C;
-    int unk0030;
-    int unk0034;
-    int unk0038;
-    int unk003C;
-    int unk0040;
-    int unk0044;
-    int unk0048;
-    int unk004C;
-    int unk0050;
-    int unk0054;
-    int unk0058;
-    int unk005C;
-    int unk0060;
-    int unk0064;
-    int unk0068;
-    int unk006C;
-    int unk0070;
-    int unk0074;
-    int unk0078;
-    int unk007C;
-    int unk0080;
-    int unk0084;
-    int unk0088;
-    int unk008C;
-    int unk0090;
-    int unk0094;
-    int unk0098;
-    int unk009C;
-    int unk00A0;
-    int unk00A4;
-    int unk00A8;
-    int unk00AC;
-    int unk00B0;
-    int unk00B4;
-    int unk00B8;
-    int unk00BC;
-    int unk00C0;
-    int unk00C4;
-    int unk00C8;
-    int unk00CC;
-    int unk00D0;
-    int unk00D4;
-    int unk00D8;
-    int unk00DC;
-    int unk00E0;
-    int unk00E4;
-    int unk00E8;
-    int unk00EC;
-    int unk00F0;
-    int unk00F4;
-    int unk00F8;
-    int unk00FC;
-    int unk0100;
-    int unk0104;
-    int unk0108;
-    int unk010C;
-    int unk0110;
-    int unk0114;
-    int unk0118;
-    int unk011C;
-    int unk0120;
-    int unk0124;
-    int unk0128;
-    int unk012C;
-    int unk0130;
-    int unk0134;
-    int unk0138;
-    int unk013C;
-    int unk0140;
-    int unk0144;
-    int unk0148;
-    int unk014C;
-    int unk0150;
-    int unk0154;
-    int unk0158;
-    int unk015C;
-    int unk0160;
-    int unk0164;
-    int unk0168;
-    int unk016C;
-    int unk0170;
-    int unk0174;
-    int unk0178;
-    int unk017C;
-    int unk0180;
-    int unk0184;
-    int unk0188;
-    int unk018C;
-    int unk0190;
-    int unk0194;
-    int unk0198;
-    int unk019C;
-    int unk01A0;
-    int unk01A4;
-    int unk01A8;
-    int unk01AC;
-    int unk01B0;
-    int unk01B4;
-    int unk01B8;
-    int unk01BC;
-    int unk01C0;
-    int unk01C4;
-    int unk01C8;
-    int unk01CC;
-    int unk01D0;
-    int unk01D4;
-    int unk01D8;
-    int unk01DC;
-    int unk01E0;
-    int unk01E4;
-    int unk01E8;
-    int unk01EC;
-    int unk01F0;
-    int unk01F4;
-    int unk01F8;
-    int unk01FC;
-    int unk0200;
-    int unk0204;
-    int unk0208;
-    int unk020C;
-    int unk0210;
-    int unk0214;
-    int unk0218;
-    int unk021C;
-    int unk0220;
-    int unk0224;
-    int unk0228;
-    int unk022C;
-    int unk0230;
-    int unk0234;
-    int unk0238;
-    int unk023C;
-    int unk0240;
-    int unk0244;
-    int unk0248;
-    FUN_00e25ba0_Table* m_pTable;
-
-    void FUN_00e25ba0();
-};
-
 namespace fnv_00e27450 {
 struct Vertex { int unk00; int unk04; int m_uiX; int m_uiY; };
 struct VKey { int m_k; VKey(const Vertex* v) : m_k((v->m_uiX << 15) + v->m_uiY) {} };
 struct Triangle { int unk00; int unk04; Vertex* m_v[3]; };
-struct EdgeRef { Triangle* m_tri; int m_idx; };
 struct EdgeEntry { Vertex* m_kPointA; Vertex* m_kPointB; int m_uiFilterValue; };
 __forceinline void copyEntry(void* dst, const void* src)
 {
@@ -5119,161 +3507,7 @@ struct EdgeMap {
         if (bucket->indexOf(a,b) >= 0) bucket->remove(a,b);
     }
 };
-struct EdgeSet { void FUN_00e24e40(int value); };
 
-struct EdgeOwner {
-    int unk000;
-    int unk004;
-    int unk008;
-    int unk00c;
-    int unk010;
-    int unk014;
-    int unk018;
-    int unk01c;
-    int unk020;
-    int unk024;
-    int unk028;
-    int unk02c;
-    int unk030;
-    int unk034;
-    int unk038;
-    int unk03c;
-    int unk040;
-    int unk044;
-    int unk048;
-    int unk04c;
-    int unk050;
-    int unk054;
-    int unk058;
-    int unk05c;
-    int unk060;
-    int unk064;
-    int unk068;
-    int unk06c;
-    int unk070;
-    int unk074;
-    int unk078;
-    int unk07c;
-    int unk080;
-    int unk084;
-    int unk088;
-    int unk08c;
-    int unk090;
-    int unk094;
-    int unk098;
-    int unk09c;
-    int unk0a0;
-    int unk0a4;
-    int unk0a8;
-    int unk0ac;
-    int unk0b0;
-    int unk0b4;
-    int unk0b8;
-    int unk0bc;
-    int unk0c0;
-    int unk0c4;
-    int unk0c8;
-    int unk0cc;
-    int unk0d0;
-    int unk0d4;
-    int unk0d8;
-    int unk0dc;
-    int unk0e0;
-    int unk0e4;
-    int unk0e8;
-    int unk0ec;
-    int unk0f0;
-    int unk0f4;
-    int unk0f8;
-    int unk0fc;
-    int unk100;
-    int unk104;
-    int unk108;
-    int unk10c;
-    int unk110;
-    int unk114;
-    int unk118;
-    int unk11c;
-    int unk120;
-    int unk124;
-    int unk128;
-    int unk12c;
-    int unk130;
-    int unk134;
-    int unk138;
-    int unk13c;
-    int unk140;
-    int unk144;
-    int unk148;
-    int unk14c;
-    int unk150;
-    int unk154;
-    int unk158;
-    int unk15c;
-    int unk160;
-    int unk164;
-    int unk168;
-    int unk16c;
-    int unk170;
-    int unk174;
-    int unk178;
-    int unk17c;
-    int unk180;
-    int unk184;
-    int unk188;
-    int unk18c;
-    int unk190;
-    int unk194;
-    int unk198;
-    int unk19c;
-    int unk1a0;
-    int unk1a4;
-    int unk1a8;
-    int unk1ac;
-    int unk1b0;
-    int unk1b4;
-    int unk1b8;
-    int unk1bc;
-    int unk1c0;
-    int unk1c4;
-    int unk1c8;
-    int unk1cc;
-    int unk1d0;
-    int unk1d4;
-    int unk1d8;
-    int unk1dc;
-    int unk1e0;
-    int unk1e4;
-    int unk1e8;
-    int unk1ec;
-    int unk1f0;
-    int unk1f4;
-    int unk1f8;
-    int unk1fc;
-    int unk200;
-    int unk204;
-    int unk208;
-    int unk20c;
-    int unk210;
-    int unk214;
-    int unk218;
-    int unk21c;
-    int unk220;
-    int unk224;
-    int unk228;
-    int unk22c;
-    int unk230;
-    int unk234;
-    int unk238;
-    int unk23c;
-    int unk240;
-    int unk244;
-    int unk248;
-    EdgeMap* m_map;
-    EdgeSet m_set;
-    void FUN_00e27450(const EdgeRef& e);
-    void FUN_00e27400();
-};
 }  // namespace fnv_00e27450
 
 namespace fnv_00e126c0 {
@@ -5307,42 +3541,6 @@ struct hkArray {
     __forceinline T* expandBy(int n) { return _expandBy(FUN_00c85750().getHeap(), n); }
 };
 
-struct hkGeometryTriangle {
-    int m_kPointA;
-    int m_kPointB;
-    int m_iThirdValue;
-    int m_iMaterialIndex;
-};
-
-struct hkGeometry {
-    hkArray<hkVector4> m_kVertices;
-    hkArray<hkGeometryTriangle> m_uiTriangleCount;
-};
-
-struct hkgpVertex {
-    hkgpVertex* m_next;
-    int unk04;
-    int unk08;
-    int unk0c;
-    hkVector4 m_pObservedSource;
-};
-
-struct hkgpTriangle {
-    hkgpTriangle* m_next;
-    int unk04;
-    hkgpVertex* m_kVertices[3];
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int m_iMaterialIndex;
-};
-
 struct HashEntryTable {
     void* m_kPrimitiveElement;
     int m_iCapacityFlags;
@@ -5367,36 +3565,7 @@ struct PointerKeyIntegerMap {
     ~PointerKeyIntegerMap() { m_map.ClearAndRelease(FUN_00c85750().getHeap()); }
 };
 
-struct hkgpConvexHullImpl {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    hkgpVertex* m_firstVertex;
-    int m_iStridedVertexCount;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    hkgpTriangle* m_firstTriangle;
-    int m_iTriangleCount;
-
-    void FUN_00e126c0(hkGeometry& geom, bool flip);
-};
-
 }  // namespace fnv_00e126c0
-
-struct HkV4 {
-    __m128 m_vComponents;
-};
-struct HkVert {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    HkV4 m_vContactPosition;
-};
 
 struct __declspec(align(16)) Vec4F {
     float m_uiX;
@@ -5419,12 +3588,6 @@ struct __declspec(align(16)) Mat3Diffs {
 #ifndef _INCLUDED_MM2
 extern "C" __m128 _mm_load_ss(const float*);
 #endif
-
-struct CollideShape
-{
-    double FUN_00e13660(__m128* out, const __m128* v, unsigned char* flag);
-    float FUN_00e144d0(float x, __m128* a, __m128* out, int count);
-};
 
 struct __declspec(align(16)) Float4Bits
 {
@@ -5450,9 +3613,7 @@ extern "C" __m128 _mm_setr_ps(float, float, float, float);
 extern "C" __m128 _mm_load_ss(const float*);
 #endif
 #ifndef _INCLUDED_MM2
-extern "C" __m128 _mm_unpacklo_ps(__m128, __m128);
 #endif
-extern __m128 DAT_010c71d0;
 extern const float DAT_01011d78;
 void __cdecl ResizeAudioStream(void*, void*, int) throw();
 
@@ -5461,8 +3622,6 @@ struct __declspec(align(16)) CellVec {
     __m128& quad() { return reinterpret_cast<__m128&>(*this); }
     const __m128& quad() const { return reinterpret_cast<const __m128&>(*this); }
 };
-struct CellBounds { CellVec min, max; };
-void __cdecl FUN_00de9590(CellBounds*) throw();
 struct BuildInput { FourFloatVector* data; int count, stride; };
 struct BuildOptions {
     int unk00, unk04, unk08, unk0c;
@@ -5514,38 +3673,12 @@ template<class T> struct CellArray {
         data = 0; capacity = 0x80000000;
     }
 };
-struct CellMesh {
-    void FUN_00e12640(CellArray<FourFloatVector>&) throw();
-    CellBounds FUN_00e11530() throw();
-    float FUN_00e13660(const CellVec&, CellVec*, bool*) throw();
-    void CollectPoints(int depthLimit, float scale, CellArray<CellVec>& output, bool invert);
-};
-
-struct FUN_00e21dd0_cls { __m128 unk00; __m128 unk10; __m128 unk20; void FUN_00e21dd0(__m128* result); };
 
 #ifndef _INCLUDED_MM2
 extern "C" __m128 _mm_load_ss(const float* p);
 #endif
 
 extern float DAT_01016248;
-
-struct FUN_00e21e60_pair {
-    __m128 m_v00;
-    __m128 m_v10;
-    unsigned int m_u20;
-};
-
-struct FUN_00e21e60_cls {
-    float unk00;
-    float unk04;
-    float unk08;
-    float unk0C;
-    __m128 m_v10;
-    float m_f20;
-    unsigned int m_u24;
-
-    float FUN_00e21e60(FUN_00e21e60_pair* p);
-};
 
 namespace fnv_00e22480 {
 extern float DAT_01011d78;
@@ -5556,12 +3689,6 @@ __declspec(align(16)) struct Vec4Packet {
     unsigned int m_uiY;
     unsigned int m_uiZ;
     unsigned int m_w;
-};
-
-struct FUN_00e22480_cls {
-    virtual void Slot00();
-    virtual void Slot01(Vec4Packet* out, unsigned int arg);
-    void FUN_00e22480(unsigned int a1, unsigned int a2, unsigned int a3);
 };
 
 }  // namespace fnv_00e22480
@@ -5610,164 +3737,6 @@ struct LocResult
     LocResult(int type, const LocEdge& e) : m_type(type), m_kEdge(e.m_pkTriangle, e.m_uiEdgeIndex) {}
 };
 
-struct LocTriangulator
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    LocTriangle* m_pHeadNode;
-    int m_maxIterations;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5c;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6c;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7c;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8c;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9c;
-    int unka0;
-    int unka4;
-    int unka8;
-    int unkac;
-    int unkb0;
-    int unkb4;
-    int unkb8;
-    int unkbc;
-    int unkc0;
-    int unkc4;
-    int unkc8;
-    int unkcc;
-    int unkd0;
-    int unkd4;
-    int unkd8;
-    int unkdc;
-    int unke0;
-    int unke4;
-    int unke8;
-    int unkec;
-    int unkf0;
-    int unkf4;
-    int unkf8;
-    int unkfc;
-    int unk100;
-    int unk104;
-    int unk108;
-    int unk10c;
-    int unk110;
-    int unk114;
-    int unk118;
-    int unk11c;
-    int unk120;
-    int unk124;
-    int unk128;
-    int unk12c;
-    int unk130;
-    int unk134;
-    int unk138;
-    int unk13c;
-    int unk140;
-    int unk144;
-    int unk148;
-    int unk14c;
-    int unk150;
-    int unk154;
-    int unk158;
-    int unk15c;
-    int unk160;
-    int unk164;
-    int unk168;
-    int unk16c;
-    int unk170;
-    int unk174;
-    int unk178;
-    int unk17c;
-    int unk180;
-    int unk184;
-    int unk188;
-    int unk18c;
-    int unk190;
-    int unk194;
-    int unk198;
-    int unk19c;
-    int unk1a0;
-    int unk1a4;
-    int unk1a8;
-    int unk1ac;
-    int unk1b0;
-    int unk1b4;
-    int unk1b8;
-    int unk1bc;
-    int unk1c0;
-    int unk1c4;
-    int unk1c8;
-    int unk1cc;
-    int unk1d0;
-    int unk1d4;
-    int unk1d8;
-    int unk1dc;
-    int unk1e0;
-    int unk1e4;
-    int unk1e8;
-    int unk1ec;
-    int unk1f0;
-    int unk1f4;
-    int unk1f8;
-    int unk1fc;
-    int unk200;
-    int unk204;
-    int unk208;
-    int unk20c;
-    int unk210;
-    int unk214;
-    int unk218;
-    int unk21c;
-    int unk220;
-    int unk224;
-    int unk228;
-    int unk22c;
-    int unk230;
-    int unk234;
-    int unk238;
-    int unk23c;
-    int unk240;
-    int unk244;
-    int unk248;
-    int unk24c;
-    int unk250;
-    int unk254;
-    int unk258;
-
-    LocTriangle* m_grid[256];
-    LocResult LocatePoint(int x, int y);
-};
-
 #include <math.h>
 #ifndef _INCLUDED_MM2
 extern "C" __m128 _mm_sub_ps(__m128,__m128);
@@ -5792,11 +3761,7 @@ struct EVec {
     __m128 dot(const EVec& a) const {__m128 v=_mm_mul_ps(quad(),a.quad());return _mm_add_ss(_mm_shuffle_ps(v,v,0xaa),_mm_add_ss(_mm_shuffle_ps(v,v,0x55),v));}
     char* FUN_00c7f520(char* out, float tolerance);
 };
-struct EVertex { int unk00,unk04,unk08,unk0c; EVec position; };
 struct ELocalVec {union {EVec scalar; __m128 simd;}; ELocalVec(const EVec& v) {scalar=v;}};
-struct EFace { EFace* next; int unk04; EVertex* vertices[3]; unsigned int edges[3]; EVec normal; };
-struct ENode { ENode* next; int unk04,unk08,unk0c; EVec position,normal; };
-struct EParams {float value,spacing,tolerance,offset,angle; unsigned char flag14,flag15,flag16,flag17; int filter;};
 struct EArray {EVec* data; int size; unsigned int capacity;};
 struct EAppend {
  EArray* owner; EVec* dest;
@@ -5804,16 +3769,7 @@ struct EAppend {
  ~EAppend() {++owner->size;}
  operator EVec&() {return *dest;}
 };
-struct EMatrix {EVec rows[3]; __declspec(noalias) EVec* FUN_00cd51c0(EVec* out);};
 void __cdecl ResizeAudioStream(void*,void*,int);
-struct EMesh {
-    int unk00,unk04,unk08,unk0c,unk10;
-    ENode* nodes;
-    int unk18,unk1c,unk20,unk24,unk28;
-    EFace* faces;
-    __declspec(noalias) float FUN_00e16e50(float value,EVec* point,int filter);
-    void FUN_00e17010(EParams* p,EArray* out);
-};
 
 struct S_00e21e30_Alloc {
     virtual void unk0();
@@ -6135,10 +4091,8 @@ struct __declspec(align(16)) BoundsCopy { float x,y,z,w; };
 extern "C" __m128 _mm_sub_ps(__m128, __m128);
 #endif
 #ifndef _INCLUDED_MM2
-extern "C" __m128 _mm_unpackhi_ps(__m128, __m128);
 #endif
 #ifndef _INCLUDED_MM2
-extern "C" __m128 _mm_rcp_ps(__m128);
 #endif
 
 
@@ -6153,8 +4107,6 @@ struct BoundNode {
 extern const float DAT_01011d78;
 extern const float DAT_01012068;
 extern float DAT_01012054;
-extern float DAT_0102295c;
-extern __m128 DAT_010c7170;
 
 struct BoundFace {
     BoundFace* next; int unk04; BoundNode* points[3];
@@ -6262,8 +4214,6 @@ bool BoundsMesh::FUN_00e11710(const __m128* a,const __m128* b,const __m128* c,__
     return valid;
 }
 
-extern char DAT_010eaf30[];
-extern char DAT_010eaf44[];
 typedef S_00e13910_Triangle NakedFace;
 typedef S_00e13910_Edge NakedEdgeRef;
 
@@ -6313,77 +4263,6 @@ static inline void copyEdge(void* destination, const void* source, int bytes)
 }
 
 void __cdecl ResizeAudioStream(void* heap, void* arr, int elemSize);
-
-struct MeshEdgeRepair
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    NakedFace* m_pHead2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5c;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6c;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7c;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8c;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9c;
-    int unka0;
-    int unka4;
-    int unka8;
-    int unkac;
-    int unkb0;
-    int unkb4;
-    int unkb8;
-    int unkbc;
-    int unkc0;
-    int unkc4;
-    int unkc8;
-    int unkcc;
-    int unkd0;
-    int unkd4;
-    int unkd8;
-    int unkdc;
-    int unke0;
-    int unke4;
-    int unke8;
-    int unkec;
-    int unkf0;
-    int unkf4;
-    int unkf8;
-    int unkfc;
-    char m_b100;
-    char m_b101;
-    void FUN_00e14d10();
-};
 
 struct hkMemoryAllocator {
     virtual void v00();
@@ -6457,15 +4336,10 @@ extern "C" __m128 _mm_sqrt_ss(__m128);
 #endif
 extern double DAT_01011588, DAT_01016408;
 void __cdecl ResizeAudioStream(Allocator*,void*,int);
-struct ZBox {
-    __m128 low,high;
-}
-;
 struct ZPlane {
     bool* FUN_00c7f520(bool*,float);
 }
 ;
-void __cdecl FUN_00cbebf0(const Vec4f**,int,ZBox*);
 template<class T> struct ZArray {
     T* data;
     int size;
@@ -6504,28 +4378,8 @@ template<> void ZArray<ZNode*>::append(ZNode* const& item) {
     if(size==(capacity&0x3fffffff)) ResizeAudioStream(&a,this,4);
     data[size++]=item;
 }
-struct ZTree {
-    void FUN_00d9be30();
-    void BuildTree(ZBox*,ZNode**,int,ZArray<int>*);
-}
-;
-struct Z_E15E50 {
-    int unk00,unk04,unk08,unk0c,unk10,unk14,unk18,unk1c,unk20,unk24,unk28;
-    ZNode* unk2c;
-    int unk30,unk34,unk38,unk3c;
-    ZTree unk40;
-    void FUN_00e15e50();
-}
-;
 
-extern char DAT_010eb0d0[];
-extern char DAT_010eb0c4[];
-extern char DAT_010eb0b8[];
-extern float DAT_01013ea4;
 void __cdecl ResizeAudioStream(void* alloc, void* arr, int elemSize) throw();
-struct E15Target {
-    void FUN_00e15e50() throw();
-};
 template <typename T>
 struct E1D960Array {
     T* m_data;
@@ -6571,18 +4425,7 @@ struct QueryCtx : QueryBase {
     E1D960Array<E1D960Pair>* arr;
     QueryCtx(E1D960Array<E1D960Pair>* a) throw() : arr(a) {}
 };
-void __cdecl FUN_00d1d890(void* a, void* b, QueryCtx* ctx) throw();
-bool __cdecl FUN_00e19d60(void* self, E12160Triangle* fa, void* obj, E12160Triangle* fb, float f) throw();
-struct DelTarget {
-    virtual ~DelTarget();
-};
-struct E1D960Mesh {
-    __declspec(nothrow) void RemoveTriangle(E12160Triangle* apNode);
-};
 __declspec(nothrow) bool __cdecl TriangleHasVertexAtPoint(const E12160Triangle* triangle, const float* point);
-struct MeshMerge960 {
-    FUN_00e1b750* FUN_00e1d960(Builder* apBuilder);
-};
 
 struct Piece {
     virtual void destroy(unsigned int);
@@ -6597,147 +4440,14 @@ template<class T> struct Array360 {
     int GetLogicalSize() const { return size; }
 };
 typedef Array360<Piece*> Pieces;
-struct Builder360 {
-    virtual void destroy(unsigned int);
-    int* FUN_00e1de00(int**, int);
-    void FUN_00e12960();
-    void FUN_00e1b820(Pieces*, int, int);
-};
-struct Factory360 { Builder360* FUN_00e1c5e0();
-int* FUN_00e1f360(int* result, int input, Pieces* output, float low, float high); };
 void __cdecl ResizeAudioStream(void*, void*, int);
-struct Hull360 {
-    float ComputeScaledPowerRatio();
-    float FUN_00d752e0();
-};
 
-extern int DAT_010eae0c;
-extern int DAT_0126ec00;
 extern int DAT_01268370;
-extern int DAT_01268380;
-extern int DAT_01268390;
-extern int DAT_012683a0;
 extern float DAT_0104da48;
 extern float DAT_0104e148;
 #ifndef _INCLUDED_MM2
 extern "C" __m128 _mm_load_ss(const float* p);
 #endif
-
-struct S00e4c730_Obj
-{
-    int FUN_00e4c730(void* p1, int p2, void* p3);
-};
-
-struct QuadFields { unsigned int x,y,z,w; };
-struct S00e22de0_frame
-{
-    volatile float m_f;      // 0x00
-    int m_kPointA;                 // 0x04
-    void* m_p8;              // 0x08
-    int m_kPointB;                 // 0x0c
-    QuadFields m_v10;   // 0x10
-    QuadFields m_v20;   // 0x20
-    QuadFields m_v30;   // 0x30
-    QuadFields m_v40;   // 0x40
-    void* m_pa0;            // 0x50
-    void* m_pa1;            // 0x54
-    int unk58;
-    int unk5C;
-    QuadFields m_v60;   // 0x60
-    QuadFields m_out;   // 0x70
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8C;
-    S00e4c730_Obj m_obj;     // 0x90
-    int unk94;
-    int unk98;
-    int unk9C;
-    int unkA0;
-    int unkA4;
-    int m_flag;              // 0xa8
-    int unkAC;
-    int unkB0;
-    int unkB4;
-    int unkB8;
-    int unkBC;
-    int unkC0;
-    int unkC4;
-    int unkC8;
-    int unkCC;
-    int unkD0;
-    int unkD4;
-    int unkD8;
-    int unkDC;
-    int unkE0;
-    int unkE4;
-    int unkE8;
-    int unkEC;
-    int unkF0;
-    int unkF4;
-    int unkF8;
-    int unkFC;
-    int unk100;
-    int unk104;
-    int unk108;
-    int unk10C;
-    int unk110;
-    int unk114;
-    int unk118;
-    int unk11C;
-    int unk120;
-    int unk124;
-    int unk128;
-    int unk12C;
-    int unk130;
-    int unk134;
-    int unk138;
-    int unk13C;
-    int unk140;
-    int unk144;
-    int unk148;
-    int unk14C;
-    int unk150;
-    int unk154;
-    int unk158;
-    int unk15C;
-    int unk160;
-    int unk164;
-    int unk168;
-    int unk16C;
-    int unk170;
-    int unk174;
-    int unk178;
-    int unk17C;
-    int unk180;
-    int unk184;
-    int unk188;
-    int unk18C;
-    int unk190;
-    int unk194;
-    int unk198;
-    int unk19C;
-    int unk1A0;
-    int unk1A4;
-    int unk1A8;
-    int unk1AC;
-    int unk1B0;
-    int unk1B4;
-    int unk1B8;
-    int unk1BC;
-    int unk1C0;
-    int unk1C4;
-    int unk1C8;
-    int unk1CC;
-    int unk1D0;
-    int unk1D4;
-    int unk1D8;
-    int unk1DC;
-    int unk1E0;
-    int unk1E4;
-    int unk1E8;
-    int unk1EC;
-};
 
 struct S00e24650_Vtx {
     unsigned int unk00;
@@ -6767,8 +4477,6 @@ struct S00e24650_Edge {
     S00e24650_Vtx* start() const { return m_pkTriangle->m_kVertices[m_uiEdgeIndex]; }
     S00e24650_Vtx* end() const { return m_pkTriangle->m_kVertices[(9>>(m_uiEdgeIndex<<1))&3]; }
 };
-
-struct EdgeWalker { S00e24650_Edge FUN_00e23df0(S00e24650_Edge k, unsigned int a4); S00e24650_Edge FUN_00e24650(S00e24650_Edge e, unsigned int a4, S00e24650_Vtx* v); };
 
 struct S_00e248b0_Tri {
     int unk00;
@@ -6868,13 +4576,6 @@ struct Where {
     EdgeT m_usTrailingValue;
 };
 
-struct S00e24aa0_Obj {
-    int unk00;
-    Where LocatePoint(int x, int y);
-    EdgeT FUN_00e24650(EdgeT e, void* a, void* b);
-    EdgeT FUN_00e24aa0(int x0, int y0, int x1, int y1);
-};
-
 struct GateE10 { char value; GateE10() {} GateE10(bool b):value(b) {} operator bool() const { return value != 0; } };
 extern "C" __m128 _mm_set_ss(float);
 extern "C" __m128 _mm_rsqrt_ss(__m128);
@@ -6913,86 +4614,7 @@ struct Vec4E10 {
         return *this;
     }
 };
-struct VertE10 {
-    VertE10* next;
-    int unk04;
-    int unk08;
-    int unk0c;
-    Vec4E10 pos10;
-    Vec4E10 acc20;
-};
-struct FaceE10 {
-    FaceE10* next;
-    int unk04;
-    VertE10* verts[3];
-    int unk14;
-    int unk18;
-    int unk1c;
-    Vec4E10 nrm20;
-};
-struct HostE10 {
-    int unk00; int unk04; int unk08; int unk0c; int unk10;
-    VertE10* list14;
-    int unk18; int unk1c; int unk20; int unk24; int unk28;
-    FaceE10* faces2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5c;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6c;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7c;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8c;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9c;
-    int unka0;
-    int unka4;
-    int unka8;
-    int unkac;
-    int unkb0;
-    int unkb4;
-    int unkb8;
-    int unkbc;
-    int unkc0;
-    int unkc4;
-    int unkc8;
-    int unkcc;
-    int unkd0;
-    int unkd4;
-    int unkd8;
-    int unkdc;
-    int unke0;
-    int unke4;
-    int unke8;
-    int unkec;
-    int unkf0;
-    int unkf4;
-    int unkf8;
-    int unkfc;
-    unsigned char b100;
-    unsigned char flag101;
-    void FUN_00e11e10();
-};
 extern const float DAT_010141cc = 0.0001f;
-extern float DAT_01017718;
 extern float DAT_01016248;
 float __cdecl ClampedAcos(float);
 
@@ -7099,83 +4721,12 @@ struct __declspec(align(16)) ClosestQuery {
         m_closest = *(hkVec4*)&DAT_01267e30;
     }
 };
-void __cdecl FUN_00d1dbb0(void* tree, const MeshPoint* p, ClosestQuery* q);
 
 extern "C" __m128 _mm_load_ss(const float* p);
 static __forceinline __m128 Splat(__m128 v) { return _mm_shuffle_ps(v, v, 0); }
 
 static __forceinline void SetMul4(__m128& d, __m128 r, const __m128& a) { d = _mm_mul_ps(Splat(r), a); }
 static __forceinline void AddMul4(__m128& d, __m128 r, const __m128& a) { d = _mm_add_ps(_mm_mul_ps(Splat(r), a), d); }
-
-struct hkgpMeshStub {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int m_iValueAt40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5c;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6c;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7c;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8c;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9c;
-    int unka0;
-    int unka4;
-    int unka8;
-    int unkac;
-    int unkb0;
-    int unkb4;
-    int unkb8;
-    int unkbc;
-    int unkc0;
-    int unkc4;
-    int unkc8;
-    int unkcc;
-    int unkd0;
-    int unkd4;
-    int unkd8;
-    int unkdc;
-    int unke0;
-    int unke4;
-    int unke8;
-    int unkec;
-    int unkf0;
-    int unkf4;
-    int unkf8;
-    int unkfc;
-    unsigned char unk100;
-    bool m_hasVertexNormals;
-    void FUN_00e13210(const MeshPoint* p, MeshResult* out);
-};
 
 extern "C" __m128 _mm_set_ss(float);
 
@@ -7307,9 +4858,6 @@ __m128 K = _mm_shuffle_ps(t,t,0);
     m_101 = 0;
 }
 
-struct E17Ends { int start; int end; };
-
-struct E17MergeState { int pass; union { int next; float score; }; };
 struct E17Mem
 {
     virtual void v00();
@@ -7417,26 +4965,6 @@ struct E17LoopList
     void append(E17Loop* const* data, int n) { AppendInts(&e17Heap(), data, n); }
 };
 
-float __cdecl FUN_00e153f0(const E17Loop* loop);
-
-struct E17Mesh
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    E17Face* m_faces;
-
-    int FUN_00e17b00(E17LoopList* out, int material) throw();
-};
-
 struct SplitFace : S_00e13910_Triangle {
     __forceinline void*& vertex(int i) { return m_kVertices[i]; }
     __forceinline hkUint32& link(int i) { return m_ppLinks[i]; }
@@ -7474,18 +5002,8 @@ struct SplitEdge : SplitCore<SplitEdge, SplitFace> {
     __forceinline SplitEdge(const SplitEdge& other) : Base(other.m_pkTriangle, other.m_uiEdgeIndex) {}
 };
 
-struct ConvexHullBuilder : public FUN_00e19cf0_cls {
-    __declspec(noinline) bool FUN_00e11910(SplitFace* t);
-    SplitEdge FUN_00e18ed0(SplitEdge edge, void* vertex, bool flag);
-};
-
 namespace fnv_00e1b820 {
 struct VertexCopy;
-// A moving corner view pairs the current vertex with its corresponding edge.
-struct CornerStore {VertexCopy* vertex;unsigned word04,word08,link;};
-struct FUN_00cb18f0_t { int FUN_00cb1fb0(int); };
-extern const float s_faderClearedAlpha;
-extern const float g_011c5aa8_arg1;
 
 struct Bits4 { unsigned a,b,c,d; };
 struct __declspec(align(16)) PositionBits:Bits4 {};
@@ -7555,23 +5073,12 @@ template<class T> struct PartArray {
     }
     __forceinline T* expand(Allocator& heap,int n){int old=size;reserve(heap,old+n);T* out=data+old;size+=n;return out;}
 };
-struct PartMesh {
-    int vf;short memorySize,refcount;
-    CopyPool<VertexCopy> vertices;
-    CopyPool<TriangleCopy> triangles;
-    int material;
-    int FUN_00e11960()const;
-    void FUN_00e17f40(float*);
-    void BuildHull();
-    int FUN_00e1b820(PartArray<PartMesh*>& output,bool simplify,bool convex)const;
-};
 
 }  // namespace fnv_00e1b820
 
 extern "C" __m128 _mm_load_ps(const float*);
 extern "C" __m128 _mm_load_ss(const float*);
 extern "C" __m128 _mm_sub_ps(__m128, __m128);
-extern double DAT_01012060;
 void __cdecl ResizeAudioStream(void*, void*, int) throw();
 
 struct CutVec {
@@ -7717,31 +5224,6 @@ template<> __forceinline CutTriangle* CutPool<CutTriangle>::allocate(const CutTr
     head=node;
     return node;
 }
-struct CutArray {
-    CutTriangle** data;
-    int size;
-    int capacity;
-};
-struct CutMesh {
-    int unk00, unk04;
-    CutPool<CutVertex> vertices;
-    int unk1c;
-    CutPool<CutTriangle> faces;
-    int unk34, unk38, unk3c, unk40, unk44, unk48, unk4c;
-    int unk50, unk54, unk58, unk5c, unk60, unk64, unk68, unk6c;
-    int unk70, unk74, unk78, unk7c, unk80, unk84, unk88, unk8c;
-    int unk90, unk94, unk98, unk9c, unka0, unka4, unk48a8, unkac;
-    int unkb0, unkb4, unkb8, unkbc, unkc0, unkc4, unkc8, unkcc;
-    int unkd0, unkd4, unkd8, unkdc, unke0, unke4, unke8, unkec;
-    CutVec plane;
-    int unk100;
-    float tolerance;
-    __declspec(noinline) int FUN_00e11990(const CutVec&, int);
-    void FUN_00e14a90();
-    void ReleaseSubobject();
-    void ResolveLinkNodes();
-    int* FUN_00e1bd30(int* result, const CutVec& p, bool splitSides);
-};
 
 namespace N {
 typedef union __declspec(intrin_type) __declspec(align(16)) __m128 {
@@ -7759,51 +5241,7 @@ void _mm_store_ss(float*, __m128);
 }
 }
 
-extern __m128 DAT_010c44d0;
 extern __m128 DAT_010c7160;
-extern double DAT_01017cf8;
-extern float DAT_010959f4;
-extern int DAT_010eadb4;
-
-struct S_00e22050_V4 {
-    N::__m128 m_vComponents;
-};
-
-struct S_00e22050_Plane {
-    int unk00, unk04, unk08, unk0C, unk10, unk14, unk18, unk1C;
-    S_00e22050_V4 m_kTriangleNormal;
-};
-
-struct S_00e22050_Arg {
-    int unk00, unk04, unk08, unk0C, unk10, unk14, unk18, unk1C;
-    S_00e22050_Plane* m_kTriangleNormal;
-};
-
-struct S_00e22050_Obj {
-    int* vtbl;
-    S_00e22050_Plane* m_kTriangleNormal;
-};
-
-struct S_00e22050_Support {
-    virtual void v0();
-    virtual void v1();
-    virtual void v2(const S_00e22050_V4& dir, S_00e22050_V4& out);
-};
-
-struct S_00e22050_Cast {
-    virtual void v0();
-    virtual float v1(S_00e22050_Support* s, S_00e22050_Obj* o, unsigned char flag);
-};
-
-struct S_00e22050 {
-    int unk00;
-    float m_tol;
-    S_00e22050_Cast* m_cast;
-    S_00e22050_Support* m_pSupport;
-    char m_bHasHit;
-    char m_flag;
-    float FUN_00e22050(S_00e22050_Arg* a);
-};
 
 struct S00e22640_Pair { int lo; int hi; };
 void __cdecl FUN_00c908c0(void* allocator, void* self, int newCap, int elemSize);
@@ -8308,160 +5746,6 @@ struct S00e25cd0_PoolAlloc {
         return new(node) S00e25cd0_EdgeData;
     }
 };
-struct S00e25cd0_Tri
-{
-    int unk0000;
-    int unk0004;
-    int unk0008;
-    int unk000c;
-    int unk0010;
-    int unk0014;
-    int unk0018;
-    int unk001c;
-    int unk0020;
-    int unk0024;
-    int unk0028;
-    int unk002c;
-    int unk0030;
-    int unk0034;
-    int unk0038;
-    int unk003c;
-    int unk0040;
-    int unk0044;
-    int unk0048;
-    int unk004c;
-    int unk0050;
-    int unk0054;
-    int unk0058;
-    int unk005c;
-    int unk0060;
-    int unk0064;
-    int unk0068;
-    int unk006c;
-    int unk0070;
-    int unk0074;
-    int unk0078;
-    int unk007c;
-    int unk0080;
-    int unk0084;
-    int unk0088;
-    int unk008c;
-    int unk0090;
-    int unk0094;
-    int unk0098;
-    int unk009c;
-    int unk00a0;
-    int unk00a4;
-    int unk00a8;
-    int unk00ac;
-    int unk00b0;
-    int unk00b4;
-    int unk00b8;
-    int unk00bc;
-    int unk00c0;
-    int unk00c4;
-    int unk00c8;
-    int unk00cc;
-    int unk00d0;
-    int unk00d4;
-    int unk00d8;
-    int unk00dc;
-    int unk00e0;
-    int unk00e4;
-    int unk00e8;
-    int unk00ec;
-    int unk00f0;
-    int unk00f4;
-    int unk00f8;
-    int unk00fc;
-    int unk0100;
-    int unk0104;
-    int unk0108;
-    int unk010c;
-    int unk0110;
-    int unk0114;
-    int unk0118;
-    int unk011c;
-    int unk0120;
-    int unk0124;
-    int unk0128;
-    int unk012c;
-    int unk0130;
-    int unk0134;
-    int unk0138;
-    int unk013c;
-    int unk0140;
-    int unk0144;
-    int unk0148;
-    int unk014c;
-    int unk0150;
-    int unk0154;
-    int unk0158;
-    int unk015c;
-    int unk0160;
-    int unk0164;
-    int unk0168;
-    int unk016c;
-    int unk0170;
-    int unk0174;
-    int unk0178;
-    int unk017c;
-    int unk0180;
-    int unk0184;
-    int unk0188;
-    int unk018c;
-    int unk0190;
-    int unk0194;
-    int unk0198;
-    int unk019c;
-    int unk01a0;
-    int unk01a4;
-    int unk01a8;
-    int unk01ac;
-    int unk01b0;
-    int unk01b4;
-    int unk01b8;
-    int unk01bc;
-    int unk01c0;
-    int unk01c4;
-    int unk01c8;
-    int unk01cc;
-    int unk01d0;
-    int unk01d4;
-    int unk01d8;
-    int unk01dc;
-    int unk01e0;
-    int unk01e4;
-    int unk01e8;
-    int unk01ec;
-    int unk01f0;
-    int unk01f4;
-    int unk01f8;
-    int unk01fc;
-    int unk0200;
-    int unk0204;
-    int unk0208;
-    int unk020c;
-    int unk0210;
-    int unk0214;
-    int unk0218;
-    int unk021c;
-    int unk0220;
-    int unk0224;
-    int unk0228;
-    int unk022c;
-    int unk0230;
-    int unk0234;
-    int unk0238;
-    int unk023c;
-    int unk0240;
-    int unk0244;
-    int unk0248;
-    S00e25cd0_Table* m_24c;
-    S00e25cd0_PoolAlloc m_250;
-    void FUN_00e25ba0();
-    void FUN_00e25cd0(const S00e25cd0_Edge& edge, const S00e25cd0_Array<S00e25cd0_Ulong>& data);
-};
 
 namespace fnv_00e275d0 {
 struct FUN_00e25f00_cls { void FUN_00e25f00(int a); };
@@ -8574,428 +5858,10 @@ extern "C" __m128 _mm_min_ps(__m128 a, __m128 b);
 extern "C" __m128 _mm_sub_ps(__m128 a, __m128 b);
 extern float DAT_0104e148;
 extern const float DAT_01011d78;
-extern double DAT_010cbf48;
 extern double DAT_01011588;
 extern double DAT_01029790;
 struct BigConst { Float4 v[4]; };
 extern BigConst DAT_0126a3e0;
-struct PointsArg { float* m_data; int m_uiItemCount; int m_iElementIndex; };
-struct TailA { Float4 columns[4]; void FUN_00de8da0(const BigConst* a, const Float4* b); };
-struct TailB { Float4 columns[4]; void FUN_00de8c50(const TailA* p, float z); };
-struct E27850This {
-    void FUN_00e27850(PointsArg* pts, Float4* mat, unsigned char flagA, unsigned char flagB);
-    void FUN_00e275d0(int a);
-    int unk000;
-    int unk004;
-    int unk008;
-    int unk00c;
-    int unk010;
-    int unk014;
-    int unk018;
-    int unk01c;
-    int unk020;
-    int unk024;
-    int unk028;
-    int unk02c;
-    int unk030;
-    int unk034;
-    int unk038;
-    int unk03c;
-    int unk040;
-    int unk044;
-    int unk048;
-    int unk04c;
-    int unk050;
-    int unk054;
-    int unk058;
-    int unk05c;
-    int unk060;
-    int unk064;
-    int unk068;
-    int unk06c;
-    int unk070;
-    int unk074;
-    int unk078;
-    int unk07c;
-    int unk080;
-    int unk084;
-    int unk088;
-    int unk08c;
-    int unk090;
-    int unk094;
-    int unk098;
-    int unk09c;
-    int unk0a0;
-    int unk0a4;
-    int unk0a8;
-    int unk0ac;
-    int unk0b0;
-    int unk0b4;
-    int unk0b8;
-    int unk0bc;
-    int unk0c0;
-    int unk0c4;
-    int unk0c8;
-    int unk0cc;
-    int unk0d0;
-    int unk0d4;
-    int unk0d8;
-    int unk0dc;
-    int unk0e0;
-    int unk0e4;
-    int unk0e8;
-    int unk0ec;
-    int unk0f0;
-    int unk0f4;
-    int unk0f8;
-    int unk0fc;
-    int unk100;
-    int unk104;
-    int unk108;
-    int unk10c;
-    int unk110;
-    int unk114;
-    int unk118;
-    int unk11c;
-    int unk120;
-    int unk124;
-    int unk128;
-    int unk12c;
-    int unk130;
-    int unk134;
-    int unk138;
-    int unk13c;
-    int unk140;
-    int unk144;
-    int unk148;
-    int unk14c;
-    int unk150;
-    int unk154;
-    int unk158;
-    int unk15c;
-    int unk160;
-    int unk164;
-    int unk168;
-    int unk16c;
-    int unk170;
-    int unk174;
-    int unk178;
-    int unk17c;
-    int unk180;
-    int unk184;
-    int unk188;
-    int unk18c;
-    int unk190;
-    int unk194;
-    int unk198;
-    int unk19c;
-    int unk1a0;
-    int unk1a4;
-    int unk1a8;
-    int unk1ac;
-    int unk1b0;
-    int unk1b4;
-    int unk1b8;
-    int unk1bc;
-    int unk1c0;
-    int unk1c4;
-    int unk1c8;
-    int unk1cc;
-    int unk1d0;
-    int unk1d4;
-    int unk1d8;
-    int unk1dc;
-    int unk1e0;
-    int unk1e4;
-    int unk1e8;
-    int unk1ec;
-    int unk1f0;
-    int unk1f4;
-    int unk1f8;
-    int unk1fc;
-    int unk200;
-    int unk204;
-    int unk208;
-    int unk20c;
-    int unk210;
-    int unk214;
-    int unk218;
-    int unk21c;
-    int unk220;
-    int unk224;
-    int unk228;
-    int unk22c;
-    int unk230;
-    int unk234;
-    int unk238;
-    int unk23c;
-    int unk240;
-    int unk244;
-    int unk248;
-    int unk24c;
-    int unk250;
-    int unk254;
-    int unk258;
-    int unk25c;
-    int unk260;
-    int unk264;
-    int unk268;
-    int unk26c;
-    int unk270;
-    int unk274;
-    int unk278;
-    int unk27c;
-    int unk280;
-    int unk284;
-    int unk288;
-    int unk28c;
-    int unk290;
-    int unk294;
-    int unk298;
-    int unk29c;
-    int unk2a0;
-    int unk2a4;
-    int unk2a8;
-    int unk2ac;
-    int unk2b0;
-    int unk2b4;
-    int unk2b8;
-    int unk2bc;
-    int unk2c0;
-    int unk2c4;
-    int unk2c8;
-    int unk2cc;
-    int unk2d0;
-    int unk2d4;
-    int unk2d8;
-    int unk2dc;
-    int unk2e0;
-    int unk2e4;
-    int unk2e8;
-    int unk2ec;
-    int unk2f0;
-    int unk2f4;
-    int unk2f8;
-    int unk2fc;
-    int unk300;
-    int unk304;
-    int unk308;
-    int unk30c;
-    int unk310;
-    int unk314;
-    int unk318;
-    int unk31c;
-    int unk320;
-    int unk324;
-    int unk328;
-    int unk32c;
-    int unk330;
-    int unk334;
-    int unk338;
-    int unk33c;
-    int unk340;
-    int unk344;
-    int unk348;
-    int unk34c;
-    int unk350;
-    int unk354;
-    int unk358;
-    int unk35c;
-    int unk360;
-    int unk364;
-    int unk368;
-    int unk36c;
-    int unk370;
-    int unk374;
-    int unk378;
-    int unk37c;
-    int unk380;
-    int unk384;
-    int unk388;
-    int unk38c;
-    int unk390;
-    int unk394;
-    int unk398;
-    int unk39c;
-    int unk3a0;
-    int unk3a4;
-    int unk3a8;
-    int unk3ac;
-    int unk3b0;
-    int unk3b4;
-    int unk3b8;
-    int unk3bc;
-    int unk3c0;
-    int unk3c4;
-    int unk3c8;
-    int unk3cc;
-    int unk3d0;
-    int unk3d4;
-    int unk3d8;
-    int unk3dc;
-    int unk3e0;
-    int unk3e4;
-    int unk3e8;
-    int unk3ec;
-    int unk3f0;
-    int unk3f4;
-    int unk3f8;
-    int unk3fc;
-    int unk400;
-    int unk404;
-    int unk408;
-    int unk40c;
-    int unk410;
-    int unk414;
-    int unk418;
-    int unk41c;
-    int unk420;
-    int unk424;
-    int unk428;
-    int unk42c;
-    int unk430;
-    int unk434;
-    int unk438;
-    int unk43c;
-    int unk440;
-    int unk444;
-    int unk448;
-    int unk44c;
-    int unk450;
-    int unk454;
-    int unk458;
-    int unk45c;
-    int unk460;
-    int unk464;
-    int unk468;
-    int unk46c;
-    int unk470;
-    int unk474;
-    int unk478;
-    int unk47c;
-    int unk480;
-    int unk484;
-    int unk488;
-    int unk48c;
-    int unk490;
-    int unk494;
-    int unk498;
-    int unk49c;
-    int unk4a0;
-    int unk4a4;
-    int unk4a8;
-    int unk4ac;
-    int unk4b0;
-    int unk4b4;
-    int unk4b8;
-    int unk4bc;
-    int unk4c0;
-    int unk4c4;
-    int unk4c8;
-    int unk4cc;
-    int unk4d0;
-    int unk4d4;
-    int unk4d8;
-    int unk4dc;
-    int unk4e0;
-    int unk4e4;
-    int unk4e8;
-    int unk4ec;
-    int unk4f0;
-    int unk4f4;
-    int unk4f8;
-    int unk4fc;
-    int unk500;
-    int unk504;
-    int unk508;
-    int unk50c;
-    int unk510;
-    int unk514;
-    int unk518;
-    int unk51c;
-    int unk520;
-    int unk524;
-    int unk528;
-    int unk52c;
-    int unk530;
-    int unk534;
-    int unk538;
-    int unk53c;
-    int unk540;
-    int unk544;
-    int unk548;
-    int unk54c;
-    int unk550;
-    int unk554;
-    int unk558;
-    int unk55c;
-    int unk560;
-    int unk564;
-    int unk568;
-    int unk56c;
-    int unk570;
-    int unk574;
-    int unk578;
-    int unk57c;
-    int unk580;
-    int unk584;
-    int unk588;
-    int unk58c;
-    int unk590;
-    int unk594;
-    int unk598;
-    int unk59c;
-    int unk5a0;
-    int unk5a4;
-    int unk5a8;
-    int unk5ac;
-    int unk5b0;
-    int unk5b4;
-    int unk5b8;
-    int unk5bc;
-    int unk5c0;
-    int unk5c4;
-    int unk5c8;
-    int unk5cc;
-    int unk5d0;
-    int unk5d4;
-    int unk5d8;
-    int unk5dc;
-    int unk5e0;
-    int unk5e4;
-    int unk5e8;
-    int unk5ec;
-    int unk5f0;
-    int unk5f4;
-    int unk5f8;
-    int unk5fc;
-    int unk600;
-    int unk604;
-    int unk608;
-    int unk60c;
-    int unk610;
-    int unk614;
-    int unk618;
-    int unk61c;
-    int unk620;
-    int unk624;
-    int unk628;
-    int unk62c;
-    int unk630;
-    int unk634;
-    int unk638;
-    int unk63c;
-    int unk640;
-    int unk644;
-    int unk648;
-    int unk64c;
-    int unk650;
-    int unk654;
-    int unk658;
-    int m_65c;
-    TailB m_660;
-    TailA m_6a0;
-};
 
 namespace fnv_00e12890 {
 // FUN_00e12890: collect the linked list at this+0x2c into an output vector,
@@ -9009,49 +5875,8 @@ struct FUN_00e12890_Holder {
     void* m_10;
 };
 
-struct FUN_00e12890_Node {
-    FUN_00e12890_Node* m_00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int m_34;
-};
-
-struct FUN_00e12890_List {
-    FUN_00e12890_Node** m_00;
-    int m_04;
-    unsigned int m_08;
-};
-
-struct FUN_00e12890_cls {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    FUN_00e12890_Node* m_2c;
-    int m_30;
-    void FUN_00e12890(FUN_00e12890_List* out, int flag);
-};
-
 FUN_00e12890_Holder* __cdecl FUN_00c85750();
 void __cdecl FUN_00c908c0(void* allocator, void* list, int count, int elemSize);
-void __cdecl FUN_00e22a50(void* data, int start, int end, int flag);
 
 }  // namespace fnv_00e12890
 
@@ -9139,22 +5964,6 @@ struct S_00e15830_Edge {
         unsigned int l = link();
         return (l & ~3u) == 0 || m_node->m_iMaterialIndex == ((S_00e15830_Node*)(l & ~3u))->m_iMaterialIndex;
     }
-};
-
-struct S_00e15830_Mesh {
-    int unk0;
-    int unk4;
-    int unk8;
-    int unkC;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    S_00e15830_Node* m_kNodeCollection;
-    int FUN_00e15830();
 };
 
 }  // namespace fnv_00e15830
@@ -9901,22 +6710,6 @@ struct S_00e1a7a0_VertexList {
     }
 };
 
-struct S_00e1a7a0_TriangleList {
-    S_00e1a7a0_Array<void*> m_kBlocks;
-    S_00e1a7a0_Triangle* m_uiBufferCapacity;
-    int m_iAllocatedCount;
-};
-
-struct S_00e1a7a0_Ostream {
-    void* vtbl;
-    int unk04;
-    void* m_pStreamWriter;
-    void FUN_00cb1600(void* buf, int size) throw();
-    S_00e1a7a0_Ostream& FUN_00cc01c0(const char* s) throw();
-    S_00e1a7a0_Ostream& WriteInt(int i) throw();
-    void FUN_00cc00e0() throw();
-};
-
 struct S_00e1a7a0_Error {
     virtual void v00();
     virtual void v04();
@@ -9924,15 +6717,6 @@ struct S_00e1a7a0_Error {
     virtual int message(int type, int id, const char* desc, const char* file, int line);
 };
 extern S_00e1a7a0_Error* DAT_01268360;
-
-struct S_00e1a7a0_Mesh {
-    int unk0;
-    int unk4;
-    S_00e1a7a0_VertexList m_kVertices;
-    int unk1C;
-    S_00e1a7a0_TriangleList m_uiTriangleCount;
-    int FUN_00e1a7a0(int tag);
-};
 
 }  // namespace fnv_00e1a7a0
 
@@ -9954,9 +6738,6 @@ struct S_e1ce10_Bool {
     char m_cBooleanValue;
     S_e1ce10_Bool() {}
     operator bool() const { return m_cBooleanValue != 0; }
-};
-struct S_e1ce10_Plane : S_e1ce10_Vec4 {
-    S_e1ce10_Bool FUN_00c7f520(float eps) const throw();
 };
 struct S_e1ce10_Aabb {
     S_e1ce10_Vec4 m_kMinimumCorner;
@@ -10064,16 +6845,6 @@ template <class T> struct S_e1ce10_Array {
     }
 };
 // geometry input
-struct S_e1ce10_GeomTriangle {
-    int m_kPointA;
-    int m_kPointB;
-    int m_iThirdValue;
-    int m_iMaterialIndex;
-};
-struct S_e1ce10_Geometry {
-    S_e1ce10_Array<S_e1ce10_Vec4> m_kVertices;
-    S_e1ce10_Array<S_e1ce10_GeomTriangle> m_uiTriangleCount;
-};
 struct S_e1ce10_Transform {
     S_e1ce10_Vec4 m_qRotation0;
 };
@@ -10328,37 +7099,10 @@ struct S_e1ce10_Ostream {
     S_e1ce10_Ostream& operator<<(const char* s) throw(); // FUN_00cc01c0
     S_e1ce10_Ostream& operator<<(int i) throw();         // WriteInt
 };
-struct S_e1ce10_Error {
-    virtual void v00() throw();
-    virtual void v04() throw();
-    virtual void v08() throw();
-    virtual int message(int type, int id, const char* desc, const char* file, int line) throw();
-};
 template <class T> struct S_e1ce10_PadSpu {
     T m_kStorage;
     T val() const { return m_kStorage; }
     T operator->() const { return m_kStorage; }
-};
-struct S_e1ce10_Mesh {
-    int unk00;
-    int unk04;
-    S_e1ce10_List<S_e1ce10_Vertex> m_kVertices;
-    int unk1c;
-    S_e1ce10_List<S_e1ce10_Triangle> m_uiTriangleCount;
-    int unk34; int unk38; int unk3c; int unk40; int unk44; int unk48; int unk4c; int unk50; int unk54; int unk58;
-    int unk5c; int unk60; int unk64; int unk68; int unk6c; int unk70; int unk74; int unk78; int unk7c; int unk80;
-    int unk84; int unk88; int unk8c; int unk90; int unk94; int unk98; int unk9c; int unka0; int unka4; int unka8;
-    int unkac; int unkb0; int unkb4; int unkb8; int unkbc; int unkc0; int unkc4; int unkc8; int unkcc; int unkd0;
-    int unkd4; int unkd8; int unkdc; int unke0; int unke4; int unke8; int unkec; int unkf0; int unkf4; int unkf8;
-    int unkfc; int unk100; int unk104; int unk108;
-    float m_weldTolerance;
-    void FUN_00e1ce10(const S_e1ce10_Geometry& geom, const S_e1ce10_Transform& transform, int material) throw();
-    void FUN_00e11510(const S_e1ce10_Vec4& a, const S_e1ce10_Vec4& b) throw(); // non-manifold edge
-    void FUN_00e11520(const S_e1ce10_Vec4& a, const S_e1ce10_Vec4& b) throw(); // bad orientation
-    __declspec(noalias) void FUN_00e11710(const S_e1ce10_Vec4* a, const S_e1ce10_Vec4* b, const S_e1ce10_Vec4* c, S_e1ce10_Vec4* plane, int normalize) throw();
-    bool FUN_00e118e0(S_e1ce10_Triangle* t, S_e1ce10_Plane* plane, int normalize) throw();
-    void FUN_00e14a90() throw();
-    void ReleaseSubobject() throw();
 };
 
 extern "C" void _ReadBarrier();
@@ -10387,22 +7131,6 @@ struct CapVertex {
     int unk20; int unk24; int unk28; int unk2c;
     float weight;
 };
-struct PtObj {
-    void FUN_00c7f700(void *dst, void *src);
-};
-
-struct AllocCtx {
-    virtual void Slot00();
-    virtual void Slot04();
-    virtual void Dealloc(void *p, int size);
-    virtual void Slot0c();
-    virtual void FreeBuf(void *p, int size);
-};
-struct AllocSvc {
-    int unk_00_000;     int unk_00_004;     int unk_00_008;     int unk_00_00c;
-    AllocCtx *m_10;
-};
-
 
 struct SubArr {
     void *m_pData;
@@ -10415,14 +7143,6 @@ template<class Payload> struct GridLinks:Payload {int next,prev;__forceinline Gr
 struct GridCore:GridLinks<GridTag> {};
 struct RecPoint : GridCore {
 int x,y;unsigned long constraint:1; unsigned long data:31;
-};
-struct Rec {
-    int m_00;
-    int m_04;
-    int unk_08_008;
-    int unk_08_00c;
-    LocalVec4 projected;
-    RecPoint point;
 };
 
 extern float DAT_01012054;
@@ -10460,125 +7180,6 @@ struct PartsMap {
     void FUN_00a29680();
     void FUN_00cb1fb0(int);
     __forceinline void reserve(int n) {EnsureCapacity(&FUN_00c85750().getHeap(),n);}
-};
-struct PoolObj {
-    int unk_00_000;     int unk_00_004;     int unk_00_008;     int unk_00_00c;     int unk_00_010;     int unk_00_014;
-    int unk_00_018;     int unk_00_01c;     int unk_00_020;     int unk_00_024;     int unk_00_028;     int unk_00_02c;
-    int unk_00_030;     int unk_00_034;     int unk_00_038;     int unk_00_03c;     int unk_00_040;     int unk_00_044;
-    int unk_00_048;     int unk_00_04c;     int unk_00_050;     int unk_00_054;     int unk_00_058;     int unk_00_05c;
-    int unk_00_060;     int unk_00_064;     int unk_00_068;     int unk_00_06c;     int unk_00_070;     int unk_00_074;
-    int unk_00_078;     int unk_00_07c;     int unk_00_080;     int unk_00_084;     int unk_00_088;     int unk_00_08c;
-    int unk_00_090;     int unk_00_094;     int unk_00_098;     int unk_00_09c;     int unk_00_0a0;     int unk_00_0a4;
-    int unk_00_0a8;     int unk_00_0ac;     int unk_00_0b0;     int unk_00_0b4;     int unk_00_0b8;     int unk_00_0bc;
-    int unk_00_0c0;     int unk_00_0c4;     int unk_00_0c8;     int unk_00_0cc;     int unk_00_0d0;     int unk_00_0d4;
-    int unk_00_0d8;     int unk_00_0dc;     int unk_00_0e0;     int unk_00_0e4;     int unk_00_0e8;     int unk_00_0ec;
-    int unk_00_0f0;     int unk_00_0f4;     int unk_00_0f8;     int unk_00_0fc;     int unk_00_100;     int unk_00_104;
-    int unk_00_108;     int unk_00_10c;     int unk_00_110;     int unk_00_114;     int unk_00_118;     int unk_00_11c;
-    int unk_00_120;     int unk_00_124;     int unk_00_128;     int unk_00_12c;     int unk_00_130;     int unk_00_134;
-    int unk_00_138;     int unk_00_13c;     int unk_00_140;     int unk_00_144;     int unk_00_148;     int unk_00_14c;
-    int unk_00_150;     int unk_00_154;     int unk_00_158;     int unk_00_15c;     int unk_00_160;     int unk_00_164;
-    int unk_00_168;     int unk_00_16c;     int unk_00_170;     int unk_00_174;     int unk_00_178;     int unk_00_17c;
-    int unk_00_180;     int unk_00_184;     int unk_00_188;     int unk_00_18c;     int unk_00_190;     int unk_00_194;
-    int unk_00_198;     int unk_00_19c;     int unk_00_1a0;     int unk_00_1a4;     int unk_00_1a8;     int unk_00_1ac;
-    int unk_00_1b0;     int unk_00_1b4;     int unk_00_1b8;     int unk_00_1bc;     int unk_00_1c0;     int unk_00_1c4;
-    int unk_00_1c8;     int unk_00_1cc;     int unk_00_1d0;     int unk_00_1d4;     int unk_00_1d8;     int unk_00_1dc;
-    int unk_00_1e0;     int unk_00_1e4;     int unk_00_1e8;     int unk_00_1ec;     int unk_00_1f0;     int unk_00_1f4;
-    int unk_00_1f8;     int unk_00_1fc;     int unk_00_200;     int unk_00_204;     int unk_00_208;     int unk_00_20c;
-    int unk_00_210;     int unk_00_214;     int unk_00_218;     int unk_00_21c;     int unk_00_220;     int unk_00_224;
-    int unk_00_228;     int unk_00_22c;     int unk_00_230;     int unk_00_234;     int unk_00_238;     int unk_00_23c;
-    int unk_00_240;     int unk_00_244;     int unk_00_248;     int unk_00_24c;     int unk_00_250;     int unk_00_254;
-    int unk_00_258;     int unk_00_25c;     int unk_00_260;     int unk_00_264;     int unk_00_268;     int unk_00_26c;
-    int unk_00_270;     int unk_00_274;     int unk_00_278;     int unk_00_27c;     int unk_00_280;     int unk_00_284;
-    int unk_00_288;     int unk_00_28c;     int unk_00_290;     int unk_00_294;     int unk_00_298;     int unk_00_29c;
-    int unk_00_2a0;     int unk_00_2a4;     int unk_00_2a8;     int unk_00_2ac;     int unk_00_2b0;     int unk_00_2b4;
-    int unk_00_2b8;     int unk_00_2bc;     int unk_00_2c0;     int unk_00_2c4;     int unk_00_2c8;     int unk_00_2cc;
-    int unk_00_2d0;     int unk_00_2d4;     int unk_00_2d8;     int unk_00_2dc;     int unk_00_2e0;     int unk_00_2e4;
-    int unk_00_2e8;     int unk_00_2ec;     int unk_00_2f0;     int unk_00_2f4;     int unk_00_2f8;     int unk_00_2fc;
-    int unk_00_300;     int unk_00_304;     int unk_00_308;     int unk_00_30c;     int unk_00_310;     int unk_00_314;
-    int unk_00_318;     int unk_00_31c;     int unk_00_320;     int unk_00_324;     int unk_00_328;     int unk_00_32c;
-    int unk_00_330;     int unk_00_334;     int unk_00_338;     int unk_00_33c;     int unk_00_340;     int unk_00_344;
-    int unk_00_348;     int unk_00_34c;     int unk_00_350;     int unk_00_354;     int unk_00_358;     int unk_00_35c;
-    int unk_00_360;     int unk_00_364;     int unk_00_368;     int unk_00_36c;     int unk_00_370;     int unk_00_374;
-    int unk_00_378;     int unk_00_37c;     int unk_00_380;     int unk_00_384;     int unk_00_388;     int unk_00_38c;
-    int unk_00_390;     int unk_00_394;     int unk_00_398;     int unk_00_39c;     int unk_00_3a0;     int unk_00_3a4;
-    int unk_00_3a8;     int unk_00_3ac;     int unk_00_3b0;     int unk_00_3b4;     int unk_00_3b8;     int unk_00_3bc;
-    int unk_00_3c0;     int unk_00_3c4;     int unk_00_3c8;     int unk_00_3cc;     int unk_00_3d0;     int unk_00_3d4;
-    int unk_00_3d8;     int unk_00_3dc;     int unk_00_3e0;     int unk_00_3e4;     int unk_00_3e8;     int unk_00_3ec;
-    int unk_00_3f0;     int unk_00_3f4;     int unk_00_3f8;     int unk_00_3fc;     int unk_00_400;     int unk_00_404;
-    int unk_00_408;     int unk_00_40c;     int unk_00_410;     int unk_00_414;     int unk_00_418;     int unk_00_41c;
-    int unk_00_420;     int unk_00_424;     int unk_00_428;     int unk_00_42c;     int unk_00_430;     int unk_00_434;
-    int unk_00_438;     int unk_00_43c;     int unk_00_440;     int unk_00_444;     int unk_00_448;     int unk_00_44c;
-    int unk_00_450;     int unk_00_454;     int unk_00_458;     int unk_00_45c;     int unk_00_460;     int unk_00_464;
-    int unk_00_468;     int unk_00_46c;     int unk_00_470;     int unk_00_474;     int unk_00_478;     int unk_00_47c;
-    int unk_00_480;     int unk_00_484;     int unk_00_488;     int unk_00_48c;     int unk_00_490;     int unk_00_494;
-    int unk_00_498;     int unk_00_49c;     int unk_00_4a0;     int unk_00_4a4;     int unk_00_4a8;     int unk_00_4ac;
-    int unk_00_4b0;     int unk_00_4b4;     int unk_00_4b8;     int unk_00_4bc;     int unk_00_4c0;     int unk_00_4c4;
-    int unk_00_4c8;     int unk_00_4cc;     int unk_00_4d0;     int unk_00_4d4;     int unk_00_4d8;     int unk_00_4dc;
-    int unk_00_4e0;     int unk_00_4e4;     int unk_00_4e8;     int unk_00_4ec;     int unk_00_4f0;     int unk_00_4f4;
-    int unk_00_4f8;     int unk_00_4fc;     int unk_00_500;     int unk_00_504;     int unk_00_508;     int unk_00_50c;
-    int unk_00_510;     int unk_00_514;     int unk_00_518;     int unk_00_51c;     int unk_00_520;     int unk_00_524;
-    int unk_00_528;     int unk_00_52c;     int unk_00_530;     int unk_00_534;     int unk_00_538;     int unk_00_53c;
-    int unk_00_540;     int unk_00_544;     int unk_00_548;     int unk_00_54c;     int unk_00_550;     int unk_00_554;
-    int unk_00_558;     int unk_00_55c;     int unk_00_560;     int unk_00_564;     int unk_00_568;     int unk_00_56c;
-    int unk_00_570;     int unk_00_574;     int unk_00_578;     int unk_00_57c;     int unk_00_580;     int unk_00_584;
-    int unk_00_588;     int unk_00_58c;     int unk_00_590;     int unk_00_594;     int unk_00_598;     int unk_00_59c;
-    int unk_00_5a0;     int unk_00_5a4;     int unk_00_5a8;     int unk_00_5ac;     int unk_00_5b0;     int unk_00_5b4;
-    int unk_00_5b8;     int unk_00_5bc;     int unk_00_5c0;     int unk_00_5c4;     int unk_00_5c8;     int unk_00_5cc;
-    int unk_00_5d0;     int unk_00_5d4;     int unk_00_5d8;     int unk_00_5dc;     int unk_00_5e0;     int unk_00_5e4;
-    int unk_00_5e8;     int unk_00_5ec;     int unk_00_5f0;     int unk_00_5f4;     int unk_00_5f8;     int unk_00_5fc;
-    int unk_00_600;     int unk_00_604;     int unk_00_608;     int unk_00_60c;     int unk_00_610;     int unk_00_614;
-    int unk_00_618;     int unk_00_61c;     int unk_00_620;     int unk_00_624;     int unk_00_628;     int unk_00_62c;
-    int unk_00_630;     int unk_00_634;     int unk_00_638;     int unk_00_63c;     int unk_00_640;     int unk_00_644;
-    int unk_00_648;     int unk_00_64c;     int unk_00_650;     int unk_00_654;     int unk_00_658;     int unk_00_65c;
-    int unk_00_660;     int unk_00_664;     int unk_00_668;     int unk_00_66c;     int unk_00_670;     int unk_00_674;
-    int unk_00_678;     int unk_00_67c;     int unk_00_680;     int unk_00_684;     int unk_00_688;     int unk_00_68c;
-    int unk_00_690;     int unk_00_694;     int unk_00_698;     int unk_00_69c;     int unk_00_6a0;     int unk_00_6a4;
-    int unk_00_6a8;     int unk_00_6ac;     int unk_00_6b0;     int unk_00_6b4;     int unk_00_6b8;     int unk_00_6bc;
-    int unk_00_6c0;     int unk_00_6c4;     int unk_00_6c8;     int unk_00_6cc;     int unk_00_6d0;     int unk_00_6d4;
-    int unk_00_6d8;     int unk_00_6dc;     int unk_00_6e0;     int unk_00_6e4;     int unk_00_6e8;     int unk_00_6ec;
-    int unk_00_6f0;     int unk_00_6f4;     int unk_00_6f8;     int unk_00_6fc;     int unk_00_700;     int unk_00_704;
-    int unk_00_708;     int unk_00_70c;     int unk_00_710;     int unk_00_714;     int unk_00_718;     int unk_00_71c;
-    int unk_00_720;     int unk_00_724;     int unk_00_728;     int unk_00_72c;     int unk_00_730;     int unk_00_734;
-    int unk_00_738;     int unk_00_73c;     int unk_00_740;     int unk_00_744;     int unk_00_748;     int unk_00_74c;
-    int unk_00_750;     int unk_00_754;     int unk_00_758;     int unk_00_75c;     int unk_00_760;     int unk_00_764;
-    int unk_00_768;     int unk_00_76c;     int unk_00_770;     int unk_00_774;     int unk_00_778;     int unk_00_77c;
-    int unk_00_780;     int unk_00_784;     int unk_00_788;     int unk_00_78c;     int unk_00_790;     int unk_00_794;
-    int unk_00_798;     int unk_00_79c;     int unk_00_7a0;     int unk_00_7a4;     int unk_00_7a8;     int unk_00_7ac;
-    int unk_00_7b0;     int unk_00_7b4;     int unk_00_7b8;     int unk_00_7bc;     int unk_00_7c0;     int unk_00_7c4;
-    int unk_00_7c8;     int unk_00_7cc;     int unk_00_7d0;     int unk_00_7d4;     int unk_00_7d8;     int unk_00_7dc;
-    int unk_00_7e0;     int unk_00_7e4;     int unk_00_7e8;     int unk_00_7ec;     int unk_00_7f0;     int unk_00_7f4;
-    int unk_00_7f8;     int unk_00_7fc;     int unk_00_800;     int unk_00_804;     int unk_00_808;     int unk_00_80c;
-    int unk_00_810;     int unk_00_814;     int unk_00_818;     int unk_00_81c;     int unk_00_820;     int unk_00_824;
-    int unk_00_828;     int unk_00_82c;     int unk_00_830;     int unk_00_834;     int unk_00_838;     int unk_00_83c;
-    int unk_00_840;     int unk_00_844;     int unk_00_848;     int unk_00_84c;     int unk_00_850;     int unk_00_854;
-    int unk_00_858;     int unk_00_85c;     int unk_00_860;     int unk_00_864;     int unk_00_868;     int unk_00_86c;
-    int unk_00_870;     int unk_00_874;     int unk_00_878;     int unk_00_87c;     int unk_00_880;     int unk_00_884;
-    int unk_00_888;     int unk_00_88c;     int unk_00_890;     int unk_00_894;     int unk_00_898;     int unk_00_89c;
-    int unk_00_8a0;     int unk_00_8a4;     int unk_00_8a8;     int unk_00_8ac;     int unk_00_8b0;     int unk_00_8b4;
-    int unk_00_8b8;     int unk_00_8bc;     int unk_00_8c0;     int unk_00_8c4;     int unk_00_8c8;     int unk_00_8cc;
-    int unk_00_8d0;     int unk_00_8d4;     int unk_00_8d8;     int unk_00_8dc;     int unk_00_8e0;     int unk_00_8e4;
-    int unk_00_8e8;     int unk_00_8ec;     int unk_00_8f0;     int unk_00_8f4;     int unk_00_8f8;     int unk_00_8fc;
-    int unk_00_900;     int unk_00_904;     int unk_00_908;     int unk_00_90c;     int unk_00_910;     int unk_00_914;
-    int unk_00_918;     int unk_00_91c;     int unk_00_920;     int unk_00_924;     int unk_00_928;     int unk_00_92c;
-    int unk_00_930;     int unk_00_934;     int unk_00_938;     int unk_00_93c;     int unk_00_940;     int unk_00_944;
-    int unk_00_948;     int unk_00_94c;     int unk_00_950;     int unk_00_954;     int unk_00_958;     int unk_00_95c;
-    int unk_00_960;     int unk_00_964;     int unk_00_968;     int unk_00_96c;     int unk_00_970;     int unk_00_974;
-    int unk_00_978;     int unk_00_97c;     int unk_00_980;     int unk_00_984;     int unk_00_988;     int unk_00_98c;
-    int unk_00_990;     int unk_00_994;     int unk_00_998;     int unk_00_99c;     int unk_00_9a0;     int unk_00_9a4;
-    int unk_00_9a8;     int unk_00_9ac;     int unk_00_9b0;     int unk_00_9b4;     int unk_00_9b8;     int unk_00_9bc;
-    int unk_00_9c0;     int unk_00_9c4;     int unk_00_9c8;     int unk_00_9cc;     int unk_00_9d0;     int unk_00_9d4;
-    int unk_00_9d8;     int unk_00_9dc;     int unk_00_9e0;     int unk_00_9e4;     int unk_00_9e8;     int unk_00_9ec;
-    int unk_00_9f0;     int unk_00_9f4;     int unk_00_9f8;     int unk_00_9fc;
-    void *m_a00;
-    int m_a04;
-};
-struct Inner {
-    PoolObj **m_00;
-    int m_04;
-    int m_08;
-    void *m_0ctail;
-    int m_10count;
-    PoolObj *FUN_00e23530();
 };
 struct NormalWords { int a,b,c,d; };
 struct RecPayload {
@@ -10733,27 +7334,7 @@ struct BoundaryEdge {
     }
 };
 
-struct MeshPoolView {
-    int unk00; int unk04; int unk08; int unk0c;
-    int unk10; int unk14; int unk18; int unk1c;
-    Inner pool;
-};
 struct BuildStatus { int code; BuildStatus() {} BuildStatus(int value) : code(value) {} };
-
-struct SlotToken{unsigned long data:32;};
-struct ThisCls {
-    int unk_00_000;     int unk_00_004;     int unk_00_008;     int unk_00_00c;     int unk_00_010;     int unk_00_014;
-    int unk_00_018;     int unk_00_01c;
-    int unk20; int unk24; int unk28;
-    TriNode* m_2c;
-    bool FUN_00e12920();
-    void FUN_00e12bc0(SlotToken a,SlotToken b);
-    void RemoveEdge(int a, int b, int c);
-    BuildStatus FUN_00e1bd30(float *pVec, int flag);
-    void FUN_00e14a90();
-    BuildStatus FUN_00e1de00(float *pVec);
-};
-
 
 __declspec(noinline) void BigObj::FUN_00e27b50(const LocalVec4& a,const LocalVec4& b,float f,bool n) {
     m_iValueBeforeForwardMatrix=n?1:0;
@@ -10909,7 +7490,6 @@ int unk660; int unk664; int unk668; int unk66c; int unk670; int unk674; int unk6
  }
 
 };
-struct PlaneBits {int x,y,z,w;};
 struct RebuildPoolBlock {MeshFace objects[32];MeshFace* freeHead;int used;};
 struct RebuildPool {
  RebuildPoolBlock** blocks;int count;int capacity;MeshFace* head;int used;
@@ -10924,19 +7504,6 @@ struct RebuildPool {
   if(head)head->prev=result;
   ++used;head=result;return result;
  }
-};
-struct RebuildMesh {
- int unk00,unk04,unk08,unk0c,unk10,unk14,unk18,unk1c;
- RebuildPool facePool;
-int unk34; int unk38; int unk3c; int unk40; int unk44; int unk48; int unk4c; int unk50; int unk54; int unk58; int unk5c; int unk60; int unk64; int unk68; int unk6c; int unk70; int unk74; int unk78; int unk7c; int unk80; int unk84; int unk88; int unk8c; int unk90; int unk94; int unk98; int unk9c; int unka0; int unka4; int unka8; int unkac; int unkb0; int unkb4; int unkb8; int unkbc; int unkc0; int unkc4; int unkc8;
- MeshVec* planes; int planeCount;
-int unkd4; int unkd8; int unkdc; int unke0; int unke4; int unke8; int unkec; int unkf0; int unkf4; int unkf8; int unkfc;
- char flag100,dirty;
- void FUN_00e14fe0(int) throw();
- void FUN_00e14a90() throw();
- void FUN_00e15e50() throw();
- void removeGroup(int,int) throw();
- void FUN_00e21100();
 };
 
 namespace fnv_00e23530 {
@@ -11080,10 +7647,6 @@ void* FUN_00e235d0_cls::FUN_00e235d0()
 
 namespace fnv_00e237b0 {
 inline void* __cdecl operator new(unsigned int, void* where) { return where; }
-struct FUN_00e237b0_Input {
-    void* unk00; void* unk04; void* unk08; void* unk0c;
-    void* unk10; void* unk14; void* unk18; void* unk1c; void* entry;
-};
 struct FUN_00e237b0_Allocation {
     void* unk00; void* unk04; void* unk08; void* unk0c; void* allocator;
 };
@@ -11094,11 +7657,6 @@ struct FUN_00e237b0_List {
 };
 extern "C" FUN_00e237b0_Allocation* __cdecl FUN_00c85750();
 extern "C" void __cdecl ResizeAudioStream(void*, FUN_00e237b0_List*, unsigned int);
-struct FUN_00e237b0_Owner {
-    void* unk00;
-    FUN_00e237b0_List list;
-    double FUN_00e237b0(FUN_00e237b0_Input* input);
-};
 }  // namespace fnv_00e237b0
 
 namespace fnv_00e23800 {
@@ -11121,22 +7679,6 @@ struct Holder {
     virtual void* v2();
     virtual void* v3();
     virtual void v4(void* a, int b);
-};
-
-struct TlsHolder {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    Holder* unk10;
-};
-
-struct FUN_00e23800_Class {
-    void* vptr;
-    void* unk04;
-    int unk08;
-    int unk0c;
-    void* FUN_00e23800(int flags);
 };
 
 }  // namespace fnv_00e23800
@@ -11376,12 +7918,6 @@ struct Edge61:Topology61<Edge61,Point61,Face61> {
         return result;
     }
 };
-struct Mesh61 {
-    int unk00,unk04,unk08,unk0c,unk10,unk14,unk18,unk1c;
-    int unk20,unk24,unk28,unk2c,unk30;
-    Face61* first;
-    void FUN_00e24fa0();
-};
 
 struct PointSol {
     int unk00, unk04;
@@ -11535,17 +8071,8 @@ struct StackSol {
         ++size;
     }
 };
-struct MeshSol {
-    int unk00,unk04,unk08,unk0c,unk10,unk14,unk18,unk1c;
-    int unk20,unk24,unk28,unk2c,unk30,unk34,unk38,unk3c;
-    StackSol stack;
-    void FUN_00e25570();
-};
 
 namespace fnv_00e27400 {
-struct FUN_00e25f00_ {
-    void FUN_00e25f00(int value);
-};
 
 struct FUN_00e27400_interface {
     virtual void FUN_00e27400_virtual_0();
@@ -11562,164 +8089,8 @@ struct FUN_00e27400_holder : FUN_00e27400_interface {
 
 extern FUN_00e27400_holder* FUN_00c85750();
 
-struct FUN_00e27400_layout {
-    int unk000;
-    int unk004;
-    int unk008;
-    int unk00c;
-    int unk010;
-    int unk014;
-    int unk018;
-    int unk01c;
-    int unk020;
-    int unk024;
-    int unk028;
-    int unk02c;
-    int unk030;
-    int unk034;
-    int unk038;
-    int unk03c;
-    int unk040;
-    int unk044;
-    int unk048;
-    int unk04c;
-    int unk050;
-    int unk054;
-    int unk058;
-    int unk05c;
-    int unk060;
-    int unk064;
-    int unk068;
-    int unk06c;
-    int unk070;
-    int unk074;
-    int unk078;
-    int unk07c;
-    int unk080;
-    int unk084;
-    int unk088;
-    int unk08c;
-    int unk090;
-    int unk094;
-    int unk098;
-    int unk09c;
-    int unk0a0;
-    int unk0a4;
-    int unk0a8;
-    int unk0ac;
-    int unk0b0;
-    int unk0b4;
-    int unk0b8;
-    int unk0bc;
-    int unk0c0;
-    int unk0c4;
-    int unk0c8;
-    int unk0cc;
-    int unk0d0;
-    int unk0d4;
-    int unk0d8;
-    int unk0dc;
-    int unk0e0;
-    int unk0e4;
-    int unk0e8;
-    int unk0ec;
-    int unk0f0;
-    int unk0f4;
-    int unk0f8;
-    int unk0fc;
-    int unk100;
-    int unk104;
-    int unk108;
-    int unk10c;
-    int unk110;
-    int unk114;
-    int unk118;
-    int unk11c;
-    int unk120;
-    int unk124;
-    int unk128;
-    int unk12c;
-    int unk130;
-    int unk134;
-    int unk138;
-    int unk13c;
-    int unk140;
-    int unk144;
-    int unk148;
-    int unk14c;
-    int unk150;
-    int unk154;
-    int unk158;
-    int unk15c;
-    int unk160;
-    int unk164;
-    int unk168;
-    int unk16c;
-    int unk170;
-    int unk174;
-    int unk178;
-    int unk17c;
-    int unk180;
-    int unk184;
-    int unk188;
-    int unk18c;
-    int unk190;
-    int unk194;
-    int unk198;
-    int unk19c;
-    int unk1a0;
-    int unk1a4;
-    int unk1a8;
-    int unk1ac;
-    int unk1b0;
-    int unk1b4;
-    int unk1b8;
-    int unk1bc;
-    int unk1c0;
-    int unk1c4;
-    int unk1c8;
-    int unk1cc;
-    int unk1d0;
-    int unk1d4;
-    int unk1d8;
-    int unk1dc;
-    int unk1e0;
-    int unk1e4;
-    int unk1e8;
-    int unk1ec;
-    int unk1f0;
-    int unk1f4;
-    int unk1f8;
-    int unk1fc;
-    int unk200;
-    int unk204;
-    int unk208;
-    int unk20c;
-    int unk210;
-    int unk214;
-    int unk218;
-    int unk21c;
-    int unk220;
-    int unk224;
-    int unk228;
-    int unk22c;
-    int unk230;
-    int unk234;
-    int unk238;
-    int unk23c;
-    int unk240;
-    int unk244;
-    int unk248;
-};
-
-struct FUN_00e27400_ : FUN_00e27400_layout {
-    FUN_00e25f00_* unk24c;
-    void FUN_00e27400();
-};
-
 }  // namespace fnv_00e27400
 
-extern char DAT_010eaf20[];
 void __cdecl __debugbreak();
 
 struct Tri14
@@ -11743,29 +8114,10 @@ struct Edge14
     }
 };
 
-struct Mesh14
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    Tri14* m_head2c;
-
-    bool FUN_00e14bd0(Edge14 edge, bool flag, bool report);
-};
-
 extern "C" __m128 _mm_load_ss(const float*);
 extern "C" __m128 _mm_sub_ps(__m128,__m128);
 extern "C" __m128 _mm_sqrt_ss(__m128);
 extern __m128 DAT_010ec7f0;
-extern float DAT_010718c0;
 extern const float DAT_01011d78;
 extern void* DAT_010eaf00[];
 extern void* DAT_010cd664[];
@@ -11791,7 +8143,6 @@ struct ClipTriangle160 {
         vertices[0].set(a.get()); vertices[1].set(b.get()); vertices[2].set(c.get());
     }
 };
-struct TriangleIndex {unsigned int a,b,c,material;};
 
 template<class T> struct ClipBufferBase {
     T* data; int count; unsigned int capacity;
@@ -11802,8 +8153,6 @@ template<class T> struct ClipBufferBase {
 };
 template<class T> struct Buffer:ClipBufferBase<T> {};
 
-struct OutputMesh {Buffer<ClipVertex160> vertices;Buffer<TriangleIndex> triangles;};
-struct SourceMesh {Buffer<ClipVertex160> vertices;Buffer<TriangleIndex> triangles;};
 extern void __cdecl ResizeAudioStream(Allocator*,void*,int);
 extern void __cdecl FUN_00cbeb70(const ClipTriangle160*,int,ClipVertex160*);
 extern void __cdecl FUN_00d1d570(void*,const ClipVertex160*,void*);
@@ -11816,12 +8165,6 @@ struct CollisionTriangle {
 struct ContactList {
     void** vtable; CollisionTriangle** data; int count; unsigned int capacity;
     __forceinline ContactList():vtable(DAT_010eaf00),data(0),count(0),capacity(0x80000000u) {}
-};
-struct CollisionWorld {
-    int unk00,unk04,unk08,unk0c,unk10,unk14,unk18,unk1c;
-    int unk20,unk24,unk28,unk2c,unk30,unk34,unk38,unk3c;
-    int world;
-    void FUN_00e160f0(const void*,SourceMesh*,const void*,OutputMesh*);
 };
 
 extern "C" __m128 _mm_load_ps1(float const* p);
@@ -11856,11 +8199,6 @@ static __forceinline float realSqrt(float x) { return (float)sqrt((double)x); }
 static __forceinline float copyReal(const float& x) { return x; }
 
 
-struct S_00e16e50 {
-    double FUN_00e13660(S_00e16e50_Vec* in, S_00e16e50_Vec* out, bool* flag);
-    float FUN_00e16e50(float scale, S_00e16e50_Vec* v, int n);
-};
-
 extern "C" {
 __m128 _mm_sub_ps(__m128 a, __m128 b);
 __m128 _mm_load_ss(const float* p);
@@ -11884,34 +8222,12 @@ struct PartSplitFace:ListLinks<PartSplitFace> { SplitVertex* vertices[3]; int li
 };
 struct SplitPair { int first, second; };
 struct SplitPairs { SplitPair* data; int size; int capacity; SplitPairs():data(0),size(0),capacity(0x80000000) {} };
-struct SplitMapEntry { int unk00,unk04,unk08,unk0c,unk10,unk14,unk18,unk1c; PartSplitFace* triangle; };
-struct SplitMap { SplitMapEntry* FUN_00d9a4c0(int); };
 struct PartSplitEdge { PartSplitFace* triangle; unsigned int index; PartSplitEdge(PartSplitFace* t, unsigned int i):triangle(t),index(i) {}  __forceinline PartSplitEdge prev() const { return PartSplitEdge(triangle,(0x12>>(index*2))&3); } };
-struct SplitHull {
-    int unk00,unk04,unk08,unk0c,unk10,unk14,unk18,unk1c;
-    int unk20,unk24,unk28,unk2c,unk30,unk34,unk38,unk3c;
-    int tree40,unk44,unk48,unk4c,unk50,unk54,unk58;
-    SplitMap map5c;
-    int unk60,unk64,unk68,unk6c,unk70,unk74,unk78,unk7c;
-    int unk80,unk84,unk88,unk8c,unk90,unk94,unk98,unk9c;
-    int unka0,unka4,unka8,unkac,unkb0,unkb4,unkb8,unkbc;
-    int unkc0,unkc4,unkc8,unkcc,unkd0,unkd4,unkd8,unkdc;
-    int unke0,unke4,unke8,unkec,unkf0,unkf4,unkf8,unkfc;
-    char flag100,flag101;
-    void FUN_00e15e50();
-    PartSplitEdge FUN_00e191a0(PartSplitEdge, const __m128&, int);
-    void FUN_00e1aec0(int firstTag, int secondTag);
-};
-void __cdecl FUN_00d1d5a0(void*,void*,SplitPairs*);
-extern double DAT_01032980;
-extern char str_010eb080[];
 __forceinline void splitCopy(Components& out,const SplitVertex* v) {
     out = *reinterpret_cast<const Components*>(&v->position);
 }
 extern "C" int __cdecl FUN_00deab10(const SplitPoint*,const SplitPoint*);
 __forceinline void setMagnitude(volatile float& out,float value) { out=(float)fabs((double)value); }
-union PointScratch { __m128* point; volatile float magnitude; };
-union VertexScratch { SplitVertex* const* vertex; volatile float magnitude; };
 
 struct EdgeByte {char value;EdgeByte(int b):value((char)b) {} __forceinline operator bool() const {return value!=0;}};
 
@@ -12420,25 +8736,9 @@ struct __declspec(align(16)) S_00e27c90_V {
     float x, y, z, w;
 };
 
-struct S_00e27c90_T {
-    S_00e27c90_V c0, c1, c2, c3;
-    void FUN_00cb2d90(const void* q);
-};
-
 struct __declspec(align(16)) S_00e27c90_Q {
     float x, y, z, w;
     void FUN_00cd9d10(int angle, const S_00e27c90_V* axis);
-};
-
-struct S_00e27c90_U {
-    S_00e27c90_V c0, c1, c2, c3;
-    void FUN_00de90f0(const S_00e27c90_T* t);
-};
-
-
-struct S_00e27c90_Obj {
-    void FUN_00e27850(int a, S_00e27c90_U* u, int b, int c);
-    void FUN_00e27c90(int a, int angle, int b, int c);
 };
 
 extern "C" void _ReadBarrier();
@@ -12465,28 +8765,8 @@ extern double DAT_01015a40;
 
 
 extern float DAT_0104da48;
-struct LogGlobal {
-    __declspec(nothrow) virtual void Slot00();
-    __declspec(nothrow) virtual void Slot04();
-    __declspec(nothrow) virtual void Slot08();
-    __declspec(nothrow) virtual void LogCall(int a, int b, char *buf, char *file, int line);
-};
-extern char DAT_010eb128;
-extern char DAT_010eb100;
-extern char DAT_010eb10c;
-extern char DAT_010eb11c;
-extern char DAT_010eb0ec;
-extern char DAT_010eb0f8;
-
 
 float __cdecl ClampedAcos(float x);
-struct LogSub { int state; void FUN_00cb1600(char *buf, int size); };
-struct LogMid {
-    int state;
-    LogMid *FUN_00cc01c0(const char *s);
-    LogMid *WriteInt(int value);
-};
-struct LogObj { int state; LogMid m_04; LogSub m_08; void FUN_00cc00e0(); };
 
 struct SubArrInt {
     int *m_pData;
@@ -12511,12 +8791,6 @@ struct NodeRes {
 };
 __declspec(nothrow) NodeRes *__cdecl FUN_00e248b0(void *node, int idx) throw();
 
-struct Node123 {
-    void *m_00;
-    char field_004; char field_005; char field_006; char field_007; char field_008; char field_009; char field_00a; char field_00b; char field_00c; char field_00d; char field_00e; char field_00f; char field_010; char field_011; char field_012; char field_013;
-    int m_14[3];
-};
-
 struct ObjB {
     char enabled; char field_01; char field_02; char field_03;
     float tolerance;
@@ -12534,7 +8808,6 @@ struct Pair {
     Pair(int aa,int bb) : a(aa),b(bb) {}
     static void *operator new(unsigned int,void *p) throw() {return p;}
 };
-struct EdgeSelection { Pair first,second; };
 struct PairArrRaw {
     Pair *m_pData; int m_iArrayLength; int m_iCap;
     __forceinline void append(const Pair& value) throw() {
@@ -12726,14 +8999,6 @@ __forceinline void SubArrInt::append(const int &value) throw()
     m_pData[m_iArrayLength] = value;
     m_iArrayLength += 1;
 }
-struct InplaceIntArr4 : SubArrInt {
-    int m_kStorage[4];
-};
-struct ArrView {
-    void *m_pData;
-    int m_iArrayLength;
-    int m_iElt;
-};
 struct ObjA {
     void *vtable;
     unsigned short memorySize; unsigned short referenceCount; int field_008; int field_00c; int field_010;
@@ -12793,10 +9058,6 @@ struct BNode {
     int field_40; int field_44; int field_48; int field_4c;
 };
 
-struct ObjASub20 {
-    void *data; int size; int capacity; void *head; int count; int unknown;
-    __declspec(nothrow) BNode *FUN_00e241a0(void *buf) throw();
-};
 struct ObjASub8 {
     void *data; int size; int capacity; void *head; int count; int unknown;
     __declspec(nothrow) void FUN_00e22f90(void *node) throw();
@@ -12804,30 +9065,6 @@ struct ObjASub8 {
 };
 
 __declspec(nothrow) void __cdecl FUN_00e11710(void *a, void *b, void *c, void *d, int e) throw();
-
-struct FillHolesMesh {
-    int field_000; int field_004;
-    ObjASub8 m_kVertices;
-    ObjASub20 m_uiTriangleCount;
-    int field_038; int field_03c; int field_040; int field_044;
-    int field_048; int field_04c; int field_050; int field_054;
-    int field_058; int field_05c; int field_060; int field_064;
-    int field_068; int field_06c; int field_070; int field_074;
-    int field_078; int field_07c; int field_080; int field_084;
-    int field_088; int field_08c; int field_090; int field_094;
-    int field_098; int field_09c; int field_0a0; int field_0a4;
-    int field_0a8; int field_0ac; int field_0b0; int field_0b4;
-    int field_0b8; int field_0bc; int field_0c0; int field_0c4;
-    int field_0c8; int field_0cc; int field_0d0; int field_0d4;
-    int field_0d8; int field_0dc; int field_0e0; int field_0e4;
-    int field_0e8; int field_0ec; int field_0f0; int field_0f4;
-    int field_0f8; int field_0fc;
-    char field_100; char m_101;
-    __declspec(nothrow) void FUN_00e124d0(void *arr);
-    __declspec(nothrow) void RemoveTriangle(void *item);
-    __declspec(nothrow) void FUN_00e11710(void *a, void *b, void *c, void *d, int e) throw();
-    __declspec(nothrow) void FUN_00e1f4e0(ParameterHandle param);
-};
 
 static __forceinline int CompareVerts(const TEnt *a, const TEnt *b)
 {
@@ -12905,17 +9142,14 @@ static __forceinline void buildGrid(HArr<OptVec4>& arr,OptVec4& akGridVector) th
     }
 }
 
-struct ReportFrame { CharBuffer stream; };
 struct ParameterHandle {Param* value; __forceinline Param* operator->() const {return value;} __forceinline operator Param*() const {return value;} };
 
 namespace PointBoundsIntrinsics {
 extern "C" __m128 _mm_min_ps(__m128 a, __m128 b);
 extern "C" __m128 _mm_max_ps(__m128 a, __m128 b);
-extern "C" __m128 _mm_and_ps(__m128 a, __m128 b);
 extern "C" __m128 _mm_set_ps1(float value);
 }
 extern float DAT_0104e148;
-extern const __m128 DAT_010c4c10;
 
 struct PointBoundsOutput {
     void* value;
@@ -12923,7 +9157,6 @@ struct PointBoundsOutput {
 };
 
 struct Point2I { int unk00, unk04; int x,y; };
-struct WalkNode { WalkNode* next; };
 
 struct WalkTriangle {
     WalkTriangle* nextNode;
@@ -12954,13 +9187,6 @@ struct WalkHit {
     int kind;
     WalkEdge edge;
     WalkHit(int k,const WalkEdge& e):kind(k),edge(e) {}
-};
-struct MeshWalk {
-    int unk00, unk04, unk08, unk0c, unk10, unk14, unk18, unk1c;
-    int unk20, unk24, unk28, unk2c, unk30;
-    WalkNode* head;
-    int maxSteps;
-    __forceinline WalkHit find(WalkEdge edge,int x,int y) const;
 };
 extern char DAT_010eafd4[],DAT_010eaf60[];
 

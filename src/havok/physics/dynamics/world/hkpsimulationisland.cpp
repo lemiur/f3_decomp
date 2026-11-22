@@ -321,47 +321,6 @@ struct D077D0MemoryRouter
 
 extern "C" D077D0MemoryRouter& __cdecl FUN_00c85750();
 
-struct D077D0LocalBuffer
-{
-    void* m_data;
-    int m_iElementCount;
-};
-
-struct D077D0BitField
-{
-    int unk00;
-    int unk04;
-
-    D077D0BitField(void* const& buffer, int numBits);
-};
-
-struct D077D0Object
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int m_iCapacity;
-
-    bool CheckConnectivity(D077D0BitField& bits);
-    bool FUN_00d077d0();
-};
-
 struct GlobalObjectO2_00d472a0
 {
 };
@@ -537,14 +496,6 @@ struct S_00d074c0_Entity
         return m_bFlag == 5;
     }
 };
-struct S_00d074c0_Action
-{
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual void v0C();
-    virtual void GetEntities(S_00d074c0_Array<S_00d074c0_Entity*>& entitiesOut) throw();
-};
 struct S_00d074c0_FixedArray
 {
     int* m_data;
@@ -558,28 +509,6 @@ struct S_00d074c0_UnionFind
     {
         return m_pParentArray->m_data[0] == -m_iNodeCount;
     }
-};
-
-struct S_00d074c0_Island
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    S_00d074c0_Array<S_00d074c0_Action*> m_ppActions;
-    int unk44;
-    S_00d074c0_Array<S_00d074c0_Entity*> m_kActorEntries;
-    bool CheckConnectivity(S_00d074c0_UnionFind& checkConnectivityOut, void* unk) throw();
 };
 
 struct AudioAllocator
@@ -666,39 +595,6 @@ namespace fnvc_adapt {
 AudioHolder* __cdecl FUN_00c85750() throw();
 }
 extern int DAT_010ccf28;
-extern int DAT_0102e388;
-
-struct FUN_00d07720_cls
-{
-    int m_vptr00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    void* m_pData3;
-    int m_iCount3;
-    unsigned int m_uCapBits3;
-    int unk44;
-    void* m_pData2;
-    int m_iCount2;
-    unsigned int m_uCapBits2;
-    int unk54;
-    int unk58;
-    void* m_pData1;
-    int m_iCount1;
-    unsigned int m_uCapBits1;
-
-    void ResetArrays();
-};
 
 }  // namespace fnv_00d07720
 
@@ -738,88 +634,6 @@ struct FUN_00d078e0_cls
 }  // namespace fnv_00d078e0
 
 // SaveIsland
-
-struct FUN_00d07210_Writer
-{
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual void Begin(const char* name, void* ptr, int flag);
-    virtual void v10();
-    virtual void Array(int type, const char* name, void* data, int size, int alloc);
-    virtual void Block(const char* name);
-    virtual void End();
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0c;
-    unsigned char m_force;
-};
-
-struct FUN_00d07210_ConFlags
-{
-    int unk00;
-    unsigned short m_flags;
-    unsigned short unk06;
-};
-
-struct FUN_00d07210_ConInstance
-{
-    int unk00;
-    unsigned short m_flags;
-    unsigned short unk06;
-    int unk08;
-    FUN_00d07210_ConFlags* m_pData;
-};
-
-struct FUN_00d07210_Constraint
-{
-    FUN_00d07210_ConInstance* m_pConstraintInstance;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-};
-
-struct FUN_00d07210_Agents
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-};
-
-struct FUN_00d07210_World
-{
-    int unk00, unk04, unk08, unk0C, unk10, unk14, unk18, unk1C;
-    int unk20, unk24, unk28, unk2C, unk30, unk34, unk38, unk3C;
-    int unk40, unk44, unk48, unk4C, unk50, unk54, unk58, unk5C;
-    int unk60, unk64, unk68, unk6C, unk70, unk74;
-    void* unk78;
-};
-
-struct FUN_00d07210_Island
-{
-    int unk00, unk04, unk08, unk0C, unk10, unk14;
-    FUN_00d07210_World* unk18;
-    int unk1C, unk20, unk24, unk28, unk2C, unk30, unk34;
-    S_00d074c0_Array<S_00d074c0_Action*> m_ppActions;
-    int unk44;
-    S_00d074c0_Array<S_00d074c0_Entity*> m_kActorEntries;
-    int unk54;
-    FUN_00d07210_Agents m_pAgents;
-    void SaveIsland(FUN_00d07210_Writer* save, int unkArg);
-};
-
-int __cdecl FUN_00d06f80(void* data, int bytes);
-void __cdecl CollectSectors(void* agents, FUN_00d07210_Writer* save);
-void __cdecl FUN_00d97130(void* agents, void* world, FUN_00d07210_Writer* save);
 
 extern const void* DAT_010ccf28[];  // hkpSimulationIsland vftable (not in the symbols DB)
 
@@ -865,8 +679,6 @@ struct hkMultiThreadCheckQ
 };
 
 struct hkpWorldQ;
-struct hkpActionQ;
-struct hkpEntityQ;
 struct hkpAgentNnSectorQ;
 
 template <typename T> struct hkArrayQ
@@ -919,28 +731,8 @@ struct IslandBaseQ : hkpConstraintOwnerQ
     }
 };
 
-struct FUN_00d07830 : IslandBaseQ
-{
-    hkMultiThreadCheckQ m_kMultiThreadCheck;
-    float m_fIslandValueBeforeActions1;
-    float m_fIslandValueBeforeActions2;
-    hkArrayQ<hkpActionQ*> m_ppActions;
-    float m_fIslandValueBeforeEntities;
-    hkInplaceArrayQ<hkpEntityQ*, 1> m_kActorEntries;
-    hkpAgentNnTrackQ m_kAgentNnTrack;
-
-    FUN_00d07830(hkpWorldQ* world);
-};
-
 namespace fnv_00d07420 {
 // FUN_00d07420: append a pointer to a list owned by this object, growing via the global allocator.
-
-struct ItemList
-{
-    void** m_data;            // +0x00
-    int m_uiItemCount;        // +0x04
-    unsigned int m_capFlags;  // +0x08 (low 30 bits = capacity)
-};
 
 struct GlobalHolder
 {
@@ -953,63 +745,6 @@ struct GlobalHolder
 
 GlobalHolder* __cdecl FUN_00c85750();
 void __cdecl ResizeAudioStream(void* alloc, void* list, unsigned int n);
-
-struct FUN_00d07420_cls
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    ItemList m_kNode;  // +0x48
-    int unk54;
-    int unk58;
-    int unk5c;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6c;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7c;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8c;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9c;
-    int unkA0;
-    int unkA4;
-    unsigned short m_a8;  // +0xa8
-    unsigned short unkAA;
-    int unkAC;
-    int unkB0;
-    int unkB4;
-    int unkB8;
-    int unkBC;
-    int unkC0;
-    int unkC4;
-    int unkC8;
-    FUN_00d07420_cls* m_cc;  // +0xcc
-
-    void FUN_00d07420(FUN_00d07420_cls* item);
-};
 
 }  // namespace fnv_00d07420
 

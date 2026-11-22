@@ -256,17 +256,6 @@ struct S_00c8d440_Arg
     }
 };
 
-struct S_00c8d440_Target
-{
-    virtual void v0();
-    virtual void v1();
-    virtual void v2();
-    virtual void v3();
-    virtual void v4(unsigned int id, S_00c8d440_Arg arg);
-};
-
-extern S_00c8d440_Target* DAT_01268360;
-
 struct NativeData
 {
     unsigned int unk00, unk04, unk08, unk0c, unk10, unk14;
@@ -362,7 +351,6 @@ struct NativeLink
     unsigned int category;
 };
 NativeLink* FUN_00c85ef0(NativeLink*, NativeThing*, const NiRTTI*);
-extern unsigned char DAT_011afe59;
 struct BodyUpdate
 {
     virtual void v00();
@@ -594,106 +582,7 @@ struct S_c8dcb0_Obj
 };
 extern int DAT_01267b70;
 S_c8dcb0_Res* __cdecl FUN_00c85ef0(S_c8dcb0_Res*, int, int*);
-struct S_c8dcb0_Base
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    bool FUN_00c85810(int a);
-    void UpdateMatchingNodes(int a);
-    bool FUN_00c8dcb0(int a);
-};
 }  // namespace fnv_00c8dcb0
-
-union C8Flags
-{
-    unsigned int raw;
-    struct
-    {
-        unsigned int type : 7;
-        unsigned int rest : 25;
-    };
-};
-
-struct C8Base
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    C8Flags flags;
-};
-
-struct C8Obj
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    C8Base base;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5C;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6C;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7C;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8C;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9C;
-    int unkA0;
-    int unkA4;
-    int unkA8;
-    int unkAC;
-    int unkB0;
-    int unkB4;
-    int unkB8;
-    int unkBC;
-    int unkC0;
-    int unkC4;
-    int unkC8;
-    int unkCC;
-    int unkD0;
-    int unkD4;
-    int unkD8;
-    int unkDC;
-    int unkE0;
-    int unkE4;
-    unsigned char state;
-    void Setup(int, bool, int);
-};
-
-struct C8Owner
-{
-    int unk00;
-    int unk04;
-    C8Obj* obj;
-    void Toggle();
-    void Apply(C8Flags);
-    float GetValue();
-    bool SetState(int state);
-};
 
 struct ListNode;
 
@@ -1500,9 +1389,6 @@ struct ThreadFlagsGuard
     }
 };
 
-void LockWorldStub();
-void UnlockWorldStub();
-
 extern unsigned int g_iRefObjectCountA;
 extern int g_iSerializableCount;
 extern int g_iLiquidActionCount;
@@ -1552,76 +1438,6 @@ struct bhkLiquidAction : bhkSerializableLvl
     }
 };
 
-struct bhkRigidBodyX
-{
-    virtual void vf00();
-    virtual void vf04();
-    virtual void vf08();
-    virtual void vf0C();
-    virtual void vf10();
-    virtual void vf14();
-    virtual void vf18();
-    virtual void vf1C();
-    virtual void vf20();
-    virtual void vf24();
-    virtual void vf28();
-    virtual void vf2C();
-    virtual void vf30();
-    virtual void vf34();
-    virtual void vf38();
-    virtual void vf3C();
-    virtual void vf40();
-    virtual void vf44();
-    virtual void vf48();
-    virtual void vf4C();
-    virtual void vf50();
-    virtual void vf54();
-    virtual void vf58();
-    virtual void vf5C();
-    virtual void vf60();
-    virtual void vf64();
-    virtual void vf68();
-    virtual void vf6C();
-    virtual void vf70();
-    virtual void vf74();
-    virtual void vf78();
-    virtual void vf7C();
-    virtual void vf80();
-    virtual void vf84();
-    virtual void vf88();
-    virtual void vf8C();
-    virtual void vf90();
-    virtual void vf94();
-    virtual void vf98();
-    virtual void vf9C();
-    virtual void vfA0();
-    virtual void vfA4();
-    virtual void vfA8();
-    virtual void vfAC();
-    virtual void vfB0();
-    virtual void vfB4();
-    virtual void vfB8();
-    virtual void vfBC();
-    virtual void vfC0();
-    virtual void vfC4();
-    virtual void vfC8();
-    virtual void vfCC();
-    virtual void vfD0();
-    virtual void vfD4();
-    virtual void vfD8();
-    virtual void vfDC();
-    virtual void vfE0();
-    virtual void vfE4();
-    virtual void vfE8();
-    virtual void vfEC();
-    virtual void vfF0();
-    virtual void vfF4();
-    virtual void vfF8();
-    virtual void SetLockedStub(bool locked);
-    void AddActionStub(bhkLiquidAction* action, int param);
-    bhkLiquidAction* CreateAndAddLiquidAction(int param);
-};
-
 extern __declspec(thread) int g_tlsMemContext;
 
 struct ScopedMemoryContext
@@ -1662,7 +1478,6 @@ struct Shell_c8da40 : public FUN_00c9d4c0_holder
 
 // Switches to memory context 0x10, calls FUN_004ee920 on uTmpnk, then calls FUN_00c9d4c0.
 // @f3 0x00752180 (community match, verified in this file)
-extern int DAT_00e15d9c;
 class __declspec(novtable) Base470 {
 public:
 
@@ -1790,23 +1605,6 @@ void C8DAC0Owner::UpdateMatchingNodes(void* pvContext)
     }
 }
 
-// Define the known helper from the preserved surrounding source.
-struct LiquidBase
-{
-    virtual ~LiquidBase();
-    unsigned int refCount, unk08, unk0c, unk10;
-};
-struct LiquidLink
-{
-    ~LiquidLink();
-};
-struct FUN_00c8e9c0 : LiquidBase
-{
-    LiquidLink link;
-    void FUN_00c8da40();
-    virtual ~FUN_00c8e9c0();
-};
-
 extern "C" __declspec(dllimport) long __stdcall InterlockedIncrement(long volatile* plAddend);
 extern "C" __declspec(dllimport) long __stdcall InterlockedDecrement(long volatile* plAddend);
 extern __declspec(thread) int g_iAllocTagC8E;
@@ -1864,8 +1662,6 @@ class NiObjectC8E
 
     unsigned int m_uiRefCount;
 };
-extern const NiRTTIC8E g_kGeometryRTTIC8E;
-extern const NiRTTIC8E g_kNodeRTTIC8E;
 template <class T> class NiPointerC8E
 {
   public:
@@ -2029,19 +1825,11 @@ struct hkVector
         m_vComponents = v.m_vComponents;
     }
 };
-extern hkVector DAT_01267e30;
 namespace c8d {
 struct Body
 {
     char pad[0x170];
     hkVector m_kPos;
-};
-struct Ent
-{
-    int unk;
-    int unkCur;
-    Body* m_pPhysicsBody;
-    hkVector FUN_00c8d200();
 };
 }
 
@@ -2057,21 +1845,6 @@ struct __declspec(align(16)) hkVector4
         m_vComponents = o.m_vComponents;
         return *this;
     }
-};
-
-extern hkVector4 g_zero;
-
-struct Inner
-{
-    char pad0[0x140];
-    hkVector4 m_vec;
-};
-
-struct Outer
-{
-    char pad0[8];
-    Inner* m_pChildAtom;
-    hkVector4 GetVec() const;
 };
 
 struct Transform_c8d3
@@ -2167,85 +1940,6 @@ struct hkVector4
         m_vComponents = v.m_vComponents;
         return *this;
     }
-};
-
-struct OldCinfo
-{
-    int m_pCollisionShape;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int m_uiCollisionFilterData;
-    char m_eCollisionResponse;
-    char unk29;
-    unsigned short m_usProcessContactCallbackDelay;
-    int unk2C;
-    hkVector4 m_vContactPosition;
-    hkVector4 m_rotation;
-    hkVector4 m_kTranslationalVelocity;
-    hkVector4 m_kAngularVelocity;
-    hkVector4 m_inertiaRow0;
-    hkVector4 m_inertiaRow1;
-    hkVector4 m_inertiaRow2;
-    hkVector4 m_kCenterOfMass1;
-    float m_fViscosityFriction;
-    float m_fLinearDamping;
-    float m_fAngularDamping;
-    float m_fSlipAngle;
-    float m_fElasticity;
-    float m_fSurfaceFriction;
-    float m_fRestitution;
-    float m_fAllowedPenetrationDepth;
-    signed char m_bFlag;
-    char m_bEnableDeactivation;
-    char m_qualityType2;
-    signed char m_iAutoRemoveLevel;
-};
-
-struct BhkRigidBody
-{
-    int m_pCollisionShape;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int m_shape2;
-    int m_uiCollisionFilterData;
-    int unk28;
-    char m_eCollisionResponse;
-    char unk2D;
-    unsigned short m_usProcessContactCallbackDelay;
-    hkVector4 m_vContactPosition;
-    hkVector4 m_rotation;
-    hkVector4 m_kTranslationalVelocity;
-    hkVector4 m_kAngularVelocity;
-    hkVector4 m_inertiaRow0;
-    hkVector4 m_inertiaRow1;
-    hkVector4 m_inertiaRow2;
-    hkVector4 m_kCenterOfMass1;
-    float m_fViscosityFriction;
-    float m_fLinearDamping;
-    float m_fAngularDamping;
-    float m_fGravityFactor;
-    float m_fSlipAngle;
-    float m_fElasticity;
-    float m_fSurfaceFriction;
-    float m_fRestitution;
-    float m_fAllowedPenetrationDepth;
-    char m_bFlag;
-    char m_bRigidBodyFlag;
-    char m_bEnableDeactivation;
-    char m_iAutoRemoveLevel;
-
-    BhkRigidBody& FromOldCinfo(const OldCinfo& src);
 };
 
 }  // namespace fnv_00c8d510
@@ -2488,9 +2182,6 @@ struct Bounds
     __m128 minimum;
     __m128 maximum;
 };
-extern float DAT_012677bc;
-extern float DAT_012677c0;
-extern float DAT_011b0c48;
 struct BodyBuild
 {
     virtual void slot00();
@@ -2923,9 +2614,6 @@ struct CollisionOwner
         return 0;
     }
 };
-extern float DAT_0104ffb8;
-extern float DAT_01011d78;
-extern float DAT_01017d00;
 
 namespace fnv_00c8e800 {
 struct RTTI
@@ -3024,9 +2712,6 @@ struct Body
 struct Collision : Object
 {
 };
-struct CollisionBody : Object
-{
-};
 struct Node : Object
 {
     unsigned int unk20;
@@ -3065,14 +2750,6 @@ struct Node : Object
     unsigned short capacity;
     unsigned short count;
 };
-struct CollisionData
-{
-    virtual void Slot0();
-    virtual void Slot1();
-    virtual const RTTI* GetRTTI();
-    unsigned int unk04, unk08, unk0c;
-    Body* body;
-};
 extern const __m128 DAT_010ec7f0;
 inline bool IsKindOfType(Collision* object)
 {
@@ -3086,10 +2763,6 @@ inline bool IsKindOfType(Collision* object)
     return false;
 }
 }  // namespace fnv_00c8e800
-
-extern const float g_fConst01011d78;
-
-void AccumulateCenterOfMass(void* a, __m128* v, float* f);
 
 struct BinaryStream_c8ea
 {
@@ -3584,7 +3257,6 @@ void RefObject_eb20::FUN_00c8eb20(bool bSetWorld)
 
 extern "C" unsigned long __readfsdword(unsigned long);
 extern unsigned int DAT_0126fd98;
-extern const float DAT_01017870;
 struct TlsBlock
 {
     int unk000;
@@ -3784,7 +3456,6 @@ struct RTTI
     const char* name;
     RTTI* parent;
 };
-extern const unsigned char* const g_01268310_arg1;
 struct Obj
 {
     virtual void v0();
@@ -4065,7 +3736,6 @@ struct bhkRefObject
 {
     void* GetReferencedData();
 };
-Obj* __cdecl FUN_00cc81c0(Obj*, float);
 struct ParentData
 {
     int unk00, unk04, unk08, unk0c, unk10, unk14, unk18;

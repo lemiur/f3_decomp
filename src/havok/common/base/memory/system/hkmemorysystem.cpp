@@ -62,31 +62,7 @@ extern void FUN_00cbbfe0_dummy();
 static const VTable g_vtbl = {
     {(void*)&FUN_00cbbfe0_dummy, (void*)&FUN_00cbbfe0_dummy, (void*)&FUN_00cbbfe0_dummy, (void*)&FUN_00cbbfe0_dummy}};
 
-struct MyCls
-{
-    const VTable* m_vtbl;
-    __declspec(noinline) void FUN_00cbbfe0();
-    MyCls* FUN_00cbc450(int arg);
-};
-
 void __cdecl FUN_00cc0410(int handle, const char* fmt, ...);
-extern const char str_010c9078[];
-extern const char str_010c9058[];
-extern const char str_010c902c[];
-extern const char str_010c900c[];
-extern const char str_010c8fe0[];
-extern const char str_010c8fc0[];
-extern const char str_010c8f94[];
-extern const char str_010c8f68[];
-extern const char str_010c8f3c[];
-
-struct S00cbc000_Stats
-{
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0c;
-};
 
 struct hkOstream;
 int __cdecl FUN_00cc0410(hkOstream* ostr, const char* fmt, ...);
@@ -120,18 +96,6 @@ struct hkMemoryAllocator
     virtual void FillMemoryStatistics(SixUnsignedValueRecord& stats);
 };
 
-struct hkThreadMemory
-{
-    unsigned int ComputeWeightedSum();
-};
-
-struct StringPointerTriple
-{
-    char* m_pTileTemplate;
-    char* m_kRayStart;
-    char* m_kRayEnd;
-};
-
 template <typename T> struct hkArray
 {
     T* m_data;
@@ -149,15 +113,6 @@ template <typename T> struct hkArray
     {
         return m_data[i];
     }
-};
-
-struct MemSystemInfo
-{
-    hkMemoryAllocator* m_pStreamAllocator;
-    hkArray<hkThreadMemory*> m_threadMemory;
-    hkArray<StringPointerTriple*> m_kAllocatorList;
-    int m_stackTotal;
-    int m_heapSoftLimit;
 };
 
 struct AllocatorHolder
@@ -178,7 +133,6 @@ struct AllocatorHolder
         return *m_pSolverAllocator;
     }
 };
-AllocatorHolder* __cdecl FUN_00c85750();
 
 namespace MathUtilities {
 }

@@ -148,7 +148,6 @@ void __stdcall FUN_00e91f80(char* pacDirectory)
 }
 }  // namespace fnv_00e91f80
 
-extern char $SG6379[];
 extern int __cdecl NiSprintf(char*, unsigned int, char const*, ...);
 extern int _ref_00ec408c;
 
@@ -275,13 +274,6 @@ struct NiTMapBaseStub
     void RemoveAll();
 };
 void __cdecl _NiFreeAlias(void*);
-struct TMapHolder
-{
-    void* f0;
-    int f4;
-    void* f8;
-    void* DestroyTMapHolder(unsigned int);
-};
 }  // namespace fnv_00e92610
 
 namespace fnv_00e92650 {
@@ -291,13 +283,6 @@ struct NiTMapBaseStub
 };
 extern void* DAT_010f0be0;
 void __cdecl _NiFreeAlias(void*);
-struct FUN_00e92650_Holder
-{
-    void* unk0;
-    unsigned int unk4;
-    void* unk8;
-    void* DestroyHolder(unsigned int);
-};
 }  // namespace fnv_00e92650
 
 namespace fnv_00e926b0 {
@@ -332,15 +317,7 @@ struct NiTMapBaseStub
 {
     void RemoveAll();
 };
-extern int DAT_010f0c40;
 void __cdecl _NiFreeAlias(void*);
-struct FakeCls
-{
-    void* vf;
-    int f04;
-    void* f08;
-    void* FUN_00e926f0(unsigned int);
-};
 }  // namespace fnv_00e926f0
 
 class NiRTTI;
@@ -348,69 +325,6 @@ class NiShader
 {
   public:
     class NiShader* DynamicCast(class NiRTTI const*);
-};
-extern char const* const g_0126f754_arg1;
-class NiD3DShaderInterface
-{
-  public:
-    virtual void f0();
-    virtual void f1();
-    virtual void f2();
-    virtual void f3();
-    virtual void f4();
-    virtual void f5();
-    virtual void f6();
-    virtual void f7();
-    virtual void f8();
-    virtual void f9();
-    virtual void f10();
-    virtual void f11();
-    virtual void f12();
-    virtual void f13();
-    virtual void f14();
-    virtual void f15();
-    virtual void f16();
-    virtual void f17();
-    virtual void f18();
-    virtual void f19();
-    virtual void f20();
-    virtual void f21();
-    virtual void f22();
-    virtual void f23();
-    virtual void f24();
-    virtual void f25();
-    virtual void f26();
-    virtual void f27();
-    virtual void f28();
-    virtual void f29();
-    virtual void f30();
-    virtual void f31();
-    virtual void f32();
-    virtual void f33();
-    virtual void f34();
-    virtual void f35();
-    virtual void f36();
-    virtual void f37();
-    virtual void f38();
-    virtual void f39();
-    virtual void f40();
-    virtual void f41();
-    virtual void f42();
-    virtual void f43();
-    virtual void f44();
-    virtual void f45();
-    virtual void f46();
-    virtual void f47();
-    virtual void f48();
-    virtual void f49();
-    virtual void f50();
-    virtual void f51();
-    virtual void f52();
-    virtual void f53();
-    virtual void f54();
-    virtual void f55();
-    virtual void f56();
-    virtual bool IsDefault();
 };
 
 void __cdecl operator delete(void* p, unsigned int);
@@ -535,7 +449,6 @@ struct NiTStringTemplateMap
 int NiSprintf(char*, int, const char*, ...);
 
 extern const char $SG6456[];
-extern unsigned int _data_011c16bc;
 void _ref_00ec408c(unsigned int);
 
 struct FUN_00e929c0_shell
@@ -1246,7 +1159,6 @@ FUN_00e925a0::~FUN_00e925a0()
     }
 }
 
-extern "C" void _ReadWriteBarrier();
 class ShaderRefObject
 {
   public:

@@ -39,7 +39,6 @@ void __stdcall FUN_00a57800(StrArr* apStrings)
 }
 
 class NiRTTI;
-extern unsigned int DAT_011f404c;
 class NiObject
 {
   public:
@@ -47,11 +46,6 @@ class NiObject
 };
 class NiInterpolator : public NiObject
 {
-};
-class NiBoolInterpolator : public NiObject
-{
-  public:
-    void SetBoolValue(bool);
 };
 class NiSingleInterpController
 {

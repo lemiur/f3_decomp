@@ -122,7 +122,6 @@ void __fastcall FUN_00e902f0(char* self, int, bool v)
 }
 
 struct GlobalObjectO2_00a7b610;
-extern GlobalObjectO2_00a7b610 g_0126f9f0;
 
 extern "C" void __cdecl FUN_00e87a50();
 
@@ -550,7 +549,6 @@ void* S00e90a80::FUN_00e90a80(void* p)
 struct NiRTTI
 {
 };
-extern NiRTTI g_011f4454_arg1;
 struct NiObject
 {
     NiObject* DynamicCast(NiRTTI const*);
@@ -2214,8 +2212,6 @@ struct _RTL_CRITICAL_SECTION_S
 extern "C" __declspec(dllimport) void __stdcall EnterCriticalSection(_RTL_CRITICAL_SECTION_S*);
 extern "C" __declspec(dllimport) void __stdcall LeaveCriticalSection(_RTL_CRITICAL_SECTION_S*);
 
-extern NiRTTI DAT_011f444c;
-
 struct CritLock
 {
     _RTL_CRITICAL_SECTION_S m_kCriticalSection;
@@ -2417,15 +2413,6 @@ struct Texture : NiObject
 int FUN_00e68ef0(void* tex, void* renderer);
 
 extern RendererStub* DAT_011f4748;
-
-struct FUN_00e90b10_shell
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    void* m_pOwnerShader;
-    void* GetTextureData(Texture* pkTexture, bool* pbChanged, bool* pbMipmap, bool* pbNonPow2);
-};
 
 }  // namespace fnv_00e90b10
 
@@ -3761,12 +3748,6 @@ extern "C" __declspec(dllimport) void __stdcall LeaveCriticalSection(void* secti
 
 struct FnvData;
 
-struct FnvRTTI
-{
-    FnvRTTI* m_pkBase;
-    const char* m_pcName;
-};
-
 struct FnvCriticalSection
 {
     void* m_pCriticalSectionDebugInfo;
@@ -3834,134 +3815,7 @@ struct FnvData
     virtual FnvData* m_vAC();
 };
 
-struct FnvObject
-{
-    void* m_ppVirtualMethodTable;
-    unsigned int m_unk04;
-    unsigned int m_unk08;
-    unsigned int m_unk0c;
-    unsigned int m_unk10;
-    unsigned int m_unk14;
-    unsigned int m_unk18;
-    unsigned int m_unk1c;
-    unsigned int m_unk20;
-    FnvData* m_pUserData;
-    FnvObject* DynamicCast(const FnvRTTI* rtti);
-};
-
-struct FnvRenderGlobal
-{
-    unsigned int m_unk000;
-    unsigned int m_unk004;
-    unsigned int m_unk008;
-    unsigned int m_unk00c;
-    unsigned int m_unk010;
-    unsigned int m_unk014;
-    unsigned int m_unk018;
-    unsigned int m_unk01c;
-    unsigned int m_unk020;
-    unsigned int m_unk024;
-    unsigned int m_unk028;
-    unsigned int m_unk02c;
-    unsigned int m_unk030;
-    unsigned int m_unk034;
-    unsigned int m_unk038;
-    unsigned int m_unk03c;
-    unsigned int m_unk040;
-    unsigned int m_unk044;
-    unsigned int m_unk048;
-    unsigned int m_unk04c;
-    unsigned int m_unk050;
-    unsigned int m_unk054;
-    unsigned int m_unk058;
-    unsigned int m_unk05c;
-    unsigned int m_unk060;
-    unsigned int m_unk064;
-    unsigned int m_unk068;
-    unsigned int m_unk06c;
-    unsigned int m_unk070;
-    unsigned int m_unk074;
-    unsigned int m_unk078;
-    unsigned int m_unk07c;
-    unsigned int m_unk080;
-    unsigned int m_unk084;
-    unsigned int m_unk088;
-    unsigned int m_unk08c;
-    unsigned int m_unk090;
-    unsigned int m_unk094;
-    unsigned int m_unk098;
-    unsigned int m_unk09c;
-    unsigned int m_unk0a0;
-    unsigned int m_unk0a4;
-    unsigned int m_unk0a8;
-    unsigned int m_unk0ac;
-    unsigned int m_unk0b0;
-    unsigned int m_unk0b4;
-    unsigned int m_unk0b8;
-    unsigned int m_unk0bc;
-    unsigned int m_unk0c0;
-    unsigned int m_unk0c4;
-    unsigned int m_unk0c8;
-    unsigned int m_unk0cc;
-    unsigned int m_unk0d0;
-    unsigned int m_unk0d4;
-    unsigned int m_unk0d8;
-    unsigned int m_unk0dc;
-    unsigned int m_unk0e0;
-    unsigned int m_unk0e4;
-    unsigned int m_unk0e8;
-    unsigned int m_unk0ec;
-    unsigned int m_unk0f0;
-    unsigned int m_unk0f4;
-    unsigned int m_unk0f8;
-    unsigned int m_unk0fc;
-    unsigned int m_unk100;
-    unsigned int m_unk104;
-    unsigned int m_unk108;
-    unsigned int m_unk10c;
-    unsigned int m_unk110;
-    unsigned int m_unk114;
-    unsigned int m_unk118;
-    unsigned int m_unk11c;
-    unsigned int m_unk120;
-    unsigned int m_unk124;
-    unsigned int m_unk128;
-    unsigned int m_unk12c;
-    unsigned int m_unk130;
-    unsigned int m_unk134;
-    unsigned int m_unk138;
-    unsigned int m_unk13c;
-    unsigned int m_unk140;
-    unsigned int m_unk144;
-    unsigned int m_unk148;
-    unsigned int m_unk14c;
-    unsigned int m_unk150;
-    unsigned int m_unk154;
-    unsigned int m_unk158;
-    unsigned int m_unk15c;
-    unsigned int m_unk160;
-    unsigned int m_unk164;
-    unsigned int m_unk168;
-    unsigned int m_unk16c;
-    unsigned int m_unk170;
-    unsigned int m_unk174;
-    unsigned int m_unk178;
-    unsigned int m_unk17c;
-    FnvCriticalSection m_kCriticalSection;
-};
-
-extern FnvRenderGlobal* g_pFnvRenderGlobal;
-extern FnvRTTI g_kFnvDataRTTI;
 int FUN_00e68ef0(void* a, void* b);
-
-struct FnvRendererOwner
-{
-    void* m_ppVirtualMethodTable;
-    unsigned int m_unk04;
-    unsigned int m_unk08;
-    void* m_pBinaryStream;
-    bool IsObjectStatic(FnvObject* obj, void* arg2, void* arg3);
-};
 
 }  // namespace fnv_00e90c70
 
@@ -4445,11 +4299,6 @@ void __cdecl FUN_00e91700()
 }
 
 struct NiStream;
-struct NiPersistentSrcTextureRendererData_s
-{
-    void FUN_00a984b0(NiStream&);
-    void FUN_00e91730(NiStream& stream);
-};
 
 extern "C" int __cdecl rand();
 extern const double DAT_01029790;
@@ -5739,10 +5588,8 @@ struct TextureProxy
     D3DFORMAT format;
 };
 PixelProxy* SelectFormatTileValue(const Preferences&, void*);
-D3DMULTISAMPLE_TYPE FUN_00e7ccf0(int);
 const char* GetHResultName(HRESULT);
 void FUN_00a29680(const char*, ...);
-extern bool DAT_0126f0d0;
 struct OwnerProxy
 {
     int unk00, unk04, unk08;
@@ -6593,7 +6440,6 @@ struct FnvD3dDevice
 };
 extern "C" unsigned char DAT_011f4454;
 extern "C" unsigned char DAT_010ed37c;
-extern "C" unsigned char DAT_010ed4dc;
 extern "C" unsigned char DAT_011f4509;
 extern "C" unsigned char DAT_011f4508;
 extern "C" unsigned char DAT_011f4448;
@@ -6623,11 +6469,8 @@ struct SourcePixelFormat
 };
 
 struct FnvOutput;
-FnvOutput* __cdecl FUN_00e8abf0(FnvSource*, FnvDevice*);
-FnvResourceManager* __cdecl FUN_00a76640();
 FnvResource* __cdecl DispatchIfHighBitSet(FnvSource*, unsigned, int);
 void __cdecl FUN_00a29680(void*, int);
-int __cdecl FUN_00e7bd20(const SourcePixelFormat*);
 
 struct SourceFields
 {

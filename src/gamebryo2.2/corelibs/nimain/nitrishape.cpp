@@ -80,11 +80,6 @@ struct NiTriStrips
     virtual ~NiTriStrips();
     char pad[0xc0];
 };
-struct FUN_00a744a0 : NiTriStrips
-{
-    FUN_00a744a0();
-    virtual ~FUN_00a744a0();
-};
 
 namespace fnv_00a744d0 {
 struct BSFadeNode
@@ -315,12 +310,6 @@ void FUN_00a74690_shell::FUN_00a74690(StrArr* pkStrings)
 }
 }  // namespace fnv_00a74690
 
-struct FUN_00a74480 : public NiTriBasedGeom
-{
-    explicit FUN_00a74480(NiTriBasedGeomData* geometry);
-    virtual ~FUN_00a74480();
-};
-
 extern void __cdecl FUN_00a9b140();
 
 void FUN_00a9b190();
@@ -329,8 +318,6 @@ void FUN_00a74500()
 {
     FUN_00a9b190();
 }
-
-void FUN_00a89770();
 
 class NiStream;
 
@@ -341,5 +328,3 @@ void FUN_00a98eb0(NiStream& stream)
 {
     FUN_00a74780(stream);
 }
-
-void __cdecl FUN_00a9b1a0();

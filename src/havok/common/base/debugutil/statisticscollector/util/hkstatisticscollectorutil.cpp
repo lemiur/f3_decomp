@@ -2,8 +2,6 @@
 // src/havok/common/base/debugutil/statisticscollector/util/hkstatisticscollectorutil.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/common/base/debugutil/statisticscollector/util/hkstatisticscollectorutil.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-extern "C" int __cdecl FUN_00cb10d0(const char* s);
-
 class Hasher
 {
   public:
@@ -32,17 +30,6 @@ struct Audio
 };
 
 extern "C" Audio* __cdecl FUN_00c85750();
-
-class Handler
-{
-  public:
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual void v0c();
-    virtual void v10();
-    virtual void Emit(int kind, int a, const char* s, int len, int hash);
-};
 
 // If s is non-null, computes its length plus one, hashes it via the audio hasher, and emits it through h with kind 1 and *a.
 // @f3 0x0046b740 (community match, verified in this file)
@@ -94,19 +81,6 @@ extern "C" void __cdecl FUN_00cf5fe0(void* value)
 }
 
 
-struct Format
-{
-    bool* GetLastNodeFlag(unsigned int*);
-};
-struct Destination
-{
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual void WriteDirect(void*, unsigned int, int);
-    virtual void WriteFormatted(Format*, void*, unsigned int, int);
-};
-
 namespace fnv_00cf6080 {
 struct S_00cf6080_Allocator
 {
@@ -136,16 +110,6 @@ struct S_00cf6080_Router
     }
 };
 S_00cf6080_Router* FUN_00c85750();
-
-struct S_00cf6080_Listener
-{
-    virtual void vfn_00();
-    virtual void vfn_04();
-    virtual void vfn_08();
-    virtual void vfn_0C();
-    virtual void vfn_10();
-    virtual void vfn_14(int type, int a, void* p, int numBytes, void* result);
-};
 
 }  // namespace fnv_00cf6080
 
@@ -203,12 +167,6 @@ struct hkBool
 
 struct Shape;
 
-struct Container
-{
-    __declspec(nothrow) int FUN_00d46f70() const;
-    __declspec(nothrow) const Shape* FUN_00d46f80(int i) const;
-};
-
 __declspec(nothrow) hkBool __cdecl GetFlagByState(const Shape* s);
 
 // FUN_00cf60d0 - 69 bytes at 0x00cf60d0
@@ -217,24 +175,6 @@ __declspec(nothrow) hkBool __cdecl GetFlagByState(const Shape* s);
 // choosing between them on the flag byte that the walker writes through the
 // pointer it is handed.  The walker returns the very pointer it was given, so
 // the test reads the byte through the returned pointer.
-
-struct FNV_C60d0_Walker
-{
-    void* unk00;
-    void* unk04;
-    void* unk08;
-    void* unk0c;
-    bool* GetLastNodeFlag(bool* outFlag);
-};
-
-struct FNV_C60d0_Sink
-{
-    virtual void v0();
-    virtual void v1();
-    virtual void v2();
-    virtual void v3(void* a0, void* a1, int flag);
-    virtual void v4(void* a0, void* a1, void* a2, int flag);
-};
 
 void* __cdecl FUN_00cf60d0(void* context, const void* a, const void* b, const void* c);
 
@@ -257,21 +197,6 @@ void __cdecl CallObjectMethodAndDispatch(int aiFirst, int aiSecond)
     }
 }
 
-struct FUN_00d46f70_Obj
-{
-    int __thiscall FUN_00d46f70();
-    FUN_00d46f70_Obj* __thiscall FUN_00d46d50();
-};
-
-extern FUN_00d46f70_Obj DAT_01268748;
-
-struct SceneNode
-{
-    SceneNode* Advance();
-};
-
-unsigned char* FUN_00cf6330(SceneNode** where, SceneNode* node);
-
 struct CF63C0Bool
 {
     char m_cBooleanValue;
@@ -286,30 +211,6 @@ struct CF63C0Bool
     }
 };
 
-struct CF63C0Class
-{
-    int GetObjectAlignment() const;
-    CF63C0Bool hasVtable() const;
-};
-
-CF63C0Bool __cdecl FUN_00cf6380(const CF63C0Class& pClassInfo);
-
-struct CF63C0Writer
-{
-    virtual void unk00();
-    virtual void unk04();
-    virtual void unk08();
-    virtual void writeObjectWithVtable(void* context, const void* object, bool recurse);
-    virtual void WriteObjectWithClass(const CF63C0Class& pClassInfo, void* context, const void* object, bool recurse);
-};
-
-struct Node
-{
-    Node* FUN_00d46d50();
-};
-
-void __cdecl WriteReflectedMembers(void* a, Node* b, void* c);
-
 // Candidate for GetFlagByState  (0x00cf62b0, 80 bytes)
 //
 // The original:
@@ -323,23 +224,6 @@ void __cdecl WriteReflectedMembers(void* a, Node* b, void* c);
 //
 // The helper at 0x00d86910 is a __thiscall member that returns the dword at
 // this+4; it must be a real call (not inlined) so that `this` stays in ECX.
-
-struct FNV_Cf62b0_Obj
-{
-    unsigned int unk00;
-    int m04;  // returned by the helper (0x00d86910)
-    unsigned char unk08;
-    unsigned char unk09;
-    unsigned char unk0a;
-    unsigned char unk0b;
-    unsigned char unk0c;  // the "type" byte
-    unsigned char unk0d;
-    unsigned short unk0e;
-    unsigned short unk10;  // the flag word
-    int __thiscall FUN_cf62b0_get04();
-};
-
-extern "C" void __cdecl FUN_cf62b0_next(unsigned char* out, int node);
 
 struct Meta64;
 struct Writer64;
@@ -370,38 +254,6 @@ struct Meta64
     Member64* FUN_00d46f80(int);
     int FUN_00d470d0();
 };
-struct Pair64
-{
-    void* data;
-    int count;
-};
-struct Homogeneous64
-{
-    Meta64* pClassInfo;
-    void* data;
-    int count;
-};
-struct Variant64
-{
-    void* object;
-    Meta64* pClassInfo;
-};
-struct Array64
-{
-    void* data;
-    int count;
-    int capacity;
-};
-struct Access64
-{
-    void* data;
-    Member64* member;
-    Access64(void*, Member64*);
-    char** FUN_00d87220(int);
-    const char* FUN_00d87230(int);
-    Pair64* FUN_00d87340(int);
-    Homogeneous64* FUN_00d87350(int);
-};
 struct Writer64
 {
     virtual void v00();
@@ -416,12 +268,6 @@ struct Writer64
     unsigned char includeStorage;
     void EmitString(const char*, const char*);
 };
-int __cdecl MemberSize64(Member64*);
-void __cdecl EmitStringWithHash(Member64*, const char*, Writer64*);
-void __cdecl FUN_00cf6080(const char*, void*, int, int, int, Writer64*);
-void __cdecl FUN_00cf6460(Member64*, void*, int, Writer64*);
-void __cdecl WriteObjectArray(const char*, Meta64*, void*, int, Writer64*);
-void __cdecl WriteToDestination(const char*, void*, Meta64*, Writer64*);
 void __cdecl FUN_00cf60d0(const char*, void*, Meta64*, Writer64*);
 int __cdecl GetThingValue(Member64*);
 
@@ -449,31 +295,10 @@ struct hkClass
     {}
 };
 
-struct hkStringPtr
-{
-    const char* m_pcText;
-};
-
-struct StringArrayAccessor
-{
-    void* m_pTargetObject;
-    const hkClassMember* m_kMemberDescriptor;
-
-    StringArrayAccessor(const void* object, const hkClassMember* member);
-    const char*& GetStringPointerAt(int index);
-    hkStringPtr& GetStringPtr(int index);
-};
-
 int __cdecl FUN_00cb0fa0(const char* a, const char* b);
 
 const void* volatile g_obj;
 const hkClass* volatile g_klass;
 const char* volatile g_out;
 
-extern const char DAT_01094398[];
-extern const char DAT_010cc458[];
 int __cdecl FUN_00cb0fa0(const char*, const char*);
-struct TaggedString64
-{
-    unsigned int bits;
-};

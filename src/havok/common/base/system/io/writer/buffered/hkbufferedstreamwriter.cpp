@@ -46,18 +46,6 @@ int __thiscall FUN_00d27260_standin::FUN_00d27260(const void* data, int size)
     return size;
 }
 
-struct FUN_00d27420_class
-{
-    virtual void m0() = 0;
-    virtual void m1() = 0;
-    virtual void m2() = 0;
-    virtual void m3(const char*, void*, int) = 0;
-    virtual void m4() = 0;
-    virtual void m5(int, const char*, void*, void*, int) = 0;
-
-    void WriteToStream(FUN_00d27420_class*, int);
-};
-
 struct DDCC60World
 {
     void removeReference();
@@ -114,15 +102,6 @@ struct FUN_00d27570MemoryRouter
 };
 
 FUN_00d27570MemoryRouter* __cdecl _D1A0E0GetMemoryRouter();
-
-struct FUN_00d27570Writer
-{
-    void* vftable;
-    unsigned short id;
-
-    void FUN_00d27520();
-    void* DestroyWriter(unsigned char deletingFlag);
-};
 
 }  // namespace fnv_00d27570
 
@@ -434,9 +413,7 @@ struct hkMemoryRouterD274
     }
 };
 namespace hkRouterD274 {
-extern "C" hkMemoryRouterD274& __cdecl FUN_00c85750() throw();
 }
-void* __cdecl FUN_00c85620(hkMemoryAllocatorD274& alloc, int iSize, int iAlign) throw();
 class hkBaseObjectD274
 {
   public:
@@ -461,15 +438,4 @@ class hkStreamWriterD274 : public hkRefObjD274
     {}
     virtual ~hkStreamWriterD274() throw()
     {}
-};
-class hkBufStreamWriterD274 : public hkStreamWriterD274
-{
-  public:
-    hkBufStreamWriterD274(hkStreamWriterD274* s, int bufSize) throw();
-    virtual ~hkBufStreamWriterD274() throw();
-    hkStreamWriterD274* m_stream;
-    char* m_buf;
-    int m_iBufferPosition;
-    int m_bufSize;
-    hkBoolD273 m_bIsOk;
 };

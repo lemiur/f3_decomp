@@ -5,16 +5,7 @@
 // produce (frameless code in an /Od unit). Declarations copied from that unit's skeleton; move the functions to their real unit once identified.
 
 #include "globalfunc_decls.h"
-bool ConvertLocalizedString(const char* input, char* output, unsigned int capacity);
-bool UpdateObjectVisibility(NiAVObject* object);
-bool RemoveInvalidChildNodes(NiNode* object);
-bool HandleUnparentedObjectNode(NiNode* object);
-void SetObjectFormID(NiAVObject* object, unsigned int referenceID);
-bool IsObjectNetValid(NiObjectNET* object);
-float GetAngleFromVector(const NiPoint3& vector);
-int CountCollisionObjects(NiAVObject* object, bool skipPhantoms, bool skipBlendObjects, bool skipUnknown);
 LANGUAGE GetConfiguredLanguage();
-bool IsSettingEnabled();
 
 extern int DAT_0126f74c;
 struct BeamStage
@@ -157,62 +148,6 @@ namespace fnv_00c86790 {
 struct NiStream
 {
     void ResetStreamState();
-};
-struct RetVal
-{
-    int a;
-    int b;
-};
-struct Holder
-{
-    virtual void v00();
-    virtual void v01();
-    virtual void v02();
-    virtual void v03();
-    virtual void v04();
-    virtual void v05();
-    virtual void v06();
-    virtual void v07();
-    virtual void v08();
-    virtual void v09();
-    virtual void v10();
-    virtual void v11();
-    virtual void v12();
-    virtual void v13();
-    virtual void v14();
-    virtual void v15();
-    virtual void v16();
-    virtual void v17();
-    virtual void v18();
-    virtual void v19();
-    virtual void v20();
-    virtual void v21();
-    virtual void v22();
-    virtual void v23();
-    virtual void v24();
-    virtual void v25();
-    virtual void v26();
-    virtual void v27();
-    virtual void v28();
-    virtual void v29();
-    virtual void v30();
-    virtual void v31();
-    virtual void v32();
-    virtual void v33();
-    virtual void v34();
-    virtual void v35();
-    virtual void v36();
-    virtual void v37();
-    virtual void v38();
-    virtual void v39();
-    virtual void v40();
-    virtual void v41();
-    virtual void v42();
-    virtual void v43();
-    virtual void v44();
-    virtual RetVal* MyVirt(int*);
-    void FUN_00c87650(NiStream*);
-    void FUN_00c86790(NiStream*);
 };
 }  // namespace fnv_00c86790
 
@@ -364,21 +299,6 @@ S_00c85ef0_Ret FUN_00c85ef0(S_00c85ef0_Map* map, int key) {
 
 extern int DAT_01268118;
 
-class FUN_00c86720_base
-{
-  public:
-    virtual void unk00();
-    ~FUN_00c86720_base();
-    int unk04;
-};
-
-class FUN_00c86720 : public FUN_00c86720_base
-{
-  public:
-    virtual ~FUN_00c86720();
-    void unk08();
-};
-
 struct FUN_00c867d0_out
 {
     void* unk00;
@@ -477,27 +397,6 @@ void FUN_00c86800_Class::FUN_00c86800(int a1, FUN_00c86800_Table* a2)
     FUN_00c87600(a1, table);
 }
 
-struct FUN_00c868f0_inner
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    void* m_18;
-};
-
-class FUN_00c868f0_cls
-{
-  public:
-    int unk00;
-    int unk04;
-    FUN_00c868f0_inner* m_08;
-    bool FUN_00ba87d0(FUN_00c868f0_cls* other);
-    unsigned char FUN_00c868f0(FUN_00c868f0_cls* other);
-};
-
 extern __declspec(thread) unsigned int threadContext;
 inline unsigned int& currentAllocationMode()
 {
@@ -579,9 +478,6 @@ class Item
 
 extern __declspec(thread) int g_tlsHeapContext;
 
-int sprintf_s(char* buffer, unsigned int size, const char* format, ...);
-char* __cdecl FUN_00a7d5e0(const char* className, const char* name);
-
 struct HeapContextGuard
 {
     int saved;
@@ -596,7 +492,6 @@ struct HeapContextGuard
     }
 };
 
-extern const char* g_name86b80;
 typedef NiTPrimitiveArray<char*, NiTMallocInterface<char*> > StringArray;
 
 inline void AddString(StringArray* arr, char*& s)
@@ -664,21 +559,6 @@ void Wrapper86b80::FUN_00c86b80(StringArray* arr)
 
 
 extern int DAT_01268124;
-
-class FUN_00c86cb0_base
-{
-  public:
-    virtual void unk00();
-    ~FUN_00c86cb0_base();
-    int unk04;
-};
-
-class FUN_00c86cb0 : public FUN_00c86cb0_base
-{
-  public:
-    virtual ~FUN_00c86cb0();
-    void unk08();
-};
 
 struct FourFloatVector
 {
@@ -903,12 +783,6 @@ struct FUN_00c871c0_tls
 };
 extern __declspec(thread) FUN_00c871c0_tls g_tls;
 
-struct FUN_00c871c0_pool
-{
-    void FUN_00aa4060(int);
-};
-extern FUN_00c871c0_pool DAT_011f6238;
-
 struct TlsFlagGuard
 {
     unsigned int m_saved;
@@ -921,16 +795,6 @@ struct TlsFlagGuard
     {
         g_tls.m_2b4 = m_saved;
     }
-};
-
-class FUN_00c871c0_cls
-{
-  public:
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    char* m_0c;
-    void FUN_00c871c0(bool flag);
 };
 
 extern __declspec(thread) int g_iC878C0AllocTag;
@@ -997,15 +861,6 @@ void FUN_00c878c0_cls::FUN_00c878c0(BC878C0StringArray* pkArray)
 }
 
 extern int DAT_01268154;
-struct FUN_00c877b0
-{
-    virtual ~FUN_00c877b0();
-};
-struct FUN_00c87970 : FUN_00c877b0
-{
-    virtual ~FUN_00c87970();
-    void FUN_00c876a0();
-};
 
 // FUN_00ead0d0 - walks a singly linked list and returns the first node whose
 // flag field is set (0 if the list ends or the head pointer is null).
@@ -1585,10 +1440,8 @@ struct Manager
     int unk58;
     void* unk5c;
 };
-extern Geom** DAT_011f91e0;
 extern int DAT_011f91c0;
 extern int DAT_0126f74c;
-extern int DAT_012003ec;
 extern int DAT_011f4288;
 struct Obj
 {
@@ -1849,8 +1702,6 @@ RefObjC86D* __cdecl FUN_00c86de0()
 }
 
 
-void FUN_00c876f0();
-void FUN_00c87700();
 void* __cdecl FUN_00aa13e0(unsigned int bytes);
 extern int DAT_0102016c;
 extern int DAT_0102009c;
@@ -1954,7 +1805,6 @@ struct hkErrorS
     virtual void v02();
     virtual int message(int type, int id, const char* desc, const char* file, int line);
 };
-extern hkErrorS* g_hkErrorInstance;
 
 struct hkpActionS
 {
@@ -2205,18 +2055,6 @@ class __declspec(align(16)) Aligned7100
     int unk3c;
 };
 
-class Owner7100
-{
-  public:
-    Aligned7100* FUN_00c87100(bool* pbCreated);
-    void SetObject(Aligned7100* pkObject);
-
-    int unk00;
-    int unk04;
-    int m_iActive;
-    Aligned7100* m_pPointer;
-};
-
 struct TlsBlock_t
 {
     unsigned int unk000;
@@ -2411,11 +2249,6 @@ struct TlsGuard_t
     }
 };
 
-struct S00c87a70_Obj : ObjectCandidate
-{
-    bool FUN_00c87a70(Item* arg);
-};
-
 struct PhysWorld_c87b
 {
     bool AddItem(void* pkEntity);
@@ -2535,20 +2368,6 @@ struct RefPtr6b3c0
         return m_p;
     }
 };
-struct Entry6b3c0
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    RefCounted6b3c0* unk10;
-    void Prepare();  // 0xc90510
-};
-
-struct Target6b3c0
-{
-    void Add(Entry6b3c0* entry);  // 0xc97370
-};
 
 struct MemoryManager6b3c0
 {
@@ -2568,101 +2387,6 @@ struct Node6b3c0
     }
 };
 
-struct RefSet6b3c0
-{
-    RefPtr6b3c0 m_pTileTemplate;
-    Node6b3c0* m_saved;
-    void Insert(const RefPtr6b3c0& ref);  // 0xc68b50
-};
-
-extern bool DAT_012677a2;
-extern unsigned int DAT_011afe80;
-
-class World6b3c0
-{
-  public:
-    virtual void v00();
-    virtual void v01();
-    virtual void v02();
-    virtual void v03();
-    virtual void v04();
-    virtual void v05();
-    virtual void v06();
-    virtual void v07();
-    virtual void v08();
-    virtual void v09();
-    virtual void v10();
-    virtual void v11();
-    virtual void v12();
-    virtual void v13();
-    virtual void v14();
-    virtual void v15();
-    virtual void v16();
-    virtual void v17();
-    virtual void v18();
-    virtual void v19();
-    virtual void v20();
-    virtual void v21();
-    virtual void v22();
-    virtual void v23();
-    virtual void v24();
-    virtual void v25();
-    virtual void v26();
-    virtual void v27();
-    virtual void v28();
-    virtual void v29();
-    virtual void v30();
-    virtual void v31();
-    virtual void v32();
-    virtual void v33();
-    virtual void v34();
-    virtual void v35();
-    virtual void v36();
-    virtual Target6b3c0* GetTarget();  // +0x94
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    unsigned int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int* unk2C;
-    unsigned int unk30;
-    int unk34;
-    int unk38;
-    Entry6b3c0** pending3C;
-    unsigned int pendingCount40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5C;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6C;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7C;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8C;
-    RefSet6b3c0 refs90;
-
-    void Flush(int* items, unsigned int count);  // 0xc674d0
-    void Step1();                                // 0xc676e0
-    void Step2();                                // 0xc6aac0
-    void Step3();                                // 0xc67850
-    void FUN_00c6b3c0(Entry6b3c0* entry);
-};
-
 inline void Swap86(unsigned long* p)
 {
     *p = _byteswap_ulong(*p);
@@ -2676,10 +2400,6 @@ struct Block86
 {
     int m_00, m_04, m_08, m_0c;
     unsigned long m_aulData[12];
-};
-struct FUN_00c86790_t
-{
-    void FUN_00c86790(NiStream86* pkStream);
 };
 class FUN_00c86e80_t
 {

@@ -25,9 +25,6 @@ hkReal hkpCylinderShapeGetCylRadius::FUN_00d571a0() {
     return m_fCylinderRadius;
 }
 
-extern char DAT_01268940[];
-void __cdecl FUN_00c90360(void* item, const char* type);
-
 struct C00d573e0 {
     char  pad00[0x10];
     volatile float f10;
@@ -47,10 +44,6 @@ void C00d573e0::SetValue(float afValue) {
 }
 
 #include "fnv_asm_helpers.h"   // project x87 helpers (fnv_SinCos, fnv_FloatToInt), kept last so earlier code is unchanged
-
-extern char DAT_010305a8;
-extern char DAT_010d0f1c;
-extern float DAT_011b5be8;
 
 static __declspec(noinline) float FUN_00d571d0()
 {
@@ -132,61 +125,7 @@ struct Vec_d57220v {
     }
 };
 
-struct Cyl_d57220 {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    Vec_d57220v m_kVertexA;
-    Vec_d57220v m_kVertexB;
-    Vec_d57220v m_kPerpendicular1;
-    Vec_d57220v m_kPerpendicular2;
-    void InitPerpendiculars();
-};
-
 }  // namespace fnv_00d57220
-
-extern float DAT_01016248;
-
-struct S00d57830 {
-    void* m_ppVirtualMethodTable;
-    unsigned short m_usMemSizeAndFlags;
-    short m_sReferenceCount;
-    unsigned int m_ulUserData;
-    unsigned int m_type;
-    float m_fSphereRadius;
-    float m_fCylinderRadius;
-    float m_fCylinderRadiusSquared;
-    unsigned int m_auiShapeKeys;
-    __m128 m_kVertexA;
-    __m128 m_kVertexB;
-
-    void FUN_00d57830(__m128* out);
-};
-
-struct FnvCpu_FUN_00d57870_CpuData0 {
-    __m128 field00;
-};
-struct FnvCpu_FUN_00d57870_CpuObject {
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0c;
-    unsigned int unk10;
-    unsigned int unk14;
-    unsigned int unk18;
-    unsigned int unk1c;
-    unsigned int unk20;
-    unsigned int unk24;
-    unsigned int unk28;
-    unsigned int unk2c;
-    __m128 field30;
-    void CopyField30(FnvCpu_FUN_00d57870_CpuData0* input0);
-};
 
 namespace fnv_00d571d0 {
 namespace c571 { const float DAT_01056528 = 1.1f; }

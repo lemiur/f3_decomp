@@ -36,36 +36,6 @@ void FUN_00e44c70_cls::InitOnce()
     }
 }
 
-struct hkpEntity
-{
-    void AddContactListener(void*);
-    void RemoveContactListener(void*);
-};
-struct FUN_00e44d50_cls
-{
-    void FUN_00e44d50(bool);
-};
-
-struct FUN_00e44be0_cls
-{
-    virtual void v0();
-    virtual void v1();
-    virtual void v2();
-    virtual void v3();
-    virtual void v4();
-    virtual void v5();
-    virtual void v6();
-    virtual void v7();
-    virtual void v8();
-    virtual void v9();
-    virtual void v10(float, int, int, int, int, int);
-
-    unsigned char pad[0x24];
-    float value;
-
-    void UpdateValue(float, int, int, int, int, int);
-};
-
 struct DDCC60World
 {
     void removeReference();
@@ -88,84 +58,9 @@ void hkpGunProjectile::ReleaseWorld()
     }
 }
 
-struct FUN_00e44d20_cls
-{
-    void FUN_00e44d20(float);
-};
-
-struct FUN_00e44de0_cls
-{
-    unsigned char pad[0x2c];
-    FUN_00e44d20_cls** m_kTrackedObjects;
-    int m_uiItemCount;
-
-    void ApplyToAll(float);
-};
-
-struct FUN_00e44e40_object
-{
-    unsigned char pad[0x0c];
-    unsigned char flags;
-};
-
-struct FUN_00e44e40_cls
-{
-    unsigned char pad[0x2c];
-    FUN_00e44e40_object** m_kTrackedObjects;
-    int m_uiItemCount;
-
-    FUN_00e44e40_object* FindFirstUnflaggedObject();
-};
-
-struct Iface1
-{
-    virtual void v0();
-};
-
-extern int DAT_010ebf74;
-extern int DAT_010ebf94;
-extern int _DAT_0102e388;
-extern const Iface1 vftable_Iface1;
-
-struct FUN_00e44e70_cls
-{
-    void ReleaseWorld();
-    void ResetVtables();
-};
-
-struct FUN_00e44f30_cls
-{
-    void ApplyToAll(float);
-    void ClearProjectileFlags();
-    void FUN_00e44f30(float, int, int, int, int, int);
-};
-
 void __cdecl FUN_00e44ef0();
 
 extern void __cdecl FUN_00e45040();
-
-struct FUN_00e450f0_manager
-{
-    virtual void v0();
-    virtual void v4();
-    virtual void deallocate(void*, unsigned short);
-};
-
-struct FUN_00e450f0_router
-{
-    unsigned char pad[0x10];
-    FUN_00e450f0_manager* manager;
-};
-
-extern FUN_00e450f0_router* __cdecl _D1A0E0GetMemoryRouter();
-
-struct FUN_00e450f0_cls
-{
-    void* vftable;
-    unsigned short size;
-
-    void* FUN_00e450f0(int flags);
-};
 
 struct CallTarget_00e44eb0
 {
@@ -201,39 +96,6 @@ void __fastcall C::FUN_00e45090(int x)
     V* base = reinterpret_cast<V*>(reinterpret_cast<char*>(this) - 8);
     base->f4(x);
 }
-
-struct FUN_00e450b0_cls
-{
-    void FUN_00e450b0(int);
-};
-
-class hkTimerE44B
-{
-  public:
-    virtual void V0();
-    virtual void V1();
-    virtual void V2();
-    virtual void V3();
-    virtual void V4();
-    virtual void V5();
-    virtual void V6();
-    virtual void V7();
-    virtual void V8();
-    virtual void trigger(int a, int b);
-
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    float m_period;
-    float m_remaining;
-
-    void TriggerIfElapsed(int a, int b);
-};
 
 struct hkBoolE44C
 {
@@ -305,14 +167,6 @@ struct hkFlagsE44E
     }
 };
 
-struct hkpGunProjectileE44E
-{
-    int m_00;
-    int m_04;
-    int m_08;
-    hkFlagsE44E m_flags;
-};
-
 template <class T> struct hkArrayE44E
 {
     T* m_data;
@@ -329,25 +183,6 @@ template <class T> struct hkArrayE44E
     }
 };
 
-class hkpProjectileGunE44E
-{
-  public:
-    int m_00;
-    int m_04;
-    int m_08;
-    int m_0c;
-    int m_10;
-    int m_14;
-    int m_18;
-    int m_1c;
-    int m_iMaxProjectiles;
-    hkReal m_fReloadTime;
-    hkReal m_fTimeSinceLastShot;
-    hkArrayE44E<hkpGunProjectileE44E*> m_kRigidBodies;
-
-    void ClearProjectileFlags();
-};
-
 void __cdecl ReleaseWorld();
 
 // @fnv 0x00e44ea0
@@ -357,15 +192,6 @@ void __cdecl FUN_00e44ea0()
 }
 
 extern float DAT_01017870;
-
-class FUN_00e46660
-{
-  public:
-    FUN_00e46660() throw();
-    virtual ~FUN_00e46660() throw();
-    int unk04[7];
-    int m_20;
-};
 
 class hkRangeE44F
 {
@@ -392,17 +218,6 @@ template <class T> class hkArrayE44F
     }
 };
 
-class FUN_00e44fc0 : public FUN_00e46660, public hkRangeE44F
-{
-  public:
-    hkArrayE44F<int> m_items;
-    int m_38;
-    int m_3c;
-
-    FUN_00e44fc0(int a, int b) throw();
-    virtual ~FUN_00e44fc0() throw();
-};
-
 struct FnvCpu_FUN_00e450c0_CpuAllocator
 {
     virtual void slot00();
@@ -418,13 +233,6 @@ struct FnvCpu_FUN_00e450c0_CpuAllocatorHolder
     FnvCpu_FUN_00e450c0_CpuAllocator* allocator;
 };
 FnvCpu_FUN_00e450c0_CpuAllocatorHolder* __cdecl FUN_00c85750();
-struct FnvCpu_FUN_00e450c0_CpuObject
-{
-    unsigned int unk00;
-    unsigned short size;
-    void ResetVtables();
-    FnvCpu_FUN_00e450c0_CpuObject* FUN_00e450c0(unsigned int flags);
-};
 
 union __declspec(intrin_type) __declspec(align(16)) __m128
 {
@@ -571,19 +379,6 @@ enum ProjectileFlagsE44
     PROJECTILE_FLAG_NONE
 };
 
-class FUN_00e44c20 : public hkRefObjE44, public hkpContactListenerE44
-{
-  public:
-    hkFlagsE44<ProjectileFlagsE44, unsigned char> m_flags;
-    hkRefObjE44* m_kCollisionBody;
-    float m_fDamage;
-    void* m_pGun;
-
-    FUN_00e44c20(void* gun, hkRefObjE44* body);
-    virtual ~FUN_00e44c20();
-    virtual void HandleContactPointEvent(void* event);
-};
-
 namespace fnv_00e44f60 {
 template <int SIZE> __forceinline void memCpyOneAlignedE44F(void* dst, const void* src)
 {
@@ -629,23 +424,6 @@ template <class T> class hkArrayE44F
         memCpyOneAlignedE44F<sizeof(T)>(m_data + m_iElementCount, &e);
         m_iElementCount++;
     }
-};
-
-class hkEntityE44F
-{
-  public:
-    void FUN_00c90510();
-    void FUN_00e44c90(int id);
-};
-
-class hkIslandE44F
-{
-  public:
-    int unk00[11];
-    hkArrayE44F<hkEntityE44F*> m_kActorEntries;
-    int m_iOwnerObjectOffset;
-
-    void FUN_00e44f60(hkEntityE44F* entity);
 };
 
 }  // namespace fnv_00e44f60
@@ -770,18 +548,6 @@ class FUN_00e466a0
     char unk08;
 };
 
-class FUN_00e46f20 : public FUN_00e466a0
-{
-  public:
-    FUN_00e46f20(hkFinishLoadedObjectFlagE46F flag) throw();
-    virtual ~FUN_00e46f20() throw();
-
-    int unk0C[9];
-    void* m_pOwningWorld;
-    int unk34[7];
-    FUN_00e46e80* m_helper;
-};
-
 namespace fnv_00e45010 {
 namespace FUN_00e466a0 {
 class hkpFirstPersonGun
@@ -842,61 +608,6 @@ struct Derived : PrimaryBase, SecondaryBase
 Derived::Derived()
 {}
 
-struct ProjectileBodyE44C : hkpEntityE44C
-{
-    void AddSlot(hkpEntityListenerE44C* listener) throw();
-};
-
-struct ProjectileWorldE44C
-{
-    hkpEntityE44C* FUN_00c914d0(hkpEntityE44C* body, int activation) throw();
-};
-
-struct ProjectileAddE44C : hkObjE44C
-{
-    void FUN_00e44c90(ProjectileWorldE44C* scene) throw();
-};
-
-struct FUN_00e44c70_V
-{
-    void __thiscall InitOnce();
-};
-
-class FUN_00e44da0_cls : public hkpProjectileGun
-{
-  public:
-    void __thiscall FUN_00e44da0(float value);
-};
-
-struct FUN_00e44d20_object
-{
-    virtual void vf00();
-    virtual void vf04();
-    virtual void vf08();
-    virtual void vf0C();
-    virtual void vf10();
-    virtual void vf14(float);
-
-    unsigned char unk04;
-    unsigned char unk05;
-    unsigned char unk06;
-    unsigned char unk07;
-    unsigned char unk08;
-    unsigned char unk09;
-    unsigned char unk0A;
-    unsigned char unk0B;
-    unsigned char unk0C;
-    unsigned char unk0D;
-    unsigned char unk0E;
-    unsigned char unk0F;
-    unsigned char unk10;
-    unsigned char unk11;
-    unsigned char unk12;
-    unsigned char unk13;
-    float unk14;
-    void FUN_00e44d20(float value);
-};
-
 struct ProjQ
 {
     void InitOnce();
@@ -934,10 +645,4 @@ struct ProjectileRelease
     {
         return (m_flags & 1) != 0;
     }
-};
-
-class ProjectileCleanupEntry : public hkpProjectileGun
-{
-  public:
-    void FUN_00e44ef0();
 };

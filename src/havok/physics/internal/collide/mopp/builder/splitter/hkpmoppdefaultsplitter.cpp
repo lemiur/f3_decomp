@@ -317,11 +317,6 @@ setRecursion:
     }
 }
 
-struct FUN_00e09bd0_Obj
-{
-    void __thiscall FUN_00e09bd0();
-};
-
 struct FUN_00e0ac80_Alloc
 {
     virtual void FUN_00e0ac80_0();
@@ -339,14 +334,6 @@ struct BSAudio
 };
 
 BSAudio* __cdecl FUN_00c85750(void);
-
-struct FUN_00e0ac80_class
-{
-    int unk00;
-    unsigned short m_04;
-
-    FUN_00e0ac80_class* __thiscall Construct(int flags);
-};
 
 struct Interval
 {
@@ -532,8 +519,6 @@ union __declspec(intrin_type) __declspec(align(16)) __m128
     float m128_f32[4];
     unsigned __int64 m128_u64[2];
 };
-extern "C" __m128 _mm_xor_ps(__m128, __m128);
-extern __m128 DAT_010c44d0;
 extern double DAT_01011588;
 
 struct FUN_00e0a950_E
@@ -891,14 +876,6 @@ SplitNode* SplitBuilder::FUN_00e0a270(SplitNode* parent, SplitList* list, int si
     return node;
 }
 
-struct hkMemoryRouterE0A5
-{
-    void* m_00;
-    void* m_04;
-    void* m_08;
-    void* m_0c;
-    void* m_10;
-};
 void* __cdecl AllocateWithHeader(void* pvAllocator, int iNumBytes);
 void __cdecl FUN_00c856c0(void* pvAllocator, void* pvMem);
 
@@ -1176,21 +1153,6 @@ struct S00e098b0_Handler
     virtual void vf1C();
     virtual void vf20();
     virtual int addRange(S00e098b0_Elem* elem, unsigned int* output);
-};
-
-struct S00e098b0_Owner
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    S00e098b0_Handler* handler;
 };
 
 struct NodeBounds

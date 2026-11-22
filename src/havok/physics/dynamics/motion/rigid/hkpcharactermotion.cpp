@@ -122,32 +122,6 @@ struct hkMatrix3D1EE
     }
 };
 
-class hkBaseObjectD1EE
-{
-  public:
-    virtual ~hkBaseObjectD1EE() throw();
-};
-
-class hkReferencedObjectD1EE : public hkBaseObjectD1EE
-{
-  public:
-    unsigned short m_usMemSizeAndFlags;
-    short m_sReferenceCount;
-};
-
-class hkpSphereMotionD1EE : public hkReferencedObjectD1EE
-{
-  public:
-    void FUN_00d1ee40(hkMatrix3D1EE& kInertiaInv) const;
-
-    unsigned char m_type;
-    unsigned char m_ucDeactivationIntegrateCounter;
-    unsigned short m_ausDeactivationNumInactiveFrames[2];
-    unsigned short unk0E;
-    hkVector4D1EE m_kMotionState[11];
-    hkVector4D1EE m_kInertiaAndMassInv;
-};
-
 namespace fnv_00d1ee80 {
 union __declspec(intrin_type) __declspec(align(16)) __m128
 {
@@ -200,32 +174,6 @@ struct hkMatrix3D1E8x
     }
 };
 
-class hkBaseObjectD1E8x
-{
-  public:
-    virtual ~hkBaseObjectD1E8x() throw();
-};
-
-class hkReferencedObjectD1E8x : public hkBaseObjectD1E8x
-{
-  public:
-    unsigned short m_usMemSizeAndFlags;
-    short m_sReferenceCount;
-};
-
-class hkpSphereMotionD1E8x : public hkReferencedObjectD1E8x
-{
-  public:
-    void FUN_00d1ee80(hkMatrix3D1E8x& kInertiaInv) const;
-
-    unsigned char m_type;
-    unsigned char m_ucDeactivationIntegrateCounter;
-    unsigned short m_ausDeactivationNumInactiveFrames[2];
-    unsigned short unk0E;
-    hkVector4D1E8x m_kMotionState[11];
-    hkVector4D1E8x m_kInertiaAndMassInv;
-};
-
 }  // namespace fnv_00d1ee80
 
 namespace fnv_00d1ef50 {
@@ -250,34 +198,6 @@ struct hkVector4D1EF
     {
         m_vComponents = _mm_add_ps(m_vComponents, a.m_vComponents);
     }
-};
-
-class hkBaseObjectD1EF
-{
-  public:
-    virtual ~hkBaseObjectD1EF() throw();
-};
-
-class hkReferencedObjectD1EF : public hkBaseObjectD1EF
-{
-  public:
-    unsigned short m_usMemSizeAndFlags;
-    short m_sReferenceCount;
-};
-
-class hkpSphereMotionD1EF : public hkReferencedObjectD1EF
-{
-  public:
-    void ApplyImpulse(const hkVector4D1EF& kImpulse);
-
-    unsigned char m_type;
-    unsigned char m_ucDeactivationIntegrateCounter;
-    unsigned short m_ausDeactivationNumInactiveFrames[2];
-    unsigned short unk0E;
-    hkVector4D1EF m_kMotionState[11];
-    hkVector4D1EF m_kInertiaAndMassInv;
-    hkVector4D1EF m_kTranslationalVelocity;
-    hkVector4D1EF m_kAngularVelocity;
 };
 
 }  // namespace fnv_00d1ef50
@@ -320,11 +240,6 @@ void FUN_00d1ecc0_Class::FUN_00d1ecc0(FUN_00d1ecc0_Matrix& inertia) const
     inertia.m_Values[10] = value;
 }
 
-
-struct FUN_00d1ed00_t
-{
-    void GetInverseDiagonal(float* out);
-};
 
 extern "C" __m128 _mm_shuffle_ps(__m128 a, __m128 b, unsigned int imm);
 extern "C" __m128 _mm_add_ps(__m128 a, __m128 b);
@@ -373,50 +288,10 @@ struct hkVector4X
     }
 };
 
-class hkpSphereMotionX
-{
-  public:
-    void* m_vtbl;
-    unsigned short m_usMemSizeAndFlags;
-    short m_sReferenceCount;
-    unsigned char m_type;
-    unsigned char m_ucDeactivationIntegrateCounter;
-    unsigned short m_ausDeactivationNumInactiveFrames[2];
-    unsigned short unk0E;
-    hkVector4X m_kMotionTransform[4];
-    hkVector4X m_vCenterOfMass0;
-    hkVector4X m_vCenterOfMass1;
-    hkVector4X m_rest[5];
-    hkVector4X m_kInertiaAndMassInv;
-    hkVector4X m_kTranslationalVelocity;
-    hkVector4X m_kAngularVelocity;
-
-    void FUN_00d1eec0(const hkVector4X& imp, const hkVector4X& p);
-};
-
 extern "C" __m128 _mm_set_ps1(float);
-extern "C" __m128 _mm_set_ss(float);
-extern "C" __m128 _mm_load_ss(const float*);
 extern "C" __m128 _mm_shuffle_ps(__m128, __m128, unsigned int);
 extern "C" __m128 _mm_mul_ps(__m128, __m128);
 extern "C" __m128 _mm_add_ps(__m128, __m128);
-extern "C" __m128 _mm_load_ps(const float*);
-extern "C" void _mm_store_ps(float*, __m128);
-union Vector
-{
-    __m128 quad;
-    struct
-    {
-        float x, y, z, w;
-    };
-};
-union Scalar
-{
-    __m128 quad;
-    float real;
-};
-extern "C" __m128 _mm_load_ps1(const float*);
-extern "C" __m128 _mm_set_ps(float, float, float, float);
 struct Simd
 {
     __m128 quad;
@@ -459,12 +334,4 @@ union Vec
         r.quad = _mm_shuffle_ps(quad, quad, 255);
         return r;
     }
-};
-class Motion
-{
-    hkVector4 m_00, m_10, m_20, m_30, m_40, m_50, m_60, m_70, m_80, m_90, m_a0, m_b0;
-    Vec mass, velocity;
-
-  public:
-    void FUN_00d1ef80(float s, const Vec& force);
 };

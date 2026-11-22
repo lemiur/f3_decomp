@@ -25,37 +25,6 @@ void FUN_00db7a80_Class::EnsureInitialized()
     }
 }
 
-struct MemoryManager
-{
-    virtual void FUN_00e00000() = 0;
-    virtual void FUN_00e00004() = 0;
-    virtual void FUN_00e00008(void*, unsigned short) = 0;
-};
-
-struct MemoryRouter
-{
-    void* m_p00;
-    void* m_p04;
-    void* m_p08;
-    void* m_p0C;
-    MemoryManager* m_pMemoryManager;
-};
-
-MemoryRouter* _D1A0E0GetMemoryRouter();
-
-struct Object
-{
-    void FUN_00e03160();
-};
-
-struct FUN_00e049d0_Class : Object
-{
-    unsigned int m_auiShapeKeys;
-    unsigned short m_type;
-
-    FUN_00e049d0_Class* FUN_00e049d0(int flags);
-};
-
 extern "C" char str_010cf830[];
 
 // @fnv 0x00dc0fb0
@@ -99,15 +68,6 @@ struct FUN_00d46d40_s
     const char* FUN_00d46d40() const throw();
 };
 
-class GlobalObjectO2_00d472a0 : public FUN_00d46d40_s
-{
-  public:
-    int m_00;
-};
-extern GlobalObjectO2_00d472a0 g_01268748;
-
-int __cdecl FUN_00cb0fa0(const char* pcA, const char* pcB) throw();
-
 class hkClassMemberDC11
 {
   public:
@@ -130,13 +90,6 @@ class hkClassMemberDC11
 
     int FUN_00d86920() const throw();
     const FUN_00d46d40_s& FUN_00d86910() const throw();
-};
-
-class hkVersionCheckDC11
-{
-  public:
-    int FUN_00e032d0(const hkClassMemberDC11* pkOld, const hkClassMemberDC11* pkNew) throw();
-    int IsMemberCompatible(const hkClassMemberDC11* pkOld, const hkClassMemberDC11* pkNew) throw();
 };
 
 class hkMemoryAllocatorDC12;
@@ -310,31 +263,9 @@ struct S00dc15a0_AudioSystem
     S00dc15a0_Buffer* unk0C;
 };
 
-struct S00dc15a0_Params
-{
-    void* unk00;
-    int unk04;
-};
-
-struct S00dc15a0_Array
-{
-    int* m_data;
-    int m_iElementCount;
-    int m_capFlags;
-};
-
 namespace fnvc_adapt {
 extern "C" S00dc15a0_AudioSystem* __cdecl FUN_00c85750();
 }
-extern "C" void __cdecl FUN_00c908c0(S00dc15a0_Buffer* buffer, int** indices, int size, int elementSize);
-
-struct hkStructureLayoutDC10
-{
-    char m_ucBytesInPointer;
-    char m_bLittleEndian;
-    char m_bReusePaddingOptimization;
-    char m_bEmptyBaseClassOptimization;
-};
 
 struct hkFlagsDC10
 {
@@ -344,21 +275,8 @@ struct hkFlagsDC10
 };
 
 namespace FUN_00e03120 {
-class hkObjectCopier
-{
-  public:
-    hkObjectCopier(const hkStructureLayoutDC10& kSrc, const hkStructureLayoutDC10& kDst, hkFlagsDC10 kFlags);
-    virtual void CopyContents();
-    int unk04, unk08, unk0C;
-};
 }
 
 namespace FUN_00dc1040 {
-class PackfileObjectCopier : public FUN_00e03120::hkObjectCopier
-{
-  public:
-    PackfileObjectCopier(const hkStructureLayoutDC10& kSrc, const hkStructureLayoutDC10& kDst);
-    virtual void CopyContents();
-};
 
 }

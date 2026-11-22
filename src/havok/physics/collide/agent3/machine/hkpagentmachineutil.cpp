@@ -2,20 +2,6 @@
 // src/havok/physics/collide/agent3/machine/hkpagentmachineutil.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/physics/collide/agent3/machine/hkpagentmachineutil.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-struct FUN_00c91180_Class
-{
-    void __thiscall IncrementCounter();
-    void __thiscall FUN_00c91190();
-    int m_field;
-    void* m_ptr;
-};
-
-void __cdecl FUN_00d01d20(void* p);
-struct FUN_00d022b0_Class
-{
-    void __thiscall FUN_00d022b0(void* a, float c);
-};
-
 // If the field at offset 0x50 is set, calls IncrementCounter, FUN_00d01d20 and FUN_00c91190 on self, then forwards a and c to the object at offset 8.
 // @f3 0x006f8ab0 (community match, verified in this file)
 namespace f3m_006f8ab0 {
@@ -1942,12 +1928,6 @@ struct S_00d97130_Sectors
     {
         return m_data[i];
     }
-};
-
-struct S_00d97130_Track
-{
-    int m_bytesAllocatedInLastSector;
-    S_00d97130_Sectors m_kSectors;
 };
 
 // Returns a pointer to base advanced by offset bytes.

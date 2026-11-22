@@ -10,16 +10,6 @@ void* __cdecl FUN_00a95310()
     return &g_011f5ed8;
 }
 
-extern int DAT_010a0384;
-void __fastcall FUN_00a5e930(void*);
-void __cdecl __Dummy_00b6fef0(void*, unsigned int);
-
-struct NiSortAdjustNode
-{
-    void* m_vftable;
-    void* __thiscall Destructor(unsigned int flags);
-};
-
 struct NiNode
 {
     NiNode(unsigned short) throw();

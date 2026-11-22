@@ -318,7 +318,6 @@ class hkBaseSystemC68
                             void* pvErrorReportObject);
     static bool s_bInitialized;
 };
-void __cdecl HavokErrorReportC68(const char* pcMessage, void* pvObject);
 
 class hkReferencedObjectC68
 {
@@ -414,289 +413,12 @@ class bhkSingletonC68
 
 class NiObject;
 typedef NiObject*(__cdecl* CreateFunctionC68)();
-class NiStreamC68
-{
-  public:
-    static void __cdecl RegisterObjectLoader(const char* pcName, CreateFunctionC68 pfnCreate);
-};
-
-class bhkBoxShape
-{
-  public:
-    static NiObject* __cdecl CreateObject();
-};
-class bhkConvexListShape
-{
-  public:
-    static NiObject* __cdecl CreateObject();
-};
-class bhkConvexSweepShape
-{
-  public:
-    static NiObject* __cdecl CreateObject();
-};
-class bhkConvexTransformShape
-{
-  public:
-    static NiObject* __cdecl CreateObject();
-};
-class bhkConvexVerticesShape
-{
-  public:
-    static NiObject* __cdecl CreateObject();
-};
-class bhkCylinderShape
-{
-  public:
-    static NiObject* __cdecl CreateObject();
-};
-class bhkExtendedMeshShapeData
-{
-  public:
-    static NiObject* __cdecl CreateObject();
-};
-class bhkExtendedMeshShape
-{
-  public:
-    static NiObject* __cdecl CreateObject();
-};
-class bhkMultiSphereShape
-{
-  public:
-    static NiObject* __cdecl CreateObject();
-};
-class bhkNiTriStripsShape
-{
-  public:
-    static NiObject* __cdecl CreateObject();
-};
-class bhkPackedNiTriStripsShape
-{
-  public:
-    static NiObject* __cdecl CreateObject();
-};
-class hkPackedNiTriStripsData
-{
-  public:
-    static NiObject* __cdecl CreateObject();
-};
-class bhkPlaneShape
-{
-  public:
-    static NiObject* __cdecl CreateObject();
-};
-class bhkSphereShape
-{
-  public:
-    static NiObject* __cdecl CreateObject();
-};
-class bhkTriangleShape
-{
-  public:
-    static NiObject* __cdecl CreateObject();
-};
-class bhkMoppBvTreeShape
-{
-  public:
-    static NiObject* __cdecl CreateObject();
-};
-class bhkTransformShape
-{
-  public:
-    static NiObject* __cdecl CreateObject();
-};
-class bhkCapsuleShape
-{
-  public:
-    static NiObject* __cdecl CreateObject();
-};
-class bhkListShape
-{
-  public:
-    static NiObject* __cdecl CreateObject();
-};
-class bhkBallAndSocketConstraint
-{
-  public:
-    static NiObject* __cdecl CreateObject();
-};
-class bhkBallSocketConstraintChain
-{
-  public:
-    static NiObject* __cdecl CreateObject();
-};
-class bhkHingeConstraint
-{
-  public:
-    static NiObject* __cdecl CreateObject();
-};
-class bhkHingeLimitsConstraint
-{
-  public:
-    static NiObject* __cdecl CreateObject();
-};
-class bhkFixedConstraint
-{
-  public:
-    static NiObject* __cdecl CreateObject();
-};
-class bhkLimitedHingeConstraint
-{
-  public:
-    static NiObject* __cdecl CreateObject();
-};
-class bhkPrismaticConstraint
-{
-  public:
-    static NiObject* __cdecl CreateObject();
-};
-class bhkRagdollConstraint
-{
-  public:
-    static NiObject* __cdecl CreateObject();
-};
-class bhkRagdollLimitsConstraint
-{
-  public:
-    static NiObject* __cdecl CreateObject();
-};
-class bhkStiffSpringConstraint
-{
-  public:
-    static NiObject* __cdecl CreateObject();
-};
-class bhkWheelConstraint
-{
-  public:
-    static NiObject* __cdecl CreateObject();
-};
-class bhkBreakableConstraint
-{
-  public:
-    static NiObject* __cdecl CreateObject();
-};
-class bhkMalleableConstraint
-{
-  public:
-    static NiObject* __cdecl CreateObject();
-};
-class bhkAngularDashpotAction
-{
-  public:
-    static NiObject* __cdecl CreateObject();
-};
-class bhkDashpotAction
-{
-  public:
-    static NiObject* __cdecl CreateObject();
-};
-class bhkLiquidAction
-{
-  public:
-    static NiObject* __cdecl CreateObject();
-};
-class bhkMouseSpringAction
-{
-  public:
-    static NiObject* __cdecl CreateObject();
-};
-class bhkMotorAction
-{
-  public:
-    static NiObject* __cdecl CreateObject();
-};
-class bhkOrientHingedBodyAction
-{
-  public:
-    static NiObject* __cdecl CreateObject();
-};
-class bhkSpringAction
-{
-  public:
-    static NiObject* __cdecl CreateObject();
-};
-class bhkAabbPhantom
-{
-  public:
-    static NiObject* __cdecl CreateObject();
-};
-class bhkCollisionObject
-{
-  public:
-    static NiObject* __cdecl CreateObject();
-};
-class bhkPCollisionObject
-{
-  public:
-    static NiObject* __cdecl CreateObject();
-};
-class bhkSPCollisionObject
-{
-  public:
-    static NiObject* __cdecl CreateObject();
-};
-class bhkBlendCollisionObject
-{
-  public:
-    static NiObject* __cdecl CreateObject();
-};
-class bhkBlendController
-{
-  public:
-    static NiObject* __cdecl CreateObject();
-};
-class bhkRigidBody
-{
-  public:
-    static NiObject* __cdecl CreateObject();
-};
-class bhkRigidBodyT
-{
-  public:
-    static NiObject* __cdecl CreateObject();
-};
-class bhkSimpleShapePhantom
-{
-  public:
-    static NiObject* __cdecl CreateObject();
-};
-class bhkCachingShapePhantom
-{
-  public:
-    static NiObject* __cdecl CreateObject();
-};
-class bhkExtraData
-{
-  public:
-    static NiObject* __cdecl CreateObject();
-};
-class bhkRagdollTemplate
-{
-  public:
-    static NiObject* __cdecl CreateObject();
-};
-class bhkRagdollTemplateData
-{
-  public:
-    static NiObject* __cdecl CreateObject();
-};
-class bhkPoseArray
-{
-  public:
-    static NiObject* __cdecl CreateObject();
-};
-
-void __cdecl InitializeSelectionMasks();
 
 extern hkMemorySystemC68* g_pkMemorySystemC68;
-extern bhkWorldListenerC68* g_pkWorldListenerC68;
-extern bhkSingletonC68* g_pkSingletonC68;
-extern char g_acMemorySystemBufferC68[];
 inline hkMemorySystemC68& GetMemorySystemC68()
 {
     return *g_pkMemorySystemC68;
 }
-extern char g_acStackBufferC68[0x60000];
 
 // Initializes the Havok physics system, sets up memory router and stack, registers Havok object loaders, and creates the world listener and singleton.
 // @f3 0x008d5000 (community match, verified in this file)
@@ -4559,10 +4281,6 @@ struct Map
     char pad[4];
     void* a;
 };
-struct Bk
-{
-    void* vt;
-};
 struct FUN_00a65300_holder
 {
     void* vt;
@@ -5931,15 +5649,9 @@ void __cdecl FUN_00a660a0()
 }
 }  // namespace fnv_00a660a0
 
-extern int DAT_01081ef0;
 extern int DAT_0109bc64;
 extern int DAT_0109bd54;
-extern int DAT_0109bd90;
 extern int DAT_0109bdcc;
-extern int DAT_0109bf6c;
-extern int DAT_0109bf74;
-extern unsigned int DAT_011a9b0c;
-extern unsigned int DAT_011a9b10;
 extern bool DAT_011f4780;
 void* __cdecl _NiMalloc(unsigned int uiSize);
 void* __cdecl _fnv_zlib_memset(void* pDst, int iValue, unsigned int uiSize);
@@ -7323,10 +7035,6 @@ struct NiMemObject
     char _pad_0[1];
 };
 typedef char _sizecheck_NiMemObject[sizeof(NiMemObject) == 1 ? 1 : -1];
-struct FUN_00c68050_shell : public NiStream
-{
-    void RegisterThread();
-};
 
 struct CRITICAL_SECTION
 {
@@ -7363,20 +7071,6 @@ struct hkMemoryAllocator
     virtual void* AllocateMemoryBlock(int size);
 };
 
-struct hkMemorySystem
-{
-    static hkMemorySystem* __cdecl GetMonitorStream();
-    virtual void v0();
-    virtual void v1();
-    virtual void v2();
-    virtual void InitializeThreadRouter(NineIntegerRecord* router, const char* name, Flag flag);
-};
-
-struct PointerCallback
-{
-    static void __cdecl HandlePointer(void*);
-};
-
 struct NineIntegerRecord
 {
     void* m_stackStart;
@@ -7385,20 +7079,6 @@ struct NineIntegerRecord
     char _pad_0c[4];
     hkMemoryAllocator* m_pThreadAllocator;
     char _pad_14[16];
-};
-
-struct AudioTlsState
-{
-    unsigned int m_uiMemoryContextId;
-    NineIntegerRecord m_router;
-    void* m_pStackBuffer;
-};
-
-struct TaskManager
-{
-    CRITICAL_SECTION m_cs;
-    AudioTlsState m_threads[16];
-    int m_uiNumThreads;
 };
 
 struct TLSData
@@ -7424,12 +7104,6 @@ struct MemContextScope
 
 }  // namespace fnv_00c68050
 
-struct GlobalObjectO2_00c67fe0
-{
-    void RegisterThread();
-};
-extern GlobalObjectO2_00c67fe0 g_01267830;
-
 #include <xmmintrin.h>
 // ---------------------------------------------------------------------------
 // Stand-ins for the game's objects.
@@ -7444,10 +7118,6 @@ extern GlobalObjectO2_00c67fe0 g_01267830;
 //  their loads to the top of the constructor (exactly like the original).
 // ---------------------------------------------------------------------------
 
-extern int FNV_vtbl_010c3c44;         // bhkWorldCinfo's type table
-extern unsigned char FNV_b_011afe5c;  // 3
-extern float FNV_f_01267b38;          // runtime initialised (.bss)
-
 union FNV_const_bits
 {
     unsigned int u;
@@ -7459,72 +7129,6 @@ static const FNV_const_bits FNV_k_011afed4 = {0xC2C43334u};
 static const FNV_const_bits FNV_k_0101e2bc = {0x3DCCCCCDu};  // 0.1f
 static const FNV_const_bits FNV_k_0104da48 = {0x7F7FFFEEu};
 static const FNV_const_bits FNV_k_unused = {0x00000000u};
-
-struct FNV_bhkBaseCinfo
-{
-    int* m_vtbl;                   // +0x00
-    int unk04;                     // +0x04
-    int unk08;                     // +0x08
-    int unk0c;                     // +0x0c
-    __m128 m_vec;                  // +0x10
-    int unk20;                     // +0x20
-    volatile float m_f24;          // +0x24
-    unsigned char m_b28;           // +0x28
-    unsigned char m_b29;           // +0x29
-    unsigned short unk2a;          // +0x2a
-    int unk2c;                     // +0x2c
-    int unk30;                     // +0x30
-    int unk34;                     // +0x34
-    int unk38;                     // +0x38
-    int unk3c;                     // +0x3c
-    int unk40;                     // +0x40
-    int unk44;                     // +0x44
-    int unk48;                     // +0x48
-    int unk4c;                     // +0x4c
-    int unk50;                     // +0x50
-    volatile float m_f54;          // +0x54
-    int unk58;                     // +0x58
-    int unk5c;                     // +0x5c
-    int unk60;                     // +0x60
-    int unk64;                     // +0x64
-    volatile float m_f68;          // +0x68
-    int unk6c;                     // +0x6c
-    int unk70;                     // +0x70
-    int unk74;                     // +0x74
-    int unk78;                     // +0x78
-    int unk7c;                     // +0x7c
-    int unk80;                     // +0x80
-    int unk84;                     // +0x84
-    int unk88;                     // +0x88
-    int unk8c;                     // +0x8c
-    int unk90;                     // +0x90
-    int unk94;                     // +0x94
-    int unk98;                     // +0x98
-    int unk9c;                     // +0x9c
-    int unkA0;                     // +0xa0
-    unsigned short unkA4;          // +0xa4
-    unsigned char unkA6;           // +0xa6
-    volatile unsigned char m_ba7;  // +0xa7
-    int unkA8;                     // +0xa8
-    int unkAC;                     // +0xac
-    int unkB0;                     // +0xb0
-    int unkB4;                     // +0xb4
-    int unkB8;                     // +0xb8
-    int unkBC;                     // +0xbc
-    int unkC0;                     // +0xc0
-    int unkC4;                     // +0xc4
-    int unkC8;                     // +0xc8
-    int unkCC;                     // +0xcc
-    unsigned char unkD0;           // +0xd0
-    unsigned char m_bd1;           // +0xd1
-
-    FNV_bhkBaseCinfo();
-};
-
-struct FUN_00c681c0_bhkWorldCinfo : public FNV_bhkBaseCinfo
-{
-    FUN_00c681c0_bhkWorldCinfo();
-};
 
 struct Thing
 {
@@ -7828,80 +7432,6 @@ struct HeapContextGuard
     {
         g_uiHeapContext = m_uiOld;
     }
-};
-
-struct LinkStream : NiStream
-{
-    unsigned int GetLinkID();
-    NiObject* GetLoadedObject();
-};
-
-struct ExtraBase
-{
-    void LinkObject(NiStream& stream);
-};
-
-struct LinkedHolder : ExtraBase
-{
-    void AddLinked(NiObject* pObj);
-    void LinkObjects(NiStream& stream);
-};
-
-struct S_00cc4870_Stream
-{
-    int FUN_00a63460();
-    int FUN_00a63430();
-};
-struct S_00cc4870
-{
-    virtual void vfn_00();
-    virtual void vfn_04();
-    virtual void vfn_08();
-    virtual void vfn_0c();
-    virtual void vfn_10();
-    virtual void vfn_14();
-    virtual void vfn_18();
-    virtual void vfn_1c();
-    virtual void vfn_20();
-    virtual void vfn_24();
-    virtual void vfn_28();
-    virtual void vfn_2c();
-    virtual void vfn_30();
-    virtual void vfn_34();
-    virtual void vfn_38();
-    virtual void vfn_3c();
-    virtual void vfn_40();
-    virtual void vfn_44();
-    virtual void vfn_48();
-    virtual void vfn_4c();
-    virtual void vfn_50();
-    virtual void vfn_54();
-    virtual void vfn_58();
-    virtual void vfn_5c();
-    virtual void vfn_60();
-    virtual void vfn_64();
-    virtual void vfn_68();
-    virtual void vfn_6c();
-    virtual void vfn_70();
-    virtual void vfn_74();
-    virtual void vfn_78();
-    virtual void vfn_7c();
-    virtual void vfn_80();
-    virtual void vfn_84();
-    virtual void vfn_88();
-    virtual void vfn_8c();
-    virtual void vfn_90();
-    virtual void vfn_94();
-    virtual void vfn_98();
-    virtual void vfn_9c();
-    virtual void vfn_a0();
-    virtual void vfn_a4();
-    virtual void vfn_a8();
-    virtual void vfn_ac();
-    virtual void vfn_b0();
-    virtual void vfn_b4(char* out);
-    void FUN_00c89860(S_00cc4870_Stream* stream);
-    void FUN_00cc4870(S_00cc4870_Stream* stream);
 };
 
 namespace fnv_00a64df0 {

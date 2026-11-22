@@ -24,27 +24,10 @@ void* __cdecl FUN_00a89b20()
     return &g_011f5b78;
 }
 
-struct NiExtraData
-{
-    void FUN_00a7b2e0(void);
-};
-
 struct BSFadeNode
 {
     static void* operator new(unsigned int);
 };
-
-extern void* DAT_0109ee9c;
-
-struct NiVertWeightsExtraData : NiExtraData
-{
-    void* FUN_00a89bb0(unsigned int);
-};
-struct FUN_00a7b300_shell
-{
-    void FUN_00a7b300();
-};
-void __cdecl _delete(void*, unsigned int);
 
 struct A89C70RTTI
 {
@@ -105,17 +88,6 @@ void A89C70Object::FUN_00a89c70(A89C70StringArray* pkStrings)
     char* pcString = FUN_00a7d330(ms_kRTTI.GetName());
     pkStrings->Add(pcString);
 }
-
-extern "C" void* __cdecl FUN_00aa13e0(unsigned int);
-
-struct FUN_00a89b30_cls
-{
-    void* m_vtbl;
-    unsigned int unk04;
-    unsigned int unk08;
-    void FUN_00a7b330(void* obj, unsigned int a1);
-    void* FUN_00a89b30(unsigned int a1);
-};
 
 struct S_00a89be0_Bin
 {

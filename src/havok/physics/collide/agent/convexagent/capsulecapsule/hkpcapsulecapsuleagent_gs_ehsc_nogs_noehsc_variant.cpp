@@ -25,31 +25,9 @@ struct FUN_00d3b3d0_Class
     void InvokeCallbacksAndRelease(int);
 };
 typedef void(__cdecl* HandlerFn)();
-void __cdecl FUN_00d3b380();
 void __cdecl FUN_00d3b420();
-void __cdecl FUN_00d3bd80();
-void __cdecl FUN_00daf8e0();
-struct HandlerSet
-{
-    HandlerFn m_pfnFirst;
-    HandlerFn m_pfnSecond;
-    HandlerFn m_pfnThird;
-    HandlerFn m_pfnFourth;
-    char m_cFlagA;
-    char m_cFlagB;
-};
-struct Registry
-{
-    void FUN_00cfbbe0(HandlerSet* apHandlers, int aiFirst, int aiSecond);
-};
-void __cdecl RegisterHandlers(Registry* apRegistry);
 void __cdecl FUN_00d3b420(const void* a, const void* b, const void* c, void* d);
-struct D3B6D0Agent
-{
-    virtual void ForwardToHandler(const void* a, const void* b, const void* c, void* d);
-};
 
-extern "C" unsigned __int64 __rdtsc(void);
 #include <xmmintrin.h>
 #include <windows.h>
 // The profiler keeps one 12 byte entry per marked call site in a per thread buffer.
@@ -94,21 +72,6 @@ struct Segments
     Vec4 v3;
 };
 
-// The two direction vectors of the ray and of the segment.
-struct Rays
-{
-    Vec4 edge;
-    Vec4 dir;
-};
-
-// Result of the ray / segment intersection.
-struct RayHit
-{
-    Vec4 point;
-    Vec4 point2;
-    float distSq;
-};
-
 // A capsule: four points (the last two are the segment ends) plus its transform.
 struct Capsule
 {
@@ -116,19 +79,6 @@ struct Capsule
     int unk04;
     float* unk08;
 };
-
-struct HitHandler
-{
-    virtual void slot00();
-    virtual void slot04(Capsule*, Capsule*);
-};
-
-extern int DAT_0126835c;
-extern char DAT_010cefcc[];
-extern char DAT_010c41f8[];
-extern "C" void _ReadWriteBarrier();
-
-void __cdecl FUN_00d22e40(void*, void*, void*, void*, void*);
 
 template <class T> struct LazyPtr
 {
@@ -236,21 +186,6 @@ struct PointResult
     float m_posAndDistY;
     float m_posAndDistZ;
     float m_fClosestPointDistanceSquared;
-};
-
-struct BasisRows
-{
-    MatRow row1, row0, row2;
-};
-union EndpointScratch
-{
-    MatRow row;
-    Vec4 endpoints[2];
-};
-struct ContactWorkspace
-{
-    PointResult results[3];
-    Vec4 verticesA[2];
 };
 
 struct AlignedPairData

@@ -51,11 +51,6 @@ struct S_00d37e60_Agent : S_00d37e60_RefObj
     virtual void getPenetrations();
 };
 
-struct S_00d37e60_Shape
-{
-    int unk0[8];
-};
-
 struct S_00d37e60_CdBody
 {
     char* m_pCollisionShape;
@@ -89,17 +84,6 @@ struct S_00d37e60_TriAgent2 : S_00d37e60_TriAgent
     __forceinline S_00d37e60_TriAgent2(const S_00d37e60_CdBody& bodyA, void* mgr) : S_00d37e60_TriAgent(bodyA, mgr)
     {}
     virtual void getPenetrations();
-};
-
-void __cdecl FUN_00d38130(void*, void*, void*, void*);
-struct D38AC0Data
-{
-    int unk00;
-    char unk04;
-    char unk05;
-    char unk06;
-    char unk07;
-    int unk08;
 };
 
 struct CpuCallData
@@ -244,56 +228,6 @@ extern "C"
     __m128 _mm_add_ps(__m128, __m128);
     __m128 _mm_xor_ps(__m128, __m128);
 }
-
-extern __m128 DAT_010c4c00;
-
-struct SimplexVertex
-{
-    __m128 m_kPointA;
-    __m128 m_kPointB;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-};
-
-struct DimNibbles
-{
-    unsigned char m_ucLowNibble : 4;
-    unsigned char m_ucHighNibble : 4;
-};
-
-struct Simplex
-{
-    SimplexVertex* m_kRayEnd;
-    int unk04;
-    int unk08;
-    int unk0C;
-    SimplexVertex m_kVertices[256];
-    int unk3010;
-    int unk3014;
-    int unk3018;
-    int unk301C;
-    __m128 m_vHitNormal;
-    float m_fClosestPointDistanceSquared;
-    int unk3034;
-    int unk3038;
-    int unk303C;
-    unsigned short m_ids[4];
-    unsigned char m_ucDimensionA;
-    unsigned char m_ucDimensionB;
-    DimNibbles m_dims;
-};
-
-struct AgentBase
-{
-    void FUN_00d38b00(int a, int b, int c, Simplex* s);
-};
-
-struct Agent : AgentBase
-{
-    void FUN_00d38f10(int a, int b, int c, Simplex* s);
-};
 
 struct hkVector4f
 {

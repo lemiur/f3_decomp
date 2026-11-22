@@ -35,18 +35,6 @@ FUN_00cc00e0::~FUN_00cc00e0()
     vtbl = (void*)&_DAT_0102e388;
 }
 
-struct hkReferencedObjectStandIn
-{
-    void RetainReference();
-    void removeReference();
-};
-struct DDCC60WorldStandIn
-{
-    int m_uiStandInValue;
-    int m_iValueAfterStandIn;
-    hkReferencedObjectStandIn* m_ref;
-    void FUN_00cc0480(hkReferencedObjectStandIn* pNew);
-};
 // @f3 0x007d7a60 (community match, verified in this file)
 namespace f3m_007d7a60 {
 struct Listener_7d7a60
@@ -77,26 +65,6 @@ void World_7d7a60::FUN_007d7a60()
 }
 }   // namespace f3m_007d7a60
 
-
-struct FUN_00cc0680
-{
-    int tell();
-};
-
-struct FUN_00cc07f0_Router
-{
-    virtual void Slot0();
-    virtual void Slot1();
-    virtual void Free(void*, unsigned short);
-};
-
-struct FUN_00cc07f0_MemoryRouter
-{
-    unsigned char padding[0x10];
-    FUN_00cc07f0_Router* pRouter;
-};
-
-extern FUN_00cc07f0_MemoryRouter* _D1A0E0GetMemoryRouter();
 
 struct FUN_00cc07f0_StandIn
 {
@@ -179,21 +147,6 @@ void __stdcall FUN_00e3b490(bool* p)
     *p = true;
 }
 
-struct FUN_00cc04a0_Slots
-{
-    virtual void slot00();
-    virtual void slot04();
-    virtual void slot08();
-    virtual void slot0C(const char* name, void* value, int flags);
-};
-struct FUN_00cc04a0_Cls
-{
-    int unk00;
-    int unk04;
-    void* unk08;
-    void RegisterWriter(FUN_00cc04a0_Slots* target, int unused);
-};
-
 class hkMemoryAllocatorCC06
 {
   public:
@@ -249,15 +202,6 @@ class FUN_00cc06f0 : public hkRefObjCC06
     int unk10;
 
     FUN_00cc06f0(void* owner, int flag) throw();
-};
-
-class FUN_00cc0630 : public hkRefObjCC06
-{
-  public:
-    FUN_00cc06f0* m_pChildAtom;
-
-    FUN_00cc0630(void* owner);
-    virtual ~FUN_00cc0630();
 };
 
 // @f3 0x0074a440 (community match, verified in this file)
@@ -854,12 +798,6 @@ class FUN_00d46be0_class
     }
 };
 
-struct FUN_00d1df70
-{
-    void FUN_00c90510() throw();
-    void removeReference() throw();
-};
-
 class hkReferencedObjectCC06
 {
   public:
@@ -1117,16 +1055,6 @@ class hkRefObjD60B
     static void operator delete(void* p);
 };
 
-class FUN_00d60b40 : public hkRefObjD60B
-{
-  public:
-    FUN_00cc06f0* m_pChildAtom;
-    char m_flag;
-
-    FUN_00d60b40(void* owner, char flag) throw();
-    virtual ~FUN_00d60b40();
-};
-
 struct NiBinaryStream;
 typedef unsigned int(__cdecl* NiBinaryReadFn)(NiBinaryStream* stream, void* buffer, unsigned int bytes,
                                               unsigned int* componentSizes, unsigned int numComponents);
@@ -1181,7 +1109,6 @@ struct HavokError
     virtual void v08();
     virtual int Warning(int type, int id, const char* desc, const char* file, int line);
 };
-extern HavokError* DAT_01268360;
 
 struct BoolType
 {

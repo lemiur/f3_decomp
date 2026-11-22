@@ -6,7 +6,6 @@
 // src/havok/physics/dynamics/phantom/hkpaabbphantom.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/physics/dynamics/phantom/hkpaabbphantom.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 #include "havok/hkpAabbPhantom.h"
-int __cdecl FUN_00cf2460();
 struct hkBoolXcf24d0
 {
     char m_cBooleanValue;
@@ -22,65 +21,6 @@ template <class T> class hkArrayXcf24d0
     int m_iElementCount;
     int m_iCapacityState;
 };
-class hkObjXcf24d0
-{
-  public:
-    int unk000;
-    int unk004;
-    int unk008;
-    int unk00C;
-    int unk010;
-    int unk014;
-    int unk018;
-    int unk01C;
-    int unk020;
-    int unk024;
-    int unk028;
-    int unk02C;
-    int unk030;
-    int unk034;
-    int unk038;
-    int unk03C;
-    int unk040;
-    int unk044;
-    int unk048;
-    int unk04C;
-    int unk050;
-    int unk054;
-    int unk058;
-    int unk05C;
-    int unk060;
-    int unk064;
-    int unk068;
-    int unk06C;
-    int unk070;
-    int unk074;
-    int unk078;
-    int unk07C;
-    int unk080;
-    int unk084;
-    int unk088;
-    int unk08C;
-    int unk090;
-    int unk094;
-    int unk098;
-    int unk09C;
-    int unk0A0;
-    int unk0A4;
-    int unk0A8;
-    int unk0AC;
-    int unk0B0;
-    int unk0B4;
-    int unk0B8;
-    int unk0BC;
-    int unk0C0;
-    int unk0C4;
-    int unk0C8;
-    int unk0CC;
-    hkArrayXcf24d0<void*> m_items;
-
-    hkBoolXcf24d0 ContainsItem(void* pv) const;
-};
 struct PresentFlag
 {
     bool value;
@@ -89,13 +29,6 @@ struct PresentFlag
     PresentFlag(const PresentFlag& v) : value(v.value)
     {}
 };
-struct FUN_00cf2a60_t : hkpAabbPhantom
-{
-    void NotifyAll(hkpCollidable* collidable, PresentFlag wasPresent);
-    void FUN_00cf2a60(hkpCollidable* collidable);
-};
-class hkClassCF2A;
-extern const hkClassCF2A DAT_0126902c;
 int __cdecl FUN_00d06f80(const void* pvChunk, int iNumBytes) throw();
 template <class T> class hkArrayCF2A
 {
@@ -138,35 +71,6 @@ class hkStatisticsCollectorCF2A
         }
     }
 };
-class hkpCollidableCF2A;
-class FUN_00d08130
-{
-  public:
-    virtual ~FUN_00d08130() throw();
-    hkUint16 m_usMemSizeAndFlags;
-    hkInt16 m_sReferenceCount;
-    char m_pad08[0xa8];
-
-    void WritePhantomLists(hkStatisticsCollectorCF2A* pkCollector, const hkClassCF2A* pkClass) const throw();
-};
-struct hkVector4CF2A
-{
-    hkReal x, y, z, w;
-};
-struct hkAabbCF2A
-{
-    hkVector4CF2A m_kMinimumCorner;
-    hkVector4CF2A m_kMaximumCorner;
-};
-class hkpAabbPhantomCF2A : public FUN_00d08130
-{
-  public:
-    hkAabbCF2A m_kBounds;
-    hkArrayCF2A<hkpCollidableCF2A*> m_ppOverlappingCollidables;
-    char m_padDC[0x4];
-
-    void AddToStatisticsCollector(hkStatisticsCollectorCF2A* pkCollector, const hkClassCF2A* pkClass) const throw();
-};
 class hkMemoryAllocatorCF2C;
 struct hkMemoryRouterCF2C
 {
@@ -207,67 +111,6 @@ template <class T> class hkArrayCF2C
         m_iElementCount++;
     }
 };
-class hkPhantomCF2C
-{
-  public:
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5C;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6C;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7C;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8C;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9C;
-    int unkA0;
-    int unkA4;
-    int unkA8;
-    int unkAC;
-    int unkB0;
-    int unkB4;
-    int unkB8;
-    int unkBC;
-    int unkC0;
-    int unkC4;
-    int unkC8;
-    int unkCC;
-    hkArrayCF2C<void*> m_overlaps;
-    bool m_dirty;
-
-    int FUN_00ca94c0(void* p);
-    void AddOverlap(void* p);
-};
 struct hkLessCF2B
 {
 };
@@ -277,66 +120,6 @@ inline void quickSortCF2B(void** pArr, int iSize, hkLessCF2B kCmp)
     if (iSize > 1)
         QuickSortShapeDetails(pArr, 0, iSize - 1, kCmp);
 }
-struct hkObjCF2B
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5C;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6C;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7C;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8C;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9C;
-    int unkA0;
-    int unkA4;
-    int unkA8;
-    int unkAC;
-    int unkB0;
-    int unkB4;
-    int unkB8;
-    int unkBC;
-    int unkC0;
-    int unkC4;
-    int unkC8;
-    int unkCC;
-    void** m_d0;
-    int m_d4;
-    int m_d8;
-    char m_dc;
-    void SortIfDirty();
-};
 union __declspec(intrin_type) __declspec(align(16)) __m128
 {
     float m128_f32[4];
@@ -356,26 +139,9 @@ extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long dwTls
 extern "C" unsigned __int64 __rdtsc(void);
 extern "C" void _ReadWriteBarrier(void);
 extern "C" unsigned long DAT_0126835c;
-struct StringCursor
-{
-    void* m_kRayStart;
-    char* m_commandPtr;
-    void* m_auiShapeKeys;
-    char* m_endPtr;
-};
 struct DummyBool
 {
     char m_cBooleanValue;
-};
-struct WorldRayCastInput
-{
-    hkVector4 m_vFrom;
-    hkVector4 m_vTo;
-    hkBool m_bEnableShapeCollectionFilter;
-    char m_pad21;
-    char m_pad22;
-    char m_pad23;
-    hkUint32 m_uiFilterInfo;
 };
 struct __declspec(align(16)) ShapeRayCastQuery
 {
@@ -429,41 +195,6 @@ struct DummyCollidable
     const hkTransform* m_pMotionState;
     DummyCollidable* m_parent;
 };
-struct DummyWorld
-{
-    int m_unk00;
-    int m_unk04;
-    int m_unk08;
-    int m_unk0c;
-    int m_unk10;
-    int m_unk14;
-    int m_unk18;
-    int m_unk1c;
-    int m_unk20;
-    int m_unk24;
-    int m_unk28;
-    int m_unk2c;
-    int m_unk30;
-    int m_unk34;
-    int m_unk38;
-    int m_unk3c;
-    int m_unk40;
-    int m_unk44;
-    int m_unk48;
-    int m_unk4c;
-    int m_unk50;
-    int m_unk54;
-    int m_unk58;
-    int m_unk5c;
-    int m_unk60;
-    int m_unk64;
-    int m_unk68;
-    int m_unk6c;
-    int m_unk70;
-    int m_unk74;
-    int m_unk78;
-    char* m_pCollisionFilter;
-};
 static inline void setRotatedInverseDir(hkVector4& out, const hkRotation& r, const __m128& b)
 {
     __m128 c0 = *(const __m128*)&r.m_kColumn0;
@@ -488,21 +219,11 @@ static inline void SetTransformedPosition(hkVector4& out, const hkTransform* t, 
     __m128 d = _mm_sub_ps(*(const __m128*)&in, *(const __m128*)&t->m_vTranslation);
     setRotatedInverseDir(out, t->m_rotation, d);
 }
-class Phantom_00cf26b0 : public hkpAabbPhantom
-{
-  public:
-    void FUN_00cf26b0(const WorldRayCastInput& input, WorldRayCastOutput& output) const;
-};
 
 typedef unsigned long DWORD;
-extern "C" __m128 _mm_add_ss(__m128, __m128);
-extern "C" __m128 _mm_sqrt_ss(__m128);
-extern "C" void _mm_store_ss(float*, __m128);
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long);
 
 extern float DAT_0104da4c;
-extern const char str_010cbfd0[];
-extern const char str_010c41f8[];
 
 struct MonTimerCmd
 {
@@ -1163,90 +884,6 @@ struct InputS {
     int unk68;
     int u6c;
 };
-struct WorldHS {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5C;
-    int unk60;
-    int unk64;
-    int unk68;
-    InputS* m_pInput;
-    FilterHolderS* m_pFilter;
-    void* m_pDispatcher;
-};
-struct PhantomX {
-    int unk00;
-    int unk04;
-    WorldHS* m_pOwningWorld;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5C;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6C;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7C;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8C;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9C;
-    int unkA0;
-    int unkA4;
-    int unkA8;
-    int unkAC;
-    int unkB0;
-    int unkB4;
-    int unkB8;
-    int unkBC;
-    CollidableS** m_overlapData;
-    int m_overlapSize;
-};
 void PhantomS::FUN_00cf2880(const CollidableS* collA,const LinCastInputS& query,void* collector,void* startCollector)
 {
     volatile unsigned int stamp;
@@ -1284,90 +921,3 @@ void PhantomS::FUN_00cf2880(const CollidableS* collA,const LinCastInputS& query,
     top=tls->ptr;
     if(top<tls->end) { *(int*)top=(int)&DAT_00e32798; _ReadWriteBarrier(); stamp=(unsigned int)__rdtsc(); *(unsigned int*)(top+4)=stamp; tls->ptr=top+12; }
 }
-
-
-struct PhRayHitCollector;
-struct PhShape
-{
-    virtual void vf00();
-    virtual void vf04();
-    virtual void vf08();
-    virtual void vf0c();
-    virtual void vf10();
-    virtual void vf14();
-    virtual void vf18();
-    virtual void vf1c();
-    virtual void vf20();
-    virtual void castRayWithCollector(const ShapeRayCastQuery& input, const hkpCdBody& cdBody,
-                                      PhRayHitCollector& collector) const;
-};
-struct PhRefObject
-{
-    virtual ~PhRefObject();
-    unsigned short m_usMemSizeAndFlags;
-    short m_sReferenceCount;
-};
-struct PhCollidableCollidableFilter
-{
-    virtual ~PhCollidableCollidableFilter();
-};
-struct PhShapeCollectionFilter
-{
-    virtual ~PhShapeCollectionFilter();
-};
-struct PhRayFilter
-{
-    virtual ~PhRayFilter();
-};
-struct PhRayCollidableFilter
-{
-    virtual ~PhRayCollidableFilter();
-};
-struct PhCollisionFilter : PhRefObject,
-                           PhCollidableCollidableFilter,
-                           PhShapeCollectionFilter,
-                           PhRayFilter,
-                           PhRayCollidableFilter
-{
-};
-struct PhWorld
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5c;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6c;
-    int unk70;
-    int unk74;
-    int unk78;
-    PhCollisionFilter* m_pCollisionFilter;
-};
-
-class Phantom_00cf2510 : public hkpAabbPhantom
-{
-  public:
-    void FUN_00cf2510(const WorldRayCastInput& input, PhRayHitCollector& collector) const;
-};

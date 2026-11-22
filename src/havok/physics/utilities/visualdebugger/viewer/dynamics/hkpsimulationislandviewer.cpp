@@ -69,31 +69,6 @@ struct S_00d65180_RefObj
     {}
 };
 
-struct S_00d65180_Base2
-{
-    virtual void v0();
-};
-
-struct S_00d65180_Obj : S_00d65180_RefObj, S_00d65180_Base2
-{
-    int unkC;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    S_00d65180_Obj(void* arg) throw();
-};
-
 extern int g_D651E0Value;
 
 // @fnv 0x00d651e0
@@ -118,13 +93,6 @@ struct FUN_00d65220_Service
     FUN_00d65220_Interface* unk10;
 };
 FUN_00d65220_Service* __cdecl FUN_00c85750();
-struct FUN_00d65220_Class
-{
-    void* vtable;
-    unsigned short unk04;
-    void FUN_00d64ae0();
-    FUN_00d65220_Class* FUN_00d65220(char flags);
-};
 }  // namespace fnv_00d65220
 
 struct S_Elem2
@@ -424,26 +392,6 @@ struct AdjustedDerived : PrimaryBase, SecondaryBase
 
 AdjustedDerived::AdjustedDerived()
 {}
-
-// FUN_00d65210 : MSVC this-adjusting thunk  (sub ecx, 0x28 ; jmp <impl>)
-struct A1_00d65210
-{
-    A1_00d65210();
-    virtual void FUN_00d65210();
-    char pad[0x24];
-};
-struct A2_00d65210
-{
-    A2_00d65210();
-    virtual void FUN_00d65210();
-};
-struct Own_00d65210 : A1_00d65210, A2_00d65210
-{
-    Own_00d65210();
-    virtual void key_fn();
-// @fnv 0x00d65210
-    void FUN_00d65210();
-};
 
 struct IslandRemovalCallback
 {

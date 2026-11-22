@@ -54,18 +54,6 @@ void __cdecl FUN_00d34d80(void* apUnused, void* b, float afValue1, float afValue
     FUN_00da35f0(b, afValue1, afValue2, e);
 }
 
-struct FUN_00cf5830_cls {
-    int unk00;
-    int unk04;
-    int unk08;
-    int m_0c;
-    int unk10;
-    unsigned short unk14;
-    unsigned short m_16;
-
-    int FUN_00cf5830();
-};
-
 struct __declspec(align(16)) D36270Data {
     void* vtable;
     void* a;
@@ -87,7 +75,6 @@ void FUN_00d36270(D36270Data*);
 struct D362Script {
     void AddEntry(D36270Data*, int row, int column);
 };
-extern unsigned char DAT_01268ad5;
 // @f3 0x009d1070 (community match, verified in this file)
 void FUN_00d362c0(D362Script* script)
 {
@@ -130,25 +117,6 @@ void __cdecl FUN_00d34d30(void* a, void* b, void* c, void* d)
     obj->m7();
 }
 
-struct Obj {
-    virtual void* m00();
-    virtual void* m04();
-    virtual void* m08();
-    virtual void* m0c();
-    virtual void* m10();
-};
-
-struct Local {
-    void* f0;
-    void* f1;
-    void* f2;
-    void* f3;
-    void* f4;
-    void* f5;
-    void* f6;
-    void* f7;
-};
-
 extern "C" void __cdecl FUN_00da4900(void*, void*);
 
 // Fills a Local struct with a3 through a7 and the m10() results of the objects at a3 and a4, then calls FUN_00da4900 with a2 and the struct.
@@ -187,7 +155,6 @@ union __declspec(intrin_type) __declspec(align(16)) __m128 { float m128_f32[4]; 
 
 extern "C" {
 __m128 _mm_load_ps(const float* p);
-void _mm_store_ps(float* p, __m128 v);
 __m128 _mm_add_ps(__m128 a, __m128 b);
 __m128 _mm_sub_ps(__m128 a, __m128 b);
 __m128 _mm_mul_ps(__m128 a, __m128 b);
@@ -196,22 +163,11 @@ __m128 _mm_max_ps(__m128 a, __m128 b);
 __m128 _mm_add_ss(__m128 a, __m128 b);
 __m128 _mm_sqrt_ss(__m128 a);
 __m128 _mm_shuffle_ps(__m128 a, __m128 b, unsigned int imm8);
-__m128 _mm_set_ps1(float a);
 }
 
 extern __m128 DAT_010ec7f0;
-extern const __m128 DAT_011b6d70;  // AABB quantization clip max
-extern __m128 DAT_01267e30;
 
 typedef unsigned int hkpShapeKey;
-
-struct hkFloat4
-{
-    float x;
-    float y;
-    float z;
-    float w;
-};
 
 struct hkSimdRealq
 {
@@ -256,48 +212,6 @@ struct hkVector4q
     }
 };
 
-union hkVector4u
-{
-    hkFloat4 m_f;
-    hkVector4q m_v;
-};
-
-struct hkTransformq
-{
-    hkVector4q m_kColumn0;
-    hkVector4q m_kColumn1;
-    hkVector4q m_kColumn2;
-    hkVector4q m_vTranslation;
-};
-
-struct hkMotionStateq
-{
-    hkTransformq m_kMotionTransform;
-    hkVector4q m_vCenterOfMass0;
-    hkVector4q m_vCenterOfMass1;
-    hkVector4q m_qRotation0;
-    hkVector4q m_qRotation1;
-    hkFloat4 m_vCenterOfMassLocal;
-    hkVector4q m_kDeltaAngle;
-};
-
-struct SweptTransformSamples
-{
-    const hkMotionStateq* m_kMotionState;
-    int unk04;
-    int unk08;
-    int unk0C;
-    hkTransformq m_kTransforms[4];
-    int m_numQsTransforms;
-    int unk114;
-    int unk118;
-    int unk11C;
-    hkTransformq m_kMotionTransform;
-    hkTransformq m_shapeToMotion;
-};
-
-void __cdecl FUN_00cbec90(const hkMotionStateq* motionState, SweptTransformSamples* out);
-
 struct hkAabbq
 {
     hkVector4q m_kMinimumCorner;
@@ -319,11 +233,6 @@ struct hkAabbUint32
 };
 typedef hkAabbUint32 hkAabbUint32Key;
 
-struct hkpShapeBufferq
-{
-    int m_data[128];
-};
-
 class hkpShapeq
 {
 public:
@@ -335,17 +244,6 @@ public:
     virtual void v14();
     virtual void v18();
     virtual void getAabb(const void* localToWorld, float tolerance, hkAabbq& out) const;
-};
-
-class hkpShapeContainerq
-{
-public:
-    virtual void v00();
-    virtual void v04();
-    virtual hkpShapeKey GetFirstKey() const;
-    virtual hkpShapeKey GetNextShapeKey(hkpShapeKey oldKey) const;
-    virtual void v10();
-    virtual const hkpShapeq* GetShapeForKey(hkpShapeKey key, hkpShapeBufferq& buffer) const;
 };
 
 struct hkpCdBodyq
@@ -365,36 +263,6 @@ struct hkpCdBodyq
         return body;
     }
 };
-
-struct hkpCollisionQualityInfoq
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int m_iQualityInfoValue10;
-};
-
-struct hkpProcessCollisionInputq
-{
-    int unk00;
-    int unk04;
-    float m_fScalar;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    hkVector4q m_kAabbMin;
-    hkVector4q m_kAabbMaximum;
-    hkVector4q m_kAabbScale;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5C;
-    hkpCollisionQualityInfoq* m_pCollisionQualityInfo;
-};
-
 
 union hkVec4F
 {
@@ -427,17 +295,6 @@ struct BoundingVolumeData : hkAabbUint32
 
     __forceinline bool isValid() const { return m_kMinimumCorner[0] <= m_kMaximumCorner[0]; }
 };
-
-struct hkpCollidableq : hkpCdBodyq
-{
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    BoundingVolumeData m_kBoundingVolumeData;
-};
-
-void __cdecl FUN_00cf8690(hkAabbUint32Key* out, const hkAabbUint32* in);
 
 struct hkAabbUint32Less
 {
@@ -518,12 +375,3 @@ begin:
     if (aiLow < j) FUN_00d36360(pArr, aiLow, j, cmpLess);
     if (i < aiHigh) { aiLow = i; goto begin; }
 }
-
-extern "C" __m128 _mm_set_ss(float);
-struct hkpAgent3ProcessInputq
-{
-    const hkpCdBodyq* m_pBodyA;
-    const hkpCdBodyq* m_pBodyB;
-    void* m_pContactManager;
-    const hkpProcessCollisionInputq* m_pRayCastInput;
-};

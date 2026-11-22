@@ -305,97 +305,6 @@ void FUN_00a364b0_cls::FUN_00a364b0(V3 aT0, V4 aR0, float fScale)
 
 // Apply the source object's local transform (as a quaternion transform) to the given node.
 
-class A36590RTTI;
-extern const A36590RTTI g_kA36590NodeRTTI;
-
-struct A36590Point3
-{
-    float x;
-    float y;
-    float z;
-};
-
-struct A36590Matrix3
-{
-    float m_pEntry00;
-    float m_pEntry01;
-    float m_pEntry02;
-    float m_pEntry10;
-    float m_pEntry11;
-    float m_pEntry12;
-    float m_pEntry20;
-    float m_pEntry21;
-    float m_pEntry22;
-};
-
-struct A36590Quaternion
-{
-    float m_fVectorX;
-    float m_fVectorY;
-    float m_fVectorZ;
-    float m_fScalarPart;
-    void FromRotationMatrix(const A36590Matrix3& kRot);
-};
-
-struct A36590QuatTransform
-{
-    A36590Point3 m_kTranslate;
-    A36590Quaternion m_kRotate;
-    float m_fScale;
-};
-
-class A36590Object
-{
-  public:
-    A36590Object* DynamicCast(const A36590RTTI* pkRTTI);
-};
-
-class A36590AVObject : public A36590Object
-{
-  public:
-    void* m_pVtbl;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    A36590Matrix3 m_kRotate;
-    A36590Point3 m_kTranslate;
-    float m_fScale;
-};
-
-class A36590Node : public A36590Object
-{
-  public:
-    void SetTargetTransform(A36590QuatTransform kTransform);
-};
-
-class A36590Controller
-{
-  public:
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    A36590AVObject* m_pkSource;
-
-    void FUN_00a36590(A36590Object* pkObject, int iUnused);
-};
-
 extern "C" void* __cdecl FUN_00aa13e0(unsigned int size);
 
 class NiTransformInitA
@@ -513,15 +422,6 @@ extern NiPoint3 DAT_011a8400;
 extern NiQuaternion DAT_011f3704;
 extern float DAT_01096b8c;
 extern const float DAT_01096324;
-struct Flags_00a36680
-{
-    bool b0 : 1;
-    bool b1 : 1;
-    bool b2 : 1;
-    bool b3 : 1;
-    bool b4 : 1;
-    bool bManager : 1;
-};
 
 struct TransformCtl_t : NiTimeController
 {

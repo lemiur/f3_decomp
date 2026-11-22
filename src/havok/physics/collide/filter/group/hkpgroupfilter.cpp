@@ -4,23 +4,6 @@
 
 #include "havok/hkpGroupFilter.h"
 
-extern int DAT_0102e388;
-extern int DAT_010c3b80;
-extern int DAT_010c3b8c;
-extern int DAT_010c3b98;
-extern int DAT_010c3bac;
-
-struct FUN_00e48a80_struct
-{
-    int* p0;
-    int* p1;
-    int* p2;
-    int* p3;
-    int* p4;
-    int* p5;
-    void InitGroupFilterPointers();
-};
-
 struct FUN_00e48970_struct
 {
     void ClearMaskedBits(unsigned int, unsigned int);
@@ -45,28 +28,6 @@ void FUN_00e48970_struct::ClearMaskedBits(unsigned int auiMaskA, unsigned int au
     }
 }
 
-
-struct FUN_00e48830_class
-{
-    void ShouldCollide(int* value, int value0, int value1);
-};
-
-struct FUN_00e48b60_arg2
-{
-    int unknown_00[7];
-    int value_1c;
-};
-
-struct FUN_00e48b60_arg1
-{
-    int unknown_00[9];
-    int value_24;
-};
-
-struct FUN_00e48b60_class
-{
-    int* FUN_00e48b60(int* value, FUN_00e48b60_arg1* arg1, FUN_00e48b60_arg2* arg2);
-};
 
 struct hkBoolRet
 {
@@ -99,34 +60,6 @@ hkBoolRet GroupFilter::ShouldCollide(unsigned int infoA, unsigned int infoB)
     return (m_uiCollisionGroupMasks[infoA & 0x1f] & (1 << (infoB & 0x1f))) != 0;
 }
 
-struct FUN_00e488a0_data
-{
-    int unknown00;
-    int unknown04;
-    int unknown08;
-    int unknown0c;
-    int unknown10;
-    int unknown14;
-    int unknown18;
-    int unknown1c;
-    int value20;
-};
-
-struct FUN_00e488a0_object
-{
-    virtual void ReportDiagnostic();
-    virtual void unused1();
-    virtual void unused2();
-    virtual void FlushUsageData();
-    virtual int getValue(int input);
-};
-
-struct FUN_00e488a0_class
-{
-    int* CallGetValueAndDispatch(int* value, FUN_00e488a0_data* data, int unused, FUN_00e488a0_object* object,
-                                 int input);
-};
-
 class hkpGroupFilterE489
 {
   public:
@@ -156,17 +89,6 @@ void hkpGroupFilterE489::DisableCollisionPair(int iLayerA, int iLayerB)
     m_uiCollisionGroupMasks[iLayerB] &= ~(1 << iLayerA);
 }
 
-struct FUN_00e48ab0_value
-{
-    int unknown_00[7];
-    int value_1c;
-};
-
-struct FUN_00e48ab0_class
-{
-    int* __thiscall FUN_00e48ab0(int* value, FUN_00e48ab0_value* arg2, FUN_00e48ab0_value* arg3);
-};
-
 struct hkBoolE48B
 {
     char m_cBooleanValue;
@@ -178,24 +100,11 @@ struct hkBoolE48B
 
 typedef __declspec(align(16)) unsigned int hkpShapeBufferE48B[128];
 
-struct hkpShapeContainerE48B
-{
-    virtual ~hkpShapeContainerE48B() throw();
-    virtual void V1() throw();
-    virtual void V2() throw();
-    virtual void V3() throw();
-    virtual hkUint32 GetFilterInfoForKey(hkUint32 uiKey) const throw();
-};
-
 class hkpShapeE48B : public hkReferencedObject
 {
   public:
     hkUlong m_ulUserData;
     int m_type;
-};
-
-class hkpShapeCollectionE48B : public hkpShapeE48B, public hkpShapeContainerE48B
-{
 };
 
 struct hkpCollidableE48B;
@@ -262,36 +171,6 @@ struct hkpCollisionDispatcherE48B
     {
         return m_auiAlternateTypeFlags[iType] & (1 << iAlternate);
     }
-};
-
-struct hkpCollisionInputE48B
-{
-    hkpCollisionDispatcherE48B* m_pCollisionDispatcher;
-};
-
-const hkpShapeContainerE48B* __cdecl FUN_00d2d4b0(const hkpCdBodyE48B* pkBody, hkpShapeBufferE48B& kBuffer) throw();
-
-struct hkpCollidableCollidableFilterE48B
-{
-    virtual void V0() throw();
-};
-
-struct hkpShapeCollectionFilterE48B
-{
-    virtual hkBoolE48B ShapeCollectionFilter(const hkpCollisionInputE48B& kInput, const hkpCdBodyE48B& kA,
-                                             const hkpCdBodyE48B& kB, const hkpShapeContainerE48B& kBContainer,
-                                             hkUint32 uiBKey) const throw();
-};
-
-class hkpGroupFilterE48B : public hkReferencedObject,
-                           public hkpCollidableCollidableFilterE48B,
-                           public hkpShapeCollectionFilterE48B
-{
-  public:
-    hkBoolE48B ShouldCollide(hkUint32 uiInfoA, hkUint32 uiInfoB) const throw();
-    virtual hkBoolE48B ShapeCollectionFilter(const hkpCollisionInputE48B& kInput, const hkpCdBodyE48B& kA,
-                                             const hkpCdBodyE48B& kB, const hkpShapeContainerE48B& kBContainer,
-                                             hkUint32 uiBKey) const throw();
 };
 
 class hkBoolE48
@@ -532,23 +411,3 @@ struct Derived : PrimaryBase, SecondaryBase
 Derived::Derived()
 {}
 }  // namespace fnv_00e00c20
-
-// FUN_00e00c30 : MSVC this-adjusting thunk  (sub ecx, 0x0c ; jmp <impl>)
-struct A1_00e00c30
-{
-    A1_00e00c30();
-    virtual void FUN_00e00c30();
-    char pad[0x08];
-};
-struct A2_00e00c30
-{
-    A2_00e00c30();
-    virtual void FUN_00e00c30();
-};
-struct Own_00e00c30 : A1_00e00c30, A2_00e00c30
-{
-    Own_00e00c30();
-    virtual void key_fn();
-// @fnv 0x00e00c30
-    void FUN_00e00c30();
-};

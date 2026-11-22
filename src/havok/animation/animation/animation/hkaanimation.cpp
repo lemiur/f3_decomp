@@ -31,25 +31,8 @@ class hkaAnnotationTrack
     FUN_00cb0c30_s m_kTrackName;
     hkArray<Annotation> m_kAnnotations;
 };
-struct hkaTrackAnnotationE2F3
-{
-    hkUint16 m_usTrackIndex;
-    hkaAnnotationTrack::Annotation m_kAnnotation;
-};
-class hkaAnimationE2F3 : public hkaAnimation
-{
-  public:
-    hkUint32 GetAnnotationsInRange(hkReal m_fStartTime, hkReal fMoveElapsedTime, hkaTrackAnnotationE2F3* pkAnnotationsOut,
-                                   hkUint32 uiMaxAnnotations) const throw();
-};
 
 static const double kNegOne = -3.402820018375656e+38;
-
-class Anim : public hkaAnimation
-{
-  public:
-    int CountAnnotationsInRange(float from, float delta);
-};
 
 class hkMemoryAllocatorE2F;
 
@@ -174,18 +157,4 @@ class ReferencedObjectE2F
 
     unsigned short m_usMemSizeAndFlags;
     short m_sReferenceCount;
-};
-
-class FUN_00e2f500 : public ReferencedObjectE2F
-{
-  public:
-    virtual ~FUN_00e2f500();
-    int m_type;
-    float m_fAnimationDuration;
-    int m_iNumTransformTracks;
-    int m_iNumberOfFloatTracks;
-    RefPtrE2F m_pExtractedMotion;
-    hkArrayE2F<TrackE2F> m_kAnnotationTracks;
-
-    FUN_00e2f500(const FUN_00e2f500& other) throw();
 };

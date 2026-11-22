@@ -95,13 +95,6 @@ void NiD3DPixelShader::SetD3DPixelShader(GeometryRelatedType* const pixelShader)
 
 struct NiD3DPixelShader;
 
-void __cdecl FUN_00e92f30(NiD3DPixelShader*);
-
-struct FUN_00e898d0_shell : NiD3DPixelShader
-{
-    void FUN_00e898d0();
-};
-
 // ---- stand-ins for identities not defined in this unit ----
 struct FakeShader;
 struct FakeRenderer

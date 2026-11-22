@@ -107,20 +107,6 @@ hkClassEnum* FUN_00d86930_StandIn::FUN_00d86930()
     return unk08;
 }
 
-struct FUN_00dba990_Obj
-{
-    int FUN_00dba990();
-};
-
-struct FUN_00d86bc0_Obj
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    unsigned char unk0C;
-    void FUN_00d86bc0(int a, int b);
-};
-
 struct NativeTypePropertyD86A
 {
     int m_type;
@@ -197,20 +183,6 @@ int hkClassMemberD86A::GetAlignment() const
     }
     return align;
 }
-
-struct TypeDescription
-{
-    const char* name;
-    const char* displayName;
-    int size;
-};
-extern TypeDescription DAT_011b6ab4[];
-extern const char str_010d3a74[];
-struct TypeNameOutput
-{
-    void FUN_00d61c10(const char*);
-};
-extern void __cdecl FUN_00d61d00(TypeNameOutput*, const char*, const char*, const char*);
 
 class OwnerD869
 {

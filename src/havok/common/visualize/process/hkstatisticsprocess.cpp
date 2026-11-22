@@ -77,20 +77,6 @@ struct SecondBase
     {}
 };
 
-struct FUN_00ddc0b0 : FirstBase, SecondBase
-{
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    PtrArrayMember m_kFirst;
-    ArrayMember m_kSecond;
-    ArrayMember m_kThird;
-
-    virtual ~FUN_00ddc0b0() throw();
-};
-
 extern int DAT_01269cd8;
 
 // @fnv 0x00ddc820
@@ -100,7 +86,6 @@ int FUN_00ddc820()
 }
 
 #include <windows.h>
-extern DWORD DAT_0126835c;
 struct TlsBuf
 {
     int* m_pCurrent;
@@ -128,12 +113,6 @@ __forceinline Singleton* GetSingleton()
 }
 void __cdecl ResizeAudioStream(Allocator* ctx, void* pVec, int elem);
 void __cdecl FUN_00c908c0(Allocator* ctx, void* pVec, int sz, int elem);
-struct IntVec
-{
-    int* m_pData;
-    int m_iArrayLength;
-    int m_iCapacity;
-};
 struct SrcArr
 {
     int* m_pData;
@@ -187,7 +166,6 @@ struct ObjA
         return i <= m_iArrayLength;
     }
 };
-void __cdecl ProcessRecords(int a, int b, ObjA* o);
 struct Sub8
 {
     int m_00;
@@ -217,10 +195,6 @@ struct Vec3
         return m_pData[m_iArrayLength++];
     }
 };
-extern char DAT_010c9368;
-extern char DAT_0102e388;
-extern char DAT_010d6ae8;
-extern char DAT_0126c830;
 struct CharVec
 {
     char* m_pData;
@@ -749,25 +723,9 @@ struct Sbf00_Arr24
             pAllocator->FreeArray(m_pData, (uCapacity & 0x3fffffff) * 24);
     }
 };
-struct Sbf00_B2
-{
-    void* m_pVtbl;
-    unsigned char m_bFlag;
-};
-struct Sbf00_Alloc
-{
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual void* AllocArray(int* apBytes);
-    virtual void FreeArray(void* apMemory, unsigned int auiCapacity);
-};
 extern int DAT_010d1508;
 extern int DAT_010d7e48;
 extern int DAT_010d7e28;
-extern int DAT_0126c860;
-extern double DAT_01017b70;
-unsigned __int64 __cdecl FUN_00d60580();
 void __cdecl FUN_00e0bd40(Sbf00_Ctx* a1, Sbf00_Name* a2, int a3, int a4, Sbf00_Sub* a5, void* a6, Sbf00_Arr24* a7);
 struct SbfRef
 {
@@ -812,13 +770,6 @@ struct SbfBytes
     SbfBytes() : m_pData(0), m_iArrayLength(0), m_uCapacity(0x80000000)
     {}
 };
-struct FUN_00ddbf00 : SbfBases
-{
-    SbfPtrs m_kFirst;
-    SbfBytes m_kSecond;
-    SbfBytes m_kThird;
-    FUN_00ddbf00(PtrArrayMember* pSource);
-};
 
 namespace fnv_00ddc870 {
 struct FixedAllocator
@@ -840,28 +791,5 @@ struct AllocHolder
 };
 
 AllocHolder* FUN_00c85750();
-
-struct ElemSub
-{
-    int unk00;
-    int unk04;
-    void Release();
-};
-
-struct Elem
-{
-    int unk00;
-    int unk04;
-    ElemSub m_08;
-};
-
-struct FUN_00ddc870_cls
-{
-    Elem* m_pItems;
-    int m_iArrayLength;
-    unsigned int m_uCapBits;
-
-    void FUN_00ddc870();
-};
 
 }  // namespace fnv_00ddc870

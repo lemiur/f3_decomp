@@ -9,43 +9,9 @@ typedef union __declspec(intrin_type) __declspec(align(16)) __m128
 } __m128;
 
 extern "C" __m128 _mm_setr_ps(float x, float y, float z, float w);
-extern "C" void _mm_store_ps(float* p, __m128 v);
-
-struct FUN_00d522b0_Ctx
-{
-    int m_00;
-    int m_04;
-    int m_08;
-    int m_0c;
-    void* m_10;
-};
-
-struct FUN_00d522b0_Vec
-{
-    void* m_ptr;
-    int m_uiItemCount;
-    int m_cap;
-};
-
-struct FUN_00d522b0_P
-{
-    int m_00;
-    int m_04;
-    int m_08;
-    int m_0c;
-    FUN_00d522b0_Vec m_verts;
-    FUN_00d522b0_Vec m_cmds;
-};
 
 extern void* __cdecl FUN_00c85750(void);
 extern void __cdecl ResizeAudioStream(void* apCtx, void* apVec, int aElemSize);
-
-struct FUN_00d522b0_cls
-{
-    int m_00;
-    FUN_00d522b0_P* m_04;
-    int AddVertexCommand(unsigned char aFlag, float aX, float aY);
-};
 
 struct __declspec(align(16)) FUN_00c7f690_cls
 {
@@ -149,43 +115,12 @@ template <class T> struct hkArrayD
     }
 };
 
-struct hkGeometryBufferD
-{
-    unsigned int unk;
-    int m_iNumBytes;
-    int m_iNumCommands;
-    int m_iNumParams;
-    hkArrayD<hkVector4D521> m_params;
-    hkArrayD<int> m_commands;
-};
-
-class hkCommandWriterD
-{
-  public:
-    int FUN_00d521b0(unsigned char ucKind, float fX, float fY);
-
-    unsigned int unk;
-    hkGeometryBufferD* m_pBuffer;
-};
-
 #include <math.h>
 inline void FillWords328(int* dest, int n, const int& value)
 {
     for (int i = 0; i < n; ++i)
         dest[i] = value;
 }
-
-extern float DAT_01011d78;
-extern float DAT_01016410;
-
-struct Draw328_Holder
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    void* m_pAllocator;
-};
 
 struct Draw328_intarr
 {

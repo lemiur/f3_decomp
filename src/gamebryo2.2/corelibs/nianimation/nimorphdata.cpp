@@ -236,14 +236,6 @@ void* __thiscall Owner_00a41660::FUN_00a41660(unsigned char flags)
 }
 }  // namespace fnv_00a41660
 
-struct MorphBuffer
-{
-    void* unk00;
-    unsigned int used;
-    void* unk08;
-    int(__cdecl* append)(MorphBuffer*, void*, unsigned int, const unsigned int*, int);
-};
-
 struct FUN_00a417f0_vec3
 {
     float x;

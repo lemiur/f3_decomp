@@ -219,28 +219,6 @@ struct AudioHolder
 
 AudioHolder* __cdecl FUN_00c85750() throw();
 
-struct FUN_00e65ea0_cls
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    void* m_pData;
-    unsigned int m_uCount;
-    unsigned int m_uiObjectFlags;
-
-    void ClearArray();
-};
-
 void __cdecl ResizeAudioStream(void* allocator, void* list, unsigned int stride);
 
 template <class T> inline void CopyConstruct(T* dst, int count, const T& value)
@@ -399,7 +377,6 @@ union __declspec(intrin_type) __declspec(align(16)) __m128
     float m128_f32[4];
     unsigned __int64 m128_u64[2];
 };
-extern double const DAT_01091c00;
 extern double const DAT_01011590;
 struct hkVector4
 {
@@ -534,20 +511,6 @@ struct MoppResults
     int size;
 
     int capacityAndFlags;
-};
-
-struct HavokMemory
-{
-
-    void* router;
-
-    void* temporary;
-
-    void* heap;
-
-    void* debug;
-
-    void* allocator;
 };
 
 struct MoppErrorStream
@@ -923,8 +886,6 @@ append:
     *dst = primitiveIndex;
 }
 
-
-extern "C" void __cdecl __debugbreak(void);
 
 struct S_00e65140_Query
 {

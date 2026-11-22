@@ -6,8 +6,6 @@
 #include <string.h>
 #include <malloc.h>
 
-MemoryManager* FUN_00401020();
-
 struct FUN_00473960_shell : public TESFile
 {
     void FUN_00473960(void*);
@@ -51,10 +49,6 @@ struct AutoMemContext
     int m_iLineNumber;
 };
 typedef char _sizecheck_AutoMemContext[sizeof(AutoMemContext) == 12 ? 1 : -1];
-struct FUN_00aa3cc0_shell : public MemoryManager
-{
-    void CreateMemoryPool(unsigned int, unsigned int, char*);
-};
 
 extern __declspec(thread) int g_tlsMemContext;
 struct MemCtxGuard
@@ -84,11 +78,6 @@ struct MemoryPoolView : public MemoryPool
     {
         return *(void**)((char*)this + 4) != 0;
     }
-};
-
-struct FUN_00aa3a10_shell
-{
-    void ClearFlagAndSetByte();
 };
 
 struct FUN_00aa3a10_tls_struct
@@ -128,7 +117,6 @@ struct FUN_00aa46a0_holder
     void* GetEntryAt(unsigned int index);
 };
 
-extern "C" int _tls_index;
 struct FUN_00aa39c0_tls
 {
     unsigned char unk0000[0x2b4];
@@ -136,36 +124,6 @@ struct FUN_00aa39c0_tls
 };
 extern __declspec(thread) FUN_00aa39c0_tls g_tls;
 
-void ClearMemoryPoolTables();
-
-class FUN_00aa39c0_cls
-{
-  public:
-    unsigned char m_00;
-    void InitializeHeaps();
-    void FUN_00866770();
-    void FUN_00483710();
-    void FUN_00aa39c0();
-};
-
-extern FUN_00aa46a0_holder DAT_011f6238;
-extern unsigned short DAT_011f623a;
-extern unsigned short DAT_011f623c;
-struct S_00aa4400_Obj
-{
-    virtual void v00();
-    virtual void v01();
-    virtual void v02();
-    virtual void v03();
-    virtual void v04();
-    virtual void v05();
-    virtual void v06();
-    virtual void v07();
-    virtual void v08();
-    virtual void v09();
-    virtual void v0a();
-    virtual void v0b();
-};
 inline int S_Sum(int a, int b)
 {
     return a + b;
@@ -182,10 +140,6 @@ struct ScrapView
     {
         g_memoryManager.Deallocate(p);
     }
-};
-struct HeapView
-{
-    virtual ~HeapView();
 };
 struct WeightedMapNode
 {
@@ -241,7 +195,6 @@ struct FUN_00aa5950_s
         g_memoryManager.Deallocate(p);
     }
 };
-extern FUN_00aa5950_s* DAT_011f63b4;
 struct PoolView
 {
     ~PoolView();
@@ -250,36 +203,8 @@ struct PoolView
         g_memoryManager.Deallocate(p);
     }
 };
-extern PoolView* DAT_011f67b8[256];
-extern "C" void* __cdecl fnv_zlib_memset(void*, int, unsigned int);
-struct FUN_00aa3a40
-{
-    bool unk00;
-    unsigned char unk01;
-    unsigned short unk02;
-    unsigned short unk04;
-    unsigned short unk06;
-    HeapView** unk08;
-    void* unk0C[66];
-    MapView unk114;
-    HeapView** unk124;
-    void FUN_00483710();
-    ~FUN_00aa3a40();
-};
 
 namespace fnv_00aa43a0 {
-void __cdecl FUN_00aa7370();
-
-class ItemAA43
-{
-  public:
-    virtual void unk00();
-    virtual void unk04();
-    virtual void unk08();
-    virtual void unk0C();
-    virtual void unk10();
-    virtual void Update();
-};
 
 class FUN_00aa46a0_holder
 {

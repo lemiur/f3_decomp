@@ -356,12 +356,6 @@ struct NiTMapBaseStub
 extern void _NiFree(void*);
 extern int DAT_0109bc84;
 extern int DAT_0109bca4;
-extern int DAT_0109bcc4;
-
-struct FUN_00a63850_Class
-{
-    void DestroyMap();
-};
 
 namespace fnv_00a63a20 {
 struct NiTMapBaseStub
@@ -599,11 +593,6 @@ void* FUN_00a6ea00_Class::FUN_00a6ea00(unsigned char flag)
         _g_memoryManager.Deallocate(this);
     return this;
 }
-
-struct NiTriStrips
-{
-    NiTriStrips();
-};
 
 extern int DAT_0109cd44;
 
@@ -1161,10 +1150,8 @@ extern __declspec(thread) TLSCtx_b9725 g_tlsCtx_b9725;
 extern TLSHeap_b9725 DAT_011f6238;
 extern void* DAT_011f4468;
 extern void* DAT_011f4464;
-extern unsigned char DAT_011f4461;
 void* __cdecl ClearAndReset();
 void* __cdecl _fnv_zlib_memset(void* p, int c, unsigned int n);
-void __stdcall Init_b9725(void* p, unsigned int size, int count, void* cb);
 
 // Allocates two blocks via the TLS heap, zeroes the first and initializes the second with Init_b9725, storing both in globals and restoring the TLS field.
 // @f3 0x00829290 (community match, verified in this file)
@@ -1524,14 +1511,6 @@ void __cdecl ApplySettings(const Settings_a62& kSettings)
 extern MemoryManager _g_memoryManager;
 extern int DAT_0109bc84;
 extern "C" void NiFreeAlias(void*);
-
-struct FUN_00a639e0_Class
-{
-    void* m_baseData0;
-    void* m_baseData1;
-    void* m_baseData2;
-    FUN_00a639e0_Class* __thiscall FUN_00a639e0(char param_2);
-};
 
 struct FUN_00a66960_cls
 {
@@ -1917,35 +1896,12 @@ FUN_00a71b80_cls* FUN_00a71b80_cls::Init(float a1, float a2, float a3, float a4,
     return p;
 }
 
-struct FUN_00a75dc0_cls
-{
-    void* FUN_00a75dc0(unsigned int a1, unsigned int a2, unsigned int a3, unsigned int a4, unsigned int a5,
-                       unsigned int a6, unsigned int a7, unsigned int a8, unsigned int a9, unsigned int a10,
-                       unsigned int a11);
-};
-
 void* __cdecl FUN_00aa13e0(unsigned int size);
-
-struct FUN_00a71c40_cls
-{
-    int* m_vt;
-    void FUN_00a89720(void* p);
-    FUN_00a71c40_cls* ConstructWithAlloc(unsigned int a1, unsigned int a2, unsigned int a3, unsigned int a4,
-                                         unsigned int a5, unsigned int a6, unsigned int a7, unsigned int a8,
-                                         unsigned int a9, unsigned int a10, unsigned int a11);
-};
 
 // FUN_00a71cc0 : constructor-like helper that calls a base routine with the
 // argument and then installs the class vtable pointer, returning itself.
 
 extern int DAT_0109cd44;
-
-struct FUN_00a71cc0_cls
-{
-    void* m_pVTable;
-    void FUN_00a89720(int arg);
-    FUN_00a71cc0_cls* FUN_00a71cc0(int arg);
-};
 
 struct FUN_00a72550_Class
 {
@@ -2419,21 +2375,6 @@ SceneFactoryObject* CreateSceneFactoryObject()
     }
     return 0;
 }
-
-extern int DAT_011aa04c;
-
-// FUN_00a74d90 - installs a callback pointer into the global slot at 0x011aa050.
-//
-// Original bytes:
-//   8b 44 24 04          mov eax, dword ptr [esp+4]
-//   a3 50 a0 1a 01       mov dword ptr [0x011aa050], eax
-//   c3                   ret
-//
-// The global is referenced by a plain DIR32 relocation with addend 0 and is
-// declared (never defined) here, so the checker binds it to the original's
-// own address.  The name is spelled with a void* type so that it does not
-// collide with the canonical "?DAT_011aa050@@3HA" entry in the symbol DB.
-extern void* DAT_011aa050;
 
 struct CallTarget_00a74e10
 {
@@ -4580,7 +4521,6 @@ class GlobalObject_0096a2d0
     void Lock(const char* pcName) throw();
 };
 
-extern "C" bool __cdecl fnv_NiStreamGetTexture(const char* pcName, A61F::NiPointer* apTextureOutput) throw();
 bool __cdecl FUN_00a61f30(const void* pvTexture) throw();
 
 // If DAT_011f4468 is set, locks DAT_011f4480, looks up pcName via fnv_NiStreamGetTexture, and returns FUN_00a61f30 of the result if found, else false.
@@ -4653,8 +4593,6 @@ void __cdecl ConvertPixelFormat(unsigned int uiWidth, unsigned int uiHeight, uns
         }
     }
 }
-
-void __cdecl FUN_00a8a9a0();
 
 struct Vec3
 {

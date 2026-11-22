@@ -68,22 +68,11 @@ struct S_00d1bcb0_Array
     }
 };
 
-struct S_00d1bcb0
-{
-    int unk00;
-    S_00d1bcb0_Array* m_ppData;
-    bool FUN_00d1bcb0(int a, int b);
-};
-
 extern int __cdecl FUN_00d1c560(void*, int, int, int, int, int);
 
 int __cdecl FUN_00d1c560(void* a, void* b, int c, int d, void* e, void* f);
 
 extern int __cdecl FUN_00d1c560(void*, int, int, int, int, int);
-
-extern "C" void* __cdecl FUN_00d1ce50(void* p, int a, int b, int c, int d, int e);
-
-extern "C" void* __cdecl FUN_00d1d240(void* p, int a, int b, int c, int d, int e);
 
 extern "C" void __cdecl FUN_00d1ca00();
 // @fnv 0x00d1d530
@@ -111,40 +100,6 @@ extern "C"
     int _mm_movemask_ps(__m128);
 }
 
-struct DNode
-{
-    __m128 m_ucLowNibble;
-    __m128 m_ucHighNibble;
-    int m_pChildAtom;
-    int unk24;
-    int m_flags;
-    int m_nextId;
-};
-struct DIndex
-{
-    DNode* FUN_00d9a4c0(int id);
-};
-struct DOwner
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    DNode* m_pTreeNode;
-    int unk14;
-    int unk18;
-    DIndex m_uiEdgeIndex;
-};
-struct DBox
-{
-    __m128 m_ucLowNibble;
-    __m128 m_ucHighNibble;
-};
-struct DVisitor
-{
-    virtual void v0();
-    virtual float visit(DNode* n);
-};
 template <class T> __forceinline void hkConstructWithCopy(T* p, int n, const T& t)
 {
     for (int i = 0; i < n; i++)
@@ -171,7 +126,6 @@ struct DIntArray
         _pushBack(FUN_00c85750()->heap(), e);
     }
 };
-extern float DAT_01011d78;
 
 namespace fnv_00d1d5a0 {
 union __declspec(intrin_type) __declspec(align(16)) __m128
@@ -229,18 +183,6 @@ struct TreeNode
 struct TreeNodeArray
 {
     TreeNode* FUN_00d9a4c0(int index);
-};
-
-struct AabbTree
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int m_iNodeCount;
-    int m_rootIndex;
-    int unk18;
-    TreeNodeArray m_kNodeCollection;
 };
 
 typedef S_00d1bcb0_Entry TreePair;
@@ -311,47 +253,6 @@ struct TreePairArray
 }  // namespace fnv_00d1d5a0
 
 #include <windows.h>
-extern "C" void _ReadWriteBarrier(void);
-
-extern DWORD DAT_0126835c;
-unsigned __int64 __cdecl __rdtsc(void);
-struct ProfRec
-{
-    const char* m_pName;
-    DWORD m_iTick;
-    DWORD unk08;
-};
-struct ProfBuf
-{
-    DWORD unk00;
-    ProfRec* m_pCur;
-    DWORD unk08;
-    ProfRec* m_pRecordEnd;
-};
-struct Inner
-{
-    DWORD unk00, unk04, unk08, unk0C, unk10, unk14, unk18, unk1C;
-    int m_20;
-    int m_24;
-    int m_28;
-};
-struct Frame
-{
-    DWORD unk00, unk04, unk08, unk0C, unk10, unk14, unk18, unk1C;
-    int m_20;
-    int m_24;
-    int m_28;
-    Inner* m_2C;
-    int m_30;
-};
-class Target
-{
-  public:
-    void ProcessCallback(void* a, void* b, int c);
-};
-int FUN_00d1d540(int a, Inner* b, int* c, int d);
-int FUN_00d1d4d0(int a, Inner* b, int* c, int d);
-int FUN_00d1b930(int a, Inner* b, int* c, int d);
 
 extern "C" __m128 _mm_set_ps1(float a);
 extern "C" __m128 _mm_sub_ps(__m128 a, __m128 b);
@@ -503,24 +404,6 @@ struct TreeNode
 struct TreeNodeArray
 {
     TreeNode* FUN_00d9a4c0(int index);
-};
-
-struct RayVisitor
-{
-    virtual void v00();
-    virtual float processLeaf(const TreeNode* node);
-};
-
-struct NodeTree
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    TreeNode* m_pTreeNode;
-    int unk14;
-    int unk18;
-    TreeNodeArray m_kNodeCollection;
 };
 
 extern "C" __m128 _mm_setr_ps(float, float, float, float);
@@ -904,55 +787,6 @@ struct hkpCompressedNode
     unsigned short m_skip;
 };
 
-struct NodeArray
-{
-    hkpCompressedNode* m_data;
-    const hkpCompressedNode* GetEntryOffset(unsigned short index);
-};
-
-struct CompressedTree
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    const hkpCompressedNode* m_pTreeNode;
-    int unk14;
-    int unk18;
-    NodeArray m_kNodeCollection;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    hkVector4Real m_kAabbMin;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5c;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6c;
-    hkVector4Real m_kAabbInverseScale;
-};
-
-struct SweptBoxQuery
-{
-    hkVector4Real m_vFrom;
-    hkVector4Real m_vTo;
-    hkVector4Real m_vHalfExtents;
-};
-
-struct LeafCollector
-{
-    virtual void unk00();
-    virtual float GetHitDistance(const hkpCompressedNode* node);
-};
-
 struct S1c2b0_Ray
 {
     hkVector4Real m_kRayStart;
@@ -1176,12 +1010,6 @@ class QueryTree16
     hkVector4 m_kAabbInverseScale;
 };
 
-struct AabbCollector
-{
-    virtual void v0();
-    virtual float GetHitDistance(const QueryNode* node);
-};
-
 struct VoidArray
 {
     void** m_data;
@@ -1203,78 +1031,6 @@ struct VoidArray
     {
         _pushBack(FUN_00c85750()->heap(), e);
     }
-};
-
-extern "C" __m128 _mm_load_ps(const float*);
-
-struct hkVector4f
-{
-    float x;
-    float y;
-    float z;
-    float w;
-};
-
-union hkQuadVector
-{
-    hkVector4f v;
-    __m128 q;
-};
-
-struct NodesSV_1cc50
-{
-    int* FUN_00d1bb40(unsigned short index);
-};
-
-struct TV4Q
-{
-    __m128 m_vComponents;
-};
-
-struct TNodeQ
-{
-    TV4Q m_kMinimumCorner;
-    TV4Q m_kMaximumCorner;
-    unsigned int m_data;
-    unsigned short m_flags;
-    unsigned short m_next;
-};
-
-struct NTreeQ
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    TNodeQ* m_pTreeNode;
-    int unk14;
-    int unk18;
-    NodesSV_1cc50 m_kNodeCollection;
-};
-
-struct RayCollector
-{
-    virtual void v00();
-    virtual float GetHitDistance(const TNodeQ* node);
-};
-
-struct RayDir
-{
-    TV4Q m_dir;
-    TV4Q m_vInverseDirection;
-};
-
-struct NodeAabb
-{
-    TV4Q m_kMinimumCorner;
-    TV4Q m_kMaximumCorner;
-};
-
-struct RayInput
-{
-    TV4Q m_vFrom;
-    TV4Q m_vTo;
-    TV4Q m_fExtents;
 };
 
 struct NodeMgrSV
@@ -1365,17 +1121,6 @@ struct FilterRays_Tree
     }
 };
 
-struct RayCastRequest
-{
-    hkVector4 m_vFrom, m_vTo;
-    int m_uiFilterInfo, m_bEnableShapeCollectionFilter;
-    int unk28, unk2c;
-    int m_pResultBuffer;
-    int m_iResultCount;
-    int m_iResultCapacity;
-    unsigned char m_useFilterCollector;
-};
-
 struct FilterRays_FilterCollector
 {
     virtual ~FilterRays_FilterCollector();
@@ -1402,49 +1147,5 @@ class hkpFixedBufferRayHitCollector
     int m_pCollidable;
 };
 
-struct FilterRays_CastBase0
-{
-    virtual void v0();
-};
-struct FilterRays_CastBase1
-{
-    virtual void v1();
-};
-struct FilterRays_CastBase3
-{
-    virtual void v3();
-};
-
-class hkCpuWorldRayCastCollector : public FilterRays_CastBase0,
-                                   public FilterRays_CastBase1,
-                                   public FilterRays_FilterCollector,
-                                   public FilterRays_CastBase3
-{
-  public:
-    int m_iFilter;
-    float m_fHitFraction;
-    int m_bHasHit;
-    int m_iFieldAfterHasHit;
-    int m_iFieldBeforeResult;
-    int m_result;
-    int m_iFieldAfterResult;
-    hkVector4 m_workFrom;
-    hkVector4 m_workTo;
-    int m_workFilter;
-    int m_workCollection;
-    int unk58, unk5c;
-    hkpFixedBufferRayHitCollector* m_fixedBufferRayHitFilterCollector;
-    int unk64, unk68, unk6c;
-    hkVector4 m_fEarlyOutHitFraction;
-};
-
-extern int DAT_011b3830[5];
-extern void* DAT_0126ec04;
-void FUN_00e2b9b0();
-void __cdecl FUN_00e2baa0(hkCpuWorldRayCastCollector* collector, const RayCastRequest* command,
-                          const void* filter);
-RayQuerySet __cdecl FUN_00e2baf0(const hkVector4& s0, const hkVector4& e0, const hkVector4& s1, const hkVector4& e1,
-                                 const hkVector4& s2, const hkVector4& e2, const hkVector4& s3, const hkVector4& e3,
-                                 int mask);
 void __cdecl FUN_00d1ca00(const FilterRays_Tree* tree, const FilterRays_Node* node, const void* skipNode,
                           const RayQuerySet* bundle, FilterRays_FilterCollector** collectors, float* fractions);

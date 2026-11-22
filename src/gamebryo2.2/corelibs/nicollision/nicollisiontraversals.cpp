@@ -1748,12 +1748,8 @@ struct Shape
     int unkBC;
 };
 
-class GlobalObjectO2_00a7b610;
-extern GlobalObjectO2_00a7b610 g_011f4a20;
-extern GlobalObjectO2_00a7b610 g_011f4a40;
 bool FUN_0043b300(const void*, Shape*);
 bool __cdecl RaycastGeometry(const NiPoint3*, const NiPoint3*, Options*, Shape*);
-bool __cdecl IntersectShape(const NiPoint3*, const NiPoint3*, Options*, Shape*);
 
 extern bool __cdecl FUN_00eadb90(const NiPoint3*, const NiPoint3*, const NiPoint3*, const NiPoint3*, const NiPoint3*,
                                  bool, NiPoint3*, float*, float*, float*);
@@ -1761,7 +1757,6 @@ extern bool __cdecl FUN_00eadb90(const NiPoint3*, const NiPoint3*, const NiPoint
 extern Vec4 DAT_011a9be0;
 extern NiPoint3 DAT_011f426c;
 extern Vec2 DAT_011f4980;
-extern Bound DAT_011f4288;
 
 inline bool IsKindOfType(const void* rtti, Shape* shape)
 {

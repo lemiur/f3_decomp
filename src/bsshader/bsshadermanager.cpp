@@ -161,10 +161,8 @@ class BSShaderManager
     static void SetFogPropertyForIndex(int, BSFogProperty*);
 };
 extern "C" FileFinder* g_fileFinder;
-extern "C" bool fnv_NiStreamGetTexture(const char*, NiPointer<NiTexture>&);
 NiTexture* CreateSpawnedCubeShell(const NiFixedString&, NiRenderer*, NiTexture::TextureFormatPreferences&);
 extern NiRenderer* DAT_011f9508;
-extern NiTexture::TextureFormatPreferences DAT_011a9598;
 extern NiRTTI DAT_011f444c;
 extern const double DAT_01023128, DAT_010ad6d8;
 extern float DAT_011adcc8;
@@ -173,13 +171,6 @@ extern void (*DAT_011f9f38)(), (*DAT_011f9f3c)();
 extern void (*DAT_011f9f40[16])(), (*DAT_011f9f80[16])();
 extern unsigned int (*DAT_011f91ec)(NiAVObject*);
 extern ShadowSceneNode* DAT_011f91c8[4];
-class SkyShaderProperty
-{
-  public:
-    unsigned char propertyData[0x70];
-    NiPointer<NiTexture> m_spTexture;
-    void SetTexture(NiTexture*);
-};
 #pragma intrinsic(sin, cos)
 
 // Stores mode in DAT_011f91b8 and sets DAT_011f9f3c and DAT_011f9f38 from the per-mode tables, falling back to index 0 when an entry is null.
@@ -478,25 +469,6 @@ NiObject* __cdecl CreateInterpDerivedBc36();
 NiObject* __cdecl FUN_00bc38c0();
 NiObject* __cdecl CreateSpawnedObj9441();
 NiObject* __cdecl CreateShaderAccumulator();
-extern const char g_011f9140_arg0[];
-extern const char g_011f9f00_arg0[];
-extern const char g_011fa010_arg0[];
-extern const char g_011fa018_arg0[];
-extern const char g_011fa05c_arg0[];
-extern const char g_011fa560_arg0[];
-extern const char g_0120044c_arg0[];
-extern const char g_01200464_arg0[];
-extern const char g_012005b8_arg0[];
-extern const char g_012007b0_arg0[];
-extern const char g_012007c8_arg0[];
-extern const char g_012007d8_arg0[];
-extern const char g_01201f84_arg0[];
-extern const char g_01201f90_arg0[];
-extern const char g_01201f9c_arg0[];
-extern const char g_01201fa8_arg0[];
-extern const char g_01201fb0_arg0[];
-extern const char g_01201fb8_arg0[];
-extern const char g_01204378_arg0[];
 
 // Registers a series of NiStream factory callbacks, each paired with a class-name string, including BSFadeNode::CreateObject.
 // @f3 0x00ad5680 (community match, verified in this file)
@@ -2856,18 +2828,7 @@ void __cdecl CopyMaterialPropertyRecursive(Walker* apWalker)
 }
 
 extern "C" int __cdecl _strnicmp(const char*, const char*, size_t);
-extern int DAT_011f91c0;
-extern int DAT_011f91d8;
-extern unsigned char DAT_011f941e;
-extern unsigned char DAT_011f94a4;
 extern unsigned char DAT_011f94a6;
-extern int DAT_011ad870;
-extern int DAT_011f94b8;
-extern float DAT_01200458;
-extern unsigned char DAT_011ad80e;
-extern unsigned char DAT_011f94d8;
-extern unsigned char DAT_011f94e4;
-extern unsigned char DAT_011f91a4;
 
 class NiAVObjectB57B
 {
@@ -3038,12 +2999,6 @@ struct Reader
 struct SubObj
 {
     void FUN_00a642a0(Rec*, Rec*);
-};
-
-struct Mgr
-{
-    Rec* FUN_00aa3e40(unsigned int);
-    void FUN_00aa4060(Rec*);
 };
 
 extern int DAT_011f6238;
@@ -3732,7 +3687,6 @@ struct TextureLoaderInit
         reinterpret_cast<InitMemory*>(&_g_memoryManager)->Deallocate(p);
     }
 };
-extern TextureLoaderInit* DAT_011f9498;
 void* GetTextureSource();
 struct ImageManagerInit
 {
@@ -3972,32 +3926,20 @@ struct ColorInit
     ColorInit(float x, float y, float z, float w) : r(x), g(y), b(z), a(w)
     {}
 };
-extern ColorInit DAT_011fa090;
 extern const float DAT_01016248;
 void ProcessCommands();
 void InsertNodeAtHead();
-void FUN_00b606e0();
 void AccumulateRenderPasses();
-void FUN_00b64440();
 void AddEntriesToAccumulator();
-void FUN_00b64490();
-void FUN_00b665a0();
 void RenderAccumulationPasses();
-void FUN_00b65e80();
 void FUN_00a29680();
-void FUN_00b64530();
 struct GlobalShaderInit
 {
     void FUN_00ba3720();
 };
 extern GlobalShaderInit DAT_01200088;
 void InitializeShaderBufferTables();
-extern void* DAT_011f94f0;
-extern void* DAT_011a9608;
-extern void* DAT_011ffe2c;
-extern unsigned int DAT_011ffe30;
 extern unsigned int DAT_011f916c;
-extern unsigned int DAT_011f9168;
 struct AccumulatorInit : NiRefObject
 {
     unsigned int unk008;
@@ -4333,10 +4275,6 @@ void InitRenderSystem()
 }
 
 
-struct TangentAllocatorView
-{
-    void FUN_00aa4060(void*);
-};
 extern MemoryManager _g_memoryManager;
 extern char* DAT_0109b220;
 char* FUN_00a5b690(const char*);
@@ -4551,9 +4489,6 @@ struct NiBinaryExtraData : NiObject
     unsigned int name;
     char* data;
 };
-extern const char DAT_0102bf34[];
-extern const char DAT_010ad7a8[];
-extern const char DAT_010ad730[];
 extern "C" void* memmove(void*, const void*, unsigned int);
 extern "C" void* FUN_00ec61c0(void*, int, unsigned int);
 // Copies tangent and binormal data from extra data when present; otherwise computes per-vertex vectors from UVs and normals and updates geometry data.

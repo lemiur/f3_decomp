@@ -84,31 +84,9 @@ struct hkBitFieldE485
     }
 };
 
-class hkObjE485
-{
-  public:
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    hkBitFieldE485* m_bits;
-
-    hkBoolE485 IsBitClear(int index, int iUnused) const;
-};
-
 }  // namespace fnv_00e48550
 
-struct FUN_00e48580_Heap
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    void* unk10;
-};
 void* __cdecl FUN_00c85750();
-void __cdecl ResizeAudioStream(void* allocator, void* array, int elementSize);
 struct Packed
 {
     unsigned int lo : 8;
@@ -274,14 +252,6 @@ class hkpEntityListenerE487
     {}
 };
 
-class FUN_00e48740 : public hkReferencedObjectE487, public hkpEntityListenerE487
-{
-  public:
-    hkArrayE487<void*> m_kActorEntries;
-
-    virtual ~FUN_00e48740() throw();
-};
-
 }  // namespace fnv_00e48740
 
 struct __declspec(align(16)) FUN_00e67230_Obj
@@ -357,42 +327,9 @@ struct hkAabbE485
     hkVector4E485 m_kMaximumCorner;
 };
 
-struct hkTransformE485
-{
-    hkVector4E485 m_kColumn0;
-    hkVector4E485 m_kColumn1;
-    hkVector4E485 m_kColumn2;
-    hkVector4E485 m_vTranslation;
-};
-extern const hkTransformE485 DAT_01268370;
-
 struct __declspec(align(16)) hkpShapeBufferE485
 {
     unsigned int m_kStorage[128];
-};
-
-class hkpShapeE485
-{
-  public:
-    virtual ~hkpShapeE485();
-    virtual void V1();
-    virtual void V2();
-    virtual void V3();
-    virtual void V4();
-    virtual void V5();
-    virtual void V6();
-    virtual void getAabb(const hkTransformE485& kLocalToWorld, float fTolerance, hkAabbE485& kOut) const;
-};
-
-class hkpShapeContainerE485
-{
-  public:
-    virtual ~hkpShapeContainerE485();
-    virtual void V1();
-    virtual void V2();
-    virtual void V3();
-    virtual void V4();
-    virtual const hkpShapeE485* GetShapeForKey(unsigned int uiKey, hkpShapeBufferE485& kBuffer) const;
 };
 
 template <class T> struct hkArrayE485
@@ -433,19 +370,6 @@ class hkpMoppModifierE485
   public:
     hkpMoppModifierE485()
     {}
-    virtual void InvokeFirstModifierMethod();
-    virtual void InvokeSecondModifierMethod();
-};
-
-class FUN_00e485d0 : public hkReferencedObjectE485, public hkpMoppModifierE485
-{
-  public:
-    hkArrayE485<unsigned int> m_kRemovedTerminalIds;
-    const hkArrayE485<unsigned int>* m_pTerminalIdsToRemove;
-
-    FUN_00e485d0(const hkpMoppCodeE485* pkMoppCode, const hkpShapeContainerE485* pkShapeContainer,
-                 const hkArrayE485<unsigned int>& kShapesToRemove);
-    virtual ~FUN_00e485d0();
     virtual void InvokeFirstModifierMethod();
     virtual void InvokeSecondModifierMethod();
 };

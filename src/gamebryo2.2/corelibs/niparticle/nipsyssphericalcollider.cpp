@@ -629,7 +629,6 @@ bool FUN_00c27ae0_cls::FUN_00c27ae0(FUN_00c27ae0_cls* pkObject)
 }
 
 #include <math.h>
-extern "C" float g_010be824;
 struct CollisionVector
 {
     float x, y, z;

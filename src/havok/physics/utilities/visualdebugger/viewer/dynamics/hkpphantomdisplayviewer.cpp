@@ -2,23 +2,11 @@
 // src/havok/physics/utilities/visualdebugger/viewer/dynamics/hkpphantomdisplayviewer.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/physics/utilities/visualdebugger/viewer/dynamics/hkpphantomdisplayviewer.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-extern int DAT_01269cd0;
 extern int DAT_01268ff0;
-void* __cdecl FUN_00d66770();
-struct HKProcessFactory
-{
-    void* __thiscall RegisterProcess(const char* name, void* creator);
-};
-void* __cdecl FUN_00dd9380(void* factory, const char* name, void* creator);
 
 struct Container
 {
     void __thiscall ClearValue(void*);
-};
-
-struct World
-{
-    void __thiscall FUN_00c917f0(void*);
 };
 
 struct hkpPhantomDisplayViewer
@@ -102,33 +90,8 @@ void FUN_00d662c0_stub::AttachToIsland(void* pIsland)
     }
 }
 
-struct FUN_00d663f0_Array
-{
-    int* m_data;
-    int m_uiItemCount;
-    int m_pRayCursor;
-};
-
-struct FUN_00d663f0_MemoryRouter
-{
-    void* m_unknown0;
-    void* m_unknown1;
-    void* m_unknown2;
-    void* m_unknown3;
-    void* m_pThreadAllocator;
-};
-
 void* _D1A0E0GetMemoryRouter();
 void __cdecl ResizeAudioStream(void*, void*, int);
-
-struct FUN_00d663f0_Class
-{
-    void* m_unknown0;
-    void* m_unknown1;
-    FUN_00d663f0_Array m_ppData;
-
-    void __thiscall AppendInt(int value);
-};
 
 namespace fnv_00d66b60 {
 struct HKMemoryManager
@@ -336,19 +299,6 @@ void ViewerList::RemoveViewer(Viewer* pViewer)
 
 
 struct FnvCpu_FUN_00d66770_CpuBlock;
-struct FnvCpu_FUN_00d66770_CpuAllocator
-{
-    virtual void slot00();
-    virtual void* Invoke(unsigned int size);
-};
-struct FnvCpu_FUN_00d66770_CpuHolder
-{
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0c;
-    FnvCpu_FUN_00d66770_CpuAllocator* allocator;
-};
 void* __cdecl FUN_00c85750();
 struct FnvCpu_FUN_00d66770_CpuBlock
 {
@@ -372,17 +322,6 @@ struct MemoryRouter
     Allocator* allocator;
 };
 MemoryRouter* __cdecl FUN_00c85750();
-extern char DAT_0102e388;
-struct HavokArrayOwner
-{
-    void* vtable;
-    unsigned short allocatorTag;
-    unsigned short unknown06;
-    void* data;
-    unsigned int size;
-    int capacityFlags;
-    HavokArrayOwner* DestroyHavokArrayOwner(unsigned int deletionFlags);
-};
 }  // namespace fnv_00e015d0
 
 namespace d664 {
@@ -497,13 +436,6 @@ class hkReferencedObjectD667
         return b;
     }
     static void operator delete(void* p);
-};
-
-class hkObjectD667 : public hkReferencedObjectD667
-{
-  public:
-    hkArrayD667<void*> m_items;
-    virtual ~hkObjectD667();
 };
 
 class hkMemoryAllocatorD664
@@ -640,8 +572,6 @@ inline void* operator new(unsigned int, void* p)
 
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long);
 extern unsigned long DAT_0126835c;
-extern "C" const char str_010d1c38[];
-extern "C" const char str_010c41f8[];
 struct MonitorCommand
 {
     const char* name;
@@ -808,13 +738,6 @@ struct DisplayGeometry : ReferenceObject
     void* geometry;
     Transform transform;
     int type;
-};
-struct FUN_00de1210 : DisplayGeometry
-{
-    Aabb bounds;
-    FUN_00de1210();
-    virtual ~FUN_00de1210();
-    void FUN_00de1170(const FourFloatVector&, const FourFloatVector&);
 };
 struct Collidable
 {
@@ -1152,45 +1075,9 @@ Derived::Derived()
 // Plat(8) + Host(44) at 8, Shim : Host at +0x34 -> copies at 8 and 0x34-8? -> delta 0x2c.
 // The final overrider's body lives in the next translation unit (0xd66b60), declared only.
 
-struct ThunkH_Plat
-{
-    void* t_unk00;
-    virtual void vf0_aux(int* pArg);
-};
-
-struct ThunkH_Host
-{
-    void* h_unk04;
-    void* h_unk08;
-    void* h_unk0c;
-    void* h_unk10;
-    void* h_unk14;
-    void* h_unk18;
-    void* h_unk1c;
-    void* h_unk20;
-    void* h_unk24;
-    void* h_unk28;
-    virtual void FUN_00d66b50(int* pArg);
-};
-
-struct ThunkH_Shim : ThunkH_Host
-{
-    void* s_unk2c;
-};
-
-struct ThunkH_Derived : ThunkH_Plat, ThunkH_Host, ThunkH_Shim
-{
-    ThunkH_Derived();
-// @fnv 0x00d66b50
-    void FUN_00d66b50(int* pArg);
-    void* d_unk40;
-};
-
 namespace fnv_00d66530 {
 extern int DAT_01268ff0;
 extern int DAT_01268ff4;
-extern const char str_010d196c[];
-extern const char str_010d1be8[];
 void __cdecl ResizeAudioStream(void*, void*, int);
 
 struct Vw66530Alloc
@@ -1259,121 +1146,6 @@ template <class T> struct Vw66530Array
         if (m_iElementCount != i)
             m_data[i] = m_data[m_iElementCount];
     }
-};
-
-struct Vw66530Entry
-{
-    virtual ~Vw66530Entry();
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-};
-
-struct Vw66530Info
-{
-    int unk00;
-    int unk04;
-    int unk08;
-};
-
-struct Vw66530Arg
-{
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual void v0c();
-    virtual void v10();
-    virtual int getType();
-    int unk04;
-    int unk08;
-    int unk0C;
-    Vw66530Info m_info;
-};
-
-struct Vw66530Global
-{
-    int unk00;
-    int unk04;
-    Vw66530Array<int> m_types;
-};
-extern Vw66530Global* DAT_01268fec;
-
-struct Vw66530Logger
-{
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual void log(int a, int b, const char* msg, const char* file, int line);
-};
-extern Vw66530Logger* DAT_01268360;
-
-struct Vw66530Str
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    void FUN_00cb1600(char* buf, int size);
-    void FUN_00cc01c0(const char* s);
-    void FUN_00cc00e0();
-};
-
-struct Vw66530Obj
-{
-    int unk00;
-    int unk04;
-    void FUN_00ddfb70();
-};
-struct Vw66530Col
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    void FUN_00ddfb80(Vw66530Obj* o);
-    void FUN_00de0f90(int root, Vw66530Array<Vw66530Entry*>* out);
-};
-
-struct Vw66530Disp
-{
-    virtual void v00();
-    virtual void add(Vw66530Array<Vw66530Entry*>* arr, int a, Vw66530Info* info, int tag, int root);
-    virtual void v08();
-    virtual void update(int b, Vw66530Info* info, int tag);
-};
-
-struct Vw66530Self
-{
-    int unk00;
-    int unk04;
-    Vw66530Array<Vw66530Arg*> m_args;
-    void FUN_00d66530(Vw66530Arg* arg);
-};
-
-struct Vw66530Outer
-{
-    Vw66530Disp* m_disp;
-    int unk04;
-    int unk08;
-    int unk0C;
-    Vw66530Self self;
 };
 
 }  // namespace fnv_00d66530

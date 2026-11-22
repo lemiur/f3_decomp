@@ -34,13 +34,6 @@ void NiBSplineTransformInterpolator::CopyUnknownFields(NiBSplineTransformInterpo
     d[10] = p[10];
 }
 
-struct FUN_00a506b0_shell : public NiBSplinePoint3Interpolator
-{
-    void* FUN_00a506b0();
-};
-
-extern char const* const g_011f4014_arg1;
-
 void __fastcall FUN_00a57f80(void*);
 void __cdecl __Dummy_00b6fef0(void*, int);
 
@@ -164,34 +157,6 @@ template <class T> struct NiTMallocInterface
 
 template <class T, class A> struct NiTPrimitiveArray
 {
-};
-
-struct Base
-{
-    void FUN_00a58200(NiTPrimitiveArray<char*, NiTMallocInterface<char*> >*);
-};
-
-struct StrArr
-{
-    unsigned char m_unknown00[8];
-    unsigned short m_pRayCursor;
-    unsigned short m_iElementCount;
-    unsigned short m_unknown0c;
-    unsigned short m_growSize;
-
-    void SetSize(unsigned int);
-    void SetAt(unsigned int, char*&);
-};
-
-char* __cdecl _FUN_00a7d330(char const*);
-char* __cdecl FUN_00a7d510(char const*, unsigned int);
-
-struct FUN_00a50960_shell
-{
-    unsigned char m_unknown[0x28];
-    unsigned int m_kPoint3CPHandle;
-
-    void FUN_00a50960(StrArr* pkStrings);
 };
 
 struct Point3

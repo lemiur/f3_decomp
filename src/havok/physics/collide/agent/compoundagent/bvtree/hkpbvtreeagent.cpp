@@ -74,32 +74,6 @@ struct __declspec(align(16)) Transform
     Transform(void* apFirst, void* apSecond);
 };
 
-struct TargetObject
-{
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual void v0c();
-    virtual void v10();
-    virtual void v14();
-    virtual void v18();
-    virtual void Apply(Transform* apTransform, float afAmount, void* apContext);
-};
-
-struct Holder
-{
-    TargetObject* m_pFlagTarget;
-    int unk04;
-    void* m_pData;
-};
-
-struct ValueSource
-{
-    int unk00;
-    int unk04;
-    float m_fAmount;
-};
-
 struct Allocator
 {
     virtual void* release();
@@ -232,11 +206,6 @@ D2FA00Agent* __cdecl FUN_00d2fa00(const void* bodyA, const void* bodyB, const vo
 {
     return new D2FA00ShapeAgent(mgr);
 }
-
-extern char str_010ce9a4[];
-extern char str_010ce9ac[];
-
-extern "C" void* __cdecl FUN_00d06f80(void* apBuffer, int aiCount);
 
 struct S_00d2f8f0_Elem
 {
@@ -395,28 +364,6 @@ void OwnerD2F5::FUN_00d2f550(void* pArg)
 
 typedef void(__thiscall* TUpdateFn)(void* self, float, float, int);
 
-struct SUpdated
-{
-    TUpdateFn* vtable;
-};
-
-struct SElement
-{
-    int unk00;
-    int unk04;
-    SUpdated* unk08;
-};
-
-struct CUpdateList
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    SElement* unk0c;
-    int unk10;
-    void FUN_00d2f5e0(float a, float b, int c);
-};
-
 class hkBoolR
 {
   public:
@@ -452,14 +399,6 @@ struct ShapeContainer
     virtual void v0c();
     virtual void v10();
     virtual const HkShape* GetShapeForKey(unsigned int key, ShapeBuffer& buffer) const;
-};
-
-struct ShapeCollection : HkShape
-{
-    virtual void v04();
-    virtual void v08();
-    virtual void v0c();
-    virtual const ShapeContainer* GetShapeContainer() const;
 };
 
 struct CdBody
@@ -676,8 +615,6 @@ struct CollisionAgent
     virtual void ProcessContactPoints(const CdBody& bodyA, const CdBody& bodyB, const CollisionInput& input,
                                       ConstraintOwner& owner);
 };
-
-CollisionAgent* __cdecl FUN_00d107a0();
 
 struct CollisionAgentMapRecord
 {
@@ -1179,9 +1116,6 @@ struct S_00d30f50_LinearCastInput
     S_00d30f50_Dispatcher* m_pCollisionDispatcher;
 };
 
-void __cdecl FUN_00d2f690(const S_00d30f50_CdBody& bodyA, const S_00d30f50_CdBody& bodyB,
-                          const S_00d30f50_LinearCastInput& input, S_00d30f50_Aabb& aabbOut);
-
 void __cdecl FUN_00d30f50(const S_00d30f50_CdBody& bodyA, const S_00d30f50_CdBody& bodyB,
                           const S_00d30f50_LinearCastInput& input, S_00d30f50_CdPointCollector& collector,
                           S_00d30f50_CdPointCollector* startCollector) throw();
@@ -1466,20 +1400,6 @@ void FUN_00d314e0(SpawnedObject* self)
 }
 }  // namespace fnv_00d314e0
 
-extern "C" void __cdecl ApplyTransformToTarget(void*, void*, void*, void*);
-extern char str_010cea04[];
-extern char str_010ce7e0[];
-extern char str_010ce9f4[];
-extern char str_01076f38[];
-
-struct S00d31110_Stream
-{
-    char* m_kRayStart;
-    unsigned int* m_cur;
-    char* m_capEnd;
-    unsigned int* m_kRayEnd;
-};
-
 struct S00d31110_Shape;
 
 struct S00d31110_Body
@@ -1503,11 +1423,6 @@ struct S00d31110_Array
     int m_capFlags;
 };
 
-struct S00d31110_InplaceArray : S00d31110_Array
-{
-    unsigned int m_kStorage[128];
-};
-
 struct S00d31110_Shape
 {
     virtual void v00();
@@ -1528,63 +1443,7 @@ struct S00d31110_Shape
     int m_type;
 };
 
-struct S00d31110_Filter
-{
-    virtual void v00();
-    virtual const bool* IsCollisionEnabled(bool* result, void* input, S00d31110_Body* a, S00d31110_Body* b,
-                                           S00d31110_Shape* container, unsigned int key);
-};
-
-struct S00d31110_RefObj
-{
-    virtual void v00();
-    int unk04;
-    int unk08;
-};
-
-struct S00d31110_FilterHolder : S00d31110_RefObj, S00d31110_Filter
-{
-};
-
 typedef void(__cdecl* S00d31110_Func)(S00d31110_Body* a, S00d31110_Body* b, void* input, void* collector);
-
-struct S00d31110_FuncEntry
-{
-    S00d31110_Func m_func;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-};
-
-struct S00d31110_Dispatcher
-{
-    unsigned char m_types[0x9a8];
-    S00d31110_FuncEntry m_entries[1];
-};
-
-struct S00d31110_Input
-{
-    S00d31110_Dispatcher* m_pCollisionDispatcher;
-    int unk04;
-    int unk08;
-    S00d31110_FilterHolder* m_iFilter;
-};
-
-struct S00d31110_Aabb
-{
-    __declspec(align(16)) float m_kMinimumCorner[4];
-    float m_kMaximumCorner[4];
-};
-
-struct S00d31110_Free
-{
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual void v0c();
-    virtual void deallocate(void* p, int size);
-};
 
 // Computes the AABB of bodyB, collects shape hits, and dispatches collision callbacks for each enabled child shape via the dispatcher.
 // @f3 0x009ba1b0 (community match, verified in this file)

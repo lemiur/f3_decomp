@@ -273,23 +273,8 @@ void FUN_00a5db30_shell::FUN_00a5db30()
     }
 }
 
-struct BSFadeNode;
-struct BSMultiBoundNode;
-struct BSResizableTriShape;
-struct BSSegmentedTriShape;
 struct NiCullingProcess;
-struct NiGeometry;
-struct NiLines;
 struct NiObject;
-struct NiParticles;
-struct NiTriBasedGeom;
-struct NiTriShape;
-struct NiTriStrips;
-struct NiVisibleArray;
-struct bhkBlendCollisionObject;
-struct bhkLimitedHingeConstraint;
-struct bhkNiCollisionObject;
-struct bhkRigidBody;
 struct BSNiNode : public NiNode
 {
     virtual void __vslot_0();
@@ -1819,13 +1804,6 @@ bool NiNodeEq::FUN_00a5e600(NiAVObject* pkObject)
 
     return true;
 }
-
-class FUN_00a59dc0_shell
-{
-  public:
-    void SetBoundObject(void*);
-    void FUN_00a7fdb0(void*);
-};
 
 struct NiBinaryStreamA5E8
 {

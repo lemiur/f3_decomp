@@ -129,11 +129,6 @@ NiColorInterpolator* __fastcall NiColorInterpolatorConstructor(NiColorInterpolat
 }
 }  // namespace fnv_00a3bd10
 
-struct FUN_00a3bd70_shell : public NiColorInterpolator
-{
-    void* FUN_00a3bd70();
-};
-
 extern "C" void* g_011f3730;
 
 struct FUN_00a487f0_shell

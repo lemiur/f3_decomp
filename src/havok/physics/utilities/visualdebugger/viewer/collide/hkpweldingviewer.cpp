@@ -72,81 +72,11 @@ void HKConstraint::FUN_00d62680(HKWorldList* pWorldList)
     pWorldList->IsEntityAdded(((char*)this - 0x20) ? (void*)&unk08 : (void*)0);
 }
 
-struct S_00d626b0_Item
-{
-    void FUN_00c93920(void* apSub);
-};
-
-struct S_00d626b0_Owner
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5c;
-    int unk60;
-    int unk64;
-    int unk68;
-    S_00d626b0_Item** m_6c;
-    int m_70;
-};
-
-struct S_00d626b0_A
-{
-    virtual void a0();
-    int unk04;
-};
-struct S_00d626b0_B
-{
-    virtual void b0();
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-};
-struct S_00d626b0_C
-{
-    virtual void c0();
-    S_00d626b0_Owner* m_24;
-};
-struct S_00d626b0_R : S_00d626b0_A, S_00d626b0_B, S_00d626b0_C
-{
-    S_00d626b0_R(int a) throw();
-};
 struct S_00d626b0_S
 {
     virtual void s0();
     S_00d626b0_S() throw()
     {}
-};
-
-struct FUN_00d626b0 : S_00d626b0_R, S_00d626b0_S
-{
-    FUN_00d626b0(int a) throw();
-    virtual void a0();
-    virtual void b0();
-    virtual void c0();
-    virtual void s0();
 };
 
 class D62720Listener
@@ -271,21 +201,6 @@ done:
 // block size into the record header and then runs the record's constructor.
 struct Viewer;
 
-struct Pool
-{
-    virtual void dummy0();
-    virtual Viewer* alloc0x2c(int n);
-};
-
-struct Manager
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    Pool* unk10;
-};
-
 struct Viewer
 {
     int unk00;
@@ -363,47 +278,6 @@ struct FUN_00d62ec0_cls
 };
 
 }  // namespace fnv_00d62ec0
-
-// FUN_00d62e90 : MSVC this-adjusting thunk  (sub ecx, 0x20 ; jmp <impl>)
-struct A1_00d62e90
-{
-    A1_00d62e90();
-    virtual void FUN_00d62e90();
-    char pad[0x1c];
-};
-struct A2_00d62e90
-{
-    A2_00d62e90();
-    virtual void FUN_00d62e90();
-};
-struct Own_00d62e90 : A1_00d62e90, A2_00d62e90
-{
-    Own_00d62e90();
-    virtual void key_fn();
-// @fnv 0x00d62e90
-    void FUN_00d62e90();
-};
-
-struct D62EA0Primary
-{
-    virtual void vfunc00();
-    virtual void FUN_00d62ea0();
-
-    int unk04;
-};
-
-struct D62EA0Secondary
-{
-    virtual void FUN_00d62ea0();
-};
-
-struct D62EA0Object : D62EA0Primary, D62EA0Secondary
-{
-    D62EA0Object();
-
-// @fnv 0x00d62ea0
-    virtual void FUN_00d62ea0();
-};
 
 // FUN_00d62eb0 : MSVC this-adjusting thunk  (sub ecx, 0x28 ; jmp <impl>)
 struct A1_00d62eb0

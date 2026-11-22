@@ -2,8 +2,6 @@
 // src/gamebryo2.2/corelibs/nimain/niditherproperty.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/_fallout3/platforms/common/code/gamebryo2.2/corelibs/nimain/niditherproperty.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-extern void* g_011f5f48;
-
 // @fnv 0x00dc9bc0
 int __cdecl FUN_00dc9bc0()
 {
@@ -55,8 +53,6 @@ NiCullingProperty* NiCullingProperty::FUN_00a9a5f0(CloningProcess& process)
     return copy;
 }
 
-char* __cdecl FUN_00a7d330(char const*);
-char* __cdecl FUN_00a7d370(char const*, bool);
 template <class T> struct NiTMallocInterface
 {
 };
@@ -70,27 +66,4 @@ template <class T, class I> struct NiTPrimitiveArray
     unsigned short growth;
     void SetSize(unsigned int);
     void SetAt(unsigned int, T&);
-};
-struct StrArr : NiTPrimitiveArray<char*, NiTMallocInterface<char*> >
-{
-};
-struct FUN_00a62a40_this
-{
-    void AppendString(StrArr*);
-};
-struct Owner : FUN_00a62a40_this
-{
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0c;
-    unsigned int unk10;
-    unsigned int unk14;
-    unsigned char m_bDither;
-    void AppendDitherSettings(StrArr*);
-};
-union Temporary
-{
-    char* text;
-    bool flag;
 };

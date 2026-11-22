@@ -197,7 +197,6 @@ extern "C" __declspec(dllimport) int __stdcall QueryPerformanceCounter(long long
 extern "C" __declspec(dllimport) int __stdcall QueryPerformanceFrequency(long long*);
 extern unsigned char DAT_011ac222;
 extern long long DAT_011f6068;
-extern long long DAT_011f606c;
 extern long long DAT_011f6070;
 
 // Initializes the performance frequency and start counter once, then returns the seconds elapsed since that start counter.
@@ -278,16 +277,6 @@ bool HashTableBase::FUN_00aa0250(const unsigned int* key)
     return false;
 }
 
-struct FUN_00aa09c0_base
-{
-    virtual ~FUN_00aa09c0_base();
-};
-
-struct FUN_00aa09c0_cls : FUN_00aa09c0_base
-{
-    virtual ~FUN_00aa09c0_cls();
-};
-
 struct FUN_00aa0ff0_cls
 {
     int unk00;
@@ -341,24 +330,7 @@ void __cdecl FUN_00aa19c0(void* object, void* buffer, unsigned int size)
 
 extern int DAT_010a24b8;
 
-struct FUN_00aa1d10_cls
-{
-    void* m_pVTable;
-    int m_iValue04;
-    int m_iValue08;
-    int m_iValue0c;
-
-    FUN_00aa1d10_cls();
-};
-
 extern int DAT_010a24b8;
-
-struct FUN_00aa1d30_cls
-{
-    int m_vptr00;
-
-    void FUN_00aa1d30();
-};
 
 class FUN_00aa1fd0_cls
 {
@@ -550,12 +522,6 @@ void FUN_00aa21e0_cls::FUN_00aa21e0()
 // literal-content check masks every relocated slot of that table, so the
 // number of slots does not have to match the original's fourteen.
 // ---------------------------------------------------------------------------
-
-struct FUN_00aa2230_BSNiAllocator
-{
-    virtual void m_virtual0();
-    FUN_00aa2230_BSNiAllocator();
-};
 
 extern char DAT_010a2554[];
 
@@ -779,9 +745,6 @@ struct S_00aa36f0_State
     unsigned char unk04;
     unsigned char unk05;
 };
-
-void __cdecl SwapIntPairs(void* a, void* b);
-void __cdecl FreeAllocatorBlock(unsigned int value);
 
 struct S_00aa36f0_Foo
 {

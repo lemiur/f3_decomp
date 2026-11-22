@@ -148,8 +148,6 @@ void __fastcall FUN_00c1ba30(FUN_00c1ba30* self, int unused)
     self->ResetTiming();
 }
 
-extern const char* const g_01203340_arg1;
-
 extern int DAT_011ae754;
 extern int DAT_011ae758;
 
@@ -463,11 +461,6 @@ void S240::PushBack(float const& afValue)
 }
 
 void __cdecl _NiFreeAlias(void*);
-struct S_00c1c300
-{
-    void FUN_00c1c300();
-    void FUN_00c312a0();
-};
 
 void __cdecl _NiFreeAlias(void*);
 void __cdecl _delete(void*, unsigned int);
@@ -641,20 +634,6 @@ NiBlendInterpolator* __stdcall FUN_00c1bb20(unsigned short usVariant, bool bAccu
     }
     return 0;
 }
-
-struct StrArr
-{
-    void SetSize(unsigned int);
-    void SetAt(unsigned int, char*&);
-};
-
-char* __cdecl _FUN_00a7d330(char*);
-void __stdcall AppendModifierInfo(StrArr*);
-
-struct FUN_00c1ce70_shell : NiPSysEmitterCtlr
-{
-    void FUN_00c1ce70(StrArr* pkStrings);
-};
 
 extern int DAT_0109a864;
 
@@ -917,29 +896,6 @@ class BC1C280FixedString
     char* m_kHandle;
 };
 
-class BC1C280Base
-{
-  public:
-    BC1C280Base(const BC1C280FixedString& kName) throw();
-    virtual ~BC1C280Base();
-
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-};
-
 struct BC1C280Tracker
 {
     BC1C280Tracker() : m_pkTarget(0), m_uiCount(0), m_fLastValue(INVALID_FLOAT), m_bModifierActive(false)
@@ -959,16 +915,6 @@ struct BC1C280Links
     void* m_pkFirst;
     void* m_pkSecond;
     void* m_pkThird;
-};
-
-class FUN_00c1c280_cls : public BC1C280Base
-{
-  public:
-    FUN_00c1c280_cls(const char* pcName) throw();
-    virtual ~FUN_00c1c280_cls();
-
-    BC1C280Tracker m_kTracker;
-    BC1C280Links m_kLinks;
 };
 
 class NiInterpolatorC1B

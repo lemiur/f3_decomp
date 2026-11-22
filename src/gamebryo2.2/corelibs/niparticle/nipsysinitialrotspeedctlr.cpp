@@ -4,18 +4,7 @@
 
 extern "C" void* g_012026e0;
 
-void* __cdecl FUN_00a7d330(const void*);
 extern void* g_012026e0;
-struct StrArr
-{
-    void SetSize(unsigned int);
-    void SetAt(unsigned int, char*&);
-};
-struct NiPSysInitialRotSpeedCtlr
-{
-    void __thiscall FUN_00c32f60(StrArr*);
-    void __thiscall AppendString(StrArr* pkStrings);
-};
 
 extern "C" void* __cdecl FUN_00aa13e0(unsigned int);
 extern char DAT_010bedbc[];

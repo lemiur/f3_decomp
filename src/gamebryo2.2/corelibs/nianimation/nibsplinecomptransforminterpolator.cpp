@@ -128,18 +128,7 @@ bool FUN_00a50e00_shell::FUN_00a50e00(NiObject* pkObject)
     return true;
 }
 
-struct StrArr
-{
-    void SetSize(unsigned int);
-    void SetAt(unsigned int, char*&);
-};
 extern int g_011f4004;
-char* _FUN_00a7d330(const char*);
-struct Holder
-{
-    void LoadBSplineTransform(StrArr*);
-    void AppendString(StrArr*);
-};
 
 struct SOut
 {

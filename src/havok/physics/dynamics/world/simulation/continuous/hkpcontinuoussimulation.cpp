@@ -155,40 +155,9 @@ void FUN_00d0c6d0(S_00d0c6d0_EntryArray* aEntries, int* aIndex, S_00d0c6d0_ByteA
 }
 
 
-struct Base { void FUN_00cfa430(int*, int, int, unsigned int); };
-struct Object : Base {
-    void FUN_00d0c290(int*, int);
-    void FUN_00d0c3e0(int);
-    void ProcessEntries(int*, int, int, unsigned int);
-};
-
 extern int DAT_010cd45c;
-struct Callback { virtual void Invoke(int value); };
-struct Receiver {
-    virtual void Slot00();
-    virtual void Slot04();
-    virtual void Slot08();
-    virtual void Slot0c();
-    virtual void Invoke(void* data, unsigned int size);
-};
 struct Manager { int unk00; int unk04; int unk08; int unk0c; int unk10; };
 Manager* __cdecl FUN_00c85750();
-struct FUN_00d0d0d0_cls {
-    int unk00; int unk04; int unk08; int unk0c;
-    int unk10; int unk14; int unk18; int unk1c;
-    int unk20; int unk24; int unk28; int unk2c;
-    void* unk30;
-    int unk34;
-    int unk38;
-    struct Subobject {
-        int unk00; int unk04; int unk08;
-        Callback* unk0c;
-        void ProcessArgument(void* managerValue);
-        void FUN_00a29680();
-    } sub3c;
-    void FUN_00cf86d0();
-    void Destroy();
-};
 
 void __cdecl InitAndDispatch();
 struct S_00d0f2e0
@@ -217,7 +186,6 @@ struct Context {
 };
 struct Body { unsigned char& motion(){return *reinterpret_cast<unsigned char*>(reinterpret_cast<char*>(this)+232);} void* state(){return reinterpret_cast<char*>(this)+240;} };
 void __cdecl FUN_00cf1b10(float,void*);
-void __cdecl FUN_00d28680(TimeStep*,Body**,int,int);
 void __cdecl FUN_00d1a330(World*,Body**,int);
 struct Controller {
  virtual void slot0();virtual void slot1();virtual void slot2();virtual void slot3();virtual void slot4();virtual void slot5();virtual void slot6();virtual void slot7();virtual void process(Body**,int,Context*,int);
@@ -244,26 +212,6 @@ struct ControllerContextView
     int unk88;
     unsigned char m_ucLocked;   // 0x8c
     void FUN_00902550();
-};
-
-struct ControllerBodyView
-{
-    int unk00, unk04, unk08, unk0C;
-    int unk10, unk14, unk18, unk1C;
-    int unk20, unk24, unk28, unk2C;
-    int unk30, unk34, unk38, unk3C;
-    int unk40, unk44, unk48, unk4C;
-    int unk50, unk54, unk58, unk5C;
-    int unk60, unk64, unk68, unk6C;
-    int unk70, unk74, unk78, unk7C;
-    int unk80, unk84, unk88, unk8C;
-    int unk90, unk94, unk98, unk9C;
-    int unkA0, unkA4, unkA8, unkAC;
-    int unkB0, unkB4, unkB8, unkBC;
-    int unkC0, unkC4, unkC8, unkCC;
-    int unkD0, unkD4, unkD8, unkDC;
-    void* m_pState;             // 0xe0
-    unsigned char m_ucMotion;   // 0xe4
 };
 
 class ViewBool
@@ -534,11 +482,6 @@ int __cdecl FUN_00d0bd30(float scale, FUN_00d0bd30_p* pParams, float* pafValues,
 // here as a run of ScopeChunk pairs.  The lookup key lives at +0x14.
 // ---------------------------------------------------------------------------
 
-struct ScopeChunk {
-    unsigned int lo;
-    unsigned int hi;
-};
-
 struct ScopeEntry {
     unsigned int unk00;
     unsigned int unk04;
@@ -634,10 +577,6 @@ extern "C" __m128 _mm_mul_ps(__m128 _A, __m128 _B);
 extern "C" __m128 _mm_add_ps(__m128 _A, __m128 _B);
 extern "C" __m128 _mm_sub_ps(__m128 _A, __m128 _B);
 extern "C" __m128 _mm_shuffle_ps(__m128 _A, __m128 _B, unsigned int _Imm8);
-extern "C" __m128 _mm_unpacklo_ps(__m128 _A, __m128 _B);
-extern "C" __m128 _mm_unpackhi_ps(__m128 _A, __m128 _B);
-extern "C" __m128 _mm_movelh_ps(__m128 _A, __m128 _B);
-extern "C" __m128 _mm_movehl_ps(__m128 _A, __m128 _B);
 
 class hkVector4 {
 public:
@@ -652,11 +591,6 @@ public:
     hkVector4 m_kColumn2;
 };
 
-class FUN_008cd6a0_Class {
-public:
-    void FUN_00cb2d90(void* q);
-};
-
 struct hkMotionState {
     hkRotation m_rotation;
     hkVector4 m_vTranslation;
@@ -667,32 +601,10 @@ struct hkMotionState {
     hkVector4 m_vCenterOfMassLocal;
 };
 
-struct SolverBody {
-    hkVector4 m_unk00;
-    hkVector4 m_unk10;
-    hkVector4 m_unk20;
-    hkVector4 m_unk30;
-    hkVector4 m_unk40;
-    hkVector4 m_kColumn0;
-    hkVector4 m_kColumn1;
-    hkVector4 m_kColumn2;
-};
-
-struct VelocityEntry {
-    hkVector4 m_unk00;
-    hkVector4 m_unk10;
-};
-
 struct Entity {
     int m_unk00;
     char m_auiShapeKeys[0xec];
     hkMotionState m_kMotionState;
-};
-
-struct EntityRaw {
-    int m_unk00;
-    int m_unk04[0x28];
-    unsigned int m_solverIndex;
 };
 
 struct Island {
@@ -700,74 +612,6 @@ struct Island {
     Entity** m_kActorEntries;
     int m_iActorEntryCount;
 };
-
-struct ByteArray {
-    unsigned char* m_data;
-};
-
-struct SolverInfo {
-    int m_unk00;
-    int m_unk04;
-    int m_unk08;
-    char* m_apEntities;
-    int m_unk10;
-    int m_unk14;
-    char* m_velocities;
-};
-
-struct EntityB {
-    char m_auiShapeKeys[0xa4];
-    unsigned int m_solverIndex;
-    char m_pAuxiliaryObject[0x108];
-    hkVector4 m_unk1b0;
-    hkVector4 m_unk1c0;
-};
-
-struct ReportSink {
-    virtual void v0();
-    virtual void v1();
-    virtual void v2();
-    virtual void v3(const char* name, unsigned int value, int flag);
-    virtual void v4();
-    virtual void v5(int level, const char* name, void* base, unsigned int bytes, unsigned int data);
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0C;
-    unsigned char m_10;
-};
-
-struct FilePool {
-    unsigned int m_00;
-    unsigned int m_04;
-    unsigned int m_08;
-    unsigned int FUN_00cb17e0();
-};
-
-struct FUN_00d0c8d0_cls {
-    unsigned int m_00;
-    unsigned int m_04;
-    unsigned int m_08;
-    unsigned int m_0C;
-    unsigned int m_10;
-    unsigned int m_14;
-    unsigned int m_18;
-    unsigned int m_1C;
-    unsigned int m_20;
-    unsigned int m_24;
-    unsigned int m_28;
-    unsigned int m_2C;
-    void* m_30;
-    unsigned int m_34;
-    unsigned int m_38;
-    FilePool m_3C;
-    unsigned int m_48;
-
-    void FUN_00c90360(ReportSink* sink, void* data);
-    void ReportMemoryUsage(ReportSink* a1, int a2);
-};
-
-unsigned int FUN_00d06f80(void* base, unsigned int bytes);
-extern char DAT_01269514;
 
 struct InfoBlock {
     unsigned int unk00;
@@ -834,14 +678,6 @@ struct SrcA {
     int m_04;
     unsigned int unk08;
     int m_0c;
-};
-
-struct HolderBase {
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0c;
-    void* m_10;
 };
 
 void __cdecl ResizeAudioStream(void* alloc, Vec* vec, unsigned int elemSize);
@@ -1327,8 +1163,6 @@ struct S_00d0d150_Error {
     virtual int message(int type, int id, const char* description, const char* file, int line) throw();
 };
 
-extern S_00d0d150_Error* DAT_01268360;
-
 static __forceinline void S_00d0d150_memCpy4(void* dst, const void* src, int numWords)
 {
     const int* s = static_cast<const int*>(src);
@@ -1398,7 +1232,6 @@ void S_00d0d150::QueueToiEvent(const S_00d0d150_CollisionOutput& result,const S_
 
 
 extern float DAT_0104da48;
-extern double DAT_0104e138;
 extern int DAT_01269200;
 
 struct ThingVCallObject {
@@ -1699,8 +1532,6 @@ struct FUN_00d0daa0_cls {
     void InitAndDispatch(ThingX* apX, ThingP* apP, ThingS* apS);
 };
 
-void __cdecl FUN_00cfedd0(ThingX* apX, ThingP* apP, ThingS* apS, int aiValue);
-
 // @f3 0x0098dd40 (community match, verified in this file)
 struct FUN_010f3400_obj {
     virtual void v00();
@@ -1760,30 +1591,6 @@ void FUN_00d0daa0_cls::InitAndDispatch(ThingX* apX, ThingP* apP, ThingS* apS)
 }
 
 
-// Stand-in for the object at ms+0x20; its member is the thiscall helper.
-struct SlotObj_b2089
-{
-    void FUN_00c7f700(void* dst, void* src);
-};
-
-struct World_b2089
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    char* m_0c;     // +0x0c: base of per-entry records
-    int unk10;
-    int unk14;
-    char* m_18;     // +0x18: vector table
-};
-
-struct EntryList_b2089
-{
-    void** m_pData; // +0x00
-    int m_iArrayLength;   // +0x04
-};
-
-extern float DAT_010c7948[];
 struct CollisionMotion {
     int unk00, unk04;
     unsigned char type;
@@ -1871,14 +1678,6 @@ struct CollisionEvent {
     int unk48, unk4c;
     hkVector4 position, normal;
 };
-struct CollisionParameters {
-    float friction, restitution, maximumImpulse;
-    float separatingVelocity, extraVelocity, deltaTime;
-    bool limitBreached;
-};
-struct CollisionOutput {
-    float impulse, velocityA, velocityB;
-};
 struct __declspec(align(16)) CollisionStateData {
     unsigned short type, count;
     int* constraint;
@@ -1896,8 +1695,6 @@ struct CollisionQueue {
         ++size;
     }
 };
-void __cdecl FUN_00d9f250(hkVector4*, float, CollisionParameters*, CollisionMotion*, CollisionMotion*, CollisionManager*, CollisionOutput*);
-void __cdecl FUN_00d01700(void*, CollisionStateData*, int);
 // @f3 0x0098cb20 (community match, verified in this file)
 namespace Task2017 {
 struct Bool {char value;Bool(){} Bool(bool b):value(b){} operator bool() const {return value!=0;}};
@@ -2058,12 +1855,6 @@ struct TimerCommandD0 {
     unsigned int m_uiCommandId;
     int unk08;
 };
-struct TimerListCommandD0 {
-    const char* m_name;
-    unsigned int m_uiCommandId;
-    int unk08;
-    const char* m_firstSub;
-};
 
 struct BoundingVolumeDataD0 {
     unsigned int m_kMinimumCorner[3];
@@ -2116,14 +1907,6 @@ struct BroadPhaseD0 {
     void unlock() { if (m_pWorldLock) unlockImplementation(); }
 };
 struct CollisionInputD0;
-struct WorldD0 {
-    int unk00, unk04, unk08, unk0c, unk10, unk14, unk18, unk1c;
-    int unk20, unk24, unk28, unk2c, unk30, unk34, unk38, unk3c;
-    int unk40, unk44, unk48, unk4c, unk50, unk54;
-    BroadPhaseD0* m_pJobSemaphore;
-    int unk5c, unk60, unk64, unk68, unk6c, unk70, unk74;
-    CollisionInputD0* m_pCollisionInput;
-};
 void __cdecl FUN_00d1a330(CollisionInputD0* input, CollidableD0** collidables, int numCollidables);
 void __cdecl FUN_00cf7130(PairArrayD0& newPairs, PairArrayD0& delPairs);
 
@@ -2442,8 +2225,6 @@ void PartitionMotionPairs(PairEntryArray* apEntryArray, int* apiFixedCount, int 
 extern "C" void _ReadBarrier(void);
 extern "C" void _WriteBarrier(void);
 // FUN_00d0ef40 v1 - Havok collide step: monitor ticks, reverse vcall loop, two ctx array loops
-extern char DAT_010cc64c[]; // TtCollide
-extern char DAT_010cc634[]; // TtIslandPostCollideCb
 extern char DAT_010c41f8[]; // Et
 extern int DAT_01269200;
 
@@ -2784,7 +2565,6 @@ struct Ctx {
     void FUN_00c91120();
     void FUN_00c91140();
 };
-void __cdecl FUN_00d01650(Ctx*, BodyL*, Param*);
 template<int Mode> static inline void TickWrite(const char* name, volatile unsigned int& t)
 {
     MonitorStreamD0* s = (MonitorStreamD0*)TlsGetValue(DAT_0126835c);
@@ -3209,26 +2989,6 @@ struct D0C290Entry {
     int unk6C;
 };
 
-class FUN_00d0c290_cls {
-public:
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    D0C290Entry* m_30;
-    int m_34;
-    void FUN_00d0c290(int* ids, int n);
-};
-
-
 struct D0C290Pair { unsigned int lo, hi; };
 
 namespace fnv_00d0c3e0 {
@@ -3348,29 +3108,10 @@ struct D0C290Entry {
     int unk6C;
 };
 
-class D0C3E0Owner {
-public:
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    D0C290Entry* m_30;
-    int m_34;
-    void FUN_00d0c3e0(void* obj);
-};
 struct D0C290Pair { unsigned int lo, hi; };
 
 }  // namespace fnv_00d0c3e0
 
-extern const char str_010cd440[];
 extern const char str_010c41f8[];
 
 struct __declspec(align(16)) S00d0c9c0_Ctx {
@@ -3487,19 +3228,6 @@ extern "C" unsigned __int64 __rdtsc(void);
 extern "C" void _ReadWriteBarrier(void);
 
 extern DWORD DAT_0126835c;
-
-struct S_00d0e210_TimerCommand {
-    const char* m_pCommandName;
-    unsigned int m_uiStartTicks;
-    unsigned int m_uiEndTicks;
-};
-
-struct S_00d0e210_MonitorStream {
-    char* m_kRayStart;
-    char* m_kRayEnd;
-    char* m_pRayCursor;
-    char* m_pCurrentCommand;
-};
 
 struct S_00d0e210_Heap {
     virtual void v00();
@@ -3766,75 +3494,7 @@ struct S_00d0e210_World {
     }
 };
 
-struct S_00d0e210_StepInfo {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5C;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6C;
-    int unk70;
-    int unk74;
-    int unk78;
-};
-
-void __cdecl UpdateRotationInterpolation(float time, S_00d0e210_Motion* motion) throw();
 void __cdecl FUN_00cc0ea0(S_00d0e210_Entity* entity, int arg) throw();
-
-struct S_00d0e210_Sim {
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual void v0C();
-    virtual void v10();
-    virtual void v14();
-    virtual void v18();
-    virtual void v1C();
-    virtual void v20();
-    virtual void v24();
-    virtual void v28();
-    virtual void v2C();
-    virtual void v30();
-    virtual void v34();
-    virtual void v38();
-    virtual void activate(S_00d0e210_Entity** entities, int numEntities, int arg, int* out);
-    int unk04;
-    int unk08;
-    S_00d0e210_World* m_pOwningWorld;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    S_00d0e210_ToiArray m_kToiEventQueue;
-    int unk3C;
-    void FUN_00d0e210(S_00d0e210_StepInfo* info, S_00d0e210_ToiEvent& event, int unused, float dt) throw();
-};
 
 struct D0FE00TimerCommand {
     const char* m_pCommandName;
@@ -3856,146 +3516,6 @@ struct D0FE00MonitorStream {
     char* m_pCurrentCommand;
 
     bool memoryAvailable() const { return m_kRayEnd < m_pCurrentCommand; }
-};
-
-extern DWORD g_D0FE00TlsIndex;
-
-struct D0FE00World {
-    int unk000;
-    int unk004;
-    int unk008;
-    int unk00C;
-    int unk010;
-    int unk014;
-    int unk018;
-    int unk01C;
-    int unk020;
-    int unk024;
-    int unk028;
-    int unk02C;
-    int unk030;
-    int unk034;
-    int unk038;
-    int unk03C;
-    int unk040;
-    int unk044;
-    int unk048;
-    int unk04C;
-    int unk050;
-    int unk054;
-    int unk058;
-    int unk05C;
-    int unk060;
-    int unk064;
-    int unk068;
-    int unk06C;
-    int unk070;
-    int unk074;
-    int unk078;
-    int unk07C;
-    int unk080;
-    int unk084;
-    int unk088;
-    int unk08C;
-    int unk090;
-    int unk094;
-    int unk098;
-    int unk09C;
-    int unk0A0;
-    int unk0A4;
-    int unk0A8;
-    int unk0AC;
-    int unk0B0;
-    int unk0B4;
-    int unk0B8;
-    int unk0BC;
-    int unk0C0;
-    int unk0C4;
-    int unk0C8;
-    int unk0CC;
-    int unk0D0;
-    int unk0D4;
-    int unk0D8;
-    int unk0DC;
-    int unk0E0;
-    int unk0E4;
-    int unk0E8;
-    int unk0EC;
-    int unk0F0;
-    int unk0F4;
-    int unk0F8;
-    int unk0FC;
-    int unk100;
-    int unk104;
-    int unk108;
-    int unk10C;
-    int unk110;
-    int unk114;
-    int unk118;
-    int unk11C;
-    int unk120;
-    int unk124;
-    int unk128;
-    int unk12C;
-    int unk130;
-    int unk134;
-    int unk138;
-    int unk13C;
-    int unk140;
-    int unk144;
-    int unk148;
-    int unk14C;
-    int unk150;
-    int unk154;
-    int unk158;
-    int unk15C;
-    int unk160;
-    int unk164;
-    int m_postSimulationCallbacks;
-};
-
-void __cdecl FUN_00d01380(D0FE00World* world);
-extern int g_D0FE00SimulationState;
-extern const char g_D0FE00TimerPostSimCb[];
-extern const char g_D0FE00TimerEnd[];
-
-struct D0FE00Simulation {
-    virtual void vfunc00();
-    virtual void vfunc04();
-    virtual void vfunc08();
-    virtual void vfunc0C();
-    virtual void vfunc10();
-    virtual void vfunc14();
-    virtual void vfunc18();
-    virtual void vfunc1C();
-    virtual void vfunc20();
-    virtual void vfunc24();
-    virtual void vfunc28();
-    virtual void vfunc2C();
-    virtual void vfunc30();
-    virtual void vfunc34();
-    virtual void vfunc38();
-    virtual void vfunc3C();
-    virtual void markEntities(int value, int* list);
-    int unk04;
-    int unk08;
-    D0FE00World* m_pOwningWorld;
-    int unk10;
-    float m_fElapsedSimulationTime;
-    int unk18;
-    int unk1C;
-    float m_frameMarkerTime;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int m_entitiesToActivate;
-    int m_iActorEntryCount;
-
-    int FUN_00d0ed10();
-    int FUN_00d0fe00();
 };
 
 namespace fnv_00d10730 {
@@ -4143,7 +3663,6 @@ struct Se4b0_MotionState {
     Se4b0_Transform swept;
 };
 void FUN_00cf1510(const Se4b0_Transform& swept, float t, Se4b0_Transform& out);
-void FUN_00dd7d00(void* arr, int lo, int hi, void* cmp);
 struct Se4b0_Dispatcher {
     virtual void s00(); virtual void s04(); virtual void s08(); virtual void s0c();
     virtual void s10(); virtual void s14(); virtual void s18(); virtual void s1c();
@@ -4527,12 +4046,6 @@ struct S_00d0e9c0_Event {
     int m_aiUnk64;
     int m_aiUnk68;
     int m_aiUnk6c;
-};
-
-struct S_00d0e9c0_EventQueue {
-    S_00d0e9c0_Event* m_data;
-    int m_iElementCount;
-    int m_iCapacityState;
 };
 
 struct S_00d0e9c0_Context {
@@ -5404,11 +4917,6 @@ class hkSmallArray
 		hkUint16	m_size;
 		hkSmallArray(hkFinishLoadedObjectFlag f) { }
 };
-struct hkQuadReal
-{
-};
-class hkVector4Comparison;
-class hkQsTransform;
 class hkVector4
 {
 	public:
@@ -5665,7 +5173,6 @@ struct hkpSolverInfo
 	hkUint8			m_deactivationIntegrateCounter;
 };
 class hkpConstraintData;
-class hkpCdPointCollector;
 struct hkpAgentNnEntry;
 class hkpLinkedCollidable: public hkpCollidable
 {
@@ -5972,7 +5479,6 @@ inline hkUint32 hkpEntity::getUid() const
 	return m_uid;
 }
 extern struct hkCheckDeterminismUtil* g_checkDeterminismUtil;
-class hkIstream;
 struct hkCheckDeterminismUtil
 {
 	public:
@@ -6077,8 +5583,6 @@ struct hkpProcessCollisionInput;
 class hkpTypedBroadPhaseDispatcher;
 struct hkpWorldRayCastInput;
 struct hkpWorldRayCastOutput;
-struct hkpLinearCastInput;
-class hkpCdBodyPairCollector;
 class hkpBroadPhase;
 class hkpRigidBody;
 class hkpPhantom;
@@ -6103,8 +5607,6 @@ class hkpWorldOperationQueue;
 struct hkpDebugInfoOnPendingOperationQueues;
 class hkpWorldMaintenanceMgr;
 namespace hkWorldOperation {
-struct BaseOperation;
-class UserCallback;
 }
 enum hkpUpdateCollisionFilterOnWorldMode
 {
@@ -6131,7 +5633,6 @@ struct hkpWorldDynamicsStepInfo
 	hkStepInfo   m_stepInfo;
 	hkpSolverInfo m_solverInfo;
 };
-struct hkpMultithreadConfig;
 enum hkpThreadToken
 {
 	HK_THREAD_TOKEN_FIRST,
@@ -6630,7 +6131,6 @@ class hkpRayCollidableFilter
 		virtual ~hkpRayCollidableFilter() { }
 		virtual hkBool isCollisionEnabled( const hkpWorldRayCastInput& a, const hkpCollidable& collidableB ) const = 0;
 };
-class hkpBvTreeShape;
 class hkpShapeCollectionFilter
 {
 	public:
@@ -6792,7 +6292,6 @@ void __stdcall FUN_00d0d3f0(Source** sources, int count, RenderParams* context, 
 }
 
 
-extern const char str_010cc54c[];
 extern const char str_010c41f8[];
 struct S00d0d8b0_Array {
     unsigned char** m_data;
@@ -7307,8 +6806,6 @@ __forceinline void restoreState(hkMotionState* m) {
     __m128 z=_mm_mul_ps(_mm_shuffle_ps(center,center,0xaa),m->m_rotation.m_kColumn2.m_vComponents);
     m->m_vTranslation.m_vComponents=_mm_sub_ps(m->m_vCenterOfMass1.m_vComponents,_mm_add_ps(_mm_add_ps(y,x),z));
 }
-struct SolveStepData { int unk00,unk04; float delta; };
-struct SolveResourcesView { SolveStepData* step; void* solver; void* query; void* accumulators; };
 struct SolvePoint { hkVector4 position,normal; };
 struct SolveAtoms {
     U32 unk00;
@@ -7332,7 +6829,6 @@ struct SolveConstraint {
     U8 priority;
 };
 struct SolveRecord { SolveConstraint* constraint; void* schema; float depth; };
-struct SolveViolation { SolveConstraint* constraint; const SolvePoint* point; const void* properties; };
 extern "C" __declspec(nothrow) int __cdecl FUN_00d9f6f0(void*,void*,void*,int,float*) throw();
 extern "C" __declspec(nothrow) int __cdecl FUN_00d0bd30(float,SolveRecord*,float*,int,void*) throw();
 
@@ -9253,12 +8749,6 @@ struct AllocHolder {
     Allocator *m_pThreadAllocator;
 };
 
-struct SpawnedNode {
-    int unk00;
-    unsigned short m_04;
-    unsigned short unk06;
-};
-
 struct Owner {
     int unk000;
     int unk004;
@@ -9473,66 +8963,16 @@ extern int DAT_010cd45c;
 AllocHolder *__cdecl FUN_00c85750();
 void __cdecl FUN_00c908c0(Allocator *allocator, void *data, unsigned int capacity, unsigned int elemSize);
 
-struct Stub_cf87c0 {
-    void FUN_00cf87c0(Owner *a1);
-};
-
-struct Stub_cb1fe0 {
-    void EnsureCapacity(void *a, int b);
-};
-
-struct Stub_d9fb90 {
-    void *FUN_00d9fb90();
-};
-
-struct FUN_00d0d020_cls {
-    int m_vptr;
-    int unk04;
-    int unk08;
-    int unk0c;
-    unsigned char m_10;
-    unsigned char unk11;
-    unsigned char unk12;
-    unsigned char unk13;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    void *m_30;
-    int m_34;
-    unsigned int m_38;
-    void *m_3c;
-    int m_40;
-    unsigned int m_44;
-    void *m_48;
-    int m_4c;
-
-    FUN_00d0d020_cls *FUN_00d0d020(Owner *a1);
-};
-
 }  // namespace fnv_00d0d020
 
 template<class T> class ScanPointer {T p;public:__forceinline ScanPointer(){} __forceinline ScanPointer(T q):p(q){} __forceinline void operator=(T q){p=q;} __forceinline operator T()const{return p;} __forceinline T const& val()const{return p;}};
 // Resolve an event and remove obsolete queued events.
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long dwTlsIndex);
 extern "C" unsigned __int64 __rdtsc(void);
-extern "C" __m128 _mm_setzero_ps();
 extern "C" void _ReadWriteBarrier(void);
 extern unsigned long DAT_0126835c;
 extern int DAT_01269200;
-extern float DAT_0104f498;
-extern float DAT_01016248;
-extern char DAT_010cd540[];
-extern char DAT_010cd534[];
-extern char DAT_010cd520[];
-extern char DAT_010cd514[];
 extern char DAT_01076f38[];
-void __cdecl FUN_00cb1280(void* p, int v, int n);
-void __cdecl FUN_00c90670(void* data, int size, int elem);
-void __cdecl FUN_00c90740(void* data, int size, int elem);
 typedef unsigned long DWORD;
 struct ProfRec { const char* m_pName; DWORD m_iTick; DWORD unk08;
     __forceinline void stamp() {
@@ -9545,18 +8985,12 @@ struct ProfRec { const char* m_pName; DWORD m_iTick; DWORD unk08;
     }
 };
 struct ProfBuf { DWORD unk00; ProfRec* m_pCur; DWORD unk08; ProfRec* m_pRecordEnd; };
-struct ProfPairRec : ProfRec {const char* m_subName;};
 struct HeapObj {
     virtual void v00();
     virtual void v04();
     virtual void v08();
     virtual void v0c();
     virtual void ReturnMemory(void* p, int numBytes);
-};
-struct Node {
-    int unk00; int unk04; int unk08;
-    int unk0c;
-    signed char m_iOwnerOffset;
 };
 struct FlagIndex16 {
     unsigned short value;
@@ -9758,28 +9192,6 @@ struct EventReleaseObj {
     virtual void v10(); virtual void v14(); virtual void v18(); virtual void v1c();
     virtual void call20(Island* a, CollisionProperties* b);
 };
-struct Vec4 { __m128 m_vComponents; };
-struct BigObj {
-    int unk00; int unk04; int unk08; int unk0c;
-    hkVector4 m_v10;
-    hkVector4 m_v20;
-    int unk30; int unk34; int unk38; int unk3c; int unk40; int unk44; int unk48; int unk4c; int unk50; int unk54; int unk58; int unk5c; int unk60; int unk64; int unk68; int unk6c; int unk70; int unk74; int unk78; int unk7c; int unk80; int unk84; int unk88; int unk8c; int unk90; int unk94; int unk98; int unk9c; int unka0; int unka4; int unka8; int unkac; int unkb0; int unkb4; int unkb8; int unkbc; int unkc0; int unkc4; int unkc8; int unkcc; int unkd0; int unkd4; int unkd8; int unkdc; int unke0; int unke4; int unke8; int unkec; int unkf0; int unkf4; int unkf8; int unkfc; int unk100; int unk104; int unk108; 
-    float m_10c;
-    float m_110;
-    int m_114;
-    int m_118;
-    int m_11c;
-    float m_120;
-    int unk124, unk128, unk12c;
-    void FUN_00d105b0(void* arg);
-    void FUN_00c90e60(float a, float b);
-};
-struct Times {
-    float tA;
-    float tB;
-    float diff;
-    float recip;
-};
 struct __declspec(align(16)) Obj2 {
     int unk00; int unk04; int unk08; int unk0c; int unk10; int unk14; int unk18; int unk1c; int unk20; int unk24; int unk28; int unk2c; int unk30; int unk34; int unk38; int unk3c; int unk40; int unk44; int unk48; int unk4c; int unk50; int unk54; int unk58; int unk5c; int unk60; int unk64; int unk68; int unk6c; int unk70; 
     void FUN_00cfa6e0(void* big, float* tA, int v);
@@ -9821,8 +9233,6 @@ struct ScopedFlags : SolverFlagView {
 };
 struct Self;
 
-int __cdecl FUN_00d88300(void* out);
-int __cdecl InitializeConstraintSolverResources(float* f, BigObj* big, Obj2* o2, int a, int b, void* mid);
 struct Self {
     virtual void v00(); virtual void v04(); virtual void v08(); virtual void v0c();
     virtual void v10(); virtual void v14(); virtual void v18(); virtual void v1c();
@@ -9866,7 +9276,6 @@ __forceinline void Self::process(Arg0* world,Elem** data,int count,void* input) 
 int __cdecl FUN_00d0f300(const EventQuery&,SolverState&,Entry70&,PhaseObj&,Arg0*,PtrArr&,SolverFlagView&,float);
 
 struct SolveConstraint;
-struct SolveSchemaInfo {SolveConstraint* constraint;void* schema;float depth;};
 
 void __cdecl reserveSolveArray(HeapObj&,void*,int,int);
 template<class T> struct SolveArray {
@@ -9894,47 +9303,6 @@ template<class T> struct SolveLocalArray:SolveArray<T> {
     __forceinline SolveLocalArray(int n){Manager* r=FUN_00c85750();allocation=(T*)r->unk00;r->unk00+=((n*sizeof(T)+127)&~127);this->data=allocation;this->capacity=n|0x80000000;}
     __forceinline ~SolveLocalArray(){if(this->data==allocation)this->clear();FUN_00c85750()->unk00=(int)allocation;}
 };
-struct SolveBufferState {void* begin;void* end;void* current;void* processed;};
-struct SolveStateView {
-    Times* step;BigObj* solver;Obj2* query;
-    void* accumulators;void* accumulatorsEnd;void* accumulatorsCurrent;
-    void* backups;void* backupsEnd;
-    SolveBufferState schemas[2];
-    void* temporaries;void* temporariesEnd;void* temporariesCurrent;void* temporariesProcessed;
-};
-struct SolveContact {
-    virtual void f00();virtual void f04();virtual void f08();virtual void f0c();
-    virtual void f10();virtual void f14();virtual void f18();virtual void f1c();
-    virtual void f20();virtual void f24();virtual void f28();virtual void f2c();
-    virtual void f30();virtual void f34();virtual void f38();virtual void f3c();
-    virtual void f40();virtual void f44();
-    virtual void solve(Entry70&,float,SolveArray<Owner*>&);
-};
-struct SolveControl {
-    virtual void f00();virtual void f04();virtual void f08();virtual void f0c();
-    virtual int GetViolations(SolveArray<SolveViolation>&);
-    virtual int outOfMemory();
-};
-void __cdecl updateSolveTransform(Owner*,float);
-void __cdecl projectSolveTransform(Owner*);
-void __cdecl validateSolveConstraints(SolverState&,void*,SolveArray<SolveSchemaInfo>&,int&,int,SolverFlagView&,const SolveArray<Owner*>&,SolveArray<Owner*>&);
-void __cdecl activateSolveEntities(void*,int,float,const SolveArray<Owner*>&,SolverFlagView&,SolveArray<Owner*>&,SolveArray<SolveConstraint*>&);
-hkBool __cdecl canAddSolveBodies(SolverState&,Owner**,int);
-hkBool __cdecl canAddSolveConstraints(SolverState&,SolveConstraint**,int);
-void __cdecl addSolveAccumulators(SolverState&,Owner*const*,int);
-void __cdecl addSolveSchemas(SolverState&,SolveConstraint**,int,SolveArray<SolveSchemaInfo>&);
-void __cdecl freezeSolveIsland(float,Island*,SolverFlagView&,SolveArray<Owner*>&);
-void __cdecl invalidateSolveBody(Owner*,void*);
-void __cdecl activateSolveFixed(SolveArray<SolveSchemaInfo>&,int&,int);
-void __cdecl activateSolveLinked(SolveArray<SolveSchemaInfo>&,int&,SolverFlagView&);
-void __cdecl solveStep(SolverState&,int);
-void __cdecl resetSolveAccumulators(SolverState&,const SolveArray<Owner*>&);
-hkBool __cdecl validateCriticalSolve(SolverState&,const SolveArray<SolveSchemaInfo>&,void*,SolveArray<SolveViolation>*);
-void __cdecl stepSolveJacobians(BigObj*,void*,void*,void*);
-void __cdecl finishSolveStep(SolverState&);
-void __cdecl backstepSolveBody(Owner*,float);
-void __cdecl integrateSolveBodies(BigObj&,Times&,const void*,Owner*const*,int);
-void __cdecl restoreSolveTransforms(Island*,SolverFlagView&,SolverState&);
 
 extern "C" void _ReadBarrier(void);
 extern "C" void _WriteBarrier(void);
@@ -10042,25 +9410,10 @@ Res* AdvanceSimulation::FUN_00d0ed10()
 
 }
 
-struct Holder_cls {
-    unsigned char unk00[0x10];
-    void* m_pAllocator;
-};
-
-struct Calc_cls {
-    float Get();
-};
-
 struct ArrayRef_cls {
     int* m_pData;
     int m_iArrayLength;
     unsigned int m_iFlags;
-};
-
-struct Flags_cls {
-    char* m_pBytes;
-    unsigned char unk04[0xc];
-    void* m_pHolder;
 };
 
 extern "C" void _ReadWriteBarrier(void);

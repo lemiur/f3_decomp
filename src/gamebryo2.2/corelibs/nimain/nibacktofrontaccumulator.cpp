@@ -148,10 +148,6 @@ struct S_00aa0d00_Node
     S_00aa0d00_Node* prev;
     void* data;
 };
-struct S_00aa0d00_Pool
-{
-    S_00aa0d00_Node* head;
-};
 struct S_00aa0d00_Aux
 {
     int unk00;
@@ -160,7 +156,6 @@ struct S_00aa0d00_Aux
 extern S_00aa0d00_Aux DAT_011c5f80;
 extern S_00aa0d00_Node* DAT_011c5f58;
 extern unsigned int DAT_011c5f84;
-extern S_00aa0d00_Renderer* DAT_011f4748;
 
 struct S_00aa0d00_Base
 {
@@ -377,14 +372,9 @@ BackToFront_aa0* BackToFront_aa0::FUN_00aa0f50(CloningProcess& kCloning)
     return pkObject;
 }
 
-void __cdecl FUN_00a88a40();
-
 extern S_00aa0d00_Aux DAT_011c5f80;
 extern S_00aa0d00_Node* DAT_011c5f58;
 extern unsigned int DAT_011c5f84;
-
-extern int DAT_010a23ac;
-extern int DAT_010a2304;
 
 extern void NiFree(void*);
 
@@ -598,17 +588,4 @@ void FUN_00aa0c00_cls::SortGeometriesBackToFront()
     FUN_00aa0b40(0, m_iGeometryCount - 1);
 }
 
-struct NiBackToFrontItemsArg
-{
-    void** m_ppGeometries;
-    int m_iArrayLength;
-};
-
 typedef PoolAllocatorBase<NiBackToFrontListItem> NiBackToFrontItemPool;
-
-void FUN_0043a080();
-
-struct FUN_00aa0e60_cls : NiBackToFrontAccumulator
-{
-    void AddGeometries(NiBackToFrontItemsArg* pkArg);
-};

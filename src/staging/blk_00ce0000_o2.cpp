@@ -42,12 +42,6 @@ void FUN_00cf4ca0_class::FUN_00cf4ca0()
         m_kPointB->RetainReference();
 }
 
-struct FUN_00d06d50_cls
-{
-    int __thiscall FindClass(int);
-};
-extern "C" void __cdecl FUN_00cf6920(int, int, int);
-
 struct FUN_00cf86f0_class
 {
     int IsFieldEqual();
@@ -62,31 +56,8 @@ int FUN_00cf86f0_class::IsFieldEqual()
 }
 
 extern int DAT_010cb864;
-struct FUN_00ce4ae0_cls
-{
-    int __thiscall FUN_00ce4ae0(int);
-    void __thiscall FUN_00ce5310();
-};
-struct FUN_00ce4a20_cls
-{
-    int m_kPointA;
-    short m_kPointB;
-    short m_iThirdValue;
-    int m_iFourthElementInteger;
-    int __thiscall FUN_00ce4a20(int a);
-};
 
 extern int DAT_0102e378;
-
-struct FUN_00cf69c0_class
-{
-    int m_kPointA;
-    int m_auiShapeKeys;
-    int m_kPointB;
-    int __thiscall FUN_00cf69c0(int a);
-};
-
-int __cdecl FUN_00cb0fa0(int a, int b);
 
 struct FUN_00cf86e0_class
 {
@@ -98,24 +69,7 @@ void FUN_00cf86e0_class::FUN_00cf86e0(float f)
     *(float*)((char*)this + 0x20) = *(float*)((char*)this + 0x14) + f;
 }
 
-extern int DAT_010cc2e0;
-
-struct FUN_00cf4820_class
-{
-    int* vtbl;
-    int m1;
-    int m2;
-    int m3;
-    int m4;
-    FUN_00cf4820_class();
-};
-
 extern int DAT_0102e388;
-
-struct FUN_00cf86d0_cls
-{
-    void FUN_00cf86d0();
-};
 
 // FUN_00ce29e0: member function that (re)initialises the object.
 //   - installs the base vtable pointer at [this],
@@ -128,16 +82,6 @@ extern int DAT_0102e388;
 struct FUN_00ce5370_cls
 {
     void FUN_00ce5370();
-};
-
-struct FUN_00ce29e0_cls
-{
-    int* m_pVTable;          // +0x00
-    int unk04;               // +0x04
-    int unk08;               // +0x08
-    int unk0C;               // +0x0C
-    FUN_00ce5370_cls m_sub;  // +0x10
-    void FUN_00ce29e0();
 };
 
 struct FnvSpawnedObject;
@@ -162,10 +106,6 @@ struct FnvSpawnedObject
     FnvProbe m_20;
     unsigned char* Check(FnvSpawnedObject** ref);
 };
-
-void __cdecl FUN_00ce2ca0(int a1, int a2, int* a3, int a4);
-
-void __cdecl FUN_00ce3090(int a1, int a2, int a3, int a4, int a5, int a6);
 
 namespace fnv_00ce5370 {
 extern "C" void _ReadWriteBarrier(void);
@@ -535,34 +475,6 @@ template <class T> inline void CF4BC0SaveBinary(CF4BC0Stream& kStream, const T& 
     CF4BC0BinaryStreamSave(*kStream.m_pBackingStream, &value);
 }
 
-class CF4BC0Object
-{
-  public:
-    virtual void Unk_00();
-    virtual void Unk_01();
-    virtual void Unk_02();
-    virtual void Unk_03();
-    virtual void Unk_04();
-    virtual void Unk_05();
-    virtual void Unk_06();
-    virtual void Unk_07();
-    virtual unsigned int GetSaveType();
-};
-
-class CF4BC0Saver
-{
-  public:
-    virtual void DeleteThis(bool bFree);
-    virtual void Unk_01();
-    virtual void Unk_02();
-    virtual void SaveBinary(CF4BC0Stream& kStream);
-
-    void SetObject(CF4BC0Object* pkObject);
-};
-
-CF4BC0Saver* __cdecl CF4BC0CreateSaver(unsigned int uiType);
-
-extern int DAT_010cc2fc;
 extern int DAT_0102e388;
 
 struct AudioAllocator
@@ -582,116 +494,6 @@ struct AudioHolder
 };
 
 AudioHolder* __cdecl FUN_00c85750() throw();
-
-struct SubObject_b3813
-{
-    int unk00;
-    void Release();
-};
-
-struct FUN_00cf4eb0_cls
-{
-    int m_vptr;
-    unsigned short m_uSize;
-    unsigned short m_u06;
-    int unk08;
-    int unk0c;
-    int unk10;
-    SubObject_b3813 m_sub;
-
-    FUN_00cf4eb0_cls* Destroy(unsigned char acFlags);
-};
-
-struct S_00cf4f00
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    short unk24;
-    unsigned short m_uiItemCount;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    unsigned int m_bits[1];
-    void __thiscall ClearBit(unsigned int idx);
-};
-
-struct FUN_00cf4f30_class
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    short unk24;
-    unsigned short counter;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    unsigned int bits[8];
-    void SetBit(unsigned int index);
-};
-
-struct FUN_00cf4f70_src
-{
-    int* m_00;
-    int m_04;
-};
-
-int __cdecl CountBitsInWords(int* data, int count);
-
-class FUN_00cf4f70_cls
-{
-  public:
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int m_1c;
-    int unk20;
-    unsigned short unk24;
-    unsigned short m_26;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int m_50;
-
-    void InitFromSource(FUN_00cf4f70_src* src);
-};
 
 struct FUN_00cf6980_class
 {
@@ -766,23 +568,6 @@ extern int DAT_01268794;
 extern "C" __declspec(dllimport) void __stdcall FUN_00fdf05c(int value);
 extern "C" __declspec(dllimport) void __stdcall FUN_00fdf100(int value);
 
-struct S_00cf6b50_Foo
-{
-    int m_iWordAt00;
-    short m_iWordAt04;
-    unsigned short m_6;
-
-    void __thiscall UpdateState(int a);
-};
-
-struct FUN_00cf6d50_cls
-{
-    int m_00;
-    unsigned short m_04;
-    unsigned short m_06;
-    void FUN_00cf6d50();
-};
-
 struct FUN_00cf6f80_cls
 {
     unsigned int m_ucLowNibble;
@@ -852,51 +637,6 @@ class CF4840Saver
     int unk10;
 };
 
-struct Saver00 : CF4840Saver
-{
-    Saver00() throw();
-};
-struct Saver01 : CF4840Saver
-{
-    Saver01() throw();
-};
-struct Saver02 : CF4840Saver
-{
-    Saver02() throw();
-};
-struct Saver03 : CF4840Saver
-{
-    Saver03() throw();
-};
-struct Saver06 : CF4840Saver
-{
-    Saver06() throw();
-};
-struct Saver07 : CF4840Saver
-{
-    Saver07() throw();
-};
-struct Saver08 : CF4840Saver
-{
-    Saver08() throw();
-};
-struct Saver09 : CF4840Saver
-{
-    Saver09() throw();
-};
-struct Saver10 : CF4840Saver
-{
-    Saver10() throw();
-};
-struct Saver12 : CF4840Saver
-{
-    Saver12() throw();
-};
-struct Saver13 : CF4840Saver
-{
-    Saver13() throw();
-};
-
 // Build the Havok object for a serialized node: find its creator, run it, keep the result and delete the creator.
 
 extern __declspec(thread) int g_iF4A30AllocTag;
@@ -916,39 +656,6 @@ struct F4A30AllocTagScope
     }
 };
 
-class F4A30Result
-{
-  public:
-    void RetainReference();
-};
-
-class F4A30Node
-{
-  public:
-    virtual void Unk00();
-    virtual void Unk04();
-    virtual void Unk08();
-    virtual void Unk0C();
-    virtual void Unk10();
-    virtual void Unk14();
-    virtual void Unk18();
-    virtual void Unk1C();
-    virtual int GetTypeID();
-};
-
-class F4A30Creator
-{
-  public:
-    virtual ~F4A30Creator();
-    virtual void Create(int iFlags, void* pvContext);
-
-    void Init(F4A30Node* pkNode);
-
-    F4A30Result* m_pkResult;
-};
-
-F4A30Creator* __cdecl F4A30FindCreator(int iTypeID);
-
 void __cdecl FUN_00ce51f0();
 // @fnv 0x00ce5300
 void __cdecl FUN_00ce5300()
@@ -963,18 +670,6 @@ class FUN_00ce5360_This
     virtual ~FUN_00ce5360_This()
     {}
     unsigned int FUN_00ce5360(unsigned int arg);
-};
-
-class FUN_00ce9800_obj
-{
-  public:
-    virtual ~FUN_00ce9800_obj();
-};
-
-struct FUN_00ce9820_vt
-{
-    virtual void FUN_00ce9820_v0(int a);
-    virtual void FUN_00ce9820_v1(int a);
 };
 
 struct Stream;
@@ -1525,13 +1220,6 @@ void __cdecl FUN_00cf74a0(void)
 
 struct hkOwnerCF74;
 
-struct hkEntryCF74
-{
-    hkOwnerCF74* m_pOwnerObject;
-    int unk04;
-    unsigned int m_08;
-};
-
 struct hkOwnerCF74
 {
     int unk00, unk04, unk08, unk0C, unk10, unk14, unk18, unk1C, unk20, unk24, unk28, unk2C, unk30;
@@ -1550,82 +1238,6 @@ struct hkBoolCF74
     {
         m_cBooleanValue = (char)b;
     }
-};
-
-struct hkQualityCF74
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    unsigned short m_priority;
-};
-
-struct hkEntityCF74
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5C;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6C;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7C;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8C;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9C;
-    int unkA0;
-    int unkA4;
-    int unkA8;
-    int unkAC;
-    int unkB0;
-    int unkB4;
-    int unkB8;
-    int unkBC;
-    int unkC0;
-    int unkC4;
-    int unkC8;
-    hkQualityCF74* m_quality;
-};
-
-struct hkPairCF74
-{
-    int unk00;
-    hkEntityCF74* m_kPointA;
-    hkEntityCF74* m_kPointB;
 };
 
 // @fnv 0x00cfb050
@@ -1647,156 +1259,8 @@ void __stdcall FUN_00cfc580(int, int, int, int, int)
 
 extern int DAT_0102e388;
 
-struct FUN_00cfc590_class
-{
-    int* vtable;
-
-    void __thiscall FUN_00cfc590();
-};
-
-extern int DAT_010cc86c;
-
-struct S_00cfc5a0
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5c;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6c;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7c;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8c;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9c;
-    int unka0;
-    int unka4;
-    unsigned short unkA8;
-    unsigned short unkAA;
-};
-
-struct FUN_00cfc5a0
-{
-    int* vtbl;
-    unsigned short unk04;
-    unsigned short unk06;
-    int unk08;
-    int unk0c;
-    S_00cfc5a0* unk10;
-    S_00cfc5a0* unk14;
-    unsigned short unk18;
-
-    FUN_00cfc5a0(int a1, S_00cfc5a0* a2, S_00cfc5a0* a3);
-};
-
-// Per-thread profiler ring: TlsGetValue(index) -> buffer with head@+4 / end@+0xc,
-// 0xc-byte events {tag, timestamp, pad}.
-struct CE0020Event
-{
-    const char* m_pTag;
-    unsigned int m_uiEventId;
-    int m_unk08;
-};
-struct CE0020Buffer
-{
-    int m_unk00;
-    CE0020Event* m_pHead;
-    int m_unk08;
-    CE0020Event* m_pRecordEnd;
-};
-
-extern unsigned int DAT_0126835c;
-extern char DAT_010cb81c[];
-extern char DAT_010c41f8[];
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long);
-extern "C" unsigned __int64 __rdtsc(void);
 extern "C" void _ReadWriteBarrier(void);
-
-// 4-byte flags struct passed by value (bool first member).
-class CE0020Flag
-{
-  public:
-    bool m_bEnableState;
-    unsigned char m_unk01;
-    unsigned char m_unk02;
-    unsigned char m_unk03;
-};
-class CE0020ZeroInfo
-{
-  public:
-    int m_unk00;
-    int m_iArrayLength;
-};
-class CE0020Holder
-{
-  public:
-    virtual void Unk00();
-    virtual void Unk01();
-    virtual void Unk02();
-    virtual void Unk03();
-    virtual void Unk04();
-    virtual void Unk05();
-    virtual void Unk06();
-    virtual void Unk07();
-    virtual void Unk08();
-    virtual void Fill(CE0020Flag kFlags, CE0020ZeroInfo* pInfo);
-};
-class CE0020Arrays
-{
-  public:
-    int unk00, unk04, unk08, unk0C, unk10, unk14, unk18;
-    float* m_pFloats;
-};
-class CE0020Target
-{
-  public:
-    int unk00, unk04, unk08;
-    CE0020Holder* m_pHolder;
-    int unk10, unk14, unk18, unk1C, unk20, unk24, unk28, unk2C;
-    CE0020Arrays* m_pArrayData;
-};
-class CE0020Subject
-{
-  public:
-    virtual void Unk00();
-    virtual void Unk01();
-    virtual void Unk02();
-    virtual void Unk03();
-    virtual void Unk04();
-    virtual void Unk05();
-    virtual void EnableConstraints();
-};
-
-void __cdecl FUN_00d27690(CE0020Target* pTarget, CE0020Subject* pSubject, int iType);
 
 void __cdecl FUN_00ce2d10();
 
@@ -1884,30 +1348,6 @@ const void* DAT_010cc0ec[];
 
 extern "C" void _ReadWriteBarrier();
 
-struct hkBoolC43
-{
-    char v;
-};
-
-class FUN_00cf43b0
-{
-  public:
-    const void** m_vftable;              // 0x00
-    unsigned short m_usMemSizeAndFlags;  // 0x04
-    unsigned short m_sReferenceCount;    // 0x06
-    unsigned char m_motorType;           // 0x08
-    char unk09;
-    char unk0A;
-    char unk0B;
-    float m_fMinForce;        // 0x0c
-    float m_fMaxForce;        // 0x10
-    float m_fTau;             // 0x14
-    float m_fMotorDamping;    // 0x18
-    char m_useVelocityClamp;  // 0x1c
-
-    FUN_00cf43b0();
-};
-
 struct NiBinaryStreamCF44
 {
     void* m_pvVtbl;
@@ -1977,159 +1417,6 @@ void SerializableCF44::FUN_00cf4400(NiStreamCF44& kStream)
     NiStreamLoadBinaryCF44(*kStream.GetIstr(), m_ucValue1C);
 }
 
-struct CF4BC0StreamInput
-{
-    int unk000;
-    int unk004;
-    int unk008;
-    int unk00C;
-    int unk010;
-    int unk014;
-    int unk018;
-    int unk01C;
-    int unk020;
-    int unk024;
-    int unk028;
-    int unk02C;
-    int unk030;
-    int unk034;
-    int unk038;
-    int unk03C;
-    int unk040;
-    int unk044;
-    int unk048;
-    int unk04C;
-    int unk050;
-    int unk054;
-    int unk058;
-    int unk05C;
-    int unk060;
-    int unk064;
-    int unk068;
-    int unk06C;
-    int unk070;
-    int unk074;
-    int unk078;
-    int unk07C;
-    int unk080;
-    int unk084;
-    int unk088;
-    int unk08C;
-    int unk090;
-    int unk094;
-    int unk098;
-    int unk09C;
-    int unk0A0;
-    int unk0A4;
-    int unk0A8;
-    int unk0AC;
-    int unk0B0;
-    int unk0B4;
-    int unk0B8;
-    int unk0BC;
-    int unk0C0;
-    int unk0C4;
-    int unk0C8;
-    int unk0CC;
-    int unk0D0;
-    int unk0D4;
-    int unk0D8;
-    int unk0DC;
-    int unk0E0;
-    int unk0E4;
-    int unk0E8;
-    int unk0EC;
-    int unk0F0;
-    int unk0F4;
-    int unk0F8;
-    int unk0FC;
-    int unk100;
-    int unk104;
-    int unk108;
-    int unk10C;
-    int unk110;
-    int unk114;
-    int unk118;
-    int unk11C;
-    int unk120;
-    int unk124;
-    int unk128;
-    int unk12C;
-    int unk130;
-    int unk134;
-    int unk138;
-    int unk13C;
-    int unk140;
-    int unk144;
-    int unk148;
-    int unk14C;
-    int unk150;
-    int unk154;
-    int unk158;
-    int unk15C;
-    int unk160;
-    int unk164;
-    int unk168;
-    int unk16C;
-    int unk170;
-    int unk174;
-    int unk178;
-    int unk17C;
-    int unk180;
-    int unk184;
-    int unk188;
-    int unk18C;
-    int unk190;
-    int unk194;
-    int unk198;
-    int unk19C;
-    int unk1A0;
-    int unk1A4;
-    int unk1A8;
-    int unk1AC;
-    int unk1B0;
-    int unk1B4;
-    int unk1B8;
-    int unk1BC;
-    int unk1C0;
-    int unk1C4;
-    int unk1C8;
-    int unk1CC;
-    int unk1D0;
-    int unk1D4;
-    int unk1D8;
-    int unk1DC;
-    int unk1E0;
-    int unk1E4;
-    int unk1E8;
-    int unk1EC;
-    int unk1F0;
-    int unk1F4;
-    int unk1F8;
-    int unk1FC;
-    int unk200;
-    int unk204;
-    int unk208;
-    int unk20C;
-    int unk210;
-    int unk214;
-    int unk218;
-    int unk21C;
-    int unk220;
-    int unk224;
-    int unk228;
-    int unk22C;
-    int unk230;
-    int unk234;
-    int unk238;
-    int unk23C;
-    int unk240;
-    int unk244;
-    int unk248;
-    CF4BC0BinaryStream* m_pUnderlyingStream;
-    CF4BC0BinaryStream* m_pBackingStream;
-};
-
 class CF4BC0BinaryStreamIn
 {
   public:
@@ -2142,16 +1429,6 @@ class CF4BC0BinaryStreamIn
         unsigned int uiSize = sizeof(T);
         m_uiStreamFlags += m_pfnRead(this, value, sizeof(T), &uiSize, 1);
     }
-};
-
-class CF4BC0SaverLoader
-{
-  public:
-    virtual void DeleteThis(bool bFree);
-    virtual void Unk_01();
-    virtual void LoadBinary(CF4BC0Stream& kStream);
-    virtual void SaveBinary(CF4BC0Stream& kStream);
-    hkReferencedObject* m_pPointer;
 };
 
 struct TagState
@@ -2285,39 +1562,7 @@ struct __declspec(align(16)) hkVector4CE98
     }
 };
 
-struct hkElementCE98
-{
-    int m_00;
-    int m_04;
-    int m_08;
-    int m_0c;
-    int m_10;
-    int m_14;
-    int m_18;
-    int m_1c;
-    hkVector4CE98 m_vector;
-};
-
-struct FUN_00cf0820
-{
-    float field00;
-    float field04;
-    unsigned int unk08;
-    unsigned int unk0c;
-    __m128 field10;
-    __m128 field20;
-    __m128 field30;
-    __m128 field40;
-    FUN_00cf0820(const FUN_00cf0820& input);
-};
-
 extern __declspec(align(16)) float DAT_01017d10[4];
-extern float DAT_01017d00;
-struct FUN_00cf08c0_VectorArray
-{
-    float* values;
-    int count;
-};
 
 struct BinaryStreamCF0
 {
@@ -2347,180 +1592,6 @@ struct hkVector4CF0
     {
         m_vComponents = _mm_setr_ps(x, y, z, w);
     }
-};
-
-struct hkMatrixCF0
-{
-    hkVector4CF0 m_kColumn0;
-    hkVector4CF0 m_kColumn1;
-    hkVector4CF0 m_kColumn2;
-};
-
-struct S00cf0cf0_Stream
-{
-    void* unk00;
-    unsigned int m_uiStreamFlags;
-    unsigned int unk08;
-    unsigned int(__cdecl* m_pfnWrite)(S00cf0cf0_Stream*, const void*, unsigned int, unsigned int*, unsigned int);
-};
-
-struct S00cf0cf0_Arr
-{
-    __m128* data;
-    unsigned int count;
-};
-
-struct S00cf0cf0_Obj
-{
-    int unk0000;
-    int unk0004;
-    int unk0008;
-    int unk000C;
-    int unk0010;
-    int unk0014;
-    int unk0018;
-    int unk001C;
-    int unk0020;
-    int unk0024;
-    int unk0028;
-    int unk002C;
-    int unk0030;
-    int unk0034;
-    int unk0038;
-    int unk003C;
-    int unk0040;
-    int unk0044;
-    int unk0048;
-    int unk004C;
-    int unk0050;
-    int unk0054;
-    int unk0058;
-    int unk005C;
-    int unk0060;
-    int unk0064;
-    int unk0068;
-    int unk006C;
-    int unk0070;
-    int unk0074;
-    int unk0078;
-    int unk007C;
-    int unk0080;
-    int unk0084;
-    int unk0088;
-    int unk008C;
-    int unk0090;
-    int unk0094;
-    int unk0098;
-    int unk009C;
-    int unk00A0;
-    int unk00A4;
-    int unk00A8;
-    int unk00AC;
-    int unk00B0;
-    int unk00B4;
-    int unk00B8;
-    int unk00BC;
-    int unk00C0;
-    int unk00C4;
-    int unk00C8;
-    int unk00CC;
-    int unk00D0;
-    int unk00D4;
-    int unk00D8;
-    int unk00DC;
-    int unk00E0;
-    int unk00E4;
-    int unk00E8;
-    int unk00EC;
-    int unk00F0;
-    int unk00F4;
-    int unk00F8;
-    int unk00FC;
-    int unk0100;
-    int unk0104;
-    int unk0108;
-    int unk010C;
-    int unk0110;
-    int unk0114;
-    int unk0118;
-    int unk011C;
-    int unk0120;
-    int unk0124;
-    int unk0128;
-    int unk012C;
-    int unk0130;
-    int unk0134;
-    int unk0138;
-    int unk013C;
-    int unk0140;
-    int unk0144;
-    int unk0148;
-    int unk014C;
-    int unk0150;
-    int unk0154;
-    int unk0158;
-    int unk015C;
-    int unk0160;
-    int unk0164;
-    int unk0168;
-    int unk016C;
-    int unk0170;
-    int unk0174;
-    int unk0178;
-    int unk017C;
-    int unk0180;
-    int unk0184;
-    int unk0188;
-    int unk018C;
-    int unk0190;
-    int unk0194;
-    int unk0198;
-    int unk019C;
-    int unk01A0;
-    int unk01A4;
-    int unk01A8;
-    int unk01AC;
-    int unk01B0;
-    int unk01B4;
-    int unk01B8;
-    int unk01BC;
-    int unk01C0;
-    int unk01C4;
-    int unk01C8;
-    int unk01CC;
-    int unk01D0;
-    int unk01D4;
-    int unk01D8;
-    int unk01DC;
-    int unk01E0;
-    int unk01E4;
-    int unk01E8;
-    int unk01EC;
-    int unk01F0;
-    int unk01F4;
-    int unk01F8;
-    int unk01FC;
-    int unk0200;
-    int unk0204;
-    int unk0208;
-    int unk020C;
-    int unk0210;
-    int unk0214;
-    int unk0218;
-    int unk021C;
-    int unk0220;
-    int unk0224;
-    int unk0228;
-    int unk022C;
-    int unk0230;
-    int unk0234;
-    int unk0238;
-    int unk023C;
-    int unk0240;
-    int unk0244;
-    int unk0248;
-    int unk024C;
-    S00cf0cf0_Stream* m_pBinaryStream;
 };
 
 struct TargetType
@@ -2609,7 +1680,6 @@ FUN_00cf6f90::FUN_00cf6f90()
             m_apSlots[i][j] = &m_kDefault;
 }
 
-extern char DAT_010cc688[];
 struct VecCFAD
 {
     union
@@ -2747,27 +1817,6 @@ int CE1700Owner::FUN_00ce1700()
     return 0;
 }
 
-struct Slot_cfdb70
-{
-    void* m_p;
-    int m_04;
-};
-struct Node_cfdb70
-{
-    char pad[0x50];
-    Slot_cfdb70* m_slots;
-};
-struct Edge_cfdb70
-{
-    void* m_vtbl;
-    unsigned short m_idxA;
-    unsigned short m_idxB;
-    int m_08;
-    int m_0c;
-    Node_cfdb70* m_kPointA;
-    Node_cfdb70* m_kPointB;
-};
-
 struct BlockArr_cfd
 {
     unsigned* m_data;
@@ -2784,11 +1833,6 @@ struct BlockArr_cfd
     {
         return m_data[i];
     }
-};
-struct BlockList_cfd
-{
-    unsigned m_lastSize;
-    BlockArr_cfd m_kBlocks;
 };
 
 inline AudioAllocator& heap_cfde()
@@ -2839,12 +1883,6 @@ struct BlockArr_cfde
             }
         }
     }
-};
-
-struct BlockStack_cfde
-{
-    int m_uiBufferCapacity;
-    BlockArr_cfde m_kBlocks;
 };
 
 // Havok: build index maps for a selection and propagate it through records and links (hkArray<hkInt16> maps).
@@ -2989,45 +2027,6 @@ template <typename T> struct hkArrayX
     }
 };
 
-struct IndexSource
-{
-    int unk00, unk04, unk08, unk0c, unk10, unk14, unk18;
-    int m_iStridedVertexCount;
-};
-struct SelRecord
-{
-    hkInt16 m_vFrom;
-    hkUint16 m_vTo;
-    int unk04, unk08, unk0c, unk10, unk14, unk18, unk1c, unk20, unk24, unk28, unk2c, unk30, unk34, unk38, unk3c;
-};
-struct SelLink
-{
-    hkUint16 m_kPointA, m_kPointB, m_iThirdValue, m_iFourthElementInteger;
-    int unk08, unk0c, unk10, unk14, unk18, unk1c, unk20, unk24, unk28, unk2c, unk30, unk34, unk38, unk3c;
-    int unk40, unk44, unk48, unk4c, unk50, unk54, unk58, unk5c, unk60, unk64, unk68, unk6c;
-};
-hkBoolX __cdecl WalkChainUntilLimit(const IndexSource* src, int a, int b, hkArrayX<hkInt16>& out) throw();
-
-struct Selection
-{
-    int unk00, unk04, unk08, unk0c;
-    hkArrayX<hkInt16> m_ppIndices;
-};
-
-struct SelectionMapper
-{
-    int unk00, unk04, unk08, unk0c;
-    IndexSource* m_pObservedSource;
-    IndexSource* m_target;
-    SelRecord* m_records;
-    int m_numRecords;
-    int unk20;
-    SelLink* m_ppLinks;
-    int m_numLinks;
-    void MapSelection(const Selection& sel, hkArrayX<hkInt16>& sourceMap, hkArrayX<hkInt16>& targetMap,
-                      hkArrayX<hkInt16>& output);
-};
-
 #include <xmmintrin.h>
 namespace fnv_00ce0ca0 {
 union __declspec(intrin_type) __declspec(align(16)) __m128
@@ -3037,20 +2036,12 @@ union __declspec(intrin_type) __declspec(align(16)) __m128
 
 extern "C"
 {
-    __m128 _mm_shuffle_ps(__m128, __m128, int);
     __m128 _mm_mul_ps(__m128, __m128);
     __m128 _mm_add_ps(__m128, __m128);
     __m128 _mm_sub_ps(__m128, __m128);
     __m128 _mm_add_ss(__m128, __m128);
     __m128 _mm_unpackhi_ps(__m128, __m128);
 }
-
-struct FUN_00ce0ca0_Quaternion
-{
-    __m128 value;
-
-    void __thiscall FUN_00ce0ca0(const FUN_00ce0ca0_Quaternion& rhs);
-};
 
 }  // namespace fnv_00ce0ca0
 
@@ -3064,50 +2055,6 @@ union __declspec(intrin_type) __declspec(align(16)) __m128
 extern "C" __m128 _mm_add_ps(__m128, __m128);
 extern "C" __m128 _mm_sub_ps(__m128, __m128);
 extern "C" __m128 _mm_mul_ps(__m128, __m128);
-extern "C" __m128 _mm_min_ps(__m128, __m128);
-extern "C" __m128 _mm_max_ps(__m128, __m128);
-extern int DAT_01268370;
-extern const __m128 DAT_010c71d0;
-
-struct BoundsVector
-{
-    union
-    {
-        __m128 quad;
-        float components[4];
-    };
-};
-struct Bounds
-{
-    BoundsVector minimum;
-    BoundsVector maximum;
-};
-struct BoundShape
-{
-    virtual void vf00();
-    virtual void vf04();
-    virtual void vf08();
-    virtual void vf0c();
-    virtual void vf10();
-    virtual void vf14();
-    virtual void vf18();
-    virtual void getBounds(const void* transform, float tolerance, Bounds* out);
-};
-struct ShapeEntry
-{
-    BoundShape* shape;
-    int unk04, unk08, unk0c;
-};
-struct ShapeCollection
-{
-    int unk00, unk04, unk08, unk0c, unk10, unk14;
-    ShapeEntry* entries;
-    int count;
-    int unk20, unk24, unk28, unk2c;
-    BoundsVector halfExtent;
-    BoundsVector center;
-    void FUN_00cf4fb0(Bounds* bounds);
-};
 
 }  // namespace fnv_00cf4fb0
 
@@ -3135,119 +2082,8 @@ AudioHolder* __cdecl FUN_00c85750() throw();
 extern CRITICAL_SECTION* DAT_01268794;
 }  // namespace fnv_00cf6d60
 
-extern "C" bool __cdecl FUN_00ce2a00(int mappingType, const FnvSpawnedObject* transform);
-
-struct FUN_00cb1600
-{
-    void* vtable;
-    void* writer;
-    int flags;
-    FUN_00cb1600(char*, int) throw();
-    void __thiscall FUN_00cc00e0() throw();
-    FUN_00cb1600& __thiscall FUN_00cc01c0(const char*) throw();
-    FUN_00cb1600& __thiscall WriteName(const void*) throw();
-};
-struct CEError
-{
-    virtual void v0();
-    virtual void v1();
-    virtual void v2();
-    virtual void report(int, unsigned int, const char*, const char*, int) throw();
-};
-extern int DAT_01268360;
 extern const char DAT_010cba14, DAT_010cb9f8, DAT_010cb9d8, DAT_010cb9c4;
 extern const char DAT_010cb9b0, DAT_010cb98c, DAT_010cb964, DAT_010cb8d0;
-struct CEBoneName
-{
-    void* name;
-    int flags;
-};
-struct CESkeleton
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    short* parents;
-    int unk10;
-    int unk14;
-    CEBoneName* names;
-    int count;
-};
-struct CESingle
-{
-    short source, target;
-    int unk04, unk08, unk0c;
-    FnvSpawnedObject transform;
-};
-struct CERange
-{
-    short startA, endA, startB, endB;
-    int unk08, unk0c;
-    FnvSpawnedObject transformA;
-    FnvSpawnedObject transformB;
-};
-struct CEMap
-{
-    CESkeleton* a;
-    CESkeleton* b;
-    CESingle* singles;
-    int singleCount;
-    int unk10;
-    CERange* ranges;
-    int rangeCount;
-    int unk1c, unk20, unk24, unk28, unk2c, unk30, unk34, unk38, unk3c;
-    int unk40, unk44, unk48, unk4c, unk50, unk54, unk58, unk5c, unk60;
-    int checker;
-};
-struct CEAllocator
-{
-    virtual void v0();
-    virtual void v1();
-    virtual void v2();
-    virtual void v3();
-    virtual void free(void*, int) throw();
-};
-
-struct CECountArray
-{
-    int* m_data;
-    int m_iElementCount;
-    int m_iCapacityState;
-    int* m_pStackAllocation;
-};
-
-extern __m128 DAT_010c71b0;
-extern float DAT_01012068;
-
-struct MapperInitialization
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5C;
-    unsigned char unk60;
-    void __thiscall FUN_00ce5310();
-};
 
 // @f3 0x00684240 (community match, verified in this file)
 namespace f3m_00684240 {

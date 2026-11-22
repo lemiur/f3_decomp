@@ -1839,7 +1839,6 @@ void FUN_007246b0(void) {
 struct Fo3Proc;
 struct Fo3Item;
 struct Fo3Ext { int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; int unk1C; int unk20; int unk24; int unk28; int unk2C; float unk30; int unk34; int unk38; int unk3C; int unk40; int unk44; float unk48; };
-struct Fo3Base { int unk00; int unk04_; };
 struct Fo3Form { int unk00; char unk04; };
 struct Fo3Clock { float FUN_007cf120(); };
 struct Fo3Time { unsigned int unk00; float FUN_0048bb10(unsigned int t); };
@@ -52222,7 +52221,6 @@ void Owner::FUN_00723670(){
 
 // @f3 0x00725180 (community match, verified in this file)
 __forceinline const float& MinimumChance(const float& left,const float& right) { return left < right ? left : right; }
-extern const float DAT_00db954c;
 namespace work39 {
 struct Actor39;
 struct ProcessObj {
@@ -54175,140 +54173,11 @@ struct RefVtbl {
  virtual void Dummy124();
  virtual int V1f4(float a, void* b, void* c);
 };
-struct Ref2 {
- virtual ~Ref2();
- virtual void Dummy1();
- virtual void Dummy2();
- virtual void Dummy3();
- virtual void Dummy4();
- virtual void Dummy5();
- virtual void Dummy6();
- virtual void Dummy7();
- virtual void Dummy8();
- virtual void Dummy9();
- virtual void Dummy10();
- virtual void Dummy11();
- virtual void Dummy12();
- virtual void Dummy13();
- virtual void Dummy14();
- virtual void Dummy15();
- virtual void Dummy16();
- virtual void Dummy17();
- virtual void Dummy18();
- virtual void Dummy19();
- virtual void Dummy20();
- virtual void Dummy21();
- virtual void Dummy22();
- virtual void Dummy23();
- virtual void Dummy24();
- virtual void Dummy25();
- virtual void Dummy26();
- virtual void Dummy27();
- virtual void Dummy28();
- virtual void Dummy29();
- virtual void Dummy30();
- virtual void Dummy31();
- virtual void Dummy32();
- virtual void Dummy33();
- virtual void Dummy34();
- virtual void Dummy35();
- virtual void Dummy36();
- virtual void Dummy37();
- virtual void Dummy38();
- virtual void Dummy39();
- virtual void Dummy40();
- virtual void Dummy41();
- virtual void Dummy42();
- virtual void Dummy43();
- virtual void Dummy44();
- virtual void Dummy45();
- virtual void Dummy46();
- virtual void Dummy47();
- virtual void Dummy48();
- virtual void Dummy49();
- virtual void Dummy50();
- virtual void Dummy51();
- virtual void Dummy52();
- virtual void Dummy53();
- virtual void Dummy54();
- virtual void Dummy55();
- virtual void Dummy56();
- virtual void Dummy57();
- virtual void Dummy58();
- virtual void Dummy59();
- virtual void Dummy60();
- virtual void Dummy61();
- virtual void Dummy62();
- virtual void Dummy63();
- virtual char V100();
- virtual void Dummy65();
- virtual void Dummy66();
- virtual void Dummy67();
- virtual void Dummy68();
- virtual void Dummy69();
- virtual void Dummy70();
- virtual void Dummy71();
- virtual void Dummy72();
- virtual void Dummy73();
- virtual void Dummy74();
- virtual void Dummy75();
- virtual void Dummy76();
- virtual void Dummy77();
- virtual void Dummy78();
- virtual void Dummy79();
- virtual void Dummy80();
- virtual void Dummy81();
- virtual void Dummy82();
- virtual void Dummy83();
- virtual void Dummy84();
- virtual void Dummy85();
- virtual void Dummy86();
- virtual void Dummy87();
- virtual void Dummy88();
- virtual void Dummy89();
- virtual void Dummy90();
- virtual void Dummy91();
- virtual void Dummy92();
- virtual void Dummy93();
- virtual void Dummy94();
- virtual void Dummy95();
- virtual void Dummy96();
- virtual void Dummy97();
- virtual void Dummy98();
- virtual void Dummy99();
- virtual void Dummy100();
- virtual void Dummy101();
- virtual void Dummy102();
- virtual void Dummy103();
- virtual void Dummy104();
- virtual void Dummy105();
- virtual void Dummy106();
- virtual void Dummy107();
- virtual void Dummy108();
- virtual void Dummy109();
- virtual void Dummy110();
- virtual void Dummy111();
- virtual void Dummy112();
- virtual void Dummy113();
- virtual void Dummy114();
- virtual void Dummy115();
- virtual void Dummy116();
- virtual void Dummy117();
- virtual void Dummy118();
- virtual void Dummy119();
- virtual void Dummy120();
- virtual void Dummy121();
- virtual void Dummy122();
- virtual void Dummy123();
- virtual void Dummy124();
- virtual int V1f4(float a, void* b);
-};
 struct Ref : RefVtbl {
  int unk04; int unk08; int unk0c; int unk10; int unk14; int unk18; int unk1c; int unk20; int unk24; int unk28; int unk2c; int unk30; int unk34; int unk38; int unk3c;
  int unk40; int unk44; int unk48; int unk4c; int unk50; int unk54; int unk58; int unk5c; int unk60;
  int FUN_007650b0();
 };
-struct StatObj { int unk00; int unk04; int unk08; int unk0c; int unk10; int unk14; int unk18; int unk1c; int unk20; float unk20f; };
 struct Node { Ref* reference; Node* next; };
 struct List { Node* reference; Node* next; void FUN_006c8220(); };
 struct Alloc { void FUN_0086ba60(void* p); };
@@ -54320,14 +54189,10 @@ struct Mgr { Node* FUN_0078fe50(void* a, void* b); void FUN_0078bd00(void* a, in
 struct Obj109 { void FUN_0043c140(int a, int b); };
 extern Obj109* DAT_0106cdcc;
 char FUN_0073cdd0(void* a);
-struct QVT { int unk000; int unk004; int unk008; int unk00c; int unk010; int unk014; int unk018; int unk01c; int unk020; int unk024; int unk028; int unk02c; int unk030; int unk034; int unk038; int unk03c; int unk040; int unk044; int unk048; int unk04c; int unk050; int unk054; int unk058; int unk05c; int unk060; int unk064; int unk068; int unk06c; int unk070; int unk074; int unk078; int unk07c; int unk080; int unk084; int unk088; int unk08c; int unk090; int unk094; int unk098; int unk09c; int unk0a0; int unk0a4; int unk0a8; int unk0ac; int unk0b0; int unk0b4; int unk0b8; int unk0bc; int unk0c0; int unk0c4; int unk0c8; int unk0cc; int unk0d0; int unk0d4; int unk0d8; int unk0dc; int unk0e0; int unk0e4; int unk0e8; int unk0ec; int unk0f0; int unk0f4; int unk0f8; int unk0fc; int unk100; int unk104; int unk108; int unk10c; int unk110; int unk114; int unk118; int unk11c; int unk120; int unk124; int unk128; int unk12c; int unk130; int unk134; int unk138; int unk13c; int unk140; int unk144; int unk148; int unk14c; int unk150; int unk154; int unk158; int unk15c; int unk160; int unk164; int unk168; int unk16c; int unk170; int unk174; int unk178; int unk17c; int unk180; int unk184; int unk188; int unk18c; int unk190; int unk194; int unk198; int unk19c; int unk1a0; int unk1a4; int unk1a8; int unk1ac; int unk1b0; int unk1b4; int unk1b8; int unk1bc; int unk1c0; int unk1c4; int unk1c8; int unk1cc; int unk1d0; int unk1d4; int unk1d8; int unk1dc; int unk1e0; int unk1e4; int unk1e8; int unk1ec; int unk1f0;
- int (__thiscall *f1f4a)(void*, float, void*, void*);
-};
 struct QVT2 { int unk000; int unk004; int unk008; int unk00c; int unk010; int unk014; int unk018; int unk01c; int unk020; int unk024; int unk028; int unk02c; int unk030; int unk034; int unk038; int unk03c; int unk040; int unk044; int unk048; int unk04c; int unk050; int unk054; int unk058; int unk05c; int unk060; int unk064; int unk068; int unk06c; int unk070; int unk074; int unk078; int unk07c; int unk080; int unk084; int unk088; int unk08c; int unk090; int unk094; int unk098; int unk09c; int unk0a0; int unk0a4; int unk0a8; int unk0ac; int unk0b0; int unk0b4; int unk0b8; int unk0bc; int unk0c0; int unk0c4; int unk0c8; int unk0cc; int unk0d0; int unk0d4; int unk0d8; int unk0dc; int unk0e0; int unk0e4; int unk0e8; int unk0ec; int unk0f0; int unk0f4; int unk0f8; int unk0fc; int unk100; int unk104; int unk108; int unk10c; int unk110; int unk114; int unk118; int unk11c; int unk120; int unk124; int unk128; int unk12c; int unk130; int unk134; int unk138; int unk13c; int unk140; int unk144; int unk148; int unk14c; int unk150; int unk154; int unk158; int unk15c; int unk160; int unk164; int unk168; int unk16c; int unk170; int unk174; int unk178; int unk17c; int unk180; int unk184; int unk188; int unk18c; int unk190; int unk194; int unk198; int unk19c; int unk1a0; int unk1a4; int unk1a8; int unk1ac; int unk1b0; int unk1b4; int unk1b8; int unk1bc; int unk1c0; int unk1c4; int unk1c8; int unk1cc; int unk1d0; int unk1d4; int unk1d8; int unk1dc; int unk1e0; int unk1e4; int unk1e8; int unk1ec; int unk1f0;
  int (__thiscall * volatile f1f4b)(void*, float, void*);
 };
 struct QObj { QVT2* vt; };
-struct QObj3 { QVT* vt; };
 
 void __stdcall FUN_0073ce10(Ref* a, Ref* b) {
   Node* saved;
@@ -57920,7 +57785,6 @@ class ActiveEffect { public: virtual void vf00();
     void FUN_006a2e00(int);
 };
 struct Node72 { ActiveEffect* item; Node72* next; };
-struct ListV72 { int unk00; int unk04; Node72* (__thiscall *get)(void*); };
 struct List72 { virtual void vf00(); virtual void vf04(); virtual Node72* Get(); };
 struct Prefix72 { virtual void vf00();
     int unk04;
@@ -68083,13 +67947,6 @@ struct ActorShell
     void FUN_00706310();
     BSFaceGenAnimationData* FUN_006f7c60();
 };
-struct GlobalShell
-{
-    bool FUN_0044b130();
-    void FUN_0082f1f0();
-};
-extern "C" char DAT_011e043c;
-extern "C" char DAT_011ca28c;
 extern "C" char DAT_00db8d0c;
 struct ProcessShell
 {
@@ -70847,8 +70704,6 @@ bool Fader739::FUN_007392e0(Actor739* a)
 // @f3 0x00723100 (community match, verified in this file)
 #include <intrin.h>
 #include <string.h>
-extern unsigned long _tls_index;
-struct Thread7231 {unsigned unknown_000;unsigned unknown_004;unsigned unknown_008;unsigned unknown_00c;unsigned unknown_010;unsigned unknown_014;unsigned unknown_018;unsigned unknown_01c;unsigned unknown_020;unsigned unknown_024;unsigned unknown_028;unsigned unknown_02c;unsigned unknown_030;unsigned unknown_034;unsigned unknown_038;unsigned unknown_03c;unsigned unknown_040;unsigned unknown_044;unsigned unknown_048;unsigned unknown_04c;unsigned unknown_050;unsigned unknown_054;unsigned unknown_058;unsigned unknown_05c;unsigned unknown_060;unsigned unknown_064;unsigned unknown_068;unsigned unknown_06c;unsigned unknown_070;unsigned unknown_074;unsigned unknown_078;unsigned unknown_07c;unsigned unknown_080;unsigned unknown_084;unsigned unknown_088;unsigned unknown_08c;unsigned unknown_090;unsigned unknown_094;unsigned unknown_098;unsigned unknown_09c;unsigned unknown_0a0;unsigned unknown_0a4;unsigned unknown_0a8;unsigned unknown_0ac;unsigned unknown_0b0;unsigned unknown_0b4;unsigned unknown_0b8;unsigned unknown_0bc;unsigned unknown_0c0;unsigned unknown_0c4;unsigned unknown_0c8;unsigned unknown_0cc;unsigned unknown_0d0;unsigned unknown_0d4;unsigned unknown_0d8;unsigned unknown_0dc;unsigned unknown_0e0;unsigned unknown_0e4;unsigned unknown_0e8;unsigned unknown_0ec;unsigned unknown_0f0;unsigned unknown_0f4;unsigned unknown_0f8;unsigned unknown_0fc;unsigned unknown_100;unsigned unknown_104;unsigned unknown_108;unsigned unknown_10c;unsigned unknown_110;unsigned unknown_114;unsigned unknown_118;unsigned unknown_11c;unsigned unknown_120;unsigned unknown_124;unsigned unknown_128;unsigned unknown_12c;unsigned unknown_130;unsigned unknown_134;unsigned unknown_138;unsigned unknown_13c;unsigned unknown_140;unsigned unknown_144;unsigned unknown_148;unsigned unknown_14c;unsigned unknown_150;unsigned unknown_154;unsigned unknown_158;unsigned unknown_15c;unsigned unknown_160;unsigned unknown_164;unsigned unknown_168;unsigned unknown_16c;unsigned unknown_170;unsigned unknown_174;unsigned unknown_178;unsigned unknown_17c;unsigned unknown_180;unsigned unknown_184;unsigned unknown_188;unsigned unknown_18c;unsigned unknown_190;unsigned unknown_194;unsigned unknown_198;unsigned unknown_19c;unsigned unknown_1a0;unsigned unknown_1a4;unsigned unknown_1a8;unsigned unknown_1ac;unsigned unknown_1b0;unsigned unknown_1b4;unsigned unknown_1b8;unsigned unknown_1bc;unsigned unknown_1c0;unsigned unknown_1c4;unsigned unknown_1c8;unsigned unknown_1cc;unsigned unknown_1d0;unsigned unknown_1d4;unsigned unknown_1d8;unsigned unknown_1dc;unsigned unknown_1e0;unsigned unknown_1e4;unsigned unknown_1e8;unsigned unknown_1ec;unsigned unknown_1f0;unsigned unknown_1f4;unsigned unknown_1f8;unsigned unknown_1fc;unsigned unknown_200;unsigned unknown_204;unsigned unknown_208;unsigned unknown_20c;unsigned unknown_210;unsigned unknown_214;unsigned unknown_218;unsigned unknown_21c;unsigned unknown_220;unsigned unknown_224;unsigned unknown_228;unsigned unknown_22c;unsigned unknown_230;unsigned unknown_234;unsigned unknown_238;unsigned unknown_23c;unsigned unknown_240;unsigned unknown_244;unsigned unknown_248;unsigned unknown_24c;unsigned unknown_250;unsigned unknown_254;unsigned unknown_258;unsigned unknown_25c;unsigned unknown_260;unsigned unknown_264;unsigned unknown_268;unsigned unknown_26c;unsigned unknown_270;unsigned unknown_274;unsigned unknown_278;unsigned unknown_27c;unsigned unknown_280;unsigned unknown_284;unsigned unknown_288;unsigned unknown_28c;unsigned unknown_290;unsigned unknown_294;int context;};
 extern __declspec(thread) int g_tlsMemContext;
 struct Scope7231 {
     int old;
@@ -70907,12 +70762,6 @@ struct Controller7231 {
 struct SecondController7231 {
     unsigned int unknown;
     void FUN_006b8190(float);
-};
-struct NestedBits7231 {
-    unsigned int low:29;
-    unsigned int first:1;
-    unsigned int second:1;
-    unsigned int high:1;
 };
 struct RefFlags7231 {
     unsigned unknown_000;unsigned unknown_004;unsigned unknown_008;unsigned unknown_00c;unsigned unknown_010;unsigned unknown_014;unsigned unknown_018;unsigned unknown_01c;unsigned unknown_020;unsigned unknown_024;unsigned unknown_028;unsigned unknown_02c;unsigned unknown_030;unsigned unknown_034;unsigned unknown_038;unsigned unknown_03c;
@@ -75470,7 +75319,6 @@ struct TLSObj {
 extern unsigned int DAT_01179af4;
 extern Bound16 DAT_0108edc8;
 
-struct FlagBits { unsigned int lo:20; unsigned int bit20:1; unsigned int hi:11; };
 struct Arg {
         int unk000;
     int unk004;
@@ -75503,22 +75351,6 @@ struct EdiObj {
 };
 struct BObj {
     void* FUN_0088ab80();
-};
-
-struct SavedObj {
-        int unk000;
-    int unk004;
-    int unk008;
-    int unk00c;
-    int unk010;
-    int unk014;
-    int unk018;
-    int unk01c;
-    Bound16* bound20;
-        int unk024;
-    int unk028;
-    int unk02c;
-    unsigned int flags30;
 };
 
 struct Node;
@@ -82910,9 +82742,6 @@ struct Topic;
 struct World;
 extern float DAT_01090bac;
 extern const float DAT_00db8d0c;
-extern const float DAT_00e1506c;
-extern const float DAT_00dcb248;
-extern const float DAT_00dd7e6c;
 struct V
 {
     float x, y, z;
@@ -96875,10 +96704,8 @@ extern unk60* DAT_0107a104;
 extern IntSetting DAT_00f5e934;
 extern FloatSetting DAT_00f5e844;
 extern const float DAT_00db38b8;
-extern const float DAT_00dcf7dc;
 extern const double DAT_00dbe5e0;
 extern const float DAT_00dc27f8 = 10000.0f;
-extern const double DAT_00de3020;
 // The symbol table aliases these two shared implementations to these names.
 float FUN_00401e20(float, float); // implementation at 00401e20
 float FUN_0090d870(float, float); // implementation at 0090d870
@@ -100284,7 +100111,6 @@ void Owner::FUN_0073f500(Owner* actor)
 // @f3 0x00739f10 (community match, verified in this file)
 #include <math.h>
 extern unsigned int DAT_01071664;
-extern float DAT_00e12830;
 extern float DAT_01090bac;
 float __cdecl FUN_00bff9a0();
 struct Setting739 {float* FUN_00401eb0();};
@@ -101155,14 +100981,6 @@ struct List124
     Deleted124** FUN_006815c0(){return (Deleted124**)&first;}
     void FUN_00421610(Deleted124*&);
     void FUN_006c8220();
-};
-struct Small124
-{
-    float FUN_00621b00();
-};
-struct Ref124
-{
-    virtual bool v22c(int) = 0;
 };
 struct Obj124
 {
@@ -102131,7 +101949,6 @@ extern int* DAT_00f6ee80[];
 inline float FUN_00408840(float x){return (float)fabs(x);}
 void FUN_0074b090(Obj124*);
 void FUN_0074b130(Obj124*);
-bool FUN_008e3e90(Obj124*, Vec124, float, Vec124&);
 // Runs the actor's current AI package: dispatches on its package type, advances timers, and re-evaluates the package when it changes or completes.
 // @fnv 0x008f4020
 void Obj124::FUN_0073e740(Obj124* ref, float time)

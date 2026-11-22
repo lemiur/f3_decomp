@@ -20,20 +20,6 @@ void __cdecl InitArrayEntries(int** apEntries, int count)
     }
 }
 
-struct FUN_00d97710_class
-{
-    void ClearEntryByKey(int);
-};
-struct FUN_00d0a270_class
-{
-    void* p0;
-    void* p4;
-    void* p8;
-    void* pc;
-    FUN_00d97710_class* pv;
-    void FUN_00d0a270(int ai);
-};
-
 struct D107A0RTTI;
 extern D107A0RTTI g_D107A0RTTI;
 
@@ -62,11 +48,6 @@ FUN_00d107b0::FUN_00d107b0()
     vft = (void**)&DAT_010cd54c;
 }
 
-struct FUN_00c9ce00_cls
-{
-    void FUN_00c9ce00(int);
-};
-
 struct FUN_00d1fa20_t
 {
     int m_uiCount;
@@ -79,32 +60,6 @@ void FUN_00d1fa20_t::ResetEntries()
         *(unsigned int*)((char*)*(unsigned char**)((char*)this + 0x18) + i * 4) = 1;
     *(unsigned char*)((char*)this + 0x24) = 0;
 }
-
-struct SpawnedAllocator
-{
-    virtual void v0();
-    virtual void* Alloc(unsigned int size);
-    virtual void Free(void* p, unsigned int size);
-};
-
-struct AllocHolder
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    SpawnedAllocator* m_pAllocator;
-};
-
-AllocHolder* FUN_00c85750();
-extern "C" void __cdecl FUN_00ec44d0(void* dst, const void* src, unsigned int size);
-
-struct FUN_00d06c30_cls
-{
-    char* m_pData;
-    unsigned short m_usElementCount;
-    unsigned short m_usCap;
-};
 
 class FUN_00d07910_cls;
 
@@ -373,35 +328,6 @@ FUN_00d1f730::FUN_00d1f730(int aiArg1, int aiArg2, int aiValue) : S_00d1f730_Bas
 }
 
 
-struct D01E50Node
-{
-    unsigned char kind;
-    unsigned char unk01;
-    unsigned char unk02;
-    unsigned char unk03;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int payload;
-};
-int __cdecl FUN_00d95cf0(int, void*, D01E50Node*);
-int __cdecl FUN_00d94df0(int, void*, D01E50Node*);
-int __cdecl ExecuteConstraintCallbacks(int, void*, D01E50Node*);
-int __cdecl FUN_00d94a80(int, void*, D01E50Node*);
-int __cdecl FUN_00d947e0(int, void*, D01E50Node*);
-int __cdecl FUN_00d944d0(int, void*, D01E50Node*);
-int __cdecl FUN_00d94570(int, void*, D01E50Node*);
-int __cdecl LogIntegrateVelocity(int, void*, D01E50Node*);
-int __cdecl FUN_00d94730(int, void*, D01E50Node*);
-int __cdecl FUN_00d943d0(int, void*, D01E50Node*);
-int __cdecl FUN_00d93ba0(int, void*, D01E50Node*);
-int __cdecl FUN_00d93380(int, void*, D01E50Node*);
-int __cdecl AccumulateShapes(int, void*, D01E50Node*);
-int __cdecl FUN_00d94340(int, void*, D01E50Node*);
-
 int __fastcall FUN_00d04380(void*);
 // @fnv 0x00d043b0
 int __cdecl FUN_00d043b0(void* ap)
@@ -415,64 +341,6 @@ int __cdecl FUN_00d043d0()
     return 0;
 }
 
-struct FnvCpu_FUN_00d04430_CpuScalar
-{
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0c;
-    unsigned int unk10;
-    unsigned int unk14;
-    unsigned int unk18;
-    int value;
-};
-struct FnvCpu_FUN_00d04430_CpuObject
-{
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0c;
-    unsigned int unk10;
-    unsigned int unk14;
-    FnvCpu_FUN_00d04430_CpuScalar* value;
-    int FUN_00d04430();
-};
-
-struct FnvCpu_FUN_00d04440_CpuScalar
-{
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0c;
-    unsigned int unk10;
-    unsigned int unk14;
-    int value;
-};
-struct FnvCpu_FUN_00d04440_CpuObject
-{
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0c;
-    unsigned int unk10;
-    unsigned int unk14;
-    FnvCpu_FUN_00d04440_CpuScalar* value;
-    int FUN_00d04440();
-};
-
-struct FUN_00d06f70_s
-{
-    void FUN_00d06f70();
-};
-
-struct FUN_00d07070_s : FUN_00d06f70_s
-{
-    int unk00;
-    unsigned short unk04;
-
-    int __thiscall FUN_00d07070(unsigned char flag);
-};
-
 struct FnvCpu_FUN_00d081d0_CpuObject
 {
     char* FUN_00d081d0();
@@ -482,38 +350,6 @@ char* FnvCpu_FUN_00d081d0_CpuObject::FUN_00d081d0()
 {
     return reinterpret_cast<char*>(this) + 80;
 }
-
-struct FUN_00d081e0_ret
-{
-    int base;
-};
-
-class FUN_00d081e0_cls
-{
-  public:
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    FUN_00d081e0_ret unk50;
-    FUN_00d081e0_ret* FUN_00d081e0();
-};
 
 // @fnv 0x00d08370
 void __stdcall FUN_00d08370(int)
@@ -664,17 +500,6 @@ struct ArrayOfArrays
     }
 };
 
-struct ArrayRecord
-{
-    int type;
-    char flag;
-    int value;
-    ArrayOfArrays arrays;
-    ArrayRecord& FUN_00d05b50(const ArrayRecord& source);
-};
-
-extern "C" int __cdecl FUN_00d61d00(void* dst, const char* format, ...);
-
 struct FUN_00d0bc20_Outer;
 
 struct FUN_00d0bc20_Vtable
@@ -752,43 +577,7 @@ union __declspec(intrin_type) __declspec(align(16)) __m128
     unsigned __int64 m128_u64[2];
 };
 
-extern "C" __m128 _mm_load_ps(const float* p);
 extern "C" __m128 _mm_sub_ps(__m128 a, __m128 b);
-
-struct S00d1b7f0_Input
-{
-    int m00;
-    int m04;
-    int m08;
-    int m0C;
-    int m10;
-    int m14;
-    int m18;
-    int m1C;
-    int m20;
-    int m24;
-    int m28;
-    int m2C;
-    int m30;
-    int m34;
-    int m38;
-    int m3C;
-    int m40;
-    int m44;
-    int m48;
-    int m4C;
-};
-
-struct S00d1b7f0_Frame
-{
-    int v0;
-    int v1;
-    int v2;
-    int v3;
-    __m128 diff;
-};
-
-extern "C" void __cdecl QueryKdTree(int a, int b, int c, const __m128* d, const int* e, int f, int g);
 
 // @fnv 0x00d043e0
 int FUN_00d043e0()
@@ -920,42 +709,11 @@ int* MyClass::GetField20()
 extern __m128 DAT_011b3810;
 
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long dwTlsIndex);
-extern "C" unsigned __int64 __rdtsc(void);
 extern "C" void _ReadWriteBarrier(void);
-
-extern unsigned int DAT_0126835c;
-extern char DAT_010cd648[];
-extern char DAT_010c41f8[];
 
 struct __declspec(align(16)) Vec4
 {
     float q[4];
-};
-
-struct HkTimer
-{
-    int unk00;
-    char* head;
-    int unk08;
-    char* end;
-};
-
-struct QueryObj
-{
-    void* unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    __m128 min;
-    __m128 max;
 };
 
 void __cdecl FUN_00d1b4d0(const void* a, int b, const Vec4* c, const Vec4* d, int e, int f, int g, int h, int i, int j);
@@ -981,19 +739,6 @@ struct D01B40_Sub
         return GetValueV();
     }
 };
-struct D01B40_Obj
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    D01B40_Sub kSub;
-};
-struct D01B40_cls
-{
-    D01B40_Obj* pObj;
-    bool* FUN_00d01b40(bool* pbResult);
-};
 
 typedef union __declspec(intrin_type) __declspec(align(16)) __m128i
 {
@@ -1002,7 +747,6 @@ typedef union __declspec(intrin_type) __declspec(align(16)) __m128i
 
 extern "C"
 {
-    __m128i _mm_setzero_si128(void);
     __m128i _mm_unpacklo_epi16(__m128i, __m128i);
     __m128i _mm_unpackhi_epi16(__m128i, __m128i);
     __m128i _mm_slli_epi32(__m128i, int);
@@ -1013,61 +757,12 @@ extern "C"
     __m128 _mm_cmple_ps(__m128, __m128);
     __m128 _mm_and_ps(__m128, __m128);
     int _mm_movemask_ps(__m128);
-    __m128i _mm_load_si128(__m128i const*);
 }
 
-extern double DAT_010217d0;
-extern float DAT_010cd644;
 extern __m128 DAT_011b3810;
 extern "C" void _ReadWriteBarrier(void);
 
 void __cdecl ResizeAudioStream(void* allocator, void* arr, int elemSize);
-
-struct MemSource
-{
-    static void* FUN_00c85750();
-};
-
-struct KdNode
-{
-    int a;
-    unsigned int b;
-};
-
-struct Aabb16
-{
-    union
-    {
-        struct
-        {
-            unsigned short minX;
-            unsigned short minY;
-            unsigned short minZ;
-            unsigned short key0;
-            unsigned short maxX;
-            unsigned short maxY;
-            unsigned short maxZ;
-            unsigned short key1;
-        };
-        struct
-        {
-            int d0, d1, d2, d3;
-        } words;
-    };
-};
-
-struct QueryAabb
-{
-    float min[4];
-    float max[4];
-};
-
-struct PrimIds
-{
-    int* data;
-    int size;
-    int capacity;
-};
 
 struct __declspec(align(16)) ScaleSplat
 {
@@ -1079,19 +774,6 @@ struct __declspec(align(16)) RawWords
     int d0, d1, d2, d3;
 };
 
-struct FloatPair
-{
-    __m128 lo;
-    __m128 hi;
-};
-struct ChildInfo
-{
-    int axis;
-    KdNode* left;
-    KdNode* right;
-};
-
-extern "C" __m128 _mm_shuffle_ps(__m128 a, __m128 b, unsigned int imm);
 extern "C" __m128 _mm_cmpeq_ps(__m128 a, __m128 b);
 extern "C" __m128 _mm_and_ps(__m128 a, __m128 b);
 extern "C" __m128 _mm_andnot_ps(__m128 a, __m128 b);
@@ -1176,26 +858,6 @@ struct HkRayBundle
 
 typedef void*(__stdcall* S00d1b9b0_TlsGet)(unsigned long dwTlsIndex);
 
-// Today's unit (blk_00d00000_o2.cpp) declares __m128 and most SSE1 intrinsics as
-// extern "C" functions instead of including <xmmintrin.h>; declare the four the
-// matched code needs that the unit does not have.
-extern "C" __m128 _mm_max_ps(__m128 a, __m128 b);
-extern "C" __m128 _mm_min_ps(__m128 a, __m128 b);
-extern "C" __m128 _mm_add_ss(__m128 a, __m128 b);
-extern "C" float _mm_cvtss_f32(__m128 a);
-
-extern "C" __m128 _mm_setzero_ps(void);
-
-struct FUN_00d1f9f0
-{
-    short boneBegin;
-    short boneEnd;
-    __m128 penetrationPoint;
-    __m128 penetrationNormal;
-
-    FUN_00d1f9f0();
-};
-
 struct S00d1b4d0_Node
 {
     unsigned code;
@@ -1215,30 +877,6 @@ struct __declspec(align(8)) S00d1b4d0_NodeCopy
         packed = p->packed;
     }
 };
-struct S00d1b4d0_Entry
-{
-    union
-    {
-        struct
-        {
-            unsigned short unk00, unk02, unk04, unk06, unk08, unk0a, unk0c, unk0e;
-        };
-        struct
-        {
-            unsigned word0, word1, word2, word3;
-        };
-    };
-};
-struct S00d1b4d0_List
-{
-    unsigned* data;
-    int size;
-    unsigned capacity;
-};
-struct S00d1b4d0_Id
-{
-    unsigned short lo, hi;
-};
 struct S00d1b4d0_Result
 {
     char m_cBooleanValue;
@@ -1246,16 +884,6 @@ struct S00d1b4d0_Result
     {
         return m_cBooleanValue != 0;
     }
-};
-struct S00d1b4d0_Callback
-{
-    virtual void slot0();
-    virtual S00d1b4d0_Result slot1(S00d1b4d0_Id id);
-};
-struct S00d1b4d0_Aabb
-{
-    __m128 m_kMinimumCorner;
-    __m128 m_kMaximumCorner;
 };
 struct RealVec
 {
@@ -1270,11 +898,6 @@ struct RealVec
     {
         return f[i];
     }
-};
-struct S00d1b4d0_Bounds
-{
-    float min[4];
-    float max[4];
 };
 
 void __cdecl ResizeAudioStream(void*, void*, int);

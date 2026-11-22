@@ -74,22 +74,6 @@ class hkReferencedObjectE4AF
     }
 };
 
-class hkAlignSceneToNodeOptionsE4AF : public hkReferencedObjectE4AF
-{
-  public:
-    hkBool m_bOption1;
-    hkBool m_bOption2;
-    hkBool m_bOption3;
-    hkBool m_bOption4;
-    hkBool m_bOption5;
-    hkBool m_bOption6;
-    hkBool m_bOption7;
-    hkInt32 m_iOptionValue;
-    FUN_00cb0c00_class m_kNodeName;
-
-    hkAlignSceneToNodeOptionsE4AF* FUN_00e4afa0(unsigned int uiFlags) throw();
-};
-
 union __declspec(intrin_type) __declspec(align(16)) __m128
 {
     float m128_f32[4];
@@ -148,17 +132,6 @@ struct Matrix4E4
     }
     void FUN_00de8e50(const Matrix4E4& m) throw();
 };
-struct MatArrE4
-{
-    Matrix4E4* m_data;
-    int m_iElementCount;
-    int m_cap;
-};
-struct PoseE4
-{
-    int unk00, unk04, unk08, unk0c, unk10, unk14, unk18;
-    MatArrE4 m_mats;
-};
 template <class T, int N> struct InplaceArrE4
 {
     T* m_data;
@@ -190,9 +163,4 @@ template <class T, int N> struct InplaceArrE4
     {
         release();
     }
-};
-struct NodeOpsE4
-{
-    int FUN_00e4a540(void* pSrc, InplaceArrE4<PoseE4*, 32>& arr) throw();
-    int FUN_00e4a5a0(void* volatile pSrc, Matrix4E4* pOut, int iIndex);
 };

@@ -4,8 +4,6 @@
 
 typedef void NiRTTI;
 
-extern NiRTTI* g_011f3f80;
-
 struct AnimationKey;
 extern void(__cdecl* DAT_011f3ca8[])(float, AnimationKey const*, AnimationKey const*, void*);
 struct FUN_00a49e10_shell
@@ -68,8 +66,6 @@ struct StrArr
     void SetSize(unsigned int);
     void SetAt(unsigned int, char*&);
 };
-void __stdcall FUN_00a6d830(StrArr*);
-char* __cdecl _FUN_00a7d330(const char*);
 struct NiPathController
 {
     void AppendString(StrArr*);

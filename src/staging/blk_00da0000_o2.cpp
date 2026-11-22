@@ -6,14 +6,6 @@
 
 #include "../../include/layout_support.h"
 
-extern "C" void __cdecl FUN_00cb0a70(void*);
-extern int DAT_010d461c;
-
-struct FUN_00da07b0_class
-{
-    void __thiscall FUN_00cb0a70(void*);
-};
-
 void __cdecl InitBlockPool(void*);
 
 // @fnv 0x00da6fa0
@@ -35,7 +27,6 @@ void __cdecl FUN_00da08c0(void** a)
     (**(void(__thiscall**)(void*, int))(*a))(a, 0);
 }
 
-extern int DAT_010c59f4;
 extern int DAT_010c6bec;
 
 extern int DAT_010c6fd0;
@@ -134,16 +125,6 @@ void __cdecl FUN_00da0740(FUN_00da0740_vt* p)
 {
     p->v0(0);
 }
-
-struct FUN_00cb0a70_class
-{
-    void __thiscall FUN_00cb0a70(int);
-};
-
-struct FUN_00db7cf0_class
-{
-    int __thiscall FUN_00db7cf0(int a, int b);
-};
 
 extern int g_unk0126958c;
 
@@ -564,19 +545,6 @@ void* __cdecl FUN_00da0b20()
     return &DAT_010c6fd0;
 }
 
-struct FUN_00db0060_class
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-
-    void __thiscall FUN_00db0060(int* param_2, int param_3);
-};
-
 struct DB7570Pair
 {
     unsigned int m_key;
@@ -747,38 +715,8 @@ struct HashEntryTable
     void FUN_00cb1870(hkMemoryAllocator& alloc, unsigned int key, unsigned int val);
 };
 
-struct MapHolder
-{
-    int unk00, unk04;
-    HashEntryTable m_map;
-
-    void CopyMapEntries(const MapHolder& other);
-};
-
 namespace fnv_00db7960 {
 extern "C" void* __cdecl FUN_00c85750();
-extern int DAT_010cf844;
-
-struct FUN_00db7960_Target
-{
-    virtual void vf00();
-    virtual void* vf04(int a);
-};
-
-struct FUN_00db7960_Data
-{
-    void __thiscall EnsureCapacity(void* a, int b);
-};
-
-struct FUN_00db7960_Result
-{
-    void* unk00;
-    unsigned short unk04;
-    unsigned short unk06;
-    int unk08;
-    int unk0C;
-    int unk10;
-};
 
 }  // namespace fnv_00db7960
 
@@ -853,37 +791,6 @@ class Thing : public RefObj
 
 }  // namespace fnv_00db7a20
 
-// ForwardToInner: forwards a 64-bit value to a member function held at this->m_08.
-struct SpawnedInner
-{
-    void FUN_00db7c70(__int64 v);
-};
-
-struct SpawnedOuter
-{
-    int unk00;
-    int unk04;
-    SpawnedInner* m_08;
-
-    void ForwardToInner(__int64 v);
-};
-
-struct CallTarget_00dba270
-{
-    int Splice(int, int, int, int, int);
-};
-struct SearchObject
-{
-    int FUN_00dba320(unsigned int arg0, unsigned int arg1, unsigned int arg2, unsigned int arg3);
-};
-
-class DBA340Object
-{
-  public:
-    int FUN_00dba320(void* pvA, void* pvB, void* pvC, int iFlag);
-    int FUN_00dba340(void* pvA, void* pvB, void* pvC);
-};
-
 namespace fnv_00dba3d0 {
 struct DBA3D0Allocator
 {
@@ -909,12 +816,6 @@ struct DBA3D0MemoryRouter
 };
 
 extern "C" DBA3D0MemoryRouter& __cdecl FUN_00c85750() throw();
-
-struct DBA3D0Pair
-{
-    int m_iKey;
-    int m_iValue;
-};
 
 template <class T> struct DBA3D0Array
 {
@@ -958,39 +859,7 @@ class DBA3D0Map : public DBA3D0MapBase
     }
 };
 
-class FUN_00dba3d0
-{
-  public:
-    ~FUN_00dba3d0() throw();
-
-    DBA3D0Array<DBA3D0Pair> m_kPairs;
-    DBA3D0Map m_kFormatEntries;
-};
-
 }  // namespace fnv_00dba3d0
-
-struct DBB100Class
-{
-    const char* getName() const;
-};
-
-struct DBB100Registry
-{
-    virtual void unk00();
-    virtual void unk04();
-    virtual void unk08();
-    virtual void unk0C();
-    virtual const DBB100Class* getClassByObject(const void* object) const;
-};
-
-struct DBB100Writer
-{
-    virtual void unk00();
-    virtual void unk04();
-    virtual void unk08();
-    virtual void unk0C();
-    virtual void WriteCString(const char* s);
-};
 
 struct hkMemoryAllocator
 {
@@ -999,46 +868,6 @@ struct hkMemoryAllocator
     virtual void vSlot08();
     virtual void vSlot0C(void* field, void* item);
     virtual void free(void* p, unsigned int nbytes);
-};
-struct AudioRouter
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    hkMemoryAllocator* unk10;
-};
-AudioRouter* __cdecl da06d0_getRouter();
-struct Elem
-{
-    int unk00;
-    int unk04;
-};
-struct Buffer
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    Elem* m_ppData;
-    int m_iElementCount;
-    int m_pRayCursor;
 };
 
 struct SweepBounds
@@ -1073,12 +902,6 @@ struct DBA430Listener
     virtual void vslot10(int a, int b);
 };
 
-struct DBA430Inner
-{
-    void __thiscall Sync(DBA430Listener* listener);
-    void __thiscall Mark();
-};
-
 struct BSAudio
 {
     virtual void vf00();
@@ -1090,96 +913,9 @@ struct BSAudio
 
 BSAudio* __cdecl FUN_00c85750();
 
-struct DBA430Owner
-{
-    int m_00;
-    int m_04;
-    int m_08;
-    DBA430Inner m_0C;
-
-    void Reset();
-};
-
-union FeaturePair
-{
-    unsigned short pair;
-    struct
-    {
-        unsigned char first;
-        unsigned char second;
-        unsigned char detail;
-        unsigned char flags;
-    };
-};
-struct FeatureCache
-{
-    FeaturePair entries[8];
-    unsigned char dimension;
-    unsigned char count;
-    bool result;
-};
-
-struct CallbackHolder
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    void(__stdcall* callback)(void* argument);
-};
-
 extern void*(__stdcall* DAT_00fdf110)();
 
-struct FUN_00da2b30_Class
-{
-    int unk00;
-    int unk04;
-    CallbackHolder* holder;
-
-    void InvokeCallback();
-};
-
 extern int DAT_010d4de4;
-extern int DAT_01269a9c;
-
-struct FUN_00da2840_Obj
-{
-    void __thiscall FUN_00da2840();
-};
-
-struct FUN_00da2b90_Obj
-{
-    int unk00;
-    short unk04;
-    short unk06;
-    int* unk08;
-
-    unsigned int* __thiscall Initialize();
-};
-
-struct DA2D70Listener
-{
-    virtual void vf00();
-    virtual void vf04();
-    virtual void vf08(void* object, int value);
-};
-
-struct DA2D70Audio
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    DA2D70Listener* m_10;
-};
-
-struct DA2D70Object
-{
-    int unk00;
-    unsigned short unk04;
-
-    void __thiscall FUN_00da2930();
-    void* __thiscall NotifyAudioListener(int flags);
-};
 
 extern BSAudio* __cdecl FUN_00c85750();
 
@@ -1207,15 +943,6 @@ struct Allocator
 {
     virtual void Reserved();
     virtual void* Alloc(unsigned int bytes);
-};
-
-struct Manager
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    Allocator* heap;
 };
 
 struct SubObject
@@ -1275,45 +1002,7 @@ int* FUN_00db7c10()
     return &DAT_01269b28;
 }
 
-extern int DAT_010cce28;
-
-struct hkLoadedObjectDB7C
-{
-    int* m_ppVirtualMethodTable;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    FUN_00cb0a70_class m_name;
-};
-
-extern "C" void __cdecl FUN_00ec658f(const void*);
-extern unsigned char DAT_01269b80;
-extern void* DAT_010d6260;
-extern void* DAT_01269b78;
-extern void* FUN_00fde2a0;
-extern unsigned short DAT_01269b7e;
-
 typedef void(__cdecl* FuncDA34)();
-
-void __cdecl ExecuteMoppAabbQuery();
-void __cdecl FUN_00df6f80();
-void __cdecl FUN_00df6b50();
-void __cdecl FUN_00df79d0();
-void __cdecl FUN_00df7340();
-void __cdecl ProcessWorkQueue();
-void __cdecl ProcessAabbTree();
-void __cdecl SplitJob();
-void __cdecl FUN_00df7a90();
 
 struct FuncTableDA34
 {
@@ -1325,8 +1014,6 @@ struct FuncTableDA34
     FuncDA34 m_func5;
     FuncDA34 m_func6;
 };
-
-extern FuncTableDA34 DAT_01269af0;
 
 struct RegisterInfoDA34
 {
@@ -1343,16 +1030,6 @@ class DispatcherDA34
 };
 
 namespace fnv_00da3480 {
-void __cdecl FUN_00df94b0();
-void __cdecl FUN_00df8df0();
-void __cdecl FinishJobWithPair();
-void __cdecl BuildKdTreeDistributed();
-void __cdecl FUN_00df8440();
-void __cdecl FUN_00df8800();
-void __cdecl FUN_00df8570();
-void __cdecl ExecuteJob();
-void __cdecl CopyAndAdvance();
-void __cdecl FUN_00df9920();
 
 typedef void(__cdecl* AgentFuncDA34)();
 
@@ -1360,8 +1037,6 @@ struct AgentTableDA34
 {
     AgentFuncDA34 m_apfnFuncs[8];
 };
-
-extern AgentTableDA34 DAT_01269ad0;
 
 struct AgentInfoDA34
 {
@@ -1498,9 +1173,6 @@ void drive_db09f0(void)
     g_out_db09f0 = FUN_00db09f0(g_in_db09f0);
 }
 
-extern int DAT_010d52d0;
-extern "C" unsigned int stub_val(void);
-
 struct FUN_00db7c80_class
 {
     int unk00;
@@ -1517,58 +1189,8 @@ int* FUN_00db7c80_class::FUN_00db7c80()
 }
 
 #include <xmmintrin.h>
-struct RadixRecord
-{
-    unsigned int key;
-    unsigned int value;
-};
-
-extern double DAT_01034208;
-
-struct TriIndexRec_b4046
-{
-    int m_00;
-    int m_04;
-    int m_08;
-    int m_0c;
-};
-
-struct TriIndexSet_b4046
-{
-    __m128* m_00;
-    int unk04;
-    int unk08;
-    TriIndexRec_b4046* m_0c;
-    int m_10;
-};
-
-struct ArgObj
-{
-    int FUN_00da2b20(int* buffer, int size);
-};
-
-struct Holder
-{
-    int FindOrAddCallTrace(int* buffer, int count);
-    int FUN_00da2d20(ArgObj* param);
-};
 
 namespace sda3740 {
-
-struct Record
-{
-    unsigned char m_ucType;
-    unsigned char unk01;
-    unsigned char unk02;
-    unsigned char m_ucSize;
-    int m_iKey1;
-    int m_iKey2;
-};
-
-struct Block
-{
-    int m_uiLogicalSize;
-};
 
 }
 
@@ -1606,27 +1228,6 @@ struct S06c0_Mgr
         return *unk0c;
     }
 };
-struct S06c0_Key
-{
-    unsigned int key;
-    int index;
-};
-struct S06c0_Quad
-{
-    unsigned int x, y, z, w;
-};
-struct S06c0_Rec
-{
-    S06c0_Quad first, second;
-};
-void __cdecl RadixSort(S06c0_Key* keys, int count, S06c0_Key* scratch);
-
-struct MaskArg
-{
-    unsigned int* ptr;
-};
-
-extern int g_00db0aa0_maskvar;
 
 namespace fnv_00db0e50 {
 union __declspec(intrin_type) __declspec(align(16)) __m128
@@ -1640,13 +1241,6 @@ extern "C" __m128 _mm_setzero_ps();
 extern "C" __m128 _mm_cmplt_ps(__m128, __m128);
 extern "C" int _mm_movemask_ps(__m128);
 
-struct VectorFlags
-{
-    unsigned int value;
-};
-
-extern "C" const __m128* getVector_db0e50();
-extern VectorFlags getFlags_db0e50();
 volatile unsigned int g_out;
 }  // namespace fnv_00db0e50
 
@@ -1655,13 +1249,6 @@ volatile unsigned int g_out;
 volatile int g_a;
 float* volatile g_v;
 int* volatile g_o;
-
-struct S_00db7c70_class
-{
-    int unk0c;
-    int __thiscall FUN_00db7c70(int a, int b);
-    int __thiscall FUN_00db7c80();
-};
 
 struct DBBCBC0Target
 {
@@ -1686,24 +1273,10 @@ int DBBCBC0Target::FUN_00dbbc00()
 }
 
 namespace fnv_00da2840 {
-extern char* DAT_011b76d0;
 extern void*(__stdcall* DAT_00fdf0b0)(const char*);
 extern void*(__stdcall* DAT_00fdf0ac)(void*, const char*);
 extern void(__stdcall* DAT_00fdf16c)(const char*);
 extern HANDLE(__stdcall* DAT_00fdf110)(int, int);
-
-extern char str_010d4da0[];
-extern char str_010d4d90[];
-extern char str_010d4d78[];
-extern char str_010d4cf8[];
-extern char str_010d4ce4[];
-extern char str_010d4cd4[];
-extern char str_010d4cc0[];
-extern char str_010d4cb4[];
-extern char str_010d4c98[];
-extern char str_010d4c84[];
-extern char str_010d4c6c[];
-extern char str_010d4c60[];
 
 typedef void(__stdcall* DA2840_OutputDebugString)(const char*);
 typedef void*(__stdcall* DA2840_GetProcAddress)(void*, const char*);
@@ -1717,24 +1290,6 @@ typedef void*(__stdcall* DA2840_SymFunctionTableAccess64)(void*, void*, void*);
 typedef void*(__stdcall* DA2840_SymGetModuleBase64)(void*, void*);
 typedef int(__stdcall* DA2840_SymGetLineFromAddr64)(void*, void*, void*, void*);
 typedef BOOL(__stdcall* DA2840_SymCleanup)(void*);
-
-struct DA2840Object
-{
-    HMODULE m_module;
-    int m_sState;
-    DA2840_SymInitialize m_symInitialize;
-    DA2840_SymRefreshModuleList m_symRefreshModuleList;
-    DA2840_SymGetOptions m_symGetOptions;
-    DA2840_SymSetOptions m_symSetOptions;
-    DA2840_SymGetSymFromAddr m_symGetSymFromAddr;
-    DA2840_StackWalk64 m_stackWalk64;
-    DA2840_SymFunctionTableAccess64 m_symFunctionTableAccess64;
-    DA2840_SymGetModuleBase64 m_symGetModuleBase64;
-    DA2840_SymGetLineFromAddr64 m_symGetLineFromAddr64;
-    DA2840_SymCleanup m_symCleanup;
-
-    void FUN_00da2840();
-};
 
 }  // namespace fnv_00da2840
 
@@ -1879,7 +1434,6 @@ typedef union __declspec(intrin_type) __declspec(align(16)) __m128
 extern "C"
 {
     __m128 _mm_load_ps(const float*);
-    __m128 _mm_load_ss(const float*);
     __m128 _mm_set_ss(float);
     __m128 _mm_setzero_ps();
     __m128 _mm_sub_ps(__m128, __m128);
@@ -1954,11 +1508,6 @@ struct Indices
 struct Output
 {
     Vector origin, direction, normal;
-};
-struct VertexBlock
-{
-    Vector vertices[16];
-    Vector direction;
 };
 // Builds out origin, direction and normal from four vertices at idx offsets in base, negating the normal if the fourth dot is negative; returns ~mask & 7.
 // @fnv 0x00dad110
@@ -2100,7 +1649,6 @@ extern "C" __m128 _mm_sub_ps(__m128, __m128);
 extern "C" __m128 _mm_add_ss(__m128, __m128);
 extern "C" __m128 _mm_sqrt_ss(__m128);
 extern "C" void _mm_store_ss(float*, __m128);
-extern "C" float _mm_cvtss_f32(__m128);
 
 struct S00db47a0_Obj
 {
@@ -2179,16 +1727,11 @@ struct SmallVec
         return SmallReal(_mm_sqrt_ss(dot(*this).value));
     }
 };
-struct S00db47a0_Pair
-{
-    SmallVec b, d;
-};
 struct S00db47a0_Cls
 {
     SmallVec a;
 };
 
-extern "C" S00db47a0_Pair* pair_input();
 S00db47a0_Cls* volatile g_self;
 S00db47a0_Obj* volatile g_o;
 S00db47a0_Obj* volatile g_p;
@@ -2315,27 +1858,3 @@ float volatile result;
 }  // namespace fnv_00db48a0
 
 extern int DAT_010d4de4;
-
-extern int DAT_0102e388;
-
-struct StackTraceModule
-{
-
-    HMODULE hModule;
-
-    int unk04, unk08, unk0c, unk10, unk14, unk18, unk1c, unk20, unk24, unk28;
-
-    void(__stdcall* releaseProcess)(void*);
-};
-
-struct StackTraceOwner
-{
-
-    void* vtable;
-
-    int unk04;
-
-    StackTraceModule* loader;
-
-    void FUN_00da2930();
-};

@@ -35,8 +35,6 @@ void __thiscall FUN_00e80610_shell::FUN_00e80610()
     *(int*)((char*)this + 0x38) = 0;
 }
 
-extern "C" const char* const g_0126f554_arg1;
-
 struct NiD3DShader
 {
     void FUN_00e806c0();

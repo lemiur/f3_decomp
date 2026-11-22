@@ -33,52 +33,7 @@ void FUN_00d54420_Owner::FUN_00d54420(int a, float b, int c)
     m_pInterface->FUN_00d54420_f6(a, b, c);
 }
 
-struct hkReferencedObject
-{
-    void RetainReference();
-};
-
-extern int DAT_010c6fd0;
-extern int DAT_010d0dac;
-
-struct FUN_00d54490
-{
-    FUN_00d54490(int, int);
-};
-
-struct FUN_00d544f0 : public FUN_00d54490
-{
-    FUN_00d544f0(hkReferencedObject*, int);
-};
-
-struct FUN_00d54930MemoryManager
-{
-    virtual void ReportDiagnostic() = 0;
-    virtual void unused1() = 0;
-    virtual void Free(void* object, unsigned short size) = 0;
-};
-
-struct FUN_00d54930MemoryRouter
-{
-    unsigned char padding[0x10];
-    FUN_00d54930MemoryManager* manager;
-};
-
-FUN_00d54930MemoryRouter* _D1A0E0GetMemoryRouter();
-
-struct FUN_00d54930Object
-{
-    virtual void ReportDiagnostic() = 0;
-
-    unsigned short m_iElementCount;
-
-    void FUN_00d543e0();
-    FUN_00d54930Object* Destroy(unsigned char flags);
-};
-
 class hkClassD543;
-
-extern const hkClassD543 DAT_01269c8c;
 
 class hkStatisticsCollectorD543
 {
@@ -406,26 +361,6 @@ int S00d54440_Obj::FUN_00d54440(int argument, int bytes) {
 
 
 #include <xmmintrin.h>
-extern char DAT_010d0d70;
-struct S00d54490_Ref
-{
-    void FUN_00c90510();
-};
-struct S00d54490_Obj
-{
-    void* volatile unk00;
-    unsigned char unk04;
-    unsigned char unk05;
-    unsigned short volatile unk06;
-    int volatile unk08;
-    int unk0C;
-    volatile unsigned char unk10;
-    void* unk14;
-    int unk18;
-    int unk1C;
-    float unk20[4];
-    S00d54490_Obj* __thiscall FUN_00d54490(int arg1, const hkpMoppBvTreeShape& arg2);
-};
 
 namespace fnv_00d54520 {
 union __declspec(intrin_type) __declspec(align(16)) __m128
@@ -439,19 +374,6 @@ extern "C" void _ReadWriteBarrier(void);
 extern unsigned long DAT_0126835c;
 extern const char str_010d0de4[];
 extern const char str_010c41f8[];
-struct S54520_Mon
-{
-    char* m_kRayStart;
-    char* m_kRayEnd;
-    char* m_cap;
-    char* m_capMinus16;
-};
-struct S54520_Timer
-{
-    const char* m_name;
-    unsigned int m_ticks;
-    unsigned int m_unk08;
-};
 struct S54520_Out
 {
     char m_flag;
@@ -503,35 +425,13 @@ struct __declspec(align(16)) S54520_Work
     int t64;
     void FUN_00dd2df0(S54520_Out*, S54520_Sub*, S54520_Box*, int, S54520_Params*);
 };
-struct S54520_Frame
-{
-    unsigned int m_codeStorage[16];
-    S54520_Work m_vm;
-};
-struct S54520_Owner
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int m_kPointA;
-    int m_kPointB;
-    __m128 m_vComponents;
-    int unk30;
-    S54520_Sub* m_sub;
-    S54520_Out* FUN_00d54520(S54520_Out* out, int p1, S54520_Params* params);
-};
 }  // namespace fnv_00d54520
 
 extern "C" void _ReadWriteBarrier(void);
 extern "C" unsigned __int64 __rdtsc(void);
 extern unsigned long DAT_0126835c;
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long);
-extern const int DAT_010c92e0[4];
 
-extern "C" const char str_010d0df0[];
 extern "C" const char str_010c41f8[];
 
 struct hkTimerCommandD546
@@ -633,84 +533,8 @@ struct hkpShapeRayCastOutputD546
     }
 };
 
-struct hkpShapeRayBundleCastOutputD546
-{
-
-    hkpShapeRayCastOutputD546 m_akRayOutputs[4];
-};
-
-struct hkpShapeRayBundleCastInputD546;
-
-struct hkpShapeContainerD546
-{
-    void* m_ppVirtualMethodTable;
-};
-
-struct hkpShapeD546
-{
-    void* m_ppVirtualMethodTable;
-    int m_usMemSizeAndFlags;
-    int m_ulUserData;
-    int m_type;
-};
-
-struct hkpShapeCollectionD546 : public hkpShapeD546, public hkpShapeContainerD546
-{
-};
-
-struct hkpMoppCodeD546
-{
-    void* m_ppVirtualMethodTable;
-    int m_usMemSizeAndFlags;
-    int m_08;
-    int m_0c;
-    hkVector4D546 m_offset;
-    unsigned char* m_data;
-    int m_iElementCount;
-    int m_iCapacityState;
-    unsigned char m_eBuildType;
-};
-
-struct hkpMoppRayBundleVirtualMachineD546
-{
-    int m_00, m_04, m_08, m_0c, m_10, m_14, m_18, m_1c;
-    int m_20, m_24, m_28, m_2c, m_30, m_34, m_38, m_3c;
-    int m_40, m_44, m_48, m_4c, m_50, m_54, m_58, m_5c;
-    int m_60, m_64, m_68, m_6c, m_70, m_74, m_78, m_7c;
-    int m_80, m_84, m_88, m_8c, m_90, m_94, m_98, m_9c;
-    int m_a0, m_a4, m_a8, m_ac, m_b0, m_b4, m_b8, m_bc;
-    int m_c0, m_c4, m_c8, m_cc, m_d0, m_d4, m_d8, m_dc;
-    hkVector4ComparisonD546 FUN_00dd4870(const hkpShapeContainerD546* pkCollection, const hkpMoppCodeD546* pkCode,
-                                         const hkpShapeRayBundleCastInputD546& kInput,
-                                         hkpShapeRayBundleCastOutputD546& kResults,
-                                         const hkVector4ComparisonD546& kRayMask) throw();
-};
-
-class hkpMoppBvTreeShapeD546
-{
-  public:
-    void* m_ppVirtualMethodTable;
-    int m_usMemSizeAndFlags;
-    int m_ulUserData;
-    int m_type;
-    int m_uiUserData;
-    const hkpMoppCodeD546* m_pMoppCode;
-    unsigned char* m_pMoppData;
-    int m_uiMoppDataSize;
-    hkVector4D546 m_kMoppCodeInfo;
-    void* m_childVtable;
-    const hkpShapeD546* m_pContainedShape;
-    int m_iChildSize;
-    int m_3c;
-
-    hkVector4ComparisonD546 FUN_00d54610(const hkpShapeRayBundleCastInputD546& kInput,
-                                         hkpShapeRayBundleCastOutputD546& kResults,
-                                         const hkVector4ComparisonD546& kRayMask) const throw();
-};
-
 extern "C" unsigned __int64 __rdtsc();
 extern "C" void _ReadWriteBarrier();
-extern void* DAT_00fdf044;
 extern unsigned long DAT_0126835c;
 extern "C" const char str_010c41f8[];
 extern char str_010d0de4;
@@ -743,75 +567,6 @@ struct S00d54720_Info
         value = other.value;
         return *this;
     }
-};
-struct S00d54720_Code
-{
-    void* unk00;
-    void* unk04;
-    void* unk08;
-    void* unk0c;
-    S00d54720_Info info;
-    void* data;
-    int size;
-    int capacity;
-    volatile unsigned char flags;
-};
-struct S00d54720_CodeBuf
-{
-    void* unk00;
-    void* unk04;
-    void* unk08;
-    void* unk0c;
-    void* unk10;
-    void* unk14;
-    void* unk18;
-    void* unk1c;
-    void* unk20;
-    void* unk24;
-    void* unk28;
-    void* unk2c;
-    void* unk30;
-    void* unk34;
-    void* unk38;
-    void* unk3c;
-};
-struct S00d54720_Vm
-{
-    void* unk00;
-    void* unk04;
-    void* unk08;
-    void* unk0c;
-    void* unk10;
-    void* unk14;
-    void* unk18;
-    void* unk1c;
-    void* unk20;
-    void* unk24;
-    void* unk28;
-    void* unk2c;
-    void* unk30;
-    void* unk34;
-    void* unk38;
-    void* unk3c;
-    int unk40;
-    int unk44;
-    void* unk48;
-    void* unk4c;
-    void* unk50;
-    void* unk54;
-    void* unk58;
-    void* unk5c;
-    void* unk60;
-    void* unk64;
-    void* unk68;
-    void* unk6c;
-    void FUN_00dd2ed0(const void* code, const S00d54720_Code* info, const void* input, const S00d54720_Body* body,
-                      void* collector);
-};
-struct S00d54720_Frame
-{
-    S00d54720_Body body;
-    S00d54720_CodeBuf codePtrBuffer;
 };
 struct S00d54720_Container
 {
@@ -935,28 +690,11 @@ struct hkVector4D543
     }
 };
 
-struct hkAabbD543
-{
-    hkVector4D543 m_kMinimumCorner;
-    hkVector4D543 m_kMaximumCorner;
-};
-
 template <class T> struct hkArrayD543
 {
     T* m_data;
     int m_iElementCount;
     int m_iCapacityState;
-};
-
-class hkpMoppCodeD543;
-
-struct hkMoppObbVirtualMachineD543
-{
-    __declspec(noalias) void FUN_00dd1da0(const hkpMoppCodeD543* pkCode, const hkAabbD543& kAabb,
-                                          hkArrayD543<unsigned int>* pkHits);
-
-    unsigned int unk00, unk04, unk08, unk0C, unk10, unk14, unk18, unk1C, unk20, unk24, unk28, unk2C;
-    unsigned int unk30, unk34, unk38, unk3C;
 };
 
 class hkBaseObjectD543
@@ -972,36 +710,6 @@ class hkReferencedObjectD543 : public hkBaseObjectD543
 
     unsigned short m_usMemSizeAndFlags;
     short m_sReferenceCount;
-};
-
-class ShapeBaseD543 : public hkReferencedObjectD543
-{
-  public:
-    virtual ~ShapeBaseD543() throw();
-
-    unsigned long m_ulUserData;
-    unsigned int m_type;
-};
-
-class hkpBvTreeShapeD543 : public ShapeBaseD543
-{
-  public:
-    virtual ~hkpBvTreeShapeD543() throw();
-
-    unsigned char m_uiUserData;
-};
-
-class hkpMoppBvTreeShapeD543 : public hkpBvTreeShapeD543
-{
-  public:
-    virtual ~hkpMoppBvTreeShapeD543() throw();
-
-    void FUN_00d54380(const hkAabbD543& kAabbIn, hkArrayD543<unsigned int>& kHits) const;
-
-    const hkpMoppCodeD543* m_pMoppCode;
-    void* m_pMoppData;
-    unsigned int m_uiMoppDataSize;
-    hkVector4D543 m_kMoppCodeInfo;
 };
 
 }  // namespace fnv_00d54380

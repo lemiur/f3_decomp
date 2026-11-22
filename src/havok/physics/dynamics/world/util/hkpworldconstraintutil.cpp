@@ -629,16 +629,6 @@ struct Constraint
     unsigned int uid;
     void FUN_00c90510();
 };
-void FUN_00cb5570(void*, Entity*, Entity*);
-unsigned char FUN_00d22120(Atom*, ConstraintInfo*, unsigned char*);
 extern unsigned short DAT_010cb7a8[];
-struct MemoryRouter
-{
-    unsigned int unk00, unk04, unk08, unk0c;
-    void* heap;
-};
-MemoryRouter* FUN_00c85750();
-void FUN_00c908c0(void*, ByteArray*, int, int);
-void ResizeAudioStream(void*, ConstraintArray*, int);
 void FUN_00cb1270(void*, const void*, int);
 }  // namespace fnv_00d27ac0

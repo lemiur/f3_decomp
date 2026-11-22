@@ -7,10 +7,6 @@ struct Target
 {
     void* volatile vptr;
 };
-struct Thunk
-{
-    void InvokeVirtualSlot15(int, int, int, int, int);
-};
 typedef void(__thiscall* VirtualTarget)(Target*, int, int, int, int, int);
 
 struct Owner
@@ -37,7 +33,6 @@ void Interface::ForwardToOwner(unsigned int a, unsigned int b, unsigned int c, f
 }
 
 namespace fnv_00ddca90 {
-extern int g_callbackContext;
 struct Target
 {
     virtual void f00();
@@ -54,15 +49,6 @@ struct Target
     virtual void f2c();
     virtual int invoke(int, int, int, int, int);
 };
-struct Adapter
-{
-    int InvokeTarget(int, int, int, int, int);
-};
-struct AdapterHeader
-{
-    Target* target;
-    unsigned int flags;
-};
 }  // namespace fnv_00ddca90
 
 extern char DAT_010d7ed0;
@@ -70,7 +56,6 @@ extern char DAT_010d7eb0;
 extern char DAT_010d7e5c;
 extern char DAT_010d7cfc;
 extern char DAT_010d1508;
-extern char DAT_0102e388;
 class ProcessManager
 {
   public:
@@ -147,22 +132,6 @@ struct S_00ddcb90_RefObj
     }
     void operator delete(void*)
     {}
-};
-
-struct S_00ddcb90_Base2
-{
-    virtual void v0();
-};
-
-struct S_00ddcb90_Obj : S_00ddcb90_RefObj, S_00ddcb90_Base2
-{
-    int unkC;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    S_00ddcb90_Obj() throw();
 };
 
 namespace fnv_00ddcbe0 {
@@ -258,75 +227,12 @@ int S_00ddc960_cls::ForwardToTarget(int aiArg1, int aiArg2, unsigned int c)
 // The forwarder returns what the delegate returns, which is what makes the
 // call a tail jump.
 
-// Stand-in for the object the delegate points at.  The eleventh virtual is
-// the one the forwarder calls; the ones before it only pad the vtable.
-struct Sink
-{
-    virtual void f0();
-    virtual void f1();
-    virtual void f2();
-    virtual void f3();
-    virtual void f4();
-    virtual void f5();
-    virtual void f6();
-    virtual void f7();
-    virtual void f8();
-    virtual void f9();
-    virtual Sink* f10(int, int, int, int, int, int);
-};
-
 // The global the sixth argument is replaced with (uninitialised, so it
 // lives in .bss just like the original one at 0x1269cdc).
 int g_1269cdc;
 
-// Primary base of the forwarding object: the delegate plus padding, so
-// that the secondary base below starts eight bytes into the object.
-struct ForwarderBase
-{
-    Sink* m_delegate;
-    int unk04;
-};
-
-// Secondary base: the interface that carries the forwarding virtual.
-struct ForwarderInterface
-{
-    virtual Sink* ForwardToDelegate(int, int, int, int, int, int);
-};
-
-struct Forwarder : public ForwarderBase, public ForwarderInterface
-{
-};
-
 // FUN_00ddcad0: thiscall forwarder. The owner pointer lives 8 bytes before this;
 // the single stack argument is forwarded to the owner's vtable slot 0x40 via a tail jump.
-
-class FUN_00ddcad0_owner
-{
-  public:
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual void v0c();
-    virtual void v10();
-    virtual void v14();
-    virtual void v18();
-    virtual void v1c();
-    virtual void v20();
-    virtual void v24();
-    virtual void v28();
-    virtual void v2c();
-    virtual void v30();
-    virtual void v34();
-    virtual void v38();
-    virtual void v3c();
-    virtual void v40(int a);
-};
-
-class FUN_00ddcad0_cls
-{
-  public:
-    void FUN_00ddcad0(int a);
-};
 
 struct S_00ddc8e0_Owner
 {
@@ -504,12 +410,6 @@ struct FNVHolder
     FNVTarget* m_target;
 };
 
-class FUN_00ddc940_cls
-{
-  public:
-    void FUN_00ddc940(int a, int b, int c, unsigned int d);
-};
-
 }  // namespace fnv_00ddc940
 
 namespace fnv_00ddc980 {
@@ -624,28 +524,6 @@ void FUN_00ddca30_cls::FUN_00ddca30(int aiArg1, int aiArg2, int aiArg3, int aiAr
 }
 }  // namespace fnv_00ddca30
 
-struct VirtualReceiver
-{
-    virtual int method0(int, int, int);
-    virtual int method1(int, int, int);
-    virtual int method2(int, int, int);
-    virtual int method3(int, int, int);
-    virtual int method4(int, int, int);
-    virtual int method5(int, int, int);
-    virtual int method6(int, int, int);
-    virtual int method7(int, int, int);
-    virtual int method8(int, int, int);
-    virtual int method9(int, int, int);
-    virtual int method10(int, int, int);
-    virtual int method11(int, int, int);
-    virtual int method12(int, int, int);
-    virtual int method13(int, int, int);
-};
-struct WrapperObject
-{
-    int __thiscall FUN_00ddcab0(int first, int second, int third);
-};
-
 namespace fnv_00ddcaf0 {
 extern char DAT_010d1508[];
 extern char DAT_010d7cfc[];
@@ -699,40 +577,12 @@ FUN_00ddcaf0_cls* FUN_00ddcaf0_cls::FUN_00ddcaf0()
 }  // namespace fnv_00ddcaf0
 
 namespace fnv_00ddcbc0 {
-void* __cdecl FUN_00ddcb90();
 
-struct S_00ddcbc0_Factory
-{
-    void* FUN_00dd9380(const char* name, void*(__cdecl* createFn)());
-};
-
-extern "C" S_00ddcbc0_Factory* DAT_01269cd0;
 extern "C" void* DAT_01269cdc;
 
 }  // namespace fnv_00ddcbc0
 
 template <class T> class HavokElementArray;
-class hkVector4;
-class hkQsTransform;
-
-struct BehaviorReceiver : TargetIface
-{
-    virtual void vslot4();
-    virtual void vslot5();
-    virtual void vslot6();
-    virtual int DisplayBehaviorGraph(const HavokElementArray<int>& words, const HavokElementArray<int>& values,
-                                     const HavokElementArray<int>& quads, const HavokElementArray<hkVector4>& vectors,
-                                     const HavokElementArray<char*>& nodes, const HavokElementArray<int>& states,
-                                     const HavokElementArray<int>& transitions, const HavokElementArray<hkQsTransform>& poses);
-};
-
-struct BehaviorForwarder
-{
-    int FUN_00ddca00(const HavokElementArray<int>& words, const HavokElementArray<int>& values, const HavokElementArray<int>& quads,
-                     const HavokElementArray<hkVector4>& vectors, const HavokElementArray<char*>& nodes,
-                     const HavokElementArray<int>& states, const HavokElementArray<int>& transitions,
-                     const HavokElementArray<hkQsTransform>& poses);
-};
 
 struct TextReceiver : TargetIface
 {
@@ -764,31 +614,3 @@ int TextEntry::FUN_00ddca70(const char* text, int color, int id, int tag)
     TextReceiver* receiver = static_cast<TextReceiver*>(owner.m_target);
     return receiver->displayText(text, color, id, g_01269cdc);
 }
-
-struct ImmediateReceiver : TargetIface
-{
-    virtual void slot4();
-    virtual void slot5();
-    virtual void slot6();
-    virtual void slot7();
-    virtual void slot8();
-    virtual void slot9();
-    virtual void slot10();
-    virtual void slot11();
-    virtual void slot12();
-    virtual void slot13();
-    virtual void slot14();
-    virtual void slot15();
-    virtual void slot16();
-    virtual int GetTypeItem();
-};
-
-struct ImmediateForwarder
-{
-    int FUN_00ddcae0();
-};
-
-struct ImmediateOwner : OwnerHolder
-{
-    ImmediateForwarder m_interface;
-};

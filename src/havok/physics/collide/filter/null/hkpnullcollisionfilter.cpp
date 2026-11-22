@@ -4,22 +4,6 @@
 
 #include "havok/hkpNullCollisionFilter.h"
 
-extern int DAT_0102e388;
-extern int DAT_010c3b80;
-extern int DAT_010c3b8c;
-extern int DAT_010c3b98;
-extern int DAT_010c3bac;
-
-struct FUN_00cfa860
-{
-    int a;
-    int b;
-    int c;
-    int d;
-    int e;
-    ~FUN_00cfa860();
-};
-
 extern "C" unsigned __int64 __rdtsc(void);
 #include <xmmintrin.h>
 struct __declspec(align(16)) S_00cfab30_vec
@@ -115,11 +99,8 @@ struct S_00cfab30_this
     void __thiscall RecordAndDispatch(S_00cfab30_object*, S_00cfab30_arg*, void*, void*, void*, void*);
 };
 
-extern int DAT_0126835c;
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long);
 extern "C" void _ReadWriteBarrier(void);
-extern const char str_010cc668[];
-extern const char str_010c41f8[];
 
 // Records a start timestamp, stores arguments into fields, invokes target_call on arg08 with a local struct, then records an end timestamp.
 // @f3 0x00984970 (community match, verified in this file)

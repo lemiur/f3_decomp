@@ -28,13 +28,6 @@ struct FUN_00d605d0_Class
     void WriteInt(unsigned int value);
     const char* ForwardValueToObject(unsigned int* value);
 };
-struct Record
-{
-    int unk00;
-    FUN_00d605d0_Class* config;
-    void* criticalSection;
-    bool SetConfigValues(unsigned int a, unsigned int b, unsigned int c, int d, unsigned int e);
-};
 
 struct FUN_00dd9ab0_cls
 {
@@ -218,45 +211,11 @@ int DD9D70ComputeSize(const DD9D70StringArray* a, const DD9D70StringArray* b)
 extern "C" __declspec(dllimport) void __stdcall _fnv_EnterCriticalSection(void* section);
 extern "C" __declspec(dllimport) void __stdcall _fnv_LeaveCriticalSection(void* section);
 
-class ConfigStub
-{
-  public:
-    void WriteShape(unsigned int value);
-};
-
-struct ItemList
-{
-    unsigned int* m_pItems;
-    int m_iArrayLength;
-};
-
-class FUN_00dd9da0_cls
-{
-  public:
-    int unk00;
-    int unk04;
-    int unk08;
-    FUN_00d605d0_Class* m_pConfig;
-    void* m_pUserData;
-
-    void ApplyItemList(ItemList* pList);
-};
-
 extern int DAT_010d7cfc;
 void __cdecl _Deallocate(void*);
 
 extern "C" __declspec(dllimport) void __stdcall _fnv_EnterCriticalSection(void* section);
 extern "C" __declspec(dllimport) void __stdcall _fnv_LeaveCriticalSection(void* section);
-
-struct ParentRec
-{
-    void ApplyItemList(unsigned int value);
-};
-
-struct ConfigAux
-{
-    void WriteTransform(unsigned int value);
-};
 
 unsigned int FUN_00dd9d70();
 
@@ -353,45 +312,9 @@ done:
     return !ok;
 }
 
-struct FUN_00d605d0_ext
-{
-    void FUN_00d607b0(unsigned int a, unsigned int len);
-    void WriteUInt16(unsigned int len);
-};
-
 int FUN_00cb10d0(unsigned int value);
 
-struct FUN_00dda0e0_cls
-{
-    int unk00;
-    FUN_00d605d0_Class* config;
-    void* criticalSection;
-    int FUN_00dda0e0(unsigned int a, unsigned int b, int c, unsigned int d);
-};
-
 int __cdecl FUN_00cb10d0(const char* text);
-
-struct FUN_00d605d0_ext_cls
-{
-    void WriteUInt16(unsigned int value);
-    void FUN_00d607b0(const char* text, unsigned int length);
-    void HashUInt(float value);
-};
-
-struct FUN_00dda1a0_cls
-{
-    int unk00;
-    FUN_00d605d0_Class* config;
-    void* criticalSection;
-
-    bool WriteConfigEntry(const char* name, const float* vec, unsigned int a, int b, unsigned int c);
-};
-
-struct FUN_00dda290_ext
-{
-    void FUN_00d607b0(unsigned int a, unsigned int len);
-    void WriteUInt16(unsigned int len);
-};
 
 int FUN_00cb10d0(unsigned int value);
 
@@ -455,10 +378,6 @@ int FUN_00dda290_cls::WriteConfigValue(unsigned int a, int aiValue, unsigned int
 
 #include <xmmintrin.h>
 #include <windows.h>
-struct DD97E0Vector4
-{
-    __m128 m_vComponents;
-};
 
 struct __declspec(align(16)) DD97E0Point
 {
@@ -597,22 +516,6 @@ struct S_00dd98c0_Bool
     S_00dd98c0_Bool()
     {}
 };
-struct S_00dd98c0_Target
-{
-    void FUN_00d60960(int a);
-    void FUN_00d605d0(int a);
-    void WriteTransform(int a);
-    void FUN_00d609a0(int a, int b);
-    void WriteInt(int a);
-    S_00dd98c0_Bool ForwardValueToObject();
-};
-struct S_00dd98c0
-{
-    int unk0;
-    S_00dd98c0_Target* unk4;
-    CRITICAL_SECTION* unk8;
-    S_00dd98c0_Result WriteValue(int a1, int a2, int a3);
-};
 
 struct DD9950Bool
 {
@@ -707,17 +610,6 @@ struct DD99D0Bool
     }
 };
 
-struct DD99D0OStream
-{
-    void writeUint32(unsigned int value);
-    void writeCommand(unsigned int value);
-    void writeVector(const void* v);
-    void writeFloat(float value);
-    void writeInt32(int value);
-    void WriteByteArray(const char* data, int length);
-    DD99D0Bool IsStreamValid();
-};
-
 struct DD99D0CriticalSection
 {
     CRITICAL_SECTION m_kCriticalSection;
@@ -734,21 +626,7 @@ struct DD99D0CriticalSection
 
 extern "C" int __cdecl FUN_00cb10d0(const char* str);
 
-struct DD99D0DisplayHandler
-{
-    int unk00;
-    DD99D0OStream* m_pDisplayStream;
-    DD99D0CriticalSection* m_pSynchronizationLock;
-
-    int WriteDisplayCommand(const void* a, const void* b, const void* c, float x, float y, float z, const char* text);
-};
-
 }  // namespace fnv_00dd99d0
-
-struct DD9FE0Vector4
-{
-    __m128 m_vComponents;
-};
 
 struct __declspec(align(16)) DD9FE0Point
 {
@@ -768,16 +646,6 @@ struct DD9FE0Bool
     }
 };
 
-struct DD9FE0OStream
-{
-    void writeCommand(unsigned int value);
-    void writeCount(unsigned int value);
-    void writeVector(const DD9FE0Point& v);
-    void writeUint64(unsigned __int64 value);
-    void writeTag(int value);
-    DD9FE0Bool IsStreamValid();
-};
-
 struct DD9FE0CriticalSection
 {
     CRITICAL_SECTION m_kCriticalSection;
@@ -790,16 +658,6 @@ struct DD9FE0CriticalSection
     {
         LeaveCriticalSection(&m_kCriticalSection);
     }
-};
-
-struct DD9FE0DisplayHandler
-{
-    int unk00;
-    DD9FE0OStream* m_pDisplayStream;
-    DD9FE0CriticalSection* m_pSynchronizationLock;
-
-    int WriteTriangle(const DD9FE0Vector4& a, const DD9FE0Vector4& b, const DD9FE0Vector4& c, unsigned int color,
-                      int id, int tag);
 };
 
 struct Vec4_dda340
@@ -816,15 +674,6 @@ struct __declspec(align(16)) Transform_dda340
     Vec4_dda340 rotation1;
     Vec4_dda340 rotation2;
     Vec4_dda340 translation;
-};
-
-struct QsTransform_dda340
-{
-    Vec4_dda340 translation;
-    Vec4_dda340 rotation;
-    Vec4_dda340 scale;
-
-    void FUN_00ce5300(Transform_dda340* out);
 };
 
 struct MemoryAllocator_dda340
@@ -886,45 +735,6 @@ class Array_dda340
         }
         m_data[m_iElementCount++] = val;
     }
-};
-
-struct Config_dda340 : public FUN_00d605d0_Class
-{
-    void WriteUInt16(unsigned int value);
-    void FUN_00d607b0(const char* text, unsigned int length);
-    void WriteTransform(const Transform_dda340* t);
-};
-
-struct Writer_dda340
-{
-    int unk00;
-    Config_dda340* config;
-    void* criticalSection;
-
-    bool Write(const ArrayRef_dda340<unsigned int>& a1, const ArrayRef_dda340<unsigned int>& a2,
-               const ArrayRef_dda340<unsigned int>& a3, const ArrayRef_dda340<Vec4_dda340>& a4,
-               const ArrayRef_dda340<const char*>& a5, const ArrayRef_dda340<unsigned int>& a6,
-               const ArrayRef_dda340<unsigned int>& a7, const ArrayRef_dda340<QsTransform_dda340>& a8);
-};
-
-// FUN_00dda650 : MSVC this-adjusting thunk  (sub ecx, 0x08 ; jmp <impl>)
-struct A1_00dda650
-{
-    A1_00dda650();
-    virtual void FUN_00dda650();
-    char pad[0x04];
-};
-struct A2_00dda650
-{
-    A2_00dda650();
-    virtual void FUN_00dda650();
-};
-struct Own_00dda650 : A1_00dda650, A2_00dda650
-{
-    Own_00dda650();
-    virtual void key_fn();
-// @fnv 0x00dda650
-    void FUN_00dda650();
 };
 
 namespace fnv_00dda660 {

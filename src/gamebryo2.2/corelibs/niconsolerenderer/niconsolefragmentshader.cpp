@@ -68,29 +68,6 @@ char FUN_00e8d230_shell::EnsureInitialized(int arg)
     return result;
 }
 
-extern char const* const g_01270918_arg1;
-
-extern int DAT_010efeb4;
-
-struct MemoryManager
-{
-    void* __thiscall _DeallocateAlias(void* p);
-};
-extern MemoryManager g_memoryManager;
-
-struct NiShaderInstanceDescriptor
-{
-    void* m_p;
-    void* __thiscall FUN_00e8d370(unsigned int mode);
-};
-
-extern "C" void* g_01270918;
-
-struct GlobalObjectO2_00a7b610
-{
-};
-extern GlobalObjectO2_00a7b610 g_0126f9d8;
-
 struct NodePoolView
 {
     void* __thiscall AddHead(void);
@@ -168,14 +145,7 @@ void __cdecl DispatchByIndex(void* a1, unsigned int auiArg2, unsigned int auiArg
     DAT_0126f738[*(int*)((char*)a1 + 0x134)]((char*)a1 + 0xF4, (char*)a1 + 0x118, auiArg2, auiArg3, auiArg4);
 }
 
-extern int EmptyFS;
 extern "C" __declspec(dllimport) long __stdcall InterlockedDecrement(long volatile*);
-struct NiFragmentShaderInstanceDescriptor
-{
-    int _vtbl;
-    void* m_pDescriptorData;
-    void* __thiscall FUN_00e8d540(unsigned int);
-};
 
 struct NiRefObject;
 struct BSShaderBloodSplatter
@@ -209,48 +179,6 @@ bool __stdcall ProcessShaderParam(unsigned int a1, FUN_00e8d5f0_Param* pParam, v
     }
     return true;
 }
-
-struct Rec24
-{
-    char pad[0x24];
-    unsigned short m24;
-};
-
-struct IShaderVt
-{
-    virtual void v0();
-    virtual void v1();
-    virtual void v2();
-    virtual void v3();
-    virtual void v4();
-    virtual void v5();
-    virtual void v6();
-    virtual void v7();
-    virtual void v8();
-    virtual void v9();
-    virtual void v10();
-    virtual int v11(unsigned short a);
-};
-
-struct Obj18
-{
-    void FUN_00e6fe30(unsigned int a, unsigned int b, unsigned int c, unsigned int d, unsigned int e);
-    void FUN_00e6fbb0(unsigned int a, unsigned int b);
-};
-
-struct FragHost
-{
-    char pad0[0x18];
-    Obj18* m18;
-    IShaderVt* m1c;
-    char pad1[0x18];
-    int m38;
-
-    int FUN_00e807d0(unsigned int a, unsigned int b, unsigned int c, unsigned int d, unsigned int e, unsigned int f,
-                     unsigned int g, unsigned int h);
-    int FUN_00e8d260(unsigned int p1, unsigned int p2, Rec24* p3, unsigned int p4, unsigned int p5, unsigned int p6,
-                     unsigned int p7, unsigned int p8);
-};
 
 struct FUN_00e8d3a0_sub
 {
@@ -347,20 +275,6 @@ struct SubObj_e8db90
     {}
 };
 
-struct BaseObj_e8db90
-{
-    BaseObj_e8db90();
-    virtual void unk00();
-    unsigned int m_04;
-    unsigned int m_08;
-    unsigned int m_0c;
-    unsigned int m_10;
-    unsigned int m_14;
-    unsigned int m_18;
-    unsigned int m_1c;
-    unsigned int m_20;
-};
-
 struct FieldsMid_e8db90
 {
     unsigned char m_24;
@@ -383,15 +297,6 @@ struct FieldsMid_e8db90
         m_38 = 0;
     }
 };
-
-struct FUN_00e8db90 : BaseObj_e8db90, FieldsMid_e8db90
-{
-    virtual void unk00();
-    SubObj_e8db90 m_3c;
-    FUN_00e8db90(unsigned int a);
-};
-
-unsigned int __stdcall FUN_00e805b0(void* a, void* b, void* c, void* d, void* e, void* f, void* g);
 
 void __cdecl FUN_00e811d0();
 // @fnv 0x00e8d2e0
@@ -520,15 +425,6 @@ NiD3DShaderConstantMap* __stdcall GetOrCreateShaderConstantMap(unsigned int auiS
     return pkMap;
 }
 
-struct ShaderStandIn
-{
-    unsigned int __thiscall FUN_00e81170(void*, void*, void*, void*, void*, void*, void*);
-};
-struct FUN_00bd16e0_shell : ShaderStandIn
-{
-    unsigned int __thiscall FUN_00bd16e0(void* a, void* b, void* c, void* d, void* e, void* f, void* g);
-};
-
 // Object cached in BSShaderBloodSplatter+0x30; receives SetNodeValue / RemoveNodeByKey as this.
 struct BloodMap
 {
@@ -624,37 +520,7 @@ bool __stdcall SetBloodSplatter(unsigned int auiShaderType, bool abEnabled, bool
     return true;
 }
 
-extern unsigned int DAT_010eff44;
-extern void* DAT_0109b220;
 void operator delete(void* pvObject, unsigned int uiSize);
-
-struct ShaderObj
-{
-    volatile unsigned int m_vft0;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0c;
-    unsigned int unk10;
-    unsigned int unk14;
-    unsigned int unk18;
-    unsigned int unk1c;
-    unsigned int unk20;
-    unsigned int unk24;
-    unsigned int unk28;
-    unsigned int unk2c;
-    unsigned int unk30;
-    unsigned int unk34;
-    unsigned int unk38;
-    unsigned int m_vft3c;
-    void* volatile m_40;
-    unsigned int unk44;
-    unsigned int unk48;
-    unsigned int unk4c;
-    unsigned int unk50;
-
-    void FUN_00e806c0();
-    ShaderObj* Release(unsigned int uiFlags);
-};
 
 class ShaderConstantEntryE8D
 {
@@ -860,7 +726,6 @@ void ShaderView::FUN_00e8dc30(void* a, void* b, void* c, ShaderGeometry* geometr
     ShaderBaseView::FUN_00a8f3e0(a, b, c, geometry, e, f, g);
 }
 
-extern "C" void _ReadWriteBarrier();
 struct BinaryDataRecord
 {
     unsigned int field00;

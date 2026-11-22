@@ -56,24 +56,6 @@ void hkMalleableConstraintData::SetContactNormal(int index)
 }
 
 
-struct ConstraintDataVTable
-{
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual void v0c();
-    virtual void v10();
-    virtual void v14();
-    virtual void v18();
-    virtual void v1c(int);
-};
-struct MalleableConstraintDataStandIn
-{
-    int m_auiShapeKeys[3];
-    ConstraintDataVTable* m_pConstraintData;
-    int FUN_00cdf690(int a);
-};
-
 // @fnv 0x00cdf6b0
 int FUN_00cdf6b0()
 {
@@ -146,38 +128,6 @@ void FUN_00cdf620_cls::DispatchArg(FUN_00cdf620_Arg* argument) {
     argument->m_iElementCount = 12;
 }
 
-
-struct hkPairCDF6
-{
-    int m_pHeadNode;
-    int m_iSecondInteger;
-};
-
-class hkInnerCDF6
-{
-  public:
-    virtual void V0();
-    virtual void V1();
-    virtual void V2();
-    virtual void V3();
-    virtual void V4();
-    virtual void V5();
-    virtual void V6();
-    virtual void V7();
-    virtual void V8();
-    virtual int forward(hkPairCDF6 kPair);
-};
-
-class hkOuterCDF6
-{
-  public:
-    int unk00;
-    int unk04;
-    int unk08;
-    hkInnerCDF6* m_inner;
-
-    int ForwardToInner(hkPairCDF6 kPair);
-};
 
 // Forwards the pair to m_inner's virtual forward and returns its result.
 // @f3 0x00652db0 (community match, verified in this file)
@@ -374,19 +324,3 @@ void Cdf7c0Self::FUN_00cdf7c0(const Cdf7c0Buf& src, int param2)
         FUN_00d6f460(info.unk10, info.unk14, (Cdf7c0Buf*)&buf, param2);
     }
 }
-
-
-class hkObjectCDF6
-{
-  public:
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    float m_uiFilterValue;
-
-    void FUN_00cdf670(float fValue);
-};

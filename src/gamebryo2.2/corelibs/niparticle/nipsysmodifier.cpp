@@ -65,8 +65,6 @@ void NiPSysModifier_shell::FUN_00c31640(NiParticleSystem* pkTarget)
     m_pkTarget = pkTarget;
 }
 
-extern const char* const g_01202528_arg1;
-
 bool __stdcall IsSameAs(NiObject* pkObject);
 struct MyIsEqual : NiPSysModifier
 {
@@ -178,20 +176,8 @@ void ParticleModifierBinary::FUN_00c31950(OutputStream& stream)
 }
 
 extern "C" char* DAT_0109b220;
-extern "C" int DAT_010c09cc;
 extern "C" void(__stdcall* DAT_00fdf1c0)(char*);
 extern "C" void(__stdcall* DAT_00fdf1c4)(char*);
-struct ParticleModifier
-{
-    void* vtable;
-    unsigned int referenceCount;
-    char* name;
-    unsigned int order;
-    void* target;
-    bool active;
-    void __thiscall FUN_00a5d3a0();
-    ParticleModifier* __thiscall FUN_00c316a0(char* volatile* newName, unsigned int newOrder);
-};
 
 struct StrArr
 {
@@ -211,12 +197,6 @@ struct StrArr
         SetAt(uiIndex, pElement);
     }
 };
-void __stdcall AppendCameraPathEntries(StrArr* apViewerStrings);
-char* __cdecl FUN_00a7d330(const char* pcText);
-char* __cdecl FUN_00a7d5e0(const char* pcPrefix, const char* pcValue);
-char* __cdecl FUN_00a7d510(const char* pcPrefix, unsigned int uiValue);
-char* __cdecl FUN_00a7d370(const char* pcPrefix, bool bValue);
-extern const char g_011d4e34_arg1[];
 
 struct FUN_00c319e0_cls : ParticleModifierBinary
 {

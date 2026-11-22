@@ -18,8 +18,6 @@ union __declspec(intrin_type) __declspec(align(16)) __m128 { float m128_f32[4]; 
 extern "C" __m128 _mm_sub_ps(__m128, __m128);
 extern "C" __m128 _mm_mul_ps(__m128, __m128);
 extern "C" __m128 _mm_add_ss(__m128, __m128);
-extern "C" __m128 _mm_sub_ss(__m128, __m128);
-extern "C" __m128 _mm_mul_ss(__m128, __m128);
 extern "C" __m128 _mm_shuffle_ps(__m128, __m128, unsigned int);
 extern "C" int _mm_movemask_ps(__m128);
 
@@ -83,22 +81,8 @@ extern "C" void __cdecl FUN_00e5d010(int first,int second,int third)
 }
 
 #include <math.h>
-extern "C" __m128 _mm_xor_ps(__m128,__m128);
 extern "C" __m128 _mm_and_ps(__m128,__m128);
-extern "C" __m128 _mm_andnot_ps(__m128,__m128);
-extern "C" __m128 _mm_or_ps(__m128,__m128);
-extern "C" __m128 _mm_move_ss(__m128,__m128);
-extern "C" __m128 _mm_movelh_ps(__m128,__m128);
-extern "C" __m128 _mm_movehl_ps(__m128,__m128);
-extern "C" __m128 _mm_unpacklo_ps(__m128,__m128);
-extern "C" __m128 _mm_unpackhi_ps(__m128,__m128);
-extern "C" __m128 _mm_set_ps(float,float,float,float);
-extern "C" __m128 _mm_setr_ps(float,float,float,float);
-extern "C" __m128 _mm_set_ps1(float);
-extern "C" __m128 _mm_set_ss(float);
 extern "C" void _ReadWriteBarrier();
-extern "C" void _ReadBarrier();
-extern "C" void _WriteBarrier();
 extern "C" void _mm_store_ss(float*,__m128);
 
 
@@ -106,14 +90,8 @@ extern "C" __m128 _mm_setzero_ps(void);
 extern "C" __m128 _mm_mul_ps(__m128, __m128);
 extern "C" __m128 _mm_add_ps(__m128, __m128);
 extern "C" __m128 _mm_shuffle_ps(__m128, __m128, unsigned int);
-extern "C" float _mm_cvtss_f32(__m128);
-
 
 extern "C" __m128 _mm_sub_ps(__m128, __m128);
-
-struct hkQuatStore_e52d90 { __m128 m_vec; };
-
-struct Shorts_e52d90 { short a; short b; short c; };
 
 extern "C" void _ReadWriteBarrier();
 static __forceinline int readPacked(const unsigned char* q) {int a=q[0]; int b=q[1]; int c=q[2]; return ((a<<8)+b<<8)+c;}
@@ -145,23 +123,11 @@ struct V4 { union { __m128 m; float f[4]; };
 struct F8 { V4 lower, upper; };
 struct BoundsRef { F8* p; F8* operator->() const { return p; } operator F8*() const { return p; } }; 
 struct Vec { int* base; int count; int cap; };
-struct Resource { int unk00, unk04, unk08, unk0c; void* allocator; };
 extern void* FUN_00c85750();
 extern void ResizeAudioStream(void* a, void* b, int c);
 static const __declspec(align(16)) unsigned int AbsMask[4] = { 0x7fffffff, 0x7fffffff, 0x7fffffff, 0x7fffffff };
 
 
-struct Diagnostic {
-  int unk00, unk04, unk08;
-  void FUN_00cb1600(char*, int);
-  void FUN_00cc01c0(const char*);
-  void FUN_00cc00e0();
-};
-struct ErrorReporter {
-  virtual void ReportDiagnostic(); virtual void unused1(); virtual void unused2();
-  virtual int report(int, unsigned int, const char*, const char*, int);
-};
-extern int DAT_01268360;
 struct Query {
   void FUN_00e65ee0(P1*, unsigned char*);
   __forceinline int classify(P1* state, unsigned char* stream, int offset, F8* bounds) {
@@ -256,7 +222,6 @@ extern "C" __m128 _mm_shuffle_ps(__m128, __m128, unsigned int);
 extern "C" __m128 _mm_setzero_ps();
 extern "C" __m128 _mm_cmplt_ps(__m128, __m128);
 extern "C" int _mm_movemask_ps(__m128);
-extern "C" void __debugbreak();
 struct IntegerOrigin { int x,y,z; int& operator[](int i) { return (&x)[i]; }
     int volatileAt(int i) const { return reinterpret_cast<const volatile int*>(&x)[i]; } };
 struct DecodeState {
@@ -269,14 +234,6 @@ struct __declspec(align(16)) BoundsPair { __m128 minimum; __m128 maximum;
 struct OutputArray { int* data; int size; int capacity; };
 struct AllocatorContext { int unk00; int unk04; int unk08; int unk0C; void* allocator; };
 void ResizeAudioStream(void*, void*, int);
-struct DiagnosticStream {
-    void* vtable; int flags; void* writer;
-    void FUN_00cb1600(void*, int);
-    void FUN_00cc01c0(const char*);
-    void FUN_00cc00e0();
-};
-extern const char str_010d5100[];
-extern const char str_010ecd88[];
 struct __declspec(align(16)) PlanePacket { __m128 x,y,z,w; };
 struct CullMachine {
     int unk00; int unk04; int unk08; int unk0C; int count; int unk14; int unk18; int unk1C;
@@ -382,7 +339,3 @@ struct TreeDecoder {
 };
 
 extern "C" __m128 _mm_and_ps(__m128, __m128);
-
-extern const __m128 DAT_01017d10;
-
-struct hkQuatStore_e52190 { __m128 m_vec; };

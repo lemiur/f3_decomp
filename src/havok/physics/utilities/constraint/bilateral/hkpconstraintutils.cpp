@@ -49,20 +49,6 @@ struct hkBool
     }
 };
 
-struct Block5
-{
-    int unk00, unk04, unk08, unk0c, unk10;
-};
-
-struct Block5b
-{
-    int unk00;
-    unsigned short unk04;
-    unsigned char unk06;
-    unsigned char unk07;
-    int unk08, unk0c, unk10;
-};
-
 struct hkRefObj
 {
     void* m_vtbl;
@@ -77,21 +63,6 @@ struct CloneDataBase : hkRefObj
     int unk08, unk0c;
     int unk10, unk14, unk18, unk1c;
     __m128 unk20, unk30, unk40, unk50, unk60, unk70;
-};
-
-struct CloneDataA : CloneDataBase
-{
-    Block5 unk80;
-    Block5b unk94;
-    Block5 unka8;
-    CloneDataA* FUN_00d4f2a0();
-    void FUN_00d4f270(hkBool flag);
-};
-
-struct CloneDataB : CloneDataBase
-{
-    Block5 unk80;
-    CloneDataB* FUN_00d52fc0();
 };
 
 struct SourceDataHeader
@@ -114,21 +85,6 @@ struct SourceDataHeader
 struct SourceData : SourceDataHeader
 {
     __m128 unk20, unk30, unk40, unk50, unk60, unk70, unk80;
-};
-
-struct SourceDataB : SourceData
-{
-    int unk90, unk94, unk98, unk9c, unka0, unka4, unka8, unkac, unkb0, unkb4, unkb8, unkbc;
-    Block5 unkc0;
-};
-
-struct SourceDataA : SourceData
-{
-    int unk90, unk94, unk98, unk9c, unka0, unka4, unka8, unkac, unkb0, unkb4, unkb8, unkbc, unkc0, unkc4, unkc8, unkcc,
-        unkd0, unkd4, unkd8, unkdc, unke0, unke4, unke8, unkec, unkf0, unkf4, unkf8;
-    Block5 unkfc;
-    Block5b unk110;
-    Block5 unk124;
 };
 
 struct Instance;
@@ -348,56 +304,7 @@ class FnvSink
 
 extern FnvSink* DAT_01268360;
 
-class MsgWriter
-{
-  public:
-    void Init(char* buf, unsigned int cap) throw();
-    void Append(const char* s) throw();
-    void Finish() throw();
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-};
-
-class FnvInner
-{
-  public:
-    virtual void v00() throw();
-    virtual void v04() throw();
-    virtual void v08() throw();
-    virtual void v0C() throw();
-    virtual void v10() throw();
-    virtual void v14() throw();
-    virtual void v18() throw();
-    virtual void v1C() throw();
-    virtual unsigned int GetKind() throw();
-
-    char unk04[0x0c];
-    __m128 m_20;
-    __m128 m_30;
-    char unk40[0x10];
-    __m128 m_50;
-    char unk60[0x30];
-    __m128 m_90;
-};
-
-class FnvHolder
-{
-  public:
-    char unk00[0x0c];
-    FnvInner* m_0c;
-};
-
 namespace fnv_00e5ae60 {
-struct S_00e5ae60_Stream
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    S_00e5ae60_Stream(char* buf, int size) throw();
-    S_00e5ae60_Stream& FUN_00cc01c0(const char* s) throw();
-    ~S_00e5ae60_Stream() throw();
-};
 
 struct S_00e5ae60_Err
 {
@@ -407,65 +314,5 @@ struct S_00e5ae60_Err
     virtual int FUN_message(int type, int id, const char* text, const char* file, int line) throw();
 };
 extern S_00e5ae60_Err* DAT_01268360;
-
-struct S_00e5ae60_Constraint
-{
-    virtual void v0();
-    virtual void v1();
-    virtual void v2();
-    virtual void v3();
-    virtual void v4();
-    virtual void v5();
-    virtual void v6();
-    virtual void v7();
-    virtual int GetType() throw();
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5c;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6c;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7c;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8c;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9c;
-    int unka0;
-    int unka4;
-    int unka8;
-    int unkac;
-    int m_b0;
-    int FUN_00cdea20() throw();
-    int FUN_00cdea80() throw();
-    int FUN_00cdeaa0() throw();
-};
 
 }  // namespace fnv_00e5ae60

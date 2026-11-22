@@ -400,8 +400,6 @@ bool FUN_00a43340::IsEqual(const FUN_00a43340& apObject)
     return C8CCC0Base::IsEqual(apObject);
 }
 
-void __cdecl FUN_00aa0ac0();
-
 void __cdecl FUN_00aa0ad0();
 
 struct S00a9b570_Pt

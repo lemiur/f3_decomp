@@ -265,39 +265,6 @@ struct Target
     void ClearValue(void* apArg);
 };
 
-struct OwnerNode
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5c;
-    int unk60;
-    int unk64;
-    int unk68;
-    Target** m_ppItems;
-    int m_iArrayLength;
-};
-
 struct PrimaryBase
 {
     virtual void unk00();
@@ -305,35 +272,10 @@ struct PrimaryBase
     ~PrimaryBase();
 };
 
-struct MidBase
-{
-    virtual void unk00();
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-};
-
-struct TailBase
-{
-    virtual void unk00();
-    OwnerNode* m_pSharedOwner;
-};
-
 struct SubObject
 {
     virtual ~SubObject()
     {}
-};
-
-struct FUN_00d69920_cls : PrimaryBase, MidBase, TailBase, SubObject
-{
-    void* m_pData;
-    int m_iField30;
-    unsigned int m_uiObjectFlags;
-
-    ~FUN_00d69920_cls() throw();
 };
 
 }  // namespace fnv_00d69920
@@ -434,33 +376,6 @@ extern "C"
         return g_0126901c;
     }
 }
-
-struct D69AC0Primary
-{
-    virtual void vfunc00();
-    virtual void FUN_00d69ac0();
-
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-};
-
-struct D69AC0Secondary
-{
-    virtual void FUN_00d69ac0();
-};
-
-struct D69AC0Object : D69AC0Primary, D69AC0Secondary
-{
-    D69AC0Object();
-
-// @fnv 0x00d69ac0
-    virtual void FUN_00d69ac0();
-};
 
 // sub ecx,8; jmp target  ==  MSVC adjustor thunk: Derived overrides a virtual that both of its bases
 // declare, so the second base's vtable gets a thunk that moves `this` back by the first base's size (8).
@@ -864,23 +779,7 @@ void ConstraintViewer::FUN_00d69730(World* world)
 }
 
 
-extern float DAT_011b6168;
-void EnterTlsGuard();
-void FUN_00c904e0();
 namespace ConstraintDrawDetail {
-struct TraceEntry
-{
-    const char* volatile name;
-    unsigned tick;
-    unsigned value;
-};
-struct TraceBuffer
-{
-    TraceEntry* begin;
-    TraceEntry* current;
-    TraceEntry* end;
-    TraceEntry* limit;
-};
 struct Shape
 {
     virtual void v00();
@@ -909,29 +808,6 @@ struct Collidable
     int unk10;
     void* first;
     void* second;
-};
-struct LocalCollidable : Collidable
-{
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    void FUN_00cf3ea0(void*, void*, Shape*, bool);
-    void FUN_00cf40b0();
-};
-struct Transform
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    __declspec(align(16)) float x;
-    float y;
-    float z;
-    float w;
 };
 struct __declspec(align(16)) Renderer
 {
@@ -1044,14 +920,6 @@ struct __declspec(align(16)) Extended : Renderer
     void FUN_00d69a20();
     void FUN_00de7a70(Collidable*, void*, void*, void*);
     void FUN_00de5fe0(Collidable*, void*, void*, void*);
-};
-struct Tail
-{
-    void FUN_00da2560();
-};
-struct ComplexCleanup
-{
-    void FUN_00d69a80();
 };
 struct __declspec(align(16)) Complex : Renderer
 {
@@ -1207,9 +1075,5 @@ struct __declspec(align(16)) Complex : Renderer
     void FUN_00de6730(Collidable*, void*, void*, void*);
     void FUN_00de59f0(Collidable*, void*, void*, void*);
     void FUN_00d69a80();
-};
-struct Viewer : ConstraintViewer
-{
-    void FUN_00d69260(int constraint, Entity* entity, int tag);
 };
 }

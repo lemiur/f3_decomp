@@ -2,13 +2,6 @@
 // src/havok/common/base/memory/system/freelist/hkfreelistmemorysystem.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/common/base/memory/system/freelist/hkfreelistmemorysystem.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-struct FUN_00cd06c0_t
-{
-    void __thiscall FUN_00cd06c0(int v);
-};
-
-extern int DAT_010cacd0;
-
 struct FUN_00cd06a0
 {
     void* m_p00;
@@ -35,62 +28,6 @@ FUN_00cd06a0::FUN_00cd06a0()
     FUN_00cbf1a0();
 }
 
-
-struct Inner
-{
-    virtual void v0();
-    virtual void v1();
-    virtual void v2();
-    virtual void v3();
-    virtual void v4();
-    virtual void v5();
-    virtual void v6();
-    virtual void v7();
-    virtual void v8();
-    virtual void v9();
-    virtual void v10();
-    virtual void v11();
-    virtual void v12();
-    virtual void v13();
-    virtual void v14();
-    virtual void v15();
-    virtual void v16();
-};
-struct Outer
-{
-    char pad[0x1c];
-    Inner inner;
-    void FUN_00cd06e0();
-};
-
-void __cdecl FUN_00d2cab0(void*, int, unsigned int);
-struct FUN_00cd0940_record
-{
-    virtual void slot00() = 0;
-    virtual void slot01() = 0;
-    virtual void slot02() = 0;
-    virtual void slot03() = 0;
-    virtual void slot04() = 0;
-    virtual void slot05() = 0;
-    virtual void slot06() = 0;
-    virtual void slot07() = 0;
-    virtual void slot08() = 0;
-    virtual void slot09() = 0;
-    virtual void slot10() = 0;
-    virtual void slot11() = 0;
-    virtual void slot12() = 0;
-    virtual void slot13() = 0;
-};
-struct FUN_00cd0940_iface
-{
-    virtual void slot00() = 0;
-    virtual void slot01() = 0;
-    virtual void slot02(int, int) = 0;
-};
-struct FUN_00cd0940_shell
-{
-    void __thiscall ResetRecordState(int* param, unsigned char mode);
-};
 
 struct AudioAllocator
 {
@@ -146,25 +83,6 @@ struct FUN_00cd0c80
 FUN_00cd0c80::~FUN_00cd0c80() throw()
 {}
 
-struct CallTarget_00cd1d80
-{
-    int FUN_00cd1d80(int, int, int, int, int);
-};
-struct SearchObject
-{
-    int Search(unsigned int arg0, unsigned int arg1, unsigned int arg2, unsigned int arg3);
-};
-
-struct SpawnedSub
-{
-    int Compute();
-};
-
-struct FUN_00cd06f0_cls
-{
-    void AccumulateSpawnedSubTotals(int* out);
-};
-
 struct CD0730Object
 {
     virtual int FUN_00cd0730(const void* info) const;
@@ -175,122 +93,6 @@ int CD0730Object::FUN_00cd0730(const void* info) const
 {
     return 1;
 }
-
-extern const char str_01094d90[];
-
-struct Gap040
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-};
-struct Gap038
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-};
-struct Gap400
-{
-    Gap040 g00;
-    Gap040 g01;
-    Gap040 g02;
-    Gap040 g03;
-    Gap040 g04;
-    Gap040 g05;
-    Gap040 g06;
-    Gap040 g07;
-    Gap040 g08;
-    Gap040 g09;
-    Gap040 g0a;
-    Gap040 g0b;
-    Gap040 g0c;
-    Gap040 g0d;
-    Gap040 g0e;
-    Gap040 g0f;
-};
-
-struct Pair
-{
-    int a;
-    int b;
-};
-
-struct Flags
-{
-    unsigned int bits;
-};
-
-struct Svc
-{
-    virtual void s0();
-    virtual int s1(int a, int b);
-};
-
-struct Sub0b0c
-{
-    int unk00, unk04, unk08, unk0c, unk10, unk14, unk18, unk1c, unk20;
-};
-
-struct FUN_00d5e960_t
-{
-    void __thiscall InitStream(int v);
-};
-
-struct Owner
-{
-    virtual void v0();
-    virtual void v1();
-    virtual void v2();
-    virtual void v3(Sub0b0c* s, const char* g, unsigned int flags);
-    Svc* svc;
-    Gap400 ga;
-    Gap400 gb;
-    Gap040 gc00;
-    Gap040 gc01;
-    Gap040 gc02;
-    Gap040 gc03;
-    Gap040 gc04;
-    Gap040 gc05;
-    Gap040 gc06;
-    Gap040 gc07;
-    Gap040 gc08;
-    Gap040 gc09;
-    Gap040 gc0a;
-    Gap038 gd;
-    int f0b00;
-    int f0b04;
-    int unk0b08;
-    Sub0b0c sub0b0c;
-    FUN_00d5e960_t cnt0b30;
-    Sub0b0c* FUN_00cd0740(const Pair* p, Flags flags);
-};
-
-extern "C" unsigned int DAT_012686cc;
 
 struct S_00cd0a60_sub8
 {
@@ -1258,60 +1060,6 @@ struct S_00cd0a60_arr
     }
 };
 
-struct FUN_00cd0a60
-{
-    virtual void v0();
-    int unk04;
-    S_00cd0a60_sub8 m08;
-    S_00cd0a60_sub1c m1c;
-    S_00cd0a60_Vt vt;
-    S_00cd0a60_sub0ad0 m0ad0;
-    S_00cd0a60_sub0b00 m0b00;
-    S_00cd0a60_sub0b0c m0b0c;
-    S_00cd0a60_sub0b30 m0b30;
-    S_00cd0a60_arr arr;
-    S_00cd0a60_sub0ad0 m336c;
-    FUN_00cd0a60();
-};
-
-struct Helper
-{
-    void FUN_00cd09d0();
-};
-
-struct FUN_00cd0c70_cls
-{
-    int unk00;
-
-    FUN_00cd0c70_cls* FUN_00cd0c70(int aiUnused);
-};
-
-struct CD07B0_Allocator
-{
-    virtual void v00();
-    virtual void v04();
-    virtual void FreeBytes(void* apMemory, unsigned int auiBytes);
-};
-struct CD07B0_Obj1c
-{
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual void v0c();
-    virtual void v10();
-    virtual void v14();
-    virtual void v18();
-    virtual void v1c();
-    virtual void v20();
-    virtual void v24();
-    virtual void v28();
-    virtual void v2c();
-    virtual void v30();
-    virtual void v34();
-    virtual void v38();
-    virtual void v3c();
-    virtual void Release();
-};
 struct CD07B0_Buffer
 {
     int unk00;
@@ -1323,87 +1071,10 @@ struct CD07B0_Buffer
     }
     void InitStream(int a1, int a2);
 };
-struct FUN_00cd07b0_cls
-{
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual void v0c();
-    virtual void Detach(Sub0b0c* apSub, Flags akFlags);
-    CD07B0_Allocator* m_pAllocator;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    CD07B0_Obj1c m_kObj1c;
-    Gap400 ga;
-    Gap400 gb;
-    Gap040 gc00;
-    Gap040 gc01;
-    Gap040 gc02;
-    Gap040 gc03;
-    Gap040 gc04;
-    Gap040 gc05;
-    Gap040 gc06;
-    Gap040 gc07;
-    Gap040 gc08;
-    Gap040 gc09;
-    Gap040 gc0a;
-    int unkae0;
-    int unkae4;
-    int unkae8;
-    int unkaec;
-    int unkaf0;
-    int unkaf4;
-    int unkaf8;
-    int unkafc;
-    int unkb00;
-    int unkb04;
-    int unkb08;
-    Sub0b0c m_kSub;
-    CD07B0_Buffer m_kBuffer;
-    int Cleanup(Flags akFlags);
-};
 
 #include <windows.h>
-struct FUN_00d2c3a0_t
-{
-    void __thiscall FUN_00d2c3a0(unsigned int a, unsigned int b);
-};
-
-struct Slot_1c_t
-{
-    virtual void v0();
-    virtual int v1(int n);
-};
-
-struct FUN_00cd0830_cls
-{
-    void AcquireSlot(unsigned int* out, unsigned int a2, unsigned int flags);
-};
-
-struct FUN_00cbf1a0_t
-{
-    void FUN_00cbf1a0();
-};
-
-struct FUN_00cd0c50_cls
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    CRITICAL_SECTION m_cs;
-
-    FUN_00cd0c50_cls* Destroy(int a1);
-};
 
 namespace fnv_00cd0b30 {
-extern "C" char str_010cade0;
-extern "C" char str_010cadb4;
 
 struct AudioHolderStub
 {
@@ -1416,56 +1087,5 @@ struct AudioHolderStub
 };
 
 AudioHolderStub* __cdecl FUN_00c85750();
-void __cdecl ResizeAudioStream(void* pAllocator, void* pArray, unsigned int auiNewSize);
-
-struct Target_cc01
-{
-    void FUN_00cc01c0(char* pText);
-};
-
-struct VSlotObj
-{
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual void v0c();
-    virtual void v10();
-    virtual void v14();
-    virtual void v18();
-    virtual void v1c();
-    virtual void v20();
-    virtual void v24();
-    virtual void v28();
-    virtual void v2c();
-    virtual void v30();
-    virtual void v34();
-    virtual void v38();
-    virtual void v3c();
-    virtual void v40();
-    virtual void v44();
-    virtual void v48();
-    virtual void v4c();
-    virtual int vSlot50();
-};
-
-struct CtorLocal
-{
-    int unk10;
-    void** m_ppA;
-    unsigned int m_nCallbackId;
-    unsigned int m_cA;
-    int* m_pB;
-    unsigned int m_nB;
-    unsigned int m_cB;
-    unsigned int unk2c;
-    int unk30;
-    void FUN_00cd0c80();
-};
-
-struct FUN_00cd0b30_cls
-{
-    void FUN_00cbc220(int a1, CtorLocal* pLocal);
-    void FUN_00cd0b30(int a1);
-};
 
 }  // namespace fnv_00cd0b30

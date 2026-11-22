@@ -37,55 +37,6 @@ void* __thiscall FUN_00c220a0_shell::FUN_00c220a0(unsigned int flags)
     return this;
 }
 
-struct FUN_00c21fd0_shell : public NiPSysEmitter
-{
-    void* FUN_00c21fd0();
-};
-
-extern char const* const g_01202500_arg1;
-
-struct StrArr
-{
-    void* m_pPadding[2];
-    unsigned short m_usCapacity;
-    unsigned short m_usElementCount;
-    unsigned short m_usUnknown;
-    unsigned short m_usGrowBy;
-
-    void SetSize(unsigned int size);
-    void SetAt(unsigned int index, char*& value);
-};
-
-struct Base00c319e0
-{
-    void FUN_00c319e0(StrArr*);
-};
-
-struct FUN_00a69720_shell
-{
-    char* ToString(char const*);
-};
-
-char* __cdecl _FUN_00a7d330(char const*);
-char* __cdecl FUN_00a7d550(char const*, float);
-
-extern char const str_01044b18[];
-extern char const str_010bdf30[];
-extern char const str_010bdf44[];
-extern char const str_010bdf50[];
-extern char const str_010bdf64[];
-extern char const str_010bdf74[];
-extern char const str_010bdf84[];
-extern char const str_010bdf9c[];
-extern char const str_010bdfac[];
-extern char const str_010bdfc4[];
-extern char const str_010bdfd0[];
-
-struct FUN_00c22780_shell : public Base00c319e0
-{
-    void FUN_00c22780(StrArr* pkStrings);
-};
-
 // Equals: thiscall bool compare of two objects (float fields + sub-object)
 
 class FUN_00c226a0_sub
@@ -426,50 +377,6 @@ class BC21FE0FixedString
     }
 
     char* m_kHandle;
-};
-
-class BC21FE0Color
-{
-  public:
-    float r;
-    float g;
-    float b;
-    float a;
-};
-
-class BC21FE0Modifier
-{
-  public:
-    BC21FE0Modifier(const BC21FE0FixedString& kName, unsigned int uiOrder) throw();
-    virtual ~BC21FE0Modifier();
-
-    int unk04;
-    char* m_kName;
-    unsigned int m_uiUpdateOrder;
-    void* m_pkTarget;
-    bool m_bModifierActive;
-};
-
-class FUN_00c21fe0_cls : public BC21FE0Modifier
-{
-  public:
-    FUN_00c21fe0_cls(const char* pcName, unsigned int uiOrder, float fSpeed, float fSpeedVar, float fDeclination,
-                     float fDeclinationVar, float fPlanarAngle, float fPlanarAngleVar, BC21FE0Color kInitialColor,
-                     float fInitialRadius, float fLifeSpan, float fLifeSpanVar, float fRadiusVar) throw();
-    virtual ~FUN_00c21fe0_cls();
-
-    float m_fEmissionSpeed;
-    float m_fSpeedVariation;
-    float m_fEmissionDeclination;
-    float m_fDeclinationVariation;
-    float m_fEmissionPlanarAngle;
-    float m_fPlanarAngleVariation;
-    BC21FE0Color m_kParticleColor;
-    float m_fEmissionRadius;
-    float m_fRadiusVariation;
-    float m_fYValue;
-    float m_fLifeSpanVariation;
-    float m_fScale;
 };
 
 struct EmitterColorWriter

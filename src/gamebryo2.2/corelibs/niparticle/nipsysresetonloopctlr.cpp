@@ -4,7 +4,6 @@
 
 extern "C"
 {
-    extern void* g_012026a8;
 }
 
 void __cdecl FUN_00a6d290();
@@ -57,19 +56,6 @@ bool __thiscall Cls_00c284f0::IsTargetOfType()
     return false;
 }
 
-struct StrArr
-{
-    unsigned char _pad0[8];
-    unsigned short _s8;
-    unsigned short _sA;
-    unsigned short _sC;
-    unsigned short _sE;
-    void SetSize(unsigned int);
-    void SetAt(unsigned int, char*&);
-};
-void __stdcall FUN_00a6d830(StrArr*);
-char* __cdecl _FUN_00a7d330(void*);
-
 struct NiMemObject
 {
     static void* operator new(unsigned int size);
@@ -78,9 +64,6 @@ void __fastcall FUN_00a6d220(void* object);
 extern float DAT_01015f5c;
 extern int DAT_010be8e4;
 
-struct CloningProcess
-{
-};
 struct CloneableObj
 {
     void* vtable;

@@ -2,8 +2,6 @@
 // src/gamebryo2.2/corelibs/nimain/niscmextradata.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/_fallout3/platforms/common/code/gamebryo2.2/corelibs/nimain/niscmextradata.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-extern int g_01270908;
-
 extern int DAT_0110129c;
 void __cdecl NiFreeAlias(void*);
 struct FUN_00a7b300_shell

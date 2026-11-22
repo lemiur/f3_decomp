@@ -9,27 +9,9 @@ void __stdcall ForwardToD3C440(int a, int b, int c, int d)
     FUN_00d3c440(a, b, c, d);
 }
 
-struct Conversion
-{
-    void (*convert)();
-    void (*create)();
-    void (*copy)();
-    void (*destroy)();
-    bool enabled;
-    bool supported;
-};
-struct Registry
-{
-    void FUN_00cfbbe0(Conversion*, int, int);
-};
-void FUN_00d3c400();
-void FUN_00d3cfc0();
 void FlipAndDispatchCollector();
-void FUN_00d3ac80();
-void CreateD3C380Obj();
 void FUN_00d3c440();
 void FUN_00d3cc00();
-void FUN_00daf8e0();
 
 extern float DAT_0104da48;
 extern void __cdecl FUN_00d3cc00(void*, void*, int, void*);
@@ -76,34 +58,6 @@ void S_00d3c3c0_Obj::FUN_00d3c3c0(int arg)
     v00(1);
 }
 
-struct AllocHolder
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    void* m_pAllocator;
-};
-
-struct ObjAllocator
-{
-    virtual void unk00();
-    virtual void* Alloc(unsigned int size);
-};
-
-struct SmallRecord
-{
-    void* m_vptr;
-    unsigned short m_w04;
-    unsigned short m_w06;
-    int m_i08;
-    unsigned short m_w0C;
-};
-
-extern char DAT_010cf018[];
-
-AllocHolder* FUN_00c85750();
-
 class D3CF80CollectorBase
 {
   public:
@@ -139,14 +93,6 @@ void D3CF80Agent::CollectFilteredEvents(void* pkA, void* pkB, void* pkInput, int
 }
 
 extern void __cdecl FUN_00d3c440(int a, int b, int c, int d);
-extern char DAT_010ce81c[];
-
-struct FlipCollectorLocal
-{
-    void* unk00;
-    unsigned char unk04;
-    int unk08;
-};
 
 struct CpuCallData
 {
@@ -179,58 +125,7 @@ union __declspec(intrin_type) __declspec(align(16)) __m128
 };
 extern "C"
 {
-    __m128 _mm_shuffle_ps(__m128, __m128, unsigned int);
     __m128 _mm_mul_ps(__m128, __m128);
     __m128 _mm_add_ps(__m128, __m128);
     __m128 _mm_xor_ps(__m128, __m128);
 }
-
-extern __m128 DAT_010c4c00;
-
-struct SimplexVertex
-{
-    __m128 m_kPointA;
-    __m128 m_kPointB;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-};
-
-struct DimNibbles
-{
-    unsigned char m_ucLowNibble : 4;
-    unsigned char m_ucHighNibble : 4;
-};
-
-struct Simplex
-{
-    SimplexVertex* m_kRayEnd;
-    int unk04;
-    int unk08;
-    int unk0C;
-    SimplexVertex m_kVertices[256];
-    int unk3010;
-    int unk3014;
-    int unk3018;
-    int unk301C;
-    __m128 m_vHitNormal;
-    float m_fClosestPointDistanceSquared;
-    int unk3034;
-    int unk3038;
-    int unk303C;
-    unsigned short m_ids[4];
-    unsigned char m_ucDimensionA;
-    unsigned char m_ucDimensionB;
-    DimNibbles m_dims;
-};
-
-struct AgentBase
-{
-    void FUN_00d3c5b0(int a, int b, int c, Simplex* s);
-};
-
-struct Agent : AgentBase
-{
-    void FUN_00d3d080(int a, int b, int c, Simplex* s);
-};

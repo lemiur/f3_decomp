@@ -13,13 +13,6 @@ extern int DAT_010cb5ac;
 namespace fnv_00e009e0 {
 extern "C" void* DAT_010305a8;
 extern "C" void* DAT_010d0e18;
-struct FUN_00e009e0_T
-{
-    void* a;
-    void* b;
-    void* c;
-    int d;
-};
 }  // namespace fnv_00e009e0
 
 extern int DAT_010305a8;
@@ -31,7 +24,6 @@ extern int DAT_010ce25c;
 extern int DAT_010305a8;
 extern int DAT_010c70b4;
 
-extern int DAT_010e99d8;
 struct FUN_00cb0a70
 {
     void __thiscall m(int);
@@ -59,17 +51,6 @@ void FUN_00e04a60(void* pData)
     }
 }
 
-struct FUN_00e10740_a
-{
-    int a;
-    float b;
-};
-struct FUN_00e10740_b
-{
-    int c;
-    float d;
-};
-
 // Returns 1 if the float field of p is less than the float field of q, otherwise 0.
 // @f3 0x00464d40 (community match, verified in this file)
 #include <math.h>
@@ -80,39 +61,12 @@ int __cdecl FUN_00e10740(float a, float b, float c)
 }
 
 
-struct FUN_00e11960_cls
-{
-    int m_2c;
-    int FUN_00e11960();
-};
-
-struct FUN_00e11d80_class
-{
-    void SetValueForAllNodes(int idx, float val);
-};
-
-struct FUN_00e11da0_class
-{
-    void FUN_00e11da0(int value);
-};
-
-struct FUN_00e000a0_vt
-{
-    virtual void m(int);
-};
-
 extern int DAT_010c59f4;
 extern int DAT_010c6cdc;
 
 extern int DAT_010e81a4;
 
-struct FUN_00e002d0_vt
-{
-    virtual void FUN_00e002d0(int);
-};
-
 extern int DAT_010c59f4;
-extern int DAT_010c6ea4;
 
 extern int DAT_010e83b4;
 
@@ -121,16 +75,6 @@ extern int DAT_010c6fd0;
 extern int DAT_010cc41c;
 
 extern int DAT_010e8824;
-
-struct FUN_00e00930_vt
-{
-    virtual void __thiscall m0(int);
-};
-
-struct FUN_00e00c70_vt
-{
-    virtual void __thiscall m0(int);
-};
 
 extern int DAT_010c63cc;
 
@@ -145,11 +89,9 @@ extern int DAT_010c6fd0;
 extern int DAT_010d102c;
 
 extern int DAT_010305a8;
-extern int DAT_010ce31c;
 extern int DAT_010e901c;
 
 extern int DAT_010305a8;
-extern int DAT_010c6ff8;
 extern int DAT_010c6fd0;
 
 extern int DAT_010e9300;
@@ -164,13 +106,6 @@ extern int DAT_010e943c;
 
 extern int DAT_010e9494;
 
-struct FUN_00e017d0_vt
-{
-    virtual void FUN_00e017d0(int);
-};
-
-extern int DAT_010e95b4;
-
 extern int DAT_010e9614;
 
 extern int DAT_010e350c;
@@ -180,13 +115,6 @@ extern int DAT_010e96c8;
 extern int DAT_010e977c;
 
 extern int DAT_010e9b7c;
-
-struct FUN_00e020e0_vt
-{
-    virtual int FUN_00e020e0(int);
-};
-
-extern int DAT_010e9ccc;
 
 typedef int(__thiscall* FUN_00e02340_fn)(void*, int);
 
@@ -200,112 +128,21 @@ extern int DAT_010ea0a4;
 
 typedef int(__thiscall* VFunc0)(void*, int);
 
-extern int DAT_010e310c;
-
 extern int DAT_010ea10c;
 
 extern int DAT_010ea154;
 
 extern int DAT_010ea188;
 
-struct FUN_00e026c0_vtbl
-{
-    virtual int v0(int);
-};
-
 extern int DAT_010ea1ac;
 
-struct FUN_00e02720_vtbl
-{
-    virtual void m0(int);
-};
-
 typedef void(__thiscall* vt)(void*, int);
-
-struct FUN_00e0bf20_s
-{
-    int a;
-    int b;
-    void __thiscall FUN_00cb0a60();
-    FUN_00e0bf20_s();
-};
-
-struct FUN_00e11dc0_class
-{
-    int m_iWordAt00;
-    int m_iWordAt04;
-    int m_8;
-    int m_iThirdValue;
-    int m_10;
-    int m_14;
-    int m_18;
-    int m_1c;
-    int m_20;
-    int m_24;
-    int m_28;
-    int m_2c;
-    void __thiscall FUN_00e11dc0();
-};
-
-struct FUN_00e001a0_vt
-{
-    virtual void m(int);
-};
-
-extern int DAT_010cc2fc;
-extern int DAT_010d79c4;
-
-struct FUN_00e00330_vt
-{
-    virtual void m(int);
-};
-
-struct FUN_00e00370_vt
-{
-    virtual void m0(int);
-};
-
-struct FUN_00e00430_vt
-{
-    virtual void __thiscall m0(int);
-};
 
 extern int DAT_010c59f4;
 extern int DAT_010c6dc4;
 
 typedef void(__thiscall* VFn)(void*, int);
 
-struct FUN_00e005b0_vt
-{
-    virtual void m(int);
-};
-
-struct FUN_00e00670_vt
-{
-    virtual void m0(int);
-};
-
-struct FUN_00e00790_vt
-{
-    virtual void __thiscall m(int);
-};
-
-struct FUN_00e007f0_vt
-{
-    virtual void m0(int);
-};
-
-struct FUN_00e00a20_vt
-{
-    virtual void m0(int);
-};
-
-struct FUN_00dcd380_cls
-{
-    void __thiscall FUN_00dcd380(int b);
-};
-extern int DAT_010e8a90;
-extern int DAT_010e8ab0;
 // @f3 0x0063d430 (community match, verified in this file)
 struct Entry1080 {
     int unk00;
@@ -366,97 +203,17 @@ void __cdecl FUN_00e00c90(void* unused, int unused2) {
 }
 
 
-struct FUN_00e00cf0_vt
-{
-    virtual void m(int);
-};
-
-struct FUN_00e00d90_vt
-{
-    virtual void m(int);
-};
-
-struct FUN_00e00e70_vt
-{
-    virtual int FUN_00e00e70(int);
-};
-
-struct FUN_00e01380_vt
-{
-    virtual void m(int);
-};
-
 typedef void(__thiscall* Fn0)(void*, int);
 
 typedef int(__thiscall* Vfn)(void*, int);
 
-extern int DAT_0126e330;
-
-extern int DAT_010e929c;
-struct FUN_00e01470_s
-{
-    int m_iWordAt00;
-    int m_iWordAt04;
-    int m_8;
-    int m_iThirdValue;
-    int m_10;
-    int m_14;
-    int m_18;
-    int m_1c;
-    int m_20;
-    int m_24;
-    int m_28;
-    FUN_00cb0a70* m_2c;
-};
-
-struct FUN_00e01550_vt
-{
-    virtual void m0(int);
-};
-
 typedef void(__thiscall* Fn)(void*, int);
 
-struct FUN_00e01a10_vt
-{
-    virtual void m0(int);
-};
-
 typedef void(__thiscall* Fn)(void*, int);
-
-struct FUN_00e01c10_vt
-{
-    virtual void m(int);
-};
-
-struct FUN_00e01cd0_vt
-{
-    virtual void m(int);
-};
-
-extern int DAT_010e9a34;
-
-struct FUN_00e01e40_vt
-{
-    virtual void m0(int);
-};
-
-extern int DAT_010e9dec;
-struct FUN_00cb0a70_00e02280
-{
-    int* vt;
-    int pad;
-    int pad2;
-    void __thiscall m(int);
-};
 
 typedef void(__thiscall* VFn)(void*, int);
 
 typedef int(__thiscall* Vf0)(void*, int);
-
-struct FUN_00e02560_vt
-{
-    virtual int m(int);
-};
 
 struct FUN_00e027b0_cls
 {
@@ -543,30 +300,6 @@ FUN_00e0bf30_s* __thiscall FUN_00e0bf30_s::FUN_00e0bf30(int v)
 }
 
 
-void* __cdecl FUN_00e114a0();
-struct FUN_00d752e0_cls
-{
-    void __thiscall FUN_00d752e0();
-};
-
-struct FUN_00e11d60_class
-{
-    int m_iWordAt00;
-    int m_iWordAt04;
-    int m_8;
-    int m_iThirdValue;
-    int m_10;
-    int m_14;
-    int m_18;
-    int m_1c;
-    int m_20;
-    int m_24;
-    int m_28;
-    int* m_2c;
-    int m_30;
-    void __thiscall FUN_00e11d60(int val);
-};
-
 struct AudioAllocator
 {
     virtual void v00();
@@ -590,60 +323,13 @@ BSAudio* __cdecl FUN_00c85750();
 
 extern int DAT_0102e388;
 
-struct FUN_00e00000_cls
-{
-    int m_vptr00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    void* m_pData2;
-    int m_iCount2;
-    unsigned int m_uCapBits2;
-    void* m_pData1;
-    int m_iCount1;
-    unsigned int m_uCapBits1;
-
-    void FUN_00e00000();
-};
-
-extern int DAT_0126d9a0;
-
-// Forward a value to the owner object when the owner pointer is present.
-struct FUN_00d50c00_cls
-{
-    void __thiscall FUN_00d50c00(int value);
-};
-
 struct CpuOpaque;
-extern CpuOpaque DAT_0126d9e8;
 
 extern int DAT_010c6cdc;
 
-extern int DAT_0126da30;
-
 extern int DAT_010e81a4;
 
-extern int DAT_0126da78;
-
-struct FUN_00e00220_Class
-{
-    virtual void VF00(int value);
-};
-
-extern int g_unk0126dac0;
-
-// FUN_00e002e0 : a one-line function - getter
-extern int g_target_00e002e0;
-
-extern int g_unk0126db50;
-
 extern int DAT_010e83b4;
-
-extern unsigned char DAT_0126db98;
 
 struct E00390FinishFlag
 {
@@ -713,80 +399,10 @@ struct S_00e003d0_Arrs
     S_00e003d0_Arr arr8c;
     S_00e003d0_Arr arr98;
 };
-struct FUN_00e003d0 : S_00e003d0_Base, S_00e003d0_Arrs
-{
-    int unka4;
-    int unka8;
-    int unkac;
-    int unkb0;
-    int unkb4;
-    int unkb8;
-    int unkbc;
-    int unkc0;
-    int unkc4;
-    int unkc8;
-    int unkcc;
-    int unkd0;
-    int unkd4;
-    int unkd8;
-    int unkdc;
-    int unke0;
-    int unke4;
-    int unke8;
-    int unkec;
-    int unkf0;
-    int unkf4;
-    int unkf8;
-    int unkfc;
-    int unk100;
-    int unk104;
-    int unk108;
-    int unk10c;
-    int unk110;
-    int unk114;
-    int unk118;
-    int unk11c;
-    int unk120;
-    int unk124;
-    int unk128;
-    int unk12c;
-    int unk130;
-    int unk134;
-    int unk138;
-    int unk13c;
-    int unk140;
-    int unk144;
-    int unk148;
-    int unk14c;
-    int unk150;
-    int unk154;
-    int unk158;
-    int unk15c;
-    S_00e003d0_Arr arr160;
-    FUN_00e003d0(int flag);
-};
-
-extern int DAT_0126dbe0;
 
 extern int DAT_010c6dc4;
 
-struct S_00e00490_vt
-{
-    virtual void m(int);
-};
-
-extern int DAT_0126dc28;
-
-struct FUN_00e004f0_class
-{
-    void __thiscall FUN_00e004f0(int value);
-};
-
-extern int DAT_0126dc70;
-
 extern int DAT_010c749c;
-
-extern int DAT_0126dcb8;
 
 struct Handler_cls
 {
@@ -827,20 +443,6 @@ struct S_00e00610_Mid : S_00e00610_P, S_00e00610_S
         }
     }
 };
-struct FUN_00e00610 : S_00e00610_Mid
-{
-    FUN_00e00610(int flag);
-};
-
-extern int DAT_0126dd00;
-
-// FUN_00e00690: null-guarded forwarding of a second argument to a
-// member function of the first (object) argument.
-class FUN_00e00690_cls
-{
-  public:
-    void FUN_00e006d0(int a1);
-};
 
 extern int DAT_010c6fd0;
 struct S_00e006d0_A
@@ -867,12 +469,6 @@ struct S_00e006d0_B : S_00e006d0_A
             unk10 = 2;
         }
     }
-};
-struct FUN_00e006d0 : S_00e006d0_B
-{
-    int* unk14;
-    virtual void v0();
-    FUN_00e006d0(int flag);
 };
 // Initializes the object: points unk14 at DAT_010c6fd0 and, when flag is set, sets unk0c to 8 and unk10 to 1.
 // @f3 0x004361d0 (community match, verified in this file)
@@ -922,17 +518,13 @@ short Obj004361d0::FUN_004361d0(int key)
 }   // namespace f3m_004361d0
 
 
-extern int DAT_0126dd48;
-
 extern int DAT_010cc41c;
 
 struct CpuOpaque;
-extern CpuOpaque DAT_0126dd90;
 
 extern int DAT_010cb5ac;
 
 struct CpuOpaque;
-extern CpuOpaque DAT_0126ddd8;
 
 extern int DAT_010e8824;
 
@@ -985,26 +577,6 @@ struct S_00e00830_Ptr
     }
 };
 
-struct S_00e00830_Elem64
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-};
-
 template <typename T> struct S_00e00830_Array
 {
     T* m_data;
@@ -1041,23 +613,9 @@ struct S_00e00830_Base
     {}
 };
 
-struct FUN_00e00830 : S_00e00830_Base
-{
-    S_00e00830_Ptr m_ptr;
-    int unk0c;
-    S_00e00830_Array<S_00e00830_Ref> m_refs;
-    S_00e00830_Array<S_00e00830_Elem64> m_pElements;
-    ~FUN_00e00830() throw();
-};
-
-// FUN_00e00940 : a one-line function - getter
-extern int g_target_00e00940;
-
 // Resets an object to the "script terminal" class layout: it installs the
 // secondary base vtable, the primary vtable and finally the derived vtable.
-extern int DAT_010e8894;
 extern int DAT_010e88b4;
-extern int DAT_010e88a4;
 
 extern int DAT_010e88b4;
 
@@ -1100,17 +658,8 @@ extern "C" struct FUN_00e009c0_vt
 };
 
 struct CpuOpaque;
-extern CpuOpaque DAT_0126de68;
 
 extern int DAT_010d0e18;
-
-// FUN_00e00a30 : a one-line function - getter
-extern int g_target_00e00a30;
-
-struct FUN_00e00a40_cls
-{
-    void __thiscall FUN_00e00a80(int a);
-};
 
 class __declspec(novtable) BE00A80Base
 {
@@ -1120,153 +669,23 @@ class __declspec(novtable) BE00A80Base
     int m_iRefCount;
 };
 
-class BE00A80InterfaceA
-{
-  public:
-    virtual void OnA();
-};
-
-class BE00A80InterfaceB
-{
-  public:
-    virtual void OnB();
-};
-
-class BE00A80InterfaceC
-{
-  public:
-    virtual void OnC();
-};
-
-class BE00A80InterfaceD
-{
-  public:
-    virtual void OnD();
-};
-
-class FUN_00e00a80_cls : public BE00A80Base,
-                         public BE00A80InterfaceA,
-                         public BE00A80InterfaceB,
-                         public BE00A80InterfaceC,
-                         public BE00A80InterfaceD
-{
-  public:
-    FUN_00e00a80_cls(int iEnabled);
-    virtual ~FUN_00e00a80_cls();
-    virtual void OnA();
-    virtual void OnB();
-    virtual void OnC();
-    virtual void OnD();
-
-    int m_iFirst;
-    int m_iSecond;
-    int m_iEnabled;
-};
-
-extern char DAT_0126def8;
-
 extern int DAT_010ce4bc;
-
-extern int g_unk0126df40;
 
 inline void* operator new(unsigned int, void* pvWhere) throw()
 {
     return pvWhere;
 }
 
-struct E00B60FinishFlag
-{
-    int m_bFinishing;
-};
-
-class E00B60Object
-{
-  public:
-    E00B60Object(E00B60FinishFlag flag);
-
-    int unk00;
-};
-
-// FUN_00e00ba0: thiscall ctor-like (flag arg) storing a primary vtable at +0 and
-// secondary vtables at +8, +0xc, +0x10, +0x14, then an optional int at +0x20.
-struct E00ba0_b0
-{
-    virtual void unk00();
-    int unk04;
-};
-struct E00ba0_b1
-{
-    virtual void unk00();
-};
-struct E00ba0_b2
-{
-    virtual void unk00();
-};
-struct E00ba0_b3
-{
-    virtual void unk00();
-};
-struct E00ba0_b4
-{
-    virtual void unk00();
-};
-
-class FUN_00e00ba0 : E00ba0_b0, E00ba0_b1, E00ba0_b2, E00ba0_b3, E00ba0_b4
-{
-  public:
-    int unk18;
-    int unk1c;
-    int m_20;
-    FUN_00e00ba0(int flag);
-};
-
 struct CpuOpaque;
-extern CpuOpaque DAT_0126df88;
-
-extern int DAT_0126dfd0;
 
 // FUN_00e00d20: cdecl, returns the address of a global object.
 extern int DAT_010c63cc;
 
-extern int DAT_0126e018;
-
-struct FUN_00d57b20_class
-{
-    void __thiscall FUN_00d57b20(int value);
-};
-
-extern int DAT_0126e060;
-
 extern int DAT_010e8d8c;
-
-extern int DAT_0126e0a8;
 
 extern int DAT_010d0e5c;
 
-struct S_00e00ee0_vt
-{
-    virtual void m0(int a);
-};
-
-extern int DAT_0126e0f0;
-
 extern int DAT_010d102c;
-
-// FUN_00e00f50: calls the first virtual (slot 0) of the object passed in the
-// first stack argument, with a single 0 argument.
-struct FUN_00e00f50_cls
-{
-    virtual void m_fn(int aParam);
-};
-
-extern int DAT_0126e138;
-
-// FUN_00e00f70: forwards a value to a helper on the passed-in object
-// when that object is present.
-struct FUN_00e00f70_cls
-{
-    void __thiscall FUN_00e00fb0(int value);
-};
 
 extern int DAT_010305a8;
 extern int DAT_010c6fb0;
@@ -1310,34 +729,12 @@ FUN_00e00fb0::FUN_00e00fb0(int flag)
         *(volatile unsigned int*)&m_0c = 7;
 }
 
-struct VirtualSlotObject
-{
-    virtual void unk00(int arg);
-};
-
-extern int DAT_0126e180;
-
 extern int DAT_010c6fb0;
 extern int DAT_010d10c4;
-extern int DAT_010d10a4;
-
-struct InitObject
-{
-    void* m_pVTable;  // +0x00
-    int m_i04;        // +0x04
-    int m_i08;        // +0x08
-    int m_i0C;        // +0x0C
-    int m_i10;        // +0x10
-    void* m_pSlot;    // +0x14
-};
 
 extern int DAT_010d10c4;
 
-extern int DAT_0126e1c8;
-
 extern int DAT_010e901c;
-
-extern int DAT_0126e210;
 
 namespace fnv_00e01210 {
 struct Handler_cls
@@ -1347,94 +744,21 @@ struct Handler_cls
 
 }  // namespace fnv_00e01210
 
-// FUN_00e01250: thiscall ctor (flag arg) storing secondary vtables at +8,+0xc,+0x10,+0x14
-// from inline base ctors, then the primary vtable at +0, then the secondary vtables again,
-// then an optional int at +0x20.
-struct E01250_b0
-{
-    virtual void unk00();
-    int unk04;
-};
-struct E01250_b1
-{
-    virtual void unk00();
-};
-struct E01250_b2
-{
-    virtual void unk00();
-};
-struct E01250_b3
-{
-    virtual void unk00();
-};
-struct E01250_b4
-{
-    virtual void unk00();
-};
-
-class FUN_00e01250 : E01250_b0, E01250_b1, E01250_b2, E01250_b3, E01250_b4
-{
-  public:
-    int unk18;
-    int unk1c;
-    int m_20;
-    FUN_00e01250(int flag);
-};
-
-struct FUN_00e01320_cls
-{
-    virtual void m_v00(int arg);
-};
-
-extern int DAT_0126e258;
-
 extern int DAT_010ce25c;
-
-extern int DAT_0126e2a0;
-
-extern int DAT_0126e2e8;
 
 extern int DAT_010c70b4;
 
-// FUN_00e01520 : a one-line function - getter
-extern int g_target_00e01520;
-
 extern int DAT_010e9300;
 
-extern int DAT_0126e3c0;
-
 extern int DAT_010e9358;
-
-struct FnvCpu_FUN_00e01590_CpuInterface
-{
-    virtual void Invoke(int value);
-};
-
-extern int DAT_0126e408;
 
 extern int DAT_010e93ac;
 
 struct CpuOpaque;
-extern CpuOpaque DAT_0126e450;
 
 extern int DAT_010e943c;
 
-struct CallerVtbl
-{
-    virtual int v0(int);
-};
-
-extern int DAT_0126e498;
-
 extern int DAT_010e9494;
-
-// Stand-in for the object whose first virtual slot is invoked with the constant 0.
-struct FUN_00e016c0_cls
-{
-    virtual void m0(int a);
-};
-
-extern int DAT_0126e4e0;
 
 struct EffectSubObject
 {
@@ -1521,18 +845,11 @@ struct __declspec(novtable) FUN_00e01750 : S_00e01750_Base
 };
 }  // namespace fnv_00e01750
 
-extern int DAT_0126e528;
-
-extern int DAT_0126e570;
-
 extern int DAT_010e9614;
-
-extern int DAT_0126e5b8;
 
 extern int DAT_010e350c;
 
 struct CpuOpaque;
-extern CpuOpaque DAT_0126e600;
 
 extern int DAT_010e96c8;
 
@@ -1593,8 +910,6 @@ struct __declspec(novtable) FUN_00e01a50 : S_00e01a50_Base
 };
 
 }  // namespace fnv_00e01a50
-
-extern int g_unk0126e648;
 
 extern int DAT_010e977c;
 
@@ -1717,61 +1032,9 @@ struct __declspec(novtable) FUN_00e01b30 : S_00e01b30_Base
 };
 }  // namespace fnv_00e01b30
 
-extern int DAT_0126e690;
-
-extern int g_unkGlobal;
-
-struct FUN_00e01e00_vt
-{
-    virtual void m(int);
-};
-
-extern int DAT_0126e720;
-
-// Null-guarded forwarder: the first argument is an object pointer; when it
-// is non-null the second argument is forwarded to a member function of that
-// object (called with the object as 'this').
-class FUN_00e01e20_cls
-{
-  public:
-    void __thiscall Handle(int a1);
-};
-
-extern int DAT_0126e768;
-
-extern int DAT_010e9acc;
-
-struct FUN_00e01e80_obj
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-};
-
-extern int DAT_0126e7b0;
-
 extern int DAT_010e9b7c;
 
-struct FUN_00e4ae80_Obj
-{
-    void __thiscall FUN_00e4ae80(int value);
-};
-
-extern int g_unk0126e7f8;
-
 // FUN_00e02120: cdecl, takes a pointer, calls virtual slot 0 with argument 0.
-
-class FUN_00e02120_cls
-{
-  public:
-    virtual int v00(int arg);
-};
-
-extern int g_unk0126e840;
 
 namespace fnv_00e021d0 {
 struct FUN_00e021d0_allocator
@@ -1794,27 +1057,6 @@ struct FUN_00e021d0_manager
 
 extern FUN_00e021d0_manager* __cdecl FUN_00c85750();
 
-struct FUN_00cb0c00_class
-{
-    void __thiscall FUN_00cb0c00();
-};
-
-struct FUN_00e021d0_class
-{
-    int* unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-
-    void __thiscall ClearAndReset();
-};
-
 extern int DAT_0102e388;
 
 }  // namespace fnv_00e021d0
@@ -1825,12 +1067,7 @@ struct GlobalObject
 };
 extern GlobalObject g_global;
 
-struct Data_0126e8d0;
-extern Data_0126e8d0 DAT_0126e8d0;
-
 extern int DAT_010e9e74;
-
-extern int DAT_0126e918;
 
 extern int DAT_010e9f48;
 
@@ -1902,26 +1139,9 @@ class __declspec(novtable) FUN_00e023c0 : public E023C0BaseObject
 
 }  // namespace fnv_00e023c0
 
-struct E02460Object
-{
-    virtual void Destroy(bool bFree);
-};
-
-extern int DAT_0126e960;
-
 extern int DAT_010e9fa4;
 
-// FUN_00e024b0 : a one-line function - getter
-extern int g_target_00e024b0;
-
 extern int DAT_010ea0a4;
-
-extern int DAT_0126e9f0;
-
-struct E02520Object
-{
-    virtual void Destroy(bool bFree);
-};
 
 namespace fnv_00e02530 {
 struct GlobalObject
@@ -1933,8 +1153,6 @@ extern GlobalObject g_global;
 }  // namespace fnv_00e02530
 
 extern int DAT_010ea10c;
-
-extern unsigned char DAT_0126ea80;
 
 extern int DAT_010ea154;
 
@@ -1976,23 +1194,9 @@ struct FUN_00e025a0_cls
 
 }  // namespace fnv_00e025a0
 
-extern int DAT_0126eac8;
-
 extern int DAT_010ea188;
 
-extern unsigned char DAT_0126eb10;
-
 extern int DAT_010ea1ac;
-
-class E02700Object
-{
-  public:
-    void Process(void* pvData);
-};
-
-extern int g_0126eb58;
-
-extern int DAT_0126eba0;
 
 extern int DAT_010c9314;
 
@@ -2048,7 +1252,6 @@ void __cdecl UpdateStateFlags(void* pData)
 }
 
 namespace fnv_00e05d10 {
-extern int DAT_010d77d8;
 extern int DAT_0102e388;
 
 struct AudioAllocator
@@ -2071,88 +1274,6 @@ struct AudioHolder
 
 AudioHolder* __cdecl FUN_00c85750() throw();
 void __fastcall FUN_00c905b0(void* selfVal);
-
-struct FUN_00e05d10_sub
-{
-    int unk00;
-    void Release();
-};
-
-struct FUN_00e05d10_cls
-{
-    int m_vptr00;
-    int unk04;
-    void* m_p08;
-    void* m_p0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    void* m_p50;
-    int m_54;
-    unsigned int m_58;
-    void* m_p5c;
-    int m_60;
-    unsigned int m_64;
-    void* m_p68;
-    int m_6c;
-    unsigned int m_70;
-    int unk74;
-    int unk78;
-    int unk7c;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8c;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9c;
-    int unkA0;
-    int unkA4;
-    int unkA8;
-    int unkAc;
-    int unkB0;
-    int unkB4;
-    int unkB8;
-    int unkBc;
-    int unkC0;
-    int unkC4;
-    int unkC8;
-    int unkCc;
-    int unkD0;
-    int unkD4;
-    int unkD8;
-    int unkDc;
-    int unkE0;
-    int unkE4;
-    int unkE8;
-    int unkEc;
-    int unkF0;
-    int unkF4;
-    int unkF8;
-    int unkFc;
-    int unk100;
-    int unk104;
-    int unk108;
-    int unk10c;
-    int unk110;
-    FUN_00e05d10_sub m_114;
-
-    void FUN_00e05d10();
-};
 
 }  // namespace fnv_00e05d10
 
@@ -2370,235 +1491,6 @@ SearchItem* FUN_00e10820(SearchContainer* c, double key, int aiFieldIndex)
     return 0;
 }
 
-struct FUN_00e10a00_cls
-{
-    int m_00;
-
-    FUN_00e10a00_cls* FUN_00e10a00();
-};
-
-// FUN_00e114f0: thiscall, 3 unused stack params, sets a flag byte at +0x100.
-class FUN_00e114f0_cls
-{
-  public:
-    int m_00;
-    int m_04;
-    int m_08;
-    int m_0c;
-    int m_10;
-    int m_14;
-    int m_18;
-    int m_1c;
-    int m_20;
-    int m_24;
-    int m_28;
-    int m_2c;
-    int m_30;
-    int m_34;
-    int m_38;
-    int m_3c;
-    int m_40;
-    int m_44;
-    int m_48;
-    int m_4c;
-    int m_50;
-    int m_54;
-    int m_58;
-    int m_5c;
-    int m_60;
-    int m_64;
-    int m_68;
-    int m_6c;
-    int m_70;
-    int m_74;
-    int m_78;
-    int m_7c;
-    int m_80;
-    int m_84;
-    int m_88;
-    int m_8c;
-    int m_90;
-    int m_94;
-    int m_98;
-    int m_9c;
-    int m_a0;
-    int m_a4;
-    int m_a8;
-    int m_ac;
-    int m_b0;
-    int m_b4;
-    int m_b8;
-    int m_bc;
-    int m_c0;
-    int m_c4;
-    int m_c8;
-    int m_cc;
-    int m_d0;
-    int m_d4;
-    int m_d8;
-    int m_dc;
-    int m_e0;
-    int m_e4;
-    int m_e8;
-    int m_ec;
-    int m_f0;
-    int m_f4;
-    int m_f8;
-    int m_fc;
-    unsigned char m_100;
-    void __thiscall FUN_00e114f0(int a1, int a2, int a3);
-};
-
-struct FlagObjectPad
-{
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0C;
-    unsigned int unk10;
-    unsigned int unk14;
-    unsigned int unk18;
-    unsigned int unk1C;
-    unsigned int unk20;
-    unsigned int unk24;
-    unsigned int unk28;
-    unsigned int unk2C;
-    unsigned int unk30;
-    unsigned int unk34;
-    unsigned int unk38;
-    unsigned int unk3C;
-    unsigned int unk40;
-    unsigned int unk44;
-    unsigned int unk48;
-    unsigned int unk4C;
-    unsigned int unk50;
-    unsigned int unk54;
-    unsigned int unk58;
-    unsigned int unk5C;
-    unsigned int unk60;
-    unsigned int unk64;
-    unsigned int unk68;
-    unsigned int unk6C;
-    unsigned int unk70;
-    unsigned int unk74;
-    unsigned int unk78;
-    unsigned int unk7C;
-    unsigned int unk80;
-    unsigned int unk84;
-    unsigned int unk88;
-    unsigned int unk8C;
-    unsigned int unk90;
-    unsigned int unk94;
-    unsigned int unk98;
-    unsigned int unk9C;
-    unsigned int unkA0;
-    unsigned int unkA4;
-    unsigned int unkA8;
-    unsigned int unkAC;
-    unsigned int unkB0;
-    unsigned int unkB4;
-    unsigned int unkB8;
-    unsigned int unkBC;
-    unsigned int unkC0;
-    unsigned int unkC4;
-    unsigned int unkC8;
-    unsigned int unkCC;
-    unsigned int unkD0;
-    unsigned int unkD4;
-    unsigned int unkD8;
-    unsigned int unkDC;
-    unsigned int unkE0;
-    unsigned int unkE4;
-    unsigned int unkE8;
-    unsigned int unkEC;
-    unsigned int unkF0;
-    unsigned int unkF4;
-    unsigned int unkF8;
-    unsigned int unkFC;
-    unsigned char m_flag100;
-};
-
-class FUN_00e11500_cls : public FlagObjectPad
-{
-  public:
-    void FUN_00e11500(int a1, int a2);
-};
-
-struct FUN_00e11510_obj
-{
-    void __thiscall FUN_00e11510(int a, int b);
-};
-
-struct FUN_00e11520_class
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5c;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6c;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7c;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8c;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9c;
-    int unka0;
-    int unka4;
-    int unka8;
-    int unkac;
-    int unkb0;
-    int unkb4;
-    int unkb8;
-    int unkbc;
-    int unkc0;
-    int unkc4;
-    int unkc8;
-    int unkcc;
-    int unkd0;
-    int unkd4;
-    int unkd8;
-    int unkdc;
-    int unke0;
-    int unke4;
-    int unke8;
-    int unkec;
-    int unkf0;
-    int unkf4;
-    int unkf8;
-    int unkfc;
-    char flag100;
-    void FUN_00e11520(int a, int b);
-};
-
 struct hkFinishLoadedObjectFlagE00
 {
     int m_bFinishing;
@@ -2725,18 +1617,6 @@ char* __cdecl ReadPaddedString(char* base, int* piOffset)
 
 class BE04D90Allocator;
 
-class BE04D90Router
-{
-  public:
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    BE04D90Allocator* m_pkHeap;
-};
-
-BE04D90Router* BE04D90GetRouter() throw();
-
 class BE04D90PointerMap
 {
   public:
@@ -2753,8 +1633,6 @@ class BE04D90PointerMap
 };
 
 class BE04D90Object;
-
-void __cdecl RegisterContextHandlers(BE04D90Object* pkObject, BE04D90PointerMap* pkMap, int iArg) throw();
 
 // Initializes a pointer map, calls RegisterContextHandlers for each non-null object in ppkObjects, then clears and deallocates the map.
 // @f3 0x009b2e50 (community match, verified in this file)
@@ -4267,8 +3145,6 @@ struct Context
 };
 void SwapHeaderBytesAndAdvance(Input*);
 void SwapQuadBytes(Input*);
-void FUN_00e05eb0(Input*);
-int FUN_00dcd4d0(unsigned int);
 void SwapHkHeaderE05E(Payload*);
 void SwapHeaderEndianness(Payload*);
 void FUN_00e05fe0(Payload*);
@@ -5129,7 +4005,6 @@ struct Array
     Array() : data(0), size(0), capacity(0x80000000)
     {}
 };
-void __cdecl FUN_00c908c0(Alloc*, Array*, int, int);
 struct Entry
 {
     Node* key;
@@ -5161,23 +4036,6 @@ struct Map
             ++n;
         return n;
     }
-};
-struct Link
-{
-    Link* next;
-    int u4;
-    Node* nodes[3];
-    int u14, u18, u1C, u20, u24, u28, u2C;
-    int index;
-};
-struct Target
-{
-    int u0, u4;
-    Pool pool;
-    int u1C, u20, u24, u28;
-    Link* links;
-    int FUN_00e11960();
-    int ResolveLinkNodes();
 };
 }  // namespace fnv_00e18b70
 
@@ -5255,20 +4113,6 @@ void TimedEntryCollection::RemoveExpiredEntries(float threshold)
             goto tail;
     }
 }
-
-struct FUN_00e00dd0_cls
-{
-    int vptr00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-
-    void __thiscall FUN_00e00dd0();
-};
 
 // Reverses the byte order of each 4-byte group in the 16-byte buffer pointed to by pucData.
 // @fnv 0x00e05de0
@@ -5374,26 +4218,6 @@ void __cdecl SwapHkHeaderE05E(hkHeaderE05E* apHeader)
     swap32E05E(&apHeader->m_24);
 }
 
-struct S00e0bf50_Acc
-{
-    float m_00;
-    float m_04;
-    float m_08;
-    float m_0c;
-    float m_10;
-    float m_14;
-    float m_18;
-    float m_1c;
-    unsigned short m_20;
-    unsigned short m_22;
-    unsigned short m_24;
-    unsigned short m_26;
-    unsigned short m_28;
-    unsigned short m_2a;
-    unsigned short m_2c;
-    unsigned short m_2e;
-};
-
 template <int SIZE> __forceinline void memCpyOneAlignedE030(void* dst, const void* src)
 {
     const unsigned int* s = (const unsigned int*)src;
@@ -5449,92 +4273,8 @@ template <class T> class hkArrayE030
     }
 };
 
-struct RangeE030
-{
-    int m_iStart;
-    int m_iFirstValue;
-};
-
 int __cdecl ReadIntAtOffset(const char* pcData, int* piPos);
 int __cdecl ReadPaddedString(const char* pcData, int* piPos);
-
-class ParserE030
-{
-  public:
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    const char* m_pcBegin;
-    const char* m_pcEnd;
-
-    void FUN_00e03010(int iOffset, hkArrayE030<RangeE030>& kOut);
-};
-
-struct Slot00e04e10
-{
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual void v0c();
-    virtual void* v10(int a);
-};
-struct Mgr00e04e10
-{
-    unsigned char* FUN_00d46d80(unsigned char* out, void* key);
-};
-
-extern const char DAT_010cb2c0[];
-extern const char DAT_010eaa4c[];
-extern const char DAT_010c65b0[];
-extern const char DAT_010eaa40[];
-extern const char DAT_010eaa30[];
-extern const char DAT_010eaa24[];
-extern const char DAT_010eaa18[];
-extern const char DAT_010eaa0c[];
-extern const char DAT_010eaa00[];
-extern const char DAT_010ea9f4[];
-extern const char DAT_010ea9e0[];
-extern const char DAT_010ea9d4[];
-extern const char DAT_010ea9cc[];
-extern const char DAT_010ea9c0[];
-extern const char DAT_010ea9b4[];
-extern const char DAT_010c41dc[];
-extern const char DAT_010ea9a8[];
-extern const char DAT_010ea998[];
-extern const char DAT_010ea984[];
-extern const char DAT_010ea974[];
-extern const char DAT_010c90a4[];
-extern const char DAT_010ea96c[];
-extern const char DAT_010ea958[];
-extern const char DAT_010ea948[];
-extern const char DAT_010ea93c[];
-extern const char DAT_010ea92c[];
-extern const char DAT_010ea920[];
-extern const char DAT_010ea910[];
-extern const char DAT_010ea900[];
-extern const char DAT_010ea8f4[];
-extern const char DAT_010ea8ec[];
-extern const char DAT_010ea8e4[];
-extern const char DAT_010ea8d4[];
-extern const char DAT_010ea8c4[];
-extern const char DAT_010c65bc[];
-extern const char DAT_010ea8ac[];
-extern const char DAT_010ea89c[];
-extern const char DAT_010ea88c[];
-extern const char DAT_010ea878[];
-
-struct ColorRegistry
-{
-    void FUN_00e0d980(const char* name, unsigned int color);
-    void RegisterDefaultColors();
-};
 
 struct FUN_00e004f0 : S_00e003d0_Base, S_00e003d0_Arrs
 {
@@ -5578,11 +4318,6 @@ struct SpawnedDerived : SpawnedPrimaryBase, SpawnedSecondaryBase
 SpawnedDerived::SpawnedDerived()
 {}
 
-struct FUN_00e11480
-{
-    virtual ~FUN_00e11480();
-};
-
 extern "C" void _ReadWriteBarrier();
 union __declspec(intrin_type) __declspec(align(16)) __m128
 {
@@ -5591,23 +4326,8 @@ union __declspec(intrin_type) __declspec(align(16)) __m128
 };
 extern "C" __m128 _mm_mul_ps(__m128 a, __m128 b);
 extern "C" __m128 _mm_add_ss(__m128 a, __m128 b);
-extern "C" float _mm_cvtss_f32(__m128 a);
 extern "C" __m128 _mm_shuffle_ps(__m128 a, __m128 b, unsigned int imm);
 extern "C" void _mm_store_ss(float* p, __m128 a);
-struct VecNode113
-{
-    VecNode113* next;
-    unsigned int unk04, unk08, unk0c;
-    __m128 vector;
-};
-struct VecList113
-{
-    unsigned int unk00, unk04, unk08, unk0c, unk10;
-    VecNode113* head;
-    __m128* FUN_00e11570(__m128* __restrict out, const __m128* direction);
-};
-
-float __cdecl FUN_00e13870(int a, int b);
 
 struct ExportPlacement;
 inline void* operator new(unsigned int, ExportPlacement* address)
@@ -5912,16 +4632,6 @@ template <class T> struct PoolList : PoolBase
     }
 };
 
-struct Mesh
-{
-    int unk00;
-    int unk04;
-    PoolList<Vertex> m_kVertices;
-    PoolList<Triangle> m_uiTriangleCount;
-    void ReleaseSubobject();
-    void FUN_00e192c0(Mesh* mesh);
-};
-
 extern "C" void _ReadWriteBarrier();
 
 struct ScalarQ
@@ -5975,39 +4685,4 @@ struct VectorQ
     {
         return spatialDot(plane) + plane.componentAt(3);
     }
-};
-
-struct VertexQ
-{
-    VertexQ* next;
-    VertexQ* prev;
-    int u8, uC;
-    VectorQ position;
-    VectorQ normal;
-    VectorQ data;
-};
-struct BlockQ;
-struct PoolQ
-{
-    BlockQ** blocks;
-    int count;
-    int u8;
-    VertexQ* head;
-    int size;
-};
-
-struct MeshQ
-{
-    int u0, u4;
-    PoolQ pool;
-    int unk1c, unk20, unk24, unk28, unk2c;
-    int unk30, unk34, unk38, unk3c, unk40, unk44, unk48, unk4c;
-    int unk50, unk54, unk58, unk5c, unk60, unk64, unk68, unk6c;
-    int unk70, unk74, unk78, unk7c, unk80, unk84, unk88, unk8c;
-    int unk90, unk94, unk98, unk9c, unka0, unka4, unka8, unkac;
-    int unkb0, unkb4, unkb8, unkbc, unkc0, unkc4, unkc8, unkcc;
-    int unkd0, unkd4, unkd8, unkdc, unke0, unke4, unke8, unkec;
-    int unkf0, unkf4, unkf8, unkfc, unk100;
-    float squaredTolerance;
-    int FUN_00e11990(const VectorQ& plane, int index);
 };

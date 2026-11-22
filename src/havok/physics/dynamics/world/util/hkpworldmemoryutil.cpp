@@ -2,29 +2,6 @@
 // src/havok/physics/dynamics/world/util/hkpworldmemoryutil.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/physics/dynamics/world/util/hkpworldmemoryutil.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-struct S_00d01bc0_Node
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    unsigned char unk24;
-    unsigned char m_flags;
-    bool FUN_00d077d0();
-};
-
-struct S_00d01bc0_Iter
-{
-    int m_key;
-    int unk04;
-    S_00d01bc0_Node* m_node;
-};
-
 struct S_00d01bc0_Sink
 {
     virtual void v0();
@@ -51,102 +28,6 @@ struct S_00d01bc0_Global
     {
         return m_sink;
     }
-};
-
-struct S_00d01bc0_Handler
-{
-    virtual void v0();
-    virtual void v1();
-    virtual void v2();
-    virtual void v3();
-    virtual void v4();
-    virtual void v5(S_00d01bc0_Node* node, int arg);
-};
-
-struct S_00d01bc0_Owner
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5c;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6c;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7c;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8c;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9c;
-    int unka0;
-    int unka4;
-    int unka8;
-    int unkac;
-    int unkb0;
-    unsigned int m_uiItemCount;
-    void IncrementCounter();
-    void FUN_00c91190();
-    void ComputeMemoryUsage(S_00d01bc0_Iter* out);
-    S_00d01bc0_Handler* FUN_00c93570();
-};
-
-S_00d01bc0_Global* __cdecl FUN_00c85750();
-void __cdecl PropagateStateToChildren(S_00d01bc0_Owner* owner, S_00d01bc0_Node* node);
-
-struct D01CE0Action
-{
-    virtual void vfunc00();
-    virtual void vfunc04();
-    virtual void vfunc08();
-    virtual void vfunc0C();
-    virtual void vfunc10();
-    virtual void applyFirst();
-    virtual void applySecond();
-
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int m_iValueAfterFlags;
-};
-
-struct D01CE0Context
-{
-    int unk00;
-    int unk04;
-    D01CE0Action* m_pAction;
 };
 
 struct InnerObj
@@ -184,66 +65,13 @@ struct ParamObj
     InnerObj* FUN_00c93570();
 };
 
-void __cdecl FUN_00d88040(int value);
-void __cdecl ApplyActionPhases(ParamObj* param);
-
 #include <windows.h>
 
 extern "C" void _ReadWriteBarrier(void);
 
-extern DWORD DAT_0126835c;
-extern DWORD DAT_01269200;
-extern DWORD DAT_00fdf044;
-
 typedef LPVOID(WINAPI* PFN_TlsGetValue)(DWORD dwTlsIndex);
 
 unsigned __int64 __cdecl __rdtsc(void);
-
-struct ProfRec
-{
-    const char* m_pName;
-    DWORD m_iTick;
-    DWORD unk08;
-};
-
-struct ProfBuf
-{
-    DWORD unk00;
-    ProfRec* m_pCur;
-    DWORD unk08;
-    ProfRec* m_pRecordEnd;
-};
-
-class TaskObj
-{
-  public:
-    virtual void vtbl00(void);
-    virtual void vtbl04(void);
-    virtual void vtbl08(void);
-    virtual DWORD vtbl0C(void);
-    virtual void vtbl10(DWORD arg);
-    virtual void vtbl14(void);
-    virtual void vtbl18(void);
-    virtual void vtbl1C(void);
-    virtual void vtbl20(void);
-    virtual bool vtbl24(DWORD arg);
-};
-
-class Src
-{
-  public:
-    TaskObj* GetA(void);
-    TaskObj* GetB(void);
-};
-
-struct D01D20Holder
-{
-    DWORD unk00;
-    DWORD unk04;
-    DWORD unk08;
-    DWORD unk0C;
-    TaskObj* m_pTask;
-};
 
 // If GetA is non-null and vtbl24 returns false, records profiler ticks around a vtbl10 call, then calls FUN_00d88040(0) if DAT_01269200 is set.
 // @f3 0x00902ea0 (community match, verified in this file)

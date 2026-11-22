@@ -4,62 +4,6 @@
 
 #include "havok/hkaRagdollInstance.h"
 
-extern int DAT_01268700;
-void __stdcall FUN_00ce1760(int, int, int);
-
-struct FUN_00ce2430_Transform
-{
-    unsigned char pad[0x30];
-};
-
-struct FUN_00ce2430_Data
-{
-    unsigned char pad[0x1c];
-    int count;
-};
-
-struct FUN_00ce2430_Class
-{
-    unsigned char pad[0x2c];
-    FUN_00ce2430_Data* data;
-
-    void FUN_00ce2150(int, float, void*);
-    void ApplyValueToTransforms(float, FUN_00ce2430_Transform*);
-};
-
-struct MemoryManager
-{
-    virtual void ReportDiagnostic();
-    virtual void unused1();
-    virtual void release(void* object, unsigned short value);
-};
-
-struct MemoryRouter
-{
-    void* ReportDiagnostic;
-    void* unused1;
-    void* unused2;
-    void* FlushUsageData;
-    MemoryManager* manager;
-};
-
-struct FUN_00ce29b0_standin
-{
-    void FUN_00ce2600();
-    void* Destroy(unsigned char deletingFlag);
-};
-
-MemoryRouter* _D1A0E0GetMemoryRouter();
-
-extern int DAT_010cfd84;
-
-struct FnvVtObj
-{
-    int m_vptr;
-
-    FnvVtObj* FUN_00ce25f0(unsigned int unusedArg);
-};
-
 struct ReferenceObject : hkReferencedObject
 {
     void FUN_00c90510();
@@ -110,15 +54,6 @@ template <class T> struct ObjectArray
         for (int i = 0; i < count; ++i)
             destination[i] = input[i];
     }
-};
-struct RagdollInstance : hkReferencedObject
-{
-    ObjectArray<ReferenceObject*> m_ppRigidBodies;
-    ObjectArray<ReferenceObject*> m_ppConstraints;
-    ObjectArray<int> m_kBoneMap;
-    ReferenceObject* m_pSkeleton;
-    void FUN_00ce22c0(const ObjectArray<ReferenceObject*>& bodies, const ObjectArray<ReferenceObject*>& constraints,
-                      ReferenceObject* skeleton);
 };
 
 namespace fnv_00ce2600 {
@@ -191,34 +126,6 @@ FUN_00ce2600::~FUN_00ce2600() throw()
     skeleton = 0;
 }
 }  // namespace fnv_00ce2600
-
-struct FUN_00ce26f0_ObjectC
-{
-    float FUN_00c91020();
-};
-
-struct FUN_00ce26f0_ObjectB
-{
-    void* unk00;
-    void* unk04;
-    FUN_00ce26f0_ObjectC* unk08;
-};
-
-struct FUN_00ce26f0_ObjectA
-{
-    FUN_00ce26f0_ObjectB* unk00;
-};
-
-struct FUN_00ce26f0_Class
-{
-    int unk00;
-    int unk04;
-    FUN_00ce26f0_ObjectA* unk08;
-
-    void FUN_00ce18d0(FUN_00ce2430_Transform* a);
-    void ApplyValueToTransforms(float a, FUN_00ce2430_Transform* b);
-    void FUN_00ce26f0(FUN_00ce2430_Transform* a);
-};
 
 typedef unsigned int hk_size_tR;
 class hkMemoryAllocatorR
@@ -376,52 +283,6 @@ class hkaRagdollInstanceR : public hkReferencedObjectR
 };
 
 #include <xmmintrin.h>
-struct FUN_00ce14b0_standin
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    float unk0C;
-    __m128 unk10;
-    unsigned short unk20;
-    unsigned short unk22;
-    unsigned short unk24;
-
-    void FUN_00ce14b0(unsigned short a, unsigned short b, unsigned short c, const void* data);
-};
-
-struct FUN_00ce1680_Body
-{
-    void* unk00;
-    void* unk04;
-    void* unk08;
-};
-
-struct FUN_00c94bd0_Obj
-{
-    void FUN_00c94bd0(void* objects, int count, int flag);
-};
-
-struct FUN_00c97d30_Obj
-{
-    void FUN_00c97d30(void* object);
-};
-
-struct CallRet
-{
-    void FUN_00c946e0(void* object, int a, int b);
-};
-
-class FUN_00ce1680_Ragdoll : public hkReferencedObject
-{
-  public:
-    hkArray<void*> m_ppRigidBodies;
-    hkArray<void*> m_ppConstraints;
-    hkArray<hkInt32> m_kBoneMap;
-    hkaSkeleton* m_pSkeleton;
-
-    int FUN_00ce1680(void* world, unsigned char flag);
-};
 
 extern int DAT_010cb830;
 void __cdecl FUN_00c908c0(ArrayAllocator* heap, void* array, int numElements, int sizeOfElement);
@@ -532,25 +393,7 @@ RagdollInstance_ce24* RagdollInstance_ce24::FUN_00ce2470(const hkArray_ce24<Refe
 
 extern "C"
 {
-    extern __m128 DAT_010c71e0;
-    extern __m128 DAT_010c7170;
-    extern __m128 DAT_010c44d0;
-    extern __m128 DAT_010c4c00;
-    extern __m128 DAT_010c4c10;
 }
-
-void __cdecl FUN_00ce2d10(unsigned int p0, void* p1, unsigned int p2, int p3, unsigned int p4);
-
-struct Vec4x3
-{
-    __m128 r0;
-    __m128 r1;
-    __m128 r2;
-};
-
-extern float DAT_01267e30;
-extern float DAT_01017d00;
-extern float DAT_01017d10;
 
 struct UnkCall
 {
@@ -644,10 +487,6 @@ struct PoseW
     const hkQsTransform* p;
     PoseW(const hkQsTransform* q) : p(q)
     {}
-};
-struct RagdollHelper : public hkaRagdollInstance
-{
-    void FUN_00ce1560(PoseW pose);
 };
 
 template <class T> struct InitArray : ObjectArray<T>

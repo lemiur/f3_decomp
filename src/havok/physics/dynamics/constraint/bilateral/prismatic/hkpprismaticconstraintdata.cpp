@@ -132,7 +132,6 @@ class FUN_00d4f8d0
     FUN_00d4f8d0* FUN_00d4ffd0(unsigned int uiFlags) throw();
 };
 
-extern int DAT_010d0b9c;
 extern int DAT_0102e388;
 
 struct RefObj
@@ -201,7 +200,6 @@ union __declspec(intrin_type) __declspec(align(16)) __m128
 };
 extern "C"
 {
-    __m128 _mm_shuffle_ps(__m128, __m128, unsigned int);
     __m128 _mm_mul_ps(__m128, __m128);
     __m128 _mm_sub_ps(__m128, __m128);
     __m128 _mm_add_ps(__m128, __m128);
@@ -210,13 +208,11 @@ extern "C"
     __m128 _mm_movelh_ps(__m128, __m128);
     __m128 _mm_movehl_ps(__m128, __m128);
     __m128 _mm_andnot_ps(__m128, __m128);
-    __m128 _mm_setzero_ps(void);
     __m128 _mm_add_ss(__m128, __m128);
     __m128 _mm_sub_ss(__m128, __m128);
     __m128 _mm_mul_ss(__m128, __m128);
     __m128 _mm_rsqrt_ss(__m128);
     __m128 _mm_cmpeq_ss(__m128, __m128);
-    __m128 _mm_set_ss(float);
 }
 
 union hkVector4q
@@ -234,34 +230,4 @@ union hkVector4q
     }
 };
 
-struct hkMatrix3q
-{
-    hkVector4q m_col[3];
-};
-
-struct hkpPrismaticTransforms
-{
-    char pad0[0x10];
-    hkMatrix3q m_kRotationA;
-    hkVector4 m_kTranslationA;
-    hkMatrix3q m_kRotationB;
-    hkVector4 m_kTranslationB;
-};
-
-struct hkpPrismaticConstraintDataEx : public hkpPrismaticConstraintData
-{
-    void FUN_00d4fba0(const hkVector4& pivotA, const hkVector4& pivotB, const hkVector4& axisA, const hkVector4& axisB,
-                      const hkVector4& axisAPerp, const hkVector4& axisBPerp);
-};
-
 #include <math.h>
-struct hkVector4Out : public hkVector4
-{
-    void SetTransformedPosition(const hkTransform& t, const hkVector4& v);
-};
-
-struct PrismaticWorldSpaceView : public hkpPrismaticConstraintData
-{
-    void FUN_00d4f8f0(const hkTransform& bodyATransform, const hkTransform& bodyBTransform, const hkVector4& pivot,
-                      const hkVector4& axis);
-};

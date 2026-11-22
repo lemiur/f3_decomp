@@ -26,13 +26,6 @@ void NiPSysMeshUpdateModifier::LoadBinary(NiStream& stream)
     stream.ReadUnsignedInteger();
 }
 
-struct FUN_00c206a0_shell : public NiPSysRotationModifier
-{
-    void* FUN_00c206a0();
-};
-
-extern "C" void* g_01202528;
-
 struct FUN_00c20a00_shell : public NiPSysRotationModifier
 {
     void FUN_00c20a00(NiStream*);

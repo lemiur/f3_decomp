@@ -7,32 +7,8 @@
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 extern "C"
 {
-    int __cdecl FUN_00cea030(void*, void*);
     int __cdecl FUN_00ce9db0(void*, void*);
-    int __cdecl FUN_00ce9e90(void*);
 }
-int __cdecl FUN_00cea7c0(void* p1, void* p2, void* p3);
-struct Item
-{
-    int unk00[11];
-    int unk2c;
-};
-struct Container
-{
-    int unk00[2];
-    Item** items;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-};
-struct Counter
-{
-    int unk00[12];
-    int unk30;
-};
-extern "C" void __cdecl AssignNodeFlags(int, int, int);
-void __cdecl FUN_00ce9fa0(Container* c, int value, Counter* counter);
 struct Inner
 {
     virtual void unk0();
@@ -59,52 +35,7 @@ struct hkErrStream
     ~hkErrStream() throw();
     hkErrStream& operator<<(const char* str) throw();
 };
-struct hkError
-{
-    virtual ~hkError() throw();
-    virtual void unk0();
-    virtual void unk1();
-    virtual int message(int type, int id, const char* desc, const char* file, int line) throw();
-};
-extern hkError* DAT_01268360;
 static bool IsSupportedRagdollConstraint(Obj* obj, bool reportError) throw();
-void caller(Obj* obj);
-struct SpawnedAllocator
-{
-    virtual void* release();
-    virtual void* allocate(int size);
-};
-struct SpawnedGlobal
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    SpawnedAllocator* m_pAllocator;
-};
-SpawnedGlobal* __cdecl FUN_00c85750() throw();
-struct SpawnedObject
-{
-    int unk00;
-    unsigned short m_size04;
-    int Init(void* a, void* b, int c, void* d);
-};
-struct SourceRecord
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int m_i2c;
-};
-int __cdecl SpawnObjectFromRecord(SourceRecord* src);
 struct Node
 {
     int unk00, unk04, unk08, unk0c, unk10;
@@ -162,10 +93,6 @@ struct LogText
     void FUN_00cc00e0() throw();
 };
 extern "C" void __cdecl FUN_00c908c0(HeapAllocator* allocator, ScratchArray* array, int capacity, int itemSize);
-extern "C" const char DAT_010cbde0[];
-extern "C" const char DAT_010cbdec[];
-extern "C" const char DAT_010cbe00[];
-extern "C" const char DAT_010cbd34[];
 struct BSAudio;
 BSAudio* __cdecl _FUN_00c85750() throw();
 static ScratchAllocator* scratchState() throw()
@@ -273,21 +200,12 @@ template <class T> struct LocalBuffer
 
 #include <xmmintrin.h>
 extern "C" void _ReadWriteBarrier(void);
-extern "C" void _WriteBarrier(void);
-
-extern const float DAT_010959f4;
-extern const float DAT_01012068;
-extern const __m128 DAT_010c71b0;
 
 struct Vec4
 {
     float x, y, z, w;
 };
 struct PivotVec;
-struct Bits
-{
-    int x, y, z, w;
-};
 struct __declspec(align(16)) V4A
 {
     float x, y, z, w;

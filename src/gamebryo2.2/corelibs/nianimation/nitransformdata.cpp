@@ -184,32 +184,7 @@ struct BSFadeNode
     static void* __cdecl operator new(unsigned int);
 };
 
-struct _Call_a5d3a0 : BSFadeNode
-{
-    _Call_a5d3a0() throw();
-};
-
 extern int DAT_01099004;
-
-struct Obj : _Call_a5d3a0
-{
-    void* mVtable;
-    int m4;
-    short mS08;
-    short mS0a;
-    short mS0c;
-    int mI10;
-    int mI14;
-    int mI18;
-    char mC1c;
-    char mC1d;
-    char mC1e;
-    int mI20;
-    int mI24;
-    int mI28;
-
-    Obj() throw();
-};
 
 }  // namespace fnv_00a4e040
 
@@ -233,16 +208,6 @@ void TimedRotationKey::ClearFloatKeys()
         ++p;
     }
 }
-
-struct FUN_00a4e0b0_Holder
-{
-    void FUN_00a4e0b0(void*, int, char*);
-};
-
-struct FUN_00a4e0f0_shell
-{
-    void InitFromParams(unsigned int, unsigned int, unsigned int);
-};
 
 namespace fnv_00a4e990 {
 struct FUN_00a4e990_shell : public NiTransformData
@@ -722,16 +687,6 @@ void FUN_00a4eaf0()
 {
     FUN_00a57630();
 }
-
-struct FUN_00a57100_Caller
-{
-    bool FUN_00a57100(NiStream&);
-};
-
-struct FUN_00a4eb00_Caller : FUN_00a57100_Caller
-{
-    bool FUN_00a4eb00(NiStream&);
-};
 
 struct TransformDataBinaryInputView
 {

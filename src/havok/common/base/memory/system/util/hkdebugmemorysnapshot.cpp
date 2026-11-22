@@ -64,21 +64,6 @@ namespace hkRouterDD6E {
 extern "C" hkMemoryRouterDD6E& __cdecl FUN_00c85750() throw();
 }
 
-struct hkEntryDD6E
-{
-    int unk00[18];
-};
-
-class hkBufferDD6E
-{
-  public:
-    int* m_ppIndices;
-    hkEntryDD6E* m_entries;
-    int m_pRayCursor;
-
-    void FreeBuffers();
-};
-
 struct hkMemoryAllocatorQ
 {
     virtual void vf00();

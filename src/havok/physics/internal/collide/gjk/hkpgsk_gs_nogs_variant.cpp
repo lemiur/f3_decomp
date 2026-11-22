@@ -47,9 +47,6 @@ struct __declspec(align(16)) SegmentClosestResult
     Vector pointA, pointB;
     float distanceSquared;
 };
-extern void __cdecl FUN_00d22e40(const Vector*, const Vector*, const Vector*, const Vector*, SegmentClosestResult*);
-extern const signed char DAT_010cb440[];
-extern const float DAT_0104da48;
 struct Simplex
 {
     int countA, countB, unk08, unk0c;
@@ -340,10 +337,6 @@ int FUN_00dabca0(Collision_ctx* self, Collision_in* in, Collision_vector* out, C
 }
 
 
-struct Result
-{
-    __m128 v;
-};
 // @fnv 0x00da8350
 __m128* volatile gP;
 __m128* volatile gO;

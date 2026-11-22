@@ -1,8 +1,6 @@
 // src/gamebryo2.2/corelibs/niparticle/nipsysemitterplanaranglevarctlr.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/_fallout3/platforms/common/code/gamebryo2.2/corelibs/niparticle/nipsysemitterplanaranglevarctlr.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-extern "C" void* g_01202730;
-
 struct NiPSysEmitterPlanarAngleVarCtlr
 {
     void __thiscall FUN_00c2b470(float fValue);
@@ -34,19 +32,6 @@ void NiPSysEmitterPlanarAngleVarCtlr::FUN_00c2a8b0(float& rfValue)
     rfValue = m_pkFloatCtlr->m_fValue;
 }
 }  // namespace fnv_00c2a8b0
-
-struct StrArr
-{
-    unsigned char _pad0[8];
-    unsigned short m_usMaxSize;
-    unsigned short m_usSize;
-    unsigned short _pad1;
-    unsigned short m_usGrowBy;
-    void __thiscall SetSize(unsigned int);
-    void __thiscall SetAt(unsigned int, char*&);
-};
-void __stdcall FUN_00c32f60(StrArr*);
-char* __cdecl _FUN_00a7d330(void*);
 
 struct NiMemObject
 {

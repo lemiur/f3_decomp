@@ -21,35 +21,6 @@ struct D3DD50Collector : D3DD50CollectorBase {
     virtual void unk00();
     virtual void unk04();
 };
-void __cdecl D3DD50Query(int a, int b, int c, D3DD50CollectorBase* collector);
-void __cdecl QueryD3DCollector(int aiArg1, int aiArg2, int aiArg3, int aiData);
-extern char DAT_010ce7fc[];
-struct Functor_d3e110 {
-    void* m_vtbl;
-    float m_fHitFraction;
-    int m_uiFilterValue;
-};
-void __cdecl FUN_00d3d8c0(int a, int b, int c, Functor_d3e110* f);
-void __cdecl FUN_00d3e110(int a, int b, int aiArg3, int d);
-struct SpawnedInner
-{
-    virtual void unk00();
-    virtual void unk04();
-    virtual void unk08();
-    virtual void unk0C();
-    virtual void unk10();
-    virtual void unk14(unsigned short flags, void* param);
-};
-class FUN_00d3d200_cls
-{
-public:
-    virtual void unk00(int flags);
-    int m_unk04;                 // +0x04
-    SpawnedInner* m_pInner;      // +0x08
-    unsigned short m_wFlags;     // +0x0C
-
-    void FUN_00d3d200(void* param);
-};
 struct hkMemory {
     virtual void unk0();
     virtual void* allocateChunk(int size);
@@ -62,7 +33,6 @@ struct hkThreadMemory {
         return m_pMemoryAllocator->allocateChunk(size);
     }
 };
-extern "C" hkThreadMemory* __cdecl FUN_00c85750();
 extern "C" void __cdecl FUN_00cd7160(void* src, void* dst);
 extern "C" const void* DAT_010cf060;
 extern "C" const void* DAT_010cf09c;
@@ -87,22 +57,6 @@ struct TargetAgent {
         vtable = &DAT_010cf09c;
     }
 };
-void* __cdecl CreateTargetAgent(void* bodyA, void* bodyB, void* input, void* mgr);
-extern char DAT_010ce81c[];
-struct D3DD10Data
-{
-    void* vt;
-    unsigned char flag;
-    unsigned int value;
-};
-struct D3DD10Object
-{
-    void __thiscall FUN_00d3d2a0(unsigned int a1, unsigned int a2,
-                                 unsigned int a3, D3DD10Data* data);
-
-    void __thiscall FUN_00d3dd10(unsigned int p0, unsigned int p1,
-                                 unsigned int p2, unsigned int p3);
-};
 union __declspec(intrin_type) __declspec(align(16)) __m128 { float m128_f32[4]; unsigned __int64 m128_u64[2]; };
 extern "C" {
 __m128 _mm_add_ps(__m128, __m128);
@@ -126,52 +80,6 @@ __forceinline void hkSwap(T& a, T& b)
     a = b;
     b = t;
 }
-struct NibblePair
-{
-    unsigned char lo : 4;
-    unsigned char hi : 4;
-};
-struct SpawnedParticle
-{
-    hkVector4q m_vContactPosition;
-    hkVector4q m_fVelocity;
-    hkVector4q m_extra;
-};
-struct ParticleSystemState
-{
-    SpawnedParticle* m_kRayEnd;
-    int unk0004;
-    int unk0008;
-    int unk000C;
-    SpawnedParticle m_particles[256];
-    int unk3010;
-    int unk3014;
-    int unk3018;
-    int unk301C;
-    hkVector4q m_3020;
-    float m_3030;
-    int unk3034;
-    int unk3038;
-    int unk303C;
-    struct Info
-    {
-        unsigned short m_3040;
-        unsigned short m_3042;
-        unsigned short m_3044;
-        unsigned short unk3046;
-        unsigned char m_3048;
-        unsigned char m_3049;
-        NibblePair m_304a;
-        unsigned char unk304b;
-    } m_info;
-};
-extern hkVector4q DAT_010c4c00;
-class ParticleSystemOps
-{
-public:
-    void FUN_00d3dd90(int a, int b, int c, ParticleSystemState* state);
-    void FUN_00d3e150(int a1, int a2, int a3, ParticleSystemState* s);
-};
 typedef unsigned long DWORD;
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(DWORD);
 extern "C" {
@@ -182,7 +90,6 @@ __m128 _mm_unpacklo_ps(__m128, __m128);
 __m128 _mm_unpackhi_ps(__m128, __m128);
 __m128 _mm_movelh_ps(__m128, __m128);
 __m128 _mm_movehl_ps(__m128, __m128);
-void _mm_store_ps(float*, __m128);
 }
 extern "C" DWORD DAT_0126835c;
 struct __declspec(align(16)) Vec4 {
@@ -191,24 +98,6 @@ struct __declspec(align(16)) Vec4 {
 struct Res {
     Vec4 pt;
     float d;
-};
-struct Arg3S {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    float f10;
-};
-struct ProfRec {
-    const char* name;
-    unsigned int tsc;
-    unsigned int unk08;
-};
-struct ProfBuf {
-    unsigned int unk00;
-    ProfRec* cur;
-    unsigned int unk08;
-    ProfRec* end;
 };
 struct XForm {
     __m128 r0;
@@ -247,30 +136,11 @@ struct SinkWrap {
     Sink* p;
     SinkWrap(Sink* q) : p(q) {}
 };
-class SphereTriAgent {
-public:
-    int unk00, unk04, unk08, unk0C;
-    float unk10;
-    void FUN_00d3d2a0(BodyHolderB* a, BodyHolderB* b, int c_, Sink* sink);
-};
 // rotate the translation difference by the inverse of B's rotation (HK_TRANSPOSE3), compute the
 // closest point, and report a contact when the distance is below the summed radii.
 extern DWORD DAT_0126835c;
-extern char DAT_010cf0d4[];
 // "TtSphereTri"
-extern char DAT_010c41f8[];
 // "Et"
-struct S_00d3d3e0_Entry {
-    const char* name;
-    unsigned time;
-    int unk08;
-};
-struct S_00d3d3e0_Hdr {
-    int unk00;
-    S_00d3d3e0_Entry* cur;
-    int unk08;
-    S_00d3d3e0_Entry* end;
-};
 struct __declspec(align(16)) S_00d3d3e0_V4 {
     float x, y, z, w;
 };
@@ -310,7 +180,6 @@ void __cdecl FUN_00cd7850(S_00d3d3e0_V4* a, void* b, S_00d3d3e0_V4* c, S_00d3d3e
 struct S_00d3d3e0_P1P { S_00d3d3e0_P1* p; S_00d3d3e0_P1* val() const { return p; } };
 struct S_00d3d3e0_P2P { S_00d3d3e0_P2* p; S_00d3d3e0_P2* val() const { return p; } };
 struct S_00d3d3e0_P3P { S_00d3d3e0_P3* p; S_00d3d3e0_P3* val() const { return p; } };
-void FUN_00d3d3e0(S_00d3d3e0_P1P a1, S_00d3d3e0_P2P a2, int unused, S_00d3d3e0_P3P a3);
 
 extern "C" __m128 _mm_load_ss(float const*_A);
 typedef unsigned long DWORD;
@@ -504,15 +373,6 @@ struct Transform {
     }
 };
 
-struct AlignedPairData {
-    FourFloatVector m_vContactPosition;
-    FourFloatVector m_vSeparatingNormal;
-    unsigned int m_iOwnerObjectOffset;
-    int pad24;
-    int pad28;
-    int pad2C;
-};
-
 struct Shape;
 struct CdBody {
     Shape* m_pCollisionShape;
@@ -548,40 +408,6 @@ struct Shape {
     FourFloatVector m_kVertices[3];
 };
 
-struct CollisionConstraintOwner {};
-
-struct ProcessCollisionOutput {
-    AlignedPairData* m_pAlignedPairData;
-    CollisionConstraintOwner* m_pConstraintOwner;
-};
-
-struct ProcessCollisionInput {
-    int unk00;
-    int unk04;
-    float m_fCollisionTolerance;
-};
-
-struct ContactMgr {
-    virtual void unk00();
-    virtual void unk04();
-    virtual void unk08();
-    virtual unsigned short addContactPoint(const CdBody* bodyA, const CdBody* bodyB, const ProcessCollisionInput* input, ProcessCollisionOutput* result, int zero, AlignedPairData* cp);
-    virtual void unk10();
-    virtual void removeContactPoint(unsigned short id, CollisionConstraintOwner& owner);
-};
-
-struct MonitorRecord {
-    const char* name;
-    unsigned int timestamp;
-    unsigned int auxiliary;
-};
-struct MonitorStream {
-    void* unk0;
-    MonitorRecord* m_pTileTemplate;
-    void* unk8;
-    MonitorRecord* m_pRayCursor;
-};
-
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long dwTlsIndex);
 extern "C" unsigned long DAT_0126835c;
 
@@ -592,20 +418,6 @@ extern "C" int __cdecl FUN_00cd7850(
     void* output,
     void* weldFlag
 );
-
-union FeatureInfo {
-    struct { unsigned char count; unsigned short indices[3]; };
-    unsigned __int64 encoded;
-};
-
-struct ClosestPointOutput {
-    FourFloatVector m_vHitNormal;
-    float m_fClosestPointDistanceSquared;
-};
-
-struct TargetAgent_Cand : TargetAgent {
-    void FUN_00d3dd90(const CdBody* bodyA, const CdBody* bodyB, const ProcessCollisionInput* input, ProcessCollisionOutput* result);
-};
 
 extern "C" __m128 _mm_load_ss(const float*);
 static __forceinline __m128 PlainBroadcast(const float& f) {

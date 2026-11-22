@@ -6,55 +6,7 @@
 // src/havok/physics/collide/shape/deprecated/convexpiecemesh/hkpconvexpieceshape.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/physics/collide/shape/deprecated/convexpiecemesh/hkpconvexpieceshape.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 extern int DAT_010c6fb0;
-extern int DAT_010ece2c;
-extern int DAT_010ece08;
-struct FUN_00e607c0
-{
-    void* m_p00;           // +0x00
-    short m_s04;           // +0x04
-    short m_s06;           // +0x06
-    int m_i08;             // +0x08
-    int m_i0C;             // +0x0c
-    float m_f10;           // +0x10
-    void* volatile m_p14;  // +0x14
-
-    FUN_00e607c0(float arg);
-};
-struct FUN_00e60680_class
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int capacity;
-    int __thiscall GetNextIndex(int index);
-};
-struct InnerDispatch
-{
-    virtual void f0();
-    virtual void f1();
-    virtual void f2();
-    virtual void f3();
-    virtual void f4();
-    virtual void run(int, int);
-};
-struct Dispatch
-{
-    int x0, x4, x8, xc;
-    InnerDispatch inner;
-};
-struct FUN_00e60690_owner
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    Dispatch* unk0c;
-    int* unk10;
-    void DispatchToInner(int index, int value);
-};
 extern int DAT_010c6fb0;
-extern int DAT_0102e388;
 struct AudioAllocator
 {
     virtual void v00();
@@ -198,7 +150,6 @@ void FNV_Owner::FUN_00e608d0(FNV_V4* pA, FNV_V4* pOut)
 }
 
 
-extern "C" void __debugbreak();
 extern const unsigned int DAT_01017d10[4];
 void __cdecl ResizeAudioStream(void* alloc, void* array, int elemSize);
 
@@ -333,25 +284,6 @@ struct S5fb50_Query
     int m_offset[3];
     int m_iIndex;
 };
-
-// hkErrStream
-struct S5fb50_ErrStream
-{
-    void* unk00;
-    void* unk04;
-    void* unk08;
-    void FUN_00cb1600(void* buf, int bufSize);
-    void FUN_00cc01c0(const char* s);
-    void FUN_00cc00e0();
-};
-struct S5fb50_Error
-{
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual int message(int id, unsigned int msgId, const char* desc, const char* file, int line);
-};
-extern S5fb50_Error* DAT_01268360;
 
 class S5fb50_MoppVm
 {

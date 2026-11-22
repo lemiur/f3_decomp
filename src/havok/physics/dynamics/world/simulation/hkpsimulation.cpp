@@ -21,8 +21,6 @@ public:
     int __thiscall FUN_00c93570();
 };
 
-extern "C" void __cdecl ProcessChildLoop(hkpWorld*);
-
 class SimulationDerived : public hkpSimulation {
 public:
     virtual void vfn04();
@@ -55,13 +53,8 @@ extern "C" {
     extern int DAT_01269200;
     extern unsigned long DAT_0126835c;
     extern const char str_010c41f8[];
-    extern const char str_010cc530[];
     void __cdecl FUN_00d014f0(void*, void*);
 }
-
-struct FUN_00c96ff0_Class {
-    void __thiscall FUN_00c96ff0(int a, int b);
-};
 
 struct hkpWorld_Fields {
     int unk000; int unk004; int unk008; int unk00c; int unk010; int unk014; int unk018; int unk01c;
@@ -353,25 +346,8 @@ struct hkpEntity {
     hkMotionState m_kMotionState;
 };
 
-void __cdecl FUN_00cf1b10(float time, hkMotionState* ms);
-void __cdecl FUN_00d28680(const hkStepInfo* stepInfo, hkpEntity** entities, int numEntities, int offset);
 void __cdecl FUN_00d1a330(hkpCollisionInputS* input, hkpEntity** entities, int numEntities);
 void __cdecl FUN_00cf9c60(hkpEntity** entities, int numEntities, hkpWorld* world);
-
-class hkpSimulationV : public hkpSimulation {
-public:
-    virtual void v04();
-    virtual void v08();
-    virtual void v0C();
-    virtual void v10();
-    virtual void v14();
-    virtual void v18();
-    virtual void v1C();
-    virtual void collideEntities(hkpEntity** entities, int numEntities, hkpWorld* world, int findExtraContacts);
-
-    void FUN_00cfa400(hkpEntity** entities, int numEntities, hkpCollisionInputS* input, int flag);
-    void ResetSimulationState(hkpEntity** entities, int numEntities, hkpWorld* world, int resetInfo);
-};
 
 }  // namespace fnv_00cfa470
 
@@ -388,17 +364,9 @@ struct FnvCpu_FUN_00cfa7a0_CpuAllocatorHolder {
     FnvCpu_FUN_00cfa7a0_CpuAllocator* allocator;
 };
 FnvCpu_FUN_00cfa7a0_CpuAllocatorHolder* __cdecl FUN_00c85750();
-struct FnvCpu_FUN_00cfa7a0_CpuObject {
-    unsigned int unk00;
-    unsigned short size;
-    void FUN_00cf86d0();
-    FnvCpu_FUN_00cfa7a0_CpuObject* FUN_00cfa7a0(unsigned int flags);
-};
 
 extern "C" void __cdecl FUN_00d01380(int);
 extern unsigned long DAT_0126835c;
-extern void* DAT_00fdf044;
-extern const char str_010cc540[];
 extern const char str_010c41f8[];
 typedef void* (__stdcall *S00cf8a40_TlsFn)(unsigned long);
 
@@ -759,8 +727,6 @@ struct hkpCollisionInputCF9 {
     int* m_aiContactPointIds;
 };
 
-class hkpShapeCF9;
-
 class hkpAgentCF9 {
 public:
     virtual void vf00();
@@ -781,10 +747,7 @@ struct hkpLinearCastInputCF9 {
     void* m_pBodyB;
 };
 
-extern float DAT_0104da48;
 extern int DAT_01269200;
-
-void __cdecl FUN_00cfedd0(hkpLinearCastInputCF9* in, hkpCollisionInputCF9* input, hkpCdPointCollectorCF9* collector, hkpAgentCF9* agent);
 
 // @f3 0x0097fc80 (community match, verified in this file)
 struct CastBool {char value; };struct CastManager;struct CastMethods {void* unk00; void* unk04; void* unk08; void* unk0C; void* unk10; void* unk14; void* unk18; void* unk1C; void* unk20; void* unk24; void* unk28; void* unk2C; void* unk30; void* unk34; void* unk38; void* unk3C; void* unk40; void* unk44; void* unk48; void* unk4C; void* unk50; void* unk54; void* unk58; void* unk5C; CastBool* (__thiscall* query)(CastManager*,CastBool*,int);};struct CastManager {CastMethods* table;int state;};
@@ -801,12 +764,6 @@ struct SimMonStream {
     char* m_kRayEnd;
     char* m_cap;
     char* m_capMinus16;
-};
-
-struct SimTimerCmd {
-    const char* m_name;
-    unsigned int m_ticks;
-    unsigned int m_auiShapeKeys;
 };
 
 struct __declspec(align(16)) SimStepInfo {
@@ -1007,7 +964,6 @@ int SimLocal::FUN_00cf9340(float physicsDeltaTime)
 
 
 extern "C" void ForwardToGlobal();
-extern "C" void __cdecl InitArrayEntries(void* a, void* b);
 
 struct S00cfa430_Data {
     char pad[0x78];
@@ -1020,121 +976,6 @@ struct MyObj : FUN_00cfa400_Obj {
 
 union __declspec(intrin_type) __declspec(align(16)) __m128 { float m128_f32[4]; unsigned __int64 m128_u64[2]; };
 extern "C" __m128 _mm_load_ss(const float* p);
-
-struct S00cfa6e0_Src {
-    int u00;
-    float f04;
-    float f08;
-    int u0c;
-    int u10;
-    int u14;
-    int u18;
-    int u1c;
-    int u20;
-    int u24;
-    int u28;
-    int u2c;
-    int u30;
-    int u34;
-    int u38;
-    int u3c;
-    int u40;
-    int u44;
-    int u48;
-    int u4c;
-    int u50;
-    float f54;
-    int u58;
-    float f5c;
-    int u60;
-    int u64;
-    int u68;
-    int u6c;
-    int u70;
-    int u74;
-    int u78;
-    int u7c;
-    int u80;
-    int u84;
-    int u88;
-    int u8c;
-    int u90;
-    int u94;
-    int u98;
-    int u9c;
-    int ua0;
-    int ua4;
-    int ua8;
-    int uac;
-    int ub0;
-    int ub4;
-    int ub8;
-    int ubc;
-    int uc0;
-    int uc4;
-    int uc8;
-    int ucc;
-    int ud0;
-    int ud4;
-    int ud8;
-    int udc;
-    int ue0;
-    int ue4;
-    int ue8;
-    int uec;
-    int uf0;
-    int uf4;
-    int uf8;
-    int ufc;
-    int u100;
-    int u104;
-    int u108;
-    float f10c;
-    float f110;
-    int u114;
-    int u118;
-    float f11c;
-    float f120;
-    int u124;
-    float f128;
-    int u12c;
-};
-
-struct S00cfa6e0_Pair {
-    int u00; int u04; int i08; int i0c;
-};
-
-struct S00cfa6e0_Dst {
-    float f00;
-    float f04;
-    float f08;
-    int i0c;
-    int i10;
-    float f14;
-    float f18;
-    int u1c;
-    float f20;
-    float f24;
-    float f28;
-    int u2c;
-    int u30;
-    int u34;
-    int u38;
-    int u3c;
-    float f40;
-    float f44;
-    int u48;
-    int u4c;
-    int i50;
-    int i54;
-    int i58;
-    int i5c;
-    int u60;
-    int u64;
-    int i68;
-    int u6c;
-    void FUN_00cfa6e0(S00cfa6e0_Src* s, S00cfa6e0_Pair* p, int v);
-};
 
 struct FUN_00cfa7d0
 {
@@ -1224,26 +1065,6 @@ public:
     hkRefObjCF87() { m_sReferenceCount = 1; }
 };
 
-class FUN_00cf87c0 : public hkRefObjCF87 {
-public:
-    int m_08;
-    void* m_0c;
-    bool m_10;
-    char unk11;
-    char unk12;
-    char unk13;
-    float m_14;
-    float m_18;
-    int unk1C;
-    float m_20;
-    float m_24;
-    int m_28;
-
-    FUN_00cf87c0(void* p) throw();
-    virtual ~FUN_00cf87c0() throw();
-};
-
-extern "C" const char str_010cc568[];
 static __forceinline void S00cf8bc0_timer(const char* tag, hkReal& slot) {
     StringCursor* s = (StringCursor*)TlsGetValue(DAT_0126835c);
     char* pos = s->m_commandSlice;
@@ -1310,7 +1131,6 @@ extern "C" unsigned __int64 __rdtsc();
 extern "C" void _ReadWriteBarrier();
 extern const char str_010cc624[], str_010cc618[], str_010cc60c[], str_010cc5fc[];
 extern const char str_010cc5f0[], str_010cc5e4[], str_010cc5d8[], str_01076f38[];
-extern "C" void __cdecl FUN_00d88040(int);
 struct Arr;
 extern "C" void __cdecl FUN_00cf7130(Arr*, Arr*);
 extern "C" void __cdecl FUN_00d1a330(void*, void*, int);
@@ -1913,16 +1733,8 @@ finish:
 }
 
 
-extern const char DAT_010c41f8[];
 extern const char str_01076f38[];
-extern const char str_010cc574[];
-extern const char str_010cc58c[];
 extern const char str_010c41f8[];
-extern const char str_010cc55c[];
-extern const char str_010cc5a4[];
-extern const char str_010cc5b0[];
-extern const char str_010cc5bc[];
-extern const char str_010cc5c4[];
 extern "C" __m128 _mm_shuffle_ps(__m128, __m128, int);
 extern "C" __m128 _mm_mul_ps(__m128, __m128);
 extern unsigned long DAT_0126835c;
@@ -2188,16 +2000,6 @@ class WorldFull { public:
     }
 };
 
-struct MemoryManager {
-    virtual void slot0(); virtual void slot1(); virtual void slot2(); virtual void slot3();
-    virtual void slot4(); virtual void slot5(); virtual void slot6(); virtual void slot7();
-    virtual bool available(int);
-};
-struct Holder { unsigned int unk00, unk04, unk08, unk0c, unk10, unk14; MemoryManager* memory; };
-
-extern "C" void __cdecl FUN_00d892d0();
-extern "C" void __cdecl FUN_00cb55d0(WorldFull*);
-extern "C" void __cdecl FUN_00d01bc0(WorldFull*);
 struct __declspec(align(16)) IntegrationContext {
     unsigned int unk000;
     unsigned int unk004;
@@ -2232,10 +2034,6 @@ struct __declspec(align(16)) IntegrationContext {
 };
 extern "C" int __cdecl FUN_00d28a30(SolverInfo*, TimeInterval*, void*, void*, int, int);
 extern "C" void __cdecl FUN_00d1a330(void*, void*, int);
-extern "C" int __cdecl FUN_00d88b50(TimeInterval*, SolverInfo*, IntegrationContext*, Island*, int, int, void*, int);
-extern "C" void __cdecl AddItemToContainer(WorldFull*, Island*);
-extern "C" void __cdecl FUN_00d015a0(WorldFull*, Island*, const TimeInterval*);
-extern "C" void __cdecl FUN_00d01440(WorldFull*, const TimeInterval*);
 struct Simulation {
     unsigned int unk00, unk04, unk08;
     WorldFull* m_pOwningWorld;
@@ -2525,9 +2323,6 @@ extern "C" unsigned __int64 __cdecl __rdtsc(void);
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long);
 extern "C" unsigned long DAT_0126835c;
 extern "C" int DAT_01269200;
-extern "C" char str_010cc64c;
-extern "C" char str_010cc54c;
-extern "C" char str_010cc634;
 struct TraceEntry { const char* m_name; unsigned int m_low; unsigned int m_high; };
 struct TraceState { unsigned int unk00; TraceEntry* m_next; unsigned int unk08; TraceEntry* m_last; };
 __forceinline void stamp(const char* name, volatile unsigned int& clockSlot) {
@@ -2853,8 +2648,6 @@ struct S00cfa080_Obj {
  void __thiscall FUN_00cfa080(hkVector4* p);
 };
 extern "C" void __cdecl FUN_00cf9c60(unsigned int, unsigned int, W*);
-extern "C" void __cdecl FUN_00cff3c0(O*, void*, O*);
-extern "C" void __cdecl FUN_00d01650(W*,O*,hkVector4*);
 __forceinline void stampN(const char* name) {
  TraceState* t = (TraceState*)TlsGetValue(DAT_0126835c);
  TraceEntry* e = t->m_next;
@@ -3020,8 +2813,6 @@ extern "C" {
     __m128 _mm_rsqrt_ss(__m128);
     float _mm_cvtss_f32(__m128);
     __m128 _mm_set_ss(float);
-    __m128 _mm_set_ps1(float);
-    __m128 _mm_setzero_ps();
     __m128 _mm_load_ps(const float*);
     __m128 _mm_load_ss(const float*);
     void _mm_store_ps(float*, __m128);
@@ -3485,8 +3276,4 @@ struct FNVAudioHolder_CFA5F0 {
 };
 extern "C" void __cdecl FUN_00cf9c60(int arg1,int arg2,FNVSIM_CFA5F0* simulation);
 FNVAudioHolder_CFA5F0* __cdecl FUN_00c85750();
-struct FNVOwner_CFA5F0 {
-    void __thiscall FUN_00cfa400(int arg1, int arg2, FNVState_CFA5F0* state, int arg5);
-    void __thiscall FUN_00cfa5f0(int arg1,int arg2,FNVSIM_CFA5F0* sim, const int* values,int arg5);
-};
 }  // namespace fnv_00cfa5f0

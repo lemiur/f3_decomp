@@ -2,36 +2,6 @@
 // with VC9 RTM (cl 15.00.21022.08, the compiler the game was built with). Declarations copied from that unit's skeleton.
 
 #include "f3_common.h"
-// src/havok/common/internal/convexhull/hkplaneequationutil.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/build/20091222_000100_aianbecldeph/source/common/internal/convexhull/hkplaneequationutil.cpp).
-// Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
-struct Arg
-{
-    void* data;
-    int count;
-};
-struct B
-{
-    int f0;
-    int f1;
-    int f2;
-    int f3;
-
-    void* FUN_00d74d40();
-};
-struct A
-{
-    int f0;
-    int f1;
-    int f2;
-    int f3;
-    int f4;
-
-    void FUN_00d76ca0();
-    int FUN_00d774a0(void*, int, void*);
-    void FUN_00d76120(int, int);
-    void FUN_00d76940();
-};
-int __cdecl ProcessArg(Arg* a, int second);
 
 union __declspec(intrin_type) __declspec(align(16)) __m128
 {
@@ -141,12 +111,6 @@ struct hkVector4
         hkQuadReal x2 = _mm_mul_ps(m_vComponents, a.m_vComponents);
         return _mm_add_ss(_mm_shuffle_ps(x2, x2, 0xaa), _mm_add_ss(_mm_shuffle_ps(x2, x2, 0x55), x2));
     }
-};
-struct hkMatrix3
-{
-    hkVector4 m_kColumn0;
-    hkVector4 m_kColumn1;
-    hkVector4 m_kColumn2;
 };
 struct PointResult
 {

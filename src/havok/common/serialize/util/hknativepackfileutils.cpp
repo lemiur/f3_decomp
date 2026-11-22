@@ -2,8 +2,6 @@
 // src/havok/common/serialize/util/hknativepackfileutils.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/common/serialize/util/hknativepackfileutils.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-extern "C" void __cdecl ProcessElements(int, int, int);
-
 struct FUN_00dc0ed0_class
 {
     void FUN_00dc0ed0(int a, int b);
@@ -17,47 +15,6 @@ void FUN_00dc0ed0_class::FUN_00dc0ed0(int first, volatile int second) {
 
 
 void __cdecl FUN_00dc0de0(void*, void*);
-
-struct FUN_00dc0ef0_class
-{
-    void* m_00;
-    void* m_04;
-    void* m_08;
-    void* m_0c;
-    int m_10;
-    int m_14;
-    int m_18;
-    void FUN_00dc0ef0();
-};
-
-struct FUN_00dc08f0_Element
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int dataOffset;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    void IsRendererActive(void* data, int arg);
-    void SecondPass(void* data, int arg);
-};
-
-struct FUN_00dc08f0_Header
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    FUN_00dc08f0_Element* elements;
-    int count;
-};
 
 struct S_00dc0de0_Allocator
 {
@@ -166,14 +123,6 @@ struct S_00dc0de0_Array
     }
 };
 
-struct S_00dc0de0
-{
-    int m_00;
-    int unk04;
-    S_00dc0de0_Map m_map;
-    S_00dc0de0_Array m_ppData;
-};
-
 extern char DAT_010d6ab4[];
 
 // @fnv 0x00dc0eb0
@@ -182,20 +131,7 @@ void* __cdecl FUN_00dc0eb0()
     return DAT_010d6ab4;
 }
 
-struct FUN_00dc0ec0_cls
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int FUN_00dc0ec0(int first, int second);
-};
-
-extern "C" int __cdecl FUN_00dc07d0(void*, void*) throw();
 extern "C" void __cdecl FUN_00c908c0(void*, void*, int, int) throw();
-extern "C" void* __cdecl UnpackPackfile(void*, void*, void*, int, void*) throw();
 extern "C" void* DAT_010d6a94;
 
 struct S_00dc0cd0_Alloc
@@ -307,70 +243,14 @@ struct S_00dc0cd0_Array
     }
 };
 
-struct S_00dc0cd0_Resource
-{
-    void* m_00;
-    short m_04;
-    short m_06;
-    S_00dc0cd0_MemberArray m_ppData;
-    void* m_14;
-    void* m_18;
-};
-
 namespace fnv_00dc0f20 {
 extern int DAT_010d6a94;
-extern int DAT_0102e388;
 
 void __cdecl FUN_00dc0de0(void*, void*);
 
-struct AudioAllocator
-{
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual void v0C();
-    virtual void FreeArray(void* apMemory, unsigned int auiSize) throw();
-};
-
-struct AudioHolder
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    AudioAllocator* m_pAllocator;
-};
-
-struct BSAudio;
-
-struct FUN_00dc0f20_cls
-{
-    int m_vptr;
-    int unk04;
-    void* m_08;
-    void* m_0c;
-    unsigned int m_10;
-    int m_14;
-    int m_18;
-
-    void FUN_00dc0f20();
-};
-
 }  // namespace fnv_00dc0f20
 
-struct StructureLayoutRules
-{
-    unsigned char m_ucBytesInPointer;
-    unsigned char m_bLittleEndian;
-    unsigned char m_bReusePaddingOptimization;
-    unsigned char m_bEmptyBaseClassOptimization;
-};
-
-extern StructureLayoutRules DAT_011b7b88;
-
 void __cdecl FUN_00cb1280(void* p, int a, int b);
-void* __cdecl FUN_00dc0fb0();
-int __cdecl FUN_00cb0fa0(const void* a, const void* b);
 
 struct hkPackfileHeader
 {
@@ -419,8 +299,6 @@ struct hkPackfileSectionHeaderN
     int m_iEndOffset;
 };
 
-void __cdecl hkMemCpyN(void* dst, const void* src, int n);
-
 inline void* operator new(unsigned int, void* p) throw()
 {
     return p;
@@ -440,25 +318,6 @@ struct hkSectionArrayN
         return m_data[i];
     }
 };
-
-struct hkTypeInfoRegistryN
-{
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual void v0c();
-    virtual const void* RegisterLoadedObject(void* obj, const char* className);
-};
-
-struct hkBuiltinTypeRegistryN
-{
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual hkTypeInfoRegistryN* GetTypeInfoRegistry();
-};
-
-extern hkBuiltinTypeRegistryN* g_pkBuiltinTypeRegistryN;
 
 struct hkLoadedObjectTrackerN
 {
@@ -511,8 +370,6 @@ volatile int g_a_dc07b0;
 volatile int g_b_dc07b0;
 Table_dc07b0* volatile g_t_dc07b0;
 volatile int g_out_dc07b0;
-
-extern "C" int __cdecl FUN_00cb17f0(int);
 
 struct hkPackfileSectionHeader
 {

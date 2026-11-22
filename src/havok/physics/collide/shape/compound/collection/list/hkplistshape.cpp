@@ -37,13 +37,6 @@ int hkPListShape2::GetElementAt(int index)
     return *(int*)(*(int*)((char*)this + 8) + (index << 4) + 4);
 }
 
-struct S_00cf5880
-{
-    int unk0;
-    void FindNextEnabledChild(int a);
-    void FUN_00cf5880();
-};
-
 struct __declspec(align(16)) BufAligned32
 {
     int unk00;
@@ -56,19 +49,7 @@ struct __declspec(align(16)) BufAligned32
     int unk1C;
 };
 
-struct FUN_00cf4fb0_Obj
-{
-    void FUN_00cf4fb0(void* a1);
-};
-
-struct FUN_00cf5420_class
-{
-    void FUN_00cf5420();
-};
-
 class hkClassCF54;
-
-extern const hkClassCF54 DAT_01269198;
 
 int __cdecl FUN_00d06f80(const void* pvChunk, int iNumBytes) throw();
 
@@ -214,14 +195,6 @@ class hkLevel1CF56 : public hkLevel0CF56, public hkIfaceCF56
     }
 };
 
-class FUN_00cf56f0 : public hkLevel1CF56
-{
-  public:
-    FUN_00cf56f0(hkFinishFlagCF56 flag) throw();
-    virtual ~FUN_00cf56f0() throw();
-    virtual void i0();
-};
-
 // @f3 0x006139a0 (community match, verified in this file)
 namespace Clear98 {
 struct Value {unsigned unk00,unk04;unsigned state;};
@@ -334,13 +307,6 @@ struct FnvCpu_FUN_00cf5890_CpuAllocatorHolder
     FnvCpu_FUN_00cf5890_CpuAllocator* allocator;
 };
 FnvCpu_FUN_00cf5890_CpuAllocatorHolder* __cdecl FUN_00c85750();
-struct FnvCpu_FUN_00cf5890_CpuObject
-{
-    unsigned int unk00;
-    unsigned short size;
-    void FUN_00cf5750();
-    FnvCpu_FUN_00cf5890_CpuObject* Destroy(unsigned int flags);
-};
 
 class hkMemoryAllocatorCF56;
 
@@ -383,45 +349,6 @@ template <class T> class hkArrayCF56
             FUN_00c908c0(kAlloc, this, iNewCap, sizeof(T));
         }
     }
-};
-
-struct hkVector4CF56
-{
-    float x, y, z, w;
-};
-
-class ShapeBaseCF56
-{
-  public:
-    virtual void vfn_00();
-    int unk04, unk08, unk0C;
-};
-
-class ListenerBaseCF56
-{
-  public:
-    virtual void vfn_10();
-    int unk14;
-};
-
-class FUN_00d21410 : public ShapeBaseCF56, public ListenerBaseCF56
-{
-  public:
-    FUN_00d21410(int iType, int iFlags) throw();
-};
-
-class FUN_00cf5640 : public FUN_00d21410
-{
-  public:
-    hkArrayCF56<hkVector4CF56> m_kPoints;
-    short m_flags24;
-    short m_flags26;
-    int unk28, unk2C, unk30, unk34, unk38, unk3C, unk40, unk44, unk48, unk4C;
-    int m_aiIds[8];
-
-    FUN_00cf5640(int iA, int iB, int iC) throw();
-    FUN_00cf5640(int iA, int iB) throw();   // 0x0097dab0 (2 stack parameters)
-    void FUN_00cf54d0(int iA, int iB, int iZero, int iC) throw();
 };
 
 struct Stream_cf50c0
@@ -501,13 +428,6 @@ struct ShapeRouter
     }
 };
 void __cdecl FUN_00c908c0(void* allocator, void* array, int capacity, int elementSize);
-void __cdecl FUN_00c90670(void* data, int count, int elementSize);
-
-struct ListShapeCF54 : public hkpListShape
-{
-    void FUN_00cf5420();
-    void FUN_00cf54d0(int* shapes, int count, int* shapeData, int flag);
-};
 
 union __declspec(intrin_type) __declspec(align(16)) __m128
 {
@@ -520,8 +440,6 @@ extern "C"
     __m128 _mm_cmple_ps(__m128 a, __m128 b);
     int _mm_movemask_ps(__m128 a);
     __m128 _mm_load_ps1(const float* p);
-    __m128 _mm_set1_ps(float a);
-    __m128 _mm_set_ps1(float a);
     __m128 _mm_xor_ps(__m128 a, __m128 b);
     __m128 _mm_min_ps(__m128 a, __m128 b);
     __m128 _mm_max_ps(__m128 a, __m128 b);
@@ -554,64 +472,11 @@ struct hkVector4q
     }
 };
 
-extern const hkVector4q DAT_01267e30;  // HK_QUADREAL_MINUS1
-extern const float DAT_010cc3b0;       // HK_REAL_MAX
-extern const hkVector4q DAT_010c44d0;  // sign mask
-
-struct hkAabbq
-{
-    hkVector4q m_kMinimumCorner;
-    hkVector4q m_kMaximumCorner;
-};
-
-class hkpShapeq
-{
-  public:
-    virtual void vf00();
-    virtual void vf04();
-    virtual void vf08();
-    virtual void vf0C();
-    virtual void vf10();
-    virtual void vf14();
-    virtual void vf18();
-    virtual void getAabb(const hkTransform& localToWorld, float tolerance, hkAabbq& out) const;
-};
-
-struct hkpListShapeChildInfoq
-{
-    hkpShapeq* m_pCollisionShape;
-    unsigned int m_uiCollisionFilterData;
-    int m_iShapeKey;
-    int m_iChildShapeCount;
-};
-
-class hkpListShapeq
-{
-  public:
-    void* m_ppVirtualMethodTable;
-    unsigned int m_usMemSizeAndFlags;
-    unsigned int m_sReferenceCount;
-    unsigned int m_ulUserData;
-    unsigned int m_type;
-    unsigned int unk14;
-    hkArray<hkpListShapeChildInfoq> m_kChildInfoList;
-    unsigned short m_flags;
-    unsigned short m_usNumDisabledChildren;
-    unsigned int unk28;
-    unsigned int unk2C;
-    hkVector4q m_kAabbHalfExtents;
-    hkVector4q m_kAabbCenter;
-
-    void FUN_00cf5420();
-    void FUN_00cf5590(const hkTransform& localToWorld, float tolerance, hkAabbq& out);
-};
-
 extern "C" void _ReadWriteBarrier(void);
 extern "C" unsigned __int64 __rdtsc(void);
 #include <string.h>
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long);
 extern unsigned long DAT_0126835c;
-extern const char str_010cc398[];
 extern const char str_010c41f8[];
 
 struct S00cf5140_Bool
@@ -956,24 +821,3 @@ FUN_00cf5750::~FUN_00cf5750()
     }
 }
 }  // namespace fnv_00cf5750
-
-struct hkpRayHitCollector;
-
-struct hkpCdBody
-{
-    const hkpShape* m_pCollisionShape;
-    hkUint32 m_uiCollisionShapeKey;
-    const void* m_kMotionState;
-    const hkpCdBody* m_parent;
-};
-
-struct S00cf52c0_ShapeIface : public S00cf5140_ShapeIface
-{
-    virtual void castRayWithCollector(const S00cf5140_Input& input, const hkpCdBody& cdBody,
-                                      hkpRayHitCollector& collector) const;
-};
-
-struct S00cf52c0_Obj : public S00cf5140_Obj
-{
-    void FUN_00cf52c0(const S00cf5140_Input& input, const hkpCdBody& cdBody, hkpRayHitCollector& collector) const;
-};

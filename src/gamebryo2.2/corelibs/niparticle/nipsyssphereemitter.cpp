@@ -62,17 +62,6 @@ void* Holder20020::FUN_00c20020(unsigned int auiFlags)
     return this;
 }
 
-struct Base00c1fde0
-{
-    char _pad[0x58];
-    bool __thiscall FUN_00c31b80(void* pkObject);
-};
-struct Holder00c1fde0 : Base00c1fde0
-{
-    float m_fCylinderRadius;
-    bool __thiscall FUN_00c1fde0(void* pkObject);
-};
-
 struct FUN_00c1ffa0_s
 {
     float m_f58;

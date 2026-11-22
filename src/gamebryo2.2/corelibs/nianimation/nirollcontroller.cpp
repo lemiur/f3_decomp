@@ -10,8 +10,6 @@ const char* const* __cdecl FUN_00a485a0()
     return &g_011f3f58_arg1;
 }
 
-extern void* g_011f3f58;
-
 struct BSFadeNode {
     static void* __cdecl operator new(unsigned int);
 };
@@ -48,21 +46,6 @@ void* S_00a485c0::DestroyIfFlagged(unsigned int flags)
 		_delete(this, 0x3c);
 	return this;
 }
-
-struct StrArr {
-    char _pad[8];
-    unsigned short m_usMaxSize;
-    unsigned short m_usSize;
-    unsigned short _pad2;
-    unsigned short m_usGrowBy;
-    void SetSize(unsigned int);
-    void SetAt(unsigned int, char* &);
-};
-void __stdcall FUN_00a6d830(StrArr*);
-char* __cdecl _FUN_00a7d330(const char*);
-struct NiRollController {
-    void FUN_00a48790(StrArr*);
-};
 
 typedef unsigned int A486F0size_t;
 

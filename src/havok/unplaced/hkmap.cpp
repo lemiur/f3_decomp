@@ -66,14 +66,6 @@ int __fastcall LookupBucketValue(DepthLimit* self, int, int key, int* output) {
 }
 
 
-struct FUN_00cb1a60_t
-{
-    int* m_kPrimitiveElement;
-    int m_iCapacityFlags;
-    int m_iPairCount;
-    void ResetEntries();
-};
-
 namespace fnv_00cb1ac0 {
 struct TypeNode
 {
@@ -114,26 +106,6 @@ struct FUN_00cb1e40_arg_t
     {}
 };
 
-struct FUN_00cb1e40_t
-{
-    int m_data;
-    int m_flags;
-    int m_uiItemCount;
-
-    void FUN_00cb1e00();
-    void FUN_00cb1e40(FUN_00cb1e40_arg_t* arg);
-};
-
-struct CB1BC0Allocator
-{
-};
-
-struct CB1BC0Map
-{
-    void ResizeStorage(CB1BC0Allocator&, int);
-    void ResizeToFit(CB1BC0Allocator&, int);
-};
-
 struct HashEntryTable
 {
     unsigned long FindValueForKey(unsigned long key, unsigned long defaultValue);
@@ -143,14 +115,6 @@ unsigned long __fastcall LookupWithDefault(HashEntryTable* self, int edx, unsign
 {
     return ((HashEntryTable*)((char*)self + 0xc))->FindValueForKey(key, -1);
 }
-
-struct FUN_00cb17e0_cls
-{
-    int m_uiStandInValue;
-    int m_iValueAfterStandIn;
-    int m_iPairCount;
-    int FUN_00cb17e0();
-};
 
 struct hkMapOperatorsCB19
 {
@@ -227,60 +191,6 @@ void hkMapBaseCB19::RemoveEntry(void* it) throw()
 }
 
 
-struct CB1A90Argument
-{
-    virtual void Dummy0();
-    virtual void Dummy1();
-    virtual void Process(int data, int size);
-};
-struct CB1A90Owner
-{
-    int data;
-    int flags;
-    int count;
-    void ResetEntries();
-    void ProcessArgument(CB1A90Argument* argument);
-};
-
-struct hkMapPairCB1E
-{
-    __int64 m_key;
-    int m_val;
-    int m_val2;
-};
-
-class hkMapCB1E
-{
-  public:
-    hkMapPairCB1E* m_kPrimitiveElement;
-    int m_iCapacityFlags;
-    int m_iPairCount;
-
-    void FUN_00cb1e00();
-};
-
-struct FUN_00cb1ac0_Obj
-{
-    void ResizeAndRehash(int a1, int a2);
-};
-
-struct FUN_00cb1fe0_t
-{
-    void EnsureCapacity(int a1, int n);
-};
-
-class FUN_00cb2000_cls
-{
-  public:
-    int m_00;
-    int m_04;
-    int m_pFreeList;
-
-    int FUN_00cb1c60(int iArg0, int iArg1);
-    void FUN_00cb1d20(int iCount);
-    int FUN_00cb2000(int iArg0, int iArg1);
-};
-
 struct hkMapPairCB18
 {
     unsigned int key;
@@ -312,23 +222,11 @@ FUN_00cb1830::FUN_00cb1830(void* apElements, unsigned int sizeInBytes)
 
 
 namespace fnv_00cb1870 {
-class hkMemoryAllocatorCB18;
 
 struct hkMapPairCB18
 {
     unsigned int key;
     unsigned int val;
-};
-
-class hkMapBaseCB18
-{
-  public:
-    hkMapPairCB18* m_kPrimitiveElement;
-    int m_iCapacityFlags;
-    int m_iPairCount;
-
-    void ResizeAndRehash(hkMemoryAllocatorCB18& alloc, int newHashMod);
-    int FUN_00cb1870(hkMemoryAllocatorCB18& alloc, unsigned int key, unsigned int val);
 };
 
 }  // namespace fnv_00cb1870
@@ -378,7 +276,6 @@ struct Manager
         return *unk10;
     }
 };
-Manager* __cdecl FUN_00c85750();
 struct Target
 {
     int unk00, unk04;
@@ -549,32 +446,6 @@ class hkMapBaseU64
     void FUN_00cb1d20(unsigned it);
 };
 
-struct Allocator_cb1e
-{
-    virtual void v00();
-    virtual void* AllocateMemoryBlock(int numBytes);
-    virtual void ReleaseBlock(void* p, int numBytes);
-};
-
-struct MapPair_cb1e
-{
-    unsigned __int64 key;
-    unsigned __int64 val;
-};
-
-class MapBase_cb1e
-{
-  public:
-    MapPair_cb1e* m_kPrimitiveElement;
-    int m_iCapacityFlags;
-    int m_iPairCount;
-
-    void InsertKeyValue(Allocator_cb1e& alloc, unsigned __int64 key, unsigned __int64 val);
-    void FUN_00cb1e70(Allocator_cb1e& alloc, int newcap);
-};
-
-struct hkMemoryAllocatorCB1F;
-
 struct hkMapOperationsCB1F
 {
     static unsigned hash(unsigned int key, unsigned mod)
@@ -589,23 +460,6 @@ struct hkMapOperationsCB1F
     {
         return key != unsigned(-1);
     }
-};
-
-struct hkMapPairCB1F
-{
-    unsigned int key;
-    unsigned int val;
-};
-
-class hkMapBaseCB1F
-{
-  public:
-    void ResizeAndRehash(hkMemoryAllocatorCB1F& alloc, int newcap);
-    int FUN_00cb1f40(hkMemoryAllocatorCB1F& alloc, unsigned int key, unsigned int val);
-
-    hkMapPairCB1F* m_kPrimitiveElement;
-    int m_iCapacityFlags;
-    int m_iPairCount;
 };
 
 // Hashes key into the open-addressing table and linearly probes for a matching entry, returning its slot index or a not-found value.

@@ -7,19 +7,6 @@
 #include "fnv_asm_helpers.h"   // project x87 helpers (fnv_SinCos, fnv_FloatToInt), kept last so earlier code is unchanged
 
 union __declspec(intrin_type) __declspec(align(16)) __m128 { float m128_f32[4]; unsigned __int64 m128_u64[2]; };
-extern "C" __m128 _mm_load_ps1(const float*);
-extern float DAT_01012068;
-extern double DAT_01012070;
-
-struct Cls_00d24670 {
-    virtual void v00(); virtual void v04(); virtual void v08(); virtual void v0c();
-    virtual void v10(); virtual void v14(); virtual void v18(); virtual void v1c();
-    virtual void v20(); virtual void v24(); virtual void v28(); virtual void v2c();
-    virtual void v30();
-    virtual float getH(int x, int y);
-    virtual void getFlip(bool& flip);
-    void FUN_00d24670(int x, int y, float fx, float fy, __m128* nrm, float* height, int* flag);
-};
 
 struct hkInfoD260 {
     int unk00;
@@ -182,25 +169,4 @@ void Obj::FUN_00d26120(Input* input, void* arg2, void* arg3) {
     this->FUN_00d24b50(&local, arg2, true, input->f34, arg3);
 }
 
-extern "C" __m128 _mm_mul_ps(__m128, __m128);
-
 __declspec(align(16)) const hkVector4 halfScale = {0.5f, 0.5f, 0.5f, 0.5f};
-
-struct SampledHeightField : hkpSampledHeightFieldShape {
-    virtual void slot01();
-    virtual void slot02();
-    virtual void slot03();
-    virtual void slot04();
-    virtual void slot05();
-    virtual void slot06();
-    virtual void slot07();
-    virtual void slot08();
-    virtual void slot09();
-    virtual void slot10();
-    virtual void slot11();
-    virtual void slot12();
-    virtual float getHeightAt(int x, int z);
-    void FUN_00d249f0(hkUlong transform, float tolerance, hkUlong aabb);
-};
-
-void __cdecl FUN_00d26230(hkUlong, const hkVector4&, const hkVector4&, float, hkUlong);

@@ -2,8 +2,6 @@
 // src/gamebryo2.2/corelibs/niparticle/nipsysmeshupdatemodifier.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/_fallout3/platforms/common/code/gamebryo2.2/corelibs/niparticle/nipsysmeshupdatemodifier.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-extern "C" void* g_01202530;
-
 class CloningProcess;
 class NiPSysModifier
 {
@@ -152,7 +150,6 @@ void* Unk21730::DestroyIfFlagged(unsigned int auiFlags)
 }
 
 namespace fnv_00c21840 {
-char* __cdecl _FUN_00a7d330(void*);
 struct StrArr
 {
     char _pad0[8];
@@ -1276,12 +1273,7 @@ void FUN_00c21400_cls::AttachMesh(MeshLookup* pkLookup, unsigned short usIndex)
         pkMesh->Destroy();
 }
 
-extern "C" void _ReadWriteBarrier();
 class NiCloningProcess_c217;
-struct S_c21770_Slot
-{
-    MyMeshObj* m_pObject;
-};
 class S_c21770_Obj : public MyMeshObj
 {
   public:

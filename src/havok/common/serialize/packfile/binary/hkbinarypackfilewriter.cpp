@@ -43,13 +43,6 @@ unsigned int __cdecl FUN_00dbd720(unsigned int arg)
     return *reinterpret_cast<unsigned int*>(arg + 4) * 3 * 16;
 }
 
-struct FUN_00dbc6e0_s
-{
-    void* m_vft;
-    void FUN_00dbdf60();
-    void FUN_00dbc6e0();
-};
-
 struct CallbackTarget
 {
     virtual void unk00();
@@ -200,20 +193,6 @@ struct FUN_00dbc6f0_cls_key
     unsigned char m_byTag;
 };
 
-struct FUN_00dbc6f0_cls_bytes
-{
-    unsigned char b0;
-    unsigned char b1;
-    unsigned char b2;
-    unsigned char b3;
-};
-
-union FUN_00dbc6f0_cls_word
-{
-    int iValue;
-    FUN_00dbc6f0_cls_bytes bytes;
-};
-
 int __cdecl FUN_00cb10d0(void* apNode);
 
 typedef void(__thiscall* S_WriteFn)(FUN_00dbc6f0_cls_callee*, void*, int);
@@ -299,20 +278,6 @@ void S_00dbd790_Class::DispatchToObject(int aiValue, int b)
 {
     object->f7(b == 0 ? aiValue + offset : aiValue, b);
 }
-
-struct FUN_00dbd820_pair
-{
-    unsigned int first;
-    unsigned int second;
-};
-
-struct FUN_00dbd820_cls
-{
-    FUN_00dbd820_pair* m_data;
-    int m_iElementCount;
-    unsigned int m_flags;
-    void AppendPair(FUN_00dbd820_pair p);
-};
 
 extern void* FUN_00c85750();
 extern void __cdecl ResizeAudioStream(void* allocator, void* vec, unsigned int elemSize);
@@ -428,153 +393,9 @@ template <class T> class BDBD910Array
     }
 };
 
-struct BDBD910Entry48
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-};
-
-struct BDBD910Entry8
-{
-    int unk00;
-    int unk04;
-};
-
-struct BDBD910Entry52
-{
-    ~BDBD910Entry52();
-
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-};
-
-class BDBD910Member20
-{
-  public:
-    ~BDBD910Member20();
-
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-};
-
-class BDBD910Member30
-{
-  public:
-    ~BDBD910Member30();
-
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-};
-
-class FUN_00dbd910_cls
-{
-  public:
-    ~FUN_00dbd910_cls() throw();
-
-    int unk00;
-    BDBD910Array<BDBD910Entry48> m_kArray04;
-    BDBD910Array<BDBD910Entry8> m_kArray10;
-    int unk1C;
-    BDBD910Member20 m_kMember20;
-    BDBD910Member30 m_kMember30;
-    BDBD910Array<BDBD910Entry52> m_kArray40;
-};
-
 namespace fnv_00dbd620 {
-struct S_00dbd620_Arg;
-
-struct S_00dbd620_Poly
-{
-    virtual void* v0();
-    virtual void* v1();
-    virtual void* v2();
-    virtual void* v3();
-    virtual void* v4();
-    virtual void* v5();
-    virtual void* v6();
-    virtual void v7(void* a, unsigned int b);
-    virtual void* v8();
-};
-
-struct S_00dbd620_Writer
-{
-    void* vtbl;
-    char unk04;
-    char unk05;
-    short unk06;
-    S_00dbd620_Poly* unk08;
-    void* unk0c;
-};
-
-struct S_00dbd620_Obj
-{
-    void* unk00;
-    int unk04;
-    void* unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    void* unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    char unk4c;
-    S_00dbd620_Obj(S_00dbd620_Arg* p);
-    void FUN_00dbd8a0(S_00dbd620_Arg* p);
-};
-
-struct S_00dbd620_Dtor
-{
-    int unk00;
-    ~S_00dbd620_Dtor();
-};
-
-extern int DAT_010d65ec;
-extern int DAT_0102e388;
 
 unsigned int __cdecl FUN_00dbd720(unsigned int arg);
-
-struct S_00dbd620_Owner
-{
-    void FUN_00dbc7a0(void* p);
-    void FUN_00dbcea0(void* p);
-    void FUN_00dbc960(void* p, void* q);
-    void* ProcessPoly(S_00dbd620_Poly* a1, S_00dbd620_Arg* a2);
-};
 
 }  // namespace fnv_00dbd620
 
@@ -855,69 +676,6 @@ struct S_00db8670_MultiMapUlong
     }
 };
 
-struct S_00db8670_StringMapOps
-{
-};
-
-struct S_00db8670_StringMap
-{
-    void* m_kPrimitiveElement;
-    int m_iCapacityFlags;
-    int m_iPairCount;
-    S_00db8670_StringMapOps m_pOperations;
-
-    S_00db8670_StringMap(S_00db8670_StringMapOps ops = S_00db8670_StringMapOps()) throw();
-    ~S_00db8670_StringMap() throw();
-
-    int GetValue(const char* key, int def) const throw();
-    void FUN_00d874d0(const char* key, int val) throw();
-};
-
-struct S_00db8670_Component
-{
-    int m_type;
-    const void* m_patch;
-};
-
-struct S_00db8670_DependsPatch
-{
-    const char* m_name;
-    int m_version;
-};
-
-struct S_00db8670_PatchInfo
-{
-    const char* m_oldName;
-    const char* m_newName;
-    int m_oldVersion;
-    int m_newVersion;
-    const S_00db8670_Component* m_component;
-    int m_numComponent;
-};
-
-struct S_00db8670_UidFromClassVersion
-{
-    S_00db8670_Uint64 FUN_00db7d60(const char* name, int version) const throw();
-};
-
-int __cdecl FUN_00cb0fa0(const char* a, const char* b) throw();
-int __cdecl FUN_00db7e70(int from, int to, const S_00db8670_MultiMapUlong& deps, S_00db8670_MapUlong& visited) throw();
-int __cdecl FUN_00db83c0(int index, S_00db8670_Array<int>& order, const S_00db8670_MultiMapUlong& deps, int next,
-                         S_00db8670_Array<int>& stack,
-                         const S_00db8670_Array<const S_00db8670_PatchInfo*>& patches) throw();
-
-struct S_00db8670_PatchManager
-{
-    int unk00;
-    int unk04;
-    S_00db8670_UidFromClassVersion* m_pUidFromClassVersion;
-    S_00db8670_Array<const S_00db8670_PatchInfo*> m_kPatchInfos;
-    S_00db8670_Map64 m_kPatchInfoIndexMap;
-
-    int FindEntry(S_00db8670_Uint64 uid, int flag) throw();
-    int FUN_00db8670() throw();
-};
-
 struct Dbc860Triple
 {
     int x;
@@ -979,10 +737,7 @@ struct Dbc860Sink
 };
 
 extern "C" void __cdecl FUN_00cb1280(void* dst, int a, int b);
-extern "C" void __cdecl FUN_00cb1260(void* dst, void* src, int n);
 extern "C" void __cdecl CopyIfNonEmpty(void* dst, void* src, int n);
-extern "C" void __cdecl FUN_00dbda20(void* dst, int n);
-extern int DAT_0126c6c8;
 
 // Builds a Dbc860Header and initializes a Dbc860Frame, then calls sink->Call with the value, header, DAT_0126c6c8, and frame.
 // @f3 0x009d7ac0 (community match, verified in this file)
@@ -1219,11 +974,6 @@ struct S_00dbd7f0_RefObj
     }
 };
 
-struct FUN_00dbd7f0 : S_00dbd7f0_RefObj
-{
-    FUN_00dbd7f0();
-    virtual ~FUN_00dbd7f0();
-};
 }  // namespace fnv_00dbd7f0
 
 extern "C" void _ReadWriteBarrier();
@@ -1403,7 +1153,6 @@ struct SectionContext
     int trailing;
     void FUN_00e028e0();
 };
-extern int DAT_0126c698;
 struct Serializer
 {
     virtual void v00();
@@ -1665,41 +1414,6 @@ struct FUN_00d46d40_s
     __declspec(noinline) const char* FUN_00d46d40();
 };
 
-struct FUN_00d874b0_class
-{
-    char* SetBoolFromThreshold(char* buf, int v);
-};
-struct FUN_00dbdd40_s
-{
-    int GetOrAddString(int v);
-};
-struct FUN_00dce8d0_class
-{
-    int LookupHashEntry(unsigned long a, unsigned long b);
-};
-struct FUN_00d60940_Class
-{
-    void WriteInt(unsigned int v);
-};
-struct FUN_00d607b0_s
-{
-    void writeVec(int v, int n);
-};
-struct FUN_00d9ec10_cls
-{
-    void SwapThreeInts(int* a);
-};
-extern void __stdcall WriteSwapped(void* data, int elem, int bytes);
-struct Ctx
-{
-    void* unk00;
-    void* unk04;
-    void* unk08;
-    void* unk0c;
-    void FUN_00d60830(ClockObj* c, int f);
-    void FUN_00d60590();
-    void WriteSwapped(void* data, int elem, int count);
-};
 struct MapBool
 {
     char value;
@@ -1709,23 +1423,6 @@ struct MapBool
     {
         return value != 0;
     }
-};
-struct LocObj
-{
-    int l00;
-    int l04;
-    int l08;
-    int l0c;
-    void FUN_00d87790(MapBool a);
-    void FUN_00d874d0(const char* s, int f);
-    void* FindStringKey(const char* s);
-    MapBool SetBoolFromThreshold(int v);
-    void FreeBuffer();
-    void FUN_00d60830(ClockObj* c, int f);
-    void WriteSwapped(void* data, int elem, int bytes);
-    void WriteInt(int v);
-    void FUN_00d607b0(int v, int n);
-    void FUN_00d60590();
 };
 struct Pair8
 {
@@ -1782,13 +1479,6 @@ struct SrcOptions
     int unk00;
     int unk04;
     unsigned char flag08;
-};
-struct SubVec
-{
-    int v00;
-    int v04;
-    int v08;
-    void SwapThreeInts(Arr8* a);
 };
 inline void* operator new(unsigned int, void* p)
 {
@@ -1903,7 +1593,6 @@ struct Router
         return *heap;
     }
 };
-extern void* __cdecl memset(void*, int, unsigned int);
 extern "C" void _ReadWriteBarrier();
 
 extern void FUN_00ec61c0(void* dst, int value, int n);

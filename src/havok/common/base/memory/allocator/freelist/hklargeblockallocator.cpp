@@ -2,143 +2,7 @@
 // src/havok/common/base/memory/allocator/freelist/hklargeblockallocator.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/common/base/memory/allocator/freelist/hklargeblockallocator.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-struct FUN_00dd74b0_cls
-{
-    void FUN_00dd74b0(int a, int b, int c, int d);
-    void* FUN_00dd7650(int a, int b, int c, int d);
-};
-
-struct hkReferencedObject
-{
-    void removeReference();
-};
-extern int DAT_0102e388;
-extern int DAT_010d7c80;
-struct hkLargeBlockAllocator
-{
-    int* m_p;
-    int* m_q;
-    hkReferencedObject* m_r;
-    void FUN_00dd91f0();
-};
-
-struct DD7F10ListNode
-{
-    DD7F10ListNode* m_next;
-    DD7F10ListNode* m_pSecondNode;
-};
-
-struct DD7F10Pool
-{
-    int unk00;
-    int unk04;
-    int m_numAllocated;
-    int m_numFree;
-    void** m_freeListPtr;
-    void* m_kFreeListEntries;
-    void* m_buckets[32];
-    int unk98;
-    void* m_freeHead;
-    int m_blockShift;
-    DD7F10ListNode m_kBlocks;
-    int unkAC;
-    int unkB0;
-    int unkB4;
-    int unkB8;
-    int m_totalBytes;
-    int m_peakBytes;
-
-    void FUN_00dd7f10();
-};
-
-struct WorkItem
-{
-    int unk00;
-    WorkItem* next;
-    int unk08;
-    int value;
-};
-
-struct WorkProcessor
-{
-    virtual void first();
-    virtual void second();
-    virtual void third();
-    virtual void fourth();
-    virtual void process(WorkItem*, int);
-};
-
-struct QueueOwner
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5c;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6c;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7c;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8c;
-    int unk90;
-    int unk94;
-    WorkProcessor* processor;
-    int unk9c;
-    int unka0;
-    WorkItem sentinel;
-    void ProcessAllItems();
-    void FUN_00dd7f10();
-};
-
-struct TreeChunk
-{
-    unsigned int m_iWordAt00;
-    unsigned int m_pFirstNode;
-    int m_8, m_iThirdValue;
-    TreeChunk* m_pChildAtom[2];
-};
-
 int __cdecl FUN_00dd7e00(unsigned int size);
-
-struct FUN_00dd8350_Alloc
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    unsigned int unk14;
-    void* m_treeBins[32];
-
-    unsigned int GetMaxChunkSize(void* tree, unsigned int size);
-    unsigned int FUN_00dd8350();
-};
 
 struct DD89B0MemChunk
 {
@@ -175,63 +39,6 @@ struct DD89B0MemChunk
         n->head &= ~1u;
         setSizeAndPinuseOfFreeChunk(s);
     }
-};
-
-struct DD89B0LargeBlockAllocator
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    DD89B0MemChunk* m_fMinimumV;
-    unsigned int m_uiChunkSize;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5C;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6C;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7C;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8C;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9C;
-    int unkA0;
-    int unkA4;
-    int unkA8;
-    int unkAC;
-    int unkB0;
-    int unkB4;
-    int unkB8;
-    unsigned int m_uiBufferCapacity;
-    int m_overhead;
-
-    void _unlinkChunk(DD89B0MemChunk* p);
-    void _insertChunk(DD89B0MemChunk* p, unsigned int size);
-    void Free(void* mem);
 };
 
 typedef void(__cdecl* S_00dd8aa0_Callback)(void* start, unsigned int size, void* param);
@@ -282,142 +89,7 @@ struct S_00dd8aa0_Page
     }
 };
 
-struct S_00dd8aa0_Allocator
-{
-    void* m_vtbl;
-    int unk4;
-    int unk8;
-    int unkC;
-    S_00dd8aa0_Chunk* m_fMinimumV;
-    unsigned int m_uiChunkSize;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5c;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6c;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7c;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8c;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9c;
-    int unka0;
-    S_00dd8aa0_Page m_kPage;
-    void ForEachAllocatedBlock(S_00dd8aa0_Callback callback, void* param);
-};
-
-struct ListNode
-{
-    int unk00;
-    ListNode* next;
-    int unk08;
-    int value;
-};
-
-extern int DAT_010d7c34;
-extern int DAT_010d7c10;
-
-struct ListTarget
-{
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual void v0c();
-    virtual void v10(ListNode* node, int value);
-};
-
-struct FUN_00dd7ec0_cls
-{
-    int* m_vptr;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5C;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6C;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7C;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8C;
-    int unk90;
-    int unk94;
-    ListTarget* m_98;
-    int unk9C;
-    int unkA0;
-    ListNode m_a4;
-    void FUN_00dd7ec0();
-};
-
-struct tchunk
-{
-    int prev_foot;
-    int head;
-    tchunk* fd;
-    tchunk* bk;
-    tchunk* child[2];
-    tchunk* parent;
-    int index;
-};
-
 int __cdecl FUN_00dd7e00(int size);
-
-struct TargetClass
-{
-    char pad00[8];
-    unsigned int m_uiChunkCount;
-    char pad0c[0xc];
-    tchunk* m_apChunkLists[32];
-
-    void InsertChunk(tchunk* x, int size);
-};
 
 struct FUN_00dd80d0_node
 {
@@ -454,60 +126,6 @@ struct FUN_00dd83a0_cls
     void FUN_00dd83a0();
 };
 
-struct hkBlockAllocator
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    char* m_next;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5c;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6c;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7c;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8c;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9c;
-    int unkA0;
-    int unkA4;
-    int unkA8;
-    int unkAC;
-    int unkB0;
-    int unkB4;
-    int unkB8;
-    int unkBC;
-    int unkC0;
-    void* AllocateBlock(int a);
-};
-
 struct FUN_00dd8480_cls
 {
     int unk00;
@@ -519,8 +137,6 @@ struct FUN_00dd8480_cls
     int AllocSlow(int a);
     int Allocate(int a);
 };
-
-int __stdcall ProbeSmall(int a);
 
 // Tries ProbeSmall when m_08 is set, then AllocSlow if a+0x100 is below m_14, otherwise returns 0.
 // @f3 0x00a7df80 (community match, verified in this file)
@@ -550,70 +166,6 @@ int FUN_00dd8480_cls::Allocate(int aiSize)
     return 0;
 }
 
-
-struct hkMemoryAllocator
-{
-    virtual void* unk00() = 0;
-    virtual void* allocate(unsigned int size) = 0;
-};
-
-struct hkMemoryManager
-{
-    virtual void* unk00() = 0;
-    virtual void* unk04() = 0;
-    virtual void* unk08() = 0;
-    virtual void* unk0c() = 0;
-    virtual void* unk10() = 0;
-    virtual void* unk14() = 0;
-    virtual void* unk18() = 0;
-    virtual void* unk1c() = 0;
-    virtual void* unk20() = 0;
-    virtual void* allocate(unsigned int size) = 0;
-};
-
-struct FUN_00dd8700_cls : public hkMemoryAllocator
-{
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5c;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6c;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7c;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8c;
-    int unk90;
-    int unk94;
-    hkMemoryManager* unk98;
-
-    void* FUN_00dd8700(unsigned int size);
-};
 
 struct Heap
 {
@@ -714,70 +266,6 @@ struct FUN_00dd8790_hdr
     unsigned int m_00;
     unsigned int m_04;
 };
-struct FUN_00dd8790_node
-{
-    FUN_00dd8790_node* m_00;
-    FUN_00dd8790_node* m_04;
-    int unk08;
-    void* m_0c;
-    FUN_00dd8790_hdr* m_10;
-    char* m_14;
-};
-struct FUN_00dd8790_owner
-{
-    virtual void v00();
-    virtual unsigned char* v04(unsigned char* out);
-    virtual void v08();
-    virtual void v0c();
-    virtual void v10(FUN_00dd8790_node* node, void* data);
-};
-struct FUN_00dd8790_cls
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    FUN_00dd8790_hdr* m_10;
-    unsigned int m_14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5c;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6c;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7c;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8c;
-    int unk90;
-    int unk94;
-    FUN_00dd8790_owner* m_98;
-    int m_9c;
-    int unka0;
-    FUN_00dd8790_node m_a4;
-
-    void PurgeAndSelectBlock();
-};
 
 struct FUN_00dd83a0_cls
 {
@@ -787,10 +275,6 @@ struct FUN_00dd80d0_cls
 {
     void RemoveNode(FUN_00dd8790_hdr* h);
 };
-struct FUN_00dd8010_cls
-{
-    void InsertChunk(FUN_00dd8790_hdr* h, unsigned int n);
-};
 struct FUN_00dd8400_cls
 {
     void ResizeSegment(unsigned char* p, unsigned int n);
@@ -798,32 +282,6 @@ struct FUN_00dd8400_cls
 
 }  // namespace fnv_00dd8790
 
-struct BlockPage
-{
-    unsigned int unk00;
-    BlockPage* next;
-    unsigned int unk08;
-    unsigned int unk0C;
-    unsigned int start;
-    unsigned int end;
-};
-
-struct FUN_00dd8910_cls
-{
-    unsigned int unk00, unk04, unk08, unk0C, unk10, unk14, unk18, unk1C, unk20, unk24;
-    unsigned int unk28, unk2C, unk30, unk34, unk38, unk3C, unk40, unk44, unk48, unk4C;
-    unsigned int unk50, unk54, unk58, unk5C, unk60, unk64, unk68, unk6C, unk70, unk74;
-    unsigned int unk78, unk7C, unk80, unk84, unk88, unk8C, unk90, unk94, unk98, unk9C;
-    unsigned int unkA0;
-    BlockPage m_kPage;
-    bool* IsChunkInPageList(bool* result, char* mem);
-};
-
-struct S_00dd8b20_Ref
-{
-    int unk00;
-    int unk04;
-};
 struct S_00dd8b20_Node
 {
     int unk00;
@@ -840,61 +298,6 @@ struct S_00dd8b20_Ret
     int size;
     S_00dd8b20_Ret()
     {}
-};
-struct FUN_00dd8b20_cls
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    S_00dd8b20_Ref* m10;
-    unsigned m14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5c;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6c;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7c;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8c;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9c;
-    int unka0;
-    int unka4;
-    S_00dd8b20_Node* ma8;
-    S_00dd8b20_Ret FUN_00dd8b20();
-};
-
-struct FUN_00dd8df0_cls
-{
-    int unk00;
-
-    void FUN_00dd7ec0();
-    FUN_00dd8df0_cls* FUN_00dd8df0(int arg);
 };
 
 struct SpanSegment
@@ -975,117 +378,12 @@ struct FUN_00dd8400_cls
     hkBool ResizeSegment(unsigned int size);
 };
 
-struct AllocatorListener
-{
-    virtual void v00() = 0;
-    virtual void v04(unsigned int size) = 0;
-    virtual void v08(unsigned int size) = 0;
-};
-
-struct MemoryProvider
-{
-    virtual void v00() = 0;
-    virtual hkBool canExtend() = 0;
-    virtual unsigned int v08(unsigned int sizeNeeded) = 0;
-    virtual S_00dd8aa0_Page* v0c(unsigned int size, unsigned int* actualSize) = 0;
-};
-
-struct Allocator_dd84c0
-{
-    void* m_vtbl;
-    AllocatorListener* m_kListener;
-    int unk08;
-    int unk0c;
-    S_00dd8aa0_Chunk* m_fMinimumV;
-    unsigned int m_uiChunkSize;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5c;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6c;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7c;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8c;
-    int unk90;
-    int unk94;
-    MemoryProvider* m_provider;
-    int unk9c;
-    int unka0;
-    S_00dd8aa0_Page m_kPage;
-
-    void* Allocate(unsigned int size);
-    hkBool ResizeSegment(unsigned int newSize);
-    void* AllocateBlock(unsigned int size);
-    void FUN_00dd83a0();
-    void InsertChunk(void* chunk, unsigned int size);
-
-    void* FUN_00dd84c0(unsigned int size);
-};
-
 inline void alignEnd(char*& p)
 {
     *(unsigned int*)&p &= ~15;
 }
 
-struct S_dd8180_Chunk
-{
-    unsigned int unk00;
-    unsigned int head;
-    int unk08;
-    int unk0c;
-    S_dd8180_Chunk* child0;
-    S_dd8180_Chunk* child1;
-};
-
 int __cdecl FUN_00dd7e00(unsigned int size);
-int __cdecl FUN_00dd7e70(unsigned int bit);
-
-struct S_dd8180_Alloc
-{
-    int unk00;
-    int unk04;
-    unsigned int treemap;
-    int unk0c;
-    int unk10;
-    int unk14;
-    S_dd8180_Chunk* bins[32];
-    int unk98;
-    int unk9c;
-    int unka0;
-    int unka4;
-    int unka8;
-    int unkac;
-    int unkb0;
-    int unkb4;
-    int unkb8;
-    unsigned int footprint;
-    unsigned int used;
-    void RemoveNode(S_dd8180_Chunk* c);
-    void InsertChunk(S_dd8180_Chunk* c, unsigned int size);
-    void* FUN_00dd8180(unsigned int nb);
-};
 
 struct FUN_00dd7de0
 {

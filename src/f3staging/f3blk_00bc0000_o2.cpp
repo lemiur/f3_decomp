@@ -4285,13 +4285,6 @@ struct AudioBig_00ae5a50;extern AudioBig_00ae5a50* DAT_011790c8;
 extern float DAT_01179160;
 // reconstruction of 0x00ae5a50
 extern "C" char DAT_01090a78;  // MemoryManager singleton
-struct AudioSetting_00ae5a50
-{
-    void* vtable;
-    float value;
-    const char* name;
-};
-extern "C" AudioSetting_00ae5a50 DAT_011f6e68;  // Setting<float> object
 extern "C" __declspec(dllimport) long __stdcall InterlockedIncrement(long*);
 extern "C" __declspec(dllimport) long __stdcall InterlockedDecrement(long*);
 extern "C" void __cdecl FUN_00887da0(const char*, ...);
@@ -7156,7 +7149,6 @@ struct FUN_00aee580_cls
 };
 
 extern double DAT_00dc8088;
-extern int DAT_01000000;
 
 // @fnv 0x00aee580
 bool FUN_00aee580_cls::FUN_00bdb390(int aiUnused)
@@ -7890,7 +7882,6 @@ bool AF1430::FUN_00bda600()
 namespace Task2023 {
 struct Memory {void* FUN_0086b930(unsigned);void FUN_0086ba60(void*);};extern Memory DAT_01090a78;
 struct FUN_00bccda0 {unsigned low,high;FUN_00bccda0(const char*,int);static void* operator new(unsigned n){return DAT_01090a78.FUN_0086b930(n);}static void operator delete(void* p){DAT_01090a78.FUN_0086ba60(p);}};
-extern void* DAT_00ea8244[];
 struct Array {virtual ~Array();virtual FUN_00bccda0** Allocate(unsigned);FUN_00bccda0** entries;unsigned count,capacity;Array(){InitArray(0,0);}void InitArray(unsigned allocated,unsigned size){entries=0;count=0;capacity=0;if(size>allocated)allocated=size;if(allocated>0){entries=Allocate(allocated);capacity=allocated;}if(size>0){count=size;}}static void* operator new(unsigned n){return DAT_01090a78.FUN_0086b930(n);}static void operator delete(void* p){DAT_01090a78.FUN_0086ba60(p);}unsigned FUN_005e5350();unsigned Append(FUN_00bccda0* const& value){unsigned index=FUN_005e5350();entries[index]=value;return index;}};
 extern Array* DAT_011786fc;extern Array* DAT_011786f8;
 struct Stream {
@@ -9575,7 +9566,6 @@ namespace f3m_00bc0080 {
 
 namespace f3m_00bc0080 {
 struct Elem { char d[0x54]; };
-struct Tag {};
 struct TagA {};
 struct TagB {};
 struct TagC {};
@@ -31187,16 +31177,13 @@ struct NameOffsetList077
         ArcHeap()->FUN_0086ba60(p);
     }
 };
-extern unsigned int DAT_011f81d8;
 extern volatile long DAT_0108ed80;
 extern unsigned char DAT_01069081;
-extern bool DAT_011f8154;
 extern int DAT_011acdfc, DAT_011ace00, DAT_011ace04;
 extern "C" __declspec(dllimport) long __stdcall InterlockedIncrement(volatile long*);
 extern "C" unsigned int __cdecl strlen(const char*);
 extern "C" __declspec(dllimport) unsigned long __stdcall GetTickCount();
 extern "C" __declspec(dllimport) void __stdcall InitializeCriticalSection(void*);
-struct Directory077;
 struct FUN_00bc8760
 {
     unsigned int hashLow, hashHigh, size;
@@ -31510,7 +31497,6 @@ namespace f3m_00bc0210 {
 // loop terminated by 1001, optional trailing chunk, then two member fix-ups.
 
 extern const char* DAT_01068eb0;    // expected file-format string
-extern float flt_00db38b8;          // -1.0f
 
 namespace fnv_bc0210 {
 
@@ -33712,7 +33698,6 @@ bool Parser::FUN_00bddd20(Reader* reader, int* box)
 
 // @f3 0x00bd1ff0 (community match, verified in this file)
 #include <windows.h>
-extern void* DAT_00ea8698;
 namespace f3m_00bd1ff0 {
 
 
@@ -34821,7 +34806,6 @@ extern "C" __declspec(dllimport) long __stdcall InterlockedIncrement(volatile lo
 extern "C" __declspec(dllimport) long __stdcall InterlockedDecrement(volatile long*);
 int __cdecl FUN_00bc8b30(const char*);
 inline unsigned ExtensionType(const char* p) { return FUN_00bc8b30(p + strlen(p) - 3); }
-struct LNode;
 
 struct ArchiveDirectoryKey {
     unsigned low, high;
@@ -35049,7 +35033,6 @@ extern double DAT_00dc8088;
 extern double DAT_00dc2f10;
 extern double DAT_00db7de8;
 extern double DAT_00dbe5e0;
-extern float DAT_00db8ea4;
 namespace f3m_00bd8f90 {
 struct Point {
  float x,y,z;
@@ -36913,7 +36896,6 @@ extern "C" __declspec(dllimport) void __stdcall EnterCriticalSection(CritSecA*);
 extern "C" __declspec(dllimport) void __stdcall LeaveCriticalSection(CritSecA*);
 struct AE6DE0Slot { void* m_pResource; unsigned short m_usState,unk06; };
 extern int DAT_01202800;
-extern "C" void __cdecl FUN_005b5e40(const char*, int);
 
 struct AudioListener_adf080;
 
@@ -36981,8 +36963,6 @@ class NiPoint3
 };
 typedef NiPoint3 AudioVector_adf080;
 extern const AudioVector_adf080 DAT_0108ec68;
-extern double DAT_01088f48;
-extern char DAT_010a3488[];
 extern Setting_00ad9da0 DAT_01179168;
 extern Setting_00ad9da0 DAT_01179174;
 extern Setting_00ad9da0 DAT_01179180;

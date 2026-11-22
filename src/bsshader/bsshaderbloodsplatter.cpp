@@ -215,11 +215,6 @@ void FUN_00b80380_shell::FUN_00b80380()
     } while (--n != 0);
 }
 
-struct FUN_00b80b20_shell : BSShaderBloodSplatter
-{
-    bool FUN_00b80b20();
-};
-
 void __cdecl _delete(void*, unsigned int);
 struct Standin00b80e40
 {

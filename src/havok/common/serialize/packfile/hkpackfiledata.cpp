@@ -2,41 +2,6 @@
 // src/havok/common/serialize/packfile/hkpackfiledata.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/common/serialize/packfile/hkpackfiledata.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-struct FUN_00cb1930_Class
-{
-    void* m_kPointA;
-    void* m_kPointB;
-    void* m_iThirdValue;
-    void* m_iFourthElementInteger;
-    void* m_usTrailingValue;
-    void* m_f;
-    void* m_g;
-    void* m_h;
-    void* m_i;
-    void* m_iUnknownValue;
-    unsigned long FindValueForKey(void* key, unsigned long def);
-};
-
-struct FUN_00e05140_Class
-{
-    void* m_kPointA;
-    void* m_kPointB;
-    void* m_iThirdValue;
-    unsigned long FUN_00e05140();
-};
-
-struct hkReferencedObject
-{
-    void RetainReference();
-    void removeReference();
-};
-
-struct hkPackFileData
-{
-    hkReferencedObject* m_pObject;
-    void SetObject(hkReferencedObject* pObject);
-};
-
 struct FUN_00e05950_class
 {
     int* m_p;
@@ -46,39 +11,6 @@ struct FUN_00e05950_class
 };
 
 void* FUN_00c85750();
-void ResizeAudioStream(void* a, void* b, int c);
-struct UnkRet
-{
-    int a;
-    int b;
-    int c;
-    int d;
-    int e;
-};
-struct UnkHolder
-{
-    int x;
-    int y;
-    int z;
-    int w;
-    int* data;
-    int count;
-    int pad;
-    int pad2;
-    UnkRet* FUN_00c85750();
-    void FUN_00e055a0(UnkRet* r, int v);
-};
-
-struct FUN_00e05550_Class
-{
-    char pad[0x4c];
-    int* m_data;
-    int m_uiItemCount;
-    int m_pRayCursor;
-    void AppendPair(int a, int b);
-};
-
-void* __cdecl _D1A0E0GetMemoryRouter();
 
 struct FUN_00e05250_Archive
 {
@@ -87,28 +19,7 @@ struct FUN_00e05250_Archive
     unsigned char m_flag;
 };
 
-struct FUN_00e05250_Class
-{
-    char m_auiShapeKeys[0x34];
-    void* m_memoryData;
-    int m_memorySize;
-    int m_memoryHashSize;
-    void* m_chunksData;
-    int m_chunksSize;
-    int m_chunksHashSize;
-    void* m_exportsData;
-    int m_exportsSize;
-    int m_exportsHashSize;
-    void* m_importsData;
-    int m_importsSize;
-    int m_importsHashSize;
-
-    void WriteSections(FUN_00e05250_Archive* pArchive, int unused);
-};
-
 typedef void(__thiscall* FUN_00e05250_Write)(FUN_00e05250_Archive*, int, const char*, void*, int, int);
-
-int __cdecl _FUN_00d06f80(void* data, int size);
 
 struct ByteSink
 {
@@ -141,28 +52,6 @@ void FUN_00e06d70_Class::WriteSize(unsigned int size)
     else
         ((E06C20Writer*)p)->FUN_00e069a0(0xb, (void*)size);
 }
-
-struct FUN_00e05100_cls
-{
-    int unk00;
-    int unk04;
-    int m_iValue08;
-    void FUN_00e05100(int value, int unused);
-};
-
-struct FUN_00e05240_cls
-{
-    int m_00;
-    int m_04;
-    int m_08;
-    int m_0c;
-    int m_10;
-    int m_14;
-    int m_18;
-    int m_1c;
-    int m_20;
-    bool FUN_00e05240();
-};
 
 struct hkAllocatorE054;
 
@@ -238,62 +127,11 @@ template <typename T> struct hkArrayE054
     }
 };
 
-struct PairE054
-{
-    int m_kPointA;
-    int m_kPointB;
-};
-
-class FUN_00e05410_Owner
-{
-  public:
-    char m_pad00[0x4c];
-    hkArrayE054<PairE054> m_iSecondInteger;
-    hkArrayE054<PairE054> m_pHeadNode;
-
-    void CopyPairArrays(hkArrayE054<PairE054>& kFirstOut, hkArrayE054<PairE054>& kSecondOut) const throw();
-};
-
-struct FUN_00dce8d0_class
-{
-    unsigned long LookupHashEntry(unsigned long uiKey, unsigned long uiDefault);
-};
-
-struct FUN_00d874d0_s
-{
-    void FUN_00d874d0(const char* pcKey, int iValue);
-};
-
 struct hkBoolE055
 {
     char m_bValue;
     hkBoolE055()
     {}
-};
-
-struct hkClassE055
-{
-    hkBoolE055 FUN_00d46d80(const hkClassE055& kOther) const;
-};
-
-class hkClassRegistryE055
-{
-  public:
-    virtual void V0();
-    virtual void V1();
-    virtual void V2();
-    virtual void V3();
-    virtual const hkClassE055* GetClassByName(const char* pcName) const;
-};
-
-class hkFinishRegistryE055
-{
-  public:
-    virtual void V0();
-    virtual void V1();
-    virtual void V2();
-    virtual void V3();
-    virtual int RegisterLoadedObject(void* pvObject, const char* pcClassName) const;
 };
 
 struct hkPointerMapPairE055
@@ -328,24 +166,7 @@ struct hkPointerMapE055 : public FUN_00e05950_class
     }
 };
 
-class hkPackfileDataE055
-{
-  public:
-    int m_iUnk00;
-    int m_iUnk04;
-    void* m_pvTopLevelObject;
-    int m_iUnk0c;
-    hkPointerMapE055 m_kTrackedTypes;
-    FUN_00d874d0_s m_kFinishedTypes;
-    int m_aiUnk20[3];
-    hkClassRegistryE055* m_pkClassRegistry;
-
-    int FUN_00e05240();
-    void* FUN_00e055f0(const char* pcExpectedClassName, const hkFinishRegistryE055* pkFinish);
-};
-
 extern "C" const void* DAT_010ea51c;
-extern int DAT_0102e388;
 
 void* FUN_00c85750();
 void __cdecl FUN_00c856c0(void* heap, void* ptr);
@@ -387,25 +208,6 @@ template <typename T> struct hkArray
     }
 };
 
-struct Chunk
-{
-    void* data;
-    int size;
-    int unk8;
-};
-
-struct Export
-{
-    int a;
-    int b;
-};
-
-struct Import
-{
-    int a;
-    int b;
-};
-
 struct Map1Type
 {
     void* m_kPointA;
@@ -420,34 +222,6 @@ struct Map1Type
         this->ProcessArgument(router->m_pStreamAllocator);
         this->FUN_00a29680();
     }
-};
-
-struct Map2Type
-{
-    void* m_kPointA;
-    int m_kPointB;
-    int m_iThirdValue;
-    int m_iFourthElementInteger;
-    void FreeBuffer();
-};
-
-struct FUN_00e057c0_Class
-{
-    const void* vtable;
-    int unk04;
-    int unk08;
-    void* unk0c;
-    Map1Type m_map1;
-    Map2Type m_map2;
-    hkReferencedObject* m_obj;
-    int unk30;
-    hkArray<void*> m_pMemoryAllocator;
-    hkArray<Chunk> m_kChunks;
-    hkArray<Export> m_kExports;
-    hkArray<Import> m_kImports;
-
-    void Clear();
-    void FUN_00e057c0();
 };
 
 class FUN_00e057c0
@@ -502,7 +276,6 @@ struct Crux53_HkRouter
 };
 void* FUN_00c85750();
 void __cdecl FUN_00c856c0(void* heap, void* ptr);
-char* __cdecl FUN_00cb1410(const char* src);
 inline void Crux53_FreeName(char* existing)
 {
     Crux53_HkRouter* router = (Crux53_HkRouter*)FUN_00c85750();
@@ -566,27 +339,7 @@ template <class T> class hkArrayE051
     }
 };
 
-struct hkEntryE051
-{
-    void* m_object;
-    int m_key;
-};
-
-class hkListenerE051
-{
-  public:
-    int unk00[19];
-    hkArrayE051<hkEntryE051> m_entries;
-
-    void FUN_00e05190(int key);
-};
-
 namespace fnv_00e051e0 {
-struct PairE051
-{
-    int m_key;
-    void* m_pIntegerData;
-};
 
 template <unsigned int SIZE> inline void memCpyOneAlignedE051(void* dst, const void* src)
 {
@@ -614,83 +367,9 @@ template <class T> class hkArrayE051
     }
 };
 
-class FUN_00e051e0_C
-{
-  public:
-    char unk00[0x58];
-    hkArrayE051<PairE051> m_entries;
-
-    void RemoveEntry(void* pValue);
-};
-
 }  // namespace fnv_00e051e0
 
-struct FUN_00e05370_Entry
-{
-    int id;
-    void* key;
-};
-struct FUN_00e05370_Callback
-{
-    int unknown0;
-    int unknown4;
-    void(__cdecl* invoke)(int);
-};
-struct FUN_00e05370_List
-{
-    FUN_00e05370_Entry* data;
-    int capacity;
-    int lastIndex;
-    void ResetEntries();
-};
-struct FUN_00e05370_Map
-{
-    int unknown0;
-    int count;
-    int unknown8;
-    int unknownC;
-    int unknown10;
-    void* table;
-    FUN_00e05370_Callback* GetValue(void* key, int defaultValue);
-    void ClearEntries();
-};
-struct FUN_00e05370_Class
-{
-    int unknown0;
-    int unknown4;
-    int field08;
-    int unknownC;
-    FUN_00e05370_List list;
-    FUN_00e05370_Map map;
-    void Clear();
-};
-
-struct FUN_00cb1fe0_Class
-{
-    int __thiscall EnsureCapacity(void* arg1, int arg2);
-};
-
-struct FUN_00d87790_Class
-{
-    void __thiscall FUN_00d87790(int arg);
-};
-
-struct FUN_00c90510_Class
-{
-    void __thiscall FUN_00c90510();
-};
-
-struct FUN_01268B08_Obj
-{
-    virtual void vf00();
-    virtual void vf04();
-    virtual void vf08();
-    virtual void vf0C();
-    virtual int vf10();
-};
-
 extern "C" const void* DAT_010ea51c;
-extern FUN_01268B08_Obj* DAT_01268b08;
 
 struct S00e05700_Arr
 {
@@ -704,29 +383,4 @@ struct S00e05700_Arr
         m_iElementCount = 0;
         m_capFlags = capFlags;
     }
-};
-
-struct S00e05700_Class
-{
-    const void* unk00;
-    char unk04;
-    char unk05;
-    unsigned short unk06;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    hkReferencedObject* unk2C;
-    int unk30;
-    S00e05700_Arr arr34;
-    S00e05700_Arr arr40;
-    S00e05700_Arr arr4C;
-    S00e05700_Arr arr58;
-
-    S00e05700_Class* __thiscall FUN_00e05700();
 };

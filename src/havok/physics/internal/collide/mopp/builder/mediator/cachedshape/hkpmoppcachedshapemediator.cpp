@@ -171,14 +171,6 @@ struct RecordBase
     {}
 };
 
-struct FUN_00dd5d90 : RecordBase
-{
-    RecordArray m_kArray;
-    int m_iExtra;
-
-    virtual ~FUN_00dd5d90() throw();
-};
-
 struct Item
 {
     virtual void v00();

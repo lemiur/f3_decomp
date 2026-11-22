@@ -2,8 +2,6 @@
 // src/havok/physics/collide/agent/heightfieldagent/hkpheightfieldagent.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/physics/collide/agent/heightfieldagent/hkpheightfieldagent.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-extern char DAT_010ceaa8[];
-
 struct hkMemoryAllocator {
     virtual ~hkMemoryAllocator();
 };
@@ -16,17 +14,6 @@ struct BSAudio {
 BSAudio* FUN_00c85750();
 
 void __cdecl FUN_00c908c0(hkMemoryAllocator& alloc, void* arr, int numElem, int sizeElem);
-
-struct SizeSource {
-    virtual void v00(); virtual void v01(); virtual void v02(); virtual void v03();
-    virtual void v04(); virtual void v05(); virtual void v06(); virtual void v07();
-    virtual void v08(); virtual void v09(); virtual void v10();
-    virtual int GetCount();
-};
-
-struct SourceRef {
-    SizeSource* m_p;
-};
 
 struct hkArrayU16 {
     unsigned short* m_data;
@@ -57,16 +44,6 @@ struct hkArrayU16 {
     }
 };
 
-struct FUN_00d32060_Class {
-    void* m_vtbl;
-    short m_usMemSizeAndFlags;
-    short m_sReferenceCount;
-    int m_flag;
-    hkArrayU16 m_aiIndexedValues;
-
-    FUN_00d32060_Class* Init(const SourceRef& src, int b, int c, int flag);
-};
-
 namespace fnv_00d32110 {
 struct Allocator {
     virtual void unk0();
@@ -83,12 +60,6 @@ struct BSAudio {
 
 BSAudio* FUN_00c85750();
 
-struct TargetObj {
-    int unk00;
-    unsigned short size;
-    TargetObj* FUN_00d32060(void* a1, void* a2, void* a3, void* a4);
-};
-
 }  // namespace fnv_00d32110
 
 extern void __cdecl FUN_00d319e0(void*, void*, void*, void*);
@@ -99,27 +70,11 @@ void __stdcall FUN_00d32170(void* apArg1, void* apArg2, void* apArg3, void* apAr
 
 typedef void (*S_00d321e0_Func)();
 
-void FUN_00d32190();
 void FUN_00d32370();
 void FUN_00d323b0();
-void FUN_00d323f0();
-void AllocateTargetObj();
 void FUN_00d317d0();
 void FUN_00d319e0();
 void FUN_00d31d30();
-
-struct S_00d321e0_AgentFuncs {
-    S_00d321e0_Func m_pCreateFunc;
-    S_00d321e0_Func m_pQueryPenetrationsFunc;
-    S_00d321e0_Func m_pGetPenetrationsFunc;
-    S_00d321e0_Func m_pLinearCastFunc;
-    bool m_bIsFlipped;
-    bool m_bIsPredictive;
-};
-
-struct S_00d321e0_Dispatcher {
-    void FUN_00cfbbe0(S_00d321e0_AgentFuncs& f, int typeA, int typeB);
-};
 
 extern float g_D323B0MaxDistance;
 
@@ -237,9 +192,6 @@ struct Argument {
     int identifier;
     unsigned int unk24, unk28, unk2c;
 };
-extern "C" const float DAT_0104da48;
-extern "C" const __m128 DAT_010c44d0;
-extern "C" const char UNK_010ce80c;
 extern "C" void __cdecl FUN_00d31d30(int, int, const CopyPacket*, const Argument*, const Argument*);
 
 }  // namespace fnv_00d323f0
@@ -249,17 +201,9 @@ union __declspec(intrin_type) __declspec(align(16)) __m128 {float m128_f32[4];};
 extern "C" {
 __m128 _mm_add_ps(__m128,__m128); __m128 _mm_mul_ps(__m128,__m128);
 __m128 _mm_shuffle_ps(__m128,__m128,int); __m128 _mm_unpackhi_ps(__m128,__m128);
-__m128 _mm_load_ss(const float*);
 }
 }
 extern unsigned long DAT_0126835c;
-extern const char DAT_010cea38[];
-extern const char DAT_010cea7c[];
-extern const char DAT_010cea6c[];
-extern const char DAT_010cea60[];
-extern const char DAT_010cea54[];
-extern const char DAT_010cea48[];
-extern const char DAT_01076f38[];
 extern const char str_010cea1c[];
 
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long dwTlsIndex);
@@ -437,13 +381,6 @@ struct ContactPointPair {
     __forceinline ContactPointPair(const hkpCdBody* a, const hkpCdBody* b) : m_pBodyA(a), m_pBodyB(b) {}
 };
 
-struct hkpCdPointCollector {
-    virtual void v00();
-    virtual void AddCdPoint(const ContactPointPair& point);
-};
-
-struct CollisionScratch { hkTransform transform; ContactPointPair contact; };
-
 struct hkpCdBodyPairCollector {
     virtual void v00();
     virtual void AddCdBodyPair(const hkpCdBody& bodyA, const hkpCdBody& bodyB);
@@ -520,15 +457,5 @@ struct AllocHolder {
 };
 
 AllocHolder* __cdecl FUN_00c85750() throw();
-
-extern char DAT_010ceaf4[];
-
-struct FUN_00d32190_cls {
-    void* m_vptr;
-    unsigned short m_w04;
-    unsigned short m_w06;
-
-    void FUN_00d32060(int a1, int a2, int a3, int a4);
-};
 
 }  // namespace fnv_00d32190

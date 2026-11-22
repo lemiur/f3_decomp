@@ -742,14 +742,8 @@ void GQFont::FUN_00bf3d60(GQGlyph* apGlyph, unsigned int auiIndex, GQGeometry* a
 
 // @f3 0x00bf55f0 (community match, verified in this file)
 namespace fo3_00bf55f0 {
-struct BSShaderAccumulator;
-struct BSShaderProperty;
-struct CloningProcess;
 struct NiProperty;
-struct NiShadeProperty;
-struct NiStream;
 struct NiTexture;
-struct NiUpdateData;
 struct FUN_00b39a70;
 struct NiTriShape; struct NiObject; struct NiAVObject;
 struct FixedStringBase { char* m_kHandle; };
@@ -4991,9 +4985,6 @@ inline FontManager* FontManager::Get()
     return DAT_011796f8;
 }
 
-int __cdecl FUN_004019a0(void*);
-int __cdecl FUN_0040b460(void*);
-
 struct TextNode
 {
 
@@ -5580,7 +5571,6 @@ struct MemoryManager
 {
     void* Allocate(unsigned int);
 };
-extern MemoryManager _g_memoryManager;
 struct AtlasRect
 {
     float left, right, top, bottom;
@@ -11680,7 +11670,6 @@ const std::codecvt<char,char,int>& FUN_00be7270(const std::locale& loc) {
 #include <string.h>
 namespace Task1667 {
 void* FUN_00bffa60(void*,const void*,unsigned);void* FUN_00c00610(void*,int,unsigned);extern bool DAT_011795c0;
-struct MouseState{int x,y,z;unsigned char buttons[8];};
 struct InputHandler{
 int m_0000;
 int m_0004;
@@ -15637,7 +15626,6 @@ extern "C" unsigned int __cdecl strlen(const char*);
 extern "C" int __cdecl sscanf(const char*, const char*, ...);
 
 inline unsigned int __cdecl FUN_0044a670(const char* value) { return strlen(value); }
-unsigned int __cdecl FUN_00403940(unsigned int, unsigned int);
 void* __cdecl FUN_00401000(unsigned int);
 void __cdecl FUN_00401030(void*);
 inline void* __cdecl FUN_00401460(void* d, const void* s, unsigned n) { return memcpy(d,s,n); }
@@ -15661,10 +15649,6 @@ struct ParsedNode {
     ParsedNode* previous;
     ParsedToken* value;
 };
-unsigned int FUN_0040fc90();
-void FUN_0040fca0(unsigned int);
-void FUN_0040fbe0();
-unsigned int FUN_0043b460(volatile unsigned int*, unsigned int, unsigned int);
 extern "C" __declspec(dllimport) long __stdcall InterlockedCompareExchange(long volatile*,long,long);
 struct ParsedPoolLock {
  volatile long owner; unsigned recursion;
@@ -15745,7 +15729,6 @@ ParsedToken* FUN_00beda30(int, float, const char*, int, void*);
 
 
 void FUN_00bedf40(ParsedToken*);
-void FUN_005b5e40(const char*, ...);
 extern const float DAT_00e3666c, DAT_00ea9f90;
 
 // @fnv 0x00a0a410
@@ -19518,7 +19501,6 @@ Point Manager::FUN_00bf4890(const char* strText, int aiFont, float afWrapwidth, 
 #include <windows.h>
 #include <string.h>
 extern float DAT_01179830;
-extern float DAT_01095728;
 namespace f3m_00bfe1b0 {
 namespace task2016 {
 struct Heap {void FUN_0086ba60(void*);}; extern Heap DAT_01090a78;
@@ -25391,7 +25373,6 @@ void Task::FUN_00bea830()
 }   // namespace f3m_00bea830
 
 // @f3 0x00beb270 (community match, verified in this file)
-extern void* const DAT_00ea9614[];
 namespace f3m_00beb270 {
 extern "C" __declspec(dllimport) long __stdcall InterlockedDecrement(volatile long*);
 
@@ -25652,8 +25633,6 @@ namespace f3m_00be0070 {
 namespace f3m_00be0070 {
 struct Elem { int a; int b; int c; };
 }
-extern f3m_00be0070::Elem* __cdecl FUN_00baab10(f3m_00be0070::Elem* first, f3m_00be0070::Elem* last, f3m_00be0070::Elem* dest,
-                                                std::random_access_iterator_tag, std::_Nonscalar_ptr_iterator_tag, std::_Range_checked_iterator_tag);
 
 f3m_00be0070::Elem* __cdecl FUN_00be0070(f3m_00be0070::Elem* first, f3m_00be0070::Elem* last, f3m_00be0070::Elem* dest)
 {
@@ -26302,7 +26281,6 @@ void __cdecl FUN_00be7490()
 
 // @f3 0x00bebc80 (community match, verified in this file)
 #include <windows.h>
-extern void* g_DAT_01090a78_dummy;
 namespace f3m_00bebc80 {
 
 class OwnerBEBC80_L {
@@ -36815,7 +36793,6 @@ void FUN_00beb070_Owner::FUN_00beb070()
 
 // @f3 0x00bfb710 (community match, verified in this file)
 namespace f3m_00bfb710 {
-extern "C" int __cdecl FUN_00ecddf1(char*,unsigned int,const char*,char*);
 extern "C" int __cdecl FUN_00c076d5(char*,unsigned int,const char*,char*);
 struct Color {float r,g,b,a;};
 struct ColorRef { const Color* p; };
@@ -38261,9 +38238,6 @@ struct ChainEntry { void FUN_00becde0(); };         // ORIG: mov ecx,edi ; call 
 extern ChainNode DAT_011796b0;                      // first intrusive chain head object ✓✓
 extern ChainNode DAT_011796a8;                      // second one ✓✓
 
-struct ListClearer { void FUN_006c8220(); };        // ORIG: mov ecx, offset <chain> ; call sub_6C8220 - once per chain ✓✓
-extern ListClearer DAT_011796b0_clear;              // not used: kept out of the model on purpose, see below
-
 struct HeapObj { void FUN_0086ba60(void* memory); };   // ORIG: mov ecx, offset unk_1090A78 ; push <item> ; call sub_86BA60 ✓✓
 extern HeapObj DAT_01090a78;                        // the global heap (declared four times in this prelude under other types) ✓✓
 
@@ -38272,8 +38246,6 @@ struct ChainHead {                                  // one type serves both role
     ChainNode* next;
     void FUN_006c8220();                            // ORIG: clear/destroy this chain in place ✓✓
 };
-
-extern ChainHead DAT_011796b0h;                     // placeholder - the real objects are declared above, so nothing here refers to this ✓✓
 
 void FUN_00bee000() {                               // no parameters and no receiver: ECX is loaded explicitly at each call ✓✓
     DAT_0106a3b4.FUN_006bd950();                    // ORIG: two teardown member calls before any walking ✓✓
@@ -39218,7 +39190,6 @@ bool __cdecl FUN_00be34c0(const TriString& filename,Model& model) {
 
 // @f3 0x00bf1eb0 (community match, verified in this file)
 extern "C" unsigned long __readfsdword(unsigned long);
-extern "C" unsigned long _tls_index;
 extern "C" void _ReadWriteBarrier();
 extern __declspec(thread) unsigned int DAT_0117c298;
 
@@ -42195,7 +42166,6 @@ Nbf86a0::LayoutString FontShell7520::FUN_00bf7520(const char* input, int* index,
 #include <string.h>
 #include <stdlib.h>
 #include <io.h>
-extern "C" int __cdecl _access(const char*,int);
 namespace content7910 {
 unsigned int __cdecl FUN_00c056a5(char*,const wchar_t*,unsigned int);
 int __cdecl FUN_00c05a0f(const char*,int);

@@ -4,11 +4,6 @@
 
 extern "C" void* g_011f5b60;
 
-struct NiExtraData
-{
-    void FUN_00a7b2e0();
-};
-
 struct BSFadeNode
 {
     static void* __cdecl operator new(unsigned int);
@@ -659,17 +654,3 @@ void FUN_00a99a90_IntsExtraData::LoadBinary(BA99A90Stream& kStream)
         m_piValue = 0;
     }
 }
-
-void* __cdecl FUN_00aa13e0(unsigned int uiSize);
-struct A89130Layout
-{
-    void* m_ppVirtualMethodTable;
-    int unk04;
-    int unk08;
-    unsigned int m_uiSize;
-    float* m_pfValue;
-};
-struct A89130Owner : NiFloatsExtraData_shell
-{
-    NiFloatsExtraData* CreateNiFloatsExtraData(CloningProcess* pCloning);
-};

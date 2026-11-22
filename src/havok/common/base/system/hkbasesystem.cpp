@@ -10,18 +10,7 @@ void __cdecl FUN_00cbb950(unsigned char* out)
     *out = DAT_01268414;
 }
 
-struct FUN_00c903b0_Class
-{
-    void ReleaseReference();
-};
-extern int DAT_01268360;
-extern int DAT_01268364;
-extern unsigned char DAT_01268a44;
 extern unsigned char DAT_01268414;
-extern int DAT_011b3dec;
-extern "C" void __cdecl FUN_00c90410(int);
-extern "C" void __cdecl FUN_00cbb990();
-extern "C" void __cdecl FUN_00cbbbd0();
 
 extern "C" void __cdecl SetThreadLocalValue(void* value);
 extern "C" void __cdecl FUN_00cb0db0();
@@ -35,9 +24,6 @@ int __cdecl FUN_00cbb930(void* value)
 }
 
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long);
-extern unsigned long DAT_0126835c;
-void __cdecl FUN_00cb0df0(void*);
-int __cdecl FUN_00c85760();
 void __cdecl SetThreadLocalValue(int);
 
 namespace impl {
@@ -211,30 +197,7 @@ found:
 extern int DAT_01268790;
 void __cdecl ResizeAudioStream(void* allocator, void* array, int itemSize);
 
-struct SoundNode
-{
-    int unk00;
-    int unk04;
-    SoundNode* m_next;
-    FUN_00c903b0_Class** m_handle;
-};
-
-struct PendingArray
-{
-    SoundNode** m_data;
-    int m_iElementCount;
-    int m_iCapacityState;
-    SoundNode* m_kStorage[128];
-};
-
 extern int DAT_01268790;
-struct SpawnedListNode
-{
-    int m_00;
-    int(__cdecl* m_04)();
-    SpawnedListNode* m_08;
-    int* m_0c;
-};
 
 void __cdecl ResizeAudioStream(void* aAlloc, void* aArray, unsigned int aiElemSize);
 
@@ -322,9 +285,6 @@ void __cdecl FUN_00cbb9c0()
 
 namespace fnv_00cbbb10 {
 extern "C" void __cdecl FUN_00cbb930(int value);
-extern "C" void __cdecl FUN_00cbb9f0();
-extern "C" unsigned char DAT_010c8eb8;
-extern int DAT_01268410;
 
 struct FNV_Allocator
 {
@@ -339,28 +299,6 @@ struct AllocHolder
     unsigned int unk08;
     unsigned int unk0C;
     FNV_Allocator* m_pAllocator;
-};
-
-struct SpawnedObject8
-{
-    void* m_vtbl;
-    unsigned short m_size04;
-    unsigned short m_flags06;
-};
-
-struct SpawnedObject28
-{
-    unsigned int unk00;
-    unsigned short m_size04;
-    SpawnedObject28* Init(unsigned int a, unsigned int b);
-};
-
-struct VirtualIface
-{
-    virtual void v0();
-    virtual void v1();
-    virtual void v2();
-    virtual void v3();
 };
 
 AllocHolder* __cdecl FUN_00c85750();
@@ -440,36 +378,6 @@ struct S_00cbbde0_RefObject
     void operator delete(void*)
     {}
     void FUN_00c905b0() throw();
-};
-
-struct S_00cbbde0_Reader : S_00cbbde0_RefObject
-{
-    virtual void vfn4();
-    virtual void vfn8();
-    virtual void vfnc();
-    virtual void vfn10();
-    virtual void vfn14();
-    virtual S_00cbbde0_Bool vfn18();
-};
-
-struct S_00cbbde0_StdioReader : S_00cbbde0_Reader
-{
-    int unk8;
-    int unkc;
-    int unk10;
-    S_00cbbde0_StdioReader(const char* name) throw();
-};
-
-struct S_00cbbde0_BufferedReader : S_00cbbde0_Reader
-{
-    int unk8;
-    int unkc;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    S_00cbbde0_BufferedReader(S_00cbbde0_Reader* s, int bufSize) throw();
 };
 
 extern const char*(__cdecl* DAT_011b3dc0)(const char* name, S_00cbbde0_StringBuf& buf);

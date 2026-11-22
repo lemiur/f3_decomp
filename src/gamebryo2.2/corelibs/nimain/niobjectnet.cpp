@@ -441,10 +441,6 @@ struct VStream
     VOut* out;
     void WriteObjectLink(NiFixedString*);
 };
-struct NiObjSave
-{
-    void SaveBinaryX();
-};
 // @fnv 0x00a5c5b0
 void __fastcall SaveNiObjectLinks(char* self, int, VStream* kStream)
 {

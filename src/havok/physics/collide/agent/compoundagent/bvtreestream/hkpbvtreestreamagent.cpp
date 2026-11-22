@@ -108,19 +108,6 @@ inline AudioMgr* audio()
     return (AudioMgr*)FUN_00c85750();
 }
 
-struct RefObj
-{
-    void* vtbl;
-    short m_usMemSizeAndFlags;
-    short m_sReferenceCount;
-};
-
-struct Obj : RefObj
-{
-    int pad[14];
-    Obj* FUN_00d2def0(int, int, int, int);
-};
-
 void FUN_00d2e680();
 void FUN_00d2e970();
 void FUN_00d2e9b0();
@@ -129,19 +116,6 @@ void FUN_00d2df50();
 
 void FUN_00d31110();
 void FUN_00d30f50();
-struct Conversion
-{
-    void (*convert)();
-    void (*create)();
-    void (*copy)();
-    void (*destroy)();
-    bool enabled;
-    bool supported;
-};
-struct Registry
-{
-    void FUN_00cfbbe0(Conversion*, int, int);
-};
 
 typedef void*(__cdecl* S_00d2e8e0_CreateFunc)(void*, void*, void*, void*);
 typedef void(__cdecl* S_00d2e8e0_GetPenetrationsFunc)(void*, void*, void*, void*);
@@ -155,21 +129,6 @@ void FUN_00d2e9f0(void*, void*, void*, void*, void*);
 void* FUN_00d2e5a0(void*, void*, void*, void*);
 void FUN_00d31110(void*, void*, void*, void*);
 void FUN_00d30f50(void*, void*, void*, void*, void*);
-
-struct S_00d2e8e0_AgentFuncs
-{
-    S_00d2e8e0_CreateFunc m_pCreateFunc;
-    S_00d2e8e0_GetPenetrationsFunc m_pQueryPenetrationsFunc;
-    S_00d2e8e0_GetClosestPointsFunc m_pGetPenetrationsFunc;
-    S_00d2e8e0_LinearCastFunc m_pLinearCastFunc;
-    bool m_bIsFlipped;
-    bool m_bIsPredictive;
-};
-
-struct S_00d2e8e0_Dispatcher
-{
-    void FUN_00cfbbe0(S_00d2e8e0_AgentFuncs& f, int typeA, int typeB);
-};
 
 extern float g_D2E9B0MaxDistance;
 
@@ -230,10 +189,6 @@ void Context::FUN_00d2edd0(void* first, void* second, void* third, void* fourth)
     FUN_00d43880(second, first, third, &collector);
 }
 
-extern "C" void* __cdecl FUN_00d06f80(void* ptr, unsigned int size);
-extern "C" void __cdecl FUN_00d97250(void* a, int b, void* c);
-extern "C" const char str_010ce828[];
-
 struct VisitTarget
 {
     virtual void v00()
@@ -252,31 +207,6 @@ struct VisitTarget
     int m_08;
     int unk0C;
     unsigned char m_10;
-};
-
-struct PackedBuffer
-{
-    void* m_ptr;
-    unsigned int m_uiItemCount;
-    unsigned int m_flag;
-};
-
-struct BufOwner
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    PackedBuffer m_buf;
-    void __thiscall VisitPackedBuffer(VisitTarget* target, int flags);
 };
 
 extern "C" const void* DAT_010ce81c;
@@ -520,9 +450,6 @@ void FUN_00d2de20_cls::FUN_00d2de20(int a0, FUN_00d2de20_obj** a1, int a2, int a
     FUN_00da48e0(&m_30, &args);
 }
 
-extern int DAT_010ce838;
-extern "C" void __cdecl InitBlockPool(void* p);
-
 struct FUN_00d2def0_cls
 {
     int m_vptr;
@@ -581,13 +508,10 @@ union __declspec(intrin_type) __declspec(align(16)) __m128
 };
 extern "C"
 {
-    __m128 _mm_shuffle_ps(__m128, __m128, unsigned int);
     __m128 _mm_mul_ps(__m128, __m128);
     __m128 _mm_add_ps(__m128, __m128);
     __m128 _mm_xor_ps(__m128, __m128);
 }
-
-extern __m128 DAT_010c4c00;
 
 struct SimplexVertex
 {
@@ -644,33 +568,9 @@ extern float DAT_0104da48;
 extern unsigned int DAT_010c44d0;
 extern unsigned int DAT_010ce80c;
 
-struct Head50
-{
-    int unk00, unk04, unk08, unk0c, unk10, unk14, unk18, unk1c;
-    int unk20, unk24, unk28, unk2c, unk30, unk34, unk38, unk3c;
-    int unk40, unk44, unk48, unk4c;
-};
-
 struct Vector4f
 {
     int x, y, z, w;
-};
-
-struct Tail10
-{
-    int unk00, unk04, unk08, unk0c;
-};
-
-struct QueryCtx
-{
-    Head50 head;
-    Vector4f vec;
-    Tail10 tail;
-};
-
-struct Handle
-{
-    int value;
 };
 
 __declspec(align(16)) struct QueryObj
@@ -690,12 +590,6 @@ __declspec(align(16)) struct QueryObj
     }
 };
 
-struct FUN_00d2dd70_class
-{
-    void __thiscall FUN_00d2dd70(Handle a, Handle b, void* c, void* d, void* e);
-    void __thiscall FUN_00d2ef30(Handle p1, Handle p2, QueryCtx* ctx, int e1, int e2);
-};
-
 }  // namespace fnv_00d2ef30
 
 namespace fnv_00d2f000 {
@@ -705,18 +599,6 @@ extern __m128 DAT_010c44d0;
 struct S_00d2f000_V4
 {
     unsigned x, y, z, w;
-};
-
-struct S_00d2f000_Input
-{
-    unsigned unk00, unk04, unk08, unk0C, unk10, unk14, unk18, unk1C, unk20, unk24, unk28, unk2C, unk30, unk34, unk38,
-        unk3C, unk40, unk44, unk48, unk4C;
-    union
-    {
-        __m128 m_q50;
-        S_00d2f000_V4 m_v50;
-    };
-    unsigned unk60, unk64, unk68, unk6C;
 };
 
 struct S_00d2f000_Base
@@ -746,12 +628,6 @@ struct __declspec(align(16)) S_00d2f000_Flip : public S_00d2f000_Base
     virtual void vtbl04(void);
 };
 
-struct FUN_00d2f000_class
-{
-    void linearCast(unsigned a, unsigned b, S_00d2f000_Input* c, void* d, void* e);
-    void LinearCastFlip(unsigned a1, unsigned a2, S_00d2f000_Input* in, unsigned a4, unsigned a5);
-};
-
 }  // namespace fnv_00d2f000
 
 namespace fnv_00d2e5a0 {
@@ -772,31 +648,9 @@ struct AllocHolder
 
 AllocHolder* FUN_00c85750();
 
-struct Dispatch
-{
-    virtual void unk00();
-    virtual void unk04();
-    virtual void unk08();
-    virtual int Select(void* a, void* b, void* c);
-};
-
-struct Arg3Obj
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    Dispatch* m_pDispatch;
-};
-
 struct FUN_00d2def0_cls
 {
     void* FUN_00d2def0(void* a, void* b, void* c, void* d);
-};
-
-struct FUN_00d440f0_cls
-{
-    void* FUN_00d440f0(void* a, void* b, void* c, void* d);
 };
 
 struct SpawnedObject
@@ -894,21 +748,6 @@ inline void* __cdecl operator new(unsigned int, void* p)
     return p;
 }
 
-struct AllocationManager
-{
-    virtual void* GetHeap();
-    virtual void* Allocate(unsigned int size);
-};
-
-struct GlobalOwner
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    AllocationManager* allocator;
-};
-
 struct hkpBvTreeStreamAgent
 {
     virtual void Destroy();
@@ -924,20 +763,6 @@ template <class Agent> struct hkpSymmetricAgent : Agent
 };
 
 namespace fnv_00d2e6d0 {
-struct RegEntry
-{
-    void* fn0;
-    void* fn1;
-    void* fn2;
-    void* fn3;
-    bool b0;
-    bool b1;
-};
-
-struct TargetClass
-{
-    void __thiscall FUN_00cfbbe0(RegEntry* entry, int a, int b);
-};
 
 extern "C"
 {

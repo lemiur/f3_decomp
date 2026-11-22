@@ -241,29 +241,6 @@ void FUN_00cbbd40_cls::FUN_00cbbd40()
     m_8 = 0x80000000;
 }
 
-extern "C" int __stdcall FUN_00ee6d80(unsigned int s, long lCmd, unsigned long* pulArg);
-
-class SocketDA2F
-{
-  public:
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    unsigned int m_uiSocket;
-
-    bool __thiscall SetNonBlocking(bool m_bCombatItemSearchActive);
-};
-
-extern char DAT_01269acc;
-extern const char str_010d5004[];
-extern const char str_010d4fdc[];
-int __stdcall FUN_00ee6d86(unsigned short, void*);
-
 struct S00da2ff0_Msg
 {
     int unk00;
@@ -281,7 +258,6 @@ struct S00da2ff0_Err
     virtual void v2();
     virtual int v3(int, int, void*, const char*, int);
 };
-extern S00da2ff0_Err* DAT_01268360;
 
 // When the flag is clear, calls FUN_00ee6d86 with 0x202, reports failure, and sets the flag.
 // @f3 0x00a28cc0 (community match, verified in this file)
@@ -396,13 +372,7 @@ success:
 }
 
 unsigned short __stdcall FUN_00ee6d74(unsigned short usHostShort);
-int __stdcall FUN_00ee6d98(unsigned int s, const void* pvName, int iNameLen);
-int __stdcall FUN_00ee6d92(unsigned int s, int iBacklog);
-int __stdcall FUN_00ee6d8c(char* pcName, int iNameLen);
 extern "C" int __stdcall FUN_00ee6d9e(unsigned int s, int level, int option, const void* value, int size);
-
-extern const char str_010d505c[];
-extern const char str_010d5070[];
 
 struct sockaddr_inDA30
 {
@@ -535,27 +505,3 @@ int hkBsdSocketDA30::FUN_00da30d0(int port) throw(){
     if((host.flags&0x80000000u)==0){unsigned int capacity=host.flags&0x3fffffff;Heap573* oldHeap=lookup(DAT_010f3170);oldHeap->FUN_008f6d90(host.data,capacity,23);}
     return 0;
 }
-
-
-struct FUN_00da33d0_client
-{
-    virtual void FUN_00da33d0_a();
-    virtual void FUN_00da33d0_b();
-    virtual void FUN_00da33d0_c(void*, unsigned short);
-};
-
-struct FUN_00da33d0_router
-{
-    void* m_vft;
-    char m_auiShapeKeys[0x0c];
-    FUN_00da33d0_client* m_client;
-};
-
-struct FUN_00da33d0_cls : hkBsdSocket
-{
-    void __thiscall Destroy();
-    int m_kPointA;
-    unsigned short m_kPointB;
-
-    FUN_00da33d0_cls* __thiscall FUN_00da33d0(bool flag);
-};

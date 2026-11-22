@@ -144,10 +144,6 @@ struct BSResizableTriShape : public NiTriShape
     char _pad_104[12];
 };
 typedef char _sizecheck_BSResizableTriShape[sizeof(BSResizableTriShape) == 272 ? 1 : -1];
-struct FUN_00e68810_shell : public NiLines
-{
-    NiLines* FUN_00e68810();
-};
 
 void __cdecl FUN_00a80470();
 // @fnv 0x00a89770

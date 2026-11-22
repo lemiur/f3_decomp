@@ -2,18 +2,12 @@
 // src/gamebryo2.2/corelibs/nianimation/nibooltimelineinterpolator.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/_fallout3/platforms/common/code/gamebryo2.2/corelibs/nianimation/nibooltimelineinterpolator.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-extern "C" void* g_011f4044;
-
 struct NiStream
 {
 };
 struct NiBoolInterpolator
 {
     NiStream* LinkObject(NiStream*);
-};
-struct NiBoolInterpController
-{
-    NiBoolInterpolator* LinkObject(NiStream*);
 };
 
 extern int DAT_01099fb4;
@@ -73,27 +67,6 @@ void* FUN_00a52f30_shell::ReleaseRef(unsigned int auiFlags)
         _delete(this, 0x20);
     return this;
 }
-
-struct StrArr
-{
-    void* m_pData;
-    unsigned int m_ui4;
-    unsigned short m_usMaxSize;
-    unsigned short m_usSize;
-    unsigned short m_usPad;
-    unsigned short m_usGrowSize;
-    void SetSize(unsigned int);
-    void SetAt(unsigned int, char*&);
-};
-struct Proxy536d0
-{
-    void FUN_00a536d0(StrArr*);
-};
-char* __cdecl _FUN_00a7d330(const char*);
-struct NiBoolTimelineInterpolator : NiBoolInterpolator
-{
-    void AppendString(StrArr*);
-};
 
 struct NiKeyBasedInterpolator
 {
@@ -323,8 +296,6 @@ void A53480Object::CloneTo(A53480Object* pkDest, A53480CloningProcess& kCloning)
     pkDest->m_spTransformData = m_spTransformData;
     pkDest->m_uiCurrentValue = m_uiCurrentValue;
 }
-
-void __cdecl FUN_00a43330();
 
 void __cdecl SaveToStream();
 

@@ -19,43 +19,6 @@ class hkpShape : public hkBaseObject
     virtual void v4();
 };
 
-// ---------------------------------------------------------------------------
-// The shape container.  It derives from the real class so that the members
-// keep their real offsets: m_kChildContainer.m_pContainedShape lives at +0x18.
-// ---------------------------------------------------------------------------
-struct TriSampledHeightFieldBvTreeShape : public hkpTriSampledHeightFieldBvTreeShape
-{
-    void FUN_00d27200();
-};
-
-struct FUN_00d268b0_Obj : public hkpTriSampledHeightFieldBvTreeShape
-{
-    int __thiscall FUN_00d268b0(int a, int b);
-};
-
-struct CallbackShape
-{
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual void v0c();
-    virtual void v10();
-    virtual void v14();
-    virtual void v18();
-    virtual void v1c(void* first, float value, void* last);
-};
-struct ShapeDispatch
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    CallbackShape* shape;
-    void DispatchCallback(void* first, float value, void* last);
-};
-
 struct hkResultD26B
 {
     int m_00;
@@ -63,50 +26,7 @@ struct hkResultD26B
     {}
 };
 
-class hkTargetD26B
-{
-  public:
-    virtual void V0();
-    virtual void V1();
-    virtual void V2();
-    virtual void V3();
-    virtual void V4();
-    virtual void V5();
-    virtual void V6();
-    virtual void V7();
-    virtual hkResultD26B query(void* a, void* b);
-};
-
-class hkHolderD26B
-{
-  public:
-    hkTargetD26B* FUN_00d26450() throw();
-};
-
-class hkObjD26B
-{
-  public:
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    hkHolderD26B* m_holder;
-
-    hkResultD26B Query(void* a, void* b) throw();
-};
-
 extern void __cdecl ComputeAabbFromTransform(int, int, float, char*);
-
-struct FUN_00d268f0_LocalBuffer
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-};
 
 class FUN_00d268f0_Shape
 {
@@ -149,30 +69,6 @@ void __thiscall FUN_00d268f0_Shape::ProcessBuffer(int a,int b,float c,int d){
  reinterpret_cast<Task1475ShapeView*>(this)->CollectHits(reinterpret_cast<char*>(&buffer),d);
 }
 
-
-extern int DAT_010c6fd0;
-extern int DAT_010ce404;
-
-struct CC9F10Shape
-{
-    void FUN_00c90510();
-};
-
-struct FUN_00d26b50
-{
-    const int* m_pVT;
-    char pad4[2];
-    unsigned short m_uiValue1;
-    int m_iA;
-    int m_iB;
-    unsigned char m_bC;
-    char pad11[3];
-    const int* m_pD;
-    CC9F10Shape* m_pShape;
-    char pad1d[4];
-    unsigned char m_bE;
-    FUN_00d26b50(CC9F10Shape* pShape, unsigned char bE);
-};
 
 union __declspec(intrin_type) __declspec(align(16)) __m128
 {
@@ -654,7 +550,6 @@ enum {  HK_SHAPE_BUFFER_ALIGNMENT = 16,	HK_SHAPE_BUFFER_SIZE = 256 };
 typedef __declspec(align(16)) char ShapeBuffer[HK_SHAPE_BUFFER_SIZE];
 typedef hkUint16 hkpVertexId;
 typedef hkUint32 hkpShapeKey;
-class hkpConvexShape;
 
 class hkpShape : public hkReferencedObject
 {
@@ -982,38 +877,6 @@ void TriSampledHeightFieldBvTreeShapeq::CollectHits(const hkAabbq& aabbInq, hkSh
 }
 
 
-struct TargetD26B
-{
-    virtual void V0();
-    virtual void V1();
-    virtual void V2();
-    virtual void V3();
-    virtual void V4();
-    virtual void V5();
-    virtual void V6();
-    virtual void V7();
-    virtual void V8();
-    virtual void Tail(int a, int b, int c, int d);
-};
-
-struct HolderD26B
-{
-    TargetD26B* FUN_00d26450();
-};
-
-struct FUN_00d26b30_cls
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    HolderD26B* m_holder;
-
-    void FUN_00d26b30(int a, int b, int c, int d);
-};
-
 extern "C"
 {
     __m128 _mm_add_ps(__m128, __m128);
@@ -1329,8 +1192,3 @@ static __declspec(noinline) hkBoolResult
 typedef hkBoolResult(__cdecl* ExtentsQueryFn)(const hkAabb&, const hkpTriSampledHeightFieldCollection*, hkUint32&,
                                               hkUint32&, hkUint32&, hkUint32&);
 ExtentsQueryFn S00d26ba0_extentsFp = &FUN_00d26940;
-
-struct BvTreeShape : public hkpTriSampledHeightFieldBvTreeShape
-{
-    hkUint32 FUN_00d26ba0(const hkAabb& aabbIn, hkpShapeKey* hits, int maxNumKeys) const;
-};

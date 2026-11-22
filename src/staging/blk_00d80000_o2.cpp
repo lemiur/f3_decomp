@@ -48,28 +48,6 @@ int* FUN_00d85a20_Stub::CopyStateFrom(int* p)
 
 extern char DAT_01267e30;
 
-class FNVDispatchNode {
-public:
-    virtual void v00();
-    virtual void v01();
-    virtual void v02();
-    virtual void v03();
-    virtual void v04();
-    virtual void v05();
-    virtual void v06();
-    virtual void v07();
-    virtual unsigned int v08();
-
-    FNVDispatchNode* Resolve();
-
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0C;
-    unsigned int unk10;
-    unsigned int unk14;
-    FNVDispatchNode* m_18;
-};
-
 struct AllocIface {
     virtual void unk00();
     virtual void* Alloc(unsigned int size);
@@ -85,32 +63,6 @@ struct AllocHolder {
 
 AllocHolder* __cdecl FUN_00c85750() throw();
 void __cdecl FUN_00cb1260(void* dst, const void* src, unsigned int size);
-
-struct FUN_00d85360_cls {
-    void* m_vptr;
-    unsigned short m_w04;
-    unsigned short m_w06;
-    int m_i08;
-    int m_i0c;
-    int m_i10;
-    int m_i14;
-    int m_i18;
-    int m_i1c;
-    int m_i20;
-    int m_i24;
-    int m_i28;
-    int m_i2c;
-    int m_i30;
-    int m_i34;
-    int m_i38;
-    int m_i3c;
-    int m_i40;
-    int m_i44;
-    int m_i48;
-    int m_i4c;
-
-    FUN_00d85360_cls* FUN_00d54290();
-};
 
 namespace fnv_00d853a0 {
 struct AllocIface {
@@ -129,56 +81,6 @@ struct AllocHolder {
 AllocHolder* __cdecl FUN_00c85750() throw();
 void __cdecl FUN_00cb1260(void* dst, const void* src, unsigned int size);
 
-struct FUN_00d853a0_cls {
-    void* m_vptr;
-    unsigned short m_w04;
-    unsigned short m_w06;
-    int m_i08;
-    int m_i0c;
-    int m_i10;
-    int m_i14;
-    int m_i18;
-    int m_i1c;
-    int m_i20;
-    int m_i24;
-    int m_i28;
-    int m_i2c;
-    int m_i30;
-    int m_i34;
-    int m_i38;
-    int m_i3c;
-    int m_i40;
-    int m_i44;
-    int m_i48;
-    int m_i4c;
-    int m_i50;
-    int m_i54;
-    int m_i58;
-    int m_i5c;
-    int m_i60;
-    int m_i64;
-    int m_i68;
-    int m_i6c;
-    int m_i70;
-    int m_i74;
-    int m_i78;
-    int m_i7c;
-    int m_i80;
-    int m_i84;
-    int m_i88;
-    int m_i8c;
-    int m_i90;
-    int m_i94;
-    int m_i98;
-    int m_i9c;
-    int m_ia0;
-    int m_ia4;
-    int m_ia8;
-    int m_iac;
-
-    FUN_00d853a0_cls* Init();
-};
-
 }  // namespace fnv_00d853a0
 
 namespace fnv_00d853f0 {
@@ -189,12 +91,6 @@ struct MemAllocD853 {
 struct SingD853 {
     char pad000[0x10];
     MemAllocD853* m_pAllocationContext;
-};
-struct ObjD853 {
-    void* m_vtbl;
-    unsigned short m_usSize;
-    char pad006[0x0a];
-    ObjD853* FUN_00cb9090();
 };
 extern "C" SingD853* __cdecl FUN_00c85750();
 extern "C" void* __cdecl FUN_00cb1260(void* pDst, const void* pSrc, unsigned int ItemUpdateArray);
@@ -219,8 +115,6 @@ struct D85440MemoryRouter {
 
 extern "C" D85440MemoryRouter& __cdecl FUN_00c85750();
 
-void D85440MemCpy(void* dst, const void* src, int nbytes);
-
 class D85440ReferencedObject {
 public:
     static void* operator new(unsigned int nbytes)
@@ -236,52 +130,10 @@ public:
     short m_sReferenceCount;
 };
 
-struct D85440Vector3 {
-    float x;
-    float y;
-    float z;
-};
-
-class D85440Shape : public D85440ReferencedObject {
-public:
-    D85440Shape() throw();
-
-    int unk08;
-    D85440Vector3 m_vHalfExtents;
-    int unk18;
-    int unk1C; int unk20; int unk24; int unk28; int unk2C; int unk30; int unk34; int unk38; int unk3C;
-    int unk40; int unk44; int unk48; int unk4C; int unk50; int unk54; int unk58; int unk5C;
-    int unk60; int unk64; int unk68; int unk6C; int unk70; int unk74; int unk78; int unk7C;
-    int unk80; int unk84; int unk88; int unk8C; int unk90; int unk94; int unk98; int unk9C;
-    int unkA0; int unkA4; int unkA8; int unkAC;
-};
-
 }  // namespace fnv_00d85440
 
 namespace fnv_00d85490 {
 extern int DAT_010cc4f4;
-
-struct FUN_00d85490_Allocator {
-    virtual void FUN_00d85490_Alloc0();
-    virtual void* FUN_00d85490_Alloc1(unsigned int size);
-};
-
-struct FUN_00d85490_Manager {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    FUN_00d85490_Allocator* unk10;
-};
-
-struct FUN_00d4fe80_Stub {
-    int unk00;
-    unsigned short unk04;
-    unsigned int unk08;
-    unsigned int unk0c;
-    unsigned char unk10;
-    void* FUN_00d4fe80();
-};
 
 extern void* __cdecl FUN_00c85750();
 extern void __cdecl FUN_00cb1260(void* destination, const void* source, unsigned int size);
@@ -323,15 +175,6 @@ struct C_Stub {
 };
 
 struct D_Stub {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-};
-
-// caller-supplied source structure; only the sub-object at +0x10 is touched
-struct Src_Stub {
     int unk00;
     int unk04;
     int unk08;
@@ -424,100 +267,6 @@ struct AllocHolder {
 AllocHolder* __cdecl FUN_00c85750() throw();
 void __cdecl FUN_00cb1260(void* dst, const void* src, unsigned int size);
 
-struct FUN_00d85570_cls {
-    void* m_vptr;
-    unsigned short m_w04;
-    unsigned short m_w06;
-    int m_i08;
-    int m_i0c;
-    int m_i10;
-    int m_i14;
-    int m_i18;
-    int m_i1c;
-    int m_i20;
-    int m_i24;
-    int m_i28;
-    int m_i2c;
-    int m_i30;
-    int m_i34;
-    int m_i38;
-    int m_i3c;
-    int m_i40;
-    int m_i44;
-    int m_i48;
-    int m_i4c;
-    int m_i50;
-    int m_i54;
-    int m_i58;
-    int m_i5c;
-    int m_i60;
-    int m_i64;
-    int m_i68;
-    int m_i6c;
-    int m_i70;
-    int m_i74;
-    int m_i78;
-    int m_i7c;
-    int m_i80;
-    int m_i84;
-    int m_i88;
-    int m_i8c;
-    int m_i90;
-    int m_i94;
-    int m_i98;
-    int m_i9c;
-    int m_ia0;
-    int m_ia4;
-    int m_ia8;
-    int m_iac;
-    int m_ib0;
-    int m_ib4;
-    int m_ib8;
-    int m_ibc;
-    int m_ic0;
-    int m_ic4;
-    int m_ic8;
-    int m_icc;
-    int m_id0;
-    int m_id4;
-    int m_id8;
-    int m_idc;
-    int m_ie0;
-    int m_ie4;
-    int m_ie8;
-    int m_iec;
-    int m_if0;
-    int m_if4;
-    int m_if8;
-    int m_ifc;
-    int m_i100;
-    int m_i104;
-    int m_i108;
-    int m_i10c;
-    int m_i110;
-    int m_i114;
-    int m_i118;
-    int m_i11c;
-    int m_i120;
-    int m_i124;
-    int m_i128;
-    int m_i12c;
-    int m_i130;
-    int m_i134;
-    int m_i138;
-    int m_i13c;
-    int m_i140;
-    int m_i144;
-    int m_i148;
-    int m_i14c;
-    int m_i150;
-    int m_i154;
-    int m_i158;
-    int m_i15c;
-
-    FUN_00d85570_cls* Init();
-};
-
 }  // namespace fnv_00d85570
 
 namespace fnv_00d855c0 {
@@ -532,11 +281,6 @@ struct FUN_00d855c0_Manager {
     int unk08;
     int unk0c;
     FUN_00d855c0_Factory* unk10;
-};
-
-struct FUN_00d855c0_Data {
-    int unk00;
-    unsigned short unk04;
 };
 
 extern "C" FUN_00d855c0_Manager* FUN_00c85750();
@@ -562,44 +306,6 @@ struct AllocHolder {
 AllocHolder* __cdecl FUN_00c85750() throw();
 void __cdecl FUN_00cb1260(void* dst, const void* src, unsigned int size);
 
-struct FUN_00d85610_cls {
-    void* m_vptr;
-    unsigned short m_w04;
-    unsigned short m_w06;
-    int m_i08;
-    int m_i0c;
-    int m_i10;
-    int m_i14;
-    int m_i18;
-    int m_i1c;
-    int m_i20;
-    int m_i24;
-    int m_i28;
-    int m_i2c;
-    int m_i30;
-    int m_i34;
-    int m_i38;
-    int m_i3c;
-    int m_i40;
-    int m_i44;
-    int m_i48;
-    int m_i4c;
-    int m_i50;
-    int m_i54;
-    int m_i58;
-    int m_i5c;
-    int m_i60;
-    int m_i64;
-    int m_i68;
-    int m_i6c;
-    int m_i70;
-    int m_i74;
-    int m_i78;
-    int m_i7c;
-
-    FUN_00d85610_cls* Init();
-};
-
 }  // namespace fnv_00d85610
 
 namespace fnv_00d856b0 {
@@ -618,60 +324,6 @@ struct AllocHolder {
 
 AllocHolder* __cdecl FUN_00c85750() throw();
 void __cdecl FUN_00cb1260(void* dst, const void* src, unsigned int size);
-
-struct FUN_00d856b0_cls {
-    void* m_vptr;
-    unsigned short m_w04;
-    unsigned short m_w06;
-    int m_i08;
-    int m_i0c;
-    int m_i10;
-    int m_i14;
-    int m_i18;
-    int m_i1c;
-    int m_i20;
-    int m_i24;
-    int m_i28;
-    int m_i2c;
-    int m_i30;
-    int m_i34;
-    int m_i38;
-    int m_i3c;
-    int m_i40;
-    int m_i44;
-    int m_i48;
-    int m_i4c;
-    int m_i50;
-    int m_i54;
-    int m_i58;
-    int m_i5c;
-    int m_i60;
-    int m_i64;
-    int m_i68;
-    int m_i6c;
-    int m_i70;
-    int m_i74;
-    int m_i78;
-    int m_i7c;
-    int m_i80;
-    int m_i84;
-    int m_i88;
-    int m_i8c;
-    int m_i90;
-    int m_i94;
-    int m_i98;
-    int m_i9c;
-    int m_ia0;
-    int m_ia4;
-    int m_ia8;
-    int m_iac;
-    int m_ib0;
-    int m_ib4;
-    int m_ib8;
-    int m_ibc;
-
-    FUN_00d856b0_cls* Init();
-};
 
 }  // namespace fnv_00d856b0
 
@@ -816,7 +468,6 @@ struct D85660MemoryRouter {
 };
 
 extern "C" D85660MemoryRouter& __cdecl D85660GetMemoryRouter() throw();
-void __cdecl D85660MemCpy(void* pvDst, const void* pvSrc, int iNumBytes) throw();
 
 class D85660Object {
 public:
@@ -873,17 +524,6 @@ public:
 };
 
 extern int DAT_010d3838;
-struct FUN_00d86260_Class {
-    unsigned int m_vptr;
-    unsigned short m_word04;
-    unsigned short m_word06;
-    volatile unsigned char m_byte08;
-    volatile float m_float0C;
-    float m_float10;
-    float m_float14;
-    float m_float18;
-    FUN_00d86260_Class(float a, float b, float c);
-};
 
 struct NiBinaryStream {
     int unk00;
@@ -907,34 +547,6 @@ struct NiStream {
     }
 };
 
-struct Struct40 {
-    int m_00, m_04, m_08, m_0c;
-    int m_10, m_14, m_18, m_1c;
-    int m_20, m_24, m_28, m_2c;
-    int m_30, m_34, m_38, m_3c;
-};
-
-struct TargetData {
-    int unk00, unk04, unk08, unk0c, unk10, unk14, unk18;
-    int unk1c;
-    char unk20;
-    char unk21;
-    short unk22;
-    int unk24, unk28, unk2c;
-    Struct40 unk30;
-    Struct40 unk70;
-};
-
-struct FUN_00d53200_class {
-    int unk00;
-    void FUN_00c8a230(NiStream&) throw();
-};
-
-struct Derived_00d53200 : public FUN_00d53200_class {
-    TargetData* unk04;
-    void ReadFromStream(NiStream& stream);
-};
-
 struct BinaryReader {
     void* vtable;
     unsigned int currentPosition;
@@ -948,198 +560,6 @@ struct BinaryReader {
         currentPosition += readBytes;
         return readBytes;
     }
-};
-
-struct DataStream {
-    unsigned int unk000;
-    unsigned int unk004;
-    unsigned int unk008;
-    unsigned int unk00c;
-    unsigned int unk010;
-    unsigned int unk014;
-    unsigned int unk018;
-    unsigned int unk01c;
-    unsigned int unk020;
-    unsigned int unk024;
-    unsigned int unk028;
-    unsigned int unk02c;
-    unsigned int unk030;
-    unsigned int unk034;
-    unsigned int unk038;
-    unsigned int unk03c;
-    unsigned int unk040;
-    unsigned int unk044;
-    unsigned int unk048;
-    unsigned int unk04c;
-    unsigned int unk050;
-    unsigned int unk054;
-    unsigned int unk058;
-    unsigned int unk05c;
-    unsigned int unk060;
-    unsigned int unk064;
-    unsigned int unk068;
-    unsigned int unk06c;
-    unsigned int unk070;
-    unsigned int unk074;
-    unsigned int unk078;
-    unsigned int unk07c;
-    unsigned int unk080;
-    unsigned int unk084;
-    unsigned int unk088;
-    unsigned int unk08c;
-    unsigned int unk090;
-    unsigned int unk094;
-    unsigned int unk098;
-    unsigned int unk09c;
-    unsigned int unk0a0;
-    unsigned int unk0a4;
-    unsigned int unk0a8;
-    unsigned int unk0ac;
-    unsigned int unk0b0;
-    unsigned int unk0b4;
-    unsigned int unk0b8;
-    unsigned int unk0bc;
-    unsigned int unk0c0;
-    unsigned int unk0c4;
-    unsigned int unk0c8;
-    unsigned int unk0cc;
-    unsigned int unk0d0;
-    unsigned int unk0d4;
-    unsigned int unk0d8;
-    unsigned int unk0dc;
-    unsigned int unk0e0;
-    unsigned int unk0e4;
-    unsigned int unk0e8;
-    unsigned int unk0ec;
-    unsigned int unk0f0;
-    unsigned int unk0f4;
-    unsigned int unk0f8;
-    unsigned int unk0fc;
-    unsigned int unk100;
-    unsigned int unk104;
-    unsigned int unk108;
-    unsigned int unk10c;
-    unsigned int unk110;
-    unsigned int unk114;
-    unsigned int unk118;
-    unsigned int unk11c;
-    unsigned int unk120;
-    unsigned int unk124;
-    unsigned int unk128;
-    unsigned int unk12c;
-    unsigned int unk130;
-    unsigned int unk134;
-    unsigned int unk138;
-    unsigned int unk13c;
-    unsigned int unk140;
-    unsigned int unk144;
-    unsigned int unk148;
-    unsigned int unk14c;
-    unsigned int unk150;
-    unsigned int unk154;
-    unsigned int unk158;
-    unsigned int unk15c;
-    unsigned int unk160;
-    unsigned int unk164;
-    unsigned int unk168;
-    unsigned int unk16c;
-    unsigned int unk170;
-    unsigned int unk174;
-    unsigned int unk178;
-    unsigned int unk17c;
-    unsigned int unk180;
-    unsigned int unk184;
-    unsigned int unk188;
-    unsigned int unk18c;
-    unsigned int unk190;
-    unsigned int unk194;
-    unsigned int unk198;
-    unsigned int unk19c;
-    unsigned int unk1a0;
-    unsigned int unk1a4;
-    unsigned int unk1a8;
-    unsigned int unk1ac;
-    unsigned int unk1b0;
-    unsigned int unk1b4;
-    unsigned int unk1b8;
-    unsigned int unk1bc;
-    unsigned int unk1c0;
-    unsigned int unk1c4;
-    unsigned int unk1c8;
-    unsigned int unk1cc;
-    unsigned int unk1d0;
-    unsigned int unk1d4;
-    unsigned int unk1d8;
-    unsigned int unk1dc;
-    unsigned int unk1e0;
-    unsigned int unk1e4;
-    unsigned int unk1e8;
-    unsigned int unk1ec;
-    unsigned int unk1f0;
-    unsigned int unk1f4;
-    unsigned int unk1f8;
-    unsigned int unk1fc;
-    unsigned int unk200;
-    unsigned int unk204;
-    unsigned int unk208;
-    unsigned int unk20c;
-    unsigned int unk210;
-    unsigned int unk214;
-    unsigned int unk218;
-    unsigned int unk21c;
-    unsigned int unk220;
-    unsigned int unk224;
-    unsigned int unk228;
-    unsigned int unk22c;
-    unsigned int unk230;
-    unsigned int unk234;
-    unsigned int unk238;
-    unsigned int unk23c;
-    unsigned int unk240;
-    unsigned int unk244;
-    unsigned int unk248;
-    unsigned int unk24c;
-    BinaryReader* input;
-};
-
-struct Record {
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0c;
-    unsigned int unk10;
-    unsigned int unk14;
-    unsigned int unk18;
-    unsigned int header;
-    unsigned int flag;
-    unsigned int unk24;
-    unsigned int unk28;
-    unsigned int unk2c;
-    unsigned int data30;
-    unsigned int unk34;
-    unsigned int unk38;
-    unsigned int unk3c;
-    unsigned int words40;
-    unsigned int unk44;
-    unsigned int unk48;
-    unsigned int unk4c;
-    unsigned int unk50;
-    unsigned int unk54;
-    unsigned int unk58;
-    unsigned int unk5c;
-    unsigned int unk60;
-    unsigned int unk64;
-    unsigned int unk68;
-    unsigned int unk6c;
-    unsigned int words70;
-};
-
-void __stdcall FUN_00c8a280(DataStream* stream);
-
-struct DataOwner {
-    unsigned int unknown00;
-    Record* record;
-    void ReadRecord(DataStream* stream);
 };
 
 int __cdecl FUN_00cb0fd0(const char*, const char*, unsigned int);
@@ -1286,20 +706,6 @@ TargetClass* FUN_00d87380_Class::CallTargetMethod(TargetClass* target, int aiArg
     return target;
 }
 
-struct FUN_00d86910_Obj {
-    int __thiscall FUN_00d86910();
-};
-
-struct FUN_00d873b0_Obj {
-    void __thiscall FUN_00d873b0(int a, int b);
-};
-
-struct FUN_00d873f0_Holder {
-    int unk00;
-    FUN_00d86910_Obj* unk04;
-    FUN_00d873b0_Obj* __thiscall FUN_00d873f0(FUN_00d873b0_Obj* a);
-};
-
 class hkSetD874 {
 public:
     int* m_kPrimitiveElement;
@@ -1350,12 +756,6 @@ void __cdecl FUN_00d87a70()
     FUN_00d87920();
 }
 
-struct FUN_00d87a80_Stub {
-    void* FUN_00d87a80(int);
-};
-
-extern int DAT_010d3cc0;
-
 class FUN_00d88050 {
 public:
     FUN_00d88050();
@@ -1373,18 +773,7 @@ FUN_00d88050::FUN_00d88050()
     m_bValueAt0C = false;
 }
 
-struct AllocIfaceFree : AllocIface
-{
-    virtual void Free(void* block, unsigned int size);
-};
-
 extern void* DAT_012691fc;
-
-struct FUN_00d880d0 {
-    unsigned char m_kPointB;
-    int m_i;
-    void M_00d880d0();
-};
 
 struct FUN_00d880f0_Class {
     int unk00;
@@ -1433,18 +822,6 @@ void __cdecl FUN_00d92200(void* pvContext, hkTargetD922B** ppkTarget, void* a, v
 {
     (*ppkTarget)->process(a, b, c, d);
 }
-
-class hkStatisticsCollectorD922 {
-public:
-    virtual ~hkStatisticsCollectorD922();
-    virtual void V1();
-    virtual void V2();
-    virtual void addChildObject(const char* pcName, const void* pvObject, const void* pvClass);
-};
-
-struct hkpAgentEntryD922 {
-    void* m_pCollisionAgent;
-};
 
 class FUN_00d92250_obj {
 public:
@@ -1612,15 +989,7 @@ extern "C" {
     void _ReadWriteBarrier(void);
     __declspec(dllimport) void* __stdcall TlsGetValue(unsigned int dwTlsIndex);
     extern unsigned int DAT_0126835c;
-    void __cdecl FUN_00d89f80(void* p, int a2, int a3, int a4, bool* pb);
 }
-
-struct StringCursor {
-    int unk00;
-    char* m_cur;
-    int unk08;
-    char* m_kRayEnd;
-};
 
 struct TargetObj {
     int dummy;
@@ -1740,19 +1109,10 @@ void LogIntegrateVelocity(Arg0* arg0, Arg1* arg1, Arg2* arg2)
 }
 
 
-extern "C" char str_010d4030[];
-
 void __cdecl FUN_00d61d00(unsigned int* result, char* text, double d0,
                           int value0, double d1, int value1, double d2);
 
 void __cdecl FUN_00d61d00(...);
-
-struct FUN_00d97680_Vec {
-    float x;
-    float y;
-    float z;
-    float w;
-};
 
 struct hkRecordD983 {
     float m_00;
@@ -1834,50 +1194,10 @@ void* __cdecl FUN_00d99540(void* a1, void* a2, void* a3, void* a4)
     return a1;
 }
 
-struct FNV_00d99f50_Entry { void* value; void* payload; };
 struct FNV_00d99f50_Result {
     unsigned char flag;
     FNV_00d99f50_Result() {}
     ~FNV_00d99f50_Result() {}
-};
-extern "C" void __cdecl FUN_00d98ca0(unsigned char* scratch, const FNV_00d99f50_Entry* entry, void* context, void* left, void* right);
-
-struct FUN_00d9a4a0_Param {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-};
-
-struct FUN_00d9a4a0_Float {
-    float unk00;
-    float unk04;
-};
-
-struct FUN_00d9a4a0_Obj {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    FUN_00d9a4a0_Float* unk10;
-
-    void __thiscall InvokeCallback(int a1);
-};
-
-struct IdxStand_ {
-    char* m_iWordAt00;
-    void* FUN_00d9a4c0(int idx);
-};
-
-struct FUN_00d9a4d0_Class {
-    int unk00;
-
-    int __thiscall GetEntryOffset(unsigned short value);
 };
 
 struct FnvCpu_FUN_00d9f6b0_CpuInterface {
@@ -1930,42 +1250,6 @@ void __stdcall FUN_00d9fce0(int) {
 extern unsigned int DAT_0126835c;
 typedef void* (__stdcall* D85TlsFn)(unsigned long);
 extern D85TlsFn DAT_00fdf044;
-
-struct D85Ctn {
-    void** entries;
-    unsigned short count;
-};
-
-struct D85Ev {
-    unsigned int tag;
-    unsigned int time;
-    int unk08;
-};
-
-struct D85Prof {
-    int unk00;
-    D85Ev* head;
-    int unk08;
-    D85Ev* end;
-};
-
-struct D85A0 {
-    int unk00;
-    unsigned int unk04;
-};
-
-struct D85Msg {
-    D85A0* p;
-};
-
-struct D85Node5 {
-    virtual void v00();
-    virtual void v01();
-    virtual void v02();
-    virtual void v03();
-    virtual void v04();
-    virtual void v05(D85Msg m);
-};
 
 struct NiBinaryStreamD861 {
     void* m_vtbl;
@@ -2149,13 +1433,6 @@ struct FUN_00dee750 {
     FUN_00dee750();
 };
 
-struct FUN_00d86470_cls {
-    int unk00;
-    FUN_00dee750* m_04;
-
-    unsigned int FUN_00d86470();
-};
-
 class hkBitFieldD867 {
 public:
     unsigned int* m_auiBitFieldWords;
@@ -2184,13 +1461,6 @@ void hkBitFieldD867::FUN_00d867e0(int value)
 }
 
 
-struct Cls00d86950 {
-    int unk00;
-    int unk04;
-    int unk08;
-    int GetUnk08();
-};
-
 struct S_00d87a60 {
     int m_uiFilterValue;
     int GetValue();
@@ -2207,19 +1477,6 @@ void* __cdecl FUN_00d880a0()
 {
     return DAT_012691fc;
 }
-
-class FUN_00d88100_Class {
-public:
-    bool m_bTriggered;
-    char unk01;
-    char unk02;
-    char unk03;
-    int m_iArrayLength;
-    bool m_bEnableState;
-    bool m_abFlags[3];
-
-    bool FUN_00d88100(int iIndex);
-};
 
 namespace fnv_00d88150 {
 class hkMemoryAllocatorD881 {
@@ -2261,113 +1518,12 @@ using hkGlobalsD881::DAT_012691fc;
 
 }  // namespace fnv_00d88150
 
-struct S00d881a0_Leaf {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5C;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6C;
-    int unk70;
-    int unk74;
-    int m78;
-};
-struct S00d881a0_Mid {
-    int unk00;
-    int unk04;
-    S00d881a0_Leaf* m08;
-};
-struct S00d881a0_Obj {
-    S00d881a0_Mid* m00;
-};
-int __cdecl FUN_00d29bf0(void* a0, void* a1, void* a2, void* a3, void* a4, int a5);
-void __cdecl FUN_00d1a330(int a0, void* a1, void* a2);
-
 static unsigned char* S00d96870_outp;
 
 union __declspec(intrin_type) __declspec(align(16)) __m128 { float m128_f32[4]; unsigned __int64 m128_u64[2]; };
 extern "C" __m128 _mm_sub_ps(__m128, __m128);
-extern "C" __m128 _mm_load_ps(const float*);
-
-struct D99FC0Quad { int a; int b; int c; int d; };
-
-struct D99FC0Object {
-    void* unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    D99FC0Quad q30;
-    __m128 v40;
-};
-
-void __cdecl IntersectTree(int a1, int a2, int a3, float* a4, int* a5,
-                          int a6, int a7, float a8, float a9, float a10, int a11);
-
-struct FUN_00d9a410_Target {
-    virtual void v00();
-    virtual char* v01(char* buffer, int* a, int* b);
-};
-
-struct FUN_00d9a410_Object {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-};
 
 typedef void (__cdecl *FUN_00d9a410_Callback)(int*, int*, void*, int, int);
-
-struct FUN_00d9a410_Entry {
-    FUN_00d9a410_Callback fn;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-};
-
-struct FUN_00d9a410_Stub {
-    int unk00;
-    int unk04;
-    int unk08;
-    FUN_00d9a410_Target* unk0c;
-    int unk10;
-    int unk14;
-    int* unk18;
-    int unk1c;
-    unsigned char* unk20;
-
-    void __thiscall InvokeCallback(int* param);
-};
 
 struct ArgD9A4 {
     int unk00, unk04, unk08, unk0C;
@@ -2481,130 +1637,9 @@ const char* FUN_007bb030(int kind, int value)
 
 extern char DAT_01267e30;
 
-class ShapeD84D {
-public:
-    virtual void vfn00();
-    virtual void vfn04();
-    virtual void vfn08();
-    virtual void vfn0C();
-    virtual void vfn10();
-    virtual void vfn14();
-    virtual void vfn18();
-    virtual void vfn1C();
-    virtual int getType();
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    ShapeD84D* m_pkChild;
-
-    ShapeD84D* FUN_00cdf6d0();
-};
-
-// pivot vector lives first in each 0x40-byte atom
-struct PivotAtom {
-    __m128 m_kPivotVector;
-    unsigned int unk10;
-    unsigned int unk14;
-    unsigned int unk18;
-    unsigned int unk1C;
-    unsigned int unk20;
-    unsigned int unk24;
-    unsigned int unk28;
-    unsigned int unk2C;
-    unsigned int unk30;
-    unsigned int unk34;
-    unsigned int unk38;
-    unsigned int unk3C;
-};
-
-// view of the derived-class atom chain at data+0x50
-struct AtomChain {
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0C;
-    unsigned int unk10;
-    unsigned int unk14;
-    unsigned int unk18;
-    unsigned int unk1C;
-    unsigned int unk20;
-    unsigned int unk24;
-    unsigned int unk28;
-    unsigned int unk2C;
-    unsigned int unk30;
-    unsigned int unk34;
-    unsigned int unk38;
-    unsigned int unk3C;
-    unsigned int unk40;
-    unsigned int unk44;
-    unsigned int unk48;
-    unsigned int unk4C;
-    PivotAtom m_kBridgeAtoms[2];
-};
-
-// hkpConstraintData stand-in (base class stays 4-aligned)
-struct PivotCData {
-    virtual void v00();
-    virtual void v01();
-    virtual void v02();
-    virtual void v03();
-    virtual void v04();
-    virtual void v05();
-    virtual void v06();
-    virtual void v07();
-    virtual int v08();
-
-    PivotCData* FUN_00cdf6c0();
-
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0C;
-    unsigned int unk10;
-    unsigned int unk14;
-    PivotCData* m_wrapped;
-};
-
 extern unsigned int DAT_0126835c;
 typedef void* (__stdcall* D90TlsFn)(unsigned long);
 extern D90TlsFn DAT_00fdf044;
-
-struct D90Ctn {
-    void** entries;
-    unsigned short count;
-};
-
-struct D90Owner {
-    unsigned int unk00, unk04, unk08, unk0C, unk10, unk14, unk18, unk1C;
-    D90Ctn m_kListeners;
-};
-
-struct D90Ev {
-    unsigned int tag;
-    unsigned int time;
-    int unk08;
-};
-
-struct D90Prof {
-    int unk00;
-    D90Ev* head;
-    int unk08;
-    D90Ev* end;
-};
-
-struct D90Node {
-    virtual void v00();
-    virtual void v01(D90Owner* pOwner);
-    virtual void v02();
-    virtual void v03(D90Owner* pOwner);
-};
-
-struct hkTimerCommand {
-    const char* m_pCommandName;
-    unsigned int m_ticks;
-    unsigned int m_auiShapeKeys;
-};
 
 template <class T>
 struct ResizableArray {
@@ -2666,22 +1701,9 @@ public:
     }
 };
 
-class hkBitFieldD868 {
-public:
-    hkArrayD868<unsigned int> m_auiBitFieldWords;
-    int m_iNumBits;
-
-    void FUN_00d867e0(int iValue) throw();
-    void Resize(int iNumBits, int iInitialValue);
-};
-
-extern const char DAT_010d3aa0[];
-extern const char DAT_010d3a90[];
-
 int __cdecl FUN_00cb0fd0(const char*, const char*, int) throw();
 int __cdecl FUN_00cb10d0(const char*) throw();
 const char* __cdecl FUN_00cb1140(const char*, int) throw();
-int __cdecl CallWithZeroMiddleArg(const char*, int) throw();
 int __cdecl GetTypeCode(const char*) throw();
 
 struct HkTempAllocator {
@@ -2837,14 +1859,6 @@ unsigned __int64 OwnerD87A::GetCurrentValue() const
 {
     return m_uiCurrentValue;
 }
-
-struct MonitorBuffer {
-    void* m_ppVirtualMethodTable;
-    int m_uiItemCount;
-    char m_bSlotEnabled;
-    char m_buffer[50];
-    void FUN_00d880b0();
-};
 
 struct hkStepInfoD881;
 struct hkpSolverInfoD881;
@@ -3050,38 +2064,6 @@ struct hkpCollisionInputD923 {
     int unk04, unk08, unk0C, unk10;
     int m_bCreatePredictiveAgents;
 };
-struct hkpAgent3InputD923 {
-    const hkpCdBodyD923* m_pBodyA;
-    const hkpCdBodyD923* m_pBodyB;
-    const void* m_pAdditionalCollidableBody;
-    const hkpCollisionInputD923* m_pRayCastInput;
-    hkpContactMgrD923* m_pContactManager;
-};
-struct hkpAgentEntryD923 {
-    unsigned char m_ucAgentType;
-    unsigned char m_ucNnTrackType;
-    unsigned char m_usNumContactPoints;
-    unsigned char m_iElementCount;
-};
-struct hkpAgentDataD923;
-
-struct CleanupAllocator {
-    virtual void unk00();
-    virtual void unk04();
-    virtual void unk08(void* object, unsigned int size);
-    virtual void unk0C();
-    virtual void unk10(void* object, unsigned int size);
-};
-
-struct CleanupRouter {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    CleanupAllocator* m_pThreadAllocator;
-    int unk14;
-    CleanupAllocator* m_allocator2;
-};
 
 struct CleanupObject {
     int unk00;
@@ -3130,10 +2112,6 @@ extern "C" {
 
 extern unsigned int DAT_0126835c;
 extern "C" char str_010cc5c4[];
-extern "C" char str_010d3e98[];
-extern "C" char str_01076f38[];
-
-void __cdecl FUN_00d89ed0(void* p, int a, int b);
 
 struct S00d944d0_Stream {
     int unk00;
@@ -3232,202 +2210,7 @@ void __cdecl FUN_00d944d0(S00d944d0_Obj* apObj, S00d944d0_Arg1* a2, S00d944d0_Ar
 namespace fnv_00d94570 {
 extern unsigned int DAT_0126835c;
 extern char str_010cc5c4;
-extern char str_010d3ea4;
 extern char DAT_01076f38;
-
-struct Fnv94570_Obj {
-    int unk000;
-    int unk004;
-    int unk008;
-    int unk00C;
-    int unk010;
-    int unk014;
-    int unk018;
-    int unk01C;
-    int unk020;
-    int unk024;
-    int unk028;
-    int unk02C;
-    int unk030;
-    int unk034;
-    int unk038;
-    int unk03C;
-    int unk040;
-    int unk044;
-    int unk048;
-    int unk04C;
-    int unk050;
-    int unk054;
-    int unk058;
-    int unk05C;
-    int unk060;
-    int unk064;
-    int unk068;
-    int unk06C;
-    int unk070;
-    int unk074;
-    int unk078;
-    int unk07C;
-    int unk080;
-    int unk084;
-    int unk088;
-    int unk08C;
-    int unk090;
-    int unk094;
-    int unk098;
-    int unk09C;
-    int unk0A0;
-    int unk0A4;
-    int unk0A8;
-    int unk0AC;
-    int unk0B0;
-    int unk0B4;
-    int unk0B8;
-    int unk0BC;
-    int unk0C0;
-    int unk0C4;
-    int unk0C8;
-    int unk0CC;
-    int unk0D0;
-    int unk0D4;
-    int unk0D8;
-    int unk0DC;
-    int unk0E0;
-    int unk0E4;
-    int unk0E8;
-    int unk0EC;
-    int unk0F0;
-    int unk0F4;
-    int unk0F8;
-    int unk0FC;
-    int unk100;
-    int unk104;
-    int unk108;
-    int unk10C;
-    int unk110;
-    int unk114;
-    int unk118;
-    int unk11C;
-    int unk120;
-    int unk124;
-    int unk128;
-    int unk12C;
-    int unk130;
-    int unk134;
-    int unk138;
-    int unk13C;
-    int unk140;
-    int unk144;
-    int unk148;
-    int unk14C;
-    int unk150;
-    int unk154;
-    int unk158;
-    int unk15C;
-    int unk160;
-    int unk164;
-    int unk168;
-    int unk16C;
-    int unk170;
-    int unk174;
-    int unk178;
-    int unk17C;
-    int unk180;
-    int unk184;
-    int unk188;
-    int unk18C;
-    int unk190;
-    int unk194;
-    int unk198;
-    int unk19C;
-    int unk1A0;
-    int unk1A4;
-    int unk1A8;
-    int unk1AC;
-    int unk1B0;
-    int unk1B4;
-    int unk1B8;
-    int unk1BC;
-    int unk1C0;
-    int unk1C4;
-    int unk1C8;
-    int unk1CC;
-    int unk1D0;
-    int unk1D4;
-    int unk1D8;
-    int unk1DC;
-    int unk1E0;
-    int unk1E4;
-    int unk1E8;
-    int unk1EC;
-    int unk1F0;
-    int unk1F4;
-    int unk1F8;
-    int unk1FC;
-    int unk200;
-    int unk204;
-    int unk208;
-    int unk20C;
-    int unk210;
-    int unk214;
-    int unk218;
-    int unk21C;
-    int unk220;
-    int unk224;
-    int unk228;
-    int unk22C;
-    int unk230;
-    int unk234;
-    int unk238;
-    int unk23C;
-    int unk240;
-    int unk244;
-    int unk248;
-    int unk24C;
-    int unk250;
-    int unk254;
-    int unk258;
-    int unk25C;
-    int unk260;
-    int unk264;
-    int unk268;
-    int unk26C;
-    int unk270;
-    int unk274;
-    int unk278;
-    int unk27C;
-    int unk280;
-    int unk284;
-    int unk288;
-    int unk28C;
-    int unk290;
-    int unk294;
-    int unk298;
-    int unk29C;
-    int unk2A0;
-    int unk2A4;
-    int unk2A8;
-    int unk2AC;
-    int unk2B0;
-    int unk2B4;
-    int unk2B8;
-    int unk2BC;
-    int unk2C0;
-    int unk2C4;
-    int unk2C8;
-    int unk2CC;
-    int unk2D0;
-    int unk2D4;
-    int unk2D8;
-    int unk2DC;
-    int unk2E0;
-    int unk2E4;
-    int unk2E8;
-    int unk2EC;
-    int unk2F0;
-    int unk2F4;
-    int unk2F8;
-};
 
 struct __declspec(align(16)) Fnv94570_Quad {
     int v0;
@@ -3436,96 +2219,9 @@ struct __declspec(align(16)) Fnv94570_Quad {
     int v3;
 };
 
-struct Fnv94570_Data {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-};
-
-struct Fnv94570_Ctx {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    Fnv94570_Data* unk2C;
-
-    void ProcessCallback(int a1, int a2, int a3);
-};
-
-struct Fnv94570_Tls {
-    int unk00;
-    char* unk04;
-    int unk08;
-    char* unk0C;
-};
-
-void __cdecl FUN_00d8fb70(
-    void* a1,
-    int a2,
-    int a3,
-    int a4,
-    int a5,
-    int a6);
-
 }  // namespace fnv_00d94570
 
-extern char DAT_010cc5c4[];
-extern char DAT_010d3eb8[];
 extern char DAT_01076f38[];
-
-struct ProfilerLongRecord {
-    char* name;
-    unsigned int time;
-    unsigned int unk08;
-    char* secondaryName;
-};
-struct ProfilerShortRecord {
-    char* name;
-    unsigned int time;
-    unsigned int unk08;
-};
-struct SolverTarget {
-    int unk00, unk04, unk08, unk0c, unk10;
-};
-struct SolverObject {
-    int unk00, unk04, unk08, unk0c;
-    int unk10, unk14, unk18, unk1c;
-    SolverTarget* target;
-};
-void __cdecl FUN_00df0680(TargetObj*, int, int, int);
-
-struct StructItem {
-    short* unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    unsigned short unk14;
-    unsigned short pad16;
-    unsigned short unk18;
-    unsigned short unk1A;
-};
-
-struct StructA {
-    StructItem* items;
-    int count;
-    int unk08;
-    int* ptrC;
-    int unk10;
-    int unk14;
-    char unk18;
-};
 
 struct StructB {
     int unk00; int unk04; int unk08; int unk0C;
@@ -3545,13 +2241,9 @@ struct StructB {
     int unk74;
 };
 
-extern double DAT_010c9300;
 struct LocalFlag { unsigned char value; };
 void __cdecl FUN_00d72190(short* a1, StructB* a2, LocalFlag a3, int** a4);
 void __cdecl FUN_00d6f460(short* a1, unsigned short a2, StructB* a3, int** a4);
-
-extern "C" StructA* input_a();
-extern "C" StructB* input_b();
 
 struct d94eb0_cls { unsigned char b; };
 extern "C" d94eb0_cls* d94eb0_target(void);
@@ -3608,13 +2300,6 @@ struct DynamicsJobSubtype14 : public DynamicsJob {
     }
 };
 inline void* operator new(unsigned int, void* where) throw() { return where; }
-struct JobRecord {
-    int m_iFirstValue;
-    int unk04;
-    int unk08;
-    int unk0c;
-    DynamicsJob m_kJob;
-};
 
 struct __declspec(align(16)) S00d96970_Local {
     unsigned char unk00;
@@ -3630,23 +2315,6 @@ struct __declspec(align(16)) S00d96970_Local {
     unsigned int unk14;
     unsigned int unk18;
     unsigned int unk1C;
-};
-
-struct S00d96970_Target {
-    void __thiscall InsertItemAndNotify(int value, S00d96970_Local* local, int flag);
-};
-
-struct S00d96970_Obj {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    unsigned char unk20;
-    unsigned char unk21;
 };
 
 namespace fnv_00d969e0 {
@@ -3782,18 +2450,7 @@ struct State {
     unsigned short unk7e;
 };
 
-struct Out {
-    int m_00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    Ev m_kEvent;
-};
-
 struct Ev20;
-struct A0Cls {
-    int InsertItemAndNotify(int a1, Ev20* temp, int z);
-};
 
 static __forceinline void InitEv(Ev* e, Ev* ev, unsigned char type, unsigned char flag, unsigned short size)
 {
@@ -3837,10 +2494,6 @@ struct Stage1 : Ev { __forceinline Stage1(Ev* ev, State* s){
 } };
 }  // namespace fnv_00d969e0
 
-extern float DAT_01017b78;
-extern float DAT_01012068;
-extern float DAT_01050cb0;
-extern double DAT_01011588;
 extern double DAT_01035718;
 extern "C" __m128 _mm_set_ps1(float);
 extern "C" __m128 _mm_add_ps(__m128, __m128);
@@ -3896,16 +2549,6 @@ float FUN_00d974f0()
 
 
 extern const __m128 DAT_011b6de0;
-
-struct ListenerArray {
-    void** m_ppItems;
-    unsigned short m_wCount;
-};
-
-struct ListenerOwner {
-    int unk00;
-    ListenerArray m_kNode;
-};
 
 #include <stdarg.h>
 namespace fnv_00d87aa0 {
@@ -3978,41 +2621,6 @@ public:
     virtual int GetType() const;
 };
 
-struct ContainerShape : Shape {
-    int unk004;
-    int unk008;
-    int unk00c;
-    int unk010;
-    int unk014;
-    Shape* m_pkChild;
-};
-
-struct ListShape : Shape {
-    Shape* FUN_00cdf6c0();
-};
-
-struct VertexShape : Shape {
-    int unk004;
-    int unk008;
-    int unk00c;
-    int unk010;
-    int unk014;
-    int unk018;
-    int unk1c;
-    FourFloatVector m_akVertices[1];
-};
-
-struct TransformShape : Shape {
-    int unk004;
-    int unk008;
-    int unk00c;
-    int unk010;
-    int unk014;
-    int unk018;
-    int unk1c;
-    Transform m_akTransforms[1];
-};
-
 }
 
 struct hkBool_d86 {
@@ -4052,8 +2660,6 @@ struct D94Tls {
 extern unsigned int DAT_0126835c;
 typedef void* (__stdcall *D94TlsGetFn)(unsigned long);
 extern D94TlsGetFn DAT_00fdf044;
-extern const char str_010d3ef4[];
-void __cdecl FUN_00d29830(char* p, unsigned int a, unsigned int b, unsigned int c, unsigned int d);
 struct D94Sub {
     int u00;
     int u04;
@@ -4131,35 +2737,6 @@ int __cdecl FUN_00d94df0(char* a1, D94Obj* a2, D94Body* a3)
 
 
 #include <string.h>
-struct S00d967a0_Obj {
-    void** vptr;
-};
-
-struct S00d967a0_Rec {
-    unsigned char m00;
-    unsigned char unk01;
-    unsigned short unk02;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0C;
-    unsigned short m10;
-    unsigned short unk12;
-    int m14;
-    unsigned int unk18;
-    S00d967a0_Obj* m1C;
-    unsigned int unk20;
-    unsigned short m24;
-    unsigned short unk26;
-    unsigned short m28;
-    unsigned short m2A;
-    unsigned int unk2C;
-    unsigned int unk30;
-    unsigned int unk34;
-    unsigned int unk38;
-    unsigned int unk3C;
-    int m40;
-    unsigned short m44;
-};
 
 static __forceinline void memCpy16NonEmpty(void* dst, const void* src, int numQuads)
 {
@@ -4561,40 +3138,21 @@ struct __declspec(align(16)) TreeVector {
     __m128 simdValue() const { return *reinterpret_cast<const __m128*>(this); }
     float operator[](unsigned int axis) const { return (&x)[axis]; }
 };
-struct TreeNode {
-    int flags;
-    unsigned int bounds;
-};
 struct __declspec(align(16)) QuantizedBounds {
     unsigned short minX, minY, minZ, idLow;
     unsigned short maxX, maxY, maxZ, idHigh;
 };
-union TreeLeafId {
-    unsigned int value;
-    struct { unsigned short low, high; };
-};
-struct TreeCollector {
-    virtual void unused();
-    virtual void AddHit(unsigned char* state, unsigned int id);
-    virtual void begin(unsigned char* state);
-    virtual float earlyOut();
-};
-extern unsigned int DAT_010c92e0[4];
 extern const double DAT_010217d0;
 extern const __m128 DAT_011b6de0;
-extern __m128 DAT_010c7170;
 extern const float DAT_010cd644 = 1.0000000272564224e16f;
 extern const float DAT_0104e148 = -3.402820018375656e38f;
 extern const float DAT_0104da48 = 3.402820018375656e38f;
-float __cdecl FUN_00c98210(float a, float b);
-float __cdecl FUN_00c9e0f0(float a, float b);
 
 template<class T> struct TreeRef { T* p; TreeRef(T* q):p(q){} operator T*()const{return p;} T* operator->()const{return p;} };
 
 struct BoundPair { __m128 minimum, maximum; void set(float a, float b) { minimum = _mm_set_ps1(a); maximum = _mm_set_ps1(b); } };
 
 extern char str_010cc5c4[];
-extern char str_010d3ec8[];
 extern char DAT_01076f38[];
 
 struct S00d94a80_Ctx {
@@ -4622,44 +3180,6 @@ struct S00d94a80_Bool {
 void __cdecl FUN_00d72190(char* atom, S00d94a80_Local* ctx, S00d94a80_Bool bCopy, int** cursor);
 inline S00d94a80_Bool S00d94a80_True() { S00d94a80_Bool r(true); return r; }
 
-struct S00d94a80_A0 {
-    SubObj* unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0c;
-    S00d94a80_Ctx m_ctx;
-};
-
-struct S00d94a80_Rec {
-    char* unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0c;
-    unsigned int unk10;
-    unsigned short unk14;
-    unsigned short unk16;
-    unsigned short unk18;
-    unsigned short unk1a;
-};
-
-struct S00d94a80_Desc {
-    int unk00;
-    int unk04;
-    char* end;
-    int* c0;
-    char* mon;
-    int count;
-    S00d94a80_Rec records[1];
-};
-
-struct S00d94a80_A2 {
-    int unk00, unk04, unk08, unk0c;
-    int unk10, unk14, unk18, unk1c;
-    S00d94a80_Desc* unk20;
-    int unk24;
-    unsigned char unk28;
-};
-
 struct ArgHandle {
     Arg2* p;
     ArgHandle(Arg2* q):p(q) {}
@@ -4685,43 +3205,6 @@ extern unsigned int DAT_0126835c;
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long);
 extern "C" unsigned __int64 __rdtsc(void);
 extern "C" void _ReadWriteBarrier(void);
-
-struct D86050Arr {
-    void** m_pElements;          // +00
-    unsigned short m_uiItemCount;  // +04
-};
-
-struct D86050Sub {
-    int f00, f04, f08, f0c, f10, f14, f18, f1c;
-    D86050Arr m_aiIndexedValues;         // +20
-};
-
-struct D86050Self {
-    int unk00;
-    D86050Sub* unk04;        // +04
-};
-
-struct D86050Prof {
-    void* unk00;             // +00
-    char* head;              // +04
-    void* unk08;             // +08
-    char* end;               // +0c
-};
-
-struct D86050Node {
-    virtual void v00();
-    virtual void v01();
-    virtual void v02();
-    virtual void v03();
-    virtual void v04();
-    virtual void v05();
-    virtual void v06(D86050Self* a1);
-};
-
-struct D86050Stamps {
-    unsigned int in;
-    unsigned int out;
-};
 
 }  // namespace fnv_00d86050
 
@@ -4754,37 +3237,8 @@ namespace fnv_00d94340 {
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long dwTlsIndex);
 extern unsigned long DAT_0126835c;
 
-struct T00d94340_Cmd {
-    char* m_name;
-    unsigned int m_uiStartTicks;
-    int unk08;
-};
-
-struct T00d94340_Stream {
-    int unk00;
-    T00d94340_Cmd* m_kRayEnd;
-    int unk08;
-    T00d94340_Cmd* m_pRayCursor;
-};
-
-
-struct Arg_00d94340 {
-    int unk00, unk04, unk08, unk0C, unk10;
-    int m_iA;
-    char* m_pcB;
-};
-
-void __cdecl ClearFlagsAndMarkDirty(int a, char* b);
-
-class Target_00d94340 {
-public:
-    void ProcessCallback(Arg_00d94340* a, Arg_00d94340* b, int c);
-};
-
 }  // namespace fnv_00d94340
 
-extern const float g_011c5874_arg1;
-extern const float runtimeFloatSettingDefault262;
 extern double DAT_01035718;
 
 union F128U
@@ -4882,7 +3336,6 @@ __m128 _mm_mul_ps(__m128,__m128);
 __m128 _mm_rsqrt_ss(__m128);
 __m128 _mm_mul_ss(__m128,__m128);
 __m128 _mm_cmpeq_ss(__m128,__m128);
-__m128 _mm_set_ss(float);
 __m128 _mm_andnot_ps(__m128,__m128);
 __m128 _mm_sub_ss(__m128,__m128);
 __m128 _mm_or_ps(__m128,__m128);
@@ -4898,7 +3351,6 @@ __m128 _mm_cmple_ps(__m128,__m128);
 __m128 _mm_cmplt_ps(__m128,__m128);
 __m128 _mm_min_ps(__m128,__m128);
 __m128 _mm_max_ps(__m128,__m128);
-void _mm_store_ss(float*,__m128);
 int _mm_movemask_ps(__m128);
 }
 extern "C" {
@@ -4929,20 +3381,6 @@ struct RayMask {
     __forceinline void set(__m128 v) {simd=v;}
 };
 struct __declspec(align(16)) PackedVector { unsigned x,y,z,w; };
-struct PrimitiveRecord {
-    union {
-        struct { unsigned pair0, pair1, pair2, pair3; };
-        struct { unsigned short minX, minY, minZ, keyLow, maxX, maxY, maxZ, keyHigh; };
-    };
-};
-struct TreeData {
-    TreeNode* root;
-    int field04, field08, stackCapacity;
-    int field10, field14, field18;
-    PrimitiveRecord* primitives;
-    int field20, field24, field28, field2c;
-    RayVector minimum, maximum;
-};
 struct RayCollector {
     virtual void unused();
     virtual FNV_00d99f50_Result report(unsigned key);
@@ -4952,10 +3390,7 @@ struct RayCollector {
 struct VectorRef { unsigned address; const RayVector* get() const { return reinterpret_cast<const RayVector*>(address); } const RayVector* operator->() const { return get(); } };
 struct CollectorRef { RayCollector* p; RayCollector* operator->() const { return p; } };
 struct OutputRef { unsigned address; void* get() const { return reinterpret_cast<void*>(address); } };
-struct TraversalArena { unsigned char* current; };
-struct TraversalEntry { TreeNode* node; float nearT, farT; unsigned reserved; };
 extern const float DAT_01011d78, DAT_01017718, DAT_01016248;
-extern const RayVector DAT_010c4c10;
 extern const float DAT_010d4080, DAT_010cd644, DAT_0104e148, DAT_0104da48;
 extern const double DAT_010217d0, DAT_01032980;
 

@@ -4,76 +4,6 @@
 
 #include "havok/hkpPhysicsSystem.h"
 
-struct DDCC60World
-{
-    void removeReference();
-};
-
-struct FUN_00d06090_Class
-{
-    void* vftable;
-    int padding0;
-    DDCC60World** refs0;
-    int count0;
-    int padding1;
-    DDCC60World** refs1;
-    int count1;
-    int padding2;
-    DDCC60World** refs2;
-    int count2;
-    int padding3;
-    DDCC60World** refs3;
-    int count3;
-
-    void ReleaseAllReferences();
-};
-
-extern int DAT_010cce28;
-extern int _DAT_0102e388;
-
-struct MemoryAllocator
-{
-    virtual void FUN_00() = 0;
-    virtual void FUN_01() = 0;
-    virtual void FUN_02() = 0;
-    virtual void FUN_03() = 0;
-    virtual void Free(void* data, unsigned int size) = 0;
-};
-
-struct MemoryRouter
-{
-    void* m_p00;
-    void* m_p04;
-    void* m_p08;
-    void* m_p0C;
-    MemoryAllocator* m_p10;
-};
-
-MemoryRouter* _D1A0E0GetMemoryRouter();
-
-struct S_00d49310_Lock
-{
-    ~S_00d49310_Lock();
-};
-
-struct FUN_00d06640_class
-{
-    struct Buffer
-    {
-        void* volatile m_pData;
-        unsigned int m_uCount;
-        unsigned int m_uCapacity;
-    };
-
-    void* volatile m_pVtable;
-    void* m_pPadding;
-    Buffer m_pWorkingSet[4];
-    S_00d49310_Lock m_lock;
-
-    void ReleaseAllReferences();
-    void Destroy();
-};
-
 // @fnv 0x00cb0020
 void __stdcall FUN_00cb0020(unsigned char* output)
 {
@@ -107,15 +37,6 @@ template <typename T> struct hkArrayD062
     }
 };
 
-class hkObjD062
-{
-  public:
-    int unk00[0xb];
-    hkArrayD062<void*> m_entries;
-
-    void RemoveNullEntries();
-};
-
 typedef unsigned int Size64;
 inline void* __cdecl operator new(Size64, void* p)
 {
@@ -142,13 +63,6 @@ struct Router64
 };
 Router64* __cdecl FUN_00c85750();
 void __cdecl ResizeAudioStream(void* allocator, Array64* array, int elementSize);
-struct Container64
-{
-    void* vtable;
-    void* pad04;
-    Array64 array;
-    void __thiscall AddShape(Shape64* object);
-};
 
 struct FUN_00cb0b80
 {
@@ -244,13 +158,6 @@ struct FnvCpu_FUN_00d06c00_CpuAllocatorHolder
     FnvCpu_FUN_00d06c00_CpuAllocator* allocator;
 };
 FnvCpu_FUN_00d06c00_CpuAllocatorHolder* __cdecl FUN_00c85750();
-struct FnvCpu_FUN_00d06c00_CpuObject
-{
-    unsigned int unk00;
-    unsigned short size;
-    void Destroy();
-    FnvCpu_FUN_00d06c00_CpuObject* FUN_00d06c00(unsigned int flags);
-};
 }  // namespace fnv_00d06c00
 
 class hkMemoryAllocatorD29
@@ -315,28 +222,6 @@ class hkStringPtrD29
     const char* m_pcText;
 };
 
-class hkpRigidBodyD29;
-class hkpConstraintInstanceD29;
-class hkpActionD29;
-class hkpPhantomD29;
-
-class hkpPhysicsSystemD29
-{
-  public:
-    virtual ~hkpPhysicsSystemD29();
-    void FUN_00d06290(const hkpPhysicsSystemD29& kOther);
-
-    unsigned short m_usMemSizeAndFlags;
-    short m_sReferenceCount;
-    hkArrayD29<hkpRigidBodyD29*> m_ppRigidBodies;
-    hkArrayD29<hkpConstraintInstanceD29*> m_ppConstraints;
-    hkArrayD29<hkpActionD29*> m_ppActions;
-    hkArrayD29<hkpPhantomD29*> m_kPhantoms;
-    hkStringPtrD29 m_name;
-    unsigned long m_ulUserData;
-    bool m_bSlotEnabled;
-};
-
 template <int SIZE> __forceinline void memCpyOneAlignedD064(void* dst, const void* src)
 {
     const unsigned int* s = (const unsigned int*)src;
@@ -381,21 +266,6 @@ template <class T> class hkArrayD064
         memCpyOneAlignedD064<sizeof(T)>(m_data + m_iElementCount, &e);
         m_iElementCount++;
     }
-};
-
-class hkShapeD064
-{
-  public:
-    void FUN_00c90510();
-};
-
-class hkOwnerD064
-{
-  public:
-    int unk00[11];
-    hkArrayD064<hkShapeD064*> m_shapes;
-
-    void FUN_00d064f0(hkShapeD064* shape);
 };
 
 template <int SIZE> __forceinline void memCpyOneAlignedXd06540(void* dst, const void* src)
@@ -444,21 +314,6 @@ template <class T> class hkArrayXd06540
     }
 };
 
-class hkShapeXd06540
-{
-  public:
-    void FUN_00c90510();
-};
-
-class hkOwnerXd06540
-{
-  public:
-    int unk00[5];
-    hkArrayXd06540<hkShapeXd06540*> m_shapes;
-
-    void FUN_00d06540(hkShapeXd06540* shape);
-};
-
 template <int SIZE> __forceinline void memCpyOneAlignedXd06590(void* dst, const void* src)
 {
     const unsigned int* s = (const unsigned int*)src;
@@ -505,21 +360,6 @@ template <class T> class hkArrayXd06590
     }
 };
 
-class hkShapeXd06590
-{
-  public:
-    void FUN_00c90510();
-};
-
-class hkOwnerXd06590
-{
-  public:
-    int unk00[8];
-    hkArrayXd06590<hkShapeXd06590*> m_shapes;
-
-    void FUN_00d06590(hkShapeXd06590* shape);
-};
-
 #include <xmmintrin.h>
 __declspec(align(16)) struct AlignedVector4
 {
@@ -551,66 +391,6 @@ __declspec(align(16)) struct AlignedTransform
     void FUN_00cb23e0(const hkTransform* other);
 };
 
-struct FUN_00ca8890_Class
-{
-    int unk00, unk04, unk08, unk0C;
-    int unk10, unk14, unk18, unk1C;
-    int unk20, unk24, unk28, unk2C;
-    int unk30, unk34, unk38, unk3C;
-    int unk40, unk44, unk48, unk4C;
-    int unk50, unk54, unk58, unk5C;
-    int unk60, unk64, unk68, unk6C;
-    int unk70, unk74, unk78, unk7C;
-    int unk80, unk84, unk88, unk8C;
-    int unk90, unk94, unk98, unk9C;
-    int unkA0, unkA4, unkA8, unkAC;
-    int unkB0, unkB4, unkB8, unkBC;
-    int unkC0, unkC4, unkC8, unkCC;
-    int unkD0, unkD4, unkD8, unkDC;
-    int unkE0, unkE4, unkE8, unkEC;
-    hkTransform m_kMotionTransform;
-
-    void FUN_00ca8890(const AlignedTransform* t);
-};
-
-struct FUN_00cf30f0_Class
-{
-    void FUN_00cf30f0(const hkTransform* t);
-};
-
-void FUN_00d05df0(void* phantom, const hkTransform* t);
-
-struct PhysicsSystemWrapper : public hkpPhysicsSystem
-{
-    void ApplyMotionTransform(const hkTransform* a2);
-};
-
-struct ReferenceBody
-{
-    void FUN_00c905b0();
-};
-struct BodyCollection
-{
-    unsigned int unk00, unk04;
-    ReferenceBody** data;
-    int count;
-    unsigned int capacityFlags;
-    void FUN_00d06130(unsigned int index);
-};
-
-struct hkRefD061
-{
-    void FUN_00c905b0();
-};
-struct OwnerD061
-{
-    unsigned int unk00, unk04, unk08, unk0c, unk10, unk14, unk18, unk1c, unk20, unk24, unk28;
-    hkRefD061** refs3;
-    int count3;
-    unsigned int capacityFlags3;
-    void FUN_00d06170(int index);
-};
-
 struct RefObj
 {
     void __thiscall FUN_00c905b0();
@@ -637,14 +417,6 @@ template <class T> struct hkArray_d061
         if (m_iElementCount != index)
             memCpy4_d061(m_data + index, m_data + m_iElementCount, sizeof(T));
     }
-};
-
-struct FUN_00d061b0_Class
-{
-    void* vftable;
-    int unk04, unk08, unk0C, unk10;
-    hkArray_d061<RefObj*> m_refs;
-    void FUN_00d061b0(int index);
 };
 
 namespace fnv_00d061f0 {
@@ -676,18 +448,7 @@ template <class T> struct hkArray_d061
     }
 };
 
-struct FUN_00d061f0_Class
-{
-    void* vftable;
-    int unk04, unk08, unk0C, unk10, unk14, unk18, unk1C;
-    hkArray_d061<RefObj*> m_refs;
-    void FUN_00d061f0(int index);
-};
-
 }  // namespace fnv_00d061f0
-
-extern float DAT_0104da48;
-extern __m128 DAT_011b1bd0;
 
 struct __declspec(align(16)) TerrainVec
 {
@@ -746,16 +507,6 @@ struct __declspec(align(16)) TerrainVec
         q = _mm_mul_ps(_mm_shuffle_ps(inv, inv, 0), q);
     }
 };
-union GridCodes
-{
-    unsigned short lanes[4];
-    unsigned __int64 packed;
-};
-struct TerrainInput
-{
-    const TerrainVec* spheres;
-    int count;
-};
 struct TerrainFlip
 {
     char value;
@@ -763,38 +514,6 @@ struct TerrainFlip
     {}
     TerrainFlip(bool b) : value(b)
     {}
-};
-struct TerrainBase
-{
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual void v0c();
-    virtual void v10();
-    virtual void v14();
-    virtual void v18();
-    virtual void v1c();
-    virtual void v20();
-    virtual void v24();
-    virtual void v28();
-    virtual void v2c();
-    virtual void v30();
-    virtual float sample(int x, int z) const;
-    virtual TerrainFlip flipped() const;
-    int refInfo;
-    unsigned int userData;
-    unsigned int typeInfo;
-    int width;
-    int depth;
-    float minHeight;
-    char projection;
-};
-struct TerrainShape : TerrainBase
-{
-    TerrainVec worldScale;
-    TerrainVec gridScale;
-    TerrainVec floorOffset;
-    void EvaluateSpheres(const TerrainInput& input, TerrainVec* output) const;
 };
 
 namespace fnv_00d06720 {

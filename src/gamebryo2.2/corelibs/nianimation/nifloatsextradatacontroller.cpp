@@ -127,23 +127,11 @@ void NiFloatsExtraDataController::FUN_00a4f1a0(NiStream& stream)
 
 namespace fnv_00a4f080 {
 struct NiRTTI;
-struct GlobalObjectO2_00a7b610
-{
-    char x;
-};
-extern GlobalObjectO2_00a7b610 g_011f3738;
 struct NiObject
 {
     NiObject* DynamicCast(const NiRTTI*);
 };
-struct PoseInterpStub
-{
-    void SetFloatValue(float);
-};
 struct NiInterpolator : NiObject
-{
-};
-struct NiFloatInterpolator : PoseInterpStub
 {
 };
 struct Unk89020
@@ -200,33 +188,6 @@ void NiFloatsExtraDataController::FUN_00a4f150(NiStream& kStream)
 }  // namespace fnv_00a4f150
 
 extern "C" void* g_011f3fcc;
-extern int DAT_01099270;
-
-struct StreamStub
-{
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned short unk08;
-    unsigned short unk0A;
-    unsigned short unk0C;
-    unsigned short unk0E;
-    void FUN_0096ad30(unsigned int offset);
-    void FUN_0096ae90(unsigned int index, void** result);
-};
-
-void __stdcall FUN_00a57420(StreamStub* stream);
-void* __cdecl FUN_00a7d330(void* source);
-void* __cdecl FUN_00a7d4d0(int* name, void* object);
-
-struct ControllerStub
-{
-    int unk00, unk04, unk08, unk0C;
-    int unk10, unk14, unk18, unk1C;
-    int unk20, unk24, unk28, unk2C;
-    int unk30, unk34, unk38, unk3C;
-    void* unk40;
-    void FUN_00a4f1e0(StreamStub* stream);
-};
 
 extern char* DAT_0109b220;
 extern "C" unsigned int __cdecl strlen(const char*);

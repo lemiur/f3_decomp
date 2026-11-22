@@ -28,34 +28,6 @@ void __stdcall FUN_00e467a0(char* flag, int a1, int a2, int a3, int a4, int a5, 
     *flag = 1;
 }
 
-void* __cdecl FUN_00c85750(void);
-
-struct FUN_00e46900_Obj
-{
-    void FUN_00e46900();
-};
-
-struct FUN_00dff930_Alloc
-{
-    virtual void slot00();
-    virtual void slot04();
-    virtual void slot08(void* p, int n);
-};
-
-struct FUN_00dff930_Mgr
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    FUN_00dff930_Alloc* m_10;
-};
-
-struct FUN_00dff930_class : hkpDisableEntityCollisionFilter
-{
-    void* FUN_00dff930(unsigned char flag);
-};
-
 struct hkBoolE467
 {
     char m_cBooleanValue;

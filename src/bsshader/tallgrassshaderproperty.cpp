@@ -572,7 +572,6 @@ void __cdecl PopulateGrassInstances(void* apKey, int aiCellX, int aiCellY, NiNod
 namespace fnv_00b61170 {
 void* __cdecl FUN_00aa1070(unsigned int size);
 void __cdecl FUN_00ec61c0(void* p, int fill, unsigned int size);
-int __cdecl FUN_00ec658f(void(__cdecl* fn)());
 
 struct ArrayHolderBase
 {

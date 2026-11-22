@@ -106,8 +106,6 @@ NiObject* BSShaderLightingProperty::MakeClone(CloningProcess& process)
     return clone;
 }
 
-extern unsigned int _data_011c16bc;
-
 // Allocates and returns a new BSShaderLightingProperty object.
 // @fnv 0x00b6fe80
 BSShaderLightingProperty* CreateShaderLightingProperty()
@@ -457,7 +455,6 @@ struct WaterTintRecord
     WaterTintRecord(float fR, float fG, float fB, float fA) : r(fR), g(fG), b(fB), a(fA)
     {}
 };
-void SetWaterTintRecord(int, WaterTintRecord);
 float FUN_0040ebd0(float, float);
 struct WaterShaderStub
 {
@@ -565,15 +562,12 @@ struct WaterStub
     WaterDataStub* pData;  // +0xf8
 };
 extern RgbaColor DAT_011a9bd0;
-extern RgbaColor DAT_011fa0c0;
 extern RgbaColor DAT_011fa0d0[8];
-extern RgbaColor DAT_011fa1f0[8];
 extern unsigned int DAT_011fa070[8];
 extern GeomStub** DAT_011f91e0;
 extern bool DAT_011f91de;
 extern bool DAT_011f941e;
 extern bool DAT_011f9427;
-extern bool DAT_011f91a6;
 extern float DAT_011f947c;
 extern float DAT_011f9190;
 extern unsigned int DAT_011f91e4;
@@ -592,9 +586,6 @@ extern const double FUN_00e01038;
 extern float DAT_0116f26c;
 extern RgbaColor DAT_0116ff70[8];
 extern RgbaColor DAT_0116fe40;
-extern RgbaColor DAT_0116fe44;
-extern RgbaColor DAT_0116fe48;
-extern RgbaColor DAT_0116fe4c;
 extern bool DAT_0116ef96;
 
 void UpdateWaterTint(unsigned int uiIndex, WaterStub* apWater, float fScale)
@@ -1806,11 +1797,6 @@ template <class T> class ViewerArray
 };
 typedef ViewerArray<char*> ViewerStrings;
 
-extern const char* DAT_011fa560;
-char* FUN_00a7d330(const char* pcClassName);
-char* FUN_00a7d490(const char* pcPrefix, int iValue);
-char* FUN_00a7d510(const char* pcPrefix, unsigned int uiValue);
-
 class LightingPropertyBase
 {
   public:
@@ -2183,7 +2169,6 @@ unsigned short FUN_00b704b0_t::get68()
 }
 
 struct S00b700d0_RTTI;
-extern S00b700d0_RTTI DAT_01202560;
 
 class S00b700d0_Alpha : public NiProperty
 {

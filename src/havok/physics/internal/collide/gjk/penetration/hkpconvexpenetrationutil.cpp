@@ -57,40 +57,6 @@ void Obj::SetEntries(const hkVector4* aVecA, const hkVector4* aVecB, const hkVec
     m_iThirdValue = 0;
 }
 
-struct FUN_00df9c40_Obj
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5C;
-    __m128* unk60;
-    __m128* unk64;
-    __m128* unk68;
-    int unk6C;
-
-    void PushVectorTriple(const __m128* src);
-};
-
 extern "C"
 {
     __m128 _mm_sub_ps(__m128, __m128);
@@ -144,8 +110,6 @@ struct Mid
 };
 
 extern "C" __m128 _mm_add_ps(__m128, __m128);
-extern const double DAT_01032980;
-extern const double DAT_010dbb40;
 
 struct S00dfa940_Entry
 {
@@ -412,12 +376,8 @@ int __cdecl TestPenetration(int a, int b, const S_00dfaac0_Transform& t, float f
 }
 
 
-extern "C" void _mm_store_ps(float*, __m128);
-extern "C" __m128 _mm_load_ps(const float*);
 extern "C"
 {
-    void** FUN_00c85750();
-    void FUN_00e2d6c0(void*, void*, void*, void*, void*);
 
     __m128 _mm_mul_ps(__m128, __m128);
     __m128 _mm_add_ps(__m128, __m128);
@@ -425,8 +385,6 @@ extern "C"
     __m128 _mm_xor_ps(__m128, __m128);
     __m128 _mm_set_ps1(float);
 }
-
-extern "C" const __m128 DAT_010c44d0;
 
 struct Arg1
 {
@@ -448,12 +406,6 @@ struct OutItem
 {
     hkVector4 point;
     hkVector4 direction;
-};
-
-struct NormalSplats
-{
-    __m128 x;
-    __m128 z;
 };
 
 struct LocalStruct70

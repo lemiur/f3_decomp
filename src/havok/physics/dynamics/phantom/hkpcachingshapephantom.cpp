@@ -15,8 +15,6 @@ struct hkpCachingShapePhantomStandIn
     void FUN_00d4d090();
 };
 
-void __cdecl SortEntriesByCollisionKey(void*, int, int, int);
-
 // @fnv 0x00d4c910
 int FUN_00d4c910()
 {
@@ -25,19 +23,6 @@ int FUN_00d4c910()
 
 struct GskAgentInput;
 struct WorldOperationEntry;
-
-struct hkpWorld
-{
-    int unk00, unk04, unk08, unk0C;
-    int unk10, unk14, unk18, unk1C;
-    int unk20, unk24, unk28, unk2C;
-    int unk30, unk34, unk38, unk3C;
-    int unk40, unk44, unk48, unk4C;
-    int unk50, unk54, unk58, unk5C;
-    int unk60, unk64, unk68, unk6C;
-    int unk70, unk74;
-    GskAgentInput* m_pCollisionInput;
-};
 
 class hkpCollisionAgent
 {
@@ -216,41 +201,6 @@ void hkpCachingShapePhantomEx::DispatchCollisionAgents(WorldOperationEntry& outp
 namespace fnv_00d4c980 {
 struct CollisionAgentContext;
 
-struct hkpWorldStandIn
-{
-    void* unk00;
-    void* unk04;
-    void* unk08;
-    void* unk0C;
-    void* unk10;
-    void* unk14;
-    void* unk18;
-    void* unk1C;
-    void* unk20;
-    void* unk24;
-    void* unk28;
-    void* unk2C;
-    void* unk30;
-    void* unk34;
-    void* unk38;
-    void* unk3C;
-    void* unk40;
-    void* unk44;
-    void* unk48;
-    void* unk4C;
-    void* unk50;
-    void* unk54;
-    void* unk58;
-    void* unk5C;
-    void* unk60;
-    void* unk64;
-    void* unk68;
-    void* unk6C;
-    void* unk70;
-    void* unk74;
-    CollisionAgentContext* m_pCollisionInput;
-};
-
 struct hkpCdBodyPairCollector
 {
     virtual ~hkpCdBodyPairCollector();
@@ -270,17 +220,6 @@ struct CollisionAgentPair
 {
     hkpCollisionAgent* m_pCollisionAgent;
     hkpCollidable* m_kCollidable;
-};
-
-struct hkpCachingShapePhantomStandIn2 : public hkpShapePhantom
-{
-    hkArray<CollisionAgentPair> m_kCollisionDetails;
-    hkBool m_bOrderDirty;
-    char pad16D;
-    char pad16E;
-    char pad16F;
-
-    void GetPenetrations(hkpCdBodyPairCollector& collector, const CollisionAgentContext* input);
 };
 
 }  // namespace fnv_00d4c980
@@ -430,8 +369,6 @@ hkBoolD4C9 hkpCachingShapePhantomD4C9::ContainsCollidable(const hkpCollidableD4C
 
 
 class hkClassD4CD;
-
-extern const hkClassD4CD DAT_0126902c;
 
 int __cdecl FUN_00d06f80(const void* pvChunk, int iNumBytes) throw();
 
@@ -791,21 +728,6 @@ class FUN_00d4ce10 : public hkpWorldObjectD4D0
 
 typedef char fnv_check_d4d0d0[(sizeof(FUN_00d4ce10) == 0x170) ? 1 : -1];
 
-struct CollisionTarget
-{
-    int unknown00;
-    int unknown04;
-    int unknown08;
-    int unknown0c;
-    int unknown10;
-    unsigned int collisionKey;
-};
-struct CollisionKeyEntry
-{
-    int shapeKey;
-    CollisionTarget* target;
-};
-
 namespace fnv_00d4d310 {
 struct FnvCpu_FUN_00d4d310_CpuAllocator
 {
@@ -822,72 +744,9 @@ struct FnvCpu_FUN_00d4d310_CpuAllocatorHolder
     FnvCpu_FUN_00d4d310_CpuAllocator* allocator;
 };
 FnvCpu_FUN_00d4d310_CpuAllocatorHolder* __cdecl FUN_00c85750();
-struct FnvCpu_FUN_00d4d310_CpuObject
-{
-    unsigned int unk00;
-    unsigned short size;
-    void FUN_00d4ce60();
-    FnvCpu_FUN_00d4d310_CpuObject* FUN_00d4d310(unsigned int flags);
-};
 }  // namespace fnv_00d4d310
 
 #include <xmmintrin.h>
-struct Aligned_00d4cc50
-{
-    __m128 column0, column1, column2;
-};
-struct FUN_00d4cc50_cls
-{
-    int field000;
-    int field004;
-    int field008;
-    int field00c;
-    int field010;
-    int field014;
-    int field018;
-    int field01c;
-    int field020;
-    int field024;
-    int field028;
-    int field02c;
-    int field030;
-    int field034;
-    int field038;
-    int field03c;
-    int field040;
-    int field044;
-    int field048;
-    int field04c;
-    int field050;
-    int field054;
-    int field058;
-    int field05c;
-    int field060;
-    int field064;
-    int field068;
-    int field06c;
-    int field070;
-    int field074;
-    int field078;
-    int field07c;
-    int field080;
-    int field084;
-    int field088;
-    int field08c;
-    int field090;
-    int field094;
-    int field098;
-    int field09c;
-    int field0a0;
-    int field0a4;
-    int field0a8;
-    int field0ac;
-    __m128 output0;
-    __m128 output1;
-    __m128 output2;
-    void FUN_00d4cab0(const void* additional, int a, int b, int c);
-    void CopyFrom(const Aligned_00d4cc50* source, int a, int b, int c);
-};
 
 extern int DAT_010ccebc;
 
@@ -1204,15 +1063,6 @@ template <typename T> struct hkArrayD4CF
     }
 };
 
-struct hkpShapeD4CF
-{
-    void* m_ppVirtualMethodTable;
-    hkUint16 m_usMemSizeAndFlags;
-    hkInt16 m_sReferenceCount;
-    hkUlong m_ulUserData;
-    int m_type;
-};
-
 struct hkpProcessCollisionInputD4CF;
 struct hkpCollisionAgentD4CF;
 typedef hkpCollisionAgentD4CF*(__cdecl* hkpCreateAgentFuncD4CF)(const hkpCdBody& kBodyA, const hkpCdBody& kBodyB,
@@ -1311,31 +1161,6 @@ struct hkpProcessCollisionInputD4CF : public hkpCollisionInputD4CF
     void FUN_00cfa7d0(const hkpProcessCollisionInputD4CF& kOther);
 };
 
-struct hkpWorldD4CF
-{
-    int m_unk000, m_unk004, m_unk008, m_unk00c, m_unk010, m_unk014, m_unk018, m_unk01c;
-    int m_unk020, m_unk024, m_unk028, m_unk02c, m_unk030, m_unk034, m_unk038, m_unk03c;
-    int m_unk040, m_unk044, m_unk048, m_unk04c, m_unk050, m_unk054, m_unk058, m_unk05c;
-    int m_unk060, m_unk064, m_unk068, m_unk06c, m_unk070, m_unk074;
-    hkpProcessCollisionInputD4CF* m_pCollisionInput;
-};
-
-struct hkpCollisionDetailD4CF
-{
-    hkpCollisionAgentD4CF* m_pCollisionAgent;
-    hkpCollidable* m_kCollidable;
-};
-
-class hkpCachingShapePhantomD4CF : public hkpShapePhantom
-{
-  public:
-    hkArrayD4CF<hkpCollisionDetailD4CF> m_kCollisionDetails;
-    hkBool m_bOrderDirty;
-
-    int FUN_00ca94c0(hkpCollidable* pkCollidable) throw();
-    void FUN_00d4cf10(hkpCollidable* pkCollidable) throw();
-};
-
 #include <string.h>
 extern int DAT_010ccebc;
 
@@ -1425,12 +1250,6 @@ namespace hkRouterD4D0 {
 extern "C" hkMemoryRouterD4D0& __cdecl FUN_00c85750() throw();
 }
 
-struct PairD4D0
-{
-    int m_kPointA;
-    int m_kPointB;
-};
-
 template <class T> class hkArrayD4D0
 {
   public:
@@ -1449,16 +1268,6 @@ template <class T> class hkArrayD4D0
     }
 };
 
-class hkOwnerD4D0
-{
-  public:
-    char unk000[0x160];
-    hkArrayD4D0<PairD4D0> m_ppData;
-
-    void FUN_00c9e820();
-    void FUN_00d4d030();
-};
-
 }  // namespace fnv_00d4d030
 
 namespace CastSimd {
@@ -1474,8 +1283,6 @@ extern "C"
     __m128 _mm_mul_ps(__m128, __m128);
     __m128 _mm_min_ps(__m128, __m128);
     __m128 _mm_max_ps(__m128, __m128);
-    __m128 _mm_setzero_ps(void);
-    __m128 _mm_shuffle_ps(__m128, __m128, unsigned int);
     __m128 _mm_add_ss(__m128, __m128);
     __m128 _mm_sqrt_ss(__m128);
     float _mm_cvtss_f32(__m128);
@@ -1483,8 +1290,6 @@ extern "C"
 }
 
 extern float DAT_0104da4c;
-
-class hkpCdPointCollector;
 
 struct hkAabb
 {
@@ -1561,25 +1366,4 @@ struct ShapeSweepParameters : public CollisionAgentContext
         *(CastSimd::__m128*)&m_v2 = *(CastSimd::__m128*)&input.m_v2;
         m_pConfiguration = input.m_pConfiguration;
     }
-};
-
-struct LinearCastParameters
-{
-    hkVector4 m_vTo;
-    hkReal m_fMaxExtraPenetrationAgainstFixed;
-    hkReal m_fMaxExtraPenetration;
-};
-
-struct hkpCachingShapePhantomLocal : public hkpCachingShapePhantom
-{
-    void FUN_00d07ec0(const hkAabb& aabb);
-    void FUN_00d4cab0(const hkVector4& position, const LinearCastParameters& input, hkpCdPointCollector& castCollector,
-                      hkpCdPointCollector* startCollector);
-};
-
-class hkpCollisionAgentLinear : public hkpCollisionAgent
-{
-  public:
-    virtual void linearCast(const hkpCdBody& a, const hkpCdBody& b, const ShapeSweepParameters& input,
-                            hkpCdPointCollector& castCollector, hkpCdPointCollector* startCollector);
 };

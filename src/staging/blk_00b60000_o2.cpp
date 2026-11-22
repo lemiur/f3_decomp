@@ -70,18 +70,10 @@ void FUN_00b60120(float a, float b, float c, float d)
     DAT_011f9eec = d - c;
 }
 
-extern int DAT_010ade18;
 void NiFreeAlias(void* p);
 struct NiTMapBaseStub
 {
     void RemoveAll();
-};
-struct FUN_00b603e0_class
-{
-    int p0;
-    int p4;
-    void* p8;
-    void FUN_00b603e0();
 };
 
 namespace fnv_00b60400 {
@@ -196,13 +188,7 @@ void FUN_00b63d60_class::FUN_00b63d60()
 }
 }  // namespace fnv_00b63d60
 
-void __cdecl FUN_00b656e0();
 extern "C" void __cdecl operator delete(void* p, unsigned int size);
-
-struct FUN_00b664f0_class
-{
-    void* FUN_00b664f0(unsigned int flags);
-};
 
 void __cdecl FUN_00b65c60(void*);
 struct NiAccumulator
@@ -402,18 +388,6 @@ void* __cdecl FUN_00b603d0()
     return ((P03MM*)&g_memoryManager)->Allocate(0xc);
 }
 
-struct NiFreeAliasStub
-{
-    void NiFree(void*);
-};
-struct FUN_00b605a0_class
-{
-    int m_iWordAt00;
-    int m_iWordAt04;
-    void* m_8;
-    FUN_00b605a0_class* __thiscall FUN_00b605a0(int flags);
-};
-
 // @fnv 0x00b60d70
 void __fastcall FUN_00b60d70(void* self, int, int value)
 {
@@ -501,11 +475,6 @@ struct NiObject
 {
     virtual ~NiObject();
     virtual void v1();
-};
-struct FUN_00b6f460_class
-{
-    void FUN_00b6f460(NiStream* s);
-    void LoadAndSetAdditional(NiStream* kStream);
 };
 
 extern "C" void* __cdecl memmove(void* dst, const void* src, unsigned int n);
@@ -715,10 +684,6 @@ FUN_00b605e0_class::FUN_00b605e0_class(int flags)
 }
 
 extern MemoryManager g_memoryManager;
-struct FUN_00b60c90_class : FUN_00b606f0_class
-{
-    FUN_00b60c90_class* __thiscall FUN_00b60c90(int flags);
-};
 
 void __cdecl FUN_00b60b50();
 struct FUN_00b60f30_class
@@ -3567,111 +3532,6 @@ int FUN_00b6c1d0_Class::FUN_00b6c1d0()
     return *(iVar2 + 3);
 }
 
-struct CpuObject
-{
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0c;
-    unsigned int unk10;
-    unsigned int unk14;
-    unsigned int unk18;
-    unsigned int unk1c;
-    unsigned int unk20;
-    unsigned int unk24;
-    unsigned int unk28;
-    unsigned int unk2c;
-    unsigned int unk30;
-    unsigned int unk34;
-    unsigned int unk38;
-    unsigned int unk3c;
-    unsigned int unk40;
-    unsigned int unk44;
-    unsigned int unk48;
-    unsigned int unk4c;
-    unsigned int unk50;
-    unsigned int unk54;
-    unsigned int unk58;
-    unsigned int unk5c;
-    unsigned int unk60;
-    unsigned int unk64;
-    unsigned int unk68;
-    unsigned int unk6c;
-    unsigned int unk70;
-    unsigned int unk74;
-    unsigned int unk78;
-    unsigned int unk7c;
-    unsigned int unk80;
-    unsigned int unk84;
-    unsigned int unk88;
-    unsigned int unk8c;
-    unsigned int unk90;
-    unsigned int unk94;
-    unsigned int unk98;
-    unsigned int unk9c;
-    unsigned int unka0;
-    unsigned int unka4;
-    int value;
-    int FUN_00b6d120();
-};
-
-struct b6d130_Counted
-{
-    virtual void v00();
-    virtual void Release();
-    int m_iObjectReferenceCount;
-};
-
-struct FUN_00b6d130_cls
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5c;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6c;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7c;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8c;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9c;
-    int unka0;
-    int unka4;
-    int unka8;
-    b6d130_Counted* m_pCounted;
-
-    void ReleaseCounted();
-};
-
 struct NiGlobalStringTable
 {
     static char* AddString(const char* s);
@@ -3702,13 +3562,10 @@ struct TexPrefs_b6d170
 
 struct NiRenderer_b6d170;
 extern NiRenderer_b6d170* DAT_011f9508;
-extern bool DAT_011f9183;
 extern bool DAT_011f4ac0;
 extern int DAT_011ab3c8;
 extern bool DAT_011ab3c4;
 extern int DAT_011bf400;
-
-void* __cdecl FUN_00ee8330(unsigned int size, NiRenderer_b6d170* renderer, TexPrefs_b6d170& prefs);
 
 struct RenderTarget_b6d170
 {
@@ -4458,20 +4315,6 @@ void FUN_00b71b90_class::FUN_00b71b90()
     this->FUN_00e814b0();
 }
 
-struct S_00b7ac20_Node
-{
-    int unk00;
-    int unk04;
-    unsigned char unk08;
-};
-
-extern S_00b7ac20_Node* DAT_011febdc[];
-extern S_00b7ac20_Node* DAT_011fec34[];
-extern S_00b7ac20_Node* DAT_011fec8c[];
-
-extern int DAT_011fb4c0[];
-extern int DAT_011fa8e0[];
-
 struct S_00b7ac20_Callable
 {
     // Empty virtual no-op body; does nothing.
@@ -4569,26 +4412,6 @@ struct C_00afd570_Owner {
     {}
     virtual void FUN_00b7ac20_v24()
     {}
-};
-
-struct S_00b7ac20_Class
-{
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0c;
-    unsigned int unk10;
-    unsigned int unk14;
-    unsigned int unk18;
-    unsigned int unk1c;
-    unsigned int unk20;
-    unsigned int unk24;
-    unsigned int unk28;
-    unsigned int unk2c;
-    S_00b7ac20_Callable* unk30;
-    S_00b7ac20_Callable* unk34;
-
-    void __thiscall FUN_00b7ac20(int index);
 };
 
 struct V4
@@ -6589,19 +6412,10 @@ struct GroupReceiver
 {
     GroupDispatch* dispatch;
 };
-int __cdecl FUN_00b6c200(int);
-extern int DAT_011f9490;
-extern bool DAT_011f9426;
 extern int DAT_011f9430, DAT_011f9434;
 extern bool DAT_011f941e;
-extern unsigned int DAT_01200054;
 extern unsigned int DAT_011ad81c, DAT_011ad820;
 extern unsigned int DAT_011ad814, DAT_011ad818, DAT_011ad810;
-extern unsigned int DAT_011adbc8;
-extern bool DAT_011ad80e;
-extern unsigned short DAT_011ad830;
-extern unsigned int DAT_011ad870;
-extern bool DAT_012004fc;
 // @f3 0x00aef570 (community match, verified in this file)
 extern bool DAT_0116f20e;
 extern bool DAT_01067b4e;
@@ -7878,7 +7692,6 @@ struct CopyList
 };
 extern unsigned DAT_011c5f80;
 extern unsigned DAT_011c5f84;
-extern CopyNode* DAT_011c5f58;
 void GrowPool();
 struct CopyObject : CopyBase
 {
@@ -8443,11 +8256,6 @@ void UpdateFogShaderConstants()
     owner->state->SetVertexConstants(14, &DAT_011fa280[0].x, 2);
 }
 
-struct FnvB60150Thunk : FUN_00b6f460_class
-{
-    void __thiscall FUN_00b60150(NiStream* stream);
-};
-
 void __cdecl FUN_00bc3770();
 
 // @fnv 0x00b60160
@@ -8832,8 +8640,6 @@ struct OwnerMap
     __declspec(noalias) void AdvanceToNextEntry(void*& kPos, unsigned int& key, OwnerBucket*& val);
 };
 
-extern OwnerMap* GetArrayHolder();
-
 // Finds and removes the StringOwner with matching m_uiKeyA and m_uiKeyB from the owner map, removing its strings from the bucket's string map.
 // @f3 0x00adf670 (community match, verified in this file)
 #include <intrin.h>
@@ -9082,7 +8888,6 @@ struct Task2033OwnerMap {
     void FUN_0089a5d0(void*&,unsigned int&,Task2033OwnerBucket*&);
 };
 namespace Globals2033 {
-extern unsigned long DAT_01179af4;
 extern NativeOwnerPoolLock DAT_0106e5a0;
 extern NativeOwnerNode* DAT_0106e588;
 extern OwnerMemoryManager DAT_01090a78;
@@ -9195,8 +9000,6 @@ void FUN_00b61570(unsigned int a,unsigned int b)
 
 
 void* __cdecl FUN_00aa1070(unsigned int);
-extern "C" void* __cdecl FUN_00ec61c0(void*, int, unsigned int);
-extern int DAT_010ade50;
 struct B617FloatPart
 {
     int first, unused04;
@@ -9220,12 +9023,6 @@ struct B617IntPart
         index24 = 0;
     }
 };
-struct B617Head
-{
-    B617FloatPart f;
-    B617IntPart i;
-    ~B617Head();
-};
 struct B617Holder
 {
     int index2c;
@@ -9236,10 +9033,6 @@ struct B617Holder
     B617Holder() : index2c(0)
     {}
     ~B617Holder();
-};
-struct FUN_00b617f0 : B617Head, B617Holder
-{
-    FUN_00b617f0();
 };
 
 class NiCamera;
@@ -9768,8 +9561,6 @@ void __cdecl FUN_00b63320(FUN_00b63320_Pass* pass, unsigned int pixelShader)
 }
 
 
-class BB63F90Shader;
-
 struct BB63F90Pass
 {
 
@@ -10155,8 +9946,6 @@ class BB63F90Geometry
                                                  BB63F90Accumulator* pkAccum, bool bFlag);
 };
 
-extern unsigned int g_uiB63F90PassFlags;
-
 extern __declspec(thread) unsigned int DAT_012722bc;
 
 // Creates render passes from pkGeometry and submits each pass with a nonzero pass count to the selected renderer.
@@ -10539,10 +10328,6 @@ struct RSSettings
     unsigned int unk194;
     unsigned int unk198;
     void* m_pData;
-};
-struct RSThreadData
-{
-    unsigned int unk00;
 };
 struct TLSData
 {
@@ -11808,13 +11593,6 @@ struct AlphaSource
 {
     AlphaVTable* vtable;
 };
-struct LightSet
-{
-    LightProperty* property;
-    int unk04;
-    unsigned char unk08, count;
-    LightEntry** entries;
-};
 struct ShaderDevice
 {
     virtual void __stdcall slot00() = 0;
@@ -11928,33 +11706,6 @@ struct DeviceHolder
     {
         device->SetVertexShaderConstantF(r, v, n);
     }
-};
-struct ShaderManager
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    int unk58;
-    DeviceHolder* holder;
 };
 struct ConstantEntry
 {
@@ -12093,24 +11844,6 @@ struct SceneTranslation
     int unk1e0;
     NiPoint3 translate;
 };
-struct ScaleSource
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    float scale;
-};
 extern SceneTranslation* DAT_011f91c8;
 extern ConstantEntry* DAT_011fec4c;
 extern ShaderVector DAT_011fd9a8[];
@@ -12203,7 +11936,6 @@ void __stdcall SetPassValues(unsigned int uiPass)
 }
 
 
-extern bool DAT_011f94a4;
 extern bool DAT_011f941f;
 
 // Returns an index derived from DAT_011f91c0 and the DAT_011f94a4, DAT_011f941e, DAT_011f941f flags.
@@ -12514,7 +12246,6 @@ void C_00b6f460::FUN_00b6f460()
 }
 
 namespace fnv_00b6b6c0 {
-extern "C" void _ReadWriteBarrier();
 
 extern NiRefObject* DAT_011fa024[10];
 
@@ -13167,10 +12898,6 @@ inline void NiRefObject::IncRefCount()
     InterlockedIncrement(&m_uiRefCount);
 }
 typedef NiRefObject B61Ref;
-struct B61Point3
-{
-    float x, y, z;
-};
 struct B61Bound
 {
     float x, y, z, r;
@@ -13339,8 +13066,6 @@ class B61AVObject : public B61Ref
     B61AVObject* FUN_00653290(const NiRTTI* pkRTTI);
     B61Property* FUN_00a59d30(int iType);
 };
-extern NiRTTI DAT_011f4280;
-extern NiRTTI DAT_011f4aa0;
 inline bool B61IsKindOf(const NiRTTI* pkRTTI, B61AVObject* pkObj)
 {
     if (!pkObj)
@@ -13900,31 +13625,6 @@ class B61Map
     }
     void FUN_00b61010(const char* pcName, NiPointer<B61Entry> spEntry);
 };
-B61Map* __cdecl FUN_00b61890();
-struct B61IOManager
-{
-    virtual void v00();
-    virtual void v01();
-    virtual void v02();
-    virtual void v03();
-    virtual void v04();
-    virtual void v05();
-    virtual void v06();
-    virtual void v07();
-    virtual void v08();
-    virtual void v09();
-    virtual void v10();
-    virtual void v11();
-    virtual void v12();
-    virtual void v13();
-    virtual void v14();
-    virtual void v15();
-    virtual void v16();
-    virtual void v17();
-    virtual void QueueTask(B61Loaded* pkTask);
-};
-extern B61IOManager* DAT_01202d98;
-extern unsigned char DAT_011ad86c;
 extern void(__cdecl* DAT_011f91e8)(const char*);
 void __cdecl BuildAssetPath(const char* pcName, char* pcPath, unsigned int uiSize);
 void* __cdecl FUN_00ec44d0(void* pvDst, const void* pvSrc, unsigned int uiSize);
@@ -14730,10 +14430,7 @@ struct FadeConfig
     int unk00, unk04;
     bool enabled;
 };
-extern FadeConfig* DAT_011fec3c;
 extern "C" ShaderColor DAT_011FA0C0;
-extern float DAT_011fd95c;
-extern float DAT_011fa27c;
 extern unsigned int DAT_011f91e4;
 double __cdecl FUN_0068b050(double minimum, float value);
 double __cdecl FUN_00b719c0(double maximum, double value);
@@ -15354,24 +15051,8 @@ struct Light
     unsigned char active;
 };
 extern unsigned char DAT_011f9ef0, DAT_011f9427, DAT_011f941e;
-extern int shaderFlags;
 extern int DAT_011f95e4, DAT_011f91c0;
 extern float DAT_011fd890;
-void __cdecl FUN_00ba8c50(void*, int, void*);
-struct ShaderPassBuilder
-{
-    int unk00, unk04, unk08, unk0c, unk10, unk14, unk18, unk1c, unk20;
-    unsigned int flags;
-    int unk28, unk2c, unk30, unk34;
-    unsigned int cached;
-    PassPointer array;
-    void FUN_00ba95e0(int);
-    unsigned short FUN_00b707d0();
-    void* FUN_00b70600(void**);
-    Light* FUN_00b70590(void**);
-    Light* FUN_00b70680(void**);
-    PassArray* FUN_00b60790(void*, unsigned int, int, unsigned int, int, int);
-};
 }  // namespace fnv_00b60790
 
 namespace fnv_00b6b0b0 {

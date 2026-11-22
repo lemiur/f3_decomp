@@ -99,20 +99,6 @@ void StandIn::FUN_00a7dab0(NiUpdateData& UpdateData, unsigned int uFlags)
 }
 }  // namespace fnv_00a7dab0
 
-class NiCullingProcess;
-struct DummyNode
-{
-    void FUN_00a5dbe0(NiCullingProcess*);
-};
-struct FUN_00a7de40_shell
-{
-    void FUN_00a7de40(NiCullingProcess*);
-};
-struct FUN_00a7e610_shell : NiBillboardNode
-{
-    void FUN_00a7e610(NiCullingProcess* process);
-};
-
 struct NiAVObject
 {
     virtual void Dummy()

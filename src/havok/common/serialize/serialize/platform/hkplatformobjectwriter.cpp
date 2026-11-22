@@ -31,28 +31,6 @@ char* OffsetView::FUN_00e02a70()
     return unk08 + 12;
 }
 
-struct hkReferencedObject
-{
-    __declspec(nothrow) void removeReference();
-};
-struct FUN_00e02d40_helper
-{
-    __declspec(nothrow) void ClearAndFreeData();
-};
-struct FUN_00e02c70_audio_iface
-{
-    virtual __declspec(nothrow) void v0();
-    virtual __declspec(nothrow) void v1();
-    virtual __declspec(nothrow) void v2(void* object, unsigned int value);
-};
-struct FUN_00e02c70_audio_holder
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    FUN_00e02c70_audio_iface* unk10;
-};
 void* __cdecl FUN_00c85750();
 struct BaseE02c70
 {
@@ -60,30 +38,6 @@ struct BaseE02c70
     virtual __declspec(nothrow) ~BaseE02c70()
     {}
 };
-struct FUN_00e02c70_Class : BaseE02c70
-{
-    hkReferencedObject* unk08;
-    FUN_00e02d40_helper* unk0c;
-    virtual __declspec(nothrow) ~FUN_00e02c70_Class();
-};
-
-struct AllocIface
-{
-    virtual void unk00();
-    virtual void* Alloc(unsigned int size);
-};
-
-struct AllocHolder
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    AllocIface* m_pAllocator;
-};
-
-extern char DAT_010ea370[];
-extern char DAT_011b7b88[4];
 
 struct IntTemp
 {
@@ -92,28 +46,6 @@ struct IntTemp
     {}
     IntTemp(const IntTemp& o) : m_v(o.m_v)
     {}
-};
-
-struct KeyRef
-{
-    void* m_p;
-    void Set(const void* p);
-};
-
-struct SpawnedBlob
-{
-    int unk00;
-    unsigned short m_w04;
-    unsigned short unk06;
-    void* Init(KeyRef* key, int a1, IntTemp a2);
-};
-
-struct SpawnedSmall
-{
-    int unk00;
-    unsigned short m_w04;
-    unsigned short unk06;
-    void* Make();
 };
 
 struct FUN_00e02bb0_cls
@@ -278,7 +210,6 @@ struct hkFlagsE02
 
 class hkObjectE02;
 class hkRegistryE02;
-extern hkRegistryE02 g_kRegistryE02;
 
 class hkLoaderE02;
 hkObjectE02* __cdecl CreateObjectE02(const char* pcName, hkRegistryE02* pkRegistry, hkLoaderE02* pkLoader, int iUnk,
@@ -344,51 +275,6 @@ hkObjectE02* hkLoaderE02::GetOrCreateObject(const char* pcName, hkTrackerE02* pk
 }
 
 
-struct E02Allocator
-{
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual void v0C();
-    virtual void FreeArray(void* apMemory, unsigned int auiSize) throw();
-};
-
-struct E02Holder
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    E02Allocator* unk10;
-};
-
-void __cdecl FUN_00c856c0(void* allocator, void* element);
-
-struct E02Sub
-{
-    int unk00;
-    int unk04;
-    int unk08;
-
-    void ProcessArgument(void* value);
-    void FUN_00a29680();
-};
-
-struct FUN_00e02d40_cls
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    E02Sub m_sub;
-    void** m_pData;
-    int m_iArrayLength;
-    unsigned int m_uCapBits;
-
-    void ClearAndFreeData();
-    void ProcessArgument(void* value);
-    void FUN_00a29680();
-};
-
 struct E02DE0Allocator;
 
 struct E02DE0MemoryRouter
@@ -431,15 +317,6 @@ struct E02DE0Array
 
     E02DE0Array() : m_data(0), m_iElementCount(0), m_iCapacityState(0x80000000)
     {}
-};
-
-struct FUN_00e02de0
-{
-    FUN_00e02de0();
-
-    E02DE0Map m_map0;
-    E02DE0Map m_map1;
-    E02DE0Array m_ppData;
 };
 
 // Initializes the two maps and the array member by running their default constructors.

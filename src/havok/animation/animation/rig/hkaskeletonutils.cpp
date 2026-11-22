@@ -37,8 +37,6 @@ void FUN_00cddef0(void* apArg1, void* apArg2, void* apArg3, void* apArg4)
     FUN_00cddd20(apArg1, apArg2, &DAT_01268700, apArg3, apArg4);
 }
 
-extern "C" void __cdecl Atan2(float, float);
-
 int __cdecl CompareStringsCaseInsensitive(const void* pKey, const void* pItem);
 struct S_00cdd390_Entry
 {
@@ -90,7 +88,6 @@ short __cdecl FindIndexByKey(S_00cdd390_Table* pSearchEntries, const void* pKey,
 }
 
 
-extern "C" void* __cdecl fnv_zlib_memset(void*, int, unsigned int);
 template <class T> struct Array
 {
     T* data;
@@ -100,15 +97,6 @@ template <class T> struct Array
     {
         return data[index];
     }
-};
-struct Hierarchy
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    Array<short> parents;
-    void* nodes;
-    int count;
 };
 
 struct Sequence
@@ -169,18 +157,11 @@ struct Logger
     virtual void v2();
     virtual void Report(int a, int code, void* msg, const char* file, int line);
 };
-extern Logger* DAT_01268360;
 struct Names
 {
     int pad[6];
     unsigned int* names;
     int count;
-};
-struct Track
-{
-    int pad[4];
-    short* out;
-    int cnt;
 };
 struct Src
 {
@@ -401,8 +382,6 @@ S_00cde450_Router* __cdecl FUN_00c85750();
 
 struct S_00cde450_ByteArr;
 struct S_00cde450_UShortArr;
-void __cdecl FUN_00ec61c0(void* dst, int value, int size);
-void __cdecl FUN_00c908c0(S_00cde450_Heap& h, S_00cde450_ByteArr* a, int n, int elemSize);
 void __cdecl ResizeAudioStream(S_00cde450_Heap& h, S_00cde450_UShortArr* a, int elemSize);
 
 struct S_00cde450_UShortArr
@@ -431,33 +410,18 @@ struct S_00cde450_ByteArr
     char* m_pTrailingData;
 };
 
-struct S_00cde450_Graph
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    unsigned short* parent;
-    int unk10;
-    int unk14;
-    int unk18;
-    int count;
-};
-
 }  // namespace fnv_00cde450
 
 union __declspec(intrin_type) __declspec(align(16)) __m128
 {
     float m128_f32[4];
 };
-extern "C" __m128 _mm_load_ss(const float* p);
 struct __declspec(align(16)) V4
 {
     __m128 q;
 };
-extern "C" void __cdecl FUN_00cde740(void* a, void* b, V4* v, void* c);
 
 extern "C" __m128 _mm_load_ps(const float*);
-extern "C" void _mm_store_ps(float*, __m128);
 extern "C" __m128 _mm_mul_ps(__m128, __m128);
 extern "C" __m128 _mm_add_ps(__m128, __m128);
 extern "C" __m128 _mm_sub_ps(__m128, __m128);
@@ -535,26 +499,6 @@ __forceinline void hkVector4::SetTransformedPoint(const hkQsTransform& t, const 
 }
 
 typedef short hkInt16;
-
-struct hkaBone
-{
-    const char* m_name;
-    bool m_bLockTranslation;
-};
-
-struct hkaSkeleton
-{
-    void* vtbl;
-    int m_usMemSizeAndFlags;
-    const char* m_name;
-    short* m_kParentIndices;
-    int m_numParentIndices;
-    int m_parentCap;
-    hkaBone* m_kBones;
-    int m_iBoneCount;
-    int m_bonesCap;
-    hkQsTransform* m_kReferencePose;
-};
 
 extern "C" __m128 _mm_xor_ps(__m128, __m128);
 extern "C" const __m128 DAT_010c44d0;
@@ -797,25 +741,6 @@ void SetModifierConstraint(HkWorld* apWorld, int owner, HkObj* apObj, Vec4* apVe
 }
 
 
-struct S_00cdd600_Obj
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    short* m0c;
-};
-struct S_00cdd600_Bone
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    float scale[4];
-};
 extern __m128 DAT_010c7170;
 
 struct S_00cdd600_Out
@@ -835,7 +760,6 @@ extern "C"
     void _mm_store_ss(float*, __m128);
     __m128 _mm_load_ps(const float*);
     __m128 _mm_rsqrt_ps(__m128);
-    __m128 _mm_set_ss(float);
     __m128 _mm_rsqrt_ss(__m128);
     __m128 _mm_mul_ss(__m128, __m128);
     __m128 _mm_sub_ss(__m128, __m128);
@@ -843,9 +767,6 @@ extern "C"
     __m128 _mm_andnot_ps(__m128, __m128);
     void _ReadWriteBarrier(void);
 }
-
-extern const __m128 DAT_010c71c0;
-extern const __m128 DAT_010c71d0;
 
 struct Simd
 {
@@ -876,12 +797,6 @@ struct Vec
     {
         m = _mm_mul_ps(factor.m, v.m);
     }
-};
-struct Item
-{
-    Vec translation;
-    Vec rot;
-    Vec scale;
 };
 
 extern "C" __m128 _mm_rcp_ps(__m128);

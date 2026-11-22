@@ -17,13 +17,6 @@ struct State
     CallbackInterface* interface10;
 };
 State* __cdecl FUN_00c85750();
-struct Object
-{
-    void* unk00;
-    unsigned short unk04;
-    void FUN_00cc0ae0();
-    Object* FUN_00cc0dd0(unsigned int flags);
-};
 
 struct D481D0StringPtr
 {
@@ -48,15 +41,6 @@ struct D481D0RefVariant
     {}
     void set(D481D0ReferencedObject* obj, const D481D0Class* pClassInfo);
     const D481D0Class* GetVariantValue() const;
-};
-
-struct FUN_00d481d0
-{
-    D481D0StringPtr m_name;
-    D481D0StringPtr m_pClassName;
-    D481D0RefVariant m_pReferencedResource;
-
-    FUN_00d481d0(const char* name, D481D0ReferencedObject* object, const D481D0Class* pClassInfo);
 };
 
 struct CC0D30Result
@@ -124,12 +108,6 @@ S_00cc0d60_R FUN_00cc0d60(void* a2, void* a3, int a4, int a5, int a6)
     return res;
 }
 
-struct Allocator
-{
-    virtual void* unk0();
-    virtual void* allocate(unsigned int size);
-};
-
 struct hkBool
 {
     char m_kPointB;
@@ -144,7 +122,6 @@ struct hkBool
 };
 
 struct PtrList;
-void __cdecl ResizeAudioStream(void* a, PtrList* l, unsigned int n);
 
 struct PtrList
 {
@@ -165,43 +142,6 @@ struct PtrList
         return slot;
     }
 };
-
-struct Obj70
-{
-    unsigned int unk00;
-    unsigned short m_04;
-    Obj70* FUN_00d4bab0(void* v);
-};
-
-struct Obj110
-{
-    unsigned int unk00;
-    unsigned short m_04;
-    Obj110* FUN_00d4aa70(void* v);
-};
-
-struct Obj80
-{
-    unsigned int unk00;
-    unsigned short m_04;
-    Obj80* FUN_00d49750(void* v);
-};
-
-struct TypeMatcher
-{
-    hkBool FUN_00d46d80(void* v);
-};
-
-struct GlobalObjectO2_00d472a0 : TypeMatcher
-{
-};
-extern GlobalObjectO2_00d472a0 g_01268f2c;
-extern GlobalObjectO2_00d472a0 g_01268e24;
-extern GlobalObjectO2_00d472a0 g_01268c5c;
-extern GlobalObjectO2_00d472a0 g_01268bcc;
-extern GlobalObjectO2_00d472a0 g_01268eb4;
-extern GlobalObjectO2_00d472a0 g_01268d4c;
-extern GlobalObjectO2_00d472a0 g_01268c14;
 
 struct FUN_00cc08f0_cls
 {
@@ -332,10 +272,6 @@ void FUN_00cc08f0_cls::FUN_00cc08f0(void** a1, void** a2)
 
 
 namespace fnv_00cc0ae0 {
-struct PooledItem
-{
-    virtual void v00(int aiFlags);
-};
 
 struct FixedAllocator
 {
@@ -356,19 +292,6 @@ struct AllocHolder
 };
 
 AllocHolder* __cdecl FUN_00c85750() throw();
-extern int DAT_010c93e4;
-extern int DAT_0102e388;
-
-struct FUN_00cc0ae0_cls
-{
-    int m_vptr00;
-    unsigned int unk04;
-    PooledItem** m_pItems;
-    int m_iArrayLength;
-    unsigned int m_uCapBits;
-
-    void FUN_00cc0ae0();
-};
 
 }  // namespace fnv_00cc0ae0
 

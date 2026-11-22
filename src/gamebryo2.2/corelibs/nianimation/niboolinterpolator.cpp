@@ -134,8 +134,6 @@ void __thiscall FUN_00a531a0_shell::SetBoolValue(bool abValue)
 }
 }  // namespace fnv_00a531a0
 
-void __cdecl FUN_00a537a0(float m_fStartTime, float m_fMaximumDistance);
-
 struct NiBoolData_shell
 {
     void AddBooleanKey(float m_fStartTime, float m_fMaximumDistance);
@@ -594,8 +592,6 @@ bool __thiscall S_00a533c0_Class::UpdateValue(float fValue, int iValue, unsigned
     unk08 = fValue;
     return true;
 }
-
-void __cdecl FUN_00aa1000();
 
 class CloningProcessA535;
 

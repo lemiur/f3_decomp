@@ -50,11 +50,6 @@ __forceinline void* __cdecl operator new(unsigned int, void* p)
 {
     return p;
 }
-struct S
-{
-    void __thiscall CreateScreenTextureBufferData(NiScreenTexture* pkScreenTexture);
-    void __thiscall FUN_00e98730(NiGeometryBufferData* pkBuffData);
-};
 
 struct FakeVB
 {
@@ -386,7 +381,6 @@ struct IDirect3DDevice9_E94
     virtual long __stdcall CreateVertexBuffer(unsigned int Length, unsigned long Usage, unsigned long FVF, int Pool,
                                               IDirect3DVertexBuffer9_E94** ppVB, void** pSharedHandle);
 };
-extern bool DAT_0126f0d0;
 class NiMemObject_E94
 {
   public:

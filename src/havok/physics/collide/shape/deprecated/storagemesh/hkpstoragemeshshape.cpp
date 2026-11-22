@@ -304,33 +304,6 @@ class FUN_00d4bc00
 namespace fnv_00d4be00 {
 void* __cdecl FUN_00c85750(void);
 
-struct FUN_00d4b400_Obj
-{
-    void FUN_00d4b400();
-};
-
-struct FUN_00d4be00_Allocator
-{
-    virtual void unk00();
-    virtual void unk04();
-    virtual void ReleaseBlock(void* p, unsigned short nbytes);
-};
-
-struct FUN_00c85750_Ret
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    FUN_00d4be00_Allocator* allocator;
-};
-
-class FUN_00d4be00_cls : public hkpStorageMeshShape
-{
-  public:
-    FUN_00d4be00_cls* FUN_00d4be00(int flags);
-};
-
 }  // namespace fnv_00d4be00
 
 struct hkAllocatorD4B4
@@ -533,7 +506,6 @@ struct Alloc480
 };
 void __cdecl ResizeAudioStream(void* heap, void* arr, int elemSize);
 void __cdecl FUN_00c908c0(void* heap, void* arr, int newCap, int elemSize);
-extern float DAT_01267e30;
 struct SubpartFlags480
 {
     int vertices, stride, numVertices, indices;
@@ -717,27 +689,12 @@ __forceinline hkpMeshShapeSubpartD4B* ExpandInit480(hkArrayD4B<hkpMeshShapeSubpa
     return &arr.m_data[arr.m_iElementCount++];
 }
 
-struct Storage480
-{
-    int vptr;
-    unsigned short GetAllocationSize;
-    unsigned short refCount;
-    Arr480<float> verts;
-    Arr480<unsigned short> idx16;
-    Arr480<int> idx32;
-    Arr480<unsigned char> mat8;
-    Arr480<int> extra;
-    Arr480<unsigned short> mat16;
-    Storage480* FUN_00d4bbb0();
-};
-
 // Copies a mesh subpart's vertex, index, material, and extra data into owned storage arrays and updates the subpart's pointers and strides.
 // @f3 0x009d6410 (community match, verified in this file)
 extern "C" void _ReadWriteBarrier(void);
 namespace storage_mesh_subpart {
 extern unsigned int DAT_010f3170;
 extern void* (__stdcall* const DAT_00d9b080)(unsigned int);
-struct hkArrayBase;
 void FUN_00901f10(void*,int);
 void FUN_00901e90(void*,int,int);
 struct MemoryManager { void* FUN_008f6d30(int,int); };
@@ -1122,30 +1079,4 @@ struct FUN_00dcebd0_Router
 };
 FUN_00dcebd0_Router* __cdecl FUN_00c85750();
 
-struct FUN_00dcebd0_Class
-{
-    void* m_ppVirtualMethodTable;
-    unsigned short m_usMemSizeAndFlags;
-    short m_sReferenceCount;
-    unsigned int m_ulUserData;
-    unsigned int m_type;
-    int m_reserved10;
-    unsigned char m_bDisableWelding;
-    unsigned char m_eCollectionType;
-    unsigned short m_reserved16;
-    int m_reserved18;
-    int m_reserved1c;
-    float m_scalingX, m_scalingY, m_scalingZ, m_scalingW;
-    int m_iNumBitsForSubpartIndex;
-    void* m_subpartsData;
-    int m_subpartsSize;
-    int m_subpartsCapacity;
-    void* m_weldingInfoData;
-    int* m_data;
-    int m_iElementCount;
-    int m_iCapacityState;
-
-    void FUN_00d06290(const FUN_00dcebd0_Class& source);
-    void FUN_00dcebd0(const FUN_00dcebd0_Class& source);
-};
 }  // namespace fnv_00dcebd0

@@ -26,18 +26,12 @@ struct NiTFixedStringMap_NiAVObject___
 {
     void RemoveAll();
 };
-void _NiFreeAlias(void*);
 struct MemoryManager
 {
     void _DeallocateAlias(void*);
 };
 extern MemoryManager g_memoryManager;
 extern int DAT_01101378;
-extern int DAT_01101388;
-struct SomeClass
-{
-    void* FUN_00ee90b0(unsigned int);
-};
 
 void __cdecl FUN_00ee9a60();
 void __cdecl operator delete(void*, unsigned int);
@@ -1388,14 +1382,11 @@ class NiFileE93
     virtual unsigned int GetFileSize();
 };
 
-extern bool DAT_011c2fdd;
 bool __cdecl FUN_00aa1ab0(const char* pcName);
 bool __cdecl FUN_00aa1bb0(const char* pcName);
-NiFileE93* __cdecl FUN_00aa1a20(const char* pcName, int eMode, unsigned int uiBufferSize);
 void __cdecl AdvancePosition(NiFileE93* pkFile, char* pcBuffer, unsigned int uiLen);
 int __cdecl FUN_00aa1360(const char* pc1, const char* pc2);
 void __cdecl InvokeAndAccumulate(NiFileE93* pkFile, bool* pbValue);
-void __cdecl FUN_00a575b0(NiFileE93* pkFile, unsigned int* puiValue);
 
 class NiFixedStringE93
 {

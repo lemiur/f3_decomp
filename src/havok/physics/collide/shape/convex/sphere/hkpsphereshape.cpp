@@ -4,16 +4,6 @@
 
 #include "havok/hkpSphereShape.h"
 
-extern char const* const g_01268970_arg1;
-void __cdecl FUN_00c90360(char const* const*, char const* const*);
-
-extern int DAT_010cb5ac;
-
-struct FUN_00cd8160
-{
-    FUN_00cd8160(float radius);
-};
-
 // @fnv 0x00cd8050
 int __cdecl FUN_00cd8050()
 {
@@ -31,47 +21,8 @@ union __declspec(intrin_type) __declspec(align(16)) __m128
     float m128_f32[4];
     unsigned __int64 m128_u64[2];
 };
-extern "C" __m128 _mm_load_ps1(const float*);
 extern "C" __m128 _mm_sub_ps(__m128, __m128);
 extern "C" __m128 _mm_add_ps(__m128, __m128);
-
-struct Shape_00cd8100
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    float m_fSphereRadius;
-};
-
-struct Vec_00cd8100
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    __m128 m_pos;
-};
-
-struct Aabb_00cd8100
-{
-    __m128 m_kMinimumCorner;
-    __m128 m_kMaximumCorner;
-};
-
-struct Shape_00cd8100_cls
-{
-    void GetAabb(const Vec_00cd8100* t, float tol, Aabb_00cd8100* out);
-    Shape_00cd8100 self;
-};
 
 extern "C" void _ReadWriteBarrier(void);
 extern "C" unsigned __int64 __rdtsc(void);
@@ -138,10 +89,8 @@ void* HostCD81::RecordTimerCommands(void* pvResult, int a, int b)
     return pvResult;
 }
 
-extern "C" __m128 _mm_set_ps(float, float, float, float);
 extern "C" __m128 _mm_setr_ps(float, float, float, float);
 extern "C" __m128 _mm_set_ps1(float);
-extern "C" __m128 _mm_load_ps(const float*);
 extern "C" void _mm_store_ps(float*, __m128);
 extern "C" __m128 _mm_mul_ps(__m128, __m128);
 extern "C" __m128 _mm_cmplt_ps(__m128, __m128);
@@ -152,10 +101,6 @@ extern "C" __m128 _mm_andnot_ps(__m128, __m128);
 extern "C" __m128 _mm_or_ps(__m128, __m128);
 extern "C" __m128 _mm_xor_ps(__m128, __m128);
 extern "C" __m128 _mm_rcp_ps(__m128);
-extern "C" __m128 _mm_rsqrt_ps(__m128);
-extern "C" __m128 _mm_load_ss(const float*);
-extern "C" __m128 _mm_unpacklo_ps(__m128, __m128);
-extern "C" __m128 _mm_shuffle_ps(__m128, __m128, int);
 extern "C" int _mm_movemask_ps(__m128);
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long);
 extern unsigned long DAT_0126835c;
@@ -188,7 +133,6 @@ const RayMask::Component RayMask::components[4] = {RayMask::X, RayMask::Y, RayMa
 static const __m128 signVector = {{-0.0f, -0.0f, -0.0f, -0.0f}};
 static const __m128 tripleVector = {{3.0f, 3.0f, 3.0f, 3.0f}};
 static const __m128 halfVector = {{0.5f, 0.5f, 0.5f, 0.5f}};
-extern __m128 kOne;
 static __forceinline __m128 reciprocalVector(__m128 value)
 {
     __m128 estimate = _mm_rcp_ps(value);
@@ -296,12 +240,6 @@ class RayVector
         return result;
     }
 };
-struct RayQuerySet
-{
-    RayVector m_vFrom[3], m_vTo[3];
-    unsigned filter;
-    const void* collectionFilter;
-};
 struct RayHitBase
 {
     RayVector m_vHitNormal;
@@ -321,36 +259,14 @@ struct RayHit : RayHitBase
         m_uiShapeKeys[m_uiShapeKeyIndex] = key;
     }
 };
-struct RayHits
-{
-    RayHit m_akRayOutputs[4];
-};
 
-struct ProbeRecord
-{
-    const char* tag;
-    unsigned time, highTime;
-};
-struct ProbeStream
-{
-    int reserved;
-    char* current;
-    int reserved2;
-    char* end;
-};
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long);
 extern unsigned long DAT_0126835c;
 extern "C" unsigned __int64 __rdtsc();
 extern "C" void _ReadWriteBarrier();
-struct ProbeSphere : hkpSphereShape
-{
-    RayMask FUN_00cd8220(const RayQuerySet&, RayHits&, const RayMask&) const;
-};
 
 extern "C" __m128 _mm_setzero_ps(void);
 extern "C" void _mm_store_ps(float*, __m128);
-
-extern "C" void __movsd(unsigned long*, const unsigned long*, unsigned long);
 
 extern "C" __m128 _mm_setzero_ps(void);
 
@@ -362,23 +278,4 @@ struct __declspec(align(16)) CentreVectorCD80
     {
         m_vComponents = _mm_setzero_ps();
     }
-};
-
-struct FUN_00cd8140_Result
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    float unk0C;
-};
-
-struct FUN_00cd8140_Obj
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    float unk10;
-
-    void FUN_00cd8140(FUN_00cd8140_Result* result);
 };

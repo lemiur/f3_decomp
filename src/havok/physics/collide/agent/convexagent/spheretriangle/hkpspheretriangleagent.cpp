@@ -106,7 +106,6 @@ struct hkThreadMemory
     }
 };
 
-extern "C" hkThreadMemory* __cdecl FUN_00c85750();
 extern "C" void __cdecl FUN_00cd7160(void* src, void* dst);
 extern "C" const void* DAT_010cf060;
 extern "C" const void* DAT_010cf09c;
@@ -241,57 +240,6 @@ struct hkVector4q
     }
 };
 
-struct NibblePair
-{
-    unsigned char lo : 4;
-    unsigned char hi : 4;
-};
-
-struct SpawnedParticle
-{
-    hkVector4q m_vContactPosition;
-    hkVector4q m_fVelocity;
-    hkVector4q m_extra;
-};
-
-struct ParticleSystemState
-{
-    SpawnedParticle* m_kRayEnd;
-    int unk0004;
-    int unk0008;
-    int unk000C;
-    SpawnedParticle m_particles[256];
-    int unk3010;
-    int unk3014;
-    int unk3018;
-    int unk301C;
-    hkVector4q m_3020;
-    float m_3030;
-    int unk3034;
-    int unk3038;
-    int unk303C;
-    struct Info
-    {
-        unsigned short m_3040;
-        unsigned short m_3042;
-        unsigned short m_3044;
-        unsigned short unk3046;
-        unsigned char m_3048;
-        unsigned char m_3049;
-        NibblePair m_304a;
-        unsigned char unk304b;
-    } m_info;
-};
-
-extern hkVector4q DAT_010c4c00;
-
-class ParticleSystemOps
-{
-  public:
-    void FUN_00d3dd90(int a, int b, int c, ParticleSystemState* state);
-    void FUN_00d3e150(int a1, int a2, int a3, ParticleSystemState* s);
-};
-
 typedef unsigned long DWORD;
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(DWORD);
 
@@ -304,7 +252,6 @@ extern "C"
     __m128 _mm_unpackhi_ps(__m128, __m128);
     __m128 _mm_movelh_ps(__m128, __m128);
     __m128 _mm_movehl_ps(__m128, __m128);
-    void _mm_store_ps(float*, __m128);
 }
 
 extern "C" DWORD DAT_0126835c;
@@ -318,15 +265,6 @@ struct Res
 {
     Vec4 pt;
     float d;
-};
-
-struct Arg3S
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    float f10;
 };
 
 struct ProfRec

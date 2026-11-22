@@ -3,14 +3,6 @@
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
 extern "C" void __cdecl _NiFreeAlias(void*);
-extern int DAT_0109a2a4;
-
-struct FUN_00a543f0_shell
-{
-    void* m_kPointA;
-    void* m_ptr;
-    void FUN_00a543f0();
-};
 
 struct GlobalObjectO2_00a7b610
 {
@@ -55,19 +47,6 @@ FUN_00a54370_shell* FUN_00a54370_shell::FUN_00a54370(bool abFree)
         g_memoryManager.Deallocate(this);
     return this;
 }
-
-struct NiStreamLinkIDSet
-{
-    void* m_kPointA;
-    unsigned int m_uiItemCount;
-    unsigned int m_pRayCursor;
-    void Realloc(unsigned int);
-};
-
-struct NiStreamLinkIDSetShell
-{
-    void AppendLinkID(unsigned int* value);
-};
 
 namespace fnv_00a54410 {
 extern int DAT_0109a2ac;
@@ -127,16 +106,6 @@ NiBoneLODController* NiBoneLODController::FUN_00a552c0(CloningProcess& kCloning)
 
 namespace fnv_00a553f0 {
 extern int DAT_0109a2ac;
-extern int DAT_0109a2d4;
-struct S55190
-{
-    void ClearEntries();
-};
-struct S6D290
-{
-    void FUN_00a6d290();
-};
-void _delete(void*, unsigned int);
 struct NiBoneLODController
 {
     void* FUN_00a553f0(unsigned int);
@@ -1802,11 +1771,6 @@ struct A54440Manager
     void FUN_00a6d0c0(A54440Remap* source);
     bool FUN_00a541f0(int newLOD);
     void CloneFrom(A54440Remap* source);
-};
-struct A54440RefSlots
-{
-    void* vtable;
-    volatile long referenceCount;
 };
 static A54440HashItem* A54440Find(A54440Hash* hash, void* key)
 {

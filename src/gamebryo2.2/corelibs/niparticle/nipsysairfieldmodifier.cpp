@@ -447,62 +447,6 @@ FUN_00c2f5c0_cls::FUN_00c2f5c0_cls() throw()
 
 extern "C" void* g_012027a8;
 
-struct ViewerStrings
-{
-    int unk00;
-    int unk04;
-    unsigned short m_08;
-    unsigned short m_0a;
-    unsigned short m_0c;
-    unsigned short m_0e;
-};
-
-struct ViewerSub
-{
-    int unk00;
-    int unk04;
-    int unk08;
-
-    void* FUN_00a59af0(const char* name);
-};
-
-void* __cdecl FUN_00a7d330(void* g);
-void* __cdecl FUN_00a7d550(const char* name, float value);
-void* __cdecl FUN_00a7d370(const char* name, bool value);
-
-struct FUN_00c303c0_cls
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    ViewerSub m_40;
-    ViewerSub m_4c;
-    float m_58;
-    float m_5c;
-    bool m_60;
-    bool m_61;
-    bool m_62;
-    float m_64;
-
-    void FUN_00c322b0(ViewerStrings* s);
-    void FUN_0096ad30(unsigned int newSize);
-    void FUN_0096ae90(unsigned int index, void** value);
-    void BuildViewerStrings(ViewerStrings* s);
-};
-
 struct AirFieldModifier
 {
     void __thiscall FUN_00c2e520(NiStream& stream);

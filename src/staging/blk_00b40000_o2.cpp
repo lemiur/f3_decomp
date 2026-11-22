@@ -50,7 +50,6 @@ void __cdecl FUN_00b540d0()
 }
 
 extern int DAT_011f9168;
-extern int* DAT_011f9170;
 
 struct FUN_00b58110_Class
 {
@@ -1484,18 +1483,6 @@ bool Effect::UpdateShaderParams(int)
     return true;
 }
 
-struct FUN_00ba3840_Class
-{
-    void __thiscall FUN_00ba3840(int value);
-};
-struct FUN_00ba3aa0_Class
-{
-    void __thiscall FUN_00ba3aa0(int kind, void* value);
-};
-struct FUN_00ba37f0_Class
-{
-    void __thiscall FUN_00ba37f0(int value);
-};
 int __cdecl GetImageSpaceTexture();
 struct FUN_00b5a340_Class
 {
@@ -2101,8 +2088,6 @@ FUN_00b5a110::~FUN_00b5a110()
     }
 }
 
-struct NiRenderer;
-extern NiRenderer* DAT_011f9508;
 namespace nb {
 struct Accum
 {
@@ -2167,10 +2152,6 @@ struct Rend
 {
     char pad[0x8b8];
     Accum* m_8b8;
-};
-struct ISM
-{
-    void RenderEndOfFrameEffects(int a, int* b, int* c);
 };
 }
 // @f3 0x00adbec0 (community match, verified in this file)
@@ -2887,10 +2868,6 @@ struct Pending
         --alloc.count;
         return data;
     }
-};
-struct VisitedList : Pending
-{
-    ~VisitedList() throw();
 };
 __declspec(noinline) Link* LinkAllocator::AddHead()
 {
@@ -3880,7 +3857,3 @@ unsigned short __cdecl GetOrCreateItem(RTKey* key, unsigned int pos, RTItem** pp
     }
     return (*ppItem)->usTotal - (*ppItem)->usUsed;
 }
-
-
-// @f3twin 0x00bd1190 of 0x00ad3b80
-struct F3Twin_00bd1190 : public PointerMap { void F3_FUN_00bd1190(unsigned int key, NiPointer<MapRefObject> value) ; };

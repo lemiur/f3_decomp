@@ -462,26 +462,6 @@ struct Ent98 {
     void* unk04;
 };
 
-struct Node98 {
-    int unk00;
-    signed char unk04;
-    signed char unk05;
-    short unk06;
-    int unk08;
-    int unk0c;
-    signed char unk10;
-    signed char unk11;
-    signed char unk12;
-    signed char unk13;
-    int unk14,unk18,unk1c,unk20,unk24,unk28,unk2c,unk30,unk34,unk38,unk3c;
-    int unk40,unk44,unk48,unk4c,unk50,unk54,unk58,unk5c,unk60,unk64,unk68,unk6c;
-    int unk70,unk74,unk78,unk7c,unk80,unk84,unk88,unk8c,unk90,unk94,unk98,unk9c;
-    int unka0,unka4,unka8,unkac,unkb0,unkb4;
-    int unkb8;
-    int unkbc,unkc0,unkc4,unkc8,unkcc,unkd0,unkd4;
-    unsigned char unkd8;
-};
-
 struct Arr98 { Ent98* data; int count; int capacity; };
 
 struct Owner98 {
@@ -7658,7 +7638,6 @@ void Cd6a0::FUN_0099d6a0(const Vd6a0& imp, const Vd6a0& pos)
 namespace f3m_009811d0 {
 struct Item;
 struct __declspec(align(16)) V4 { float x; float y; float z; float w; };
-struct Dst { int unk00; int unk04; int unk08; int unk0c; int unk10; int unk14; int unk18; int unk1c; int unk20; int unk24; int unk28; int unk2c; int unk30; int unk34; int unk38; int unk3c; int unk40; int unk44; int unk48; int unk4c; V4 v; };
 struct Cam {
     int unk00; int unk04; int unk08; int unk0c; int unk10; int unk14; int unk18; int unk1c; int unk20; int unk24; int unk28; int unk2c; int unk30; int unk34; int unk38; int unk3c; int unk40; int unk44; int unk48; int unk4c; int unk50; int unk54; int unk58; int unk5c; int unk60; int unk64; int unk68;
     V4* unk6c;
@@ -7676,7 +7655,6 @@ struct Owner {
     void FUN_00981160(Item** a, int n, V4* d, int z);
     void FUN_009811d0(Item** items, int n, Cam* cam, unsigned flags);
 };
-float Cam_GetItemF(Cam* c, Item* items);
 void FUN_009776f0(float f, float* p);
 void FUN_009a9cb0(V4* o, Item** items, int n, int sz);
 void FUN_0099a2d0(V4* d, Item** items, int n);
@@ -10069,7 +10047,6 @@ void Collector::FUN_00982c80(Entity** entities, int num, void* arg)
 extern unsigned long DAT_0116913c;
 extern const char DAT_00e7de38[];
 extern const char DAT_00e32798[];
-extern const float DAT_00de6e60;
 extern const float DAT_00de731c;
 namespace f3m_0099f1c0 {
 namespace Bounds879 {
@@ -11362,7 +11339,6 @@ extern V4 DAT_01060dd0;
 extern float DAT_01060db0;
 extern float DAT_01060db4;
 extern float DAT_01060db8;
-extern float DAT_01060dbc;
 
 struct __declspec(align(16)) hkAabbUint32 { unsigned int m_min[3]; unsigned int m_expansionMin; unsigned int m_max[3]; unsigned int m_expansionMax; };
 struct __declspec(align(16)) S4 { unsigned short x, y, z, w; };
@@ -14453,7 +14429,6 @@ namespace hkArrayUtil
 {
 void __cdecl _reserve(void*, int numElem, int sizeElem);
 void __cdecl _reserveMore(void* array, int sizeElem);
-void __cdecl _reduce(void* array, int sizeElem, char* inplaceMem, int requestedCapacity);
 }
 template <typename T> class hkObjectArray;
 template <typename T>

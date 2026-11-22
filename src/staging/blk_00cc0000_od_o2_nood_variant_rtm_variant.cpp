@@ -73,15 +73,6 @@ struct TransformObj
 
     TransformObj();
 };
-struct TransformOwner
-{
-    int unk00;
-    TransformObj* m_pSource;
-
-    void ReleaseObject(TransformObj* pkObj, int iArg);
-    void FUN_00cc85b0(TransformObj* pkObj, int iArg);
-};
-bool __stdcall FUN_00c84ec0(void* key);
 struct Cd2Target
 {
     virtual void v00();
@@ -235,9 +226,6 @@ struct __declspec(align(16)) PoseVector {
     }
 };
 struct PoseQuaternion {PoseVector vector; void FUN_00c66320(const PoseQuaternion&,const PoseQuaternion&);};
-extern "C" unsigned int __security_cookie;
-extern "C" void __fastcall __security_check_cookie(unsigned int);
-struct QuaternionProduct {__m128 quad;};
 struct PoseTransform {
     PoseVector translation;
     PoseQuaternion rotation;
@@ -354,108 +342,8 @@ struct FUN_00d4f2a0 {
         return p;
     }
 };
-struct FUN_00cc5f30_cls {
-    int unk00;
-    FUN_00d4f2a0* m_pSrc;
-
-    void FUN_00cc5f30(FUN_00d4f2a0* dst, int a2);
-    void ReleaseObject(FUN_00d4f2a0* dst, int a2);
-};
-struct S_00ccbce0_Source
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5c;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6c;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7c;
-    __m128 unk80;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9c;
-    int unkA0;
-    int unkA4;
-    int unkA8;
-    int unkAC;
-    int unkB0;
-    int unkB4;
-    int unkB8;
-    int unkBC;
-    int unkC0;
-    int unkC4;
-    int unkC8;
-    int unkCC;
-    int unkD0;
-    int unkD4;
-    int unkD8;
-    int unkDC;
-    int unkE0;
-    float unkE4;
-};
-struct S_00ccbce0_Ref
-{
-    virtual void FUN_00ccbce0_ref0();
-    virtual void FUN_00ccbce0_ref1();
-
-    LONG unk04;
-};
-struct S_00ccbce0_Output
-{
-    int unk00;
-    S_00ccbce0_Ref* unk04;
-    float unk08;
-    int unk0c;
-    __m128 unk10;
-};
-struct S_00ccbce0_Owner
-{
-    int unk00;
-    int unk04;
-    S_00ccbce0_Source* unk08;
-    int unk0c;
-    int unk10;
-    S_00ccbce0_Ref* unk14;
-
-    void __thiscall FUN_00c84e20(S_00ccbce0_Output* value);
-    void __thiscall FUN_00ccbce0(S_00ccbce0_Output* value);
-};
 extern "C" __m128 _mm_setr_ps(float, float, float, float);
 union hkVec4 { __m128 m_vComponents; char m_bytes[16]; };
-struct BytePair { char a; char b; };
-struct EntityCinfo {
-    int unk00, unk04, unk08, unk0C;
-    float m_vContactPosition[4];
-    float m_rotation[4];
-    float unk30, unk34, unk38;
-    char unk3C, unk3D;
-};
 struct EntityObj {
     int unk00;
     unsigned short m_usMemSizeAndFlags;
@@ -475,355 +363,6 @@ struct EntityObj {
     void SetPivots(const hkVector4& position,const hkVector4& rotation);
     void removeReference();
 };
-struct EntityOwner {
-    virtual void v00(); virtual void v01(); virtual void v02(); virtual void v03();
-    virtual void v04(); virtual void v05(); virtual void v06(); virtual void v07();
-    virtual void v08(); virtual void v09(); virtual void v10(); virtual void v11();
-    virtual void v12(); virtual void v13(); virtual void v14(); virtual void v15();
-    virtual void v16(); virtual void v17(); virtual void v18(); virtual void v19();
-    virtual void v20(); virtual void v21(); virtual void v22(); virtual void v23();
-    virtual void v24(); virtual void v25(); virtual void v26(); virtual void v27();
-    virtual void v28(); virtual void v29(); virtual void v30(); virtual void v31();
-    virtual void v32(); virtual void v33(); virtual void v34();
-    virtual void HandleNode(EntityObj* obj);
-    virtual void v36(); virtual void v37(); virtual void v38(); virtual void v39();
-    virtual void v40(); virtual void v41(); virtual void v42(); virtual void v43();
-    virtual void v44(); virtual void v45(); virtual void v46();
-    virtual int AddCinfo(EntityCinfo* info);
-    int FUN_00cc3050(EntityCinfo* info);
-};
-class S_00cd3c20_Obj
-{
-public:
-    void FUN_00c6cba0();
-    int unk000;
-    int unk004;
-    int unk008;
-    int unk00c;
-    int unk010;
-    int unk014;
-    int unk018;
-    int unk01c;
-    int unk020;
-    int unk024;
-    int unk028;
-    int unk02c;
-    int unk030;
-    int unk034;
-    int unk038;
-    int unk03c;
-    int unk040;
-    int unk044;
-    int unk048;
-    int unk04c;
-    int unk050;
-    int unk054;
-    int unk058;
-    int unk05c;
-    int unk060;
-    int unk064;
-    int unk068;
-    int unk06c;
-    int unk070;
-    int unk074;
-    int unk078;
-    int unk07c;
-    int unk080;
-    int unk084;
-    int unk088;
-    int unk08c;
-    int unk090;
-    int unk094;
-    int unk098;
-    int unk09c;
-    int unk0a0;
-    int unk0a4;
-    int unk0a8;
-    int unk0ac;
-    int unk0b0;
-    int unk0b4;
-    int unk0b8;
-    int unk0bc;
-    int unk0c0;
-    int unk0c4;
-    int unk0c8;
-    int unk0cc;
-    int unk0d0;
-    int unk0d4;
-    int unk0d8;
-    int unk0dc;
-    int unk0e0;
-    int unk0e4;
-    int unk0e8;
-    int unk0ec;
-    int unk0f0;
-    int unk0f4;
-    int unk0f8;
-    int unk0fc;
-    int unk100;
-    int unk104;
-    int unk108;
-    int unk10c;
-    int unk110;
-    int unk114;
-    int unk118;
-    int unk11c;
-    int unk120;
-    int unk124;
-    int unk128;
-    int unk12c;
-    int unk130;
-    int unk134;
-    int unk138;
-    int unk13c;
-    int unk140;
-    int unk144;
-    int unk148;
-    int unk14c;
-    int unk150;
-    int unk154;
-    int unk158;
-    int unk15c;
-    int unk160;
-    int unk164;
-    int unk168;
-    int unk16c;
-    int unk170;
-    int unk174;
-    int unk178;
-    int unk17c;
-    int unk180;
-    int unk184;
-    int unk188;
-    int unk18c;
-    int unk190;
-    int unk194;
-    int unk198;
-    int unk19c;
-    int unk1a0;
-    int unk1a4;
-    int unk1a8;
-    int unk1ac;
-    int unk1b0;
-    int unk1b4;
-    int unk1b8;
-    int unk1bc;
-    int unk1c0;
-    int unk1c4;
-    int unk1c8;
-    int unk1cc;
-    int unk1d0;
-    int unk1d4;
-    int unk1d8;
-    int unk1dc;
-    int unk1e0;
-    int unk1e4;
-    int unk1e8;
-    int unk1ec;
-    int unk1f0;
-    int unk1f4;
-    int unk1f8;
-    int unk1fc;
-    int unk200;
-    int unk204;
-    int unk208;
-    int unk20c;
-    int unk210;
-    int unk214;
-    int unk218;
-    int unk21c;
-    int unk220;
-    int unk224;
-    int unk228;
-    int unk22c;
-    int unk230;
-    int unk234;
-    int unk238;
-    int unk23c;
-    int unk240;
-    int unk244;
-    int unk248;
-    int unk24c;
-    int unk250;
-    int unk254;
-    int unk258;
-    int unk25c;
-    int unk260;
-    int unk264;
-    int unk268;
-    int unk26c;
-    int unk270;
-    int unk274;
-    int unk278;
-    int unk27c;
-    int unk280;
-    int unk284;
-    int unk288;
-    int unk28c;
-    int unk290;
-    int unk294;
-    int unk298;
-    int unk29c;
-    int unk2a0;
-    int unk2a4;
-    int unk2a8;
-    int unk2ac;
-    int unk2b0;
-    int unk2b4;
-    int unk2b8;
-    int unk2bc;
-    int unk2c0;
-    int unk2c4;
-    int unk2c8;
-    int unk2cc;
-    int unk2d0;
-    int unk2d4;
-    int unk2d8;
-    int unk2dc;
-    int unk2e0;
-    int unk2e4;
-    int unk2e8;
-    int unk2ec;
-    int unk2f0;
-    int unk2f4;
-    int unk2f8;
-    int unk2fc;
-    int unk300;
-    int unk304;
-    int unk308;
-    int unk30c;
-    int unk310;
-    int unk314;
-    int unk318;
-    int unk31c;
-    int unk320;
-    int unk324;
-    int unk328;
-    int unk32c;
-    int unk330;
-    int unk334;
-    int unk338;
-    int unk33c;
-    int unk340;
-    int unk344;
-    int unk348;
-    int unk34c;
-    int unk350;
-    int unk354;
-    int unk358;
-    int unk35c;
-    int unk360;
-    int unk364;
-    int unk368;
-    int unk36c;
-    int unk370;
-    int unk374;
-    int unk378;
-    int unk37c;
-    int unk380;
-    int unk384;
-    int unk388;
-    int unk38c;
-    int unk390;
-    int unk394;
-    int unk398;
-    int unk39c;
-    int unk3a0;
-    int unk3a4;
-    int unk3a8;
-    int unk3ac;
-    int unk3b0;
-    int unk3b4;
-    int unk3b8;
-    int unk3bc;
-    int unk3c0;
-    int unk3c4;
-    int unk3c8;
-    int unk3cc;
-    int unk3d0;
-    int unk3d4;
-    int unk3d8;
-    int unk3dc;
-    int unk3e0;
-    int unk3e4;
-    int unk3e8;
-    int unk3ec;
-    int unk3f0;
-    int unk3f4;
-    int unk3f8;
-    int unk3fc;
-    int unk400;
-    int unk404;
-    int unk408;
-    int unk40c;
-    int unk410;
-    int unk414;
-    int unk418;
-    int unk41c;
-    int unk420;
-    int unk424;
-    int unk428;
-    int unk42c;
-    int unk430;
-    int unk434;
-    int unk438;
-    int unk43c;
-    int unk440;
-    int unk444;
-    int unk448;
-    int unk44c;
-    int unk450;
-    int unk454;
-    int unk458;
-    int unk45c;
-    int unk460;
-    int unk464;
-    int unk468;
-    int unk46c;
-    int unk470;
-    int unk474;
-    int unk478;
-    int unk47c;
-    int unk480;
-    int unk484;
-    int unk488;
-    int unk48c;
-    int unk490;
-    int unk494;
-    int unk498;
-    int unk49c;
-    int unk4a0;
-    int unk4a4;
-    int unk4a8;
-    int unk4ac;
-    int unk4b0;
-    int unk4b4;
-    int unk4b8;
-    int unk4bc;
-    int unk4c0;
-    int unk4c4;
-    int unk4c8;
-    int unk4cc;
-    int unk4d0;
-    int unk4d4;
-    int unk4d8;
-    int unk4dc;
-    int unk4e0;
-    int unk4e4;
-    int unk4e8;
-    int unk4ec;
-    __m128 unk4f0;
-    int unk500;
-    int unk504;
-    int unk508;
-    int unk50c;
-    int unk510;
-    float unk514;
-    int unk518;
-    int unk51c;
-    int unk520;
-};
-void __stdcall FUN_00cd3c20(S_00cd3c20_Obj* obj);
 struct ShapeVector
 {
     hkVec4 m_v;
@@ -925,7 +464,6 @@ struct ShapeOwner
     virtual void finish(struct IntegerBlock18* pkInfo);
     void FUN_00cc3710(IntegerBlock18* pkInfo);
 };
-struct S00cc4610_Ref { void __thiscall FUN_00c905b0(); };
 struct S00cc4610_Out {
     int unk00; unsigned short m_iElementCount; unsigned short unk06; int unk08; int unk0C; int unk10; int unk14; int unk18; int unk1C;
     __m128 q20;
@@ -940,106 +478,13 @@ struct S00cc4610_Out {
         return p;
     }
 };
-struct S00cc4610_In {
-    int unk00; int m_04; int m_08; int unk0C;
-    float m_10; float m_14; float m_18; float m_1c; float m_20; float m_24;
-};
 struct S00cc4610_Scope {
     int saved;
     S00cc4610_Scope() { saved = tls_memContext; tls_memContext = 0x10; }
     ~S00cc4610_Scope() { tls_memContext = saved; }
 };
 static inline void s00cc4610_copy(__m128& d, const __m128& s) { d = s; }
-struct S00cc4610_Self {
-    virtual void v00();
-    virtual void v01();
-    virtual void v02();
-    virtual void v03();
-    virtual void v04();
-    virtual void v05();
-    virtual void v06();
-    virtual void v07();
-    virtual void v08();
-    virtual void v09();
-    virtual void v10();
-    virtual void v11();
-    virtual void v12();
-    virtual void v13();
-    virtual void v14();
-    virtual void v15();
-    virtual void v16();
-    virtual void v17();
-    virtual void v18();
-    virtual void v19();
-    virtual void v20();
-    virtual void v21();
-    virtual void v22();
-    virtual void v23();
-    virtual void v24();
-    virtual void v25();
-    virtual void v26();
-    virtual void v27();
-    virtual void v28();
-    virtual void v29();
-    virtual void v30();
-    virtual void v31();
-    virtual void v32();
-    virtual void v33();
-    virtual void v34();
-    virtual void v35(S00cc4610_Out* o);
-    virtual void v36();
-    virtual void v37();
-    virtual void v38();
-    virtual void v39();
-    virtual void v40();
-    virtual void v41();
-    virtual void v42();
-    virtual void v43();
-    virtual void v44();
-    virtual void v45();
-    virtual void v46();
-    virtual void v47(S00cc4610_In* i);
-    void FUN_00cc4610(S00cc4610_In* in);
-};
-struct Cc7Bool { char value; };
-struct Cc7Local {
-    void* constraint;
-    void* scheme;
-    int stiffnessReference, dampingReference;
-    Cc7Bool linearA[3], linearB[3];
-    Cc7Bool angularA, angularB, pivotA, pivotB;
-    void InitFromHelper(void* source);
-    void FUN_00d52000(void* out);
-    void FUN_00d51c30(void* tmp);
-    void* FUN_00d520a0(void* out);
-    void* FUN_00d51d40(void* tmp);
-    void AddBridgeAtoms();
-    void AppendEntryAndAdvance();
-    void FUN_00d52ae0(float value);
-    void FUN_00d52ba0();
-    void AppendZeroItem();
-};
 struct __declspec(align(16)) Cc7Vector { unsigned char lanes[16]; };
-struct Cc7Tmp {
-    Cc7Vector column0, column1, column2;
-    Cc7Vector translation;
-    void FUN_00cb22f0(void* base, void* arg);
-};
-extern const float g_011c5c70_arg1;
-struct Cc7Owner {
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual void v0c();
-    virtual void v10();
-    void* m04;
-    void* m08;
-    char* m0c;
-    char* m10;
-    void* m14;
-    void* m18;
-    void FUN_00cc7fe0(void* arg);
-};
 extern "C" void _ReadWriteBarrier();
 struct TypeHeader { unsigned int unk00, unk04, unk08, typeCode; };
 struct TypeAttributes { unsigned int attributes; };
@@ -1051,19 +496,6 @@ struct ScratchGeometry {
     unsigned char useA, useB, specialShape, useD, useE;
     void FUN_00d54de0();
 };
-struct LunaAction {
-    unsigned int id;
-    ObjectType* source;
-    void* result;
-    float defaultValue;
-    ScratchGeometry scratch;
-};
-struct LunaArgument {
-    int unk00, unk04;
-    ObjectType* value;
-    int unk0c;
-};
-struct LunaTarget { unsigned int FUN_00cca360(LunaArgument* argument); };
 extern void* __cdecl FUN_00d54cd0(const void*, ScratchGeometry*, unsigned int);
 union Quaternion525 {
     __m128 value;
@@ -1071,7 +503,6 @@ union Quaternion525 {
     Quaternion525() {}
     Quaternion525& operator=(const Quaternion525& other) { value=other.value; return *this; }
 };
-struct RotationSource525 { unsigned int unk00,unk04,unk08,unk0c; Quaternion525 rotation; };
 struct StringArray525 : NiTObjectArray<char*> {
     void FUN_0096ad30(unsigned int);
     void FUN_0096ae90(unsigned int,char* const&);
@@ -1086,18 +517,9 @@ public:
     float x,y,z;
     char* FUN_00a59af0(const char*);
 };
-extern void* DAT_01268670;
-extern const char DAT_0101c29c[];
-extern const char DAT_010ca6a4[];
 char* __cdecl FUN_00a7d330(void*);
 char* __cdecl FUN_00a7d550(const char*,float);
 void __cdecl FUN_00458620(PositionText525*,const Quaternion525*);
-struct RotationOwner525 {
-    unsigned int unk00,unk04;
-    RotationSource525* source;
-    void FUN_00d54ed0(StringArray525*);
-    void FUN_00ccb810(StringArray525*);
-};
 struct TlsState { int unk000; int unk004; int unk008; int unk00c; int unk010; int unk014; int unk018; int unk01c; int unk020; int unk024; int unk028; int unk02c; int unk030; int unk034; int unk038; int unk03c; int unk040; int unk044; int unk048; int unk04c; int unk050; int unk054; int unk058; int unk05c; int unk060; int unk064; int unk068; int unk06c; int unk070; int unk074; int unk078; int unk07c; int unk080; int unk084; int unk088; int unk08c; int unk090; int unk094; int unk098; int unk09c; int unk0a0; int unk0a4; int unk0a8; int unk0ac; int unk0b0; int unk0b4; int unk0b8; int unk0bc; int unk0c0; int unk0c4; int unk0c8; int unk0cc; int unk0d0; int unk0d4; int unk0d8; int unk0dc; int unk0e0; int unk0e4; int unk0e8; int unk0ec; int unk0f0; int unk0f4; int unk0f8; int unk0fc; int unk100; int unk104; int unk108; int unk10c; int unk110; int unk114; int unk118; int unk11c; int unk120; int unk124; int unk128; int unk12c; int unk130; int unk134; int unk138; int unk13c; int unk140; int unk144; int unk148; int unk14c; int unk150; int unk154; int unk158; int unk15c; int unk160; int unk164; int unk168; int unk16c; int unk170; int unk174; int unk178; int unk17c; int unk180; int unk184; int unk188; int unk18c; int unk190; int unk194; int unk198; int unk19c; int unk1a0; int unk1a4; int unk1a8; int unk1ac; int unk1b0; int unk1b4; int unk1b8; int unk1bc; int unk1c0; int unk1c4; int unk1c8; int unk1cc; int unk1d0; int unk1d4; int unk1d8; int unk1dc; int unk1e0; int unk1e4; int unk1e8; int unk1ec; int unk1f0; int unk1f4; int unk1f8; int unk1fc; int unk200; int unk204; int unk208; int unk20c; int unk210; int unk214; int unk218; int unk21c; int unk220; int unk224; int unk228; int unk22c; int unk230; int unk234; int unk238; int unk23c; int unk240; int unk244; int unk248; int unk24c; int unk250; int unk254; int unk258; int unk25c; int unk260; int unk264; int unk268; int unk26c; int unk270; int unk274; int unk278; int unk27c; int unk280; int unk284; int unk288; int unk28c; int unk290; int unk294; int unk298; int unk29c; int unk2a0; int unk2a4; int unk2a8; int unk2ac; int unk2b0; int unk2b4; };
 extern __declspec(thread) TlsState g_tlsState;
 class MemoryManager { public: void* Allocate(unsigned int size); };
@@ -1144,7 +566,6 @@ inline void* AllocAligned(unsigned int size)
 }
 struct Vec { float x,y,z; };
 struct Mat { float xx,xy,xz,yx,yy,yz,zx,zy,zz; };
-struct NodeTransform { Mat rotation; Vec translation; float scale; };
 union __declspec(align(16)) Transform { struct { __m128 a,b,c,d; }; char bytes[64]; };
 struct TLSData {
 int unk000;
@@ -1418,75 +839,12 @@ int unka8;
 ConvexShapeNode(unsigned short); static void* operator new(unsigned int); void SetParentObject(const struct Name&); };
 extern char* emptyString;
 struct Name { char* value; static char* InternString(const char*); Name(const char* s):value(InternString(s)){} ~Name(){if(value!=emptyString) InterlockedDecrement(reinterpret_cast<volatile long*>(value)-2);} };
-struct Target {
-virtual void slot0();
-virtual void slot1();
-virtual void slot2();
-virtual void slot3();
-virtual void slot4();
-virtual void slot5();
-virtual void slot6();
-virtual void slot7();
-virtual void slot8();
-virtual void slot9();
-virtual void slot10();
-virtual void slot11();
-virtual void slot12();
-virtual void slot13();
-virtual void slot14();
-virtual void slot15();
-virtual void slot16();
-virtual void slot17();
-virtual void slot18();
-virtual void slot19();
-virtual void slot20();
-virtual void slot21();
-virtual void slot22();
-virtual void slot23();
-virtual void slot24();
-virtual void slot25();
-virtual void slot26();
-virtual void slot27();
-virtual void slot28();
-virtual void slot29();
-virtual void slot30();
-virtual void slot31();
-virtual void slot32();
-virtual void slot33();
-virtual void slot34();
-virtual void slot35();
-virtual void slot36();
-virtual void slot37();
-virtual void slot38();
-virtual void slot39();
-virtual void slot40();
-virtual void slot41();
-virtual void slot42();
-virtual void slot43();
-virtual void slot44();
-virtual void slot45();
-virtual void slot46();
-virtual void slot47();
-virtual void slot48();
-virtual void slot49();
-virtual void slot50();
-virtual void slot51();
-virtual void slot52();
-virtual void finish(ConvexShapeNode*,void*); };
-struct Owner { int unk00,unk04; Target* target; };
-struct Body { int unk00,unk04,unk08,unk0c,unk10,unk14; Owner* owner; int unk1c; Transform transform; };
-extern Transform identity;
-extern const char nodeName[];
-void FUN_00624b10(Mat*,Transform*);
 void FUN_00458620(Vec*,__m128*);
-struct Subject { int unk00,unk04; Body* body; void FUN_00ccf150(ConvexShapeNode*,void*); };
 extern "C" {
 __m128 _mm_set_ps1(float);
 __m128 _mm_min_ps(__m128, __m128);
 __m128 _mm_max_ps(__m128, __m128);
 }
-extern float DAT_0104da48;
-extern float DAT_0104e148;
 struct BoundsVector : hkVector4
 {
     __forceinline const __m128& Get() const { return m_vComponents; }
@@ -1500,12 +858,6 @@ struct BoundsVector : hkVector4
         m_vComponents = _mm_max_ps(a.Get(), b.Get());
     }
 };
-struct BoundsEntry
-{
-    BoundsVector translation;
-    BoundsVector rotation;
-    BoundsVector scale;
-};
 struct BoundsBox
 {
     BoundsVector m_kMinimumCorner;
@@ -1515,17 +867,6 @@ struct BoundsBox
         m_kMinimumCorner.Min(m_kMinimumCorner, point);
         m_kMaximumCorner.Max(m_kMaximumCorner, point);
     }
-};
-class BoundsOwner
-{
-public:
-    SkeletonData* m_pSub;
-    int unk04;
-    int unk08;
-    int unk0c;
-    BoundsEntry* m_pEntries;
-    void FUN_00cda340();
-    void FUN_00cda610(BoundsBox* out);
 };
 extern __declspec(thread) int DAT_tls_field;
 struct S00cc2530_ScopedHeap306 {
@@ -1647,57 +988,6 @@ t[1]=_mm_setr_ps(src->m[4],src->m[5],src->m[6],src->m[7]);
 t[2]=_mm_setr_ps(src->m[8],src->m[9],src->m[10],src->m[11]);
 t[3]=_mm_setr_ps(src->m[12],src->m[13],src->m[14],src->m[15]);
 return t;}
-struct S00cc2530_Owner306 {
- virtual void slot00();
- virtual void slot04();
- virtual void slot08();
- virtual void slot0c();
- virtual void slot10();
- virtual void slot14();
- virtual void slot18();
- virtual void slot1c();
- virtual void slot20();
- virtual void slot24();
- virtual void slot28();
- virtual void slot2c();
- virtual void slot30();
- virtual void slot34();
- virtual void slot38();
- virtual void slot3c();
- virtual void slot40();
- virtual void slot44();
- virtual void slot48();
- virtual void slot4c();
- virtual void slot50();
- virtual void slot54();
- virtual void slot58();
- virtual void slot5c();
- virtual void slot60();
- virtual void slot64();
- virtual void slot68();
- virtual void slot6c();
- virtual void slot70();
- virtual void slot74();
- virtual void slot78();
- virtual void slot7c();
- virtual void slot80();
- virtual void slot84();
- virtual void slot88();
- virtual void Set(S00cc2530_FUN_00d4ce10*);
- virtual void slot90();
- virtual void slot94();
- virtual void slot98();
- virtual void slot9c();
- virtual void slota0();
- virtual void slota4();
- virtual void slota8();
- virtual void slotac();
- virtual void slotb0();
- virtual void slotb4();
- virtual void slotb8();
- virtual void OnSource(S00cc2530_Source306*);
- void FUN_00cc2530(S00cc2530_Source306*);
-};
 struct SourceGeometry {
     unsigned int type;
     unsigned int owner;
@@ -1951,8 +1241,6 @@ struct TlsFlagGuard {
     TlsFlagGuard() { unsigned int index = DAT_0126fd98; m_blk = reinterpret_cast<ThreadTlsBlock**>(__readfsdword(0x2c))[index]; m_saved = m_blk->m_2b4; m_blk->m_2b4 = 0x10; }
     ~TlsFlagGuard() { m_blk->m_2b4 = m_saved; }
 };
-extern unsigned int DAT_01268694;
-extern float DAT_010c72bc;
 struct NameArr {
     virtual ~NameArr();
     void* m_pBase;
@@ -1973,23 +1261,8 @@ struct __declspec(align(16)) Blk {
     float z0;
     float z1, z2;
 };
-struct TagObj {
-    float x, y, z;
-    unsigned int FUN_00a59af0(const char* s);
-};
 unsigned int __cdecl FUN_00a7d330(unsigned int v);
 namespace fnvc_adapt { unsigned int __cdecl FUN_00a7d550(const char* s, float f); }
-void __cdecl FUN_004a3970(TagObj* t, const __m128* v);
-extern const char g_011d3e74_arg1[];
-extern const char str_010ca918[];
-extern const char str_010ca914[];
-class NamedShape {
-public:
-    unsigned int unk00;
-    void WriteLimitedHingeData(Blk* b);
-    void FUN_00c9fc50(NameArr* arr);
-    void FUN_00ccd960(NameArr* arr);
-};
 static void AddName(NameArr* arr, const unsigned int& v) {
     unsigned int n = arr->m_usSize;
     if (n >= arr->m_usMaxSize) {
@@ -2042,18 +1315,6 @@ struct ContactArray {
             memCpyOneAligned<sizeof(AlignedPairData)>(m_data + index, m_data + m_iElementCount);
     }
 };
-struct ContactManifold {
-    void* m_ppVirtualMethodTable;
-    int m_usMemSizeAndFlags;
-    int unk08;
-    int unk0C;
-    ContactArray m_kPoints;
-    int unk1C;
-    AlignedPairData m_kStorage[8];
-    ContactManifold* m_other;
-
-    void FUN_00cd3080();
-};
 extern "C" __m128 _mm_setzero_ps();
 extern float DAT_011b153c;
 union hkVecQ3E
@@ -2062,25 +1323,6 @@ union hkVecQ3E
     char m_bytes[16];
     __forceinline hkVecQ3E() {}
     __forceinline hkVecQ3E(float x, float y, float z, float w) { m_vComponents = _mm_setr_ps(x, y, z, w); }
-};
-struct ShapeInfo_SI
-{
-    int unk00;
-    float m_fBoundRadius;
-    int unk08;
-    int unk0C;
-    float m_f10;
-    float m_f14;
-    float m_f18;
-    float m_f1C;
-    float m_f20;
-    float m_f24;
-    float m_f28;
-    float m_f2C;
-    float m_f30;
-    float m_f34;
-    float m_f38;
-    float m_f3C;
 };
 struct hkReferencedObject
 {
@@ -2136,83 +1378,6 @@ struct ShapeObj_SI : hkpConvexShape
     }
     virtual ~ShapeObj_SI();
 };
-struct ShapeOwner_SI
-{
-    virtual void vf00();
-    virtual void vf01();
-    virtual void vf02();
-    virtual void vf03();
-    virtual void vf04();
-    virtual void vf05();
-    virtual void vf06();
-    virtual void vf07();
-    virtual void vf08();
-    virtual void vf09();
-    virtual void vf10();
-    virtual void vf11();
-    virtual void vf12();
-    virtual void vf13();
-    virtual void vf14();
-    virtual void vf15();
-    virtual void vf16();
-    virtual void vf17();
-    virtual void vf18();
-    virtual void vf19();
-    virtual void vf20();
-    virtual void vf21();
-    virtual void vf22();
-    virtual void vf23();
-    virtual void vf24();
-    virtual void vf25();
-    virtual void vf26();
-    virtual void vf27();
-    virtual void vf28();
-    virtual void vf29();
-    virtual void vf30();
-    virtual void vf31();
-    virtual void vf32();
-    virtual void vf33();
-    virtual void vf34();
-    virtual void addObject(hkReferencedObject* pkObj);
-    virtual void vf36();
-    virtual void vf37();
-    virtual void vf38();
-    virtual void vf39();
-    virtual void vf40();
-    virtual void vf41();
-    virtual void vf42();
-    virtual void vf43();
-    virtual void vf44();
-    virtual void vf45();
-    virtual void vf46();
-    virtual void finish(ShapeInfo_SI* pkInfo);
-    void FUN_00ccaee0(ShapeInfo_SI* pkInfo);
-};
-struct ParamSrc {
- int unk00, unk04, unk08, unk0c;
- float m_10, m_14, m_18, m_1c;
- float m_20, m_24, m_28, m_2c;
- float m_30;
-};
-class CylinderInitOwner {
-public:
- virtual void v00(); virtual void v01(); virtual void v02(); virtual void v03();
- virtual void v04(); virtual void v05(); virtual void v06(); virtual void v07();
- virtual void v08(); virtual void v09(); virtual void v10(); virtual void v11();
- virtual void v12(); virtual void v13(); virtual void v14(); virtual void v15();
- virtual void v16(); virtual void v17(); virtual void v18(); virtual void v19();
- virtual void v20(); virtual void v21(); virtual void v22(); virtual void v23();
- virtual void v24(); virtual void v25(); virtual void v26(); virtual void v27();
- virtual void v28(); virtual void v29(); virtual void v30(); virtual void v31();
- virtual void v32(); virtual void v33(); virtual void v34(); virtual void v35();
- virtual void v36(); virtual void v37(); virtual void v38(); virtual void v39();
- virtual void v40(); virtual void v41(); virtual void v42(); virtual void v43();
- virtual void v44(); virtual void v45(); virtual void v46();
- virtual void v47(ParamSrc*);
- void __thiscall CreateAndDispatchObject(const __m128& lo, const __m128& hi, float f);
- void __thiscall FUN_00ccd8c0(ParamSrc*);
-};
-void* __cdecl FUN_00ec44d0(void*, const void*, unsigned);
 void* __cdecl FUN_00aa13e0(unsigned);
 void __cdecl FreeStorage(void*);
 using ::MemoryManager;
@@ -2249,19 +1414,6 @@ struct Geometry {
         return index>=triangleCount;
 
     }
-
-};
-struct ExtendedMeshInput {
-
-    unsigned unk00;
-
-    Geometry* geometry;
-
-    float scale;
-
-    unsigned unk0C;
-
-    __m128 transform;
 
 };
 struct MeshPart {
@@ -2363,156 +1515,6 @@ struct __declspec(align(16)) ExtendedMeshStoredVector {
     hkVec4 lanes;
     __forceinline ExtendedMeshStoredVector& operator=(__m128 v) { _mm_store_ps(reinterpret_cast<float*>(&lanes.m_bytes[0]),v);return *this; }
     __forceinline operator const __m128&() const { return *reinterpret_cast<const __m128*>(&lanes.m_bytes[0]); }
-};
-struct Result {
-
-    Mesh* mesh;
-
-    unsigned unk04;
-
-    float scale;
-
-    unsigned unk0C;
-
-    ExtendedMeshStoredVector transform;
-
-    Result(Mesh*);
-
-    ~Result();
-
-};
-struct ExtendedMeshBuilder {
-
-virtual void Slot00();
-
-virtual void Slot04();
-
-virtual void Slot08();
-
-virtual void Slot0C();
-
-virtual void Slot10();
-
-virtual void Slot14();
-
-virtual void Slot18();
-
-virtual void Slot1C();
-
-virtual void Slot20();
-
-virtual void Slot24();
-
-virtual void Slot28();
-
-virtual void Slot2C();
-
-virtual void Slot30();
-
-virtual void Slot34();
-
-virtual void Slot38();
-
-virtual void Slot3C();
-
-virtual void Slot40();
-
-virtual void Slot44();
-
-virtual void Slot48();
-
-virtual void Slot4C();
-
-virtual void Slot50();
-
-virtual void Slot54();
-
-virtual void Slot58();
-
-virtual void Slot5C();
-
-virtual void Slot60();
-
-virtual void Slot64();
-
-virtual void Slot68();
-
-virtual void Slot6C();
-
-virtual void Slot70();
-
-virtual void Slot74();
-
-virtual void Slot78();
-
-virtual void Slot7C();
-
-virtual void Slot80();
-
-virtual void Slot84();
-
-virtual void Slot88();
-
-virtual void Slot8C();
-
-virtual void Slot90();
-
-virtual void Slot94();
-
-virtual void Slot98();
-
-virtual void Slot9C();
-
-virtual void SlotA0();
-
-virtual void SlotA4();
-
-virtual void SlotA8();
-
-virtual void SlotAC();
-
-    virtual void Apply(Result*);
-
-    void FUN_00ccc980(ExtendedMeshInput*);
-
-};
-void* __cdecl NiMalloc(unsigned);
-struct FUN_00ccea00Block
-{
-    __m128 m_v0;
-    __m128 m_v1;
-    __m128 m_v2;
-    __m128 m_v3;
-};
-struct FUN_00ccea00Inner
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    FUN_00ccea00Block m_20;
-};
-struct FUN_00ccea00Out
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    FUN_00ccea00Block m_10;
-};
-extern FUN_00ccea00Block DAT_01268370;
-struct FUN_00ccea00Holder
-{
-    int unk00;
-    int unk04;
-    FUN_00ccea00Inner* m_08;
-
-    void FUN_00c9fb70(FUN_00ccea00Out* out);
-    void FUN_00ccea00(FUN_00ccea00Out* out);
 };
 
 struct ThreadBlock {
@@ -2729,14 +1731,6 @@ public:
         heap->Release(memory,motion->allocatedBytes);
     }
 };
-struct MotionScale {int unk00,unk04,unk08,unk0c;float factor;};
-class MotionOwner {
-public:
-    int unk00;
-    FUN_00d4edc0* motion;
-    void ReleaseObject(FUN_00d4edc0* output,MotionScale* scale);
-    void FUN_00cc51e0(FUN_00d4edc0* output,MotionScale* scale);
-};
 
 extern "C" __m128 _mm_load_ss(const float*);
 struct BlockAllocator {
@@ -2913,13 +1907,6 @@ void CloneOwner513::FUN_00cc7600(FUN_00d4fe80* output_, CloneData513* data_)
 extern "C" __m128 _mm_load_ss(float const*_A);
 
 
-struct S00cc96b0_ScaleObject {
-    int unk00, unk04, unk08, unk0c;
-    int unk10, unk14, unk18, unk1c;
-    __m128 vector20;
-    __m128 vector30;
-};
-
 __forceinline void scale(__m128& v, float f)
 {
     __m128 q = _mm_load_ss(&f);
@@ -2938,55 +1925,6 @@ struct RefObjStandIn
     void DecRefCount() { if (InterlockedDecrement(&m_uiRefCount) == 0) DeleteThis(); }
 };
 
-struct QuadHolder
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    __m128 m_vComponents;
-};
-
-struct ScaleArg
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    float unk10;
-};
-
-struct TargetArg
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    NiPointer<RefObjStandIn> unk14;
-};
-
-class ScaledNode
-{
-public:
-    virtual void v00(), v04(), v08(), v0c(), v10(), v14(), v18(), v1c();
-    virtual void v20(), v24(), v28(), v2c(), v30(), v34(), v38(), v3c();
-    virtual void v40(), v44(), v48(), v4c(), v50(), v54(), v58(), v5c();
-    virtual void v60(), v64(), v68(), v6c(), v70(), v74(), v78(), v7c();
-    virtual void v80(), v84(), v88(), v8c(), v90(), v94(), v98(), v9c();
-    virtual void va0(), va4(), va8(), vac(), vb0();
-    virtual QuadHolder* vb4(bool* pbFlag);
-
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    NiPointer<RefObjStandIn> unk14;
-
-    void FUN_00c84df0(TargetArg* pkTarget, ScaleArg* pkArg);
-    void FUN_00ccbf00(TargetArg* pkTarget, ScaleArg* pkArg);
-};
-
 extern "C" {
 __m128 _mm_sub_ss(__m128,__m128);
 __m128 _mm_load_ss(const float*);
@@ -2995,7 +1933,6 @@ void _ReadBarrier();
 void _ReadWriteBarrier();
 }
 struct Motion;
-struct FUN_00c6cba0_class { void FUN_00c6cba0(); };
 struct MotionVtable {
 void* slot00;
 void* slot04;
@@ -3377,8 +2314,6 @@ extern "C" __m128 _mm_sub_ss(__m128 _A, __m128 _B);
 
 
 
-extern float DAT_011b0140;
-extern float DAT_01267bbc;
 extern float DAT_01011d78;
 extern __m128 DAT_010c7160;
 
@@ -3418,8 +2353,6 @@ struct S00cd3fb0_MotionParams {
     float unk6c;
     S00cd3fb0_hkVector4 m_v70;
 };
-
-extern void __cdecl IntegrateMotion(S00cd3fb0_MotionParams* params, S00cd3fb0_hkVector4* velocity);
 
 class S00cd3fb0_MotionObject;
 struct S00cd3fb0_MotionVtable {
@@ -3462,10 +2395,6 @@ struct S00cd3fb0_MotionVtable {
     void* slot90;
     S00cd3fb0_MotionTransform* (__thiscall *GetResult)(S00cd3fb0_MotionObject*);
 };
-struct S00cd3fb0_FUN_00c70550_class { float FUN_00c70550(); };
-struct S00cd3fb0_FUN_00c6cba0_class { void FUN_00c6cba0(); };
-struct S00cd3fb0_FUN_00c6e2e0_cls { void FUN_00c6e2e0(); };
-struct S00cd3fb0_FUN_00c6e300_class { void SubtractVectors(__m128*); };
 extern void __cdecl FUN_00d6aef0(S00cd3fb0_MotionParams*, S00cd3fb0_hkVector4*);
 
 class S00cd3fb0_MotionObject {
@@ -3858,13 +2787,6 @@ public:
     void Reset();
     void Finish();
     void GetAudioPosition(S00cd3fb0_hkVector4* out);
-};
-
-struct S00cd3fb0_MotionContext {
-    unsigned int unk00;
-    unsigned int unk04;
-    float m_vScale;
-    void FUN_00cd3fb0(S00cd3fb0_MotionObject* object);
 };
 
 struct S00cd3fb0_MotionScalarLane { __m128 value; __forceinline S00cd3fb0_MotionScalarLane(float v) { value = _mm_load_ss(&v); } __forceinline S00cd3fb0_MotionScalarLane(S00cd3fb0_RealValue v) { value=_mm_load_ss(&v.value); } __forceinline __m128 broadcast() const { return _mm_shuffle_ps(value,value,0); } };
@@ -4290,10 +3212,7 @@ struct MotionController {
     const void* FUN_00c89720();
     void SubtractVectors(__m128* result);
 };
-extern float DAT_01267e30;
 extern float DAT_01011d78;
-extern float DAT_01017718;
-extern float DAT_01016248;
 void __cdecl FUN_00458620(__m128* result, const __m128* vector);
 
 union __declspec(align(16)) GsVec4 { __m128 v; float f[4]; char c[16]; };
@@ -4455,8 +3374,6 @@ struct NTransform {
 };
 struct NativeBool {char value;NativeBool(){}NativeBool(bool a):value(a){}operator bool() const {return value!=0;}NativeBool& operator=(bool a){value=a;return *this;}};
 
-extern "C" ::__m128 _mm_cmple_ps(::__m128,::__m128);
-extern "C" int _mm_movemask_ps(::__m128);
 struct NativePose {
     void* skeleton;NativeArray<NTransform> locals,transforms;NativeArray<unsigned> flags;
     bool modelSync,localSync;
@@ -4467,16 +3384,6 @@ struct NativePose {
         return FUN_00cda180(i);
     }
 };
-struct NativeInput {
-    NTransform desired;
-    NTransform world;
-    bool enabled;
-    void* query;
-    float blend, rise, fall, speed0, speed1, decay;
-    unsigned filter;
-    bool useFilter;
-};
-struct NativeOutput { float error; bool active; };
 struct NativeSetup {
     short bone0,bone1,bone2,twist0,twist1;
     NVector axis;
@@ -4487,29 +3394,6 @@ struct NativeSetup {
     NativeSetup() {FUN_00c74ed0();}
     void FUN_00c74ed0();
 };
-NativeBool FUN_00cdbae0(const NativeSetup&,NativePose&);
-struct NativeSettings {
-    void* skeleton;
-    short bone0,bone1,bone2;
-    NVector axis,localPoint,direction,plane;
-    float offset,minDistance,maxDistance,lowerLimit,upperLimit,gain,limit,unk7c,unk80;
-    bool lock;
-
-};
-struct NativeSolver {
-    int unk00,unk04,unk08,unk0c;
-    NativeSettings settings;
-    float weight,correction;
-    NVector oldNormal;
-    float previous;
-    NativeBool cached;
-    NVector cachePoint,cacheTarget,drift;
-    bool RayCast(const NativeInput&,const NVector&,const NVector&,float&,NVector&) const;
-    bool FUN_00cd8a50(const NativeInput&,const NVector&,const NVector&,NVector&,NVector&) const;
-};
-
-extern const float  DAT_01017d00;
-extern const ::__m128 DAT_01017d10;
 
 static __forceinline ::__m128 rawDot(::__m128 a,::__m128 b) {
     ::__m128 p=_mm_mul_ps(a,b);
@@ -4517,9 +3401,6 @@ static __forceinline ::__m128 rawDot(::__m128 a,::__m128 b) {
     return _mm_add_ss(_mm_shuffle_ps(p,p,0xaa),y);
 }
 extern "C" ::__m128 _mm_rsqrt_ps(::__m128);
-extern "C" ::__m128 _mm_sqrt_ps(::__m128);
-extern "C" ::__m128 _mm_cmpgt_ps(::__m128,::__m128);
-extern "C" ::__m128 _mm_cmplt_ps(::__m128,::__m128);
 static const ::__m128 quaternionUnit={{0.0f,0.0f,0.0f,1.0f}};
 static const ::__m128 quaternionOne={{1.0f,1.0f,1.0f,1.0f}};
 static const ::__m128 quaternionHalf={{0.5f,0.5f,0.5f,0.5f}};
@@ -4546,11 +3427,9 @@ void _mm_store_ss(float*,::__m128);
 }
 extern "C" ::__m128 _mm_set_ss(float);
 extern "C" ::__m128 _mm_set_ps1(float);
-extern "C" DWORD DAT_0126835c;
 extern "C" unsigned __int64 __cdecl __rdtsc(void);
 extern "C" void _ReadWriteBarrier(void);
 extern "C" void _ReadBarrier(void);
-extern "C" void _WriteBarrier(void);
 extern "C" double __cdecl sqrt(double);
 
 extern "C" const ::__m128 DAT_010c71b0; // (0,0,0,1)
@@ -4585,14 +3464,6 @@ struct ProfRec2
     DWORD unk08;
     const char* m_pName2;
 __forceinline void setTime() { TimerLayer1(m_iTick); }
-};
-
-struct ProfBuf
-{
-    DWORD unk00;
-    char* m_pCur;
-    DWORD unk08;
-    char* m_pRecordEnd;
 };
 
 struct hkQsTransform;
@@ -4631,8 +3502,6 @@ __forceinline void copyRotation(const hkQuaternion& q) {*(QuadWords*)&m_vec=*(co
     void FUN_00c74ac0(const hkQuaternion& q0, const hkQuaternion& q1);
     void FUN_00cb2850(const hkQuaternion& q0, const hkQuaternion& q1, float t);
 };
-
-float __cdecl ClampedAcos(float x);
 
 struct VectorComponentValue
 {
@@ -5026,32 +3895,6 @@ struct hkaPoseTyped
     }
 };
 
-struct hkaTwoJointsIkSetup
-{
-    short m_sFirstJointIndex;
-    short m_sSecondJointIndex;
-    short m_sThirdJointIndex;
-    short m_sFourthJointIndex;
-    short m_sFifthJointIndex;
-    short unk0A;
-    int unk0C;
-    IkVector4 m_vHingeAxisLS;
-    float m_fFirstIkParameter;
-    float m_fSecondIkParameter;
-    float m_fThirdIkParameter;
-    float m_fFourthIkParameter;
-    float m_fFifthIkParameter;
-    int unk34;
-    int unk38;
-    int unk3C;
-    IkVector4 m_vFirstIkVector;
-    hkQuaternion m_qFirstIkRotation;
-    IkVector4 m_vSecondIkVector;
-    hkQuaternion m_qSecondIkRotation;
-    bool m_bFirstIkOption;
-    bool m_bSecondIkOption;
-};
-
 struct hkBool
 {
     char m_cBooleanValue;
@@ -5059,6 +3902,4 @@ struct hkBool
 };
 
 
-extern "C" double __cdecl acos(double);
 extern "C" double __cdecl fabs(double);
-extern "C" const float DAT_0102b3c8;

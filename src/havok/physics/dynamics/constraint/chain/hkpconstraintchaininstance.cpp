@@ -8,10 +8,6 @@ struct FUN_00c91120
 {
     void ExecutePendingOperations();
 };
-struct FUN_00c91140
-{
-    void ExecutePendingOperationQueues();
-};
 struct FUN_00c97510
 {
     void ProcessPointer(void*);
@@ -278,13 +274,6 @@ struct FnvCpu_FUN_00dd0630_CpuAllocatorHolder
     FnvCpu_FUN_00dd0630_CpuAllocator* allocator;
 };
 FnvCpu_FUN_00dd0630_CpuAllocatorHolder* __cdecl FUN_00c85750();
-struct FnvCpu_FUN_00dd0630_CpuObject
-{
-    unsigned int unk00;
-    unsigned short size;
-    void FUN_00dd05c0();
-    FnvCpu_FUN_00dd0630_CpuObject* Destroy(unsigned int flags);
-};
 }  // namespace fnv_00dd0630
 
 namespace fnv_00dd0530 {

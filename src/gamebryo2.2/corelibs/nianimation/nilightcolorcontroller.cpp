@@ -28,9 +28,6 @@ const char* __thiscall FUN_00a4d1b0_shell::GetLightTypeName()
     return result;
 }
 
-struct GlobalObjectO2_00a7b610;
-extern GlobalObjectO2_00a7b610 g_011f3fa8;
-
 struct BSFadeNode
 {
     static void* __cdecl operator new(unsigned int);
@@ -135,21 +132,7 @@ bool __stdcall FUN_00a4d210(NiObjectNET* pkTarget)
     return false;
 }
 
-void __cdecl _delete(void*, unsigned int);
-struct B462
-{
-    void __thiscall FUN_00a6d290();
-};
-struct R462
-{
-    virtual void f0();
-    virtual void f1();
-};
 extern "C" __declspec(dllimport) long __stdcall InterlockedDecrement(long volatile*);
-struct H462
-{
-    void* __thiscall DestroyAndFree(unsigned int);
-};
 
 struct CloningProcess
 {
@@ -183,16 +166,6 @@ void* __thiscall CloneHost::FUN_00a4d4b0(CloningProcess& kCloning)
     pkObject->m_uiObjectFlags = m_uiObjectFlags;
     return pkObject;
 }
-
-struct StrArr
-{
-    unsigned short m_uiItemCount;
-    unsigned short m_iElementCount;
-    void SetSize(unsigned int);
-    void SetAt(unsigned int, char*&);
-};
-void __stdcall FUN_00a57d10(StrArr*);
-char* __cdecl FUN_00a7d330(GlobalObjectO2_00a7b610*);
 
 struct NiBinaryStream
 {
@@ -394,18 +367,6 @@ void __thiscall Host::LoadActiveObject(VersionedDataBlock* stream)
 
 extern float DAT_01096324;
 extern NiColor DAT_011f4998;
-extern FakeRTTI g_011f4a28;
-
-struct NiControllerOutput_00a4d240
-{
-    void __thiscall FUN_004bc280(const NiPoint3& value);
-    void __thiscall SetEffectColor(const NiColor& value);
-};
-
-struct DynCastObj : NiObject
-{
-    NiControllerOutput_00a4d240* __thiscall DynamicCast(FakeRTTI* type);
-};
 
 struct Controller34
 {

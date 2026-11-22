@@ -2,80 +2,7 @@
 // src/havok/common/base/thread/jobqueue/hkjobqueue.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/common/base/thread/jobqueue/hkjobqueue.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-struct FUNObj
-{
-    struct Entry
-    {
-        int first;
-        int second;
-        int third;
-        int fourth;
-    };
-    Entry entries[15];
-    void SetEntry(int index, int first, int second, int third, int fourth);
-};
-
 void FUN_00d043c0(void*, int);
-
-struct UnsignedShortCountBlock
-{
-    unsigned short unk00;
-    unsigned short unk02;
-    unsigned short unk04;
-    unsigned short unk06;
-    unsigned short unk08;
-    unsigned short unk0A;
-    unsigned short unk0C;
-    unsigned short unk0E;
-    unsigned short unk10;
-    unsigned short unk12;
-    unsigned short unk14;
-    unsigned short unk16;
-    unsigned short unk18;
-    unsigned short unk1A;
-    unsigned short unk1C;
-    unsigned short unk1E;
-    unsigned short unk20;
-    unsigned short counts[5];
-};
-
-struct ItemManager
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5C;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6C;
-    int unk70;
-    int unk74;
-    void* values[5];
-    int count;
-    void ProcessPendingEntries(UnsignedShortCountBlock* refs);
-    void RemoveItemReference(int index, UnsignedShortCountBlock* refs);
-};
 
 struct Bucket
 {
@@ -237,25 +164,6 @@ struct ItemPool
     void Insert2(const Item& item);
 };
 
-struct PoolSet
-{
-    char m_auiShapeKeys[0x2c];
-    ItemPool m_pools[1];
-};
-
-struct Mgr
-{
-    int GetIndex(const Item& item);
-    void Notify(int idx, PoolSet* set);
-    void InsertItemAndNotify(PoolSet* set, const Item& item, int flag);
-};
-
-struct Obj
-{
-    int Forward3(int a, int b, int c);
-    int ForwardWithZero(int a, int b);
-};
-
 struct S_00d056a0_Allocator
 {
     virtual void v0();
@@ -284,13 +192,6 @@ struct S_00d056a0_Elem
     int unk20, unk24, unk28, unk2c, unk30, unk34, unk38, unk3c;
     int unk40, unk44, unk48, unk4c, unk50, unk54, unk58, unk5c;
     int unk60, unk64, unk68, unk6c, unk70, unk74, unk78, unk7c;
-};
-
-struct S_00d056a0
-{
-    S_00d056a0_Elem* m_data;
-    int m_iElementCount;
-    void FUN_00d056a0();
 };
 
 struct D057A0Element
@@ -407,15 +308,6 @@ int __cdecl FUN_00d043c0(CallTarget* apTarget, int aiValue)
 
 void __cdecl FUN_00d043c0(int value, int flag);
 
-struct FUN_00d04450_cls
-{
-    int unk00;
-
-    void* FUN_00d04400(void* out);
-    void FUN_00d04420(void* p);
-    void SetValue(int a1);
-};
-
 // ---------------------------------------------------------------------------
 // ReleasePendingCounts - releases the pending semaphore counts of one object.
 //
@@ -432,141 +324,7 @@ struct FnvSemaphore;
 // Releases a semaphore count times.
 void FUN_00d043c0(FnvSemaphore* pSemaphore, int count);
 
-// The block of pending counters handed to ReleasePendingCounts.
-struct FnvReleaseCounts
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    unsigned short unk20;
-    unsigned short pending[8];  // 0x22
-};
-
-// The object that owns the semaphores.
-struct FnvReleaseSet
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5C;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6C;
-    int unk70;
-    int unk74;
-    FnvSemaphore* pSemaphores[5];  // 0x78
-    int count;                     // 0x8c
-
-    void ReleasePendingCounts(FnvReleaseCounts* pCounts);
-};
-
-struct SpawnedEntry
-{
-    unsigned char m_key1;
-    unsigned char unk01;
-    unsigned char unk02;
-    unsigned char unk03;
-    unsigned char m_key2;
-    unsigned char m_uiFilterValue;
-    unsigned char unk06;
-    unsigned char unk07;
-};
-
-class FUN_00d04890_cls
-{
-  public:
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0c;
-    unsigned int unk10;
-    unsigned int unk14;
-    unsigned int unk18;
-    unsigned int unk1c;
-    unsigned int unk20;
-    unsigned int unk24;
-    unsigned int unk28;
-    unsigned int unk2c;
-    int m_30;
-    unsigned int unk34;
-    unsigned int unk38;
-    unsigned int unk3c;
-    unsigned int unk40;
-    unsigned int unk44;
-    int m_48;
-
-    int LookupSpawnedEntry(const unsigned char* p);
-};
-
 void __cdecl FUN_00d043c0(int value, int flag);
-
-struct FUN_00d048e0_cls
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int m_34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int m_4c;
-    int m_50;
-    int unk54;
-    int unk58;
-    int unk5c;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6c;
-    int unk70;
-    int unk74;
-    int m_78;
-    int unk7c;
-    int unk80;
-    int unk84;
-    int unk88;
-    int m_8c;
-
-    void ProcessPendingEntries(char* tbl);
-};
 
 struct __declspec(align(16)) D049D0LockInfo
 {
@@ -664,35 +422,6 @@ struct __declspec(align(16)) D049D0LockInfo
     int unk16C;
 };
 
-struct D049D0Simulation
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int m_enabled;
-};
-
-struct D049D0World
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    D049D0Simulation* m_pSimulation;
-
-    void* lock(D049D0LockInfo* info);
-    void disable(void* lockHandle);
-    void unlock(void* lockHandle);
-
-    void SetSimulationEnabled(int enabled);
-};
-
 extern "C" void __cdecl FUN_00cb1260(void* dst, const void* src, int nbytes);
 
 struct __declspec(align(16)) D04B90Object
@@ -732,29 +461,6 @@ struct __declspec(align(16)) D04B90Object
     int unk7C;
 };
 
-struct D04B90World
-{
-    void addCopy(D04B90Object* copy, void* userData);
-    void AddObjectCopy(const D04B90Object* object, void* userData);
-};
-
-void __cdecl GetProcessorCount(unsigned int* out);
-
-class FUN_00d05450_cls
-{
-  public:
-    unsigned int m_00;
-    unsigned char m_04;
-    unsigned char unk05;
-    unsigned short unk06;
-    unsigned int m_08;
-    unsigned int m_0c;
-    unsigned int m_10;
-    unsigned int m_14;
-
-    FUN_00d05450_cls* Init();
-};
-
 // ---------------------------------------------------------------------------
 // InitHookTable
 //
@@ -768,61 +474,6 @@ class FUN_00d05450_cls
 // ---------------------------------------------------------------------------
 
 typedef void(__cdecl* HookFn)(void*, void*);
-
-// The 16 byte descriptor that SetEntry stores into the object's table.
-struct HookInfo
-{
-    HookFn* m_ppData;   // +0x00  pointer to the handler array
-    int m_uiItemCount;  // +0x04  number of entries in that array
-    HookFn m_f1;        // +0x08  first callback
-    HookFn m_f2;        // +0x0c  second callback
-};
-
-// Stand-in for the object the argument points at.  Only +0x60 is touched by
-// this function; the table that SetEntry writes into starts at +0xf0.
-struct TargetObj
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5c;
-    int unk60;
-    void __thiscall QueueOperation(int a, int b, int c);
-    void __thiscall SetEntry(int index, HookInfo info);
-};
-
-// The global handler array (17 entries) and the callbacks that go into it.
-extern HookFn g_hookTable[17];
-
-extern void __cdecl hookDefault_00d01e50(void*, void*);
-extern void __cdecl hookA_00d96600(void*, void*);
-extern void __cdecl hookB_00d969e0(void*, void*);
-extern void __cdecl hookC_00d967a0(void*, void*);
-extern void __cdecl hookD_00d968e0(void*, void*);
-
-// Two more registration helpers, both cdecl with one pointer argument.
-void __cdecl FUN_00da3400(TargetObj* p);
-void __cdecl FUN_00da3480(TargetObj* p);
 
 struct D04A20Allocator;
 
@@ -870,118 +521,6 @@ struct D04A20OperationArray
             ResizeAudioStream(&alloc, this, sizeof(D04A20Operation));
         return m_data[m_iElementCount++];
     }
-};
-
-struct D04A20World
-{
-    int unk000;
-    int unk004;
-    int unk008;
-    int unk00C;
-    int unk010;
-    int unk014;
-    int unk018;
-    int unk01C;
-    int unk020;
-    int unk024;
-    int unk028;
-    int unk02C;
-    int unk030;
-    int unk034;
-    int unk038;
-    int unk03C;
-    int unk040;
-    int unk044;
-    int unk048;
-    int unk04C;
-    int unk050;
-    int unk054;
-    int unk058;
-    int unk05C;
-    int unk060;
-    int unk064;
-    int unk068;
-    int unk06C;
-    int unk070;
-    int unk074;
-    int unk078;
-    int unk07C;
-    int unk080;
-    int unk084;
-    int unk088;
-    int unk08C;
-    int unk090;
-    int unk094;
-    int unk098;
-    int unk09C;
-    int unk0A0;
-    int unk0A4;
-    int unk0A8;
-    int unk0AC;
-    int unk0B0;
-    int unk0B4;
-    int unk0B8;
-    int unk0BC;
-    int unk0C0;
-    int unk0C4;
-    int unk0C8;
-    int unk0CC;
-    int unk0D0;
-    int unk0D4;
-    int unk0D8;
-    int unk0DC;
-    int unk0E0;
-    int unk0E4;
-    int unk0E8;
-    int unk0EC;
-    int unk0F0;
-    int unk0F4;
-    int unk0F8;
-    int unk0FC;
-    int unk100;
-    int unk104;
-    int unk108;
-    int unk10C;
-    int unk110;
-    int unk114;
-    int unk118;
-    int unk11C;
-    int unk120;
-    int unk124;
-    int unk128;
-    int unk12C;
-    int unk130;
-    int unk134;
-    int unk138;
-    int unk13C;
-    int unk140;
-    int unk144;
-    int unk148;
-    int unk14C;
-    int unk150;
-    int unk154;
-    int unk158;
-    int unk15C;
-    int unk160;
-    int unk164;
-    int unk168;
-    int unk16C;
-    int unk170;
-    int unk174;
-    int unk178;
-    int unk17C;
-    int unk180;
-    int unk184;
-    int unk188;
-    int unk18C;
-    int unk190;
-    int unk194;
-    int unk198;
-    int unk19C;
-    D04A20OperationArray m_pPendingOperations;
-
-    void processPendingOperations();
-    void QueueOperation(void* object, bool flag, int data);
 };
 
 extern "C" __declspec(dllimport) unsigned long __stdcall TlsSetValue(unsigned long index, void* value);
@@ -1260,72 +799,13 @@ void hkQueue128::FUN_00d056d0(int aiMinCapacity)
 }
 
 
-extern "C" void _ReadWriteBarrier(void);
-extern "C" unsigned __int64 __rdtsc(void);
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long);
-extern "C" unsigned long _DAT_0126835c;
-extern "C" const char str_010ccd90[];
 extern "C" const char str_010c41f8[];
-
-struct LunaOwner : Owner
-{
-    int LookupSpawnedEntry(Item* item);
-    int FUN_00d05840(int index, Registry* registry, int param_4, int param_3);
-    int ProcessCallback(int param_2, int param_3, int param_4);
-};
-
-struct LunaTrace
-{
-    int unk00;
-    unsigned int* current;
-    int unk08;
-    unsigned int* end;
-};
-
-struct LunaCallbackItem
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    Item payload;
-};
 
 extern unsigned long DAT_0126835c;
 extern "C" void __cdecl FUN_00cb1260(void* dst, const void* src, int nbytes);
 
-struct TimerEntry
-{
-    const char* m_name;
-    unsigned int m_uiCommandId;
-    int m_auiShapeKeys;
-};
-
-struct MonitorStream
-{
-    int unk00;
-    char* m_cur;
-    int unk08;
-    char* m_kRayEnd;
-};
-
-struct ArrayOfJobs
-{
-    void** m_data;
-    int m_iElementCount;
-    int m_iCapacityState;
-};
-
-struct FUN_00d04bd0_cls : Owner
-{
-    int LookupSpawnedEntry(void* p);
-    void RemoveItemReference(int index, Registry* set);
-    void AddJobBatch(ArrayOfJobs* jobs, int priority);
-};
-
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long index);
-
-extern unsigned long hkMonitorStreamTls;
 
 struct S_00d05020_Job
 {
@@ -1403,64 +883,11 @@ struct S_00d05020_Queue
     }
 };
 
-struct S_00d05020_DynamicData
-{
-    short m_sQueueCounts[8];
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    S_00d05020_Queue m_kQueues[8];
-};
-
-struct S_00d05020_JobQueue
-{
-    S_00d05020_DynamicData* FUN_00d04400(char* dynamicDataStorage);
-    int LookupSpawnedEntry(const S_00d05020_Job& job);
-    int FUN_00d05840(int queueIndexOfNewJob, S_00d05020_DynamicData* data, int waitStatus, S_00d05020_Job& jobOut);
-    int FUN_00d05020(int originalJobType, int priority, S_00d05020_Job& jobInOut, int waitStatus);
-};
-
 namespace fnv_00df8570 {
 typedef unsigned long DWORD;
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(DWORD);
 extern unsigned int DAT_0126835c;
-extern const char str_010dba98[];
 extern const char str_010c41f8[];
-struct S00df8570_Trace
-{
-    int status;
-    unsigned int* next;
-    int reserved;
-    unsigned int* end;
-};
-struct S00df8570_Input
-{
-    int m00;
-    int m04;
-    int m08;
-    int m0c;
-    int m10;
-    int* outCount;
-    int m18;
-    int m1c;
-    int m20;
-    int m24;
-    int m28;
-    int m2c;
-    int m30;
-    int m34;
-    int entryCount;
-    int m3c;
-    int m40;
-    int m44;
-    int m48;
-    int m4c;
-    int m50;
-};
 struct S00df8570_Rec
 {
     unsigned char kind;
@@ -1509,19 +936,6 @@ struct S00df8570_Rec
         stride = 0x70;
     }
 };
-struct S00df8570_Result
-{
-    void* values[92];
-};
-struct S00df8570_Enc
-{
-    int FUN_00d04400(S00df8570_Result* result);
-    void InsertItemAndNotify(int output, S00df8570_Rec* record, int zero);
-    void FUN_00d04420(int output);
-    int ProcessCallback(S00df8570_Input* first, S00df8570_Input* second, int zero);
-};
-extern "C" void __cdecl InitSplitChunks(int resource, int total, int options, int base, int count,
-                                        S00df8570_Rec* records);
 }  // namespace fnv_00df8570
 
 namespace fnv_00d04b50 {
@@ -1577,40 +991,6 @@ struct S_00d055c0_Router
 };
 S_00d055c0_Router* FUN_00c85750() throw();
 
-struct S_00d055c0_Elem
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    void FUN_00d056a0();
-};
-struct S_00d055c0_Pool
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    S_00d055c0_Elem e[16];
-    int unk16c;
-};
-struct S_00d055c0_Handle
-{
-    void FUN_00d04370();
-};
-struct S_00d055c0_Cont
-{
-    int unk00;
-    void ClearLists();
-};
 struct S_00d055c0_Arr12
 {
     void* m_data;
@@ -1628,150 +1008,9 @@ struct S_00d055c0_Arr12
 };
 extern void(__stdcall* DAT_00fdf058)(void*);
 
-struct S_00d055c0_Obj
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    S_00d055c0_Pool* unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    S_00d055c0_Cont unk58;
-    int unk5c;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6c;
-    int unk70;
-    unsigned char unk74;
-    S_00d055c0_Handle* unk78[5];
-    int unk8c;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9c;
-    int unka0;
-    int unka4;
-    int unka8;
-    int unkac;
-    int unkb0;
-    int unkb4;
-    int unkb8;
-    int unkbc;
-    int unkc0;
-    int unkc4;
-    int unkc8;
-    int unkcc;
-    int unkd0;
-    int unkd4;
-    int unkd8;
-    int unkdc;
-    int unke0;
-    int unke4;
-    int unke8;
-    int unkec;
-    int unkf0;
-    int unkf4;
-    int unkf8;
-    int unkfc;
-    int unk100;
-    int unk104;
-    int unk108;
-    int unk10c;
-    int unk110;
-    int unk114;
-    int unk118;
-    int unk11c;
-    int unk120;
-    int unk124;
-    int unk128;
-    int unk12c;
-    int unk130;
-    int unk134;
-    int unk138;
-    int unk13c;
-    int unk140;
-    int unk144;
-    int unk148;
-    int unk14c;
-    int unk150;
-    int unk154;
-    int unk158;
-    int unk15c;
-    int unk160;
-    int unk164;
-    int unk168;
-    int unk16c;
-    int unk170;
-    int unk174;
-    int unk178;
-    int unk17c;
-    int unk180;
-    int unk184;
-    int unk188;
-    int unk18c;
-    int unk190;
-    int unk194;
-    int unk198;
-    int unk19c;
-    S_00d055c0_Arr12 unk1a0;
-    void FUN_00d055c0();
-};
-
 }  // namespace fnv_00d055c0
 
 namespace fnv_00d889f0 {
-struct ScratchBlock
-{
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0C;
-    unsigned int unk10;
-    unsigned int unk14;
-    unsigned int unk18;
-    unsigned int unk1C;
-    unsigned int unk20;
-    unsigned int unk24;
-    unsigned int unk28;
-    unsigned int unk2C;
-    unsigned int unk30;
-    unsigned int unk34;
-    unsigned int unk38;
-    unsigned int unk3C;
-    unsigned int unk40;
-    unsigned int unk44;
-    unsigned int unk48;
-    unsigned int unk4C;
-    unsigned int unk50;
-    unsigned int unk54;
-    unsigned int unk58;
-    unsigned int unk5C;
-    unsigned int unk60;
-    unsigned int unk64;
-    unsigned int unk68;
-    unsigned int unk6C;
-    unsigned int unk70;
-    unsigned int unk74;
-    unsigned int unk78;
-    unsigned short unk7C;
-};
 
 struct SlotAllocator
 {
@@ -1791,7 +1030,6 @@ struct AllocHolder
     SlotAllocator* m_pAllocator;
 };
 
-void* FUN_00d883c0(void* a1, unsigned int a2, unsigned int a3, ScratchBlock* a4);
 AllocHolder* FUN_00c85750();
 
 }  // namespace fnv_00d889f0
@@ -1800,51 +1038,6 @@ extern unsigned long DAT_0126835c;
 
 static const char kTraceFinishJob[] = "TtfinishJob";
 static const char kTraceEnd[] = "Et";
-
-struct TraceRecord
-{
-    const char* m_pName;
-    unsigned long m_iTick;
-    unsigned long unk08;
-};
-
-struct TraceBuffer
-{
-    unsigned long unk00;
-    TraceRecord* m_pCur;
-    unsigned long unk08;
-    TraceRecord* m_pRecordEnd;
-};
-
-struct TraceArg
-{
-    unsigned char unk00;
-    unsigned char m_uiEdgeIndex;
-    unsigned short unk02;
-    unsigned long unk04;
-};
-
-struct JobOut
-{
-    int m_iResultCode;
-    int unk04;
-    int unk08;
-    int unk0C;
-};
-
-class Worker
-{
-  public:
-    int unk00, unk04, unk08, unk0C, unk10, unk14, unk18, unk1C;
-    int(__cdecl* m_pfn20)(Worker*, PoolSet*, TraceArg*, int*);
-
-    PoolSet* GetNode(RequestContext* ctx);
-    int FindIndex(Item* item);
-    void Sync(int index, PoolSet* set);
-    void Release(PoolSet* set);
-
-    void FUN_00d04d80(TraceArg* p, int flag);
-};
 
 struct __declspec(align(16)) DispatchJob
 {
@@ -1884,42 +1077,6 @@ struct __declspec(align(16)) DispatchJob
     int unk7C;
 };
 
-struct TimerSamples
-{
-    volatile unsigned int cloth;
-    volatile unsigned int pathfinding;
-    volatile unsigned int physicsSecondary;
-    volatile unsigned int characterProxy;
-    volatile unsigned int raycast;
-    volatile unsigned int userJob;
-    volatile unsigned int behavior;
-    volatile unsigned int unknownJob;
-    volatile unsigned int collision;
-    volatile unsigned int end;
-    volatile unsigned int physics;
-    volatile unsigned int animation;
-};
-
-struct JobFetchView
-{
-    int ForwardWithZero(int job, int flags);
-};
-
-struct Dispatcher : FUN_00d05490
-{
-    int FUN_00d051b0();
-};
-
 extern "C" __declspec(dllimport) void __stdcall EnterCriticalSection(void* section);
 
-struct QueueLockView : Owner
-{
-    Registry* FUN_00d04400(RequestContext* storage);
-};
-
 extern "C" __declspec(dllimport) void __stdcall LeaveCriticalSection(void* section);
-
-struct CriticalSectionOwner
-{
-    void FUN_00d04420(Registry* data);
-};

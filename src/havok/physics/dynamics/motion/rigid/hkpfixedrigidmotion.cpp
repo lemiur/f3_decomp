@@ -43,12 +43,3 @@ void C00d1e150::FUN_00d1e150(int arg)
 {}
 
 #include <xmmintrin.h>
-struct FUN_00c86660_Obj
-{
-    void FUN_00c86660(int* a);
-};
-
-struct FUN_00d1e190_Obj
-{
-    void FUN_00d1e190(int* motion);
-};

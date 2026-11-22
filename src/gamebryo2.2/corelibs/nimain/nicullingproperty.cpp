@@ -3,7 +3,6 @@
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
 struct GlobalObjectO2_00a7b610;
-extern GlobalObjectO2_00a7b610 g_011f5d20;
 
 struct BSFadeNode
 {
@@ -104,8 +103,6 @@ void __thiscall NiCullingProperty::FUN_00a8f650(NiStream& stream)
 }
 }  // namespace fnv_00a8f650
 
-extern void* __cdecl FUN_00aa13e0(unsigned int);
-extern "C" void __fastcall FUN_00a5c200(void*);
 extern int DAT_0109f68c;
 extern "C" __declspec(dllimport) long __stdcall InterlockedDecrement(volatile long*);
 extern "C" __declspec(dllimport) long __stdcall InterlockedIncrement(volatile long*);

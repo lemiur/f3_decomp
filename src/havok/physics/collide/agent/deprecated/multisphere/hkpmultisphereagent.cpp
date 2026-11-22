@@ -331,25 +331,9 @@ void* FUN_00d44d00(int aiArg1, int aiArg2, int aiArg3, int aiArg4)
     return obj;
 }
 
-struct FnTable
-{
-    void (*m_fn00)();
-    void (*m_fn04)();
-    void (*m_fn08)();
-    void (*m_fn0C)();
-    unsigned char m_flag10;
-    unsigned char m_flag11;
-};
-
-struct RegistryOwner
-{
-    void RegisterTable(FnTable* table, int a, int b);
-};
-
 void FUN_00d44d00();
 void FUN_00d44de0();
 void FUN_00d44e20();
-void FUN_00d44e60();
 void FUN_00d44cc0();
 void FUN_00d449f0();
 void FUN_00d445e0();
@@ -397,20 +381,6 @@ struct AudioHolder
 };
 
 AudioHolder* __cdecl FUN_00c85750() throw();
-extern int DAT_0102e388;
-
-struct FUN_00d450f0_cls
-{
-    int m_vptr00;
-    unsigned short m_uSize;
-    unsigned short m_u06;
-    int unk08;
-    void* m_pData;
-    int m_iArrayLength;
-    unsigned int m_uCapBits;
-
-    FUN_00d450f0_cls* Destroy(unsigned char acFlags);
-};
 
 }  // namespace fnv_00d450f0
 
@@ -866,10 +836,7 @@ void FUN_00d44cc0(int a1, int a2, int a3, int a4)
 }
 
 extern "C" __m128 _mm_xor_ps(__m128 _A, __m128 _B);
-extern "C" void* __cdecl memcpy(void* _Dst, const void* _Src, unsigned int _Size);
 
-extern char DAT_010ce80c;
-extern __m128 DAT_010c44d0;
 extern float DAT_0104da48;
 
 union __declspec(align(16)) S_00d45160_Vec
@@ -923,41 +890,7 @@ struct __declspec(align(16)) S_00d45160_Collector
     unsigned int m_key;
 };
 
-class S_00d45160_Owner
-{
-  public:
-    void Spawn(unsigned int a2, unsigned int a1, S_00d45160_Input* input, S_00d45160_Collector* out,
-               S_00d45160_Collector* opt);
-    void SpawnWithCollectors(unsigned int a1, unsigned int a2, const S_00d45160_Input* a3, unsigned int a4,
-                             unsigned int a5);
-};
-
-extern "C" __m128 _mm_load_ps(const float*);
-struct S00d44fd0_Base
-{
-    void FUN_00d443e0(int a, int b, int c, unsigned char* obj);
-};
-
-struct S00d44fd0_Agent : S00d44fd0_Base
-{
-    void FUN_00d44fd0(int a1, int a2, int a3, unsigned char* obj);
-};
 extern __m128 DAT_010c4c00;
-
-struct S00d44fd0_Nib
-{
-    unsigned char lo : 4;
-    unsigned char hi : 4;
-};
-
-struct S00d44fd0_Cache
-{
-    unsigned short v[4];
-    unsigned char dimA;
-    unsigned char dimB;
-    unsigned char lo : 4;
-    unsigned char hi : 4;
-};
 
 template <class T> inline void S00d44fd0_swap(T& a, T& b)
 {
@@ -988,45 +921,6 @@ struct S00d44fd0_V
     {
         q = _mm_xor_ps(a.q, DAT_010c4c00);
     }
-};
-
-struct S00d44fd0_Vert
-{
-    S00d44fd0_V pos;
-    S00d44fd0_V nrm;
-    int u20;
-    int u24;
-    int u28;
-    int u2c;
-};
-
-class hkpCdPointCollector;
-class Q_Agent
-{
-  public:
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual void v0c();
-    virtual void getPenetrations();
-    virtual void linearCast(const hkpCdBody& a, const hkpCdBody& b, const CollisionAgentContext& input,
-                            hkpCdPointCollector& collector, hkpCdPointCollector* startCollector);
-};
-struct Q_KeyAgentPair
-{
-    unsigned int m_key;
-    Q_Agent* m_pCollisionAgent;
-};
-class Q_MultiSphereAgent
-{
-  public:
-    void* m_vtbl;
-    int unk04;
-    int unk08;
-    Q_KeyAgentPair* m_pAgents;
-    int m_iElementCount;
-    void FUN_00d446f0(const hkpCdBody& bodyA, const hkpCdBody& bodyB, const CollisionAgentContext& input,
-                      hkpCdPointCollector& collector, hkpCdPointCollector* startCollector);
 };
 
 extern float DAT_0104da48;
@@ -1061,7 +955,6 @@ struct Record_d2e9
 
 void __cdecl ProcessMultiSphereCollision(int a1, int a2, Input_d2e9* input, Record_d2e9* rec, Record_d2e9* optRec);
 
-extern "C" void _ReadWriteBarrier();
 struct __declspec(align(16)) FUN_00cd8160 : hkpShape
 {
     float m_fSphereRadius;
@@ -1145,18 +1038,6 @@ struct __declspec(align(16)) S_00d44b00_Tri
     int unka4;
     int unka8;
     int unkac;
-};
-struct S_00d44b00_Mesh
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int count;
-    int unk14;
-    int unk18;
-    int unk1c;
-    S_00d44b00_V4 v0;
 };
 struct S_00d44b00_Entry
 {
@@ -1311,15 +1192,7 @@ struct S_00d44b00_Base
     S_00d44b00_Base(void* c) : unk06(1), unk08(c)
     {}
 };
-extern char DAT_010cf354;
-struct FUN_00d44b00 : S_00d44b00_Base
-{
-    virtual void v0();
-    S_00d44b00_Inplace arr;
-    FUN_00d44b00(const hkpCdBody& src, const hkpCdBody& pb, const S_00d44b00_A& a, void* c);
-};
 
-extern "C" void _mm_store_ps(float* _V, __m128 _A);
 __declspec(align(16)) struct S_V4
 {
     float x, y, z, w;
@@ -1433,8 +1306,6 @@ struct Ctx443
     void* owner;
 };
 struct ChildCall443e0 { virtual void v0(); virtual void v1(); virtual void v2(); virtual void v3(); virtual void v4(Ctx443*, int, int, int); };
-
-struct V3t { float x, y, z; };
 
 void S00d443e0_S_Owner::FUN_00d443e0(S00d443e0_S_Wrap* wrap, int a, int b, int d)
 {

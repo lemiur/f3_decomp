@@ -47,11 +47,6 @@ void __thiscall NiBSPNode::FUN_00a9a840(NiUpdateData& aUpdateData)
 }
 }  // namespace fnv_00a9a840
 
-struct GlobalObjectO2_00a7b610
-{
-};
-extern GlobalObjectO2_00a7b610 g_011f5f54;
-
 struct Unk_00a5e930
 {
     void FUN_00a5e930();
@@ -95,28 +90,6 @@ void NiBSPNode::FUN_00a9a740(NiStream& stream)
     m_pSphere.SaveBinary(stream);
 }
 }  // namespace fnv_00a9a740
-
-struct StrArr
-{
-    unsigned int m_usSize;
-    unsigned int m_usMaxSize;
-    void SetSize(unsigned int);
-    void SetAt(unsigned int, char*&);
-};
-struct FUN_00c51570_Class
-{
-    void* FUN_00a5ea70(void*);
-};
-struct FUN_00a69a60_Owner
-{
-    char* FUN_00a69a60(const char*);
-};
-char* __cdecl _FUN_00a7d330(GlobalObjectO2_00a7b610*);
-
-struct FUN_00a9acf0_shell : NiBSPNode
-{
-    void AppendPlaneNames(StrArr* apViewerStrings);
-};
 
 struct NiStream;
 

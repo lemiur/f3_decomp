@@ -4,7 +4,6 @@
 
 int __cdecl FUN_00cb10d0(const char* s);
 char* __cdecl AllocateWithHeader(void* alloc, int size);
-void __cdecl FUN_00cb1090(char* dst, const char* src);
 
 // @f3 0x00923640 (community match, verified in this file)
 typedef void* (__stdcall *TlsGetter385)(unsigned long index);
@@ -37,8 +36,6 @@ FUN_00cb0a60::FUN_00cb0a60()
 {
     unk00 = g_01268358;
 }
-
-int __cdecl FUN_00c856c0(int, int);
 
 int __cdecl FUN_00cb10d0(const char* s);
 
@@ -93,7 +90,6 @@ extern "C"
 {
     void* __cdecl FUN_00cb10d0(void* p);
     void* __cdecl AllocateWithHeader(void* p, int n);
-    void* __cdecl CopyIfNonEmpty(void* p, void* q, int n);
 }
 
 // Copies up to n2 characters from p1 into a new null-terminated buffer allocated from p3 and returns it.

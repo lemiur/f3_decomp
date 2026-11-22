@@ -64,7 +64,6 @@ struct StrArr
     void SetAt(unsigned int, char*&);
 };
 
-void __stdcall FUN_00a576c0(StrArr*);
 char* __cdecl _FUN_00a7d330(void*);
 
 // @f3 0x00825cd0 (community match, verified in this file)

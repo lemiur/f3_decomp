@@ -9691,8 +9691,6 @@ extern unsigned int DAT_00f4a768;
 extern void* DAT_00e2c4d0;
 namespace f3m_00447020 {
 
-struct Reader447020_Obj;
-
 struct Reader447020
 {
     virtual void vf00();
@@ -14731,12 +14729,6 @@ public:
     int   unk3C;
 };
 
-class ClsHold44b030 {
-public:
-    int unk00;
-    int unk04;
-};
-
 extern ClsChain44b030 DAT_0116d760;
 void __cdecl FUN_007bc5b0(int b, ClsArg44b030* d, ClsArg44b030* d2, int e, ClsPt44b030 pt, ClsMtx44b030 mtx);
 
@@ -16009,7 +16001,6 @@ Entry1118* __cdecl FUN_0044f2a0(Entry1118* first, unsigned short* mask) {
 }   // namespace f3m_0044f2a0
 
 // @f3 0x0044a330 (community match, verified in this file)
-extern double DAT_00dbb288;
 namespace f3m_0044a330 {
 struct FUN_00aa5140;
 FUN_00aa5140& FUN_0044a2d0();
@@ -17952,7 +17943,6 @@ extern "C" __declspec(dllimport) long __stdcall InterlockedDecrement(long volati
 extern "C" __declspec(dllimport) long __stdcall InterlockedIncrement(long volatile* value);
 
 extern "C" void __cdecl FUN_00c00b80(char* buffer, unsigned int value, void* object);
-extern "C" void __cdecl FUN_00c0018c(unsigned int cookie);
 
 class FUN_00447110_Class {
 public:
@@ -23865,7 +23855,6 @@ void BGSDestructibleObjectForm::FUN_0044a6e0(TESBoundObject* object, IO_TASK_PRI
 }   // namespace f3m_0044a6e0
 
 // @f3 0x00450920 (community match, verified in this file)
-extern int DAT_00dbbbcc;
 namespace f3m_00450920 {
 struct Member1260{int unk00;void FUN_006c8220();~Member1260(){FUN_006c8220();}};
 struct TESActorBaseData {int unk04,unk08,unk0C,unk10,unk14,unk18,unk1C,unk20,unk24,unk28;Member1260 member;void FUN_0044fc30();virtual ~TESActorBaseData();};
@@ -27220,7 +27209,6 @@ bool File::FUN_00448b50()
 namespace f3m_0045ca00 {
 namespace n45ca00 {
 char* __cdecl FUN_00401e50(char* d, const char* s);
-struct Tex { int m0; int m4; char* m8; };
 struct Item { int m0; int m4; char* m8; };
 struct Node { Node* m0; int m4; Item* m8; };
 struct List { Node* m0; };

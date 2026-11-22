@@ -893,11 +893,6 @@ ParticleObjectFactoryType* CreateParticleObjectFactory()
 
 extern void* __cdecl FUN_00aa13e0(unsigned int size);
 
-struct FUN_00c31720_This
-{
-    void FUN_00c31720();
-};
-
 extern int DAT_010bf654;
 
 struct ParticleEmitterAllocation : FUN_00c32d80
@@ -979,33 +974,6 @@ extern "C" void* DAT_010c08ac;
 extern "C" void(__stdcall* DAT_00fdf1c0)(void*);
 extern "C" void(__stdcall* DAT_00fdf1c4)(void*);
 
-struct NiStringBaseHelper
-{
-    void FUN_00a38e00();
-};
-
-struct FUN_00c31440_cls
-{
-    void* vptr;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    char* m_38;
-    int m_3c;
-
-    FUN_00c31440_cls* AssignString(char** src);
-};
-
 // Factory: allocates a 0x40-byte object, runs the FUN_00c32d80 base constructor and
 // installs this type's vtable (same pattern as ParticleObjectFactoryType / CreateParticleObjectFactory).
 extern int DAT_010bf754;
@@ -1069,11 +1037,6 @@ bool __cdecl FUN_00c32df0(int param1, int param2)
 {
     return IsEquivalentTo(param1, param2);
 }
-
-struct NiPSysBoxEmitterWrapper : NiPSysBoxEmitter
-{
-    void FUN_00c31b10(NiPSysModifier* destination, CloningProcess& process);
-};
 
 struct TrailVector
 {

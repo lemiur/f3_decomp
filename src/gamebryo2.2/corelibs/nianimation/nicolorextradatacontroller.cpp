@@ -4,7 +4,6 @@
 
 extern "C"
 {
-    extern void* g_011f3fdc;
 }
 
 extern "C" void __cdecl FUN_00a572d0(void);
@@ -95,12 +94,7 @@ void* __thiscall Ctrl9::FUN_00a4fb30(unsigned short usIndex)
     return 0;
 }
 
-struct RgbaColor
-{
-    float r, g, b, a;
-};
 class NiRTTI;
-extern NiRTTI _g_011f3730;
 class NiObject
 {
   public:
@@ -108,42 +102,6 @@ class NiObject
 };
 class NiInterpolator : public NiObject
 {
-};
-class NiColorInterpolator : public NiObject
-{
-  public:
-    void SetColorValue(RgbaColor);
-};
-struct NiColorExtraData
-{
-    char _0[12];
-    RgbaColor m_kFogTint;
-};
-struct NiColorExtraDataController
-{
-    char _0[60];
-    NiColorExtraData* m_pkExtra;
-    void FUN_00a4fc90(NiInterpolator* pkInterp, unsigned short usIndex);
-};
-
-struct StrArr
-{
-    char _pad0[8];
-    unsigned short m_usAlloc;
-    unsigned short m_usSize;
-    unsigned short _pad1;
-    unsigned short m_usGrow;
-    void __thiscall SetSize(unsigned int);
-    void __thiscall SetAt(unsigned int, char*&);
-};
-struct Base57420
-{
-    void __thiscall FUN_00a57420(StrArr*);
-};
-char* __cdecl _FUN_00a7d330(const char*);
-struct FUN_00a4fd90_shell : Base57420
-{
-    void __thiscall AppendString(StrArr*);
 };
 
 // Stand-in with the target virtual at vtable slot 0xB4/4 = 45

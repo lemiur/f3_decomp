@@ -2927,13 +2927,6 @@ class A170Ptr
     }
 };
 
-struct A170Node
-{
-    A170Node* m_pNext;
-    A170Node* m_pListObject;
-    A170Obj* m_element;
-};
-
 struct A170Lock
 {
     int m_pOwnerObject;
@@ -2952,20 +2945,6 @@ struct A170Heap
     void* __thiscall FUN_00aa3e40(unsigned int);
 };
 extern A170Heap DAT_011f6238;
-
-struct A170Set
-{
-    A170Set* __thiscall FUN_00a89810(A170Set* src);
-};
-
-struct FUN_00a5a170_cls
-{
-    char _p00[0x24];
-    A170Node* m_24;
-    char _p28[4];
-    int m_2c;
-    void FUN_00a5a170(A170Set* a1, bool a2, A170Set** out);
-};
 
 }  // namespace fnv_00a5a170
 

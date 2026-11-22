@@ -2,10 +2,6 @@
 // src/havok/physics/collide/util/welding/hkpmeshweldingutility.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/physics/collide/util/welding/hkpmeshweldingutility.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-struct Record
-{
-    float x, y, key;
-};
 struct ComparisonResult
 {
     bool value;
@@ -17,18 +13,6 @@ struct ComparisonResult
     }
 };
 
-struct DynamicArray
-{
-    void SpliceElements(int a, int b, int c, int d, int e);
-    void FUN_00ddecb0(int a, int b, int c, int d);
-};
-
-struct S_00ddecf0_Key
-{
-    float t;
-    float a;
-    float b;
-};
 struct S_00ddecf0_Heap;
 struct S_00ddecf0_Router
 {
@@ -43,20 +27,6 @@ struct S_00ddecf0_Router
     }
 };
 S_00ddecf0_Router* FUN_00c85750();
-
-struct S_00ddecf0_Array
-{
-    S_00ddecf0_Key* m_data;
-    int m_iElementCount;
-    void FUN_00ddecd0(S_00ddecf0_Heap& heap, int index, const S_00ddecf0_Key& key);
-};
-
-struct S_00ddecf0
-{
-    int unk0;
-    S_00ddecf0_Array m_keys;
-    void InsertKey(float t, float a, float b);
-};
 
 extern double DAT_010cd5a8;
 extern double DAT_0101ff40;
@@ -314,7 +284,6 @@ bool* CheckSubQueries(bool* result, void* key, Iface* self)
 
 
 void* FUN_00c908c0(void* alloc, void* arr, int numElems, int elemSize);
-void FUN_00d2cc70(void* dst, const void* src, int numBytes);
 
 inline void* operator new(unsigned int, void* p)
 {
@@ -346,12 +315,6 @@ struct S_00ddeab0
     }
 
     void SpliceElements(void* alloc, int index, int numdel, const S_00ddeab0_Elem* p, int numtoinsert);
-};
-
-struct S_00ddecd0
-{
-    void FUN_00ddecb0(int a, int b, int c, int flag);
-    void FUN_00ddecd0(int a, int b, int c);
 };
 
 struct FourFloatVector
@@ -386,13 +349,6 @@ struct ObjOuter
     virtual ObjInner* GetInner();
 };
 
-struct LocalBuffer
-{
-    __declspec(align(16)) int data[125];
-};
-
-char* IsDegenerateTriangle(char* out, const FourFloatVector* v0, const FourFloatVector* v1, const FourFloatVector* v2,
-                           float eps);
 int FUN_00dde4c0(ObjOuter* p2, Transform* trans, void* p1, int i, void* p3, int* outLocal);
 
 union __declspec(intrin_type) __declspec(align(16)) __m128
@@ -432,19 +388,6 @@ struct hkVector4DDCE
         const __m128 eps = _mm_load_ps1(&DAT_01017d00);
         return (_mm_movemask_ps(_mm_cmple_ps(t, eps)) & 7) == 7;
     }
-};
-
-struct hkTransformHolderDDCE
-{
-    unsigned int unk00, unk04, unk08, unk0C, unk10, unk14, unk18, unk1C;
-    hkVector4DDCE m_kColumn0;
-    hkVector4DDCE m_kColumn1;
-    hkVector4DDCE m_kColumn2;
-};
-
-struct hkUtilDDCE
-{
-    static hkBoolDDCE FUN_00ddced0(const hkTransformHolderDDCE& kA, const hkTransformHolderDDCE& kB);
 };
 
 namespace fnv_00ddd940 {
@@ -523,14 +466,6 @@ struct hkVector4
         m_vComponents = _mm_mul_ps(_mm_shuffle_ps(r, r, 0), m_vComponents);
     }
 };
-
-struct TriangleShape
-{
-    int m_kHeader[8];
-    hkVector4 m_kVertices[3];
-};
-
-void FUN_00ddd620(const hkVector4& a, const hkVector4& b, const hkVector4& c, hkVector4& normalOut);
 
 }  // namespace fnv_00ddd940
 
@@ -678,15 +613,8 @@ struct S_00ddecf0_Heap
     }
 };
 
-extern const double DAT_010290b8;
 __declspec(nothrow) S_00ddecf0_Router* FUN_00c85750();
 void __cdecl ResizeAudioStream(void* heap, void* arr, int elemSize) throw();
-
-struct KeyLess
-{
-};
-void __cdecl FUN_00ddeb70(S_00ddecf0_Key* keys, int left, int right, KeyLess cmp) throw();
-extern "C" double __cdecl fabs(double);
 
 struct ArrayAllocator
 {
@@ -745,11 +673,6 @@ template <typename T, typename A = ArrayAllocator> struct hkArray : SpanStorage<
     }
 };
 
-struct Track : public S_00ddecf0
-{
-    float FUN_00dded60();
-};
-
 // FUN_00ddcf60 - "point A is close to one of the three points of the shape
 // AND point B is close to one of them as well" test.
 //
@@ -763,13 +686,6 @@ struct Track : public S_00ddecf0
 struct Vec4
 {
     __m128 v;
-};
-
-struct Shape
-{
-    float unk00, unk04, unk08, unk0c;
-    float unk10, unk14, unk18, unk1c;
-    Vec4 p0, p1, p2;
 };
 
 extern "C"
@@ -868,8 +784,6 @@ float FUN_00ddd7e0(const hkVector4q* apVertices, float* sinOut, float* cosOut)
     return hkAtan2(*sinOut, *cosOut);
 }
 
-extern "C" __m128 _mm_load_ps(float const* _A);
-extern "C" void _mm_store_ps(float* _V, __m128 _A);
 struct __declspec(align(16)) Row
 {
     float x, y, z, w;
@@ -884,26 +798,6 @@ struct __declspec(align(16)) Item
     Matrix44 transform;
     int payload;
 };
-
-struct S00dde760_PoolState
-{
-    char* cursor;
-    int unk04;
-    int unk08;
-    int unk0c;
-    S_00ddecf0_Heap* allocator;
-};
-
-struct S00dde760_ScratchVector
-{
-    Item* elements;
-    unsigned int size;
-    unsigned int encodedCapacity;
-    char* originalCursor;
-};
-
-extern "C" Matrix44 DAT_01268370;
-extern "C" void __cdecl FUN_00dddcd0(const Matrix44*, int, int, S00dde760_ScratchVector*, int);
 
 // @f3 0x00a560b0 (community match, verified in this file)
 extern float DAT_01065384;

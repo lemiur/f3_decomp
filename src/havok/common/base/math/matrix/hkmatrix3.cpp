@@ -16,25 +16,6 @@ struct CD4AF0Bool
     }
 };
 
-struct CD4AF0Vector4
-{
-    float x;
-    float y;
-    float z;
-    float w;
-
-    CD4AF0Bool IsStreamValid() const;
-};
-
-struct CD4AF0Matrix3
-{
-    CD4AF0Vector4 m_kColumn0;
-    CD4AF0Vector4 m_kColumn1;
-    CD4AF0Vector4 m_kColumn2;
-
-    CD4AF0Bool FUN_00cd4af0() const;
-};
-
 struct S_00cd4b60
 {
     float m[3][4];
@@ -317,16 +298,6 @@ class hkMatrix3CD4B
     hkVector4CD4B m_kColumn2;
 };
 
-struct S_V4
-{
-    __m128 q;
-};
-struct S_00cd4c70
-{
-    S_V4 r0, r1, r2;
-    const S_V4& Multiply(const S_V4& s);
-};
-
 #include <math.h>
 struct JacobiRot
 {
@@ -353,22 +324,6 @@ volatile int g_p5270;
 volatile int g_q5270;
 Mat34 g_m5270;
 JacobiRot g_r5270;
-
-struct Mat
-{
-    float f00;
-    float f04;
-    float f08;
-    float f0c;
-    float f10;
-    float f14;
-    float f18;
-    float f1c;
-    float f20;
-    float f24;
-    float f28;
-    float f2c;
-};
 
 // Computes the Euclidean norm of the 3x3 block formed by the first three entries of each row.
 // @f3 0x00bbd320 (community match, verified in this file)
@@ -516,19 +471,6 @@ void MProduct::FUN_00cd55b0(const MProduct& aLeft, const MProduct& aRight)
 extern "C" __m128 _mm_setzero_ps(void);
 extern "C" void _mm_store_ps(float* p, __m128 a);
 
-struct SrcRec
-{
-    float unk00;
-    float unk04;
-    int unk08;
-    int unk0C;
-};
-
-struct Matrix34
-{
-    float m[12];
-};
-
 extern "C" __m128 _mm_setr_ps(float, float, float, float);
 
 struct S00cd4cc0_V
@@ -540,22 +482,10 @@ struct S00cd4cc0_V
     }
 };
 
-struct S00cd4cc0_M
-{
-    S00cd4cc0_V c0;
-    S00cd4cc0_V c1;
-    S00cd4cc0_V c2;
-    void FUN_00cd4cc0(const float* r);
-};
-
-extern "C" double __cdecl fabs(double);
 extern "C" __m128 _mm_sub_ps(__m128 a, __m128 b);
 extern "C" __m128 _mm_add_ss(__m128 a, __m128 b);
 extern "C" __m128 _mm_load_ss(const float* p);
 extern "C" void _mm_store_ss(float* p, __m128 a);
-extern "C" __m128 _mm_div_ss(__m128 a, __m128 b);
-
-extern float DAT_01012068;
 
 typedef __m128 VectorComponentValue;
 
@@ -704,13 +634,6 @@ void S_00cd55a0::FUN_00cd5050()
     m->getColumn(2).scale(d, r2);
 }
 
-struct FUN_00cd5180_cls
-{
-    __declspec(align(16)) float m_v[12];
-
-    const __m128* Subtract(const __m128* p);
-};
-
 extern "C" __m128 _mm_setr_ps(float, float, float, float);
 struct DiagVec
 {
@@ -765,30 +688,6 @@ class DiagMat
     }
 };
 
-extern const float DAT_01011d78;
-
-class FUN_00cd51c0_cls
-{
-  public:
-    float m_00;
-    float unk04;
-    float unk08;
-    float unk0C;
-    float m_10;
-    float unk14;
-    float unk18;
-    float unk1C;
-    float m_20;
-    float unk24;
-    float unk28;
-    float unk2C;
-
-    __m128 FUN_00cd51c0();
-};
-
-extern "C" __m128 _mm_and_ps(__m128, __m128);
-extern "C" __m128 _mm_cmple_ps(__m128, __m128);
-extern "C" int _mm_movemask_ps(__m128);
 extern "C" __declspec(align(16)) const __m128 g_signClear;
 
 struct TransposeReceiver : CD4BA0Matrix3
@@ -842,20 +741,6 @@ void MatrixProduct::FUN_00cd5610(const hkMatrix3CD4B& apLeft, const CD4BA0Matrix
 
 extern "C" __m128 _mm_load_ps(float const* p);
 
-struct FUN_00cd55b0_cls
-{
-    void FUN_00cd55b0(const void* src, int arg);
-};
-
-struct FUN_00cd5680_cls
-{
-    __m128 m_v0;
-    __m128 m_v1;
-    __m128 m_v2;
-
-    void FUN_00cd5680(int arg);
-};
-
 struct __declspec(align(16)) FUN_00cd5680_tmp
 {
     unsigned int unk00;
@@ -873,11 +758,6 @@ struct __declspec(align(16)) FUN_00cd5680_tmp
 };
 
 extern "C" __m128 _mm_load_ps(const float* p);
-
-struct MatrixAddReceiver : hkMatrix3
-{
-    const __m128* FUN_00cd5140(const __m128* rhs);
-};
 
 extern "C" __m128 _mm_load_ps(const float* p);
 

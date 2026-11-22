@@ -1,19 +1,5 @@
 // fallout/misc/scenegraph.cpp: SceneGraph, StandIn (1 function)
 #include "f3_common.h"
-class NiRTTI;
-
-class BSSceneGraph
-{
-  public:
-    virtual const NiRTTI* GetRTTI() const;
-};
-
-class SceneGraph : public BSSceneGraph
-{
-  public:
-    static const NiRTTI ms_kRTTI;
-    virtual const NiRTTI* GetRTTI() const;
-};
 
 extern int DAT_01083b5c;
 
@@ -44,73 +30,4 @@ void* Wrapper_00878610::FUN_00878610(char* apSceneGraphName, bool abMenuSceneGra
 }
 
 
-struct FUN_008786b0_shell : public SceneGraph
-{
-    float FUN_008786b0();
-};
-
-union SETTING_VALUE
-{
-    float f;
-};
-class SettingT_GameSettingCollection_
-{
-  public:
-    SETTING_VALUE* Float();
-};
-class BGSTerrainManager
-{
-  public:
-    bool FUN_00454b70();
-};
-class TESWorldSpace
-{
-  public:
-    BGSTerrainManager* GetWorldTerrainManager();
-};
-class Sky
-{
-  public:
-    int FUN_00476c90();
-};
-class TESObjectCELL
-{
-  public:
-    float GetInteriorLightValue();
-};
-class BGSCameraPath
-{
-  public:
-    BGSCameraPath* GetPrevPath();
-};
-class TES
-{
-  public:
-    TESWorldSpace* GetHitSound();
-    Sky* GetLogDate();
-};
-
-extern TES* g_TES;
-extern SettingT_GameSettingCollection_ g_01203120;
-extern SettingT_GameSettingCollection_ g_0120312c;
-extern SettingT_GameSettingCollection_ g_01203138;
-extern float DAT_01083c64;
-extern float DAT_010c26d8;
-extern double _gModifierZero;
-
-float __cdecl LinearInterpolate(float, float, float, float, float);
-
-struct StandIn
-{
-    void __thiscall FUN_00878690();
-    void* __thiscall DestroyIfFlagged(unsigned int);
-};
-void __cdecl _delete(void*, unsigned int);
-
 extern int DAT_01083b5c;
-
-struct FUN_00878690_shell
-{
-    void FUN_00878690();
-    void FUN_00c51df0();
-};

@@ -7,111 +7,11 @@
 // to their real unit once identified.
 // src/havok/physics/utilities/dynamics/inertia/hkpinertiatensorcomputer.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/physics/utilities/dynamics/inertia/hkpinertiatensorcomputer.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
-struct Object
-{
-};
-void __cdecl FUN_00cebdf0(float* source, float value, Object* destination);
-void __cdecl FUN_00cebe50(float* source, float scale, Object* destination);
-struct Receiver
-{
-    void FUN_00cecc90(float value);
-};
 struct State
 {
     int first;
     int count;
     int context;
-};
-void FUN_00cebbb0(void* state, float zero, void* receiver);
-int __cdecl ApplyLimitToReceiver(int owner, int context, int count, float limit, Receiver* receiver, float value);
-struct FUN_00cebe80_Struct
-{
-    float unk00;
-    float unk04;
-    float unk08;
-};
-void __cdecl FUN_00cebe80(FUN_00cebe80_Struct* pThis, float fParam2, float* pOut);
-void __cdecl AddInertiaTensor(float* param_1, float param_2, float* param_3);
-struct FUN_00cec6b0_cls
-{
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0C;
-    unsigned int unk10;
-    unsigned int unk14;
-    unsigned int unk18;
-    unsigned int unk1C;
-    unsigned int unk20;
-    unsigned int unk24;
-    unsigned int unk28;
-    unsigned int unk2C;
-    unsigned int unk30;
-    unsigned int unk34;
-    unsigned int unk38;
-    unsigned int unk3C;
-    unsigned int unk40;
-    unsigned int unk44;
-    unsigned int unk48;
-    unsigned int unk4C;
-    unsigned int unk50;
-    unsigned int unk54;
-    unsigned int unk58;
-    unsigned int unk5C;
-    unsigned int unk60;
-    float m_64;
-    float m_68;
-    float m_6C;
-    float m_70;
-    float m_74;
-    float m_78;
-    float m_7C;
-    float m_80;
-    float m_84;
-    float m_88;
-
-    void FUN_00cec6b0(float a1, float b, float* p, float* M);
-};
-struct CECCD0Value
-{
-    float m_uiFilterValue;
-
-    void set(float v);
-    void ScaleValue(float scale);
-};
-struct S_00ced230_T
-{
-    float unk00;
-    float unk04;
-    float unk08;
-    float unk0c;
-    float unk10;
-    float unk14;
-    float unk18;
-    float unk1c;
-    float unk20;
-    float unk24;
-    float unk28;
-    float unk2c;
-    float unk30;
-    float unk34;
-    float unk38;
-    float unk3c;
-    float unk40;
-    float unk44;
-    float unk48;
-    float unk4c;
-    float unk50;
-    float unk54;
-    float unk58;
-    float unk5c;
-    float unk60;
-    float unk64;
-    float unk68;
-    float unk6c;
-    float unk70;
-    float unk74;
-    float unk78;
 };
 static inline float S_MaxGT(float x, float y)
 {
@@ -121,33 +21,6 @@ static inline float S_MaxLT(float x, float y)
 {
     return (x < y) ? y : x;
 }
-void __cdecl FUN_00ced230(float d, S_00ced230_T* p);
-struct S_00cee1c0_Heap
-{
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual void v0C();
-    virtual void Free(void* p, unsigned int size);
-};
-struct S_00cee1c0_Router
-{
-    unsigned int cursor;
-    int unk04;
-    int unk08;
-    int unk0C;
-    S_00cee1c0_Heap* heap;
-};
-struct S_00cee1c0_Arr
-{
-    unsigned int* m_data;
-    int m_iElementCount;
-    unsigned int m_cap;
-    unsigned int* m_pTrailingData;
-};
-S_00cee1c0_Router* FUN_00c85750();
-float __cdecl FUN_00cedec0(S_00cee1c0_Arr* arr, int unk, float value);
-void __cdecl ProcessArrayWithValue(unsigned int* source, int count, int unk, float value);
 namespace fnv_anon_00cec3d0 {}
 using namespace fnv_anon_00cec3d0;
 namespace fnv_anon_00cec3d0 {
@@ -170,22 +43,6 @@ struct S00cec3d0_Base
     __declspec(noinline) void FUN_00cec000(const float* v);
 };
 }
-struct S00cec3d0_Face : S00cec3d0_Base
-{
-    float Fa;
-    float Fb;
-    float Fc;
-    float m_fVertex0X;
-    float m_fVertex0Y;
-    float m_fVertex0Z;
-    float m_fVertex1X;
-    float m_fVertex1Y;
-    float m_fVertex1Z;
-    float m_fVertex2X;
-    float m_fVertex2Y;
-    float m_fVertex2Z;
-    void FUN_00cec3d0(const float* verts, const float* n);
-};
 static inline float S00cec3d0_Sqr(float x)
 {
     return x * x;
@@ -255,35 +112,7 @@ struct Vector
         return 0;
     }
 };
-struct Matrix
-{
-    Vector c0, c1, c2;
-};
-struct Transform
-{
-    Vector columns[4];
-};
-struct Bounds
-{
-    Vector lo, hi;
-};
-extern const Vector DAT_01017d10;
-void FUN_00d5ac50(char*, Matrix*, Vector*, Vector*, Vector*);
-struct Shape
-{
-    virtual void v0();
-    virtual void v1();
-    virtual void v2();
-    virtual void v3();
-    virtual void v4();
-    virtual void v5();
-    virtual void v6();
-    virtual void getAabb(const Transform*, float, Bounds*);
-};
-void FUN_00cedae0(Shape* shape, const Matrix* input, Vector* outA, Vector* outB);
 extern "C" void _mm_store_ps(float*, __m128);
-extern const float DAT_01011d78;
-extern const double DAT_010240b0;
 struct __declspec(align(16)) CE50Vector
 {
     float x, y, z, w;
@@ -320,11 +149,9 @@ static __declspec(noinline) void FUN_00cebfd0(CE50Body* body, float scale)
     body->inertia.row2.y *= scale;
     body->inertia.row2.z *= scale;
 }
-int __cdecl FUN_00cece50(float* src, float mass, float thickness, CE50Body* out, ...);
 extern "C"
 {
     void _mm_store_ps(float*, __m128);
-    __m128 _mm_load_ps(const float*);
     __m128 _mm_set_ps1(float);
     __m128 _mm_xor_ps(__m128, __m128);
     __m128 _mm_min_ps(__m128, __m128);
@@ -333,11 +160,6 @@ extern "C"
     __m128 _mm_mul_ps(__m128, __m128);
     __m128 _mm_shuffle_ps(__m128, __m128, unsigned int);
 }
-extern const float DAT_0104da48;
-extern const float DAT_01016248;
-extern const __m128 DAT_010c44d0;
-extern const __m128 DAT_010ec7f0;
-__int64 __cdecl FUN_00cebaf0(float* source, float value, void* dest);
 __declspec(align(16)) struct Vec4F
 {
     float x;
@@ -408,33 +230,10 @@ __declspec(align(16)) struct Work
     Mat4 mat;
     Solver solver;
 };
-struct OutBlock
-{
-    float unk00;
-    float unk04;
-    float unk08;
-    float unk0c;
-    __m128 vec10;
-    float m00, m01, m02, m03;
-    float m10, m11, m12, m13;
-    float m20, m21, m22, m23;
-};
-struct MeshTriangle
-{
-    int a, b, c, material;
-};
-struct MeshInput
-{
-    __m128* vertices;
-    int count, context;
-    MeshTriangle* triangles;
-    int triangleCount;
-};
 inline float MaxVal(float a, float b)
 {
     return a > b ? a : b;
 }
-int __cdecl FUN_00ced8e0(State* self, float value, OutBlock* out);
 extern "C" __m128 _mm_mul_ps(__m128 _A, __m128 _B);
 extern "C" __m128 _mm_set_ps1(float _A);
 struct __declspec(align(16)) S00cf0690_Vec
@@ -448,12 +247,6 @@ struct S00cf0690_Mass
     S00cf0690_Vec center;
     S00cf0690_Vec row0, row1, row2;
 };
-struct S00cf0690_Xf
-{
-    S00cf0690_Vec row0, row1, row2, translation;
-};
-void __cdecl FUN_00ceff00(void*, const S00cf0690_Xf*, float, S00cf0690_Mass*);
-extern const float DAT_01013ea4;
 static __declspec(noinline) void FUN_00cebfd0(S00cf0690_Mass* p, float density)
 {
     float newMass = density * p->volume;
@@ -464,7 +257,6 @@ static __declspec(noinline) void FUN_00cebfd0(S00cf0690_Mass* p, float density)
     *(__m128*)&p->row1 = _mm_mul_ps(*(__m128*)&p->row1, f);
     *(__m128*)&p->row2 = _mm_mul_ps(*(__m128*)&p->row2, f);
 }
-void __cdecl FUN_00cf0690(void* shape, float mass, S00cf0690_Mass* result);
 
 #include <math.h>
 extern "C"
@@ -475,7 +267,6 @@ extern "C"
     __m128 _mm_sqrt_ss(__m128);
     __m128 _mm_add_ss(__m128, __m128);
     __m128 _mm_load_ss(const float*);
-    void _mm_store_ss(float*, __m128);
 }
 struct __declspec(align(16)) IntegralVector159
 {

@@ -18,59 +18,6 @@ void FUN_00d2c3a0_class::FUN_00d2c3a0(void* a)
 }
 
 
-struct SlowPath
-{
-    virtual void ReportDiagnostic();
-    virtual void unused1();
-    virtual void unused2();
-    virtual void FlushUsageData();
-    virtual void unused4();
-    virtual void unused5();
-    virtual void process(int* output, int count, int value);
-};
-struct FUNClass
-{
-    virtual void unused();
-    virtual unsigned int generate(int value);
-    SlowPath* unk04;
-    void FUN_00d2c030(int* output, int count, int value);
-};
-
-struct Helper
-{
-    virtual void h0();
-    virtual void h1();
-    virtual void h2();
-    virtual void h3();
-    virtual void h4();
-    virtual void h5();
-    virtual void h6();
-    virtual void dispatch(unsigned int* values, int count, int threshold);
-};
-struct Owner
-{
-    virtual void v0();
-    virtual void v1();
-    virtual void check(unsigned int value, int threshold);
-    Helper* helper;
-    void ProcessValues(unsigned int* values, int count, int threshold);
-};
-
-struct ComponentValue
-{
-    int value;
-    int unk04;
-};
-
-struct Target : FUN_00d2c3a0_class
-{
-    int unk0C;
-    ComponentValue values[16];
-    int terminal;
-    volatile int weights[17];
-    int ComputeWeightedSum();
-};
-
 struct Block
 {
     Block* next;
@@ -221,11 +168,6 @@ struct FreeBlock
     FreeNode* head;
     int count;
 };
-struct OverflowHandler
-{
-    virtual void f0();
-    virtual FreeNode* f1(int);
-};
 struct Allocator : FUN_00d2c3a0_class
 {
     FreeBlock blocks[25];
@@ -237,17 +179,6 @@ struct Allocator : FUN_00d2c3a0_class
 // The target helper ignores EDX; this ABI-compatible signature keeps its this pointer in ECX and bucket on the stack.
 extern "C" FreeNode* __fastcall AllocateBlock(Allocator* self, int unused, int bucket);
 }  // namespace fnv_00d2c5a0
-
-extern void FUN_00d2caa0(void* res, int a1, int n);
-
-struct SelfCls
-{
-    virtual void vslot0();
-    virtual void* vslot1(void* p);
-    virtual void vslot2(int a, int b);
-
-    void* FUN_00d2c6d0(int a1, int a2, FUN_00d2c3a0_class* a3);
-};
 
 struct FUN_00d2c7a0_Slot
 {
@@ -296,208 +227,7 @@ void FUN_00d2c7a0_class::FUN_00d2c7a0()
 }
 
 
-struct FUN_00d60500
-{
-    virtual void placeholder();
-    unsigned int capacity;
-    unsigned int count;
-    void* storage;
-    void* owner;
-    FUN_00d60500(void* parent, unsigned int requested);
-};
-
-class DispatchInterface
-{
-  public:
-    virtual void Unknown0() = 0;
-    virtual int Dispatch(void*) = 0;
-    int DispatchValue(void* const& value);
-};
-
-struct FUN_00d2c020_class
-{
-    virtual void __fastcall slot00(unsigned int value);
-    virtual void __fastcall slot04(unsigned int value);
-    virtual void __fastcall slot08(unsigned int value);
-
-    void __fastcall FUN_00d2c020(unsigned int value);
-};
-
-struct FnvCpu_FUN_00d2c0f0_CpuInterface
-{
-    virtual void slot00();
-    virtual void slot04();
-    virtual void slot08();
-    virtual void slot0c();
-    virtual void slot10();
-    virtual void slot14();
-    virtual void slot18();
-    virtual void slot1c();
-    virtual void slot20();
-    virtual void slot24();
-    virtual void Invoke(int arg0);
-};
-struct FnvCpu_FUN_00d2c0f0_CpuOwner
-{
-    unsigned int unk00;
-    FnvCpu_FUN_00d2c0f0_CpuInterface* target;
-    void FUN_00d2c0f0(int arg0);
-};
-
 extern "C" void __debugbreak();
-
-struct SizeClassTable
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5C;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6C;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7C;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8C;
-    int unk90;
-    int iClassSize[17];
-    unsigned char ucSmallClass[41];
-    int iLargeClass[8];
-
-    void InitSizeClasses(void*, void*);
-};
-
-struct FUN_00d2c600_bucket
-{
-    void* m_pFirstNode;
-    volatile int m_uiItemCount;
-};
-
-struct FUN_00d2c600_obj
-{
-    virtual void unk00();
-    virtual void unk04();
-    virtual void unk08(void* p, int size);
-};
-
-struct FUN_00d2c600_cls
-{
-    int unk00;
-    FUN_00d2c600_obj* m_04;
-    int m_08;
-
-    void FUN_00d2c450(int index, void* p);
-    void Free(void* p, int size);
-};
-
-struct FUN_00d2c670_inner
-{
-    virtual void v00();
-    virtual void v01();
-    virtual void v02();
-    virtual void v03();
-    virtual void v04();
-    virtual void v05();
-    virtual void v06();
-    virtual void v07();
-    virtual void v08();
-    virtual void Forward(int a);
-};
-
-struct FUN_00d2c670_cls
-{
-    void* m_00;
-    FUN_00d2c670_inner* m_04;
-
-    void FUN_00d2c670(int a);
-};
-
-struct S_00d2c680_Inner
-{
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual void v0c();
-    virtual void v10();
-    virtual void v14();
-    virtual void v18();
-    virtual void v1c();
-    virtual void v20();
-    virtual void v24();
-    virtual void v28();
-    virtual int v2c(int a0, int a1);
-};
-
-struct S_00d2c680_Cls
-{
-    int unk00;
-    S_00d2c680_Inner* unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5c;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6c;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7c;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8c;
-    int unk90;
-    int m_94[0x10];
-    int unkd4;
-    signed char m_d8[0x2c];
-    int m_104[8];
-    int FUN_00d2c680(int a0, int a1);
-};
 
 struct Allocator219
 {
@@ -590,24 +320,6 @@ struct BlockEntry
     void* size;
 };
 
-struct ThreadMemoryBase
-{
-    void* m0;
-    void* m4;
-    void* m8;
-    void FUN_00d2c3a0(void* a, void* b);
-};
-
-struct HKThreadMemory : ThreadMemoryBase
-{
-    BlockEntry blocks[17];
-    int blockTable[17];
-    unsigned char freeList[0x29];
-    int bigBlocks[8];
-    void InitSizeClasses();
-    HKThreadMemory* FUN_00d2c720();
-};
-
 namespace fnv_00d2c760 {
 extern "C" char DAT_010cacd0;
 
@@ -617,17 +329,6 @@ struct BlockEntry
     int count;
     BlockEntry() : block(0), count(0)
     {}
-};
-
-struct ThreadMemoryView : FUN_00d2c3a0_class
-{
-    BlockEntry blocks[17];
-    int blockTable[17];
-    unsigned char freeList[41];
-    int bigBlocks[8];
-    void InitSizeClasses();
-    void FUN_00d2c3a0(void* allocator, int limit);
-    ThreadMemoryView* FUN_00d2c760(void* allocator);
 };
 
 }  // namespace fnv_00d2c760

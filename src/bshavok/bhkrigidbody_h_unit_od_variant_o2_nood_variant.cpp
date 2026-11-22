@@ -38,15 +38,8 @@ struct S8d280_Mat
     }
 };
 
-class FUN_00c8d280_cls : public bhkRefObject
-{
-  public:
-    S8d280_Mat* FUN_00c8d280(S8d280_Mat* out);
-};
-
 // Preserves full 2026-10-24 prior contributor reconstruction; prior observed  /Od compiler mismatch.
 
-extern unsigned int DAT_0126fd98;
 struct ThreadState
 {
     unsigned int unk000;
@@ -377,13 +370,7 @@ struct __declspec(align(16)) AlignedDynamicArray
         ClearAndRelease(GetAllocator()->getAllocator());
     }
 };
-extern void* __cdecl MakeHeading(const char*);
-extern void* __cdecl MakeFloat(const char*, float);
-extern void* __cdecl MakeInt(const char*, const char*);
-extern void* __cdecl MakeCount(const char*, unsigned int);
 extern void __cdecl ExtractPoint(PointFormat*, const FloatVector*);
-extern void __cdecl AddMotion(InspectorList*, int);
-extern int __cdecl FormatText(char*, unsigned int, const char*, ...);
 // @f3 0x009010b0 (community match, verified in this file)
 extern const char str_00e348f8[];
 extern const char str_00de0224[];
@@ -827,10 +814,6 @@ struct Q8f6e0_Arg
     int unk248;
     Q8f6e0_Mem* mem;
 };
-extern int __cdecl FUN_00406d00(char* buf, int n, const char* fmt, ...);
-extern Q8f6e0_Report* DAT_01268360;
-extern const char str_010c6118[];
-extern const char str_010c60dc[];
 struct Q8f6e0_Obj
 {
     virtual void v00();

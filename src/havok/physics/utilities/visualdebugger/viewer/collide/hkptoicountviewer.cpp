@@ -222,35 +222,6 @@ struct AudioHeap
     void* heap;
 };
 
-struct ItemList
-{
-    char pad[0x6c];
-    void** items;
-    int count;
-};
-
-struct BaseP
-{
-    virtual void p0();
-    int p4;
-};
-struct BaseQ
-{
-    virtual void q0();
-    char q[0x14];
-};
-struct BaseC
-{
-    virtual void c0();
-    ItemList* list;
-    __declspec(nothrow) void Remove(void* item);
-};
-
-struct Base0 : BaseP, BaseQ, BaseC
-{
-    ~Base0();
-};
-
 struct Iface1
 {
     virtual void i1();
@@ -282,114 +253,6 @@ struct Member : MemberBase
     {
         Release(((AudioHeap*)FUN_00c85750())->heap);
     }
-};
-
-struct FUN_00d67fa0 : Base0, Iface1, Iface2, Iface3
-{
-    Member member;
-    ~FUN_00d67fa0();
-    virtual void p0();
-};
-
-struct Point3
-{
-    float x;
-    float y;
-    float z;
-};
-struct EntryListNode
-{
-    void** entries;
-    int count;
-};
-struct Node
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    EntryListNode entries;
-};
-struct Query
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    Point3 direction;
-    int unk1c;
-    Node* direct;
-    int unk24;
-    Node** groups;
-    int groupCount;
-};
-struct BaseHelper
-{
-    void FUN_00d68030(void* entry, int mode);
-};
-int __cdecl FUN_00d679c0(float* direction);
-struct Context
-{
-    void ProcessQuery(Query* query);
-};
-
-struct FUN_00d67970_helper
-{
-    void __thiscall c93920(void* value);
-    void __thiscall c93a20(void* value);
-};
-
-struct FUN_00d67970_class
-{
-    void* unk00;
-    void* unk04;
-    void* unk08;
-    void* unk0c;
-
-    void __thiscall FUN_00d67970(FUN_00d67970_helper* helper);
-};
-
-struct OwnerBinding
-{
-    void Bind(void* owner);
-};
-
-struct SubLink
-{
-    int unk00;
-    void Attach(int* p);
-};
-
-struct FUN_00d67b90_cls
-{
-    int unk00;
-    SubLink m_sub;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-
-    void BindAndAttach(int* arg);
 };
 
 struct ListItem;
@@ -575,7 +438,6 @@ void FUN_00d67e30_cls::RemoveEntriesForObject(SpawnedObject* a1)
 }
 
 #include <xmmintrin.h>
-extern const __m128 DAT_01017d10;
 
 __declspec(align(16)) struct SquaredLanes
 {
@@ -736,76 +598,6 @@ struct BSAudioValue
     {}
 };
 
-struct BSAudioNotifier
-{
-    virtual void v0();
-    virtual int v1();
-};
-
-struct ContactEntry
-{
-    int unk00;
-    unsigned int m_flags;
-};
-
-struct ContactTable
-{
-    ContactEntry* m_entries;
-    int m_iElementCount;
-    int m_pRayCursor;
-    int Find(const void* key);
-};
-
-struct ContactViewer
-{
-    int unk00;
-    int unk04;
-    BSAudioNotifier m_notifier;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int m_18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    ContactTable m_table;
-
-    void FUN_00d68030(void* entry, int mode);
-};
-
-extern void __cdecl FUN_00d67a50(int owner, int id, void* entry, int mode, const char* name, unsigned int info,
-                                 float value, BSAudioValue flags);
-
-struct D681E0Primary
-{
-    virtual void vfunc00();
-    virtual void FUN_00d681e0();
-
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-};
-
-struct D681E0Secondary
-{
-    virtual void FUN_00d681e0();
-};
-
-struct D681E0Object : D681E0Primary, D681E0Secondary
-{
-    D681E0Object();
-
-// @fnv 0x00d681e0
-    virtual void FUN_00d681e0();
-};
-
 // FUN_00d68200: thiscall adjustor thunk (sub ecx,0x28; jmp FUN_00d68230).
 // Written as multiple inheritance: the primary base is 0x28 bytes (vptr + 9 ints),
 // so the secondary base sits at +0x28 and MSVC emits the this-adjusting thunk.
@@ -885,8 +677,6 @@ namespace fnv_00d67c30 {
 struct Holder;
 
 extern "C" Holder* __cdecl FUN_00c85750();
-extern "C" char DAT_01000001;
-extern "C" char DAT_00ffffff;
 
 struct Entry
 {
@@ -894,26 +684,9 @@ struct Entry
     unsigned int m_flags;
 };
 
-struct Table
-{
-    Entry* m_entries;
-    int unk04;
-
-    int FindIndex(int aKey);
-    void Attach(int aOwner, int aKey, int aTag);
-};
-
 struct Item
 {
     void Apply(int aValue);
-};
-
-struct ArgBlock
-{
-    int unk00;
-    int m_items[2];
-    int unk0c;
-    int unk10;
 };
 
 struct Holder
@@ -925,61 +698,4 @@ struct Holder
     int m_10;
 };
 
-struct FUN_00d67c30_cls
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    Table m_0c;
-    int m_14;
-
-    void FUN_00d67c30(ArgBlock* a1);
-};
-
 }  // namespace fnv_00d67c30
-
-struct ToiCountPrimaryInterface : PrimaryBase
-{
-    virtual void FUN_00d681f0();
-};
-
-struct ToiCountProcessInterface
-{
-    virtual void FUN_00d681f0();
-};
-
-struct ToiCountProcessAdjustor : ToiCountPrimaryInterface, ToiCountProcessInterface
-{
-    ToiCountProcessAdjustor();
-// @fnv 0x00d681f0
-    virtual void FUN_00d681f0();
-};
-
-// MSVC adjustor thunk: the primary base occupies 0x2c bytes; both bases declare the virtual,
-// the derived class defines only its constructor, so the compiler emits the this-adjusting thunk.
-struct ToiCountThunkPrimary
-{
-    virtual void FUN_00d68210();
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-};
-
-struct ToiCountThunkSecondary
-{
-    virtual void FUN_00d68210();
-};
-
-struct ToiCountThunkObject : ToiCountThunkPrimary, ToiCountThunkSecondary
-{
-    ToiCountThunkObject();
-// @fnv 0x00d68210
-    virtual void FUN_00d68210();
-};

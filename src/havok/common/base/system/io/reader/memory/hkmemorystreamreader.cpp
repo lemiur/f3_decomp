@@ -53,20 +53,6 @@ struct FUN_00e05bf0Manager
     {}
 };
 
-struct FUN_00e05bf0Router
-{
-    unsigned char m_00[0x10];
-    FUN_00e05bf0Manager* m_10;
-};
-
-FUN_00e05bf0Router* __cdecl _D1A0E0GetMemoryRouter();
-
-struct FUN_00e05bf0Class : hkMemoryStreamReader
-{
-    void __thiscall FUN_00e05bb0();
-    hkMemoryStreamReader* __thiscall FUN_00e05bf0(int flags);
-};
-
 struct FUN_00e059d0_cls
 {
     int unk00;
@@ -260,7 +246,6 @@ struct hkMemoryRouterE05B
 namespace hkRouterE05B {
 extern "C" hkMemoryRouterE05B& __cdecl FUN_00c85750() throw();
 }
-void* __cdecl AllocateWithHeader(hkMemoryAllocatorE05B& kAlloc, int iNumBytes) throw();
 void __cdecl FUN_00cb1260(void* pvDst, const void* pvSrc, int iNumBytes) throw();
 
 class hkRefObjE05B

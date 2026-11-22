@@ -102,18 +102,6 @@ int* __thiscall FUN_00d87280_class::FUN_00d87280(int index)
     return m_p + index;
 }
 
-struct FUN_00d872b0_class
-{
-    int* data;
-    int* FUN_00d872b0(int index);
-};
-
-struct FUN_00d872d0_class
-{
-    char* m_p;
-    char* __thiscall FUN_00d872d0(int index);
-};
-
 struct CpuObject
 {
     int value;
@@ -124,12 +112,6 @@ int CpuObject::FUN_00d872e0(int amount)
 {
     return value + amount;
 }
-
-struct FUN_00d87360_class
-{
-    char* m_p;
-    char* FUN_00d87360(int index);
-};
 
 struct Pair
 {
@@ -244,13 +226,6 @@ char* FUN_00d87330_class::FUN_00d87330(int index)
 {
     return m_p + index * 0x30;
 }
-
-struct FUN_00d87340_cls
-{
-    Pair* m_p;
-
-    Pair* FUN_00d87340(int index);
-};
 
 struct FnvCpu_FUN_00d871f0_CpuObject
 {

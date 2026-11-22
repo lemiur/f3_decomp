@@ -3,7 +3,6 @@
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
 struct NiRTTI;
-extern NiRTTI g_012026f0;
 
 struct NiRTTI
 {
@@ -56,14 +55,6 @@ bool NiPSysInitialRotAngleCtlr::IsModifierOfType(NiObjectNET* pkTarget)
         return false;
     return pkModifier->IsKindOfType(&_g_01202528);
 }
-
-struct StrArr
-{
-    void SetSize(unsigned int);
-    void SetAt(unsigned int, char*&);
-};
-char* __cdecl FUN_00a7d330(const char*);
-void __stdcall FUN_00c32f60(StrArr*);
 
 extern char DAT_010befbc;
 void* __cdecl FUN_00aa13e0(unsigned int);

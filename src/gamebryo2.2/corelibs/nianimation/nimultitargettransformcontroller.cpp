@@ -836,12 +836,6 @@ struct NiBlendInterpolator
     unsigned int unk28;
     unsigned int unk2c;
 };
-struct TimeFlags
-{
-    unsigned char m_unused : 5;
-    unsigned char m_bManagerControlled : 1;
-    unsigned char m_reserved : 2;
-};
 struct NiMultiTargetTimeShell : public NiMultiTargetTransformController
 {
     bool GetManagerControlled() const
@@ -1119,29 +1113,6 @@ void A30440MultiTarget::FUN_00a30440(A30440Stream& kStream)
         kStream.SaveLinkID(m_ppkTargets[us]);
 }
 
-struct FUN_00a304b0_arr
-{
-    char pad00[8];
-    unsigned short m_usCapacity;
-    unsigned short m_usElementCount;
-    unsigned short m_usPad0c;
-    unsigned short m_usGrow;
-
-    void FUN_0096ad30(unsigned int ItemUpdateArray);
-    void FUN_0096ae90(unsigned int uiIndex, void** ppItem);
-};
-
-struct FUN_00a304b0_cls
-{
-    char pad00[0x3c];
-    unsigned short m_usNumInterps;
-
-    void WriteManagerControlledFlag(FUN_00a304b0_arr* pArr);
-    void FUN_00a304b0(FUN_00a304b0_arr* pArr);
-};
-
-void* __cdecl FUN_00a7d330(int);
-void* __cdecl FUN_00a7d490(const char*, unsigned short);
 extern int DAT_011f36bc;
 
 extern "C" int __cdecl strcmp(const char* pcA, const char* pcB);

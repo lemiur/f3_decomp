@@ -4,63 +4,6 @@
 
 #include "havok/hkpGroupCollisionFilter.h"
 
-struct FUN_00e455f0_Class
-{
-    void FUN_00e455f0(void*, int, int);
-};
-
-struct FUN_00e45990_Class
-{
-    void* FUN_00e45990(void*, void*, void*);
-};
-
-struct FUN_00e45890_Object
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-};
-
-class FUN_00e45890_Class : public hkBaseObject
-{
-  public:
-    virtual void* FUN_00e45890(void* param1, void* param2, void* param3);
-};
-
-struct FUN_00e458c0_Node
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    FUN_00e458c0_Node* m_0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int m_1c;
-};
-
-struct FUN_00e458c0_Vt
-{
-    virtual void s00();
-    virtual void s04();
-    virtual void s08();
-    virtual void s0c();
-    virtual int s10(int p);
-};
-
-struct FUN_00e458c0_class
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    void* FUN_00e458c0(void* p1, void* p2, FUN_00e458c0_Node* p3, int p4, FUN_00e458c0_Vt* p5, int p6);
-};
-
 class hkBoolC
 {
   public:

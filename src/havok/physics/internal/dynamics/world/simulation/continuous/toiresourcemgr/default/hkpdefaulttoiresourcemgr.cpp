@@ -4,27 +4,6 @@
 
 #include "havok/hkpDefaultToiResourceMgr.h"
 
-extern char g_0126955c_arg0;
-
-extern int DAT_010d4310;
-
-struct FUN_00d9fb90
-{
-    void* m_ppVirtualMethodTable;  // +0x00
-    short m_pad4;    // +0x04
-    short m_pad6;    // +0x06
-    int m_pad8;      // +0x08
-    int m_fieldC;    // +0x0c
-
-    FUN_00d9fb90();
-};
-
-struct FUN_00d9fc30Arg
-{
-    unsigned char pad_00[0x18];
-    int memoryType;
-};
-
 struct MemoryManager
 {
     virtual void* Function0() = 0;
@@ -42,15 +21,6 @@ struct MemoryRouter
 
 MemoryRouter* __cdecl _D1A0E0GetMemoryRouter();
 
-struct FUN_00d9fc30Class
-{
-    void* pVftable;
-    void* pUnknown;
-    int allocationSize;
-
-    void* AllocateMemory(int, int, FUN_00d9fc30Arg*);
-};
-
 namespace fnv_00d9fc70 {
 struct FUN_00d9fc70_MemoryManager;
 
@@ -66,15 +36,6 @@ struct FUN_00d9fc70_Router
     void* vtable;
     unsigned char padding[12];
     FUN_00d9fc70_MemoryManager* memoryManager;
-};
-
-struct FUN_00d9fc70_Class
-{
-    void* vtable;
-    unsigned short value;
-
-    void __thiscall FUN_00d9fb30();
-    void* __thiscall FUN_00d9fc70(unsigned char flag);
 };
 
 FUN_00d9fc70_Router* _D1A0E0GetMemoryRouter();
@@ -119,8 +80,6 @@ struct hkMemoryRouterD9FB
     }
 };
 
-extern "C" hkMemoryRouterD9FB& __cdecl FUN_00c85750() throw();
-
 struct hkBoolD9FB
 {
     char m_cBooleanValue;
@@ -138,36 +97,9 @@ enum hkResultD9FB
     HK_FAILURE_D9FB = 1
 };
 
-struct hkpToiEventD9FB;
 template <class T> struct hkArrayD9FB
 {
     T* m_data;
     int m_iElementCount;
     int m_iCapacityState;
-};
-
-struct hkpToiResourcesD9FB
-{
-    int m_iFirstValue;
-    int m_iSecondInteger;
-    int m_iThirdValue;
-    int m_iFourthValue;
-    int m_iFifthInteger;
-    int m_numRequiredStepsForSolver;
-    char* m_pCharacterBuffer;
-    int m_iCharacterBufferSize;
-};
-
-class hkpDefaultToiResourceMgrD9FB
-{
-  public:
-    virtual ~hkpDefaultToiResourceMgrD9FB();
-    unsigned short m_usMemSizeAndFlags;
-    short m_sReferenceCount;
-    int m_iNumToiResources;
-    int m_iMaxNumToiResources;
-
-    hkBoolD9FB FUN_00d9fb40(const hkpToiEventD9FB& event) throw();
-    hkResultD9FB AllocateToiResources(const hkpToiEventD9FB& event, const hkArrayD9FB<hkpToiEventD9FB>& otherEvents,
-                                      hkpToiResourcesD9FB& resourcesOut);
 };

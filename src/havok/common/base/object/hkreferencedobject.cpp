@@ -53,38 +53,11 @@ struct RefObj
 {
     void RetainReference();
 };
-struct FUN_00cd29c0_class
-{
-    void FUN_00cd29c0(RefObj*);
-};
-
-struct FUN_00cdf6e0_class
-{
-    void** m_pVTable;
-    short m_uiObjectFlags;
-    short m_uCount;
-    char m_auiShapeKeys[4];
-    hkReferencedObject* m_pObject;
-    void SetReferencedObject(hkReferencedObject* pObject);
-};
-
-struct FUN_00cdf6e0_Ref : hkReferencedObject
-{
-    void RetainReference();
-    void removeReference();
-};
 
 namespace fnv_00d47750 {
 struct RefObj
 {
     void FUN_00c90510();
-};
-
-struct FUN_00d47750_class
-{
-    RefObj* m_pObject;
-
-    FUN_00d47750_class* AssignObject(RefObj** pObject);
 };
 
 }  // namespace fnv_00d47750
@@ -93,21 +66,6 @@ namespace fnv_00dee6f0 {
 struct RefObj
 {
     void FUN_00c90510();
-};
-struct RefObj2
-{
-    void FUN_00c905b0();
-};
-struct FUN_00dee6f0_class
-{
-    void* m_pVTable;
-    int m_kPointA;
-    int m_kPointB;
-    int m_iThirdValue;
-    int m_iFourthElementInteger;
-    int m_usTrailingValue;
-    RefObj* m_pObject;
-    void FUN_00dee6f0(RefObj* pObject);
 };
 }  // namespace fnv_00dee6f0
 
@@ -120,35 +78,6 @@ struct FUN_00d1df70
 struct DDCC60World : public FUN_00d1df70
 {
     void removeReference();
-};
-
-struct FUN_00e3e840_data
-{
-    DDCC60World* m_pWorld;
-    int m_value0;
-    int m_value1;
-};
-
-struct FUN_00e3e840_result
-{
-    DDCC60World* m_pWorld;
-
-    void AssignObject(int* value);
-};
-
-struct FUN_00e5c4d0_class
-{
-    void FUN_00e5c4d0(FUN_00e3e840_data* data, int key);
-};
-
-struct FUN_00e3e840_class
-{
-    void* m_pUnknown0;
-    void* m_pUnknown1;
-    unsigned char* m_pItems;
-    int m_uiItemCount;
-
-    FUN_00e3e840_result* FindWorldByKey(FUN_00e3e840_result* result, int key);
 };
 
 }  // namespace fnv_00e3e840
@@ -333,17 +262,6 @@ struct ThreadMode_9bf0
     unsigned int m_currentMode;
 };
 __declspec(thread) ThreadMode_9bf0 tls_9bf0;
-struct Object_9bf0
-{
-    void FUN_00c90510();
-    void FUN_00c905b0();
-};
-struct Owner_9bf0
-{
-    unsigned int unk00, unk04, unk08, unk0c, unk10, unk14;
-    Object_9bf0* m_object;
-    void FUN_00c89bf0(Object_9bf0* next);
-};
 struct RestoreMode_9bf0
 {
     unsigned int original;
@@ -384,17 +302,6 @@ extern "C" __declspec(dllimport) int __stdcall TlsSetValue(unsigned long index, 
 extern "C" __declspec(dllimport) void __stdcall EnterCriticalSection(void* section);
 extern int DAT_012681d4;
 extern int DAT_012681d8;
-
-struct FUN_00c90490_state
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int m_0c;
-    int unk10;
-    int unk14;
-    int unk18;
-};
 
 extern int DAT_012681d4;
 
@@ -469,11 +376,6 @@ void hkReferencedObjectC905::FUN_00c905b0()
     }
 }
 
-struct ObjectRef
-{
-    void FUN_00c90510();
-    void FUN_00c905b0();
-};
 extern __declspec(thread) int g_threadFlag;
 struct ThreadFlagGuard
 {
@@ -486,15 +388,6 @@ struct ThreadFlagGuard
     {
         g_threadFlag = previousFlag;
     }
-};
-struct FUN_00ca9b40_class
-{
-    void** m_pVTable;
-    short m_uiObjectFlags;
-    short m_uCount;
-    int m_extraneousState;
-    ObjectRef* m_pObject;
-    void FUN_00ca9b40(ObjectRef* pObject);
 };
 
 struct DeviceCallback
@@ -532,13 +425,6 @@ struct InputObject
     }
 };
 Resource* __cdecl FUN_00cf4af0(InputObject*);
-struct FUN_00ca9ce0_class
-{
-    int unk00;
-    DeviceOwner* m_pOwnerObject;
-    void FUN_00c8a230(InputObject*);
-    void ProcessInput(InputObject*);
-};
 
 struct FUN_00d1df70
 {
@@ -589,12 +475,6 @@ struct HeapLessE3EE
     {
         return kB.m_primary > kA.m_primary || (kA.m_primary == kB.m_primary && kA.m_secondary < kB.m_secondary);
     }
-};
-
-struct Ref_00c89b60
-{
-    void __thiscall FUN_00c90510();
-    void __thiscall FUN_00c905b0();
 };
 
 struct Tls_00c89b60
@@ -789,17 +669,6 @@ struct Scope_00c89b60
     {
         tls_00c89b60.unk2b4 = saved;
     }
-};
-
-struct Obj_00c89b60
-{
-    void* unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    Ref_00c89b60* m_pReference;
-    void __thiscall FUN_00c89b60();
 };
 
 // Sets m_pReference to r, calling FUN_00c90510 on the new reference and FUN_00c905b0 on the old one if present.
@@ -1071,51 +940,7 @@ class hkShapeCC4 : public hkRefCC4
 {
 };
 
-class hkpWorldObjectCC4
-{
-  public:
-    int unk00, unk04, unk08, unk0C, unk10, unk14, unk18, unk1C;
-    int m_iLayer;
-    unsigned char m_ucFlags;
-
-    void FUN_00cc49b0(hkShapeCC4* pkShape) throw();
-};
-
-class FUN_00d53200_class
-{
-  public:
-    virtual ~FUN_00d53200_class();
-    void FUN_00c8a230(NiStream& kStream);
-};
-
 hkShapeCC4* __cdecl FUN_00cf4af0(NiStream& kStream) throw();
-
-class bhkWorldObjectCC4 : public FUN_00d53200_class
-{
-  public:
-    hkpWorldObjectCC4* m_pPointer;
-
-    void FUN_00cc4e10(NiStream& kStream);
-};
-
-struct RcObject
-{
-    void FUN_00c90510();
-    void FUN_00c905b0();
-};
-struct SortEntry
-{
-    RcObject* object;
-    int key;
-    int value;
-};
-void __cdecl SiftDownHeap(SortEntry* entries, int index, int count, int compare);
-
-struct Resource_e3eb
-{
-    void FUN_00c90510() throw();
-    void FUN_00c905b0() throw();
-};
 
 template <class T> struct hkRefPtr_e3eb
 {
@@ -1142,16 +967,6 @@ template <class T> struct hkRefPtr_e3eb
     }
 };
 
-struct Container_e3eb
-{
-    int unk00, unk04, unk08, unk0C, unk10, unk14;
-    Resource_e3eb* m_resource;
-    int unk1C, unk20, unk24;
-    Container_e3eb** m_children;
-    int m_numChildren;
-    hkRefPtr_e3eb<Resource_e3eb> FUN_00e3eb10(Resource_e3eb* target) throw();
-};
-
 struct E5C4Obj
 {
     void FUN_00c90510();
@@ -1171,27 +986,6 @@ struct E5C4Ref
     }
 };
 
-struct E5C4Key
-{
-    E5C4Obj* p;
-    E5C4Ref* AssignObject(int* tmp);
-};
-
-struct E5C4Entry
-{
-    int key;
-    E5C4Ref val;
-};
-
-struct E5C4Foo
-{
-    int unk0;
-    E5C4Entry* d;
-    int FindEntryIndex(E5C4Obj* k);
-    E5C4Ref FUN_00e5c4d0(E5C4Key k);
-};
-
-extern "C" void _ReadWriteBarrier(void);
 volatile int S00e3eba0_sink;
 __declspec(noinline) void __fastcall FUN_00c90510(void* self)
 {
@@ -1201,32 +995,6 @@ __declspec(noinline) void __fastcall FUN_00c905b0(void* self)
 {
     S00e3eba0_sink = (int)self + 1;
 }
-struct S00e3eba0_class
-{
-    void** m_pVTable;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    void* m_pShape;
-    int unk1C;
-    int unk20;
-    int unk24;
-    S00e3eba0_class** m_items;
-    int m_uiItemCount;
-    void ReplaceObject(hkReferencedObject* oldObject, hkReferencedObject* GetObject);
-};
-
-struct BatchReleaseObjectC907 : FUN_00c903b0_class
-{
-    void ReleaseReference();
-};
-
-struct ReferenceIncrementC906 : hkReferencedObject
-{
-    __declspec(noinline) void FUN_00c903a0();
-};
 
 // @f3twin 0x00983050 of 0x009316f0
 struct F3Twin_00983050 : public FUN_00c903b0_class { void F3_FUN_00983050() ; };

@@ -14,17 +14,11 @@ BSAudio* __cdecl FUN_00c85750();
 void __cdecl ResizeAudioStream(void*, void*, int);
 struct UnkRet { int x; int y; };
 void __fastcall AppendPairToBuffer(UnkRet* a, UnkRet* b, void* c);
-void __fastcall ToggleBit(int a, void* b);
 struct Entry {
     unsigned short key;
     unsigned short value;
 };
 Entry* __stdcall LowerBoundEntry(Entry* first, Entry* last, unsigned short key);
-struct FUN_00d11960_cls {
-    int* m_pEntryData;
-    int m_iArrayLength;
-    void FUN_00d11960(int aiFirst, int aiSecond);
-};
 struct D1A0E0Allocator;
 struct D1A0E0MemoryRouter {
     int unk00;
@@ -35,9 +29,7 @@ struct D1A0E0MemoryRouter {
 
     D1A0E0Allocator& heap() { return *m_pStreamAllocator; }
 };
-extern "C" D1A0E0MemoryRouter& __cdecl D1A0E0GetMemoryRouter();
 void __cdecl FUN_00c908c0(D1A0E0Allocator* alloc, void* array, int numElements, int sizeElem);
-extern char* g_D1A0E0Tables[2];
 struct D1A0E0Entry {
     unsigned short m_flags;
     unsigned short m_uiEdgeIndex;
@@ -75,7 +67,6 @@ struct S_00d1a180_Allocator {
 struct S_00d1a180_ArrayUtil {
     static int __cdecl FUN_00c908c0(S_00d1a180_Allocator& alloc, void* arr, int numElem, int elemSize);
 };
-extern int DAT_011b37b4[2];
 struct S_00d1a180_Router {
     int unk0; int unk4; int unk8; int unkC;
     S_00d1a180_Allocator* m_pStreamAllocator;
@@ -125,52 +116,6 @@ struct S_00d1a180_Axis {
 
     void RemapEndPoints(char* nodes, const S_00d1a180_IntArray& remap);
 };
-void __fastcall FUN_00d10af0(int index, unsigned int* bits);
-struct FUN_00d11620_cls {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5C;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6C;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7C;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8C;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9C;
-    int unkA0;
-    int m_iA4;
-    int FUN_00d11620();
-};
 // Reconstructed source for FUN_00d119c0 (forwarding thunk, 24 bytes).
 // Target shape:
 //   mov edx, [esp+4]            ; handle (first stack arg)
@@ -179,71 +124,9 @@ struct FUN_00d11620_cls {
 //   add eax, [ecx+0xA0]         ; + &this->entries
 //   mov [esp+4], eax            ; forward as first stack arg
 //   jmp FUN_00d11650            ; __thiscall tail call, ecx = this preserved
-struct UnkHandle {
-    int unk00; // entry index read at [handle]
-};
-struct SweepEntry { // 16-byte entry, matches shl eax,4 stride
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-};
 // Tail-call target observed forwarding (this, handle, entry) with edx = handle kept live:
 // __fastcall helper taking (self in ecx, handle in edx, entry on stack).
-void __fastcall FUN_00d11650(void* self, UnkHandle* handle, SweepEntry* entry);
 // Stand-in owner class for the __thiscall thunk; fnvcheck matches the name FUN_00d119c0.
-struct FUN_00d119c0_owner {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5C;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6C;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7C;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8C;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9C;
-    SweepEntry* unkA0; // entry array base pointer at this+0xA0
-
-    void FUN_00d119c0(UnkHandle* handle);
-};
-struct HkHolder {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    void* m_pAllocator;
-};
 struct PairEntry {
     int m_pHeadNode;
     int m_iSecondInteger;
@@ -275,26 +158,8 @@ struct FnvArr {
     int m_uiItemCount;
     unsigned int m_cap;
 };
-struct FnvPair8 {
-    unsigned int first;
-    unsigned int second;
-};
-struct FnvHolderTail {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    void* m_pAllocator;
-};
 void __fastcall FUN_00d11c60(void* base, FnvNode* p, unsigned short a1, FnvNode* q, FnvArr* a3);
 struct FUN_00d11da0_cls;
-struct FUN_00d11da0_holder {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    void* m_pAllocator;
-};
 struct FUN_00d11da0_entry {
     unsigned short key;
     unsigned short value;
@@ -307,10 +172,6 @@ struct FUN_00d11da0_cls {
 
     void InsertPair(unsigned int a1, unsigned int a2, unsigned short a3,
                       unsigned short a4, unsigned short* outIndex2, unsigned short* outIndex);
-};
-struct S_00d138a0_Heap : BSAudio {
-    int unk0c;
-    void* unk10;
 };
 struct S_00d138a0_Pair {
     int unk00;
@@ -329,54 +190,14 @@ struct S_00d138a0_Node {
     int unk0c;
 };
 void __cdecl CollectNodePairs(int unused, S_00d138a0_Node* node, int count, S_00d138a0_Array* out);
-struct AllocIface {
-    virtual void* unk00();
-    virtual void* Alloc(unsigned int size);
-};
-struct AllocHolder {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    AllocIface* m_pAllocator;
-};
-struct SpawnedObject {
-    int unk00;
-    unsigned short m_wSize;
-
-    SpawnedObject* Init(int a, int b, int c);
-};
-SpawnedObject* FUN_00d182a0(int a, int b, int c);
-int __cdecl FUN_00d19d10(const float* v, float* out);
 extern int DAT_011b37a4[];
 struct hkp3AxisSweep;
 struct Endpoint {
     unsigned short value;
     unsigned short handle;
 };
-struct S_00d19d90_Class {
-    Endpoint* m_endpoints;
-    void MergeSortedEndpoints(void* pLookup, int totalCount, Endpoint* pSrc2, int count2);
-};
-struct Pair {
-    unsigned short key;
-    unsigned short hi;
-};
-struct FUN_00d19ef0_cls {
-    Pair* m_pItems;
-    void FUN_00d19ef0(char* out, int n, Pair* src, int k);
-};
 void __cdecl FUN_00d19fa0(unsigned int* base, int lo, int hi, int unkArg);
-void __cdecl QuickSortByLowWord(unsigned int* base, int lo, int hi, int unkArg);
-static int FUN_00d10b10(void* self, int index, unsigned int* bits);
-int IsBitmapBitSet(void* table, int index, unsigned int* bits);
 extern int DAT_011b37a4[];
-class FUN_00d11120_cls {
-public:
-    Endpoint* m_endpoints;
-    void MergeEndpoints(char* cells, int n, int m,
-                      unsigned int axis, Endpoint* scratch);
-};
 // Adapted from an unverified prior attempt by another contributor; original author/model unknown.
 struct S_d11790_Node { unsigned short m_usValue00, m_usValue02, m_usValue04, m_usValue06, m_usValue08, m_usValue0A; unsigned short unk0c, unk0e; };
 struct S_d11790_Edge { unsigned short value; unsigned short handle; };
@@ -398,59 +219,6 @@ static __forceinline void S_d11790_Fix(S_d11790_Node* nodes, S_d11790_Edge* edge
 
     *currentField = i;
 }
-struct S_d11790_Sweep {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5c;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6c;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7c;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8c;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9c;
-    S_d11790_Node* nodes;
-    int unka4;
-    int unka8;
-    S_d11790_Edge* axis0;
-    int unkb0;
-    int unkb4;
-    S_d11790_Edge* axis1;
-    int unkbc;
-    int unkc0;
-    S_d11790_Edge* axis2;
-    void FixNodeEdges(unsigned h);
-};
 extern "C" int __cdecl FUN_00d06f80(const void* ptr, int size);
 struct hkStatisticsCollector {
     virtual void dummy0();
@@ -473,20 +241,6 @@ struct hkArray {
     int m_iElementCount;
     int m_iCapacityState;
 };
-struct FourIntegerBlock {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-};
-struct UnsignedShortPair {
-    unsigned short m_uiFilterValue;
-    unsigned short m_usIndex;
-};
-struct OverlappingMarkerInfo {
-    int unk00;
-    hkArray<unsigned short> m_overlappingMarkers;
-};
 template <typename T>
 __forceinline void addArray(hkStatisticsCollector* collector, const char* name, const hkArray<T>& arr)
 {
@@ -497,30 +251,7 @@ __forceinline void addArray(hkStatisticsCollector* collector, const char* name, 
         collector->AddMemoryChunk(3, name, arr.m_data, arr.m_iElementCount * sizeof(T), allocated);
     }
 }
-struct S_00d119e0 {
-    int unk00; int unk04; int unk08; int unk0C;
-    int unk10; int unk14; int unk18; int unk1C;
-    int unk20; int unk24; int unk28; int unk2C;
-    int unk30; int unk34; int unk38; int unk3C;
-    int unk40; int unk44; int unk48; int unk4C;
-    int unk50; int unk54; int unk58; int unk5C;
-    int unk60; int unk64; int unk68; int unk6C;
-    int unk70; int unk74; int unk78; int unk7C;
-    int unk80; int unk84; int unk88; int unk8C;
-    int unk90; int unk94; int unk98; int unk9C;
-
-    hkArray<FourIntegerBlock> m_kNodeCollection;
-    hkArray<UnsignedShortPair> m_axis0;
-    hkArray<UnsignedShortPair> m_axis1;
-    hkArray<UnsignedShortPair> m_axis2;
-    int m_iMarkerCount;
-    int unkD4;
-    OverlappingMarkerInfo* m_pOverlappingMarkerInfo;
-
-    void ReportStatistics(hkStatisticsCollector* collector, const void* cls);
-};
 BSAudio* __cdecl FUN_00c85750() throw();
-void __cdecl FUN_00c856c0(void*, void*) throw();
 struct Allocator_00d182e0 {
     virtual void unk00() throw();
     virtual void unk04() throw();
@@ -551,46 +282,6 @@ struct hkArray_00d182e0 {
         m_iCapacityState = 0x80000000;
     }
 };
-struct Node_00d182e0 {
-    int unk00; int unk04; int unk08; int unk0c;
-};
-struct EndPoint_00d182e0 {
-    unsigned short m_uiFilterValue;
-    unsigned short m_usIndex;
-};
-struct SubNode_00d182e0 {
-    int unk00;
-    hkArray_00d182e0<unsigned short> m_ppData;
-};
-struct BroadPhaseBase {
-    virtual ~BroadPhaseBase() throw();
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-};
-struct FUN_00d182e0 : public BroadPhaseBase {
-    int unk20; int unk24; int unk28; int unk2C;
-    int unk30; int unk34; int unk38; int unk3C;
-    int unk40; int unk44; int unk48; int unk4C;
-    int unk50; int unk54; int unk58; int unk5C;
-    int unk60; int unk64; int unk68; int unk6C;
-    int unk70; int unk74; int unk78; int unk7C;
-    int unk80; int unk84; int unk88; int unk8C;
-    int unk90; int unk94; int unk98; int unk9C;
-    hkArray_00d182e0<Node_00d182e0> m_kNodeCollection;
-    hkArray_00d182e0<EndPoint_00d182e0> m_kAxisEndPoints[3];
-    int m_numSubNodes;
-    int unkD4;
-    SubNode_00d182e0* m_subNodes;
-
-    virtual ~FUN_00d182e0() throw();
-};
-int __cdecl FUN_00d10ac0();
-void __cdecl FUN_00d10ff0();
 struct Allocator;
 struct MemoryRouter {
     int unk00, unk04, unk08, unk0C;
@@ -641,10 +332,6 @@ struct SmallArray {
         }
     }
 };
-struct TargetStruct {
-    int unk00;
-    SmallArray m_ppData;
-};
 struct BroadPhasePairArray : S_00d138a0_Array {
     S_00d138a0_Pair& _expandOne(Allocator& alloc) {
         if (unk04 == (int)(unk08 & 0x3fffffff)) {
@@ -658,68 +345,8 @@ struct BroadPhasePairArray : S_00d138a0_Array {
         return _expandOne(MemoryRouter::GetMonitorStream()->heap());
     }
 };
-struct C_00d13620 {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5C;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6C;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7C;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8C;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9C;
-    int unkA0;
-    int unkA4;
-    int unkA8;
-    int unkAC;
-    int unkB0;
-    int unkB4;
-    int unkB8;
-    int unkBC;
-    int unkC0;
-    int unkC4;
-    int unkC8;
-    int unkCC;
-    int unkD0;
-    int unkD4;
-    void* m_unkD8;
-
-    void BuildBroadPhasePairs(S_00d138a0_Node* nodesA, int numNodesA, S_00d138a0_Node* nodesB, int numNodesB, int mode, BroadPhasePairArray& pairs);
-};
 #include "fnv_asm_helpers.h"   // project x87 helpers (fnv_SinCos, fnv_FloatToInt), kept last so earlier code is unchanged
 // Broad-phase endpoint sweep with two inline active-node sets.
-struct BSAudioLocal { void* p; int a; int b; };
 void __cdecl ResizeAudioStream(void*, void*, int);
 struct AllocObj {
     void** m_vtbl;
@@ -735,9 +362,6 @@ struct ShortVec {
 struct LocalVec {
     U16* m_00; int m_04; int m_08;
     U16 m_0c[256];
-};
-struct EntryLocal {
-    unsigned short m_00; unsigned short m_02;
 };
 struct Record {
     int m_00; int m_04; int m_08; int m_0c;
@@ -847,15 +471,6 @@ __declspec(align(16)) struct S00d10b30_Node {
     __m64 hi;
 };
 
-struct S00d10b30_Bnd {
-    short lo0;
-    short lo1;
-    short lo2;
-    short lo3;
-    short hi0;
-    short hi1;
-};
-
 __declspec(align(16)) struct BpRefBounds {
     unsigned short lo0;
     unsigned short lo1;
@@ -867,13 +482,6 @@ __declspec(align(16)) struct BpRefBounds {
     unsigned short hi3;
 };
 
-struct BpDeltaPair {
-    unsigned int lo;
-    unsigned int hi;
-};
-
-struct BpBoundNode { __m64 lo; __m64 hi; };
-struct BpBoundWords { unsigned short lo0, lo1, lo2, lo3, hi0, hi1; };
 struct __declspec(align(16)) ReferenceBounds {
     unsigned short min0, min1, min2, min3;
     unsigned short max0, max1;
@@ -881,49 +489,6 @@ struct __declspec(align(16)) ReferenceBounds {
 };
 
 int fnv_FloatToInt(float fValue);
-
-extern __m128 DAT_011b6d70;
-extern __m128 DAT_01267e30;
-
-struct SweepVec4 { __m128 m_vComponents; };
-struct SweepAabb { SweepVec4 m_kMinimumCorner; SweepVec4 m_kMaximumCorner; };
-struct SweepAabbInt { int m_min0; int m_min1; int m_min2; int m_min3; int m_max0; int m_max1; int m_max2; int m_max3; };
-
-struct SweepCls {
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual void v0c();
-    virtual void v10();
-    virtual int v14(void* a, SweepAabbInt* b, int c);
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5C;
-    int unk60;
-    int unk64;
-    int unk68;
-    SweepVec4 m_kVectorAt40;
-    SweepVec4 m_kVectorAt50;
-    SweepVec4 m_vScale;
-    int FUN_00d114e0(void* a1, const SweepAabb& aabb, int a3);
-};
 
 // Axis0 candidate-bitset sweep. First argument is updated node count,
 // independently confirmed at the real caller; it is not allocation words.
@@ -1446,48 +1011,13 @@ Obj8* ep=&current;
 
 #include <xmmintrin.h>
 namespace fnv_00d154a0 {
-extern "C" void _ReadWriteBarrier(void);
 extern __m128 DAT_011b3790;
 extern __m128 DAT_011b3770;
 
-struct Alloc154 {
-    virtual void unk00();
-    virtual void unk04();
-    virtual void unk08();
-    virtual void* alloc(int& size);
-    virtual void ReleaseBlock(void* p, int n);
-};
-struct Router154 {
-    int unk00; int unk04; int unk08;
-    Alloc154* m_pStreamAllocator;
-};
 struct Obj154 {
     virtual float unk00(int a, int b);
     virtual float call4(int a, int b);
 };
-
-struct Entry16 {
-    unsigned short key;
-    unsigned short pad;
-    unsigned short* list;
-    int count;
-    int capacity;
-};
-struct Node16 {
-    int f0; int f4;
-    unsigned short f8;
-    unsigned short f10;
-    int f12;
-};
-struct Elem64 {
-    int minPair;
-    int maxPair;
-    int unk8;
-    int handle;
-};
-
-// A view beginning at one node's packed maximum and ending at the next node's minimum.
-struct NodeTail154 { int maxPair,unk8,handle,nextMinPair; };
 
 struct Axis154 {
     Entry* m_data;
@@ -1508,30 +1038,6 @@ struct Axis154 {
 struct Aabb154 {__m128 min,max;};
 struct Input154 { const Aabb154* p; Input154(const Aabb154* q):p(q) {} };
 struct Callback154 { Obj154* p; Callback154(Obj154* q):p(q) {} };
-struct Sweep154 {
-    int unk00; int unk04; int unk08; int unk0c;
-    int unk10; int unk14; int unk18; int unk1c;
-    int unk20; int unk24; int unk28; int unk2c;
-    int unk30; int unk34; int unk38; int unk3c;
-    __m128 unk40;
-    __m128 unk50;
-    __m128 unk60;
-    int unk70; int unk74; int unk78; int unk7c;
-    int unk80; int unk84; int unk88; int unk8c;
-    int unk90; int unk94; int unk98; int unk9c;
-    Node16* unkA0;
-    int unkA4;
-    int unkA8;
-    int* unkAC;
-    int unkB0, unkB4;
-    Axis154 axisB8;
-    Axis154 axisC4;
-    int unkD0;
-    int unkD4;
-    Entry16* unkD8;
-
-    void FUN_00d154a0(Input154 input, Callback154 callback);
-};
 
 __declspec(noinline) Entry* Axis154::LowerBoundEntry(Entry* first, Entry* last, int key) {
     while (last-first > 16) {
@@ -1602,55 +1108,16 @@ struct S159a0_NodeArray {
 };
 void __cdecl FUN_00c908c0(S159a0_Alloc* alloc, S159a0_NodeArray* arr, int numElements, int sizeElem);
 
-struct S159a0_U16Array {
-    unsigned short* m_data;
-    int m_iElementCount;
-    int m_iCapacityState;
-};
-struct S159a0_Marker {
-    unsigned short m_usIndex;
-    unsigned short m_uiFilterValue;
-    S159a0_U16Array m_kMarkerIndices;
-};
-struct S159a0_Axis {
-    Endpoint* m_data;
-    int m_iElementCount;
-    int m_iCapacityState;
-    Endpoint* LowerBoundEntry(Endpoint* first, Endpoint* last, unsigned int value);
-};
 union __declspec(align(16)) S159a0_IntUnion64 {
     unsigned short u16[4];
     unsigned int u32[2];
-};
-union S159a0_QuadInt {
-    __m128 q;
-    unsigned int u[4];
 };
 struct __declspec(align(16)) S159a0_AabbInt {
     unsigned int m_kMinimumCorner[4];
     unsigned int m_kMaximumCorner[4];
 };
-struct S159a0_Aabb {
-    __m128 m_kMinimumCorner;
-    __m128 m_kMaximumCorner;
-};
 extern __m128 DAT_011b3790;
 extern __m128 DAT_011b3770;
-
-struct S159a0_Vec { __m128 m_vComponents; };
-
-struct S159a0_Sweep {
-    int unk00; int unk04; int unk08; int unk0c;
-    __m128 unk10; __m128 unk20; __m128 unk30;
-    __m128 m_kVectorAt40; __m128 m_kVectorAt50; __m128 m_vScale;
-    __m128 unk70; __m128 unk80; __m128 unk90;
-    S159a0_Node* m_kNodeCollection; int m_iNodeCount; int m_nodesCap;
-    S159a0_Axis m_kAxisEndPoints[3];
-    int m_iMarkerCount; int m_iMarkerCapacity; S159a0_Marker* m_pOverlappingMarkerInfo;
-    void FUN_00d13950(S159a0_NodeArray* nodes, PairArray* out);
-    __forceinline void querySingleAabbSub(unsigned int* handle, const unsigned int* bitField, const unsigned int* bitFieldEnd, const S159a0_Node& queryNode, S159a0_NodeArray& out);
-    void FUN_00d159a0(const S159a0_Aabb& aabb, PairArray& out);
-};
 
 }  // namespace fnv_00d159a0
 
@@ -1794,7 +1261,6 @@ struct S16c50_CastAabbInput {
     const char* m_pBroadPhaseAabbCache;
 };
 
-extern const double DAT_010c9300;
 extern const float DAT_0104a494, DAT_010162c0;
 
 struct S16c50_Sweep {
@@ -1832,7 +1298,6 @@ struct S16c50_Sweep {
 }  // namespace fnv_00d16c50
 
 extern __m128 DAT_010c44d0;
-extern __m128 DAT_010c7170;
 
 struct Vec4
 {
@@ -1850,45 +1315,6 @@ struct Vec4
         __m128 e = _mm_rcp_ps(v.m_vComponents);
         m_vComponents = _mm_sub_ps(_mm_add_ps(e, e), _mm_mul_ps(_mm_mul_ps(e, v.m_vComponents), e));
     }
-};
-
-struct SweepShiftPairs;
-
-struct SweepShift
-{
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual void v0c();
-    virtual void v10();
-    virtual void v14();
-    virtual void v18();
-    virtual void v1c();
-    virtual void v20();
-    virtual void v24();
-    virtual void v28();
-    virtual void v2c();
-    virtual void v30();
-    virtual void v34();
-    virtual void v38();
-    virtual void v3c();
-    virtual void v40();
-    virtual void v44();
-    virtual void v48();
-    virtual void v4c();
-    virtual void shiftObjects(const Vec4& distance, Vec4& applied, SweepShiftPairs& pairs);
-
-    Vec4 m_10;
-    Vec4 m_20;
-    Vec4 m_30;
-    Vec4 m_lowOffset;
-    Vec4 m_lowRounded;
-    Vec4 m_lowScale;
-    Vec4 m_highOffset;
-    Vec4 m_highRounded;
-    Vec4 m_highScale;
-
-    void FUN_00d10f00(const Vec4& distance, Vec4& appliedOut, SweepShiftPairs& pairs);
 };
 
 void __cdecl ResizeAudioStream(void* allocator,void* array,int elementSize);
@@ -2344,8 +1770,6 @@ void S4ef0Owner::FUN_00d14ef0(const S4ef0Aabb& aabb, S4ef0Results& pairsOut) con
 
 inline void* __cdecl operator new(unsigned int, void* storage) { return storage; }
 
-extern float DAT_0104da48;
-extern float DAT_0104e148;
 static const __m128 batchSweepBias={65536.0f,65536.0f,65536.0f,65536.0f};
 extern float DAT_011b3790[4];
 
@@ -2401,7 +1825,6 @@ struct __declspec(align(16)) SweepLowShorts { unsigned short x,y,z,w; };
 
 struct Holder { void* p; int a; int b; BatchSweepAllocator* allocObj; void* f10; };
 
-struct BatchSweepKey { unsigned short val,idx; };
 struct SweepBatchNode;
 template<class T> __forceinline void destroySweepRange(T* p,int n) {for(int k=0;k<n;++k)p[k].~T();}
 template<class T> __forceinline void initializeSweepRange(T* p,int n) {for(int k=0;k<n;++k)::new(p+k) T;}
@@ -2451,8 +1874,6 @@ struct Arr:SweepStorageBase<SweepBatchNode*> {
  }
  __forceinline void clearAndFree() {Holder* holder=(Holder*)FUN_00c85750();clear(*holder->allocObj);}
 };
-struct BatchNodeArray:SweepStorageBase<SweepBatchNode> {};
-struct BatchMarker { unsigned short node,value; unsigned short* data; int size,capacity; };
 struct SortArr15 {
     Endpoint* data; int size; int cap;
     __declspec(noinline) void* LowerBoundEntry(void* begin, void* end, int thresh);
@@ -2469,36 +1890,7 @@ __declspec(noinline) void* SortArr15::LowerBoundEntry(void* begin,void* end,int 
  return first;
 }
 
-union PackedBatchBounds {
-    unsigned short values[4];
-    struct { unsigned int low,high; } packed;
-};
-struct In1 { SweepObjectHandle** f0; int count; };
-
-struct In2 { BatchAabb* base; int gate; };
-
-struct Sweep15 : public BroadPhaseBase {
-    int unk20; int unk24; int unk28; int unk2C;
-    int unk30; int unk34; int unk38; int unk3C;
-    SweepVector m_kVectorAt40;
-    SweepVector m_kVectorAt50;
-    SweepVector m_vScale;
-    int unk70; int unk74; int unk78; int unk7C;
-    int unk80; int unk84; int unk88; int unk8C;
-    int unk90; int unk94; int unk98; int unk9C;
-    BatchNodeArray arrA0;
-    SortArr15 axes[3];
-    int m_iMarkerCount;
-    int m_markerShift;
-    BatchMarker* m_pOverlappingMarkerInfo;
-
-    __forceinline void collectSweepCandidates(const BatchAabb& spl,Arr& local);
-    void FUN_00d18400(In1* p1, In2* p2, int p3);
-    int BuildBroadPhasePairs(void* a, int b, void* c, int d, int e, int f);
-};
-
 void __cdecl FUN_00c908c0(void* a, void* b, int c, int d);
 struct EndpointOrder { };
 void __cdecl FUN_00d19fa0(void* a, int b, int c, EndpointOrder d);
-void __cdecl FUN_00d9fcf0(void* a, int b, void* c);
 void __cdecl CollectNodePairs(void* a, void* b, int c, int d);

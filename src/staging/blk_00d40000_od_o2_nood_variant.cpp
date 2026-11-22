@@ -68,36 +68,6 @@ template <class T> struct D51Array
     }
 };
 
-struct D51Stream
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    D51Array<D51Vector4> m_kShapeVectorData;
-    D51Array<int> m_commands;
-};
-
-struct D51Input
-{
-    D51Vector4 m_kPointA;
-    D51Vector4 m_kPointB;
-    D51Vector4 m_iThirdValue;
-};
-
-struct D51Writer
-{
-    int unk00;
-    D51Stream* m_stream;
-    int unk08;
-    int unk0c;
-    int unk10;
-    short unk14;
-    bool m_bValueAt0C;
-
-    int FUN_00d51c30(const D51Input& input);
-};
-
 namespace fnv_00d52640 {
 union __declspec(intrin_type) __declspec(align(16)) __m128
 {
@@ -140,11 +110,6 @@ struct hkVector4
     }
 };
 
-struct hkReferencedObject
-{
-    void FUN_00c90510() const;
-};
-
 template <typename T> __forceinline void hkConstructWithCopy(T* p, int n, const T& t)
 {
     for (int i = 0; i < n; i++)
@@ -169,27 +134,6 @@ template <typename T> struct hkArray
         hkConstructWithCopy(m_data + m_iElementCount, 1, t);
         m_iElementCount++;
     }
-};
-
-struct S00d52640_Writer
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    hkArray<hkVector4> m_kShapeVectorData;
-    hkArray<int> m_commands;
-    int unk28;
-    int unk2c;
-    int unk30;
-    hkArray<const hkReferencedObject*> m_kTrackedObjects;
-};
-
-struct FUN_00d52640_c
-{
-    int unk00;
-    S00d52640_Writer* m_pStreamWriter;
-    int FUN_00d52640(bool flag, const hkReferencedObject* object);
 };
 
 }  // namespace fnv_00d52640
@@ -222,24 +166,6 @@ struct hkVector4D564
     }
 };
 
-extern hkVector4D564 DAT_01267e30;
-
-struct hkQuaternionD564
-{
-    hkVector4D564 m_vec;
-
-    float GetAngle() const;
-};
-
-struct FUN_00d56470_cls
-{
-    unsigned int unk00, unk04, unk08, unk0C, unk10, unk14, unk18, unk1C;
-    hkQuaternionD564 m_rotation;
-    hkVector4D564 m_vTranslation;
-
-    FUN_00d56470_cls* FUN_00d56470(int bCompute);
-};
-
 }  // namespace fnv_00d56470
 
 struct __declspec(align(16)) hkpAgent3FuncsD40
@@ -260,14 +186,6 @@ struct __declspec(align(16)) hkpAgent3FuncsD40
     bool m_bAgentFlag1;
     bool m_bAgentFlag2;
 };
-
-class hkpCollisionDispatcherD40
-{
-  public:
-    void AddEntry(const hkpAgent3FuncsD40& kFuncs, int a, int b);
-};
-
-void __cdecl FUN_00d400f0(void* buf);
 
 struct Handle_d49550
 {
@@ -413,7 +331,6 @@ struct __declspec(align(16)) FUN_00c9ce00
     int unk218;
     int unk21C;
 };
-extern int DAT_010c7888;
 
 struct FinishingFlag
 {
@@ -715,62 +632,6 @@ const void* __cdecl FUN_00d4bf40()
 }
 }  // namespace fnv_00d4bf40
 
-struct FnvCpu_FUN_00d4f7f0_CpuData0
-{
-    __m128 field00;
-    __m128 field10;
-    __m128 field20;
-};
-struct FnvCpu_FUN_00d4f7f0_CpuObject
-{
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0c;
-    unsigned int unk10;
-    unsigned int unk14;
-    unsigned int unk18;
-    unsigned int unk1c;
-    __m128 field20;
-    __m128 field30;
-    __m128 field40;
-    void FUN_00d4f7f0(FnvCpu_FUN_00d4f7f0_CpuData0* input0);
-};
-
-struct FnvCpu_FUN_00d4f820_CpuData0
-{
-    __m128 field00;
-    __m128 field10;
-    __m128 field20;
-};
-struct FnvCpu_FUN_00d4f820_CpuObject
-{
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0c;
-    unsigned int unk10;
-    unsigned int unk14;
-    unsigned int unk18;
-    unsigned int unk1c;
-    unsigned int unk20;
-    unsigned int unk24;
-    unsigned int unk28;
-    unsigned int unk2c;
-    unsigned int unk30;
-    unsigned int unk34;
-    unsigned int unk38;
-    unsigned int unk3c;
-    unsigned int unk40;
-    unsigned int unk44;
-    unsigned int unk48;
-    unsigned int unk4c;
-    __m128 field50;
-    __m128 field60;
-    __m128 field70;
-    void FUN_00d4f820(FnvCpu_FUN_00d4f820_CpuData0* input0);
-};
-
 namespace fnv_00d51890 {
 struct HkRouterD51
 {
@@ -818,27 +679,6 @@ template <class T> struct HkArrD51
     }
 };
 
-struct HkCoreD51
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    HkArrD51<HkVecD51> m_vecs;
-    HkArrD51<int> m_auiHeaderValues;
-};
-
-struct HkOwnerD51
-{
-    int unk00;
-    HkCoreD51* m_core;
-    int unk08;
-    int unk0C;
-    unsigned char m_flags[4];
-
-    int FUN_00d51890(const HkVecD51& v, int index);
-};
-
 }  // namespace fnv_00d51890
 
 namespace fnv_00d51d40 {
@@ -862,40 +702,6 @@ template <typename T> inline void hkConstructWithCopy(T* p, int n, const T& t)
     for (int i = 0; i < n; i++)
         p[i] = t;
 }
-struct VectorArray
-{
-    __m128* elements;
-    unsigned int count;
-    unsigned int capacityFlags;
-};
-struct IndexArray
-{
-    unsigned int* elements;
-    unsigned int count;
-    unsigned int capacityFlags;
-};
-struct GeometryArrays
-{
-    unsigned int unknown00;
-    unsigned int unknown04;
-    unsigned int unknown08;
-    unsigned int unknown0c;
-    VectorArray vertices;
-    IndexArray indices;
-};
-struct GeometryBuilder
-{
-    unsigned int unknown00;
-    GeometryArrays* arrays;
-    unsigned int state08;
-    unsigned int state0c;
-    unsigned int state10;
-    unsigned char status14;
-    unsigned char status15;
-    unsigned char status16;
-    bool updated;
-    unsigned int FUN_00d51d40(const __m128* vectors);
-};
 }  // namespace fnv_00d51d40
 
 namespace fnv_00d52000 {
@@ -942,20 +748,6 @@ template <typename T> struct ArrayD52
         m_iElementCount++;
     }
 };
-struct OwnerD52
-{
-    int unk00, unk04, unk08, unk0c;
-    ArrayD52<VecD52> m_vecs;
-    ArrayD52<int> m_auiHeaderValues;
-};
-struct D52Class
-{
-    int unk00;
-    OwnerD52* m_pOwnerObject;
-    int unk08, unk0c, unk10, unk14;
-    bool m_dirty;
-    int FUN_00d52000(const VecD52& v);
-};
 }  // namespace fnv_00d52000
 
 extern "C" __m128 _mm_setr_ps(float e0, float e1, float e2, float e3);
@@ -988,21 +780,6 @@ template <typename T> struct D529E0_Array
         D529E0_ConstructWithCopy<T>(m_data + m_iElementCount, 1, value);
         m_iElementCount++;
     }
-};
-struct D529E0_Batch
-{
-    int unk00;
-    int m_04;
-    int m_08;
-    int m_0C;
-    D529E0_Array<__m128> m_kShapeVectorData;
-    D529E0_Array<int> m_commands;
-};
-struct D529E0_Builder
-{
-    int unk00;
-    D529E0_Batch* m_batch;
-    int FUN_00d529e0(unsigned char a1, float a2);
 };
 
 extern "C"
@@ -1059,18 +836,6 @@ struct __declspec(align(16)) Vec
                           _mm_mul_ps(_mm_shuffle_ps(left, left, 0xd2), _mm_shuffle_ps(right, right, 0xc9)));
     }
 };
-struct BasisPair
-{
-    Vec unk00;
-    Vec unk10;
-    Vec axisA;
-    Vec axisB;
-    Vec normalA;
-    Vec axisC;
-    Vec axisD;
-    Vec normalB;
-    const Vec* FUN_00d52ce0(const Vec* a, const Vec* c, const Vec* b, const Vec* d);
-};
 
 extern "C"
 {
@@ -1084,7 +849,6 @@ extern "C"
     __m128 _mm_set_ss(float);
     __m128 _mm_cmpeq_ss(__m128, __m128);
     __m128 _mm_andnot_ps(__m128, __m128);
-    __m128 _mm_setzero_ps();
     __m128 _mm_sub_ps(__m128, __m128);
 }
 
@@ -1127,10 +891,8 @@ static __forceinline __m128 Normalize172(__m128 vector)
 }
 // @f3 0x009e0a70 (community match, verified in this file)
 #include <math.h>
-extern "C" float __cdecl FUN_00bff9a0(float);
 __forceinline float Abs53(float v) { return (float)fabs((double)v); }
 __forceinline float InvSqrt53(float v) { if(v!=0) return 1.0f/(float)sqrt(v); return 0.0f; }
-struct AxisMagnitudes172 { float x,z,y; };
 struct RowCall172 { void FUN_00477880(int index,const Vector172* v); };
 void Frame172::FUN_00d53060(int first,int second,const Vector172* direction)
 {
@@ -1175,34 +937,6 @@ void Frame172::FUN_00d53060(int first,int second,const Vector172* direction)
 }
 
 
-// Reuse the current source's vector layout and basis storage without redefining either.
-struct BasisPairSetup : BasisPair
-{
-    const __m128& FUN_00d4f5d0(const __m128&, const __m128&, const __m128&, const __m128&);
-};
-
 namespace WorldLinearDof {
 
-struct Writer
-{
-    unsigned int unk00;
-    D51Stream* m_stream;
-    unsigned int unk08, unk0c;
-    unsigned char m_specifiedA[3];
-    unsigned char m_specifiedB[3];
-
-    int FUN_00d51a50(const D51Vector4& direction, int axis);
-};
-
 }
-
-struct PivotBWriter
-{
-    int unk00;
-    D51Stream* m_stream;
-    int unk08, unk0c, unk10, unk14;
-    unsigned char m_pivotASet;
-    bool m_pivotBSet;
-
-    int FUN_00d520a0(const D51Vector4& pivot);
-};

@@ -59,30 +59,11 @@ FUN_00d66b90::FUN_00d66b90(int a) : D698B0Base((void*)a)
     m20 = (int)&DAT_010d1cb4;
 }
 
-struct Registry_00dd9380
-{
-    void* Register(const char*, void(__cdecl*)());
-};
-extern int DAT_01269cd0;
 extern int DAT_01268ff8;
-void __cdecl FUN_00d66c50();
 
 extern int DAT_01268ff8;
 
 struct FnvCpu_FUN_00d66c50_CpuBlock;
-struct FnvCpu_FUN_00d66c50_CpuAllocator
-{
-    virtual void slot00();
-    virtual void* Invoke(unsigned int size);
-};
-struct FnvCpu_FUN_00d66c50_CpuHolder
-{
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0c;
-    FnvCpu_FUN_00d66c50_CpuAllocator* allocator;
-};
 void* __cdecl FUN_00c85750();
 struct FnvCpu_FUN_00d66c50_CpuBlock
 {
@@ -304,13 +285,6 @@ struct FnvCpu_FUN_00d66f00_CpuAllocatorHolder
     FnvCpu_FUN_00d66f00_CpuAllocator* allocator;
 };
 FnvCpu_FUN_00d66f00_CpuAllocatorHolder* __cdecl FUN_00c85750();
-struct FnvCpu_FUN_00d66f00_CpuObject
-{
-    unsigned int unk00;
-    unsigned short size;
-    void FUN_00d66cd0();
-    FnvCpu_FUN_00d66f00_CpuObject* FUN_00d66f00(unsigned int flags);
-};
 }  // namespace fnv_00d66f00
 
 class UnkCall

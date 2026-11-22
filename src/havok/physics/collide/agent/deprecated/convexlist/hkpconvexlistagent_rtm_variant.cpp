@@ -4,76 +4,10 @@
 #include "f3_common.h"
 // src/havok/physics/collide/agent/deprecated/convexlist/hkpconvexlistagent.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/physics/collide/agent/deprecated/convexlist/hkpconvexlistagent.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
-extern "C" void __cdecl FUN_00da3510(void*, void*);
-struct hkpConvexListAgent
-{
-    void __thiscall RemovePoint(int a);
-    void __thiscall FUN_00d33770(int a);
-};
-extern "C" void __cdecl FUN_00d339d0(int, int, int, int);
-struct FUN_00d33b70_cls
-{
-    void __thiscall FUN_00d33b70(int a, int b, int c, int d);
-};
 extern "C"
 {
-    void __cdecl FUN_00d33b90(void* a, void* b, void* c, void* d);
 }
-struct FUN_00d33c80_class
-{
-    void __thiscall FUN_00d33c80(void* a, void* b, void* c, void* d);
-};
-struct hkpCollisionDispatcher
-{
-    struct CollisionAgentFunctionTable
-    {
-        void* pfnA;
-        void* pfnB;
-        void* pfnC;
-        void* pfnD;
-        char b1;
-        char b2;
-    };
-    void __thiscall FUN_00cfbbe0(CollisionAgentFunctionTable* a, int b, int c);
-};
 extern void* __cdecl CreateConvexListAgent();
-extern void* __cdecl InitSpawnedBuffer();
-extern void* __cdecl FUN_00d34970();
-extern void* __cdecl FUN_00d349b0();
-extern void* __cdecl FUN_00d343f0();
-extern void* __cdecl _FUN_00d33b90();
-extern void* __cdecl _FUN_00d339d0();
-extern void* __cdecl FUN_00d33ca0();
-extern void* __cdecl FUN_00d34510();
-void __cdecl RegisterConvexListAgentCollisionFuncs(hkpConvexListAgent* self);
-struct FUN_00d337f0_self
-{
-    void __thiscall FUN_00dacb20(int a);
-    void __thiscall FUN_00d337f0(int a);
-};
-struct hkpGskfAgent
-{
-    void __thiscall AddPotential(int a);
-};
-struct FUN_00d33810_cls : hkpGskfAgent
-{
-    void __thiscall FUN_00d33810(int a);
-};
-extern void __cdecl FUN_00d97250(void*, void*, void*);
-struct FUN_00d33740_cls
-{
-    void __thiscall FUN_00d33740(int a, int b);
-};
-void __cdecl FUN_00da42b0(void*, int, int, int);
-struct FUN_00d33850_cls
-{
-    void __thiscall FUN_00d33850(int a);
-};
-void* __stdcall FUN_00d33da0(void* a, void* b, void* c, void* d, void* e);
-struct hkpSimpleClosestContactCollector
-{
-    void Reset();
-};
 struct D338e0Agent
 {
     virtual void vf00();
@@ -104,45 +38,6 @@ struct D338e0Local
     int field14;
     int field18;
     int field1C;
-};
-struct D338e0Owner
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5C;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6C;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7C;
-    int unk80;
-    unsigned char unk84;
-
-    void __thiscall FUN_00d338e0(int param1, int param2, int param3, int param4);
 };
 extern "C" void __cdecl FUN_00da48e0(int*, D338e0Local*);
 inline void D338e0Dispatch(D338e0Local* local, int* ownerField, int result)
@@ -213,13 +108,6 @@ class hkpSymmetricConvexListAgentD33D : public FUN_00d33940
     {}
     virtual ~hkpSymmetricConvexListAgentD33D() throw();
 };
-class FUN_00d440f0 : public hkpCollisionAgentD33D
-{
-  public:
-    FUN_00d440f0(const hkpCdBodyD33D& kBodyA, const hkpCdBodyD33D& kBodyB, const hkpCollisionInputD33D& kInput,
-                 hkpContactMgrD33D* pkMgr) throw();
-    char m_acUnk08[0x30];
-};
 class FUN_00dacbd0 : public hkpCollisionAgentD33D
 {
   public:
@@ -239,7 +127,6 @@ hkpCollisionAgentD33D* __cdecl CreateConvexListAgent(const hkpCdBodyD33D& kBodyA
                                                      const hkpCollisionInputD33D& kInput,
                                                      hkpContactMgrD33D* pkMgr) throw();
 void __cdecl ReleaseAllEntries(void* out, void* src, void* arg);
-void InitBlockPool(void* p);
 struct hkArrayD33E
 {
     void* m_data;
@@ -252,45 +139,6 @@ struct hkArrayD33E
     {
         return p;
     }
-};
-struct hkObjD33E
-{
-    int unk00;
-    int unk04;
-    void* m_pObservedSource;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    hkArrayD33E m_ppData;
-    float m_3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5C;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6C;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7C;
-    int unk80;
-    char m_84;
-    char unk85;
-    short m_86;
-
-    void FUN_00d33ef0(void* arg);
 };
 class hkCollectorBaseD347
 {
@@ -310,67 +158,10 @@ class hkCollectorD347 : public hkCollectorBaseD347
 
     int m_iFilter;
 };
-extern "C" void __cdecl FUN_00d43dc0(void* a, void* b, void* c, hkCollectorBaseD347& collector);
 void __cdecl FUN_00d34790(void* b, void* a, void* c, int filter);
-extern "C" void __cdecl FUN_00d34810();
 // @fnv 0x00d36930
-struct hkMemberD337
-{
-    int unk00;
-};
-void __cdecl FUN_00da35f0(hkMemberD337* member, float a, float b, int c);
-class hkObjD337
-{
-  public:
-    int unk00[12];
-    hkMemberD337 m_30;
-    int unk34[20];
-    bool m_84;
-
-    void SetValueIfExpected(float a, float b, int c);
-    void SetValue(float a, float b, int c);
-};
 // @fnv 0x00d33890
 extern void __cdecl ReleaseAllEntries(void*, int, void*);
-struct ContactAgent
-{
-    virtual void Invalidate(int);
-    int unk04, collidable08;
-    int unkc;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int contact30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5c;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6c;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7c;
-    int state80;
-    unsigned char flag84;
-    void FUN_00d33890(void*);
-};
-extern float DAT_01012054;
-extern char DAT_010cebf0[];
 struct __declspec(align(16)) S00d33940_Out
 {
     float x;
@@ -391,75 +182,11 @@ struct __declspec(align(16)) S00d33940_Out
     float w3;
     void FUN_00cb22f0(int a, int b);
 };
-struct S00d33940_Sub
-{
-    void FUN_00dafcd0(int a, int b, S00d33940_Out* c);
-};
-struct S00d33940_Base
-{
-    int vt;
-    void FUN_00dacbd0(int* a, int* b, void* d);
-};
-struct S00d33940_Obj : S00d33940_Base
-{
-    int unk04;
-    int unk08;
-    S00d33940_Sub unk0c;
-    char unk0d;
-    char unk0e;
-    char unk0f;
-    int unk10;
-    int unk14;
-    float unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    float unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5c;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6c;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7c;
-    int unk80;
-    unsigned char unk84;
-    unsigned char unk85;
-    S00d33940_Obj* FUN_00d33940(int* a, int* b, int* c, void* d);
-};
 extern "C" unsigned __int64 __rdtsc(void);
 #include <windows.h>
 extern "C" void _ReadWriteBarrier(void);
 extern DWORD DAT_0126835c;
 extern char DAT_010cebd0;
-struct ProfRec
-{
-    const char* m_pName;
-    DWORD m_iTick;
-    DWORD unk08;
-    const char* m_pName2;
-};
-struct ProfBuf
-{
-    DWORD unk00;
-    char* m_pCur;
-    DWORD unk08;
-    char* m_pRecordEnd;
-};
 struct HitCollector
 {
     void* m_vtbl;
@@ -471,21 +198,11 @@ void __cdecl FUN_00d34790(void* a, void* b, void* c, void* d);
 extern "C" void _ReadWriteBarrier(void);
 extern "C" unsigned __int64 __rdtsc(void);
 extern unsigned long DAT_0126835c;
-extern const char str_010cec28[];
 extern const char str_01076f38[];
 extern int DAT_010c476c;
 extern float DAT_0104da48;
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long dwTlsIndex);
 extern "C" int __cdecl TestGsk(const void* a, const void* b, const void* c, void* d);
-extern "C" void __cdecl FUN_00dac450(const void* a, const void* b, const void* c, void* d);
-extern "C" void __cdecl QueryClosestPoints(const void* a, const void* b, const void* c, void* d);
-struct StringCursor
-{
-    int unk00;
-    char* m_commandPointer;
-    int unk08;
-    char* m_endCommandPointer;
-};
 typedef union __declspec(intrin_type) __declspec(align(16)) __m128
 {
     float m128_f32[4];
@@ -558,31 +275,6 @@ struct hkpClosestCdPointCollector
     {
         return m_kHitPoint.m_pRootCollidableA != 0;
     }
-};
-struct hkpCdBody
-{
-    const void* m_pCollisionShape;
-};
-struct hkpConvexListShape
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    float m_minDistanceToUseConvexHull;
-};
-struct ContactPointPair
-{
-    hkContactPoint m_kPoint;
-    const void* m_pBodyA;
-    const void* m_pBodyB;
-};
-struct hkpCdPointCollector
-{
-    virtual void unk00() = 0;
-    virtual void AddCdPoint(const ContactPointPair& point) = 0;
 };
 
 struct ProfileIndex
@@ -837,7 +529,6 @@ struct Rec12
 void FUN_00d33670(void* a);
 void FUN_00d33600(void* a, void* b, void* c, void* d);
 void* FUN_00cb22f0(void* a, void* b);
-int FUN_00dabca0(SStruct* a, void* b, void* c, void* d);
 void FUN_00d33850(void* a);
 void FUN_00d33ef0(void* a);
 void FUN_00d42020(void* a, void* b, void* c, void* d);
@@ -932,10 +623,6 @@ __forceinline void projectDistance(Vec4& normal, const Vec4& vec)
     normal.w -= dot;
 }
 // Keep the two rounded scale values together for x87 and SIMD consumers.
-struct MotionScales
-{
-    float a, b;
-};
 struct ScalarScratch
 {
     union

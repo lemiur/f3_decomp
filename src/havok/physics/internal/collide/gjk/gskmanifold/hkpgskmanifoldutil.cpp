@@ -377,13 +377,3 @@ struct ContactWork
         return *reinterpret_cast<const ContactVertex*>(reinterpret_cast<const char*>(vertices) + off);
     }
 };
-
-struct ContactResult
-{
-    Vector point, delta, normal;
-};
-
-struct EntryParameter
-{
-    const S_00dad4d0_Entry* p;
-};

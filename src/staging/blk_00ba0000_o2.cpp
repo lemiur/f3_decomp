@@ -67,13 +67,6 @@ void* __thiscall FUN_00ba1750_Class::FUN_00ba1750(char flag)
 }  // namespace fnv_00ba1750
 
 extern "C" void NiFreeAlias(void*);
-extern int DAT_010b9d24;
-struct FUN_00ba3d10_Class
-{
-    int m0;
-    void* m1;
-    void __thiscall FUN_00ba3d10();
-};
 
 namespace fnv_00ba4170 {
 struct MemoryManager
@@ -158,18 +151,6 @@ void* __thiscall FUN_00ba8270_Class::FUN_00ba8270(bool b)
         operator delete(this, 0x14c);
     return this;
 }
-
-extern const void* DAT_010b895c;
-
-struct ImageSpaceEffect
-{
-    ImageSpaceEffect();
-};
-
-struct FUN_00baa160_Class : ImageSpaceEffect
-{
-    FUN_00baa160_Class();
-};
 
 namespace fnv_00baa220 {
 struct MemoryManager
@@ -523,14 +504,7 @@ void __thiscall FUN_00bb1b20_Class::FUN_00bb1b20(int a)
         DAT_0126f74c = *(int*)((char*)this + 0x388);
 }
 
-extern "C" void __cdecl NiFree(void*);
 extern MemoryManager g_memoryManager;
-struct FUN_00ba3ce0_Class
-{
-    void* m0;
-    void* m1;
-    void* __thiscall FUN_00ba3ce0(bool flag);
-};
 
 // Returns the element of a fixed lookup table at index a - 1.
 // @fnv 0x00ba5060
@@ -797,23 +771,14 @@ FUN_00bb7170_Class* FUN_00bb7300_Class::CreateInstance()
     return new FUN_00bb7170_Class;
 }
 
-struct GlobalObjectO2_00a7b610;
-extern GlobalObjectO2_00a7b610 g_011fa05c;
 char* __cdecl FUN_00a7d330(void*);
 struct StrArr
 {
     void __thiscall SetSize(unsigned int);
     void __thiscall SetAt(unsigned int, char*&);
 };
-void __stdcall WriteToSettingArray(StrArr*);
 
 void __cdecl NiFreeAlias(void*);
-struct FUN_00ba4050_Class
-{
-    int m_vft;
-    void* m_obj;
-    void* __thiscall FUN_00ba4050(bool);
-};
 
 struct FUN_00ba4580_Class
 {
@@ -905,8 +870,6 @@ FUN_00bad560_Class* FUN_00bad560_Class::FUN_00bad560(char flag)
     return this;
 }
 
-extern const char* const DAT_012005b8;
-
 extern "C" void __cdecl _delete(void*, unsigned int);
 struct FUN_00baec90_Class
 {
@@ -940,16 +903,6 @@ void __thiscall FUN_00bb1a70_Class::CallVirtualMethodWithField()
 }
 
 extern int DAT_010b9338;
-struct FUN_00bb3070_Class
-{
-    void* m_vft;
-    char m_04[0x1c - 4];
-    int m_0x1c;
-    char m_0x20[0x58 - 0x20];
-    int m_0x58;
-    void __thiscall FUN_00bb3500(int a);
-    void* __thiscall FUN_00bb3070(int a);
-};
 
 struct FUN_00bb3400_Class
 {
@@ -1211,31 +1164,10 @@ BSFogProperty* BSFogProperty::FUN_00bb8250(unsigned char flags)
     return this;
 }
 
-struct NiTPrimitiveArray_ImageSpaceTexture___
-{
-    void __thiscall SetSize(unsigned int);
-    ~NiTPrimitiveArray_ImageSpaceTexture___();
-};
-
-extern int DAT_010b9f04;
-extern int DAT_011a9be0;
-extern int DAT_011a9be4;
-extern int DAT_011a9be8;
-extern int DAT_011a9bec;
 extern int DAT_01200800;
 extern int DAT_01200804;
 extern int DAT_01200808;
 extern int DAT_0120080c;
-
-struct FUN_00bb8900_Class : ImageSpaceEffect
-{
-    void* m_vft;
-    unsigned char m_flag;
-    char m_auiShapeKeys[0x23];
-    NiTPrimitiveArray_ImageSpaceTexture___ m_ppData;
-
-    FUN_00bb8900_Class();
-};
 
 struct FUN_00bb8ea0_Class
 {
@@ -5164,19 +5096,6 @@ class BB0ED0RefObject
 
 struct BB0ED0CloningProcess;
 
-struct BB0ED0Values
-{
-    int m_aiData0;
-    int m_aiData1;
-    int m_aiData2;
-    int m_aiData3;
-    int m_aiData4;
-    int m_aiData5;
-    int m_aiData6;
-    int m_aiData7;
-    int m_aiData8;
-};
-
 class BB0ED0Base
 {
   public:
@@ -7990,97 +7909,6 @@ FUN_00bb40c0_cls::~FUN_00bb40c0_cls()
 {}
 }  // namespace fnv_00bb40c0
 
-struct SpawnBaseObj
-{
-    SpawnBaseObj();
-    virtual ~SpawnBaseObj();
-
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-};
-
-struct SpawnArgIface
-{
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual void v0C();
-    virtual void v10();
-    virtual void v14();
-    virtual void v18();
-    virtual void v1C();
-    virtual void v20();
-    virtual void v24();
-    virtual void v28();
-    virtual void v2C();
-    virtual void v30();
-    virtual void v34();
-    virtual void v38();
-    virtual void v3C();
-    virtual void v40();
-    virtual void v44();
-    virtual void v48();
-    virtual void v4C();
-    virtual void v50();
-    virtual void v54();
-    virtual void v58();
-    virtual void v5C();
-    virtual void v60();
-    virtual void v64();
-    virtual void v68();
-    virtual void v6C();
-    virtual void v70();
-    virtual void v74();
-    virtual void v78();
-    virtual void v7C();
-    virtual void v80();
-    virtual void v84();
-    virtual void v88();
-    virtual void v8C();
-    virtual void v90();
-    virtual void v94();
-    virtual void v98();
-    virtual void v9C();
-    virtual void vA0();
-    virtual void vA4();
-    virtual void vA8();
-    virtual void vAC();
-    virtual void vB0();
-    virtual void vB4();
-    virtual void vB8();
-    virtual void vBC();
-    virtual void vC0();
-    virtual void vC4();
-    virtual void vC8();
-    virtual void vCC(void* obj);
-};
-
-struct FUN_00bb4540 : SpawnBaseObj
-{
-    int m_1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    int m_58;
-    virtual ~FUN_00bb4540();
-    FUN_00bb4540(SpawnArgIface* arg);
-};
-
 extern int DAT_010b9910;
 
 // FUN_00bb45c0 : a one-line function - getter
@@ -8849,93 +8677,8 @@ struct StrArrView
     unsigned short elementSize;
     unsigned short growBy;
 };
-extern void* DAT_012007d8;
-extern const char DAT_010b9e1c[];
-extern const char DAT_010b9e0c[];
-extern const char DAT_010b9dfc[];
-extern const char DAT_010b9df4[];
-extern const char DAT_010b9dec[];
-extern char DAT_011f444c;
 extern char* __cdecl FUN_00a7d550(const char*, float);
 extern char* __cdecl FUN_00a7d5e0(const char*, unsigned int);
-struct GameGraphicsObject
-{
-    virtual void Method0();
-    virtual void Method1();
-    virtual void Method2();
-    virtual void Method3();
-    virtual void Method4();
-    virtual void Method5();
-    virtual void Method6();
-    virtual void Method7();
-    virtual void Method8();
-    virtual void Method9();
-    virtual void Method10();
-    virtual void Method11();
-    virtual void Method12();
-    virtual void Method13();
-    virtual void Method14();
-    virtual void Method15();
-    virtual void Method16();
-    virtual void Method17();
-    virtual void Method18();
-    virtual void Method19();
-    virtual void Method20();
-    virtual void Method21();
-    virtual void Method22();
-    virtual void Method23();
-    virtual void Method24();
-    virtual void Method25();
-    virtual void Method26();
-    virtual void Method27();
-    virtual void Method28();
-    virtual void Method29();
-    virtual void Method30();
-    virtual void Method31();
-    virtual void Method32();
-    virtual void Method33();
-    virtual void Method34();
-    virtual void Method35();
-    virtual void Method36();
-    virtual void Method37();
-    virtual void Method38();
-    virtual unsigned int* GetGraphicsValue();
-};
-extern GameGraphicsObject* __stdcall FUN_00653290(const void*);
-struct ShaderPassParameters
-{
-    unsigned int unknown00;
-    unsigned int unknown04;
-    unsigned int unknown08;
-    unsigned int unknown0c;
-    unsigned int unknown10;
-    unsigned int unknown14;
-    unsigned int unknown18;
-    unsigned int unknown1c;
-    unsigned int unknown20;
-    unsigned int unknown24;
-    unsigned int unknown28;
-    unsigned int unknown2c;
-    unsigned int unknown30;
-    unsigned int unknown34;
-    unsigned int unknown38;
-    unsigned int unknown3c;
-    unsigned int unknown40;
-    unsigned int unknown44;
-    unsigned int unknown48;
-    unsigned int unknown4c;
-    unsigned int unknown50;
-    unsigned int unknown54;
-    unsigned int unknown58;
-    unsigned int unknown5c;
-    void* volatile enabledData;
-    unsigned int unknown64;
-    float parameter68;
-    float parameter6c;
-    float parameter70;
-    float parameter74;
-    void AppendShaderParameters(StrArr*);
-};
 
 void* __cdecl FUN_00aa13e0(unsigned int);
 void __cdecl FUN_00aa1460(void*, unsigned int);
@@ -10144,162 +9887,6 @@ struct NiMemObjectAllocation
     static void* operator new(unsigned int);
     static void operator delete(void*, unsigned int);
 };
-struct FUN_00b6abb0 : NiMemObjectAllocation
-{
-    FUN_00b6abb0();
-    int unk000;
-    int unk004;
-    int unk008;
-    int unk00C;
-    int unk010;
-    int unk014;
-    int unk018;
-    int unk01C;
-    int unk020;
-    int unk024;
-    int unk028;
-    int unk02C;
-    int unk030;
-    int unk034;
-    int unk038;
-    int unk03C;
-    int unk040;
-    int unk044;
-    int unk048;
-    int unk04C;
-    int unk050;
-    int unk054;
-    int unk058;
-    int unk05C;
-    int unk060;
-    int unk064;
-    int unk068;
-    int unk06C;
-    int unk070;
-    int unk074;
-    int unk078;
-    int unk07C;
-    int unk080;
-    int unk084;
-    int unk088;
-    int unk08C;
-    int unk090;
-    int unk094;
-    int unk098;
-    int unk09C;
-    int unk0A0;
-    int unk0A4;
-    int unk0A8;
-    int unk0AC;
-    int unk0B0;
-    int unk0B4;
-    int unk0B8;
-    int unk0BC;
-    int unk0C0;
-    int unk0C4;
-    int unk0C8;
-    int unk0CC;
-    int unk0D0;
-    int unk0D4;
-    int unk0D8;
-    int unk0DC;
-    int unk0E0;
-    int unk0E4;
-    int unk0E8;
-    int unk0EC;
-    int unk0F0;
-    int unk0F4;
-    int unk0F8;
-    int unk0FC;
-    int unk100;
-    int unk104;
-    int unk108;
-    int unk10C;
-    int unk110;
-    int unk114;
-    int unk118;
-    int unk11C;
-    int unk120;
-    int unk124;
-    int unk128;
-    int unk12C;
-    int unk130;
-    int unk134;
-    int unk138;
-    int unk13C;
-    int unk140;
-    int unk144;
-    int unk148;
-    int unk14C;
-};
-struct BSShaderLightingProperty : NiMemObjectAllocation
-{
-    BSShaderLightingProperty();
-    int unk000;
-    int unk004;
-    int unk008;
-    int unk00C;
-    int unk010;
-    int unk014;
-    int unk018;
-    int unk01C;
-    int unk020;
-    int unk024;
-    int unk028;
-    int unk02C;
-    int unk030;
-    int unk034;
-    int unk038;
-    int unk03C;
-    int unk040;
-    int unk044;
-    int unk048;
-    int unk04C;
-    int unk050;
-    int unk054;
-    int unk058;
-    int unk05C;
-    int unk060;
-    int unk064;
-    int unk068;
-    int unk06C;
-    int unk070;
-    int unk074;
-    int unk078;
-    int unk07C;
-};
-struct FUN_00bc37b0 : NiMemObjectAllocation
-{
-    FUN_00bc37b0();
-    int unk000;
-    int unk004;
-    int unk008;
-    int unk00C;
-    int unk010;
-    int unk014;
-    int unk018;
-    int unk01C;
-    int unk020;
-    int unk024;
-    int unk028;
-    int unk02C;
-    int unk030;
-    int unk034;
-    int unk038;
-    int unk03C;
-    int unk040;
-    int unk044;
-    int unk048;
-    int unk04C;
-    int unk050;
-    int unk054;
-    int unk058;
-    int unk05C;
-    int unk060;
-    int unk064;
-    int unk068;
-    int unk06C;
-};
 struct FUN_00baeb80 : NiMemObjectAllocation
 {
     FUN_00baeb80();
@@ -10339,166 +9926,6 @@ struct FUN_00baeb80 : NiMemObjectAllocation
     int unk084;
     int unk088;
     int unk08C;
-};
-struct FUN_00b60cb0 : NiMemObjectAllocation
-{
-    FUN_00b60cb0();
-    int unk000;
-    int unk004;
-    int unk008;
-    int unk00C;
-    int unk010;
-    int unk014;
-    int unk018;
-    int unk01C;
-    int unk020;
-    int unk024;
-    int unk028;
-    int unk02C;
-    int unk030;
-    int unk034;
-    int unk038;
-    int unk03C;
-    int unk040;
-    int unk044;
-    int unk048;
-    int unk04C;
-    int unk050;
-    int unk054;
-    int unk058;
-    int unk05C;
-    int unk060;
-    int unk064;
-    int unk068;
-    int unk06C;
-    int unk070;
-    int unk074;
-    int unk078;
-    int unk07C;
-    int unk080;
-    int unk084;
-    int unk088;
-    int unk08C;
-    int unk090;
-    int unk094;
-};
-struct TileShaderProperty : NiMemObjectAllocation
-{
-    TileShaderProperty(bool);
-    int unk000;
-    int unk004;
-    int unk008;
-    int unk00C;
-    int unk010;
-    int unk014;
-    int unk018;
-    int unk01C;
-    int unk020;
-    int unk024;
-    int unk028;
-    int unk02C;
-    int unk030;
-    int unk034;
-    int unk038;
-    int unk03C;
-    int unk040;
-    int unk044;
-    int unk048;
-    int unk04C;
-    int unk050;
-    int unk054;
-    int unk058;
-    int unk05C;
-    int unk060;
-    int unk064;
-    int unk068;
-    int unk06C;
-    int unk070;
-    int unk074;
-    int unk078;
-    int unk07C;
-    int unk080;
-    int unk084;
-    int unk088;
-    int unk08C;
-    int unk090;
-    int unk094;
-    int unk098;
-    int unk09C;
-    int unk0A0;
-    int unk0A4;
-    int unk0A8;
-    int unk0AC;
-};
-struct FUN_00c05880 : NiMemObjectAllocation
-{
-    FUN_00c05880();
-    int unk000;
-    int unk004;
-    int unk008;
-    int unk00C;
-    int unk010;
-    int unk014;
-    int unk018;
-    int unk01C;
-    int unk020;
-    int unk024;
-    int unk028;
-    int unk02C;
-    int unk030;
-    int unk034;
-    int unk038;
-    int unk03C;
-    int unk040;
-    int unk044;
-    int unk048;
-    int unk04C;
-    int unk050;
-    int unk054;
-    int unk058;
-    int unk05C;
-    int unk060;
-    int unk064;
-    int unk068;
-    int unk06C;
-    int unk070;
-    int unk074;
-    int unk078;
-    int unk07C;
-    int unk080;
-    int unk084;
-    int unk088;
-    int unk08C;
-    int unk090;
-    int unk094;
-    int unk098;
-    int unk09C;
-    int unk0A0;
-    int unk0A4;
-    int unk0A8;
-    int unk0AC;
-    int unk0B0;
-    int unk0B4;
-    int unk0B8;
-    int unk0BC;
-    int unk0C0;
-    int unk0C4;
-    int unk0C8;
-    int unk0CC;
-    int unk0D0;
-    int unk0D4;
-    int unk0D8;
-    int unk0DC;
-    int unk0E0;
-    int unk0E4;
-    int unk0E8;
-    int unk0EC;
-    int unk0F0;
-    int unk0F4;
-    int unk0F8;
-    int unk0FC;
-    int unk100;
-    int unk104;
 };
 inline void* operator new(unsigned int, int bytes)
 {
@@ -11076,12 +10503,7 @@ void FUN_00baf640_Class::UpdateRenderFlags(FlagState* a, RenderInput* b)
     *pfValue = field8c;
 }
 
-struct NiGlobalStringTable
-{
-    static char* __cdecl AddString(const char*);
-};
 extern char* DAT_0109b220;
-extern const float DAT_01012054;
 extern int(__stdcall* DAT_00fdf1c4)(void*);
 struct Getter08
 {
@@ -13214,7 +12636,6 @@ extern float DAT_011ae5f0;
 extern float DAT_011ae5f4;
 extern float DAT_011ae5f8;
 extern float DAT_011ae5fc;
-extern float DAT_01099378;
 
 // @fnv 0x00bb85e0
 bool EffectCtx::FUN_00bb85e0(int aiUnused)
@@ -13277,16 +12698,6 @@ bool EffectCtx::FUN_00bb85e0(int aiUnused)
 
 struct NiStream;
 
-struct FUN_00b6f460_class
-{
-    void LoadAndSetAdditional(NiStream* stream);
-};
-
-struct FUN_00ba8630_Class : FUN_00b6f460_class
-{
-    void FUN_00ba8650(NiStream* stream);
-};
-
 struct NiObj_s
 {
     bool IsEqual(NiObj_s*);
@@ -13300,10 +12711,6 @@ bool FUN_00ba87d0_Class::FUN_00ba87d0(NiObj_s* a)
 {
     return ((NiObj_s*)this)->IsEqual(a);
 }
-
-void __cdecl FUN_00a950c0();
-
-void __cdecl FUN_00a99e40();
 
 // @fnv 0x00ba8a90
 int __stdcall FUN_00ba8a90(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5)
@@ -13492,110 +12899,9 @@ void __thiscall FUN_00baeee0_shell::AppendToStringArray(StrArr* arr)
 
 
 namespace fnv_00bb1160 {
-extern void* DAT_012005fc;
-extern char DAT_010b90ec;
-extern char DAT_010ae79c;
-extern char DAT_010ae344;
-extern char DAT_010b90dc;
 char* FUN_00a7d4d0(const char*, int);
 char* FUN_00a7d5a0(const char*, void*);
 const char* FUN_00c4bb40(void*);
-char* FUN_00a7d370(const char*, bool);
-char* FUN_00a7db60(const char*, unsigned int);
-struct FUN_00bb1160_Class
-{
-    virtual void slot0();
-    virtual void slot1();
-    virtual void slot2();
-    virtual void slot3();
-    virtual void slot4();
-    virtual void slot5();
-    virtual void slot6();
-    virtual void slot7();
-    virtual void slot8();
-    virtual void slot9();
-    virtual void slot10();
-    virtual void slot11();
-    virtual void slot12();
-    virtual void slot13();
-    virtual void slot14();
-    virtual void slot15();
-    virtual void slot16();
-    virtual void slot17();
-    virtual void slot18();
-    virtual void slot19();
-    virtual void slot20();
-    virtual void slot21();
-    virtual void slot22();
-    virtual void slot23();
-    virtual void slot24();
-    virtual void slot25();
-    virtual void slot26();
-    virtual void slot27();
-    virtual void slot28();
-    virtual void slot29();
-    virtual void slot30();
-    virtual void slot31();
-    virtual void slot32();
-    virtual void slot33();
-    virtual void slot34();
-    virtual void slot35();
-    virtual void slot36();
-    virtual void slot37();
-    virtual void slot38();
-    virtual void slot39();
-    virtual void slot40();
-    virtual void slot41();
-    virtual void slot42();
-    virtual void slot43();
-    virtual void slot44();
-    virtual void slot45();
-    virtual void slot46();
-    virtual void slot47();
-    virtual void slot48();
-    virtual void slot49();
-    virtual void slot50();
-    virtual int IsEnabled();
-    unsigned int field04;
-    unsigned int field08;
-    unsigned int field0c;
-    unsigned int field10;
-    unsigned int field14;
-    unsigned int field18;
-    unsigned int field1c;
-    unsigned int field20;
-    unsigned int field24;
-    unsigned int field28;
-    unsigned int field2c;
-    unsigned int field30;
-    unsigned int field34;
-    unsigned int field38;
-    unsigned int field3c;
-    unsigned int field40;
-    unsigned int field44;
-    unsigned int field48;
-    unsigned int field4c;
-    unsigned int field50;
-    unsigned int field54;
-    unsigned int field58;
-    unsigned int field5c;
-    unsigned int field60;
-    unsigned int field64;
-    unsigned int field68;
-    unsigned int field6c;
-    unsigned int field70;
-    unsigned int field74;
-    unsigned int field78;
-    unsigned int field7c;
-    unsigned int field80;
-    unsigned int field84;
-    unsigned int field88;
-    unsigned int field8c;
-    void* field90;
-    unsigned int field94;
-    unsigned int field98;
-    void __thiscall FUN_00bb1160(StrArr* array);
-};
 }  // namespace fnv_00bb1160
 
 union FogSlots_00bb1b50
@@ -13710,14 +13016,6 @@ void FUN_00bb3940()
 }  // namespace fnv_00bb3940
 
 struct NiStream;
-struct FUN_00b68dc0_class
-{
-    void LoadFromStream(NiStream&);
-};
-struct FUN_00bb44f0_class : FUN_00b68dc0_class
-{
-    void FUN_00bb44f0(NiStream&);
-};
 
 void __cdecl CheckAndNotify();
 // @fnv 0x00bb4500
@@ -15165,11 +14463,6 @@ extern const char DAT_010b9178[], DAT_010aece0[], DAT_01011584[], DAT_010b9174[]
     DAT_010a93e4[], DAT_010b9138[], DAT_010b9128[], DAT_010b9118[], DAT_010b8afc[];
 extern int DAT_011f91c0;
 extern bool DAT_011f948b, DAT_011f9421;
-struct Macro
-{
-    const char* name;
-    const char* value;
-};
 struct VertexShaderRequest
 {
     const char* values[7];
@@ -17211,7 +16504,6 @@ BSShaderProperty__RenderPassArray* DecalShaderProperty::UpdateRenderPasses(NiGeo
 }
 
 namespace fnv_00bb7170 {
-extern int DAT_010b9c40;
 
 struct PoolHeap
 {
@@ -17220,21 +16512,6 @@ struct PoolHeap
 };
 
 extern "C" PoolHeap DAT_011f6238;
-
-unsigned int __cdecl FUN_00bb6030();
-
-struct BaseShim
-{
-    int m_vptr;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    BaseShim();
-    ~BaseShim();
-};
 
 struct PoolElement20
 {
@@ -17250,30 +16527,6 @@ struct PoolElement20
     {
         return DAT_011f6238.FUN_00aa3e40(size);
     }
-};
-
-struct FUN_00bb7170 : BaseShim
-{
-    int m_01c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    int m_058;
-    int unk5c;
-    unsigned int m_060;
-    PoolElement20* m_064;
-    FUN_00bb7170();
 };
 
 }  // namespace fnv_00bb7170
@@ -19997,13 +19250,11 @@ struct P368Context
 };
 
 extern NiBound DAT_011f4288;
-extern const float DAT_011f9458;
 extern float DAT_011f9460, DAT_011f9468, DAT_011f946c;
 extern float DAT_011f9470;
 
 bool IsParticleShaderRendererEnabled();
 int GetGlobalFloatAsUInt();
-bool FUN_005bf7b0();
 float LinearInterpolate(float, float, float, float, float);
 
 struct P368Shader

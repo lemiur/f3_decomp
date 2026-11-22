@@ -516,7 +516,6 @@ extern int DAT_01093d84;
 extern int DAT_01093d9c;
 extern int DAT_01093de8;
 extern int DAT_01093e24;
-extern int DAT_01093ed4;
 struct FUN_009fc890_class
 {
     void __thiscall FUN_009fc890(int a, int b, int c, int d, const wchar_t* e, int f);
@@ -5915,33 +5914,6 @@ struct AdjDerived : AdjPrimaryBase, AdjSecondaryBase
 
 AdjDerived::AdjDerived()
 {}
-
-// FUN_009fdd60: __cdecl adjustor thunk (sub dword ptr [esp+4],0x18; jmp target).
-// A __cdecl virtual member passes "this" as the first stack argument, so the
-// multiple-inheritance adjustor thunk subtracts the secondary-base offset from
-// the stack slot instead of from ecx. Primary base is 0x18 bytes (vptr + five
-// ints); the secondary base subobject sits at +0x18 inside Derived.
-struct PrimaryBase_009fdd60
-{
-    virtual void __cdecl FUN_009fdd60();
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-};
-
-struct SecondaryBase_009fdd60
-{
-    virtual void __cdecl FUN_009fdd60();
-};
-
-struct Derived_009fdd60 : PrimaryBase_009fdd60, SecondaryBase_009fdd60
-{
-    Derived_009fdd60();
-// @fnv 0x009fdd60
-    virtual void __cdecl FUN_009fdd60();
-};
 
 namespace fnv_009fddf0 {
 extern "C" __declspec(dllimport) void __stdcall InitializeCriticalSection(void* lpCriticalSection);

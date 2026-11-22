@@ -38,8 +38,6 @@ struct D92740Block
 };
 
 D92740Block* __cdecl AllocateBlock(int capacity, int typeA, int typeB, int extra);
-void __cdecl FUN_00d925b0(D92740Block* dst, D92740Block* src);
-int __cdecl RoundUpToBucketSize(int sizeClass);
 
 // @f3 0x00a26c20 (community match, verified in this file)
 struct D92740Block;
@@ -67,41 +65,7 @@ D92740Block* __cdecl ShrinkBlockIfSparse(D92740Block* block, int numToAdd, bool*
 }
 
 
-struct MyAlloc
-{
-    virtual void unk00();
-    virtual void* Construct(unsigned int raw);
-};
-
 extern "C" D92740MemoryRouter& __cdecl FUN_00c85750();
-
-struct Types
-{
-    unsigned char a;
-    unsigned char b;
-};
-
-struct Obj
-{
-    unsigned short f00;
-    unsigned short f02;
-    unsigned short f04;
-    unsigned short f06;
-    Types types;
-    unsigned char f0A;
-    unsigned char unk0B;
-    unsigned short f0C;
-    unsigned short f0E;
-    unsigned short f10;
-    unsigned short f12;
-    unsigned int f14;
-    unsigned int f18;
-    unsigned int f1C;
-    unsigned int f20;
-    unsigned int f24;
-    unsigned int f28;
-    unsigned int f2C;
-};
 
 // @f3 0x00a269d0 (community match, verified in this file)
 extern void* (__stdcall* DAT_00d9b080)(unsigned long);

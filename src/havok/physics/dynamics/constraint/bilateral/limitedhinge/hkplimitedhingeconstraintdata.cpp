@@ -4,13 +4,6 @@
 
 #include "havok/hkpLimitedHingeConstraintData.h"
 
-struct FUN_00cb8a90_class
-{
-    void __thiscall SetConstraintFlag(int cl);
-};
-
-extern "C" void* __cdecl FUN_00d21a60(void* self, int a, int b);
-
 struct FUN_00cb8af0_cls
 {
     void* __thiscall FUN_00cb8af0(int arg);
@@ -37,80 +30,6 @@ void __thiscall FUN_00cb8b10Class::FUN_00cb8b10(int* apUnused, int* a2)
     a2[0] = 80;
 }
 
-struct FUN_00cb8a70_class
-{
-    void __thiscall FUN_00cb8a70(float v);
-};
-
-struct RefObj
-{
-    void __thiscall RetainReference();
-    void __thiscall removeReference();
-};
-struct FUN_00cb8ac0_class
-{
-    void __thiscall SetReferencedObject(RefObj* obj);
-};
-
-struct DDCC60World
-{
-    void removeReference();
-};
-extern int DAT_010c89e4;
-extern int DAT_0102e388;
-struct FUN_00cb8b40_class
-{
-    int m_000;
-    int m_004;
-    int m_008;
-    int m_00c;
-    int m_010;
-    int m_014;
-    int m_018;
-    int m_01c;
-    int m_020;
-    int m_024;
-    int m_028;
-    int m_02c;
-    int m_030;
-    int m_034;
-    int m_038;
-    int m_03c;
-    int m_040;
-    int m_044;
-    int m_048;
-    int m_04c;
-    int m_050;
-    int m_054;
-    int m_058;
-    int m_05c;
-    int m_060;
-    int m_064;
-    int m_068;
-    int m_06c;
-    int m_070;
-    int m_074;
-    int m_078;
-    int m_07c;
-    int m_080;
-    int m_084;
-    int m_088;
-    int m_08c;
-    int m_090;
-    int m_094;
-    int m_098;
-    int m_09c;
-    int m_0a0;
-    int m_0a4;
-    int m_0a8;
-    int m_0ac;
-    int m_0b0;
-    int m_0b4;
-    int m_0b8;
-    int m_0bc;
-    void __thiscall DestroyWorldReference();
-};
-
 // Stores b at self+0xa2 and its negation at self+0xb6; if a is non-null, zeroes four floats at a->0x30->0x1c.
 // @f3 0x0092b6d0 (community match, verified in this file)
 void __fastcall FUN_00cb8fe0(char* self, int, int a, bool b)
@@ -134,23 +53,6 @@ void __fastcall FUN_00cb8fe0(char* self, int, int a, bool b)
     }
 }
 
-
-class FUN_00cb8a80_cls
-{
-  public:
-    char unkPad0[0xd8];
-    float m_fD8;
-    float FUN_00cb8a80();
-};
-
-struct FUN_00cb8ab0_class
-{
-    char pad0[0xD6];
-    unsigned char m_byteD6;
-    char padD7[0x1];
-
-    unsigned char __thiscall FUN_00cb8ab0();
-};
 
 // @fnv 0x00cb8b30
 int __cdecl FUN_00cb8b30()
@@ -198,29 +100,6 @@ hkBoolCB90 hkObjCB90::FUN_00cb9020() const
 {
     return m_kPointA.IsOrthonormal(1e-3f) && m_kPointB.IsOrthonormal(1e-3f) && (!m_hasC || m_cValid);
 }
-
-struct FnvCpu_FUN_00cb9220_CpuAllocator
-{
-    virtual void slot00();
-    virtual void slot04();
-    virtual void Invoke(void* block, unsigned int size);
-};
-struct FnvCpu_FUN_00cb9220_CpuAllocatorHolder
-{
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0c;
-    FnvCpu_FUN_00cb9220_CpuAllocator* allocator;
-};
-FnvCpu_FUN_00cb9220_CpuAllocatorHolder* __cdecl FUN_00c85750();
-struct FnvCpu_FUN_00cb9220_CpuObject
-{
-    unsigned int unk00;
-    unsigned short size;
-    void DestroyWorldReference();
-    FnvCpu_FUN_00cb9220_CpuObject* Destroy(unsigned int flags);
-};
 
 struct FUN_00b5aea0_self
 {
@@ -379,16 +258,6 @@ class hkpConstraintDataD4FE : public hkReferencedObjectD4FE
     unsigned long m_ulUserData;
 };
 
-class FUN_00d4fe80 : public hkpConstraintDataD4FE
-{
-  public:
-    FUN_00d4fe80() throw();
-    virtual ~FUN_00d4fe80() throw();
-
-    int unk0C;
-    FUN_00d4ff60 m_kBridgeAtoms;
-};
-
 #include <math.h>
 extern "C"
 {
@@ -419,37 +288,8 @@ union hkVector4q
     }
 };
 
-struct hkVector4Out : public hkVector4
-{
-    void setRotatedInverseDir(const hkRotation& r, const hkVector4& v);
-    void SetTransformedPosition(const hkTransform& t, const hkVector4& v);
-};
-
-struct hkpSetupStabilizationAtom
-{
-    unsigned short m_type;
-    unsigned short unk02;
-    int unk04;
-    int unk08;
-    int unk0C;
-};
-
-struct hkpLimitedHingeTransforms
-{
-    hkpSetupStabilizationAtom m_kHeader;
-    hkTransform m_kBodyALocalFrame;
-    hkTransform m_kBodyBLocalFrame;
-};
-
-struct hkpLimitedHingeConstraintDataEx : public hkpLimitedHingeConstraintData
-{
-    void FUN_00cb8b60(const hkTransform& bodyATransform, const hkTransform& bodyBTransform, const hkVector4& pivot,
-                      const hkVector4& axis);
-};
-
 extern "C"
 {
-    void _ReadWriteBarrier(void);
     __m128 _mm_mul_ps(__m128, __m128);
     __m128 _mm_add_ss(__m128, __m128);
     __m128 _mm_sub_ps(__m128, __m128);
@@ -499,35 +339,4 @@ struct hkVector4_Havok
                                    _mm_mul_ps(_mm_shuffle_ps(a.m_vComponents, a.m_vComponents, 0xd2),
                                               _mm_shuffle_ps(b.m_vComponents, b.m_vComponents, 0xc9)));
     }
-};
-
-struct hkRotation_Havok
-{
-    hkVector4_Havok m_kColumn0;
-    hkVector4_Havok m_kColumn1;
-    hkVector4_Havok m_kColumn2;
-};
-
-struct hkTransform_Havok
-{
-    hkRotation_Havok m_rotation;
-    hkVector4_Havok m_vTranslation;
-};
-
-struct HingeClass
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    hkTransform_Havok m_kBodyALocalFrame;
-    hkTransform_Havok m_kBodyBLocalFrame;
-
-    void __thiscall FUN_00cb8da0(const hkVector4_Havok& pivotA, const hkVector4_Havok& pivotB,
-                                 const hkVector4_Havok& axisA, const hkVector4_Havok& axisB,
-                                 const hkVector4_Havok& axisAPerp, const hkVector4_Havok& axisBPerp);
 };

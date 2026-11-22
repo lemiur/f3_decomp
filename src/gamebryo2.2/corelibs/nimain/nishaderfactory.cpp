@@ -98,12 +98,6 @@ struct NiD3DShaderProgram : public NiGPUProgram
     ShaderPassRenderer* m_pRenderState;
 };
 typedef char _sizecheck_NiD3DShaderProgram[sizeof(NiD3DShaderProgram) == 44 ? 1 : -1];
-struct FUN_00e89830_shell : public NiD3DShaderProgram
-{
-    void* FUN_00e89830();
-};
-
-extern char const* const g_0126f9ac_arg1;
 
 struct NiFileHack
 {

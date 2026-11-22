@@ -53,8 +53,6 @@ void __cdecl FUN_00a75c00()
     FUN_00a72080();
 }
 
-void FUN_00a90010();
-
 class CloningProcessA9B3;
 
 class TESObjectDoorController

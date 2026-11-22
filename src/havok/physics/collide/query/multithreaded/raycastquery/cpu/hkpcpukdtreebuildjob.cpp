@@ -5,25 +5,10 @@
 #include <xmmintrin.h>
 #include <windows.h>
 extern DWORD DAT_0126835c;
-extern "C" void _ReadWriteBarrier(void);
-unsigned __int64 __cdecl __rdtsc(void);
 struct __declspec(align(8)) ScratchWord
 {
     DWORD unk00;
     DWORD value;
-};
-struct TraceRecord
-{
-    const char* m_pTag;
-    DWORD m_dwTime;
-    DWORD unk08;
-};
-struct TraceBuffer
-{
-    DWORD unk00;
-    TraceRecord* m_pCurrent;
-    DWORD unk08;
-    TraceRecord* m_pRecordEnd;
 };
 struct ArgStruct
 {
@@ -46,47 +31,12 @@ struct ArgStruct
     int m_3c;
     int m_40;
 };
-struct Head
-{
-    int m_20;
-    int m_24;
-    unsigned short s0;
-    unsigned short s1;
-    unsigned short s2;
-    unsigned short s3;
-    unsigned short s4;
-    unsigned short s5;
-    unsigned short s6;
-    unsigned short s7;
-};
-struct Vec16
-{
-    float f0;
-    float f1;
-    float f2;
-    float f3;
-};
 struct __declspec(align(16)) VecA
 {
     float x;
     float y;
     float z;
     float w;
-};
-extern float DAT_012684d0[4];
-struct InElem
-{
-    DWORD* m_20ptr;
-    DWORD m_24;
-    DWORD m_28;
-    Vec16 m_2cvec;
-    DWORD m_3c;
-    VecA m_40vec;
-    DWORD unk30;
-    DWORD unk34;
-    DWORD unk38;
-    DWORD unk3c;
-    VecA initialVector;
 };
 struct OutElem
 {
@@ -135,8 +85,6 @@ struct Ctx
     void FUN_00d04420(int h);
     int ProcessCallback(ArgStruct* a, ArgStruct* b, int z);
 };
-extern "C" void __cdecl MixChannels(Head* a1, char* a2, int a3, int a4, int a5, int a6, DWORD* a7);
-extern "C" void __cdecl FUN_00df37b0(Head* a1, char* a2, int a3, int a4, void* a5, int* a6, unsigned short* a7);
 struct ContextHandle
 {
     Ctx* object;
@@ -159,18 +107,6 @@ struct ArgHandle
 };
 
 extern unsigned long DAT_0126835c;
-extern char str_010cc5c4;
-extern char str_010d3ea4;
-extern char str_010d3eb8;
-extern char str_01076f38;
-
-struct S00d947e0_Tls
-{
-    int unk00;
-    char* unk04;
-    int unk08;
-    char* unk0C;
-};
 
 struct S00d947e0_Obj
 {
@@ -343,9 +279,6 @@ static __forceinline void S00d947e0_memClear16(int* p, int n)
         p += 4;
     }
 }
-
-void __cdecl FUN_00d8d030(void* a, int b, int c, int d);
-void __cdecl FUN_00df0680(void* a, int b, int c, int d);
 
 // Writes profiler records, clears a buffer, calls FUN_00d8d030, queues an S00d947e0_Cmd via a2->FUN_00d04b50, calls FUN_00df0680, then calls a2->ProcessCallback.
 // @f3 0x00a23820 (community match, verified in this file)

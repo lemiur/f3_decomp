@@ -21,27 +21,6 @@ int __cdecl FUN_00cea7c0(void* apFirst, void* apSecond, void* apThird)
     return 0;
 }
 
-struct Item
-{
-    int unk00[11];
-    int unk2c;
-};
-struct Container
-{
-    int unk00[2];
-    Item** items;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-};
-struct Counter
-{
-    int unk00[12];
-    int unk30;
-};
-extern "C" void __cdecl AssignNodeFlags(int, int, int);
-
 struct Inner
 {
     virtual void unk0();
@@ -581,16 +560,13 @@ struct Ragdoll
         return --mapped < 0 ? 0 : constraints[mapped];
     }
 };
-extern "C" void __cdecl MarkHierarchyDescendants(Skeleton*, int, char*, int) throw();
 }  // namespace fnv_00ceaf60
 
-extern "C" void _ReadWriteBarrier();
 union __declspec(intrin_type) __declspec(align(16)) __m128
 {
     float m128_f32[4];
     unsigned __int64 m128_u64[2];
 };
-extern "C" __m128 _mm_load_ps(const float*);
 
 extern "C"
 {
@@ -604,12 +580,6 @@ extern "C"
     __m128 _mm_unpackhi_ps(__m128, __m128);
     __m128 _mm_rcp_ps(__m128);
 }
-
-extern __m128 DAT_010c71e0;
-extern __m128 DAT_010c7170;
-extern __m128 DAT_010c44d0;
-extern __m128 DAT_010c4c00;
-extern __m128 DAT_010c4c10;
 
 struct hkBoolR
 {
@@ -752,107 +722,6 @@ struct hkXform
     hkVec4 m_kColumn2;
     hkVec4 m_vTranslation;
 };
-
-struct MassA
-{
-    void* unk00;
-    void* unk04;
-    unsigned char unk08, unk09, unk0a, unk0b;
-    void FUN_00d733e0();
-};
-struct MassB
-{
-    hkVec4 unk00;
-    void FUN_00d73410();
-};
-struct ErrorIface
-{
-    virtual void unk00();
-    virtual void unk04();
-    virtual void unk08();
-    virtual void unk0c();
-    virtual void SetErrorCodeEnabled(int id, hkBoolR enabled);
-    virtual hkBoolR isEnabled(int id);
-};
-struct ShapeObj
-{
-    int unk00;
-    unsigned short m_usMemSizeAndFlags;
-    ShapeObj* FUN_00cf5990(void* shape, const hkXform& t);
-    void FUN_00c905b0();
-};
-struct Body
-{
-    virtual void vf00();
-    virtual void vf04();
-    virtual void vf08();
-    virtual void SetCollisionShapeAndKey(ShapeObj* shape);
-    void* m_pCollisionShape;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5c;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6c;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7c;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8c;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9c;
-    int unka0;
-    int unka4;
-    int unka8;
-    int unkac;
-    int unkb0;
-    int unkb4;
-    int unkb8;
-    int unkbc;
-    int unkc0;
-    int unkc4;
-    int unkc8;
-    int unkcc;
-    int unkd0;
-    int unkd4;
-    int unkd8;
-    int unkdc;
-    int unke0;
-    int unke4;
-    char m_bFlag;
-    int unkec;
-    hkXform m_kMotionTransform;
-    hkVec4 m_vCenterOfMass0;
-    hkVec4 m_vCenterOfMass1;
-    void FUN_00ca8890(const hkXform& t);
-    void FUN_00ca85f0(const hkVec4& com);
-};
-void __cdecl FUN_00d748d0(Body* body, MassA* a, MassB* b);
-
-extern hkQsXform DAT_01268700;
-extern float DAT_01017d00;
 
 struct MemoryRouter : SpawnedGlobal
 {

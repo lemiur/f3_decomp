@@ -78,8 +78,6 @@ void NiBlendQuaternionInterpolator::FUN_00a554e0(NiStream* kStream)
 }
 }  // namespace fnv_00a554e0
 
-extern int g_011f4064;
-
 void __fastcall FUN_00a36890(void*);
 extern int DAT_011f4208;
 extern int DAT_011f420c;
@@ -233,44 +231,6 @@ bool FUN_00a55920_shell::Interpolate(float fTime, void* pkInterpTarget, NiQuater
     m_fLastTime = fTime;
     return bReturnValue;
 }
-
-struct StrArr
-{
-    void* m_pData;
-    unsigned int m_uiCapacity;
-    unsigned short m_uiSize;
-    unsigned short m_uiCount;
-    unsigned short m_uiReserved;
-    unsigned short m_uiGrowSize;
-
-    void SetSize(unsigned int);
-    void SetAt(unsigned int, char*&);
-};
-
-struct FUN_00a38080_shell
-{
-    void FUN_00a38080(StrArr*);
-};
-
-struct FUN_00a6e190_shell
-{
-    float x;
-    float y;
-    float z;
-    float w;
-
-    char* FUN_00a6e190(const char*);
-};
-
-char* __cdecl _FUN_00a7d330(int);
-char* FUN_00a6e190(const char*);
-
-extern char str_01098800[];
-
-struct FUN_00a55980_shell : NiBlendQuaternionInterpolator
-{
-    void AppendInterpolatorStrings(StrArr*);
-};
 
 struct FUN_00a55590_sub
 {

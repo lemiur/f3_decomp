@@ -2,20 +2,12 @@
 // src/havok/physics/utilities/constraint/chain/hkpconstraintchainutil.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/physics/utilities/constraint/chain/hkpconstraintchainutil.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-struct CallTarget_00e5c370
-{
-    int InsertAndDelete(int, int, int, int, int);
-};
 struct SearchObject
 {
     int FUN_00e5c420(unsigned int arg0, unsigned int arg1, unsigned int arg2, unsigned int arg3);
 };
 
 namespace fnv_00e5c440 {
-struct CallTarget_00e5c420
-{
-    int FUN_00e5c420(int, int, int, int);
-};
 struct SearchObject
 {
     int FUN_00e5c440(unsigned int arg0, unsigned int arg1, unsigned int arg2);
@@ -29,48 +21,6 @@ struct AudioAllocator
     virtual void v08();
     virtual void v0c();
     virtual void v10();
-};
-
-struct AudioHolder
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    AudioAllocator* m_pAllocator;
-};
-
-AudioHolder* __cdecl FUN_00c85750() throw();
-
-struct DispatchTarget
-{
-    void CallWithFlag(void* aValue, int aZero, void* aOut);
-};
-
-struct OutObject
-{
-    void FUN_00c90510();
-};
-
-struct FUN_00e5c460_cls
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    DispatchTarget m_38;
-
-    void FUN_00e5c460(OutObject* a1);
 };
 
 #include <xmmintrin.h>
@@ -168,33 +118,6 @@ struct __declspec(align(16)) RelativeOrientationData
     void FUN_00c74ac0(char* a, char* b);
 };
 
-struct Callee
-{
-    int unk00;
-    void FUN_00e3b850(void* p1, void* p2, void* p3, int a4, int a5, int a6);
-};
-
-struct Owner
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    Callee* m_0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    void** m_38;
-    int m_3c;
-    void AddReferencedObject(char* a);
-};
-
 }  // namespace fnv_00e5b440
 
 // FUN_00e5b8f0: __cdecl, 317 bytes
@@ -269,8 +192,6 @@ struct ListB
     void AddReferencedObject(unsigned int key);
     void FUN_00e5c460(unsigned int key);
 };
-
-int FUN_00e5ad40(KeyOwnerA* a, Tmp16* p, Tmp16* q);
 
 // Returns 1 if FUN_00e5ad40 is nonzero or no key matches; else matches a1's m_14/m_18 to a2's list ends, calls a3 helpers, updates a2 and returns 0.
 // @f3 0x00a91590 (community match, verified in this file)

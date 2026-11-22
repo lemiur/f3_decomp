@@ -21,40 +21,6 @@ FUN_00ba8690::FUN_00ba8690(int flags)
         operator delete((void*)this, 0x104);
 }
 
-struct S_00ba8630_Base
-{
-    int unk4;
-    int unk8;
-    int unkC;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    S_00ba8630_Base();
-    virtual ~S_00ba8630_Base();
-};
-
-struct FUN_00ba8630 : S_00ba8630_Base
-{
-    int unk58;
-    FUN_00ba8630();
-    virtual ~FUN_00ba8630();
-};
-
 extern int DAT_0120043c;
 
 void __stdcall FUN_00b665c0(void* apValue);
@@ -65,11 +31,6 @@ bool __stdcall FUN_00ba8670(void* apValue)
     FUN_00b665c0(apValue);
     return false;
 }
-
-struct ACS00bac
-{
-    void* m_p;
-};
 
 struct A5A040Cls
 {
@@ -321,27 +282,3 @@ int* SpawnerHost::CreateSpawnedObject(int flags) { task1436::SpawnedObject* p=ne
 
 
 extern int DAT_0120043c;
-void __stdcall FUN_00b690d0(void* p);
-void* __cdecl FUN_00a7d330(int v);
-
-struct ObjHdr
-{
-    int unk0;
-    int unk4;
-    unsigned short unk8;
-    unsigned short unkA;
-    unsigned short unkC;
-    unsigned short unkE;
-    void FUN_0096ad30(int v);
-    void FUN_0096ae90(unsigned int count, void** out);
-};
-
-struct S_00b68ed0_Stream;
-struct S_00b68ed0_Obj
-{
-    void ReadFromStream(S_00b68ed0_Stream*);
-};
-struct FUN_00ba8660_S
-{
-    void FUN_00ba8660(S_00b68ed0_Stream*);
-};

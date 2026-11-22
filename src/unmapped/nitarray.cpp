@@ -20,11 +20,6 @@ void NiD3DRenderState::FUN_00e87980(void* apData)
     ((NiD3DShaderFactory*)((char*)this + 0xf8))->FUN_00e94050(*(void**)((char*)this + 0x10f8));
 }
 
-struct FUN_009ba5f0_shell
-{
-    void SetChildObject(int);
-};
-
 struct FUN_00c89c80_obj
 {
     void CopyFromSource(unsigned int uiMaxSize);
@@ -235,20 +230,6 @@ void C89CD0Holder::ProcessTarget(void* arg)
             pkTarget->process(arg);
     }
 }
-
-struct Target
-{
-    void FUN_00c89bf0(void* apArg);
-};
-
-struct FUN_00c89cf0_cls
-{
-    int unk00;
-    int unk04;
-    Target* m_pFlagTarget;
-
-    void DispatchToTarget(void* apArg);
-};
 
 extern "C" __declspec(dllimport) long __stdcall InterlockedIncrement(long volatile* plAddend);
 extern "C" __declspec(dllimport) long __stdcall InterlockedDecrement(long volatile* plAddend);

@@ -21983,11 +21983,6 @@ namespace f3m_00429980 {
 extern void __cdecl FUN_00c007fc(char*, unsigned int, const char*);
 extern void __cdecl FUN_00c00fcc(char*, unsigned int, const char*);
 
-struct Heap_b0692 {
-    void* FUN_0086b930(unsigned int bytes);
-    void FUN_0086ba60(void* memory);
-};
-
 struct Entry_b0692 {
     char* name;
     Entry_b0692* next;
@@ -23231,7 +23226,6 @@ struct FormType1011519_43cda0 : FormStorage0441519_43cda0 {
 struct FormType1021519_43cda0 : FormStorage0301519_43cda0 {
     FormType1021519_43cda0();
 };
-struct FormTypeName1519_43cda0 { const char* name; unsigned int unk04, unk08; };
 void FUN_00887da0(const char*, ...);
 
 FactoryObject1519_43cda0* FUN_0043cda0(unsigned char type)
@@ -30526,10 +30520,6 @@ struct ReloadHandler
     void FUN_00615b90(ReloadPoint*,int); void FUN_00615310(ReloadPoint*);
     bool FUN_00454b70() { return worldActive != 0; }
 };
-struct ReloadWorld
-{
-    ReloadHandler* FUN_00501cc0();
-};
 struct ReloadGrid
 {
     unsigned int unk000;
@@ -30831,7 +30821,6 @@ struct ReloadRoot
 };
 extern ReloadRoot* DAT_01071564;
 inline ReloadRoot* ReloadGetRoot() { return DAT_01071564; }
-ReloadRoot* ReloadGetRootCreate(int);
 extern ReloadRoot* DAT_0116efb8;
 inline ReloadRoot* ReloadGetMain(int) { return DAT_0116efb8; }
 void FUN_00ad3b60(int);
@@ -32974,7 +32963,6 @@ Outer* FUN_00422d70(Source* src) {
 
 // @f3 0x00438510 (community match, verified in this file)
 #include <string.h>
-extern "C" unsigned long __readfsdword(unsigned long);
 extern "C" __declspec(dllimport) long __stdcall InterlockedDecrement(volatile long* value);
 extern "C" __declspec(dllimport) long __stdcall InterlockedIncrement(volatile long* value);
 namespace z438510 {
@@ -33676,7 +33664,6 @@ struct Parent {
     virtual void v54();
     virtual void v55(DerB0* d, int f);
 };
-extern unsigned int DAT_01179af4;
 extern int DAT_0108ec80;
 void FUN_0056c210();
 void FUN_004c1cf0();
@@ -33719,7 +33706,6 @@ struct SPr {
     }
 };
 extern "C" void _ReadWriteBarrier(void);
-extern "C" unsigned long _tls_index;
 struct ThreadHeap {
  int unk000;
  int unk004;
@@ -45096,8 +45082,6 @@ extern float DAT_0116f1fc;
 extern float DAT_0116f29c;
 extern S004399f0_Water* DAT_01071564;
 extern S004399f0_Player* DAT_0107a104;
-extern const float DAT_00db8d7c;
-extern const float DAT_00db8d78;
 bool __cdecl FUN_0061a040();
 void __cdecl FUN_005736a0();
 

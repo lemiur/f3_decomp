@@ -84,13 +84,6 @@ struct Cls_00d1e7b0
     void WriteDiagonal(float* pOut);
 };
 
-// Zeroes 12 floats at pOut, then stores m_c0, m_c4 and m_c8 at pOut[0], pOut[5] and pOut[10].
-// @f3 0x004e6070 (community match, verified in this file)
-struct Ret4
-{
-    __m128 m_vComponents;
-};
-
 struct StubVirt
 {
     virtual void v00();
@@ -196,32 +189,6 @@ struct hkMatrix3D1E8
     {
         return (&m_kColumn0)[c](r);
     }
-};
-
-class hkBaseObjectD1E8
-{
-  public:
-    virtual ~hkBaseObjectD1E8() throw();
-};
-
-class hkReferencedObjectD1E8 : public hkBaseObjectD1E8
-{
-  public:
-    unsigned short m_usMemSizeAndFlags;
-    short m_sReferenceCount;
-};
-
-class hkpSphereMotionD1E8 : public hkReferencedObjectD1E8
-{
-  public:
-    void SetInertiaAndMassInv(const hkMatrix3D1E8& kInertiaInv);
-
-    unsigned char m_type;
-    unsigned char m_ucDeactivationIntegrateCounter;
-    unsigned short m_ausDeactivationNumInactiveFrames[2];
-    unsigned short unk0E;
-    hkVector4D1E8 m_kMotionState[11];
-    hkVector4D1E8 m_kInertiaAndMassInv;
 };
 
 }  // namespace fnv_00d1e810
@@ -497,28 +464,6 @@ struct hkMat3Q
     hkVec4Q m_kColumn0, m_kColumn1, m_kColumn2;
 };
 
-struct hkpMotionB
-{
-    void* vtbl;
-    int unk04;
-    int unk08;
-    int unk0c;
-    hkMat3Q m_rotation;      // 0x10
-    hkVec4Q m_vTranslation;  // 0x40
-    hkVec4Q m_com0;          // 0x50
-    hkVec4Q m_com1;          // 0x60
-    hkVec4Q unk70;
-    hkVec4Q unk80;
-    hkVec4Q unk90;
-    hkVec4Q unka0;
-    hkVec4Q unkb0;
-    hkVec4Q m_kInertiaAndMassInv;      // 0xc0
-    hkVec4Q m_kTranslationalVelocity;  // 0xd0
-    hkVec4Q m_kAngularVelocity;        // 0xe0
-
-    void FUN_00d1e9f0(const hkVec4Q& imp, const hkVec4Q& p);
-};
-
 extern "C" __m128 _mm_unpacklo_ps(__m128, __m128);
 extern "C" __m128 _mm_unpackhi_ps(__m128, __m128);
 extern "C" __m128 _mm_movelh_ps(__m128, __m128);
@@ -526,19 +471,6 @@ extern "C" __m128 _mm_movehl_ps(__m128, __m128);
 extern "C" __m128 _mm_mul_ps(__m128, __m128);
 extern "C" __m128 _mm_add_ps(__m128, __m128);
 extern "C" void _ReadWriteBarrier(void);
-extern "C" __m128 _mm_load_ps(const float*);
-struct Mat
-{
-    __m128 c0, c1, c2;
-};
-struct Vec
-{
-    __m128 q;
-};
-struct Motion
-{
-    void FUN_00d1eaf0(const Vec& impulse);
-};
 
 extern "C" __m128 _mm_setr_ps(float, float, float, float);
 
@@ -547,33 +479,11 @@ inline void* operator new(unsigned int, void* p)
     return p;
 }
 
-extern const char DAT_010c6dc4[];
-extern const float DAT_01012068;
-
-struct FUN_00c86530_Obj
-{
-    virtual ~FUN_00c86530_Obj();
-    FUN_00c86530_Obj(int a1, int a2, int a3);
-};
-
-struct S00d1e690_cls : hkpMotion
-{
-    S00d1e690_cls* FUN_00d1e690(int a1, int a2);
-};
-
 extern "C" __m128 _mm_setr_ps(float, float, float, float);
-
-struct S00d1e750_cls : hkpMotion
-{
-    const hkMatrix3& FUN_00d1e750(const hkMatrix3& inertia);
-};
 
 extern "C" void _ReadWriteBarrier(void);
 
 extern "C" __m128 _mm_load_ps1(const float* p);
-extern "C" void _mm_store_ps(float* p, __m128 a);
-
-extern const float DAT_0104da4c;
 
 struct hkVector4D1E6F
 {
@@ -640,30 +550,4 @@ struct hkMatrix3D1E6F
         (*this)(1, 1) = m11;
         (*this)(2, 2) = m22;
     }
-};
-
-class hkBaseObjectD1E6F
-{
-  public:
-    virtual ~hkBaseObjectD1E6F() throw();
-};
-
-class hkReferencedObjectD1E6F : public hkBaseObjectD1E6F
-{
-  public:
-    unsigned short m_usMemSizeAndFlags;
-    short m_sReferenceCount;
-};
-
-class hkpSphereMotionD1E6F : public hkReferencedObjectD1E6F
-{
-  public:
-    void FUN_00d1e6f0(hkMatrix3D1E6F& kInertiaInv) const;
-
-    unsigned char m_type;
-    unsigned char m_ucDeactivationIntegrateCounter;
-    unsigned short m_ausDeactivationNumInactiveFrames[2];
-    unsigned short unk0E;
-    hkVector4D1E6F m_kMotionState[11];
-    hkVector4D1E6F m_kInertiaAndMassInv;
 };

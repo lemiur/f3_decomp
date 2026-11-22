@@ -11,19 +11,8 @@ void __cdecl CopyIfNonEmpty(char* dest, const char* src, int count)
         FUN_00ecc7b0(dest, src, count);
 }
 
-void __cdecl FUN_00ec8d33(int a, int b, int c);
-
 struct BSAudio;
-struct UnkRet
-{
-    void* p;
-};
-struct UnkHolder
-{
-    UnkRet* FUN_00c85750();
-};
 extern "C" BSAudio* __cdecl FUN_00c85750();
-extern "C" void __cdecl CallSwappedArgs(BSAudio*, int);
 
 double __cdecl FUN_00ecdf2d(unsigned int value, int mode);
 // @fnv 0x00cb1110
@@ -44,13 +33,6 @@ class hkBool
 
 int __cdecl FUN_00cb10d0(const char* text);
 
-class NineIntegerRecord
-{
-  public:
-    NineIntegerRecord();
-    int unk00, unk04, unk08, unk0c, unk10, unk14, unk18, unk1c, unk20;
-};
-
 struct BSAudio
 {
     int unk00, unk04, unk08, unk0c;
@@ -58,7 +40,6 @@ struct BSAudio
 };
 
 BSAudio* FUN_00c85750();
-void __cdecl FUN_00cb11b0(int a, int b, int c);
 
 // Reads unk10 from the BSAudio returned by FUN_00c85750 and passes it with a and b to FUN_00cb11b0.
 // @f3 0x005435a0 (community match, verified in this file)
@@ -99,26 +80,6 @@ int __cdecl FUN_00cb1290(const unsigned char* left,const unsigned char* right,un
 
 
 const char* __cdecl FUN_00cb1150(const char* str, int c);
-
-struct S_00cb1410_Buf
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    S_00cb1410_Buf();
-};
-int __cdecl FUN_00cb1160(int a, int b);
-
-struct Sink
-{
-    void FUN_00cb0c50(const char* p, int n);
-};
 
 const char* __cdecl FUN_00cb1130(const char* a, const char* b);
 int __cdecl FUN_00cb10d0(const char* text);

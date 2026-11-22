@@ -68,18 +68,7 @@ struct NiObject
 {
     NiObject* DynamicCast(const NiRTTI*);
 };
-struct GlobalObjectO2_00a7b610
-{
-};
-extern GlobalObjectO2_00a7b610 g_011f3738;
 struct NiInterpolator : NiObject
-{
-};
-struct PoseInterpStub
-{
-    void SetFloatValue(float);
-};
-struct NiFloatInterpolator : PoseInterpStub
 {
 };
 struct NiSingleInterpController : NiObject

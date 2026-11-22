@@ -278,21 +278,8 @@ void __fastcall FUN_00a3aba0(FUN_00a3aba0_t* self, int)
     }
 }
 
-struct FUN_00a3adc0_md
-{
-    char pad[8];
-    unsigned short count;
-};
-struct FUN_00a3adc0_t
-{
-    char pad[0x38];
-    FUN_00a3adc0_md* md;
-};
-
 struct CloningProcess;
-struct NiFloatData;
 struct NiFloatInterpolator;
-struct TimedAnimationKey;
 struct NiStream;
 struct FUN_00a3ae50_shell : public NiGeomMorpherController
 {
@@ -302,15 +289,6 @@ struct FUN_00a3ae50_shell : public NiGeomMorpherController
 struct GlobalObjectO2_00a7b610
 {
     int pad;
-};
-extern GlobalObjectO2_00a7b610 g_011f3738;
-struct PoseInterpStub
-{
-    void SetFloatValue(float);
-};
-struct DynCastHelper
-{
-    DynCastHelper* DynamicCast(const GlobalObjectO2_00a7b610*);
 };
 // Reads a float from the morph data array at usIndex and passes it to the interpolator's SetFloatValue after a dynamic cast.
 // @f3 0x008b4e50 (community match, verified in this file)
@@ -1291,12 +1269,6 @@ struct MorpherCaller
     virtual NiInterpolator* GetInterpolator(unsigned int index) = 0;
 };
 
-struct TimeFlags
-{
-    unsigned char lowerBits : 5;
-    unsigned char updateAllowed : 1;
-    unsigned char upperBits : 2;
-};
 extern const float DAT_01096ce0;
 extern const float DAT_01015f5c;
 

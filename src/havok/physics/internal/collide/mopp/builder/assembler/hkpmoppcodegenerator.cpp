@@ -7,8 +7,6 @@ extern "C"
     void* __cdecl FUN_00c85750(void);
     void __cdecl FUN_00c856c0(void*, void*);
 }
-extern int DAT_0102e388;
-extern void* DAT_010ea5b4;
 struct Buffer
 {
     void* data;
@@ -28,16 +26,6 @@ struct Buffer
         capacity = 0x80000000u;
     }
 };
-struct SomeClass
-{
-    void* vtable;
-    int unk04;
-    int unk08;
-    int unk0c;
-    void* unk10;
-    Buffer buffer;
-    void Destroy();
-};
 
 struct E06490Allocator;
 
@@ -55,8 +43,6 @@ struct E06490MemoryRouter
     }
 };
 
-extern "C" E06490MemoryRouter& __cdecl E06490GetMemoryRouter();
-char* __cdecl AllocateWithHeader(E06490Allocator* alloc, int numBytes);
 void __cdecl FUN_00c856c0(E06490Allocator* alloc, void* p);
 extern "C" void __cdecl FUN_00cb1280(void* dst, int c, int n);
 extern "C" void __cdecl FUN_00cb1260(void* dst, const void* src, int nbytes);
@@ -245,12 +231,6 @@ struct S_00e064f0_Obj : S_00e064f0_Ref
     virtual void vfn00();
 };
 
-struct FUN_00e064f0_class
-{
-    int unk00, unk04, unk08, unk0C, unk10;
-    S_00e064f0_Obj* FUN_00e064f0();
-};
-
 namespace fnv_00e066c0 {
 struct CpuAllocator
 {
@@ -267,13 +247,6 @@ struct CpuAllocatorHolder
     CpuAllocator* allocator;
 };
 CpuAllocatorHolder* __cdecl FUN_00c85750();
-struct CpuObject
-{
-    unsigned int unk00;
-    unsigned short size;
-    void Destroy();
-    CpuObject* FUN_00e066c0(unsigned int flags);
-};
 }  // namespace fnv_00e066c0
 
 // @f3 0x00a85c40 (community match, verified in this file)

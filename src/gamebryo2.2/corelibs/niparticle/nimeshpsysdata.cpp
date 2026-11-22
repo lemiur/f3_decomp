@@ -4,7 +4,6 @@
 
 extern "C"
 {
-    extern void* g_012027c0;
 }
 
 struct NiPSysData
@@ -228,19 +227,6 @@ NiObject* __thiscall Holder_00c30c50::FUN_00c30c50(CloningProcess& kCloning)
     ((Hae0*)this)->CloneTo(pkObject, kCloning);
     return (NiObject*)pkObject;
 }
-
-struct StrArr
-{
-    char _pad[8];
-    unsigned short m_usAlloc;
-    unsigned short m_usSize;
-    unsigned short _pad2;
-    unsigned short m_usGrow;
-    void __thiscall SetSize(unsigned int);
-    void __thiscall SetAt(unsigned int, char*&);
-};
-void __stdcall FUN_00c255b0(StrArr*);
-char* __cdecl _FUN_00a7d330(const char*);
 
 struct CloningProcess;
 
@@ -978,56 +964,6 @@ class BC30C00ObjectArray : public BC30C00ChildArray
         : BC30C00ChildArray(uiMaxSize, uiGrowBy)
     {}
     virtual ~BC30C00ObjectArray();
-};
-
-class BC30C00Base
-{
-  public:
-    BC30C00Base() throw();
-    virtual ~BC30C00Base();
-
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5C;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6C;
-    int unk70;
-    int unk74;
-    int unk78;
-};
-
-class FUN_00c30c00_cls : public BC30C00Base
-{
-  public:
-    FUN_00c30c00_cls() throw();
-    virtual ~FUN_00c30c00_cls();
-
-    void* m_pkTarget;
-    int unk80;
-    int unk84;
-    BC30C00ObjectArray m_kArray;
 };
 
 __declspec(dllimport) long __stdcall InterlockedIncrement(long*);

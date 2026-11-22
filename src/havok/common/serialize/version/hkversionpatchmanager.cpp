@@ -3,32 +3,6 @@
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
 extern "C" void* __cdecl FUN_00cb1410(unsigned int);
-struct FUN_00d479e0_class
-{
-    void* GetValue(const void* a, const void* b);
-};
-struct FUN_00d874d0_s
-{
-    void FUN_00d874d0(const char* a, int b);
-};
-struct FUN_00db7d00_class
-{
-    void* __thiscall FUN_00db7d00(unsigned int a);
-};
-
-struct DB7DD0Inner
-{
-    void FUN_00db7d60();
-};
-
-struct DB7DD0Outer
-{
-    int unk00;
-    int unk04;
-    DB7DD0Inner* m_inner;
-
-    void FUN_00db7dd0();
-};
 
 struct AudioHolder
 {
@@ -148,23 +122,6 @@ struct ArrayHeader
     {}
 };
 
-struct TaggedList
-{
-    int m_i00;
-    int m_i04;
-    int m_i08;
-    int m_i0c;
-
-    void FUN_00d87790(ByteTag akTag);
-};
-
-struct CreatedObject
-{
-    TaggedList m_kFirst;
-    ArrayHeader m_kArray;
-    TaggedList m_kSecond;
-};
-
 struct PoolHolder
 {
     void* m_p00;
@@ -177,35 +134,7 @@ struct PoolHolder
     void ResizeToFit(AudioAllocator* apAllocator, int aiFlag);
 };
 
-struct FUN_00db8540
-{
-    virtual void v00();
-
-    short m_s04;
-    unsigned short m_u06;
-    CreatedObject* m_pCreated;
-    ArrayHeader m_kArray;
-    PoolHolder m_kEntryPool;
-
-    FUN_00db8540();
-};
-
 }  // namespace fnv_00db8540
-
-struct DBA230Entry
-{
-    unsigned __int64 m_key;
-    int unk08;
-    int unk0C;
-};
-
-struct DBA230Array
-{
-    DBA230Entry* m_data;
-    int m_iElementCount;
-
-    bool ContainsKey(const unsigned __int64& key);
-};
 
 namespace fnv_00dbe710 {
 struct S_00dbe710_Allocator;
@@ -224,23 +153,6 @@ struct S_00dbe710_Router
 S_00dbe710_Router* FUN_00c85750();
 void ResizeAudioStream(S_00dbe710_Allocator* alloc, void* arr, int elemSize);
 
-struct S_00dbe710_Elem
-{
-    int m_uiFilterValue;
-    int m_next;
-};
-
-struct S_00dbe710
-{
-    S_00dbe710_Elem* m_data;
-    int m_iElementCount;
-    int m_iCapacityState;
-    int unkC;
-    int unk10;
-    int unk14;
-    int m_firstFree;
-    int AllocateSlot();
-};
 }  // namespace fnv_00dbe710
 
 // FindEntry (0x00db7de0, 134 bytes)
@@ -256,59 +168,9 @@ struct S_00dbe710
 // the same register the helper is given a stand-in body that does not touch
 // EDX and is marked __declspec(noinline) so that the call is not inlined.
 
-struct Entry_t
-{
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0C;
-};
-
-struct Index_t
-{
-    unsigned int unk00;
-    int __thiscall FUN_00cb1cb0(int a, int b, int c, int d);
-};
-
-struct Owner_t
-{
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0C;
-    int __thiscall FUN_00db7d60(unsigned int a, unsigned int b);
-};
-
-extern "C" int __cdecl FUN_00cb0fa0(unsigned int a, unsigned int b);
-
-struct Cls_t
-{
-    unsigned int unk00;
-    unsigned int unk04;
-    Owner_t* m08;
-    Entry_t** m0C;
-    unsigned int unk10;
-    unsigned int unk14;
-    Index_t m18;
-
-    int FindEntry(int a, int b, int c);
-};
-
-struct HelperClass
-{
-    int FUN_00cb1cb0(int a, int b, int c, int d);
-};
-struct OwnerClass
-{
-    int unk00, unk04, unk08;
-    HelperClass helper;
-    int CallHelperWithDefaults(int first, int second);
-};
-
 class BDBA270Allocator;
 
 void __cdecl FUN_00c908c0(BDBA270Allocator& kAlloc, void* apvArray, int iReqCapacity, int iElementSize);
-void __cdecl FUN_00d2cc70(void* pvDst, const void* pvSrc, int iNumBytes);
 
 inline void* __cdecl operator new(unsigned int, void* pvWhere)
 {
@@ -338,46 +200,6 @@ class BDBA270Array
     void Splice(BDBA270Allocator& kAlloc, int iIndex, int iNumToDel, const BDBA270Element* pkItems, int iNumToInsert);
 };
 
-struct FUN_00dc7fd0_sub
-{
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0c;
-    void FUN_00d87790(unsigned int a);
-    void FUN_00dc9e70();
-};
-
-struct FUN_00dc7fd0_subw
-{
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0c;
-    unsigned int unk10;
-    unsigned int unk14;
-    unsigned int unk18;
-    void FUN_00d87790(unsigned int a);
-    void FUN_00dc9e70();
-};
-
-struct FUN_00dc7fd0_cls
-{
-    unsigned int m_00;
-    unsigned int m_04;
-    unsigned int m_08;
-    unsigned int m_0c;
-    FUN_00dc7fd0_subw m_10;
-    int m_2c;
-    FUN_00dc7fd0_subw m_30;
-    FUN_00dc7fd0_sub m_4c;
-    FUN_00dc7fd0_sub m_5c;
-    FUN_00dc7fd0_sub m_6c;
-
-    FUN_00dc7fd0_cls* Initialize();
-    void FUN_00d87790(unsigned int a);
-};
-
 struct DB7F50Allocator
 {
     virtual void unk00();
@@ -404,7 +226,6 @@ struct DB7F50MemoryRouter
 namespace fnvc_adapt {
 extern "C" DB7F50MemoryRouter& __cdecl FUN_00c85750() throw();
 }
-void __cdecl FUN_00c856c0(DB7F50Allocator* pkAllocator, void* pvMem) throw();
 
 template <class T> struct DB7F50Array
 {
@@ -426,31 +247,6 @@ template <class T> struct DB7F50Array
         m_data = 0;
         m_iCapacityState = 0x80000000;
     }
-};
-
-class DB7F50Map
-{
-  public:
-    ~DB7F50Map() throw();
-
-    int GetFirstIterator() throw();
-    void* getValue(int it) throw();
-    int getNext(int it) throw();
-    void isValid(bool* pbValid, int it) throw();
-
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-};
-
-class FUN_00db7f50 : public DB7F50Map
-{
-  public:
-    ~FUN_00db7f50() throw();
-
-    DB7F50Array<void*> m_kEntries;
-    DB7F50Map m_kValues;
 };
 
 namespace fnv_00db83c0 {
@@ -507,29 +303,6 @@ struct hkIntArray
         constructWithCopy(m_data + m_iElementCount, 1, e);
         m_iElementCount++;
     }
-};
-
-struct LocalBuf
-{
-    char* m_data;
-    int m_iElementCount;
-    int m_iCapacityState;
-    int m_kStorage[32];
-    __declspec(nothrow) void InitBuffer();
-};
-
-struct GraphEdge
-{
-    int target;
-    int next;
-};
-
-struct Graph
-{
-    GraphEdge* m_kEdges;
-    int m_numEdges;
-    int m_iCapacityState;
-    __declspec(nothrow) int LookupWithDefault(int node);
 };
 
 }  // namespace fnv_00db83c0
@@ -690,20 +463,6 @@ class DBA1E0ReferencedObject
     short m_sReferenceCount;
 };
 
-class DBA1E0Object : public DBA1E0ReferencedObject
-{
-  public:
-    __declspec(nothrow) DBA1E0Object();
-
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-};
-
 }  // namespace fnv_00dba1e0
 
 namespace fnv_00db95c0 {
@@ -763,12 +522,6 @@ struct VecPair
         m_iCapacity = (int)0x80000000;
     }
 };
-struct WorkRecord
-{
-    unsigned __int64 key;
-    int index;
-    int dependency;
-};
 struct Vec16
 {
     int* m_pData;
@@ -819,13 +572,6 @@ struct IndexedMemberArray
         m_iCapacityState = 0x80000000;
     }
 };
-struct ClassCinfo
-{
-    int name;
-    int version;
-    int parent;
-    IndexedMemberArray members;
-};
 struct ObjCB
 {
     void* m_pData;
@@ -863,115 +609,6 @@ struct HelperX
     void FUN_00dc7320(StrX* a, int b) throw();
     void FUN_00dc72e0(StrX* a, int b) throw();
 };
-struct MgrA
-{
-    int m_00;
-    int m_04;
-    int m_08;
-    MgrA* FUN_00cc01c0(void* a) throw();
-    MgrA* WriteInt(int a) throw();
-    void FUN_00cb1600(void* a, int b) throw();
-    void FUN_00cc00e0() throw();
-    void FUN_00d87790(int a) throw();
-    void FUN_00d874d0(int a, void* b) throw();
-    void* GetValue(int a, int b) throw();
-    void FUN_00d87820(int a) throw();
-    int FUN_00d87410() throw();
-    void SetBoolFromThreshold(void* valid, int iterator) throw();
-    void* FUN_00d87440(int a) throw();
-    int FindNextUsedSlot(int a) throw();
-    void FreeBuffer() throw();
-};
-struct MapTag
-{
-    char m_00;
-};
-struct MgrB
-{
-    int m_00;
-    int m_04;
-    int m_08;
-    int m_0c;
-    void FUN_00d87790(MapTag a) throw();
-    void FUN_00d87820(int a) throw();
-    void FreeBuffer() throw();
-    void FUN_00d874d0(int a, void* b) throw();
-    void* GetValue(int a, int b) throw();
-    int FUN_00d87410() throw();
-    void SetBoolFromThreshold(void* valid, int iterator) throw();
-    void* FUN_00d87440(int a) throw();
-    int FindNextUsedSlot(int a) throw();
-};
-struct ErrorBuffer
-{
-    int words[128];
-};
-struct LogSink
-{
-    virtual void v0() throw();
-    virtual void v1() throw();
-    virtual void v2() throw();
-    virtual void FUN_v3(int a, int b, void* c, const char* d, int e) throw();
-};
-extern LogSink* DAT_01268360;
-struct VerObj
-{
-    virtual void v0() throw();
-    virtual void v1() throw();
-    virtual int FUN_v2() throw();
-    int FUN_00d47120() throw();
-    int FUN_00d46d40() throw();
-};
-struct Pair5
-{
-    int m_00;
-    int* m_04;
-};
-struct Elem
-{
-    int m_00;
-    int m_04;
-    int m_08;
-    int m_0c;
-    Pair5* m_10;
-    int m_14;
-};
-struct VObj
-{
-    virtual void v0() throw();
-    virtual void v1() throw();
-    virtual int FUN_v2() throw();
-    virtual int FUN_v3() throw();
-};
-struct ArgA
-{
-    virtual void v0() throw();
-    virtual void v1() throw();
-    virtual void v2() throw();
-    virtual void v3() throw();
-    virtual VerObj* FUN_v4(int a) throw();
-    virtual void v5() throw();
-    virtual void v6() throw();
-    virtual void v7() throw();
-    virtual void FUN_v8(void* a) throw();
-    void FUN_00dc85a0(int name, HelperX* world) throw();
-};
-int __cdecl FUN_00db94b0(Vec16* out, int lo, int hi, void* a, void* b, ObjCB* c, ObjCB* d) throw();
-struct Owner8
-{
-    unsigned __int64 FUN_00db7d60(int a, int b) throw();
-};
-struct This
-{
-    int m_00;
-    int m_04;
-    Owner8* m_08;
-    Elem** m_0c;
-    int m_10;
-    int FUN_00db7d40(int a, int b) throw();
-    int ForwardToInner(int a, int b) throw();
-    int ProcessVersionPatches(ArgA* a, ArgA* b, VecP* c) throw();
-};
 struct ClassWorld : HelperX
 {
     ClassWorld() throw()
@@ -1003,107 +640,6 @@ struct PointerMap : ObjCB
 
 extern "C" void* __cdecl FUN_00cb1410(unsigned int);
 
-struct PatchFactory
-{
-    virtual void vf00();
-    virtual void vf04();
-    virtual void vf08();
-    virtual void vf0C();
-    virtual int vf10();
-};
-
-extern PatchFactory* DAT_01268b08;
-
-struct FUN_00c90510_Object
-{
-    void FUN_00c90510();
-};
-
-struct FUN_00c905b0_Object
-{
-    void FUN_00c905b0();
-};
-
-struct PatchArray
-{
-    int unk00;
-    int unk04;
-    int unk08;
-};
-
-struct PatchAllocator
-{
-    virtual void vf00();
-    virtual void vf04();
-    virtual void vf08();
-    virtual void vf0C();
-    virtual void vf10(int a, int b);
-};
-
-extern "C" int __cdecl applyPatchOperations(int patch, int object);
-struct PatchWorld
-{
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual void v0c();
-    virtual void v10();
-    virtual void v14();
-    virtual void v18();
-    virtual void v1c();
-    virtual void v20();
-    virtual int GetClassFromName(int name);
-};
-
-struct PatchManager
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-
-    int FUN_00db8670();
-    int ProcessVersionPatches(int a, int b, PatchArray* c);
-    int FUN_00dba0d0(int param2, int param3);
-};
-
-struct DBA1A0Class
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    void* unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-
-    int FUN_00db8670();
-    int __thiscall FUN_00dba1a0(int a1);
-};
-
-extern "C" int fnv_unknown_clobber(int a) throw();
-
-// @fnv 0x00db7d40
-struct Pair
-{
-    int first, second;
-};
-struct C
-{
-    void __thiscall FUN_00db7cf0(int, int);
-};
-struct W
-{
-    int x, y;
-    C* inner;
-    void __thiscall FUN_00db7d40(Pair);
-};
-
 namespace fnv_00dba4d0 {
 struct AllocHolder
 {
@@ -1114,26 +650,8 @@ struct AllocHolder
     void* m_pAllocator;
 };
 
-struct SortedEntry
-{
-    int m_kPointA;
-    int m_kPointB;
-    int m_key;
-    int m_iFourthElementInteger;
-};
-
 AllocHolder* __cdecl FUN_00c85750();
 void __cdecl ResizeAudioStream(void* allocator, void* list, unsigned int elemSize);
-
-struct FUN_00dba4d0_cls
-{
-    SortedEntry* m_pData;
-    int m_iArrayLength;
-    unsigned int m_uCapBits;
-
-    void FUN_00dba340(void* allocator, int index, const SortedEntry* value);
-    void FUN_00dba4d0(const SortedEntry* apValue);
-};
 
 }  // namespace fnv_00dba4d0
 
@@ -1153,13 +671,6 @@ struct CpuAllocatorHolder
     CpuAllocator* allocator;
 };
 CpuAllocatorHolder* __cdecl FUN_00c85750();
-struct CpuObject
-{
-    unsigned int unk00;
-    unsigned short size;
-    void FUN_00db85e0();
-    CpuObject* FUN_00dba580(unsigned int flags);
-};
 }  // namespace fnv_00dba580
 
 struct AudioAllocator
@@ -1171,114 +682,6 @@ struct AudioAllocator
 
 extern "C" void _ReadWriteBarrier(void);
 void __cdecl ResizeAudioStream(AudioAllocator* apAllocator, void* apContainer, unsigned int auiElemSize);
-int __cdecl FUN_00db7cb0(unsigned int auiValue);
-
-struct FUN_00db7ef0_sub
-{
-    int unk00;
-    int unk04;
-    void FUN_00cb1e00();
-};
-
-struct FUN_00db7ef0_list
-{
-    unsigned int* m_data;
-    int m_uiItemCount;
-    unsigned int m_capFlags;
-};
-
-struct FUN_00db7ef0_cls
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    FUN_00db7ef0_list m_kNode;
-    FUN_00db7ef0_sub m_sub;
-
-    void FUN_00db7ef0(unsigned int auiValue);
-};
-
-struct S00db94b0_Ref_s
-{
-    int unk00;
-    int unk04;
-};
-
-struct S00db94b0_Entry_s
-{
-    int type;
-    S00db94b0_Ref_s* ref;
-};
-
-struct S00db94b0_Item_s
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    S00db94b0_Entry_s* entries;
-    int count;
-};
-
-struct S00db94b0_Node_s
-{
-    virtual void v0();
-    virtual void v1();
-    virtual void v2();
-    virtual int v3();
-    virtual void v4();
-    virtual void v5();
-    virtual void v6();
-    virtual void v7();
-    virtual void v8();
-    virtual S00db94b0_Node_s* v9(int a);
-};
-
-struct S00db94b0_Sub_s
-{
-    int FUN_00cb1cb0(unsigned __int64 key, __int64 val);
-};
-
-struct S00db94b0_Owner_s
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    S00db94b0_Item_s** items;
-    int unk10;
-    int unk14;
-    S00db94b0_Sub_s sub;
-
-    unsigned __int64 FUN_00db7dd0(int a, int b);
-};
-
-struct S00db94b0_Array_s : DBA230Array
-{
-    bool ContainsKey(const unsigned __int64& key);
-    void FUN_00dba4d0(const unsigned __int64& key);
-};
-
-struct DB7D00_Shell
-{
-    void* __thiscall FUN_00db7d00(unsigned int a);
-};
-
-struct VersionUidCache
-{
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0C;
-    struct ItemVec
-    {
-        unsigned int* m_data;
-        unsigned int m_uiItemCount;
-        unsigned int m_cap;
-    } m_vec;
-
-    unsigned int __thiscall GetOrSetInt(unsigned int a, unsigned int b);
-    unsigned __int64 FUN_00db7d60(unsigned int a1, int a2);
-};
 
 extern "C" void _ReadWriteBarrier(void);
 extern "C" void __cdecl ResizeAudioStream(void* alloc, void* vec, unsigned int n);

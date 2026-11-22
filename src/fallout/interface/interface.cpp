@@ -8,12 +8,6 @@ class TESForm;
 class TESObjectREFR;
 class NiControllerSequence;
 
-class BSSystemUtility
-{
-  public:
-    static int s_iUpdateEnabled;
-};
-
 class Interface
 {
   public:
@@ -103,35 +97,10 @@ const char kMeshesFolder[] = "Meshes";
 
 // Fresh-claim additions verified against the supplied PC spans.
 
-struct FUN_00424940_shell : public InterfaceManager
-{
-    char FUN_00424940();
-};
-
-extern bool DAT_011c70ed;
-extern bool DAT_011c70ee;
-
-struct ListStandIn
-{
-    int* FUN_0057cbe0(int** pos);
-};
-
-struct FUN_00644640_shell : public InterfaceManager
-{
-    bool FUN_00644640();
-};
-
 class Modifier
 {
   public:
     char GetKey(void);
-};
-
-bool __fastcall FUN_00644640(void*);
-
-struct FUN_007023a0_shell : public InterfaceManager
-{
-    bool FUN_007023a0();
 };
 
 namespace fnv_007023c0 {
@@ -139,12 +108,6 @@ class Modifier
 {
   public:
     unsigned char GetKey();
-};
-
-class InterfaceManager_GetEnterStackTop_Helper
-{
-  public:
-    int GetTopEnterStackEntry();
 };
 
 }  // namespace fnv_007023c0
@@ -164,16 +127,6 @@ class Modifier
     char GetKey();
 };
 
-struct InterfaceManager_EnterStackTop : InterfaceManager
-{
-    int GetTopEnterStackEntry();
-};
-
-struct Interface_Ext : Interface
-{
-    static bool IsMenuActive(Interface::enumMenus, unsigned int);
-};
-
 }  // namespace fnv_00702450
 
 namespace fnv_00702640 {
@@ -183,14 +136,7 @@ class Modifier
     unsigned char GetKey();
 };
 
-struct InterfaceManager_GetEnterStack_shell : public InterfaceManager
-{
-    int GetMenuStackEntry(int);
-};
-
 }  // namespace fnv_00702640
-
-extern bool DAT_011f308f[];
 
 namespace fnv_007027e0 {
 class Modifier
@@ -198,8 +144,6 @@ class Modifier
   public:
     unsigned char GetKey();
 };
-
-void __fastcall UpdateStartMenuState(InterfaceManager*);
 
 }  // namespace fnv_007027e0
 
@@ -210,8 +154,6 @@ class Modifier
     char GetKey();
 };
 
-void __fastcall UpdateInterface(InterfaceManager*);
-
 }  // namespace fnv_00702810
 
 namespace fnv_00702840 {
@@ -220,8 +162,6 @@ class Modifier
   public:
     unsigned char GetKey();
 };
-
-void __fastcall UpdateMenuSelection(InterfaceManager* pThis);
 
 }  // namespace fnv_00702840
 
@@ -239,7 +179,6 @@ class BGSMoviePlayer
 };
 
 extern BGSMoviePlayer* DAT_0126fac4;
-void __fastcall FUN_00713f00(InterfaceManager*);
 
 }  // namespace fnv_00702870
 
@@ -256,30 +195,9 @@ class BGSMoviePlayer
     bool FUN_00ec17c0();
 };
 
-class TaskThreadManager
-{
-  public:
-    static TaskThreadManager* __cdecl GetSingleton();
-    void FUN_00ba30f0(int, int);
-    void FUN_00ba3130(int, int);
-};
-
-struct IM_Stub
-{
-    void RenderMenu(int, int);
-    void SetField148(int);
-};
-
 extern BGSMoviePlayer* DAT_0126fac4;
 
 }  // namespace fnv_007028b0
-
-struct FUN_00702940_cls
-{
-    char pad[0x148];
-    char field_148;
-    void SetField148(char val);
-};
 
 struct FUN_00703060_shell : public InterfaceManager
 {
@@ -375,8 +293,6 @@ class Modifier
     char GetKey(void);
 };
 
-int __cdecl FUN_007da2c0();
-
 }  // namespace fnv_00704be0
 
 namespace fnv_00704f50 {
@@ -398,15 +314,6 @@ namespace fnv_00705070 {
 struct Modifier
 {
     bool GetKey();
-};
-struct TimeGlobal
-{
-    void SetGlobalTimeMultiplier(float, bool);
-};
-extern TimeGlobal g_timeGlobal;
-struct DialogMenu
-{
-    static void* Create(void*, void*, void*);
 };
 }  // namespace fnv_00705070
 
@@ -441,8 +348,6 @@ class Modifier
     char GetKey(void);
 };
 
-void __fastcall FUN_00713c70(InterfaceManager*);
-
 }  // namespace fnv_007058e0
 
 namespace fnv_00705910 {
@@ -473,7 +378,6 @@ class Modifier
   public:
     char GetKey(void);
 };
-void __fastcall ResetWidget(InterfaceManager*);
 
 }  // namespace fnv_007059d0
 
@@ -484,7 +388,6 @@ class Modifier
     char GetKey();
 };
 
-bool __cdecl FUN_00709bc0();
 bool __cdecl FUN_00709c00();
 
 }  // namespace fnv_00705a00
@@ -516,28 +419,12 @@ struct IMStandIn
 };
 }  // namespace fnv_00705b30
 
-struct DummyVtable_00705e30
-{
-    virtual ~DummyVtable_00705e30();
-};
-
 class MapMenu
 {
   public:
     void FUN_007069f0(unsigned char);
 };
 extern MapMenu* DAT_011da368;
-
-struct Dummy_007069f0
-{
-    virtual void v0() = 0;
-    virtual void v1() = 0;
-    virtual void v2() = 0;
-    virtual void v3(int, int) = 0;
-    void FUN_007069f0(int a1);
-};
-
-void __cdecl SetInventoryTab(unsigned char);
 
 int __cdecl MinInt(int, int);
 
@@ -569,185 +456,24 @@ class MapMenu
     static void __cdecl SetMapPositionToPlayer();
     static void __cdecl UpdateMapPosition();
 };
-class SurgeryMenu
-{
-  public:
-    static void __cdecl UpdatePerkEntries();
-};
 
-void __cdecl FUN_007dd710();
-void __cdecl UpdateStatsMenuLevelText();
 void __cdecl ClearMapMenuNote();
 
 }  // namespace fnv_00706a90
 
-struct BGSNote;
 struct BGSQuestObjective;
-struct TESChallenge;
 struct TESQuest;
 struct RegionObjectEntry;
 struct TESWorldSpace;
-struct PathingPath;
-struct blob12
-{
-    char b[12];
-};
 
 class MapMenu;
 extern MapMenu* DAT_011da368;
 
-struct TutorialManagerLayout
-{
-    struct Entry
-    {
-        unsigned int b0 : 1;
-        unsigned int b1 : 1;
-        unsigned int pad : 6;
-        unsigned int rest : 24;
-    };
-    Entry entries[0x29];
-    unsigned int unkA4;
-    unsigned int unkA8;
-};
-
-struct FUN_00706cb0_shell : public InterfaceManager
-{
-    void ResetFieldBC();
-};
-
-class BSFaceGenAnimationData;
-class BSFaceGenNiNode
-{
-  public:
-    BSFaceGenAnimationData* GetAnimationData();
-};
-
-class NiAVObject_Attach : public NiAVObject
-{
-  public:
-    void AttachProperty(NiObject*);
-};
-
-struct FUN_00706d90_shell : public InterfaceManager
-{
-    bool FUN_00706d90();
-};
-
 int __cdecl FUN_004dc200();
-
-int __cdecl FUN_004dc1f0();
-
-NiRenderer* __cdecl FUN_0043c4b0();
-float __cdecl FUN_00706e80();
-
-struct DummyRTG_00706e90
-{
-    virtual void v0();
-    virtual void v1();
-    virtual void v2();
-    virtual void v3();
-    virtual void v4();
-    virtual void v5();
-    virtual void v6();
-    virtual void v7();
-    virtual void v8();
-    virtual void v9();
-    virtual void v10();
-    virtual void v11();
-    virtual void v12();
-    virtual void v13();
-    virtual void v14();
-    virtual void v15();
-    virtual void v16();
-    virtual void v17();
-    virtual void v18();
-    virtual void v19();
-    virtual void v20();
-    virtual void v21();
-    virtual void v22();
-    virtual void v23();
-    virtual void v24();
-    virtual void v25();
-    virtual void v26();
-    virtual void v27();
-    virtual void v28();
-    virtual void v29();
-    virtual void v30();
-    virtual void v31();
-    virtual void v32();
-    virtual void v33();
-    virtual void v34();
-    virtual unsigned int GetWidth(unsigned int);
-    virtual unsigned int GetHeight(unsigned int);
-};
-
-struct DummyRenderer_00706e90
-{
-    virtual void v0();
-    virtual void v1();
-    virtual void v2();
-    virtual void v3();
-    virtual void v4();
-    virtual void v5();
-    virtual void v6();
-    virtual void v7();
-    virtual void v8();
-    virtual void v9();
-    virtual void v10();
-    virtual void v11();
-    virtual void v12();
-    virtual void v13();
-    virtual void v14();
-    virtual void v15();
-    virtual void v16();
-    virtual void v17();
-    virtual void v18();
-    virtual void v19();
-    virtual void v20();
-    virtual void v21();
-    virtual void v22();
-    virtual void v23();
-    virtual void v24();
-    virtual void v25();
-    virtual void v26();
-    virtual void v27();
-    virtual void v28();
-    virtual void v29();
-    virtual void v30();
-    virtual void v31();
-    virtual void v32();
-    virtual void v33();
-    virtual void v34();
-    virtual void v35();
-    virtual void v36();
-    virtual void v37();
-    virtual void v38();
-    virtual void v39();
-    virtual void v40();
-    virtual void v41();
-    virtual void v42();
-    virtual void v43();
-    virtual void v44();
-    virtual void v45();
-    virtual void v46();
-    virtual void v47();
-    virtual void v48();
-    virtual void v49();
-    virtual DummyRTG_00706e90* GetDefaultRenderTargetGroup();
-};
-
-void __cdecl FUN_007164c0(void*, float);
-
-void __fastcall UpdateNodeTimers(InterfaceManager*);
 
 struct FUN_00714d90_struct
 {
     void PushMenuStackEntry(int);
-};
-
-struct InterfaceManager_PopFromEnterStack_helper
-{
-    int AddMenuStackEntry(int, bool);
 };
 
 struct IMStandIn
@@ -761,19 +487,6 @@ class TESResponse
     TESResponse* GetNext();
 };
 
-class ModelLoader
-{
-  public:
-    void FUN_0045a5e0(const char*);
-};
-extern ModelLoader* g_modelLoader;
-
-struct S_004431f0
-{
-    void* FUN_004431f0(unsigned int);
-};
-extern S_004431f0* DAT_011d890c;
-
 namespace fnv_00707930 {
 struct Modifier
 {
@@ -781,24 +494,7 @@ struct Modifier
 };
 }  // namespace fnv_00707930
 
-struct FUN_00707950_shell : public InterfaceManager
-{
-    void SetNeed(bool);
-};
-
-bool __cdecl FUN_00705a00();
-FORenderedMenu* __cdecl FUN_00705990();
-bool __fastcall FUN_007079f0(InterfaceManager*);
-
-struct FUN_007079f0_shell : public InterfaceManager
-{
-    bool FUN_007079f0();
-};
-
-bool __cdecl FUN_007178a0();
-
 class FORenderedMenu;
-FORenderedMenu* __fastcall FUN_00707af0(InterfaceManager*);
 
 int __cdecl FUN_004dc200();
 
@@ -807,15 +503,7 @@ extern int DAT_011d8954;
 extern int DAT_011d8958;
 extern int DAT_011d895c;
 extern int DAT_011d8964;
-extern int g_011d8998;
 extern int DAT_011d899c;
-extern int DAT_011d89a0;
-extern int DAT_011d89a4;
-extern int DAT_011d89ac;
-
-bool __cdecl IsConditionMet();
-void __cdecl FUN_007094f0();
-void __cdecl FUN_00709a90();
 
 class TESRace;
 template <> class BSSimpleList<TESRace*>
@@ -827,17 +515,6 @@ template <> class BSSimpleList<TESRace*>
 struct StrHelper
 {
     operator const char*() const;
-};
-struct StrOwner
-{
-    int pad;
-    StrHelper s;
-    const char* FUN_007fa950();
-};
-
-struct FUN_009373f0_shell : public InterfaceManager
-{
-    bool FUN_009373f0();
 };
 
 namespace fnv_00703e80 {
@@ -857,11 +534,6 @@ struct Modifier
 {
     unsigned char GetKey();
 };
-struct HUDHelper
-{
-    void FUN_00775920();
-};
-extern HUDMainMenu* g_pHudMainMenuInstance;
 InterfaceManager* FUN_004b7210();
 }  // namespace fnv_007053b0
 
@@ -871,87 +543,28 @@ struct Modifier
 {
     unsigned char GetKey();
 };
-struct FUN_0070b790_shell
-{
-    void FUN_0070b790(char);
-};
 namespace fnv_0070b810 {
-struct FUN_0070b810_shell
-{
-    void FUN_0070b810(char);
-};
 }
 namespace fnv_0070b870 {
-struct S0b870
-{
-    void FUN_0070b870(char);
-};
 }
-struct FUN_0070b8d0_shell
-{
-    void FUN_0070b8d0(int);
-};
 InterfaceManager* FUN_004b7210();
 int MinInt(int, int);
-int FUN_00705c40(int, char);
 }  // namespace fnv_00705b70
 
 struct InterfaceManager;
 class PlayerCharacter;
 struct MobileObject;
-struct DialogH
-{
-    static bool IsInDialog();
-};
-struct MapMenuH
-{
-    static void StopMapMenuSounds();
-};
-struct StatsMenuH
-{
-    static void ClearPerks();
-};
-struct fnv_007aa480
-{
-    static void ClearAllElements();
-};
-struct FocusH
-{
-    void FocusOnActor(MobileObject*, float, bool);
-};
 struct Im7181
 {
     void SetRenderedMenu(int);
 };
 extern PlayerCharacter* g_thePlayer;
-extern unsigned char DAT_011d8a85;
 InterfaceManager* FUN_004b7210();
 MobileObject* GetDialogCastSound();
-void FUN_007053b0();
-void FUN_00705780();
-void FUN_00706320(int);
 void ClearMapMenuNote();
-void __fastcall ResetEntries(void*);
-void FUN_00706fd0(int, int);
-void FUN_007f6920();
-void FUN_0083e510();
-void ResetHUDMainMenu();
 MobileObject* GetDialogCastSound();
 
 struct InterfaceManager;
-struct NavMesh;
-struct S3de0
-{
-    void FUN_00713de0(NavMesh*);
-};
-struct TESAmmoInitCalls
-{
-    unsigned int GetFieldBC();
-};
-struct FUN_00706cb0_shell2
-{
-    void ResetFieldBC();
-};
 InterfaceManager* FUN_004b7210();
 
 struct QuantityData
@@ -965,16 +578,6 @@ struct Modifier
     unsigned char GetKey();
 };
 bool __cdecl FUN_00702680(int, unsigned int);
-struct InventoryMenuHelper
-{
-    static void UpdateItemList();
-};
-struct MenuHelper
-{
-    void UpdateOption(int);
-};
-void __cdecl FUN_00730690(int);
-void __cdecl FUN_00728a30(int);
 void __cdecl FUN_00704bc0();
 
 }  // namespace fnv_00704af0
@@ -996,13 +599,6 @@ struct TaskQueueInterface
 {
     static void __cdecl CopyStringToBuffer(char*, unsigned int, const char*);
 };
-struct AttachMsg
-{
-    int a;
-    char name[260];
-    char flag;
-};
-void __cdecl ShowRegionData(AttachMsg*);
 
 }  // namespace fnv_00705420
 
@@ -1013,15 +609,8 @@ class Modifier
     unsigned char GetKey(void);
 };
 
-extern "C" void __cdecl FUN_0070a0b0(void);
-
 }  // namespace fnv_00702330
 
-class MenuFade : public Menu
-{
-  public:
-    unsigned int GetCurrentFadeState();
-};
 Tile* __cdecl FindMenuById(int);
 bool __cdecl FUN_00709c00();
 class InterfaceManagerPC
@@ -1070,23 +659,15 @@ class Modifier
 
 class InterfaceManager;
 
-struct FUN_009b4440_holder
-{
-    void* FUN_009b4440();
-};
-
 }  // namespace fnv_00703390
 
 char __cdecl ConsumeByteAtE4();
-extern char DAT_0119f349;
 
 namespace fnv_007043d0 {
 struct Modifier
 {
     unsigned char GetKey();
 };
-
-bool FUN_00704400();
 
 }  // namespace fnv_007043d0
 
@@ -1096,14 +677,10 @@ struct Modifier
     unsigned char GetKey();
 };
 
-bool FUN_00704450(bool);
-
 }  // namespace fnv_00704420
 
 class MapMenu;
 extern MapMenu* DAT_011da368;
-
-extern "C" void __cdecl FUN_0079b430(int);
 
 namespace fnv_00704690 {
 class Modifier
@@ -1111,7 +688,6 @@ class Modifier
   public:
     unsigned char GetKey();
 };
-void CreateRepairServicesMenu(unsigned int);
 
 }  // namespace fnv_00704690
 
@@ -1201,8 +777,6 @@ struct Modifier
     bool GetKey();
 };
 
-extern "C" void __cdecl InitInventoryMenu(unsigned int, unsigned int);
-
 }  // namespace fnv_00704f80
 
 namespace fnv_00704fc0 {
@@ -1212,11 +786,7 @@ class Modifier
     unsigned char GetKey();
 };
 
-extern "C" void __cdecl CreateRecipeMenu(int, int);
-
 }  // namespace fnv_00704fc0
-
-void FUN_00705050();
 
 namespace fnv_00705050 {
 class ContainerMenu;
@@ -1244,19 +814,15 @@ struct Modifier
     unsigned char GetKey();
 };
 
-void CreateLockpickMenu(int, int, unsigned char);
-
 }  // namespace fnv_00705830
 
 struct GlobalObject_0045cfe0
 {
     int* Int();
 };
-extern GlobalObject_0045cfe0 g_011c3ea4;
 extern int g_011d8950;
 extern int DAT_011d8960;
 
-void FUN_00763ff0();
 void GetOrCreateMenuTile(int);
 
 namespace fnv_00705a60 {
@@ -1297,8 +863,6 @@ struct Modifier
     unsigned char GetKey();
 };
 
-extern "C" void __cdecl FUN_007e41f0(int, int);
-
 }  // namespace fnv_00706230
 
 namespace fnv_00706270 {
@@ -1307,8 +871,6 @@ class Modifier
   public:
     unsigned char GetKey();
 };
-
-void FUN_00784c80();
 
 }  // namespace fnv_00706270
 
@@ -1320,21 +882,7 @@ struct FUN_005e3fc0_shell
     unsigned int Get();
 };
 
-void __cdecl FUN_00717280(int aiSoundIndex);
-
-void __cdecl RemoveNodeById(int);
-
-struct FUN_00709920_Class
-{
-    const char* FUN_00709920();
-};
-
 class Tile;
-class TileRect
-{
-  public:
-    const char* FUN_00709970();
-};
 
 class TileMenu
 {
@@ -1342,16 +890,11 @@ class TileMenu
     const char* FUN_00709a50();
 };
 
-void FUN_0077f2f0(int a1);
-
-extern int DAT_011da204;
-
 namespace fnv_00703150 {
 struct Modifier
 {
     unsigned char GetKey();
 };
-extern "C" unsigned char __cdecl FUN_00703150();
 
 }  // namespace fnv_00703150
 
@@ -1378,8 +921,6 @@ class FUN_00714d90_struct
 
 }  // namespace fnv_00703e10
 
-extern int _DAT_011da368;
-
 namespace fnv_00705cb0 {
 class Modifier
 {
@@ -1388,23 +929,6 @@ class Modifier
 };
 
 }  // namespace fnv_00705cb0
-
-extern "C" char __cdecl GetInterfaceManagerResult();
-extern "C" char __cdecl FUN_00705cb0();
-extern "C" char __cdecl FUN_00705d10();
-extern "C" char __cdecl FUN_00705d50();
-extern "C" int __cdecl FUN_00705d90();
-
-struct TESSaveLoadGame
-{
-    void FUN_008579b0(void*, int);
-};
-extern TESSaveLoadGame* g_TESSaveLoadGame;
-
-struct FUN_00406f90_this
-{
-    int FUN_00406f90(char const*, char*);
-};
 
 namespace fnv_00703030 {
 struct FUN_00703060_shell
@@ -1420,10 +944,6 @@ namespace fnv_00703080 {
 struct Modifier
 {
     char GetKey();
-};
-struct Holder
-{
-    void UpdateTilePosition(float, float);
 };
 }  // namespace fnv_00703080
 
@@ -1442,20 +962,12 @@ struct Modifier
     char GetKey();
 };
 InterfaceManager* FUN_004b7210();
-struct FakeTile
-{
-    NiNode* FUN_0056c7f0();
-};
 }  // namespace fnv_00703810
 
 namespace fnv_00705d10 {
 struct Modifier
 {
     char GetKey();
-};
-struct IdleAnimationManager
-{
-    bool FUN_00843150();
 };
 }  // namespace fnv_00705d10
 
@@ -1464,31 +976,9 @@ struct Modifier
 {
     char GetKey();
 };
-struct Byte15Accessor
-{
-    char GetByte15();
-};
 }  // namespace fnv_00705d50
 
-struct UnnamedClass_00705dd0
-{
-    char _pad[0x9c];
-    Tile* m_9c;
-    int FUN_00705dd0();
-};
-
-struct FORenderedTerminal
-{
-    void FUN_007060d0();
-    void* DestroyIfFlagged(unsigned int);
-};
-
 int __cdecl MinInt(int, int);
-
-struct FUN_00706810_Class
-{
-    int __thiscall FUN_00706810();
-};
 
 struct Dummy00712450
 {
@@ -1548,14 +1038,6 @@ class StatsMenu
   public:
     static void SetStatsPage(unsigned char);
 };
-void FUN_00706a20(unsigned char);
-void FUN_007069d0(unsigned char);
-void FUN_007a1820(float);
-void FUN_007a1850(float);
-struct TutorialState
-{
-    void LoadTutorialSeenFlags(char*);
-};
 void* memset(void*, int, unsigned int);
 }  // namespace fnv_00706860
 
@@ -1564,28 +1046,16 @@ struct Tile_Set_Helper
 {
     void Set(int, int);
 };
-class MenuPC : public Menu
-{
-  public:
-    void SetFadeState(int);
-    Tile* GetTile();
-};
 class InterfaceManagerPC
 {
   public:
     bool GetKey();
-};
-struct PlayerCharacterPC
-{
-    static bool UpdatePlayerStatus();
 };
 struct Im7181
 {
     void SetRenderedMenu(int);
 };
 Tile* __cdecl FindMenuById(int);
-void __cdecl FUN_00704f50();
-void __cdecl CloseStartMenu(bool);
 
 }  // namespace fnv_00703610
 
@@ -1602,16 +1072,6 @@ class BSThread
     unsigned int GetThreadID();
 };
 
-struct InterfaceManagerStandIn
-{
-    int GetTopEnterStackEntry();
-};
-
-struct InterfaceStandIn
-{
-    static bool IsMenuActive(Interface::enumMenus, unsigned int);
-};
-
 void* __cdecl _FUN_004b7210();
 Menu* __cdecl FindMenuById(int);
 
@@ -1624,59 +1084,16 @@ class Modifier
     unsigned char GetKey();
 };
 
-class ProxyPipboy : public FOPipboyManager
-{
-};
-
-class ProxyMgr
-{
-  public:
-    ProxyPipboy* GetPipboyManager();
-};
-
 class MapMenu
 {
   public:
     static void MenuDepthController();
 };
 
-struct InterfaceAccess
-{
-    static bool IsMenuActive(Interface::enumMenus menuID, unsigned int flags);
-};
-
-struct TileAccess
-{
-    void Set(int x, int y);
-};
-
-struct MenuAccess
-{
-    void LoadMenuData();
-    void UnloadMenuData();
-};
-
-struct PipboyAccess
-{
-    void FUN_007f8a80();
-};
-
-struct MenuVirtualAccess
-{
-    virtual void FUN_00();
-    virtual void FUN_01();
-    virtual void FUN_02();
-    virtual void FUN_03();
-    virtual void FUN_04();
-    virtual void FUN_05(int, int);
-};
-
 Menu* __cdecl FindMenuById(int);
-Tile* __cdecl FUN_00704140();
 void __cdecl FUN_00704390();
 void __cdecl ResetItemModMenu();
 void __cdecl ResetRepairMenu();
-void __cdecl FUN_0079c340(bool);
 
 }  // namespace fnv_00704170
 
@@ -1687,13 +1104,6 @@ class Modifier
     unsigned char GetKey();
 };
 
-class SleepWaitMenu : public Menu
-{
-  public:
-    bool FUN_007c0580();
-};
-
-unsigned int __cdecl FUN_00705770();
 Menu* __cdecl FindMenuById(int);
 Modifier* __cdecl _FUN_004b7210();
 
@@ -1718,16 +1128,6 @@ struct Setting
 struct StartMenu : Setting
 {
     const char* GetMenuTitle();
-};
-
-struct Setting_S : Setting
-{
-    float* Float();
-};
-
-struct GlobalObject_0045cf30 : Setting
-{
-    unsigned char* Bool();
 };
 
 struct GlobalObject_0045cfe0 : Setting
@@ -1760,22 +1160,9 @@ struct TaskQueueInterface
     static void CopyStringToBuffer(char*, unsigned int, const char*);
 };
 
-void ___insecure_strcpy(char*, const char*);
-int strcat_s(char*, unsigned int, const char*);
-int _BSStringLength(const char*);
-int _sprintf(char*, const char*, ...);
-void __fastcall _ref_00ec408c(unsigned int);
-
-extern unsigned int __security_cookie;
-
 }  // namespace fnv_007073d0
 
 namespace fnv_00702c80 {
-class List_009e03e0
-{
-  public:
-    void RemoveAll();
-};
 
 class Modifier
 {
@@ -1789,130 +1176,15 @@ class GO
     operator unsigned int() const;
 };
 
-class TL
-{
-  public:
-    void* GetNext(void*&);
-};
-
 class FUN_005e3fc0_shell
 {
   public:
     unsigned int Get();
 };
 
-class EffectSettingStub
-{
-  public:
-    void* GetBoltSound();
-};
-
 void* _FUN_004b7210();
-void UpdateVisibility(void*, bool, bool, bool);
 
 }  // namespace fnv_00702c80
-
-struct StubMenu
-{
-    void CloseA();
-    void CloseB();
-};
-struct StubTile
-{
-    StubMenu* GetMenuX();
-    void SetX(int trait, int value);
-};
-struct StubPipboy
-{
-    void DoA();
-    void ActivateBtn(unsigned int button);
-    bool IsInit();
-};
-struct StubIM
-{
-    bool KeyX();
-    StubTile* RootX();
-    StubPipboy* PipboyX();
-};
-StubIM* GetIM();
-StubTile* __cdecl MenuByClass(int aiClass);
-bool __cdecl MenuVisible(int aiID, unsigned int auFade);
-StubTile* __cdecl CreateMenuX();
-void __cdecl AfterCloseX();
-void __cdecl SetPipboyX(bool ab);
-
-struct TerminalBase
-{
-    int unk00;
-    ~TerminalBase();
-};
-
-struct TerminalMember
-{
-    ~TerminalMember();
-};
-
-struct FUN_007060d0_cls : TerminalBase
-{
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5C;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6C;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7C;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8C;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9C;
-    int unkA0;
-    int unkA4;
-    int unkA8;
-    int unkAC;
-    int unkB0;
-    int unkB4;
-    int unkB8;
-    int unkBC;
-    int unkC0;
-    int unkC4;
-    int unkC8;
-    int unkCC;
-    int unkD0;
-    int unkD4;
-    int unkD8;
-    int unkDC;
-    int unkE0;
-    TerminalMember m_kMemberDescriptor;
-    ~FUN_007060d0_cls();
-};
 
 class B706130Node;
 
@@ -1995,53 +1267,10 @@ class B706130Pick
     int unkEC;
 };
 
-class B706130Manager
-{
-  public:
-    bool GetKey();
-    void SetRenderedMenu(B706130Pick* pkPick);
-};
-
-class B706130Setting
-{
-  public:
-    unsigned char* Bool();
-};
-
-B706130Manager* __cdecl B706130GetManager();
-B706130Tile* __cdecl CreateComputerMenu(int m_uiSoundID);
-void __cdecl B706130UpdateAllTiles(bool bForce);
-
-extern B706130Setting g_kB706130Setting;
-
-class FUN_00707870_Temp
-{
-  public:
-    float m_v;
-    FUN_00707870_Temp(float f);
-    ~FUN_00707870_Temp();
-};
-
-struct FUN_00707870_Owner
-{
-    int FUN_00457ba0(unsigned int a, FUN_00707870_Temp* b);
-};
-
-struct FUN_00707870_Target
-{
-    int FUN_00a5d2c0(FUN_00707870_Temp* b);
-};
-
-extern FUN_00707870_Owner* DAT_011dea10;
-bool __cdecl FUN_004b5bf0(unsigned int a);
-
 extern "C" __declspec(dllimport) int __stdcall IsDebuggerPresent();
 extern "C" __declspec(dllimport) __declspec(noreturn) void __stdcall ExitProcess(unsigned int uExitCode);
-extern "C" void __debugbreak();
 
 char ConsumeByteAtE4();
-void FUN_00703fd0();
-void FUN_0040fbe0(const char* pcMessage);
 
 struct Player;
 struct Helper;
@@ -2212,10 +1441,6 @@ struct InterfaceObject
     virtual void Unknown158();
     virtual ActiveObject* CurrentObject();
 };
-struct DialogObject
-{
-    void FUN_009ed0d0(Player*, int);
-};
 struct Helper
 {
     void SetPackageType(int);
@@ -2223,11 +1448,6 @@ struct Helper
     void FUN_00826b90(int);
     void FUN_00984f60(int);
 };
-extern Helper* __cdecl CreatePackageByType(int);
-extern DialogObject* __cdecl FUN_00ec43fb(Helper*, int, void*, void*, int);
-extern int DAT_011846a0;
-extern int DAT_011a32e0;
-extern int DAT_011dea3c;
 struct Player
 {
     virtual void Unknown000();
@@ -2427,353 +1647,6 @@ struct Player
     void OpenDialogMenu();
 };
 
-struct TileListAccess
-{
-    void* GetHeadPos() const;
-    Tile*& GetNext(void*& _n);
-};
-struct VisibilityTile : Tile
-{
-    float FUN_00a011b0(int trait);
-    NiNode* FUN_0056c7f0();
-};
-struct VisibilityManager
-{
-    unsigned int unk000;
-    unsigned int unk004;
-    unsigned int unk008;
-    unsigned int unk00C;
-    unsigned int unk010;
-    unsigned int unk014;
-    unsigned int unk018;
-    unsigned int unk01C;
-    unsigned int unk020;
-    unsigned int unk024;
-    unsigned int unk028;
-    unsigned int unk02C;
-    unsigned int unk030;
-    unsigned int unk034;
-    unsigned int unk038;
-    unsigned int unk03C;
-    unsigned int unk040;
-    unsigned int unk044;
-    unsigned int unk048;
-    unsigned int unk04C;
-    unsigned int unk050;
-    unsigned int unk054;
-    unsigned int unk058;
-    unsigned int unk05C;
-    unsigned int unk060;
-    unsigned int unk064;
-    unsigned int unk068;
-    unsigned int unk06C;
-    unsigned int unk070;
-    unsigned int unk074;
-    unsigned int unk078;
-    unsigned int unk07C;
-    unsigned int unk080;
-    unsigned int unk084;
-    unsigned int unk088;
-    unsigned int unk08C;
-    unsigned int unk090;
-    unsigned int unk094;
-    unsigned int unk098;
-    unsigned int unk09C;
-    unsigned int unk0A0;
-    unsigned int unk0A4;
-    unsigned int unk0A8;
-    unsigned int unk0AC;
-    unsigned int unk0B0;
-    unsigned int unk0B4;
-    unsigned int unk0B8;
-    unsigned int unk0BC;
-    unsigned int unk0C0;
-    unsigned int unk0C4;
-    unsigned int unk0C8;
-    unsigned int unk0CC;
-    unsigned int unk0D0;
-    unsigned int unk0D4;
-    unsigned int unk0D8;
-    unsigned int unk0DC;
-    unsigned int unk0E0;
-    unsigned int unk0E4;
-    unsigned int unk0E8;
-    unsigned int unk0EC;
-    unsigned int unk0F0;
-    unsigned int unk0F4;
-    unsigned int unk0F8;
-    unsigned int unk0FC;
-    unsigned int unk100;
-    unsigned int unk104;
-    unsigned int unk108;
-    unsigned int unk10C;
-    unsigned int unk110;
-    unsigned int unk114;
-    unsigned int unk118;
-    unsigned int unk11C;
-    unsigned int unk120;
-    unsigned int unk124;
-    unsigned int unk128;
-    unsigned int unk12C;
-    unsigned int unk130;
-    unsigned int unk134;
-    unsigned int unk138;
-    unsigned int unk13C;
-    unsigned int unk140;
-    unsigned int unk144;
-    unsigned int unk148;
-    unsigned int unk14C;
-    unsigned int unk150;
-    unsigned int unk154;
-    unsigned int unk158;
-    unsigned int unk15C;
-    unsigned int unk160;
-    unsigned int unk164;
-    unsigned int unk168;
-    unsigned int unk16C;
-    unsigned int unk170;
-    unsigned int unk174;
-    unsigned int unk178;
-    unsigned int unk17C;
-    unsigned int unk180;
-    unsigned int unk184;
-    unsigned int unk188;
-    unsigned int unk18C;
-    unsigned int unk190;
-    unsigned int unk194;
-    unsigned int unk198;
-    unsigned int unk19C;
-    unsigned int unk1A0;
-    unsigned int unk1A4;
-    unsigned int unk1A8;
-    unsigned int unk1AC;
-    unsigned int unk1B0;
-    unsigned int unk1B4;
-    unsigned int unk1B8;
-    unsigned int unk1BC;
-    unsigned int unk1C0;
-    unsigned int unk1C4;
-    unsigned int unk1C8;
-    unsigned int unk1CC;
-    unsigned int unk1D0;
-    unsigned int unk1D4;
-    unsigned int unk1D8;
-    unsigned int unk1DC;
-    unsigned int unk1E0;
-    unsigned int unk1E4;
-    unsigned int unk1E8;
-    unsigned int unk1EC;
-    unsigned int unk1F0;
-    unsigned int unk1F4;
-    unsigned int unk1F8;
-    unsigned int unk1FC;
-    unsigned int unk200;
-    unsigned int unk204;
-    unsigned int unk208;
-    unsigned int unk20C;
-    unsigned int unk210;
-    unsigned int unk214;
-    unsigned int unk218;
-    unsigned int unk21C;
-    unsigned int unk220;
-    unsigned int unk224;
-    unsigned int unk228;
-    unsigned int unk22C;
-    unsigned int unk230;
-    unsigned int unk234;
-    unsigned int unk238;
-    unsigned int unk23C;
-    unsigned int unk240;
-    unsigned int unk244;
-    unsigned int unk248;
-    unsigned int unk24C;
-    unsigned int unk250;
-    unsigned int unk254;
-    unsigned int unk258;
-    unsigned int unk25C;
-    unsigned int unk260;
-    unsigned int unk264;
-    unsigned int unk268;
-    unsigned int unk26C;
-    unsigned int unk270;
-    unsigned int unk274;
-    unsigned int unk278;
-    unsigned int unk27C;
-    unsigned int unk280;
-    unsigned int unk284;
-    unsigned int unk288;
-    unsigned int unk28C;
-    unsigned int unk290;
-    unsigned int unk294;
-    unsigned int unk298;
-    unsigned int unk29C;
-    unsigned int unk2A0;
-    unsigned int unk2A4;
-    unsigned int unk2A8;
-    unsigned int unk2AC;
-    unsigned int unk2B0;
-    unsigned int unk2B4;
-    unsigned int unk2B8;
-    unsigned int unk2BC;
-    unsigned int unk2C0;
-    unsigned int unk2C4;
-    unsigned int unk2C8;
-    unsigned int unk2CC;
-    unsigned int unk2D0;
-    unsigned int unk2D4;
-    unsigned int unk2D8;
-    unsigned int unk2DC;
-    unsigned int unk2E0;
-    unsigned int unk2E4;
-    unsigned int unk2E8;
-    unsigned int unk2EC;
-    unsigned int unk2F0;
-    unsigned int unk2F4;
-    unsigned int unk2F8;
-    unsigned int unk2FC;
-    unsigned int unk300;
-    unsigned int unk304;
-    unsigned int unk308;
-    unsigned int unk30C;
-    unsigned int unk310;
-    unsigned int unk314;
-    unsigned int unk318;
-    unsigned int unk31C;
-    unsigned int unk320;
-    unsigned int unk324;
-    unsigned int unk328;
-    unsigned int unk32C;
-    unsigned int unk330;
-    unsigned int unk334;
-    unsigned int unk338;
-    unsigned int unk33C;
-    unsigned int unk340;
-    unsigned int unk344;
-    unsigned int unk348;
-    unsigned int unk34C;
-    unsigned int unk350;
-    unsigned int unk354;
-    unsigned int unk358;
-    unsigned int unk35C;
-    unsigned int unk360;
-    unsigned int unk364;
-    unsigned int unk368;
-    unsigned int unk36C;
-    unsigned int unk370;
-    unsigned int unk374;
-    unsigned int unk378;
-    unsigned int unk37C;
-    unsigned int unk380;
-    unsigned int unk384;
-    unsigned int unk388;
-    unsigned int unk38C;
-    unsigned int unk390;
-    unsigned int unk394;
-    unsigned int unk398;
-    unsigned int unk39C;
-    unsigned int unk3A0;
-    unsigned int unk3A4;
-    unsigned int unk3A8;
-    unsigned int unk3AC;
-    unsigned int unk3B0;
-    unsigned int unk3B4;
-    unsigned int unk3B8;
-    unsigned int unk3BC;
-    unsigned int unk3C0;
-    unsigned int unk3C4;
-    unsigned int unk3C8;
-    unsigned int unk3CC;
-    unsigned int unk3D0;
-    unsigned int unk3D4;
-    unsigned int unk3D8;
-    unsigned int unk3DC;
-    unsigned int unk3E0;
-    unsigned int unk3E4;
-    unsigned int unk3E8;
-    unsigned int unk3EC;
-    unsigned int unk3F0;
-    unsigned int unk3F4;
-    unsigned int unk3F8;
-    unsigned int unk3FC;
-    unsigned int unk400;
-    unsigned int unk404;
-    unsigned int unk408;
-    unsigned int unk40C;
-    unsigned int unk410;
-    unsigned int unk414;
-    unsigned int unk418;
-    unsigned int unk41C;
-    unsigned int unk420;
-    unsigned int unk424;
-    unsigned int unk428;
-    unsigned int unk42C;
-    unsigned int unk430;
-    unsigned int unk434;
-    unsigned int unk438;
-    unsigned int unk43C;
-    unsigned int unk440;
-    unsigned int unk444;
-    unsigned int unk448;
-    unsigned int unk44C;
-    unsigned int unk450;
-    unsigned int unk454;
-    unsigned int unk458;
-    unsigned int unk45C;
-    unsigned int unk460;
-    unsigned int unk464;
-    unsigned int unk468;
-    unsigned int unk46C;
-    unsigned int unk470;
-    unsigned int unk474;
-    unsigned int unk478;
-    unsigned int unk47C;
-    unsigned int unk480;
-    unsigned int unk484;
-    unsigned int unk488;
-    unsigned int unk48C;
-    unsigned int unk490;
-    unsigned int unk494;
-    unsigned int unk498;
-    unsigned int unk49C;
-    unsigned int unk4A0;
-    unsigned int unk4A4;
-    unsigned int unk4A8;
-    unsigned int unk4AC;
-    unsigned int unk4B0;
-    unsigned int unk4B4;
-    unsigned int unk4B8;
-    unsigned int unk4BC;
-    unsigned int unk4C0;
-    BSSimpleList<Tile*> visibilityQueue;
-};
-
-struct NiNodeCull
-{
-    void SetAppCulled(bool abCulled);
-};
-
-struct TileChildList : NiTPointerList_Tile___
-{
-    void* GetHeadPos();
-    Tile*& GetNext(void*& rkPos);
-};
-
-struct TileEx : Tile
-{
-    Tile* GetChildById(int aiID);
-    NiNodeCull* GetNode();
-};
-
-struct IMMenuOpen : InterfaceManager
-{
-    bool FUN_009373f0();
-};
-
-extern "C" void __fastcall FUN_00717600(InterfaceManager*);
-extern "C" void __cdecl UpdatePipboyMapVisibility(int, int);
-extern "C" void __cdecl FUN_007048f0(int, int, int);
-extern "C" void __cdecl ShowStatsMenu(int, int);
-
 bool __cdecl QueueMessage(int a1, int a2, int a3, int a4, int a5, int a6, int a7, int a10, va_list* args, int enabled,
                           int left, int right, float zero, float x, float y);
 
@@ -2796,11 +1669,6 @@ extern "C" __declspec(dllimport) int __stdcall PeekMessageA(WinMessage*, HWND__*
 extern "C" __declspec(dllimport) int __stdcall TranslateMessage(const WinMessage*);
 extern "C" __declspec(dllimport) long __stdcall DispatchMessageA(const WinMessage*);
 
-struct InterfaceControl
-{
-    void FUN_007010e0(bool, bool);
-};
-extern Interface* DAT_011d8804;
 bool __cdecl QueueMessage(const char*, int, int, int, void (*)(), int, int, int, va_list*, bool, int, int, float, float,
                           float);
 void __cdecl FUN_00403d30(void*, int, unsigned int);
@@ -2814,12 +1682,6 @@ class OSGlobals
   public:
     InputManager* FUN_00877720();
 };
-extern OSGlobals* g_osGlobals;
-void FUN_007027e0();
-void FUN_00702810();
-void FUN_00702840();
-void RenderOrFallback(int, int);
-void FUN_00702960();
 
 struct MenuProxy
 {
@@ -2832,78 +1694,18 @@ struct TileProxy
     MenuProxy* FUN_00a03c90();
 };
 TileProxy* FUN_00a09030(int);
-TileProxy* FUN_00704be0();
 void ResetRepairMenu();
 void ResetItemModMenu();
-void PlayPipboyPageSound(bool);
-struct PipProxy
-{
-    void FUN_007f8a80();
-    void FUN_007fa010(unsigned int);
-    bool IsUnk28Set();
-};
-struct InterfaceProxy
-{
-    PipProxy* FUN_00704370();
-};
 
-struct DecompScopeGuard
-{
-    int m_00;
-    DecompScopeGuard(int a, int b, const char* file, int line);
-    ~DecompScopeGuard();
-};
-
-struct DecompArg12
-{
-    int m_00;
-    int m_04;
-    int m_08;
-    DecompArg12(const DecompArg12& src);
-    ~DecompArg12();
-};
-
-struct DecompVec3
-{
-    int m_00;
-    int m_04;
-    int m_08;
-};
-
-struct DecompTarget
-{
-    void FUN_00774fd0(int a1, DecompArg12 a2, DecompVec3 a3, int a4, bool a5);
-};
-
-extern unsigned int DAT_011d96c0;
-
-struct FUN_0047ee30_shell : public InterfaceManager
-{
-    char GetAssistance();
-};
-
-struct FloatValue
-{
-    float GetFloat();
-};
 struct Data
 {
     int GetLength();
     void GetData(char*);
 };
-struct Root : InterfaceManager
-{
-    Data data;
-    FloatValue* GetValue(int);
-};
 struct Buffer
 {
     void SaveData(void*, unsigned, int);
 };
-char GetStatsMenuPage();
-unsigned char FUN_007824b0();
-float GetMapMenuFloatSetting();
-float GetTileFloatOrDefault();
 void FUN_00403d30(void*, int, unsigned);
 // @f3 0x0061a210 (community match, verified in this file)
 #include <string.h>
@@ -2965,19 +1767,9 @@ void FUN_007066d0(Buffer* buffer_)
 }
 
 
-struct FUN_00703960_Class
-{
-    void __thiscall SetByteAtOffsetEC(char param);
-};
-
 class TESForm;
 class TESGlobal;
 class Setting;
-
-struct FUN_00401170_s
-{
-    int FUN_00401170();
-};
 
 class TESGlobal : public TESForm
 {
@@ -2991,26 +1783,6 @@ class Setting
   public:
     const char* String();
 };
-
-extern Setting* DAT_0119b354[];
-extern Setting* DAT_0119b35c[];
-extern Setting* DAT_0119b364[];
-
-struct Player_StandIn : public PlayerCharacter
-{
-    const char* GetFullName();
-    const char* FUN_0087f6c0();
-    int GetSex();
-};
-
-int __cdecl FindSettingIndex(const char* apName);
-void __cdecl GetControlLabel(int a1, char* a2, bool a3);
-bool __cdecl ResolveSettingString(const char* a1, char* a2);
-TESForm* __cdecl FUN_00483a00(const char* apName);
-
-int __cdecl sprintf_s(char* apBuffer, unsigned int auiBufferSize, const char* apFormat, ...);
-int __cdecl strcpy_s(char* apDest, unsigned int auiDestSize, const char* apSrc);
-int __cdecl _stricmp(const char* apStr1, const char* apStr2);
 
 class NiStream
 {
@@ -3324,24 +2096,6 @@ class NiStream
     unsigned int unk5C8;
     bool FUN_00c3a8a0(const char*, bool);
 };
-class BSStream : public NiStream
-{
-  public:
-    BSStream();
-    virtual ~BSStream();
-};
-class Model
-{
-  public:
-    unsigned int unk00, unk04, unk08, unk0C;
-    Model(const char*, BSStream*, bool, bool);
-    NiNode* GetObject3D();
-};
-struct Loader_S
-{
-    NiNode* FUN_00447080(const char*, int, bool, bool, bool, bool);
-};
-extern bool DAT_011d8908;
 class FileFinder
 {
   public:
@@ -3404,53 +2158,6 @@ class TESNPC : public TESBoundObject
     B7AB690FullName m_kFullName;
 };
 
-class B7AB690Player
-{
-  public:
-    TESBoundObject* GetObjectReference();
-};
-
-class B7AB690SettingString
-{
-  public:
-    const char* GetString();
-};
-
-extern B7AB690Player* g_pkB7AB690Player;
-extern B7AB690SettingString g_kB7AB690NamePrompt;
-
-void __cdecl FUN_007ab7c0();
-void __cdecl B7AB690ShowTextEntry(const char* pcPrompt, const char* pcDefault, void(__cdecl* pfnCallback)(const char*));
-void __cdecl B7AB690OnNameEntered(const char* pcName);
-
-class B7AB690Menu
-{
-  public:
-    B7AB690Menu();
-    virtual ~B7AB690Menu();
-
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-};
-
-class FUN_007ab690_cls : public B7AB690Menu
-{
-  public:
-    FUN_007ab690_cls();
-    virtual ~FUN_007ab690_cls();
-
-    void Finish(const char* pcName);
-
-    TESNPC* m_pkNPC;
-};
-
 namespace fnv_008d66b0 {
 #include <string.h>
 #include <stdio.h>
@@ -3461,45 +2168,12 @@ struct WobbleName : NiFixedString
     ~WobbleName();
     operator const char*() const;
 };
-struct WobbleNode : NiNode
-{
-    WobbleName& GetName();
-    void SetName(const WobbleName&);
-};
-struct WobbleLoader : ModelLoader
-{
-    WobbleNode* LoadFile(const char*, int, bool, bool, bool, bool);
-};
 struct FileFinder
 {
     static int Exist(const char*, char*, unsigned int, unsigned int);
 };
-extern WobbleNode* DAT_011e0110[];
-extern char* DAT_011e00e0[];
-extern bool DAT_01185520;
-extern const char* DAT_011977a4[];
-unsigned int BSStringLength(const char*);
 int FUN_00406d30(char*, unsigned int, const char*);
 }  // namespace fnv_008d66b0
-
-struct InterfaceManagerPCMine : InterfaceManager
-{
-    bool GetKey();
-};
-
-struct TESObjectREFRMine : TESObjectREFR
-{
-    TESForm* GetOwner();
-    bool CanBeUsed(Actor* apActor, bool abUnk);
-};
-
-int FUN_0075b310(TESObjectREFR* apRef, int aType);
-
-struct MgrQ
-{
-    bool FUN_009373f0();
-    bool FUN_00644640();
-};
 
 namespace sleep704 {
 struct M70Tile
@@ -3530,101 +2204,12 @@ struct M70Player
 M70Player* FUN_004b7210();
 M70Menu* FUN_00a09030(int id);
 bool FUN_00702680(int id, int a);
-M70Menu* CreateInventoryMenuIfModifierKey();
 void FUN_00704390();
 void ResetRepairMenu();
 void ResetItemModMenu();
-void FUN_00782a90();
 void FUN_00782470(int a);
-void UpdateCurrentValue();
 
 }
-
-struct BaseMenu
-{
-    BaseMenu();
-    ~BaseMenu();
-    virtual void vfunc();
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5C;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6C;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7C;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8C;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9C;
-    int unkA0;
-    int unkA4;
-    int unkA8;
-    int unkAC;
-    int unkB0;
-    int unkB4;
-    int unkB8;
-    int unkBC;
-    int unkC0;
-    int unkC4;
-    int unkC8;
-    int unkCC;
-    int unkD0;
-    int unkD4;
-};
-
-struct RenderedPoint
-{
-    RenderedPoint();
-    float x;
-    float y;
-    float z;
-};
-
-struct NodeHandle
-{
-    NodeHandle(int);
-};
-
-struct FUN_00705fe0 : BaseMenu
-{
-    RenderedPoint pt;
-    NodeHandle node;
-
-    FUN_00705fe0();
-};
-
-struct FUN_00709930
-{
-    virtual ~FUN_00709930();
-};
 
 // Candidate for FUN_0079ffb0 (claim clm_f5183b6336444303ae13, 0x0079ffb0, 5190 bytes)
 // World-map tile mesh build / screenshot dump; param_1 != 0 selects the dump path.
@@ -3660,535 +2245,15 @@ struct FUN_004a7800
 };
 typedef FUN_004a7800 NiCol;
 
-// object reached from DAT_011dea3c through virtual slot 0x1f4 (index 125, __thiscall)
-struct C125
-{
-    virtual void v000();
-    virtual void v001();
-    virtual void v002();
-    virtual void v003();
-    virtual void v004();
-    virtual void v005();
-    virtual void v006();
-    virtual void v007();
-    virtual void v008();
-    virtual void v009();
-    virtual void v010();
-    virtual void v011();
-    virtual void v012();
-    virtual void v013();
-    virtual void v014();
-    virtual void v015();
-    virtual void v016();
-    virtual void v017();
-    virtual void v018();
-    virtual void v019();
-    virtual void v020();
-    virtual void v021();
-    virtual void v022();
-    virtual void v023();
-    virtual void v024();
-    virtual void v025();
-    virtual void v026();
-    virtual void v027();
-    virtual void v028();
-    virtual void v029();
-    virtual void v030();
-    virtual void v031();
-    virtual void v032();
-    virtual void v033();
-    virtual void v034();
-    virtual void v035();
-    virtual void v036();
-    virtual void v037();
-    virtual void v038();
-    virtual void v039();
-    virtual void v040();
-    virtual void v041();
-    virtual void v042();
-    virtual void v043();
-    virtual void v044();
-    virtual void v045();
-    virtual void v046();
-    virtual void v047();
-    virtual void v048();
-    virtual void v049();
-    virtual void v050();
-    virtual void v051();
-    virtual void v052();
-    virtual void v053();
-    virtual void v054();
-    virtual void v055();
-    virtual void v056();
-    virtual void v057();
-    virtual void v058();
-    virtual void v059();
-    virtual void v060();
-    virtual void v061();
-    virtual void v062();
-    virtual void v063();
-    virtual void v064();
-    virtual void v065();
-    virtual void v066();
-    virtual void v067();
-    virtual void v068();
-    virtual void v069();
-    virtual void v070();
-    virtual void v071();
-    virtual void v072();
-    virtual void v073();
-    virtual void v074();
-    virtual void v075();
-    virtual void v076();
-    virtual void v077();
-    virtual void v078();
-    virtual void v079();
-    virtual void v080();
-    virtual void v081();
-    virtual void v082();
-    virtual void v083();
-    virtual void v084();
-    virtual void v085();
-    virtual void v086();
-    virtual void v087();
-    virtual void v088();
-    virtual void v089();
-    virtual void v090();
-    virtual void v091();
-    virtual void v092();
-    virtual void v093();
-    virtual void v094();
-    virtual void v095();
-    virtual void v096();
-    virtual void v097();
-    virtual void v098();
-    virtual void v099();
-    virtual void v100();
-    virtual void v101();
-    virtual void v102();
-    virtual void v103();
-    virtual void v104();
-    virtual void v105();
-    virtual void v106();
-    virtual void v107();
-    virtual void v108();
-    virtual void v109();
-    virtual void v110();
-    virtual void v111();
-    virtual void v112();
-    virtual void v113();
-    virtual void v114();
-    virtual void v115();
-    virtual void v116();
-    virtual void v117();
-    virtual void v118();
-    virtual void v119();
-    virtual void v120();
-    virtual void v121();
-    virtual void v122();
-    virtual void v123();
-    virtual void v124();
-    virtual void* v125();
-};
-
-// object with virtual name accessor at slot 0x130 (index 76, __thiscall)
-struct C76a
-{
-    virtual void v000();
-    virtual void v001();
-    virtual void v002();
-    virtual void v003();
-    virtual void v004();
-    virtual void v005();
-    virtual void v006();
-    virtual void v007();
-    virtual void v008();
-    virtual void v009();
-    virtual void v010();
-    virtual void v011();
-    virtual void v012();
-    virtual void v013();
-    virtual void v014();
-    virtual void v015();
-    virtual void v016();
-    virtual void v017();
-    virtual void v018();
-    virtual void v019();
-    virtual void v020();
-    virtual void v021();
-    virtual void v022();
-    virtual void v023();
-    virtual void v024();
-    virtual void v025();
-    virtual void v026();
-    virtual void v027();
-    virtual void v028();
-    virtual void v029();
-    virtual void v030();
-    virtual void v031();
-    virtual void v032();
-    virtual void v033();
-    virtual void v034();
-    virtual void v035();
-    virtual void v036();
-    virtual void v037();
-    virtual void v038();
-    virtual void v039();
-    virtual void v040();
-    virtual void v041();
-    virtual void v042();
-    virtual void v043();
-    virtual void v044();
-    virtual void v045();
-    virtual void v046();
-    virtual void v047();
-    virtual void v048();
-    virtual void v049();
-    virtual void v050();
-    virtual void v051();
-    virtual void v052();
-    virtual void v053();
-    virtual void v054();
-    virtual void v055();
-    virtual void v056();
-    virtual void v057();
-    virtual void v058();
-    virtual void v059();
-    virtual void v060();
-    virtual void v061();
-    virtual void v062();
-    virtual void v063();
-    virtual void v064();
-    virtual void v065();
-    virtual void v066();
-    virtual void v067();
-    virtual void v068();
-    virtual void v069();
-    virtual void v070();
-    virtual void v071();
-    virtual void v072();
-    virtual void v073();
-    virtual void v074();
-    virtual void v075();
-    virtual unsigned int v076();
-};
-struct C76b
-{
-    virtual void v000();
-    virtual void v001();
-    virtual void v002();
-    virtual void v003();
-    virtual void v004();
-    virtual void v005();
-    virtual void v006();
-    virtual void v007();
-    virtual void v008();
-    virtual void v009();
-    virtual void v010();
-    virtual void v011();
-    virtual void v012();
-    virtual void v013();
-    virtual void v014();
-    virtual void v015();
-    virtual void v016();
-    virtual void v017();
-    virtual void v018();
-    virtual void v019();
-    virtual void v020();
-    virtual void v021();
-    virtual void v022();
-    virtual void v023();
-    virtual void v024();
-    virtual void v025();
-    virtual void v026();
-    virtual void v027();
-    virtual void v028();
-    virtual void v029();
-    virtual void v030();
-    virtual void v031();
-    virtual void v032();
-    virtual void v033();
-    virtual void v034();
-    virtual void v035();
-    virtual void v036();
-    virtual void v037();
-    virtual void v038();
-    virtual void v039();
-    virtual void v040();
-    virtual void v041();
-    virtual void v042();
-    virtual void v043();
-    virtual void v044();
-    virtual void v045();
-    virtual void v046();
-    virtual void v047();
-    virtual void v048();
-    virtual void v049();
-    virtual void v050();
-    virtual void v051();
-    virtual void v052();
-    virtual void v053();
-    virtual void v054();
-    virtual void v055();
-    virtual void v056();
-    virtual void v057();
-    virtual void v058();
-    virtual void v059();
-    virtual void v060();
-    virtual void v061();
-    virtual void v062();
-    virtual void v063();
-    virtual void v064();
-    virtual void v065();
-    virtual void v066();
-    virtual void v067();
-    virtual void v068();
-    virtual void v069();
-    virtual void v070();
-    virtual void v071();
-    virtual void v072();
-    virtual void v073();
-    virtual void v074();
-    virtual void v075();
-    virtual unsigned int v076(int, int);
-};
-struct C76c
-{
-    virtual void v000();
-    virtual void v001();
-    virtual void v002();
-    virtual void v003();
-    virtual void v004();
-    virtual void v005();
-    virtual void v006();
-    virtual void v007();
-    virtual void v008();
-    virtual void v009();
-    virtual void v010();
-    virtual void v011();
-    virtual void v012();
-    virtual void v013();
-    virtual void v014();
-    virtual void v015();
-    virtual void v016();
-    virtual void v017();
-    virtual void v018();
-    virtual void v019();
-    virtual void v020();
-    virtual void v021();
-    virtual void v022();
-    virtual void v023();
-    virtual void v024();
-    virtual void v025();
-    virtual void v026();
-    virtual void v027();
-    virtual void v028();
-    virtual void v029();
-    virtual void v030();
-    virtual void v031();
-    virtual void v032();
-    virtual void v033();
-    virtual void v034();
-    virtual void v035();
-    virtual void v036();
-    virtual void v037();
-    virtual void v038();
-    virtual void v039();
-    virtual void v040();
-    virtual void v041();
-    virtual void v042();
-    virtual void v043();
-    virtual void v044();
-    virtual void v045();
-    virtual void v046();
-    virtual void v047();
-    virtual void v048();
-    virtual void v049();
-    virtual void v050();
-    virtual void v051();
-    virtual void v052();
-    virtual void v053();
-    virtual void v054();
-    virtual void v055();
-    virtual void v056();
-    virtual void v057();
-    virtual void v058();
-    virtual void v059();
-    virtual void v060();
-    virtual void v061();
-    virtual void v062();
-    virtual void v063();
-    virtual void v064();
-    virtual void v065();
-    virtual void v066();
-    virtual void v067();
-    virtual void v068();
-    virtual void v069();
-    virtual void v070();
-    virtual void v071();
-    virtual void v072();
-    virtual void v073();
-    virtual void v074();
-    virtual void v075();
-    virtual unsigned int v076(int);
-};
-
-// object with virtual slot 0xdc (index 55, __thiscall, callee pops 8)
-struct C55
-{
-    virtual void v000();
-    virtual void v001();
-    virtual void v002();
-    virtual void v003();
-    virtual void v004();
-    virtual void v005();
-    virtual void v006();
-    virtual void v007();
-    virtual void v008();
-    virtual void v009();
-    virtual void v010();
-    virtual void v011();
-    virtual void v012();
-    virtual void v013();
-    virtual void v014();
-    virtual void v015();
-    virtual void v016();
-    virtual void v017();
-    virtual void v018();
-    virtual void v019();
-    virtual void v020();
-    virtual void v021();
-    virtual void v022();
-    virtual void v023();
-    virtual void v024();
-    virtual void v025();
-    virtual void v026();
-    virtual void v027();
-    virtual void v028();
-    virtual void v029();
-    virtual void v030();
-    virtual void v031();
-    virtual void v032();
-    virtual void v033();
-    virtual void v034();
-    virtual void v035();
-    virtual void v036();
-    virtual void v037();
-    virtual void v038();
-    virtual void v039();
-    virtual void v040();
-    virtual void v041();
-    virtual void v042();
-    virtual void v043();
-    virtual void v044();
-    virtual void v045();
-    virtual void v046();
-    virtual void v047();
-    virtual void v048();
-    virtual void v049();
-    virtual void v050();
-    virtual void v051();
-    virtual void v052();
-    virtual void v053();
-    virtual void v054();
-    virtual void v055(void*, int);
-};
-
-// object with virtual slot 0x9c (index 39, __thiscall, callee pops 4)
-struct C39
-{
-    virtual void v000();
-    virtual void v001();
-    virtual void v002();
-    virtual void v003();
-    virtual void v004();
-    virtual void v005();
-    virtual void v006();
-    virtual void v007();
-    virtual void v008();
-    virtual void v009();
-    virtual void v010();
-    virtual void v011();
-    virtual void v012();
-    virtual void v013();
-    virtual void v014();
-    virtual void v015();
-    virtual void v016();
-    virtual void v017();
-    virtual void v018();
-    virtual void v019();
-    virtual void v020();
-    virtual void v021();
-    virtual void v022();
-    virtual void v023();
-    virtual void v024();
-    virtual void v025();
-    virtual void v026();
-    virtual void v027();
-    virtual void v028();
-    virtual void v029();
-    virtual void v030();
-    virtual void v031();
-    virtual void v032();
-    virtual void v033();
-    virtual void v034();
-    virtual void v035();
-    virtual void v036();
-    virtual void v037();
-    virtual void v038();
-    virtual unsigned int v039(int);
-};
-
 // chain objects reached through DAT_011dea3c members
 struct Local12;
 struct Mesh34;
 struct V3Maker;
-struct ChainObj
-{
-    void FUN_00a59c60(V3Maker*);
-    ChainObj* FUN_00586170();
-    ChainObj* FUN_0043b230();
-    bool FUN_00456610();
-    void FUN_00450f90(bool);
-    void* FUN_005875a0(int, int);
-    void FUN_00555bc0();
-    void FUN_004a0370();
-    void FUN_004a03c0();
-    void FUN_00555b10(NiPt3*, NiPt3*, int);
-    void FUN_00556ef0(int, int, int);
-    void FUN_0054e640(Local12*);
-    void FUN_0054e750(int, int, Local12*);
-    void CollectCellReferences(unsigned int*);
-    unsigned int FUN_0059bb30();
-};
 struct Mesh34
 {
     void FUN_00439410(void*);
     void FUN_00a5a040();
     void FUN_004bc1f0(float, float, float);
-};
-struct ObjD_11dea3c
-{
-    bool FUN_00575d10();
-    void* FUN_00575d70();
-    void* FUN_008d6f30();
-};
-
-// path-name providers on the object at DAT_011dea10
-struct PathSrc
-{
-    void* FUN_005f36f0();
-    void* FUN_004fd3e0();
-};
-
-// object at [[DAT_011da368]+0x30]
-struct Tile30
-{
-    unsigned int FUN_0056c7f0();
-    void FUN_007a1400(int);
-    void FUN_00a07530(int);
-    void FUN_00700320(int, int);
-    void FUN_00a012d0(int, float, int);
 };
 
 // small local-object stand-ins (methods invoked with ecx = local)
@@ -4200,16 +2265,6 @@ struct V3Maker
     NiCol& FUN_00414430(float a, float b, float c, float d);
     void FUN_0043d410(float a, int b, int c);
     void FUN_0063c8a0(NiPt3* p);
-};
-struct ColorMaker
-{
-    float r, g, b, a;
-    NiCol& FUN_00414430(float, float, float, float);
-};
-struct UvMaker
-{
-    float u, v;
-    NiPt2& FUN_00452dc0(float, float);
 };
 struct Obj16
 {
@@ -4359,146 +2414,9 @@ struct Obj1C
     void FUN_0049ed90(int);
 };
 
-// map-menu state global, fields at their offsets
-struct MapMenuR6
-{
-    unsigned int unk000;
-    unsigned int unk004;
-    unsigned int unk008;
-    unsigned int unk00c;
-    unsigned int unk010;
-    unsigned int unk014;
-    unsigned int unk018;
-    unsigned int unk01c;
-    unsigned int unk020;
-    unsigned int unk024;
-    unsigned int unk028;
-    unsigned int unk02c;
-    void* tile_30;
-    unsigned int unk034;
-    unsigned int unk038;
-    unsigned int unk03c;
-    unsigned int unk040;
-    unsigned int unk044;
-    unsigned int unk048;
-    unsigned int unk04c;
-    unsigned int unk050;
-    unsigned int unk054;
-    unsigned int unk058;
-    unsigned int unk05c;
-    unsigned int unk060;
-    unsigned int unk064;
-    unsigned int unk068;
-    unsigned int unk06c;
-    unsigned int unk070;
-    unsigned int unk074;
-    unsigned int unk078;
-    unsigned int unk07c;
-    unsigned int unk080;
-    unsigned int field_84;
-    unsigned int unk088;
-    unsigned int unk08c;
-    unsigned int unk090;
-    unsigned int unk094;
-    unsigned int unk098;
-    unsigned int unk09c;
-    unsigned int unk0a0;
-    unsigned int unk0a4;
-    unsigned int unk0a8;
-    unsigned int unk0ac;
-    unsigned int unk0b0;
-    unsigned int unk0b4;
-    unsigned int unk0b8;
-    unsigned int unk0bc;
-    unsigned int unk0c0;
-    unsigned int unk0c4;
-    unsigned int unk0c8;
-    unsigned int unk0cc;
-    unsigned int unk0d0;
-    unsigned int unk0d4;
-    unsigned int unk0d8;
-    unsigned int unk0dc;
-    unsigned int field_e0;
-    unsigned int unk0e4;
-    unsigned int unk0e8;
-    unsigned int unk0ec;
-    unsigned int unk0f0;
-    unsigned int unk0f4;
-    unsigned int unk0f8;
-    unsigned int unk0fc;
-    unsigned int unk100;
-    unsigned int unk104;
-    unsigned int unk108;
-    unsigned int unk10c;
-    unsigned int unk110;
-    unsigned int unk114;
-    unsigned int unk118;
-    unsigned int unk11c;
-    unsigned int unk120;
-    unsigned int unk124;
-    unsigned int field_128;
-    unsigned char field_12c;
-    void UpdateLocalMap();
-};
-
-int __cdecl FUN_00556870(V3Maker*);
 // free helpers; conventions read from add esp evidence
-extern "C" void* __cdecl FUN_00401000(unsigned int);
-extern "C" void __stdcall FUN_00401050(void*, unsigned int, unsigned int, void*);
-extern "C" void* __cdecl FUN_00aa1070(unsigned int);
-extern "C" void* __cdecl FUN_00aa13e0(unsigned int);
 extern "C" void __cdecl FUN_006815c0();
 extern "C" void __cdecl FUN_004a7800();
-extern "C" int __cdecl FUN_00406d90(float);
-extern "C" void __cdecl FUN_00406d00(char*, unsigned int, const char*, ...);
-extern "C" void __stdcall FUN_00ee6dc2(char*, int, unsigned int);
-extern "C" bool __cdecl FUN_007a1750();
-extern "C" void* __cdecl FUN_007a1480();
-extern "C" void* __cdecl FUN_00653270(unsigned int, unsigned int);
-extern "C" void __cdecl FUN_00b57e30(void*, int, int);
-extern "C" float __cdecl ScreenWidth();
-extern "C" float __cdecl ScreenHeight();
-extern "C" void* __cdecl FUN_00ec62c0();
-extern "C" float __cdecl FUN_00879d90();
-struct ColorSource
-{
-    void ReadColor(int, Obj16*);
-};
-extern "C" ColorSource* __cdecl ColorSingleton();
-extern "C" void __fastcall FUN_00719060(void*); /* ecx = FUN_00718b60 result */
-extern "C" void __fastcall FUN_00a59c60(void*); /* ecx = FUN_0056c7f0 result */
-struct GObj
-{
-    int* FUN_0043d4d0();
-};
-extern GObj DAT_011c63cc; /* object at 0x11c63cc */
-
-// globals read/written here
-struct Position
-{
-    float x, y, z;
-};
-extern Position DAT_011f426c;
-struct RenderColor
-{
-    unsigned int r, g, b, a;
-};
-extern RenderColor DAT_011ff3a8;
-extern RenderColor DAT_011a9bd0;
-extern unsigned char DAT_011ff103;
-extern double DBL_01020758;
-extern double DBL_01011590;
-extern double DBL_0101db80;
-extern double DBL_0101e568;
-extern float FLT_0101e570;
-extern char DAT_01075520[];
-extern char DAT_01075508[];
-extern char DAT_010754f0[];
-extern char DAT_010754d4[];
-extern char DAT_010754ac[];
-extern char DAT_01075490[];
-extern char DAT_01075468[];
-extern unsigned int DAT_011f4418;
 
 namespace fnv_00705ec0 {
 class IMHelper
@@ -4624,32 +2542,14 @@ struct TileQ
     MenuQ* FUN_00a03c90();
     void FUN_00700320(int, int);
 };
-struct PipboyQ
-{
-    void FUN_007f8a80();
-    void FUN_007fa010(int);
-    bool IsUnk28Set();
-};
-struct IMQ : InterfaceManager
-{
-    bool FUN_009373f0();
-    PipboyQ* FUN_00704370();
-};
 TileQ* FUN_00a09030(int);
 bool FUN_00702680(int, int);
-TileQ* FUN_007046c0();
 void FUN_00704390();
 void FUN_00782470(int);
 
 }  // namespace fnv_007046f0
 
 namespace s7094f0 {
-
-struct Lock
-{
-    void FUN_0040fbf0(int iArg);
-    void FUN_0040fba0();
-};
 
 struct InterfaceManagerView
 {
@@ -5007,26 +2907,16 @@ struct NameTile
     int unk28;
 };
 
-extern Lock DAT_011d89c0;
-extern int DAT_011d8950;
 extern TESObjectREFR* DAT_011d8954;
 extern int DAT_011d8958;
 extern int DAT_011d895c;
 extern int DAT_011d8960;
 extern int DAT_011d8964;
-extern int DAT_011d8998;
 extern int DAT_011d899c;
 
 InterfaceManagerView* FUN_004b7210();
-int FUN_00704ed0(TESObjectREFR* pkRef, int iArg);
 bool FUN_00705ec0(TESObjectREFR* pkRef);
-bool FUN_00706130(TESObjectREFR* pkRef);
-int FUN_00705070(TESObjectREFR* pkRef, int iArg0, int iArg1);
 int GetOrCreateMenuTile(int iArg);
-bool InitStartMenu(int iArg0, int iArg1);
-void FUN_00771700(int iArg);
-bool FUN_007a8ba0();
-bool DestroyCompanionWheelMenu(Actor* pkActor);
 
 static const char s_szPlayerNameEntryMenu[] = "Player Name Entry Menu";
 
@@ -5057,13 +2947,6 @@ struct DisplayTile
     void FUN_00a012d0(int, float, bool);
     void FUN_00a01350(int, const char*, bool);
     void FUN_00700320(int, int);
-};
-
-struct DisplayEffects
-{
-    int unk00;
-    DisplayList effects;
-    void BuildDescription(char*, int);
 };
 
 struct DisplayItem
@@ -5389,174 +3272,10 @@ struct DisplayPlayer : DisplayPlayerPrefix, ActorValues
     DisplayProcess* FUN_008d8520();
 };
 
-struct DisplayInventory
-{
-    int FUN_004c8f30(DisplayForm*);
-};
-
 struct DisplaySetting
 {
     const char* FUN_00403df0();
     float* FUN_00403e20();
-};
-
-struct ArmorFlags
-{
-    bool FUN_004c0bd0();
-    bool FUN_00514450();
-};
-
-class TESObjectARMO : public TESBoundObject
-{
-  public:
-    int unk30;
-
-    int unk34;
-
-    int unk38;
-
-    int unk3c;
-
-    int unk40;
-
-    int unk44;
-
-    int unk48;
-
-    int unk4c;
-
-    int unk50;
-
-    int unk54;
-
-    int unk58;
-
-    int unk5c;
-
-    int unk60;
-
-    int unk64;
-
-    int unk68;
-
-    int unk6c;
-
-    ArmorFlags armorFlags;
-};
-
-struct DisplayDescription
-{
-
-    virtual void v0();
-    virtual void v1();
-    virtual void v2();
-    virtual void v3();
-    virtual const char* Text(int, int);
-};
-
-struct DescriptionForm
-{
-
-    int unk00;
-
-    int unk04;
-
-    int unk08;
-
-    int unk0c;
-
-    int unk10;
-
-    int unk14;
-
-    int unk18;
-
-    int unk1c;
-
-    int unk20;
-
-    int unk24;
-
-    int unk28;
-
-    int unk2c;
-
-    int unk30;
-
-    int unk34;
-
-    int unk38;
-
-    int unk3c;
-
-    int unk40;
-
-    int unk44;
-
-    int unk48;
-
-    int unk4c;
-
-    int unk50;
-
-    int unk54;
-
-    int unk58;
-
-    int unk5c;
-
-    int unk60;
-
-    int unk64;
-
-    int unk68;
-
-    int unk6c;
-
-    int unk70;
-
-    DisplayDescription description;
-};
-
-struct EffectPrefix
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-};
-
-struct EffectForm : EffectPrefix, DisplayEffects
-{
-};
-
-struct EnchantPrefix
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-};
-
-struct EnchantForm : EnchantPrefix, DisplayEffects
-{
-    bool FUN_0040e210(int);
 };
 
 extern DisplaySetting *DAT_0118a644, *DAT_0118a648, *DAT_0118a640;
@@ -5568,23 +3287,5 @@ extern char DAT_0106ed20[], DAT_0106ed18[], DAT_0106ed0c[], DAT_0106ecfc[], DAT_
     DAT_01019f08[], DAT_0106ece8[], DAT_01047008[], DAT_0106ece0[], DAT_0106ecd8[], DAT_0106ecd0[], DAT_0106ecc8[],
     DAT_01020768[], DAT_01030018[], DAT_01018348[];
 
-int FUN_00a01860(const char*);
-float FUN_0048ebc0(DisplayForm*, bool);
-DisplayTile* FUN_00a08b20(DisplayTile*, const char*);
-
-unsigned int FUN_0044a670(const char*);
-void FUN_005e58f0(int, DisplayPlayer*, ...);
-float FUN_00645380(ActorValues*, DisplayForm*, float, bool, DisplayItem*, int, int, int, float, float, int, int,
-                   DisplayForm*);
-float GetWeaponDamage(DisplayForm*, float, DisplayItem*, DisplayForm*);
-
 void FUN_00406d30(char*, unsigned int, const char*);
-float FUN_004bd510(float, float);
-float FUN_0040ebd0(float, float);
-DisplayInventory* FUN_004bf220(DisplayPlayer*);
 int MinInt(int, int);
-float FUN_00646360(int, float);
-float FUN_00476b20(float);
-unsigned int FUN_004873d0(DisplayForm*);
-EnchantForm* FUN_004be330(DisplayForm*);
-int FUN_00408b20(const char*, const char*);

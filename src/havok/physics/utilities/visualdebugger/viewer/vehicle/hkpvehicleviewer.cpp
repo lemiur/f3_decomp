@@ -4,9 +4,6 @@
 
 struct D625A0Allocator;
 
-void __cdecl FUN_00c908c0(D625A0Allocator* alloc, void* array, int numElements, int sizeElem);
-void __cdecl D625A0MemMove(void* dst, const void* src, unsigned int nbytes);
-
 struct D625A0CharArray
 {
     char* m_data;
@@ -101,18 +98,6 @@ void FUN_00d634e0_cls::ProcessItems()
     }
 }
 
-struct HeadPart
-{
-    virtual void h00();
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-};
-
 struct OurPart
 {
     virtual void o00();
@@ -131,10 +116,6 @@ struct NotifyTarget
 struct SecondTarget
 {
     virtual void w00();
-};
-
-struct Container : HeadPart, OurPart, NotifyTarget, SecondTarget
-{
 };
 
 struct ItemList
@@ -701,26 +682,6 @@ struct Parent : FirstBase, Receiver
 Parent::Parent()
 {}
 
-// FUN_00d63e00 : MSVC this-adjusting thunk  (sub ecx, 0x2c ; jmp <impl>)
-struct A1_00d63e00
-{
-    A1_00d63e00();
-    virtual void FUN_00d63e00();
-    char pad[0x28];
-};
-struct A2_00d63e00
-{
-    A2_00d63e00();
-    virtual void FUN_00d63e00();
-};
-struct Own_00d63e00 : A1_00d63e00, A2_00d63e00
-{
-    Own_00d63e00();
-    virtual void key_fn();
-// @fnv 0x00d63e00
-    void FUN_00d63e00();
-};
-
 struct D63590Array
 {
     unsigned int* m_data;
@@ -741,14 +702,4 @@ struct D63590Array
         if (m_iElementCount != index)
             m_data[index] = m_data[m_iElementCount];
     }
-};
-
-class D63590List
-{
-  public:
-    int unk00;
-    int unk04;
-    D63590Array m_items;
-
-    void FUN_00d63590(unsigned int value);
 };

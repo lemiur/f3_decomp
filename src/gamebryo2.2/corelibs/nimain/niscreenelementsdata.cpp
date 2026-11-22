@@ -65,9 +65,6 @@ bool NiScreenElementsData::SetRectangleBounds(int iPolygonIndex, unsigned short 
     return false;
 }
 
-struct GlobalObjectO2_00a7b610;
-extern GlobalObjectO2_00a7b610 g_011f5b50;
-
 void __fastcall FUN_00a7b8c0(void*);
 void __cdecl _NiFreeAlias(void*);
 void __cdecl _delete(void*, unsigned int);
@@ -89,33 +86,6 @@ void* Holder00a87aa0::Destroy(unsigned int auiFlags)
         _delete(this, 0x70);
     return this;
 }
-
-struct FUN_00a886f0_shell : public NiScreenElementsData
-{
-    void AppendMemberDescriptions(void*);
-};
-
-struct StrArr
-{
-    void* m_pData;
-    void* m_pAllocator;
-    unsigned short m_usCapacity;
-    unsigned short m_usSize;
-    unsigned short m_usReserved;
-    unsigned short m_usGrowBy;
-
-    void SetSize(unsigned int);
-    void SetAt(unsigned int, char*&);
-};
-
-struct Obj
-{
-    void AppendTriListInfo(StrArr*);
-};
-
-char* __cdecl _FUN_00a7d330(void*);
-char* __cdecl FUN_00a7d490(char const*, unsigned short);
-char* __cdecl FUN_00a7d5a0(char const*, void*);
 
 class RgbaColor
 {

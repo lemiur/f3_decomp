@@ -2,22 +2,6 @@
 // src/havok/common/base/debugutil/statisticscollector/stream/hkstreamstatisticscollector.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/common/base/debugutil/statisticscollector/stream/hkstreamstatisticscollector.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-struct VirtualBase
-{
-    virtual void v0();
-    virtual void v1();
-    virtual void v2();
-    virtual void v3();
-    virtual void v4();
-    virtual void v5();
-    virtual void v6();
-    virtual void Dispatch();
-};
-struct FUN_00ddf020_Class
-{
-    void __thiscall FUN_00ddf020();
-};
-
 struct hkMemoryAllocator
 {
     virtual ~hkMemoryAllocator();
@@ -163,13 +147,6 @@ struct AllocatorHolder
     MemoryAllocator* allocator;
 };
 extern AllocatorHolder* __cdecl FUN_00c85750();
-struct StreamStatisticsCollector
-{
-    int unk00;
-    unsigned short unk04;
-    void FUN_00ddf240();
-    void* FreeIfFlagged(unsigned int flags);
-};
 }  // namespace fnv_00ddfb40
 
 void __cdecl ResizeAudioStream(void* heap, void* arr, int elemSize);
@@ -507,15 +484,6 @@ class ObjDDF9
     int unk30, unk34, unk38, unk3C, unk40, unk44, unk48, unk4C, unk50, unk54;
 };
 
-void __stdcall FUN_00ddf740(hkArrayDDF9<ObjDDF9*>& kArray, int iParam) throw();
-
-extern int DAT_010d8040;
-
-struct SubBase
-{
-    void FUN_00d06f50(int a1);
-};
-
 struct AudioAllocator
 {
     virtual void v00();
@@ -557,19 +525,6 @@ struct SpawnedHandle
         }
         m_uiFilterValue = n;
     }
-};
-
-struct FUN_00ddf170_cls
-{
-    void* m_vtbl;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    SpawnedHandle m_14;
-    SpawnedHandle m_20;
-
-    FUN_00ddf170_cls* FUN_00ddf170(int a1, int a2);
 };
 
 int FUN_00cb10d0(const char* s);
@@ -730,31 +685,6 @@ struct AudioHolder
 
 AudioHolder* __cdecl FUN_00c85750() throw();
 
-struct SpawnedSub
-{
-    void Attach(AudioAllocator* apAllocator);
-    void Reset();
-};
-
-struct SpawnedRoot
-{
-    virtual ~SpawnedRoot() throw();
-};
-
-struct FUN_00ddf240_cls : SpawnedRoot
-{
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    void* m_pData;
-    int m_iUnk18;
-    unsigned int m_uiObjectFlags;
-    SpawnedSub m_sub;
-
-    virtual ~FUN_00ddf240_cls() throw();
-};
-
 }  // namespace fnv_00ddf240
 
 namespace fnv_00ddfa10 {
@@ -769,32 +699,7 @@ struct SpawnHolder
 
 SpawnHolder* FUN_00c85750();
 
-struct Sub20_cls
-{
-    int CB1930(int a, int b);
-    void CB1870(int a, int b, int c);
-};
-
 typedef void(__thiscall* VSlot8)(void* self, void* owner, int r);
-
-struct FUN_00ddfa10_cls
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int m_18;
-    unsigned int m_1c;
-    Sub20_cls m_20;
-
-    int D06D90(int a);
-    void DDF420(int a, int b, int c);
-    int D06D50(int a);
-    void DDF020();
-    void FUN_00ddfa10(int a1, int a2, unsigned char flag);
-};
 
 }  // namespace fnv_00ddfa10
 
@@ -808,36 +713,7 @@ struct AudioHolder
     int m_10;
 };
 
-struct Param1
-{
-    int FUN_00d470d0();
-};
-
-struct Sub20
-{
-    int LookupHashEntry(int a, int b);
-    void FUN_00cb1870(int a, int b, int c);
-};
-
 AudioHolder* __cdecl FUN_00c85750() throw();
-void __cdecl FUN_00cf6920(int a, void* b, void* c);
-
-struct FUN_00ddfab0_cls
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int m_18;
-    unsigned int m_1c;
-    Sub20 m_20;
-
-    void FUN_00ddf420(int a, int b, int c);
-    void FUN_00ddf020();
-    void FUN_00ddfab0(Param1* a1, int a2, int a3, int a4);
-};
 
 }  // namespace fnv_00ddfab0
 

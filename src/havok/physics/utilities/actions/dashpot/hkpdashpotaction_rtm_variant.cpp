@@ -6,40 +6,12 @@
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 #include "havok/hkpDashpotAction.h"
 #include <xmmintrin.h>
-extern float DAT_0101e2bc;
-extern float DAT_01013ea4;
-extern int DAT_010d0994;
-struct FUN_00cf4d80_shell { void FUN_00cf4d80(int entityA, int entityB, int name); };
-struct FUN_00d4d980_Class : hkpDashpotAction { FUN_00d4d980_Class* FUN_00d4d980(int entityA, int entityB, int name); };
 // FUN_00d4d9d0 - hkpDashpotAction clone-style factory (Havok)
 __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long dwTlsIndex);
 unsigned long g_tlsIdx = 0;
-class DashHeap1 {
-public:
-	virtual void unk00();
-	virtual void* allocate(int size);
-};
-struct DashRouter1 {
-	void* u00;
-	void* u04;
-	void* u08;
-	void* u0c;
-	DashHeap1* u10;
-};
-class FUN_00d4d980_class {
-public:
-	void* FUN_00d4d980(hkpEntity* entityA, hkpEntity* entityB, hkUlong userData);
-};
-class hkpDashpotActionX : public hkpDashpotAction {
-public:
-	hkpAction* FUN_00d4d9d0(const hkArray<hkpEntity*>& newEntities, const hkArray<hkpEntity*>& removedEntities);
-};
 
 #include <xmmintrin.h>
 extern "C" void _ReadWriteBarrier(void);
-extern unsigned long DAT_0126835c;
-extern double DAT_010d09b8;
-extern float DAT_01012054;
 
 namespace DashpotApplyDetail {
 

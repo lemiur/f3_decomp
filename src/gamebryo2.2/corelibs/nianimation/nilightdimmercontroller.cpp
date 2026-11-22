@@ -30,10 +30,6 @@ void NiLightDimmerController::GetLightDimmer(float& fValue)
     }
 }
 
-struct GlobalObjectO2_00a7b610;
-
-extern GlobalObjectO2_00a7b610 g_011f3fa0;
-
 struct BSFadeNode
 {
     static void* __cdecl operator new(unsigned int);
@@ -73,8 +69,6 @@ template <typename T, typename A> struct NiTPrimitiveArray
     void SetSize(unsigned int);
     void SetAt(unsigned int, T&);
 };
-void __stdcall FUN_00a576c0(NiTPrimitiveArray<char*, NiTMallocInterface<char*> >*);
-char* __cdecl FUN_00a7d330(const char*);
 
 extern "C" void* __cdecl FUN_00aa13e0(unsigned int size);
 
@@ -101,14 +95,7 @@ void* FloatInterpOwner::CreateFloatInterpController(int arg)
     return obj;
 }
 
-class NiRTTI;
-extern NiRTTI DAT_011f4a28;
 extern const float DAT_01096324;
-
-struct DynCastHelper
-{
-    DynCastHelper* DynamicCast(const GlobalObjectO2_00a7b610* pkRTTI);
-};
 
 class NiLightW
 {

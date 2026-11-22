@@ -2,8 +2,6 @@
 // src/gamebryo2.2/corelibs/nimain/niparticles.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/_fallout3/platforms/common/code/gamebryo2.2/corelibs/nimain/niparticles.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-extern char const* const g_011f5f14_arg1;
-
 struct NiGeometryData
 {
     enum Consistency
@@ -69,19 +67,6 @@ void FUN_00a9b1f0_shell::SetupRenderer(NiRenderer* apkRenderer)
         ((void(__thiscall*)(NiRenderer*, void*))(*(void***)pkRenderer)[111])(pkRenderer, this);
     }
 }
-
-struct StrArr
-{
-    char _0[8];
-    unsigned short m_usMax;
-    unsigned short m_usSize;
-    unsigned short _c;
-    unsigned short m_usGrow;
-    void SetSize(unsigned int);
-    void SetAt(unsigned int, char*&);
-};
-void __stdcall FUN_00a80e70(StrArr*);
-char* _FUN_00a7d330(const char*);
 
 void* __cdecl FUN_00aa13e0(unsigned int size);
 extern int DAT_010a11d4;

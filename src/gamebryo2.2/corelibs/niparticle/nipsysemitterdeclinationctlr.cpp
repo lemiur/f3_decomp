@@ -14,8 +14,6 @@ void __thiscall NiPSysEmitterDeclinationCtlr::FUN_00c2a1b0(float& fValue)
     fValue = *(float*)((char*)p + 0x20);
 }
 
-extern "C" void* g_01202758;
-
 namespace fnv_00c2b9b0 {
 struct NiPSysEmitterDeclinationCtlr
 {
@@ -51,12 +49,6 @@ struct ObjArray
             FUN_0096ad30(uiIndex + m_usGrowBy);
         FUN_0096ae90(uiIndex, element);
     }
-};
-
-struct FUN_00c2ba10_class
-{
-    __declspec(nothrow) void FUN_00c32f60(ObjArray* arr);
-    void FUN_00c2ba10(ObjArray* arr);
 };
 
 struct S_00c2b9c0_Base

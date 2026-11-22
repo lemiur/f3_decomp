@@ -45,36 +45,6 @@ void __cdecl InitAndSetB(void* a1, int a2)
     a.FinishA();
 }
 
-struct FUN_00d5a630_ctxA
-{
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0c;
-    unsigned int unk10;
-
-    void InitA();
-    int FindB(void* a1, void* b);
-    void SetB(int zero, int a2);
-    void SetF(float f, int zero);
-    void SetC(int a3);
-    void FinishA();
-};
-
-struct FUN_00d5a630_ctxB
-{
-    unsigned char m_00;
-    unsigned char unk01;
-    unsigned short unk02;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0c;
-
-    void InitB();
-};
-
-extern float DAT_0106ea1c;
-
 struct S_00d5a6b0_Elem
 {
     float x;
@@ -310,10 +280,6 @@ struct __declspec(align(16)) S00d5c060_Result
     unsigned int unk08;
     unsigned int unk0C;
 };
-
-char* __cdecl AllocateWithHeader(D5C110Allocator* alloc, int size);
-char* __cdecl FUN_00c856c0(D5C110Allocator* owner, char* data);
-void __cdecl FUN_00d5beb0(S00d5c060_Result* self, char* data, int count, int flags, float scale);
 
 // Allocates a buffer, copies vertex coordinates from src->m_pData into it, and passes it to FUN_00d5beb0 to produce a result.
 // @f3 0x009eb6d0 (community match, verified in this file)
@@ -595,24 +561,15 @@ void FUN_00d5d270(const void* shape, ObbVec* outExt, ObbXf* outXf, int mode)
 }  // namespace fnv_00d5d270
 
 extern "C" __m128 _mm_add_ss(__m128, __m128);
-extern "C" float _mm_cvtss_f32(__m128);
 extern "C" void _mm_store_ss(float*, __m128);
 extern "C" __m128 _mm_mul_ps(__m128, __m128);
-extern "C" __m128 _mm_setzero_ps(void);
 extern "C" __m128 _mm_shuffle_ps(__m128, __m128, unsigned int);
 extern "C" __m128 _mm_sqrt_ss(__m128);
 extern "C" __m128 _mm_sub_ps(__m128, __m128);
 
-extern const float DAT_01012054;
-
 struct __declspec(align(16)) Vec4
 {
     float x, y, z, w;
-};
-
-struct MyPoint
-{
-    __m128 v;
 };
 
 extern "C" __m128 _mm_add_ps(__m128, __m128);

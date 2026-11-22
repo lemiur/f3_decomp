@@ -17,67 +17,10 @@ hkInt32 FnvShapeGetter::FUN_00d2a5f0()
     return unk10;
 }
 
-class GlobalObjectO2_00d472a0;
-extern GlobalObjectO2_00d472a0 g_01268910;
-
-class hkStatisticsCollectorD2A6;
-
-class hkReferencedObjectD2A6
-{
-  public:
-    virtual ~hkReferencedObjectD2A6() throw();
-    unsigned short m_usMemSizeAndFlags;
-    short m_sReferenceCount;
-
-    void FUN_00c90360(hkStatisticsCollectorD2A6* pkCollector, const GlobalObjectO2_00d472a0* pkClass) const;
-};
-
-class hkObjectD2A6 : public hkReferencedObjectD2A6
-{
-  public:
-    void FUN_00d2a600(hkStatisticsCollectorD2A6* pkCollector, const GlobalObjectO2_00d472a0* pkClass) const;
-};
-
-extern int DAT_010ce4bc;
-
 typedef union __declspec(intrin_type) __declspec(align(16)) __m128
 {
     float m128_f32[4];
 } __m128;
-
-struct FUN_00d2a760
-{
-    void* m_ppVirtualMethodTable;
-    short unk04;
-    short m_iObjectReferenceCount;
-    unsigned int m_ulUserData;
-    int m_type;
-    int m_iSphereCount;
-    int unk14;
-    int unk18;
-    int unk1C;
-    hkVector4 m_kSpheres[8];
-
-    FUN_00d2a760(const hkVector4* spheres, int count);
-};
-
-extern "C" __m128 _mm_set_ps(float, float, float, float);
-
-extern "C" __m128 _mm_setr_ps(float, float, float, float);
-
-extern "C" __m128 _mm_load_ps1(const float*);
-
-extern "C" __m128 _mm_move_ss(__m128, __m128);
-
-extern "C" __m128 _mm_load_ss(const float*);
-
-extern "C" __m128 _mm_set_ps1(float);
-
-extern "C" __m128 _mm_set_ss(float);
-
-extern "C" __m128 _mm_load_ps(const float*);
-
-extern "C" __m128 _mm_add_ps(__m128, __m128);
 
 extern "C" __m128 _mm_sub_ps(__m128, __m128);
 
@@ -118,22 +61,6 @@ struct __declspec(align(16)) Sph
 
     float x, y, z, w;
 };
-
-extern __m128 DAT_010ec7f0;
-
-extern "C" Out* d2a610_out();
-
-extern "C" Sph* d2a610_sph();
-
-extern "C" float* d2a610_fracs();
-
-extern "C" int* d2a610_ids();
-
-extern "C" int d2a610_count();
-
-extern "C" Ray* d2a610_ray();
-
-extern "C" void d2a610_sink(int);
 
 struct FUN_00d2a920
 {
@@ -242,25 +169,13 @@ char* S00d2ab90_Shape::FUN_00d2ab90(char* ok, RayCtx* in, void* p3)
 #include <math.h>
 
 extern "C" void _ReadWriteBarrier(void);
-extern "C" unsigned __int64 __rdtsc(void);
-extern unsigned long DAT_0126835c;
-extern const char str_010ce4f0[];
-extern const char str_010c41f8[];
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long dwTlsIndex);
 
 extern "C" __m128 _mm_add_ss(__m128, __m128);
-extern "C" void _mm_store_ss(float*, __m128);
 extern "C" __m128 _mm_sub_ps(__m128, __m128);
 extern "C" __m128 _mm_mul_ps(__m128, __m128);
 extern "C" __m128 _mm_shuffle_ps(__m128, __m128, int);
 
-struct Sph_Mon
-{
-    int unk00;
-    char* cur;
-    int unk08;
-    char* end;
-};
 struct Sph_V
 {
     float x, y, z, w;
@@ -555,9 +470,6 @@ void DummyMultiSphere::FUN_00d2abe0(const ShapeRayCastQuery& query, const hkpCdB
 }
 
 
-extern "C" __m128 _mm_min_ps(__m128, __m128);
-extern "C" __m128 _mm_max_ps(__m128, __m128);
-
 struct Vec4
 {
     __m128 m_vComponents;
@@ -569,36 +481,4 @@ struct Vec4
     {
         m_vComponents = v;
     }
-};
-
-struct hkTransformSimd
-{
-    Vec4 m_kColumn0;
-    Vec4 m_kColumn1;
-    Vec4 m_kColumn2;
-    Vec4 m_vTranslation;
-};
-
-struct hkAabbSimd
-{
-    Vec4 m_kMinimumCorner;
-    Vec4 m_kMaximumCorner;
-};
-
-extern float DAT_0104da48;
-extern float DAT_0104e148;
-
-struct MultiSphereShape
-{
-    void* unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int m_iSphereCount;
-    int unk14;
-    int unk18;
-    int unk1C;
-    Vec4 m_kSpheres[8];
-
-    void FUN_00d2a7c0(const hkTransformSimd& localToWorld, float tolerance, hkAabbSimd& out) const;
 };

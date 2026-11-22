@@ -57,9 +57,6 @@ NiQuaternion __cdecl TimedRotationKey::InterpolatePosition(float fTime, TimedRot
     }
 }
 
-// 22-byte covered span: ctor thunk (11 B) + 5 B int3 padding + 6 B static-address accessor.
-void FUN_00a3ca30();
-
 // Compares the four floats of pThis with those of q and returns 1 only if all four are exactly equal.
 // @fnv 0x00a92660
 int __fastcall FUN_00a92660(const float* pThis, int, const float* q)
@@ -68,13 +65,6 @@ int __fastcall FUN_00a92660(const float* pThis, int, const float* q)
 }
 
 void __cdecl FUN_00a57010();
-extern void* _DAT_01097054;
-
-struct FUN_00a3ca30_shell
-{
-    void* m;
-    void FUN_00a3ca30();
-};
 
 extern void* _DAT_011f3740;
 

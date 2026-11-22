@@ -37,24 +37,9 @@ void FUN_00d452a0::Method(float afValue, float agValue, void* arg)
 void __cdecl FUN_00d45f30();
 void __cdecl FUN_00d46010();
 void __cdecl FUN_00d46050();
-void __cdecl FUN_00d46090();
-void __cdecl FUN_00d45480();
 void __cdecl FUN_00d45dd0();
 void __cdecl FUN_00d45af0();
 void __cdecl FUN_00d45800();
-struct FUN_00cfbbe0_vtbl
-{
-    void* v0;
-    void* v1;
-    void* v2;
-    void* v3;
-    char b1;
-    char b2;
-};
-struct FUN_00cfbbe0
-{
-    void Method(FUN_00cfbbe0_vtbl* p, int a, int b);
-};
 
 struct TargetVtbl
 {
@@ -321,8 +306,6 @@ void FUN_00d45330_cls::CallSlotVt13(void* arg)
     }
 }
 
-extern char DAT_010cf3cc;
-
 struct FUN_00d453d0_args
 {
     int m_00;
@@ -412,16 +395,6 @@ class D45480ReferencedObject
 
     unsigned short m_usMemSizeAndFlags;
     short m_sReferenceCount;
-};
-
-class D45480Object : public D45480ReferencedObject
-{
-  public:
-    __declspec(nothrow) D45480Object(void* a, void* b, void* c, void* d);
-
-    int unk08;
-    int unk0C;
-    int unk10;
 };
 
 extern float DAT_0104da48;
@@ -801,61 +774,10 @@ union __declspec(intrin_type) __declspec(align(16)) __m128
 };
 extern "C"
 {
-    __m128 _mm_shuffle_ps(__m128, __m128, unsigned int);
     __m128 _mm_mul_ps(__m128, __m128);
     __m128 _mm_add_ps(__m128, __m128);
     __m128 _mm_xor_ps(__m128, __m128);
 }
-
-extern __m128 DAT_010c4c00;
-
-struct SimplexVertex
-{
-    __m128 m_kPointA;
-    __m128 m_kPointB;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-};
-
-struct DimNibbles
-{
-    unsigned char m_ucLowNibble : 4;
-    unsigned char m_ucHighNibble : 4;
-};
-
-struct Simplex
-{
-    SimplexVertex* m_kRayEnd;
-    int unk04;
-    int unk08;
-    int unk0C;
-    SimplexVertex m_kVertices[256];
-    int unk3010;
-    int unk3014;
-    int unk3018;
-    int unk301C;
-    __m128 m_vHitNormal;
-    float m_fClosestPointDistanceSquared;
-    int unk3034;
-    int unk3038;
-    int unk303C;
-    unsigned short m_ids[4];
-    unsigned char m_ucDimensionA;
-    unsigned char m_ucDimensionB;
-    DimNibbles m_dims;
-};
-
-struct AgentBase
-{
-    void FUN_00d454c0(int a, int b, int c, Simplex* s);
-};
-
-struct Agent : AgentBase
-{
-    void FUN_00d46220(int a, int b, int c, Simplex* s);
-};
 
 extern char DAT_010cebe0;
 
@@ -942,8 +864,6 @@ void __cdecl FUN_00d45800(CdBody* bodyA, CdBody* bodyB, CollisionInput* input, v
 }
 
 extern float DAT_0104da48;
-extern const __m128 DAT_010c44d0;
-extern unsigned int DAT_010ce80c;
 
 struct __declspec(align(16)) Key_d2e9
 {
@@ -1117,8 +1037,6 @@ __forceinline S_00d45970_Agent* S_00d45970_Dispatcher::getNewCollisionAgent(cons
     S_00d45970_CreateFunc f = m_agent2Funcs[idx].m_pCreateFunc;
     return f(bodyA, bodyB, input, mgr);
 }
-
-struct S_00d45970_Output;
 
 struct S_00d45970_Agent
 {
@@ -2061,8 +1979,6 @@ void* __cdecl FUN_00d45f30(int a1, int a2, int a3, int a4)
 }
 }  // namespace fnv_00d45f30
 
-extern "C" void _mm_store_ps(float*, __m128);
-
 extern float DAT_0104da48;
 
 struct __declspec(align(16)) Vec4
@@ -2108,14 +2024,4 @@ struct __declspec(align(16)) Event
     float m_fHitFraction;
     Vec4 m_vec;
     int m_kCollisionBody;
-};
-
-struct Host
-{
-    void Dispatch(int a, int b, Block* blk, Event* ev, Event* ctx);
-};
-
-struct Owner
-{
-    void FUN_00d46340(int a1, int a2, const Block* p, int a4, int a5);
 };

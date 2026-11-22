@@ -208,73 +208,6 @@ void This::FUN_00ca4e50(int first, int second)
 }
 
 
-struct S_00ca4ec0_Stream
-{
-    void FUN_00a645b0();
-};
-
-struct S_00ca4ec0_Out
-{
-    int unk00;
-    int m_04;
-};
-
-struct S_00ca4ec0_Base
-{
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual void v0c();
-    virtual void v10();
-    virtual void v14();
-    virtual void v18();
-    virtual void v1c();
-    virtual void v20();
-    virtual void v24();
-    virtual void v28();
-    virtual void v2c();
-    virtual void v30();
-    virtual void v34();
-    virtual void v38();
-    virtual void v3c();
-    virtual void v40();
-    virtual void v44();
-    virtual void v48();
-    virtual void v4c();
-    virtual void v50();
-    virtual void v54();
-    virtual void v58();
-    virtual void v5c();
-    virtual void v60();
-    virtual void v64();
-    virtual void v68();
-    virtual void v6c();
-    virtual void v70();
-    virtual void v74();
-    virtual void v78();
-    virtual void v7c();
-    virtual void v80();
-    virtual void v84();
-    virtual void v88();
-    virtual void v8c();
-    virtual void v90();
-    virtual void v94();
-    virtual void v98();
-    virtual void v9c();
-    virtual void va0();
-    virtual void va4();
-    virtual void va8();
-    virtual void vac();
-    virtual void vb0();
-    virtual S_00ca4ec0_Out* vb4(int* out);
-    void FUN_00c84d00(S_00ca4ec0_Stream& kStream);
-};
-
-struct S_00ca4ec0 : S_00ca4ec0_Base
-{
-    void FUN_00ca4ec0(S_00ca4ec0_Stream& kStream);
-};
-
 struct NiStream;
 struct FirstInterface
 {
@@ -553,30 +486,7 @@ struct MemoryContextGuard
     }
 };
 
-struct FUN_00cb0780_Allocator
-{
-    virtual void slot00();
-    virtual void slot04();
-    virtual void Free(void* memory, unsigned int size);
-};
-struct FUN_00cb0780_Manager
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    FUN_00cb0780_Allocator* allocator;
-};
 void* __cdecl FUN_00c85750();
-
-struct FUN_00cb0780_class
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    void* memory;
-    void FUN_00cb0780(bool release);
-};
 
 struct ThreadState
 {
@@ -756,28 +666,6 @@ struct ThreadState
     int unk2B4;
 };
 extern __declspec(thread) ThreadState s_tlsData;
-struct NiStringArray
-{
-    void* unk00;
-    char** data;
-    unsigned short capacity;
-    unsigned short count;
-    unsigned short unk0C;
-    unsigned short growth;
-    void FUN_0096ad30(unsigned int newCapacity);
-    void FUN_0096ae90(unsigned int index, char** value);
-};
-struct GlobalString
-{
-    const char* value;
-};
-extern GlobalString g_01268350;
-char* __cdecl FUN_00a7d330(const char* text);
-struct StringBuilder
-{
-    void FUN_00ca5190(NiStringArray* array);
-    void FUN_00cb09b0(NiStringArray* array);
-};
 struct ThreadStateGuard
 {
     int previous;
@@ -789,174 +677,6 @@ struct ThreadStateGuard
     {
         s_tlsData.unk2B4 = previous;
     }
-};
-
-struct EP
-{
-    int u0[0x50];
-    int m254;
-    int m260;
-    int __thiscall FUN_00a63430();
-};
-
-struct K46
-{
-    virtual void f0();
-    virtual void f1();
-    virtual void f2();
-    virtual void f3();
-    virtual void f4();
-    virtual void f5();
-    virtual void f6();
-    virtual void f7();
-    virtual void f8();
-    virtual void f9();
-    virtual void f10();
-    virtual void f11();
-    virtual void f12();
-    virtual void f13();
-    virtual void f14();
-    virtual void f15();
-    virtual void f16();
-    virtual void f17();
-    virtual void f18();
-    virtual void f19();
-    virtual void f20();
-    virtual void f21();
-    virtual void f22();
-    virtual void f23();
-    virtual void f24();
-    virtual void f25();
-    virtual void f26();
-    virtual void f27();
-    virtual void f28();
-    virtual void f29();
-    virtual void f30();
-    virtual void f31();
-    virtual void f32();
-    virtual void f33();
-    virtual void f34();
-    virtual void f35();
-    virtual void f36();
-    virtual void f37();
-    virtual void f38();
-    virtual void f39();
-    virtual void f40();
-    virtual void f41();
-    virtual void f42();
-    virtual void f43();
-    virtual void f44();
-    virtual int M45(void* p);
-};
-
-struct QTF
-{
-    virtual void f0();
-    virtual void f1();
-    virtual void f2();
-    virtual void f3();
-    virtual void f4();
-    virtual void f5();
-    virtual void f6();
-    virtual void f7();
-    virtual void f8();
-    virtual void f9();
-    virtual void f10();
-    virtual void f11();
-    virtual void f12();
-    virtual void f13();
-    virtual void f14();
-    virtual void f15();
-    virtual void f16();
-    virtual void f17();
-    virtual void f18();
-    virtual void f19();
-    virtual void f20();
-    virtual void f21();
-    virtual void f22();
-    virtual void f23();
-    virtual void f24();
-    virtual void f25();
-    virtual void f26();
-    virtual void f27();
-    virtual void f28();
-    virtual void f29();
-    virtual void f30();
-    virtual void f31();
-    virtual void f32();
-    virtual void f33();
-    virtual void f34();
-    virtual void f35();
-    virtual void f36();
-    virtual void f37();
-    virtual void f38();
-    virtual void f39();
-    virtual void f40();
-    virtual void f41();
-    virtual void f42();
-    virtual void f43();
-    virtual void f44();
-    virtual int M45(void* p);
-    void __thiscall FUN_00c84cc0(EP* p);
-    void FUN_00ca4f00(EP* a1);
-};
-
-struct FUN_00ca4fd0_Value
-{
-    virtual void v00();
-    virtual void v01();
-    virtual void v02();
-    virtual void v03();
-    virtual void v04();
-    virtual void v05();
-    virtual void v06();
-    virtual void v07();
-    virtual void v08();
-    virtual void v09();
-    virtual void v10();
-    virtual void v11();
-    virtual void v12();
-    virtual void v13();
-    virtual void v14();
-    virtual void v15();
-    virtual void v16();
-    virtual void v17();
-    virtual void v18();
-    virtual void v19();
-    virtual void v20();
-    virtual void v21();
-    virtual void v22();
-    virtual void v23();
-    virtual void v24();
-    virtual void v25();
-    virtual void v26();
-    virtual void v27();
-    virtual void v28();
-    virtual void v29();
-    virtual void v30();
-    virtual void v31();
-    virtual void v32();
-    virtual void v33();
-    virtual void v34();
-    virtual void v35();
-    virtual void v36();
-    virtual void v37();
-    virtual void v38();
-    virtual void v39();
-    virtual void v40();
-    virtual void v41();
-    virtual void v42();
-    virtual void v43();
-    virtual void v44();
-    virtual void v45();
-    virtual void v46();
-    virtual void v47();
-    virtual void v48();
-    virtual void v49();
-    virtual void v50();
-    virtual void v51();
-    virtual void v52();
-    virtual void Target(int first);
 };
 
 class FUN_00ca4fd0_cls
@@ -1072,20 +792,6 @@ void FUN_00ca4fd0_cls::FUN_00ca4fd0(int first)
 
 extern "C" __declspec(dllimport) long __stdcall InterlockedIncrement(long volatile* lpAddend);
 
-void FUN_00ca5080();
-
-struct RefCounted
-{
-    int unk00;
-    long refCount;
-};
-
-struct Owner_Ext : public Owner
-{
-    void FUN_00c84e50(bool flag);
-    void FUN_00ca5130(bool flag);
-};
-
 extern "C" void* __cdecl FUN_00aa13e0(unsigned int);
 extern "C" void __cdecl FUN_00c876f0();
 extern "C" void __cdecl FUN_00c87700();
@@ -1187,33 +893,6 @@ SpawnedObject* FUN_00cb05d0_cls::FUN_00cb05d0(int a1)
     return p;
 }
 
-struct FUN_00cb06c0_Alloc
-{
-    virtual void slot00();
-    virtual void* Alloc(unsigned int size);
-};
-struct FUN_00cb06c0_Holder
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    FUN_00cb06c0_Alloc* allocator;
-};
-struct FUN_00cb06c0_Obj
-{
-    void* FUN_00622490();
-};
-struct FUN_00cb06c0_cls
-{
-    int unk00;
-    int unk04;
-    void* unk08;
-    void* unk0c;
-    void FUN_00cb0030(void* value);
-    void* FUN_00cb06c0(bool* out);
-};
-
 struct S00cb0820_Alloc
 {
     virtual void slot00();
@@ -1277,7 +956,6 @@ struct S00cb0820_Outer
 
 extern char DAT_010c853c;
 extern double DAT_01012070;
-extern float DAT_01016248;
 
 struct S00cb0820_Shape : S00cb0820_Ref
 {
@@ -1501,37 +1179,6 @@ void S00cb0820_World::FUN_00cb0820(S00cb0820_Outer* outer)
 
 
 #include <windows.h>
-struct ValueRefObject
-{
-    virtual void v00();
-    virtual void Destroy();
-    LONG m_lRefCount;
-};
-
-struct ValueHeader
-{
-    int unk00;
-    int unk04;
-    ValueRefObject* value;
-};
-
-struct ValueNode
-{
-    virtual void f00();
-    virtual void f04();
-    virtual void f08();
-    virtual void f0c();
-    virtual void* get();
-};
-
-struct FUN_00ca5080_cls
-{
-    int unk00;
-    int unk04;
-    ValueNode* m_pReferencedNode;
-
-    void FUN_00ca5080();
-};
 
 struct BinaryDataRecord
 {
@@ -1724,68 +1371,6 @@ void T::FUN_00cb0120(void* arg)
 }
 
 
-struct ValueRecord
-{
-    void* value;
-    int type;
-    Link link;
-};
-struct ValueObj
-{
-    virtual void v00();
-    virtual void v01();
-    virtual void v02();
-    virtual void v03();
-    virtual void v04();
-    virtual void v05();
-    virtual void v06();
-    virtual void v07();
-    virtual void v08();
-    virtual void v09();
-    virtual void v0a();
-    virtual void v0b();
-    virtual void v0c();
-    virtual void v0d();
-    virtual void v0e();
-    virtual void v0f();
-    virtual void v10();
-    virtual void v11();
-    virtual void v12();
-    virtual void v13();
-    virtual void v14();
-    virtual void v15();
-    virtual void v16();
-    virtual void v17();
-    virtual void v18();
-    virtual void v19();
-    virtual void v1a();
-    virtual void v1b();
-    virtual void v1c();
-    virtual void v1d();
-    virtual void v1e();
-    virtual void v1f();
-    virtual void v20();
-    virtual void v21();
-    virtual void v22();
-    virtual void v23();
-    virtual void v24();
-    virtual void v25();
-    virtual void v26();
-    virtual void v27();
-    virtual void v28();
-    virtual void v29();
-    virtual void v2a();
-    virtual void v2b();
-    virtual void v2c();
-    virtual void v2d();
-    virtual void v2e();
-    virtual void v2f();
-    virtual void v30();
-    virtual void v31();
-    virtual void v32();
-    virtual void v33();
-    virtual bool vD0(int a);
-};
 struct ValueOwner
 {
     int state;
@@ -1912,49 +1497,4 @@ bool ValueOwner::FUN_00ca5040(int a)
 
 extern "C"
 {
-    extern const char* DAT_012682d0;
 }
-
-struct StringArrayCalls_00ca5190
-{
-    void FUN_0096ad30(unsigned int);
-    void FUN_0096ae90(unsigned int, char**);
-};
-struct StringBuilderCalls_00ca5190
-{
-    void FUN_00c851c0(NiStringArray* array);
-};
-
-struct ValueObject_00ca5190
-{
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual void v0c();
-    virtual void v10();
-    virtual void v14();
-    virtual void v18();
-    virtual void v1c();
-    virtual void v20();
-    virtual void v24();
-    virtual void v28();
-    virtual void v2c();
-    virtual void v30();
-    virtual void v34();
-    virtual void v38();
-    virtual void v3c();
-    virtual void v40();
-    virtual void v44();
-    virtual void v48();
-    virtual void v4c();
-    virtual void v50();
-    virtual void v54();
-    virtual void v58();
-    virtual void v5c();
-    virtual void v60(NiStringArray* array);
-};
-
-struct StringBuilder_ca5190 : public StringBuilder
-{
-    void FUN_00ca5190(NiStringArray* array);
-};

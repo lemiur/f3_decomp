@@ -648,233 +648,6 @@ struct S_00cb5d00_Source
         unk1C(key, out);
     }
 };
-struct S_00cb5d00_Sink
-{
-    void DispatchPairs(S_00cb5d00_Elem* data, int n) throw();
-};
-struct S_00cb5d00_Owner
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    S_00cb5d00_Source* unk58;
-    int unk5C;
-    int unk60;
-    S_00cb5d00_Sink* unk64;
-    int unk68;
-    int unk6C;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7C;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8C;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9C;
-    int unkA0;
-    int unkA4;
-    int unkA8;
-    int unkAC;
-    int unkB0;
-    int unkB4;
-    int unkB8;
-    int unkBC;
-    int unkC0;
-    int unkC4;
-    int unkC8;
-    int unkCC;
-    int unkD0;
-    int unkD4;
-    int unkD8;
-    int unkDC;
-    int unkE0;
-    int unkE4;
-    int unkE8;
-    int unkEC;
-    int unkF0;
-    int unkF4;
-    int unkF8;
-    int unkFC;
-    int unk100;
-    int unk104;
-    int unk108;
-    int unk10C;
-    int unk110;
-    int unk114;
-    int unk118;
-    int unk11C;
-    int unk120;
-    int unk124;
-    int unk128;
-    int unk12C;
-    int unk130;
-    int unk134;
-    int unk138;
-    int unk13C;
-    int unk140;
-    int unk144;
-    int unk148;
-    int unk14C;
-    int unk150;
-    int unk154;
-    int unk158;
-    int unk15C;
-    int unk160;
-    int unk164;
-    int unk168;
-    int unk16C;
-    int unk170;
-    int unk174;
-    int unk178;
-    int unk17C;
-    int unk180;
-    int unk184;
-    int unk188;
-    int unk18C;
-    int unk190;
-    int unk194;
-    int unk198;
-    int unk19C;
-    int unk1A0;
-    int unk1A4;
-    int unk1A8;
-    int unk1AC;
-    int unk1B0;
-    int unk1B4;
-    int unk1B8;
-    int unk1BC;
-    int unk1C0;
-    int unk1C4;
-    int unk1C8;
-    int unk1CC;
-    int unk1D0;
-    int unk1D4;
-    int unk1D8;
-    int unk1DC;
-    int unk1E0;
-    int unk1E4;
-    int unk1E8;
-    int unk1EC;
-    int unk1F0;
-    int unk1F4;
-    int unk1F8;
-    int unk1FC;
-    int unk200;
-    int unk204;
-    int unk208;
-    int unk20C;
-    int unk210;
-    int unk214;
-    int unk218;
-    int unk21C;
-    int unk220;
-    int unk224;
-    int unk228;
-    int unk22C;
-    int unk230;
-    int unk234;
-    int unk238;
-    int unk23C;
-    int unk240;
-    int unk244;
-    int unk248;
-    int unk24C;
-    int unk250;
-    int unk254;
-    int unk258;
-    int unk25C;
-    int unk260;
-    int unk264;
-    int unk268;
-    int unk26C;
-    int unk270;
-    int unk274;
-    int unk278;
-    int unk27C;
-    int unk280;
-    int unk284;
-    int unk288;
-    int unk28C;
-    int unk290;
-    int unk294;
-    int unk298;
-    int unk29C;
-    int unk2A0;
-    int unk2A4;
-    int unk2A8;
-    int unk2AC;
-    int unk2B0;
-    int unk2B4;
-    int unk2B8;
-    int unk2BC;
-    int unk2C0;
-    int unk2C4;
-    int unk2C8;
-    int unk2CC;
-    int unk2D0;
-    int unk2D4;
-    int unk2D8;
-    int unk2DC;
-    int unk2E0;
-    int unk2E4;
-    int unk2E8;
-    int unk2EC;
-    int unk2F0;
-    int unk2F4;
-    int unk2F8;
-    int unk2FC;
-    int unk300;
-    int unk304;
-    int unk308;
-    int unk30C;
-    int unk310;
-    int unk314;
-    int unk318;
-    int unk31C;
-    int unk320;
-    int unk324;
-    int unk328;
-    int unk32C;
-    int unk330;
-    int unk334;
-    int unk338;
-};
-struct S_00cb5d00_Query
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-};
 
 struct Object
 {
@@ -1313,27 +1086,6 @@ struct S_00c6aca0_Arr8
     }
 };
 
-struct S_00c6aca0_Cont
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    ~S_00c6aca0_Cont();
-    void FUN_00c67f20();
-};
-
-struct S_00c6aca0_Mm
-{
-    void FUN_00aa4060(int p);
-};
-extern S_00c6aca0_Mm DAT_011f6238;
-extern int DAT_012677a4;
-
-struct S_00c6aca0_Ref
-{
-    void FUN_00c905b0();
-};
 struct S_00c6aca0_Base
 {
     int unk04;
@@ -1382,40 +1134,6 @@ struct S_00c6aca0_Base
     {
         vfn_94();
     }
-};
-
-struct FUN_00c6aca0 : S_00c6aca0_Base
-{
-    S_00c6aca0_Ref* unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5c;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6c;
-    S_00c6aca0_Arr4 unk70;
-    S_00c6aca0_Arr8 unk7c;
-    int unk88;
-    int unk8c;
-    S_00c6aca0_Cont unk90;
-    ~FUN_00c6aca0();
 };
 
 struct S_00cb3f90_Bool
@@ -1808,18 +1526,6 @@ struct S_00cb59f0_Elem
     int unk04;
 };
 
-struct S_00cb59f0_Xf
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-};
-
 struct S_00cb59f0_Heap
 {
     virtual void vfn_00();
@@ -1871,261 +1577,6 @@ struct S_00cb59f0_Local
             h.vfn_10(m_data, (cap & 0x3fffffff) * 8);
     }
 };
-
-struct S_00cb59f0_Obj58
-{
-    virtual void vfn_00();
-    virtual void vfn_04();
-    virtual void vfn_08();
-    virtual void vfn_0c();
-    virtual void vfn_10();
-    virtual void vfn_14(int* a, S_00cb59f0_Xf* b, S_00cb59f0_Local* c) throw();
-};
-
-struct S_00cb59f0_Obj64
-{
-    void FUN_00cf7080(S_00cb59f0_Elem* data, int n, char* extra) throw();
-};
-
-struct S_00cb59f0_Ctx
-{
-    int unk00;
-};
-
-struct S_00cb59f0_Sub
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-};
-
-struct S_00cb59f0_B
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    S_00cb59f0_Sub sub;
-    int unk28;
-    int unk2c;
-    S_00cb59f0_Xf unk30;
-};
-
-struct S_00cb59f0_A
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    S_00cb59f0_Obj58* unk58;
-    int unk5c;
-    int unk60;
-    S_00cb59f0_Obj64* unk64;
-    int unk68;
-    int unk6c;
-    int unk70;
-    int unk74;
-    S_00cb59f0_Ctx* unk78;
-    char* unk7c;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8c;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9c;
-    int unka0;
-    int unka4;
-    int unka8;
-    int unkac;
-    int unkb0;
-    int unkb4;
-    int unkb8;
-    int unkbc;
-    int unkc0;
-    int unkc4;
-    int unkc8;
-    int unkcc;
-    int unkd0;
-    int unkd4;
-    int unkd8;
-    int unkdc;
-    int unke0;
-    int unke4;
-    int unke8;
-    int unkec;
-    int unkf0;
-    int unkf4;
-    int unkf8;
-    int unkfc;
-    int unk100;
-    int unk104;
-    int unk108;
-    int unk10c;
-    int unk110;
-    int unk114;
-    int unk118;
-    int unk11c;
-    int unk120;
-    int unk124;
-    int unk128;
-    int unk12c;
-    int unk130;
-    int unk134;
-    int unk138;
-    int unk13c;
-    int unk140;
-    int unk144;
-    int unk148;
-    int unk14c;
-    int unk150;
-    int unk154;
-    int unk158;
-    int unk15c;
-    int unk160;
-    int unk164;
-    int unk168;
-    int unk16c;
-    int unk170;
-    int unk174;
-    int unk178;
-    int unk17c;
-    int unk180;
-    int unk184;
-    int unk188;
-    int unk18c;
-    int unk190;
-    int unk194;
-    int unk198;
-    int unk19c;
-    int unk1a0;
-    int unk1a4;
-    int unk1a8;
-    int unk1ac;
-    int unk1b0;
-    int unk1b4;
-    int unk1b8;
-    int unk1bc;
-    int unk1c0;
-    int unk1c4;
-    int unk1c8;
-    int unk1cc;
-    int unk1d0;
-    int unk1d4;
-    int unk1d8;
-    int unk1dc;
-    int unk1e0;
-    int unk1e4;
-    int unk1e8;
-    int unk1ec;
-    int unk1f0;
-    int unk1f4;
-    int unk1f8;
-    int unk1fc;
-    int unk200;
-    int unk204;
-    int unk208;
-    int unk20c;
-    int unk210;
-    int unk214;
-    int unk218;
-    int unk21c;
-    int unk220;
-    int unk224;
-    int unk228;
-    int unk22c;
-    int unk230;
-    int unk234;
-    int unk238;
-    int unk23c;
-    int unk240;
-    int unk244;
-    int unk248;
-    int unk24c;
-    int unk250;
-    int unk254;
-    int unk258;
-    int unk25c;
-    int unk260;
-    int unk264;
-    int unk268;
-    int unk26c;
-    int unk270;
-    int unk274;
-    int unk278;
-    int unk27c;
-    int unk280;
-    int unk284;
-    int unk288;
-    int unk28c;
-    int unk290;
-    int unk294;
-    int unk298;
-    int unk29c;
-    int unk2a0;
-    int unk2a4;
-    int unk2a8;
-    int unk2ac;
-    int unk2b0;
-    int unk2b4;
-    int unk2b8;
-    int unk2bc;
-    int unk2c0;
-    int unk2c4;
-    int unk2c8;
-    int unk2cc;
-    int unk2d0;
-    int unk2d4;
-    int unk2d8;
-    int unk2dc;
-    int unk2e0;
-    int unk2e4;
-    int unk2e8;
-    int unk2ec;
-    int unk2f0;
-    int unk2f4;
-    int unk2f8;
-    int unk2fc;
-    int unk300;
-    int unk304;
-    int unk308;
-    int unk30c;
-    int unk310;
-    int unk314;
-    int unk318;
-    int unk31c;
-    int unk320;
-    int unk324;
-    int unk328;
-    int unk32c;
-    int unk330;
-    int unk334;
-    int unk338;
-};
-
-void __cdecl FUN_00d1a330(S_00cb59f0_Ctx* ctx, S_00cb59f0_B** items, int n) throw();
 
 }  // namespace fnv_00cb59f0
 
@@ -2396,46 +1847,7 @@ struct FilterRec
     unsigned int unk08;
 };
 
-struct EntityRec
-{
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual void v0C();
-    virtual void v10();
-    virtual void v14();
-    virtual void v18(OutSlot* out);
-    void FUN_00d07950(OutSlot* out);
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0c;
-    unsigned int unk10;
-    unsigned int unk14;
-    unsigned int unk18;
-    unsigned int unk1c;
-    unsigned int unk20;
-    unsigned int m_24;
-    unsigned int m_28;
-    unsigned int m_2c;
-    unsigned int m_30;
-};
-
 AudioHolder* __cdecl FUN_00c85750() throw();
-
-struct ArrFrame
-{
-    LocalArr arr;
-    unsigned char* saved;
-};
-
-struct OutPad
-{
-    OutSlot out;
-    unsigned int unk10;
-    unsigned int unk14;
-    unsigned int unk18;
-    unsigned int unk1C;
-};
 
 }  // namespace fnv_00cb5b10
 
@@ -2458,40 +1870,6 @@ struct VObj
 struct Coll
 {
     void __thiscall add(void* p, int n);
-};
-
-// The four-word record that is handed to v1c by address.
-struct Slot
-{
-    void* a;
-    int b;
-    int c;
-    void* d;
-};
-
-// The thread local block the accessor at 0xc85750 returns.
-struct TlsBlk
-{
-    void* f0;
-    void* f1;
-    void* f2;
-    void* f3;
-    VObj* f4;
-};
-
-// The second argument.
-struct Evt
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
 };
 
 // The first argument.
@@ -2705,9 +2083,6 @@ struct Owner
     int unk334;
     int unk338;
 };
-
-// The thread local accessor at 0xc85750.
-void* __cdecl tlsSlot_cb5c10();
 
 namespace fnv_00cb5f50 {
 struct S_00cb5f50_Allocator
@@ -3107,14 +2482,6 @@ struct S00cb5310_List
     int m_04;
     unsigned int m_08;
 };
-struct S00cb5310_Alloc
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    void* m_pAllocator;
-};
 struct S00cb5310_Node
 {
     int unk00;
@@ -3326,11 +2693,8 @@ struct S00cb5310_Owner
     int unk1CC;
     float m_1d0;
 };
-extern int DAT_01267e30;
 void ResizeAudioStream(void* alloc, S00cb5310_List* list, int n);
-bool FUN_00d28560(float* p, S00cb5310_Piece** arr, int n, int size);
 void UpdateRotationInterpolation(float f, void* p);
-void FUN_00d011b0(S00cb5310_Owner* a1, S00cb5310_Node* a2);
 
 namespace fnv_00cb5500 {
 inline void* __cdecl operator new(unsigned int, void* place)
@@ -3500,8 +2864,6 @@ struct Cb5750_Sink
 };
 
 S_00c6aca0_Router* Cb5750_router() throw();
-void __cdecl Cb5750_merge(Cb5750_Array<S_00cb5d00_Elem>* a, Cb5750_Array<S_00cb5d00_Elem>* b) throw();
-void __cdecl Cb5750_invalid(void* world, Cb5750_Param** pp, int count) throw();
 
 struct Cb5750_Owner
 {
@@ -4140,22 +3502,6 @@ struct Producer
     virtual void enumerate(Scratch* result);
     void __thiscall FUN_00c90510();
 };
-struct Handle
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    unsigned short unk20;
-    unsigned short index22;
-    unsigned char unk24;
-    unsigned char flags25;
-    void __thiscall RemoveEntry(Producer* object);
-};
 struct Actor
 {
     int unk00;
@@ -4217,161 +3563,6 @@ struct Actor
     int unke0;
     int unke4;
     unsigned char kindE8;
-};
-struct Manager
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5c;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6c;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7c;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8c;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9c;
-    int unka0;
-    int unka4;
-    int unka8;
-    int unkac;
-    int unkb0;
-    int unkb4;
-    int unkb8;
-    int unkbc;
-    int unkc0;
-    int unkc4;
-    int unkc8;
-    Handle* currentCC;
-    int unkd0;
-    int unkd4;
-    int unkd8;
-    int unkdc;
-    int unke0;
-    int unke4;
-    int unke8;
-    int unkec;
-    int unkf0;
-    int unkf4;
-    int unkf8;
-    int unkfc;
-    int unk100;
-    int unk104;
-    int unk108;
-    int unk10c;
-    int unk110;
-    int unk114;
-    int unk118;
-    int unk11c;
-    int unk120;
-    int unk124;
-    int unk128;
-    int unk12c;
-    int unk130;
-    int unk134;
-    int unk138;
-    int unk13c;
-    int unk140;
-    int unk144;
-    int unk148;
-    int unk14c;
-    int unk150;
-    int unk154;
-    int unk158;
-    int unk15c;
-    int unk160;
-    int unk164;
-    int unk168;
-    int unk16c;
-    int unk170;
-    int unk174;
-    int unk178;
-    int unk17c;
-    int unk180;
-    int unk184;
-    int unk188;
-    int unk18c;
-    int unk190;
-    int unk194;
-    int unk198;
-    int unk19c;
-    int unk1a0;
-    int unk1a4;
-    int unk1a8;
-    int unk1ac;
-    int unk1b0;
-    int unk1b4;
-    int unk1b8;
-    int unk1bc;
-    int unk1c0;
-    int unk1c4;
-    int unk1c8;
-    int unk1cc;
-    int unk1d0;
-    int unk1d4;
-    int unk1d8;
-    int unk1dc;
-    int unk1e0;
-    int unk1e4;
-    int unk1e8;
-    int unk1ec;
-    int unk1f0;
-    int unk1f4;
-    int unk1f8;
-    int unk1fc;
-    int unk200;
-    int unk204;
-    Producer** producers208;
-    unsigned short producerCount20c;
-};
-struct Context
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    Array<Handle> handles40;
 };
 }  // namespace fnv_00cb5dd0
 
@@ -4475,11 +3666,6 @@ struct B10293_Item
         return *(const unsigned short*)((const char*)this + off);
     }
 };
-struct B10293_List
-{
-    B10293_Item** m_data;
-    int m_uiItemCount;
-};
 struct B10293_Ctx
 {
     unsigned char Sel(int off) const
@@ -4487,75 +3673,12 @@ struct B10293_Ctx
         return *((const unsigned char*)this + off);
     }
 };
-struct B10293_Arr
-{
-    int* m_aiIndexedValues;
-};
-struct B10293_Chain
-{
-    B10293_Arr* m_aiIndexedValues;
-};
 static inline int Dec(int w, unsigned char s)
 {
     if (s == (w >> 14))
         return (w >> 7) & 0x7f;
     return w & 0x7f;
 }
-
-struct Shape
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5C;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6C;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7C;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8C;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9C;
-    int unkA0;
-    int unkA4;
-    int unkA8;
-    int unkAC;
-    unsigned short m_numShapeKeys;  // +0xb0
-};
-
-struct ShapeList
-{
-    Shape** m_items;
-    int m_uiItemCount;
-};
 
 namespace fnv_00cb4790 {
 inline void* __cdecl operator new(unsigned int, void* place)
@@ -5050,64 +4173,6 @@ struct AllocHolder
 
 extern "C" AllocHolder* __cdecl FUN_00c85750();
 extern "C" void __cdecl ResizeAudioStream(void* pAllocator, void* pArray, int iStride);
-
-struct PtrArray
-{
-    void* m_pData;
-    int m_iArrayLength;
-    unsigned int m_uCapFlags;
-};
-
-struct LockedList
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    PtrArray m_40;
-    int unk4c;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5c;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6c;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7c;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8c;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9c;
-    int unka0;
-    int unka4;
-    int unka8;
-    int unkac;
-    int unkb0;
-    int unkb4;
-    int unkb8;
-    int unkbc;
-    CRITICAL_SECTION* m_pCs;
-};
 
 struct ListItem
 {
@@ -6244,7 +5309,6 @@ void FUN_00cb5100(S00cb5100_World* originalWorld, S00cb5100_Body* apBody, bool m
 
 
 #include <xmmintrin.h>
-extern float DAT_01017d00;
 
 struct C6A870_Child
 {
@@ -6384,51 +5448,6 @@ void __cdecl AddItemToContainer(C6A870_World* world, C6A870_Item* item);
 
 struct C6A870_Self;
 typedef C6A870_World*(__thiscall* C6A870_Query)(C6A870_Self*);
-struct C6A870_QueryTable
-{
-    void* f00;
-    void* f04;
-    void* f08;
-    void* f0c;
-    void* f10;
-    void* f14;
-    void* f18;
-    void* f1c;
-    void* f20;
-    void* f24;
-    void* f28;
-    void* f2c;
-    void* f30;
-    void* f34;
-    void* f38;
-    void* f3c;
-    void* f40;
-    void* f44;
-    void* f48;
-    void* f4c;
-    void* f50;
-    void* f54;
-    void* f58;
-    void* f5c;
-    void* f60;
-    void* f64;
-    void* f68;
-    void* f6c;
-    void* f70;
-    void* f74;
-    void* f78;
-    void* f7c;
-    void* f80;
-    void* f84;
-    void* f88;
-    void* f8c;
-    void* f90;
-    C6A870_Query query;
-};
-struct C6A870_View
-{
-    C6A870_QueryTable* table;
-};
 
 struct C6A870_Self
 {
@@ -6495,11 +5514,6 @@ struct Motion4120
         }
         return n & 127;
     }
-};
-struct Selector
-{
-    unsigned char first;
-    unsigned char second;
 };
 
 struct Entry4120
@@ -6945,26 +5959,7 @@ struct Inner
 };
 typedef void(__thiscall* FnFree)(void* self, void* p, int bytes);
 typedef void(__thiscall* Fn20)(void* self, void* p, int a, void* b, int c);
-struct RemRef
-{
-    void FUN_00c905b0();
-};
 
-struct CallB
-{
-    void UpdateNodeSlotIndices();
-    void FUN_00c90510();
-};
-struct CallInner
-{
-    void FUN_00c946e0(void* p, void* q, int a);
-    void FUN_00c91120();
-    void FUN_00c91140();
-};
-void FUN_00cf9c60(void* p, int a, void* b);
-void FUN_00cb5000(MotionObj* a0, void* b);
-void CollectActorEntries(Inner* s, MotionObj* a0, void* a);
-void CollectProducers(Inner* s, MotionObj* a0, void* a);
 void FUN_00cb4740(Inner* s, MotionObj* a0);
 void FUN_00cb3ca0(Inner* s, void* e, int z);
 struct ModeBool
@@ -6989,36 +5984,10 @@ struct ModeBool
         return test();
     }
 };
-void FUN_00cb4230(MotionObj* a0, int mode, ModeBool fMode, ModeBool fCur, Inner* s);
 void FUN_00cb4640(Inner* s, int a5, int a7);
-void ApplyConstraintsToEntity(Inner* s, int a8, void* p);
-void FUN_00cb3ee0(void* m, MotionObj* a3, void* w, int mode);
 void FUN_00cff290(void* m, void* w);
 void FUN_00cb5570(Inner* in, MotionObj* a0, MotionObj* e);
 void UpdateRotationInterpolation(float f, void* p);
-void NotifyEntityRemoved(void* p, MotionObj* a3);
-struct VecB
-{
-    void* data;
-    int size;
-    int cap;
-    void* buf[16];
-};
-struct VecA
-{
-    void* data;
-    int size;
-    int cap;
-    void* buf[16];
-};
-struct Work
-{
-    int f0;
-    void* data;
-    int size;
-    int cap;
-    int buf0;
-};
 struct Elem8
 {
     int f0;
@@ -7031,12 +6000,6 @@ struct VecC
     int cap;
     VecC() : data(0), size(0), cap((int)0x80000000)
     {}
-};
-struct HeadC
-{
-    short unk10;
-    ModeBool fCur;
-    ModeBool fMode;
 };
 
 struct S00cb4230_Vec4
@@ -7340,10 +6303,6 @@ struct MotionState : S00cb4230_Keyframed
     MotionState() : S00cb4230_Keyframed()
     {}
 };
-struct BoxMotion : MotionBase
-{
-    BoxMotion(const S00cb4230_Vec4& position, const S00cb4230_Quat& rotation);
-};
 struct S00cb4230_String
 {
     static __forceinline void __cdecl memCpy16NonEmpty(void* dst, const void* src, int numQuads)
@@ -7495,210 +6454,6 @@ struct ThisObj
     }
     void UpdateBoundingVolume(void* a, const void* b);
 };
-struct Node4
-{
-    int m_000;
-    int m_004;
-    int m_008;
-    int m_00c;
-    int m_010;
-    int m_014;
-    int m_018;
-    int m_01c;
-    int m_020;
-    int m_024;
-    int m_028;
-    int m_02c;
-    int m_030;
-    int m_034;
-    int m_038;
-    int m_03c;
-    int m_040;
-    int m_044;
-    int m_048;
-    int m_04c;
-    int m_050;
-    int m_054;
-    int m_058;
-    int m_05c;
-    int m_060;
-    int m_064;
-    int m_068;
-    int m_06c;
-    int m_070;
-    int m_074;
-    int m_078;
-    int m_07c;
-    int m_080;
-    int m_084;
-    int m_088;
-    int m_08c;
-    int m_090;
-    int m_094;
-    int m_098;
-    int m_09c;
-    int m_0a0;
-    int m_0a4;
-    int m_0a8;
-    int m_0ac;
-    int m_0b0;
-    int m_0b4;
-    int m_0b8;
-    int m_0bc;
-    int m_0c0;
-    int m_0c4;
-    int m_0c8;
-    int m_0cc;
-    int m_0d0;
-    int m_0d4;
-    int m_0d8;
-    int m_0dc;
-    int m_0e0;
-    int m_0e4;
-    int m_0e8;
-    int m_0ec;
-    int m_0f0;
-    int m_0f4;
-    int m_0f8;
-    int m_0fc;
-    int m_100;
-    int m_104;
-    int m_108;
-    int m_10c;
-    int m_110;
-    int m_114;
-    int m_118;
-    int m_11c;
-    int m_120;
-    int m_124;
-    int m_128;
-    int m_12c;
-    int m_130;
-    int m_134;
-    int m_138;
-    int m_13c;
-    int m_140;
-    int m_144;
-    int m_148;
-    int m_14c;
-    int m_150;
-    int m_154;
-    int m_158;
-    int m_15c;
-    int m_160;
-    int m_164;
-    int m_168;
-    int m_16c;
-    int m_170;
-    int m_174;
-    int m_178;
-    int m_17c;
-    int m_180;
-    int m_184;
-    int m_188;
-    int m_18c;
-    int m_190;
-    int m_194;
-    int m_198;
-    int m_19c;
-    int m_1a0;
-    int m_1a4;
-    int m_1a8;
-    int m_1ac;
-    int m_1b0;
-    int m_1b4;
-    int m_1b8;
-    int m_1bc;
-    int m_1c0;
-    int m_1c4;
-    int m_1c8;
-    int m_1cc;
-    int m_1d0;
-    int m_1d4;
-    int m_1d8;
-    int m_1dc;
-    int m_1e0;
-    int m_1e4;
-    int m_1e8;
-    int m_1ec;
-    int m_1f0;
-    int m_1f4;
-    int m_1f8;
-    int m_1fc;
-    int m_200;
-    int m_204;
-    int m_208;
-    int m_20c;
-    int m_210;
-    int m_214;
-    int m_218;
-    int m_21c;
-    int m_220;
-    int m_224;
-    int m_228;
-    int m_22c;
-    int m_230;
-    int m_234;
-    int m_238;
-    int m_23c;
-    int m_240;
-    int m_244;
-    int m_248;
-    int m_24c;
-    int m_250;
-    int m_254;
-    int m_258;
-    int m_25c;
-    int m_260;
-    int m_264;
-    int m_268;
-    int m_26c;
-    int m_270;
-    int m_274;
-    int m_278;
-    int m_27c;
-    int m_280;
-    int m_284;
-    int m_288;
-    int m_28c;
-    int m_290;
-    int m_294;
-    int m_298;
-    int m_29c;
-    int m_2a0;
-    int m_2a4;
-    int m_2a8;
-    int m_2ac;
-    int m_2b0;
-    int m_2b4;
-    int m_2b8;
-    int m_2bc;
-    int m_2c0;
-    int m_2c4;
-    int m_2c8;
-    int m_2cc;
-    int m_2d0;
-    int m_2d4;
-    int m_2d8;
-    int m_2dc;
-    int m_2e0;
-    int m_2e4;
-    int m_2e8;
-    int m_2ec;
-    int m_2f0;
-    int m_2f4;
-    int m_2f8;
-    int m_2fc;
-    int m_300;
-    char m_304;
-    char m_305;
-    char m_306;
-    char m_307;
-    float FUN_00c91020();
-};
-void __cdecl FUN_00cb1280(void* p, int a, int b);
-void __cdecl FUN_00ca8240(int mode, const S00cb4230_Vec4* p40, const S00cb4230_Quat* p80, float fret,
-                          const InertiaTensor* out, const S00cb4230_Vec4* p90, float f0, float f1, MotionBase* motion);
 void __cdecl UpdateRotationInterpolation(float f, S00cb4230_MotionStateData* p);
 
 struct MergeWorld
@@ -8195,10 +6950,6 @@ void FUN_00cb49e0(MergeWorld* ownerArg, int remap_, MergeListArg listArg, Cb4890
 
 namespace fnv_00cb5000 {
 extern "C" void _ReadWriteBarrier(void);
-struct FUN_00cb5000_obj
-{
-    void Refresh();
-};
 
 struct Holder
 {
@@ -8213,103 +6964,7 @@ Holder* __cdecl FUN_00c85750();
 void __cdecl ResizeAudioStream(void* apAllocator, void* apVector, unsigned int auiElemSize);
 void __cdecl FUN_00cb3dd0(int aCtx, int aObj, int aFlag);
 
-struct PtrVec
-{
-    int* m_pData;
-    unsigned int m_uCount;
-    unsigned int m_uCapFlags;
-};
-
-struct Entry48
-{
-    FUN_00cb5000_obj* m_pEntryObject;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-};
-
-struct OwnerObj
-{
-    int unk00;
-    int unk04;
-    int m_iCtx;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5C;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6C;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7C;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8C;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9C;
-    int unkA0;
-    int unkA4;
-    int unkA8;
-    Entry48* m_pEntries;
-    unsigned short m_wEntryCount;
-    unsigned short unkB2;
-    int* m_pPtrs;
-    int m_iPtrCount;
-};
-
 }  // namespace fnv_00cb5000
-
-struct S00cb3ee0_Entry
-{
-    int item;
-    char* obj;
-};
-
-struct S00cb3ee0_Holder
-{
-    S00cb3ee0_Entry* entries;
-    int count;
-};
-
-struct S00cb3ee0_Sub
-{
-    S00cb3ee0_Holder* FUN_00d081e0();
-};
-
-int PickIslandByValue(int a, int b, int c);
-void CloneRecord(int a, int b);
-void FUN_00cfe020(int a, int b);
 
 struct S55Item;
 
@@ -8528,8 +7183,6 @@ struct S55Owner
 
 void __cdecl FUN_00cb5100(S55Owner* owner, S55Item* item, S55Bool b);
 
-void __cdecl FUN_00cb5310(S55Owner* owner, S55Item* item);
-
 extern "C" void __cdecl FUN_00cb5570(S55Owner* owner, ObjB* first, ObjB* second);
 
 // Sorts owner->m_40, then drains it by popping items, compacting their m_38 arrays, and applying state changes via FUN_00cb5100, FUN_00cb5310, or FUN_00cb5570.
@@ -8723,11 +7376,6 @@ struct TaskCtx
     int unkE0;
     int unkE4;
     unsigned char typeE8;
-};
-struct TaskHeap
-{
-    virtual void slot0();
-    virtual TaskNode* alloc(int size);
 };
 
 // Sets b's parent to a, then calls FUN_00d07420 with b on a node of a: node20 if b's type is 5, else one found or allocated in list28/list34 or list28's first.

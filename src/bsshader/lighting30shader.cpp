@@ -992,18 +992,11 @@ void __stdcall FUN_00bbde20(int bFog, ShadowSceneOwner* pOwner, int iUnused)
 
 #include <stdlib.h>
 
-Lighting30Shader* __cdecl FUN_00b55560(int);
-struct ConstantMapPointer
-{
-    NiD3DShaderConstantMap* value;
-    void FUN_00c663d0(const NiPointer<NiD3DShaderConstantMap>*);
-};
 class D3DRenderStateGroup
 {
   public:
     void SetNodeValue(unsigned int, unsigned int, bool);
 };
-D3DRenderStateGroup* __cdecl FUN_00e7f5d0();
 class NiD3DPass
 {
   public:
@@ -1022,7 +1015,6 @@ extern Lighting30PacketState* DAT_012010d4;
 extern Lighting30PacketState* DAT_012010dc;
 extern Lighting30PacketState* DAT_012010e4;
 extern Lighting30PacketState* DAT_012010e8;
-extern unsigned short DAT_011f941c;
 inline void AssignMap(NiPointer<NiD3DShaderConstantMap>& dst, const NiPointer<NiD3DShaderConstantMap>& src)
 {
     NiRefObject* old = reinterpret_cast<NiRefObject*>(dst.m_pObject);
@@ -1477,62 +1469,18 @@ struct FUN_00b7e330 : Object
     static __forceinline void operator delete(void*)
     {}
 };
-extern bool DAT_01201f28;
-extern char DAT_01011584[];
-extern char DAT_01013cf4[];
-extern char DAT_01031334[];
-extern char DAT_010a16ec[];
-extern char DAT_010a18a4[];
 extern char DAT_010a1cac[];
-extern char DAT_010a1d20[];
-extern char DAT_010a1db8[];
-extern char DAT_010a1e50[];
-extern char DAT_010a1ee0[];
-extern char DAT_010af45c[];
-extern char DAT_010af468[];
-extern char DAT_010af474[];
-extern char DAT_010af48c[];
-extern char DAT_010af498[];
-extern char DAT_010af580[];
-extern char DAT_010af590[];
-extern char DAT_010af5a0[];
-extern char DAT_010af5b0[];
-extern char DAT_010af5d8[];
-extern char DAT_010aff58[];
-extern char DAT_010ba250[];
-extern char DAT_010ba258[];
-extern char DAT_010ba26c[];
-extern char DAT_010ba278[];
-extern char DAT_010ba288[];
-extern char DAT_010ba294[];
-extern char DAT_010ba2a4[];
-extern char DAT_010ba2b4[];
-extern char DAT_010ba2bc[];
-extern char DAT_010ba2c8[];
-extern char DAT_010ba2d4[];
-extern char DAT_010ba2e4[];
-extern char DAT_010ba2f4[];
-extern char DAT_010ba30c[];
-extern char DAT_010ba320[];
-extern char DAT_010ba32c[];
-extern char DAT_011fa580[];
-extern char DAT_011fed08[];
-extern char DAT_011fed48[];
 extern char DAT_01200be8[];
 extern char DAT_01200bec[];
-extern char DAT_01200bf0[];
 extern char DAT_01200bf8[];
 extern char DAT_01200c08[];
 extern char DAT_01200c18[];
 extern char DAT_01200c28[];
 extern char DAT_01200c38[];
-extern char DAT_01201170[];
-extern char DAT_012012b0[];
 extern char DAT_012012f0[];
 extern char DAT_01201350[];
 extern char DAT_01201360[];
 extern char DAT_01201370[];
-extern char DAT_01201380[];
 extern char DAT_012013b0[];
 extern char DAT_012013d0[];
 extern char DAT_01201b30[];
@@ -1543,23 +1491,13 @@ extern char DAT_01201b70[];
 extern char DAT_01201b90[];
 extern char DAT_01201ba0[];
 extern char DAT_01201bc0[];
-extern char DAT_01201be0[];
 extern char DAT_01201c70[];
 extern Pointer DAT_01201080;
-extern Pointer DAT_01201084;
-extern Pointer DAT_01201088;
-extern Pointer DAT_0120108c;
 extern Pointer DAT_01201090;
-extern Pointer DAT_01201094;
-extern Pointer DAT_01201098;
-extern Pointer DAT_0120109c;
-extern Pointer DAT_012010a0;
 extern Pointer DAT_012010a4;
-extern Pointer DAT_012010a8;
 extern Pointer DAT_012010ac;
 extern Pointer DAT_012010b0;
 extern Pointer DAT_012010b4;
-extern Pointer DAT_012010b8;
 extern Pointer DAT_012010bc;
 extern Pointer DAT_012010c0;
 extern Pointer DAT_012010c4;
@@ -1572,41 +1510,6 @@ extern Pointer DAT_012010dc;
 extern Pointer DAT_012010e0;
 extern Pointer DAT_012010e4;
 extern Pointer DAT_012010e8;
-struct Lighting
-{
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0c;
-    unsigned int unk10;
-    unsigned int unk14;
-    void* device;
-    unsigned int unk1c;
-    unsigned int unk20;
-    unsigned int unk24;
-    unsigned int unk28;
-    unsigned int unk2c;
-    Pointer constants30;
-    Pointer constants34;
-    unsigned int unk38;
-    unsigned int unk3c;
-    unsigned int unk40;
-    unsigned int unk44;
-    unsigned int unk48;
-    unsigned int unk4c;
-    unsigned int unk50;
-    unsigned int unk54;
-    unsigned int unk58;
-    unsigned int unk5c;
-    unsigned int unk60;
-    unsigned int unk64;
-    unsigned int unk68;
-    Pointer constants6c;
-    Pointer constants70;
-    Pointer constants74;
-    Pointer constants78;
-    void FUN_00bbf5a0();
-};
 }
 
 namespace fnv_00bbba00 {
@@ -3024,22 +2927,9 @@ extern Lighting30PacketState* DAT_012010e4;
 extern Lighting30PacketState* DAT_012010e8;
 extern unsigned char DAT_011f91c4;
 extern PacketF DAT_012013b0;
-extern PacketF DAT_012013c0;
 extern PacketF DAT_012013d0;
 extern P4_bbb890 DAT_011fa2a0;
 extern NiPoint3 DAT_011f474c;
-
-class MapOwner : public NiD3DShaderInterface
-{
-  public:
-    bool m_bIsInitialized;
-    bool m_bSoftwareVertexProcessing;
-    NiPointer<NiD3DShaderDeclaration> m_spShaderDeclaration;
-    D3DRenderStateGroup* m_pRenderStateGroup;
-    NiPointer<NiD3DShaderConstantMap> m_spFirstShaderConstantMap;
-    NiPointer<NiD3DShaderConstantMap> m_spSecondShaderConstantMap;
-    void UpdateShaderDirtyFlags(int);
-};
 
 }  // namespace fnv_00bbe120
 
@@ -3134,16 +3024,6 @@ struct PassTexture
     {
         texture = t;
     }
-};
-struct PassStages
-{
-    PassTexture* stage0;
-    PassTexture* stage1;
-    PassTexture* stage2;
-    PassTexture* stage3;
-    PassTexture* stage4;
-    PassTexture* stage5;
-    PassTexture* stage6;
 };
 struct ShaderPassEntry
 {
@@ -4068,10 +3948,6 @@ class FUN_00be2200
 extern int DAT_011f91c0;
 extern int DAT_011ae60c;
 extern int DAT_01200854;
-extern int DAT_01200858;
-extern int DAT_0120085c;
-extern int DAT_01200860;
-extern char DAT_01200864;
 extern int DAT_01200848;
 extern int DAT_0120084c;
 extern short DAT_01200850;
@@ -5260,100 +5136,6 @@ struct GHold
     int pad_004;
     unsigned char b;
 };
-struct Flags164
-{
-    int pad_000;
-    int pad_004;
-    int pad_008;
-    int pad_00c;
-    int pad_010;
-    int pad_014;
-    int field_018;
-    int pad_01c;
-    int pad_020;
-    int pad_024;
-    int pad_028;
-    int pad_02c;
-    int pad_030;
-    int pad_034;
-    int pad_038;
-    int pad_03c;
-    int pad_040;
-    int pad_044;
-    int pad_048;
-    int pad_04c;
-    int pad_050;
-    int pad_054;
-    int pad_058;
-    int pad_05c;
-    int pad_060;
-    int pad_064;
-    int pad_068;
-    int pad_06c;
-    int pad_070;
-    int pad_074;
-    int pad_078;
-    int pad_07c;
-    int pad_080;
-    int pad_084;
-    int pad_088;
-    int pad_08c;
-    int pad_090;
-    int pad_094;
-    int pad_098;
-    int pad_09c;
-    int pad_0a0;
-    int pad_0a4;
-    int pad_0a8;
-    int pad_0ac;
-    int pad_0b0;
-    int pad_0b4;
-    int pad_0b8;
-    int pad_0bc;
-    int pad_0c0;
-    int pad_0c4;
-    int pad_0c8;
-    int pad_0cc;
-    int pad_0d0;
-    int pad_0d4;
-    int pad_0d8;
-    int pad_0dc;
-    int pad_0e0;
-    int pad_0e4;
-    int pad_0e8;
-    int pad_0ec;
-    int pad_0f0;
-    int pad_0f4;
-    int pad_0f8;
-    int pad_0fc;
-    int pad_100;
-    int pad_104;
-    int pad_108;
-    int pad_10c;
-    int pad_110;
-    int pad_114;
-    int pad_118;
-    int pad_11c;
-    int pad_120;
-    int pad_124;
-    int pad_128;
-    int pad_12c;
-    int pad_130;
-    int pad_134;
-    int pad_138;
-    int pad_13c;
-    int pad_140;
-    int pad_144;
-    int pad_148;
-    int pad_14c;
-    int pad_150;
-    int pad_154;
-    int pad_158;
-    int pad_15c;
-    int pad_160;
-    char a;
-    char b;
-};
 struct Lst;
 struct Glob
 {
@@ -5429,190 +5211,14 @@ extern int DAT_011f91e4;
 extern char DAT_011f4288[];
 extern GHold* DAT_012010ac;
 extern GHold* DAT_012010dc;
-extern float DAT_011f940c;
 extern float DAT_01201350;
 extern float DAT_01201ba0;
-extern float DAT_01201ba4;
 extern Glob* DAT_0126f74c;
 extern Cam* DAT_011f91c8;
 struct PlaneTarget;
-struct PlaneTargetHolder
-{
-    int field_000;
-    int field_004;
-    int field_008;
-    int field_00c;
-    int field_010;
-    int field_014;
-    int field_018;
-    int field_01c;
-    int field_020;
-    int field_024;
-    int field_028;
-    int field_02c;
-    int field_030;
-    int field_034;
-    int field_038;
-    int field_03c;
-    int field_040;
-    int field_044;
-    int field_048;
-    int field_04c;
-    int field_050;
-    int field_054;
-    int field_058;
-    int field_05c;
-    int field_060;
-    int field_064;
-    int field_068;
-    int field_06c;
-    int field_070;
-    int field_074;
-    int field_078;
-    int field_07c;
-    int field_080;
-    int field_084;
-    int field_088;
-    int field_08c;
-    int field_090;
-    int field_094;
-    int field_098;
-    int field_09c;
-    int field_0a0;
-    int field_0a4;
-    int field_0a8;
-    int field_0ac;
-    int field_0b0;
-    int field_0b4;
-    int field_0b8;
-    int field_0bc;
-    int field_0c0;
-    int field_0c4;
-    int field_0c8;
-    int field_0cc;
-    int field_0d0;
-    int field_0d4;
-    int field_0d8;
-    int field_0dc;
-    int field_0e0;
-    int field_0e4;
-    int field_0e8;
-    int field_0ec;
-    int field_0f0;
-    int field_0f4;
-    int field_0f8;
-    int field_0fc;
-    int field_100;
-    int field_104;
-    int field_108;
-    int field_10c;
-    int field_110;
-    int field_114;
-    int field_118;
-    int field_11c;
-    int field_120;
-    int field_124;
-    int field_128;
-    int field_12c;
-    int field_130;
-    int field_134;
-    int field_138;
-    int field_13c;
-    int field_140;
-    int field_144;
-    int field_148;
-    int field_14c;
-    int field_150;
-    int field_154;
-    int field_158;
-    int field_15c;
-    int field_160;
-    int field_164;
-    int field_168;
-    int field_16c;
-    int field_170;
-    int field_174;
-    int field_178;
-    int field_17c;
-    int field_180;
-    int field_184;
-    int field_188;
-    int field_18c;
-    int field_190;
-    int field_194;
-    int field_198;
-    int field_19c;
-    int field_1a0;
-    int field_1a4;
-    int field_1a8;
-    int field_1ac;
-    int field_1b0;
-    int field_1b4;
-    int field_1b8;
-    int field_1bc;
-    int field_1c0;
-    int field_1c4;
-    int field_1c8;
-    int field_1cc;
-    int field_1d0;
-    int field_1d4;
-    int field_1d8;
-    int field_1dc;
-    int field_1e0;
-    int field_1e4;
-    int field_1e8;
-    int field_1ec;
-    int field_1f0;
-    int field_1f4;
-    int field_1f8;
-    int field_1fc;
-    int field_200;
-    int field_204;
-    int field_208;
-    int field_20c;
-    int field_210;
-    int field_214;
-    int field_218;
-    int field_21c;
-    int field_220;
-    int field_224;
-    int field_228;
-    int field_22c;
-    int field_230;
-    int field_234;
-    int field_238;
-    int field_23c;
-    int field_240;
-    int field_244;
-    int field_248;
-    int field_24c;
-    int field_250;
-    int field_254;
-    int field_258;
-    int field_25c;
-    int field_260;
-    int field_264;
-    int field_268;
-    int field_26c;
-    int field_270;
-    int field_274;
-    int field_278;
-    int field_27c;
-    int field_280;
-    int field_284;
-    PlaneTarget* target;
-};
-extern PlaneTargetHolder* DAT_011f4748;
 extern float DAT_011f474c, DAT_011f4750, DAT_011f4754;
 
 void FUN_00b97e30(int, int);
-void FUN_00c4c2d0(void* sub, int b, Mat* m);
-Flags164* FUN_00b4f5c0();
-Mat* __stdcall FUN_00ee6de0(Mat* o, Mat* a, Mat* b);
-Mat* __stdcall FUN_00ee6dda(Mat* o, float* det, Mat* a);
-Mat* __stdcall FUN_00ee6dd4(Mat* o, Mat* a);
-Plane* __stdcall FUN_00ee6dce(Plane* o, Plane* a);
-Plane* __stdcall FUN_00ee6dc8(Plane* o, Plane* a, Mat* m);
 void __stdcall FUN_00bbbe30(P0c* p);
 
 struct PlaneTarget
@@ -5754,7 +5360,6 @@ class SolColor : public NiMemObject
     }
     float ComputeWeightedSum() const;
 };
-extern "C" double __cdecl sqrt(double);
 struct S00bbe9c0_Coef
 {
     float ambient, diffuse, specular, emissive;
@@ -5762,15 +5367,8 @@ struct S00bbe9c0_Coef
 extern S00bbe9c0_Coef DAT_011a9be0, DAT_01201b60;
 extern int DAT_011f91b8;
 extern char* DAT_011f91c8;
-extern double DAT_0101e568;
 extern char* DAT_012010d0;
 extern bool DAT_01200bf5;
-struct S00bbe9c0_Flags
-{
-    unsigned int unk00, unk04, unk08, unk0c, unk10, unk14;
-    unsigned short flags;
-    unsigned char strength, other;
-};
 
 struct S00bbe9c0_AV
 {
@@ -5800,17 +5398,6 @@ struct S00bbe9c0_Node
     int unkc0, unkc4, unkc8, unkcc, unkd0, unkd4, unkd8, unkdc;
     int unke0, unke4, unke8, unkec, unkf0, unkf4;
     S00bbe9c0_Target* target;
-};
-struct S00bbe9c0_Holder
-{
-    int unk00, unk04, unk08, unk0c, unk10, unk14, unk18, unk1c;
-    int unk20, unk24, unk28, unk2c, unk30, unk34, unk38, unk3c;
-    int unk40, unk44, unk48, unk4c, unk50, unk54, unk58, unk5c;
-    int unk60, unk64, unk68, unk6c, unk70, unk74, unk78, unk7c;
-    int unk80, unk84, unk88, unk8c, unk90, unk94, unk98, unk9c;
-    int unka0, unka4, unka8, unkac, unkb0, unkb4, unkb8, unkbc;
-    int unkc0, unkc4, unkc8, unkcc, unkd0, unkd4, unkd8, unkdc;
-    S00bbe9c0_Node* listE0;
 };
 struct S00bbe9c0_Obj;
 struct S00bbe9c0_VT
@@ -5894,8 +5481,6 @@ struct S00bbe9c0_Obj
     bool FUN_004a2020(int mode);
     S00bbe9c0_Node* FUN_00b70600(int* selected);
 };
-double FUN_0068b050(double, float);
-double FUN_00b719c0(double, double);
 extern double DAT_010ae8b8, DAT_010ae8c0, DAT_010ae8b0;
 }  // namespace fnv_00bbe9c0
 

@@ -340,18 +340,6 @@ struct S_B
     }
 };
 
-extern unsigned char DAT_011f91c6;
-extern S_A* DAT_011f91a8;
-extern S_B* DAT_011f91ac;
-extern unsigned int DAT_011f91e0;
-extern unsigned int DAT_011f9508;
-
-void InitRenderSystem();
-void ClearAllCachedStates();
-void FUN_00ba50d0();
-void FUN_00bc0940();
-void ClearRefObject();
-
 // @f3 0x00addd70 (community match, verified in this file)
 namespace NativeDistantLodReset {
 struct NativeRenderPool {
@@ -1042,8 +1030,6 @@ FUN_00b6f0b0::~FUN_00b6f0b0()
     ma8 = S_00b6f0b0_Ptr(0);
     mac = S_00b6f0b0_Ptr(0);
 }
-
-extern "C" void _ReadWriteBarrier();
 
 struct MemoryManager
 {
@@ -2363,10 +2349,6 @@ inline void* operator new(unsigned int n)
 {
     return Resource::operator new(n);
 }
-
-extern "C" void* __cdecl memcpy(void*, const void*, unsigned int);
-
-int __cdecl PrintError(char*, unsigned int, const char*, ...);
 
 __forceinline bool IsKindOfType(NiObject* p, const NiRTTI* type)
 {

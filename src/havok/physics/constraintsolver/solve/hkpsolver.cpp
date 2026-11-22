@@ -22,13 +22,9 @@ typedef union __declspec(intrin_type) __declspec(align(16)) __m128 {
     unsigned int m128_u32[4];
 } __m128;
 
-extern "C" __m128 _mm_add_ss(__m128 a, __m128 b);
-
 // @fnv 0x00d921c0
 char* __cdecl FUN_00d921c0(char* dst, const char* src)
 {
     *dst = *src;
     return dst;
 }
-
-extern "C" __m128 _mm_sub_ss(__m128 a, __m128 b);

@@ -292,18 +292,10 @@ struct CloningProcess
     char _pad_d[3];
 };
 typedef char _sizecheck_NiCloningProcess[sizeof(CloningProcess) == 16 ? 1 : -1];
-struct FUN_00a6c610_shell : public NiTexturingProperty
-{
-    NiObject* CloneTexturingProperty(CloningProcess*);
-};
 
 struct NiObject
 {
     void CopyMembersStream(NiObject*, CloningProcess*);
-};
-struct FUN_00a6bb00_holder
-{
-    void CloneTo(NiTexturingProperty*, CloningProcess*);
 };
 
 struct Elem4
@@ -413,17 +405,7 @@ unsigned char S8::FUN_00a69f50(S8* pOther)
 }
 
 void __cdecl _NiFreeAlias(void*);
-struct DeallocHelper
-{
-    void _DeallocateAlias(void*);
-};
 extern int DAT_0109c394;
-struct S00a6a050
-{
-    void* vf;
-    void* p;
-    void* FUN_00a6a050(unsigned int);
-};
 
 void _NiFreeAlias(void*);
 extern int DAT_0109c39c;
@@ -663,20 +645,6 @@ NiTexturingProperty* CreateTexturingProperty()
 // NiTexturingProperty::BumpMap default constructor: identity luma, half-scale bump matrix.
 // (Declared here under the tag name so the checker can find it; layout mirrors BumpMap.)
 
-class FUN_00a69fb0 : public NiTexturingProperty::Map
-{
-  public:
-    float m_fLumaScale;
-    float m_fLumaOffset;
-    float m_fBumpMat00;
-    float m_fBumpMat01;
-    float m_fBumpMat10;
-    float m_fBumpMat11;
-
-    FUN_00a69fb0() throw();
-    virtual ~FUN_00a69fb0();
-};
-
 class NiTexture
 {
   public:
@@ -748,7 +716,6 @@ bool FUN_00a6a560_cls::ApplyTextures(unsigned int uiArg)
 }
 
 void* NiMalloc(unsigned int size);
-NiTexture* FUN_00a5ff10(void* pkPrefs, const char* pcName, void* pkOther);
 
 typedef NiTArray<BGSCameraPath*, NiTMallocInterface<BGSCameraPath*> > CamPathArray;
 
@@ -1713,10 +1680,6 @@ char* FUN_00a7d4d0(const char*, int);
 char* FUN_00a7d510(const char*, unsigned int);
 char* FUN_00a7d550(const char*, float);
 char* FUN_00a7d5a0(const char*, void*);
-struct FUN_00a62a40_this
-{
-    void AppendString(StrArr*);
-};
 struct PropertyViewer : NiTexturingProperty
 {
     void AppendPropertyInfo(StrArr*);

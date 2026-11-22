@@ -26,7 +26,6 @@ struct FNVFlags
     unsigned char unknownA;
     unsigned char flags;
 };
-extern "C" int __cdecl DispatchInputRecord(FNVPair*, int, FNVFlags*);
 // @f3 0x009cb230 (community match, verified in this file)
 int FUN_009cc0e0(FNVPair*,int,FNVFlags*);
 int __cdecl ConvertPairFlags(FNVPair* pair, int mode, FNVFlags* result)
@@ -55,18 +54,7 @@ struct Allocator
     virtual Node* allocate(unsigned int size);
 };
 
-struct Manager
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    Allocator* allocator;
-};
-
-extern "C" Manager* __cdecl FUN_00c85750();
 extern "C" void __cdecl FUN_00d41930(void*, void*, void*, void*);
-extern double DAT_010cf218;
 
 struct Node
 {
@@ -337,8 +325,6 @@ void D40AF0Caller(D40AF0State* s, D40AF0Mask* m)
     FUN_00d40af0(s, m);
 }
 
-void __fastcall FUN_00c905b0(void* selfVal);
-
 void** volatile g_d409d0_vals;
 void** volatile g_d409d0_slots;
 
@@ -358,27 +344,6 @@ struct D40A10Holder
     {
         return *allocator;
     }
-};
-
-struct D40A10Shape
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    float unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    float unk20;
-    float unk24;
-    float unk28;
-    float unk2c;
-    float unk30;
-    float unk34;
-    float unk38;
-    float unk3c;
-    float FUN_00d571a0();
 };
 
 struct D40A10Node

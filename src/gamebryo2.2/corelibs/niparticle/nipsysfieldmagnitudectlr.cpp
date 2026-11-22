@@ -16,8 +16,6 @@ void __thiscall NiPSysFieldMagnitudeCtlr::FUN_00c29ea0(float& fValue)
     fValue = *(float*)(*(NiPSysModifierFloatCtlr**)((char*)this + 0x3C) + 0x1C);
 }
 
-extern "C" void* g_01202718;
-
 struct NiPSysFieldMagnitudeCtlr_shell : NiPSysFieldMagnitudeCtlr
 {
     void __thiscall FUN_00c2b150(float value);
@@ -28,20 +26,6 @@ void __thiscall NiPSysFieldMagnitudeCtlr_shell::FUN_00c2b150(float value)
 {
     ((float*)*(int*)((char*)this + 0x3c))[7] = value;
 }
-
-struct StrArr
-{
-    void* m_pData;
-    int _m04;
-    unsigned short m_usAlloc;
-    unsigned short m_usSize;
-    unsigned short _m0C;
-    unsigned short m_usGrow;
-    void __thiscall SetSize(unsigned int);
-    void __thiscall SetAt(unsigned int, char*&);
-};
-void __stdcall FUN_00c32f60(StrArr*);
-char* __cdecl FUN_00a7d330(const char*);
 
 struct Base
 {

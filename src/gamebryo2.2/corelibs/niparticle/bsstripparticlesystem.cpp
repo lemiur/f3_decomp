@@ -26,18 +26,6 @@ void __thiscall FUN_00a80610_shell::FUN_00c25730(NiRenderer* apkRenderer)
         ((void(__thiscall*)(NiRenderer*, FUN_00a80610_shell*))(*(void***)pkRenderer)[112])(pkRenderer, this);
 }
 
-struct StrArr
-{
-    void SetSize(unsigned int);
-    void SetAt(unsigned int, char*&);
-};
-char* __cdecl _FUN_00a7d330(void*);
-struct BSStripParticleSystem
-{
-    void WriteParticleSystemInfo(StrArr*);
-    void AppendString(StrArr*);
-};
-
 extern "C" void* __cdecl FUN_00aa13e0(unsigned int size);
 extern unsigned int UNK_010be35c;
 struct ParticleSystem

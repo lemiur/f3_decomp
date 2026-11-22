@@ -90,12 +90,6 @@ NiDX9AdditionalDepthStencilBufferData* NiDX9AdditionalDepthStencilBufferData::Cr
     return data;
 }
 
-extern "C" void __cdecl FUN_00e80150();
-extern "C" void __cdecl CreateStagePool();
-
-extern "C" void __cdecl ClearSpawnedObject();
-extern "C" void __cdecl DestroyStagePool();
-
 // @fnv 0x00e80690
 void ResetGlobalString()
 {
@@ -108,35 +102,12 @@ void ResetGlobalString()
     }
 }
 
-struct BSFadeNode;
-struct BSMultiBoundNode;
-struct FourComponentFloatVector;
-struct BSResizableTriShape;
-struct BSSegmentedTriShape;
 struct Direct3DDeviceInterface;
-struct COMUnknownInterface;
-struct CloningProcess;
-struct NiControllerManager;
 struct NiD3DShaderDeclaration;
 struct NiGeometry;
-struct NiGeometryData;
-struct NiLines;
 struct NiNode;
 struct NiObject;
-struct NiObjectGroup;
-struct NiParticles;
-struct NiSkinInstance;
-struct NiStream;
-struct NiTriBasedGeom;
-struct NiTriShape;
-struct NiTriStrips;
-struct NiVBChip;
 struct GraphicsRenderer;
-struct VertexDeclarationLayout;
-struct bhkBlendCollisionObject;
-struct bhkLimitedHingeConstraint;
-struct bhkNiCollisionObject;
-struct bhkRigidBody;
 struct FUN_00e81420_shell : public NiD3DShader
 {
     void FUN_00e81420(NiD3DShaderDeclaration*);
@@ -156,13 +127,6 @@ void FUN_00e81420_shell::FUN_00e81420(NiD3DShaderDeclaration* pkShaderDecl)
             pObj->IncRefCount();
     }
 }
-
-struct FUN_00e818c0_shell : public NiD3DShaderInterface
-{
-    void* FUN_00e818c0();
-};
-
-extern const char* const g_0126f754_arg1;
 
 struct FUN_00e81880_shell : public NiD3DShader
 {
@@ -760,7 +724,6 @@ struct RendererStub
     virtual void v00();
     virtual unsigned int v04(NiAVObjectStub*, void*, void*, void*, void*, void*, void*, void*, void*);
 };
-struct ShaderPassObj;
 struct RendererGlobal
 {
     RendererStub base;
@@ -1954,22 +1917,6 @@ void __cdecl FUN_00e80570()
 {
     FUN_00e81a90();
 }
-
-struct FnvCpu_FUN_00eea530_CpuObject
-{
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0c;
-    unsigned int unk10;
-    unsigned int unk14;
-    unsigned int unk18;
-    unsigned int unk1c;
-    unsigned int unk20;
-    unsigned int unk24;
-    int value;
-    int FUN_00eea530();
-};
 
 // Sets two render-state stage values, then writes m_kWorldView using pkRot, the second shadow matrix, and pkTrans.
 // @fnv 0x00e80860

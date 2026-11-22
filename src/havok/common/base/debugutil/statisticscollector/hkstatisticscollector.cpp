@@ -21,32 +21,7 @@ void FUN_00d06f70_s::FUN_00d06f70()
 
 int __cdecl FUN_00d06f80(void* apBuffer, int aiCount);
 
-struct FUN_00d06fb0_cls
-{
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual void v0c();
-    virtual void v10();
-    virtual void Dispatch(int aiFlag, void* apFirst, void* apSecond, int aiCount, int aiMode);
-
-    void DispatchWithMode(void* apFirst, void* apSecond, int aiCount, int aiMode);
-};
-
-extern "C" int __cdecl FUN_00cb10d0(const char* s);
 extern "C" int __cdecl FUN_00d06f80(const char* s, int len);
-
-class Handler
-{
-  public:
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual void v0c();
-    virtual void v10();
-    virtual void Emit(int kind, int a, const char* s, int len, int hash);
-    void EmitString(int a, unsigned int* str);
-};
 
 struct SlotAllocator
 {
@@ -109,33 +84,6 @@ void __cdecl FUN_00d06cb0(GrowBuf* buf, unsigned int elemSize)
 }
 
 
-struct D06D50Class;
-
-struct D06D50Object
-{
-    virtual void unk00();
-    virtual const D06D50Class* GetClassType() const;
-};
-
-struct D06D50Registry
-{
-    virtual void unk00();
-    virtual void unk04();
-    virtual void unk08();
-    virtual void unk0C();
-    virtual const D06D50Class* GetClassFromName(const D06D50Object* object) const;
-};
-
-struct D06D50Finder
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    const D06D50Registry* m_registry;
-
-    const D06D50Class* FindClass(const D06D50Object* object) const;
-};
-
 struct FUN_00d06d90_cls;
 
 struct Rec
@@ -151,11 +99,6 @@ struct Inner
     virtual void v08();
     virtual void v0c();
     virtual void* Query(Rec* a);
-};
-
-struct Tail
-{
-    int Process();
 };
 
 struct FUN_00d06d90_cls
@@ -201,25 +144,9 @@ struct S_00d06dd0_Router
 
 S_00d06dd0_Router* FUN_00c85750();
 
-struct S_00d06dd0_Obj
-{
-    virtual void v0();
-    virtual void v1();
-    virtual void v2();
-    virtual void v3();
-    virtual void v4();
-    virtual void slot14(int a, int b, int c, int d, int e);
-    int GetFlagsOrProcess(int a);
-    void DispatchIfNotFlagged(int a, unsigned int flags);
-};
-
 }  // namespace fnv_00d06dd0
 
 namespace fnv_00d06e10 {
-struct FUN_00d06e10_src
-{
-    int Read();
-};
 
 struct FUN_00d06e10_obj
 {
@@ -248,19 +175,6 @@ struct FUN_00d06e10_holder
 
 FUN_00d06e10_holder* __cdecl FUN_00c85750();
 
-class FUN_00d06e10_cls
-{
-  public:
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual void v0c();
-    virtual void v10();
-    virtual void Emit(int kind, int a, const char* s, int len, int hash);
-
-    void FUN_00d06e10(int a1, int a2, unsigned char flag);
-};
-
 }  // namespace fnv_00d06e10
 
 class D06F50ReferencedObject
@@ -274,42 +188,7 @@ class D06F50ReferencedObject
     short m_sReferenceCount;
 };
 
-class FUN_00d06f50 : public D06F50ReferencedObject
-{
-  public:
-    FUN_00d06f50(void* owner);
-    virtual void unk00();
-
-    int unk08;
-    void* m_pOwnerObject;
-    bool m_flag;
-};
-
 namespace fnv_00d06f80 {
-struct Target
-{
-    virtual void v00();
-    virtual void v01();
-    virtual void v02();
-    virtual void v03();
-    virtual void v04();
-    virtual void v05();
-    virtual void v06();
-    virtual void v07();
-    virtual void v08();
-    virtual void v09();
-    virtual void v10();
-    virtual int v11(const char* s, int len);
-};
-
-struct Holder
-{
-    void* vtbl;
-    void* unk04;
-    void* unk08;
-    void* unk0c;
-    Target* unk10;
-};
 
 extern void* __cdecl FUN_00c85750();
 
@@ -344,25 +223,6 @@ void Cls_00569bf0::FUN_00569bf0(int a) {
 }  // namespace fnv_00d06f80
 
 int __cdecl FUN_00d06f80(int aiB, int aiC);
-
-struct FUN_00d06ff0_cls
-{
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual void v0c();
-    virtual void v10();
-    virtual void V14(int aiZero, int aiA, int aiB, int aiC, int aiR);
-
-    void FUN_00d06ff0(int aiA, int aiB, int aiC, int aiD);
-};
-
-extern const char str_010cce5c[];
-extern const char str_010cce54[];
-extern const char str_010cce4c[];
-extern const char str_010cce44[];
-extern const char str_010cce3c[];
-extern const char str_0106f148[];
 
 // Returns one of five fixed string pointers for values 0 through 4, or a fallback pointer otherwise.
 // @f3 0x005a24f0 (community match, verified in this file)

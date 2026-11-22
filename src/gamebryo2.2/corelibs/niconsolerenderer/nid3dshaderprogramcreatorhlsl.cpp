@@ -45,31 +45,6 @@ void NiD3DVertexShader::FUN_00be0bf0(bool bSoftwareVP)
 }
 }  // namespace fnv_00be0bf0
 
-struct VTableObj
-{
-    int m_uiX;
-    int m_uiY;
-    virtual void* v0();
-    virtual void* v1();
-    virtual void* v2();
-    virtual void* v3();
-    virtual void Call(int a, int b);
-};
-
-extern "C" void* __cdecl FUN_00c85750();
-
-struct FUN_00c7b0f0_shell
-{
-    int m_kPointA;
-    int m_kPointB;
-    int m_iThirdValue;
-    void FUN_00c7b0f0();
-};
-
-extern "C" void* g_0126fa40;
-
-extern const void* g_0126fa48;
-
 extern void(__cdecl* DAT_fdf3f0)();
 
 // @fnv 0x00ee6e2e
@@ -417,14 +392,6 @@ bool NiD3DShaderProgramCreatorHLSL::CompileShaderFromMemory(const void* apSource
     return true;
 }
 
-struct FUN_00be09e0_shell
-{
-    char m_auiShapeKeys[0x10];
-    char* m_pkShaderProgramName;
-    void FUN_00be09e0(const char* pszName);
-};
-
-extern const char $SG3295[];
 extern "C" int __cdecl strcmp(const char* psz1, const char* psz2);
 void __cdecl _NiFree(void*);
 int __cdecl _strcpy_s(char* str, unsigned int numberOfElements, const char* source);
@@ -494,37 +461,6 @@ void __thiscall FUN_00be0ba0_Class::FUN_00be0ba0(unsigned int value)
 {
     unk30 = value;
 }
-
-struct S_00e58ea0_Gen
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int FUN_00e587a0();
-    int FUN_00cc0760();
-    void InitFloatArray(int a, int b, float c);
-};
-
-struct S_00e58ea0_Arr
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    void InitFloatArray(int a, int b, float c);
-    void FUN_00c7b0f0();
-};
-
-struct S_00e58ea0_cls
-{
-    int unk00;
-    int FUN_00dbbc00();
-    void FUN_00e58a20(S_00e58ea0_Gen* a, S_00e58ea0_Gen* b, S_00e58ea0_Arr* pkOut);
-    S_00e58ea0_Gen* FUN_00e58ea0(S_00e58ea0_Gen* a1, S_00e58ea0_Gen* a2);
-};
 
 struct IUnk_e95
 {
@@ -776,25 +712,6 @@ struct MatResult
     MatResult()
     {}
 };
-
-struct MatrixNm
-{
-    float* m_data;
-    int m_iElementCount;
-    int m_iCapacityState;
-    int m_numRows;
-    int m_numCols;
-
-    MatrixNm(int numRows, int numCols);
-    void Release();
-    int GetNumRows() const;
-    int GetNumCols() const;
-    float* GetPtr(int row, int col);
-    float* GetVecPtr(int i);
-    float Get(int row, int col);
-};
-
-MatResult __cdecl SolveVector(void* solver, MatrixNm& x, MatrixNm& b, int maxIter, float tolerance);
 
 bool __cdecl NiShaderFindFile(const char* pcFile, char* pcPath, unsigned int uiLen);
 extern "C" long __stdcall D3DXCompileShaderFromFileA(const char* pSrcFile, const void* pDefines, void* pInclude,
@@ -1225,17 +1142,7 @@ struct SolverVector
     void InitArray(int rows, int columns);
     void FUN_00c7b0f0();
 };
-struct SolverMatrix
-{
-    SolverVector* FUN_00e58ea0(SolverVector* out, SolverVector* other);
-    int FUN_00dbbc00();
-    void FUN_00e58b10(SolverVector*, SolverVector*, SolverVector*);
-    void FUN_00e58a20(SolverVector*, SolverVector*, SolverVector*);
-};
-float DotProduct(SolverVector*, SolverVector*);
 __declspec(noalias) void FUN_00e58960(SolverVector*, float*, SolverVector*);
-void FUN_00e589a0(SolverVector*, SolverVector*);
-void NegateElements(SolverVector*);
 __declspec(noalias) void FUN_00e58900(SolverVector*, SolverVector*, float*, SolverVector*);
 
 struct ConstTableE95
@@ -1330,14 +1237,12 @@ bool ShaderMgrE95::FUN_00e95ba0(ShaderSrcE95* pkShader)
     return true;
 }
 
-extern "C" void _ReadWriteBarrier();
 struct S00e96610_CT
 {
     virtual long __stdcall QueryInterface(const void* riid, void** ppv);
     virtual unsigned long __stdcall AddRef();
     virtual unsigned long __stdcall Release();
 };
-struct D3DDeviceStandIn;
 const char* __stdcall FUN_00ee6e2e(void* pDevice);
 
 int __cdecl FUN_00aa0020(int, bool, const char*, ...);

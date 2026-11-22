@@ -110,10 +110,6 @@ struct P03MM
 };
 extern P03MM g_memoryManager;
 extern int DAT_010f0170;
-struct RendererData
-{
-    void* FUN_00e8ee80(unsigned int);
-};
 
 struct IUnk_00e8f010
 {

@@ -104,18 +104,6 @@ struct QuaternionVector
         value = _mm_shuffle_ps(imag, _mm_unpackhi_ps(imag, real), 0xc4);
     }
 };
-struct Transform
-{
-    __m128 translation;
-    QuaternionVector rotation;
-    __m128 scale;
-};
-extern const __m128 DAT_010c71e0;
-struct Par_00ce2d10
-{
-    __m128 translation;
-    QuaternionVector rotation;
-};
 
 template <class T> struct PointerParam
 {
@@ -135,13 +123,6 @@ template <class T> struct PointerParam
     {
         return p;
     }
-};
-
-struct Cls
-{
-    unsigned short m0, m2, m4, m6;
-    __m128 v10, v20, v30, v40, v50, v60;
-    Cls* FUN_00ce4a50(Cls* src);
 };
 
 struct SortRec
@@ -206,8 +187,6 @@ extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long);
 extern "C" unsigned __int64 __rdtsc(void);
 extern "C" void _ReadWriteBarrier(void);
 extern unsigned int DAT_0126835c;
-extern char DAT_010cc678[];
-extern char DAT_010c41f8[];
 void* __cdecl FUN_00c85750(void);
 struct S00cfac20_Vec
 {
@@ -221,12 +200,6 @@ struct S00cfac20_Vec
         q = _mm_max_ps(a.q, b.q);
     }
 };
-struct S00cfac20_Ray
-{
-    S00cfac20_Vec from;
-    S00cfac20_Vec to;
-    S00cfac20_Vec extra;
-};
 struct S00cfac20_Aabb
 {
     S00cfac20_Vec mn;
@@ -236,36 +209,6 @@ struct S00cfac20_Aabb
         mn.setMin4(mn, p);
         mx.setMax4(mx, p);
     }
-};
-struct S00cfac20_Builder
-{
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual void v0c();
-    virtual void v10();
-    virtual void v14();
-    virtual void v18();
-    virtual void v1c();
-    virtual void v20();
-    virtual void v24();
-    virtual void v28();
-    virtual void v2c();
-    virtual void v30();
-    virtual void v34();
-    virtual void v38();
-    virtual void v3c();
-    virtual void v40();
-    virtual void v44();
-    virtual void v48();
-    virtual void v4c();
-    virtual void v50();
-    virtual void v54();
-    virtual void v58();
-    virtual void v5c();
-    virtual int GetLogicalSize();
-    virtual void v64();
-    virtual void init(S00cfac20_Aabb* bounds, void* mem);
 };
 struct S00cfac20_Mon
 {
@@ -287,11 +230,6 @@ struct S00cfac20_Stack
     {
         cur = p;
     }
-};
-struct S00cfac20_Grp
-{
-    void RecordAndDispatch(S00cfac20_Builder* b, S00cfac20_Ray* ray, void* ctx, void* mem, char* out);
-    void FUN_00cfac20(S00cfac20_Builder* b, S00cfac20_Ray* rays, int count, void* ctx, char* out);
 };
 static inline void S00cfac20_timer(const char* name)
 {
@@ -330,12 +268,6 @@ struct hkVector4
     {
         m_vComponents = v.m_vComponents;
     }
-};
-
-struct hkReferencedObject
-{
-    void FUN_00c90510();
-    void FUN_00c905b0();
 };
 
 template <class T> struct ReferenceCountedPointer
@@ -498,42 +430,4 @@ template <typename T> struct hkArray
         m_iElementCount = a.GetLogicalSize();
         hkCopy(m_data, a.m_data, m_iElementCount);
     }
-};
-
-struct VectorTriple
-{
-    hkVector4 a, b, c;
-};
-
-struct VertexInfo
-{
-    hkUint16 m_index0;
-    hkUint16 m_index1;
-    VectorTriple m_v;
-};
-
-struct FaceInfo
-{
-    hkUint16 m_index0;
-    hkUint16 m_index1;
-    hkUint16 m_index2;
-    hkUint16 m_index3;
-    VectorTriple m_kPointA;
-    VectorTriple m_kPointB;
-};
-
-struct ShapeData
-{
-    ReferenceCountedPointer<hkReferencedObject> m_kFirstReferencedObject;
-    ReferenceCountedPointer<hkReferencedObject> m_kSecondReferencedObject;
-    hkArray<VertexInfo> m_kVertices;
-    hkArray<FaceInfo> m_faces;
-    hkArray<hkUint16> m_ppIndices;
-    hkVector4 m_kMinimumCorner;
-    hkVector4 m_kMaximumCorner;
-    hkVector4 m_kCenterPosition;
-    bool m_flag;
-    int m_uiItemCount;
-
-    ShapeData& FUN_00ce4ae0(const ShapeData& other);
 };

@@ -47,23 +47,6 @@ int FUN_00d2bb40_cls::FUN_00d2bb40()
     return 1;
 }
 
-extern int DAT_0102e388;
-extern int DAT_010ce688;
-struct hkReferencedObject
-{
-    void removeReference();
-};
-struct hkBufferedStreamReader
-{
-    int* m_pVTable;
-    int m_uiStandInValue;
-    hkReferencedObject* m_pObject;
-    int m_iValueAfterStandIn;
-    int m_pAuxiliaryObject;
-    void FUN_00d2bc10();
-    void Destroy();
-};
-
 struct FUN_00d2ba80_cls
 {
     int SkipBytes(int);
@@ -196,16 +179,6 @@ int __fastcall FUN_00d2bb60(FUN_00d2bb60_cls* self, int unused, int value)
     return value;
 }
 
-struct MemoryManager
-{
-    void* m_00;
-    void* m_04;
-    void* m_08;
-    void* m_0c;
-    void* m_10;
-};
-MemoryManager* FUN_00c85750();
-void* FUN_00c85620(void*, void*, unsigned int);
 struct FUN_00d2bbd0_cls
 {
     void* m_00;
@@ -435,36 +408,3 @@ void BufWriterMarkD2B9::FUN_00d2b900() throw()
         m_writePos = m_bufOffset;
     }
 }
-
-struct CC9F10Shape
-{
-    void Refresh();
-};
-struct V_00d2bbd0 : FUN_00d2bbd0_cls
-{
-    FUN_00d2bbd0_cls* Init(int);
-};
-struct FUN_00d2bc30_cls
-{
-    int* m_pVTable;
-    unsigned short m_04;
-    unsigned short m_06;
-    int m_08;
-    FUN_00d2bbd0_cls* Init(int);
-    FUN_00d2bc30_cls* FUN_00d2bc30(int, int);
-};
-
-struct BufferedReaderHeap
-{
-    virtual void v0();
-    virtual void v1();
-    virtual void ReleaseBlock(void*, unsigned int);
-};
-
-struct BufferedReaderDeletionView : hkBufferedStreamReader
-{
-    void Destroy();
-    hkBufferedStreamReader* FUN_00d2bca0(unsigned int);
-};
-
-void __cdecl FUN_00c85660(void* allocator, void* buffer);

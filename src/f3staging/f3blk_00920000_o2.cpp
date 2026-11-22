@@ -4111,7 +4111,6 @@ int Owner_1360::FUN_00931360()
 }   // namespace f3m_00931360
 
 // @f3 0x0092e340 (community match, verified in this file)
-extern int DAT_00e37244;
 namespace f3m_0092e340 {
 namespace f3m_0092e340 {
 struct Vector4_e340 {
@@ -5309,10 +5308,6 @@ void FUN_00934590(void* owner, void* source, int value)
 
 // @f3 0x00934330 (community match, verified in this file)
 namespace f3m_00934330 {
-struct SyncFieldElem {
-    int unk00;
-    int unk04;
-};
 struct SyncFieldRef {
     void* unk00;
     int unk04;
@@ -6102,7 +6097,6 @@ int* FUN_00923890_Obj::FUN_00923890(int* source)
 // @f3 0x00933ca0 (community match, verified in this file)
 namespace f3m_00933ca0 {
 namespace enabled_children_reset {
-extern "C" void* __cdecl memset(void*,int,unsigned int);
 struct FUN_0093d600 {void* source;void* member;FUN_0093d600(void*,const char*);void* FUN_0093d6b0(int);};
 void __cdecl FUN_00933ca0(void* unused,void* object){FUN_0093d600 access(object,"enabledChildren");unsigned int* data=(unsigned int*)access.FUN_0093d6b0(0);data[0]=~0u;data[1]=~0u;data[2]=~0u;data[3]=~0u;data[4]=~0u;data[5]=~0u;data[6]=~0u;data[7]=~0u;}
 }
@@ -11491,8 +11485,6 @@ struct Sink96 {
     typedef void (__thiscall *BindFn)(void* self, void* generator, void* finished);   
 };
 
-struct Generator96;                                   
-
 void __cdecl FUN_00936050(void* generatorOwner, void* rootOwner, Sink96* sink) {   
     NamedRef96 rootReference;                          
     NamedRef96 generatorReference;                     
@@ -13632,7 +13624,6 @@ struct hkContactPoint
     hkVector4 m_separatingNormal;
 };
 
-class hkpWorldObject;
 class hkpRigidBody;
 class hkpPhantom;
 class hkpEntityListener;

@@ -2,20 +2,7 @@
 // src/havok/physics/utilities/charactercontrol/statemachine/hkpcharactercontext.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/physics/utilities/charactercontrol/statemachine/hkpcharactercontext.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-extern int DAT_0102e388;
 extern int DAT_010c8198;
-struct hkReferencedObject
-{
-    void removeReference();
-};
-struct FUN_00ca95e0_class
-{
-    int m_p;
-    int m_uiX;
-    int m_uiY;
-    int m_uiZ;
-    void FUN_00ca95e0();
-};
 
 struct FUN_00ca9670_cls
 {
@@ -64,24 +51,6 @@ void FUN_00ca9690_cls::FUN_00ca9690(int value)
 }
 
 extern int DAT_010c8198;
-void __fastcall FUN_00c90510(void*);
-
-struct hkpCharacterContext
-{
-    int* vtbl;
-    short unk04;
-    short unk06;
-    int unk08;
-    void* unk0C;
-    int unk10;
-    int unk14;
-    unsigned char unk18;
-    float unk1C;
-    float unk20;
-    float unk24;
-
-    hkpCharacterContext* Initialize(void* arg0, int arg1);
-};
 
 // @fnv 0x00ca9600
 int __fastcall FUN_00ca9600(char* object)
@@ -135,29 +104,6 @@ void hkpCharacterContextCA96::SetState(int iState, const hkpCharacterInputCA96& 
     m_iPreviousState = iState;
     pCharacterStateManager->FUN_00cbc510(iState)->enterState(*this, iPrevState, kInput, kOutput);
 }
-
-struct FnvCpu_FUN_00ca9810_CpuAllocator
-{
-    virtual void slot00();
-    virtual void slot04();
-    virtual void Invoke(void* block, unsigned int size);
-};
-struct FnvCpu_FUN_00ca9810_CpuAllocatorHolder
-{
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0c;
-    FnvCpu_FUN_00ca9810_CpuAllocator* allocator;
-};
-FnvCpu_FUN_00ca9810_CpuAllocatorHolder* __cdecl FUN_00c85750();
-struct FnvCpu_FUN_00ca9810_CpuObject
-{
-    unsigned int unk00;
-    unsigned short size;
-    void FUN_00ca95e0();
-    FnvCpu_FUN_00ca9810_CpuObject* Destroy(unsigned int flags);
-};
 
 #include <xmmintrin.h>
 class VectorComponentValue

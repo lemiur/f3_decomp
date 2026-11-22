@@ -96,9 +96,6 @@ struct GlobalObjectO2_00a7b610
 };
 
 extern __declspec(thread) GlobalObjectO2_00a7b610 g_tls_object;
-extern GlobalObjectO2_00a7b610* g_01268740;
-
-char* __cdecl _FUN_00a7d330(GlobalObjectO2_00a7b610* object);
 
 struct TLSGuard
 {
@@ -196,16 +193,7 @@ class BC8AD40StringArray
     unsigned short m_usGrowBy;
 };
 
-extern const char* g_pcC8AD40Name;
-
 char* __cdecl FUN_00a7d330(const char* pcString);
-
-class FUN_00c8ad40_cls
-{
-  public:
-    void C8AD40BaseGetViewerStrings(BC8AD40StringArray* pkArray);
-    void FUN_00c8ad40(BC8AD40StringArray* pkArray);
-};
 
 namespace fnv_00cc31c0 {
 extern __declspec(thread) int g_iCC31C0MemContext;
@@ -226,7 +214,6 @@ class CC31C0MemContext
     int m_iPrevious;
 };
 
-extern const char* g_pcCC31C0ClassName;
 extern "C" char* __cdecl FUN_00a7d330(const char* pcName);
 
 class CC31C0StrArray
@@ -252,13 +239,6 @@ class CC31C0StrArray
     unsigned short m_usGrowBy;
 };
 
-class CC31C0Object
-{
-  public:
-    void GetViewerStringsBase(CC31C0StrArray* pkStrings);
-    void FUN_00cc31c0(CC31C0StrArray* pkStrings);
-};
-
 }  // namespace fnv_00cc31c0
 
 struct ViewerObject
@@ -273,10 +253,6 @@ struct ViewerObject
     virtual void slot7();
     virtual void* GetType();
 };
-const char* __cdecl TypeName(void*);
-char* __cdecl MakeViewerString(const char*, const char*);
-char* __cdecl FUN_00a7d4d0(const char*, int);
-int __cdecl FormatViewer(char*, unsigned int, const char*, ...);
 struct ViewerConstraint
 {
     int unk00;
@@ -365,21 +341,7 @@ class BCC4740StringArray
     unsigned short m_usGrowBy;
 };
 
-extern const char* g_pcCC4740Name;
-
 char* __cdecl FUN_00a7d330(const char* pcString);
-
-class CC4740Base
-{
-  public:
-    void GetViewerStrings(BCC4740StringArray* pkArray);
-};
-
-class CC4740Derived : public CC4740Base
-{
-  public:
-    void FUN_00cc4740(BCC4740StringArray* pkArray);
-};
 
 extern __declspec(thread) int g_iCC4740AllocTag;
 struct CF4520AllocTagScope
@@ -395,7 +357,6 @@ struct CF4520AllocTagScope
         g_iCC4740AllocTag = saved;
     }
 };
-extern const char* DAT_01268738;
 char* __cdecl FUN_00a7d330(const char* name);
 struct CF4520Array
 {
@@ -457,20 +418,6 @@ class BCCCFD0StringArray
     unsigned short m_usSize;
     unsigned short m_usESize;
     unsigned short m_usGrowBy;
-};
-
-extern const char* g_pcCCCFD0Name;
-
-class CCCFD0Base
-{
-  public:
-    void GetViewerStrings(BCCCFD0StringArray* pkStrings);
-};
-
-class CCCFD0Derived : public CCCFD0Base
-{
-  public:
-    void FUN_00cccfd0(BCCCFD0StringArray* pkStrings);
 };
 
 extern "C" void _ReadWriteBarrier();
@@ -545,8 +492,6 @@ struct CAA010Arr
     }
 };
 
-CAA010Shell* __cdecl CreateSaver(void* p);
-
 struct CAA010This
 {
     int unk00;
@@ -610,7 +555,6 @@ void CAA010This::FUN_00caa010(CAA010Arr* array)
 }
 
 
-extern const char* DAT_01268730;
 // @f3 0x004a3380 (community match, verified in this file)
 extern const char DAT_00dc3b84[], DAT_00dc3b70[];
 namespace f3m_004a3380 {

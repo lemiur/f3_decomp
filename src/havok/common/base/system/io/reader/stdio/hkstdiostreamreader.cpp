@@ -139,27 +139,6 @@ void Owner::FUN_00d2bdf0()
     invoke(unk08, 0);
 }
 
-extern int DAT_010cc2fc;
-struct Prefix
-{
-    int vtable;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    ~Prefix();
-};
-
-struct FUN_00cb0a70_Class
-{
-    void FUN_00cb0a70(int);
-};
-struct FUN_00d2c7e0_class : Prefix
-{
-    FUN_00cb0a70_Class sub;
-    FUN_00d2c7e0_class(int value);
-};
-
 struct FUN_00d2bd00_cls
 {
     int unk00;
@@ -177,7 +156,6 @@ void FUN_00d2bd00_cls::FUN_00d2bd00(unsigned char* volatile out)
     *out = value;
 }
 
-extern "C" void _ReadWriteBarrier(void);
 extern "C" void* __cdecl FUN_00ec9a47(const char* name, const char* mode);
 extern int DAT_010ce6c0;
 extern const char kModeReadBinary[];
@@ -205,29 +183,6 @@ StdioStreamReader* StdioStreamReader::OpenFile(const char* fname)
     IsStreamValid = handle != 0;
     return this;
 }
-
-struct CpuAllocator
-{
-    virtual void slot00();
-    virtual void slot04();
-    virtual void Invoke(void* block, unsigned int size);
-};
-struct CpuAllocatorHolder
-{
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0c;
-    CpuAllocator* allocator;
-};
-CpuAllocatorHolder* __cdecl FUN_00c85750();
-struct CpuObject
-{
-    unsigned int unk00;
-    unsigned short size;
-    void DestroyFileHandle();
-    CpuObject* FUN_00d2be00(unsigned int flags);
-};
 
 // @f3twin 0x00a85100 of 0x0092e890
 void __stdcall F3_FUN_00a85100(unsigned char* output)

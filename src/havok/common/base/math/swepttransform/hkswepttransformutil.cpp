@@ -498,7 +498,6 @@ typedef union __declspec(intrin_type) __declspec(align(16)) __m128
 } __m128;
 
 extern "C" __m128 _mm_setzero_ps(void);
-extern "C" unsigned long __cdecl _byteswap_ulong(unsigned long value);
 
 extern __declspec(thread) unsigned int g_uiHeapContext;
 
@@ -575,17 +574,6 @@ struct NiBinaryStreamStandIn
     }
 };
 
-struct BlobStream
-{
-    int unk00;
-    unsigned int unk04;
-    int pad08[0x75];
-    char pad1dc[9];
-    unsigned char unk1e5;
-    char pad1e6[0x66];
-    NiBinaryStreamStandIn* istr;
-};
-
 extern char DAT_0102e368[];
 
 struct __declspec(align(16)) BlobVec
@@ -654,42 +642,8 @@ int __cdecl FUN_00cf2160(unsigned int uiValue, unsigned int arg1)
 }
 
 #include <xmmintrin.h>
-struct F4
-{
-    float x, y, z, w;
-};
-
-struct Obj
-{
-    __m128 m00;
-    __m128 m10;
-    __m128 m20;
-    int unk30;
-    int unk34;
-    __m128 m40;
-    __m128 m50;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6c;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7c;
-    __m128 m80;
-};
-
-struct Calc
-{
-    __declspec(align(16)) F4 res;
-    void __thiscall mul(Obj* o, F4* v);
-};
-
-extern const __m128 g_mask;
 
 extern double DAT_010924a8;
-extern double DAT_0101de30;
-extern double DAT_01011588;
 extern double DAT_01016ff0;
 extern float DAT_01016248;
 extern float DAT_01011d78;
@@ -733,12 +687,6 @@ struct __declspec(align(16)) MotionMat4
     MotionVec4 c3;
 };
 
-class MotionRotSet_cls
-{
-  public:
-    void Set(const MotionMat4* m);
-};
-
 struct __declspec(align(16)) MotionState_cls
 {
     MotionMat4 m_kMotionTransform;  // +0x00
@@ -748,20 +696,6 @@ struct __declspec(align(16)) MotionState_cls
     MotionVec4 m_rot1;              // +0x70
     MotionVec4 m_comLocal;          // +0x80
     MotionVec4 m_kDeltaAngle;       // +0x90
-};
-
-struct TransformData
-{
-    __m128 row0;
-    __m128 row1;
-    __m128 row2;
-    __m128 sourceCopy;
-    __m128 output;
-    __m128 output2;
-    __m128 output3;
-    __m128 translation;
-    __m128 transform;
-    __m128 zero;
 };
 
 struct Obj_t
@@ -874,16 +808,6 @@ struct hkVector4
     }
 };
 
-struct hkQuaternion
-{
-    hkVector4 m_vec;
-};
-
-struct hkMatrix3
-{
-    hkVector4 m_kColumn0, m_kColumn1, m_kColumn2;
-};
-
 struct __declspec(align(16)) hkVector4L
 {
     float x, y, z, w;
@@ -892,25 +816,10 @@ struct __declspec(align(16)) hkVector4L
         return _mm_load_ps(&x);
     }
 };
-struct hkSweptTransform
-{
-    hkVector4L m_vCenterOfMass0;
-    hkVector4L m_vCenterOfMass1;
-    hkVector4L m_qRotation0;
-    hkVector4L m_qRotation1;
-    hkVector4L m_vCenterOfMassLocal;
-};
 
 struct OutputArg
 {
     FUN_008cd6a0_Class* ptr;
     OutputArg(FUN_008cd6a0_Class* p) : ptr(p)
     {}
-};
-
-extern float DAT_0104da4c;
-
-struct MotionExtR : FUN_008cd6a0_Class
-{
-    V4 deltaAngle;
 };

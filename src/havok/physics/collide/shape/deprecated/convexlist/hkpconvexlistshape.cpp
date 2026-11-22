@@ -70,28 +70,6 @@ int __fastcall FUN_00d5e2f0(char* self, int edx, int key, int pad)
 
 void __cdecl FUN_00d5e7c0();
 
-struct FUN_00d5e850_Allocator
-{
-    virtual void slot0();
-    virtual void slot1();
-    virtual void deallocate(void* object, unsigned short size);
-};
-
-struct FUN_00d5e850_MemoryRouter
-{
-    unsigned char padding[0x10];
-    FUN_00d5e850_Allocator* allocator;
-};
-
-FUN_00d5e850_MemoryRouter* _D1A0E0GetMemoryRouter();
-
-struct FUN_00d5e850_Class
-{
-    void* vtable;
-    unsigned short field_04;
-    FUN_00d5e850_Class* Destroy(int flags);
-};
-
 struct FUN_00d5e0f0_cls
 {
     int unk00;
@@ -120,40 +98,6 @@ int __stdcall FUN_00d5e0e0(int)
 {
     return 0;
 }
-
-class hkTargetD5E1
-{
-  public:
-    virtual void V0();
-    virtual void V1();
-    virtual void V2();
-    virtual void V3();
-    virtual void V4();
-    virtual void V5();
-    virtual void V6();
-    virtual void V7();
-    virtual void V8();
-    virtual void V9();
-    virtual void V10();
-    virtual void V11();
-    virtual void V12();
-    virtual void run(void* a);
-};
-
-struct hkHolderD5E1
-{
-    hkTargetD5E1* m_target;
-};
-
-class hkObjD5E1
-{
-  public:
-    int unk00, unk04, unk08, unk0C, unk10, unk14, unk18, unk1C, unk20;
-    int unk24, unk28, unk2C, unk30, unk34, unk38, unk3C, unk40;
-    hkHolderD5E1* m_holder;
-
-    void FUN_00d5e180(void* a);
-};
 
 struct FUN_00d5e1c0_Shape
 {
@@ -244,13 +188,6 @@ struct BSAudio
 };
 
 BSAudio* FUN_00c85750();
-void FUN_00c908c0(void* allocator, void* arrayPtr, int newCapacity, int elementSize);
-void __fastcall FUN_00c90510(hkpConvexShape* shape);
-
-struct ConvexList : hkpConvexListShape
-{
-    void SetChildren(hkpConvexShape** children, int numChildren);
-};
 
 struct ShapeOutD5E
 {
@@ -349,7 +286,6 @@ extern "C" __m128 _mm_sub_ps(__m128 a, __m128 b);
 extern "C" __m128 _mm_mul_ps(__m128 a, __m128 b);
 extern "C" __m128 _mm_load_ps1(const float* p);
 
-extern const __m128 DAT_010c71d0;
 static const float DAT_0104da48 = 3.40282e+38f;
 static const float DAT_0104e148 = -3.40282e+38f;
 
@@ -412,8 +348,6 @@ struct hkAabbD5E3
         m_kMaximumCorner.setMax4(m_kMaximumCorner, kOther.m_kMaximumCorner);
     }
 };
-
-extern hkTransformD5E3 DAT_01268370;
 
 template <class T> struct hkArrayD5E3
 {
@@ -516,9 +450,6 @@ struct hkAabbD5E3
         m_kMaximumCorner.setMax4(m_kMaximumCorner, kOther.m_kMaximumCorner);
     }
 };
-
-void __cdecl FUN_00d26230(const hkTransformD5E3& kLocalToWorld, const hkVector4D5E3& m_kPoint2,
-                          const hkVector4D5E3& kTargetCenter, float fExtraRadius, hkAabbD5E3& kAabbOut);
 
 template <class T> struct hkArrayD5E3
 {
@@ -628,18 +559,6 @@ class hkContainerD5E7
     int unk1C[10];
 };
 
-class FUN_00d5e750 : public hkShapeD5E7, public hkContainerD5E7
-{
-  public:
-    FUN_00d5e750(void* a, void* b) throw();
-    virtual ~FUN_00d5e750() throw();
-
-    void SetChildren(void* a, void* b) throw();
-    void UpdateCachedAabb(int flag) throw();
-
-    hkArrayD5E7<int> m_ppData;
-};
-
 namespace fnv_00d5e7c0 {
 struct hkAllocatorD5E7
 {
@@ -728,52 +647,6 @@ FUN_00d5e7c0::~FUN_00d5e7c0() throw()
     }
 }
 }  // namespace fnv_00d5e7c0
-
-extern int _FUN_00d06f80(void*, int);
-extern int DAT_01268940;
-extern const char str_010cc3a4[];
-
-struct S00d5e480_Visitor
-{
-    virtual void slot00();
-    virtual void slot04();
-    virtual void slot08();
-    virtual void visit(int, void*, int);
-    virtual void slot10();
-    virtual void visitArray(int, const char*, void*, int, int);
-
-    int unk04;
-    int unk08;
-    int unk0c;
-    char field10;
-};
-
-struct S00d5e480_Class
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    void** children;
-    int count;
-    int capacity;
-
-    void FUN_00c90360(S00d5e480_Visitor*, int*);
-    void FUN_00d5e480(S00d5e480_Visitor*, int);
-};
 
 #include <windows.h>
 extern "C" void _ReadWriteBarrier(void);
@@ -1081,25 +954,6 @@ struct hkVector4q
     {
         reinterpret_cast<int*>(&m_vComponents)[3] = value | 0x3f000000;
     }
-};
-
-class ConvexChildShape : public hkpConvexShape
-{
-  public:
-    virtual void vf04();
-    virtual void vf08();
-    virtual void vf0C();
-    virtual void vf10();
-    virtual void vf14();
-    virtual void vf18();
-    virtual void vf1C();
-    virtual void vf20();
-    virtual void vf24();
-    virtual void vf28();
-    virtual void vf2C();
-    virtual void vf30();
-    virtual void vf34();
-    virtual void GetSupportPoint(const hkVector4q& direction, hkVector4q& supportingVertex) const;
 };
 
 struct ConvexListShapeQ : hkpConvexListShape

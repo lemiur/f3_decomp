@@ -33,23 +33,6 @@ void FnvCpu_FUN_00e063e0_CpuOwner::FUN_00e063e0(int arg0)
 void __stdcall FUN_00e063c0(int)
 {}
 
-struct FnvAllocator
-{
-    virtual void unk00();
-    virtual void unk04();
-    virtual void unk08();
-    virtual void* AllocateMemoryBlock(int* bytes);
-    virtual void ReleaseBlock(void* ptr, int bytes);
-};
-struct FnvMemoryRouter
-{
-    void* unk00;
-    void* unk04;
-    void* unk08;
-    void* unk0c;
-    FnvAllocator* allocator;
-};
-extern "C" FnvMemoryRouter* __cdecl FUN_00c85750();
 struct FnvEntityArray
 {
     void** m_data;

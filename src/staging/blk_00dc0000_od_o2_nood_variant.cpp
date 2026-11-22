@@ -22,13 +22,6 @@ extern "C"
     void _mm_store_ss(float*, __m128);
 }
 
-struct VecArray
-{
-    __m128* m_data;
-    int m_iElementCount;
-    int m_iCapacityState;
-};
-
 struct MemAllocator;
 
 struct MemRouter
@@ -45,7 +38,6 @@ struct MemRouter
 };
 
 void* __cdecl FUN_00c85750();
-void __cdecl FUN_00c908c0(MemAllocator* alloc, VecArray* arr, int newCap, int elemSize);
 
 namespace fnv_00dd6a10 {
 union __declspec(intrin_type) __declspec(align(16)) __m128
@@ -156,10 +148,6 @@ typedef Arr_00dd6a10<Plane> PlaneArray;
 typedef Arr_00dd6a10<Triangle> TriangleArray;
 typedef Arr_00dd6a10<Edge> EdgeArray;
 
-char* __cdecl FUN_00dd66d0(char* flag, Plane* plane, PlaneArray* vertices, int a, int b, Triangle* tri,
-                           TriangleArray* out);
-void __cdecl FUN_00dd62e0(PlaneArray* vertices, int i1, int i2, int i3, Plane* out);
-
 }  // namespace fnv_00dd6a10
 
 struct FinishingFlag
@@ -218,10 +206,6 @@ extern "C" __m128 _mm_xor_ps(__m128, __m128);
 extern "C" float _mm_cvtss_f32(__m128);
 extern "C" void _mm_store_ss(float*, __m128);
 extern const __m128 DAT_010c44d0;
-struct VectorArray
-{
-    __m128* field_00;
-};
 
 }  // namespace fnv_00dd62e0
 
@@ -361,7 +345,6 @@ static __forceinline bool gt_00dd6c10(const float& a, const float& b)
 {
     return a > b;
 }
-extern float DAT_0104e148;
 extern const float DAT_010c8440 = -1.1920929e-07f;
 
 extern "C" __m128 _mm_load_ss(const float*);
@@ -436,7 +419,6 @@ extern "C" void _ReadWriteBarrier();
 
 int __cdecl FUN_00a57240(const __m128*, VecArr_00dd6c10*, int, int, PlanePoint*, PlanePoint*);
 extern float DAT_00de731c;
-extern const double DAT_00e012a0;
 extern void* (__stdcall* DAT_00d9b080)(unsigned long);
 extern unsigned long DAT_010f3170;
 

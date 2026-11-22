@@ -334,7 +334,6 @@ struct LayoutOptions
 {
     unsigned char pointerBytes, littleEndian, reusePadding, emptyBase;
 };
-extern "C" void _ReadWriteBarrier();
 struct Allocator
 {
     virtual void v0();

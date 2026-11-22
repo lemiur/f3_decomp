@@ -2,8 +2,6 @@
 // src/gamebryo2.2/corelibs/niparticle/nipsysairfieldairfrictionctlr.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/_fallout3/platforms/common/code/gamebryo2.2/corelibs/niparticle/nipsysairfieldairfrictionctlr.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-extern int g_012027b8;
-
 struct NiPSysModifierFloatCtlr
 {
     NiPSysModifierFloatCtlr();
@@ -26,14 +24,6 @@ void NiPSysAirFieldAirFrictionCtlr::FUN_00c307d0(float& rfValue)
     rfValue = *(float*)((char*)pTarget + 0x58);
 }
 
-struct StrArr
-{
-    char _pad[8];
-    unsigned short m_usAlloc;
-    unsigned short m_usSize;
-    unsigned short _pad1;
-    unsigned short m_usGrow;
-};
 template <class T> struct NiTMallocInterface
 {
 };
@@ -47,8 +37,6 @@ template <class T, class A> struct NiTPrimitiveArray
     void SetSize(unsigned int);
     void SetAt(unsigned int, T&);
 };
-void __stdcall FUN_00c32f60(StrArr*);
-char* __cdecl _FUN_00a7d330(int);
 
 struct NiObjectNET;
 struct BaseStandIn
@@ -210,5 +198,3 @@ void __cdecl FUN_00c2b8a0()
 {
     FUN_00a41220();
 }
-
-bool __cdecl FUN_00c32df0(int, int);

@@ -39,15 +39,6 @@ struct EntryD480
     }
 };
 
-class VariantListD480
-{
-  public:
-    EntryD480* m_data;
-    int m_iElementCount;
-
-    void* FindByName(const char* pcName, const void* pkAfter);
-};
-
 struct Ent_d48150
 {
     unsigned int unk00;

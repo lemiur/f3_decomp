@@ -32,21 +32,6 @@ struct FUN_00cfcc30_class
     FUN_00cfcc30_class* FUN_00cfcc30(unsigned char flags);
 };
 
-struct FUN_00cfcc30_manager
-{
-    virtual void FUN_00cfcc30_virtual_0();
-    virtual void FUN_00cfcc30_virtual_1();
-    virtual void FUN_00cfcc30_virtual_2(FUN_00cfcc30_class* object, unsigned short flag);
-};
-
-struct FUN_00cfcc30_router
-{
-    unsigned char m_auiShapeKeys[0x10];
-    FUN_00cfcc30_manager* m_manager;
-};
-
-FUN_00cfcc30_router* _D1A0E0GetMemoryRouter();
-
 struct GameNode
 {
     unsigned int unknown00;
@@ -82,28 +67,6 @@ struct InputRecord
     }
 };
 
-struct Descriptor
-{
-    int type;
-    GameNode* primary;
-    GameNode* secondary;
-    void* tertiary;
-    int control;
-    void* data50;
-    void* data18;
-    unsigned char option0;
-    unsigned char option1;
-    unsigned char option2;
-    void* data04;
-    void* output;
-    void* data2c;
-    int result0;
-    int result1;
-};
-
-void __cdecl FUN_00d00ca0(void* payload, Descriptor* descriptor);
-void __cdecl FUN_00cfff00(GameNode* node, int* index);
-
 struct CFCA90Shape
 {
     int m_type, m_flags, m_uiContentCount, m_kSmartReference;
@@ -124,7 +87,6 @@ struct CFCA90Work
     CFCA90Object* m_pOwnerObject;
 };
 void __cdecl NotifyShapeSetListeners(void*, void*);
-void __cdecl FUN_00d00270(void*, void*);
 struct CFCA90Object
 {
     int m_type, m_uiContentCount, m_flags;
@@ -405,7 +367,6 @@ struct S_Cfca40_Router
         return *m_manager;
     }
 };
-S_Cfca40_Router* FUN_00c85750();
 struct S_Cfca40_Element
 {
     void* m_ppVirtualMethodTable;

@@ -2,11 +2,6 @@
 // src/gamebryo2.2/corelibs/nianimation/niflipcontroller.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/_fallout3/platforms/common/code/gamebryo2.2/corelibs/nianimation/niflipcontroller.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-struct FUN_00a4f300_shell
-{
-    void* GetEntryAt(int idx);
-};
-
 extern "C" const void* g_011f3fd4;
 
 // @fnv 0x00a4f5d0
@@ -456,24 +451,6 @@ FUN_00a4f820::FUN_00a4f820() : m_kNames(1, 1)
 void* FUN_00aa1070(unsigned int uiSize);
 void* FUN_00ec61c0(void* pDest, int iValue, int iCount);
 
-struct FUN_00a6d220
-{
-    FUN_00a6d220();
-    virtual void v00();
-    int unk;
-    int unkCur;
-    int unk0c;
-    int unkValue;
-    int uNewnk;
-    int uTmpnk;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-};
-
 struct MapBase_a4d
 {
     MapBase_a4d(unsigned int uiHashSize = 37)
@@ -504,13 +481,6 @@ struct Map_a4d : MapMid_a4d
     Map_a4d(unsigned int uiHashSize = 37) : MapMid_a4d(uiHashSize)
     {}
     virtual void v00();
-};
-
-struct FUN_00a4da20_cls : FUN_00a6d220
-{
-    FUN_00a4da20_cls();
-    virtual void v00();
-    Map_a4d kMap;
 };
 
 // Default constructor for a class that embeds a Map_a4d, which initialises its hash table with the default size.

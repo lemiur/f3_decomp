@@ -154,23 +154,6 @@ template <class T> struct hkArrayE474
     }
 };
 
-class hkBaseObjectE474
-{
-  public:
-    virtual ~hkBaseObjectE474() throw();
-};
-
-class hkpLinearParametricCurveE474 : public hkBaseObjectE474
-{
-  public:
-    virtual ~hkpLinearParametricCurveE474() throw();
-
-    void FUN_00e47440(float t, hkVector4E474& kPointOut) const;
-
-    unsigned int unk04, unk08, unk0C, unk10, unk14, unk18, unk1C;
-    hkArrayE474<hkVector4E474> m_kPoints;
-};
-
 namespace fnv_00e474e0 {
 union __declspec(intrin_type) __declspec(align(16)) __m128
 {
@@ -261,23 +244,6 @@ struct Arr_e474e0
     }
 };
 
-struct Curve_e474e0
-{
-    virtual void v0();
-    virtual void v1();
-    virtual void v2();
-    virtual void v3();
-    virtual float FindNearestPoint(float t, const Vec_e474e0& nearPoint, Vec_e474e0& pointOnCurve);
-    int m_iObjectReferenceCount;
-    float m_fSmoothingValue;
-    bool m_bClosedLoop;
-    char unk0d;
-    char unk0e;
-    char unk0f;
-    hkVector4 m_dirNotParallel;
-    Arr_e474e0 m_kPoints;
-};
-
 }  // namespace fnv_00e474e0
 
 namespace fnv_00e478d0 {
@@ -356,30 +322,7 @@ float FUN_00e47c30_cls::GetInterpolatedValue(float t) const
     return (t - i) * fInterval + m_iSlotIds[i];
 }
 
-struct MemoryManager
-{
-    virtual void unk00();
-    virtual void unk04();
-    virtual void unk08();
-    virtual void* allocateChunk(int* reqBytes);
-    virtual void deallocateChunk(void* p, int nbytes);
-};
-
-struct ThreadMemory
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    MemoryManager* m_pMemoryAllocator;
-};
-
 void* FUN_00c85750();
-
-struct CurveHelper : public hkpLinearParametricCurve
-{
-    void CopyPoints(hkArray<hkVector4>& out) const;
-};
 
 namespace fnv_00e48030 {
 union __declspec(intrin_type) __declspec(align(16)) __m128
@@ -463,11 +406,8 @@ FUN_00e48030::FUN_00e48030() throw() : m_fSmoothingValue(0.01f), m_bClosedLoop(f
 }
 }  // namespace fnv_00e48030
 
-extern "C" __m128 _mm_load_ps(const float*);
-
 extern "C" __m128 _mm_shuffle_ps(__m128, __m128, int);
 extern "C" void _mm_store_ss(float*, __m128);
-extern "C" void _ReadWriteBarrier();
 extern "C" __m128 _mm_setr_ps(float, float, float, float);
 extern float DAT_01011d78;
 struct Allocator
@@ -629,7 +569,6 @@ hkpStorageSampledHeightFieldShape::hkpStorageSampledHeightFieldShape(const Heigh
 
 #include <math.h>
 extern "C" __m128 _mm_andnot_ps(__m128, __m128);
-extern "C" __m128 _mm_setzero_ps(void);
 extern "C" __m128 _mm_add_ss(__m128, __m128);
 extern "C" __m128 _mm_sub_ss(__m128, __m128);
 extern "C" __m128 _mm_mul_ss(__m128, __m128);
@@ -650,19 +589,6 @@ union hkVector4q
     {
         return reinterpret_cast<const hkReal*>(&m_vComponents)[i];
     }
-};
-
-extern hkVector4q DAT_01268380;
-
-struct LinearCurve : public hkpLinearParametricCurve
-{
-    virtual void GetBoxVector(hkReal t, hkVector4& pointOnCurve) const;
-    virtual void setStart(const hkVector4& start);
-    virtual void setEnd(const hkVector4& end);
-    virtual hkReal GetStreamStart() const;
-    virtual void GetTangentAt(hkReal t, hkVector4& tangent) const;
-
-    void FUN_00e47cb0(hkReal t, hkVector4& up) const;
 };
 
 // @f3twin 0x00a75290 of 0x00589a00

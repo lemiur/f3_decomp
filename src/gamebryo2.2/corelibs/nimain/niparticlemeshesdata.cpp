@@ -2,9 +2,6 @@
 // src/gamebryo2.2/corelibs/nimain/niparticlemeshesdata.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/_fallout3/platforms/common/code/gamebryo2.2/corelibs/nimain/niparticlemeshesdata.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-struct GlobalObjectO2_00a7b610;
-extern GlobalObjectO2_00a7b610 g_011f5f0c;
-
 struct NiStream
 {
     void ResetStreamState();
@@ -745,20 +742,6 @@ FUN_00a98b10* __cdecl FUN_00a98d30()
     *(bool*)&pObject->unk40 = true;
     return pObject;
 }
-
-struct FUN_0096ad30_This
-{
-    int unk00;
-    int unk04;
-    unsigned short m_pRayCursor;
-    unsigned short m_uiItemCount;
-    unsigned short m_unk0C;
-    unsigned short m_growth;
-    void FUN_0096ad30(unsigned int);
-    void FUN_0096ae90(unsigned int, void*);
-};
-void __stdcall FUN_00a97420(void*);
-void* __cdecl FUN_00a7d330(void*);
 
 #include <windows.h>
 struct S_00a98b90_Ref

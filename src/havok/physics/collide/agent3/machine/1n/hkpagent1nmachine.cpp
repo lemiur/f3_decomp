@@ -1734,10 +1734,6 @@ struct S_00da40e0_FilterHolder : S_00da40e0_CollidableCollidableFilter
     int unk08;
 };
 
-struct S_00da40e0_Filter : S_00da40e0_FilterHolder, S_00da40e0_ShapeCollectionFilter
-{
-};
-
 struct S_00da40e0_Input
 {
     const S_00da40e0_CdBody* m_pBodyA;
@@ -1748,10 +1744,6 @@ struct S_00da40e0_Input
     S_00da40e0_ContactMgr* m_pContactManager;
     S_00da40e0_ConstraintOwner* m_pConstraintOwner;
 };
-
-const S_00da40e0_CdBody* __cdecl FUN_00cfe1d0(const S_00da40e0_CdBody* cdBody, S_00da40e0_CdBody* newCdBodies,
-                                              S_00da40e0_MotionState* newMotionStates, int numSlots,
-                                              unsigned char& changeCounter);
 
 // @f3 0x00a2b440 (community match, verified in this file)
 struct S_00da40e0_CollisionInputF3
@@ -1813,9 +1805,6 @@ struct ShapeCollectionFilter1n
                                                const S_00da40e0_ShapeContainer& containerShapeB, unsigned int keyA,
                                                unsigned int keyB) const = 0;
 };
-struct Filter1n : S_00da40e0_FilterHolder, ShapeCollectionFilter1n
-{
-};
 
 // @f3 0x00a2b310 (community match, verified in this file)
 struct S_00da40e0_CollisionInputFields
@@ -1865,8 +1854,6 @@ union __declspec(intrin_type) __declspec(align(16)) __m128
 };
 
 extern "C" __m128 _mm_setzero_ps(void);
-
-extern const float DAT_01012054;
 
 struct hkVector4
 {
@@ -2250,17 +2237,6 @@ finished:
 
 
 #include <string.h>
-struct StreamAllocator : BlockPoolAllocator
-{
-    virtual void ReleaseBlock(void*, int);
-};
-struct StreamRecord
-{
-    int first;
-    int second;
-    void* third;
-    void* fourth;
-};
 struct StreamHeader
 {
     void* a;
@@ -2286,7 +2262,6 @@ __forceinline static void streamCopy(void* dst, const void* src, int count)
         s += 4;
     } while (--count > 0);
 }
-void __cdecl FUN_00d2cc70(void*, const void*, unsigned int);
 typedef unsigned char*(__cdecl* StreamTransform)(void*, unsigned char*, unsigned char*);
 // Walks records in the BlockPoolArray blocks, copies them into new 512-byte blocks, applies the callback to some record types, and replaces the array contents.
 // @f3 0x00a2afc0 (community match, verified in this file)
@@ -2437,7 +2412,6 @@ extern "C"
     __m128 _mm_unpackhi_ps(__m128, __m128);
     __m128 _mm_movelh_ps(__m128, __m128);
     __m128 _mm_movehl_ps(__m128, __m128);
-    __m128 _mm_shuffle_ps(__m128, __m128, unsigned int);
 }
 struct __declspec(align(16)) TOIBody
 {

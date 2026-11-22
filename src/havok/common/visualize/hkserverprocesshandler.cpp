@@ -188,30 +188,6 @@ void __cdecl FUN_00d61240()
     ((FUN_00dd9270_Class*)DAT_01269cd0)->FindEntry();
 }
 
-struct FUN_00d61260_Class
-{
-    void* m_p;
-    unsigned short m_iElementCount;
-
-    void FUN_00d610e0();
-    void* FUN_00d61260(int flags);
-};
-
-struct FUN_00d61260_MemoryManager
-{
-    virtual void FUN_00d61260_0();
-    virtual void FUN_00d61260_1();
-    virtual void Deallocate(void* p, unsigned short size);
-};
-
-struct FUN_00d61260_Router
-{
-    void* m_p[4];
-    FUN_00d61260_MemoryManager* m_pMemoryManager;
-};
-
-FUN_00d61260_Router* __cdecl _D1A0E0GetMemoryRouter();
-
 extern int DAT_01268fb8;
 
 // @fnv 0x00d61210
@@ -662,12 +638,6 @@ class EntryD60E
     ListenerD60E* m_pkListener;
 };
 
-class EntryFactoryD60E
-{
-  public:
-    EntryD60E* InvokeRecord(int aiSoundId, void* pvParam);
-};
-
 class EntryListD60E
 {
   public:
@@ -772,11 +742,6 @@ template <class T> struct hkArray_d60e
 struct Item_d60e
 {
     virtual ~Item_d60e();
-};
-
-struct Owner_d60e
-{
-    int FUN_00d60d40(void* key);
 };
 
 struct Listeners_d60e
@@ -984,10 +949,6 @@ struct OwnerObject : RefObject
     void ProcessInputData(struct ListenerC* listener) throw();
 };
 
-struct ListenerB
-{
-    virtual void ListenerB_v0();
-};
 struct ListenerC
 {
     virtual void ListenerC_v0();
@@ -996,18 +957,6 @@ struct ListenerC
     {}
 };
 
-struct OwnerHolder : OwnerObject
-{
-
-    void ProcessInputData(ListenerC* listener) throw();
-};
-
-struct FUN_00ddabe0 : RefObject
-{
-    int unk08;
-    int unk0c;
-    FUN_00ddabe0(void* src) throw();
-};
 struct FUN_00dda6e0 : RefObject
 {
     int unk08;
@@ -1023,22 +972,6 @@ struct FUN_00dd9cc0 : RefObject, ChildBase
     int unk0c;
     int unk10;
     FUN_00dd9cc0(FUN_00dda6e0* src) throw();
-};
-
-struct FUN_00d60f30 : RefObject, ListenerB, ListenerC
-{
-    FUN_00ddabe0* m_pHeadNode;
-    FUN_00dda6e0* m_iSecondInteger;
-    ChildBase* m_pChildAtom;
-    ListenerB* m_kListener;
-    OwnerObject m_pOwnerObject;
-    PtrArray m_arr38;
-    PtrArray m_arr44;
-
-    FUN_00d60f30(const PtrArray& arr, void* first, void* second);
-    virtual void Thing_v1();
-    virtual void ListenerB_v0();
-    virtual void ListenerC_v0();
 };
 
 }  // namespace fnv_00d60f30

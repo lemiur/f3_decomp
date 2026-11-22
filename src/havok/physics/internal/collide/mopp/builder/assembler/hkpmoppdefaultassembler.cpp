@@ -374,22 +374,6 @@ void __stdcall AdjustLimits(Limits* first, Limits* second, Limits* third)
         third->unk34 = first->unk24;
 }
 
-struct E06C20Writer
-{
-    void FUN_00e069a0(int size, void* data);
-};
-
-struct E06C20Object
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    E06C20Writer* m_pStreamWriter;
-
-    int FUN_00e06c20(void* data);
-};
-
 namespace fnv_00e06db0 {
 struct Node
 {
@@ -605,26 +589,8 @@ struct CheckResult
         return value;
     }
 };
-struct Tracker
-{
-    int unk00, unk04, unk08, count;
-};
 void __stdcall FUN_00e06b20(Node*);
 void __stdcall FUN_00e07510(Node*, void*, State*, MergeInfo*);
-struct TreeOptimizer
-{
-    int unk00, unk04, unk08, unk0C;
-    Tracker* tracker;
-    int unk14, threshold, unk1C, unk20, limit, count, unk2C;
-    float config30, config34, config38, config3C, config40, config44, config48, config4C, config50, config54, config58,
-        config5C, config60, config64, config68, config6C;
-    int period;
-    CheckResult FUN_00e06af0(Node*, State*);
-    int FUN_00e07c50(Node*, void*, State*);
-    void FUN_00e06aa0(Node*);
-    int FUN_00e07ca0(Node*, void*, State*, MergeInfo*);
-    int OptimizeTree(Node*, void*, State*);
-};
 }  // namespace fnv_00e08040
 
 struct Allocator
@@ -1757,36 +1723,6 @@ struct AudioHolder
     AudioAllocator* m_pAllocator;
 };
 
-struct BSAudio;
-
-extern int DAT_010ea5dc;
-extern int DAT_0102e388;
-
-struct FUN_00e09450_cls
-{
-    int m_vptr00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    void* m_pData;
-    int m_iArrayLength;
-    unsigned int m_uCapBits;
-
-    void DestroyAudioBuffer();
-};
-
 int __cdecl FUN_00cbfe20(float v);
 
 struct FUN_00e094a0_floatpair
@@ -2173,8 +2109,6 @@ void FUN_00e07550_cls::FUN_00e07550(Arg1Flags* apFlags, Arg2Layout* apLayout)
     }
 }
 
-extern "C" unsigned int __cdecl _rotl(unsigned int, int);
-
 struct KdNode;
 struct KdCtx;
 
@@ -2462,47 +2396,6 @@ void __stdcall FUN_00e07b90(const FUN_00e07b90_bounds* bounds, FUN_00e07b90_vect
 }
 
 
-struct S_00e07d60_Info
-{
-    float x;
-    float y;
-    float z;
-    __m128 v;
-    int i;
-    char b;
-};
-
-struct S_00e07d60
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    float x;
-    float y;
-    float z;
-    __m128 v;
-    int i;
-    char b;
-    void FUN_00e07d60(const S_00e07d60_Info& info);
-};
-
 namespace e083 {
 struct Alloc;
 struct Router
@@ -2523,10 +2416,6 @@ struct PairArray
     Pair* m_data;
     int m_iElementCount;
     int m_iCapacityState;
-};
-struct SrcW
-{
-    PairArray* p;
 };
 }
 
@@ -3028,16 +2917,6 @@ struct SlotPair
     int m_10;
 };
 
-struct Ctx
-{
-    int unk00;
-    PairList m_kNode;
-    int unk10;
-    int unk14;
-    int unk18;
-    int m_1c;
-};
-
 struct Node
 {
     int unk00;
@@ -3076,47 +2955,9 @@ struct Node
     Node* m_74;
 };
 
-struct FUN_00e08240_cls
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    Ctx* m_14;
-    int FUN_00e08240(Node* a1, int a2, int a3);
-};
-
 }  // namespace fnv_00e08240
 
 namespace fnv_00e08470 {
-struct S_00e08470_Context
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    char unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    int unk58;
-    void* unk5c;
-};
 
 struct S_00e08470_Entry
 {
@@ -3140,32 +2981,8 @@ struct S_00e08470_Holder
     void* unk10;
 };
 
-struct S_00e08470_Data
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    void* unk0c;
-    S_00e08470_Holder* unk10;
-    S_00e08470_Vector unk14;
-
-    void __thiscall FUN_00e06480();
-};
-
 extern "C" S_00e08470_Holder* __cdecl FUN_00c85750();
 extern "C" void __cdecl ResizeAudioStream(void*, S_00e08470_Vector*, int);
-
-struct S_00e08470_Class
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    S_00e08470_Data* unk10;
-
-    void __thiscall FUN_00e06c20(int);
-    int __thiscall FUN_00e08470(S_00e08470_Context*);
-};
 
 }  // namespace fnv_00e08470
 

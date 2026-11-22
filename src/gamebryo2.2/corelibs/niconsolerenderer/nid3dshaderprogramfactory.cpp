@@ -46,19 +46,6 @@ void DestroyProgram()
     DAT_0126fa10 = 0;
 }
 
-struct Nd
-{
-    Nd* next;
-    int b;
-    int data;
-};
-struct Lst
-{
-    int a;
-    int b;
-    Nd* head;
-};
-
 // @fnv 0x00e93df0
 void FUN_00e93df0()
 {
@@ -390,10 +377,6 @@ void __thiscall FUN_00e937f0_shell::AddShader(ShaderArg* pkShader)
     if (pkShader && m_pTaskMap)
         m_pTaskMap->SetAt(pkShader->GetKey(), (NiShader*)pkShader);
 }
-
-extern int DAT_0126fa18;
-extern int DAT_0126fa1c;
-extern int DAT_0126fa20;
 
 extern "C" int __cdecl strcmp(const char*, const char*);
 extern "C" unsigned int __cdecl strlen(const char*);
@@ -801,15 +784,6 @@ struct ShaderEntryList
     void __thiscall FUN_00b602d0();
     void __thiscall FUN_00e7d5b0();
 };
-struct ShaderEntryNodePool
-{
-    void* first;
-    void __thiscall FUN_0040fbf0(int count);
-};
-extern ShaderEntryNodePool DAT_011c5f80;
-extern ShaderEntryNode* DAT_011c5f58;
-extern unsigned int DAT_011c5f84;
-extern "C" void __cdecl FUN_00aa10f0(void*);
 struct ShaderEntryOwner
 {
     int unknown00;

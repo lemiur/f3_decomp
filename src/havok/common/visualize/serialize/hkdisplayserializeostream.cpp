@@ -47,37 +47,10 @@ struct hkBool
     }
 };
 
-struct RefObj
-{
-    void* m_vtbl;
-    short m_usMemSizeAndFlags;
-    short m_sReferenceCount;
-    __declspec(nothrow) void FUN_00c905b0();
-};
-
-struct FUN_00d27460 : RefObj
-{
-    int pad[(0x1c - 8) / 4];
-    __declspec(nothrow) FUN_00d27460(int a, int b);
-};
-
 inline void* operator new(unsigned int, void* p)
 {
     return p;
 }
-
-struct FUN_00d60830 : RefObj
-{
-    RefObj* m_8;
-    __declspec(nothrow) FUN_00d60830(RefObj* o, hkBool b);
-};
-
-extern "C" char DAT_010d7db8[];
-
-struct FUN_00dda6e0 : FUN_00d60830
-{
-    FUN_00dda6e0(int a);
-};
 
 struct DDA7C0Vector4
 {
@@ -161,13 +134,6 @@ struct AllocatorHolder
     Allocator* allocator;
 };
 AllocatorHolder* __cdecl FUN_00c85750();
-struct FUN_00ddabb0_shell
-{
-    void* unk00;
-    unsigned short size;
-    void FUN_00d60590();
-    FUN_00ddabb0_shell* FUN_00ddabb0(unsigned int flags);
-};
 }  // namespace fnv_00ddabb0
 
 // Stand-in for the class that owns WriteUInt16 (the game's own class name for
@@ -234,12 +200,6 @@ struct S_00dda740_Transform
 {
     S_00dda740_Matrix3 m_rotation;
     S_00dda740_Vector4 m_vTranslation;
-};
-
-struct S_00dda740_Quaternion
-{
-    S_00dda740_Vector4 m_vec;
-    void FUN_00cb26e0(const S_00dda740_Matrix3& r);
 };
 
 struct S_00dda740

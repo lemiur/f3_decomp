@@ -254,7 +254,6 @@ class TESObjectREFR: public TESForm {};
 class TESGlobal: public TESForm {};
 class TESTopicInfo: public TESForm { public: void FUN_00566950(BSStringT<char>*, int); };
 TESForm* FUN_005643c0(TESTopicInfo*);
-TESForm* TESQuestGetTopic(TESTopicInfo*);
 void FUN_00454a40(unsigned int*, void*);
 TESForm* FUN_00455190(unsigned int);
 void FUN_00887da0(const char*, ...);
@@ -323,7 +322,6 @@ void Condition::FUN_005ae9d0(TESForm* owner) {
 // @f3 0x005a7e10 (community match, verified in this file)
 #include <math.h>
 #include <stdio.h>
-struct P2 { float x,y; };
 struct P3 { float x,y,z; float FUN_005a3b00(); };
 struct Cell;
 struct BaseRecord { int unk00; unsigned char type; };
@@ -11149,7 +11147,6 @@ extern int DAT_0116d6bc;
 namespace f3m_005abee0 {
 
 class TESFile;
-class TESObjectANIO;
 class TESTopic;
 
 class TESForm
@@ -16367,9 +16364,7 @@ bool Owner5A0740::FUN_005a0740(unsigned short index, Obj5A0740* arg)
 // @f3 0x005ad080 (community match, verified in this file)
 extern const char DAT_00dfef08[];
 extern const char DAT_00dfeeb0[];
-extern const char DAT_00dfee60[];
 extern const char DAT_00dfee10[];
-extern const char DAT_00dfedb8[];
 extern const char DAT_00dfed60[];
 extern char DAT_00f47a3c;
 extern char DAT_00f47aa8;
@@ -22329,11 +22324,6 @@ struct R01Form
     virtual void v74();
     virtual void v75();
     virtual const char* GetDebugName();
-};
-
-struct R01Rand
-{
-    unsigned int FUN_00825c00(int, int);
 };
 
 extern unsigned int DAT_01090bb0;
@@ -29329,18 +29319,6 @@ struct FUN_0083f490 : Geometry {
  FUN_0083f490(unsigned short,void*,void*,void*,void*,unsigned short,unsigned,unsigned short,void*);
 
 };
-struct Provider {    unsigned unk00;
-    unsigned unk04;
-    unsigned unk08;
-    unsigned unk0C;
-    unsigned unk10;
-    unsigned unk14;
-    unsigned unk18;
-    unsigned unk1C;
-    unsigned unk20;
-    unsigned unk24;
-    unsigned unk28;
-    unsigned unk2C;virtual void Unused();};
 struct Query {virtual void q0();
 virtual void q1();
 virtual void q2();
@@ -33748,7 +33726,6 @@ struct ThreeByThreeMatrix {
     ThreeByThreeMatrix operator*(const ThreeByThreeMatrix& o) const;
 };
 
-extern const float DAT_00db88e0;
 inline bool ThreeByThreeMatrix::Inverse(ThreeByThreeMatrix& dst) const {
     dst.m[0][0]=m[1][1]*m[2][2]-m[1][2]*m[2][1];
     dst.m[0][1]=m[0][2]*m[2][1]-m[0][1]*m[2][2];
@@ -33885,12 +33862,6 @@ struct SkinDataObj {
     unsigned boneCount;
     ResetFields* GetBones() { return bones; }
     unsigned GetBoneCount() { return boneCount; }
-};
-
-struct SkinVtable {
-    void* dtor;
-    void* unk04;
-    void* (__thiscall *getRTTI)(void* self);
 };
 
 struct SkinObj {

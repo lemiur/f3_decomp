@@ -117,11 +117,6 @@ struct NiTPrimitiveArray_int___
     void SetAt(unsigned int, int&);
 };
 
-struct FUN_00c04960_class
-{
-    void ResetArrayElement();
-};
-
 namespace fnv_00c04a80 {
 struct MemoryManager
 {
@@ -226,14 +221,7 @@ int FUN_00c05350_class::FUN_00c05350()
     return 0;
 }
 
-extern void* DAT_010bcb60;
-void __cdecl FUN_00bb45b0();
 extern "C" void __cdecl _delete(void*, unsigned int);
-struct FUN_00c058c0
-{
-    void* vtbl;
-    __thiscall FUN_00c058c0(bool flag);
-};
 
 extern "C" void __cdecl FUN_00b7a870(int, int);
 
@@ -689,7 +677,6 @@ void __thiscall FUN_00c04310_class::ReleaseStagePasses(int)
 
 
 namespace fnv_00c04490 {
-extern unsigned int _data_011c16bc;
 
 struct StageReturn
 {
@@ -804,14 +791,6 @@ struct FUN_00e7f7c0_class
 };
 
 extern FUN_00e7f7c0_class* DAT_0126f74c;
-
-struct FUN_00c04490_class
-{
-    char pad00[0x9e];
-    unsigned short m_uiItemCount;
-
-    void __thiscall ResetStages(int);
-};
 
 }  // namespace fnv_00c04490
 
@@ -1424,11 +1403,6 @@ unsigned char __cdecl FUN_00c03340()
     return g_unk012023f0;
 }
 
-struct FUN_00c033c0
-{
-    FUN_00c033c0();
-};
-
 struct DestroyableReference
 {
     virtual ~DestroyableReference();
@@ -1581,12 +1555,6 @@ class FUN_00c036f0_sub5c
 {
   public:
     void FUN_00ba3840(int aiValue);
-};
-
-class FUN_00c036f0_cls
-{
-  public:
-    void InitSubObjects(int aUnused);
 };
 
 class NiRefObject
@@ -5091,9 +5059,6 @@ struct RenderSettings
     unsigned int flags;
     RenderColor clearColor;
 };
-extern RenderSettings DAT_01202410;
-extern RenderColor DAT_011ad840;
-extern bool DAT_011f9426;
 struct NiRenderTargetGroup;
 struct BSRenderedTexture : NiRefObject
 {
@@ -5103,10 +5068,6 @@ struct BSRenderedTexture : NiRefObject
         volatile long* p = (volatile long*)&m_uiRefCount;
         InterlockedIncrement(p);
     }
-};
-struct TextureInput
-{
-    BSRenderedTexture* GetRenderedTexture() const;
 };
 struct RenderGeometry;
 struct RenderPrimary
@@ -5221,25 +5182,6 @@ struct RenderPrimary
     int unk64;
     int unk68;
     void ProcessEntries();
-};
-struct RenderSecondary
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    TextureInput** textures;
-    void RenderSecondaryGeometry(RenderGeometry*, int, RenderSettings*, bool);
-};
-struct RenderEffect : RenderPrimary, RenderSecondary
-{
 };
 struct RenderGeometry
 {
@@ -5727,17 +5669,6 @@ struct RenderManager
     RenderColor color;
 };
 extern RenderManager* DAT_011f91ac;
-void __cdecl FUN_00b6b890(unsigned int, int);
-void __cdecl FUN_00b6b8d0(unsigned int, NiRenderTargetGroup*);
-NiRenderTargetGroup* __cdecl GetCurrentItem();
-void __cdecl FUN_00b6b790();
-struct FUN_00ba8cd0
-{
-    int mode, geometry, enabled, unknown;
-    ~FUN_00ba8cd0();
-};
-FUN_00ba8cd0 __cdecl FUN_00ba8ec0(RenderGeometry*, int, int, int, int);
-void __cdecl FUN_00b994f0(void*, unsigned short, int, int, int);
 
 }  // namespace fnv_00c03d80
 
@@ -9197,7 +9128,6 @@ float __cdecl FUN_00c05870()
     return 1.0f;
 }
 
-extern "C" unsigned int __cdecl _rotl(unsigned int, int);
 extern "C" __declspec(dllimport) long __stdcall InterlockedDecrement(volatile long* value);
 extern "C" __declspec(dllimport) long __stdcall InterlockedIncrement(volatile long* value);
 struct ConstantEntryStandin
@@ -9350,10 +9280,6 @@ struct StatePtr
     }
 };
 extern StatePtr DAT_01200ec0[112];
-extern unsigned DAT_01200a28[112];
-extern unsigned DAT_01200868[112];
-extern ConstantEntryStandin* DAT_01201080[17];
-extern ConstantEntryStandin* DAT_012010c4[10];
 struct Owner
 {
     int unk00;
@@ -9457,7 +9383,6 @@ void __cdecl FUN_00c1a630()
     FUN_00a74640();
 }
 
-extern "C" void _ReadWriteBarrier();
 struct P440Light;
 struct P440Pass;
 struct P440Camera;
@@ -10012,13 +9937,6 @@ struct P440Shader
 };
 extern P440Renderer* DAT_011f4748;
 extern float DAT_011f9458, DAT_011f9460, DAT_011f9468, DAT_011f946c;
-extern float DAT_011f9470;
-extern unsigned char DAT_011f91a7;
-P440Renderer* __cdecl FUN_00b4f5c0();
-bool __cdecl IsParticleShaderRendererEnabled();
-int __cdecl GetGlobalFloatAsUInt();
-bool __cdecl FUN_005bf7b0();
-float __cdecl LinearInterpolate(float, float, float, float, float);
 
 struct FUN_00c02c30_Obj
 {
@@ -10445,24 +10363,6 @@ struct S00c04f50_I4
     int y;
     int z;
     int w;
-};
-
-struct S00c04f50_Tmp
-{
-    float f00;
-    float f04;
-    float f08;
-    float f0c;
-    float f10;
-    float f14;
-    int f18;
-    int f1c;
-    int f20;
-    int f24;
-    float f28;
-    float f2c;
-    float f30;
-    float f34;
 };
 
 struct S00c04f50_Mat
@@ -11257,10 +11157,6 @@ struct C0CD80Pass
     unsigned int FUN_00e7def0(unsigned int code);
     unsigned int ApplyPairToState(unsigned int code);
 };
-struct C0CD80Rdr
-{
-    unsigned short FUN_00b704b0();
-};
 struct C0CD80Item
 {
     int unk00, unk04, unk08, unk0c, unk10, unk14, unk18, unk1c;
@@ -11280,8 +11176,6 @@ struct C0CD80Mgr
     unsigned char unk00, unk01, unk02, unk03, unk04, unk05, unk06, unk07, unk08, unk09;
     C0CD80Item** m_kNode;
 };
-extern unsigned int DAT_011f91b0;
-extern long DAT_01201c7c;
 struct C0CD80Shader
 {
     void FUN_00bb9640(ShaderEntry* entry, ShaderInterface* iface);

@@ -11,15 +11,6 @@ void* __cdecl FUN_00a87800()
     return &g_011f5b48;
 }
 
-extern "C" void _delete(void*, unsigned int);
-
-struct NiScreenElements
-{
-    void* m_pVftable;
-    void __fastcall FUN_00a89760();
-    NiScreenElements* __thiscall FUN_00a87830(unsigned int flags);
-};
-
 namespace fnv_00a878b0 {
 struct StrArr
 {

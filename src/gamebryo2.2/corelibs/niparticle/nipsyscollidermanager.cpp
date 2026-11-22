@@ -2,8 +2,6 @@
 // src/gamebryo2.2/corelibs/niparticle/nipsyscollidermanager.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/_fallout3/platforms/common/code/gamebryo2.2/corelibs/niparticle/nipsyscollidermanager.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-extern "C" void* g_01202780;
-
 struct NiPSysPositionModifier
 {
     void* vfn[6];
@@ -333,7 +331,6 @@ struct StrArr
     void SetSize(unsigned int);
     void SetAt(unsigned int, char*&);
 };
-char* __cdecl _FUN_00a7d330(void*);
 struct NiPSysCollider
 {
     virtual void f0();

@@ -52,14 +52,9 @@ BSRenderedTexture* BSShaderManager::GetSceneDepthRenderedTexture()
 
 struct BSTreeModel;
 struct CSpeedTreeRT;
-struct NiBinaryStream;
 struct NiCullingProcess;
-struct NiObjectGroup;
-struct NiSearchPath;
 struct NiStream;
-struct NiTexture;
 struct NiTexturingProperty;
-struct NiThread;
 struct NiTriBasedGeom;
 struct NiUpdateData;
 struct bhkSimpleShapePhantom;
@@ -260,7 +255,6 @@ void __cdecl ReleaseFadeNodeResources()
 }
 
 extern unsigned char DAT_011ad7b4;
-extern int DAT_011f36ac;
 
 bool __cdecl FUN_00b4ea20_probe(void* obj);
 
@@ -708,15 +702,8 @@ bool Fade::UpdateFade(Fade* camera, int unused)
 
 #include <math.h>
 struct NiCamera;
-struct CloningProcess;
-struct NiPoint2;
-struct NiPoint3;
 struct NiStream;
 struct NiUpdateData;
-struct blob12
-{
-    char b[12];
-};
 struct FUN_00b4e030_shell : public BSFadeNode
 {
     bool IsWithinFadeDistance(NiCamera*, float);
@@ -856,36 +843,11 @@ struct FadeCuller
     FadeCamera* m_pCamera;  // 0x0c
 };
 
-struct FadeQueue
-{
-    void RenderBound(const char* name, int b);
-    void DispatchBatchRenderer();
-};
-
-struct FadeQueueHolder
-{
-    int unk00;
-    int unk04;
-    FadeQueue* m_pQueue;
-};
-
 extern char DAT_011ad7b4;
 extern float DAT_011ad7b8[11];
-extern float DAT_011ad7e4;
-extern float DAT_011ad7e8;
-extern float DAT_011ad7ec;
 extern float DAT_011ad7f0;
 extern float DAT_011ad7f4;
-extern float DAT_011ad7f8;
-extern float DAT_011f63a0;
 extern int DAT_011f9138;
-extern FadeQueueHolder* DAT_011f4748;
-extern int DAT_011fa000;
-extern char DAT_011f4288[];
-
-float FUN_0040ebd0(float a, float b);
-float FUN_00404010(float a, float b);
-bool FUN_0043b300(void* list, FadeQueue* q);
 
 struct FadeNodeObj;
 void FUN_00b6bb30(FadeNodeObj* node, float fade);

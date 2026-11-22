@@ -269,16 +269,6 @@ void* FUN_00a68800_shell::FUN_00a68800(unsigned int flags)
     return this;
 }
 
-struct FUN_00a725d0_shell
-{
-    char pad[8];
-    unsigned int m_uiRefCount;
-    char pad2[0x14];
-    void*** m_ppChildren;
-    char pad3[2];
-    unsigned short m_usElementCount;
-    void FUN_00a725d0(unsigned int idx);
-};
 struct VObj
 {
     virtual void f0();
@@ -2104,8 +2094,6 @@ class MemoryManager
 };
 extern MemoryManager g_memoryManager;
 extern void* DAT_011f4880;
-extern char UNK_0109c040;
-extern char UNK_004a7800;
 
 class StreamEA0
 {
@@ -2282,15 +2270,6 @@ struct Point2EA0 : AllocEA0
     float y;
 };
 
-class ColorEA0 : public AllocEA0
-{
-  public:
-    float r;
-    float g;
-    float b;
-    float a;
-};
-
 struct Point3EA0 : AllocEA0
 {
     Point3EA0()
@@ -2300,90 +2279,8 @@ struct Point3EA0 : AllocEA0
     float z;
 };
 
-class SphereEA0
-{
-  public:
-    Point3EA0 m_kCenter;
-    float m_fBoundRadius;
-    void FUN_00a69ac0(StreamEA0& kStream);
-};
-
-struct BuffEA0
-{
-    void* m_pField0;
-    int m_iField4;
-    void* m_pCurrent;
-    int m_iArrayLength;
-};
-
-class ObjEA0
-{
-  public:
-    virtual ~ObjEA0();
-    virtual const void* GetRTTI() const;
-    virtual ObjEA0* MakeClone(void* pCloning);
-    virtual void CopyMemberData(ObjEA0* pkDest, void* pCloning);
-    virtual void PostLinkObject(StreamEA0& kStream);
-    virtual bool StreamCanSkip();
-    virtual bool GetStreamableRTTIName(char* acName, unsigned int uiMaxSize) const;
-    virtual unsigned int GetBlockAllocationSize() const;
-    virtual void* GetGroup() const;
-    virtual void SetGroup(void* pkGroup);
-    virtual void AddViewerStrings(void* pkViewerStrings);
-    virtual void SetName(unsigned int uiName);
-    virtual bool AddExtraData(ObjEA0* pkExtra);
-    virtual ObjEA0* GetExtraData() const;
-    virtual bool RemoveExtraDataByName(ObjEA0* pkExtra);
-    virtual void UpdateModelBound();
-    virtual bool ResizeExtraData(unsigned short usSize);
-    virtual void GetNumChildren();
-    virtual void ReadGroup(StreamEA0& kStream);
-    virtual void LinkObject(StreamEA0& kStream);
-    virtual bool RegisterStreamables(StreamEA0& kStream);
-    virtual void SaveBinary(StreamEA0& kStream);
-    virtual bool IsEqual(ObjEA0* pkObject);
-    virtual void GetViewerStrings(void* pkViewerStrings);
-    virtual void InsertExtraData(ObjEA0* pkExtra);
-    virtual void ProcessClone(void* pCloning);
-    unsigned int m_uiRefCount;
-};
-
 void* FUN_00ec61c0(void* pvDest, int iValue, unsigned int uiSize);
 typedef void*(__thiscall* CtorStubEA0)(void*);
-extern "C" void __stdcall _vector_constructor_iterator(void* apvArray, unsigned int uiElemSize, int iCount,
-                                                       CtorStubEA0 pfnCtor);
 void FUN_00a67aa0(StreamEA0& kStream, void* pvDest, int iCount);
-void FUN_00a29680(const char* pcFmt, const char* pcName, int iKBytes);
-
-class GeomEA0 : public ObjEA0
-{
-  public:
-    virtual void* GetBoundObject();
-    virtual void* GetVertexArray();
-    virtual void* GetNormalArray();
-    virtual void* GetColorArray();
-    virtual void* GetTextureArray();
-    virtual void* GetBufferObject();
-    virtual BuffEA0* GetBuffData();
-
-    unsigned short m_usVertices;
-    unsigned short m_usGeometryFlags;
-    unsigned short m_usTrianglePoints;
-    unsigned short m_usDirtyFlags;
-    SphereEA0 m_kBound;
-    Point3EA0* m_pkVertex;
-    Point3EA0* m_pkNormal;
-    ColorEA0* m_pkColor;
-    Point2EA0* m_pkTexture;
-    void* m_spAdditionalGeomData;
-    void* m_pkGeometryRendererData;
-    unsigned char m_ucKeepFlags;
-    unsigned char m_ucCompressFlags;
-    bool m_bIsDynamic;
-    bool m_bBoundDirty;
-    bool m_bVerticesDirty;
-
-    void ReadBinary(StreamEA0& kStream);
-};
 
 }  // namespace fnv_00a67ea0

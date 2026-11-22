@@ -4,19 +4,6 @@
 
 #include "havok/hkpConstraintAtom.h"
 
-struct FUN_00d21ce0_cls
-{
-    void* m_base;
-    void* m_pBridge;
-    void* m_pConstraintData;
-    void FUN_00d21ce0(void* data);
-};
-
-struct FUN_00d22090_cls
-{
-    int FUN_00d22090(void* a, void* b);
-};
-
 // Walks a linked list from self while the node's first ushort is at least 0x17, OR-ing each node's FUN_00d22090(a, b) result and returning it.
 // @f3 0x009a1f20 (community match, verified in this file)
 struct ConstraintNode {
@@ -159,35 +146,6 @@ struct hkMatrix3q
     void mul(const hkSimdRealq& scale);
 };
 
-struct hkpSimpleConstraintInfoInitInputq
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    hkMatrix3q m_kInverseInertiaMatrix;
-    hkVector4q m_vInverseInertiaAndMass;
-    const hkMatrix3q* m_rotation;
-};
-
-class hkpMassChangerModifierConstraintAtomq
-{
-  public:
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    hkVector4q m_kFactorA;
-    hkVector4q m_kFactorB;
-
-    void ScaleInverseInertia(const void* cp, hkpSimpleConstraintInfoInitInputq& inA, void* velA,
-                             hkpSimpleConstraintInfoInitInputq& inB, void* velB);
-};
-
 namespace fnv_00d21f50 {
 union __declspec(intrin_type) __declspec(align(16)) __m128
 {
@@ -230,41 +188,7 @@ struct hkVector4D21F
     }
 };
 
-struct hkContactPointD21F
-{
-    hkVector4D21F m_vContactPosition;
-    hkVector4D21F m_vSeparatingNormal;
-};
-
-class hkpMovingSurfaceModifierConstraintAtomD21F
-{
-  public:
-    void FUN_00d21f50(const hkContactPointD21F& kCp, void* pvA, void* pvB, void* pvC, hkVector4D21F& kVelOut);
-
-    unsigned short m_type;
-    unsigned short unk02;
-    unsigned int unk04, unk08, unk0C, unk10, unk14, unk18, unk1C;
-    hkVector4D21F m_fVelocity;
-};
-
 }  // namespace fnv_00d21f50
-
-struct hkpConstraintInfoD220
-{
-    int m_iMaxSchemaSize;
-    int m_iSchemaByteSize;
-    int m_iSolverResultCount;
-    int m_iSolverElementTemporaryCount;
-};
-
-class hkpModifierConstraintAtomD220
-{
-  public:
-    unsigned short m_type;
-
-    int FUN_00d22030(hkpConstraintInfoD220& kInfo) const;
-    int FUN_00d22090(hkpConstraintInfoD220& kInfo, unsigned char& ucUsedFlagsOut) const;
-};
 
 extern "C" __m128 _mm_shuffle_ps(__m128 a, __m128 b, int c);
 extern "C" __m128 _mm_add_ps(__m128 a, __m128 b);
@@ -289,70 +213,4 @@ struct Vec4
     }
 };
 
-struct Mat3
-{
-    Vec4 m_kColumn0;
-    Vec4 m_kColumn1;
-    Vec4 m_kColumn2;
-};
-
-struct Transform
-{
-    Mat3 m_rotation;
-    Vec4 m_vTranslation;
-};
-
-struct InitInput
-{
-    Vec4 m_kFirstVector;
-    Mat3 m_kInverseInertiaMatrix;
-    Vec4 m_vInverseInertiaAndMass;
-    const Transform* m_kMotionTransform;
-};
-
-struct BodyVelocity
-{
-    Vec4 m_kTranslationalVelocity;
-    Vec4 m_kAngularVelocity;
-};
-
-struct ComChangerAtom
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    Vec4 m_kDisplacementA;
-    Vec4 m_kDisplacementB;
-
-    void FUN_00d22160(const void* cp, InitInput& inA, BodyVelocity& velA, InitInput& inB, BodyVelocity& velB);
-};
-
-extern __m128 DAT_012689a0;
-extern __m128 DAT_012689b0;
-extern __m128 DAT_012689c0;
-extern __m128 DAT_012689d0;
-
-extern "C" __m128 _mm_load_ps(float const* p);
 extern "C" __m128 _mm_add_ss(__m128 a, __m128 b);
-struct FUN_00d21fc0_n
-{
-    float x, y, z, w;
-};
-struct Cls_00d21fc0
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    FUN_00d21fc0_n m_uiValueCount;
-    void __thiscall FUN_00d21fc0(__m128* a, int b, int c, int d, int e, int out);
-};

@@ -1,31 +1,6 @@
 #include "f3_common.h"
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-struct PoolLock_b1698
-{
-    void Lock(int wait);
-};
-
-struct PoolNode_b1698
-{
-    PoolNode_b1698* m_00;
-    unsigned int m_04;
-};
-
-extern "C" int DAT_011c5f80;
-extern "C" PoolNode_b1698* DAT_011c5f58;
-extern "C" int DAT_011c5f84;
-
-struct FUN_00b63e90_cls
-{
-    unsigned int m_00;
-    unsigned int m_04;
-    unsigned int* m_08;
-    PoolNode_b1698* m_0c;
-
-    void ReleasePoolNodes();
-};
-
 struct FUN_00b63f10_Kind
 {
     int m_type;

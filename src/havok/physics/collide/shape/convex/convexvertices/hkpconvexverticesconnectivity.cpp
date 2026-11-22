@@ -60,11 +60,3 @@ template <class T> struct hkArray_e48d
         m_iElementCount++;
     }
 };
-
-struct Writer_e48d
-{
-    int unk00, unk04;
-    hkArray_e48d<unsigned short> m_ppIndices;
-    hkArray_e48d<unsigned char> m_counts;
-    void FUN_00e48df0(const int* values, int count);
-};

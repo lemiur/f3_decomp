@@ -2,10 +2,6 @@
 // src/gamebryo2.2/corelibs/nianimation/nirotdata.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/_fallout3/platforms/common/code/gamebryo2.2/corelibs/nianimation/nirotdata.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-struct NiRTTI;
-
-extern const NiRTTI g_011f3f50;
-
 class AnimationKey
 {
   public:
@@ -311,35 +307,6 @@ bool FUN_00a48160_shell::FUN_00a48160(void* pkObject)
     }
     return true;
 }
-
-struct StrArr
-{
-    unsigned char _00[8];
-    unsigned short m_uiCapacity;
-    unsigned short m_uiSize;
-    unsigned char _0C[2];
-    unsigned short m_uiGrowSize;
-
-    void SetSize(unsigned int uiSize);
-    void SetAt(unsigned int uiIndex, char*& rString);
-};
-
-struct NiRTTIAccess
-{
-    void* m_pIntegerData;
-};
-
-void* __cdecl _FUN_00a7d330(void* pObject);
-char* __cdecl FUN_00a7d510(char const* pName, unsigned int uiValue);
-void __stdcall AppendCameraPathEntries(StrArr* apViewerStrings);
-
-struct FUN_00a484c0_shell
-{
-    void* _00[2];
-    unsigned int m_uiNumKeys;
-
-    void AppendNumKeysToStringArray(StrArr* apViewerStrings);
-};
 
 struct FUN_00b66620_cls
 {

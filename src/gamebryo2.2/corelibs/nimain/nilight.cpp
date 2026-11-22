@@ -22,13 +22,6 @@ void NiLight::CopyMemberData(NiLight* clone, CloningProcess& process)
     clone->m_bEffectEnabled = m_bEffectEnabled;
 }
 
-struct FUN_00a72000_shell : public NiLight
-{
-    void* FUN_00a72000();
-};
-
-extern const char* const g_011f4a68_arg1;
-
 extern int DAT_0109ce4c;
 struct NiDynamicEffect;
 void __fastcall DestroyDynamicEffect(NiDynamicEffect*);

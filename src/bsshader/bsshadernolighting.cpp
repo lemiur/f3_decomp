@@ -508,15 +508,6 @@ void BSShaderNoLighting::PrepareShaderPass(const NiPropertyState* properties)
         m_pRenderState->SetWireframeProperty(wire);
 }
 
-struct NiColor
-{
-    float r, g, b;
-};
-
-extern NiColor DAT_011a9b7c;
-extern NiColor DAT_011f4998;
-extern bool DAT_011F941E;
-
 // @f3 0x00b4a680 (community match, verified in this file)
 struct Color489 {
     float r, g, b;
@@ -957,7 +948,6 @@ struct ShaderStagePointer
 };
 void AssignStageFromPool(ShaderStagePointer*);
 void ConfigureBeamStage(ShaderStage*, unsigned int, unsigned int, unsigned int, bool);
-extern unsigned int DAT_011f9534;
 struct ShaderPass
 {
     unsigned int unk00;
@@ -1588,19 +1578,6 @@ void TechniqueShader::SetPass(unsigned int uiTechnique)
     }
 }
 
-
-struct Texture
-{
-    void SetClamp(unsigned int);
-};
-struct F860Pass
-{
-    bool Apply(bool);
-};
-struct BSShaderNoLightingShell : BSShaderNoLighting
-{
-    void FUN_00bc8d30();
-};
 
 namespace NoLightingConsts {
 extern "C" unsigned int DAT_01202158;

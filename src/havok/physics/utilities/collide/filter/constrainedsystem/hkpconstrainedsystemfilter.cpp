@@ -4,31 +4,6 @@
 
 #include "havok/hkpConstrainedSystemFilter.h"
 
-extern int g_unk0126d658;
-
-struct FnvCpu_FUN_00dffb00_CpuAllocator
-{
-    virtual void slot00();
-    virtual void slot04();
-    virtual void Invoke(void* block, unsigned int size);
-};
-struct FnvCpu_FUN_00dffb00_CpuAllocatorHolder
-{
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0c;
-    FnvCpu_FUN_00dffb00_CpuAllocator* allocator;
-};
-FnvCpu_FUN_00dffb00_CpuAllocatorHolder* __cdecl FUN_00c85750();
-struct FnvCpu_FUN_00dffb00_CpuObject
-{
-    unsigned int unk00;
-    unsigned short size;
-    void FUN_00e46b80();
-    FnvCpu_FUN_00dffb00_CpuObject* FUN_00dffb00(unsigned int flags);
-};
-
 struct hkBoolE46B
 {
     char m_cBooleanValue;
@@ -348,18 +323,6 @@ hkBoolE46D hkListE46D::FUN_00e46da0(const void* a, const void* b, const void* c,
 }
 }  // namespace fnv_00e46da0
 
-struct Owner
-{
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual void v0C();
-    virtual void v10();
-    virtual void v14();
-    virtual void v18();
-    virtual void v1C();
-    virtual int getType();
-};
 int __cdecl CallA(void*, void*);
 void __cdecl CallB(void*);
 // If the owner at +0xc has type other than 11, calls CallA with the +0x10 offsets of the pointers at +0x14 and +0x18, and passes a nonzero result to CallB.
@@ -445,49 +408,6 @@ Derived::Derived()
 }  // namespace fnv_00dffb40
 
 // Adjustor thunk: the secondary-base (+0x10) vtable entry for an override defined on the derived class.
-
-class DFFB50Primary
-{
-  public:
-    virtual void FUN_00dffb50();
-    int unk04;
-    int unk08;
-    int unk0C;
-};
-
-class DFFB50Secondary
-{
-  public:
-    virtual void FUN_00dffb50();
-};
-
-class DFFB50Listener : public DFFB50Primary, public DFFB50Secondary
-{
-  public:
-    DFFB50Listener();
-// @fnv 0x00dffb50
-    virtual void FUN_00dffb50();
-};
-
-// FUN_00dffb60 : MSVC this-adjusting thunk  (sub ecx, 0x30 ; jmp <impl>)
-struct A1_00dffb60
-{
-    A1_00dffb60();
-    virtual void FUN_00dffb60();
-    char pad[0x2c];
-};
-struct A2_00dffb60
-{
-    A2_00dffb60();
-    virtual void FUN_00dffb60();
-};
-struct Own_00dffb60 : A1_00dffb60, A2_00dffb60
-{
-    Own_00dffb60();
-    virtual void key_fn();
-// @fnv 0x00dffb60
-    void FUN_00dffb60();
-};
 
 namespace fnv_00dffb70 {
 // sub ecx,0x14; jmp FUN_00dffb00

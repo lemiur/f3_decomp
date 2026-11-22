@@ -119,7 +119,6 @@ FUN_00a51ab0_cls* FUN_00a51ab0_cls::FUN_00a51ab0(int a1, int a2, int a3)
     return this;
 }
 
-extern float DAT_01012054;
 void* __cdecl FUN_00aa13e0(unsigned int uiSize);
 
 class SplineBase
@@ -248,17 +247,3 @@ void FUN_00a52c50_BasisData::FUN_00a52c50(NiStream& stream)
     SaveBinaryBase(stream);
     WriteScalar(static_cast<NiStreamSave&>(stream).m_pBackingStream, m_kBSplineBasis.m_iNumControlPoints);
 }
-
-extern int DAT_0109a2a4;
-void* NiMalloc(unsigned int size);
-
-struct FUN_00a54190_cls
-{
-    int m_vt;
-    void* m_04;
-    unsigned short m_08;
-    unsigned short m_0a;
-    unsigned short m_0c;
-    unsigned short m_0e;
-    FUN_00a54190_cls* FUN_00a54190(int n, short a2);
-};

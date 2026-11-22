@@ -2,16 +2,6 @@
 // src/havok/animation/animation/mapper/hkaskeletonmapperutils.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/animation/animation/mapper/hkaskeletonmapperutils.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-struct CE5F90QsTransform
-{
-    float m_vTranslation[4];
-    float m_rotation[4];
-    float m_vScale[4];
-};
-
-void __cdecl FUN_00ce5a70(CE5F90QsTransform* out, const CE5F90QsTransform* a, const CE5F90QsTransform* b, int mode,
-                          float weightA, float weightB);
-
 // @f3 0x006f5500 (community match, verified in this file)
 struct GlobalStub { float FUN_006e2a90(); };
 extern GlobalStub DAT_01079f68;
@@ -25,8 +15,6 @@ void X::FUN_006f5500(int a, float b)
 
 
 #include <xmmintrin.h>
-extern const float DAT_0104da48;
-extern const float DAT_0104e148;
 
 struct __declspec(align(16)) VertexRecord
 {
@@ -105,49 +93,10 @@ struct hkQsTransformq
     }
 };
 
-struct ScaleParams
-{
-    int m_iValueAfterFlags;
-    int m_sBoneA;
-    int m_sBoneB;
-    hkReal m_scaleA;
-    hkReal m_scaleB;
-};
-
-void __cdecl FUN_00ce5560(const hkQsTransformq* pose, int numBones, hkVector4q& minOut, hkVector4q& maxOut);
-
 }  // namespace fnv_00ce55d0
 
 #include <math.h>
-struct ThresholdState
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    float threshold;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int mode;
-};
 
-struct ValueSource
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-};
-
-extern "C" float __cdecl GetAngle();
 typedef float(__thiscall* ReadValue)(void*);
 
 namespace fnv_00ce5e60 {
@@ -191,16 +140,6 @@ struct hkQsTransformq
     hkVector4q m_rotation;
     hkVector4q m_vScale;
 };
-
-struct hkaSkeletonq
-{
-    int m_ppVirtualMethodTable;
-    int m_usMemSizeAndFlags;
-    const char* m_name;
-    hkInt16* m_kParentIndices;
-};
-
-extern hkVector4q DAT_010c71e0;
 
 }  // namespace fnv_00ce5e60
 
@@ -261,36 +200,6 @@ struct hkQuaternion
     void FUN_00c74b70(const hkQuaternion& a, const hkQuaternion& b);
 };
 
-struct hkQsTransform
-{
-    hkVector4 m_vTranslation;
-    hkQuaternion m_rotation;
-    hkVector4 m_vScale;
-};
-
-struct hkaSkeleton;
-
-struct BonePairInfo
-{
-    hkInt16 m_boneA0;
-    hkInt16 m_boneA1;
-    hkInt16 m_boneB0;
-    hkInt16 m_boneB1;
-    int unk08;
-    int unk0C;
-    hkVector4 m_offset;
-    hkVector4 unk20;
-    hkVector4 unk30;
-    hkQuaternion m_rotation;
-    hkQuaternion m_relRotation;
-    hkVector4 m_vScale;
-};
-
-void FUN_00ce5f90(const void* data, const hkQsTransform* poseA, hkInt16 boneA, const hkQsTransform* poseB,
-                  hkInt16 boneB, hkVector4* out, hkReal eps, hkReal weight);
-void FUN_00ce5e60(const hkaSkeleton* skel, const hkQsTransform* poses, hkInt16 ancestor, hkInt16 bone,
-                  hkReal* lengthOut, hkVector4* posOut);
-
 }  // namespace fnv_00ce5fe0
 
 typedef unsigned int size_t;
@@ -317,12 +226,6 @@ struct hkMemoryRouterStub
 
 hkMemoryRouterStub* __cdecl FUN_00c85750();
 extern "C" void __cdecl FUN_00c908c0(hkMemoryAllocator* mem, void* array, int numElems, int elemSize);
-
-struct HkElem8
-{
-    int a;
-    int b;
-};
 
 template <typename T> struct HkArray
 {
@@ -381,29 +284,4 @@ template <typename T> struct HkArray
         copyFromArray(FUN_00c85750()->heap(), other);
         return *this;
     }
-};
-
-struct FUN_00ce9580
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    float unk0C;
-    float unk10;
-    HkArray<HkElem8> arr14;
-    HkArray<HkElem8> arr20;
-    HkArray<HkElem8> arr2C;
-    char unk38;
-    char unk39;
-    struct Tail
-    {
-        int unk3C;
-        int unk40;
-        int unk44;
-        int unk48;
-        int unk4C;
-        int unk50;
-    } tail;
-
-    FUN_00ce9580(const FUN_00ce9580& other);
 };

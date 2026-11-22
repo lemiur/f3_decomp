@@ -126,10 +126,6 @@ struct MemoryManager
 };
 extern int DAT_0109ca08;
 extern int DAT_0109ca18;
-struct FUN_00a6eb20_Holder
-{
-    void* __thiscall DestroyHolder(unsigned int);
-};
 
 struct NodeChildrenView_cls
 {
@@ -511,8 +507,6 @@ void PaletteShell::FUN_00a6e5b0(CloningProcess& kCloning)
         }
     }
 }
-
-bool __stdcall FUN_00a84c70(void*);
 
 extern char* DAT_0109b220;
 extern "C" void(__stdcall* DAT_00fdf1c4)(void*);

@@ -5,21 +5,6 @@
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
 extern int DAT_010c6fb0;
-extern int DAT_010ece2c;
-extern int DAT_010ece08;
-
-struct FUN_00e607c0
-{
-    void* m_p00;            // +0x00
-    short m_s04;            // +0x04
-    short m_s06;            // +0x06
-    int   m_i08;            // +0x08
-    int   m_i0C;            // +0x0c
-    float m_f10;            // +0x10
-    void* volatile m_p14;   // +0x14
-
-    FUN_00e607c0(float arg);
-};
 
 struct FUN_00e60680_class {
     int unk00; int unk04; int unk08; int unk0c; int unk10;
@@ -43,23 +28,6 @@ struct FUN_00e60690_owner { int unk00; int unk04; int unk08; Dispatch* unk0c; in
 void FUN_00e60690_owner::DispatchToInner(int index,int value) { unk0c->inner.run(unk10[index],value); }
 
 extern int DAT_010c6fb0;
-extern int DAT_0102e388;
-
-struct AudioAllocator {
-    virtual void v00();
-    virtual void v04();
-    virtual void Free(void* apMemory, unsigned int auiSize) throw();
-};
-
-struct AudioHolder {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    AudioAllocator* m_pAllocator;
-};
-
-AudioHolder* __cdecl FUN_00c85750() throw();
 
 struct FUN_00e60c30_cls {
     int m_vptr;
@@ -81,35 +49,11 @@ int FUN_00e60670()
 }
 
 #include <xmmintrin.h>
-struct FUN_00e606c0_cls {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    __m128* m_pSrc;
-
-    void Copy(__m128* apDst);
-};
 
 struct E606E0Vector4 {
     __m128 m_vComponents;
 
     void operator=(const E606E0Vector4& v) { m_vComponents = v.m_vComponents; }
-};
-
-struct E606E0Shape {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    float m_fSphereRadius;
-    int unk14;
-    E606E0Vector4* m_kVertices;
-    int m_iStridedVertexCount;
-
-    E606E0Vector4* CopyVerticesWithRadius(E606E0Vector4* vertices) const;
 };
 
 struct __declspec(align(16)) Vec4 {
@@ -175,29 +119,6 @@ void FUN_00e60730_cls::FUN_00e60730(const unsigned short* apIndices, int aiCount
     }
 }
 
-
-struct Transform_e608 {
-    __m128 m_kColumn0;
-    __m128 m_kColumn1;
-    __m128 m_kColumn2;
-    __m128 m_vTranslation;
-};
-
-struct Aabb_e608 {
-    __m128 m_kMinimumCorner;
-    __m128 m_kMaximumCorner;
-};
-
-class Shape_e608 {
-public:
-    int unk00, unk04, unk08, unk0c;
-    float m_fSphereRadius;
-    int unk14;
-    __m128* m_kVertices;
-    int m_iStridedVertexCount;
-
-    void FUN_00e60800(const Transform_e608& kLocalToWorld, float fTolerance, Aabb_e608& kOut) const;
-};
 
 extern "C" void _ReadWriteBarrier(void);
 extern "C" unsigned __int64 __rdtsc(void);

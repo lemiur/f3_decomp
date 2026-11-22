@@ -4,30 +4,6 @@
 
 #include "havok/hkpSimpleShapePhantom.h"
 
-struct FUN_00d1f9c0_Memory
-{
-    virtual void FUN_00d1f9c0_a();
-    virtual void FUN_00d1f9c0_b();
-    virtual void FUN_00d1f9c0_free(void* object, unsigned short size);
-};
-
-struct FUN_00d1f9c0_Router
-{
-    unsigned char pad[0x10];
-    FUN_00d1f9c0_Memory* memory;
-};
-
-FUN_00d1f9c0_Router* _D1A0E0GetMemoryRouter();
-
-struct FUN_00d1f9c0_StandIn
-{
-    void* vtable;
-    unsigned short size;
-
-    void FUN_00d1f780();
-    void* FUN_00d1f9c0(unsigned int flags);
-};
-
 // @fnv 0x00d1f220
 int FUN_00d1f220()
 {
@@ -63,102 +39,6 @@ template <class T> class hkArrayXd1f230
     T* m_data;
     int m_iElementCount;
     int m_iCapacityState;
-};
-
-class hkObjXd1f230
-{
-  public:
-    int unk000;
-    int unk004;
-    int unk008;
-    int unk00C;
-    int unk010;
-    int unk014;
-    int unk018;
-    int unk01C;
-    int unk020;
-    int unk024;
-    int unk028;
-    int unk02C;
-    int unk030;
-    int unk034;
-    int unk038;
-    int unk03C;
-    int unk040;
-    int unk044;
-    int unk048;
-    int unk04C;
-    int unk050;
-    int unk054;
-    int unk058;
-    int unk05C;
-    int unk060;
-    int unk064;
-    int unk068;
-    int unk06C;
-    int unk070;
-    int unk074;
-    int unk078;
-    int unk07C;
-    int unk080;
-    int unk084;
-    int unk088;
-    int unk08C;
-    int unk090;
-    int unk094;
-    int unk098;
-    int unk09C;
-    int unk0A0;
-    int unk0A4;
-    int unk0A8;
-    int unk0AC;
-    int unk0B0;
-    int unk0B4;
-    int unk0B8;
-    int unk0BC;
-    int unk0C0;
-    int unk0C4;
-    int unk0C8;
-    int unk0CC;
-    int unk0D0;
-    int unk0D4;
-    int unk0D8;
-    int unk0DC;
-    int unk0E0;
-    int unk0E4;
-    int unk0E8;
-    int unk0EC;
-    int unk0F0;
-    int unk0F4;
-    int unk0F8;
-    int unk0FC;
-    int unk100;
-    int unk104;
-    int unk108;
-    int unk10C;
-    int unk110;
-    int unk114;
-    int unk118;
-    int unk11C;
-    int unk120;
-    int unk124;
-    int unk128;
-    int unk12C;
-    int unk130;
-    int unk134;
-    int unk138;
-    int unk13C;
-    int unk140;
-    int unk144;
-    int unk148;
-    int unk14C;
-    int unk150;
-    int unk154;
-    int unk158;
-    int unk15C;
-    hkArrayXd1f230<void*> m_items;
-
-    hkBoolXd1f230 Contains(void* pv) const;
 };
 
 struct hkBoolD1F5
@@ -252,8 +132,6 @@ void hkpSimpleShapePhantomD1F5::FUN_00d1f5a0(hkpCollidableD1F5* pkCollidable) th
 
 
 class hkClassD1F6;
-
-extern const hkClassD1F6 DAT_0126902c;
 
 int __cdecl FUN_00d06f80(const void* pvChunk, int iNumBytes) throw();
 
@@ -410,21 +288,9 @@ struct CollisionMemoryRouter
     int unk00, unk04, unk08, unk0c;
     void* allocator;
 };
-extern "C" int __stdcall FUN_00ca94c0(void* object);
 extern "C" CollisionMemoryRouter* __cdecl FUN_00c85750();
-void __cdecl ResizeAudioStream(void* allocator, void* array, int elementSize);
-
-struct FUN_00d1f690_Member : hkpSimpleShapePhantom
-{
-    void AddCollisionDetail(void* object);
-};
 
 namespace fnv_00d1f6f0 {
-struct hkLessD1F6
-{
-};
-
-void __cdecl QuickSortShapeDetails(void** pArr, int iStart, int iEnd, hkLessD1F6 kCmp);
 
 struct hkObjD1F6
 {
@@ -1387,40 +1253,6 @@ struct FUN_00d1f520_Input
 {
     FUN_00d1f520_Dispatcher* m_pCollisionDispatcher;
 };
-struct FUN_00d1f520_World
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5C;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6C;
-    int unk70;
-    int unk74;
-    FUN_00d1f520_Input* m_pCollisionInput;
-};
 struct FUN_00d1f520_Phantom : public hkpSimpleShapePhantom
 {
     void QueryPenetrations(FUN_00d1f520_Collector& collector, const FUN_00d1f520_Input* input);
@@ -1461,11 +1293,6 @@ void FUN_00d1f520_Phantom::QueryPenetrations(FUN_00d1f520_Collector& collector, 
 
 
 #include <xmmintrin.h>
-struct FUN_00d1f450_Obj
-{
-    void FUN_00d1f270(int* a, int b, int c, int d);
-    void FUN_00d1f450(int* source, int a, int b, int c);
-};
 
 namespace fnv_00d1f960 {
 // @fnv 0x00d1f960
@@ -1490,9 +1317,4 @@ struct Router
     }
 };
 Router* FUN_00c85750();
-struct C : hkpSimpleShapePhantom
-{
-    void FUN_00d1f960();
-    void FUN_00c9e820();
-};
 }  // namespace fnv_00d1f960

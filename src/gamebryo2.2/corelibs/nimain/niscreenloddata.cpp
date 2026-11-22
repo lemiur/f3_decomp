@@ -27,11 +27,6 @@ void NiScreenLODData::UpdateScreenBound(NiBound& bound)
     bound.TransformPoint(inverse);
 }
 
-struct FUN_00a95cb0_shell : public NiScreenLODData
-{
-    void* FUN_00a95cb0();
-};
-
 extern "C" void* g_011f5ee8;
 
 struct FUN_00a95c80_shell : public NiScreenLODData

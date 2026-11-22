@@ -795,12 +795,6 @@ union __declspec(intrin_type) __declspec(align(16)) __m128
 {
     float m128_f32[4];
 };
-struct FUN_00d50570_class
-{
-    char pad[0x28];
-    __m128* m_items;
-    void CopyItems(int start, int count, const __m128* src);
-};
 
 struct SolverItem
 {
@@ -856,28 +850,6 @@ struct FUN_00d51620_Router
 
 FUN_00d51620_Router* FUN_00c85750();
 
-struct FUN_00d51620_class
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    void* m_a10;
-    int m_a14;
-    int m_a18;
-    void* m_1c;
-    int m_20;
-    int m_24;
-    void* m_28;
-    int m_2c;
-    int m_30;
-    void* m_34;
-    int m_38;
-    int m_3c;
-
-    void FreeArrays();
-};
-
 namespace fnv_00d516f0 {
 struct FnvCpu_FUN_00d516f0_CpuAllocator
 {
@@ -894,13 +866,6 @@ struct FnvCpu_FUN_00d516f0_CpuAllocatorHolder
     FnvCpu_FUN_00d516f0_CpuAllocator* allocator;
 };
 FnvCpu_FUN_00d516f0_CpuAllocatorHolder* __cdecl FUN_00c85750();
-struct FnvCpu_FUN_00d516f0_CpuObject
-{
-    unsigned int unk00;
-    unsigned short size;
-    void FUN_00d50c50();
-    FnvCpu_FUN_00d516f0_CpuObject* FUN_00d516f0(unsigned int flags);
-};
 }  // namespace fnv_00d516f0
 
 union FUN_00d503c0_vec
@@ -926,7 +891,6 @@ struct FUN_00d503c0_src
     int unkA0, unkA4, unkA8, unkAc, unkB0, unkB4, unkB8;
 };
 
-extern "C" __m128 __cdecl _mm_setzero_ps(void);
 void __cdecl FUN_00dcf280(FUN_00d503c0_m* m, void* obj, void* out);
 
 // Copies two vectors from src, sets a third to each unit axis in turn calling FUN_00dcf280 each time, then adds 3 to src->unkB8.
@@ -1242,17 +1206,6 @@ struct hkRotationq
     }
 };
 
-struct AngularFrames
-{
-    hkVector4q m_v00;
-    hkVector4q m_v10;
-    hkVector4q m_v20;
-    hkVector4q m_v30;
-    hkVector4q m_v40;
-    hkRotationq m_rotA;
-    hkRotationq m_rotB;
-};
-
 extern int DAT_011b5a90[];
 extern int DAT_011b5a94[];
 
@@ -1260,49 +1213,12 @@ float __cdecl Atan2(float y, float x);
 
 extern "C" __m128 _mm_sub_ps(__m128 a, __m128 b);
 
-struct S00d505c0_Blk
-{
-    __m128 diff;
-    __m128 v;
-    float fb;
-    int idx;
-};
-
-void __cdecl FUN_00dcf100(S00d505c0_Blk* in, int* cfg, int index);
-
 namespace fnv_00d50d60 {
 extern "C" __m128 __cdecl _mm_load_ps(const float*);
 extern "C" void __cdecl _mm_store_ps(float*, __m128);
-extern "C" __m128 __cdecl _mm_xor_ps(__m128, __m128);
-
-union D50D60_Vec
-{
-    __m128 v;
-};
-
-struct D50D60_Stream
-{
-    D50D60_Vec vecs[11];  // vector data the code indexes
-    int unkB0;
-    int unkB4;
-    int numDecoded;  // +0xB8
-};
-
-struct D50D60_OF
-{
-    float x, y, z, w;
-};
-
-struct D50D60_Out
-{
-    D50D60_OF a;
-    D50D60_OF b;
-    D50D60_OF c;
-};
 
 extern unsigned int DAT_011b5a90;
 extern unsigned int DAT_011b5a94;
-extern unsigned int DAT_010c44d0;
 
 void __cdecl FUN_00dcee80(void* pair, int a2, int a3);
 
@@ -1322,26 +1238,11 @@ extern "C"
     __m128 _mm_rsqrt_ss(__m128);
     __m128 _mm_cmpeq_ss(__m128, __m128);
     __m128 _mm_andnot_ps(__m128, __m128);
-    __m128 _mm_set_ss(float);
 }
 
 struct __declspec(align(16)) hkVec4A
 {
     float x, y, z, w;
-};
-
-struct hkSchemeVecs
-{
-    hkVector4 m_v0;
-    hkVector4 m_v1;
-    hkVector4 m_v2;
-    hkVector4 m_v3;
-    hkVector4 m_v4;
-    hkVec4A m_colsA[3];
-    hkVec4A m_colsB[3];
-    int unkb0;
-    int unkb4;
-    int m_uiItemCount;
 };
 
 struct hkAngInfo
@@ -1354,17 +1255,6 @@ struct hkAngInfo
 };
 
 extern "C" void FUN_00d6cb30(hkAngInfo* info, int p1, int p2);
-
-struct S00d51100_Blk
-{
-    __m128 a;
-    __m128 b;
-    __m128 v;
-    float f0;
-    float f1;
-};
-
-void __cdecl FUN_00dcfa30(S00d51100_Blk* in, int* cfg, int index);
 
 // @f3 0x009de6a0 (community match, verified in this file)
 struct Vector457 {
@@ -1392,24 +1282,13 @@ void __stdcall FUN_00d51100(int** commands, int* unusedData, void* unusedScheme,
 
 
 namespace fnv_00d51170 {
-extern float DAT_01016248;
 
-struct AnglePool
-{
-    __m128 vectors[11];
-    int unkB0, unkB4, unkB8;
-};
 extern "C" __m128 __cdecl _mm_mul_ps(__m128, __m128);
 extern "C" __m128 __cdecl _mm_add_ss(__m128, __m128);
 extern "C" __m128 __cdecl _mm_shuffle_ps(__m128, __m128, int);
 extern "C" void __cdecl _mm_store_ss(float*, __m128);
 extern int DAT_011b5a90[];
 extern float Atan2(float, float);
-extern float dotAngle(__m128, __m128);
-struct AngleRecord
-{
-    float x, y, angle, w;
-};
 
 }  // namespace fnv_00d51170
 
@@ -1492,10 +1371,7 @@ struct SixIntegerData
     int unk14;
 };
 
-void __cdecl ComputeJacobian(const hkVector4* axis, const hkVector4* posB, SixteenWordFloatRecord* in,
-                             void* currentSchema, SolverElementTemp* input);
 void __cdecl FUN_00dcfff0(const hkpConstraintMotor* motor, const SolverElementTemp* input, SixIntegerData* output);
-void __cdecl FUN_00dd03c0(SixIntegerData* output, SixteenWordFloatRecord* in, void* currentSchema, void** schemaPtr);
 
 // Advances the command and data pointers, computes a dot product for a motor constraint, and updates the solver state if a motor is present.
 // @f3 0x009dee30 (community match, verified in this file)
@@ -1543,10 +1419,6 @@ void __stdcall FUN_00d51270(const int** commands, const hkVector4** data, hkpGen
     runtime->m_solverResultIndex += 1;
 }
 
-
-extern "C" __m128 _mm_setr_ps(float, float, float, float);
-extern "C" __m128 _mm_load_ss(float const*);
-extern "C" __m128 _mm_unpacklo_ps(__m128, __m128);
 
 struct Motor;
 
@@ -1645,12 +1517,8 @@ struct __declspec(align(16)) MotorStuff
 };
 
 extern int DAT_011b5a90[];
-extern double DAT_0101ff58;
 
-extern "C" void _ReadWriteBarrier(void);
-extern "C" void __cdecl FUN_00d6cd70(Vec* axis, QueryIn* in, void* schema, MotorStuff* packet);
 void __cdecl FUN_00dcfff0(Motor* motor, MotorStuff* input, float* output);
-extern "C" void __cdecl FUN_00d6ce70(float* negAndOut, QueryIn* in, void* schema, void** out);
 
 static __forceinline __m128 dot3(__m128 p, __m128 q)
 {
@@ -1659,24 +1527,6 @@ static __forceinline __m128 dot3(__m128 p, __m128 q)
     return _mm_add_ss(_mm_shuffle_ps(m, m, 0xAA), s);
 }
 
-struct StepScratch
-{
-    float z;
-    float y;
-    union
-    {
-        int axis;
-        float d2;
-        float ang;
-    };
-    Motor* motor;
-    float d1;
-    union
-    {
-        Pair* sr;
-        float sum;
-    };
-};
 // Computes and unwraps an angle from runtime vectors, stores it back, and if a motor exists calls FUN_00dcfff0 and FUN_00d6ce70; then increments m_iFirstInteger.
 // @f3 0x009df0b0 (community match, verified in this file)
 struct F3MotorResults9df0b0 { float a; float b; };
@@ -1713,7 +1563,6 @@ extern int DAT_01062d90[];
 extern int DAT_01062d94[];
 extern double FUN_00dc0770;
 extern double FUN_00dc0778;
-extern double FUN_00db38a8;
 extern double FUN_00dc0760;
 float __cdecl FUN_00954db0(float y, float x);
 static inline void QSetVec(Vec* v, float x, float y, float z, float w) { v->x = x; v->y = y; v->z = z; v->w = w; }

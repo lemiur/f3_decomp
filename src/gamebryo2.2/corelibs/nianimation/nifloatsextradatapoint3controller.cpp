@@ -83,9 +83,6 @@ void NiFloatsExtraDataPoint3Controller::FUN_00a4ee90(NiStream& stream)
 }  // namespace fnv_00a4ee90
 
 struct NiRTTI;
-struct NiObject {
-    NiObject* DynamicCast(const NiRTTI*);
-};
 struct GlobalObjectO2_00a7b610;
 extern GlobalObjectO2_00a7b610 g_011f3f70;
 struct ExtraStub {
@@ -94,39 +91,11 @@ struct ExtraStub {
 struct Vec12 {
     float x, y, z;
 };
-struct Holder00 {
-    void FUN_00a494b0(Vec12);
-};
-struct FUN_00a4ed50_shell : NiFloatsExtraDataPoint3Controller {
-    void SetInterpolatorPoint3(NiObject* pkInterp, unsigned short usIndex);
-};
-
-struct StrArr {
-    void* m_data;
-    void* m_reserved;
-    unsigned short m_pRayCursor;
-    unsigned short m_iElementCount;
-    unsigned short m_ucUnknownByte;
-    unsigned short m_growth;
-    void SetSize(unsigned int size);
-    void SetAt(unsigned int index, char*& value);
-};
-
-struct Base57420 {
-    unsigned char pad[0x3d];
-    void FUN_00a57420(StrArr* strings);
-};
 
 extern void* g_011f3fc4;
 
 char* __cdecl _FUN_00a7d330(void* value);
 char* __cdecl FUN_00a7d4d0(char const* name, int value);
-
-struct FUN_00a4eed0_shell : Base57420 {
-    int m_iFloatsExtraDataIndex;
-
-    void FUN_00a4eed0(StrArr* strings);
-};
 
 int* __fastcall InitTimeController(int*);
 extern int DAT_0109917c;
@@ -247,7 +216,6 @@ public:
     virtual void v34();
     virtual bool AlwaysUpdate();
 };
-struct FUN_00a36250_t { bool FUN_00a36250(float); };
 
 class Ctlr4edd {
 public:
@@ -304,9 +272,6 @@ struct IDirect3DVertexBuffer9 {
 };
 
 extern unsigned int DAT_011bf558;
-extern const float DAT_010718c0;
-extern const double DAT_0101e568;
-extern const char DAT_010efe14[];
 
 struct RenderBuffer {
     unsigned unk00, unk04, unk08, unk0c;

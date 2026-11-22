@@ -4,12 +4,6 @@
 
 #include "havok/hkpStiffSpringChainData.h"
 
-struct hkStiffSpringChainData
-{
-    unsigned int m_uiCurrentValue;
-    void FUN_00e3af80(bool bFlag, unsigned int* pOut);
-};
-
 // @fnv 0x00e3af30
 int __cdecl FUN_00e3af30()
 {
@@ -92,7 +86,6 @@ union __declspec(intrin_type) __declspec(align(16)) __m128
 };
 extern "C"
 {
-    __m128 _mm_shuffle_ps(__m128, __m128, unsigned int);
     __m128 _mm_mul_ps(__m128, __m128);
     __m128 _mm_sub_ps(__m128, __m128);
     __m128 _mm_andnot_ps(__m128, __m128);
@@ -101,134 +94,7 @@ extern "C"
     __m128 _mm_mul_ss(__m128, __m128);
     __m128 _mm_rsqrt_ss(__m128);
     __m128 _mm_cmpeq_ss(__m128, __m128);
-    __m128 _mm_set_ss(float);
-    void _mm_store_ss(float*, __m128);
 }
-union hkVector4q
-{
-    __m128 m_vComponents;
-    hkVector4 m_vec;
-};
-extern "C" const __m128 DAT_01268370;
-struct QuantizedBoundsData;
-struct SolverSchemaHeader;
-struct hkpEntityS
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5c;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6c;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7c;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8c;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9c;
-    int unka0;
-    hkUint32 m_uiFilterInfo;
-    int unka8;
-    int unkac;
-    int unkb0;
-    int unkb4;
-    int unkb8;
-    int unkbc;
-    int unkc0;
-    int unkc4;
-    int unkc8;
-    int unkcc;
-    int unkd0;
-    int unkd4;
-    int unkd8;
-    int unkdc;
-    int unke0;
-    int unke4;
-    int unke8;
-    int unkec;
-    hkTransform m_kMotionTransform;
-};
-struct hkpConstraintChainInstanceS
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    hkpEntityS* m_pEntityA;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    hkArray<hkpEntityS*> m_ppRigidBodies;
-};
-struct SixteenWordFloatRecord
-{
-    int m_unk00;
-    int m_unk04;
-    int m_fQueryInputValue;
-    int m_unk0c;
-    int m_unk10;
-    int m_unk14;
-    int m_unk18;
-    int m_unk1c;
-    int m_iBeforeFourthQueryValue;
-    hkReal m_fFourthQueryValue;
-    int m_unk28;
-    int m_unk2c;
-    const QuantizedBoundsData* m_pBodyA;
-    const QuantizedBoundsData* m_pBodyB;
-    const hkTransform* m_kBodyALocalFrame;
-    const hkTransform* m_kBodyBLocalFrame;
-    int m_unk40;
-    int m_unk44;
-    int m_unk48;
-    int m_unk4c;
-    int m_unk50;
-    int m_unk54;
-    int m_unk58;
-    int m_unk5c;
-    hkpConstraintChainInstanceS* m_pConstraintChainInstance;
-    void* m_pByteBuffer;
-    int m_unk68;
-    int m_unk6c;
-    int m_unk70;
-    int m_unk74;
-    int m_unk78;
-    int m_unk7c;
-};
 template <class T> struct OutputSlot31
 {
     T* ptr;
@@ -253,16 +119,6 @@ template <class T> struct OutputSlot31
         return ptr;
     }
 };
-struct QueryResultSchema
-{
-    OutputSlot31<SolverSchemaHeader> m_pQueryResultSchema;
-};
-struct hk1dLinearBilateralConstraintInfo
-{
-    hkVector4q m_kPivotA;
-    hkVector4q m_kPivotB;
-    hkVector4q m_kConstraintAxis;
-};
 class hkpStiffSpringChainDataConstraintInfo
 {
   public:
@@ -272,10 +128,6 @@ class hkpStiffSpringChainDataConstraintInfo
     int unk24;
     int unk28;
     int unk2c;
-};
-struct hkVector4T : public hkVector4
-{
-    void SetTransformedPoint(const hkTransform& t, const hkVector4& v) throw();
 };
 struct hkMemoryAllocator
 {
@@ -294,14 +146,6 @@ struct hkMemoryRouterS
     hkMemoryAllocator* m_pStreamAllocator;
 };
 void __cdecl ResizeAudioStream(hkMemoryAllocator* alloc, void* array, int sizeElem) throw();
-extern "C" void __cdecl AppendEventRecord(const SixteenWordFloatRecord& in, QueryResultSchema& out, void* solverResults,
-                                     int solverResultStriding) throw();
-SolverSchemaHeader* __cdecl FUN_00dd13b0(SolverSchemaHeader* schema) throw();
-void __cdecl FUN_00dcee70(SixteenWordFloatRecord* in) throw();
-void __cdecl FUN_00dcf720(const hk1dLinearBilateralConstraintInfo& info, const SixteenWordFloatRecord& in,
-                          SolverSchemaHeader* schema, hkReal rhs) throw();
-void __cdecl FUN_00dd1180(int numConstraints, hkReal tau, hkReal damping, hkReal cfm, int* offsets, hkUint32 base,
-                          SolverSchemaHeader* schema, const SixteenWordFloatRecord& in, QueryResultSchema& out) throw();
 __forceinline void* __cdecl operator new(unsigned int, void* p) throw()
 {
     return p;
@@ -341,9 +185,4 @@ struct hkInplaceIntArray32
         new (&m_data[m_iElementCount]) int(v);
         m_iElementCount++;
     }
-};
-struct hkpStiffSpringChainDataEx : public hkpStiffSpringChainData
-{
-// @fnv 0x00e3b0f0
-    void FUN_00e3b0f0(const SixteenWordFloatRecord& inNonConst, QueryResultSchema& out) volatile;
 };

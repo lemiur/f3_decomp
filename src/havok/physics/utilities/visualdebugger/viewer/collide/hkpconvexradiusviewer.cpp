@@ -2,11 +2,6 @@
 // src/havok/physics/utilities/visualdebugger/viewer/collide/hkpconvexradiusviewer.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/physics/utilities/visualdebugger/viewer/collide/hkpconvexradiusviewer.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-void* __cdecl FUN_00d68e00();
-struct FUN_00dd9380_class
-{
-    void* __thiscall FUN_00dd9380(const char* name, void* func);
-};
 void* DAT_01269cd0;
 void* DAT_01269010;
 
@@ -165,23 +160,6 @@ struct Holder
     int unk0C;
     Heap* unk10;
 };
-struct Destructor
-{
-    void FUN_00d690d0();
-};
-struct FUN_00d691d0_Class
-{
-    int unk00;
-    unsigned short allocationSize;
-    unsigned short unk06;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    FUN_00d691d0_Class* Destroy(unsigned int flags);
-};
 extern Holder* FUN_00c85750();
 
 extern void* DAT_01269010;
@@ -235,11 +213,6 @@ struct FUN_00d68aa0_mgr
     virtual void v03();
     virtual void v04();
     virtual void v05(void* a, void* b, int c);
-};
-
-struct FUN_00d68aa0_owner
-{
-    int FindKeyIndex(void* key);
 };
 
 extern void* DAT_01269010;
@@ -300,14 +273,6 @@ struct S_Heap
     virtual void v2();
     virtual void v3();
     virtual void ReturnMemory(void* p, int n) throw();
-};
-struct S_Holder
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    S_Heap* m10;
 };
 struct S_B0
 {
@@ -695,11 +660,6 @@ struct Listener_d65f
     virtual void l00();
 };
 
-struct Watch_d65f
-{
-    int unk00;
-};
-
 struct Phantom_d65f : Base_d65f, Listener_d65f, Watch2_d65f
 {
     hkArray_d65f<Node_d65f*> m_kNodeCollection;
@@ -723,8 +683,6 @@ extern "C" unsigned __int64 __rdtsc(void);
 #include <windows.h>
 extern DWORD DAT_0126835c;
 extern void* DAT_01269010;
-extern char DAT_010d2080[];
-extern char DAT_010c41f8[];
 
 struct D68970_ProfileRecord
 {
@@ -938,69 +896,6 @@ void D68970_Listener::FUN_00d68970(D68970_Owner* owner)
 }
 
 
-struct D69190Primary
-{
-    virtual void vfunc00();
-    virtual void FUN_00d69190();
-
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-};
-
-struct D69190Secondary
-{
-    virtual void FUN_00d69190();
-};
-
-struct D69190Object : D69190Primary, D69190Secondary
-{
-    D69190Object();
-
-// @fnv 0x00d69190
-    virtual void FUN_00d69190();
-};
-
-// FUN_00d691a0 : MSVC this-adjusting thunk.
-//
-// The original is 8 bytes:  sub ecx, 0x08 ; jmp 0x00d691d0
-// That is the adjustor thunk MSVC emits for a virtual function that a
-// derived class overrides for a SECONDARY base: calling through the
-// secondary base's vftable passes the base subobject's 	his, so the
-// thunk walks it back to the derived object and tail-jumps to the shared
-// override.
-//
-// Two bases declare the same virtual, so the derived class overrides one
-// function for both of them -> one adjustor per secondary base.  The first
-// base is padded to 8 bytes so the second base lands at +0x08.
-// The override is DECLARED ONLY, so the thunk is the single defined
-// function symbol carrying the name FUN_00d691a0, and a defined key function in the
-// derived class makes the vftable that references the thunk be emitted here.
-struct AdjBase1
-{
-    AdjBase1();
-    virtual void FUN_00d691a0();
-    char pad[0x04];
-};
-
-struct AdjBase2
-{
-    AdjBase2();
-// @fnv 0x00d691a0
-    virtual void FUN_00d691a0();
-};
-
-struct AdjOwner : AdjBase1, AdjBase2
-{
-    AdjOwner();
-    virtual void key_fn();  // key function - defined, so the vftable is emitted
-    void FUN_00d691a0();    // the shared override - declared only
-};
-
 // sub ecx,0x28; jmp target: MSVC adjustor thunk. PrimaryBase is 0x28 bytes (vptr + 9 ints),
 // so the second base sits at +0x28 and the thunk subtracts 0x28 from this.
 struct PrimaryBase
@@ -1032,149 +927,7 @@ struct SpawnedObject : PrimaryBase, SecondaryBase
 SpawnedObject::SpawnedObject()
 {}
 
-struct D691C0Primary
-{
-    virtual void vfunc00();
-    virtual void FUN_00d691c0();
-
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-};
-
-struct D691C0Secondary
-{
-    virtual void FUN_00d691c0();
-};
-
-struct D691C0Object : D691C0Primary, D691C0Secondary
-{
-    D691C0Object();
-
-// @fnv 0x00d691c0
-    virtual void FUN_00d691c0();
-};
-
 namespace fnv_00d68c00 {
-struct S_00d68c00_Arg
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5c;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6c;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7c;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8c;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9c;
-    int unka0;
-    int unka4;
-    int unka8;
-    int unkac;
-    int unkb0;
-    int unkb4;
-    int unkb8;
-    int unkbc;
-    int unkc0;
-    int unkc4;
-    int unkc8;
-    int unkcc;
-    int unkd0;
-    int unkd4;
-    int unkd8;
-    int unkdc;
-    int unke0;
-    int unke4;
-    unsigned char unke8;
-    unsigned char unke9;
-    unsigned char unkea;
-    unsigned char unkeb;
-    int unkec;
-    int unkf0;
-};
-
-struct S_00d68c00_Elem
-{
-    virtual void* v0(unsigned int flags) throw();
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-};
-
-struct S_00d68c00_Arr
-{
-    S_00d68c00_Elem** data;
-    int size;
-    int cap;
-};
-
-struct S_00d68c00_List
-{
-    char** data;
-    int size;
-    int cap;
-};
-
-struct S_00d68c00_Item
-{
-    int unk00;
-    S_00d68c00_List list;
-};
 
 struct S_00d68c00_Heap
 {
@@ -1201,80 +954,6 @@ struct S_00d68c00_Router
 S_00d68c00_Router* __cdecl FUN_00c85750() throw();
 void __cdecl ResizeAudioStream(S_00d68c00_Heap* heap, void* arr, int elemSize) throw();
 
-struct S_00d68c00_Obj
-{
-    virtual void v0() throw();
-    virtual void v1(S_00d68c00_Arr* arr, void* p, char* name, void* dat, int zero) throw();
-    virtual void v2() throw();
-    virtual void v3(int a, char* name, void* dat) throw();
-};
-
-struct S_00d68c00_Log
-{
-    virtual void v0() throw();
-    virtual void v1() throw();
-    virtual void v2() throw();
-    virtual void v3(int a, int b, char* msg, const char* file, int line) throw();
-};
-extern S_00d68c00_Log* DAT_01268360;
-
-struct S_00d68c00_Real
-{
-    float v;
-    void FUN_00de3050() throw();
-};
-
-struct S_00d68c00_Query
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    void FUN_00de3060(S_00d68c00_Real* r) throw();
-    void FUN_00de4420(int a, S_00d68c00_Arr* arr) throw();
-};
-
-struct S_00d68c00_Str
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    void FUN_00cb1600(char* buf, int size) throw();
-    void FUN_00cc01c0(const char* s) throw();
-    void FUN_00cc00e0() throw();
-};
-
-struct S_00d68c00_Main
-{
-    virtual void m0() throw();
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    S_00d68c00_Obj* unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int FindKeyIndex(int key) throw();
-};
-
-struct S_00d68c00_Listener
-{
-    virtual void FUN_00d68c00(S_00d68c00_Arg* a2) throw();
-    int unk04;
-    S_00d68c00_Item** unk08;
-    int unk0c;
-    int unk10;
-    void* unk14;
-    void* unk18;
-};
-
-struct S_00d68c00_Sub : S_00d68c00_Main, S_00d68c00_Listener
-{
-    virtual void FUN_00d68c00(S_00d68c00_Arg* a2) throw();
-};
-
 }  // namespace fnv_00d68c00
 
 namespace fnv_00d68e00 {
@@ -1296,13 +975,6 @@ struct hkThreadMemory
 };
 
 extern "C" hkThreadMemory* __cdecl FUN_00c85750();
-
-struct TargetAgent
-{
-    char pad[4];
-    short m_usMemSizeAndFlags;
-    TargetAgent* FUN_00d68b90(void* arg1);
-};
 
 }  // namespace fnv_00d68e00
 

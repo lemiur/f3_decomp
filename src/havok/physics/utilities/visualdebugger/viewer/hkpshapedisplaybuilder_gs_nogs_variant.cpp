@@ -57,7 +57,6 @@ struct S_00ddfcd0_Obj : S_00ddfcd0_RefObj
     {}
     virtual ~S_00ddfcd0_Obj() throw();
 };
-S_00ddfcd0_RefObj* FUN_00ddfcd0();
 
 #include <xmmintrin.h>
 struct __declspec(align(16)) Mat4

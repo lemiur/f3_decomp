@@ -12,7 +12,6 @@ NiScreenPolygon::NiScreenPolygon(const NiScreenPolygon& other)
 }
 
 struct GlobalObjectO2_00a7b610;
-extern GlobalObjectO2_00a7b610 g_011f5e5c;
 
 struct BSFadeNode
 {
@@ -35,7 +34,6 @@ void* __cdecl FUN_00a8ff80()
 }
 
 struct GlobalObjectO2_00a7b610;
-extern GlobalObjectO2_00a7b610 g_011f5e64;
 
 namespace fnv_00a8ffc0 {
 struct _Call_a5d3a0
@@ -102,7 +100,6 @@ void* __cdecl FUN_00a90ab0()
 struct GlobalObjectO2_00a7b610
 {
 };
-extern GlobalObjectO2_00a7b610 g_011f5e6c;
 
 struct ImageSpaceTexture
 {
@@ -283,29 +280,13 @@ struct StrArr
         return m_usGrow;
     }
 };
-struct Caller74690
-{
-    void __thiscall FUN_00a74690(StrArr*);
-};
 char* __cdecl _FUN_00a7d330(const char*);
-struct Outer913a0 : Caller74690
-{
-    void __thiscall AppendGlobalString(StrArr*);
-};
 
 namespace fnv_00a91890 {
 struct StrArr
 {
     void SetSize(unsigned int);
     void SetAt(unsigned int, char*&);
-};
-struct BaseCam
-{
-    void __thiscall FUN_00a71920(StrArr*);
-};
-struct Cam : BaseCam
-{
-    void __thiscall FUN_00a91890(StrArr*);
 };
 char* __cdecl _FUN_00a7d330(const char*);
 }  // namespace fnv_00a91890
@@ -1488,9 +1469,6 @@ struct Vec16
     int unk0c;
     ~Vec16();
 };
-
-void __stdcall FUN_00ec5fce(void* p, unsigned int size, unsigned int count, void (*ctor)());
-void FUN_00ba3a00();
 
 struct NodeBase
 {

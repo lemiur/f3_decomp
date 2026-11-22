@@ -297,19 +297,6 @@ struct BB97550AllocTagScope
     }
 };
 
-class BB97550Pass;
-
-class BB97550Shader
-{
-  public:
-    void RenderWithTextures(BB97550Pass* pkPass, int iA, int iB, int iC, int iD, int iE);
-    void FUN_00b97550(unsigned int uiPass, int iA, int iB, int iC, int iD, int iE);
-
-    int unk00;
-    int unk04;
-    BB97550Pass** m_ppkPasses;
-};
-
 struct S_00ba8c50_Slot
 {
     ShadowSceneLight* light;
@@ -349,8 +336,6 @@ void __cdecl BSShaderProperty::ShaderPassEntry::FUN_00ba8c50(unsigned char numLi
         }
     }
 }
-
-extern int DAT_010b8488;
 
 struct FUN_00ba8e50_base
 {
@@ -598,81 +583,6 @@ struct ShaderFlagList
     unsigned int unknown0c;
     unsigned int count;
 };
-extern void __stdcall WriteToArray(SettingArray* target);
-extern int __cdecl FUN_00a7d330(const char* text);
-extern int __cdecl FUN_00a7d370(const char* text, int flag);
-extern int __cdecl FUN_00a7d550(const char* text, float value);
-extern int __cdecl FUN_00a7d4d0(const char* text, int value);
-extern unsigned int __cdecl FUN_00a7d510(const char* text, unsigned int value);
-extern int __cdecl FUN_00a7d5e0(const char* text, const char* value);
-extern const char* __cdecl FUN_00b4f9d0(unsigned int value);
-extern const char* DAT_01200464;
-extern const char UNK_010b8950[];
-extern const char UNK_010b8948[];
-extern const char UNK_010b893c[];
-extern const char UNK_010b892c[];
-extern const char UNK_010b8920[];
-extern const char UNK_010b8914[];
-extern const char UNK_010b890c[];
-extern const char UNK_010b88f8[];
-extern const char UNK_010b88e8[];
-extern const char UNK_010b88dc[];
-extern const char UNK_010b88d4[];
-extern const char UNK_010b88c8[];
-extern const char UNK_010b88b4[];
-extern const char UNK_010b889c[];
-extern const char UNK_010b8890[];
-extern const char UNK_010b8884[];
-extern const char UNK_010b8874[];
-extern const char UNK_010b885c[];
-extern const char UNK_010b8854[];
-extern const char UNK_010b8844[];
-extern const char UNK_010b882c[];
-extern const char UNK_010b8810[];
-extern const char UNK_010b8800[];
-extern const char UNK_010b87f0[];
-extern const char UNK_010b87dc[];
-extern const char UNK_010b87c8[];
-extern const char UNK_010b87c0[];
-extern const char UNK_010b87b0[];
-extern const char UNK_010b879c[];
-extern const char UNK_010b8788[];
-extern const char UNK_010b877c[];
-extern const char UNK_010b876c[];
-extern const char UNK_010b875c[];
-extern const char UNK_010b874c[];
-extern const char UNK_010b873c[];
-extern const char UNK_010b8734[];
-extern const char UNK_010b8724[];
-extern const char UNK_010b8714[];
-extern const char UNK_010b8708[];
-extern const char UNK_010b86ec[];
-extern const char UNK_010b86e0[];
-extern const char UNK_010b86d4[];
-extern const char UNK_010b86c4[];
-extern const char UNK_010b86b4[];
-extern const char UNK_010b86a8[];
-extern const char UNK_010b869c[];
-extern const char UNK_010b8688[];
-extern const char UNK_010b8674[];
-extern const char UNK_010b8668[];
-extern const char UNK_010b8658[];
-extern const char UNK_010b8644[];
-extern const char UNK_010b8634[];
-extern const char UNK_010b8620[];
-extern const char UNK_010b8614[];
-extern const char UNK_010b85f4[];
-extern const char UNK_010b85e4[];
-extern const char UNK_010b85dc[];
-extern const char UNK_010b85d0[];
-extern const char UNK_010b85c4[];
-extern const char UNK_010b85b4[];
-extern const char UNK_010b85a4[];
-extern const char UNK_010b858c[];
-extern const char UNK_010b855c[];
-extern const char UNK_010b8554[];
-extern const char UNK_010b854c[];
-extern const char UNK_010b8570[];
 struct ShaderPropertyRecord
 {
     int unknown00, unknown04, unknown08, unknown0c;

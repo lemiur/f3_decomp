@@ -7,11 +7,3 @@ struct Helper62d0
     void* p;
     Helper62d0& operator=(void const*);
 };
-struct Struct6c89e0
-{
-    Helper62d0 f0;
-    int f4;
-    int f8;
-    NavMeshPtr fC;
-    Struct6c89e0& AssignFrom(Struct6c89e0 const*);
-};

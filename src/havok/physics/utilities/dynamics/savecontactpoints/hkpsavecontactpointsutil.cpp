@@ -52,70 +52,6 @@ int __cdecl FUN_00dcd4d0(void* p)
 }
 
 
-struct D10710Object
-{
-    void Search(void* a, void* b, void* c, int flag);
-    void CallWithFlag(void* a, void* b, void* c);
-};
-
-struct Entry
-{
-    unsigned key;
-    unsigned value;
-    unsigned flags;
-    unsigned type;
-    unsigned state;
-    unsigned metadata;
-};
-struct Node
-{
-    virtual void slot0();
-    virtual void slot1();
-    virtual void slot2();
-    virtual void slot3();
-    virtual void slot4();
-    virtual void slot5();
-    virtual void slot6();
-    virtual void slot7();
-    virtual void slot8();
-    virtual int BaseIndex();
-    virtual void slot10();
-    virtual int Find(unsigned key);
-    unsigned flags, type, state, metadata, level;
-    Node* parent;
-    unsigned capacity, size, reserved;
-    Entry* entries;
-    int count;
-};
-struct Object
-{
-    virtual void slot0();
-    virtual void slot1();
-    virtual void slot2();
-    virtual void slot3();
-    virtual void SetContext(void*);
-};
-struct Item
-{
-    unsigned key;
-    Object* object;
-};
-struct FUN_00dcb550_class
-{
-    virtual void slot0();
-    virtual void slot1();
-    virtual void slot2();
-    virtual void slot3();
-    virtual void slot4();
-    virtual void* Context();
-    unsigned flags, count;
-    Item* items;
-    unsigned capacity, version;
-    Node* current;
-    int AddNodeEntry(Entry*);
-    int SetItemContextByKey(unsigned key);
-};
-
 struct DCD6A0Context;
 struct DCD6A0Item;
 typedef void(__cdecl* DCD6A0AgentFunc)();
@@ -1985,7 +1921,6 @@ void FUN_00dcdd80(void* a, S_00dcdd80_Item** items, int count, S_00dcdd80_Listen
 
 namespace fnv_00dcde10 {
 void* __cdecl FUN_00cb1260(void*, const void*, unsigned int);
-void* __cdecl FUN_00d32ac0(void*, void*);
 int __cdecl CopyAudioNodeTree(void*, void*, void*);
 int FUN_00dcd4d0(void* p)
 {
@@ -2186,23 +2121,6 @@ FUN_00dce840::FUN_00dce840(void* const* keys, int numKeys)
     }
 }
 }  // namespace fnv_00dce840
-
-struct AudioAllocator
-{
-    virtual void v00();
-    virtual void* v04(unsigned int auiSize);
-    virtual void v08();
-    virtual void v0C();
-};
-
-struct AudioHolder
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    AudioAllocator* m_pAllocator;
-};
 
 struct BSAudio;
 namespace fnvc_adapt {
@@ -2674,13 +2592,6 @@ class SubOfSel : public FUN_00cb1a90_out
     {
         FUN_00a29680();
     }
-};
-
-class FUN_00dce8f0 : public SubOfSel
-{
-  public:
-    virtual void VF();
-    FUN_00dce8f0(unsigned char flag) throw();
 };
 
 }  // namespace fnv_00dce8f0
@@ -3478,7 +3389,6 @@ struct Ctx
 };
 
 void* __cdecl FindEntryValue(unsigned int a, unsigned int b);
-void __cdecl SwapMeshRecords(unsigned int a, SpawnedItem* b);
 int __cdecl FUN_00dce180(Resolver* a1, SpawnedItem* item, unsigned int edi, unsigned int ebx, unsigned int ctx78,
                          void* p);
 
@@ -3579,12 +3489,6 @@ struct FUN_00e05d10_Base
         FUN_00e05d10_Base* b = static_cast<FUN_00e05d10_Base*>(p);
         FUN_00c85750()->heap().ReleaseBlock(p, b->m_usMemSizeAndFlags);
     }
-};
-
-struct FUN_00dce9e0 : FUN_00e05d10_Base
-{
-    FUN_00dce9e0(int);
-    virtual ~FUN_00dce9e0();
 };
 
 }  // namespace fnv_00dce9e0
@@ -4281,11 +4185,6 @@ struct VecU16
     int m_iCapacityState;
     VecU16() : m_data(0), m_iElementCount(0), m_iCapacityState(0x80000000)
     {}
-};
-struct ContactListDce
-{
-    ContactDce* current;
-    VecU16 ids;
 };
 struct OutputDce;
 struct InputDce
@@ -7417,44 +7316,13 @@ struct __declspec(align(16)) OutputDce
     OutputDce() : m_0004(0), m_3030(DAT_0104da48), m_3050(0.0f), m_3054(0.0f)
     {}
 };
-struct SmallDce
-{
-    void* m_00;
-    void* m_04;
-    int m_08;
-    int m_0c;
-    void* m_10;
-    void* m_14;
-    void* m_18;
-    unsigned char m_1c;
-    unsigned char m_1d;
-    unsigned char m_1e;
-    unsigned char u1f;
-    int m_20;
-    void* m_24;
-    void* m_28;
-    void* m_2c;
-    int m_30;
-};
-struct LocalStateDce
-{
-    CountInfoDce counts;
-    void* transform;
-};
 
 extern "C" int PickIslandByValue(void* p5, int a, int b);
 extern "C" int DispatchItemToAgent(int a, void* p4, WorkObj* wb, int cc, void* p5);
 extern "C" int DispatchInstruction(NodeDce* p1, int sb, void* inner, void* p4, void* p5);
 extern "C" void FUN_00c908c0(void* old, void* bufptr, int nsize, int one);
-extern "C" void FUN_00cb3ca0(void* obj, void* work, int one);
-extern "C" int RoundUpToBucketSize(int w);
 extern "C" NodeG* AllocateBlock(int a, int b, int c, int d);
 extern "C" void __fastcall AccumulateStats(void* cc, void* elem, void* a, int* b);
-extern "C" void FUN_00cfdbe0(void* p5, void* p4);
-extern "C" void FUN_00d01850(void* a, void* item);
-extern "C" void FUN_00d00110(NodeDce* p, void* item);
-extern "C" void FUN_00d00ca0(void* a, void* item);
-extern "C" void FUN_00cfff00(NodeDce* p, void* item);
 extern "C" float DAT_0104da48;
 typedef int(__thiscall* FnThiscallInt)(void* self, int a);
 typedef int(__thiscall* FnThiscallInt2)(void* self, int a, int b);
@@ -8232,17 +8100,4 @@ class DCEEntryInit : public hkReferencedObjectDCE
 
 // @f3 0x00a4dea0 (community match, verified in this file)
 namespace f3m_00dce7e0 {
-struct Sub
-{
-    int unk00;
-    void FUN_00922cf0();
-};
-struct Local
-{
-    int unk00;
-    Sub unk04;
-    int unk08;
-    int unk0c;
-    void FUN_00a4def0(int* p, int d);
-};
 }

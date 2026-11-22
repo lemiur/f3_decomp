@@ -10,12 +10,6 @@
 #include "../../include/layout_support.h"
 
 #include <xmmintrin.h>
-struct Vec4Target
-{
-    __m128 m_v0;
-    __m128 m_v1;
-    void __thiscall FUN_00c66320(const __m128* a, const __m128* b);
-};
 
 __declspec(align(16)) struct Vec4Pod
 {
@@ -23,19 +17,6 @@ __declspec(align(16)) struct Vec4Pod
     unsigned int m_04;
     unsigned int m_08;
     unsigned int m_0c;
-};
-
-extern const __m128 DAT_010c4c10;
-
-struct FUN_00cf2280_cls
-{
-    __m128 m_00;
-    __m128 m_10;
-    __m128 m_20;
-    __m128 m_30;
-    __m128 m_40;
-
-    void FUN_00cf2280(const __m128* a, const __m128* b);
 };
 
 extern "C" void _ReadWriteBarrier(void);

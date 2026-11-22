@@ -58,15 +58,6 @@ struct E04A00EntryArray {
     void AddBack(const E04A00Entry& e) { _pushBack(FUN_00c85750().heap(), e); }
 };
 
-struct E04A00Registry {
-    int unk00;
-    int unk04;
-    int unk08;
-    E04A00EntryArray m_entries;
-
-    void AddEntry(void* a, void* b, void* c, void* d);
-};
-
 // FUN_00e03100
 //
 // The object pointer reaches this function in ESI (the compiler passes the
@@ -585,7 +576,6 @@ void target_driver(unsigned int type, unsigned int count, unsigned int size, voi
 }
 
 namespace fnv_00e036b0 {
-extern "C" void _ReadWriteBarrier();
 struct Item {
     int f00; int f04; int f08;
     unsigned char type; unsigned char f0d; unsigned char f0e; unsigned char f0f;
@@ -608,37 +598,10 @@ struct EbpObj {
     virtual int v1c(int a, int b);
     virtual int v20();
 };
-struct ExitObj {
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual void v0c();
-    virtual void v10();
-    virtual void v14();
-    virtual void v18();
-    virtual int v1c(int a);
-};
 struct HObj {
     int Lookup(int a, void* b);
     int FUN_00db75b0(int a, void* b);
     int CollectMatchingEntries(int a, void* b, void* c);
-};
-struct Inner {
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual void v0c();
-    virtual int v10(int a, int b);
-};
-struct InnerHolder { int f00; int f04; int f08; int f0c; Inner* f10; };
-struct Chain {
-    Chain* FUN_00cc01c0(const void* s, void* a);
-    Chain* FUN_00cc01c0();
-    void FUN_00cc00e0();
-};
-struct StrBuf {
-    char* data; int size; int capacity;
-    void FUN_00cb1600(void* a, int n);
 };
 struct StreamObj {
     EbpObj* FUN_00d60800();

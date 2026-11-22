@@ -339,7 +339,6 @@ struct StrArr
         return m_usGrow;
     }
 };
-char* __cdecl _FUN_00a7d330(const char*);
 struct NiCollisionData
 {
     virtual void v00();
@@ -728,33 +727,6 @@ void S_00ead250::FUN_00ead250()
         }
     }
 }
-
-struct FUN_00ead2b0_node
-{
-    void* vft;
-    FUN_00ead2b0_node* m_04;
-};
-
-struct FUN_00ead2b0_cls
-{
-    virtual void unk00();
-    virtual void unk04();
-    virtual FUN_00ead2b0_node* unk08();
-    virtual int unk0c();
-    int m_04;
-    int m_08;
-    int m_0c;
-    int m_10;
-    int m_14;
-    int m_18;
-    int m_1c;
-    int m_20;
-    int m_24;
-    int m_28;
-    FUN_00ead2b0_cls* m_2c;
-    bool __thiscall Probe(void* p);
-    bool __thiscall MatchesOther(FUN_00ead2b0_cls* other);
-};
 
 struct NiRTTI
 {

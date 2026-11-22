@@ -14,18 +14,6 @@ void __cdecl FUN_00cebe50(float* source, float scale, Object* destination)
     FUN_00cebdf0(source, result, destination);
 }
 
-struct Receiver
-{
-    void FUN_00cecc90(float value);
-};
-struct State
-{
-    int first;
-    int count;
-    int context;
-};
-void FUN_00cebbb0(void* state, float zero, void* receiver);
-
 struct FUN_00cebe80_Struct
 {
     float unk00;
@@ -414,44 +402,6 @@ struct Vector
 struct Matrix
 {
     Vector c0, c1, c2;
-};
-struct Transform
-{
-    Vector columns[4];
-};
-struct Bounds
-{
-    Vector lo, hi;
-};
-extern const Vector DAT_01017d10;
-void FUN_00d5ac50(char*, Matrix*, Vector*, Vector*, Vector*);
-struct Shape
-{
-    virtual void v0();
-    virtual void v1();
-    virtual void v2();
-    virtual void v3();
-    virtual void v4();
-    virtual void v5();
-    virtual void v6();
-    virtual void getAabb(const Transform*, float, Bounds*);
-};
-
-struct MotionLike
-{
-    int unk00;
-    float field04;
-    int unk08;
-    int unk0c;
-    __m128 field10;
-    __m128 field20;
-    __m128 field30;
-    __m128 field40;
-    __m128 field50;
-    __m128 field60;
-    __m128 field70;
-    __m128 field80;
-    float field90;
 };
 
 extern "C" __m128 _mm_load_ss(const float*);
@@ -844,7 +794,6 @@ typedef union __declspec(intrin_type) __declspec(align(16)) __m128i
 {
     int m128i_i32[4];
 } __m128i;
-extern "C" __m128i _mm_cvtsi32_si128(int);
 __m128 _mm_castsi128_ps(__m128i);
 extern "C" void _mm_store_ps(float*, __m128);
 
@@ -852,56 +801,6 @@ struct __declspec(align(16)) Vec4
 {
     float x, y, z, w;
 };
-struct Probe
-{
-    unsigned char flag;
-    unsigned char status1;
-    unsigned char status2;
-    unsigned char status3;
-    int next;
-    int previous;
-    int index;
-};
-struct Track
-{
-    int stage;
-    int frame;
-    int sequence;
-    int timer;
-    int interpolation;
-    void FUN_00d76ca0();
-    void FUN_00d77200(void* state, Probe* probe);
-    int FUN_00d74e10();
-    void FUN_00d762f0();
-    float GetMass();
-    double FUN_00d752e0();
-    __m128* FUN_00d75600();
-    __m128* FUN_00d75560();
-    void FUN_00d77be0(float scale);
-    void FUN_00d76940();
-};
-struct RowMatrix
-{
-    __m128 row0, row1, row2;
-    void Multiply(const Vec4* weight);
-};
-struct Receiver2
-{
-    float time;
-    float enabled;
-    float pad08;
-    float pad0c;
-    __m128 translation;
-    RowMatrix matrix;
-};
-struct Status
-{
-    void FUN_00d74d40();
-};
-extern float DAT_011b153c;
-extern double DAT_01020998;
-extern double DAT_010cbf50;
-extern double DAT_010cbf48;
 inline __m128 scalarVector(float x)
 {
     __m128 result = {x};
@@ -963,7 +862,6 @@ extern "C"
     __m128 _mm_shuffle_ps(__m128, __m128, int);
     __m128 _mm_sqrt_ss(__m128);
     __m128 _mm_load_ss(const float*);
-    void _mm_store_ss(float*, __m128);
 }
 
 // Same-file stand-ins as FUN_00cece50 (hkpMassProperties / hkVector4 / hkMatrix3).
@@ -1017,13 +915,8 @@ int __cdecl FUN_00cee290(const CE50Vector* v0, const CE50Vector* v1, const CE50V
                          float thickness, CE50Body* out);
 extern "C" void _ReadWriteBarrier(void);
 
-extern "C" __m128 _mm_div_ss(__m128, __m128);
 void __cdecl FUN_00ced6b0(const CEFBGeom* geometry, float mass, CE50Body* out);
 
-struct BoolFlag
-{
-    char value;
-};
 }  // namespace fnv_00cefb90
 
 extern "C" __m128 _mm_shuffle_ps(__m128, __m128, unsigned int);
@@ -1034,73 +927,6 @@ extern "C"
     __m128 _mm_set_ps1(float);
 }
 
-struct S_00ced090_Elem
-{
-    float unk00;
-    float unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5c;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6c;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7c;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8c;
-};
-struct S_00ced090_Out
-{
-    float unk00;
-    float unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-};
-struct S_00ced090_State
-{
-    S_00ced090_Elem* first;
-    int count;
-};
 struct __declspec(align(16)) S_00ced090_V4
 {
     float x, y, z, w;
@@ -1114,11 +940,6 @@ struct S_00ced090_Vec
 {
     S_00ced090_V4 v;
     void FUN_00c7f640(void* a, void* b);
-};
-struct S_00ced090_Inertia
-{
-    S_00ced090_V4 r0, r1, r2;
-    void FUN_00cd5140(S_00ced090_Mat* m);
 };
 void __cdecl AddInertiaTensor(S_00ced090_Vec* d, float m, S_00ced090_Mat* mat);
 
@@ -1412,7 +1233,6 @@ unsigned int __cdecl FUN_00cf0f40(S00cf0f40_Owner* owner,S00cf0f40_Arr* arr) {
 
 extern "C" void _ReadWriteBarrier();
 
-extern const double DAT_010290c0;
 extern const double DAT_010cbf40;
 
 struct Target
@@ -1582,7 +1402,6 @@ void VertexComponentData::FUN_00cec000(const float* verts)
 extern "C"
 {
     void _mm_store_ps(float*, __m128);
-    __m128 _mm_load_ps(const float*);
     __m128 _mm_set_ps1(float);
     __m128 _mm_set_ss(float);
     __m128 _mm_add_ps(__m128, __m128);
@@ -1599,8 +1418,6 @@ inline void* operator new(unsigned int, void* p)
 {
     return p;
 }
-extern const float DAT_01011d78;
-extern const float DAT_01017718;
 extern const float DAT_01016248;
 struct Mat4CE;
 struct __declspec(align(16)) Vec4CE
@@ -1648,11 +1465,6 @@ struct Handle
             heap->Free(data, (capacity & 0x3fffffff) * 16);
     }
 };
-struct View
-{
-    Vec4CE* data;
-    int count, stride;
-};
 struct __declspec(align(16)) Query
 {
     unsigned int shapeBuffer[128];
@@ -1699,23 +1511,9 @@ struct HkShape
     float FUN_00d571a0();
     void FUN_00d59200(Handle*);
 };
-struct TreeShape : HkShape
-{
-    virtual HkShape* Container();
-};
-struct ScaledShape
-{
-    int m00, m04, m08, m0c, m10, m14, m18, m1c;
-    Vec4CE m20, m30;
-    void FUN_00cd8160(float);
-};
 void __cdecl ResizeAudioStream(void*, void*, int);
 void __cdecl FUN_00cebaf0(Vec4CE*, float, MassBody*);
-void __cdecl FUN_00ceeca0(Vec4CE*, Vec4CE*, float, float, MassBody*);
-void __cdecl FUN_00cef6d0(Vec4CE*, Vec4CE*, float, float, MassBody*);
-float __cdecl FUN_00c98210(float, float);
 void __cdecl FUN_00cee290(Vec4CE*, Vec4CE*, Vec4CE*, float, float, MassBody*);
-void __cdecl FUN_00ced090(void*, MassBody*);
 struct RawBody
 {
     float volume, mass;
@@ -1744,22 +1542,6 @@ struct Element
     }
     void FUN_00cf0820(const MassBody*);
 };
-union PrimitiveTemporary
-{
-    Handle vertices;
-    Vec4CE vector;
-};
-union ShapeTemporary
-{
-    Mat4CE local;
-    ScaledShape scaled;
-};
-struct Working
-{
-    ShapeTemporary temp;
-    Mat4CE combined;
-    MassBody body;
-};
 struct Array
 {
     Element* data;
@@ -1773,17 +1555,6 @@ struct Array
     }
 };
 
-union ResultStorage
-{
-    Query query;
-    Array array;
-};
-
-struct S_00cecc90_Sub
-{
-    void Multiply(Vector* v);
-};
-
 extern "C"
 {
     __m128 _mm_set_ps1(float);
@@ -1792,13 +1563,7 @@ extern "C"
     __m128 _mm_max_ps(__m128, __m128);
 }
 
-extern const float DAT_0104da48;
 extern const float DAT_01016248;
-extern const __m128 DAT_010c44d0;
-extern const __m128 DAT_010ec7f0;
-
-extern "C" const double DAT_01099ee0;
-extern "C" const double DAT_010240b0;
 
 struct V4
 {
@@ -1956,15 +1721,6 @@ extern "C"
     __m128 _mm_shuffle_ps(__m128, __m128, unsigned int);
 }
 
-extern "C" double __cdecl sqrt(double);
-extern "C" double __cdecl fabs(double);
-
-struct EigenMatrix
-{
-    __m128 row0, row1, row2;
-    void FUN_00cd55b0(const EigenMatrix& a, const EigenMatrix& b);
-};
-
 struct EigenVector
 {
     __m128 q;
@@ -2057,26 +1813,9 @@ struct Basis
 };
 
 void FUN_00c908c0(S_00cee1c0_Heap* a, void* arr, int n, int sz);
-struct OutObj
-{
-    float unk00;
-    float m_04;
-    float unk08;
-    float unk0c;
-    __m128 com;
-    __m128 r0;
-    __m128 r1;
-    __m128 r2;
-};
 struct __declspec(align(16)) Vec
 {
     float x, y, z, w;
-};
-struct Arr
-{
-    Vec* data;
-    int size;
-    unsigned cap;
 };
 
 struct Geometry

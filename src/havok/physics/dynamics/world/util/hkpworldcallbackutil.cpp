@@ -2,7 +2,6 @@
 // src/havok/physics/dynamics/world/util/hkpworldcallbackutil.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/physics/dynamics/world/util/hkpworldcallbackutil.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-extern "C" unsigned long _tls_index;
 struct AudioTlsState
 {
     unsigned unk0;
@@ -193,78 +192,6 @@ struct ScopedContext
     {
         threadData.m_uiMemoryContext = previous;
     }
-};
-struct Metadata
-{
-    int unk00, unk04, unk08, unk0C, unk10;
-    unsigned char flags;
-};
-struct Reference
-{
-    int unk00, unk04, unk08;
-    Metadata* metadata;
-    void FUN_00c905b0();
-};
-struct World
-{
-    void FUN_00c95800(Reference**, unsigned);
-};
-void* FUN_00ec61c0(void*, int, unsigned);
-struct Owner
-{
-    virtual void method0();
-    virtual void method1();
-    virtual void method2();
-    virtual void method3();
-    virtual void method4();
-    virtual void method5();
-    virtual void method6();
-    virtual void method7();
-    virtual void method8();
-    virtual void method9();
-    virtual void method10();
-    virtual void method11();
-    virtual void method12();
-    virtual void method13();
-    virtual void method14();
-    virtual void method15();
-    virtual void method16();
-    virtual void method17();
-    virtual void method18();
-    virtual void method19();
-    virtual void method20();
-    virtual void method21();
-    virtual void method22();
-    virtual void method23();
-    virtual void method24();
-    virtual void method25();
-    virtual void method26();
-    virtual void method27();
-    virtual void method28();
-    virtual void method29();
-    virtual void method30();
-    virtual void method31();
-    virtual void method32();
-    virtual void method33();
-    virtual void method34();
-    virtual void method35();
-    virtual void method36();
-    virtual World* GetWorld();
-    int unk4;
-    int unk8;
-    int unkC;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    Reference** references;
-    unsigned count;
-    void ClearReferences();
 };
 
 struct D00370Array
@@ -1033,12 +960,6 @@ struct ListenerBase
     virtual void OnEvent(void* apParam);
 };
 
-struct ListenerList
-{
-    ListenerBase** m_ppItems;
-    int m_iArrayLength;
-};
-
 struct ListenerOwner
 {
     DWORD unk0000, unk0004, unk0008, unk000C, unk0010, unk0014, unk0018, unk001C;
@@ -1127,132 +1048,6 @@ struct D00CA0MonitorStream
         return m_kRayEnd < m_pCurrentCommand;
     }
 };
-
-extern DWORD g_D00CA0TlsIndex;
-
-struct D00CA0Listener
-{
-    virtual void entityCallback(void* entity);
-};
-
-struct D00CA0ListenerArray
-{
-    D00CA0Listener** m_data;
-    int m_iElementCount;
-    int m_iCapacityState;
-};
-
-struct D00CA0World
-{
-    int unk000;
-    int unk004;
-    int unk008;
-    int unk00C;
-    int unk010;
-    int unk014;
-    int unk018;
-    int unk01C;
-    int unk020;
-    int unk024;
-    int unk028;
-    int unk02C;
-    int unk030;
-    int unk034;
-    int unk038;
-    int unk03C;
-    int unk040;
-    int unk044;
-    int unk048;
-    int unk04C;
-    int unk050;
-    int unk054;
-    int unk058;
-    int unk05C;
-    int unk060;
-    int unk064;
-    int unk068;
-    int unk06C;
-    int unk070;
-    int unk074;
-    int unk078;
-    int unk07C;
-    int unk080;
-    int unk084;
-    int unk088;
-    int unk08C;
-    int unk090;
-    int unk094;
-    int unk098;
-    int unk09C;
-    int unk0A0;
-    int unk0A4;
-    int unk0A8;
-    int unk0AC;
-    int unk0B0;
-    int unk0B4;
-    int unk0B8;
-    int unk0BC;
-    int unk0C0;
-    int unk0C4;
-    int unk0C8;
-    int unk0CC;
-    int unk0D0;
-    int unk0D4;
-    int unk0D8;
-    int unk0DC;
-    int unk0E0;
-    int unk0E4;
-    int unk0E8;
-    int unk0EC;
-    int unk0F0;
-    int unk0F4;
-    int unk0F8;
-    int unk0FC;
-    int unk100;
-    int unk104;
-    int unk108;
-    int unk10C;
-    int unk110;
-    int unk114;
-    int unk118;
-    int unk11C;
-    int unk120;
-    int unk124;
-    int unk128;
-    int unk12C;
-    int unk130;
-    int unk134;
-    int unk138;
-    int unk13C;
-    int unk140;
-    int unk144;
-    int unk148;
-    int unk14C;
-    int unk150;
-    int unk154;
-    int unk158;
-    int unk15C;
-    int unk160;
-    int unk164;
-    int unk168;
-    int unk16C;
-    int unk170;
-    int unk174;
-    int unk178;
-    int unk17C;
-    int unk180;
-    int unk184;
-    int unk188;
-    int unk18C;
-    int unk190;
-    int unk194;
-    int unk198;
-    int unk19C;
-    D00CA0ListenerArray m_kEntityListenerArray;
-};
-
-extern const char g_D00CA0TimerEntityCb[];
-extern const char g_D00CA0TimerEnd[];
 
 namespace fnv_00d00d40 {
 extern "C" void _ReadWriteBarrier();
@@ -1473,134 +1268,6 @@ struct D00DE0MonitorStream
     }
 };
 
-extern DWORD g_D00DE0TlsIndex;
-
-struct D00DE0Listener
-{
-    virtual void unk00();
-    virtual void unk04();
-    virtual void entityCallback(void* entity);
-};
-
-struct D00DE0ListenerArray
-{
-    D00DE0Listener** m_data;
-    int m_iElementCount;
-    int m_iCapacityState;
-};
-
-struct D00DE0World
-{
-    int unk000;
-    int unk004;
-    int unk008;
-    int unk00C;
-    int unk010;
-    int unk014;
-    int unk018;
-    int unk01C;
-    int unk020;
-    int unk024;
-    int unk028;
-    int unk02C;
-    int unk030;
-    int unk034;
-    int unk038;
-    int unk03C;
-    int unk040;
-    int unk044;
-    int unk048;
-    int unk04C;
-    int unk050;
-    int unk054;
-    int unk058;
-    int unk05C;
-    int unk060;
-    int unk064;
-    int unk068;
-    int unk06C;
-    int unk070;
-    int unk074;
-    int unk078;
-    int unk07C;
-    int unk080;
-    int unk084;
-    int unk088;
-    int unk08C;
-    int unk090;
-    int unk094;
-    int unk098;
-    int unk09C;
-    int unk0A0;
-    int unk0A4;
-    int unk0A8;
-    int unk0AC;
-    int unk0B0;
-    int unk0B4;
-    int unk0B8;
-    int unk0BC;
-    int unk0C0;
-    int unk0C4;
-    int unk0C8;
-    int unk0CC;
-    int unk0D0;
-    int unk0D4;
-    int unk0D8;
-    int unk0DC;
-    int unk0E0;
-    int unk0E4;
-    int unk0E8;
-    int unk0EC;
-    int unk0F0;
-    int unk0F4;
-    int unk0F8;
-    int unk0FC;
-    int unk100;
-    int unk104;
-    int unk108;
-    int unk10C;
-    int unk110;
-    int unk114;
-    int unk118;
-    int unk11C;
-    int unk120;
-    int unk124;
-    int unk128;
-    int unk12C;
-    int unk130;
-    int unk134;
-    int unk138;
-    int unk13C;
-    int unk140;
-    int unk144;
-    int unk148;
-    int unk14C;
-    int unk150;
-    int unk154;
-    int unk158;
-    int unk15C;
-    int unk160;
-    int unk164;
-    int unk168;
-    int unk16C;
-    int unk170;
-    int unk174;
-    int unk178;
-    int unk17C;
-    int unk180;
-    int unk184;
-    int unk188;
-    int unk18C;
-    int unk190;
-    int unk194;
-    int unk198;
-    int unk19C;
-    D00DE0ListenerArray m_kEntityListenerArray;
-};
-
-extern const char g_D00DE0TimerEntityCb[];
-extern const char g_D00DE0TimerEnd[];
-
 struct D00E80TimerCommand
 {
     const char* m_pCommandName;
@@ -1628,8 +1295,6 @@ struct D00E80MonitorStream
     }
 };
 
-extern DWORD g_D00E80TlsIndex;
-
 struct D00E80World;
 
 struct D00E80Listener
@@ -1643,12 +1308,6 @@ struct D00E80ListenerArray
     D00E80Listener** m_data;
     int m_iElementCount;
     int m_iCapacityState;
-};
-
-struct D00E80TickPair
-{
-    volatile unsigned int m_uiBegin;
-    volatile unsigned int m_uiEndTick;
 };
 
 struct D00E80World
@@ -1738,9 +1397,6 @@ struct D00E80World
     int unk148;
     D00E80ListenerArray m_kEntityListenerArray;
 };
-
-extern const char g_D00E80TimerActionCb[];
-extern const char g_D00E80TimerEnd[];
 
 namespace fnv_00d00f30 {
 extern "C" void _ReadWriteBarrier();
@@ -2306,8 +1962,6 @@ struct D014F0MonitorStream
     }
 };
 
-extern DWORD g_D014F0TlsIndex;
-
 struct D014F0World;
 
 struct D014F0Listener
@@ -2321,12 +1975,6 @@ struct D014F0ListenerArray
     D014F0Listener** m_data;
     int m_iElementCount;
     int m_iCapacityState;
-};
-
-struct D014F0TickPair
-{
-    volatile unsigned int m_uiBegin;
-    volatile unsigned int m_uiEndTick;
 };
 
 struct D014F0World
@@ -2428,9 +2076,6 @@ struct D014F0World
     int unk178;
     D014F0ListenerArray m_kEntityListenerArray;
 };
-
-extern const char g_D014F0TimerCollisionAddedCb[];
-extern const char g_D014F0TimerEnd[];
 
 struct D015A0TimerCommand
 {
@@ -2675,130 +2320,6 @@ struct D01650MonitorStream
     }
 };
 
-extern DWORD g_D01650TlsIndex;
-
-struct D01650Listener
-{
-    virtual void unk00();
-    virtual void collisionAddedCallback(void* pvEvent, void* pvContext);
-};
-
-struct D01650ListenerArray
-{
-    D01650Listener** m_data;
-    int m_iElementCount;
-    int m_iCapacityState;
-};
-
-struct D01650World
-{
-    int unk000;
-    int unk004;
-    int unk008;
-    int unk00C;
-    int unk010;
-    int unk014;
-    int unk018;
-    int unk01C;
-    int unk020;
-    int unk024;
-    int unk028;
-    int unk02C;
-    int unk030;
-    int unk034;
-    int unk038;
-    int unk03C;
-    int unk040;
-    int unk044;
-    int unk048;
-    int unk04C;
-    int unk050;
-    int unk054;
-    int unk058;
-    int unk05C;
-    int unk060;
-    int unk064;
-    int unk068;
-    int unk06C;
-    int unk070;
-    int unk074;
-    int unk078;
-    int unk07C;
-    int unk080;
-    int unk084;
-    int unk088;
-    int unk08C;
-    int unk090;
-    int unk094;
-    int unk098;
-    int unk09C;
-    int unk0A0;
-    int unk0A4;
-    int unk0A8;
-    int unk0AC;
-    int unk0B0;
-    int unk0B4;
-    int unk0B8;
-    int unk0BC;
-    int unk0C0;
-    int unk0C4;
-    int unk0C8;
-    int unk0CC;
-    int unk0D0;
-    int unk0D4;
-    int unk0D8;
-    int unk0DC;
-    int unk0E0;
-    int unk0E4;
-    int unk0E8;
-    int unk0EC;
-    int unk0F0;
-    int unk0F4;
-    int unk0F8;
-    int unk0FC;
-    int unk100;
-    int unk104;
-    int unk108;
-    int unk10C;
-    int unk110;
-    int unk114;
-    int unk118;
-    int unk11C;
-    int unk120;
-    int unk124;
-    int unk128;
-    int unk12C;
-    int unk130;
-    int unk134;
-    int unk138;
-    int unk13C;
-    int unk140;
-    int unk144;
-    int unk148;
-    int unk14C;
-    int unk150;
-    int unk154;
-    int unk158;
-    int unk15C;
-    int unk160;
-    int unk164;
-    int unk168;
-    int unk16C;
-    int unk170;
-    int unk174;
-    int unk178;
-    int unk17C;
-    int unk180;
-    int unk184;
-    int unk188;
-    int unk18C;
-    int unk190;
-    D01650ListenerArray m_kEntityListenerArray;
-};
-
-extern const char g_D01650TimerCollisionAddedCb[];
-extern const char g_D01650TimerEnd[];
-
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long dwTlsIndex);
 extern "C" unsigned long DAT_0126835c;
 
@@ -2911,119 +2432,6 @@ struct D017B0MonitorStream
     }
 };
 
-extern DWORD g_D017B0TlsIndex;
-
-struct D017B0Listener
-{
-    virtual void unk00();
-    virtual void unk04();
-    virtual void EntityRemovedCallback(void* entity);
-};
-
-struct D017B0ListenerArray
-{
-    D017B0Listener** m_data;
-    int m_iElementCount;
-    int m_iCapacityState;
-};
-
-struct D017B0World
-{
-    int unk000;
-    int unk004;
-    int unk008;
-    int unk00C;
-    int unk010;
-    int unk014;
-    int unk018;
-    int unk01C;
-    int unk020;
-    int unk024;
-    int unk028;
-    int unk02C;
-    int unk030;
-    int unk034;
-    int unk038;
-    int unk03C;
-    int unk040;
-    int unk044;
-    int unk048;
-    int unk04C;
-    int unk050;
-    int unk054;
-    int unk058;
-    int unk05C;
-    int unk060;
-    int unk064;
-    int unk068;
-    int unk06C;
-    int unk070;
-    int unk074;
-    int unk078;
-    int unk07C;
-    int unk080;
-    int unk084;
-    int unk088;
-    int unk08C;
-    int unk090;
-    int unk094;
-    int unk098;
-    int unk09C;
-    int unk0A0;
-    int unk0A4;
-    int unk0A8;
-    int unk0AC;
-    int unk0B0;
-    int unk0B4;
-    int unk0B8;
-    int unk0BC;
-    int unk0C0;
-    int unk0C4;
-    int unk0C8;
-    int unk0CC;
-    int unk0D0;
-    int unk0D4;
-    int unk0D8;
-    int unk0DC;
-    int unk0E0;
-    int unk0E4;
-    int unk0E8;
-    int unk0EC;
-    int unk0F0;
-    int unk0F4;
-    int unk0F8;
-    int unk0FC;
-    int unk100;
-    int unk104;
-    int unk108;
-    int unk10C;
-    int unk110;
-    int unk114;
-    int unk118;
-    int unk11C;
-    int unk120;
-    int unk124;
-    int unk128;
-    int unk12C;
-    int unk130;
-    int unk134;
-    int unk138;
-    int unk13C;
-    int unk140;
-    int unk144;
-    int unk148;
-    int unk14C;
-    int unk150;
-    int unk154;
-    int unk158;
-    int unk15C;
-    int unk160;
-    D017B0ListenerArray m_kEntityListenerArray;
-};
-
-extern const char g_D017B0TimerEntityRemovedCb[];
-extern const char g_D017B0TimerEnd[];
-
 struct D019B0TimerCommand
 {
     const char* m_pCommandName;
@@ -3049,145 +2457,6 @@ struct D019B0MonitorStream
     {
         return m_kRayEnd < m_pCurrentCommand;
     }
-};
-
-extern DWORD g_D019B0TlsIndex;
-
-struct D019B0Listener
-{
-    virtual void unk00();
-    virtual void unk04();
-    virtual void unk08();
-    virtual void unk0C();
-    virtual void unk10();
-    virtual void unk14();
-    virtual void shapeSetCallback(void* entity);
-};
-
-struct D019B0ListenerArray
-{
-    D019B0Listener** m_data;
-    int m_iElementCount;
-    int m_iCapacityState;
-};
-
-struct D019B0World
-{
-    int unk000;
-    int unk004;
-    int unk008;
-    int unk00C;
-    int unk010;
-    int unk014;
-    int unk018;
-    int unk01C;
-    int unk020;
-    int unk024;
-    int unk028;
-    int unk02C;
-    int unk030;
-    int unk034;
-    int unk038;
-    int unk03C;
-    int unk040;
-    int unk044;
-    int unk048;
-    int unk04C;
-    int unk050;
-    int unk054;
-    int unk058;
-    int unk05C;
-    int unk060;
-    int unk064;
-    int unk068;
-    int unk06C;
-    int unk070;
-    int unk074;
-    int unk078;
-    int unk07C;
-    int unk080;
-    int unk084;
-    int unk088;
-    int unk08C;
-    int unk090;
-    int unk094;
-    int unk098;
-    int unk09C;
-    int unk0A0;
-    int unk0A4;
-    int unk0A8;
-    int unk0AC;
-    int unk0B0;
-    int unk0B4;
-    int unk0B8;
-    int unk0BC;
-    int unk0C0;
-    int unk0C4;
-    int unk0C8;
-    int unk0CC;
-    int unk0D0;
-    int unk0D4;
-    int unk0D8;
-    int unk0DC;
-    int unk0E0;
-    int unk0E4;
-    int unk0E8;
-    int unk0EC;
-    int unk0F0;
-    int unk0F4;
-    int unk0F8;
-    int unk0FC;
-    int unk100;
-    int unk104;
-    int unk108;
-    int unk10C;
-    int unk110;
-    int unk114;
-    int unk118;
-    int unk11C;
-    int unk120;
-    int unk124;
-    int unk128;
-    int unk12C;
-    int unk130;
-    int unk134;
-    int unk138;
-    int unk13C;
-    int unk140;
-    int unk144;
-    int unk148;
-    int unk14C;
-    int unk150;
-    int unk154;
-    int unk158;
-    int unk15C;
-    int unk160;
-    int unk164;
-    int unk168;
-    int unk16C;
-    int unk170;
-    int unk174;
-    int unk178;
-    int unk17C;
-    int unk180;
-    int unk184;
-    int unk188;
-    int unk18C;
-    int unk190;
-    int unk194;
-    int unk198;
-    int unk19C;
-    D019B0ListenerArray m_kEntityListenerArray;
-};
-
-extern const char g_D019B0TimerSetShapeCb[];
-extern const char g_D019B0TimerEnd[];
-
-struct D019B0Event
-{
-    int unk00;
-    int unk04;
-    int m_result;
 };
 
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long);
@@ -3287,104 +2556,6 @@ struct D005A0MonitorStream
     }
 };
 
-extern DWORD g_D005A0TlsIndex;
-
-struct D005A0Listener
-{
-    virtual void unk00();
-    virtual void unk04();
-    virtual void EntityRemovedCallback(void* entity);
-};
-
-struct D005A0ListenerArray
-{
-    D005A0Listener** m_data;
-    int m_iElementCount;
-    int m_iCapacityState;
-};
-
-struct D005A0World
-{
-    int unk000;
-    int unk004;
-    int unk008;
-    int unk00C;
-    int unk010;
-    int unk014;
-    int unk018;
-    int unk01C;
-    int unk020;
-    int unk024;
-    int unk028;
-    int unk02C;
-    int unk030;
-    int unk034;
-    int unk038;
-    int unk03C;
-    int unk040;
-    int unk044;
-    int unk048;
-    int unk04C;
-    int unk050;
-    int unk054;
-    int unk058;
-    int unk05C;
-    int unk060;
-    int unk064;
-    int unk068;
-    int unk06C;
-    int unk070;
-    int unk074;
-    int unk078;
-    int unk07C;
-    int unk080;
-    int unk084;
-    int unk088;
-    int unk08C;
-    int unk090;
-    int unk094;
-    int unk098;
-    int unk09C;
-    int unk0A0;
-    int unk0A4;
-    int unk0A8;
-    int unk0AC;
-    int unk0B0;
-    int unk0B4;
-    int unk0B8;
-    int unk0BC;
-    int unk0C0;
-    int unk0C4;
-    int unk0C8;
-    int unk0CC;
-    int unk0D0;
-    int unk0D4;
-    int unk0D8;
-    int unk0DC;
-    int unk0E0;
-    int unk0E4;
-    int unk0E8;
-    int unk0EC;
-    int unk0F0;
-    int unk0F4;
-    int unk0F8;
-    int unk0FC;
-    int unk100;
-    int unk104;
-    int unk108;
-    int unk10C;
-    int unk110;
-    int unk114;
-    int unk118;
-    int unk11C;
-    int unk120;
-    int unk124;
-    D005A0ListenerArray m_kEntityListenerArray;
-};
-
-extern const char g_D005A0TimerEntityAddedCb[];
-extern const char g_D005A0TimerEnd[];
-
 struct D00640TimerCommand
 {
     const char* m_pCommandName;
@@ -3411,105 +2582,6 @@ struct D00640MonitorStream
         return m_kRayEnd < m_pCurrentCommand;
     }
 };
-
-extern DWORD g_D00640TlsIndex;
-
-struct D00640Listener
-{
-    virtual void unk00();
-    virtual void unk04();
-    virtual void unk08();
-    virtual void shapeSetCallback(void* entity);
-};
-
-struct D00640ListenerArray
-{
-    D00640Listener** m_data;
-    int m_iElementCount;
-    int m_iCapacityState;
-};
-
-struct D00640World
-{
-    int unk000;
-    int unk004;
-    int unk008;
-    int unk00C;
-    int unk010;
-    int unk014;
-    int unk018;
-    int unk01C;
-    int unk020;
-    int unk024;
-    int unk028;
-    int unk02C;
-    int unk030;
-    int unk034;
-    int unk038;
-    int unk03C;
-    int unk040;
-    int unk044;
-    int unk048;
-    int unk04C;
-    int unk050;
-    int unk054;
-    int unk058;
-    int unk05C;
-    int unk060;
-    int unk064;
-    int unk068;
-    int unk06C;
-    int unk070;
-    int unk074;
-    int unk078;
-    int unk07C;
-    int unk080;
-    int unk084;
-    int unk088;
-    int unk08C;
-    int unk090;
-    int unk094;
-    int unk098;
-    int unk09C;
-    int unk0A0;
-    int unk0A4;
-    int unk0A8;
-    int unk0AC;
-    int unk0B0;
-    int unk0B4;
-    int unk0B8;
-    int unk0BC;
-    int unk0C0;
-    int unk0C4;
-    int unk0C8;
-    int unk0CC;
-    int unk0D0;
-    int unk0D4;
-    int unk0D8;
-    int unk0DC;
-    int unk0E0;
-    int unk0E4;
-    int unk0E8;
-    int unk0EC;
-    int unk0F0;
-    int unk0F4;
-    int unk0F8;
-    int unk0FC;
-    int unk100;
-    int unk104;
-    int unk108;
-    int unk10C;
-    int unk110;
-    int unk114;
-    int unk118;
-    int unk11C;
-    int unk120;
-    int unk124;
-    D00640ListenerArray m_kEntityListenerArray;
-};
-
-extern const char g_D00640TimerSetShapeCb[];
-extern const char g_D00640TimerEnd[];
 
 struct D00820TimerCommand
 {
@@ -3538,107 +2610,6 @@ struct D00820MonitorStream
     }
 };
 
-extern DWORD g_D00820TlsIndex;
-
-struct D00820Listener
-{
-    virtual void unk00();
-    virtual void unk04();
-    virtual void entityCallback(void* entity);
-};
-
-struct D00820ListenerArray
-{
-    D00820Listener** m_data;
-    int m_iElementCount;
-    int m_iCapacityState;
-};
-
-struct D00820World
-{
-    int unk000;
-    int unk004;
-    int unk008;
-    int unk00C;
-    int unk010;
-    int unk014;
-    int unk018;
-    int unk01C;
-    int unk020;
-    int unk024;
-    int unk028;
-    int unk02C;
-    int unk030;
-    int unk034;
-    int unk038;
-    int unk03C;
-    int unk040;
-    int unk044;
-    int unk048;
-    int unk04C;
-    int unk050;
-    int unk054;
-    int unk058;
-    int unk05C;
-    int unk060;
-    int unk064;
-    int unk068;
-    int unk06C;
-    int unk070;
-    int unk074;
-    int unk078;
-    int unk07C;
-    int unk080;
-    int unk084;
-    int unk088;
-    int unk08C;
-    int unk090;
-    int unk094;
-    int unk098;
-    int unk09C;
-    int unk0A0;
-    int unk0A4;
-    int unk0A8;
-    int unk0AC;
-    int unk0B0;
-    int unk0B4;
-    int unk0B8;
-    int unk0BC;
-    int unk0C0;
-    int unk0C4;
-    int unk0C8;
-    int unk0CC;
-    int unk0D0;
-    int unk0D4;
-    int unk0D8;
-    int unk0DC;
-    int unk0E0;
-    int unk0E4;
-    int unk0E8;
-    int unk0EC;
-    int unk0F0;
-    int unk0F4;
-    int unk0F8;
-    int unk0FC;
-    int unk100;
-    int unk104;
-    int unk108;
-    int unk10C;
-    int unk110;
-    int unk114;
-    int unk118;
-    int unk11C;
-    int unk120;
-    int unk124;
-    int unk128;
-    int unk12C;
-    int unk130;
-    D00820ListenerArray m_kEntityListenerArray;
-};
-
-extern const char g_D00820TimerSetShapeCb[];
-extern const char g_D00820TimerEnd[];
-
 struct D008C0TimerCommand
 {
     const char* m_pCommandName;
@@ -3665,108 +2636,6 @@ struct D008C0MonitorStream
         return m_kRayEnd < m_pCurrentCommand;
     }
 };
-
-extern DWORD g_D008C0TlsIndex;
-
-struct D008C0Listener
-{
-    virtual void unk00();
-    virtual void unk04();
-    virtual void unk08();
-    virtual void shapeSetCallback(void* entity);
-};
-
-struct D008C0ListenerArray
-{
-    D008C0Listener** m_data;
-    int m_iElementCount;
-    int m_iCapacityState;
-};
-
-struct D008C0World
-{
-    int unk000;
-    int unk004;
-    int unk008;
-    int unk00C;
-    int unk010;
-    int unk014;
-    int unk018;
-    int unk01C;
-    int unk020;
-    int unk024;
-    int unk028;
-    int unk02C;
-    int unk030;
-    int unk034;
-    int unk038;
-    int unk03C;
-    int unk040;
-    int unk044;
-    int unk048;
-    int unk04C;
-    int unk050;
-    int unk054;
-    int unk058;
-    int unk05C;
-    int unk060;
-    int unk064;
-    int unk068;
-    int unk06C;
-    int unk070;
-    int unk074;
-    int unk078;
-    int unk07C;
-    int unk080;
-    int unk084;
-    int unk088;
-    int unk08C;
-    int unk090;
-    int unk094;
-    int unk098;
-    int unk09C;
-    int unk0A0;
-    int unk0A4;
-    int unk0A8;
-    int unk0AC;
-    int unk0B0;
-    int unk0B4;
-    int unk0B8;
-    int unk0BC;
-    int unk0C0;
-    int unk0C4;
-    int unk0C8;
-    int unk0CC;
-    int unk0D0;
-    int unk0D4;
-    int unk0D8;
-    int unk0DC;
-    int unk0E0;
-    int unk0E4;
-    int unk0E8;
-    int unk0EC;
-    int unk0F0;
-    int unk0F4;
-    int unk0F8;
-    int unk0FC;
-    int unk100;
-    int unk104;
-    int unk108;
-    int unk10C;
-    int unk110;
-    int unk114;
-    int unk118;
-    int unk11C;
-    int unk120;
-    int unk124;
-    int unk128;
-    int unk12C;
-    int unk130;
-    D008C0ListenerArray m_kEntityListenerArray;
-};
-
-extern const char g_D008C0TimerSetShapeCb[];
-extern const char g_D008C0TimerEnd[];
 
 extern "C" void _ReadWriteBarrier(void);
 extern DWORD DAT_0126835c;
@@ -4329,48 +3198,6 @@ void __cdecl FUN_00d01900(WorldD* world, RemovedEvent& event)
 }
 
 extern void*(__stdcall* DAT_00fdf044)(unsigned long);
-struct ProfRecQ
-{
-    const char* m_pName;
-    unsigned long m_iTick;
-    unsigned long unk08;
-};
-struct ProfBufQ
-{
-    unsigned long unk00;
-    ProfRecQ* m_pCur;
-    unsigned long unk08;
-    ProfRecQ* m_pRecordEnd;
-};
-class ListenerObjQ
-{
-  public:
-    virtual void v00(void);
-    virtual void v01(void);
-    virtual void v02(void);
-    virtual void v03(void);
-    virtual void v04(void);
-    virtual void v05(unsigned long a1);
-};
-struct ListenerArrayQ
-{
-    ListenerObjQ** m_ppItems;
-    unsigned long m_uiItemCount;
-};
-struct ListenerOwnerQ
-{
-    unsigned long unk00, unk04, unk08, unk0C, unk10, unk14, unk18, unk1C;
-    unsigned long unk20, unk24, unk28, unk2C, unk30, unk34, unk38, unk3C;
-    unsigned long unk40, unk44, unk48, unk4C, unk50, unk54, unk58, unk5C;
-    unsigned long unk60, unk64, unk68, unk6C, unk70, unk74, unk78, unk7C;
-    unsigned long unk80, unk84, unk88, unk8C, unk90, unk94, unk98, unk9C;
-    unsigned long unkA0, unkA4, unkA8, unkAC, unkB0, unkB4, unkB8, unkBC;
-    unsigned long unkC0, unkC4, unkC8, unkCC, unkD0, unkD4, unkD8, unkDC;
-    unsigned long unkE0, unkE4, unkE8, unkEC, unkF0, unkF4, unkF8, unkFC;
-    unsigned long unk100, unk104, unk108, unk10C, unk110, unk114, unk118, unk11C;
-    unsigned long unk120, unk124, unk128, unk12C, unk130, unk134, unk138, unk13C;
-    ListenerArrayQ m_kListeners;
-};
 // Iterates pOwner's listener array, profiling each call to v05(a2), then calls FUN_00d00370 on the array.
 // @f3 0x00908a00 (community match, verified in this file)
 #include <windows.h>
@@ -4463,21 +3290,6 @@ struct S00d01850_Out
     int unk00, unk04, unk08;
     DWORD unk0C;
     DWORD m_i10;
-};
-class S00d01850_Item
-{
-  public:
-    virtual void v0();
-    virtual void v1();
-    virtual void v2();
-    virtual void v3();
-    virtual void vtbl10(S00d01850_Out*);
-    virtual void v5();
-};
-struct S00d01850_ItemList
-{
-    S00d01850_Item** m_ppItems;
-    int m_iArrayLength;
 };
 struct S00d01850_Owner
 {

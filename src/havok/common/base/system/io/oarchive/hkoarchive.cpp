@@ -2,20 +2,6 @@
 // src/havok/common/base/system/io/oarchive/hkoarchive.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/common/base/system/io/oarchive/hkoarchive.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-struct hkReferencedObject
-{
-    void RetainReference();
-    void removeReference();
-};
-
-struct FUN_00d60810
-{
-    int m_iWordAt00;
-    int m_iWordAt04;
-    hkReferencedObject* m_8;
-    void AssignReferencedObject(hkReferencedObject* p);
-};
-
 extern "C" unsigned int __stdcall WriteSwapped(void*, int, int);
 
 // @fnv 0x00d609c0
@@ -218,18 +204,6 @@ int __thiscall FUN_00d607e0_class::ForwardValueToObject(int value)
     m_8->FUN_00d607e0_virtual3(value);
     return value;
 }
-
-extern int DAT_010d14f8;
-
-struct FUN_00d60830
-{
-    int m_iWordAt00;
-    short m_iWordAt04;
-    short m_6;
-    hkReferencedObject* m_8;
-    char m_iThirdValue;
-    FUN_00d60830(hkReferencedObject* p, char b);
-};
 
 struct FUN_00d60a00_class : public hkOArchive
 {
@@ -450,35 +424,4 @@ struct hkMemoryRouterDBA
     {
         return *m_pStreamAllocator;
     }
-};
-
-extern "C" hkMemoryRouterDBA* __cdecl FUN_00c85750();
-
-class hkMap64DBA
-{
-  public:
-    void* m_kPrimitiveElement;
-    int m_iCapacityFlags;
-    int m_iPairCount;
-
-    unsigned __int64 FUN_00cb1cb0(unsigned __int64 key, unsigned __int64 def) const;
-    void InsertKeyValue(hkMemoryAllocatorDBA& alloc, unsigned __int64 key, unsigned __int64 val);
-};
-
-struct EntryDBA
-{
-    int m_uiFilterValue;
-    int m_next;
-};
-
-class ListMapDBA
-{
-  public:
-    EntryDBA* m_entries;
-    int m_iNumberOfEntries;
-    int m_pRayCursor;
-    hkMap64DBA m_map;
-
-    int AllocateSlot();
-    void Insert(unsigned __int64 key, const int& value);
 };

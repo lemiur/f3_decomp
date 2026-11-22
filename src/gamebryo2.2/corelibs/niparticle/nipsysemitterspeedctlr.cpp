@@ -1,8 +1,6 @@
 // src/gamebryo2.2/corelibs/niparticle/nipsysemitterspeedctlr.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/_fallout3/platforms/common/code/gamebryo2.2/corelibs/niparticle/nipsysemitterspeedctlr.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-extern const void* g_01202728;
-
 struct NiPSysModifierFloatCtlr
 {
     float m_fValue;
@@ -40,19 +38,6 @@ void NiPSysEmitterSpeedCtlr::FUN_00c29fa0(float fValue)
     m_pFloatCtlr->m_fTarget = fValue;
 }
 }  // namespace fnv_00c29fa0
-
-struct StrArr
-{
-    void SetSize(unsigned int);
-    void SetAt(unsigned int, char*&);
-    unsigned char _pad[8];
-    unsigned short m_usMaxSize;
-    unsigned short m_usSize;
-    unsigned short _pad2;
-    unsigned short m_usGrowBy;
-};
-void __stdcall FUN_00c32f60(StrArr*);
-char* __cdecl _FUN_00a7d330(const void*);
 
 extern "C" void* __cdecl FUN_00aa13e0(unsigned int);
 extern char DAT_010bf654[];

@@ -2,8 +2,6 @@
 // src/gamebryo2.2/corelibs/niparticle/nipsysemitterlifespanctlr.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/_fallout3/platforms/common/code/gamebryo2.2/corelibs/niparticle/nipsysemitterlifespanctlr.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-extern "C" void* g_01202740;
-
 struct NiPSysModifierFloatCtlr
 {
     void* m_pUserData;
@@ -41,14 +39,6 @@ void NiPSysEmitterLifeSpanCtlr::FUN_00c2b670(float fValue)
     *f = fValue;
 }
 }  // namespace fnv_00c2b670
-
-struct StrArr
-{
-    void __thiscall SetSize(unsigned int);
-    void __thiscall SetAt(unsigned int, char*&);
-};
-void __stdcall FUN_00c32f60(StrArr*);
-char* __cdecl _FUN_00a7d330(void*);
 
 class C2B680Base
 {

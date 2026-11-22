@@ -347,16 +347,6 @@ hkBool9C90 FilterList9C90::FUN_00e49c90(const void* p0, const void* p1, const vo
     return true;
 }
 
-struct FUN_00e49dc0_FilterObject
-{
-    void FUN_00c905b0();
-};
-
-struct FUN_00e49dc0_List : public hkpCollisionFilterList
-{
-    void FUN_00e49dc0(hkpCollisionFilter* filter);
-};
-
 struct AllocatorE49
 {
     virtual void slot0();
@@ -546,24 +536,6 @@ struct FilterArrayE4
         data = 0;
         capacityAndFlags = 0x80000000;
     }
-};
-struct FUN_00e49f40 : CollisionFilterE4
-{
-    FilterArrayE4 filters;
-    virtual ~FUN_00e49f40() throw();
-};
-
-extern int DAT_0102e388;
-
-class FilterListAE90
-{
-  public:
-    int vftable;
-    int unk04;
-    FilterRefE4** m_data;
-    int m_iElementCount;
-    int m_iCapacityState;
-    void FUN_00e4ae90();
 };
 
 // @f3 0x00a779f0 (community match, verified in this file)

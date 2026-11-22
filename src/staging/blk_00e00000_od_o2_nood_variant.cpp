@@ -216,8 +216,6 @@ struct FUN_00e00290_sub
     void FUN_00cb0a70(Handle_e00290 kHandle);
     int m_00;
 };
-extern int DAT_010cc040;
-extern int DAT_010d79e8;
 struct SmallArray_e00290
 {
     void* m_pData;
@@ -601,7 +599,6 @@ struct FUN_00e02180_sub
     void FUN_00cb0a70(Handle_e02180 kHandle);
     int m_00;
 };
-extern int DAT_010e9ccc;
 struct __declspec(align(16)) FUN_00e02180_obj
 {
     int* m_pVtbl;
@@ -633,33 +630,11 @@ class __declspec(align(16)) S00e02730_Object
 };
 
 #include <xmmintrin.h>
-struct S_00e11530_Node
-{
-    S_00e11530_Node* next;
-    int unk04;
-    int unk08;
-    int unk0c;
-    __m128 bounds;
-};
-
-struct S_00e11530_Owner
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    S_00e11530_Node* unk14;
-
-    __m128* FUN_00e11530(__m128* out);
-};
 
 struct VecQ
 {
     float x, y, z, w;
 };
-
-extern VecQ DAT_012683a0;
 
 struct __declspec(align(16)) TransformQ
 {
@@ -672,13 +647,6 @@ struct __declspec(align(16)) RotationQ
     float m_col[12];
 };
 
-struct ShapeQ
-{
-    void FUN_00e11a90(const TransformQ* t);
-    void FUN_00e11b40(const RotationQ* r);
-};
-
-extern unsigned __int64 g_unk01268370[6];
 struct __declspec(align(16)) Rot
 {
     unsigned __int64 d[6];
@@ -689,11 +657,6 @@ struct __declspec(align(16)) Transform
     float r1[4];
     float r2[4];
     float t[4];
-};
-struct Owner
-{
-    void FUN_00e11a90(const Transform* xf);
-    void FUN_00e11ca0(const __m128* src);
 };
 
 struct S00e00d70_Arg
@@ -740,9 +703,6 @@ union __declspec(intrin_type) __declspec(align(16)) __m128
 extern "C"
 {
     N::__m128 _mm_load_ps(const float*);
-    N::__m128 _mm_load_ss(const float*);
-    N::__m128 _mm_set_ss(float);
-    N::__m128 _mm_set1_ps(float);
     N::__m128 _mm_shuffle_ps(N::__m128, N::__m128, int);
     N::__m128 _mm_mul_ps(N::__m128, N::__m128);
     N::__m128 _mm_add_ps(N::__m128, N::__m128);
@@ -835,22 +795,6 @@ struct EdgeNode
         unk40 = a.unk40;
     }
 };
-struct EdgeMesh
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    EdgeNode* head;
-    int count;
-};
 struct EdgeRef
 {
     EdgeNode* node;
@@ -901,8 +845,6 @@ struct EdgeMemory
 EdgeMemory* FUN_00c85750();
 void FUN_00c908c0(void*, void*, int, int);
 void ResizeAudioStream(void*, void*, int);
-float FUN_00e13870(EdgeNode*, int);
-float ClampedAcos(float);
 template <class T> inline void EdgeAllocator::reserve(EdgeArray<T>& array, int needed, int elementSize)
 {
     int available = array.capacity & 0x3fffffff;
@@ -960,27 +902,6 @@ struct EdgePool
         head = item;
         return item;
     }
-};
-struct PointerSlotArray
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    void* slots[1];
-};
-extern PointerSlotArray* DAT_0126ebe8;
-extern int DAT_0126ebec;
-extern int DAT_0126ebf0;
-struct EdgeProcessor
-{
-    int unk00;
-    int unk04;
-    EdgePool vertices;
-    EdgePool edges;
-    void FUN_00e11910(EdgeNode*);
-    void FUN_00e195c0(float threshold, float distance, const EdgeMesh* mesh);
 };
 
 struct LoadedName_E001F0

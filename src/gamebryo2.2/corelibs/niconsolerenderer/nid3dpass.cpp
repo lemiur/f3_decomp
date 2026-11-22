@@ -235,7 +235,6 @@ void __cdecl FreePointerArray(NiPointer<BeamStage>* pkElement)
 
 void* __cdecl FUN_00c1d790(unsigned int);
 extern int DAT_010ef35c;
-extern int DAT_010ef378;
 
 class NiMemObject
 {
@@ -323,12 +322,6 @@ NiTexture* __stdcall GetTextureByIndex(char* apObject, int aiIndex)
     }
     return pTexture;
 }
-
-struct GlobalObjectO2_00a7b610
-{
-    int x;
-};
-extern GlobalObjectO2_00a7b610 g_0126f5c4;
 
 namespace fnv_00e7e7a0 {
 struct MemoryManager
@@ -465,25 +458,6 @@ void __cdecl FUN_00e7f920(int pObject)
 }
 
 extern int DAT_011bf558;
-struct SubArr
-{
-    char d[0x10];
-    void FUN_00e80020(unsigned int, unsigned int);
-};
-struct FUN_00e800f0
-{
-    virtual ~FUN_00e800f0();
-    bool b4;
-    int pad8[3];
-    int f14, f18, f1c;
-    SubArr sub;
-    int f30, f34, f38, f3c, f40, f44, f48;
-    char b4c;
-    int f50, f54, f58, f5c;
-    char b60, b61;
-    int f64;
-    FUN_00e800f0();
-};
 
 extern "C" int __cdecl AllocatePoolItem();
 
@@ -1266,67 +1240,6 @@ void* NiDSBObject::InitializeAndRegister()
 extern int DAT_011bf558;
 extern int DAT_011bf560;
 extern int DAT_0126f6c8;
-
-class DispatchObject
-{
-  public:
-    virtual void v00();
-    virtual void v01();
-    virtual void v02();
-    virtual void v03();
-    virtual void v04();
-    virtual void v05();
-    virtual void v06();
-    virtual void v07();
-    virtual void v08();
-    virtual void v09();
-    virtual void v0a();
-    virtual void v0b();
-    virtual void v0c();
-    virtual void v0d();
-    virtual void v0e();
-    virtual void v0f();
-    virtual void v10();
-    virtual void v11();
-    virtual void v12();
-    virtual void v13();
-    virtual void v14();
-    virtual void v15();
-    virtual void v16();
-    virtual void v17();
-    virtual void v18();
-    virtual void v19();
-    virtual void v1a();
-    virtual void v1b();
-    virtual void v1c();
-    virtual void v1d();
-    virtual void v1e();
-    virtual void v1f();
-    virtual void v20();
-    virtual void v21();
-    virtual void v22();
-    virtual void v23();
-    virtual void v24();
-    virtual void v25();
-    virtual void v26();
-    virtual void v27();
-    virtual void v28();
-    virtual void v29();
-    virtual void v2a();
-    virtual void v2b();
-    virtual void v2c();
-    virtual void v2d();
-    virtual void v2e();
-    virtual void v2f();
-    virtual void v30(int a, int b, int c, int d);
-    virtual void v31();
-    virtual void v32();
-    virtual void v33();
-    virtual void v34();
-    virtual void v35();
-    virtual void v36();
-    virtual void v_dc(int a, int b);
-};
 
 struct E7DE90State
 {

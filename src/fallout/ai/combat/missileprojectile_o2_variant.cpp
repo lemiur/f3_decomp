@@ -2,48 +2,6 @@
 // src/fallout/ai/combat/missileprojectile_o2_variant.cpp - flag-variant unit created 2026-10-17 by flag_variants.py for src/fallout/ai/combat/missileprojectile.cpp functions whose prologue its flags cannot
 // produce (frameless code in an /Od unit). Declarations copied from that unit's skeleton; move the functions to their real unit once identified.
 
-// src/fallout/ai/combat/missileprojectile.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/_fallout3/platforms/common/code/fallout/ai/combat/missileprojectile.cpp).
-// Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
-extern int DAT_011c6278;
-int __cdecl FUN_009b7cb0();
-extern char const* const g_01268310_arg1;
-struct FUN_009ba4d0_shell
-{
-    char const* const* GetArg1Ptr();
-};
-extern "C" void __cdecl FUN_00c89640(void*);
-extern "C" void __cdecl __Dummy_00b6fef0(void*, unsigned int);
-struct bhkConstraint
-{
-    virtual ~bhkConstraint();
-    void* DestroyConstraint(unsigned int);
-};
-struct BGSLoadFormBuffer
-{
-    void ReadTypedData(void*, unsigned int);
-};
-struct BeamProjectile
-{
-    void LoadProjectile(BGSLoadFormBuffer*);
-};
-struct MissileProjectile : BeamProjectile
-{
-    void FUN_009baad0(BGSLoadFormBuffer*);
-};
-struct BGSProjectile
-{
-    bool GetFlag(unsigned int) const;
-};
-struct FUN_009b7c90_shell : BGSProjectile
-{
-    bool FUN_009b7c90();
-};
-extern "C" void __cdecl _delete(void*, unsigned int);
-struct bhkHingeConstraint : bhkConstraint
-{
-    void* FUN_009ba520(unsigned int);
-};
-
 struct TlsBlock_t
 {
     int unk000;
@@ -242,8 +200,6 @@ struct TlsGuard_t
     }
 };
 
-void FUN_00c876f0();
-void FUN_00c87700();
 void* __cdecl FUN_00aa13e0(unsigned int size);
 
 class OwnerBase_t
@@ -281,14 +237,6 @@ class SpawnedObject_t : public ChainA_t
     {
         g_ctrD += 1;
     }
-};
-
-struct FUN_00cbdd60_cls
-{
-    int unk00;
-    int unk04;
-    void FUN_00c89730(SpawnedObject_t* obj, unsigned int arg);
-    SpawnedObject_t* FUN_00cbdd60(unsigned int arg);
 };
 
 struct S_cbde40_Tls
@@ -487,7 +435,6 @@ struct S_cbde40_Pool
     void* FUN_00aa3e40(unsigned int n);
 };
 extern S_cbde40_Pool DAT_011f6238;
-extern int DAT_0108ff98;
 struct S_cbde40_Base
 {
     int unk00;
@@ -503,15 +450,6 @@ struct S_cbde40_Obj
     {
         return DAT_011f6238.FUN_00aa3e40(n);
     }
-};
-struct S_cbde40
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    S_cbde40_Base* unk0c;
-    void CopyFromSource(S_cbde40_Obj* c);
-    S_cbde40_Base* FUN_00cbde40(bool* created);
 };
 
 class NiAVObject;

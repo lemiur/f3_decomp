@@ -4,27 +4,6 @@
 
 #include "havok/hkArrayStreamWriter.h"
 
-struct FUN_00d467c0
-{
-    void write(const char* a, unsigned int b);
-};
-struct FUN_00d468a0_obj
-{
-    unsigned int pad[2];
-    FUN_00d467c0* p;
-    unsigned int WriteToStream(unsigned int arg, unsigned int b);
-};
-
-struct FUN_00d469c0
-{
-    int m0;
-    int m1;
-    int m2;
-    int m3;
-    int m4;
-    FUN_00d469c0(int v);
-};
-
 struct FUN_00d46b20_inner
 {
     void Run();
@@ -43,57 +22,6 @@ void FUN_00d46b20_cls::FUN_00d46b20()
 {
     m_08->Run();
 }
-
-struct FUN_00d46c80_cls
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int m_0c;
-
-    void FUN_00d46c80(int aiDelta);
-};
-
-extern int DAT_010cf734;
-struct FUN_00d466e0
-{
-    void* unk00;
-    short unk04;
-    short unk06;
-    int unk08;
-    int unk0C;
-    int unk10;
-    FUN_00d466e0(int a, int b);
-};
-
-struct FNVBuffer
-{
-    void* data;
-    unsigned int used;
-    unsigned int capacityAndFlags;
-};
-struct FNVWriter
-{
-    virtual void method00();
-    virtual void method04();
-    virtual void method08();
-    virtual void method0c();
-    virtual void method10();
-    virtual void method14(int operation, const void* globalData, void* bytes, unsigned int count, unsigned int limit);
-    int unk04;
-    int unk08;
-    int unk0c;
-    unsigned char allowRestricted;
-};
-extern int DAT_010cc460;
-extern unsigned int __cdecl FUN_00d06f80(void*, unsigned int);
-struct FUN_00d46770_cls
-{
-    int unk00;
-    int unk04;
-    FNVBuffer* buffer;
-    void WriteBufferToWriter(FNVWriter* writer, int unused);
-};
 
 class hkMemoryAllocatorD469
 {
@@ -253,12 +181,6 @@ class FUN_00d46be0_class
     }
 };
 
-struct FUN_00d1df70
-{
-    void FUN_00c90510() throw();
-    void removeReference() throw();
-};
-
 class hkReferencedObjectD46C
 {
   public:
@@ -298,20 +220,6 @@ struct State
     State()
     {}
 };
-struct Counters
-{
-    int step;
-    int base;
-    int misc;
-    int length;
-};
-struct FUN_00d46ca0_Class
-{
-    int unk00, unk04;
-    Counters* counters;
-    int position;
-    State FUN_00d46ca0();
-};
 
 namespace fnv_00d46cc0 {
 struct FnvCpu_FUN_00d46cc0_CpuAllocator
@@ -329,27 +237,9 @@ struct FnvCpu_FUN_00d46cc0_CpuAllocatorHolder
     FnvCpu_FUN_00d46cc0_CpuAllocator* allocator;
 };
 FnvCpu_FUN_00d46cc0_CpuAllocatorHolder* __cdecl FUN_00c85750();
-struct FnvCpu_FUN_00d46cc0_CpuObject
-{
-    unsigned int unk00;
-    unsigned short size;
-    void FUN_00d46c30();
-    FnvCpu_FUN_00d46cc0_CpuObject* Destroy(unsigned int flags);
-};
 }  // namespace fnv_00d46cc0
 
 void __cdecl FUN_00cb1260(void* dst, const void* src, int nbytes);
-
-class hkBlockStreamD466
-{
-  public:
-    int m_iDofCount;
-    int m_iLastBlockSize;
-    char** m_kBlocks;
-    int m_iBlockCount;
-
-    void Read(void* buf, int nbytes, int offset);
-};
 
 class hkBoolD467
 {
@@ -363,32 +253,6 @@ class hkBoolD467
         return m_cBooleanValue != 0;
     }
     char m_cBooleanValue;
-};
-
-class hkBufferD467
-{
-  public:
-    int m_iFirstIndex;
-    int m_last;
-    int unk08;
-    int m_iCapacity;
-
-    void Read(void* dst, int n, int offset) throw();
-};
-
-class hkStreamD467
-{
-  public:
-    virtual ~hkStreamD467();
-    virtual int read(void* dst, int n);
-    virtual int skip(int n);
-    virtual hkBoolD467 IsStreamValid();
-
-    int unk04;
-    hkBufferD467* m_buffer;
-    int m_offset;
-
-    int FUN_00d46710(void* dst, int n);
 };
 
 namespace fnv_00d468c0 {
@@ -441,17 +305,6 @@ template <class T> class hkArrayD468
         reserve(FUN_00c85750().heap(), n);
         m_iElementCount = n;
     }
-};
-
-class hkBufWriterD468
-{
-  public:
-    int unk00;
-    int unk04;
-    hkArrayD468<char>* m_buf;
-    int m_pos;
-
-    void Reset();
 };
 
 }  // namespace fnv_00d468c0
@@ -600,24 +453,6 @@ struct Router_d467
     }
 };
 
-struct BlockArray_d467
-{
-    const char** m_data;
-    int m_iElementCount;
-    int m_iCapacityState;
-};
-
-class Stream_d467
-{
-  public:
-    int m_iDofCount;
-    int m_offset;
-    BlockArray_d467 m_kBlocks;
-
-    void FUN_00d467c0(const char* pcData, int iSize);
-};
-
-void __cdecl ResizeAudioStream(void*, void*, int);
 void __cdecl FUN_00cb1260(void* dst, const void* src, int count);
 
 void __cdecl FUN_00c908c0(hkMemoryAllocatorD469* heap, void* array, int numElements, int sizeOfElement);

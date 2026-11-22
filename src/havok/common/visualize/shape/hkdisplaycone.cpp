@@ -41,7 +41,6 @@ struct GlobalContext
     Allocator* allocator;
 };
 extern "C" GlobalContext* __cdecl FUN_00c85750();
-extern "C" void __cdecl ResizeAudioStream(Allocator*, DynamicArray<Vertex>*, int);
 extern "C" void __cdecl FUN_00c908c0(Allocator*, DynamicArray<Edge>*, int, int);
 struct ForwardArg
 {

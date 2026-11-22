@@ -3,24 +3,6 @@
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
 void __cdecl FUN_00d6ad40();
-void __cdecl FUN_00d6a850();
-void __cdecl RegisterCenterOfMass();
-void __cdecl RegisterConstraintsProcessFactory();
-void __cdecl RegisterConvexRadius();
-void __cdecl RegisterContactPointsActive();
-void __cdecl RegisterContactPointsInactive();
-void __cdecl DispatchStateHandler();
-void __cdecl RegisterToiCounter();
-void __cdecl RegisterInertiaTensors();
-void __cdecl RegisterMousePicking();
-void __cdecl RegisterPhantomsProcess();
-void __cdecl RegisterShapesProcess();
-void __cdecl FUN_00d651c0();
-void __cdecl RegisterSweptTransformsTask();
-void __cdecl FUN_00d63da0();
-void __cdecl InitWorldMemory();
-void __cdecl RegisterSnapshotCommands();
-void __cdecl RegisterWeldingViewer();
 
 // @f3 0x009542b0 (community match, verified in this file)
 void __cdecl FUN_00d6ad40();
@@ -150,10 +132,6 @@ struct Owner
 {
     void UntrackObject(Event* e);
 };
-struct Sub
-{
-    void DispatchEventToOwner(Event* e);
-};
 
 }  // namespace fnv_00cd1ff0
 
@@ -162,7 +140,6 @@ struct GlobalObjectO2_00d472a0
 {
     int x;
 };
-extern GlobalObjectO2_00d472a0 g_012690d4;
 struct FUN_00cd12b0_cls
 {
     void AddElementAndNotify(int value, const void* category, const char* name, int flags);
@@ -276,81 +253,9 @@ struct PointerArray
     int count;
     int capacity;
 };
-struct Candidate
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5C;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6C;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7C;
-    int unk80;
-    PointerArray items;
-    void* FindOrAddPointer(void* value);
-};
 
 namespace fnv_00cd27f0 {
-struct Device
-{
-    virtual void slot00() = 0;
-    virtual void slot04() = 0;
-    virtual void slot08() = 0;
-    virtual void slot0c() = 0;
-    virtual void Release(void* handle, unsigned int bytes) = 0;
-};
-struct Holder
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    Device* device;
-};
 extern void* __cdecl FUN_00c85750();
-struct FUN_00cd27f0
-{
-    virtual void v0() = 0;
-    int unk04;
-    int buffer2;
-    int unk0c;
-    int count2;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int buffer1;
-    volatile int unk30;
-    int count1;
-    virtual ~FUN_00cd27f0();
-};
 }  // namespace fnv_00cd27f0
 
 namespace fnv_00cd2900 {
@@ -369,17 +274,9 @@ struct Manager
     DeleteInterface* iface;
 };
 Manager* __cdecl FUN_00c85750();
-struct FUN_00cd2900_owner
-{
-    int unk00;
-    unsigned short unk04;
-    void FUN_00cd2690();
-    void* DestroyIfFlagged(unsigned flags);
-};
 }  // namespace fnv_00cd2900
 
 class GlobalObjectO2_00d472a0;
-extern GlobalObjectO2_00d472a0 g_012688c8;
 class Handler
 {
   public:
@@ -402,62 +299,6 @@ struct Container
         UnknownBlock unk10, unk20, unk30, unk40;
     } prefix;
     Receiver receiver;
-};
-
-struct CD1F70Stats
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int m_childStats;
-};
-
-extern const char g_CD1F70Parent[];
-
-struct CD1F70Collection
-{
-    void AddStat(CD1F70Stats* stats, const char* parent, const char* name, int* childStats);
-};
-
-class CD1F70Primary
-{
-  public:
-    virtual void unk00();
-
-    CD1F70Collection* m_kPhantoms;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-};
-
-class CD1F70Secondary
-{
-  public:
-    virtual void CollectPhantoms(CD1F70Stats* stats);
-};
-
-class CD1F70World : public CD1F70Primary, public CD1F70Secondary
-{
-  public:
-    virtual void CollectPhantoms(CD1F70Stats* stats);
 };
 
 struct CD1FB0Collector
@@ -1040,9 +881,6 @@ struct CD22Owner
     void AddElementAndNotify(CD22Elem* e, const char* d, const char* s, int z);
 };
 
-extern char DAT_01269104[];
-extern char str_010cb20c[];
-
 struct CD22Object
 {
     int unk00;
@@ -1183,11 +1021,6 @@ void FUN_00cd24d0_cls::FUN_00cd24d0(int value)
         }
     }
 }
-
-struct FUN_00c93a60_cls
-{
-    void FUN_00c93a60(void* param);
-};
 
 struct Sink
 {
@@ -1662,22 +1495,6 @@ struct ValueCD2A
     {}
 };
 
-struct EntryCD2A
-{
-    int m_key;
-    int m_unk04;
-    ValueCD2A m_uiFilterValue;
-};
-
-class OwnerCD2A
-{
-  public:
-    int unk00[0x78 / 4];
-    hkArrayCD2A<EntryCD2A> m_entries;
-
-    ValueCD2A FUN_00cd2a50(int iKey);
-};
-
 struct FUN_00cd1e70
 {
     virtual ~FUN_00cd1e70();
@@ -1738,45 +1555,6 @@ struct ThunkOwner : PrimaryBase, SecondaryBase
 
 ThunkOwner::ThunkOwner()
 {}
-
-// FUN_00cd28b0: MSVC this-adjusting thunk.
-//
-// The original is 8 bytes:  sub ecx, 0x5c ; jmp 0x00cd2900
-// That is the adjustor thunk MSVC emits for a virtual function that a
-// derived class overrides for a SECONDARY base: calling through the
-// secondary base's vftable passes the base subobject's `this`, so the
-// thunk walks it back to the derived object and tail-jumps to the shared
-// override.
-//
-// To make the compiler produce exactly that symbol we need
-//   * two bases that both declare the same virtual (so the derived class
-//     overrides one function for both of them -> one adjustor per base),
-//   * the second base placed at offset 0x5c (the first base is padded to
-//     0x5c bytes),
-//   * the override DECLARED ONLY, so that the thunk is the single defined
-//     function symbol carrying the name FUN_00cd28b0,
-//   * a defined key function in the derived class, so that its vftable
-//     (which references the thunk) is emitted in this translation unit.
-struct AdjBase1
-{
-    AdjBase1();
-    virtual void FUN_00cd28b0();
-    char pad[0x58];  // vptr + 0x58 -> size 0x5c, so AdjBase2 lands at +0x5c
-};
-
-struct AdjBase2
-{
-    AdjBase2();
-// @fnv 0x00cd28b0
-    virtual void FUN_00cd28b0();
-};
-
-struct AdjOwner : AdjBase1, AdjBase2
-{
-    AdjOwner();
-    virtual void key_fn();  // key function - defined, so the vftable is emitted
-    void FUN_00cd28b0();    // the shared override - declared only
-};
 
 namespace fnv_00cd28c0 {
 // sub ecx,0x60; jmp DestroyIfFlagged == MSVC adjustor thunk (second base's vtable slot, this moved back by sizeof(PrimaryBase)=0x60).
@@ -1895,54 +1673,3 @@ struct CD28E0Object : CD28E0Primary, CD28E0Secondary
 
 CD28E0Object::CD28E0Object()
 {}
-
-// sub ecx,0x68; jmp target == MSVC adjustor thunk for a secondary base slot.
-struct CD28F0Primary
-{
-    virtual void FUN_00cd28f0();
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0C;
-    unsigned int unk10;
-    unsigned int unk14;
-    unsigned int unk18;
-    unsigned int unk1C;
-    unsigned int unk20;
-    unsigned int unk24;
-    unsigned int unk28;
-    unsigned int unk2C;
-    unsigned int unk30;
-    unsigned int unk34;
-    unsigned int unk38;
-    unsigned int unk3C;
-    unsigned int unk40;
-    unsigned int unk44;
-    unsigned int unk48;
-    unsigned int unk4C;
-    unsigned int unk50;
-    unsigned int unk54;
-    unsigned int unk58;
-    unsigned int unk5C;
-    unsigned int unk60;
-    unsigned int unk64;
-};
-
-struct CD28F0Secondary
-{
-    virtual void FUN_00cd28f0();
-};
-
-struct CD28F0Derived : CD28F0Primary, CD28F0Secondary
-{
-    CD28F0Derived();
-// @fnv 0x00cd28f0
-    virtual void FUN_00cd28f0();
-};
-
-struct FUN_00cd1eb0_StandIn
-{
-    int unk00;
-    int __thiscall FUN_00cd1eb0(int param);
-};
-
-extern void __cdecl FUN_00401030(void* ptr);

@@ -80,13 +80,6 @@ template <class T> struct hkArray
     }
 };
 
-extern int __cdecl FUN_00dd6380(hkArray<hkVector4>* planes, int skip1, int skip2, int plane, Contact* contact);
-
-extern float DAT_0104da48;
-extern float DAT_0109afc4;
-extern double DAT_01032980;
-extern __m128 DAT_010c7160;
-
 // @f3 0x00a57480 (community match, verified in this file)
 extern const float DAT_00de6e60;
 extern const double DAT_00db5748;
@@ -165,13 +158,3 @@ hkBool __cdecl FUN_00dd66d0(const hkVector4* direction, hkArray<hkVector4>* plan
     }
     return found;
 }
-
-
-extern "C" void __cdecl Atan2(float, float);
-
-extern __m128 DAT_010c44d0;
-
-struct S00dd2fd0_cls
-{
-    __m128 m_00;
-};

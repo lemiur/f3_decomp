@@ -43,11 +43,6 @@ void FUN_00c03a20();
 
 void __cdecl operator delete(void* p, unsigned int size);
 
-struct FUN_00b91b50
-{
-    FUN_00b91b50* Method(bool flag);
-};
-
 void __cdecl FUN_00b92450();
 
 void __cdecl operator delete(void* p, unsigned int size);
@@ -355,11 +350,6 @@ extern int DAT_010b14c0;
 extern int DAT_010b14a0;
 void FUN_00c03a20();
 
-struct FUN_00b8e280_class
-{
-    FUN_00b8e280_class* __thiscall FUN_00b8e280(bool flag);
-};
-
 namespace fnv_00b8e2c0 {
 extern int DAT_010b1640;
 extern int DAT_010b1620;
@@ -440,23 +430,12 @@ FUN_00b8ef60_class* __thiscall FUN_00b8ef60_class::FUN_00b8ef60(bool abFree)
 }
 
 extern "C" void __cdecl _delete(void* p, unsigned int size);
-extern int DAT_010b2308;
-extern int DAT_010b22e8;
 void FUN_00c03a20();
-
-struct FUN_00b8f120_class
-{
-    void* __thiscall FUN_00b8f120(unsigned char b);
-};
 
 extern "C" void __cdecl _delete(void*, unsigned int);
 extern "C" int DAT_010b2470;
 extern "C" int DAT_010b2490;
 void FUN_00c03a20();
-struct FUN_00b8f2b0_class
-{
-    void* __thiscall FUN_00b8f2b0(bool flag);
-};
 
 extern int DAT_010b25f0;
 extern int DAT_010b2610;
@@ -545,11 +524,6 @@ void* __thiscall FUN_00b8f6d0_class::FUN_00b8f6d0(bool abFree)
 extern "C" void __cdecl _delete(void* p, unsigned int size);
 extern int DAT_010b2a74;
 extern int DAT_010b2a98;
-
-struct FUN_00b8f7a0_class
-{
-    int* __thiscall FUN_00b8f7a0(int arg);
-};
 
 extern "C" void __cdecl _delete(void*, unsigned int);
 extern "C" int DAT_010b2bec;
@@ -1128,14 +1102,7 @@ FUN_00b92290_shell* __thiscall FUN_00b92290_shell::FUN_00b92290(bool abFree)
 }
 
 extern "C" void __cdecl _delete(void* p, unsigned int size);
-extern int DAT_010b5af0;
-extern int DAT_010b5b10;
 void FUN_00c03a20();
-struct FUN_00b92570_class
-{
-    int vtbl;
-    FUN_00b92570_class* __thiscall FUN_00b92570(bool del);
-};
 
 namespace fnv_00b92690 {
 extern int DAT_010b5cb8;
@@ -1280,32 +1247,10 @@ FUN_00b92a40_class* __thiscall FUN_00b92a40_class::FUN_00b92a40(bool abDelete)
     return this;
 }
 
-extern int DAT_010b61d0;
-extern int DAT_010b61f0;
 void FUN_00c03a20();
-struct FUN_00b92b90
-{
-    FUN_00b92b90(bool b);
-};
-
-extern int DAT_010b6398;
-extern int DAT_010b6374;
-
-struct FUN_00b92ce0_class
-{
-    int vtbl;
-    int pad[26];
-    int* field_6c;
-    FUN_00b92ce0_class* __thiscall FUN_00b92ce0(int flag);
-};
 
 extern int DAT_010b6524;
 extern int DAT_010b6548;
-
-struct FUN_00b92ea0_shell
-{
-    void* __thiscall FUN_00b92ea0(bool flag);
-};
 
 namespace fnv_00b92ee0 {
 struct ImageSpaceEffectShader
@@ -1387,10 +1332,6 @@ extern "C" void __cdecl _delete(void*, unsigned int);
 extern int DAT_010b687c;
 extern int DAT_010b68a0;
 void FUN_00c03a20();
-struct FUN_00b93140_class
-{
-    void* __thiscall FUN_00b93140(bool);
-};
 
 namespace fnv_00b93180 {
 struct ImageSpaceEffectShader
@@ -1613,56 +1554,14 @@ extern "C" void __cdecl _delete(void*, unsigned int);
 extern "C" int DAT_010b7578;
 extern "C" int DAT_010b7598;
 void FUN_00c03a20();
-struct FUN_00b93fa0_shell
-{
-    void* vtbl;
-    void* m_004;
-    void* m_008;
-    void* m_00c;
-    void* m_010;
-    void* m_014;
-    void* m_018;
-    void* m_01c;
-    void* m_020;
-    void* m_024;
-    void* m_028;
-    void* m_02c;
-    void* m_030;
-    void* m_034;
-    void* m_038;
-    void* m_03c;
-    void* m_040;
-    void* m_044;
-    void* m_048;
-    void* m_04c;
-    void* m_050;
-    void* m_054;
-    void* m_058;
-    void* m_05c;
-    void* m_060;
-    void* m_064;
-    void* m_068;
-    void* m_06c;
-    void FUN_00c03a20();
-    void* __thiscall FUN_00b93fa0(bool flag);
-};
 
 extern "C" void __cdecl _delete(void*, unsigned int);
 void FUN_00c03a20();
 extern int DAT_010b7700;
 extern int DAT_010b7720;
 
-struct FUN_00b940f0_class
-{
-    FUN_00b940f0_class* __thiscall FUN_00b940f0(bool flag);
-};
-
 extern int DAT_010b78b8;
 extern int DAT_010b7898;
-struct FUN_00b94240_Class
-{
-    int* __thiscall FUN_00b94240(bool b);
-};
 
 namespace fnv_00b94280 {
 struct ImageSpaceEffectShader
@@ -1714,10 +1613,6 @@ extern "C" void __cdecl _delete(void*, unsigned int);
 extern int DAT_010b7bf0;
 extern int DAT_010b7bcc;
 void FUN_00c03a20();
-struct FUN_00b944e0_class
-{
-    FUN_00b944e0_class* __thiscall FUN_00b944e0(bool flag);
-};
 
 struct FUN_00b9cfd0_class
 {
@@ -1881,13 +1776,6 @@ FUN_00b8efa0::FUN_00b8efa0()
     ((NiTPrimitiveArray_ImageSpaceTexture___*)((char*)this + 0x94))->SetSize(2);
 }
 
-struct FUN_00b8f010_class : ImageSpaceEffectShader
-{
-    char m_00[0x94];
-    NiTPrimitiveArray_ImageSpaceTexture___ m_094;
-    FUN_00b8f010_class();
-};
-
 struct FUN_00b8f1b0 : ImageSpaceEffectShader
 {
     int m_00b2470;
@@ -1970,56 +1858,6 @@ FUN_00b91b80::FUN_00b91b80()
 
 extern int DAT_010b5460;
 extern int DAT_010b5480;
-
-struct FUN_00b91cf0_class : ImageSpaceEffectShader
-{
-    FUN_00b91cf0_class();
-    int* m_6c;
-    NiTPrimitiveArray_ImageSpaceTexture___ m_94;
-};
-
-struct FUN_00b92a80_class : public ImageSpaceEffectShader
-{
-    int m_04;
-    int m_08;
-    int m_0c;
-    int m_10;
-    int m_14;
-    int m_18;
-    int m_1c;
-    int m_20;
-    int m_24;
-    int m_28;
-    int m_2c;
-    int m_30;
-    int m_34;
-    int m_38;
-    int m_3c;
-    int m_40;
-    int m_44;
-    int m_48;
-    int m_4c;
-    int m_50;
-    int m_54;
-    int m_58;
-    int m_5c;
-    int m_60;
-    int m_64;
-    int m_68;
-    int m_6c;
-    int* m_70;
-    int m_74;
-    int m_78;
-    int m_7c;
-    int m_80;
-    int m_84;
-    int m_88;
-    int m_8c;
-    int m_90;
-    int m_94;
-    NiTPrimitiveArray_ImageSpaceTexture___ m_aiIndexedValues;
-    FUN_00b92a80_class();
-};
 
 struct FUN_00b92d90 : ImageSpaceEffectShader
 {
@@ -2126,48 +1964,6 @@ FUN_00b93fe0::FUN_00b93fe0()
 
 extern int DAT_010b7bf0;
 extern int DAT_010b7bcc;
-struct FUN_00b943d0_class : public ImageSpaceEffectShader
-{
-    int m_04;
-    int m_08;
-    int m_0c;
-    int m_10;
-    int m_14;
-    int m_18;
-    int m_1c;
-    int m_20;
-    int m_24;
-    int m_28;
-    int m_2c;
-    int m_30;
-    int m_34;
-    int m_38;
-    int m_3c;
-    int m_40;
-    int m_44;
-    int m_48;
-    int m_4c;
-    int m_50;
-    int m_54;
-    int m_58;
-    int m_5c;
-    int m_60;
-    int m_64;
-    int m_68;
-    int m_6c;
-    int m_70;
-    int m_74;
-    int m_78;
-    int m_7c;
-    int m_80;
-    int m_84;
-    int m_88;
-    int m_8c;
-    int m_90;
-    int m_94;
-    NiTPrimitiveArray_ImageSpaceTexture___ arr;
-    FUN_00b943d0_class();
-};
 
 struct MemoryManager
 {
@@ -2202,15 +1998,6 @@ void __thiscall FUN_00b8cad0_class::SetValue(int value)
     *(int*)((char*)this + 0xac) = value;
     g_tls_2b4 = old;
 }
-
-extern int __tls_index;
-
-struct FUN_00b8cb00_class
-{
-    unsigned char pad_000[0xb0];
-    int m_00b0;
-    void __thiscall FUN_00b8cb00(int value);
-};
 
 extern int DAT_010b083c;
 extern int DAT_010b0860;
@@ -2254,55 +2041,9 @@ extern int DAT_010b5480;
 void FUN_00c03a20();
 extern "C" void __cdecl _delete(void*, unsigned int);
 
-struct FUN_00b91e00_class
-{
-    int* vtbl;
-    int m_04;
-    int m_08;
-    int m_0c;
-    int m_10;
-    int m_14;
-    int m_18;
-    int m_1c;
-    int m_20;
-    int m_24;
-    int m_28;
-    int m_2c;
-    int m_30;
-    int m_34;
-    int m_38;
-    int m_3c;
-    int m_40;
-    int m_44;
-    int m_48;
-    int m_4c;
-    int m_50;
-    int m_54;
-    int m_58;
-    int m_5c;
-    int m_60;
-    int m_64;
-    int m_68;
-    int* m_6c;
-    FUN_00b91e00_class(bool flag);
-    ~FUN_00b91e00_class();
-};
-
 extern int _data_011c16bc;
 
-struct FUN_00b92500_class : ImageSpaceEffectShader
-{
-    char pad[0x94 - sizeof(ImageSpaceEffectShader) + 1];
-    NiTPrimitiveArray_ImageSpaceTexture___ m_ppData;  // +0x94
-    FUN_00b92500_class();
-};
-
 extern int _data_011c16bc;
-
-struct FUN_00b92bd0_class : ImageSpaceEffectShader
-{
-    FUN_00b92bd0_class();
-};
 
 extern int _data_011c16bc;
 
@@ -2376,13 +2117,6 @@ FUN_00b93aa0_class::FUN_00b93aa0_class()
 extern int DAT_010b7898;
 extern int DAT_010b78b8;
 extern int _data_011c16bc;
-
-struct FUN_00b94130_class : ImageSpaceEffectShader
-{
-    char pad[0x94 - sizeof(ImageSpaceEffectShader) + 1];
-    NiTPrimitiveArray_ImageSpaceTexture___ m_ppData;  // +0x94
-    FUN_00b94130_class();
-};
 
 struct FUN_00b988c0
 {
@@ -11353,10 +11087,6 @@ struct FUN_00bd8290 : NiAVObject
         FUN_00bd74a0();
     }
 };
-struct Input
-{
-    int unk00, unk04, unk08, unk0c;
-};
 struct TagGuard
 {
     int old;
@@ -11368,11 +11098,6 @@ struct TagGuard
     {
         g_tls_2b4 = old;
     }
-};
-struct Target
-{
-    bool FUN_00b9c020(int, FUN_00bd8290*);
-    bool FUN_00b9de90(int, int, int, int, Input*, unsigned short);
 };
 }  // namespace fnv_00b9de90
 
@@ -11658,14 +11383,6 @@ void FUN_00b8c830_class::RenderWithTextures(HolderForAccum* apShader, int aiArg1
     }
 }
 
-class BB8D440Texture;
-
-class BB8D440ImageSpaceTexture
-{
-  public:
-    BB8D440Texture* GetTexture() const;
-};
-
 template <class T> class BB8D440Pointer
 {
   public:
@@ -11683,32 +11400,6 @@ template <class T> class BB8D440Pointer
     }
 
     T* m_pObject;
-};
-
-struct BB8D440Data
-{
-    int unk00;
-    int unk04;
-    BB8D440Pointer<BB8D440ImageSpaceTexture> m_spTexture;
-};
-
-class BB8D440Effect
-{
-  public:
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    BB8D440Data* m_pUserData;
-
-    int HasTexture();
 };
 
 struct BufferDescriptor
@@ -12755,7 +12446,6 @@ bool FUN_00b98970_shell::HasListedItemInRange(unsigned int aMin, unsigned int aM
 }
 
 namespace fnv_00b9b540 {
-extern float DAT_011ffe48;
 extern float DAT_011ffe4c, DAT_011ffe50;
 extern float DAT_011ffe5c, DAT_011ffe60;
 extern float DAT_011ffe6c, DAT_011ffe70;
@@ -12768,51 +12458,6 @@ struct ImageSpaceTexture
     void FUN_00ba3840(unsigned int);
     void FUN_00ba3760(unsigned int);
     void FUN_00ba39a0();
-};
-struct PassConstants
-{
-    void FUN_00b8a790(unsigned int, float, float, float, float);
-};
-struct ShaderPrimary
-{
-    virtual void PrimarySlot0();
-    int unk04, unk08, unk0c, unk10, unk14, unk18;
-    int unk1c, unk20, unk24, unk28, unk2c, unk30, unk34;
-    int unk38, unk3c, unk40, unk44, unk48, unk4c, unk50;
-    int unk54, unk58, unk5c, unk60, unk64, unk68;
-};
-struct ShaderStage
-{
-    virtual void Slot0();
-    virtual void Render(void*, void*, PassConstants*, bool);
-    void SetAccumulatorAt(unsigned int, ImageSpaceTexture*, unsigned int);
-};
-struct ShaderObject : ShaderPrimary, ShaderStage
-{
-};
-struct EffectB9B540
-{
-    virtual void Slot0();
-    virtual void Slot1();
-    virtual void Slot2();
-    virtual void Slot3();
-    virtual void Slot4();
-    virtual void Slot5();
-    virtual void Slot6();
-    virtual bool Initialize(void*);
-    unsigned char unk04;
-    bool needsInitialize;
-    unsigned short unk06;
-    int unk08;
-    ShaderStage** shaders;
-    int unk10, unk14, unk18;
-    PassConstants** constants;
-    int unk20, unk24, unk28;
-    ImageSpaceTexture** textures;
-    int unk30, unk34, unk38, unk3c, unk40, unk44, unk48;
-    int unk4c, unk50, unk54, unk58, unk5c, unk60, unk64;
-    ImageSpaceTexture temporaryTexture;
-    void FUN_00b9b540(void*, void*, void*, void*);
 };
 }  // namespace fnv_00b9b540
 
@@ -12992,942 +12637,6 @@ struct Registry
         r_04[index] = value;
     }
 };
-struct CBA4640 : NiMemObj
-{
-    virtual void s0();
-    virtual void s1();
-    virtual void s2();
-    virtual void s3();
-    virtual void s4();
-    virtual void s5();
-    virtual void s6();
-    virtual void s7();
-    virtual void Call20(int n);
-    virtual void Call24(int n);
-    int data_00_0, data_00_4, data_00_8, data_00_c, data_00_10, data_00_14, data_00_18, data_00_1c, data_00_20,
-        data_00_24, data_00_28, data_00_2c, data_00_30, data_00_34, data_00_38, data_00_3c, data_00_40, data_00_44,
-        data_00_48, data_00_4c, data_00_50, data_00_54, data_00_58;
-    CBA4640();
-};
-struct CC05680 : NiMemObj
-{
-    int data_00_0, data_00_4, data_00_8, data_00_c, data_00_10, data_00_14, data_00_18, data_00_1c, data_00_20,
-        data_00_24, data_00_28, data_00_2c, data_00_30, data_00_34, data_00_38, data_00_3c, data_00_40, data_00_44,
-        data_00_48, data_00_4c, data_00_50, data_00_54, data_00_58, data_00_5c, data_00_60, data_00_64;
-    CC05680();
-};
-struct CBD93D0 : NiMemObj
-{
-    int data_00_0, data_00_4, data_00_8, data_00_c, data_00_10, data_00_14, data_00_18, data_00_1c, data_00_20,
-        data_00_24, data_00_28, data_00_2c, data_00_30, data_00_34, data_00_38, data_00_3c, data_00_40, data_00_44,
-        data_00_48, data_00_4c, data_00_50, data_00_54, data_00_58, data_00_5c, data_00_60, data_00_64;
-    CBD93D0();
-};
-struct CC03810 : NiMemObj
-{
-    int data_00_0, data_00_4, data_00_8, data_00_c, data_00_10, data_00_14, data_00_18, data_00_1c, data_00_20,
-        data_00_24, data_00_28, data_00_2c, data_00_30, data_00_34, data_00_38, data_00_3c, data_00_40, data_00_44,
-        data_00_48, data_00_4c, data_00_50, data_00_54, data_00_58, data_00_5c, data_00_60, data_00_64, data_00_68,
-        data_00_6c, data_00_70, data_00_74, data_00_78;
-    CC03810();
-};
-struct CBAD500 : NiMemObj
-{
-    int data_00_0, data_00_4, data_00_8, data_00_c, data_00_10, data_00_14, data_00_18, data_00_1c, data_00_20,
-        data_00_24, data_00_28, data_00_2c, data_00_30, data_00_34, data_00_38, data_00_3c, data_00_40, data_00_44,
-        data_00_48, data_00_4c, data_00_50, data_00_54, data_00_58, data_00_5c, data_00_60, data_00_64, data_00_68,
-        data_00_6c;
-    CBAD500();
-};
-struct CC05420 : NiMemObj
-{
-    int data_00_0, data_00_4, data_00_8, data_00_c, data_00_10, data_00_14, data_00_18, data_00_1c, data_00_20,
-        data_00_24, data_00_28, data_00_2c, data_00_30, data_00_34, data_00_38, data_00_3c, data_00_40, data_00_44,
-        data_00_48, data_00_4c, data_00_50, data_00_54, data_00_58, data_00_5c, data_00_60, data_00_64, data_00_68,
-        data_00_6c, data_00_70, data_00_74, data_00_78;
-    CC05420();
-};
-struct CC04D20 : NiMemObj
-{
-    int data_00_0, data_00_4, data_00_8, data_00_c, data_00_10, data_00_14, data_00_18, data_00_1c, data_00_20,
-        data_00_24, data_00_28, data_00_2c, data_00_30, data_00_34, data_00_38, data_00_3c, data_00_40, data_00_44,
-        data_00_48, data_00_4c, data_00_50, data_00_54, data_00_58, data_00_5c, data_00_60, data_00_64, data_00_68,
-        data_00_6c, data_00_70, data_00_74, data_00_78, data_00_7c, data_00_80, data_00_84, data_00_88, data_00_8c,
-        data_00_90, data_00_94, data_00_98, data_00_9c, data_00_a0, data_00_a4, data_00_a8, data_00_ac, data_00_b0,
-        data_00_b4, data_00_b8, data_00_bc, data_00_c0, data_00_c4;
-    CC04D20();
-};
-struct CBB8900 : NiMemObj
-{
-    int data_00_0, data_00_4, data_00_8, data_00_c, data_00_10, data_00_14, data_00_18, data_00_1c, data_00_20,
-        data_00_24, data_00_28, data_00_2c, data_00_30, data_00_34, data_00_38, data_00_3c, data_00_40, data_00_44,
-        data_00_48, data_00_4c, data_00_50, data_00_54;
-    CBB8900();
-};
-struct CBC0600 : NiMemObj
-{
-    int data_00_0, data_00_4, data_00_8, data_00_c, data_00_10, data_00_14, data_00_18, data_00_1c, data_00_20,
-        data_00_24, data_00_28, data_00_2c, data_00_30, data_00_34, data_00_38, data_00_3c, data_00_40, data_00_44,
-        data_00_48, data_00_4c, data_00_50, data_00_54;
-    CBC0600();
-};
-struct CBD7120 : NiMemObj
-{
-    int data_00_0, data_00_4, data_00_8, data_00_c, data_00_10, data_00_14, data_00_18, data_00_1c, data_00_20,
-        data_00_24, data_00_28, data_00_2c, data_00_30, data_00_34, data_00_38, data_00_3c, data_00_40, data_00_44,
-        data_00_48, data_00_4c, data_00_50, data_00_54, data_00_58, data_00_5c, data_00_60, data_00_64, data_00_68,
-        data_00_6c, data_00_70, data_00_74, data_00_78, data_00_7c, data_00_80, data_00_84, data_00_88, data_00_8c,
-        data_00_90, data_00_94, data_00_98, data_00_9c, data_00_a0, data_00_a4, data_00_a8, data_00_ac, data_00_b0,
-        data_00_b4, data_00_b8;
-    CBD7120();
-};
-struct CC049C0 : NiMemObj
-{
-    int data_00_0, data_00_4, data_00_8, data_00_c, data_00_10, data_00_14, data_00_18, data_00_1c, data_00_20,
-        data_00_24, data_00_28, data_00_2c, data_00_30, data_00_34, data_00_38, data_00_3c, data_00_40, data_00_44,
-        data_00_48, data_00_4c, data_00_50, data_00_54, data_00_58, data_00_5c, data_00_60, data_00_64, data_00_68,
-        data_00_6c, data_00_70, data_00_74;
-    CC049C0();
-};
-struct CBA4880 : NiMemObj
-{
-    int data_00_0, data_00_4, data_00_8, data_00_c, data_00_10, data_00_14, data_00_18, data_00_1c, data_00_20,
-        data_00_24, data_00_28, data_00_2c, data_00_30, data_00_34, data_00_38, data_00_3c, data_00_40, data_00_44,
-        data_00_48, data_00_4c, data_00_50, data_00_54, data_00_58, data_00_5c, data_00_60, data_00_64, data_00_68,
-        data_00_6c, data_00_70, data_00_74, data_00_78, data_00_7c, data_00_80, data_00_84;
-    CBA4880();
-};
-struct CB5A590 : NiMemObj
-{
-    int data_00_0, data_00_4, data_00_8, data_00_c, data_00_10, data_00_14, data_00_18, data_00_1c, data_00_20,
-        data_00_24, data_00_28, data_00_2c, data_00_30, data_00_34, data_00_38, data_00_3c, data_00_40, data_00_44,
-        data_00_48, data_00_4c, data_00_50, data_00_54, data_00_58, data_00_5c, data_00_60, data_00_64, data_00_68,
-        data_00_6c, data_00_70, data_00_74, data_00_78, data_00_7c, data_00_80, data_00_84, data_00_88, data_00_8c,
-        data_00_90, data_00_94, data_00_98, data_00_9c, data_00_a0, data_00_a4, data_00_a8, data_00_ac, data_00_b0,
-        data_00_b4, data_00_b8, data_00_bc, data_00_c0, data_00_c4, data_00_c8, data_00_cc, data_00_d0;
-    CB5A590();
-};
-struct CB5A410 : NiMemObj
-{
-    int data_00_0, data_00_4, data_00_8, data_00_c, data_00_10, data_00_14, data_00_18, data_00_1c, data_00_20,
-        data_00_24, data_00_28, data_00_2c, data_00_30, data_00_34, data_00_38, data_00_3c, data_00_40, data_00_44,
-        data_00_48, data_00_4c, data_00_50, data_00_54, data_00_58, data_00_5c, data_00_60, data_00_64, data_00_68,
-        data_00_6c, data_00_70;
-    CB5A410();
-};
-struct CBAA160 : NiMemObj
-{
-    int data_00_0, data_00_4, data_00_8, data_00_c, data_00_10, data_00_14, data_00_18, data_00_1c, data_00_20,
-        data_00_24, data_00_28, data_00_2c, data_00_30, data_00_34, data_00_38, data_00_3c, data_00_40, data_00_44,
-        data_00_48, data_00_4c, data_00_50, data_00_54;
-    CBAA160();
-};
-struct CC04600 : NiMemObj
-{
-    int data_00_0, data_00_4, data_00_8, data_00_c, data_00_10, data_00_14, data_00_18, data_00_1c, data_00_20,
-        data_00_24, data_00_28, data_00_2c, data_00_30, data_00_34, data_00_38, data_00_3c, data_00_40, data_00_44,
-        data_00_48, data_00_4c, data_00_50, data_00_54, data_00_58, data_00_5c, data_00_60;
-    CC04600();
-};
-struct CBA15E0 : NiMemObj
-{
-    int data_00_0, data_00_4, data_00_8, data_00_c, data_00_10, data_00_14, data_00_18, data_00_1c, data_00_20,
-        data_00_24, data_00_28, data_00_2c, data_00_30, data_00_34, data_00_38, data_00_3c, data_00_40, data_00_44,
-        data_00_48, data_00_4c, data_00_50, data_00_54, data_00_58, data_00_5c, data_00_60, data_00_64, data_00_68,
-        data_00_6c, data_00_70, data_00_74, data_00_78, data_00_7c, data_00_80, data_00_84, data_00_88, data_00_8c,
-        data_00_90, data_00_94, data_00_98, data_00_9c, data_00_a0, data_00_a4, data_00_a8, data_00_ac, data_00_b0,
-        data_00_b4, data_00_b8;
-    CBA15E0();
-};
-struct CBA02F0 : NiMemObj
-{
-    int data_00_0, data_00_4, data_00_8, data_00_c, data_00_10, data_00_14, data_00_18, data_00_1c, data_00_20,
-        data_00_24, data_00_28, data_00_2c, data_00_30, data_00_34, data_00_38, data_00_3c, data_00_40, data_00_44,
-        data_00_48, data_00_4c, data_00_50, data_00_54, data_00_58, data_00_5c, data_00_60, data_00_64, data_00_68,
-        data_00_6c, data_00_70;
-    CBA02F0();
-};
-struct CB9B830 : NiMemObj
-{
-    int data_00_0, data_00_4, data_00_8, data_00_c, data_00_10, data_00_14, data_00_18, data_00_1c, data_00_20,
-        data_00_24, data_00_28, data_00_2c, data_00_30, data_00_34, data_00_38, data_00_3c, data_00_40, data_00_44,
-        data_00_48, data_00_4c, data_00_50, data_00_54, data_00_58, data_00_5c, data_00_60, data_00_64, data_00_68,
-        data_00_6c, data_00_70, data_00_74, data_00_78, data_00_7c, data_00_80, data_00_84, data_00_88, data_00_8c,
-        data_00_90, data_00_94, data_00_98, data_00_9c, data_00_a0, data_00_a4, data_00_a8, data_00_ac, data_00_b0,
-        data_00_b4, data_00_b8, data_00_bc, data_00_c0, data_00_c4, data_00_c8, data_00_cc, data_00_d0, data_00_d4,
-        data_00_d8, data_00_dc, data_00_e0, data_00_e4, data_00_e8, data_00_ec, data_00_f0, data_00_f4, data_00_f8,
-        data_00_fc, data_00_100, data_00_104, data_00_108, data_00_10c, data_00_110, data_00_114, data_00_118,
-        data_00_11c, data_00_120, data_00_124, data_00_128, data_00_12c, data_00_130, data_00_134, data_00_138,
-        data_00_13c, data_00_140, data_00_144, data_00_148, data_00_14c, data_00_150, data_00_154, data_00_158,
-        data_00_15c, data_00_160, data_00_164, data_00_168, data_00_16c, data_00_170, data_00_174, data_00_178,
-        data_00_17c, data_00_180, data_00_184, data_00_188, data_00_18c, data_00_190, data_00_194, data_00_198,
-        data_00_19c, data_00_1a0, data_00_1a4, data_00_1a8, data_00_1ac, data_00_1b0, data_00_1b4, data_00_1b8,
-        data_00_1bc, data_00_1c0, data_00_1c4, data_00_1c8, data_00_1cc, data_00_1d0, data_00_1d4, data_00_1d8,
-        data_00_1dc, data_00_1e0, data_00_1e4, data_00_1e8, data_00_1ec, data_00_1f0, data_00_1f4, data_00_1f8,
-        data_00_1fc, data_00_200, data_00_204, data_00_208, data_00_20c, data_00_210, data_00_214, data_00_218,
-        data_00_21c, data_00_220, data_00_224, data_00_228, data_00_22c, data_00_230, data_00_234, data_00_238,
-        data_00_23c, data_00_240, data_00_244, data_00_248, data_00_24c, data_00_250, data_00_254, data_00_258,
-        data_00_25c, data_00_260, data_00_264, data_00_268, data_00_26c, data_00_270, data_00_274, data_00_278,
-        data_00_27c, data_00_280, data_00_284, data_00_288, data_00_28c, data_00_290, data_00_294, data_00_298,
-        data_00_29c, data_00_2a0, data_00_2a4, data_00_2a8, data_00_2ac, data_00_2b0, data_00_2b4, data_00_2b8;
-    CB9B830();
-};
-struct CC033C0 : NiMemObj
-{
-    int data_00_0, data_00_4, data_00_8, data_00_c, data_00_10, data_00_14, data_00_18, data_00_1c, data_00_20,
-        data_00_24, data_00_28, data_00_2c, data_00_30, data_00_34, data_00_38, data_00_3c, data_00_40, data_00_44,
-        data_00_48, data_00_4c, data_00_50, data_00_54, data_00_58, data_00_5c, data_00_60, data_00_64;
-    CC033C0();
-};
-struct CBB9180 : NiMemObj
-{
-    int data_00_0, data_00_4, data_00_8, data_00_c, data_00_10, data_00_14, data_00_18, data_00_1c, data_00_20,
-        data_00_24, data_00_28, data_00_2c, data_00_30, data_00_34, data_00_38, data_00_3c, data_00_40, data_00_44,
-        data_00_48, data_00_4c, data_00_50, data_00_54;
-    CBB9180();
-};
-void* __cdecl FUN_00aa13e0(unsigned int n);
-struct CB8EFA0
-{
-    CB8EFA0* __thiscall FUN_00b8efa0();
-};
-struct CB8F010
-{
-    CB8F010* __thiscall FUN_00b8f010();
-};
-struct CB8F660
-{
-    CB8F660* __thiscall FUN_00b8f660();
-};
-struct CB8F520
-{
-    CB8F520* __thiscall FUN_00b8f520();
-};
-struct CB8F1B0
-{
-    CB8F1B0* __thiscall FUN_00b8f1b0();
-};
-struct CB8F360
-{
-    CB8F360* __thiscall FUN_00b8f360();
-};
-struct CB92180
-{
-    CB92180* __thiscall FUN_00b92180();
-};
-struct CB8D330
-{
-    CB8D330* __thiscall FUN_00b8d330();
-};
-struct CB8D850
-{
-    CB8D850* __thiscall FUN_00b8d850();
-};
-struct CB8FEA0
-{
-    CB8FEA0* __thiscall FUN_00b8fea0();
-};
-struct CB8D5B0
-{
-    CB8D5B0* __thiscall FUN_00b8d5b0();
-};
-struct CB8D700
-{
-    CB8D700* __thiscall FUN_00b8d700();
-};
-struct CB922D0
-{
-    CB922D0* __thiscall FUN_00b922d0();
-};
-struct CB8EE20
-{
-    CB8EE20* __thiscall FUN_00b8ee20();
-};
-struct CB8F7E0
-{
-    CB8F7E0* __thiscall FUN_00b8f7e0();
-};
-struct CB8FD40
-{
-    CB8FD40* __thiscall FUN_00b8fd40();
-};
-struct CB917C0
-{
-    CB917C0* __thiscall FUN_00b917c0();
-};
-struct CB91900
-{
-    CB91900* __thiscall FUN_00b91900();
-};
-struct CB91B80
-{
-    CB91B80* __thiscall FUN_00b91b80();
-};
-struct CB8F930
-{
-    CB8F930* __thiscall FUN_00b8f930();
-};
-struct CB8FA80
-{
-    CB8FA80* __thiscall FUN_00b8fa80();
-};
-struct CB8FBE0
-{
-    CB8FBE0* __thiscall FUN_00b8fbe0();
-};
-struct CB8BEA0
-{
-    CB8BEA0* __thiscall FUN_00b8bea0();
-};
-struct CB8FFF0
-{
-    CB8FFF0* __thiscall FUN_00b8fff0();
-};
-struct CB90190
-{
-    CB90190* __thiscall FUN_00b90190();
-};
-struct CB90330
-{
-    CB90330* __thiscall FUN_00b90330();
-};
-struct CB90520
-{
-    CB90520* __thiscall FUN_00b90520();
-};
-struct CB906B0
-{
-    CB906B0* __thiscall FUN_00b906b0();
-};
-struct CB90830
-{
-    CB90830* __thiscall FUN_00b90830();
-};
-struct CB909C0
-{
-    CB909C0* __thiscall FUN_00b909c0();
-};
-struct CB90B50
-{
-    CB90B50* __thiscall FUN_00b90b50();
-};
-struct CB91000
-{
-    CB91000* __thiscall FUN_00b91000();
-};
-struct CB911A0
-{
-    CB911A0* __thiscall FUN_00b911a0();
-};
-struct CB91340
-{
-    CB91340* __thiscall FUN_00b91340();
-};
-struct CB914E0
-{
-    CB914E0* __thiscall FUN_00b914e0();
-};
-struct CB90CE0
-{
-    CB90CE0* __thiscall FUN_00b90ce0();
-};
-struct CB90E70
-{
-    CB90E70* __thiscall FUN_00b90e70();
-};
-struct CB91680
-{
-    CB91680* __thiscall FUN_00b91680();
-};
-struct CB8BCE0
-{
-    CB8BCE0* __thiscall FUN_00b8bce0();
-};
-struct CB92500
-{
-    CB92500* __thiscall FUN_00b92500();
-};
-struct CB91A40
-{
-    CB91A40* __thiscall FUN_00b91a40();
-};
-struct CB8D990
-{
-    CB8D990* __thiscall FUN_00b8d990();
-};
-struct CB8DAE0
-{
-    CB8DAE0* __thiscall FUN_00b8dae0();
-};
-struct CB8DC30
-{
-    CB8DC30* __thiscall FUN_00b8dc30();
-};
-struct CB8DD80
-{
-    CB8DD80* __thiscall FUN_00b8dd80();
-};
-struct CB8DED0
-{
-    CB8DED0* __thiscall FUN_00b8ded0();
-};
-struct CB8E020
-{
-    CB8E020* __thiscall FUN_00b8e020();
-};
-struct CB8E170
-{
-    CB8E170* __thiscall FUN_00b8e170();
-};
-struct CB8E2C0
-{
-    CB8E2C0* __thiscall FUN_00b8e2c0();
-};
-struct CB8E460
-{
-    CB8E460* __thiscall FUN_00b8e460();
-};
-struct CB8E600
-{
-    CB8E600* __thiscall FUN_00b8e600();
-};
-struct CB8E7A0
-{
-    CB8E7A0* __thiscall FUN_00b8e7a0();
-};
-struct CB8E940
-{
-    CB8E940* __thiscall FUN_00b8e940();
-};
-struct CB8EAE0
-{
-    CB8EAE0* __thiscall FUN_00b8eae0();
-};
-struct CB8EC80
-{
-    CB8EC80* __thiscall FUN_00b8ec80();
-};
-struct CB932D0
-{
-    CB932D0* __thiscall FUN_00b932d0();
-};
-struct CB93600
-{
-    CB93600* __thiscall FUN_00b93600();
-};
-struct CB93950
-{
-    CB93950* __thiscall FUN_00b93950();
-};
-struct CB93AA0
-{
-    CB93AA0* __thiscall FUN_00b93aa0();
-};
-struct CB93BF0
-{
-    CB93BF0* __thiscall FUN_00b93bf0();
-};
-struct CB93D40
-{
-    CB93D40* __thiscall FUN_00b93d40();
-};
-struct CB93E90
-{
-    CB93E90* __thiscall FUN_00b93e90();
-};
-struct CB93FE0
-{
-    CB93FE0* __thiscall FUN_00b93fe0();
-};
-struct CB94130
-{
-    CB94130* __thiscall FUN_00b94130();
-};
-struct CB94280
-{
-    CB94280* __thiscall FUN_00b94280();
-};
-struct CB943D0
-{
-    CB943D0* __thiscall FUN_00b943d0();
-};
-struct CB92690
-{
-    CB92690* __thiscall FUN_00b92690();
-};
-struct CB927E0
-{
-    CB927E0* __thiscall FUN_00b927e0();
-};
-struct CB92930
-{
-    CB92930* __thiscall FUN_00b92930();
-};
-struct CB92A80
-{
-    CB92A80* __thiscall FUN_00b92a80();
-};
-struct CB92BD0
-{
-    CB92BD0* __thiscall FUN_00b92bd0();
-};
-struct CB92D90
-{
-    CB92D90* __thiscall FUN_00b92d90();
-};
-struct CB92EE0
-{
-    CB92EE0* __thiscall FUN_00b92ee0();
-};
-struct CB93030
-{
-    CB93030* __thiscall FUN_00b93030();
-};
-struct CB93180
-{
-    CB93180* __thiscall FUN_00b93180();
-};
-struct CB91CF0
-{
-    CB91CF0* __thiscall FUN_00b91cf0();
-};
-struct CNB91E40 : Header6c, ISSBase
-{
-    CNB91E40();
-};
-struct CNB8C070 : Header6c, ISSBase
-{
-    CNB8C070();
-};
-struct TailObj
-{
-    virtual void t0();
-    virtual void t1();
-    virtual void t2();
-    virtual void t3();
-    virtual void t4();
-    virtual void t5();
-    virtual void t6();
-    virtual void t7();
-    virtual void t8();
-    virtual void t9();
-    virtual void t10();
-    virtual void t11();
-    virtual void t12();
-    virtual void t13();
-    virtual void t14();
-    virtual void t15();
-    virtual void t16();
-    virtual void t17();
-    virtual void t18();
-    virtual void t19();
-    virtual void t20();
-    virtual void t21();
-    virtual void t22();
-    virtual void t23();
-    virtual void t24();
-    virtual void t25();
-    virtual void t26();
-    virtual void t27();
-    virtual void t28();
-    virtual void t29();
-    virtual void t30();
-    virtual void t31();
-    virtual void t32();
-    virtual void t33();
-    virtual void t34();
-    virtual void t35();
-    virtual void t36();
-    virtual void t37();
-    virtual void t38();
-    virtual void t39();
-    virtual void t40();
-    virtual void t41();
-    virtual void t42();
-    virtual void t43();
-    virtual void t44();
-    virtual void t45();
-    virtual void t46();
-    virtual void t47();
-    virtual void t48();
-    virtual void t49();
-    virtual void t50();
-    virtual void t51();
-    virtual void t52();
-    virtual void t53();
-    virtual void t54();
-    virtual void t55();
-    virtual void t56();
-    virtual void t57();
-    virtual void t58();
-    virtual void t59();
-    virtual void t60();
-    virtual void t61();
-    virtual void t62();
-    virtual void t63();
-    virtual void t64();
-    virtual void t65();
-    virtual void t66();
-    virtual void t67();
-    virtual void t68();
-    virtual void t69();
-    virtual void t70();
-    virtual void t71();
-    virtual void Call120();
-};
-struct ShaderHeader : TailObj
-{
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5c;
-    int unk60;
-    int unk64;
-    int unk68;
-};
-struct ShaderLayout : ShaderHeader, ISSBase
-{
-};
-struct Temp
-{
-    void* p;
-    ~Temp();
-};
-struct CNB8EFA0 : Header6c, ISSBase
-{
-    CNB8EFA0();
-};
-struct CNB8F010 : Header6c, ISSBase
-{
-    CNB8F010();
-};
-struct CNB8F660 : Header6c, ISSBase
-{
-    CNB8F660();
-};
-struct CNB8F520 : Header6c, ISSBase
-{
-    CNB8F520();
-};
-struct CNB8F1B0 : Header6c, ISSBase
-{
-    CNB8F1B0();
-};
-struct CNB8F360 : Header6c, ISSBase
-{
-    CNB8F360();
-};
-struct CNB92180 : Header6c, ISSBase
-{
-    CNB92180();
-};
-struct CNB8D330 : Header6c, ISSBase
-{
-    CNB8D330();
-};
-struct CNB8D850 : Header6c, ISSBase
-{
-    CNB8D850();
-};
-struct CNB8FEA0 : Header6c, ISSBase
-{
-    CNB8FEA0();
-};
-struct CNB8D5B0 : Header6c, ISSBase
-{
-    CNB8D5B0();
-};
-struct CNB8D700 : Header6c, ISSBase
-{
-    CNB8D700();
-};
-struct ISSBase68 : ISSBase
-{
-    ISSBase68();
-    ~ISSBase68();
-    int iss_00_64;
-};
-struct CNB922D0 : Header6c, ISSBase68
-{
-    CNB922D0();
-};
-struct CNB8EE20 : Header6c, ISSBase
-{
-    CNB8EE20();
-};
-struct CNB8F7E0 : Header6c, ISSBase
-{
-    CNB8F7E0();
-};
-struct CNB8FD40 : Header6c, ISSBase
-{
-    CNB8FD40();
-};
-struct CNB917C0 : Header6c, ISSBase
-{
-    CNB917C0();
-};
-struct CNB91900 : Header6c, ISSBase
-{
-    CNB91900();
-};
-struct CNB91B80 : Header6c, ISSBase
-{
-    CNB91B80();
-};
-struct CNB8F930 : Header6c, ISSBase
-{
-    CNB8F930();
-};
-struct CNB8FA80 : Header6c, ISSBase
-{
-    CNB8FA80();
-};
-struct CNB8FBE0 : Header6c, ISSBase
-{
-    CNB8FBE0();
-};
-struct CNB8BEA0 : Header6c, ISSBase
-{
-    CNB8BEA0();
-};
-struct CNB8FFF0 : Header6c, ISSBase
-{
-    CNB8FFF0();
-};
-struct CNB90190 : Header6c, ISSBase
-{
-    CNB90190();
-};
-struct CNB90330 : Header6c, ISSBase
-{
-    CNB90330();
-};
-struct CNB90520 : Header6c, ISSBase
-{
-    CNB90520();
-};
-struct CNB906B0 : Header6c, ISSBase
-{
-    CNB906B0();
-};
-struct CNB90830 : Header6c, ISSBase
-{
-    CNB90830();
-};
-struct CNB909C0 : Header6c, ISSBase
-{
-    CNB909C0();
-};
-struct CNB90B50 : Header6c, ISSBase
-{
-    CNB90B50();
-};
-struct CNB91000 : Header6c, ISSBase
-{
-    CNB91000();
-};
-struct CNB911A0 : Header6c, ISSBase
-{
-    CNB911A0();
-};
-struct CNB91340 : Header6c, ISSBase
-{
-    CNB91340();
-};
-struct CNB914E0 : Header6c, ISSBase
-{
-    CNB914E0();
-};
-struct CNB90CE0 : Header6c, ISSBase
-{
-    CNB90CE0();
-};
-struct CNB90E70 : Header6c, ISSBase
-{
-    CNB90E70();
-};
-struct CNB91680 : Header6c, ISSBase
-{
-    CNB91680();
-};
-struct CNB8BCE0 : Header6c, ISSBase
-{
-    CNB8BCE0();
-};
-struct CNB92500 : Header6c, ISSBase
-{
-    CNB92500();
-};
-struct CNB91A40 : Header6c, ISSBase
-{
-    CNB91A40();
-};
-struct CNB8D990 : Header6c, ISSBase
-{
-    CNB8D990();
-};
-struct CNB8DAE0 : Header6c, ISSBase
-{
-    CNB8DAE0();
-};
-struct CNB8DC30 : Header6c, ISSBase
-{
-    CNB8DC30();
-};
-struct CNB8DD80 : Header6c, ISSBase
-{
-    CNB8DD80();
-};
-struct CNB8DED0 : Header6c, ISSBase
-{
-    CNB8DED0();
-};
-struct CNB8E020 : Header6c, ISSBase
-{
-    CNB8E020();
-};
-struct CNB8E170 : Header6c, ISSBase
-{
-    CNB8E170();
-};
-struct CNB8E2C0 : Header6c, ISSBase
-{
-    CNB8E2C0();
-};
-struct CNB8E460 : Header6c, ISSBase
-{
-    CNB8E460();
-};
-struct CNB8E600 : Header6c, ISSBase
-{
-    CNB8E600();
-};
-struct CNB8E7A0 : Header6c, ISSBase
-{
-    CNB8E7A0();
-};
-struct CNB8E940 : Header6c, ISSBase
-{
-    CNB8E940();
-};
-struct CNB8EAE0 : Header6c, ISSBase
-{
-    CNB8EAE0();
-};
-struct CNB8EC80 : Header6c, ISSBase
-{
-    CNB8EC80();
-};
-struct CNB932D0 : Header6c, ISSBase
-{
-    CNB932D0();
-};
-struct CNB93600 : Header6c, ISSBase
-{
-    CNB93600();
-};
-struct CNB93950 : Header6c, ISSBase
-{
-    CNB93950();
-};
-struct CNB93AA0 : Header6c, ISSBase
-{
-    CNB93AA0();
-};
-struct CNB93BF0 : Header6c, ISSBase
-{
-    CNB93BF0();
-};
-struct CNB93D40 : Header6c, ISSBase
-{
-    CNB93D40();
-};
-struct CNB93E90 : Header6c, ISSBase
-{
-    CNB93E90();
-};
-struct CNB93FE0 : Header6c, ISSBase
-{
-    CNB93FE0();
-};
-struct CNB94130 : Header6c, ISSBase
-{
-    CNB94130();
-};
-struct CNB94280 : Header6c, ISSBase
-{
-    CNB94280();
-};
-struct CNB943D0 : Header6c, ISSBase
-{
-    CNB943D0();
-};
-struct CNB92690 : Header6c, ISSBase
-{
-    CNB92690();
-};
-struct CNB927E0 : Header6c, ISSBase
-{
-    CNB927E0();
-};
-struct CNB92930 : Header6c, ISSBase
-{
-    CNB92930();
-};
-struct CNB92A80 : Header6c, ISSBase
-{
-    CNB92A80();
-};
-struct CNB92BD0 : Header6c, ISSBase
-{
-    CNB92BD0();
-};
-struct CNB92D90 : Header6c, ISSBase
-{
-    CNB92D90();
-};
-struct CNB92EE0 : Header6c, ISSBase
-{
-    CNB92EE0();
-};
-struct CNB93030 : Header6c, ISSBase
-{
-    CNB93030();
-};
-struct CNB93180 : Header6c, ISSBase
-{
-    CNB93180();
-};
-struct CNB91CF0 : Header6c, ISSBase
-{
-    CNB91CF0();
-};
-struct B94520Cls
-{
-    int m_00;
-    Registry m_04;
-    void __thiscall FUN_00b94520();
-};
 
 namespace nb {
 struct Snd
@@ -14103,15 +12812,6 @@ struct NodeList1_af60
         }
     }
 };
-struct List1_af60
-{
-    unsigned short unk00;
-    unsigned short m_02;
-    int unk04;
-    int unk08;
-    int unk0c;
-    NodeList1_af60 m_kNode;
-};
 struct Sub2c_af60
 {
     void FUN_00b64ec0();
@@ -14182,24 +12882,6 @@ struct Entry_af60
     float m_20;
     void FUN_00b9a410();
 };
-struct Node2_af60
-{
-    Node2_af60* m_next;
-    Node2_af60* m_pSecondNode;
-    Entry_af60* m_data;
-};
-struct List2_af60
-{
-    Node2_af60* m_pFirstNode;
-    Node2_af60* m_pTail;
-    int m_uiItemCount;
-    void RemoveHead();
-};
-struct Lock_af60
-{
-    int m_pOwnerObject;
-    void FUN_0040fbf0(int a);
-};
 struct Mgr_af60
 {
     void FUN_00aa4060(Entry_af60* e);
@@ -14212,91 +12894,8 @@ struct Point3_af60
     Point3_af60(float ax, float ay, float az) : x(ax), y(ay), z(az)
     {}
 };
-struct Cam_af60
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5c;
-    int unk60;
-    int unk64;
-    float m_68;
-    int unk6c;
-    int unk70;
-    float m_74;
-    int unk78;
-    int unk7c;
-    float m_80;
-};
-extern Lock_af60 DAT_011c5f80;
-extern int DAT_011c5f84;
-extern Node2_af60* DAT_011c5f58;
 extern Mgr_af60 DAT_011f6238;
-extern int DAT_011f91b8;
-extern char DAT_011ad80f;
-extern float DAT_01200458;
-extern int DAT_011ff9dc;
-extern int DAT_011ff9e4;
-extern double DAT_01016978;
-void __cdecl ClearPassList(int* p, int a);
 void __cdecl FUN_00b97e30(int a, int b);
-void __cdecl SendFloatAdd(float f, int a);
-void __cdecl FUN_00b994f0(Item_af60* item, unsigned int a, int b, int c, int d);
-extern "C" int __cdecl _isnan(double);
-struct Renderer_af60
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5c;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6c;
-    List1_af60* m_70[2];
-    List2_af60 m_78[2];
-    void UpdateVisibility(int idx, Cam_af60* cam, bool flag, float maxDist);
-};
 }  // namespace fnv_00b9af60
 
 class NiPoint3
@@ -15573,7 +14172,6 @@ struct W82197
 };
 void __cdecl UpdateInputFlags(W82197, int);
 
-extern "C" void __stdcall FUN_00ec5fce(void* apBase, unsigned int aiSize, unsigned int aiCount, void* apDtor);
 void __cdecl FUN_00aa10f0(void* apMemory);
 extern "C" void FUN_0045cec0();
 
@@ -15702,15 +14300,6 @@ void WaterFFTDisplayEffect::FUN_00b941a0()
     CreateShaders(&kVertexDelta, &kPixel, "FFTDISPLAYHIGHW", "vs_1_1", pcPS);
     SetupShaders();
 }
-
-struct EffectManager975
-{
-    int unk00;
-    int unk04;
-    ImageSpaceEffectB979** effects;
-    void FUN_00b8c980(ImageSpaceEffectB979*, int, int, int, int, int);
-    void FUN_00b975f0(unsigned int index, int a, int b, int c, int d, int e);
-};
 
 void NiFree(void* memory);
 

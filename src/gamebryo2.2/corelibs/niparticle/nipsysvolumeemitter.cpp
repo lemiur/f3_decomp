@@ -73,7 +73,6 @@ void FUN_00c31c90_shell::FUN_00c31c90(CloningProcess* kCloning)
     }
 }
 
-struct BSPSysArrayEmitter;
 struct NiAVObject;
 struct CloningProcess;
 struct NiTransform;
@@ -158,14 +157,7 @@ char const* const* __cdecl FUN_00c31bc0()
     return &g_01202508_arg1;
 }
 
-void __cdecl FUN_00c31750(void);
-
 extern "C" void __cdecl operator delete(void*, unsigned int);
-
-struct FUN_00c31c70_shell
-{
-    void* __thiscall DestroyIfFlagged(unsigned int flags);
-};
 
 struct FakeStream_00c31b60
 {
@@ -276,37 +268,3 @@ void FUN_00c31db0_cls::FUN_00c31db0(NameArray_b9457* arr)
         arr->SetAt(uiIndex, &name);
     }
 }
-
-struct FUN_00c31bd0_base
-{
-    FUN_00c31bd0_base(const char* pcName, unsigned int uiOrder, float fSpeed, float fSpeedVar, float fDeclination,
-                      float fDeclinationVar, float fPlanarAngle, float fPlanarAngleVar, RgbaColor kInitialColor,
-                      float fInitialRadius, float fLifeSpan, float fLifeSpanVar, float fRadiusVar);
-    virtual ~FUN_00c31bd0_base();
-    unsigned int m_uiRefCount;
-    NiFixedString m_kName;
-    unsigned int m_uiUpdateOrder;
-    NiParticleSystem* m_pkTarget;
-    bool m_bModifierActive;
-    float m_fEmissionSpeed;
-    float m_fSpeedVariation;
-    float m_fEmissionDeclination;
-    float m_fDeclinationVariation;
-    float m_fEmissionPlanarAngle;
-    float m_fPlanarAngleVariation;
-    RgbaColor m_kParticleColor;
-    float m_fEmissionRadius;
-    float m_fRadiusVariation;
-    float m_fYValue;
-    float m_fLifeSpanVariation;
-    float m_fScale;
-};
-
-struct FUN_00c31bd0 : FUN_00c31bd0_base
-{
-    FUN_00c31bd0(const char* pcName, NiAVObject* pkEmitterObj, float fSpeed, float fSpeedVar, float fDeclination,
-                 float fDeclinationVar, float fPlanarAngle, float fPlanarAngleVar, RgbaColor kInitialColor,
-                 float fInitialRadius, float fLifeSpan, float fLifeSpanVar, float fRadiusVar);
-    virtual ~FUN_00c31bd0();
-    NiAVObject* m_pkEmitterObject;
-};

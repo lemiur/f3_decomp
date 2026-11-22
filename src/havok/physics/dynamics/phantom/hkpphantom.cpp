@@ -73,26 +73,6 @@ public:
     void NotifyListeners();
 };
 
-struct PhantomListeners : hkpPhantom {
-    void __thiscall RemoveListener(void* listener);
-};
-
-class PhArchive {
-public:
-    char unk04[0xc];
-    char m_flag;
-    virtual void v0(); virtual void v1(); virtual void v2(); virtual void v3(); virtual void v4();
-    virtual void Write(int type, const char* name, void* ptr, int size, int extra);
-};
-struct PhTag;
-extern PhTag DAT_01268808;
-int FUN_00d06f80(void* p, int n);
-class FUN_00d07cf0_cls : public hkpPhantom {
-public:
-    void WriteToStream(PhArchive* a, PhTag* t);
-    void WritePhantomLists(PhArchive* a, int unused);
-};
-
 class hkMemoryAllocatorD07E {
 public:
     virtual ~hkMemoryAllocatorD07E() throw();
@@ -154,93 +134,14 @@ public:
 };
 
 
-class hkpPhantomOverlapListenerD07E;
-class hkpPhantomListenerD07E;
-
-class hkpPhantomD07E {
-public:
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5C;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6C;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7C;
-    int unk80;
-    int unk84;
-    int unk88;
-    hkArrayD07E<hkpPhantomOverlapListenerD07E*> m_kPhantomOverlapListeners;
-    hkArrayD07E<hkpPhantomListenerD07E*> m_kPhantomListeners;
-
-    void FreeListenerArrays() throw();
-};
-
 #include "fnv_asm_helpers.h"   // project x87 helpers (fnv_SinCos, fnv_FloatToInt), kept last so earlier code is unchanged
 
 struct __declspec(intrin_type) __declspec(align(16)) __m128 {
     float x, y, z, w;
 };
 
-extern "C" __m128 _mm_add_ps(__m128, __m128);
-extern "C" __m128 _mm_mul_ps(__m128, __m128);
-extern "C" __m128 _mm_min_ps(__m128, __m128);
-extern "C" __m128 _mm_max_ps(__m128, __m128);
-
-extern float DAT_011b6d70;
-extern float DAT_01267e30;
-
 struct __declspec(align(16)) hkQuadD07950 {
     hkReal x, y, z, w;
-};
-
-struct hkAabbD07950 {
-    hkVector4 m_kMinimumCorner;
-    hkVector4 m_kMaximumCorner;
-};
-
-struct BroadPhaseD07950 {
-    int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; int unk1C;
-    hkVector4 m_kVectorAt40;
-    hkVector4 m_kVectorAt50;
-    hkVector4 m_vScale;
-};
-
-struct WorldD07950 {
-    int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; int unk1C;
-    int unk20; int unk24; int unk28; int unk2C; int unk30; int unk34; int unk38; int unk3C;
-    int unk40; int unk44; int unk48; int unk4C; int unk50; int unk54; int unk58; int unk5C;
-    int unk60; int unk64; int unk68; int unk6C; int unk70; int unk74;
-    BroadPhaseD07950* m_pJobSemaphore;
-};
-
-class FUN_00d07950_cls : public hkpPhantom {
-public:
-    void FUN_00d07950(const hkAabbD07950& aabb);
 };
 
 inline void MemCopyD07A90(void* pvDst, const void* pvSrc, int nbytes)
@@ -260,46 +161,6 @@ template <class T> struct ArrayD07A90 {
     int m_iElementCount;
     int m_iCapacityState;
 };
-struct ListenerD07A90;
-struct PhantomD07A90 {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5C;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6C;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7C;
-    int unk80;
-    int unk84;
-    int unk88;
-    ArrayD07A90<ListenerD07A90*> m_kPhantomOverlapListeners;
-    void FUN_00d07a90();
-};
 
 inline void MemCopyD07AF0(void* pvDst, const void* pvSrc, int nbytes)
 {
@@ -317,49 +178,6 @@ template <class T> struct ArrayD07AF0 {
     T* m_data;
     int m_iElementCount;
     int m_iCapacityState;
-};
-struct ListenerD07AF0;
-struct PhantomD07AF0 {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5C;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6C;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7C;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8C;
-    int unk90;
-    int unk94;
-    ArrayD07AF0<ListenerD07AF0*> m_kPhantomListeners;
-    void FUN_00d07af0();
 };
 
 struct LS_cls;
@@ -404,65 +222,11 @@ void Fun_cls::FUN_00d07b50() {
 }
 
 
-struct PhantomLsn {
-    virtual void V0();
-    virtual void V1(void* owner);
-};
-
 template <class T> struct ArrRef {
     T* m_data;
     int m_iElementCount;
     T& operator[](int i) { return m_data[i]; }
     int GetLogicalSize() const { return m_iElementCount; }
-};
-
-struct PhantomCls {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5C;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6C;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7C;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8C;
-    int unk90;
-    int unk94;
-    ArrRef<PhantomLsn*> m_kListeners;
-
-    void FUN_00d07af0();
-    void FUN_00d07b90();
-};
-
-struct PhRemoveListener : hkpPhantom {
-    void FUN_00d07c80(void* listener);
 };
 
 template <int SIZE>
@@ -507,14 +271,6 @@ public:
     }
 };
 
-class hkOwnerXd07da0 {
-public:
-    int unk00[38];
-    hkArrayXd07da0<void*> m_kNode;
-
-    void AddItem(void* item);
-};
-
 template <int SIZE>
 __forceinline void memCpyOneAlignedXd07de0(void* dst, const void* src)
 {
@@ -555,14 +311,6 @@ public:
         memCpyOneAlignedXd07de0<sizeof(T)>(m_data + m_iElementCount, &e);
         m_iElementCount++;
     }
-};
-
-class hkOwnerXd07de0 {
-public:
-    int unk00[35];
-    hkArrayXd07de0<void*> m_kNode;
-
-    void FUN_00d07de0(void* item);
 };
 
 class hkMemoryAllocatorD07 {
@@ -1195,48 +943,4 @@ struct S00d08130_Arr {
         m_data = 0;
         m_iCapacityState = 0x80000000;
     }
-};
-
-class FUN_00d08130 {
-public:
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5C;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6C;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7C;
-    int unk80;
-    int unk84;
-    int unk88;
-    S00d08130_Arr m_kPhantomOverlapListeners;
-    S00d08130_Arr m_kPhantomListeners;
-
-    void NotifyElements();
-    void FUN_00c9d3b0();
-    virtual ~FUN_00d08130();
 };

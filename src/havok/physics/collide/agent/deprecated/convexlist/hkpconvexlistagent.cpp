@@ -48,28 +48,8 @@ void __thiscall FUN_00d33c80_class::FUN_00d33c80(void* apArg1, void* apArg2, voi
     FUN_00d33b90(apArg1, apArg2, apArg3, apArg4);
 }
 
-struct hkpCollisionDispatcher
-{
-    struct CollisionAgentFunctionTable
-    {
-        void* pfnA;
-        void* pfnB;
-        void* pfnC;
-        void* pfnD;
-        char b1;
-        char b2;
-    };
-    void __thiscall FUN_00cfbbe0(CollisionAgentFunctionTable* a, int b, int c);
-};
 extern void* __cdecl CreateConvexListAgent();
-extern void* __cdecl InitSpawnedBuffer();
-extern void* __cdecl FUN_00d34970();
-extern void* __cdecl FUN_00d349b0();
-extern void* __cdecl FUN_00d343f0();
-extern void* __cdecl _FUN_00d33b90();
-extern void* __cdecl _FUN_00d339d0();
 extern void* __cdecl FUN_00d33ca0();
-extern void* __cdecl FUN_00d34510();
 
 struct FUN_00d337f0_self
 {
@@ -120,8 +100,6 @@ void __thiscall FUN_00d33830_cls::FUN_00d33830(int aiArg)
 }
 }  // namespace fnv_00d33830
 
-extern void __cdecl FUN_00d97250(void*, void*, void*);
-
 struct FUN_00d33740_cls
 {
     void __thiscall FUN_00d33740(int a);
@@ -160,11 +138,6 @@ void* __stdcall FUN_00d33da0(void* a, void* b, void* c, void* d, void* e)
 {
     return ((void*(__cdecl*)(void*, void*, void*, void*, void*))FUN_00d33ca0)(a, b, c, d, e);
 }
-
-struct hkpSimpleClosestContactCollector
-{
-    void Reset();
-};
 
 struct D338e0Agent
 {
@@ -889,7 +862,6 @@ extern "C" void _ReadWriteBarrier(void);
 extern "C" unsigned __int64 __rdtsc(void);
 
 extern unsigned long DAT_0126835c;
-extern const char str_010cec28[];
 extern const char str_01076f38[];
 extern int DAT_010c476c;
 extern float DAT_0104da48;
@@ -897,8 +869,6 @@ extern float DAT_0104da48;
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long dwTlsIndex);
 
 extern "C" int __cdecl TestGsk(const void* a, const void* b, const void* c, void* d);
-extern "C" void __cdecl FUN_00dac450(const void* a, const void* b, const void* c, void* d);
-extern "C" void __cdecl QueryClosestPoints(const void* a, const void* b, const void* c, void* d);
 
 struct StringCursor
 {
@@ -1262,29 +1232,5 @@ extern "C"
 typedef void*(__thiscall* PfnDacbd0)(void* self, void* bodyA, void* bodyB, void* contactMgr);
 typedef void*(__thiscall* PfnD440f0)(void* self, void* bodyA, void* bodyB, void* input, void* contactMgr);
 typedef void*(__thiscall* PfnD33940)(void* self, void* bodyA, void* bodyB, void* input, void* contactMgr);
-
-struct AgentCollisionDispatcher
-{
-    virtual void* vfunc0();
-    virtual void* vfunc1();
-    virtual void* vfunc2();
-    virtual int getCollisionType(void* bodyA, void* bodyB, void* input);
-};
-
-struct AgentCollisionInput
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    AgentCollisionDispatcher* m_pCollisionDispatcher;
-};
-
-struct AgentHeader
-{
-    void* vtable;
-    unsigned short m_usMemSizeAndFlags;
-    short m_iObjectReferenceCount;
-};
 
 }  // namespace fnv_00d34510

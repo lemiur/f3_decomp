@@ -241,17 +241,6 @@ struct D68910MemoryRouter
 
 extern "C" D68910MemoryRouter& __cdecl FUN_00c85750();
 
-class D68910Object
-{
-  public:
-    void* m_ppVirtualMethodTable;
-    unsigned short m_usMemSizeAndFlags;
-    short m_sReferenceCount;
-
-    ~D68910Object();
-    D68910Object* DestroyAndFree(unsigned int uiFlags);
-};
-
 }  // namespace fnv_00d68910
 
 extern char DAT_0126905c;
@@ -279,11 +268,6 @@ int* __cdecl FUN_00d6ae00()
 {
     return &DAT_0126908c;
 }
-
-struct FUN_00c90e00_Obj
-{
-    void __thiscall FUN_00c90e00(int value);
-};
 
 // 13-byte cdecl forwarder: loads the object pointer, fetches its vtable and
 // calls the first virtual slot with a literal 0 argument.
@@ -510,29 +494,7 @@ class hkReferencedObjectD605
     short m_sReferenceCount;
 };
 
-class FUN_00d60540 : public hkReferencedObjectD605
-{
-  public:
-    FUN_00d60540(hkFinishLoadedObjectFlagD605 flag);
-    virtual ~FUN_00d60540();
-};
-
 extern int DAT_010d14f8;
-extern int DAT_0102e388;
-
-struct D60590Callback
-{
-    void FUN_00c905b0();
-};
-
-struct D60590Object
-{
-    int* vtable;
-    int unk04;
-    D60590Callback* callback;
-
-    void FUN_00d60590();
-};
 
 namespace fnv_00d60860 {
 struct HKMemoryManager
@@ -598,21 +560,6 @@ void* FUN_00d61470_Class::FUN_00d61470()
 
 char* __cdecl FUN_00cb1130(char* pcHaystack, const char* pcNeedle);
 
-class hkStringBufD614
-{
-  public:
-    char* m_data;
-
-    int FindSubstring(const char* pcNeedle, int iStartIndex, int iEndIndex) throw();
-};
-
-struct hkStringD614
-{
-    const char* m_kStringBuffer;
-
-    int FindCaseInsensitive(const char* needle) const;
-};
-
 int __cdecl FUN_00cb1130(int a1, int a2);
 struct FUN_00d61520_cls
 {
@@ -634,26 +581,6 @@ int FUN_00d61520_cls::FindOffset(int a, int b) {
     return result;
 }
 
-
-struct FnvString
-{
-    const char* text;
-    int FUN_00d61560(const char* other);
-};
-
-struct hkStringD615
-{
-    const char* m_kStringBuffer;
-
-    int FUN_00d615a0(const char* other) const;
-};
-
-struct FNV_00d61600_Buffer
-{
-    unsigned char* data;
-    int length;
-    int FindCharacter(unsigned char character, int start, int limit);
-};
 
 struct FUN_00d61640_cls
 {
@@ -678,49 +605,11 @@ int FUN_00d61640_cls::FindLastCharInRange(char c, int startIndex, int endIndex)
     return -1;
 }
 
-struct FUN_00d61680_Obj
-{
-    int unk00;
-    void __thiscall FUN_00d61680(unsigned int param);
-};
-
 int __cdecl FUN_00cb0fa0(int, int);
 
-void __cdecl CompareStringsCaseInsensitive(void* pvOwner, int iValue);
-
-struct FUN_00d616a0_cls
-{
-    void* m_pOwnerObject;
-
-    void FUN_00d616a0(int iValue);
-};
-
-int __stdcall FUN_00d61680(unsigned int value);
-
 int __cdecl FUN_00cb10d0(int s);
-struct FUN_00d61700_cls
-{
-    char* m_00;
-    int m_04;
-    int EndsWith(char* s);
-};
 
 int __cdecl FUN_00cb10d0(const char* str);
-
-struct FUN_00d61750_cls
-{
-    char* m_data;
-    int m_fRestLength;
-
-    int EndsWithIgnoreCase(const char* suffix);
-};
-
-struct FUN_00d617d0_cls
-{
-    char* m_p00;
-    int m_i04;
-    void RemoveFront(int count);
-};
 
 struct hkMathD618
 {
@@ -867,26 +756,8 @@ template <class T, int N> class hkInplaceArrayD61B
     }
 };
 
-class FUN_00d61b10
-{
-  public:
-    hkInplaceArrayD61B<char, 128> m_kStringBuffer;
-
-    FUN_00d61b10(const char* pcString, int iLength) throw();
-};
-
 int __cdecl FUN_00cb10d0(int);
 void* __cdecl FUN_00c85750();
-struct FUN_00d62630_Obj
-{
-    void FUN_00d62630(int a1, int a2, int a3, int a4);
-};
-struct FUN_00d61df0_cls
-{
-    int unk00;
-    int unk04;
-    FUN_00d61df0_cls* FUN_00d61df0(int arg);
-};
 
 class hkMemoryAllocatorD61E;
 
@@ -989,47 +860,7 @@ void* __cdecl FUN_00c85750();
 void __cdecl FUN_00c908c0(int value1, int value2, int value3, int value4);
 void __cdecl FUN_00d2caa0(void* value1, unsigned int value2, unsigned int value3);
 
-struct D62080_Audio
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-};
-
-struct D62080_Object
-{
-    unsigned char* m_data;
-    int m_uiItemCount;
-    unsigned int m_pRayCursor;
-
-    void __thiscall FUN_00d62080(int param2, int param3);
-};
-
 extern int __cdecl FUN_00cb10d0(int value);
-struct Router_d62100
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int m_iValueAtOffset0C;
-};
-struct FUN_00d62100_Class
-{
-    int __thiscall FUN_00d62630(int context, int first, int second, int third);
-    int __thiscall FUN_00d62100(int first, int second, int third);
-};
-
-struct SearchBase
-{
-    int FUN_00d61cc0();
-};
-struct SearchController : SearchBase
-{
-    int FindLastCharInRange(int token, int start, int limit);
-    int FUN_00d61fc0(int start, int position);
-    int FUN_00d62140();
-};
 
 struct hkStringPtr
 {
@@ -1038,51 +869,6 @@ struct hkStringPtr
     {
         return (const char*)((unsigned int)m_stringAndFlags & ~1);
     }
-};
-
-struct FUN_00d623a0
-{
-    char* m_data;
-    int m_iElementCount;
-    unsigned int m_iCapacityState;
-    char m_kStorage;
-
-    void FUN_00d61c10(const char* str);
-
-    FUN_00d623a0(const hkStringPtr& str);
-};
-
-struct FUN_00d623d0
-{
-    void* m_p00;
-    int m_i04;
-    int m_i08;
-    int m_i0c;
-    int m_i10;
-    int m_i14;
-    int m_i18;
-    void* m_p1c;
-    int m_i20;
-    void* m_p24;
-
-    void AppendStrings(int a, int b, int c, int d, int e, int f);
-    FUN_00d623d0(int a, int b, int c, int d, int e, int f);
-};
-
-struct FUN_00d62100_Obj
-{
-    int FUN_00d62100(int a, int b, int c);
-};
-struct FUN_00d62580_Cls
-{
-    int FUN_00d62580(int a, int b);
-};
-
-class hkObjectD626
-{
-  public:
-    int ReplaceRange(int a, int b, int c, int d, int e);
-    int FUN_00d62630(int a, int b, int d, int e);
 };
 
 struct FUN_00ddccb0_Obj
@@ -1122,27 +908,6 @@ FUN_00d62ef0_cls* __thiscall FUN_00d62ef0_cls::FUN_00d62ef0(int aParam, unsigned
     unk28 = aValue;
     return this;
 }
-
-struct HeapAllocator
-{
-    virtual void* GetStats();
-    virtual void* Allocate(unsigned int bytes);
-};
-struct MemorySystem
-{
-    void* unknown00;
-    void* unknown04;
-    void* unknown08;
-    void* unknown0c;
-    HeapAllocator* heap;
-};
-struct HeapBlockMetadata
-{
-    unsigned int flags;
-    unsigned short size;
-    unsigned short reserved;
-    HeapBlockMetadata* FUN_00d62ef0(void* data, unsigned int enabled);
-};
 
 struct Allocator_d632c0
 {
@@ -1611,38 +1376,6 @@ void __cdecl RegisterSweptTransformsTask()
 }
 }  // namespace fnv_00d64630
 
-struct FUN_00d65250_cls
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5C;
-    unsigned char unk60;
-    unsigned char unk61;
-
-    void __thiscall FUN_00d65250(unsigned char value);
-};
-
 struct FnvCpu_FUN_00d65260_CpuObject
 {
     unsigned int unk00;
@@ -1939,34 +1672,6 @@ struct hkBoolD608
     hkBoolD608(const hkBoolD608& other) : value(other.value)
     {}
 };
-struct hkAllocatorD608
-{
-    virtual void vf00();
-    virtual void* Allocate(int bytes);
-};
-struct hkRouterD608
-{
-    void* unk00;
-    void* unk04;
-    void* unk08;
-    void* unk0c;
-    hkAllocatorD608* allocator;
-};
-struct FUN_00d274c0
-{
-    void* unk00;
-    unsigned short allocatedSize;
-    FUN_00d274c0(int first, int second, hkBoolD608 enabled);
-};
-struct FUN_00d608a0
-{
-    void* vptr;
-    unsigned short unk04;
-    unsigned short count;
-    FUN_00d274c0* child;
-    unsigned char mode;
-    FUN_00d608a0(int first, int second, unsigned char mode);
-};
 
 int __cdecl FUN_00cb0fa0(int, int);
 struct R
@@ -1974,11 +1679,6 @@ struct R
     volatile char value;
     R(bool b) : value(b)
     {}
-};
-struct S
-{
-    int value;
-    R IsLessThan(int other) const;
 };
 
 class hkMemoryAllocatorD619;
@@ -2033,15 +1733,6 @@ template <class T> class hkArrayD619
     {
         _pushBack(hkRouterD619::FUN_00c85750().heap(), t);
     }
-};
-
-class hkStringD619
-{
-  public:
-    char* m_kStringBuffer;
-
-    int FindCharacter(int c, int iStart, int iEnd) const;
-    int SplitString(int c, hkArrayD619<const char*>& kBits);
 };
 
 class hkMemoryAllocatorD61
@@ -2170,16 +1861,7 @@ template <class T, int N> class hkInplaceArrayD61B8
     }
 };
 
-class FUN_00d61b80
-{
-  public:
-    hkInplaceArrayD61B8<char, 128> m_kStringBuffer;
-
-    FUN_00d61b80(const FUN_00d61b80& kOther) throw();
-};
-
 struct C6DF60Router;
-C6DF60Router* __cdecl _FNV_e03300_arena();
 struct C6DF60Router
 {
     int unk00;
@@ -2190,24 +1872,6 @@ struct C6DF60Router
     int unk14;
     int unk18;
 };
-struct C540BC0Allocator
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-};
-struct FUN_00d61cc0_t
-{
-    char* m_pBuffer;
-    int m_iFadeIndex;
-    int m_iState2;
-    void FUN_00d61cc0();
-};
-void __cdecl ArrayReserveImpl(void*, void*, int, int);
 
 class hkMemoryAllocatorD61F;
 
@@ -2293,7 +1957,6 @@ namespace hkRouterD61F {
 extern "C" hkMemoryRouterD61F& __cdecl FUN_00c85750() throw();
 }
 void __cdecl FUN_00c908c0(hkMemoryAllocatorD61F& kAlloc, void* apvArray, int aiNumElements, int iSizeElem) throw();
-void FUN_00d2cc70(void* pvDst, void* pvSrc, unsigned int uiNumBytes);
 
 class hkStringBufD61F
 {
@@ -2421,36 +2084,6 @@ FUN_00d73410::FUN_00d73410()
     ((Z0*)this)->FUN_00d73400();
 }
 
-struct Node
-{
-    unsigned unk00, unk04, unk08, unk0c;
-    void* active;
-    Node* left;
-    Node* right;
-    unsigned unk1c, unk20, unk24, unk28, flags;
-};
-
-struct FUN_00d7e740_cls
-{
-    int FUN_00d7e740(int iArg0, int iArg1, bool iFlag, int iArg2);
-};
-
-struct FUN_00d76c20_cls
-{
-    int m_00;
-    int m_04;
-    FUN_00d7e740_cls* m_target;
-
-    int ForwardToTarget(int iSelector, int iArg0, int iArg1, int iArg2);
-};
-
-struct hkResultD794
-{
-    int m_bHasHit;
-};
-
-void __cdecl FUN_00d79250(void* a, void* b, hkResultD794* out, int flags, float f);
-
 volatile char g_d61430_c;
 char g_d61430_sink;
 
@@ -2485,17 +2118,6 @@ union __declspec(intrin_type) __declspec(align(16)) __m128
     float m128_f32[4];
 };
 
-extern "C" __m128 _mm_shuffle_ps(__m128 a, __m128 b, int imm);
-extern "C" __m128 _mm_mul_ps(__m128 a, __m128 b);
-extern "C" __m128 _mm_add_ps(__m128 a, __m128 b);
-
-extern "C" __m128 g_d6c1d0_src[4];
-extern "C" __m128 g_d6c1d0_mat[4];
-extern "C" __m128 g_d6c1d0_out[4];
-
-extern float DAT_011b6924;
-extern float DAT_011b6928;
-extern float DAT_010c8440;
 struct IntegratorD720
 {
     float unk00;
@@ -2507,11 +2129,6 @@ struct IntegratorD720
 
 IntegratorD720* volatile integratorD720;
 volatile float inputD720, stepD720, resultD720;
-
-struct FUN_00d74dc0_cls
-{
-    void* FUN_00d74dc0();
-};
 
 #include <stdarg.h>
 struct hkAllocatorD624
@@ -2539,7 +2156,6 @@ inline hkMemoryRouterD624* getRouterD624()
 }
 
 void __cdecl FUN_00c908c0(hkAllocatorD624& kAlloc, void* apvArray, int aiNumElements, int iSizeElem) throw();
-int __cdecl FUN_00cb0f50(char* pcBuf, int iBufSize, const char* pcFormat, va_list kArgs) throw();
 
 template <typename T> struct hkArrayD624
 {
@@ -2606,17 +2222,6 @@ class hkStringBufD624
     }
 };
 
-class hkOstreamD624
-{
-  public:
-    void* m_ppVirtualMethodTable;
-    int m_usMemSizeAndFlags;
-    void* m_pStreamWriter;
-
-    void FUN_00d62080(const char* pcBuf, int iNumBytes) throw();
-    void WriteFormatted(const char* pcFormat, ...) throw();
-};
-
 // sub ecx,8; jmp target  ==  MSVC adjustor thunk: Derived overrides a virtual that both of its bases
 // declare, so the second base's vtable gets a thunk that moves `this` back by the first base's size (8).
 struct PrimaryBase
@@ -2670,13 +2275,6 @@ struct Derived : PrimaryBase, SecondaryBase
 Derived::Derived()
 {}
 }  // namespace fnv_00d68900
-
-struct Node_d6c580
-{
-    unsigned short m_type;
-    char pad[0x12];
-    Node_d6c580* m_parent;
-};
 
 // @fnv 0x00d6c590
 static __declspec(noinline) void FUN_00d6c590(int* p)
@@ -2744,14 +2342,6 @@ template <class T> class hkArrayD61C
     {
         return m_data[i];
     }
-};
-
-class hkStringBufD61C
-{
-  public:
-    hkArrayD61C<char> m_kStringBuffer;
-
-    hkStringBufD61C& FUN_00d61c10(const char* s);
 };
 
 }  // namespace fnv_00d61c10
@@ -2889,34 +2479,7 @@ struct ConstraintQuery
     QueryValue<const RigidTransform*> transformB;
 };
 
-struct LocalOrientations
-{
-    int unk00, unk04, unk08, unk0c;
-    Orientation localA;
-    Orientation localB;
-};
-
 extern "C" __m128 _mm_load_ps(const float* p);
-extern "C" void _mm_store_ps(float* p, __m128 a);
-
-extern __m128 DAT_01267e30;
-
-struct D73390Source
-{
-    float value0[4];
-    float value1[4];
-    float value2[4];
-};
-
-struct D73390Data
-{
-    float value0[4];
-    float value1[4];
-    float value2[4];
-    float value3[4];
-
-    void FUN_00de8f10();
-};
 
 class UpperCaseBufferD618 : public hkStringBufD618
 {

@@ -3,27 +3,6 @@
 // produce (frameless code in an /Od unit). Declarations copied from that unit's skeleton; move the functions to their real unit once identified.
 
 #include "niintegersextradata_decls.h"
-struct NiFixedString
-{
-};
-struct NiAVObject
-{
-    void SetName(NiFixedString const& name);
-};
-extern NiFixedString* DAT_012031c0;
-struct FUN_00c543e0_shell : NiAVObject
-{
-    void FUN_00c543e0();
-};
-extern int g_012031c4;
-struct FUN_00c54d60_shell
-{
-    int* __thiscall FUN_00c54d60();
-};
-struct FUN_00c54030_shell
-{
-    int __thiscall FUN_00c54030(int param_1);
-};
 
 extern char const* const g_012043a4_arg1;
 
@@ -58,19 +37,7 @@ void __thiscall FUN_00a99950_shell::FUN_00a99950()
     ((FUN_00a7b300_shell*)this)->FUN_00a7b300();
 }
 
-struct PB_00a7b2e0
-{
-    void FUN_00a7b2e0();
-};
-struct PB_00a99800
-{
-    void AssignPointerArray(int a, int b);
-};
 extern int DAT_010a0c7c;
-struct ST_00a99980 : NiExtraData
-{
-    ST_00a99980* FUN_00a99980(int a, int b);
-};
 
 extern int DAT_010a0c7c;
 struct BSFadeNode

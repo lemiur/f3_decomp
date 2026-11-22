@@ -4,37 +4,11 @@
 
 #include "havok/hkaSkeletonMapper.h"
 
-struct FUN_00ce4ab0Allocator
-{
-    virtual void FUN_00ce4ab0Unused1() = 0;
-    virtual void FUN_00ce4ab0Unused2() = 0;
-    virtual void FUN_00ce4ab0Free(void* object, unsigned short size) = 0;
-};
-
-struct FUN_00ce4ab0Router
-{
-    unsigned char pad[16];
-    FUN_00ce4ab0Allocator* allocator;
-};
-
-FUN_00ce4ab0Router* _D1A0E0GetMemoryRouter();
-void FUN_00ce29e0();
-
-struct FUN_00ce4ab0Class
-{
-    FUN_00ce4ab0Class* Destroy(unsigned int flags);
-};
-
 union __declspec(intrin_type) __declspec(align(16)) __m128
 {
     float m128_f32[4];
     unsigned __int64 m128_u64[2];
 };
-extern "C" __m128 _mm_mul_ps(__m128, __m128);
-extern "C" __m128 _mm_add_ss(__m128, __m128);
-extern "C" __m128 _mm_sqrt_ss(__m128);
-extern "C" __m128 _mm_shuffle_ps(__m128, __m128, unsigned int);
-extern "C" void _mm_store_ss(float*, __m128);
 
 struct hkaBone
 {
@@ -80,8 +54,6 @@ struct hkError
     virtual void unk08() = 0;
     virtual int message(int type, int id, const char* description, const char* file, int line) = 0;
 };
-
-extern int DAT_01268360;
 
 #include <math.h>
 // Clamps the input to the domain of asin and returns the result, substituting the sign of pi/2 when the magnitude is at least 1.0f.

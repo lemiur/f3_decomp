@@ -7,18 +7,6 @@
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 #include "havok/hkpConvexPieceMeshShape.h"
 struct HkpStandIn;
-struct HkpAllocator
-{
-    virtual void v0() = 0;
-    virtual void v1() = 0;
-    virtual void release(HkpStandIn* object, unsigned short size) = 0;
-};
-struct HkpRouter
-{
-    void* reserved;
-    unsigned char padding[12];
-    HkpAllocator* allocator;
-};
 struct HkpStandIn
 {
     virtual void v0() = 0;
@@ -27,11 +15,6 @@ struct HkpStandIn
     HkpStandIn* FUN_00e01010(int flags);
 
     unsigned short value;
-};
-HkpRouter* _D1A0E0GetMemoryRouter();
-struct FUN_00e49100_t
-{
-    int GetNextKey(int key);
 };
 struct FUN_00e49290_Target
 {
@@ -57,30 +40,6 @@ struct FUN_00e49290_Target
         return 0;
     }
 };
-struct FUN_00e49290_Owner
-{
-    unsigned char pad[0x10];
-    FUN_00e49290_Target target;
-};
-struct FUN_00e49290_Data
-{
-    unsigned char pad0[8];
-    int* p8;
-    unsigned char pad1[8];
-    int* p14;
-    unsigned int count;
-    unsigned char pad2[4];
-    int* p20;
-};
-struct FUN_00e49290_Class
-{
-    unsigned char pad[8];
-    FUN_00e49290_Data* data;
-    FUN_00e49290_Owner* owner;
-
-    int FUN_00e49290(unsigned int index);
-};
-int FUN_00e49030();
 struct Ref
 {
     void FUN_00c905b0() throw();
@@ -113,8 +72,6 @@ struct D : P, S
     {}
     void FUN_00e490d0();
 };
-class GlobalObjectO2_00d472a0;
-extern GlobalObjectO2_00d472a0 g_01269198;
 int __cdecl FUN_00d06f80(const void* pvChunk, int iNumBytes) throw();
 template <class T> class hkArrayE494
 {
@@ -157,38 +114,6 @@ class hkStatisticsCollectorE494
             AddMemoryChunk(3, pcName, kArray.m_data, kArray.GetLogicalSize() * sizeof(T), iAllocated);
         }
     }
-};
-class hkxStreamE494;
-class hkDisplayMeshE494;
-struct hkMeshSectionE494
-{
-    int unk00;
-    int unk04;
-    hkArrayE494<hkxStreamE494*> m_indexStreams;
-    hkArrayE494<hkxStreamE494*> m_vertexStreams;
-    hkArrayE494<hkxStreamE494*> m_materialStreams;
-};
-class hkReferencedObjectE494
-{
-  public:
-    virtual ~hkReferencedObjectE494() throw();
-    unsigned short m_usMemSizeAndFlags;
-    short m_sReferenceCount;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-
-    void FUN_00d213e0(hkStatisticsCollectorE494* pkCollector, const GlobalObjectO2_00d472a0* pkClass) const throw();
-};
-class hkDisplayGeometryE494 : public hkReferencedObjectE494
-{
-  public:
-    hkMeshSectionE494* m_kCriticalSection;
-    hkDisplayMeshE494* m_pDisplayMesh;
-
-    void AddToStatisticsCollector(hkStatisticsCollectorE494* pkCollector, const GlobalObjectO2_00d472a0* pkClass) const
-        throw();
 };
 
 #include <xmmintrin.h>
@@ -400,40 +325,4 @@ struct xVec4
         m_vComponents = _mm_max_ps(a.m_vComponents, b.m_vComponents);
     }
 };
-struct xAabb
-{
-    xVec4 m_kMinimumCorner;
-    xVec4 m_kMaximumCorner;
-};
-struct xTransform;
 typedef __declspec(align(16)) int xShapeBuffer[128];
-
-struct xChild
-{
-    virtual void c0();
-    virtual void c1();
-    virtual void c2();
-    virtual void c3();
-    virtual void c4();
-    virtual void c5();
-    virtual void c6();
-    virtual void getAabb(const xTransform& t, float tolerance, xAabb& out) const;
-};
-struct xContainer
-{
-    virtual void k0();
-    virtual void k1();
-    virtual int GetFirstKey() const;
-    virtual int GetNextShapeKey(int key) const;
-    virtual void k4();
-    virtual const xChild* GetShapeForKey(int key, xShapeBuffer& buffer) const;
-};
-struct xShapeBase
-{
-    virtual void s0();
-    int a, b, c;
-};
-struct xCollection : xShapeBase, xContainer
-{
-    void FUN_00e492d0(const xTransform& t, float tolerance, xAabb& out) const;
-};

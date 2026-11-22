@@ -8,12 +8,6 @@ NiInterpolator::NiInterpolator() : m_fLastTime(DAT_01015f5c)
     m_pVTable = NiInterpolator_VTable;
 }
 
-struct BSBlendTreadTransfInterpolator;
-struct NiBlendInterpolator;
-struct CloningProcess;
-struct NiObjectNET;
-struct NiQuatTransform;
-struct NiStream;
 struct FUN_00a57030_shell : public NiInterpolator
 {
     void GetKeyTimeRange(float*, float*);
@@ -26,17 +20,7 @@ void FUN_00a57030_shell::GetKeyTimeRange(float* fBeginKeyTime, float* fEndKeyTim
     *fEndKeyTime = 0.0f;
 }
 
-extern "C" const char* const g_011f36fc_arg1;
-
-struct NiRefObject
-{
-    virtual ~NiRefObject();
-};
 extern void* NiInterpolator_VTable[];
-struct NiKeyBasedInterpolator : public NiRefObject
-{
-    void FUN_00a57010();
-};
 
 template <class T> struct NiTMallocInterface
 {
@@ -51,8 +35,6 @@ template <class T, class A> struct NiTPrimitiveArray
     void SetSize(unsigned int);
     void SetAt(unsigned int, T&);
 };
-void __stdcall AppendCameraPathEntries(NiTPrimitiveArray<char*, NiTMallocInterface<char*> >*);
-char* _FUN_00a7d330(const char*);
 
 // Reconstructed: 26-byte stdcall wrapper that grabs an object from a
 // factory-like helper and calls one virtual on it (vtable slot 0xD0).
@@ -131,7 +113,3 @@ char __stdcall FUN_00a57020(int a, int b, int c)
 }
 
 void __cdecl operator delete(void*, unsigned int);
-struct FUN_00a57080_Owner
-{
-    void* Destroy(unsigned int);
-};

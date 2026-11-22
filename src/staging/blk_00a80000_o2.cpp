@@ -84,14 +84,6 @@ void FUN_00a87900_class::FUN_00a87900()
     }
 }
 
-extern int DAT_011f5b84;
-void __cdecl InitializeGameSystems();
-void __cdecl FUN_00a8a280();
-void __cdecl FUN_00aa2060(void*, void*);
-struct FUN_00a8a5f0_class {
-    void* FUN_00a8a5f0();
-};
-
 struct FUN_00a8f060_class {
     void FUN_00a8f060();
 };
@@ -256,7 +248,6 @@ void* FUN_00a982d0()
 
 struct CloningProcess;
 struct NiBinaryExtraData;
-struct NiFloatsExtraData;
 struct NiExtraData {
     void* p;
     void FUN_00a7b330(void* dst, CloningProcess* cp);
@@ -327,7 +318,6 @@ void* __cdecl FUN_00a91fe0()
     return 0;
 }
 
-extern int DAT_010a02e4;
 struct NiProperty {
     void* vtbl;
     int m_iWordAt04;
@@ -366,14 +356,6 @@ NiParticleMeshes* __cdecl FUN_00a98e70() {
 
 void __cdecl NiFree(void*);
 void* __cdecl NiMalloc(unsigned int);
-struct FUN_00a99800_shell {
-    void* m_iWordAt00;
-    void* m_iWordAt04;
-    void* m_8;
-    unsigned int m_iThirdValue;
-    void* m_10;
-    void AssignPointerArray(unsigned int count, const void* src);
-};
 
 extern const void* DAT_010a12cc;
 
@@ -841,7 +823,6 @@ void NiCullingProperty::FUN_00a99e00(
 }  // namespace fnv_00a99e00
 
 void __cdecl FUN_00a9b8b0();
-void __cdecl FUN_00a9b9b0();
 
 struct SpawnedRef {
     virtual void Vslot00();
@@ -905,13 +886,7 @@ void FUN_00a80580_cls::FUN_00a80580()
     BaseTeardown();
 }
 
-extern const void* DAT_0109e174;
-
 void FUN_00a5d3d0();
-
-struct FUN_00a80fc0_class {
-    void __thiscall FUN_00a80fc0();
-};
 
 extern float DAT_011ab3f8;
 static const float kPi = 3.1415927f;
@@ -961,17 +936,6 @@ float __cdecl FUN_00a811f0(float y, float x)
 }
 
 void* __cdecl FUN_00aa13e0(unsigned int size);
-extern int DAT_0109e32c;
-
-struct FUN_00a81760_obj
-{
-    void* m_pVTable;
-    char unk04[0x54];
-    unsigned short m_58;
-    unsigned short m_5a;
-
-    void FUN_00a7b690();
-};
 
 struct S_a819e0_O {
 virtual ~S_a819e0_O() {}
@@ -1351,14 +1315,6 @@ void FUN_00a89650(const short* psCompressed, unsigned int uiUnused, float afBase
     for (unsigned int i = 0; i < ItemUpdateArray; i++)
         pfValues[i] = (float)(psCompressed[i] / 32767.0 * fHalfRange + afBase);
 }
-
-struct FUN_00a89760_base {
-    virtual ~FUN_00a89760_base();
-};
-
-struct FUN_00a89760_cls : FUN_00a89760_base {
-    virtual ~FUN_00a89760_cls();
-};
 
 struct BaseCls {
     void __thiscall FUN_00a67b20(int, int, int, int, int, int, int);
@@ -1870,33 +1826,7 @@ NiParticleObject* __cdecl CreateNiParticleObject() {
     return 0;
 }
 
-extern int DAT_010a13ac;
-
 void __declspec(noreturn) FUN_00aa0dc0();
-
-struct FUN_00a9b4a0_Class {
-    void __thiscall FUN_00a9b4a0();
-};
-
-extern unsigned short DAT_011f5f7c;
-extern unsigned short DAT_011f5f7e;
-extern unsigned short DAT_011f5f80;
-extern unsigned short DAT_011f5f82;
-extern unsigned short DAT_011f5f84;
-extern unsigned short DAT_011f5f86;
-extern unsigned short DAT_011f5f88;
-extern unsigned short DAT_011f5f8a;
-extern unsigned short DAT_011f5f8c;
-extern int DAT_011f5f90;
-extern int DAT_011f5f94;
-extern int DAT_011f5f98;
-extern int DAT_011f5f9c;
-extern int DAT_011f5fa0;
-extern int DAT_011f5fa4;
-extern int DAT_011f5fa8;
-extern int DAT_011f5fac;
-extern int DAT_011f5fb0;
-extern unsigned char DAT_011f6001;
 
 extern "C" void* DAT_0109b220;
 
@@ -2853,8 +2783,6 @@ void RleDecoder::Decode(NiBinaryStream& stream,unsigned char* dest,unsigned int 
 void __stdcall FUN_00a85510(int, int, int, int, int, int, int, int) {
 }
 
-extern void __cdecl FUN_00a98ea0();
-
 extern "C" void __cdecl FUN_00a71d10();
 
 // @fnv 0x00a877e0
@@ -3748,11 +3676,3 @@ extern int DAT_011f5e44;
 extern int DAT_011f5e4c;
 extern int (__stdcall* DAT_00fdf1c4)(void*);
 extern const void* vftable_NiRefObject;
-
-
-struct MaterialLibraryView {
-    void* vtbl;
-    int m_iWordAt04;
-    int m_8;
-    void FUN_00a8fdb0();
-};

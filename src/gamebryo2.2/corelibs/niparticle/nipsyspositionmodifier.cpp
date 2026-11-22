@@ -11,8 +11,6 @@ NiPSysPositionModifier::NiPSysPositionModifier()
     m_bModifierActive = true;
 }
 
-extern "C" void* g_012026b8;
-
 void __cdecl FUN_00c31750(void);
 void __cdecl _delete(void*, unsigned int);
 struct Helper
@@ -28,26 +26,6 @@ void* Helper::DestroyIfFlagged(unsigned int flags)
         _delete(this, 0x18);
     return this;
 }
-
-char* __cdecl FUN_00a7d330(const char*);
-struct StrArr
-{
-    char _pad[8];
-    unsigned short _s8;
-    unsigned short _sa;
-    unsigned short _sc;
-    unsigned short _se;
-    void SetSize(unsigned int);
-    void SetAt(unsigned int, char*&);
-};
-struct Base00c319e0
-{
-    void FUN_00c319e0(StrArr*);
-};
-struct Holder00c28cb0 : Base00c319e0
-{
-    void AppendString(StrArr*);
-};
 
 struct FnvV3
 {

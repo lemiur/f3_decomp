@@ -5563,7 +5563,6 @@ bool QArr8ee70::FUN_0048ee70(QFile8ee70* file)
 // @f3 0x0048f4c0 (community match, verified in this file)
 namespace f3m_0048f4c0 {
 
-struct FUN_0048f4c0_Target;
 struct FUN_0048f4c0_Result;
 
 struct FUN_0048f4c0_Copy
@@ -6011,9 +6010,6 @@ void __thiscall FUN_0048f4c0_Owner::FUN_0048f4c0(FUN_0048f4c0_V53* param_2)
 
 // @f3 0x0049cc40 (community match, verified in this file)
 namespace f3m_0049cc40 {
-struct Stream_49cc40 {
-    void FUN_006db490(void* buf, unsigned int size);
-};
 
 struct FUN_0049cc40_cls {
     int unk00;
@@ -10072,7 +10068,6 @@ namespace f3m_0048fd80 {
 struct Point48 { float x, y, z; };
 struct Color48 { float r, g, b, a; };
 struct Renderer48;
-struct RendererVtbl48_unused { void* unk000; void* unk004; void* unk008; void* unk00c; void* unk010; void* unk014; void* unk018; void* unk01c; void* unk020; void* unk024; void* unk028; void* unk02c; void* unk030; void* unk034; void* unk038; void* unk03c; void* unk040; void* unk044; void* unk048; void* unk04c; void* unk050; void* unk054; void* unk058; void* unk05c; void* unk060; void* unk064; void* unk068; void* unk06c; void* unk070; void* unk074; void* unk078; void* unk07c; void* unk080; void* unk084; void* unk088; void* unk08c; void* unk090; void* unk094; void* unk098; void* unk09c; void* unk0a0; void* unk0a4; void* unk0a8; void (__thiscall* SetClearColor)(Renderer48*, Color48*); };
 struct Renderer48 { virtual void unk000(); virtual void unk004(); virtual void unk008(); virtual void unk00c(); virtual void unk010(); virtual void unk014(); virtual void unk018(); virtual void unk01c(); virtual void unk020(); virtual void unk024(); virtual void unk028(); virtual void unk02c(); virtual void unk030(); virtual void unk034(); virtual void unk038(); virtual void unk03c(); virtual void unk040(); virtual void unk044(); virtual void unk048(); virtual void unk04c(); virtual void unk050(); virtual void unk054(); virtual void unk058(); virtual void unk05c(); virtual void unk060(); virtual void unk064(); virtual void unk068(); virtual void unk06c(); virtual void unk070(); virtual void unk074(); virtual void unk078(); virtual void unk07c(); virtual void unk080(); virtual void unk084(); virtual void unk088(); virtual void unk08c(); virtual void unk090(); virtual void unk094(); virtual void unk098(); virtual void unk09c(); virtual void unk0a0(); virtual void unk0a4(); virtual void unk0a8(); virtual void SetClearColor(Color48*); };
 extern Point48 DAT_0106f9d8;
 extern Renderer48* DAT_0106f8d8;
@@ -10731,7 +10726,6 @@ struct AllocationScope_49b240 {
     }
     ~AllocationScope_49b240() { *(unsigned int*)(block+0x298)=previous; }
 };
-class QuadHeap_49b240 { public: void* FUN_0086b930(unsigned int n); void FUN_0086ba60(void* p); };
 
 extern "C" void* NiMalloc(unsigned int);
 extern "C" void* FUN_00aa13e0(unsigned int);
@@ -11608,16 +11602,10 @@ struct World61
     unsigned unk78;
     float height;float FUN_0045cd80(){return height;}
 };
-struct Toggle61
-{
-    bool* FUN_00408d60();
-};
 extern World61* DAT_0107a0d8;
 extern Matrix61 DAT_00f72574;
 extern unsigned int DAT_0106fd3c;
 extern bool DAT_0106fee4;
-void* FUN_00438220();
-void* FUN_005d9660();
 void FUN_00ade300(FUN_00ad2a40*, int, int);
 struct Main61
 {
@@ -22308,7 +22296,6 @@ Entry* Owner::FUN_00493d50(Ref* ref, Holder* holder, float z)
 
 // @f3 0x0049db10 (community match, verified in this file)
 #include <math.h>
-extern const double DAT_00db7268;
 namespace f3m_0049db10 {
 
 namespace f3m_0049db10 {
@@ -25251,7 +25238,6 @@ struct Ref4959 { void* object; Ref4959& FUN_008e9600(const Ref4959&); };
 struct Resolved { virtual void f0(); virtual void f4(); virtual void* f8(); unsigned char IsExact(const void* type) { unsigned char equal=f8()==type; _ReadWriteBarrier(); return equal; } int a04,a08,a0c,a10,a14,a18,a1c,a20,a24,a28,a2c,a30,a34,a38,a3c,a40,a44,a48,a4c,a50,a54,a58,a5c,a60,a64,a68,a6c,a70,a74,a78,a7c,a80,a84,a88,a8c,a90,a94,a98,a9c,aa0,aa4,aa8,aac,ab0,ab4,ab8,abc,ac0,ac4,ac8,acc,ad0,ad4,ad8,adc,ae0,ae4,ae8,aec,af0,af4,af8,afc,b00,b04,b08,b0c,b10,b14,b18,b1c,b20,b24,b28,b2c,b30,b34,b38; Ref4959 reference; };
 struct Object { Resolved* FUN_00826590(int); };
 struct Arg { int a00,a04,a08,a0c,a10,a14,a18,a1c,a20; Node4959* list; int a28,a2c,a30,a34,a38,a3c,a40,a44,a48,a4c,a50; Ref4959 reference; Object* extra; char active; };
-struct Global { int a00,a04,a08,a0c,a10,a14,a18,a1c,a20,a24,a28,a2c,a30; int mode; };
 extern Ref4959 DAT_0106fdc0, DAT_0106ff0c;
 extern int DAT_0116fda0;
 struct Owner4959 { Object* FUN_004941a0(Entry4959*); void FUN_00495960(Arg*); };
@@ -26512,7 +26498,6 @@ struct UpdData {
 struct TSub { int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; unsigned int unk1C; };
 struct Chain2 { int unk00; int unk04; int unk08; int unk0C; TSub sub; };
 struct Chain1 { int unk00, unk04; Chain2* unk08; };
-struct Chain0 { int unk00, unk04, unk08, unk0C; Chain1* unk10; };
 
 struct TObj {
     int unk04, unk08;

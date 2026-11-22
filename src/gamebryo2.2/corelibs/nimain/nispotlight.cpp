@@ -5,7 +5,6 @@
 struct GlobalObjectO2_00a7b610
 {
 };
-extern GlobalObjectO2_00a7b610 g_011f5ec4;
 
 struct NiSpotLight;
 

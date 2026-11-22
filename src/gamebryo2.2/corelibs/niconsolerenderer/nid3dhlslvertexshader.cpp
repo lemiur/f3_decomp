@@ -29,42 +29,6 @@ bool CLS_00e89b10::CallVtableMethod(unsigned int auiArg1, const float* apfArg2, 
     return dev->vtable->m_fn(dev, auiArg1, apfArg2, auiArg3) >= 0;
 }
 
-struct MyConstTable
-{
-    virtual void __stdcall Dummy0();
-    virtual void __stdcall Dummy1();
-    virtual void __stdcall Release();
-};
-struct MyHolder
-{
-    char _pad0[0x44];
-    MyConstTable* m_pShaderConstantTable;
-    void FUN_00e89ac0();
-    void ReleaseConstTable();
-};
-
-struct MyDesc
-{
-    const char* Creator;
-    unsigned int Version;
-    unsigned int Constants;
-};
-struct MyTable
-{
-    virtual long __stdcall F0();
-    virtual long __stdcall F1();
-    virtual long __stdcall F2();
-    virtual long __stdcall F3();
-    virtual long __stdcall F4();
-    virtual long __stdcall GetDesc(MyDesc* pDesc);
-};
-struct ShaderWrap
-{
-    unsigned char _pad[0x44];
-    MyTable* m_pShaderConstantTable;
-    unsigned int GetConstants();
-};
-
 struct _D3DXCONSTANT_DESC
 {
     const char* Name;
@@ -459,8 +423,6 @@ struct OrderArg
 {
     const unsigned short* p;
 };
-extern "C" void _ReadWriteBarrier();
-extern const char str_010f14e8[];
 struct ArrayShader : VS_00e972e0_Shader
 {
     bool FUN_00e974f0(VS_00e972e0_Entry*, const void*, unsigned int, unsigned int, OrderArg);

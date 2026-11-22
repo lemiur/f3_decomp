@@ -4,23 +4,8 @@
 
 #include "havok/hkResourceHandle.h"
 
-struct FUN_00e2df60_class
-{
-    int __thiscall FUN_00e2df60(int);
-};
-
 extern int DAT_010eb19c;
 void __cdecl Deallocate(void*);
-struct FUN_00e2def0_class
-{
-    void* m_p;
-    int __thiscall InitAndMaybeFree(int flags);
-};
-
-struct FUN_00e2df40_class
-{
-    const char* __thiscall FUN_00e2df40(int);
-};
 
 struct D481D0RefVariant
 {
@@ -52,41 +37,7 @@ void FUN_00e2df30_class::FUN_00e2df30(D481D0ReferencedObject* obj, D481D0Class c
 }
 }  // namespace fnv_00e2df30
 
-struct FUN_00d479e0_class
-{
-    void* GetValue(void const*, int);
-};
-
-struct FUN_00e2df80_obj
-{
-    virtual int FUN_00e2df80_v00();
-    virtual int FUN_00e2df80_v04();
-    virtual int FUN_00e2df80_v08();
-    virtual int FUN_00e2df80_v0c();
-    virtual int FUN_00e2df80_v10();
-    virtual int FUN_00e2df80_v14();
-    virtual int FUN_00e2df80_v18();
-    virtual int FUN_00e2df80_v1c();
-};
-
-struct FUN_00e2df80_class
-{
-    int __thiscall FUN_00e2df80(void* a, int* out);
-};
-
 extern int DAT_010eb288;
-struct FUN_00cb0a70
-{
-    void m(int);
-};
-struct FUN_00e2ea20_class
-{
-    int m_p;
-    int m_kPointA;
-    int m_kPointB;
-    FUN_00cb0a70 m_h;
-    FUN_00e2ea20_class* FUN_00e2ea20(int a);
-};
 // @f3 0x00600920 (community match, verified in this file)
 namespace f3m_00600920 {
 struct Helper { void FUN_005fc430(int*); char pad[0x28]; };
@@ -126,11 +77,6 @@ void* __thiscall FUN_00e2f1e0_class::Destroy(int flags)
     return this;
 }
 
-struct FUN_00e2ea40_class
-{
-    virtual void FUN_00e2ea40();
-};
-
 struct FUN_00e2f210_manager
 {
     virtual void unused();
@@ -147,17 +93,7 @@ struct FUN_00e2f210_router
 
 FUN_00e2f210_router* _D1A0E0GetMemoryRouter();
 
-struct FUN_00e2f210_class : public FUN_00e2ea40_class
-{
-    unsigned short m_handle;
-    void* __thiscall FUN_00e2f210(unsigned int flags);
-};
-
 namespace fnv_00e2f240 {
-struct FUN_00e2ec00_class
-{
-    void ClearItems();
-};
 
 struct FUN_00e2f240_manager_class
 {
@@ -173,14 +109,6 @@ struct FUN_00e2f240_router_class
 };
 
 FUN_00e2f240_router_class* _D1A0E0GetMemoryRouter();
-
-struct FUN_00e2f240_class : public FUN_00e2ec00_class
-{
-    unsigned char m_auiShapeKeys[4];
-    unsigned short m_iElementCount;
-
-    void* __thiscall FUN_00e2f240(int flags);
-};
 
 }  // namespace fnv_00e2f240
 
@@ -199,41 +127,7 @@ int FUN_00e2df50_Obj::FUN_00e2df50()
     return unk08;
 }
 
-struct FnvCpu_FUN_00e2df70_CpuObject
-{
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0c;
-    unsigned int unk10;
-    unsigned int unk14;
-    unsigned int unk18;
-    unsigned int unk1c;
-    int value;
-    int FUN_00e2df70();
-};
-
-struct FNVEntry
-{
-    int unk00;
-    int unk04;
-    unsigned int taggedType;
-};
 int __cdecl FUN_00cb0fa0(const void* filter, const void* tagged);
-struct FNVEntryCollection
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    FNVEntry** items;
-    int count;
-
-    FNVEntry* __thiscall FUN_00e2dfd0(const void* filter, FNVEntry* previous);
-};
 // @f3 0x0058ca80 (community match, verified in this file)
 namespace f3m_0058ca80 {
 
@@ -274,23 +168,6 @@ bool __cdecl FUN_0058ca80(Arr_0058b6e0* a, Arr_0058b6e0* b)
 }   // namespace f3m_0058ca80
 
 
-struct Entry
-{
-    virtual void m00();
-    virtual void m04();
-    virtual void m08();
-    virtual void m0c();
-    virtual void m10();
-    virtual void m14();
-    virtual void m18();
-    virtual void m1c();
-    virtual void m20();
-    virtual void m24();
-    virtual void m28();
-    virtual void m2c();
-    virtual void m30();
-    virtual void process(int);
-};
 struct MemoryManager
 {
     virtual void m00();
@@ -307,18 +184,10 @@ struct MemoryRouter
     int unk0c;
     MemoryManager* manager;
 };
-struct EntryArray
-{
-    Entry** data;
-    int size;
-    int capacityAndFlags;
-};
-void __stdcall FUN_00e2e2e0(EntryArray*);
 MemoryRouter* __cdecl FUN_00c85750();
 
 namespace fnv_00e2ec00 {
 extern "C" int DAT_010eb2c4;
-extern "C" int DAT_0102e388;
 struct FUN_00c905b0_Class
 {
     void FUN_00c905b0();
@@ -337,25 +206,6 @@ struct MemoryRouter
     MemoryAllocator* m_pThreadAllocator;
 };
 void* FUN_00c85750() throw();
-struct HandleState
-{
-    int m_uiFilterValue;
-    void FUN_00cb0c00();
-};
-struct AnimationResource
-{
-    int* m_ppVirtualMethodTable;
-    int m_04;
-    HandleState m_handle;
-    int m_0c;
-    FUN_00c905b0_Class** m_firstItems;
-    int m_firstCount;
-    int m_firstCapacity;
-    FUN_00c905b0_Class** m_secondItems;
-    int m_secondCount;
-    int m_secondCapacity;
-    void ClearItems();
-};
 }  // namespace fnv_00e2ec00
 
 namespace fnv_00e2f090 {
@@ -474,22 +324,6 @@ class hkStringBufE2F0
     }
 };
 
-class hkNamedTypeE2F0
-{
-  public:
-    virtual void V0() throw();
-    virtual void V1() throw();
-    virtual void V2() throw();
-    virtual void V3() throw();
-    virtual const char* getName(hkStringBufE2F0& kBuf) const throw();
-};
-
-class hkTypeSourceE2F0
-{
-  public:
-    void FUN_00e2e2e0(hkArrayE2F0<hkNamedTypeE2F0*>& kTypesOut) const throw();
-};
-
 struct hkBoolE2F0
 {
     char m_cBooleanValue;
@@ -522,15 +356,6 @@ template <typename V> class hkStringMapE2F0
     {
         m_map.FUN_00d874d0(pcKey, val);
     }
-};
-
-class FUN_00e2f090
-{
-  public:
-    hkStringMapE2F0<hkNamedTypeE2F0*> m_typeFromName;
-
-    FUN_00e2f090(const hkTypeSourceE2F0* pkSource) throw();
-    virtual void V0() throw();
 };
 
 }  // namespace fnv_00e2f090
@@ -584,27 +409,6 @@ template <class T> struct hkArrayE2E2
     }
 };
 
-class hkNodeE2E2
-{
-  public:
-    virtual void vfn_00();
-    virtual void vfn_04();
-    virtual void vfn_08();
-    virtual void vfn_0C();
-    virtual void vfn_10();
-    virtual void vfn_14();
-    virtual void vfn_18();
-    virtual void vfn_1C();
-    virtual hkNodeE2E2* vfn_20(int a, int b, hkNodeE2E2* prev);
-    virtual void vfn_24();
-    virtual void vfn_28();
-    virtual void vfn_2C();
-    virtual void vfn_30();
-    virtual hkNodeE2E2* vfn_34(int a, hkNodeE2E2* prev);
-
-    void FUN_00e2e2e0(hkArrayE2E2<hkNodeE2E2*>& out);
-};
-
 class hkMemoryAllocatorE2E3;
 
 struct hkMemoryRouterE2E3
@@ -652,27 +456,6 @@ template <class T> struct hkArrayE2E3
         constructWithCopyE2E3<T>(m_data + m_iElementCount, 1, e);
         m_iElementCount++;
     }
-};
-
-class hkNodeE2E3
-{
-  public:
-    virtual void vfn_00();
-    virtual void vfn_04();
-    virtual void vfn_08();
-    virtual void vfn_0C();
-    virtual void vfn_10();
-    virtual void vfn_14();
-    virtual void vfn_18();
-    virtual void vfn_1C();
-    virtual hkNodeE2E3* vfn_20(int a, int b, hkNodeE2E3* prev);
-    virtual void vfn_24();
-    virtual void vfn_28();
-    virtual void vfn_2C();
-    virtual void vfn_30();
-    virtual hkNodeE2E3* vfn_34(int a, hkNodeE2E3* prev);
-
-    void FUN_00e2e380(hkArrayE2E3<hkNodeE2E3*>& out);
 };
 
 struct S00e2e3f0_Pair
@@ -726,7 +509,6 @@ void S00e2e3f0_Obj::FUN_00e2e3f0()
 }
 
 
-extern "C" void* __cdecl memcpy(void*, const void*, unsigned int);
 extern "C" int __cdecl FUN_00cb0fa0(const char*, const char*);
 struct String839
 {
@@ -737,39 +519,12 @@ struct String839
         return reinterpret_cast<const char*>(tagged & ~1u);
     }
 };
-struct Pair839
-{
-    String839 name, value;
-};
-struct Container839
-{
-    int unk00, unk04, unk08, unk0C;
-    Pair839* pairs;
-    int size, capacity;
-    void FUN_00e2e430(const char*);
-};
 
-struct FUN_00c90510_Class
-{
-    void FUN_00c90510();
-};
 struct FUN_00c905b0_Class
 {
     void FUN_00c905b0();
 };
-struct C
-{
-    int a, b, c, d;
-    void** items;
-    int count;
-    void RemoveItem(void* item);
-};
 
-struct ReferencedE2E710
-{
-    void FUN_00c90510() throw();
-    void removeReference() throw();
-};
 template <class T> struct RefPtrE2E710
 {
     RefPtrE2E710(T* e) throw() : m_pRetainedObject(e)
@@ -806,18 +561,6 @@ template <class T> struct ArrayE2E710
     T* m_data;
     int m_iElementCount;
     int m_iCapacityState;
-};
-struct WorldE2E710
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    ArrayE2E710<RefPtrE2E710<ReferencedE2E710> > m_kThirdFollowingStreamField;
-    void RemoveObject(ReferencedE2E710* pkObject);
 };
 
 struct FUN_00cb0a60_target
@@ -891,38 +634,6 @@ FUN_00e2eb70::FUN_00e2eb70(const char* pcName) throw() : m_kName(pcName), m_iVal
 {}
 
 extern int DAT_010eb2c4;
-
-struct Item_e2ebc0
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-};
-
-struct F_e2ebc0
-{
-    int v;
-};
-
-struct FUN_00cb0a70_Class
-{
-    void FUN_00cb0a70(int);
-};
-
-struct FUN_00e2ebc0_class
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    Item_e2ebc0** items;
-    int itemCount;
-    FUN_00e2ebc0_class* Init(F_e2ebc0 flags);
-};
 
 inline void* operator new(unsigned int, void* p)
 {
@@ -1119,92 +830,14 @@ template <class T> class hkArray
 }
 
 namespace hkE2EA {
-struct ExternalLink
-{
-    FUN_00cb0c00::hkStringPtr m_kLinkName;
-    FUN_00cb0c00::hkStringPtr m_kClassName;
-};
 }
 
 namespace FUN_00e2ea40 {
-class hkMemoryResourceHandle : public hkE2EA::hkReferencedObject
-{
-  public:
-    virtual ~hkMemoryResourceHandle();
-
-    hkE2EA::ReferenceCountedPointer<hkE2EA::hkReferencedObject> m_pReferencedResource;
-    FUN_00cb0c00::hkStringPtr m_name;
-    hkE2EA::hkArray<hkE2EA::ExternalLink> m_kExternalLinks;
-};
 
 }
 }  // namespace fnv_00e2ea40
 
 namespace fnv_00e2eae0 {
-struct FUN_00e2eae0_Result
-{
-    void __thiscall FUN_00e2eae0(int* param);
-};
-
-struct FUN_00e2eae0_class
-{
-    virtual void* vf00();
-    virtual void* vf04();
-    virtual void* vf08();
-    virtual void* vf0c();
-    virtual void* vf10(void* arg);
-    virtual void* vf14();
-    virtual void* vf18();
-    virtual void* vf1c();
-    virtual void* vf20();
-    virtual FUN_00e2eae0_Result* vf24();
-    void __thiscall FUN_00e2eae0(int* param);
-};
-
-struct FUN_00cbbd80_Local
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5c;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6c;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7c;
-    int unk80;
-    int unk84;
-    int unk88;
-    void __thiscall InitBuffer();
-};
-
-struct FUN_00d61df0_Obj
-{
-    void __thiscall FUN_00d61df0(void* value);
-};
 
 struct FUN_00c85750_Object
 {
@@ -1223,8 +856,6 @@ struct FUN_00c85750_Owner
     FUN_00c85750_Object* unk0c;
 };
 
-extern int DAT_01063cbc;
-
 FUN_00c85750_Owner* __cdecl FUN_00c85750();
 
 }  // namespace fnv_00e2eae0
@@ -1240,49 +871,6 @@ struct ExternalLinkString
     void FUN_00cb0c10(const char* text) throw();
 };
 
-struct ExternalLinkPair
-{
-    ExternalLinkString memberName;
-    ExternalLinkString externalId;
-};
-
 extern void __cdecl ResizeAudioStream(MemoryManager*, void*, int);
 
-struct ExternalLinkHandle : hkResourceHandle
-{
-    void* object;
-    hkStringPtr name;
-    hkArray<ExternalLinkPair> references;
-    void FUN_00e2e040(const char* memberName, const char* externalId);
-};
-
 void __cdecl ResizeAudioStream(void* alloc, void* arr, int elemSize) throw();
-struct ObjQ_e2e9e0
-{
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual void v0c();
-    virtual void v10();
-    virtual void FUN_00e2e9e0_v14(void* a);
-    virtual void v18();
-    virtual void v1c();
-    virtual void FUN_00e2e9e0_v20(void* a, void* b);
-    unsigned short m_usMemSizeAndFlags;
-    void* Ctor();
-};
-struct ArrQ_e2ed00
-{
-    ObjQ_e2e9e0** m_data;
-    int m_iElementCount;
-    int m_iCapacityState;
-};
-struct FUN_00e2ed00_class
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    ArrQ_e2ed00 unk10;
-    ObjQ_e2e9e0* FUN_00e2ed00(void* p0, void* p1, void* p2);
-};

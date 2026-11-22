@@ -1596,9 +1596,6 @@ typedef struct internal_state {
 } deflate_state;
 
 typedef char charf;
-void _tr_init(deflate_state*);
-int _tr_tally(deflate_state*,unsigned,unsigned);
-void _tr_align(deflate_state*);
 void FUN_00ba0c30(deflate_state*,charf*,ulg,int);
 static const int extra_lbits[29] 
    = {0,0,0,0,0,0,0,0,1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5,0};
@@ -1747,7 +1744,6 @@ static static_tree_desc  static_d_desc =
 static static_tree_desc  static_bl_desc =
 {(const ct_data *)0, extra_blbits, 0,   19, 7};
 
-static void tr_static_init (void);
 static void FUN_00b9f670     (deflate_state *s);
 static void pqdownheap     (deflate_state *s, ct_data *tree, int k);
 static void gen_bitlen     (deflate_state *s, tree_desc *desc);
@@ -1761,7 +1757,6 @@ static void FUN_00ba0230 (deflate_state *s, ct_data *ltree, ct_data *dtree);
 static void FUN_00ba0640  (deflate_state *s);
 static unsigned bi_reverse (unsigned value, int length);
 static void FUN_00ba0750      (deflate_state *s);
-static void bi_flush       (deflate_state *s);
 static void copy_block     (deflate_state *s, charf *buf, unsigned len, int header);
 
 static void FUN_00b9f670(deflate_state *s)
@@ -3029,7 +3024,6 @@ struct Log4820 { void FUN_0042f100(const char*, int); };
 extern Log4820 DAT_01068a70;
 extern char DAT_00ea7258[];
 void __cdecl FUN_00ba14c0(float,unsigned short,float,float,float,float,float*,float*,short*,short*);
-struct Triple4820 { float x,y,z; };
 struct Data4820 {
     int unk000;
     int unk004;
@@ -4209,7 +4203,6 @@ struct String : public StringVal
     unsigned int m_uiSize;
     unsigned int m_uiRes;
 };
-extern "C" char* __cdecl strcpy(char* pcDst, const char* pcSrc);
 struct IdvFilename : public String
 {
     IdvFilename(String strName) : String(strName)
@@ -4514,10 +4507,6 @@ extern const double DAT_00e31f80, DAT_00de7c38;
 namespace f3m_00ba14c0 { void __cdecl FUN_00ba14c0(float,unsigned short,float,float,float,float,float*,float*,short*,short*); }
 namespace Task1945 {
 inline float HalfPass1945(unsigned short n) { return (float)(0.5 / n); }
-struct R0c
-{
-    float x, y, z;
-};
 struct V0c
 {
     float x, y, z;
@@ -6144,7 +6133,6 @@ void Shape::FUN_00baeee0(Bound* bound)
 // @f3 0x00bbc300 (community match, verified in this file)
 #include <new>
 extern const char DAT_00ea7d00[];
-extern const float DAT_00db91dc;
 namespace f3m_00bbc300 {
 namespace batch14_17 {
 
@@ -6554,11 +6542,6 @@ Vec56& (Vec56::*keep)(const Vec56&) = &Vec56::FUN_00bb5d10;
 namespace f3m_00bb1c50 {
 
 namespace leafdata_bb1c50 {
-
-struct Element16 {
-    ~Element16();
-    int data[4];
-};
 
 struct FUN_00bb1c50 {
     char unknown00[0xc];
@@ -14841,13 +14824,6 @@ struct Vec3
         return squared;
     }
 };
-struct FourFloatVector
-{
-    float x, y, z, w;
-    void* AddVector(void*, Vec3*, void*, float);
-    void* AddVector(void*, void*);
-    void* ScaleSwizzled();
-};
 struct Color
 {
     float r, g, b;
@@ -15189,7 +15165,6 @@ void Vec16::FUN_00bbc520(const Elem16& val)
 extern const char DAT_00ea7cd0[];
 extern const char DAT_00ea7cb0[];
 namespace f3m_00bba060 {
-struct TreeHeapReader { void* FUN_0086b930(unsigned int); void FUN_0086ba60(void*); };
 template<class T> struct TreeAllocatorReader : std::allocator<T> {
  template<class U> struct rebind { typedef TreeAllocatorReader<U> other; };
  TreeAllocatorReader() throw() {}
@@ -16193,10 +16168,6 @@ Elem* Vec::FUN_00bb10a0(Elem* first, Elem* last, Elem* dest)
 namespace Task1906 {
 extern const float DAT_00de7c24,DAT_00e00d60,DAT_00e05de4;
 void FUN_00c01e8b();
-extern "C" double __cdecl FUN_00ec6054(double);
-extern "C" double __cdecl FUN_00ec9f30(double);
-extern "C" double __cdecl FUN_00eca060(double);
-extern double DAT_010a4d90;
 template <class T> inline const T& max_value(const T& _Left, const T& _Right)
 {
     return _Left < _Right ? _Right : _Left;

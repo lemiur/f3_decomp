@@ -24,10 +24,6 @@ struct ProcessTable {
     void* beforeTalking[(0x4b4-0x30c)/4];
     bool (__thiscall* talking)(Process*,Actor*);
 };
-struct SoundManager {
-    static SoundManager* get();
-    bool check(unsigned);
-};
 struct Sound {
     unsigned handle;
     __declspec(noinline) bool active();

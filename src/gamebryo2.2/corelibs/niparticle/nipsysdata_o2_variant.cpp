@@ -326,11 +326,6 @@ bool PSDataEqStand::FUN_00c24de0(PSDataEqStand* other)
     return true;
 }
 
-struct NiPSysData_CountView : NiPSysData
-{
-    unsigned int FUN_00c24ea0();
-};
-
 struct NiParticlesDataWriter : NiParticlesData
 {
     void __thiscall FUN_00a97290(NiStream&);

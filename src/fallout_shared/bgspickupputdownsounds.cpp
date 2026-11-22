@@ -6,7 +6,6 @@
 // @f3 0x00593340 (community match, verified in this file)
 extern "C" __declspec(dllimport) long __stdcall InterlockedIncrement(volatile long* value);
 extern volatile long g_liveObjectCount;
-extern const int FUN_00db7764[];   // TESIcon vftable
 extern const int FUN_00dfc184[];   // TESTexture vftable (the base ctor's store)
 
 template <class T> BSStringT<T>::BSStringT()
@@ -24,28 +23,14 @@ TESIcon::TESIcon()
 
 
 extern int DAT_0101abd8;
-void __fastcall FUN_0047b540(void* pThis);
 
 struct BGSMenuIcon;
-struct BGSMessageIcon;
-struct BGSTextureSet;
 struct BipedAnim;
-struct NiAVObject;
 struct NiPoint3;
 struct Script;
 struct TESBoundObject;
-struct TESModel;
-struct TESModelTextureSwap;
 struct TESObject;
-struct TESFormList;
 struct TESObjectREFR;
-struct FileEntryList;
-struct TESWaterForm;
-struct DistantTreeTextureInfo;
-struct blob12
-{
-    char b[12];
-};
 struct BGSClipRoundsForm : public BaseFormComponent
 {
     virtual void InitializeComponent();
@@ -128,45 +113,20 @@ struct BGSEquipType : public BaseFormComponent
     int m_eEquipType;
 };
 typedef char _sizecheck_BGSEquipType[sizeof(BGSEquipType) == 8 ? 1 : -1];
-struct FUN_0047b540_shell : public BGSClipRoundsForm
-{
-    void FUN_0047b540();
-};
 
 struct TESObjectREFR
 {
     void SetFlags(unsigned int);
 };
-struct TESRaceForm
-{
-    void Initialize(unsigned int);
-};
 struct ArrSI
 {
     unsigned int GetFlags();
-};
-struct CombatNode
-{
-    unsigned int FUN_00726070();
-};
-struct FUN_0047b5d0_cls
-{
-    void FUN_0047b5d0(BaseFormComponent* component);
 };
 
 namespace fnv_0047b560 {
 struct ArrSI
 {
     unsigned int GetFlags();
-};
-struct ItemList
-{
-    void* GetItem();
-};
-extern "C" void __cdecl FUN_00485910(int, int);
-struct FUN_0047b560_shell : public TESForm
-{
-    void LogFormIDs();
 };
 }  // namespace fnv_0047b560
 
@@ -176,17 +136,6 @@ struct ArrSI
     unsigned int GetFlags();
 };
 
-struct FUN_0047b630_shell
-{
-    unsigned int FUN_00726070();
-    bool IsSamePickupPutdownSounds(BaseFormComponent* component);
-};
-
 }  // namespace fnv_0047b630
 
 extern int DAT_0101abd8;
-
-struct FUN_0047b520_shell : TESForm
-{
-    void FUN_0047b520();
-};

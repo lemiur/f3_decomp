@@ -2,38 +2,6 @@
 // src/havok/physics/dynamics/world/util/kdtree/hkpkdtreeworldmanager.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/physics/dynamics/world/util/kdtree/hkpkdtreeworldmanager.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-struct hkpKdTreeWorldManager
-{
-    int m_kPointA;
-    int m_kPointB;
-    char m_iThirdValue;
-    char m_iFourthElementInteger;
-    char m_usTrailingValue;
-    char m_f;
-    char m_g;
-    char m_h;
-    void __thiscall FUN_00d0a2b0(void* p);
-};
-
-struct FUN_00d0a270_StandIn
-{
-    void __thiscall FUN_00d0a270(int);
-};
-
-struct FUN_00d0a340_StandIn
-{
-    int m_kPointA;
-    int m_kPointB;
-    char m_iThirdValue;
-    char m_iFourthElementInteger;
-    char m_usTrailingValue;
-    char m_f;
-    char m_g;
-    char m_h;
-
-    void __thiscall SetFlagOrForward(int);
-};
-
 struct FUN_00c917a0_shell
 {
     void FUN_00c917a0(void*);
@@ -95,57 +63,6 @@ FUN_00d0a4f0::~FUN_00d0a4f0()
     *(int*)((char*)this + 0x14) = (int)&$SG5957;
 }
 
-struct FUN_00d0a290_cls
-{
-    int unk00;
-    int unk04;
-    unsigned char unk08;
-    unsigned char unk09;
-    unsigned char unk0A;
-    unsigned char unk0B;
-    unsigned char m_flag0C;
-
-    void SetFlag0C(int unused);
-};
-
-struct FUN_00d0ad80_This
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    char unk20;
-};
-
-class FUN_00d0ad80_Class : public FUN_00d0ad80_This
-{
-  public:
-    bool __thiscall FUN_00d0ad80();
-};
-
-struct FUN_00d0a360_Arg
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-};
-
-struct FUN_00d0a360_Owner
-{
-    int unk00;
-    int unk04;
-    unsigned char unk08;
-    unsigned char unk09;
-
-    void __thiscall HandleArg(int arg);
-};
-
 template <typename T> inline void D0A6A0_constructWithCopy(T* p, int n, const T& t)
 {
     for (int i = 0; i < n; ++i)
@@ -155,12 +72,6 @@ template <typename T> inline void D0A6A0_constructWithCopy(T* p, int n, const T&
 }
 
 struct D0A6A0_Entity;
-
-struct D0A6A0_EntityArray
-{
-    D0A6A0_Entity** m_data;
-    int m_iElementCount;
-};
 
 struct D0A6A0_Collidable
 {
@@ -174,121 +85,6 @@ struct D0A6A0_Entity
     int unk08;
     int unk0C;
     D0A6A0_Collidable m_kCollidable;
-};
-
-struct D0A6A0_Island
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    D0A6A0_Entity** m_kActorEntries;
-    int m_iActorEntryCount;
-};
-
-struct D0A6A0_IslandArray
-{
-    D0A6A0_Island** m_data;
-    int m_iElementCount;
-};
-
-struct D0A6A0_Broadphase
-{
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual void v0C();
-    virtual void v10();
-    virtual void v14();
-    virtual void v18();
-    virtual void v1C();
-    virtual void v20();
-    virtual int GetBroadphaseType();
-};
-
-struct D0A6A0_World
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    D0A6A0_Island* m_pFixedIsland;
-    D0A6A0_Entity* m_pFixedRigidBody;
-    D0A6A0_IslandArray m_activeIslands;
-    int unk30;
-    D0A6A0_IslandArray m_inactiveIslands;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    D0A6A0_Broadphase* m_pJobSemaphore;
-    int unk5C;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6C;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7C;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8C;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9C;
-    int unkA0;
-    int unkA4;
-    int unkA8;
-    int unkAC;
-    int unkB0;
-    int unkB4;
-    int unkB8;
-    int unkBC;
-    int unkC0;
-    int unkC4;
-    int unkC8;
-    int unkCC;
-    int unkD0;
-    int unkD4;
-    int unkD8;
-    int unkDC;
-    int unkE0;
-    int unkE4;
-    int unkE8;
-    int unkEC;
-    int unkF0;
-    int unkF4;
-    int unkF8;
-    int unkFC;
-    int unk100;
-    int unk104;
-    int unk108;
-    int unk10C;
-    D0A6A0_EntityArray m_kPhantoms;
 };
 
 struct D0A6A0_Allocator;
@@ -338,27 +134,6 @@ struct D0A6A0_Router
 };
 
 D0A6A0_Router& FUN_00c85750();
-
-struct D0A6A0_Manager
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    D0A6A0_World* m_pOwningWorld;
-
-    void CollectCollidables(D0A6A0_CollidableArray& out);
-};
-
-struct FUN_00d0ac40_Owner
-{
-    void FUN_00d0a810(int a, int b, int c, int d);
-    void FUN_00d0a560(int a, int b);
-    void FUN_00d0ac40(int a, int b, int c, int d);
-};
 
 namespace fnv_00d0adc0 {
 class hkMemoryAllocatorD0A
@@ -474,15 +249,6 @@ class hkCollectorD0A3
 
 hkResultD0A3 __cdecl FUN_00d98ca0(void* world, hkInputD0A3* input, int* inputBody, hkCollectorD0A3* collector);
 
-class hkQueryD0A3
-{
-  public:
-    int unk00[4];
-    void* m_pOwningWorld;
-
-    void RayCast(hkInputD0A3* input, hkPhantomD0A3* phantom, int filter);
-};
-
 struct __declspec(align(16)) hkVector4D0A4
 {
     float x, y, z, w;
@@ -565,50 +331,9 @@ class RayCollectorD0A4
 hkBoolD0A4 __cdecl FUN_00d98ca0(void* pkShape, const RayInputD0A4* pkInput, const hkVector4D0A4* pkTo,
                                 RayCollectorD0A4* pkCollector);
 
-struct RayCasterD0A4
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    void* m_pkShape;
-    void CastRay(const RayInputD0A4* pkInput, QueryD0A4* pkQuery, int iUser);
-};
-
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long);
-extern "C" unsigned __int64 __rdtsc(void);
 extern "C" void _ReadWriteBarrier(void);
 extern unsigned long DAT_0126835c;
-extern const char str_010cd2d8[];
-extern const char str_010cd2cc[];
-extern const char str_010cd2c0[];
-extern const char str_01076f38[];
-struct D0AMon
-{
-    int unk00;
-    char* m_kRayEnd;
-    int unk08;
-    char* m_pFreeList;
-};
-struct D0ATimer12
-{
-    const char* m_name;
-    unsigned int m_ticks;
-    unsigned int unk08;
-};
-struct D0ATimer16
-{
-    const char* m_name;
-    unsigned int m_ticks;
-    unsigned int unk08;
-    const char* m_name2;
-};
-struct D0ARange
-{
-    void* m_kPointA;
-    int m_kPointB;
-    int m_iThirdValue;
-};
 struct D0AHeap
 {
     virtual void v00();
@@ -628,25 +353,6 @@ struct D0ARouter
 namespace fnvc_adapt {
 D0ARouter* __cdecl FUN_00c85750();
 }
-struct D0ASub
-{
-    int unk00;
-};
-struct D0AObj
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    D0ASub m_sub;
-    int unk14;
-    int unk18;
-    int unk1c;
-    char m_flag;
-    void CollectCollidables(D0ARange*);
-    void FUN_00d0ac40(D0ASub*, D0ARange*, int, int);
-    void CollectAndProcessCollidables(int a, int b);
-};
 
 class hkReferencedObjectD0A
 {
@@ -709,44 +415,12 @@ class FUN_00d0a2d0 : public WorldD0A
 {
 };
 
-class ListenerMgrD0A : public hkpActionD0A, public hkpEntityListenerD0A, public hkpPhantomListenerD0A
-{
-  public:
-    ListenerMgrD0A(FUN_00d0a2d0* pkWorld, bool bFlag) throw();
-    virtual ~ListenerMgrD0A() throw();
-
-    WorldD0A* m_pkWorld;
-    bool m_bModifierActive;
-    bool m_bFlag;
-};
-
 namespace fnv_00d0a560 {
 struct Iface_d0a560A
 {
     virtual void slot0();
     virtual int slot1(int n);
     virtual void slot2(void* p, int n);
-};
-
-struct S00d0a560_IfaceB
-{
-    virtual void slot0();
-    virtual void slot1();
-    virtual void slot2();
-    virtual void slot3();
-    virtual void slot4();
-    virtual void slot5();
-    virtual void slot6();
-    virtual void slot7();
-    virtual void slot8();
-    virtual void slot9();
-    virtual void slot10();
-    virtual void slot11();
-    virtual void slot12();
-    virtual void slot13();
-    virtual void slot14();
-    virtual void slot15();
-    virtual void slot16(void* a, void* b);
 };
 
 struct BSAudio
@@ -766,59 +440,11 @@ namespace fnvc_adapt {
 BSAudio* __cdecl FUN_00c85750(void);
 }
 
-struct FUN_00d9df50_Obj
-{
-    int unk00;
-    void InitWalker(int a1, void* a2);
-};
-
 struct FUN_00d9e000_Obj
 {
     int unk00;
     int unk04;
     int FUN_00d9e000();
-};
-
-struct FUN_00d976d0_Obj
-{
-    void FUN_00d976d0();
-};
-
-struct FUN_00d97850_Obj
-{
-    void ClearBuffers();
-};
-
-struct FUN_00d97970_Obj
-{
-    int Init(void* p);
-};
-
-struct S00d0a560_Holder
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    S00d0a560_IfaceB* unk58;
 };
 
 struct __declspec(align(16)) S00d0a560_Scratch
@@ -839,12 +465,6 @@ struct __declspec(align(16)) S00d0a560_S30
     int unk0C;
 };
 
-struct S00d0a560_Combo
-{
-    FUN_00d9e000_Obj a;
-    FUN_00d9df50_Obj b;
-};
-
 struct __declspec(align(16)) S00d0a560_Frame
 {
     int unk10;
@@ -857,45 +477,12 @@ struct __declspec(align(16)) S00d0a560_Frame
     S00d0a560_Scratch s50;
 };
 
-struct S00d0a560_Timer
-{
-    int name;
-    unsigned int tick;
-    int unk08;
-};
-
-struct S00d0a560_TimerBuf
-{
-    int unk00;
-    S00d0a560_Timer* cur;
-    int unk08;
-    S00d0a560_Timer* end;
-};
-
 extern "C" void _ReadWriteBarrier(void);
 extern unsigned long DAT_0126835c;
-extern int str_010cd2a4;
-extern int str_010c41f8;
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long);
 
 void __cdecl GetAudioPair(void* out, int n);
 void __cdecl FreeBufferPair(void* out, int n);
-void __cdecl DrawIfCountPositive(void* p, int v);
-void __cdecl FillAabbArray(void* p, int a, int b, int c);
-
-struct S00d0a560_Owner
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    S00d0a560_Holder* unk1C;
-
-    void __thiscall FUN_00d0a560(int* out, int ch);
-};
 
 }  // namespace fnv_00d0a560
 
@@ -1006,40 +593,6 @@ struct Tree
     void ClearBuffers();
     Tree* Init(TreeInfo*);
 };
-struct Bounds
-{
-    virtual void slot00();
-    virtual void slot01();
-    virtual void slot02();
-    virtual void slot03();
-    virtual void slot04();
-    virtual void slot05();
-    virtual void slot06();
-    virtual void slot07();
-    virtual void slot08();
-    virtual void slot09();
-    virtual void slot10();
-    virtual void slot11();
-    virtual void slot12();
-    virtual void slot13();
-    virtual void slot14();
-    virtual void slot15();
-    virtual void getBounds(FourFloatVector*, FourFloatVector*);
-};
-struct World
-{
-    int field00, field04, field08, field0c, field10, field14, field18, field1c;
-    int field20, field24, field28, field2c, field30, field34, field38, field3c;
-    int field40, field44, field48, field4c, field50, field54;
-    Bounds* bounds;
-    int field5c, field60, field64, field68, field6c, field70, field74;
-    void* context;
-};
-struct Input
-{
-    void* objects;
-    int count;
-};
 struct Scratch
 {
     void* first;
@@ -1047,73 +600,6 @@ struct Scratch
 };
 void __cdecl GetAudioPair(Scratch*, int);
 void __cdecl FreeBufferPair(Scratch*, int);
-void __cdecl FUN_00d9d950(Tree*, int, int*, int*);
-struct Counter
-{
-    int value;
-};
-struct Semaphore
-{
-    void* handle;
-    Semaphore* Create(int, int);
-    void FUN_00d04370();
-    void FUN_00d04380();
-};
-struct BuildJob
-{
-    unsigned char type, subtype, cpu;
-    unsigned char field03;
-    short bytes, affinity;
-    int field08, field0c;
-    Semaphore* volatile semaphore;
-    Counter* counter;
-    int field18;
-    void* context;
-    void* scratchFirst;
-    void* scratchSecond;
-    void* nodes;
-    int root;
-    int* volatile first;
-    int* second;
-    int* indices;
-    int totalSize, extra;
-    int field44, field48, field4c;
-    void* objects;
-    int field54, field58, field5c;
-};
-struct Queue
-{
-    void FUN_00d04b50(BuildJob*, int);
-    void FUN_00d051b0();
-};
-struct Workers
-{
-    virtual void slot00();
-    virtual void slot01();
-    virtual void slot02();
-    virtual void start(Queue*, int);
-    virtual void wait();
-};
-struct TimerRecord
-{
-    const char* name;
-    unsigned int clock;
-    int field08;
-    const char* object;
-};
-struct TimerStream
-{
-    int field00;
-    char* current;
-    char* begin;
-    char* end;
-};
-extern const char str_010cd104[];
-extern const char str_010cd0fc[];
-extern const char str_010cd0f4[];
-extern const char str_010cd0e0[];
-extern const char str_010cd0d0[];
-extern const char str_010cd0c4[];
 struct IntBuffer
 {
     int* data;
@@ -1137,9 +623,3 @@ __forceinline int* AllocateBufferWithSize(int& bytes, int n)
 {
     return static_cast<int*>(getRouter()->stack->allocArray(bytes, n));
 }
-struct Manager
-{
-    int field00, field04, field08, field0c, field10, field14, field18;
-    World* world;
-    void FUN_00d0a810(Tree**, Input*, Queue*, Workers*);
-};

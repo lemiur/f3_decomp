@@ -17,10 +17,6 @@ unsigned char* __stdcall FUN_00e3c610(unsigned char* out, int a1, int a2)
 void __stdcall FUN_00e3c600(int a1, int a2, int a3)
 {}
 
-class hkClassE3C6;
-
-extern const hkClassE3C6 DAT_01268910;
-
 int __cdecl FUN_00d06f80(const void* pvChunk, int iNumBytes) throw();
 
 template <class T> class hkArrayE3C6
@@ -67,35 +63,6 @@ class hkStatisticsCollectorE3C6
     }
 };
 
-struct hkVector4E3C6
-{
-    float x, y, z, w;
-};
-
-struct hkRayE3C6
-{
-    hkVector4E3C6 m_vFrom;
-    hkVector4E3C6 m_vTo;
-};
-
-class hkpShapeE3C6
-{
-  public:
-    void FUN_00c90360(hkStatisticsCollectorE3C6* pkCollector, const hkClassE3C6* pkClass) const throw();
-};
-
-class hkObjE3C6 : public hkpShapeE3C6
-{
-  public:
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    hkArrayE3C6<hkRayE3C6> m_kRays;
-
-    void AddRaysToStatistics(hkStatisticsCollectorE3C6* pkCollector, const hkClassE3C6* pkClass) const throw();
-};
-
 union __declspec(intrin_type) __declspec(align(16)) __m128
 {
     float m128_f32[4];
@@ -103,16 +70,11 @@ union __declspec(intrin_type) __declspec(align(16)) __m128
 };
 extern "C"
 {
-    __m128 _mm_shuffle_ps(__m128, __m128, unsigned int);
     __m128 _mm_mul_ps(__m128, __m128);
     __m128 _mm_add_ps(__m128, __m128);
     __m128 _mm_min_ps(__m128, __m128);
     __m128 _mm_max_ps(__m128, __m128);
-    __m128 _mm_set_ps1(float);
 }
-
-extern float DAT_0104da48;
-extern float DAT_0104e148;
 
 struct hkMemoryAllocator
 {
@@ -138,12 +100,6 @@ struct NineIntegerRecord
 
 extern "C" NineIntegerRecord* FUN_00c85750();
 void __cdecl FUN_00c908c0(hkMemoryAllocator* alloc, void* array, int reqCapacity, int elemSize);
-
-union hkQuadVector
-{
-    hkVector4 v;
-    __m128 q;
-};
 
 struct __declspec(align(16)) hkWorldRay
 {
@@ -199,18 +155,6 @@ struct hkInplaceWorldRayArray : hkWorldRayArray
     }
 };
 
-struct hkAabbQ
-{
-    __m128 m_kMinimumCorner;
-    __m128 m_kMaximumCorner;
-};
-
-class hkpMultiRayShapeImpl : public hkpMultiRayShape
-{
-  public:
-    void FUN_00e3c800(const hkTransform& localToWorld, hkReal tolerance, hkAabbQ& out) const;
-};
-
 extern "C"
 {
     __m128 _mm_sub_ps(__m128, __m128);
@@ -219,11 +163,8 @@ extern "C"
     __m128 _mm_mul_ss(__m128, __m128);
     __m128 _mm_sqrt_ss(__m128);
     __m128 _mm_rsqrt_ss(__m128);
-    __m128 _mm_set_ss(float);
     __m128 _mm_andnot_ps(__m128, __m128);
     __m128 _mm_cmpeq_ss(__m128, __m128);
-    __m128 _mm_load_ps1(float const*);
-    void _mm_store_ss(float*, __m128);
 }
 extern "C" void __cdecl FUN_00c908c0(hkMemoryAllocator& alloc, void* array, int numElem, int sizeElem);
 struct RayStandIn
@@ -281,12 +222,4 @@ struct ShapeStandIn : RefObjStandIn
     unsigned int m_type;
     ShapeStandIn(unsigned int type) : m_ulUserData(0), m_type(type)
     {}
-};
-
-struct FUN_00e3c680 : ShapeStandIn
-{
-    RayArrayStandIn m_kRays;
-    float m_fRayRadius;
-    FUN_00e3c680(const RayStandIn* rays, int nRays, float rayPenetrationDistance);
-    virtual ~FUN_00e3c680();
 };

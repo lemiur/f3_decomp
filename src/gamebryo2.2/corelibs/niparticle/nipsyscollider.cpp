@@ -62,13 +62,6 @@ void NiPSysCollider::LinkObject(NiStream& stream)
     }
 }
 
-struct FUN_00c327e0_shell : public NiPSysCollider
-{
-    void* FUN_00c327e0();
-};
-
-extern const char* const g_012026a0_arg1;
-
 struct StrArr
 {
     void* vptr;
@@ -525,8 +518,6 @@ bool C326B0Modifier::FUN_00c326b0(C326B0Object* pkObject)
 
     return true;
 }
-
-extern int DAT_01098ccc;
 
 struct c327f0_Counted
 {

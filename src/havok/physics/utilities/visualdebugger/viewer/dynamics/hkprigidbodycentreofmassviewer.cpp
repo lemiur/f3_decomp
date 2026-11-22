@@ -98,16 +98,6 @@ template <class T> struct S_00d69fc0_Array
     }
 };
 
-struct S_00d69fc0_Item;
-
-struct S_00d69fc0
-{
-    int unk00;
-    int unk04;
-    S_00d69fc0_Array<S_00d69fc0_Item*> m_items;
-    void RemoveItem(S_00d69fc0_Item* item);
-};
-
 struct D6A140Allocator
 {
     virtual void unk00();
@@ -146,20 +136,6 @@ class D6A140ReferencedObject
 
     unsigned short m_usMemSizeAndFlags;
     short m_sReferenceCount;
-};
-
-class D6A140Interface
-{
-  public:
-    virtual ~D6A140Interface();
-};
-
-class D6A140Object : public D6A140ReferencedObject, public D6A140Interface
-{
-  public:
-    __declspec(nothrow) D6A140Object(const void* info);
-
-    int unk0C[12];
 };
 
 extern void* DAT_01269020;
@@ -305,7 +281,6 @@ void FUN_00d69b20_cls::AttachAndDispatch(ArgOwner* apOwner)
 }
 
 namespace fnv_00d69fa0 {
-class SpawnedObject;
 
 class FUN_00d69b20_cls
 {
@@ -371,23 +346,7 @@ FUN_00d6a040::FUN_00d6a040(void* input) : FUN_00ddccb0(input)
     unk38 = 0x80000000u;
 }
 
-class RegistryOwner
-{
-  public:
-    void* Register(const char* name, void (*callback)());
-};
-
-extern RegistryOwner* DAT_01269cd0;
 extern void* DAT_01269020;
-
-extern void FUN_00d6a140();
-
-struct DwordList
-{
-    unsigned int* m_pData;
-    int m_iArrayLength;
-    unsigned int m_uCapFlags;
-};
 
 struct GlobalHolder
 {
@@ -402,16 +361,6 @@ namespace fnvc_adapt {
 GlobalHolder* __cdecl FUN_00c85750();
 }
 extern "C" void _ReadWriteBarrier(void);
-void __cdecl ResizeAudioStream(void* aAlloc, void* aList, unsigned int aiElemSize);
-
-struct FUN_00d6a000_cls
-{
-    int unk00;
-    int unk04;
-    DwordList m_kNode;
-
-    void AppendDword(unsigned int aValue);
-};
 
 namespace fnv_00d6a0a0 {
 struct Allocator
@@ -453,61 +402,6 @@ struct Array
     }
 };
 
-struct Base00
-{
-    virtual ~Base00() throw();
-    int unk04;
-};
-
-struct Base08
-{
-    virtual void Vfn08();
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-};
-
-struct Source
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5C;
-    int unk60;
-    int unk64;
-    int unk68;
-    void** unk6C;
-    int unk70;
-};
-
-struct Base20
-{
-    virtual void Vfn20();
-    Source* unk24;
-};
-
 struct Base28
 {
     virtual ~Base28() throw()
@@ -518,13 +412,6 @@ struct Base2C
 {
     virtual ~Base2C() throw()
     {}
-};
-
-struct FUN_00d6a0a0 : Base00, Base08, Base20, Base28, Base2C
-{
-    Array unk30;
-    virtual ~FUN_00d6a0a0();
-    void AttachAndDispatch(void* item) throw();
 };
 
 }  // namespace fnv_00d6a0a0
@@ -539,7 +426,6 @@ typedef union __declspec(intrin_type) __declspec(align(16)) __m128
 
 extern "C" __m128 _mm_add_ps(__m128, __m128);
 extern "C" __m128 _mm_mul_ps(__m128, __m128);
-extern "C" __m128 _mm_load_ps(const float*);
 extern "C" __m128 _mm_load_ss(const float*);
 extern "C" __m128 _mm_shuffle_ps(__m128, __m128, unsigned int);
 extern "C" unsigned __int64 __rdtsc(void);
@@ -547,18 +433,6 @@ extern "C" unsigned __int64 __rdtsc(void);
 extern "C" void*(__stdcall* DAT_00fdf044)(unsigned long);
 
 extern unsigned int DAT_0126835c;
-extern float DAT_011b6194;
-extern char DAT_010d2224[];
-extern char DAT_010d2210[];
-extern char DAT_010d2200[];
-extern char DAT_010c41f8[];
-
-extern "C" __m128 _mm_set_ss(float);
-extern "C" __m128 _mm_set_ps1(float);
-extern "C" __m128 _mm_load_ps1(const float*);
-extern "C" __m128 _mm_move_ss(__m128, __m128);
-extern "C" __m128 _mm_setzero_ps();
-extern "C" float _mm_cvtss_f32(__m128);
 
 struct MonRec
 {
@@ -802,42 +676,6 @@ struct Derived : PrimaryBase, SecondaryBase
 Derived::Derived()
 {}
 
-// FUN_00d6a1c0 : MSVC this-adjusting thunk.
-//
-// The original is 8 bytes:  sub ecx, 0x28 ; jmp 0x00d6a1f0
-// That is the adjustor thunk MSVC emits for a virtual function that a
-// derived class overrides for a SECONDARY base: calling through the
-// secondary base's vftable passes the base subobject's 	his, so the
-// thunk walks it back to the derived object and tail-jumps to the shared
-// override.
-//
-// Two bases declare the same virtual, so the derived class overrides one
-// function for both of them -> one adjustor per secondary base.  The first
-// base is padded to 40 bytes so the second base lands at +0x28.
-// The override is DECLARED ONLY, so the thunk is the single defined
-// function symbol carrying the name FUN_00d6a1c0, and a defined key function in the
-// derived class makes the vftable that references the thunk be emitted here.
-struct AdjBase1
-{
-    AdjBase1();
-    virtual void FUN_00d6a1c0();
-    char pad[0x24];
-};
-
-struct AdjBase2
-{
-    AdjBase2();
-// @fnv 0x00d6a1c0
-    virtual void FUN_00d6a1c0();
-};
-
-struct AdjOwner : AdjBase1, AdjBase2
-{
-    AdjOwner();
-    virtual void key_fn();  // key function - defined, so the vftable is emitted
-    void FUN_00d6a1c0();    // the shared override - declared only
-};
-
 namespace fnv_00d6a1d0 {
 // sub ecx,0x2c; jmp DestroyOwner: adjustor thunk from multiple inheritance.
 // PrimaryBase is vptr + 10 dwords = 0x2c bytes.
@@ -892,8 +730,6 @@ Parent::Parent()
 {}
 
 #include <math.h>
-extern "C" void _mm_store_ss(float*, __m128);
-extern "C" __m128 _mm_add_ss(__m128, __m128);
 
 struct Vec4Clamp
 {

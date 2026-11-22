@@ -2,14 +2,11 @@
 // src/gamebryo2.2/corelibs/nianimation/niuvdata.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/_fallout3/platforms/common/code/gamebryo2.2/corelibs/nianimation/niuvdata.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-extern const void* g_011f3f10;
-
 struct NiUVData
 {
     void Destructor();
     void* FUN_00a45200(unsigned int);
 };
-void __cdecl _delete(void*, unsigned int);
 
 extern void(__cdecl* DAT_011f38a0[])(void*);
 extern unsigned char DAT_011f3758[];
@@ -180,36 +177,6 @@ void NiUVData::Destructor()
         DAT_011f38a0[*(unsigned int*)((char*)this + 0x34)](p);
     ((NiRefObject*)this)->~NiRefObject();
 }
-
-struct StrArr
-{
-    unsigned char _pad0[8];
-    unsigned short m_uiCapacity;
-    unsigned short m_uiSize;
-    unsigned char _pad1[2];
-    unsigned short m_uiGrowSize;
-
-    void SetSize(unsigned int);
-    void SetAt(unsigned int, char*&);
-};
-
-void __stdcall AppendCameraPathEntries(StrArr*);
-char* __cdecl _FUN_00a7d330(char*);
-char* __cdecl FUN_00a7d510(char const*, unsigned int);
-
-struct FUN_00a457d0_shell
-{
-    unsigned char _pad0[8];
-    unsigned int m_uiNumUOffsetKeys;
-    unsigned char _pad1[8];
-    unsigned int m_uiNumVOffsetKeys;
-    unsigned char _pad2[8];
-    unsigned int m_uiNumUTilingKeys;
-    unsigned char _pad3[8];
-    unsigned int m_uiNumVTilingKeys;
-
-    void AppendKeyNames(StrArr*);
-};
 
 extern bool(__cdecl* DAT_011f3ae0[])(void*, void*);
 

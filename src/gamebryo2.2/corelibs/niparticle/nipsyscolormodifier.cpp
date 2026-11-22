@@ -195,23 +195,6 @@ void NiPSysColorModifierLocal::SetColorData(NiColorData* pkColorData)
     }
 }
 
-struct Ctor00c2d240
-{
-    void Ctor();
-};
-struct HostLike
-{
-    void SetColorData(void*);
-};
-
-struct S00c2d240
-{
-    void FUN_00c31780(void*, int);
-    void* CreateAndInit(int arg);
-};
-
-extern "C" void* __cdecl Alloc00c2d240(unsigned int);
-
 struct ColorDataStandIn
 {
     virtual ~ColorDataStandIn();

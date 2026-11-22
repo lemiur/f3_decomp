@@ -2,8 +2,6 @@
 // src/gamebryo2.2/corelibs/nianimation/nilookatcontroller.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/_fallout3/platforms/common/code/gamebryo2.2/corelibs/nianimation/nilookatcontroller.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-extern "C" void* g_011f3f98;
-
 struct NiTimeController
 {
     virtual ~NiTimeController();
@@ -27,21 +25,6 @@ void* __thiscall NiLookAtController::FUN_00a4cd40(unsigned int flags)
         _delete(this, 0x3c);
     return this;
 }
-
-struct StrArr
-{
-    void SetSize(unsigned int);
-    void SetAt(unsigned int, char*&);
-};
-struct BaseStub
-{
-    void FUN_00a6d830(StrArr*);
-};
-char* _FUN_00a7d330(const char*);
-struct Holder : NiLookAtController
-{
-    void AppendString(StrArr*);
-};
 
 namespace fnv_00a4c840 {
 struct NiObject
@@ -300,10 +283,6 @@ struct StreamLayout
 struct BaseLoad
 {
     void FUN_00a6d5e0(NiStream&);
-};
-struct StreamFinish
-{
-    void FUN_00a645b0();
 };
 struct LookAt : BaseLoad
 {

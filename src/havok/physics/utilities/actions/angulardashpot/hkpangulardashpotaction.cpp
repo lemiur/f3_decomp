@@ -15,8 +15,6 @@ struct hkQuaternionD4DB
     __m128 m_vec;
 };
 
-extern const __m128 DAT_010c71b0;
-
 class FUN_00cf4d80
 {
   public:
@@ -88,18 +86,6 @@ struct __declspec(align(16)) hkVector4D4DC
     }
 };
 
-struct hkpEntityPairD4DC
-{
-    void* m_pEntityA;
-    void* m_pEntityB;
-};
-
-struct hkpConstraintInputD4DC
-{
-    hkpEntityPairD4DC* m_pair;
-    int m_type;
-};
-
 class hkReferencedObjectD4DC
 {
   public:
@@ -134,24 +120,6 @@ class FUN_00d4dbe0 : public hkReferencedObjectD4DC
 
     FUN_00d4dbe0(void* pvEntityA, void* pvEntityB, int iUserData) throw();
     virtual ~FUN_00d4dbe0() throw();
-};
-
-class hkpConstraintTemplateD4DC
-{
-  public:
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int m_ulUserData;
-    int unk14;
-    int unk18;
-    int unk1C;
-    hkVector4D4DC m_kAxisEndPoints;
-    float m_kMinimumCorner;
-    float m_kMaximumCorner;
-
-    FUN_00d4dbe0* FUN_00d4dc30(const hkpConstraintInputD4DC& kA, const hkpConstraintInputD4DC& kB);
 };
 
 }  // namespace fnv_00d4dc30

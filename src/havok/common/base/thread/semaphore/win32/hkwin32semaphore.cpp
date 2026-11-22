@@ -22,23 +22,6 @@ unsigned long FUN_00d04390::wait(unsigned long amount)
     return (unsigned long)ReleaseSemaphore(*(void**)this, (long)amount, 0);
 }
 
-struct FUN_00d97970_cls
-{
-    unsigned int m_00;
-    unsigned int m_04;
-    unsigned int m_08;
-    unsigned int unk0c;
-    unsigned int unk10;
-    unsigned int unk14;
-    unsigned int unk18;
-    unsigned int m_1c;
-    unsigned int m_20;
-    unsigned int m_24;
-
-    void InitBase(unsigned int aValue);
-    FUN_00d97970_cls* Init(unsigned int aValue);
-};
-
 #include <windows.h>
 struct FUN_00d04350_cls
 {

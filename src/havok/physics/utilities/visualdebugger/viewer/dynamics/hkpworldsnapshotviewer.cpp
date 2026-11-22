@@ -61,15 +61,6 @@ void __cdecl RegisterSnapshotCommands()
 
 struct FUN_00c7be20_cls;
 
-struct FUN_00c7be20_holder
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    void* m_pAllocator;
-};
-
 struct FUN_00c7be20_src
 {
     int unk00;
@@ -86,7 +77,6 @@ struct FUN_00c7be20_arr
 };
 
 void* __cdecl FUN_00c85750() throw();
-void __cdecl FUN_00c908c0(void* allocator, FUN_00c7be20_arr* self, unsigned int newCap, int elemSize);
 
 struct FUN_00c7be20_cls
 {
@@ -217,33 +207,6 @@ struct FUN_00d63250_cls
 
 }  // namespace fnv_00d63250
 
-extern int DAT_010d1794;
-extern int DAT_010d1774;
-extern int DAT_010d1764;
-
-struct SubObject
-{
-    void Init(int a, int b);
-};
-
-struct FUN_00d63280_cls
-{
-    void* m_vtbl0;
-    int unk04;
-    void* m_vtbl8;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    void* m_vtbl20;
-    int unk24;
-    SubObject m_sub28;
-
-    void Setup(int b);
-    FUN_00d63280_cls* FUN_00d63280(int a, int b);
-};
-
 // Adjustor thunk for virtual FUN_00d63230 (sub ecx,8; jmp to the Derived implementation).
 struct PrimaryBase
 {
@@ -265,30 +228,3 @@ struct ThunkOwner : PrimaryBase, SecondaryBase
 
 ThunkOwner::ThunkOwner()
 {}
-
-struct D63240Primary
-{
-    virtual void vfunc00();
-    virtual void FUN_00d63240();
-
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-};
-
-struct D63240Secondary
-{
-    virtual void FUN_00d63240();
-};
-
-struct D63240Object : D63240Primary, D63240Secondary
-{
-    D63240Object();
-
-// @fnv 0x00d63240
-    virtual void FUN_00d63240();
-};

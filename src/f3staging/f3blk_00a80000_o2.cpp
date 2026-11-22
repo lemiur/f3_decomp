@@ -1044,29 +1044,6 @@ struct hkArray
     int m_capacityAndFlags;
 };
 
-struct FUN_00922cb0
-{
-    FUN_00922cb0() throw();
-
-    int unk00;
-    int unk04;
-    int unk08;
-};
-
-class hkPackfileData : public hkReferencedObject {
-public:
-    hkPackfileData();
-    virtual ~hkPackfileData();
-
-    void* m_topLevelObject;
-    char* m_name;
-    FUN_00922cb0 m_trackedObjects;
-    hkArray<void*> m_memory;
-    hkArray<void*> m_chunks;
-    hkArray<void*> m_destructors;
-    hkArray<void*> m_exports;
-};
-
 }   // namespace f3m_00a80240
 
 // @f3 0x00a84ab0 (community match, verified in this file)
@@ -1868,12 +1845,6 @@ struct MoppResults
     unsigned int* data;
     int count, capacity;
 };
-struct MoppMemoryRouter
-{
-    int unk00, unk04, unk08, unk0c;
-    void* heap;
-};
-void* __cdecl FUN_00c85750();
 void __cdecl FUN_00901f10(MoppResults* array, int elementSize);
 struct MoppErrorSink
 {
@@ -5402,13 +5373,6 @@ struct XOstream {
     XOstream& operator<<(const char* s) throw();  // FUN_00943710
     XOstream& operator<<(int v) throw();          // FUN_009437d0
     void FUN_00943a60() throw();
-};
-
-struct XLogger {
-    virtual void v0();
-    virtual void v1();
-    virtual void v2();
-    virtual void Log(int a, unsigned int h, const char* m, const char* f, int line) throw();
 };
 
 void __cdecl FUN_00923500(void* p, int v, int n) throw();

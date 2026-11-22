@@ -365,8 +365,6 @@ void FUN_00d36990()
     FUN_00d34790();
 }
 
-extern char DAT_010cf318[];
-
 struct hkBoolS
 {
     char m_cBooleanValue;
@@ -419,10 +417,6 @@ struct CollisionInputS;
 struct ContactMgrS;
 struct AgentS;
 
-struct CollidableFilterS
-{
-    virtual void v00();
-};
 struct ShapeCollectionFilterS
 {
     virtual void v00();
@@ -1784,20 +1778,6 @@ struct ProfBuf
     ProfRec* m_pRecordEnd;
 };
 
-struct ShapeResult
-{
-    DWORD m_ret;
-    DWORD m_key;
-    DWORD m_pMotionState;
-    void* m_parent;
-};
-
-struct KeyedPointerEntry
-{
-    DWORD m_key;
-    void* m_pEntryObject;
-};
-
 __declspec(align(16)) struct ShapeKeyBuf
 {
     DWORD m_key;
@@ -1811,52 +1791,6 @@ __declspec(align(16)) struct ShapeKeyBuf
         unk1A8, unk1AC, unk1B0, unk1B4, unk1B8, unk1BC, unk1C0, unk1C4, unk1C8, unk1CC, unk1D0, unk1D4, unk1D8, unk1DC,
         unk1E0, unk1E4, unk1E8, unk1EC, unk1F0;
 };
-
-class ShapeSource
-{
-  public:
-    virtual void vtbl00(void);
-    virtual void vtbl04(void);
-    virtual void vtbl08(void);
-    virtual void vtbl0C(void);
-    virtual void* vtbl10(void);
-};
-
-class ShapeKeyHandler
-{
-  public:
-    virtual void vtbl00(void);
-    virtual void vtbl04(void);
-    virtual void vtbl08(void);
-    virtual void vtbl0C(void);
-    virtual void vtbl10(void);
-    virtual DWORD vtbl14(DWORD key, ShapeKeyBuf* pOut);
-};
-
-class ShapeObject
-{
-  public:
-    virtual void vtbl00(void);
-    virtual void vtbl04(void);
-    virtual void vtbl08(void);
-    virtual void vtbl0C(void);
-    virtual void vtbl10(void* pKey, DWORD a1, DWORD a2, DWORD a3);
-};
-
-struct ShapeHolder
-{
-    ShapeSource* m_pSrc;
-    DWORD unk04;
-    DWORD m_dw08;
-};
-
-struct FUN_00d43880_cls : public hkpShapeCollectionAgent
-{
-    void FUN_00d43880(ShapeHolder* pHolder, DWORD a1, DWORD a2, DWORD a3);
-};
-
-extern const char str_010cf300[];
-extern const char str_010c41f8[];
 
 __declspec(align(16)) struct hkpShapeBuffer
 {

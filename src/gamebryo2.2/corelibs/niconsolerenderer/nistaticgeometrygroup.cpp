@@ -112,19 +112,7 @@ void* NiStaticGeometryGroup::Destroy(unsigned int flag)
     return this;
 }
 
-struct MM
-{
-    void _DeallocateAlias(void*);
-};
-extern MM g_memoryManager;
 void __cdecl _NiFreeAlias(void*);
-extern int DAT_010f0f84;
-struct S
-{
-    void* f0;
-    void* f4;
-    void* FUN_00e94a80(unsigned int);
-};
 
 namespace fnv_00e94d00 {
 struct NiGeometryBufferData
@@ -151,12 +139,10 @@ void NiGeometryGroup::FUN_00e94d00(void* pkObj)
 }  // namespace fnv_00e94d00
 
 namespace fnv_00e94db0 {
-struct Direct3DDeviceInterface;
 struct NiGeometryBufferData;
 struct NiGeometryData;
 struct NiGeometryGroup;
 struct NiScreenTexture;
-struct NiSkinInstance;
 struct NiVBChip;
 
 struct NiGeometryBufferData
@@ -705,11 +691,6 @@ void* __cdecl FUN_00e94b80(unsigned int a, void* apUnknown, unsigned int key, un
     return object;
 }
 
-struct P03MM
-{
-    void* Allocate(unsigned int);
-};
-extern int DAT_01400000;
 inline void* operator new(unsigned int, void* p)
 {
     return p;
@@ -718,18 +699,4 @@ struct NiScreenTexture
 {
     char _0[0x1c];
     void* m_pkGeometryRendererData;
-};
-struct B00e947c0
-{
-    B00e947c0();
-    char _0[4];
-    void* m_uiValue1;
-    char _8[0x34];
-    int m_eRequestType;
-    char _40[0x14];
-};
-struct NiStaticGeometryGroup_00e94a30 : NiStaticGeometryGroup
-{
-    void FUN_00e98730(void*);
-    void FUN_00e94a30(NiScreenTexture*);
 };

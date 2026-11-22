@@ -5,11 +5,6 @@
 #include "Tile__FloatAction.h"
 #include "tile_packet_decls.h"
 
-struct FUN_00bb79d0_class
-{
-    void __thiscall FUN_00bb79d0(bool value);
-};
-
 struct MemoryManager
 {
     void Deallocate(void*);

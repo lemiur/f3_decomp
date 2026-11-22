@@ -2,101 +2,6 @@
 // src/havok/physics/utilities/visualdebugger/viewer/collide/hkpcontactpointviewer.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/physics/utilities/visualdebugger/viewer/collide/hkpcontactpointviewer.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-struct Prefix32
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-};
-struct Context
-{
-    void FUN_00c93920(void* value);
-};
-struct Secondary
-{
-    int unk00;
-    int unk04;
-    int child;
-    void FUN_00de2950(Context* context);
-};
-struct Owner : Prefix32, Secondary
-{
-};
-
-struct S_00de2980_B2
-{
-    virtual void f2();
-};
-struct S_00de2980_World
-{
-    int ClearValue(S_00de2980_B2* p);
-};
-struct S_00de2980_B0
-{
-    virtual void f0();
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-};
-struct S_00de2980_B1
-{
-    virtual void FUN_00de2980(S_00de2980_World* w);
-    int unk04;
-};
-struct S_00de2980_D : S_00de2980_B0, S_00de2980_B1, S_00de2980_B2
-{
-    virtual void FUN_00de2980(S_00de2980_World* w);
-};
-
-struct DE29B0PartA
-{
-    virtual void vfuncA();
-    int unk04;
-};
-
-struct DE29B0PartB
-{
-    virtual void vfuncB();
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-};
-
-struct DE29B0PartC
-{
-    virtual void vfuncC();
-    int unk04;
-};
-
-struct DE29B0Base : DE29B0PartA, DE29B0PartB, DE29B0PartC
-{
-    DE29B0Base(void* owner);
-};
-
-struct DE29B0Listener
-{
-    virtual void vfuncD();
-};
-
-struct FUN_00de29b0 : DE29B0Base, DE29B0Listener
-{
-    float m_uiFilterValue;
-    void* m_ulUserData;
-
-    FUN_00de29b0(void* owner, void* userData);
-};
-
 struct hkBaseObject
 {
     virtual void base0() throw();
@@ -184,59 +89,6 @@ void hkpContactPointViewer::DestroyContactPointViewer() throw()
     this->hkpContactPointViewer::~hkpContactPointViewer();
 }
 
-struct SpawnedSub
-{
-    virtual void v00();
-    virtual void v04(void* apItem);
-};
-
-struct SpawnedList
-{
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0c;
-    unsigned int unk10;
-    unsigned int unk14;
-    unsigned int unk18;
-    unsigned int unk1c;
-    unsigned int unk20;
-    unsigned int unk24;
-    unsigned int unk28;
-    unsigned int unk2c;
-    unsigned int unk30;
-    unsigned int unk34;
-    unsigned int unk38;
-    unsigned int unk3c;
-    unsigned int unk40;
-    unsigned int unk44;
-    unsigned int unk48;
-    unsigned int unk4c;
-    unsigned int unk50;
-    unsigned int unk54;
-    unsigned int unk58;
-    unsigned int unk5c;
-    unsigned int unk60;
-    unsigned int unk64;
-    unsigned int unk68;
-    void** m_6c;
-    int m_70;
-};
-
-struct FUN_00de2a00_cls
-{
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0c;
-    unsigned int unk10;
-    unsigned int unk14;
-    SpawnedSub m_18;
-    SpawnedList* m_1c;
-
-    void ProcessSpawnedList();
-};
-
 extern "C"
 {
     unsigned __int64 __rdtsc(void);
@@ -323,19 +175,6 @@ void S_00de2fa0::PostSimulationCallback(S_00de2fa0_Arg* apArg)
     }
 }
 
-struct HkArrayRaw
-{
-    void* m_pData;
-    int m_iArrayLength;
-    unsigned int m_uCapFlags;
-};
-
-struct HkArrayPairBlock
-{
-    HkArrayRaw m_arrA;
-    HkArrayRaw m_arrB;
-};
-
 struct HkAllocator
 {
     virtual void v00();
@@ -351,30 +190,8 @@ struct HkAllocHolder
     HkAllocator* m_pAllocator;
 };
 
-struct HkDisplayConvexObj
-{
-    int unk00;
-    unsigned short m_u04;
-    unsigned short unk06;
-
-    HkDisplayConvexObj* FUN_00de1d20(HkArrayPairBlock* a1);
-};
-
 HkAllocHolder* __cdecl FUN_00c85750() throw();
-void __cdecl ResizeAudioStream(HkAllocator* a1, HkArrayRaw* a2, int a3);
 
-struct FUN_00de4340_cls
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    HkDisplayConvexObj* m_pConvex;
-
-    HkDisplayConvexObj* GetOrCreateConvex(HkArrayRaw* a1);
-};
-
-extern "C" void _ReadBarrier();
-extern "C" void _WriteBarrier();
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long);
 
 extern "C" unsigned __int64 __rdtsc();

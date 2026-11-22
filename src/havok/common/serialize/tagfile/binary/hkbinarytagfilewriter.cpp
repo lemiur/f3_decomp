@@ -112,48 +112,11 @@ struct StringHandle
         FUN_00dba7f0();
     }
 };
-struct Value
-{
-    int FUN_00dbac40();
-    int CallVirtualWithArg();
-    float ApplyValue();
-    void* FUN_00dbac70();
-    __declspec(nothrow) ObjectHandle FUN_00dbacd0();
-    __declspec(nothrow) StringHandle CreateValueInto();
-};
 
 struct ResourceKey
 {
     int first;
     int second;
-};
-struct SoundEntry
-{
-    void* sound;
-};
-struct Receiver
-{
-    void __thiscall FUN_009ba760(void* sound);
-    void __thiscall FUN_009ba780(void* description);
-};
-struct Description
-{
-    int __thiscall FUN_009ba980();
-    void __thiscall FUN_009ba810(ResourceKey* key);
-};
-struct ResourceLookup
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int __thiscall FUN_009be8c0(int first, int second, int flags);
-};
-struct AudioResourceState
-{
-    void* active;
-    ResourceLookup lookup;
-    SoundEntry** entries;
-    void* __thiscall ResolveSound(Receiver* receiver, Description* description);
 };
 
 struct hkMemoryAllocator
@@ -233,55 +196,6 @@ FUN_00dbef20::FUN_00dbef20(int aiSize)
     SetSizeAndGrow((aiSize + 7) & ~7);
     setSizeUnchecked(aiSize);
 }
-
-struct AudioAllocator
-{
-    virtual void v00();
-    virtual void v04();
-    virtual void Free(void* apMemory, unsigned int auiSize);
-};
-
-struct ArrayDeallocator
-{
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual void v0c();
-    virtual void FreeArray(void* apMemory, unsigned int auiSize);
-};
-
-struct AudioHolder
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    ArrayDeallocator* m_pArrayDealloc;
-    AudioAllocator* m_pAllocator;
-};
-
-struct Element
-{
-    int m_i00;
-    void FUN_00dba7f0();
-};
-
-struct SubObject
-{
-    int m_i00;
-    int m_i04;
-    int m_i08;
-    void AllocBufferIfNotFlagged(AudioAllocator* apAllocator);
-};
-
-struct FUN_00dc03d0_cls
-{
-    int unk00;
-    SubObject m_kSub;
-    Element** m_ppArray;
-    int m_iArrayLength;
-    unsigned int m_uCapacity;
-    void ClearArray();
-};
 
 namespace fnv_00dc0460 {
 struct hkMemoryAllocator
@@ -378,42 +292,6 @@ struct Obj : BaseObj
 
 }  // namespace fnv_00dc0460
 
-struct AudioObject
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-};
-struct Dc0380Layout
-{
-    BSAudio* p;
-    UnkHolder unk;
-    int a;
-    int b;
-    int c;
-};
-struct FUN_00dc05b0_writer
-{
-    AudioObject first;
-    AudioObject second;
-    AudioObject third;
-    int unk30;
-    UnkHolder unk34;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    Dc0380Layout audio;
-    void __thiscall FUN_00dc0500(int, int);
-    void __thiscall WriteInt(unsigned int);
-    void __thiscall WriteVarint(unsigned int, unsigned int);
-    void __thiscall FUN_00dbf450(int, int);
-    void __thiscall FUN_00dc00b0(int);
-    void __thiscall FUN_00dc0460();
-};
 struct CallbackTarget
 {
     virtual void Dummy0()
@@ -500,32 +378,6 @@ struct HashEntry
     int unk08;
 };
 
-struct HashTableBase
-{
-    HashEntry* m_entries;
-    int m_flags;
-    int m_uiItemCount;
-
-    void ClearEntries();
-};
-
-struct AudioIface
-{
-    virtual void v00();
-    virtual void v04();
-    virtual void Alloc(void* apBuf, unsigned int auSize);
-};
-
-struct FUN_00dbe950_cls
-{
-    void* m_00;
-    unsigned int m_04;
-    unsigned int m_08;
-
-    void ClearEntries();
-    void AllocBufferIfNotFlagged(AudioIface* apIface);
-};
-
 struct AllocOwner
 {
     virtual void v0();
@@ -583,31 +435,6 @@ void FUN_00dbec60_cls::FUN_00dbec60(AllocOwner* alloc, int count)
     if (oldFlags == 0)
         alloc->Free(pOldEntries, oldCount * 12);
 }
-
-extern "C" int __cdecl FUN_00cb10d0(const char* s);
-
-struct DBED30StringMap
-{
-    void* m_kPrimitiveElement;
-    int m_iCapacityFlags;
-    int m_iPairCount;
-
-    int FindValueForKey(const char* key, int def) const;
-    void insert(const char* key, int val);
-};
-
-struct DBED30Writer
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    DBED30StringMap m_pStringFunctions;
-
-    void WriteSigned64BitInteger(__int64 i);
-    void WriteByteArray(const void* buf, int nbytes);
-    void WriteString(const char* s);
-};
 
 struct S_dbefc0_Heap
 {
@@ -671,17 +498,6 @@ struct S_dbefc0_Bytes
     }
     void FUN_00dbefc0(const unsigned char* bytes, int count);
 };
-
-struct Rec_00dbf0d0
-{
-    unsigned char* unk00;  // data buffer
-    int unk04;             // used size
-    int unk08;             // capacity (low 30 bits) + flags
-    void __thiscall PackBitsToBytes(unsigned char* dest);
-};
-
-void __cdecl fnv_grow_00c908c0(int audioD, Rec_00dbf0d0* self, int newCap, int flag);
-void __cdecl fnv_memset_00ec61c0(void* dest, int ch, int count);
 
 extern int DAT_01011584;
 struct S_00dc0500_Flag
@@ -761,14 +577,6 @@ inline void* operator new(size_t, void* p) throw()
 {
     return p;
 }
-
-struct S_dbf1a0_Map
-{
-    int unk00;
-    int unk04;
-    int __thiscall GetValue(const char* name, int defValue) throw();
-    void __thiscall FUN_00d874d0(const char* name, int value) throw();
-};
 
 struct S_dbf1a0_Handle
 {
@@ -869,23 +677,6 @@ template <typename T> struct S_dbf1a0_Array
         if ((m_iCapacityState & 0x80000000) == 0)
             alloc._bufFree<T>(m_data, m_iCapacityState & 0x3fffffff);
     }
-};
-
-struct S_dbf1a0_Writer
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    S_dbf1a0_Map m_map;
-
-    void __thiscall WriteVarint(__int64 val) throw();
-    void __thiscall WriteString(const char* str) throw();
-    int WriteHandle(const S_dbf1a0_Handle& h) throw();
 };
 
 class hkMemoryAllocatorDBE8;
@@ -1053,18 +844,6 @@ __forceinline Arr::Arr(int n)
         new (data + k) Rec;
 }
 extern "C" void __cdecl FUN_00c908c0(void* owner, Arr* arr, int newCap, int stride);
-struct Host
-{
-    __declspec(nothrow) void WriteArray(const Wrap& arg0, int count);
-    __declspec(nothrow) void FUN_00d605d0(int v);
-    __declspec(nothrow) void WriteVarint(__int64 v);
-    __declspec(nothrow) void HashUInt(float f);
-    __declspec(nothrow) void WriteFloatArray(void* p, int v);
-    __declspec(nothrow) void FUN_00dc00b0(const StringHandle& v);
-    __declspec(nothrow) void WriteString(int v);
-    __declspec(nothrow) void FUN_00d607b0(void* p, int n);
-    __declspec(nothrow) int IsTruthy(Pair* p);
-};
 
 struct S_00dbfef0_A;
 struct S_00dbfef0_B;
@@ -1103,42 +882,6 @@ struct S_00dbfef0_A
     int FUN_00dbac10();
     void FUN_00dbac20(S_00dbfef0_B* b);
     void FUN_00dbab70();
-};
-
-struct S_00dbfef0_Sub
-{
-    int GetValue(int a, int b);
-};
-
-struct S_00dbfef0_Visitor
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    S_00dbfef0_Sub m_sub;
-    void FUN_00d605d0(int v);
-    void HashUInt(float v);
-    void WriteFloatArray(int p, int n);
-    void WriteVarint(__int64 v);
-    void WriteString(int v);
-    void WriteArray(S_00dbfef0_A* a, int n);
-    void FUN_00dc00b0(int v);
-    void WriteNode(S_00dbfef0_Node* node, S_00dbfef0_B b);
-};
-
-struct HkNodeE980
-{
-    int QueryAndWriteResult();
-    int FUN_00dba990();
-    int FUN_00dba9c0();
-    float FUN_00dbaa00();
-    __declspec(nothrow) StringHandle FUN_00dba9d0();
-    __declspec(nothrow) ObjectHandle GetResult();
 };
 
 typedef unsigned int size_t;
@@ -1186,23 +929,6 @@ struct MyDesc
     __declspec(nothrow) ResourceKey __thiscall GetSourcePair();
     __declspec(nothrow) FUN_00dba650 __thiscall GetObjectValue();
     __declspec(nothrow) ResourceKey __thiscall FUN_00dba890(int id);
-};
-struct AudioResourceState2
-{
-    __declspec(nothrow) MyDesc __thiscall ResolveSound(MyDesc* obj);
-};
-struct MyHolder
-{
-    __declspec(nothrow) int __thiscall FindEntryValue(ResourceKey key, int aDefault);
-};
-struct Entry24
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
 };
 struct Struct20
 {
@@ -1304,31 +1030,6 @@ struct Array20
         m_iCapacityState = 0x80000000;
     }
 };
-struct FUN_00d607b0_s
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    __declspec(nothrow) void __thiscall writeVec(int a, int b);
-};
-struct ResourceWriter : FUN_00d607b0_s
-{
-    int unk10, unk14, unk18, unk1c;
-    int unk20, unk24, unk28, unk2c;
-    int m_30;
-    FUN_00dbe8c0_cls m_34;
-    S_00dc0500_Arr m_40;
-    S_00dc0500_Arr m_4c;
-    AudioResourceState2 m_58;
-    int unk5c, unk60, unk64, unk68, unk6c;
-
-    __declspec(nothrow) void __thiscall WriteVarint(__int64 val);
-    __declspec(nothrow) int __thiscall WriteHandle(FUN_00dba650* h);
-    __declspec(nothrow) void __thiscall WriteNode(ResourceKey* key, Struct20* item);
-
-    __declspec(nothrow) void __thiscall FUN_00dc00b0(MyDesc* input);
-};
 
 struct ScanKey
 {
@@ -1406,16 +1107,11 @@ struct ScanItem
     int index;
     __declspec(nothrow) ScanObject CreateValueInto() const;
 };
-struct ScanResources
-{
-    __declspec(nothrow) ScanObject FUN_00dbedd0(const ScanObject& source);
-};
 struct ScanRecord
 {
     int first, second, bitOffset, count;
     ScanKey key;
 };
-extern ScanRecord DAT_010d6848;
 void __cdecl ResizeAudioStream(hkMemoryAllocator& heap, void* array, int elementSize);
 struct ScanReferences
 {
@@ -1466,19 +1162,6 @@ struct ScanMask : hkCharArray
         m_data = 0;
         m_iCapacityState = 0x80000000;
     }
-};
-
-struct ScanWriter
-{
-    AudioObject first, second, third;
-    int unk30;
-    ScanMap map;
-    hkCharArray bits;
-    ScanReferences references;
-    ScanResources resources;
-    __declspec(nothrow) void WriteHandle(const ScanClass& type);
-    __declspec(nothrow) int EvaluateNode(const ScanValue& value);
-    __declspec(nothrow) void FUN_00dbf450(const ScanObject& source, int supplemental);
 };
 
 struct S00dbedb0_Callee : UnkHolder

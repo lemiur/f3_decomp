@@ -26,8 +26,6 @@ int __thiscall FUN_00ee8230_shell::FUN_00ee8230()
     return *(int*)((char*)p + 0xc);
 }
 
-extern "C" void* DAT_012708e4;
-
 void __cdecl operator delete(void* p, size_t size);
 void* __cdecl operator new(size_t);
 struct NiRenderedCubeMap

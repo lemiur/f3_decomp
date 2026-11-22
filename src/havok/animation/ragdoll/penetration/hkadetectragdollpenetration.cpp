@@ -77,8 +77,6 @@ struct Desc
     int unk08;
 };
 
-extern "C" char DAT_010ce1a8[];
-
 struct RefObj
 {
     void* m_vtbl;
@@ -138,9 +136,6 @@ union __declspec(intrin_type) __declspec(align(16)) __m128
 extern "C" __m128 _mm_set_ps1(float);
 extern "C" __m128 _mm_min_ps(__m128, __m128);
 extern "C" __m128 _mm_max_ps(__m128, __m128);
-
-extern float DAT_0104da48;
-extern float DAT_0104e148;
 
 struct hkVector4
 {
@@ -250,48 +245,7 @@ struct BoxSet
     }
 };
 
-struct IndexInfo
-{
-    int unk00, unk04, unk08;
-    short* m_idx;
-};
-
-struct PairRecord
-{
-    short m_kPointA;
-    short m_kPointB;
-    int unk04, unk08, unk0c;
-    hkVector4 m_p0;
-    hkVector4 m_p1;
-    PairRecord() throw();
-};
-
-struct AabbSink
-{
-    void FUN_00cf24a0(const hkAabb& aabb) throw();
-};
-
-struct PairTester
-{
-    virtual void v00();
-    virtual hkBool test(AabbSink* sink, const hkVector4& a, const hkVector4& b, hkVector4& p0, hkVector4& p1) throw();
-};
-
-void __cdecl CollectReachableNodes(IndexInfo* info, short idx, hkArr<short>* list, int flags) throw();
-
-struct PairFinder : RefObj
-{
-    IndexInfo* m_info;
-    PairTester* m_tester;
-    AabbSink* m_sink;
-    int m_uiItemCount;
-    hkIntArray m_aiIndexedValues;
-    bool m_flag;
-    hkBool FUN_00d1fb00(BoxSet* boxes, hkArr<PairRecord>* out);
-};
-
 namespace fnv_00d1fe70 {
-extern int DAT_0102e388;
 
 struct AudioAllocator
 {

@@ -334,23 +334,6 @@ Derived::Derived()
 {
 }
 
-// FUN_00d68720 : MSVC this-adjusting thunk  (sub ecx, 0x08 ; jmp <impl>)
-struct A1_00d68720 {
-    A1_00d68720();
-    virtual void FUN_00d68720();
-    char pad[0x04];
-};
-struct A2_00d68720 {
-    A2_00d68720();
-    virtual void FUN_00d68720();
-};
-struct Own_00d68720 : A1_00d68720, A2_00d68720 {
-    Own_00d68720();
-    virtual void key_fn();
-// @fnv 0x00d68720
-    void FUN_00d68720();
-};
-
 namespace fnv_00d68730 {
 // sub ecx,0x28; jmp target  ==  MSVC adjustor thunk: Derived overrides a virtual that both of its bases
 // declare, so the second base's vtable gets a thunk that moves `this` back by the first base's size (0x28).
@@ -431,36 +414,9 @@ typedef union __declspec(intrin_type) __declspec(align(16)) __m128 {
     struct { float lane0, lane1, lane2, lane3; };
 } __m128;
 
-extern "C" __m128 _mm_set_ss(float);
-extern "C" float _mm_cvtss_f32(__m128);
-extern "C" __m128 _mm_add_ps(__m128 a, __m128 b);
-extern "C" __m128 _mm_sub_ps(__m128 a, __m128 b);
-extern "C" __m128 _mm_mul_ps(__m128 a, __m128 b);
-extern "C" __m128 _mm_mul_ss(__m128 a, __m128 b);
-extern "C" __m128 _mm_add_ss(__m128 a, __m128 b);
-extern "C" __m128 _mm_sub_ss(__m128 a, __m128 b);
-extern "C" __m128 _mm_shuffle_ps(__m128 a, __m128 b, int imm);
-extern "C" __m128 _mm_load_ps(const float* p);
-extern "C" __m128 _mm_load_ss(const float* p);
-extern "C" void _mm_store_ss(float* p, __m128 a);
-extern "C" __m128 _mm_rsqrt_ss(__m128 a);
-extern "C" __m128 _mm_sqrt_ss(__m128 a);
-extern "C" __m128 _mm_cmpeq_ss(__m128 a, __m128 b);
-extern "C" __m128 _mm_andnot_ps(__m128 a, __m128 b);
-extern "C" __m128 _mm_setzero_ps(void);
-
-
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long);
 
-extern float DAT_0104da4c;
-extern float DAT_01011d78;
-extern float DAT_01017718;
-extern float DAT_01016248;
-extern float DAT_01019de0;
-extern float DAT_010c69c4;
 extern const float DAT_010c69c0=(0.85f-1.0f);
-extern float DAT_010ec7f0;
-extern unsigned long DAT_0126835c;
 
 struct Vec {
     union {
@@ -468,34 +424,6 @@ struct Vec {
         struct { float x, y, z, w; };
     };
 };
-
-struct Handler {
-    virtual void v00();
-    virtual void v01();
-    virtual void v02();
-    virtual void v03();
-    virtual void v04();
-    virtual void v05();
-    virtual void v06();
-    virtual void v07();
-    virtual void v08();
-    virtual void DisplayLine(const Vec& a, const Vec& b, int color, int id, int tag);
-};
-
-struct TimerCmd {
-    const char* m_pCommandName;
-    unsigned int m_uiStartTicks;
-    unsigned int m_uiEndTicks;
-};
-
-struct MonStream {
-    int unk00;
-    TimerCmd* m_kRayEnd;
-    int unk08;
-    TimerCmd* m_cap;
-};
-
-extern int DAT_01269004;
 
 class S00d68670_hkBool {
 public:
@@ -531,22 +459,4 @@ struct S00d68670_ContactPointEvent {
     int m_type;
     S00d68670_ContactPoint* m_vContactPoint;
     S00d68670_hkBool isToi() const { return m_type <= 0; }
-};
-
-struct S00d68670_WorldViewerBase {
-    virtual void v00();
-    int unk04;
-    int unk08;
-    Handler* m_pDisplayHandler;
-    int unk10;
-    int unk14;
-    int unk18;
-};
-
-struct S00d68670_ContactListener {
-    virtual void FUN_00d68670(const S00d68670_ContactPointEvent& event);
-};
-
-struct S00d68670_ToiContactPointViewer : S00d68670_WorldViewerBase, S00d68670_ContactListener {
-    virtual void FUN_00d68670(const S00d68670_ContactPointEvent& event);
 };

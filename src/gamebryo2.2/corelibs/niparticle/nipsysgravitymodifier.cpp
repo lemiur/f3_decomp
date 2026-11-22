@@ -86,14 +86,7 @@ NiPSysGravityModifier* NiPSysGravityModifier::FUN_00c22b00(CloningProcess& proce
 }  // namespace fnv_00c22b00
 
 namespace fnv_00c2e520 {
-struct NiAVObject;
-struct NiBinaryStream;
-struct NiFixedString;
 struct NiObject;
-struct NiObjectGroup;
-struct NiSearchPath;
-struct NiTexture;
-struct NiThread;
 struct NiMemObject
 {
     char _pad_0[1];
@@ -821,8 +814,6 @@ struct EmitterC22
         return activeCount;
     }
 };
-
-extern float __cdecl FUN_006397c0();
 
 struct EffectC22
 {

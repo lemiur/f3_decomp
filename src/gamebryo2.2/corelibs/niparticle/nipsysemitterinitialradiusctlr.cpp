@@ -2,8 +2,6 @@
 // src/gamebryo2.2/corelibs/niparticle/nipsysemitterinitialradiusctlr.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/_fallout3/platforms/common/code/gamebryo2.2/corelibs/niparticle/nipsysemitterinitialradiusctlr.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-extern "C" void* g_01202748;
-
 struct NiPSysModifierFloatCtlr
 {
     float m_fValue;
@@ -37,19 +35,6 @@ void __thiscall NiPSysEmitterInitialRadiusCtlr::FUN_00c2b770(float value)
     p[0x10] = value;
 }
 }  // namespace fnv_00c2b770
-
-struct StrArr
-{
-    unsigned char _0[8];
-    unsigned short m_usMaxSize;
-    unsigned short m_usSize;
-    unsigned short _c;
-    unsigned short m_usGrow;
-    void SetSize(unsigned int);
-    void SetAt(unsigned int, char*&);
-};
-void __stdcall FUN_00c32f60(StrArr*);
-char* __cdecl _FUN_00a7d330(const char*);
 
 class NiPSysBaseC2B
 {

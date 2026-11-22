@@ -476,12 +476,6 @@ struct NiTransform
     NiTransform operator*(const NiTransform&) const;
 };
 void FUN_00c74dd0(void*, NiTransform*);
-extern bool DAT_01267c28;
-extern bool DAT_01267c34;
-extern bool DAT_01267c40;
-extern bool DAT_01267c4c;
-extern bool DAT_01267c58;
-extern bool DAT_01267c64;
 
 struct RagScrapMarker
 {
@@ -773,25 +767,6 @@ void FUN_00c7d810_Cls::FUN_00c7d810()
         p->FUN_00cdb3e0();
 }
 }  // namespace fnv_00c7d810
-
-struct FUN_00cb0c00_class
-{
-    void FUN_00cb0c00();
-};
-
-struct VObjExt : VObj
-{
-    virtual void v3();
-    virtual void v4(void*, unsigned int);
-};
-
-struct FUN_00c7d890_cls
-{
-    void* _0;
-    int _4;
-    unsigned int _8;
-    void FUN_00c7d890();
-};
 
 void* __cdecl FUN_00ec7230(char*, char const*, unsigned int);
 
@@ -1186,79 +1161,6 @@ struct BCB9810AllocTagScope
     }
 };
 
-struct BCB9810Node
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    BCB9810Node* m_pParentNode;
-};
-
-struct BCB9810Entry
-{
-    int unk00;
-    int unk04;
-    BCB9810Node* m_pkTreeNode;
-    int unk0C;
-};
-
-class BCB9810Registry
-{
-  public:
-    void AppendTailPair(void* pvOwner, BCB9810Node* pkNode);
-    void FUN_00cb9810(void* pvOwner, BCB9810Node* pkNode);
-
-    int unk00;
-    int unk04;
-    BCB9810Entry* m_pkEntryArray;
-    int m_iArrayLength;
-};
-
-struct CE4360Iter
-{
-    int* GetFirst();
-    int* GetSecond();
-    int* GetThird();
-    int* GetFourth();
-};
-
-struct CE4360Context
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5C;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6C;
-    int unk70;
-    int m_iMode;
-};
-
-void __cdecl FUN_00ce3a00(CE4360Context* pkContext, int a, int b, int c, int d);
-void __cdecl FUN_00ce4330(CE4360Context* pkContext, int a, int b, int c);
-
 struct RTTI_c9b
 {
     const char* m_pcName;
@@ -1267,8 +1169,6 @@ struct RTTI_c9b
 extern unsigned char DAT_011f4428;
 
 class GlobalObjectO2_00a7b610;
-extern GlobalObjectO2_00a7b610 g_012043f8;
-extern float DAT_01267e30;
 
 struct S
 {
@@ -1545,17 +1445,6 @@ struct hkArrayStandIn
     hkArrayStandIn() : m_data(0), m_iElementCount(0), m_iCapacityState(0x80000000)
     {}
 };
-struct FUN_00c7bfd0
-{
-    int m_00, m_04, m_08;
-    float m_0c;
-    float m_10;
-    hkArrayStandIn m_14, m_20, m_2c;
-    Head m_38;
-    int m_40, m_44, m_48;
-    float m_4c, m_50;
-    FUN_00c7bfd0();
-};
 // @f3 0x007c2870 (community match, verified in this file)
 extern int DAT_0108ec68;
 extern int DAT_0108ec6c;
@@ -1781,9 +1670,6 @@ void RagController::FUN_00c75580(unsigned char enabled)
 
 
 extern "C" double __cdecl sqrt(double x);
-__int64 __cdecl FUN_00aa4d80();
-extern float DAT_011b02e4;
-extern float DAT_011ac39c;
 struct NodeC
 {
     int n000;
@@ -2248,8 +2134,6 @@ void Cls::FUN_00c7ba50(void* a1, void* a2, bool* a3)
     }
 }
 
-
-extern __m128 g_hkQuadZero;
 
 struct RagMotion
 {
@@ -2923,7 +2807,6 @@ void HkFloatCheck::FUN_00c7f500(bool* pOut)
     CheckFloatsValid((const float*)this, 4, pOut);
 }
 
-extern int DAT_01267b70;
 struct S_Out
 {
     int unk00;
@@ -2962,7 +2845,6 @@ struct S_Elem
     int unk08;
     S_Inner* unk0c;
 };
-int* __cdecl FUN_00c85ef0(S_Out* out, void* ptr, void* tag);
 inline void* GetOwner(S_Obj* c)
 {
     return (char*)c + c->unk10;
@@ -3039,17 +2921,6 @@ struct __declspec(align(16)) MVec4
         q = _mm_add_ps(q, a.q);
     }
 };
-struct BoneTransform
-{
-    MVec4 position;
-    MVec4 rotation;
-    MVec4 scale;
-};
-struct BoneDesc
-{
-    int unk00;
-    unsigned char locked;
-};
 struct BoneFlags
 {
     unsigned int bits;
@@ -3063,30 +2934,6 @@ struct BoneFlags
         bits &= ~mask;
         return *this;
     }
-};
-struct SkeletonModel
-{
-    int unk00, unk04, unk08;
-    short* parents;
-    int unk10, unk14;
-    BoneDesc* bones;
-    int count;
-    int unk20;
-    BoneTransform* reference;
-};
-struct PoseState
-{
-    SkeletonModel* model;
-    BoneTransform* local;
-    int unk08, unk0c;
-    BoneTransform* world;
-    int unk14, unk18;
-    unsigned int* flags;
-    int count;
-    int unk24;
-    bool ready;
-    void FUN_00cda340();
-    void FUN_00cda4c0();
 };
 
 struct C7C2B0_Heap
@@ -3121,18 +2968,6 @@ struct C7C2B0_Array
         m_data = 0;
         m_iCapacityState = 0x80000000;
     }
-};
-struct ShapeArrays
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    C7C2B0_Array m_iThirdValue;
-    C7C2B0_Array m_kPointB;
-    C7C2B0_Array m_kPointA;
-    ~ShapeArrays();
 };
 
 extern "C" void _ReadWriteBarrier(void);
@@ -3537,7 +3372,6 @@ FUN_00c7d900::~FUN_00c7d900()
 }
 
 namespace fnv_00cda110 {
-void sub_00cb1260(void*, void*, unsigned int);
 
 struct A
 {
@@ -3954,441 +3788,3 @@ FUN_00c7dc40::~FUN_00c7dc40()
 {}
 
 typedef unsigned char u8;
-
-struct RagdollAnimationResetView
-{
-    __declspec(noinline) void FUN_00cdb3e0();
-};
-
-struct RagdollAnimBodyView
-{
-    void FUN_00c68d50(int a1);
-};
-
-struct RagdollAnimEntry
-{
-    int unk00;
-    int unk04;
-    void* p08;
-};
-
-struct RagdollAnimOwner
-{
-    int unk000;
-    int unk004;
-    int unk008;
-    int unk00C;
-    int unk010;
-    int unk014;
-    int unk018;
-    int unk01C;
-    int unk020;
-    int unk024;
-    int unk028;
-    int unk02C;
-    int unk030;
-    int unk034;
-    int unk038;
-    int unk03C;
-    int unk040;
-    int unk044;
-    int unk048;
-    int unk04C;
-    int unk050;
-    int unk054;
-    int unk058;
-    int unk05C;
-    int unk060;
-    int unk064;
-    int unk068;
-    int unk06C;
-    int unk070;
-    int unk074;
-    int unk078;
-    int unk07C;
-    int unk080;
-    int unk084;
-    int unk088;
-    int unk08C;
-    int unk090;
-    int unk094;
-    int unk098;
-    int unk09C;
-    int unk0A0;
-    int unk0A4;
-    int unk0A8;
-    int unk0AC;
-    int unk0B0;
-    int unk0B4;
-    int unk0B8;
-    int unk0BC;
-    int unk0C0;
-    int unk0C4;
-    int unk0C8;
-    int unk0CC;
-    int unk0D0;
-    int unk0D4;
-    int unk0D8;
-    int unk0DC;
-    int unk0E0;
-    int unk0E4;
-    int unk0E8;
-    int unk0EC;
-    int unk0F0;
-    int unk0F4;
-    int unk0F8;
-    int unk0FC;
-    int unk100;
-    int unk104;
-    int unk108;
-    int unk10C;
-    int unk110;
-    int unk114;
-    int unk118;
-    int unk11C;
-    int unk120;
-    int unk124;
-    int unk128;
-    int unk12C;
-    int unk130;
-    int unk134;
-    int unk138;
-    int unk13C;
-    int unk140;
-    int unk144;
-    int unk148;
-    int unk14C;
-    int unk150;
-    int unk154;
-    int unk158;
-    int unk15C;
-    int unk160;
-    int unk164;
-    int unk168;
-    int unk16C;
-    int unk170;
-    int unk174;
-    int unk178;
-    int unk17C;
-    int unk180;
-    int unk184;
-    int unk188;
-    int unk18C;
-    int unk190;
-    int unk194;
-    int unk198;
-    int unk19C;
-    int unk1A0;
-    int unk1A4;
-    int unk1A8;
-    int unk1AC;
-    int unk1B0;
-    int unk1B4;
-    int unk1B8;
-    int unk1BC;
-    int unk1C0;
-    int unk1C4;
-    int unk1C8;
-    int unk1CC;
-    int unk1D0;
-    int unk1D4;
-    int unk1D8;
-    int unk1DC;
-    int unk1E0;
-    int unk1E4;
-    int unk1E8;
-    int unk1EC;
-    int unk1F0;
-    int unk1F4;
-    int unk1F8;
-    int unk1FC;
-    int unk200;
-    int unk204;
-    int unk208;
-    int unk20C;
-    int unk210;
-    int unk214;
-    int unk218;
-    int unk21C;
-    int unk220;
-    int unk224;
-    int unk228;
-    int unk22C;
-    int unk230;
-    int unk234;
-    int unk238;
-    int unk23C;
-    int unk240;
-    int unk244;
-    int unk248;
-    int unk24C;
-    int unk250;
-    int unk254;
-    int unk258;
-    int unk25C;
-    int unk260;
-    int unk264;
-    int unk268;
-    int unk26C;
-    int unk270;
-    int unk274;
-    int unk278;
-    int unk27C;
-    int unk280;
-    int unk284;
-    int unk288;
-    int unk28C;
-    int unk290;
-    int unk294;
-    int unk298;
-    int unk29C;
-    int unk2A0;
-    int unk2A4;
-    int unk2A8;
-    int unk2AC;
-    int unk2B0;
-    int unk2B4;
-    int unk2B8;
-    int unk2BC;
-    int unk2C0;
-    int unk2C4;
-    int unk2C8;
-    int unk2CC;
-    int unk2D0;
-    int unk2D4;
-    int unk2D8;
-    int unk2DC;
-    int unk2E0;
-    int unk2E4;
-    int unk2E8;
-    int unk2EC;
-    int unk2F0;
-    int unk2F4;
-    int unk2F8;
-    int unk2FC;
-    int unk300;
-    int unk304;
-    int unk308;
-    int unk30C;
-    int unk310;
-    int unk314;
-    int unk318;
-    int unk31C;
-    int unk320;
-    int unk324;
-    int unk328;
-    int unk32C;
-    int unk330;
-    int unk334;
-    int unk338;
-    int unk33C;
-    int unk340;
-    int unk344;
-    int unk348;
-    int unk34C;
-    RagdollAnimBodyView* p350;
-};
-
-struct RagdollAnimReference
-{
-    int unk00;
-    int unk04;
-    RagdollAnimOwner* p08;
-};
-
-struct RagdollAnimHandle
-{
-    RagdollAnimReference* p00;
-};
-
-struct RagdollAnimData
-{
-    int unk00;
-    int unk04;
-    RagdollAnimHandle* p08;
-    int unk0C;
-    int unk10;
-    RagdollAnimEntry** arr14;
-    int count18;
-};
-
-struct RagdollAnimControllerView
-{
-    int unk000;
-    int unk004;
-    int unk008;
-    int unk00C;
-    int unk010;
-    int unk014;
-    int unk018;
-    int unk01C;
-    int unk020;
-    int unk024;
-    int unk028;
-    int unk02C;
-    int unk030;
-    int unk034;
-    int unk038;
-    int unk03C;
-    u8 unk40;
-    u8 b41;
-    u8 b42;
-    u8 b43;
-    int unk44;
-    RagdollAnimData* p48;
-    RagdollAnimationResetView* p4C;
-    int unk050;
-    int unk054;
-    int unk058;
-    int unk05C;
-    int unk060;
-    int unk064;
-    int unk068;
-    int unk06C;
-    int unk070;
-    int unk074;
-    int unk078;
-    int unk07C;
-    int unk080;
-    int unk084;
-    int unk088;
-    int unk08C;
-    int unk090;
-    int unk094;
-    int unk098;
-    int unk09C;
-    int unk0A0;
-    int unk0A4;
-    int unk0A8;
-    int unk0AC;
-    int unk0B0;
-    int unk0B4;
-    int unk0B8;
-    int unk0BC;
-    int unk0C0;
-    int unk0C4;
-    int unk0C8;
-    int unk0CC;
-    int unk0D0;
-    int unk0D4;
-    int unk0D8;
-    int unk0DC;
-    int unk0E0;
-    int unk0E4;
-    int unk0E8;
-    int unk0EC;
-    int unk0F0;
-    int unk0F4;
-    int unk0F8;
-    int unk0FC;
-    int unk100;
-    int unk104;
-    int unk108;
-    int unk10C;
-    int unk110;
-    int unk114;
-    int unk118;
-    int unk11C;
-    int unk120;
-    int unk124;
-    int unk128;
-    int unk12C;
-    int unk130;
-    int unk134;
-    int unk138;
-    int unk13C;
-    int unk140;
-    int unk144;
-    int unk148;
-    int unk14C;
-    int unk150;
-    int unk154;
-    int unk158;
-    int unk15C;
-    int unk160;
-    int unk164;
-    int unk168;
-    int unk16C;
-    int unk170;
-    int unk174;
-    int unk178;
-    int unk17C;
-    int unk180;
-    int unk184;
-    int unk188;
-    int unk18C;
-    int unk190;
-    int unk194;
-    int unk198;
-    int unk19C;
-    int unk1A0;
-    int unk1A4;
-    int unk1A8;
-    int unk1AC;
-    int unk1B0;
-    int unk1B4;
-    int unk1B8;
-    int unk1BC;
-    int unk1C0;
-    int unk1C4;
-    int unk1C8;
-    int unk1CC;
-    int unk1D0;
-    int unk1D4;
-    int unk1D8;
-    int unk1DC;
-    int unk1E0;
-    int unk1E4;
-    int unk1E8;
-    int unk1EC;
-    int unk1F0;
-    int unk1F4;
-    int unk1F8;
-    int unk1FC;
-    int unk200;
-    int unk204;
-    int unk208;
-    int unk20C;
-    int unk210;
-    int unk214;
-    int unk218;
-    u8 unk21C;
-    u8 b21D;
-    u8 b21E;
-    u8 unk21F;
-    u8 b220;
-    u8 unk221;
-    u8 b222;
-    u8 b223;
-    int unk224;
-    int unk228;
-    int unk22C;
-    int unk230;
-    int unk234;
-    int unk238;
-    int unk23C;
-    int unk240;
-    int unk244;
-    int unk248;
-    int unk24C;
-    int unk250;
-    int unk254;
-    int unk258;
-    int unk25C;
-    int unk260;
-    int unk264;
-    int unk268;
-    int unk26C;
-    int unk270;
-    int unk274;
-    int unk278;
-    int unk27C;
-    int unk280;
-    int unk284;
-    int unk288;
-    u8 unk28C;
-    u8 unk28D;
-    u8 b28E;
-    u8 unk28F;
-    int FUN_00c7a8d0();
-};

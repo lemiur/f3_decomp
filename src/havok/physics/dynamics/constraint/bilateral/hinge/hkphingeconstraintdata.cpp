@@ -4,18 +4,6 @@
 
 #include "havok/hkpHingeConstraintData.h"
 
-struct FUN_00cbe1b0_class
-{
-    void FUN_00cbe1b0(int index);
-};
-
-extern "C" void* __cdecl FUN_00d21a60(void* thisPtr, int size, int param);
-
-struct hkpHingeConstraintData_ : public hkpConstraintData
-{
-    void* __thiscall FUN_00cbe210(int param);
-};
-
 // Writes 5 and 0x28 into target[1] and target[0] when param is nonzero, otherwise writes zeros.
 // @fnv 0x00cbe1e0
 void __stdcall SetTargetValues(char param, int* target)
@@ -96,56 +84,6 @@ float CpuObject::FUN_00cbe1a0()
 }
 
 // Reads a flag byte at +0xA6 and returns it shifted right by one.
-
-class FUN_00cbe1d0_cls
-{
-  public:
-    unsigned int m_00;
-    unsigned int m_04;
-    unsigned int m_08;
-    unsigned int m_0C;
-    unsigned int m_10;
-    unsigned int m_14;
-    unsigned int m_18;
-    unsigned int m_1C;
-    unsigned int m_20;
-    unsigned int m_24;
-    unsigned int m_28;
-    unsigned int m_2C;
-    unsigned int m_30;
-    unsigned int m_34;
-    unsigned int m_38;
-    unsigned int m_3C;
-    unsigned int m_40;
-    unsigned int m_44;
-    unsigned int m_48;
-    unsigned int m_4C;
-    unsigned int m_50;
-    unsigned int m_54;
-    unsigned int m_58;
-    unsigned int m_5C;
-    unsigned int m_60;
-    unsigned int m_64;
-    unsigned int m_68;
-    unsigned int m_6C;
-    unsigned int m_70;
-    unsigned int m_74;
-    unsigned int m_78;
-    unsigned int m_7C;
-    unsigned int m_80;
-    unsigned int m_84;
-    unsigned int m_88;
-    unsigned int m_8C;
-    unsigned int m_90;
-    unsigned int m_94;
-    unsigned int m_98;
-    unsigned int m_9C;
-    unsigned short m_A0;
-    unsigned short m_A2;
-    unsigned short m_A4;
-    unsigned char m_A6;
-    unsigned int FUN_00cbe1d0();
-};
 
 // @fnv 0x00cbe230
 int __cdecl FUN_00cbe230()
@@ -234,19 +172,6 @@ union hkVector4q
     void FUN_00c7f690(const hkTransform& t, const hkVector4& v);
 };
 
-struct hkpSetLocalTransformsAtom
-{
-    hkUint16 m_type;
-    hkUint16 unk02;
-    hkUint32 unk04;
-    hkUint32 unk08;
-    hkUint32 unk0C;
-    hkVector4q m_kRotationA[3];
-    hkVector4q m_kTranslationA;
-    hkVector4q m_kRotationB[3];
-    hkVector4q m_kTranslationB;
-};
-
 struct hkpHingeConstraintDataEx : public hkpHingeConstraintData
 {
     void SetLocalTransforms(const hkTransform& bodyATransform, const hkTransform& bodyBTransform,
@@ -289,20 +214,6 @@ union hkVector4q
     {
         return reinterpret_cast<const hkReal*>(&m_vComponents)[i];
     }
-};
-
-struct hkMatrix3q
-{
-    hkVector4q m_col[3];
-};
-
-struct hkpHingeTransforms
-{
-    char pad0[0x10];
-    hkMatrix3q m_kRotationA;
-    hkVector4q m_kTranslationA;
-    hkMatrix3q m_kRotationB;
-    hkVector4q m_kTranslationB;
 };
 
 struct hkpHingeConstraintDataEx : public hkpHingeConstraintData

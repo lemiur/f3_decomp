@@ -145,11 +145,6 @@ struct BSFadeNode
 {
     static void* __cdecl operator new(unsigned int);
 };
-struct FUN_00c32d80
-{
-    FUN_00c32d80();
-};
-extern int DAT_010c03cc;
 inline void* __cdecl operator new(unsigned int, void* p)
 {
     return p;
@@ -613,13 +608,6 @@ void __thiscall NiPSysSpawnModifier::FUN_00c2f3f0(float fValue)
 
     target->unk64 = fClamped;
 }
-
-void* __cdecl FUN_00aa13e0(unsigned int size);
-struct Host2f440
-{
-    void FUN_00c32de0(FUN_00c32d80* obj, int arg);
-    FUN_00c32d80* CreateAndInit(int arg);
-};
 
 void __cdecl FUN_00c31670();
 

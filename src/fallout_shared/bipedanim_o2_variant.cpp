@@ -201,12 +201,3 @@ struct BackpackName
     }
     ~BackpackName();
 };
-
-SceneNode* FUN_00c4b310(SceneNode* root, const char* name, int flag);
-SceneNode* FUN_00c4b470(SceneNode* root, BackpackName* name, int flag);
-struct AttachInfo
-{
-    void* m_data;
-};
-
-void FUN_00c88a40(void* a1, AttachInfo a2, SceneNode* obj, SceneNode* parent, bool a4);

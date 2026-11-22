@@ -87,59 +87,8 @@ struct __declspec(align(16)) FinishLoadedShape
 };
 
 #include <xmmintrin.h>
-struct FnvCpu_FUN_00de1170_CpuData0
-{
-    __m128 field00;
-};
-struct FnvCpu_FUN_00de1170_CpuData1
-{
-    __m128 field00;
-};
-struct FnvCpu_FUN_00de1170_CpuObject
-{
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0c;
-    unsigned int unk10;
-    unsigned int unk14;
-    unsigned int unk18;
-    unsigned int unk1c;
-    unsigned int unk20;
-    unsigned int unk24;
-    unsigned int unk28;
-    unsigned int unk2c;
-    unsigned int unk30;
-    unsigned int unk34;
-    unsigned int unk38;
-    unsigned int unk3c;
-    unsigned int unk40;
-    unsigned int unk44;
-    unsigned int unk48;
-    unsigned int unk4c;
-    unsigned int unk50;
-    unsigned int unk54;
-    unsigned int unk58;
-    unsigned int unk5c;
-    __m128 field60;
-    __m128 field70;
-    void FUN_00de1170(FnvCpu_FUN_00de1170_CpuData0* input0, FnvCpu_FUN_00de1170_CpuData1* input1);
-};
 
 typedef __m128 S_00de2010_Vec;
-
-struct S_00de2010_Class
-{
-    int unk00;
-    S_00de2010_Vec unk10;
-    S_00de2010_Vec unk20;
-    S_00de2010_Vec unk30;
-    S_00de2010_Vec unk40;
-    S_00de2010_Vec unk50;
-    S_00de2010_Vec unk60;
-
-    void FUN_00de2010(const S_00de2010_Vec* arg0, const S_00de2010_Vec* arg1);
-};
 
 struct __declspec(align(16)) Vec4
 {
@@ -287,25 +236,6 @@ FUN_00de49b0::FUN_00de49b0(const S00de49b0_Vec4& kC, const S00de49b0_Vec4& kA, c
 }
 
 
-// Object holding two 16-byte vectors and three scalars; the setter copies
-// the two vectors and the three scalars into the object.
-struct FUN_00de5370_cls
-{
-    int unk00, unk04, unk08, unk0c, unk10, unk14, unk18, unk1c, unk20, unk24, unk28, unk2c, unk30, unk34, unk38, unk3c,
-        unk40, unk44, unk48, unk4c, unk50, unk54, unk58, unk5c;
-    __m128 m_v60;
-    __m128 m_v70;
-    int m_i80;
-    float m_f84;
-    float m_f88;
-    void FUN_00de5370(float f1, float f2, int i1, const __m128* p1, const __m128* p2);
-};
-
-struct S00de53b0_Vec4
-{
-    float x, y, z, w;
-};
-
 struct S00de53b0_Quad
 {
     __m128 m_vComponents;
@@ -368,25 +298,6 @@ class __declspec(novtable) S00de53b0_Base : public S00de53b0_RefObject
     int m_type;
 };
 
-class FUN_00de53b0 : public S00de53b0_Base
-{
-  public:
-    FUN_00de53b0(float f1, float f2, int i1, const S00de53b0_Vec4& p1, const S00de53b0_Vec4& p2);
-    virtual void vf00();
-
-    S00de53b0_Vec4 m_v60;
-    S00de53b0_Vec4 m_v70;
-    int m_i80;
-    float m_f84;
-    float m_f88;
-};
-
-struct ScaleMatrix
-{
-    __m128 row0, row1, row2, row3;
-    const __m128* FUN_00de88a0(const __m128* scalar, const ScaleMatrix* matrix);
-};
-
 struct __declspec(align(16)) Vector4_df07c0
 {
     float q[4];
@@ -428,18 +339,6 @@ struct MotionArgument
     MotionArgument(Motion_df07c0* q) : p(q)
     {}
 };
-
-struct Vector4f
-{
-    unsigned int a, b, c, d;
-};
-struct MetaEntry
-{
-    unsigned int index;
-    unsigned int state;
-};
-
-extern __m128 DAT_010cbfc0;
 
 struct FUN_00c93d10_arg
 {
@@ -695,44 +594,10 @@ const void* __cdecl FUN_00dfb2b0()
 }
 
 namespace fnv_00dfb2d0 {
-extern "C" char DAT_010305a8;
-extern "C" char DAT_010ce3c8;
-extern "C" char DAT_010d0d70;
-extern "C" char DAT_010d0dac;
-extern "C" char DAT_010c6fd0;
 
 struct FinishFlag
 {
     int m_bFinishing;
-};
-
-struct ShapeChild
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    __m128 unk10;
-    int unk20;
-    int unk24;
-};
-
-struct FUN_00dfb2d0
-{
-    char* unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    unsigned char unk10;
-    unsigned char unk11;
-    unsigned char unk12;
-    unsigned char unk13;
-    ShapeChild* unk14;
-    int unk18;
-    int unk1c;
-    __m128 unk20;
-    char* unk30;
-
-    FUN_00dfb2d0(FinishFlag flag);
 };
 
 }  // namespace fnv_00dfb2d0
@@ -1323,8 +1188,6 @@ struct FUN_00dff130_sub
     void FUN_00cb0a70(Handle_dff130 kHandle);
     int m_00;
 };
-extern int DAT_010cc2fc;
-extern int DAT_010e6834;
 struct __declspec(align(16)) FUN_00dff130_obj
 {
     int* m_pVtbl;
@@ -1535,10 +1398,6 @@ class __declspec(align(16)) S00dfffa0_Object
     int m_kNextStreamField[7];
 };
 
-struct Vec4_de1190
-{
-    float v[4];
-};  // unaligned 4-float argument type (copied by dwords)
 struct __declspec(align(16)) Quad_de1190
 {
     float q[4];
@@ -1581,55 +1440,16 @@ struct TransformShape_de1190 : RefObject_de1190
     {}
 };
 
-struct Shape_de1190 : TransformShape_de1190
-{
-    Vec4_de1190 m_kMin;
-    Vec4_de1190 m_kMax;
-    Shape_de1190(const Vec4_de1190& kMinBoundsCur, const Vec4_de1190& kMaxPoint);
-    virtual ~Shape_de1190();
-};
-
 namespace SIMD56 {
 struct __declspec(intrin_type) __declspec(align(16)) __m128
 {
     float x, y, z, w;
 };
-extern "C" __m128 _mm_and_ps(__m128, __m128);
 }
 struct SplitB
 {
     int f0;
     int f4;
-};
-
-struct Node56
-{
-    SplitB* m0;
-    int m4;
-    int m8;
-    int m0c;
-    int m10;
-    int m14;
-    int m18;
-    int m1c;
-    SIMD56::__m128 m20;
-    int m30;
-    int m34;
-    int m38;
-    int m3c;
-    SIMD56::__m128 m40;
-};
-
-struct W2
-{
-    short lo;
-    short hi;
-};
-
-union Packed56
-{
-    int bits;
-    W2 words;
 };
 
 struct SplitA
@@ -1639,14 +1459,6 @@ struct SplitA
     short lo;
     short hi;
 };
-
-struct Pairs56
-{
-    SplitB r[2];
-};
-
-extern SIMD56::__m128 DAT_012684d0;
-extern SIMD56::__m128 DAT_01268460[];
 
 struct Output56
 {
@@ -1660,9 +1472,6 @@ struct Output56
     }
 };
 
-int FUN_00df32a0(Output56* a, int b, int c);
-int FUN_00df32d0(Output56* a, int b, int c, int d, int e, int f);
-int FUN_00df3330(Output56* a, int b, int c, int d, int e, int f, int g);
 __declspec(noalias) int FUN_00df4ec0(SplitB* a, int b, int c, SplitA* sa, int* p5, SplitB* sb, SIMD56::__m128* v20,
                                      SIMD56::__m128* v40);
 
@@ -1886,8 +1695,6 @@ class __declspec(align(16)) AnimationBindingVtableProbe
     int unk2C;
 };
 
-extern int DAT_010d08f4;
-
 struct __declspec(align(16)) SpringVtableObject
 {
     int* m_ppVirtualMethodTable;
@@ -1917,9 +1724,6 @@ struct __declspec(align(16)) SpringVtableObject
     bool m_extension;
 };
 
-extern int DAT_010cce28;
-extern int DAT_010d07f4;
-
 struct __declspec(align(16)) ContactSystemView
 {
     int* table;
@@ -1943,8 +1747,6 @@ struct __declspec(align(16)) ContactSystemView
     int contactsSize;
     int contactsCapacity;
 };
-
-extern int DAT_010c8e94;
 
 struct __declspec(align(16)) VtableProbeDff2b0
 {
@@ -1992,8 +1794,6 @@ class __declspec(align(16)) S00dff380_Object : public S00dfbe20_Mid
     int unkD3C;
 };
 
-extern int DAT_010d0994;
-
 struct __declspec(align(16)) DashpotTypeInfoObject
 {
     FUN_00dff130_obj m_pAction;
@@ -2002,8 +1802,6 @@ struct __declspec(align(16)) DashpotTypeInfoObject
     float m_impulseZ;
     float m_impulseW;
 };
-
-extern int DAT_010d09f4;
 
 struct __declspec(align(16)) AngularActionVtableObject
 {

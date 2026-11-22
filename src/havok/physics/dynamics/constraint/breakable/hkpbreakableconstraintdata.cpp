@@ -38,79 +38,11 @@ void FUN_00d4de50_class::PopulateInfo(GenericConstraintAtomScheme* info)
     info->m_usSizeOfAllAtoms = 0xc;
 }
 
-struct FUN_00d4dea0_object
-{
-    virtual void FUN_00d4dea80();
-    virtual void FUN_00d4dea84();
-    virtual void FUN_00d4dea88();
-    virtual void FUN_00d4dea8c();
-    virtual void FUN_00d4dea90();
-    virtual void FUN_00d4dea94();
-    virtual void FUN_00d4dea98();
-    virtual void FUN_00d4dea9c(void*);
-};
-
-struct FUN_00d4dea0_class
-{
-    virtual void FUN_00d4de70();
-    virtual void FUN_00d4de74();
-    virtual void FUN_00d4de78();
-    virtual void FUN_00d4de7c();
-    virtual void FUN_00d4de80();
-    virtual void FUN_00d4de84();
-    virtual void FUN_00d4de88();
-    virtual void FUN_00d4de8c();
-    char FUN_00d4de90[0x14];
-    FUN_00d4dea0_object* FUN_00d4dea0_object;
-    void* FUN_00d4dea0(void*);
-};
-
-extern void* DAT_010d0a1c;
-extern void* _DAT_0102e388;
-struct DDCC60World
-{
-    void removeReference();
-};
-struct FUN_00d4e000_class
-{
-    void* m_vt;
-    void* m1;
-    void* m2;
-    void* m3;
-    void* m4;
-    void* m5;
-    DDCC60World* m6;
-    void FUN_00d4e000();
-};
-
 // @fnv 0x00d4dec0
 int __cdecl FUN_00d4dec0()
 {
     return 0xc;
 }
-
-struct FnvCpu_FUN_00cc48b0_CpuAllocator
-{
-    virtual void slot00();
-    virtual void slot04();
-    virtual void Invoke(void* block, unsigned int size);
-};
-struct FnvCpu_FUN_00cc48b0_CpuAllocatorHolder
-{
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0c;
-    FnvCpu_FUN_00cc48b0_CpuAllocator* allocator;
-};
-FnvCpu_FUN_00cc48b0_CpuAllocatorHolder* __cdecl FUN_00c85750();
-struct FnvCpu_FUN_00cc48b0_CpuObject
-{
-    unsigned int unk00;
-    unsigned short size;
-    void FUN_00d4e000();
-    FnvCpu_FUN_00cc48b0_CpuObject* Destroy(unsigned int flags);
-};
 
 struct hkFinishLoadedObjectFlagD4DF
 {
@@ -160,15 +92,6 @@ class hkpConstraintDataD4DF : public hkReferencedObjectD4DF
     hkUlong m_ulUserData;
 };
 
-class FUN_00d4dfc0 : public hkpConstraintDataD4DF
-{
-  public:
-    hkpBridgeAtomsD4DF m_kBridgeAtoms;
-
-    FUN_00d4dfc0(hkFinishLoadedObjectFlagD4DF flag);
-    virtual ~FUN_00d4dfc0();
-};
-
 class hkReferencedObjectCDF7
 {
   public:
@@ -207,17 +130,6 @@ class hkMidCDF7 : public hkReferencedObjectCDF7
     int m_08;
 };
 
-class FUN_00cdf710 : public hkMidCDF7
-{
-  public:
-    FUN_00cdf710(hkReferencedObjectCDF7* ref) throw();
-    virtual ~FUN_00cdf710() throw();
-
-    hkReferencedObjectCDF7* m_ref;
-    hkListenerCDF7 m_kListener;
-    float m_1c;
-};
-
 class hkBoolD4DE
 {
   public:
@@ -228,43 +140,6 @@ class hkBoolD4DE
     char m_cBooleanValue;
 };
 
-struct hkFilterInfoD4DE
-{
-    unsigned short m_kPointA;
-    unsigned short unk02;
-    unsigned short m_kPointB;
-    unsigned short unk06;
-};
-
-class hkShapeD4DE
-{
-  public:
-    virtual void vf00();
-    virtual void vf04();
-    virtual void vf08();
-    virtual void vf0C();
-    virtual void vf10();
-    virtual void vf14();
-    virtual void vf18();
-    virtual void vf1C();
-    virtual void vf20();
-    virtual void vf24(hkBoolD4DE b, hkFilterInfoD4DE* out);
-
-    void FUN_00c90510();
-    void FUN_00c905b0();
-};
-
-class hkOwnerD4DE
-{
-  public:
-    int unk00[6];
-    hkShapeD4DE* m_pCollisionShape;
-    unsigned short m_1c;
-    unsigned short m_1e;
-
-    void SetCollisionShape(hkShapeD4DE* shape);
-};
-
 struct hkpConstraintInfoD4E0
 {
     int m_iMaxSchemaSize;
@@ -273,25 +148,6 @@ struct hkpConstraintInfoD4E0
     int m_iSolverElementTemporaryCount;
     hkpConstraintAtom* m_kBridgeAtoms;
     int m_usSizeOfAllAtoms;
-};
-
-struct hkpConstraintDataVtD4E0 : hkReferencedObject
-{
-    virtual void vf04();
-    virtual void vf08();
-    virtual void vf0C();
-    virtual void vf10();
-    virtual void vf14();
-    virtual void vf18();
-    virtual void vf1C();
-    virtual void vf20();
-    virtual void vf24();
-    virtual void vf28();
-    virtual void vf2C();
-    virtual void vf30();
-    virtual void vf34();
-    virtual void vf38();
-    virtual void PopulateInfo(hkpConstraintInfoD4E0& info) const;
 };
 
 struct hkpVelocityAccumulatorD4E0
@@ -360,11 +216,6 @@ struct hkpBoolResultD4E0
 {
     hkBool m_cBooleanValue;
 };
-
-void __stdcall FUN_00d4de30(const hkpConstraintQueryInD4E0& in, int out);
-void __cdecl FUN_00d72190(hkpConstraintAtom* atoms, const hkpConstraintQueryInD4E0& in, hkpBoolResultD4E0 flag,
-                          int out);
-void __cdecl FUN_00d6f460(hkpConstraintAtom* atoms, int sizeOfAllAtoms, const hkpConstraintQueryInD4E0& in, int out);
 
 struct RuntimeD4E0
 {
@@ -487,12 +338,9 @@ extern "C"
     __m128 _mm_sub_ps(__m128, __m128);
     __m128 _mm_add_ps(__m128, __m128);
     __m128 _mm_mul_ps(__m128, __m128);
-    __m128 _mm_shuffle_ps(__m128, __m128, unsigned int);
     __m128 _mm_unpacklo_ps(__m128, __m128);
-    __m128 _mm_load_ss(float const*);
     __m128 _mm_setr_ps(float, float, float, float);
     __m128 _mm_set_ps1(float);
-    double __cdecl sqrt(double);
 }
 
 extern const __m128 DAT_010ec7f0;
@@ -580,15 +428,6 @@ struct SixteenWordFloatRecord
     ContactImpulseInfo* m_pByteBuffer;
 };
 
-struct hkpBreakableRuntime
-{
-    hkBool m_bFlag;
-    hkReal m_linearVelA[3];
-    hkReal m_linearVelB[3];
-    hkReal m_angularVelA[3];
-    hkReal m_angularVelB[3];
-};
-
 class hkBoolC
 {
   public:
@@ -597,12 +436,6 @@ class hkBoolC
         m_cBooleanValue = static_cast<char>(b);
     }
     char m_cBooleanValue;
-};
-
-struct hkpBreakableConstraintData_e1e0 : hkpBreakableConstraintData
-{
-    void FUN_00d4e020(void* instance, hkBoolC isBroken, hkReal currentConstraintForce);
-    void FUN_00d4e1e0(const SixteenWordFloatRecord* in);
 };
 
 namespace fnv_00d4df30 {
@@ -662,21 +495,6 @@ struct FUN_00d21ce0_cls
         m_type = 1;
     }
     void FUN_00d21ce0(void* constraintData) throw();
-};
-
-class FUN_00d4df30 : public hkpConstraintDataD4D
-{
-  public:
-    FUN_00d21ce0_cls m_kBridgeAtoms;
-    hkpConstraintDataD4D* m_pConstraintData;
-    unsigned short m_usRuntimeOffset;
-    unsigned short m_usNumSolverResults;
-    float m_fBreakingStrength;
-    hkBoolD4D m_bRemoveWhenBroken;
-    hkBoolD4D m_bRevertBackVelocityOnBreak;
-
-    FUN_00d4df30(hkpConstraintDataD4D* constraintData);
-    virtual ~FUN_00d4df30();
 };
 
 }  // namespace fnv_00d4df30
@@ -744,29 +562,6 @@ struct BrkInfo
     BrkInfo(hkpSimulationIslandD4E0* island, BrkInstance* constraint, const GlobalObjectO2_00d472a0* type)
         : m_pCurrentSimulationIsland(island), m_pHavokConstraint(constraint), m_type(type), m_0c(0)
     {}
-};
-
-void __cdecl FUN_00d85fa0(BrkInfo* pkInfo);
-void __cdecl FUN_00d86050(BrkInfo* pkInfo);
-void __cdecl FUN_00d00b40(hkpSimulationIslandD4E0* pkIsland, BrkInfo* pkInfo);
-void __cdecl FUN_00d00bf0(hkpSimulationIslandD4E0* pkIsland, BrkInfo* pkInfo);
-
-extern char DAT_01269c44;
-
-struct hkpBreakableRuntimeD4E0
-{
-    hkBoolD4E0 m_bFlag;
-};
-
-class hkpBreakableConstraintDataD4E0
-{
-  public:
-    int unk00, unk04, unk08, unk0c, unk10, unk14, unk18;
-    unsigned short m_runtimeOffset;
-    short unk1E;
-    float m_threshold;
-
-    void FUN_00d4e020(BrkInstance* instanceArg, hkBoolD4E0 broken, float currentForce);
 };
 
 // @f3twin 0x009dac40 of 0x007efe40

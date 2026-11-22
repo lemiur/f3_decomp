@@ -1643,11 +1643,6 @@ struct ShadowExtraData
     ShadowVector offset;
     ShadowVector extent;
 };
-struct ShadowUpdateData
-{
-    float time;
-    bool updateControllers, multithreaded, updateGeomorphs, updateBounds, updateTransforms;
-};
 struct NiFrustum
 {
     float left, right, top, bottom, nearPlane, farPlane;
@@ -1660,10 +1655,6 @@ struct NiFrustum
         right = r;
         top = r;
     }
-};
-struct ShadowViewport
-{
-    float left, right, top, bottom;
 };
 struct ShadowObject : NiAVObject
 {
@@ -1684,39 +1675,10 @@ struct NiMemObjectAllocation
     static void* operator new(unsigned int);
     static void operator delete(void*);
 };
-struct ShadowLight : ShadowObject
-{
-    unsigned int unk09c, unk0a0, unk0a4, unk0a8, unk0ac, unk0b0, unk0b4;
-    unsigned int unk0b8, unk0bc, unk0c0, unk0c4, unk0c8, unk0cc, unk0d0;
-    unsigned int unk0d4, unk0d8, unk0dc;
-    float range;
-};
-struct FUN_00a712f0 : ShadowObject, NiMemObjectAllocation
-{
-    D3DXMATRIX worldToCamera;
-    NiFrustum frustum;
-    ShadowViewport viewport;
-    float lodAdjust;
-    unsigned int unk10c, unk110;
-    FUN_00a712f0();
-    void FUN_00a59c60(ShadowUpdateData&);
-    void SetLookAt(const ShadowVector&, const ShadowVector&);
-    void FUN_00a6faf0(const NiFrustum&);
-    void FUN_00712e60(const ShadowViewport&);
-    void FUN_00a70080(const NiBound&);
-};
 struct ShadowManager
 {
     BSRenderedTexture* ActivatePending();
     void FUN_00b6d4c0(BSRenderedTexture*);
-};
-struct ShadowPointerCalls
-{
-    ShadowPointerCalls& FUN_0066b0d0(void*);
-};
-struct ShadowPlanes
-{
-    void SetFromFrustum(const NiFrustum&, const ShadowTransform&);
 };
 struct ShadowAccumulator : BSShaderAccumulator
 {
@@ -1753,29 +1715,17 @@ struct ShadowAccumulator : BSShaderAccumulator
     }
     void AssignRefCounted(ShadowSceneLight*);
 };
-struct ShadowEvents
-{
-    void FUN_00ba30f0(int, unsigned char*);
-    void FUN_00ba3390(NiCamera*, int, NiAVObject*, int, int, BSShaderAccumulator*, int, unsigned char*, int);
-};
 extern ShadowManager* DAT_011f91a8;
 extern int DAT_011f91c0, DAT_011f91b0;
 extern int DAT_011f91d8;
 extern double DAT_01082cb0, DAT_01031148, DAT_010b7ea0;
 extern double DAT_01016ff0, DAT_0106c948, DAT_01020758;
 extern double DAT_0106b178, DAT_01018a90;
-extern float DAT_01032adc;
 extern ShadowVector DAT_011a9484, DAT_011a946c, DAT_011f426c;
-extern const void* DAT_012031e4;
-extern ShadowEvents DAT_01200088;
 inline float ShadowNegate(float f)
 {
     return -f;
 }
-extern float __cdecl FUN_00404010(float, float);
-extern float __cdecl FUN_0040ebd0(float, float);
-extern bool __cdecl FUN_005bf7b0();
-extern BSShaderAccumulator* __cdecl PopNextInt();
 class ShadowSceneLightDecompile : public ShadowSceneLight
 {
   public:
@@ -1798,7 +1748,6 @@ class ShadowSceneLightDecompile : public ShadowSceneLight
 }  // namespace fnv_00b9dfc0
 
 struct NiRTTI;
-extern NiRTTI g_011fed88_arg1;
 struct NiShader
 {
     NiShader* DynamicCast(const NiRTTI*);
@@ -2946,27 +2895,6 @@ struct PassEffect
 {
     void SetAccumulatorAt(int, ImageSpaceTexture*, int);
 };
-struct PassEffectList
-{
-    unsigned int unk000;
-    unsigned int unk004;
-    unsigned int unk008;
-    unsigned int unk00C;
-    unsigned int unk010;
-    unsigned int unk014;
-    unsigned int unk018;
-    unsigned int unk01C;
-    unsigned int unk020;
-    unsigned int unk024;
-    unsigned int unk028;
-    unsigned int unk02C;
-    unsigned int unk030;
-    unsigned int unk034;
-    unsigned int unk038;
-    unsigned int unk03C;
-    unsigned int unk040;
-    PassEffect* effect;
-};
 struct PassImageManager
 {
     unsigned int unk00, unk04;
@@ -3259,10 +3187,6 @@ struct AlphaPropertyView_b9e
     int unk034;
     int unk038;
     float alpha;
-};
-struct PropertyObjectView_b9e
-{
-    AlphaPropertyView_b9e* FUN_00a59d30(unsigned);
 };
 struct ShaderDirtyView_b9e
 {

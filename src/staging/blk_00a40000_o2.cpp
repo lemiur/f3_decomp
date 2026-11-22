@@ -137,19 +137,11 @@ void* __thiscall FUN_00a51af0_class::FUN_00a51af0(unsigned char flags)
 }
 
 extern int DAT_0109a264;
-extern int DAT_0109a284;
 struct NiTMapBaseStub
 {
     void RemoveAll();
 };
 void __cdecl NiFreeAlias(void*);
-struct FUN_00a540a0 : NiTMapBaseStub
-{
-    int vtbl;
-    int pad;
-    void* p;
-    void Init();
-};
 
 extern "C" char* __cdecl _strcat_s(char* destination, unsigned int destinationSize, const char* source);
 
@@ -213,14 +205,6 @@ unsigned int __thiscall FUN_00a4d6d0_class::HashStringModulo(const char* acStrin
 
 extern "C" void NiFree(void*);
 extern MemoryManager _g_memoryManager;
-extern int DAT_01098ec8;
-struct FUN_00a4d700_class : NiTMapBaseStub
-{
-    void* m_pVTable;
-    int pad;
-    void* m_p;
-    void* __thiscall FUN_00a4d700(unsigned char flags);
-};
 
 extern int DAT_010997f4;
 struct BaseHolder
@@ -263,16 +247,6 @@ void* __cdecl FUN_00a51e10()
 }
 
 void* __cdecl NiMalloc(unsigned int);
-void* __cdecl fnv_zlib_memset(void* dst, void* src, unsigned int size);
-
-struct FUN_00a54060_class : NiTMapBaseStub
-{
-    int m_vtbl;
-    int m_iElementCount;
-    void* m_data;
-    void* m_p;
-    void* InitBuffer(unsigned int size);
-};
 
 struct FUN_00a540d0_class : NiTMapBaseStub
 {
@@ -569,17 +543,6 @@ void* FUN_00a47f20()
     return 0;
 }
 }  // namespace fnv_00a47f20
-
-extern int DAT_01098ee8;
-void __cdecl _NiFree(void*);
-
-struct FUN_00a4d740_class
-{
-    void* m_pVTable;
-    int m_auiShapeKeys;
-    void* m_p;
-    void* __thiscall DestroyAndFree(unsigned int flags);
-};
 
 namespace fnv_00a50aa0 {
 struct A51BF0Base
@@ -1055,26 +1018,6 @@ void __cdecl FUN_00a42c80(int* param1, FUN_00a42c80_virtual* pVirtual)
     }
 }
 
-struct FUN_00a42f80_base
-{
-    virtual ~FUN_00a42f80_base();
-};
-
-struct FUN_00a42f80_cls : FUN_00a42f80_base
-{
-    virtual ~FUN_00a42f80_cls();
-};
-
-struct FUN_00a44830_base
-{
-    virtual ~FUN_00a44830_base();
-};
-
-struct FUN_00a44830_cls : FUN_00a44830_base
-{
-    virtual ~FUN_00a44830_cls();
-};
-
 namespace fnv_00a44ff0 {
 struct ControllerAllocation : FUN_00a44f90_class, BSFadeNode
 {
@@ -1299,15 +1242,6 @@ void FUN_00a53c90_cls::GetNextEntry(FUN_00a53c90_Node** ppCursor, unsigned int* 
 }
 
 extern void* __cdecl FUN_00aa1070(unsigned int size);
-
-struct FUN_00a54110
-{
-    int* pBuffer;
-    unsigned int reservedSize;
-    unsigned int size;
-
-    FUN_00a54110(unsigned int count);
-};
 
 extern "C" __declspec(dllimport) long __stdcall InterlockedDecrement(long volatile* plAddend);
 
@@ -1551,7 +1485,6 @@ struct SingletonTarget
 {
     void __thiscall FUN_00a5b3c0();
 };
-extern SingletonTarget* g_011f42c0;
 
 extern void __cdecl FUN_00aa10f0(char* psz);
 extern int DAT_0102102c;
@@ -1850,25 +1783,6 @@ NiObjectBase* __cdecl FUN_00a5f030()
     }
     return 0;
 }
-
-// Constructor of a derived object: base ctor call, then a 16-bit field and the vtable pointer.
-extern int DAT_0109b72c;
-
-struct FUN_00a5f1e0_cls
-{
-    void* m_pVTable;       // +0x00
-    int m_i04;             // +0x04
-    int m_i08;             // +0x08
-    int m_i0C;             // +0x0C
-    int m_i10;             // +0x10
-    unsigned short m_w14;  // +0x14
-    unsigned short m_w16;  // +0x16
-    unsigned short m_w18;  // +0x18
-
-    void Init();  // base constructor (external)
-
-    FUN_00a5f1e0_cls();
-};
 
 class A5F4D0Property
 {
@@ -2771,154 +2685,6 @@ template <> class NiPointer<NiGPUProgram>
         return *this;
     }
 };
-struct DynCastHelper
-{
-    NiObject* DynamicCast(const void*) throw();
-};
-extern unsigned int g_011f3f48;
-struct BinaryDataRecord
-{
-    unsigned int unk000;
-    unsigned int unk004;
-    unsigned int unk008;
-    unsigned int unk00C;
-    unsigned int unk010;
-    unsigned int unk014;
-    unsigned int unk018;
-    unsigned int unk01C;
-    unsigned int unk020;
-    unsigned int unk024;
-    unsigned int unk028;
-    unsigned int unk02C;
-    unsigned int unk030;
-    unsigned int unk034;
-    unsigned int unk038;
-    unsigned int unk03C;
-    unsigned int unk040;
-    unsigned int unk044;
-    unsigned int unk048;
-    unsigned int unk04C;
-    unsigned int unk050;
-    unsigned int unk054;
-    unsigned int unk058;
-    unsigned int unk05C;
-    unsigned int unk060;
-    unsigned int unk064;
-    unsigned int unk068;
-    unsigned int unk06C;
-    unsigned int unk070;
-    unsigned int unk074;
-    unsigned int unk078;
-    unsigned int unk07C;
-    unsigned int unk080;
-    unsigned int unk084;
-    unsigned int unk088;
-    unsigned int unk08C;
-    unsigned int unk090;
-    unsigned int unk094;
-    unsigned int unk098;
-    unsigned int unk09C;
-    unsigned int unk0A0;
-    unsigned int unk0A4;
-    unsigned int unk0A8;
-    unsigned int unk0AC;
-    unsigned int unk0B0;
-    unsigned int unk0B4;
-    unsigned int unk0B8;
-    unsigned int unk0BC;
-    unsigned int unk0C0;
-    unsigned int unk0C4;
-    unsigned int unk0C8;
-    unsigned int unk0CC;
-    unsigned int unk0D0;
-    unsigned int unk0D4;
-    unsigned int version;
-    unsigned int unk0DC;
-    unsigned int unk0E0;
-    unsigned int unk0E4;
-    unsigned int unk0E8;
-    unsigned int unk0EC;
-    unsigned int unk0F0;
-    unsigned int unk0F4;
-    unsigned int unk0F8;
-    unsigned int unk0FC;
-    unsigned int unk100;
-    unsigned int unk104;
-    unsigned int unk108;
-    unsigned int unk10C;
-    unsigned int unk110;
-    unsigned int unk114;
-    unsigned int unk118;
-    unsigned int unk11C;
-    unsigned int unk120;
-    unsigned int unk124;
-    unsigned int unk128;
-    unsigned int unk12C;
-    unsigned int unk130;
-    unsigned int unk134;
-    unsigned int unk138;
-    unsigned int unk13C;
-    unsigned int unk140;
-    unsigned int unk144;
-    unsigned int unk148;
-    unsigned int unk14C;
-    unsigned int unk150;
-    unsigned int unk154;
-    unsigned int unk158;
-    unsigned int unk15C;
-    unsigned int unk160;
-    unsigned int unk164;
-    unsigned int unk168;
-    unsigned int unk16C;
-    unsigned int unk170;
-    unsigned int unk174;
-    unsigned int unk178;
-    unsigned int unk17C;
-    unsigned int unk180;
-    unsigned int unk184;
-    unsigned int unk188;
-    unsigned int unk18C;
-    unsigned int unk190;
-    unsigned int unk194;
-    unsigned int unk198;
-    unsigned int unk19C;
-    unsigned int unk1A0;
-    unsigned int unk1A4;
-    unsigned int unk1A8;
-    unsigned int unk1AC;
-    unsigned int unk1B0;
-    unsigned int unk1B4;
-    unsigned int unk1B8;
-    unsigned int unk1BC;
-    unsigned int unk1C0;
-    unsigned int unk1C4;
-    unsigned int unk1C8;
-    unsigned int unk1CC;
-    unsigned int unk1D0;
-    unsigned int unk1D4;
-    unsigned int unk1D8;
-    unsigned int unk1DC;
-    unsigned int unk1E0;
-    unsigned int unk1E4;
-    unsigned int unk1E8;
-    unsigned int unk1EC;
-    unsigned int unk1F0;
-    unsigned int unk1F4;
-    unsigned int unk1F8;
-    unsigned int unk1FC;
-    unsigned int unk200;
-    unsigned int unk204;
-    unsigned int unk208;
-    unsigned int unk20C;
-    unsigned int unk210;
-    unsigned int unk214;
-    unsigned int unk218;
-    unsigned int unk21C;
-    DynCastHelper** objects;
-    unsigned int unk224;
-    unsigned int count;
-};
-NiGPUProgram* CreateResultFromStreamObject(BinaryDataRecord*, unsigned int, void*) throw();
 
 void __cdecl NiFreeA4D(void* pvMem) throw();
 
@@ -4169,81 +3935,6 @@ void ArrayBuffer::FUN_00a541e0()
     FUN_00aa10f0(m_pBuffer);
 }
 
-struct FUN_00a5abe0_lock
-{
-    int m_pOwnerObject;
-    int m_uiItemCount;
-    void FUN_0040fbf0(int mode);
-};
-extern FUN_00a5abe0_lock DAT_011f42a0;
-
-struct FUN_00a5abe0_node
-{
-    int m_iWordAt00;
-    FUN_00a5abe0_node* m_next;
-    void* m_item;
-};
-
-struct FUN_00a5abe0_item
-{
-    virtual void vSlot00();
-    virtual void vSlot01();
-    virtual void vSlot02();
-    virtual void vSlot03();
-    virtual void vSlot04();
-    virtual void vSlot05();
-    virtual void vSlot06();
-    virtual void vSlot07();
-    virtual void vSlot08();
-    virtual void vSlot09();
-    virtual void vSlot10();
-    virtual void vSlot11();
-    virtual void vSlot12();
-    virtual void vSlot13();
-    virtual void vSlot14();
-    virtual void vSlot15();
-    virtual void vSlot16();
-    virtual void vSlot17();
-    virtual void vSlot18();
-    virtual void vSlot19();
-    virtual void vSlot20();
-    virtual void vSlot21();
-    virtual void vSlot22();
-    virtual void vSlot23();
-    virtual void vSlot24();
-    virtual void vSlot25();
-    virtual void vSlot26();
-    virtual void vSlot27();
-    virtual void vSlot28();
-    virtual void vSlot29();
-    virtual void vSlot30();
-    virtual void vSlot31();
-    virtual void vSlot32();
-    virtual void vSlot33();
-    virtual void vSlot34();
-    virtual int vfn35();
-
-    long m_iWordAt04;
-    FUN_00a5abe0_item* FUN_00a5d3f0(void* ctx);
-};
-
-struct FUN_00a5abe0_sub
-{
-    void FUN_00439fd0(void** p);
-};
-
-struct FUN_00a5abe0_owner
-{
-    int unk00, unk04, unk08, unk0C, unk10, unk14, unk18, unk1C, unk20;
-    FUN_00a5abe0_sub m_24;
-};
-
-struct FUN_00a5abe0_list
-{
-    int m_iWordAt00;
-    FUN_00a5abe0_node* m_pFirstNode;
-};
-
 class RefObjB
 {
   public:
@@ -5437,22 +5128,6 @@ NiSequence* NiSequence::FUN_00a47bd0(const char* pcName, unsigned int uiArraySiz
     m_uiUnk30 = 0;
     return this;
 }
-
-extern "C" unsigned long __readfsdword(unsigned long);
-extern "C" volatile unsigned long _tls_index;
-extern unsigned int DAT_011f42c8;
-extern unsigned int DAT_011f42c4;
-
-struct ThreadedTableEntry
-{
-    void __thiscall FUN_00a5b4b0(const char** key);
-};
-
-struct ThreadedTable
-{
-    unsigned int __thiscall FUN_00a5b270(const char* key, unsigned int flags);
-    void __thiscall FUN_00a5b5a0(const char** key, unsigned int flags);
-};
 
 struct FUN_00a5d310_Class
 {

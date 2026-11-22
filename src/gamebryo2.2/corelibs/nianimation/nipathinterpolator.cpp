@@ -372,11 +372,6 @@ struct A51BF0Base
     static void* __cdecl operator new(unsigned int);
 };
 
-struct FUN_00a3f060_shell
-{
-    void* __thiscall FUN_00a3f060(short, short);
-};
-
 extern float DAT_01097170;
 extern float DAT_01015f5c;
 extern double DAT_010231b0;
@@ -1003,15 +998,6 @@ class NiObjectA3F
     int unk50;
     int unk54;
     int unk58;
-};
-
-class NiCloningProcessA3F;
-
-class NiOwnerA3F
-{
-  public:
-    void CopyMemberData(NiObjectA3F* pkDest, NiCloningProcessA3F& kCloning);
-    NiObjectA3F* CloneObject(NiCloningProcessA3F& kCloning);
 };
 
 struct MyPosKey
@@ -1733,15 +1719,9 @@ struct PathBasis
     float x, y, z;
     FV3 __thiscall FUN_0053d1a0(const FV3&) const;
 };
-struct PathBlend
-{
-    FV3* __thiscall FUN_00439e90(FV3*, const FV3*);
-};
 extern char DAT_011a9448;
 extern "C" void* __cdecl memcpy(void*, const void*, unsigned int);
 extern PathBasis DAT_011a9484;
-extern float DAT_011f3e40;
-extern unsigned int DAT_011f3e44;
 extern float DAT_01097304;
 extern "C" double __cdecl atan(double);
 extern void __cdecl ComputeFrenetFrame(float, MyPosKey*, MyPosKey*, unsigned int, FV3*, FV3*, FV3*, float*);

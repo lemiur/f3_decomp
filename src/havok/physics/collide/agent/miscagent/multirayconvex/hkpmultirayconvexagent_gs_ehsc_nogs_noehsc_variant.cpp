@@ -6,44 +6,9 @@
 // src/havok/physics/collide/agent/miscagent/multirayconvex/hkpmultirayconvexagent.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/physics/collide/agent/miscagent/multirayconvex/hkpmultirayconvexagent.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 void FUN_00d374f0(int a, int b, int c, int d);
-struct FUN_00d37690_Class {
-    void __thiscall ForwardToFunction(int a, int b, int c, int d);
-};
-void FUN_00d37740(int a, int b, int c, int d);
-void FUN_00d37780(int a, int b, int c, int d);
 void FUN_00d37860(int a, int b, int c, int d);
 void FUN_00d378a0(int a, int b, int c, int d);
 void FUN_00d37280(int a, int b, int c, int d);
-void FUN_00daf8e0();
-void FUN_00d3ac80();
-struct FUN_00cfbbe0_Arg {
-    void* f0;
-    void* f1;
-    void* f2;
-    void* f3;
-    char f4;
-    char f5;
-};
-struct FUN_00cfbbe0_Class {
-    void __thiscall FUN_00cfbbe0(FUN_00cfbbe0_Arg* a, int b, int c);
-};
-void FUN_00d377d0(int a);
-struct Handler {
-    virtual void slot0();
-    virtual void slot1();
-    virtual void slot2();
-    virtual void slot3();
-    virtual void slot4();
-    virtual void process(unsigned short index, int argument);
-};
-struct Owner {
-    virtual ~Owner();
-    int unk04;
-    Handler* handler;
-    unsigned short* values;
-    int count;
-    void ProcessValuesAndDelete(int argument);
-};
 struct S_00d37860_Base {
     virtual void f0();
     virtual void f1();
@@ -59,8 +24,6 @@ struct S_00d37860_Collector : S_00d37860_Base {
 void FUN_00d374f0(void* b, void* a, void* c, S_00d37860_Collector* collector);
 void FUN_00d37860(void* a, void* b, void* c, int filter);
 struct Payload { const char* name; float value; int id; };
-extern float DAT_0104da48;
-extern const char DAT_010ce7fc[];
 void FUN_00d37280(int, int, int, Payload*);
 void FUN_00d378a0(int a, int b, int c, int d);
 struct D376B0Allocator;
@@ -106,49 +69,17 @@ struct D376B0IndexArray {
         m_iElementCount = n;
     }
 };
-struct D376B0Shape {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int m_numChildren;
-};
-struct D376B0ShapeRef {
-    D376B0Shape* m_pCollisionShape;
-};
 class D376B0Filter : public D376B0ReferencedObject {
 public:
     D376B0Filter(void* userData) : m_ulUserData(userData) {}
 
     void* m_ulUserData;
 };
-class FUN_00d376b0 : public D376B0Filter {
-public:
-    FUN_00d376b0(const D376B0ShapeRef& shape, void* ReportDiagnostic, void* unused1, void* userData);
-    virtual void unk00();
-
-    D376B0IndexArray m_ppIndices;
-};
 
 extern "C" void _ReadWriteBarrier(void);
 extern "C" unsigned __int64 __rdtsc(void);
 #include <xmmintrin.h>
 #include <windows.h>
-extern DWORD hkMonitorStreamTls;
-
-struct S_00d374f0_TimerCommand {
-    const char* m_pCommandName;
-    unsigned int m_uiStartTicks;
-    unsigned int m_uiEndTicks;
-};
-
-struct S_00d374f0_MonitorStream {
-    char* m_kRayStart;
-    char* m_kRayEnd;
-    char* m_pRayCursor;
-    char* m_pCurrentCommand;
-};
 
 // hkVector4 stand-in: 4 floats (an __m128 member would add a GS cookie)
 struct __declspec(align(16)) S_00d374f0_Vector4 {
@@ -194,53 +125,12 @@ struct __declspec(align(16)) S_00d374f0_RayOutput : S_00d374f0_RayOutputBase {
     S_00d374f0_RayOutput() { m_uiShapeKeyIndex = 0; m_uiShapeKeys[0] = 0xffffffff; }
 };
 
-struct S_00d374f0_ConvexShape {
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual void v0c();
-    virtual void v10();
-    virtual void v14();
-    virtual void v18();
-    virtual void v1c();
-    virtual S_00d374f0_Bool RayCast(const S_00d374f0_RayInput& input, S_00d374f0_RayOutput& output) const;
-};
-
-struct S_00d374f0_Ray {
-    S_00d374f0_Vector4 m_kRayStart;
-    S_00d374f0_Vector4 m_kRayEnd;
-};
-
-struct S_00d374f0_MultiRayShape {
-    int unk0;
-    int unk4;
-    int unk8;
-    int unkC;
-    S_00d374f0_Ray* m_data;
-    int m_iElementCount;
-    int m_pRayCursor;
-};
-
-struct S_00d374f0_CdBody {
-    const void* m_pCollisionShape;
-    unsigned int m_uiCollisionShapeKey;
-    const S_00d374f0_Transform* m_pMotionState;
-    const S_00d374f0_CdBody* m_parent;
-};
-
-struct S_00d374f0_Collector {
-    virtual ~S_00d374f0_Collector();
-    virtual void AddCdBodyPair(const S_00d374f0_CdBody& a, const S_00d374f0_CdBody& b);
-    S_00d374f0_Bool m_fHitDistance;
-};
-
 extern "C" unsigned __int64 __rdtsc(void);
 extern "C" void _ReadWriteBarrier(void);
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long);
 extern unsigned int DAT_0126835c;
 extern char DAT_010ceda8[];
 extern char DAT_010c41f8[];
-extern __m128 DAT_010ec7f0;
 struct Event378 { const char* tag; unsigned time; unsigned other; };
 struct Timer378 { int unused; Event378* current; int unknown; Event378* end; };
 inline void timer378(const char* tag) {
@@ -306,7 +196,6 @@ inline __m128 transform378(const Transform378& t, __m128 p) {
     return _mm_add_ps(_mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(p,p,0x55),t.y),_mm_mul_ps(_mm_shuffle_ps(p,p,0),t.x)),
                       _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(p,p,0xaa),t.z),t.t));
 }
-struct Scratch378 { Ray378 ray; Transform378 relative; V378 position; };
 // @f3 0x009c01f0 (community match, verified in this file)
 namespace f3m_009c01f0 {
 struct __declspec(align(16)) NativeFloat4 {

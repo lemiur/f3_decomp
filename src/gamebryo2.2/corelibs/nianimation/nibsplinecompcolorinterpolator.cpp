@@ -11,8 +11,6 @@ char __stdcall FUN_00a51210(char acValue)
     return r != 0;
 }
 
-extern "C" void* g_011f4024;
-
 struct CloningProcess;
 struct FUN_00a50110_obj
 {
@@ -154,7 +152,6 @@ void NiBSplineCompColorInterpolator::LoadFromStream(NiStream& stream)
 }  // namespace fnv_00a51930
 
 namespace fnv_00a519b0 {
-char* _FUN_00a7d330(const char*);
 template <class T> struct NiTMallocInterface
 {
 };

@@ -8,14 +8,6 @@ struct BSAudio
 BSAudio* __cdecl FUN_00c85750();
 extern "C" void __cdecl FUN_00c908c0(void*, void*, int, int);
 
-struct BufferHolder
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    void* m_pAllocator;
-};
-
 class BufferOwner
 {
   public:
@@ -27,7 +19,6 @@ class BufferOwner
 };
 
 #include <stdarg.h>
-int __cdecl FUN_00cb0f50(char* buf, int size, const char* fmt, va_list args);
 struct PolymorphicBase
 {
     virtual void v0();

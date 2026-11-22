@@ -2,13 +2,6 @@
 // src/gamebryo2.2/corelibs/nicollision/niintersector.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/_fallout3/platforms/common/code/gamebryo2.2/corelibs/nicollision/niintersector.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-struct VTableObject
-{
-    virtual void __fastcall Query(int value);
-    virtual void __fastcall AddRef(int value);
-    virtual void __fastcall Release(int value);
-};
-
 static const float g_fltDefault = 3.402823466e+38f;
 
 struct SpawnedBase

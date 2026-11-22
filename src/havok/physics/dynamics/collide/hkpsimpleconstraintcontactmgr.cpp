@@ -71,8 +71,6 @@ int FUN_00cfcc70_class::FUN_00cfcc70(int value) {
     return 0;
 }
 
-extern "C" void __cdecl ProcessCollisionEvent(void*, void*, float, void*);
-
 struct FUN_00cfd410_class {
     void* m_00;
     void* m_04;
@@ -181,58 +179,6 @@ void FUN_00cfd7d0_class::DecrementBytesAboveValue(unsigned int auiThreshold)
             --m_00[i];
     }
 }
-
-struct FUN_00cfdae0_router
-{
-	virtual void FUN_00cfdae0_slot0();
-	virtual void FUN_00cfdae0_slot1();
-	virtual void FUN_00cfdae0_deallocate(void* object, unsigned short size);
-};
-
-struct FUN_00cfdae0_manager
-{
-	void* m_00;
-	void* m_04;
-	void* m_08;
-	void* m_0c;
-	FUN_00cfdae0_router* m_router;
-};
-
-FUN_00cfdae0_manager* _D1A0E0GetMemoryRouter();
-
-struct FUN_00cfdae0_class
-{
-	unsigned int m_00;
-	unsigned short m_iElementCount;
-
-	void FUN_00cfda50();
-	FUN_00cfdae0_class* Destroy(unsigned char flags);
-};
-
-struct ContactSubobject {
-    virtual void __fastcall method00(void*);
-    virtual void __fastcall method04(void*);
-    virtual void __fastcall method08(void*);
-    virtual void __fastcall method0c(void*);
-    virtual void __fastcall method10(void*);
-    virtual void __fastcall method14(void*);
-    virtual void __fastcall method18(void*);
-    virtual void __fastcall method1c(void*);
-    virtual void __fastcall method20(void*);
-    virtual void __fastcall method24(void*);
-    virtual void __fastcall method28(void*);
-    virtual void __fastcall method2c(void*);
-    virtual void __fastcall method30(void*);
-    virtual void __fastcall method34(void*);
-    virtual void __fastcall method38(void*);
-    virtual void __fastcall method3c(void*);
-    virtual void __fastcall method40(void*);
-};
-struct FUN_00cfccb0_class {
-    void* m_00; void* m_04; void* m_08; void* m_0c; void* m_10;
-    ContactSubobject embedded;
-    void __fastcall FUN_00cfccb0(void* forwardedArg);
-};
 
 // FUN_00cfd660 : a forwarding member  (add ecx, 0x20 ; jmp <base impl>)
 extern int g_sink_00cfd660;
@@ -934,13 +880,6 @@ ContactManager* ContactManager::InitContact(const unsigned char* first,
 }
 
 
-struct OffsetDescriptor {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    signed char relativeOffset;
-};
 struct AllocatorInterface {
     virtual void unk00();
     virtual void* allocate(unsigned int size);
@@ -953,17 +892,6 @@ struct MemoryContext {
     AllocatorInterface* allocator;
 };
 MemoryContext* __cdecl FUN_00c85750();
-struct ContactObject {
-    int unk00;
-    unsigned short GetAllocationSize;
-    ContactObject* InitContact(void* a, void* b, void* c);
-};
-struct FUN_00cfd780_class {
-    void* unk00;
-    void* unk04;
-    void* m_08;
-    ContactObject* AllocateContactObject(OffsetDescriptor* first, OffsetDescriptor* second, int unused);
-};
 
 namespace fnv_00cfd9f0 {
 class hkMemoryAllocatorCFD9;
@@ -1005,15 +933,6 @@ public:
     }
 };
 
-class hkpShapeKeyMaskCFD9 {
-public:
-    hkUint8* m_data;
-    int m_iElementCount;
-    int m_iCapacityState;
-
-    void FUN_00cfd9f0(hkArrayCFD9<hkUint16>& kIndicesOut) const;
-};
-
 }  // namespace fnv_00cfd9f0
 
 namespace fnv_00cfdb10 {
@@ -1033,44 +952,9 @@ struct AudioObject_00cfdb10 {
 
 AudioObject_00cfdb10* __cdecl FUN_00c85750();
 
-struct ContactManager_00cfdb10 {
-    virtual int FUN_00cfdb10(unsigned char flags);
-    unsigned short m_04;
-
-    void FUN_00cfd720();
-};
-
 }  // namespace fnv_00cfdb10
 
 #include "fnv_asm_helpers.h"   // project x87 helpers (fnv_SinCos, fnv_FloatToInt), kept last so earlier code is unchanged
-
-struct ContactCallDescriptor {
-    int kind;
-    void* firstManager;
-    void* secondManager;
-    void* owner;
-    int reservedStatus;
-    void* sourceTail;
-    void* sourceContact;
-    unsigned char state0, state1, state2, state3;
-    void* sourceHeader;
-    void* forwardedArgument;
-    void* sourceProperties;
-    int statusA, statusB;
-};
-struct ContactSource {
-    void* unk00;
-    int unk04, unk08;
-    void* firstManager;
-    void* secondManager;
-    int unk14, member18, unk1c, unk20, unk24, unk28, member2c;
-    int unk30,unk34,unk38,unk3c,unk40,unk44,unk48,unk4c,member50;
-};
-extern "C" void __cdecl FUN_00d00ca0(void*, ContactCallDescriptor*);
-extern "C" void __cdecl FUN_00cfff00(void*, int*);
-struct ContactContext {
-    void FUN_00cfcd70(ContactSource* source, void* other);
-};
 
 int __cdecl FUN_00d06f80(const void* pvChunk, int iNumBytes) throw();
 
@@ -1084,11 +968,6 @@ public:
     int GetLogicalSize() const { return m_iElementCount; }
     int getCapacity() const { return m_iCapacityState & 0x3fffffff; }
     const T* begin() const { return m_data; }
-};
-
-struct hkpAgentNnSectorCFD5 {
-    unsigned short unk00;
-    unsigned short m_uiAgentCount;
 };
 
 class hkStatisticsCollectorCFD5 {
@@ -1117,18 +996,6 @@ public:
             AddMemoryChunk(3, pcName, kArray.m_data, kArray.GetLogicalSize() * sizeof(T), iAllocated);
         }
     }
-};
-
-class hkClassCFD5;
-
-class hkpSimpleConstraintContactMgrCFD5 {
-public:
-    int unk00, unk04, unk08, unk0C, unk10, unk14, unk18, unk1C;
-    hkArrayCFD5<unsigned char> m_contactIds;
-    int unk2C, unk30, unk34, unk38;
-    hkpAgentNnSectorCFD5* m_pAtom;
-
-    void FUN_00cfd5e0(hkStatisticsCollectorCFD5* pkCollector, const hkClassCFD5* pkClass) const throw();
 };
 
 struct hkAllocatorCFDA {
@@ -1752,8 +1619,6 @@ int Cls::FUN_00cfce80(int a1, int a2, int a3, int* a4, float a5, int a6, int a7,
 }
 
 
-extern "C" void _mm_stream_ps(float*, __m128);
-
 struct CfdInfoItem {
     __m128 m_v0;
     __m128 m_v1;
@@ -1797,42 +1662,7 @@ struct CfdEntity {
     signed char m_motionOffset;
 };
 
-struct CfdBody {
-    int unk000; int unk004; int unk008; int unk00c; int unk010; int unk014; int unk018; int unk01c;
-    int unk020; int unk024; int unk028; int unk02c; int unk030; int unk034; int unk038; int unk03c;
-    int unk040; int unk044; int unk048; int unk04c; int unk050; int unk054; int unk058; int unk05c;
-    int unk060; int unk064; int unk068; int unk06c; int unk070; int unk074; int unk078; int unk07c;
-    int unk080; int unk084; int unk088; int unk08c; int unk090; int unk094; int unk098; int unk09c;
-    int unk0a0; int unk0a4;
-    unsigned short unk0a8;
-    unsigned short m_uiItemCount;
-    int unk0ac; int unk0b0; int unk0b4; int unk0b8; int unk0bc; int unk0c0; int unk0c4; int unk0c8;
-    int unk0cc; int unk0d0; int unk0d4; int unk0d8; int unk0dc; int unk0e0; int unk0e4; int unk0e8;
-    int unk0ec; int unk0f0; int unk0f4; int unk0f8; int unk0fc; int unk100; int unk104; int unk108;
-    int unk10c; int unk110; int unk114; int unk118; int unk11c; int unk120; int unk124; int unk128;
-    int unk12c; int unk130; int unk134; int unk138; int unk13c; int unk140; int unk144; int unk148;
-    int unk14c; int unk150; int unk154; int unk158; int unk15c; int unk160; int unk164; int unk168;
-    int unk16c; int unk170; int unk174; int unk178; int unk17c; int unk180; int unk184; int unk188;
-    int unk18c; int unk190; int unk194; int unk198; int unk19c; int unk1a0; int unk1a4; int unk1a8;
-    int unk1ac; int unk1b0; int unk1b4; int unk1b8; int unk1bc; int unk1c0; int unk1c4; int unk1c8;
-    int unk1cc; int unk1d0; int unk1d4; int unk1d8; int unk1dc; int unk1e0; int unk1e4; int unk1e8;
-    int unk1ec; int unk1f0; int unk1f4; int unk1f8; int unk1fc; int unk200;
-    unsigned short m_numJac;
-};
-
 struct CfdMgr;
-
-struct CfdParams {
-    CfdEntity* m_kPointA;
-    CfdEntity* m_kPointB;
-    int unk08;
-    CfdInfo* m_info;
-    void* m_ptrs[256];
-    CfdMgr* m_pOwnerObject;
-};
-
-extern "C" void __cdecl NotifyShapeSetListeners(void* a, CfdParams* p);
-extern "C" void __cdecl FUN_00d00270(void* a, CfdParams* p);
 
 struct CfdMgr {
     int unk00;

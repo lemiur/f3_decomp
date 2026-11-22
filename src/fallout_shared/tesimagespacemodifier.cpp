@@ -376,18 +376,8 @@ struct Obj52 : NiMemObject
 };
 }  // namespace fnv_0052d130
 
-struct GlobalObjectO2_00a7b610;
-extern GlobalObjectO2_00a7b610 g_011f3748;
-
-struct FUN_0052cf80_shell
-{
-    GlobalObjectO2_00a7b610* GetGlobalObject();
-};
-
 namespace fnv_0052d120 {
 struct NiRTTI;
-
-extern NiRTTI g_011f3750;
 
 struct NiColorData
 {
@@ -395,14 +385,6 @@ struct NiColorData
 };
 
 }  // namespace fnv_0052d120
-
-struct GlobalObject_0052b8f0
-{
-    ~GlobalObject_0052b8f0();
-    void* __thiscall Destroy(unsigned int flags);
-};
-
-extern void* __cdecl _Deallocate(void*);
 
 struct FUN_00533060_shell
 {
@@ -418,44 +400,12 @@ struct FUN_00533060_shell
 {
     void* FUN_00533060(void**, void**, char*);
 };
-struct FUN_00533000_shell
-{
-    char _pad[16];
-    Flt m_kHandle;
-    void* FUN_00533000(void**, void**, char*);
-};
 }  // namespace fnv_00533000
 
-struct Base5a
-{
-    virtual ~Base5a();
-};
 struct FUN_0052bb70
 {
     virtual ~FUN_0052bb70();
     char pad[0x20];
-};
-
-struct FUN_0052bbd0 : Base5a
-{
-    char pad[0x110];
-    NiFloatInterpolator m_akFloatInterpolators[21][2];
-    NiFloatInterpolator m_kFloatInterpolatorOne, m_kFloatInterpolatorTwo;
-    FUN_0052bb70 m_kColorInterpolatorOne, m_kColorInterpolatorTwo;
-    NiFloatInterpolator m_kFloatInterpolatorNine, m_kFloatInterpolatorTen, m_kFloatInterpolatorEleven,
-        m_kFloatInterpolatorThree, m_kFloatInterpolatorFour;
-    NiFloatInterpolator m_kFloatInterpolatorFive, m_kFloatInterpolatorSix, m_kFloatInterpolatorSeven,
-        m_kFloatInterpolatorEight;
-    ~FUN_0052bbd0();
-};
-
-struct FUN_00532e40_s
-{
-    float x;
-    float y;
-    float z;
-    float w;
-    FUN_00532e40_s* AddDelta(FUN_00532e40_s* result, float* delta);
 };
 
 struct FUN_00532ec0_v4
@@ -468,30 +418,6 @@ struct FUN_00532ec0_v4
 struct FUN_00532ec0
 {
     FUN_00532ec0_v4* SUB(FUN_00532ec0_v4* result, const FUN_00532ec0_v4& sub);
-};
-
-struct FUN_0052ed90_shell
-{
-    void CacheObjectValues();
-};
-
-struct FUN_005e79a0_t
-{
-    bool FUN_00485270(TESForm* form);
-};
-
-struct FUN_005310b0_shell
-{
-    bool FUN_005310b0(TESForm* form);
-};
-
-int __cdecl _memcmp(const void* left, const void* right, unsigned int count);
-void* __cdecl FUN_00ec43fb(void* object, unsigned int type, void* data, const void* typeInfo, unsigned char option);
-extern char _DAT_01183028;
-
-struct FUN_00531490_shell
-{
-    void SwapEndian();
 };
 
 struct FUN_0045cec0
@@ -507,13 +433,6 @@ struct FUN_00a3ca30
     int unk0C;
 
     ~FUN_00a3ca30();
-};
-
-struct FUN_0052bb10 : public FUN_00a3ca30
-{
-    FUN_0045cec0 unk10;
-
-    ~FUN_0052bb10();
 };
 
 FUN_0045cec0::~FUN_0045cec0()
@@ -562,178 +481,6 @@ float* __cdecl FUN_00532f40(float* pOut, float f, SpawnedObject* pObj)
     return pOut;
 }
 
-struct FUN_00532f60_vec4
-{
-    float x;
-    float y;
-    float z;
-    float w;
-};
-
-class FUN_00532f60_cls
-{
-  public:
-    float m_uiX;
-    float m_uiY;
-    float m_uiZ;
-    float m_w;
-    FUN_00532f60_vec4* ScaleVector4(FUN_00532f60_vec4* out, float scale);
-};
-
-struct xA
-{
-    virtual void v000();
-    virtual void v004();
-    virtual void v008();
-    virtual void v00c();
-    virtual void v010();
-    virtual void v014();
-    virtual void v018();
-    virtual void v01c();
-    virtual void v020();
-    virtual void v024();
-    virtual void v028();
-    virtual void v02c();
-    virtual void v030();
-    virtual void v034();
-    virtual void v038();
-    virtual void v03c();
-    virtual void v040();
-    virtual void v044();
-    virtual void v048();
-    virtual void v04c();
-    virtual void v050();
-    virtual void v054();
-    virtual void v058();
-    virtual void v05c();
-    virtual void v060();
-    virtual void v064();
-    virtual void v068();
-    virtual void v06c();
-    virtual void v070();
-    virtual void v074();
-    virtual void v078();
-    virtual void v07c();
-    virtual void v080();
-    virtual void v084();
-    virtual void v088();
-    virtual void v08c();
-    virtual void v090();
-    virtual void v094();
-    virtual void v098();
-    virtual void v09c();
-    virtual void v0a0();
-    virtual void v0a4();
-    virtual void v0a8();
-    virtual void v0ac();
-    virtual void v0b0();
-    virtual void v0b4();
-    virtual void v0b8();
-    virtual void v0bc();
-    virtual void v0c0();
-    virtual void v0c4();
-    virtual void v0c8();
-    virtual void v0cc();
-    virtual void v0d0();
-    virtual void v0d4();
-    virtual void v0d8();
-    virtual void v0dc();
-    virtual int GetA(int i);
-    virtual void v0e4();
-    virtual void v0e8();
-    virtual int GetB(int i);
-    int m_kNextStreamField[5];
-};
-
-struct xB : xA
-{
-    int m_aiExtra[3];
-};
-
-struct xSkyX
-{
-    char _pad000[0x28];
-    int m_aiA[21][2];
-    int m_i0d0;
-    int m_i0d4;
-    int m_i0d8;
-    int m_i0dc;
-    int m_i0e0;
-    int m_i0e4;
-    char _pad0e8[0xc];
-    int m_i0f4;
-    int m_i0f8;
-    int m_i0fc;
-    char _pad100[0x4];
-    int m_i104;
-    int m_i108;
-    int m_i10c;
-    int m_i110;
-    xA m_akObj[21][2];
-    xA m_k504;
-    xA m_k51c;
-    xB m_k534;
-    xB m_k558;
-    xA m_k57c;
-    xA m_k594;
-    xA m_k5ac;
-    xA m_k5c4;
-    xA m_k5dc;
-    xA m_k5f4;
-    xA m_k60c;
-    xA m_k624;
-    xA m_k63c;
-    int m_aiB[21][2];
-    int m_i6fc;
-    int m_i700;
-    int m_i704;
-    int m_i708;
-    int m_i70c;
-    int m_i710;
-    int m_i714;
-    int m_i718;
-    int m_i71c;
-    int m_i720;
-    int m_i724;
-    int m_i728;
-    int m_i72c;
-    void CacheObjectValues();
-};
-
-struct FUN_004855a0_shell
-{
-    void FUN_004855a0();
-};
-struct FUN_00485680_shell
-{
-    void FUN_00485680();
-};
-bool FUN_00401500();
-void AppendChunk(unsigned int, void*, unsigned int);
-void FUN_00485910(unsigned int, unsigned int);
-void* __memcpy(void*, const void*, unsigned int);
-struct FUN_0052f250_shell : TESImageSpaceModifier
-{
-    void WriteToStream();
-};
-
-extern char _DAT_011862b8;
-extern "C" void* __cdecl FUN_00401460(void*, const void*, unsigned int);
-extern "C" void __fastcall CacheObjectValues(TESImageSpaceModifier*);
-struct PassPtr
-{
-    TESImageSpaceModifier* value;
-};
-extern "C" void __fastcall FUN_004851b0(TESImageSpaceModifier*, PassPtr);
-struct CopyBaseShell
-{
-    void FUN_004851b0(TESImageSpaceModifier*);
-};
-struct TESImageSpaceModifierCopy : TESImageSpaceModifier
-{
-    void FUN_00530160(TESForm*);
-};
-
 struct BlendColor
 {
     float r, g, b, a;
@@ -742,18 +489,3 @@ struct BlendColor
     BlendColor AddDelta(const BlendColor&) const;
 };
 BlendColor FUN_00532f40(float, const BlendColor&);
-struct BlendPoint
-{
-    float x, y;
-    BlendPoint();
-    BlendPoint(float, float);
-    BlendPoint Subtract(const BlendPoint&) const;
-    BlendPoint FUN_004dfe30(const BlendPoint&) const;
-};
-BlendPoint FUN_00532fd0(float, const BlendPoint&);
-struct BlendImageManager : ImageSpaceManager
-{
-    void FUN_00b8b1c0(const NiBound&, BlendPoint&);
-    void FUN_00b8bb70(const NiBound&, BlendPoint&);
-};
-TESImageSpaceModifier* FUN_00532ff0();

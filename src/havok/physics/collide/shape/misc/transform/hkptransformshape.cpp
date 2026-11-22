@@ -4,43 +4,6 @@
 
 #include "havok/hkpTransformShape.h"
 
-struct FUN_00cf5900
-{
-    int calc(int a2, int a3);
-};
-
-class hkClassCF58;
-
-extern const hkClassCF58 DAT_01268910;
-
-class hkStatisticsCollectorCF58
-{
-  public:
-    virtual ~hkStatisticsCollectorCF58() throw();
-    virtual void V1() throw();
-    virtual void V2() throw();
-    virtual void addChildObject(const char* pcName, const void* pvObject, const void* pvClass) throw();
-};
-
-class hkpShapeCF58
-{
-  public:
-    void FUN_00c90360(hkStatisticsCollectorCF58* pkCollector, const hkClassCF58* pkClass) const throw();
-};
-
-class hkpSingleShapeContainerCF58 : public hkpShapeCF58
-{
-  public:
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    const void* m_pContainedShape;
-
-    void AddChildShapeToCollector(hkStatisticsCollectorCF58* pkCollector, const hkClassCF58* pkClass) const throw();
-};
-
 struct FnvCpu_FUN_00cf58f0_CpuObject
 {
     char* FUN_00cf58f0();
@@ -93,13 +56,6 @@ class hkReferencedObjectCF5E
     }
 };
 
-class hkpShapeCF5E : public hkReferencedObjectCF5E
-{
-  public:
-    hkUlong m_ulUserData;
-    hkUint32 m_type;
-};
-
 class hkpShapeContainerCF5E
 {
   public:
@@ -117,34 +73,6 @@ class hkpSingleShapeContainerCF5E : public hkpShapeContainerCF5E
         if (m_pContainedShape)
             m_pContainedShape->removeReference();
     }
-};
-
-class hkpTransformShapeCF5E : public hkpShapeCF5E, public hkpSingleShapeContainerCF5E
-{
-  public:
-    hkpTransformShapeCF5E* DestroyAndMaybeFree(unsigned int uiFlags) throw();
-};
-
-extern int DAT_010cc41c;
-extern int DAT_010c6fd0;
-
-struct FUN_00c90510_class
-{
-    void FUN_00c90510();
-};
-
-struct cf5990_TransformShape
-{
-    void* m_vtbl;                      // 0x00
-    unsigned short unk04;              // 0x04 (memSizeAndFlags, untouched here)
-    unsigned short m_sReferenceCount;  // 0x06
-    unsigned int m_ulUserData;         // 0x08
-    unsigned int m_type;               // 0x0c
-    void* m_childContainerVtbl;        // 0x10
-    hkpShape* m_pContainedShape;       // 0x14
-
-    void CopyBlock(const hkTransform& transform);
-    int FUN_00cf5990(hkpShape* child, const hkTransform& transform);
 };
 
 struct __declspec(align(16)) Quaternion
@@ -200,36 +128,4 @@ void FUN_00cf59e0_Class::FUN_00cf59e0(int a, float factor, int flags)
 struct __declspec(align(16)) Vec4_cf5a
 {
     float x, y, z, w;
-};
-
-class ConvexChild_cf5a
-{
-  public:
-    virtual void v00();
-    virtual void v01();
-    virtual void v02();
-    virtual float getMaximumProjection(const Vec4_cf5a& direction) const;
-};
-
-class TransformShape_cf5a
-{
-  public:
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    ConvexChild_cf5a* m_pContainedShape;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    __m128 m_kColumn0;
-    __m128 m_kColumn1;
-    __m128 m_kColumn2;
-    __m128 m_vTranslation;
-
-    float FUN_00cf5a20(const __m128& direction);
 };

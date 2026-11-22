@@ -573,9 +573,6 @@ class FUN_00dcecc0
 }  // namespace fnv_00d4c8e0
 
 extern void* __cdecl FUN_00c85750(void);
-extern int DAT_010d07f4;
-extern void __cdecl ProcessCollisionRecords(void*, void*, void*);
-extern void __cdecl ResizeAudioStream(void*, void*, int);
 
 struct D4C2Place
 {
@@ -587,14 +584,6 @@ inline void* operator new(unsigned int, void* p, D4C2Place)
 }
 inline void operator delete(void*, void*, D4C2Place)
 {}
-
-struct BigType
-{
-    int m_00;
-    unsigned short m_04;
-    unsigned short m_06;
-    void* FUN_00c90b80(void);
-};
 
 struct ArrayField
 {
@@ -631,19 +620,6 @@ struct SmallType
     void FUN_00d065e0(void);
 };
 
-struct AllocType
-{
-    virtual void vf00(void);
-    virtual void* vf04(int);
-};
-struct HolderType
-{
-    int m_00;
-    int m_04;
-    int m_08;
-    int m_0c;
-    AllocType* m_10;
-};
 struct ClientType
 {
     void FUN_00c91c50(void*);
@@ -871,11 +847,6 @@ struct hkMemoryRouterD4C
 
 extern "C" hkMemoryRouterD4C* __cdecl FUN_00c85750() throw();
 
-struct hkRefD4C
-{
-    void FUN_00c905b0() throw();
-};
-
 template <class T> class hkArrayD4C
 {
   public:
@@ -899,22 +870,6 @@ class hkBaseObjectD4C
   public:
     virtual ~hkBaseObjectD4C()
     {}
-};
-
-class hkReferencedObjectD4C : public hkBaseObjectD4C
-{
-  public:
-    unsigned short m_usMemSizeAndFlags;
-    short m_sReferenceCount;
-};
-
-class FUN_00d4c250 : public hkReferencedObjectD4C
-{
-  public:
-    hkRefD4C* m_pCollisionShape;
-    hkArrayD4C<hkRefD4C*> m_children;
-
-    virtual ~FUN_00d4c250();
 };
 
 }  // namespace fnv_00d4c250

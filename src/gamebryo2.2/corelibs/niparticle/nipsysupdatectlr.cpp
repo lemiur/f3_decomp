@@ -4,8 +4,6 @@
 
 struct GlobalObjectO2_00a7b610;
 
-extern GlobalObjectO2_00a7b610 g_01202690;
-
 extern char const* const g_011dfe40_arg1;
 
 // @fnv 0x00a6d280
@@ -157,21 +155,6 @@ void FnvNode::FUN_00c27290(FnvNode* pTarget)
     }
 }
 
-struct StrArr
-{
-    int _m0;
-    int _m4;
-    unsigned short m_usAlloc;
-    unsigned short m_usSize;
-    unsigned short _mC;
-    unsigned short m_usGrowBy;
-    void SetSize(unsigned int);
-    void SetAt(unsigned int, char*&);
-};
-
-void __stdcall FUN_00a6d830(StrArr*);
-char* __cdecl FUN_00a7d330(const char*);
-
 struct GlobalObjectO2_00a7b610
 {
     const char* m_pcName;
@@ -308,10 +291,8 @@ FUN_00a6d220::FUN_00a6d220() throw()
     uFlags = (uFlags & 0xff6c) | 0x4c;
 }
 
-extern "C" void _ReadWriteBarrier();
 extern float g_01015f5c;
 extern float g_010be6a8;
-extern double g_010241b0;
 extern char g_012024e8;
 
 struct SpawnedTarget

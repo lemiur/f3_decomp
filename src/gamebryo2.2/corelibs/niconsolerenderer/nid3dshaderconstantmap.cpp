@@ -442,13 +442,6 @@ FUN_00a9beb0::~FUN_00a9beb0()
 }
 
 extern "C" char DAT_010f003c;
-struct ShaderMapBase
-{
-    virtual void BaseVirtual();
-    unsigned int unk04, unk08;
-    ShaderMapBase(unsigned int);
-    ~ShaderMapBase();
-};
 struct ShaderMapArray
 {
     void* vtable;
@@ -463,15 +456,6 @@ struct ShaderMapArray
     }
     ~ShaderMapArray();
     void FUN_00b799c0();
-};
-struct FUN_00b7e330 : ShaderMapBase
-{
-    ShaderMapArray activeEntries, definedEntries;
-    unsigned char enabled, unk2d, unk2e, unk2f;
-    unsigned int unk30, unk34, unk38, unk3c, unk40;
-    FUN_00b7e330(unsigned int, unsigned int);
-    void FUN_00e81d00(unsigned int);
-    virtual void MapVirtual();
 };
 
 extern unsigned int DAT_011f5f90[];
@@ -2112,7 +2096,6 @@ unsigned int __stdcall FUN_00e84d00(FUN_00e84b60_prog* pkProgram, NiShaderConsta
 }
 }  // namespace fnv_00e84d00
 
-extern "C" void* __cdecl fnv_zlib_memset(void*, int, unsigned int);
 extern "C" double __cdecl cos(double);
 
 class NiPoint3_ext : public NiPoint3
@@ -2122,14 +2105,6 @@ class NiPoint3_ext : public NiPoint3
     NiPoint3* FUN_00439ef0(NiPoint3*, const NiPoint3&) const;
     void FUN_004a0c10();
     float Dot(const NiPoint3&) const;
-};
-
-class NiMatrix3_ext : public ThreeByThreeMatrix
-{
-  public:
-    NiMatrix3_ext* FUN_004768c0(NiMatrix3_ext*) const;
-    ThreeByThreeMatrix* FUN_0043f8d0(ThreeByThreeMatrix*, const ThreeByThreeMatrix&) const;
-    NiPoint3* FUN_004b4500(NiPoint3*, const NiPoint3&) const;
 };
 
 class NiTransform
@@ -2151,204 +2126,7 @@ class NiBound
     float m_fBoundRadius;
 };
 
-struct NiRTTI;
-extern const NiRTTI DAT_011f4a98;
-bool __cdecl FUN_0043b300(const NiRTTI*, void*);
-void __cdecl FUN_00b71a40(float* d, const ThreeByThreeMatrix& r, const NiPoint3& t, float s);
-void __cdecl FUN_00b799a0(float* d, const char* t);
-extern const NiPoint3 DAT_011f426c;
-
-struct StandinLight
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5c;
-    int unk60;
-    int unk64;
-    NiTransform m_kWorldSpaceTransform;
-    char unk9c;
-    unsigned char m_ucLightType;
-    char unk9e;
-    char unk9f;
-    int unka0;
-    int unka4;
-    int unka8;
-    int unkac;
-    int unkb0;
-    int unkb4;
-    int unkb8;
-    int unkbc;
-    int unkc0;
-    float m_fDimmer;
-    NiPoint3 m_kAmbient;
-    NiPoint3 m_kDiffuse;
-    NiPoint3 m_kSpecular;
-    int unkec;
-    union
-    {
-        struct
-        {
-            NiPoint3 m_kWorldLocation;
-            NiPoint3 m_kSpotDirection;
-            float m_fOuterAngle;
-            float m_fInnerAngle;
-            float m_fSpotExponent;
-            int unk114;
-        };
-        struct
-        {
-            int unkF0;
-            ThreeByThreeMatrix m_kLightRotate;
-        };
-    };
-    NiPoint3 m_kWorldDirection;
-    int unk124;
-    int unk128;
-    int unk12c;
-    int unk130;
-    unsigned int m_uiSubtype;
-    unsigned char m_bAtten;
-    char unk139;
-    char unk13a;
-    char unk13b;
-    int unk13c;
-    int unk140;
-    int unk144;
-    int unk148;
-    union
-    {
-        struct
-        {
-            float m_fConstantAtten;
-            float m_fLinearAtten;
-            float m_fQuadAtten;
-            float m_fDistanceLimit;
-        };
-        struct
-        {
-            NiPoint3 m_kPlaneNormal;
-            float m_fPlaneDistance;
-        };
-    };
-};
-
-struct NiD3DMatrix4
-{
-    float m[4][4];
-};
-
-struct LightPlane
-{
-    NiPoint3 normal;
-    float distance;
-};
-struct LightMappingWorkspace
-{
-    volatile float scalar;
-    LightPlane plane;
-    NiD3DMatrix4 matrix;
-    NiPoint3 scaledAtten;
-    NiD3DMatrix4 identity;
-    NiTransform inverse;
-    NiTransform lightWorld;
-    NiPoint3 modelWorldDirection;
-    NiPoint3 modelDirection;
-    NiPoint3 modelPosition;
-    NiPoint3 distantModelPosition;
-    NiPoint3 pointLightDirection;
-    NiPoint3 modelLightDirection;
-    NiPoint3 pointLightModelDirection;
-    ThreeByThreeMatrix modelWorldRotation;
-    NiMatrix3_ext inverseEffectRotation;
-    ThreeByThreeMatrix modelEffectRotation;
-    NiMatrix3_ext inverseWorldRotation;
-    NiMatrix3_ext inverseLightRotation;
-    NiTransform modelLightWorld;
-};
-
-union PointBits
-{
-    NiPoint3 point;
-    struct
-    {
-        unsigned int x, y, z;
-    } words;
-};
-
-struct S00e85c40_Tex
-{
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0c;
-    void* m_10;
-    unsigned char unk14;
-    unsigned char m_15;
-    unsigned char unk16;
-    unsigned char unk17;
-    unsigned int m_18;
-};
-
-struct S00e85c40_Obj
-{
-    virtual void s00();
-    virtual void s01();
-    virtual void s02();
-    virtual void s03();
-    virtual void s04();
-    virtual void s05();
-    virtual void s06();
-    virtual void s07();
-    virtual void s08();
-    virtual void s09();
-    virtual void s0a();
-    virtual void s0b();
-    virtual void s0c();
-    virtual void s0d();
-    virtual void s0e();
-    virtual void s0f();
-    virtual void s10();
-    virtual void s11();
-    virtual void s12();
-    virtual void s13();
-    virtual void s14();
-    virtual void s15();
-    virtual void s16();
-    virtual void s17();
-    virtual void s18();
-    virtual void s19();
-    virtual void s1a();
-    virtual void s1b();
-    virtual void s1c();
-    virtual bool s1d(S00e85c40_Tex* t, void* data, int flag);
-};
-
 extern unsigned int DAT_011f5f90[];
-extern char DAT_0126f770;
-unsigned int __cdecl GetLightByType(unsigned int a, unsigned int b, unsigned int c);
-bool __cdecl FillLightConstantData(void* data, unsigned int pitch, void* src, unsigned int fmt, int p3, int p4, int p5,
-                                   int p6, int p7, unsigned int p8, int p9, int p10, int p11);
 
 struct GlobalObjectO2_00a7b610
 {
@@ -2899,9 +2677,7 @@ struct __declspec(align(16)) Vec4
 S83_Matrix* __stdcall FUN_00ee6dda(S83_Matrix*, float*, const S83_Matrix*);
 S83_Matrix* __stdcall FUN_00ee6dd4(S83_Matrix*, const S83_Matrix*);
 S83_Matrix* __stdcall FUN_00ee6de0(S83_Matrix*, const S83_Matrix*, const S83_Matrix*);
-S83_Matrix* __stdcall FUN_00ee6dfe(S83_Matrix*, const S83_Matrix*, const S83_Matrix*);
 void __cdecl SetAffineMatrix(S83_Matrix*, const char*, bool, bool, unsigned int);
-extern float DAT_01099378;
 extern "C" double __cdecl sin(double);
 extern "C" double __cdecl cos(double);
 extern "C" double __cdecl tan(double);
@@ -3030,7 +2806,6 @@ struct Geometry
 };
 extern const char* DAT_011bf65c;
 extern NiPoint3 DAT_011f4998;
-extern unsigned int DAT_011f5f6c;
 struct Light
 {
     void* FUN_00653290(const unsigned int*);

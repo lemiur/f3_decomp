@@ -12,46 +12,9 @@ void __cdecl CallIfNotFlagged(int aiUnused, int pObject, int c)
 }
 
 void __cdecl SetFlagAndCall(int, int, int);
-void __cdecl FUN_00d32cd0(int, int, int);
-void __cdecl FUN_00d32ca0(int, int, int);
 void __cdecl FUN_00d32bd0(int, int, int);
-void __cdecl FUN_00d32be0(int, int, int);
-void __cdecl FUN_00d32c00(int, int, int);
-void __cdecl FUN_00d32c20(int, int, int);
-void __cdecl FUN_00d32c40(int, int, int);
 void __cdecl FUN_00d32ae0(int, int, int);
 void __cdecl FUN_00d32b40(int, int, int);
-void __cdecl FUN_00d32ba0(int, int, int);
-struct FUN_00d33140_t
-{
-    void* m_ppVirtualMethodTable;
-    int m_04;
-    void* m_08;
-    void* m_0c;
-    void* m_10;
-    void* m_14;
-    void* m_18;
-    void* m_1c;
-    void* m_20;
-    void* m_24;
-    void* m_28;
-    void* m_2c;
-    char m_30;
-};
-
-struct FUN_00d32ae0_agent
-{
-    virtual void f0();
-    virtual void f1();
-    virtual void f2();
-    virtual void f3();
-    virtual void f4();
-    virtual void f5();
-    virtual void f6(const char*);
-    virtual void f7();
-};
-
-void __cdecl FUN_00d97250(void*, void*, void*);
 
 // If the flag at offset 0x0b of b is clear, calls f6 with "hkConvexListAgent3", FUN_00d97250 on b+0x10, then f7 on the agent.
 // @f3 0x009bc8c0 (community match, verified in this file)
@@ -114,12 +77,6 @@ void __cdecl SetFlagAndCall(int aiArg1, int aiArg2, int c)
     DispatchInputRecord(aiArg1, aiArg2, p);
     p[0xb] = (p[0xb] & 0xbf) | 0x20;
 }
-
-void __cdecl RemoveEntryById(void);
-
-void __cdecl InsertSlotId(void);
-
-void __cdecl FindEntryByKey(int, int, int);
 
 struct PackTarget
 {
@@ -260,45 +217,6 @@ void FnvCpu_FUN_00d33250_CpuOwner::FUN_00d33250(int arg0)
 {
     target->Invoke(arg0);
 }
-
-struct TargetInterface
-{
-    virtual void slot00();
-    virtual void slot04();
-    virtual void slot08();
-    virtual void slot0c();
-    virtual int slot10();
-};
-
-struct Arg3
-{
-    TargetInterface* target;
-};
-
-struct Arg1
-{
-    int unk00;
-    int unk04;
-    short unk08;
-    char unk0a;
-    unsigned char flags;
-    int unk0c;
-    int field_10;
-};
-
-struct EventData
-{
-    int m00;
-    Arg3* m04;
-    int m08;
-    int m0c;
-    int m10;
-    int m14;
-    int m18;
-    int m1c;
-};
-
-void __cdecl FUN_00da48e0(void*, void*);
 
 struct hkpShapeD333
 {
@@ -473,19 +391,6 @@ void Container::FUN_00d33600(void* unusedA, void* unusedB, char* source, Callbac
     }
 }
 
-struct hkpShapeD32
-{
-    int unk00;
-    int unk04;
-    unsigned char unk08;
-    unsigned char unk09;
-    unsigned char unk0A;
-    unsigned char m_flags;
-    int unk0C;
-    int m_data;
-};
-
-void __cdecl ForwardToTarget(void* agent, hkpShapeD32* shape, void* input, void* output, void* collector);
 void __cdecl FUN_00da42b0(int* data, void* collector, void* input, void* output);
 
 void __cdecl FUN_00d41860();
@@ -526,8 +431,6 @@ struct hkpAgent3FuncsD331
     bool m_bAgentFlag2;
 };
 
-void __cdecl FUN_00d33140(hkpAgent3FuncsD331& kFuncs);
-
 class hkpCollisionDispatcherD331
 {
   public:
@@ -548,39 +451,6 @@ void __cdecl RegisterAgent3Entries(hkpCollisionDispatcherD331* pkDispatcher)
 
 
 #include <xmmintrin.h>
-// Builds on an earlier contributor's 2026-10-25 reconstruction of this routine.
-extern float DAT_010CEB6C;
-extern __m128 DAT_01268370;
-void __cdecl FUN_00d41930(int, int, int, int);
-
-struct HK_ASSERT_OBJECT_SIZE_OK_FUNC_t
-{
-    int m_00;
-    int m_04;
-    int m_08;
-    int m_0c;
-    int m_10;
-    int m_14;
-    int m_18;
-    int m_1c;
-    int m_20;
-    int m_24;
-    int m_28;
-    int m_2c;
-    int m_30;
-    int m_34;
-    int m_38;
-    int m_3c;
-    int m_40;
-    int m_44;
-    int m_48;
-    int m_4c;
-    int m_50;
-    int m_54;
-    int m_58;
-    int m_5c;
-    HK_ASSERT_OBJECT_SIZE_OK_FUNC_t& FUN_00d33260(const HK_ASSERT_OBJECT_SIZE_OK_FUNC_t& a);
-};
 
 struct __declspec(align(16)) HK_Stage_t
 {
@@ -735,9 +605,6 @@ namespace fnv_00d32cd0 {
 #include <windows.h>
 #include <string.h>
 
-extern "C" unsigned __int64 __rdtsc();
-extern "C" void _ReadWriteBarrier();
-
 struct __declspec(align(16)) FourFloatVector
 {
     union
@@ -770,11 +637,6 @@ struct Body
     Body* parent;
     int unk10, unk14, unk18, unk1c, unk20, unk24, unk28, unk2c, unk30, unk34, unk38, unk3c, unk40, unk44, unk48;
     float radius;
-};
-struct CollisionInput
-{
-    int unk00, unk04;
-    float tolerance;
 };
 struct Cache
 {
@@ -836,17 +698,6 @@ struct Manager
     virtual void f1c();
     virtual void f20(int, Basis*);
 };
-struct Context
-{
-    Body* bodyA;
-    Body* bodyB;
-    int unk08;
-    CollisionInput* input;
-    Manager* manager;
-    int unk14, unk18, unk1c;
-    Transform transform;
-    int extra60, extra64, extra68, extra6c, extra70, extra74, extra78, extra7c;
-};
 struct StateRecord
 {
     union
@@ -879,68 +730,9 @@ struct FUN_00d33670
     FUN_00d33670(Output*);
     void FUN_00d33600(Body*, Body*, Output*, Manager*);
 };
-struct ProcessInput
-{
-    Body* bodyA;
-    Body* bodyB;
-    int unk08;
-    CollisionInput* input;
-    Manager* manager;
-    int unk14, unk18, unk1c;
-    Transform transform;
-    int extra60, extra64, extra68, extra6c, extra70, extra74, extra78, extra7c;
-    void FUN_00d33260(Context*);
-};
-struct CollisionResult
-{
-    float unk00, unk04, unk08, distance;
-};
-struct ProbeInput
-{
-    Transform* relative;
-    Transform* world;
-    Shape* a;
-    Shape* b;
-    float tolerance;
-};
-struct Collector
-{
-    void* vtable;
-    short unk04;
-    short capacity;
-    int mode;
-    Manager* manager;
-    bool hit;
-};
-struct MonitorEntry
-{
-    const char* volatile name;
-    unsigned int time;
-    int unk08;
-    const char* volatile detail;
-};
-struct Monitor
-{
-    int unk00;
-    MonitorEntry* current;
-    int unk08;
-    MonitorEntry* end;
-};
-extern DWORD DAT_0126835c;
-extern void* DAT_010ceb44;
-extern float DAT_010ceb6c;
-int __cdecl FUN_00dabca0(ProbeInput*, Agent*, void*, FourFloatVector*);
 void __cdecl FUN_00da42b0(Cache*, int, Manager*, int);
-void* __cdecl FUN_00d41a30(ProcessInput*, int, Agent*, void*, Output*);
 void __cdecl FUN_00d41860(int, Agent*, Manager*, int);
-void __cdecl InitBlockPool(Cache*);
-void __cdecl FUN_00da4aa0(Cache*, Context*, int*, int*, Output*);
-void* __cdecl FUN_00c85750();
 
-struct TLSArgument
-{
-    DWORD value;
-};
 }  // namespace fnv_00d32cd0
 
 class hkpLinearCastProcessorD334

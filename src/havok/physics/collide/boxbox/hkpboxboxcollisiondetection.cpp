@@ -39,9 +39,6 @@ extern "C"
     __m128 _mm_mul_ps(__m128, __m128);
     __m128 _mm_mul_ss(__m128, __m128);
     __m128 _mm_rsqrt_ss(__m128);
-    __m128 _mm_set_ps1(float);
-    __m128 _mm_set_ss(float);
-    __m128 _mm_setzero_ps(void);
     __m128 _mm_shuffle_ps(__m128, __m128, unsigned int);
     void _mm_store_ss(float*, __m128);
     __m128 _mm_sub_ps(__m128, __m128);
@@ -51,7 +48,6 @@ extern "C"
 
 extern "C"
 {
-    double __cdecl fabs(double _X);
 }
 extern "C++"
 {
@@ -85,51 +81,6 @@ struct hkVector4
     {
         return reinterpret_cast<const float*>(this)[i];
     }
-};
-
-struct hkTransform
-{
-    hkVector4 m_kColumn0;
-    hkVector4 m_kColumn1;
-    hkVector4 m_kColumn2;
-    hkVector4 m_vTranslation;
-};
-
-struct BoxBoxEdgeContact
-{
-    hkVector4 m_vContactPosition;                  // 0x00
-    hkVector4 unk10;                       // 0x10
-    hkVector4 m_vHitNormal;                    // 0x20
-    float unk30;                           // 0x30
-    float m_fClosestPointDistanceSquared;  // 0x34
-    int m_featureA;                        // 0x38
-    int m_featureB;                        // 0x3c
-};
-
-extern const hkVector4 g_boxVertexSigns[8];
-extern const __m128 g_negateMask;
-
-struct BoxBoxCollisionDetection
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    hkVector4 m_rotation[3];        // 0x20
-    hkVector4 m_vTranslation;       // 0x50
-    hkVector4 m_kBoxBasisVector;            // 0x60
-    hkVector4 m_kThirdBasisVector;  // 0x70
-    hkVector4 unk80;
-    hkVector4 unk90;
-    hkVector4 unkA0;
-    float m_fScalar;          // 0xb0
-    float m_minNormalLength;  // 0xb4
-
-    hkBool TestEdgeEdgeContact(BoxBoxEdgeContact* contact);
 };
 
 static __forceinline __m128 dot3v(__m128 a, __m128 b)

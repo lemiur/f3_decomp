@@ -28,20 +28,6 @@ unsigned char* ThresholdHolder::WriteThresholdFlag(unsigned char* output) {
 }
 
 
-struct CpuScalar
-{
-    unsigned int unk00;
-    float value;
-};
-struct CpuObject
-{
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    CpuScalar* value;
-    float FUN_00d98420();
-};
-
 struct hkBoolD984
 {
     char m_cBooleanValue;
@@ -123,26 +109,4 @@ struct hkpCollisionDispatcherD984
 struct hkpCollisionInputD984
 {
     hkpCollisionDispatcherD984* m_pCollisionDispatcher;
-};
-
-class hkpCollisionFilterD984
-{
-  public:
-    virtual void V0();
-    virtual hkBoolD984 IsCollisionEnabled(const hkCdBodyD984& a, const hkCdBodyD984& b) const;
-};
-
-class FUN_00d98430_cls
-{
-  public:
-    int unk00, unk04;
-    hkpCollisionFilterD984* m_iFilter;
-    void* m_kCollector;
-    void* m_startCollector;
-    const hkCdBodyD984* m_pBodyA;
-    int m_iAgentTypeA;
-    int unk1C;
-    hkpCollisionInputD984 m_pRayCastInput;
-
-    hkBoolD984 QueryPenetrations(const hkCdBodyD984& bodyB);
 };

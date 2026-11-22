@@ -20,8 +20,6 @@ void NiVisController::GetVisibility(bool& abVisible)
     abVisible = !(*(unsigned char*)((char*)p + 0x30) & 1);
 }
 
-extern void* g_011f3f08;
-
 struct BSFadeNode
 {
     static void* __cdecl operator new(unsigned int);
@@ -115,14 +113,9 @@ bool NiTransformController::IsTargetOfType(NiObjectNET* pkTarget) const
     return false;
 }
 
-extern void* DAT_0109ab44;
 struct NiTimeController
 {
     void __thiscall SetControllerActive();
-};
-struct FUN_00a57640_shell : NiTimeController
-{
-    FUN_00a57640_shell* __thiscall FUN_00a57640();
 };
 
 extern int DAT_0109ac54;
@@ -138,15 +131,6 @@ FUN_00a57790::FUN_00a57790()
     SetControllerActive();
     *(int**)this = (int*)&DAT_0109ac54;
 }
-
-struct StrArr
-{
-    void __thiscall SetSize(unsigned int);
-    void __thiscall SetAt(unsigned int, char*&);
-};
-
-void __stdcall FUN_00a57800(StrArr*);
-char* __cdecl _FUN_00a7d330(void*);
 
 extern "C" __declspec(dllimport) long __stdcall InterlockedIncrement(long volatile* plValue);
 extern "C" __declspec(dllimport) long __stdcall InterlockedDecrement(long volatile* plValue);

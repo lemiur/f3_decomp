@@ -6,20 +6,6 @@
 
 struct HkpStandIn;
 
-struct HkpAllocator
-{
-    virtual void v0() = 0;
-    virtual void v1() = 0;
-    virtual void release(HkpStandIn* object, unsigned short size) = 0;
-};
-
-struct HkpRouter
-{
-    void* reserved;
-    unsigned char padding[12];
-    HkpAllocator* allocator;
-};
-
 struct HkpStandIn
 {
     virtual void v0() = 0;
@@ -29,8 +15,6 @@ struct HkpStandIn
 
     unsigned short value;
 };
-
-HkpRouter* _D1A0E0GetMemoryRouter();
 
 struct FUN_00e49100_t
 {
@@ -156,9 +140,6 @@ struct D : P, S
     void FUN_00e490d0();
 };
 
-class GlobalObjectO2_00d472a0;
-extern GlobalObjectO2_00d472a0 g_01269198;
-
 int __cdecl FUN_00d06f80(const void* pvChunk, int iNumBytes) throw();
 
 template <class T> class hkArrayE494
@@ -203,42 +184,6 @@ class hkStatisticsCollectorE494
             AddMemoryChunk(3, pcName, kArray.m_data, kArray.GetLogicalSize() * sizeof(T), iAllocated);
         }
     }
-};
-
-class hkxStreamE494;
-class hkDisplayMeshE494;
-
-struct hkMeshSectionE494
-{
-    int unk00;
-    int unk04;
-    hkArrayE494<hkxStreamE494*> m_indexStreams;
-    hkArrayE494<hkxStreamE494*> m_vertexStreams;
-    hkArrayE494<hkxStreamE494*> m_materialStreams;
-};
-
-class hkReferencedObjectE494
-{
-  public:
-    virtual ~hkReferencedObjectE494() throw();
-    unsigned short m_usMemSizeAndFlags;
-    short m_sReferenceCount;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-
-    void FUN_00d213e0(hkStatisticsCollectorE494* pkCollector, const GlobalObjectO2_00d472a0* pkClass) const throw();
-};
-
-class hkDisplayGeometryE494 : public hkReferencedObjectE494
-{
-  public:
-    hkMeshSectionE494* m_kCriticalSection;
-    hkDisplayMeshE494* m_pDisplayMesh;
-
-    void AddToStatisticsCollector(hkStatisticsCollectorE494* pkCollector, const GlobalObjectO2_00d472a0* pkClass) const
-        throw();
 };
 
 // sub ecx,0x10; jmp target  ==  MSVC adjustor thunk for a virtual declared by both bases.

@@ -18,16 +18,6 @@ NiGeometry::NiGeometry()
 
 #pragma optimize("", off)
 
-struct DummyClass
-{
-    void __thiscall FUN_0051d080_mem(unsigned char a1, int a2);
-};
-
-struct StackByte
-{
-    unsigned char v;
-};
-
 class NiMemObject
 {
   public:

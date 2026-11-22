@@ -2,8 +2,6 @@
 // src/gamebryo2.2/corelibs/niparticle/nimeshparticlesystem.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/_fallout3/platforms/common/code/gamebryo2.2/corelibs/niparticle/nimeshparticlesystem.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-extern "C" void* g_01202538;
-
 struct BSFadeNode
 {
     static void* __cdecl operator new(unsigned int);
@@ -217,7 +215,6 @@ struct StrArr
     void __thiscall SetSize(unsigned int);
     void __thiscall SetAt(unsigned int, char*&);
 };
-char* __cdecl _FUN_00a7d330(void*);
 struct NiParticleSystem
 {
     void __thiscall WriteParticleSystemInfo(StrArr*);

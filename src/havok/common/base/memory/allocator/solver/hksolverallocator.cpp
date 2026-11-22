@@ -2,33 +2,7 @@
 // src/havok/common/base/memory/allocator/solver/hksolverallocator.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/common/base/memory/allocator/solver/hksolverallocator.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-struct hkMemoryStatistics
-{
-    int m_iAllocated;
-    int m_iAvailable;
-    int m_iFree;
-    int m_uiLogicalSize;
-};
-
-struct hkSolverAllocator
-{
-    int m_iFree;
-    int m_iAllocated;
-    int m_uiLogicalSize;
-    int m_iBlockSize;
-    int m_iPadding;
-    int m_iBlockSize2;
-    void GetMemoryStatistics(hkMemoryStatistics* statistics);
-};
-
-struct FUN_00d5e8a0_Class : hkSolverAllocator
-{
-    bool CanAllocate(int size);
-};
-
 extern "C" __declspec(dllimport) void __stdcall DeleteCriticalSection(void*);
-
-extern int DAT_010d1110;
 
 struct FUN_00c66560_class
 {
@@ -55,17 +29,6 @@ void FUN_00cd06a0_class::ResetVftableAndDeleteCriticalSection()
     m_pVftable = &DAT_00e27f54;
 }
 
-
-struct S_00d5e8f0
-{
-    int unk0;
-    int unk4;
-    int unk8;
-    int unkC;
-    int unk10;
-    int unk14;
-    void FUN_00d5e8f0();
-};
 
 // @fnv 0x00d5e880
 int __stdcall FUN_00d5e880(int arg0)
@@ -100,83 +63,6 @@ struct hkStreamD5E9
         m_kRayEnd = p + size;
         m_10 = 0;
     }
-};
-
-struct hkObjD5E9
-{
-    int unk00;
-    hkStreamD5E9 m_stream;
-    int unk14;
-    int* m_data;
-    int m_iElementCount;
-    int m_iCapacityState;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5C;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6C;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7C;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8C;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9C;
-    int unkA0;
-    int unkA4;
-    int unkA8;
-    int unkAC;
-    int unkB0;
-    int unkB4;
-    int unkB8;
-    int unkBC;
-    int unkC0;
-    int unkC4;
-    int unkC8;
-    int unkCC;
-    int unkD0;
-    int unkD4;
-    int unkD8;
-    int unkDC;
-    int unkE0;
-    int unkE4;
-    int unkE8;
-    int unkEC;
-    int unkF0;
-    int unkF4;
-    int unkF8;
-    int unkFC;
-    int unk100;
-    int unk104;
-    int unk108;
-    int unk10C;
-    int unk110;
-    int unk114;
-    int unk118;
-    int unk11C;
-    int unk120;
-    hkCriticalSectionD5E9 m_kCriticalSection;
-
-    void InitStream(char* p, int size);
 };
 
 namespace fnv_00d5e9b0 {
@@ -342,24 +228,6 @@ inline void* operator new(unsigned int, void* ptr)
     return ptr;
 }
 
-void __cdecl FUN_00c908c0(void* allocator, void* array, int capacity, int elemSize);
-void __cdecl FUN_00d2cc70(void* dst, const void* src, unsigned int numBytes);
-
-struct Element
-{
-    int a;
-    int b;
-};
-
-struct ArrayClass
-{
-    Element* m_data;
-    int m_iElementCount;
-    int m_iCapacityState;
-
-    void Splice(void* allocator, int index, int numToRemove, const Element* elements, int numToInsert);
-};
-
 template <typename T> struct hkArrayD5E9
 {
     T* m_data;
@@ -376,34 +244,6 @@ template <typename T, int N> struct hkInplaceArrayD5E9 : public hkArrayD5E9<T>
         this->m_iElementCount = 0;
         this->m_iCapacityState = N | 0x80000000;
     }
-};
-
-struct hkPairD5E9
-{
-    int m_key;
-    int m_uiFilterValue;
-};
-
-class FUN_00cf6da0
-{
-  public:
-    int unk00;
-    FUN_00cf6da0(int flag);
-};
-
-class FUN_00d5e900
-{
-  public:
-    virtual ~FUN_00d5e900();
-    int m_04;
-    int m_08;
-    int m_0C;
-    int m_10;
-    int m_14;
-    hkInplaceArrayD5E9<hkPairD5E9, 32> m_pairs;
-    FUN_00cf6da0 m_pChildAtom;
-
-    FUN_00d5e900();
 };
 
 extern "C" __declspec(dllimport) void __stdcall EnterCriticalSection(void*);
@@ -453,32 +293,4 @@ struct S00d5eb10_BlockArray
     {
         FUN_00d5eda0(0, index, &b);
     }
-};
-
-struct S00d5eb10_CS
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-};
-
-struct S00d5eb10_Alloc : public FUN_00c66560_class
-{
-    void* unk04;
-    void* unk08;
-    void* m_pTileTemplate;
-    int m_numAllocations;
-    int unk14;
-    S00d5eb10_BlockArray m_kBlocks;
-    S00d5eb10_CS m_pWorldLock;
-
-    void FUN_00d5eb10(void* p, int size);
-};
-
-struct SolverDeletingView : FUN_00cd06a0_class
-{
-    SolverDeletingView* FUN_00d5ed70(unsigned int flags);
 };

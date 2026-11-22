@@ -26,7 +26,6 @@ extern "C" __m128 _mm_add_ss(__m128 a, __m128 b);
 extern "C" __m128 _mm_shuffle_ps(__m128 a, __m128 b, unsigned int imm);
 extern "C" void _mm_store_ss(float* p, __m128 a);
 
-extern const __m128 DAT_010c71d0;
 extern const __m128 DAT_010c44d0;
 
 namespace hkC9E5 {

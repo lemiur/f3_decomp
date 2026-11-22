@@ -129,44 +129,6 @@ struct Rot_d849a0
     }
 };
 
-struct Out_d847c0 : public Vec_d849a0
-{
-    void setRotatedInverseDir(const Rot_d849a0& r, const Vec_d849a0& v);
-};
-
-struct Trans_d847c0
-{
-    Rot_d849a0 m_rotation;
-    Vec_d849a0 m_vTranslation;
-};
-
-struct Pos_d847c0 : public Vec_d849a0
-{
-    void SetTransformedPosition(const Trans_d847c0& t, const Vec_d849a0& v);
-};
-
-struct PointToPlane_d847c0
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    Vec_d849a0 m_20;
-    Vec_d849a0 m_30;
-    Vec_d849a0 m_40;
-    Pos_d847c0 m_50;
-    Rot_d849a0 m_60;
-    Pos_d847c0 m_90;
-    unsigned short unkA0;
-    unsigned char m_a2;
-    void SetFromTransforms(const Trans_d847c0& bodyA, const Trans_d847c0& bodyB, const Vec_d849a0& pivot,
-                           const Vec_d849a0& normal);
-};
-
 }  // namespace fnv_00d847c0
 
 namespace fnv_00d849a0 {
@@ -232,27 +194,6 @@ struct Rot_d849a0
     {
         return (&col0)[i];
     }
-};
-
-struct Cls_d849a0
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    Vec_d849a0 m_20;
-    Vec_d849a0 m_30;
-    Vec_d849a0 m_40;
-    Vec_d849a0 m_50;
-    Rot_d849a0 m_60;
-    Vec_d849a0 m_90;
-    unsigned short unkA0;
-    unsigned char m_a2;
-    void SetBasis(const Vec_d849a0& a1, const Vec_d849a0& a2, const Vec_d849a0& a3);
 };
 
 }  // namespace fnv_00d849a0

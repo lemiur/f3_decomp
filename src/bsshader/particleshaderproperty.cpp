@@ -2,8 +2,6 @@
 // src/bsshader/particleshaderproperty.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/_fallout3/platforms/common/code/bsshader/particleshaderproperty.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-extern int g_01200434;
-
 template <class T> class NiTMallocInterface
 {
 };
@@ -13,15 +11,6 @@ template <class T, class A> class NiTPrimitiveArray
     void SetSize(unsigned int);
     void SetAt(unsigned int, char*&);
 };
-struct BaseStr
-{
-    void WriteToSettingArray(NiTPrimitiveArray<char*, NiTMallocInterface<char*> >*);
-};
-struct ParticleShaderProperty : BaseStr
-{
-    void FUN_00ba7f20(NiTPrimitiveArray<char*, NiTMallocInterface<char*> >*);
-};
-char* __cdecl _FUN_00a7d330(const char*);
 
 extern "C" __declspec(dllimport) long __stdcall InterlockedDecrement(long volatile*);
 extern int DAT_0101fbcc;
@@ -618,23 +607,10 @@ struct PickSrc
     PickObj** m_ppObjs;
 };
 
-struct PickView
-{
-    unsigned int u0;
-    unsigned int u4;
-    unsigned char u8;
-};
 struct ArrView
 {
     char* base;
     unsigned int stride;
-    unsigned char flag;
-};
-struct ArrView2
-{
-    char* base;
-    unsigned int stride;
-    unsigned int unk08;
     unsigned char flag;
 };
 struct ThreeComponentPoint
@@ -1310,7 +1286,6 @@ void Target71::FUN_00ba71d0(unsigned int index)
     pParticles[index].dz = direction.z;
 }
 
-extern int DAT_010b8250;
 void __fastcall FUN_00baa0e0(void*);
 struct MemoryManagerDealloc
 {

@@ -10,87 +10,11 @@ void __cdecl FUN_00d48640(int a, int b)
     FUN_00d48620(a, b, 1);
 }
 
-extern "C" void __cdecl FUN_00d485a0(int, int, int, int, int);
-
-extern int DAT_0102e388;
-extern int DAT_010d7540;
-
 struct hkReferencedObject
 {
     void removeReference();
 };
 
-struct FUN_00dcc160_cls
-{
-    void* vtbl;
-    int a;
-    hkReferencedObject* b;
-    void FUN_00dcc160();
-};
-
-struct FUN_00dbc670_storage
-{
-    void* vtbl;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5C;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6C;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7C;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8C;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9C;
-    int unkA0;
-    int unkA4;
-    int unkA8;
-    int unkAC;
-    int unkB0;
-    int unkB4;
-    int unkB8;
-    int unkBC;
-    int unkC0;
-    int unkC4;
-    int unkC8;
-    int unkCC;
-    int unkD0;
-};
-struct FUN_00dbc670_shell
-{
-    void FUN_00dbc670();
-    void FUN_00dbda50(int, int, int);
-    int ProcessPoly(int, int);
-    void FUN_00dbc6e0();
-};
 struct GlobalDispatch
 {
     virtual int V0();
@@ -101,16 +25,6 @@ struct GlobalDispatch
 extern GlobalDispatch* DAT_01269b74;
 
 extern void* FUN_00d48d30(void* obj_b, int a2, int a3);
-
-struct CtorBox
-{
-    CtorBox* InitFromValue(void* arg);
-    void FUN_00dcc160();
-
-    void* f0;
-    int f4;
-    void* b;
-};
 
 namespace fnv_00d48f00 {
 void* __cdecl FUN_00cb1280(void* destination, int value, int size);
@@ -146,23 +60,8 @@ struct Header180
         unk28 = 0;
     }
 };
-struct Object180
-{
-    void* unk00;
-    int unk04;
-    void* unk08;
-    Object180* __thiscall FUN_00dcc6a0(void* input, int arg2);
-    void __thiscall FUN_00dcc160();
-};
 }  // namespace fnv_00d48f00
 
-struct S_00d49310_Lock
-{
-    int unk0;
-    int unk4;
-    S_00d49310_Lock() throw();
-    ~S_00d49310_Lock() throw();
-};
 struct S_00d49310_Result
 {
     int m_uiFilterValue;
@@ -212,123 +111,6 @@ bool S_00d49350::Equals(const char* aString) const
 }
 
 
-struct FUN_00d493a0_cls
-{
-    char m_00;
-    char m_01;
-    char m_02;
-    char m_03;
-    bool* MatchesTag(bool* out, const char* tag);
-};
-
-struct D493E0Object;
-
-struct D493E0Ref
-{
-    D493E0Ref(D493E0Object* p);
-
-    D493E0Object* m_pRetainedObject;
-};
-
-struct D493E0Registry
-{
-    D493E0Object* find(const void* key, int flags) const;
-};
-
-struct D493E0Loader
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    D493E0Registry* m_registry;
-
-    D493E0Ref FindObject(const void* key, int flags) const;
-};
-
-struct Pair
-{
-    void* first;
-    void* second;
-};
-
-struct Vt4Obj
-{
-    virtual void unk00();
-    virtual void unk04();
-    virtual void unk08();
-    virtual void unk0c();
-    virtual void* unk10(void* apArg);
-};
-
-struct GlobalObj
-{
-    virtual void unk00();
-    virtual void unk04();
-    virtual void unk08();
-    virtual void unk0c();
-    virtual Vt4Obj* unk10();
-};
-
-struct Obj5
-{
-    void* FUN_00dba680();
-    void FUN_00dba660();
-};
-
-struct Obj2
-{
-    void GetObjectValue(Obj5* apOut);
-    int FUN_00dba980();
-    void FUN_00dba660();
-    void GetSourcePair(Pair* apOut);
-};
-
-struct Obj1
-{
-    void AssignRef(Obj2* apArg);
-};
-
-struct PairVt
-{
-    virtual void unk00();
-    virtual void unk04();
-    virtual void unk08();
-    virtual void unk0c(void** apFirst, void** apSecond);
-};
-
-extern int DAT_01268b08;
-
-struct FUN_00d49420_cls
-{
-    int unk00;
-    int unk04;
-    PairVt* m_08;
-
-    Obj1* ProcessPair(Obj1* apArg1, Obj2* apArg2);
-    void unk20(Obj1* apA, void* apB, void* apC);
-};
-
-extern volatile int DAT_01269b70;
-
-struct Holder_cls
-{
-    int unk00;
-    void FUN_00dba7f0();
-};
-
-struct Pending_cls
-{
-    int unk00;
-    int unk04;
-    void FUN_00dc5d30();
-    void FUN_00dc5d50(Holder_cls* h, int a, int b);
-};
-
-struct Owner_cls
-{
-    int FUN_00dba0d0(int a, int b);
-};
-
 struct S00d48d30_Bool
 {
     char m_cBooleanValue;
@@ -356,56 +138,13 @@ struct S00d48d30_Result
     hkStringPtr m_message;
 };
 
-struct S00d48d30_Lock
-{
-    int unk00;
-    int unk04;
-    S00d48d30_Lock() throw();
-    ~S00d48d30_Lock() throw();
-};
-
-struct S00d48d30_Ref
-{
-    int unk00;
-    S00d48d30_Ref(const S00d48d30_Ref&) throw();
-    ~S00d48d30_Ref() throw();
-};
-
 struct S00d48d30_Format
 {
     int m_type;
     int attach(struct S00d48d30_Stream* s, struct S00d48d30_Result* out);
 };
 
-struct S00d48d30_Reader
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    S00d48d30_Reader() throw();
-    ~S00d48d30_Reader() throw();
-    S00d48d30_Ref ForwardToReceiver();
-    void prepare();
-    int open(S00d48d30_Stream* s);
-    void close();
-};
-
-struct S00d48d30_Service
-{
-    virtual void s0();
-    virtual void s1();
-    virtual void s2();
-    virtual int getLoadOptions();
-    virtual int getDefaultOptions();
-};
-
-extern const char str_010cfacc[];
-extern const char str_010cfab8[];
-extern const char str_010cfa94[];
-
-int S00d48d30_Finish(int opts);
 void FUN_00d48af0(void* stream, int* out) throw();
-int __cdecl FUN_00dc3300(const S00d48d30_Ref& r, int opts);
 
 struct S00d48680_Arr
 {
@@ -632,7 +371,6 @@ struct NativeWorld
     }
 };
 struct ObjectResource;
-extern "C" ObjectResource* __cdecl FUN_00dc32c0(const RootObject&, const ClassRegistry*, const TypeRegistry*) throw();
 struct LoadFormat
 {
     int type;
@@ -726,8 +464,6 @@ const ClassRegistry* volatile classSource;
 const TypeRegistry* volatile typeSource;
 ObjectResource* volatile outputSink;
 
-extern const char str_010cf9f4[];
-
 struct S00d48950_Item
 {
     virtual void v00();
@@ -798,7 +534,6 @@ struct S00d48950_Sys
         return *m_pStreamAllocator;
     }
 };
-void __cdecl FUN_00cb0c70(char* buf, const char* fmt, ...);
 
 S00d48950_Result* volatile g00d48950_result;
 S00d48950_Target* volatile g00d48950_target;

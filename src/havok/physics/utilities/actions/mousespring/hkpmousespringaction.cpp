@@ -48,12 +48,6 @@ union __declspec(intrin_type) __declspec(align(16)) __m128
     unsigned __int64 m128_u64[2];
 };
 
-extern int DAT_010c8e94;
-extern int DAT_010c476c;
-extern float DAT_0101b2d0;
-extern float DAT_0104da48;
-extern const char str_011b1f3c[];
-
 struct Ms_Heap
 {
     virtual void v0();
@@ -83,12 +77,6 @@ struct Ms_ArrInit
         m_iElementCount = 0;
         m_cap = 0x80000000;
     }
-};
-struct Ms_Arr
-{
-    int* m_data;
-    int m_iElementCount;
-    int m_cap;
 };
 
 struct Ms_Sphere
@@ -134,7 +122,6 @@ struct Ms_Body
     int u19;
     void __thiscall FUN_00cd2d80(Ms_Sphere* s, Ms_Xf* x, int parent);
 };
-Ms_Xf* __cdecl FUN_00cd4b50();
 
 struct Ms_Input
 {
@@ -186,102 +173,10 @@ struct Ms_Coll
     int u31;
 };
 
-struct Ms_Shape
-{
-    int u0;
-    int u1;
-    int u2;
-    int type;
-};
-struct Ms_Disp
-{
-    int unk00;
-};
-struct Ms_World
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5c;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6c;
-    int unk70;
-    int unk74;
-    Ms_Input* input;
-    int unk7c;
-    Ms_Disp* disp;
-};
-struct Ms_Ent
-{
-    int u0;
-    int u1;
-    Ms_World* world;
-    int u3;
-    Ms_Shape* shape;
-};
 typedef void(__cdecl* Ms_Fn)(Ms_Body*, void*, Ms_Input*, Ms_Coll*);
-struct Ms_B
-{
-    void __thiscall FUN_00d2b260(void* e, int z);
-};
-struct Ms_N
-{
-    void __thiscall FUN_00cb0c10(const char* s);
-};
 extern "C"
 {
-    void _mm_store_ps(float*, __m128);
-    __m128 _mm_load_ps(const float*);
 }
-struct Fv
-{
-    float x;
-    float y;
-    float z;
-    float w;
-};
-struct Ms_cls
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    Fv pos;
-    Fv mouse;
-    float damping;
-    float elasticity;
-    float maxRel;
-    float objDamping;
-    int shapeKey;
-    Ms_ArrInit cb;
-    Ms_cls* FUN_00cbb560(__m128* a0, __m128* a1, float a2, float a3, float a4, Ms_Ent* a5, Ms_Arr* a6);
-};
 
 namespace fnv_00cbb790 {
 struct hkAllocatorCBB7
@@ -471,32 +366,10 @@ FUN_00cd2d80::FUN_00cd2d80(const void* apCollisionShape, const void* motionState
 struct Ms_Tls;
 Ms_Tls* FUN_00c85750();
 
-struct Ms_HeapX
-{
-    virtual void v00();
-    virtual void v04();
-    virtual void v08(void* p, unsigned short n);
-    virtual void v0c();
-    virtual void v10(int p, int n);
-};
-
-struct Cls
-{
-    void* m_vt;          // 0x00
-    int m_04;            // 0x04 (word)
-    char m_pad08[0x4c];  // to 0x54
-    int m_54;
-    int m_58;
-    int m_5c;
-    Cls* FUN_00cbb8b0(int flags);
-    void FUN_00d2b2b0();
-};
-
 extern "C"
 {
     __m128 _mm_sub_ps(__m128, __m128);
     __m128 _mm_and_ps(__m128, __m128);
-    __m128 _mm_load_ps1(const float*);
     __m128 _mm_cmple_ps(__m128, __m128);
     int _mm_movemask_ps(__m128);
 }
@@ -504,9 +377,6 @@ extern "C"
 extern "C"
 {
 }
-
-extern const __m128 DAT_01017d10;
-extern const float DAT_01017d00;
 
 struct __declspec(align(16)) hkVector4CBB1
 {
@@ -517,37 +387,6 @@ struct __declspec(align(16)) hkVector4CBB1
     }
 };
 
-class UnkCall
-{
-  public:
-    int unk00;
-    int unk04;
-    int m_pOwningWorld;
-
-    void FUN_00c9c1d0();
-};
-
-class hkpPositionTrackerCBB1
-{
-  public:
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    UnkCall* m_pOwnerObject;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    hkVector4CBB1 m_vContactPosition;
-
-    void FUN_00cbb150(const hkVector4CBB1& kPosition);
-};
-
-extern "C" __m128 _mm_setzero_ps(void);
 struct FUN_00cbb4e0
 {
     void* unk00;

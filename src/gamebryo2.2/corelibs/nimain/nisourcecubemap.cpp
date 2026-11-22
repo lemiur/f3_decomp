@@ -15,9 +15,6 @@ bool __stdcall FUN_00a60850(NiStream& kStream)
     return AttachToListener(&kStream);
 }
 
-struct GlobalObjectO2_00a7b610;
-extern GlobalObjectO2_00a7b610 g_011f4454;
-
 struct NiSourceTexture
 {
     NiSourceTexture();
@@ -177,21 +174,6 @@ bool __thiscall Thunk60800::CreateCubeOrRelease()
     }
     return true;
 }
-
-struct StrArr
-{
-    void SetSize(unsigned int);
-    void SetAt(unsigned int, char*&);
-};
-struct Base60770
-{
-    void GetFileStrings(StrArr*);
-};
-char* __cdecl _FUN_00a7d330(char*);
-struct Host61480 : Base60770
-{
-    void AppendGlobalString(StrArr*);
-};
 
 namespace fnv_00a60ba0 {
 extern "C" void* __cdecl memset(void*, int, unsigned int);

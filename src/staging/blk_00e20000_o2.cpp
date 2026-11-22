@@ -4,13 +4,6 @@
 
 #include "../../include/layout_support.h"
 
-extern void* DAT_011be488[];
-
-struct FUN_00e39e60_class
-{
-    int ComputeIndex(int param);
-};
-
 struct FUN_00e3f340_Class
 {
     int __thiscall FindEntryByKey(int arg);
@@ -59,36 +52,9 @@ void __cdecl FUN_00e2ba90()
     DAT_0126ec04 = FUN_00e2b9b0;
 }
 
-extern int DAT_010eb3b8[];
-extern int DAT_010eb3d0[];
-int __cdecl FUN_00e30ff0(int a, int b);
-
 extern int DAT_010eb770;
-struct FUN_00e34800
-{
-    int vtbl;
-    int a;
-    int b;
-    int c;
-    void __thiscall m(int);
-    FUN_00e34800(int x);
-};
-
-struct CB2FC0Object
-{
-    void __thiscall FUN_00cb2d90(void*);
-};
-struct FUN_00e3b4d0_Class
-{
-    void __thiscall ApplyToBothObjects(void* a, void* b);
-};
 
 int __cdecl CompareStringsCaseInsensitive(int, int);
-
-struct FUN_00e3ec30_Class
-{
-    int __thiscall FUN_00e3ec30(int arg);
-};
 
 struct D481D0RefVariant
 {
@@ -114,87 +80,6 @@ void __cdecl FUN_00e298f0(FUN_00e29620_class* object, int param)
 {
     object->FUN_00e29620(param);
 }
-
-struct SplitChunk
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5c;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6c;
-};
-
-struct E2baaSrc
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    signed char unk20;
-    unsigned char unk21;
-    unsigned char unk22;
-    unsigned char unk23;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-};
-
-struct E2baaDst
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    float unk14;
-    unsigned char unk18;
-    unsigned char unk19;
-    unsigned char unk1A;
-    unsigned char unk1B;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-};
 
 struct FUN_00e2d0d0_cls;
 struct E2d0Ref;
@@ -1219,12 +1104,6 @@ struct RefHolderE2
     RefHolderE2& operator=(const RefHolderE2& other);
 };
 
-struct KeyedEntryE2
-{
-    float m_key;
-    RefHolderE2 m_uiFilterValue;
-};
-
 template <typename T> struct hkArrayStub
 {
     T* m_data;
@@ -1289,55 +1168,12 @@ template <typename T> struct hkArrayStub
     }
 };
 
-struct FUN_00e2f680_Class
-{
-    RefHolderE2 m_ref;
-    hkArrayStub<KeyedEntryE2> m_entries;
-
-    FUN_00e2f680_Class& CopyFrom(const FUN_00e2f680_Class& other);
-};
-
-class FUN_00e30f10
-{
-  public:
-    unsigned short m_kPointA;
-    unsigned char m_kPointB;
-    FUN_00e30f10();
-};
-
 unsigned int __cdecl FUN_00e31570(unsigned char a1, unsigned int* a2);
-int __cdecl FUN_00e315a0(unsigned char a1, unsigned int a2, unsigned int a3, unsigned int* a4);
 
 int __cdecl FUN_00e31570(int a, int* c);
-void __cdecl AlignAndAdvance(int a, int result, int b, int* c);
-
-struct FUN_00e33910_item
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    bool* Test(bool* result);
-};
-
-class FUN_00e33910_cls
-{
-  public:
-    FUN_00e33910_item* m_pItems;
-    int m_uiItemCount;
-    bool* AreAllItemsValid(bool* out);
-};
 
 extern "C" void _ReadWriteBarrier(void);
 extern int DAT_010eb770;
-
-struct SubObj_b4888
-{
-    SubObj_b4888();
-};
 
 struct Base_b4888
 {
@@ -1352,20 +1188,6 @@ struct Base_b4888
         *(int**)this = &DAT_010eb770;
         m_08 = 0;
     }
-};
-
-struct FUN_00e347c0 : Base_b4888
-{
-    SubObj_b4888 m_0c;
-    unsigned int m_10;
-    unsigned int m_14;
-    unsigned int m_18;
-    unsigned int m_1c;
-    unsigned int m_20;
-    unsigned int m_24;
-    unsigned int m_28;
-
-    FUN_00e347c0();
 };
 
 // @f3 0x00453910 (community match, verified in this file)
@@ -1398,34 +1220,6 @@ TESDescription::TESDescription()
     m_04 = 0;
 }
 
-
-struct S_00e34950_Foo
-{
-    unsigned short unk00;
-    unsigned short unk02;
-    float unk04;
-    float unk08;
-    float unk0c;
-    float unk10;
-    float unk14;
-
-    S_00e34950_Foo* Init();
-};
-
-extern int DAT_010df9f4;
-
-class FUN_00e39a80
-{
-  public:
-    int m_vptr00;
-    unsigned short unk04;
-    unsigned short m_06;
-    int m_08;
-    int m_0c;
-    int m_10;
-    float m_14;
-    FUN_00e39a80();
-};
 
 struct S_00e3a270_RefObj
 {
@@ -1535,26 +1329,6 @@ void S_00e3ae70_cls::SetItemValues(unsigned int a1, unsigned int a2, float a3, f
 
 
 extern void* DAT_010eb98c;
-union ReleaseFlags
-{
-    int releaseHandle;
-    int releaseOwner;
-};
-struct LinkOwner
-{
-    void* unk00;
-    void* unk04;
-    void* unk08;
-    void __thiscall FUN_00d21ce0(void*);
-};
-struct FUN_00e3b060_Class
-{
-    void* vtable;
-    int unk04;
-    int unk08;
-    LinkOwner links;
-    FUN_00e3b060_Class* __thiscall ReleaseLinks(ReleaseFlags flags);
-};
 
 namespace fnv_00e3b0a0 {
 struct AudioAllocator
@@ -1577,22 +1351,6 @@ struct AudioHolder
 
 AudioHolder* __cdecl FUN_00c85750() throw();
 extern int DAT_010eb98c;
-extern int DAT_0102e388;
-
-struct FUN_00e3b0a0_cls
-{
-    int m_vptr00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0c;
-    unsigned int unk10;
-    unsigned int unk14;
-    void* m_pData;
-    int m_iArrayLength;
-    unsigned int m_uCapBits;
-
-    void FUN_00e3b0a0();
-};
 
 }  // namespace fnv_00e3b0a0
 
@@ -1642,22 +1400,6 @@ FUN_00e3c5b0::FUN_00e3c5b0(float f) : S_00e3c5b0_Base(0x16)
     unk40 = 6;
 }
 
-
-struct ScriptRecord
-{
-    unsigned int identifier;
-    unsigned short flags;
-    short type;
-    unsigned int value;
-};
-
-struct ScriptRecordList
-{
-    ScriptRecord* records;
-    int count;
-
-    ScriptRecord* FindByTypeAndOccurrence(int type, int occurrence);
-};
 
 struct FUN_00e3dfb0_arg
 {
@@ -1821,8 +1563,6 @@ struct S_00e3ed00_Foo
     int __thiscall AppendToTraversalList(S_00e3ed00_Foo* param1, S_00e3ed00_List* param2);
 };
 
-void __cdecl ResizeAudioStream(int param1, S_00e3ed00_List* param2, int param3);
-
 struct hkMemoryAllocator
 {
     virtual ~hkMemoryAllocator();
@@ -1854,12 +1594,6 @@ NineIntegerRecord& GetMemoryRouter();
 struct hkReferencedObj
 {
     void removeReference();
-};
-
-struct hkStringPtr
-{
-    const char* m_pcText;
-    void release();
 };
 
 struct hkRefPtrE
@@ -1960,46 +1694,6 @@ template <class T> struct hkArr
         _clearAndDeallocate(GetMemoryRouter().heap());
     }
 };
-struct BaseE3EAA0
-{
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    virtual void vf0();
-    void Shutdown();
-};
-
-struct FUN_00e3ed80 : BaseE3EAA0
-{
-    hkStringPtr m_14;
-    ReferenceCountedPointer m_18;
-    hkArr<Elem40> m_1c;
-    hkArr<hkRefPtrE> m_28;
-    hkArr<Pair8> m_34;
-    hkStringPtr m_40;
-    virtual ~FUN_00e3ed80();
-};
-
-struct E3F0F0Less
-{
-};
-
-void __cdecl HeapSort(int* piFirst, int* piLast, E3F0F0Less kPred);
-
-struct E3F0F0Owner
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int* m_piFirst;
-    int* m_piLast;
-
-    void FUN_00e3f0f0();
-};
 
 namespace fnv_00e3f110 {
 struct AudioAllocator
@@ -2020,84 +1714,12 @@ struct AudioHolder
     AudioAllocator* m_pAllocator;
 };
 
-extern int DAT_010e33dc;
 struct BSAudio;
 BSAudio* __cdecl FUN_00c85750();
 
-struct AudioRefObject
-{
-    void Release();
-};
-
-struct AudioSub
-{
-    int unk00;
-    void Reset();
-};
-
-struct FUN_00e3f110_cls
-{
-    int m_vptr00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    AudioSub m_sub14;
-    void* m_pBuf18;
-    int m_iCount1c;
-    unsigned int m_uCap20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5c;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6c;
-    AudioRefObject** m_pBuf70;
-    int m_iCount74;
-    unsigned int m_uCap78;
-    AudioRefObject* m_p7c;
-
-    void BaseTeardown();
-    void Destroy() throw();
-};
-
 }  // namespace fnv_00e3f110
 
-struct FUN_00e3f210_cls
-{
-    char m_buf[2];
-    unsigned char HasDelimiter();
-};
-
 int __cdecl CompareStringsCaseInsensitive(unsigned int a, int b);
-
-struct FUN_00e3f230_Entry
-{
-    unsigned int m_flagged;
-    unsigned int unk04;
-};
-
-struct FUN_00e3f230_cls
-{
-    int unk00;
-    int unk04;
-    FUN_00e3f230_Entry* m_pEntries;
-    int m_uiItemCount;
-    int FindEntryByKey(int arg);
-};
 
 namespace fnv_00e30ff0 {
 extern int(__cdecl* DAT_011be4a0[])(int);
@@ -2117,17 +1739,6 @@ struct BE3E7E0Entry
     {
         return (const char*)(m_uiTaggedName & ~1u);
     }
-};
-
-class BE3E7E0Table
-{
-  public:
-    int unk00;
-    int unk04;
-    BE3E7E0Entry* m_pkEntryArray;
-    int m_iArrayLength;
-
-    BE3E7E0Entry* FindEntryByName(const char* pcName);
 };
 
 void __cdecl SetEntity();
@@ -2155,11 +1766,6 @@ float FUN_00e39e80_class::FUN_00e39e80()
 {
     return unk1C;
 }
-
-struct FUN_00e3df50_Class
-{
-    FUN_00e3df50_Class* __thiscall FUN_00e3df50(int param);
-};
 
 int __cdecl FUN_00e3dfb0(int param_1, int* param_2);
 
@@ -2341,16 +1947,6 @@ FNVTreeNode* __thiscall FNVTreeNode::FindChildByName(const char* pcName)
 }
 
 
-class Base
-{
-  public:
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int FUN_00e3f270();
-};
-
 struct FUN_00e31080
 {
     float f0;
@@ -2396,41 +1992,6 @@ FUN_00e31080::FUN_00e31080()
 }
 
 
-struct E3F290Entry
-{
-    int unk00;
-    int unk04;
-};
-
-struct E3F290Class
-{
-    int unk00;
-    int unk04;
-    E3F290Entry* unk08;
-    int __thiscall GetEntryValue(int index);
-};
-
-struct FUN_00e3f370_handle
-{
-    int unk00;
-    void Release();
-};
-
-struct FUN_00e3f370_pair
-{
-    FUN_00e3f370_handle first;
-    FUN_00e3f370_handle second;
-};
-
-struct FUN_00e3f370_cls
-{
-    int unk00;
-    int unk04;
-    FUN_00e3f370_pair* m_pItems;
-    int m_iArrayLength;
-    void ReleaseItems();
-};
-
 // Probe for 0x00e29900: does cl 15.00.30729.01 /GL + /LTCG deliver this
 // wrapper's pointer argument in EAX, so the body compiles to
 //   50              push eax
@@ -2457,8 +2018,6 @@ __int64 probe_caller(void)
 
 typedef __int64 (*probe_fn)(void);
 probe_fn volatile g_keep = probe_caller;
-
-extern "C" unsigned int be_arg_src_e2f9(void);
 
 volatile unsigned int g_be_sink_e2f9;
 
@@ -2496,8 +2055,6 @@ namespace se34af0 {
 
 }
 
-extern "C" unsigned short stub_val_e34b20(void);
-
 #include <xmmintrin.h>
 struct hkVector4X
 {
@@ -2530,11 +2087,6 @@ template <class T> struct hkArrayX
     {}
 };
 
-struct WheelComponentParamsX
-{
-    float m_fSphereRadius;
-};
-
 struct hkRefObjX
 {
     virtual void vf0();
@@ -2557,50 +2109,6 @@ struct hkBoolX
         return *this;
     }
 };
-
-struct FrictionDescX
-{
-    float m_fFrictionEqualizer, m_fMaxVelocityForPositionalFriction, m_a0, m_a1, m_a2, m_a3, m_a4, m_a5;
-    float m_b0, m_b1, m_b2, m_b3, m_b4, m_b5, m_b6, m_b7;
-    float m_c0, m_c1, m_c2, m_c3, m_c4, m_c5, m_c6, m_c7;
-    float m_d0, m_d1, m_d2, m_d3, m_d4, m_d5, m_d6, m_d7;
-    float m_e0, m_e1, m_e2, m_e3, m_e4, m_e5, m_e6, m_e7;
-    float m_f0, m_f1, m_f2, m_f3, m_f4, m_f5, m_f6, m_f7;
-    float m_g0, m_g1, m_g2, m_g3, m_g4, m_g5, m_g6;
-};
-
-struct FUN_00e39da0 : hkRefObjX
-{
-    hkVector4X m_kGravity;
-    signed char m_iWheelCount;
-    hkRotationX m_kChassisOrientation;
-    float m_fChassisMass;
-    float m_fTorqueMax;
-    float m_fTorqueMin;
-    float m_fTorqueFactor;
-    float m_fTorquePitchFactor;
-    float m_fTorqueRollFactor;
-    float m_fTorqueYawFactor;
-    float m_fExtraTorqueFactor;
-    float m_fChassisUnitInertiaRoll;
-    float m_fChassisUnitInertiaPitch;
-    float m_fChassisUnitInertiaYaw;
-    hkArrayX<WheelComponentParamsX> m_kWheelParams;
-    hkArrayX<signed char> m_kNumWheelsPerAxle;
-    FrictionDescX m_kFrictionDescription;
-    hkVector4X m_vChassisUnitInertiaAndMassInv;
-    hkBoolX m_bWheelsUseChassisForGround;
-    FUN_00e39da0();
-};
-
-struct FUN_00e39e50_cls
-{
-    __m128 m_v0;
-    __m128 m_v1;
-    FUN_00e39e50_cls* __thiscall FUN_00e39e50();
-};
-
-extern float DAT_010d0c80;
 
 struct S3b010Links
 {
@@ -2656,8 +2164,6 @@ void* S3b010Obj::FUN_00e3b010()
 }
 
 
-extern int DAT_010e11ec;
-
 struct V4
 {
     __m128 q;
@@ -2689,27 +2195,6 @@ struct M3
     }
 };
 
-struct FUN_00e3b5c0
-{
-    int m_vtbl00;
-    unsigned short unk04;
-    volatile unsigned short m_06;
-    volatile int m_08;
-    int m_0c;
-    volatile unsigned short m_10;
-    unsigned short unk12;
-    int unk14;
-    int unk18;
-    int unk1c;
-    M3 m_rot20;
-    M3 m_rot50;
-    unsigned short m_80;
-    unsigned char m_82;
-    unsigned char m_83;
-
-    FUN_00e3b5c0();
-};
-
 namespace se3b790 {
 
 struct Cell
@@ -2717,76 +2202,15 @@ struct Cell
     unsigned char m_aucFlags[48];
 };
 
-struct CellInfo
-{
-    int unk000;
-    int unk004;
-    int unk008;
-    int unk00c;
-    int unk010;
-    int unk014;
-    int unk018;
-    int m_iIndex;
-};
-
-struct CellArray
-{
-    int unk000;
-    int unk004;
-    int unk008;
-    int unk00c;
-    int unk010;
-    int unk014;
-    int unk018;
-    Cell* m_pkCells;
-};
-
-struct Grid
-{
-    int unk000;
-    int unk004;
-    int unk008;
-    CellInfo* m_pkInfo;
-    int unk010;
-    int unk014;
-    int unk018;
-    int unk01c;
-    int unk020;
-    int unk024;
-    int unk028;
-    int unk02c;
-    CellArray* m_pkArray;
-};
-
 }
 
 namespace se3d200 {
-
-struct Mesh
-{
-    int unk000;
-    int unk004;
-    int unk008;
-    int unk00c;
-    int unk010;
-    int unk014;
-    int unk018;
-    unsigned short* m_pusIndices;
-
-    void FUN_00e3cd50(int iV0, int iV1, int iV2, float fValue, int iArg0, int iArg1, int iArg2);
-    void FUN_00e3d200(int iTri, float fValue, int iArg0, int iArg1, int iArg2);
-};
 
 }
 
 namespace ns_e3e8 {
 int __cdecl CompareStringsCaseInsensitive(const char* a, const char* b) throw();
 }
-struct Resource_e3e8
-{
-    const char* FUN_00d46d40() throw();
-    void FUN_00c905b0() throw();
-};
 
 template <class T> struct hkRefPtr_e3e8
 {
@@ -2801,24 +2225,6 @@ template <class T> struct hkRefPtr_e3e8
     {
         return m_pRetainedObject;
     }
-};
-
-hkRefPtr_e3e8<Resource_e3e8> __stdcall FindWorldByKey(const char* name) throw();
-
-struct S_00e3f280_Entry
-{
-    int unk00;
-    int unk04;
-};
-
-struct S_00e3f280_Class
-{
-    int unk00;
-    int unk04;
-    S_00e3f280_Entry* unk08;
-
-    int __thiscall FUN_00e3f280(int index);
-    int __thiscall GetEntryValue(int index);
 };
 
 struct FUN_00e22d50
@@ -2877,25 +2283,9 @@ class hkBaseObject
     {}
 };
 
-class hkReferencedObject : public hkBaseObject
-{
-  public:
-    unsigned short m_usMemSizeAndFlags;
-    short m_sReferenceCount;
-    void FUN_00c905b0() throw();
-};
 }
 
 namespace FUN_00e3a360 {
-class hkpTyremarksInfo : public hkE3A3::hkReferencedObject
-{
-  public:
-    virtual ~hkpTyremarksInfo();
-
-    float m_fMinTyremarkPointDistance;
-    float m_fMaxTyremarkPointDistance;
-    hkArrayE3A3<hkE3A3::hkReferencedObject*> m_kTyremarksWheels;
-};
 
 }
 
@@ -2918,13 +2308,6 @@ template <class T> struct Array_e3f4e0
     int m_iCapacityState;
     Array_e3f4e0() : m_data(0), m_iElementCount(0), m_iCapacityState(0x80000000)
     {}
-};
-
-struct Owner_e3f4e0 : RefObject_e3f4e0
-{
-    Array_e3f4e0<int> m_entries;
-    Owner_e3f4e0();
-    virtual ~Owner_e3f4e0();
 };
 
 struct S_00df8990_Obj
@@ -2992,7 +2375,6 @@ struct __declspec(align(16)) CastCollector
     int unk7c;
 };
 extern int DAT_010dbaf8, DAT_010dbae4, DAT_010dbad8, DAT_010dbacc, DAT_010dbb04;
-void __cdecl FUN_00d98ca0(void*, void*, S_00df8990_Obj*, void*, void*);
 
 #include <xmmintrin.h>
 namespace fnv_00e2cfe0 {
@@ -3013,14 +2395,8 @@ extern "C"
     __m128 _mm_rsqrt_ss(__m128);
     __m128 _mm_set_ss(float);
     void _mm_store_ss(float*, __m128);
-    void _mm_store_ps(float*, __m128);
     float _mm_cvtss_f32(__m128);
-    void _WriteBarrier();
 }
-
-extern const float DAT_01011d78;
-extern const float DAT_01017718;
-extern const float DAT_01016248;
 
 struct PlaneScalar
 {
@@ -3076,34 +2452,7 @@ struct PlaneVector
     }
 };
 
-struct TrianglePlane
-{
-    PlaneVector m_00;
-    PlaneVector* m_10;
-    int m_14;
-    int m_18;
-    int m_1c;
-    PlaneVector* m_20;
-    int m_24;
-    int m_28;
-    int m_2c;
-    PlaneVector* m_30;
-    int m_34;
-    int m_38;
-    int m_3c;
-    float m_40;
-
-    void ComputePlane();
-};
-
 }  // namespace fnv_00e2cfe0
-
-float __cdecl FUN_00e52f40();
-float __cdecl FUN_00e52f50();
-float __cdecl FUN_00e52f60();
-float __cdecl FUN_00e52f70();
-float __cdecl FUN_00e52f80();
-float __cdecl FUN_00e52f90();
 
 extern "C" void _ReadWriteBarrier(void);
 struct Chain
@@ -3269,21 +2618,7 @@ struct WorkItem
     int side;
     int count;
 };
-struct PlaneList
-{
-    PackedPlane* data;
-    PackedPlane* GetEntryOffset(PlaneIndex index) throw();
-};
-struct SplitInput
-{
-    int unk00, unk04, unk08, unk0c;
-    PackedPlane* root;
-    int unk14, unk18;
-    PlaneList nodes;
-};
 S_00e3ae70_Holder* FUN_00e4e3f0() throw();
-void FUN_00e2c100(SplitInput*, PackedPlane*, PackedPlane*, int, int, int, int, int, float*, int*, int, int, int, int,
-                  int*, int*, int*, int*, PackedPlane*, PackedPlane*) throw();
 struct WorkStack
 {
     WorkItem* data;
@@ -3454,11 +2789,6 @@ __forceinline Item* growItems(Item* data, int old, int size) throw()
     constructItems(p, delta);
     return p;
 }
-struct Outputs
-{
-    Bounds out0;
-    Bounds out1;
-};
 }  // namespace fnv_00e2c8a0
 
 namespace FanSpace {
@@ -3714,19 +3044,10 @@ struct HullFace
     int m_uiContentCount;
 };
 
-struct HullWalker
-{
-    void ClearEntries();
-    HullFace* FUN_00e2d550(HullFace* start);
-};
-
 }  // namespace fnv_00e2d550
 
 namespace fnv_00e31570 {
-extern void __cdecl SwapBytesAndAdvance(int, unsigned char**);
 }  // namespace fnv_00e31570
-
-extern int DAT_010e00dc;
 
 void __cdecl FUN_00c908c0(hkMemoryAllocatorE3A3* allocator, void* array, int capacity, int elementSize);
 
@@ -3754,65 +3075,6 @@ template <class T> struct TyremarkArray
         }
         m_iElementCount = count;
     }
-};
-
-struct TyremarkWheelView : FUN_00e3a270
-{
-    TyremarkWheelView* FUN_00e3a270();
-    void FUN_00e3a1e0(int pointCount);
-};
-
-struct TyremarkVehicleView
-{
-    int unk00, unk04, unk08, unk0c, unk10, unk14, unk18, unk1c;
-    signed char m_iWheelCount;
-};
-
-struct TyremarkInfoView
-{
-    int* m_ppVirtualMethodTable;
-    unsigned short m_usMemSizeAndFlags;
-    short m_sReferenceCount;
-    float m_fMinTyremarkPointDistance;
-    float m_fMaxTyremarkPointDistance;
-    TyremarkArray<TyremarkWheelView*> m_wheels;
-
-    TyremarkInfoView* FUN_00e3a2a0(const TyremarkVehicleView* vehicle, int pointCount);
-};
-
-struct Q_cls
-{
-    char m_buf[2];
-    __declspec(noinline) unsigned char HasDelimiter();
-};
-
-struct S_Pair2b0
-{
-    unsigned int first;
-    unsigned int second;
-};
-
-struct S_Out2b0
-{
-    void FUN_00d61cc0();
-    void FUN_00d61df0(const char* separator);
-};
-
-extern char DAT_01021184[];
-extern char DAT_01011584[];
-extern char str_010ebaa4[];
-extern char str_010ebaa0[];
-
-void __cdecl WriteFormatted(S_Out2b0* out, const char* format, ...);
-
-struct S_Class2b0
-{
-    int unk00;
-    int unk04;
-    S_Pair2b0* unk08;
-    int unk0c;
-
-    void FUN_00e3f2b0(S_Out2b0* param);
 };
 
 // @f3 0x0093d830 (community match, verified in this file)

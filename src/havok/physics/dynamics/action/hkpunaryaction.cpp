@@ -23,10 +23,6 @@ void FUN_00d2b1f0::EntityRemovedCallback(int)
         m1->ProcessPointer(this);
 }
 
-extern int DAT_010cc2fc;
-extern int DAT_010ce528;
-extern int _DAT_0102e388;
-
 struct DDCC60World
 {
     void removeReference();
@@ -88,29 +84,7 @@ void FUN_00d2b2b0_class::FUN_00d2b2b0()
 }
 
 
-struct hkMemoryManager
-{
-    virtual void FUN_00d4d950_0() = 0;
-    virtual void FUN_00d4d950_1() = 0;
-    virtual void free(void* object, unsigned int size) = 0;
-};
-
-struct NineIntegerRecord
-{
-    unsigned char padding[0x10];
-    hkMemoryManager* memoryManager;
-};
-
 void FUN_00d2b2b0();
-NineIntegerRecord* _D1A0E0GetMemoryRouter();
-
-struct Action
-{
-    virtual void FUN_00d4d950_2() = 0;
-    unsigned short size;
-
-    Action* FUN_00d4d950(unsigned char flags);
-};
 
 class hkpWorld;
 
@@ -153,28 +127,6 @@ void UnaryActionHelper::SetEntity(hkpEntity* entity)
         world->FUN_00c92bd0(this, m_pEntity);
     }
 }
-
-struct FUN_00cb0a60_Field
-{
-    unsigned int value;
-    void initialize();
-};
-struct FUN_00c90510_Entity
-{
-    void RetainReference();
-};
-struct FUN_00d2b260
-{
-    void* vptr;
-    unsigned short memSizeAndFlags;
-    short referenceCount;
-    void* world;
-    void* island;
-    unsigned int userData;
-    FUN_00cb0a60_Field name;
-    FUN_00c90510_Entity* entity;
-    FUN_00d2b260(FUN_00c90510_Entity* entity, unsigned int userData);
-};
 
 class hkMemoryAllocatorXd2b2f0;
 
@@ -219,20 +171,6 @@ template <class T> class hkArrayXd2b2f0
         constructWithCopyXd2b2f0(m_data + m_iElementCount, 1, t);
         m_iElementCount++;
     }
-};
-
-class hkObjXd2b2f0
-{
-  public:
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    void* m_uiFilterValue;
-
-    void AppendPointer(hkArrayXd2b2f0<void*>& kArray);
 };
 
 // @f3twin 0x009ae940 of 0x00979da0

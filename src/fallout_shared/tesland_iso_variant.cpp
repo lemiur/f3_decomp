@@ -2,7 +2,6 @@
 // with VC9 SP1 and /MT /O2 /GS /EHsc /Gy (unit lists /MT /O2 /GS /EHsc /Gy). Declarations copied from that unit's skeleton.
 
 #include "tesland_decls.h"
-int TruncateFloatToInt(float value);
 
 struct CacheLookup
 {
@@ -85,7 +84,6 @@ void LandscapeSpecularView::FUN_00b66640(unsigned char a, unsigned char b, unsig
 
 extern "C" __declspec(dllimport) void __stdcall EnterCriticalSection(void* lpCriticalSection);
 extern "C" __declspec(dllimport) void __stdcall LeaveCriticalSection(void* lpCriticalSection);
-extern bool DAT_0126f0d0;
 
 void __cdecl FUN_00aa1460(void* p, unsigned int s);
 
@@ -1069,12 +1067,6 @@ struct CacheLock
 };
 extern CacheLock DAT_011c5f80;
 extern CacheListNode* DAT_011c5f58;
-extern unsigned int DAT_011f9ef4;
-struct CacheMemory
-{
-    void FUN_00aa4060(void*);
-};
-extern CacheMemory DAT_011f6238;
 struct CacheList
 {
     CacheListNode* head;

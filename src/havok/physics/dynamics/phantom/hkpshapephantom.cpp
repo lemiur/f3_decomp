@@ -36,18 +36,6 @@ inline void FUN_00c9ea00__VirtualObject::FUN_00c9ea00__M7(void*, float, void*)
 
 double DAT_01011588 = 0.5;
 
-struct FUN_00c9ea00__Class
-{
-    void __thiscall FUN_00c9ea00(void*);
-};
-
-
-
-struct CpuObject
-{
-    char* FUN_00c9e810();
-};
-
 void FreeListenerArrays();
 // @fnv 0x00c9e820
 void FUN_00c9e820()
@@ -234,8 +222,6 @@ struct S00c9e830_Shape
 };
 
 extern "C" void __cdecl FUN_00cb5d00(S00c9e830_Owner* owner, void* object);
-extern "C" void __cdecl FUN_00d008c0(S00c9e830_Owner* owner, void* object);
-extern "C" void __cdecl QueryEntityIntoBuffer(S00c9e830_Owner* owner, void* object);
 
 struct S00c9e830_Obj
 {
@@ -503,17 +489,6 @@ void FUN_00c9e910_Class::FUN_00c9e910(int value)
 }
 
 
-struct FUN_00c9e990_Local
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-};
 struct FUN_00c9e990_Inner
 {
     int unk00;

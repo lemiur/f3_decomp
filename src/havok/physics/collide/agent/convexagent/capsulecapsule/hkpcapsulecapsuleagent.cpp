@@ -44,10 +44,8 @@ void FUN_00d3b3d0_Class::InvokeCallbacksAndRelease(int value)
 
 typedef void (__cdecl* HandlerFn)();
 
-void __cdecl FUN_00d3b380();
 void __cdecl FUN_00d3b420();
 void __cdecl FUN_00d3bd80();
-void __cdecl FUN_00daf8e0();
 
 struct HandlerSet {
     HandlerFn m_pfnFirst;
@@ -100,7 +98,6 @@ extern "C" __m128 _mm_shuffle_ps(__m128, __m128, unsigned int);
 
 
 struct Vec4 { float x, y, z, w; };
-union MatrixRow { Vec4 scalar; __m128 simd; };
 struct Mat44 { Vec4 row0, row1, row2, row3; };
 struct JointTransform {
     float unk00;

@@ -2,26 +2,11 @@
 // src/havok/common/base/system/error/hkerror.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/common/base/system/error/hkerror.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-void __cdecl __debugbreak();
 struct CharBuffer
 {
     char* begin;
     char* end;
     unsigned int capacity;
-};
-struct FUN_00cb1600_class
-{
-    void FUN_00cb1600(char* storage, unsigned int size);
-};
-struct FUN_00cc01c0_class
-{
-    FUN_00cc01c0_class* FUN_00cc01c0(const char* text);
-    FUN_00cc01c0_class* FUN_00cc0120(const void* value);
-    FUN_00cc01c0_class* WriteInt(int value);
-};
-struct FUN_00cc00e0_class
-{
-    void FUN_00cc00e0();
 };
 struct ErrorReporter
 {
@@ -169,11 +154,6 @@ struct S_00cb17b0_RefObj
         S_00cb17b0_RefObj* b = static_cast<S_00cb17b0_RefObj*>(p);
         FUN_00c85750()->heap().ReleaseBlock(p, b->m_usMemSizeAndFlags);
     }
-};
-struct FUN_00cb17b0 : S_00cb17b0_RefObj
-{
-    FUN_00cb17b0();
-    virtual ~FUN_00cb17b0();
 };
 
 struct DiagBuffer

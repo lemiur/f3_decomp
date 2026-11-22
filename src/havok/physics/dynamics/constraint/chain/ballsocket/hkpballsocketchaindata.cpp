@@ -52,9 +52,6 @@ void hkpBallSocketChainData_00d53ca0::InitChainData(char* out)
     *(int*)(out + 0xc) = iTripleCount;
 }
 
-// FUN_00d53c90 : a one-line function - getter
-extern int g_target_00d53c90;
-
 class hkpConstraintDataD53E;
 
 struct FUN_00d21ce0_cls
@@ -173,15 +170,6 @@ class hkpConstraintDataD53D : public hkReferencedObjectD53D
     hkpConstraintDataD53D(hkFinishLoadedObjectFlagD53D flag) : hkReferencedObjectD53D(flag)
     {}
     hkUlong m_ulUserData;
-};
-
-class FUN_00d53df0 : public hkpConstraintDataD53D
-{
-  public:
-    hkpBridgeAtomsD53D m_kBridgeAtoms;
-
-    FUN_00d53df0(hkFinishLoadedObjectFlagD53D flag);
-    virtual ~FUN_00d53df0();
 };
 
 }  // namespace fnv_00d53df0
@@ -307,43 +295,8 @@ class FUN_00d53e30
 };
 
 namespace fnv_00d549d0 {
-struct MemManager
-{
-    virtual void unk00();
-    virtual void unk04();
-    virtual void unk08();
-    virtual void unk0C();
-    virtual void deallocateChunk(void* p, int nbytes);
-};
-
-struct ThreadContext
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    MemManager* memory;
-};
 
 void* FUN_00c85750();
-
-struct Elem
-{
-    int a, b;
-};
-
-struct DummyClass
-{
-    int unk00;
-    Elem* data1;
-    int size1;
-    int cap1;
-    Elem* data2;
-    int size2;
-    int cap2;
-
-    void ClearArrays();
-};
 
 }  // namespace fnv_00d549d0
 
@@ -362,28 +315,10 @@ struct Router_00d53d30
     void* m_10;
 };
 
-struct Pair_00d53d30
-{
-    __m128 a;
-    __m128 b;
-};
-
 namespace fnvc_adapt {
 Router_00d53d30* FUN_00c85750();
 }
 void ResizeAudioStream(void* alloc, void* arr, int elemSize);
-
-struct Chain_00d53d30
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    hkArray<Pair_00d53d30> m_aiIndexedValues;
-    void Push(const __m128& a, const __m128& b);
-};
 
 extern "C"
 {
@@ -435,10 +370,6 @@ template <class T> struct ChainValue
     {
         return val();
     }
-};
-struct QueryResultSchema
-{
-    ChainValue<void*> m_pQueryResultSchema;
 };
 struct QuantizedBoundsData;
 struct ChainStep
@@ -652,14 +583,4 @@ struct OffsetForChain
 };
 extern "C"
 {
-    void AppendEventRecord(const PortQuery*, QueryResultSchema*, void*, int);
-    char* FUN_00dd13c0(void*);
-    void FUN_00dcee70(PortQuery*);
-    void FUN_00dcfc00(const PortVector*, const PortVector*, float, PortQuery*, char*);
-    void FUN_00dd0ad0(int, float, float, float, OffsetForChain*, const QuantizedBoundsData*, char*, const PortQuery*,
-                      QueryResultSchema*);
 }
-struct ProbeRoot : public hkpBallSocketChainData
-{
-    void FUN_00d53e80(const PortQuery&, QueryResultSchema&);
-};

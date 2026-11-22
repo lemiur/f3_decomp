@@ -215,11 +215,9 @@ ObjA513* ObjA513::FUN_00a51360(CloningProcessA513& cloning)
 }
 
 extern "C" void* g_011f4014;
-void* __cdecl FUN_00a51270();
 
 void __stdcall FUN_00a50960(StrArr*);
 char* __cdecl _FUN_00a7d330(const char*);
-void __stdcall FUN_00a51480(StrArr* pkStrings);
 
 extern void* FUN_00aa13e0(unsigned int bytes) throw();
 

@@ -4,10 +4,6 @@
 
 #include "havok/hkpShapeCollection.h"
 
-class hkPackedNiTriStripsShape;
-class hkNiTriStripsShape;
-class hkpListShape;
-
 class hkpShapeCollection_L
 {
   public:
@@ -25,9 +21,6 @@ int hkpShapeCollection_L::FUN_00d213d0()
     return 0;
 }
 
-extern char const* const DAT_01268910;
-void __cdecl FUN_00c90360(char const* const* first, char const* const* second);
-
 // @fnv 0x00d213f0
 void __stdcall FUN_00d213f0(int, int)
 {}
@@ -35,34 +28,6 @@ void __stdcall FUN_00d213f0(int, int)
 // @fnv 0x00d21400
 void __stdcall FUN_00d21400(int a1)
 {}
-
-struct Allocator
-{
-    virtual void vfn0();
-    virtual void vfn4();
-    virtual void Free(void* pointer, unsigned short size);
-};
-struct MemorySystem
-{
-    unsigned int field00;
-    unsigned int field04;
-    unsigned int field08;
-    unsigned int field0c;
-    Allocator* allocator;
-};
-extern char DAT_010c6fb0;
-extern char DAT_0102e388;
-struct Holder
-{
-    void* vtable;
-    unsigned short memSizeAndFlags;
-    unsigned short referenceCount;
-    unsigned int userData;
-    unsigned int shapeType;
-    void* shapeVtable;
-    MemorySystem* __thiscall FUN_00c85750();
-    Holder* __thiscall Destroy(unsigned char flags);
-};
 
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long dwTlsIndex);
 extern "C" unsigned __int64 __rdtsc(void);
@@ -235,7 +200,6 @@ namespace fnv_00d217d0 {
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long dwIndex);
 
 extern "C" unsigned int DAT_0126835c;
-extern "C" char str_010ce1f8[];
 extern "C" char str_010c41f8[];
 
 class Arg0_L;
@@ -244,20 +208,6 @@ class Arg2_L;
 class ShapeBuf_L;
 struct Ctx_L;
 class Owner_L;
-
-struct ProfRec_L
-{
-    void* id;
-    unsigned int time;
-    int unk08;
-};
-struct ProfSlot_L
-{
-    int unk00;
-    ProfRec_L* head;
-    int unk08;
-    ProfRec_L* end;
-};
 
 class Shape_L
 {
@@ -506,13 +456,4 @@ struct WeldingAndType
         m_bDisableWelding = 0;
         m_eCollectionType = type;
     }
-};
-
-class FUN_00d21410 : public hkpShape_ctor, public ShapeContainerLite
-{
-  public:
-    WeldingAndType m_info;
-    FUN_00d21410(int type, char collectionType);
-    ~FUN_00d21410();
-    virtual int FUN_00d213d0();
 };

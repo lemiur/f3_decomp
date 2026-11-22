@@ -55,55 +55,6 @@ struct FUN_00c9c3c0_Class
     int GetEntryAt(int index);
 };
 
-struct FUN_00c9c1a0_Value
-{
-    int m_00;
-    int m_04;
-    int m_08;
-};
-
-struct FUN_00c9c1a0_Item
-{
-    FUN_00c9c1a0_Value* m_00;
-    int m_04;
-};
-
-struct FUN_00c9c1a0_Class
-{
-    char m_auiShapeKeys[0x60];
-    FUN_00c9c1a0_Item* m_60;
-    int m_64;
-
-    int __thiscall FindValueByKey();
-};
-
-struct FUN_00c9d490_Allocator
-{
-    virtual void m_00() = 0;
-    virtual void m_04() = 0;
-    virtual void m_08(void* object, unsigned short type) = 0;
-};
-
-struct FUN_00c9d490_Router
-{
-    void* m_00;
-    void* m_04;
-    void* m_08;
-    void* m_0c;
-    FUN_00c9d490_Allocator* m_10;
-};
-
-extern FUN_00c9d490_Router* __cdecl _D1A0E0GetMemoryRouter();
-
-struct FUN_00c9d490_Class
-{
-    void* m_00;
-    unsigned short m_04;
-
-    void FUN_00c9cf60();
-    void* FUN_00c9d490(int flags);
-};
-
 struct CpuObject
 {
     char* FUN_00c9c030();
@@ -160,8 +111,6 @@ struct FUN_00c9bfa0_Class
     int m_10;
     void FUN_00c9bfa0();
 };
-
-void __cdecl FUN_00d1a330(int a1, int* a2, int a3);
 
 // If m_08 and m_10 are set, calls FUN_00d1a330 with m_08->m_78, a pointer to this, and 1.
 // @f3 0x0090af70 (community match, verified in this file)
@@ -276,17 +225,6 @@ void hkpEntityC9C3::FUN_00c9c300()
 }
 
 
-struct WorldOp
-{
-    unsigned char m_type;
-    void* m_pEntity;
-};
-
-struct World_Class : public FUN_00c9c3c0_Class
-{
-    void FUN_00c91160(WorldOp* op);
-};
-
 struct FUN_00c9c240_holder : public hkpEntity
 {
     void FUN_00c9c240();
@@ -312,8 +250,6 @@ int FUN_00c9c390_Class::GetEntry(int index)
 
 
 class GlobalObjectO2_00d472a0;
-extern GlobalObjectO2_00d472a0 g_012688c8;
-extern GlobalObjectO2_00d472a0 g_01268808;
 
 class hkStatisticsCollector
 {
@@ -336,9 +272,6 @@ class hkpEntityExtendedListeners
     hkpEntitySmallArraySerializeOverrideType m_kContactListenerArray;
     hkpEntitySmallArraySerializeOverrideType m_kEntityListenerArray;
 };
-
-void __cdecl WriteReflectedMembers(const void* obj, const GlobalObjectO2_00d472a0* cls,
-                                   hkStatisticsCollector* collector);
 
 class hkpEntityStats : public hkpEntity
 {
@@ -600,97 +533,6 @@ void hkOwnerC9C5::AddSlot(void* p) {
 }
 
 
-struct FUN_00c9c860_Node
-{
-    int m_00;
-    int m_04;
-    int m_08;
-    int m_0c;
-    int m_10;
-    int m_14;
-    int m_18;
-};
-struct FUN_00c9c860_Slot
-{
-    FUN_00c9c860_Node* m_00;
-    int m_04;
-    int m_08;
-    int m_0c;
-    int m_10;
-    int m_14;
-    int m_18;
-    int m_1c;
-    unsigned short m_20;
-    unsigned short m_22;
-    int m_24;
-    int m_28;
-    int m_2c;
-};
-struct FUN_00c9c860_Shell
-{
-    int m_00;
-    int m_04;
-    int m_08;
-    int m_0c;
-    int m_10;
-    int m_14;
-    int m_18;
-    int m_1c;
-    int m_20;
-    int m_24;
-    int m_28;
-    int m_2c;
-    int m_30;
-    int m_34;
-    int m_38;
-    int m_3c;
-    int m_40;
-    int m_44;
-    int m_48;
-    int m_4c;
-    int m_50;
-    int m_54;
-    int m_58;
-    int m_5c;
-    int m_60;
-    int m_64;
-    int m_68;
-    int m_6c;
-    int m_70;
-    int m_74;
-    int m_78;
-    int m_7c;
-    int m_80;
-    int m_84;
-    int m_88;
-    int m_8c;
-    int m_90;
-    int m_94;
-    int m_98;
-    int m_9c;
-    int m_a0;
-    int m_a4;
-    int m_a8;
-    FUN_00c9c860_Slot* m_ac;
-    unsigned short m_b0;
-    FUN_00c9c860_Node** m_b4;
-    int m_b8;
-    int m_bc;
-    int m_c0;
-    int m_c4;
-    int m_c8;
-    int m_cc;
-    int m_d0;
-    int m_d4;
-    int m_d8;
-    int m_dc;
-    int m_e0;
-    int m_e4;
-    unsigned char m_e8;
-    void UpdateNodeSlotIndices();
-};
-void FUN_00c9d250(void* a1, int a2, int a3, void* a4);
-
 class hkpShape;
 class hkLocalFrame;
 class hkpConstraintInstance;
@@ -800,13 +642,6 @@ class __declspec(novtable) FUN_00c9cce0 : public hkpEntityBaseC9CC
 };
 
 extern int DAT_010c59f4;
-extern int DAT_010c6bec;
-
-struct MotionStateObject
-{
-    void* volatile m_ppVirtualMethodTable;
-    MotionStateObject* FUN_00c9d100(int enabled);
-};
 
 struct FnvCpu_FUN_00c9d160_CpuAllocator
 {
@@ -823,94 +658,8 @@ struct FnvCpu_FUN_00c9d160_CpuAllocatorHolder
     FnvCpu_FUN_00c9d160_CpuAllocator* allocator;
 };
 FnvCpu_FUN_00c9d160_CpuAllocatorHolder* __cdecl FUN_00c85750();
-struct FnvCpu_FUN_00c9d160_CpuObject
-{
-    unsigned int unk00;
-    unsigned short size;
-    void FUN_00d1dff0();
-    FnvCpu_FUN_00c9d160_CpuObject* FUN_00c9d160(unsigned int flags);
-};
 
 extern int DAT_010c59f4;
-extern int DAT_010c6d54;
-struct FUN_00c9d190
-{
-    void* volatile m_vtbl;
-    int unk004;
-    int unk008;
-    int unk00c;
-    int unk010;
-    int unk014;
-    int unk018;
-    int unk01c;
-    int unk020;
-    int unk024;
-    int unk028;
-    int unk02c;
-    int unk030;
-    int unk034;
-    int unk038;
-    int unk03c;
-    int unk040;
-    int unk044;
-    int unk048;
-    int unk04c;
-    int unk050;
-    int unk054;
-    int unk058;
-    int unk05c;
-    int unk060;
-    int unk064;
-    int unk068;
-    int unk06c;
-    int unk070;
-    int unk074;
-    int unk078;
-    int unk07c;
-    int unk080;
-    int unk084;
-    int unk088;
-    int unk08c;
-    int unk090;
-    int unk094;
-    int unk098;
-    int unk09c;
-    int unk0a0;
-    int unk0a4;
-    int unk0a8;
-    int unk0ac;
-    int unk0b0;
-    int unk0b4;
-    int unk0b8;
-    int unk0bc;
-    int unk0c0;
-    int unk0c4;
-    int unk0c8;
-    int unk0cc;
-    int unk0d0;
-    int unk0d4;
-    int unk0d8;
-    int unk0dc;
-    int unk0e0;
-    int unk0e4;
-    int unk0e8;
-    int unk0ec;
-    int unk0f0;
-    int unk0f4;
-    int unk0f8;
-    int unk0fc;
-    int unk100;
-    int unk104;
-    int unk108;
-    int unk10c;
-    int unk110;
-    int unk114;
-    short unk118;
-    short unk11a;
-    short unk11c;
-    short unk11e;
-    FUN_00c9d190(int flag);
-};
 
 inline void* operator new(unsigned int, void* p)
 {
@@ -1011,13 +760,6 @@ struct FnvCpu_FUN_00c9d460_CpuAllocatorHolder
     FnvCpu_FUN_00c9d460_CpuAllocator* allocator;
 };
 FnvCpu_FUN_00c9d460_CpuAllocatorHolder* __cdecl FUN_00c85750();
-struct FnvCpu_FUN_00c9d460_CpuObject
-{
-    unsigned int unk00;
-    unsigned short size;
-    void FUN_00c9d3b0();
-    FnvCpu_FUN_00c9d460_CpuObject* FUN_00c9d460(unsigned int flags);
-};
 }  // namespace fnv_00c9d460
 
 namespace fnv_00d1f780 {
@@ -1061,108 +803,6 @@ template <class T> class hkArrayD1F7
         m_data = 0;
         m_iCapacityState = 0x80000000;
     }
-};
-
-class FUN_00d08130
-{
-  public:
-    virtual void v00();
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5C;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6C;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7C;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8C;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9C;
-    int unkA0;
-    int unkA4;
-    int unkA8;
-    int unkAC;
-    int unkB0;
-    int unkB4;
-    int unkB8;
-    int unkBC;
-    int unkC0;
-    int unkC4;
-    int unkC8;
-    int unkCC;
-    int unkD0;
-    int unkD4;
-    int unkD8;
-    int unkDC;
-    int unkE0;
-    int unkE4;
-    int unkE8;
-    int unkEC;
-    int unkF0;
-    int unkF4;
-    int unkF8;
-    int unkFC;
-    int unk100;
-    int unk104;
-    int unk108;
-    int unk10C;
-    int unk110;
-    int unk114;
-    int unk118;
-    int unk11C;
-    int unk120;
-    int unk124;
-    int unk128;
-    int unk12C;
-    int unk130;
-    int unk134;
-    int unk138;
-    int unk13C;
-    int unk140;
-    int unk144;
-    int unk148;
-    int unk14C;
-    int unk150;
-    int unk154;
-    int unk158;
-    int unk15C;
-    ~FUN_00d08130() throw();
-};
-
-class FUN_00d1f780 : public FUN_00d08130
-{
-  public:
-    virtual ~FUN_00d1f780() throw();
-
-    hkArrayD1F7<void*> m_ppData;
 };
 
 }  // namespace fnv_00d1f780
@@ -1211,28 +851,6 @@ void S00c92a80_cls::FUN_00c92a80(int a0, int a1)
     S00c92a80_Range r(b, a);
     obj->v1c(a0, a1, this, &r, 1);
 }
-
-struct c9bfd0_ptr
-{
-    int p00, p04, p08, p0c, p10, p14, p18, p1c, p20;
-    unsigned short p24;
-    unsigned char p26;
-};
-
-struct c9bfd0_base
-{
-    int u00, u04, u08, u0c, u10, u14, u18, u1c;
-    int u20, u24, u28, u2c, u30, u34, u38, u3c;
-    int u40, u44, u48, u4c, u50, u54, u58, u5c;
-    int u60, u64, u68, u6c, u70, u74, u78, u7c;
-    int u80, u84, u88, u8c, u90, u94, u98, u9c;
-    int uA0, uA4, uA8, uAc, uB0, uB4, uB8, uBc;
-    int uC0, uC4, uC8;
-    c9bfd0_ptr* uCc;
-    c9bfd0_ptr FUN_00c9bfd0();
-};
-
-extern "C" c9bfd0_ptr* c9bfd0_out_val(void);
 
 struct FUN_00c9bff0_Class
 {
@@ -2380,28 +1998,6 @@ template <class T> class hkArrayC9C7
     }
 };
 
-class hkpConstraintInstanceC9C7;
-
-struct hkConstraintInternalC9C7
-{
-    hkpConstraintInstanceC9C7* m_pHavokConstraint;
-    int unk04, unk08, unk0C, unk10, unk14, unk18, unk1C, unk20, unk24, unk28, unk2C;
-};
-
-class hkpEntityC9C7
-{
-  public:
-    int unk000[0xac / 4];
-    hkConstraintInternalC9C7* m_eSmallArraySerializeOverrideType;
-    unsigned short m_constraintsMasterSize;
-    unsigned short m_constraintsMasterCapacity;
-    hkpConstraintInstanceC9C7** m_kSlaveConstraints;
-    int m_constraintsSlaveSize;
-
-    int FUN_00c9c380();
-    void CollectConstraints(hkArrayC9C7<hkpConstraintInstanceC9C7*>& constraints);
-};
-
 }  // namespace fnv_00c9c7c0
 
 class hkLocalFrame;
@@ -2410,10 +2006,6 @@ class hkpEntityExtendedListeners;
 extern int DAT_010c59f4;
 extern const int DAT_010c6c64;
 extern const int DAT_010c6f7c;
-struct hkFinishLoadedObjectFlagC9CE
-{
-    int m_bFinishing;
-};
 struct hkSmallArrayC9CE : public hkpEntitySmallArraySerializeOverrideType
 {
     hkSmallArrayC9CE()
@@ -2459,11 +2051,6 @@ class FUN_00c9d1c0
 {
   public:
     FUN_00c9d1c0(int flag) throw();
-};
-class FUN_00c9d100
-{
-  public:
-    FUN_00c9d100(int flag) throw();
 };
 class FUN_00c9d130
 {
@@ -2623,12 +2210,6 @@ struct FUN_00c9c700_Array
     int unk08;
     unsigned short unk0C;
     unsigned short unk0E;
-};
-
-struct FUN_00c9c700_Allocator
-{
-    virtual void slot00();
-    virtual void* slot04(int size);
 };
 
 struct FUN_00c9c700_Class
@@ -2926,7 +2507,6 @@ class hkpSimulationIslandQ
     }
 };
 
-extern float DAT_0104da48;
 void __cdecl PropagateStateToChildren(FUN_00c9c3c0_Class* world, hkpSimulationIslandQ* island);
 void __cdecl AddItemToContainer(FUN_00c9c3c0_Class* world, hkpSimulationIslandQ* island);
 // If the island is active: runs PropagateStateToChildren when split-check or sparse is set, sets each entity's reference position w to FLT_MAX, then calls AddItemToContainer.
@@ -3211,13 +2791,6 @@ class hkpBoxMotion : public hkpMotion
 
 namespace FUN_00c9d1f0 {
 
-class hkpThinBoxMotion : public hkC9D1::hkpMotion
-{
-  public:
-    hkpThinBoxMotion(hkC9D1::FinishingFlag flag);
-    virtual ~hkpThinBoxMotion();
-};
-
 }
 }  // namespace fnv_00c9d1f0
 
@@ -3240,20 +2813,11 @@ struct FnvRouter
 };
 extern FnvRouter* __cdecl FUN_00c85750();
 
-struct FnvRA
-{
-    virtual ~FnvRA();
-    int m4;
-};
 struct FnvRB
 {
     int x;
 };
 extern void __stdcall FUN_00c9c140(FnvRB*);
-struct FnvRef : FnvRA, FnvRB
-{
-    virtual ~FnvRef();
-};
 struct FnvSmall
 {
     void** data;
@@ -3303,12 +2867,6 @@ struct FnvSmall
         return false;
     }
 };
-struct FnvArray
-{
-    void* data;
-    int size;
-    int flags;
-};
 struct FnvTwo
 {
     FnvSmall one;
@@ -3321,137 +2879,6 @@ struct FnvTwo
         FnvMem* mem = router->heap;
         mem->freeArray(this, 16);
     }
-};
-struct EntityRebuild
-{
-    int unk0;
-    int unk4;
-    int unk8;
-    int unkc;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5c;
-    void* p60;
-    int n64;
-    int f68;
-    int unk6c;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7c;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8c;
-    int unk90;
-    int unk94;
-    FnvRef* p98;
-    int unk9c;
-    int unka0;
-    int unka4;
-    int unka8;
-    FnvSmall master;
-    FnvArray slave;
-    FnvArray runtime;
-    int unkcc;
-    int unkd0;
-    int unkd4;
-    int unkd8;
-    int unkdc;
-    int unke0;
-    int unke4;
-    int unke8;
-    int unkec;
-    int unkf0;
-    int unkf4;
-    int unkf8;
-    int unkfc;
-    int unk100;
-    int unk104;
-    int unk108;
-    int unk10c;
-    int unk110;
-    int unk114;
-    int unk118;
-    int unk11c;
-    int unk120;
-    int unk124;
-    int unk128;
-    int unk12c;
-    int unk130;
-    int unk134;
-    int unk138;
-    int unk13c;
-    int unk140;
-    int unk144;
-    int unk148;
-    int unk14c;
-    int unk150;
-    int unk154;
-    int unk158;
-    int unk15c;
-    int unk160;
-    int unk164;
-    int unk168;
-    int unk16c;
-    int unk170;
-    int unk174;
-    int unk178;
-    int unk17c;
-    int unk180;
-    int unk184;
-    int unk188;
-    int unk18c;
-    int unk190;
-    int unk194;
-    int unk198;
-    int unk19c;
-    int unk1a0;
-    int unk1a4;
-    int unk1a8;
-    int unk1ac;
-    int unk1b0;
-    int unk1b4;
-    int unk1b8;
-    int unk1bc;
-    int unk1c0;
-    int unk1c4;
-    int unk1c8;
-    int unk1cc;
-    int unk1d0;
-    int unk1d4;
-    int unk1d8;
-    int unk1dc;
-    int unk1e0;
-    int unk1e4;
-    int unk1e8;
-    int unk1ec;
-    int unk1f0;
-    int unk1f4;
-    int unk1f8;
-    int unk1fc;
-    FnvSmall contact;
-    FnvSmall actions;
-    int localFrame;
-    FnvTwo* extended;
-    void FUN_00c9c8f0();
 };
 }  // namespace fnv_00c9c8f0
 

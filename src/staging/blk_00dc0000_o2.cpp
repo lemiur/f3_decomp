@@ -82,12 +82,6 @@ void __thiscall FUN_00dd5170_class::CopySixInts(const int* pSource)
     h = pSource[5];
 }
 
-struct FUN_00dd8c20_class
-{
-    int m_field;
-    int SumListValues();
-};
-
 template <class K, class V, class O> class HashEntryTable
 {
   public:
@@ -95,11 +89,6 @@ template <class K, class V, class O> class HashEntryTable
 };
 template <class K> struct KeyMarker
 {
-};
-
-struct FUN_00ddf050_cls
-{
-    void ClearContainer();
 };
 
 extern "C" void __cdecl FUN_00d51760(int* p1, int* p2);
@@ -142,16 +131,6 @@ void __thiscall FUN_00dd4b70_class::FUN_00dd4b70(unsigned char value)
     *(unsigned char*)(this + 0x64) = value;
 }
 
-extern int DAT_0102e388;
-
-struct FUN_00dd51d0_class
-{
-    int m_00;
-    int m_04;
-    int m_08;
-    void FUN_00dd51d0();
-};
-
 struct FUN_00ddfb70_cls
 {
     int m_00;
@@ -166,21 +145,6 @@ FUN_00ddfb70_cls* FUN_00ddfb70_cls::FUN_00ddfb70()
     m_04 = 8;
     return this;
 }
-
-struct FUN_00dccb70_Class
-{
-    void SetTableValue(int arg1, unsigned short value);
-};
-
-struct CountArray
-{
-    int m_00;
-    int m_04;
-    int m_08;
-    void __thiscall EnsureCapacity(void* p, int n);
-};
-
-void* __cdecl _D1A0E0GetMemoryRouter();
 
 struct FUN_00dc9e70_Class
 {
@@ -199,7 +163,6 @@ struct FUN_00dc9e70_Class
 extern "C" void _ReadWriteBarrier();
 struct Heap543 {void* FUN_008f6d90(void*,unsigned int,int);};
 namespace Globals543 {extern int DAT_00e84ed4,DAT_00e84ec4,DAT_00e84eb4,DAT_00dcc494;extern unsigned long DAT_010f3170;extern Heap543* (__stdcall* const DAT_00d9b080)(unsigned long);}
-struct Header543 {void* primary;unsigned int unk04;void* secondary;};
 struct Capacity543 {unsigned int count:30;unsigned int flags:2;};
 struct View543 {
     void* primary;unsigned int unk04;void* secondary;void* data;int count,capacity;
@@ -242,16 +205,6 @@ FUN_00dcc5a0_class* FUN_00dcc5a0_class::FUN_00dcc5a0(int arg)
     return this;
 }
 
-struct FUN_00cb0a70
-{
-    void __thiscall m(int);
-};
-
-struct S_00d49310_Lock
-{
-    ~S_00d49310_Lock();
-};
-
 extern int DAT_010d77b4[];
 extern void __cdecl _Deallocate(void* p);
 
@@ -292,10 +245,6 @@ void __thiscall FUN_00dda6b0_Class::WriteUInt32Triple(const unsigned int* auiVal
 struct D2B3D0Map
 {
     void clear();
-};
-struct FUN_00ddf030_Class
-{
-    void __thiscall FUN_00ddf030(int arg);
 };
 
 namespace fnv_00ddf040 {
@@ -358,8 +307,6 @@ FUN_00dc1670_cls* FUN_00dc1670_cls::FUN_00dc1670()
     return this;
 }
 
-void __stdcall FUN_00dd8fe0(float* out, int a, int b);
-
 struct ArrayBlock
 {
     unsigned int* values;
@@ -377,12 +324,6 @@ struct AllocatorState
 };
 extern "C" AllocatorState* __cdecl FUN_00c85750();
 extern "C" void __cdecl FUN_00c908c0(void*, ArrayBlock*, int, int);
-struct ArrayHost
-{
-    int unk00, unk04, unk08;
-    ArrayBlock array;
-    void ResizeArray(int desired);
-};
 
 namespace fnv_00dc9e20 {
 struct AllocatorIface
@@ -405,24 +346,6 @@ struct AllocHolder
 
 AllocHolder* FUN_00c85750();
 void FUN_00c908c0(AllocatorIface* alloc, void* arr, unsigned int newCap, int elemSize);
-
-struct DwordArray
-{
-    unsigned int* m_pBuffer;
-    unsigned int m_uiLogicalSize;
-    unsigned int m_iReserved;
-};
-
-class FUN_00dc9e20_cls
-{
-  public:
-    int unk00;
-    int unk04;
-    int unk08;
-    DwordArray m_aiIndexedValues;
-
-    void ReserveDwordArray(int count);
-};
 
 }  // namespace fnv_00dc9e20
 
@@ -539,16 +462,6 @@ struct SpawnedBlob
     void* Init(int a1, int a2, int a3);
 };
 
-struct FUN_00dcc6a0_cls
-{
-    void* m_vptr;
-    unsigned short m_w04;
-    unsigned short m_w06;
-    void* m_p08;
-
-    FUN_00dcc6a0_cls* FUN_00dcc6a0(int a1, int a2);
-};
-
 }  // namespace fnv_00dcc6a0
 
 namespace fnv_00dcc6f0 {
@@ -577,16 +490,6 @@ struct SpawnedBlob
     unsigned short m_w04;
     unsigned short unk06;
     void* Init(int a1, int a2);
-};
-
-struct FUN_00dcc6f0_cls
-{
-    void* m_vptr;
-    unsigned short m_w04;
-    unsigned short m_w06;
-    void* m_p08;
-
-    FUN_00dcc6f0_cls* FUN_00dcc6f0(int a1);
 };
 
 }  // namespace fnv_00dcc6f0
@@ -632,17 +535,6 @@ struct S_00dcc9c0_StringBuf
     }
 };
 
-struct S_00dcc9c0_Target
-{
-    void __thiscall FUN_00cb0c10(const char* name) throw();
-};
-
-struct S_00dcc9c0_Class
-{
-    void __thiscall ReadToken(S_00dcc9c0_StringBuf* buf) throw();
-    S_00dcc9c0_Class* __thiscall FUN_00dcc9c0(S_00dcc9c0_Target* target) throw();
-};
-
 }  // namespace fnv_00dcc9c0
 
 extern int g_unk01269bb4;
@@ -677,13 +569,6 @@ struct FnvCpu_FUN_00dcd480_CpuAllocatorHolder
     FnvCpu_FUN_00dcd480_CpuAllocator* allocator;
 };
 FnvCpu_FUN_00dcd480_CpuAllocatorHolder* __cdecl FUN_00c85750();
-struct FnvCpu_FUN_00dcd480_CpuObject
-{
-    unsigned int unk00;
-    unsigned short size;
-    void FUN_00d4bd60();
-    FnvCpu_FUN_00dcd480_CpuObject* FUN_00dcd480(unsigned int flags);
-};
 }  // namespace fnv_00dcd480
 
 struct FUN_00dced30_cls
@@ -704,21 +589,6 @@ int __cdecl FUN_00dced40()
 {
     return reinterpret_cast<int>(&DAT_01269c44);
 }
-
-struct FUN_00d4dfc0_class
-{
-    void __thiscall FUN_00d4dfc0(unsigned int value);
-};
-
-struct S_00dd4bb0_Class
-{
-    unsigned char unk00;
-    unsigned char unk01;
-    unsigned char unk02;
-    unsigned char unk03;
-    unsigned char unk04;
-    unsigned int GetPackedValue();
-};
 
 extern float DAT_0101e2bc;
 extern float DAT_010181bc;
@@ -820,99 +690,11 @@ unsigned char* __cdecl LessThan(unsigned char* output, const unsigned int* left,
     return output;
 }
 
-// Constructor for the object handled by FUN_00dd7110.
-//
-// The class holds a run of scalar members; every one of them is zeroed by the
-// constructor except m_iUninitialised08, which is left for the caller to fill
-// in later.  The ten members cleared through the initialiser list are stored
-// first (in declaration order), the two cleared in the constructor body are
-// stored afterwards.
-struct FUN_00dd7110_cls
-{
-    int m_i00;
-    int m_i04;
-    int m_i08;
-    int m_i0c;
-    int m_i10;
-    int m_i14;
-    int m_i18;
-    int m_i1c;
-    int m_i20;
-    int m_i24;
-    int m_i28;
-    int m_i2c;
-    int m_i30;
-    FUN_00dd7110_cls();
-};
-
-struct FUN_00dd8bc0_Node
-{
-    int m_00;
-    FUN_00dd8bc0_Node* m_next;
-    int m_08;
-    int m_0c;
-    unsigned char* m_pRayStart;
-    unsigned char* m_kRayEnd;
-};
-
-struct FUN_00dd8bc0_cls
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5C;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6C;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7C;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8C;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9C;
-    int unkA0;
-    FUN_00dd8bc0_Node m_kNode;
-    void FUN_00dd83a0();
-    unsigned int GetUsedMemory();
-};
-
 struct S_00dd8cf0_Ret
 {
     bool v;
     S_00dd8cf0_Ret()
     {}
-};
-struct S_00dd8cf0
-{
-    bool __thiscall IsValidChunk(int v);
-    S_00dd8cf0_Ret __thiscall AllMatch(const int* arr, int n);
 };
 
 extern int DAT_010d7c34;
@@ -1081,7 +863,6 @@ struct S_00dd8fa0_Caller
 };
 
 extern "C" S_00dd8fa0_Caller* __cdecl FUN_00c85750();
-extern "C" S_00dd8fa0_Vtable DAT_010d7c58;
 
 }  // namespace fnv_00dd8fa0
 
@@ -1165,27 +946,6 @@ class DD91A0ReferencedObject
     short m_sReferenceCount;
 };
 
-class DD91A0Shape : public DD91A0ReferencedObject
-{
-  public:
-    DD91A0Shape(int a, int b, int type) throw();
-
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-};
-
-class FUN_00dd91a0 : public DD91A0ReferencedObject
-{
-  public:
-    FUN_00dd91a0(int a, int b, unsigned char flag);
-
-    DD91A0Shape* m_pCollisionShape;
-    unsigned char m_flag;
-};
-
 }  // namespace fnv_00dd91a0
 
 namespace fnv_00ddc160 {
@@ -1229,55 +989,7 @@ class DDC160ReferencedObject
     static void operator delete(void* p);
 };
 
-class DDC160Interface
-{
-  public:
-    virtual void unk00();
-};
-
-class DDC160Impl : public DDC160ReferencedObject, public DDC160Interface
-{
-  public:
-    DDC160Impl(void* pvInfo) throw();
-
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-};
-
 }  // namespace fnv_00ddc160
-
-struct FUN_00ddfbb0_cls
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int m_10;
-    void FUN_00ddfbb0();
-};
-
-void __cdecl FUN_00c90510();
-
-struct FUN_00dcc130_Class
-{
-    int* m_vtbl;
-    unsigned short unk04;
-    unsigned short enabled06;
-    int unk08;
-    int* __thiscall FUN_00dcc130(int* value);
-};
 
 struct S_00dcc740_Cls
 {
@@ -1314,20 +1026,6 @@ S_00dcc740_Cls* S_00dcc740_Cls::ReadSignedShort(unsigned short* out)
 
 extern void(__stdcall* DAT_00fdf05c)(int*);
 extern void(__stdcall* DAT_00fdf100)(int*);
-
-struct Lock_dd9
-{
-    int unk;
-    int unkCur;
-    int unkValue;
-    int unk0c;
-    int uNewnk;
-    int uTmpnk;
-    int* m_pkCriticalSection;
-    int FindEntry(int iKey);
-    int InvokeRecord(int iIndex, int iArg);
-    int FUN_00dd9330(int iKey, int iArg);
-};
 
 extern int DAT_010d7db8;
 
@@ -1544,12 +1242,6 @@ struct Block388
         return reinterpret_cast<const unsigned char*>(&sizeAndFlags)[0];
     }
 };
-struct Allocator388
-{
-    unsigned int unk00, unk04, unk08;
-    Block388* lower;
-    Bool388 ValidateBlock(Block388* block);
-};
 
 // @fnv 0x00dd8fd0
 static __declspec(noinline) void FUN_00dd8fd0(unsigned char* a, unsigned char* b)
@@ -1619,37 +1311,6 @@ template <class T> class hkArrayDDFB
         new (m_data + m_iElementCount) T(t);
         m_iElementCount++;
     }
-};
-
-class hkOwnerDDFB
-{
-  public:
-    int unk00;
-    int unk04;
-    hkArrayDDFB<hkPairDDFB> m_pairs;
-
-    void AddPairIfKeyAbsent(void* object, void* key);
-};
-
-struct S_00dcb0b0_Target
-{
-    virtual void v0();
-    virtual void v1();
-    virtual void v2();
-    virtual void v3();
-    virtual void v4();
-    virtual void v5();
-    virtual void v6();
-};
-
-struct S_00dcb0b0_Class
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    S_00dcb0b0_Target* unk0C;
-
-    void __thiscall CallTargetV6();
 };
 
 struct stub_cls
@@ -1777,38 +1438,6 @@ FUN_00dcc860_Class* FUN_00dcc860_Class::ReadInt64(FNVInt64* out)
     return this;
 }
 
-struct S00dcd1b0_Pool
-{
-    virtual void v00();
-    virtual void v01();
-    virtual void v02();
-    virtual void v03();
-    virtual void ReturnMemory(void* p, int size);
-};
-
-struct S00dcd1b0_Obj
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    char* m_34;
-    int m_38;
-    int unk3C;
-    ArrayBlock m_40;
-    unsigned char m_4c;
-    void FUN_00dcd1b0(int value);
-};
-
 struct S00dcd270_Rec
 {
     int unk00;
@@ -1835,25 +1464,6 @@ struct S00dcd270_Arr
     int m_cap;
 };
 extern "C" void __cdecl ResizeAudioStream(void*, S00dcd270_Arr*, int);
-extern char DAT_01267e30;
-struct S00dcd270_cls
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    S00dcd270_Arr arr;
-    S00dcd270_Rec* AddRecord(const S00dcd270_Rec* a0);
-};
 
 class hkBoolDD8
 {
@@ -1904,15 +1514,6 @@ struct MemChunkDD8
         return (const MemChunkDD8*)((const char*)in - PAYLOAD_OFFSET);
     }
 };
-class hkLargeBlockAllocatorDD8
-{
-  public:
-    int unk00;
-    int unk04;
-    int unk08;
-    const MemChunkDD8* m_pMemoryChunk;
-    bool IsValidChunk(const void* in) const;
-};
 
 extern "C" int FUN_00d86940();
 
@@ -1924,22 +1525,6 @@ int FUN_00dc1be0()
         return r;
     return 1;
 }
-
-struct S_00dc6fc0_Target
-{
-    virtual void v00();
-    virtual int v01();
-};
-
-struct S_00dc6fc0_Class
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    S_00dc6fc0_Target* m_0c;
-
-    int __thiscall FUN_00dc6fc0();
-};
 
 struct TokenReader
 {
@@ -1994,11 +1579,6 @@ CpuOpaque* __cdecl FUN_00dccb50()
     return &DAT_01269c14;
 }
 
-struct RefObj
-{
-    void __thiscall FUN_00c905b0();
-};
-
 inline void memCpy4_d061(void* dst, const void* src, int nbytes)
 {
     for (int i = 0; i < nbytes; i += 4)
@@ -2020,29 +1600,6 @@ template <class T> struct hkArray_d061
         if (m_iElementCount != index)
             memCpy4_d061(m_data + index, m_data + m_iElementCount, sizeof(T));
     }
-};
-
-struct FUN_00dceb90_Class
-{
-    void* vftable;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    hkArray_d061<RefObj*> m_refs;
-    void RemoveRef(int index);
 };
 
 #include <math.h>
@@ -2171,7 +1728,6 @@ union __declspec(intrin_type) __declspec(align(16)) __m128
 #ifndef _INCLUDED_MM2
 extern "C"
 {
-    __m128 _mm_setzero_ps();
     __m128 _mm_cmplt_ps(__m128, __m128);
     __m128 _mm_cmple_ps(__m128, __m128);
     __m128 _mm_and_ps(__m128, __m128);
@@ -2183,8 +1739,6 @@ extern "C"
     int _mm_movemask_ps(__m128);
 }
 #endif
-
-extern __m128 DAT_010c7170;
 
 struct OW
 {
@@ -2199,17 +1753,6 @@ volatile int g_s, g_a, g_o, g_r;
 // @fnv 0x00dd31d0
 unsigned char volatile g_src[4];
 float volatile g_dst[4];
-
-struct BEStoreTarget
-{
-    unsigned char m_00;
-    unsigned char m_01;
-    unsigned char m_02;
-    unsigned char m_03;
-    unsigned char m_04;
-};
-
-extern "C" unsigned int be_store_value(void);
 
 // Looks up the table entry for i with FUN_00dcb2b0 and calls its forward method with the owner's context value.
 // @fnv 0x00dcb460
@@ -2251,13 +1794,6 @@ struct Table
     {
         return entries[i].target;
     }
-};
-struct Owner
-{
-    int a, b, c;
-    Table* table;
-    int context;
-    void FUN_00dcb460(unsigned int);
 };
 
 #include <stdlib.h>
@@ -2303,66 +1839,6 @@ DCC5E0Reader& DCC5E0Reader::ReadDouble(double& rdValue)
 }
 
 // Adjustor thunk: the secondary-base (+0x10) vtable entry for an override defined on the derived class.
-
-class DD470Primary
-{
-  public:
-    virtual void FUN_00dcd470();
-    int unk04;
-    int unk08;
-    int unk0C;
-};
-
-class DD470Secondary
-{
-  public:
-    virtual void FUN_00dcd470();
-};
-
-class DD470Derived : public DD470Primary, public DD470Secondary
-{
-  public:
-    DD470Derived();
-// @fnv 0x00dcd470
-    virtual void FUN_00dcd470();
-};
-
-// Stand-in for the class owning this function.
-//   +0x0c : int*   array of packed triples
-//   +0x18 : CRITICAL_SECTION*  shared lock
-class FUN_00dd9240_cls
-{
-  public:
-    int m_unk00;
-    int m_unk04;
-    int m_unk08;
-    int* m_pEntryData;
-    int m_unk10;
-    int m_unk14;
-    CRITICAL_SECTION* m_pCrit;
-
-    int FUN_00dd9240(int index);
-};
-
-int __cdecl FUN_00cb0fa0(unsigned int entry, unsigned int flag);
-
-// Stand-in for the class owning this function.
-//   +0x0c : int*   array of 12-byte records (first dword = flagged pointer)
-//   +0x10 : int    record count
-//   +0x18 : CRITICAL_SECTION*  shared lock
-class FUN_00dd9270_cls
-{
-  public:
-    int m_unk00;
-    int m_unk04;
-    int m_unk08;
-    int* m_pEntryData;
-    int m_uiItemCount;
-    int m_unk14;
-    CRITICAL_SECTION* m_pCrit;
-
-    int FindEntry(unsigned int flag);
-};
 
 // Stand-in for the class owning this function.
 //   +0x0c : record*  array of 12-byte records
@@ -2426,29 +1902,8 @@ int FUN_00dd92f0_cls::InvokeRecord(int index, int arg)
 
 
 namespace fnv_00dd9d20 {
-extern int DAT_010d7da8;
-extern int DAT_010d7d54;
-extern int DAT_010d7cfc;
 
 extern "C" void* __cdecl FUN_00c85750();
-
-struct FUN_00dd9d20_Target
-{
-    virtual void vf00();
-    virtual void vf04();
-    virtual void vf08(void* a, int b);
-};
-
-struct FUN_00dd9d20_Object
-{
-    void* unk00;
-    int unk04;
-    void* unk08;
-    int unk0C;
-    void* unk10;
-
-    void __thiscall FUN_00dd9d20();
-};
 
 }  // namespace fnv_00dd9d20
 
@@ -2761,13 +2216,6 @@ class S00dd0ff0_Jacobian
     }
 };
 
-struct S00dd0ff0_Triple
-{
-    float m_lower;
-    float m_diag;
-    float m_upper;
-};
-
 volatile int g_S00dd0ff0_n;
 volatile float g_S00dd0ff0_cfm;
 volatile int g_S00dd0ff0_jac;
@@ -2775,23 +2223,6 @@ volatile int g_S00dd0ff0_offs;
 volatile int g_S00dd0ff0_base;
 volatile int g_S00dd0ff0_triple;
 volatile int g_S00dd0ff0_size;
-
-struct S_00dd1180_Hdr
-{
-    union
-    {
-        float f00;
-        struct
-        {
-            unsigned char type;
-            unsigned char unk01;
-            unsigned short n;
-        };
-    };
-    unsigned int size;
-    float f08;
-    float f0c;
-};
 
 // Writes a type 0x1d header and n triples of floats into the buffer at *pp, copies n+1 pointers, and advances *pp by the block size.
 // @f3 0x00a520c0 (community match, verified in this file)

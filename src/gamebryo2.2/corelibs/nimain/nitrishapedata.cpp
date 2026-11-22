@@ -572,21 +572,7 @@ struct FUN_00a7b690 : Base_a7b
 FUN_00a7b690::FUN_00a7b690() : m_p44(0), m_p48(0), m_p4c(0), m_us50(0), m_p54(0)
 {}
 
-struct BaseA7b7e0
-{
-    bool MatchesTriangleCount(const void* pkOther);
-};
-struct NameA7b7e0 : BaseA7b7e0
-{
-    char pad000[0x44];
-    unsigned int m_uiNameHash;
-    char* m_pReferencedObject;
-
-    bool FUN_00a7b7e0(const NameA7b7e0* pkOther);
-};
-
 namespace fnv_00ba3d30 {
-extern "C" char DAT_010b7fe4;
 
 void __cdecl FUN_00aa10f0(void*);
 

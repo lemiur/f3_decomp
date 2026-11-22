@@ -6,11 +6,6 @@
 
 #include "../../include/layout_support.h"
 
-struct FUN_00e428f0_class {
-    void Remove(void*);
-    void FUN_00e428f0(void* p);
-};
-
 extern "C" void __cdecl FUN_00cb0a60();
 
 struct FUN_00e4e400_class {
@@ -48,15 +43,6 @@ int* FUN_00e58780_Class::GetElementPtr(int a, int b)
     return *(int**)(this + 0) + a * *(int*)((char*)this + 0x10) + b;
 }
 
-struct FUN_00e587c0_Class {
-    int m_00;
-    int m_04;
-    int m_08;
-    int m_0c;
-    int m_10;
-    float GetFloatAt(int idx, int base);
-};
-
 struct GlobalObjectO2_00d472a0 { int x; };
 GlobalObjectO2_00d472a0 g_0126e600;
 void __stdcall FUN_00e5c540(int, GlobalObjectO2_00d472a0*);
@@ -80,20 +66,17 @@ void __stdcall FUN_00e5c5f0(int aiValue)
 
 namespace fnv_00e5c610 {
 struct GlobalObjectO2_00d472a0;
-extern GlobalObjectO2_00d472a0 g_0126e570;
 extern "C" void __stdcall FUN_00e5c540(int, GlobalObjectO2_00d472a0*);
 }  // namespace fnv_00e5c610
 
 namespace fnv_00e5c650 {
 struct GlobalObjectO2_00d472a0 {};
-extern GlobalObjectO2_00d472a0 g_0126ea38;
 void __stdcall FUN_00e5c540(int, GlobalObjectO2_00d472a0*);
 }  // namespace fnv_00e5c650
 
 namespace fnv_00e5c670 {
 struct GlobalObjectO2_00d472a0;
 extern "C" void* __stdcall FUN_00e5c540(void*, void*);
-extern GlobalObjectO2_00d472a0 g_0126ea80;
 
 }  // namespace fnv_00e5c670
 
@@ -144,10 +127,6 @@ struct FUN_00e587b0_Class {
     int* __thiscall FUN_00e587b0(int idx);
 };
 
-struct FUN_00e58880_Class {
-    float FUN_00e58880(int offset);
-};
-
 namespace fnv_00e589e0 {
 struct FUN_00e587b0_Class {
     float* FUN_00e587b0(int);
@@ -155,76 +134,7 @@ struct FUN_00e587b0_Class {
 };
 }  // namespace fnv_00e589e0
 
-extern const float runtimeFloatSettingDefault132;
-extern const float runtimeFloatSettingDefault255;
-extern const float g_011c7344_arg1;
-extern int DAT_010e62a4;
-
-struct FUN_00e44280_struct {
-    int* m_00;
-    unsigned short m_06;
-    float m_08;
-    float m_0c;
-    float m_10;
-    float m_14;
-    float m_18;
-    float m_1c;
-    float m_20;
-    float m_24;
-    float m_28;
-    float m_2c;
-    FUN_00e44280_struct* InitializeDefaults();
-};
-
-struct FUN_00e407d0_class {
-    void SetSlotValue(int idx, char b);
-};
-
-struct FUN_00e426f0_class {
-    unsigned short m_00;
-    unsigned short m_02;
-    unsigned short m_04;
-    unsigned short m_06;
-    unsigned short m_08;
-    unsigned short m_0a;
-    unsigned short m_0c;
-    unsigned short m_0e;
-    unsigned short m_10;
-    unsigned short m_12;
-    unsigned short m_14;
-    void AddObject(void* p);
-    void AddByteFromObject(void* p);
-};
-
-struct FUN_00e61480_class {
-    void FUN_00e61480(int);
-};
-struct FUN_00e4ab50_class {
-    int m_00;
-    int m_04;
-    int* m_08;
-    int m_0c;
-    void __thiscall ApplyToAll(int a);
-};
-
 extern int DAT_010ec1fc;
-struct FUN_00cb0a70 {
-    void m(int);
-};
-struct FUN_00e4af80 {
-    int vtbl;
-    int m_04;
-    int m_08;
-    int m_0c;
-    int m_10;
-    FUN_00e4af80* Set(int arg);
-};
-
-struct FUN_00e58b10_class {
-    void FillWithValue(float* out);
-    void FUN_00e58a20(int a, int b, int c);
-    void FUN_00e58b10(int a, int b, int c);
-};
 
 extern const char* const g_0126c5f0_arg1;
 void __stdcall FUN_00e5c540(int, int);
@@ -235,38 +145,10 @@ void __stdcall FUN_00e5c5d0(int aiValue)
 }
 
 struct GlobalObjectO2_00d472a0;
-extern GlobalObjectO2_00d472a0 g_0126eb10;
 void __stdcall FUN_00e5c540(int a, GlobalObjectO2_00d472a0* b);
 
 struct GlobalObjectO2_00d472a0;
-extern GlobalObjectO2_00d472a0 g_0126eac8;
 void __stdcall FUN_00e5c540(int, GlobalObjectO2_00d472a0*);
-
-struct FUN_00e406d0_cls
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    float* m_44;
-    int unk48;
-    int unk4C;
-    float* m_50;
-    void ClampBoundsAt(int index, float value);
-};
 
 struct HolderStub {
     int unk00;
@@ -283,13 +165,6 @@ struct ValueArray {
     unsigned int* m_pData;
     int m_iArrayLength;
     unsigned int m_uCapFlags;
-};
-
-struct FUN_00e41db0_cls {
-    int unk00;
-    int unk04;
-    ValueArray m_08;
-    void AppendValue(unsigned int value);
 };
 
 class BE41DF0ReferencedObject {
@@ -309,79 +184,6 @@ struct BE41DF0Array {
     int m_iElementCount;
     int m_iCapacityState;
 };
-
-class FUN_00e41df0_cls : public BE41DF0ReferencedObject {
-public:
-    FUN_00e41df0_cls() throw();
-    virtual ~FUN_00e41df0_cls();
-
-    BE41DF0Array<void*> m_kEntries;
-};
-
-// FUN_00e42650: iterate an array of listener objects and notify each one.
-struct EventListener {
-    virtual void v00();
-    virtual void v01();
-    virtual void v02();
-    virtual void v03();
-    virtual void v04();
-    virtual void v05();
-    virtual void v06();
-    virtual void v07();
-    virtual void v08();
-    virtual void v09(int a);
-};
-
-struct FUN_00e42650_cls {
-    int m_00;
-    int m_04;
-    EventListener** m_08;
-    int m_0c;
-
-    void FUN_00e42650(int a);
-};
-
-struct FUN_00e42680_Item {
-    virtual void v00();
-    virtual void v01();
-    virtual void v02();
-    virtual void v03();
-    virtual void v04();
-    virtual void v05();
-    virtual void v06();
-    virtual void v07();
-    virtual void v08();
-    virtual void v09();
-    virtual void v10();
-};
-
-struct FUN_00e42680_cls {
-    int m_00;
-    int m_04;
-    FUN_00e42680_Item** m_08;
-    int m_0c;
-
-    void CallItemsVirtual();
-};
-
-extern "C" int DAT_010e5e9c;
-
-struct FUN_00e43ac0_cls {
-    void* m_00;
-    unsigned short m_04;
-    unsigned short m_06;
-    float m_08;
-    float m_0c;
-    float m_10;
-    FUN_00e43ac0_cls();
-};
-
-extern double DAT_010ebf20;
-extern double DAT_010ebf18;
-extern double DAT_01012638;
-extern double DAT_0101ff48;
-
-extern "C" int DAT_010e5ff4;
 
 struct FUN_00e43f30_cls {
     void* volatile m_00;
@@ -494,40 +296,16 @@ FUN_00e468b0_cls::FUN_00e468b0_cls()
 {
 }
 
-struct S_e49fe0_B0 { virtual void d0(); int unk4; };
-struct S_e49fe0_B8 { virtual void d8(); };
-struct S_e49fe0_Bc { virtual void dc(); };
-struct S_e49fe0_B10 { virtual void d10(); };
-struct S_e49fe0_B14 { virtual void d14(); };
-struct FUN_00cbfba0 : S_e49fe0_B0, S_e49fe0_B8, S_e49fe0_Bc, S_e49fe0_B10, S_e49fe0_B14 {
-    FUN_00cbfba0();
-};
 struct S_e49fe0_Arr {
     int m_data;
     int m_iElementCount;
     unsigned m_cap;
     S_e49fe0_Arr() : m_data(0), m_iElementCount(0), m_cap(0x80000000) {}
 };
-struct FUN_00e49fe0 : FUN_00cbfba0 {
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    S_e49fe0_Arr arr;
-    FUN_00e49fe0();
-    virtual void d0();
-    virtual void d8();
-    virtual void dc();
-    virtual void d10();
-    virtual void d14();
-};
 
 struct E4AAA0Allocator;
 
 void __cdecl FUN_00c908c0(E4AAA0Allocator* alloc, void* array, int numElements, int sizeElem);
-void __cdecl FUN_00d2cc70(void* dst, const void* src, unsigned int nbytes);
 
 struct E4AAA0Element {
     int m_kPointA;
@@ -575,14 +353,6 @@ public:
     E4AE50Array() : m_data(0), m_iElementCount(0), m_iCapacityState(0x80000000) {}
 };
 
-class FUN_00e4ae50 : public E4AE50ReferencedObject {
-public:
-    E4AE50Array<void*> m_entries;
-
-    FUN_00e4ae50();
-    virtual ~FUN_00e4ae50();
-};
-
 // FUN_00e4ae80 (11 bytes)
 //
 //   00e4ae80  8b c1                    mov eax, ecx
@@ -599,11 +369,6 @@ public:
 // The class is stand-in only: it needs one virtual so that the compiler emits
 // a vftable, and the vftable slot points at the (undefined) virtual, so the
 // only defined function symbol in this translation unit is the constructor.
-
-struct FUN_00e4ae80_class {
-    FUN_00e4ae80_class(int flags);
-    virtual void vfunc_00();
-};
 
 // add ecx,0x14; jmp FUN_00cb0c10 : the derived override forwards to the secondary base's
 // virtual, so `this` is moved forward by the size of the primary base (vptr + 4 ints = 0x14)
@@ -688,45 +453,7 @@ struct AudioHolder {
 
 AudioHolder* __cdecl FUN_00c85750() throw();
 
-struct FUN_00e50ca0_cls {
-    int unk00;
-    int unk04;
-    int unk08;
-    void* m_pData5;
-    int m_iCount5;
-    unsigned int m_uCap5;
-    void* m_pData4;
-    int m_iCount4;
-    unsigned int m_uCap4;
-    void* m_pData3;
-    int m_iCount3;
-    unsigned int m_uCap3;
-    void* m_pData2;
-    int m_iCount2;
-    unsigned int m_uCap2;
-    void* m_pData1;
-    int m_iCount1;
-    unsigned int m_uCap1;
-
-    void FUN_00e50ca0();
-};
-
 }  // namespace fnv_00e50ca0
-
-extern float DAT_0102295c;
-extern float DAT_0101622c;
-
-void __cdecl DeinterleaveFloats(float* a, float* b, unsigned int n);
-void __cdecl AccumulateNeighborSum(float c, float* a, float* b, unsigned int n);
-void __cdecl FUN_00e50e50(float c, float* a, float* b, unsigned int n);
-
-struct PackedFormat {
-    unsigned char bits;
-    unsigned char rawCount;
-    unsigned short unk02;
-    float range;
-    float minimum;
-};
 
 extern const float g_x;
 
@@ -871,15 +598,6 @@ FUN_00e53200_cls::FUN_00e53200_cls(float afScale)
 }
 
 
-struct E53230Color {
-    float r;
-    float g;
-    float b;
-    float a;
-
-    E53230Color& DivideByScalar(float fScalar);
-};
-
 struct FourFloatVector {
     float x;
     float y;
@@ -900,19 +618,6 @@ struct S_e53300_Vec {
     S_e53300_Vec ScaleCopy(float f);
 };
 
-struct Quad4 {
-    unsigned int m_00;
-    unsigned int m_04;
-    unsigned int m_08;
-    unsigned int m_0c;
-    Quad4* Eval(float t);
-};
-
-class FUN_00e53350_cls : public Quad4 {
-public:
-    Quad4 EvalCopy(float t);
-};
-
 struct SpawnedObject {
     void Method(float* pOut, float f);
 };
@@ -923,21 +628,6 @@ float* __cdecl FUN_00e533a0(float* pOut, float fValue, SpawnedObject* pObj)
     pObj->Method(pOut, fValue);
     return pOut;
 }
-
-// Thin cdecl wrapper: forwards its first argument and a float to a
-// thiscall method of the object given as the third argument, then hands
-// the first argument back to the caller.
-struct FUN_00e533c0_cls {
-    void SetValue(float* pOut, float fValue);
-};
-
-double __cdecl FUN_00ec6940(double value);
-
-struct FourComponentVector {
-    float x, y, z, w;
-    __declspec(noinline) FourComponentVector(float a, float b, float c, float d);
-    FourComponentVector FUN_00e53440() const;
-};
 
 // Returns a FourComponentVector whose components are each passed through FUN_00ec6940.
 // @f3 0x007e02b0 (community match, verified in this file)
@@ -1102,14 +792,6 @@ bool C7e02b0::FUN_007e02b0(NP3_7e02b0 pt, int d) const
 }   // namespace f3m_007e02b0
 
 
-struct FUN_00e53580_cls {
-    float FUN_00e53580(int idx);
-};
-
-struct S_00e53590_Foo {
-    int* __thiscall FUN_00e53590(int index);
-};
-
 struct Vec4f {
     float x;
     float y;
@@ -1138,74 +820,7 @@ __declspec(noinline) float& Vec4f::operator[](int i)
     return (&x)[i];
 }
 
-void __cdecl FUN_00e535a0(int a, int b);
-
-struct FUN_00e54ad0_cls
-{
-    int unk00;
-    void FUN_00e54ad0();
-};
-
-// The two callees below are unnamed in the binary's symbol table; they bind by position.
-extern void __cdecl helper_before();
-extern double __cdecl helper_value();
-
-class FUN_00e54b00_cls
-{
-public:
-    float GetHelperValueAsFloat();
-    void EvalCopy(int a, float b);
-    int FUN_00e54b00(int p);
-};
-
-struct FUN_00e54b20_out
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-};
-
-struct FUN_00e54b20_src
-{
-    void* Lookup(FUN_00e54b20_out* out, unsigned int key);
-};
-
-struct FUN_00e54b20_sink
-{
-    void Consume();
-};
-
-
-class E54B50Vector4 {
-public:
-    double Length() const;
-
-    float x;
-    float y;
-    float z;
-    float w;
-};
-
-double E54B50Dot(const E54B50Vector4& kA, const E54B50Vector4& kB);
-
-struct FUN_00e54ae0_class
-{
-    void __thiscall GetHelperValueAsFloat();
-};
-
-struct FUN_00e532b0_class
-{
-    FUN_00e54ae0_class* __thiscall FUN_00e532b0(void* buffer, void* value);
-};
-
 char* __cdecl IsSampleBoundary(int* base, int idx, int b, int c);
-
-struct E54C50IntArray {
-    int* m_data;
-    int m_iElementCount;
-    int m_iCapacityState;
-};
 
 namespace fnv_00e55080 {
 struct FourFloatVector {
@@ -1214,36 +829,14 @@ struct FourFloatVector {
     float z;
     float w;
 };
-extern const double DAT_010290f8;
 void __cdecl FUN_00e54630(FourFloatVector* result, int a, int b, int c, int d, float value);
 float __cdecl LookupAndConsume(const FourFloatVector* a, const FourFloatVector* b);
 
 }  // namespace fnv_00e55080
 
 struct Float4 { float x, y, z, w; };
-extern const double DAT_01016978;
 void __cdecl FUN_00e54630(Float4* out, int a, int b, int c, int d, float input);
 float __cdecl LookupAndConsume(const Float4* left, const Float4* right);
-
-extern void __cdecl FUN_00e58440(int, int, int, int, float, int, int, int, int);
-
-struct FUN_00e58820_cls {
-    float* m_data;
-    int unk04;
-    int unk08;
-    int m_0c;
-    int m_10;
-    void FillWithValue(const float* value);
-};
-
-struct FUN_00e58890_Class {
-    int m_00;
-    int m_04;
-    int m_08;
-    int m_0c;
-    int m_10;
-    int FUN_00e58890();
-};
 
 struct SpawnArray
 {
@@ -1256,16 +849,6 @@ struct SpawnArray
         unk04 = 0;
         unk08 = 0x80000000;
     }
-};
-
-struct FUN_00e58b50_cls
-{
-    SpawnArray m_kPointA;
-    SpawnArray m_kPointB;
-    SpawnArray m_iThirdValue;
-    int unk24;
-    int unk28;
-    FUN_00e58b50_cls* ResetSpawnArrays(int a1, int a2);
 };
 
 namespace fnv_00e58b90 {
@@ -1287,20 +870,6 @@ struct AudioHolder {
 
 AudioHolder* __cdecl FUN_00c85750() throw();
 
-struct FUN_00e58b90_cls {
-    void* m_pDataC;
-    int m_iCountC;
-    unsigned int m_uCapC;
-    void* m_pDataB;
-    int m_iCountB;
-    unsigned int m_uCapB;
-    void* m_pDataA;
-    int m_iCountA;
-    unsigned int m_uCapA;
-
-    void FUN_00e58b90();
-};
-
 }  // namespace fnv_00e58b90
 
 namespace fnv_00e58c30 {
@@ -1321,14 +890,6 @@ struct ValueArray {
     int* data;
     int count;
     unsigned int capFlags;
-};
-
-struct FUN_00e58c30_cls {
-    ValueArray m_arr00;
-    ValueArray m_arr0c;
-    ValueArray m_arr18;
-
-    float* AppendTriple(int a1, int a2, float a3);
 };
 
 }  // namespace fnv_00e58c30
@@ -1355,28 +916,9 @@ struct AllocHolder
 AllocHolder* FUN_00c85750();
 void FUN_00c908c0(AllocatorIface* alloc, void* arr, unsigned int newCap, int elemSize);
 
-class FUN_00e58cf0_cls
-{
-public:
-    float* m_00;
-    unsigned int m_04;
-    unsigned int m_08;
-    unsigned int m_0c;
-    unsigned int m_10;
-
-    FUN_00e58cf0_cls* InitFloatArray(int count, int stride, float fill);
-};
-
 }  // namespace fnv_00e58cf0
 
 namespace fnv_00e58df0 {
-struct HkHolder {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    void* m_pAllocator;
-};
 
 struct FUN_00e58df0_cls;
 void* __cdecl FUN_00c85750();
@@ -1394,76 +936,7 @@ struct FUN_00e58df0_cls {
 
 }  // namespace fnv_00e58df0
 
-struct FUN_00e5c490_entry
-{
-    unsigned int m_ptr;
-    unsigned int m_unk04;
-};
-
 int CompareStringsCaseInsensitive(unsigned int item, unsigned int ctx);
-
-class FUN_00e5c490_cls
-{
-public:
-    unsigned int m_unk00;
-    FUN_00e5c490_entry* m_pEntries;
-    int m_uiItemCount;
-
-    int FindEntryIndex(unsigned int a1);
-};
-
-class AttrEntry_b5103 {
-public:
-    int m_unk00;
-    int m_unk04;
-    int* m_pIntegerData;
-};
-
-class AttrLog_b5103 {
-public:
-    virtual void Dummy0() throw();
-    virtual void Dummy1() throw();
-    virtual void Dummy2() throw();
-    virtual void Assert(int level, unsigned int magic, const char* msg, const char* file, int line) throw();
-};
-
-class AttrTmp_b5103 {
-public:
-    void Commit() throw();
-    int m_unk00;
-    int m_unk04;
-};
-
-class AttrWriter_b5103 {
-public:
-    AttrWriter_b5103(unsigned int* buf, unsigned int size) throw();
-    int m_unk00;
-    int m_unk04;
-    int m_unk08;
-    AttrWriter_b5103& Write5(const char* a, const char* name, const char* b, const void* self, const char* c) throw();
-    AttrWriter_b5103& Step1() throw();
-    AttrWriter_b5103& Step2() throw();
-    AttrWriter_b5103& Step3() throw();
-    AttrWriter_b5103& Step4() throw();
-    AttrWriter_b5103& Step5();
-    void Release() throw();
-    unsigned int* GetBuf() throw();
-};
-
-class AttrStream_b5103 {
-public:
-    AttrStream_b5103(unsigned int* buf, unsigned int size) throw();
-    AttrWriter_b5103 m_w;
-};
-
-extern AttrLog_b5103* DAT_01268360_b5103;
-
-class FUN_00e5c6b0_cls {
-public:
-    AttrEntry_b5103* FindPrimary(const char* name) throw();
-    AttrEntry_b5103* FindSecondary(const char* name) throw();
-    int GetBoolAttribute(const char* name, bool required, unsigned char* out);
-};
 
 struct ConfigValue { unsigned type, identifier; const void* data; };
 struct CharBuffer {
@@ -1514,235 +987,8 @@ int ConfigTable::GetUnsignedValue(const char* name, bool reportMissing, unsigned
     return 1;
 }
 
-struct FUN_00e5c8b0_Node
-{
-    unsigned int m_00;
-};
-
-struct FUN_00e5c8b0_Target
-{
-    void FindValue(unsigned int a, unsigned int* b);
-};
-
-struct FUN_00e5c8b0_Rec
-{
-    int unk00;
-    int unk04;
-    FUN_00e5c8b0_Node* m_08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    FUN_00e5c8b0_Target* m_20;
-};
-
-struct FUN_00e5c8b0_Str
-{
-    int m_00;
-    int m_04;
-    int m_08;
-    void Set(char* buf, unsigned int len);
-    FUN_00e5c8b0_Str* Chain5(const char* s0, int a1, const char* s2, int a3, const char* s4);
-    FUN_00e5c8b0_Str* Chain0();
-    FUN_00e5c8b0_Str* ChainB();
-    FUN_00e5c8b0_Str* ChainC();
-    void Release();
-};
-
-struct FUN_00e5c8b0_cls
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    FUN_00e5c8b0_Rec* FUN_00e5c610(int a);
-    FUN_00e5c8b0_Rec* FUN_00e5c5f0(int a);
-    int GetAttributeValue(int a, bool flag, unsigned int* out);
-};
-
-struct FUN_00e5c8b0_Logger
-{
-    virtual void v0();
-    virtual void v1();
-    virtual void v2();
-    virtual void Report(int level, unsigned int code, const char* msg, const char* file, int line);
-};
-extern FUN_00e5c8b0_Logger* g_01268360;
-
-struct AttrLogBuf {
-    unsigned int m_00;
-    unsigned int m_04;
-    unsigned int m_08;
-    unsigned int m_0c;
-    unsigned int m_10;
-    unsigned int m_14;
-    unsigned int m_18;
-    unsigned int m_1c;
-    unsigned int m_20;
-    unsigned int m_24;
-    unsigned int m_28;
-    unsigned int m_2c;
-    unsigned int m_30;
-    unsigned int m_34;
-    unsigned int m_38;
-    unsigned int m_3c;
-    unsigned int m_40;
-    unsigned int m_44;
-    unsigned int m_48;
-    unsigned int m_4c;
-    unsigned int m_50;
-    unsigned int m_54;
-    unsigned int m_58;
-    unsigned int m_5c;
-    unsigned int m_60;
-    unsigned int m_64;
-    unsigned int m_68;
-    unsigned int m_6c;
-    unsigned int m_70;
-    unsigned int m_74;
-    unsigned int m_78;
-    unsigned int m_7c;
-    unsigned int m_80;
-    unsigned int m_84;
-    unsigned int m_88;
-    unsigned int m_8c;
-    unsigned int m_90;
-    unsigned int m_94;
-    unsigned int m_98;
-    unsigned int m_9c;
-    unsigned int m_a0;
-    unsigned int m_a4;
-    unsigned int m_a8;
-    unsigned int m_ac;
-    unsigned int m_b0;
-    unsigned int m_b4;
-    unsigned int m_b8;
-    unsigned int m_bc;
-    unsigned int m_c0;
-    unsigned int m_c4;
-    unsigned int m_c8;
-    unsigned int m_cc;
-    unsigned int m_d0;
-    unsigned int m_d4;
-    unsigned int m_d8;
-    unsigned int m_dc;
-    unsigned int m_e0;
-    unsigned int m_e4;
-    unsigned int m_e8;
-    unsigned int m_ec;
-    unsigned int m_f0;
-    unsigned int m_f4;
-    unsigned int m_f8;
-    unsigned int m_fc;
-    unsigned int m_100;
-    unsigned int m_104;
-    unsigned int m_108;
-    unsigned int m_10c;
-    unsigned int m_110;
-    unsigned int m_114;
-    unsigned int m_118;
-    unsigned int m_11c;
-    unsigned int m_120;
-    unsigned int m_124;
-    unsigned int m_128;
-    unsigned int m_12c;
-    unsigned int m_130;
-    unsigned int m_134;
-    unsigned int m_138;
-    unsigned int m_13c;
-    unsigned int m_140;
-    unsigned int m_144;
-    unsigned int m_148;
-    unsigned int m_14c;
-    unsigned int m_150;
-    unsigned int m_154;
-    unsigned int m_158;
-    unsigned int m_15c;
-    unsigned int m_160;
-    unsigned int m_164;
-    unsigned int m_168;
-    unsigned int m_16c;
-    unsigned int m_170;
-    unsigned int m_174;
-    unsigned int m_178;
-    unsigned int m_17c;
-    unsigned int m_180;
-    unsigned int m_184;
-    unsigned int m_188;
-    unsigned int m_18c;
-    unsigned int m_190;
-    unsigned int m_194;
-    unsigned int m_198;
-    unsigned int m_19c;
-    unsigned int m_1a0;
-    unsigned int m_1a4;
-    unsigned int m_1a8;
-    unsigned int m_1ac;
-    unsigned int m_1b0;
-    unsigned int m_1b4;
-    unsigned int m_1b8;
-    unsigned int m_1bc;
-    unsigned int m_1c0;
-    unsigned int m_1c4;
-    unsigned int m_1c8;
-    unsigned int m_1cc;
-    unsigned int m_1d0;
-    unsigned int m_1d4;
-    unsigned int m_1d8;
-    unsigned int m_1dc;
-    unsigned int m_1e0;
-    unsigned int m_1e4;
-    unsigned int m_1e8;
-    unsigned int m_1ec;
-    unsigned int m_1f0;
-    unsigned int m_1f4;
-    unsigned int m_1f8;
-    unsigned int m_1fc;
-};
-
-struct AttrEntry {
-    int m_00;
-    int m_04;
-    float* m_08;
-};
-
-class AttrLogBuilder {
-public:
-    char* m_pString;
-    unsigned short m_sLen;
-    unsigned short m_sMaxLen;
-    unsigned int m_08;
-    void Init(AttrLogBuf* buf, unsigned int size);
-    AttrLogBuilder* Build(const char* a, const char* name, const char* b, void* self, const char* c);
-    AttrLogBuilder* Chain();
-    AttrLogBuilder* Other();
-    void Free();
-};
-
-class LogSink {
-public:
-    virtual void v0();
-    virtual void v1();
-    virtual void v2();
-    virtual void Log(int level, unsigned int tag, const char* msg, const char* file, int line);
-};
-
-extern LogSink* g_pAttrLogger;
-
-class FUN_00e5c9b0_cls {
-public:
-    AttrEntry* FindAttr(const char* name);
-    int GetFloatAttribute(const char* name, bool log, float* out);
-};
-
 // FUN_00e5cec0 - forwards this + four stack arguments to SpliceArray,
 // with a literal zero inserted as the third argument.
-
-struct FUN_00e5cdb0_class {
-    void __thiscall SpliceArray(int a, int b, int c, int d, int e);
-    void __thiscall FUN_00e5cec0(int a, int b, int c, int d);
-};
 
 struct S_00e5cfb0_Object {
     int unk00;
@@ -1779,72 +1025,10 @@ void __cdecl FUN_00e5cfb0(S_00e5cfb0_Object* object, int value)
     local.FUN_00e65ee0(buffer, object->unk20);
 }
 
-extern float DAT_0104e148;
-
-struct FloatArray_e404b0 {
-    float* data;
-    int count;
-};
-
-extern float _DAT_0104da48;
-
 namespace fnv_00e42960 {
-extern "C" unsigned __int64 __rdtsc(void);
 extern "C" void _ReadWriteBarrier(void);
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long);
-extern unsigned long DAT_0126835c;
-struct MonEntry { const char* name; unsigned int ticks; int pad; };
-struct MonStream { int unk0; MonEntry* m_kRayEnd; int unk8; MonEntry* m_pRayCursor; };
-struct E42940Inner { int unk00; int unk04; int unk08; int unk0c; int unk10; int unk14; int unk18; int unk1c; int m_type; };
-struct VStepJob {
-    int Create(int a, int b);
-    void FUN_00d04370();
-    void FUN_00d04380();
-};
-void* __cdecl FUN_00c85620(void* alloc, int a, int b);
-void __cdecl FUN_00c85660(void* alloc, void* p);
-struct VWorld {
-    void FUN_00c911a0();
-    void FUN_00c911b0();
-};
-struct VCollector {
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual void vfn_0c(void* a, int b);
-    virtual void vfn_10();
-};
-struct VInfo { void FUN_00d051b0(); };
-struct VSim {
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual void v0c();
-    virtual void v10();
-    virtual void v14();
-    virtual void v18();
-    virtual void vfn_1c();
-    virtual int vfn_20(int n);
-    virtual void vfn_24(VWorld* w, int k, int n, VInfo* info, VStepJob* job, int mark);
-    virtual void vfn_28(void* p, int n, int mark);
-    void RunVehicleSync(VWorld* world, VCollector* coll, VInfo* info, int n);
-};
 }  // namespace fnv_00e42960
-
-extern int DAT_010e60c4;
-
-struct FUN_00e44070 {
-    int* volatile m_00;
-    unsigned short unk04;
-    volatile unsigned short m_06;
-    volatile float m_08;
-    volatile float m_0c;
-    void* volatile m_10;
-    volatile int m_14;
-    volatile unsigned int m_18;
-
-    FUN_00e44070();
-};
 
 class PrimaryE45 {
 public:
@@ -2095,21 +1279,13 @@ struct CShape : CBase0, CBase8, CBaseC, CBase10, CBase14 {
     int unk2c;
 };
 
-struct FUN_00e46900 : CShape, CListener {
-    HkArray<ActorEntry*> m_kActorEntries;
-
-    virtual ~FUN_00e46900() throw();
-};
-
 struct Ref { void FUN_00c90510(); };
 int FUN_00e60cb0(unsigned char,int);
 struct Entry { Ref* name; Ref* pClassInfo; unsigned char type; unsigned char flags; unsigned short reserved; int count; unsigned char storage; unsigned char ReplaceImpactData; unsigned short reserved12; void* data; int unk18; int unk1c; int length() const { int t=type; return FUN_00e60cb0(t,count); } };
 struct Allocator {};
 struct Router { int a,b,c,d; Allocator* heap; Allocator& getHeap() {return *heap;} };
-Router* getRouter();
 int FUN_00e60cb0(unsigned char type,int count);
 extern "C" void FUN_00c908c0(Allocator*,void*,int,int);
-void FUN_00cb1260(void*,const void*,int);
 struct String { void* value; void init() throw(); void assign(const char*) throw(); };
 struct ArrayBase {
  void* data; int size; int capacity;
@@ -2124,29 +1300,6 @@ template<class T> struct Arr : ArrayBase {
  T* expand(Allocator& heap,int n) {int old=size; reserve(heap,old+n); size+=n; return (T*)data+old;}
 };
 struct Base { virtual void dummy(); unsigned short flags; short refs; Base(){refs=1;} };
-struct FUN_00e4a1d0:Base {
- Arr<Entry> entries; Arr<unsigned short> shorts; Arr<unsigned int> ints; String label;
- FUN_00e4a1d0(const Entry* source,int count);
- virtual void dummy();
-};
-
-struct E51F00Format
-{
-    unsigned char bits;
-    unsigned char rawCount;
-    unsigned short unk02;
-    float range;
-    float minimum;
-};
-
-struct L { int* m_00; int m_04; };
-
-struct HolderView { int unk00; int unk04; int unk08; int unk0c; void* volatile m_pAllocator; };
-struct FloatArrayRef {
-    float* data;
-    int size;
-    unsigned int capacity;
-};
 
 struct ArrayAllocator;
 struct FloatArray;
@@ -2173,7 +1326,6 @@ struct MemoryRouter {
     ArrayAllocator* m_pStreamAllocator;
     ArrayAllocator& heap() { return *m_pStreamAllocator; }
 };
-MemoryRouter* GetMemoryRouter();
 
 // Element-wise subtract another matrix of the same shape from this one.
 
@@ -2189,25 +1341,6 @@ public:
     E87E0Matrix& FUN_00e587e0(const E87E0Matrix& kOther);
 };
 
-class CE588A0Vector {
-public:
-    double Get(int iIndex);
-    int GetSize();
-};
-
-struct Stand_e58d90 {
-    void* m_pData;
-    int m_iArrayLength;
-    unsigned int m_uCapFlags;
-    int m_iArrayCapacity;
-    int m_iElemSize;
-    Stand_e58d90* InitArray(int a1, int a2);
-};
-
-extern "C" double __cdecl sqrt(double);
-extern "C" double __cdecl sin(double);
-extern "C" double __cdecl cos(double);
-
 extern int DAT_010e7874;
 extern int DAT_010e7868;
 extern int DAT_010e7854;
@@ -2216,36 +1349,6 @@ extern int DAT_010e783c;
 extern int DAT_010e781c;
 extern int DAT_010cb1e4;
 
-struct FUN_00cbfba0_Base {
-    void FUN_00cbfba0();
-};
-struct FUN_00c90510_Reference {
-    void FUN_00c90510();
-};
-struct FUN_00e46b30_Layout {
-    void* primaryVtable;
-    int referenceCount;
-    void* secondaryVtable;
-    void* thirdVtable;
-    void* fourthVtable;
-    void* fifthVtable;
-    int field18;
-    int field1c;
-    int field20;
-    int field24;
-    int field28;
-    int field2c;
-    void* volatile listenerVtable;
-    FUN_00c90510_Reference* reference;
-};
-struct FUN_00e46b30_Class : FUN_00e46b30_Layout {
-    FUN_00e46b30_Class* InitializeWithReference(FUN_00c90510_Reference* value);
-};
-
-struct FUN_00c905b0_class {
-    void __thiscall FUN_00c905b0();
-};
-
 extern int DAT_010e7874;
 extern int DAT_010e7868;
 extern int DAT_010e7854;
@@ -2253,30 +1356,6 @@ extern int DAT_010e7848;
 extern int DAT_010e783c;
 extern int DAT_010e781c;
 extern int DAT_010cb1e4;
-extern int DAT_010c3b8c;
-extern int DAT_010c3bac;
-extern int DAT_010c3b98;
-extern int DAT_010c3b80;
-extern int DAT_0102e388;
-
-struct FUN_00e46b80_class {
-    int* unk00;
-    int* unk04;
-    int* unk08;
-    int* unk0C;
-    int* unk10;
-    int* unk14;
-    int* unk18;
-    int* unk1C;
-    int* unk20;
-    int* unk24;
-    int* unk28;
-    int* unk2C;
-    int* unk30;
-    FUN_00c905b0_class* unk34;
-
-    void __thiscall FUN_00e46b80();
-};
 
 struct FUN_00e46e80 {
     int m_00;
@@ -2299,12 +1378,6 @@ FUN_00e46e80::FUN_00e46e80()
 
 struct E473C0Owner;
 
-struct E473C0Target {
-    virtual void vf00();
-    virtual void vf01();
-    virtual void __thiscall vf02(E473C0Owner* a1, int a2);
-};
-
 struct E473C0Owner {
     int unk00;
     unsigned short unk04;
@@ -2325,16 +1398,6 @@ void FnvCpu_FUN_00e473f0_CpuObject::FUN_00e473f0(unsigned char arg0)
 {
     value = arg0;
 }
-
-extern int DAT_010e81a4;
-
-struct FUN_00e48240 {
-    void* m_vTable;
-    short m_flags;
-    short m_sState;
-    int m_uiFilterValue;
-    FUN_00e48240(int value);
-};
 
 extern int DAT_010cb76c;
 extern int DAT_010cb780;
@@ -2475,14 +1538,6 @@ struct Node4a5
     Node4a5* FindChildByName(const char* pcName);
 };
 
-struct Owner4a5
-{
-    char pad[0x14];
-    Node4a5* m_pkTreeNode;
-
-    Node4a5* FUN_00e4a550(const char* pcName);
-};
-
 struct GtrStand_ {
     int unk00;
     int unk04;
@@ -2510,34 +1565,11 @@ namespace fnv_00e53130 {
 
 }  // namespace fnv_00e53130
 
-struct FUN_00e53180_Obj {
-    float x;
-    float y;
-    float z;
-    float w;
-    void FUN_00e53180(const Float4* source);
-};
-
-struct E58E80Object {
-    void CopyFrom(int setting);
-};
-
 class hkBool
 {
 public:
     hkBool(bool b) { m_cBooleanValue = (char)b; }
     char m_cBooleanValue;
-};
-
-struct E5B110Ref { void FUN_00c90510(); };
-struct E5B110Obj {
-    void CopyStateFrom(void* p);
-    int unk00, unk04, unk08, unk0c, unk10, unk14, unk18, unk1c;
-    int unk20, unk24, unk28, unk2c, unk30, unk34, unk38, unk3c;
-    int unk40, unk44, unk48, unk4c, unk50, unk54, unk58, unk5c;
-    int unk60, unk64, unk68, unk6c, unk70, unk74, unk78, unk7c;
-    int unk80, unk84, unk88, unk8c, unk90, unk94, unk98, unk9c;
-    E5B110Ref* unka0;
 };
 
 int GetUnsignedValue(const char*, bool, unsigned*);
@@ -2564,15 +1596,6 @@ struct UnkRet {
     FUN_00e47390_obj* m_10;
 };
 
-struct UnkHolder {
-    void* m_00;
-    unsigned int m_04;
-    UnkRet* FUN_00c85750();
-    void FUN_00e47390();
-};
-
-extern float DAT_0108cb00;
-
 class RefObjectE483 {
 public:
     RefObjectE483() { m_sReferenceCount = 1; }
@@ -2585,16 +1608,6 @@ class TypedObjectE483 : public RefObjectE483 {
 public:
     TypedObjectE483() { m_type = 0; }
     unsigned char m_type;
-};
-
-class FUN_00e48390 : public TypedObjectE483 {
-public:
-    FUN_00e48390(int a, int b);
-    virtual ~FUN_00e48390();
-    volatile float m_fCoefficientA;
-    float m_fB;
-    int m_iB;
-    int m_iA;
 };
 
 // @fnv 0x00e48460
@@ -2648,28 +1661,6 @@ void E48490Driver()
 {
     FUN_00e48490(E48490PtrSrc(), E48490ValSrc());
 }
-
-extern "C" float* mm_min(void);
-extern "C" float* mm_max(void);
-extern "C" const float* mm_vals(void);
-extern "C" int mm_count(void);
-
-struct SampleField {
-    int FUN_00e587a0();
-    float* GetElementPtr(int index, int component);
-    void FillWithValue(float* value);
-    float GetFloatAt(int index, int component);
-};
-struct FUN_00e58a20_cls {
-    float* m_00;
-    int m_04;
-    int unk08;
-    int* m_0c;
-    int unk10;
-    int unk14;
-    int* m_18;
-    void FUN_00e58a20(SampleField* volatile input, SampleField* weights, SampleField* output);
-};
 
 // Source struct: only its float members at 0x80..0x94 take part; the rest are
 // stand-in fields holding the earlier offsets.
@@ -2734,17 +1725,6 @@ static Dst* volatile g_dst;
 static Src* volatile g_src;
 
 #include <math.h>
-class FUN_00e40740_cls {
-public:
-    int unk00, unk04, unk08, unk0c, unk10, unk14, unk18, unk1c;
-    int unk20, unk24, unk28, unk2c, unk30, unk34, unk38, unk3c;
-    int unk40, unk44, unk48, unk4c, unk50, unk54, unk58;
-    float* m_pMinArray;
-    int unk60;
-    int unk64;
-    float* m_pMaxArray;
-    void UpdateMinMax(int index, float value);
-};
 
 #include <xmmintrin.h>
 extern int DAT_010e6834;
@@ -2788,15 +1768,6 @@ MotorObject* MotorObject::FUN_00e444c0()
 }
 
 
-struct LoadedFlag { int finishing; };
-extern "C" int DAT_010ec004;
-struct LoadedObject {
-    void* vtable;
-    int unk04;
-    unsigned char type;
-    void FUN_00e46f20(LoadedFlag flag);
-    LoadedObject* Initialize(LoadedFlag flag);
-};
 // Calls FUN_00e46f20, sets vtable to DAT_010ec004, sets type to 4 when flag.finishing is true, and returns this.
 // @f3 0x00bce490 (community match, verified in this file)
 namespace f3m_00bce490 {
@@ -2858,15 +1829,6 @@ template<class T> struct EntityArray : HkArray<T> {
 
 struct SmallBool { unsigned char value; SmallBool(bool v) : value(v) {} };
 
-struct EntityShape {
-    int unk00; int unk04; int unk08; int unk0c;
-    int unk10; int unk14; int unk18; int unk1c;
-    int unk20; int unk24; int unk28; int unk2c;
-    CListener m_kListener;
-    EntityArray<Actor*> m_kActorEntries;
-    SmallBool AddActor(Actor* item);
-};
-
 struct BitLinks {
     int m_00;
     int m_04;
@@ -2896,31 +1858,7 @@ void BitLinks::SetLink(int aiIndexA, int aiIndexB)
 
 namespace se49080 {
 
-extern "C" const char DAT_010e8e94[];
-extern "C" const char DAT_010e8e74[];
-
 void __fastcall FUN_00c90510(void* pvObject);
-
-struct Shape;
-
-struct ShapeBase {
-    const char* m_pVtbl;
-    int unk004;
-    int unk008;
-    int unk00c;
-    const char* m_pVtbl2;
-
-    void FUN_00d21410(int iType, int iFlags);
-};
-
-struct KeyedPointerEntry : ShapeBase {
-    int unk14;
-    Shape* m_pkShapeB;
-    Shape* m_pkShapeA;
-    float m_fBoundRadius;
-
-    KeyedPointerEntry* FUN_00e49080(Shape* pkShapeA, Shape* pkShapeB, float fRadius);
-};
 
 }
 
@@ -2976,12 +1914,6 @@ void Owner::FUN_00e493a0(Stats* pkStats)
 
 }
 
-struct SrcArray
-{
-    unsigned short* m_pBase;
-    int m_uiLogicalSize;
-};
-
 class AllocatorIface
 {
 public:
@@ -2992,50 +1924,6 @@ public:
     virtual void Free(void* pBuffer, unsigned int size);
 };
 
-
-class SpawnedBase
-{
-public:
-    virtual void unkBase();
-    SpawnedBase(unsigned int flags, int one);
-};
-
-class FUN_00e49900 : public SpawnedBase
-{
-public:
-    virtual void unkBase();
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5c;
-    unsigned short* m_pData;
-    int m_iArrayLength;
-    unsigned int m_uiCapacity;
-    unsigned char m_bFlag;
-    float m_fTimeA;
-    float m_fTimeB;
-
-    FUN_00e49900(unsigned int flags, SrcArray* src, float a, float b);
-};
 
 namespace fnv_00e4e420 {
 struct IntegerHolder {
@@ -3088,18 +1976,9 @@ struct CopyArray {
         m_04 = newSize;
     }
 };
-struct FUN_00e4e420 {
-    IntegerHolder m_00;
-    CopyArray m_04;
-    FUN_00e4e420(const FUN_00e4e420&);
-};
 }  // namespace fnv_00e4e420
 
 struct Count { int n; };
-
-extern "C" void __movsd(unsigned long* destination,
-                        const unsigned long* source,
-                        unsigned int count);
 
 namespace fnv_00e51070 {
 struct Count { int n; };
@@ -3113,8 +1992,6 @@ struct ThresholdAllocator {
     virtual void slot3();
     virtual void ReleaseBlock(void*, int);
 };
-struct ThresholdCompare { bool descending; };
-void __cdecl FUN_00e50f10(float*, int, int, ThresholdCompare);
 struct ThresholdArray {
     float* data;
     int size;
@@ -3150,30 +2027,11 @@ struct ThresholdArray {
 struct Q { __m128 m_vComponents; void FUN_005611c0(); };
 struct QRef { Q* p; Q* operator->() const { return p; } };
 
-class Quat4
-{
-public:
-	float m_fVectorY;
-	float m_fVectorZ;
-	float m_fScalarPart;
-	float m_fVectorX;
-
-	Quat4(float fX, float fY, float fZ, float fW);
-	Quat4 GetAbsolute() const;
-};
-
 template<class T> struct CurveArg { T value; };
 struct V4 { float x, y, z, w; };
 float __cdecl FUN_00e54cb0(int a3, int a4, int a5, int a6, float* p, int a9, int a10, float a11, float a12);
 void __cdecl FUN_00e54630(V4* out, int a3, int a4, int a5, int a6, float v);
-struct CurvePointOps {
-    float* FUN_00e532b0(V4* p1, V4* p2);
-};
-struct CurveLengthOps {
-    float GetHelperValueAsFloat();
-};
 
-extern const float runtimeFloatSettingDefault726;
 __declspec(noalias) float __cdecl LookupAndConsume(const Float4* left, const Float4* right);
 extern "C" float __cdecl FUN_00e54cb0(int a, int b, int c, int d, Float4* p, int e, int f, float g, float h);
 
@@ -3268,9 +2126,6 @@ Resource_e5c5* Registry_e5c5::FUN_00e5c540(const char* name, Resource_e5c5* expe
     return 0;
 }
 
-extern float DAT_010ea628;
-extern float DAT_010ec1b0;
-
 struct __declspec(align(16)) Aabb {
     float minX, minY, minZ, minW;
     float maxX, maxY, maxZ, maxW;
@@ -3295,19 +2150,10 @@ struct CollectorBase {
     CollectorBase() throw() {}
 };
 
-void __cdecl ConstructTemporaryObject(int a, const Aabb* aabb, CollectorBase* collector);
-
 struct Mid : RefObject, CollectorBase {
     HkArr m_ppData;
     int m_18;
     Mid() throw() : m_18(0) {}
-};
-
-struct hkpRemoveTerminalsMoppModifier2 : Mid {
-    int m_1c;
-    hkpRemoveTerminalsMoppModifier2(int a, int c) throw();
-    virtual ~hkpRemoveTerminalsMoppModifier2() throw();
-    virtual void Dummy0() throw();
 };
 
 struct FnvCpu_FUN_00e49bb0_CpuObject { char* FUN_00e49bb0(); };
@@ -3317,8 +2163,6 @@ char* FnvCpu_FUN_00e49bb0_CpuObject::FUN_00e49bb0()
     return reinterpret_cast<char*>(this) + 48;
 }
 
-extern double __cdecl FUN_00ec9e10(double x);
-
 namespace Components {
 struct FUN_00e53160 {
     float x, y, z, w;
@@ -3326,10 +2170,6 @@ struct FUN_00e53160 {
 };
 __declspec(noinline) FUN_00e53160::FUN_00e53160(float a, float b, float c, float d) : x(a), y(b), z(c), w(d) {}
 }
-struct ComponentVector {
-    float x, y, z, w;
-    Components::FUN_00e53160 FUN_00e534c0() const;
-};
 
 struct KnotVector {
     float x,y,z,w;
@@ -3347,12 +2187,6 @@ struct KnotVector {
 };
 __declspec(noinline) KnotVector::KnotVector(float a,float b,float c,float d) : x(a),y(b),z(c),w(d) {}
 __declspec(noinline) KnotVector& KnotVector::FUN_00e53180(const KnotVector& v) { x=v.x;y=v.y;z=v.z;w=v.w;return *this; }
-
-float __cdecl FUN_00e54ba0(const KnotVector&,const KnotVector&);
-
-
-struct CurveArray { float* data; int size; int capacity; };
-struct PointArray { KnotVector* data; int size; int capacity; };
 
 void* _fnv_zlib_memset(void*,int,int);
 struct MarkHeap {
@@ -3462,19 +2296,6 @@ struct FitMatrix {
  void FUN_00c7b0f0();
  __forceinline void set(int a,int b,float value) {GetElementPtr(a,b)=value;}
 };
-struct RhsWork {float component;FitMatrix matrix;};
-struct SparseGrid {
- ElevationArray<float> values;
- ElevationArray<int> rows,cols;
- int numRows,numCols;
- void ResetSpawnArrays(int,int);
- void AppendTriple(int,int,float);
- void FUN_00e58b90();
-};
-float EvaluateBasisFunction(int degree,int numKnots,ElevationArray<float>* knots,int i,float t);
-char* FUN_00e57490(char*,int,int,ElevationArray<float>*,int,ElevationArray<float>*,float);
-char* SolveMatrixColumns(char*,SparseGrid*,FitMatrix*,FitMatrix*,int,float);
-char* CheckPointsWithinThreshold(char*,int,int,ElevationArray<KnotVector>*,ElevationArray<float>*,int,ElevationArray<KnotVector>*,ElevationArray<float>*,float);
 }  // namespace fnv_00e57620
 
 struct MemoryAllocator;
@@ -3511,17 +2332,6 @@ struct VertexVector {
     unsigned int capacity;
 
 };
-struct InputFloats { const float* data; };
-struct InputVertices { const Vertex4* data; };
-struct ScratchIndices {
-
-    unsigned int* data;
-
-    int count;
-
-    int capacity;
-
-};
 struct MemoryAllocator {
 
     virtual void ReportDiagnostic();
@@ -3535,30 +2345,6 @@ struct MemoryAllocator {
     virtual void Free(void* pointer, int requestedBytes);
 
 };
-struct AllocationEnvironment {
-
-    unsigned int unk00, unk04, unk08, unk0c;
-
-    MemoryAllocator* allocator;
-
-};
-extern int __cdecl FUN_00e57210(FloatVector*, int);
-extern int __cdecl RemoveAdjacentDuplicates(FloatVector*, int);
-extern int __cdecl FUN_00e56a00(int*, int, FloatVector*, VertexVector*, int,
-
-    const InputFloats*, ScratchIndices*, float, const InputVertices*);
-struct EvaluationResult {
-
-    bool active;
-
-};
-extern void __cdecl FitSpline(EvaluationResult*, int, int, VertexVector*, FloatVector*,
-
-    int, const InputVertices*, const InputFloats*, float, float);
-extern void __cdecl FUN_00e55cf0(int*, int, FloatVector*, VertexVector*, int);
-extern void __cdecl FUN_00e54fa0(int, const InputVertices*, int, int, FloatVector*, VertexVector*,
-
-    ScratchIndices*, const InputFloats*, int, int, float, float, void*);
 extern const float DAT_010718c0, DAT_010959f4;
 __forceinline void FloatVector::reserve(MemoryAllocator& heap, int wanted) {
     MemoryAllocator* alloc = &heap;
@@ -3595,92 +2381,14 @@ __forceinline void VertexVector::reserve(MemoryAllocator& heap, int wanted) {
 
 }
 
-struct SpawnedAllocator {
-    virtual void unkV0();
-    virtual void unkV1();
-    virtual void unkV2();
-    virtual void* Alloc(int* size);
-    virtual void Free(void* block, unsigned int size);
-};
-
-struct SpawnedHolder {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    SpawnedAllocator* m_pAllocator;
-};
-
 struct SpawnedBlockRef {
     void* data;
     int count;
     unsigned int flags;
 };
 
-void __cdecl FUN_00e568f0(int a1, int a2, void* s);
 void __cdecl ProcessGeometryPasses(int a1, int a2, SpawnedBlockRef* block, hkBool enabled, int b1, float b2, int b3, int b4, int b5);
 
-struct SolverState {
-    float m_00;
-    float m_04;
-    float m_08;
-    float m_0c;
-    float m_10;
-    float m_14;
-    float m_18;
-    float m_1c;
-    float m_20;
-    float m_24;
-    float m_28;
-    float m_2c;
-    float m_30;
-    float m_34;
-    float m_38;
-    float m_3c;
-    float m_40;
-    float m_44;
-    float m_48;
-    float m_4c;
-    float m_50;
-    float m_54;
-    float m_58;
-    float m_5c;
-    float m_60;
-    float m_64;
-    float m_68;
-    float m_6c;
-    float m_70;
-    float m_74;
-    float m_78;
-    float m_7c;
-    float m_80;
-    float m_84;
-    float m_88;
-    float m_8c;
-    float m_90;
-    float m_94;
-    float m_98;
-};
-
-struct SolverOutput {
-    float m_00;
-    float m_04;
-    float m_08;
-    float m_0c;
-    float m_10;
-    float m_14;
-    float m_18;
-    float m_1c;
-    float m_20;
-};
-
-struct BoundaryTable {
-    float samples[16];
-    float scale;
-    float initialScale;
-};
-
-extern double _gModifierZero;
 extern float DAT_0104da4c;
 extern const float runtimeFloatSettingDefault1085 = 1.1f;
 
@@ -3754,22 +2462,6 @@ struct Se5b160_Data : Se5b160_RefObj {
     virtual void v4(); virtual void v5(); virtual void v6(); virtual void v7();
     virtual Se5b160_Type getType() const;
     int unk08; int unk0c;
-};
-struct FUN_00cb9090 : Se5b160_Data {
-    Se5b160_HingeAtoms m_kBridgeAtoms;
-    int unkb4; int unkb8; int unkbc; int unkc0; int unkc4; int unkc8; int unkcc; int unkd0; int unkd4; int unkd8; int unkdc; 
-    FUN_00cb9090() throw();
-    void SetReferencedObject(Se5b160_Motor* motor);
-    void FUN_00cb8fe0(void* info, bool enabled);
-};
-struct FUN_00cdf2f0 : Se5b160_Data {
-    Se5b160_RagdollAtoms m_kBridgeAtoms;
-    int unkec; int unkf0; int unkf4; int unkf8; int unkfc; int unk100; int unk104; int unk108; int unk10c; int unk110; int unk114; int unk118; int unk11c; int unk120; int unk124; int unk128; int unk12c; int unk130; int unk134; int unk138; int unk13c; 
-    FUN_00cdf2f0() throw();
-    void FUN_00cdea70(Se5b160_Motor* motor);
-    void FUN_00cdeab0(Se5b160_Motor* motor);
-    void FUN_00cdea90(Se5b160_Motor* motor);
-    void SetFlagAndClearFloats(void* info, bool enabled);
 };
 struct Se5b160_StrPtr {
     const char* m_pcText;
@@ -3939,12 +2631,6 @@ Se5b160_Instance* __cdecl CreatePoweredConstraint(const Se5b160_Instance* origin
 }
 
 
-struct S00e51a60_BlockDesc {
-    unsigned int m_uiFirstQuantizationParameter;
-    unsigned int m_uiBlockOffset;
-    unsigned int m_ucSecondQuantizationParameter;
-};
-
 struct E5B130Object {
     int unk00;
     int unk04;
@@ -4101,7 +2787,6 @@ struct Segment {Vec4 first,second,unk20,unk30,firstMeta,secondMeta;};
 // Tests a point against segment endpoints; between them writes a cross product and returns count, otherwise writes a difference vector and returns 1.
 // @fnv 0x00e4b6e0
 Vec4* volatile pointInput;Segment* volatile segmentInput;Vec4* volatile resultInput;volatile int kindInput;
-extern "C" int ReadCountInput();
 }  // namespace fnv_00e4b6e0
 
 struct S00e58310_Allocator {
@@ -4216,13 +2901,6 @@ struct S00e58310_Array : S00e58310_ArrayBase<T> {
     }
 };
 
-struct S00e58310_Point {
-    float x;
-    float y;
-    float z;
-    float w;
-};
-
 struct CurvePoint { float x,y,z,w; CurvePoint(float a=0,float b=0,float c=0,float d=0) throw(); float& FUN_00e53590(int); };
 __declspec(noinline) CurvePoint::CurvePoint(float a,float b,float c,float d) throw():x(a),y(b),z(c),w(d){}
 struct CurveHeap {
@@ -4272,9 +2950,6 @@ template<class T> struct FitOwnedArray:FitOwnedArrayBase<T> {
 struct CurveWirePoints {CurvePoint* data;int size;int capacity;};
 void __cdecl ProcessGeometryPasses(int,const CurveWirePoints*,FitOwnedArray<float>*,hkBool,int,float,int*,FitOwnedArray<float>*,FitOwnedArray<CurvePoint>*) throw();
 
-struct E589Destination { float* data; int unknown04; int unknown08; int rows; int columns;
-    float* FUN_00e587b0(int index);
-};
 struct E589Values { float* data; int unknown04; int unknown08; int rows; int columns;
     __declspec(noinline) float FUN_00e58880(int index) { return data[index]; }
     int FUN_00e58890();
@@ -4444,40 +3119,6 @@ struct hkVector4 {
     __forceinline float& operator()(int i) { return m_vComponents.m128_f32[i]; }
     __forceinline const float& operator()(int i) const { return m_vComponents.m128_f32[i]; }
 };
-struct RaySegment {
-    hkVector4 m_vFrom;
-    hkVector4 m_vTo;
-    volatile unsigned int m_pMoppCode;
-};
-struct PrimitiveInfo {
-    unsigned int m_00;
-    unsigned int m_04;
-    unsigned int m_08;
-    unsigned int m_0c;
-    unsigned int m_10;
-    unsigned int m_iElementIndex;
-};
-struct RayVirtualMachine {
-    unsigned int m_pRayCastInput;
-    unsigned int m_04;
-    unsigned int m_08;
-    unsigned int m_0c;
-    float m_invLength;
-    unsigned int m_14;
-    unsigned int m_18;
-    unsigned int m_1c;
-    unsigned int m_pRayCastOutput;
-    unsigned int m_24;
-    unsigned int m_28;
-    unsigned int m_2c;
-    hkVector4 m_kRayCastVector;
-    void FUN_00e5f070(PrimitiveInfo* info, unsigned int code, hkVector4* offset);
-};
-struct RayQuery {
-    hkVector4 m_offset;
-    hkVector4 m_vScale;
-    RayVirtualMachine m_vm;
-};
 extern const double DAT_01091c00;
 }  // namespace fnv_00e5d650
 
@@ -4491,7 +3132,6 @@ extern "C" __m128 _mm_unpackhi_ps(__m128, __m128);
 extern "C" __m128 _mm_setzero_ps();
 extern "C" __m128 _mm_set_ps1(float);
 extern "C" double DAT_01091c00;
-extern "C" __m128 _mm_load_ss(const float*);
 union __declspec(align(16)) QueryVector {
     __m128 quad;
     struct { float x, y, z, w; } components;
@@ -4506,29 +3146,7 @@ struct QueryState {
     QueryState() { x=0; y=0; z=0; primitiveOffset=0; properties=0; }
 };
 struct QueryBounds { QueryVector low, high; };
-struct SphereQuery {
-    void* hits;
-    int unk04, unk08, unk0c;
-    float inverseScale;
-    int unk14, unk18, unk1c;
-    void* volatile collector;
-    int unk24, unk28, unk2c;
-    QueryVector sphere;
-    void FUN_00e5fb50(QueryState*, unsigned char*, QueryBounds*);
-};
 }  // namespace fnv_00e5d710
-
-struct V4Init_00e53160 {
-    float x;
-    float y;
-    float z;
-    float w;
-
-    V4Init_00e53160* FUN_00e53160(float a, float b, float c, float d);
-};
-
-void __cdecl FUN_00e53a80(
-    int span, float u, int degree, int limit, float** knots, float* basis);
 
 struct S00e49e00_Slot {};
 inline void* operator new(size_t, void* p, S00e49e00_Slot) { __assume(p != 0); return p; }
@@ -4565,29 +3183,8 @@ template <class T> struct ObjectArray {
     }
 };
 
-struct Child;
-
-struct Container {
-    int unk000;
-    int unk004;
-    int unk008;
-    int unk00c;
-    int unk010;
-    int unk014;
-    int unk018;
-    int unk01c;
-    int unk020;
-    int unk024;
-    int unk028;
-    int unk02c;
-    ObjectArray<Child*> m_kChildList;
-
-    void FUN_00e49e00(Child* pkChild);
-};
-
 }
 
 namespace e54 {
 int __cdecl FindFloatInterval(int a, int degree, float u, float** knots);
-void __cdecl ComputeBasisFunctions(int span, float u, int degree, float** knots, float* basis);
 }

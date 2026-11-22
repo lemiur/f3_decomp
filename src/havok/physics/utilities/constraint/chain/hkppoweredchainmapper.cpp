@@ -148,7 +148,6 @@ struct FnMemory
 extern "C" FnMemory* __cdecl FUN_00c85750();
 extern "C" void __cdecl FUN_00c908c0(FnAllocator*, void*, int, int);
 extern "C" void __cdecl ResizeAudioStream(FnAllocator*, void*, int);
-extern "C" void* __cdecl FUN_00cb1280(void*, int, unsigned int);
 extern "C" int DAT_010e0654;
 
 template <class T> struct FnArray
@@ -302,9 +301,6 @@ struct FnMapper
     FnMapper() : vtable(&DAT_010e0654), refs(1)
     {}
 };
-extern "C" int __cdecl FUN_00e5ba30(hkArray<int>*, int, int, FnArray<int>*, FnArray<int>*);
-extern "C" FnObject* __cdecl FUN_00e5b510(FnArray<int>*, unsigned char);
-extern "C" int __cdecl CloneInstanceFromSource(int);
 struct FnDiagnostic
 {
     int stream;
@@ -664,11 +660,6 @@ struct hkpPoweredChainMapperLinkInfo
     int unk08;
 };
 
-struct SomeClass : public hkpPoweredChainMapper
-{
-    void SetLinkVector(int chainIndex, const __m128& vec);
-};
-
 class hkMemoryAllocatorE3A3
 {
   public:
@@ -758,36 +749,6 @@ template <class T> class hkArrayE3A3
     }
 };
 
-class hkConstraintRefE3A3
-{
-  public:
-    void removeReference() throw();
-};
-
-struct hkpConstraintEntryE3A3
-{
-    hkConstraintRefE3A3* m_pHavokConstraint;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-};
-
 class hkReferencedObjectE3A3
 {
   public:
@@ -798,13 +759,6 @@ class hkReferencedObjectE3A3
 };
 
 namespace FUN_00e3a3d0 {
-class hkpConstraintChainMapperE3A3 : public hkReferencedObjectE3A3
-{
-  public:
-    hkArrayE3A3<hkpConstraintEntryE3A3> m_entries;
-
-    virtual ~hkpConstraintChainMapperE3A3() throw();
-};
 
 }
 

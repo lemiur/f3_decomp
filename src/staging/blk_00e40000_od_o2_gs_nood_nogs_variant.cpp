@@ -18,10 +18,6 @@ struct RotationVector
     }
 };
 extern const __m128 DAT_01017d10;
-extern const float DAT_01011d78;
-extern const float DAT_01017718;
-extern const float DAT_01016248;
-float __cdecl Atan2(float y, float x);
 
 namespace fnv_00e526f0 {
 union __declspec(intrin_type) __declspec(align(16)) __m128
@@ -33,19 +29,9 @@ union __declspec(intrin_type) __declspec(align(16)) __m128
 extern "C"
 {
     __m128 _mm_and_ps(__m128 a, __m128 b);
-    double __cdecl sqrt(double);
 }
 
 extern const __m128 DAT_01017d10;
-
-struct hkQuaternion
-{
-    union
-    {
-        __m128 m_vComponents;
-        float m_f[4];
-    };
-};
 
 }  // namespace fnv_00e526f0
 

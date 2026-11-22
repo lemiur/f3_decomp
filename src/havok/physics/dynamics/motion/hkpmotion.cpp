@@ -232,11 +232,6 @@ struct hkVector4C865
     }
 };
 
-struct hkQuaternionC865
-{
-    hkVector4C865 m_vec;
-};
-
 class hkHalfC865
 {
   public:
@@ -248,22 +243,6 @@ class hkHalfC865
     }
 
     short m_uiFilterValue;
-};
-
-struct hkMotionStateC865
-{
-    void FUN_00cf2410(const hkVector4C865& kPosition, const hkQuaternionC865& kRotationBasis);
-
-    hkVector4C865 m_kMotionTransform[4];
-    hkVector4C865 m_kSweptTransform[5];
-    hkVector4C865 m_kDeltaAngle;
-    float m_fObjectRadius;
-    float m_fLinearDamping;
-    float m_fAngularDamping;
-    unsigned char m_fSurfaceFriction;
-    unsigned char m_fRestitution;
-    unsigned char m_uiDeactivationClass;
-    unsigned char unkAF;
 };
 
 class hkBaseObjectC865
@@ -283,28 +262,6 @@ class hkReferencedObjectC865 : public hkBaseObjectC865
     short m_sReferenceCount;
 };
 
-class FUN_00c86530 : public hkReferencedObjectC865
-{
-  public:
-    FUN_00c86530(const hkVector4C865& kPosition, const hkQuaternionC865& kRotationBasis,
-                 bool bWantDeactivation) throw();
-    virtual ~FUN_00c86530() throw();
-
-    unsigned char m_type;
-    unsigned char m_ucDeactivationIntegrateCounter;
-    unsigned short m_ausDeactivationNumInactiveFrames[2];
-    unsigned short unk0E;
-    hkMotionStateC865 m_kMotionState;
-    hkVector4C865 m_kInertiaAndMassInv;
-    hkVector4C865 m_kTranslationalVelocity;
-    hkVector4C865 m_kAngularVelocity;
-    hkVector4C865 m_akDeactivationReferencePositions[2];
-    unsigned int m_auiDeactivationReferenceOrientations[2];
-    void* m_pSavedMotion;
-    unsigned short m_savedMotionSize;
-    hkHalfC865 m_fGravityFactor;
-};
-
 }  // namespace fnv_00c86530
 
 namespace fnv_00c86610 {
@@ -313,30 +270,7 @@ union __declspec(intrin_type) __declspec(align(16)) __m128
     float m128_f32[4];
     unsigned __int64 m128_u64[2];
 };
-struct Motion_00c86660
-{
-    void __thiscall FUN_00c86660(void* a);
-};
-struct Motion_00c86610
-{
-    Motion_00c86610();
-    void __thiscall FUN_00c86610(Motion_00c86610* dst);
-};
 }  // namespace fnv_00c86610
-
-struct FUN_00c864b0_Class
-{
-    void __thiscall FUN_00c864b0(const float* a);
-};
-
-struct FUN_00c864d0_Class
-{
-    char m_e0[0xe0];
-    __m128 m_f0e0;
-    void __thiscall CopyFrom(__m128* v);
-};
-
-extern "C" void _mm_store_ss(float*, __m128);
 
 struct MotionMassView : hkpMotionC864F
 {

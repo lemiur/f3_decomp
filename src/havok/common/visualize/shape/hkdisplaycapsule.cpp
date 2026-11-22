@@ -2,16 +2,6 @@
 // src/havok/common/visualize/shape/hkdisplaycapsule.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/common/visualize/shape/hkdisplaycapsule.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-struct StaticHelper
-{
-    static void HandleObjectEvent(void* a, void* b, float c, void* d, void* e, void* f, void* g);
-};
-
-struct hkDisplayCapsule
-{
-    void FUN_00d22d70();
-};
-
 union __declspec(intrin_type) __declspec(align(16)) __m128
 {
     float m128_f32[4];
@@ -28,7 +18,6 @@ extern "C"
     __m128 _mm_load_ss(const float*);
     void _mm_store_ss(float*, __m128);
     double sqrt(double);
-    void _ReadWriteBarrier();
 }
 extern float DAT_0104da4c;
 extern double DAT_01016978;
@@ -341,12 +330,6 @@ fallback:
     }
 }
 
-extern Context* volatile testContext;
-extern Record* volatile testLeft;
-extern Record* volatile testRight;
-extern Vector* volatile testPoint;
-extern Vector* volatile testOut;
-
 struct V
 {
     union
@@ -621,16 +604,6 @@ static __declspec(noinline) void FUN_00d23850(IntersectionContext* ctx, PairPlan
     }
 }
 
-struct Wrap_b
-{
-    PlaneRecord* p;
-};
-
-struct Wrap_c
-{
-    PlaneRecord* p;
-};
-
 struct Wrap_reorder
 {
     int p;
@@ -717,20 +690,6 @@ sequential:
         FUN_00d23850(ctx, pb, pc, pf, pr);
     }
 }
-
-extern PlaneRecord* volatile feed_a;
-
-extern IntersectionContext* volatile feed_ctx;
-
-extern PlaneRecord* volatile feed_b;
-
-extern PlaneRecord* volatile feed_c;
-
-extern int volatile feed_reorder;
-
-extern const __m128* volatile feed_fallback;
-
-extern __m128* volatile feed_result;
 
 extern float runtimeFloatSettingDefault166;
 

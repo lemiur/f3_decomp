@@ -4,10 +4,6 @@
 
 #include "havok/hkpTriangleShape.h"
 
-extern char const* const g_01268970_arg1;
-
-void __cdecl FUN_00c90360(char const*, char const* const*);
-
 // FUN_00d1ff10: hkpTriangleShape helper returning (m_ucWeldingPadding + 1) * 3.
 class FUN_00d1ff10_cls : public hkpTriangleShape
 {
@@ -38,34 +34,10 @@ extern "C" __m128 _mm_add_ps(__m128 a, __m128 b);
 extern "C" __m128 _mm_mul_ps(__m128 a, __m128 b);
 extern "C" __m128 _mm_load_ss(const float* p);
 extern "C" __m128 _mm_shuffle_ps(__m128 a, __m128 b, unsigned int imm);
-extern "C" void _mm_store_ps(float* p, __m128 a);
-extern float DAT_0106c2e0;
-
-class FUN_00d1ff40_cls {
-public:
-    int pad00[8];
-    __m128 m_20;
-    __m128 m_30;
-    __m128 m_40;
-
-    void FUN_00d1ff40(hkVector4* out);
-};
-
-struct FUN_00d1ff20_s {
-    void CopyVector(float* dst);
-};
 
 extern "C" __m128 _mm_sub_ps(__m128, __m128);
 extern "C" __m128 _mm_add_ss(__m128, __m128);
-extern "C" __m128 _mm_mul_ss(__m128, __m128);
-extern "C" __m128 _mm_sub_ss(__m128, __m128);
-extern "C" __m128 _mm_rsqrt_ss(__m128);
-extern "C" __m128 _mm_cmpeq_ss(__m128, __m128);
 extern "C" __m128 _mm_andnot_ps(__m128, __m128);
-extern "C" __m128 _mm_set_ss(float);
-extern const float DAT_01011d78;
-extern const float DAT_01017718;
-extern const float DAT_01016248;
 
 // Computes the normalized cross product of two edge vectors and writes the result to out.
 // @fnv 0x00d1ff80
@@ -88,22 +60,6 @@ struct SimdVector {
     __forceinline void difference(const SimdVector& a, const SimdVector& b) { value = _mm_sub_ps(a.value, b.value); }
     __forceinline void broadcast(float f) { __m128 scalar = _mm_load_ss(&f); value = _mm_shuffle_ps(scalar, scalar, 0); }
 };
-struct Bounds { SimdVector minimum, maximum; };
-struct TriangleBounds : hkpConvexShape {
-    unsigned short welding;
-    unsigned char weldingType;
-    unsigned char extruded;
-    unsigned int unk18;
-    unsigned int unk1c;
-    SimdVector vertexA, vertexB, vertexC, extrusion;
-    void FUN_00d20050(const void* transform, float tolerance, Bounds& out) const;
-};
-
-class Cls_00d20110 : public hkpTriangleShape
-{
-public:
-    hkVector4* GetVertices(hkVector4* output);
-};
 
 extern "C" __m128 _mm_load_ps(const float*);
 extern "C" void _mm_store_ss(float*, __m128);
@@ -118,54 +74,21 @@ struct SupportVector {
     __forceinline void add(const SupportVector& b) { vector = _mm_add_ps(vector, b.vector); }
 };
 
-struct TriangleSupport : hkpTriangleShape {
-    void FUN_00d20270(float const* pf, float* out);
-};
-
 #include <math.h>
 
 
 
-extern "C" __m128 _mm_load_ps1(const float*);
 extern "C" __m128 _mm_unpacklo_ps(__m128, __m128);
 extern "C" __m128 _mm_unpackhi_ps(__m128, __m128);
 extern "C" __m128 _mm_movelh_ps(__m128, __m128);
 extern "C" __m128 _mm_movehl_ps(__m128, __m128);
 extern "C" int _mm_movemask_ps(__m128);
 
-extern int DAT_011b3b4c[];
-extern int DAT_011b3b50[];
-extern float DAT_011b3b38[];
 // hkpWeldingUtility sin/cos table: cosAccept0, sinAccept0, cosSnap0, cosSnap1, cosAccept1, sinAccept1
 struct FloatArray6 { float value[6]; };
-extern FloatArray6 DAT_01269210[];
 
 static __forceinline float scalar(__m128 v) { float out; _mm_store_ss(&out, v); return out; }
 static __forceinline __m128 splat(__m128 v) { return _mm_shuffle_ps(v, v, 0); }
-
-struct VectorOperations {
-    __m128 value;
-    void FUN_00c7f700(const hkRotation*, const __m128*);
-    void FUN_00c7f690(const hkTransform*, const hkVector4*);
-    void FUN_00c7f640(const hkTransform*, const VectorOperations&);
-};
-struct SupportShape {
-    virtual void slot00(); virtual void slot04(); virtual void slot08();
-    virtual void slot0c(); virtual void slot10(); virtual void slot14();
-    virtual void slot18(); virtual void slot1c(); virtual void slot20();
-    virtual void slot24(); virtual void slot28(); virtual void slot2c();
-    virtual void slot30(); virtual void slot34(); virtual void slot38();
-    virtual void slot3c(); virtual void slot40();
-    virtual void getSupport(VectorOperations*);
-};
-extern float __cdecl FUN_00c9e0f0(float, float);
-
-class TriangleWelding : public hkpTriangleShape {
-public:
-    int FUN_00d203f0(unsigned short* indices, unsigned char* count,
-        const hkVector4* position, const hkTransform* transform,
-        SupportShape* source, const hkTransform* sourceTransform, hkVector4* output);
-};
 
 typedef unsigned char hkUint8_S;
 typedef unsigned short hkUint16_S;
@@ -291,15 +214,9 @@ extern __m128 _mm_rcp_ps(__m128 _A);
 extern __m128 _mm_and_ps(__m128 _A,__m128 _B);
 
 extern __m128 _mm_or_ps(__m128 _A,__m128 _B);
-extern __m128 _mm_xor_ps(__m128 _A,__m128 _B);
-
-extern __m128 _mm_cmpeq_ps(__m128 _A,__m128 _B);
-extern __m128 _mm_cmplt_ps(__m128 _A,__m128 _B);
-extern __m128 _mm_cmple_ps(__m128 _A,__m128 _B);
 
 extern int _mm_movemask_ps(__m128 _A);
 
-extern __m128 _mm_setr_ps(float _A,float _B,float _C,float _D);
 extern __m128 _mm_setzero_ps(void);};
 typedef __m128 hkQuadReal;
 class hkVector4_S;
@@ -364,7 +281,6 @@ hkQuadReal e=_mm_rcp_ps(r);
 return _mm_sub_ps(_mm_add_ps(e,e),_mm_mul_ps(_mm_mul_ps(e,r),e));
 }
 }
-extern const hkQuadReal g_kQuadRealConstant;
 class hkTransform_S;
 class hkVector4_S
 {
@@ -784,15 +700,8 @@ public:
     }
 };
 
-extern const LaneVector* obtainVector();
-extern LaneVector* obtainOutput();
-
 extern "C" void _mm_store_ss(float*, __m128);
 struct ShapeRayCastQuery {
     hkVector4_S m_vFrom;
     hkVector4_S m_vTo;
-};
-class TriangleRayCast : public hkpTriangleShape_S {
-public:
-    hkBool_S FUN_00d20a70(const ShapeRayCastQuery&, ShapeRayCastOutput&) const;
 };

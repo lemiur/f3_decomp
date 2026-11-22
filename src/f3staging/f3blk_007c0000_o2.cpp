@@ -2591,7 +2591,6 @@ void ActorX::FUN_007c7730(bool arg1, bool arg2)
 }   // namespace f3m_007c7730
 
 // @f3 0x007c1210 (community match, verified in this file)
-extern float FUN_00db8b4c;
 namespace f3m_007c1210 {
 struct Mat3 {
     float m[9];
@@ -10240,7 +10239,6 @@ char O_7c7630::FUN_007c7630(float f) { if (Flag7()) v(f); return 0; }
 // @f3 0x007da910 (community match, verified in this file)
 namespace f3m_007da910 {
 void __stdcall FUN_007ac760(int v);
-struct In_7da910 { char pad[0x9c]; };
 struct M_7da910 { char pad[0x9c]; struct R { char pad[0xe0]; int v; }* r; };
 struct O_7da910 { int u0; M_7da910* m; char pad[0x4c]; char b54; void FUN_007da910(); };
 void O_7da910::FUN_007da910() { if (b54) { FUN_007ac760(m->r->v); b54 = 0; } }
@@ -10287,7 +10285,6 @@ void Owner::FUN_007c1e00() {
 // @f3 0x007da940 (community match, verified in this file)
 namespace f3m_007da940 {
 void __stdcall FUN_007ac700(int v);
-struct R_7da940 { int v; };
 struct M_7da940 { char pad[0x9c]; struct { char pad[0xe0]; int v; }* r; };
 struct O_7da940 { int u0; M_7da940* m; char pad[8]; int a10; char pad2[0x40]; char b54; void FUN_007da940(); };
 void O_7da940::FUN_007da940() { if (a10 == 2 || a10 == 3) { FUN_007ac700(m->r->v); b54 = 1; } }
@@ -12466,7 +12463,6 @@ bool Owner::FUN_007d2b80(float first,float second,unsigned int unused){bool resu
 }
 
 // @f3 0x007d88a0 (community match, verified in this file)
-extern const float FUN_00e1ae88;
 namespace f3m_007d88a0 {
 namespace f3m_007d88a0 {
 struct Point3_88a0 {
@@ -15752,7 +15748,6 @@ void __cdecl FUN_007c7990(Vec3* out, int count, Vec3 center, float a6, float a7,
 
 // @f3 0x007c9b90 (community match, verified in this file)
 #include <math.h>
-extern float DAT_00db9510;
 namespace f3m_007c9b90 {
 namespace n7c9b90 {
 struct Vec3 {
@@ -27627,8 +27622,6 @@ struct MvDisplay
     virtual void __cdecl Print(int iX, int iY, const char* pFormat, ...);
 };
 
-struct MvSpace;
-
 struct MvReference
 {
     virtual void s000(); virtual void s001(); virtual void s002(); virtual void s003();
@@ -30918,7 +30911,6 @@ void Self7c6f40::FUN_007c6f40(void* arg)
 }
 
 // @f3 0x007d45b0 (community match, verified in this file)
-extern "C" float DAT_01011d78;
 namespace f3m_007d45b0 {
 namespace q7d45b0 {
 struct Proc
@@ -35134,7 +35126,6 @@ NiPoint3 Task::FUN_007d1e40()
 
 // @f3 0x007d5780 (community match, verified in this file)
 extern float DAT_0108cba0;
-extern float FUN_00dbe1e0;
 extern double FUN_00db38b0;
 namespace f3m_007d5780 {
 
@@ -37401,72 +37392,6 @@ extern "C" __declspec(dllimport) long __stdcall InterlockedDecrement(volatile lo
 extern "C" __declspec(dllimport) long __stdcall InterlockedIncrement(volatile long*);
 
 void* __cdecl FUN_0089eb90(unsigned int size);
-
-struct RenderObj {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5C;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6C;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7C;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8C;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9C;
-    int unkA0;
-    int unkA4;
-    int unkA8;
-    int unkAC;
-    int unkB0;
-    int unkB4;
-    int unkB8;
-    int unkBC;
-    int unkC0;
-    int unkC4;
-    int unkC8;
-    int unkCC;
-    int unkD0;
-    int unkD4;
-    int unkD8;
-    int unkDC;
-    int unkE0;
-    int unkE4;
-    int unkE8;
-    int unkEC;
-    int unkF0;
-    int unkF4;
-    int body;
-};
 
 struct SceneRef {
     virtual void v00();
@@ -45652,14 +45577,6 @@ struct Obj
     int unk04, unk08;
     unsigned formID0c;
 };
-struct CF845
-{
-    CF845(int);
-    bool FUN_00624070();
-    int FUN_004a3a20();
-    int FUN_0043b4d0();
-    int value;
-};
 struct Shape
 {
     int FUN_008f76a0(int);
@@ -45689,7 +45606,6 @@ struct Body
     virtual void v2();
     virtual BodyPart* v3();
 };
-Body* __cdecl FUN_004b5820(Buffer*);
 struct Wrapper
 {
     __forceinline void* FUN_00559450() { return value; }
@@ -45702,7 +45618,6 @@ struct Ref
     __forceinline Node* FUN_0044ddc0() { return node08; }
 };
 Ref* __cdecl FUN_004b5260(void*);
-Shape* __cdecl FUN_004a3a40(void*);
 struct Hit
 {
     Obj* ref;
@@ -45752,11 +45667,6 @@ struct DebugSetting
     unsigned char* FUN_00408d60();
 };
 extern DebugSetting g_011f20b8, g_011f20ec;
-struct FloatSetting
-{
-    float* FUN_00403e20();
-};
-extern FloatSetting g_011f210c;
 struct Impact
 {
     void SpawnGroupNodeNearPlayer();
@@ -49673,9 +49583,7 @@ Projectile::~Projectile()
 #include <math.h>
 extern float DAT_00f60a44;
 extern float DAT_00dbeb38;
-extern float DAT_00dbe1e0;
 extern float DAT_00dbcbd0;
-extern float DAT_00dfcd00;
 namespace f3m_007d3ca0 {
 
 namespace f3m_007d3ca0 {

@@ -23,28 +23,9 @@ struct C68E30MemoryRouter
 extern "C" C68E30MemoryRouter& __cdecl FUN_00c85750();
 void __cdecl ResizeAudioStream(void* alloc, void* array, int sizeElem);
 
-struct C68E30PrimaryBase
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-};
-
 struct C68E30Listener
 {
     int unk00;
-};
-
-struct C68E30Entity : C68E30PrimaryBase, C68E30Listener
-{
-};
-
-struct C68E30Holder
-{
-    int unk00;
-    int unk04;
-    C68E30Entity* m_pEntity;
 };
 
 struct C68E30Pair
@@ -78,53 +59,6 @@ struct C68E30PairArray
     }
 };
 
-struct C68E30Owner
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5C;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6C;
-    int unk70;
-    int unk74;
-    int unk78;
-    C68E30PairArray m_kListeners;
-
-    void FUN_00c68e30(C68E30Holder* holder, int value);
-};
-
-struct AudioAllocator
-{
-    virtual void v00();
-    virtual void v04();
-    virtual void Free(void* apMemory, unsigned int auiSize) throw();
-    virtual void v0c();
-    virtual void Resize(void* apMemory, unsigned int auiSize) throw();
-};
-
 struct AudioHolder
 {
     int unk00;
@@ -138,8 +72,6 @@ namespace fnvc_adapt {
 AudioHolder* __cdecl FUN_00c85750() throw();
 }
 void __cdecl FUN_00c908c0(void* apOwner, void* apArray, int aiSize, int aiAlign);
-
-extern int DAT_01268fd0;
 
 struct SweptVirtualObj
 {
@@ -338,8 +270,6 @@ struct C68E30Allocator
 };
 
 void __cdecl FUN_00c908c0(void* alloc, void* array, int numElements, int sizeElem);
-void* __cdecl AllocateWithHeader(void* alloc, int size);
-void __cdecl FUN_00c856c0(void* alloc, void* p);
 
 struct hkBool
 {
@@ -617,14 +547,6 @@ static __declspec(noinline) int FUN_00e0b850(Data* fixups, Sink* output, unsigne
     return total + payloadSize + 4;
 }
 
-struct ObjectWriteTri
-{
-    int a;
-    int b;
-    int c;
-    int d;
-};
-
 struct ObjectWriteItem
 {
     int m_00;
@@ -642,63 +564,10 @@ struct ObjectWriteArrItem
     int m_cap;
 };
 
-struct ObjectWriteArrTri
-{
-    ObjectWriteTri* m_data;
-    int m_iElementCount;
-    int m_cap;
-};
-
-struct ObjectWriteArrByte
-{
-    char* m_data;
-    int m_iElementCount;
-    int m_cap;
-};
-
-struct ObjectWriteArrInt
-{
-    int* m_data;
-    int m_iElementCount;
-    int m_cap;
-};
-
-struct ObjectWriteW
-{
-    ObjectWriteArrInt m_a0;
-    ObjectWriteArrTri m_a1;
-    ObjectWriteArrInt m_a2;
-    ObjectWriteArrInt m_a3;
-    int m_30;
-    void FUN_00e028e0();
-};
-
-struct ObjectWriteZ
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    void FUN_00cc06f0(ObjectWriteArrByte* y, int one);
-    void FUN_00cc0780();
-};
-
 struct ObjectWriteInfo
 {
     char unk00;
     char m_01;
-};
-
-struct ObjectWriteX
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    void FUN_00e02bb0(ObjectWriteInfo* info);
-    void FUN_00e02a80(ObjectWriteZ* z, int a, int b, ObjectWriteW* w);
-    void FUN_00e02c70();
 };
 
 extern char DAT_011b7b89;
@@ -760,9 +629,6 @@ struct NativeThreadMemory {
 extern char DAT_00e7a244, DAT_00dcc494;
 extern unsigned long DAT_010f3170;
 extern void __cdecl FUN_00901f10(void*, int);
-extern int __cdecl FUN_00a8b5b0(Data* fixups, Sink* output, unsigned int idLow, unsigned int idHigh,
-                                unsigned int classLow, unsigned int classHigh, const void* payload,
-                                unsigned int payloadSize, ObjectWriteFlag swap);
 int __cdecl FUN_00e0bd40(Sink* sink, ObjectWriteInfo* layout, unsigned int idLow,
                          unsigned int idHigh, int source, unsigned int size, ObjectWriteArrItem* output)
 {

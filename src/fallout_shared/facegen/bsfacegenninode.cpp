@@ -8,9 +8,6 @@ class NiNode
     const NiPoint3& FUN_0045bb80() const;
 };
 
-extern NiNode* DAT_011d59ec;
-extern const NiPoint3 _NiPoint3_ZERO;
-
 struct GeometryVertexBuffer
 {
     char b[12];
@@ -37,8 +34,6 @@ class ProcessLists
     unsigned char* GetLifeStateControlFlag(void);
 };
 
-extern ProcessLists g_011d5a5c;
-
 namespace fnv_00663a70 {
 struct NiUpdateData
 {
@@ -51,10 +46,6 @@ struct NiUpdateData
     char _pad_9[3];
 };
 typedef char _sizecheck_NiUpdateData[sizeof(NiUpdateData) == 12 ? 1 : -1];
-struct FUN_00663a70_shell : public BSFaceGenNiNode
-{
-    void UpdateFaceGenNode(NiUpdateData*, unsigned int);
-};
 
 struct NiAVObject
 {
@@ -64,39 +55,16 @@ struct NiNode
 {
     void UpdateDownwardPass(NiUpdateData*, unsigned int);
 };
-struct Stand663
-{
-    void UpdateFaceGenAnimation(NiUpdateData*);
-};
 }  // namespace fnv_00663a70
 
-struct BSFadeNode;
-struct BSMultiBoundNode;
-struct BSResizableTriShape;
-struct BSSegmentedTriShape;
 struct NiAVObject;
-struct NiCullingProcess;
-struct NiGeometry;
-struct NiLines;
 struct NiNode;
-struct NiParticles;
 struct NiTriBasedGeom;
-struct NiTriShape;
-struct NiTriStrips;
-struct NiVisibleArray;
-struct bhkBlendCollisionObject;
-struct bhkLimitedHingeConstraint;
-struct bhkNiCollisionObject;
-struct bhkRigidBody;
 struct NiMemObject
 {
     char _pad_0[1];
 };
 typedef char _sizecheck_NiMemObject[sizeof(NiMemObject) == 1 ? 1 : -1];
-struct FUN_00663ae0_shell : public BSFaceGenNiNode
-{
-    void CullWithBoundAccum(NiCullingProcess*);
-};
 
 struct NiBound;
 struct NiAVObject
@@ -104,28 +72,9 @@ struct NiAVObject
     NiBound& GetBoundingVolume();
 };
 
-struct DummyAccum
-{
-    int GetField19C();
-    void RenderBound(NiBound&, int);
-    void DispatchBatchRenderer();
-};
-
-struct DummyNode
-{
-    void FUN_00a5dbe0(NiCullingProcess*);
-};
-
-DummyAccum* __fastcall GetStringAtOffsetC4(NiCullingProcess*);
-
 struct BSStrHelper663
 {
     operator const char*() const;
-};
-
-struct FUN_00662a40_shell
-{
-    char __thiscall GetByteAtOffsetD6();
 };
 
 struct GlobalObject_0044f440
@@ -145,19 +94,6 @@ GlobalObject_0044f440 g_011d5b34;
 
 }  // namespace fnv_006633e0
 
-struct FUN_00662aa0_shell : BSFaceGenNiNode
-{
-    void SetFixedNormals(bool abFixedNormals);
-};
-
-void _delete(void* ptr, unsigned int size);
-
-struct FUN_00662ac0_shell
-{
-    void* DestroyIfFlagged(unsigned int flags);
-    void FUN_00662b00();
-};
-
 namespace fnv_00663ab0 {
 struct NiUpdateData
 {
@@ -168,34 +104,7 @@ struct NiNode
     virtual void UpdateTransformAndBounds(NiUpdateData&);
 };
 
-struct FUN_00663ab0_class : NiNode
-{
-    void UpdateFaceGenAnimation(NiUpdateData&);
-    void FUN_00663ab0(NiUpdateData&);
-};
-
 }  // namespace fnv_00663ab0
-
-struct Ret36
-{
-    unsigned int v[9];
-};
-struct FUN_00662a10_shell
-{
-    char _pad[0xB0];
-    Ret36 _m;
-    Ret36 GetRet36();
-};
-
-struct FUN_00662a80_shell : BSFaceGenNiNode
-{
-    unsigned char FUN_00662a80();
-};
-
-struct FUN_009a0240_shell : BSFaceGenNiNode
-{
-    char GetFixedNormals();
-};
 
 namespace fnv_00663510 {
 class Actor;
@@ -625,7 +534,6 @@ class MobileObject
     BaseProcess* GetCurrentAIProcess() const;
     unsigned int GetCurrentProcessLevel();
 };
-extern PlayerCharacter* g_thePlayer;
 
 class FaceGenAnimData
 {
@@ -790,49 +698,11 @@ class NiAVObject
     bool FUN_00456610();
     bool FUN_004f0140();
 };
-class Calendar
-{
-  public:
-    unsigned int GetDaysPassed();
-};
-class Setting_S
-{
-  public:
-    float* Float();
-};
-class Twin_0084d030
-{
-  public:
-    float GetStoredFloatValue();
-};
 class ProcessLists
 {
   public:
     unsigned char* GetLifeStateControlFlag();
     bool CanAddActorToList(Actor*, int);
-};
-class Interface
-{
-  public:
-    static bool __cdecl IsSaveLoadActive();
-};
-extern Setting_S g_011c5724;
-extern Twin_0084d030 g_timeGlobal;
-extern ProcessLists g_011df6d0;
-extern ProcessLists DAT_011e0e80;
-unsigned char __cdecl FUN_00663a30();
-unsigned char __fastcall FUN_006639f0(char*);
-unsigned char __fastcall GetByteAt1D(char*);
-void __cdecl FUN_00652510(Actor*);
-
-struct FaceGenUpdateData663510
-{
-    float fTime;
-    bool m_bUpdateEnabled;
-};
-struct FUN_00663510_t
-{
-    void UpdateFaceGenAnimation(FaceGenUpdateData663510* UpdateData);
 };
 
 }  // namespace fnv_00663510
@@ -1006,139 +876,7 @@ struct FUN_00662b70_cls
 };
 
 // ApplyParamValues candidate
-class FUN_00662bc0_Sub;
-class FUN_00662bc0_Holder
-{
-  public:
-    void FUN_00662030(int a0, int a1, void* a2, int a3, float a4);
-};
-class FUN_00662bc0_Obj
-{
-  public:
-    virtual void v00();
-    virtual void v01();
-    virtual void v02();
-    virtual void v03();
-    virtual void v04();
-    virtual void v05();
-    virtual void v06();
-    virtual void v07();
-    virtual void v08();
-    virtual void v09();
-    virtual void v10();
-    virtual void v11();
-    virtual void v12();
-    virtual void v13();
-    virtual void v14();
-    virtual void v15();
-    virtual void v16();
-    virtual void v17();
-    virtual void v18();
-    virtual void v19();
-    virtual void v20();
-    virtual void v21();
-    virtual void v22();
-    virtual void v23();
-    virtual void v24();
-    virtual void v25();
-    virtual void v26();
-    virtual void v27();
-    virtual void v28();
-    virtual void v29();
-    virtual void v30();
-    virtual void v31();
-    virtual void v32();
-    virtual void v33();
-    virtual void v34();
-    virtual void v35();
-    virtual void v36();
-    virtual float v37(int i);
-};
-class FUN_00662bc0_Param
-{
-  public:
-    void* m_00;
-    int m_04;
-    int unk08;
-    int unk0c;
-    FUN_00662bc0_Holder* m_10;
-    int m_14;
-    int unk18;
-    unsigned char m_1c;
-};
 extern "C" void __cdecl FUN_00653340(void* a, void* b);
-extern const double DAT_01012060;
-extern const double DAT_01012070;
-class FUN_00662bc0_cls
-{
-  public:
-    virtual void v00();
-    virtual void v01();
-    virtual void v02();
-    virtual void v03();
-    virtual void v04();
-    virtual void v05();
-    virtual void v06();
-    virtual void v07();
-    virtual void v08();
-    virtual void v09();
-    virtual void v10();
-    virtual void v11();
-    virtual void v12();
-    virtual void v13();
-    virtual void v14();
-    virtual void v15();
-    virtual void v16();
-    virtual void v17();
-    virtual void v18();
-    virtual void v19();
-    virtual void v20();
-    virtual void v21();
-    virtual void v22();
-    virtual void v23();
-    virtual void v24();
-    virtual void v25();
-    virtual void v26();
-    virtual void v27();
-    virtual void v28();
-    virtual void v29();
-    virtual void v30();
-    virtual void v31();
-    virtual void v32();
-    virtual void v33();
-    virtual void v34();
-    virtual void v35();
-    virtual void v36();
-    virtual void v37();
-    virtual void v38();
-    virtual void v39();
-    virtual void v40();
-    virtual void v41();
-    virtual void v42();
-    virtual void v43();
-    virtual void v44();
-    virtual void v45();
-    virtual void v46();
-    virtual void v47();
-    virtual void v48();
-    virtual void v49();
-    virtual void v50();
-    virtual void v51();
-    virtual void v52();
-    virtual void v53();
-    virtual void v54();
-    virtual void v55();
-    virtual void v56();
-    virtual void v57();
-    virtual void v58();
-    virtual void v59();
-    virtual void v60();
-    virtual void v61();
-    virtual void v62();
-    virtual void v63();
-    virtual FUN_00662bc0_Obj* v64();
-    void ApplyParamValues(FUN_00662bc0_Param* p);
-};
 
 struct Sub10Obj;
 struct FUN_00662f70_cls;
@@ -1291,12 +1029,7 @@ class B663450Point3
     float Length() const;
 };
 
-const B663450Point3& B663450GetCenter();
-float B663450GetRadius();
-
 class B663450Actor;
-
-void __cdecl FUN_00653e50(B663450Actor* pkActor, int iState);
 
 class B663450Actor
 {
@@ -1305,82 +1038,6 @@ class B663450Actor
     bool GetByteAtE0();
     void UpdateStateByDistance(int iState);
 };
-
-struct FUN_00662ca0_Data
-{
-    float GetValue(int i);
-};
-class FUN_00662ca0_cls
-{
-  public:
-    virtual void v00();
-    virtual void v01();
-    virtual void v02();
-    virtual void v03();
-    virtual void v04();
-    virtual void v05();
-    virtual void v06();
-    virtual void v07();
-    virtual void v08();
-    virtual void v09();
-    virtual void v10();
-    virtual void v11();
-    virtual void v12();
-    virtual void v13();
-    virtual void v14();
-    virtual void v15();
-    virtual void v16();
-    virtual void v17();
-    virtual void v18();
-    virtual void v19();
-    virtual void v20();
-    virtual void v21();
-    virtual void v22();
-    virtual void v23();
-    virtual void v24();
-    virtual void v25();
-    virtual void v26();
-    virtual void v27();
-    virtual void v28();
-    virtual void v29();
-    virtual void v30();
-    virtual void v31();
-    virtual void v32();
-    virtual void v33();
-    virtual void v34();
-    virtual void v35();
-    virtual void v36();
-    virtual void v37();
-    virtual void v38();
-    virtual void v39();
-    virtual void v40();
-    virtual void v41();
-    virtual void v42();
-    virtual void v43();
-    virtual void v44();
-    virtual void v45();
-    virtual void v46();
-    virtual void v47();
-    virtual void v48();
-    virtual void v49();
-    virtual void v50();
-    virtual void v51();
-    virtual void v52();
-    virtual void v53();
-    virtual void v54();
-    virtual void v55();
-    virtual void v56();
-    virtual void v57();
-    virtual void v58();
-    virtual void v59();
-    virtual void v60();
-    virtual void v61();
-    virtual void v62();
-    virtual void v63();
-    virtual FUN_00662ca0_Data* GetData();
-    void ApplyParameterValues(FUN_00662bc0_Param* p);
-};
-void __cdecl SplitSignedDifference(float a, float b, float* pA, float* pB);
 
 struct BoneName
 {
@@ -1445,13 +1102,6 @@ struct SceneNode
     virtual void unk98();
     virtual SceneNode* FindBone(BoneName*);
     BoneName* FUN_00413f40();
-};
-void FNV_Warning(const char*, ...);
-struct FaceNode
-{
-    unsigned int FUN_0043b480();
-    SceneNode* FUN_0043b4a0(unsigned int);
-    void AttachBones(SceneNode*, bool);
 };
 
 namespace fnv_00663050 {
@@ -1702,151 +1352,9 @@ class FaceGenNode
     void FUN_00662f70(FUN_00663430*);
     void FUN_00663050(bool);
 };
-void* FUN_00653230(void*);
-NiExtraData* GetExtraDataIfPresent(NiAVObject*);
 void FUN_00653340(NiTriBasedGeom*, BSFaceGenMorphData*);
-const NiPoint3& FUN_006633f0();
-float FUN_006633d0();
-float FUN_006633e0();
-unsigned char FUN_00525420();
-bool FUN_00702360();
 
 }  // namespace fnv_00663050
-
-extern const char DAT_01066238[];
-struct DumpArray
-{
-    void FUN_0096a610(char* const&);
-};
-struct DumpAnimation
-{
-    virtual void v00();
-    virtual void v01();
-    virtual void v02();
-    virtual void v03();
-    virtual void v04();
-    virtual void v05();
-    virtual void v06();
-    virtual void v07();
-    virtual void v08();
-    virtual void v09();
-    virtual void v0a();
-    virtual void v0b();
-    virtual void v0c();
-    virtual void v0d();
-    virtual void v0e();
-    virtual void v0f();
-    virtual void v10();
-    virtual void v11();
-    virtual void v12();
-    virtual void v13();
-    virtual void v14();
-    virtual void v15();
-    virtual void v16();
-    virtual void v17();
-    virtual void v18();
-    virtual void v19();
-    virtual void v1a();
-    virtual void v1b();
-    virtual void v1c();
-    virtual void v1d();
-    virtual void v1e();
-    virtual void v1f();
-    virtual void v20();
-    virtual void v21();
-    virtual void v22();
-    virtual void v23();
-    virtual void v24();
-    virtual float v25(int);
-    virtual void v26();
-    virtual void v27();
-    virtual void v28();
-    virtual float v29(int);
-    float FUN_005dd4a0(int);
-};
-struct DumpPointer
-{
-    DumpAnimation* FUN_00559450();
-};
-struct DumpActor
-{
-    unsigned int FUN_0084e3a0();
-};
-struct DumpString
-{
-    const char* FUN_00559450();
-};
-extern DumpString DAT_011d5bf8;
-char* FUN_00a7d330(const char*);
-char* FUN_00a7d550(const char*, float);
-const char* FUN_005dd830(int);
-const char* FUN_005dd840(int);
-const char* FUN_005dd850(int);
-int FUN_00406d00(char*, int, const char*, ...);
-struct DumpNode
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5c;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6c;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7c;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8c;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9c;
-    int unka0;
-    int unka4;
-    int unka8;
-    DumpPointer animation;
-    int unkb0;
-    int unkb4;
-    int unkb8;
-    int unkbc;
-    int unkc0;
-    int unkc4;
-    int unkc8;
-    int unkcc;
-    int unkd0;
-    unsigned char forceBaseMorph, fixedNormals, animationUpdate, rotatedLastUpdate;
-    unsigned char applyRotationToParent, unkD9, unkDA, unkDB;
-    float lastTime;
-    unsigned char usingLoResHead, playerCharacter, inDialogue, unkE3;
-    int unkE4;
-    DumpActor* actor;
-    void FUN_00a5ea70(DumpArray*);
-    void DumpToArray(DumpArray*);
-};
 
 struct FaceNodeBase662b00
 {
@@ -1951,8 +1459,6 @@ struct Block6628
     int v20;
     Block6628();
 };
-
-extern Block6628 DAT_011a9448;
 
 struct NodeBase6628
 {
@@ -2535,33 +2041,4 @@ struct S_00662e90_This
     {
         return 0;
     }
-};
-
-struct S_00662e90_Object
-{
-    void* unk00;
-    void* unk04;
-};
-
-struct S_00662e90_Callee
-{
-    void __thiscall FUN_00662030(int, int, void*, int, float);
-};
-
-struct S_00662e90_Argument
-{
-    S_00662e90_Object* unk00;
-    void* unk04;
-    int unk08;
-    int unk0c;
-    S_00662e90_Callee* unk10;
-    int unk14;
-    int unk18;
-    unsigned char unk1c;
-};
-
-class S_00662e90_Class : public S_00662e90_This
-{
-  public:
-    void __thiscall FUN_00662e90(S_00662e90_Argument*);
 };

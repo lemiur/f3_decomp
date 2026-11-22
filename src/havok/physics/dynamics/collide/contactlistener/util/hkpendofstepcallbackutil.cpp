@@ -51,24 +51,6 @@ void __fastcall PassObjectToTarget(Derived* apObject, void* apUnused, Target* ap
     apTarget->FUN_00c93920(apObject);
 }
 
-struct S_00d9e280_B2
-{
-    virtual void f2();
-};
-struct S_00d9e280_World
-{
-    int ClearValue(S_00d9e280_B2* p);
-};
-struct S_00d9e280_B0
-{
-    virtual void FUN_00d9e280(S_00d9e280_World* w);
-    int unk04;
-};
-struct S_00d9e280_D : S_00d9e280_B0, S_00d9e280_B2
-{
-    virtual void FUN_00d9e280(S_00d9e280_World* w);
-};
-
 struct S_00d9e2b0_Bool
 {
     char m_cBooleanValue;
@@ -86,45 +68,6 @@ struct S_00d9e2b0
     S_00d9e2b0_Bool Equals(const S_00d9e2b0& other) const;
 };
 
-struct Record
-{
-    void* first;
-    void* second;
-    void* third;
-};
-struct RecordArray
-{
-    Record* data;
-    unsigned int count;
-    unsigned int capacity;
-};
-struct MemoryManager
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    void* allocator;
-};
-struct FUN_00d9e450_class
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    RecordArray records;
-    void AppendRecord(void* first, void* second, void* third);
-};
-MemoryManager* __cdecl FUN_00885750();
-void __cdecl FUN_00890940(void* allocator, RecordArray* array, unsigned int elementSize);
-
 struct hkBaseObject
 {
     virtual void BaseV() = 0;
@@ -137,26 +80,6 @@ struct hkReferencedObject : hkBaseObject
 };
 hkReferencedObject::hkReferencedObject() : unk06(1)
 {}
-struct hkpWorldPostSimulationListener
-{
-    virtual void ListenerMethod() = 0;
-};
-struct FUN_00d9e860 : hkReferencedObject, hkpWorldPostSimulationListener
-{
-    volatile int unk0C;
-    volatile unsigned char unk10;
-    volatile int unk14;
-    volatile int unk18;
-    volatile int unk1C;
-    volatile int unk20;
-    volatile int unk24;
-    volatile int unk28;
-    volatile int unk2C;
-    volatile int unk30;
-    volatile int unk34;
-    virtual ~FUN_00d9e860() = 0;
-    FUN_00d9e860();
-};
 
 extern "C" void* __cdecl FUN_00c85750(void);
 extern "C" void __cdecl ResizeAudioStream(void* heap, void* arr, int elemSize);
@@ -188,13 +111,6 @@ struct S_00d9e3f0_Arr
             ResizeAudioStream(r.m10, this, sizeof(S_00d9e3f0_Item));
         return m_data[m_iElementCount++];
     }
-};
-
-struct FUN_00d9e3f0_class
-{
-    int unk00, unk04, unk08, unk0C, unk10, unk14, unk18, unk1C;
-    S_00d9e3f0_Arr m_aiIndexedValues;
-    void AppendItem(int a, int b, int c);
 };
 
 struct S_00d9ec40_Ref
@@ -339,10 +255,7 @@ struct FUN_00d9ee20_cls
 
 }  // namespace fnv_00d9ee20
 
-extern "C" void _ReadWriteBarrier(void);
-extern "C" unsigned __int64 __rdtsc(void);
 #include <windows.h>
-extern DWORD DAT_0126835c;
 
 struct S_00d9ea80_Heap
 {
@@ -366,20 +279,6 @@ struct S_00d9ea80_Router
     }
 };
 void __cdecl FUN_00c908c0(S_00d9ea80_Heap*, void* arr, int n, int elemSize);
-
-struct S_00d9ea80_TimerEntry
-{
-    const char* m_name;
-    unsigned m_uiStartTicks;
-    int unk8;
-};
-struct S_00d9ea80_Timers
-{
-    int unk0;
-    S_00d9ea80_TimerEntry* m_cur;
-    int unk8;
-    S_00d9ea80_TimerEntry* m_kRayEnd;
-};
 
 struct S_00d9ea80_Info
 {
@@ -419,26 +318,12 @@ struct S_00d9ea80_Obj
     virtual void v3c();
     virtual S_00d9ea80_Sub* FUN_vfn40();
 };
-void __cdecl FUN_00d9e2e0(S_00d9ea80_Obj* obj, int a, int b);
 
-struct S_00d9ea80_Src
-{
-    S_00d9ea80_Obj* obj;
-    int a;
-    int b;
-    int d;
-};
 struct S_00d9ea80_Entry
 {
     S_00d9ea80_Obj* obj;
     int a;
     int b;
-};
-struct S_00d9ea80_SrcArray
-{
-    S_00d9ea80_Src* m_data;
-    int m_iElementCount;
-    int m_cap;
 };
 struct S_00d9ea80_EntryArray
 {
@@ -454,26 +339,6 @@ struct S_00d9ea80_EntryArray
             FUN_00c908c0(&a, this, (n < c2) ? c2 : n, sizeof(S_00d9ea80_Entry));
         }
     }
-};
-struct S_00d9ea80_Less
-{
-    char c;
-};
-void __cdecl FUN_00d9e4a0(void* c, S_00d9ea80_SrcArray* b);
-void __cdecl FUN_00d9e680(void* c, S_00d9ea80_EntryArray* a);
-void __cdecl FUN_00d9e8b0(S_00d9ea80_SrcArray* b, S_00d9ea80_EntryArray* a);
-void __cdecl QuickSortEntries(S_00d9ea80_Src* data, int lo, int hi, S_00d9ea80_Less l);
-
-struct S_00d9ea80
-{
-    int unk0;
-    int unk4;
-    unsigned char m_sort;
-    unsigned char unk9, unka, unkb;
-    S_00d9ea80_EntryArray m_entries;
-    S_00d9ea80_SrcArray m_src;
-    int m_iThirdValue[3];
-    void FUN_00d9ea80(int arg);
 };
 
 // sub ecx,8; jmp FUN_00d9ee20  ==  MSVC adjustor thunk (multiple inheritance, 8-byte primary base).
@@ -498,20 +363,6 @@ struct AdjDerived : AdjPrimaryBase, AdjSecondaryBase
 AdjDerived::AdjDerived()
 {}
 
-struct NotifyProperties
-{
-    int unk00, unk04, unk08;
-    unsigned short unk0c;
-    unsigned char unk0e;
-    unsigned char flags;
-    int unk10;
-};
-struct NotifyResource
-{
-    int unk00, unk04, unk08, unk0c;
-    unsigned short unk10;
-    unsigned char flags;
-};
 struct EventFlag
 {
     char value;
@@ -559,56 +410,6 @@ struct S_Notify : EventBase
 struct S_Listener
 {
     virtual void Notify0(S_Notify* n);
-};
-
-struct S_Info
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    NotifyResource* unk30;
-};
-
-struct S_Block
-{
-    int unk00;
-    unsigned short count;
-    unsigned short extra;
-    unsigned short unk08;
-    unsigned char stride;
-};
-
-struct S_Owner
-{
-    virtual void v00();
-    virtual void v01();
-    virtual void v02();
-    virtual void v03();
-    virtual void v04();
-    virtual void v05();
-    virtual void v06();
-    virtual void v07();
-    virtual void v08();
-    virtual void v09();
-    virtual void v0a();
-    virtual void v0b();
-    virtual void v0c();
-    virtual void v0d();
-    virtual void v0e();
-    virtual void v0f();
-    virtual S_Info* v10();
-    int unk04, unk08, unk0c, unk10, unk14, unk18, unk1c;
-    int unk20, unk24, unk28, unk2c, unk30, unk34, unk38;
-    char* block;
 };
 
 struct ListenerArg
@@ -738,10 +539,6 @@ struct ElemArrayD9E
     void SwapThreeInts(ElemArrayD9E& other);
 };
 
-struct hkMergeTarget8b0
-{
-    void SwapThreeInts(int* pkSource);
-};
 struct hkValue8b0
 {
     S_00d9ec40_Obj* m_pkObj;
@@ -752,39 +549,10 @@ struct __declspec(align(16)) hkEntry8b0
 {
     hkValue8b0 m_kValue;
 };
-struct hkArray16_8b0
-{
-    hkEntry8b0* m_pData;
-    int m_uiLogicalSize;
-    int m_iCapacityAndFlags;
-};
-struct hkArray12_8b0
-{
-    hkValue8b0* m_pData;
-    int m_uiLogicalSize;
-    int m_iCapacityAndFlags;
-};
-struct hkAllocator8b0
-{
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual void* BufAlloc(int& iNumBytesInOut);
-    virtual void BufFree(void* pvData, int iNumBytes);
-};
-struct hkRouter8b0
-{
-    int unk00, unk04, unk08, unk0C;
-    hkAllocator8b0* m_pkHeap;
-};
 
 struct BatchCollision : S_00d9e2b0
 {
     __declspec(noinline) S_00d9e2b0_Bool Equals(const BatchCollision& other) const;
-};
-struct BatchSwap
-{
-    void SwapThreeInts(int*);
 };
 struct BatchHeap
 {

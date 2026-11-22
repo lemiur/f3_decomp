@@ -5,23 +5,6 @@
 #include "tesobjectcell_packet.h"
 void __cdecl operator delete(void* pointer);
 const char kTESObjectCELLCellRefLockEnter[] = "TESObjectCELL::CellRefLockEnter()";
-unsigned int FUN_0054f4c0();
-NiAVObject* FUN_0054f4f0();
-
-struct FUN_00b5a9a0_Node
-{
-    void* m_pListObject;
-    void* m_pNext;
-    unsigned int m_uiCount;
-};
-
-struct FUN_00b5a9a0_List
-{
-    FUN_00b5a9a0_Node* m_pHead;
-    FUN_00b5a9a0_Node* m_pTail;
-    unsigned int m_uiCount;
-    void __thiscall FUN_00b5a9a0(FUN_00b5a9a0_Node* node);
-};
 
 void* __cdecl _memmove(void* dst, const void* src, unsigned int count);
 void* __cdecl _fnv_zlib_memset(void* ptr, int value, unsigned int count);

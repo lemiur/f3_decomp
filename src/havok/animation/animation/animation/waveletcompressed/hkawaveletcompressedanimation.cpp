@@ -12,26 +12,6 @@ int __cdecl FUN_00e51da0(int aiValue, const char* apBytes)
     return ((aiValue - x) * y + 7) / 8 + x * 4;
 }
 
-struct FUN_00e2f8c0_Class
-{
-    unsigned char m_auiShapeKeys[0x2c];
-    unsigned int m_divisor;
-
-    int FUN_00e2f8c0(unsigned int value, int unused);
-};
-
-struct FUN_00e2f7c0_Class : hkaWaveletCompressedAnimation {
-    virtual void v1();
-    virtual void v2();
-    virtual void v3();
-    virtual void v4();
-    virtual void v5();
-    virtual void v6();
-    virtual void v7();
-    virtual unsigned int v8();
-    void FUN_00e2f7c0(float t, unsigned int* outIndex, float* outFrac);
-};
-
 struct FUN_00e2f8b0_Obj
 {
     int unk00;
@@ -164,8 +144,6 @@ struct e2f910_Stream
     e2f910_Cls* ctrl;
 };
 
-extern "C" e2f910_Cls* e2f910_obj(void);
-
 volatile int g_e2f910_a2 = 0;
 volatile int g_e2f910_a4 = 0;
 e2f910_Stream* volatile g_e2f910_stream = 0;
@@ -175,61 +153,11 @@ struct hkBoolE2FA {
     hkBoolE2FA() {}
 };
 
-class hkStreamWriterE2FA {
-public:
-    virtual void vfn_00();
-    virtual void vfn_04();
-    virtual void vfn_08();
-    virtual void vfn_0C();
-    virtual void vfn_10();
-    virtual hkBoolE2FA write(const void* buf, int nbytes);
-};
-
-class hkBufferE2FA {
-public:
-    virtual void vfn_00();
-    virtual void vfn_04();
-    virtual void vfn_08();
-    virtual void vfn_0C();
-    virtual void vfn_10();
-    virtual void vfn_14();
-    virtual void vfn_18();
-    virtual void vfn_1C();
-    virtual int getNumElements();
-
-    int unk04[10];
-    int m_iDofCount;
-    int unk30;
-    int m_iElementIndex;
-    int unk38[11];
-    char* m_data;
-
-    void Write(hkStreamWriterE2FA* writer);
-};
-
 namespace fnv_00e300b0 {
-struct WBlk {
-    unsigned int count;
-    int blockSize;
-    unsigned int qHeader;
-    float* offsets;
-    float* scales;
-    unsigned char* bitWidths;
-    unsigned char* quantized;
-};
 
 struct BitDesc {
     unsigned char bits;
     unsigned char preserved;
-};
-
-struct WaveState {
-    BitDesc desc;
-    float scale;
-    float off;
-    int bits;
-    int quant;
-    int preserved;
 };
 
 int __cdecl FUN_00e51da0(int a, const char* b);
@@ -238,25 +166,7 @@ int __cdecl DecodeBlock(unsigned char* data, int* qp, unsigned char* block, int 
 void __cdecl DecodeQuantizedBlock(unsigned char* block, BitDesc* desc, float* out, int n);
 void __cdecl FUN_00e51140(float* out, int n);
 
-extern "C" float* wblk_dst();
-extern "C" unsigned wblk_u(int n);
-extern "C" int wblk_i(int n);
-extern "C" float* wblk_f(int n);
-extern "C" unsigned char* wblk_p(int n);
-
 }  // namespace fnv_00e300b0
-
-extern unsigned char DAT_0126ef84;
-void __cdecl FUN_00e63c60(void*);
-extern const float DAT_010ec880[];
-
-struct QParam_00e51660 {
-    unsigned char m_uiFirstQuantizationParameter;
-    unsigned char m_ucSecondQuantizationParameter;
-    unsigned short unk02;
-    float m_vScale;
-    float m_offset;
-};
 
 // Swaps the byte order of a float by reinterpreting its bits as a 32-bit integer and reversing the four bytes.
 // @f3 0x0061dbe0 (community match, verified in this file)
@@ -279,8 +189,6 @@ void FUN_0061dbe0(unsigned int value, unsigned int& top, unsigned int& upperMidd
 unsigned short volatile g_in; unsigned short g_out;
 
 #include <xmmintrin.h>
-extern float DAT_01012068;
-extern __m128 DAT_010c71b0;
 
 // Companion quad-writer variant (scalar-load broadcast form) that shares the
 // module with FUN_00e2fbc0; TU order matters for VC9's codegen state.
@@ -294,29 +202,14 @@ struct SwapCountsE2 {
     float n;
     SwapCountsE2() : a(0), b(0), c(0), d(0), e(0), f(0), g(0), h(0), i(0), j(0), k(0), l(0), m(0), n(0.0f) {}
 };
-void __cdecl FUN_00e4ebb0(unsigned short*, unsigned short*, int, int, SwapCountsE2*);
 
 #include <string.h>
 extern "C" unsigned __int64 __rdtsc(void);
 extern "C" void _ReadWriteBarrier(void);
-extern void* DAT_00fdf044;
 typedef void* (__stdcall* S00e306d0_TlsFn)(unsigned long);
 extern unsigned long DAT_0126835c;
 extern const char str_010eb358[];
 extern const char str_010c41f8[];
-
-struct S00e306d0_Args {
-    unsigned int f00;
-    unsigned int f04;
-    unsigned char b08;
-    unsigned char b09;
-    unsigned char b0a;
-    unsigned char b0b;
-    unsigned int f0c;
-    unsigned int f10;
-    unsigned int f14;
-    unsigned int f18;
-};
 
 static volatile unsigned int s00e306d0_sink;
 
@@ -355,103 +248,15 @@ struct S00e306d0_Stream {
     }
 };
 
-struct S00e306d0_Obj {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    unsigned int m_ui2c;
-    unsigned char m_b30;
-    unsigned char m_b31;
-    unsigned char unk32;
-    unsigned char unk33;
-    int unk34;
-    unsigned int m_ui38;
-    unsigned int m_ui3c;
-    unsigned int m_ui40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    unsigned int m_ui54;
-    int unk58;
-    unsigned int m_ui5c;
-    int unk60;
-    unsigned int m_ui64;
-};
-
 #include <windows.h>
 namespace fnv_00e307b0 {
 extern DWORD DAT_0126835c;
-extern unsigned int* g_escape;
-extern int g_never;
-
-struct StringCursor {
-    char* m_kRayStart;
-    char* m_kRayEnd;
-    char* m_pRayCursor;
-    char* m_pCurrentCommand;
-};
-
-struct hkTimerCommand {
-    const char* m_pCommandName;
-    unsigned int m_ticks;
-    unsigned int m_auiShapeKeys;
-};
 
 struct hkBoolR {
     char m_cBooleanValue;
     hkBoolR(bool b) { m_cBooleanValue = (char)b; }
     operator bool() const { return m_cBooleanValue != 0; }
 };
-
-struct ChunkAccessManager {
-    virtual void unk00();
-    virtual void unk04();
-    virtual void unk08();
-    virtual void* retrieveChunk(hkUint32 key, int size);
-    virtual void* allocateChunk(hkUint32 key, int size);
-    virtual void unk14();
-    virtual hkBoolR markForRead(hkUint32 key, int size);
-    virtual void unk1c();
-    virtual hkBoolR MarkForWrite(hkUint32 key, int size);
-    virtual hkBoolR unmarkForWrite(hkUint32 key, int size);
-    virtual hkBoolR isLocked(hkUint32 key, int size);
-    virtual void lock();
-    virtual void unlock();
-};
-
-struct hkaWaveletAnimExt : hkaWaveletCompressedAnimation {
-    virtual void vfunc01();
-    virtual void vfunc02();
-    virtual void vfunc03();
-    virtual void vfunc04();
-    virtual void vfunc05();
-    virtual void vfunc06();
-    virtual void vfunc07();
-    virtual void vfunc08();
-    virtual void vfunc09();
-    virtual void vfunc0a();
-    virtual void vfunc0b();
-    virtual void vfunc0c();
-    virtual void vfunc0d();
-    virtual void vfunc0e();
-    virtual void vfunc0f();
-    virtual hkUint32 getBlockKey(int block) const;
-};
-
-struct ChunkCacheRef { ChunkAccessManager* m_pAccessManager; };
-
-static void FUN_00e306d0(const hkaWaveletCompressedAnimation* anim, int block, void* out, int numPoses);
-
-extern int g_sink;
 
 }  // namespace fnv_00e307b0
 
@@ -468,63 +273,11 @@ struct hkDmaRefE2FA {
     }
 };
 
-struct hkSlotE2FA {
-    int unk00;
-    int unk04;
-    int unk08;
-};
-
-struct hkJobDescE2FA {
-    hkDmaRefE2FA m_queue;
-    hkDmaRefE2FA m_data;
-    hkSlotE2FA m_slot;
-    hkSlotE2FA m_nextSlot;
-};
-
-class hkQueueE2FA {
-public:
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    unsigned int m_slotSize;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    unsigned int m_numSlots;
-    int m_iDataSize;
-    int unk60;
-    void* m_data;
-
-    void FUN_00e2fa60(unsigned int slot, hkDmaRefE2FA* out) const;
-    void FUN_00e2fac0(unsigned int offset, int unused, hkDmaRefE2FA* desc, int mode) const;
-};
-
 struct InfoE2FB {
     InfoE2FB() : m_iFirstValue(0), m_uiLogicalSize(0), m_bFlag(false) {}
     int m_iFirstValue;
     int m_uiLogicalSize;
     unsigned char m_bFlag;
-};
-
-class HostE2FB : public hkaWaveletCompressedAnimation {
-public:
-    void FUN_00e2fa60(unsigned int uiIndex, InfoE2FB* pkInfo);
-    int FUN_00e2fb30();
 };
 
 struct ChunkRetry {
@@ -539,9 +292,6 @@ struct ChunkRetry {
     }
     void finish() { size = (size + misalignment + 15) & ~15U; }
 };
-struct AnimRetry : hkaWaveletCompressedAnimation {
-    void FUN_00e2fa60(int block, ChunkRetry& chunk) const;
-};
 
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long);
 
@@ -550,12 +300,6 @@ extern "C" unsigned __int64 __rdtsc();
 extern "C" unsigned long DAT_0126835c;
 extern "C" void _ReadWriteBarrier();
 
-struct TimerRecord {const char* name;unsigned int time,secondary;};
-
-struct ObjectTimerRecord:TimerRecord {const char* object;};
-
-struct MonitorStream {char* start;char* current;char* capacity;char* end;};
-
 class hkStackAllocator {public:char* m_pTileTemplate;};
 
 class NineIntegerRecord {public:hkStackAllocator m_aiEntries;};
@@ -563,8 +307,6 @@ class NineIntegerRecord {public:hkStackAllocator m_aiEntries;};
 extern "C" NineIntegerRecord* __cdecl FUN_00c85750();
 
 struct Chunk {const hkUint8* data;unsigned int size;hkUint8 offset;const hkUint8* bytes() const {return data+offset;}};
-
-struct WaveletParameters {unsigned int count;int blockSize;hkUint8 preserved,maxBitWidth;const float* offsets;const float* scales;const hkUint8* bitWidths;const hkUint8* data;};
 
 struct Quantization {hkUint8 bitWidth,preserved;float scale,offset;};
 
@@ -626,70 +368,11 @@ struct TrackStatistics {
 
 };
 
-struct RecomposeParameters {
-
-    unsigned int numTransformTracks;
-
-    unsigned int numFloatTracks;
-
-    const hkUint16* transformMasks;
-
-    const hkUint16* floatMasks;
-
-    const float* staticTransforms;
-
-    const float* staticFloats;
-
-    const float* dynamicTransforms;
-
-    const float* dynamicFloats;
-
-};
-
 void __cdecl AnalyzeTrackWithZeroCount(const hkUint16*,const hkUint16*,unsigned int,unsigned int,TrackStatistics*);
-
-void __cdecl FUN_00e4f640(const RecomposeParameters*,hkQsTransform*,float*);
-
-extern char DAT_010eb3a8[];
-extern char DAT_010eb338[];
-extern char DAT_010eb398[];
-extern char DAT_010eb38c[];
-extern char DAT_010eb37c[];
-extern char DAT_01076f38[];
-extern char DAT_010eb370[];
-extern char DAT_010c41f8[];
-struct MonStreamE30 {
-    int unk00;
-    char* m_curr;
-    int unk08;
-    char* m_kRayEnd;
-};
-struct MonRecE30 {
-    const char* m_name;
-    unsigned int m_uiCommandId;
-    unsigned int unk08;
-    const char* m_sub;
-};
 
 struct hkBoolE30 {
     char m_cBooleanValue;
     hkBoolE30() {}
-};
-class CacheCtrlE30 {
-public:
-    virtual void vf00();
-    virtual void vf04();
-    virtual void vf08();
-    virtual void* vf0C(int key, int size);
-    virtual void* vf10(int key, int size);
-    virtual void vf14();
-    virtual hkBoolE30 vf18(int key, int size);
-    virtual void vf1C();
-    virtual hkBoolE30 vf20(int key, int size);
-    virtual hkBoolE30 vf24(int key, int size);
-    virtual hkBoolE30 vf28(int key, int size);
-    virtual void lock();
-    virtual void unlock();
 };
 
 struct TrackAnalysisE30 {
@@ -725,9 +408,3 @@ struct TrackAnalysisE30 {
     }
 };
 void __cdecl AnalyzeTrackWithZeroCount(const unsigned short*, const unsigned short*, int, int, TrackAnalysisE30*);
-
-
-struct WaveletSamplerE30 : FUN_00e2f7c0_Class {
-    void FUN_00e30980(float time, unsigned int transformCount, hkQsTransform* transforms,
-                      unsigned int floatCount, float* floats, CacheCtrlE30* cache);
-};

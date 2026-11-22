@@ -169,19 +169,6 @@ struct hkVector4
     }
 };
 
-struct VecDispatch
-{
-    virtual void v00();
-    virtual void Dispatch(void* packet);
-    float m_04;
-};
-struct VecArg
-{
-    hkVector4 m_00;
-    hkVector4 m_10;
-    unsigned int m_20;
-    unsigned int m_24;
-};
 struct VecPacket
 {
     hkVector4 m_00;
@@ -190,17 +177,6 @@ struct VecPacket
     unsigned int m_24;
     __forceinline VecPacket(unsigned int a, unsigned int b) : m_20(a), m_24(b)
     {}
-};
-struct VecHolder
-{
-    unsigned int unk00;
-    float m_04;
-    unsigned int unk08;
-    unsigned int unk0C;
-    hkVector4 m_10;
-    VecDispatch* m_20;
-
-    void FUN_00da70e0(const VecArg& arg);
 };
 
 }  // namespace fnv_00da70e0

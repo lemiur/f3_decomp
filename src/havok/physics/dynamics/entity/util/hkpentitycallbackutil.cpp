@@ -753,14 +753,6 @@ struct CFFCF0MonitorStream
     }
 };
 
-extern DWORD g_CFFCF0TlsIndex;
-
-struct CFFCF0TimerTicks
-{
-    unsigned int m_pRayStart;
-    unsigned int m_kRayEnd;
-};
-
 struct CFFCF0Owner;
 
 struct CFFCF0Listener
@@ -785,9 +777,6 @@ struct CFFCF0Owner
     CFFCF0ListenerList* m_listenerList;
 };
 
-extern const char g_CFFCF0TimerBegin[];
-extern const char g_CFFCF0TimerEnd[];
-
 extern "C" void _ReadWriteBarrier(void);
 
 extern DWORD DAT_0126835c;
@@ -809,93 +798,12 @@ struct ProfBuf
     ProfRec* m_pRecordEnd;
 };
 
-class TaskObj
-{
-  public:
-    virtual void vtbl00(void);
-    virtual void vtbl04(void);
-    virtual void vtbl08(void);
-    virtual void vtbl0C(void);
-    virtual void vtbl10(void* pOwner);
-};
-
-struct TaskList
-{
-    DWORD unk00;
-    DWORD unk04;
-    TaskObj** m_ppItems;
-    unsigned short m_nCount;
-};
-
-struct TaskOwner
-{
-    DWORD unk00, unk04, unk08, unk0C, unk10, unk14, unk18, unk1C;
-    DWORD unk20, unk24, unk28, unk2C, unk30, unk34, unk38, unk3C;
-    DWORD unk40, unk44, unk48, unk4C, unk50, unk54, unk58, unk5C;
-    DWORD unk60, unk64, unk68, unk6C, unk70, unk74, unk78, unk7C;
-    DWORD unk80, unk84, unk88, unk8C, unk90, unk94, unk98, unk9C;
-    DWORD unkA0, unkA4, unkA8, unkAC, unkB0, unkB4, unkB8, unkBC;
-    DWORD unkC0, unkC4, unkC8, unkCC, unkD0, unkD4, unkD8, unkDC;
-    DWORD unkE0, unkE4, unkE8, unkEC, unkF0, unkF4, unkF8, unkFC;
-    DWORD unk100, unk104, unk108, unk10C, unk110, unk114, unk118, unk11C;
-    DWORD unk120, unk124, unk128, unk12C, unk130, unk134, unk138, unk13C;
-    DWORD unk140, unk144, unk148, unk14C, unk150, unk154, unk158, unk15C;
-    DWORD unk160, unk164, unk168, unk16C, unk170, unk174, unk178, unk17C;
-    DWORD unk180, unk184, unk188, unk18C, unk190, unk194, unk198, unk19C;
-    DWORD unk1A0, unk1A4, unk1A8, unk1AC, unk1B0, unk1B4, unk1B8, unk1BC;
-    DWORD unk1C0, unk1C4, unk1C8, unk1CC, unk1D0, unk1D4, unk1D8, unk1DC;
-    DWORD unk1E0, unk1E4, unk1E8, unk1EC, unk1F0, unk1F4, unk1F8, unk1FC;
-    DWORD unk200, unk204, unk208, unk20C, unk210;
-    TaskList* m_pEntries;
-};
-
 typedef LPVOID(WINAPI* PFN_TlsGetValue)(DWORD dwTlsIndex);
 
 extern DWORD DAT_0126835c;
 extern "C" void _ReadWriteBarrier(void);
 
 unsigned __int64 __cdecl __rdtsc(void);
-
-class ListItem
-{
-  public:
-    virtual void vtbl00(void);
-    virtual void vtbl04(void);
-    virtual void vtbl08(void);
-    virtual void vtbl0C(void);
-    virtual void vtbl10(void);
-    virtual void vtbl14(void* pOwner);
-};
-
-struct ItemList
-{
-    DWORD unk00;
-    DWORD unk04;
-    ListItem** m_ppItems;
-    WORD m_wCount;
-};
-
-struct ProfOwner
-{
-    DWORD unk000, unk004, unk008, unk00C, unk010, unk014, unk018, unk01C;
-    DWORD unk020, unk024, unk028, unk02C, unk030, unk034, unk038, unk03C;
-    DWORD unk040, unk044, unk048, unk04C, unk050, unk054, unk058, unk05C;
-    DWORD unk060, unk064, unk068, unk06C, unk070, unk074, unk078, unk07C;
-    DWORD unk080, unk084, unk088, unk08C, unk090, unk094, unk098, unk09C;
-    DWORD unk0A0, unk0A4, unk0A8, unk0AC, unk0B0, unk0B4, unk0B8, unk0BC;
-    DWORD unk0C0, unk0C4, unk0C8, unk0CC, unk0D0, unk0D4, unk0D8, unk0DC;
-    DWORD unk0E0, unk0E4, unk0E8, unk0EC, unk0F0, unk0F4, unk0F8, unk0FC;
-    DWORD unk100, unk104, unk108, unk10C, unk110, unk114, unk118, unk11C;
-    DWORD unk120, unk124, unk128, unk12C, unk130, unk134, unk138, unk13C;
-    DWORD unk140, unk144, unk148, unk14C, unk150, unk154, unk158, unk15C;
-    DWORD unk160, unk164, unk168, unk16C, unk170, unk174, unk178, unk17C;
-    DWORD unk180, unk184, unk188, unk18C, unk190, unk194, unk198, unk19C;
-    DWORD unk1A0, unk1A4, unk1A8, unk1AC, unk1B0, unk1B4, unk1B8, unk1BC;
-    DWORD unk1C0, unk1C4, unk1C8, unk1CC, unk1D0, unk1D4, unk1D8, unk1DC;
-    DWORD unk1E0, unk1E4, unk1E8, unk1EC, unk1F0, unk1F4, unk1F8, unk1FC;
-    DWORD unk200, unk204, unk208, unk20C, unk210;
-    ItemList* m_pItems;
-};
 
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long);
 extern "C" unsigned __int64 __rdtsc(void);

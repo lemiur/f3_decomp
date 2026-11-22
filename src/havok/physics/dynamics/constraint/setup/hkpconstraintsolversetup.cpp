@@ -241,28 +241,12 @@ struct hkpVelocityAccumulatorD886
     }
 };
 
-struct hkpSolverSumVelocitiesD886
-{
-    hkVector4D886 m_vLinearVelocity;
-    hkVector4D886 m_vAngularVelocity;
-};
-
 struct hkStepInfoD886;
 
 struct hkpEntityD886
 {
     unsigned int unk00[41];
     unsigned int m_uiFilterInfo;
-};
-
-struct hkpConstraintSolverResourcesD886
-{
-    const hkStepInfoD886* m_pStepInfo;
-    unsigned int unk04, unk08;
-    hkpVelocityAccumulatorD886* m_pVelocityAccumulatorA;
-    hkpVelocityAccumulatorD886* m_pVelocityAccumulatorB;
-    hkpVelocityAccumulatorD886* m_pVelocityAccumulatorC;
-    hkpSolverSumVelocitiesD886* m_sumVelocities;
 };
 
 hkpVelocityAccumulatorD886* __cdecl FUN_00d29830(const hkStepInfoD886* pkInfo, hkpEntityD886* const* ppkEntities,
@@ -1145,8 +1129,6 @@ int __cdecl FUN_00d883c0(const S883_Island& island,char* buffer,int bufferSize,S
 extern "C" void _mm_prefetch(char const*, int);
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long);
 extern unsigned long DAT_0126835c;
-extern const char str_010d3d70[];
-extern const char str_010d3d60[];
 
 // hkMemoryAllocator
 struct S88b50_Allocator
@@ -1491,11 +1473,6 @@ struct S88b50_MonitorStream
         m_kRayEnd = e;
     }
 };
-struct S88b50_AddValueCommand
-{
-    const char* m_pCommandName;
-    float m_uiFilterValue;
-};
 
 struct S88b50_BreachedHeader
 {
@@ -1514,13 +1491,10 @@ template <typename T> inline T S88b50_max2(T x, T y)
     return x > y ? x : y;
 }
 
-int __cdecl FUN_00d8d030(const void* solverInfo, char* schemas, hkpVelocityAccumulatorD886* accum, char* elemTemps);
-void __cdecl FUN_00df0680(const void* solverInfo, char* elemTemps, char* schemas, hkpVelocityAccumulatorD886* accum);
 int __cdecl FUN_00d29bf0(const void* solverInfo, const hkStepInfoD886* stepInfo,
                          const hkpVelocityAccumulatorD886* accums, S88b50_Entity* const* bodies, int numBodies,
                          int offset);
 void __cdecl FUN_00d1a330(const void* input, S88b50_Entity* const* bodies, int numBodies);
-void __cdecl FUN_00d01700(void* world, void* elems, int n);
 
 // hkMatrix3
 struct S88b50_Matrix3

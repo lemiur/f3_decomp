@@ -132,14 +132,6 @@ struct E40FA0Array
     {}
 };
 
-struct FUN_00e40fa0 : E40FA0ReferencedObject
-{
-    E40FA0Array m_ppData;
-
-    FUN_00e40fa0();
-    virtual ~FUN_00e40fa0();
-};
-
 // Default constructor for the referenced object; the array member is default-initialized by its own constructor.
 // @f3 0x00409c20 (community match, verified in this file)
 namespace f3m_00409c20 {
@@ -164,7 +156,6 @@ FUN_00e40fa0_m* FUN_00e40fa0_m::FUN_00409c20()
 
 
 namespace fnv_00e40fd0 {
-extern int DAT_010e56d4;
 extern int DAT_0102e388;
 void* __cdecl FUN_00c85750();
 struct hkReferencedObject
@@ -184,14 +175,6 @@ struct AllocatorVTable
 struct Allocator
 {
     AllocatorVTable* vtable;
-};
-struct HolderLayout
-{
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0c;
-    Allocator* allocator;
 };
 struct Owner
 {
@@ -412,7 +395,6 @@ FUN_00e40800::FUN_00e40800(int aiSize, float afValue1, float afValue2, float afV
 }  // namespace fnv_00e40800
 
 namespace fnv_00e40ca0 {
-extern "C" char DAT_010ebd64;
 struct Obj
 {
     const void* vptr;
@@ -437,13 +419,6 @@ struct CpuAllocatorHolder
     CpuAllocator* allocator;
 };
 CpuAllocatorHolder* __cdecl FUN_00c85750();
-struct CpuObject
-{
-    unsigned int unk00;
-    unsigned short size;
-    void FUN_00e40cb0();
-    CpuObject* FUN_00e41050(unsigned int flags);
-};
 }  // namespace fnv_00e41050
 
 namespace fnv_00e41e20 {
@@ -466,18 +441,6 @@ struct AudioHolder
 };
 
 AudioHolder* __cdecl FUN_00c85750() throw();
-extern int DAT_010e58c8;
 extern int DAT_0102e388;
-
-struct FUN_00e41e20_cls
-{
-    int m_vptr00;
-    unsigned int unk04;
-    void* m_pData;
-    int m_iArrayLength;
-    unsigned int m_uCapBits;
-
-    void FUN_00e41e20();
-};
 
 }  // namespace fnv_00e41e20

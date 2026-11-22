@@ -35,31 +35,13 @@ bool NiVectorExtraData::FUN_00a92020(NiObject* pObject)
     return false;
 }
 
-struct Holder00a92080
-{
-    void* FUN_00a92080(unsigned int);
-};
-void __cdecl FUN_00a7b300();
-void __cdecl _delete(void*, unsigned int);
 extern int DAT_0109fb94;
 
-struct NiExtraData
-{
-    void FUN_00a7b2e0();
-    void FUN_00a7b330(void*, void*);
-};
 struct BSFadeNode
 {
     static void* __cdecl operator new(unsigned int);
 };
-struct CloningProcess
-{
-};
 extern int DAT_0109fb94;
-struct FUN_00a920b0_shell : NiVectorExtraData
-{
-    NiObject* FUN_00a920b0(CloningProcess&);
-};
 
 struct StrArr
 {

@@ -1942,11 +1942,6 @@ template <typename E, typename S> struct S00cb4230_Enum
     }
     S m_kStorage;
 };
-struct AllocObj
-{
-    virtual void v00();
-    virtual void* v01(int size);
-};
 struct MotionState;
 struct S00cb4230_FinishFlag
 {

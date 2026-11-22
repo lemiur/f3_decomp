@@ -545,7 +545,6 @@ enum KeyType
 };
 
 struct AnimationKey;
-struct TimedAnimationKey;
 
 extern void*(__cdecl* DAT_011f3db0[])(NiStreamView&, unsigned int);
 extern void(__cdecl* DAT_011f3780[])(void*, unsigned int, unsigned char);

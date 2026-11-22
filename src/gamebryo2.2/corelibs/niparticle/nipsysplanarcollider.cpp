@@ -42,11 +42,6 @@ void NiPSysPlanarCollider::LoadBinary(NiStream& stream)
     reinterpret_cast<NiColor*>(&m_kSecondPlaneVector)->LoadBinary(stream);
 }
 
-struct FUN_00c299d0_shell : public NiPSysPlanarCollider
-{
-    void* FUN_00c299d0();
-};
-
 struct GlobalObjectO2_00a7b610;
 extern GlobalObjectO2_00a7b610 g_012026c8;
 
@@ -626,11 +621,6 @@ bool FUN_00c28d00_cls::FUN_00c28d00(void* a1)
     return reinterpret_cast<FUN_00c32680_Obj*>(this)->FUN_00c32680(a1);
 }
 
-extern "C" double __cdecl fabs(double);
-extern "C" double __cdecl pow(double, double);
-extern "C" const double DAT_01012060;
-extern "C" unsigned int DAT_012026c4;
-extern "C" float DAT_012026c0;
 struct PlaneVector : NiPoint3
 {
     PlaneVector()
@@ -699,15 +689,6 @@ struct CollisionPlane : NiPlane
         float d = reinterpret_cast<const PlaneVector&>(m_kPlaneNormal) * reinterpret_cast<const PlaneVector&>(p);
         return d - m_fPlaneConstant;
     }
-};
-struct RotationHelper
-{
-    void FUN_004b4500(PlaneVector* result, const NiPoint3* direction);
-};
-struct PlanarColliderExt : NiPSysPlanarCollider
-{
-    NiPSysCollider* FUN_00c28d10(float time, float* collisionTime, BoundDataBlock* data, unsigned short particleId);
-    NiPSysCollider* ResolveTail(float time, float* collisionTime, BoundDataBlock* data, unsigned short particleId);
 };
 
 struct Mat36

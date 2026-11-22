@@ -147,11 +147,6 @@ struct D749Entry
     int m_key1;
 };
 
-struct FUN_00c90510_Obj
-{
-    void FUN_00c90510();
-};
-
 struct hkReferencedObject
 {
     void removeReference();
@@ -263,49 +258,6 @@ struct Cache_d74480
     int count;
     int capacity;
     void SetEntryValue(Shp_d74480* source, Shp_d74480* replacement);
-};
-struct ChildInfo_d74480
-{
-    Shp_d74480* shape;
-    int unk04;
-    int unk08;
-    int unk0c;
-};
-struct Cont_d74480
-{
-    virtual void unk00();
-    virtual int count();
-    int unk04;
-};
-struct List_d74480 : Shp_d74480
-{
-    Cont_d74480 container;
-    ChildInfo_d74480* children;
-};
-struct Convex_d74480 : Shp_d74480
-{
-    float radius;
-    int unk14;
-    Shp_d74480* child;
-    int unk1c;
-    __m128 translation;
-};
-struct Xform_d74480 : Shp_d74480
-{
-    int unk10;
-    Shp_d74480* child;
-    int unk18;
-    int unk1c;
-    __m128 unk20;
-    __m128 transform;
-};
-extern int DAT_010d0e5c;
-extern __m128 DAT_010c4c10;
-struct Arr_d74480
-{
-    Shp_d74480** data;
-    int size;
-    int capacity;
 };
 Shp_d74480* __cdecl FUN_00d739f0(Shp_d74480*, void*, Cache_d74480*, void*);
 

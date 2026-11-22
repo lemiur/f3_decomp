@@ -4,24 +4,9 @@
 
 #include "havok/hkpGravityGun.h"
 
-struct FUN_00e45fb0_class
-{
-    void FUN_00e45e60(int);
-    void FUN_00e45fb0(int, int, int);
-};
-
 struct DDCC60World
 {
     void removeReference();
-};
-
-struct FUN_00e45fc0_class
-{
-    unsigned char m_unknown[0x20];
-    DDCC60World** m_kExternalLinks;
-    int m_sReferenceCount;
-
-    void RemoveAllReferences(int);
 };
 
 struct hkFinishLoadedObjectFlagE463
@@ -221,12 +206,6 @@ class FUN_00cb0c00_class
     }
 };
 
-struct FUN_00d1df70
-{
-    void FUN_00c90510() throw();
-    void removeReference() throw();
-};
-
 class hkReferencedObjectE463
 {
   public:
@@ -241,28 +220,7 @@ class hkReferencedObjectE463
     }
 };
 
-class FUN_00e466e0 : public hkReferencedObjectE463
-{
-  public:
-    int m_08;
-    FUN_00cb0c00_class m_name;
-    int m_10;
-    hkArrayE463<FUN_00d1df70*> m_children;
-
-    virtual ~FUN_00e466e0() throw();
-};
-
-class hkDerivedE463 : public FUN_00e466e0
-{
-  public:
-    hkArrayE463<int> m_iSlotIds;
-
-    hkDerivedE463* DestroyAndFree(unsigned int uiFlags) throw();
-};
-
 }  // namespace fnv_00e46340
-
-extern "C" double __cdecl fabs(double);
 
 union __declspec(intrin_type) __declspec(align(16)) __m128
 {
@@ -574,57 +532,6 @@ struct __declspec(align(16)) MyVec
     float x, y, z, w;
 };
 
-struct GunArg3
-{
-    int unk000, unk004, unk008, unk00c;
-    int unk010, unk014, unk018, unk01c;
-    int unk020, unk024, unk028, unk02c;
-    int unk030, unk034, unk038, unk03c;
-    int unk040, unk044, unk048, unk04c;
-    int unk050, unk054, unk058, unk05c;
-    int unk060, unk064, unk068, unk06c;
-    int unk070, unk074, unk078, unk07c;
-    int unk080, unk084, unk088, unk08c;
-    int unk090, unk094, unk098, unk09c;
-    int unk0a0, unk0a4, unk0a8, unk0ac;
-    int unk0b0, unk0b4, unk0b8, unk0bc;
-    int unk0c0, unk0c4, unk0c8, unk0cc;
-    int unk0d0, unk0d4, unk0d8, unk0dc;
-    int unk0e0, unk0e4, unk0e8, unk0ec;
-    int unk0f0, unk0f4, unk0f8, unk0fc;
-    int unk100, unk104, unk108, unk10c;
-    int unk110, unk114, unk118, unk11c;
-    MyVec unk120;
-};
-
-struct GunTransform
-{
-    int unk00, unk04, unk08, unk0c;
-    int unk10, unk14, unk18, unk1c;
-    int unk20, unk24, unk28, unk2c;
-    MyVec m_vTranslation;
-};
-
-struct GunListener
-{
-    virtual void func0();
-    virtual void func1();
-    virtual void func2();
-    virtual void func3();
-    virtual void func4();
-    virtual void gunAction(const MyVec& from, const MyVec* to = 0);
-};
-
-struct hkpGravityGunEx : public hkpGravityGun
-{
-    void FUN_00e45ee0(GunTransform* a4, GunArg3* a3, DDCC60World* world);
-    void FUN_00e46080(GunTransform* a4, GunArg3* a3, DDCC60World* world);
-    void FUN_00e45fb0(GunTransform* a4, GunArg3* a3, DDCC60World* world);
-    void FUN_00e45c90(hkReal dt, GunTransform* a4, GunArg3* a3);
-
-    void FUN_00e46140(hkReal dt, DDCC60World* world, GunArg3* a3, GunTransform* a4, bool b1, bool b2);
-};
-
 extern "C" __m128 _mm_shuffle_ps(__m128 _A, __m128 _B, unsigned int _Imm8);
 extern "C" void _mm_store_ss(float* _V, __m128 _A);
 class hkMemoryAllocatorE460;
@@ -698,25 +605,6 @@ struct hkVector4E460
     }
 };
 
-class hkEntityE460
-{
-  public:
-    int unk00[104];
-    hkVector4E460 m_vec1a0;
-
-    void FUN_00c90510();
-    void FUN_00ca88e0(float f);
-};
-
-class hkWorldE460
-{
-  public:
-    int unk00[8];
-    hkArrayE460<hkEntityE460*> m_kActorEntries;
-
-    void FUN_00e46000(hkEntityE460* e);
-};
-
 extern "C" __m128 _mm_setr_ps(float, float, float, float);
 
 class hkStringPtrE462
@@ -748,37 +636,4 @@ struct __declspec(align(16)) hkVector4E462
     {
         m_vComponents = _mm_setr_ps(x, y, z, w);
     }
-};
-
-class hkpFirstPersonGunListenerE462;
-class hkpRigidBodyE462;
-
-class FUN_00e46660
-{
-  public:
-    virtual ~FUN_00e46660() throw();
-    unsigned short m_usMemSizeAndFlags;
-    short m_sReferenceCount;
-    unsigned char m_type;
-    hkStringPtrE462 m_name;
-    unsigned char m_uiKeyboardKey;
-    hkArrayE462<hkpFirstPersonGunListenerE462*> m_kListeners;
-
-    FUN_00e46660() throw();
-};
-
-class FUN_00e46260 : public FUN_00e46660
-{
-  public:
-    hkArrayE462<hkpRigidBodyE462*> m_kPickedBodies;
-    int m_iMaxPickedBodies;
-    float m_fMaxPickMass;
-    float m_fMaxPickDistance;
-    float m_fPickAngle;
-    float m_fHoldDistance;
-    hkVector4E462 m_kGrabPosition;
-    hkVector4E462 m_kTargetPosition;
-
-    FUN_00e46260() throw();
-    virtual ~FUN_00e46260() throw();
 };

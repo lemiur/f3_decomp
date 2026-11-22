@@ -35,25 +35,7 @@ InitObject* InitObject::FUN_00d97010()
 
 extern "C" __declspec(dllimport) void __stdcall LeaveCriticalSection(void* apSection);
 
-struct FUN_00d97060_cls
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    void* m_pSection;
-
-    void FUN_00d97060();
-};
-
 // FUN_00d97070: thiscall, one stack parameter, /MT /O2 /GS /EHsc /Gy
-
-struct SubObj
-{
-    unsigned int unk00;
-    unsigned int unk04;
-    void Reset();
-};
 
 class Spawned
 {
@@ -80,16 +62,6 @@ struct Holder
 
 Holder* FUN_00c85750();
 
-class Owner
-{
-  public:
-    unsigned int unk00;
-    unsigned int unk04;
-    SubObj m_08;
-    Spawned* m_10;
-    void FUN_00d97070(void* a1);
-};
-
 namespace fnv_00d97100 {
 struct CpuAllocator
 {
@@ -106,13 +78,6 @@ struct CpuAllocatorHolder
     CpuAllocator* allocator;
 };
 CpuAllocatorHolder* __cdecl FUN_00c85750();
-struct CpuObject
-{
-    unsigned int unk00;
-    unsigned short size;
-    void FUN_00d970c0();
-    CpuObject* FUN_00d97100(unsigned int flags);
-};
 }  // namespace fnv_00d97100
 
 extern "C" __declspec(dllimport) void __stdcall EnterCriticalSection(void* apSection);
@@ -135,7 +100,6 @@ void FUN_00d97050_cls::FUN_00d97050()
 }
 
 extern "C" __declspec(dllimport) void __stdcall DeleteCriticalSection(void* apSection);
-extern char DAT_0102e388[];
 
 struct FUN_00d970c0_cls
 {
@@ -146,13 +110,6 @@ struct FUN_00d970c0_cls
     void* m_pCs;
 
     void FUN_00d970c0(void*, void*);
-};
-
-struct FreeAllocator
-{
-    virtual void v00();
-    virtual void v04();
-    virtual void Free(void* apMemory, unsigned int auiSize) throw();
 };
 
 // Deletes the critical section m_pCs, frees it via the holder's allocator, clears m_pCs, and sets the vtable pointer to DAT_0102e388.

@@ -240,32 +240,6 @@ static __declspec(noinline) char* AllocatePoolChunk(CFE820Pool* pool)
 
 typedef void(__cdecl* FUN_00cfeba0_Fn)(void*, void*, void*, void*, void*, void*, void*);
 
-struct FUN_00cfeba0_Obj
-{
-    unsigned char m_type;         // +0x00 shape type
-    unsigned char m_uiEdgeIndex;  // +0x01 handler index
-    int unk04;
-    int unk08;  // +0x08
-    int unk0c;
-    void* m_p10;  // +0x10
-    void* m_p14;  // +0x14
-    int unk18;
-    int unk1c;
-    int unk20;  // +0x20
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;  // +0x30
-};
-
-struct FUN_00cfeba0_Result
-{
-    void* unk00;
-    int unk04;
-    void* unk08;
-    void* unk0c;
-};
-
 struct __declspec(align(16)) FUN_00cfeba0_Node
 {
     int unk00;
@@ -313,8 +287,6 @@ struct __declspec(align(16)) FUN_00cfeba0_Node
     int unka8;
     int unkac;
 };
-
-void* __cdecl FUN_00cfe1d0(void* h, void* a, void* b, unsigned int n, void* c);
 
 namespace fnv_00cfeca0 {
 extern "C" void _ReadWriteBarrier();
@@ -1353,57 +1325,6 @@ struct AgentInput
     {}
 };
 typedef void(__cdecl* AgentCreateFunc)(AgentInput* input, CollisionAgentEntry* entry, void* subEntry);
-struct QualityEntry
-{
-    AgentCreateFunc m_pCreateFunc;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int m_flag28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-};
-struct Dispatcher
-{
-    char* m_tableBase;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5c;
-    void* m_currentAgentEntry;
-};
 struct CollisionAgentEntry
 {
     unsigned char m_flags;
@@ -1512,7 +1433,6 @@ struct PairTemporary
     PairBody a, b;
     Transform ta, tb;
 };
-void __cdecl FUN_00cf1510(const SweptPose&, float, Transform&);
 
 // Computes swept transforms for both bodies, copies shapes and keys into temp bodies, and sets out fields from in and temp.
 // @f3 0x009987b0 (community match, verified in this file)

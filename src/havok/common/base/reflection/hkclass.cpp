@@ -35,14 +35,6 @@ void* FUN_00d47260_cls::FUN_00d47260(const char* name) const
     return 0;
 }
 
-struct FUN_00d472a0
-{
-    unsigned int m[11];
-    FUN_00d472a0(unsigned int a, unsigned int b, unsigned int c, unsigned int d, unsigned int e, unsigned int f,
-                 unsigned int g, unsigned int h, unsigned int i, unsigned int j, unsigned int k, unsigned int l,
-                 unsigned int n);
-};
-
 struct FUN_00d46f00_s
 {
     unsigned int m_uiCount;
@@ -99,11 +91,6 @@ int Container::FindMemberByName(const char* name) const
 int __cdecl FUN_00cb0fa0(int, int);
 int __cdecl FUN_00d46f20(void);
 
-struct FUN_00d46f00_Class
-{
-    int FUN_00d46f00(void);
-};
-
 struct FUN_00d46fe0_Class
 {
     int FUN_00d46f00(void);
@@ -140,13 +127,6 @@ struct Container
 };
 
 }  // namespace fnv_00d47080
-
-struct FUN_00d471a0_class
-{
-    char pad[0x20];
-    int* m_iSlotIds;
-    int FUN_00d471a0(int i) const;
-};
 
 struct FUN_00d46fe0_result
 {
@@ -320,20 +300,6 @@ class hkPackfileD472
         return false;
     }
     hkResultD472 WriteItemName(int index, hkStreamWriterD472* writer);
-};
-
-struct hkNamedEntryD473
-{
-    int m_name;
-};
-
-class hkEntryListD473
-{
-  public:
-    int FUN_00d46ef0() const;
-    hkNamedEntryD473* GetEntryAt(int i);
-
-    hkNamedEntryD473* FUN_00d47300(int iName);
 };
 
 struct SmallFlag
@@ -719,61 +685,11 @@ int __thiscall FUN_00d47130_class::InvokeTarget(const char* name, FUN_00d471c0_t
     return result;
 }
 
-class hkpEntityListenerD87
-{
-  public:
-    virtual ~hkpEntityListenerD87();
-};
-
-class hkpConstraintListenerD87
-{
-  public:
-    virtual ~hkpConstraintListenerD87();
-};
-
-class hkpActionListenerD87
-{
-  public:
-    virtual ~hkpActionListenerD87();
-};
-
-class hkpPhantomListenerD87
-{
-  public:
-    virtual ~hkpPhantomListenerD87();
-};
-
-class hkReferencedObjectD87
-{
-  public:
-    virtual ~hkReferencedObjectD87();
-    unsigned short m_usMemSizeAndFlags;
-    short m_sReferenceCount;
-};
-
-class FUN_00def160 : public hkReferencedObjectD87,
-                     public hkpEntityListenerD87,
-                     public hkpConstraintListenerD87,
-                     public hkpActionListenerD87,
-                     public hkpPhantomListenerD87
-{
-  public:
-    virtual ~FUN_00def160();
-
-    int unk18, unk1C, unk20, unk24, unk28, unk2C, unk30, unk34, unk38, unk3C;
-};
-
 class hkpWorldPostSimulationListenerD87
 {
   public:
     virtual ~hkpWorldPostSimulationListenerD87()
     {}
-};
-
-class FUN_00d87bf0 : public FUN_00def160, public hkpWorldPostSimulationListenerD87
-{
-  public:
-    virtual ~FUN_00d87bf0();
 };
 
 struct MemberD4728
@@ -961,56 +877,6 @@ enum hkResultD473
 {
     HK_SUCCESS = 0,
     HK_FAILURE = 1
-};
-
-class hkClassD473;
-class hkClassEnumD473;
-
-class hkClassMemberD473
-{
-  public:
-    const char* m_name;
-    const hkClassD473* m_class;
-    const hkClassEnumD473* m_pClassEnum;
-    unsigned char m_type;
-    unsigned char m_eSubtype;
-    short m_iArraySize;
-    unsigned short m_flags;
-    unsigned short m_offset;
-    const void* m_pCustomAttributes;
-
-    const hkClassD473* FUN_00d86920() const;
-    const hkClassEnumD473* FUN_00d86930() const;
-    int ReadSignedValueBySize(const void* pvObject) const;
-};
-
-class hkDataValueD473
-{
-  public:
-    int m_type;
-    int unk04;
-    int unk08;
-    int unk0C;
-    const void* m_uiFilterValue;
-    const void* m_class;
-
-    hkResultD473 SetData(const void* pvAddr, int iType);
-};
-
-class hkClassAccessorD473
-{
-  public:
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    const hkClassMemberD473* m_members;
-    int m_numMembers;
-    const char* m_pData;
-
-    hkResultD473 FUN_00d473f0(int iIndex, hkDataValueD473& kOut) const;
 };
 
 struct S_00e03240_Node;

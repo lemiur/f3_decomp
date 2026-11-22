@@ -66,20 +66,8 @@ void NiPick::Results::Clear() throw()
     NiFree(m_pBase);
 }
 
-struct FUN_00e98fd0_shell : NiPick::Results
-{
-    void* DestroyResults(bool free);
-};
-
-extern int DAT_0126fa60;
 void __cdecl InitNiStreamCallbacks();
 void __cdecl FUN_00e99260();
-void __cdecl FUN_00aa2080(void*, void*);
-
-struct FUN_00e99300_shell
-{
-    void* __thiscall FUN_00e99300();
-};
 
 struct NiObject;
 struct NiStream

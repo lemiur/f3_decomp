@@ -29,12 +29,6 @@ class AILinearTaskThread : public BSThread
     unsigned char layoutPadding[0x78];
 };
 
-class MemoryManager
-{
-  public:
-    static void* Allocate(unsigned int);
-};
-
 class AIThreadManager
 {
   public:
@@ -53,34 +47,12 @@ class AIThreadManager
     static void SetThreadingEnabled(bool);
 };
 
-union SETTING_VALUE
-{
-    int value;
-};
-class SettingT_GameSettingCollection_
-{
-  public:
-    SETTING_VALUE* Int();
-};
-class ActorMover
-{
-  public:
-    unsigned int GetCurrentMoveModeType();
-};
 extern "C" __declspec(dllimport) void* __stdcall CreateEventA(void*, int, int, const char*);
-extern "C" int __cdecl sprintf_s(char*, unsigned int, const char*, ...);
-extern "C" unsigned int gPreferredMoveMode;
 
 class CountingSemaphore
 {
   public:
     void Wait();
-};
-
-struct FUN_008c7490_this
-{
-    char pad[0x3c];
-    CountingSemaphore sem;
 };
 
 struct ActiveEffect;
@@ -173,24 +145,12 @@ struct TaskQueueInterface
 };
 typedef char _sizecheck_TaskQueueInterface[sizeof(TaskQueueInterface) == 16 ? 1 : -1];
 
-class GlobalObject2_0040c150
-{
-  public:
-    int* Int();
-};
 class BSAudio
 {
   public:
     void* GetAudioBackendData();
 };
-unsigned int __cdecl gm_GetCurrentThreadId(void);
-bool __cdecl FUN_00713d90(void);
-bool __fastcall FUN_0087a730(void*);
-bool __cdecl FUN_008c7bc0(void);
 void* __stdcall FUN_00713d80(int);
-unsigned int __fastcall GetValueWithItemResult(void*);
-unsigned long __fastcall _ref_0084e3a0(void*);
-extern GlobalObject2_0040c150 g_011c3ea4;
 extern BSAudio* g_osGlobals;
 
 __declspec(thread) int DAT_tls_0264;
@@ -221,13 +181,6 @@ struct CountingSemaphore
     void Signal();
 };
 
-struct FUN_008c74b0_shell
-{
-    unsigned char layoutPadding[0x48];
-    CountingSemaphore semaphore;
-    void SignalThread();
-};
-
 }  // namespace fnv_008c74b0
 
 extern bool DAT_011dfa18;
@@ -251,8 +204,6 @@ struct CountingSemaphore
 extern CountingSemaphore g_011dfafc;
 
 }  // namespace fnv_008c80c0
-
-void __cdecl FUN_008c80b0();
 
 extern "C" __declspec(dllimport) unsigned long __stdcall WaitForSingleObject(void*, unsigned long);
 extern "C" __declspec(dllimport) int __stdcall SetEvent(void*);
@@ -303,35 +254,10 @@ struct FUN_008c7d80_shell
     void SetCurrent(int aiIndex, int aiValue);
 };
 
-struct AutoMemHelper
-{
-    int aiMemoryContext;
-    AutoMemHelper(int, bool, const char*, int);
-    ~AutoMemHelper();
-};
-struct ArrHelper
-{
-    unsigned int GetSize();
-};
-struct Arr
-{
-    unsigned int* GetAt(int);
-};
-struct Twin_0084d030
-{
-    float GetStoredFloatValue();
-};
 struct CombatTargetMap
 {
     void ResetTargetMap();
 };
-struct FUN_00986c40_obj
-{
-    bool FUN_00986c40();
-    void FUN_00986150();
-};
-extern Twin_0084d030 g_timeGlobal;
-void __cdecl FUN_009915e0(float);
 struct FUN_00991500_shell
 {
     char pad[0x14];
@@ -341,19 +267,6 @@ struct FUN_00991500_shell
 
 extern "C" __declspec(dllimport) int __stdcall CloseHandle(void* hObject);
 
-void __fastcall FUN_008c74b0(void*);
-void __fastcall FUN_008c7490(void*);
-
-struct TaskThreadStandin
-{
-    virtual ~TaskThreadStandin();
-};
-
-struct FUN_008c73a0_shell : public AIThreadManager
-{
-    void FUN_008c73a0();
-};
-
 namespace fnv_008c7bd0 {
 struct BSAudio
 {
@@ -362,12 +275,6 @@ struct BSAudio
 struct GlobalObject_0045cf30
 {
     unsigned char* Bool();
-};
-
-struct RecursiveSpinLock
-{
-    void Lock(const char*);
-    void Unlock();
 };
 
 struct Zt5TES
@@ -441,15 +348,6 @@ struct ProcessLists
     void RunActorUpdates();
 };
 
-struct GlobalObject_0096d020
-{
-    void FUN_0096cca0();
-    void FUN_0096cda0();
-    void FUN_0096bcd0(float, int);
-    void UpdateDetection();
-    void FUN_0096db30(float, int, int);
-};
-
 void* __stdcall FUN_00713d80(int);
 void __fastcall FUN_0086fd70(void*);
 float __cdecl FUN_00453850();
@@ -464,23 +362,15 @@ extern BSAudio* g_osGlobals;
 extern int g_TES;
 extern GlobalObject_0045cf30 g_011d73e4;
 extern int DAT_011e0e80;
-extern RecursiveSpinLock DAT_011f11a0;
 extern void* BGSSaveLoadGlobalDataWorldspacePtr;
 
 }  // namespace fnv_008c7bd0
 
 namespace fnv_008c7f50 {
-class Sky;
 
 struct Zt5TES
 {
     void FUN_00453550(float);
-};
-
-struct FUN_0096c330_shell
-{
-    void UpdateDetection();
-    void FUN_0096db30(float, int, int);
 };
 
 struct FUN_0087a6b0_shell

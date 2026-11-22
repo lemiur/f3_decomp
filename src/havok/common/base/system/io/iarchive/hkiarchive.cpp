@@ -2,26 +2,7 @@
 // src/havok/common/base/system/io/iarchive/hkiarchive.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/common/base/system/io/iarchive/hkiarchive.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-struct hkReferencedObject
-{
-    void RetainReference();
-    void removeReference();
-};
-
-struct FUN_00dd9110_class
-{
-    int m_iWordAt00;
-    int m_cByteAtOffset1;
-    hkReferencedObject* m_cByteAtOffset2;
-    void SetReferencedObject(hkReferencedObject* p);
-};
-
 int DAT_010d7c80;
-
-struct FUN_00dd9130_class
-{
-    FUN_00dd9130_class* Init(hkReferencedObject* p, bool b);
-};
 
 struct Inner
 {

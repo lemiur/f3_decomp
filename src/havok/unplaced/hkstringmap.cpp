@@ -70,14 +70,6 @@ char* FUN_00d874b0_class::SetBoolFromThreshold(char* pbOut, int value)
     return pbOut;
 }
 
-struct FUN_00d87460_class
-{
-    int m_iWordAt00;
-    int m_iWordAt04;
-    int m_8;
-    void __thiscall SetElement(int idx, int val);
-};
-
 struct FUN_00d87760_class
 {
     void** m_kPrimitiveElement;
@@ -110,14 +102,6 @@ struct FUN_00d877d0_router
 
 FUN_00d877d0_router* _D1A0E0GetMemoryRouter();
 
-struct FUN_00d877d0_class
-{
-    unsigned long* m_kPrimitiveElement;
-    int m_auiShapeKeys;
-    int m_iPairCount;
-    void FreeBuffer();
-};
-
 struct FUN_00d87820_Class
 {
     char* SetBoolFromThreshold(char* p, int value);
@@ -127,10 +111,6 @@ struct FUN_00d87820_Class
 };
 
 namespace fnv_00dc8080 {
-struct FUN_00dc7750_class
-{
-    void FUN_00dc7750();
-};
 
 struct FUN_allocator_class
 {
@@ -150,19 +130,7 @@ struct FUN_router_class
     void* m_8;
 };
 
-extern int DAT_010d7510;
-extern int _DAT_0102e388;
-
 FUN_router_class* _D1A0E0GetMemoryRouter();
-
-struct FUN_00dc8080_class
-{
-    void* m_vptr;
-    int m_iWordAt04;
-    FUN_00dc7750_class* m_8;
-
-    void FUN_00dc8080();
-};
 
 }  // namespace fnv_00dc8080
 
@@ -548,7 +516,6 @@ extern "C" RouterE028& __cdecl FUN_00c85750() throw();
 }
 
 void __cdecl ResizeAudioStream(AllocatorE028* pAlloc, void* pArray, int iElemSize);
-char* __cdecl FUN_00cb1160(const char* pcString, AllocatorE028& kAlloc);
 
 struct hkBoolE028
 {
@@ -596,12 +563,6 @@ class StringMapE028 : public FUN_00d87790
     {}
 };
 
-struct EntryE028
-{
-    void* m_pPointer;
-    const char* m_pcName;
-};
-
 template <class T> __forceinline void constructWithCopyE028(T* p, int n, const T& t)
 {
     for (int i = 0; i < n; i++)
@@ -631,16 +592,6 @@ template <class T> class hkArrayE028
     {
         _pushBack(hkRouterE028::FUN_00c85750(), t);
     }
-};
-
-class NamedObjectsE028
-{
-  public:
-    int unk00, unk04, unk08, unk0C, unk10, unk14, unk18, unk1C, unk20;
-    hkArrayE028<EntryE028> m_kEntries;
-    StringMapE028* m_pkPool;
-
-    void FUN_00e02800(void* pkObject, const char* pcName);
 };
 
 }  // namespace fnv_00e02800

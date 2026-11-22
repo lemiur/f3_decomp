@@ -198,36 +198,6 @@ struct hkTransformD4D3
     hkVector4D4D3 m_vTranslation;
 };
 
-struct hkpEntityD4D3
-{
-    unsigned int unk00, unk04, unk08, unk0C, unk10, unk14, unk18, unk1C, unk20, unk24, unk28, unk2C;
-    unsigned int unk30, unk34, unk38, unk3C, unk40, unk44, unk48, unk4C, unk50, unk54, unk58, unk5C;
-    unsigned int unk60, unk64, unk68, unk6C, unk70, unk74, unk78, unk7C, unk80, unk84, unk88, unk8C;
-    unsigned int unk90, unk94, unk98, unk9C, unkA0, unkA4, unkA8, unkAC, unkB0, unkB4, unkB8, unkBC;
-    unsigned int unkC0, unkC4, unkC8, unkCC, unkD0, unkD4, unkD8, unkDC, unkE0, unkE4, unkE8, unkEC;
-    hkTransformD4D3 m_kMotionTransform;
-};
-
-class hkBaseObjectD4D3
-{
-  public:
-    virtual ~hkBaseObjectD4D3() throw();
-};
-
-class hkpStiffSpringWrapperD4D3 : public hkBaseObjectD4D3
-{
-  public:
-    void UpdatePivotsAndRestLength(const hkVector4D4D3& kPivotAW, const hkVector4D4D3& kPivotBW);
-
-    unsigned int unk04, unk08, unk0C, unk10, unk14;
-    hkpEntityD4D3* m_pEntityA;
-    hkpEntityD4D3* m_pEntityB;
-    unsigned int unk20, unk24, unk28, unk2C;
-    hkVector4D4D3 m_kPivotInA;
-    hkVector4D4D3 m_kPivotInB;
-    float m_fSpringRestLength;
-};
-
 namespace fnv_00d4d410 {
 union __declspec(intrin_type) __declspec(align(16)) __m128
 {
@@ -289,36 +259,6 @@ struct hkTransformD4D41
 {
     hkVector4D4D41 m_rotation[3];
     hkVector4D4D41 m_vTranslation;
-};
-
-struct hkpEntityD4D41
-{
-    unsigned int unk00, unk04, unk08, unk0C, unk10, unk14, unk18, unk1C, unk20, unk24, unk28, unk2C;
-    unsigned int unk30, unk34, unk38, unk3C, unk40, unk44, unk48, unk4C, unk50, unk54, unk58, unk5C;
-    unsigned int unk60, unk64, unk68, unk6C, unk70, unk74, unk78, unk7C, unk80, unk84, unk88, unk8C;
-    unsigned int unk90, unk94, unk98, unk9C, unkA0, unkA4, unkA8, unkAC, unkB0, unkB4, unkB8, unkBC;
-    unsigned int unkC0, unkC4, unkC8, unkCC, unkD0, unkD4, unkD8, unkDC, unkE0, unkE4, unkE8, unkEC;
-    hkTransformD4D41 m_kMotionTransform;
-};
-
-class hkBaseObjectD4D41
-{
-  public:
-    virtual ~hkBaseObjectD4D41() throw();
-};
-
-class hkpStiffSpringWrapperD4D41 : public hkBaseObjectD4D41
-{
-  public:
-    void SetPivots(const hkVector4D4D41& kPivotA, const hkVector4D4D41& kPivotB);
-
-    unsigned int unk04, unk08, unk0C, unk10, unk14;
-    hkpEntityD4D41* m_pEntityA;
-    hkpEntityD4D41* m_pEntityB;
-    unsigned int unk20, unk24, unk28, unk2C;
-    hkVector4D4D41 m_kPivotInA;
-    hkVector4D4D41 m_kPivotInB;
-    float m_fSpringRestLength;
 };
 
 }  // namespace fnv_00d4d410

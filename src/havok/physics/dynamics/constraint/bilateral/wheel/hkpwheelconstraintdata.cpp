@@ -123,12 +123,6 @@ static __forceinline void hkSetRotatedInverseDir(hkVector4q& out, const hkTransf
     static_cast<hkVector4Out&>(out.m_vec).setRotatedInverseDir(t.m_rotation, v);
 }
 
-struct hkpWheelConstraintDataEx : public hkpWheelConstraintData
-{
-    void UpdateWheelAtoms(const hkTransform& bodyATransform, const hkTransform& bodyBTransform, const hkVector4& pivot,
-                          const hkVector4& axle, const hkVector4& suspensionAxis, const hkVector4& steeringAxis);
-};
-
 }  // namespace fnv_00d4e5c0
 
 namespace fnv_00d4e960 {
@@ -182,11 +176,6 @@ struct hkRotationQ
     {
         return (&m_kColumn0)[i];
     }
-};
-
-struct hkMatrix3Q
-{
-    hkVector4q m_col[3];
 };
 
 struct hkTransformQ
@@ -303,16 +292,6 @@ static __forceinline void hkSetCrossD(hkVector4q& out, const hkVector4q& v0, con
     out.m_vComponents = t.m_vComponents;
 }
 
-struct WheelConstraintLayout : public hkpConstraintData
-{
-    int unknown0c;
-    hkpWheelAtomsQ m_kBridgeAtoms;
-    hkVector4q m_kAxleDirectionInBodyB;
-    hkVector4q m_kSteeringDirectionInBodyB;
-    void FUN_00d4e960(const hkVector4& pivotA, const hkVector4& pivotB, const hkVector4& axleA, const hkVector4& axleB,
-                      const hkVector4& suspensionB, const hkVector4& steeringB);
-};
-
 }  // namespace fnv_00d4e960
 
 extern int DAT_010d0a64;
@@ -345,34 +324,6 @@ struct FloatMatrix3
         axis2.component[2] = 1.0f;
     }
 };
-struct FUN_00d4f000
-{
-    unsigned int unk00, unk04, unk08, unk0C;
-    FloatMatrix3 m_20;
-    Vec4 m_50;
-    FloatMatrix3 m_60;
-    Vec4 m_90;
-    unsigned char unkA0, unkA1, m_a2, unkA3;
-    float m_a4, m_a8;
-    unsigned char unkAC, unkAD, m_ae, unkAF;
-    float m_b0, m_b4;
-    unsigned char unkB8, unkB9, m_ba, unkBB, unkBC, unkBD, m_be, unkBF;
-    Vec4 m_c0;
-    FloatMatrix3 m_d0, m_100;
-    unsigned char unk130, unk131;
-    volatile unsigned char m_132;
-    unsigned char unk133;
-    unsigned int unk134, unk138, unk13C;
-    FUN_00d4f000();
-};
-struct FUN_00d4edc0
-{
-    WheelHeader m_kHeader;
-    unsigned int m_reserved0C;
-    FUN_00d4f000 m_kBridgeAtoms;
-    Vec4 m_kAxleDirectionInBodyB, m_kSteeringDirectionInBodyB;
-    FUN_00d4edc0();
-};
 
 struct hkBoolRet
 {
@@ -387,56 +338,7 @@ struct hkBoolRet
     }
 };
 
-extern "C" void IsOrthonormal();
-extern float DAT_01267e30;
-
 struct DummyTransform
 {
 };
 typedef hkBoolRet (DummyTransform::*MemFn)(float tol);
-
-struct hkVector4_SSE
-{
-    __m128 m_vComponents;
-};
-
-struct MyAtoms
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    hkTransform m_kBodyALocalFrame;
-    hkTransform m_kBodyBLocalFrame;
-    int unk90;
-    float m_suspensionMin;
-    float m_suspensionMax;
-    int unk9C;
-    int unkA0;
-    int unkA4;
-    int unkA8;
-    int unkAC;
-    int unkB0;
-    int unkB4;
-    int unkB8;
-    int unkBC;
-    hkRotation m_kRotationA;
-    hkRotation m_kRotationB;
-    int unk120;
-    int unk124;
-    int unk128;
-    int unk12C;
-};
-
-struct hkpWheelConstraintData_Standin
-{
-    void* vtable;
-    int unk04;
-    int unk08;
-    int unk0C;
-    MyAtoms m_kBridgeAtoms;
-    hkVector4 m_kAxleDirectionInBodyB;
-    hkVector4 m_kSteeringDirectionInBodyB;
-
-    hkBoolRet FUN_00d4eec0();
-};

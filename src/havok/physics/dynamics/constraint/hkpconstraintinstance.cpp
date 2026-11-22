@@ -4,71 +4,6 @@
 
 #include "havok/hkpConstraintInstance.h"
 
-void __cdecl EnableConstraintsAndZeroArrays(void* a, void* b);
-
-struct FUN_00cf3d90_class
-{
-    void* m0;
-    void* m1;
-    void* m2;
-    void* m3;
-    void FUN_00cf3d90();
-};
-
-struct FUN_00cf3070_class
-{
-    void* m0;
-    void* m1;
-    void* m2;
-    void* m3;
-    void* m4;
-    void* m5;
-    void* m6;
-    void* m7;
-    void* m8;
-    void* m9;
-    void* mA;
-    void* mB;
-    void* mC;
-    void* mD;
-    void* mE;
-    void* mF;
-    void* m10;
-    void* m11;
-    void* m12;
-    void* m13;
-    void* m14;
-    void* m15;
-    void* m16;
-    void* m17;
-    void* m18;
-    void* m19;
-    void* m1A;
-    void* m1B;
-    void* m1C;
-    void* m1D;
-    void* m1E;
-    void* m1F;
-    void* m20;
-    void* m21;
-    void* m22;
-    void* m23;
-    void* m24;
-    void* m25;
-    void* m26;
-    void* m27;
-    void* m28;
-    void* m29;
-    void* m2A;
-    void* m2B;
-    void* m2C;
-    void* m2D;
-    void* m2E;
-    void* m2F;
-    void* m30;
-    void SetActive(bool);
-};
-
 void __cdecl FUN_00cb3dd0(void* a, void* b, int c);
 struct FUN_00cf3090_class
 {
@@ -86,8 +21,6 @@ void FUN_00cf3090_class::FUN_00cf3090(void* arg)
         FUN_00cb3dd0(*(void**)((char*)arg + 8), this, 1);
 }
 
-void __cdecl FUN_00cdff60(void*, void*);
-
 struct DDCC60World
 {
     void removeReference(void);
@@ -95,16 +28,6 @@ struct DDCC60World
 struct RefObj
 {
     void RetainReference(void);
-};
-struct FUN_00cf3000_class
-{
-    void* m0;
-    void* m1;
-    void* m2;
-    void* m3;
-    void* m4;
-    void* m5;
-    void ReplaceReference(void* arg1, void* arg2);
 };
 
 namespace fnv_00cf3040 {
@@ -200,41 +123,6 @@ struct hkBoolCF2F
     }
 };
 
-struct hkInnerCF2F
-{
-    int m_00;
-    int m_04;
-    int m_08;
-    int m_0c;
-    int m_10;
-    int m_14;
-    int m_18;
-    int m_1c;
-    int m_20;
-    void* m_pOwnerObject;
-};
-
-struct hkLinkCF2F
-{
-    int m_00;
-    int m_04;
-    hkInnerCF2F* m_inner;
-};
-
-class FUN_00cf2fb0_cls
-{
-  public:
-    int m_00;
-    int m_04;
-    int m_08;
-    int m_0c;
-    int m_10;
-    hkLinkCF2F* m_link;
-    void* m_pOwnerObject;
-
-    hkBoolCF2F FUN_00cf2fb0() const;
-};
-
 namespace fnv_00cf2fe0 {
 struct hkBoolCF2F
 {
@@ -246,14 +134,6 @@ struct hkBoolCF2F
 };
 
 int __cdecl FindModifierConstraintAtom(const void* pvObject, int iType);
-
-class FUN_00cf2fe0_cls
-{
-  public:
-    int m_00;
-
-    hkBoolCF2F FUN_00cf2fe0() const;
-};
 
 }  // namespace fnv_00cf2fe0
 
@@ -275,56 +155,6 @@ class hkObjCF30
     }
 
     void FUN_00cf30b0(void* pv);
-};
-
-struct hkVector4CF3D
-{
-    float x;
-    float y;
-    float z;
-    float w;
-};
-
-class hkpEntityCF3D
-{
-  public:
-    hkVector4CF3D unk00;
-    hkVector4CF3D unk10;
-    hkVector4CF3D unk20;
-    hkVector4CF3D unk30;
-    hkVector4CF3D unk40;
-    hkVector4CF3D unk50;
-    hkVector4CF3D unk60;
-    hkVector4CF3D unk70;
-    hkVector4CF3D unk80;
-    hkVector4CF3D unk90;
-    hkVector4CF3D unkA0;
-    hkVector4CF3D unkB0;
-    int unkC0;
-    int unkC4;
-    int unkC8;
-    int m_cc;
-    int unkD0;
-    int unkD4;
-    int unkD8;
-    int unkDC;
-    int unkE0;
-    int unkE4;
-    unsigned char m_bFlag;
-};
-
-class hkpPairCF3D
-{
-  public:
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    hkpEntityCF3D* m_pEntityA;
-    hkpEntityCF3D* m_pEntityB;
-
-    int FUN_00cf3dd0() const;
 };
 
 struct hkAllocatorCF3F
@@ -356,15 +186,6 @@ class hkpConstraintData : public hkReferencedObject
   public:
     void FUN_00c90510() throw();
     void removeReference() throw();
-};
-
-hkpConstraintData* __cdecl FUN_00d85700(const hkpConstraintData* pkData) throw();
-hkpConstraintData* __cdecl FUN_00d858f0(const hkpConstraintData* pkData) throw();
-
-struct FUN_00cb0c10_s
-{
-    char* m_pcString;
-    void FUN_00cb0c10(const char* pcString) throw();
 };
 
 class FUN_00cf3ea0 : public hkpConstraintInstance
@@ -590,26 +411,10 @@ struct S00cf3df0_Arr
     }
 };
 
-struct S00cf3df0_Obj
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    S00cf3df0_Arr m_l;
-    void Add(void* a);
-};
-
 typedef union __declspec(intrin_type) __declspec(align(16)) __m128
 {
     float m128_f32[4];
 } __m128;
-extern "C" __m128 _mm_load_ps(const float*);
-extern "C" void _mm_store_ps(float*, __m128);
 struct Matrix4f;
 struct CVector
 {
@@ -651,22 +456,6 @@ struct ConstraintReference : ConstraintReferencedBase
     void FUN_00cded30(CVector*, CVector*, CVector*, CVector*, CVector*, CVector*);
     void FUN_00d4e960(CVector*, CVector*, CVector*, CVector*, CVector*, CVector*);
 };
-struct CPlaneData
-{
-    void* vptr;
-    unsigned unk04, unk08, unk0c, unk10, unk14, unk18, unk1c;
-    Matrix4f a;
-    CVector axes[3];
-    CVector position;
-    unsigned char unkA0, unkA1, axis, unkA3;
-};
-struct CDirectData
-{
-    void* vptr;
-    unsigned unk04, unk08, unk0c, unk10, unk14, unk18, unk1c;
-    CVector axis, position;
-    float unk40, value;
-};
 struct CBoolean
 {
     char b;
@@ -677,13 +466,6 @@ struct CBoolean
         return b != 0;
     }
 };
-struct CInstance
-{
-    unsigned unk00, unk04, unk08;
-    ConstraintReference* data;
-    CBoolean FUN_00cf2fb0();
-    void FUN_00cf30f0(Matrix4f*);
-};
 static __forceinline CVector getVector(const CVector& s)
 {
     return s;
@@ -691,139 +473,11 @@ static __forceinline CVector getVector(const CVector& s)
 
 extern "C"
 {
-    hkVector4* __cdecl GetDispatchTarget(void* obj);
-    hkVector4* __cdecl GetShapeData(void* obj);
 }
 
-struct TargetObj
-{
-    char pad[0x18];
-    void* unk18;
-};
-
-struct ReceiverObj
-{
-    void FUN_00c7f640(void* pTarget, hkVector4* pVec);
-};
-
-class FUN_00cf3c90_cls
-{
-  public:
-    char pad0[0xc];
-    void* m_obj0C;
-    char pad1[4];
-    TargetObj* m_target14;
-    TargetObj* m_target18;
-
-    void FUN_00cf3c90(ReceiverObj* first, ReceiverObj* second);
-};
-
-union FUN_00cf3d00_Vec4
-{
-    __m128 m;
-};
-
-struct FUN_00cf3d00_Alloc
-{
-    void* unk00;
-    void* unk04;
-    void* unk08;
-    void* unk0C;
-    void* unk10;
-    void* unk14;
-    void* unk18;
-    void* unk1C;
-    FUN_00cf3d00_Vec4 unk20;
-    FUN_00cf3d00_Vec4 unk30;
-};
-
-struct FUN_00cf3d00_Buf
-{
-    unsigned short unk00;
-    unsigned short unk02;
-    unsigned short unk04;
-    unsigned short unk06;
-    unsigned short unk08;
-    unsigned short unk0A;
-    unsigned short unk0C;
-    unsigned short unk0E;
-    unsigned short unk10;
-    unsigned short unk12;
-    unsigned short unk14;
-    unsigned short unk16;
-    unsigned short unk18;
-    unsigned short unk1A;
-    unsigned short unk1C;
-    unsigned short unk1E;
-    FUN_00cf3d00_Vec4 unk20;
-    FUN_00cf3d00_Vec4 unk30;
-};
-
-struct FUN_00cf3d00_Obj
-{
-    virtual void vf00();
-    virtual FUN_00cf3d00_Buf* vf04(int size);
-};
-
-struct FUN_00cf3d00_Holder
-{
-    void* m0;
-    void* m1;
-    void* m2;
-    void* m3;
-    FUN_00cf3d00_Obj* m4;
-};
-
 void* __cdecl FindModifierConstraintAtom(void* self, int size);
-void __cdecl FUN_00d27960(void* a, void* b, void* c);
-
-struct FUN_00cf3d00_class
-{
-    void* m0;
-    void* m1;
-    void* m2;
-
-    void SetVec4Pair(FUN_00cf3d00_Vec4* a, FUN_00cf3d00_Vec4* b);
-};
 
 extern char DAT_010cc040;
-
-struct CF3F40Member
-{
-    void FUN_00cb0a60();
-};
-
-struct S00cf3f40_Obj
-{
-    void* m_vptr;
-    unsigned short m_iWordAt04;
-    short m_6;
-    int m_8;
-    int m_iThirdValue;
-    int m_10;
-    int m_14;
-    int m_18;
-    unsigned char m_1c;
-    unsigned char m_1d;
-    unsigned char m_1e;
-    char m_1f;
-    int m_20;
-    short m_24;
-    unsigned short m_26;
-    CF3F40Member m_28;
-    int m_2c;
-    int m_30;
-    int m_34;
-
-    S00cf3f40_Obj* FUN_00cf3f40(bool flag);
-};
-
-struct ConstraintEnabledDispatch : public hkpConstraintInstance
-{
-    void FUN_00cf3d90();
-    void FUN_00cf3da0();
-    void FUN_00cf3db0(hkBool enabled);
-};
 
 // @f3 0x004fed10 (community match, verified in this file)
 struct MemoryManager

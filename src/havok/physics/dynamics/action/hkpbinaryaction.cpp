@@ -4,25 +4,6 @@
 
 #include "havok/hkpBinaryAction.h"
 
-struct DDCC60World
-{
-    void removeReference(void);
-};
-
-struct S_00d49310_Lock
-{
-    ~S_00d49310_Lock(void);
-};
-
-extern int DAT_010cc320;
-extern int DAT_010cc2fc;
-extern int _DAT_0102e388;
-
-struct FUN_00cf4de0_class
-{
-    void FUN_00cf4de0(void);
-};
-
 struct FUN_00c97510
 {
     void ProcessPointer(void*);
@@ -41,18 +22,9 @@ void FUN_00cf4cc0_class::FUN_00cf4cc0(void* arg)
         ((FUN_00c97510*)p)->ProcessPointer(this);
 }
 
-struct FUN_00cf4d30_class
-{
-    void SetRefObject(void* arg);
-};
 struct RefObj
 {
     void RetainReference(void);
-};
-struct WorldObj
-{
-    void HandleObjectPointerPair(void*, void*);
-    void HandleWorldObjectPair(void*, void*);
 };
 
 namespace fnv_00d4f850 {
@@ -61,44 +33,7 @@ struct RefObj
     void RetainReference(void);
 };
 
-struct FUN_00d4f850_class : hkReferencedObject
-{
-    void SetReferencedObject(hkReferencedObject* obj);
-};
-
 }  // namespace fnv_00d4f850
-
-struct FUN_00cf4ce0_class
-{
-    int unk00;
-    int unk04;
-    void* unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    void* unk18;
-    void FUN_00cf4ce0(void* newAction);
-};
-
-struct FUN_00c90510_class
-{
-    void FUN_00c90510();
-};
-
-struct FUN_00c905b0_class
-{
-    void FUN_00c905b0();
-};
-
-struct FUN_00c976a0_class
-{
-    void RemoveActionFromEntity(void*, void*);
-};
-
-struct FUN_00c92bd0_class
-{
-    void FUN_00c92bd0(void*, void*);
-};
 
 struct NameStr
 {
@@ -121,14 +56,6 @@ struct Act : Ref
     NameStr name;
     Act(unsigned long u) : world(0), island(0), userData(u)
     {}
-};
-struct FUN_00cf4d80 : Act
-{
-    void* a;
-    void* b;
-    void Init() throw();
-    virtual ~FUN_00cf4d80();
-    FUN_00cf4d80(void* x, void* y, unsigned long u);
 };
 
 template <int SIZE> __forceinline void memCpyOneAlignedXcf4e30(void* dst, const void* src)
@@ -175,14 +102,4 @@ template <class T> class hkArrayXcf4e30
         memCpyOneAlignedXcf4e30<sizeof(T)>(m_data + m_iElementCount, &e);
         m_iElementCount++;
     }
-};
-
-class hkOwnerXcf4e30
-{
-  public:
-    int unk00[6];
-    void* m_kPointA;
-    void* m_kPointB;
-
-    void GetPointers(hkArrayXcf4e30<void*>& out);
 };

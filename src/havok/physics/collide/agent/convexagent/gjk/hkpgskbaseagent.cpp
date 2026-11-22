@@ -17,25 +17,8 @@ typedef union __declspec(intrin_type) __declspec(align(16)) __m128
 {
     float m128_f32[4];
 } __m128;
-extern "C" __m128 _mm_setzero_ps(void);
-extern "C" __m128 _mm_xor_ps(__m128, __m128);
 
 extern float DAT_01012054;
-
-class FUN_00dabeb0_cls
-{
-  public:
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    float m_f18;
-    int unk1C;
-
-    void Reset(bool flag);
-};
 
 extern float DAT_01012054;
 
@@ -88,30 +71,6 @@ struct GskAgentInput
     float m_fScalar;
 };
 
-struct hkTransform
-{
-    __m128 m_kColumn0;
-    __m128 m_kColumn1;
-    __m128 m_kColumn2;
-    __m128 m_kColumn3;
-    void FUN_00cb22f0(const void* a, const void* b);
-};
-
-struct GskInput
-{
-    const hkTransform* m_kTransform;
-    const void* m_pTransformB;
-    const void* m_pShapeA;
-    const void* m_pShapeB;
-    float m_fScalar;
-};
-
-struct GskOutput
-{
-    __m128 m_pos;
-    __m128 m_vHitNormal;
-};
-
 struct hkContactPoint
 {
     __m128 m_vContactPosition;
@@ -130,8 +89,6 @@ struct hkpCdPointCollector
     virtual void vfunc00();
     virtual void AddCdPoint(const ContactPointPair& point);
 };
-
-int FUN_00dabca0(const GskInput* input, void* status, __m128* out1, __m128* out2);
 
 class FUN_00dac9e0_cls
 {
@@ -297,33 +254,6 @@ struct hkTransformDAC0
     }
 };
 
-class hkpConvexShapeDAC0
-{
-  public:
-    virtual ~hkpConvexShapeDAC0();
-
-    unsigned short m_usMemSizeAndFlags;
-    short m_sReferenceCount;
-    unsigned long m_ulUserData;
-    unsigned int m_type;
-    float m_fSphereRadius;
-};
-
-struct hkpCdBodyDAC0
-{
-    const hkpConvexShapeDAC0* m_pCollisionShape;
-    unsigned int m_uiCollisionShapeKey;
-    const hkTransformDAC0* m_pMotionState;
-};
-
-struct hkpCollisionInputDAC0;
-
-struct FUN_00daad40_solver
-{
-    void FUN_00daad40(const hkpConvexShapeDAC0* pkShapeA, const hkpConvexShapeDAC0* pkShapeB,
-                      const hkTransformDAC0& kAtB, hkVector4DAC0& kPointOut);
-};
-
 extern char g_gskBaseAgentVtbl;
 
 struct GskNode;
@@ -464,72 +394,8 @@ struct hkBool
     }
 };
 
-struct CollisionAgentContext
-{
-    void* m_pCollisionDispatcher;
-    float m_weldTolerance;
-    float m_fScalar;
-};
-
-struct ContactData
-{
-    __m128 m_vHitNormal;
-    __m128 m_vContactPosition;
-    float m_fClosestPointDistanceSquared;
-    __m128 m_data30;
-    __m128 m_data40;
-};
-
-struct Shape
-{
-    virtual void v0();
-    virtual void v1();
-    virtual void v2();
-    virtual void v3();
-    virtual void v4();
-    virtual void v5();
-    virtual void v6();
-    virtual void v7();
-    virtual void v8();
-    virtual void v9();
-    virtual void v10();
-    virtual void v11();
-    virtual void v12();
-    virtual void v13();
-    virtual void v14();
-    virtual void GetVerticesForIds(const short* ids, int numIds, __m128* vertsOut);
-    int pad04;
-    int pad08;
-    int pad0c;
-    float m_fSphereRadius;
-};
-
-struct GskCache
-{
-    short m_kVertices[4];
-    unsigned char m_ucDimensionA, m_ucDimensionB, m_features, unk17;
-};
-struct GskStatus
-{
-    int m_ucDimensionA;
-    int m_ucDimensionB;
-    int m_featureA;
-    int m_featureB;
-    int unk10;
-    int unk14;
-    int pad18;
-    int pad1c;
-    __m128 m_vertsA[12];
-    __m128 m_vertsB[10];
-
-    void FUN_00daad40(const void* shapeA, const void* shapeB, const hkTransform* bTa, void* out10);
-    void FUN_00da9790(void* cache);
-    void FUN_00da9880(void* out10, hkContactPoint* pointOut);
-};
-
 extern "C"
 {
-    void _mm_store_ps(float*, __m128);
     __m128 _mm_add_ps(__m128, __m128);
     __m128 _mm_sub_ps(__m128, __m128);
     __m128 _mm_mul_ps(__m128, __m128);
@@ -538,19 +404,7 @@ extern "C"
     __m128 _mm_unpackhi_ps(__m128, __m128);
     __m128 _mm_movehl_ps(__m128, __m128);
     __m128 _mm_movelh_ps(__m128, __m128);
-    __m128 _mm_load_ss(const float*);
-    __m128 _mm_set_ss(float);
 }
-
-struct GskAgentStandin : public hkpGskBaseAgent
-{
-    int unk04;
-    int unk08;
-    GskCache m_pAccessManager;
-
-    hkBool FUN_00dac7f0(const hkpCdBody& bodyA, const hkpCdBody& bodyB, const CollisionAgentContext& input,
-                        hkContactPoint& pointOut);
-};
 
 #include <windows.h>
 
@@ -605,14 +459,6 @@ struct __declspec(align(16)) S_00dac2b0_Vec
 };
 
 struct S_00dac2b0_Shape;
-
-struct S_00dac2b0_Cache
-{
-    unsigned short id0, id1, id2, id3;
-    unsigned char dimA, dimB, dims;
-    void FUN_00dafe70(const S_00dac2b0_Shape* a, const S_00dac2b0_Shape* b, const S_00dac2b0_Transform* t);
-    void FUN_00dafcd0(const S_00dac2b0_Shape* a, const S_00dac2b0_Shape* b, const S_00dac2b0_Transform* t);
-};
 
 struct S_00dac2b0_Shape
 {
@@ -954,43 +800,6 @@ struct S_00dac0b0_PackedCache
     unsigned char m_ucDimensionA;
     unsigned char m_ucDimensionB;
     unsigned char m_flags;
-};
-
-struct S_00dac0b0_Gsk
-{
-    int m_ucDimensionA;
-    int m_ucDimensionB;
-    int m_ucLowNibble;
-    int m_ucHighNibble;
-    int m_iCachedVertexCount;
-    int m_changed;
-    int unk18;
-    int unk1C;
-    S_00dac0b0_Vertex a00;
-    S_00dac0b0_Vertex a01;
-    S_00dac0b0_Vertex a02;
-    S_00dac0b0_Vertex a03;
-    S_00dac0b0_Vertex a04;
-    S_00dac0b0_Vertex a05;
-    S_00dac0b0_Vertex a06;
-    S_00dac0b0_Vertex a07;
-    S_00dac0b0_Vertex a08;
-    S_00dac0b0_Vertex a09;
-    S_00dac0b0_Vertex a10;
-    S_00dac0b0_Vertex a11;
-    S_00dac0b0_Vertex b00;
-    S_00dac0b0_Vertex b01;
-    S_00dac0b0_Vertex b02;
-    S_00dac0b0_Vertex b03;
-    S_00dac0b0_Vertex b04;
-    S_00dac0b0_Vertex b05;
-    S_00dac0b0_Vertex b06;
-    S_00dac0b0_Vertex b07;
-    S_00dac0b0_Vertex b08;
-    S_00dac0b0_Vertex b09;
-    S_00dac0b0_Transform aTb;
-    int FUN_00daad40(S_00dac0b0_Shape* a, S_00dac0b0_Shape* b, const S_00dac0b0_Transform& aTb, S_00dac0b0_Vertex* out);
-    void FUN_00da9790(S_00dac0b0_PackedCache* dst);
 };
 
 template <class T> struct S_00dac0b0_Pad

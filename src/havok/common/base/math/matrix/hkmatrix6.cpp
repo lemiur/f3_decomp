@@ -37,16 +37,6 @@ struct hkMatrix3
     }
 };
 
-struct FUN_00e29290_Block
-{
-    hkMatrix3 f0;
-    hkMatrix3 f1;
-    hkMatrix3 f2;
-    hkVector4 f3;
-    hkVector4 f4;
-    hkVector4 f5;
-};
-
 struct E29250Matrix3
 {
     float m_kColumn0[4];
@@ -70,10 +60,7 @@ void __cdecl FUN_00e29250(E29250Matrix6& out, const E29250Matrix6& in)
     out.m_iUnknownValue2[1][1].SetFromMatrix(in.m_iUnknownValue2[1][1]);
 }
 
-extern "C" __m128 _mm_mul_ps(__m128 a, __m128 b);
-extern "C" __m128 _mm_shuffle_ps(__m128 a, __m128 b, int imm8);
 extern "C" __m128 _mm_load_ps(const float* p);
-extern "C" void _mm_store_ps(float* p, __m128 a);
 
 __forceinline void AddVector(__m128& dst, const __m128& src)
 {
@@ -88,38 +75,12 @@ __forceinline void AddPointers(__m128* dst, const __m128* src)
     *dst = _mm_add_ps(_mm_load_ps((float*)dst), _mm_load_ps((const float*)src));
 }
 
-struct LocalMatrix
-{
-    union
-    {
-        __m128 col0;
-        float values0[4];
-    };
-    union
-    {
-        __m128 col1;
-        float values1[4];
-    };
-    union
-    {
-        __m128 col2;
-        float values2[4];
-    };
-};
-struct PodPointer
-{
-    void* p;
-};
 struct WrappedPointer
 {
     void* p;
     WrappedPointer(void* q) : p(q)
     {}
 };
-extern "C" void __cdecl FUN_00cd5530(void* out, const void* a,
-                                     const void*
-
-                                         b);
 
 // @f3 0x00a98480 (community match, verified in this file)
 inline void AddScalar(float& out, float const volatile& value) { out = value + out; }
@@ -163,6 +124,3 @@ void __cdecl FUN_00e29470(void* dest, WrappedPointer src, WrappedPointer rhs)
         source += 24;
     } while (--outerCount != 0);
 }
-
-
-extern "C" __m128 _mm_sub_ps(__m128 a, __m128 b);

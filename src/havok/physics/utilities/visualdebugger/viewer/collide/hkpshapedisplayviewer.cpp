@@ -258,14 +258,6 @@ void FUN_00d652a0_cls::FUN_00d652a0(int arg)
     v10(m_18, arg);
 }
 
-extern int vftbl_010d1b04;
-extern int vftbl_010d1ae4;
-extern int vftbl_010d1ad4;
-extern int vftbl_010d1ab8;
-extern int vftbl_010d1aa8;
-extern int vftbl_010ccf7c;
-extern int vftbl_0102f13c;
-
 struct AudioAllocator
 {
     virtual void v00();
@@ -275,52 +267,7 @@ struct AudioAllocator
     virtual void FreeArray(void* apMemory, int aiSize) throw();
 };
 
-struct AudioHolder
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    AudioAllocator* m_pAllocator;
-};
-
 struct BSAudio;
-
-struct SpawnedBuf
-{
-    int unk00;
-    int unk04;
-    int unk08;
-
-    void ProcessArgument(AudioAllocator* apAlloc);
-    void FUN_00a29680();
-};
-
-struct FUN_00d66080_cls
-{
-    int m_vptr00;
-    int unk04;
-    int m_vptr08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int m_vptr20;
-    int unk24;
-    int m_vptr28;
-    int m_vptr2c;
-    int* m_pData;
-    int m_iArrayLength;
-    unsigned int m_uiObjectFlags;
-    SpawnedBuf m_buf3c;
-    SpawnedBuf m_buf48;
-    SpawnedBuf m_buf54;
-
-    void FUN_00d65fc0(int aiIndex);
-    void FUN_00ddcc60();
-    void Destroy();
-};
 
 struct OwnerObject
 {
@@ -645,7 +592,6 @@ extern char DAT_010d1ae4[];
 extern char DAT_010d1ad4[];
 extern char DAT_010d1ab8[];
 extern char DAT_010d1aa8[];
-extern float DAT_01012054;
 extern int DAT_01268fe8;
 extern int DAT_01268fe4;
 
@@ -851,11 +797,6 @@ struct Listener_d65f
     virtual void l00();
 };
 
-struct Watch_d65f
-{
-    int unk00;
-};
-
 struct Phantom_d65f : Base_d65f, Listener_d65f, Watch2_d65f
 {
     hkArray_d65f<Node_d65f*> m_kNodeCollection;
@@ -962,33 +903,6 @@ void TtShapeDisplayInner::FUN_00d65520(int arg)
     TtPushEvent("Et");
 }
 
-struct D661E0Primary
-{
-    virtual void vfunc00();
-    virtual void FUN_00d661e0();
-
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-};
-
-struct D661E0Secondary
-{
-    virtual void FUN_00d661e0();
-};
-
-struct D661E0Object : D661E0Primary, D661E0Secondary
-{
-    D661E0Object();
-
-// @fnv 0x00d661e0
-    virtual void FUN_00d661e0();
-};
-
 // sub ecx,8; jmp FUN_00d661f0: adjustor thunk from multiple inheritance.
 struct PrimaryBase
 {
@@ -1010,35 +924,6 @@ struct Derived : PrimaryBase, SecondaryBase
 
 Derived::Derived()
 {}
-
-// FUN_00d66200 : MSVC this-adjusting thunk  (sub ecx, 0x28 ; jmp <impl>)
-//
-// Two bases declare the same virtual, so the derived class overrides one
-// function for both of them and the compiler emits one adjustor thunk per
-// secondary base.  The first base is padded to 40 bytes so the second
-// base lands at +0x28.  The override is DECLARED ONLY, so this thunk
-// is the single defined function symbol carrying the name FUN_00d66200; a defined
-// key function makes the vftable that references the thunk be emitted here.
-struct A1_00d66200
-{
-    A1_00d66200();
-    virtual void FUN_00d66200();
-    char pad[0x24];
-};
-
-struct A2_00d66200
-{
-    A2_00d66200();
-// @fnv 0x00d66200
-    virtual void FUN_00d66200();
-};
-
-struct Own_00d66200 : A1_00d66200, A2_00d66200
-{
-    Own_00d66200();
-    virtual void key_fn();  // key function - defined, so the vftable is emitted
-    void FUN_00d66200();    // the shared override - declared only
-};
 
 namespace fnv_00d66210 {
 // sub ecx,0x2c; jmp target == MSVC adjustor thunk: Derived overrides a virtual that both of its bases
@@ -1106,12 +991,6 @@ struct S_00d66220_RefObject
         S_00d66220_RefObject* o = static_cast<S_00d66220_RefObject*>(p);
         FUN_00c85750()->heap()->ReleaseBlock(p, o->m_usMemSizeAndFlags);
     }
-};
-
-struct FUN_00d66220 : S_00d66220_RefObject
-{
-    FUN_00d66220();
-    virtual ~FUN_00d66220();
 };
 
 }  // namespace fnv_00d66220
@@ -1555,11 +1434,6 @@ struct AudioParam
 };
 // The flag the helper is given: it is a single byte but the helper reads it
 // as a whole word.
-union AudioFlag
-{
-    int m_iValue;
-    char m_cValue;
-};
 // The sub object this method belongs to.
 struct AudioNodeSub
 {
@@ -1603,14 +1477,6 @@ static DisplayOuter* GetDisplayOuter(AudioNodeSub* p)
     return (DisplayOuter*)((char*)p - sizeof(DisplayPrimary));
 }
 extern int DAT_01268fe0;
-struct S_00c6d840_Q : S_00c6d840
-{
-    S_00c6d840_Pair FindEntry(int key, int unused);
-};
-struct FUN_00d655e0_Q : FUN_00d655e0_class
-{
-    int FindItemIndex(int key);
-};
 void* __cdecl GetProperty1134(D66180Entity* e);
 // Module local helper: it is called from exactly one place, so the compiler
 // hands it the sound in EAX and keeps the two other arguments on the stack.

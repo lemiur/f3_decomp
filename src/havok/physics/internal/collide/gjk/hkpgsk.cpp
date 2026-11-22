@@ -131,10 +131,6 @@ extern "C"
 }
 #endif
 
-struct PlainVector
-{
-    float x, y, z, w;
-};
 struct Vector
 {
     __m128 quad;
@@ -145,17 +141,6 @@ struct Vector
         quad = v.quad;
         return *this;
     }
-};
-extern const __m128 signMask;
-
-struct Simplex
-{
-    int countA, countB, unk08, unk0c, unk10, status, unk18, unk1c;
-    Vector a[4];
-    Vector unk60, unk70, unk80, unk90;
-    Vector verticesB[8];
-    Vector result, axis, unk140, unk150, weights;
-    int FUN_00da8500(const Vector* point, Vector* vertices, int orient);
 };
 
 namespace fnv_00da8700 {
@@ -181,7 +166,6 @@ extern "C"
     __m128 _mm_rsqrt_ss(__m128);
     __m128 _mm_cmpeq_ss(__m128, __m128);
     __m128 _mm_set_ss(float);
-    __m128 _mm_load_ps(const float*);
 }
 #endif
 
@@ -243,13 +227,6 @@ struct hkVector4
     {
         m_vComponents = _mm_mul_ps(m_vComponents, _mm_shuffle_ps(s.m_vValue, s.m_vValue, 0));
     }
-};
-
-struct Tri
-{
-    hkVector4 m_v0;
-    hkVector4 m_v1;
-    hkVector4 m_v2;
 };
 
 }  // namespace fnv_00da8700
@@ -532,7 +509,6 @@ extern "C"
     __m128 _mm_rsqrt_ss(__m128);
     __m128 _mm_set_ss(float);
     __m128 _mm_set_ps1(float);
-    __m128 _mm_load_ps1(const float*);
     __m128 _mm_load_ss(const float*);
     __m128 _mm_setzero_ps();
     __m128 _mm_unpacklo_ps(__m128, __m128);
@@ -598,17 +574,8 @@ struct Collision_hit
     float fraction;
 };
 extern const float DAT_01017718, DAT_01016248, DAT_01011d78;
-extern const double DAT_01016978;
-extern const float DAT_010d51b0;
-extern const double DAT_010d51a8;
-extern const float DAT_01012054;
-extern const double DAT_0109cc78;
 extern const __m128 DAT_010c44d0;
 extern const signed char DAT_010cb438[], DAT_010cb440[], DAT_010cb442[];
-struct Transform_result : Collision_vector
-{
-    void FUN_00c7f700(Collision_mat*, Collision_vector*);
-};
 extern int FUN_00d22e40(Collision_vector*, Collision_vector*, Collision_vector*, Collision_vector*, Collision_vector*);
 struct SmallBool
 {
@@ -662,8 +629,6 @@ static __forceinline void flipSignC(Collision_vector& v, const Collision_vector&
 }
 extern const __m128 DAT_01017d10;
 extern const float DAT_0104da48, DAT_010c6090;
-extern const double DAT_010290f8;
-extern int __cdecl FUN_00da8390(const Collision_vector*, const Collision_vector*);
 
 extern const __m128 DAT_010c7160;
 
@@ -845,11 +810,6 @@ struct hkVector4
     }
 };
 
-struct Int4
-{
-    int i[4];
-};
-
 hkVector4* g_v;
 hkVector4* g_p;
 float g_f;
@@ -859,7 +819,6 @@ extern "C" __m128 _mm_load_ss(const float*);
 extern "C" __m128 _mm_rsqrt_ss(__m128);
 extern "C" __m128 _mm_andnot_ps(__m128, __m128);
 extern "C" __m128 _mm_cmpeq_ss(__m128, __m128);
-extern const float DAT_010d51c4;
 
 class GapScalar
 {
@@ -1216,23 +1175,7 @@ struct SolverOutput
 };
 extern void __cdecl FUN_00d22e40(const AlignedPoint* polygon, const AlignedPoint* direction, const AlignedPoint* vertex,
                                  const AlignedPoint* edge, SolverOutput* result);
-extern const __m128 DAT_010ec7f0;
-struct CollisionPlanes
-{
-    __m128 unk000, unk010, unk020, unk030, unk040, unk050;
-    __m128 unk060, unk070, unk080, unk090, unk0a0, unk0b0;
-    __m128 unk0c0, unk0d0, unk0e0, unk0f0, unk100, unk110;
-    __m128 faceNormal120;
-    __m128 unk130, unk140, unk150;
-    __m128 reference160;
-    int unk170;
-    int lastSegment174;
-    __declspec(noinline) int FUN_00da8500(const AlignedPoint* point, AlignedPoint* triangle, int mode);
-    int __thiscall FUN_00da9340(AlignedPoint* segment, AlignedPoint* polygon, int* volatile segmentCount,
-                                int* polygonCount, char recomputeNormal, int segmentIndex);
-};
 
-extern "C" void _mm_store_ps(float* _V, __m128 _A);
 template <class T> struct S00daac40_RayArgument
 {
     T value;
@@ -1296,12 +1239,6 @@ struct S00daac40_RayParams
     unsigned long unk44;
     unsigned long unk48;
     unsigned long unk4C;
-};
-
-class S00daac40_RayCastTarget
-{
-  public:
-    void FUN_009c1aa0(S00daac40_RayParams* p);
 };
 
 class S00daac40_FUN_00daac40_cls

@@ -1,45 +1,6 @@
 #include "f3_common.h"
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-struct BaseFake
-{
-    char _b[0x38];
-    void __thiscall FUN_00e898c0();
-};
-struct CT
-{
-    virtual void __stdcall F0();
-    virtual void __stdcall F1();
-    virtual void __stdcall Release();
-};
-struct FUN_00e96cd0_shell : BaseFake
-{
-    CT* m_pShaderConstantTable;
-    void __thiscall ReleaseAndReset();
-};
-
-struct _D3DXCONSTANTTABLE_DESC
-{
-    const char* Creator;
-    unsigned long Version;
-    unsigned int Constants;
-};
-struct FakeConstantTable00e96d10
-{
-    virtual long __stdcall F0();
-    virtual long __stdcall F1();
-    virtual long __stdcall F2();
-    virtual long __stdcall F3();
-    virtual long __stdcall F4();
-    virtual long __stdcall GetDesc(_D3DXCONSTANTTABLE_DESC* pDesc);
-};
-struct NiD3DHLSLPixelShader
-{
-    char _pad00[0x38];
-    FakeConstantTable00e96d10* m_pShaderConstantTable;
-    unsigned int FUN_00e96d10();
-};
-
 struct FUN_00e96d40_Class
 {
     char _pad00[0x38];

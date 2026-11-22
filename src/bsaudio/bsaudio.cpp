@@ -46,11 +46,6 @@ __declspec(noinline) void AudioUpdateStand::FUN_00ad7740()
 #define AudioUpdateStand AudioUpdateStand__declared_later
 
 
-struct FUN_00ad8740_shell : public BSAudio
-{
-    void FUN_00ad8740();
-};
-
 struct TLSPad_00ad7740
 {
     char pad[0x2b4];
@@ -105,15 +100,6 @@ struct AudioUpdateStand
 };
 }  // namespace fnv_00ad7fa0
 
-struct FUN_0083b8d0_stub
-{
-    void FUN_0083b8d0();
-};
-struct FUN_00798450_shell
-{
-    void* FUN_00798450(unsigned int flags);
-};
-
 struct TESResponse
 {
     int GetNext();
@@ -121,13 +107,6 @@ struct TESResponse
 struct Tile
 {
     void Set(int, float, bool);
-};
-void* __cdecl FUN_004b7210();
-extern int DAT_011da9a4;
-
-struct FUN_00aa4a50_shell2
-{
-    void FUN_00aa4a50(int a);
 };
 
 __declspec(thread) int g_audioThreadMode = 59;
@@ -152,14 +131,6 @@ struct AudioThreadModeScope
         SetMode(saved);
     }
 };
-struct FUN_00ada0f0_stub
-{
-    void FUN_00ada0f0();
-};
-struct FUN_00ad9870_stub
-{
-    void FUN_00ad9870();
-};
 struct FUN_00ad7150_shell
 {
     char pad[4];
@@ -173,26 +144,6 @@ struct FUN_00ad7150_shell
     void FUN_00ad7150();
 };
 
-struct FUN_00ad78e0_obj
-{
-    virtual void v0();
-    virtual void v1();
-    virtual void v2();
-    virtual const NiPoint3* v3();
-};
-extern NiPoint3 _NiPoint3_ZERO;
-struct FUN_00ad78e0_shell
-{
-    FUN_00ad78e0_obj* pObj;
-    int pad[3];
-};
-struct FUN_00ad78e0_cls
-{
-    char pad[0x10];
-    FUN_00ad78e0_obj* pObj;
-    NiPoint3 FUN_00ad78e0();
-};
-
 void __fastcall FUN_00adc160(void*);
 
 struct AudioStub
@@ -200,25 +151,10 @@ struct AudioStub
     void FUN_00adc160();
 };
 
-struct FUN_00ad7b40
-{
-    void Set(float value);
-};
-
-struct FUN_00adc160_shell
-{
-    void __thiscall FUN_00adc160();
-};
-
 namespace fnv_00ad7ba0 {
 struct AudioStub
 {
     void FUN_00adc160();
-};
-
-struct FUN_00ad7ba0
-{
-    void Set(float value);
 };
 
 }  // namespace fnv_00ad7ba0
@@ -229,11 +165,6 @@ struct AudioStub
     void FUN_00adc160();
 };
 
-struct FUN_00ad7bd0
-{
-    void Set(float value);
-};
-
 }  // namespace fnv_00ad7bd0
 
 namespace fnv_00ad7c00 {
@@ -242,53 +173,14 @@ struct AudioStub
     void FUN_00adc160();
 };
 
-struct FUN_00ad7c00
-{
-    void Set(float value);
-};
-
 }  // namespace fnv_00ad7c00
 
 void __fastcall FUN_00adc160(BSAudioManager* m);
-struct FUN_00ad7c30_shell2
-{
-    void FUN_00ad7c30();
-};
-
-struct FUN_00ad7cb0_shell2
-{
-    float FUN_00ad7cb0();
-};
-
-struct FUN_00ad7ce0
-{
-    float Get();
-};
-
-struct FUN_00ad7d10
-{
-    float Get();
-};
-
-struct FUN_00ad7d40
-{
-    float Get();
-};
-
-struct FUN_00ad7d70
-{
-    float Get();
-};
 
 namespace fnv_00ad7da0 {
 struct AudioStub
 {
     void FUN_00adc160();
-};
-
-struct FUN_00ad7da0
-{
-    void Set(float value);
 };
 
 }  // namespace fnv_00ad7da0
@@ -299,22 +191,12 @@ struct AudioStub
     void FUN_00adc160();
 };
 
-struct FUN_00ad7dd0
-{
-    void Set(float value);
-};
-
 }  // namespace fnv_00ad7dd0
 
 namespace fnv_00ad7e00 {
 struct AudioStub
 {
     void FUN_00adc160();
-};
-
-struct FUN_00ad7e00
-{
-    void Set(float value);
 };
 
 }  // namespace fnv_00ad7e00
@@ -325,30 +207,11 @@ struct AudioStub
     void FUN_00adc160();
 };
 
-struct FUN_00ad7e30
-{
-    void Set(float value);
-};
-
 }  // namespace fnv_00ad7e30
 
 void __fastcall FUN_00adc160(BSAudioManager*);
-struct FUN_00ad7e60_shell
-{
-    void FUN_00ad7e60(float v);
-};
 
 void __fastcall FUN_00adc160(BSAudioManager*);
-struct FUN_00ad7e90_shell
-{
-    void FUN_00ad7e90(float v);
-};
-
-void __fastcall FUN_00ad87d0(BSAudioManager* m);
-struct FUN_00ad7ec0_shell2
-{
-    void FUN_00ad7ec0();
-};
 
 namespace fnv_00ad7ee0 {
 __declspec(thread) int g_audioThreadMode = 59;
@@ -372,14 +235,6 @@ struct AudioThreadModeScope
     {
         SetMode(saved);
     }
-};
-struct FUN_00ae5ff0_stub
-{
-    int FUN_00ae5ff0(unsigned int);
-};
-struct FUN_00ad7ee0_shell
-{
-    int FUN_00ad7ee0(unsigned int n);
 };
 }  // namespace fnv_00ad7ee0
 
@@ -406,14 +261,6 @@ struct AudioThreadModeScope
         SetMode(saved);
     }
 };
-struct FUN_00ae6bf0_stub
-{
-    void SetAudioCacheSize(unsigned int);
-};
-struct FUN_00ad81c0_shell
-{
-    void SetAudioThreadModeAndForward(unsigned int n);
-};
 }  // namespace fnv_00ad81c0
 
 namespace fnv_00ad8270 {
@@ -438,14 +285,6 @@ struct AudioThreadModeScope
     {
         SetMode(saved);
     }
-};
-struct FUN_00ae6c60_stub
-{
-    int FUN_00ae6c60();
-};
-struct FUN_00ad8270_shell
-{
-    int FUN_00ad8270();
 };
 }  // namespace fnv_00ad8270
 
@@ -472,14 +311,6 @@ struct AudioThreadModeScope
         SetMode(saved);
     }
 };
-struct FUN_00ae6ca0_stub
-{
-    void FUN_00ae6ca0(bool);
-};
-struct FUN_00ad8320_shell
-{
-    void FUN_00ad8320(bool b);
-};
 }  // namespace fnv_00ad8320
 
 namespace fnv_00ad83d0 {
@@ -505,28 +336,11 @@ struct AudioThreadModeScope
         SetMode(saved);
     }
 };
-struct FUN_00ae6cf0_stub
-{
-    bool FUN_00ae6cf0();
-};
-struct FUN_00ad83d0_shell
-{
-    bool FUN_00ad83d0();
-};
 }  // namespace fnv_00ad83d0
 
 struct MemoryManager
 {
     void Deallocate(void*);
-};
-extern MemoryManager g_memoryManager;
-struct FUN_00ad7000_stub
-{
-    void FUN_00ad7000();
-};
-struct FUN_00ad8790_shell
-{
-    void* FUN_00ad8790(unsigned int flags);
 };
 
 struct AutoMemContext
@@ -539,10 +353,6 @@ struct AutoMemContext
     int m_iLineNumber;
 };
 typedef char _sizecheck_AutoMemContext[sizeof(AutoMemContext) == 12 ? 1 : -1];
-struct FUN_00ad7230_shell : public BSAudio
-{
-    void FUN_00ad7230(bool);
-};
 
 extern __declspec(thread) int iCurrentMemContext;
 
@@ -582,8 +392,6 @@ struct SettingBool
     }
 };
 
-extern SettingBool g_011f6dfc;
-
 struct BSAudioState
 {
     virtual ~BSAudioState();
@@ -604,10 +412,6 @@ struct BSAudioSoundHandle
 struct FUN_00ae5870_t
 {
     BSAudioSoundHandle FUN_00ae5870(unsigned int, unsigned int);
-};
-struct FUN_00ad73b0_t : public BSAudio
-{
-    BSAudioSoundHandle FUN_00ad73b0(unsigned int, unsigned int);
 };
 extern __declspec(thread) int BSAudioThreadContext;
 __forceinline int BSAudioGetMemContext()
@@ -676,11 +480,6 @@ struct FUN_00ae5870_t
     BSSoundHandleEx FUN_00ae5870(unsigned int, unsigned int);
 };
 
-struct FUN_00ad7620_t : public BSAudio
-{
-    BSSoundHandleEx FUN_00ad7620(unsigned int aiFormID, unsigned int aiTypeFlags, NiPoint3 aLoc, unsigned int aiID);
-};
-
 }  // namespace fnv_00ad7620
 
 namespace fnv_00ad77f0 {
@@ -694,10 +493,6 @@ struct AutoMemContext
     int m_iLineNumber;
 };
 typedef char _sizecheck_AutoMemContext[sizeof(AutoMemContext) == 12 ? 1 : -1];
-struct FUN_00ad77f0_shell : public BSAudio
-{
-    void FUN_00ad77f0(float, unsigned int);
-};
 
 struct OH2TlsBlock
 {
@@ -722,17 +517,6 @@ struct OH2MemContext
 };
 }  // namespace fnv_00ad77f0
 
-class TargetAD79
-{
-  public:
-    virtual void vf00();
-    virtual void vf04();
-    virtual void vf08();
-    virtual void vf0C();
-    virtual void vf10();
-    virtual void Apply(void* pA, void* pB);
-};
-
 template <class T> class NiPointerAD79
 {
   public:
@@ -745,20 +529,6 @@ template <class T> class NiPointerAD79
         return m_pObject;
     }
     T* m_pObject;
-};
-
-class FUN_00ad7940_C
-{
-  public:
-    char unk00[0x10];
-    NiPointerAD79<TargetAD79> m_spReferencedObject;
-
-    void FUN_00ad7940(int a1, int a2, int a3, int a4, int a5, int a6);
-};
-
-struct FUN_00ad79b0_shell : public BSAudio
-{
-    void FUN_00ad79b0(unsigned int);
 };
 
 namespace sad7c50 {
@@ -922,10 +692,6 @@ struct AutoMemContext
     int m_iLineNumber;
 };
 typedef char _sizecheck_AutoMemContext[sizeof(AutoMemContext) == 12 ? 1 : -1];
-struct FUN_00ad8100_shell : public BSAudio
-{
-    void FUN_00ad8100(char*, unsigned int, void*);
-};
 
 struct TLSData
 {

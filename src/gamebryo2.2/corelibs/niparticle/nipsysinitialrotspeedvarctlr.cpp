@@ -20,20 +20,6 @@ FUN_00c32d80::FUN_00c32d80()
 }
 
 extern "C" void* g_012026d8;
-void __stdcall FUN_00c32f60(void* p);
-void* __cdecl FUN_00a7d330(void* p);
-
-struct FUN_00c29f00_Array
-{
-    void* unk00;
-    void* unk04;
-    unsigned short unk08;
-    unsigned short unk0A;
-    unsigned short unk0C;
-    unsigned short unk0E;
-    void FUN_0096ad30(unsigned int size);
-    void FUN_0096ae90(unsigned int index, void** item);
-};
 
 extern "C" char DAT_010becbc;
 extern "C" void* __cdecl FUN_00aa13e0(unsigned int size);

@@ -44,31 +44,6 @@ int FUN_00d263f0_t::FUN_00d263f0(int a, int b)
 }
 
 
-struct FUN_00d26760_StandIn
-{
-    void FUN_00d26760();
-};
-
-struct FUN_00d26880_MemoryManagerClient
-{
-    virtual void BeforeAllocate1() = 0;
-    virtual void BeforeAllocate2() = 0;
-    virtual void Deallocate(void* object, unsigned short size) = 0;
-};
-
-struct FUN_00d26880_MemoryRouter
-{
-    unsigned char Padding[0x10];
-    FUN_00d26880_MemoryManagerClient* Manager;
-};
-
-FUN_00d26880_MemoryRouter* _D1A0E0GetMemoryRouter();
-
-struct FUN_00d26880_StandIn : public hkpTriSampledHeightFieldCollection
-{
-    hkpTriSampledHeightFieldCollection* FUN_00d26880(unsigned int flags);
-};
-
 // @fnv 0x00d26390
 int FUN_00d26390()
 {
@@ -142,47 +117,12 @@ class hkpSampledHeightFieldShape : public hkpShape
     int m_unk10;
 };
 
-struct S_d264d0_Coll : public hkpTriSampledHeightFieldCollection
-{
-    hkpSampledHeightFieldShape* FUN_00d26450();
-    void FUN_00d264d0(unsigned int key, unsigned short value);
-};
-
 union __declspec(intrin_type) __declspec(align(16)) __m128
 {
     float m128_f32[4];
     unsigned __int64 m128_u64[2];
 };
 extern "C" __m128 _mm_setzero_ps(void);
-
-extern int DAT_010ce390;
-extern int DAT_010ce370;
-
-void __stdcall FUN_00d21410(int a, int b);
-
-struct Target26700
-{
-    void __thiscall FUN_00c90510();
-};
-
-struct FUN_00d26700
-{
-    void* m_vptr1;  // +0x00
-    int m_04;
-    int m_08;
-    int m_0c;
-    void* m_vptr2;  // +0x10
-    int m_14;
-    void* m_p;  // +0x18
-    int m_1c;
-    volatile float m_f;  // +0x20
-    volatile int m_uiX;  // +0x24
-    volatile int m_uiY;  // +0x28
-    volatile int m_uiZ;  // +0x2c
-    __m128 m_v;          // +0x30
-
-    FUN_00d26700(void* p, float f);
-};
 
 class hkMemoryAllocatorD267
 {
@@ -267,38 +207,10 @@ FUN_00d26760::~FUN_00d26760() throw()
     m_pkRef->FUN_00c905b0();
 }
 
-struct FUN_00d26450_S
-{
-    void* FUN_00d26450();
-};
-
-struct FUN_00d267c0_Alloc
-{
-    virtual void unk00();
-    virtual void unk04();
-    virtual void unk08();
-    virtual void unk0C();
-    virtual void Free(void* data, int size);
-};
-
 void* FUN_00c85750(void);
-void FUN_00c908c0(int a1, int a2, int a3, int a4);
-
-struct FUN_00d267c0_t : FUN_00d26450_S
-{
-    void FUN_00d267c0(int mode);
-};
 
 extern "C" __m128 _mm_mul_ps(__m128 a, __m128 b);
-extern "C" __m128 _mm_add_ss(__m128 a, __m128 b);
-extern "C" __m128 _mm_shuffle_ps(__m128 a, __m128 b, unsigned int imm);
 extern "C" __m128 _mm_setr_ps(float a, float b, float c, float d);
-extern "C" void _mm_store_ss(float* p, __m128 a);
-
-struct S00d26510_Bool
-{
-    char m_cBooleanValue;
-};
 
 struct S00d26510_Vec
 {
@@ -311,47 +223,6 @@ struct S00d26510_Vec
     {
         m_vComponents = _mm_mul_ps(v.m_vComponents, m_vComponents);
     }
-};
-
-struct S00d26510_Shape
-{
-    virtual ~S00d26510_Shape();
-    unsigned short m_usMemSizeAndFlags;
-    unsigned short m_sReferenceCount;
-    int m_ulUserData;
-    int m_type;
-};
-
-struct S00d26510_HFBase
-{
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual void v0C();
-    virtual void v10();
-    virtual void v14();
-    virtual void v18();
-    virtual void v1C();
-    virtual void v20();
-    virtual void v24();
-    virtual void v28();
-    virtual void v2C();
-    virtual void v30();
-    virtual float getHeightAt(int x, int z) const;
-    virtual void getTriangleFlip(S00d26510_Bool& out) const;
-    unsigned short m_usMemSizeAndFlags;
-    unsigned short m_sReferenceCount;
-    int m_ulUserData;
-    int m_type;
-};
-
-struct S00d26510_HF : public S00d26510_HFBase
-{
-    int m_iXResolution;
-    int m_iZResolution;
-    int unk18;
-    int unk1C;
-    S00d26510_Vec m_kHeightScaleVector;
 };
 
 struct S00d26510_ShapeB
@@ -402,27 +273,6 @@ struct S00d26510_Tri : public S00d26510_Convex
         m_ucWeldingPadding = 0;
     }
     virtual ~S00d26510_Tri();
-};
-
-struct S00d26510_Container
-{
-    virtual ~S00d26510_Container();
-    virtual const S00d26510_ShapeB* FUN_00d26510(unsigned int key, void* buffer) const;
-};
-
-struct S00d26510_Coll : public S00d26510_Shape, public S00d26510_Container
-{
-    int unk14;
-    S00d26510_HF* m_pHeightFieldShape;
-    int m_iChildSize;
-    float m_fSphereRadius;
-    unsigned short* m_weldingData;
-    int m_weldingSize;
-    int m_weldingCap;
-    __m128 m_kTriangleExtrusion;
-
-    S00d26510_HF* getHF() const;
-    virtual const S00d26510_ShapeB* FUN_00d26510(unsigned int key, void* buffer) const;
 };
 
 // FUN_00d26870 - MSVC this-adjusting thunk for a secondary base.

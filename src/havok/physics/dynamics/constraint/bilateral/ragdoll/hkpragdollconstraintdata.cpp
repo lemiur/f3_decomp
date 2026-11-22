@@ -11,25 +11,6 @@ void __stdcall FUN_00cde9d0(int* apUnused, int* apiOut)
     apiOut[0] = 0x80;
 }
 
-struct FUN_00cde980_cls
-{
-    void __thiscall FUN_00cde980(int a);
-};
-
-struct FUN_00cde960_cls
-{
-    void __thiscall FUN_00cde960(float a);
-};
-
-void* __cdecl FUN_00d21a60(void* a, int b, int c);
-struct FUN_00cde9b0_cls
-{
-    char* FUN_00cde9b0(int a);
-};
-
-extern int DAT_010cb71c;
-extern int _DAT_0102e388;
-
 struct DDCC60World
 {
     void __thiscall removeReference(void);
@@ -69,106 +50,6 @@ FUN_00cdf1f0::~FUN_00cdf1f0() {
 }
 
 
-struct FUN_00cde970_cls
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5C;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6C;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7C;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8C;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9C;
-    int unkA0;
-    int unkA4;
-    int unkA8;
-    int unkAC;
-    int unkB0;
-    int unkB4;
-    int unkB8;
-    int unkBC;
-    int unkC0;
-    int unkC4;
-    int unkC8;
-    int unkCC;
-    int unkD0;
-    int unkD4;
-    int unkD8;
-    int unkDC;
-    int unkE0;
-    int unkE4;
-    int unkE8;
-    int unkEC;
-    int unkF0;
-    int unkF4;
-    int unkF8;
-    int unkFC;
-    int unk100;
-    int unk104;
-    int unk108;
-    int unk10C;
-    int unk110;
-    int unk114;
-    int unk118;
-    int unk11C;
-    int unk120;
-    int unk124;
-    int unk128;
-    int unk12C;
-    int unk130;
-    int unk134;
-    int unk138;
-    float m_13c;
-    float FUN_00cde970();
-};
-
-// FUN_00cde9a0
-//   movzx eax, byte ptr [ecx + 0x13a]
-//   shr   eax, 1
-//   ret
-//
-// The unit file does not declare this function, so it is modelled here from the
-// disassembly.  The object is an hkpRagdollConstraintData (m_kBridgeAtoms at +0x10);
-// inside m_kBridgeAtoms the hkpBallSocketConstraintAtom sits at +0x128, so its
-// hkUint8 m_ucBodiesToNotify member is at +0x13a of the complete object.
-// The getter returns that byte shifted right by one bit.
-struct RagdollBodiesToNotify : public hkpRagdollConstraintData
-{
-    int __thiscall FUN_00cde9a0();
-};
-
 // @fnv 0x00cdead0
 int __cdecl FUN_00cdead0()
 {
@@ -185,90 +66,6 @@ struct __declspec(align(16)) FUN_00cdf190_Vec
     float y;
     float z;
     float w;
-};
-struct FUN_00cdf190_Out
-{
-    FUN_00cdf190_Vec a;
-    FUN_00cdf190_Vec b;
-    FUN_00cdf190_Vec c;
-};
-struct FUN_00cdf190_Class
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    FUN_00cdf190_Vec v20;
-    FUN_00cdf190_Vec v30;
-    FUN_00cdf190_Vec v40;
-    void CopyVectorsToOut(FUN_00cdf190_Out* out);
-};
-
-struct FnvCpu_FUN_00cdf530_CpuAllocator
-{
-    virtual void slot00();
-    virtual void slot04();
-    virtual void Invoke(void* block, unsigned int size);
-};
-struct FnvCpu_FUN_00cdf530_CpuAllocatorHolder
-{
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0c;
-    FnvCpu_FUN_00cdf530_CpuAllocator* allocator;
-};
-FnvCpu_FUN_00cdf530_CpuAllocatorHolder* __cdecl FUN_00c85750();
-struct FnvCpu_FUN_00cdf530_CpuObject
-{
-    unsigned int unk00;
-    unsigned short size;
-    void FUN_00cdf1f0();
-    FnvCpu_FUN_00cdf530_CpuObject* FUN_00cdf530(unsigned int flags);
-};
-
-struct Cdf1c0_vec48
-{
-    __m128 a;
-    __m128 b;
-    __m128 c;
-};
-
-class Cdf1c0_cls
-{
-  public:
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5C;
-    Cdf1c0_vec48 m60;
-    Cdf1c0_vec48 m70;
-    Cdf1c0_vec48 m80;
-    void GetM60(Cdf1c0_vec48* out);
 };
 
 extern "C" __m128 _mm_setzero_ps(void);
@@ -417,16 +214,6 @@ class hkpConstraintDataB90 : public hkReferencedObjectB90
     unsigned long m_ulUserData;
 };
 
-class FUN_00cb9090 : public hkpConstraintDataB90
-{
-  public:
-    FUN_00cb9090() throw();
-    virtual ~FUN_00cb9090() throw();
-
-    int unk0C;
-    FUN_00cb9170 m_kBridgeAtoms;
-};
-
 extern "C"
 {
     __m128 _mm_shuffle_ps(__m128, __m128, unsigned int);
@@ -444,7 +231,6 @@ extern "C"
     __m128 _mm_mul_ss(__m128, __m128);
     __m128 _mm_rsqrt_ss(__m128);
     __m128 _mm_cmpeq_ss(__m128, __m128);
-    __m128 _mm_set_ss(float);
 }
 
 union hkVector4q
@@ -462,11 +248,6 @@ union hkVector4q
     }
 };
 
-struct hkVector4Out : public hkVector4
-{
-    void SetTransformedPosition(const hkTransform& t, const hkVector4& v);
-};
-
 struct hkMatrix3q
 {
     hkVector4q m_col[3];
@@ -477,31 +258,6 @@ struct hkMatrix3q
         m_col[1].m_vComponents = m.m_col[1].m_vComponents;
         m_col[2].m_vComponents = m.m_col[2].m_vComponents;
     }
-};
-
-struct hkRagdollTransformsq
-{
-    hkUint16 m_type;
-    hkUint16 unk02;
-    int unk04;
-    int unk08;
-    int unk0C;
-    hkMatrix3q m_kRotationA;
-    hkVector4 m_kTranslationA;
-    hkMatrix3q m_kRotationB;
-    hkVector4 m_kTranslationB;
-    hkUint16 m_motorType;
-    hkUint16 unk82;
-    int unk84;
-    int unk88;
-    int unk8C;
-    hkMatrix3q m_kMotorAxes;
-};
-
-struct hkpRagdollConstraintDataEx : public hkpRagdollConstraintData
-{
-    void FUN_00cdeae0(const hkTransform& bodyATransform, const hkTransform& bodyBTransform, const hkVector4& pivot,
-                      const hkVector4& twistAxisW, const hkVector4& planeAxisW);
 };
 
 extern "C" __m128 _mm_add_ss(__m128 _A, __m128 _B);
@@ -575,74 +331,6 @@ struct Vec4
         ret.addMul4(imagCrossDir, qreal);
         setAdd4(ret, ret);
     }
-};
-
-struct FUN_00cdef90_cls
-{
-    void* unk00;
-    void* unk04;
-    void* unk08;
-    void* unk0C;
-    void* unk10;
-    void* unk14;
-    void* unk18;
-    void* unk1C;
-    void* unk20;
-    void* unk24;
-    void* unk28;
-    void* unk2C;
-    void* unk30;
-    void* unk34;
-    void* unk38;
-    void* unk3C;
-    void* unk40;
-    void* unk44;
-    void* unk48;
-    void* unk4C;
-    void* unk50;
-    void* unk54;
-    void* unk58;
-    void* unk5C;
-    Vec4 m_dir;
-    Vec4 m_kAxisEndPoints;
-    Vec4 m_kStartPerpendicular;
-    void* unk90;
-    void* unk94;
-    void* unk98;
-    void* unk9C;
-    void* unkA0;
-    void* unkA4;
-    void* unkA8;
-    void* unkAC;
-    void* unkB0;
-    void* unkB4;
-    void* unkB8;
-    void* unkBC;
-    void* unkC0;
-    void* unkC4;
-    void* unkC8;
-    void* unkCC;
-    void* unkD0;
-    void* unkD4;
-    void* unkD8;
-    void* unkDC;
-    void* unkE0;
-    void* unkE4;
-    void* unkE8;
-    void* unkEC;
-    void* unkF0;
-    void* unkF4;
-    void* unkF8;
-    void* unkFC;
-    void* unk100;
-    void* unk104;
-    void* unk108;
-    void* unk10C;
-    void* unk110;
-    void* unk114;
-    void* unk118;
-    float m_halfRange;
-    void FUN_00cdef90(float a, float b);
 };
 
 namespace fnv_00cb9170 {
@@ -801,45 +489,6 @@ FUN_00cb9170::FUN_00cb9170()
     m_fC8 = DAT_0104da48;
 }
 }  // namespace fnv_00cb9170
-
-struct RagdollRotation3q
-{
-    hkVector4q m_kColumn0;
-    hkVector4q m_kColumn1;
-    hkVector4q m_kColumn2;
-};
-
-struct RagdollTransformq
-{
-    RagdollRotation3q m_rotation;
-    hkVector4q m_vTranslation;
-};
-
-struct RagdollLayout
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    RagdollTransformq m_kBodyALocalFrame;
-    RagdollTransformq m_kBodyBLocalFrame;
-    int unkA0;
-    int unkA4;
-    int unkA8;
-    int unkAC;
-    RagdollRotation3q m_kMotorAxes;
-};
-
-// out = a x b, with the operands passed as (b, a)
-struct hkpRagdollConstraintDataBodySpace : public hkpRagdollConstraintData
-{
-    void FUN_00cded30(const hkVector4& pivotA, const hkVector4& pivotB, const hkVector4& planeAxisA,
-                      const hkVector4& planeAxisB, const hkVector4& twistAxisA, const hkVector4& twistAxisB);
-};
 
 // @f3twin 0x0095a050 of 0x004a0640
 int __cdecl F3_FUN_0095a050()

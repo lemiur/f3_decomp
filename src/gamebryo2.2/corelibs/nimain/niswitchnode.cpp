@@ -429,69 +429,6 @@ class A93DD0AVObjectPtr
     A93DD0AVObject* m_pObject;
 };
 
-class A93DD0BlockArray
-{
-  public:
-    void Remove(unsigned int uiIndex) throw();
-};
-
-class A93DD0Node
-{
-  public:
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5C;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6C;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7C;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8C;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9C;
-    A93DD0AVObject** m_ppkChildren;
-    unsigned short unkA4;
-    unsigned short m_usChildCount;
-    int unkA8;
-    int unkAC;
-    int m_iLastChild;
-    int unkB4;
-    int m_bValueAt0C;
-    A93DD0BlockArray m_kBlocks;
-
-    void DetachChildInternal(unsigned int uiIndex, A93DD0AVObjectPtr& spChild) throw();
-    void RemoveChild(unsigned int uiIndex, A93DD0AVObjectPtr& pChild);
-};
-
 }  // namespace fnv_00a93dd0
 
 struct SwitchChildB10050

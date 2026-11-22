@@ -4,11 +4,6 @@
 
 #include "../../include/layout_support.h"
 
-struct FUN_00e87a40_This {
-    void ReleaseOwnedObject();
-    void FUN_00e87a40();
-};
-
 struct FUN_00e87a70_Class {
     void __thiscall FUN_00e87a70();
 };
@@ -41,10 +36,6 @@ int __thiscall FUN_00e88a50_Class::FUN_00e88a50(int index)
 {
     return *(int*)((char*)this + 0x10a0 + index * 4);
 }
-
-struct FUN_00e87a50_Class {
-    void __thiscall FUN_00e87a50();
-};
 
 struct FUN_00e87ea0_Class {
     int __thiscall CallVirtualWithFlags(void* p);
@@ -204,11 +195,6 @@ int __cdecl FUN_00e978a0(int a, int b)
 }
 
 extern "C" void __cdecl NiFreeAlias(void*);
-extern int DAT_010f0f7c;
-
-struct FUN_00e98640_Class {
-    void __thiscall FUN_00e98640();
-};
 
 struct FUN_00e81d00_Class {
     char m_auiShapeKeys[0x38];
@@ -403,8 +389,6 @@ void __thiscall FUN_00e89560_Class::FUN_00e89560()
 
 extern int DAT_0126f9a0;
 
-struct P03MM { void* __thiscall Allocate(unsigned int); };
-
 struct NiConsoleRendererStub {
     void* m_pCurrentRenderState;
     void* m_pD3DDevice;
@@ -507,18 +491,10 @@ void __cdecl FUN_00e91b90()
 }
 
 namespace fnv_00e91dc0 {
-struct NiD3DShader { static void __cdecl InitializePoint3(void); };
 struct NiD3DShaderFactory { static void __cdecl InitializePoint3(void); };
-extern bool DAT_0126fa00;
 void __cdecl AddKeyToList(int);
-void __cdecl FUN_00e7f2b0();
-void __cdecl FUN_00e895f0();
-void __cdecl FUN_00e80620();
-void __cdecl FUN_00e7a860();
-void __cdecl FUN_00e93df0();
 void __cdecl FUN_00e91b40();
 void __cdecl FUN_00e91b90();
-void __cdecl CreateHLSLShaderProgramCreator();
 
 }  // namespace fnv_00e91dc0
 
@@ -526,20 +502,7 @@ extern int DAT_010f0e50;
 extern int DAT_010f0e70;
 extern "C" void __cdecl NiFree(void*);
 
-struct FUN_00e936b0_Class {
-    int* m_kPointA;
-    int* m_kPointB;
-    void* m_iThirdValue;
-    void* __thiscall DestroyMapBase(int unused);
-};
-
-extern int DAT_010f0eb0;
-extern int DAT_010f0ed0;
 void __cdecl NiFree(void*);
-
-struct FUN_00e93750_Class {
-    void* __thiscall FUN_00e93750(int unused);
-};
 
 struct FUN_00e941d0_Node { unsigned int pad[9]; unsigned int count; unsigned int pad2[5]; FUN_00e941d0_Node* next; FUN_00e941d0_Node* prev; };
 struct FUN_00e941d0_This { int pad[11]; FUN_00e941d0_Node* head; };
@@ -564,16 +527,6 @@ FUN_00e941d0_Node* __fastcall RemoveFirstNodeAtLeast(FUN_00e941d0_This* self, in
 }
 
 extern "C" void __cdecl operator delete(void* p, unsigned int size);
-
-struct FUN_00e98610_Node {
-    void* m_next;
-    void* m_auiShapeKeys;
-    void* m_data;
-    void* m_pAuxiliaryObject;
-    void* m_pad3;
-    void* m_pad4;
-    void* m_pSecondNode;
-};
 
 extern int DAT_0126fa58;
 
@@ -872,18 +825,7 @@ unsigned int __fastcall FUN_00e8a240(char* self, int)
 
 void __cdecl _NiFree(void* p);
 
-struct FUN_00e8b4e0_Class : NiTMapBaseStub {
-    void* m_auiShapeKeys;
-    void* m_pAuxiliaryObject;
-    void* m_ptr;
-    void* __thiscall FUN_00e8b4e0(unsigned int flags);
-};
-
 extern int DAT_010efdd8;
-
-struct FUN_00e8b520_Class : NiTMapBaseStub {
-    void* __thiscall FUN_00e8b520(int deletingFlag);
-};
 
 extern int DAT_010efdf8;
 extern int DAT_010efdd8;
@@ -893,24 +835,9 @@ void __cdecl _NiFree(void* p);
 extern int DAT_010efe54;
 extern MemoryManager _g_memoryManager;
 
-struct FUN_00e8ce30_Class : NiTMapBaseStub {
-    int m_auiShapeKeys[2];
-    void* m_pUnk08;
-    FUN_00e8ce30_Class(int flags);
-};
-
 extern int DAT_010efe54;
-extern int DAT_010efe74;
 extern MemoryManager _g_memoryManager;
 void __cdecl _NiFree(void*);
-
-struct FUN_00e8ce70_Class : NiTMapBaseStub {
-    void* m_ppVirtualMethodTable;
-    unsigned int m_auiShapeKeys;
-    void* m_data;
-
-    void* __thiscall FUN_00e8ce70(int flag);
-};
 
 extern "C" void __cdecl operator delete(void*, unsigned int);
 struct FUN_00e8ceb0_Class {
@@ -960,12 +887,6 @@ void* __thiscall FUN_00e8f800_Class::FUN_00e8f800(bool deleting)
 }
 
 extern int DAT_0126fa04;
-void __cdecl FUN_00aa2080(void*, void*);
-void __cdecl FUN_00e91dc0();
-void __cdecl FUN_00e91c80();
-struct FUN_00e91e30_This {
-    void* FUN_00e91e30();
-};
 
 extern void* DAT_0126fa0c;
 
@@ -1076,35 +997,13 @@ void FUN_00e935b0_Class::FreeIfFlagged(int* a)
 extern int DAT_010f0df0;
 extern "C" void __cdecl NiFree(void*);
 
-struct FUN_00e935d0 : NiTMapBaseStub {
-    int m_auiShapeKeys;
-    int m_pAuxiliaryObject;
-    void* m_data;
-    FUN_00e935d0(int unused);
-};
-
 extern int DAT_010f0df0;
 extern int DAT_010f0e10;
 extern MemoryManager _g_memoryManager;
 
-struct FUN_00e93610_Class {
-    void* m_vptr;
-    char m_auiShapeKeys[3];
-    void* m_data;
-
-    FUN_00e93610_Class* __thiscall FUN_00e93610(int flags);
-};
-
 void __cdecl NiFree(void* p);
 extern int DAT_010f0e50;
 extern MemoryManager g_memoryManager;
-
-struct FUN_00e93670_Class {
-    void* m_ppVirtualMethodTable;
-    void* m_auiShapeKeys;
-    void* m_ptr;
-    void* __thiscall FUN_00e93670(int unused);
-};
 
 void __cdecl FUN_00e934d0();
 struct FUN_00e936f0_Class {
@@ -1238,13 +1137,6 @@ void __stdcall FUN_00e94330(void* p)
 
 void __cdecl _NiFree(void* p);
 
-struct FUN_00e94390_Class {
-    void* m_vptr;
-    void* m_ptr;
-
-    void* __thiscall FUN_00e94390(int flags);
-};
-
 extern int DAT_010f0f94;
 extern int DAT_010f0fb4;
 extern MemoryManager _g_memoryManager;
@@ -1369,13 +1261,6 @@ void AllocateNodeList()
     }
 }
 
-struct FUN_00e98b10_Class {
-    void*** m_ppVirtualMethodTable;
-    void* m_data;
-    FUN_00e98b10_Class* __thiscall FUN_00e98b10(unsigned char flag);
-};
-
-extern void** DAT_010f16dc;
 extern MemoryManager _g_memoryManager;
 
 struct SpawnedObject {
@@ -8363,7 +8248,6 @@ extern LockObj DAT_011c5f80;
 extern unsigned int DAT_011c5f84;
 extern PoolNode* DAT_011c5f58;
 struct Com { virtual void __stdcall f0(); virtual void __stdcall f1(); virtual void __stdcall Release(); };
-struct ListCleanup { void FUN_004ed900(); };
 void _delete(void*,unsigned int);
 struct Target {
  virtual void f0();
@@ -8452,31 +8336,6 @@ void Target::FUN_00e8b630()
 extern int DAT_010efdd8;
 extern int DAT_010efdf8;
 extern "C" void* __cdecl FUN_00aa1070(unsigned int);
-extern "C" void* __cdecl FUN_00ec61c0(void*, int, unsigned int);
-struct Observer {
-    virtual void __stdcall Slot0();
-    virtual void __stdcall Slot1();
-};
-struct MapProcessor {
-    int* vtable;
-    unsigned int bucketCount;
-    void* buckets;
-    unsigned int itemCount;
-    int field10;
-    int field14;
-    int field18;
-    Observer* observer1c;
-    void* volatile context20;
-    int index24;
-    int field28;
-    int field2c;
-    int field30;
-    int field34;
-    int field38;
-    unsigned char data3c[512];
-    void FUN_00e8b170();
-    MapProcessor* FUN_00e8bae0(void* context, Observer* observer);
-};
 
 namespace fnv_00e8bd40 {
 struct Record;
@@ -9881,31 +9740,6 @@ f20=1.0f; return true;
 }
 
 extern "C" void __cdecl FUN_00aa10f0(void* p);
-extern int DAT_010f0ef0;
-
-struct FUN_00e93540_Node {
-    FUN_00e93540_Node* next;
-    void* data;
-};
-
-struct FUN_00e93540_Map : public NiTMapBaseStub {
-    unsigned int m_vptr;
-    unsigned int m_uiItemCount;
-    FUN_00e93540_Node** m_buckets;
-    unsigned int unk0c;
-    unsigned char m_ownsData;
-
-    void __thiscall FUN_00e93540();
-};
-
-struct FUN_00e89740_Obj {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-
-    void Cleanup();
-};
 
 extern "C" __declspec(dllimport) long __stdcall InterlockedIncrement(long volatile* plValue);
 extern "C" __declspec(dllimport) long __stdcall InterlockedDecrement(long volatile* plValue);
@@ -10364,27 +10198,6 @@ void __thiscall FUN_00e8bf80_Object::FUN_00e8bf80() {
     ++m_uiItemCount;
 }
 
-struct FUN_00e8d350_Class {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-
-    int* __thiscall FUN_00e8d350();
-};
-
 struct Item9ea;
 
 bool DispatchByVirtualIndex(float fTime, Item9ea* pkItem, void* p2, void* p3, void* p4, void* p5, void* p6);
@@ -10578,7 +10391,6 @@ struct ShadowSceneLightList { PoolNode* head; PoolNode* tail; unsigned int count
  __forceinline void recycle(PoolNode* node) { node->data=0; DAT_011c5f80.FUN_0040fbf0(0); node->prev=0; node->next=DAT_011c5f58; --DAT_011c5f84; DAT_011c5f58=node; if (!DAT_011c5f84) DAT_011c5f80.value=0; }
  __forceinline SceneLight* remove(PoolNode*& node) { if(node==head) { PoolNode* old=head; head=old->next; if(head) head->prev=0; else tail=0; SceneLight* element=(SceneLight*)old->data; recycle(old); --count; return element; } else if(node==tail) { return FUN_004edf00(); } else { PoolNode* prev=node->prev; PoolNode* next=node->next; if(prev)prev->next=next; if(next)next->prev=prev; SceneLight* element=(SceneLight*)node->data; recycle(node); --count; return element; } }
 };
-extern const float runtimeFloatSettingDefault9;
 struct LightManager { unsigned int field00,field04,field08,field0c; ShadowSceneLightList active; LightDevice* device; MobileTargetObj* render; unsigned int field24,field28; unsigned char field2c; bool enabled; unsigned short field2e;
  unsigned int AllocateBitIndex(); void InsertOrUpdate(SceneLight*,ActiveLight*); void FUN_00e8b740(LightInput* input); };
 // @f3 0x00883be0 (community match, verified in this file)
@@ -10791,64 +10603,6 @@ void S00e81b00_Caller(S00e81b00_Mat* dst, const S00e81b00_Mat* src) {
 
 typedef unsigned int UINT;
 typedef unsigned long DWORD;
-struct SurfDesc { UINT Format, Type, Usage, Pool, MultiSampleType, MultiSampleQuality, Width, Height; };
-struct VolDesc { UINT Format, Type, Usage, Pool, Width, Height, Depth; };
-struct BaseTex {
- virtual long __stdcall QueryInterface(const void*,void**);
- virtual unsigned __stdcall AddRef();
- virtual unsigned __stdcall Release();
- virtual long __stdcall GetDevice(void**);
- virtual long __stdcall SetPrivateData(const void*,const void*,unsigned,unsigned);
- virtual long __stdcall GetPrivateData(const void*,void*,unsigned*);
- virtual long __stdcall FreePrivateData(const void*);
- virtual unsigned __stdcall SetPriority(unsigned);
- virtual unsigned __stdcall GetPriority();
- virtual void __stdcall PreLoad();
- virtual int __stdcall GetType();
- virtual unsigned __stdcall SetLOD(unsigned);
- virtual unsigned __stdcall GetLOD();
- virtual unsigned __stdcall GetLevelCount();
- virtual long __stdcall SetAutoGenFilterType(unsigned);
- virtual unsigned __stdcall GetAutoGenFilterType();
- virtual void __stdcall GenerateMipSubLevels();
-};
-struct Tex2D : BaseTex { virtual long __stdcall GetLevelDesc(unsigned, SurfDesc*); };
-struct TexCube : BaseTex { virtual long __stdcall GetLevelDesc(unsigned, SurfDesc*); };
-struct TexVol : BaseTex { virtual long __stdcall GetLevelDesc(unsigned, VolDesc*); };
-
-void __cdecl GetPixelTemplateForFormat(UINT format, void* out);
-
-struct TextureInfo {
-    int unk00;
-    int unk04;
-    int unk08;
-    UINT m_fMaxFriction;
-    UINT m_height;
-    int m_format14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5c;
-    int unk60;
-    int unk64;
-    DWORD m_levelCount;
-
-    bool InitFromTexture(BaseTex* pTexture);
-};
 
 void __cdecl FUN_00aa1460(void* pvMem, unsigned int uiSize);
 
@@ -11150,13 +10904,6 @@ public:
 // @f3 0x008842a0 (community match, verified in this file)
 struct NativeControllerMap16 {void FUN_00899cf0(KeyObjectE8B*);};
 void __cdecl FUN_0089ec10(void* pvMem, unsigned int uiSize);
-
-struct NiTListE8BFwd {
-    NiTListItemE8B* m_pkHead;
-    NiTListItemE8B* m_pkTail;
-    unsigned int m_uiCount;
-    void DeleteItem(NiTListItemE8B* pkItem);
-};
 
 struct NativeListE8B {
     NiTListItemE8B* m_pkHead;
@@ -14499,7 +14246,6 @@ void E895A0_Object::FUN_00e895a0()
 }
 
 extern "C++" void __cdecl operator delete(void*, int);
-struct E95B80SV { void FUN_00e95b80(); };
 extern "C" __declspec(dllimport) long __stdcall InterlockedDecrement(volatile long* p);
 extern unsigned char kVtbl_NiDX9IndexBufferManager;
 

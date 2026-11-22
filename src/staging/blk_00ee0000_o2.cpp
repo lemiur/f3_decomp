@@ -189,8 +189,6 @@ int __stdcall FUN_00ee6db0(unsigned int s, void* addr, int* addrlen)
     return accept(s, addr, addrlen);
 }
 
-extern "C" int __cdecl __WSAFDIsSet(unsigned long, void*);
-
 extern void(__cdecl* const FUN_00DF3880)();
 
 // @fnv 0x00ee6db6
@@ -413,16 +411,6 @@ void __stdcall FUN_00ee8210(void* TargetFrame, void* TargetIp, void* ExceptionRe
     RtlUnwind(TargetFrame, TargetIp, ExceptionRecord, ReturnValue);
 }
 
-struct FUN_00ee88d0_base
-{
-    virtual ~FUN_00ee88d0_base();
-};
-
-struct FUN_00ee88d0_cls : FUN_00ee88d0_base
-{
-    virtual ~FUN_00ee88d0_cls();
-};
-
 class FUN_00eea550_cls
 {
   public:
@@ -553,17 +541,6 @@ void FixedStringHolder::FUN_00eea690(const char** source)
         m_pString = newString;
     }
 }
-
-class FUN_00eea4f0_cls
-{
-  public:
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-
-    int* FUN_00eea4f0();
-};
 
 struct FUN_00eea500_Holder
 {

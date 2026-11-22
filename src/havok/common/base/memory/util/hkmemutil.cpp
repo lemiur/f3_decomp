@@ -3,7 +3,6 @@
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
 void __cdecl FUN_00d2caa0(void*, void*, unsigned int);
-void __cdecl CopyMemoryBackward(void*, void*, unsigned int);
 
 namespace fnv_00d2caa0 {
 void* __cdecl _memmove(void* dst, const void* src, unsigned int count);
@@ -21,9 +20,3 @@ void __cdecl FUN_00d2cab0()
 {
     FUN_00ec61c0();
 }
-
-struct D2CAC0Elem
-{
-    unsigned int lo;
-    unsigned int hi;
-};

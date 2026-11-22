@@ -7,26 +7,6 @@ struct Owner {
     unsigned int field20, field24, field28, field2c;
     void* payload;
 };
-struct Item {
-    unsigned int value;
-    unsigned char* first;
-    unsigned char* second;
-    unsigned int key;
-    unsigned short kind;
-    unsigned char flags;
-    unsigned char flagsHigh;
-    unsigned short firstSize;
-    unsigned short field16;
-    unsigned short secondSize;
-    unsigned short field1a;
-    unsigned int extra;
-    unsigned short extraKind;
-};
-struct Entry {
-    Item* item;
-    unsigned short firstIndex;
-    unsigned short secondIndex;
-};
 struct Record {
     unsigned int key;
     unsigned int value;
@@ -64,10 +44,6 @@ struct Group {
     Group* limit;
     unsigned int field24, field28, field2c;
 };
-struct BlockList { Block* head; unsigned int count; };
-struct EntryListNode { Entry* data; int count; };
-struct Special { Entry entry; Record* record; unsigned int field0c; };
-struct SpecialList { Special* data; int count; };
 struct Allocator { virtual void unused(); virtual void* allocate(unsigned int size); };
 struct AllocationContext { unsigned int field00, field04, field08, field0c; Allocator* allocator; void* allocate(unsigned int size) { return allocator->allocate(size); } };
 void* __cdecl FUN_00c85750();
@@ -78,7 +54,6 @@ struct SizePointer { unsigned int* value; SizePointer(unsigned int* p):value(p) 
 
 #include <xmmintrin.h>
 #include <windows.h>
-extern "C" void _ReadWriteBarrier();
 inline void* operator new(unsigned int, void* ptr) { return ptr; }
 __declspec(nothrow) void* FUN_00c85750();
 __declspec(nothrow) void FUN_00c908c0(void*,void*,int,int);
@@ -381,11 +356,6 @@ struct __declspec(align(16)) ProbeCallback : ProbeEntry {
 
 extern const char str_010d3f1c[], str_010d3d60[], str_010d3f08[], str_010d3d70[], str_010c41f8[];
 
-union EarlyPhase { DWORD ticks; TaskEntity* const* bodies; int pass; };
-union FinalPhase { DWORD ticks; int bytes; };
-
-
-
 struct SceneInput { SceneInput(SceneIsland* v):p(v) {} SceneIsland* p;  operator SceneIsland*() const { return p; } SceneIsland* operator->() const { return p; } };
 
 
@@ -462,7 +432,6 @@ __forceinline void MonitorStream::CommandTimingEntry::setTime() {
 }
 
 extern TlsSlot<MonitorStream*> DAT_0126835c;
-extern TlsSlot<int> DAT_012687c8;
 
 struct TaskAllocator {
     virtual ~TaskAllocator();
@@ -539,17 +508,6 @@ struct __declspec(align(16)) QueueStorage : Command {
     int unk160, unk164, unk168, unk16c;
 };
 
-struct Queue {
-    int __thiscall ForwardWithZero(Command& cmd, int waitMode);
-    void __thiscall FUN_00d04b50(Command& cmd, int priority);
-    void __thiscall FUN_00d04d80(const Command* cmd, int flag);
-    void* __thiscall FUN_00d04400(void* storage);
-    void __thiscall InsertItemAndNotify(void* token, const PacketBase& cmd, int priority);
-    void __thiscall FUN_00d04420(void* token);
-    int __thiscall FUN_00d05020(int kind, int priority, Command& next, int waitMode);
-    int __thiscall ProcessCallback(const PacketBase* prev, Command& next, int waitMode);
-};
-
 struct QueryStepBase {
     __declspec(align(16)) float substepDt;
     float microStepDt, substepInvDt, frameDt, frameInvDt, invNumSteps, invTotalSteps;
@@ -614,23 +572,6 @@ struct Settings {
     int unk1c0, unk1c4, unk1c8, unk1cc;
     Context context;
     __forceinline void* getCollisionInput() const { return collisionInput; }
-};
-
-struct SecondarySettings {
-    int unk00, unk04, unk08, unk0c, unk10, unk14, unk18, unk1c, unk20, unk24, unk28, unk2c, unk30, unk34, unk38, unk3c;
-    int unk40, unk44, unk48, unk4c, unk50, unk54, unk58, unk5c, unk60, unk64, unk68, unk6c, unk70, unk74, unk78, unk7c;
-    int unk80, unk84, unk88, unk8c, unk90, unk94, unk98, unk9c, unka0, unka4, unka8, unkac, unkb0;
-    unsigned int constraintLimit;
-};
-
-struct TaskOwner {
-    Settings* settings;
-    int unk04, unk08, unk0c;
-    ConstraintQueryIn queryIn;
-    int unk90, unk94, unk98, unk9c, unka0, unka4, unka8, unkac, unkb0, unkb4, unkb8, unkbc;
-    int unkc0, unkc4, unkc8, unkcc, unkd0, unkd4, unkd8, unkdc, unke0, unke4, unke8, unkec, unkf0, unkf4, unkf8, unkfc;
-    int unk100, unk104, unk108, unk10c;
-    PaddedPtr<SecondarySettings*> secondary;
 };
 
 struct SceneIsland {
@@ -761,19 +702,6 @@ struct FinishPacket : DynamicsPacket {
         header = hdr;
     }
 };
-
-struct AccumulatorsPacket : DynamicsPacket {
-    void* const* entitiesArray;
-    unsigned short firstEntityIdx;
-    unsigned short numEntities;
-};
-
-extern int __cdecl FUN_00d889f0(SceneIsland& island);
-extern int __cdecl FUN_00d28a30(const SolverParams& solver, const StepTiming& timing, const AccelVec& accel, void* const* entities, int numEntities, int offset);
-extern void __cdecl FUN_00d1a330(const void* input, void* const* entities, int numEntities);
-extern int __cdecl FUN_00d88b50(const StepTiming& timing, const SolverParams& solver, ConstraintQueryIn& queryIn, SceneIsland& island, void* buffer, int bufferSize, void* const* entities, int numEntities);
-extern void __cdecl ClearFlagsAndMarkDirty(SceneIsland* island, TaskArray<void*>& splitIslands);
-extern int __cdecl FUN_00d883c0(const SceneIsland& island, char* buffer, int bufferSize, JobHeader& header);
 
 }  // namespace fnv_00d95cf0
 

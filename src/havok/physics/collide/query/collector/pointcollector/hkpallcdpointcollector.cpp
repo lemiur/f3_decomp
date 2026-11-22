@@ -2,27 +2,8 @@
 // src/havok/physics/collide/query/collector/pointcollector/hkpallcdpointcollector.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/physics/collide/query/collector/pointcollector/hkpallcdpointcollector.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-struct FUN_00caba90_array
-{
-    void* data;
-    unsigned int count;
-    unsigned int capacity;
-};
-struct FUN_006212c0_shell
-{
-    void* FUN_006212c0(void* source);
-};
 void* __cdecl FUN_00c85750();
 void __cdecl ResizeAudioStream(void* manager, void* array, int itemSize);
-struct FUN_00caba90_Class
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    FUN_00caba90_array array;
-    void* AppendItem(void* source);
-};
 
 struct ByteTag
 {
@@ -82,13 +63,6 @@ struct S_00cab970_Cd
     int unk08;
     S_00cab970_Cd* parent;
 };
-struct S_00cab970_Src
-{
-    S_00cab970_Vec a;
-    S_00cab970_Vec b;
-    S_00cab970_Cd* bodyA;
-    S_00cab970_Cd* bodyB;
-};
 struct S_00cab970_Entry
 {
     S_00cab970_Vec a;
@@ -114,13 +88,4 @@ struct S_00cab970_Arr
             ResizeAudioStream(r->heap, this, sizeof(S_00cab970_Entry));
         return m_data[m_iElementCount++];
     }
-};
-struct S_00cab970_Cls
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    S_00cab970_Arr arr;
-    void FUN_00cab970(const S_00cab970_Src* src);
 };

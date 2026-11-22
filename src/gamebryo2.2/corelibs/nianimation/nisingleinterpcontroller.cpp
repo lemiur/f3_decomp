@@ -41,11 +41,6 @@ void* __fastcall FUN_00a2f8c0(void* pThis)
     return pThis;
 }
 
-struct FUN_00a38e20_shell : public NiSingleInterpController
-{
-    void* FUN_00a38e20();
-};
-
 extern const char* const g_011f36ec_arg1;
 
 struct NiBlendInterpolator;

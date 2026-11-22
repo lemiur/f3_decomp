@@ -24709,7 +24709,6 @@ struct Self {
 };
 
 extern float FUN_00db38b8;
-extern float FUN_00eaad58;
 extern const char DAT_00e03fac[];
 MenuV* __stdcall FUN_00beab90(TileV* parent, int id, int unk);
 int __cdecl FUN_00becd70(const char* name, int len);
@@ -30739,7 +30738,6 @@ void Menu2120::FUN_00670830(int aiID, Tile2120* apTile)
 // @f3 0x0067e360 (community match, verified in this file)
 #include <string.h>
 #include <stdarg.h>
-extern char DAT_011f6238;
 extern bool        DAT_01077140;
 extern const char* DAT_0106cb94;
 extern const char* DAT_00f650ac;
@@ -36446,8 +36444,6 @@ struct Str {
 struct Loader { void FUN_004353f0(const char*, Ptr<RefObj>*, int, int); };
 extern Loader* DAT_0107a0d8;
 extern Player* DAT_0107a104;
-extern const char DAT_00de4c10[15];
-extern const char DAT_00de4c00[16];
 extern const char DAT_00dfbf7c[];
 extern const char DAT_00dfbf88[];
 extern const char FUN_00db3438[];
@@ -37733,8 +37729,6 @@ extern const double DAT_00db38a8,DAT_00db38b0;
 namespace f66f {
 extern float DAT_00dbea4c;
 extern const char DAT_00dfa38c[], DAT_00dff2d4[], DAT_00e07444[], DAT_00e0743c[], DAT_00e07434[], DAT_00e0742c[];
-extern const float DAT_00e04a78;
-extern const double DAT_00e04a70;
 extern float DAT_00e07428,DAT_00e07400,DAT_00dcd2ac,DAT_00e073fc,DAT_00e073f8,DAT_00e073f4,DAT_00e073f0,DAT_00e073c4,DAT_00e073c0,DAT_00e073bc,DAT_00e07398,DAT_00e01f4c;
 extern const char DAT_00e07404[],DAT_00e073c8[],DAT_00e0739c[],DAT_00e06fe8[];
 extern char DAT_00f460fc, DAT_00f46b24;
@@ -38577,7 +38571,6 @@ struct PartName
 };
 
 struct ColorA { float r, g, b, a; };
-struct RGBA8 { unsigned char r, g, b, a; };
 
 struct Node
 {
@@ -38747,14 +38740,6 @@ struct Animation
     unsigned fC0; unsigned fC4; unsigned fC8; unsigned fCC; unsigned fD0; unsigned fD4;
     Manager* managerD8;
     Manager* GetManager() const { return managerD8; }
-};
-
-struct PlayerVTable
-{
-    VBlock100 b000;
-    VBlock100 b100;
-    VBlock100 b200;
-    VBlock100 b300;
 };
 
 struct Player
@@ -38990,14 +38975,6 @@ struct Player
 };
 
 struct Npc;
-
-struct NpcVTable
-{
-    void* v00; void* v04; void* v08; void* v0C; void* v10; void* v14; void* v18; void* v1C;
-    void* v20; void* v24; void* v28; void* v2C; void* v30; void* v34; void* v38; void* v3C;
-    void* v40; void* v44;
-    void (__thiscall *SetFlags)(Npc*, unsigned);
-};
 
 struct Npc
 {

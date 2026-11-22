@@ -40,15 +40,6 @@ struct InputProvider
     virtual void reserved1();
     virtual void GetData(unsigned char** data, int* length);
 };
-struct MessageContext
-{
-    void* unk00;
-    void* unk04;
-    void* unk08;
-    void* unk0c;
-    void* active;
-};
-MessageContext* __cdecl FUN_00c85750();
 struct MessageSink
 {
     void __thiscall FUN_00cb1870(void* active, unsigned int value, InputProvider* source);
@@ -235,26 +226,4 @@ struct S_00dd9660_IArchive
         FUN_00dd8fe0(&c, 8, 1);
         return c;
     }
-};
-
-struct S_00dd9660_Process
-{
-    virtual void vfn00();
-    virtual void vfn04();
-    virtual void vfn08();
-    virtual void ExecuteCommand(hkUint8 command);
-};
-
-struct S_00dd9660_CommandMap
-{
-    int LookupBucketValue(unsigned long key, S_00dd9660_Process** out);
-};
-
-struct S_00dd9660_Handler
-{
-    int unk00;
-    int unk04;
-    S_00dd9660_CommandMap m_kCommandMap;
-
-    S_00dd9660_Bool ReadCommands(S_00dd9660_IArchive* stream);
 };

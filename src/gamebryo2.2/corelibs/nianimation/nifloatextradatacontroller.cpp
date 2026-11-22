@@ -208,18 +208,3 @@ void __fastcall LinkColorInterpolator(NiPSysModifierCtlr* self, int edx, NiStrea
     }
 }
 }  // namespace fnv_00a4fc00
-
-// NiFloatExtraDataController helper: push the controller's float extra-data value
-// into the fade node that owns it (if the node is registered for this controller).
-struct FadeNode
-{
-    FadeNode* LookupNode(void* pKey);
-    void SetValue(float fValue);
-};
-
-extern int g_011f3738;
-
-struct FUN_00a412d0_cls : public NiFloatExtraDataController
-{
-    void ApplyFadeValue(FadeNode* pFadeNode, int iIndex);
-};

@@ -427,34 +427,9 @@ template <class T> struct PoolAllocatorBase
     static LinkedListEntry* ms_pFreeList;
 };
 
-struct BSShaderLightingProperty
-{
-    void ClearLights();
-};
-
-struct NiD3DDefaultShader
-{
-    static void __cdecl SetShaderName(char const*);
-};
-
-extern int DAT_0109d9c4;
-extern RecursiveSpinLock g_011c5f80;
-extern unsigned int DAT_011c5f84;
-void __fastcall FUN_00a76680(void* pThis);
-
 struct VirtualObj_00a7aff0
 {
     virtual ~VirtualObj_00a7aff0();
-};
-
-struct Obj_00a7aff0
-{
-    void* vftable;
-    char pad0[0x77c];
-    char field_780[0x210];
-    PoolAllocatorBase<unsigned int>::LinkedListEntry* head;  // +0x990
-    PoolAllocatorBase<unsigned int>::LinkedListEntry* tail;  // +0x994
-    unsigned int count;                                       // +0x998
 };
 
 // @f3 0x00624170 (community match, verified in this file)
@@ -3811,14 +3786,6 @@ void __cdecl FUN_00a7a160(unsigned int uiWidth, unsigned int uiHeight, unsigned 
     }
 }
 
-
-struct Format_a7a1f0
-{
-    int unk00;
-    int unk04;
-};
-
-void __cdecl FUN_00ec44d0(void* destination, const void* source, unsigned int size);
 
 extern "C" __declspec(dllimport) long __stdcall InterlockedIncrement(volatile long*) throw();
 

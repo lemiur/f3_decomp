@@ -20,12 +20,6 @@ char const* const* __cdecl FUN_00a99c60()
 extern "C" void __cdecl FUN_00a7b300();
 extern int DAT_010a0d24;
 
-struct FUN_00a99c70_shell
-{
-    int* m_val;
-    void __thiscall FUN_00a99c70();
-};
-
 struct BSFadeNode
 {
     static void* __cdecl operator new(unsigned int);

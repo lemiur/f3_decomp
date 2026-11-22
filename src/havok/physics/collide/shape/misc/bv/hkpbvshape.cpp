@@ -4,18 +4,7 @@
 
 #include "havok/hkpBvShape.h"
 
-extern int DAT_010c6fb0;
 extern int DAT_010c6fd0;
-struct DDCC60World
-{
-    void __thiscall removeReference();
-};
-struct FUN_00c9d8c0
-{
-    int* vtbl;
-    DDCC60World* m_pContainedShape;
-    FUN_00c9d8c0* __thiscall doWork(int flags);
-};
 
 struct FUN_00c9d970_shape
 {
@@ -43,55 +32,11 @@ void FUN_00c9d970_class::DispatchShapeMethod7(int value, float currentTime, void
     shape->method7(value, currentTime, queryFilter);
 }
 
-struct FUN_00c9d930StandIn
-{
-    void FUN_00c9d930();
-};
-
-struct MemoryManagerStandIn
-{
-    virtual void Function0() = 0;
-    virtual void Function1() = 0;
-    virtual void Free(void* object, unsigned short flags) = 0;
-};
-
-struct hkpBvShapeStandIn
-{
-    hkpBvShapeStandIn* Destroy(int flags);
-};
-
-void* _D1A0E0GetMemoryRouter();
-
 // @fnv 0x00c9d8b0
 int __stdcall FUN_00c9d8b0(int a1)
 {
     return -1;
 }
-
-extern int DAT_010c6fec;
-extern int DAT_01268910;
-
-struct C9D8F0Callback
-{
-    virtual void method0();
-    virtual void method1();
-    virtual void method2();
-    virtual void method3(void* context, void* childShape, int flags);
-};
-
-struct C9D8F0Shape
-{
-    void* vtable;
-    int field04;
-    int field08;
-    int field0c;
-    int field10;
-    int field14;
-    void* m_pContainedShape;
-
-    void FUN_00c90360(C9D8F0Callback* callback, void* typeInfo);
-    void NotifyCallback(C9D8F0Callback* callback, int flags);
-};
 
 struct hkpBvShapeContainerView : hkpBvShape
 {
@@ -104,22 +49,7 @@ hkpSingleShapeContainer* hkpBvShapeContainerView::FUN_00c9d920()
     return &m_pContainedShape;
 }
 
-extern int DAT_010c6ff8;
 extern int DAT_010c6fd0;
-struct Shape_00c9d990;
-void __fastcall FUN_00c90510(Shape_00c9d990*);
-struct FUN_00c9d990
-{
-    void* vtable;
-    unsigned short memoryFlags;
-    unsigned short referenceCount;
-    unsigned int userData;
-    unsigned int type;
-    Shape_00c9d990* boundingVolume;
-    void* containerVtable;
-    Shape_00c9d990* child;
-    FUN_00c9d990(Shape_00c9d990* bounds, Shape_00c9d990* childShape);
-};
 
 extern "C" void _ReadWriteBarrier(void);
 extern "C" unsigned __int64 __rdtsc(void);
@@ -351,11 +281,6 @@ __forceinline void FUN_00c9da80_cls::FUN_00c9da80(const void* pkInput, const hkp
 }
 void FUN_00c9da80_cls::FUN_00c9da80(const void* input,const hkpCdBody_c9da80& parent,void* collector)const{reinterpret_cast<const Native1441::FUN_00c9da80_cls*>(this)->FUN_00c9da80(input,reinterpret_cast<const Native1441::hkpCdBody_c9da80&>(parent),collector);}
 
-
-struct BvShapeReference
-{
-    void __thiscall FUN_00c905b0() throw();
-};
 
 extern int DAT_0102e388;
 

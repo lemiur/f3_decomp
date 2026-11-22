@@ -163,10 +163,6 @@ Object858* __cdecl FUN_00d858f0(Object858* pkSource)
 }
 
 
-struct hkRefObj858
-{
-    void removeReference();
-};
 struct Heap858b
 {
     int unk00;
@@ -178,14 +174,6 @@ struct Heap858b
     {
         return *m_pHeapAllocator;
     }
-};
-struct Node858 : Object858
-{
-    int unk10;
-    int unk14;
-    Object858* pkChild;
-    float unk1c;
-    Object858* FUN_00cdf6d0();
 };
 struct Breakable858 : Object858
 {
@@ -225,41 +213,3 @@ struct Breakable858 : Object858
         m_bRevertBackVelocityOnBreak = b;
     }
 };
-struct Kind3Shape858
-{
-    virtual void v00();
-    virtual void v01();
-    virtual void v02();
-    virtual void v03();
-    virtual void v04();
-    virtual void v05();
-    virtual void v06();
-    virtual void v07();
-    virtual void v08();
-    virtual void v09();
-    virtual void v0a();
-    virtual void v0b();
-    virtual void v0c();
-    virtual hkRefObj858* GetChildShape();
-};
-struct Kind3Result858
-{
-    void FUN_00dee6f0(Kind3Shape858* pkChild);
-};
-struct Raw858b
-{
-    Breakable858* FUN_00d4df30(Object858* pkChild);
-    Node858* FUN_00cdf710(Object858* pkChild);
-};
-Object858* __cdecl FUN_00d85360(Object858* pkSource);
-Object858* __cdecl FUN_00d853a0(Object858* pkSource);
-Object858* __cdecl FUN_00d853f0(Object858* pkSource);
-Object858* __cdecl CloneShape(Object858* pkSource);
-Object858* __cdecl CloneAllocatedObject(Object858* pkSource);
-Object858* __cdecl CloneStub(Object858* pkSource);
-Object858* __cdecl FUN_00d85530(Object858* pkSource);
-Object858* __cdecl CloneWithInit(Object858* pkSource);
-Object858* __cdecl CloneDataBlock(Object858* pkSource);
-Object858* __cdecl CloneWithCopiedPayload(Object858* pkSource);
-Object858* __cdecl FUN_00d85660(Object858* pkSource);
-Object858* __cdecl CloneWithAllocatedCopy(Object858* pkSource);

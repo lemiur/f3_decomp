@@ -6,447 +6,6 @@
 
 // src/havok/common/internal/geometryprocessing/convexhull/hkgpconvexhull.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/build/20091222_000100_aianbecldeph/source/common/internal/geometryprocessing/convexhull/hkgpconvexhull.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
-struct FUN_00d74dd0_Class {
-    void* m_00;
-    void* m_04;
-    void* m_08;
-    void* m_0c;
-    void* m_10;
-    void FUN_00d74dd0();
-};
-struct FUN_00d7ac40_class {
-    void FUN_00d7ac40(int);
-};
-struct FUN_00d75850_class {
-    int m0;
-    int m1;
-    FUN_00d7ac40_class* m2;
-    int m3;
-    int m4;
-    void FUN_00d75850();
-};
-int __stdcall FUN_00d76300(const int* p, int i);
-struct FUN_00d7c200_cls { void __thiscall FreeAll(); };
-struct FUN_00d7c250_cls { void __thiscall FlushQueuedElements(); };
-struct FUN_00d7c950_cls {
-    void __thiscall FUN_00d7c950();
-};
-int __stdcall FUN_00d752c0(int* arr, int idx);
-struct CpuScalar {
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0c;
-    unsigned int unk10;
-    unsigned int unk14;
-    unsigned int unk18;
-    unsigned int unk1c;
-    unsigned int unk20;
-    unsigned int unk24;
-    unsigned int unk28;
-    unsigned int unk2c;
-    unsigned int unk30;
-    unsigned int unk34;
-    unsigned int unk38;
-    unsigned int unk3c;
-    unsigned int unk40;
-    unsigned int unk44;
-    unsigned int unk48;
-    unsigned int unk4c;
-    unsigned int unk50;
-    unsigned int unk54;
-    unsigned int unk58;
-    unsigned int unk5c;
-    unsigned int unk60;
-    unsigned int unk64;
-    unsigned int unk68;
-    unsigned int unk6c;
-    unsigned int unk70;
-    unsigned int unk74;
-    unsigned int unk78;
-    unsigned int unk7c;
-    unsigned int unk80;
-    unsigned int unk84;
-    unsigned int unk88;
-    unsigned int unk8c;
-    unsigned int unk90;
-    unsigned int unk94;
-    unsigned int unk98;
-    unsigned int unk9c;
-    unsigned int unka0;
-    unsigned int unka4;
-    unsigned int unka8;
-    unsigned int unkac;
-    unsigned int unkb0;
-    unsigned int unkb4;
-    unsigned int unkb8;
-    unsigned int unkbc;
-    unsigned int unkc0;
-    unsigned int unkc4;
-    unsigned int unkc8;
-    unsigned int unkcc;
-    unsigned int unkd0;
-    unsigned int unkd4;
-    unsigned int unkd8;
-    unsigned int unkdc;
-    unsigned int unke0;
-    unsigned int unke4;
-    unsigned int unke8;
-    unsigned int unkec;
-    unsigned int unkf0;
-    unsigned int unkf4;
-    unsigned int unkf8;
-    unsigned int unkfc;
-    unsigned int unk100;
-    unsigned int unk104;
-    unsigned int unk108;
-    unsigned int unk10c;
-    unsigned int unk110;
-    unsigned int unk114;
-    unsigned int unk118;
-    unsigned int unk11c;
-    unsigned int unk120;
-    unsigned int unk124;
-    unsigned int unk128;
-    unsigned int unk12c;
-    unsigned int unk130;
-    unsigned int unk134;
-    unsigned int unk138;
-    unsigned int unk13c;
-    unsigned int unk140;
-    unsigned int unk144;
-    unsigned int unk148;
-    unsigned int unk14c;
-    unsigned int unk150;
-    unsigned int unk154;
-    unsigned int unk158;
-    unsigned int unk15c;
-    unsigned int unk160;
-    unsigned int unk164;
-    unsigned int unk168;
-    unsigned int unk16c;
-    unsigned int unk170;
-    unsigned int unk174;
-    unsigned int unk178;
-    unsigned int unk17c;
-    unsigned int unk180;
-    unsigned int unk184;
-    unsigned int unk188;
-    unsigned int unk18c;
-    unsigned int unk190;
-    unsigned int unk194;
-    unsigned int unk198;
-    unsigned int unk19c;
-    unsigned int unk1a0;
-    unsigned int unk1a4;
-    unsigned int unk1a8;
-    unsigned int unk1ac;
-    int value;
-};
-struct CpuObject {
-    unsigned int unk00;
-    unsigned int unk04;
-    CpuScalar* value;
-    int FUN_00d74df0();
-};
-struct ValueBlock {
-    int m_i00;
-    int m_i04;
-    int m_i08;
-    int m_i0c;
-};
-struct Implementation {
-    int unk000;
-    int unk004;
-    int unk008;
-    int unk00c;
-    int unk010;
-    int unk014;
-    int unk018;
-    int unk01c;
-    int unk020;
-    int unk024;
-    int unk028;
-    int unk02c;
-    int unk030;
-    int unk034;
-    int unk038;
-    int unk03c;
-    int unk040;
-    int unk044;
-    int unk048;
-    int unk04c;
-    int unk050;
-    int unk054;
-    int unk058;
-    int unk05c;
-    int unk060;
-    int unk064;
-    int unk068;
-    int unk06c;
-    int unk070;
-    int unk074;
-    int unk078;
-    int unk07c;
-    int unk080;
-    int unk084;
-    int unk088;
-    int unk08c;
-    int unk090;
-    int unk094;
-    int unk098;
-    int unk09c;
-    int unk0a0;
-    int unk0a4;
-    int unk0a8;
-    int unk0ac;
-    int unk0b0;
-    int unk0b4;
-    int unk0b8;
-    int unk0bc;
-    int unk0c0;
-    int unk0c4;
-    int unk0c8;
-    int unk0cc;
-    int unk0d0;
-    int unk0d4;
-    int unk0d8;
-    int unk0dc;
-    ValueBlock m_kValue;
-};
-struct FUN_00d74e50_cls {
-    int unk00;
-    int unk04;
-    Implementation* m_pImpl;
-
-    ValueBlock GetValueBlock();
-};
-struct PayloadOwner {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int m_iPayload;
-};
-int* __stdcall FUN_00d74ed0(PayloadOwner* apOwner);
-struct TargetCallee {
-    void FUN_00d7a5a0(void* p1, void* p2, void* p3, void* p4, float p5);
-};
-struct FUN_00d74ee0_Class : FUN_00d74dd0_Class {
-    void ForwardToCallee(void* p1, void* p2, void* p3, void* p4, float p5);
-};
-struct D75060Inner {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-};
-struct D75060Outer {
-    int unk00;
-    int unk04;
-    D75060Inner* unk08;
-
-    int FUN_00d75060();
-};
-struct TextBuffer {
-    int unk00;
-    int unk04;
-    int unk08;
-    int storage[128];
-    void FUN_00cb1600(char* buffer, int capacity);
-    TextBuffer* FUN_00cc01c0(const char* first, const char* middle, const char* last);
-    TextBuffer* FUN_00cc01c0();
-    TextBuffer* FUN_00cc02d0();
-    void FUN_00cc00e0();
-};
-struct ChildData {
-    int unk000;
-    int unk004;
-    int unk008;
-    int unk00c;
-    int unk010;
-    int unk014;
-    int unk018;
-    int unk01c;
-    int unk020;
-    int unk024;
-    int unk028;
-    int unk02c;
-    int unk030;
-    int unk034;
-    int unk038;
-    int unk03c;
-    int unk040;
-    int unk044;
-    int unk048;
-    int unk04c;
-    int unk050;
-    int unk054;
-    int unk058;
-    int unk05c;
-    int unk060;
-    int unk064;
-    int unk068;
-    int unk06c;
-    int unk070;
-    int unk074;
-    int unk078;
-    int unk07c;
-    int unk080;
-    int unk084;
-    int unk088;
-    int unk08c;
-    int unk090;
-    int unk094;
-    int unk098;
-    int unk09c;
-    int unk0a0;
-    int unk0a4;
-    int unk0a8;
-    int unk0ac;
-    int unk0b0;
-    int unk0b4;
-    int unk0b8;
-    int unk0bc;
-    int unk0c0;
-    int unk0c4;
-    int unk0c8;
-    int unk0cc;
-    int unk0d0;
-    int unk0d4;
-    int unk0d8;
-    int unk0dc;
-    int unk0e0;
-    int unk0e4;
-    int unk0e8;
-    int unk0ec;
-    int unk0f0;
-    int unk0f4;
-    int unk0f8;
-    int unk0fc;
-    int unk100;
-    int unk104;
-    int unk108;
-    int unk10c;
-    int unk110;
-    int unk114;
-    int unk118;
-    int unk11c;
-    int unk120;
-    int unk124;
-    int unk128;
-    int unk12c;
-    int unk130;
-    int unk134;
-    int unk138;
-    int unk13c;
-    int unk140;
-    int unk144;
-    int unk148;
-    int unk14c;
-    int unk150;
-    int unk154;
-    int unk158;
-    int unk15c;
-    int unk160;
-    int unk164;
-    int unk168;
-    int unk16c;
-    int unk170;
-    int unk174;
-    int unk178;
-    int unk17c;
-    int unk180;
-    int unk184;
-    int unk188;
-    int unk18c;
-    int unk190;
-    int unk194;
-    int unk198;
-    int unk19c;
-    int unk1a0;
-    int unk1a4;
-    int unk1a8;
-    int unk1ac;
-    int unk1b0;
-    char unk1b4;
-    char flag1b5;
-};
-struct Request {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-};
-struct ErrorReporter {
-    virtual void unk0();
-    virtual void unk1();
-    virtual void unk2();
-    virtual int message(int type, int hash, const char* text, const char* file, int line);
-};
-extern ErrorReporter* DAT_01268360;
-void __debugbreak();
-struct Owner {
-    int unk00;
-    int unk04;
-    ChildData* unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int FUN_00d75070(Request* request);
-};
-int __stdcall FUN_00d75120(int* p);
-struct D75130Inner {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-};
-struct D75130Outer {
-    int unk00;
-    int unk04;
-    D75130Inner* unk08;
-
-    int FUN_00d75130();
-};
-int __stdcall FUN_00d75200(const int* value);
 struct S_00d75210_ErrStream {
     void* m_vt;
     int unk04;
@@ -455,177 +14,6 @@ struct S_00d75210_ErrStream {
     ~S_00d75210_ErrStream() throw();
     S_00d75210_ErrStream& operator<<(const char* s) throw();
     S_00d75210_ErrStream& operator<<(unsigned int u) throw();
-};
-struct S_00d75210_Error {
-    virtual void v0();
-    virtual void v1();
-    virtual void v2();
-    virtual int message(int type, int id, const char* desc, const char* file, int line) throw();
-};
-extern S_00d75210_Error* g_hkError;
-struct S_00d75210_Data {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int m_uiEdgeIndex;
-};
-struct S_00d75210_Config {
-    int unk000;
-    int unk004;
-    int unk008;
-    int unk00c;
-    int unk010;
-    int unk014;
-    int unk018;
-    int unk01c;
-    int unk020;
-    int unk024;
-    int unk028;
-    int unk02c;
-    int unk030;
-    int unk034;
-    int unk038;
-    int unk03c;
-    int unk040;
-    int unk044;
-    int unk048;
-    int unk04c;
-    int unk050;
-    int unk054;
-    int unk058;
-    int unk05c;
-    int unk060;
-    int unk064;
-    int unk068;
-    int unk06c;
-    int unk070;
-    int unk074;
-    int unk078;
-    int unk07c;
-    int unk080;
-    int unk084;
-    int unk088;
-    int unk08c;
-    int unk090;
-    int unk094;
-    int unk098;
-    int unk09c;
-    int unk0a0;
-    int unk0a4;
-    int unk0a8;
-    int unk0ac;
-    int unk0b0;
-    int unk0b4;
-    int unk0b8;
-    int unk0bc;
-    int unk0c0;
-    int unk0c4;
-    int unk0c8;
-    int unk0cc;
-    int unk0d0;
-    int unk0d4;
-    int unk0d8;
-    int unk0dc;
-    int unk0e0;
-    int unk0e4;
-    int unk0e8;
-    int unk0ec;
-    int unk0f0;
-    int unk0f4;
-    int unk0f8;
-    int unk0fc;
-    int unk100;
-    int unk104;
-    int unk108;
-    int unk10c;
-    int unk110;
-    int unk114;
-    int unk118;
-    int unk11c;
-    int unk120;
-    int unk124;
-    int unk128;
-    int unk12c;
-    int unk130;
-    int unk134;
-    int unk138;
-    int unk13c;
-    int unk140;
-    int unk144;
-    int unk148;
-    int unk14c;
-    int unk150;
-    int unk154;
-    int unk158;
-    int unk15c;
-    int unk160;
-    int unk164;
-    int unk168;
-    int unk16c;
-    int unk170;
-    int unk174;
-    int unk178;
-    int unk17c;
-    int unk180;
-    int unk184;
-    int unk188;
-    int unk18c;
-    int unk190;
-    int unk194;
-    int unk198;
-    int unk19c;
-    int unk1a0;
-    int unk1a4;
-    int unk1a8;
-    int unk1ac;
-    unsigned int m_1b0;
-    char unk1b4;
-    bool m_hasIndex;
-};
-struct S_00d75210_Self {
-    int unk00;
-    int unk04;
-    S_00d75210_Config* m_pConfiguration;
-    int FUN_00d75210(const S_00d75210_Data* v) const throw();
-};
-struct D762F0Target {
-    void update();
-};
-struct D762F0Owner {
-    int unk00;
-    int unk04;
-    D762F0Target* m_target;
-
-    void FUN_00d762f0();
-};
-struct D76910Inner { void FUN_00d7cf00(); };
-struct D76910Owner {
-    int unk00;
-    int unk04;
-    D76910Inner* inner;
-    void FUN_00d76910();
-};
-struct FUN_00d76990_State {
-    int unk00;
-    float unk04;
-    void FUN_00d7d2a0();
-};
-struct FUN_00d76990_Class {
-    int unk00;
-    int unk04;
-    FUN_00d76990_State* unk08;
-    void SetValue(float value, bool clearFlag);
 };
 typedef union __declspec(intrin_type) __declspec(align(16)) __m128 {
     float m128_f32[4];
@@ -637,46 +25,8 @@ typedef union __declspec(intrin_type) __declspec(align(16)) __m128 {
     unsigned int m128_u32[4];
 } __m128;
 extern "C" __m128 _mm_setr_ps(float a, float b, float c, float d);
-struct Vec3 { float x, y, z; };
 struct __declspec(align(16)) hkVec4 {
     float x, y, z, w;
-};
-struct Shape {
-    float FUN_00d768b0(const hkVec4& v);
-    float FUN_00d76840(const hkVec4& v);
-    float FUN_00d769c0(const Vec3& p);
-};
-struct AudioSink {
-    void FUN_00d7df60(void* apFirst, void* apSecond, bool abIsNull, void* apThird);
-};
-struct FUN_00d76c50_cls {
-    int unk00;
-    int unk04;
-    AudioSink* m_pSink;
-
-    void DispatchToSink(void* apKey, void* apFirst, void* apSecond, void* apThird);
-};
-struct Vec4i {
-    int x, y, z, w;
-};
-struct FUN_00d81510_Class {
-    Vec4i m_00;
-    void FUN_00d81510(int a, int b, int c, int d);
-};
-struct FUN_00d771c0_Owner {
-    int unk00;
-    int unk04;
-    FUN_00d81510_Class* unk08;
-    void FUN_00d771c0(int a, int b, const Vec4i& v);
-};
-struct FUN_00d83430_class {
-    void FUN_00d83430(int, int, int, float);
-};
-struct FUN_00d790a0_class {
-    int unk00;
-    int unk04;
-    FUN_00d83430_class* unk08;
-    void FUN_00d790a0(int a, int b, int c, float d);
 };
 struct S_00d79f90_Opts
 {
@@ -693,8 +43,6 @@ struct S_00d79f90_World
 {
     S_00d79f90_Result* FUN_00d76cf0();
 };
-void __cdecl FUN_00d79ab0(S_00d79f90_World* world, int a, void* b, float c);
-void __cdecl FUN_00d79580(S_00d79f90_Result* res, void* b, int n, float eps);
 void __cdecl FUN_00d79f90(S_00d79f90_World* world, int a, void* b, int n, float d);
 struct S_00d7a010_Alloc {
     virtual void unk0();
@@ -730,7 +78,6 @@ struct S_00d7a010_Obj {
     void operator delete(void* p) throw();
 };
 void __cdecl FUN_00d79f90(int a, int b, S_00d7a010_Array<S_00d7a010_Obj*>& out, int c, float f) throw();
-void __cdecl DeleteCollectedObjects(int a, int b, int c, float f);
 struct S_00d7c200_Heap {
     virtual void v0();
     virtual void v1();
@@ -744,14 +91,6 @@ struct S_00d7c200_Router {
     S_00d7c200_Heap* m_pStreamAllocator;
     static S_00d7c200_Router& GetMonitorStream();
     S_00d7c200_Heap& heap() { return *m_pStreamAllocator; }
-};
-struct S_00d7c200 {
-    void** m_kBlocks;
-    int m_iBlockCount;
-    int unk8;
-    int unkC;
-    int unk10;
-    void FreeAll();
 };
 struct S_00d7c340_Allocator {
     virtual void vfn_00();
@@ -767,439 +106,7 @@ struct S_00d7c340_Router {
 };
 S_00d7c340_Router* FUN_00c85750();
 int ResizeAudioStream(S_00d7c340_Allocator* alloc, void* array, int elemSize);
-struct S_00d7c340_Elem {
-    S_00d7c340_Elem* next;
-    int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; int unk1C;
-    int unk20; int unk24; int unk28; int unk2C; int unk30; int unk34; int unk38; int unk3C;
-    int unk40; int unk44;
-};
-struct S_00d7c340_Block {
-    S_00d7c340_Elem elems[32];
-    S_00d7c340_Elem* freeList;
-    int numUsed;
-};
-struct S_00d7c340 {
-    S_00d7c340_Block** m_data;
-    int m_iElementCount;
-    int m_iCapacityState;
-    S_00d7c340_Block* AllocateBlock();
-};
-struct UnknownBlock {
-    int unk00, unk04, unk08, unk0c, unk10, unk14, unk18, unk1c;
-    int unk20, unk24, unk28, unk2c, unk30, unk34, unk38, unk3c;
-};
-struct Node {
-    Node *link0;
-    Node *link4;
-    void *unk08;
-    void *unk0c;
-    int value10, value14, value18, value1c, value20, value24, value28;
-    float value2c;
-    int value30, value34;
-};
-struct NodeBank {
-    UnknownBlock unk000, unk040, unk080, unk0c0, unk100, unk140, unk180, unk1c0;
-    UnknownBlock unk200, unk240, unk280, unk2c0, unk300, unk340, unk380, unk3c0;
-    UnknownBlock unk400, unk440, unk480, unk4c0, unk500, unk540, unk580, unk5c0;
-    UnknownBlock unk600, unk640, unk680, unk6c0, unk700, unk740, unk780, unk7c0;
-    Node *freeHead;
-    int allocated;
-};
-struct PoolList {
-    NodeBank **banks;
-    int bankValid;
-    void *unk08;
-    Node *head;
-    int activeCount;
-    NodeBank *FUN_00d7c2a0();
-    Node *CloneNode(Node *source);
-};
-extern float DAT_0106ea1c;
-class FUN_00d74d40_cls
-{
-public:
-    unsigned char m_00;
-    float m_04;
-    volatile unsigned char m_08;
-    volatile unsigned char m_09;
-    volatile unsigned char m_0a;
-    volatile unsigned char m_0b;
-    volatile unsigned char m_0c;
-    volatile unsigned char m_0d;
-
-    FUN_00d74d40_cls* FUN_00d74d40();
-};
-struct FUN_00d74d70_cls {
-    int m_00;
-    unsigned char m_04;
-    float m_08;
-    float m_0c;
-    unsigned char m_10;
-    unsigned char m_11;
-    FUN_00d74d70_cls* FUN_00d74d70();
-};
 extern float DAT_0104da4c;
-struct FUN_00d74d90_cls {
-    int m_i00;
-    float m_f04;
-
-    FUN_00d74d90_cls* FUN_00d74d90();
-};
-struct SpawnedInner {
-    int unk000;
-    int unk004;
-    int unk008;
-    int unk00C;
-    int unk010;
-    int unk014;
-    int unk018;
-    int unk01C;
-    int unk020;
-    int unk024;
-    int unk028;
-    int unk02C;
-    int unk030;
-    int unk034;
-    int unk038;
-    int unk03C;
-    int unk040;
-    int unk044;
-    int unk048;
-    int unk04C;
-    int unk050;
-    int unk054;
-    int unk058;
-    int unk05C;
-    int unk060;
-    int unk064;
-    int unk068;
-    int unk06C;
-    int unk070;
-    int unk074;
-    int unk078;
-    int unk07C;
-    int unk080;
-    int unk084;
-    int unk088;
-    int unk08C;
-    int unk090;
-    int unk094;
-    int unk098;
-    int unk09C;
-    int unk0A0;
-    int unk0A4;
-    int unk0A8;
-    int unk0AC;
-    int unk0B0;
-    int unk0B4;
-    int unk0B8;
-    int unk0BC;
-    int unk0C0;
-    int unk0C4;
-    int unk0C8;
-    int unk0CC;
-    int unk0D0;
-    int unk0D4;
-    int unk0D8;
-    int unk0DC;
-    int unk0E0;
-    int unk0E4;
-    int unk0E8;
-    int unk0EC;
-    int unk0F0;
-    int unk0F4;
-    int unk0F8;
-    int unk0FC;
-    int unk100;
-    int unk104;
-    int unk108;
-    int unk10C;
-    int unk110;
-    int unk114;
-    int unk118;
-    int unk11C;
-    int unk120;
-    int unk124;
-    int unk128;
-    int unk12C;
-    int unk130;
-    int unk134;
-    int unk138;
-    int unk13C;
-    int unk140;
-    int unk144;
-    int unk148;
-    int unk14C;
-    int unk150;
-    int unk154;
-    int unk158;
-    int unk15C;
-    int unk160;
-    int unk164;
-    int unk168;
-    int unk16C;
-    int unk170;
-    int unk174;
-    int unk178;
-    int unk17C;
-    int unk180;
-    int unk184;
-    int unk188;
-    int unk18C;
-    int unk190;
-    int unk194;
-    int unk198;
-    int unk19C;
-    int unk1A0;
-    int unk1A4;
-    int m_i1a8;
-};
-struct FUN_00d74e10_cls {
-    int unk00;
-    int unk04;
-    SpawnedInner* m_pInner;
-
-    int FUN_00d74e10();
-};
-struct FourFloatVector { int x,y,z,w; };
-struct FUN_00d74e20_class {
-    void* m_00; void* m_04; char* m_08;
-    FourFloatVector __thiscall GetFieldAtD0();
-};
-struct Inner {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int m_i28;
-};
-struct FUN_00d75050_cls {
-    int unk00;
-    int unk04;
-    Inner* m_pInner;
-
-    int FUN_00d75050();
-};
-struct FUN_00d7a180_target {
-    void FUN_00d7a180();
-};
-struct FUN_00d752d0_cls {
-    void* m_00;
-    void* m_04;
-    FUN_00d7a180_target* m_08;
-    void FUN_00d752d0();
-};
-struct DiagStream {
-    unsigned int m_00;
-    unsigned int m_04;
-    unsigned int m_08;
-    unsigned int m_buf[128];
-    void FUN_00cb1600(unsigned int* buf, unsigned int size);
-    DiagStream* FUN_00cc01c0(const char* fmt, unsigned int count, const char* tail);
-    DiagStream* FUN_00cc02d0();
-    void FUN_00cc01c0();
-    void FUN_00cc00e0();
-};
-struct DiagLogger {
-    virtual void v0();
-    virtual void v1();
-    virtual void v2();
-    virtual int Report(int level, unsigned int hash, char* msg, const char* file, int line);
-};
-extern DiagLogger* g_diagLogger;
-struct DiagState {
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0C;
-    unsigned int unk10;
-    unsigned int unk14;
-    unsigned int unk18;
-    unsigned int unk1C;
-    unsigned int unk20;
-    unsigned int unk24;
-    unsigned int unk28;
-    unsigned int unk2C;
-    unsigned int unk30;
-    unsigned int unk34;
-    unsigned int unk38;
-    unsigned int unk3C;
-    unsigned int unk40;
-    unsigned int unk44;
-    unsigned int unk48;
-    unsigned int unk4C;
-    unsigned int unk50;
-    unsigned int unk54;
-    unsigned int unk58;
-    unsigned int unk5C;
-    unsigned int unk60;
-    unsigned int unk64;
-    unsigned int unk68;
-    unsigned int unk6C;
-    unsigned int unk70;
-    unsigned int unk74;
-    unsigned int unk78;
-    unsigned int unk7C;
-    unsigned int unk80;
-    unsigned int unk84;
-    unsigned int unk88;
-    unsigned int unk8C;
-    unsigned int unk90;
-    unsigned int unk94;
-    unsigned int unk98;
-    unsigned int unk9C;
-    unsigned int unkA0;
-    unsigned int unkA4;
-    unsigned int unkA8;
-    unsigned int unkAC;
-    unsigned int unkB0;
-    unsigned int unkB4;
-    unsigned int unkB8;
-    unsigned int unkBC;
-    unsigned int unkC0;
-    unsigned int unkC4;
-    unsigned int unkC8;
-    unsigned int unkCC;
-    unsigned int unkD0;
-    unsigned int unkD4;
-    unsigned int unkD8;
-    unsigned int unkDC;
-    unsigned int unkE0;
-    unsigned int unkE4;
-    unsigned int unkE8;
-    unsigned int unkEC;
-    unsigned int unkF0;
-    unsigned int unkF4;
-    unsigned int unkF8;
-    unsigned int unkFC;
-    unsigned int unk100;
-    unsigned int unk104;
-    unsigned int unk108;
-    unsigned int unk10C;
-    unsigned int unk110;
-    unsigned int unk114;
-    unsigned int unk118;
-    unsigned int unk11C;
-    unsigned int unk120;
-    unsigned int unk124;
-    unsigned int unk128;
-    unsigned int unk12C;
-    unsigned int unk130;
-    unsigned int unk134;
-    unsigned int unk138;
-    unsigned int unk13C;
-    unsigned int unk140;
-    unsigned int unk144;
-    unsigned int unk148;
-    unsigned int unk14C;
-    unsigned int unk150;
-    unsigned int unk154;
-    unsigned int unk158;
-    unsigned int unk15C;
-    unsigned int unk160;
-    unsigned int unk164;
-    unsigned int unk168;
-    unsigned int unk16C;
-    unsigned int unk170;
-    unsigned int unk174;
-    unsigned int unk178;
-    unsigned int unk17C;
-    unsigned int unk180;
-    unsigned int unk184;
-    unsigned int unk188;
-    unsigned int unk18C;
-    unsigned int unk190;
-    unsigned int unk194;
-    unsigned int unk198;
-    unsigned int unk19C;
-    unsigned int unk1A0;
-    float m_1a4;
-    unsigned int unk1A8;
-    unsigned int unk1AC;
-    unsigned int m_1b0;
-    unsigned char m_1b4;
-};
-struct FUN_00d75390_cls {
-    unsigned int unk00;
-    unsigned int unk04;
-    DiagState* m_08;
-    float GetMass();
-};
-extern "C" double __cdecl pow(double base, double exponent);
-extern const double DAT_010d35e8;
-extern const double DAT_010d35e0;
-struct FUN_00d75440_cls {
-    float FUN_00d752e0();
-    double GetMass();
-    float ComputeScaledPowerRatio();
-};
-struct FUN_00d75820_Tmp8 {
-    int m00;
-    int m04;
-};
-struct FUN_00d75820_Target {
-    void FUN_00d7a200(int a, float b, FUN_00d75820_Tmp8* c, int d);
-};
-struct FUN_00d75820_cls {
-    int m00;
-    int m04;
-    FUN_00d75820_Target* m08;
-
-    void CallTargetWithTemp(int a1, float a2, int a3);
-};
-struct FUN_00d7b330_cls {
-    void FUN_00d7b330(int a1, int a2, float a3);
-};
-struct FUN_00d76100_cls {
-    void* unk00;
-    void* unk04;
-    FUN_00d7b330_cls* m_08;
-    void FUN_00d76100(int a1, int a2, float a3);
-};
-struct FUN_00d7caa0_class {
-    void __thiscall FUN_00d7caa0(float, int);
-};
-struct FUN_00d76920_class {
-    void* m_00;
-    void* m_04;
-    FUN_00d7caa0_class* m_08;
-    void FUN_00d76920(float, int);
-};
-struct SpawnedObject {
-    void* m_00;
-    void* m_04;
-    void* m_08;
-};
-struct TailCallee {
-    void Tail();
-};
-class FUN_00d77bc0_cls {
-public:
-    void FUN_00d77bc0();
-};
-struct ArgPair
-{
-    int m_kPointA;
-    int m_kPointB;
-};
-void __cdecl FUN_00d78ea0(int first, ArgPair* apPairs, int count);
-void __cdecl CallWithPair(int a0, int a1, int a2);
-struct D79090Target {
-    void update();
-};
-struct D79090Owner {
-    int unk00;
-    int unk04;
-    D79090Target* m_target;
-
-    void FUN_00d79090();
-};
 // FUN_00d79510 (0x00d79510, 102 bytes)
 //
 // The function walks the item table of a record and asks every item to
@@ -1212,65 +119,21 @@ struct D79090Owner {
 // The callee is only DECLARED here on purpose: the checker then binds the
 // call relocation to the original's own target 0x00d79250.
 // an item of the table: a virtual at vtable slot 0
-struct FUN_00d79510_Item {
-    virtual void FUN_00d79510_doIt(int);
-};
 // the record the table lives in: the item array at +0, the count at +4
-struct FUN_00d79510_Record {
-    FUN_00d79510_Item** m_00;
-    int m_04;
-};
 // the third parameter: an object with a virtual at vtable slot 0
-struct FUN_00d79510_Object {
-    virtual void FUN_00d79510_doIt(int);
-    int m_04;
-};
-struct FUN_00d79510_A;
-struct FUN_00d79510_B;
-void __cdecl FUN_00d79250_helper(FUN_00d79510_A* a, FUN_00d79510_B* b,
-                                 FUN_00d79510_Object** out, void* p, float f);
-bool __cdecl FUN_00d79510(FUN_00d79510_A* a, FUN_00d79510_B* b, FUN_00d79510_Object* c, float f);
 static int SortKeyOf(void* p)
 {
     return ((int*)p)[0xe];
 }
 void __cdecl QuickSortByKey(void** arr, int lo, int hi, int ctx);
-struct RandomGenerator {
-    unsigned int stateFlags;
-    unsigned int seed;
-    void FUN_00d7a4b0(float* components);
-};
-struct Record {
-    unsigned int payload;
-    float key;
-};
 
 // The script object that receives the queued elements: its third virtual
 // function is the one that is called with the element and the command id.
-struct ScriptHandler {
-    virtual void v00();
-virtual void v01();
-virtual void v02(void* element, int command);
-};
 // What FUN_00c85750() hands back: the audio system object, whose field at
 // offset 0x10 is the script handler that owns the vtable.
-struct AudioSystem {
-    void* m_00;
-    void* m_04;
-    void* m_08;
-    void* m_0c;
-    ScriptHandler* m_10;
-};
 // The audio system object the game hands out.
 // The layout of the object this method belongs to: a queue of elements at
 // m_00 with its length at m_04, plus two counters that are cleared again.
-struct QueuedElements {
-    void** m_00;
-    int m_04;
-    int m_08;
-    int m_0c;
-    int m_10;
-};
 // FUN_00d7c2a0 - create a new object of type 0x808 and append it to the
 // item list of this container.
 //
@@ -1278,19 +141,8 @@ struct QueuedElements {
 // (m_04) and a capacity/flags field (m_08).  The new object is allocated
 // through the creation interface found at offset 0x10 of the global manager;
 // the object itself starts with a free list of 32 linked 64 byte blocks.
-struct GlobalManager {
-    void* m_00;
-    void* m_04;
-    void* m_08;
-    void* m_0c;
-    void* m_10;
-};
 // The creation interface: slot 1 takes the object type id and returns a
 // freshly allocated object of that type.
-struct CreateIface {
-    virtual void* v0();
-    virtual void* v1(int);
-};
 void __cdecl ResizeAudioStream(void*, void*, int);
 // A writable handle for one slot of the item array.
 struct SlotRef {
@@ -1298,12 +150,6 @@ struct SlotRef {
     void operator=(void* p) { *m_slot = p; }
 };
 static __forceinline SlotRef MakeSlot(void** a, int i) { SlotRef r; r.m_slot = a + i; return r; }
-struct FUN_00d7c2a0_cls {
-    void** m_00;
-    int m_04;
-    int m_08;
-    void* FUN_00d7c2a0();
-};
 // Candidate for ClearAndFlush (115 bytes).
 //
 // Reconstructed shape (from the original bytes):
@@ -1320,89 +166,6 @@ struct FUN_00d7c2a0_cls {
 // The two "count = 0" stores and the "array = 0" store are immediate stores:
 // the zero constant would have to be live across the calls, so MSVC 2008 does
 // not materialise it in a register.
-struct D7C850_Target {
-    virtual void v_dummy0();
-    virtual void v_dummy1();
-    virtual void v1(void* element, unsigned int flags);   // vtable offset 0x08
-    virtual void v_dummy2();
-    virtual void v2(void* data, unsigned int size);        // vtable offset 0x10
-};
-struct D7C850_Holder {
-    void* m_00;
-    void* m_04;
-    void* m_08;
-    void* m_0c;
-    D7C850_Target* m_10;
-};
-struct D7C850_Class {
-    void** m_00;
-    int m_04;
-    unsigned int m_08;
-    void ClearAndFlush();
-};
-extern char DAT_0103d078;
-struct RetBlock64
-{
-	__m128 m_v0;
-	__m128 m_v1;
-	__m128 m_v2;
-	__m128 m_v3;
-};
-struct RetBlock16
-{
-	__m128 m_v0;
-};
-struct SharedOwner
-{
-	int unk000, unk004, unk008, unk00C, unk010, unk014, unk018, unk01C;
-	int unk020, unk024, unk028, unk02C, unk030, unk034, unk038, unk03C;
-	int unk040, unk044, unk048, unk04C, unk050, unk054, unk058, unk05C;
-	int unk060, unk064, unk068, unk06C, unk070, unk074, unk078, unk07C;
-	int unk080, unk084, unk088, unk08C, unk090, unk094, unk098, unk09C;
-	int unk0A0, unk0A4, unk0A8, unk0AC, unk0B0, unk0B4, unk0B8, unk0BC;
-	int unk0C0, unk0C4, unk0C8, unk0CC, unk0D0, unk0D4, unk0D8, unk0DC;
-	int unk0E0, unk0E4, unk0E8, unk0EC, unk0F0, unk0F4, unk0F8, unk0FC;
-	int unk100, unk104, unk108, unk10C, unk110, unk114, unk118, unk11C;
-	__m128 m_v120;
-	__m128 m_v130;
-	__m128 m_v140;
-	__m128 m_v150;
-	__m128 m_v160;
-	int unk170, unk174, unk178, unk17C;
-	int unk180, unk184, unk188, unk18C;
-	int unk190, unk194, unk198, unk19C;
-	int unk1A0, unk1A4, unk1A8, unk1AC;
-	int m_i1B0;
-	unsigned char m_b1B4;
-};
-class DbgStr_cls
-{
-public:
-	int unk00;
-	int unk04;
-	int unk08;
-	void Init(char *buf, int size);
-	DbgStr_cls *Append(const char *pszPrefix, int value, const char *pszSuffix);
-	DbgStr_cls *Pad(void);
-	DbgStr_cls *Last(void);
-	void Release(void);
-};
-class AssertMgr_cls
-{
-public:
-	virtual void vtbl00(void);
-	virtual void vtbl04(void);
-	virtual void vtbl08(void);
-	virtual int vtbl0C(int level, unsigned int id, char *buf, const char *file, int line);
-};
-class FUN_00d75490_cls
-{
-public:
-	int unk00;
-	int unk04;
-	SharedOwner *m_pSharedOwner;
-	void GetMassProperties(RetBlock64 *pOut64, RetBlock16 *pOut16);
-};
 struct D76250Allocator;
 struct D76250MemoryRouter {
     int unk00;
@@ -1446,290 +209,8 @@ struct D76250VectorArray {
         return m_data + oldSize;
     }
 };
-struct D76250Shape {
-    int getNumVertices() const;
-    const D76250Vector4& getVertex(int i) const;
-
-    void CopyVerticesToArray(D76250VectorArray& vertices) const;
-};
-struct FUN_00d81510_cls {
-    void FUN_00d81510(int a1, int a2, int a3, int a4);
-};
-struct FUN_00d77320_cls {
-    int unk00;
-    int unk04;
-    FUN_00d81510_cls* m_08;
-
-    void CopyAndDispatch(int* a1, int a2, const __m128* a3, const unsigned int* a4);
-};
-struct FnvCpu_FUN_00d74e00_CpuObject {
-    unsigned int unk00;
-    unsigned int unk04;
-    int value;
-    int FUN_00d74e00();
-};
-struct S_00cc01c0_Class {
-    S_00cc01c0_Class* FUN_00cc02d0();
-    void FUN_00cc01c0();
-    S_00cc01c0_Class* FUN_00cc01c0(const char*, int, char*);
-};
-struct S_00d752e0_Entity {
-    int unk000;
-    int unk004;
-    int unk008;
-    int unk00c;
-    int unk010;
-    int unk014;
-    int unk018;
-    int unk01c;
-    int unk020;
-    int unk024;
-    int unk028;
-    int unk02c;
-    int unk030;
-    int unk034;
-    int unk038;
-    int unk03c;
-    int unk040;
-    int unk044;
-    int unk048;
-    int unk04c;
-    int unk050;
-    int unk054;
-    int unk058;
-    int unk05c;
-    int unk060;
-    int unk064;
-    int unk068;
-    int unk06c;
-    int unk070;
-    int unk074;
-    int unk078;
-    int unk07c;
-    int unk080;
-    int unk084;
-    int unk088;
-    int unk08c;
-    int unk090;
-    int unk094;
-    int unk098;
-    int unk09c;
-    int unk0a0;
-    int unk0a4;
-    int unk0a8;
-    int unk0ac;
-    int unk0b0;
-    int unk0b4;
-    int unk0b8;
-    int unk0bc;
-    int unk0c0;
-    int unk0c4;
-    int unk0c8;
-    int unk0cc;
-    int unk0d0;
-    int unk0d4;
-    int unk0d8;
-    int unk0dc;
-    int unk0e0;
-    int unk0e4;
-    int unk0e8;
-    int unk0ec;
-    int unk0f0;
-    int unk0f4;
-    int unk0f8;
-    int unk0fc;
-    int unk100;
-    int unk104;
-    int unk108;
-    int unk10c;
-    int unk110;
-    int unk114;
-    int unk118;
-    int unk11c;
-    int unk120;
-    int unk124;
-    int unk128;
-    int unk12c;
-    int unk130;
-    int unk134;
-    int unk138;
-    int unk13c;
-    int unk140;
-    int unk144;
-    int unk148;
-    int unk14c;
-    int unk150;
-    int unk154;
-    int unk158;
-    int unk15c;
-    int unk160;
-    int unk164;
-    int unk168;
-    int unk16c;
-    int unk170;
-    int unk174;
-    int unk178;
-    int unk17c;
-    int unk180;
-    int unk184;
-    int unk188;
-    int unk18c;
-    int unk190;
-    int unk194;
-    int unk198;
-    int unk19c;
-    float unk1a0;
-    int unk1a4;
-    int unk1a8;
-    int unk1ac;
-    int unk1b0;
-    char unk1b4;
-};
-struct S_00d752e0_Class {
-    int unk00;
-    int unk04;
-    S_00d752e0_Entity* unk08;
-    float FUN_00d752e0();
-};
 extern const char str_010d3540[];
 extern const char str_010d358c[];
-struct S_00cb1600_Class {
-    int unk000;
-    int unk004;
-    int unk008;
-    int unk00c;
-    int unk010;
-    int unk014;
-    int unk018;
-    int unk01c;
-    int unk020;
-    int unk024;
-    int unk028;
-    int unk02c;
-    int unk030;
-    int unk034;
-    int unk038;
-    int unk03c;
-    int unk040;
-    int unk044;
-    int unk048;
-    int unk04c;
-    int unk050;
-    int unk054;
-    int unk058;
-    int unk05c;
-    int unk060;
-    int unk064;
-    int unk068;
-    int unk06c;
-    int unk070;
-    int unk074;
-    int unk078;
-    int unk07c;
-    int unk080;
-    int unk084;
-    int unk088;
-    int unk08c;
-    int unk090;
-    int unk094;
-    int unk098;
-    int unk09c;
-    int unk0a0;
-    int unk0a4;
-    int unk0a8;
-    int unk0ac;
-    int unk0b0;
-    int unk0b4;
-    int unk0b8;
-    int unk0bc;
-    int unk0c0;
-    int unk0c4;
-    int unk0c8;
-    int unk0cc;
-    int unk0d0;
-    int unk0d4;
-    int unk0d8;
-    int unk0dc;
-    int unk0e0;
-    int unk0e4;
-    int unk0e8;
-    int unk0ec;
-    int unk0f0;
-    int unk0f4;
-    int unk0f8;
-    int unk0fc;
-    int unk100;
-    int unk104;
-    int unk108;
-    int unk10c;
-    int unk110;
-    int unk114;
-    int unk118;
-    int unk11c;
-    int unk120;
-    int unk124;
-    int unk128;
-    int unk12c;
-    int unk130;
-    int unk134;
-    int unk138;
-    int unk13c;
-    int unk140;
-    int unk144;
-    int unk148;
-    int unk14c;
-    int unk150;
-    int unk154;
-    int unk158;
-    int unk15c;
-    int unk160;
-    int unk164;
-    int unk168;
-    int unk16c;
-    int unk170;
-    int unk174;
-    int unk178;
-    int unk17c;
-    int unk180;
-    int unk184;
-    int unk188;
-    int unk18c;
-    int unk190;
-    int unk194;
-    int unk198;
-    int unk19c;
-    int unk1a0;
-    int unk1a4;
-    int unk1a8;
-    int unk1ac;
-    int unk1b0;
-    int unk1b4;
-    int unk1b8;
-    int unk1bc;
-    int unk1c0;
-    int unk1c4;
-    int unk1c8;
-    int unk1cc;
-    int unk1d0;
-    int unk1d4;
-    int unk1d8;
-    int unk1dc;
-    int unk1e0;
-    int unk1e4;
-    int unk1e8;
-    int unk1ec;
-    int unk1f0;
-    int unk1f4;
-    int unk1f8;
-    int unk1fc;
-    int unk200;
-    int unk204;
-    int unk208;
-
-    void FUN_00cb1600(int*, unsigned int);
-    S_00cc01c0_Class* FUN_00cc01c0(const char*, int, char*);
-    void FUN_00cc00e0();
-};
 // Recursive quicksort partition over 12-byte records keyed by a float at +8;
 // the key delta is scaled by the double literal -1.0 before testing against 0.0.
 struct SortRec12 {
@@ -1780,18 +261,6 @@ struct DistanceLess {
     }
 };
 void FUN_00d7aaf0(DistanceVector* pa,int lo,int hi,DistanceLess less);
-struct S00d7d1c0_Alloc {
-    virtual void s0();
-    virtual void s1();
-    virtual void s2(void* p, int size);
-};
-struct S00d7d1c0_Router {
-    int u00;
-    int u04;
-    int u08;
-    int u0c;
-    S00d7d1c0_Alloc* m10;
-};
 struct S00d7d1c0_M08 {
     int f00;
     int f04;
@@ -1867,101 +336,10 @@ struct hkVector4
 
 extern float DAT_0104da48;
 
-struct S_00d75cb0_Node
-{
-    S_00d75cb0_Node* m_next;
-    int unk04;
-    int unk08;
-    int unk0C;
-    hkVector4 m_pos;
-    int m_uiX;
-    int m_uiY;
-    int m_uiZ;
-};
-
-struct S_00d75cb0_Obj
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    S_00d75cb0_Node* m_pFirstNode;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5C;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6C;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7C;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8C;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9C;
-    int unkA0;
-    int unkA4;
-    int unkA8;
-    int unkAC;
-    int unkB0;
-    int unkB4;
-    int unkB8;
-    int unkBC;
-    int unkC0;
-    int unkC4;
-    int unkC8;
-    int unkCC;
-    int unkD0;
-    int unkD4;
-    int unkD8;
-    int unkDC;
-    int unkE0;
-    int unkE4;
-    int unkE8;
-    int unkEC;
-    hkVector4 m_offset;
-    int unk100;
-    int unk104;
-    int unk108;
-    int unk10C;
-    hkVector4 m_vScale;
-};
-
 struct S_00d75cb0_Ref
 {
     hkVector4* p;
     S_00d75cb0_Ref(hkVector4* q) : p(q) {}
-};
-
-struct S_00d75cb0
-{
-    int unk00;
-    int unk04;
-    S_00d75cb0_Obj* m_obj;
-
-    void FUN_00d75cb0(int mode, const hkVector4& point, hkVector4& closest);
 };
 
 int __cdecl Vsnprintf(void* buf, int size, const char* fmt, unsigned int arg);
@@ -2023,11 +401,6 @@ struct TESFileRecordLoader {
         out.m_vComponents = _mm_add_ps(_mm_mul_ps(_mm_setr_ps((float)c.x, (float)c.y, (float)c.z, 0.0f), m_vScale.m_vComponents), m_offset.m_vComponents);
     }
 };
-struct GridOwner {
-    int unk00, unk04;
-    TESFileRecordLoader* m_grid;
-    void FUN_00d74e80(GridVec4& out, const GridCell& c) const;
-};
 
 extern "C" __m128 _mm_unpackhi_ps(__m128 a, __m128 b);
 extern "C" __m128 _mm_shuffle_ps(__m128 a, __m128 b, unsigned int imm);
@@ -2072,18 +445,6 @@ struct S00d756a0_Vec {
     void setAbs4(const S00d756a0_Vec& v) { m_vComponents = _mm_and_ps(v.m_vComponents, DAT_01017d10); }
 };
 
-struct S00d756a0_Plain {
-    float x, y, z, w;
-};
-
-struct S00d756a0_Shape {
-    int m_00;
-    int m_04;
-    char* m_08;
-    void GetMassProperties(S00d756a0_Vec* axes, S00d756a0_Vec* ext);
-    void FUN_00d756a0(S00d756a0_Plain& out);
-};
-
 extern "C" __m128 _mm_load_ss(const float*);
 extern "C" __m128 _mm_set_ss(float);
 extern "C" __m128 _mm_set_ps1(float);
@@ -2100,8 +461,6 @@ __m128 _mm_cmple_ps(__m128, __m128);
 int _mm_movemask_ps(__m128);
 __m128 _mm_add_ss(__m128, __m128);
 __m128 _mm_sqrt_ss(__m128);
-__m128 _mm_set_ps(float, float, float, float);
-__m128 _mm_set1_ps(float);
 float _mm_cvtss_f32(__m128);
 }
 
@@ -2110,51 +469,11 @@ struct Vec4 {
     __forceinline void setMin(const Vec4& a,const Vec4& b) { q=_mm_min_ps(a.q,b.q); }
     __forceinline void setMax(const Vec4& a,const Vec4& b) { q=_mm_max_ps(a.q,b.q); }
 };
-struct Box { Vec4 lo; Vec4 hi; };
-
-struct Impl {
-    int u00; int u04; int u08; int u0c;
-    int u10; int u14; int u18; int u1c;
-    int u20; int u24; int u28; int u2c;
-    int u30; int u34; int u38; int u3c;
-    int u40; int u44; int u48; int u4c;
-    int u50; int u54; int u58; int u5c;
-    int u60; int u64; int u68; int u6c;
-    int u70; int u74; int u78; int u7c;
-    int u80; int u84; int u88; int u8c;
-    Box boxes[2];
-    int ud0,ud4,ud8,udc;
-    int ue0,ue4,ue8,uec;
-    Vec4 offset;
-    int u100,u104,u108,u10c;
-    Vec4 scale;
-};
-
-struct PointNode {
-    PointNode* next;
-    int flag,unk08,unk0c;
-    Vec4 source;
-    int x,y,z;
-};
-struct HullAccess {
-    int unk00,unk04;
-    Impl* data;
-    __declspec(noinline) int FUN_00d75050();
-    __declspec(noinline) PointNode* FUN_00d75060();
-    __declspec(noinline) Vec4* FUN_00d74ed0(PointNode* node);
-    __declspec(noinline) PointNode* FUN_00d75120(PointNode* node);
-    __declspec(noinline) Vec4* FUN_00d74e80(Vec4* out, PointNode* node);
-};
 
 extern "C" void _mm_store_ss(float*,__m128);
 extern "C" __m128 _mm_load_ps1(const float*);
 static __forceinline __m128 broadcast(float f) { __m128 q=_mm_load_ss(&f); return _mm_shuffle_ps(q,q,0); }
 static __forceinline float scalar(__m128 q) { float f; _mm_store_ss(&f,q); return f; }
-
-struct Self {
-    int unk00; int unk04; Impl* m_pClassImpl;
-    Box __thiscall FUN_00d75920(int index, float a2, float a3);
-};
 
 extern "C" __m128 _mm_add_ps(__m128 a, __m128 b);
 extern "C" __m128 _mm_mul_ps(__m128 a, __m128 b);
@@ -2360,16 +679,6 @@ struct S_00d76410_Vec4 {
     __m128 m_vComponents;
     S_00d76410_Vec4& operator=(const S_00d76410_Vec4& o) { m_vComponents = o.m_vComponents; return *this; }
 };
-struct S_00d76410_Tri {
-    int m_kPointA;
-    int m_kPointB;
-    int m_iThirdValue;
-    int m_iMaterialIndex;
-};
-struct S_00d76410_Geometry {
-    S_00d76410_Array<S_00d76410_Vec4> m_kVertices;
-    S_00d76410_Array<S_00d76410_Tri> m_uiTriangleCount;
-};
 template <typename T>
 struct S_00d76410_Pad {
     T m_kStorage;
@@ -2517,23 +826,6 @@ struct S_00d76410_Hull {
         out.m_vComponents = _mm_add_ps(position, m_offset.m_vComponents);
     }
 };
-struct S_00d76410_HullData {
-    char unk00;
-};
-struct S_00d76410_Builder {
-    int unk00;
-    int unk04;
-    S_00d76410_Hull* m_data;
-    __forceinline void generateConvex(bool useSource, S_00d76410_Geometry& geom) const throw();
-    __forceinline void generatePlanar(bool useSource, S_00d76410_Geometry& geom) const throw();
-    void FUN_00d76410(int mode, S_00d76410_Geometry& geom) const throw();
-};
-
-struct S_00d77380_Strided {
-    char* data;
-    int count;
-    int stride;
-};
 
 struct S_00d77380_Allocator {
     virtual void v0();
@@ -2589,11 +881,6 @@ struct S_00d77380_Array {
     S_00d77380_Vec4& operator[](int i) { return m_data[i]; }
 };
 
-struct S_00d77380 {
-    int CopyAndDispatch(const S_00d77380_Vec4* verts, int count, int a, int b);
-    int FUN_00d77380(S_00d77380_Strided* s, int a, int b);
-};
-
 extern const char str_010d3574[];
 extern const float s_faderClearedAlpha;
 void __cdecl FUN_00c908c0(void*,void*,int,int);
@@ -2614,8 +901,6 @@ struct ExportStream {
     void FUN_00cc01c0();
     void FUN_00cc00e0();
 };
-struct OffsetVector { int x,y,z,w; };
-struct OffsetView { __m128* data; int size; int stride; };
 struct OffsetArray {
     __m128* data;
     int size;
@@ -2638,46 +923,11 @@ struct OffsetArray {
         if((capacity&0x80000000)==0) a.ReturnMemory(data,(capacity&0x3fffffff)*16);
     }
 };
-union OffsetWorkspace { ExportStream stream; OffsetArray array; };
-struct OffsetOwner {
-    int unk00,unk04;
-    ChildData* state;
-    OffsetVector* FUN_00d75600();
-    OffsetVector* FUN_00d752d0();
-    int FUN_00d74f10();
-    OffsetVector* FUN_00d74fb0(int);
-    __declspec(noinline) int FUN_00d74e10();
-    __declspec(noinline) void* FUN_00d74e00();
-    ValueBlock GetValueBlock();
-    int FUN_00d75050();
-    PayloadOwner* FUN_00d75060();
-    __declspec(noinline) __m128* FUN_00d74ed0(PayloadOwner* n);
-    __declspec(noinline) PayloadOwner* FUN_00d75120(PayloadOwner* n);
-    void FUN_00d77840(__m128*,int,const ValueBlock&,void*);
-    void FUN_00d774a0(__m128*,int,void*);
-    void FUN_00d77380(const OffsetView&,const ValueBlock&,void*);
-    void FUN_00d77200(const OffsetView&,void*);
-    void FUN_00d762f0();
-    void SetValue(float,bool);
-};
 
 extern "C" __m128 _mm_mul_ps(__m128,__m128);
 extern "C" __m128 _mm_add_ps(__m128,__m128);
 extern "C" __m128 _mm_shuffle_ps(__m128,__m128,unsigned int);
 
-struct BlendOptions {
-    unsigned char m_00;
-    float m_04;
-    unsigned char m_08,m_09,m_0a,m_0b,m_0c,m_0d;
-    void FUN_00d74d40();
-};
-struct BlendObject {
-    virtual ~BlendObject();
-    unsigned short size;
-    int unk08,unk0c,unk10;
-    BlendObject* FUN_00d76ca0();
-    int FUN_00d77200(void* vertices,BlendOptions* options);
-};
 struct BlendFactory {
     virtual void v0();
     virtual void* alloc(int size);
@@ -2692,11 +942,6 @@ struct BlendRouter {
     BlendFactory* factory;
 };
 static __forceinline BlendRouter* router() { return (BlendRouter*)FUN_00c85750(); }
-struct BlendInput {
-    const float* data;
-    int count;
-    int stride;
-};
 struct BlendArray {
     __m128* data;
     int count;
@@ -2712,7 +957,6 @@ struct BlendArray {
     }
     __forceinline ~BlendArray() { clearAndFree(*router()->heap); }
 };
-struct BlendSpan { __m128* data; int count; int stride; };
 
 extern "C" __m128 _mm_set_ps1(float);
 extern "C" __m128 _mm_set_ss(float);
@@ -2738,20 +982,6 @@ struct Vector352 {
     void Add(const Vector352& other) { value = _mm_add_ps(other.value, value); }
     void Multiply(const Scalar352& factor) { value = _mm_mul_ps(factor.value, value); }
 };
-struct Node352 {
-    Node352* next;
-    unsigned int unk04, unk08, unk0c;
-    Vector352 point;
-};
-struct Centroid352 {
-    unsigned int unk00,unk04,unk08,unk0c,unk10,unk14,unk18,unk1c,unk20;
-    Node352* head;
-    int count;
-    unsigned int unk2c,unk30,unk34,unk38,unk3c,unk40,unk44,unk48,unk4c;
-    unsigned int unk50,unk54,unk58,unk5c,unk60,unk64,unk68,unk6c;
-    Vector352 centroid;
-    const Vector352& FUN_00d7a180();
-};
 
 extern "C" __m128 _mm_mul_ps(__m128 a, __m128 b);
 extern "C" __m128 _mm_add_ps(__m128 a, __m128 b);
@@ -2762,25 +992,6 @@ extern "C" double fabs(double x);
 
 struct __declspec(align(16)) S_00d7a200_V4 {
     float x, y, z, w;
-};
-
-struct S_00d7a200_Node {
-    S_00d7a200_Node* m_next;
-    int m_flag;
-    int unk08;
-    int unk0c;
-    __declspec(align(16)) S_00d7a200_V4 m_pos;
-    int unk20;
-    int unk24;
-    int unk28;
-    float m_fHitFraction;
-};
-
-struct S_00d7a200_Owner {
-    int unk00; int unk04; int unk08; int unk0c; int unk10; int unk14;
-    int unk18; int unk1c; int unk20;
-    S_00d7a200_Node* m_pFirstNode;
-    int FUN_00d7a200(const S_00d7a200_V4& plane, float tol, int* counts, float* range);
 };
 
 extern const char str_010d365c[];
@@ -2840,13 +1051,6 @@ struct PoolBlock40
     {
         ((BlockAllocAB*)FUN_00c85750()->heap())->ReleaseBlock(p, size);
     }
-};
-
-struct PoolAllocator40
-{
-    ArrAB<PoolBlock40*> m_pools;
-
-    void FUN_00d7adb0(PoolItem40* item);
 };
 
 // @f3 0x008f6e10 (community match, verified in this file)
@@ -2984,13 +1188,6 @@ struct PoolBlock48
     }
 };
 
-struct PoolAllocator48
-{
-    ArrAB<PoolBlock48*> m_pools;
-
-    void FUN_00d7aea0(PoolItem48* item);
-};
-
 }  // namespace fnv_00d7aea0
 
 extern "C" {
@@ -3115,7 +1312,6 @@ struct ExportVertex {
     int x,y,z,unk2c,unk30;
     int alternateIndex;
 };
-struct ExportInt3 { int x,y,z; };
 struct ExportFace {
     ExportFace* next;
     int unk04;
@@ -3139,33 +1335,8 @@ struct ExportEdge {
 };
 static __forceinline int NextCorner(int i) { return (9>>(i*2))&3; }
 
-union ExportWorkspace { ExportStream stream; ExportArray<ExportFace*> sorted; ExportArray<ExportVertex*> map; };
 struct ExportCompare { unsigned char dummy; };
 void __cdecl QuickSortByKey(void**,int,int,ExportCompare);
-
-struct ExportShape {
-    int unk00,unk04,unk08,unk0c,unk10,unk14,unk18,unk1c,unk20;
-    ExportVertex* vertices;
-    int numVertices,unk2c,unk30,unk34,unk38;
-    ExportFace* faces;
-    int numFaces,unk44,unk48,unk4c,unk50,unk54;
-    int numPolygons;
-    int unk5c,unk60,unk64,unk68,unk6c,unk70,unk74,unk78,unk7c;
-    int unk80,unk84,unk88,unk8c,unk90,unk94,unk98,unk9c;
-    int unka0,unka4,unka8,unkac,unkb0,unkb4,unkb8,unkbc;
-    int unkc0,unkc4,unkc8,unkcc,unkd0,unkd4,unkd8,unkdc;
-    int unke0,unke4,unke8,unkec,unkf0,unkf4,unkf8,unkfc;
-    int unk100,unk104,unk108,unk10c,unk110,unk114,unk118,unk11c;
-    int unk120,unk124,unk128,unk12c,unk130,unk134,unk138,unk13c;
-    int unk140,unk144,unk148,unk14c,unk150,unk154,unk158,unk15c;
-    int unk160,unk164,unk168,unk16c,unk170,unk174,unk178,unk17c;
-    int unk180,unk184,unk188,unk18c,unk190,unk194,unk198,unk19c;
-    int unk1a0,unk1a4;
-    int dimension,unk1ac,index;
-    unsigned char unk1b4;
-    bool indexed;
-    int FUN_00d7e740(ExportArray<unsigned char>& sizes,ExportArray<unsigned short>& indices,bool useIndex,bool rotate);
-};
 
 }  // namespace fnv_00d7e740
 
@@ -3190,38 +1361,12 @@ struct __declspec(align(16)) FUN_00d7a0b0_Vertex {
     __m128 m_pos;
 };
 
-struct FUN_00d7a0b0_cls {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    FUN_00d7a0b0_Vertex* m_kVertices;
-    void FUN_00d7a0b0(const FUN_00d7a0b0_Matrix* m, const __m128* scale, __m128* out);
-};
-
 extern "C" {
 __m128 __cdecl _mm_load_ss(float const*);
 void __cdecl _mm_store_ps(float*, __m128);
 }
 
 extern float DAT_01011d78;
-
-struct SpatialNode {
-    SpatialNode* m_next;
-    int unk04;
-    int unk08;
-    int unk0C;
-    __m128 m_pos;
-};
-
-struct SpatialSimd {
-    __m128 q;
-};
 
 __declspec(align(16)) struct SpatialVec4 {
     float x;
@@ -3230,23 +1375,8 @@ __declspec(align(16)) struct SpatialVec4 {
     float w;
 };
 
-struct FUN_00d7a350_cls {
-    int unk00, unk04, unk08, unk0C, unk10, unk14, unk18, unk1C, unk20;
-    SpatialNode* m_24;
-
-    SpatialSimd FUN_00d7a350(const __m128& p);
-};
-
 extern const char str_010d3574[];
 struct D76250Allocator : S_00d7a010_Alloc {};
-
-struct PolygonStream {
-    int unk00, unk04, unk08;
-    void FUN_00cb1600(char*, int) throw();
-    PolygonStream& FUN_00cc01c0(const char*) throw();
-    PolygonStream& FUN_00cc02d0(unsigned int) throw();
-    void FUN_00cc00e0() throw();
-};
 
 template<class T> struct PolygonArray {
     T* data;
@@ -3354,34 +1484,6 @@ struct PolygonEdge {
     __forceinline PolygonVertex* vertex() const { return triangle->vertices[edge]; }
 };
 
-struct PolygonMesh {
-    int unk00, unk04, unk08, unk0c, unk10, unk14, unk18, unk1c, unk20;
-    PolygonVertex* vertexHead;
-    int vertexCount;
-    int unk2c, unk30, unk34, unk38;
-    PolygonTriangle* triangleHead;
-    int triangleCount;
-    int unk44, unk48, unk4c, unk50, unk54;
-    int polygonCount;
-    int unk5c, unk60, unk64, unk68, unk6c, unk70, unk74, unk78, unk7c;
-    int unk80, unk84, unk88, unk8c, unk90, unk94, unk98, unk9c;
-    int unka0, unka4, unka8, unkac, unkb0, unkb4, unkb8, unkbc;
-    int unkc0, unkc4, unkc8, unkcc, unkd0, unkd4, unkd8, unkdc;
-    int unke0, unke4, unke8, unkec, unkf0, unkf4, unkf8, unkfc;
-    int unk100, unk104, unk108, unk10c, unk110, unk114, unk118, unk11c;
-    int unk120, unk124, unk128, unk12c, unk130, unk134, unk138, unk13c;
-    int unk140, unk144, unk148, unk14c, unk150, unk154, unk158, unk15c;
-    int unk160, unk164, unk168, unk16c, unk170, unk174, unk178, unk17c;
-    int unk180, unk184, unk188, unk18c, unk190, unk194, unk198, unk19c;
-    int unk1a0, unk1a4;
-    int dimension;
-    int unk1ac;
-    int errorValue;
-    char unk1b4;
-    bool hasIndices;
-    int FUN_00d7df60(PolygonArray<int>& counts, PolygonArray<int>& indices, bool ids, bool rotate);
-};
-
 extern "C" __m128 _mm_load_ps(const float*);
 extern "C" __m128 _mm_load_ss(const float*);
 extern "C" __m128 _mm_shuffle_ps(__m128, __m128, unsigned int);
@@ -3392,162 +1494,6 @@ extern const double DAT_01011588;
 extern const char str_010d3574[];
 extern const char str_010d3540[];
 
-union D81340Vec4 {
-    __m128 q;
-    struct { float x; float y; float z; float w; };
-};
-
-struct D81340Dbg {
-    void* unk00;
-    int unk04;
-    int unk08;
-    void __thiscall FUN_00cb1600(char* buf, unsigned int n);
-    D81340Dbg* __thiscall FUN_00cc01c0(const char* fmt, int a, const char* b);
-    D81340Dbg* __thiscall FUN_00cc02d0();
-    void __thiscall FUN_00cc01c0();
-    void __thiscall FUN_00cc00e0();
-};
-
-struct D81340Workspace {
-    union {
-        D81340Dbg stream;
-        struct { float lower; float upper; } bounds;
-    };
-    float bestR;
-    float result;
-    float bestD;
-};
-struct D81340Transform { D81340Vec4 c0,c1,c2,c3; };
-
-struct D81340F090 { float __thiscall FUN_00d7f090(const D81340Vec4& dir, void* b, void* c); };
-struct D81340F610 { int m_auiShapeKeys; float __thiscall FUN_00d7c610(const D81340Vec4& dir, float* b, float* c); };
-
-struct D81340Cls {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    D81340Vec4* m_54;
-    int m_58;
-    int unk5c;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6c;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7c;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8c;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9c;
-    int unka0;
-    int unka4;
-    int unka8;
-    int unkac;
-    int unkb0;
-    int unkb4;
-    int unkb8;
-    int unkbc;
-    int unkc0;
-    int unkc4;
-    int unkc8;
-    int unkcc;
-    int unkd0;
-    int unkd4;
-    int unkd8;
-    int unkdc;
-    int m_e0;
-    int unke4;
-    int unke8;
-    int unkec;
-    int unkf0;
-    int unkf4;
-    int unkf8;
-    int unkfc;
-    int unk100;
-    int unk104;
-    int unk108;
-    int unk10c;
-    int unk110;
-    int unk114;
-    int unk118;
-    int unk11c;
-    int unk120;
-    int unk124;
-    int unk128;
-    int unk12c;
-    int unk130;
-    int unk134;
-    int unk138;
-    int unk13c;
-    int unk140;
-    int unk144;
-    int unk148;
-    int unk14c;
-    int unk150;
-    int unk154;
-    int unk158;
-    int unk15c;
-    int unk160;
-    int unk164;
-    int unk168;
-    int unk16c;
-    int unk170;
-    int unk174;
-    int unk178;
-    int unk17c;
-    int unk180;
-    int unk184;
-    int unk188;
-    int unk18c;
-    int unk190;
-    int unk194;
-    int unk198;
-    int unk19c;
-    int unk1a0;
-    int unk1a4;
-    int m_1a8;
-    int unk1ac;
-    void* m_1b0;
-    unsigned char unk1b4;
-    unsigned char m_1b5;
-    unsigned char unk1b6;
-    unsigned char unk1b7;
-    float __thiscall FUN_00d7c610(int, float*, float*);
-    float __thiscall FUN_00d7f090(int, D81340Vec4*, D81340Transform*);
-    void __thiscall FUN_00d81340(D81340Vec4& a0, D81340Transform& a1);
-};
-
-struct SupportVector { __m128 q; };
-struct SupportShape {
-    void FUN_00d76320(const SupportVector& input, SupportVector& output);
-    float FUN_00d768b0(const SupportVector& input);
-};
-
-extern float DAT_0104e148;
 class PlaneScalar {
     __m128 value;
 public:
@@ -3598,21 +1544,8 @@ extern "C" __m128 _mm_add_ss(__m128 a, __m128 b);
 extern "C" __m128 _mm_load_ps(const float* p);
 extern "C" void _mm_store_ps(float* p, __m128 a);
 
-extern unsigned long DAT_0126835c;
 extern float DAT_01011d78;
 extern const __m128 DAT_010c7160;
-
-struct Tt_ProfRec {
-    const char* m_pName;
-    unsigned long m_iTick;
-    unsigned long unk08;
-};
-struct Tt_ProfBuf {
-    unsigned long unk00;
-    Tt_ProfRec* m_pCur;
-    unsigned long unk08;
-    Tt_ProfRec* m_pRecordEnd;
-};
 
 struct __declspec(align(16)) Tt_Mat3 {
     __m128 r0;
@@ -3660,12 +1593,6 @@ struct __declspec(align(16)) Tt_M3 {
         m_col[1].set(r0(1), r1(1), r2(1));
         m_col[2].set(r0(2), r1(2), r2(2));
     }
-};
-
-struct S_00d77840 {
-    int unk00;
-    int FUN_00d77380(D76250VectorArray* view, const D76250Vector4* sph, int a4);
-    int FUN_00d77840(const D76250Vector4* pts, int n, const D76250Vector4* sph, int a4);
 };
 
 extern "C" {
@@ -4132,8 +2059,6 @@ extern "C" void __cdecl _mm_store_ss(float* p, __m128 a);
 extern "C" void* __cdecl memcpy(void* d, const void* s, unsigned int n);
 
 extern double DAT_01032980;
-extern double DAT_0101dae8;
-extern unsigned int DAT_0126a3e0;
 
 struct __declspec(align(16)) S_00d827b0_Sign {
     unsigned int a, b, c, d;
@@ -4163,62 +2088,6 @@ static __forceinline float supportDot(const S_00d827b0_V4& a, const S_00d827b0_V
     _mm_store_ss(&dot, _mm_add_ss(zs, _mm_add_ss(ys, prod)));
     return dot;
 }
-
-struct S_00d827b0_Param {
-    D76250Vector4* points;
-    int count;
-};
-
-struct S_00d827b0_Node {
-    S_00d827b0_Node* next;
-    int unk04;
-    int unk08;
-    int unk0c;
-    D76250Vector4 pos;
-};
-
-struct PlaneFace {
-    PlaneFace* next;
-    int unk04;
-    S_00d827b0_Node* vertices[3];
-};
-
-extern "C" void __cdecl FUN_00d74c70(S_00d827b0_V4* v, float t, S_00d827b0_Xf* out);
-
-struct FixBool { char value; };
-
-struct S_00d827b0_Owner {
-    int unk00, unk04, unk08, unk0c;
-    int unk10, unk14, unk18, unk1c;
-    int unk20;
-    S_00d827b0_Node* m_pFirstNode;
-    int m_uiItemCount;
-    int unk2c, unk30, unk34, unk38;
-    PlaneFace* m_faces;
-    int unk40, unk44, unk48;
-    int unk4c, unk50, unk54, unk58, unk5c, unk60, unk64, unk68;
-    int unk6c, unk70, unk74, unk78, unk7c, unk80, unk84, unk88;
-    int unk8c, unk90, unk94, unk98, unk9c, unka0, unka4, unka8;
-    int unkac, unkb0, unkb4, unkb8, unkbc, unkc0, unkc4, unkc8;
-    int unkcc, unkd0, unkd4, unkd8, unkdc, unke0, unke4, unke8;
-    int unkec, unkf0, unkf4, unkf8, unkfc, unk100, unk104, unk108;
-    int unk10c, unk110, unk114, unk118, unk11c, unk120, unk124, unk128;
-    int unk12c, unk130, unk134, unk138, unk13c, unk140, unk144, unk148;
-    int unk14c, unk150, unk154, unk158, unk15c, unk160, unk164, unk168;
-    int unk16c, unk170, unk174, unk178, unk17c, unk180, unk184, unk188;
-    int unk18c, unk190, unk194, unk198, unk19c, unk1a0, unk1a4, unk1a8;
-    int unk1ac, unk1b0;
-    FixBool m_b1b4;
-    FixBool m_b1b5;
-
-    float FUN_00d7a810(S_00d827b0_Param* p, S_00d827b0_Xf* xf, S_00d827b0_V4* out);
-    void FUN_00d7a0b0(S_00d827b0_Xf* xf, S_00d827b0_V4* dir, S_00d827b0_V4* out);
-    void FUN_00d81510(D76250Vector4* data, int n, int a, int b);
-    void FUN_00d7d2a0();
-    void FUN_00d7b600();
-    void FUN_00d827b0(S_00d827b0_Param* param);
-};
-
 
 extern "C" __m128 _mm_sub_ps(__m128, __m128);
 extern "C" __m128 _mm_load_ss(const float*);
@@ -4389,26 +2258,6 @@ struct S00d82ad0_EdgeArr {
         return m_data[m_iElementCount++];
     }
 };
-
-struct S00d82ad0_Stream {
-    int unk00;
-    int unk04;
-    int unk08;
-    void FUN_00cb1600(char* buf, int size);
-    S00d82ad0_Stream& FUN_00cc01c0(const char* s);
-    S00d82ad0_Stream& WriteInt(int v);
-    void FUN_00cc00e0();
-};
-
-struct S00d82ad0_Err {
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    virtual int message(int type, int id, const char* text, const char* file, int line);
-};
-
-extern S00d82ad0_Err* g_01268360;
-extern const float g_01011d78;
 
 struct S00d82ad0_Tri3 {
     S00d82ad0_Vec a;
@@ -4647,12 +2496,6 @@ struct HullMemory {
 };
 void __cdecl FUN_00c908c0(HullAllocator* pAlloc, void* pArray, int iNewCap, int iElemSize) throw();
 void __cdecl ResizeAudioStream(HullAllocator* pAlloc, void* pArray, int iElemSize) throw();
-struct ErrReporter {
-    virtual void v00();
-    virtual void v04();
-    virtual void v08();
-    __declspec(nothrow) virtual int Message(int iType, int aiSoundId, const char* pDesc, const char* pFile, int iLine) throw();
-};
 struct ErrStream {
     int unk00;
     int unk04;
@@ -4662,7 +2505,6 @@ struct ErrStream {
     __declspec(nothrow) ~ErrStream() throw();
     __declspec(nothrow) ErrStream& operator<<(const char* s) throw();
 };
-extern const double DAT_01012060;
 extern const double DAT_01011588;
 extern const __m128 DAT_010ec7f0;
 class HullVec {
@@ -4758,18 +2600,7 @@ struct VecArray : VecArrayBase {
         Clear();
     }
 };
-struct ErrorWork {
-    int unk00, unk04, unk08;
-    void FUN_00cb1600(void* buf, int size) throw();
-    ErrorWork& FUN_00cc01c0(const char* text) throw();
-    void FUN_00cc00e0() throw();
-};
 struct __declspec(align(16)) SplitRawVec { unsigned int x,y,z,w; };
-struct SplitWork {
-    VecArrayBase back;
-    union { float rounded; SplitVertex** edge; } scratch;
-    union { VecArrayBase front; SplitRawVec position; ErrorWork stream; } current;
-};
 inline void* operator new(unsigned int, HullVec* place) { return place; }
 struct HullImpl;
 struct FUN_00d76ca0 {
@@ -4805,8 +2636,6 @@ struct HullImpl {
     int FUN_00d83430(const HullVec& plane,FUN_00d76ca0** ppFront,FUN_00d76ca0** ppBack,float fEps) const;
 };
 inline float HullCrtAbs(float f) { return (float)fabs((double)f); }
-extern "C" void _ReadBarrier();
-extern "C" void _WriteBarrier();
 
 extern "C" void _ReadWriteBarrier();
 extern "C" __m128 _mm_load_ps(const float*);
@@ -4817,45 +2646,6 @@ extern "C" __m128 _mm_load_ss(const float*);
 
 extern "C" __m128 _mm_setr_ps(float, float, float, float);
 extern double DAT_0104e138;
-
-struct VecNode {
-    VecNode* m_next;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int m_20;
-    int m_24;
-    int m_28;
-};
-
-struct CentroidHull {
-    int unk00, unk04, unk08, unk0C, unk10, unk14, unk18, unk1C, unk20;
-    VecNode* m_24;
-    int m_28;
-    int unk2C, unk30, unk34, unk38, unk3C, unk40, unk44, unk48, unk4C;
-    int unk50, unk54, unk58, unk5C, unk60, unk64, unk68, unk6C, unk70, unk74, unk78, unk7C;
-    union {
-        __m128 m_80;
-        struct {
-            float unk80;
-            float unk84;
-            float unk88;
-            float m_8c;
-        };
-    };
-    int unk90, unk94, unk98, unk9C, unkA0, unkA4, unkA8, unkAC;
-    int unkB0, unkB4, unkB8, unkBC, unkC0, unkC4, unkC8, unkCC;
-    int unkD0, unkD4, unkD8, unkDC, unkE0, unkE4, unkE8, unkEC;
-    __m128 m_f0;
-    int unk100, unk104, unk108, unk10C;
-    __m128 m_110;
-
-    void* FUN_00d7aa30();
-};
 
 // Cached centroid of the transformed hull vertices.
 
@@ -4872,25 +2662,6 @@ extern "C" double __cdecl sqrt(double);
 extern const char str_010d358c[];
 extern const char str_010d3540[];
 extern const __m128 DAT_010c7160;
-struct MessageStream {
-    int unk00, unk04, unk08;
-    void FUN_00cb1600(void*, int);
-    MessageStream* FUN_00cc01c0(const char*, int, const char*);
-    MessageStream* FUN_00cc02d0();
-    void FUN_00cc01c0();
-    void FUN_00cc00e0();
-};
-struct BasisTransform {
-    PlaneVector axes[3];
-    PlaneVector origin;
-};
-struct PlaneShape {
-    int unk00, unk04;
-    ChildData* state;
-    void GetMassProperties(BasisTransform*, void*);
-    float FUN_00d769c0(const PlaneVector&);
-    void FUN_00d76a20(PlaneVector* planes);
-};
 static __forceinline __m128 dot3(const __m128& a, const __m128& b) {
     __m128 p = _mm_mul_ps(a,b);
     __m128 y = _mm_shuffle_ps(p,p,0x55);
@@ -4899,25 +2670,11 @@ static __forceinline __m128 dot3(const __m128& a, const __m128& b) {
     return _mm_add_ss(z,y);
 }
 
-extern __m128 DAT_01268370;
-extern __m128 DAT_01268380;
-extern __m128 DAT_01268390;
-extern __m128 DAT_012683a0;
 struct SampleTransform {
     D76250Vector4 x,y,z,w;
     __forceinline SampleTransform(const D76250Vector4& a,const D76250Vector4& b,const D76250Vector4& c,const D76250Vector4& d) {
         x=a; y=b; z=c; w=d;
     }
-};
-extern const char str_010d36fc[];
-struct SamplePoint: D76250Vector4 {
-    void FUN_00c7f640(const SampleTransform&,const D76250Vector4&);
-};
-struct SampleBuilder {
-    int unk00,unk04;
-    ChildData* hull;
-    void FUN_00d76d80(D76250Vector4&,SampleTransform&);
-    bool FUN_00d76100(const D76250Vector4&,unsigned char,float);
 };
 struct SampleStream {
     int unk00,unk04,unk08;
@@ -4927,8 +2684,6 @@ struct SampleStream {
 };
 struct SampleTrivialVector { __m128 m_vComponents; };
 union SampleWorkspace { SampleTrivialVector extents; SampleStream stream; __forceinline SampleWorkspace(const D76250Vector4& v):extents((const SampleTrivialVector&)v) {} };
-struct SampleBuilderRef { SampleBuilder* value; };
-struct SampleRandomRef { RandomGenerator* value; };
 
 namespace tolerance { extern const float DAT_0104da4c=1.1920928955078125e-7f; }
 extern "C" __m128 _mm_load_ss(const float*);
@@ -5013,9 +2768,6 @@ struct EnumerationTimer {
         clock0=ticks;
     }
 };
-struct EnumerationStream {
-    char *start,*end,*capacity,*limit;
-};
 struct PlanePointArray: D76250VectorArray {
     __forceinline PlanePointArray() {m_data=0;m_iElementCount=0;m_iCapacityState=0x80000000;}
     __forceinline ~PlanePointArray() {
@@ -5067,8 +2819,6 @@ double sqrt(double);
 
 
 
-extern float DAT_01012054;
-
 struct AllocHolder {
     int unk00;
     int unk04;
@@ -5078,7 +2828,6 @@ struct AllocHolder {
 };
 inline AllocHolder* Holder() { return (AllocHolder*)FUN_00c85750(); }
 
-void __cdecl FUN_00c909d0(HullAllocator* alloc, void* arr, int elemSize, int unused, int n);
 struct IndexVertex {
     IndexVertex* m_pNext;
     int unk04;
@@ -5126,28 +2875,12 @@ struct IndexEdge:IndexEdgeBase<IndexEdge> {
     IndexEdge(unsigned int packed):IndexEdgeBase<IndexEdge>(packed) {}
     IndexEdge(const IndexEdge& e) { m_face=e.m_face; m_ucOperationType=e.m_ucOperationType; }
 };
-struct FaceArea {
-    HullFace* m_face;
-    float m_area;
-};
 struct FaceLess { unsigned char context; FaceLess() : context(0) {} };
-void __cdecl FUN_00d7b270(FaceArea* arr, int lo, int hi, FaceLess cmp);
-struct HullBool {
-    unsigned char m_cBooleanValue;
-};
-struct HullVec4 {
-    __m128 m_vComponents;
-    HullBool* FUN_00c7f520(HullBool* out, float eps);
-};
 struct __declspec(align(16)) HullFloat4 {
     float x;
     float y;
     float z;
     float w;
-};
-union HullPlane {
-    __m128 m_vComponents;
-    HullFloat4 m_fields;
 };
 template <class T> struct HullArrayBase {
     T* m_data;
@@ -5209,113 +2942,6 @@ public:
         }
     }
 };
-struct HullBuilder {
-    int unk00;
-    float m_fScalar;
-    int unk08;
-    unsigned char unk0c;
-    unsigned char m_bFixup;
-    unsigned char unk0e;
-    unsigned char unk0f;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    IndexVertex* m_kVertices;
-    int m_iStridedVertexCount;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    HullFace* m_faces;
-    int m_numFaces;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    HullArray<__m128> m_kPlaneArray;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6c;
-    int field70;
-    int field74;
-    int field78;
-    int field7c;
-    int field80;
-    int field84;
-    int field88;
-    int field8c;
-    int field90;
-    int field94;
-    int field98;
-    int field9c;
-    int fielda0;
-    int fielda4;
-    int fielda8;
-    int fieldac;
-    int fieldb0;
-    int fieldb4;
-    int fieldb8;
-    int fieldbc;
-    int fieldc0;
-    int fieldc4;
-    int fieldc8;
-    int fieldcc;
-    int fieldd0;
-    int fieldd4;
-    int fieldd8;
-    int fielddc;
-    __m128 m_e0;
-    __m128 m_f0;
-    int unk100;
-    int unk104;
-    int unk108;
-    int unk10c;
-    __m128 m_110;
-    int field120;
-    int field124;
-    int field128;
-    int field12c;
-    int field130;
-    int field134;
-    int field138;
-    int field13c;
-    int field140;
-    int field144;
-    int field148;
-    int field14c;
-    int field150;
-    int field154;
-    int field158;
-    int field15c;
-    int field160;
-    int field164;
-    int field168;
-    int field16c;
-    int field170;
-    int field174;
-    int field178;
-    int field17c;
-    int field180;
-    int field184;
-    int field188;
-    int field18c;
-    int field190;
-    int field194;
-    int field198;
-    int field19c;
-    int field1a0;
-    int field1a4;
-    int m_dimension;
-    int unk1ac;
-    int unk1b0;
-    unsigned char unk1b4;
-    unsigned char m_bPlanesBuilt;
-    HullFloat4* FUN_00d7aa30();
-    void FUN_00d7d2a0();
-};
 
 extern "C" __m128 _mm_load_ss(const float*);
 extern "C" __m128 _mm_set_ss(float);
@@ -5326,7 +2952,6 @@ extern "C" __m128 _mm_add_ps(__m128, __m128);
 extern "C" __m128 _mm_sub_ps(__m128, __m128);
 extern "C" __m128 _mm_add_ss(__m128, __m128);
 extern "C" __m128 _mm_shuffle_ps(__m128, __m128, unsigned int);
-extern "C" __m128 _mm_unpacklo_ps(__m128, __m128);
 extern "C" __m128 _mm_move_ss(__m128, __m128);
 
 extern float DAT_01011d78;
@@ -5384,11 +3009,6 @@ struct ProbeTransform {
         return v;
     }
 };
-struct ProbeObj {
-    int unk00,unk04;
-    ProbeHull* hull;
-    void FUN_00d75e30(int mode,const MatchVector& input,MatchVector& output);
-};
 
 extern const char str_010d3574[];
 extern float DAT_0104da4c;
@@ -5403,14 +3023,6 @@ __m128 _mm_load_ss(const float*);
 void _mm_store_ss(float*,__m128);
 double fabs(double);
 }
-struct ClipStream {
-    int unk00,unk04,unk08;
-    void FUN_00cb1600(char*,int);
-    ClipStream* FUN_00cc01c0(const char*,int,char*);
-    ClipStream* FUN_00cc02d0();
-    void FUN_00cc01c0();
-    void FUN_00cc00e0();
-};
 class ClipSimdReal {
 public:
     ClipSimdReal(const __m128& x):m_vValue(x) {}
@@ -5437,121 +3049,6 @@ public:
     }
     __forceinline void operator=(const ClipVector& v) { m_vComponents=v.m_vComponents; }
     __m128 m_vComponents;
-};
-struct ClipHull {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    ClipVector* planes;
-    int numPlanes;
-    int unk5c;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6c;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7c;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8c;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9c;
-    int unka0;
-    int unka4;
-    int unka8;
-    int unkac;
-    int unkb0;
-    int unkb4;
-    int unkb8;
-    int unkbc;
-    int unkc0;
-    int unkc4;
-    int unkc8;
-    int unkcc;
-    int unkd0;
-    int unkd4;
-    int unkd8;
-    int unkdc;
-    int unke0;
-    int unke4;
-    int unke8;
-    int unkec;
-    int unkf0;
-    int unkf4;
-    int unkf8;
-    int unkfc;
-    int unk100;
-    int unk104;
-    int unk108;
-    int unk10c;
-    int unk110;
-    int unk114;
-    int unk118;
-    int unk11c;
-    int unk120;
-    int unk124;
-    int unk128;
-    int unk12c;
-    int unk130;
-    int unk134;
-    int unk138;
-    int unk13c;
-    int unk140;
-    int unk144;
-    int unk148;
-    int unk14c;
-    int unk150;
-    int unk154;
-    int unk158;
-    int unk15c;
-    int unk160;
-    int unk164;
-    int unk168;
-    int unk16c;
-    int unk170;
-    int unk174;
-    int unk178;
-    int unk17c;
-    int unk180;
-    int unk184;
-    int unk188;
-    int unk18c;
-    int unk190;
-    int unk194;
-    int unk198;
-    int unk19c;
-    int unk1a0;
-    int unk1a4;
-    int unk1a8;
-    int unk1ac;
-    int index;
-    unsigned char unk1b4;
-    bool indexed;
-    __forceinline void mustHaveIndex() const;
-    bool FUN_00d7a5a0(const ClipVector& a,const ClipVector& b,float& t0,float& t1,float planeThickness) const;
 };
 
 extern "C" __m128 _mm_mul_ps(__m128 a, __m128 b);
@@ -5732,14 +3229,6 @@ struct BevelHull {
 };
 
 
-struct BevelStream {
-    void* vtable; int unk04,unk08;
-    void FUN_00cb1600(char*,int) throw();
-    BevelStream& FUN_00cc01c0(const char*) throw();
-    BevelStream& FUN_00cc02d0(unsigned int) throw();
-    void FUN_00cc00e0() throw();
-};
-
 extern "C" __m128 __cdecl _mm_mul_ss(__m128, __m128);
 extern "C" __m128 __cdecl _mm_add_ps(__m128, __m128);
 
@@ -5747,16 +3236,6 @@ extern "C" __m128 __cdecl _mm_add_ps(__m128, __m128);
 extern const char str_010d3574[];
 extern const char str_010d3540[];
 
-struct BoxStream {
-    int unk00;
-    int unk04;
-    int unk08;
-    BoxStream* FUN_00cb1600(void* buf, int size);
-    BoxStream* FUN_00cc01c0(const char*,int,char*);
-    BoxStream* FUN_00cc02d0();
-    void FUN_00cc01c0();
-    void FUN_00cc00e0();
-};
 struct BoxScalar;
 class __declspec(align(16)) BoxVector {
     __m128 value;
@@ -5787,12 +3266,6 @@ __forceinline BoxScalar operator*(const BoxScalar& a, const BoxScalar& b)
 }
 
 extern "C" __m128 _mm_load_ps(const float*);
-struct BoxTransform {
-    BoxVector m_kColumn0;
-    BoxVector m_kColumn1;
-    BoxVector m_kColumn2;
-    BoxVector m_vTranslation;
-};
 
 template <class T> struct BoxPointer {
     T m_kStorage;
@@ -5829,122 +3302,6 @@ struct BoxIterator {
     operator const void*() const { return m_tri ? this : 0; }
 };
 
-struct BoxHull {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    BoxFace* m_firstTri;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    BoxVector* m_kPlaneArray;
-    int m_iValue;
-    int unk5c;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6c;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7c;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8c;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9c;
-    int unka0;
-    int unka4;
-    int unka8;
-    int unkac;
-    int unkb0;
-    int unkb4;
-    int unkb8;
-    int unkbc;
-    int unkc0;
-    int unkc4;
-    int unkc8;
-    int unkcc;
-    int unkd0;
-    int unkd4;
-    int unkd8;
-    int unkdc;
-    int unke0;
-    int unke4;
-    int unke8;
-    int unkec;
-    int unkf0;
-    int unkf4;
-    int unkf8;
-    int unkfc;
-    int unk100;
-    int unk104;
-    int unk108;
-    int unk10c;
-    int unk110;
-    int unk114;
-    int unk118;
-    int unk11c;
-    int unk120;
-    int unk124;
-    int unk128;
-    int unk12c;
-    int unk130;
-    int unk134;
-    int unk138;
-    int unk13c;
-    int unk140;
-    int unk144;
-    int unk148;
-    int unk14c;
-    int unk150;
-    int unk154;
-    int unk158;
-    int unk15c;
-    int unk160;
-    int unk164;
-    int unk168;
-    int unk16c;
-    int unk170;
-    int unk174;
-    int unk178;
-    int unk17c;
-    int unk180;
-    int unk184;
-    int unk188;
-    int unk18c;
-    int unk190;
-    int unk194;
-    int unk198;
-    int unk19c;
-    int unk1a0;
-    int unk1a4;
-    int m_eVertexFloatDimensions;
-    int unk1ac;
-    int m_uiEdgeIndex;
-    char unk1b4;
-    char m_hasIndex;
-    float FUN_00d7c610(const BoxVector& axis, float& mn, float& mx) const;
-    float FUN_00d7f090(BoxPointer<const BoxVector*> plane, BoxVector& halfExtents, BoxTransform& transform) const;
-};
-
 namespace S00d81510_Intrinsics {
 extern "C" {
 __m128 _mm_mul_ps(__m128,__m128);
@@ -5963,7 +3320,6 @@ __m128 _mm_setr_ps(float,float,float,float);
 void _mm_store_ss(float*,__m128);
 }
 }
-extern const char str_010d3718[];
 extern const char str_010d3540[];
 extern const __m128 DAT_010c7160;
 extern const __m128 DAT_010c7170;
@@ -5972,14 +3328,6 @@ extern const __m128 DAT_01017d10;
 namespace S00d81510_Constants {
 static const double DAT_01032980 = double(1e-4f);
 }
-struct S00d81510_Stream {
-    int unk00;
-    int unk04;
-    int unk08;
-    S00d81510_Stream* FUN_00cb1600(void* buf, int size);
-    S00d81510_Stream& FUN_00cc01c0(const char* s);
-    void FUN_00cc00e0();
-};
 class S00d81510_SimdReal {
 public:
     __forceinline S00d81510_SimdReal(const __m128& x) : m_vValue(x) {}
@@ -6182,9 +3530,6 @@ __forceinline bool operator==(const S00d81510_Vertex& a, const S00d81510_Vertex&
 __forceinline bool operator!=(const S00d81510_Vertex& a, const S00d81510_Vertex& b) { return !(a == b); }
 __forceinline int S00d81510_round(float x) { return (int)(x + (x < 0 ? -0.5f : 0.5f)); }
 
-struct S00d81510_Less {};
-void __cdecl FUN_00d7af90(S00d81510_Vertex* pArr, int d, int h, S00d81510_Less cmpLess);
-
 struct S00d81510_VertexList {
     int unk00; int unk04; int unk08; int unk0c; int unk10; int unk14;
     int unk18; int unk1c; int unk20; int unk24; int unk28; int unk2c;
@@ -6280,10 +3625,6 @@ public:
     }
 };
 
-struct HullPlaneOwner {
-    void FUN_00d75b80(__m128& out, const int* triangle);
-};
-
 class ScalarPlaneQ {
     __m128 value;
 public:
@@ -6311,27 +3652,12 @@ struct PlaneVectorQ {
         default:return _mm_shuffle_ps(q,q,0xff); }
     }
 };
-struct PlaneVertexQ {
-    PlaneVertexQ* next; int flag,unk08,unk0c;
-    PlaneVectorQ position;
-};
-struct PlaneFaceQ {
-    PlaneFaceQ* next; int unk04;
-    PlaneVertexQ* vertices[3];
-};
 struct PlanePointsQ {
     PlaneVectorQ* data; int size; int capacityAndFlags;
     __forceinline int GetLogicalSize() const { return size; }
     __forceinline const PlaneVectorQ& operator[](int i) const { return data[i]; }
 };
 struct PlaneTransformQ { PlaneVectorQ rows[4]; };
-
-struct PlaneHullQ {
-    int unk00,unk04,unk08,unk0c,unk10,unk14,unk18,unk1c,unk20;
-    PlaneVertexQ* vertices; int numVertices,unk2c,unk30,unk34,unk38;
-    PlaneFaceQ* faces;
-    float FUN_00d7a810(const PlanePointsQ& points,const PlaneTransformQ& transform,PlaneVectorQ& out);
-};
 
 namespace N {
 union __declspec(intrin_type) __declspec(align(16)) __m128 { float m128_f32[4]; unsigned __int64 m128_u64[2]; short m128_i16[8]; int m128_i32[4]; __int64 m128_i64[2]; unsigned short m128_u16[8]; unsigned int m128_u32[4]; };
@@ -6344,37 +3670,10 @@ void _mm_store_ss(float*, __m128);
 __m128 _mm_sub_ps(__m128 a, __m128 b);
 }
 }
-extern const char str_010d37a8[];
 extern const char str_010d3574[];
 struct S83_Vec4 {
     N::__m128 q;
     __forceinline void operator=(const S83_Vec4& v) { q = v.q; }
-};
-struct S83_Vertex {
-    S83_Vertex* next;
-    int unk04;
-    int unk08;
-    int unk0c;
-    S83_Vec4 point;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int removalFlag;
-};
-struct S83_Tri {
-    S83_Tri* next;
-    int unk04;
-    S83_Vertex* v[3];
-};
-struct S83_Options {
-    int vertexLimit;
-    unsigned char reseat;
-    float tolerance;
-    int unk0c;
-    unsigned char rebuild;
-    unsigned char modified;
 };
 struct S83_Alloc {
     virtual void v0();
@@ -6456,136 +3755,6 @@ template<class T> struct S83_OwnedArray : S83_ArrayBase<T> {
     __forceinline void AddBack(const T& v) { this->append(S83_HeapAccess().get(this),v); }
 };
 template<class T> struct S83_Array : S83_OwnedArray<T> {};
-struct S83_Fmt {
-    int unk00;
-    int unk04;
-    int unk08;
-    void FUN_00cb1600(char* buffer, int capacity);
-    S83_Fmt* FUN_00cc01c0(const char* text);
-    S83_Fmt* FUN_00cc01c0(const char* text, int code, const char* tail);
-    S83_Fmt* FUN_00cc02d0();
-    void FUN_00cc01c0();
-    void FUN_00cc00e0();
-};
-struct S83_Mesh {
-    int unk000;
-    int unk004;
-    int unk008;
-    int unk00c;
-    int unk010;
-    int unk014;
-    int unk018;
-    int unk01c;
-    int unk020;
-    S83_Vertex* vertices;
-    int vertexCount;
-    int unk02c;
-    int unk030;
-    int unk034;
-    int unk038;
-    S83_Tri* triangles;
-    int unk040;
-    int unk044;
-    int unk048;
-    int unk04c;
-    int unk050;
-    int unk054;
-    int unk058;
-    int unk05c;
-    int unk060;
-    int unk064;
-    int unk068;
-    int unk06c;
-    int unk070;
-    int unk074;
-    int unk078;
-    int unk07c;
-    int unk080;
-    int unk084;
-    int unk088;
-    int unk08c;
-    int unk090;
-    int unk094;
-    int unk098;
-    int unk09c;
-    int unk0a0;
-    int unk0a4;
-    int unk0a8;
-    int unk0ac;
-    int unk0b0;
-    int unk0b4;
-    int unk0b8;
-    int unk0bc;
-    int unk0c0;
-    int unk0c4;
-    int unk0c8;
-    int unk0cc;
-    int unk0d0;
-    int unk0d4;
-    int unk0d8;
-    int unk0dc;
-    int unk0e0;
-    int unk0e4;
-    int unk0e8;
-    int unk0ec;
-    int unk0f0;
-    int unk0f4;
-    int unk0f8;
-    int unk0fc;
-    int unk100;
-    int unk104;
-    int unk108;
-    int unk10c;
-    int unk110;
-    int unk114;
-    int unk118;
-    int unk11c;
-    int unk120;
-    int unk124;
-    int unk128;
-    int unk12c;
-    int unk130;
-    int unk134;
-    int unk138;
-    int unk13c;
-    int unk140;
-    int unk144;
-    int unk148;
-    int unk14c;
-    int unk150;
-    int unk154;
-    int unk158;
-    int unk15c;
-    int unk160;
-    int unk164;
-    int unk168;
-    int unk16c;
-    int unk170;
-    int unk174;
-    int unk178;
-    int unk17c;
-    int unk180;
-    int unk184;
-    int unk188;
-    int unk18c;
-    int unk190;
-    int unk194;
-    int unk198;
-    int unk19c;
-    int unk1a0;
-    int unk1a4;
-    int state;
-    int unk1ac;
-    int diagnosticCode;
-    unsigned char flag1b4;
-    unsigned char flag1b5;
-    void FUN_00d83f30(S83_Options* options);
-    void FUN_00d82ad0(int limit, bool reseat);
-    int FUN_00d81510(const S83_Vec4* points, int numPoints, int a, int b);
-    void FUN_00d7d2a0();
-    void FUN_00d7b600();
-    void FUN_00d7df60(S83_Array<int>* a, S83_Array<int>* b, int c, int d);
-};
 
 extern "C" {
 __m128 _mm_mul_ps(__m128,__m128);
@@ -6600,18 +3769,9 @@ __m128 _mm_andnot_ps(__m128,__m128);
 __m128 _mm_set_ss(float);
 void _mm_store_ss(float*,__m128);
 }
-extern const char str_010d36ec[];
 extern const char str_010d3540[];
 extern const __m128 DAT_010c7160;
 
-struct S00d7fb80_Stream {
-    int unk00;
-    int unk04;
-    int unk08;
-    S00d7fb80_Stream* FUN_00cb1600(void* buf, int size);
-    S00d7fb80_Stream& FUN_00cc01c0(const char* s);
-    void FUN_00cc00e0();
-};
 class S00d7fb80_SimdReal {
 public:
     __forceinline S00d7fb80_SimdReal(const __m128& x) : m_vValue(x) {}
@@ -7003,9 +4163,7 @@ void _mm_store_ss(float*, __m128);
 double fabs(double);
 void* memcpy(void*,const void*,unsigned int);
 }
-extern const float DAT_010141cc;
 extern const float s_faderClearedAlpha;
-extern const char str_010d3748[];
 extern const char str_010d3540[];
 
 class ExpandTruth {
@@ -7063,11 +4221,6 @@ struct ExpandHeap {
     virtual void unknownC();
     virtual void ReturnMemory(void*,int);
 };
-struct ExpandRouter {
-    int unk00,unk04,unk08,unk0c;
-    ExpandHeap* heap;
-    static ExpandRouter* FUN_00c85750();
-};
 struct ExpandArray {
     ExpandVector* data;
     int size;
@@ -7108,146 +4261,9 @@ struct ExpandArray {
     }
 };
 struct __declspec(align(16)) ExpandHeader { int a,b,c,d; };
-struct ExpandBool { unsigned char value; };
-struct ExpandPointNode {
-    int unk00,unk04,unk08,unk0c;
-    ExpandVector point;
-};
-struct ExpandState {
-    ExpandHeader header;
-    int unk10,unk14,unk18,unk1c,unk20;
-    ExpandPointNode* first;
-    int unk028;
-    int unk02c;
-    int unk030;
-    int unk034;
-    int unk038;
-    int unk03c;
-    int unk040;
-    int unk044;
-    int unk048;
-    int unk04c;
-    int unk050;
-    int unk054;
-    int unk058;
-    int unk05c;
-    int unk060;
-    int unk064;
-    int unk068;
-    int unk06c;
-    int unk070;
-    int unk074;
-    int unk078;
-    int unk07c;
-    int unk080;
-    int unk084;
-    int unk088;
-    int unk08c;
-    int unk090;
-    int unk094;
-    int unk098;
-    int unk09c;
-    int unk0a0;
-    int unk0a4;
-    int unk0a8;
-    int unk0ac;
-    int unk0b0;
-    int unk0b4;
-    int unk0b8;
-    int unk0bc;
-    int unk0c0;
-    int unk0c4;
-    int unk0c8;
-    int unk0cc;
-    int unk0d0;
-    int unk0d4;
-    int unk0d8;
-    int unk0dc;
-    ExpandVector normal;
-    int unk0f0;
-    int unk0f4;
-    int unk0f8;
-    int unk0fc;
-    int unk100;
-    int unk104;
-    int unk108;
-    int unk10c;
-    int unk110;
-    int unk114;
-    int unk118;
-    int unk11c;
-    int unk120;
-    int unk124;
-    int unk128;
-    int unk12c;
-    int unk130;
-    int unk134;
-    int unk138;
-    int unk13c;
-    int unk140;
-    int unk144;
-    int unk148;
-    int unk14c;
-    int unk150;
-    int unk154;
-    int unk158;
-    int unk15c;
-    int unk160;
-    int unk164;
-    int unk168;
-    int unk16c;
-    int unk170;
-    int unk174;
-    int unk178;
-    int unk17c;
-    int unk180;
-    int unk184;
-    int unk188;
-    int unk18c;
-    int unk190;
-    int unk194;
-    int unk198;
-    int unk19c;
-    int unk1a0;
-    int unk1a4;
-    int dimension;
-    int unk1ac,unk1b0;
-    bool flagA,flagB;
-    int FUN_00d81510(const ExpandVector*,int,int,int);
-};
 struct ExpandView {
     const ExpandVector* data;
     int size;
     int stride;
     __forceinline void set(const ExpandArray& a) { data=a.data;size=a.size;stride=16; }
-};
-struct ExpandStream {
-    int unk00,unk04,unk08;
-    void FUN_00cb1600(char*,int);
-    void FUN_00cc01c0(const char*);
-    void FUN_00cc00e0();
-};
-struct ExpandValidity { int unk00,unk04,unk08; unsigned char unk0c,unk0d,unk0e,valid; };
-union ExpandAV { ExpandArray points; ExpandStream stream; ExpandValidity validity; };
-struct ExpandShape {
-    int unk00,unk04;
-    ExpandState* state;
-    __declspec(noinline) int FUN_00d74e10();
-    const ExpandVector& FUN_00d752d0() const;
-    __declspec(noinline) void GetValueBlock(ExpandVector*) const;
-    int FUN_00d75050() const;
-    int FUN_00d75060() const;
-    const ExpandVector& FUN_00d74ed0(int) const;
-    __declspec(noinline) int FUN_00d75120(int) const;
-    int FUN_00d75130() const;
-    int FUN_00d75140() const;
-    int FUN_00d75200(int) const;
-    void FUN_00d75b80(ExpandVector*,int) const;
-    int FUN_00d752c0(int,int) const;
-    void FUN_00d76120(int,ExpandArray&) const;
-    __declspec(noinline) int FUN_00d771c0(const ExpandVector*,int,const ExpandHeader&);
-    __declspec(noinline) int FUN_00d77200(const ExpandView&,const ExpandHeader&);
-    void SetValue(float,bool);
-    void FUN_00d762f0();
-    bool FUN_00d77be0(float radius);
 };

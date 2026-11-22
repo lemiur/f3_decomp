@@ -25,20 +25,6 @@ void* FUN_00c65830()
     return new MyType;
 }
 
-struct hkVector4
-{
-    float x, y, z, w;
-};
-void __cdecl SetNiPoint3FromHkVector4(void*, hkVector4 const&);
-extern int _NiPoint3_ZERO;
-extern int DAT_011f4270;
-extern int DAT_011f4274;
-extern float DAT_01267e30;
-struct WeaponObject
-{
-    void* FUN_00c65ef0(void*);
-};
-
 struct AudioTlsState
 {
     char pad[0x2b4];
@@ -88,31 +74,6 @@ MyType* FUN_00c659d0_shell::FUN_00c659d0(void* param)
     return (MyType*)obj;
 }
 
-
-struct FUN_00c65890_Tgt
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    unsigned int m_flags;
-};
-
-struct FUN_00c65890_Callee
-{
-    void Tail();
-};
-
-struct FUN_00c65890_cls
-{
-    int unk00;
-    int unk04;
-    FUN_00c65890_Callee* m_08;
-    int unk0c;
-    FUN_00c65890_Tgt* m_10;
-    void FUN_00c65890(int param);
-    void UpdateState(int param);
-};
 
 struct CollisionNode
 {

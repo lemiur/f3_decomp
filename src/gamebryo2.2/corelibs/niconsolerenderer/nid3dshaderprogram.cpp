@@ -1,8 +1,6 @@
 #include "f3_common.h"
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-extern "C" void __cdecl _delete(void*, unsigned int);
-
 struct NiD3DShaderProgram
 {
     void FUN_00e89840();

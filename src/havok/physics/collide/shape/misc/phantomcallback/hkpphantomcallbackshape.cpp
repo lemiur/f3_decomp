@@ -8,9 +8,6 @@
 void __stdcall FUN_00c9e390(int, int, int)
 {}
 
-extern char DAT_01268910[];
-void __cdecl FUN_00c90360(void*, void*);
-
 #include <xmmintrin.h>
 
 // @fnv 0x00c9e3d0

@@ -31,17 +31,9 @@ void* __fastcall FUN_00a57c20(void* self, int, unsigned short usIndex)
 extern const char* const g_011f3f88_arg1;
 
 namespace fnv_00a57cb0 {
-class NiRTTI;
-struct GlobalObjectO2_00a7b610;
-extern GlobalObjectO2_00a7b610 g_011f3f70;
 struct NiPoint3
 {
     float x, y, z;
-};
-class NiObject
-{
-  public:
-    NiObject* DynamicCast(const NiRTTI*) const;
 };
 struct NiPoint3InterpolatorStandIn
 {
@@ -62,8 +54,6 @@ template <class T, class A> struct NiTArray
 };
 typedef NiTArray<ActorCombatGroup*, NiTMallocInterface<ActorCombatGroup*> > CombatGroupArray;
 extern const char* const g_011f3f88_arg1;
-void __stdcall FUN_00a390a0(CombatGroupArray* a);
-ActorCombatGroup* __cdecl FUN_00a7d330(const char* s);
 
 extern unsigned int DAT_011f404c;
 

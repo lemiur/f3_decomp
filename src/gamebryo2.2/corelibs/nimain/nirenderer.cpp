@@ -13,8 +13,6 @@ void __cdecl FUN_00a62ae0()
     NiRenderer::ms_pRenderer = 0;
 }
 
-extern char const* const g_0126f0f0_arg1;
-
 void __cdecl FUN_00a62b60();
 void __cdecl _delete(void* p, unsigned int flags);
 struct FUN_00a63230_shell
@@ -30,14 +28,6 @@ void* __thiscall FUN_00a63230_shell::Destroy(unsigned int flags)
         _delete(this, 0x280);
     return this;
 }
-
-struct StrArr
-{
-    void __thiscall SetSize(unsigned int);
-    void __thiscall SetAt(unsigned int, char*&);
-};
-void __stdcall AppendCameraPathEntries(StrArr*);
-char* __cdecl _FUN_00a7d330(const char*);
 
 struct CriticalSectionA62
 {

@@ -39,17 +39,4 @@ struct CD8810Bool
     }
 };
 
-struct CD8810Filter
-{
-    virtual CD8810Bool FUN_00cd8810(const void* a, const void* b, const void* c, const void* d, const void* e) const;
-};
-
 #include <xmmintrin.h>
-extern __m128 DAT_010c44d0;
-
-class NormVec_cls
-{
-  public:
-    __m128 m_v;
-    __m128* FUN_00c74c90(__m128* out);
-};

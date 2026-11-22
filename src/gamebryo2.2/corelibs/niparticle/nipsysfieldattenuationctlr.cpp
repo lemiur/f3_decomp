@@ -2,8 +2,6 @@
 // src/gamebryo2.2/corelibs/niparticle/nipsysfieldattenuationctlr.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/_fallout3/platforms/common/code/gamebryo2.2/corelibs/niparticle/nipsysfieldattenuationctlr.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-extern "C" void* g_01202720;
-
 struct NiObjectNET;
 struct BaseStandIn
 {
@@ -106,17 +104,3 @@ NiPSysFieldAttenuationCtlr* Owner::CreateFieldAttenuationController(NiObjectNET*
     this->FUN_00c32de0(pCtlr, pArg);
     return (NiPSysFieldAttenuationCtlr*)pCtlr;
 }
-
-struct StrArr
-{
-    void* unk00;
-    char** data;
-    unsigned short capacity;
-    unsigned short index;
-    unsigned short count;
-    unsigned short growBy;
-    void SetSize(unsigned int);
-    void SetAt(unsigned int, char*&);
-};
-char* __cdecl FUN_00a7d330(char*);
-void __stdcall FUN_00c32f60(StrArr*);

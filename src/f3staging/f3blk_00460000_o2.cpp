@@ -11943,7 +11943,6 @@ Grid::Grid(){
 }   // namespace f3m_0047bab0
 
 // @f3 0x0046a820 (community match, verified in this file)
-extern unsigned int DAT_00dbea44[];
 namespace f3m_0046a820 {
 namespace Collector2089 {
 struct __declspec(align(16)) Normal {float x,y,z,w;};
@@ -14119,7 +14118,6 @@ bool __cdecl FUN_00478d70(const char* path, char* out, unsigned int outSize)
 }   // namespace f3m_00478d70
 
 // @f3 0x0046e340 (community match, verified in this file)
-extern const double DAT_00db75d0;
 namespace f3m_0046e340 {
 namespace F3ModifierDispatch {
 struct Point {
@@ -19230,7 +19228,6 @@ struct FUN_00460340_heap { void FUN_0086ba60(void* p); };
 extern FUN_00460340_heap g_heap460340;
 extern int (__stdcall* FUN_00d9b064)(void*);
 int __cdecl FUN_006191f0();
-void __cdecl FUN_006c8220_x();
 struct FUN_00460340_list { void FUN_006c8220(); };
 
 struct FUN_00460340_cls {
@@ -19495,7 +19492,6 @@ struct EffectItem {
     int FUN_004022f0();
 };
 
-struct EffectEntry;
 struct EffectNode {
     EffectItem* item;
     EffectNode* next;
@@ -21129,10 +21125,6 @@ extern ZMgr* DAT_0106ca70;
 
 extern int DAT_01091f0c;
 extern int DAT_01091f6c;
-
-struct ZHolder {
-    void FUN_004609a0();
-};
 
 struct FUN_004613b0 {
     int unk00;
@@ -25909,7 +25901,6 @@ done:
 }
 
 // @f3 0x0046c9b0 (community match, verified in this file)
-extern const double DAT_00dbf098;
 namespace f3m_0046c9b0 {
 namespace DebugColor2245 {
 struct Color {float r,g,b,a;};
@@ -28100,7 +28091,6 @@ struct Node { Entry* item; Node* next;
     Node* GetNext() { return next; }
 };
 inline Form* FormOf(Entry* e) { return e->form; }
-struct Keyed { int unk00, unk04, key; };
 struct Proc {
     virtual void v000();
     virtual void v004();

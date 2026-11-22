@@ -18,14 +18,7 @@ void __thiscall FUN_00a893b0_shell::SetValues(int aiValue0, int aiValue1, int ai
 
 extern void* g_011f5b68;
 
-extern "C" void __cdecl _FUN_00a7b300();
-extern void __cdecl _delete(void*, unsigned int);
 extern int DAT_0109eccc;
-
-struct NiColorExtraData_shell
-{
-    NiColorExtraData_shell* __thiscall Destroy(unsigned int flags);
-};
 
 struct NiStream;
 
@@ -192,45 +185,6 @@ bool S_00a89590::FUN_00a89590(S_00a89590* other)
 
 extern void* g_011f5b68;
 
-struct StreamShell
-{
-    unsigned char unk0[8];
-    unsigned short m_usSize;
-    unsigned short m_usPos;
-    unsigned short m_usHold;
-    unsigned short m_usAdd;
-
-    void FUN_0096ad30(unsigned int uiNewEnd);
-    void FUN_0096ae90(unsigned int uiPos, void* pvData);
-};
-
-void __stdcall FUN_00a7b580(void* pv);
-void* __cdecl FUN_00a7d330(void* pv);
-
-struct NameSink
-{
-    void* ToString(const char* pcText);
-};
-
-class ClaimCls
-{
-    unsigned char unk0[0xc];
-    NameSink m_sink;
-
-  public:
-    void WriteColorToStream(StreamShell& kStream);
-};
-
 #include <stddef.h>
-struct NiExtraData_StandIn
-{
-    virtual ~NiExtraData_StandIn();
-    void FUN_00a7b2e0();
-};
 
-extern "C" void* __cdecl FUN_00aa13e0(unsigned int size);
 extern int DAT_0109eccc;
-extern int DAT_011a9bd0;
-extern int DAT_011a9bd4;
-extern int DAT_011a9bd8;
-extern int DAT_011a9bdc;

@@ -40,19 +40,6 @@ struct FUN_00613790_shell : public CStringArgument
     void* FUN_00613790();
 };
 
-struct S7f
-{
-    char pad[0x2a];
-    unsigned char v;
-    void SetValue(unsigned char a);
-};
-
-struct Interface
-{
-    static void __cdecl PrintDebugMessage(const char*);
-};
-extern int DAT_011908f0;
-extern int DAT_01196d18;
 struct S5a
 {
     S5a* ValidateScriptNameTables();
@@ -83,8 +70,6 @@ struct ScriptVariableData
     void* pForm;
     ScriptVariableData* Reset();
 };
-
-void __cdecl FUN_00ec8d33(int a, int b, int c);
 
 int __cdecl FUN_005b3cd0(unsigned short arg1, void* arg2, void* arg3, void* arg4, int arg5, int arg6);
 
@@ -133,10 +118,6 @@ FUN_005af370_shell::FUN_005af370_shell()
 }
 
 namespace fnv_005afeb0 {
-struct TaskQueueInterface
-{
-    static void __cdecl CopyStringToBuffer(char*, unsigned int, const char*);
-};
 struct TESForm
 {
     static TESForm* __cdecl LookupFormByEditorID(const char*);
@@ -153,23 +134,12 @@ bool __cdecl ResolveScriptCommand(char*);
 namespace fnv_005aedb0 {
 template <class T> class BSSimpleList;
 struct ScriptReferencedObject;
-class ShellH;
 class Script
 {
   public:
     char* GetText();
     static void __cdecl CopyScriptReferences(BSSimpleList<ScriptReferencedObject*>*,
                                              BSSimpleList<ScriptReferencedObject*>*, Script*);
-};
-class ScriptS
-{
-  public:
-    void* GetHeader();
-};
-class XActor
-{
-  public:
-    ShellH* GetExtra() const;
 };
 class TESObjectREFR
 {
@@ -189,7 +159,6 @@ class Str6a70
     Str6a70& operator=(const char*);
 };
 void* __memcpy(void*, const void*, unsigned int);
-extern const char* DAT_0118ca7c[];
 enum COMPILER_NAME
 {
     COMPILER_NAME_0,
@@ -257,7 +226,6 @@ void* __cdecl memset(void*, int, unsigned int);
 char* __cdecl AllocateZeroed(int, int);
 
 extern char $SG3295[];
-extern int _data_011c16bc;
 
 struct FUN_005ae490
 {
@@ -356,72 +324,6 @@ struct ScriptLineBuffer
     unsigned int m_uiTrailingValue;
 };
 
-struct ScriptSource
-{
-    char* pInput;
-    unsigned int m_uiInputOffset;
-};
-
-void __cdecl ScriptCompileError(ScriptSource* apData, const char* apFormat, ...);
-
-struct Node_5afe30
-{
-    void** _ref_006815c0();
-    Node_5afe30* _ref_00726070();
-    bool _ref_008256d0();
-};
-
-struct Cls_5afe30
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    unsigned int count2c;
-    Node_5afe30* FUN_005d43c0();
-    void* GetNodeValue(unsigned int idx);
-};
-
-struct ScriptCommandView
-{
-    const char* longName;
-    const char* shortName;
-    unsigned int opcode;
-    const char* helpText;
-    unsigned int m_uiParameterCount;
-    void* parameters;
-    void* execute;
-    void* parse;
-    void* evaluate;
-    void* reserved;
-};
-struct ScriptWordView
-{
-    char text[0x200];
-    unsigned int referencedObjectIndex;
-    char variableType;
-    unsigned int functionCode;
-};
-extern ScriptCommandView DAT_0118cb50[];
-int __cdecl FUN_00404dc0(const char*, const char*);
-
-struct FUN_005ae730_shell
-{
-    List* FUN_005a8080();
-    void FUN_005ae730();
-};
-struct HairObject
-{
-    void* DestroyAndFree(unsigned int);
-};
-
 struct ScriptRefHolder;
 struct TESForm;
 struct TESObjectREFR;
@@ -429,20 +331,7 @@ struct Target;
 struct ListNode;
 struct Item;
 
-extern char DAT_01183028[];
-extern char DAT_011841cc[];
-
-struct Mgr
-{
-    void* FindFormByEditorID(ScriptRefHolder* p);
-};
-extern Mgr* DAT_011c3f2c;
-
 int __cdecl FUN_0044a670(ScriptRefHolder* p);
-void* __cdecl FUN_00ec43fb(void* obj, int vfdelta, void* src, void* dst, int isRef);
-int __cdecl FUN_00ec7ec0(char* s, ScriptRefHolder* p, int idx);
-int __cdecl FUN_00ec89e9(int c);
-Target* __cdecl FUN_004826d0(TESForm* f);
 
 struct TESForm
 {
@@ -489,36 +378,6 @@ struct ScriptRefHolder
     int m_20c;
     TESForm* m_210;
 };
-
-struct CompilerCtx
-{
-    char unk00[0x4c];
-    Target* m_4c;
-
-    ListNode* FUN_005a8080();
-    bool FUN_005afad0(ScriptRefHolder* p, int a, int b);
-    bool ResolveReference(ScriptRefHolder* p);
-};
-
-struct StrBuf8
-{
-    StrBuf8();
-    ~StrBuf8();
-    char* GetText();
-    int _field00;
-    int _field04;
-};
-
-struct ScriptNameRef
-{
-    char* GetName();
-};
-
-void __cdecl FUN_00407000(char* buf, const char* fmt, void* args);
-void __cdecl FUN_00406f60(StrBuf8* out, const char* fmt, char* name, unsigned int line, char* msg);
-int __cdecl FUN_00464f30(char* a, int b);
-void __cdecl FUN_00703c00(int a);
-void __cdecl FUN_005b5e40(int a);
 
 static const char scriptNameError[] = "You need to start scripts with \"scriptname ScriptName\"";
 
@@ -588,59 +447,18 @@ struct Compile95
     unsigned int line;
     Queue95* FUN_00613790();
 };
-unsigned int __cdecl FUN_00ec6130(const char*);
-int __cdecl ReadScriptLine(Compile95*, Line95*);
 int __cdecl FUN_005af5f0(Compile95*, Word95*, const char*, unsigned int*, int, int);
 void __cdecl ReportScriptError(Compile95*, const char*, ...);
-void __cdecl FUN_00406d30(char*, unsigned int, const char*);
-struct Parser95
-{
-    int ParseLine(Compile95*);
-};
-
-struct LineListNode
-{
-    bool IsEmpty();
-    ScriptLineBuffer*& Item();
-    LineListNode* Next();
-};
-
-void __cdecl ReportCompileError(CStringArgument* apData, const char* apFormat, ...);
-
-struct ScriptBlockScanner
-{
-    int ScanBlockLines(CStringArgument* apData, unsigned int* apStartLine);
-};
 
 // CRT isalnum in the game image
-int __cdecl FUN_00ec86e1(int c);
 int strcpy_s(char* dst, unsigned int size, const char* src);
 void* __memcpy(void* dst, const void* src, unsigned int size);
 
 typedef bool(__cdecl* ScriptParseFunctionB15)(unsigned short usParamCount, void* pParams,
                                               FUN_005af370_shell* pkLineBuffer, CStringArgument* pkData);
 
-struct ScriptFunctionB15
-{
-    const char* pFunctionName;
-    const char* m_pShortName;
-    unsigned int m_eOutputType;
-    const char* m_pDescription;
-    bool m_bRequiresReference;
-    unsigned short usParamCount;
-    void* pParameters;
-    void* m_pfnExecute;
-    ScriptParseFunctionB15 m_pfnCompile;
-};
-
 int __cdecl FUN_005af5f0(CStringArgument* pkData, ScriptVariableData* pkWord, char* pInput, unsigned int* puiOffset,
                          int a5, int a6);
-ScriptFunctionB15* __cdecl FUN_005b1120(unsigned int m_uiReferenceID);
-
-struct FUN_005b1570_Class
-{
-    int CompileScriptLine(CStringArgument* pkData, unsigned int* puiLineNumber, char* pInput, char* pOutput);
-};
 
 struct ScriptLineS
 {
@@ -661,10 +479,6 @@ struct ScriptBufferS
     ScriptLineNode* FUN_00613790();
 };
 void ReportScriptError(ScriptBufferS* pkBuffer, const char* pcError);
-struct FUN_005b1180_shell
-{
-    bool FUN_005b1180(ScriptBufferS* pkBuffer);
-};
 
 namespace fnv_005b12c0 {
 struct ScriptLine
@@ -946,55 +760,12 @@ struct CStringArgument
 
 void ReportScriptError(CStringArgument* apData, const char* apMsg, ...);
 
-struct FUN_005b12c0_owner
-{
-    int CountLinesInBeginBlock(CStringArgument* apData, unsigned int* apLineNumber);
-};
-
 }  // namespace fnv_005b12c0
-
-class Item5AE6C0
-{
-  public:
-    ~Item5AE6C0();
-    int unk00;
-};
-class List5AE6C0
-{
-  public:
-    Item5AE6C0* m_item;
-    List5AE6C0* m_pkNext;
-    bool IsEmpty();
-    Item5AE6C0*& GetItem();
-    void RemoveHead();
-};
-class Owner5AE6C0
-{
-  public:
-    List5AE6C0* GetList();
-    void ClearList();
-};
 
 void __cdecl ReportScriptError(CStringArgument* a, const char* fmt, ...);
 unsigned char __cdecl ResolveScriptCommand(ScriptVariableData* w);
-extern "C" char* strchr(char* s, int c);
 int __cdecl strcpy_s(char* dst, unsigned int n, const char* src);
 extern "C" int isalnum(int c);
-extern "C" int isalpha(int c);
-extern "C" void* _FNV_DynamicCast(void* obj, int a, void* src, void* dst, int b);
-extern int DAT_01186500;
-struct ScriptFuncDef
-{
-    int field00;
-    int field04;
-    BGSCameraPath* pForm;
-};
-struct CompilerShell : public CStringArgument
-{
-    bool FUN_005afad0(ScriptVariableData* w, int a, bool b);
-    bool ResolveReference(ScriptVariableData* w);
-    ScriptFuncDef* GetNodeValue(unsigned int idx);
-};
 
 namespace fnv_005afa50 {
 struct FUN_005afa50_list
@@ -1025,46 +796,15 @@ struct CStringArgument
     FUN_005afa50_list m_kReferencedObjectList;
 };
 
-struct FUN_005afa50_shell : public CStringArgument
-{
-    bool FUN_005afa50();
-};
-
-struct FUN_005afa50_obj
-{
-    unsigned char _pad0[8];
-    unsigned int m_08;
-    unsigned int m_0c;
-    char* GetName();
-};
-
 void __cdecl ReportScriptError(void* owner, const char* fmt, const char* name);
 
 }  // namespace fnv_005afa50
 
 #include <stdlib.h>
-int __cdecl IsIntegerString(const char*);
-void* __cdecl FUN_00401460(void*, const void*, unsigned int);
 unsigned int __cdecl FUN_0044a670(const char*);
 
 namespace MsgCompileData {
-extern "C" char DAT_01186130[];
 }
-struct MessageDescription_5b3c
-{
-    virtual void v0();
-    virtual void v4();
-    virtual void v8();
-    virtual void vc();
-    virtual char* GetText(void*, unsigned int);
-};
-class BGSMessage_5b3c : public TESForm
-{
-  public:
-    unsigned int virtualTable00;
-    int flags04, flags08, flags0c, flags10, flags14, flags18, flags1c, flags20;
-    MessageDescription_5b3c description;
-};
 struct MessageParseWord_5b3c
 {
     char text[0x200];
@@ -1075,17 +815,5 @@ struct MessageParseWord_5b3c
     TESForm* form;
     MessageParseWord_5b3c* Reset();
 };
-struct MessageArrayWord_5b3c : MessageParseWord_5b3c
-{
-    MessageArrayWord_5b3c();
-};
-struct MessageParameter_5b3c
-{
-    char* name;
-};
 int __cdecl FUN_005af5f0(void*, MessageParseWord_5b3c*, char*, unsigned int*, bool, bool);
-struct CompileMessageContext_5b3c
-{
-    bool FUN_005afad0(MessageParseWord_5b3c*, bool, bool);
-};
 void __cdecl ReportScriptError(void*, const char*, ...);

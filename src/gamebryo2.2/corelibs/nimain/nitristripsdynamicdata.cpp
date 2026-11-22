@@ -79,13 +79,6 @@ struct BSFadeNode
     static void* __cdecl operator new(unsigned int);
 };
 
-struct FUN_00a75e20_shell
-{
-    void __thiscall FUN_00a75e20();
-};
-
-extern int DAT_0109fc54;
-
 struct FUN_00a92490_shell
 {
     unsigned char unk00[0x44];

@@ -6,58 +6,6 @@
 // src/havok/animation/ragdoll/instance/hkaragdollinstance.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/animation/ragdoll/instance/hkaragdollinstance.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 #include "havok/hkaRagdollInstance.h"
-extern int DAT_01268700;
-void __stdcall FUN_00ce1760(int, int, int);
-void __stdcall FUN_00ce18d0(int a);
-struct FUN_00ce2430_Transform
-{
-    unsigned char pad[0x30];
-};
-struct FUN_00ce2430_Data
-{
-    unsigned char pad[0x1c];
-    int count;
-};
-struct FUN_00ce2430_Class
-{
-    unsigned char pad[0x2c];
-    FUN_00ce2430_Data* data;
-
-    void FUN_00ce2150(int, float, void*);
-    void ApplyValueToTransforms(float, FUN_00ce2430_Transform*);
-};
-struct MemoryManager
-{
-    virtual void ReportDiagnostic();
-    virtual void unused1();
-    virtual void release(void* object, unsigned short value);
-};
-struct MemoryRouter
-{
-    void* ReportDiagnostic;
-    void* unused1;
-    void* unused2;
-    void* FlushUsageData;
-    MemoryManager* manager;
-};
-struct FUN_00ce29b0_standin
-{
-    void FUN_00ce2600();
-    void* Destroy(unsigned char deletingFlag);
-};
-MemoryRouter* _D1A0E0GetMemoryRouter();
-extern int DAT_010cfd84;
-struct FnvVtObj
-{
-    int m_vptr;
-
-    FnvVtObj* FUN_00ce25f0(unsigned int unusedArg);
-};
-struct ReferenceObject : hkReferencedObject
-{
-    void FUN_00c90510();
-    void FUN_00c905b0();
-};
 struct ArrayAllocator
 {
     virtual void slot00();
@@ -103,39 +51,6 @@ template <class T> struct ObjectArray
         for (int i = 0; i < count; ++i)
             destination[i] = input[i];
     }
-};
-struct RagdollInstance : hkReferencedObject
-{
-    ObjectArray<ReferenceObject*> m_ppRigidBodies;
-    ObjectArray<ReferenceObject*> m_ppConstraints;
-    ObjectArray<int> m_kBoneMap;
-    ReferenceObject* m_pSkeleton;
-    void FUN_00ce22c0(const ObjectArray<ReferenceObject*>& bodies, const ObjectArray<ReferenceObject*>& constraints,
-                      ReferenceObject* skeleton);
-};
-struct FUN_00ce26f0_ObjectC
-{
-    float FUN_00c91020();
-};
-struct FUN_00ce26f0_ObjectB
-{
-    void* unk00;
-    void* unk04;
-    FUN_00ce26f0_ObjectC* unk08;
-};
-struct FUN_00ce26f0_ObjectA
-{
-    FUN_00ce26f0_ObjectB* unk00;
-};
-struct FUN_00ce26f0_Class
-{
-    int unk00;
-    int unk04;
-    FUN_00ce26f0_ObjectA* unk08;
-
-    void FUN_00ce18d0(FUN_00ce2430_Transform* a);
-    void ApplyValueToTransforms(float a, FUN_00ce2430_Transform* b);
-    void FUN_00ce26f0(FUN_00ce2430_Transform* a);
 };
 typedef unsigned int hk_size_tR;
 class hkMemoryAllocatorR
@@ -295,38 +210,7 @@ class hkaRagdollInstanceR : public hkReferencedObjectR
 #include <xmmintrin.h>
 // FUN_00ce0d30 - build orthonormal basis from 3 indexed points, convert to quaternion via FUN_00cb26e0
 
-extern float DAT_01016248;  // 0.5f
-extern float DAT_01011d78;  // 0.0f
-extern float DAT_01017718;  // 3.0f
-
-struct VecF
-{
-    float x, y, z, w;
-};
-
-struct Elem
-{
-    VecF v;
-    float pad[8];
-};
-
-struct ThisX
-{
-    unsigned char pad[0x20];
-    short m_i0;
-    short m_i1;
-    short m_i2;
-};
-
-class FUN_00827200_class
-{
-  public:
-    float m_00, m_04, m_08, m_0c;
-    void FUN_00cb26e0(int);
-};
-
 ArrayRouter* __cdecl FUN_00c85750();
-void __cdecl ResizeAudioStream(void* a, void* b, int c);
 
 struct __declspec(align(16)) Pose32
 {
@@ -711,104 +595,6 @@ class hkQsTransformCE2
     }
 };
 
-struct hkaSkeletonCE2
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    short* m_kParentIndices;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    hkQsTransformCE2* m_kReferencePose;
-};
-
-struct RigidBodyCE2
-{
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0c;
-    unsigned int unk10;
-    unsigned int unk14;
-    unsigned int unk18;
-    unsigned int unk1c;
-    unsigned int unk20;
-    unsigned int unk24;
-    unsigned int unk28;
-    unsigned int unk2c;
-    unsigned int unk30;
-    unsigned int unk34;
-    unsigned int unk38;
-    unsigned int unk3c;
-    unsigned int unk40;
-    unsigned int unk44;
-    unsigned int unk48;
-    unsigned int unk4c;
-    unsigned int unk50;
-    unsigned int unk54;
-    unsigned int unk58;
-    unsigned int unk5c;
-    unsigned int unk60;
-    unsigned int unk64;
-    unsigned int unk68;
-    unsigned int unk6c;
-    unsigned int unk70;
-    unsigned int unk74;
-    unsigned int unk78;
-    unsigned int unk7c;
-    unsigned int unk80;
-    unsigned int unk84;
-    unsigned int unk88;
-    unsigned int unk8c;
-    unsigned int unk90;
-    unsigned int unk94;
-    unsigned int unk98;
-    unsigned int unk9c;
-    unsigned int unka0;
-    unsigned int unka4;
-    unsigned int unka8;
-    unsigned int unkac;
-    unsigned int unkb0;
-    unsigned int unkb4;
-    unsigned int unkb8;
-    unsigned int unkbc;
-    unsigned int unkc0;
-    unsigned int unkc4;
-    unsigned int unkc8;
-    unsigned int unkcc;
-    unsigned int unkd0;
-    unsigned int unkd4;
-    unsigned int unkd8;
-    unsigned int unkdc;
-    unsigned int unke0;
-    unsigned int unke4;
-    unsigned int unke8;
-    unsigned int unkec;
-    hkTransformCE2 m_kMotionTransform;
-};
-
-class FUN_00ce2000Owner
-{
-  public:
-    int unk00;
-    int unk04;
-    RigidBodyCE2** m_ppBodies;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int* m_piBoneToBody;
-    int unk24;
-    int unk28;
-    hkaSkeletonCE2* m_pkSkeleton;
-
-    void FUN_00ce2000(int iBone, hkQsTransformCE2& kOut);
-};
-
 extern __m128 DAT_010c71e0;
 extern __m128 DAT_010c7170;
 extern __m128 DAT_010c44d0;
@@ -976,115 +762,6 @@ class hkQsTransformC21
     }
 };
 
-struct hkaSkeletonC21
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    short* m_kParentIndices;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    hkQsTransformC21* m_kReferencePose;
-};
-
-struct MotionStateC21
-{
-    void EvaluateTransformAtTime(float fTime, hkTransformC21& kTransformOut) const;
-};
-
-struct RigidBodyC21
-{
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0c;
-    unsigned int unk10;
-    unsigned int unk14;
-    unsigned int unk18;
-    unsigned int unk1c;
-    unsigned int unk20;
-    unsigned int unk24;
-    unsigned int unk28;
-    unsigned int unk2c;
-    unsigned int unk30;
-    unsigned int unk34;
-    unsigned int unk38;
-    unsigned int unk3c;
-    unsigned int unk40;
-    unsigned int unk44;
-    unsigned int unk48;
-    unsigned int unk4c;
-    unsigned int unk50;
-    unsigned int unk54;
-    unsigned int unk58;
-    unsigned int unk5c;
-    unsigned int unk60;
-    unsigned int unk64;
-    unsigned int unk68;
-    unsigned int unk6c;
-    unsigned int unk70;
-    unsigned int unk74;
-    unsigned int unk78;
-    unsigned int unk7c;
-    unsigned int unk80;
-    unsigned int unk84;
-    unsigned int unk88;
-    unsigned int unk8c;
-    unsigned int unk90;
-    unsigned int unk94;
-    unsigned int unk98;
-    unsigned int unk9c;
-    unsigned int unka0;
-    unsigned int unka4;
-    unsigned int unka8;
-    unsigned int unkac;
-    unsigned int unkb0;
-    unsigned int unkb4;
-    unsigned int unkb8;
-    unsigned int unkbc;
-    unsigned int unkc0;
-    unsigned int unkc4;
-    unsigned int unkc8;
-    unsigned int unkcc;
-    unsigned int unkd0;
-    unsigned int unkd4;
-    unsigned int unkd8;
-    unsigned int unkdc;
-    MotionStateC21 m_kMotionState;
-    unsigned int unke4;
-    unsigned int unke8;
-    unsigned int unkec;
-    hkTransformC21 m_kMotionTransform;
-};
-
-class FUN_00ce2150Owner
-{
-  public:
-    int unk00;
-    int unk04;
-    RigidBodyC21** m_ppBodies;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int* m_piBoneToBody;
-    int unk24;
-    int unk28;
-    hkaSkeletonC21* m_pkSkeleton;
-
-    void FUN_00ce2150(int iBone, float fTime, hkQsTransformC21& kOut);
-};
-
-extern int DAT_01012068;
-
-struct Vq12
-{
-    __m128 m;
-};
 struct Xf12a0
 {
     __m128 t, r, s;
@@ -1098,33 +775,6 @@ struct Xf12a0
 __declspec(align(16)) struct Q4
 {
     float x, y, z, w;
-};
-
-struct Ce0d30Obj
-{
-    void FUN_00ce0d30(void* arr, void* out);
-};
-struct Ce74Obj
-{
-    void FUN_00c74ac0(void* a, void* b);
-};
-struct Ceb2Obj
-{
-    void FUN_00cb2ca0(void* axis, void* tmp, float* angleOut);
-    void FUN_00cb2450(void* axis, float angle);
-};
-struct Ce12a0Self
-{
-    int unk00, unk04, unk08, unk0c;
-    void* unk10;
-    int unk14, unk18, unk1c;
-    short idx0, idx1, idx2;
-};
-
-class Ce12a0Host
-{
-  public:
-    void FUN_00ce12a0(void* a1, void* a2, Xf12a0* a3, Xf12a0* a4);
 };
 
 struct SimdNumber
@@ -1171,13 +821,6 @@ struct ByteResult
     char value;
     ByteResult(bool b) : value(b)
     {}
-};
-
-struct VectorTest
-{
-    __m128 m_data;
-
-    ByteResult FUN_00ce1500() const;
 };
 
 extern __m128 DAT_010c71e0;
@@ -1308,39 +951,6 @@ class hkQsTransformC18
     }
 };
 
-struct hkaSkeletonC18
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int m_iBoneCount;
-};
-
-class RagdollMapperC18
-{
-  public:
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    hkaSkeletonC18* m_pkSkeleton;
-
-    void getWorldPose(hkQsTransformC18* pkPoseOut);
-    void FUN_00ce18f0(hkQsTransformC18* pkPoseOut, const hkQsTransformC18& kWorldFromModel);
-};
-
-extern "C" void _ReadWriteBarrier();
 // Near miss: two load-register encodings remain under accepted GS- flags and RTM.
 
 struct hkVec4
@@ -1350,20 +960,9 @@ struct hkVec4
 extern const __m128 DAT_01017d10;
 extern __m128 DAT_010c71e0;
 extern __m128 DAT_010c4c00;
-struct hkRot3
-{
-    hkVec4 m_kColumn0, m_kColumn1, m_kColumn2;
-};
-struct hkQuat
-{
-    hkVec4 m_vec;
-    void FUN_00cb26e0(const hkRot3& r);
-    void FUN_00c66320(const hkQuat& a, const hkQuat& b);
-};
 // @fnv 0x00ce0ff0
 
 #include <math.h>
-extern float DAT_0104da48;
 
 class ScalarLane
 {
@@ -1437,21 +1036,6 @@ struct PoseRotation
     }
     void FUN_00cb26e0(const PoseBasis& basis);
     void FUN_00c66320(const PoseRotation& a, const PoseRotation& b);
-};
-
-struct CandidatePose
-{
-    PoseRotation reference;
-    const void* binding;
-    float time;
-};
-struct PoseMatcher
-{
-    hkArray<CandidatePose> candidates;
-    PoseVector axis;
-    short rootBone, otherBone, thirdBone;
-    void FUN_00ce0d30(const hkQsTransform* pose, PoseRotation& out) const;
-    int FUN_00ce11f0(const hkQsTransform* pose, float& error) const;
 };
 
 extern "C"
@@ -1587,106 +1171,6 @@ class hkQsTransformC17
         m_rotation.FUN_00c66320(t1.m_rotation, t2.m_rotation);
         m_vScale.setMul4(t1.m_vScale, t2.m_vScale);
     }
-};
-
-struct hkaSkeletonC17
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    short* m_kParentIndices;
-    int unk10;
-    int unk14;
-    int unk18;
-    int m_iBoneCount;
-    int unk20;
-    hkQsTransformC17* m_kReferencePose;
-};
-
-extern "C" void __cdecl MultiplyBoneScales(const hkaSkeletonC17*, const hkQsTransformC17*, int, hkVector4C17&);
-
-struct RigidBodyC17
-{
-    unsigned int unk00;
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0c;
-    unsigned int unk10;
-    unsigned int unk14;
-    unsigned int unk18;
-    unsigned int unk1c;
-    unsigned int unk20;
-    unsigned int unk24;
-    unsigned int unk28;
-    unsigned int unk2c;
-    unsigned int unk30;
-    unsigned int unk34;
-    unsigned int unk38;
-    unsigned int unk3c;
-    unsigned int unk40;
-    unsigned int unk44;
-    unsigned int unk48;
-    unsigned int unk4c;
-    unsigned int unk50;
-    unsigned int unk54;
-    unsigned int unk58;
-    unsigned int unk5c;
-    unsigned int unk60;
-    unsigned int unk64;
-    unsigned int unk68;
-    unsigned int unk6c;
-    unsigned int unk70;
-    unsigned int unk74;
-    unsigned int unk78;
-    unsigned int unk7c;
-    unsigned int unk80;
-    unsigned int unk84;
-    unsigned int unk88;
-    unsigned int unk8c;
-    unsigned int unk90;
-    unsigned int unk94;
-    unsigned int unk98;
-    unsigned int unk9c;
-    unsigned int unka0;
-    unsigned int unka4;
-    unsigned int unka8;
-    unsigned int unkac;
-    unsigned int unkb0;
-    unsigned int unkb4;
-    unsigned int unkb8;
-    unsigned int unkbc;
-    unsigned int unkc0;
-    unsigned int unkc4;
-    unsigned int unkc8;
-    unsigned int unkcc;
-    unsigned int unkd0;
-    unsigned int unkd4;
-    unsigned int unkd8;
-    unsigned int unkdc;
-    unsigned int unke0;
-    unsigned int unke4;
-    unsigned int unke8;
-    unsigned int unkec;
-    hkTransformC17 m_kMotionTransform;
-};
-
-class Ragdoll4
-{
-  public:
-    int unk00;
-    int unk04;
-    RigidBodyC17** m_ppBodies;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int* m_piBoneToBody;
-    int unk24;
-    int unk28;
-    hkaSkeletonC17* m_pkSkeleton;
-
-    void FUN_00ce1760(hkQsTransformC17* pkPoseOut, const hkQsTransformC17& kRoot, const hkQsTransformC17* pkLocalPose);
 };
 
 #include <xmmintrin.h>

@@ -52,9 +52,6 @@ struct S_00d92690
     unsigned short maxCapacity;
 };
 S_00d92690* AllocateBlock(int cap, int a, int b, int maxCap);
-void FUN_00d925b0(S_00d92690* dst, S_00d92690* src);
-int RoundUpToBucketSize(int size);
-S_00d92690_Mgr* FUN_00c85750();
 
 // @f3 0x00a26b70 (community match, verified in this file)
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long dwTlsIndex);
@@ -103,8 +100,6 @@ void __stdcall FUN_00d92800(bool* p)
 {
     *p = true;
 }
-
-extern unsigned char DAT_010cc934;
 
 struct PacketResult
 {
@@ -188,11 +183,6 @@ struct S_00d92fd0_Atom
     void FUN_00d21fc0(int a, float b, int c, int d, int e, int f);
     void FUN_00d22260(int a, float b, int c, int d, int e, int f);
 };
-struct S_00d92fd0_Alloc : S_00d92690_Alloc
-{
-    virtual void v3();
-    virtual void Free2(void* p, int size);
-};
 struct S_00d92fd0_Arr
 {
     S_00d92fd0_Atom** data;
@@ -206,21 +196,8 @@ struct S_00d92fd0_Arr
         cap = 0x80000010;
     }
 };
-struct S_00d92fd0_Holder
-{
-    int unk00, unk04, unk08, unk0c;
-    S_00d92fd0_Atom* head;
-};
 void __cdecl ResizeAudioStream(S_00d92690_Alloc* a, S_00d92fd0_Arr* arr, int elem);
 
-struct S_00d92fd0_This
-{
-    int unk00, unk04, unk08, unk0c, unk10, unk14, unk18, unk1c, unk20;
-    S_00d92fd0_Holder* holder;
-    void DispatchAtomHandlers(int p1, float p2, int p3, int p4, int p5, int p6);
-};
-
-extern "C" void _ReadWriteBarrier(void);
 void __cdecl ResizeAudioStream(void*, void*, int);
 
 struct FUN_00d93140_cls
@@ -261,53 +238,6 @@ int __stdcall FUN_00d927f0(int arg)
 {
     return 0;
 }
-
-struct FUN_00d92820_cls
-{
-    int unk00;
-    char* FUN_00d92820();
-};
-
-struct hkNodeX
-{
-    unsigned short type;
-    unsigned short unk02;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    hkNodeX* next;
-
-    void ScaleInverseInertia(int a1, int a2, int a3, int a4, int a5);
-    void SetGlobalVectors(int a1, int a2, int a3, int a4, int a5);
-    void FUN_00d21f50(int a1, int a2, int a3, int a4, int a5);
-    void FUN_00d22160(int a1, int a2, int a3, int a4, int a5);
-};
-
-struct hkHolderX
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    hkNodeX* unk10;
-};
-
-struct hkClsX
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    hkHolderX* unk24;
-
-    void DispatchNodeCallbacks(int a1, int a2, int a3, int a4, int a5);
-};
 
 struct hkVector4f
 {
@@ -506,13 +436,7 @@ union __declspec(intrin_type) __declspec(align(16)) __m128
 extern "C" __m128 _mm_shuffle_ps(__m128 a, __m128 b, unsigned int imm);
 extern "C" void _mm_store_ss(float* p, __m128 a);
 
-extern float DAT_01017870;   // 0.3f
-extern float DAT_0104da48;   // HK_REAL_MAX
-extern float DAT_010cc3b0;   // distance for disabled points
 extern double DAT_010cc8d0;  // 1/128
-extern double DAT_010cc8d8;  // -0.2
-extern double DAT_0109cc78;  // 1e-10
-extern double DAT_010d3dc0;  // -1.3
 extern float DAT_010c7948[];
 
 struct S00d92900_Config
@@ -908,39 +832,7 @@ struct S00d92900_Accum
         return &m_com.x;
     }
 };
-struct S00d92900_QueryIn
-{
-    float m_fQueryInputValue;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    S00d92900_Accum* m_pBodyA;
-    S00d92900_Accum* m_pBodyB;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5c;
-    S00d92900_Instance* m_pConstraintChainInstance;
-};
 struct S00d92900_Mgr;
-struct S00d92900_Data
-{
-    S00d92900_Mgr* FUN_00d92820();
-};
 
 struct S00d92900_CollisionEvent
 {
@@ -979,20 +871,6 @@ struct S00d92900_Event : S00d92900_CollisionEvent
         m_pVelocityAccumulatorA[1] = accB;
     }
 };
-struct S00d92900_CollideParams
-{
-    float m_fSlipAngle;
-    float m_fElasticity;
-    float m_usFlags;
-    float m_fFirstAdditionalValue;
-    float m_fSecondAdditionalValue;
-    float m_fThirdAdditionalValue;
-    S00d92900_Bool m_bCollisionOption;
-};
-struct S00d92900_Output
-{
-    float m_fContactImpulse;
-};
 struct __declspec(align(16)) S00d92900_BreachInfo
 {
     unsigned short m_type;
@@ -1009,12 +887,3 @@ struct __declspec(align(16)) S00d92900_BreachInfo
         m_kProperties = properties;
     }
 };
-
-extern float FUN_00df2510(const S00d92900_Body* a, const S00d92900_Body* b, const float* comA, const float* comB,
-                          const S00d92900_ContactPoint* cp);
-extern void FUN_00d00ca0(S00d92900_World* world, S00d92900_Event& event);
-extern void FUN_00cfff00(S00d92900_Body* entity, S00d92900_Event& event);
-extern void FUN_00d9ee50(S00d92900_Data* data, const S00d92900_ContactPoint& cp, S00d92900_CollideParams& params,
-                         S00d92900_Body* rbA, S00d92900_Body* rbB, S00d92900_Accum* accA, S00d92900_Accum* accB,
-                         S00d92900_Output& output);
-extern void FUN_00d01700(S00d92900_World* world, const S00d92900_BreachInfo* info, int num);

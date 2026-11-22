@@ -56,7 +56,6 @@ struct SpawnedBuffer
 };
 
 char* FUN_00c85750();
-void FUN_00cb0df0(SpawnedBuffer* buf);
 
 // @f3 0x009448d0 (community match, verified in this file)
 extern unsigned long DAT_010f3170;
@@ -171,14 +170,5 @@ struct AudioHolder
 };
 
 AudioHolder* __cdecl FUN_00c85750();
-
-struct GrowBuffer
-{
-    char* m_pBegin;
-    char* m_pCurrent;
-    char* m_pRecordEnd;
-    char* m_pReadData;
-    char m_bOwned;
-};
 
 }  // namespace fnv_00cb0df0

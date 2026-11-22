@@ -4,16 +4,6 @@
 
 #include "havok/hkpFirstPersonGun.h"
 
-struct FUN_00e463b0_cls
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    unsigned int m_0C;
-
-    unsigned int FUN_00e463b0();
-};
-
 struct FUN_00e463c0_cls
 {
     virtual void v00();
@@ -34,11 +24,6 @@ void FUN_00e463c0_cls::FUN_00e463c0(int a)
     this->Tail(a);
 }
 
-struct FUN_00cb0b80
-{
-    char* m_kStringBuffer;
-    FUN_00cb0b80(const char* s) throw();
-};
 template <typename T> struct hkArrayE466
 {
     T* m_data;
@@ -59,29 +44,11 @@ class hkRefObjE466
         m_sReferenceCount = 1;
     }
 };
-class FUN_00e46660 : public hkRefObjE466
-{
-  public:
-    volatile unsigned char m_type;
-    char unk09, unk0A, unk0B;
-    FUN_00cb0b80 m_name;
-    unsigned char m_uiKeyboardKey;
-    char unk11, unk12, unk13;
-    hkArrayE466<void*> m_kListeners;
-    FUN_00e46660();
-    virtual ~FUN_00e46660();
-};
 
 namespace fnv_00e466a0 {
 struct hkFinishFlagE466
 {
     int m_bFinishing;
-};
-
-struct FUN_00cb0a70
-{
-    char* m_kStringBuffer;
-    FUN_00cb0a70(hkFinishFlagE466 flag) throw();
 };
 
 template <class T> struct hkArrayE466
@@ -101,24 +68,6 @@ class hkRefObjE466
     short m_sReferenceCount;
     hkRefObjE466(hkFinishFlagE466 flag)
     {}
-};
-
-class FUN_00e466a0 : public hkRefObjE466
-{
-  public:
-    unsigned char m_type;
-    char unk09;
-    char unk0A;
-    char unk0B;
-    FUN_00cb0a70 m_name;
-    unsigned char m_uiKeyboardKey;
-    char unk11;
-    char unk12;
-    char unk13;
-    hkArrayE466<void*> m_kListeners;
-
-    FUN_00e466a0(hkFinishFlagE466 flag);
-    virtual ~FUN_00e466a0();
 };
 
 }  // namespace fnv_00e466a0
@@ -202,12 +151,6 @@ class FUN_00cb0c00_class
     }
 };
 
-struct FUN_00d1df70
-{
-    void FUN_00c90510() throw();
-    void removeReference() throw();
-};
-
 class hkReferencedObjectE466
 {
   public:
@@ -217,23 +160,7 @@ class hkReferencedObjectE466
     hkInt16 m_sReferenceCount;
 };
 
-class FUN_00e466e0_class : public hkReferencedObjectE466
-{
-  public:
-    int m_08;
-    FUN_00cb0c00_class m_name;
-    int m_10;
-    hkArrayE466<FUN_00d1df70*> m_children;
-
-    virtual ~FUN_00e466e0_class() throw();
-};
-
 }  // namespace fnv_00e466e0
-
-struct FUN_00e466e0_Obj
-{
-    void FUN_00e466e0();
-};
 
 class FUN_00e46750_Obj;
 
@@ -315,9 +242,7 @@ struct hkVector4q
     }
 };
 
-extern hkVector4q DAT_01267e30;
 extern float DAT_0104da48;
-extern float DAT_0104da4c;
 
 struct hkTransformq
 {
@@ -397,15 +322,6 @@ struct hkpCollidableq
     }
 };
 
-struct hkpLinearCastInputq
-{
-    hkVector4q m_vTo;
-    float m_fMaxExtraPenetration;
-    float m_fMaxExtraPenetrationAgainstFixed;
-    int unk18;
-    int unk1C;
-};
-
 struct hkContactPointq
 {
     hkVector4q m_vContactPosition;
@@ -461,20 +377,6 @@ struct hkpClosestCdPointCollectorq
     }
 
     static int DAT_010c476c;
-};
-
-struct hkpWorldq
-{
-    void FUN_00c92430(const hkpCollidableq* collA, const hkpLinearCastInputq& input,
-                      hkpClosestCdPointCollectorq& castCollector, void* startCollector);
-};
-
-struct LinearCastResult
-{
-    hkVector4q m_vContactPosition;
-    hkVector4q m_vHitNormal;
-    unsigned int m_uiCollisionShapeKey;
-    void* m_pRigidBody;
 };
 
 enum hkResult

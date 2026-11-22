@@ -17,19 +17,6 @@ struct CharGenMenu
 
 }  // namespace fnv_00753350
 
-struct Proxy_753380
-{
-    void* DestroyIfFlagged(unsigned int);
-};
-struct Proxy_7533b0
-{
-    void FUN_007533b0();
-};
-void __cdecl _Deallocate(void*);
-
-extern "C" double _gModifierZero;
-extern int DAT_011d9220;
-extern int DAT_011d92a0;
 struct ActorValue
 {
     enum Index
@@ -68,31 +55,10 @@ void __cdecl FUN_00754530(Tile* tile, ActorValue::Index index)
 }
 
 
-struct FUN_00753770_shell
-{
-    char pad[0x2c];
-    int m[8];
-    bool HasAllSlotsSet();
-};
-
 namespace fnv_007542d0 {
 struct Tile
 {
     bool ContainsTrait(int);
-};
-struct Interface
-{
-    static void __cdecl PlayUISound(int);
-};
-struct FUN_007542d0_shell
-{
-    virtual void f0();
-    virtual void f1();
-    virtual void f2();
-    virtual void f3(int, int);
-    char _pad[0x40];
-    Tile* tile;
-    bool __thiscall HandleButton(int aiButton, float afValue);
 };
 }  // namespace fnv_007542d0
 
@@ -121,27 +87,9 @@ FUN_007533b0::~FUN_007533b0()
 
 extern int DAT_011d920c;
 extern int DAT_011d9210;
-extern int DAT_011d9214;
 extern int DAT_011d9224;
-struct TileSet
-{
-    void Set(int, float, bool);
-};
-struct FUN_007545a0_shell
-{
-    void UpdateValueString(Tile*);
-};
 
 namespace fnv_007543c0 {
-struct Tile_Set_Helper
-{
-    void Set(int, int);
-    void Set(int, float, bool);
-};
-struct TESClass_TagSkill_Helper
-{
-    bool IsTagSkill(ActorValue::Index);
-};
 struct CharGenMenu_7543c0
 {
     char pad[0x48];
@@ -154,140 +102,9 @@ extern CharGenMenu_7543c0* DAT_011d920c;
 extern int DAT_011d9224;
 }  // namespace fnv_007543c0
 
-struct StartMenu
-{
-    char const* __thiscall GetMenuTitle();
-};
-
-struct GlobalObject_0040c150 : StartMenu
-{
-};
-
-extern GlobalObject_0040c150 g_011d390c;
-extern GlobalObject_0040c150 g_011d4138;
-extern GlobalObject_0040c150 g_011d4de0;
-extern GlobalObject_0040c150 g_011d3888;
-extern char const g_011d3d6c_arg1[];
-
-int __cdecl _sprintf_s(char*, unsigned int, char const*, ...);
-int __cdecl strcat_s(char*, unsigned int, char const*);
-
-struct Tile_00753d20
-{
-    void Set(int, int);
-    void Set(int, char const*, bool);
-};
-
-struct FUN_00753d20_shell
-{
-    char pad_00[0x28];
-    int m_iSelectedAttributeIndex;
-    Tile_00753d20* m_pTiles[7];
-    int m_iPointsUsed;
-    int m_iPointsRemaining;
-
-    void UpdatePointsDisplay();
-};
-
-int __cdecl GetTileValueID(char const*, int);
-
-struct FUN_00754950_shell
-{
-    bool __thiscall FUN_00754950(Tile* apSelectItem);
-};
-
-struct Proxy_7314c0
-{
-    void FUN_007314c0(void*, int, int);
-};
-struct Proxy_726070
-{
-    void* FUN_00726070(int, int);
-};
-struct Proxy_700320
-{
-    void FUN_00700320();
-};
-struct Proxy_a1d910
-{
-    void FUN_00a1d910();
-};
-struct Proxy_884350
-{
-    void* FUN_00884350();
-};
-struct Proxy_884350b
-{
-    void* FUN_00884350(int, int);
-};
-struct Proxy_5f6e80
-{
-    void FUN_005f6e80();
-};
 extern int DAT_011dea3c;
-int __cdecl FUN_005d9660();
-void __cdecl FUN_00754460();
-
-struct TileX
-{
-    float GetFloat(int);
-    void Set(int, char const*, bool);
-    void Set(int, int);
-    TileX* FUN_0045cd60();
-};
-struct LBList
-{
-    virtual void Select(TileX*);
-    void* FindItemData(TileX*);
-};
-char const* __cdecl FUN_0066e9f0(ActorValue::Index);
-char const* __cdecl GetActorValueDescription(ActorValue::Index);
-void __cdecl FUN_00706f30(int);
-
-struct MenuX
-{
-    virtual void V0();
-    virtual void V1();
-    virtual void V2();
-    virtual void V3();
-    virtual void HandleClick(int, TileX*);
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    TileX* unk34;
-    TileX* unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    float unk50;
-    int unk54;
-    LBList list;
-    void HandleTileClick(int, TileX*);
-};
 
 namespace fnv_007539a0 {
-struct UITile
-{
-    void FUN_00a012d0(int, float, bool);
-    void FUN_00700320(int, int);
-};
-struct List
-{
-    UITile* items;
-    void FUN_0075a0d0(UITile*, const char*);
-    UITile* AddListEntry(int, const char*, int, int);
-};
 struct Animation
 {
     void FUN_00718630();
@@ -667,295 +484,9 @@ struct Player
 };
 extern Player* DAT_011dea3c;
 extern int DAT_011d9210, DAT_011d9224;
-extern const float DAT_01071c84;
-extern const char DAT_01071c88[];
-struct Context
-{
-    virtual void Slot0();
-    virtual void Slot1();
-    virtual void Slot2();
-    virtual void Slot3();
-    virtual void Slot4();
-    virtual void Slot5();
-    virtual void Slot6();
-    virtual void Slot7();
-    virtual void Slot8();
-    virtual void Slot9();
-    virtual void Slot10();
-    virtual void Slot11();
-    virtual void Slot12();
-    virtual int GetMenuValue(int);
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0c;
-    unsigned int unk10;
-    unsigned int unk14;
-    unsigned int unk18;
-    unsigned int unk1c;
-    unsigned int unk20;
-    unsigned int unk24;
-    unsigned int unk28;
-    unsigned int unk2c;
-    UITile* tile30;
-    unsigned int unk34, unk38, unk3c, unk40, unk44;
-    int current;
-    int maximum;
-    unsigned int unk50;
-    unsigned char enabled;
-    List list;
-    void UpdateValueString(UITile*);
-    void InitMenu();
-};
 }  // namespace fnv_007539a0
 
 extern int DAT_011dea3c;
-
-struct FUN_00754460_sub
-{
-    virtual int v000(int);
-};
-
-struct FUN_00754460_obj
-{
-    virtual void p000();
-    virtual void p001();
-    virtual void p002();
-    virtual void p003();
-    virtual void p004();
-    virtual void p005();
-    virtual void p006();
-    virtual void p007();
-    virtual void p008();
-    virtual void p009();
-    virtual void p010();
-    virtual void p011();
-    virtual void p012();
-    virtual void p013();
-    virtual void p014();
-    virtual void p015();
-    virtual void p016();
-    virtual void p017();
-    virtual void p018();
-    virtual void p019();
-    virtual void p020();
-    virtual void p021();
-    virtual void p022();
-    virtual void p023();
-    virtual void p024();
-    virtual void p025();
-    virtual void p026();
-    virtual void p027();
-    virtual void p028();
-    virtual void p029();
-    virtual void p030();
-    virtual void p031();
-    virtual void p032();
-    virtual void p033();
-    virtual void p034();
-    virtual void p035();
-    virtual void p036();
-    virtual void p037();
-    virtual void p038();
-    virtual void p039();
-    virtual void p040();
-    virtual void p041();
-    virtual void p042();
-    virtual void p043();
-    virtual void p044();
-    virtual void p045();
-    virtual void p046();
-    virtual void p047();
-    virtual void p048();
-    virtual void p049();
-    virtual void p050();
-    virtual void p051();
-    virtual void p052();
-    virtual void p053();
-    virtual void p054();
-    virtual void p055();
-    virtual void p056();
-    virtual void p057();
-    virtual void p058();
-    virtual void p059();
-    virtual void p060();
-    virtual void p061();
-    virtual void p062();
-    virtual void p063();
-    virtual void p064();
-    virtual void p065();
-    virtual void p066();
-    virtual void p067();
-    virtual void p068();
-    virtual void p069();
-    virtual void p070();
-    virtual void p071();
-    virtual void p072();
-    virtual void p073();
-    virtual void p074();
-    virtual void p075();
-    virtual void p076();
-    virtual void p077();
-    virtual void p078();
-    virtual void p079();
-    virtual void p080();
-    virtual void p081();
-    virtual void p082();
-    virtual void p083();
-    virtual void p084();
-    virtual void p085();
-    virtual void p086();
-    virtual void p087();
-    virtual void p088();
-    virtual void p089();
-    virtual void p090();
-    virtual void p091();
-    virtual void p092();
-    virtual void p093();
-    virtual void p094();
-    virtual void p095();
-    virtual void p096();
-    virtual void p097();
-    virtual void p098();
-    virtual void p099();
-    virtual void p100();
-    virtual void p101();
-    virtual void p102();
-    virtual void p103();
-    virtual void p104();
-    virtual void p105();
-    virtual void p106();
-    virtual void p107();
-    virtual void p108();
-    virtual void p109();
-    virtual void p110();
-    virtual void p111();
-    virtual void p112();
-    virtual void p113();
-    virtual void p114();
-    virtual void p115();
-    virtual void p116();
-    virtual void p117();
-    virtual void p118();
-    virtual void p119();
-    virtual void p120();
-    virtual void p121();
-    virtual void p122();
-    virtual void p123();
-    virtual void p124();
-    virtual void p125();
-    virtual void p126();
-    virtual void p127();
-    virtual void p128();
-    virtual void p129();
-    virtual void p130();
-    virtual void p131();
-    virtual void p132();
-    virtual void p133();
-    virtual void p134();
-    virtual void p135();
-    virtual void p136();
-    virtual void p137();
-    virtual void p138();
-    virtual void p139();
-    virtual void p140();
-    virtual void p141();
-    virtual void p142();
-    virtual void p143();
-    virtual void p144();
-    virtual void p145();
-    virtual void p146();
-    virtual void p147();
-    virtual void p148();
-    virtual void p149();
-    virtual void p150();
-    virtual void p151();
-    virtual void p152();
-    virtual void p153();
-    virtual void p154();
-    virtual void p155();
-    virtual void p156();
-    virtual void p157();
-    virtual void p158();
-    virtual void p159();
-    virtual void p160();
-    virtual void p161();
-    virtual void p162();
-    virtual void p163();
-    virtual void p164();
-    virtual void p165();
-    virtual void p166();
-    virtual void p167();
-    virtual void p168();
-    virtual void p169();
-    virtual void p170();
-    virtual void p171();
-    virtual void p172();
-    virtual void p173();
-    virtual void p174();
-    virtual void p175();
-    virtual void p176();
-    virtual void p177();
-    virtual void p178();
-    virtual void p179();
-    virtual void p180();
-    virtual void p181();
-    virtual void p182();
-    virtual void p183();
-    virtual void p184();
-    virtual void p185();
-    virtual void p186();
-    virtual void p187();
-    virtual void p188();
-    virtual void p189();
-    virtual void p190();
-    virtual void p191();
-    virtual void p192();
-    virtual void p193();
-    virtual void p194();
-    virtual void p195();
-    virtual void p196();
-    virtual void p197();
-    virtual void p198();
-    virtual void p199();
-    virtual void p200();
-    virtual void p201();
-    virtual void p202();
-    virtual void p203();
-    virtual void p204();
-    virtual void p205();
-    virtual void p206();
-    virtual void p207();
-    virtual void p208();
-    virtual void p209();
-    virtual void p210();
-    virtual void p211();
-    virtual void p212();
-    virtual void p213();
-    virtual void p214();
-    virtual void p215();
-    virtual void p216();
-    virtual void p217();
-    virtual void p218();
-    virtual void p219();
-    virtual void p220();
-    virtual void p221();
-    virtual void p222();
-    virtual void p223();
-    virtual void p224();
-    virtual void p225();
-    virtual void p226();
-    virtual void p227();
-    virtual void p228();
-    virtual void v229(int, float);
-    char pad_04[0xa0];
-    FUN_00754460_sub m_a4;
-    void FUN_0093a850(int, float);
-};
-
-struct FUN_00754460_self
-{
-    float __thiscall FUN_00a011b0(int);
-};
 
 extern const char str_01071c5c[], str_01071c08[], str_01071bfc[];
 struct Menu753;
@@ -973,10 +504,6 @@ struct Manager753
     Tile753* Root();
 };
 Manager753* __cdecl FUN_004b7210();
-Menu753* __cdecl Lookup753(int);
-float __cdecl Scale753();
-void __cdecl FNV_Warning(const char*);
-int __cdecl FUN_00a01860(const char*);
 struct Setting753
 {
     const char* Text();
@@ -1035,11 +562,7 @@ struct Menu753
     void Update();
     void Show(int);
 };
-extern Menu753* menu753;
 extern int DAT_011d9218, DAT_011d921c;
-int __cdecl FUN_00753760();
-const char* __cdecl Name753(int);
-const char* __cdecl Desc753(int);
 
 namespace fnv_00753b10 {
 struct SkillTile : Tile
@@ -1061,66 +584,6 @@ struct SkillList
     virtual void Sort(void(__cdecl*)());
     void Initialize(Tile*, const char*);
     SkillTile* AddListEntry(ActorValue::Index, const char*, int, int);
-};
-struct ActorValues
-{
-    virtual void v0();
-    virtual void v1();
-    virtual void v2();
-    virtual void v3();
-    virtual void v4();
-    virtual void v5();
-    virtual void v6();
-    virtual int GetValue(ActorValue::Index);
-};
-struct SkillPlayer : PC7d
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5c;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6c;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7c;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8c;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9c;
-    int unka0;
-    ActorValues values;
-};
-struct SkillClass : TESClass
-{
-    bool IsTagSkill(ActorValue::Index);
 };
 struct SkillInterfacePart
 {
@@ -1442,16 +905,7 @@ struct SkillInterface
 SkillInterface* __cdecl FUN_004b7210();
 unsigned int __cdecl FUN_0066ecf0(int);
 ActorValue::Index __cdecl FUN_0066ec10(int, unsigned char);
-bool __cdecl FUN_00406d70(ActorValue::Index, unsigned int);
 const char* __cdecl FUN_0066e950(ActorValue::Index);
-void __cdecl CompareActorValueNames();
-struct SkillSetting
-{
-    float* Float();
-};
-extern SkillSetting DAT_011ccf5c;
-extern const char DAT_01071ca0[];
-extern const float g_011c72f0_arg1;
 struct SkillMenu
 {
     virtual void v0();
@@ -1496,18 +950,6 @@ struct SkillMenu
 };
 }  // namespace fnv_00753b10
 
-class Menu754
-{
-  public:
-    Menu754();
-    virtual ~Menu754();
-
-    int unk04, unk08, unk0C, unk10, unk14, unk18, unk1C, unk20;
-    int unk24, unk28, unk2C, unk30, unk34, unk38, unk3C, unk40;
-    int unk44, unk48, unk4C, unk50, unk54, unk58, unk5C, unk60;
-    int unk64, unk68, unk6C;
-};
-
 class Handle754
 {
   public:
@@ -1521,68 +963,10 @@ class Handle754
     int unk08;
 };
 
-class FUN_00754b40 : public Menu754
-{
-  public:
-    FUN_00754b40();
-    virtual ~FUN_00754b40();
-
-    int m_iIndex;
-    bool m_bFlag;
-    int unk78;
-    Handle754 m_kHandle;
-};
-
-struct Proxy_724430
-{
-    bool FUN_00724430();
-};
-
-struct Proxy_7242f0
-{
-    bool ContainsKey(void* value);
-};
-
-struct Proxy_a01230
-{
-    bool IsTraitNonZero(void* value);
-};
-
-struct Proxy_700320_call
-{
-    void FUN_00700320(void* key, int value);
-};
-
-struct Proxy_a00940
-{
-    static void* __cdecl FUN_00a00940(char const* name, int index);
-};
-
-struct Proxy_754a00
-{
-    bool SetTraitSelected(void* parameter, int action);
-};
-
-extern void* volatile DAT_011d92ac;
-extern volatile int DAT_011d92b0;
-extern char const DAT_01071b64[];
-
 struct ScopeGuard
 {
     ~ScopeGuard()
     {}
-};
-
-int __cdecl xMin(int, int);
-int __cdecl MaxI(int, int);
-int __cdecl GetTrait(char const*, int);
-struct UiTile
-{
-    float Read(int);
-};
-struct TileSet2
-{
-    void Set(int, char const*, bool);
 };
 
 struct SkTile
@@ -1591,20 +975,6 @@ struct SkTile
     void FUN_00a012d0(int, float, bool);
     SkTile* FUN_0045cd60();
 };
-struct SkPerkList
-{
-    bool FUN_005a5f40(void*);
-};
-struct SkMgr
-{
-    SkPerkList* FUN_00884350();
-};
-struct SkSetting
-{
-    float* FUN_00403e20();
-};
-extern SkMgr* g_skMgr_11dea3c;
-extern SkSetting g_skSetting_11ccf5c;
 struct SkItemList
 {
     void* FindItemData(SkTile*);
@@ -1616,7 +986,6 @@ struct SkCounter
 {
     void FUN_00700320();
 };
-void __cdecl UpdateTagSkillTile(SkTile*);
 
 struct SkillMenu
 {
@@ -1651,61 +1020,4 @@ struct SkillMenu
     void UpdateValueString(SkTile*);
     void UpdatePointsDisplay();
     void HandleSkillMenuCommand(int aiID, SkTile* apTile);
-};
-
-struct TileItem
-{
-    TileItem* FUN_00a03eb0(int);
-    bool IsTraitNonZero(int);
-    void FUN_00a0b110(int);
-};
-
-struct SubList
-{
-    virtual void v0();
-    virtual TileItem* Selected();
-};
-
-struct CharGenInputMenu
-{
-    virtual void v0();
-    virtual void v1();
-    virtual void v2();
-    virtual void HandleClick(int, TileItem*);
-    virtual void v4();
-    virtual void v5();
-    virtual void v6();
-    virtual void v7();
-    virtual void v8();
-    virtual void v9();
-    virtual void v10();
-    virtual void v11();
-    virtual void v12();
-    virtual void v13();
-    virtual bool v14(int, float);
-
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    SubList list;
-
-    bool FUN_00754150(int a1, float amount);
 };

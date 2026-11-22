@@ -46,15 +46,6 @@ struct hkMemoryRouterContext
     NineIntegerRecord* router;
 };
 
-struct hkpStorageExtendedMeshShape_MeshSubpartStorage
-{
-    void* m_unknown;
-    unsigned short m_iElementCount;
-
-    void FUN_00d4af60();
-    hkpStorageExtendedMeshShape_MeshSubpartStorage* DestroyStorage(unsigned int);
-};
-
 hkMemoryRouterContext* __cdecl _D1A0E0GetMemoryRouter();
 
 }  // namespace fnv_00d4b120
@@ -433,13 +424,6 @@ FUN_00d4a180::FUN_00d4a180(hkFinishLoadedObjectFlagD4A1 flag) throw() : FUN_00d5
 }
 
 
-struct FUN_00d4aec0_Class
-{
-    unsigned short m_usMemSizeAndFlags;
-    void FUN_00d49cb0();
-    virtual FUN_00d4aec0_Class* FUN_00d4aec0(unsigned char flags);
-};
-
 namespace fnv_00d4aef0 {
 class hkMemoryAllocatorD4AE
 {
@@ -521,28 +505,6 @@ class FUN_00cb0c00_class
     }
 };
 
-struct hkVector4D4AE
-{
-    hkReal x, y, z, w;
-};
-
-struct hkpMeshMaterialD4AE
-{
-    hkUint32 m_uiFilterInfo;
-};
-
-struct hkpStorageExtendedMeshShapeMaterialD4AE : public hkpMeshMaterialD4AE
-{
-    hkHalf m_fElasticity;
-    hkHalf m_fSlipAngle;
-    hkUlong m_ulUserData;
-};
-
-struct hkpNamedMeshMaterialD4AE : public hkpMeshMaterialD4AE
-{
-    FUN_00cb0c00_class m_name;
-};
-
 class hkReferencedObjectD4AE
 {
   public:
@@ -552,22 +514,6 @@ class hkReferencedObjectD4AE
     {}
     hkUint16 m_usMemSizeAndFlags;
     hkInt16 m_sReferenceCount;
-};
-
-class FUN_00d4aef0 : public hkReferencedObjectD4AE
-{
-  public:
-    hkArrayD4AE<hkVector4D4AE> m_kVertices;
-    hkArrayD4AE<hkUint8> m_kIndices8;
-    hkArrayD4AE<hkUint16> m_kIndices16;
-    hkArrayD4AE<hkUint32> m_kIndices32;
-    hkArrayD4AE<hkUint8> m_kMaterialIndices8;
-    hkArrayD4AE<hkpStorageExtendedMeshShapeMaterialD4AE> m_kMaterials;
-    hkArrayD4AE<hkpNamedMeshMaterialD4AE> m_kNamedMaterials;
-    hkArrayD4AE<hkUint16> m_kMaterialIndices16;
-
-    FUN_00d4aef0() throw();
-    virtual ~FUN_00d4aef0() throw();
 };
 
 }  // namespace fnv_00d4aef0
@@ -965,36 +911,6 @@ struct __declspec(align(16)) hkVector4D4AB
     {
         m_vComponents = v.m_vComponents;
     }
-};
-
-struct hkpExtendedMeshShapeSubpartD4AB
-{
-    hkInt8 m_type;
-    hkInt8 m_iMaterialIndexType;
-    hkInt16 m_iIndexStriding;
-    const void* m_pVertexBase;
-    hkUint16 m_iVertexStriding;
-    hkUint16 m_iNumTriangles;
-    const void* m_pIndexBase;
-    hkUlong m_ulUserData;
-};
-
-struct hkpExtendedMeshShapeTrianglesSubpartD4AB : public hkpExtendedMeshShapeSubpartD4AB
-{
-    int m_iVertexStride;
-    const hkReal* m_pMaterialIndexBase;
-    int m_iStridedVertexCount;
-    const void* m_pMaterialDataBase;
-    hkVector4D4AB m_kVertexTransform;
-    int m_iTriangleIndexStride;
-    int m_iMaterialStriding;
-    hkInt8 m_ucIndexStridingType;
-    hkInt8 m_bFlipAlternateTriangles;
-    int m_iTriangleOffset;
-    int m_userData50;
-
-    hkpExtendedMeshShapeTrianglesSubpartD4AB& FUN_00d4abf0(
-        const hkpExtendedMeshShapeTrianglesSubpartD4AB& kOther) throw();
 };
 
 namespace fnv_00d4ad60 {
@@ -1602,7 +1518,6 @@ extern "C"
     __m128 _mm_sub_ps(__m128 a, __m128 b);
     __m128 _mm_and_ps(__m128 a, __m128 b);
     __m128 _mm_cmple_ps(__m128 a, __m128 b);
-    __m128 _mm_set_ps1(float a);
     int _mm_movemask_ps(__m128 a);
 }
 
@@ -1615,11 +1530,6 @@ typedef float hkReal;
 typedef signed char hkInt8;
 typedef short hkInt16;
 typedef unsigned short hkUint16;
-
-extern const __m128 g_hkQuadIdentityQuat;
-extern const __m128 g_hkQuadZero;
-extern const __m128 g_hkQuadAbsMask;
-extern const float g_hkEqualsEps;
 
 struct hkMemoryAllocator
 {
