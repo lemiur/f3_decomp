@@ -790,6 +790,7 @@ void hkpMultiSphereAgent_staticLinearCast(const Body_x& a,const Body_x& b,const 
 #include <intrin.h>
 #include <math.h>
 
+#include "havok/hkMonitorStream.h"
 namespace NativeBox891 {
 extern unsigned long DAT_0116913c;
 extern const char DAT_00e7f1b8[],DAT_00e32798[];
@@ -862,13 +863,7 @@ struct S009c5c30_Cb {
 
 // pdb: hkpSphereBoxAgent::staticGetPenetrations | hkpSphereBoxAgent.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_seq), high
 void hkpSphereBoxAgent_staticGetPenetrations(S009c5c30_A* a, S009c5c30_B* b, unsigned int unk10, S009c5c30_Cb* cb) {
-    S009c5c30_Tls* tls = (S009c5c30_Tls*)DAT_00d9b080(DAT_0116913c);
-    S009c5c30_Ev* ev = tls->cur;
-    if (ev < tls->end) {
-        ev->id = DAT_00e7f1b8;
-        ev->setTime();
-        tls->cur = ev + 1;
-    }
+    HK_TIMER_BEGIN("SphereBox", HK_NULL);
 
     S009c5c30_Y* y = a->y;
     S009c5c30_Vec* pos = &a->q->pos;
@@ -907,13 +902,7 @@ void hkpSphereBoxAgent_staticGetPenetrations(S009c5c30_A* a, S009c5c30_B* b, uns
         cb->Slot1(a, b);
     }
 
-    tls = (S009c5c30_Tls*)DAT_00d9b080(DAT_0116913c);
-    ev = tls->cur;
-    if (ev < tls->end) {
-        ev->id = DAT_00e32798;
-        ev->setTime();
-        tls->cur = ev + 1;
-    }
+    HK_TIMER_END();
 }
 
 }
