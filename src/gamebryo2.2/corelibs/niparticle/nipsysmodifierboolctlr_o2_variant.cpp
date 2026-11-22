@@ -198,7 +198,7 @@ class C32CB0Controller
     virtual void vfn0F0();
     virtual void SetManagerControlled(int fValue);
 
-    bool FUN_00a36250(float fTime);
+    bool NiTimeController_DontDoUpdate(float fTime);
     bool GetManagerControlled() const
     {
         return ((unsigned char)(m_usFlags >> 5) & 1) != 0;
@@ -228,7 +228,7 @@ void C32CB0Controller::FUN_00c32cb0(const float& fTime)
     {
         m_fControllerTime = DAT_01096324;
     }
-    else if (FUN_00a36250(fTime) && (!m_pkInterpolator || !m_pkInterpolator->IsChannelPosed()))
+    else if (NiTimeController_DontDoUpdate(fTime) && (!m_pkInterpolator || !m_pkInterpolator->IsChannelPosed()))
     {
         return;
     }

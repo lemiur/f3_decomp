@@ -149,7 +149,8 @@ struct FUN_00dbc640_class
 };
 
 // @fnv 0x00dbb130
-int __stdcall FUN_00dbb130(int a, int b)
+// pdb: hkpConstraintChainInstanceAction::clone | hkpConstraintChainInstanceAction.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+int __stdcall hkpConstraintChainInstanceAction_clone(int a, int b)
 {
     return 0;
 }
@@ -823,7 +824,7 @@ struct StreamDBC5C0
 
 extern "C" int __cdecl Vsnprintf(char* pcBuffer, unsigned int uSize, const char* pcFormat, ...);
 extern const char str_010a5824[];
-extern "C" int __cdecl FUN_00cb10d0(const char* s);
+extern "C" int __cdecl hkString_strLen(const char* s);
 struct WriterC12
 {
     virtual void write(const char* s, int len) throw();
@@ -833,7 +834,7 @@ static __declspec(noinline) void FUN_00cc0080(WriterC12* pkWriter, const char* p
     if (pcString == 0)
         pkWriter->write("(null)", 6);
     else
-        pkWriter->write(pcString, FUN_00cb10d0(pcString));
+        pkWriter->write(pcString, hkString_strLen(pcString));
 }
 // @fnv 0x00cc0120
 hkOstreamDBB7& hkOstreamDBB7::FUN_00cc0120(const void* pvPointer) throw()

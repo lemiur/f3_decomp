@@ -1840,7 +1840,7 @@ struct CollectionProcessBody
 
 struct CollectionProcessAgent : hkpShapeCollectionAgent
 {
-    void FUN_00d437a0(ShapeArg* arg, unsigned int a0, unsigned int a1, unsigned int a2);
+    void hkpShapeCollectionAgent_processCollision(ShapeArg* arg, unsigned int a0, unsigned int a1, unsigned int a2);
 };
 
 // Records a TtShapeCollection profiler tick, calls v14 on each shape, dispatches results via v18, then records an Et profiler tick.
@@ -1854,7 +1854,8 @@ struct CollectionShapeF3
     virtual void v10(void);
     virtual CollectionProcessHandler* getContainer(void);
 };
-void CollectionProcessAgent::FUN_00d437a0(ShapeArg* arg, unsigned int a0, unsigned int a1, unsigned int a2)
+// pdb: hkpShapeCollectionAgent::processCollision | hkpShapeCollectionAgent.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void CollectionProcessAgent::hkpShapeCollectionAgent_processCollision(ShapeArg* arg, unsigned int a0, unsigned int a1, unsigned int a2)
 {
     ProfBuf* pBuf = (ProfBuf*)TlsGetValue(DAT_0126835c);
     if (pBuf->m_pCur < pBuf->m_pRecordEnd)

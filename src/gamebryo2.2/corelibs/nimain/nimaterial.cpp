@@ -5,7 +5,8 @@
 extern "C" char const* const g_011f6048_arg1;
 
 // @fnv 0x00a8f860
-char const* const* __cdecl FUN_00a8f860()
+// pdb: NiSwitchNode::GetRTTI | NiSwitchNode.obj | fnv360_0721_beta, udata + bridge(vtable|objrun) + skyrim(objrun_open), high
+char const* const* __cdecl NiSwitchNode_GetRTTI()
 {
     return &g_011f6048_arg1;
 }
@@ -266,7 +267,8 @@ extern "C" CRITICAL_SECTION DAT_011f600c;
 
 // Locks DAT_011f600c, nulls every element of DAT_011ac040, resets its size to zero, and unlocks.
 // @fnv 0x00a9bb60
-void __cdecl FUN_00a9bb60()
+// pdb: NiMetricsLayer::_SDMShutdown | NiMetricsLayer.obj | fnv360_0822_retail, call_seq + bridge(call_dedup|call_dedup) + skyrim(call_gap_sim), high
+void __cdecl NiMetricsLayer__SDMShutdown()
 {
     EnterCriticalSection(&DAT_011f600c);
     unsigned int uiIndex = 0;

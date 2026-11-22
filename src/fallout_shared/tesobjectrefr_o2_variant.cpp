@@ -59,7 +59,7 @@ void FUN_00c876a0();
 
 struct CallRet
 {
-    void FUN_00c946e0(void* a, int b, int c);
+    void hkpWorld_updateCollisionFilterOnEntity(void* a, int b, int c);
 };
 struct Holder00c9d5d0
 {
@@ -111,7 +111,7 @@ void Holder00c9d5d0::FUN_00c9d5d0()
 {
     CallRet* p = GetRet();
     if (p)
-        p->FUN_00c946e0(unk8, 0, 1);
+        p->hkpWorld_updateCollisionFilterOnEntity(unk8, 0, 1);
 }
 
 extern int DAT_01268238;
@@ -209,7 +209,8 @@ struct OutS
     float f4;
 };
 // @fnv 0x00c9fb70
-void __fastcall FUN_00c9fb70(MyObj* _this, int, OutS* _out)
+// pdb: bhkConvexShape::CopyCinfo | bhkConvexShape.obj | fnv360_0822_retail, call_seq + bridge(hash|call_seq) + skyrim(objrun), high
+void __fastcall bhkConvexShape_CopyCinfo(MyObj* _this, int, OutS* _out)
 {
     _this->FUN_00c84e20(_out);
     if (_this && _this->p8)
@@ -280,7 +281,7 @@ struct bhkSphereShape
     virtual void f43();
     virtual void f44();
     virtual RetV* Target(char* p);
-    void __thiscall FUN_00c84df0(void* a, ArgB* b);
+    void __thiscall bhkShape_CopyMembers(void* a, ArgB* b);
     void __thiscall FUN_00ca0740(void* a, ArgB* b);
 };
 
@@ -688,15 +689,15 @@ class FUN_00c8bed0_base_cls
     int unk04;
 };
 
-class FUN_00c8bed0_cls : public FUN_00c8bed0_base_cls
+class bhkTransformShape : public FUN_00c8bed0_base_cls // src: F3_EXE vtable 0x00dfcfd4 (old: FUN_00c8bed0_cls)
 {
   public:
-    virtual ~FUN_00c8bed0_cls();
+    virtual ~bhkTransformShape();
     void unk08();
 };
 
 // @fnv 0x00c8bed0
-FUN_00c8bed0_cls::~FUN_00c8bed0_cls()
+bhkTransformShape::~bhkTransformShape()
 {
     this->unk08();
     DAT_012681b0--;
@@ -1883,7 +1884,7 @@ void SphereScalingMethod::FUN_00c9fea0(void* first, ArgB* second)
         result->m_28 *= scale;
         result->m_2c *= scale;
     }
-    FUN_00c84df0(first, second);
+    bhkShape_CopyMembers(first, second);
 }
 
 
@@ -2336,16 +2337,16 @@ class CC2350Base
 
 extern int g_iCC2350Count;
 
-class FUN_00cc2350 : public CC2350Base
+class bhkCachingShapePhantom : public CC2350Base // src: F3_EXE vtable 0x00e3314c (old: FUN_00cc2350)
 {
   public:
     void Release();
 
-    virtual ~FUN_00cc2350();
+    virtual ~bhkCachingShapePhantom();
 };
 
 // @fnv 0x00cc2350
-FUN_00cc2350::~FUN_00cc2350()
+bhkCachingShapePhantom::~bhkCachingShapePhantom()
 {
     Release();
     --g_iCC2350Count;
@@ -2391,15 +2392,15 @@ FUN_00cce900::~FUN_00cce900()
 
 extern int DAT_012686c0;
 
-class FUN_00ccf740_cls : public FUN_00c9fb00
+class bhkConvexTransformShape : public FUN_00c9fb00 // src: F3_EXE vtable 0x00e7b8b4 (old: FUN_00ccf740_cls)
 {
   public:
-    virtual ~FUN_00ccf740_cls();
+    virtual ~bhkConvexTransformShape();
     void FUN_00c876a0();
 };
 
 // @fnv 0x00ccf740
-FUN_00ccf740_cls::~FUN_00ccf740_cls()
+bhkConvexTransformShape::~bhkConvexTransformShape()
 {
     FUN_00c876a0();
     --DAT_012686c0;
@@ -2528,7 +2529,7 @@ struct FUN_009317a0_Obj
 struct FUN_00931740_Obj
 {
     int unk00;
-    void FUN_00931740(int* value, int* result, S_00c85c10_flag flag);
+    void hkpWorldObject_addProperty(int* value, int* result, S_00c85c10_flag flag);
 };
 
 void S_00c85c10::FUN_00c85c10(int* result, int* value)
@@ -2553,7 +2554,7 @@ void S_00c85c10::FUN_00c85c10(int* result, int* value)
         S_00c85c10_flag flag;
         if (this != 0 && unk08 != 0)
         {
-            reinterpret_cast<FUN_00931740_Obj*>(unk08)->FUN_00931740(value, result, flag);
+            reinterpret_cast<FUN_00931740_Obj*>(unk08)->hkpWorldObject_addProperty(value, result, flag);
         }
     }
 }
@@ -5991,14 +5992,14 @@ struct S_00ca09e0_Obj
     int unk0;
     int unk4;
     S_00ca09e0_Inner* unk8;
-    void __thiscall FUN_00ca09e0(S_00ca09e0_Target* a);
+    void __thiscall bhkSphereShape_BuildDisplayGeometry(S_00ca09e0_Target* a);
 };
 // @f3 0x0090ebc0 (community match, verified in this file)
 extern float DAT_00f7a690;
 extern double DAT_00db88e8;
 extern char* DAT_00e207a8;
 char* __cdecl FUN_008242a0(const char*);
-S_00ca09e0_Shape* __cdecl FUN_00ab1a80(float, int, int, int);
+S_00ca09e0_Shape* __cdecl BSTestObjects_CreateSphere(float, int, int, int);
 
 namespace f3_sphere_display {
 struct ShapeName {
@@ -6029,7 +6030,8 @@ struct SphereSource {
 };
 }
 
-void S_00ca09e0_Obj::FUN_00ca09e0(S_00ca09e0_Target* target)
+// pdb: bhkSphereShape::BuildDisplayGeometry | bhkSphereShape.obj | fnv360_0822_retail, ustr_rel + bridge(ustr_rel|vtable), high
+void S_00ca09e0_Obj::bhkSphereShape_BuildDisplayGeometry(S_00ca09e0_Target* target)
 {
     using namespace f3_sphere_display;
     float radius;
@@ -6038,7 +6040,7 @@ void S_00ca09e0_Obj::FUN_00ca09e0(S_00ca09e0_Target* target)
     else
         radius = unk8->unk10;
     const float scaledRadius = static_cast<float>(radius * DAT_00db88e8);
-    S_00ca09e0_Shape* geometry = FUN_00ab1a80(scaledRadius, 10, 10, 0);
+    S_00ca09e0_Shape* geometry = BSTestObjects_CreateSphere(scaledRadius, 10, 10, 0);
     if (!geometry)
         return;
 

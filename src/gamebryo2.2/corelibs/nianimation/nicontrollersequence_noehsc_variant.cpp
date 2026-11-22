@@ -109,11 +109,11 @@ struct FUN_00a33bf0_s : NiObject
 };
 struct FUN_00a2e420_shell
 {
-    unsigned char FUN_00a2e420(float);
+    unsigned char NiControllerManager_StopTransSourceSequence(float);
 };
 struct FUN_00a30540_shell
 {
-    void FUN_00a30540();
+    void NiControllerSequence_DetachInterpolators();
 };
 extern float DAT_01015f5c;
 extern double DAT_010241b0;
@@ -123,7 +123,7 @@ struct FUN_00a35030_shell : NiControllerSequence
 };
 struct FUN_00a30900_shell
 {
-    void FUN_00a30900(char m_ucRegionPriority);
+    void NiControllerSequence_AttachInterpolators(char m_ucRegionPriority);
 };
 struct A51BF0Base
 {
@@ -332,7 +332,7 @@ struct SequenceA30970 : NiObject
 struct FUN_00a30c80_shell
 {
     unsigned __int64 __thiscall IsNotInChain(void* arg);
-    bool __thiscall FUN_00a30c80(void* arg);
+    bool __thiscall NiControllerSequence_CanSyncTo(void* arg);
 };
 bool __stdcall MatchesTextKeys(void* arg);
 struct FUN_00a30cc0_target
@@ -416,7 +416,7 @@ struct ObjectView
 {
     int vtable;
     int refs;
-    bool FUN_00a5d2f0(StreamView&);
+    bool NiObject_RegisterStreamables(StreamView&);
 };
 struct ItemView
 {
@@ -462,7 +462,7 @@ struct SequenceView : ObjectView
     int unk68;
     RefView** notes;
     unsigned short noteCount;
-    bool FUN_00a30ea0(StreamView&);
+    bool NiControllerSequence_RegisterStreamables(StreamView&);
 };
 __declspec(dllimport) long __stdcall InterlockedIncrement(long* p);
 __declspec(dllimport) long __stdcall InterlockedDecrement(long* p);
@@ -1197,7 +1197,7 @@ struct AnimationSequence : S_00a30880_Base
     unsigned short noteCount;
     float GetMorphedTime(AnimationSequence*, float);
     float FUN_00a30970(float, bool);
-    void FUN_00a32290(float, float, float);
+    void NiControllerSequence_SetInterpsWeightAndTime(float, float, float);
     void FUN_00a34ba0(float time, bool update);
     __forceinline bool SetState(int value)
     {
@@ -1393,7 +1393,7 @@ extern "C" void* __cdecl FUN_00aa13e0(unsigned int size);
 struct FUN_00a344f0_cls
 {
     void __thiscall FUN_00a33570(void* obj, unsigned int param);
-    void* FUN_00a344f0(unsigned int param);
+    void* NiControllerSequence_CreateClone(unsigned int param);
 };
 extern const float DAT_010141cc;
 struct FUN_00a350d0_seq : SeqA34f20
@@ -1956,9 +1956,9 @@ struct Stream71
     unsigned int unk244;
     unsigned int unk248;
     Binary71* input;
-    void FUN_00a64ea0(String71&);
-    void FUN_00a64df0(String71&);
-    void FUN_00a645b0();
+    void NiStream_LoadCStringAsFixedString(String71&);
+    void NiStream_LoadFixedString(String71&);
+    void NiStream_ReadLinkID();
     Ref71* FUN_00a64620();
 };
 struct Sequence71
@@ -1991,9 +1991,9 @@ void Sequence71::FUN_00a33e40(Stream71& stream)
     ReadGroup(stream);
     if (stream.version < 0x0a010068)
     {
-        stream.FUN_00a64ea0(name);
-        stream.FUN_00a64ea0(root);
-        stream.FUN_00a645b0();
+        stream.NiStream_LoadCStringAsFixedString(name);
+        stream.NiStream_LoadCStringAsFixedString(root);
+        stream.NiStream_ReadLinkID();
         stream.input->Read(&count, 4);
         grow = 12;
         interpolators = new Interp71[count];
@@ -2001,17 +2001,17 @@ void Sequence71::FUN_00a33e40(Stream71& stream)
         for (unsigned int index = 0; index < count; ++index)
         {
             String71 objectName;
-            stream.FUN_00a64ea0(objectName);
+            stream.NiStream_LoadCStringAsFixedString(objectName);
             tags[index].object = objectName;
-            stream.FUN_00a645b0();
+            stream.NiStream_ReadLinkID();
             objectName.Release();
         }
         return;
     }
     if (stream.version < 0x14010001)
-        stream.FUN_00a64ea0(name);
+        stream.NiStream_LoadCStringAsFixedString(name);
     else
-        stream.FUN_00a64df0(name);
+        stream.NiStream_LoadFixedString(name);
     stream.input->Read(&count, 4);
     stream.input->Read(&grow, 4);
     interpolators = new Interp71[count];
@@ -2025,7 +2025,7 @@ void Sequence71::FUN_00a33e40(Stream71& stream)
         }
     }
     stream.input->Read(&weight, 4);
-    stream.FUN_00a645b0();
+    stream.NiStream_ReadLinkID();
     {
         int cycleValue;
         stream.input->Read(&cycleValue, 4);
@@ -2044,23 +2044,23 @@ void Sequence71::FUN_00a33e40(Stream71& stream)
         bool backward;
         stream.input->Read(&backward, 1);
     }
-    stream.FUN_00a645b0();
+    stream.NiStream_ReadLinkID();
     if (stream.version < 0x14010001)
-        stream.FUN_00a64ea0(root);
+        stream.NiStream_LoadCStringAsFixedString(root);
     else
-        stream.FUN_00a64df0(root);
+        stream.NiStream_LoadFixedString(root);
     if (stream.version >= 0x0a010071 && stream.version < 0x14010001)
         oldNotes = stream.FUN_00a64620();
     else
         oldNotes = 0;
     if (stream.unk04 > 21 && stream.unk04 < 29)
-        stream.FUN_00a645b0();
+        stream.NiStream_ReadLinkID();
     if (stream.unk04 > 28)
     {
         stream.input->Read(&noteCount, 2);
         if (noteCount > 0)
             notes = new Smart71[noteCount];
         for (unsigned short index = 0; index < noteCount; ++index)
-            stream.FUN_00a645b0();
+            stream.NiStream_ReadLinkID();
     }
 }

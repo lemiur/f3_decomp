@@ -633,7 +633,7 @@ struct OBBShape
 struct OBBContext
 {
     int unk00;
-    int FUN_00ebc2a0(OBBContext* pkOther, float* pfTime, NiPoint3* pkPoint);
+    int NiOBBox_FindIntersection(OBBContext* pkOther, float* pfTime, NiPoint3* pkPoint);
     void ProjectOntoAxes(NiPoint3* pkPoint, NiPoint3* pkNormal);
 };
 
@@ -714,7 +714,7 @@ int OBBLeaf::FUN_00eb9b00(OBBLeaf* pkOther, int iA, int iB, int iC, int iD, bool
     }
     else
     {
-        iCollide = m_kContext.FUN_00ebc2a0(&pkOther->m_kContext, &kRecord.m_fTime, &kRecord.m_kPoint);
+        iCollide = m_kContext.NiOBBox_FindIntersection(&pkOther->m_kContext, &kRecord.m_fTime, &kRecord.m_kPoint);
     }
     if (iCollide)
     {

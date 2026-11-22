@@ -1285,7 +1285,8 @@ struct NiNode_b68770 : NiAVObject_b68770
 
 // Recursively applies shader flags 15, 16 and 36 and a float value to geometry objects whose shader type is 8-12, optionally setting iValueE4.
 // @f3 0x00aebb10 (community match, verified in this file)
-void __cdecl FUN_00b68770(NiAVObject_b68770* obj, bool abFlag15, float afFloatValue, bool abFlag16, float afValueE4,
+// pdb: BSShaderPPLightingProperty::SetRefractionRecurse | BSShaderPPLightingProperty.obj | fnv360_0822_retail, call_seq + bridge(call_gap|caller), high
+void __cdecl BSShaderPPLightingProperty_SetRefractionRecurse(NiAVObject_b68770* obj, bool abFlag15, float afFloatValue, bool abFlag16, float afValueE4,
                           bool abFlag36)
 {
     if (!obj)
@@ -1313,7 +1314,7 @@ void __cdecl FUN_00b68770(NiAVObject_b68770* obj, bool abFlag15, float afFloatVa
             {
                 NiAVObject_b68770* child = node->m_children[i];
                 if (child)
-                    FUN_00b68770(child, abFlag15, afFloatValue, abFlag16, afValueE4, abFlag36);
+                    BSShaderPPLightingProperty_SetRefractionRecurse(child, abFlag15, afFloatValue, abFlag16, afValueE4, abFlag36);
             }
         }
     }
@@ -2639,7 +2640,7 @@ extern char DAT_011f4aac;
 extern int DAT_011f91c0;
 extern char DAT_010ae238;
 extern char DAT_010ae1f0;
-extern void* __cdecl FUN_00b54b60(CallerArg*);
+extern void* __cdecl BSShaderManager_CreateTangentSpaceSimple(CallerArg*);
 extern void __cdecl FUN_005b5e40(void*, void*);
 struct RefHandle
 {
@@ -2806,7 +2807,7 @@ bool SelfObj::FUN_00b67a40(CallerArg* arg)
         bool bSameKind = geom->property ? geom->property->IsSameKind(&DAT_011f4aac) : false;
         if (!bSameKind && !(geom->typeFlags & 0xf000))
         {
-            activeHandle.FUN_0066b0d0(FUN_00b54b60(arg));
+            activeHandle.FUN_0066b0d0(BSShaderManager_CreateTangentSpaceSimple(arg));
         }
     }
     if ((primaryFlags & 0x100000) > 0)
@@ -3527,7 +3528,7 @@ struct PassShader
     void FUN_00b2b830(int);
     void FUN_00b2b980(int);
     void FUN_00b2b740(int);
-    void FUN_00b618e0(Geom*, bool, bool, Context*);
+    void BSShaderPPLightingProperty_AddDepthMapPass_2x(Geom*, bool, bool, Context*);
     void FUN_00b5c280(Geom*, bool, bool);
     void FUN_00b60430(Geom*, bool, bool);
     void FUN_00b61950(Geom*, bool);
@@ -3563,7 +3564,7 @@ __forceinline Passes* PassShader::Get(Geom* geom, unsigned int pass, unsigned sh
             if (prop == 0)
                 prop = properties->alpha;
             bool alphaTest = prop && (bool)(int)(prop->shifted() & 1);
-            FUN_00b618e0(geom, geom->skin != 0, alphaTest, context);
+            BSShaderPPLightingProperty_AddDepthMapPass_2x(geom, geom->skin != 0, alphaTest, context);
         }
         return special7;
     }
@@ -3711,7 +3712,7 @@ __forceinline Passes* PassShader::Get(Geom* geom, unsigned int pass, unsigned sh
                     skin = geom->skin;
                     FUN_00b2b7c0(1);
                     special7->count = 0;
-                    FUN_00b618e0(geom, skin != 0, alphaTest, context);
+                    BSShaderPPLightingProperty_AddDepthMapPass_2x(geom, skin != 0, alphaTest, context);
                 }
             }
             else

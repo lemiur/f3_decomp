@@ -578,7 +578,8 @@ struct GlobalObjectO2_00a7b610
 GlobalObjectO2_00a7b610 g_011f9e80;
 
 // @fnv 0x00b5e590
-GlobalObjectO2_00a7b610* FUN_00b5e590()
+// pdb: NiBSPNode::GetRTTI | NiBSPNode.obj | fnv360_0822_retail, udata + bridge(vtable|udata) + skyrim(objrun_open), high
+GlobalObjectO2_00a7b610* NiBSPNode_GetRTTI()
 {
     return &g_011f9e80;
 }
@@ -4875,7 +4876,8 @@ bool __cdecl CheckBoundAndChildren(Obj5* obj, S5_C* a2, Obj5** b, bool c);
 
 // With flag set, filters child candidates by the object's bound, sorts matches, and calls CheckBoundAndChildren; otherwise dispatches based on Predicate().
 // @fnv 0x00b5dac0
-bool __cdecl FUN_00b5dac0(Obj5* obj, S5_C* apList, bool a3, bool abTestBound)
+// pdb: ShadowSceneNode::UpdateQueuedObjectLightingStart | ShadowSceneNode.obj | fnv360_0721_retail, udata + bridge(call_dedup|call_dedup), high
+bool __cdecl ShadowSceneNode_UpdateQueuedObjectLightingStart(Obj5* obj, S5_C* apList, bool a3, bool abTestBound)
 {
     if (obj == 0)
         return true;
@@ -6755,12 +6757,13 @@ struct SSN_cand
     void* m_spD8;
     void* m_spDC;
 
-    void FUN_00b5cde0(MyShadowSceneLight* a2);
+    void ShadowSceneNode_SortShadowLights(MyShadowSceneLight* a2);
 };
 
 // Reorders shadow light list nodes by comparing m_fD8 and m_fDC against thresholds and DAT_011ad834, moving nodes before m_pD0 or m_pD4.
 // @fnv 0x00b5cde0
-void SSN_cand::FUN_00b5cde0(MyShadowSceneLight* apLight)
+// pdb: ShadowSceneNode::SortShadowLights | ShadowSceneNode.obj | fnv360_0721_beta, udata, high
+void SSN_cand::ShadowSceneNode_SortShadowLights(MyShadowSceneLight* apLight)
 {
     MyShadowList* pShadowList = &shadowLights;
 
@@ -8146,7 +8149,7 @@ class Self
 
     void FUN_00b5d270(Item* item);
 
-    unsigned int FUN_00a5dbe0(void* p);
+    unsigned int NiNode_OnVisible(void* p);
 
     unsigned int FUN_00b5e870(ParamObj* arg);
 };
@@ -8221,7 +8224,7 @@ __declspec(noinline) void Self::RemoveLightFromNode(RefPtr_b9fcc0& value, void*&
         m_listB4.FUN_00b9efa0(position);
 }
 
-// Processes entries in m_listB4, updates globals from arg and m_134, and returns a value derived from m_134 or FUN_00a5dbe0.
+// Processes entries in m_listB4, updates globals from arg and m_134, and returns a value derived from m_134 or NiNode_OnVisible.
 // @fnv 0x00b5e870
 unsigned int Self::FUN_00b5e870(ParamObj* arg)
 
@@ -8280,7 +8283,7 @@ unsigned int Self::FUN_00b5e870(ParamObj* arg)
     if (DAT_011f91c0 == 0)
     {
 
-        return FUN_00a5dbe0(arg);
+        return NiNode_OnVisible(arg);
     }
 
     if (1 == DAT_011f91a7)
@@ -8705,7 +8708,7 @@ struct CullObject
     unsigned int unk28;
     unsigned int unk2c;
     unsigned int flags;
-    void FUN_00a59e00(CullProcess*);
+    void NiAVObject_Cull(CullProcess*);
 };
 struct CullEntry;
 struct CullLightNode
@@ -9108,7 +9111,7 @@ struct SceneCull
     bool special;
     CullManager* manager;
     void FUN_00b5e870(CullProcess*);
-    void FUN_00a5dbe0(CullProcess*);
+    void NiNode_OnVisible(CullProcess*);
     void FUN_00b5ba80(void*, CullEntry*);
     void FUN_00b5f9b0(CullProcess* process);
 };
@@ -9178,12 +9181,12 @@ void SceneCull::FUN_00b5f9b0(CullProcess* process)
             {
                 CullObject* object = children[i];
                 if (object)
-                    object->FUN_00a59e00(process);
+                    object->NiAVObject_Cull(process);
             }
         }
         else
         {
-            FUN_00a5dbe0(process);
+            NiNode_OnVisible(process);
             CullGroupList* list = &manager->groups30;
             if (process->mode == 1 || process->mode == 3)
                 list = &manager->groups20;
@@ -9216,7 +9219,7 @@ void SceneCull::FUN_00b5f9b0(CullProcess* process)
             if (object && !pSavedFlags[i])
             {
                 object->flags &= ~1;
-                object->FUN_00a59e00(process);
+                object->NiAVObject_Cull(process);
             }
         }
         {
@@ -9228,7 +9231,7 @@ void SceneCull::FUN_00b5f9b0(CullProcess* process)
     }
     else
     {
-        FUN_00a5dbe0(process);
+        NiNode_OnVisible(process);
     }
 }
 }  // namespace fnv_00b5f9b0

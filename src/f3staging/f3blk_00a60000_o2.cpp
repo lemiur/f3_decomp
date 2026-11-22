@@ -186,7 +186,7 @@ void Cls::FUN_00a6b0c0()
 
 // @f3 0x00a741b0 (community match, verified in this file)
 namespace f3m_00a741b0 {
-// FUN_00a741b0 - EntityShape::AddActor(Actor*)
+// hkpDisableEntityCollisionFilter_addEntityToFilter - EntityShape::AddActor(Actor*)
 // this+0x30 : listener object (address only)
 // this+0x34 : hkArray<Actor*>  { data, size, capacityAndFlags }
 
@@ -248,10 +248,11 @@ struct EntityShape
     int m_kListener;              // +0x30
     ActorEntryArray m_kActorEntries;  // +0x34
 
-    SmallBool FUN_00a741b0(ActorRef* apActor);
+    SmallBool hkpDisableEntityCollisionFilter_addEntityToFilter(ActorRef* apActor);
 };
 
-SmallBool EntityShape::FUN_00a741b0(ActorRef* apActor)
+// pdb: hkpDisableEntityCollisionFilter::addEntityToFilter | hkpDisableEntityCollisionFilter.obj | fnv360_0822_retail, caller_sim + skyrim(objrun_prop), high
+SmallBool EntityShape::hkpDisableEntityCollisionFilter_addEntityToFilter(ActorRef* apActor)
 {
     if (!apActor)
         return false;
@@ -719,7 +720,7 @@ struct GeometryVector1560
         z = newZ;
         w = 0.0f;
     }
-    void FUN_008d28e0(const GeometryTransform1560* transform, const GeometryVector1560* source);
+    void hkVector4_setTransformedPos(const GeometryTransform1560* transform, const GeometryVector1560* source);
 };
 
 struct GeometryTransform1560
@@ -807,7 +808,7 @@ void BoxShape1560::FUN_00a67f80()
     }
     for (int i = 0; i < geometry08->vertices00.size04; ++i)
     {
-        geometry08->vertices00.At(i).FUN_008d28e0(&transform10, &geometry08->vertices00.At(i));
+        geometry08->vertices00.At(i).hkVector4_setTransformedPos(&transform10, &geometry08->vertices00.At(i));
     }
     {
         GeometryTriangle1560& triangle = geometry08->triangles0c.ExpandOne();
@@ -3553,7 +3554,7 @@ struct Sub71730 {
     int unk04;
     int unk08;
     int unk0c;
-    void __thiscall FUN_009a1a00(int value);
+    void __thiscall hkpBridgeConstraintAtom_init(int value);
 };
 struct Obj71730 {
     void* vtbl;
@@ -3569,8 +3570,8 @@ Obj71730* __thiscall Obj71730::FUN_00a71730(int unused)
     Sub71730* s = &sub;
     word06 = 1;
     vtbl = (void*)&DAT_00e87b68;
-    s->FUN_009a1a00(s->unk08);
-    s->FUN_009a1a00((int)this);
+    s->hkpBridgeConstraintAtom_init(s->unk08);
+    s->hkpBridgeConstraintAtom_init((int)this);
     return this;
 }
 }   // namespace f3m_00a71730
@@ -4250,7 +4251,7 @@ struct SubRecord_a70c30 {
     int u04;
     void* p08;
 
-    void FUN_009a1a00(void* pValue);
+    void hkpBridgeConstraintAtom_init(void* pValue);
 };
 
 struct FUN_00a70c30 {
@@ -4272,14 +4273,14 @@ FUN_00a70c30::FUN_00a70c30(int completionFlag)
 
     m_usReadyFlag = 1;
     m_ppVftable = &FUN_00e87b30;
-    pSub->FUN_009a1a00(pSub->p08);
+    pSub->hkpBridgeConstraintAtom_init(pSub->p08);
 
     int iZero = 0;
     m_i18 = iZero;
     m_i1C = iZero;
     m_ui20 = 0x80000000;
 
-    pSub->FUN_009a1a00(this);
+    pSub->hkpBridgeConstraintAtom_init(this);
 }
 }   // namespace f3m_00a70c30
 
@@ -4620,9 +4621,10 @@ __forceinline Entry& Array::ExpandOne() {
 struct Owner {
     int unk00,unk04,unk08,unk0c,unk10,unk14;
     Array entries;
-    void FUN_00a715a0(const Vector4& a,const Vector4& b,const Vector4& c,RefObject* x,RefObject* y,RefObject* z);
+    void hkpPoweredChainData_addConstraintInfoInBodySpace(const Vector4& a,const Vector4& b,const Vector4& c,RefObject* x,RefObject* y,RefObject* z);
 };
-void Owner::FUN_00a715a0(const Vector4& a,const Vector4& b,const Vector4& c,RefObject* x,RefObject* y,RefObject* z) {
+// pdb: hkpPoweredChainData::addConstraintInfoInBodySpace | hkpPoweredChainData.obj | fnv360_0822_retail, caller + skyrim(call_seq), high
+void Owner::hkpPoweredChainData_addConstraintInfoInBodySpace(const Vector4& a,const Vector4& b,const Vector4& c,RefObject* x,RefObject* y,RefObject* z) {
     entries.ExpandOne().Set(a,b,c,x,y,z);
 }
 }
@@ -4919,10 +4921,11 @@ public:
     int unk34;
     unsigned int unk38;
 
-    void FUN_00a72b10(Archive* ar);
+    void hkpSimpleMeshShape_calcContentStatistics(Archive* ar);
 };
 
-void StorageMesh::FUN_00a72b10(Archive* ar)
+// pdb: hkpSimpleMeshShape::calcContentStatistics | hkpSimpleMeshShape.obj | fnv360_0822_retail, ustr + bridge(ustr|vtable) + skyrim(ustr), high
+void StorageMesh::hkpSimpleMeshShape_calcContentStatistics(Archive* ar)
 {
     ar->vf04(DAT_00e87bb4, 1, this);
     if (!(unk20 & 0x80000000))
@@ -5330,8 +5333,9 @@ namespace f3m_00a762d0 {
 namespace Copy308 {
 struct Heap {void FUN_008f6d90(void*,unsigned,int);void* FUN_008f6d30(unsigned,int);};extern Heap* (__stdcall* DAT_00d9b080)(unsigned);extern unsigned DAT_010f3170;
 struct Array {int* data;int count;unsigned capacity;};struct Owner {int unk00; int unk04; int unk08; int unk0c; int unk10; int unk14; int unk18; int unk1c; int unk20; int unk24; int unk28;Array array;};
-struct Object {int unk00; int unk04; int unk08; int unk0c; int unk10; int unk14;Owner* owner;void FUN_00a762d0(Array*);};
-void Object::FUN_00a762d0(Array* out){Array* source=&owner->array;int capacity=out->capacity&0x3fffffff;if(capacity<source->count){if(!(out->capacity&0x80000000)){Heap* heap=(Heap*)TlsGetValue(DAT_010f3170);heap->FUN_008f6d90(out->data,capacity*4,0x17);}Heap* heap=(Heap*)TlsGetValue(DAT_010f3170);out->data=(int*)heap->FUN_008f6d30(source->count*4,0x17);out->capacity=(out->capacity&0x40000000)|source->count;}int count=source->count;out->count=count;int* dest=out->data;int* src=source->data;for(int i=0;i<count;++i)dest[i]=src[i];}
+struct Object {int unk00; int unk04; int unk08; int unk0c; int unk10; int unk14;Owner* owner;void hkpConstraintChainInstanceAction_getEntities(Array*);};
+// pdb: hkpConstraintChainInstanceAction::getEntities | hkpConstraintChainInstanceAction.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void Object::hkpConstraintChainInstanceAction_getEntities(Array* out){Array* source=&owner->array;int capacity=out->capacity&0x3fffffff;if(capacity<source->count){if(!(out->capacity&0x80000000)){Heap* heap=(Heap*)TlsGetValue(DAT_010f3170);heap->FUN_008f6d90(out->data,capacity*4,0x17);}Heap* heap=(Heap*)TlsGetValue(DAT_010f3170);out->data=(int*)heap->FUN_008f6d30(source->count*4,0x17);out->capacity=(out->capacity&0x40000000)|source->count;}int count=source->count;out->count=count;int* dest=out->data;int* src=source->data;for(int i=0;i<count;++i)dest[i]=src[i];}
 }
 
 
@@ -5428,7 +5432,7 @@ struct BridgeAtom : Atom
     int m_04;
     int m_08;
     BridgeAtom() : Atom(1) {}
-    void FUN_009a1a00(ConstraintData* data);
+    void hkpBridgeConstraintAtom_init(ConstraintData* data);
 };
 
 struct ConstraintData : ConstraintBase
@@ -5444,19 +5448,20 @@ struct ConstraintData : ConstraintBase
     Transform m_transformB;
 };
 
-struct FUN_00a74790 : ConstraintData
+struct NiDynamicEffect_GetRTTI : ConstraintData
 {
-    FUN_00a74790();
+    NiDynamicEffect_GetRTTI();
 };
 
-FUN_00a74790::FUN_00a74790()
+// pdb: NiDynamicEffect::GetRTTI | NiDynamicEffect.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+NiDynamicEffect_GetRTTI::NiDynamicEffect_GetRTTI()
 {
     m_child = 0;
     m_1c = 0.0f;
     m_20 = true;
     m_transformA.setIdentity();
     m_transformB.setIdentity();
-    m_bridge.FUN_009a1a00(this);
+    m_bridge.hkpBridgeConstraintAtom_init(this);
 }
 
 }
@@ -5855,7 +5860,7 @@ static __forceinline ThreadMemory* Memory() throw() {
     return static_cast<ThreadMemory*>(TlsGetValue(DAT_010f3170));
 }
 
-int __cdecl FUN_009232c0(const char* first, const char* second) throw();
+int __cdecl hkString_strCmp(const char* first, const char* second) throw();
 int __cdecl FUN_009233f0(const char* string) throw();
 void* __cdecl FUN_009234e0(void* destination, const void* source, unsigned int count) throw();
 void __cdecl FUN_00901e90(void* array, int capacity, int stride) throw();
@@ -5996,7 +6001,7 @@ int Registry::FUN_00a61250(const char* name, void* value) throw() {
     for (; i < records.size; ++i) {
         const char* key = records.data[i].key.data;
 
-        if (FUN_009232c0(key, name) == 0) {
+        if (hkString_strCmp(key, name) == 0) {
             record = &records.data[i];
             break;
         }
@@ -6278,7 +6283,7 @@ void Owner::FUN_00a70b40(bool on, SizeOut* out)
 namespace f3m_00a71080 {
 namespace na71080 {
 struct Part {
-    void FUN_00924b40(void* p);
+    void hkRotation_set(void* p);
 };
 struct Owner {
     int unk00;
@@ -6306,8 +6311,8 @@ struct Owner {
 };
 void Owner::FUN_00a71080(void* a, void* b)
 {
-    part20.FUN_00924b40(a);
-    part50.FUN_00924b40(b);
+    part20.hkRotation_set(a);
+    part50.hkRotation_set(b);
 }
 }
 }   // namespace f3m_00a71080
@@ -6372,7 +6377,7 @@ struct State00a71050 {
     unsigned int count;
     int capacityFlags;
     void FUN_00a70c70();
-    void __thiscall FUN_00924b40(unsigned int a);
+    void __thiscall hkRotation_set(unsigned int a);
     State00a71050* FUN_00a71050(unsigned int flags);
     void __stdcall FUN_00a71080(unsigned int a);
 };

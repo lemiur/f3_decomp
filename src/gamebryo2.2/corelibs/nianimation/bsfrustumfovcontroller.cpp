@@ -397,7 +397,7 @@ class NiCameraControllerA42D
 {
   public:
     virtual void vfn_00();
-    bool FUN_00a36250(float fTime);
+    bool NiTimeController_DontDoUpdate(float fTime);
     void FUN_00a42dc0(NiUpdateDataA42D& kUpdateData);
 
     bool GetManagerControlled() const
@@ -429,7 +429,7 @@ void NiCameraControllerA42D::FUN_00a42dc0(NiUpdateDataA42D& kUpdateData)
     {
         m_fControllerTime = DAT_01096324;
     }
-    else if (FUN_00a36250(kUpdateData.m_fTime) &&
+    else if (NiTimeController_DontDoUpdate(kUpdateData.m_fTime) &&
              (!m_spControllerInterpolator || !m_spControllerInterpolator->AlwaysUpdate()))
     {
         return;
@@ -474,12 +474,13 @@ class ObjA42E : public FUN_00a57640
     }
 
     void FUN_00a57620(ObjA42E* dest, CloningProcessObjA42E& cloning);
-    ObjA42E* FUN_00a42e90(CloningProcessObjA42E& cloning);
+    ObjA42E* BSFrustumFOVController_CreateClone(CloningProcessObjA42E& cloning);
 };
 
 // Allocates an ObjA42E, calls FUN_00a57620 with it and cloning, and returns the new object.
 // @fnv 0x00a42e90
-ObjA42E* ObjA42E::FUN_00a42e90(CloningProcessObjA42E& cloning)
+// pdb: BSFrustumFOVController::CreateClone | BSFrustumFOVController.obj | fnv360_0822_retail, objopen_prop + bridge(vtable|objrun_open) + skyrim(caller_sim), high
+ObjA42E* ObjA42E::BSFrustumFOVController_CreateClone(CloningProcessObjA42E& cloning)
 {
     ObjA42E* p = new ObjA42E;
     FUN_00a57620(p, cloning);

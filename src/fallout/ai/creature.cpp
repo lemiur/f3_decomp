@@ -92,7 +92,7 @@ extern double _gModifierZero;
 
 struct FUN_0087d880_class
 {
-    float FUN_0087d880();
+    float NiD3DShaderDeclaration_Pack_UnsignedByteToFloat();
 };
 
 struct SubA4
@@ -111,7 +111,7 @@ extern double _gModifierZero;
 
 struct FUN_0087d880_class
 {
-    float FUN_0087d880();
+    float NiD3DShaderDeclaration_Pack_UnsignedByteToFloat();
 };
 
 struct SubA4

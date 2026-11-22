@@ -63,7 +63,7 @@ struct SizeNode;
 
 struct SizeNodeList
 {
-    int FUN_00d46f00();
+    int hkClass_getNumMembers();
     SizeNode* FUN_00d46f20(int index);
 };
 
@@ -280,19 +280,20 @@ struct FUN_00cb18f0_Obj
     int __thiscall FindSlot(int value);
 };
 
-extern "C" void __cdecl FUN_00dc1960(unsigned int value1, void* value2, void* value3, int value4);
+extern "C" void __cdecl retargetClassInplace(unsigned int value1, void* value2, void* value3, int value4);
 
 class FUN_00dc1bb0_Class
 {
   public:
-    void FUN_00dc1bb0(unsigned int param1, unsigned int param2);
+    void hkStructureLayout_computeMemberOffsetsInplace(unsigned int param1, unsigned int param2);
 };
 
-// Calls FindSlot on the object with param1 and, if the result exceeds object->unk08, calls FUN_00dc1960 with this, object and param3.
+// Calls FindSlot on the object with param1 and, if the result exceeds object->unk08, calls retargetClassInplace with this, object and param3.
 // @f3 0x009b2a50 (community match, verified in this file)
 extern "C" void __cdecl FUN_009b2810(unsigned int value1, void* value2, void* value3);
 
-void FUN_00dc1bb0_Class::FUN_00dc1bb0(unsigned int uiValue, unsigned int pObject)
+// pdb: hkStructureLayout::computeMemberOffsetsInplace | hkStructureLayout.obj | fnv360_0822_retail, call_gap_sim + bridge(call_gap|call_seq) + skyrim(call_seq), high
+void FUN_00dc1bb0_Class::hkStructureLayout_computeMemberOffsetsInplace(unsigned int uiValue, unsigned int pObject)
 {
     FUN_00cb18f0_Obj* object = reinterpret_cast<FUN_00cb18f0_Obj*>(pObject);
     int result = object->FindSlot(uiValue);
@@ -391,14 +392,14 @@ struct NodeListEx
     const void* attributes;
     unsigned int flags;
     int version;
-    int FUN_00d46f00() const;
+    int hkClass_getNumMembers() const;
     const NodeEx& FUN_00d46f60(int index) const;
     const NodeListEx* FUN_00d46d50() const;
-    int FUN_00d46e20() const;
+    int hkpMoppShapeMediator_getNumPrimitives() const;
     int FUN_00d46f70() const;
     const NodeEx& FUN_00d46f80(int index) const;
     int FUN_00d470d0() const;
-    void FUN_00d470e0(int val);
+    void hkpCharacterContext_setCharacterType(int val);
 };
 struct Arg2
 {
@@ -465,7 +466,7 @@ struct NL215
     unsigned int flags;
     int version;
     int FUN_009b0630();
-    NE215& FUN_009b0690(int index);
+    NE215& hkClass_getMember(int index);
     const NL215* FUN_009b04a0() const;
     int FUN_009b0560();
     int FUN_009b06a0();
@@ -510,13 +511,14 @@ struct Arr215
 inline Alloc215& Alloc215::getInstance() { return *(Alloc215*)DAT_00d9b080(DAT_010f3170); }
 int __cdecl FUN_009b2710(NE215* node, int type, int fallback);
 int __cdecl FUN_009b2550(NE215* node, const LayoutOptions* options, int type);
-void __cdecl FUN_00dc1960(NodeListEx& root, const LayoutOptions& options, Arg2& visited, int arg3)
+// pdb: retargetClassInplace | hkStructureLayout.obj | fnv360_0822_retail, call_seq + bridge(call_gap_sim|call_gap) + skyrim(call_seq), high
+void __cdecl retargetClassInplace(NodeListEx& root, const LayoutOptions& options, Arg2& visited, int arg3)
 {
     ((Vis215*)&visited)->FUN_00922710((NL215*)&root, 0);
     int count = ((NL215*)&root)->FUN_009b0630();
     for (int i = 0; i < count; ++i)
     {
-        NE215& member = ((NL215*)&root)->FUN_009b0690(i);
+        NE215& member = ((NL215*)&root)->hkClass_getMember(i);
         if (member.child && ((Vis215*)&visited)->IsMissing(member.FUN_0093d890()))
         {
             // recursion uses the pack three-argument bridge; the definition keeps its four-argument form.

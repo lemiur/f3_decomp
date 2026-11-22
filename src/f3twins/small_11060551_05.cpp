@@ -43,7 +43,7 @@ void* C_00be6e80::FUN_00be6e80(unsigned char f)
 // ---- family f066
 
 struct O_0089ef80 { void FUN_0089ef80(int, int); };
-struct O_0089f040 { void FUN_0089f040(int, int); };
+struct O_0089f040 { void NiFile_FileWrite(int, int); };
 struct O_008a0010 { void FUN_008a0010(int, int); };
 struct O_00bca160 { void FUN_00bca160(int, int); };
 
@@ -54,7 +54,7 @@ void FUN_0089f150(O_0089ef80* a, int b, int c)
 
 void FUN_0089f170(O_0089f040* a, int b, int c)
 {
-    a->FUN_0089f040(b, c);
+    a->NiFile_FileWrite(b, c);
 }
 
 void FUN_008a00e0(O_008a0010* a, int b, int c)

@@ -156,7 +156,7 @@ unsigned long __cdecl FUN_00b9f650(unsigned long,const unsigned char*,unsigned i
 unsigned long __cdecl FUN_00b9f270(unsigned long,const unsigned char*,unsigned int);
 int __cdecl FUN_00b9ed90(codetype,unsigned short*,unsigned,code**,unsigned*,unsigned short*);
 void __cdecl FUN_00b9e8d0(z_streamp,unsigned);
-static int FUN_00b9bd70(z_streamp,unsigned);
+static int updatewindow(z_streamp,unsigned);
 void* __cdecl FUN_00bffa60(void*,const void*,unsigned int);
 
 static void fixedtables(inflate_state* state)
@@ -254,7 +254,8 @@ static void fixedtables(inflate_state* state)
     state->distbits = 5;
 }
 
-static int FUN_00b9bd70(z_streamp strm,unsigned out)
+// pdb: updatewindow | inflate.obj | fnv360_0822_debug, call_seq + bridge(call_gap|call_gap) + skyrim(call_dedup), high
+static int updatewindow(z_streamp strm,unsigned out)
 {
     struct inflate_state  *state;
     unsigned copy, dist;
@@ -298,7 +299,8 @@ static int FUN_00b9bd70(z_streamp strm,unsigned out)
     return 0;
 }
 
-int __cdecl FUN_00b9be60(z_streamp strm,int flush)
+// pdb: inflate | inflate.obj | fnv360_0822_retail, ustr + bridge(ustr|ustr) + skyrim(ustr), high
+int __cdecl inflate(z_streamp strm,int flush)
 {
     struct inflate_state  *state;
     unsigned char  *next;    
@@ -804,7 +806,7 @@ int __cdecl FUN_00b9be60(z_streamp strm,int flush)
   inf_leave:
     do { strm->next_out = put; strm->avail_out = left; strm->next_in = next; strm->avail_in = have; state->hold = hold; state->bits = bits; } while (0);
     if (state->wsize || (state->mode < CHECK && out != strm->avail_out))
-        if (FUN_00b9bd70(strm, out)) {
+        if (updatewindow(strm, out)) {
             state->mode = MEM;
             return (-4);
         }

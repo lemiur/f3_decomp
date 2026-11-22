@@ -61,10 +61,11 @@ namespace fnv_00a3ca80 {
 struct AnimationKey;
 struct NiKeyBasedInterpolator
 {
-    AnimationKey* FUN_00a3ca80(unsigned int uiWhichKey, unsigned short usChannel);
+    AnimationKey* NiKeyBasedInterpolator_GetKeyAt(unsigned int uiWhichKey, unsigned short usChannel);
 };
 // @fnv 0x00a3ca80
-AnimationKey* NiKeyBasedInterpolator::FUN_00a3ca80(unsigned int uiWhichKey, unsigned short usChannel)
+// pdb: NiKeyBasedInterpolator::GetKeyAt | NiKeyBasedInterpolator.obj | fnv360_0822_retail, objrun + bridge(hash|objrun), high
+AnimationKey* NiKeyBasedInterpolator::NiKeyBasedInterpolator_GetKeyAt(unsigned int uiWhichKey, unsigned short usChannel)
 {
     typedef unsigned char(__thiscall * FnStride)(NiKeyBasedInterpolator*, unsigned short);
     typedef AnimationKey*(__thiscall * FnArray)(NiKeyBasedInterpolator*, unsigned short);
@@ -182,14 +183,15 @@ class KeyInterp
         return (AnimationKey*)((char*)pkKeys + uiIndex * ucSize);
     }
 
-    void FUN_00a3cac0(float& fBeginKeyTime, float& fEndKeyTime) const;
+    void NiKeyBasedInterpolator_GetActiveTimeRange(float& fBeginKeyTime, float& fEndKeyTime) const;
 };
 
 extern float DAT_0109704c;
 extern float DAT_01015f5c;
 
 // @fnv 0x00a3cac0
-void KeyInterp::FUN_00a3cac0(float& fBeginKeyTime, float& fEndKeyTime) const
+// pdb: NiKeyBasedInterpolator::GetActiveTimeRange | NiKeyBasedInterpolator.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun) + skyrim(objrun_open), high
+void KeyInterp::NiKeyBasedInterpolator_GetActiveTimeRange(float& fBeginKeyTime, float& fEndKeyTime) const
 {
     fBeginKeyTime = DAT_0109704c;
     fEndKeyTime = DAT_01015f5c;

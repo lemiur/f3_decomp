@@ -113,7 +113,7 @@ class NiStreamMemoryBuffer : public NiBinaryStream
     void FUN_00aa2fb0(char* buffer, int size);
     void FUN_00aa2ff0();
     void NiMemStreamDestructor();
-    char* FUN_00aa2d60();
+    char* NiMemStream_Str();
 };
 
 inline void NiStreamReadUInt(NiBinaryStream* stream, unsigned int& value)

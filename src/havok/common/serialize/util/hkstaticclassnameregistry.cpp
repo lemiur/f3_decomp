@@ -47,10 +47,11 @@ struct FnvCpu_FUN_00db7a70_CpuObject
     unsigned int unk00;
     unsigned int unk04;
     int value;
-    int FUN_00db7a70();
+    int hkStaticClassNameRegistry_getName();
 };
 // @fnv 0x00db7a70
-int FnvCpu_FUN_00db7a70_CpuObject::FUN_00db7a70()
+// pdb: hkStaticClassNameRegistry::getName | hkStaticClassNameRegistry.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+int FnvCpu_FUN_00db7a70_CpuObject::hkStaticClassNameRegistry_getName()
 {
     return value;
 }

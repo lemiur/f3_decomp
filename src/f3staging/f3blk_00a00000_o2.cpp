@@ -233,7 +233,7 @@ namespace f3m_00a09840 {
 struct AllocB0 { void* FUN_008f6d30(int size, int tag); };
 extern AllocB0* (__stdcall *DAT_00d9b080)(int);
 struct MatrixB0 { float cells[16]; void FUN_008fda60(const MatrixB0&); };
-struct FUN_00a74790 {
+struct NiDynamicEffect_GetRTTI {
     int vptr00;
     short unk04;
     short unk06;
@@ -248,22 +248,22 @@ struct FUN_00a74790 {
     unsigned char pad21[15];
     MatrixB0 m1;
     MatrixB0 m2;
-    FUN_00a74790();
-    static void* operator new(unsigned int size) { AllocB0* alloc = DAT_00d9b080(DAT_010f3170); FUN_00a74790* mem = (FUN_00a74790*)alloc->FUN_008f6d30(0xb0, 0x2c); *(short*)((char*)mem + 4) = 0xb0; return mem; }
+    NiDynamicEffect_GetRTTI();
+    static void* operator new(unsigned int size) { AllocB0* alloc = DAT_00d9b080(DAT_010f3170); NiDynamicEffect_GetRTTI* mem = (NiDynamicEffect_GetRTTI*)alloc->FUN_008f6d30(0xb0, 0x2c); *(short*)((char*)mem + 4) = 0xb0; return mem; }
 };
 struct SettingsB0 { int pad[4]; float scale; };
 struct OwnerB0 {
     int unk00;
-    FUN_00a74790* field4;
-    void FUN_008fc3f0(FUN_00a74790* dest, SettingsB0* settings);
-    void FUN_00a09840(FUN_00a74790* dest, SettingsB0* settings);
+    NiDynamicEffect_GetRTTI* field4;
+    void FUN_008fc3f0(NiDynamicEffect_GetRTTI* dest, SettingsB0* settings);
+    void FUN_00a09840(NiDynamicEffect_GetRTTI* dest, SettingsB0* settings);
 };
 
-void OwnerB0::FUN_00a09840(FUN_00a74790* dest, SettingsB0* settings)
+void OwnerB0::FUN_00a09840(NiDynamicEffect_GetRTTI* dest, SettingsB0* settings)
 {
-    FUN_00a74790* src = field4;
+    NiDynamicEffect_GetRTTI* src = field4;
     if (!dest)
-        dest = new FUN_00a74790();
+        dest = new NiDynamicEffect_GetRTTI();
     dest->f1c = src->f1c;
     dest->b20 = src->b20;
     dest->m1.FUN_008fda60(src->m1);
@@ -1179,7 +1179,8 @@ struct Obj {
     void FUN_009dc7f0(Flag flag);
 };
 
-void __cdecl FUN_00a06f20(Obj* obj)
+// pdb: finishLoadedObjecthkpRagdollLimitsData | hkpRagdollLimitsDataClass.obj | fnv360_0822_retail, caller_sim + bridge(caller_sim|caller_sim) + skyrim(caller_sim), high
+void __cdecl finishLoadedObjecthkpRagdollLimitsData(Obj* obj)
 {
     if (obj) {
         obj->unk06 = 1;
@@ -2657,7 +2658,7 @@ namespace f3m_00a0a1e0 {
 struct Entry { const char* name; int value; };
 extern Entry DAT_01064a50[];
 struct ClassInfo { const char* FUN_009b0490(); };   // getName
-int __cdecl FUN_009232c0(const char* a, const char* b);   // string compare
+int __cdecl hkString_strCmp(const char* a, const char* b);   // string compare
 struct Bool {
     char value;
     Bool(bool b) : value(b) {}
@@ -2667,7 +2668,7 @@ struct Bool {
 f3m_00a0a1e0::Bool __stdcall FUN_00a0a1e0(f3m_00a0a1e0::ClassInfo* info, int* valueOut)
 {
     for (int i = 0; i < 1; i++) {
-        if (f3m_00a0a1e0::FUN_009232c0(f3m_00a0a1e0::DAT_01064a50[i].name, info->FUN_009b0490()) == 0) {
+        if (f3m_00a0a1e0::hkString_strCmp(f3m_00a0a1e0::DAT_01064a50[i].name, info->FUN_009b0490()) == 0) {
             *valueOut = f3m_00a0a1e0::DAT_01064a50[i].value;
             return true;
         }
@@ -3860,7 +3861,7 @@ struct Allocator2377
 extern Allocator2377* (__stdcall* DAT_00d9b080)(int);
 void __cdecl FUN_009e10c0(void* memory);
 
-struct FUN_00a74790
+struct NiDynamicEffect_GetRTTI
 {
     void* vtable;
     unsigned short allocationSize, references;
@@ -3906,12 +3907,12 @@ struct FUN_00a74790
     int unka4;
     int unka8;
     int unkac;
-    FUN_00a74790();
+    NiDynamicEffect_GetRTTI();
 
     static void* operator new(unsigned int size)
     {
         Allocator2377* allocator = DAT_00d9b080(DAT_010f3170);
-        FUN_00a74790* memory = static_cast<FUN_00a74790*>(allocator->FUN_008f6d30(size, 0x2c));
+        NiDynamicEffect_GetRTTI* memory = static_cast<NiDynamicEffect_GetRTTI*>(allocator->FUN_008f6d30(size, 0x2c));
         memory->allocationSize = static_cast<unsigned short>(size);
         return memory;
     }
@@ -3924,15 +3925,15 @@ struct FUN_00a74790
 struct Owner2377
 {
     int unk00;
-    FUN_00a74790* payload;
+    NiDynamicEffect_GetRTTI* payload;
     int FUN_00a09970();
 };
 
 int Owner2377::FUN_00a09970()
 {
     if (!payload)
-        payload = new FUN_00a74790();
-    return sizeof(FUN_00a74790);
+        payload = new NiDynamicEffect_GetRTTI();
+    return sizeof(NiDynamicEffect_GetRTTI);
 }
 }   // namespace f3m_00a09970
 
@@ -4039,17 +4040,18 @@ struct StepInfo;
 struct Accumulator { unsigned int unk00; unsigned int unk04; unsigned int unk08; unsigned int unk0c; unsigned int unk10; unsigned int unk14; unsigned int unk18; unsigned int unk1c; unsigned int unk20; unsigned int unk24; unsigned int unk28; unsigned int unk2c; unsigned int unk30; unsigned int unk34; unsigned int unk38; unsigned int unk3c; unsigned int unk40; unsigned int unk44; unsigned int unk48; unsigned int unk4c; unsigned int unk50; unsigned int unk54; unsigned int unk58; unsigned int unk5c; unsigned int unk60; unsigned int unk64; unsigned int unk68; unsigned int unk6c; unsigned int unk70; unsigned int unk74; unsigned int unk78; unsigned int unk7c; };
 struct World { unsigned int unk00,unk04,unk08,unk0c,unk10,unk14,unk18,unk1c,unk20,unk24,unk28,unk2c,unk30,unk34,unk38,unk3c,unk40,unk44,unk48,unk4c,unk50,unk54,unk58,unk5c,unk60,unk64,unk68; void* collisionInput; };
 struct Entity { unsigned int unk00; unsigned short unk04; short unk06; World* world; };
-int __cdecl FUN_009ac100(const void*, const StepInfo*, const Accumulator*, Entity* const*, int, int);
+int __cdecl hkRigidMotionUtilApplyAccumulators(const void*, const StepInfo*, const Accumulator*, Entity* const*, int, int);
 void __cdecl FUN_0099a2d0(const void*, Entity* const*, int);
-static __declspec(noinline) int __cdecl FUN_00a0a450(const void* solverInfo, const StepInfo& stepInfo, const Accumulator* accumulators, Entity* const* bodies, int numBodies)
+// pdb: hkConstraintSolverSetup_integrate2 | hkpConstraintSolverSetup.obj | fnv360_0822_retail, caller_sim + skyrim(caller_sim), high
+static __declspec(noinline) int __cdecl hkConstraintSolverSetup_integrate2(const void* solverInfo, const StepInfo& stepInfo, const Accumulator* accumulators, Entity* const* bodies, int numBodies)
 {
-    int result = FUN_009ac100(solverInfo, &stepInfo, accumulators + 1, bodies, numBodies, 0xd0);
+    int result = hkRigidMotionUtilApplyAccumulators(solverInfo, &stepInfo, accumulators + 1, bodies, numBodies, 0xd0);
     FUN_0099a2d0(bodies[0]->world->collisionInput, bodies, numBodies);
     return result;
 }
 
 const void* volatile w06_solver; const StepInfo* volatile w06_step; const Accumulator* volatile w06_acc; Entity* const* volatile w06_bodies; volatile int w06_count, w06_result;
-void w06_emit_integrate() { w06_result = FUN_00a0a450(w06_solver, *w06_step, w06_acc, w06_bodies, w06_count); }
+void w06_emit_integrate() { w06_result = hkConstraintSolverSetup_integrate2(w06_solver, *w06_step, w06_acc, w06_bodies, w06_count); }
 }   // namespace f3m_00a0a450
 
 // @f3 0x00a0af50 (community match, verified in this file)
@@ -4155,7 +4157,7 @@ struct Sub81a0 {
     int unk00;
     int vtbl04;
     int field08;
-    void __thiscall FUN_009a1a00(int value);
+    void __thiscall hkpBridgeConstraintAtom_init(int value);
 };
 
 struct Obj81a0 {
@@ -4166,22 +4168,24 @@ struct Obj81a0 {
     Sub81a0 sub;
 };
 
-void FUN_00a081a0(Obj81a0* p)
+// pdb: finishLoadedObjecthkpPointToPathConstraintData | hkpPointToPathConstraintDataClass.obj | fnv360_0822_retail, caller_sim + bridge(caller_sim|caller_sim) + skyrim(caller_sim), high
+void finishLoadedObjecthkpPointToPathConstraintData(Obj81a0* p)
 {
     if (!p)
         return;
     Sub81a0* q = &p->sub;
     p->word6 = 1;
     p->vtbl = 0xe84950;
-    q->FUN_009a1a00(q->field08);
+    q->hkpBridgeConstraintAtom_init(q->field08);
 }
 }   // namespace f3m_00a081a0
 
 // @f3 0x00a05610 (community match, verified in this file)
 namespace f3m_00a05610 {
-// candidate for FUN_00a05610
+// candidate for hkpTransformCollapseUtil_collapseTransforms
 extern "C" int __cdecl FUN_00a05580(void* arr, void* a, void* b);
-int __cdecl FUN_00a05610(f3m_00a04370::QKey* pkEntity, void* iA, void* iB)
+// pdb: hkpTransformCollapseUtil::collapseTransforms | hkpTransformCollapseUtil.obj | fnv360_0822_retail, call_gap_sim + skyrim(call_gap_sim), high
+int __cdecl hkpTransformCollapseUtil_collapseTransforms(f3m_00a04370::QKey* pkEntity, void* iA, void* iB)
 {
     f3m_00a04370::QKeyArray kEntities;
     f3m_00a04370::QPush(&kEntities, pkEntity);
@@ -4333,7 +4337,8 @@ struct P6f90 {
     void __thiscall FUN_00959c90(Flag6f90 value);
 };
 
-void FUN_00a06f90(P6f90* p)
+// pdb: finishLoadedObjecthkpRagdollConstraintData | hkpRagdollConstraintDataClass.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc + skyrim(caller_sim), high
+void finishLoadedObjecthkpRagdollConstraintData(P6f90* p)
 {
     if (!p)
         return;
@@ -5229,7 +5234,8 @@ union __declspec(align(16)) PackBits
     unsigned int u[4];
 };
 
-unsigned int __cdecl FUN_00a0a120(const float* in)
+// pdb: hkVector4Util::packQuaternionIntoInt32 | hkVector4Util.obj | fnv360_0822_retail, objrun_prop + skyrim(objrun_prop), high
+unsigned int __cdecl hkVector4Util_packQuaternionIntoInt32(const float* in)
 {
     PackBits scaled;
     PackBits biased;
@@ -5713,7 +5719,7 @@ struct Ctx
     DstElem* f18;
 };
 
-SrcElem* FUN_009abb20(void* owner, Item** items, unsigned int count, unsigned int bytes, SrcElem* cur);
+SrcElem* hkRigidMotionUtilApplyForcesAndBuildAccumulators(void* owner, Item** items, unsigned int count, unsigned int bytes, SrcElem* cur);
 
 void FUN_00a0a770(Ctx* ctx, Item** items, unsigned int count)
 {
@@ -5751,7 +5757,7 @@ void FUN_00a0a770(Ctx* ctx, Item** items, unsigned int count)
 
     SrcElem* src = ctx->f14;
     DstElem* dst = ctx->f18 + (items[0]->f90 >> 7);
-    ctx->f14 = FUN_009abb20(ctx->f00, items, count, 0xd0, ctx->f14);
+    ctx->f14 = hkRigidMotionUtilApplyForcesAndBuildAccumulators(ctx->f00, items, count, 0xd0, ctx->f14);
 
     V4 zero;
     zero.setZero4();

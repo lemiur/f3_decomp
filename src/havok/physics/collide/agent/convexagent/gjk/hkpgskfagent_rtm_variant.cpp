@@ -137,7 +137,7 @@ struct Drecv
     int unk2c;
     int f30;
 
-    void FUN_00daccd0(Dsrc* a1, Dsrc* a2, Dsrc* a3, int a4);
+    void hkpGskfAgent_processCollisionNoTim(Dsrc* a1, Dsrc* a2, Dsrc* a3, int a4);
 };
 void ProcessCollision(Dtask* task, int* ctx1, int* ctx2, int* node, int* a5, int* a6, int a7);
 
@@ -332,8 +332,8 @@ struct hkGskAgentS
     float m_fFloatValue;
     int unk1c;
     hkVector4S m_vSeparatingNormal;
-    void __thiscall FUN_00daccd0(const hkCdBodyS& a, const hkCdBodyS& b, const hkInputS& input, void* result);
-    void __thiscall FUN_00dacd50(const hkCdBodyS& a, const hkCdBodyS& b, const hkInputS& input, void* result);
+    void __thiscall hkpGskfAgent_processCollisionNoTim(const hkCdBodyS& a, const hkCdBodyS& b, const hkInputS& input, void* result);
+    void __thiscall hkpGskfAgent_processCollision(const hkCdBodyS& a, const hkCdBodyS& b, const hkInputS& input, void* result);
 };
 
 // @f3 0x00a35890 (community match, verified in this file)
@@ -379,7 +379,8 @@ static __forceinline void CalcT(const hkMotionStateS& ms0, const hkMotionStateS&
     timInfo(3) = ms0.m_kDeltaAngle(3) * fa * ms0.m_fObjectRadius + ms1.m_kDeltaAngle(3) * fb * ms1.m_fObjectRadius;
 }
 
-void __thiscall hkGskAgentS::FUN_00dacd50(const hkCdBodyS& a, const hkCdBodyS& b, const hkInputS& input, void* result)
+// pdb: hkpGskfAgent::processCollision | hkpGskfAgent.obj | fnv360_0822_retail, vtable + skyrim(vtable), high
+void __thiscall hkGskAgentS::hkpGskfAgent_processCollision(const hkCdBodyS& a, const hkCdBodyS& b, const hkInputS& input, void* result)
 {
     Getter00a3 getter = (Getter00a3)DAT_00fdf044;
     volatile unsigned int ticks;

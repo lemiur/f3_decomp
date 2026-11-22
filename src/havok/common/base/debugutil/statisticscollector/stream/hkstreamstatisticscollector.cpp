@@ -326,7 +326,7 @@ extern unsigned long DAT_010f3170;
 extern void* (__stdcall* DAT_00d9b080)(unsigned long);
 unsigned __cdecl FUN_009233f0(const char*);
 void* __cdecl FUN_009234e0(void*, const void*, unsigned);
-int __cdecl FUN_009232c0(const char*, const char*);
+int __cdecl hkString_strCmp(const char*, const char*);
 void __cdecl FUN_00901e90(String*, int, int);
 void __cdecl FUN_00901f10(Strings*, int);
 }
@@ -344,7 +344,7 @@ static __declspec(noinline) MonitorNode* FUN_00a64f60(
     if (parent) {
         for (int i = 0; i < parent->children.size; ++i) {
             MonitorNode* child = parent->children.data[i];
-            if (!FUN_009232c0(child->name, name)) {
+            if (!hkString_strCmp(child->name, name)) {
                 result = child;
                 break;
             }
@@ -527,7 +527,7 @@ struct SpawnedHandle
     }
 };
 
-int FUN_00cb10d0(const char* s);
+int hkString_strLen(const char* s);
 
 struct StrPacker
 {
@@ -555,7 +555,7 @@ void StrPacker::FUN_00ddf5a0(const char* str)
         int pad = 0;
         if (str != 0)
         {
-            count = FUN_00cb10d0(str) + 1;
+            count = hkString_strLen(str) + 1;
             pad = count % 2;
         }
         unsigned char* out = (unsigned char*)FUN_00a64bf0((hkArrayChar*)((char*)this + 8), pad + count);
@@ -754,7 +754,7 @@ void MonitorStream::FUN_00ddf4d0(int unused, const char* name, int size, int id,
     int odd = 0;
     if (name)
     {
-        len = FUN_00cb10d0(name) + 1;
+        len = hkString_strLen(name) + 1;
         odd = len % 2;
     }
     unsigned char* p = (unsigned char*)FUN_00ddf370(&m_stream, odd + len);
@@ -787,7 +787,7 @@ void Pkt::FUN_00ddf420(const char* str, const void* a2, int a3)
     int pad = 0;
     if (str != 0)
     {
-        len = FUN_00cb10d0(str) + 1;
+        len = hkString_strLen(str) + 1;
         pad = len % 2;
     }
     unsigned char* out = (unsigned char*)FUN_00ddf370(&m14, len + pad);

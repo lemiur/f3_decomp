@@ -305,7 +305,7 @@ class S00cb3250_Object
 {
   public:
     void FUN_00c8d1a0(S00cb3250_Query* pQuery);
-    void FUN_00cb3250(int iArg);
+    void bhkRigidBodyT_SetRotation(int iArg);
     unsigned int unk00;
     unsigned int unk04;
     unsigned int unk08;
@@ -318,7 +318,8 @@ class S00cb3250_Object
 };
 
 // @f3 0x00925880 (community match, verified in this file)
-void S00cb3250_Object::FUN_00cb3250(int iArg)
+// pdb: bhkRigidBodyT::SetRotation | bhkRigidBodyT.obj | fnv360_0822_retail, objrun + skyrim(objrun_open), high
+void S00cb3250_Object::bhkRigidBodyT_SetRotation(int iArg)
 {
     S00cb3250_Query kQuery(iArg, &m_kOwner);
     FUN_00c8d1a0(&kQuery);

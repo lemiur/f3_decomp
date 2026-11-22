@@ -169,7 +169,7 @@ struct FloatCtlr
     {
         return ((m_uiObjectFlags >> 5) & 1) ? true : false;
     }
-    bool FUN_00a36250(float fTime);
+    bool NiTimeController_DontDoUpdate(float fTime);
     void FUN_00a56a00(UpdateData& kData);
 };
 // @fnv 0x00a56a00
@@ -179,7 +179,7 @@ void FloatCtlr::FUN_00a56a00(UpdateData& kData)
     {
         m_fControllerTime = kInvalidTime;
     }
-    else if (FUN_00a36250(kData.m_fTime) &&
+    else if (NiTimeController_DontDoUpdate(kData.m_fTime) &&
              (!m_spControllerInterpolator || !m_spControllerInterpolator->AlwaysUpdate()))
     {
         return;

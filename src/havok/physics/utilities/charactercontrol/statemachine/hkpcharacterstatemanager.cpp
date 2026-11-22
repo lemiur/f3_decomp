@@ -56,11 +56,12 @@ struct hkpCharacterStateView
 {
     int m_auiShapeKeys[2];
     hkReferencedObject* m_states[32];
-    hkReferencedObject* FUN_00cbc510(int index);
+    hkReferencedObject* hkpCharacterStateManager_getState(int index);
 };
 
 // @fnv 0x00cbc510
-hkReferencedObject* hkpCharacterStateView::FUN_00cbc510(int index)
+// pdb: hkpCharacterStateManager::getState | hkpCharacterStateManager.obj | fnv360_0822_retail, call_seq + skyrim(call_seq), high
+hkReferencedObject* hkpCharacterStateView::hkpCharacterStateManager_getState(int index)
 {
     return m_states[index];
 }

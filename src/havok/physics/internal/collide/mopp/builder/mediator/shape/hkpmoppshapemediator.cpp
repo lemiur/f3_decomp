@@ -20,7 +20,8 @@ struct FUN_00dd5260_T
 
 // Copies the five-int struct pointed to by pSrc into the struct pointed to by pDst.
 // @fnv 0x00dd5260
-void __stdcall FUN_00dd5260(FUN_00dd5260_T* pSrc, int a1, int a2, int a3, FUN_00dd5260_T* pDst)
+// pdb: hkpMoppShapeMediator::splitPrimitive | hkpMoppShapeMediator.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void __stdcall hkpMoppShapeMediator_splitPrimitive(FUN_00dd5260_T* pSrc, int a1, int a2, int a3, FUN_00dd5260_T* pDst)
 {
     *pDst = *pSrc;
 }
@@ -110,10 +111,11 @@ struct FnvCpu_FUN_00dd5290_CpuObject
     unsigned int unk04;
     unsigned int unk08;
     int value;
-    int FUN_00dd5290();
+    int hkMemoryStreamReader_tell();
 };
 // @fnv 0x00dd5290
-int FnvCpu_FUN_00dd5290_CpuObject::FUN_00dd5290()
+// pdb: hkMemoryStreamReader::tell | hkMemoryStreamReader.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+int FnvCpu_FUN_00dd5290_CpuObject::hkMemoryStreamReader_tell()
 {
     return value;
 }

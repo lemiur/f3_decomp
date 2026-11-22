@@ -25,11 +25,12 @@ struct FUN_00cbb1b0_Class
 {
     char pad0[0x48];
     hkReal m_fMaxRelativeForce;
-    void __thiscall FUN_00cbb1b0(hkReal a);
+    void __thiscall hkpMouseSpringAction_setMaxRelativeForce(hkReal a);
 };
 
 // @fnv 0x00cbb1b0
-void FUN_00cbb1b0_Class::FUN_00cbb1b0(hkReal a)
+// pdb: hkpMouseSpringAction::setMaxRelativeForce | hkpMouseSpringAction.obj | fnv360_0822_debug, call_seq + bridge(call_seq|call_gap) + skyrim(objrun_open), high
+void FUN_00cbb1b0_Class::hkpMouseSpringAction_setMaxRelativeForce(hkReal a)
 {
     m_fMaxRelativeForce = a;
 }
@@ -451,7 +452,7 @@ struct F8feb20_Attachment
     F8feb20_Point3 position;
 };
 
-F8feb20_Attachment* __cdecl FUN_00ab3120(float size);
+F8feb20_Attachment* __cdecl BSTestObjects_CreateCoordinateJack(float size);
 
 struct F8feb20_Object
 {
@@ -533,7 +534,7 @@ F8feb20_Object* F8feb20_Object::FUN_008feb20(int arg)
         world.y = position.y * (double)kPhysicsToWorld;
         world.z = position.z * (double)kPhysicsToWorld;
 
-        F8feb20_Attachment* attachment = FUN_00ab3120(6.0f);
+        F8feb20_Attachment* attachment = BSTestObjects_CreateCoordinateJack(6.0f);
         if (attachment)
         {
             attachment->position = world;

@@ -114,15 +114,15 @@ struct FUN_00a818b0_cls
     unsigned char unk00[0x58];
     unsigned short m_usActiveVertices;  // src: FNV360_PDB NiTriShapeDynamicData +0x58
     unsigned short m_usActiveTriangles;  // src: FNV360_PDB NiTriShapeDynamicData +0x5A
-    void FUN_00a7bbe0(void* pOther);
+    void NiTriShapeData_SaveBinary(void* pOther);
     void FUN_00a818b0(void* pOther);
 };
-// Calls FUN_00a7bbe0, then writes the active vertex and triangle counts to the stream's output stream.
+// Calls NiTriShapeData_SaveBinary, then writes the active vertex and triangle counts to the stream's output stream.
 // @fnv 0x00a818b0
 void FUN_00a818b0_cls::FUN_00a818b0(void* pOther)
 {
     NiStream_00a818b0* pObj = (NiStream_00a818b0*)pOther;
-    FUN_00a7bbe0(pOther);
+    NiTriShapeData_SaveBinary(pOther);
     S_BinWrite(pObj->m_pkOstr, &m_usActiveVertices, 2);
     S_BinWrite(pObj->m_pkOstr, &m_usActiveTriangles, 2);
 }
@@ -453,7 +453,7 @@ struct Dynamic
     unsigned int unk54;
     unsigned short m_usActiveVertices;
     unsigned short m_usActiveTriangles;
-    bool FUN_00a7b940(Stream*);
+    bool NiTriShapeData_LoadBinary(Stream*);
     void FUN_00a81850(Stream*);
 };
 static __forceinline void ReadBytes(Reader* bin, void* v, unsigned int bytes)
@@ -465,7 +465,7 @@ static __forceinline void ReadBytes(Reader* bin, void* v, unsigned int bytes)
 void Dynamic::FUN_00a81850(Stream* pStream)
 {
     Stream* s = pStream;
-    FUN_00a7b940(s);
+    NiTriShapeData_LoadBinary(s);
     ReadBytes(s->m_pReader, &m_usActiveVertices, 2);
     ReadBytes(s->m_pReader, &m_usActiveTriangles, 2);
 }

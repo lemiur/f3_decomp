@@ -61,7 +61,8 @@ extern "C" void __cdecl FUN_00d43b90();
 
 // Writes four function pointers into the object at offsets 0, 4, 8 and 12, then sets the bytes at offsets 16 and 17 to 1.
 // @fnv 0x00d36c30
-void __cdecl FUN_00d36c30(void* apObject)
+// pdb: hkpListAgent::initAgentFunc | hkpListAgent.obj | fnv360_0822_retail, objrun + bridge(hash|objrun) + skyrim(hash), high
+void __cdecl hkpListAgent_initAgentFunc(void* apObject)
 {
     *(void**)apObject = &FUN_00d36be0;
     *(void**)((char*)apObject + 4) = &FUN_00d43dc0;
@@ -149,7 +150,7 @@ struct Agent {
 void __cdecl FUN_00d2e970();
 void __cdecl FUN_00d2e9b0();
 void __cdecl FUN_00d2daf0();
-void __cdecl FUN_00d312f0();
+void __cdecl hkpBvTreeAgent_staticGetPenetrations();
 void __cdecl FUN_00d31110();
 void __cdecl FUN_00d2f0d0();
 void __cdecl CreateAgentForBodyPair();
@@ -463,7 +464,7 @@ public:
 void __cdecl FUN_00d2e970();
 void __cdecl FUN_00d2e9b0();
 void __cdecl FUN_00d2daf0();
-void __cdecl FUN_00d312f0();
+void __cdecl hkpBvTreeAgent_staticGetPenetrations();
 void __cdecl FUN_00d31110();
 void __cdecl FUN_00d2f0d0();
 void __cdecl CreateAgentForBodyPair();
@@ -477,8 +478,8 @@ void __cdecl FUN_009b59e0();
 void __cdecl FUN_009b8200();
 void __cdecl FUN_009ba3c0();
 void __cdecl FUN_009ba1b0();
-void __cdecl FUN_009b7950();
-void __cdecl FUN_009b7b40();
+void __cdecl hkpMoppAgent_staticLinearCast();
+void __cdecl hkpMoppAgent_createBvBvAgent();
 
 void __cdecl FUN_00d2f2c0(D2F2C0Dispatcher* dispatcher)
 {
@@ -497,17 +498,17 @@ void __cdecl FUN_00d2f2c0(D2F2C0Dispatcher* dispatcher)
         f.m_pCreateFunc = FUN_009b8200;
         f.m_pQueryPenetrationsFunc = FUN_009ba3c0;
         f.m_getClosestPointsFunc = FUN_009ba1b0;
-        f.m_pLinearCastFunc = FUN_009b7950;
+        f.m_pLinearCastFunc = hkpMoppAgent_staticLinearCast;
         f.m_bIsFlipped = false;
         f.m_bIsPredictive = false;
         dispatcher->registerCollisionAgent(f, -1, 11);
     }
     {
         D2F2C0AgentFuncs f;
-        f.m_pCreateFunc = FUN_009b7b40;
+        f.m_pCreateFunc = hkpMoppAgent_createBvBvAgent;
         f.m_pQueryPenetrationsFunc = FUN_009ba3c0;
         f.m_getClosestPointsFunc = FUN_009ba1b0;
-        f.m_pLinearCastFunc = FUN_009b7950;
+        f.m_pLinearCastFunc = hkpMoppAgent_staticLinearCast;
         f.m_bIsFlipped = false;
         f.m_bIsPredictive = true;
         dispatcher->registerCollisionAgent(f, 11, 11);
@@ -674,13 +675,13 @@ void* __cdecl FUN_00d36be0(int a1, int a2, int a3, int a4)
 }  // namespace fnv_00d36be0
 
 struct FUN_00d36cc0_Obj {
-    void __thiscall FUN_00d368c0(int a1, int a2, int a3, int a4);
+    void __thiscall hkpListAgent_updateShapeCollectionFilter(int a1, int a2, int a3, int a4);
     void __thiscall FUN_00d36cc0(int param_1, int param_2, int param_3, int param_4);
 };
 
 // @fnv 0x00d36cc0
 void __thiscall FUN_00d36cc0_Obj::FUN_00d36cc0(int param_1, int param_2, int param_3, int param_4) {
-    this->FUN_00d368c0(param_2, param_1, param_3, param_4);
+    this->hkpListAgent_updateShapeCollectionFilter(param_2, param_1, param_3, param_4);
 }
 
 struct FnvCpu_FUN_00d36ce0_CpuCallData { void* descriptor; float bound; unsigned int value; };
@@ -1219,7 +1220,7 @@ struct D27690_Owner {
     int unk08;
     int m_iElementCount;
 
-    void FUN_00cb7480(void* unk, D27690_ConstraintInfo* info);
+    void hkpConstraintOwner_subConstraintInfo(void* unk, D27690_ConstraintInfo* info);
 };
 
 // Removes the modifier of the given type from the instance's chain, updates internal child result and stats, then frees the modifier.
@@ -1239,7 +1240,8 @@ struct FO3_ThreadMemory {
     void FUN_008f6d90(void* p, int nbytes, int memClass);
 };
 
-void __cdecl FUN_00d27690(D27690_Instance* instance, D27690_Owner* owner, unsigned int modifierType)
+// pdb: hkpWorldConstraintUtil::removeAndDeleteModifier | hkpWorldConstraintUtil.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_seq), high
+void __cdecl hkpWorldConstraintUtil_removeAndDeleteModifier(D27690_Instance* instance, D27690_Owner* owner, unsigned int modifierType)
 {
     owner->checkReadOnly();
 
@@ -1546,10 +1548,10 @@ struct FnvCpu_FUN_00d329b0_CpuCallData { void* descriptor; float bound; unsigned
 extern float DAT_0104da48;
 extern unsigned char DAT_010ce7fc;
 struct FnvCpu_FUN_00d329b0_CpuObject {
-    void FUN_00d32170(void*, void*, unsigned int, FnvCpu_FUN_00d329b0_CpuCallData*);
+    void hkpHeightFieldAgent_getClosestPoints(void*, void*, unsigned int, FnvCpu_FUN_00d329b0_CpuCallData*);
     void DispatchWithBound(void*, void*, unsigned int, unsigned int);
 };
-// Builds a call-data record from the fourth argument, DAT_0104da48 and DAT_010ce7fc, then forwards it to FUN_00d32170 with the first two arguments swapped.
+// Builds a call-data record from the fourth argument, DAT_0104da48 and DAT_010ce7fc, then forwards it to hkpHeightFieldAgent_getClosestPoints with the first two arguments swapped.
 // @fnv 0x00d329b0
 void FnvCpu_FUN_00d329b0_CpuObject::DispatchWithBound(void* first, void* second, unsigned int third, unsigned int fourth)
 {
@@ -1557,7 +1559,7 @@ void FnvCpu_FUN_00d329b0_CpuObject::DispatchWithBound(void* first, void* second,
     data.value = fourth;
     data.bound = DAT_0104da48;
     data.descriptor = &DAT_010ce7fc;
-    FUN_00d32170(second, first, third, &data);
+    hkpHeightFieldAgent_getClosestPoints(second, first, third, &data);
 }
 
 // @fnv 0x00d32ac0
@@ -1594,20 +1596,20 @@ struct FUN_00d34aa0_Obj {
     virtual void vf18();
     virtual void vf1C();
 
-    void __thiscall FUN_00d338e0(int a, int b, int c, int d);
+    void __thiscall hkpConvexListAgent_updateShapeCollectionFilter(int a, int b, int c, int d);
     virtual void __thiscall FUN_00d34aa0(int a, int b, int c, int d);
 };
 // @fnv 0x00d34aa0
 void __thiscall FUN_00d34aa0_Obj::FUN_00d34aa0(int param_1, int param_2, int param_3, int param_4)
 {
-    FUN_00d338e0(param_2, param_1, param_3, param_4);
+    hkpConvexListAgent_updateShapeCollectionFilter(param_2, param_1, param_3, param_4);
 }
 
 struct FnvCpu_FUN_00d34b00_CpuCallData { void* descriptor; float bound; unsigned int value; };
 extern float DAT_0104da48;
 extern unsigned char DAT_010ce7fc;
 struct FnvCpu_FUN_00d34b00_CpuObject {
-    void FUN_00d33b70(void*, void*, unsigned int, FnvCpu_FUN_00d34b00_CpuCallData*);
+    void hkpConvexListAgent_getClosestPoints(void*, void*, unsigned int, FnvCpu_FUN_00d34b00_CpuCallData*);
     void DispatchCpuCall(void*, void*, unsigned int, unsigned int);
 };
 // @fnv 0x00d34b00
@@ -1617,7 +1619,7 @@ void FnvCpu_FUN_00d34b00_CpuObject::DispatchCpuCall(void* first, void* second, u
     data.value = fourth;
     data.bound = DAT_0104da48;
     data.descriptor = &DAT_010ce7fc;
-    FUN_00d33b70(second, first, third, &data);
+    hkpConvexListAgent_getClosestPoints(second, first, third, &data);
 }
 
 // Scans the first three entries of table for key and, if found, replaces it with 0xffff and returns.
@@ -1791,12 +1793,12 @@ public:
     FUN_00d496d0* FUN_00d262e0(unsigned int uiFlags) throw();
 };
 
-void FUN_00da3510(void*, void*);
+void hkAgent1nMachine_InvalidateTim(void*, void*);
 
 // @fnv 0x00d2d460
 void FUN_00d2d460(int, void* b, void* c)
 {
-    FUN_00da3510(b, c);
+    hkAgent1nMachine_InvalidateTim(b, c);
 }
 
 extern unsigned char DAT_011b4284;
@@ -1849,11 +1851,11 @@ struct D34ac0Struct {
 };
 
 struct FUN_00d33c80_class {
-    void FUN_00d33c80(void* a, void* b, void* c, void* d);
+    void hkpConvexListAgent_getPenetrations(void* a, void* b, void* c, void* d);
     void FUN_00d34ac0(void* a, void* b, void* c, void* d);
 };
 
-// Builds a local struct holding &DAT_010ce81c, 0 and d, then calls FUN_00d33c80 with b, a, c and a pointer to the struct.
+// Builds a local struct holding &DAT_010ce81c, 0 and d, then calls hkpConvexListAgent_getPenetrations with b, a, c and a pointer to the struct.
 // @fnv 0x00d34ac0
 void FUN_00d33c80_class::FUN_00d34ac0(void* a, void* b, void* c, void* d)
 {
@@ -1861,7 +1863,7 @@ void FUN_00d33c80_class::FUN_00d34ac0(void* a, void* b, void* c, void* d)
     s.g = d;
     s.f = 0;
     s.e = &DAT_010ce81c;
-    FUN_00d33c80(b, a, c, &s);
+    hkpConvexListAgent_getPenetrations(b, a, c, &s);
 }
 
 extern void __cdecl FUN_00cd7160(void* src, void* dst);
@@ -2728,12 +2730,12 @@ struct Point {
     }
 };
 
-extern "C" void __cdecl FUN_00da3510(int, int);
-// Forwards a2 and a3 to FUN_00da3510, ignoring a1.
+extern "C" void __cdecl hkAgent1nMachine_InvalidateTim(int, int);
+// Forwards a2 and a3 to hkAgent1nMachine_InvalidateTim, ignoring a1.
 // @fnv 0x00d34d60
 void __cdecl ForwardCall(int aUnused, int a2, int a3)
 {
-    FUN_00da3510(a2, a3);
+    hkAgent1nMachine_InvalidateTim(a2, a3);
 }
 
 struct D36B70_Heap
@@ -3151,7 +3153,7 @@ public:
     int r18_08;
 };
 
-__declspec(noinline) void __cdecl FUN_00d36c30(void* apObject);
+__declspec(noinline) void __cdecl hkpListAgent_initAgentFunc(void* apObject);
 
 __declspec(noinline) void __cdecl FUN_00d36bb0(CollisionAgentFunctionTable* f)
 {
@@ -3163,16 +3165,17 @@ __declspec(noinline) void __cdecl FUN_00d36bb0(CollisionAgentFunctionTable* f)
     f->f = 1;
 }
 
-// Fills a function table via FUN_00d36c30 and passes it to agent->FUN_00cfbbe0 with (9, -1), then refills via FUN_00d36bb0 and passes it with (-1, 9).
+// Fills a function table via hkpListAgent_initAgentFunc and passes it to agent->FUN_00cfbbe0 with (9, -1), then refills via FUN_00d36bb0 and passes it with (-1, 9).
 // @f3 0x009bf1b0 (community match, verified in this file)
-void __cdecl FUN_00d36c60(void* apAgent)
+// pdb: hkpListAgent::registerAgent | hkpListAgent.obj | fnv360_0822_retail, objrun + bridge(caller_sim|objrun) + skyrim(caller_sim), high
+void __cdecl hkpListAgent_registerAgent(void* apAgent)
 {
     CollisionAgentFunctionTable funcs;
     CollisionAgentFunctionTable* table = &funcs;
 
     funcs.e = 0;
     funcs.f = 0;
-    FUN_00d36c30(table);
+    hkpListAgent_initAgentFunc(table);
 
     Agent* agent = (Agent*)apAgent;
     agent->FUN_00cfbbe0(table, 10, -1);
@@ -3332,9 +3335,10 @@ struct S009b7ef0_Owner {
     int unk04;
     int unk08;
     S009b7ef0_Array<S009b7ef0_Entry> m_entries;
-    void FUN_009b7ef0(float a, float b, int c);
+    void hkpBvTreeAgent_warpTime(float a, float b, int c);
 };
-void S009b7ef0_Owner::FUN_009b7ef0(float a, float b, int c)
+// pdb: hkpBvTreeAgent::warpTime | hkpBvTreeAgent.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void S009b7ef0_Owner::hkpBvTreeAgent_warpTime(float a, float b, int c)
 {
     S009b7ef0_Entry* p = m_entries.begin();
     S009b7ef0_Entry* pEnd = m_entries.end();

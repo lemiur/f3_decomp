@@ -37,7 +37,7 @@ void* __fastcall FUN_00a75c20(char* pObject)
 
 struct FUN_00a75c70_shell : public NiDirectionalLight
 {
-    void* FUN_00a75c70();
+    void* NiCullingProcess_GetRTTI();
 };
 
 struct GlobalObjectO2_00a7b610
@@ -48,7 +48,8 @@ struct GlobalObjectO2_00a7b610
 GlobalObjectO2_00a7b610 g_011f4a68;
 
 // @fnv 0x00a75c70
-void* FUN_00a75c70_shell::FUN_00a75c70()
+// pdb: NiCullingProcess::GetRTTI | NiCullingProcess.obj | fnv360_0822_retail, udata + bridge(vtable|udata) + skyrim(udata), high
+void* FUN_00a75c70_shell::NiCullingProcess_GetRTTI()
 {
     return &g_011f4a68;
 }

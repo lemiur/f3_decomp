@@ -67,11 +67,11 @@ bool NiGeometryData::IsGeometryDataStreamable(bool bWrite)
     if (pkAdditional && pkAdditional->IsPacked())
     {
         if (bWrite)
-            pkAdditional->FUN_00a725d0(0);
+            pkAdditional->NiAdditionalGeometryData_UnlockDataBlock(0);
         else
         {
             unsigned int uiSize = 0;
-            pkAdditional->FUN_00a72590(0, &uiSize);
+            pkAdditional->NiAdditionalGeometryData_LockDataBlock(0, &uiSize);
         }
     }
     m_bBoundDirty = bWrite;
@@ -84,11 +84,12 @@ bool NiGeometryData::IsGeometryDataStreamable(bool bWrite)
 
 struct FUN_00a673d0_shell : public NiGeometryData
 {
-    void FUN_00a673d0();
+    void NiGeometryData_UnlockPackedVertexData();
 };
 
 // @fnv 0x00a673d0
-void FUN_00a673d0_shell::FUN_00a673d0()
+// pdb: NiGeometryData::UnlockPackedVertexData | NiGeometryData.obj | fnv360_1110_retail, call_seq + bridge(hash|call_gap) + skyrim(call_gap), high
+void FUN_00a673d0_shell::NiGeometryData_UnlockPackedVertexData()
 {
     if (*reinterpret_cast<bool*>(reinterpret_cast<char*>(this) + 0x3a))
     {
@@ -96,7 +97,7 @@ void FUN_00a673d0_shell::FUN_00a673d0()
             *reinterpret_cast<NiAdditionalGeometryData**>(reinterpret_cast<char*>(this) + 0x30);
         if (pkAGD && pkAGD->IsPacked() && !*reinterpret_cast<bool*>(reinterpret_cast<char*>(this) + 0x3b))
         {
-            pkAGD->FUN_00a725d0(0);
+            pkAGD->NiAdditionalGeometryData_UnlockDataBlock(0);
         }
         *reinterpret_cast<bool*>(reinterpret_cast<char*>(this) + 0x3a) = false;
     }
@@ -284,10 +285,11 @@ struct FUN_00a725d0_shell2
     VObj** m_aiIndexedValues;
     char pad3[2];
     unsigned short m_us;
-    void FUN_00a725d0(unsigned int idx);
+    void NiAdditionalGeometryData_UnlockDataBlock(unsigned int idx);
 };
 // @fnv 0x00a725d0
-void FUN_00a725d0_shell2::FUN_00a725d0(unsigned int uiIndex)
+// pdb: NiAdditionalGeometryData::UnlockDataBlock | NiAdditionalGeometryData.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(caller), high
+void FUN_00a725d0_shell2::NiAdditionalGeometryData_UnlockDataBlock(unsigned int uiIndex)
 {
     if (uiIndex < m_us)
     {
@@ -1682,12 +1684,13 @@ extern NiObjectGroup* DAT_011f4880;
 
 struct NiGeometryDataSave : NiGeometryData
 {
-    void FUN_00a68520(SaveStream& kStream);
+    void NiGeometryData_SaveBinary(SaveStream& kStream);
 };
 
 // Serializes NiGeometryData vertex, normal, color, texture and bound data to kStream, writing arrays only when m_bVerticesDirty is set.
 // @fnv 0x00a68520
-void NiGeometryDataSave::FUN_00a68520(SaveStream& kStream)
+// pdb: NiGeometryData::SaveBinary | NiGeometryData.obj | fnv360_0822_retail, call_seq + bridge(vtable|call_seq) + skyrim(caller_sim), high
+void NiGeometryDataSave::NiGeometryData_SaveBinary(SaveStream& kStream)
 {
     NiObject::SaveBinary(kStream);
 
@@ -1954,12 +1957,13 @@ class NiPoint2
 
 struct GeometryEquality : NiGeometryData
 {
-    bool FUN_00a67840(NiObject* pkObject);
+    bool NiGeometryData_IsEqual(NiObject* pkObject);
 };
 
 // Compares this NiGeometryData against pkObject, returning false if vertex, normal, bound, color, texture, or additional data differ.
 // @fnv 0x00a67840
-bool GeometryEquality::FUN_00a67840(NiObject* pkObject)
+// pdb: NiGeometryData::IsEqual | NiGeometryData.obj | fnv360_0822_retail, caller_sim + bridge(vtable|caller_sim) + skyrim(call_seq), high
+bool GeometryEquality::NiGeometryData_IsEqual(NiObject* pkObject)
 {
     if (!NiObject::IsEqual(pkObject))
         return false;
@@ -2251,7 +2255,7 @@ class StreamEA0
     ReaderEA0* m_pkReader;
 
     void* FUN_00a634e0(unsigned int uiID);
-    void FUN_00a645b0();
+    void NiStream_ReadLinkID();
 };
 
 struct AllocEA0

@@ -530,7 +530,8 @@ FUN_00d60860::FUN_00d60860(void* pData, unsigned char ucType)
 void __stdcall WriteSwapped(char**, int, int);
 
 // @fnv 0x00d60900
-void __stdcall FUN_00d60900(char* p)
+// pdb: hkOArchive::write16 | hkOArchive.obj | fnv360_0822_retail, call_gap + bridge(call_dedup|call_gap) + skyrim(call_gap), high
+void __stdcall hkOArchive_write16(char* p)
 {
     WriteSwapped(&p, 2, 1);
 }
@@ -607,9 +608,9 @@ int FUN_00d61640_cls::FindLastCharInRange(char c, int startIndex, int endIndex)
 
 int __cdecl FUN_00cb0fa0(int, int);
 
-int __cdecl FUN_00cb10d0(int s);
+int __cdecl hkString_strLen(int s);
 
-int __cdecl FUN_00cb10d0(const char* str);
+int __cdecl hkString_strLen(const char* str);
 
 struct hkMathD618
 {
@@ -756,7 +757,7 @@ template <class T, int N> class hkInplaceArrayD61B
     }
 };
 
-int __cdecl FUN_00cb10d0(int);
+int __cdecl hkString_strLen(int);
 void* __cdecl FUN_00c85750();
 
 class hkMemoryAllocatorD61E;
@@ -773,7 +774,7 @@ struct hkMemoryRouterD61E
     }
 };
 
-int __cdecl FUN_00cb10d0(const char* pcString) throw();
+int __cdecl hkString_strLen(const char* pcString) throw();
 void __cdecl FUN_00cb1260(void* pvDst, const void* pvSrc, int iNumBytes) throw();
 void __cdecl FUN_00c908c0(hkMemoryAllocatorD61E& kAlloc, void* apvArray, int aiNumElements, int iSizeElem) throw();
 
@@ -855,12 +856,12 @@ class hkStringBufD620
     void Assign(void* src, int len);
 };
 
-int __cdecl FUN_00cb10d0(int value);
+int __cdecl hkString_strLen(int value);
 void* __cdecl FUN_00c85750();
 void __cdecl FUN_00c908c0(int value1, int value2, int value3, int value4);
 void __cdecl FUN_00d2caa0(void* value1, unsigned int value2, unsigned int value3);
 
-extern int __cdecl FUN_00cb10d0(int value);
+extern int __cdecl hkString_strLen(int value);
 
 struct hkStringPtr
 {
@@ -1797,7 +1798,7 @@ struct FUN_00d61a50_cls
 };
 
 namespace fnvc_adapt {
-char* __cdecl FUN_00cb10d0(int value);
+char* __cdecl hkString_strLen(int value);
 }
 void __cdecl FUN_00c908c0(int allocator, FUN_00d61a50_cls* array, int capacity, int value);
 void __cdecl FUN_00cb1260(int* data, int value, char* source);
@@ -2304,7 +2305,7 @@ struct hkMemoryRouterD61C
 namespace hkRouterD61C {
 extern "C" hkMemoryRouterD61C& __cdecl FUN_00c85750() throw();
 }
-extern "C" int __cdecl FUN_00cb10d0(const char* pcString) throw();
+extern "C" int __cdecl hkString_strLen(const char* pcString) throw();
 void __cdecl FUN_00c908c0(hkMemoryAllocatorD61C& kAlloc, void* apvArray, int aiNumElements, int iSizeElem) throw();
 void __cdecl FUN_00cb1260(void* pvDst, const void* pvSrc, int iNumBytes) throw();
 

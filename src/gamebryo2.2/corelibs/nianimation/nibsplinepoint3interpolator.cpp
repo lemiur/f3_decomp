@@ -17,15 +17,15 @@ struct NiBSplineTransformInterpolator
     int m_fUnknown20;
     int m_fUnknown24;
     int m_fUnknown28;
-    void FUN_00a57fd0(NiBSplineTransformInterpolator*, CloningProcess&);
+    void NiBSplineInterpolator_CopyMembers(NiBSplineTransformInterpolator*, CloningProcess&);
     void CopyUnknownFields(NiBSplineTransformInterpolator*, CloningProcess&);
 };
 
-// Calls FUN_00a57fd0, then copies the four int fields at offsets 0x1C-0x28 from this into dest.
+// Calls NiBSplineInterpolator_CopyMembers, then copies the four int fields at offsets 0x1C-0x28 from this into dest.
 // @fnv 0x00a50680
 void NiBSplineTransformInterpolator::CopyUnknownFields(NiBSplineTransformInterpolator* dest, CloningProcess& process)
 {
-    NiBSplineTransformInterpolator::FUN_00a57fd0(dest, process);
+    NiBSplineTransformInterpolator::NiBSplineInterpolator_CopyMembers(dest, process);
     int* p = (int*)this;
     int* d = (int*)dest;
     d[7] = p[7];
@@ -118,7 +118,7 @@ void* FUN_00a506c0_shell::FUN_00a506c0(int a1, int aiValue, int a3)
 struct NiObject;
 struct FUN_00a50110_obj
 {
-    void __thiscall FUN_00a57fd0(FUN_00a50110_obj*, CloningProcess&);
+    void __thiscall NiBSplineInterpolator_CopyMembers(FUN_00a50110_obj*, CloningProcess&);
 };
 struct FUN_00a507e0_obj
 {
@@ -143,7 +143,7 @@ NiObject* FUN_00a507e0_obj::Clone(CloningProcess& kCloning)
     {
         pkObject = 0;
     }
-    ((FUN_00a50110_obj*)this)->FUN_00a57fd0((FUN_00a50110_obj*)pkObject, kCloning);
+    ((FUN_00a50110_obj*)this)->NiBSplineInterpolator_CopyMembers((FUN_00a50110_obj*)pkObject, kCloning);
     pkObject->_1c = this->_1c;
     pkObject->_20 = this->_20;
     pkObject->_24 = this->_24;
@@ -415,12 +415,13 @@ class A50880Light : public A50880Base
     A50880Color m_kFogTint;
     float m_fValue;
 
-    void FUN_00a50880(A50880Stream& kStream);
+    void NiBSplinePoint3Interpolator_SaveBinary(A50880Stream& kStream);
 };
 
 // SaveBinary
 // @fnv 0x00a50880
-void A50880Light::FUN_00a50880(A50880Stream& kStream)
+// pdb: NiBSplinePoint3Interpolator::SaveBinary | NiBSplinePoint3Interpolator.obj | fnv360_0822_retail, caller_sim + bridge(vtable|caller_sim) + skyrim(caller_sim), high
+void A50880Light::NiBSplinePoint3Interpolator_SaveBinary(A50880Stream& kStream)
 {
     SaveToStream(kStream);
     m_kFogTint.SaveBinary(kStream);
@@ -446,14 +447,14 @@ struct S_00a508d0_Obj
     int unk18;
     S_00a508d0_Sub sub1c;
     int unk28;
-    bool FUN_00a57e90(S_00a508d0_Obj* p);
+    bool NiBSplineInterpolator_IsEqual(S_00a508d0_Obj* p);
     bool FUN_00a508d0(S_00a508d0_Obj* p);
 };
 
 // @fnv 0x00a508d0
 bool S_00a508d0_Obj::FUN_00a508d0(S_00a508d0_Obj* pOther)
 {
-    if (!FUN_00a57e90(pOther))
+    if (!NiBSplineInterpolator_IsEqual(pOther))
         return false;
     if (sub1c.FUN_00439090(&pOther->sub1c))
         return false;

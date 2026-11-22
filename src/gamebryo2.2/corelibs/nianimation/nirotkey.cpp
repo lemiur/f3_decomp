@@ -95,14 +95,14 @@ class FUN_00a3e9a0_cls
     float* m_20;
     float m_24;
 
-    float FUN_00a3e680(unsigned int a, unsigned int b, float c);
+    float NiPathInterpolator_PathLength(unsigned int a, unsigned int b, float c);
     float GetAccumulatedValue();
 };
 
 void __cdecl FUN_00aa10f0(float* p);
 void* __cdecl FUN_00aa1070(unsigned int n);
 
-// If m_24 is negative, allocates a float array sized from m_18->m_08, fills running sums via FUN_00a3e680, stores the last value in m_24, and returns m_24.
+// If m_24 is negative, allocates a float array sized from m_18->m_08, fills running sums via NiPathInterpolator_PathLength, stores the last value in m_24, and returns m_24.
 // @fnv 0x00a3e9a0
 float FUN_00a3e9a0_cls::GetAccumulatedValue()
 {
@@ -119,7 +119,7 @@ float FUN_00a3e9a0_cls::GetAccumulatedValue()
         {
             do
             {
-                volatile float t = FUN_00a3e680(uiIndex, uiIndex + 1, 1.0f);
+                volatile float t = NiPathInterpolator_PathLength(uiIndex, uiIndex + 1, 1.0f);
                 float* p = m_20;
                 p[uiIndex + 1] = p[uiIndex] + t;
                 uiIndex = uiIndex + 1;

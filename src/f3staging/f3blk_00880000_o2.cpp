@@ -1155,8 +1155,9 @@ unsigned int unk24;
 unsigned int unk28;
 unsigned int unk2c;
 unsigned int unk30;
-~Value301(){FUN_00899a00();}void FUN_00899a00();static void operator delete(void*p,unsigned int size){FUN_0089ec10(p,size);}};struct Node301{unsigned int unk00;};struct Map301{void*vtable;unsigned int size;Node301**buckets;__forceinline Node301* First(){for(unsigned int i=0;i<size;++i)if(buckets[i])return buckets[i];return 0;}void FUN_0089a5d0(Node301*&,unsigned int&,Value301* volatile&);void FUN_00899cf0(unsigned int);};struct Owner301{unsigned int unk00,unk04,unk08;Map301 map;void FUN_00899e20();};
-void Owner301::FUN_00899e20(){Node301*position=map.First();while(position){unsigned int key;Value301* volatile value;map.FUN_0089a5d0(position,key,value);map.FUN_00899cf0(key);Value301*current=value;if(current){current->FUN_00899a00();FUN_0089ec10(current,sizeof(Value301));}}}
+~Value301(){FUN_00899a00();}void FUN_00899a00();static void operator delete(void*p,unsigned int size){FUN_0089ec10(p,size);}};struct Node301{unsigned int unk00;};struct Map301{void*vtable;unsigned int size;Node301**buckets;__forceinline Node301* First(){for(unsigned int i=0;i<size;++i)if(buckets[i])return buckets[i];return 0;}void FUN_0089a5d0(Node301*&,unsigned int&,Value301* volatile&);void FUN_00899cf0(unsigned int);};struct Owner301{unsigned int unk00,unk04,unk08;Map301 map;void NiStaticGeometryGroup_Purge();};
+// pdb: NiStaticGeometryGroup::Purge | NiStaticGeometryGroup.obj | fnv360_0822_retail, call_gap + skyrim(objrun_prop), high
+void Owner301::NiStaticGeometryGroup_Purge(){Node301*position=map.First();while(position){unsigned int key;Value301* volatile value;map.FUN_0089a5d0(position,key,value);map.FUN_00899cf0(key);Value301*current=value;if(current){current->FUN_00899a00();FUN_0089ec10(current,sizeof(Value301));}}}
 }
 }   // namespace f3m_00899e20
 
@@ -1603,9 +1604,10 @@ struct Buffer {
  int unk28;
  bool writable;
  bool FUN_0089edd0();
- unsigned FUN_0089f040(const char*,unsigned);
+ unsigned NiFile_FileWrite(const char*,unsigned);
 };
-unsigned Buffer::FUN_0089f040(const char* source,unsigned count) {
+// pdb: NiFile::FileWrite | NiFile_Xenon.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(objrun), high
+unsigned Buffer::NiFile_FileWrite(const char* source,unsigned count) {
  if(writable) {
  unsigned done=0;
  unsigned available=capacity-position;

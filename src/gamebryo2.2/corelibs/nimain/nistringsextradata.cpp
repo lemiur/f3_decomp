@@ -152,7 +152,7 @@ struct S_00a94a50_Stream
         unk1f8, unk1fc, unk200, unk204, unk208, unk20c, unk210, unk214, unk218, unk21c, unk220, unk224, unk228, unk22c,
         unk230, unk234, unk238, unk23c, unk240, unk244, unk248;
     S_00a94a50_Bin* m_pBin;
-    void FUN_00a64ce0(void** str);
+    void NiStream_LoadCString(void** str);
 };
 
 void* __cdecl FUN_00aa1070(unsigned int size);
@@ -184,7 +184,7 @@ void S_00a94a50::LoadStringArray(S_00a94a50_Stream* s)
         for (unsigned int i = 0; i < m_uiItemCount; i++)
         {
             m_ppData[i] = 0;
-            s->FUN_00a64ce0(&m_ppData[i]);
+            s->NiStream_LoadCString(&m_ppData[i]);
         }
     }
     else
@@ -298,11 +298,12 @@ struct CloneObject
 struct CloneSource
 {
     void CopyStringsExtraData(CloneObject* pDest, void* pCloning);
-    CloneObject* FUN_00a94990(void* pCloning);
+    CloneObject* NiStringsExtraData_CreateClone(void* pCloning);
 };
 
 // @fnv 0x00a94990
-CloneObject* CloneSource::FUN_00a94990(void* pCloning)
+// pdb: NiStringsExtraData::CreateClone | NiStringsExtraData.obj | fnv360_0822_retail, caller_sim + bridge(vtable|objopen_prop) + skyrim(caller_sim), high
+CloneObject* CloneSource::NiStringsExtraData_CreateClone(void* pCloning)
 {
     CloneObject* p = new CloneObject;
     CopyStringsExtraData(p, pCloning);
@@ -519,14 +520,15 @@ class NiExtraDataA949
 class NiStringsExtraDataA949 : public NiExtraDataA949
 {
   public:
-    void FUN_00a949f0(NiStreamA949& kStream);
+    void NiStringsExtraData_SaveBinary(NiStreamA949& kStream);
 
     unsigned int m_uiSize;
     char** m_ppcValue;
 };
 
 // @fnv 0x00a949f0
-void NiStringsExtraDataA949::FUN_00a949f0(NiStreamA949& kStream)
+// pdb: NiStringsExtraData::SaveBinary | NiStringsExtraData.obj | fnv360_0822_retail, caller_sim + bridge(vtable|objrun_open) + skyrim(caller_sim), high
+void NiStringsExtraDataA949::NiStringsExtraData_SaveBinary(NiStreamA949& kStream)
 {
     NiExtraDataA949::SaveBinary(kStream);
     A949SaveBinary(kStream, m_uiSize);

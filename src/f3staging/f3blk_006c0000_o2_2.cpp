@@ -17,7 +17,8 @@ namespace f3m_006d4190 {
 
 struct Info497 {DWORD userSize;SYSTEMTIME time;char dateTime[260];char user[260];};
 int __cdecl FUN_00403230(char*,unsigned int,const char*,...);
-void __stdcall FUN_006d4190(char* output,unsigned int capacity) {
+// pdb: BGSSaveLoadManager::GetVersionInfo | BGSSaveLoadManager.obj | fnv360_0822_retail, ustr + bridge(ustr|ustr) + skyrim(ustr), high
+void __stdcall BGSSaveLoadManager_GetVersionInfo(char* output,unsigned int capacity) {
     Info497 info;
     info.user[0]=0;memset(info.user+1,0,259);
     info.dateTime[0]=0;memset(info.dateTime+1,0,259);

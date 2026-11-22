@@ -66,7 +66,7 @@ struct This
     virtual void v44();
     virtual Result* GetResult(char* output);
     void FUN_00ca4e50(int first, int second);
-    void FUN_00c84df0(int first, int second);
+    void bhkShape_CopyMembers(int first, int second);
 };
 struct Resolved
 {
@@ -326,7 +326,7 @@ struct Owner
     int state;
     int flags;
     Node* node;
-    void FUN_00c84d50(Sink*);
+    void bhkShape_SaveBinary(Sink*);
     void FUN_00ca4f80(Sink*);
     void* getValue()
     {
@@ -459,10 +459,11 @@ struct Owner
     virtual void V44();
     virtual void V45(char*);
     void FUN_00ca4e50(int, int);
-    void FUN_00cafff0(int first, int second);
+    void bhkTriSampledHeightFieldBvTreeShape_CopyMembers(int first, int second);
 };
 // @fnv 0x00cafff0
-void Owner::FUN_00cafff0(int first, int second)
+// pdb: bhkTriSampledHeightFieldBvTreeShape::CopyMembers | bhkTriSampledHeightFieldBvTreeShape.obj | fnv360_0822_retail, caller_sim + bridge(caller_sim|vtable) + skyrim(objrun_open), high
+void Owner::bhkTriSampledHeightFieldBvTreeShape_CopyMembers(int first, int second)
 {
     char local;
     V45(&local);

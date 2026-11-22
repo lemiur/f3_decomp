@@ -361,12 +361,13 @@ class InterpA52F : public FUN_00a53280
     bool m_bBoolValue;
 
     void CloneTo(InterpA52F* dest, CloningProcessA52F& cloning);
-    InterpA52F* FUN_00a52f80(CloningProcessA52F& cloning);
+    InterpA52F* NiBoolTimelineInterpolator_CreateClone(CloningProcessA52F& cloning);
 };
 
 // Allocates a new InterpA52F, copies state into it via CloneTo, and returns the clone.
 // @fnv 0x00a52f80
-InterpA52F* InterpA52F::FUN_00a52f80(CloningProcessA52F& cloning)
+// pdb: NiBoolTimelineInterpolator::CreateClone | NiBoolTimelineInterpolator.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun) + skyrim(caller_sim), high
+InterpA52F* InterpA52F::NiBoolTimelineInterpolator_CreateClone(CloningProcessA52F& cloning)
 {
     InterpA52F* p = new InterpA52F;
     CloneTo(p, cloning);

@@ -29,11 +29,12 @@ void* FUN_00a35950_shell::FUN_00a35950()
 
 struct FUN_00a35e90_shell : public BSMultiTargetTreadTransfController
 {
-    char* FUN_00a35e90(unsigned short);
+    char* BSMultiTargetTreadTransfController_GetInterpolatorID(unsigned short);
 };
 
 // @fnv 0x00a35e90
-char* FUN_00a35e90_shell::FUN_00a35e90(unsigned short ausIndex)
+// pdb: BSMultiTargetTreadTransfController::GetInterpolatorID | BSMultiTargetTreadTransfController.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun) + skyrim(objrun_open), high
+char* FUN_00a35e90_shell::BSMultiTargetTreadTransfController_GetInterpolatorID(unsigned short ausIndex)
 {
     LinkAVObj* p = pLinksA[ausIndex];
     char** q = (char**)p->pTarget;
@@ -699,11 +700,12 @@ struct Controller112
     unsigned short count, field3a;
     Link112** links;
     unsigned short linkCount;
-    void FUN_00a35c00(float* time);
+    void BSMultiTargetTreadTransfController_Update(float* time);
 };
 
 // @fnv 0x00a35c00
-void Controller112::FUN_00a35c00(float* time)
+// pdb: BSMultiTargetTreadTransfController::Update | BSMultiTargetTreadTransfController.obj | fnv360_0822_retail, objrun + bridge(vtable|caller_sim) + skyrim(caller_sim), high
+void Controller112::BSMultiTargetTreadTransfController_Update(float* time)
 {
     if (Active() & 1)
     {

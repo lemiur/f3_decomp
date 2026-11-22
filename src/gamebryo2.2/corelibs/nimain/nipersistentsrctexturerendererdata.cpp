@@ -212,7 +212,7 @@ struct NiStreamV_s
 };
 struct NiPixelFormat_s
 {
-    void FUN_00a7d1a0(NiStream&);
+    void NiPixelFormat_SaveBinary(NiStream&);
 };
 struct RendererDataBase_s
 {
@@ -236,18 +236,19 @@ struct NiPersistentSrcTextureRendererData_s : RendererDataBase_s
     unsigned int m_uiPaletteSize;
     unsigned int m_uiPaletteEntryCount;
     void* m_spPalette;
-    void FUN_00a984b0(NiStream& kStream);
+    void NiPersistentSrcTextureRendererData_SaveBinary(NiStream& kStream);
 };
 
 // Writes the renderer data to the stream: pixel format, palette link ID, mipmap levels, per-level dimensions and offsets, faces, and pixel data.
 // @fnv 0x00a984b0
-void NiPersistentSrcTextureRendererData_s::FUN_00a984b0(NiStream& kStream)
+// pdb: NiPersistentSrcTextureRendererData::SaveBinary | NiPersistentSrcTextureRendererData.obj | fnv360_0822_retail, udata + bridge(vtable|udata) + skyrim(udata), high
+void NiPersistentSrcTextureRendererData_s::NiPersistentSrcTextureRendererData_SaveBinary(NiStream& kStream)
 {
     RendererDataBase_s::LinkObject(kStream);
 
     bool bToolModeStreamingValid = DAT_011f5f00 && m_uiPaletteSize && m_uiPaletteEntryCount && m_pucPaletteData;
 
-    m_kPixelFormat.FUN_00a7d1a0(kStream);
+    m_kPixelFormat.NiPixelFormat_SaveBinary(kStream);
     ((NiStreamV_s*)&kStream)->SaveLinkID(m_spPalette);
     NiStreamSaveBinary_s(kStream, m_uiMipmapLevels);
     NiStreamSaveBinary_s(kStream, m_uiPixelStride);

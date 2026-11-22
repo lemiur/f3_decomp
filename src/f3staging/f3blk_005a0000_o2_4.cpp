@@ -1891,8 +1891,8 @@ struct Base {
     int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; int unk1C; int unk20;
     unsigned char unk24;
     Ref* FUN_004d62c0();
-    int FUN_004d3430();
-    int FUN_004d3450();
+    int TESObjectCELL_GetDataX();
+    int TESObjectCELL_GetDataY();
 };
 struct Proc {
     unsigned FUN_005acce0();
@@ -1934,9 +1934,10 @@ struct Owner {
     int unk98;
     Ref* unk9C;
     Proc* FUN_005a4020();
-    Pt FUN_005a4dc0(Ref* ref);
+    Pt TESPackage_GetSecondLocationCoord(Ref* ref);
 };
-Pt Owner::FUN_005a4dc0(Ref* ref)
+// pdb: TESPackage::GetSecondLocationCoord | Package.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+Pt Owner::TESPackage_GetSecondLocationCoord(Ref* ref)
 {
     Proc* current = FUN_005a4020();
     Pt result = DAT_0108ec68;
@@ -1950,8 +1951,8 @@ Pt Owner::FUN_005a4dc0(Ref* ref)
                 Ref* r = b->FUN_004d62c0();
                 if (r) result = *r->GetPos();
                 else if (!(b->unk24 & 1)) {
-                    result.x = (float)(current->FUN_005acda0()->FUN_004d3430() << 12);
-                    result.y = (float)(current->FUN_005acda0()->FUN_004d3450() << 12);
+                    result.x = (float)(current->FUN_005acda0()->TESObjectCELL_GetDataX() << 12);
+                    result.y = (float)(current->FUN_005acda0()->TESObjectCELL_GetDataY() << 12);
                     result.z = 0.0f;
                 }
             }

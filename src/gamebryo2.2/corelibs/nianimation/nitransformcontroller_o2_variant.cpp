@@ -124,11 +124,12 @@ struct S00a36100
     char _pad[0x2c];
     NiAVObject* m_spReferencedObject;
 
-    NiTransformInterpolator* FUN_00a36100(unsigned short usIndex);
+    NiTransformInterpolator* NiTransformController_CreatePoseInterpolator(unsigned short usIndex);
 };
 
 // @fnv 0x00a36100
-NiTransformInterpolator* S00a36100::FUN_00a36100(unsigned short usIndex)
+// pdb: NiTransformController::CreatePoseInterpolator | NiTransformController.obj | fnv360_0822_retail, objrun_prop + bridge(vtable|objrun_prop) + skyrim(objrun_prop), high
+NiTransformInterpolator* S00a36100::NiTransformController_CreatePoseInterpolator(unsigned short usIndex)
 {
     NiAVObject* pkTarget = m_spReferencedObject;
     NiQuaternion kRotate;
@@ -157,11 +158,12 @@ struct FUN_00a2f8a0_Holder
 struct FUN_00a38ef0_Class : NiInterpController
 {
     NiInterpolator* m_spControllerInterpolator;
-    void FUN_00a38ef0(FUN_00a38ef0_Class* pkDest, CloningProcess& kCloning);
+    void NiSingleInterpController_CopyMembers(FUN_00a38ef0_Class* pkDest, CloningProcess& kCloning);
 };
 
 // @fnv 0x00a38ef0
-void FUN_00a38ef0_Class::FUN_00a38ef0(FUN_00a38ef0_Class* pkDest, CloningProcess& kCloning)
+// pdb: NiSingleInterpController::CopyMembers | NiSingleInterpController.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(caller_sim), high
+void FUN_00a38ef0_Class::NiSingleInterpController_CopyMembers(FUN_00a38ef0_Class* pkDest, CloningProcess& kCloning)
 {
     ((FUN_00a2f8a0_Holder*)this)->FUN_00a2f8a0(pkDest, kCloning);
 
@@ -219,7 +221,7 @@ struct NiSingleInterpControllerBase
 };
 struct FUN_00a35a80_Obj
 {
-    void FUN_00a35a80(int a1, int a2);
+    void BSMultiTargetTreadTransfController_AllocateStorage(int a1, int a2);
 };
 struct FUN_00a36070 : NiSingleInterpControllerBase
 {
@@ -237,7 +239,7 @@ FUN_00a36070::FUN_00a36070(int a1, int a2)
     unk3c = 0;
     *(int**)this = &DAT_01096694;
     unk40 = 0;
-    ((FUN_00a35a80_Obj*)this)->FUN_00a35a80(a1, a2);
+    ((FUN_00a35a80_Obj*)this)->BSMultiTargetTreadTransfController_AllocateStorage(a1, a2);
 }
 
 extern double DAT_010241b0;
@@ -328,7 +330,8 @@ class NiTransformInitB
 };
 
 // @fnv 0x00a36620
-void* __stdcall FUN_00a36620(int a1, int a2, unsigned char a3, float a4, int a5)
+// pdb: NiTransformController::CreateBlendInterpolator | NiTransformController.obj | fnv360_0822_retail, caller_sim + bridge(vtable|objrun) + skyrim(caller_sim), high
+void* __stdcall NiTransformController_CreateBlendInterpolator(int a1, int a2, unsigned char a3, float a4, int a5)
 {
     void* obj;
     if (a3 != 0)
@@ -425,7 +428,7 @@ extern const float DAT_01096324;
 
 struct TransformCtl_t : NiTimeController
 {
-    void FUN_00a36680(UpdData_00a36680&);
+    void NiTransformController_Update(UpdData_00a36680&);
     unsigned short GetField(unsigned short uMask, unsigned short uPos) const
     {
         return (*(const unsigned short*)((const char*)this + 8) & uMask) >> uPos;
@@ -437,7 +440,8 @@ struct TransformCtl_t : NiTimeController
 };
 
 // @fnv 0x00a36680
-void TransformCtl_t::FUN_00a36680(UpdData_00a36680& UpdateData)
+// pdb: NiTransformController::Update | NiTransformController.obj | fnv360_0822_retail, caller_sim + bridge(vtable|caller_sim) + skyrim(caller_sim), high
+void TransformCtl_t::NiTransformController_Update(UpdData_00a36680& UpdateData)
 {
     Interp_00a36680*& spInterp = *(Interp_00a36680**)((char*)this + 0x34);
     if (GetManagerControlled())

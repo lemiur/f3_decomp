@@ -832,7 +832,8 @@ __declspec(noinline) void FUN_00899140()
     FUN_0089dff0();
 }
 
-__declspec(noinline) void FUN_008c2520()
+// pdb: NiRollController::LoadBinary | NiRollController.obj | fnv360_0822_retail, caller_sim + skyrim(caller_sim), high
+__declspec(noinline) void NiRollController_LoadBinary()
 {
     FUN_008d1520();
 }
@@ -872,12 +873,14 @@ __declspec(noinline) void FUN_008ccc00()
     FUN_008b6740();
 }
 
-__declspec(noinline) void FUN_008ccc10()
+// pdb: NiBoolTimelineInterpolator::SaveBinary | NiBoolTimelineInterpolator.obj | fnv360_0822_retail, objrun_prop + bridge(vtable|objrun_prop) + skyrim(caller_sim), high
+__declspec(noinline) void NiBoolTimelineInterpolator_SaveBinary()
 {
     FUN_008cd4e0();
 }
 
-__declspec(noinline) void FUN_008ccc20()
+// pdb: NiBoolTimelineInterpolator::IsEqual | NiBoolTimelineInterpolator.obj | fnv360_0822_retail, objrun_prop + bridge(vtable|objrun_sim) + skyrim(caller_sim), high
+__declspec(noinline) void NiBoolTimelineInterpolator_IsEqual()
 {
     FUN_008cd0d0();
 }
@@ -907,7 +910,8 @@ __declspec(noinline) void FUN_00ac91e0()
     FUN_00ad1ee0();
 }
 
-__declspec(noinline) void FUN_00aca1a0()
+// pdb: NiPSysModifierActiveCtlr::LinkObject | NiPSysModifierActiveCtlr.obj | fnv360_0822_retail, caller_sim + bridge(vtable|objrun_prop) + skyrim(caller_sim), high
+__declspec(noinline) void NiPSysModifierActiveCtlr_LinkObject()
 {
     FUN_00ad2460();
 }
@@ -2560,7 +2564,8 @@ __declspec(noinline) void* FUN_0083f810()
     return &DAT_0108f448;
 }
 
-__declspec(noinline) void* FUN_0085bf70()
+// pdb: NiScreenPolygon::GetRTTI | NiOldScreenSpace.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+__declspec(noinline) void* NiScreenPolygon_GetRTTI()
 {
     return &DAT_0109085c;
 }
@@ -2570,12 +2575,14 @@ __declspec(noinline) void* FUN_008c2570()
     return &DAT_01092a30;
 }
 
-__declspec(noinline) void* FUN_008ccc30()
+// pdb: NiBoolTimelineInterpolator::GetRTTI | NiBoolTimelineInterpolator.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+__declspec(noinline) void* NiBoolTimelineInterpolator_GetRTTI()
 {
     return &DAT_01092884;
 }
 
-__declspec(noinline) void* FUN_00aca1b0()
+// pdb: NiPSysModifierActiveCtlr::GetRTTI | NiPSysModifierActiveCtlr.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+__declspec(noinline) void* NiPSysModifierActiveCtlr_GetRTTI()
 {
     return &DAT_0116edc8;
 }
@@ -3072,19 +3079,22 @@ void FUN_009cbfb0(int, char*);
 void FUN_009cbff0(int, char*);
 void FUN_009cc030(int, char*);
 
-void FUN_009bc9c0(int a, char* b)
+// pdb: hkConvexListAgent3::removePoint | hkpConvexListAgent3.obj | fnv360_0822_retail, caller_sim + bridge(caller_sim|caller_sim) + skyrim(caller_sim), high
+void hkConvexListAgent3_removePoint(int a, char* b)
 {
     if (b[0xb] & 0x20)
         FUN_009cbfb0(a, b);
 }
 
-void FUN_009bc9e0(int a, char* b)
+// pdb: hkConvexListAgent3::commitPotential | hkpConvexListAgent3.obj | fnv360_0822_retail, objrun + skyrim(objrun), high
+void hkConvexListAgent3_commitPotential(int a, char* b)
 {
     if (b[0xb] & 0x20)
         FUN_009cbff0(a, b);
 }
 
-void FUN_009bca00(int a, char* b)
+// pdb: hkConvexListAgent3::createZombie | hkpConvexListAgent3.obj | fnv360_0822_retail, objrun + skyrim(objrun), high
+void hkConvexListAgent3_createZombie(int a, char* b)
 {
     if (b[0xb] & 0x20)
         FUN_009cc030(a, b);

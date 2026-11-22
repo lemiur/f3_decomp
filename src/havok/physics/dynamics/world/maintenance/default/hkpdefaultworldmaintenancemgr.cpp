@@ -11,17 +11,17 @@ struct S_00d0b250_RefObj
     {}
 };
 
-struct FUN_00d0b250 : S_00d0b250_RefObj
+struct hkpDefaultWorldMaintenanceMgr : S_00d0b250_RefObj // src: F3_EXE vtable 0x00e7da5c (old: FUN_00d0b250)
 {
     float m_kPointA;
     float m_kPointB;
-    FUN_00d0b250();
-    virtual ~FUN_00d0b250();
+    hkpDefaultWorldMaintenanceMgr();
+    virtual ~hkpDefaultWorldMaintenanceMgr();
 };
 
 // Initializes the object's two float members to 33.0 and 63.0 and sets the base reference count to 1.
 // @fnv 0x00d0b250
-FUN_00d0b250::FUN_00d0b250() : m_kPointA(33.0f), m_kPointB(63.0f)
+hkpDefaultWorldMaintenanceMgr::hkpDefaultWorldMaintenanceMgr() : m_kPointA(33.0f), m_kPointB(63.0f)
 {}
 
 struct S_00d0b230_Dst
@@ -60,7 +60,7 @@ extern const char str_010cd380[];
 extern const char str_010cd378[];
 extern const char str_010cd36c[];
 extern const char str_01076f38[];
-extern void __cdecl FUN_00cb6f30(void*);
+extern void __cdecl hkpWorldOperationUtil_splitSimulationIslands(void*);
 struct TraceBuffer
 {
     int unk00;
@@ -88,9 +88,9 @@ struct FUN_00d0b280_cls
     int unk08;
     float unk0c;
     void FUN_00d0b280(float* first, float* second);
-    void FUN_00d0b3e0(float* first, float* second);
+    void hkpDefaultWorldMaintenanceMgr_resetWorldTime(float* first, float* second);
 };
-// Writes trace entries, calls FUN_00cb6f30(first), and if *second >= unk0c calls FUN_00d0b3e0(first, second) between further trace entries.
+// Writes trace entries, calls hkpWorldOperationUtil_splitSimulationIslands(first), and if *second >= unk0c calls hkpDefaultWorldMaintenanceMgr_resetWorldTime(first, second) between further trace entries.
 // @fnv 0x00d0b280
 void FUN_00d0b280_cls::FUN_00d0b280(float* first, float* second)
 {
@@ -107,7 +107,7 @@ void FUN_00d0b280_cls::FUN_00d0b280(float* first, float* second)
         current += 16;
         buffer->current = current;
     }
-    FUN_00cb6f30(first);
+    hkpWorldOperationUtil_splitSimulationIslands(first);
     if (*second >= unk0c)
     {
         buffer = (TraceBuffer*)TlsGetValue(DAT_0126835c);
@@ -122,7 +122,7 @@ void FUN_00d0b280_cls::FUN_00d0b280(float* first, float* second)
             current += 12;
             buffer->current = current;
         }
-        FUN_00d0b3e0(first, second);
+        hkpDefaultWorldMaintenanceMgr_resetWorldTime(first, second);
     }
     buffer = (TraceBuffer*)TlsGetValue(DAT_0126835c);
     current = buffer->current;
@@ -149,10 +149,10 @@ struct FUN_00d0b350_cls
     int unk04;
     int unk08;
     float unk0c;
-    void FUN_00d0b3e0(float* first, float* second);
+    void hkpDefaultWorldMaintenanceMgr_resetWorldTime(float* first, float* second);
     void TraceConditionalCall(float* first, float* second);
 };
-// Writes a trace entry, calls FUN_00d0b3e0(first, second) if *second >= unk0c, then writes a closing trace entry.
+// Writes a trace entry, calls hkpDefaultWorldMaintenanceMgr_resetWorldTime(first, second) if *second >= unk0c, then writes a closing trace entry.
 // @fnv 0x00d0b350
 void FUN_00d0b350_cls::TraceConditionalCall(float* first, float* second)
 {
@@ -170,7 +170,7 @@ void FUN_00d0b350_cls::TraceConditionalCall(float* first, float* second)
         buffer->current = current;
     }
     if (*second >= unk0c)
-        FUN_00d0b3e0(first, second);
+        hkpDefaultWorldMaintenanceMgr_resetWorldTime(first, second);
     buffer = (TraceBuffer*)TlsGetValue(DAT_0126835c);
     current = buffer->current;
     if (current < buffer->end)
@@ -481,7 +481,7 @@ struct TimeRebaser
     int unk00;
     int unk04;
     float m_newTime;
-    void FUN_00d0b3e0(hkpWorld* world, hkStepInfo& stepInfo);
+    void hkpDefaultWorldMaintenanceMgr_resetWorldTime(hkpWorld* world, hkStepInfo& stepInfo);
 };
 
 // @f3 0x0098ba90 (community match, verified in this file)
@@ -669,7 +669,8 @@ struct F3Entity
     float m_uiCommandId;
 };
 void __cdecl FUN_009445e0(hkpSimulationIsland* island, float oldTime, float newTime, CollisionAgentContext* input);
-void TimeRebaser::FUN_00d0b3e0(hkpWorld* world, hkStepInfo& stepInfo)
+// pdb: hkpDefaultWorldMaintenanceMgr::resetWorldTime | hkpDefaultWorldMaintenanceMgr.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_seq), high
+void TimeRebaser::hkpDefaultWorldMaintenanceMgr_resetWorldTime(hkpWorld* world, hkStepInfo& stepInfo)
 {
     F3World* fo3World = (F3World*)world;
     float deltaTime = stepInfo.m_fEndTime - stepInfo.m_uiStartTime;

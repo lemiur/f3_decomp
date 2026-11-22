@@ -1972,7 +1972,8 @@ FUN_00b9b930_class* FUN_00b9b930_class::FUN_00b9b930(bool abDelete)
 extern int DAT_011ff0f4;
 
 // @fnv 0x00b811e0
-int __cdecl FUN_00b811e0()
+// pdb: NiBackToFrontAccumulator::GetRTTI | NiBackToFrontAccumulator.obj | fnv360_0822_retail, udata + bridge(vtable|udata) + skyrim(udata), high
+int __cdecl NiBackToFrontAccumulator_GetRTTI()
 {
     return reinterpret_cast<int>(&DAT_011ff0f4);
 }
@@ -2337,11 +2338,12 @@ struct S_00b8a6e0_Foo
     unsigned char unk55;
     unsigned char unk56;
 
-    void __thiscall FUN_00b8a6e0(int arg0, unsigned int arg1, unsigned int arg2);
+    void __thiscall ImageSpaceShaderParam_SetTexOffset(int arg0, unsigned int arg1, unsigned int arg2);
 };
 
 // @fnv 0x00b8a6e0
-void __thiscall S_00b8a6e0_Foo::FUN_00b8a6e0(int iSlot, unsigned int arg1, unsigned int arg2)
+// pdb: ImageSpaceShaderParam::SetTexOffset | ImageSpaceShaderParam.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_seq), high
+void __thiscall S_00b8a6e0_Foo::ImageSpaceShaderParam_SetTexOffset(int iSlot, unsigned int arg1, unsigned int arg2)
 {
     float value0;
     float value1;
@@ -3389,10 +3391,11 @@ struct S_00b8db50_Cls
     virtual void v148()
     {}
     virtual void v14c();
-    void FUN_00b8db50();
+    void ImageSpaceShaderBlur5_ReloadShaders();
 };
 // @fnv 0x00b8db50
-void S_00b8db50_Cls::FUN_00b8db50()
+// pdb: ImageSpaceShaderBlur5::ReloadShaders | ImageSpaceManager.obj | fnv360_0822_retail, udata + bridge(udata|udata), high
+void S_00b8db50_Cls::ImageSpaceShaderBlur5_ReloadShaders()
 {
     S_00b8db50_Desc s1;
     S_00b8db50_Desc s2;
@@ -18159,7 +18162,7 @@ struct B9Entry
 };
 struct B9List
 {
-    B9Entry* FUN_00b70600(void** position);
+    B9Entry* BSShaderLightingProperty_GetFirstActiveNonShadowLight(void** position);
     B9Entry* FUN_00b70700(void** position);
 };
 struct B9Manager
@@ -18344,7 +18347,7 @@ void B9D150::UpdateOutputLight(B9List* lights, B9Point3 position)
     unsigned int count = 0;
     unsigned short index = 0;
     void* cursor;
-    B9Entry* entry = lights ? lights->FUN_00b70600(&cursor) : B9Mgr()->GetListItemAt(0);
+    B9Entry* entry = lights ? lights->BSShaderLightingProperty_GetFirstActiveNonShadowLight(&cursor) : B9Mgr()->GetListItemAt(0);
 
     if (entry)
     {
@@ -18389,7 +18392,7 @@ void B9D150::UpdateOutputLight(B9List* lights, B9Point3 position)
     else
     {
         unsigned int scan = 0;
-        entry = lights ? lights->FUN_00b70600(&cursor) : manager->GetListItemAt(0);
+        entry = lights ? lights->BSShaderLightingProperty_GetFirstActiveNonShadowLight(&cursor) : manager->GetListItemAt(0);
         for (unsigned int i = 0; i < count; ++i)
         {
             if (entry && !entry->disabled)

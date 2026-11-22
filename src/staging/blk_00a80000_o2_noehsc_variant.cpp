@@ -315,7 +315,8 @@ struct SkinData
 };
 
 // @fnv 0x00a84810
-WeightArray* __stdcall FUN_00a84810(unsigned int vertexCount, SkinData* skin)
+// pdb: NiSkinPartition::CreateVertexInteractions | NiSkinPartition.obj | fnv360_0822_retail, call_gap + bridge(call_seq|objrun_prop) + skyrim(call_gap), high
+WeightArray* __stdcall NiSkinPartition_CreateVertexInteractions(unsigned int vertexCount, SkinData* skin)
 {
     WeightArray* arrays = new WeightArray[vertexCount];
     unsigned int boneCount = skin->boneCount;
@@ -923,11 +924,11 @@ struct GeometryBuilder
 {
     unsigned int unk00, unk04, count;
     OutputRecord* output;
-    TempRecord* FUN_00a84810(unsigned int, SkinBuildData*);
+    TempRecord* NiSkinPartition_CreateVertexInteractions(unsigned int, SkinBuildData*);
     bool ReduceGroupWeights(SourceGeometry*, unsigned char, unsigned char, TempRecord*);
     bool BuildTriangleSetMapping(SourceGeometry*, SkinBuildData*, unsigned char, TempRecord*, HolderArray*, void**,
                       OutputRecord**);
-    bool FUN_00a84980(SourceGeometry*, SkinBuildData*, unsigned char, unsigned char, bool, OutputRecord**,
+    bool NiSkinPartition_MakePartitions(SourceGeometry*, SkinBuildData*, unsigned char, unsigned char, bool, OutputRecord**,
                       unsigned short*, unsigned char*);
 };
 
@@ -1036,13 +1037,14 @@ __declspec(noinline) void FUN_00a81ba0::PopulateSkinData(C082d30* triangles, Hol
 }
 
 // @fnv 0x00a84980
-bool GeometryBuilder::FUN_00a84980(SourceGeometry* source, SkinBuildData* other, unsigned char first,
+// pdb: NiSkinPartition::MakePartitions | NiSkinPartition.obj | fnv360_0822_retail, call_gap + bridge(call_gap|objrun_prop) + skyrim(call_gap), high
+bool GeometryBuilder::NiSkinPartition_MakePartitions(SourceGeometry* source, SkinBuildData* other, unsigned char first,
                                    unsigned char second, bool mode, OutputRecord** outputs, unsigned short* indices,
                                    unsigned char* changes)
 {
     HolderArray holders = {0, 0, 0};
     void* data;
-    TempRecord* records = FUN_00a84810(source->GetCount(), other);
+    TempRecord* records = NiSkinPartition_CreateVertexInteractions(source->GetCount(), other);
     if (!records)
     {
         NiFree(records);

@@ -2876,7 +2876,8 @@ void __cdecl UpdateShaderProperty(NiAVObjectB57B* pkObject, BSShaderManager::eOb
 
 // Recursively applies a shader property to a NiAVObject, descending into child nodes when the object is not geometry.
 // @fnv 0x00b57bd0
-void __cdecl FUN_00b57bd0(NiAVObjectB57B* pkObject, BSShaderManager::eObjectType eType, bool bArg2, bool bArg3)
+// pdb: BSShaderManager::PrepareObjectRecurse | BSShaderManager.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_gap) + skyrim(caller_sim), high
+void __cdecl BSShaderManager_PrepareObjectRecurse(NiAVObjectB57B* pkObject, BSShaderManager::eObjectType eType, bool bArg2, bool bArg3)
 {
     if (pkObject->IsSceneNode() || pkObject->IsGeometry())
     {
@@ -2891,7 +2892,7 @@ void __cdecl FUN_00b57bd0(NiAVObjectB57B* pkObject, BSShaderManager::eObjectType
             {
                 NiAVObjectB57B* pkChild = pkNode->m_kChildList.GetAt(i);
                 if (pkChild)
-                    FUN_00b57bd0(pkChild, eType, bArg2, bArg3);
+                    BSShaderManager_PrepareObjectRecurse(pkChild, eType, bArg2, bArg3);
             }
         }
     }
@@ -3200,7 +3201,8 @@ extern NP DAT_011f95d8;
 extern NP DAT_011f9548[35];
 // When all is true, clears cached references and deletes cleanup objects; always clears selected globals and releases the pointer array.
 // @fnv 0x00b54630
-void FUN_00b54630(bool all)
+// pdb: BSShaderManager::Free | BSShaderManager.obj | fnv360_0822_retail, ustr + bridge(ustr|ustr) + skyrim(ustr), high
+void BSShaderManager_Free(bool all)
 {
     if (all)
     {
@@ -4509,7 +4511,8 @@ struct TangentDataBindings : NiGeometryData
     unsigned short* FUN_008404e0();
     void FUN_00830ee0(unsigned short, NiPoint3*, NiPoint3*, RgbaColor*, NiPoint2*, unsigned short, unsigned int);
 };
-NativeB66810* __cdecl FUN_00b54b60(NiGeometry* apGeometry)
+// pdb: BSShaderManager::CreateTangentSpaceSimple | BSShaderManager.obj | fnv360_0822_retail, ustr + bridge(ustr|ustr) + skyrim(ustr), high
+NativeB66810* __cdecl BSShaderManager_CreateTangentSpaceSimple(NiGeometry* apGeometry)
 {
     if (apGeometry->GetName())
         _strnicmp(apGeometry->GetName(), str_00dcad64, 4);

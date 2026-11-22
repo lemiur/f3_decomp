@@ -201,13 +201,14 @@ struct FUN_00a50110_obj : public BSFadeNode
     unsigned int m_kRotCPHandle;
     unsigned int m_kScaleCPHandle;
     FUN_00a50110_obj(int, unsigned short, unsigned short, unsigned short, int) throw();
-    void FUN_00a57fd0(FUN_00a50110_obj*, FUN_00a50110_proc&);
+    void NiBSplineInterpolator_CopyMembers(FUN_00a50110_obj*, FUN_00a50110_proc&);
 };
 // @fnv 0x00a50110
-FUN_00a50110_obj* __fastcall FUN_00a50110(FUN_00a50110_obj* self, int, FUN_00a50110_proc* kCloning)
+// pdb: NiBSplineTransformInterpolator::CreateClone | NiBSplineTransformInterpolator.obj | fnv360_0822_retail, caller_sim + bridge(vtable|objrun) + skyrim(caller_sim), high
+FUN_00a50110_obj* __fastcall NiBSplineTransformInterpolator_CreateClone(FUN_00a50110_obj* self, int, FUN_00a50110_proc* kCloning)
 {
     FUN_00a50110_obj* pkObject = new FUN_00a50110_obj(0, 0xffff, 0xffff, 0xffff, 0);
-    self->FUN_00a57fd0(pkObject, *kCloning);
+    self->NiBSplineInterpolator_CopyMembers(pkObject, *kCloning);
     pkObject->m_kDefaultTransform = self->m_kDefaultTransform;
     pkObject->m_kTransCPHandle = self->m_kTransCPHandle;
     pkObject->m_kRotCPHandle = self->m_kRotCPHandle;
@@ -227,7 +228,8 @@ struct FUN_00a4fff0 : public BSFadeNode
 };
 // Allocates and constructs a FUN_00a4fff0 with arguments 0, 0xffff, 0xffff, 0xffff, 0, returning the new object.
 // @fnv 0x00a50180
-FUN_00a4fff0* FUN_00a50180()
+// pdb: NiBSplineTransformInterpolator::CreateObject | NiBSplineTransformInterpolator.obj | fnv360_0822_retail, objrun + bridge(hash|objrun), high
+FUN_00a4fff0* NiBSplineTransformInterpolator_CreateObject()
 {
     return new FUN_00a4fff0(0, 0xffff, 0xffff, 0xffff, 0);
 }
@@ -245,13 +247,13 @@ struct FUN_00a501b0_obj
     unsigned int m_kTransCPHandle;
     unsigned int m_kRotCPHandle;
     unsigned int m_kScaleCPHandle;
-    bool FUN_00a57e90(FUN_00a501b0_obj*);
+    bool NiBSplineInterpolator_IsEqual(FUN_00a501b0_obj*);
 };
-// Returns true if the object passes FUN_00a57e90, its quaternion matches, and the trans, rot and scale CP handles all match the other object's.
+// Returns true if the object passes NiBSplineInterpolator_IsEqual, its quaternion matches, and the trans, rot and scale CP handles all match the other object's.
 // @fnv 0x00a501b0
 bool __fastcall FUN_00a501b0(FUN_00a501b0_obj* self, int, FUN_00a501b0_obj* pkObject)
 {
-    if (self->FUN_00a57e90(pkObject) && self->m_kDefaultTransform.Equals(&pkObject->m_kDefaultTransform) &&
+    if (self->NiBSplineInterpolator_IsEqual(pkObject) && self->m_kDefaultTransform.Equals(&pkObject->m_kDefaultTransform) &&
         pkObject->m_kTransCPHandle == self->m_kTransCPHandle && pkObject->m_kRotCPHandle == self->m_kRotCPHandle &&
         pkObject->m_kScaleCPHandle == self->m_kScaleCPHandle)
         return true;
@@ -576,12 +578,13 @@ class A503E0Light : public A503E0Base
     float m_fValue1;
     float m_fValue2;
 
-    void FUN_00a503e0(A503E0Stream& kStream);
+    void NiBSplineTransformInterpolator_SaveBinary(A503E0Stream& kStream);
 };
 
 // Saves the base data, color, and three float values of the light to the stream.
 // @fnv 0x00a503e0
-void A503E0Light::FUN_00a503e0(A503E0Stream& kStream)
+// pdb: NiBSplineTransformInterpolator::SaveBinary | NiBSplineTransformInterpolator.obj | fnv360_0822_retail, caller_sim + bridge(vtable|caller_sim) + skyrim(caller_sim), high
+void A503E0Light::NiBSplineTransformInterpolator_SaveBinary(A503E0Stream& kStream)
 {
     SaveToStream(kStream);
     m_kFogTint.SaveBinary(kStream);
@@ -719,7 +722,8 @@ struct FUN_00a57fd0_fields
 };
 
 // @fnv 0x00a57fd0
-void FUN_00a50110_obj::FUN_00a57fd0(FUN_00a50110_obj* destination, FUN_00a50110_proc& cloning)
+// pdb: NiBSplineInterpolator::CopyMembers | NiBSplineInterpolator.obj | fnv360_0822_retail, call_seq + bridge(call_seq|objrun) + skyrim(call_seq), high
+void FUN_00a50110_obj::NiBSplineInterpolator_CopyMembers(FUN_00a50110_obj* destination, FUN_00a50110_proc& cloning)
 {
     FUN_00a57fd0_fields* source = reinterpret_cast<FUN_00a57fd0_fields*>(this);
     FUN_00a57fd0_fields* target = reinterpret_cast<FUN_00a57fd0_fields*>(destination);

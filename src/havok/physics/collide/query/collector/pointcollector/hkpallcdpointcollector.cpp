@@ -27,11 +27,12 @@ struct SortableArray
     void* m_pData;
     int m_iArrayLength;
 
-    void FUN_00cabad0();
+    void hkpAllCdPointCollector_sortHits();
 };
 
 // @fnv 0x00cabad0
-void SortableArray::FUN_00cabad0()
+// pdb: hkpAllCdPointCollector::sortHits | hkpAllCdPointCollector.obj | fnv360_0822_retail, call_seq + bridge(call_gap_sim|call_gap_sim) + skyrim(callee_sim), high
+void SortableArray::hkpAllCdPointCollector_sortHits()
 {
     ByteTag kTag;
     if (m_iArrayLength > 1)

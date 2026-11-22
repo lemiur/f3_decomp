@@ -42,14 +42,14 @@ struct Outer401 {
 struct Target401 {
     void FUN_0090b020(Outer401* object);
     void FUN_0090b960(Interface401* object);
-    void FUN_0090afd0(Interface401* object);
+    void hkpEntity_removeEntityActivationListener(Interface401* object);
 };
 void FUN_00d0ae30_cls::FUN_00d0ae30(CallbackTarget* target) {
     Outer401* outer = reinterpret_cast<Outer401*>(reinterpret_cast<char*>(this) - 4);
     Target401* receiver = reinterpret_cast<Target401*>(target);
     receiver->FUN_0090b020(outer);
     receiver->FUN_0090b960(outer ? &outer->first : 0);
-    receiver->FUN_0090afd0(outer ? &outer->second : 0);
+    receiver->hkpEntity_removeEntityActivationListener(outer ? &outer->second : 0);
     if (outer)
         outer->Destroy(1);
 }

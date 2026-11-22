@@ -208,12 +208,13 @@ struct NiOBB
     float m_afWorldExtent[3];
     NiOBBRoot* m_pkTreeNode;
 
-    int FUN_00ebc2a0(const NiOBB& kBox, float& rfTime, NiPoint3_ext& rkPoint);
+    int NiOBBox_FindIntersection(const NiOBB& kBox, float& rfTime, NiPoint3_ext& rkPoint);
 };
 
 // Tests swept OBB collision against kBox, writing the earliest collision time to rfTime and the contact point to rkPoint, returning 1 on hit or 0 on miss.
 // @fnv 0x00ebc2a0
-int NiOBB::FUN_00ebc2a0(const NiOBB& kBox, float& rfHitTime, NiPoint3_ext& rkHitPoint)
+// pdb: NiOBBox::FindIntersection | NiOBBox.obj | fnv360_0822_retail, objrun + bridge(hash|objrun), high
+int NiOBB::NiOBBox_FindIntersection(const NiOBB& kBox, float& rfHitTime, NiPoint3_ext& rkHitPoint)
 {
     const NiPoint3_ext* pkA = m_akWorldBasis;
     const NiPoint3_ext* pkB = kBox.m_akWorldBasis;

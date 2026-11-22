@@ -92,7 +92,8 @@ void* __thiscall NiScreenGeometry::FUN_00a90040(unsigned int flags)
 extern "C" void* g_011f5e54;
 
 // @fnv 0x00a90ab0
-void* __cdecl FUN_00a90ab0()
+// pdb: NiParticles::GetRTTI | NiParticles.obj | fnv360_0721_beta, udata + bridge(vtable|objrun_prop) + skyrim(objrun_open), high
+void* __cdecl NiParticles_GetRTTI()
 {
     return &g_011f5e54;
 }
@@ -1796,7 +1797,7 @@ void FUN_00a90f70_poly::FUN_00a90f70(SaveStream& kStream)
 struct ColorA90
 {
     float r, g, b, a;
-    void FUN_00a698a0(SaveStream&);
+    void NiColorA_SaveBinary(SaveStream&);
 };
 struct ElemA90
 {
@@ -1838,14 +1839,14 @@ struct HostA90
     unsigned short unk68;
     unsigned short m_us6A;
     unsigned short m_usElements;
-    void FUN_00a7bbe0(SaveStream&);
+    void NiTriShapeData_SaveBinary(SaveStream&);
     void FUN_00a90b40(SaveStream&);
 };
 // Serializes the host's flag, element count and each element's polygon/vertex/color/texture data to the save stream.
 // @fnv 0x00a90b40
 void HostA90::FUN_00a90b40(SaveStream& stream)
 {
-    FUN_00a7bbe0(stream);
+    NiTriShapeData_SaveBinary(stream);
     char cByte = m_b58;
     stream.m_pkOut->BinaryWrite(&cByte, 1);
     unsigned int ItemUpdateArray = m_us6A;
@@ -1876,7 +1877,7 @@ void HostA90::FUN_00a90b40(SaveStream& stream)
                 if (bHasColor)
                 {
                     for (unsigned int j = 0; j < usPolygonCount; ++j)
-                        pkColor[j].FUN_00a698a0(stream);
+                        pkColor[j].NiColorA_SaveBinary(stream);
                 }
                 stream.m_pkOut->BinaryWrite(&usVertexCount, 2);
                 if (usVertexCount != 0)
@@ -2646,7 +2647,7 @@ template <class T> inline void Load91950(LoadStream91950& s, T& p)
 struct LoadBase91950
 {
     void ReadBinary(NiStream&);
-    void FUN_00a7b940(NiStream&);
+    void NiTriShapeData_LoadBinary(NiStream&);
 };
 struct Element91950;
 struct Array91950
@@ -2728,7 +2729,7 @@ void Host91950::FUN_00a91950(LoadStream91950& stream)
     if (Version91950(stream) < 0x0a00010f)
         this->ReadBinary(stream);
     else
-        this->FUN_00a7b940(stream);
+        this->NiTriShapeData_LoadBinary(stream);
     unsigned char flag;
     Load91950(stream, flag);
     this->m58 = flag != 0;

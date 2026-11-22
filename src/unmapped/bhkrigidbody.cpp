@@ -2451,7 +2451,7 @@ struct FUN_00ca8c90
     unsigned int unk1F8;
     unsigned int unk1FC;
     FUN_00ca8c90(void* settings);
-    void FUN_00ca8420(int motion,int activate,int extra); void FUN_0090cbf0(int motion,int activate,int extra);
+    void FUN_00ca8420(int motion,int activate,int extra); void hkpRigidBody_setMotionType(int motion,int activate,int extra);
     void FUN_00c905b0(); void FUN_009316f0();
     static void* operator new(unsigned int size);
     static void operator delete(void* p);
@@ -2547,7 +2547,7 @@ void BodyBuild::ConfigureBody(BuildSettings* input) {
  } else if(settings->motionType==7) settings->solver=1;
  settings->unk20=settings->unk00; settings->unk24=settings->unk04;
  f3m_008feed0::FUN_00ca8c90* body=new f3m_008feed0::FUN_00ca8c90(&settings->unk20);
- if(savedMotion!=10) {settings->motionType=static_cast<signed char>(savedMotion);body->FUN_0090cbf0(savedMotion,1,0);}
+ if(savedMotion!=10) {settings->motionType=static_cast<signed char>(savedMotion);body->hkpRigidBody_setMotionType(savedMotion,1,0);}
  self->SetBody(body);body->FUN_009316f0();
  int motion=settings->motionType;
  if(motion<6 || motion==8) {
@@ -2797,7 +2797,7 @@ class WorldObject_c8ea
 
 struct LoadStream_c8ea
 {
-    void FUN_00a64670();
+    void NiStream_ReadMultipleLinkIDs();
 };
 
 class Entity_c8ea : public WorldObject_c8ea
@@ -2877,7 +2877,7 @@ void Entity_c8ea::FUN_00c8ea30(char* pkStream)
                 *(unsigned char*)(pkBody + 0xd0) = 7;
         }
     }
-    ((LoadStream_c8ea*)s)->FUN_00a64670();
+    ((LoadStream_c8ea*)s)->NiStream_ReadMultipleLinkIDs();
     BinaryStream_c8ea* __restrict pBin = *(BinaryStream_c8ea**)(s + 0x24c);
     *(int*)&pkStream = 4;
     pBin->m_uiStreamFlags += pBin->m_pfnRead(pBin, &m_iSlotCount, 4, (unsigned int*)&pkStream, 1);

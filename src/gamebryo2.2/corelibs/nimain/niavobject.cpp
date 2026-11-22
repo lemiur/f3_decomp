@@ -38,7 +38,8 @@ void __thiscall FUN_00a5a030_shell::FUN_00a5a030(NiUpdateData& data)
 extern char const* const g_011f4428_arg1;
 
 // @fnv 0x00a5a420
-char const* const* __cdecl FUN_00a5a420()
+// pdb: BSFadeNodeCuller::GetRTTI | Main.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(udata), high
+char const* const* __cdecl BSFadeNodeCuller_GetRTTI()
 {
     return &g_011f4428_arg1;
 }
@@ -383,10 +384,11 @@ struct T00a5a0e0
     T00a5a0e0* m_pHeadNode;
     char _p10[32];
     T00a5a0e0* m_next;
-    bool __thiscall FUN_00a5a0e0();
+    bool __thiscall NiAVObject_HasTransformController();
 };
 // @fnv 0x00a5a0e0
-bool __thiscall T00a5a0e0::FUN_00a5a0e0()
+// pdb: NiAVObject::HasTransformController | NiAVObject.obj | fnv360_0822_retail, call_seq + bridge(hash|call_seq) + skyrim(objrun_open), high
+bool __thiscall T00a5a0e0::NiAVObject_HasTransformController()
 {
     T00a5a0e0* p = m_pHeadNode;
     while (p)
@@ -761,10 +763,11 @@ struct S_00a59e00
     int unk28;
     int unk2c;
     unsigned char flags;
-    void FUN_00a59e00(S_00a59e00_Arg* a);
+    void NiAVObject_Cull(S_00a59e00_Arg* a);
 };
 // @fnv 0x00a59e00
-void S_00a59e00::FUN_00a59e00(S_00a59e00_Arg* a)
+// pdb: NiAVObject::Cull | NiAVObject.obj | fnv360_0822_retail, call_seq + bridge(hash|call_seq) + skyrim(call_seq), high
+void S_00a59e00::NiAVObject_Cull(S_00a59e00_Arg* a)
 {
     if (!(flags & 1))
         a->FUN_44(this);
@@ -1431,7 +1434,7 @@ struct FUN_0040fbf0_shell
 
 struct FUN_00a5e3a0_Helper
 {
-    void FUN_00a5e3a0(NiPropertyState*& ps);
+    void NiNode_UpdatePropertiesUpward(NiPropertyState*& ps);
     NiPropertyState* FUN_00a89ab0();
     void* FUN_00aa3e40(unsigned int size);
 };
@@ -1505,7 +1508,7 @@ void FUN_00a5a040_Class::FUN_00a5a040()
     ((FUN_0040fbf0_shell*)&DAT_011f42a0)->FUN_0040fbf0(0);
     if (m18 != 0)
     {
-        m18->FUN_00a5e3a0(ps);
+        m18->NiNode_UpdatePropertiesUpward(ps);
     }
     else
     {
@@ -1653,7 +1656,7 @@ struct LoadedStream
     int unkd0;
     int unkd4;
     unsigned int version;
-    unsigned int FUN_00a63460();
+    unsigned int NiStream_GetNumberOfLinkIDs();
     LoadedRef* FUN_00a63430();
 };
 struct LoadedNode
@@ -1676,7 +1679,7 @@ struct LoadedNode
 void LoadedNode::ReadFromStream(LoadedStream* stream)
 {
     FUN_00a5c0e0(stream);
-    unsigned int count = stream->FUN_00a63460();
+    unsigned int count = stream->NiStream_GetNumberOfLinkIDs();
     if (stream->version < 0x04010008)
     {
         while (count)
@@ -2215,11 +2218,12 @@ class AVObjectA5A4
         return false;
     }
 
-    void FUN_00a5a450(bool& bSelectiveUpdate, bool bSelectiveUpdateTransforms, bool& bRigid);
+    void NiAVObject_SetSelectiveUpdateFlags(bool& bSelectiveUpdate, bool bSelectiveUpdateTransforms, bool& bRigid);
 };
 
 // @fnv 0x00a5a450
-void AVObjectA5A4::FUN_00a5a450(bool& bSelectiveUpdate, bool bSelectiveUpdateTransforms, bool& bRigid)
+// pdb: NiAVObject::SetSelectiveUpdateFlags | NiAVObject.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun) + skyrim(objopen_prop), high
+void AVObjectA5A4::NiAVObject_SetSelectiveUpdateFlags(bool& bSelectiveUpdate, bool bSelectiveUpdateTransforms, bool& bRigid)
 {
     bRigid = !HasTransformController() && !GetBit(0x80, 7);
     if (!bSelectiveUpdateTransforms)
@@ -2260,7 +2264,7 @@ struct A5a260CompareBase
     virtual void v20() = 0;
     virtual void v21() = 0;
     virtual void v22() = 0;
-    virtual bool FUN_00a5a260(A5a260CompareBase*) = 0;
+    virtual bool NiAVObject_IsEqual(A5a260CompareBase*) = 0;
 };
 
 struct A5a260CompareField
@@ -2304,12 +2308,13 @@ struct A5a260Object : A5a260CompareBase
     A5a260CompareField unk34;
 
     bool __thiscall FUN_00a5c820(A5a260CompareBase*);
-    bool __thiscall FUN_00a5a260(A5a260CompareBase*);
+    bool __thiscall NiAVObject_IsEqual(A5a260CompareBase*);
 };
 
 // Returns false when the flag bit, field comparison, property list, or collision comparison does not match.
 // @fnv 0x00a5a260
-bool __thiscall A5a260Object::FUN_00a5a260(A5a260CompareBase* pkObject)
+// pdb: NiAVObject::IsEqual | NiAVObject.obj | fnv360_0822_retail, call_seq + bridge(vtable|call_seq) + skyrim(call_seq), high
+bool __thiscall A5a260Object::NiAVObject_IsEqual(A5a260CompareBase* pkObject)
 {
     A5a260Object* other = (A5a260Object*)pkObject;
 
@@ -2338,7 +2343,7 @@ bool __thiscall A5a260Object::FUN_00a5a260(A5a260CompareBase* pkObject)
                 return false;
             if (!property0 && property1)
                 return false;
-            if (property0 && !property0->FUN_00a5a260(property1))
+            if (property0 && !property0->NiAVObject_IsEqual(property1))
                 return false;
         }
     }
@@ -2347,7 +2352,7 @@ bool __thiscall A5a260Object::FUN_00a5a260(A5a260CompareBase* pkObject)
     A5a260CompareBase* collision1 = other->unk1C;
     if (collision0 && collision1)
     {
-        if (!collision0->FUN_00a5a260(collision1))
+        if (!collision0->NiAVObject_IsEqual(collision1))
             return false;
     }
     else if (collision0 != collision1)
@@ -2614,8 +2619,8 @@ struct LoadStream
     unsigned int unknown3b4;
     unsigned int unknown3b8;
     char typeName[128];
-    void FUN_00a64670();
-    void FUN_00a645b0();
+    void NiStream_ReadMultipleLinkIDs();
+    void NiStream_ReadLinkID();
 };
 struct LoadBase
 {
@@ -2753,7 +2758,7 @@ void LoadObject::FUN_00a5a510(LoadStream& stream)
         flags |= low & 1;
         LoadVector oldTranslation = {0.0f, 0.0f, 0.0f};
         oldTranslation.FUN_00a59be0(stream);
-        stream.FUN_00a64670();
+        stream.NiStream_ReadMultipleLinkIDs();
         unsigned char enabled;
         unsigned int oldEnabled;
         if (stream.version < 0x04010000)
@@ -2784,8 +2789,8 @@ void LoadObject::FUN_00a5a510(LoadStream& stream)
     }
     else
     {
-        stream.FUN_00a64670();
-        stream.FUN_00a645b0();
+        stream.NiStream_ReadMultipleLinkIDs();
+        stream.NiStream_ReadLinkID();
     }
     if (stream.version < 0x0a000102)
     {

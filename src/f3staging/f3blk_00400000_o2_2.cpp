@@ -105,8 +105,8 @@ public:
 class ExtraDataList
 {
 public:
-    BSExtraData* FUN_0040a4c0(unsigned char type);
-    void FUN_0040a320(BSExtraData* pkExtra);
+    BSExtraData* BaseExtraList_GetExtraData(unsigned char type);
+    void BaseExtraList_AddExtra(BSExtraData* pkExtra);
     void FUN_0040a3f0(unsigned char type);
 
     void FUN_00412380(BSOcclusionPlane* pkPlane);
@@ -116,7 +116,7 @@ void ExtraDataList::FUN_00412380(BSOcclusionPlane* pkPlane)
 {
     if (pkPlane)
     {
-        ExtraOcclusionPlane* pkExtra = (ExtraOcclusionPlane*)FUN_0040a4c0(0x71);
+        ExtraOcclusionPlane* pkExtra = (ExtraOcclusionPlane*)BaseExtraList_GetExtraData(0x71);
         if (pkExtra)
         {
             pkExtra->spPlane = pkPlane;
@@ -125,7 +125,7 @@ void ExtraDataList::FUN_00412380(BSOcclusionPlane* pkPlane)
         {
             pkExtra = new ExtraOcclusionPlane;
             pkExtra->spPlane = pkPlane;
-            FUN_0040a320(pkExtra);
+            BaseExtraList_AddExtra(pkExtra);
         }
     }
     else

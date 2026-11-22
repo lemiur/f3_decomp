@@ -130,7 +130,8 @@ void __fastcall FUN_00a6e430(NiQuaternion* self, int edx, float afTime, const Ni
 extern unsigned char DAT_011F3FE4;
 
 // @fnv 0x00a4ffe0
-unsigned char* __cdecl FUN_00a4ffe0()
+// pdb: BSFaceGenModelExtraData::GetRTTI | BSFaceGenModel.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(udata), high
+unsigned char* __cdecl BSFaceGenModelExtraData_GetRTTI()
 {
     return &DAT_011F3FE4;
 }
@@ -198,11 +199,12 @@ template <class T> inline void SerializeValue(NiStream& kStream, const T& value)
 struct FUN_00a6e4a0_shell : public NiQuaternion
 {
     void SnapSmallComponentsToZero();
-    void FUN_00a6e4a0(NiStream& kStream);
+    void NiQuaternion_SaveBinary(NiStream& kStream);
 };
 
 // @fnv 0x00a6e4a0
-void FUN_00a6e4a0_shell::FUN_00a6e4a0(NiStream& kStream)
+// pdb: NiQuaternion::SaveBinary | NiQuaternion.obj | fnv360_0822_retail, call_gap + bridge(hash|call_gap) + skyrim(call_gap), high
+void FUN_00a6e4a0_shell::NiQuaternion_SaveBinary(NiStream& kStream)
 {
     SnapSmallComponentsToZero();
     SerializeValue(kStream, m_fVectorX);

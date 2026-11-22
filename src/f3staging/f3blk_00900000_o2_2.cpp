@@ -320,7 +320,7 @@ struct Body : Base {
     float unk188;
     void FUN_0090b500();
     void FUN_0090c670(int c);
-    void FUN_0090c830(void* p, Vec4* out);
+    void hkpRigidBody_updateCachedShapeInfo(void* p, Vec4* out);
     Body(const CInfo& info);
 };
 Body::Body(const CInfo& info) : Base(info.shape)
@@ -354,7 +354,7 @@ Body::Body(const CInfo& info) : Base(info.shape)
     unk188 = info.unk98;
     if (unk10) {
         Vec4 v;
-        FUN_0090c830(unk10, &v);
+        hkpRigidBody_updateCachedShapeInfo(unk10, &v);
         if (unk58 <= 0.0f)
             FUN_0090c7b0((Collidable*)&unk10, v);
     }

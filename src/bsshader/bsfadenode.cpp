@@ -522,11 +522,12 @@ void FUN_00b4dee0()
 struct Cls00b4df20
 {
     bool FUN_00a5e600(Cls00b4df20* other);
-    bool FUN_00b4df20(Cls00b4df20* other);
+    bool NiProperty_CopyMembers(Cls00b4df20* other);
 };
 
 // @fnv 0x00b4df20
-bool Cls00b4df20::FUN_00b4df20(Cls00b4df20* other)
+// pdb: NiProperty::CopyMembers | NiProperty.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_seq), high
+bool Cls00b4df20::NiProperty_CopyMembers(Cls00b4df20* other)
 {
     return FUN_00a5e600(other);
 }
@@ -916,7 +917,7 @@ struct FadeNodeObj
     {
         return (m_uiValue1 >> 28) & 1;
     }
-    void FUN_00a5dbe0(FadeCuller& culler);
+    void NiNode_OnVisible(FadeCuller& culler);
     float FUN_00b4df80();
     void FUN_00b4e490(FadeCuller& culler);
 };

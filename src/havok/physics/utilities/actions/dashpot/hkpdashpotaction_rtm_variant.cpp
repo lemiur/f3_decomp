@@ -203,7 +203,7 @@ struct S00d4da60_DashpotAction
     void* unk48;
     void* unk4C;
     DashpotApplyVector m_fContactImpulse;
-    void __thiscall FUN_00d4da60(S00d4da60_StepRef stepInfo);
+    void __thiscall hkpDashpotAction_applyAction(S00d4da60_StepRef stepInfo);
 };
 
 // @f3 0x009da680 (community match, verified in this file)
@@ -221,7 +221,7 @@ struct __declspec(align(16)) ScalarVector55 {
         struct { float x,y,z,w; };
         float components[4];
     };
-    void FUN_008d28e0(const Transform55*,const ScalarVector55*);
+    void hkVector4_setTransformedPos(const Transform55*,const ScalarVector55*);
     void SubA(const ScalarVector55& a,const ScalarVector55& b){x=a.x-b.x;y=a.y-b.y;z=a.z-b.z;w=a.w-b.w;}
     void SubB(const ScalarVector55& a,const ScalarVector55& b){x=a.x-b.x;y=a.y-b.y;z=a.z-b.z;w=a.w-b.w;}
     void MulA(float s,const ScalarVector55& b){for(int i=0;i<4;i++)components[i]=b.components[i]*s;}
@@ -349,7 +349,8 @@ struct Entity55
 };
 struct Scratch55 {ScalarVector55 pointB,pointA,opposite;};
 }
-void ::DashpotApplyDetail::S00d4da60_DashpotAction::FUN_00d4da60(::DashpotApplyDetail::S00d4da60_StepRef stepInfo) {
+// pdb: hkpDashpotAction::applyAction | hkpDashpotAction.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void ::DashpotApplyDetail::S00d4da60_DashpotAction::hkpDashpotAction_applyAction(::DashpotApplyDetail::S00d4da60_StepRef stepInfo) {
     using namespace dp_009da680;
     volatile unsigned int tick;
     {
@@ -368,8 +369,8 @@ void ::DashpotApplyDetail::S00d4da60_DashpotAction::FUN_00d4da60(::DashpotApplyD
     Entity55* entityB=(Entity55*)m_pEntityB;
     ScalarVector55 relativeVel;
     Scratch55 scratch;
-    scratch.pointA.FUN_008d28e0(&entityA->m_kMotionTransform,(const ScalarVector55*)&m_kPoint[0]);
-    scratch.pointB.FUN_008d28e0(&entityB->m_kMotionTransform,(const ScalarVector55*)&m_kPoint[1]);
+    scratch.pointA.hkVector4_setTransformedPos(&entityA->m_kMotionTransform,(const ScalarVector55*)&m_kPoint[0]);
+    scratch.pointB.hkVector4_setTransformedPos(&entityB->m_kMotionTransform,(const ScalarVector55*)&m_kPoint[1]);
     scratch.opposite.SubA(scratch.pointA,scratch.pointB);
     relativeVel.SubB(entityA->m_kTranslationalVelocity,entityB->m_kTranslationalVelocity);
     ScalarVector55* impulse=(ScalarVector55*)&m_fContactImpulse;

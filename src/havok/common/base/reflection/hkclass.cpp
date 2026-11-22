@@ -39,11 +39,12 @@ struct FUN_00d46f00_s
 {
     unsigned int m_uiCount;
     FUN_00d46f00_s* m_parent;
-    unsigned int __thiscall FUN_00d46f00() const;
+    unsigned int __thiscall hkClass_getNumMembers() const;
 };
 
 // @fnv 0x00d46f00
-unsigned int FUN_00d46f00_s::FUN_00d46f00() const
+// pdb: hkClass::getNumMembers | hkClass.obj | fnv360_0822_retail, call_gap + bridge(call_seq|call_seq) + skyrim(call_seq), high
+unsigned int FUN_00d46f00_s::hkClass_getNumMembers() const
 {
     FUN_00d46f00_s* cls = m_parent;
     unsigned int total = *(unsigned int*)((char*)this + 0x1c);
@@ -93,7 +94,7 @@ int __cdecl FUN_00d46f20(void);
 
 struct FUN_00d46fe0_Class
 {
-    int FUN_00d46f00(void);
+    int hkClass_getNumMembers(void);
     int* FUN_00d46f20(int i);
     int* FUN_00d46fe0(const int* name);
 };
@@ -102,7 +103,7 @@ struct FUN_00d46fe0_Class
 // @fnv 0x00d46fe0
 int* FUN_00d46fe0_Class::FUN_00d46fe0(const int* name)
 {
-    for (int i = 0; i < FUN_00d46f00(); i++)
+    for (int i = 0; i < hkClass_getNumMembers(); i++)
     {
         int* m = FUN_00d46f20(i);
         if (FUN_00cb0fa0(m[0], (int)name) == 0)
@@ -162,11 +163,12 @@ struct FUN_00d470e0_Class
     virtual void vf00();
     int unk04;
     int unk08;
-    void __thiscall FUN_00d470e0(int value);
+    void __thiscall hkpCharacterContext_setCharacterType(int value);
 };
 
 // @fnv 0x00d470e0
-void __thiscall FUN_00d470e0_Class::FUN_00d470e0(int value)
+// pdb: hkpCharacterContext::setCharacterType | hkpCharacterContext.obj | fnv360_0822_retail, objrun + skyrim(objrun), high
+void __thiscall FUN_00d470e0_Class::hkpCharacterContext_setCharacterType(int value)
 {
     this->unk08 = value;
 }
@@ -241,17 +243,18 @@ int FnvCpu_FUN_00d470d0_CpuObject::FUN_00d470d0()
     return value;
 }
 
-// FUN_00d47120: 4-byte inline getter, __thiscall, reads this+0x2C.
+// hkClass_getDescribedVersion: 4-byte inline getter, __thiscall, reads this+0x2C.
 // Neighbours use hkClass layout (m_parent@0x04, declaredMembers@0x18, defaults@0x20,
 // sizeof == 0x30), so +0x2C is m_iDescribedVersion.
 
 struct hkClassD47120 : hkClass
 {
-    int FUN_00d47120() const;
+    int hkClass_getDescribedVersion() const;
 };
 
 // @fnv 0x00d47120
-int hkClassD47120::FUN_00d47120() const
+// pdb: hkClass::getDescribedVersion | hkClass.obj | fnv360_0822_retail, objrun + skyrim(objrun), high
+int hkClassD47120::hkClass_getDescribedVersion() const
 {
     return m_iDescribedVersion;
 }
@@ -315,7 +318,7 @@ struct Archive
     unsigned int unk00, unk04, unk08, unk0c;
     void __thiscall FUN_00d60830(void* stream, SmallFlag swap);
     void __thiscall WriteInt(int value);
-    void __thiscall FUN_00d60900(unsigned short value);
+    void __thiscall hkOArchive_write16(unsigned short value);
     int __thiscall FUN_00d607b0(const void* data, int bytes);
     void __thiscall FUN_00d60590();
 };
@@ -330,7 +333,7 @@ struct Prop
     unsigned short m_iElementCount;
 };
 Prop* __cdecl FUN_00d868a0(unsigned int which);
-int __cdecl FUN_00cb10d0(const char* str);
+int __cdecl hkString_strLen(const char* str);
 struct ClassRec;
 struct MemberRec
 {
@@ -400,13 +403,13 @@ void ClassRec::WriteToStream(void* stream) const
         }
         if (info.m_pClassEnum)
             member.FUN_00d86930()->FUN_00db7600(stream);
-        out.FUN_00d607b0(info.m_name, FUN_00cb10d0(info.m_name));
-        out.FUN_00d60900(info.m_type);
-        out.FUN_00d60900(info.m_eSubtype);
+        out.FUN_00d607b0(info.m_name, hkString_strLen(info.m_name));
+        out.hkOArchive_write16(info.m_type);
+        out.hkOArchive_write16(info.m_eSubtype);
         if (altType != 0)
-            out.FUN_00d60900(altType);
-        out.FUN_00d60900(info.m_iArraySize);
-        out.FUN_00d60900(info.m_flags);
+            out.hkOArchive_write16(altType);
+        out.hkOArchive_write16(info.m_iArraySize);
+        out.hkOArchive_write16(info.m_flags);
     }
     out.WriteInt(m_numMembers);
     out.FUN_00d60590();
@@ -545,11 +548,11 @@ struct HkClassNode
     int unk14;
     HkMem* m_members;
     int m_uiCount;
-    int FUN_00d46f00();
+    int hkClass_getNumMembers();
     HkMem* FUN_00d46f20(int i);
 };
 
-__declspec(noinline) int HkClassNode::FUN_00d46f00()
+__declspec(noinline) int HkClassNode::hkClass_getNumMembers()
 {
     HkClassNode* p = m_parent;
     int total = m_uiCount;
@@ -569,7 +572,7 @@ __declspec(noinline) int HkClassNode::FUN_00d46f00()
 HkMem* HkClassNode::FUN_00d46f20(int aiIndex)
 {
     HkClassNode* pNode = this;
-    int iOffset = aiIndex - FUN_00d46f00();
+    int iOffset = aiIndex - hkClass_getNumMembers();
     if (this != 0)
     {
         do
@@ -594,17 +597,18 @@ struct hkItemD470
 class hkClassEnumD470
 {
   public:
-    int FUN_00d46f00() const;
+    int hkClass_getNumMembers() const;
     const hkItemD470& FUN_00d46f20(int i) const;
 
-    int FUN_00d47030(const char* name) const;
+    int hkClass_getMemberIndexByName(const char* name) const;
 };
 
 // Linearly searches the enum items for one whose m_name matches name and returns its index, or -1 if not found.
 // @fnv 0x00d47030
-int hkClassEnumD470::FUN_00d47030(const char* name) const
+// pdb: hkClass::getMemberIndexByName | hkClass.obj | fnv360_0822_debug, caller_sim + skyrim(caller_sim), high
+int hkClassEnumD470::hkClass_getMemberIndexByName(const char* name) const
 {
-    for (int i = 0; i < FUN_00d46f00(); i++)
+    for (int i = 0; i < hkClass_getNumMembers(); i++)
     {
         if (FUN_00cb0fa0(FUN_00d46f20(i).m_name, name) == 0)
             return i;
@@ -827,10 +831,10 @@ struct LookupNode
     HkMem* m_members;
     int m_uiCount;
     int* m_pDefaultObject;
-    int FUN_00d46f00();
+    int hkClass_getNumMembers();
     int FUN_00d47130(int offset, char** value, HkMem** member);
 };
-__declspec(noinline) int LookupNode::FUN_00d46f00()
+__declspec(noinline) int LookupNode::hkClass_getNumMembers()
 {
     LookupNode* p = m_parent;
     int total = m_uiCount;
@@ -849,7 +853,7 @@ __declspec(noinline) int LookupNode::FUN_00d46f00()
 int LookupNode::FUN_00d47130(int offset, char** value, HkMem** member)
 {
     LookupNode* node = this;
-    offset -= node->FUN_00d46f00();
+    offset -= node->hkClass_getNumMembers();
     while (node != 0)
     {
         offset += node->m_uiCount;
@@ -884,7 +888,7 @@ struct S_00e03240_Node;
 struct S_00e03240_Holder
 {
     int __thiscall InvokeTarget(int value, int flags);
-    int __thiscall FUN_00d46f00();
+    int __thiscall hkClass_getNumMembers();
     S_00e03240_Node* __thiscall FUN_00d46f20(int index);
 };
 
@@ -907,7 +911,8 @@ static __declspec(noinline) int FUN_00e03100(S_00e03240_Node* node)
 }
 
 // @fnv 0x00e03240
-int __cdecl FUN_00e03240(S_00e03240_Holder* holder, S_00e03240_Node* node, int value, int flags)
+// pdb: applyDefaultsFor | hkObjectCopier.obj | fnv360_0822_retail, call_gap_sim + bridge(call_gap_sim|call_gap) + skyrim(call_gap_sim), high
+int __cdecl applyDefaultsFor(S_00e03240_Holder* holder, S_00e03240_Node* node, int value, int flags)
 {
     int result = holder->InvokeTarget(value, flags);
 
@@ -925,11 +930,11 @@ int __cdecl FUN_00e03240(S_00e03240_Holder* holder, S_00e03240_Node* node, int v
     int outerCount = rounds;
     do
     {
-        for (int index = 0; index < childHolder->FUN_00d46f00(); ++index)
+        for (int index = 0; index < childHolder->hkClass_getNumMembers(); ++index)
         {
             S_00e03240_Node* child = childHolder->FUN_00d46f20(index);
 
-            if (!FUN_00e03240(childHolder, child, index, flags))
+            if (!applyDefaultsFor(childHolder, child, index, flags))
                 result = 0;
         }
     } while (--outerCount);

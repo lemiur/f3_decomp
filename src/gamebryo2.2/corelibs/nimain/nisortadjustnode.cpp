@@ -5,7 +5,8 @@
 extern "C" void* g_011f5ed8;
 
 // @fnv 0x00a95310
-void* __cdecl FUN_00a95310()
+// pdb: NiScreenGeometryData::GetRTTI | NiOldScreenSpace.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+void* __cdecl NiScreenGeometryData_GetRTTI()
 {
     return &g_011f5ed8;
 }
@@ -349,7 +350,7 @@ struct S_00a95440_Stream
     int unk244;
     int unk248;
     S_00a95440_BinStream* m_pUnderlyingStream;
-    void FUN_00a645b0();
+    void NiStream_ReadLinkID();
 };
 
 struct S_00a95440_Node
@@ -416,7 +417,7 @@ void S_00a95440_SortAdjustNode::FUN_00a95440(S_00a95440_Stream& kStream)
     if (m_iSortAdjust >= 2)
         m_iSortAdjust = 0;
     if (kStream.m_uiNifVersion < 0x14000004)
-        kStream.FUN_00a645b0();
+        kStream.NiStream_ReadLinkID();
 }
 
 struct FUN_00a95350_Object
@@ -497,17 +498,17 @@ class FUN_00a95350_cls
     int unkA8;
     int m_iAc;
 
-    void FUN_00a5dbe0(FUN_00a95350_Arg* pArg);
+    void NiNode_OnVisible(FUN_00a95350_Arg* pArg);
     void UpdateItemFlags(FUN_00a95350_Arg* pArg);
 };
 
-// Calls FUN_00a5dbe0, then sets or clears bit 0x40 in the flags of each list item added during that call, depending on whether m_iAc equals 1.
+// Calls NiNode_OnVisible, then sets or clears bit 0x40 in the flags of each list item added during that call, depending on whether m_iAc equals 1.
 // @fnv 0x00a95350
 void FUN_00a95350_cls::UpdateItemFlags(FUN_00a95350_Arg* pArg)
 {
     bool hide = (m_iAc != 1);
     unsigned int start = pArg->m_pEntries->m_uItemCount;
-    FUN_00a5dbe0(pArg);
+    NiNode_OnVisible(pArg);
 
     FUN_00a95350_List* pList = pArg->m_pEntries;
     unsigned int end = pList->m_uItemCount;

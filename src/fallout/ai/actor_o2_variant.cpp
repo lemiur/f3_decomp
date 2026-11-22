@@ -30,7 +30,8 @@ void* bhkRagdollController::FUN_00c7de30(unsigned int flag)
 extern "C" void* g_012685f8;
 
 // @fnv 0x00c7fa60
-void* __cdecl FUN_00c7fa60()
+// pdb: NiBSplineInterpolator::GetRTTI | NiBSplineInterpolator.obj | fnv360_0822_retail, udata + bridge(vtable|udata) + skyrim(objrun), high
+void* __cdecl NiBSplineInterpolator_GetRTTI()
 {
     return &g_012685f8;
 }
@@ -354,7 +355,8 @@ struct RCtx;
 RObj* __cdecl FUN_00c4b470(RCtx*, RKey*, int);
 
 // @fnv 0x00c7bcb0
-void __cdecl FUN_00c7bcb0(RCtx* ctx, RObj* obj, RArr* arr)
+// pdb: bhkRagdollController::CopyPoseTo3DRec | bhkRagdollController.obj | fnv360_0822_retail, ustr_rel + bridge(ustr_rel|caller_sim), high
+void __cdecl bhkRagdollController_CopyPoseTo3DRec(RCtx* ctx, RObj* obj, RArr* arr)
 {
     RKey key(obj->name);
     key.obj = obj;
@@ -380,7 +382,7 @@ void __cdecl FUN_00c7bcb0(RCtx* ctx, RObj* obj, RArr* arr)
         {
             RObj* child = node->children[i];
             if (child)
-                FUN_00c7bcb0(ctx, child, arr);
+                bhkRagdollController_CopyPoseTo3DRec(ctx, child, arr);
         }
     }
 }
@@ -406,7 +408,7 @@ struct Creature
 };
 
 void __cdecl SetFlagRecursive(int, void*);
-void __cdecl FUN_00c7bcb0(void*, void*, void*);
+void __cdecl bhkRagdollController_CopyPoseTo3DRec(void*, void*, void*);
 
 inline unsigned char GetFlag6(unsigned short w)
 {
@@ -450,7 +452,7 @@ void __cdecl FUN_00c7d3b0(NiNode* param_1, void* param_2, void* param_3, char* p
     }
     if (param_1 && param_2)
     {
-        FUN_00c7bcb0(param_1, param_2, param_3);
+        bhkRagdollController_CopyPoseTo3DRec(param_1, param_2, param_3);
         NiUpdateData updateData;
         updateData.m_fTime = 0.0f;
         updateData.b0 = false;
@@ -635,7 +637,7 @@ struct Controller {
     bool flag28e;
     char unk28f;
     __forceinline void Update(float);
-    void FUN_008e1dd0();
+    void bhkRagdollController_GetSGPoseLocalSpace();
     void FUN_008e5710(int);
     void FUN_008dd450(void*);
     void FUN_008dbec0(void*);
@@ -644,7 +646,7 @@ struct Controller {
     // only tells the compiler that the bool passed by address does not escape, so the loads of the count are not
     // held behind the store that clears it.
     __declspec(noalias) void FUN_008e6750(void*, void*, bool*);
-    void FUN_008e6210(void*);
+    void bhkRagdollController_UpdateRagdollRigidBodies(void*);
     void FUN_008e6d70();
     void FUN_008e2480();
 };
@@ -691,7 +693,7 @@ __forceinline void Controller::Update(float)
         FUN_008db970(&m_kWorkArea, &kWorld);
         if (flag40 == 0)
         {
-            FUN_008e1dd0();
+            bhkRagdollController_GetSGPoseLocalSpace();
             FUN_008e5710(0);
             if (DAT_010f2c88 && (flag222 || flag223))
                 FUN_008dd450(&m_kWorkArea);
@@ -703,7 +705,7 @@ __forceinline void Controller::Update(float)
         unsigned int count = m_48->inner->count;
         bool bOk = false;
         ScrapMarker kScrap(count);
-        FUN_008e6210((DAT_010f2cb8 && flag256 && (FUN_008e6750(&m_kWorkArea, kScrap.p, &bOk), bOk)) ? kScrap.p : 0);
+        bhkRagdollController_UpdateRagdollRigidBodies((DAT_010f2cb8 && flag256 && (FUN_008e6750(&m_kWorkArea, kScrap.p, &bOk), bOk)) ? kScrap.p : 0);
         FUN_008e5710(1);
         if (!flag40)
         {
@@ -818,7 +820,8 @@ extern void* DAT_011afecc;
 S_c6a200_Info* __cdecl GetExtraDataChecked(void* obj);
 void __cdecl FUN_00c68900(void* obj, S_c6a200_Ev* ev, void* extra);
 // @fnv 0x00c6a200
-bool __cdecl FUN_00c6a200(void* obj, unsigned char a1, unsigned char a2, unsigned char a3)
+// pdb: bhkWorld::SetDisabled | bhkWorld.obj | fnv360_0822_retail, call_seq + bridge(call_gap_sim|call_gap_sim) + skyrim(caller_sim), high
+bool __cdecl bhkWorld_SetDisabled(void* obj, unsigned char a1, unsigned char a2, unsigned char a3)
 {
     bool r = false;
     if (obj)
@@ -2655,7 +2658,7 @@ struct RagdollCtl
     int unk2a8;
     int unk2ac;
     void FUN_00c7b6a0(bool);
-    void FUN_00c7c150(bool);
+    void bhkRagdollController_DisableRagdollAnim(bool);
 };
 
 // @f3 0x008e6bf0 (community match, verified in this file)
@@ -2706,7 +2709,8 @@ struct RVec48e {
 }
 using namespace n8e6bf0;
 
-void RagdollCtl::FUN_00c7c150(bool b)
+// pdb: bhkRagdollController::DisableRagdollAnim | bhkRagdollController.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+void RagdollCtl::bhkRagdollController_DisableRagdollAnim(bool b)
 {
     if (active)
     {
@@ -3549,7 +3553,7 @@ struct KRigidBodyView
 struct KQuatView
 {
     float w, x, y, z;
-    void FUN_0049da00(KMatrix3& m) const;
+    void NiQuaternion_ToRotation(KMatrix3& m) const;
 };
 struct KNodeUpdateView
 {
@@ -3592,7 +3596,7 @@ void FUN_00c821b0(KObject* root, KPoint3* outDelta, bool update)
             KQuat q;
             ((KRigidBodyView*)body)->FUN_004e6030(t.trans);
             ((KRigidBodyView*)body)->FUN_004e6070(q);
-            ((KQuatView*)&q)->FUN_0049da00(t.rot);
+            ((KQuatView*)&q)->NiQuaternion_ToRotation(t.rot);
         }
         else
         {

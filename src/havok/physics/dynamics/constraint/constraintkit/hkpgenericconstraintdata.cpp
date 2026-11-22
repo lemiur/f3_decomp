@@ -768,7 +768,8 @@ int* FUN_00d50560_class::FUN_00d50560(unsigned int index)
 }
 
 // @fnv 0x00d50500
-void __stdcall FUN_00d50500(unsigned char* out)
+// pdb: hkStdioStreamWriter::markSupported | hkStdioStreamWriter.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void __stdcall hkStdioStreamWriter_markSupported(unsigned char* out)
 {
     *out = 1;
 }
@@ -820,13 +821,13 @@ struct FUN_00d50bd0_owner
 struct OwnerM50B {
     char pad[0x18];
     unsigned int constraintData;
-    void FUN_009ddf50(void* data, SolverItem* item, int index);
+    void hkpGenericConstraintData_hatchScheme(void* data, SolverItem* item, int index);
 };
 
 void FUN_00d50bd0_owner::FUN_00d50bd0(SolverItem* item, int index) {
     AppendEventRecord(item, index, item->unk4c, 8);
     OwnerM50B* self = (OwnerM50B*)this;
-    self->FUN_009ddf50(&self->constraintData, item, index);
+    self->hkpGenericConstraintData_hatchScheme(&self->constraintData, item, index);
 }
 
 
@@ -1380,7 +1381,8 @@ void __cdecl FUN_00a507b0(const hkVector4*,const hkVector4*,SixteenWordFloatReco
 void __cdecl FUN_00a50540(const hkpConstraintMotor*,const SolverElementTemp*,SixIntegerData*);
 void __cdecl FUN_00a50a80(SixIntegerData*,SixteenWordFloatRecord*,void*,void**);
 // @fnv 0x00d51270
-void __stdcall FUN_00d51270(const int** commands, const hkVector4** data, hkpGenericConstraintDataScheme* scheme,
+// pdb: hkpGenericConstraintData::setLinearMotorW | hkpGenericConstraintData.obj | fnv360_0822_retail, objrun_prop + bridge(caller_sim|call_gap) + skyrim(caller_sim), high
+void __stdcall hkpGenericConstraintData_setLinearMotorW(const int** commands, const hkVector4** data, hkpGenericConstraintDataScheme* scheme,
                             GenericConstraintRuntime* runtime, SixteenWordFloatRecord* apStepInfo, void** schema)
 {
     *commands += 1;
@@ -1584,7 +1586,8 @@ void __cdecl FUN_009f9580(Vec* ptr, QueryIn* in, void* schema, QMotorPacket* pac
 void __cdecl FUN_00a50540(Motor* motor, QMotorPacket* input, float* output);
 void __cdecl FUN_009f97a0(float* output, QueryIn* in, void* schema, void** out);
 
-void __stdcall FUN_00d51410(int** cmdPtr, Vec** dataPtr, Scheme* scheme, Runtime* runtime, QueryIn* apQuery, void** out)
+// pdb: hkpGenericConstraintData::setAngularMotorW | hkpGenericConstraintData.obj | fnv360_0822_retail, objrun_prop + bridge(caller_sim|call_gap) + skyrim(caller_sim), high
+void __stdcall hkpGenericConstraintData_setAngularMotorW(int** cmdPtr, Vec** dataPtr, Scheme* scheme, Runtime* runtime, QueryIn* apQuery, void** out)
 {
     ++*cmdPtr;
     F3MotorResults9df0b0* out5 = reinterpret_cast<F3QueryIn9df0b0*>(apQuery)->m_results;
@@ -1700,8 +1703,8 @@ struct InterpreterD506
     void FUN_00d51170(int**, VecD506**, hkpGenericConstraintDataScheme*, StateD506*, InputD506*, void*);
     void FUN_00d50ec0(int**, VecD506**, hkpGenericConstraintDataScheme*, StateD506*, InputD506*, void*);
     void FUN_00d51060(int**, VecD506**, hkpGenericConstraintDataScheme*, StateD506*, InputD506*, void*);
-    void FUN_00d51410(int**, VecD506**, hkpGenericConstraintDataScheme*, StateD506*, InputD506*, void*);
-    void FUN_00d51270(int**, VecD506**, hkpGenericConstraintDataScheme*, StateD506*, InputD506*, void*);
+    void hkpGenericConstraintData_setAngularMotorW(int**, VecD506**, hkpGenericConstraintDataScheme*, StateD506*, InputD506*, void*);
+    void hkpGenericConstraintData_setLinearMotorW(int**, VecD506**, hkpGenericConstraintDataScheme*, StateD506*, InputD506*, void*);
     void FUN_00d51390(int**, VecD506**, hkpGenericConstraintDataScheme*, StateD506*, InputD506*, void*);
     void FUN_00d505c0(int**, VecD506**, hkpGenericConstraintDataScheme*, StateD506*, InputD506*, void*);
 };

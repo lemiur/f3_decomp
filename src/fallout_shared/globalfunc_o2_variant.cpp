@@ -191,10 +191,11 @@ struct FUN_00c75460_S
     ArmBones_S xRight;
     char pad21c[0x2a4 - 0x21c];
     SkelHolder_S* pHolder;
-    bool FUN_00c75460();
+    bool bhkRagdollController_InitGrabIK();
 };
 // @fnv 0x00c75460
-bool FUN_00c75460_S::FUN_00c75460()
+// pdb: bhkRagdollController::InitGrabIK | bhkRagdollController.obj | fnv360_0822_retail, ustr + bridge(ustr|ustr) + skyrim(ustr), high
+bool FUN_00c75460_S::bhkRagdollController_InitGrabIK()
 {
     bool bResult = bEnabled;
     if (bResult)
@@ -374,7 +375,7 @@ struct FUN_00c86800_Table
 struct FUN_00c86800_Class : S86870
 {
     void FUN_00c86800(int a1, FUN_00c86800_Table* a2);
-    void FUN_00c87600(int a1, FUN_00c86800_Table* a2);
+    void bhkSerializable_CopyMembers(int a1, FUN_00c86800_Table* a2);
 };
 
 // @fnv 0x00c86800
@@ -394,7 +395,7 @@ void FUN_00c86800_Class::FUN_00c86800(int a1, FUN_00c86800_Table* a2)
             link->m04 = target ? target->m08 : 0;
         }
     }
-    FUN_00c87600(a1, table);
+    bhkSerializable_CopyMembers(a1, table);
 }
 
 extern __declspec(thread) unsigned int threadContext;
@@ -862,7 +863,7 @@ void FUN_00c878c0_cls::FUN_00c878c0(BC878C0StringArray* pkArray)
 
 extern int DAT_01268154;
 
-// FUN_00ead0d0 - walks a singly linked list and returns the first node whose
+// NiCollisionData_FindAncestorWithCollisionData - walks a singly linked list and returns the first node whose
 // flag field is set (0 if the list ends or the head pointer is null).
 // The original was written as a tail-recursive helper; MSVC's tail-call
 // optimisation turns it into the loop that is actually emitted here.
@@ -879,7 +880,8 @@ struct FadeNodeEntry
 };
 
 // @fnv 0x00ead0d0
-FadeNodeEntry* __stdcall FUN_00ead0d0(FadeNodeEntry* pHead)
+// pdb: NiCollisionData::FindAncestorWithCollisionData | NiCollisionData.obj | fnv360_0822_retail, objrun + bridge(hash|objrun), high
+FadeNodeEntry* __stdcall NiCollisionData_FindAncestorWithCollisionData(FadeNodeEntry* pHead)
 {
     if (pHead == 0)
     {
@@ -897,7 +899,7 @@ FadeNodeEntry* __stdcall FUN_00ead0d0(FadeNodeEntry* pHead)
         return pNode;
     }
 
-    return FUN_00ead0d0(pNode);
+    return NiCollisionData_FindAncestorWithCollisionData(pNode);
 }
 
 struct InBaFull

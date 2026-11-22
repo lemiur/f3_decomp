@@ -106,12 +106,13 @@ template <class T> inline void NiStreamSaveBinaryBA89(NiBinaryStream* pkStream, 
 class BSShaderTextureSetBA89 : public BSShaderTextureSet
 {
   public:
-    void FUN_00ba8970(NiStream& stream);
+    void BSShaderTextureSet_SaveBinary(NiStream& stream);
 };
 
 // Links the object into the stream, writes the texture count 6, and writes each of the six m_kTextureNames strings to the stream.
 // @fnv 0x00ba8970
-void BSShaderTextureSetBA89::FUN_00ba8970(NiStream& stream)
+// pdb: BSShaderTextureSet::SaveBinary | BSShaderTextureSet.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(caller_sim), high
+void BSShaderTextureSetBA89::BSShaderTextureSet_SaveBinary(NiStream& stream)
 {
     ((NiObjectCall*)this)->NiObjectCall::LinkObject(stream);
 

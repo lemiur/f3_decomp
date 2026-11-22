@@ -21,10 +21,10 @@ extern "C" __declspec(dllimport) void __stdcall _fnv_EnterCriticalSection(void* 
 extern "C" __declspec(dllimport) void __stdcall _fnv_LeaveCriticalSection(void* section);
 struct FUN_00d605d0_Class
 {
-    void FUN_00d60960(unsigned int value);
-    void FUN_00d605d0(unsigned int value);
+    void hkOArchive_write32u(unsigned int value);
+    void hkOArchive_write8u(unsigned int value);
     void FUN_00dda730(unsigned int value);
-    void FUN_00d609a0(__int64 value);
+    void hkOArchive_write64u(__int64 value);
     void WriteInt(unsigned int value);
     const char* ForwardValueToObject(unsigned int* value);
 };
@@ -57,11 +57,11 @@ bool FUN_00dd9ab0_cls::FUN_00dd9ab0(unsigned int a1, unsigned int a2, int a3, un
     static_cast<WorldLockStub*>(m_pWorldLock)->FUN_00908a00();
     if (m_pConfiguration != 0)
     {
-        m_pConfiguration->FUN_00d60960(0x21);
-        m_pConfiguration->FUN_00d605d0(8);
+        m_pConfiguration->hkOArchive_write32u(0x21);
+        m_pConfiguration->hkOArchive_write8u(8);
         m_pConfiguration->FUN_00dda730(a1);
         m_pConfiguration->FUN_00dda730(a2);
-        m_pConfiguration->FUN_00d60960(a3);
+        m_pConfiguration->hkOArchive_write32u(a3);
         m_pConfiguration->WriteInt(a4);
     }
     if (m_pConfiguration == 0)
@@ -107,8 +107,8 @@ bool FUN_00dd9be0_cls::FUN_00dd9be0(unsigned int value, unsigned int length)
     if (m_pConfiguration != 0)
     {
         unsigned int count = length;
-        m_pConfiguration->FUN_00d60960(count + 5);
-        m_pConfiguration->FUN_00d605d0(0xf);
+        m_pConfiguration->hkOArchive_write32u(count + 5);
+        m_pConfiguration->hkOArchive_write8u(0xf);
         m_pConfiguration->WriteInt(count);
         reinterpret_cast<ConfigExt*>(m_pConfiguration)->unk607b0(value, count);
     }
@@ -164,7 +164,7 @@ bool S_00dd9c60::FUN_00dd9c60()
     if (unk04)
     {
         ((Cfg_w137*)unk04)->FUN_009ee8f0(1);
-        unk04->FUN_00d605d0(0xb);
+        unk04->hkOArchive_write8u(0xb);
     }
     bool r;
     char c;
@@ -287,10 +287,10 @@ bool FUN_00dd9f40_cls::SetAndCheck(unsigned int uiValue, unsigned int a2, int a3
     {
         unsigned int v = uiValue;
         m_pConfiguration->WriteInt(FUN_00dd9d70() + 0x11);
-        m_pConfiguration->FUN_00d605d0(6);
+        m_pConfiguration->hkOArchive_write8u(6);
         reinterpret_cast<FUN_00dd9da0_ext*>((char*)this - 8)->ApplyItemList(v);
-        m_pConfiguration->FUN_00d60960(a2);
-        m_pConfiguration->FUN_00d609a0((__int64)a3);
+        m_pConfiguration->hkOArchive_write32u(a2);
+        m_pConfiguration->hkOArchive_write64u((__int64)a3);
         m_pConfiguration->WriteInt(a4);
     }
     if (m_pConfiguration == 0)
@@ -312,11 +312,11 @@ done:
     return !ok;
 }
 
-int FUN_00cb10d0(unsigned int value);
+int hkString_strLen(unsigned int value);
 
-int __cdecl FUN_00cb10d0(const char* text);
+int __cdecl hkString_strLen(const char* text);
 
-int FUN_00cb10d0(unsigned int value);
+int hkString_strLen(unsigned int value);
 
 struct FUN_00dda290_cls
 {
@@ -460,8 +460,8 @@ struct FUN_00d60940_Class
 };
 struct Stream : FUN_00d605d0_Class
 {
-    void FUN_00d60960(unsigned int);
-    void FUN_00d609a0(unsigned int, int);
+    void hkOArchive_write32u(unsigned int);
+    void hkOArchive_write64u(unsigned int, int);
     char* ForwardValueToObject(void*);
 };
 struct Output
@@ -490,10 +490,10 @@ int Output::WriteRecord(unsigned int first, unsigned int second, unsigned int th
     ((W56Lock*)lock)->FUN_00908a00();
     if (stream)
     {
-        stream->FUN_00d60960(17);
-        stream->FUN_00d605d0(3);
-        stream->FUN_00d60960(first);
-        stream->FUN_00d609a0(second, 0);
+        stream->hkOArchive_write32u(17);
+        stream->hkOArchive_write8u(3);
+        stream->hkOArchive_write32u(first);
+        stream->hkOArchive_write64u(second, 0);
         ((FUN_00d60940_Class*)stream)->WriteInt(third);
     }
     bool failed = stream && *stream->ForwardValueToObject(&first);
@@ -624,7 +624,7 @@ struct DD99D0CriticalSection
     }
 };
 
-extern "C" int __cdecl FUN_00cb10d0(const char* str);
+extern "C" int __cdecl hkString_strLen(const char* str);
 
 }  // namespace fnv_00dd99d0
 
@@ -814,11 +814,11 @@ bool SecondaryDisplay::FUN_00dd9e90(unsigned int a, unsigned int b, unsigned int
     {
         unsigned int a2 = a;
         config->WriteInt(FUN_00dd9d70() + 0x2d);
-        config->FUN_00d605d0(5);
+        config->hkOArchive_write8u(5);
         reinterpret_cast<FUN_00dd9da0_owner*>((char*)this - 8)->ApplyItemList(a2);
         config->WriteTransform(b);
-        config->FUN_00d60960(c);
-        config->FUN_00d609a0((__int64)d);
+        config->hkOArchive_write32u(c);
+        config->hkOArchive_write64u((__int64)d);
         config->WriteInt(e);
     }
     bool ok = config != 0 && config->ForwardValueToObject(&a)[0] != 0;

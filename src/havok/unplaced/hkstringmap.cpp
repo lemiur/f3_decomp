@@ -263,17 +263,17 @@ class hkStringMapD876
 // @f3 0x0098da90 (community match, verified in this file)
 struct MapOps
 {
-    int FUN_00981190(const char* key, int def, void* a, void* b);
-    int FUN_0098c9b0(const char* key, int def);
-    int FUN_0098caa0(int value);
+    int hkpSimulation_resetCollisionInformationForEntities(const char* key, int def, void* a, void* b);
+    int hkpContinuousSimulation_removeToiEventsOfEntities(const char* key, int def);
+    int hkpContinuousSimulation_removeToiEventsOfEntity(int value);
 };
 
 int hkStringMapD876::GetOrSetInt(const char* key, int def, void* a, void* b)
 {
-    ((MapOps*)this)->FUN_00981190(key, def, a, b);
+    ((MapOps*)this)->hkpSimulation_resetCollisionInformationForEntities(key, def, a, b);
     if (def != 1)
-        return ((MapOps*)this)->FUN_0098c9b0(key, def);
-    return ((MapOps*)this)->FUN_0098caa0(*(int*)key);
+        return ((MapOps*)this)->hkpContinuousSimulation_removeToiEventsOfEntities(key, def);
+    return ((MapOps*)this)->hkpContinuousSimulation_removeToiEventsOfEntity(*(int*)key);
 }
 
 

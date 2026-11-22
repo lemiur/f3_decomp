@@ -255,7 +255,8 @@ extern char DAT_01177d1c;
 void __cdecl FUN_00ad2c70(void);
 void __cdecl FUN_00aef4d0(void);
 
-void FUN_00b458f0()
+// pdb: BSShaderSDM::KillSDM | BSShaderSDM.obj | fnv360_0822_retail, udata + bridge(hash|udata), high
+void BSShaderSDM_KillSDM()
 {
     if (DAT_01177d1c) {
         FUN_00ad2c70();
@@ -535,8 +536,9 @@ void* C_00b51e60::FUN_00b51e60(unsigned char f)
 
 
 struct X_00b53ab0 { char pad[0xbc]; int fbc; };
-struct C_00b53ab0 { char pad[0x6c]; int f6c; int f70; int FUN_00b53ab0(X_00b53ab0* a, int b); };
-int C_00b53ab0::FUN_00b53ab0(X_00b53ab0* a, int b)
+struct C_00b53ab0 { char pad[0x6c]; int f6c; int f70; int SkinShader_GetShaderDecl(X_00b53ab0* a, int b); };
+// pdb: SkinShader::GetShaderDecl | SkinShader.obj | fnv360_0822_retail, objrun + bridge(hash|objrun_open), high
+int C_00b53ab0::SkinShader_GetShaderDecl(X_00b53ab0* a, int b)
 {
     return a->fbc ? f70 : f6c;
 }

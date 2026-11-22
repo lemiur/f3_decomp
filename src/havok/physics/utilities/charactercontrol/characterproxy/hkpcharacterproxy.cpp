@@ -159,7 +159,7 @@ struct FNVOwner {
     FNVBuffers*& Buffers() {
         return *reinterpret_cast<FNVBuffers**>(reinterpret_cast<char*>(this) + 0x214);
     }
-    void FUN_00c9c5b0(int value);
+    void hkpEntity_addEntityListener(int value);
 };
 // Ensures the buffers exist, stores value into the first empty element slot or appends it, growing the array when full.
 // @f3 0x0090b880 (community match, verified in this file)
@@ -168,7 +168,8 @@ extern DWORD DAT_010f3170;
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(DWORD);
 void* __stdcall FUN_008f6800(int, int);
 void __cdecl FUN_0098a9f0(FNVArray*, unsigned int);
-void FNVOwner::FUN_00c9c5b0(int value) {
+// pdb: hkpEntity::addEntityListener | hkpEntity.obj | fnv360_0822_retail, call_seq + bridge(call_gap_sim|call_seq) + skyrim(objrun), high
+void FNVOwner::hkpEntity_addEntityListener(int value) {
     FNVBuffers*& buffers = *reinterpret_cast<FNVBuffers**>(reinterpret_cast<char*>(this) + 0xcc);
     if (buffers == 0) {
         char* pool = static_cast<char*>(TlsGetValue(DAT_010f3170));
@@ -309,7 +310,7 @@ struct ArgminLocal {
 };
 
 struct Stub_00921660 {
-    float FUN_00921660(void* a, void* b);
+    float hkpCharacterProxy_surfaceDistance(void* a, void* b);
 };
 
 int FUN_00cacf10_cls::FUN_00cacf10(void* arg) {
@@ -321,7 +322,7 @@ int FUN_00cacf10_cls::FUN_00cacf10(void* arg) {
         return -1;
     }
     do {
-        float d = ((Stub_00921660*)this)->FUN_00921660(arg, (void*)(m_74 + i * 0x40));
+        float d = ((Stub_00921660*)this)->hkpCharacterProxy_surfaceDistance(arg, (void*)(m_74 + i * 0x40));
         if (d < s.best) {
             s.best = d;
             s.idx = i;
@@ -1623,7 +1624,7 @@ struct S_00cad500_RefStub
 {
     void FUN_009316e0();
     void FUN_009316f0();
-    void FUN_00931740(int id, S_00cad500_Pair p);
+    void hkpWorldObject_addProperty(int id, S_00cad500_Pair p);
 };
 struct S_00cad500_E1Stub
 {
@@ -1631,11 +1632,11 @@ struct S_00cad500_E1Stub
 };
 struct S_00cad500_E2Stub
 {
-    void FUN_009898e0(void* p);
+    void hkpPhantom_removePhantomListener(void* p);
 };
 struct S_00cad500_ThisStub
 {
-    void FUN_0091dd70(S_00cad500_Src* a);
+    void hkpCharacterProxy_setPosition(S_00cad500_Src* a);
 };
 
 void S_00cad500_This::FUN_00cad500(S_00cad500_Src* apSrc)
@@ -1683,7 +1684,7 @@ void S_00cad500_This::FUN_00cad500(S_00cad500_Src* apSrc)
     m_40.w = m_40.w * inv;
     _ReadWriteBarrier();
     if (m_30->m_08 != 0) {
-        reinterpret_cast<S_00cad500_ThisStub*>(this)->FUN_0091dd70(apSrc);
+        reinterpret_cast<S_00cad500_ThisStub*>(this)->hkpCharacterProxy_setPosition(apSrc);
     }
     int i = 0;
     m_20.w = 0.0f;
@@ -1696,7 +1697,7 @@ void S_00cad500_This::FUN_00cad500(S_00cad500_Src* apSrc)
     }
     m_90 = 0;
     for (int j = 0; j < m_9c; j++) {
-        reinterpret_cast<S_00cad500_E2Stub*>(m_98[j])->FUN_009898e0(&unk0C);
+        reinterpret_cast<S_00cad500_E2Stub*>(m_98[j])->hkpPhantom_removePhantomListener(&unk0C);
     }
     m_9c = 0;
     m_78 = 0;
@@ -1705,7 +1706,7 @@ void S_00cad500_This::FUN_00cad500(S_00cad500_Src* apSrc)
             return;
         }
     }
-    reinterpret_cast<S_00cad500_RefStub*>(m_30)->FUN_00931740(0x1300, S_00cad500_Pair(this, 0));
+    reinterpret_cast<S_00cad500_RefStub*>(m_30)->hkpWorldObject_addProperty(0x1300, S_00cad500_Pair(this, 0));
 }
 
 

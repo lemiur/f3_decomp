@@ -696,7 +696,8 @@ void __fastcall FUN_00b65570(char* self, int unused)
 struct GlobalObjectO2_00a7b610;
 extern GlobalObjectO2_00a7b610 g_011fa000;
 // @fnv 0x00b65a80
-GlobalObjectO2_00a7b610* __cdecl FUN_00b65a80()
+// pdb: NiCullingProperty::GetRTTI | NiCullingProperty.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+GlobalObjectO2_00a7b610* __cdecl NiCullingProperty_GetRTTI()
 {
     return &g_011fa000;
 }

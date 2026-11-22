@@ -5,7 +5,8 @@
 extern void* g_011ff8d8;
 
 // @fnv 0x00b887b0
-void* __cdecl FUN_00b887b0()
+// pdb: NiShaderDeclaration::GetRTTI | NiD3DShaderDeclaration.obj | fnv360_0822_retail, udata + bridge(vtable|udata) + skyrim(udata), high
+void* __cdecl NiShaderDeclaration_GetRTTI()
 {
     return &g_011ff8d8;
 }

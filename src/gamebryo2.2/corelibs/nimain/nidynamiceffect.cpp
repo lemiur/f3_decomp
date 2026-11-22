@@ -223,14 +223,14 @@ static inline NiNode* GetNext(NiTListItem<NiNode*>*& node)
 class FNVEffect : public NiDynamicEffect
 {
   public:
-    bool __thiscall FUN_00a5a260(FNVEffect* other);
+    bool __thiscall NiAVObject_IsEqual(FNVEffect* other);
     bool __thiscall FUN_00a68d80(FNVEffect* other);
 };
-// Returns false if counts differ or paired entries differ in nullness; otherwise returns true if FUN_00a5a260 succeeds.
+// Returns false if counts differ or paired entries differ in nullness; otherwise returns true if NiAVObject_IsEqual succeeds.
 // @fnv 0x00a68d80
 bool __thiscall FNVEffect::FUN_00a68d80(FNVEffect* other)
 {
-    if (!FUN_00a5a260(other))
+    if (!NiAVObject_IsEqual(other))
         return false;
     if (m_kEffectTargetNodes.m_kItemCount.m_uiCount != other->m_kEffectTargetNodes.m_kItemCount.m_uiCount)
         return false;

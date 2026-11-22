@@ -30,7 +30,8 @@ struct BSFadeNode
     float m_f58;
 };
 // @fnv 0x00c1fff0
-BSFadeNode* __cdecl FUN_00c1fff0()
+// pdb: NiPSysSphereEmitter::CreateObject | NiPSysSphereEmitter.obj | fnv360_0822_retail, objrun + bridge(hash|objopen_prop), high
+BSFadeNode* __cdecl NiPSysSphereEmitter_CreateObject()
 {
     BSFadeNode* p = static_cast<BSFadeNode*>(BSFadeNode::operator new(0x5c));
     if (p)
@@ -88,7 +89,7 @@ BSFadeNode* FUN_00c1ffa0_s::CreateFadeNode(void* pkCloningProcess)
     return pkObject;
 }
 
-// FUN_00c20080 - the sphere emitter's stream loader.
+// NiPSysSphereEmitter_SaveBinary - the sphere emitter's stream loader.
 //
 // The pack's NiStream / NiBinaryStream declarations do not match the original
 // code: the original takes the binary stream from stream+0x250 (the pack says
@@ -134,11 +135,12 @@ struct PSysVolumeEmitter
 struct PSysSphereEmitter : PSysVolumeEmitter
 {
     float m_fBoundRadius;  // +0x58
-    void FUN_00c20080(GameStream& stream);
+    void NiPSysSphereEmitter_SaveBinary(GameStream& stream);
 };
 
 // @fnv 0x00c20080
-void PSysSphereEmitter::FUN_00c20080(GameStream& stream)
+// pdb: NiPSysSphereEmitter::SaveBinary | NiPSysSphereEmitter.obj | fnv360_0822_retail, caller_sim + bridge(vtable|objopen_prop) + skyrim(caller_sim), high
+void PSysSphereEmitter::NiPSysSphereEmitter_SaveBinary(GameStream& stream)
 {
     PSysVolumeEmitter::LoadBinary(stream);
     BinaryStream* input = stream.input;

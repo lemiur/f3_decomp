@@ -575,7 +575,7 @@ struct Motion : MotionHeader {
     int unk88;
     int unk8c;
     Vec centerOfMass;
-    float FUN_00c86430();
+    float hkpMotion_getMass();
 };
 struct Body {
     int unk00;
@@ -637,7 +637,7 @@ struct Body {
     Motion motion;
     __forceinline Motion* getRigidMotion() { return &motion; }
     __forceinline const Motion* getRigidMotionC() const { return &motion; }
-    __forceinline float GetMassValue() { return getRigidMotion()->FUN_00c86430(); }
+    __forceinline float GetMassValue() { return getRigidMotion()->hkpMotion_getMass(); }
     __forceinline void GetInverseScaleMatrix(Inertia& m) { getRigidMotion()->getInertia(&m); }
     __forceinline const Transform& getTransform() const { return motion.transform; }
     __forceinline const Vec& getCenterOfMassLocal() const { return motion.centerOfMass; }
@@ -870,7 +870,7 @@ struct ScalarVec {
     __forceinline ScalarVec& operator=(const ScalarVec& o) { x=o.x;y=o.y;z=o.z;w=o.w;return *this; }
     __forceinline void set(float a,float b,float c,float d) {x=a;y=b;z=c;w=d;}
     __forceinline void add(const ScalarVec& b) {x+=b.x;y+=b.y;z+=b.z;w+=b.w;}
-    void FUN_008d2a00(const Transform* rotation, const Vec* v);
+    void hkVector4_setRotatedDir(const Transform* rotation, const Vec* v);
 };
 struct ScalarTransform {
     ScalarVec x,y,z,translation;
@@ -971,7 +971,7 @@ void ViewerPart::FUN_00d67340(float unused) {
             n9f4270::ScalarVec rotated;
             {
                 n9f4270::ScalarVec center(*reinterpret_cast<const n9f4270::ScalarVec*>(&reinterpret_cast<n9f4270::RigidBody*>(bodies[i])->motion.centerOfMass));
-                rotated.FUN_008d2a00(reinterpret_cast<const Transform*>(&transform), reinterpret_cast<const Vec*>(&center));
+                rotated.hkVector4_setRotatedDir(reinterpret_cast<const Transform*>(&transform), reinterpret_cast<const Vec*>(&center));
             }
             rotated.add(transform.translation);
             transform.translation = rotated;

@@ -69,11 +69,12 @@ struct NiPSysData_StandIn
         int v[7];
     }* m_pkParticleInfo;
     float* m_pfRotationSpeeds;
-    void FUN_00c24cc0(unsigned short usParticle);
+    void NiPSysData_RemoveParticle(unsigned short usParticle);
     void FUN_00a964c0(unsigned short);
 };
 // @fnv 0x00c24cc0
-void NiPSysData_StandIn::FUN_00c24cc0(unsigned short usParticle)
+// pdb: NiPSysData::RemoveParticle | NiPSysData.obj | fnv360_0822_retail, call_gap_sim + bridge(vtable|objrun_prop) + skyrim(objopen_prop), high
+void NiPSysData_StandIn::NiPSysData_RemoveParticle(unsigned short usParticle)
 {
     unsigned short usLastParticle = m_50 - 1;
     FUN_00a964c0(usParticle);
@@ -199,7 +200,7 @@ struct FnvPSysData
     virtual void v38();
     virtual void v39();
     virtual void v40();
-    virtual void FUN_00c24cc0(unsigned short usParticle);
+    virtual void NiPSysData_RemoveParticle(unsigned short usParticle);
 
     char _pad04[0x4c];
     unsigned short m_usActive;  // +0x50
@@ -222,7 +223,7 @@ void FnvPSysData::FUN_00c24d20()
         {
             if (m_usActive <= m_usNumParticles)
                 break;
-            FUN_00c24cc0(i);
+            NiPSysData_RemoveParticle(i);
             ++i;
         }
 
@@ -275,7 +276,7 @@ FUN_00c24da0_cls* __cdecl FUN_00c24da0()
 
 struct HookBase
 {
-    bool FUN_00a96a30(void* p);
+    bool NiParticlesData_IsEqual(void* p);
 };
 struct ParticleItemStand
 {
@@ -285,13 +286,14 @@ struct PSDataEqStand : NiPSysData_StandIn
 {
     unsigned short m_78;
     unsigned short m_7a;
-    bool FUN_00c24de0(PSDataEqStand* other);
+    bool NiPSysData_IsEqual(PSDataEqStand* other);
 };
 
 // @fnv 0x00c24de0
-bool PSDataEqStand::FUN_00c24de0(PSDataEqStand* other)
+// pdb: NiPSysData::IsEqual | NiPSysData.obj | fnv360_0822_retail, caller_sim + bridge(vtable|caller_sim) + skyrim(caller_sim), high
+bool PSDataEqStand::NiPSysData_IsEqual(PSDataEqStand* other)
 {
-    if (!reinterpret_cast<HookBase*>(this)->FUN_00a96a30(other))
+    if (!reinterpret_cast<HookBase*>(this)->NiParticlesData_IsEqual(other))
     {
         return false;
     }
@@ -328,18 +330,19 @@ bool PSDataEqStand::FUN_00c24de0(PSDataEqStand* other)
 
 struct NiParticlesDataWriter : NiParticlesData
 {
-    void __thiscall FUN_00a97290(NiStream&);
+    void __thiscall NiParticlesData_SaveBinary(NiStream&);
 };
 struct NiPSysDataWriter : NiParticlesDataWriter
 {
     Point3ParameterData* particleInfo;
     float* rotationSpeeds;
-    void __thiscall FUN_00c25560(NiStream&);
+    void __thiscall NiPSysData_SaveBinary(NiStream&);
 };
 // @fnv 0x00c25560
-void NiPSysDataWriter::FUN_00c25560(NiStream& stream)
+// pdb: NiPSysData::SaveBinary | NiPSysData.obj | fnv360_0822_retail, caller_sim + bridge(vtable|objrun) + skyrim(caller_sim), high
+void NiPSysDataWriter::NiPSysData_SaveBinary(NiStream& stream)
 {
-    NiParticlesDataWriter::FUN_00a97290(stream);
+    NiParticlesDataWriter::NiParticlesData_SaveBinary(stream);
     bool hasRotationSpeeds = rotationSpeeds != 0;
     NiBinaryStream* output = stream.m_pBackingStream;
     unsigned int(__cdecl * writer)(NiBinaryStream*, const void*, unsigned int, unsigned int*, unsigned int) =
@@ -521,7 +524,7 @@ struct NiPSysData_View : NiPSysData
         m_pfRotationSpeeds = pfSpeeds;
     }
 
-    void FUN_00c24f20(NiPSysData_View* pkDest, void* kCloning);
+    void NiPSysData_CopyMembers(NiPSysData_View* pkDest, void* kCloning);
 };
 
 static inline void SetCenterAndRadius(NiBound& kBound, const NiPoint3& kTargetCenter, float fRadius)
@@ -530,7 +533,8 @@ static inline void SetCenterAndRadius(NiBound& kBound, const NiPoint3& kTargetCe
     kBound.m_fBoundRadius = fRadius;
 }
 // @fnv 0x00c24f20
-void NiPSysData_View::FUN_00c24f20(NiPSysData_View* pkDest, void* kCloning)
+// pdb: NiPSysData::CopyMembers | NiPSysData.obj | fnv360_0822_retail, objrun + bridge(hash|objopen_prop) + skyrim(caller_sim), high
+void NiPSysData_View::NiPSysData_CopyMembers(NiPSysData_View* pkDest, void* kCloning)
 {
     ((NiObject_Stub*)this)->CopyMembersStream(pkDest, kCloning);
 
@@ -644,7 +648,7 @@ struct S00c25340_Info : Point3ParameterData
 
 struct S00c25340_Data : NiPSysData
 {
-    void FUN_00c25340(NiStream& stream);
+    void NiPSysData_LoadBinary(NiStream& stream);
 };
 
 struct S00c25340_Stream : NiBinaryStream
@@ -661,7 +665,8 @@ static inline void S00c25340_Read(NiBinaryStream* input, void* destination, unsi
 }
 
 // @fnv 0x00c25340
-void S00c25340_Data::FUN_00c25340(NiStream& stream)
+// pdb: NiPSysData::LoadBinary | NiPSysData.obj | fnv360_0822_retail, caller_sim + bridge(vtable|caller_sim) + skyrim(caller_sim), high
+void S00c25340_Data::NiPSysData_LoadBinary(NiStream& stream)
 {
     NiParticlesData::LoadBinary(stream);
     if (stream.m_uiNifVersion < 0x0a030005 && m_pkRotations)
@@ -751,15 +756,16 @@ struct PSysDataClone
 
 struct PSysDataCloneSrc
 {
-    void FUN_00c24f20(PSysDataClone* pkDest, void* kCloning);
-    PSysDataClone* FUN_00c252d0(void* kCloning);
+    void NiPSysData_CopyMembers(PSysDataClone* pkDest, void* kCloning);
+    PSysDataClone* NiPSysData_CreateClone(void* kCloning);
 };
 
 // @fnv 0x00c252d0
-PSysDataClone* PSysDataCloneSrc::FUN_00c252d0(void* kCloning)
+// pdb: NiPSysData::CreateClone | NiPSysData.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun_open) + skyrim(caller_sim), high
+PSysDataClone* PSysDataCloneSrc::NiPSysData_CreateClone(void* kCloning)
 {
     PSysDataClone* pkClone = new PSysDataClone;
-    FUN_00c24f20(pkClone, kCloning);
+    NiPSysData_CopyMembers(pkClone, kCloning);
     return pkClone;
 }
 

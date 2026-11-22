@@ -264,7 +264,7 @@ const char* __cdecl PrepareScriptMessage(const char* msg, bool flag);
 struct NiTArray_Layout;
 void __fastcall FUN_005e03d0(NiTArray_Layout*);
 
-void __cdecl FUN_004add50(char* dst, const char* src, unsigned int count);
+void __cdecl TESFurniture_GetMarkerEnabled(char* dst, const char* src, unsigned int count);
 
 typedef int(__stdcall* DAT_00fdf28c_fn)(void*, int, int, void*);
 
@@ -309,7 +309,7 @@ struct FUN_004d9100
 Node7* __cdecl FUN_00653270(void*, Node7*);
 const char* __cdecl FUN_00464f30(const char*, bool);
 const char* __fastcall FUN_00559450(void*);
-void __cdecl FUN_004add50(char*, const char*, unsigned);
+void __cdecl TESFurniture_GetMarkerEnabled(char*, const char*, unsigned);
 
 namespace fnv_004d80b0 {
 struct FUN_004d9100
@@ -325,7 +325,7 @@ struct FUN_004d9100
 };
 extern void* __cdecl FUN_00653270(const void*, void*);
 extern char* __cdecl FUN_00464f30(const void*, int);
-extern void __cdecl FUN_004add50(char*, const char*, unsigned int);
+extern void __cdecl TESFurniture_GetMarkerEnabled(char*, const char*, unsigned int);
 }  // namespace fnv_004d80b0
 
 typedef void*(__stdcall* SendMessage4d86)(void*, int, int, int);

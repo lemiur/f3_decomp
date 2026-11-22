@@ -22,7 +22,8 @@ NiDepthStencilBuffer* NiDepthStencilBuffer::Create(unsigned int width, unsigned 
 extern "C" void* g_011f6048;
 
 // @fnv 0x00aa06e0
-void* __cdecl FUN_00aa06e0()
+// pdb: NiIntegersExtraData::GetRTTI | BSWArray.obj | fnv360_0822_retail, vtable + skyrim(objrun_open), high
+void* __cdecl NiIntegersExtraData_GetRTTI()
 {
     return &g_011f6048;
 }

@@ -28,7 +28,8 @@ namespace f3m_00525d00 {
 struct ParamInfo;class ScriptEventList;
 bool __cdecl FUN_00517950(ParamInfo*,void*,unsigned int*,TESObjectREFR*,TESObjectREFR*,Script*,ScriptEventList*,...);
 struct Obj525d00 {void FUN_00551360(void*,unsigned int);};
-bool __cdecl FUN_00525d00(ParamInfo* a1,void* a2,TESObjectREFR* a3,TESObjectREFR* a4,Script* a5,ScriptEventList* a6,double* out,unsigned int* a8) {
+// pdb: Script::SetFactionReaction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim + bridge(caller_sim|caller_sim) + skyrim(objrun_open), high
+bool __cdecl Script_SetFactionReaction(ParamInfo* a1,void* a2,TESObjectREFR* a3,TESObjectREFR* a4,Script* a5,ScriptEventList* a6,double* out,unsigned int* a8) {
  unsigned int option;Obj525d00* receiver;void* target;
  receiver=0;target=0;option=0;
  if(!FUN_00517950(a1,a2,a8,a3,a4,a5,a6,&receiver,&target,&option)) return false;
@@ -44,14 +45,15 @@ namespace f3m_0052b3a0 {
 class ParamInfo;
 class ScriptEventList;
 
-bool __cdecl FUN_00515350(TESObjectREFR* thisObj, unsigned int unusedA,
+bool __cdecl Script_IsRunningConditionFunction(TESObjectREFR* thisObj, unsigned int unusedA,
     unsigned int unusedB, double* result);
 
-bool __cdecl FUN_0052b3a0(ParamInfo* paramInfo, void* scriptData, TESObjectREFR* thisObj,
+// pdb: Script::IsRunningFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim + bridge(caller_sim|caller_sim) + skyrim(caller_sim), high
+bool __cdecl Script_IsRunningFunction(ParamInfo* paramInfo, void* scriptData, TESObjectREFR* thisObj,
     TESObjectREFR* containingObj, Script* scriptObj, ScriptEventList* eventList, double* result,
     unsigned int* opcodeOffsetPtr)
 {
-    FUN_00515350(thisObj, 0, 0, result);
+    Script_IsRunningConditionFunction(thisObj, 0, 0, result);
     return true;
 }
 }   // namespace f3m_0052b3a0
@@ -62,7 +64,8 @@ namespace f3_0291 {
 struct TESFaction { void FUN_005513c0(TESFaction*, int); };
 bool __cdecl FUN_00517950(const ScriptParameter*, const char*, unsigned int*, TESObjectREFR*, TESObjectREFR*, Script*, ScriptLocals*, ...);
 // @fnv 0x005c8120
-bool __cdecl FUN_00525d90(const ScriptParameter* parameters, const char* scriptData,
+// pdb: Script::SetAllyFunction | TESScriptFunctions.obj | fnv360_0822_retail, objrun + skyrim(objrun_open), high
+bool __cdecl Script_SetAllyFunction(const ScriptParameter* parameters, const char* scriptData,
     TESObjectREFR* thisObject, TESObjectREFR* container, Script* script,
     ScriptLocals* locals, double& result, unsigned int& opcodeOffset)
 {
@@ -125,9 +128,10 @@ bool FUN_005306c0(const ScriptParameter* parameters, const char* scriptData, TES
 namespace f3m_0052fb80 {
 namespace f3_0328 {
 bool __cdecl FUN_00517950(const ScriptParameter*, const char*, unsigned int*, TESObjectREFR*, TESObjectREFR*, Script*, ScriptLocals*, ...);
-bool __cdecl FUN_00513ee0(TESObjectREFR*, void*, void*, double&);
+bool __cdecl Script_GetVATSRightAreaFreeConditionFunction(TESObjectREFR*, void*, void*, double&);
 // @fnv 0x005c7010
-bool __cdecl FUN_0052fb80(const ScriptParameter* parameters, const char* scriptData,
+// pdb: Script::GetVATSRightAreaFreeFunction | TESScriptFunctions.obj | fnv360_0822_retail, caller_sim + bridge(caller_sim|caller_sim) + skyrim(caller_sim), high
+bool __cdecl Script_GetVATSRightAreaFreeFunction(const ScriptParameter* parameters, const char* scriptData,
                                TESObjectREFR* thisObject, TESObjectREFR* container,
                                Script* script, ScriptLocals* locals, double& result,
                                unsigned int& opcodeOffset)
@@ -136,7 +140,7 @@ bool __cdecl FUN_0052fb80(const ScriptParameter* parameters, const char* scriptD
     if (!FUN_00517950(parameters, scriptData, &opcodeOffset, thisObject, container,
                      script, locals, &formID))
         return false;
-    return FUN_00513ee0(thisObject,
+    return Script_GetVATSRightAreaFreeConditionFunction(thisObject,
                                               reinterpret_cast<void*>(formID), 0, result);
 }
 
@@ -158,7 +162,8 @@ extern Mgr* DAT_0107a0d8;
 extern unsigned int DAT_0107152c;
 void __cdecl FUN_006195d0(const char* fmt, ...);
 bool __cdecl FUN_00517950(unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, unsigned, int*);
-bool __cdecl FUN_00524370(unsigned a, unsigned b, unsigned c, unsigned d, unsigned e, unsigned f, unsigned g, unsigned h) {
+// pdb: Script::ToggleCellNode | TESScriptFunctions.obj | fnv360_0822_retail, ustr + bridge(ustr|ustr) + skyrim(ustr), high
+bool __cdecl Script_ToggleCellNode(unsigned a, unsigned b, unsigned c, unsigned d, unsigned e, unsigned f, unsigned g, unsigned h) {
     int value = -1;
     if (!FUN_00517950(a, b, h, c, d, e, f, &value)) return false;
     if (value == -1) return true;
@@ -287,7 +292,7 @@ struct WaterGeom {
 struct WaterManager {
     WaterGeom* FUN_004941a0(TESObjectREFR* ref);
     void FUN_00493f80(int a, int b, int c);
-    void FUN_00494020();
+    void TESWaterSystem_EnableWaterSystem();
 };
 
 struct Cell {
@@ -366,7 +371,8 @@ extern "C" __declspec(dllimport) int __stdcall QueryPerformanceFrequency(long lo
 
 using namespace f3m_005357e0;
 
-bool __cdecl FUN_005357e0(const ScriptParameter* parameters, const char* scriptData, TESObjectREFR* thisObject, TESObjectREFR* container, Script* script, ScriptLocals* locals, double& result, unsigned int& opcodeOffset)
+// pdb: Script::ModifyWaterShader | TESScriptFunctions.obj | fnv360_0822_retail, ustr + bridge(ustr|ustr) + skyrim(ustr), high
+bool __cdecl Script_ModifyWaterShader(const ScriptParameter* parameters, const char* scriptData, TESObjectREFR* thisObject, TESObjectREFR* container, Script* script, ScriptLocals* locals, double& result, unsigned int& opcodeOffset)
 {
     WaterNode* p;
     float value = 0.0f;
@@ -587,7 +593,7 @@ bool __cdecl FUN_005357e0(const ScriptParameter* parameters, const char* scriptD
         FUN_00403230(msg, 0xff, "GeneratePlaceableWaterForCell() for cell %s: Ticks: %I64d, Microseconds: %f",
                      DAT_0107a0d8->FUN_00435750()->GetName(), dt, (double)dt / secondsPerTick);
         if (!IsWaterLocked()) {
-            DAT_0107a0d8->GetWaterManager()->FUN_00494020();
+            DAT_0107a0d8->GetWaterManager()->TESWaterSystem_EnableWaterSystem();
         }
     }
     return true;
@@ -740,7 +746,7 @@ struct Ref {
     LinkList linked;
     void* FUN_004e8880();
     void FUN_004e69f0(bool disabled);
-    void FUN_004e6b20(bool value);
+    void TESObjectREFR_SetRefPersists(bool value);
     void* GetParentCell() { return parentCell; }
     LinkList* GetLinkNode() { return &linked; }
 };
@@ -831,7 +837,7 @@ bool __cdecl FUN_0053d570(void* paramInfo, void* scriptData, Ref* thisObj, Ref* 
         Ref* pkNew = DAT_0106cdcc->FUN_0043def0(pvForm, &kPos, &kAngle, thisObj->GetParentCell(), thisObj->FUN_004e8880(), 0, 0, 0);
         pkNew->FUN_004e69f0(!bAligned);
         pkNew->flags |= 0x8000000;
-        pkNew->FUN_004e6b20(true);
+        pkNew->TESObjectREFR_SetRefPersists(true);
         pkNew->GetLinkNode()->FUN_00411bd0(thisObj);
         thisObj->GetLinkNode()->FUN_00411bd0(pkNew);
         pkNew->MarkAsModified(0x80000000);

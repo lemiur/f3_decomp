@@ -39,7 +39,7 @@ int C_00b0fbd0::FUN_00b0fbd0(int idx, int data)
 
 struct H_00bea7b0 { void FUN_00bea7b0(int, int*); };
 struct E_00b0f540 { void FUN_00b0f540(int); };
-struct T_00b10420 { void FUN_00b10420(int*, int, int); };
+struct T_00b10420 { void BSBatchRenderer_PrepareNextRenderPass(int*, int, int); };
 
 struct C_00b10750 { void FUN_00b10750(int* a1, int a2, int a3, int a4); };
 void C_00b10750::FUN_00b10750(int* a1, int a2, int a3, int a4)
@@ -47,7 +47,7 @@ void C_00b10750::FUN_00b10750(int* a1, int a2, int a3, int a4)
     int idx = 0;
     ((H_00bea7b0*)((char*)this + 0xc))->FUN_00bea7b0(*a1, &idx);
     ((E_00b0f540*)(*(char**)((char*)this + 8) + idx * 0x68))->FUN_00b0f540(0);
-    ((T_00b10420*)this)->FUN_00b10420(a1, a2, a3);
+    ((T_00b10420*)this)->BSBatchRenderer_PrepareNextRenderPass(a1, a2, a3);
 }
 
 // ---- family f391

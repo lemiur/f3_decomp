@@ -152,7 +152,7 @@ struct Res {
 struct Recv {
     void FUN_00925300(void*, void*);
 };
-void* __cdecl FUN_00976cd0(void*, float, void*);
+void* __cdecl hkSweptTransformUtil_lerp2(void*, float, void*);
 }
 static __declspec(noinline) void FUN_00da49b0(DaDest* dest, DaSource* source_, void* p)
 {
@@ -161,9 +161,9 @@ static __declspec(noinline) void FUN_00da49b0(DaDest* dest, DaSource* source_, v
     Res* result = (Res*)p;
     float value = source->unk08->unk50;
     void* first = (char*)dest + 0x20;
-    FUN_00976cd0((char*)source->unk00->unk08 + 0x40, value, first);
+    hkSweptTransformUtil_lerp2((char*)source->unk00->unk08 + 0x40, value, first);
     p = (char*)dest + 0x60;
-    FUN_00976cd0((char*)source->unk04->unk08 + 0x40, source->unk08->unk50, p);
+    hkSweptTransformUtil_lerp2((char*)source->unk04->unk08 + 0x40, source->unk08->unk50, p);
     DaNode* node = (DaNode*)((char*)dest + 0x10);
     result->unk00 = dest;
     result->unk04 = node;

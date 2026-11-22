@@ -75,12 +75,13 @@ class FUN_00d3d200_cls
     SpawnedInner* m_pInner;   // +0x08
     unsigned short m_wFlags;  // +0x0C
 
-    void FUN_00d3d200(void* param);
+    void hkpSphereTriangleAgent_cleanup(void* param);
 };
 
 // If m_wFlags is not 0xFFFF, forwards m_wFlags and param to m_pInner->unk14, then calls unk00(1) on this object.
 // @fnv 0x00d3d200
-void FUN_00d3d200_cls::FUN_00d3d200(void* param)
+// pdb: hkpSphereTriangleAgent::cleanup | hkpSphereTriangleAgent.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void FUN_00d3d200_cls::hkpSphereTriangleAgent_cleanup(void* param)
 {
     if (m_wFlags != 0xFFFF)
     {
@@ -347,7 +348,7 @@ class SphereTriAgent
 extern DWORD DAT_0116913c;
 extern char DAT_00e7f23c, DAT_00e32798;
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(DWORD);
-extern void __cdecl FUN_00970580(Vec4* projected, void* shape, const hkVector4q* axis, Res* result);
+extern void __cdecl hkpCollideTriangleUtil_closestPointTriangle(Vec4* projected, void* shape, const hkVector4q* axis, Res* result);
 
 void SphereTriAgent::FUN_00d3d2a0(BodyHolderB* a, BodyHolderB* b, int c_, Sink* sink)
 {
@@ -385,7 +386,7 @@ void SphereTriAgent::FUN_00d3d2a0(BodyHolderB* a, BodyHolderB* b, int c_, Sink* 
     projected.w = 0.0f;
 
     Res result;
-    FUN_00970580(&projected, (char*)tri+0x20, (const hkVector4q*)&unk10, &result);
+    hkpCollideTriangleUtil_closestPointTriangle(&projected, (char*)tri+0x20, (const hkVector4q*)&unk10, &result);
     float combined = sphere->unk10 + tri->unk10;
     if (result.d < combined)
         sink->unk04(*a, *b);
@@ -563,10 +564,10 @@ extern float DAT_0104da48;
 extern unsigned char DAT_010ce7fc;
 struct CpuObject
 {
-    void FUN_00d3d6b0(void*, void*, unsigned int, CpuCallData*);
+    void hkpSphereTriangleAgent_getClosestPoints(void*, void*, unsigned int, CpuCallData*);
     void FUN_00d3e0d0(void*, void*, unsigned int, unsigned int);
 };
-// Fills a CpuCallData with fourth, DAT_0104da48 and &DAT_010ce7fc, then calls FUN_00d3d6b0 with second, first, third and the data pointer.
+// Fills a CpuCallData with fourth, DAT_0104da48 and &DAT_010ce7fc, then calls hkpSphereTriangleAgent_getClosestPoints with second, first, third and the data pointer.
 // @fnv 0x00d3e0d0
 void CpuObject::FUN_00d3e0d0(void* first, void* second, unsigned int third, unsigned int uiValue)
 {
@@ -574,6 +575,6 @@ void CpuObject::FUN_00d3e0d0(void* first, void* second, unsigned int third, unsi
     data.value = uiValue;
     data.bound = DAT_0104da48;
     data.descriptor = &DAT_010ce7fc;
-    FUN_00d3d6b0(second, first, third, &data);
+    hkpSphereTriangleAgent_getClosestPoints(second, first, third, &data);
 }
 }  // namespace fnv_00d3e0d0

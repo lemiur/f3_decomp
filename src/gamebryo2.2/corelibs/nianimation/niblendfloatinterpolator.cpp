@@ -176,7 +176,8 @@ struct GlobalObjectO2_00a7b610
 };
 extern GlobalObjectO2_00a7b610 g_011f3e58;
 // @fnv 0x00a405e0
-void* __cdecl FUN_00a405e0()
+// pdb: bhkMouseSpringAction::GetRTTI | GlobalFunc.obj | fnv360_0822_retail, udata + bridge(vtable_prefix|vtable), high
+void* __cdecl bhkMouseSpringAction_GetRTTI()
 {
     return &g_011f3e58;
 }
@@ -198,10 +199,11 @@ struct M76Obj
 {
     void FUN_00a37ec0(M76Stream*);
     char pad[0x30 - 0];
-    void FUN_00a408b0(M76Stream*);
+    void NiBlendFloatInterpolator_SaveBinary(M76Stream*);
 };
 // @fnv 0x00a408b0
-void __fastcall FUN_00a408b0(M76Obj* self, int, M76Stream* stream)
+// pdb: NiBlendFloatInterpolator::SaveBinary | NiBlendFloatInterpolator.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun) + skyrim(objrun_open), high
+void __fastcall NiBlendFloatInterpolator_SaveBinary(M76Obj* self, int, M76Stream* stream)
 {
     self->FUN_00a37ec0(stream);
     M76Bin* __restrict out = stream->output;

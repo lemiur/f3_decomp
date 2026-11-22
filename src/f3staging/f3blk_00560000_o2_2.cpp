@@ -458,8 +458,8 @@ int unk68; int state; };
 struct Other { void FUN_00579dc0(float); };
 bool FUN_00576ba0(Obj*);
 void FUN_0048fd80(void*);
-struct Manager2 { double FUN_004e9080(); };
-__forceinline bool checkThreshold(){ double limit=DAT_0107a224->get()->value; return ((Manager2*)DAT_0107a104)->FUN_004e9080()>limit; }
+struct Manager2 { double TESObjectREFR_GetRelevantWaterHeight(); };
+__forceinline bool checkThreshold(){ double limit=DAT_0107a224->get()->value; return ((Manager2*)DAT_0107a104)->TESObjectREFR_GetRelevantWaterHeight()>limit; }
 struct Obj { int unk0;
 int unk4;
 int unk8;
@@ -531,19 +531,20 @@ int unk10C;
 int unk110;
 int unk114;
 unsigned flags;
-void FUN_0057c650(float); void FUN_0057c6b0(); void FUN_0057de00(); void FUN_0057b700(); void FUN_0057bac0(); void FUN_0057aaa0(); void FUN_0057cae0();
-void FUN_0057e0a0(float dt);
+void FUN_0057c650(float); void Sky_HandleClimateChange(); void Sky_UpdateWeather(); void FUN_0057b700(); void FUN_0057bac0(); void FUN_0057aaa0(); void FUN_0057cae0();
+void Sky_Update(float dt);
 };
-void Obj::FUN_0057e0a0(float dt) {
+// pdb: Sky::Update | Sky.obj | fnv360_0822_retail, call_seq + bridge(call_gap|caller), high
+void Obj::Sky_Update(float dt) {
  Context context(33);
  if(DAT_0107a104->unk3C) {
  time=DAT_01079f68.FUN_006e2a90();
  if(DAT_0107a104 && DAT_0107a104->unk3C && checkThreshold()) flags|=4; else flags&=~4;
  if(mode==1 && !DAT_01079858->active()) FUN_0057c650(dt);
  else {
- FUN_0057c6b0();
+ Sky_HandleClimateChange();
  if(DAT_01079858->active()) flags|=1;
- FUN_0057de00(); FUN_0057b700(); FUN_0057bac0(); FUN_0057aaa0(); FUN_0057cae0();
+ Sky_UpdateWeather(); FUN_0057b700(); FUN_0057bac0(); FUN_0057aaa0(); FUN_0057cae0();
  if(c20)c20->update(this,dt); if(c24)c24->update(this,dt); if(c2c)c2c->update(this,dt); if(c28)c28->update(this,dt);
  if(((flags&0x20) && stamp<DAT_01079f68.FUN_006e2ac0()) || DAT_01079858->active()) {
  bool ok=FUN_00576ba0(this);

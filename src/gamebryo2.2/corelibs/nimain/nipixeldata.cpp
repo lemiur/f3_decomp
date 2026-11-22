@@ -159,14 +159,15 @@ class FUN_00a7bee0_cls
     unsigned int unk48;
     FUN_00a7bee0_target* m_pFlagTarget;
 
-    bool FUN_00a5d2f0(unsigned int flags);
-    bool FUN_00a7bee0(unsigned int flags);
+    bool NiObject_RegisterStreamables(unsigned int flags);
+    bool NiPixelData_RegisterStreamables(unsigned int flags);
 };
 
 // @fnv 0x00a7bee0
-bool FUN_00a7bee0_cls::FUN_00a7bee0(unsigned int flags)
+// pdb: NiPixelData::RegisterStreamables | NiPixelData.obj | fnv360_0721_retail, objrun + bridge(vtable|objrun) + skyrim(caller_sim), high
+bool FUN_00a7bee0_cls::NiPixelData_RegisterStreamables(unsigned int flags)
 {
-    bool ok = FUN_00a5d2f0(flags);
+    bool ok = NiObject_RegisterStreamables(flags);
     if (!ok)
     {
         return ok;
@@ -260,7 +261,7 @@ struct NiObjectSerialization : NiObject
 
 struct NiPixelFormatSerialization : NiPixelFormat
 {
-    void FUN_00a7d1a0(NiStreamSerialization*);
+    void NiPixelFormat_SaveBinary(NiStreamSerialization*);
 };
 
 struct NiPixelDataSerialization : NiPixelData
@@ -280,7 +281,7 @@ static __forceinline void TransferData(NiStreamSerialization* stream, const void
 void NiPixelDataSerialization::SaveToStream(NiStreamSerialization* stream)
 {
     reinterpret_cast<NiObjectSerialization*>(this)->FUN_00a89af0(stream);
-    reinterpret_cast<NiPixelFormatSerialization*>(&m_kPixelFormat)->FUN_00a7d1a0(stream);
+    reinterpret_cast<NiPixelFormatSerialization*>(&m_kPixelFormat)->NiPixelFormat_SaveBinary(stream);
     stream->SavePalette(m_spPalette.value);
 
     TransferData(stream, &m_uiMipmapLevels, sizeof(m_uiMipmapLevels));
@@ -488,12 +489,13 @@ struct NiPixelFormatLoad : NiPixelFormat
 
 struct NiPixelDataLoad : NiPixelData
 {
-    void FUN_00a7c470(NiStreamLoad& stream);
+    void NiPixelData_LoadBinary(NiStreamLoad& stream);
 };
 
 // Loads pixel format, mipmap levels, per-mipmap width/height/offset, faces and pixel data from the stream, then allocates and copies them.
 // @fnv 0x00a7c470
-void NiPixelDataLoad::FUN_00a7c470(NiStreamLoad& stream)
+// pdb: NiPixelData::LoadBinary | NiPixelData.obj | fnv360_0822_retail, caller_sim + bridge(vtable|objrun) + skyrim(caller_sim), high
+void NiPixelDataLoad::NiPixelData_LoadBinary(NiStreamLoad& stream)
 {
     ((NiObjectLoad*)this)->LoadBinaryBase(stream);
     ((NiPixelFormatLoad*)&m_kPixelFormat)->LoadBinaryFormat(stream);
@@ -748,7 +750,7 @@ class NiPixelDataEq : public NiPixelData
 {
   public:
     bool ObjectIsEqual(NiObject* pkObject);
-    bool FUN_00a7bf10(NiObject* pkObject);
+    bool NiPixelData_IsEqual(NiObject* pkObject);
 };
 
 // Compares pixel format, palette, mipmap dimensions, face count, and pixel data of two NiPixelData objects, returning true only if all match.
@@ -769,7 +771,8 @@ __forceinline NiObject* ReadOtherPalette(void* const volatile& pointer)
     return static_cast<NiObject*>(pointer);
 }
 
-bool NiPixelDataEq::FUN_00a7bf10(NiObject* pkObject)
+// pdb: NiPixelData::IsEqual | NiPixelData.obj | fnv360_0822_retail, objopen_prop + bridge(vtable|objrun_sim) + skyrim(objrun), high
+bool NiPixelDataEq::NiPixelData_IsEqual(NiObject* pkObject)
 {
     NiPixelDataEq* rhs = (NiPixelDataEq*)pkObject;
     if (!((PixelBaseCmp*)this)->FUN_008258d0(pkObject))

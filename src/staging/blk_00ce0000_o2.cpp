@@ -1796,11 +1796,12 @@ struct CE1700Owner
     int unk10;
     void** objects;
     int count;
-    int FUN_00ce1700();
+    int hkaRagdollInstance_removeFromWorld();
 };
 // Returns 1 if the owner's node has no world; otherwise calls world->FUN_00c97e80 per object, then world->RemoveEntities(owner, flags), and returns 0.
 // @fnv 0x00ce1700
-int CE1700Owner::FUN_00ce1700()
+// pdb: hkaRagdollInstance::removeFromWorld | hkaRagdollInstance.obj | fnv360_0822_retail, caller_sim + skyrim(caller_sim), high
+int CE1700Owner::hkaRagdollInstance_removeFromWorld()
 {
     CE1700Node* node = *owner;
     CE1700World* world = 0;
@@ -2091,7 +2092,7 @@ namespace StatsControls {
 
 class Tile {
 public:
-    void __thiscall FUN_00bf05a0(unsigned int channel, float from, float to, float seconds, bool reverse);
+    void __thiscall Tile_AddFadeControl(unsigned int channel, float from, float to, float seconds, bool reverse);
     void __thiscall FUN_00bed770(int trait);
     void __thiscall FUN_00bee190(int trait, float value, bool notify);
 };
@@ -2100,7 +2101,7 @@ bool __cdecl FUN_00684240(Tile* tile, unsigned int gamepad)
 {
     const int alpha = 0xFA9;
     if (gamepad) {
-        tile->FUN_00bf05a0(alpha, 255.0f, 0.0f, 1.0f, true);
+        tile->Tile_AddFadeControl(alpha, 255.0f, 0.0f, 1.0f, true);
     } else {
         tile->FUN_00bed770(alpha);
         tile->FUN_00bee190(alpha, 255.0f, true);

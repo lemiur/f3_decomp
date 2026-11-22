@@ -17,7 +17,7 @@ class WorldCBFD
     void FUN_00cfb1e0(FlagCBFD kFlag);
 };
 
-void __cdecl FUN_00d46410(WorldCBFD* pkWorld);
+void __cdecl hkRegisterAlternateShapeTypes(WorldCBFD* pkWorld);
 void __cdecl ConfigureVtblHandlers(WorldCBFD* pkWorld);
 void __cdecl RegisterTwoTables(WorldCBFD* pkWorld);
 void __cdecl RegisterAll(WorldCBFD* pkWorld);

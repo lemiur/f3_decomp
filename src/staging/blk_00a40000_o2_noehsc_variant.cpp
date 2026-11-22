@@ -63,7 +63,7 @@ struct S_00a42290_Q : FUN_00a5d3a0
     {}
     virtual ~S_00a42290_Q() throw()
     {}
-    void FUN_00a3ccb0(void* a, unsigned int b, int c);
+    void NiFloatData_SetAnim(void* a, unsigned int b, int c);
 };
 class A42380RefObject
 {
@@ -1295,7 +1295,7 @@ class NiObjectD510
         if (InterlockedDecrement(&m_uiRefCount) == 0)
             DeleteThis();
     }
-    void FUN_00a5d510(class NiPointerD510& spCopy);
+    void NiObject_CreateDeepCopy(class NiPointerD510& spCopy);
     long m_uiRefCount;
 };
 
@@ -1648,7 +1648,8 @@ class NiStreamD510
 };
 
 // @fnv 0x00a5d510
-void NiObjectD510::FUN_00a5d510(NiPointerD510& spCopy)
+// pdb: NiObject::CreateDeepCopy | NiObject.obj | fnv360_0822_retail, call_seq + bridge(call_dedup|call_gap_sim) + skyrim(caller_sim), high
+void NiObjectD510::NiObject_CreateDeepCopy(NiPointerD510& spCopy)
 {
     NiStreamD510 kStream;
     kStream.InsertObject(this);

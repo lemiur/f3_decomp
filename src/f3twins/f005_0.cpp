@@ -12,7 +12,8 @@ __declspec(noinline) void FUN_00901e00()
 {
 }
 
-__declspec(noinline) void FUN_009023e0()
+// pdb: hkpWorld::checkDeterminism | hkpWorld.obj | fnv360_0822_retail, call_gap_sim + skyrim(call_gap_sim), high
+__declspec(noinline) void hkpWorld_checkDeterminism()
 {
 }
 
@@ -112,7 +113,8 @@ __declspec(noinline) void FUN_0098ad40()
 {
 }
 
-__declspec(noinline) void FUN_0098adb0()
+// pdb: hkpSimulationIsland::markForWrite | hkpSimulationIsland.obj | fnv360_0822_retail, call_gap + bridge(call_seq|call_gap) + skyrim(call_seq), high
+__declspec(noinline) void hkpSimulationIsland_markForWrite()
 {
 }
 
@@ -148,15 +150,18 @@ __declspec(noinline) void FUN_009c2190()
 {
 }
 
-__declspec(noinline) void FUN_009ca080()
+// pdb: hkBoxBoxAgent3::createZombie | hkpBoxBoxAgent3.obj | fnv360_0822_retail, objrun + skyrim(objrun), high
+__declspec(noinline) void hkBoxBoxAgent3_createZombie()
 {
 }
 
-__declspec(noinline) void FUN_009cd1b0()
+// pdb: hkpPhantomAgent::staticGetClosestPoints | hkpPhantomAgent.obj | fnv360_0822_retail, objrun + skyrim(objrun), high
+__declspec(noinline) void hkpPhantomAgent_staticGetClosestPoints()
 {
 }
 
-__declspec(noinline) void FUN_009cd1d0()
+// pdb: hkpPhantomAgent::staticLinearCast | hkpPhantomAgent.obj | fnv360_0822_retail, objrun + skyrim(objrun), high
+__declspec(noinline) void hkpPhantomAgent_staticLinearCast()
 {
 }
 

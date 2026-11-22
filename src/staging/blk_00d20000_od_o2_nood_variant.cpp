@@ -54,7 +54,8 @@ struct ContactBody
 };
 
 // @f3 0x009a9ba0 (community match, verified in this file)
-bool FUN_00d28560(void* unused, char** items, int count, int offset)
+// pdb: hkRigidMotionUtilCanDeactivateFinal | hkpRigidMotionUtil.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc + skyrim(uconst), high
+bool hkRigidMotionUtilCanDeactivateFinal(void* unused, char** items, int count, int offset)
 {
     for (int i = count - 1; i >= 0; i--)
     {
@@ -508,7 +509,7 @@ class hkpSymmetricAgentFlipCastCollector : public hkpCdPointCollector
 
 struct AgentBase
 {
-    void FUN_00d36960(const hkpCdBody& bodyA, const hkpCdBody& bodyB, const ShapeSweepParameters& input,
+    void hkpListAgent_linearCast(const hkpCdBody& bodyA, const hkpCdBody& bodyB, const ShapeSweepParameters& input,
                       hkpCdPointCollector& collector, hkpCdPointCollector* startCollector);
 };
 
@@ -576,7 +577,7 @@ struct Simplex
 
 struct AgentBase
 {
-    void FUN_00d378e0(int a, int b, int c, Simplex* s);
+    void hkpMultiRayConvexAgent_processCollision(int a, int b, int c, Simplex* s);
 };
 
 struct Agent : AgentBase
@@ -629,7 +630,7 @@ void RemoveKeyFromTable();
 void InsertIntoSlotArray();
 
 // @f3 0x009c29f0 (community match, verified in this file)
-void FUN_009c2530();
+void hkCapsuleTriangleAgent3_process();
 void FUN_009c2240();
 void FUN_009c2190();
 void FUN_009c2220();
@@ -637,7 +638,7 @@ void __cdecl FUN_00d39840(hkpCollisionDispatcherD398* pkDispatcher)
 {
     __declspec(align(16)) hkpAgent3FuncsD398 kFuncs;
     kFuncs.m_pCreateFunc = InitOutputDefaults;
-    kFuncs.m_setCollisionQualityFunc = FUN_009c2530;
+    kFuncs.m_setCollisionQualityFunc = hkCapsuleTriangleAgent3_process;
     kFuncs.m_pAgentFunction11 = FUN_009c2240;
     kFuncs.m_pAgentFunction3 = ReleaseHandles;
     kFuncs.m_pAgentFunction4 = RemoveKeyFromTable;

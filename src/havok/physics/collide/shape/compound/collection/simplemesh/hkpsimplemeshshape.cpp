@@ -287,11 +287,12 @@ struct hkGeometryQ
     int unk04;
     hkArrayQ<hkVector4Q> m_kVertices;
     hkArrayQ<TriangleQ> m_uiTriangleCount;
-    int FUN_00e3c340() const;
+    int hkpSimpleMeshShape_getFirstKey() const;
 };
 // Returns the index of the first triangle in m_uiTriangleCount that is not degenerate, or -1 if all are degenerate.
 // @fnv 0x00e3c340
-int hkGeometryQ::FUN_00e3c340() const
+// pdb: hkpSimpleMeshShape::getFirstKey | hkpSimpleMeshShape.obj | fnv360_0822_retail, objrun_open + bridge(caller_sim|vtable) + skyrim(caller_sim), high
+int hkGeometryQ::hkpSimpleMeshShape_getFirstKey() const
 {
     for (int i = 0; i < m_uiTriangleCount.GetLogicalSize(); i++)
     {
@@ -404,7 +405,7 @@ class hkpShapeContainerAudit
 {
   public:
     virtual ~hkpShapeContainerAudit();
-    virtual unsigned int FUN_00e3c3b0(unsigned int oldKey) const = 0;
+    virtual unsigned int hkpSimpleMeshShape_getNextKey(unsigned int oldKey) const = 0;
 };
 class hkpShapeCollectionAudit : public hkpShape, public hkpShapeContainerAudit
 {
@@ -420,12 +421,13 @@ class hkpSimpleMeshShapeAudit : public hkpShapeCollectionAudit
     MeshArray<unsigned char> m_kMaterialIndices8;
     float m_fSphereRadius;
     unsigned char m_eWeldingType;
-    virtual unsigned int FUN_00e3c3b0(unsigned int oldKey) const;
+    virtual unsigned int hkpSimpleMeshShape_getNextKey(unsigned int oldKey) const;
 };
 extern float DAT_011b2e90;
 hkBoolResult __cdecl IsDegenerateTriangle(const MeshVertex&, const MeshVertex&, const MeshVertex&, float);
 // @fnv 0x00e3c3b0
-unsigned int hkpSimpleMeshShapeAudit::FUN_00e3c3b0(unsigned int oldKey) const
+// pdb: hkpSimpleMeshShape::getNextKey | hkpSimpleMeshShape.obj | fnv360_0822_retail, objrun_open + bridge(caller_sim|vtable) + skyrim(caller_sim), high
+unsigned int hkpSimpleMeshShapeAudit::hkpSimpleMeshShape_getNextKey(unsigned int oldKey) const
 {
     for (int i = static_cast<int>(oldKey) + 1; i < m_uiTriangleCount.GetLogicalSize(); ++i)
     {

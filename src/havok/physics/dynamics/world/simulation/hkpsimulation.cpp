@@ -133,7 +133,7 @@ public:
 extern "C" int* DAT_010f3400;
 extern "C" const char str_00e32798[];
 extern "C" const char str_00e7d2c8[];
-extern "C" void __cdecl FUN_009893f0(void*,void*);
+extern "C" void __cdecl hkpWorldCallbackUtil_firePostCollideCallback(void*,void*);
 extern "C" void* (__stdcall *DAT_00d9b080)(unsigned long);
 struct FUN_00907f30_Class { void __thiscall FUN_00907f30(int,int); };
 static __forceinline void timerF3(const char* tag, volatile hkUint32& t) {
@@ -163,7 +163,7 @@ hkUint32 hkpSimulation_Derived::FUN_00cf8820()
         m_fSimulationTime += m_fStepDeltaTime;
         if (((hkpWorld_Fields*)m_pOwningWorld)->unk154 != 0) {
             timerF3(str_00e7d2c8, t);
-            FUN_009893f0(m_pOwningWorld, &stepInfo);
+            hkpWorldCallbackUtil_firePostCollideCallback(m_pOwningWorld, &stepInfo);
             timerF3(str_00e32798, t);
         }
         m_bHasStepped = 1;
@@ -845,7 +845,7 @@ static inline SimMonStream& GetMonStream() {
 
 struct SimLocal : hkpSimulation {
     int FUN_00cf8da0(const SimStepInfo& stepInfo);
-    int FUN_00cf9340(float physicsDeltaTime);
+    int hkpSimulation_integrate(float physicsDeltaTime);
 };
 
 // @f3 0x0097fd30 (community match, verified in this file)
@@ -859,7 +859,8 @@ struct S_0097fd30_SimulationCall
     void FUN_0097f810(const SimStepInfo& stepInfo);
 };
 
-int SimLocal::FUN_00cf9340(float physicsDeltaTime)
+// pdb: hkpSimulation::integrate | hkpSimulation.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(caller_sim), high
+int SimLocal::hkpSimulation_integrate(float physicsDeltaTime)
 {
     typedef void* (__stdcall *LocalTlsFn)(unsigned long);
     struct LocalMonitor
@@ -2221,15 +2222,15 @@ __forceinline void timerBeginList(const char* name, const char* firstSplit)
 
 extern "C" void __cdecl FUN_00a0b770();
 extern "C" void __cdecl FUN_00927c80(World* world);
-extern "C" int __cdecl FUN_009aa3e0(const SolverInfo& solverInfo, const StepInfo& stepInfo, const Vector4& acceleration,
+extern "C" int __cdecl hkRigidMotionUtilApplyForcesAndStep(const SolverInfo& solverInfo, const StepInfo& stepInfo, const Vector4& acceleration,
                                     void** motions, int numMotions, int motionOffset);
 extern "C" void __cdecl FUN_0099a2d0(void* collisionInput, void** entities, int numEntities);
 extern "C" int __cdecl FUN_00a0b010(const StepInfo& stepInfo, const SolverInfo& solverInfo,
                                     ConstraintQueryIn& constraintQueryIn, Island& island, void** entities,
                                     int numEntities);
-extern "C" void __cdecl FUN_00926f00(World* world, Island* island);
+extern "C" void __cdecl hkpWorldOperationUtil_markIslandInactive(World* world, Island* island);
 extern "C" void __cdecl FUN_009894a0(World* world, Island* island, const StepInfo& stepInfo);
-extern "C" void __cdecl FUN_00989340(World* world, const StepInfo& stepInfo);
+extern "C" void __cdecl hkpWorldCallbackUtil_firePostIntegrateCallback(World* world, const StepInfo& stepInfo);
 
 struct Simulation {
     int unk00, unk04, unk08;
@@ -2277,7 +2278,7 @@ __forceinline void Simulation::integrateInternal(const StepInfo& stepInfoIn)
             DynamicsStepInfo& info = m_world->dynamicsStepInfo;
             if (island->sizeOfJacobians == 0) {
                 timerCommand("TtSingleObj");
-                numInactiveFrames = FUN_009aa3e0(info.solverInfo, info.stepInfo,
+                numInactiveFrames = hkRigidMotionUtilApplyForcesAndStep(info.solverInfo, info.stepInfo,
                                                  info.solverInfo.globalAccelerationPerStep,
                                                  island->entities.begin(), island->entities.getSize(), 0xd0);
                 FUN_0099a2d0(island->world->collisionInput, island->entities.begin(), island->entities.getSize());
@@ -2288,7 +2289,7 @@ __forceinline void Simulation::integrateInternal(const StepInfo& stepInfoIn)
             }
             if (numInactiveFrames > 5) {
                 if ((island->flags & 0xc) && island->world->wantDeactivation)
-                    FUN_00926f00(island->world, island);
+                    hkpWorldOperationUtil_markIslandInactive(island->world, island);
             }
             if (m_world->islandPostIntegrateListeners.getSize()) {
                 timerCommand("StIslandPostIntegrateCb");
@@ -2300,7 +2301,7 @@ __forceinline void Simulation::integrateInternal(const StepInfo& stepInfoIn)
 
     if (m_world->worldPostIntegrateListeners.getSize()) {
         timerCommand("TtWorldPostIntegrateCb");
-        FUN_00989340(m_world, stepInfoIn);
+        hkpWorldCallbackUtil_firePostIntegrateCallback(m_world, stepInfoIn);
         timerCommand("Et");
     }
     timerCommand("lt");
@@ -2687,8 +2688,8 @@ extern char DAT_00e7d3e4[], DAT_00e7d2e4[], DAT_00e7d3cc[];
 
 struct NativeWorldCalls { void FUN_00902550(); };
 extern "C" void __cdecl FUN_009808f0(unsigned, unsigned, W*);
-extern "C" void __cdecl FUN_00999b70(O*, void*, O*);
-extern "C" void __cdecl FUN_00989550(W*, O*, hkVector4*);
+extern "C" void __cdecl hkAgentNnMachine_ProcessTrack(O*, void*, O*);
+extern "C" void __cdecl hkpWorldCallbackUtil_fireIslandPostCollideCallback(W*, O*, hkVector4*);
 
 // Leaves the world's critical section and runs the pending operations when this was the last lock.
 __forceinline void NativeDone(W* w) {
@@ -2727,7 +2728,7 @@ void S00cfa080_Obj::FUN_00cfa080(hkVector4* p) {
   stampN(DAT_00e7d2e4);
   obj->unk060 = obj->unk000 + 0x1c60;
   obj->unk010 = 0;
-  FUN_00999b70(entry, &entry->unk058, obj);
+  hkAgentNnMachine_ProcessTrack(entry, &entry->unk058, obj);
   stampN(str_010c41f8);
   if (DAT_010f3400[1] == 1) {
    NativeDone(m_pOwningWorld);
@@ -2736,7 +2737,7 @@ void S00cfa080_Obj::FUN_00cfa080(hkVector4* p) {
   }
   if (m_pOwningWorld->unk16c != 0) {
    stampN(DAT_00e7d3cc);
-   FUN_00989550(m_pOwningWorld, entry, p);
+   hkpWorldCallbackUtil_fireIslandPostCollideCallback(m_pOwningWorld, entry, p);
    stampN(str_010c41f8);
   }
  }
@@ -2908,7 +2909,7 @@ struct Pair {
 };
 struct Quaternion {
     __m128 value;
-    void __thiscall FUN_00cb2450(const __m128*, float);
+    void __thiscall hkQuaternion_setAxisAngle(const __m128*, float);
     void __thiscall FUN_00c66320(const Quaternion*, const Quaternion*);
     void __thiscall FUN_00c74b70(const Quaternion*, const Quaternion*);
 };
@@ -3142,7 +3143,7 @@ void __thiscall SimulationContext::FUN_00cf9480(Body** bodies, int count, Collis
                         __m128 inverseScalar=_mm_load_ss(&inverseLength);
                         axis=_mm_mul_ps(_mm_shuffle_ps(inverseScalar,inverseScalar,0),axis);
                         Quaternion turn, rotated;
-                        turn.FUN_00cb2450(&axis,savedRotation);
+                        turn.hkQuaternion_setAxisAngle(&axis,savedRotation);
                         rotated.FUN_00c66320(&turn,&body->motion.rotation1);
                         transform.FUN_00cb2d90(&rotated);
                         updateTranslation(body);
@@ -3157,7 +3158,7 @@ void __thiscall SimulationContext::FUN_00cf9480(Body** bodies, int count, Collis
                         refined=_mm_andnot_ps(_mm_cmpeq_ss(length,_mm_set_ss(0.0f)),refined);
                         perpendicular=_mm_mul_ps(_mm_shuffle_ps(refined,refined,0),perpendicular);
                         Quaternion sideways, oriented;
-                        sideways.FUN_00cb2450(&perpendicular,savedRotation);
+                        sideways.hkQuaternion_setAxisAngle(&perpendicular,savedRotation);
                         oriented.FUN_00c66320(&sideways,(Quaternion*)&angle);
                         transform.FUN_00cb2d90(&oriented);
                         updateTranslation(body);

@@ -31,7 +31,7 @@ class hkBool
     char m_cBooleanValue;
 };
 
-int __cdecl FUN_00cb10d0(const char* text);
+int __cdecl hkString_strLen(const char* text);
 
 struct BSAudio
 {
@@ -79,11 +79,11 @@ int __cdecl FUN_00cb1290(const unsigned char* left,const unsigned char* right,un
 }
 
 
-const char* __cdecl FUN_00cb1150(const char* str, int c);
+const char* __cdecl BSTreadTransfInterpolator_IsEqual(const char* str, int c);
 
 const char* __cdecl FUN_00cb1130(const char* a, const char* b);
-int __cdecl FUN_00cb10d0(const char* text);
-char* __cdecl FUN_00cb1140(const char* s, int c);
+int __cdecl hkString_strLen(const char* text);
+char* __cdecl BSBlendTreadTransfInterpolator_IsEqual(const char* s, int c);
 
 void __cdecl FUN_00ecddf1(int a, int b, int c, int d);
 
@@ -97,7 +97,8 @@ namespace fnv_00cb1140 {
 extern "C" char* __cdecl _strchr(const char* s, int c);
 
 // @fnv 0x00cb1140
-char* __cdecl FUN_00cb1140(const char* s, int c)
+// pdb: BSBlendTreadTransfInterpolator::IsEqual | BSBlendTreadTransfInterpolator.obj | fnv360_0822_retail, caller_sim + bridge(vtable|caller_sim) + skyrim(caller_sim), high
+char* __cdecl BSBlendTreadTransfInterpolator_IsEqual(const char* s, int c)
 {
     return _strchr(s, c);
 }
@@ -107,7 +108,8 @@ namespace fnv_00cb1150 {
 extern "C" const char* __cdecl FUN_00ec6e30(const char* str, int c);
 
 // @fnv 0x00cb1150
-const char* __cdecl FUN_00cb1150(const char* str, int c)
+// pdb: BSTreadTransfInterpolator::IsEqual | BSTreadTransfInterpolator.obj | fnv360_0822_retail, caller_sim + bridge(vtable|caller_sim) + skyrim(caller_sim), high
+const char* __cdecl BSTreadTransfInterpolator_IsEqual(const char* str, int c)
 {
     return FUN_00ec6e30(str, c);
 }
@@ -152,7 +154,8 @@ int __cdecl Vsnprintf(char* buf, int n, const char* fmt, ...)
 #include <string.h>
 namespace fnv_00cb10d0 {
 // @fnv 0x00cb10d0
-int __cdecl FUN_00cb10d0(const char* apString)
+// pdb: hkString::strLen | hkString.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_seq), high
+int __cdecl hkString_strLen(const char* apString)
 {
     return (int)strlen(apString);
 }

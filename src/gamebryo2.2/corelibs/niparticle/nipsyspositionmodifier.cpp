@@ -175,11 +175,12 @@ class BC28C60GravityModifier : public BC28C60Modifier
     virtual ~BC28C60GravityModifier();
 
     void CopyMemberData(BC28C60GravityModifier* pkDest, BC28C60CloningProcess& kCloning);
-    BC28C60GravityModifier* FUN_00c28c60(BC28C60CloningProcess& kCloning);
+    BC28C60GravityModifier* NiPSysPositionModifier_CreateClone(BC28C60CloningProcess& kCloning);
 };
 
 // @fnv 0x00c28c60
-BC28C60GravityModifier* BC28C60GravityModifier::FUN_00c28c60(BC28C60CloningProcess& kCloning)
+// pdb: NiPSysPositionModifier::CreateClone | NiPSysPositionModifier.obj | fnv360_0822_retail, objopen_prop + bridge(vtable|objopen_prop) + skyrim(caller_sim), high
+BC28C60GravityModifier* BC28C60GravityModifier::NiPSysPositionModifier_CreateClone(BC28C60CloningProcess& kCloning)
 {
     BC28C60GravityModifier* pkClone = new BC28C60GravityModifier;
     CopyMemberData(pkClone, kCloning);
@@ -201,7 +202,8 @@ void NiPSysModifier::FUN_00c28b50(NiStream& a1)
 
 void __cdecl FUN_00c31830();
 // @fnv 0x00c28b80
-void __cdecl FUN_00c28b80()
+// pdb: NiAlphaAccumulator::RegisterStreamables | NiAlphaAccumulator.obj | fnv360_0822_retail, caller_sim + bridge(vtable|caller_sim) + skyrim(caller_sim), high
+void __cdecl NiAlphaAccumulator_RegisterStreamables()
 {
     FUN_00c31830();
 }

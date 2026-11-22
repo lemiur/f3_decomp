@@ -32,7 +32,8 @@ extern int DAT_01268700;
 
 // Calls FUN_00cddd20 with a, b, the address of DAT_01268700, c and d.
 // @fnv 0x00cddef0
-void FUN_00cddef0(void* apArg1, void* apArg2, void* apArg3, void* apArg4)
+// pdb: hkaSkeletonUtils::transformModelPoseToLocalPose | hkaSkeletonUtils.obj | fnv360_0822_retail, call_gap + skyrim(objrun), high
+void hkaSkeletonUtils_transformModelPoseToLocalPose(void* apArg1, void* apArg2, void* apArg3, void* apArg4)
 {
     FUN_00cddd20(apArg1, apArg2, &DAT_01268700, apArg3, apArg4);
 }

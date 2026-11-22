@@ -3,7 +3,8 @@
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
 // @fnv 0x00d2bef0
-void __stdcall FUN_00d2bef0(char* p)
+// pdb: hkStdioStreamReader::seekTellSupported | hkStdioStreamReader.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void __stdcall hkStdioStreamReader_seekTellSupported(char* p)
 {
     *p = 1;
 }
@@ -27,7 +28,8 @@ extern int DAT_010ce6f4;
 
 void __cdecl FUN_00ecda70(void*);
 // @fnv 0x00d2bec0
-void __fastcall FUN_00d2bec0(void* self, int)
+// pdb: hkStdioStreamWriter::flush | hkStdioStreamWriter.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void __fastcall hkStdioStreamWriter_flush(void* self, int)
 {
     void* p = *(void**)((char*)self + 8);
     if (p)
@@ -39,10 +41,11 @@ struct FUN_00d2bf20_class
 {
     char m0[8];
     void* m8;
-    long FUN_00d2bf20();
+    long hkStdioStreamWriter_tell();
 };
 // @fnv 0x00d2bf20
-long FUN_00d2bf20_class::FUN_00d2bf20()
+// pdb: hkStdioStreamWriter::tell | hkStdioStreamWriter.obj | fnv360_0822_retail, vtable + skyrim(vtable), high
+long FUN_00d2bf20_class::hkStdioStreamWriter_tell()
 {
     return _ftell(m8);
 }
@@ -148,7 +151,8 @@ unsigned char* FUN_00d2bed0_cls::GetFlagAsByte(unsigned char* out)
 }
 
 // @fnv 0x00d2bee0
-void __stdcall FUN_00d2bee0(unsigned char* output)
+// pdb: hkStdioStreamReader::markSupported | hkStdioStreamReader.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void __stdcall hkStdioStreamReader_markSupported(unsigned char* output)
 {
     *output = 1;
 }

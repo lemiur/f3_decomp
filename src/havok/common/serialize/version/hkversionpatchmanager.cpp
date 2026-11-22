@@ -61,7 +61,7 @@ struct FUN_00db7e70_Obj
 };
 
 int __cdecl FUN_0093e470();
-int __cdecl FUN_009232c0(int aiA, int aiB);
+int __cdecl hkString_strCmp(int aiA, int aiB);
 int __cdecl FUN_009406e0(FUN_00db7e70_Node* apNode, int aiResult, void* apItem, int aiA, int aiB);
 
 int __cdecl FUN_00db7e70(void* apTarget, void* apItem, GraphTable* apTable, DepthLimit* apDepth)
@@ -69,7 +69,7 @@ int __cdecl FUN_00db7e70(void* apTarget, void* apItem, GraphTable* apTable, Dept
     FUN_00db7e70_Obj* pObj = reinterpret_cast<FUN_00db7e70_Obj*>(apTarget);
     int iA = pObj->unk09();
     int iB = FUN_0093e470();
-    if (FUN_009232c0(iA, iB) != 0)
+    if (hkString_strCmp(iA, iB) != 0)
     {
         FUN_00db7e70_Node* pNode = pObj->unk07();
         if (pNode->unk04 != 0 && FUN_009406e0(pNode, pObj->unk08(), apItem, iA, iB) == 0)

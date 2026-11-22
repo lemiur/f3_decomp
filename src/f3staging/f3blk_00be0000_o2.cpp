@@ -259,7 +259,7 @@ int Owner422::FUN_00be9190(int* output) {
 
 // @f3 0x00be4720 (community match, verified in this file)
 #include <string>
-void __cdecl FUN_00be5520(int severity, std::string message);
+void __cdecl futSetLastError(int severity, std::string message);
 struct Owner435 {
     virtual void slot00();
     virtual void slot04();
@@ -284,7 +284,7 @@ bool Owner435::FUN_00be4720(void* buffer, unsigned int size, unsigned int count)
     if (!raw)
         return false;
     if (!Read(buffer,1,size * count)) {
-        FUN_00be5520(1,name);
+        futSetLastError(1,name);
         FUN_00be4650();
         return false;
     }
@@ -394,7 +394,8 @@ struct S28 {
     F3Str str;
 };
 
-void __cdecl FUN_00be5520(S28 s)
+// pdb: futSetLastError | lastError.obj | fnv360_0822_debug, call_seq + bridge(call_gap|call_gap), high
+void __cdecl futSetLastError(S28 s)
 {
     if (DAT_01179468 == 0) {
         unsigned int len = s.str.size;
@@ -453,7 +454,7 @@ public:
     unsigned int unk04, unk08, unk0c, unk10, unk14, unk18, unk1c, unk20, unk24, unk28;
     bool good;
     bool IsGood() { return good; }
-    void FUN_0048be50(void* buffer, unsigned int size);
+    void NiBinaryStream_Read(void* buffer, unsigned int size);
 };
 XMLFile* __cdecl FUN_00bc7fc0(const char* name, int mode, unsigned int bufferSize, unsigned int flags);
 struct CompressedXML {
@@ -480,7 +481,7 @@ CompressedXML* FUN_00bfc8a0(const char* apFilename, const char* apFileData)
         ifileSize = pfile->GetSize();
         pfileData = new char[ifileSize];
         bdeletefiledata = true;
-        pfile->FUN_0048be50(pfileData, ifileSize);
+        pfile->NiBinaryStream_Read(pfileData, ifileSize);
         delete pfile;
     }
     else
@@ -4499,10 +4500,11 @@ struct QOwner {
     int unk00; int unk04;
     QNode list;
     int unk10;
-    QResult* FUN_00bfd250(QCtx* ctx, const char* name, int p3);
+    QResult* Menu_RenderTemplate(QCtx* ctx, const char* name, int p3);
 };
 
-QResult* QOwner::FUN_00bfd250(QCtx* ctx, const char* name, int p3)
+// pdb: Menu::RenderTemplate | Menu.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+QResult* QOwner::Menu_RenderTemplate(QCtx* ctx, const char* name, int p3)
 {
     QResult* result = 0;
     if (p3) unk10 = p3;
@@ -5167,7 +5169,7 @@ struct TextNode
 
     void FUN_008268a0();
     bool FUN_00824920(FUN_00bf98b0*);
-    bool FUN_00a5ba40(FUN_00bf98b0*);
+    bool NiObjectNET_InsertExtraData(FUN_00bf98b0*);
 
     void SetFlag(unsigned mask, bool enabled)
     {
@@ -5318,7 +5320,7 @@ struct TextTile
 
     TextNode* FUN_00beadd0();
     float FUN_00becf40(int);
-    const char* FUN_00becf60(int);
+    const char* Tile_GetString(int);
 
     void FUN_00bee190(int, float, bool);
     void FUN_00bee370(int);
@@ -5380,7 +5382,7 @@ TextNode* TextTile::FUN_00bfea20()
 
     const char* text;
 
-    text = FUN_00becf60(0xfc4);
+    text = Tile_GetString(0xfc4);
 
     if (text && *text)
         current.FUN_004019c0(text, 0);
@@ -6041,7 +6043,8 @@ typedef basic_string<char> string;
 }
 typedef std::string AtlasPath;
 // @fnv 0x00a06dd0
-void FUN_00bf14c0(const char* definition, const char* image, AtlasString* texture, float* bounds)
+// pdb: Tile::GetTextureAtlasInfo | Tile.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+void Tile_GetTextureAtlasInfo(const char* definition, const char* image, AtlasString* texture, float* bounds)
 {
     char line5[1024];
     char filename9[260];
@@ -6330,7 +6333,7 @@ class BSString
 };
 
 const char* FUN_0061a8d0();
-NiAVObject* FUN_0061bb30(const char* path, bool* flag);
+NiAVObject* Interface_LoadModelFile(const char* path, bool* flag);
 NiAVObject* FUN_0061d280(NiAVObject* obj);
 void FUN_0061a8e0(int a);
 void FUN_0061a8a0();
@@ -6358,7 +6361,7 @@ class Tile3DX
     BSString m_kName;
     BSString strFilename;
 
-    const char* FUN_00becf60(int id);
+    const char* Tile_GetString(int id);
     bool FUN_00becf80(int id);
     void FUN_00bee190(int id, float value, bool b);
     void FUN_00bee370(int a);
@@ -6376,7 +6379,7 @@ class Tile3DX
 // @fnv 0x00a20980
 void Tile3DX::FUN_00bfe5d0()
 {
-    const char* pszName = FUN_00becf60(0xfcc);
+    const char* pszName = Tile_GetString(0xfcc);
     if (!pszName)
         return;
     if (strstr(pszName, "\\Data"))
@@ -6384,7 +6387,7 @@ void Tile3DX::FUN_00bfe5d0()
     else
         strFilename.FUN_00403a00("%s\\%s", FUN_0061a8d0(), pszName);
     bool flag = false;
-    NiAVObject* m_kModelObjectsItem = FUN_0061bb30(strFilename.CStr(), &flag);
+    NiAVObject* m_kModelObjectsItem = Interface_LoadModelFile(strFilename.CStr(), &flag);
     if (!m_kModelObjectsItem)
     {
         node = 0;
@@ -8652,7 +8655,7 @@ static inline void SetSlot(int id, int base, QMenu* const& v)
         DAT_0106a7bc.FUN_005b3880(index, v);
 }
 void __cdecl FUN_0061a7a0(void* p, int flag);
-int __cdecl FUN_006191a0();
+int __cdecl Interface_GetTopMenuID();
 
 class QMenu {
 public:
@@ -8692,7 +8695,7 @@ QMenu::~QMenu()
         }
     }
     items.FUN_006c8220();
-    if (!FUN_006191a0()) {
+    if (!Interface_GetTopMenuID()) {
         if (DAT_0107a0d4->FUN_006e4eb0()->FUN_00be97a0(0xe, 0))
             { QInterfaceObj* o = DAT_0107a0d4->FUN_006e4eb0(); o->flags1B92 = o->flags1B92 | 8; }
     }
@@ -8895,7 +8898,8 @@ unsigned int position;
 unsigned int (__cdecl *reader)(LoaderFile*,void*,unsigned int,unsigned int*,unsigned int);
 int unk0c; int unk10; int unk14; int unk18; int unk1c; int unk20; int unk24; int unk28; bool good;
 bool IsGood() { return good; }
-unsigned int FUN_0048be50(void* dst,unsigned int size) { unsigned int one3=1; unsigned int count3=reader(this,dst,size,&one3,1); position+=count3; unsigned int result3=count3; return result3; }
+// pdb: NiBinaryStream::Read | LipSynchAnim.obj | fnv360_0721_beta, call_seq + bridge(call_seq|call_dedup) + skyrim(call_gap), high
+unsigned int NiBinaryStream_Read(void* dst,unsigned int size) { unsigned int one3=1; unsigned int count3=reader(this,dst,size,&one3,1); position+=count3; unsigned int result3=count3; return result3; }
 };
 struct FileFinder { static LoaderFile* FUN_00bc7fc0(const char*,int,unsigned int,unsigned int); };
 inline void Close(LoaderFile* f) { delete f; }
@@ -9055,7 +9059,7 @@ if(RefCount()==0 && path) {
 file=FileFinder::FUN_00bc7fc0(path,0,0x2800,2);
 if(!file || !file->IsGood()) { FUN_00887da0(DAT_00eaa374,Path()); if(file) delete file; return; }
 data=new FontData;
-file->FUN_0048be50(data,file->Size()); delete file; file=0;
+file->NiBinaryStream_Read(data,file->Size()); delete file; file=0;
 height=0.0f; maxHeight=0.0f; drop=0.0f;
 for(letter5=0;letter5<256;letter5++) {
 extent=data->f0000-((GlyphData*)data)->letters[letter5].spacing;
@@ -9076,10 +9080,10 @@ for(index3=0;index3<data->f0004;index3++) {
 sprintf_s(filename,256,DAT_00eaa3bc,((Names*)data)->textures[index3].name);
 kTextureFile=FileFinder::FUN_00bc7fc0(filename,0,0x2800,2);
 if(!kTextureFile || !kTextureFile->IsGood()) { FUN_00887da0(DAT_00eaa398,filename); if(kTextureFile) delete kTextureFile; return; }
-kTextureFile->FUN_0048be50(dimensions2,8);
+kTextureFile->NiBinaryStream_Read(dimensions2,8);
 prefs4.layout=6; prefs4.alpha=3; prefs4.mip=2;
 pixels5=new FUN_00846990(dimensions2[0],dimensions2[1],DAT_00f734c0,1,1);
-kTextureFile->FUN_0048be50(pixels5->GetPixels(),dimensions2[0]*dimensions2[1]*4);
+kTextureFile->NiBinaryStream_Read(pixels5->GetPixels(),dimensions2[0]*dimensions2[1]*4);
 pixels5->changed=true;
 texture5=new FUN_008342e0(pixels5,FUN_00422920(Path()),prefs4);
 delete kTextureFile; kTextureFile=0; texture5->FUN_00555870(1); textures[index3].FUN_008e9650(texture5);
@@ -19665,7 +19669,7 @@ struct AnimTile
     AnimManager* manager;
     AnimSequence* sequence;
     AnimString name;
-    const char* FUN_00becf60(int);
+    const char* Tile_GetString(int);
     bool FUN_00becf80(int);
     bool FUN_00bfdec0(const char*);
     AnimNode* GetNode()
@@ -19679,7 +19683,7 @@ float FUN_0090d870(float high,float value);
 // @fnv 0x00a20ed0
 bool AnimTile::FUN_00bfe1b0(float value, bool force)
 {
-    const char* r = FUN_00becf60(0xfd2);
+    const char* r = Tile_GetString(0xfd2);
     if ((name.Get() || r) && name != r)
     {
         name.FUN_004019c0(r, 0);
@@ -20339,7 +20343,7 @@ void ClipTile::FUN_00bed540(float left, float top, float right, float bottom)
 extern const char kModeWriteBinary[];
 namespace f3m_00be4b10 {
 
-void __cdecl FUN_00be5520(int severity, std::string message);
+void __cdecl futSetLastError(int severity, std::string message);
 
 struct FgFileWriter4b10 {
     unsigned int unk00;
@@ -20361,11 +20365,11 @@ bool FgFileWriter4b10::FUN_00be4b10(std::string name) {
     Close();
     m_file = fopen(name.c_str(), kModeWriteBinary);
     if (!m_file) {
-        FUN_00be5520(5, name);
+        futSetLastError(5, name);
         return false;
     }
     if (!FUN_00be48a0(m_header.c_str(), m_header.size(), 1)) {
-        FUN_00be5520(5, name);
+        futSetLastError(5, name);
         Close();
         return false;
     }
@@ -20567,8 +20571,8 @@ struct Value {
     Tile* owner;
     float num;
     char* str;
-    void FUN_00beafa0();
-    void FUN_00bf0720(bool changed);
+    void Tile_Value_ClearActions();
+    void Tile_Value_CalculateValue(bool changed);
 };
 struct Flash {
     float from;
@@ -20584,9 +20588,10 @@ extern FlashList DAT_011796a8;
 struct Tile {
     void FUN_00617a60(int id, int value);
     Value* FUN_00bee080(int id);
-    void FUN_00bf05a0(int id, float from, float to, float duration, int mode);
+    void Tile_AddFadeControl(int id, float from, float to, float duration, int mode);
 };
-void Tile::FUN_00bf05a0(int id, float from, float to, float duration, int mode)
+// pdb: Tile::AddFadeControl | Tile.obj | fnv360_0721_retail, call_seq + bridge(call_gap|call_gap), high
+void Tile::Tile_AddFadeControl(int id, float from, float to, float duration, int mode)
 {
     if (from == to)
         return;
@@ -20614,8 +20619,8 @@ void Tile::FUN_00bf05a0(int id, float from, float to, float duration, int mode)
                 DAT_01090a78.FUN_0086ba60(v->str);
                 v->str = 0;
             }
-            v->FUN_00beafa0();
-            v->FUN_00bf0720(changed);
+            v->Tile_Value_ClearActions();
+            v->Tile_Value_CalculateValue(changed);
         }
         f->duration = duration / total * 1000.0;
     } else if (mode == 2) {
@@ -20707,7 +20712,7 @@ struct Region {
     unsigned int unk[4];
     Rect rect;
 };
-void FUN_00bf14c0(const char* definition, const char* image, Str* texture, float* bounds);
+void Tile_GetTextureAtlasInfo(const char* definition, const char* image, Str* texture, float* bounds);
 inline void* operator new(unsigned int, void* p) { return p; }
 struct RegionArray {
     virtual void v0();
@@ -20744,7 +20749,7 @@ struct Atlas {
 void Atlas::FUN_00bf6980(const char* name)
 {
     Region r;
-    FUN_00bf14c0(DAT_011796bc, name, &texture, &r.rect.left);
+    Tile_GetTextureAtlasInfo(DAT_011796bc, name, &texture, &r.rect.left);
     int i = strlen(name) - 1;
     while (name[i] != '_')
         i--;
@@ -20776,8 +20781,8 @@ struct Value {
     Tile* owner;
     float number;
     char* string;
-    void FUN_00beafa0();
-    void FUN_00bf0720(bool changed);
+    void Tile_Value_ClearActions();
+    void Tile_Value_CalculateValue(bool changed);
 };
 
 struct ChildNode {
@@ -20825,8 +20830,8 @@ public:
                 DAT_01090a78.FUN_0086ba60(value->string);
                 value->string = 0;
             }
-            value->FUN_00beafa0();
-            value->FUN_00bf0720(changed);
+            value->Tile_Value_ClearActions();
+            value->Tile_Value_CalculateValue(changed);
         }
     }
     void FUN_00beea70(Tile* newParent, Tile* sibling);
@@ -20898,8 +20903,8 @@ struct TileValue {
     float value;
     char* stringValue;
 
-    void FUN_00beafa0();
-    void FUN_00bf0720(bool changed);
+    void Tile_Value_ClearActions();
+    void Tile_Value_CalculateValue(bool changed);
 };
 
 void __cdecl FUN_00bedc80(TileBF* tile);
@@ -20927,7 +20932,7 @@ struct TileBF {
     TileValue* FUN_00bece90(int id);
     TileValue* FUN_00bee080(int id);
     float FUN_00becf40(int id);
-    const char* FUN_00becf60(int id);
+    const char* Tile_GetString(int id);
     DepthController* FUN_00beab90();
     TileBF* FUN_00bf00f0(int trait, float value, int unused);
 
@@ -20965,8 +20970,8 @@ struct TileBF {
             entry->stringValue = 0;
         }
         if (update)
-            entry->FUN_00beafa0();
-        entry->FUN_00bf0720(valueChanged);
+            entry->Tile_Value_ClearActions();
+        entry->Tile_Value_CalculateValue(valueChanged);
     }
 };
 
@@ -21053,12 +21058,12 @@ TileBF* TileBF::FUN_00bf00f0(int trait, float value, int unused)
         return this;
     }
 
-    if (trait == 0xfcc && GetType() == 0x386 && FUN_00becf60(0xfcc)) {
+    if (trait == 0xfcc && GetType() == 0x386 && Tile_GetString(0xfcc)) {
         SetChangedFlag(0x20);
         return this;
     }
 
-    if (trait == 0xfcc && GetType() == 0x388 && FUN_00becf60(0xfcc)) {
+    if (trait == 0xfcc && GetType() == 0x388 && Tile_GetString(0xfcc)) {
         SetChangedFlag(0x40);
         return this;
     }
@@ -21202,7 +21207,8 @@ struct FUN_00bfd070_Map
 };
 extern FUN_00bfd070_Map DAT_0106a794;
 
-unsigned int __cdecl FUN_00bfd070(const char* path, bool flag)
+// pdb: Menu::GetXML | Menu.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+unsigned int __cdecl Menu_GetXML(const char* path, bool flag)
 {
     const char* name = path;
     const char* sep = strrchr(path, '\\');
@@ -25583,8 +25589,8 @@ public:
     float unk08;
     void* unk0C;
 
-    void FUN_00beafa0();
-    void FUN_00bf0720(bool changed);
+    void Tile_Value_ClearActions();
+    void Tile_Value_CalculateValue(bool changed);
 };
 
 class FUN_00bef830_Owner {
@@ -25606,8 +25612,8 @@ void FUN_00bef830_Owner::FUN_00bef830(int value, float amount)
             ::DAT_01090a78.FUN_0086ba60(record->unk0C);
             record->unk0C = 0;
         }
-        record->FUN_00beafa0();
-        record->FUN_00bf0720(changed);
+        record->Tile_Value_ClearActions();
+        record->Tile_Value_CalculateValue(changed);
     }
 
     record = FUN_00bee080(value);
@@ -25620,8 +25626,8 @@ void FUN_00bef830_Owner::FUN_00bef830(int value, float amount)
             ::DAT_01090a78.FUN_0086ba60(record->unk0C);
             record->unk0C = 0;
         }
-        record->FUN_00beafa0();
-        record->FUN_00bf0720(changed);
+        record->Tile_Value_ClearActions();
+        record->Tile_Value_CalculateValue(changed);
     }
 }
 }   // namespace f3m_00bef830
@@ -25660,7 +25666,7 @@ float Obj::FUN_00bea810()
 #include <stdio.h>
 #include <string>
 namespace f3m_00be4930 {
-void __cdecl FUN_00be5520(int severity, std::string message);
+void __cdecl futSetLastError(int severity, std::string message);
 namespace f3m_00be4930 {
 struct StdFile {
     virtual void slot00();
@@ -25674,14 +25680,15 @@ struct StdFile {
         name = "";
         file = 0;
     }
-    bool FUN_00be4930(void* buffer, unsigned int size, unsigned int count);
+    bool FutBinaryFileC_readHeader(void* buffer, unsigned int size, unsigned int count);
 };
-bool StdFile::FUN_00be4930(void* buffer, unsigned int size, unsigned int count)
+// pdb: FutBinaryFileC::readHeader | binaryFile.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap_sim), high
+bool StdFile::FutBinaryFileC_readHeader(void* buffer, unsigned int size, unsigned int count)
 {
     if (!file)
         return false;
     if (fread(buffer, size, count, file) != count) {
-        FUN_00be5520(1, name);
+        futSetLastError(1, name);
         Close();
         return false;
     }
@@ -26252,7 +26259,7 @@ bool f3m_00becf80::Tile::FUN_00becf80(int id)
 
 // @f3 0x00beb1b0 (community match, verified in this file)
 namespace f3m_00beb1b0 {
-struct Item { void FUN_00bf0720(int flag); };
+struct Item { void Tile_Value_CalculateValue(int flag); };
 struct Node { Item* item; Node* next; };
 struct Map { bool FUN_00bea7b0(int key, Node** out); };
 extern Map DAT_0106a3d8;
@@ -26263,7 +26270,7 @@ void __cdecl FUN_00beb1b0(int key)
     f3m_00beb1b0::Node* node = 0;
     if (f3m_00beb1b0::DAT_0106a3d8.FUN_00bea7b0(key, &node)) {
         for (f3m_00beb1b0::Node* n = node; n; n = n->next)
-            n->item->FUN_00bf0720(0);
+            n->item->Tile_Value_CalculateValue(0);
     }
 }
 
@@ -26855,11 +26862,12 @@ extern BSMapBase_00a09200 DAT_0106a3d8;
 struct Value_00a09200 {
     int unk00, unk04, unk08, unk0c;
     Action_00a09200* actions;
-    void FUN_00beafa0();
+    void Tile_Value_ClearActions();
 };
 
 // @fnv 0x00a09200
-void Value_00a09200::FUN_00beafa0()
+// pdb: Tile::Value::ClearActions | Tile.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+void Value_00a09200::Tile_Value_ClearActions()
 {
     Action_00a09200* pcurrAction;
     {
@@ -27260,7 +27268,7 @@ struct IosBase {
     void* arr;
     void* calls;
     Locale* ploc;
-    void FUN_00bbd8d0(int state, bool reraise);
+    void std_ios_base_clear(int state, bool reraise);
     void FUN_00be6d90();
 };
 __forceinline Locale* NewLocale()
@@ -27287,7 +27295,7 @@ void IosBase::FUN_00be6d90()
     wide = 0;
     arr = 0;
     calls = 0;
-    FUN_00bbd8d0(0, false);
+    std_ios_base_clear(0, false);
     ploc = NewLocale();
 }
 }
@@ -29227,7 +29235,8 @@ inline unsigned char A11740HasMarker(A11740Node*& p)
 }
 
 // @fnv 0x00a11740
-A11740Item* __cdecl FUN_00bf9e60(A11740Input* input, int unused, int expected, int* outValue)
+// pdb: DebugText::GetFloatingText | DebugText.obj | fnv360_0721_beta, udata, high
+A11740Item* __cdecl DebugText_GetFloatingText(A11740Input* input, int unused, int expected, int* outValue)
 {
     A11740Item* res;
     unsigned int indexB;
@@ -29848,8 +29857,8 @@ FUN_00bf1990::FUN_00bf1990(FUN_0053dc10* parent) {
 namespace f3m_00be7210 {
 namespace task2697 {
 void __cdecl FUN_00bff6ba(void*);
-struct Stream {int unk00,unk04,state,unk0c,unk10,unk14,unk18,unk1c,unk20,unk24;void* buffer;int tied;unsigned char fill;void FUN_00be6d90();unsigned char FUN_00be70e0(int);void FUN_00bbd8d0(unsigned,int);void FUN_00be7210(void*,bool);};
-void Stream::FUN_00be7210(void*p,bool standard){FUN_00be6d90();buffer=p;tied=0;fill=FUN_00be70e0(0x20);if(!buffer){unsigned h=state;unsigned i=h|4;FUN_00bbd8d0(buffer==0?(i|4):i,0);}if(standard)FUN_00bff6ba(this);else unk04=0;}
+struct Stream {int unk00,unk04,state,unk0c,unk10,unk14,unk18,unk1c,unk20,unk24;void* buffer;int tied;unsigned char fill;void FUN_00be6d90();unsigned char FUN_00be70e0(int);void std_ios_base_clear(unsigned,int);void FUN_00be7210(void*,bool);};
+void Stream::FUN_00be7210(void*p,bool standard){FUN_00be6d90();buffer=p;tied=0;fill=FUN_00be70e0(0x20);if(!buffer){unsigned h=state;unsigned i=h|4;std_ios_base_clear(buffer==0?(i|4):i,0);}if(standard)FUN_00bff6ba(this);else unk04=0;}
 }
 }   // namespace f3m_00be7210
 
@@ -30075,9 +30084,10 @@ FUN_00be59e0_cls* FUN_00be59e0_cls::FUN_00be59e0(char* pPos, FNVSourceStringX* p
 
 // @f3 0x00bea870 (community match, verified in this file)
 namespace f3m_00bea870 {
-struct Lookup2693 { void* FUN_00bea870(int); };
+struct Lookup2693 { void* Tile_GetValueQ(int); };
 // @fnv 0x00a00e90
-void* Lookup2693::FUN_00bea870(int aiTrait)
+// pdb: Tile::GetValueQ | Tile.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+void* Lookup2693::Tile_GetValueQ(int aiTrait)
 {
  unsigned int uiIndex;
  {
@@ -35073,7 +35083,8 @@ struct FUN_00bece90_Result
 
 FUN_00bece90_Result* __stdcall FUN_00bece90(int);
 
-const char* __stdcall FUN_00becf60(int index)
+// pdb: Tile::GetString | Tile.obj | fnv360_0721_retail, call_seq + bridge(call_gap|call_seq), high
+const char* __stdcall Tile_GetString(int index)
 {
     FUN_00bece90_Result* result = FUN_00bece90(index);
     if (result)
@@ -35902,7 +35913,7 @@ namespace f3m_00bfe960 {
 class TextTile
 {
 public:
-    const char* FUN_00becf60(int id);
+    const char* Tile_GetString(int id);
     float FUN_00becf40(int id);
     void FUN_00bee370(int a);
     TextTile* FUN_00bfe960(int id, float value, const char* name);
@@ -35914,7 +35925,7 @@ TextTile* TextTile::FUN_00bfe960(int id, float value, const char* name)
     bool ok = false;
     if (id == 0xfc4)
     {
-        const char* s = FUN_00becf60(id);
+        const char* s = Tile_GetString(id);
         ok = !s || strcmp(name, s) == 0;
     }
     else if (id == 0xfb7)
@@ -36070,7 +36081,8 @@ struct QMenuArray {
 };
 extern QMenuArray DAT_0106a7bc;
 
-QMenu* FUN_00beaf00(unsigned int index)
+// pdb: Tile::GetMenuByClass | Tile.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_seq), high
+QMenu* Tile_GetMenuByClass(unsigned int index)
 {
     if (index >= 1001 && index <= 1060 && DAT_0106a7bc.size > index - 1001)
         return DAT_0106a7bc.base[index - 1001];
@@ -36739,7 +36751,7 @@ public:
     float unk08;
     void* unk0C;
 
-    void __thiscall FUN_00beafa0();
+    void __thiscall Tile_Value_ClearActions();
 };
 
 class FUN_00beb070_Owner
@@ -36758,7 +36770,7 @@ void FUN_00beb070_Owner::FUN_00beb070()
     FUN_00beb070_Object* self = (FUN_00beb070_Object*)this;
     int result = 0;
 
-    self->FUN_00beafa0();
+    self->Tile_Value_ClearActions();
 
     if (DAT_0106a3d8.FUN_00bea7b0(self, &result))
     {
@@ -37133,12 +37145,13 @@ struct Tile {
     Node* children;
     int unk08, unk0c, unk10, unk14, unk18, unk1c;
     const char* name;   // 0x20
-    Tile* FUN_00beabd0(const char* key);
+    Tile* Tile_GetChildByName(const char* key);
 };
 }
 
 // depth-first search of the child tree by name
-f3m_00beabd0::Tile* f3m_00beabd0::Tile::FUN_00beabd0(const char* key)
+// pdb: Tile::GetChildByName | Tile.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+f3m_00beabd0::Tile* f3m_00beabd0::Tile::Tile_GetChildByName(const char* key)
 {
     Node* node = children;
     while (node) {
@@ -37150,7 +37163,7 @@ f3m_00beabd0::Tile* f3m_00beabd0::Tile::FUN_00beabd0(const char* key)
         const char* text = child->name;
         if (text && strcmp(text, key) == 0)
             return child;
-        Tile* found = child->FUN_00beabd0(key);
+        Tile* found = child->Tile_GetChildByName(key);
         if (found)
             return found;
     }
@@ -38301,8 +38314,8 @@ struct Value {
     int unk00, unk04;
     float number;
     void* text;
-    void FUN_00beafa0();
-    void FUN_00bf0720(bool);
+    void Tile_Value_ClearActions();
+    void Tile_Value_CalculateValue(bool);
     void FUN_00beb200(float, bool);
 };
 void Value::FUN_00beb200(float replacement, bool notify)
@@ -38313,8 +38326,8 @@ void Value::FUN_00beb200(float replacement, bool notify)
         DAT_01090a78.FUN_0086ba60(text);
         text = 0;
     }
-    if (notify) FUN_00beafa0();
-    FUN_00bf0720(changed);
+    if (notify) Tile_Value_ClearActions();
+    Tile_Value_CalculateValue(changed);
 }
 }
 
@@ -38416,9 +38429,9 @@ Object* Object::FUN_00be5cf0(char* buffer,unsigned size){if(file&&!FUN_00c083eb(
 #include <string>
 namespace f3m_00be48a0 {
 namespace Write285 {
-void FUN_00be5520(int,std::string);
+void futSetLastError(int,std::string);
 struct Object {int unk00;std::string name;int unk20; int unk24; int unk28; int unk2c; int unk30; int unk34; int unk38;FILE* file;bool FUN_00be48a0(const void*,unsigned,unsigned);};
-bool Object::FUN_00be48a0(const void* data,unsigned size,unsigned count){if(file){if(fwrite(data,size,count,file)!=count){FUN_00be5520(6,name);if(file)fclose(file);name.assign("",(std::string::size_type)0);file=0;}else return true;}return false;}
+bool Object::FUN_00be48a0(const void* data,unsigned size,unsigned count){if(file){if(fwrite(data,size,count,file)!=count){futSetLastError(6,name);if(file)fclose(file);name.assign("",(std::string::size_type)0);file=0;}else return true;}return false;}
 }
 
 
@@ -39071,7 +39084,7 @@ struct File : FileBase {
     void FUN_00be4650();
     virtual ~File() { FUN_00be4650(); }
 };
-void __cdecl FUN_00be5520(int,TriString);
+void __cdecl futSetLastError(int,TriString);
 
 bool __cdecl FUN_00be34c0(const TriString& filename,Model& model) {
     struct Header { UInt vertices,triangles,quads,labels,surfaceLabels,textures,flags,morphs,modifiers,extraVertices; char reserved[16]; } header;
@@ -39180,7 +39193,7 @@ bool __cdecl FUN_00be34c0(const TriString& filename,Model& model) {
         total+=length;
     }
     if(total!=header.vertices+header.extraVertices) {
-        FUN_00be5520(1,filename);
+        futSetLastError(1,filename);
         return false;
     }
     return true;
@@ -39468,7 +39481,7 @@ struct Tile1eb0 {
     bool FUN_00beac40();
     Value* FUN_00bece90(unsigned int);
     float FUN_00becf40(unsigned int) throw();
-    const char* FUN_00becf60(unsigned int);
+    const char* Tile_GetString(unsigned int);
     bool FUN_00becf80(unsigned int);
     void FUN_00bf11a0(unsigned int,const char*,bool);
     void FUN_00bee190(unsigned int,float,bool);
@@ -39565,7 +39578,7 @@ struct AtlasPath {
     void FUN_00ba3700(const char*);
     const char* c_str() const { return capacity<16?text.sbuf:text.large; }
 };
-__declspec(noinline) void __cdecl FUN_00bf14c0(const char* name,const char* file,LocalString* outName,Rect4& outRect)
+__declspec(noinline) void __cdecl Tile_GetTextureAtlasInfo(const char* name,const char* file,LocalString* outName,Rect4& outRect)
 {
     char path[260];
     strcpy_s(path,260,DAT_00dd1dc4);
@@ -39639,8 +39652,8 @@ extern float __cdecl FUN_0061a680();
 extern bool __cdecl FUN_0061a930(void*);
 extern float __cdecl FUN_00401e20(float,float);
 extern float __cdecl FUN_0090d870(float,float);
-struct ColorResult { bool FUN_00621610(int,Color4&) const; };
-extern ColorResult* __cdecl FUN_006295a0();
+struct ColorResult { bool SystemColorManager_GetColor(int,Color4&) const; };
+extern ColorResult* __cdecl SystemColorManager_GetInstance();
 __forceinline void Tile1eb0::mark(unsigned int bit) {
     unsigned int prev=flags;
     flags=prev|bit;
@@ -39716,14 +39729,14 @@ bool Tile1eb0::FUN_00bf1eb0(bool reset)
                     if(value) { action=value->action; path=value->text; }
                     if(!value || ((!path || !*path) && !action)) {
                         FUN_00bf11a0(0xfcc,DAT_00eaa300,true);
-                        path=FUN_00becf60(0xfcc);
+                        path=Tile_GetString(0xfcc);
                         fallback=true;
                     }
                     if(path && *path) {
                         if(fallback || FUN_00bece90(0xff9)) {
                             LocalString resolved("");
-                            const char* atlasName=fallback?DAT_011796bc:FUN_00becf60(0xff9);
-                            FUN_00bf14c0(atlasName,FUN_00becf60(0xfcc),&resolved,atlas);
+                            const char* atlasName=fallback?DAT_011796bc:Tile_GetString(0xff9);
+                            Tile_GetTextureAtlasInfo(atlasName,Tile_GetString(0xfcc),&resolved,atlas);
                             FUN_00bfd6b0(resolved.data,&scale,&texture,FUN_00becf40(0xfb8),handle);
                         }
                         if(!texture.m_pObject) FUN_00bfd6b0(path,&scale,&texture,FUN_00becf40(0xfb8),handle);
@@ -39732,7 +39745,7 @@ bool Tile1eb0::FUN_00bf1eb0(bool reset)
                         shader->FUN_00b39a20(texture.m_pObject);
                         shader->wrap=FUN_00becf80(0xfb5)?2:0;
                         float percent=FUN_00becf40(0xfb8);
-                        const char* name=FUN_00becf60(0xfcc);
+                        const char* name=Tile_GetString(0xfcc);
                         float width=float(texture->width());
                         float height=float(texture->height());
                         if(FUN_00becf40(0xfb5)==DAT_01012054) {
@@ -39797,7 +39810,7 @@ bool Tile1eb0::FUN_00bf1eb0(bool reset)
                             actualWidth=float((double(height)/float(texture->height()))*float(texture->width()));
                         } else if(percent>=0.0f) {
                             if(percent==0.0f) percent=100.0f;
-                            const char* name=FUN_00becf60(0xfcc);
+                            const char* name=Tile_GetString(0xfcc);
                             if(useful(name)) {
                                 float factor=scale;
                                 actualWidth=float((double(shader->texture->width())*(percent/100.0))/factor);
@@ -39818,7 +39831,7 @@ bool Tile1eb0::FUN_00bf1eb0(bool reset)
                         if(FUN_00bece90(0xff9)) {
                             Rect4 rect(0,0,0,0);
                             if(atlas.right!=DAT_01012054 && atlas.bottom!=DAT_01012054) rect=atlas;
-                            else FUN_00bf14c0(FUN_00becf60(0xff9),FUN_00becf60(0xfcc),0,rect);
+                            else Tile_GetTextureAtlasInfo(Tile_GetString(0xff9),Tile_GetString(0xfcc),0,rect);
                             float rw=rect.right-rect.left;
                             float rh=rect.bottom-rect.top;
                             if(rw>0.0f && rh>0.0f) {
@@ -39981,7 +39994,7 @@ bool Tile1eb0::FUN_00bf1eb0(bool reset)
                 }
                 if(p) id=int(p->number(0xff4));
             palette:
-                if(FUN_006295a0()->FUN_00621610(id,colorValue)) {
+                if(SystemColorManager_GetInstance()->SystemColorManager_GetColor(id,colorValue)) {
                     colorValue*=amount;
                 } else goto explicitColor;
             }
@@ -40054,8 +40067,8 @@ struct Value {
     void* owner;
     float num;
     char* str;
-    void FUN_00beafa0();
-    void FUN_00bf0720(bool changed);
+    void Tile_Value_ClearActions();
+    void Tile_Value_CalculateValue(bool changed);
     void FUN_00bf0ec0(const char* name, bool refresh);
 };
 
@@ -40073,8 +40086,8 @@ void Value::FUN_00bf0ec0(const char* name, bool refresh)
     }
     num = 0.0f;
     if (refresh)
-        FUN_00beafa0();
-    FUN_00bf0720(changed);
+        Tile_Value_ClearActions();
+    Tile_Value_CalculateValue(changed);
 }
 }
 
@@ -40270,7 +40283,7 @@ struct TextBuffer {
     unsigned int length;
     char* text;
 };
-TextBuffer* FUN_00bfd070(const char* path, bool flag);
+TextBuffer* Menu_GetXML(const char* path, bool flag);
 
 struct String {
     char* pString;
@@ -40310,7 +40323,7 @@ bool __cdecl FUN_00bed0d0(TextBuffer* buffer)
         char* context;
         FUN_00c06119(found, "\"", &context);
         path.FUN_00403a00("Data\\Menus\\Prefabs\\%s", FUN_00c06119(0, "\"", &context));
-        TextBuffer* include = FUN_00bfd070(path.pString, false);
+        TextBuffer* include = Menu_GetXML(path.pString, false);
         result.FUN_00402540(include->text);
         if (include->text)
             DAT_01090a78.FUN_0086ba60(include->text);
@@ -40374,7 +40387,7 @@ struct UITile {
     __forceinline const char* GetName() const { return m_kName.pString; }
     TileMenuRoot* FUN_00beab90();
     __forceinline UITile* FUN_00a03d40(){UITile* t=this;while(t && t->m_pParentNode && t->m_pParentNode->m_pParentNode)t=t->m_pParentNode;return t;}
-    UITile* FUN_00beabd0(const char* pcName);
+    UITile* Tile_GetChildByName(const char* pcName);
 };
 
 enum { TilePathLayout = 1 / (sizeof(UITile) == 0x2c) };
@@ -40440,7 +40453,7 @@ UITile* FUN_00beb8c0(UITile* pTile, const char* pcPath)
         if (!acName[0] && pTile->GetChildCount())
             return pTile->m_kChildList.m_pkHead->m_element;
         else if (pTile && acName[0] && pTile->GetChildCount())
-            return pTile->FUN_00beabd0(acName);
+            return pTile->Tile_GetChildByName(acName);
         else
             return 0;
     case 0x138e:
@@ -41053,7 +41066,7 @@ namespace f3m_00bef8f0 {
 namespace a00bef8f0 {
 struct Token { void FUN_00beece0(int,const char*,int,bool); };
 struct Owner { Token* FUN_00bea6d0(); };
-CompressedXML* __cdecl FUN_00bfd070(const char*,bool);
+CompressedXML* __cdecl Menu_GetXML(const char*,bool);
 void __cdecl FUN_00bed0d0(CompressedXML*);
 int __cdecl FUN_00bea9e0(const char*);
 bool __cdecl FUN_0061d750(const char*,char*);
@@ -41069,7 +41082,7 @@ __declspec(noinline) f3m_00bf37b0::ParseNode* __cdecl FUN_00bef8f0(const char* p
     const char* input=0;
     unsigned int size=0;
     if(a) {input=a;size=b;}
-    else {file=a00bef8f0::FUN_00bfd070(path,false);if(file){a00bef8f0::FUN_00bed0d0(file);input=file->data;size=file->size;}}
+    else {file=a00bef8f0::Menu_GetXML(path,false);if(file){a00bef8f0::FUN_00bed0d0(file);input=file->data;size=file->size;}}
     char tag[128],text[4096],converted[4096];
     text[0]=0;
     int state=0,attribute=0;
@@ -41199,7 +41212,7 @@ struct HolderPtr {
 struct Directory { Holder* FUN_004248b0(const char*); };
 extern Directory* DAT_0106ca70;
 void* __cdecl FUN_00bc7fc0(const char*, int, unsigned int, unsigned int);
-void __cdecl FUN_00be5520(int, std::string);
+void __cdecl futSetLastError(int, std::string);
 struct File {
     void* unk00;
     std::string name;
@@ -41223,7 +41236,7 @@ bool File::FUN_00be5010(std::string filename, bool flag) {
         raw = FUN_00bc7fc0(filename.c_str(), 0, 0x2800, mode);
     }
     if (!raw) {
-        FUN_00be5520(4, filename);
+        futSetLastError(4, filename);
         return false;
     }
     std::vector<char> bytes(signature.size() + 1, char());
@@ -41231,13 +41244,13 @@ bool File::FUN_00be5010(std::string filename, bool flag) {
     std::vector<char> copied(bytes);
     copied[5] = signature[5];
     if (signature != &copied[0]) {
-        FUN_00be5520(2, filename);
+        futSetLastError(2, filename);
         FUN_00be4650();
         return false;
     }
     if (bytes[5] > '0') {
         if (signature[5] != bytes[5]) {
-            FUN_00be5520(4, filename);
+            futSetLastError(4, filename);
             FUN_00be4650();
             return false;
         }
@@ -42002,7 +42015,7 @@ namespace f3m_00be4cb0 {
 
 namespace f3m_00be4cb0 {
 
-void __cdecl FUN_00be5520(int severity, std::string message);
+void __cdecl futSetLastError(int severity, std::string message);
 
 struct FutFile {
     virtual void slot00();
@@ -42015,7 +42028,7 @@ struct FutFile {
         m_fname = "";
         fptr = 0;
     }
-    bool FUN_00be4930(void* buffer, unsigned int size, unsigned int count);
+    bool FutBinaryFileC_readHeader(void* buffer, unsigned int size, unsigned int count);
     void FUN_00be4870();
     bool FUN_00be4cb0(std::string name);
 };
@@ -42025,21 +42038,21 @@ bool FutFile::FUN_00be4cb0(std::string name)
     Close();
     fptr = fopen(name.c_str(), "rb");
     if (!fptr) {
-        FUN_00be5520(4, name);
+        futSetLastError(4, name);
         return false;
     }
     std::vector<char> v(fileId.size() + 1, 0);
-    if (!FUN_00be4930(&v[0], fileId.size(), 1))
+    if (!FutBinaryFileC_readHeader(&v[0], fileId.size(), 1))
         return false;
     std::vector<char> w(v);
     w[5] = fileId[5];
     if (fileId != &w[0]) {
-        FUN_00be5520(2, name);
+        futSetLastError(2, name);
         FUN_00be4870();
         return false;
     }
     if (v[5] > '0' && fileId.at(5) != v.at(5)) {
-        FUN_00be5520(4, name);
+        futSetLastError(4, name);
         FUN_00be4870();
         return false;
     }
@@ -42828,7 +42841,7 @@ struct ActMenu {
 };
 struct TileVal {
     int trait;
-    void FUN_00bf0720(bool changed);
+    void Tile_Value_CalculateValue(bool changed);
     void FUN_00beaf40(int id, float value);
     void FUN_00beec50(int id, void* tile, int value);
     void FUN_00bf0ec0(const char* str, bool refresh);
@@ -42912,7 +42925,7 @@ void ActParser::FUN_00bf11d0(ActMenu* a1)
             for (an = 0; an < (n = ad->count); an++)
             {
                 if (ad->parr[an]->trait != 4004)
-                    ad->parr[an]->FUN_00bf0720(true);
+                    ad->parr[an]->Tile_Value_CalculateValue(true);
             }
             LeaveCriticalSection(&DAT_01179690);
             ad = ad->next28;
@@ -43105,10 +43118,11 @@ struct S00bf0720_Value {
     float value;
     char* str;
     S00bf0720_Action* actions;
-    void FUN_00bf0720(bool update);
+    void Tile_Value_CalculateValue(bool update);
 };
 
-void S00bf0720_Value::FUN_00bf0720(bool update)
+// pdb: Tile::Value::CalculateValue | Tile.obj | fnv360_0822_debug, call_seq + bridge(call_gap|call_gap), high
+void S00bf0720_Value::Tile_Value_CalculateValue(bool update)
 {
     if ((tile->flags & 0x10000) && id != 4004)
         return;
@@ -43484,7 +43498,7 @@ inline bool S00bfbad0_IsFloatingText(S00bfbad0_Item* extra)
     return false;
 }
 
-S00bfbad0_Item* __cdecl FUN_00bf9e60(S00bfbad0_NiNode* node, const char* name, int expected, int* outValue)
+S00bfbad0_Item* __cdecl DebugText_GetFloatingText(S00bfbad0_NiNode* node, const char* name, int expected, int* outValue)
 {
     if (node == 0)
         return 0;
@@ -43518,7 +43532,7 @@ bool FUN_00bfbad0(S00bfbad0_NiNode* node, const char* text, int offset, float li
     S00bfbad0_Item* item;
     S00bfbad0_Cfg* cfg = node->m_cfg ? node->m_cfg : &DAT_0108edc8;
     int value = (int)cfg->m_height;
-    item = FUN_00bf9e60(node, text, offset, &value);
+    item = DebugText_GetFloatingText(node, text, offset, &value);
     if (item) {
         S00bfbad0_ListNode* pos = FUN_00bfb7c0(true)->list.GetHeadPos();
         while (pos) {
@@ -44572,7 +44586,7 @@ struct S00bf6b80_Rect {
     S00bf6b80_Rect() : left(0), right(0), top(0), bottom(0) {}
 };
 struct S00bf6b80_Icon { float width; unsigned int m_field04, m_field08; float spacing; S00bf6b80_Rect rect; };
-void FUN_00bf14c0(const char* definition, const char* image, S00bf6b80_Str* texture, float* bounds);
+void Tile_GetTextureAtlasInfo(const char* definition, const char* image, S00bf6b80_Str* texture, float* bounds);
 struct S00bf6b80_Icons {
     virtual void v0();
     virtual S00bf6b80_Icon* Allocate(unsigned int count);

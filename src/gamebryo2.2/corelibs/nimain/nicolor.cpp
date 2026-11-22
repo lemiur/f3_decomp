@@ -17,11 +17,12 @@ struct FUN_00a698a0_class
     int unk04;
     int unk08;
     int unk0c;
-    void __thiscall FUN_00a698a0(void* context);
+    void __thiscall NiColorA_SaveBinary(void* context);
 };
 // Writes the four 4-byte fields at offsets 0, 4, 8 and 12 of this object to the stream stored at context+0x250, accumulating bytesWritten.
 // @fnv 0x00a698a0
-void FUN_00a698a0_class::FUN_00a698a0(void* context)
+// pdb: NiColorA::SaveBinary | NiColor.obj | fnv360_0822_retail, call_seq + bridge(hash|callee_sim) + skyrim(call_seq), high
+void FUN_00a698a0_class::NiColorA_SaveBinary(void* context)
 {
     FUN_00a698a0_stream* stream = *(FUN_00a698a0_stream**)((char*)context + 0x250);
     int size = 4;

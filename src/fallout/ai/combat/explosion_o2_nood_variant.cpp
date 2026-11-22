@@ -1909,7 +1909,7 @@ unsigned unk194;
 unsigned unk198;
 unsigned unk19c;
 Four velocity;
-    int __thiscall FUN_0090b210();
+    int __thiscall hkpEntity_getNumConstraints();
     Constraint* __thiscall FUN_0090b220(int);
     void __thiscall FUN_0090b500();
     void SetVelocity(const Four& v) {FUN_0090b500(); world.SetVelocity(v);}
@@ -1994,7 +1994,7 @@ extern float DAT_00f7b698,DAT_00f7b69c,DAT_00f7b6a0,DAT_00f7b6a4;
 extern unsigned char DAT_010f3418;
 extern const double DAT_00db36a8;
 struct SetupLiquid {void __thiscall FUN_0092f910(LiquidLink*);};
-struct NormalPoint {float __thiscall FUN_00432c00();};
+struct NormalPoint {float __thiscall NiPoint3_UnitizeGetLength();};
 void LiquidActionCandidate::FUN_00cbccb0(float delta)
 {
     LiquidVec force;
@@ -2020,9 +2020,9 @@ int i = target != 0;
             Four velocity;
             velocity=object ? object->velocity : DAT_01092a50;
             Contact contact;
-            if (object && object->FUN_0090b210() && reinterpret_cast<PointCheck&>(position).FUN_00914730(DAT_0108ec68))
+            if (object && object->hkpEntity_getNumConstraints() && reinterpret_cast<PointCheck&>(position).FUN_00914730(DAT_0108ec68))
             {
-                for (i = 0; reinterpret_cast<PointCheck&>(position).FUN_00914730(DAT_0108ec68) && i < object->FUN_0090b210(); ++i)
+                for (i = 0; reinterpret_cast<PointCheck&>(position).FUN_00914730(DAT_0108ec68) && i < object->hkpEntity_getNumConstraints(); ++i)
                 {
                     Constraint* c = object->FUN_0090b220(i);
                     ConstraintData* d = c->data;
@@ -2107,7 +2107,7 @@ int i = target != 0;
                     LiquidVec otherPos={otherPosition.x*DAT_00db88e8,otherPosition.y*DAT_00db88e8,otherPosition.z*DAT_00db88e8};
                     LiquidVec difference;
                     Subtract(difference,bodyPosition,otherPos);
-                    float distance = reinterpret_cast<NormalPoint&>(difference).FUN_00432c00();
+                    float distance = reinterpret_cast<NormalPoint&>(difference).NiPoint3_UnitizeGetLength();
                     if (distance > 0 && radius + radius > distance)
                     {
                         float ratio = (radius - distance) / (DAT_00f7b698 * radius);

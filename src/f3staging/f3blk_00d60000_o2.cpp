@@ -463,13 +463,13 @@ struct TypeInfo {
 };
 extern TypeInfo DAT_011696d4;
 extern const char DAT_00e453a4[];
-void* __cdecl FUN_009d6d80();
+void* __cdecl finishLoadedObjecthkpMeshShape();
 void __cdecl FUN_009d6da0(void* object);
 unsigned int __cdecl FUN_009d6db0();
 }
 void __cdecl FUN_00d7e2b0() {
     using namespace f3m_00d7e2b0;
-    DAT_011696d4.TypeInfo::TypeInfo(DAT_00e453a4, FUN_009d6d80, FUN_009d6da0, FUN_009d6db0());
+    DAT_011696d4.TypeInfo::TypeInfo(DAT_00e453a4, finishLoadedObjecthkpMeshShape, FUN_009d6da0, FUN_009d6db0());
 }
 
 // @f3 0x00d7e330 (community match, verified in this file)
@@ -778,13 +778,13 @@ struct TypeInfo {
 };
 extern TypeInfo DAT_0116a094;
 extern const char DAT_00e45db0[];
-void* __cdecl FUN_00a06f20();
+void* __cdecl finishLoadedObjecthkpRagdollLimitsData();
 void __cdecl FUN_00a06f00(void* object);
 unsigned int __cdecl FUN_00a06f50();
 }
 void __cdecl FUN_00d7efc0() {
     using namespace f3m_00d7efc0;
-    DAT_0116a094.TypeInfo::TypeInfo(DAT_00e45db0, FUN_00a06f20, FUN_00a06f00, FUN_00a06f50());
+    DAT_0116a094.TypeInfo::TypeInfo(DAT_00e45db0, finishLoadedObjecthkpRagdollLimitsData, FUN_00a06f00, FUN_00a06f50());
 }
 
 // @f3 0x00d7f050 (community match, verified in this file)
@@ -799,13 +799,13 @@ struct TypeInfo {
 };
 extern TypeInfo DAT_0116a104;
 extern const char DAT_00e45ba8[];
-void* __cdecl FUN_00a06f90();
+void* __cdecl finishLoadedObjecthkpRagdollConstraintData();
 void __cdecl FUN_00a06f70(void* object);
 unsigned int __cdecl FUN_00a06fc0();
 }
 void __cdecl FUN_00d7f050() {
     using namespace f3m_00d7f050;
-    DAT_0116a104.TypeInfo::TypeInfo(DAT_00e45ba8, FUN_00a06f90, FUN_00a06f70, FUN_00a06fc0());
+    DAT_0116a104.TypeInfo::TypeInfo(DAT_00e45ba8, finishLoadedObjecthkpRagdollConstraintData, FUN_00a06f70, FUN_00a06fc0());
 }
 
 // @f3 0x00d7f0f0 (community match, verified in this file)

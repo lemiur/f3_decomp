@@ -205,22 +205,23 @@ void NiBoolDataSaver::SaveBoolData(NiStream& stream)
     }
 }
 
-void __cdecl FUN_00a3d630(unsigned int mode, AnimationKey::KeyType type, BooleanKey* sourceKeys,
+void __cdecl NiAnimationKey_CopySequence(unsigned int mode, AnimationKey::KeyType type, BooleanKey* sourceKeys,
                           unsigned int sourceCount, float startTime, float endTime, BooleanKey** outputKeys,
                           unsigned int* outputCount);
 
 struct FUN_00a53910_shell : NiBoolData
 {
-    void __thiscall FUN_00a5d510(NiBoolData*& clone);
-    void __thiscall FUN_00a53910(float startTime, float endTime, NiPointer<NiBoolData>& output);
+    void __thiscall NiObject_CreateDeepCopy(NiBoolData*& clone);
+    void __thiscall NiBoolData_GetSequenceData(float startTime, float endTime, NiPointer<NiBoolData>& output);
 };
 
 // Clones this NiBoolData, processes its keys with the requested time range when present, and assigns the result to output.
 // @fnv 0x00a53910
-void FUN_00a53910_shell::FUN_00a53910(float startTime, float endTime, NiPointer<NiBoolData>& output)
+// pdb: NiBoolData::GetSequenceData | NiBoolData.obj | fnv360_0822_retail, caller_sim + bridge(call_seq|caller_sim) + skyrim(caller_sim), high
+void FUN_00a53910_shell::NiBoolData_GetSequenceData(float startTime, float endTime, NiPointer<NiBoolData>& output)
 {
     NiBoolData* original = 0;
-    FUN_00a5d510(original);
+    NiObject_CreateDeepCopy(original);
 
     NiBoolData* copy = original;
     if (copy != 0)
@@ -230,7 +231,7 @@ void FUN_00a53910_shell::FUN_00a53910(float startTime, float endTime, NiPointer<
     {
         BooleanKey* keys = 0;
         unsigned int count = 0;
-        FUN_00a3d630(5, m_eRequestType, m_pKeyArray, m_uiNumKeys, startTime, endTime, &keys, &count);
+        NiAnimationKey_CopySequence(5, m_eRequestType, m_pKeyArray, m_uiNumKeys, startTime, endTime, &keys, &count);
         copy->SetColorKeys(keys, count, m_eRequestType);
     }
 

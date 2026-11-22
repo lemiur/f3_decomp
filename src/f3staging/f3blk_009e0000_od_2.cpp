@@ -695,8 +695,8 @@ struct __declspec(align(16)) hkVector4 {
         }
         mul4(inv);
     }
-    void FUN_008d2a00(const struct hkRotation& r, const hkVector4& v);
-    void FUN_008d28e0(const struct hkTransform& t, const hkVector4& v);
+    void hkVector4_setRotatedDir(const struct hkRotation& r, const hkVector4& v);
+    void hkVector4_setTransformedPos(const struct hkTransform& t, const hkVector4& v);
 };
 
 struct hkRotation {
@@ -720,7 +720,7 @@ struct hkTransform {
     hkRotation m_rotation;
     hkVector4 m_translation;
     hkTransform(const hkRotation& r, const hkVector4& t) : m_rotation(r), m_translation(t) {}
-    void FUN_00925110(const hkTransform& t);
+    void hkTransform_setInverse(const hkTransform& t);
 };
 
 struct hkStridedVertices {
@@ -870,7 +870,7 @@ bool FUN_009eb8c0(const hkVecArray& points, hkVector4& halfExtents, hkTransform&
     rot.FUN_0096c8f0(0.01f);
 
     for (int i = 0; i < 8; i++)
-        buf[i].FUN_008d2a00(rot, buf[i]);
+        buf[i].hkVector4_setRotatedDir(rot, buf[i]);
 
     float minX;
     float maxX;
@@ -919,21 +919,21 @@ bool FUN_009eb8c0(const hkVecArray& points, hkVector4& halfExtents, hkTransform&
     center.mul4(-1.0f);
 
     hkTransform T(rot, center);
-    out.FUN_00925110(T);
+    out.hkTransform_setInverse(T);
 
     if (FUN_009e9300(rot.m_col0, tolerance) && FUN_009e9300(rot.m_col1, tolerance)
         && FUN_009e9300(rot.m_col2, tolerance)) {
-        halfExtents.FUN_008d2a00(out.m_rotation, halfExtents);
+        halfExtents.hkVector4_setRotatedDir(out.m_rotation, halfExtents);
         halfExtents(3) = 0.0f;
         halfExtents.setAbs4(halfExtents);
         rot.setIdentity();
         out.m_rotation = rot;
     }
-    T.FUN_00925110(out);
+    T.hkTransform_setInverse(out);
 
     for (int i = 0; i < points.m_size; i++) {
         hkVector4 t;
-        t.FUN_008d28e0(T, points.m_data[i]);
+        t.hkVector4_setTransformedPos(T, points.m_data[i]);
         for (int k = 0; k < 3; k++) {
             if (fabs((&t.x)[k]) > (&halfExtents.x)[k] * 1.001f) {
                     return false;

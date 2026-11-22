@@ -79,7 +79,7 @@ void FUN_00ca9840_Class::SetFieldValue(float afValue)
 
 extern int DAT_010c8288;
 
-extern "C" int __cdecl FUN_00cb10d0(int);
+extern "C" int __cdecl hkString_strLen(int);
 
 // @fnv 0x00cb0f10
 char ToUpperAscii(char acChar)
@@ -662,7 +662,7 @@ bhkConstraint* __cdecl FUN_00caa1c0()
 struct NiStream;
 struct FUN_00cac980_Holder
 {
-    void* FUN_00cac980();
+    void* hkpCharacterProxy_getShapePhantom();
 };
 struct BaseThunk
 {
@@ -678,7 +678,7 @@ struct FUN_00cac070_Stub : BaseThunk
 // @f3 0x0092ab00 (community match, verified in this file)
 void FUN_00cac070_Stub::FUN_00cac070(NiStream& stream) {
     if (this && m_8) {
-        void* resolved=m_8->FUN_00cac980();
+        void* resolved=m_8->hkpCharacterProxy_getShapePhantom();
         if (resolved) {
             void* object=*(void**)((char*)resolved + 0xc);
             if (object) ((void(__thiscall*)(void*, NiStream&))(*(void***)object)[21])(object, stream);
@@ -2293,7 +2293,7 @@ struct S_00ca4e10_Cls
     int unk04;
     S_00ca4e10_Obj* unk08;
     void FUN_00c84e20(S_00ca4e10_Out* out);
-    char* FUN_00ca4e10(S_00ca4e10_Out* out);
+    char* bhkBvTreeShape_CopyCinfo(S_00ca4e10_Out* out);
 };
 
 // Calls FUN_00c84e20 on out, then stores the object's v10() result minus 0x10 (or null) into out->unk04 and returns it.
@@ -2308,7 +2308,8 @@ struct S_008f75b0_Cls
     void FUN_008f75b0(S_00ca4e10_Out* out);
 };
 
-char* S_00ca4e10_Cls::FUN_00ca4e10(S_00ca4e10_Out* out)
+// pdb: bhkBvTreeShape::CopyCinfo | bhkBvTreeShape.obj | fnv360_0822_retail, objrun + bridge(caller_sim|call_seq) + skyrim(objopen_prop), high
+char* S_00ca4e10_Cls::bhkBvTreeShape_CopyCinfo(S_00ca4e10_Out* out)
 {
     ((S_008f75b0_Cls*)this)->FUN_008f75b0(out);
     char* r;
@@ -2344,7 +2345,8 @@ FUN_00ca5290::~FUN_00ca5290()
 extern int DAT_012682dc;
 
 // @fnv 0x00ca5300
-int* __cdecl FUN_00ca5300()
+// pdb: bhkRefObject::GetRTTI | bhkRefObject.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+int* __cdecl bhkRefObject_GetRTTI()
 {
     return &DAT_012682dc;
 }
@@ -2686,7 +2688,7 @@ struct S_00ca59d0_Self
     virtual void v45(int* out);
     int unk04;
     S_00ca59d0_Member* unk08;
-    void FUN_00c84d50(S_00ca59d0_Stream* s);
+    void bhkShape_SaveBinary(S_00ca59d0_Stream* s);
     void FUN_00ca59d0(S_00ca59d0_Stream* s);
 };
 // @fnv 0x00ca59d0
@@ -2695,7 +2697,7 @@ void S_00ca59d0_Self::FUN_00ca59d0(S_00ca59d0_Stream* pStream)
     int out;
     v45(&out);
     S_00ca59d0_Member* m = unk08;
-    FUN_00c84d50(pStream);
+    bhkShape_SaveBinary(pStream);
     float f = m->unkA0;
     S_00ca59d0_Save(*pStream->unk250, &f, 1);
     S_00ca59d0_Save(*pStream->unk250, &m->unk90, 1);
@@ -4836,7 +4838,7 @@ unsigned int __cdecl PackBytesBigEndian(unsigned char a, unsigned char b, unsign
     return result;
 }
 
-void __fastcall FUN_00a645b0(int a);
+void __fastcall NiStream_ReadLinkID(int a);
 
 struct S_00cac0b0_Arg
 {
@@ -4868,7 +4870,7 @@ struct S_00cac0b0_Obj
     int unk00;
     int unk04;
     S_00cac0b0_Inner* unk08;
-    S_00cac0b0_Inner* FUN_00cac980();
+    S_00cac0b0_Inner* hkpCharacterProxy_getShapePhantom();
 };
 
 struct S_00cac0b0_cls
@@ -4885,7 +4887,7 @@ void S_00cac0b0_cls::FUN_00cac0b0(S_00cac0b0_Arg* a)
 {
     S_00cac0b0_Inner* node = 0;
     if (this && unk08)
-        node = unk08->FUN_00cac980();
+        node = unk08->hkpCharacterProxy_getShapePhantom();
     a->v0c(node ? node->unk0c : 0);
     SaveSerializeData(a);
 }
@@ -5417,7 +5419,7 @@ static inline char* CB0AD0AllocateChars(int iCount)
 // @fnv 0x00cb0ad0
 static __declspec(noinline) char* FUN_00cb0ad0(const char* pcSrc, int iMaxChars)
 {
-    int iLen = FUN_00cb10d0((int)pcSrc);
+    int iLen = hkString_strLen((int)pcSrc);
     if (iLen > iMaxChars)
         iLen = iMaxChars;
     char* pcCopy = CB0AD0AllocateChars(iLen + 1);
@@ -5756,7 +5758,8 @@ FUN_00cb9b80::FUN_00cb9b80(CB9B80Info* pkInfo)
 struct CpuOpaque;
 extern CpuOpaque DAT_01268610;
 // @fnv 0x00cb9c00
-CpuOpaque* __cdecl FUN_00cb9c00()
+// pdb: hkPackedNiTriStripsData::GetRTTI | hkPackedNiTriStripsShape.obj | fnv360_0822_retail, udata + bridge(vtable|udata) + skyrim(udata), high
+CpuOpaque* __cdecl hkPackedNiTriStripsData_GetRTTI()
 {
     return &DAT_01268610;
 }
@@ -6311,15 +6314,15 @@ struct HolderBase
     void Release();
 };
 
-struct FUN_00cbd970 : PrimaryBase
+struct bhkOrientHingedBodyAction : PrimaryBase // src: F3_EXE vtable 0x00e36e14 (old: FUN_00cbd970)
 {
     int unk04;
-    virtual ~FUN_00cbd970();
+    virtual ~bhkOrientHingedBodyAction();
 };
 
 // Releases the holder and decrements the global counter DAT_01268434.
 // @fnv 0x00cbd970
-FUN_00cbd970::~FUN_00cbd970()
+bhkOrientHingedBodyAction::~bhkOrientHingedBodyAction()
 {
     ((HolderBase*)this)->Release();
     DAT_01268434--;
@@ -7418,7 +7421,7 @@ struct ReadStream
     int unk244;
     int unk248;
     ReadBin* binary;
-    void FUN_00a645b0();
+    void NiStream_ReadLinkID();
 };
 struct ReadData
 {
@@ -7478,7 +7481,7 @@ struct CA5940
     void FUN_00c84d00(ReadStream* stream);
     void ReadDataFromStream(ReadStream* stream);
 };
-// Reads a value and a 4-float vector from the stream into the object's ReadData, then calls FUN_00a645b0.
+// Reads a value and a 4-float vector from the stream into the object's ReadData, then calls NiStream_ReadLinkID.
 // @f3 0x0094f620 (community match, verified in this file)
 void CA5940::ReadDataFromStream(ReadStream* stream)
 {
@@ -7490,7 +7493,7 @@ void CA5940::ReadDataFromStream(ReadStream* stream)
         Load(*stream->binary, &data->value08, 1);
         unsigned int size2 = 4;
         stream->binary->Read(data->vector10, 16, &size2, 1);
-        stream->FUN_00a645b0();
+        stream->NiStream_ReadLinkID();
     }
 }
 
@@ -8902,7 +8905,7 @@ struct StandInStream : public NiStream
     int unk248;
     StandInBinaryStream* m_pkIStream;
 
-    void FUN_00a64df0(void* pLinkID);
+    void NiStream_LoadFixedString(void* pLinkID);
 };
 
 template <class T> inline void StreamRead(StandInStream& kStream, T& val)
@@ -9436,7 +9439,8 @@ class Node_ca57
 
 int __cdecl FUN_00c84ec0(int param_1);
 // @fnv 0x00ca6610
-int __cdecl FUN_00ca6610(int param_1)
+// pdb: NiBlendTransformInterpolator::CreateCloneInPlace | NiBlendTransformInterpolator.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_seq) + skyrim(call_seq), high
+int __cdecl NiBlendTransformInterpolator_CreateCloneInPlace(int param_1)
 {
     return FUN_00c84ec0(param_1);
 }
@@ -9530,10 +9534,11 @@ int* __fastcall FUN_00cac900(SomeClass* pThis)
 
 struct FnvCpu_FUN_00cac950_CpuObject
 {
-    char* FUN_00cac950();
+    char* hkpCharacterProxy_getLinearVelocity();
 };
 // @fnv 0x00cac950
-char* FnvCpu_FUN_00cac950_CpuObject::FUN_00cac950()
+// pdb: hkpCharacterProxy::getLinearVelocity | hkpCharacterProxy.obj | fnv360_0822_retail, objrun + bridge(call_dedup|call_gap) + skyrim(objrun), high
+char* FnvCpu_FUN_00cac950_CpuObject::hkpCharacterProxy_getLinearVelocity()
 {
     return reinterpret_cast<char*>(this) + 16;
 }
@@ -9613,7 +9618,8 @@ void __cdecl FUN_00cb0f80(char* a, const char* b, char* c)
 extern "C" int __cdecl FUN_00ec8a19(const char*, const char*, unsigned int);
 
 // @fnv 0x00cb0fd0
-int __cdecl FUN_00cb0fd0(const char* s1, const char* s2, unsigned int count)
+// pdb: hkString::strNcmp | hkString.obj | fnv360_0822_retail, call_gap + skyrim(call_seq), high
+int __cdecl hkString_strNcmp(const char* s1, const char* s2, unsigned int count)
 {
     return FUN_00ec8a19(s1, s2, count);
 }
@@ -9658,7 +9664,8 @@ int CompareStringsCaseInsensitive(const char* pStringA, const char* pStringB)
 
 void __cdecl FUN_00c87f60(void);
 // @fnv 0x00cb75f0
-void __cdecl FUN_00cb75f0(void)
+// pdb: BSRotAccumTransfInterpolator::IsEqual | BSRotAccumTransfInterpolator.obj | fnv360_0822_retail, caller_sim + bridge(vtable|objrun) + skyrim(caller_sim), high
+void __cdecl BSRotAccumTransfInterpolator_IsEqual(void)
 {
     FUN_00c87f60();
 }
@@ -10354,7 +10361,7 @@ struct CA0F0Object : BaseThunk
 int CA0F0Object::GetResultValue() {
     int value = 0;
     if (this && m_8) {
-        CA0F0Result* result = (CA0F0Result*)m_8->FUN_00cac980();
+        CA0F0Result* result = (CA0F0Result*)m_8->hkpCharacterProxy_getShapePhantom();
         if (result)
             value = result->m_8;
     }
@@ -10425,7 +10432,7 @@ struct WorldObjectCAC4B0
     int unk0B8;
     int unk0BC;
     void* m_pkUserData;
-    ShapeHolderCAC4B0* FUN_00cac980();
+    ShapeHolderCAC4B0* hkpCharacterProxy_getShapePhantom();
 };
 struct RefObjectCAC4B0
 {
@@ -10453,7 +10460,7 @@ void ShapeRefCAC4B0::FUN_00cac4b0(bool bAdd)
         WorldObjectCAC4B0* pkHavok = GetHavokObject();
         if (pkHavok)
         {
-            ShapeHolderCAC4B0* pkHolder = pkHavok->FUN_00cac980();
+            ShapeHolderCAC4B0* pkHolder = pkHavok->hkpCharacterProxy_getShapePhantom();
             if (pkHolder && pkHolder->m_pkShape)
                 InterlockedIncrement(&pkHolder->m_pkShape->m_iRefCount);
         }
@@ -10463,7 +10470,7 @@ void ShapeRefCAC4B0::FUN_00cac4b0(bool bAdd)
         WorldObjectCAC4B0* pkHavok = GetHavokObject();
         if (pkHavok)
         {
-            ShapeHolderCAC4B0* pkHolder = pkHavok->FUN_00cac980();
+            ShapeHolderCAC4B0* pkHolder = pkHavok->hkpCharacterProxy_getShapePhantom();
             if (pkHolder)
             {
                 RefCountedCAC4B0* pkShape = pkHolder->m_pkShape;
@@ -10564,12 +10571,12 @@ FUN_00caff80::~FUN_00caff80()
 
 // FUN_00cb0aa0: allocator-backed string dup. Takes the source string in the
 // caller's edi (private convention derived for this static noinline helper):
-// length via FUN_00cb10d0 (+1 for the NUL), block allocated through the task
+// length via hkString_strLen (+1 for the NUL), block allocated through the task
 // memory router's allocator, contents filled by FUN_00cb1090.
 
 struct FNVTaskMemoryRouter;
 
-extern "C" int __cdecl FUN_00cb10d0(int);
+extern "C" int __cdecl hkString_strLen(int);
 extern "C" FNVTaskMemoryRouter* __cdecl FUN_00c85750();
 extern "C" void* __cdecl AllocateWithHeader(void* allocator, unsigned int count);
 extern "C" void __cdecl FUN_00cb1090(void* block, int value);
@@ -10583,11 +10590,11 @@ struct CbobRouter
     void* allocator;
 };
 
-// Allocates a block of FUN_00cb10d0(s) + 1 units from the router's allocator, fills it from s via FUN_00cb1090, and returns it.
+// Allocates a block of hkString_strLen(s) + 1 units from the router's allocator, fills it from s via FUN_00cb1090, and returns it.
 // @fnv 0x00cb0aa0
 static __declspec(noinline) void* FUN_00cb0aa0(char* s)
 {
-    unsigned int count = (unsigned int)(FUN_00cb10d0((int)s) + 1);
+    unsigned int count = (unsigned int)(hkString_strLen((int)s) + 1);
     CbobRouter* router = (CbobRouter*)FUN_00c85750();
     void* block = AllocateWithHeader(router->allocator, count);
     FUN_00cb1090(block, (int)s);
@@ -10842,7 +10849,7 @@ struct CBB050Object
     void FUN_00a7b4a0(ReadStream* stream);
     void FUN_00cbb050(ReadStream* stream);
 };
-// Calls FUN_00a7b4a0, loads a count from the stream, passes it to the array's FUN_00cbadf0, then calls stream->FUN_00a645b0 count times.
+// Calls FUN_00a7b4a0, loads a count from the stream, passes it to the array's FUN_00cbadf0, then calls stream->NiStream_ReadLinkID count times.
 // @fnv 0x00cbb050
 void CBB050Object::FUN_00cbb050(ReadStream* stream)
 {
@@ -10851,7 +10858,7 @@ void CBB050Object::FUN_00cbb050(ReadStream* stream)
     Load(*stream->binary, &count, 1);
     array.FUN_00cbadf0(count, true);
     for (unsigned int i = 0; i < count; ++i)
-        stream->FUN_00a645b0();
+        stream->NiStream_ReadLinkID();
 }
 
 void* __cdecl FUN_00aa13e0(unsigned int size);
@@ -11241,7 +11248,7 @@ class BufferC520
     int unk7c;
 };
 
-// FUN_00cac980: __thiscall getter, 4 bytes: mov eax,[ecx+0x30]; ret
+// hkpCharacterProxy_getShapePhantom: __thiscall getter, 4 bytes: mov eax,[ecx+0x30]; ret
 // Original index entry spans 0xcac980..0xcac993 (20 bytes): this 4-byte getter,
 // 12 bytes of int3 COMDAT pad, then a byte-identical anonymous twin getter at
 // 0xcac990 (mov eax,[ecx+0x30]; ret) that the pack does not index.
@@ -11262,11 +11269,12 @@ struct FUN_00cac980_class
     int unk28;
     int unk2c;
     void* m_30;
-    void* FUN_00cac980();
+    void* hkpCharacterProxy_getShapePhantom();
 };
 
 // @fnv 0x00cac980
-void* FUN_00cac980_class::FUN_00cac980()
+// pdb: hkpCharacterProxy::getShapePhantom | hkpCharacterProxy.obj | fnv360_0721_beta, call_seq + skyrim(objrun), high
+void* FUN_00cac980_class::hkpCharacterProxy_getShapePhantom()
 {
     return m_30;
 }
@@ -11353,7 +11361,7 @@ extern "C" void __cdecl FUN_00c856c0(void*, void*);
 extern "C" void __cdecl CopyIfNonEmpty(char*, const char*, int);
 static __declspec(noinline) char* FUN_00cb0ad0(char* text, int count)
 {
-    int length = FUN_00cb10d0((int)text);
+    int length = hkString_strLen((int)text);
     if (length > count)
         length = count;
     char* result = (char*)AllocateWithHeader(FUN_00c85750()->allocator, length + 1);
@@ -11363,7 +11371,7 @@ static __declspec(noinline) char* FUN_00cb0ad0(char* text, int count)
 }
 static __declspec(noinline) void* FUN_00cb0aa0(char* text)
 {
-    int length = FUN_00cb10d0((int)text) + 1;
+    int length = hkString_strLen((int)text) + 1;
     void* result = AllocateWithHeader(FUN_00c85750()->allocator, length);
     FUN_00cb1090(result, (int)text);
     return result;
@@ -11404,7 +11412,7 @@ extern "C" char* __cdecl FUN_00cb0ad0(const char* text, int count);
 
 static __declspec(noinline) void* FUN_00cb0aa0(char* s)
 {
-    int n = FUN_00cb10d0((int)s) + 1;
+    int n = hkString_strLen((int)s) + 1;
     void* block = AllocateWithHeader(FUN_00c85750()->allocator, n);
     FUN_00cb1090(block, (int)s);
     return block;
@@ -11857,7 +11865,8 @@ void __cdecl InsertIntoContext(void* pList, void* pContext)
 
 // Floors a float (rounds toward negative infinity) using integer bit manipulation of its IEEE-754 representation.
 // @fnv 0x00cbfd80
-float __cdecl FUN_00cbfd80(float value)
+// pdb: hkMath::hkFloor | hkMathTypes.obj | fnv360_0822_retail, call_gap + bridge(uconst|call_gap) + skyrim(call_seq), high
+float __cdecl hkMath_hkFloor(float value)
 {
     union
     {
@@ -13541,7 +13550,7 @@ struct Item9bd0F3
 extern "C" Item9bd0F3* __cdecl FUN_0097a980(void* c, int k);
 struct Sub9bd0F3
 {
-    void FUN_009a1a00(void* rec);
+    void hkpBridgeConstraintAtom_init(void* rec);
 };
 struct Rec9bd0F3
 {
@@ -13593,7 +13602,7 @@ void Owner9bd0::FUN_00ca9bd0(Rec9bd0* apRecord, Key9bd0 key)
         pItem->removeReference();
     }
     rec->score = c->score;
-    rec->sub.FUN_009a1a00(rec);
+    rec->sub.hkpBridgeConstraintAtom_init(rec);
     vself->FUN_008fc3f0(rec, k);
 }
 
@@ -13604,7 +13613,7 @@ extern "C" void __cdecl CopyIfNonEmpty(void*, int, int);
 extern int DAT_01268358;
 static __declspec(noinline) void* FUN_00cb0ad0(char* s, int maxLen)
 {
-    int len = FUN_00cb10d0((int)s);
+    int len = hkString_strLen((int)s);
     if (len > maxLen)
         len = maxLen;
     char* p = (char*)AllocateWithHeader(FUN_00c85750()->allocator, len + 1);
@@ -14065,7 +14074,7 @@ struct ExtraSerializer
     virtual void slotac();
     virtual void slotb0();
     virtual SerializedExtraBody* Acquire(int* token);
-    void FUN_00c84d50(S_00ca59d0_Stream* stream);
+    void bhkShape_SaveBinary(S_00ca59d0_Stream* stream);
     void FUN_00ca77f0(S_00ca59d0_Stream* stream);
 };
 inline void SaveR(S_00ca59d0_Bin& bin, const unsigned int* p)
@@ -14098,7 +14107,7 @@ void ExtraSerializer::FUN_00ca77f0(S_00ca59d0_Stream* stream)
     if (*(unsigned char*)&stream->unk1E4 != 1)
         body->Swap();
     }
-    FUN_00c84d50(stream);
+    bhkShape_SaveBinary(stream);
     S_00ca59d0_Save(*stream->unk250, &count, 1);
     for (int i = 0; i < count; ++i)
     {
@@ -14417,11 +14426,11 @@ struct S_00cb0030_Out : S_00ca4e10_Out
 
 struct S_00cb0030_Cls : S_00ca4e10_Cls
 {
-    void FUN_00ca4e10(S_00cb0030_Out* out);
+    void bhkBvTreeShape_CopyCinfo(S_00cb0030_Out* out);
     void FUN_00cb0030(S_00cb0030_Out* out);
 };
 
-// Calls FUN_00ca4e10, then if obj->unk18 yields a source, fills out unk10, unk20, unk24, unk28, unk2c and unk40 from its fields.
+// Calls bhkBvTreeShape_CopyCinfo, then if obj->unk18 yields a source, fills out unk10, unk20, unk24, unk28, unk2c and unk40 from its fields.
 // @f3 0x00921ba0 (community match, verified in this file)
 struct S_b173Src
 {

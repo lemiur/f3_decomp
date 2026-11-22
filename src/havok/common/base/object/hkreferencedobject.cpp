@@ -25,11 +25,12 @@ void FUN_00c903b0_class::ReleaseReference()
 
 struct FUN_00c903a0_class
 {
-    void FUN_00c903a0();
+    void hkSweptTransformUtil_setTimeInformation();
 };
 
 // @fnv 0x00c903a0
-void FUN_00c903a0_class::FUN_00c903a0()
+// pdb: hkSweptTransformUtil::setTimeInformation | hkSweptTransformUtil.obj | fnv360_0721_beta, call_gap + skyrim(call_gap), high
+void FUN_00c903a0_class::hkSweptTransformUtil_setTimeInformation()
 {
     if ((*(short*)((char*)this + 4)) != 0)
         (*(short*)((char*)this + 6))++;

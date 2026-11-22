@@ -107,11 +107,11 @@ extern const char DAT_010eec18[];
 extern const char DAT_010eec28[];
 extern const char DAT_010eec38[];
 extern "C" void* g_011f4430;
-void* __cdecl FUN_00a5f200();
+void* __cdecl BSPlayerDistanceCheckController_GetRTTI();
 extern "C" int g_011f443c;
 int __cdecl FUN_00a5f4f0();
 int __cdecl FUN_00a5f500();
-int __cdecl FUN_00dc9e60();
+int __cdecl hkpGenericConstraintData_getType();
 struct NiDX9Renderer {
     unsigned int pad[0x228];
     unsigned int m_8a0;
@@ -657,7 +657,7 @@ struct FUN_00e79f40_Stream {
     unsigned int pad28;
     char* dst;
 };
-int FUN_00e79f40(FUN_00e79f40_Stream* pStream);
+int NiD3DShaderDeclaration_Pack_ByteToUByteColor(FUN_00e79f40_Stream* pStream);
 struct FUN_00e78bd0_shell {
     bool flag;          // +0x00
     void* field_04;     // +0x04
@@ -8220,7 +8220,7 @@ struct FUN_00e79370_Info {
     unsigned int pad28;
     unsigned char* pucDest;
 };
-unsigned int FUN_00e79370(FUN_00e79370_Info* pkInfo);
+unsigned int NiD3DShaderDeclaration_Pack_UnsignedLongToFloat(FUN_00e79370_Info* pkInfo);
 struct NormalizedStream {
     unsigned short lastComponent, unk02;
     unsigned short type, unk06;
@@ -8608,7 +8608,7 @@ struct PackingPacket {
     void* vertexData;
     void* stripLengths;
     bool FUN_00e8eeb0();
-    void FUN_00e8ef10(unsigned int);
+    void NiGeometryBufferData_SetStreamCount(unsigned int);
     void FUN_00e8eee0();
 };
 struct PackingData {
@@ -13247,7 +13247,7 @@ unsigned int unk00, flags; Owner108* owner; unsigned int unk0c,unk10; bool dynam
 unsigned int activeVertices,vertices,streamCount,unk24; void** streams; unsigned int indexCount,indexOffset; void* indexBuffer; unsigned int unk38,unk3c,stripLengths,triangles,stripCount;void* activeTriangles;void* indices;
 __forceinline void SetVertexCounts(unsigned short av,unsigned short v) { activeVertices=av; vertices=v; }
 __forceinline void SetTriangleCounts(unsigned short at,unsigned short t,void* lens,unsigned short strips,void* idx) { stripLengths=at; triangles=t; activeTriangles=lens; indices=idx; stripCount=strips; }
-bool FUN_00e8eeb0(); void FUN_00e8ef10(unsigned int); void FUN_00e8eee0();
+bool FUN_00e8eeb0(); void NiGeometryBufferData_SetStreamCount(unsigned int); void FUN_00e8eee0();
 };
 struct Geo108 {unsigned int unk00,unk04,unk08,unk0c,unk10,unk14,revision;};
 class NiD3DHLSLVertexShader {public:const char* GetEntryPoint();};
@@ -15574,7 +15574,7 @@ struct S00e76450_Obj {
     bool FUN_00e76450(unsigned int x, unsigned int y, int a, int b, int c, int d, int e, int f);
 };
 void* __cdecl FUN_00ec44d0(void*, const void*, unsigned int);
-unsigned int __cdecl FUN_00e78f80(Stream_e78910* s);
+unsigned int __cdecl NiD3DShaderDeclaration_Pack_FloatToFloat(Stream_e78910* s);
 struct PixRow_00e79760 {
   unsigned short m_w0;        // +0x00
   unsigned short m_w2;        // +0x02
@@ -15592,8 +15592,8 @@ struct PixRow_00e79760 {
   unsigned int m_unk28;       // +0x28
   char* m_dst;                // +0x2c
 };
-unsigned int FUN_00e79760(PixRow_00e79760* r);
-unsigned int FUN_00e79d00(NormalizedStream* s);
+unsigned int NiD3DShaderDeclaration_Pack_UnsignedShortToFloat(PixRow_00e79760* r);
+unsigned int NiD3DShaderDeclaration_Pack_FloatToUByteColor(NormalizedStream* s);
 class DepthStencilE7B {
 public:
     unsigned int m_uiKey;
@@ -16258,9 +16258,9 @@ struct SrcObj {
 
     unsigned short FUN_00c25db0(unsigned short row);
     unsigned short FUN_00c25dd0();
-    float FUN_00c25eb0(unsigned short row);
+    float BSStripPSysData_GetTexCoordDelta(unsigned short row);
     const PointE69* GetElementField(unsigned short row, unsigned short col);
-    const PointE69* FUN_00c25e90(unsigned short row, unsigned short col);
+    const PointE69* BSStripPSysData_GetPointNorms(unsigned short row, unsigned short col);
     const ColorF* GetParticleColor(unsigned short row, unsigned short col);
 };
 static inline int WrapIndex(int i, int n)
@@ -18656,8 +18656,8 @@ static inline void S00e783b0_Pad(unsigned char* pucPad, unsigned short usCopy)
         *pucPad++ = 0;
     }
 }
-unsigned int __cdecl FUN_00e783b0(StreamCopyInfo* pkInfo);
-unsigned int FUN_00e78a70(Stream_e78910* s);
+unsigned int __cdecl NiD3DShaderDeclaration_Pack_UnsignedByteToUnsignedByte(StreamCopyInfo* pkInfo);
+unsigned int NiD3DShaderDeclaration_Pack_UnsignedShortToUByteColor(Stream_e78910* s);
 void* memcpy(void*,const void*,unsigned int);
 struct Stream78 {
  unsigned short type, unk02;
@@ -18672,7 +18672,7 @@ struct Stream78 {
  unsigned int unk24,unk28;
  char* pucDest;
 };
-unsigned int FUN_00e78e30(Stream78* pkInfo);
+unsigned int NiD3DShaderDeclaration_Pack_Float_ExtraOutsToZero(Stream78* pkInfo);
 unsigned int __cdecl DecodeVertexData(NormalizedStream* s);
 struct E7Context {
     unsigned int destFormat, sourceFormat;
@@ -22334,7 +22334,7 @@ struct CopyStreamData {
     int unk28;
     char* unk2C;
 };
-int __cdecl FUN_00e78d50(CopyStreamData* data);
+int __cdecl NiD3DShaderDeclaration_Pack_Float_DropIns(CopyStreamData* data);
 struct ParticlePoint {
  float x,y,z;
  ParticlePoint() {}
@@ -22708,7 +22708,7 @@ struct StripStream {
 struct StripRendererData {
     unsigned int GetStride(unsigned int stream) const { return stream < streamCount ? strides[stream] : 0; }
     void SetVertexCount(unsigned int count) { maxVertices = vertexCount = count; }
-    void FUN_00e8ef10(unsigned int);
+    void NiGeometryBufferData_SetStreamCount(unsigned int);
     void SetComPointer(unsigned int);
     unsigned int unk000;
     unsigned int flags;
@@ -23402,7 +23402,7 @@ struct LineBufferData {
     unsigned int unk30;
     unsigned int unk34;
     unsigned int m_uiBufferSize;
-    void FUN_00e8ef10(unsigned int uiStreamCount);
+    void NiGeometryBufferData_SetStreamCount(unsigned int uiStreamCount);
     void FUN_00e8f010(unsigned int uiFVF);
 };
 struct LineGeomData {
@@ -26979,10 +26979,11 @@ public:
     unsigned int m_1c;
     unsigned int m_20;
     OuterSlot* m_24;
-    bool FUN_00e78c60(FUN_00e69660_shell* a, unsigned int b, unsigned int c) throw();
+    bool NiD3DShaderDeclaration_Initialize(FUN_00e69660_shell* a, unsigned int b, unsigned int c) throw();
 };
 // @fnv 0x00e78c60
-bool DeclMap786::FUN_00e78c60(FUN_00e69660_shell* a, unsigned int b, unsigned int c) throw() {
+// pdb: NiD3DShaderDeclaration::Initialize | NiD3DShaderDeclaration.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(caller_sim), high
+bool DeclMap786::NiD3DShaderDeclaration_Initialize(FUN_00e69660_shell* a, unsigned int b, unsigned int c) throw() {
     m_08 = a;
     m_0c = m_08->h8bc;
     m_10 = m_08->dev; m_10->f01();

@@ -185,7 +185,7 @@ bool __stdcall IsTgaExtension(const char* ext)
     return false;
 }
 
-struct FUN_00a8d750 : NiImageReader
+struct NiTGAReader : NiImageReader // src: F3_EXE vtable 0x00e24dd8 (old: FUN_00a8d750)
 {
     unsigned char b100, b101, b102;
     unsigned char pad103;
@@ -198,11 +198,11 @@ struct FUN_00a8d750 : NiImageReader
     NiPixelFormat m_eFormat;
     unsigned int d160, d164, d168, d16c, d170, d174;
     unsigned char b178, b179, b17a, b17b, b17c;
-    FUN_00a8d750();
+    NiTGAReader();
     virtual void vfn_x();
 };
 // @fnv 0x00a8d750
-FUN_00a8d750::FUN_00a8d750()
+NiTGAReader::NiTGAReader()
 {
     b100 = 0;
     b101 = 0;

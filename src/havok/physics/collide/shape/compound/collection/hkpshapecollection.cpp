@@ -22,7 +22,8 @@ int hkpShapeCollection_L::FUN_00d213d0()
 }
 
 // @fnv 0x00d213f0
-void __stdcall FUN_00d213f0(int, int)
+// pdb: hkpMoppShapeMediator::setSplittingPlaneDirections | hkpMoppShapeMediator.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void __stdcall hkpMoppShapeMediator_setSplittingPlaneDirections(int, int)
 {}
 
 // @fnv 0x00d21400
@@ -90,7 +91,7 @@ class FUN_00d21450_Class : public hkpShape
     char unk16;
     char unk17;
 
-    hkBoolRet FUN_00d21450(const ShapeRayCastQuery& input, ShapeRayCastOutput& output) const;
+    hkBoolRet hkpShapeCollection_castRayImpl(const ShapeRayCastQuery& input, ShapeRayCastOutput& output) const;
 };
 
 struct ShapeRayCastQuery
@@ -130,7 +131,8 @@ class hkpRayShapeCollectionFilter
 
 // Calls RayCast on each child in m_container (filtered if a filter is given), stores the last hit shape key in output.m_uiShapeKeys, returns true if any hit.
 // @fnv 0x00d21450
-hkBoolRet FUN_00d21450_Class::FUN_00d21450(const ShapeRayCastQuery& input, ShapeRayCastOutput& output) const
+// pdb: hkpShapeCollection::castRayImpl | hkpShapeCollection.obj | fnv360_0822_retail, objrun + skyrim(objrun), high
+hkBoolRet FUN_00d21450_Class::hkpShapeCollection_castRayImpl(const ShapeRayCastQuery& input, ShapeRayCastOutput& output) const
 {
     volatile unsigned int time;
     StringCursor* stream = (StringCursor*)TlsGetValue(DAT_0126835c);
@@ -365,14 +367,15 @@ class hkPackedNiTriStripsShape_StandIn : public hkpShapeCollection
     virtual ~hkPackedNiTriStripsShape_StandIn();
     virtual void Unk04();
     virtual int First();
-    virtual float FUN_00d216e0(int arg);
+    virtual float hkpShapeCollection_getMaximumProjection(int arg);
     virtual void Unk10();
     virtual void Unk14();
 };
 
 // Iterates child shapes via ShapeIterator, calls GetMaxProjection(arg) on each and returns the largest value, between two timer records.
 // @fnv 0x00d216e0
-float hkPackedNiTriStripsShape_StandIn::FUN_00d216e0(int arg)
+// pdb: hkpShapeCollection::getMaximumProjection | hkpShapeCollection.obj | fnv360_0822_retail, ustr + bridge(ustr|vtable) + skyrim(ustr), high
+float hkPackedNiTriStripsShape_StandIn::hkpShapeCollection_getMaximumProjection(int arg)
 {
     volatile float maxProj;
     __declspec(align(16)) float buf[125];

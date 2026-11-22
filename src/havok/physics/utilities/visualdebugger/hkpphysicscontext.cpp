@@ -11,7 +11,7 @@ void __cdecl FUN_009f6a60();
 void __cdecl FUN_009f6290();
 void __cdecl FUN_009f57c0();
 void __cdecl FUN_009f5260();
-void __cdecl FUN_009f51a0();
+void __cdecl hkpInactiveContactPointViewer_registerViewer();
 void __cdecl FUN_009f5090();
 void __cdecl FUN_009f4250();
 void __cdecl FUN_009f3b60();
@@ -20,7 +20,7 @@ void __cdecl FUN_009f2850();
 void __cdecl FUN_009f1710();
 void __cdecl FUN_009f1170();
 void __cdecl FUN_009f05f0();
-void __cdecl FUN_009ef920();
+void __cdecl hkpWorldMemoryViewer_registerViewer();
 void __cdecl FUN_009ef4e0();
 
 void __cdecl FUN_00cd1ed0()
@@ -31,7 +31,7 @@ void __cdecl FUN_00cd1ed0()
     FUN_009f6290();
     FUN_009f57c0();
     FUN_009f5260();
-    FUN_009f51a0();
+    hkpInactiveContactPointViewer_registerViewer();
     FUN_009f5090();
     FUN_009f4250();
     FUN_009f3b60();
@@ -40,7 +40,7 @@ void __cdecl FUN_00cd1ed0()
     FUN_009f1710();
     FUN_009f1170();
     FUN_009f05f0();
-    FUN_009ef920();
+    hkpWorldMemoryViewer_registerViewer();
     FUN_009ef4e0();
 }
 
@@ -1166,11 +1166,12 @@ extern const CD2890Class g_CD2890WorldClass;
 
 struct CD2890World
 {
-    virtual const CD2890Class* FUN_00cd2890() const;
+    virtual const CD2890Class* bhkExtendedMeshShapeData_GetRTTI() const;
 };
 
 // @fnv 0x00cd2890
-const CD2890Class* CD2890World::FUN_00cd2890() const
+// pdb: bhkExtendedMeshShapeData::GetRTTI | bhkExtendedMeshShape.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+const CD2890Class* CD2890World::bhkExtendedMeshShapeData_GetRTTI() const
 {
     return &g_CD2890WorldClass;
 }

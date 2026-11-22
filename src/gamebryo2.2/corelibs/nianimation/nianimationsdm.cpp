@@ -174,7 +174,7 @@ void FUN_00a421c0();
 extern const char DAT_01096060[];  // NiAlphaController
 void CreateFloatInterpController();
 extern const char DAT_0109603c[];  // NiBlendAccumTransformInterpolator
-void FUN_00a39700();
+void NiBlendAccumTransformInterpolator_CreateObject();
 extern const char DAT_01096024[];  // NiBlendBoolInterpolator
 void FUN_00a565c0();
 extern const char DAT_01096008[];  // NiBlendColorInterpolator
@@ -204,7 +204,7 @@ void FUN_00a51c60();
 extern const char DAT_01095ee0[];  // NiBSplineCompColorInterpolator
 void CreateSplineCompColorInterpolator();
 extern const char DAT_01095ec0[];  // NiBSplineCompFloatInterpolator
-void FUN_00a51620();
+void NiBSplineCompFloatInterpolator_CreateObject();
 extern const char DAT_01095ea0[];  // NiBSplineCompPoint3Interpolator
 void CreateComp4();
 extern const char DAT_01095e7c[];  // NiBSplineCompTransformInterpolator
@@ -214,7 +214,7 @@ void FUN_00a50ad0();
 extern const char DAT_01095e44[];  // NiBSplinePoint3Interpolator
 void FUN_00a50840();
 extern const char DAT_01095e24[];  // NiBSplineTransformInterpolator
-void FUN_00a50180();
+void NiBSplineTransformInterpolator_CreateObject();
 extern const char DAT_01095e18[];  // NiColorData
 void CreateNiColorData();
 extern const char DAT_01095dfc[];  // NiColorExtraDataController
@@ -238,7 +238,7 @@ void FUN_00a4f000();
 extern const char DAT_01095d2c[];  // NiFloatsExtraDataPoint3Controller
 void FUN_00a4ecd0();
 extern const char DAT_01095d14[];  // NiGeomMorpherController
-void FUN_00a3b550();
+void NiGeomMorpherController_CreateObject();
 extern const char DAT_01095cfc[];  // NiKeyframeController
 void FUN_00a36810();
 extern const char DAT_01095cec[];  // NiKeyframeData
@@ -252,7 +252,7 @@ void FUN_00a4d0d0();
 extern const char DAT_01095c94[];  // NiLookAtController
 void CreateMorphData();
 extern const char DAT_01095c7c[];  // NiLookAtInterpolator
-void FUN_00a4c5a0();
+void NiLookAtInterpolator_CreateObject();
 extern const char DAT_01095c60[];  // NiMaterialColorController
 void FUN_00a4b790();
 extern const char DAT_01095c54[];  // NiMorphData
@@ -260,7 +260,7 @@ void CreateA51BF0();
 extern const char DAT_01095c30[];  // NiMultiTargetTransformController
 void CreateCtl();
 extern const char DAT_01095c1c[];  // NiPathController
-void FUN_00a4b270();
+void NiPathController_CreateObject();
 extern const char DAT_01095c08[];  // NiPathInterpolator
 void CreateA51BF0Base();
 extern const char DAT_01095bf0[];  // NiPoint3Interpolator
@@ -280,7 +280,7 @@ void FUN_00a47380();
 extern const char DAT_01095b74[];  // NiStringPalette
 void FUN_00a47150();
 extern const char DAT_01095b60[];  // NiTextKeyExtraData
-void FUN_00a46b70();
+void NiTextKeyExtraData_CreateObject();
 extern const char DAT_01095b40[];  // NiTextureTransformController
 void FUN_00a46950();
 extern const char DAT_01095b28[];  // NiTransformController
@@ -288,7 +288,7 @@ void FUN_00a36810();
 extern const char DAT_01095b18[];  // NiTransformData
 void FUN_00a4e040();
 extern const char DAT_01095b00[];  // NiTransformInterpolator
-void FUN_00a403f0();
+void NiTransformInterpolator_CreateObject();
 extern const char DAT_01095af0[];  // NiUVController
 void FUN_00a45f50();
 extern const char DAT_01095ae4[];  // NiUVData
@@ -296,9 +296,9 @@ void CreateControllerAllocation();
 extern const char DAT_01095ad4[];  // NiVisController
 void FUN_00a44f10();
 extern const char DAT_01095ac8[];  // BSAnimNotes
-void FUN_00a44940();
+void BSAnimNotes_CreateObject();
 extern const char DAT_01095ab8[];  // BSGrabIKNote
-void FUN_00a44380();
+void BSGrabIKNote_CreateObject();
 extern const char DAT_01095aa8[];  // BSLookIKNote
 void CreateLookIKNote();
 extern const char DAT_01095a88[];  // BSRotAccumTransfInterpolator
@@ -320,7 +320,7 @@ void FUN_00a2d8a0()
     {
         DAT_011f369d = true;
         FUN_00a64900(DAT_01096060, CreateFloatInterpController);
-        FUN_00a64900(DAT_0109603c, FUN_00a39700);
+        FUN_00a64900(DAT_0109603c, NiBlendAccumTransformInterpolator_CreateObject);
         FUN_00a64900(DAT_01096024, FUN_00a565c0);
         FUN_00a64900(DAT_01096008, CreateBlendColorInterpolator);
         FUN_00a64900(DAT_01095fec, CreateNiBlendFloatInterpolator);
@@ -335,12 +335,12 @@ void FUN_00a2d8a0()
         FUN_00a64900(DAT_01095f1c, FUN_00a51e10);
         FUN_00a64900(DAT_01095f00, FUN_00a51c60);
         FUN_00a64900(DAT_01095ee0, CreateSplineCompColorInterpolator);
-        FUN_00a64900(DAT_01095ec0, FUN_00a51620);
+        FUN_00a64900(DAT_01095ec0, NiBSplineCompFloatInterpolator_CreateObject);
         FUN_00a64900(DAT_01095ea0, CreateComp4);
         FUN_00a64900(DAT_01095e7c, CreateEvaluator);
         FUN_00a64900(DAT_01095e60, FUN_00a50ad0);
         FUN_00a64900(DAT_01095e44, FUN_00a50840);
-        FUN_00a64900(DAT_01095e24, FUN_00a50180);
+        FUN_00a64900(DAT_01095e24, NiBSplineTransformInterpolator_CreateObject);
         FUN_00a64900(DAT_01095e18, CreateNiColorData);
         FUN_00a64900(DAT_01095dfc, FUN_00a4fac0);
         FUN_00a64900(DAT_01095de8, FUN_00a3c130);
@@ -352,18 +352,18 @@ void FUN_00a2d8a0()
         FUN_00a64900(DAT_01095d6c, CreateNiFloatInterpolator);
         FUN_00a64900(DAT_01095d50, FUN_00a4f000);
         FUN_00a64900(DAT_01095d2c, FUN_00a4ecd0);
-        FUN_00a64900(DAT_01095d14, FUN_00a3b550);
+        FUN_00a64900(DAT_01095d14, NiGeomMorpherController_CreateObject);
         FUN_00a64900(DAT_01095cfc, FUN_00a36810);
         FUN_00a64900(DAT_01095cec, FUN_00a4e040);
         FUN_00a64900(DAT_01095cd8, FUN_00a4db60);
         FUN_00a64900(DAT_01095cc0, FUN_00a4d500);
         FUN_00a64900(DAT_01095ca8, FUN_00a4d0d0);
         FUN_00a64900(DAT_01095c94, CreateMorphData);
-        FUN_00a64900(DAT_01095c7c, FUN_00a4c5a0);
+        FUN_00a64900(DAT_01095c7c, NiLookAtInterpolator_CreateObject);
         FUN_00a64900(DAT_01095c60, FUN_00a4b790);
         FUN_00a64900(DAT_01095c54, CreateA51BF0);
         FUN_00a64900(DAT_01095c30, CreateCtl);
-        FUN_00a64900(DAT_01095c1c, FUN_00a4b270);
+        FUN_00a64900(DAT_01095c1c, NiPathController_CreateObject);
         FUN_00a64900(DAT_01095c08, CreateA51BF0Base);
         FUN_00a64900(DAT_01095bf0, FUN_00a49a30);
         FUN_00a64900(DAT_01095be4, FUN_00a49020);
@@ -373,16 +373,16 @@ void FUN_00a2d8a0()
         FUN_00a64900(DAT_01095b9c, FUN_00a47f20);
         FUN_00a64900(DAT_01095b84, FUN_00a47380);
         FUN_00a64900(DAT_01095b74, FUN_00a47150);
-        FUN_00a64900(DAT_01095b60, FUN_00a46b70);
+        FUN_00a64900(DAT_01095b60, NiTextKeyExtraData_CreateObject);
         FUN_00a64900(DAT_01095b40, FUN_00a46950);
         FUN_00a64900(DAT_01095b28, FUN_00a36810);
         FUN_00a64900(DAT_01095b18, FUN_00a4e040);
-        FUN_00a64900(DAT_01095b00, FUN_00a403f0);
+        FUN_00a64900(DAT_01095b00, NiTransformInterpolator_CreateObject);
         FUN_00a64900(DAT_01095af0, FUN_00a45f50);
         FUN_00a64900(DAT_01095ae4, CreateControllerAllocation);
         FUN_00a64900(DAT_01095ad4, FUN_00a44f10);
-        FUN_00a64900(DAT_01095ac8, FUN_00a44940);
-        FUN_00a64900(DAT_01095ab8, FUN_00a44380);
+        FUN_00a64900(DAT_01095ac8, BSAnimNotes_CreateObject);
+        FUN_00a64900(DAT_01095ab8, BSGrabIKNote_CreateObject);
         FUN_00a64900(DAT_01095aa8, CreateLookIKNote);
         FUN_00a64900(DAT_01095a88, CreateRotAccumTransfInterpolator);
         FUN_00a64900(DAT_01095a6c, CreateDerivedA43370);

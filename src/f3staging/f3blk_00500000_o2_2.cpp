@@ -198,12 +198,13 @@ int unk50;
 int unk54;
 int unk58;
 int unk5c;
-Ref* base; Record* FUN_00766020(); };
+Ref* base; Record* MobileObject_GetCurrentPackage(); };
 void FUN_006195d0(const char*, ...);
-bool __cdecl FUN_00511510(Ref* ref, int arg2, int arg3, double* result) {
+// pdb: Script::GetCurrentAIProcedureConditionFunction | TESConditionFunctions.obj | fnv360_0822_retail, caller_sim + skyrim(objrun), high
+bool __cdecl Script_GetCurrentAIProcedureConditionFunction(Ref* ref, int arg2, int arg3, double* result) {
 *result=0.0;
-if(ref && ref->v64() && ref->base && ref->FUN_00766020()) {
-Record* record=ref->FUN_00766020();
+if(ref && ref->v64() && ref->base && ref->MobileObject_GetCurrentPackage()) {
+Record* record=ref->MobileObject_GetCurrentPackage();
 Ref* base=ref->base;
 int group=record->group;
 int kind=g_categories[group][base->v159()];

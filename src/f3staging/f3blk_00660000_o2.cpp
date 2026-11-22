@@ -893,7 +893,7 @@ int unk44;
 int unk48;
 int unk4c;
  SequenceMap sequences;
- void FUN_0045c7f0(float);
+ void NiControllerManager_DeactivateAll(float);
  Sequence* Lookup(const FixedName&);
  bool IsKind(const TypeInfo* t) { TypeInfo* r=GetType(); while(r) { if(r==t) return true; r=r->base; } return false; }
  static Controller* Cast(Controller* c,const TypeInfo* t) { if(!c)return 0; unsigned mask=c->IsKind(t)?~0u:0u; return reinterpret_cast<Controller*>(mask & reinterpret_cast<unsigned>(c)); }
@@ -1227,7 +1227,7 @@ void TerminalState::FUN_00676b70() {
  if(controller) {
   Sequence* sequence=controller->Lookup(FixedName(DAT_00de2fa4));
   if(sequence) {
-   controller->FUN_0045c7f0(0.0f);
+   controller->NiControllerManager_DeactivateAll(0.0f);
    sequence->FUN_008aecd0(0,true,1.0f,0.0f,0,0);
    controller->flags|=8;
    sequence->unk48=-3.402823466e38f;
@@ -1502,7 +1502,7 @@ void __cdecl FUN_00669cc0(unsigned char param_1)
 
 // @f3 0x00679ad0 (community match, verified in this file)
 struct Ctl67{void FUN_00621690(int value);int FUN_00621640();};
-Ctl67* __stdcall FUN_006295a0(int which);
+Ctl67* __stdcall SystemColorManager_GetInstance(int which);
 struct Tile67{void FUN_00bef410(int trait,float value);};
 struct Iface67{char pad[0x9c];Tile67* tile;};
 extern Iface67* DAT_01075b24;
@@ -1511,13 +1511,13 @@ struct List67{char pad[0x14];unsigned int index;unsigned int first;unsigned int 
 static __forceinline unsigned char Bit5(unsigned int f){return (unsigned char)(f>>5)&1;}
 void __cdecl FUN_00679ad0(List67* list){
     if(DAT_010770ac && Bit5(DAT_010770ac->flags1a0)){
-        FUN_006295a0(4)->FUN_00621690(DAT_00f6b3d8[list->index]);
+        SystemColorManager_GetInstance(4)->FUN_00621690(DAT_00f6b3d8[list->index]);
         DAT_01075b24->tile->FUN_00bef410(4,0.0f);
         return;
     }
     list->first=0;
     list->index=0;
-    while(DAT_00f6b3d8[list->index]!=FUN_006295a0(4)->FUN_00621640()){
+    while(DAT_00f6b3d8[list->index]!=SystemColorManager_GetInstance(4)->FUN_00621640()){
         if(++list->index>=list->count){list->index=list->first;return;}
     }
 }
@@ -2080,7 +2080,7 @@ struct Sys {
     void FUN_00791920();
 };
 struct Hud {
-    void FUN_00617fd0(int a, int b);
+    void FaderManager_RemoveFader(int a, int b);
 };
 extern Menu* DAT_01076fd8;
 extern Settings* DAT_01079858;
@@ -2095,7 +2095,7 @@ void FUN_00674530()
         if (!(char)((DAT_01079858->flags >> 1) & 1))
             DAT_0107c0a0.FUN_00791920();
         if (DAT_01076fd8->b45)
-            DAT_01075974->FUN_00617fd0(0, 0);
+            DAT_01075974->FaderManager_RemoveFader(0, 0);
         DAT_01076fd8->tile->FUN_00bee190(0x1772, 1.0f, 1);
         DAT_01076fd8->FUN_00bfc470();
     }
@@ -2357,11 +2357,11 @@ if (DAT_01076ce9) DAT_01076cea = true;
 namespace f3m_0066c6d0 {
 struct List66 { int unk00; int unk04; int unk08; List66(){unk08=0;unk00=0;unk04=0;} void FUN_00496ac0(); ~List66(){FUN_00496ac0();} };
 struct Tile66 { void FUN_00bee190(int,float,bool); void FUN_00bf11a0(int,const char*,bool); void FUN_00bf1eb0(int); };
-struct Guard66 { int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; int unk1C; int unk20; int unk24; int unk28; int unk2C; int unk30; int unk34; int unk38; int unk3C; int unk40; int unk44; int unk48; int unk4C; int unk50; int unk54; int unk58; int unk5C; int unk60; int unk64; int unk68; int unk6C; int unk70; int unk74; Tile66* unk78; Tile66* GetTile() { return unk78; } Tile66* FUN_00bfd250(Tile66*,const char*,int); };
+struct Guard66 { int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; int unk1C; int unk20; int unk24; int unk28; int unk2C; int unk30; int unk34; int unk38; int unk3C; int unk40; int unk44; int unk48; int unk4C; int unk50; int unk54; int unk58; int unk5C; int unk60; int unk64; int unk68; int unk6C; int unk70; int unk74; Tile66* unk78; Tile66* GetTile() { return unk78; } Tile66* Menu_RenderTemplate(Tile66*,const char*,int); };
 namespace cons66 { extern Guard66* DAT_01076dd4; }
 extern const char DAT_00e072a4[], DAT_00e07298[];  int __cdecl FUN_00becd70(const char*,int);
 struct FUN_0066c6d0 { List66 list; int unk0C; int unk10; Tile66* unk14; float unk18; int unk1C; int unk20; FUN_0066c6d0(int,const char*); };
-FUN_0066c6d0::FUN_0066c6d0(int value,const char* text) { unk18=0.0f; unk10=20; unk0C=20; unk1C=0; unk14=cons66::DAT_01076dd4->FUN_00bfd250(cons66::DAT_01076dd4->unk78,DAT_00e072a4,0); unk14->FUN_00bee190(0x1004,(float)value,true); unk14->FUN_00bf11a0(0xfc4,text,true); unk14->FUN_00bee190(0xfaf,0.0f,true); int id=FUN_00becd70(DAT_00e07298,-1); unk14->FUN_00bee190(id,1.0f,true); unk14->FUN_00bf1eb0(0); unk20=0; }
+FUN_0066c6d0::FUN_0066c6d0(int value,const char* text) { unk18=0.0f; unk10=20; unk0C=20; unk1C=0; unk14=cons66::DAT_01076dd4->Menu_RenderTemplate(cons66::DAT_01076dd4->unk78,DAT_00e072a4,0); unk14->FUN_00bee190(0x1004,(float)value,true); unk14->FUN_00bf11a0(0xfc4,text,true); unk14->FUN_00bee190(0xfaf,0.0f,true); int id=FUN_00becd70(DAT_00e07298,-1); unk14->FUN_00bee190(id,1.0f,true); unk14->FUN_00bf1eb0(0); unk20=0; }
 }   // namespace f3m_0066c6d0
 
 // @f3 0x0066a3a0 (community match, verified in this file)
@@ -2437,7 +2437,7 @@ extern bool DAT_010770b4;
 namespace f3m_0067bf60 {
 namespace SmallStartup {
 struct Token { void FUN_00be7910(); }; Token* __stdcall FUN_00be78d0(int);
-struct System { int FUN_00441f30(); void FUN_00446220(int); void FUN_0043cd30(); void FUN_0043bbe0(); }; extern System* DAT_0106cdcc;
+struct System { int FUN_00441f30(); void TESDataHandler_CompileFiles(int); void FUN_0043cd30(); void FUN_0043bbe0(); }; extern System* DAT_0106cdcc;
 struct Flags {
  int unk000;
  int unk004;
@@ -2589,7 +2589,7 @@ struct Cache { void FUN_0078cf20(); }; extern Cache DAT_0107c0a0;
 struct Other { void FUN_005543b0(); }; extern Other* DAT_010721b8;
 void FUN_00c24b70(); void FUN_00619790();
 }
-void FUN_0067bf60() { using namespace SmallStartup; if(!DAT_010770b4) { FUN_00be78d0(1)->FUN_00be7910(); if(DAT_0106cdcc->FUN_00441f30()) { bool absent=!(DAT_01079858->flags&1); DAT_01079858->flags|=1; DAT_0106cdcc->FUN_00446220(1); DAT_0106cdcc->FUN_0043cd30(); if(!absent) DAT_01079858->flags|=1; else DAT_01079858->flags&=~1; DAT_0107c0a0.FUN_0078cf20(); DAT_0106cdcc->FUN_0043bbe0(); } DAT_010721b8->FUN_005543b0(); FUN_00c24b70(); DAT_010770b4=true; } FUN_00619790(); }
+void FUN_0067bf60() { using namespace SmallStartup; if(!DAT_010770b4) { FUN_00be78d0(1)->FUN_00be7910(); if(DAT_0106cdcc->FUN_00441f30()) { bool absent=!(DAT_01079858->flags&1); DAT_01079858->flags|=1; DAT_0106cdcc->TESDataHandler_CompileFiles(1); DAT_0106cdcc->FUN_0043cd30(); if(!absent) DAT_01079858->flags|=1; else DAT_01079858->flags&=~1; DAT_0107c0a0.FUN_0078cf20(); DAT_0106cdcc->FUN_0043bbe0(); } DAT_010721b8->FUN_005543b0(); FUN_00c24b70(); DAT_010770b4=true; } FUN_00619790(); }
 }   // namespace f3m_0067bf60
 
 // @f3 0x00672970 (community match, verified in this file)
@@ -2635,13 +2635,13 @@ struct Action {
  int unk34;
  int unk38;
  int unk3c;
-Counter counter; void FUN_004ee000(Player*,int,int,int); };
-struct Target { void FUN_00518c40(Action*,int,int,int); };
+Counter counter; void TESObjectREFR_Activate(Player*,int,int,int); };
+struct Target { void Script_Run(Action*,int,int,int); };
 struct Activation { int unk00; Target* target; Action* action; };
 struct Array { virtual ~Array(); virtual void* FUN_005d2de0(unsigned); virtual void FUN_005bb6e0(void*); Activation** data; unsigned size; unsigned capacity; void Clear() { if(data) { void* memory=data; FUN_005bb6e0(memory); data=0; capacity=0; size=0; } } };
 extern Array DAT_00f6b1ac; signed char FUN_00619750();
 }
-void FUN_00668440() { using namespace N668440; int index=FUN_00619750(); if(index!=DAT_00f6b1ac.size-1) { Activation* activation=DAT_00f6b1ac.data[index]; activation->target->FUN_00518c40(activation->action,0,0,0); } else { void* pointer=DAT_00f6b1ac.data[index]->action; int count=static_cast<Action*>(pointer)->counter.FUN_0040ac80(); DAT_00f6b1ac.data[index]->action->FUN_004ee000(N668440::DAT_0107a104,0,0,count); } DAT_00f6b1ac.Clear(); }
+void FUN_00668440() { using namespace N668440; int index=FUN_00619750(); if(index!=DAT_00f6b1ac.size-1) { Activation* activation=DAT_00f6b1ac.data[index]; activation->target->Script_Run(activation->action,0,0,0); } else { void* pointer=DAT_00f6b1ac.data[index]->action; int count=static_cast<Action*>(pointer)->counter.FUN_0040ac80(); DAT_00f6b1ac.data[index]->action->TESObjectREFR_Activate(N668440::DAT_0107a104,0,0,count); } DAT_00f6b1ac.Clear(); }
 
 
 
@@ -8217,7 +8217,7 @@ void Owner::FUN_006620c0() {
 // @f3 0x0067f920 (community match, verified in this file)
 namespace menu_rebuild {
 struct TileValue {
- void FUN_00beafa0();
+ void Tile_Value_ClearActions();
  void FUN_00beb200(float value, int propagate);
 };
 struct TileName { void FUN_004019c0(const char*, int); };
@@ -8232,11 +8232,11 @@ struct MenuTile {
  int unk1c;
  TileName name;
  double FUN_00becf40(int property);
- void FUN_00bf05a0(int property,float from,float to,float duration,int mode);
+ void Tile_AddFadeControl(int property,float from,float to,float duration,int mode);
  void FUN_00bf11a0(int property,const char* text,int propagate);
  void FUN_00bee190(int property,float value,int propagate);
  MenuTile* FUN_00bed3c0(int id);
- TileValue* FUN_00bea870(int property);
+ TileValue* Tile_GetValueQ(int property);
  TileValue* FUN_00bece90(int property);
 };
 struct Option;
@@ -8400,7 +8400,7 @@ void Menu::FUN_0067f920(unsigned mask)
  list.FUN_0067a7f0(1);
  int alpha=FUN_00becd70(&DAT_00e08010,-1);
  if(tile030->FUN_00becf40(alpha) < 255.0)
-  tile030->FUN_00bf05a0(alpha,0.0f,255.0f,0.25f,0);
+  tile030->Tile_AddFadeControl(alpha,0.0f,255.0f,0.25f,0);
  tile038->FUN_00bf11a0(0xfc4,DAT_00f647f4,1);
  for(unsigned i=0;i<userOptions.Size();++i) {
   if(userOptions[i]->mask & mask) {
@@ -8427,20 +8427,20 @@ void Menu::FUN_0067f920(unsigned mask)
   tile->name.FUN_004019c0(basicOptions[i]->label,0);
   tile->FUN_00bee190(0x1007,16.0f,1);
   MenuTile* child=tile->FUN_00bed3c0(100);
-  TileValue* value=child->FUN_00bea870(0xfa3);
-  value->FUN_00beafa0(); value->FUN_00beb200(0.0f,1);
+  TileValue* value=child->Tile_GetValueQ(0xfa3);
+  value->Tile_Value_ClearActions(); value->FUN_00beb200(0.0f,1);
   value=child->FUN_00bece90(0xfaf);
-  value->FUN_00beafa0(); value->FUN_00beb200(0.0f,1);
+  value->Tile_Value_ClearActions(); value->FUN_00beb200(0.0f,1);
   child=tile->FUN_00bed3c0(102);
-  value=child->FUN_00bea870(0xfa3);
-  value->FUN_00beafa0(); value->FUN_00beb200(0.0f,1);
+  value=child->Tile_GetValueQ(0xfa3);
+  value->Tile_Value_ClearActions(); value->FUN_00beb200(0.0f,1);
   value=child->FUN_00bece90(0xfaf);
-  value->FUN_00beafa0(); value->FUN_00beb200(0.0f,1);
+  value->Tile_Value_ClearActions(); value->FUN_00beb200(0.0f,1);
   child=tile->FUN_00bed3c0(101);
-  value=child->FUN_00bea870(0xfa3);
-  value->FUN_00beafa0(); value->FUN_00beb200(1.0f,1);
+  value=child->Tile_GetValueQ(0xfa3);
+  value->Tile_Value_ClearActions(); value->FUN_00beb200(1.0f,1);
   value=child->FUN_00bece90(0xfaf);
-  value->FUN_00beafa0(); value->FUN_00beb200(0.0f,1);
+  value->Tile_Value_ClearActions(); value->FUN_00beb200(0.0f,1);
  }
  float maximum=0.0f;
  if(mask&8) { float candidate=(float)tile004->FUN_00becf40(0x1005); if(DAT_00db38b0>candidate) {} else maximum=candidate; }
@@ -10507,8 +10507,8 @@ unsigned flags;unsigned unk1a4,unk1a8,unk1ac;Option*selected;void FUN_0067bd60()
 
 // @f3 0x00673210 (community match, verified in this file)
 namespace f3m_00673210 {
-namespace N673210 {extern unsigned DAT_01076f54;struct Tile{bool FUN_00becf80(unsigned);};struct Value{double FUN_0047cf30(int);bool FUN_0047d260(int);};struct Record{Tile*tile;Value*value;};}
-int FUN_00673210(N673210::Record*a,N673210::Record*b){using namespace N673210;int result=0;bool left=!a->tile->FUN_00becf80(N673210::DAT_01076f54);bool right=!b->tile->FUN_00becf80(N673210::DAT_01076f54);if(left&&!right)result=1;else if(!left&&right)return-1;else{double value=a->value->FUN_0047cf30(0);if(b->value->FUN_0047cf30(0)>value)result=1;else{value=a->value->FUN_0047cf30(0);if(b->value->FUN_0047cf30(0)<value)result=-1;else if(a->value->FUN_0047d260(0))result=-1;else if(b->value->FUN_0047d260(0))result=1;}}if(left&&right)result=-result;return result;}
+namespace N673210 {extern unsigned DAT_01076f54;struct Tile{bool FUN_00becf80(unsigned);};struct Value{double FUN_0047cf30(int);bool ItemChange_GetWorn(int);};struct Record{Tile*tile;Value*value;};}
+int FUN_00673210(N673210::Record*a,N673210::Record*b){using namespace N673210;int result=0;bool left=!a->tile->FUN_00becf80(N673210::DAT_01076f54);bool right=!b->tile->FUN_00becf80(N673210::DAT_01076f54);if(left&&!right)result=1;else if(!left&&right)return-1;else{double value=a->value->FUN_0047cf30(0);if(b->value->FUN_0047cf30(0)>value)result=1;else{value=a->value->FUN_0047cf30(0);if(b->value->FUN_0047cf30(0)<value)result=-1;else if(a->value->ItemChange_GetWorn(0))result=-1;else if(b->value->ItemChange_GetWorn(0))result=1;}}if(left&&right)result=-result;return result;}
 }   // namespace f3m_00673210
 
 // @f3 0x0067d210 (community match, verified in this file)
@@ -12549,7 +12549,7 @@ struct Tile {
     Menu* FUN_00beab90();
     float FUN_00becf40(int id);
     void FUN_00bee190(int id, float v, bool b);
-    Tile* FUN_00beabd0(const char* name);
+    Tile* Tile_GetChildByName(const char* name);
 };
 struct Iface {
     int unk00;
@@ -12606,9 +12606,9 @@ extern unsigned int DAT_01076cf0;
 extern void** DAT_00f6b1a0;
 extern unsigned int DAT_00f6b1a4;
 extern float DAT_010732dc;
-Menu* __cdecl FUN_00beaf00(int id);
-int __cdecl FUN_006191a0();
-float __cdecl FUN_00bea750();
+Menu* __cdecl Tile_GetMenuByClass(int id);
+int __cdecl Interface_GetTopMenuID();
+float __cdecl Tile_GetMaximumDepth();
 void* __cdecl FUN_00beb8c0(int a, const char* b);
 bool __cdecl FUN_00619b80();
 void __cdecl FUN_00619ba0(int a);
@@ -12618,9 +12618,9 @@ bool __cdecl FUN_00669700()
 {
     Iface* iface = DAT_01075b24;
     bool flag = false;
-    Menu* old = FUN_00beaf00(0x3e9);
+    Menu* old = Tile_GetMenuByClass(0x3e9);
     if (old) delete old;
-    if (FUN_006191a0()) flag = true;
+    if (Interface_GetTopMenuID()) flag = true;
     Tile* tile = iface->unk9C->FUN_00bf37b0("Data\\Menus\\message_menu.xml");
     DAT_01076cec = tile->FUN_00beab90();
     if (DAT_01076cec && DAT_01076cec->GetID() == 0x3e9) {
@@ -12629,14 +12629,14 @@ bool __cdecl FUN_00669700()
             if (DAT_01076cec->unk28[i] == 0) return false;
         DAT_011790c8->FUN_00bcfcd0("UIPopUpMessageWindow", 0x121, 0).FUN_00bd00c0();
         if (tile->FUN_00becf40(0xfa7) == 6006.0f || tile->FUN_00becf40(0xfa7) == 102.0)
-            tile->FUN_00bee190(0xfad, FUN_00bea750(), true);
+            tile->FUN_00bee190(0xfad, Tile_GetMaximumDepth(), true);
         DAT_01076cec->sub3C.Init(DAT_01076cec->unk28[4]);
         if (DAT_01076cf0 < DAT_00f6b1a4 && DAT_00f6b1a0[DAT_01076cf0])
             DAT_01076cec->FUN_00668e80();
         if (flag) {
             Tile* t = DAT_01076cec->unk04;
             float f = DAT_010732dc * 255.0;
-            t->FUN_00beabd0("MM_Background")->FUN_00bee190(0xfa9, f, true);
+            t->Tile_GetChildByName("MM_Background")->FUN_00bee190(0xfa9, f, true);
         }
         if (FUN_00619b80()) FUN_00619ba0(1);
         DAT_01076cec->FUN_00bfd010(0);
@@ -13262,7 +13262,7 @@ struct QList13c {
 class QClip {
 public:
     float FUN_00becf40(unsigned int channel);
-    void FUN_00bf05a0(unsigned int channel, float first, float last, float time, bool reverse);
+    void Tile_AddFadeControl(unsigned int channel, float first, float last, float time, bool reverse);
 };
 
 unsigned int __cdecl FUN_00becd70(const char* name, int scope);
@@ -13298,11 +13298,11 @@ void Q0067eef0::FUN_0067eef0()
 
     unsigned int alpha = FUN_00becd70(DAT_00e08010, -1);
     if (unk60->FUN_00becf40(alpha) < FUN_00dbeb78)
-        unk60->FUN_00bf05a0(alpha, 0.0f, FUN_00dc5c94, FUN_00dbea4c, false);
+        unk60->Tile_AddFadeControl(alpha, 0.0f, FUN_00dc5c94, FUN_00dbea4c, false);
 
     alpha = FUN_00becd70(DAT_00e08010, -1);
     if (unk3c->FUN_00becf40(alpha) < FUN_00dbeb78)
-        unk3c->FUN_00bf05a0(alpha, 0.0f, FUN_00dc5c94, FUN_00dbea4c, false);
+        unk3c->Tile_AddFadeControl(alpha, 0.0f, FUN_00dc5c94, FUN_00dbea4c, false);
 }
 
 }
@@ -13769,7 +13769,7 @@ struct NiPoint3Q { float x, y, z; };
 
 struct QUnk3C { float FUN_004d3ca0(); };
 struct QBase { QBase* FUN_004237e0(); };
-struct QHit { QBase* FUN_004e74a0(); };
+struct QHit { QBase* TESObjectREFR_GetTeleport(); };
 
 struct QRef {
     virtual void v000();
@@ -13948,7 +13948,7 @@ struct QRef {
     virtual void v173();
     virtual void v174();
     virtual float GetF175(int a);
-    bool FUN_004e8840();
+    bool TESObjectREFR_GetInterior();
     int FUN_004e8880();
     int unk04;
     int unk08;
@@ -14359,7 +14359,7 @@ struct QRef {
 struct QTile {
     void FUN_00bee190(unsigned int id, float value, int update);
     bool FUN_00beac60(unsigned int id);
-    void FUN_00bf05a0(unsigned int id, float a, float b, float c, int update);
+    void Tile_AddFadeControl(unsigned int id, float a, float b, float c, int update);
     double FUN_00becf40(unsigned int id);
     int unk00, unk04, unk08, unk0c, unk10, unk14, unk18, unk1c, unk20, unk24;
     QTile* unk28;
@@ -14370,7 +14370,7 @@ struct QPanel {
     QTile* unk28;
 };
 
-struct QXform { void FUN_004d3cc0(NiPoint3Q* out, NiPoint3Q* in, int flag); };
+struct QXform { void TESObjectCELL_AdjustCoordForNorthRotation(NiPoint3Q* out, NiPoint3Q* in, int flag); };
 
 struct QEntry { QHit* hit; int unk04, unk08, unk0c; };
 
@@ -14488,29 +14488,30 @@ struct FUN_006642b0_cls {
     QRef* unk104;
     int unk108;
     QXform* unk10c;
-    void FUN_006642b0();
+    void MapMenu_AddMapIcons();
     NiPoint3Q FUN_0065d600(NiPoint3Q pos, int x);
     void FUN_00662470();
-    void FUN_00662a90();
+    void MapMenu_DeletePlayerMarker();
     void FUN_00662870();
 };
 
 }
 
 namespace f3m_006642b0 {
-void FUN_006642b0_cls::FUN_006642b0()
+// pdb: MapMenu::AddMapIcons | MapMenu.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+void FUN_006642b0_cls::MapMenu_AddMapIcons()
 {
     QTile* tile = (unk70 == 0x1d) ? unk3c : unk34;
     NiPoint3Q r;
     r.y = r.x = 0.5f;
-    if (unk70 == 0x1d && DAT_0107a104->FUN_004e8840()) {
+    if (unk70 == 0x1d && DAT_0107a104->TESObjectREFR_GetInterior()) {
         unk104 = DAT_0107a104->unk588;
         if (!unk104) {
             FUN_0060ffc0 hits;
             FUN_004aa0c0 from(DAT_0107a104);
             if (FUN_005f3f90(FUN_005fd450(DAT_0107a104), FUN_005fc3f0(), &hits, 3, 0.0f, &from, 2)) {
                 if (hits.count > 0)
-                    unk104 = (QRef*)hits.Last()->hit->FUN_004e74a0()->FUN_004237e0();
+                    unk104 = (QRef*)hits.Last()->hit->TESObjectREFR_GetTeleport()->FUN_004237e0();
                 if (!unk104)
                     unk104 = DAT_0107a104;
             }
@@ -14521,25 +14522,25 @@ void FUN_006642b0_cls::FUN_006642b0()
     if (unk104) {
         NiPoint3Q pos = *unk104->GetPos();
         if (unk10c)
-            unk10c->FUN_004d3cc0(&pos, &pos, 1);
+            unk10c->TESObjectCELL_AdjustCoordForNorthRotation(&pos, &pos, 1);
         r = FUN_0065d600(pos, unk104->FUN_004e8880());
         tile->FUN_00bee190(0xfa3, 1.0f, 1);
         tile->FUN_00bee190(DAT_01076ba0, r.x, 1);
         tile->FUN_00bee190(DAT_01076b9c, r.y, 1);
         float f = -DAT_0107a104->GetF175(0) - FUN_00dc8060;
-        float g = DAT_0107a104->FUN_004e8840() ? DAT_0107a104->unk3c->FUN_004d3ca0() : 0.0f;
+        float g = DAT_0107a104->TESObjectREFR_GetInterior() ? DAT_0107a104->unk3c->FUN_004d3ca0() : 0.0f;
         f = f - g;
         tile->FUN_00bee190(0xffa, f, 1);
     } else {
         tile->FUN_00bee190(0xfa3, 0.0f, 1);
     }
     if (!tile->FUN_00beac60(0xff5))
-        tile->FUN_00bf05a0(0xff5, FUN_00dcb248, 255.0f, 1.0f, 1);
+        tile->Tile_AddFadeControl(0xff5, FUN_00dcb248, 255.0f, 1.0f, 1);
     unk74->FUN_00bee190(0xfa1, (float)(unk74->unk28->FUN_00becf40(0xfb1) * 0.5 - unk74->FUN_00becf40(0xfb1) * r.x), 0);
     unk74->FUN_00bee190(0xfa2, (float)(unk74->unk28->FUN_00becf40(0xfb0) * 0.5 - unk74->FUN_00becf40(0xfb0) * r.y), 0);
     FUN_00662470();
     if (DAT_0107a104->unk650) {
-        FUN_00662a90();
+        MapMenu_DeletePlayerMarker();
         FUN_00662870();
     }
 }
@@ -14552,13 +14553,13 @@ struct Tile {
     int FUN_00bece90(unsigned int property);
     void FUN_00bf11a0(unsigned int property, int value, int update);
     float FUN_00becf40(int id);
-    Tile* FUN_00bea870(int id);
-    void FUN_00beafa0();
+    Tile* Tile_GetValueQ(int id);
+    void Tile_Value_ClearActions();
     void FUN_00beec50(int a, Tile* b, int c);
     void FUN_00beaf40(int property, float value);
-    void FUN_00bf0720(int a);
+    void Tile_Value_CalculateValue(int a);
 };
-struct Menu { Tile* FUN_00bfd250(); };
+struct Menu { Tile* Menu_RenderTemplate(); };
 Menu* __stdcall FUN_00beab90(Tile* parent, int id, int unk);
 int __cdecl FUN_00becd70(const char* name, int len);
 struct Pool { void* FUN_0086b930(unsigned); };
@@ -14599,7 +14600,7 @@ Tile* FUN_0067f1b0_cls::FUN_0067f1b0(int value, int prop, int index, int id)
 {
     Tile* parent = unk0c;
     if (!parent || (!unk18 && !id)) return 0;
-    Tile* t = FUN_00beab90(parent, id ? id : unk18, 0)->FUN_00bfd250();
+    Tile* t = FUN_00beab90(parent, id ? id : unk18, 0)->Menu_RenderTemplate();
     if (!t->FUN_00bece90(0xfaa))
         t->FUN_00bee190(0xfaa, -1.0f, 1);
     if (prop)
@@ -14624,11 +14625,11 @@ Tile* FUN_0067f1b0_cls::FUN_0067f1b0(int value, int prop, int index, int id)
     for (Node* n = &list; n; n = n->next)
         if (n->item) count++;
     if (count == 1 && unk0c->FUN_00becf40(FUN_00becd70("_number_of_visible_items", -1)) > 0.0f) {
-        Tile* s = unk0c->FUN_00bea870(0xfb0);
-        s->FUN_00beafa0();
+        Tile* s = unk0c->Tile_GetValueQ(0xfb0);
+        s->Tile_Value_ClearActions();
         s->FUN_00beec50(0x7d0, t, 0xfb0);
         s->FUN_00beaf40(0x7d3, unk0c->FUN_00becf40(FUN_00becd70("_number_of_visible_items", -1)));
-        s->FUN_00bf0720(0);
+        s->Tile_Value_CalculateValue(0);
     }
     return t;
 }
@@ -14766,7 +14767,7 @@ FUN_006618c0::FUN_006618c0() {
 namespace N67C6F0 {
 struct Tile67c {
     float FUN_00becf40(int trait);
-    void FUN_00bf05a0(int trait, float from, float to, float time, int flags);
+    void Tile_AddFadeControl(int trait, float from, float to, float time, int flags);
 };
 int __cdecl FUN_00becd70(const char* name, int index);
 struct Mgr67c { int unk000; int unk004; int unk008; int unk00C; int unk010; int unk014; int unk018; int unk01C; int unk020; int unk024; int unk028; int unk02C; Tile67c* tile; int unk034; int unk038; int unk03C; int unk040; int unk044; int unk048; int unk04C; int unk050; int unk054; int unk058; int unk05C; int unk060; int unk064; int unk068; int unk06C; int unk070; int unk074; int unk078; int unk07C; int unk080; int unk084; int unk088; int unk08C; int unk090; int unk094; int unk098; int unk09C; int unk0A0; int unk0A4; int unk0A8; int unk0AC; int unk0B0; int unk0B4; int unk0B8; int unk0BC; int unk0C0; int unk0C4; int unk0C8; int unk0CC; int unk0D0; int unk0D4; int unk0D8; int unk0DC; int unk0E0; int unk0E4; int unk0E8; int unk0EC; int unk0F0; int unk0F4; int unk0F8; int unk0FC; int unk100; int unk104; int unk108; int unk10C; int unk110; int unk114; int unk118; int unk11C; int unk120; int unk124; int unk128; int unk12C; int unk130; int unk134; int unk138; int unk13C; int unk140; int unk144; int unk148; int unk14C; int unk150; int unk154; int unk158; int unk15C; int unk160; int unk164; int unk168; int unk16C; int unk170; int unk174; int unk178; int unk17C; int unk180; int unk184; int unk188; int unk18C; int unk190; int unk194; int unk198; int unk19C; unsigned int flags;
@@ -14779,7 +14780,7 @@ void FUN_0067c6f0() {
     if (!mgr) return;
     int alpha = FUN_00becd70("_alpha", -1);
     if (mgr->tile->FUN_00becf40(alpha) > 0.0f)
-        mgr->tile->FUN_00bf05a0(alpha, 255.0f, 0.0f, 0.25f, 0);
+        mgr->tile->Tile_AddFadeControl(alpha, 255.0f, 0.0f, 0.25f, 0);
     DAT_010770ac->flags |= 0x1000;
     if (!DAT_010770ac->FUN_0067bdd0()) DAT_010770ac->FUN_0067be30();
 }
@@ -16264,13 +16265,13 @@ struct Tile {
     int FUN_00bece90(unsigned int property);
     void FUN_00bf11a0(unsigned int property, int value, int update);
     float FUN_00becf40(int id);
-    Tile* FUN_00bea870(int id);
-    void FUN_00beafa0();
+    Tile* Tile_GetValueQ(int id);
+    void Tile_Value_ClearActions();
     void FUN_00beec50(int a, Tile* b, int c);
     void FUN_00beaf40(int property, float value);
-    void FUN_00bf0720(int a);
+    void Tile_Value_CalculateValue(int a);
 };
-struct Menu { Tile* FUN_00bfd250(); };
+struct Menu { Tile* Menu_RenderTemplate(); };
 Menu* __stdcall FUN_00beab90(Tile* parent, int id, int unk);
 int __cdecl FUN_00becd70(const char* name, int len);
 struct Pool { void* FUN_0086b930(unsigned); };
@@ -16311,7 +16312,7 @@ Tile* FUN_00663620_cls::FUN_00663620(int value, int prop, int index, int id)
 {
     Tile* parent = unk0c;
     if (!parent || (!unk18 && !id)) return 0;
-    Tile* t = FUN_00beab90(parent, id ? id : unk18, 0)->FUN_00bfd250();
+    Tile* t = FUN_00beab90(parent, id ? id : unk18, 0)->Menu_RenderTemplate();
     if (!t->FUN_00bece90(0xfaa))
         t->FUN_00bee190(0xfaa, -1.0f, 1);
     if (prop)
@@ -16336,11 +16337,11 @@ Tile* FUN_00663620_cls::FUN_00663620(int value, int prop, int index, int id)
     for (Node* n = &list; n; n = n->next)
         if (n->item) count++;
     if (count == 1 && unk0c->FUN_00becf40(FUN_00becd70("_number_of_visible_items", -1)) > 0.0f) {
-        Tile* s = unk0c->FUN_00bea870(0xfb0);
-        s->FUN_00beafa0();
+        Tile* s = unk0c->Tile_GetValueQ(0xfb0);
+        s->Tile_Value_ClearActions();
         s->FUN_00beec50(0x7d0, t, 0xfb0);
         s->FUN_00beaf40(0x7d3, unk0c->FUN_00becf40(FUN_00becd70("_number_of_visible_items", -1)));
-        s->FUN_00bf0720(0);
+        s->Tile_Value_CalculateValue(0);
     }
     return t;
 }
@@ -16416,7 +16417,7 @@ bool PageTerm::FUN_00675a00(bool bForward)
     Sequence* out;
     Sequence* sequence = controller->sequences.FUN_00bea7b0(NiFixedString(name),out) ? out : 0;
     if (sequence) {
-        controller->FUN_0045c7f0(0.0f);
+        controller->NiControllerManager_DeactivateAll(0.0f);
         sequence->FUN_008aecd0(0,true,1.0f,0.0f,0,0);
         controller->flags|=8;
         sequence->unk48=-3.402823466e38f;
@@ -16501,7 +16502,7 @@ struct QMenuB {
     int unk0e4;
     int unk0e8;
     NiPoint3B pos0ec;
-    void FUN_00662a90();
+    void MapMenu_DeletePlayerMarker();
     void FUN_00662870();
 };
 
@@ -16841,12 +16842,12 @@ void __cdecl FUN_00663b00()
     case 3:
         DAT_0107a104->FUN_0076d080(DAT_01076bb8->pos0ec, DAT_01076bb8->unk0e8);
         if (mode == 0)
-            DAT_01076bb8->FUN_00662a90();
+            DAT_01076bb8->MapMenu_DeletePlayerMarker();
         DAT_01076bb8->FUN_00662870();
         break;
     case 1:
         DAT_0107a104->FUN_0076d170();
-        DAT_01076bb8->FUN_00662a90();
+        DAT_01076bb8->MapMenu_DeletePlayerMarker();
         break;
     }
     DAT_01076bb8->pos0ec = NiPoint3_ZERO;
@@ -16953,9 +16954,9 @@ struct BSStringE {
 struct TileE {
     void FUN_00bf11a0(unsigned int id, const char* value, bool propagate);
     TileE* FUN_00bece90(int a, int b);
-    void FUN_00bf0720();
+    void Tile_Value_CalculateValue();
     TileE* FUN_00bed3c0(int a);
-    TileE* FUN_00beabd0(const char* name);
+    TileE* Tile_GetChildByName(const char* name);
 };
 unsigned int __cdecl FUN_00bea9e0(const char* name);
 
@@ -16971,7 +16972,7 @@ struct PipBoyMenuE {
     int unk5c; int unk60; int unk64; int unk68;
     TileE* unk6c;
     TileE* Root() const { return unk04; }
-    void FUN_00667220();
+    void MapMenu_UpdateCurrentPage();
 };
 extern PipBoyMenuE* DAT_01076bb8;
 extern int DAT_01076ba4;
@@ -16980,7 +16981,7 @@ struct StateE {
     int unk00; int unk04; int unk08; int unk0c; int unk10; int unk14; int unk18; int unk1c; int unk20; int unk24;
     bool unk28;
 };
-StateE* __cdecl FUN_00619e90();
+StateE* __cdecl Interface_GetPipboy();
 
 struct GameTimeE {
     float FUN_006e2a90();
@@ -17008,7 +17009,7 @@ extern const char* DAT_00f63768;
 
 void __cdecl FUN_006673f0()
 {
-    if (!DAT_01076bb8 || !FUN_00619e90()->unk28)
+    if (!DAT_01076bb8 || !Interface_GetPipboy()->unk28)
         return;
 
     BSStringE str;
@@ -17026,16 +17027,16 @@ void __cdecl FUN_006673f0()
         DAT_01076bb8->unk54->FUN_00bf11a0(FUN_00bea9e0("_Title_3"), DAT_00f63894, true);
         DAT_01076bb8->unk54->FUN_00bf11a0(FUN_00bea9e0("_Title_4"), DAT_00f637e0, true);
         DAT_01076bb8->unk54->FUN_00bf11a0(FUN_00bea9e0("_Title_5"), DAT_00f638a0, true);
-        DAT_01076bb8->unk54->FUN_00bece90(DAT_01076ba4, 1)->FUN_00bf0720();
+        DAT_01076bb8->unk54->FUN_00bece90(DAT_01076ba4, 1)->Tile_Value_CalculateValue();
         DAT_01076bb8->unk58->FUN_00bf11a0(FUN_00bea9e0("_Title_1"), DAT_00f63780, true);
         DAT_01076bb8->unk58->FUN_00bf11a0(FUN_00bea9e0("_Title_2"), DAT_00f638d0, true);
         DAT_01076bb8->unk58->FUN_00bf11a0(FUN_00bea9e0("_Title_3"), DAT_00f638b8, true);
         DAT_01076bb8->unk58->FUN_00bf11a0(FUN_00bea9e0("_Title_4"), DAT_00f638ac, true);
-        DAT_01076bb8->unk58->FUN_00bece90(DAT_01076ba4, 1)->FUN_00bf0720();
+        DAT_01076bb8->unk58->FUN_00bece90(DAT_01076ba4, 1)->Tile_Value_CalculateValue();
         DAT_01076bb8->unk6c->FUN_00bed3c0(0x20)->FUN_00bf11a0(0xfc4, DAT_00f63858, true);
-        DAT_01076bb8->Root()->FUN_00beabd0("MM_Headline_Title")->FUN_00bf11a0(0xfc4, DAT_00f63768, true);
+        DAT_01076bb8->Root()->Tile_GetChildByName("MM_Headline_Title")->FUN_00bf11a0(0xfc4, DAT_00f63768, true);
     }
-    DAT_01076bb8->FUN_00667220();
+    DAT_01076bb8->MapMenu_UpdateCurrentPage();
 }
 }   // namespace f3m_006673f0
 
@@ -17266,7 +17267,7 @@ struct ValueOwner { float FUN_00becf40(int); };
 struct ValueLink { ValueOwner* ptr; float GetValue(int id) { return ptr->FUN_00becf40(id); } };
 struct ItemValues { unsigned unk00,unk04; ValueLink values; };
 struct Item { unsigned unk00,unk04; ItemValues* data; bool FUN_00becf80(int); float GetValue(int id) { return data->values.GetValue(id); } };
-struct Data { float FUN_0047cf30(bool); bool FUN_0047d260(bool); };
+struct Data { float FUN_0047cf30(bool); bool ItemChange_GetWorn(bool); };
 struct SortEntry { Item* pItem; Data* pData; };
 // @fnv 0x007b5950
 int FUN_00671de0(SortEntry* apA, SortEntry* apB)
@@ -17303,11 +17304,11 @@ int FUN_00671de0(SortEntry* apA, SortEntry* apB)
         }
         if (iResult == 0)
         {
-            if (apA->pData->FUN_0047d260(false))
+            if (apA->pData->ItemChange_GetWorn(false))
             {
                 iResult = -1;
             }
-            else if (apB->pData->FUN_0047d260(false))
+            else if (apB->pData->ItemChange_GetWorn(false))
             {
                 iResult = 1;
             }
@@ -17500,7 +17501,7 @@ struct PtrState {unsigned int unk00,unk04;PtrState(int value):unk00(value){}~Ptr
 struct Point3 {float x,y,z;};extern Point3 DAT_0108ec68;
 struct FUN_00409c20 {unsigned int id;unsigned char valid,unk05;unsigned short unk06;unsigned int state;FUN_00409c20();~FUN_00409c20(){}__forceinline FUN_00409c20& operator=(const FUN_00409c20& other){id=other.id;valid=other.valid;state=other.state;return *this;}__forceinline void SetValid(){valid=1;}};
 struct FUN_004320f0 {unsigned int unk00,unk04,unk08,unk0c,unk10,unk14;FUN_004320f0();~FUN_004320f0();};
-struct AudioManager {FUN_00409c20 FUN_00bd65f0(const char*,unsigned int);};AudioManager* __cdecl FUN_00bd6800();
+struct AudioManager {FUN_00409c20 BSAudioManager_GetSoundHandleByName(const char*,unsigned int);};AudioManager* __cdecl FUN_00bd6800();
 struct RaceSexMenu:FUN_00bfcfe0 {
 unsigned int unk28;
 unsigned int unk2c;
@@ -17535,10 +17536,10 @@ memset(&unk78,0,0x18);memset(&unk28,0,0x50);
 unkB8=0.0f;unkBC=0;unkEC=3;unkC8=0.0f;unkD0=0.0f;unkCC=0.0f;
 points[1]=DAT_0108ec68;points[0]=points[1];
 AudioManager* manager=FUN_00bd6800();
-(sounds[0]=manager->FUN_00bd65f0("OBJComputerTerminal01LP",49)).SetValid();
-(sounds[1]=manager->FUN_00bd65f0("QSTBirthRoomLP",49)).SetValid();
-(sounds[2]=manager->FUN_00bd65f0("UIFaceGenZoomLP",49)).SetValid();
-(sounds[3]=manager->FUN_00bd65f0("UIFaceGenRotateLP",49)).SetValid();
+(sounds[0]=manager->BSAudioManager_GetSoundHandleByName("OBJComputerTerminal01LP",49)).SetValid();
+(sounds[1]=manager->BSAudioManager_GetSoundHandleByName("QSTBirthRoomLP",49)).SetValid();
+(sounds[2]=manager->BSAudioManager_GetSoundHandleByName("UIFaceGenZoomLP",49)).SetValid();
+(sounds[3]=manager->BSAudioManager_GetSoundHandleByName("UIFaceGenRotateLP",49)).SetValid();
 unkC4=0;unkC0=0;unk120=20;
 }
 }
@@ -17780,7 +17781,7 @@ void __cdecl FUN_0067b040()
 namespace task1728 {
 extern char DAT_00e08010; extern float DAT_00dbea4c;
 int __cdecl FUN_00becd70(const char*,int);
-struct Tile67A5F0 { float FUN_00becf40(int); void FUN_00bf05a0(int,float,float,float,int); };
+struct Tile67A5F0 { float FUN_00becf40(int); void Tile_AddFadeControl(int,float,float,float,int); };
 struct Control67A5F0 {
  int unk00; int unk04; int unk08; int unk0c; int unk10; int unk14; int unk18; int unk1c; int unk20; int unk24;
  Tile67A5F0* tiles[1];
@@ -17789,8 +17790,8 @@ struct Control67A5F0 {
 void Control67A5F0::FUN_0067a5f0(int index,bool show,int trait,float duration) {
  if (trait == (-2147483647-1)) trait=FUN_00becd70(&DAT_00e08010,-1);
  if (duration < 0.0f) duration=DAT_00dbea4c;
- if (show && tiles[index]->FUN_00becf40(trait)<255.0) tiles[index]->FUN_00bf05a0(trait,0.0f,255.0f,duration,0);
- else if (!show && tiles[index]->FUN_00becf40(trait)>0.0f) tiles[index]->FUN_00bf05a0(trait,255.0f,0.0f,duration,0);
+ if (show && tiles[index]->FUN_00becf40(trait)<255.0) tiles[index]->Tile_AddFadeControl(trait,0.0f,255.0f,duration,0);
+ else if (!show && tiles[index]->FUN_00becf40(trait)>0.0f) tiles[index]->Tile_AddFadeControl(trait,255.0f,0.0f,duration,0);
 }
 
 
@@ -17807,7 +17808,7 @@ struct String {
  ~String() {if(data) DAT_01090a78.FUN_0086ba60(data);data=0;capacity=0;length=0;}
  const char* Get() const {return data;}
 };
-struct Time {float FUN_006e2a90();String FUN_006e2c90();const char* FUN_006e2bb0();};
+struct Time {float FUN_006e2a90();String FUN_006e2c90();const char* Calendar_GetDayOfWeekString();};
 extern Time DAT_01079f68;
 extern const char* DAT_00f64758;extern const char* DAT_00f64764;
 int __cdecl FUN_00403230(char*,unsigned,const char*,...);
@@ -17822,7 +17823,7 @@ void Menu::FUN_00674820() {
  float time=DAT_01079f68.FUN_006e2a90();hour=(int)time;
  int minute=(int)((time-hour)*60.0);
  if(time>=0.0 && time<1.0) hour=12;else if(time>=13.0)hour-=12;
- FUN_00403230(text,260,"%s, %s, %d:%02d %s",DAT_01079f68.FUN_006e2bb0(),DAT_01079f68.FUN_006e2c90().Get(),hour,minute,time<12.0?DAT_00f64758:DAT_00f64764);
+ FUN_00403230(text,260,"%s, %s, %d:%02d %s",DAT_01079f68.Calendar_GetDayOfWeekString(),DAT_01079f68.FUN_006e2c90().Get(),hour,minute,time<12.0?DAT_00f64758:DAT_00f64764);
  }
  tile->FUN_00bf11a0(0xfc4,text,true);
 }
@@ -17954,13 +17955,13 @@ struct RefTarget{virtual void Interface();virtual void Destroy();long refs;};
 struct Pointer8{RefTarget* value;unsigned int flags;__forceinline ~Pointer8(){RefTarget* old=value;if(old&&InterlockedDecrement(&old->refs)==0)old->Destroy();}};
 struct Array16;struct Dispatch{void (__thiscall* destroy)(Array16*,unsigned int);void* (__thiscall* allocate)(Array16*,unsigned int);void (__thiscall* release)(Array16*,void*);};extern const Dispatch DAT_00dd900c;
 struct Array16{const Dispatch* vtable;void* data;unsigned int size,capacity;__forceinline void Clear(){if(data){vtable->release(this,data);data=0;capacity=0;size=0;}}__forceinline ~Array16(){vtable=&DAT_00dd900c;if(data){vtable->release(this,data);data=0;capacity=0;size=0;}}};
-struct Sound12{unsigned int unk00,unk04,unk08;void FUN_00bd0140();void FUN_00bd03b0();~Sound12();};
+struct Sound12{unsigned int unk00,unk04,unk08;void BSSoundHandle_Stop();void BSSoundHandle_Release();~Sound12();};
 struct Entry24{unsigned int unk00,unk04,unk08,unk0C,unk10,unk14;~Entry24();};
 struct InterfaceMgr{void FUN_0061eb80(int);};extern InterfaceMgr* DAT_01075b24;
 struct Process{void FUN_00560c20();};struct Player{virtual void Slot000();virtual void Slot004();virtual void Slot008();virtual void Slot00C();virtual void Slot010();virtual void Slot014();virtual void Slot018();virtual void Slot01C();virtual void Slot020();virtual void Slot024();virtual void Slot028();virtual void Slot02C();virtual void Slot030();virtual void Slot034();virtual void Slot038();virtual void Slot03C();virtual void Slot040();virtual void Slot044();virtual void Slot048();virtual void Slot04C();virtual void Slot050();virtual void Slot054();virtual void Slot058();virtual void Slot05C();virtual void Slot060();virtual void Slot064();virtual void Slot068();virtual void Slot06C();virtual void Slot070();virtual void Slot074();virtual void Slot078();virtual void Slot07C();virtual void Slot080();virtual void Slot084();virtual void Slot088();virtual void Slot08C();virtual void Slot090();virtual void Slot094();virtual void Slot098();virtual void Slot09C();virtual void Slot0A0();virtual void Slot0A4();virtual void Slot0A8();virtual void Slot0AC();virtual void Slot0B0();virtual void Slot0B4();virtual void Slot0B8();virtual void Slot0BC();virtual void Slot0C0();virtual void Slot0C4();virtual void Slot0C8();virtual void Slot0CC();virtual void Slot0D0();virtual void Slot0D4();virtual void Slot0D8();virtual void Slot0DC();virtual void Slot0E0();virtual void Slot0E4();virtual void Slot0E8();virtual void Slot0EC();virtual void Slot0F0();virtual void Slot0F4();virtual void Slot0F8();virtual void Slot0FC();virtual void Slot100();virtual void Slot104();virtual void Slot108();virtual void Slot10C();virtual void Slot110();virtual void Slot114();virtual void Slot118();virtual void Slot11C();virtual void Slot120();virtual void Slot124();virtual void Slot128();virtual void Slot12C();virtual void Slot130();virtual void Slot134();virtual void Slot138();virtual void Slot13C();virtual void Slot140();virtual void Slot144();virtual void Slot148();virtual void Slot14C();virtual void Slot150();virtual void Slot154();virtual void Slot158();virtual void Slot15C();virtual void Slot160();virtual void Slot164();virtual void Slot168();virtual void Slot16C();virtual void Slot170();virtual void Slot174();virtual void Slot178();virtual void Slot17C();virtual void Slot180();virtual void Slot184();virtual void Slot188();virtual void Slot18C();virtual void Slot190();virtual void Slot194();virtual void Slot198();virtual void Slot19C();virtual void Slot1A0();virtual void Slot1A4();virtual void Slot1A8();virtual void Slot1AC();virtual void Slot1B0();virtual void Slot1B4();virtual void Slot1B8();virtual void Slot1BC();virtual void Slot1C0();virtual void Slot1C4();virtual void Slot1C8();virtual void Slot1CC();virtual void Slot1D0();virtual void Slot1D4();virtual void Slot1D8();virtual void Slot1DC();virtual void Slot1E0();virtual void Slot1E4();virtual void Slot1E8();virtual void Slot1EC();virtual void Slot1F0();virtual void Slot1F4();virtual void Slot1F8();virtual void Slot1FC();virtual void Slot200();virtual void Slot204();virtual void Slot208();virtual void Slot20C();virtual void Slot210();virtual void Slot214();virtual void Slot218();virtual void Slot21C();virtual void Slot220();virtual void Slot224();virtual void Slot228();virtual void Slot22C();virtual void Slot230();virtual void Slot234();virtual void Slot238();virtual void Slot23C();virtual void Slot240();virtual void Slot244();virtual void Slot248();virtual void Slot24C();virtual void Slot250();virtual void Slot254();virtual void Slot258();virtual void Slot25C();virtual void Slot260();virtual void Slot264();virtual void Slot268();virtual void Slot26C();virtual void Slot270();virtual void Slot274();virtual void Slot278();virtual void Slot27C();virtual void Slot280();virtual void Slot284();virtual void Slot288();virtual void Slot28C();virtual void Slot290();virtual void Slot294();virtual void Slot298();virtual void Slot29C();virtual void Slot2A0();virtual void Slot2A4();virtual void Slot2A8();virtual void Slot2AC();virtual void Slot2B0();virtual void Slot2B4();virtual void Slot2B8();virtual void Slot2BC();virtual void Slot2C0();virtual void Slot2C4();virtual void Slot2C8();virtual void Slot2CC();virtual void Slot2D0();virtual void Slot2D4();virtual void Slot2D8();virtual void Slot2DC();virtual void Slot2E0();virtual void Slot2E4();virtual void Slot2E8();virtual void Slot2EC();virtual void Slot2F0();virtual void Slot2F4();virtual void Slot2F8();virtual void Slot2FC();virtual void Slot300();virtual void Slot304();virtual void Slot308();virtual void Slot30C();virtual void Slot310();virtual void Slot314();virtual void Slot318();virtual void Slot31C();virtual void Slot320();virtual void Slot324();virtual void Slot328();virtual void Slot32C();virtual void Slot330();virtual void Slot334();virtual void Slot338();virtual void Slot33C();virtual void Slot340();virtual void Slot344();virtual void Slot348();virtual void Slot34C();virtual void Slot350();virtual void Slot354();virtual void Slot358();virtual void Slot35C();virtual void Slot360();virtual void Slot364();virtual void Slot368();virtual void Slot36C();virtual void Slot370();virtual void Slot374(); virtual Process* GetProcess();};extern Player* DAT_0107a104;
 struct Menu:BaseMenu{Item* items[20];unsigned int unk78,unk7C,unk80,unk84,unk88,unk8C;String8 firstString,secondString;float pointA0,pointA4,pointA8,pointAC,pointB0,pointB4,unkB8;unsigned int unkBC,unkC0,unkC4;float unkC8,unkCC,unkD0;Pointer8 pointer;Array16 npcs;unsigned int unkEC;Sound12 sounds[4];unsigned int unk120;Entry24 entries[4];virtual ~Menu();};
 typedef char MenuSize[(sizeof(Menu)==0x184)?1:-1];
-Menu::~Menu(){DAT_01075b24->FUN_0061eb80(0);DAT_0107a104->GetProcess()->FUN_00560c20();for(int i=0;i<20;++i)delete items[i];npcs.Clear();for(int j=0;j<4;++j){sounds[j].FUN_00bd0140();sounds[j].FUN_00bd03b0();}}
+Menu::~Menu(){DAT_01075b24->FUN_0061eb80(0);DAT_0107a104->GetProcess()->FUN_00560c20();for(int i=0;i<20;++i)delete items[i];npcs.Clear();for(int j=0;j<4;++j){sounds[j].BSSoundHandle_Stop();sounds[j].BSSoundHandle_Release();}}
 }
 }   // namespace f3m_0066cc10
 
@@ -18396,9 +18397,9 @@ struct Menu6798 {
 };
 namespace N6798 { extern Menu6798* DAT_010770ac; extern Input6798* DAT_01075b24; }
 bool __cdecl FUN_0061ac60(int,int);
-void* __cdecl FUN_00455190(int);
+void* __cdecl TESForm_GetFormByNumericID(int);
 void* __cdecl FUN_00c0050a(void*,int,const void*,const void*,int);
-void __cdecl FUN_0068d080(void*,int);
+void __cdecl TutorialMenu_Create(void*,int);
 struct MenuAction6798 { void FUN_00679820(); };
 void MenuAction6798::FUN_00679820()
 {
@@ -18420,10 +18421,10 @@ void MenuAction6798::FUN_00679820()
             index = N6798::DAT_01075b24->codes.Find(action);
         }
         if (index < 29) {
-            result = FUN_00c0050a(FUN_00455190(index+0x168),0,&DAT_00f46078,&DAT_00f49744,0);
+            result = FUN_00c0050a(TESForm_GetFormByNumericID(index+0x168),0,&DAT_00f46078,&DAT_00f49744,0);
         }
     } while (++i, !result);
-    FUN_0068d080(result,1);
+    TutorialMenu_Create(result,1);
 }
 }   // namespace f3m_00679820
 
@@ -18618,7 +18619,7 @@ struct Tile
     void FUN_00bf11a0(int property,const char* text,int propagate);
     void FUN_00bee190(int property,float value,int propagate);
     double FUN_00becf40(int property);
-    void FUN_00bf05a0(int property,float from,float to,float seconds,int mode);
+    void Tile_AddFadeControl(int property,float from,float to,float seconds,int mode);
 };
 struct List
 {
@@ -18761,10 +18762,10 @@ void Menu::FUN_0067ed50()
         tile->FUN_00bee190(property,0.0f,1);
         int alpha=FUN_00becd70(DAT_00e08010,-1);
         if(tile40->FUN_00becf40(alpha)<255.0)
-            tile40->FUN_00bf05a0(alpha,0.0f,255.0f,0.25f,0);
+            tile40->Tile_AddFadeControl(alpha,0.0f,255.0f,0.25f,0);
         alpha=FUN_00becd70(DAT_00e08010,-1);
         if(tile3c->FUN_00becf40(alpha)<255.0)
-            tile3c->FUN_00bf05a0(alpha,0.0f,255.0f,0.25f,0);
+            tile3c->Tile_AddFadeControl(alpha,0.0f,255.0f,0.25f,0);
         tile38->FUN_00bf11a0(0xfc4,DAT_00f65244,1);
         tile3c->FUN_00bee190(0xfaf,0.0f,1);
         flags|=0x100000;
@@ -19119,7 +19120,7 @@ struct QFactory {
     QOption* selected20;
     void FUN_0066bc70();
     QOption* FUN_0066c330(const char* name, const char* tmpl, int parent, int flags);
-    bool FUN_0066b690(int step);
+    bool RaceSexMenu_MenuOptionList_DoGamepad(int step);
     void FUN_0066b600();
 };
 struct QSystem { int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; int unk1C; int unk20; int unk24; int unk28; int unk2C; int unk30; int unk34; int unk38; int unk3C; int unk40; int unk44; int unk48; QNode list4c; };
@@ -19147,7 +19148,7 @@ void QMenu::FUN_0066c9d0()
         }
     }
     FUN_0066b140();
-    while (selected && selected != factory3c->selected20 && factory3c->FUN_0066b690(2)) {
+    while (selected && selected != factory3c->selected20 && factory3c->RaceSexMenu_MenuOptionList_DoGamepad(2)) {
     }
     factory3c->FUN_0066b600();
     flagsEC &= ~1;
@@ -19424,7 +19425,7 @@ struct Control {int unk00,unk04;Handle* handle;};
 extern const double DAT_00dbeb78;
 struct EntryHead {void* form;};
 struct Count {int value;};
-struct Item {EntryHead* head;int unk04;Count count;bool FUN_0047d260(int);};
+struct Item {EntryHead* head;int unk04;Count count;bool ItemChange_GetWorn(int);};
 extern Item* DAT_01076eec;
 struct List {
  virtual void Slot00();virtual void* Slot04();
@@ -19711,7 +19712,7 @@ void Action673::Owner::FUN_00673050(unsigned int action,Control* control) {
    list.FUN_0062a480(list.Slot04());
    if(list.FUN_00629f00()==1) Slot0c(12,0);
    else FUN_00672d90(0);
-   if(item->FUN_0047d260(0)) {DAT_0107a104->Slot3c0();FUN_00653d40();}
+   if(item->ItemChange_GetWorn(0)) {DAT_0107a104->Slot3c0();FUN_00653d40();}
   }
   break;
  }
@@ -19726,7 +19727,7 @@ struct Tile {
  unsigned int unk00;Link* parent;Link* child;
  void FUN_00bee190(int,float,bool);float FUN_00becf40(int);Tile* FUN_00bed3c0(int);
 };
-struct Item {float FUN_0047cf30(bool);bool FUN_0047d260(int);};extern Item* DAT_01076eec;
+struct Item {float FUN_0047cf30(bool);bool ItemChange_GetWorn(int);};extern Item* DAT_01076eec;
 struct Values {int FUN_005a29a0(int);};
 struct Player {
 unsigned int unk00;
@@ -19771,13 +19772,14 @@ unsigned int unk98;
 Values values;
 };extern Player* DAT_0107a104;
 float __cdecl FUN_00584860(int,float,float,int*);
-void __cdecl FUN_00671c30(Tile* tile,Item* item) {
+// pdb: RepairMenu::InitFunc | RepairMenu.obj | fnv360_0822_retail, udata, high
+void __cdecl RepairMenu_InitFunc(Tile* tile,Item* item) {
  if(!tile || !item) return;
  float weight=item->FUN_0047cf30(true);
  tile->FUN_00bee190(4010,14.0f,true);
  tile->FUN_00bee190(4003,tile->FUN_00becf40(4012)>=0.0f,true);
  tile->FUN_00bed3c0(15)->FUN_00bee190(4017,(float)(weight*0.6000000238418579),true);
- if(item->FUN_0047d260(0)) {
+ if(item->ItemChange_GetWorn(0)) {
   tile->parent->tile->FUN_00bee190(4003,1.0f,true);
  }
   float selected=DAT_01076eec->FUN_0047cf30(true);
@@ -21233,7 +21235,7 @@ extern unsigned DAT_01090bb0,DAT_01076ce0;extern int DAT_01076b94;
 extern Setting DAT_01076bec,DAT_00f638e4;
 extern const double DAT_00e06f90,DAT_00dc2e18;
 extern const float DAT_00dc5c94,DAT_00dcb248;
-bool __cdecl FUN_0061c490(int);Pip* __cdecl FUN_00619e90();void __cdecl FUN_00665b00(bool);bool __cdecl FUN_00477b00();
+bool __cdecl FUN_0061c490(int);Pip* __cdecl Interface_GetPipboy();void __cdecl FUN_00665b00(bool);bool __cdecl FUN_00477b00();
 void __fastcall FUN_0065e9f0(Menu*);void __fastcall FUN_00664aa0(Menu*);
 inline bool CursorUnavailable(){return DAT_01075b28 && !DAT_01075cac;}
 // @fnv 0x0079a130
@@ -21260,7 +21262,7 @@ void __fastcall FUN_00666e00(Menu* menu)
         menu->index += DAT_01090bb0 - DAT_01076ce0;
     }
 
-    if (!FUN_00619e90()->IsUnk28Set())
+    if (!Interface_GetPipboy()->IsUnk28Set())
         return;
 
     if (FUN_0061c490(0x3ff))
@@ -21268,7 +21270,7 @@ void __fastcall FUN_00666e00(Menu* menu)
         switch (DAT_01076bb8->mode)
         {
         case 0x1c:
-            if (*DAT_01076bec.FUN_00405070() && FUN_00619e90()->FUN_006995c0())
+            if (*DAT_01076bec.FUN_00405070() && Interface_GetPipboy()->FUN_006995c0())
             {
                 DAT_01076bb8->count = 0;
                 for (i = 0; i < 25; i++)
@@ -21388,7 +21390,7 @@ struct RSMTile
 {
     RSMTile* FUN_00bf37b0(const char* apPath);
     struct RSMMenu* FUN_00beab90();
-    RSMTile* FUN_00beabd0(const char* apName);
+    RSMTile* Tile_GetChildByName(const char* apName);
     float FUN_00becf40(int aiID);
     void FUN_00bee190(int aiID, float afValue, bool abPropagate);
     void FUN_00bef830(int aiID, float afValue);
@@ -21563,8 +21565,9 @@ struct RSMMenu
     int FUN_00726070(){return unk04;}
 };
 
-inline int FUN_007b7890(){return 0x422;}
-RSMMenu* __cdecl FUN_00beaf00(int aiMenuID);
+// pdb: CombatUtilities::IsTargetWithinStrikeAngle | CombatUtilities.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+inline int CombatUtilities_IsTargetWithinStrikeAngle(){return 0x422;}
+RSMMenu* __cdecl Tile_GetMenuByClass(int aiMenuID);
 
 extern RSMMenu* DAT_01076f68;
 extern RSMActor* DAT_01076f6c;
@@ -21579,7 +21582,7 @@ extern const char* DAT_00f62d3c;
 
 
 extern RSMInterfaceManager* DAT_01075b24;
-float FUN_00bea750();
+float Tile_GetMaximumDepth();
 void FUN_0063d340();
 int FUN_00404050(const char*,const char*);
 // @fnv 0x007b7570
@@ -21595,13 +21598,13 @@ RSMTile* __cdecl FUN_00673790(RSMActor* apVendor)
     }
 
     pInterfaceMgr2 = DAT_01075b24;
-    pOldMenu5 = FUN_00beaf00(FUN_007b7890());
+    pOldMenu5 = Tile_GetMenuByClass(CombatUtilities_IsTargetWithinStrikeAngle());
     if (pOldMenu5)
         delete pOldMenu5;
 
     pTile = pInterfaceMgr2->GetMenuRoot()->FUN_00bf37b0("Data\\Menus\\repair_services_menu.xml");
     DAT_01076f68 = pTile->FUN_00beab90();
-    if (DAT_01076f68 && DAT_01076f68->GetID() == FUN_007b7890())
+    if (DAT_01076f68 && DAT_01076f68->GetID() == CombatUtilities_IsTargetWithinStrikeAngle())
     {
         DAT_01076f68->FUN_00bfc570(pTile, false);
         if (!DAT_01076f68->FUN_006731b0())
@@ -21609,7 +21612,7 @@ RSMTile* __cdecl FUN_00673790(RSMActor* apVendor)
             return 0;
         }
         if (pTile->FUN_00becf40(0xfa7) == 6006.0 || pTile->FUN_00becf40(0xfa7) == 102.0)
-            pTile->FUN_00bee190(0xfad, FUN_00bea750(), true);
+            pTile->FUN_00bee190(0xfad, Tile_GetMaximumDepth(), true);
         DAT_01076f68->pTile40->FUN_00bef830(DAT_01076f60, 1.0f);
         DAT_01076f68->pTile54->FUN_00bef830(DAT_01076f60, 1.0f);
         DAT_01076f6c = apVendor;
@@ -21619,9 +21622,9 @@ RSMTile* __cdecl FUN_00673790(RSMActor* apVendor)
         FUN_0063d340();
         if (FUN_00404050(DAT_0106cb94, "ENGLISH"))
         {
-            pTile->FUN_00beabd0("RSM_Headline_Title")
+            pTile->Tile_GetChildByName("RSM_Headline_Title")
                 ->FUN_00bf11a0(DAT_01076f58, DAT_00f645d8, true);
-            pTile->FUN_00beabd0("RSM_EmptyRepairListText")
+            pTile->Tile_GetChildByName("RSM_EmptyRepairListText")
                 ->FUN_00bf11a0(DAT_01076f58, DAT_00f64614, true);
             DAT_01076f68->pTile3C->FUN_00bf11a0(DAT_01076f58, DAT_00f635f4, true);
             DAT_01076f68->pTile50->FUN_00bf11a0(DAT_01076f58, DAT_00f635f4, true);
@@ -21936,16 +21939,16 @@ int __cdecl FUN_00becd70(const char* name, int len);
 struct Heap { void* FUN_0086b930(unsigned int size); };
 extern Heap DAT_01090a78;
 struct Tile {
-    Tile* FUN_00bfd250();
+    Tile* Menu_RenderTemplate();
     int FUN_00bece90(unsigned int id);
     void FUN_00bee190(unsigned int id, float value, int update);
     void FUN_00bf11a0(unsigned int id, const char* value, int update);
     float FUN_00becf40(int id);
-    Tile* FUN_00bea870(unsigned int id);
-    void FUN_00beafa0();
+    Tile* Tile_GetValueQ(unsigned int id);
+    void Tile_Value_ClearActions();
     void FUN_00beec50(unsigned int a, Tile* t, unsigned int b);
     void FUN_00beaf40(unsigned int id, float value);
-    void FUN_00bf0720(int a);
+    void Tile_Value_CalculateValue(int a);
 };
 Tile* __stdcall FUN_00beab90(Tile* parent, const char* name, int a);
 struct Item {
@@ -21981,7 +21984,7 @@ Tile* ListMenu::FUN_00662dc0(void* obj, const char* text, void* sort, const char
     if (!parent || (!tmpl && !name))
         return 0;
     const char* t = name ? name : tmpl;
-    Tile* tile = FUN_00beab90(parent, t, 0)->FUN_00bfd250();
+    Tile* tile = FUN_00beab90(parent, t, 0)->Menu_RenderTemplate();
     if (!tile->FUN_00bece90(0xfaa))
         tile->FUN_00bee190(0xfaa, DAT_00db38b8, 1);
     if (text)
@@ -22005,11 +22008,11 @@ Tile* ListMenu::FUN_00662dc0(void* obj, const char* text, void* sort, const char
         if (node->item)
             ++n;
     if (n == 1 && parent->FUN_00becf40(FUN_00becd70(DAT_00e03fac, -1)) > 0.0f) {
-        Tile* x = parent->FUN_00bea870(0xfb0);
-        x->FUN_00beafa0();
+        Tile* x = parent->Tile_GetValueQ(0xfb0);
+        x->Tile_Value_ClearActions();
         x->FUN_00beec50(0x7d0, tile, 0xfb0);
         x->FUN_00beaf40(0x7d3, parent->FUN_00becf40(FUN_00becd70(DAT_00e03fac, -1)));
-        x->FUN_00bf0720(0);
+        x->Tile_Value_CalculateValue(0);
     }
     return tile;
 }
@@ -22446,7 +22449,7 @@ struct Ref {
  int unk34;
  int unk38;
  void* cell;
- bool FUN_004e8840();void* FUN_004e8880();void* GetCell(){return cell;}
+ bool TESObjectREFR_GetInterior();void* FUN_004e8880();void* GetCell(){return cell;}
 };
 struct Path {int a,b,c,d,e;};
 struct Player:Ref {
@@ -22842,10 +22845,10 @@ struct Player:Ref {
  Ref* GetTarget(){return target;}Path* GetPath(){return &path;}Ref* GetFirst(){return count>0?targets[0]:target;}
 };
 extern Player* DAT_0107a104;
-struct Value {void FUN_00beafa0();void FUN_00beec50(int,void*,int);void FUN_00bf0720(int);};
+struct Value {void Tile_Value_ClearActions();void FUN_00beec50(int,void*,int);void Tile_Value_CalculateValue(int);};
 struct Tile {void FUN_00bee190(unsigned int,float,bool);void FUN_00bf11a0(unsigned int,const char*,bool);Value* FUN_00bece90(int);};
-struct MenuFactory {Tile* FUN_00bfd250(Tile*,const char*,int);};extern MenuFactory* DAT_01076bb8;extern unsigned int DAT_01076ba0,DAT_01076b9c;
-struct Cell {void FUN_004d3cc0(Point&,Point&,bool);};
+struct MenuFactory {Tile* Menu_RenderTemplate(Tile*,const char*,int);};extern MenuFactory* DAT_01076bb8;extern unsigned int DAT_01076ba0,DAT_01076b9c;
+struct Cell {void TESObjectCELL_AdjustCoordForNorthRotation(Point&,Point&,bool);};
 struct Menu {
  int unk00;
  int unk04;
@@ -22910,26 +22913,26 @@ struct Menu {
  int unk0fc;
  int unk100;
  Ref* first;int unk108;Cell* adjust;
- Ref* FUN_0065f160(Ref*,Path*);void FUN_00660030(Ref*,Ref*,Path*,int);Point FUN_0065d600(Point,void*);
+ Ref* MapMenu_GetWorldMapTrackingRef(Ref*,Path*);void FUN_00660030(Ref*,Ref*,Path*,int);Point FUN_0065d600(Point,void*);
  void FUN_00662870();
 };
 void Menu::FUN_00662870(){
- Ref* reference=mode==29?FUN_0065f160(DAT_0107a104->GetTarget(),DAT_0107a104->GetPath()):DAT_0107a104->GetFirst();
+ Ref* reference=mode==29?MapMenu_GetWorldMapTrackingRef(DAT_0107a104->GetTarget(),DAT_0107a104->GetPath()):DAT_0107a104->GetFirst();
  if(reference){if(mode==29)FUN_00660030(first,reference,DAT_0107a104->GetPath(),26);}
  else if(DAT_0107a104->GetTarget()){
-  if((mode==29&&!DAT_0107a104->GetTarget()->FUN_004e8840())||(mode==28&&DAT_0107a104->GetTarget()->GetCell()==DAT_0107a104->GetCell())) reference=DAT_0107a104->GetTarget();
+  if((mode==29&&!DAT_0107a104->GetTarget()->TESObjectREFR_GetInterior())||(mode==28&&DAT_0107a104->GetTarget()->GetCell()==DAT_0107a104->GetCell())) reference=DAT_0107a104->GetTarget();
  }
  if(reference){
   Point position;Point mapPosition;position=*reference->GetPos();
-  if(adjust)adjust->FUN_004d3cc0(position,position,true);
+  if(adjust)adjust->TESObjectCELL_AdjustCoordForNorthRotation(position,position,true);
   mapPosition=FUN_0065d600(position,reference->FUN_004e8880());
   Tile* parent=mode==29?world:local;Tile* marker=0;
-  if(mode==29)marker=DAT_01076bb8->FUN_00bfd250(mapTile,"WorldMapQuestMarkerTemplate",0);
-  else marker=DAT_01076bb8->FUN_00bfd250(mapTile,"LocalMapQuestMarkerTemplate",0);
+  if(mode==29)marker=DAT_01076bb8->Menu_RenderTemplate(mapTile,"WorldMapQuestMarkerTemplate",0);
+  else marker=DAT_01076bb8->Menu_RenderTemplate(mapTile,"LocalMapQuestMarkerTemplate",0);
   marker->FUN_00bee190(DAT_01076ba0,mapPosition.x,true);marker->FUN_00bee190(DAT_01076b9c,mapPosition.y,true);
   marker->FUN_00bf11a0(0xfcc,"glow_hud_compass_pc_marker.dds",true);
   marker->FUN_00bee190(0xfaa,24.0f,true);marker->FUN_00bee190(0xfad,5.0f,true);
-  Value* value=marker->FUN_00bece90(0xff5);value->FUN_00beafa0();value->FUN_00beec50(2000,parent,0xff5);value->FUN_00bf0720(0);
+  Value* value=marker->FUN_00bece90(0xff5);value->Tile_Value_ClearActions();value->FUN_00beec50(2000,parent,0xff5);value->Tile_Value_CalculateValue(0);
  }
 }
 }
@@ -22952,7 +22955,7 @@ struct MenuTile {
  double FUN_00becf40(int property);
  float FUN_00becfb0();
  float FUN_00bed040();
- void FUN_00bf05a0(int property,float from,float to,float duration,int mode);
+ void Tile_AddFadeControl(int property,float from,float to,float duration,int mode);
  void FUN_00bf11a0(int property,const char* text,int propagate);
  void FUN_00bee190(int property,float value,int propagate);
 };
@@ -23039,7 +23042,7 @@ void Menu::FUN_0067fd70(unsigned mask, int x, int y, unsigned width, bool visibl
  list.FUN_0067a7f0(1);
  int alpha=FUN_00becd70(&DAT_00e08010,-1);
  if(tile044->FUN_00becf40(alpha) < 255.0)
-  tile044->FUN_00bf05a0(alpha,0.0f,255.0f,FUN_00dbea4c,0);
+  tile044->Tile_AddFadeControl(alpha,0.0f,255.0f,FUN_00dbea4c,0);
  MenuTile* parent=tile044->parent;
  tile044->FUN_00bee190(0xfa1,(float)(x - parent->FUN_00becfb0()),1);
  tile044->FUN_00bee190(0xfa2,(float)(y - tile044->parent->FUN_00bed040()),1);
@@ -23062,13 +23065,13 @@ struct Tile {
     int FUN_00bece90(unsigned int property);
     void FUN_00bf11a0(unsigned int property, int value, int update);
     float FUN_00becf40(int id);
-    Tile* FUN_00bea870(int id);
-    void FUN_00beafa0();
+    Tile* Tile_GetValueQ(int id);
+    void Tile_Value_ClearActions();
     void FUN_00beec50(int a, Tile* b, int c);
     void FUN_00beaf40(int property, float value);
-    void FUN_00bf0720(int a);
+    void Tile_Value_CalculateValue(int a);
 };
-struct Menu { Tile* FUN_00bfd250(); };
+struct Menu { Tile* Menu_RenderTemplate(); };
 Menu* __stdcall FUN_00beab90(Tile* parent, int id, int unk);
 int __cdecl FUN_00becd70(const char* name, int len);
 struct Pool { void* FUN_0086b930(unsigned); };
@@ -23111,7 +23114,7 @@ Tile* Owner6647::FUN_006647d0(int value, int prop, int index, int id)
 {
     Tile* parent = unk0c;
     if (!parent || (!unk18 && !id)) return 0;
-    Tile* t = FUN_00beab90(parent, id ? id : unk18, 0)->FUN_00bfd250();
+    Tile* t = FUN_00beab90(parent, id ? id : unk18, 0)->Menu_RenderTemplate();
     if (!t->FUN_00bece90(0xfaa))
         t->FUN_00bee190(0xfaa, DAT_00db38b8, 1);
     if (prop)
@@ -23136,11 +23139,11 @@ Tile* Owner6647::FUN_006647d0(int value, int prop, int index, int id)
     for (Node* n = &list; n; n = n->next)
         if (n->item) count++;
     if (count == 1 && unk0c->FUN_00becf40(FUN_00becd70("_number_of_visible_items", -1)) > 0.0f) {
-        Tile* s = unk0c->FUN_00bea870(0xfb0);
-        s->FUN_00beafa0();
+        Tile* s = unk0c->Tile_GetValueQ(0xfb0);
+        s->Tile_Value_ClearActions();
         s->FUN_00beec50(0x7d0, t, 0xfb0);
         s->FUN_00beaf40(0x7d3, unk0c->FUN_00becf40(FUN_00becd70("_number_of_visible_items", -1)));
-        s->FUN_00bf0720(0);
+        s->Tile_Value_CalculateValue(0);
     }
     return t;
 }
@@ -23306,7 +23309,7 @@ struct Tile {
     Tile* FUN_00bece90(unsigned int id);
     void FUN_00bee190(unsigned int id, float value, int update);
     void FUN_00beec50(unsigned int a, Tile* t, unsigned int b);
-    void FUN_00bf0720(int a);
+    void Tile_Value_CalculateValue(int a);
 };
 struct Menu {
     int f0, f4, f8;
@@ -23325,9 +23328,9 @@ void Menu::FUN_0067ac00()
         Tile* a = fc->FUN_00bece90(hx);
         Tile* b = fc->FUN_00bece90(sh);
         a->FUN_00beec50(2000, f10, 0xfa2);
-        a->FUN_00bf0720(0);
+        a->Tile_Value_CalculateValue(0);
         b->FUN_00beec50(2000, f10, 0xfb0);
-        b->FUN_00bf0720(0);
+        b->Tile_Value_CalculateValue(0);
     }
     else
     {
@@ -23618,7 +23621,7 @@ struct SoundHandle {
     int iState;
     SoundHandle(const SoundHandle& o) : iID(o.iID), bFlag(o.bFlag), iState(o.iState) {}
     ~SoundHandle() {}
-    bool FUN_00bd0390();
+    bool BSSoundHandle_IsValid();
     int FUN_00bd0270();
     bool FUN_00bd00c0(int iUnk);
 };
@@ -23641,7 +23644,7 @@ struct Subtitles {
     SubtitleText* GetElement(int i) { return &pkData[i]; }
     void FUN_00664660(int iA, int iB);
 };
-void __cdecl FUN_0061b770(const char* pcSubtitle, SoundHandle kHandle, Point kPos, Player* pkSpeaker, int iFlag);
+void __cdecl Interface_ShowSubtitle(const char* pcSubtitle, SoundHandle kHandle, Point kPos, Player* pkSpeaker, int iFlag);
 struct Tile {
     void FUN_00bf11a0(int iValue, const char* pcValue, int iFlag);
     void FUN_00bee190(int iValue, float fValue, int iFlag);
@@ -23678,7 +23681,7 @@ void MenuView::FUN_00664aa0()
         int iCount = 0;
         for (SoundNode* pkNode = &m_kSounds; pkNode; pkNode = pkNode->GetNext())
         {
-            if (pkNode->GetHandle()->FUN_00bd0390())
+            if (pkNode->GetHandle()->BSSoundHandle_IsValid())
             {
                 bNonePlaying = false;
                 if (!m_pkCurrent)
@@ -23703,7 +23706,7 @@ void MenuView::FUN_00664aa0()
             m_fSoundVolume = (iCount - 1) * 500 + iTotal;
             m_pkCurrent->GetHandle()->FUN_00bd00c0(0);
             m_uiStartTime = DAT_01090bb0;
-            FUN_0061b770(m_kSubtitles.GetElement(0)->CStr(), *m_pkCurrent->GetHandle(),
+            Interface_ShowSubtitle(m_kSubtitles.GetElement(0)->CStr(), *m_pkCurrent->GetHandle(),
                          DAT_0107a104->GetPosition(), DAT_0107a104, 0);
             m_kSubtitles.FUN_00664660(0, 1);
         }
@@ -23718,7 +23721,7 @@ void MenuView::FUN_00664aa0()
         m_pkInfoTile->FUN_00bf11a0(FUN_00bea9e0("_ItemStringInfo"), acText, 1);
         m_pkInfoTile->FUN_00bee190(FUN_00bea9e0("_AudioFileCompletion"), fTimeOffset / m_fSoundVolume, 1);
     }
-    if (m_pkCurrent && !m_pkCurrent->GetHandle()->FUN_00bd0390())
+    if (m_pkCurrent && !m_pkCurrent->GetHandle()->BSSoundHandle_IsValid())
     {
         if (!s_uiAdvanceTime)
             s_uiAdvanceTime = DAT_01090bb0;
@@ -23727,7 +23730,7 @@ void MenuView::FUN_00664aa0()
             m_pkCurrent = m_pkCurrent->GetNext();
             m_pkCurrent->GetHandle()->FUN_00bd00c0(0);
             s_uiAdvanceTime = 0;
-            FUN_0061b770(m_kSubtitles.GetElement(0)->CStr(), *m_pkCurrent->GetHandle(),
+            Interface_ShowSubtitle(m_kSubtitles.GetElement(0)->CStr(), *m_pkCurrent->GetHandle(),
                          DAT_0107a104->GetPosition(), DAT_0107a104, 1);
             m_kSubtitles.FUN_00664660(0, 1);
         }
@@ -24486,7 +24489,7 @@ public:
     FUN_00426340(Handler* handler, int value);
     virtual ~FUN_00426340();
     void FUN_00426480();
-    void FUN_004265a0(Player* player, void* value);
+    void QueuedHead_Attach(Player* player, void* value);
 };
 
 class ScopeBase {
@@ -24513,7 +24516,7 @@ public:
     virtual void s009();
     virtual void s010();
 };
-StateObj* __cdecl FUN_00619e90();
+StateObj* __cdecl Interface_GetPipboy();
 
 extern Blob DAT_00f72574;
 extern unsigned char DAT_0106e30c;
@@ -24543,7 +24546,7 @@ void GlobalState::FUN_0066bad0()
         scope.FUN_00426480();
         ((ScopeBase*)&scope)->q010();
         void* value = DAT_0107a104->FUN_0076cd20(0);
-        scope.FUN_004265a0(DAT_0107a104, value);
+        scope.QueuedHead_Attach(DAT_0107a104, value);
     }
     DAT_0106e30c = 0;
     void* state = DAT_0107a104->FUN_0076ff40(1);
@@ -24554,8 +24557,8 @@ void GlobalState::FUN_0066bad0()
     *(Blob*)(dst + 0x34) = *(Blob*)result;
     DAT_0116d138->FUN_00aa4b30(5);
     FUN_0066aee0();
-    FUN_00619e90()->s010();
-    FUN_00619e90()->s009();
+    Interface_GetPipboy()->s010();
+    Interface_GetPipboy()->s009();
 }
 }
 
@@ -24621,7 +24624,7 @@ extern char DAT_00e075c8[];
 extern char DAT_00e04938[];
 
 void __cdecl FUN_00673520();
-void __cdecl FUN_00673340();
+void __cdecl RepairServicesMenu_InitFunc();
 int __cdecl FUN_00673210();
 
 void Self::FUN_006735c0()
@@ -24632,7 +24635,7 @@ void Self::FUN_006735c0()
     DAT_01076f68->m_98 = 0;
     DAT_01076f68->v14(0x11, 0);
     DAT_01076f68->member68.FUN_0062a4e0(DAT_0107a104, (void*)FUN_00673520, 0, 0, 1, 0);
-    DAT_01076f68->member68.FUN_00655800((void*)FUN_00673340, -1, 0x7fffffff);
+    DAT_01076f68->member68.FUN_00655800((void*)RepairServicesMenu_InitFunc, -1, 0x7fffffff);
     DAT_01076f68->member68.v20((void*)FUN_00673210);
     if (DAT_0107a104->FUN_006f6480() > FUN_00f62ee0)
         FUN_00403230(buf, 0x40, DAT_00e075c8, FUN_00f635b8, FUN_00f62ee0);
@@ -24682,14 +24685,14 @@ struct TileV {
     int FUN_00bece90(int property);
     void FUN_00bf11a0(int property, int value, int update);
     float FUN_00becf40(int id);
-    TileV* FUN_00bea870(int id);
-    void FUN_00beafa0();
+    TileV* Tile_GetValueQ(int id);
+    void Tile_Value_ClearActions();
     void FUN_00beec50(int a, TileV* b, int c);
     void FUN_00beaf40(int property, float value);
-    void FUN_00bf0720(int a);
+    void Tile_Value_CalculateValue(int a);
 };
 
-struct MenuV { TileV* FUN_00bfd250(); };
+struct MenuV { TileV* Menu_RenderTemplate(); };
 
 struct Self {
     void* vptr;
@@ -24718,7 +24721,7 @@ Tile* List::FUN_0067e850(int value, int prop, int index, const char* name)
     Self* self = (Self*)this;
     TileV* parent = self->unk0c;
     if (!parent || (!self->unk18 && !name)) return 0;
-    TileV* t = FUN_00beab90(parent, name ? reinterpret_cast<int>(name) : self->unk18, 0)->FUN_00bfd250();
+    TileV* t = FUN_00beab90(parent, name ? reinterpret_cast<int>(name) : self->unk18, 0)->Menu_RenderTemplate();
     if (!t->FUN_00bece90(0xfaa))
         t->FUN_00bee190(0xfaa, -1.0f, 1);
     if (prop)
@@ -24743,11 +24746,11 @@ Tile* List::FUN_0067e850(int value, int prop, int index, const char* name)
     for (ListOps* node = &self->list; node; node = node->next)
         if (node->item) count++;
     if (count == 1 && self->unk0c->FUN_00becf40(FUN_00becd70("_number_of_visible_items", -1)) > 0.0f) {
-        TileV* s = self->unk0c->FUN_00bea870(0xfb0);
-        s->FUN_00beafa0();
+        TileV* s = self->unk0c->Tile_GetValueQ(0xfb0);
+        s->Tile_Value_ClearActions();
         s->FUN_00beec50(0x7d0, t, 0xfb0);
         s->FUN_00beaf40(0x7d3, self->unk0c->FUN_00becf40(FUN_00becd70("_number_of_visible_items", -1)));
-        s->FUN_00bf0720(0);
+        s->Tile_Value_CalculateValue(0);
     }
     return (Tile*)t;
 }
@@ -24857,7 +24860,7 @@ struct Tile;
 
 struct TileValue {
     void FUN_00beec50(int action, Tile* ref, int trait);
-    void FUN_00bf0720(int force);
+    void Tile_Value_CalculateValue(int force);
 };
 
 struct Tile {
@@ -24885,9 +24888,9 @@ void ListBox::FUN_0067ad50()
             TileValue* valY = tile->FUN_00bece90(highlightY);
             TileValue* valH = tile->FUN_00bece90(selectedHeight);
             valY->FUN_00beec50(0x7d0, selected, 0xfa2);
-            valY->FUN_00bf0720(0);
+            valY->Tile_Value_CalculateValue(0);
             valH->FUN_00beec50(0x7d0, selected, 0xfb0);
-            valH->FUN_00bf0720(0);
+            valH->Tile_Value_CalculateValue(0);
         } else {
             tile->FUN_00bee190(highlightY, -1.0f, true);
             tile->FUN_00bee190(selectedHeight, 0.0f, true);
@@ -24996,13 +24999,13 @@ extern ShadowSceneNode* DAT_0116efbc;
 extern Terminal* DAT_01077040;
 extern NiPointer<RefObj> DAT_01077090;
 extern const char DAT_00e07878[];
-Tile* __cdecl FUN_00beaf00(int id);
+Tile* __cdecl Tile_GetMenuByClass(int id);
 }
 
 void FUN_00676150()
 {
     int i;
-    N676150::Tile* menu = N676150::FUN_00beaf00(0x424);
+    N676150::Tile* menu = N676150::Tile_GetMenuByClass(0x424);
     if (!menu)
         return;
     N676150::DAT_0106ca70->FUN_00429640(N676150::DAT_00e07878, 1, 1);
@@ -25029,7 +25032,7 @@ extern float DAT_00dc5c94;
 int __cdecl FUN_00becd70(const char* name, int fallback);
 struct Tile {
     float FUN_00becf40(int trait);
-    void FUN_00bf05a0(int trait, float from, float to, float duration, int mode);
+    void Tile_AddFadeControl(int trait, float from, float to, float duration, int mode);
 };
 struct Menu {
     char pad00[0x28];
@@ -25045,7 +25048,7 @@ extern Menu* DAT_010770ac;
 __forceinline void FadeOut(int trait, Tile*& tile) {
     float value = tile->FUN_00becf40(trait);
     if (value > 0.0f)
-        tile->FUN_00bf05a0(trait, DAT_00dc5c94, 0.0f, DAT_00dbea4c, 0);
+        tile->Tile_AddFadeControl(trait, DAT_00dc5c94, 0.0f, DAT_00dbea4c, 0);
 }
 void __cdecl FUN_0067af30() {
     if (!DAT_010770ac)
@@ -25056,7 +25059,7 @@ void __cdecl FUN_0067af30() {
     int trait = FUN_00becd70("_alpha", -1);
     float value = menu->tile28->FUN_00becf40(trait);
     if (value > 0.0f)
-        menu->tile28->FUN_00bf05a0(trait, DAT_00dc5c94, 0.0f, DAT_00dbea4c, 0);
+        menu->tile28->Tile_AddFadeControl(trait, DAT_00dc5c94, 0.0f, DAT_00dbea4c, 0);
     FadeOut(0xfa9, DAT_010770ac->tile4c);
 }
 }
@@ -26637,8 +26640,8 @@ struct Player {
  int unk6b4;
  unsigned char unk6b8;
  unsigned char unk6b9;
- void FUN_00713470(int a, int b, int c, int d, int e, int f);
- void FUN_006fef60(unsigned char v);
+ void Actor_EquipObject(int a, int b, int c, int d, int e, int f);
+ void Actor_SetWantWeaponDrawn(unsigned char v);
 };
 extern Menu* DAT_01076dd4;
 extern Item* DAT_01076dd8[20];
@@ -26672,12 +26675,12 @@ void __cdecl FUN_0066c550() {
  if (f3m_0066c550::DAT_0107613c) f3m_0066c550::FUN_0063d5f0(f3m_0066c550::FUN_00563cf0(5, 4));
  for (int i = 0; i < 20; ++i) {
   if (f3m_0066c550::DAT_01076dd8[i]) {
-   DAT_0107a104->FUN_00713470(f3m_0066c550::DAT_01076dd8[i]->unk08, 1, 0, 1, 0, 1);
+   DAT_0107a104->Actor_EquipObject(f3m_0066c550::DAT_01076dd8[i]->unk08, 1, 0, 1, 0, 1);
    delete f3m_0066c550::DAT_01076dd8[i];
    f3m_0066c550::DAT_01076dd8[i] = 0;
   }
  }
- DAT_0107a104->FUN_006fef60(f3m_0066c550::DAT_01076e28);
+ DAT_0107a104->Actor_SetWantWeaponDrawn(f3m_0066c550::DAT_01076e28);
  DAT_0107a104->unk6b9 = 1;
 }
 
@@ -26734,13 +26737,13 @@ struct Iface {
 extern Iface* DAT_01075b24;
 extern Menu* DAT_01076ee8;
 extern int DAT_01076ee0;
-Menu* __cdecl FUN_00beaf00(int id);
-float __cdecl FUN_00bea750();
+Menu* __cdecl Tile_GetMenuByClass(int id);
+float __cdecl Tile_GetMaximumDepth();
 
 Tile* __cdecl FUN_00671f40()
 {
     Iface* iface = DAT_01075b24;
-    Menu* old = FUN_00beaf00(0x40b);
+    Menu* old = Tile_GetMenuByClass(0x40b);
     if (old) delete old;
     Tile* tile = iface->unk9C->FUN_00bf37b0("Data\\Menus\\repair_menu.xml");
     DAT_01076ee8 = tile->FUN_00beab90();
@@ -26750,7 +26753,7 @@ Tile* __cdecl FUN_00671f40()
         for (int i = 0; i < 13; i++)
             if (DAT_01076ee8->unk28[i] == 0) return 0;
         if (tile->FUN_00becf40(0xfa7) == 6006.0f || tile->FUN_00becf40(0xfa7) == 102.0)
-            tile->FUN_00bee190(0xfad, FUN_00bea750(), true);
+            tile->FUN_00bee190(0xfad, Tile_GetMaximumDepth(), true);
         DAT_01076ee8->sub5C.Init(DAT_01076ee8->unk28[1]);
         DAT_01076ee8->flags88 &= ~1;
         DAT_01076ee8->unk28[5]->FUN_00bef830(DAT_01076ee0, 1.0f);
@@ -27013,7 +27016,7 @@ int __cdecl FUN_00becd70(const char*, int);
 
 struct StartFadeTile {
     double FUN_00becf40(int);
-    void FUN_00bf05a0(int, float, float, float, int);
+    void Tile_AddFadeControl(int, float, float, float, int);
 };
 
 struct StartFadeEntry {
@@ -27041,7 +27044,7 @@ void __cdecl FUN_0067dff0() {
         ::StartMenu* sm = ::DAT_010770ac;
         int alpha = FUN_00becd70("_alpha", -1);
         if (reinterpret_cast<StartFadeTile*>(sm->unk02c)->FUN_00becf40(alpha) < FUN_00dbeb78)
-            reinterpret_cast<StartFadeTile*>(sm->unk02c)->FUN_00bf05a0(alpha, 0.0f, FUN_00dc5c94, FUN_00dbea4c, 0);
+            reinterpret_cast<StartFadeTile*>(sm->unk02c)->Tile_AddFadeControl(alpha, 0.0f, FUN_00dc5c94, FUN_00dbea4c, 0);
     }
     if (StartFadeList* list = reinterpret_cast<StartFadeList*>((char*)::DAT_010770ac + 0xac)) {
         for (StartFadeNode* node = &list->node04; node; node = node->next) {
@@ -27055,7 +27058,7 @@ void __cdecl FUN_0067dff0() {
         ::StartMenu* sm = ::DAT_010770ac;
         int alpha = FUN_00becd70("_alpha", -1);
         if (reinterpret_cast<StartFadeTile*>(sm->unk03c)->FUN_00becf40(alpha) < FUN_00dbeb78)
-            reinterpret_cast<StartFadeTile*>(sm->unk03c)->FUN_00bf05a0(alpha, 0.0f, FUN_00dc5c94, FUN_00dbea4c, 0);
+            reinterpret_cast<StartFadeTile*>(sm->unk03c)->Tile_AddFadeControl(alpha, 0.0f, FUN_00dc5c94, FUN_00dbea4c, 0);
     }
 }
 
@@ -27101,7 +27104,7 @@ struct Tile {
     Menu* FUN_00beab90();
     float FUN_00becf40(int id);
     void FUN_00bee190(int id, float v, bool b);
-    Tile* FUN_00beabd0(const char* name);
+    Tile* Tile_GetChildByName(const char* name);
     void FUN_00bf11a0(int id, const char* text, bool b);
 };
 
@@ -27131,9 +27134,9 @@ extern const char* DAT_00f64674;
 extern const char* DAT_00f62c88;
 extern const char* DAT_00f62cac;
 
-Menu* __cdecl FUN_00beaf00(int id);
-int __cdecl FUN_006191a0();
-float __cdecl FUN_00bea750();
+Menu* __cdecl Tile_GetMenuByClass(int id);
+int __cdecl Interface_GetTopMenuID();
+float __cdecl Tile_GetMaximumDepth();
 
 inline int MaxInt(int a, int b) { return a > b ? a : b; }
 inline int MinInt(int a, int b) { return a < b ? a : b; }
@@ -27142,9 +27145,9 @@ Tile* __cdecl FUN_0066a700(int max, void* callback, int initial)
 {
     Iface* iface = DAT_01075b24;
     bool flag = false;
-    Menu* old = FUN_00beaf00(0x3f8);
+    Menu* old = Tile_GetMenuByClass(0x3f8);
     if (old) delete old;
-    if (FUN_006191a0()) flag = true;
+    if (Interface_GetTopMenuID()) flag = true;
     Tile* tile = iface->unk9C->FUN_00bf37b0("Data\\Menus\\quantity_menu.xml");
     DAT_01076dc4 = tile->FUN_00beab90();
     if (DAT_01076dc4 && DAT_01076dc4->GetID() == 0x3f8) {
@@ -27153,7 +27156,7 @@ Tile* __cdecl FUN_0066a700(int max, void* callback, int initial)
             if (DAT_01076dc4->unk28[i] == 0) return 0;
         DAT_011790c8->FUN_00bcfcd0("UIPopUpMessageWindow", 0x121, 0).FUN_00bd00c0();
         if (tile->FUN_00becf40(0xfa7) == 6006.0f || tile->FUN_00becf40(0xfa7) == 102.0)
-            tile->FUN_00bee190(0xfad, FUN_00bea750(), true);
+            tile->FUN_00bee190(0xfad, Tile_GetMaximumDepth(), true);
         int value = MinInt(initial, max);
         int bigStep = MaxInt(max / 20, 1);
         int smallStep = MaxInt(max / 4, 1);
@@ -27165,14 +27168,14 @@ Tile* __cdecl FUN_0066a700(int max, void* callback, int initial)
         DAT_01076dc4->unk28[0]->FUN_00bee190(0xff0, 0.0f, true);
         DAT_01076dc0 = callback;
         if (strcmp(DAT_0106cb94, "ENGLISH")) {
-            tile->FUN_00beabd0("QM_HowManyText")->FUN_00bf11a0(0xfc4, DAT_00f64674, true);
+            tile->Tile_GetChildByName("QM_HowManyText")->FUN_00bf11a0(0xfc4, DAT_00f64674, true);
             DAT_01076dc4->unk28[4]->FUN_00bf11a0(0xfc4, DAT_00f62c88, true);
             DAT_01076dc4->unk28[5]->FUN_00bf11a0(0xfc4, DAT_00f62cac, true);
         }
         if (flag) {
             Tile* t = DAT_01076dc4->unk04;
             float f = DAT_010732dc * 255.0;
-            t->FUN_00beabd0("QM_Background")->FUN_00bee190(0xfa9, f, true);
+            t->Tile_GetChildByName("QM_Background")->FUN_00bee190(0xfa9, f, true);
         }
         DAT_01076dc4->FUN_00bfd010(0);
         return tile;
@@ -27236,13 +27239,13 @@ struct Tile {
     int FUN_00bece90(unsigned int property);
     void FUN_00bf11a0(unsigned int property, int value, int update);
     float FUN_00becf40(int id);
-    Tile* FUN_00bea870(int id);
-    void FUN_00beafa0();
+    Tile* Tile_GetValueQ(int id);
+    void Tile_Value_ClearActions();
     void FUN_00beec50(int a, Tile* b, int c);
     void FUN_00beaf40(int property, float value);
-    void FUN_00bf0720(int a);
+    void Tile_Value_CalculateValue(int a);
 };
-struct Menu { Tile* FUN_00bfd250(); };
+struct Menu { Tile* Menu_RenderTemplate(); };
 Menu* __stdcall FUN_00beab90(Tile* parent, int id, int unk);
 int __cdecl FUN_00becd70(const char* name, int len);
 struct Pool { void* FUN_0086b930(unsigned); };
@@ -27283,7 +27286,7 @@ Tile* FUN_006631f0_cls::FUN_006631f0(int value, int prop, int index, int id)
 {
     Tile* parent = unk0c;
     if (!parent || (!unk18 && !id)) return 0;
-    Tile* t = FUN_00beab90(parent, id ? id : unk18, 0)->FUN_00bfd250();
+    Tile* t = FUN_00beab90(parent, id ? id : unk18, 0)->Menu_RenderTemplate();
     if (!t->FUN_00bece90(0xfaa))
         t->FUN_00bee190(0xfaa, -1.0f, 1);
     if (prop)
@@ -27308,11 +27311,11 @@ Tile* FUN_006631f0_cls::FUN_006631f0(int value, int prop, int index, int id)
     for (Node* n = &list; n; n = n->next)
         if (n->item) count++;
     if (count == 1 && unk0c->FUN_00becf40(FUN_00becd70("_number_of_visible_items", -1)) > 0.0f) {
-        Tile* s = unk0c->FUN_00bea870(0xfb0);
-        s->FUN_00beafa0();
+        Tile* s = unk0c->Tile_GetValueQ(0xfb0);
+        s->Tile_Value_ClearActions();
         s->FUN_00beec50(0x7d0, t, 0xfb0);
         s->FUN_00beaf40(0x7d3, unk0c->FUN_00becf40(FUN_00becd70("_number_of_visible_items", -1)));
-        s->FUN_00bf0720(0);
+        s->Tile_Value_CalculateValue(0);
     }
     return t;
 }
@@ -27754,7 +27757,7 @@ struct Menu {
     void FUN_00bfd010(int a);
 };
 struct Obj4D8 {
-    void FUN_0061ed70(int a, int b, int c);
+    void InterfaceManager_TutorialManager_ShowMessage(int a, int b, int c);
 };
 struct Iface {
     int unk00[39];
@@ -27769,9 +27772,9 @@ extern int DAT_00f63834;
 extern int DAT_00f63840;
 extern int DAT_00f6384c;
 extern int DAT_00f63858;
-Menu* __cdecl FUN_00beaf00(int id);
+Menu* __cdecl Tile_GetMenuByClass(int id);
 void __cdecl FUN_00bfc7e0(const char* path, Menu* menu);
-float __cdecl FUN_00bea750();
+float __cdecl Tile_GetMaximumDepth();
 void __cdecl FUN_0061d340(Tile* t, int a, int b, int c, int d, int e, int f, int g);
 int __cdecl FUN_00becd70(const char* name, int len);
 void __cdecl FUN_00660680();
@@ -27779,7 +27782,7 @@ void __cdecl FUN_00660680();
 Tile* __cdecl FUN_006621c0()
 {
     Iface* iface = DAT_01075b24;
-    Menu* old = FUN_00beaf00(0x3ff);
+    Menu* old = Tile_GetMenuByClass(0x3ff);
     if (old) delete old;
     Tile* tile = iface->unk9C->FUN_00bf37b0("Data\\Menus\\Main\\map_menu.xml");
     DAT_01076bb8 = tile->FUN_00beab90();
@@ -27790,8 +27793,8 @@ Tile* __cdecl FUN_006621c0()
         for (int i = 0; i < 18; i++)
             if (DAT_01076bb8->unk28[i] == 0) return 0;
         if (tile->FUN_00becf40(0xfa7) == 6006.0f || tile->FUN_00becf40(0xfa7) == 102.0)
-            tile->FUN_00bee190(0xfad, FUN_00bea750(), true);
-        DAT_01075b24->obj4D8.FUN_0061ed70(0x1a, 0x3ff, 0x200);
+            tile->FUN_00bee190(0xfad, Tile_GetMaximumDepth(), true);
+        DAT_01075b24->obj4D8.InterfaceManager_TutorialManager_ShowMessage(0x1a, 0x3ff, 0x200);
         FUN_0061d340(DAT_01076bb8->unk28[17], 0x1c, DAT_00f63828, DAT_00f63834, DAT_00f63840, DAT_00f6384c, DAT_00f63858, 0);
         DAT_01076bb8->sub120.Init(DAT_01076bb8->unk28[7]);
         DAT_01076bb8->sub120.flags2C &= ~1;
@@ -27938,7 +27941,7 @@ struct Self {
     void FUN_00664000();
     void FUN_0065e350(void* object);
     void FUN_00664140();
-    void FUN_00667220();
+    void MapMenu_UpdateCurrentPage();
 };
 
 struct Notifier { void FUN_00623d70(void* p, unsigned int id, int flag); };
@@ -27949,7 +27952,8 @@ extern Notifier* DAT_01075b24;
 
 namespace f3m_00667220 {
 
-void Self::FUN_00667220()
+// pdb: MapMenu::UpdateCurrentPage | MapMenu.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+void Self::MapMenu_UpdateCurrentPage()
 {
     this->unk150.FUN_0065d9f0(0);
     this->unk120.FUN_0065d960(0);
@@ -30004,7 +30008,7 @@ struct SlTile {
 
 struct SlSub {
     float FUN_00becf40(int id);
-    int  FUN_00becf60(int id);
+    int  Tile_GetString(int id);
 };
 
 struct SlOption {
@@ -30090,7 +30094,7 @@ void SlMenu::FUN_00670a30()
     int id = (int)m_pkTile->FUN_00becf40(0xfaa);
     if (m_pkOption->unk04 == 0x1c) {
         if (id == 0x64 || id == 0x68) {
-            if (SlEq(m_pkTile->m_pkSub->FUN_00becf60(0x1009), FUN_00f64170))
+            if (SlEq(m_pkTile->m_pkSub->Tile_GetString(0x1009), FUN_00f64170))
                 goto commit;
         }
     }
@@ -30138,13 +30142,13 @@ class TESWorldSpace: public TESForm { public: z665160::MapData* FUN_00501210(); 
 namespace z665160 {
 typedef f3m_006642b0::NiPoint3Q P;
 struct Object {bool FUN_00422810();const char* FUN_004018e0();bool FUN_00422840();unsigned FUN_00422880();};
-struct Ref: f3m_006642b0::QRef {TESWorldSpace* FUN_004e8880();Object* FUN_004e75e0();unsigned char Hidden(){return ((unsigned)unk08>>11)&1;}};
+struct Ref: f3m_006642b0::QRef {TESWorldSpace* FUN_004e8880();Object* TESObjectREFR_GetMapMarkerData();unsigned char Hidden(){return ((unsigned)unk08>>11)&1;}};
 struct Tile {
  int unk00,unk04,unk08,unk0c,unk10,unk14,unk18,unk1c;
  struct Text {void FUN_004019c0(const char*,int);__forceinline Text& operator=(const char* s){FUN_004019c0(s,0);return *this;}} text;
  void FUN_00bee190(unsigned,float,int);void FUN_00bf11a0(unsigned,const char*,int);void FUN_00617a60(unsigned,int);int FUN_00bed3c0(int);
 };
-struct Manager {Tile* FUN_00bfd250(Tile*,const char*,int);};
+struct Manager {Tile* Menu_RenderTemplate(Tile*,const char*,int);};
 struct Heap {void FUN_0086ba60(void*);void* FUN_0086b930(unsigned);};extern Heap DAT_01090a78;
 struct Node {Ref* item;Node* next;void FUN_006c8220();~Node(){FUN_006c8220();}static void operator delete(void* p){DAT_01090a78.FUN_0086ba60(p);}};
 struct ListCell {Ref* item;ListCell* next;};
@@ -30165,7 +30169,7 @@ struct Defaults {int unk00,unk04,unk08;TESWorldSpace* world;};extern Defaults* D
 extern bool DAT_01076bbc;extern Manager* DAT_01076bb8;extern unsigned DAT_01076ba0,DAT_01076b9c;
 extern const char DAT_00e06b70[],DAT_00e068b4[],DAT_00e06b3c[],DAT_00e06b2c[];
 extern const char* DAT_00f6b13c[];extern float DAT_00e068d8;
-TESForm* __cdecl FUN_00455190(unsigned);const char* __cdecl FUN_00501cf0();unsigned __cdecl FUN_00becd70(const char*,int);
+TESForm* __cdecl TESForm_GetFormByNumericID(unsigned);const char* __cdecl FUN_00501cf0();unsigned __cdecl FUN_00becd70(const char*,int);
 struct Pair {float x,y;Pair(float a,float b):x(a),y(b){}};
 struct Owner {
  int unk0;
@@ -30233,12 +30237,12 @@ struct Owner {
  int unk104;
  int unk108;
  int unk10c;
- void FUN_00665160();void FUN_0065ebf0(int,float);P FUN_0065d600(P,TESWorldSpace*);void FUN_006642b0();
+ void FUN_00665160();void FUN_0065ebf0(int,float);P FUN_0065d600(P,TESWorldSpace*);void MapMenu_AddMapIcons();
 };
 void Owner::FUN_00665160() {
  MapData* data=world?world->FUN_00501210():0;
  if(!world || !data || !data->width || !data->height) {
-  world=dynamic_cast<TESWorldSpace*>(FUN_00455190(0x3c));
+  world=dynamic_cast<TESWorldSpace*>(TESForm_GetFormByNumericID(0x3c));
   data=world?world->FUN_00501210():0;
   changed=true;
  }
@@ -30269,16 +30273,16 @@ void Owner::FUN_00665160() {
    P position=*rawPosition;
    TESWorldSpace* root=reference->FUN_004e8880();
    while(root && root->FUN_00501200()) root=root->FUN_00501200();
-   if(!reference->FUN_004e75e0()->FUN_00422810() || reference->Hidden() || root!=world) continue;
-   Tile* marker=DAT_01076bb8->FUN_00bfd250(tile,DAT_00e06b70,0);
+   if(!reference->TESObjectREFR_GetMapMarkerData()->FUN_00422810() || reference->Hidden() || root!=world) continue;
+   Tile* marker=DAT_01076bb8->Menu_RenderTemplate(tile,DAT_00e06b70,0);
    if(!marker) continue;
    P projected=FUN_0065d600(position,reference->FUN_004e8880());
-   marker->text=reference->FUN_004e75e0()->FUN_004018e0();
+   marker->text=reference->TESObjectREFR_GetMapMarkerData()->FUN_004018e0();
    marker->FUN_00bee190(0xfaa,DAT_00e068d8,1);
    marker->FUN_00bee190(DAT_01076ba0,projected.x,1);
    marker->FUN_00bee190(DAT_01076b9c,projected.y,1);
-   marker->FUN_00bf11a0(FUN_00becd70(DAT_00e068b4,-1),reference->FUN_004e75e0()->FUN_004018e0(),1);
-   if(reference->FUN_004e75e0()->FUN_00422840()) marker->FUN_00bf11a0(0xfcc,DAT_00f6b13c[reference->FUN_004e75e0()->FUN_00422880()],1);
+   marker->FUN_00bf11a0(FUN_00becd70(DAT_00e068b4,-1),reference->TESObjectREFR_GetMapMarkerData()->FUN_004018e0(),1);
+   if(reference->TESObjectREFR_GetMapMarkerData()->FUN_00422840()) marker->FUN_00bf11a0(0xfcc,DAT_00f6b13c[reference->TESObjectREFR_GetMapMarkerData()->FUN_00422880()],1);
    else {marker->FUN_00bf11a0(0xfcc,DAT_00e06b3c,1);
    marker->FUN_00bee190(0x1004,0.0f,1);}
    marker->FUN_00617a60(FUN_00becd70(DAT_00e06b2c,-1),markerIndex);
@@ -30288,7 +30292,7 @@ void Owner::FUN_00665160() {
   head->FUN_006c8220();
   delete head;
  }
- FUN_006642b0();
+ MapMenu_AddMapIcons();
 }
 }
 
@@ -31068,16 +31072,16 @@ InventoryChanges* GetInventoryChanges(TESObjectREFR* ref); // FUN_0047e090
 extern TESObjectREFR* g_thePlayer;                   // DAT_0107a104
 
 struct TileValue {
-    void Clear();                                    // FUN_00beafa0
+    void Clear();                                    // Tile_Value_ClearActions
     void Link(int op, Tile* tile, int id);           // FUN_00beec50
     void SetNumber(int op, float value);             // FUN_00beaf40
-    void Finish(int flag);                           // FUN_00bf0720
+    void Finish(int flag);                           // Tile_Value_CalculateValue
 };
 
 struct Tile {
     void SetFloat(int id, float value, bool propagate);         // FUN_00bee190
-    TileValue* GetValue(int id);                                 // FUN_00bea870
-    Tile* GetChild(const char* name);                            // FUN_00beabd0
+    TileValue* GetValue(int id);                                 // Tile_GetValueQ
+    Tile* GetChild(const char* name);                            // Tile_GetChildByName
     void SetString(int id, const char* text, bool propagate);   // FUN_00bf11a0
 };
 
@@ -31196,10 +31200,10 @@ unsigned unk02c;
 unsigned flags;
 ChainObj* FUN_00501cc0(); ChainObj* FUN_00586170(){return FUN_00501cc0();}
 ChainObj* FUN_0043b230(){return node;} bool FUN_00456610(){return (flags&1)!=0;} void FUN_00450f90(bool b){if(b)flags|=1;else flags&=~1;}
-void* FUN_00501d20(int,int); void* FUN_005875a0(int a,int b){return FUN_00501d20(a,b);}
+void* TESWorldSpace_GetCellFromCellCoord(int,int); void* FUN_005875a0(int a,int b){return TESWorldSpace_GetCellFromCellCoord(a,b);}
 void FUN_004d3db0(); void FUN_00555bc0(){FUN_004d3db0();}
-void FUN_004d3cc0(NiPt3*,NiPt3*,int);void FUN_00555b10(NiPt3* a,NiPt3*b,int c){FUN_004d3cc0(a,b,c);}
-void FUN_004d3dc0(int,int,int);void FUN_00556ef0(int a,int b,int c){FUN_004d3dc0(a,b,c);}
+void TESObjectCELL_AdjustCoordForNorthRotation(NiPt3*,NiPt3*,int);void FUN_00555b10(NiPt3* a,NiPt3*b,int c){TESObjectCELL_AdjustCoordForNorthRotation(a,b,c);}
+void TESObjectCELL_GetIntSeenSection(int,int,int);void FUN_00556ef0(int a,int b,int c){TESObjectCELL_GetIntSeenSection(a,b,c);}
 void FUN_004df240(Local12*);void FUN_0054e640(Local12*p){FUN_004df240(p);}
 void FUN_004df340(int,int,Local12*);void FUN_0054e750(int a,int b,Local12*p){FUN_004df340(a,b,p);}
 void FUN_004db330(unsigned*);void CollectCellReferences(unsigned*p){FUN_004db330(p);}
@@ -31223,7 +31227,7 @@ unsigned unk030;
 unsigned unk034;
 unsigned unk038;
 void* cell;
-bool FUN_004e8840();bool FUN_00575d10(){return FUN_004e8840();} void* FUN_004e8880();void* FUN_00575d70(){return FUN_004e8880();} void* FUN_008d6f30(){return cell;}
+bool TESObjectREFR_GetInterior();bool FUN_00575d10(){return TESObjectREFR_GetInterior();} void* FUN_004e8880();void* FUN_00575d70(){return FUN_004e8880();} void* FUN_008d6f30(){return cell;}
 };
 struct PathSrc {
 unsigned unk000;
@@ -31775,7 +31779,7 @@ unsigned unk014;
 FUN_00824e90();
 };
 extern unsigned DAT_00db7534; struct Obj1C:FUN_00824e90 { unsigned short flags;unsigned char mode; Obj1C(){*(void**)this=&DAT_00db7534;flags=0xec;mode=0;} static void* operator new(unsigned n){return FUN_0089eb90(n);}static void operator delete(void*p,unsigned n){FUN_0089ec10(p,n);} void FUN_00439340(int n){flags=(flags&~0x1e)|(n<<1);}void FUN_00439390(int n){flags=(flags&~0x1e0)|(n<<5);}void FUN_0049ed90(int n){flags=(flags&~1)|n;} };
-struct ColorSource{void FUN_00621610(int,Obj16*);void ReadColor(int n,Obj16*p){FUN_00621610(n,p);}};ColorSource* FUN_006295a0();ColorSource* ColorSingleton(){return FUN_006295a0();}
+struct ColorSource{void SystemColorManager_GetColor(int,Obj16*);void ReadColor(int n,Obj16*p){SystemColorManager_GetColor(n,p);}};ColorSource* SystemColorManager_GetInstance();ColorSource* ColorSingleton(){return SystemColorManager_GetInstance();}
 struct Lock{unsigned unk000;
 unsigned unk004;
 unsigned unk008;
@@ -31809,7 +31813,7 @@ unsigned unk074;
 unsigned unk078;
 unsigned unk07c;
 CriticalSection3104 cs;void FUN_004a0370(){EnterCriticalSection(&cs);}void FUN_004a03c0(){LeaveCriticalSection(&cs);}};extern Lock* DAT_0108f048;Lock* FUN_0043c4b0(){return DAT_0108f048;}
-int FUN_004d7c50(V3Maker*);void FUN_00403230(char*,unsigned,const char*,...);void __stdcall FUN_00c20826(char*,int,unsigned,int);void* FUN_00424d50(unsigned,unsigned);void FUN_00ade300(void*,int,int);float FUN_0061e250();float FUN_0061e2a0();float FUN_006f0300();
+int TESObjectCELL_GetSeenValue(V3Maker*);void FUN_00403230(char*,unsigned,const char*,...);void __stdcall FUN_00c20826(char*,int,unsigned,int);void* FUN_00424d50(unsigned,unsigned);void FUN_00ade300(void*,int,int);float FUN_0061e250();float FUN_0061e2a0();float FUN_006f0300();
 extern Position DAT_0108ec68;extern RenderColor DAT_01175128,DAT_00f73210;extern unsigned char DAT_01174e83;extern unsigned DAT_0108ed88;
 
 // @fnv 0x0079ffb0
@@ -31878,7 +31882,7 @@ void __cdecl FUN_00665b00(char param_1)
     DAT_01174e83 = 1;
 
     Obj16 objB83(0.0f, 0.0f, 0.0f, 0.0f);
-    FUN_006295a0()->FUN_00621610(4, &objB83);
+    SystemColorManager_GetInstance()->SystemColorManager_GetColor(4, &objB83);
     cFlag7151 = 1;
     if (reinterpret_cast<ObjD_11dea3c*>(DAT_0107a104)->FUN_00575d70() != 0)
     {
@@ -32029,7 +32033,7 @@ void __cdecl FUN_00665b00(char param_1)
             mk324.FUN_0063c8a0(reinterpret_cast<NiPt3*>(&base9c33));
             float hgt = 4.0f;
             if (reinterpret_cast<MapMenuR6*>(DAT_01076bb8)->field_12c != 0)
-                hgt = static_cast<float>(FUN_004d7c50(reinterpret_cast<V3Maker*>(&mk324)));
+                hgt = static_cast<float>(TESObjectCELL_GetSeenValue(reinterpret_cast<V3Maker*>(&mk324)));
             static_cast<NiCol*>(pvC52)[idx19] = NiCol(1.0f, 1.0f, 1.0f, hgt / 4.0);
             idx19++;
         }
@@ -32204,7 +32208,7 @@ namespace S0067c5a0_ns {
 
 int __cdecl FUN_0061a9a0();
 struct S0067c5a0_State { void FUN_00698830(); };
-S0067c5a0_State* __cdecl FUN_00619e90();
+S0067c5a0_State* __cdecl Interface_GetPipboy();
 bool __cdecl FUN_00619b80();
 void __cdecl FUN_00619ba0(int a);
 bool __cdecl FUN_0061bcc0();
@@ -32237,8 +32241,8 @@ void FUN_0067c5a0(unsigned char arg)
     if (!::DAT_010770ac)
         return;
     if (::DAT_010770ac->flags1a0 & 1) {
-        if (FUN_0061a9a0() && FUN_0061a9a0() == (int)FUN_00619e90())
-            FUN_00619e90()->FUN_00698830();
+        if (FUN_0061a9a0() && FUN_0061a9a0() == (int)Interface_GetPipboy())
+            Interface_GetPipboy()->FUN_00698830();
     }
     if (!::DAT_010770ac || ((S0067c5a0_Menu*)::DAT_010770ac)->FUN_0067aee0())
         return;
@@ -32348,7 +32352,7 @@ namespace MenuText66C1E0 {
 
 class Value {
 public:
-    const char* FUN_00becf60(int id);
+    const char* Tile_GetString(int id);
     float FUN_00becf40(int id);
     void FUN_00bee190(int id, float value, int type);
     void FUN_00bf11a0(int id, const char* value, int type);
@@ -32438,7 +32442,7 @@ void Target::FUN_0066c1e0()
     }
     if (!unk20)
         return;
-    const char* t = unk20->value->FUN_00becf60(0xfe8);
+    const char* t = unk20->value->Tile_GetString(0xfe8);
     Str str(t);
     Value* initialValue=unk20->value;
     initialValue->FUN_00bee190(0xfe8, DAT_00db38b8, 1);
@@ -32484,10 +32488,11 @@ struct Factory {
     int unk08, unk0C, unk10, unk14, unk18, unk1C;
     void* selected20;
     Node* FUN_0066b0d0(Node* node);
-    bool FUN_0066b690(int step);
+    bool RaceSexMenu_MenuOptionList_DoGamepad(int step);
 };
 
-bool Factory::FUN_0066b690(int step)
+// pdb: RaceSexMenu::MenuOptionList::DoGamepad | RaceSexMenu.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+bool Factory::RaceSexMenu_MenuOptionList_DoGamepad(int step)
 {
     bool flag = step == 1 || step == 15;
     bool result = true;
@@ -33313,7 +33318,7 @@ struct Value {
 
     void* GetItem() { return unk08; }
     float FUN_0047cf30(bool flag);
-    bool FUN_0047d260(bool flag);
+    bool ItemChange_GetWorn(bool flag);
 };
 
 struct Menu {
@@ -33369,7 +33374,8 @@ extern Player* DAT_0107a104;
 int __cdecl FUN_0045bd90(void* item);
 int __cdecl FUN_00584a00(int skill, float health, float value);
 
-void __cdecl FUN_00673340(Tile* tile, Value* val)
+// pdb: RepairServicesMenu::InitFunc | RepairServicesMenu.obj | fnv360_0822_retail, udata, high
+void __cdecl RepairServicesMenu_InitFunc(Tile* tile, Value* val)
 {
     if (!tile || !val)
         return;
@@ -33391,7 +33397,7 @@ void __cdecl FUN_00673340(Tile* tile, Value* val)
     tile->FUN_00bee190(0xfa3, (float)(tile->FUN_00becf40(0xfac) >= 0.0f), 1);
     tile->FUN_00bed3c0(0x12)->FUN_00bee190(0xfb1, (float)(val->FUN_0047cf30(1) * DAT_00dc8040), 1);
     tile->FUN_00bee190(DAT_01076f54, (float)(alpha == 255.0), 1);
-    if (val->FUN_0047d260(0))
+    if (val->ItemChange_GetWorn(0))
         tile->head->tile->FUN_00bee190(0xfa3, 1.0f, 1);
 }
 
@@ -33626,7 +33632,7 @@ struct Config {
     int unk1b0;
     int unk1b4;
     void* value1b8;
-    void FUN_005579a0(Choice*);
+    void TESNPC_CopyHeadData(Choice*);
 };
 struct Owner {
     int unk00;
@@ -33691,7 +33697,7 @@ void Owner::FUN_0066fce0()
             flags&=~0x200u;
         }
     } else if(id==0x18) {
-        config->FUN_005579a0(choices[(int)current->tile->FUN_00becf40(0x1005)-1]);
+        config->TESNPC_CopyHeadData(choices[(int)current->tile->FUN_00becf40(0x1005)-1]);
         List** view=views;
         unsigned count=20;
         do {(*view)->FUN_0066b600();++view;}while(--count);
@@ -33799,7 +33805,7 @@ extern Handler* DAT_010770ac;
 extern Renderer* DAT_011790c8;
 extern State* DAT_0107a0d4;
 extern Queue* DAT_0107a0d8;
-void FUN_0061aef0();
+void Interface_HideMenus();
 void FUN_0061cfd0(int value);
 Interface* FUN_00be78d0();
 }
@@ -33807,7 +33813,7 @@ Interface* FUN_00be78d0();
 void FUN_00679960()
 {
     delete c679960::DAT_010770ac;
-    c679960::FUN_0061aef0();
+    c679960::Interface_HideMenus();
     c679960::FUN_0061cfd0(0);
     c679960::DAT_011790c8->FUN_00bcf5d0(-1, 0);
     if (c679960::FUN_00be78d0()) {
@@ -33821,9 +33827,9 @@ void FUN_00679960()
 // @f3 0x00673520 (community match, verified in this file)
 namespace f3m_00673520 {
 namespace Eligible301 {
-struct Item {virtual void v000(); virtual void v004(); virtual void v008(); virtual void v00c(); virtual void v010(); virtual void v014(); virtual void v018(); virtual void v01c(); virtual void v020(); virtual void v024(); virtual void v028(); virtual void v02c(); virtual void v030(); virtual void v034(); virtual void v038(); virtual void v03c(); virtual void v040(); virtual void v044(); virtual void v048(); virtual void v04c(); virtual void v050(); virtual void v054(); virtual void v058(); virtual void v05c(); virtual void v060(); virtual void v064(); virtual void v068(); virtual void v06c(); virtual void v070(); virtual void v074(); virtual void v078(); virtual void v07c(); virtual void v080(); virtual void v084(); virtual void v088(); virtual void v08c(); virtual void v090();virtual bool blocked();unsigned char type;float FUN_0047cda0();};struct Check {bool FUN_00451d90();};Check* FUN_00451da0(Item*);bool FUN_00452670(Item*);void* FUN_004566c0(Item*);
+struct Item {virtual void v000(); virtual void v004(); virtual void v008(); virtual void v00c(); virtual void v010(); virtual void v014(); virtual void v018(); virtual void v01c(); virtual void v020(); virtual void v024(); virtual void v028(); virtual void v02c(); virtual void v030(); virtual void v034(); virtual void v038(); virtual void v03c(); virtual void v040(); virtual void v044(); virtual void v048(); virtual void v04c(); virtual void v050(); virtual void v054(); virtual void v058(); virtual void v05c(); virtual void v060(); virtual void v064(); virtual void v068(); virtual void v06c(); virtual void v070(); virtual void v074(); virtual void v078(); virtual void v07c(); virtual void v080(); virtual void v084(); virtual void v088(); virtual void v08c(); virtual void v090();virtual bool blocked();unsigned char type;float FUN_0047cda0();};struct Check {bool FUN_00451d90();};Check* FUN_00451da0(Item*);bool TESContainer_IsGold(Item*);void* FUN_004566c0(Item*);
 struct Object {int unk00,unk04;Item* item;double FUN_0047cf30(int);};extern float DAT_00f6192c,DAT_00eaad58;extern double DAT_00dc2d10;
-bool FUN_00673520(Object* object){Item* item=object->item;Check* check=FUN_00451da0(item);if(!item||(check&&!check->FUN_00451d90())||FUN_00452670(item)||item->blocked()||!FUN_004566c0(item))return true;if(object->FUN_0047cf30(1)>=DAT_00f6192c*DAT_00dc2d10)return true;if(item->type==24&&item->FUN_0047cda0()<=0.0f)return true;return false;}
+bool FUN_00673520(Object* object){Item* item=object->item;Check* check=FUN_00451da0(item);if(!item||(check&&!check->FUN_00451d90())||TESContainer_IsGold(item)||item->blocked()||!FUN_004566c0(item))return true;if(object->FUN_0047cf30(1)>=DAT_00f6192c*DAT_00dc2d10)return true;if(item->type==24&&item->FUN_0047cda0()<=0.0f)return true;return false;}
 }
 
 
@@ -33835,13 +33841,13 @@ namespace f3m_00679a20 {
 void __cdecl FUN_00679a20(List67* list)
 {
     if (::DAT_010770ac && Bit5(::DAT_010770ac->flags1a0)) {
-        FUN_006295a0(1)->FUN_00621690(DAT_00f6b3d8[list->index]);
+        SystemColorManager_GetInstance(1)->FUN_00621690(DAT_00f6b3d8[list->index]);
         DAT_01075b24->tile->FUN_00bef410(1, 0.0f);
         return;
     }
     list->first = 0;
     list->index = 0;
-    while (DAT_00f6b3d8[list->index] != FUN_006295a0(1)->FUN_00621640()) {
+    while (DAT_00f6b3d8[list->index] != SystemColorManager_GetInstance(1)->FUN_00621640()) {
         if (++list->index >= list->count) {
             list->index = list->first;
             return;
@@ -33858,7 +33864,7 @@ struct SoundHandle {
     bool bFlag;
     int iState;
     bool FUN_00bd0160();
-    void FUN_00bd0140();
+    void BSSoundHandle_Stop();
     void FUN_00bd00c0();
 };
 
@@ -33918,7 +33924,7 @@ struct MenuView6649e0 {
 void MenuView6649e0::FUN_006649e0()
 {
     if (m_pkCurrent && m_pkCurrent->kHandle.FUN_00bd0160())
-        m_pkCurrent->kHandle.FUN_00bd0140();
+        m_pkCurrent->kHandle.BSSoundHandle_Stop();
     m_kSounds.FUN_0063fda0();
     m_kSubtitles.Clear();
     m_fSoundVolume = 0.0f;
@@ -34880,7 +34886,7 @@ struct Tile {
  void FUN_00bf11a0(unsigned,const char*,bool);
  void FUN_00bee190(unsigned,float,bool);
  bool FUN_00beac60(unsigned);
- void FUN_00bf05a0(unsigned,float,float,float,bool);
+ void Tile_AddFadeControl(unsigned,float,float,float,bool);
 };
 struct Owner {
  unsigned unk00; unsigned unk04; unsigned unk08; unsigned unk0c; unsigned unk10; unsigned unk14; unsigned unk18; unsigned unk1c; unsigned unk20; unsigned unk24; unsigned unk28; unsigned unk2c; unsigned unk30; unsigned unk34; unsigned unk38; unsigned unk3c; unsigned unk40; unsigned unk44;
@@ -34892,7 +34898,7 @@ void Owner::FUN_00671b10(const char* text){
  tile4c->FUN_00bee190(0xfa3,0.0f,true);
  tile48->FUN_00bee190(0xfa3,1.0f,true);
  if(!tile48->FUN_00beac60(0xfa9))
-  tile48->FUN_00bf05a0(0xfa9,DAT_00dc5c94,DAT_00dfcd00,DAT_00dbcbd0,true);
+  tile48->Tile_AddFadeControl(0xfa9,DAT_00dc5c94,DAT_00dfcd00,DAT_00dbcbd0,true);
 }
 }
 }   // namespace f3m_00671b10
@@ -36619,9 +36625,9 @@ struct S662470_List {
 struct S662470_Tile;
 
 struct S662470_Value {
-    void FUN_00beafa0();
+    void Tile_Value_ClearActions();
     void FUN_00beec50(int a, S662470_Tile* b, int c);
-    void FUN_00bf0720(int a);
+    void Tile_Value_CalculateValue(int a);
 };
 
 struct S662470_Tile {
@@ -36635,12 +36641,12 @@ struct S662470_Tile {
 };
 
 struct S662470_Manager {
-    S662470_Tile* FUN_00bfd250(S662470_Tile* parent, const char* name, int a);
+    S662470_Tile* Menu_RenderTemplate(S662470_Tile* parent, const char* name, int a);
 };
 
 struct S662470_Path { int a, b, c, d, e; };
 
-struct S662470_Xform { void FUN_004d3cc0(S662470_Point* out, S662470_Point* in, int flag); };
+struct S662470_Xform { void TESObjectCELL_AdjustCoordForNorthRotation(S662470_Point* out, S662470_Point* in, int flag); };
 
 struct S662470_Ref {
     virtual void v000(); virtual void v001(); virtual void v002(); virtual void v003();
@@ -36678,7 +36684,7 @@ struct S662470_Ref {
     virtual S662470_Point* GetPos();
     int unk04, unk08, unk0c, unk10, unk14, unk18, unk1c, unk20, unk24, unk28, unk2c, unk30, unk34, unk38;
     void* cell;
-    bool FUN_004e8840();
+    bool TESObjectREFR_GetInterior();
     void* FUN_004e8880();
 };
 
@@ -36688,7 +36694,7 @@ struct S662470_Quest {
     S662470_Path path;
     S662470_Ref** targets;
     unsigned int targetCount;
-    S662470_Ref* FUN_0055f010(int a);
+    S662470_Ref* TESQuestTarget_GetReference(int a);
     S662470_Ref* GetFirst() { return targetCount > 0 ? targets[0] : unk0c; }
 };
 
@@ -36722,7 +36728,7 @@ struct S662470_Menu {
     S662470_Ref* unk104;
     int unk108;
     S662470_Xform* unk10c;
-    S662470_Ref* FUN_0065f160(S662470_Ref* ref, S662470_Path* path);
+    S662470_Ref* MapMenu_GetWorldMapTrackingRef(S662470_Ref* ref, S662470_Path* path);
     void FUN_00660030(S662470_Ref* from, S662470_Ref* to, S662470_Path* path, int a);
     S662470_Point FUN_0065d600(S662470_Point pos, void* x);
     void FUN_00662470();
@@ -36745,35 +36751,35 @@ void S662470_Menu::FUN_00662470()
     }
     S662470_QuestNode* node = DAT_0107a104->FUN_0076cf30();
     while (S662470_Valid(node)) {
-        S662470_Ref* ref = node->quest->FUN_0055f010(1);
+        S662470_Ref* ref = node->quest->TESQuestTarget_GetReference(1);
         S662470_Quest* quest = node->quest;
-        S662470_Ref* target = mode == 29 ? FUN_0065f160(ref, &quest->path) : quest->GetFirst();
+        S662470_Ref* target = mode == 29 ? MapMenu_GetWorldMapTrackingRef(ref, &quest->path) : quest->GetFirst();
         if (target) {
             if (mode == 29)
                 FUN_00660030(unk104, target, &node->quest->path, 0x19);
         } else if (ref) {
-            if ((mode == 29 && !ref->FUN_004e8840()) || (mode == 28 && ref->cell == DAT_0107a104->cell))
-                target = node->quest->FUN_0055f010(1);
+            if ((mode == 29 && !ref->TESObjectREFR_GetInterior()) || (mode == 28 && ref->cell == DAT_0107a104->cell))
+                target = node->quest->TESQuestTarget_GetReference(1);
         }
         if (target) {
             S662470_Point pos = *target->GetPos();
             if (unk10c)
-                unk10c->FUN_004d3cc0(&pos, &pos, 1);
+                unk10c->TESObjectCELL_AdjustCoordForNorthRotation(&pos, &pos, 1);
             S662470_Point mapPos;
             mapPos = FUN_0065d600(pos, target->FUN_004e8880());
             S662470_Tile* marker;
             if (mode == 29)
-                marker = DAT_01076bb8->FUN_00bfd250(unk74, "WorldMapQuestMarkerTemplate", 0);
+                marker = DAT_01076bb8->Menu_RenderTemplate(unk74, "WorldMapQuestMarkerTemplate", 0);
             else
-                marker = DAT_01076bb8->FUN_00bfd250(unk74, "LocalMapQuestMarkerTemplate", 0);
+                marker = DAT_01076bb8->Menu_RenderTemplate(unk74, "LocalMapQuestMarkerTemplate", 0);
             marker->FUN_00bee190(DAT_01076ba0, mapPos.x, 1);
             marker->FUN_00bee190(DAT_01076b9c, mapPos.y, 1);
             marker->FUN_00bf11a0(0xfcc, "glow_hud_compass_objective_marker.dds", 1);
             marker->FUN_00bee190(0xfaa, 23.0f, 1);
             S662470_Value* value = marker->FUN_00bece90(0xff5);
-            value->FUN_00beafa0();
+            value->Tile_Value_ClearActions();
             value->FUN_00beec50(2000, mode == 29 ? unk3c : unk34, 0xff5);
-            value->FUN_00bf0720(0);
+            value->Tile_Value_CalculateValue(0);
         }
         node = node->next;
     }
@@ -36788,7 +36794,7 @@ struct Tile {
     void FUN_00bf11a0(int,const char*,int);
     double FUN_00becf40(int);
     void FUN_00bef830(int,float);
-    void FUN_00bf05a0(int,float,float,float,int);
+    void Tile_AddFadeControl(int,float,float,float,int);
 };
 struct Item {Tile* tile;unsigned unk04;unsigned char filtered;};
 struct Node {Item* item;Node* next;};
@@ -36959,10 +36965,10 @@ void Owner::FUN_0067e0f0()
     }
     int alpha=FUN_00becd70(DAT_00e08010,-1);
     if(tile40->FUN_00becf40(alpha)<255.0)
-        tile40->FUN_00bf05a0(alpha,0.0f,255.0f,0.25f,0);
+        tile40->Tile_AddFadeControl(alpha,0.0f,255.0f,0.25f,0);
     alpha=FUN_00becd70(DAT_00e08010,-1);
     if(tile3c->FUN_00becf40(alpha)<255.0)
-        tile3c->FUN_00bf05a0(alpha,0.0f,255.0f,0.25f,0);
+        tile3c->Tile_AddFadeControl(alpha,0.0f,255.0f,0.25f,0);
     tile38->FUN_00bf11a0(0xfc4,DAT_00f65244,1);
 }
 }
@@ -37175,7 +37181,7 @@ struct Menu {
     int unk30,unk34,unk38,unk3c,unk40,unk44,unk48,unk4c,unk50,unk54,unk58,unk5c;
     int unk60,unk64,unk68,unk6c,unk70,unk74;
     Tile* root;
-    Tile* FUN_00bfd250(Tile* parent,const char* name,int flags);
+    Tile* Menu_RenderTemplate(Tile* parent,const char* name,int flags);
 };
 extern Menu* DAT_01076dd4;
 int __cdecl FUN_00becd70(const char*,int);
@@ -37247,7 +37253,7 @@ Row* Owner::FUN_0066c330(const char* text,const char* name,unsigned id,ListPos p
     Row* added=new Row;
     int position=(int)tile->FUN_00becf40(0x1004);
     added->id=id;
-    added->tile=DAT_01076dd4->FUN_00bfd250(DAT_01076dd4->root,name,0);
+    added->tile=DAT_01076dd4->Menu_RenderTemplate(DAT_01076dd4->root,name,0);
     added->tile->FUN_00bf11a0(0xfc4,text,true);
     added->tile->FUN_00bee190(0x1004,(float)position,true);
     added->tile->FUN_00bee190(0xfaf,1.0f,true);
@@ -37361,10 +37367,11 @@ struct S662a90_Menu {
     int unk40, unk44, unk48, unk4c, unk50, unk54, unk58, unk5c, unk60, unk64, unk68, unk6c;
     int mode;
     S662a90_Tile* unk74;
-    void FUN_00662a90();
+    void MapMenu_DeletePlayerMarker();
 };
 
-void S662a90_Menu::FUN_00662a90()
+// pdb: MapMenu::DeletePlayerMarker | MapMenu.obj | fnv360_1110_retail, objrun + bridge(call_gap|call_gap_sim), high
+void S662a90_Menu::MapMenu_DeletePlayerMarker()
 {
     S662a90_Tile* first = unk74->FUN_00bed3c0(0x18);
     S662a90_Tile* child = first;
@@ -37444,7 +37451,7 @@ struct PipItemP {
     int unk10;
     int unk14; int unk18; int unk1c;
     int unk20;
-    bool FUN_0066b690(int key);
+    bool RaceSexMenu_MenuOptionList_DoGamepad(int key);
     int GetNext() { return unk0c; }
     int GetPrev() { return unk10; }
 };
@@ -37552,12 +37559,12 @@ bool PipMenuP::FUN_0066cf90(int key, float unused)
         }
     }
     case 1:
-        return unk28[FUN_00684310()]->FUN_0066b690(key);
+        return unk28[FUN_00684310()]->RaceSexMenu_MenuOptionList_DoGamepad(key);
     case 2: {
         TileP* active = DAT_01075b24->unkbc;
         if (active == unk88 || active == unk8c)
             return true;
-        if (unk28[FUN_00684310()]->FUN_0066b690(key))
+        if (unk28[FUN_00684310()]->RaceSexMenu_MenuOptionList_DoGamepad(key))
             return true;
         if (unk88->FUN_00beac40()) {
             PipItemP* item = Current();
@@ -37602,10 +37609,10 @@ struct FUN_0040eda0 {
     int unk14;
     int unk18;
     short FUN_0040ac80();
-    void FUN_0041b3c0(ExtraList*);
-    void FUN_00410170(short);
+    void ExtraDataList_DuplicateExtraListForContainer(ExtraList*);
+    void ExtraDataList_SetCount(short);
     void FUN_0040b160(float);
-    bool FUN_0040a7e0(ExtraList*, bool);
+    bool ExtraDataList_CompareListForContainer(ExtraList*, bool);
     void FUN_0040b510(int);
     static void* operator new(unsigned n) throw() { return DAT_01090a78.FUN_0086b930(n); }
     static void operator delete(void* p) { DAT_01090a78.FUN_0086ba60(p); }
@@ -37685,14 +37692,14 @@ static __forceinline void ApplyRepair(float ratio)
     ExtraList* copy = new ExtraList();
     bool found = false;
     int total = form->FUN_0040ac80();
-    copy->FUN_0041b3c0(form);
-    copy->FUN_00410170(1);
+    copy->ExtraDataList_DuplicateExtraListForContainer(form);
+    copy->ExtraDataList_SetCount(1);
     copy->FUN_0040b160(ratio);
     DAT_01076eec->extraLists->RemoveHead();
-    if (total > 1) form->FUN_00410170(total - 1);
+    if (total > 1) form->ExtraDataList_SetCount(total - 1);
     for (Node* n = entry->extraLists; n && n->data; n = n->next) {
-        if (!n->data->FUN_0040a7e0(copy, true) && !copy->FUN_0040a7e0(n->data, true)) {
-            n->data->FUN_00410170(n->data->FUN_0040ac80() + 1);
+        if (!n->data->ExtraDataList_CompareListForContainer(copy, true) && !copy->ExtraDataList_CompareListForContainer(n->data, true)) {
+            n->data->ExtraDataList_SetCount(n->data->FUN_0040ac80() + 1);
             DAT_01076eec->extraLists->FUN_0049fac0(n);
             found = true;
         }
@@ -37875,7 +37882,7 @@ class TESNPC : public TESBoundObject { public:
 };
 struct ObjectSource { unsigned int unk00,unk04,unk08,unk0c,unk10,unk14,unk18; TESBoundObject* unk1c; };
 namespace f66f { extern ObjectSource* DAT_0107a104; }
-struct UISetup { void FUN_0061ed70(int,int,int); };
+struct UISetup { void InterfaceManager_TutorialManager_ShowMessage(int,int,int); };
 struct UISetupOwner {
     unsigned int unk00;
     unsigned int unk04;
@@ -38280,7 +38287,7 @@ struct ChoiceLists {
 extern ChoiceLists* DAT_0106cdcc;
 extern const char* DAT_01076e84;
 extern float DAT_01076e64;
-float __stdcall FUN_00bea750(int);
+float __stdcall Tile_GetMaximumDepth(int);
 int __cdecl FUN_00476910();
 void __cdecl FUN_0066ae80();
 void __cdecl FUN_0066adc0();
@@ -38384,8 +38391,8 @@ struct MenuInit {
 };
 void MenuInit::FUN_0066ffc0(int mode) {
     if (unk04->FUN_00becf40(0xfa7)==6006.0f || unk04->FUN_00becf40(0xfa7)==102.0)
-        unk04->FUN_00bee190(0xfad,FUN_00bea750(1));
-    f66f::DAT_01075b24->unk4d8.FUN_0061ed70(15,0x40c,0x200);
+        unk04->FUN_00bee190(0xfad,Tile_GetMaximumDepth(1));
+    f66f::DAT_01075b24->unk4d8.InterfaceManager_TutorialManager_ShowMessage(15,0x40c,0x200);
     unk04->FUN_00bf11a0(0x1005,f66f::DAT_00dfa38c,true);
     unk04->FUN_00bf11a0(0x1006,f66f::DAT_00dff2d4,true);
     TESBoundObject* baseObject = f66f::DAT_0107a104->unk1c;
@@ -38710,7 +38717,7 @@ struct Snapshot
 
 struct FaceBase
 {
-    void FUN_00556210(Player* player, bool value);
+    void TESNPC_FixDisplayedHeadParts(Player* player, bool value);
 };
 
 struct Snapshot;
@@ -38970,7 +38977,7 @@ struct Player
     unsigned f04; unsigned f08; unsigned f0C; unsigned f10; unsigned f14; unsigned f18;
     FaceBase* faceBase1C;
 
-    int FUN_006f4a50();
+    int Actor_GetSex();
     Animation* FUN_0076cce0(bool value);
 };
 
@@ -39056,7 +39063,7 @@ bool Host::FUN_0066dda0(bool rebuild)
         char nameBuffer[32];
         Snapshot snapshot;
         FaceBase* faceBase = DAT_0107a104->faceBase1C;
-        DAT_0107a104->GetAppearance()->FUN_00560dd0(faceBase, &snapshot, DAT_0107a104->FUN_006f4a50(), false);
+        DAT_0107a104->GetAppearance()->FUN_00560dd0(faceBase, &snapshot, DAT_0107a104->Actor_GetSex(), false);
 
         Node* firstRoot = DAT_0107a104->RootA(false);
         Node* secondRoot = DAT_0107a104->RootB(false);
@@ -39076,7 +39083,7 @@ bool Host::FUN_0066dda0(bool rebuild)
             if (object)
                 object->FUN_00838910();
         }
-        DAT_0107a104->faceBase1C->FUN_00556210(DAT_0107a104, false);
+        DAT_0107a104->faceBase1C->TESNPC_FixDisplayedHeadParts(DAT_0107a104, false);
 
         for (int index = 0; index < 2; ++index)
         {
@@ -39376,7 +39383,7 @@ struct Form67 {
 };
 struct Item67 {
  unsigned int unk000,unk004; Form67* unk008;
- const char* FUN_0047d500(int); float FUN_0047cf30(int);
+ const char* ItemChange_GetIconOne(int); float FUN_0047cf30(int);
 };
 struct Entry67 { unsigned int id; Item67* item; };
 struct Link67 { Entry67* entry; Link67* next;
@@ -39426,7 +39433,7 @@ void Menu67::FUN_00673c40(unsigned int message,RepairTile67* sender) {
  bool enabled=sender->FUN_00becf80(DAT_01076f54);
  unk05c->FUN_00bee190(0xfaf,(float)enabled,true);
  unk038->FUN_00bee190(0xfa3,1.0f,true);
- unk034->FUN_00bf11a0(0xfcc,selected->FUN_0047d500(0),true);
+ unk034->FUN_00bf11a0(0xfcc,selected->ItemChange_GetIconOne(0),true);
  unk034->FUN_00bee190(0xfa3,1.0f,true);
  float condition=(float)(selected->FUN_0047cf30(1)/100.0);
  unk03c->FUN_00bee190(0x1004,condition,true);
@@ -39540,8 +39547,8 @@ struct Ref {
     int unk04, unk08, unk0c, unk10, unk14, unk18;
     Form* baseForm;
     Form* GetBaseForm() { return baseForm; }
-    RefHolder* FUN_004e74a0();
-    bool FUN_004e8840();
+    RefHolder* TESObjectREFR_GetTeleport();
+    bool TESObjectREFR_GetInterior();
     WorldSpace* FUN_004e8880();
 };
 
@@ -39572,7 +39579,7 @@ struct Tile {
     __forceinline void Set(unsigned int id, int value) { FUN_00bee190(id, (float)value, true); }
 };
 
-struct MenuFactory { Tile* FUN_00bfd250(Tile* parent, const char* name, int a); };
+struct MenuFactory { Tile* Menu_RenderTemplate(Tile* parent, const char* name, int a); };
 extern MenuFactory* DAT_01076bb8;
 extern unsigned int DAT_01076ba0, DAT_01076b9c; extern const char DAT_00e06948[], DAT_00e06934[], DAT_00e06904[];
 
@@ -39640,41 +39647,41 @@ void MapMenu::FUN_00660030(Ref* start, Ref* end, Path* path, int id)
     TileList first;
     Point startMapPos = FUN_0065d600(*start->GetPos(), start->FUN_004e8880());
     Point endMapPos = FUN_0065d600(*end->GetPos(), end->FUN_004e8880());
-    Tile* startTile = DAT_01076bb8->FUN_00bfd250(m_pMapTile, DAT_00e06948, 0);
+    Tile* startTile = DAT_01076bb8->Menu_RenderTemplate(m_pMapTile, DAT_00e06948, 0);
     startTile->FUN_00bee190(DAT_01076ba0, startMapPos.x, true);
     startTile->FUN_00bee190(DAT_01076b9c, startMapPos.y, true);
     startTile->Set(0xfaa, id);
     startTile->FUN_00bee190(0xfa9, 0.0f, true);
-    if (start->GetBaseForm()->typeID == 0x1c && start->FUN_004e74a0()->FUN_004237e0()->FUN_004e8840())
+    if (start->GetBaseForm()->typeID == 0x1c && start->TESObjectREFR_GetTeleport()->FUN_004237e0()->TESObjectREFR_GetInterior())
         startTile->Set(0x1004, 1);
     first.FUN_0061c430(startTile);
     int firstIndex = 0;
     int lastIndex = path->refs.GetSize() - 1;
     for (unsigned int i = 0; i < path->refs.GetSize(); i++)
     {
-        if (path->refs.GetAt(i).ref == start || path->refs.GetAt(i).ref->FUN_004e74a0()->FUN_004237e0() == start)
+        if (path->refs.GetAt(i).ref == start || path->refs.GetAt(i).ref->TESObjectREFR_GetTeleport()->FUN_004237e0() == start)
             firstIndex = i + 1;
-        if (path->refs.GetAt(i).ref == end || path->refs.GetAt(i).ref->FUN_004e74a0()->FUN_004237e0() == end)
+        if (path->refs.GetAt(i).ref == end || path->refs.GetAt(i).ref->TESObjectREFR_GetTeleport()->FUN_004237e0() == end)
             lastIndex = i - 1;
     }
     for (int j = firstIndex; j <= lastIndex; j++)
     {
-        Ref* ref = !path->refs.GetAt(j).ref->FUN_004e8840() ? path->refs.GetAt(j).ref : 0;
+        Ref* ref = !path->refs.GetAt(j).ref->TESObjectREFR_GetInterior() ? path->refs.GetAt(j).ref : 0;
         if (!ref)
-            ref = path->refs.GetAt(j).ref->FUN_004e74a0()->FUN_004237e0();
-        if (ref && !ref->FUN_004e8840())
+            ref = path->refs.GetAt(j).ref->TESObjectREFR_GetTeleport()->FUN_004237e0();
+        if (ref && !ref->TESObjectREFR_GetInterior())
         {
-            Tile* waypointTile = DAT_01076bb8->FUN_00bfd250(m_pMapTile, DAT_00e06948, 0);
+            Tile* waypointTile = DAT_01076bb8->Menu_RenderTemplate(m_pMapTile, DAT_00e06948, 0);
             Point waypointMapPos = FUN_0065d600(*ref->GetPos(), ref->FUN_004e8880());
             waypointTile->FUN_00bee190(DAT_01076ba0, waypointMapPos.x, true);
             waypointTile->FUN_00bee190(DAT_01076b9c, waypointMapPos.y, true);
             waypointTile->Set(0xfaa, id);
-            if (path->refs.GetAt(j).ref->FUN_004e74a0()->FUN_004237e0()->FUN_004e8840())
+            if (path->refs.GetAt(j).ref->TESObjectREFR_GetTeleport()->FUN_004237e0()->TESObjectREFR_GetInterior())
                 waypointTile->Set(0x1004, 1);
             first.FUN_0061c430(waypointTile);
         }
     }
-    Tile* endTile = DAT_01076bb8->FUN_00bfd250(m_pMapTile, DAT_00e06948, 0);
+    Tile* endTile = DAT_01076bb8->Menu_RenderTemplate(m_pMapTile, DAT_00e06948, 0);
     endTile->FUN_00bee190(DAT_01076ba0, endMapPos.x, true);
     endTile->FUN_00bee190(DAT_01076b9c, endMapPos.y, true);
     endTile->Set(0xfaa, id);
@@ -39684,7 +39691,7 @@ void MapMenu::FUN_00660030(Ref* start, Ref* end, Path* path, int id)
     float scaleY = m_pMapTile ? m_pMapTile->FUN_00becf40(0xfce) : 0.0f;
     for (TileList* node = &first; node && node->item && node->next; node = node->next)
     {
-        Tile* line = DAT_01076bb8->FUN_00bfd250(node->item, DAT_00e06934, 0);
+        Tile* line = DAT_01076bb8->Menu_RenderTemplate(node->item, DAT_00e06934, 0);
         float bx = node->item->FUN_00becf40(DAT_01076ba0);
         float by = node->item->FUN_00becf40(DAT_01076b9c);
         TileList* next = node->next;
@@ -39721,10 +39728,10 @@ public:
     static void* operator new(unsigned size) { return DAT_01090a78.FUN_0086b930(size); }
     static void operator delete(void* p);
     short FUN_0040ac80();
-    void FUN_0041b3c0(ExtraDataList* src);
-    void FUN_00410170(short count);
+    void ExtraDataList_DuplicateExtraListForContainer(ExtraDataList* src);
+    void ExtraDataList_SetCount(short count);
     void FUN_0040b160(float health);
-    bool FUN_0040a7e0(ExtraDataList* other, bool flag);
+    bool ExtraDataList_CompareListForContainer(ExtraDataList* other, bool flag);
     void FUN_0040b510(bool flag);
 };
 
@@ -39835,14 +39842,14 @@ void R6739::Menu673Local::FUN_006739e0(RepEntry* entry)
     ExtraDataList* copy = new ExtraDataList;
     bool merged = false;
     int count = xdata->FUN_0040ac80();
-    copy->FUN_0041b3c0(xdata);
-    copy->FUN_00410170(1);
+    copy->ExtraDataList_DuplicateExtraListForContainer(xdata);
+    copy->ExtraDataList_SetCount(1);
     copy->FUN_0040b160(health);
     if (count > 1)
-        xdata->FUN_00410170(count - 1);
+        xdata->ExtraDataList_SetCount(count - 1);
     for (XDataList::Node673* node = (XDataList::Node673*)found->extendData; node && node->item; node = node->next) {
-        if (!node->item->FUN_0040a7e0(copy, true) && !copy->FUN_0040a7e0(node->item, true)) {
-            node->item->FUN_00410170(node->item->FUN_0040ac80() + 1);
+        if (!node->item->ExtraDataList_CompareListForContainer(copy, true) && !copy->ExtraDataList_CompareListForContainer(node->item, true)) {
+            node->item->ExtraDataList_SetCount(node->item->FUN_0040ac80() + 1);
             merged = true;
         }
     }
@@ -39893,12 +39900,12 @@ struct Entry {
     unsigned int unk00; unsigned int unk04; Form* form;
     Form* GetForm() { return form; }
     float FUN_0047cf30(bool a);
-    const char* FUN_0047d500(int a);
+    const char* ItemChange_GetIconOne(int a);
 };
 struct Inventory { int FUN_005a29a0(int type); };
 struct Player { unsigned int unk00; unsigned int unk04; unsigned int unk08; unsigned int unk0c; unsigned int unk10; unsigned int unk14; unsigned int unk18; unsigned int unk1c; unsigned int unk20; unsigned int unk24; unsigned int unk28; unsigned int unk2c; unsigned int unk30; unsigned int unk34; unsigned int unk38; unsigned int unk3c; unsigned int unk40; unsigned int unk44; unsigned int unk48; unsigned int unk4c; unsigned int unk50; unsigned int unk54; unsigned int unk58; unsigned int unk5c; unsigned int unk60; unsigned int unk64; unsigned int unk68; unsigned int unk6c; unsigned int unk70; unsigned int unk74; unsigned int unk78; unsigned int unk7c; unsigned int unk80; unsigned int unk84; unsigned int unk88; unsigned int unk8c; unsigned int unk90; unsigned int unk94; unsigned int unk98; Inventory inv; };
 struct HUD { void FUN_00623d70(int a); };
-struct Sound { void FUN_0061ed70(int a, int b, int c); };
+struct Sound { void InterfaceManager_TutorialManager_ShowMessage(int a, int b, int c); };
 struct Interface { unsigned int unk00; unsigned int unk04; unsigned int unk08; unsigned int unk0c; unsigned int unk10; unsigned int unk14; unsigned int unk18; unsigned int unk1c; unsigned int unk20; unsigned int unk24; unsigned int unk28; unsigned int unk2c; unsigned int unk30; unsigned int unk34; unsigned int unk38; unsigned int unk3c; unsigned int unk40; unsigned int unk44; unsigned int unk48; unsigned int unk4c; unsigned int unk50; unsigned int unk54; unsigned int unk58; unsigned int unk5c; unsigned int unk60; unsigned int unk64; unsigned int unk68; unsigned int unk6c; unsigned int unk70; unsigned int unk74; unsigned int unk78; unsigned int unk7c; unsigned int unk80; unsigned int unk84; unsigned int unk88; unsigned int unk8c; unsigned int unk90; unsigned int unk94; unsigned int unk98; unsigned int unk9c; unsigned int unka0; unsigned int unka4; unsigned int unka8; unsigned int unkac; unsigned int unkb0; unsigned int unkb4; unsigned int unkb8; unsigned int unkbc; unsigned int unkc0; unsigned int unkc4; unsigned int unkc8; unsigned int unkcc; unsigned int unkd0; unsigned int unkd4; unsigned int unkd8; unsigned int unkdc; unsigned int unke0; unsigned int unke4; unsigned int unke8; unsigned int unkec; unsigned int unkf0; unsigned int unkf4; unsigned int unkf8; unsigned int unkfc; unsigned int unk100; unsigned int unk104; unsigned int unk108; unsigned int unk10c; unsigned int unk110; unsigned int unk114; unsigned int unk118; unsigned int unk11c; unsigned int unk120; unsigned int unk124; unsigned int unk128; unsigned int unk12c; unsigned int unk130; unsigned int unk134; unsigned int unk138; unsigned int unk13c; unsigned int unk140; unsigned int unk144; unsigned int unk148; unsigned int unk14c; unsigned int unk150; unsigned int unk154; unsigned int unk158; unsigned int unk15c; unsigned int unk160; unsigned int unk164; unsigned int unk168; unsigned int unk16c; unsigned int unk170; unsigned int unk174; unsigned int unk178; unsigned int unk17c; unsigned int unk180; unsigned int unk184; unsigned int unk188; unsigned int unk18c; unsigned int unk190; unsigned int unk194; unsigned int unk198; unsigned int unk19c; unsigned int unk1a0; unsigned int unk1a4; unsigned int unk1a8; unsigned int unk1ac; unsigned int unk1b0; unsigned int unk1b4; unsigned int unk1b8; unsigned int unk1bc; unsigned int unk1c0; unsigned int unk1c4; unsigned int unk1c8; unsigned int unk1cc; unsigned int unk1d0; unsigned int unk1d4; unsigned int unk1d8; unsigned int unk1dc; unsigned int unk1e0; unsigned int unk1e4; unsigned int unk1e8; unsigned int unk1ec; unsigned int unk1f0; unsigned int unk1f4; unsigned int unk1f8; unsigned int unk1fc; unsigned int unk200; unsigned int unk204; unsigned int unk208; unsigned int unk20c; unsigned int unk210; unsigned int unk214; unsigned int unk218; unsigned int unk21c; unsigned int unk220; unsigned int unk224; unsigned int unk228; unsigned int unk22c; unsigned int unk230; unsigned int unk234; unsigned int unk238; unsigned int unk23c; unsigned int unk240; unsigned int unk244; unsigned int unk248; unsigned int unk24c; unsigned int unk250; unsigned int unk254; unsigned int unk258; unsigned int unk25c; unsigned int unk260; unsigned int unk264; unsigned int unk268; unsigned int unk26c; unsigned int unk270; unsigned int unk274; unsigned int unk278; unsigned int unk27c; unsigned int unk280; unsigned int unk284; unsigned int unk288; unsigned int unk28c; unsigned int unk290; unsigned int unk294; unsigned int unk298; unsigned int unk29c; unsigned int unk2a0; unsigned int unk2a4; unsigned int unk2a8; unsigned int unk2ac; unsigned int unk2b0; unsigned int unk2b4; unsigned int unk2b8; unsigned int unk2bc; unsigned int unk2c0; unsigned int unk2c4; unsigned int unk2c8; unsigned int unk2cc; unsigned int unk2d0; unsigned int unk2d4; unsigned int unk2d8; unsigned int unk2dc; unsigned int unk2e0; unsigned int unk2e4; unsigned int unk2e8; unsigned int unk2ec; unsigned int unk2f0; unsigned int unk2f4; unsigned int unk2f8; unsigned int unk2fc; unsigned int unk300; unsigned int unk304; unsigned int unk308; unsigned int unk30c; unsigned int unk310; unsigned int unk314; unsigned int unk318; unsigned int unk31c; unsigned int unk320; unsigned int unk324; unsigned int unk328; unsigned int unk32c; unsigned int unk330; unsigned int unk334; unsigned int unk338; unsigned int unk33c; unsigned int unk340; unsigned int unk344; unsigned int unk348; unsigned int unk34c; unsigned int unk350; unsigned int unk354; unsigned int unk358; unsigned int unk35c; unsigned int unk360; unsigned int unk364; unsigned int unk368; unsigned int unk36c; unsigned int unk370; unsigned int unk374; unsigned int unk378; unsigned int unk37c; unsigned int unk380; unsigned int unk384; unsigned int unk388; unsigned int unk38c; unsigned int unk390; unsigned int unk394; unsigned int unk398; unsigned int unk39c; unsigned int unk3a0; unsigned int unk3a4; unsigned int unk3a8; unsigned int unk3ac; unsigned int unk3b0; unsigned int unk3b4; unsigned int unk3b8; unsigned int unk3bc; unsigned int unk3c0; unsigned int unk3c4; unsigned int unk3c8; unsigned int unk3cc; unsigned int unk3d0; unsigned int unk3d4; unsigned int unk3d8; unsigned int unk3dc; unsigned int unk3e0; unsigned int unk3e4; unsigned int unk3e8; unsigned int unk3ec; unsigned int unk3f0; unsigned int unk3f4; unsigned int unk3f8; unsigned int unk3fc; unsigned int unk400; unsigned int unk404; unsigned int unk408; unsigned int unk40c; unsigned int unk410; unsigned int unk414; unsigned int unk418; unsigned int unk41c; unsigned int unk420; unsigned int unk424; unsigned int unk428; unsigned int unk42c; unsigned int unk430; unsigned int unk434; unsigned int unk438; unsigned int unk43c; unsigned int unk440; unsigned int unk444; unsigned int unk448; unsigned int unk44c; unsigned int unk450; unsigned int unk454; unsigned int unk458; unsigned int unk45c; unsigned int unk460; unsigned int unk464; unsigned int unk468; unsigned int unk46c; unsigned int unk470; unsigned int unk474; unsigned int unk478; unsigned int unk47c; unsigned int unk480; unsigned int unk484; unsigned int unk488; unsigned int unk48c; unsigned int unk490; unsigned int unk494; unsigned int unk498; unsigned int unk49c; unsigned int unk4a0; unsigned int unk4a4; unsigned int unk4a8; unsigned int unk4ac; unsigned int unk4b0; unsigned int unk4b4; unsigned int unk4b8; unsigned int unk4bc; unsigned int unk4c0; unsigned int unk4c4; unsigned int unk4c8; unsigned int unk4cc; unsigned int unk4d0; unsigned int unk4d4; Sound snd; };
 extern void* DAT_01076ee8;
 extern void* DAT_01076eec;
@@ -39916,7 +39923,7 @@ float __cdecl FUN_0047ca30(float value, float mult);
 float __cdecl FUN_00582720(unsigned short value, float health);
 float __cdecl FUN_0044a250(float value);
 void __cdecl FUN_00672a20();
-void __cdecl FUN_00671c30(Tile*,Entry*);
+void __cdecl RepairMenu_InitFunc(Tile*,Entry*);
 int __cdecl FUN_00671de0(SortEntry*,SortEntry*);
 void __cdecl FUN_0061b1f0(int a, int b, int c);
 void __cdecl FUN_00672d90(Entry* item);
@@ -39941,10 +39948,10 @@ void __cdecl n672d90::FUN_00672d90(Entry* item)
     }
     
     if (item) {
-        (*(Menu**)&DAT_01076ee8)->m34->FUN_00bf11a0(0xfcc, (*(Entry**)&DAT_01076eec)->FUN_0047d500(0), true);
+        (*(Menu**)&DAT_01076ee8)->m34->FUN_00bf11a0(0xfcc, (*(Entry**)&DAT_01076eec)->ItemChange_GetIconOne(0), true);
         FUN_00672a20();
     }
-    (*(Menu**)&DAT_01076ee8)->list.FUN_00655800(FUN_00671c30, 0, 0x7fffffff);
+    (*(Menu**)&DAT_01076ee8)->list.FUN_00655800(RepairMenu_InitFunc, 0, 0x7fffffff);
     (*(Menu**)&DAT_01076ee8)->list.v8(FUN_00671de0);
     (*(Menu**)&DAT_01076ee8)->m28->SetI((*(int*)&DAT_01076ee0), (*(Player**)&DAT_0107a104)->inv.FUN_005a29a0(0x27));
     if (item && (*(bool*)&DAT_01075b28) && !(*(bool*)&DAT_01075cac)) {
@@ -39954,7 +39961,7 @@ void __cdecl n672d90::FUN_00672d90(Entry* item)
     (*(Menu**)&DAT_01076ee8)->v4(0xe, (*(Menu**)&DAT_01076ee8)->list.v1());
     if (item) {
         FUN_0061b1f0(1, 0, 0);
-        reinterpret_cast<Interface*>((*(HUD**)&DAT_01075b24))->snd.FUN_0061ed70(6, 0x40b, 0x1f4);
+        reinterpret_cast<Interface*>((*(HUD**)&DAT_01075b24))->snd.InterfaceManager_TutorialManager_ShowMessage(6, 0x40b, 0x1f4);
     }
 }
 
@@ -40084,13 +40091,13 @@ struct TESObjectREFR {
     int unk00, unk04, unk08, unk0c, unk10, unk14, unk18;
     TESForm* pBaseForm;
     int FUN_004ef470();
-    ExtraList* FUN_004e75f0();
+    ExtraList* TESObjectREFR_GetLock();
     bool FUN_004f3b80();
-    bool FUN_004f3990(void* actor, int flag);
+    bool TESObjectREFR_IsAnOwner(void* actor, int flag);
     TESForm* GetBaseForm() const { return pBaseForm; }
 };
 
-int __cdecl FUN_0044df30(TESObjectREFR* ref);
+int __cdecl BGSOpenCloseForm_GetOpenState(TESObjectREFR* ref);
 bool __cdecl FUN_004b7ce0(TESObjectREFR* ref, void* actor, int a, int b);
 
 struct Setting {
@@ -40142,7 +40149,7 @@ bool __cdecl FUN_00669d30(ItemNode* node, TESObjectREFR* ref)
 
     int kind = ref->FUN_004ef470();
     unsigned int type = ref->GetBaseForm()->cFormType;
-    ExtraList* extra = ref->FUN_004e75f0();
+    ExtraList* extra = ref->TESObjectREFR_GetLock();
     TESForm* base = ref->GetBaseForm();
     if (kind == 1) {
         if (!ref->FUN_004f3b80()) goto useDefault;
@@ -40152,8 +40159,8 @@ bool __cdecl FUN_00669d30(ItemNode* node, TESObjectREFR* ref)
         FUN_00c007fc(buffer, 260, FUN_00f654a8);
     } else if (kind == 8) {
         if (type != 28) goto useDefault;
-        bool open = FUN_0044df30(ref) == 1 || FUN_0044df30(ref) == 2;
-        if (extra && (extra->cFlags & 1) && !ref->FUN_004f3990(DAT_0107a104, 1)
+        bool open = BGSOpenCloseForm_GetOpenState(ref) == 1 || BGSOpenCloseForm_GetOpenState(ref) == 2;
+        if (extra && (extra->cFlags & 1) && !ref->TESObjectREFR_IsAnOwner(DAT_0107a104, 1)
             && (!base || !FUN_004b7ce0(ref, DAT_0107a104, 0, 1))) {
             FUN_00c007fc(buffer, 260, FUN_00f64fa4);
         } else {
@@ -40296,7 +40303,7 @@ struct FUN_00728d10 {
     int unk140, unk144, unk148, unk14c, unk150, unk154, unk158, unk15c, unk160, unk164, unk168, unk16c, unk170, unk174, unk178, unk17c;
     int unk180, unk184, unk188, unk18c, unk190, unk194, unk198, unk19c, unk1a0, unk1a4, unk1a8, unk1ac;
     void FUN_004553b0();
-    void FUN_004e8670(int speaker);
+    void TESObjectREFR_SetObjectReference(int speaker);
     static void* operator new(unsigned int size) { return DAT_01090a78.FUN_0086b930(size); }
     static void operator delete(void* memory) { DAT_01090a78.FUN_0086ba60(memory); }
 };
@@ -40411,12 +40418,12 @@ struct Ref {
 struct Quest {
     int unk00, unk04, unk08, unk0c;
     int path;
-    Ref* FUN_0055f010(bool update);                      // current target
+    Ref* TESQuestTarget_GetReference(bool update);                      // current target
     int* GetPath() { return &path; }
 };
 
 struct MapMarker {
-    MapMarker* FUN_004e75e0();
+    MapMarker* TESObjectREFR_GetMapMarkerData();
     bool FUN_00422840();
     const char* FUN_004018e0();
 };
@@ -40426,7 +40433,7 @@ struct MarkerList {
 };
 
 struct MapTransform {
-    void FUN_004d3cc0(Point3* out, Point3* in, int unk);
+    void TESObjectCELL_AdjustCoordForNorthRotation(Point3* out, Point3* in, int unk);
 };
 
 struct MapCamera {
@@ -40467,7 +40474,7 @@ int __cdecl FUN_00becd70(const char* trait, int unk);
 int __cdecl FUN_00403230(char* buffer, unsigned int size, const char* format, ...);
 void __cdecl FUN_006c0d10(int unk);
 void __cdecl FUN_006c3a40(Note* note, int unk);
-void __cdecl FUN_0065d590();
+void __cdecl MapMenu_UnselectFunc();
 void __cdecl FUN_0065e9b0();
 void __cdecl FUN_00663b00();
 void __cdecl FUN_0065e180();
@@ -40512,11 +40519,11 @@ struct MapMenu {
     NoteList secondTab;
     ItemList thirdTab;
 
-    void FUN_00667220();
+    void MapMenu_UpdateCurrentPage();
     void FUN_006649e0();
     void FUN_0065d5b0();
     Tile* FUN_0065e350(Note* note);
-    Ref* FUN_0065f160(Ref* target, int* path);
+    Ref* MapMenu_GetWorldMapTrackingRef(Ref* target, int* path);
     // WorldToMap: the same file, so its body is visible (its result shares the sound handle's frame slot)
     __declspec(noinline) Point3 FUN_0065d600(Point3 pos, WorldSpace* worldSpace)
     {
@@ -40553,7 +40560,7 @@ void MapMenu::FUN_00667730(int id, Tile* tile)
             if (!(list->FUN_00632d70()->flags & 2)) {
                 DAT_0107a104->FUN_00770580(list->FUN_00632d70());
                 FUN_0061a730(3);
-                FUN_00667220();
+                MapMenu_UpdateCurrentPage();
             }
         }
         break;
@@ -40600,7 +40607,7 @@ void MapMenu::FUN_00667730(int id, Tile* tile)
         } else if (note->type == 3 && note->FUN_005451c0() && note->FUN_005451d0()) {
             FUN_00728d10* actor = new FUN_00728d10(0);
             actor->FUN_004553b0();
-            actor->FUN_004e8670(note->FUN_005451d0());
+            actor->TESObjectREFR_SetObjectReference(note->FUN_005451d0());
             FUN_006c6550* iterator = new FUN_006c6550(actor, DAT_0107a104, note->FUN_005451c0());
             iterator->FUN_006c65c0();
             if (iterator->FUN_006c6fc0() && iterator->FUN_006c6fc0()->FUN_006c65c0()) {
@@ -40631,7 +40638,7 @@ void MapMenu::FUN_00667730(int id, Tile* tile)
             break;
         bool select = !item->FUN_00becf80(DAT_01076b98);
         FUN_0065d5b0();
-        thirdTab.FUN_00655800((void*)FUN_0065d590, 0, 0x7fffffff);
+        thirdTab.FUN_00655800((void*)MapMenu_UnselectFunc, 0, 0x7fffffff);
         if (DAT_010791cc)
             FUN_006c0d10(0);
         if (select) {
@@ -40639,7 +40646,7 @@ void MapMenu::FUN_00667730(int id, Tile* tile)
             FUN_006c3a40(thirdTab.FUN_00632d70(), 0);
             item->FUN_00bee190(DAT_01076b98, 1.0f, 1);
         }
-        FUN_00667220();
+        MapMenu_UpdateCurrentPage();
         break;
     }
     case 12:
@@ -40686,7 +40693,7 @@ void MapMenu::FUN_00667730(int id, Tile* tile)
                     worldSpace->FUN_00501450(&playerPosition, 1);
             }
             if (mapTransform)
-                mapTransform->FUN_004d3cc0(&playerPosition, &playerPosition, 0);
+                mapTransform->TESObjectCELL_AdjustCoordForNorthRotation(&playerPosition, &playerPosition, 0);
             tiles[6]->FUN_00bee190(0xfa3, 0.0f, 1);
             if (DAT_0107a104->unk650 != 0)
                 FUN_00619700((void*)DAT_00f637a4, 0, 0, (void*)FUN_00663b00, 0, 0x17, DAT_00f637b0, DAT_00f637c8, DAT_00f637bc, 0);
@@ -40697,7 +40704,7 @@ void MapMenu::FUN_00667730(int id, Tile* tile)
         case 0x1e: {
             if (!quest) break;
             HandleClick(0x1d, 0);
-            Ref* target = FUN_0065f160(quest->FUN_0055f010(1), quest->GetPath());
+            Ref* target = MapMenu_GetWorldMapTrackingRef(quest->TESQuestTarget_GetReference(1), quest->GetPath());
             if (!target || !mapTile) break;
             Point3* targetPos = target->GetPos();
             WorldSpace* space = target->FUN_004e8880();
@@ -40732,10 +40739,10 @@ void MapMenu::FUN_00667730(int id, Tile* tile)
                 node = node->next;
             }
         }
-        if (selectedMarker->FUN_004e75e0()->FUN_00422840()) {
+        if (selectedMarker->TESObjectREFR_GetMapMarkerData()->FUN_00422840()) {
             vf14(id, tile);
             int text = DAT_00f6378c;
-            FUN_00403230(buf, 0x100, DAT_00e06fe8, text, selectedMarker->FUN_004e75e0()->FUN_004018e0());   // "%s %s?"
+            FUN_00403230(buf, 0x100, DAT_00e06fe8, text, selectedMarker->TESObjectREFR_GetMapMarkerData()->FUN_004018e0());   // "%s %s?"
             tiles[6]->FUN_00bee190(0xfa3, 0.0f, 1);
             FUN_00619700(buf, 0, 0, (void*)FUN_0065e180, 0, 0x17, DAT_00f62c94, DAT_00f62ca0, 0);
         } else {
@@ -40793,10 +40800,10 @@ struct String668 : std::string {
 };
 struct Tile668 {
  float FUN_00becf40(unsigned);
- const char* FUN_00becf60(unsigned);
+ const char* Tile_GetString(unsigned);
  void FUN_00bf11a0(unsigned,const char*,bool);
  void FUN_00bee190(unsigned,float,bool);
- Tile668* FUN_00beabd0(const char*);
+ Tile668* Tile_GetChildByName(const char*);
  void SetInt(unsigned id,int v) {FUN_00bee190(id,(float)v,true);}
 };
 struct List668 {
@@ -40867,10 +40874,10 @@ void Owner668::FUN_00668e80() {
    if(part.length()>0) {
     Tile668* text=0;
     item=DAT_01076cec->buttonList.FUN_0063e040(record->buttonBase+index,buttons.FUN_00668e40(pos,buttons.Find(DAT_00dfa654,pos)-pos).c_str(),0,0);
-    text=item->FUN_00beabd0(DAT_00e070e4);
+    text=item->Tile_GetChildByName(DAT_00e070e4);
     item->FUN_00bee190(0xfaa,DAT_00e070e0,true);
     if(text) {
-     maxWidth=MaxInt668(maxWidth,(int)FontMgr668()->FUN_00bf4890(text->FUN_00becf60(0xfc4),2,text->FUN_00becf40(0xfba),0).x);
+     maxWidth=MaxInt668(maxWidth,(int)FontMgr668()->FUN_00bf4890(text->Tile_GetString(0xfc4),2,text->FUN_00becf40(0xfba),0).x);
     }
     listHeight=item->FUN_00becf40(0xfb0)+listHeight;
    }
@@ -40935,7 +40942,7 @@ struct Interface {
 };
 extern void* DAT_01075b24;
 enum SoundStatus { SoundPlaying=1, SoundPaused=3 };
-struct Sound {unsigned unk0,unk4; SoundStatus state; void FUN_00bd00c0(int);void FUN_00bd0120();void FUN_00bd0140();bool FUN_00bd0160();};
+struct Sound {unsigned unk0,unk4; SoundStatus state; void FUN_00bd00c0(int);void FUN_00bd0120();void BSSoundHandle_Stop();bool FUN_00bd0160();};
 extern bool __cdecl FUN_0061c490(unsigned);
 enum MenuCommand { WheelUp=2,WheelDown=3 };
 class MenuUpdate {
@@ -40995,7 +41002,7 @@ void MenuUpdate::FUN_006711e0() {
     }
     velocityCC=0.0f;
    }
-   if(Flag(5)&&!sounds[3].FUN_00bd0160())sounds[3].FUN_00bd00c0(0); else if(!Flag(5)&&sounds[3].FUN_00bd0160())sounds[3].FUN_00bd0140();if(Flag(6)&&!sounds[2].FUN_00bd0160())sounds[2].FUN_00bd00c0(0); else if(!Flag(6)&&sounds[2].FUN_00bd0160())sounds[2].FUN_00bd0140();
+   if(Flag(5)&&!sounds[3].FUN_00bd0160())sounds[3].FUN_00bd00c0(0); else if(!Flag(5)&&sounds[3].FUN_00bd0160())sounds[3].BSSoundHandle_Stop();if(Flag(6)&&!sounds[2].FUN_00bd0160())sounds[2].FUN_00bd00c0(0); else if(!Flag(6)&&sounds[2].FUN_00bd0160())sounds[2].BSSoundHandle_Stop();
    if(unkC4&&Flag(4)){FUN_0066fce0();unkC4=0;unkC0=0;}
   } else {
    flagsEC&=~0x40u;
@@ -41022,7 +41029,7 @@ void MenuUpdate::FUN_006711e0() {
     if(fractionD0+delta<targetC8)delta=targetC8-fractionD0;
     if(UpdateFraction(delta,false))flagsEC|=0x40;else flagsEC&=~0x40u;
    } else velocityCC=0.0f;
-   if(Flag(6)&&!sounds[2].FUN_00bd0160())sounds[2].FUN_00bd00c0(0); else if(!Flag(6)&&sounds[2].FUN_00bd0160())sounds[2].FUN_00bd0140();if(Flag(5)&&!sounds[3].FUN_00bd0160())sounds[3].FUN_00bd00c0(0); else if(!Flag(5)&&sounds[3].FUN_00bd0160())sounds[3].FUN_00bd0140();
+   if(Flag(6)&&!sounds[2].FUN_00bd0160())sounds[2].FUN_00bd00c0(0); else if(!Flag(6)&&sounds[2].FUN_00bd0160())sounds[2].BSSoundHandle_Stop();if(Flag(5)&&!sounds[3].FUN_00bd0160())sounds[3].FUN_00bd00c0(0); else if(!Flag(5)&&sounds[3].FUN_00bd0160())sounds[3].BSSoundHandle_Stop();
    flagsEC&=~0x20u;
    if(unkC4&&((Manager*)DAT_0107a0d4)->FUN_006e4eb0()&&((Manager*)DAT_0107a0d4)->FUN_006e4eb0()->FUN_00be81c0(0,2))FUN_00670a30();
   }
@@ -41833,7 +41840,7 @@ struct Player {
     Queue unk8c;
 
     void FUN_00772520();
-    void FUN_00722340();
+    void Actor_DispelPermanentMagic();
     void FUN_0070aeb0();
 };
 
@@ -41910,7 +41917,7 @@ void Menu::FUN_00670e40(int id, Tile* tile)
                 unkd8->process->FUN_00560c20();
                 DAT_0107a104->FUN_00772520();
                 DAT_0107a104->unk8c.FUN_006b7270(0);
-                DAT_0107a104->FUN_00722340();
+                DAT_0107a104->Actor_DispelPermanentMagic();
                 unkd8->FUN_005556c0(item->value, 0);
             } else {
                 unkd8->process->FUN_00560c20();
@@ -42041,8 +42048,8 @@ struct ItemList {
 };
 
 struct Player {
-    char FUN_006f7110();
-    void FUN_006fef60(bool flag);
+    char Actor_GetWantWeaponDrawn();
+    void Actor_SetWantWeaponDrawn(bool flag);
     void FUN_0070da60(int form, int a, int b, int c, int d, int e);
 };
 
@@ -42194,7 +42201,7 @@ struct InterfaceManager {
     void FUN_0061eb80(MenuObject* menu);
 };
 
-Menu* __cdecl FUN_00beaf00(int id);
+Menu* __cdecl Tile_GetMenuByClass(int id);
 ItemList* __cdecl FUN_0047e090(Player* player);
 int __cdecl FUN_00476910();
 void __cdecl FUN_00c0544c(char* text, int size);
@@ -42218,7 +42225,7 @@ extern Player* DAT_0107a104;
 
 void* __cdecl FUN_00670be0(int mode) {
     extern const char DAT_00e0744c[];
-    S670be0_::Menu* existing = S670be0_::FUN_00beaf00(0x40c);
+    S670be0_::Menu* existing = S670be0_::Tile_GetMenuByClass(0x40c);
     if (existing) return existing;
     S670be0_::Tile* tile = S670be0_::DAT_01075b24->unk9C->FUN_00bf37b0(DAT_00e0744c);
     if (tile) {
@@ -42235,8 +42242,8 @@ void* __cdecl FUN_00670be0(int mode) {
                 if (S670be0_::DAT_01076e84.pString) { n = S670be0_::DAT_01076e84.sLen + 1; S670be0_::FUN_00c0544c(S670be0_::DAT_01076e84.pString, n); }
             }
         }
-        S670be0_::DAT_01076e28 = S670be0_::DAT_0107a104->FUN_006f7110();
-        S670be0_::DAT_0107a104->FUN_006fef60(false);
+        S670be0_::DAT_01076e28 = S670be0_::DAT_0107a104->Actor_GetWantWeaponDrawn();
+        S670be0_::DAT_0107a104->Actor_SetWantWeaponDrawn(false);
         S670be0_::ItemList* list = S670be0_::FUN_0047e090(S670be0_::DAT_0107a104);
         for (unsigned int i = 0; i < 20; i++) {
             switch (i) {
@@ -42304,7 +42311,7 @@ public:
 class LMCell
 {
 public:
-    void FUN_004d3cc0(LMPoint3& kIn, LMPoint3& kOut, bool bFlag);
+    void TESObjectCELL_AdjustCoordForNorthRotation(LMPoint3& kIn, LMPoint3& kOut, bool bFlag);
 };
 
 class LMBaseForm
@@ -42370,9 +42377,9 @@ public:
     LMCell* parentCell;
 
     LMWorld* FUN_004e8880();
-    bool FUN_004e8840();
+    bool TESObjectREFR_GetInterior();
     bool FUN_004e91a0();
-    LMDoorInfo* FUN_004e74a0();
+    LMDoorInfo* TESObjectREFR_GetTeleport();
 
     LMCell* GetParentCell() { return parentCell; }
     LMBaseForm* GetBaseForm() { return baseForm; }
@@ -42394,7 +42401,7 @@ public:
 class LMTileSource
 {
 public:
-    LMTile* FUN_00bfd250(LMTile* pkParent, const char* pcName, bool bFlag);
+    LMTile* Menu_RenderTemplate(LMTile* pkParent, const char* pcName, bool bFlag);
 };
 
 class LMNode
@@ -42482,7 +42489,7 @@ public:
     void FUN_006655a0();
     void FUN_0065ebf0(bool bFlag, float fScale);
     LMPoint3 FUN_0065d600(LMPoint3 kPos, int iArg);
-    void FUN_006642b0();
+    void MapMenu_AddMapIcons();
 };
 
 extern LMRef* DAT_0107a104;
@@ -42491,7 +42498,7 @@ extern LMTileSource* DAT_01076bb8;
 extern int DAT_01076ba0;
 extern int DAT_01076b9c;
 
-int FUN_004d7c50(LMPoint3& kPos);
+int TESObjectCELL_GetSeenValue(LMPoint3& kPos);
 int FUN_00becd70(const char* pcName, int iArg);
 
 void LMMapView::FUN_006655a0()
@@ -42499,11 +42506,11 @@ void LMMapView::FUN_006655a0()
     LMWorld* b = DAT_0107a104->FUN_004e8880();
     LMCell* a = DAT_0107a104->GetParentCell();
     LMPoint3 c = *DAT_0107a104->GetPos();
-    unk10c = DAT_0107a104->FUN_004e8840() ? a : 0;
+    unk10c = DAT_0107a104->TESObjectREFR_GetInterior() ? a : 0;
     if (unk10c)
     {
         LMPoint3 b = c;
-        unk10c->FUN_004d3cc0(c, b, true);
+        unk10c->TESObjectCELL_AdjustCoordForNorthRotation(c, b, true);
         int e = ((fnv_FloatToInt(b.x) - 2048) >> 12) - (DAT_0106e9cc >> 1);
         int d = ((fnv_FloatToInt(b.y) - 2048) >> 12) - (DAT_0106e9cc >> 1);
         LMPoint3 a((float)((e * 4096) + 2048), (float)(((d + DAT_0106e9cc - 1) * 4096) + 2048), 0.0f);
@@ -42537,18 +42544,18 @@ void LMMapView::FUN_006655a0()
                 if (e->IsFlag23() || e->FUN_004e91a0() || (!a || a->FUN_004b7c20()))
                     continue;
                 if (unk10c)
-                    unk10c->FUN_004d3cc0(d, d, true);
+                    unk10c->TESObjectCELL_AdjustCoordForNorthRotation(d, d, true);
                 LMTile* g;
                 LMDoorInfo* f;
                 {
                     float c = 255.0f;
                     LMPoint3 b = FUN_0065d600(d, 0);
                     if (unk11c)
-                        c = (float)(FUN_004d7c50(d) / 4.0 * c);
+                        c = (float)(TESObjectCELL_GetSeenValue(d) / 4.0 * c);
                     if (!(c > 0.0 && b.x >= 0.0 && b.x <= 1.0 && b.y >= 0.0 && b.y <= 1.0))
                         continue;
-                    g = DAT_01076bb8->FUN_00bfd250(unk30, "MapMarkerTemplate", false);
-                    f = e->FUN_004e74a0();
+                    g = DAT_01076bb8->Menu_RenderTemplate(unk30, "MapMarkerTemplate", false);
+                    f = e->TESObjectREFR_GetTeleport();
                     g->FUN_00bee190(4010, 22.0f, true);
                     g->FUN_00bee190(DAT_01076ba0, b.x, true);
                     g->FUN_00bee190(DAT_01076b9c, b.y, true);
@@ -42563,7 +42570,7 @@ void LMMapView::FUN_006655a0()
                 }
             }
         }
-        FUN_006642b0();
+        MapMenu_AddMapIcons();
     }
     unk30->FUN_00bee190(4003, 1.0f, true);
     unk34->FUN_00bee190(4003, 1.0f, true);

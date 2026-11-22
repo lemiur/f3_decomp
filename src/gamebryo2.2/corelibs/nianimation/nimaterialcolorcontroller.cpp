@@ -5,7 +5,8 @@
 extern "C" void* g_011f3f88;
 
 // @fnv 0x00a4b570
-void* __cdecl FUN_00a4b570()
+// pdb: bhkAabbPhantom::GetRTTI | TESObjectREFR.obj | fnv360_0822_retail, udata + bridge(vtable_prefix|vtable), high
+void* __cdecl bhkAabbPhantom_GetRTTI()
 {
     return &g_011f3f88;
 }
@@ -420,7 +421,7 @@ class NiMaterialColorControllerA4B5
     };
 
     virtual void vfn_00();
-    bool FUN_00a36250(float fTime);
+    bool NiTimeController_DontDoUpdate(float fTime);
     void FUN_00a4b580(NiUpdateDataA4B5& kUpdateData);
 
     bool GetManagerControlled() const
@@ -451,7 +452,7 @@ void NiMaterialColorControllerA4B5::FUN_00a4b580(NiUpdateDataA4B5& kUpdateData)
     {
         m_fControllerTime = DAT_01096324;
     }
-    else if (FUN_00a36250(kUpdateData.m_fTime) &&
+    else if (NiTimeController_DontDoUpdate(kUpdateData.m_fTime) &&
              (!m_spControllerInterpolator || !m_spControllerInterpolator->AlwaysUpdate()))
     {
         return;
@@ -520,7 +521,7 @@ struct NiStream
     {
         return *(unsigned short*)((char*)this + 0x286);
     }
-    void FUN_00a645b0();
+    void NiStream_ReadLinkID();
 };
 struct Stand840
 {

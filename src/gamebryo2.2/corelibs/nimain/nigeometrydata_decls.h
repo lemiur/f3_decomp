@@ -96,8 +96,8 @@ class NiAdditionalGeometryData : public NiObject
     virtual unsigned int GetDataStreamCount() const;
     virtual void* GetDataStream(unsigned int uiIndex);
     virtual bool IsDataStreamValid(unsigned int uiIndex) const;
-    void* FUN_00a72590(unsigned int, unsigned int*);
-    void* FUN_00a725d0(unsigned int);
+    void* NiAdditionalGeometryData_LockDataBlock(unsigned int, unsigned int*);
+    void* NiAdditionalGeometryData_UnlockDataBlock(unsigned int);
     virtual bool IsPacked() const;  // slot 35
 };
 

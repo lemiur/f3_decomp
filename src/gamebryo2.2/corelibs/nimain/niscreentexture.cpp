@@ -5,7 +5,8 @@
 extern const void* g_011f5ee0;
 
 // @fnv 0x00a955f0
-const void* __cdecl FUN_00a955f0()
+// pdb: NiScreenSpaceCamera::GetRTTI | NiOldScreenSpace.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+const void* __cdecl NiScreenSpaceCamera_GetRTTI()
 {
     return &g_011f5ee0;
 }
@@ -749,7 +750,7 @@ struct ReadNiStream
     unsigned int unk244;
     unsigned int unk248;
     ReadBinaryStream* input;
-    void FUN_00a645b0();
+    void NiStream_ReadLinkID();
 };
 
 template <class T> inline void ReadBinaryValue(ReadNiStream& kStream, T& value)
@@ -814,7 +815,7 @@ void FUN_00a958f0_Class::ReadScreenRects(ReadNiStream& stream)
         arr.buffer[arr.used] = rect;
         ++arr.used;
     }
-    stream.FUN_00a645b0();
+    stream.NiStream_ReadLinkID();
 }
 
 struct S_00a95660_Color

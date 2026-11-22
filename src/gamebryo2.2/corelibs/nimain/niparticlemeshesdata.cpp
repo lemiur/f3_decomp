@@ -93,11 +93,12 @@ struct FUN_00a98a30_This
     unsigned short m50;
     char _p2[0x1E];
     Helper00a98a30* p70;
-    void FUN_00a98a30(unsigned short);
+    void NiParticleMeshesData_SetActiveVertexCount(unsigned short);
 };
 // Calls Target on p70 for each index from usActive up to m50, then clamps m50 to the smaller of usActive and m8.
 // @fnv 0x00a98a30
-void FUN_00a98a30_This::FUN_00a98a30(unsigned short usActive)
+// pdb: NiParticleMeshesData::SetActiveVertexCount | NiParticleMeshesData.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun_open) + skyrim(objrun_open), high
+void FUN_00a98a30_This::NiParticleMeshesData_SetActiveVertexCount(unsigned short usActive)
 {
     unsigned short i;
     for (i = usActive; i < m50; ++i)
@@ -139,11 +140,12 @@ struct FakeNode
 };
 struct FUN_00a98a80_Holder : NiLinesData
 {
-    bool FUN_00a98a80(NiStream&);
+    bool NiParticleMeshesData_RegisterStreamables(NiStream&);
 };
 // Registers the base NiLinesData streamables, then registers the streamables of the node at offset 0x70; returns false if the base call fails.
 // @fnv 0x00a98a80
-bool FUN_00a98a80_Holder::FUN_00a98a80(NiStream& kStream)
+// pdb: NiParticleMeshesData::RegisterStreamables | NiParticleMeshesData.obj | fnv360_0822_retail, objrun + bridge(vtable|objopen_prop) + skyrim(caller_sim), high
+bool FUN_00a98a80_Holder::NiParticleMeshesData_RegisterStreamables(NiStream& kStream)
 {
     if (!NiLinesData::RegisterStreamables(kStream))
         return 0;
@@ -154,7 +156,7 @@ bool FUN_00a98a80_Holder::FUN_00a98a80(NiStream& kStream)
 struct NiNode;
 struct FUN_00a97290_holder
 {
-    void FUN_00a97290(NiStream&);
+    void NiParticlesData_SaveBinary(NiStream&);
 };
 struct FakeStream
 {
@@ -174,13 +176,14 @@ struct FakeStream
 };
 struct FUN_00a98ab0_shell : NiParticleMeshesData
 {
-    void FUN_00a98ab0(NiStream&);
+    void NiParticleMeshesData_SaveBinary(NiStream&);
 };
 // @fnv 0x00a98ab0
-void FUN_00a98ab0_shell::FUN_00a98ab0(NiStream& kStream)
+// pdb: NiParticleMeshesData::SaveBinary | NiParticleMeshesData.obj | fnv360_0822_retail, caller_sim + bridge(vtable|objopen_prop) + skyrim(caller_sim), high
+void FUN_00a98ab0_shell::NiParticleMeshesData_SaveBinary(NiStream& kStream)
 {
     NiNode* pkNode;
-    ((FUN_00a97290_holder*)this)->FUN_00a97290(kStream);
+    ((FUN_00a97290_holder*)this)->NiParticlesData_SaveBinary(kStream);
     pkNode = *(NiNode**)((char*)this + 0x70);
     ((FakeStream*)&kStream)->f12(pkNode);
 }
@@ -214,7 +217,7 @@ struct MeshNode
 };
 struct HookBase
 {
-    bool FUN_00a96a30(void*);
+    bool NiParticlesData_IsEqual(void*);
 };
 struct Holder
 {
@@ -227,7 +230,7 @@ struct Holder
 bool Holder::IsMeshNodeEqual(void* pkObject)
 {
     Holder* pkPart = (Holder*)pkObject;
-    if (!((HookBase*)this)->FUN_00a96a30(pkObject))
+    if (!((HookBase*)this)->NiParticlesData_IsEqual(pkObject))
         return false;
     MeshNode* mine = m_pMeshNode;
     MeshNode* other = pkPart->m_pMeshNode;
@@ -255,11 +258,12 @@ struct Holder00a98d60
 {
     char _pad[0x70];
     FakeObj543* m_sp;
-    void FUN_00a98d60(NiStream&);
+    void NiParticleMeshesData_LinkObject(NiStream&);
 };
 // Links the object to kStream, then swaps m_sp to the stream's object, releasing the old one and retaining the new one.
 // @fnv 0x00a98d60
-void Holder00a98d60::FUN_00a98d60(NiStream& kStream)
+// pdb: NiParticleMeshesData::LinkObject | NiParticleMeshesData.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun) + skyrim(objrun), high
+void Holder00a98d60::NiParticleMeshesData_LinkObject(NiStream& kStream)
 {
     ((NiLinesData*)this)->LinkObject(kStream);
     FakeObj543* pkNew = ((StreamHelper543*)&kStream)->GetLoadedObject();
@@ -736,7 +740,8 @@ inline void* __cdecl operator new(unsigned int, void* where)
 }
 // Allocates a 0x78-byte object, constructs it, sets the bool at offset 0x40 to true, and returns it.
 // @fnv 0x00a98d30
-FUN_00a98b10* __cdecl FUN_00a98d30()
+// pdb: NiParticleMeshesData::CreateObject | NiParticleMeshesData.obj | fnv360_0822_retail, objrun + bridge(hash|objrun) + skyrim(caller_sim), high
+FUN_00a98b10* __cdecl NiParticleMeshesData_CreateObject()
 {
     FUN_00a98b10* pObject = new (NiMemObject::operator new(0x78)) FUN_00a98b10();
     *(bool*)&pObject->unk40 = true;

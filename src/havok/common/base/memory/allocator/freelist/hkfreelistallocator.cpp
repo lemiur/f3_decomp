@@ -35,7 +35,7 @@ struct FUN_00d5f850_cls
 #include <string.h>
 
 extern unsigned char DAT_0106dd0e;
-void __cdecl FUN_004548c0(int tag, void* p, int n);
+void __cdecl TESForm___AddChunkData(int tag, void* p, int n);
 
 struct FUN_0049e910_vt
 {
@@ -58,7 +58,7 @@ void FUN_00d5f850_cls::FUN_00d5f850()
     {
         buf[0] = _byteswap_ulong(r);
     }
-    FUN_004548c0(0x54414452, buf, 8);
+    TESForm___AddChunkData(0x54414452, buf, 8);
 }
 
 
@@ -102,7 +102,8 @@ struct Res
 }
 
 // @fnv 0x00d5fab0
-void __stdcall FUN_00d5fab0(int)
+// pdb: hkpCollisionAgent::invalidateTim | hkpCollisionAgent.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void __stdcall hkpCollisionAgent_invalidateTim(int)
 {}
 
 extern void(__stdcall* DAT_00fdf05c)(int* pkCriticalSection);

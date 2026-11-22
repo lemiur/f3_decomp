@@ -41,7 +41,7 @@ struct BSFadeNode
 struct AirTmp : NiPSysFieldModifier
 {
     AirTmp* __thiscall FUN_00c2f5c0();
-    void __thiscall FUN_00c2f500(void*);
+    void __thiscall NiPSysAirFieldModifier_SetDirection(void*);
 };
 // @fnv 0x00c2fad0
 NiObject* __thiscall NiPSysFieldModifier::Clone(CloningProcess& kCloning)
@@ -53,7 +53,7 @@ NiObject* __thiscall NiPSysFieldModifier::Clone(CloningProcess& kCloning)
     else
         pkObject = 0;
     FUN_00c32020(pkObject, kCloning);
-    pkObject->FUN_00c2f500((char*)this + 0x40);
+    pkObject->NiPSysAirFieldModifier_SetDirection((char*)this + 0x40);
     return (NiObject*)pkObject;
 }
 
@@ -86,7 +86,8 @@ struct TmpVec3
 };
 // Copies three ints from param into this+0x40 and this+0x4c, calls FUN_004a0c10, and replaces the vector with DAT_011a946c/70/74 if it equals DAT_011f426c/70/74.
 // @fnv 0x00c2f500
-void AirTmp::FUN_00c2f500(void* pSource)
+// pdb: NiPSysAirFieldModifier::SetDirection | NiPSysAirFieldModifier.obj | fnv360_0822_retail, call_seq + bridge(hash|call_seq) + skyrim(call_seq), high
+void AirTmp::NiPSysAirFieldModifier_SetDirection(void* pSource)
 {
     int* p = (int*)pSource;
     int* a = (int*)((char*)this + 0x40);
@@ -364,12 +365,13 @@ struct NiPSysGravityFieldModifier : NiPSysFieldModifierBase
     bool m_b62;
     float m_f64;
 
-    void FUN_00c302a0(NiStream& stream);
+    void NiPSysAirFieldModifier_SaveBinary(NiStream& stream);
 };
 
 // Saves the base field modifier, a color, m_f58, m_f5C, the three bools m_b60-m_b62 and m_f64 to the stream.
 // @fnv 0x00c302a0
-void NiPSysGravityFieldModifier::FUN_00c302a0(NiStream& stream)
+// pdb: NiPSysAirFieldModifier::SaveBinary | NiPSysAirFieldModifier.obj | fnv360_0822_retail, caller_sim + bridge(vtable|caller_sim) + skyrim(caller_sim), high
+void NiPSysGravityFieldModifier::NiPSysAirFieldModifier_SaveBinary(NiStream& stream)
 {
     NiPSysFieldModifierBase::SaveBinary(stream);
     m_kFogTint.SaveBinary(stream);
@@ -450,11 +452,12 @@ extern "C" void* g_012027a8;
 struct AirFieldModifier
 {
     void __thiscall FUN_00c2e520(NiStream& stream);
-    void __thiscall FUN_00c2f4e0(NiStream& stream);
+    void __thiscall NiStrnicmp(NiStream& stream);
 };
 
 // @fnv 0x00c2f4e0
-void __thiscall AirFieldModifier::FUN_00c2f4e0(NiStream& stream)
+// pdb: NiStrnicmp | NiSystem.obj | fnv360_0822_retail, call_seq + bridge(call_dedup|call_dedup) + skyrim(caller_sim), high
+void __thiscall AirFieldModifier::NiStrnicmp(NiStream& stream)
 {
     FUN_00c2e520(stream);
 }
@@ -790,15 +793,16 @@ struct S00c30170_Obj : AirTmp
     bool m_62;
     float m_64;
     void __thiscall LoadFromStream(NiStream*);
-    void __thiscall FUN_00c30170(NiStream* stream);
+    void __thiscall NiPSysAirFieldModifier_LoadBinary(NiStream* stream);
 };
-// Calls LoadFromStream, reads m_40, applies FUN_00c2f500 to it, then reads m_58, m_5c, m_60, m_61, m_62, and m_64.
+// Calls LoadFromStream, reads m_40, applies NiPSysAirFieldModifier_SetDirection to it, then reads m_58, m_5c, m_60, m_61, m_62, and m_64.
 // @fnv 0x00c30170
-void __thiscall S00c30170_Obj::FUN_00c30170(NiStream* stream)
+// pdb: NiPSysAirFieldModifier::LoadBinary | NiPSysAirFieldModifier.obj | fnv360_0822_retail, caller_sim + bridge(vtable|caller_sim) + skyrim(caller_sim), high
+void __thiscall S00c30170_Obj::NiPSysAirFieldModifier_LoadBinary(NiStream* stream)
 {
     LoadFromStream(stream);
     m_40.FUN_00a59be0(stream);
-    FUN_00c2f500(&m_40);
+    NiPSysAirFieldModifier_SetDirection(&m_40);
     ReadBinaryValue(stream, m_58);
     ReadBinaryValue(stream, m_5c);
     unsigned char b;
@@ -1004,11 +1008,12 @@ struct AirModifier
     float spread;
     void UpdateParticleAirFriction(float, AirParticles*);
     void UpdateAirFriction(float, AirParticles*);
-    void FUN_00c2fb40(float, AirParticles*);
+    void NiPSysAirFieldModifier_Update(float, AirParticles*);
 };
 // Updates particle velocities using the field direction and magnitude, with optional spread, distance limiting, attenuation, and inherited velocity.
 // @fnv 0x00c2fb40
-void AirModifier::FUN_00c2fb40(float time, AirParticles* apParticles)
+// pdb: NiPSysAirFieldModifier::Update | NiPSysAirFieldModifier.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun) + skyrim(udata), high
+void AirModifier::NiPSysAirFieldModifier_Update(float time, AirParticles* apParticles)
 {
     if (apParticles->count == 0 || !source)
         return;

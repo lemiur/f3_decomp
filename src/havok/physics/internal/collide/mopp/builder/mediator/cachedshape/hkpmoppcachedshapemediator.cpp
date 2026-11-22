@@ -75,7 +75,8 @@ struct S_00d54cd0_Result
 };
 S_00d54cd0_Result* FUN_00d54a40(S_00d54cd0_Base* col, void* world, S_00d54cd0_Input* in, void* out) throw();
 // @fnv 0x00d54cd0
-S_00d54cd0_Result* FUN_00d54cd0(void* world, S_00d54cd0_Input* pInput, void* out)
+// pdb: hkpMoppUtility::buildCode | hkpMoppUtility.obj | fnv360_0822_retail, caller_sim + bridge(caller_sim|callee_sim) + skyrim(caller_sim), high
+S_00d54cd0_Result* hkpMoppUtility_buildCode(void* world, S_00d54cd0_Input* pInput, void* out)
 {
     S_00d54cd0_Result* r;
     if (pInput->unk20)
@@ -255,10 +256,10 @@ struct DD5D50Source
     virtual int getCount();
 };
 
-class FUN_00dd5d50 : public DD5D50ReferencedObject
+class hkpMoppCachedShapeMediator : public DD5D50ReferencedObject // src: F3_EXE vtable 0x00e86bc8 (old: FUN_00dd5d50)
 {
   public:
-    FUN_00dd5d50(DD5D50Source* source);
+    hkpMoppCachedShapeMediator(DD5D50Source* source);
     virtual void unk00();
 
     DD5D50Array m_items;
@@ -267,7 +268,7 @@ class FUN_00dd5d50 : public DD5D50ReferencedObject
 };
 
 // @fnv 0x00dd5d50
-FUN_00dd5d50::FUN_00dd5d50(DD5D50Source* source) : m_pObservedSource(source)
+hkpMoppCachedShapeMediator::hkpMoppCachedShapeMediator(DD5D50Source* source) : m_pObservedSource(source)
 {
     m_uiItemCount = source->getCount();
 }
@@ -513,11 +514,12 @@ struct Owner
     unsigned int unk00, unk04, unk08, unk0c, unk10;
     OutCollection* collection;
     int count;
-    void FUN_00dd55f0(OutRecord* out);
+    void hkpMoppCachedShapeMediator_getPrimitives(OutRecord* out);
 };
 // Iterates the collection and writes each element's handle and index into the out array.
 // @fnv 0x00dd55f0
-void Owner::FUN_00dd55f0(OutRecord* out)
+// pdb: hkpMoppCachedShapeMediator::getPrimitives | hkpMoppCachedShapeMediator.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void Owner::hkpMoppCachedShapeMediator_getPrimitives(OutRecord* out)
 {
     int n = count;
     void* current = collection->Begin();

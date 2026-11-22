@@ -190,7 +190,7 @@ struct Agent378 {
     int unknown;
     ContactManager378* manager;
     unsigned short* indices;
-    void __thiscall FUN_00d378e0(Body378*, Body378*, void*, ContactBuffer378*);
+    void __thiscall hkpMultiRayConvexAgent_processCollision(Body378*, Body378*, void*, ContactBuffer378*);
 };
 inline __m128 transform378(const Transform378& t, __m128 p) {
     return _mm_add_ps(_mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(p,p,0x55),t.y),_mm_mul_ps(_mm_shuffle_ps(p,p,0),t.x)),
@@ -231,7 +231,8 @@ __forceinline void transform1(V378& out, const Transform378& xf, const V378& in)
     t(3) = 0;
 }
 }
-void Agent378::FUN_00d378e0(Body378* a, Body378* b, void* input, ContactBuffer378* buffer) {
+// pdb: hkpMultiRayConvexAgent::processCollision | hkpMultiRayConvexAgent.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void Agent378::hkpMultiRayConvexAgent_processCollision(Body378* a, Body378* b, void* input, ContactBuffer378* buffer) {
     using namespace f3m_009c01f0;
     timer378(DAT_010ceda8);
     Shape378* source = a->shape;

@@ -113,8 +113,8 @@ class Task1447ConstraintData
 class Task1447Entity
 {
   public:
-    int FUN_0090b210() throw();
-    int FUN_0090b250(int i) throw();
+    int hkpEntity_getNumConstraints() throw();
+    int hkpEntity_getConstraint(int i) throw();
 };
 hkBoolE46B hkpConstraintCollisionFilterE46B::ConstraintCollisionFilter(const hkpCollidableE46B& a,
                                                                        const hkpCollidableE46B& b) const throw()
@@ -128,15 +128,15 @@ hkBoolE46B hkpConstraintCollisionFilterE46B::ConstraintCollisionFilter(const hkp
     if (!pkBodyA || !pkBodyB)
         return true;
 
-    const bool bSwapBodies = reinterpret_cast<Task1447Entity*>(pkBodyA)->FUN_0090b210() > reinterpret_cast<Task1447Entity*>(pkBodyB)->FUN_0090b210();
+    const bool bSwapBodies = reinterpret_cast<Task1447Entity*>(pkBodyA)->hkpEntity_getNumConstraints() > reinterpret_cast<Task1447Entity*>(pkBodyB)->hkpEntity_getNumConstraints();
     FUN_00c9c3c0_Class* pkEntityA = bSwapBodies ? pkBodyB : pkBodyA;
     FUN_00c9c3c0_Class* pkEntityB = bSwapBodies ? pkBodyA : pkBodyB;
 
-    int numConstraints = reinterpret_cast<Task1447Entity*>(pkEntityA)->FUN_0090b210();
+    int numConstraints = reinterpret_cast<Task1447Entity*>(pkEntityA)->hkpEntity_getNumConstraints();
     for (int i = 0; i < numConstraints; i++)
     {
         const hkpConstraintInstanceE46B* pkConstraint =
-            reinterpret_cast<const hkpConstraintInstanceE46B*>(reinterpret_cast<Task1447Entity*>(pkEntityA)->FUN_0090b250(i));
+            reinterpret_cast<const hkpConstraintInstanceE46B*>(reinterpret_cast<Task1447Entity*>(pkEntityA)->hkpEntity_getConstraint(i));
         if (pkConstraint && reinterpret_cast<const Task1447ConstraintData*>(pkConstraint->m_data)->getType() != 11)
         {
             if (pkConstraint->m_pEntityA == pkEntityB || pkConstraint->m_pEntityB == pkEntityB)
@@ -335,7 +335,8 @@ struct OwnerT
     virtual void v0C();
     virtual int v10();
 };
-void __stdcall FUN_00e46e30(void* p)
+// pdb: hkpConstrainedSystemFilter::constraintAddedCallback | hkpConstrainedSystemFilter.obj | fnv360_0822_retail, caller_sim + skyrim(caller_sim), high
+void __stdcall hkpConstrainedSystemFilter_constraintAddedCallback(void* p)
 {
     OwnerT* owner = *reinterpret_cast<OwnerT**>(reinterpret_cast<char*>(p) + 0xc);
     if (owner->v10() != 11)

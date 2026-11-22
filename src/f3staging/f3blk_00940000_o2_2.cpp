@@ -228,7 +228,8 @@ extern "C" hkpModifierConstraintAtom* __cdecl FUN_009a94f0(hkpConstraintInstance
 extern "C" void __cdecl FUN_009a9550(hkpConstraintInstance* apInstance, ConstraintInput* apInput,
                                       hkpModifierConstraintAtom* apAtom);
 
-void __cdecl FUN_0095aec0(hkpConstraintInstance* apInstance, ConstraintInput* apInput)
+// pdb: hkpResponseModifier::disableConstraint | hkpResponseModifier.obj | fnv360_0822_retail, ustr + bridge(ustr|ustr) + skyrim(ustr), high
+void __cdecl hkpResponseModifier_disableConstraint(hkpConstraintInstance* apInstance, ConstraintInput* apInput)
 {
     apInput->disable();
     Timer_Emit("TtDsblConstr");
@@ -875,7 +876,7 @@ struct hkReferencedObject946380 {
 // hkpSpringAction
 struct FUN_00d4d340 : hkReferencedObject946380 {
     FUN_00d4d340(void* entityA, void* entityB, unsigned long userData);
-    void FUN_009d9f40(const hkVector4_946380& pivotA, const hkVector4_946380& pivotB);  // setPositionsInWorldSpace
+    void hkpSpringAction_setPositionsInBodySpace(const hkVector4_946380& pivotA, const hkVector4_946380& pivotB);  // setPositionsInWorldSpace
     void setStrength(float s) { m_strength = s; }
     void setDamping(float d) { m_damping = d; }
     void setRestLength(float l) { m_restLength = l; }
@@ -939,7 +940,7 @@ void World946380::FUN_00946380(SpringDesc946380* desc) {
         action->setRestLength(desc->restLength);
         action->setOnCompression(desc->onCompression);
         action->setOnExtension(desc->onExtension);
-        action->FUN_009d9f40(hkVector4_946380(desc->pivotA.x, desc->pivotA.y, desc->pivotA.z, desc->pivotA.w), hkVector4_946380(desc->pivotB.x, desc->pivotB.y, desc->pivotB.z, desc->pivotB.w));
+        action->hkpSpringAction_setPositionsInBodySpace(hkVector4_946380(desc->pivotA.x, desc->pivotA.y, desc->pivotA.z, desc->pivotA.w), hkVector4_946380(desc->pivotB.x, desc->pivotB.y, desc->pivotB.z, desc->pivotB.w));
         AddAction(action);
         action->removeReference();
         AddDesc(desc);
@@ -1201,10 +1202,11 @@ struct Calc
 
 struct Owner
 {
-    void FUN_00942cf0(Obj* a1, Blk* a2, int a3, char* a4, int a5, int a6);
+    void hkpWorldRayCaster_castRayGroup(Obj* a1, Blk* a2, int a3, char* a4, int a5, int a6);
 };
 
-void Owner::FUN_00942cf0(Obj* a1, Blk* a2, int a3, char* a4, int a5, int a6)
+// pdb: hkpWorldRayCaster::castRayGroup | hkpWorldRayCaster.obj | fnv360_0822_retail, ustr + skyrim(ustr), high
+void Owner::hkpWorldRayCaster_castRayGroup(Obj* a1, Blk* a2, int a3, char* a4, int a5, int a6)
 {
 
     {
@@ -1445,7 +1447,7 @@ struct S945a80_World {
 };
 
 bool FUN_008f62d0(S945a80_Key a, S945a80_Key b);
-void __stdcall FUN_008d2a00(S945a80_Mat* mat, S945a80_Out* out);
+void __stdcall hkVector4_setRotatedDir(S945a80_Mat* mat, S945a80_Out* out);
 
 struct S945a80_Picker {
     int unk00;
@@ -1455,10 +1457,11 @@ struct S945a80_Picker {
     S945a80_Pair* pairs;
     int count;
     int GetCount() const { return count; }
-    void FUN_00945a80(S945a80_RayIn* in, S945a80_Out* out);
+    void hkpCachingShapePhantomRay_castRay(S945a80_RayIn* in, S945a80_Out* out);
 };
 
-void S945a80_Picker::FUN_00945a80(S945a80_RayIn* in, S945a80_Out* out)
+// pdb: hkpCachingShapePhantomRay::castRay | bhkCachingShapePhantom.obj | fnv360_0822_retail, ustr + bridge(ustr|ustr) + skyrim(ustr), high
+void S945a80_Picker::hkpCachingShapePhantomRay_castRay(S945a80_RayIn* in, S945a80_Out* out)
 {
     S945a80_ProfBuf* buf = (S945a80_ProfBuf*)TlsGetValue(DAT_0116913c);
     S945a80_ProfRec* rec = buf->m_pCur;
@@ -1514,7 +1517,7 @@ void S945a80_Picker::FUN_00945a80(S945a80_RayIn* in, S945a80_Out* out)
         }
     }
     if (out->entry)
-        FUN_008d2a00(out->entry->mat, out);
+        hkVector4_setRotatedDir(out->entry->mat, out);
 
     buf = (S945a80_ProfBuf*)TlsGetValue(DAT_0116913c);
     rec = buf->m_pCur;

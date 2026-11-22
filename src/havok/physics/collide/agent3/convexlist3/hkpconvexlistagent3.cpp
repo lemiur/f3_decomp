@@ -2,19 +2,19 @@
 // src/havok/physics/collide/agent3/convexlist3/hkpconvexlistagent3.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/physics/collide/agent3/convexlist3/hkpconvexlistagent3.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-void __cdecl FUN_00da3510(void* a, void* b);
+void __cdecl hkAgent1nMachine_InvalidateTim(void* a, void* b);
 
 // @fnv 0x00d32b20
 void __cdecl CallIfNotFlagged(int aiUnused, int pObject, int c)
 {
     if (!(*(char*)(pObject + 0xb) & 0x20))
-        FUN_00da3510((void*)(pObject + 0x10), (void*)c);
+        hkAgent1nMachine_InvalidateTim((void*)(pObject + 0x10), (void*)c);
 }
 
 void __cdecl SetFlagAndCall(int, int, int);
 void __cdecl FUN_00d32bd0(int, int, int);
-void __cdecl FUN_00d32ae0(int, int, int);
-void __cdecl FUN_00d32b40(int, int, int);
+void __cdecl hkConvexListAgent3_calcStatistics(int, int, int);
+void __cdecl hkConvexListAgent3_warpTime(int, int, int);
 
 // If the flag at offset 0x0b of b is clear, calls f6 with "hkConvexListAgent3", FUN_00d97250 on b+0x10, then f7 on the agent.
 // @f3 0x009bc8c0 (community match, verified in this file)
@@ -32,7 +32,8 @@ struct FUN_00d32ae0_vt
 
 void __cdecl FUN_00a26d90(void*, void*, void*);
 
-void __cdecl FUN_00d32ae0(int aiUnused, int b, int c)
+// pdb: hkConvexListAgent3::calcStatistics | hkpConvexListAgent3.obj | fnv360_0822_retail, ustr + bridge(ustr|ustr) + skyrim(ustr), high
+void __cdecl hkConvexListAgent3_calcStatistics(int aiUnused, int b, int c)
 {
     if (reinterpret_cast<unsigned char*>(b)[0x0b] & 0x20)
         return;
@@ -49,7 +50,8 @@ void __cdecl _FUN_00da35f0(void*, float, float, int);
 
 // If the object's byte at offset 0xb lacks flag 0x20, forwards its fields at +0x10 plus three stack arguments to _FUN_00da35f0.
 // @fnv 0x00d32b40
-void __cdecl FUN_00d32b40(int aiUnused, int aiArg1, int aiArg2)
+// pdb: hkConvexListAgent3::warpTime | hkpConvexListAgent3.obj | fnv360_0822_retail, objrun + bridge(hash|objrun) + skyrim(hash), high
+void __cdecl hkConvexListAgent3_warpTime(int aiUnused, int aiArg1, int aiArg2)
 {
     struct StackArguments
     {
@@ -107,7 +109,7 @@ void FUN_00d33210_cls::FUN_00d33210()
     m_0c->v24();
 }
 
-// FUN_00d33220 (0x00d33220, 10 bytes)
+// hkpMapPointsToSubShapeContactMgr_reserveContactPointsImpl (0x00d33220, 10 bytes)
 //
 //	8b 49 0c        mov ecx, dword ptr [ecx+0xc]
 //	8b 01           mov eax, dword ptr [ecx]
@@ -135,11 +137,12 @@ struct Own_d33220
     int unk04;
     int unk08;
     Sub_d33220* unk0c;
-    void FUN_00d33220(int);
+    void hkpMapPointsToSubShapeContactMgr_reserveContactPointsImpl(int);
 };
 
 // @fnv 0x00d33220
-void Own_d33220::FUN_00d33220(int a)
+// pdb: hkpMapPointsToSubShapeContactMgr::reserveContactPointsImpl | hkpConvexListAgent3.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void Own_d33220::hkpMapPointsToSubShapeContactMgr_reserveContactPointsImpl(int a)
 {
     unk0c->v4(a);
 }
@@ -210,10 +213,11 @@ struct FnvCpu_FUN_00d33250_CpuOwner
     unsigned int unk04;
     unsigned int unk08;
     FnvCpu_FUN_00d33250_CpuInterface* target;
-    void FUN_00d33250(int arg0);
+    void hkpMapPointsToSubShapeContactMgr_removeToiImpl(int arg0);
 };
 // @fnv 0x00d33250
-void FnvCpu_FUN_00d33250_CpuOwner::FUN_00d33250(int arg0)
+// pdb: hkpMapPointsToSubShapeContactMgr::removeToiImpl | hkpConvexListAgent3.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void FnvCpu_FUN_00d33250_CpuOwner::hkpMapPointsToSubShapeContactMgr_removeToiImpl(int arg0)
 {
     target->Invoke(arg0);
 }
@@ -391,7 +395,7 @@ void Container::FUN_00d33600(void* unusedA, void* unusedB, char* source, Callbac
     }
 }
 
-void __cdecl FUN_00da42b0(int* data, void* collector, void* input, void* output);
+void __cdecl hkAgent1nMachine_Destroy(int* data, void* collector, void* input, void* output);
 
 void __cdecl FUN_00d41860();
 // @fnv 0x00d32bd0
@@ -730,7 +734,7 @@ struct FUN_00d33670
     FUN_00d33670(Output*);
     void FUN_00d33600(Body*, Body*, Output*, Manager*);
 };
-void __cdecl FUN_00da42b0(Cache*, int, Manager*, int);
+void __cdecl hkAgent1nMachine_Destroy(Cache*, int, Manager*, int);
 void __cdecl FUN_00d41860(int, Agent*, Manager*, int);
 
 }  // namespace fnv_00d32cd0
@@ -814,8 +818,9 @@ int hkpConvexListLinearCastD334::FUN_00d334c0(const hkpCdBodyD333* apBodyA, cons
 
 
 // @f3twin 0x009bd060 of 0x0095b090
-struct F3Twin_009bd060 : public FnvCpu_FUN_00d33230_CpuOwner { void F3_FUN_009bd060(int arg0) ; };
-void F3Twin_009bd060::F3_FUN_009bd060(int arg0) 
+struct F3Twin_009bd060 : public FnvCpu_FUN_00d33230_CpuOwner { void hkpMapPointsToSubShapeContactMgr_removeContactPointImpl(int arg0) ; };
+// pdb: hkpMapPointsToSubShapeContactMgr::removeContactPointImpl | hkpConvexListAgent3.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void F3Twin_009bd060::hkpMapPointsToSubShapeContactMgr_removeContactPointImpl(int arg0) 
 {
     target->Invoke(arg0);
 }

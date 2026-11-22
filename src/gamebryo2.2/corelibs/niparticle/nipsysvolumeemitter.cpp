@@ -152,7 +152,8 @@ void FUN_00c31cf0_shell::ComputeEmitterInitialPositionAndVelocity(NiPoint3* kPos
 extern char const* const g_01202508_arg1;
 
 // @fnv 0x00c31bc0
-char const* const* __cdecl FUN_00c31bc0()
+// pdb: NiInterpolator::GetRTTI | NiInterpolator.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+char const* const* __cdecl NiInterpolator_GetRTTI()
 {
     return &g_01202508_arg1;
 }
@@ -179,14 +180,15 @@ struct Stub_00c31b60
 {
     char _pad[0x54];
     void* m_obj;
-    void FUN_00c22530(void* s);
-    void FUN_00c31b60(void* s);
+    void NiPSysEmitter_SaveBinary(void* s);
+    void NiPSysVolumeEmitter_SaveBinary(void* s);
 };
-// Calls FUN_00c22530 on s, then invokes the virtual At30 on s passing m_obj.
+// Calls NiPSysEmitter_SaveBinary on s, then invokes the virtual At30 on s passing m_obj.
 // @fnv 0x00c31b60
-void Stub_00c31b60::FUN_00c31b60(void* s)
+// pdb: NiPSysVolumeEmitter::SaveBinary | NiPSysVolumeEmitter.obj | fnv360_0822_retail, call_seq + bridge(vtable|objrun) + skyrim(caller_sim), high
+void Stub_00c31b60::NiPSysVolumeEmitter_SaveBinary(void* s)
 {
-    FUN_00c22530(s);
+    NiPSysEmitter_SaveBinary(s);
     ((FakeStream_00c31b60*)s)->At30(m_obj);
 }
 
@@ -195,10 +197,11 @@ struct FUN_00c31b80_This
     char _pad[0x54];
     void* m_pkEmitterObject;
     bool Equals(void* pkObject);
-    bool FUN_00c31b80(void* pkObject);
+    bool NiPSysVolumeEmitter_IsEqual(void* pkObject);
 };
 // @fnv 0x00c31b80
-bool FUN_00c31b80_This::FUN_00c31b80(void* pkObject)
+// pdb: NiPSysVolumeEmitter::IsEqual | NiPSysVolumeEmitter.obj | fnv360_0822_retail, call_seq + bridge(vtable|objrun) + skyrim(caller_sim), high
+bool FUN_00c31b80_This::NiPSysVolumeEmitter_IsEqual(void* pkObject)
 {
     FUN_00c31b80_This* pkDest = (FUN_00c31b80_This*)pkObject;
     if (!Equals(pkObject))

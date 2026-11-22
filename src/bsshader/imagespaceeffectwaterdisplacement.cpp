@@ -353,7 +353,7 @@ struct GameObject
     float accumulated;
     float step;
 
-    void FUN_00ba0900(void* arg1, void* arg2, int arg3, int arg4);
+    void ImageSpaceEffectWaterDisplacement_Render(void* arg1, void* arg2, int arg3, int arg4);
 };
 
 extern float DAT_010313d4;
@@ -683,7 +683,8 @@ __forceinline void EffectState::UpdatePasses(void* arg1, void* arg2, int arg3, i
         tex64.FUN_00b22530();
     }
 }
-void GameObject::FUN_00ba0900(void* arg1, void* arg2, int arg3, int arg4)
+// pdb: ImageSpaceEffectWaterDisplacement::Render | ImageSpaceEffectWaterDisplacement.obj | fnv360_0822_retail, ustr + bridge(ustr|ustr) + skyrim(ustr), high
+void GameObject::ImageSpaceEffectWaterDisplacement_Render(void* arg1, void* arg2, int arg3, int arg4)
 {
     ((EffectState*)this)->UpdatePasses(arg1,arg2,arg3,arg4);
 }

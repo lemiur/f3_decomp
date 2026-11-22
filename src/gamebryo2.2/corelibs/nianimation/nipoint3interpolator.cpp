@@ -50,7 +50,7 @@ struct NiTexture;
 struct NiThread;
 struct FUN_00a49530_shell : public NiPoint3Interpolator
 {
-    void FUN_00a49530(NiStream*);
+    void NiPoint3Interpolator_LoadBinary(NiStream*);
 };
 
 class NiColor
@@ -71,7 +71,8 @@ struct NiKeyBasedInterpolator_LoadBinary_Helper : public NiKeyBasedInterpolator
 
 // Loads the base interpolator and a NiColor from the stream, then reads a NiObject and stores it as a ref-counted member.
 // @fnv 0x00a49530
-void FUN_00a49530_shell::FUN_00a49530(NiStream* pkStream)
+// pdb: NiPoint3Interpolator::LoadBinary | NiPoint3Interpolator.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun) + skyrim(caller_sim), high
+void FUN_00a49530_shell::NiPoint3Interpolator_LoadBinary(NiStream* pkStream)
 {
     reinterpret_cast<NiKeyBasedInterpolator_LoadBinary_Helper*>(this)
         ->NiKeyBasedInterpolator_LoadBinary_Helper::LoadBinary(*pkStream);
@@ -156,7 +157,7 @@ struct NiTexture;
 struct NiThread;
 struct FUN_00a49590_shell : public NiPoint3Interpolator
 {
-    bool FUN_00a49590(NiStream*);
+    bool NiPoint3Interpolator_RegisterStreamables(NiStream*);
 };
 
 struct HC1Base
@@ -191,7 +192,8 @@ struct HC1Data
 
 // Calls FUN_00aa0ad0 on this as HC1Base; if it succeeds, registers the HC1Data at offset 0x18 with the stream and returns true.
 // @fnv 0x00a49590
-bool FUN_00a49590_shell::FUN_00a49590(NiStream* kStream)
+// pdb: NiPoint3Interpolator::RegisterStreamables | NiPoint3Interpolator.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun) + skyrim(objrun_open), high
+bool FUN_00a49590_shell::NiPoint3Interpolator_RegisterStreamables(NiStream* kStream)
 {
     if (!reinterpret_cast<HC1Base*>(this)->FUN_00aa0ad0(kStream))
         return false;

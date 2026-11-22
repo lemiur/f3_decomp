@@ -616,7 +616,7 @@ struct Item785 {
     float FUN_004b2220();
 };
 struct Ctrl785 {
-    float FUN_008ea150();
+    float bhkCharacterController_GetRadius();
 };
 struct Group785 {
     unsigned short layer;
@@ -810,13 +810,14 @@ struct Player785 {
     Group785 FUN_00766b00();
     Area785* GetArea() { return cell; }
     Pt3* GetPos() { return &pos; }
-    bool FUN_00785750(Item785* item, Pt3* outPos, bool tryAround, bool advance);
+    bool PlayerCharacter_GetDropPoint(Item785* item, Pt3* outPos, bool tryAround, bool advance);
 };
 extern Player785* DAT_0107a104;
-bool Player785::FUN_00785750(Item785* item, Pt3* outPos, bool tryAround, bool advance)
+// pdb: PlayerCharacter::GetDropPoint | PlayerCharacter.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+bool Player785::PlayerCharacter_GetDropPoint(Item785* item, Pt3* outPos, bool tryAround, bool advance)
 {
     float span = item->FUN_004b2220() * 2.0f;
-    float minGap = ToGame(DAT_0107a104->FUN_00764ea0()->FUN_008ea150());
+    float minGap = ToGame(DAT_0107a104->FUN_00764ea0()->bhkCharacterController_GetRadius());
     float placeDist = FUN_004e6d80() * DAT_00f61ea8;
     Pt3 eye, aim;
     FUN_00701790(&eye, &aim, true);

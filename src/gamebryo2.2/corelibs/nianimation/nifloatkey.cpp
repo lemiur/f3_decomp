@@ -63,11 +63,12 @@ struct Base_00a26eb0
 struct Holder_00a26eb0 : Base_00a26eb0
 {
     float m;
-    void FUN_00a26eb0(NiStream&);
+    void NiFloatKey_LoadBinary(NiStream&);
 };
 // Calls the base stream reader, then reads 4 bytes from stream.input into m and advances the stream position by the bytes read.
 // @fnv 0x00a26eb0
-void Holder_00a26eb0::FUN_00a26eb0(NiStream& stream)
+// pdb: NiFloatKey::LoadBinary | NiFloatKey.obj | fnv360_0822_retail, caller_sim + bridge(hash|objopen_prop) + skyrim(caller_sim), high
+void Holder_00a26eb0::NiFloatKey_LoadBinary(NiStream& stream)
 {
     Base_00a26eb0::AccumulateAnimSink(stream);
     NiBinaryStream* __restrict input = stream.input;

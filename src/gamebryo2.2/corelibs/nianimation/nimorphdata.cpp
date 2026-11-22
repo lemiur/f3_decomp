@@ -6,7 +6,8 @@ extern "C" void* g_011f3e74;
 
 // Returns the address of the global g_011f3e74.
 // @fnv 0x00a415e0
-void* __cdecl FUN_00a415e0()
+// pdb: NiMorphData::GetRTTI | NiMorphData.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+void* __cdecl NiMorphData_GetRTTI()
 {
     return &g_011f3e74;
 }
@@ -511,11 +512,12 @@ struct NiMorphDataX : NiObjBase
     MorphTgt* m_pMorphTargets;
     bool m_bTargetsAreRelative;
 
-    void FUN_00a41d90(NiStreamM& kStream);
+    void NiMorphData_SaveBinary(NiStreamM& kStream);
 };
 
 // @fnv 0x00a41d90
-void NiMorphDataX::FUN_00a41d90(NiStreamM& kStream)
+// pdb: NiMorphData::SaveBinary | NiMorphData.obj | fnv360_0822_retail, objrun + bridge(vtable|caller_sim) + skyrim(caller_sim), high
+void NiMorphDataX::NiMorphData_SaveBinary(NiStreamM& kStream)
 {
     SaveBinaryBase(kStream);
     SerializeValue(kStream, m_uiNumTargets);
@@ -828,8 +830,8 @@ struct NiStreamL_a41940
     int unk244;
     int unk248;
     NiBinIstr_a41940* m_pUnderlyingStream;
-    void FUN_00a64ea0(NiFixedStrL_a41940& kString);
-    void FUN_00a64df0(NiFixedStrL_a41940& kString);
+    void NiStream_LoadCStringAsFixedString(NiFixedStrL_a41940& kString);
+    void NiStream_LoadFixedString(NiFixedStrL_a41940& kString);
 };
 struct NiPoint3_a41940
 {
@@ -851,9 +853,9 @@ struct MorphTarget_a41940
 void MorphTarget_a41940::Load(NiStreamL_a41940& kStream, unsigned int m_uiScaleCount)
 {
     if (kStream.m_uiNifVersion < 0x14010001)
-        kStream.FUN_00a64ea0(m_kName);
+        kStream.NiStream_LoadCStringAsFixedString(m_kName);
     else
-        kStream.FUN_00a64df0(m_kName);
+        kStream.NiStream_LoadFixedString(m_kName);
     if (kStream.m_uiNifVersion >= 0x0A010068 && kStream.m_uiNifVersion < 0x14010003)
         NiBinIstrLoad_a41940(kStream.m_pUnderlyingStream, &m_fMorphWeight, 1);
     m_aVerts = new NiPoint3_a41940[m_uiScaleCount];
@@ -883,7 +885,7 @@ struct MorphEqualData
     MorphEqualTarget* m_10;
     unsigned char m_14;
     bool IsSameAs(MorphEqualData* other);
-    bool FUN_00a418a0(MorphEqualData* other);
+    bool NiMorphData_IsEqual(MorphEqualData* other);
 };
 
 __declspec(noinline) bool MorphEqualTarget::Equals(MorphEqualTarget* other, unsigned int val)
@@ -900,7 +902,8 @@ __declspec(noinline) bool MorphEqualTarget::Equals(MorphEqualTarget* other, unsi
 
 // Compares two MorphEqualData instances by checking m_08, m_0c, m_14 and each MorphEqualTarget in m_10 via Equals.
 // @fnv 0x00a418a0
-bool MorphEqualData::FUN_00a418a0(MorphEqualData* other)
+// pdb: NiMorphData::IsEqual | NiMorphData.obj | fnv360_0822_retail, objrun_sim + bridge(vtable|objrun_open) + skyrim(caller_sim), high
+bool MorphEqualData::NiMorphData_IsEqual(MorphEqualData* other)
 {
     if (!IsSameAs(other))
     {

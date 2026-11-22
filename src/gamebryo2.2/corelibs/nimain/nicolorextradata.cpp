@@ -143,13 +143,14 @@ class A89400ColorExtraData : public A89400ExtraData
         A89400ExtraData::CopyMemberData(pkDest, kCloning);
         pkDest->m_kFogTint = m_kFogTint;
     }
-    A89400ColorExtraData* FUN_00a89400(A89400CloningProcess& kCloning);
+    A89400ColorExtraData* NiColorExtraData_CreateClone(A89400CloningProcess& kCloning);
 
     A89400ColorA m_kFogTint;
 };
 
 // @fnv 0x00a89400
-A89400ColorExtraData* A89400ColorExtraData::FUN_00a89400(A89400CloningProcess& kCloning)
+// pdb: NiColorExtraData::CreateClone | NiColorExtraData.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun) + skyrim(caller_sim), high
+A89400ColorExtraData* A89400ColorExtraData::NiColorExtraData_CreateClone(A89400CloningProcess& kCloning)
 {
     A89400ColorExtraData* pkDest = new A89400ColorExtraData;
     CopyMemberData(pkDest, kCloning);

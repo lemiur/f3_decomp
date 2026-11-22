@@ -205,10 +205,10 @@ class __declspec(novtable) S00de49b0_Base : public S00de49b0_RefObject
     int m_type;
 };
 
-class FUN_00de49b0 : public S00de49b0_Base
+class hkDisplaySemiCircle : public S00de49b0_Base // src: F3_EXE vtable 0x00e87068 (old: FUN_00de49b0)
 {
   public:
-    FUN_00de49b0(const S00de49b0_Vec4& kC, const S00de49b0_Vec4& kA, const S00de49b0_Vec4& kB, float f1, float f2,
+    hkDisplaySemiCircle(const S00de49b0_Vec4& kC, const S00de49b0_Vec4& kA, const S00de49b0_Vec4& kB, float f1, float f2,
                  float f3, int i1);
     virtual void vf00();
 
@@ -222,7 +222,7 @@ class FUN_00de49b0 : public S00de49b0_Base
 };
 
 // @f3 0x00a6ac90 (community match, verified in this file)
-FUN_00de49b0::FUN_00de49b0(const S00de49b0_Vec4& kC, const S00de49b0_Vec4& kA, const S00de49b0_Vec4& kB,
+hkDisplaySemiCircle::hkDisplaySemiCircle(const S00de49b0_Vec4& kC, const S00de49b0_Vec4& kA, const S00de49b0_Vec4& kB,
                            float f1, float f2, float f3, int i1)
     : S00de49b0_Base(5)
 {

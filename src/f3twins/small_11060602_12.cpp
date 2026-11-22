@@ -119,9 +119,10 @@ struct S_00b489b0
     virtual void Slot(int);
     char pad[0x68];
     int arr[3];
-    void FUN_00b489b0();
+    void VolumetricFogShader_ClearPassStages();
 };
-void S_00b489b0::FUN_00b489b0()
+// pdb: VolumetricFogShader::ClearPassStages | VolumetricFogShader.obj | fnv360_0822_retail, objrun + bridge(hash|objrun), high
+void S_00b489b0::VolumetricFogShader_ClearPassStages()
 {
     for (int i = 0; i < 3; i++)
         Slot(arr[i]);
@@ -161,8 +162,9 @@ extern "C" __declspec(dllimport) long __stdcall InterlockedDecrement(volatile lo
 
 struct A_00b48b10 { char pad[0x64]; int rc; void FUN_00888c10(); };
 struct R_00b48b10 { virtual void v0(); virtual void v1(); long rc; };
-struct C_00b48b10 { char pad[0x6c]; A_00b48b10* a[3]; R_00b48b10* b[2]; R_00b48b10* c[2]; bool FUN_00b58540(); bool FUN_00b48b10(); };
-bool C_00b48b10::FUN_00b48b10()
+struct C_00b48b10 { char pad[0x6c]; A_00b48b10* a[3]; R_00b48b10* b[2]; R_00b48b10* c[2]; bool FUN_00b58540(); bool VolumetricFogShader_Initialize(); };
+// pdb: VolumetricFogShader::Initialize | VolumetricFogShader.obj | fnv360_0822_retail, objrun + bridge(hash|objrun), high
+bool C_00b48b10::VolumetricFogShader_Initialize()
 {
     bool r = FUN_00b58540();
     for (int i = 0; i < 3; i++) {

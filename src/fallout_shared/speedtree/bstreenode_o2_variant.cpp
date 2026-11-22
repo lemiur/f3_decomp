@@ -1164,7 +1164,7 @@ struct FUN_00caaea0_shell
     virtual void v43() = 0;
     virtual void v44() = 0;
     virtual ScaleMatrix* getMatrix(bool* outFlag) = 0;
-    void FUN_00c84df0(void* context, SourceObject* source);
+    void bhkShape_CopyMembers(void* context, SourceObject* source);
     void FUN_00caaea0(void* context, SourceObject* source);
 };
 // @f3 0x0091d1c0 (community match, verified in this file)
@@ -1189,7 +1189,7 @@ void FUN_00caaea0_shell::FUN_00caaea0(void* context, SourceObject* source)
         }
     }
 
-    FUN_00c84df0(context,source);
+    bhkShape_CopyMembers(context,source);
 }
 
 
@@ -3180,7 +3180,7 @@ struct FUN_00cb8010_cls
     virtual void vB0();
     virtual OwnerB* v45(unsigned char* pFlag);
 
-    void __thiscall FUN_00c84d50(A1Owner* a1);
+    void __thiscall bhkShape_SaveBinary(A1Owner* a1);
     void __thiscall FUN_00cb8010(A1Owner* a1);
 };
 
@@ -3471,7 +3471,7 @@ struct FUN_00c8c1e0_arg
 {
     int unk00;
     unsigned int m04;
-    void FUN_00a645b0();
+    void NiStream_ReadLinkID();
     int unk08;
     int unk0C;
     int unk10;
@@ -3966,7 +3966,7 @@ struct C8C260Shader
     int unk04;
     C8C260Link* m_link;
 
-    void FUN_00c84d50(C8C260Renderer* pkRenderer);
+    void bhkShape_SaveBinary(C8C260Renderer* pkRenderer);
     void FUN_00c8c260(C8C260Renderer* pkRenderer);
 };
 
@@ -3978,7 +3978,7 @@ inline void* C8C260GetTarget(C8C260Shader* p)
 // @f3 0x008fddc0 (community match, verified in this file)
 struct FUN_00c84d50_cls
 {
-    void FUN_00c84d50(void* p);
+    void bhkShape_SaveBinary(void* p);
 };
 void C8C260Shader::FUN_00c8c260(C8C260Renderer* pkRenderer)
 {
@@ -3998,7 +3998,7 @@ void C8C260Shader::FUN_00c8c260(C8C260Renderer* pkRenderer)
             FUN_00c8c020(header);
         }
     }
-    reinterpret_cast<FUN_00c84d50_cls*>(this)->FUN_00c84d50(pkRenderer);
+    reinterpret_cast<FUN_00c84d50_cls*>(this)->bhkShape_SaveBinary(pkRenderer);
     if (pkBlock)
     {
         pkBlock->m_flags = 0;

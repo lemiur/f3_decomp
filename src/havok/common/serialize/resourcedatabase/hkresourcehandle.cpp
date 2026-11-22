@@ -118,11 +118,12 @@ struct FUN_00e2df50_Obj
     int unk04;
     int unk08;
 
-    int FUN_00e2df50();
+    int hkOffsetOnlyStreamWriter_tell();
 };
 
 // @fnv 0x00e2df50
-int FUN_00e2df50_Obj::FUN_00e2df50()
+// pdb: hkOffsetOnlyStreamWriter::tell | hkOffsetOnlyStreamWriter.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+int FUN_00e2df50_Obj::hkOffsetOnlyStreamWriter_tell()
 {
     return unk08;
 }

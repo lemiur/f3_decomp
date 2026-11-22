@@ -129,8 +129,8 @@ inline char toLowerD615(char c)
     return (c >= 'A' && c <= 'Z') ? c - 'A' + 'a' : c;
 }
 int __cdecl FUN_00cb0fa0(int, int);
-int __cdecl FUN_00cb10d0(int s);
-int __cdecl FUN_00cb10d0(const char* str);
+int __cdecl hkString_strLen(int s);
+int __cdecl hkString_strLen(const char* str);
 static inline int tolower_custom(char c)
 {
     if ((unsigned char)(c - 'A') <= 25)
@@ -211,7 +211,7 @@ template <class T, int N> class hkInplaceArrayD61B
         m_iElementCount = n;
     }
 };
-int __cdecl FUN_00cb10d0(int);
+int __cdecl hkString_strLen(int);
 void* __cdecl FUN_00c85750();
 class hkMemoryAllocatorD61E;
 struct hkMemoryRouterD61E
@@ -225,7 +225,7 @@ struct hkMemoryRouterD61E
         return *m_pTemp;
     }
 };
-int __cdecl FUN_00cb10d0(const char* pcString) throw();
+int __cdecl hkString_strLen(const char* pcString) throw();
 void __cdecl FUN_00cb1260(void* pvDst, const void* pvSrc, int iNumBytes) throw();
 void __cdecl FUN_00c908c0(hkMemoryAllocatorD61E& kAlloc, void* apvArray, int aiNumElements, int iSizeElem) throw();
 class hkStringBufD61E
@@ -301,11 +301,11 @@ class hkStringBufD620
 
     void Assign(void* src, int len);
 };
-int __cdecl FUN_00cb10d0(int value);
+int __cdecl hkString_strLen(int value);
 void* __cdecl FUN_00c85750();
 void __cdecl FUN_00c908c0(int value1, int value2, int value3, int value4);
 void __cdecl FUN_00d2caa0(void* value1, unsigned int value2, unsigned int value3);
-extern int __cdecl FUN_00cb10d0(int value);
+extern int __cdecl hkString_strLen(int value);
 struct hkStringPtr
 {
     const char* m_stringAndFlags;
@@ -558,7 +558,7 @@ struct FUN_00d61a50_cls
     int* FUN_00d61a50(int value);
 };
 namespace fnvc_adapt {
-char* __cdecl FUN_00cb10d0(int value);
+char* __cdecl hkString_strLen(int value);
 }
 void __cdecl FUN_00c908c0(int allocator, FUN_00d61a50_cls* array, int capacity, int value);
 void __cdecl FUN_00cb1260(int* data, int value, char* source);

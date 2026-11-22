@@ -293,7 +293,7 @@ unsigned int FUN_00c32450_shell::FUN_00c32450(float param1, unsigned int param2,
 }
 
 // Stand-ins for the classes the pack header only forward-declares.
-// Field offsets follow the offsets used by FUN_00c32490's machine code.
+// Field offsets follow the offsets used by NiPSysCollider_Update's machine code.
 
 class NiPSysData : public NiObject
 {
@@ -356,12 +356,13 @@ class NiPSysColliderManager : public NiObject
 
 struct FUN_00c32490_shell : public NiPSysCollider
 {
-    void FUN_00c32490(float fTime, NiPSysData* pkData, unsigned int uiIndex);
+    void NiPSysCollider_Update(float fTime, NiPSysData* pkData, unsigned int uiIndex);
 };
 
 // Writes a vertex position for the particle at uiIndex, runs the spawn modifier when both pointers are set, and calls the data update if a flag is set.
 // @fnv 0x00c32490
-void FUN_00c32490_shell::FUN_00c32490(float fTime, NiPSysData* pkData, unsigned int uiIndex)
+// pdb: NiPSysCollider::Update | NiPSysCollider.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun) + skyrim(objopen_prop), high
+void FUN_00c32490_shell::NiPSysCollider_Update(float fTime, NiPSysData* pkData, unsigned int uiIndex)
 {
     pkData->m_pkVertex[(unsigned short)uiIndex] = m_kCollisionPosition;
 
@@ -483,11 +484,12 @@ class C326B0Modifier : public C326B0Object
     C326B0Object* m_pkSecond;
     C326B0Object* m_pkThird;
 
-    bool FUN_00c326b0(C326B0Object* pkObject);
+    bool NiPSysCollider_IsEqual(C326B0Object* pkObject);
 };
 
 // @fnv 0x00c326b0
-bool C326B0Modifier::FUN_00c326b0(C326B0Object* pkObject)
+// pdb: NiPSysCollider::IsEqual | NiPSysCollider.obj | fnv360_0822_retail, caller_sim + bridge(vtable|objrun) + skyrim(caller_sim), high
+bool C326B0Modifier::NiPSysCollider_IsEqual(C326B0Object* pkObject)
 {
     if (!BaseIsEqual(pkObject))
         return false;
@@ -785,13 +787,14 @@ class C32900Controller : public C32900Base
     C32900Object* m_pkSecond;
     C32900Object* m_pkThird;
 
-    void FUN_00c32900(C32900Stream& kStream);
+    void NiPSysCollider_SaveBinary(C32900Stream& kStream);
 };
 
 // SaveBinary
 // Saves the base data, type, two flags and the three object link IDs to the stream.
 // @fnv 0x00c32900
-void C32900Controller::FUN_00c32900(C32900Stream& kStream)
+// pdb: NiPSysCollider::SaveBinary | NiPSysCollider.obj | fnv360_0822_retail, call_seq + bridge(vtable|objrun) + skyrim(call_seq), high
+void C32900Controller::NiPSysCollider_SaveBinary(C32900Stream& kStream)
 {
     C32900Base::SaveBinary(kStream);
     C32900SaveBinary(kStream, m_iType);

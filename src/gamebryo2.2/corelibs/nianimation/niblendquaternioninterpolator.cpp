@@ -201,7 +201,7 @@ struct FUN_00a37260_shell
 
 struct FUN_00a555c0_shell
 {
-    bool FUN_00a555c0(float fTime, void* pkTarget, void* kValue);
+    bool NiBlendQuaternionInterpolator_StoreSingleValue(float fTime, void* pkTarget, void* kValue);
 };
 
 struct FUN_00a556b0_shell
@@ -221,7 +221,7 @@ bool FUN_00a55920_shell::Interpolate(float fTime, void* pkInterpTarget, NiQuater
     unsigned char ucCount = m_ucInterpCount;
     if (ucCount == 1)
     {
-        bReturnValue = ((FUN_00a555c0_shell*)this)->FUN_00a555c0(fTime, pkInterpTarget, kValue);
+        bReturnValue = ((FUN_00a555c0_shell*)this)->NiBlendQuaternionInterpolator_StoreSingleValue(fTime, pkInterpTarget, kValue);
     }
     else if (ucCount > 0)
     {
@@ -343,11 +343,12 @@ struct FUN_00a555c0_cls
     int unk28;
     int unk2c;
     NiQuadWords m_30;
-    bool FUN_00a555c0(float t, void* p2, NiQuadWords* out);
+    bool NiBlendQuaternionInterpolator_StoreSingleValue(float t, void* p2, NiQuadWords* out);
 };
 
 // @fnv 0x00a555c0
-bool FUN_00a555c0_cls::FUN_00a555c0(float t, void* p2, NiQuadWords* out)
+// pdb: NiBlendQuaternionInterpolator::StoreSingleValue | NiBlendQuaternionInterpolator.obj | fnv360_0721_beta, objrun + bridge(hash|objrun) + skyrim(call_seq), high
+bool FUN_00a555c0_cls::NiBlendQuaternionInterpolator_StoreSingleValue(float t, void* p2, NiQuadWords* out)
 {
     if ((m_0c & 1) != 0)
     {

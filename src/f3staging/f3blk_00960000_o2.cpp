@@ -73,13 +73,14 @@ public:
     void* overlaps;
     int overlapCount;
     int overlapCapacity;
-    void FUN_00989a20(StatisticsCollector97*) const;
-    void FUN_00978cb0(StatisticsCollector97*) const;
+    void hkpPhantom_calcContentStatistics(StatisticsCollector97*) const;
+    void hkpAabbPhantom_calcContentStatistics(StatisticsCollector97*) const;
 };
-void StatisticsObject97::FUN_00978cb0(StatisticsCollector97* collector) const
+// pdb: hkpAabbPhantom::calcContentStatistics | hkpAabbPhantom.obj | fnv360_0822_retail, ustr + bridge(ustr|vtable) + skyrim(ustr), high
+void StatisticsObject97::hkpAabbPhantom_calcContentStatistics(StatisticsCollector97* collector) const
 {
     collector->beginObject(DAT_00e7c964, 2, this);
-    FUN_00989a20(collector);
+    hkpPhantom_calcContentStatistics(collector);
     if ((static_cast<unsigned int>(overlapCapacity) & 0x80000000u) == 0)
         collector->addArray(DAT_00e7c954, 8, overlaps, overlapCount * 4, (overlapCapacity & 0x3fffffff) * 4);
     collector->endObject();
@@ -95,13 +96,13 @@ struct Vector4 {
 
 class Member40 {
 public:
-    void FUN_00978440(const Vector4& position, int arg);
+    void hkSweptTransform_initSweptTransform(const Vector4& position, int arg);
 };
 
 class Body {
 public:
-    void FUN_00924b40(int arg);
-    void FUN_009786b0(const Vector4& position, int arg);
+    void hkRotation_set(int arg);
+    void hkMotionState_initMotionState(const Vector4& position, int arg);
 
     int unk00; int unk04; int unk08; int unk0C;
     int unk10; int unk14; int unk18; int unk1C;
@@ -121,10 +122,11 @@ public:
 
 using namespace f3m_009786b0;
 
-void Body::FUN_009786b0(const Vector4& position, int arg)
+// pdb: hkMotionState::initMotionState | hkMotionState.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_seq), high
+void Body::hkMotionState_initMotionState(const Vector4& position, int arg)
 {
-    m_member40.FUN_00978440(position, arg);
-    FUN_00924b40(arg);
+    m_member40.hkSweptTransform_initSweptTransform(position, arg);
+    hkRotation_set(arg);
     m_position.x = position.x;
     m_position.y = position.y;
     m_position.z = position.z;
@@ -655,8 +657,9 @@ void __stdcall FUN_00970e40(int unused, V970e40* v) { v->x = v->y = v->z = v->w 
 // @f3 0x0097a050 (community match, verified in this file)
 namespace f3m_0097a050 {
 struct C97a050 { char pad[0x13]; unsigned char flag; };
-struct O97a050 { char pad[0x1c]; unsigned char flag; char pad2[0xb]; C97a050* child; void FUN_0097a050(unsigned char v); };
-void O97a050::FUN_0097a050(unsigned char v) { flag = v; if (child) child->flag = v; }
+struct O97a050 { char pad[0x1c]; unsigned char flag; char pad2[0xb]; C97a050* child; void hkpConstraintInstance_setPriority(unsigned char v); };
+// pdb: hkpConstraintInstance::setPriority | hkpConstraintInstance.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_seq), high
+void O97a050::hkpConstraintInstance_setPriority(unsigned char v) { flag = v; if (child) child->flag = v; }
 }   // namespace f3m_0097a050
 
 // @f3 0x00970f40 (community match, verified in this file)
@@ -967,8 +970,9 @@ void Object::FUN_0097a720(NameArray* names) {
 namespace f3m_0097dcf0 {
 namespace f3m_0097dcf0 { extern char DAT_00e7d224; extern char DAT_00e7d218; }
 struct O0097dcf0 { virtual void v0(); virtual void Slot1(void* a, int b, void* c); virtual void v2(); virtual void Slot3(void* a, int b, int c); virtual void v4(); virtual void v5(); virtual void Slot6(); };
-struct H0097dcf0 { char pad[0x14]; int field; void FUN_0097dcf0(O0097dcf0* o); };
-void H0097dcf0::FUN_0097dcf0(O0097dcf0* o) { o->Slot1(&f3m_0097dcf0::DAT_00e7d224, 1, this); o->Slot3(&f3m_0097dcf0::DAT_00e7d218, 1, field); o->Slot6(); }
+struct H0097dcf0 { char pad[0x14]; int field; void hkpTransformShape_calcContentStatistics(O0097dcf0* o); };
+// pdb: hkpTransformShape::calcContentStatistics | hkpTransformShape.obj | fnv360_0822_retail, ustr + bridge(ustr|vtable) + skyrim(ustr), high
+void H0097dcf0::hkpTransformShape_calcContentStatistics(O0097dcf0* o) { o->Slot1(&f3m_0097dcf0::DAT_00e7d224, 1, this); o->Slot3(&f3m_0097dcf0::DAT_00e7d218, 1, field); o->Slot6(); }
 }   // namespace f3m_0097dcf0
 
 // @f3 0x0097dc10 (community match, verified in this file)
@@ -981,8 +985,9 @@ O97dc10* O97dc10::FUN_0097dc10(unsigned int flags) { void** pb = this ? &vt10 : 
 // @f3 0x00978770 (community match, verified in this file)
 namespace f3m_00978770 {
 struct V978770 { float a, b, c, d, e, f, g, h; };
-struct O978770 { char pad[0xa0]; V978770 v; void FUN_00989c00(V978770* p); void FUN_00978770(const V978770* p); };
-void O978770::FUN_00978770(const V978770* p) { V978770* d = &v; d->a = p->a; d->b = p->b; d->c = p->c; d->d = p->d; d->e = p->e; d->f = p->f; d->g = p->g; d->h = p->h; FUN_00989c00(d); }
+struct O978770 { char pad[0xa0]; V978770 v; void FUN_00989c00(V978770* p); void hkpAabbPhantom_setAabb(const V978770* p); };
+// pdb: hkpAabbPhantom::setAabb | hkpAabbPhantom.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc + skyrim(caller_sim), high
+void O978770::hkpAabbPhantom_setAabb(const V978770* p) { V978770* d = &v; d->a = p->a; d->b = p->b; d->c = p->c; d->d = p->d; d->e = p->e; d->f = p->f; d->g = p->g; d->h = p->h; FUN_00989c00(d); }
 }   // namespace f3m_00978770
 
 // @f3 0x0097a090 (community match, verified in this file)
@@ -1140,14 +1145,14 @@ namespace f3m_00979df0 {
 namespace Task0925 {
 struct Action;
 struct Entity {void FUN_009316f0();void FUN_009316e0();};
-struct World {void FUN_00907450(Action*,Entity*);void FUN_009038e0(Action*,Entity*);};
+struct World {void hkpWorld_detachActionFromEntity(Action*,Entity*);void FUN_009038e0(Action*,Entity*);};
 struct Action {
  int unk00,unk04;World* world;int unk0c,unk10,unk14,unk18;Entity* entity;
  void FUN_00979df0(Entity*);
 };
 void Action::FUN_00979df0(Entity* next) {
  if(entity){
-  if(World* owner=world) owner->FUN_00907450(this,entity);
+  if(World* owner=world) owner->hkpWorld_detachActionFromEntity(this,entity);
   entity->FUN_009316f0();entity=0;
  }
  entity=next;
@@ -1396,9 +1401,10 @@ struct Vec {
 }
 struct Mat96c880 {
     n96c880::Vec col0, col1, col2;
-    void FUN_0096c880(const n96c880::Vec& v);
+    void hkMatrix3_setCrossSkewSymmetric(const n96c880::Vec& v);
 };
-void Mat96c880::FUN_0096c880(const n96c880::Vec& v)
+// pdb: hkMatrix3::setCrossSkewSymmetric | hkMatrix3.obj | fnv360_0822_retail, call_gap + bridge(call_seq|call_gap) + skyrim(call_seq), high
+void Mat96c880::hkMatrix3_setCrossSkewSymmetric(const n96c880::Vec& v)
 {
     col0.set(0.0f, v.z, -v.y, 0.0f);
     col1.set(-v.z, 0.0f, v.x, 0.0f);
@@ -2157,13 +2163,13 @@ struct A {
     int* FUN_00956270();
     int* FUN_00955ab0();
 };
-void __cdecl FUN_00962a60(void* a, int b, int c, int d, void* e);
+void __cdecl hkaSkeletonMapper_mapPose(void* a, int b, int c, int d, void* e);
 
 void __cdecl FUN_009639c0(void* g1, A* g2, A* g3, void* g4) {
     int a = *g2->FUN_00956280();
     int b = *g3->FUN_00956270();
     int* c = g3->FUN_00955ab0();
-    FUN_00962a60(g1, a, b, *c, g4);
+    hkaSkeletonMapper_mapPose(g1, a, b, *c, g4);
 }
 }
 }   // namespace f3m_009639c0
@@ -2437,10 +2443,11 @@ inline void Arr97::Add(const int& value)
 struct Obj97 {
     int unk00, unk04, unk08, unk0c, unk10, unk14;
     int unk18, unk1c;
-    void FUN_00979ed0(Arr97* arr) const;
+    void hkpBinaryAction_getEntities(Arr97* arr) const;
 };
 
-void Obj97::FUN_00979ed0(Arr97* arr) const
+// pdb: hkpBinaryAction::getEntities | hkpBinaryAction.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void Obj97::hkpBinaryAction_getEntities(Arr97* arr) const
 {
     arr->Add(unk18);
     arr->Add(unk1c);
@@ -4026,7 +4033,7 @@ protected:
 class __declspec(align(16)) RotMat : public Mat3
 {
 public:
-    void FUN_00924b40(const Quat4& q);
+    void hkRotation_set(const Quat4& q);
 };
 
 __forceinline void Vec4::_setMul3(const Mat3& r, const Vec4& v)
@@ -4053,7 +4060,7 @@ public:
     inline const Vec4& getTranslation() const { return m_translation; }
     inline RotMat& getRotation() { return m_rotation; }
     inline const RotMat& getRotation() const { return m_rotation; }
-    inline void setRotation(const Quat4& quatRotation) { m_rotation.FUN_00924b40(quatRotation); }
+    inline void setRotation(const Quat4& quatRotation) { m_rotation.hkRotation_set(quatRotation); }
 
 protected:
     RotMat m_rotation;
@@ -4478,7 +4485,7 @@ struct FNV0097f560Xform {
     FNV0097f560Vec4 col2;
     FNV0097f560Vec4 trans;
 
-    void __thiscall FUN_00924b40(int value);
+    void __thiscall hkRotation_set(int value);
 };
 
 struct FNV0097f560Object {
@@ -4555,9 +4562,10 @@ struct FNV0097f560Object {
     FNV0097f560Pt3 pt;        // 0x160
 };
 
-static __declspec(noinline) void FUN_0097f560(FNV0097f560Object* obj, int value) {
+// pdb: setRotationAroundCentreOfMass | hkpSimulation.obj | fnv360_0822_debug, objrun + skyrim(objrun), high
+static __declspec(noinline) void setRotationAroundCentreOfMass(FNV0097f560Object* obj, int value) {
     FNV0097f560Xform* t = &obj->xform;
-    t->FUN_00924b40(value);
+    t->hkRotation_set(value);
     float x = obj->pt.x;
     float y = obj->pt.y;
     float z = obj->pt.z;
@@ -4573,7 +4581,7 @@ static __declspec(noinline) void FUN_0097f560(FNV0097f560Object* obj, int value)
 
 volatile int g_in0097f560;
 FNV0097f560Object* volatile g_obj0097f560;
-void caller_of_FUN_0097f560() { FUN_0097f560(g_obj0097f560, g_in0097f560); }
+void caller_of_FUN_0097f560() { setRotationAroundCentreOfMass(g_obj0097f560, g_in0097f560); }
 }   // namespace f3m_0097f560
 
 // @f3 0x00969f70 (community match, verified in this file)
@@ -5288,7 +5296,7 @@ struct __declspec(align(16)) hkVector4
     {
         x = y = z = w = 0.0f;
     }
-    void FUN_008d28e0(const void* transform, const hkVector4& pos) throw();
+    void hkVector4_setTransformedPos(const void* transform, const hkVector4& pos) throw();
 };
 
 struct hkMatrix3
@@ -5326,7 +5334,7 @@ struct hkTransform
         m_rotation.setIdentity();
         m_translation.setZero4();
     }
-    void FUN_009251b0(const hkTransform& a, const hkTransform& b) throw();
+    void hkTransform_setMul(const hkTransform& a, const hkTransform& b) throw();
 };
 
 struct hkpMassPropertiesData
@@ -5615,7 +5623,7 @@ void __cdecl FUN_00975d50(const hkpShape* shape, const hkTransform& transform, h
         local.m_rotation.setIdentity();
         local.m_translation = s->m_translation;
         hkTransform combined;
-        combined.FUN_009251b0(transform, local);
+        combined.hkTransform_setMul(transform, local);
         FUN_00975d50(s->m_childShape.m_childShape, combined, result);
         return;
     }
@@ -5623,7 +5631,7 @@ void __cdecl FUN_00975d50(const hkpShape* shape, const hkTransform& transform, h
     {
         const hkpConvexTransformShape* s = (const hkpConvexTransformShape*)shape;
         hkTransform combined;
-        combined.FUN_009251b0(transform, s->m_transform);
+        combined.hkTransform_setMul(transform, s->m_transform);
         FUN_00975d50(s->m_childShape.m_childShape, combined, result);
         return;
     }
@@ -5631,7 +5639,7 @@ void __cdecl FUN_00975d50(const hkpShape* shape, const hkTransform& transform, h
     {
         const hkpTransformShape* s = (const hkpTransformShape*)shape;
         hkTransform combined;
-        combined.FUN_009251b0(transform, s->m_transform);
+        combined.hkTransform_setMul(transform, s->m_transform);
         FUN_00975d50(s->m_childShape.m_childShape, combined, result);
         return;
     }
@@ -5653,7 +5661,7 @@ void __cdecl FUN_00975d50(const hkpShape* shape, const hkTransform& transform, h
             t.m_rotation.m_col1 = c1;
             t.m_rotation.m_col2 = c2;
             t.m_translation = tr;
-            t.m_translation.FUN_008d28e0(&t, (*sphereVec));
+            t.m_translation.hkVector4_setTransformedPos(&t, (*sphereVec));
             hkpSphereShape sphere;
             sphere.FUN_00970f60((*sphereVec).w);
             FUN_00975d50((const hkpShape*)&sphere, t, result);
@@ -5942,7 +5950,7 @@ struct Quat964800
 struct __declspec(align(16)) Matrix964800
 {
     float r[3][4];
-    void FUN_00924b40(const Quat964800& q);
+    void hkRotation_set(const Quat964800& q);
     void FUN_0096ce80(const Matrix964800& a, const Matrix964800& b);
 };
 struct __declspec(align(16)) Transform964800
@@ -5963,7 +5971,7 @@ struct Object964800
 void Object964800::FUN_00964800(int arg)
 {
     Matrix964800 rot;
-    rot.FUN_00924b40(m_q);
+    rot.hkRotation_set(m_q);
     Matrix964800 sc;
     sc.r[0][0] = 0.0f; sc.r[0][1] = 0.0f; sc.r[0][2] = 0.0f; sc.r[0][3] = 0.0f;
     sc.r[1][0] = 0.0f; sc.r[1][1] = 0.0f; sc.r[1][2] = 0.0f; sc.r[1][3] = 0.0f;
@@ -6044,9 +6052,10 @@ void __cdecl FUN_00a05900(const Src964930* s, Result964930* out);
 struct __declspec(align(16)) Matrix964930
 {
     float m[3][4];
-    hkBool964930 FUN_00964930(const Src964930* s);
+    hkBool964930 hkQsTransform_set4x4ColumnMajor(const Src964930* s);
 };
-hkBool964930 Matrix964930::FUN_00964930(const Src964930* s)
+// pdb: hkQsTransform::set4x4ColumnMajor | hkQsTransform.obj | fnv360_0822_debug, objrun + skyrim(objrun), high
+hkBool964930 Matrix964930::hkQsTransform_set4x4ColumnMajor(const Src964930* s)
 {
     Result964930 r;
     FUN_00a05900(s, &r);
@@ -6154,10 +6163,11 @@ struct Point3 { float x, y, z; };
 struct Vector4Init { float x, y, z, w; };
 struct SweptTransformInit {
     Vector4Init fromPosition, toPosition, fromRotation, toRotation, centerOfMass;
-    void FUN_00978440(const Point3& position, const Vector4Init& rotation);
+    void hkSweptTransform_initSweptTransform(const Point3& position, const Vector4Init& rotation);
 };
 
-void SweptTransformInit::FUN_00978440(const Point3& position, const Vector4Init& rotation)
+// pdb: hkSweptTransform::initSweptTransform | hkSweptTransform.obj | fnv360_0822_retail, call_gap + bridge(call_gap|call_gap) + skyrim(call_gap), high
+void SweptTransformInit::hkSweptTransform_initSweptTransform(const Point3& position, const Vector4Init& rotation)
 {
     fromPosition.x = position.x;
     fromPosition.y = position.y;
@@ -6642,7 +6652,7 @@ struct hkTransform
     hkVector4 col2;
     hkVector4 translation;
 
-    void FUN_00924b40(const hkVector4* quaternion);
+    void hkRotation_set(const hkVector4* quaternion);
 };
 
 __forceinline void lerp4(hkVector4& r, const hkVector4& a, const hkVector4& b, float t)
@@ -6668,10 +6678,11 @@ struct Interpolator
     hkVector4 rotationB;
     hkVector4 pivot;
 
-    void FUN_009784b0(float time, hkTransform* out);
+    void hkSweptTransform_approxTransformAt(float time, hkTransform* out);
 };
 
-void Interpolator::FUN_009784b0(float time, hkTransform* out)
+// pdb: hkSweptTransform::approxTransformAt | hkSweptTransform.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_seq), high
+void Interpolator::hkSweptTransform_approxTransformAt(float time, hkTransform* out)
 {
     int unused0 = 1;
     int unused1 = 1;
@@ -6684,7 +6695,7 @@ void Interpolator::FUN_009784b0(float time, hkTransform* out)
     q.y *= inv;
     q.z *= inv;
     q.w *= inv;
-    out->FUN_00924b40(&q);
+    out->hkRotation_set(&q);
     lerp4(out->translation, translationA, translationB, u);
     hkVector4 r;
     rot3(r, *out, pivot);
@@ -6755,7 +6766,7 @@ struct __declspec(align(16)) Vec4 {
     void SetSub4(const Vec4& a, const Vec4& b) { x = a.x - b.x; y = a.y - b.y; z = a.z - b.z; w = a.w - b.w; }
     Vec4& operator=(const Vec4& o) { x = o.x; y = o.y; z = o.z; w = o.w; return *this; }
     void Add3(const Vec4& a) { x += a.x; y += a.y; z += a.z; }
-    void FUN_008d2a00(const void* transform, const Vec4* v);
+    void hkVector4_setRotatedDir(const void* transform, const Vec4* v);
 };
 struct Aabb { Vec4 min; Vec4 max; };
 struct Obj {
@@ -6770,7 +6781,7 @@ void __cdecl FUN_00976c10(const Vec4* p, Obj* obj)
     d.SetSub4(*p, obj->pos);
     obj->pos = *p;
     Vec4 r;
-    r.FUN_008d2a00(obj, &d);
+    r.hkVector4_setRotatedDir(obj, &d);
     obj->aabb.min.Add3(r);
     obj->aabb.max.Add3(r);
 }
@@ -7009,10 +7020,11 @@ struct Builder {
     char unk20[0xc];
     Skeleton* skeleton;
 
-    Result* FUN_00962570(void* arg);
+    Result* hkaRagdollInstance_clone(void* arg);
 };
 
-Result* Builder::FUN_00962570(void* arg)
+// pdb: hkaRagdollInstance::clone | hkaRagdollInstance.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+Result* Builder::hkaRagdollInstance_clone(void* arg)
 {
     int a = links.m_size;
     int obj = sources.m_size;
@@ -7120,7 +7132,7 @@ struct __declspec(align(16)) Vec4 {
 
 struct Transform {
     Vec4 c0, c1, c2, t;
-    void FUN_009251b0(const Transform* a, const Transform* b);
+    void hkTransform_setMul(const Transform* a, const Transform* b);
 };
 
 struct RayInput {
@@ -7151,7 +7163,7 @@ struct TransformShape {
     Shape* child;
     unsigned int unk18, unk1c, unk20, unk24, unk28, unk2c;
     Transform xf;
-    void FUN_0097e130(const RayInput& input, const CdBody& parent, void* collector);
+    void hkpTransformShape_castRayWithCollectorImpl(const RayInput& input, const CdBody& parent, void* collector);
 };
 
 __forceinline void InvPos(Vec4& out, const Transform& a, const Vec4& b)
@@ -7177,7 +7189,8 @@ __forceinline void InvPos2(Vec4& out, const Transform& a, const Vec4& b)
     out.w = 0.0f;
 }
 
-void TransformShape::FUN_0097e130(const RayInput& input, const CdBody& parent, void* collector)
+// pdb: hkpTransformShape::castRayWithCollectorImpl | hkpTransformShape.obj | fnv360_0822_retail, objopen_prop + bridge(caller_sim|vtable) + skyrim(caller_sim), high
+void TransformShape::hkpTransformShape_castRayWithCollectorImpl(const RayInput& input, const CdBody& parent, void* collector)
 {
     Stream* s = (Stream*)TlsGetValue(DAT_0116913c);
     Command* c = s->cursor;
@@ -7195,7 +7208,7 @@ void TransformShape::FUN_0097e130(const RayInput& input, const CdBody& parent, v
     InvPos(sub.from, xf, input.from);
     InvPos2(sub.to, xf, input.to);
     Transform world;
-    world.FUN_009251b0(parent.motion, &xf);
+    world.hkTransform_setMul(parent.motion, &xf);
     CdBody body(&parent, &world);
     body.shape = child;
     body.key = 0;
@@ -7401,12 +7414,12 @@ struct hkMatrix3
 struct hkRotation : hkMatrix3
 {
     // set(const hkQuaternion&)
-    void FUN_00924b40(const hkQuaternion& q);
+    void hkRotation_set(const hkQuaternion& q);
 };
 
 struct hkTransform
 {
-    __forceinline void setRotation(const hkQuaternion& quatRotation) { m_rotation.FUN_00924b40(quatRotation); }
+    __forceinline void setRotation(const hkQuaternion& quatRotation) { m_rotation.hkRotation_set(quatRotation); }
     __forceinline const hkRotation& getRotation() const { return m_rotation; }
     __forceinline hkVector4& getTranslation() { return m_translation; }
 
@@ -7565,7 +7578,8 @@ __forceinline void calcTransAtT1(const hkSweptTransform& sweptTrans, hkTransform
 
 }  // namespace hkSweptTransformUtil
 
-void __cdecl FUN_009776f0(hkTime time, hkMotionState& motionState)
+// pdb: hkSweptTransformUtil::backStepMotionState | hkSweptTransformUtil.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_seq) + skyrim(call_gap), high
+void __cdecl hkSweptTransformUtil_backStepMotionState(hkTime time, hkMotionState& motionState)
 {
     hkSweptTransform& st = motionState.getSweptTransform();
     hkReal t = hkMath::max2(st.getInterpolationValue(time), HK_REAL_EPSILON);
@@ -7630,7 +7644,8 @@ struct hkPadSpu
     TYPE m_storage;
 };
 
-void __cdecl FUN_00970190(hkVector4Parameter pos, hkVector4Parameter t0, hkVector4Parameter t1, hkVector4Parameter t2,
+// pdb: hkpCollideTriangleUtil::calcBarycentricCoordinates | hkpCollideTriangleUtil.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_seq), high
+void __cdecl hkpCollideTriangleUtil_calcBarycentricCoordinates(hkVector4Parameter pos, hkVector4Parameter t0, hkVector4Parameter t1, hkVector4Parameter t2,
                           hkPadSpu<hkReal> result[3])
 {
     hkVector4 Q;
@@ -7860,7 +7875,8 @@ struct hkpShapeRayCastOutput : hkpShapeRayCastCollectorOutput
     int m_shapeKeyIndex;
 };
 
-hkBool __cdecl FUN_00971020(hkReal radius, const hkpShapeRayCastInput& input, hkpShapeRayCastOutput& results)
+// pdb: hkpSphereUtil::castRayUtil | hkpSphereShape.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_seq), high
+hkBool __cdecl hkpSphereUtil_castRayUtil(hkReal radius, const hkpShapeRayCastInput& input, hkpShapeRayCastOutput& results)
 {
     {
         hkReal radius2 = radius * radius;
@@ -8011,12 +8027,12 @@ struct hkMatrix3
 struct hkRotation : hkMatrix3
 {
     // set(const hkQuaternion&)
-    void FUN_00924b40(const hkQuaternion& q);
+    void hkRotation_set(const hkQuaternion& q);
 };
 
 struct hkTransform
 {
-    __forceinline void setRotation(const hkQuaternion& quatRotation) { m_rotation.FUN_00924b40(quatRotation); }
+    __forceinline void setRotation(const hkQuaternion& quatRotation) { m_rotation.hkRotation_set(quatRotation); }
     __forceinline const hkRotation& getRotation() const { return m_rotation; }
     __forceinline hkVector4& getTranslation() { return m_translation; }
 
@@ -8166,7 +8182,8 @@ __forceinline void _lerp2(const hkSweptTransform& sweptTrans, hkReal t, hkTransf
 
 }  // namespace hkSweptTransformUtil
 
-void __cdecl FUN_00976cd0(const hkSweptTransform& sweptTrans, hkTime t, hkTransform& transformOut)
+// pdb: hkSweptTransformUtil::lerp2 | hkSweptTransformUtil.obj | fnv360_0822_debug, call_gap + bridge(call_seq|caller) + skyrim(call_seq), high
+void __cdecl hkSweptTransformUtil_lerp2(const hkSweptTransform& sweptTrans, hkTime t, hkTransform& transformOut)
 {
     hkReal r = sweptTrans.getInterpolationValue(t);
     hkSweptTransformUtil::_lerp2(sweptTrans, r, transformOut);
@@ -8244,12 +8261,12 @@ struct hkMatrix3
 struct hkRotation : hkMatrix3
 {
     // set(const hkQuaternion&)
-    void FUN_00924b40(const hkQuaternion& q);
+    void hkRotation_set(const hkQuaternion& q);
 };
 
 struct hkTransform
 {
-    __forceinline void setRotation(const hkQuaternion& quatRotation) { m_rotation.FUN_00924b40(quatRotation); }
+    __forceinline void setRotation(const hkQuaternion& quatRotation) { m_rotation.hkRotation_set(quatRotation); }
     __forceinline const hkRotation& getRotation() const { return m_rotation; }
     __forceinline hkVector4& getTranslation() { return m_translation; }
 
@@ -8391,7 +8408,8 @@ __forceinline void _lerp2(const hkSweptTransform& sweptTrans, hkReal t, hkTransf
 
 }  // namespace hkSweptTransformUtil
 
-void __cdecl FUN_009773a0(const hkSweptTransform& sweptTrans, hkReal r, hkTransform& transformOut)
+// pdb: hkSweptTransformUtil::lerp2Rel | hkSweptTransformUtil.obj | fnv360_0822_debug, objrun + skyrim(objrun), high
+void __cdecl hkSweptTransformUtil_lerp2Rel(const hkSweptTransform& sweptTrans, hkReal r, hkTransform& transformOut)
 {
     hkSweptTransformUtil::_lerp2(sweptTrans, r, transformOut);
 }
@@ -8475,12 +8493,12 @@ struct hkMatrix3
 struct hkRotation : hkMatrix3
 {
     // set(const hkQuaternion&)
-    void FUN_00924b40(const hkQuaternion& q);
+    void hkRotation_set(const hkQuaternion& q);
 };
 
 struct hkTransform
 {
-    __forceinline void setRotation(const hkQuaternion& quatRotation) { m_rotation.FUN_00924b40(quatRotation); }
+    __forceinline void setRotation(const hkQuaternion& quatRotation) { m_rotation.hkRotation_set(quatRotation); }
     __forceinline const hkRotation& getRotation() const { return m_rotation; }
     __forceinline hkVector4& getTranslation() { return m_translation; }
 
@@ -8639,7 +8657,8 @@ __forceinline void calcTransAtT1(const hkSweptTransform& sweptTrans, hkTransform
 
 }  // namespace hkSweptTransformUtil
 
-void __cdecl FUN_00977ab0(hkTime time, hkMotionState& motionState)
+// pdb: hkSweptTransformUtil::freezeMotionState | hkSweptTransformUtil.obj | fnv360_0822_retail, call_gap + bridge(call_gap|call_seq) + skyrim(call_gap), high
+void __cdecl hkSweptTransformUtil_freezeMotionState(hkTime time, hkMotionState& motionState)
 {
     hkSweptTransform& st = motionState.getSweptTransform();
 
@@ -13127,7 +13146,7 @@ public:
     // this = t^-1 * b, as a point
     __forceinline void _setTransformedInversePos(const hkTransform& t, const hkVector4& b);
     // this = r * b
-    void FUN_008d2a00(const hkRotation& r, const hkVector4& b);
+    void hkVector4_setRotatedDir(const hkRotation& r, const hkVector4& b);
 
     hkReal x;
     hkReal y;
@@ -13279,7 +13298,7 @@ struct hkArray
 class hkpAabbPhantom
 {
 public:
-    void FUN_009789b0(const hkpWorldRayCastInput& input, hkpWorldRayCastOutput& output) const;
+    void hkpAabbPhantom_castRay(const hkpWorldRayCastInput& input, hkpWorldRayCastOutput& output) const;
 
     void* m_vtable;
     int unk04;
@@ -13288,7 +13307,8 @@ public:
     hkArray<hkpCollidable*> m_overlappingCollidables;
 };
 
-void hkpAabbPhantom::FUN_009789b0(const hkpWorldRayCastInput& input, hkpWorldRayCastOutput& output) const
+// pdb: hkpAabbPhantom::castRay | hkpAabbPhantom.obj | fnv360_0822_retail, caller_sim + bridge(ustr_rel|call_seq) + skyrim(caller_sim), high
+void hkpAabbPhantom::hkpAabbPhantom_castRay(const hkpWorldRayCastInput& input, hkpWorldRayCastOutput& output) const
 {
     {
         hkMonitorStream& mStream = hkMonitorStream::getInstance();
@@ -13336,7 +13356,7 @@ void hkpAabbPhantom::FUN_009789b0(const hkpWorldRayCastInput& input, hkpWorldRay
     // the normal of the hit, back in world space
     if (output.m_rootCollidable != 0)
     {
-        output.m_normal.FUN_008d2a00(output.m_rootCollidable->getTransform().getRotation(), output.m_normal);
+        output.m_normal.hkVector4_setRotatedDir(output.m_rootCollidable->getTransform().getRotation(), output.m_normal);
     }
 
     {
@@ -14252,7 +14272,7 @@ struct __declspec(align(16)) hkVector4
         y = -v.y;
         z = -v.z;
     }
-    void FUN_008d2a00(const void* rotation, const hkVector4& v);   // setRotatedDir
+    void hkVector4_setRotatedDir(const void* rotation, const hkVector4& v);   // setRotatedDir
 };
 
 struct hkpShape
@@ -14475,7 +14495,7 @@ void f3m_0096a3b0::Collector::FUN_0096a3b0(const hkpCdPoint& point)
             edge1.setSub4(triangle->m_vertexC, triangle->m_vertexB);
             normal.setCross(edge0, edge1);
             normal.normalize3();
-            normal.FUN_008d2a00(point.m_cdBodyB->m_motion, normal);
+            normal.hkVector4_setRotatedDir(point.m_cdBodyB->m_motion, normal);
             if (normal.dot3(hit.m_contact.m_separatingNormal) < 0.0f)
                 normal.setNeg3(normal);
             if (normal.dot3(hit.m_contact.m_separatingNormal) > cosTolerance)
@@ -14515,10 +14535,11 @@ struct C961be0 {
     int unk10;
     O961be0** arr14;
     int count18;
-    int FUN_00961be0(W961be0* w, bool flag);
+    int hkaRagdollInstance_addToWorld(W961be0* w, bool flag);
 };
 
-int C961be0::FUN_00961be0(W961be0* w, bool flag)
+// pdb: hkaRagdollInstance::addToWorld | hkaRagdollInstance.obj | fnv360_0822_retail, caller_sim + skyrim(caller_sim), high
+int C961be0::hkaRagdollInstance_addToWorld(W961be0* w, bool flag)
 {
     O961be0** arr = this->arr08;
     O961be0* first = arr[0];

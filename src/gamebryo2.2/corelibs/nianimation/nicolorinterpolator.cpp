@@ -201,10 +201,11 @@ struct NiColorA_SaveHelper
 };
 struct FUN_00a3bce0_shell : NiColorInterpolator
 {
-    void FUN_00a3bce0(NiStream&);
+    void NiColorInterpolator_SaveBinary(NiStream&);
 };
 // @fnv 0x00a3bce0
-void FUN_00a3bce0_shell::FUN_00a3bce0(NiStream& kStream)
+// pdb: NiColorInterpolator::SaveBinary | NiColorInterpolator.obj | fnv360_0721_beta, objrun + bridge(vtable|objrun_prop) + skyrim(caller_sim), high
+void FUN_00a3bce0_shell::NiColorInterpolator_SaveBinary(NiStream& kStream)
 {
     ((FUN_00a95ca0_helper*)this)->FUN_00a95ca0(&kStream);
     ((NiColorA_SaveHelper*)&m_kColorValue)->SaveBinary(&kStream);

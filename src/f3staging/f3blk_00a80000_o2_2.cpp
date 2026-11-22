@@ -98,7 +98,7 @@ struct SSNode
     NiPoint3 cache[4];
     int unkd8, unkdc, unke0;
     bool dirty;
-    void FUN_00a9de50(NiPoint3* out);
+    void BSOcclusionPlane_GetVertices(NiPoint3* out);
     bool FUN_00c33cf0(void*, int, NiPoint3);
     bool FUN_00c344c0(void*, const NiPoint3&);
     inline bool IsExactType()
@@ -109,7 +109,8 @@ struct SSNode
     }
 };
 
-void SSNode::FUN_00a9de50(NiPoint3* out)
+// pdb: BSOcclusionPlane::GetVertices | BSOcclusionPlane.obj | fnv360_0721_beta, call_seq + bridge(call_gap|caller), high
+void SSNode::BSOcclusionPlane_GetVertices(NiPoint3* out)
     {
         if (!dirty)
             memmove(out, cache, 48);
@@ -407,7 +408,8 @@ struct ConstraintInstance {
 };
 __forceinline void Copy(Vec4* d, const Vec4& s) { d->x = s.x; d->y = s.y; d->z = s.z; d->w = s.w; }
 }
-int __cdecl FUN_00a908d0(wa908d0::ConstraintInstance* inst, wa908d0::Vec4* pivotA, wa908d0::Vec4* pivotB)
+// pdb: hkpConstraintUtils::getConstraintPivots | hkpConstraintUtils.obj | fnv360_0822_retail, ustr + bridge(ustr|ustr) + skyrim(ustr), high
+int __cdecl hkpConstraintUtils_getConstraintPivots(wa908d0::ConstraintInstance* inst, wa908d0::Vec4* pivotA, wa908d0::Vec4* pivotB)
 {
     wa908d0::ConstraintData* d = inst->data;
     switch (d->getType()) {
@@ -1301,7 +1303,8 @@ static __declspec(noinline) void FUN_00a99b30(const ConvexShape* shapeA, const C
 
 using namespace N00a99d10;
 
-void __cdecl FUN_00a99d10(const ConvexShape* shapeA, const ConvexShape* shapeB, const hkTransform& aTb, hkVector4& pointAinA,
+// pdb: hkpCvxCvxDistByHeuristicSampling | hkpCvxCvxDistByHeuristicSampling.obj | fnv360_0822_retail, call_gap + bridge(call_seq|callee_sim) + skyrim(call_seq), high
+void __cdecl hkpCvxCvxDistByHeuristicSampling(const ConvexShape* shapeA, const ConvexShape* shapeB, const hkTransform& aTb, hkVector4& pointAinA,
                           hkVector4& pointBinB, SampleOutput& out)
 {
     SampleResult result;
@@ -1392,7 +1395,7 @@ struct __declspec(align(16)) Vec
     inline void SetAdd4(const Vec& a, const Vec& b) { x = a.x + b.x; y = a.y + b.y; z = a.z + b.z; w = a.w + b.w; }
     inline void SetSub4(const Vec& a, const Vec& b) { x = a.x - b.x; y = a.y - b.y; z = a.z - b.z; w = a.w - b.w; }
     inline Vec& operator=(const Vec& b) { x = b.x; y = b.y; z = b.z; w = b.w; return *this; }
-    void FUN_008d2a00(const Matrix*, const Vec*);
+    void hkVector4_setRotatedDir(const Matrix*, const Vec*);
 };
 struct __declspec(align(16)) Matrix
 {
@@ -1426,7 +1429,7 @@ void Sweep::FUN_00a8f470(const Vec* center, Vec* axis, Vec* direction, float sta
     matrix.FUN_00924c60(axis, start);
     Vec point;
     point.SetMul4(radius, *direction);
-    point.FUN_008d2a00(&matrix, &point);
+    point.hkVector4_setRotatedDir(&matrix, &point);
     point.SetAdd4(*center, point);
     matrix.FUN_00924c60(axis, step);
     if (count > 0)
@@ -1435,7 +1438,7 @@ void Sweep::FUN_00a8f470(const Vec* center, Vec* axis, Vec* direction, float sta
         {
             Vec next;
             next.SetSub4(point, *center);
-            next.FUN_008d2a00(&matrix, &next);
+            next.hkVector4_setRotatedDir(&matrix, &next);
             next.SetAdd4(*center, next);
             callback->v20(&point, &next, context, output);
             point = next;
@@ -2032,7 +2035,7 @@ bool* __cdecl FUN_00a8aae0(bool* output, const Config* config, const Vector* inp
 // @f3 0x00a91000 (community match, verified in this file)
 namespace f3m_00a91000 {
 struct Callee {
-    void FUN_00a715a0(void* p1, void* p2, void* p3, int a4, int a5, int a6);
+    void hkpPoweredChainData_addConstraintInfoInBodySpace(void* p1, void* p2, void* p3, int a4, int a5, int a6);
 };
 
 struct Owner {
@@ -2080,7 +2083,8 @@ struct RelativeOrientationData {
     void FUN_008db610(void* a1, void* a2);
 };
 
-void FUN_00a91000(Owner* a1, char* a2, const void* a3, int a4, int a5, int a6)
+// pdb: hkpConstraintChainUtil::addConstraintToPoweredChain | hkpConstraintChainUtil.obj | fnv360_0822_retail, caller_sim + skyrim(caller_sim), high
+void hkpConstraintChainUtil_addConstraintToPoweredChain(Owner* a1, char* a2, const void* a3, int a4, int a5, int a6)
 {
     Callee* pCallee = a1->m_0c;
     char* e1;
@@ -2101,7 +2105,7 @@ void FUN_00a91000(Owner* a1, char* a2, const void* a3, int a4, int a5, int a6)
     relativeOrientation.argument4 = a4;
     relativeOrientation.argument5 = a5;
     relativeOrientation.argument6 = a6;
-    pCallee->FUN_00a715a0(&points.first, &points.second, (void*)&relativeOrientation, a4, a5, a6);
+    pCallee->hkpPoweredChainData_addConstraintInfoInBodySpace(&points.first, &points.second, (void*)&relativeOrientation, a4, a5, a6);
     a1->FUN_00a50b70(a2);
 }
 }   // namespace f3m_00a91000

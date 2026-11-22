@@ -39,7 +39,7 @@ void __cdecl FUN_00d46010();
 void __cdecl FUN_00d46050();
 void __cdecl FUN_00d45dd0();
 void __cdecl FUN_00d45af0();
-void __cdecl FUN_00d45800();
+void __cdecl hkpBvAgent_staticLinearCast();
 
 struct TargetVtbl
 {
@@ -61,12 +61,13 @@ struct TargetClass
     TargetVtbl* p1;
     TargetVtbl* p2;
 
-    void FUN_00d45230(void* arg);
+    void hkpBvAgent_cleanup(void* arg);
 };
 
 // Calls v7(arg) on p1 and, if set, on p2 (then clears p2), and finally deletes this object.
 // @fnv 0x00d45230
-void TargetClass::FUN_00d45230(void* arg)
+// pdb: hkpBvAgent::cleanup | hkpBvAgent.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void TargetClass::hkpBvAgent_cleanup(void* arg)
 {
     p1->v7(arg);
     if (p2)
@@ -95,11 +96,12 @@ struct Worker
     int a, b, c;
     WorkerIface* p1;
     WorkerIface* p2;
-    void __thiscall FUN_00d45270(void* value);
+    void __thiscall hkpBvAgent_invalidateTim(void* value);
 };
 // Forwards value to the v9 method of p1 and, if p2 is non-null, to the v9 method of p2.
 // @fnv 0x00d45270
-void Worker::FUN_00d45270(void* value)
+// pdb: hkpBvAgent::invalidateTim | hkpBvAgent.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void Worker::hkpBvAgent_invalidateTim(void* value)
 {
     p1->v9(value);
     if (p2)
@@ -838,7 +840,8 @@ typedef void(__cdecl* CollideFn5)(CdBody* a, CdBody* b, CollisionInput* input, v
 
 // Tests bodyA's bounding shape against bodyB via a dispatched collide function, then if a hit is found, re-tests the contained shape.
 // @fnv 0x00d45800
-void __cdecl FUN_00d45800(CdBody* bodyA, CdBody* bodyB, CollisionInput* input, void* c, void* d)
+// pdb: hkpBvAgent::staticLinearCast | hkpBvAgent.obj | fnv360_0822_retail, objrun + skyrim(objrun), high
+void __cdecl hkpBvAgent_staticLinearCast(CdBody* bodyA, CdBody* bodyB, CollisionInput* input, void* c, void* d)
 {
     volatile unsigned int ticks;
     D458Begin(DAT_010cf414, DAT_010cf404, ticks);
@@ -893,7 +896,7 @@ struct Record_d2e9
     int m_uiFilterValue;
 };
 
-void __cdecl FUN_00d45800(int a1, int a2, Input_d2e9* input, Record_d2e9* rec, Record_d2e9* optRec);
+void __cdecl hkpBvAgent_staticLinearCast(int a1, int a2, Input_d2e9* input, Record_d2e9* rec, Record_d2e9* optRec);
 
 #include <windows.h>
 

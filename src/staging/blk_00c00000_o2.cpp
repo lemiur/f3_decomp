@@ -4445,7 +4445,8 @@ void C1A550Object::RenderIfActive(NiRenderer* pkRenderer)
 
 extern int DAT_012024c0;
 // @fnv 0x00c1a650
-int* __cdecl FUN_00c1a650()
+// pdb: BSMultiTargetTreadTransfController::GetRTTI | BSMultiTargetTreadTransfController.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun) + skyrim(objrun_open), high
+int* __cdecl BSMultiTargetTreadTransfController_GetRTTI()
 {
     return &DAT_012024c0;
 }
@@ -9378,7 +9379,8 @@ void Owner::InitShaderConstantMaps()
 
 void __cdecl FUN_00a74640();
 // @fnv 0x00c1a630
-void __cdecl FUN_00c1a630()
+// pdb: NiTriBasedGeom::LinkObject | NiTriBasedGeom.obj | fnv360_0721_beta, objrun_prop + bridge(vtable|objrun_open) + skyrim(call_seq), high
+void __cdecl NiTriBasedGeom_LinkObject()
 {
     FUN_00a74640();
 }
@@ -9931,7 +9933,7 @@ struct P440Shader
     void SortShadowSceneLights(P440Position*);
     P440Light* FUN_00b70590(void**);
     P440Light* FUN_00b70680(void**);
-    P440Light* FUN_00b70600(void**);
+    P440Light* BSShaderLightingProperty_GetFirstActiveNonShadowLight(void**);
     P440Light* FUN_00b70700(void**);
     P440List* GetPasses(P440Geometry*, unsigned int, int, unsigned int, P440Renderer*, int);
 };
@@ -10211,7 +10213,7 @@ struct S00c03c80_manager
 extern S00c03c80_manager* _DAT_011f4748;
 struct S00c03c80_processor
 {
-    void __thiscall FUN_00b8a6e0(unsigned int, int, void*);
+    void __thiscall ImageSpaceShaderParam_SetTexOffset(unsigned int, int, void*);
 };
 struct S00c03c80_cls
 {
@@ -10270,7 +10272,7 @@ struct S00c03c80_cls
     S00c03c80_processor* m_processor;
     void __thiscall ProcessEntries();
 };
-// Iterates m_entries, calling m_processor->FUN_00b8a6e0 with item data or provider meta values for each index.
+// Iterates m_entries, calling m_processor->ImageSpaceShaderParam_SetTexOffset with item data or provider meta values for each index.
 // @fnv 0x00c03c80
 void S00c03c80_cls::ProcessEntries()
 {
@@ -10280,7 +10282,7 @@ void S00c03c80_cls::ProcessEntries()
         if (m_entries[i] != 0 && (item = m_entries[i]->FUN_00ba3780()) != 0)
         {
             if (m_processor != 0)
-                m_processor->FUN_00b8a6e0(i, item->Get94(), (void*)item->Get98());
+                m_processor->ImageSpaceShaderParam_SetTexOffset(i, item->Get94(), (void*)item->Get98());
         }
         else
         {
@@ -10314,7 +10316,7 @@ void S00c03c80_cls::ProcessEntries()
                     else
                         second = m2->value08;
                 }
-                m_processor->FUN_00b8a6e0(i, second, meta);
+                m_processor->ImageSpaceShaderParam_SetTexOffset(i, second, meta);
             }
         }
     }

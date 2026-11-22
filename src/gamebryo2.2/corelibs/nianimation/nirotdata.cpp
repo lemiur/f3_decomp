@@ -281,11 +281,12 @@ struct FUN_00a48160_shell
     TimedRotationKey* m_pKeyArray;
     int m_eRequestType;
     unsigned char m_ucKeyDataSize;
-    bool FUN_00a48160(void* pkObject);
+    bool NiRotData_IsEqual(void* pkObject);
 };
 
 // @fnv 0x00a48160
-bool FUN_00a48160_shell::FUN_00a48160(void* pkObject)
+// pdb: NiRotData::IsEqual | NiRotData.obj | fnv360_0822_retail, objrun_open + bridge(vtable|objopen_prop) + skyrim(udata), high
+bool FUN_00a48160_shell::NiRotData_IsEqual(void* pkObject)
 {
     FUN_00a48160_shell* pkData = (FUN_00a48160_shell*)pkObject;
     if (!((A46BB0Object*)this)->IsEqual((A46BB0Object*)pkObject))
@@ -856,12 +857,12 @@ struct A48280Obj
     int m_eRequestType;
     unsigned char m_ucKeyDataSize;
 
-    void FUN_00a5d510(A48280Obj** pObject);
+    void NiObject_CreateDeepCopy(A48280Obj** pObject);
     void FUN_00a48220(TimedRotationKey* pkKeys, unsigned int uiNumKeys, AnimationKey::KeyType eType);
     void CopyTo(float fTime, float fDuration, A48280Obj** ppRival);
 };
 
-void __cdecl FUN_00a3d630(int a1, int a2, void* a3, unsigned int a4, float a5, float a6, TimedRotationKey** a7,
+void __cdecl NiAnimationKey_CopySequence(int a1, int a2, void* a3, unsigned int a4, float a5, float a6, TimedRotationKey** a7,
                           unsigned int* a8);
 
 // Obtains an object, fills its keys using the current key data and time arguments, then assigns it to ppRival with reference counting.
@@ -870,7 +871,7 @@ void A48280Obj::CopyTo(float fTime, float fDuration, A48280Obj** ppRival)
 {
     A48280Obj* pNew = 0;
 
-    FUN_00a5d510(&pNew);
+    NiObject_CreateDeepCopy(&pNew);
 
     A48280Obj* pCopy = pNew;
     if (pCopy != 0)
@@ -880,7 +881,7 @@ void A48280Obj::CopyTo(float fTime, float fDuration, A48280Obj** ppRival)
     {
         TimedRotationKey* pKeys = 0;
         unsigned int uiNumKeys = 0;
-        FUN_00a3d630(2, m_eRequestType, m_pKeyArray, m_uiNumKeys, fTime, fDuration, &pKeys, &uiNumKeys);
+        NiAnimationKey_CopySequence(2, m_eRequestType, m_pKeyArray, m_uiNumKeys, fTime, fDuration, &pKeys, &uiNumKeys);
         pCopy->FUN_00a48220(pKeys, uiNumKeys, (AnimationKey::KeyType)m_eRequestType);
     }
 

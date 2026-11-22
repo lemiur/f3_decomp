@@ -34,10 +34,10 @@ struct TargetClass
 {
     char _pad[0x40];
     NiControllerManager* field40;
-    int FUN_00a31910(int, int);
+    int NiControllerSequence_ResolveTransformInterpolators(int, int);
     int FUN_004eedd0(int, int);
 };
-// Returns the result of FUN_00a31910 with a1 and the value GetStringAtOffset returns for a2 on field40.
+// Returns the result of NiControllerSequence_ResolveTransformInterpolators with a1 and the value GetStringAtOffset returns for a2 on field40.
 // @f3 0x005fd4b0 (community match, verified in this file)
 struct ArgumentObjectView6
 {
@@ -63,7 +63,7 @@ struct ArgumentObjectView6
 struct TargetTableView6
 {
     void* m_pTable;
-    void FUN_005fcac0(int a, int f, void* r);
+    void PathingLocation_SetupData(int a, int f, void* r);
 };
 
 extern int DAT_00dc4dc0;
@@ -75,7 +75,7 @@ int TargetClass::FUN_004eedd0(int a, int b)
     self->m_pTable = (void*)&DAT_00dc4dc0;
     int f = (int)p->m_field3c;
     void* r = p->FUN_004e8880();
-    self->FUN_005fcac0(a, f, r);
+    self->PathingLocation_SetupData(a, f, r);
     return (int)(void*)this;
 }
 

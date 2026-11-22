@@ -109,15 +109,17 @@ struct S_0083fb40 { void FUN_0083fb40(int); };
 struct S_00823eb0 { void FUN_00823eb0(int); };
 struct S_0083fa20 { void FUN_0083fa20(int); };
 
-struct C_008cfc60 { void FUN_008b1ee0(int); char p[0x30]; S_0083fb40 s; void FUN_008cfc60_(int); };
-void C_008cfc60::FUN_008cfc60_(int a)
+struct C_008cfc60 { void FUN_008b1ee0(int); char p[0x30]; S_0083fb40 s; void NiBlendColorInterpolator_SaveBinary(int); };
+// pdb: NiBlendColorInterpolator::SaveBinary | NiBlendColorInterpolator.obj | fnv360_0822_retail, caller_sim + bridge(vtable|objopen_prop) + skyrim(caller_sim), high
+void C_008cfc60::NiBlendColorInterpolator_SaveBinary(int a)
 {
     FUN_008b1ee0(a);
     s.FUN_0083fb40(a);
 }
 
-struct C_00ac6ce0 { void FUN_00ad1980(int); char p[0x30]; S_00823eb0 s; void FUN_00ac6ce0_(int); };
-void C_00ac6ce0::FUN_00ac6ce0_(int a)
+struct C_00ac6ce0 { void FUN_00ad1980(int); char p[0x30]; S_00823eb0 s; void NiPSysVortexFieldModifier_LoadBinary(int); };
+// pdb: NiPSysVortexFieldModifier::LoadBinary | NiPSysVortexFieldModifier.obj | fnv360_0822_retail, caller_sim + skyrim(caller_sim), high
+void C_00ac6ce0::NiPSysVortexFieldModifier_LoadBinary(int a)
 {
     FUN_00ad1980(a);
     s.FUN_00823eb0(a);
@@ -155,7 +157,7 @@ void S_00a923c0::FUN_00a923c0(int a, int b)
 
 extern char DAT_00e7e9d4;
 struct L_009c1aa0 { void* vt; char b; int f8; };
-void __cdecl FUN_009c0d40(int, int, int, L_009c1aa0*);
+void __cdecl hkpMultiSphereTriangleAgent_staticGetPenetrations(int, int, int, L_009c1aa0*);
 struct L_009c4520 { void* vt; char b; int f8; };
 void __cdecl FUN_009c3cc0(int, int, int, L_009c4520*);
 struct L_009d4160 { void* vt; char b; int f8; };
@@ -167,7 +169,7 @@ void FUN_009c1aa0(int a1, int a2, int a3, int a4)
     l.b = 0;
     l.vt = &DAT_00e7e9d4;
     l.f8 = a4;
-    FUN_009c0d40(a2, a1, a3, &l);
+    hkpMultiSphereTriangleAgent_staticGetPenetrations(a2, a1, a3, &l);
 }
 
 void FUN_009c4520(int a1, int a2, int a3, int a4)

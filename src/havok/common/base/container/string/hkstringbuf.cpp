@@ -70,7 +70,7 @@ struct StringBuf : public BufferOwner
 // @f3 0x009236d0 (community match, verified in this file)
 #include <stdarg.h>
 void __cdecl FUN_00901e90(void* self, int size, int flag);
-void __cdecl FUN_00901fb0(void* self, int a, int b, int size);
+void __cdecl hkArrayUtil__reduce(void* self, int a, int b, int size);
 int __cdecl FUN_00923270(char* buf, int size, const char* fmt, va_list args);
 struct StringBufOps : StringBuf
 {
@@ -111,7 +111,7 @@ void StringBuf::FUN_00d61d00(const char* fmt, ...)
             {
                 m_iReferenceCount = iChars + 1;
                 if (iChars + 1 <= GetCapacity())
-                    FUN_00901fb0(this, 1, 0, iChars + 1);
+                    hkArrayUtil__reduce(this, 1, 0, iChars + 1);
                 break;
             }
             ((StringBufOps*)this)->SetSize3(iChars + 1);

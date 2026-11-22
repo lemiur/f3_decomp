@@ -5,7 +5,8 @@
 extern const char* const g_011f3f58_arg1;
 
 // @fnv 0x00a485a0
-const char* const* __cdecl FUN_00a485a0()
+// pdb: bhkPhantom::GetRTTI | TESObjectREFR.obj | fnv360_0822_retail, udata + bridge(vtable_prefix|vtable), high
+const char* const* __cdecl bhkPhantom_GetRTTI()
 {
     return &g_011f3f58_arg1;
 }
@@ -176,7 +177,7 @@ struct NiFloatKeyA485 {
 class NiRollControllerA485 {
 public:
     virtual void vfn_00();
-    bool FUN_00a36250(float fTime);
+    bool NiTimeController_DontDoUpdate(float fTime);
     NiFloatKeyA485* GetFloatKeys(unsigned int& uiNumKeys, int& eType, unsigned char& ucSize);
     void FUN_00a485e0(NiUpdateDataA485& kUpdateData);
 
@@ -193,7 +194,7 @@ public:
 // @fnv 0x00a485e0
 void NiRollControllerA485::FUN_00a485e0(NiUpdateDataA485& kUpdateData)
 {
-    if (!m_pkTarget || FUN_00a36250(kUpdateData.m_fTime))
+    if (!m_pkTarget || NiTimeController_DontDoUpdate(kUpdateData.m_fTime))
         return;
 
     unsigned int uiNumKeys;

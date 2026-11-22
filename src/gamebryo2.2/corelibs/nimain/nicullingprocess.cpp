@@ -5,7 +5,8 @@
 extern char const* const g_01201f7c_arg1;
 
 // @fnv 0x00a693f0
-char const* const* const __cdecl FUN_00a693f0()
+// pdb: NiVertexColorProperty::GetRTTI | NiXenonRenderer.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+char const* const* const __cdecl NiVertexColorProperty_GetRTTI()
 {
     return &g_01201f7c_arg1;
 }
@@ -117,7 +118,7 @@ struct WorkerS694a0
     int unk00, unk04, unk08, unk0c, unk10, unk14, unk18, unk1c, unk20, unk24, unk28;
     NiPlane_004b6100 planes[6];
     unsigned int flags;
-    void __thiscall FUN_00a694e0(NiAVObject* object);
+    void __thiscall NiCullingProcess_DoCulling(NiAVObject* object);
 };
 // @f3 0x008338f0 (community match, verified in this file)
 struct Bound8338
@@ -152,7 +153,8 @@ struct Proc8338
     Planes8338 m_kPlanes;
 };
 
-void WorkerS694a0::FUN_00a694e0(NiAVObject* object)
+// pdb: NiCullingProcess::DoCulling | NiCullingProcess.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_seq) + skyrim(objopen_prop), high
+void WorkerS694a0::NiCullingProcess_DoCulling(NiAVObject* object)
 {
     if (((Obj8338*)object)->HasBoundB())
     {
@@ -285,7 +287,7 @@ struct RefLookup
 };
 struct Handler
 {
-    void __thiscall FUN_00a59e00(void*);
+    void __thiscall NiAVObject_Cull(void*);
 };
 struct Sub694a0 : S694a0
 {
@@ -314,7 +316,7 @@ void Sub694a0::ProcessWorkerWithHandler(void* worker, Handler* handler, void* te
             if (ref)
                 ref->vslot35(worker);
         }
-        handler->FUN_00a59e00(this);
+        handler->NiAVObject_Cull(this);
         if (ref)
         {
             DAT_011f4748->SetFromCamera(worker);
@@ -348,7 +350,7 @@ struct WorkerA69640 : WorkerS694a0
 {
     void __thiscall ProcessObject(NiAVObject* object);
 };
-// Checks bits 12, 20 and 11 of the object's flags and either invokes the object's callback or calls FUN_00a694e0 based on them and this->flags.
+// Checks bits 12, 20 and 11 of the object's flags and either invokes the object's callback or calls NiCullingProcess_DoCulling based on them and this->flags.
 // @fnv 0x00a69640
 void WorkerA69640::ProcessObject(NiAVObject* object)
 {
@@ -362,7 +364,7 @@ void WorkerA69640::ProcessObject(NiAVObject* object)
     }
     else if (!obj->IsBitSet(11) && this->flags != 0)
     {
-        this->FUN_00a694e0(object);
+        this->NiCullingProcess_DoCulling(object);
     }
     else
     {

@@ -78,7 +78,8 @@ struct GlobalObjectO2_00a7b610
 extern GlobalObjectO2_00a7b610 g_011f3ed8;
 // Returns the address of the global object g_011f3ed8.
 // @fnv 0x00a43360
-GlobalObjectO2_00a7b610* __cdecl FUN_00a43360()
+// pdb: BSTreadTransfInterpolator::GetRTTI | BSTreadTransfInterpolator.obj | fnv360_0822_retail, udata + bridge(vtable|udata) + skyrim(udata), high
+GlobalObjectO2_00a7b610* __cdecl BSTreadTransfInterpolator_GetRTTI()
 {
     return &g_011f3ed8;
 }
@@ -182,12 +183,13 @@ bool FUN_00a9b510_shell::FUN_00a9b510(NiObject* pkObject)
 
 struct FUN_00a9b530_shell : public NiAlphaAccumulator
 {
-    void* FUN_00a9b530();
+    void* NiParticleMeshes_GetRTTI();
 };
 
 extern const char* const g_011fa000_arg1;
 // @fnv 0x00a9b530
-void* FUN_00a9b530_shell::FUN_00a9b530()
+// pdb: NiParticleMeshes::GetRTTI | NiParticleMeshes.obj | fnv360_0822_retail, udata + bridge(vtable|udata) + skyrim(udata), high
+void* FUN_00a9b530_shell::NiParticleMeshes_GetRTTI()
 {
     return (void*)&g_011fa000_arg1;
 }
@@ -533,12 +535,13 @@ struct S00a9b570_Acc
     bool m_bSkipObjectsWithFlag14;
     bool m_bInterface;
 
-    void FUN_00a9b570();
+    void NiAlphaAccumulator_Sort();
     void FUN_00aa0b40(int start, int finish);
 };
 
 // @fnv 0x00a9b570
-void S00a9b570_Acc::FUN_00a9b570()
+// pdb: NiAlphaAccumulator::Sort | NiAlphaAccumulator.obj | fnv360_0721_beta, objopen_prop + bridge(vtable|objopen_prop) + skyrim(objrun), high
+void S00a9b570_Acc::NiAlphaAccumulator_Sort()
 {
     if (!m_pkList)
         m_pkList = &m_kUnsortedGeometryList;
@@ -860,12 +863,13 @@ struct CloneCopyHelper
 };
 struct CloneAccumulator : NiAlphaAccumulator
 {
-    NiObject* FUN_00a9b730(CloningProcess*);
+    NiObject* NiAlphaAccumulator_CreateClone(CloningProcess*);
 };
 
 // Allocates a NiAlphaAccumulator clone, initializes it, copies skip flags, and returns the new object.
 // @fnv 0x00a9b730
-NiObject* CloneAccumulator::FUN_00a9b730(CloningProcess* cloning)
+// pdb: NiAlphaAccumulator::CreateClone | NiAlphaAccumulator.obj | fnv360_0822_retail, caller_sim + bridge(vtable|objrun_prop) + skyrim(caller_sim), high
+NiObject* CloneAccumulator::NiAlphaAccumulator_CreateClone(CloningProcess* cloning)
 {
     NiAlphaAccumulator* clone = (NiAlphaAccumulator*)FUN_00aa13e0(sizeof(NiAlphaAccumulator));
     if (clone)

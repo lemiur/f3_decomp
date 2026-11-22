@@ -69,8 +69,8 @@ extern const char* DAT_00ea44f0;
 extern const char* DAT_00ea44fc;
 unsigned int __cdecl FUN_00b9f270(unsigned int,const unsigned char*,unsigned int);
 unsigned int __cdecl FUN_00b9f650(unsigned int,const unsigned char*,unsigned int);
-void __cdecl FUN_00ba0cd0(DeflateState*);
-void __cdecl FUN_00ba0c30(DeflateState*,const char*,unsigned int,int);
+void __cdecl _tr_align(DeflateState*);
+void __cdecl _tr_stored_block(DeflateState*,const char*,unsigned int,int);
 static __declspec(noinline) void FUN_00b9d280(DeflateState* state,unsigned int value)
 {
     state->pending_buf[state->pending]=(unsigned char)(value>>8);
@@ -91,7 +91,8 @@ static __declspec(noinline) void FUN_00b9d2b0(DeflateStream* strm)
     strm->state->pending-=len;
     if(strm->state->pending==0) strm->state->pending_out=strm->state->pending_buf;
 }
-int __cdecl FUN_00b9d300(DeflateStream* strm,int flush)
+// pdb: deflate | deflate.obj | fnv360_0822_retail, call_gap_sim + skyrim(objrun), high
+int __cdecl deflate(DeflateStream* strm,int flush)
 {
     DeflateState* s;
     int old_flush;
@@ -154,9 +155,9 @@ int __cdecl FUN_00b9d300(DeflateStream* strm,int flush)
             return 0;
         }
         if(bstate==1) {
-            if(flush==1) FUN_00ba0cd0(s);
+            if(flush==1) _tr_align(s);
             else {
-                FUN_00ba0c30(s,0,0,0);
+                _tr_stored_block(s,0,0,0);
                 if(flush==3) {
                     s->head[s->hash_size-1]=0;
                     memset(s->head,0,(s->hash_size-1)*sizeof(*s->head));
@@ -264,10 +265,11 @@ struct F650Blk {
 
 void* __cdecl FUN_00b9e8a0(void* ctx, unsigned int count, unsigned int size);
 void __cdecl FUN_00b9e8c0();
-int __cdecl FUN_00b9e5c0(F650Obj* obj);
-void __cdecl FUN_00b9d710(F650Obj* obj);
+int __cdecl deflateReset(F650Obj* obj);
+void __cdecl deflateEnd(F650Obj* obj);
 
-int FUN_00b9e650(F650Obj* obj, int a2, int a3, int a4, int a5, int a6, char* a7, int a8)
+// pdb: deflateInit2_ | deflate.obj | fnv360_0822_retail, call_seq + skyrim(call_seq), high
+int deflateInit2_(F650Obj* obj, int a2, int a3, int a4, int a5, int a6, char* a7, int a8)
 {
     int sign = 1;
     unsigned int b;
@@ -321,11 +323,11 @@ int FUN_00b9e650(F650Obj* obj, int a2, int a3, int a4, int a5, int a6, char* a7,
         p->f7c = a2;
         p->f80 = a6;
         p->b1d = 8;
-        return FUN_00b9e5c0(obj);
+        return deflateReset(obj);
     }
     p->f04 = 0x29a;
     obj->f18 = FUN_00ea44f8;
-    FUN_00b9d710(obj);
+    deflateEnd(obj);
     return -4;
 }
 }   // namespace f3m_00b9e650
@@ -2096,7 +2098,8 @@ static int ReadInput(DeflateStream* strm, unsigned char* buf, unsigned size)
     return (int)len;
 }
 
-static __declspec(noinline) void FUN_00b9daa0(DeflateState* s)
+// pdb: fill_window | deflate.obj | fnv360_0822_retail, caller_sim + skyrim(caller_sim), high
+static __declspec(noinline) void fill_window(DeflateState* s)
 {
     unsigned n, m;
     unsigned short* p;
@@ -2156,7 +2159,7 @@ int __cdecl FUN_00b9dbf0(DeflateState* s, int flush)
         max_block_size = s->pending_buf_size - 5;
     for (;;) {
         if (s->lookahead <= 1) {
-            FUN_00b9daa0(s);
+            fill_window(s);
             if (s->lookahead == 0 && flush == 0) return 0;
             if (s->lookahead == 0) break;
         }
@@ -2325,7 +2328,8 @@ typedef struct internal_state {
 
 } deflate_state;
 
-static uInt FUN_00b9d850(deflate_state *s, IPos cur_match)                             
+// pdb: longest_match | deflate.obj | fnv360_0822_retail, call_gap_sim + skyrim(call_seq), high
+static uInt longest_match(deflate_state *s, IPos cur_match)                             
 {
     unsigned chain_length = s->max_chain_length;
     register Bytef *scan = s->window + s->strstart; 
@@ -2396,7 +2400,7 @@ static uInt FUN_00b9d850(deflate_state *s, IPos cur_match)
 
 deflate_state* volatile input_state_0140;
 IPos volatile input_match_0140;
-unsigned EmitLongestMatch0140() { return FUN_00b9d850(input_state_0140,input_match_0140); }
+unsigned EmitLongestMatch0140() { return longest_match(input_state_0140,input_match_0140); }
 }   // namespace f3m_00b9d850
 
 // @f3 0x00b9f270 (community match, verified in this file)
@@ -3219,7 +3223,7 @@ bool Shader66::FUN_00b84ba0(int unused)
 
 // @f3 0x00b9daa0 (community match, verified in this file)
 namespace f3m_00b9daa0 {
-static __declspec(noinline) void FUN_00b9daa0(DeflateState* s)
+static __declspec(noinline) void fill_window(DeflateState* s)
 {
     register unsigned n, m;
     register unsigned short* p;
@@ -3677,7 +3681,7 @@ static int ReadDeflateBuffer(z_streamp strm, Bytef* buf, unsigned size)
     return (int)len;
 }
 
-static uInt FUN_00b9d850(deflate_state* s, IPos cur_match)
+static uInt longest_match(deflate_state* s, IPos cur_match)
 {
     unsigned chain_length = s->max_chain_length;
     register Bytef *scan = s->window + s->strstart; 
@@ -3729,7 +3733,8 @@ static uInt FUN_00b9d850(deflate_state* s, IPos cur_match)
     return s->lookahead;
 }
 
-static uInt FUN_00b9d9d0(deflate_state* s, IPos cur_match)
+// pdb: longest_match_fast | deflate.obj | fnv360_0822_retail, call_gap_sim + skyrim(call_seq), high
+static uInt longest_match_fast(deflate_state* s, IPos cur_match)
 {
     register Bytef *scan = s->window + s->strstart; 
     register Bytef *match;                       
@@ -3755,7 +3760,7 @@ static uInt FUN_00b9d9d0(deflate_state* s, IPos cur_match)
     return (uInt)len <= s->lookahead ? (uInt)len : s->lookahead;
 }
 
-static void FUN_00b9daa0(deflate_state* s)
+static void fill_window(deflate_state* s)
 {
     register unsigned n, m;
     register Posf *p;
@@ -3800,13 +3805,14 @@ static void FUN_00b9daa0(deflate_state* s)
     } while (s->lookahead < (258+3+1) && s->strm->avail_in != 0);
 }
 
-block_state FUN_00b9e140(deflate_state* s, int flush)
+// pdb: deflate_slow | deflate.obj | fnv360_0822_retail, caller_sim + skyrim(caller_sim), high
+block_state deflate_slow(deflate_state* s, int flush)
 {
     IPos hash_head = 0;    
     int bflush;              
     for (;;) {
         if (s->lookahead < (258+3+1)) {
-            FUN_00b9daa0(s);
+            fill_window(s);
             if (s->lookahead < (258+3+1) && flush == 0) {
                 return need_more;
             }
@@ -3820,9 +3826,9 @@ block_state FUN_00b9e140(deflate_state* s, int flush)
         if (hash_head != 0 && s->prev_length < s->max_lazy_match &&
             s->strstart - hash_head <= ((s)->w_size-(258+3+1))) {
             if (s->strategy < 2) {
-                s->match_length = FUN_00b9d850 (s, hash_head);
+                s->match_length = longest_match (s, hash_head);
             } else if (s->strategy == 3 && s->strstart - hash_head == 1) {
-                s->match_length = FUN_00b9d9d0 (s, hash_head);
+                s->match_length = longest_match_fast (s, hash_head);
             }
             if (s->match_length <= 5 && (s->strategy == 1
                 || (s->match_length == 3 &&
@@ -3875,13 +3881,14 @@ block_state FUN_00b9e140(deflate_state* s, int flush)
 namespace f3m_00b9ddd0 {
 // Adapted from zlib 1.2.1 deflate_fast, Copyright 1995-2003 Jean-loup Gailly.
 // Uses the claim pack's zlib state, tables and complete static helper bodies.
-block_state FUN_00b9ddd0(deflate_state* s, int flush)
+// pdb: deflate_fast | deflate.obj | fnv360_0822_retail, caller_sim + skyrim(caller_sim), high
+block_state deflate_fast(deflate_state* s, int flush)
 {
     IPos hash_head = 0;
     int bflush;
     for (;;) {
         if (s->lookahead < 262) {
-            FUN_00b9daa0(s);
+            fill_window(s);
             if (s->lookahead < 262 && flush == 0) return need_more;
             if (s->lookahead == 0) break;
         }
@@ -3890,9 +3897,9 @@ block_state FUN_00b9ddd0(deflate_state* s, int flush)
         }
         if (hash_head != 0 && s->strstart - hash_head <= s->w_size - 262) {
             if (s->strategy < 2) {
-                s->match_length = FUN_00b9d850(s, hash_head);
+                s->match_length = longest_match(s, hash_head);
             } else if (s->strategy == 3 && s->strstart - hash_head == 1) {
-                s->match_length = FUN_00b9d9d0(s, hash_head);
+                s->match_length = longest_match_fast(s, hash_head);
             }
         }
         if (s->match_length >= 3) {
@@ -6768,20 +6775,20 @@ unsigned int __cdecl FUN_00b9f650(unsigned int crc,const unsigned char* buf,unsi
 
 // @f3 0x00b9bd50 (community match, verified in this file)
 namespace f3m_00b9bd50 {
-int __cdecl FUN_00b9bc60(z_streamp strm,int windowBits,const char* version,int stream_size);
+int __cdecl inflateInit2_(z_streamp strm,int windowBits,const char* version,int stream_size);
 int __cdecl FUN_00b9bd50(z_streamp strm,const char* version,int stream_size)
 {
-    return FUN_00b9bc60(strm,15,version,stream_size);
+    return inflateInit2_(strm,15,version,stream_size);
 }
 }   // namespace f3m_00b9bd50
 
 // @f3 0x00b9e870 (community match, verified in this file)
 namespace f3m_00b9e870 {
 struct F650Obj;
-int __cdecl FUN_00b9e650(F650Obj* obj,int a2,int a3,int a4,int a5,int a6,char* a7,int a8);
+int __cdecl deflateInit2_(F650Obj* obj,int a2,int a3,int a4,int a5,int a6,char* a7,int a8);
 int __cdecl FUN_00b9e870(z_streamp strm,int level,char* version,int stream_size)
 {
-    return FUN_00b9e650((F650Obj*)strm,level,8,15,8,0,version,stream_size);
+    return deflateInit2_((F650Obj*)strm,level,8,15,8,0,version,stream_size);
 }
 }   // namespace f3m_00b9e870
 
@@ -6829,10 +6836,11 @@ void caller_of_FUN_00b9f670()
 namespace f3m_00b9e5c0 {
 unsigned int __cdecl FUN_00b9f270(unsigned int,const unsigned char*,unsigned int);
 unsigned int __cdecl FUN_00b9f650(unsigned int,const unsigned char*,unsigned int);
-void __cdecl FUN_00ba0860(DeflateState* s);
+void __cdecl _tr_init(DeflateState* s);
 void __cdecl FUN_00b9d7d0(void);
 
-int __cdecl FUN_00b9e5c0(DeflateStream* strm)
+// pdb: deflateReset | deflate.obj | fnv360_0822_retail, call_gap + skyrim(call_seq), high
+int __cdecl deflateReset(DeflateStream* strm)
 {
     DeflateState* s;
     if (strm == 0 || strm->state == 0 || strm->allocator == 0 || strm->deallocator == 0)
@@ -6848,7 +6856,7 @@ int __cdecl FUN_00b9e5c0(DeflateStream* strm)
     strm->adler = (s->wrap == 2) ? FUN_00b9f650(0u, (const unsigned char*)0, 0u)
                                  : FUN_00b9f270(0u, (const unsigned char*)0, 0u);
     s->last_flush = 0;
-    FUN_00ba0860(s);
+    _tr_init(s);
     FUN_00b9d7d0();
     return 0;
 }
@@ -7061,7 +7069,8 @@ struct z_stream
 };
 }
 
-static __declspec(noinline) int FUN_00b9bd70(f3m_00b9bd70::z_stream* strm, unsigned out)
+// pdb: updatewindow | inflate.obj | fnv360_0822_debug, call_seq + bridge(call_gap|call_gap) + skyrim(call_dedup), high
+static __declspec(noinline) int updatewindow(f3m_00b9bd70::z_stream* strm, unsigned out)
 {
     f3m_00b9bd70::inflate_state* state;
     unsigned copy, dist;
@@ -7115,7 +7124,7 @@ volatile unsigned g_out_00b9bd70;
 volatile int g_ret_00b9bd70;
 void caller_of_FUN_00b9bd70()
 {
-    g_ret_00b9bd70 = FUN_00b9bd70(g_strm_00b9bd70, g_out_00b9bd70);
+    g_ret_00b9bd70 = updatewindow(g_strm_00b9bd70, g_out_00b9bd70);
 }
 }   // namespace f3m_00b9bd70
 
@@ -7143,7 +7152,8 @@ void Obj00b87e10::FUN_00b87e10(int a) {
 // @f3 0x00b9bc10 (community match, verified in this file)
 namespace f3m_00b9bc10 {
 
-int __cdecl FUN_00b9bc10(void* arg0) {
+// pdb: inflateReset | inflate.obj | fnv360_0822_retail, call_seq + skyrim(call_seq), high
+int __cdecl inflateReset(void* arg0) {
     void* edx = arg0;
     void* eax = 0;
     if (edx != 0) {
@@ -7269,7 +7279,8 @@ struct State_b9d710 {
 };
 }
 
-int __cdecl FUN_00b9d710(f3m_00b9d710::State_b9d710* s)
+// pdb: deflateEnd | deflate.obj | fnv360_0721_beta, call_seq + skyrim(call_seq), high
+int __cdecl deflateEnd(f3m_00b9d710::State_b9d710* s)
 {
     if (!s || !s->inner1c)
         return -2;
@@ -7357,9 +7368,10 @@ struct z_stream
 
 void* __cdecl FUN_00b9e8a0(void* opaque, unsigned int items, unsigned int size);
 void __cdecl FUN_00b9e8c0(void* opaque, void* address);
-int __cdecl FUN_00b9bc10(z_stream* strm);
+int __cdecl inflateReset(z_stream* strm);
 
-int __cdecl FUN_00b9bc60(z_stream* strm, int windowBits, const char* version, int stream_size)
+// pdb: inflateInit2_ | inflate.obj | fnv360_0822_retail, call_seq + skyrim(call_seq), high
+int __cdecl inflateInit2_(z_stream* strm, int windowBits, const char* version, int stream_size)
 {
     inflate_state* state;
 
@@ -7408,7 +7420,7 @@ int __cdecl FUN_00b9bc60(z_stream* strm, int windowBits, const char* version, in
     }
     state->wbits = (unsigned int)windowBits;
     state->window = 0;
-    return FUN_00b9bc10(strm);
+    return inflateReset(strm);
 }
 
 }

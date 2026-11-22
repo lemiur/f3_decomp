@@ -283,7 +283,7 @@ struct Target
     int unk0c, unk10;
     unsigned char* unk14;
     int unk18;
-    bool* FUN_00e48e80(bool* out);
+    bool* hkpConvexVerticesConnectivity_isClosed(bool* out);
 };
 // Checks that every edge in the vertex list appears exactly twice with opposite orientation, returning true only when all edge keys have value 3.
 // @f3 0x00a76e00 (community match, verified in this file)
@@ -325,7 +325,8 @@ struct EdgeKeyMap
     }
 };
 
-bool* Target::FUN_00e48e80(bool* apResult)
+// pdb: hkpConvexVerticesConnectivity::isClosed | hkpConvexVerticesConnectivity.obj | fnv360_0721_beta, caller_sim + skyrim(caller_sim), high
+bool* Target::hkpConvexVerticesConnectivity_isClosed(bool* apResult)
 {
     int index = 0;
     EdgeKeyMap edgeMap;

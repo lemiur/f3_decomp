@@ -433,13 +433,13 @@ template <class T> inline void NiStreamLoadBinary485(NiStream485& kStream, T* pk
 void* __cdecl FUN_00aa1070(unsigned int bytes);
 struct FUN_00a88410_shell : NiScreenElementsData
 {
-    void FUN_00a7b940(NiStream485& kStream);
+    void NiTriShapeData_LoadBinary(NiStream485& kStream);
     void LoadScreenElementsData(NiStream485& kStream);
 };
 // @fnv 0x00a88410
 void FUN_00a88410_shell::LoadScreenElementsData(NiStream485& kStream)
 {
-    FUN_00a7b940(kStream);
+    NiTriShapeData_LoadBinary(kStream);
     NiStreamLoadBinary485(kStream, m_usMaxPQuantity);
     m_akPolygon = static_cast<NiScreenElementsData__Polygon*>(
         FUN_00aa1070(m_usMaxPQuantity * sizeof(NiScreenElementsData__Polygon)));
@@ -510,7 +510,7 @@ template <class T> inline void SerializeValue(NiStream& kStream, const T* pValue
 }
 struct FUN_00a7bbe0_shell
 {
-    void FUN_00a7bbe0(NiStream* apStream);
+    void NiTriShapeData_SaveBinary(NiStream* apStream);
 };
 struct FUN_00a88590_shell : public NiScreenElementsData
 {
@@ -520,7 +520,7 @@ struct FUN_00a88590_shell : public NiScreenElementsData
 // @fnv 0x00a88590
 void FUN_00a88590_shell::WriteToStream(NiStream& kStream)
 {
-    ((FUN_00a7bbe0_shell*)this)->FUN_00a7bbe0(&kStream);
+    ((FUN_00a7bbe0_shell*)this)->NiTriShapeData_SaveBinary(&kStream);
     SerializeValue(kStream, m_usMaxPQuantity);
     unsigned int uiPolygonCount = m_usMaxPQuantity;
     SerializeValue(kStream, m_akPolygon, uiPolygonCount);

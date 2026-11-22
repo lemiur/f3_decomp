@@ -95,7 +95,7 @@ int unk144;
 int unk148;
 int unk14c;
 int pos150;
-int FUN_0048be50(void*,int);
+int NiBinaryStream_Read(void*,int);
 };
 struct State {
 int unk00;
@@ -131,7 +131,7 @@ delete file; return 0;
 case 0: {
 File* file=state->file;
 if(!file) return 0x105;
-int bytes=file->FUN_0048be50(data,size);
+int bytes=file->NiBinaryStream_Read(data,size);
 state->position+=bytes; return bytes;
 }
 case 2: {

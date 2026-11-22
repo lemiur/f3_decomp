@@ -121,7 +121,7 @@ struct FUN_00cbb560
     FUN_00cbb560(const hkVector4D66D& kPositionInRbLocal, const hkVector4D66D& kMousePositionInWorld,
                  float fSpringDamping, float fSpringElasticity, float fObjectDamping, hkpEntityD66D* pkRigidBody,
                  void* pkRigidBodies) throw();
-    void FUN_00cbb1b0(float fMaxRelativeForce);
+    void hkpMouseSpringAction_setMaxRelativeForce(float fMaxRelativeForce);
 };
 
 struct hkpWorldD66D
@@ -178,7 +178,7 @@ hkBoolD66D MousePickD66D::PickEntity(hkUint64D66D uiCollidableUserData, const hk
                 kPositionInRbLocal.FUN_00c7f690(pkEntity->m_kTransform, kPositionInWorld);
                 m_pkMouseSpring =
                     new FUN_00cbb560(kPositionInRbLocal, kPositionInWorld, 0.5f, 0.3f, 0.95f, pkEntity, 0);
-                m_pkMouseSpring->FUN_00cbb1b0(m_fMaxRelativeForce);
+                m_pkMouseSpring->hkpMouseSpringAction_setMaxRelativeForce(m_fMaxRelativeForce);
                 m_pkWorld->FUN_00c97370(m_pkMouseSpring);
             }
         }

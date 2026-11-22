@@ -240,7 +240,8 @@ bool __fastcall FUN_00a6c680(void* pThis, int edx, NiStream& kStream)
 
 extern const char* const g_011f4a28_arg1;
 // @fnv 0x00a69060
-const char* const* FUN_00a69060()
+// pdb: NiRenderer::GetRTTI | NiRenderer.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun) + skyrim(objrun), high
+const char* const* NiRenderer_GetRTTI()
 {
     return &g_011f4a28_arg1;
 }
@@ -275,7 +276,8 @@ int FUN_00a6a000()
 struct GlobalObjectO2_00a7b610;
 extern GlobalObjectO2_00a7b610 g_011f49a4;
 // @fnv 0x00a6a140
-GlobalObjectO2_00a7b610* FUN_00a6a140()
+// pdb: NiZBufferProperty::GetRTTI | NiXenonRenderer.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+GlobalObjectO2_00a7b610* NiZBufferProperty_GetRTTI()
 {
     return &g_011f49a4;
 }
@@ -306,16 +308,17 @@ struct Elem4
 };
 struct EqObj
 {
-    bool FUN_00a864d0(EqObj*);
+    bool NiSkinInstance_IsEqual(EqObj*);
     unsigned int m_auiShapeKeys[13];
     unsigned int m_uiCount;
     Elem4* m_pElems;
 };
 // Returns true if the base comparison passes, the counts match, and every element's a, b and c fields are equal.
 // @fnv 0x00a6c6a0
-bool __fastcall FUN_00a6c6a0(EqObj* self, int, EqObj* other)
+// pdb: BSDismemberSkinInstance::IsEqual | BSDismemberSkinInstance.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(caller_sim), high
+bool __fastcall BSDismemberSkinInstance_IsEqual(EqObj* self, int, EqObj* other)
 {
-    if (!self->FUN_00a864d0(other))
+    if (!self->NiSkinInstance_IsEqual(other))
         return false;
     if (self->m_uiCount != other->m_uiCount)
         return false;
@@ -1950,7 +1953,7 @@ struct LinkArray
 };
 struct LinkStream : NiStream
 {
-    unsigned int FUN_00a63460();
+    unsigned int NiStream_GetNumberOfLinkIDs();
     LinkTexture* FUN_00a63430();
 };
 struct LinkProperty
@@ -1976,12 +1979,12 @@ struct LinkProperty
 void LinkProperty::LoadFromStream(LinkStream& stream)
 {
     FUN_00a47360(stream);
-    unsigned int count = stream.FUN_00a63460();
+    unsigned int count = stream.NiStream_GetNumberOfLinkIDs();
     unsigned int i;
     flags &= 0xf00f;
     for (i = 0; i < count; ++i)
     {
-        if (stream.FUN_00a63460())
+        if (stream.NiStream_GetNumberOfLinkIDs())
         {
             LinkMap*& map = maps.data[i];
             map->texture = stream.FUN_00a63430();
@@ -2037,10 +2040,10 @@ void LinkProperty::LoadFromStream(LinkStream& stream)
     }
     if (stream.m_uiNifVersion >= 0x5000011)
     {
-        count = stream.FUN_00a63460();
+        count = stream.NiStream_GetNumberOfLinkIDs();
         for (i = 0; i < count; ++i)
         {
-            if (stream.FUN_00a63460())
+            if (stream.NiStream_GetNumberOfLinkIDs())
             {
                 LinkMap*& map = shaderMaps->data[i];
                 map->texture = stream.FUN_00a63430();

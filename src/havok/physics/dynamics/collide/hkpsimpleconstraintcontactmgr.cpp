@@ -147,13 +147,13 @@ struct FUN_00cfd720 {
     ~FUN_00cfd720();
 };
 
-void __cdecl FUN_00cb3dd0(void*, void*, int);
+void __cdecl hkpWorldOperationUtil_removeConstraintImmediately(void*, void*, int);
 
 // @fnv 0x00cfd720
 FUN_00cfd720::~FUN_00cfd720() {
     *(void**)this = (void*)&DAT_010cc984;
     if (*(unsigned short*)(*(char**)((char*)this + 0x3c) + 4) != 0) {
-        FUN_00cb3dd0(*(void**)((char*)this + 0xc), (char*)this + 0x44, 1);
+        hkpWorldOperationUtil_removeConstraintImmediately(*(void**)((char*)this + 0xc), (char*)this + 0x44, 1);
     }
     *(void**)((char*)this + 0x58) = 0;
     *(void**)((char*)this + 0x5c) = 0;
@@ -306,8 +306,8 @@ struct FUN_00cfccf0_class {
 };
 // Builds a ContactRecord from the two stored contacts and inputs, dispatches it via m_0c, then processes each contact whose flag at index 0x102 is set.
 // @f3 0x009868e0 (community match, verified in this file)
-void __cdecl FUN_00988d10(void*, ContactRecord*);
-void __cdecl FUN_009882e0(void*, ContactRecord*);
+void __cdecl hkpWorldCallbackUtil_fireContactPointRemoved(void*, ContactRecord*);
+void __cdecl hkpEntityCallbackUtil_fireContactPointRemovedInternal(void*, ContactRecord*);
 
 void FUN_00cfccf0_class::ProcessContactPair(void* firstInput, void* secondInput) {
     void* entityA = this->m_10;
@@ -322,13 +322,13 @@ void FUN_00cfccf0_class::ProcessContactPair(void* firstInput, void* secondInput)
     record.secondContact = (unsigned short*)entityB;
     record.firstInput = firstInput;
 
-    FUN_00988d10(p, &record);
+    hkpWorldCallbackUtil_fireContactPointRemoved(p, &record);
 
     if (*(unsigned short*)((char*)entityA + 0x1f4) != 0) {
-        FUN_009882e0(entityA, &record);
+        hkpEntityCallbackUtil_fireContactPointRemovedInternal(entityA, &record);
     }
     if (*(unsigned short*)((char*)entityB + 0x1f4) != 0) {
-        FUN_009882e0(entityB, &record);
+        hkpEntityCallbackUtil_fireContactPointRemovedInternal(entityB, &record);
     }
 }
 
@@ -1235,7 +1235,7 @@ struct hkSimpleConstraintContactMgrStub
     hkConstraintInstanceBody m_pHavokConstraint;
 
     hkRigidBodyStub* FUN_00cfd800(const hkCdBodyStub& a, const hkCdBodyStub& b, int maxImpulse, hkCPProperties* cpi);
-    hkContactPointId FUN_00cfcf80(const hkCdBodyStub& a, const hkCdBodyStub& b, const hkProcessCollisionInputStub& input,
+    hkContactPointId hkpSimpleConstraintContactMgr_addContactPointImpl(const hkCdBodyStub& a, const hkCdBodyStub& b, const hkProcessCollisionInputStub& input,
         hkProcessCollisionOutputStub& output, const hkGskCacheStub* contactCache, hkContactPt& cp);
 };
 
@@ -1333,7 +1333,8 @@ __declspec(noinline) void __cdecl FUN_00988180(ns_00986f90::RigidBodyF3* rb, ns_
     }
 }
 
-hkContactPointId hkSimpleConstraintContactMgrStub::FUN_00cfcf80(const hkCdBodyStub& a, const hkCdBodyStub& b,
+// pdb: hkpSimpleConstraintContactMgr::addContactPointImpl | hkpSimpleConstraintContactMgr.obj | fnv360_0822_retail, objrun + bridge(caller_sim|vtable) + skyrim(caller_sim), high
+hkContactPointId hkSimpleConstraintContactMgrStub::hkpSimpleConstraintContactMgr_addContactPointImpl(const hkCdBodyStub& a, const hkCdBodyStub& b,
     const hkProcessCollisionInputStub& input, hkProcessCollisionOutputStub& output,
     const hkGskCacheStub* contactCache, hkContactPt& cp)
 {

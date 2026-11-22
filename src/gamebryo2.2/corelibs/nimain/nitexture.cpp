@@ -98,7 +98,8 @@ struct GlobalObjectO2_00a7b610;
 extern GlobalObjectO2_00a7b610 g_011f3f38;
 // Returns a pointer to the global object g_011f3f38, ignoring both arguments.
 // @fnv 0x00a47370
-GlobalObjectO2_00a7b610* __fastcall FUN_00a47370(void*, int)
+// pdb: NiSequenceStreamHelper::GetRTTI | NiSequenceStreamHelper.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+GlobalObjectO2_00a7b610* __fastcall NiSequenceStreamHelper_GetRTTI(void*, int)
 {
     return &g_011f3f38;
 }
@@ -400,8 +401,9 @@ void Elements::FUN_00a912d0(ViewerStrings* pkStrings)
 }
 
 // @f3twin 0x00c24260 of 0x0093e450
-struct F3Twin_00c24260 : public FUN_00a62660_cls { const int& F3_FUN_00c24260() ; };
-const int& F3Twin_00c24260::F3_FUN_00c24260() 
+struct F3Twin_00c24260 : public FUN_00a62660_cls { const int& NiExtraData_GetName() ; };
+// pdb: NiExtraData::GetName | NiExtraData.obj | fnv360_0721_beta, call_seq + skyrim(call_seq), high
+const int& F3Twin_00c24260::NiExtraData_GetName() 
 {
     return m_08;
 }

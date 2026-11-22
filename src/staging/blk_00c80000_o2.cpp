@@ -1217,10 +1217,11 @@ void FUN_00c80b20_cls::InsertItemAt(unsigned int index, FUN_00c80b20_item8& item
     m_pBuffer[index] = item;
 }
 
-// FUN_00c81570 : a one-line function - getter
+// bhkWorld_GetRTTI : a one-line function - getter
 extern int g_target_00c81570;
 // @fnv 0x00c81570
-void* FUN_00c81570()
+// pdb: bhkWorld::GetRTTI | bhkWorld.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+void* bhkWorld_GetRTTI()
 {
     return &g_target_00c81570;
 }
@@ -1885,15 +1886,16 @@ class FUN_00c84df0_cls
     unsigned int unk0c;
     unsigned int m_10;
 
-    void FUN_00c87600(FUN_00c84df0_cls* first, FUN_00c84df0_cls* second);
-    void FUN_00c84df0(FUN_00c84df0_cls* first, FUN_00c84df0_cls* second);
+    void bhkSerializable_CopyMembers(FUN_00c84df0_cls* first, FUN_00c84df0_cls* second);
+    void bhkShape_CopyMembers(FUN_00c84df0_cls* first, FUN_00c84df0_cls* second);
 };
 
-// Calls FUN_00c87600 with first and second, then copies the low 5 bits of m_10 into first->m_10.
+// Calls bhkSerializable_CopyMembers with first and second, then copies the low 5 bits of m_10 into first->m_10.
 // @fnv 0x00c84df0
-void FUN_00c84df0_cls::FUN_00c84df0(FUN_00c84df0_cls* first, FUN_00c84df0_cls* second)
+// pdb: bhkShape::CopyMembers | bhkShape.obj | fnv360_0822_retail, caller_sim + bridge(hash|vtable) + skyrim(caller_sim), high
+void FUN_00c84df0_cls::bhkShape_CopyMembers(FUN_00c84df0_cls* first, FUN_00c84df0_cls* second)
 {
-    FUN_00c87600(first, second);
+    bhkSerializable_CopyMembers(first, second);
     first->m_10 = m_10 & 0x1f;
 }
 
@@ -2668,7 +2670,7 @@ struct FUN_00c87600_Obj : FUN_00c87600_Base
     virtual void* vfB0(void* value);
     virtual void* vfB4(void* value);
 
-    void __thiscall FUN_00c87600(void* arg1, void* arg2);
+    void __thiscall bhkSerializable_CopyMembers(void* arg1, void* arg2);
 };
 
 struct FUN_00a5d450_helper
@@ -2678,7 +2680,8 @@ struct FUN_00a5d450_helper
 
 // Calls the base helper with arg1 and arg2, passes the result of vfB4 to arg1's vfB0, then calls vfA4 with 1.
 // @fnv 0x00c87600
-void __thiscall FUN_00c87600_Obj::FUN_00c87600(void* pTarget, void* arg2)
+// pdb: bhkSerializable::CopyMembers | bhkSerializable.obj | fnv360_0721_beta, call_seq + bridge(hash|call_seq) + skyrim(caller_sim), high
+void __thiscall FUN_00c87600_Obj::bhkSerializable_CopyMembers(void* pTarget, void* arg2)
 {
     reinterpret_cast<FUN_00a5d450_helper*>(this)->CreateVertexBufferSet(pTarget, arg2);
 
@@ -5512,7 +5515,7 @@ struct FUN_00c8b000_cls
     virtual void v43();
     virtual void v44();
     virtual FUN_00c8b000_List* v45(bool* out);
-    void FUN_00c84df0(int a, int b);
+    void bhkShape_CopyMembers(int a, int b);
     void UpdateListEntries(int a1, int a2);
 };
 
@@ -5606,7 +5609,7 @@ void FUN_00c8b000_cls::UpdateListEntries(int a1, int a2)
 
 struct FileContext
 {
-    void FUN_00a64670();
+    void NiStream_ReadMultipleLinkIDs();
 };
 struct H_00c8b1d0
 {
@@ -5665,7 +5668,7 @@ void __cdecl LoadIntArray(FileContext* object, char* component);
 void H_00c8b1d0::ProcessFileContext(FileContext* volatile object)
 {
     FileContext* stableObject = object;
-    stableObject->FUN_00a64670();
+    stableObject->NiStream_ReadMultipleLinkIDs();
     FUN_00c84d00(stableObject);
     char* data = GetDataPosition(&object);
     if (!data)
@@ -8147,11 +8150,12 @@ struct FUN_00c84d50_cls
     unsigned int m_flags;
 
     void SaveSerializeData(void* arg);
-    void FUN_00c84d50(void* arg);
+    void bhkShape_SaveBinary(void* arg);
 };
 
 // @fnv 0x00c84d50
-void FUN_00c84d50_cls::FUN_00c84d50(void* arg)
+// pdb: bhkShape::SaveBinary | bhkShape.obj | fnv360_0822_retail, caller_sim + bridge(vtable|vtable) + skyrim(objrun), high
+void FUN_00c84d50_cls::bhkShape_SaveBinary(void* arg)
 {
     void* object;
     int* result = v45(object);
@@ -8669,8 +8673,8 @@ class NiNode : public NiAVObject
     char pad20[0x9c - 0x20];
     NiTObjectArray<NiAVObject*> m_kChildList;
 };
-void FUN_00c6a350(NiNode* apNode, int aiArg, bool abA, bool abB, bool abC);
-// Updates apObject, then for each child of the Chain01 node's parent with a collision object, calls Unk_2A and FUN_00c6a350.
+void bhkWorld_SetMotion(NiNode* apNode, int aiArg, bool abA, bool abB, bool abC);
+// Updates apObject, then for each child of the Chain01 node's parent with a collision object, calls Unk_2A and bhkWorld_SetMotion.
 // @fnv 0x00c88810
 void UpdateChainCollision(NiAVObject* apObject)
 {
@@ -8693,7 +8697,7 @@ void UpdateChainCollision(NiAVObject* apObject)
             if (pkCollision)
             {
                 pkCollision->Unk_2A();
-                FUN_00c6a350((NiNode*)pkChild, 1, false, true, true);
+                bhkWorld_SetMotion((NiNode*)pkChild, 1, false, true, true);
             }
         }
     }
@@ -9755,7 +9759,7 @@ struct Owner253
     virtual void slot43();
     virtual void slot44();
     virtual PhysicsData253* GetData(bool* temporary);
-    void FUN_00c87600(void* destination, void* process);
+    void bhkSerializable_CopyMembers(void* destination, void* process);
     void ClonePhysicsData(void* destination, void* process);
 };
 // @f3 0x008fb680 (community match, verified in this file)
@@ -9785,7 +9789,7 @@ void Owner253::ClonePhysicsData(void* destination, void* process)
             data->second = clone ? clone->object : 0;
         }
     }
-    FUN_00c87600(destination, context);
+    bhkSerializable_CopyMembers(destination, context);
 }
 
 
@@ -10195,7 +10199,7 @@ struct N2066_This5380d0
 {
     bool FUN_004c8ee0(Param5380d0*);
 };
-void FUN_0095af90(void*, void*);
+void hkpResponseModifier_enableConstraint(void*, void*);
 struct N2066_ControllerRTTI
 {
     const char* name;
@@ -10448,7 +10452,7 @@ struct N2066_ControllerLink
     N2066_ControllerObject* object;
     void Process()
     {
-        FUN_0095af90(this, active);
+        hkpResponseModifier_enableConstraint(this, active);
     }
     bool IsActive() const
     {
@@ -10462,7 +10466,7 @@ struct N2066_ControllerLink
     void ProcessIfActive()
     {
         if (active)
-            FUN_0095af90(this, active);
+            hkpResponseModifier_enableConstraint(this, active);
     }
 };
 struct N2066_ControllerFallback
@@ -10659,7 +10663,7 @@ void ProcessControllerList(WalkNode_cls* node)
                                 controller->HandleControllerData(owner ? owner->manager : 0);
                             }
                             if (controller->link->IsActive())
-                                FUN_0095af90(controller->link, controller->link->active);
+                                hkpResponseModifier_enableConstraint(controller->link, controller->link->active);
                             break;
                         case 8: {
                             N2066_ControllerLink* link = controller->GetLink();
@@ -12555,11 +12559,11 @@ struct Owner89730
     virtual void slot43();
     virtual void slot44();
     virtual Data89730Base* GetData(bool* pbTemporary);
-    void FUN_00c87600(void* pkDestination, Process89730* pkProcess);
+    void bhkSerializable_CopyMembers(void* pkDestination, Process89730* pkProcess);
     void FUN_00c89730(void* pkDestination, Process89730* pkProcess);
 };
 
-// Scales the data from GetData if pkProcess->m_fScale is not 1, re-links its two object pointers via the process map or Clone, then calls FUN_00c87600.
+// Scales the data from GetData if pkProcess->m_fScale is not 1, re-links its two object pointers via the process map or Clone, then calls bhkSerializable_CopyMembers.
 // @fnv 0x00c89730
 void Owner89730::FUN_00c89730(void* pkDestination, Process89730* pkProcess)
 {
@@ -12586,7 +12590,7 @@ void Owner89730::FUN_00c89730(void* pkDestination, Process89730* pkProcess)
             pkData->m_pkSecond = pkSecondClone ? pkSecondClone->object : 0;
         }
     }
-    FUN_00c87600(pkDestination, pkProcess);
+    bhkSerializable_CopyMembers(pkDestination, pkProcess);
 }
 
 struct FUN_00d53200_class
@@ -12600,7 +12604,7 @@ struct FUN_00d53200_class
     int unk08;
     void FUN_00c8a230(NiStream& kStream);
 };
-// Calls FUN_00a64670 on kStream, calls vfn10, then calls ReadBinaryValue(&kStream, unk08).
+// Calls NiStream_ReadMultipleLinkIDs on kStream, calls vfn10, then calls ReadBinaryValue(&kStream, unk08).
 // @f3 0x008fc580 (community match, verified in this file)
 struct W30FileCtx
 {
@@ -15478,7 +15482,7 @@ struct LoadStreamLocal
     int unkd8;
     int unkdc;
     char filename;
-    unsigned int FUN_00a63460();
+    unsigned int NiStream_GetNumberOfLinkIDs();
     ShapeLocal* FUN_00a63430();
 };
 struct ListLocal
@@ -15590,7 +15594,7 @@ void LoaderLocal::LoadShapes(LoadStreamLocal* stream)
 {
     bool shared;
     ListLocal* list = GetList(&shared);
-    unsigned int count = stream->FUN_00a63460();
+    unsigned int count = stream->NiStream_GetNumberOfLinkIDs();
     if (list)
     {
         ClearAndDeallocateLoadF3(list->items);
@@ -16673,7 +16677,7 @@ struct Y577F3
 };
 struct A577F3
 {
-    Y577F3* __thiscall FUN_0090cdf0();
+    Y577F3* __thiscall hkpRigidBody_getStoredDynamicMotion();
     int unk000;
     int unk004;
     int unk008;
@@ -16781,7 +16785,7 @@ float __thiscall S_00c8cd20_object::GetFloatValue()
     if (this && this->unk08)
     {
         A577F3* owner = (A577F3*)this->unk08;
-        Y577F3* result = owner->FUN_0090cdf0();
+        Y577F3* result = owner->hkpRigidBody_getStoredDynamicMotion();
         Z577F3* z;
         Z577F3 local_z;
         if (result)

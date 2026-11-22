@@ -376,7 +376,7 @@ extern "C"
 struct UnkCall
 {
     void FUN_00c9c1d0();
-    void FUN_00ca8860(const hkVector4& pos, const hkQuaternion& rot);
+    void hkpRigidBody_setPositionAndRotation(const hkVector4& pos, const hkQuaternion& rot);
 };
 
 struct hkpMotion

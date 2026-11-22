@@ -8,7 +8,8 @@ struct hkpCollisionDispatcher
 };
 
 // @f3 0x009d45d0 (community match, verified in this file)
-void FUN_00d46410(hkpCollisionDispatcher* dispatcher)
+// pdb: hkRegisterAlternateShapeTypes | hkpShapeType.obj | fnv360_0822_retail, objrun_prop + bridge(call_gap|objrun_prop) + skyrim(call_gap_sim), high
+void hkRegisterAlternateShapeTypes(hkpCollisionDispatcher* dispatcher)
 {
     dispatcher->FUN_00cfbf60(2, 1);
     dispatcher->FUN_00cfbf60(4, 1);

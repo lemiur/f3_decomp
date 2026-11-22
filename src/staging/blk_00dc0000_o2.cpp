@@ -91,7 +91,7 @@ template <class K> struct KeyMarker
 {
 };
 
-extern "C" void __cdecl FUN_00d51760(int* p1, int* p2);
+extern "C" void __cdecl hkpConstraintConstructionKit_computeConstraintInfo(int* p1, int* p2);
 struct FUN_00dd0420_Class
 {
     int m_00;
@@ -104,7 +104,7 @@ struct FUN_00dd0420_Class
     int m_1c;
     FUN_00dd0420_Class* __thiscall FUN_00dd0420(int arg);
 };
-// If arg is nonzero, zeroes m_00/m_08/m_0c, sets m_04 to 0x10, calls FUN_00d51760 on m_1c and this, then sets m_00 to m_04; returns this.
+// If arg is nonzero, zeroes m_00/m_08/m_0c, sets m_04 to 0x10, calls hkpConstraintConstructionKit_computeConstraintInfo on m_1c and this, then sets m_00 to m_04; returns this.
 // @fnv 0x00dd0420
 FUN_00dd0420_Class* __thiscall FUN_00dd0420_Class::FUN_00dd0420(int aiFlag)
 {
@@ -114,7 +114,7 @@ FUN_00dd0420_Class* __thiscall FUN_00dd0420_Class::FUN_00dd0420(int aiFlag)
         m_08 = 0;
         m_0c = 0;
         m_04 = 0x10;
-        FUN_00d51760(&m_1c, (int*)this);
+        hkpConstraintConstructionKit_computeConstraintInfo(&m_1c, (int*)this);
         m_00 = m_04;
     }
     return this;
@@ -122,10 +122,11 @@ FUN_00dd0420_Class* __thiscall FUN_00dd0420_Class::FUN_00dd0420(int aiFlag)
 
 struct FUN_00dd4b70_class
 {
-    void __thiscall FUN_00dd4b70(unsigned char value);
+    void __thiscall hkpMoppCompiler_enableInterleavedBuilding(unsigned char value);
 };
 // @fnv 0x00dd4b70
-void __thiscall FUN_00dd4b70_class::FUN_00dd4b70(unsigned char value)
+// pdb: hkpMoppCompiler::enableInterleavedBuilding | hkpMoppCompiler.obj | fnv360_0822_retail, objrun + skyrim(objrun), high
+void __thiscall FUN_00dd4b70_class::hkpMoppCompiler_enableInterleavedBuilding(unsigned char value)
 {
     *(unsigned char*)(this + 0x1c) = value;
     *(unsigned char*)(this + 0x64) = value;
@@ -1008,7 +1009,8 @@ extern "C" void ReadIniLine(void);
 
 // Stand-in for the unit's integer parser: its body is not this function's code, it only makes
 // the compiler reproduce the original custom convention (stream on the stack, sign flag in eax).
-static __declspec(noinline) unsigned short FUN_00dcc240(IniTokenStream* stream, unsigned char* negative)
+// pdb: readInteger64 | hkIStream.obj | fnv360_0822_retail, caller_sim + skyrim(caller_sim), high
+static __declspec(noinline) unsigned short readInteger64(IniTokenStream* stream, unsigned char* negative)
 {
     *negative = 0;
     ReadIniLine();
@@ -1019,7 +1021,7 @@ static __declspec(noinline) unsigned short FUN_00dcc240(IniTokenStream* stream, 
 S_00dcc740_Cls* S_00dcc740_Cls::ReadSignedShort(unsigned short* out)
 {
     unsigned char flag;
-    short r = (short)FUN_00dcc240((IniTokenStream*)m_08, &flag);
+    short r = (short)readInteger64((IniTokenStream*)m_08, &flag);
     *out = flag != 0 ? (unsigned short)(-r) : (unsigned short)r;
     return this;
 }
@@ -1072,19 +1074,20 @@ struct S_00dcc790_Class
 
 extern "C" void __cdecl SkipWhitespace(void);
 
-static __declspec(noinline) unsigned short FUN_00dcc240(unsigned char* ok, S_00dcc240_Reader* reader)
+// pdb: readInteger64 | hkIStream.obj | fnv360_0822_retail, caller_sim + skyrim(caller_sim), high
+static __declspec(noinline) unsigned short readInteger64(unsigned char* ok, S_00dcc240_Reader* reader)
 {
     *ok = 0;
     SkipWhitespace();
     return reader->unk08;
 }
 
-// Reads a 16-bit value via FUN_00dcc240 and stores it negated into result when ok is set, otherwise as-is; returns this.
+// Reads a 16-bit value via readInteger64 and stores it negated into result when ok is set, otherwise as-is; returns this.
 // @fnv 0x00dcc790
 S_00dcc790_Class* __thiscall S_00dcc790_Class::ReadSignedValue(unsigned short* result)
 {
     unsigned char ok;
-    unsigned short value = FUN_00dcc240(&ok, m_08);
+    unsigned short value = readInteger64(&ok, m_08);
 
     *result = ok ? (unsigned short)-(int)value : value;
     return this;
@@ -1355,7 +1358,7 @@ FUN_00dcc5c0_cls* __thiscall FUN_00dcc5c0_cls::GetFloatValue(float* out)
     return this;
 }
 
-// ReadSignedInt: thiscall member returning this; parses an int through FUN_00dcc240
+// ReadSignedInt: thiscall member returning this; parses an int through readInteger64
 // (per-TU private convention: stream on the stack, sign-flag address in EAX),
 // negates it when the flag byte is set, and stores it through the int* argument.
 struct S_00dcc7e0_Stream
@@ -1368,7 +1371,8 @@ extern "C" void ReadIniLine(void);
 // Stand-in for the unit's integer parser (int flavour): its body is not this
 // function's code, it only makes the compiler reproduce the original custom
 // convention (stream on the stack, sign flag in eax).
-static __declspec(noinline) int FUN_00dcc240(S_00dcc7e0_Stream* stream, unsigned char* negative)
+// pdb: readInteger64 | hkIStream.obj | fnv360_0822_retail, caller_sim + skyrim(caller_sim), high
+static __declspec(noinline) int readInteger64(S_00dcc7e0_Stream* stream, unsigned char* negative)
 {
     *negative = 0;
     ReadIniLine();
@@ -1384,12 +1388,12 @@ struct FUN_00dcc7e0_Class
     FUN_00dcc7e0_Class* __thiscall ReadSignedInt(int* out);
 };
 
-// Reads a signed integer from the stream at m_08 via FUN_00dcc240, applies the sign flag, stores the result in out, and returns this.
+// Reads a signed integer from the stream at m_08 via readInteger64, applies the sign flag, stores the result in out, and returns this.
 // @fnv 0x00dcc7e0
 FUN_00dcc7e0_Class* FUN_00dcc7e0_Class::ReadSignedInt(int* out)
 {
     unsigned char flag;
-    int value = FUN_00dcc240((S_00dcc7e0_Stream*)m_08, &flag);
+    int value = readInteger64((S_00dcc7e0_Stream*)m_08, &flag);
     *out = flag != 0 ? -value : value;
     return this;
 }

@@ -460,7 +460,7 @@ class RefCountedObj
     }
 };
 
-void FUN_00a3d630(int, int, int, int, float, float, unsigned int*, unsigned int*);
+void NiAnimationKey_CopySequence(int, int, int, int, float, float, unsigned int*, unsigned int*);
 
 class FUN_00a49140_cls
 {
@@ -471,7 +471,7 @@ class FUN_00a49140_cls
     RefCountedObj* m_0C;
     int m_10;
 
-    void FUN_00a5d510(RefCountedObj** out);
+    void NiObject_CreateDeepCopy(RefCountedObj** out);
     void FUN_00a49140(float a1, float a2, RefCountedObj** out);
 };
 
@@ -482,7 +482,7 @@ void FUN_00a49140_cls::FUN_00a49140(float a1, float a2, RefCountedObj** apObj)
     unsigned int uiOut2;
     unsigned int uiOut1;
     tmp = 0;
-    FUN_00a5d510(&tmp);
+    NiObject_CreateDeepCopy(&tmp);
     RefCountedObj* p = tmp;
     if (p != 0)
     {
@@ -492,7 +492,7 @@ void FUN_00a49140_cls::FUN_00a49140(float a1, float a2, RefCountedObj** apObj)
     {
         uiOut1 = 0;
         uiOut2 = 0;
-        FUN_00a3d630(1, m_10, (int)m_0C, (int)m_08, a1, a2, &uiOut1, &uiOut2);
+        NiAnimationKey_CopySequence(1, m_10, (int)m_0C, (int)m_08, a1, a2, &uiOut1, &uiOut2);
         p->FUN_00a490e0(uiOut1, uiOut2, m_10);
     }
     RefCountedObj* old = *apObj;

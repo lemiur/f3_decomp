@@ -21,8 +21,9 @@ void C_00b60430::FUN_00b60430(int a, bool b, bool c)
 
 struct Ob_00b618e0 { void FUN_00b2c0b0(int, int, int, int, int, int, int, int); };
 struct P_00b618e0 { char pad[0x1a0]; int f1a0; };
-struct C_00b618e0 { char pad[0x40]; Ob_00b618e0* o; void FUN_00b618e0(int, bool, bool, P_00b618e0*); };
-void C_00b618e0::FUN_00b618e0(int a, bool b, bool c, P_00b618e0* p)
+struct C_00b618e0 { char pad[0x40]; Ob_00b618e0* o; void BSShaderPPLightingProperty_AddDepthMapPass_2x(int, bool, bool, P_00b618e0*); };
+// pdb: BSShaderPPLightingProperty::AddDepthMapPass_2x | BSShaderPPLightingProperty_Passes_2x.obj | fnv360_0822_retail, objrun + bridge(hash|call_gap), high
+void C_00b618e0::BSShaderPPLightingProperty_AddDepthMapPass_2x(int a, bool b, bool c, P_00b618e0* p)
 {
     int v = p->f1a0;
     if (!b) {

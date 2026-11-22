@@ -551,7 +551,8 @@ int __cdecl FUN_00a559f0(const weld_a55e90::Vec4* triangle, const weld_a55e90::V
 unsigned int __cdecl FUN_00ddcdd0(unsigned int bitcode, unsigned int edgeIndex, unsigned int value);
 int __cdecl GetIndexForValue(int value);
 
-weld_a55e90::hkBool __cdecl FUN_00a55e90(const weld_a55e90::BvTree* bvTree, const weld_a55e90::TriShape* triangle,
+// pdb: hkpMeshWeldingUtility::calcBitcodeForTriangleEdge | hkpMeshWeldingUtility.obj | fnv360_0822_retail, call_seq + skyrim(call_seq), high
+weld_a55e90::hkBool __cdecl hkpMeshWeldingUtility_calcBitcodeForTriangleEdge(const weld_a55e90::BvTree* bvTree, const weld_a55e90::TriShape* triangle,
                                           unsigned int key, int edgeIndex, unsigned short& bitcode,
                                           bool testConsistency)
 {

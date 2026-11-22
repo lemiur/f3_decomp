@@ -9,7 +9,8 @@ struct P03MM
 extern P03MM g_memoryManager;
 
 // @fnv 0x00aa3370
-void __stdcall FUN_00aa3370(void* apBlock, int e, unsigned int s)
+// pdb: NiStandardAllocator::DeallocateExternal | NiStandardAllocator.obj | fnv360_0822_retail, objrun_open + bridge(vtable|objopen_prop) + skyrim(vtable), high
+void __stdcall NiStandardAllocator_DeallocateExternal(void* apBlock, int e, unsigned int s)
 {
     if (apBlock)
     {
@@ -483,7 +484,8 @@ struct MMHeap
 
 // Allocates and zeroes a block, applying the requested alignment when iType is 0xd.
 // @fnv 0x00aa3300
-void* __stdcall FUN_00aa3300(unsigned int puiSize, unsigned char* pucAlign, int iType, int iUnk, int iUnkCur,
+// pdb: NiStandardAllocator::AllocateExternal | NiStandardAllocator.obj | fnv360_0822_retail, objrun_open + bridge(vtable|objrun_open) + skyrim(vtable), high
+void* __stdcall NiStandardAllocator_AllocateExternal(unsigned int puiSize, unsigned char* pucAlign, int iType, int iUnk, int iUnkCur,
                              int iUnkValue, int iNewUnk)
 {
     MMHeap* pkHeap = (MMHeap*)&_g_memoryManager;

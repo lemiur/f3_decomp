@@ -17,7 +17,8 @@ extern int DAT_011f5e40;
 
 // Allocates a 0x14-byte BSFadeNode, runs its constructor, and stores the resulting pointer in DAT_011f5e40 (or 0 if allocation fails).
 // @fnv 0x00a8fd80
-void __cdecl FUN_00a8fd80()
+// pdb: NiSingleShaderMaterialLibrary::_SDMInit | NiSingleShaderMaterialLibrary.obj | fnv360_0822_retail, udata + bridge(hash|call_dedup), high
+void __cdecl NiSingleShaderMaterialLibrary__SDMInit()
 {
     void* p = BSFadeNode::operator new(0x14);
     if (p)

@@ -9,7 +9,7 @@ void __cdecl FUN_00d365d0();
 extern "C" void __cdecl FUN_00d36b70();
 extern "C" void __cdecl QueryClosestPoints();
 extern "C" void __cdecl GetClosestPointsShapeCollection();
-void __cdecl FUN_00d36c30(void* apObject);
+void __cdecl hkpListAgent_initAgentFunc(void* apObject);
 void CreateRetObj();
 void FUN_00d3d3e0();
 void FUN_00d3d8c0();
@@ -32,7 +32,7 @@ struct Agent {
 void __cdecl FUN_00d2e970();
 void __cdecl FUN_00d2e9b0();
 void __cdecl FUN_00d2daf0();
-void __cdecl FUN_00d312f0();
+void __cdecl hkpBvTreeAgent_staticGetPenetrations();
 void __cdecl FUN_00d31110();
 void __cdecl FUN_00d2f0d0();
 void __cdecl CreateAgentForBodyPair();
@@ -116,7 +116,7 @@ typedef void (__cdecl *D2F2C0Func)();
 void __cdecl FUN_00d2e970();
 void __cdecl FUN_00d2e9b0();
 void __cdecl FUN_00d2daf0();
-void __cdecl FUN_00d312f0();
+void __cdecl hkpBvTreeAgent_staticGetPenetrations();
 void __cdecl FUN_00d31110();
 void __cdecl FUN_00d2f0d0();
 void __cdecl CreateAgentForBodyPair();
@@ -286,7 +286,7 @@ public:
 
     FUN_00d496d0* FUN_00d262e0(unsigned int uiFlags) throw();
 };
-void FUN_00da3510(void*, void*);
+void hkAgent1nMachine_InvalidateTim(void*, void*);
 extern unsigned char DAT_011b4284;
 extern unsigned char DAT_011b4284;
 extern float DAT_0104da48;
@@ -721,7 +721,7 @@ struct Point {
         hkVector4::setNeg4(m_vHitNormal, m_vHitNormal, DAT_010c4c00);
     }
 };
-extern "C" void __cdecl FUN_00da3510(int, int);
+extern "C" void __cdecl hkAgent1nMachine_InvalidateTim(int, int);
 struct D36B70_Heap
 {
     virtual void v0();
@@ -958,7 +958,7 @@ static __forceinline int maxSize(int minimum, int value) {
     return value <= minimum ? minimum : value;
 }
 int FUN_00d365d0(A1Rec* a1, int a2, int a3, int a4, int a5);
-__declspec(noinline) void __cdecl FUN_00d36c30(void* apObject);
+__declspec(noinline) void __cdecl hkpListAgent_initAgentFunc(void* apObject);
 
 #include <xmmintrin.h>
 
@@ -1593,7 +1593,7 @@ enum ClosestPointTriangleStatus
 void __cdecl FUN_0096fbc0(const hkVector4* tri, ClosestPointTriangleCache& cache);
 
 // closestPointTriangle
-ClosestPointTriangleStatus __cdecl FUN_00970580(const hkVector4& position, const hkVector4* tri,
+ClosestPointTriangleStatus __cdecl hkpCollideTriangleUtil_closestPointTriangle(const hkVector4& position, const hkVector4* tri,
                                                 const ClosestPointTriangleCache& cache,
                                                 ClosestPointTriangleResult& result);
 }  // namespace hkpCollideTriangleUtil
@@ -1641,7 +1641,7 @@ __forceinline hkpSphereTriangleAgent::ClosestPointResult hkpSphereTriangleAgent:
 
     hkpCollideTriangleUtil::ClosestPointTriangleResult cptr;
     hkpCollideTriangleUtil::ClosestPointTriangleStatus res =
-        hkpCollideTriangleUtil::FUN_00970580(posA, &triVertices[0], cache, cptr);
+        hkpCollideTriangleUtil::hkpCollideTriangleUtil_closestPointTriangle(posA, &triVertices[0], cache, cptr);
 
     const hkReal radiusSum = sphereA->getRadius() + triB->getRadius();
 

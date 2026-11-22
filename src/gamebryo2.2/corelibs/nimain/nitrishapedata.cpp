@@ -260,7 +260,7 @@ struct NiTexture;
 struct NiThread;
 struct FUN_00a7bbe0_shell : public NiTriShapeData
 {
-    void FUN_00a7bbe0(NiStream*);
+    void NiTriShapeData_SaveBinary(NiStream*);
 };
 
 struct BinStreamS
@@ -300,7 +300,8 @@ struct SharedNormalArrayS
 
 // Saves the triangle list length, its presence flag and data, then the shared-normal array sizes and entries to the stream.
 // @fnv 0x00a7bbe0
-void FUN_00a7bbe0_shell::FUN_00a7bbe0(NiStream* kStream)
+// pdb: NiTriShapeData::SaveBinary | NiTriShapeData.obj | fnv360_0822_retail, call_seq + bridge(vtable|call_seq) + skyrim(objopen_prop), high
+void FUN_00a7bbe0_shell::NiTriShapeData_SaveBinary(NiStream* kStream)
 {
     char* p = (char*)this;
     NiTriBasedGeomData::SaveBinary(*kStream);
@@ -336,7 +337,7 @@ struct NiTexture;
 struct NiThread;
 struct FUN_00a7b940_shell : public NiTriShapeData
 {
-    void FUN_00a7b940(NiStream*);
+    void NiTriShapeData_LoadBinary(NiStream*);
 };
 
 void* NiMalloc(unsigned int) throw();
@@ -429,7 +430,8 @@ template <class T> inline void ReadBinaryValue(NiBinaryStreamView& kStream, T* p
 
 // Loads triangle data from the stream: reads a count, an optional list flag, the index array, and per-element arrays allocated from a shared block pool.
 // @fnv 0x00a7b940
-void FUN_00a7b940_shell::FUN_00a7b940(NiStream* kStream)
+// pdb: NiTriShapeData::LoadBinary | NiTriShapeData.obj | fnv360_0721_beta, call_seq + bridge(vtable|objrun) + skyrim(objopen_prop), high
+void FUN_00a7b940_shell::NiTriShapeData_LoadBinary(NiStream* kStream)
 {
 
     ((NiTriBasedGeomData*)this)->LoadBinary(*(::NiStream*)kStream);

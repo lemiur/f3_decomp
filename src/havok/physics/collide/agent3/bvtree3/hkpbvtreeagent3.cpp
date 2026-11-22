@@ -7,11 +7,11 @@ void __fastcall CallWithValueSource(void* self, int, int, int);
 void __fastcall FUN_00d2d430(void* self, int, int, int);
 void __fastcall FUN_00d2d480(void* self, int, int, int);
 
-extern "C" void __cdecl FUN_00da35f0(void*, float, float, int);
+extern "C" void __cdecl hkAgent1nMachine_WarpTime(void*, float, float, int);
 // @fnv 0x00d2d480
 void __cdecl FUN_00d2d480(void*, void* target, float first, float second, int flags)
 {
-    FUN_00da35f0(target, first, second, flags);
+    hkAgent1nMachine_WarpTime(target, first, second, flags);
 }
 
 struct LessU32
@@ -79,7 +79,7 @@ struct CallBuf
     int unk1c;
 };
 
-// Calls f4 on the ValueSource, fills a CallBuf with the arguments and result, then passes it to FUN_00da48e0 with p2.
+// Calls f4 on the ValueSource, fills a CallBuf with the arguments and result, then passes it to hkAgent1nMachine_UpdateShapeCollectionFilter with p2.
 // @f3 0x009b4bd0 (community match, verified in this file)
 struct SourceDispatch {
     void* unk00;

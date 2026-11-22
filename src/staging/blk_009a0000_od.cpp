@@ -1575,7 +1575,7 @@ class TESChildCell
 };
 }
 
-namespace FUN_009bbc70 {
+namespace hkpHeightFieldAgent_createHeightFieldAAgent {
 class Projectile : public FUN_004f15a0::TESForm, public hk9AAF::TESChildCell
 {
   public:
@@ -1592,7 +1592,7 @@ class Projectile : public FUN_004f15a0::TESForm, public hk9AAF::TESChildCell
 }
 
 namespace FUN_009aaff0 {
-class ContinuousBeamProjectile : public FUN_009bbc70::Projectile
+class ContinuousBeamProjectile : public hkpHeightFieldAgent_createHeightFieldAAgent::Projectile
 {
   public:
     ContinuousBeamProjectile(bool bTempRef);
@@ -1961,7 +1961,7 @@ struct HitWeapon
     int unk94;
     int unk98;
     HitClip clip;
-    HitAmmo* FUN_00525980(HitActor*);
+    HitAmmo* Script_IsInListFunction(HitActor*);
     bool FUN_006450c0();
     int FUN_00446390();
     unsigned char FUN_00525b20(int, int, HitActor*);

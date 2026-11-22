@@ -21,20 +21,21 @@ bool NiBlendTransformInterpolator::Update(float fTime, NiObjectNET* pkObject, Ni
 
 struct FUN_00a40a40_shell : public NiBlendTransformInterpolator
 {
-    void* FUN_00a40a40();
+    void* BSSplatterExtraData_GetRTTI();
 };
 
 extern "C" const NiRTTI* g_011f3e64;
 
 // @fnv 0x00a40a40
-void* FUN_00a40a40_shell::FUN_00a40a40()
+// pdb: BSSplatterExtraData::GetRTTI | ScreenSplatter.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(udata), high
+void* FUN_00a40a40_shell::BSSplatterExtraData_GetRTTI()
 {
     return &g_011f3e64;
 }
 
 struct FUN_00a40a20_shell : public NiBlendTransformInterpolator
 {
-    bool FUN_00a40a20(NiObject*);
+    bool BSDismemberSkinInstance_RegisterStreamables(NiObject*);
 };
 
 struct FUN_00a36fd0_tgt
@@ -43,7 +44,8 @@ struct FUN_00a36fd0_tgt
 };
 
 // @fnv 0x00a40a20
-bool FUN_00a40a20_shell::FUN_00a40a20(NiObject* pkObject)
+// pdb: BSDismemberSkinInstance::RegisterStreamables | BSDismemberSkinInstance.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(caller_sim), high
+bool FUN_00a40a20_shell::BSDismemberSkinInstance_RegisterStreamables(NiObject* pkObject)
 {
     return ((FUN_00a36fd0_tgt*)this)->FUN_00a36fd0(pkObject);
 }

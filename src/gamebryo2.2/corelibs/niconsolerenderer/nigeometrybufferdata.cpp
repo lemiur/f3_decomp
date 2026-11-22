@@ -206,12 +206,13 @@ class NiSlotSetE8E
     unsigned int* m_puiFlags;
     void** m_ppvSlots;
 
-    void FUN_00e8ef10(unsigned int uiNewSize);
+    void NiGeometryBufferData_SetStreamCount(unsigned int uiNewSize);
 };
 
 // Resizes the slot and flag arrays to uiNewSize, copying existing entries, zeroing new ones, notifying the listener of removed slots, and freeing the old arrays.
 // @fnv 0x00e8ef10
-void NiSlotSetE8E::FUN_00e8ef10(unsigned int uiNewSize)
+// pdb: NiGeometryBufferData::SetStreamCount | NiGeometryBufferData.obj | fnv360_0822_retail, call_gap_sim + bridge(call_seq|objrun_prop) + skyrim(call_seq), high
+void NiSlotSetE8E::NiGeometryBufferData_SetStreamCount(unsigned int uiNewSize)
 {
     if (uiNewSize == m_uiSize)
         return;

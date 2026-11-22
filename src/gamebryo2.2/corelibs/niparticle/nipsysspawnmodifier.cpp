@@ -292,12 +292,13 @@ template <class T> __forceinline void StreamSaveBinary(SaveStream& stream, const
 struct SpawnModifier : NiPSysSpawnModifier
 {
     void __thiscall FUN_00c31950(SaveStream& stream);
-    void __thiscall FUN_00c24920(SaveStream& stream);
+    void __thiscall NiPSysSpawnModifier_SaveBinary(SaveStream& stream);
 };
 
 // Saves the SpawnModifier fields to the stream after calling the base class save routine.
 // @fnv 0x00c24920
-void SpawnModifier::FUN_00c24920(SaveStream& stream)
+// pdb: NiPSysSpawnModifier::SaveBinary | NiPSysSpawnModifier.obj | fnv360_0822_retail, caller_sim + bridge(vtable|objrun_prop) + skyrim(caller_sim), high
+void SpawnModifier::NiPSysSpawnModifier_SaveBinary(SaveStream& stream)
 {
     FUN_00c31950(stream);
     StreamSaveBinary(stream, m_usSpawnGenerationCount);

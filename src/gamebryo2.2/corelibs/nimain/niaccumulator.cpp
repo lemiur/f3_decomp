@@ -4,7 +4,8 @@
 extern char const* const g_011f6058_arg1;
 
 // @fnv 0x00aa0b00
-char const* const* __cdecl FUN_00aa0b00()
+// pdb: NiFloatsExtraData::GetRTTI | NiFloatsExtraData.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+char const* const* __cdecl NiFloatsExtraData_GetRTTI()
 {
     return &g_011f6058_arg1;
 }

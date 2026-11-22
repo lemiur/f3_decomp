@@ -1875,7 +1875,8 @@ static __forceinline void createAndAppendNewTask( const hkpBuildJacobianTaskHead
 		prevSolveTask = solveTask;
 	}
 }
-static void FUN_00a240d0(SceneIsland* islandArg, FlagByte forceCoherentConstraintOrderingInSolver, JobHeader* headerArg, BuildCollection* buildsArg, SolveCollection* solvesArg)
+// pdb: createBuildJacobianAndSolveJacobianTaskCollection | hkpCpuIntegrateJob.obj | fnv360_0822_retail, ustr + bridge(ustr|ustr) + skyrim(ustr), high
+static void createBuildJacobianAndSolveJacobianTaskCollection(SceneIsland* islandArg, FlagByte forceCoherentConstraintOrderingInSolver, JobHeader* headerArg, BuildCollection* buildsArg, SolveCollection* solvesArg)
 {
 	hkpSimulationIsland*const island = reinterpret_cast<hkpSimulationIsland*>(islandArg);
 	hkpBuildJacobianTaskHeader*const taskHeader = reinterpret_cast<hkpBuildJacobianTaskHeader*>(headerArg);
@@ -2061,7 +2062,7 @@ void hkCpuIntegrateJobCaller( SceneIsland* island, JobHeader* taskHeader, FlagBy
     hkpBuildJacobianTaskHeader* header = reinterpret_cast<hkpBuildJacobianTaskHeader*>(taskHeader);
     hkpBuildJacobianTaskCollection outBuildCollection = { 0 };
     hkpSolveJacobiansTaskCollection outSolveCollection = { 0 };
-    FUN_00a240d0( island, coherent, taskHeader, reinterpret_cast<BuildCollection*>(&outBuildCollection), reinterpret_cast<SolveCollection*>(&outSolveCollection) );
+    createBuildJacobianAndSolveJacobianTaskCollection( island, coherent, taskHeader, reinterpret_cast<BuildCollection*>(&outBuildCollection), reinterpret_cast<SolveCollection*>(&outSolveCollection) );
     header->m_tasks = outBuildCollection;
     header->m_solveTasks = outSolveCollection;
 }

@@ -68,8 +68,9 @@ void* C_00ae8a10::FUN_00ae8a10(unsigned f)
 
 extern int DAT_0116efb0;
 
-struct S_00afb500 { void** vt; void FUN_00b6d010(); void FUN_00b64220(); void FUN_00b65960(); void FUN_00b693a0(); void FUN_00b69860(); void FUN_00b69ec0(); void FUN_00b6a8f0(); void FUN_00b6af40(); void FUN_00b6b8c0(); void FUN_00b6cc10(); void FUN_00b78590(); void FUN_00b6dcc0(); void FUN_00b72650(); void FUN_00b7ae40(); void FUN_00b7b590(); void FUN_00b7de40(); void FUN_00b7e740(); void FUN_00b82f60(); void FUN_00b83700(); void FUN_00b83b60(); void FUN_00b83ea0(); void FUN_00b82b20(); void FUN_00b84280(); void FUN_00b6bfe0(); void FUN_00afb500(); };
-void S_00afb500::FUN_00afb500()
+struct S_00afb500 { void** vt; void FUN_00b6d010(); void FUN_00b64220(); void FUN_00b65960(); void FUN_00b693a0(); void FUN_00b69860(); void FUN_00b69ec0(); void FUN_00b6a8f0(); void FUN_00b6af40(); void FUN_00b6b8c0(); void FUN_00b6cc10(); void FUN_00b78590(); void FUN_00b6dcc0(); void FUN_00b72650(); void FUN_00b7ae40(); void FUN_00b7b590(); void FUN_00b7de40(); void FUN_00b7e740(); void FUN_00b82f60(); void FUN_00b83700(); void FUN_00b83b60(); void FUN_00b83ea0(); void FUN_00b82b20(); void FUN_00b84280(); void FUN_00b6bfe0(); void ShadowLightShader_ReloadShaders(); };
+// pdb: ShadowLightShader::ReloadShaders | ShadowLightShader.obj | fnv360_0822_retail, objrun + bridge(hash|objrun_prop), high
+void S_00afb500::ShadowLightShader_ReloadShaders()
 {
     ((void (__thiscall *)(void*))vt[0x144 / 4])(this);
     FUN_00b6d010();

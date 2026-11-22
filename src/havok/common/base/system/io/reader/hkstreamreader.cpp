@@ -49,10 +49,11 @@ int Stream::ReadChar()
 
 struct S_00cb1570
 {
-    int FUN_00cb1570(void* pArg);
+    int hkEntitySelectorAll_isEntityOk(void* pArg);
 };
 // @fnv 0x00cb1570
-int S_00cb1570::FUN_00cb1570(void* pArg)
+// pdb: `anonymous namespace'::hkEntitySelectorAll::isEntityOk | hkpSaveContactPointsUtil.obj | fnv360_0721_beta, vtable + skyrim(vtable), high
+int S_00cb1570::hkEntitySelectorAll_isEntityOk(void* pArg)
 {
     return 1;
 }
@@ -64,7 +65,8 @@ int __cdecl FUN_00cb1580()
 }
 
 // @fnv 0x00cb15c0
-void __stdcall FUN_00cb15c0(char* p)
+// pdb: hkStreamReader::markSupported | hkStreamReader.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void __stdcall hkStreamReader_markSupported(char* p)
 {
     *p = 0;
 }
@@ -92,11 +94,12 @@ struct CB15B0Bool
 
 struct CB15B0Object
 {
-    virtual CB15B0Bool FUN_00cb15b0() const;
+    virtual CB15B0Bool hkStreamWriter_seekTellSupported() const;
 };
 
 // @fnv 0x00cb15b0
-CB15B0Bool CB15B0Object::FUN_00cb15b0() const
+// pdb: hkStreamWriter::seekTellSupported | hkStreamWriter.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+CB15B0Bool CB15B0Object::hkStreamWriter_seekTellSupported() const
 {
     return false;
 }

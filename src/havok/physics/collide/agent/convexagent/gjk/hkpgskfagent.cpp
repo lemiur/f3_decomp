@@ -233,7 +233,7 @@ struct Drecv
     int unk2c;
     int f30;
 
-    void FUN_00daccd0(Dsrc* a1, Dsrc* a2, Dsrc* a3, int a4);
+    void hkpGskfAgent_processCollisionNoTim(Dsrc* a1, Dsrc* a2, Dsrc* a3, int a4);
 };
 
 void ProcessCollision(Dtask* task, int* ctx1, int* ctx2, int* node, int* a5, int* a6, int a7);
@@ -249,7 +249,8 @@ struct Drecv_task
     Dsub sub;
 };
 
-void Drecv::FUN_00daccd0(Dsrc* a1, Dsrc* a2, Dsrc* a3, int a4)
+// pdb: hkpGskfAgent::processCollisionNoTim | hkpGskfAgent.obj | fnv360_0822_retail, call_seq + bridge(call_seq|caller_sim) + skyrim(call_seq), high
+void Drecv::hkpGskfAgent_processCollisionNoTim(Dsrc* a1, Dsrc* a2, Dsrc* a3, int a4)
 {
     Dctx ctx;
     Drecv_task res;

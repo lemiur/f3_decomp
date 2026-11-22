@@ -201,7 +201,7 @@ struct RefNode
         next = 0;
     }
 };
-// FUN_00c81570 : a one-line function - getter
+// bhkWorld_GetRTTI : a one-line function - getter
 class C815B0Base
 {
   public:
@@ -6447,7 +6447,7 @@ struct __declspec(align(16)) Vec4F3
         w = v.w;
     }
 
-    void FUN_008d28e0(const struct MatF3* matrix, const Vec4F3* point);
+    void hkVector4_setTransformedPos(const struct MatF3* matrix, const Vec4F3* point);
 };
 
 struct MatF3
@@ -6455,7 +6455,8 @@ struct MatF3
     Vec4F3 r0, r1, r2, r3;
 };
 
-__declspec(noinline) void Vec4F3::FUN_008d28e0(const MatF3* m,const Vec4F3* p) {
+// pdb: hkVector4::setTransformedPos | hkVector4.obj | fnv360_0822_retail, call_seq + bridge(call_dedup|call_gap_sim) + skyrim(call_seq), high
+__declspec(noinline) void Vec4F3::hkVector4_setTransformedPos(const MatF3* m,const Vec4F3* p) {
  float px=p->x,py=p->y,pz=p->z;
  x=m->r0.x*px+m->r1.x*py+m->r2.x*pz+m->r3.x;
  y=m->r0.y*px+m->r1.y*py+m->r2.y*pz+m->r3.y;
@@ -6907,7 +6908,7 @@ struct WrapperF3
 };
 
 WrapperF3* __cdecl FUN_00424fe0(SceneObjectLocal*);
-void __cdecl FUN_0095aec0(DirectF3*, void*);
+void __cdecl hkpResponseModifier_disableConstraint(DirectF3*, void*);
 
 static __forceinline EndpointF3* getFirst(GraphicsF3* p)
 {
@@ -6997,8 +6998,8 @@ void __cdecl FUN_00c80ce0(SceneObjectLocal* owner, int notification)
             first->GetMatrix(&firstMatrix);
             second->GetMatrix(&secondMatrix);
             Vec4F3 transformedFirst, transformedSecond;
-            transformedFirst.FUN_008d28e0(&firstMatrix, &pos);
-            transformedSecond.FUN_008d28e0(&secondMatrix, &rot);
+            transformedFirst.hkVector4_setTransformedPos(&firstMatrix, &pos);
+            transformedSecond.hkVector4_setTransformedPos(&secondMatrix, &rot);
             transformedFirst.x = transformedFirst.x - transformedSecond.x;
             transformedFirst.y = transformedFirst.y - transformedSecond.y;
             transformedFirst.z = transformedFirst.z - transformedSecond.z;
@@ -7014,7 +7015,7 @@ void __cdecl FUN_00c80ce0(SceneObjectLocal* owner, int notification)
             AttachmentF3* attachment = first->GetAttachment();
             unsigned index = attachment ? attachment->value : 0;
             if (current->Gethk()->GetOwner())
-                FUN_0095aec0(current->Gethk(),current->Gethk()->GetOwner());
+                hkpResponseModifier_disableConstraint(current->Gethk(),current->Gethk()->GetOwner());
             if (entries->next)
                 entries->next->FUN_008f2610(cast);
             else
@@ -7576,7 +7577,7 @@ struct ShapeUpdate892 {
     void FUN_008fb1d0(int, int, int, int);
 };
 struct SceneAttach892 {
-    void FUN_0056ff10(Shape892* shape);
+    void NiAVObject_SetCollisionObject(Shape892* shape);
     void* FUN_00825200(const void* type);
 };
 struct MotionCtrl892 {
@@ -7636,7 +7637,7 @@ void Shape892::FUN_00c892c0(int arg1,int arg2,int arg3,Shape892* other,int arg5)
     BodyRef892 ref(other->body);
     ((ShapeUpdate892*)other)->FUN_008da000(0);
     Scene892* object=other->scene;
-    ((SceneAttach892*)object)->FUN_0056ff10(this);
+    ((SceneAttach892*)object)->NiAVObject_SetCollisionObject(this);
     ((ShapeUpdate892*)this)->FUN_008da000(ref.body);
     ((ShapeUpdate892*)this)->FUN_008fb1d0(1,arg1,arg2,arg5);
     if(body && body->info)
@@ -9041,7 +9042,7 @@ struct Motion482 : MotionInterface482
 
     float linearDamping, angularDamping;
 
-    float FUN_00c86430();
+    float hkpMotion_getMass();
 };
 
 struct Collidable482
@@ -9106,7 +9107,7 @@ void Wrapper482::FUN_00c8cfd0(Info482* info)
         Motion482* motion = b ? b->FUN_00ca86c0() : 0;
         if (motion)
         {
-            info->config.mass = motion->FUN_00c86430();
+            info->config.mass = motion->hkpMotion_getMass();
             ((float*)&info->config.centerOfMass)[0] = ((float*)&motion->centerOfMass)[0];
             ((float*)&info->config.centerOfMass)[1] = ((float*)&motion->centerOfMass)[1];
             ((float*)&info->config.centerOfMass)[2] = ((float*)&motion->centerOfMass)[2];

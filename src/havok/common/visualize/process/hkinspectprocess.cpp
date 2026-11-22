@@ -244,9 +244,9 @@ class ProcessContext
 class hkOArchive
 {
   public:
-    void FUN_00d60960(unsigned int);
-    void FUN_00d605d0(unsigned char);
-    void FUN_00d609a0(unsigned __int64);
+    void hkOArchive_write32u(unsigned int);
+    void hkOArchive_write8u(unsigned char);
+    void hkOArchive_write64u(unsigned __int64);
 };
 struct hkInspectProcess
 {
@@ -260,7 +260,7 @@ struct hkInspectProcess
 // @fnv 0x00ddb310
 int hkInspectProcess::WriteObjectHeader(void* object, const hkClass* pClassInfo, unsigned int flags)
 {
-    archive->FUN_00d60960(25);
+    archive->hkOArchive_write32u(25);
     const hkClass* pActualClass = pClassInfo;
     if (context->registry && pClassInfo->GetLastNodeFlag())
     {
@@ -268,10 +268,10 @@ int hkInspectProcess::WriteObjectHeader(void* object, const hkClass* pClassInfo,
         if (!pActualClass)
             pActualClass = pClassInfo;
     }
-    archive->FUN_00d605d0(33);
-    archive->FUN_00d609a0(reinterpret_cast<unsigned int>(object));
-    archive->FUN_00d609a0(reinterpret_cast<unsigned int>(pActualClass));
-    archive->FUN_00d609a0(flags);
+    archive->hkOArchive_write8u(33);
+    archive->hkOArchive_write64u(reinterpret_cast<unsigned int>(object));
+    archive->hkOArchive_write64u(reinterpret_cast<unsigned int>(pActualClass));
+    archive->hkOArchive_write64u(flags);
     return 25;
 }
 
@@ -289,9 +289,9 @@ extern GlobalObjectO2_00d472a0 g_0126cae8;
 class FUN_00d605d0_Class
 {
   public:
-    void FUN_00d60960(int iCommand);
-    void FUN_00d605d0(unsigned int uiValue);
-    void FUN_00d609a0(const GlobalObjectO2_00d472a0* pkClass, int iFlags);
+    void hkOArchive_write32u(int iCommand);
+    void hkOArchive_write8u(unsigned int uiValue);
+    void hkOArchive_write64u(const GlobalObjectO2_00d472a0* pkClass, int iFlags);
 };
 
 struct TrackedObjectDDB3
@@ -349,7 +349,7 @@ class InspectProcessDDB3 : public ProcessBaseDDB3, public ListenerDDB3
     virtual void WriteTrackedObjects();
 };
 
-// Writes layout rules and each tracked object entry to m_pDataStream via FUN_00d60960, FUN_00d605d0, FUN_00d609a0, and WriteObjectHeader.
+// Writes layout rules and each tracked object entry to m_pDataStream via hkOArchive_write32u, hkOArchive_write8u, hkOArchive_write64u, and WriteObjectHeader.
 // @f3 0x00a63130 (community match, verified in this file)
 namespace f3m_00a63130 {
 struct ProcessHeaderWriter
@@ -385,13 +385,13 @@ void InspectProcessDDB3::WriteTrackedObjects()
 {
     if (!m_pkTracked)
         return;
-    m_pDataStream->FUN_00d60960(0xd);
-    m_pDataStream->FUN_00d605d0(0x20);
-    m_pDataStream->FUN_00d609a0(&g_0126cae8, 0);
-    m_pDataStream->FUN_00d605d0(f3m_00a63130::DAT_01061524.m_ucBytesInPointer);
-    m_pDataStream->FUN_00d605d0(f3m_00a63130::DAT_01061524.m_bLittleEndian);
-    m_pDataStream->FUN_00d605d0(f3m_00a63130::DAT_01061524.m_bReusePaddingOptimization);
-    m_pDataStream->FUN_00d605d0(f3m_00a63130::DAT_01061524.m_bEmptyBaseClassOptimization);
+    m_pDataStream->hkOArchive_write32u(0xd);
+    m_pDataStream->hkOArchive_write8u(0x20);
+    m_pDataStream->hkOArchive_write64u(&g_0126cae8, 0);
+    m_pDataStream->hkOArchive_write8u(f3m_00a63130::DAT_01061524.m_ucBytesInPointer);
+    m_pDataStream->hkOArchive_write8u(f3m_00a63130::DAT_01061524.m_bLittleEndian);
+    m_pDataStream->hkOArchive_write8u(f3m_00a63130::DAT_01061524.m_bReusePaddingOptimization);
+    m_pDataStream->hkOArchive_write8u(f3m_00a63130::DAT_01061524.m_bEmptyBaseClassOptimization);
     hkArrayDDB3<f3m_00a63130::Entry8DDB3>& kObjects = ((f3m_00a63130::TrackedListCast*)m_pkTracked)->m_kTrackedObjects;
     for (int i = 0; i < kObjects.GetLogicalSize(); i++)
     {
@@ -405,9 +405,9 @@ namespace fnv_00ddb550 {
 class FUN_00d605d0_Class
 {
   public:
-    void FUN_00d60960(int iFlags);
-    void FUN_00d605d0(unsigned int uiFlags);
-    void FUN_00d609a0(int iKey, int iValue);
+    void hkOArchive_write32u(int iFlags);
+    void hkOArchive_write8u(unsigned int uiFlags);
+    void hkOArchive_write64u(int iKey, int iValue);
 };
 
 template <typename T> struct hkArrayDDB5
@@ -612,8 +612,8 @@ struct hkWrittenObjectQ
 
 struct hkDisplayOStreamQ
 {
-    void FUN_00d60960(int size) throw();
-    void FUN_00d605d0(unsigned int cmd) throw();
+    void hkOArchive_write32u(int size) throw();
+    void hkOArchive_write8u(unsigned int cmd) throw();
     void FUN_00d607b0(const char* data, int size) throw();
 };
 
@@ -691,8 +691,8 @@ int hkInspectProcessQ::FUN_00ddb770(const void* object, const hkClassQ* pClassIn
     }
 
     int total = size + 1;
-    m_pDisplayStream->FUN_00d60960(total);
-    m_pDisplayStream->FUN_00d605d0(0x24);
+    m_pDisplayStream->hkOArchive_write32u(total);
+    m_pDisplayStream->hkOArchive_write8u(0x24);
     m_pDisplayStream->FUN_00d607b0(buffer.m_data, buffer.GetLogicalSize());
     if (recurse)
     {

@@ -278,10 +278,10 @@ public:
     int m_iCapacityState;
 };
 
-class FUN_00e468b0_cls : public BE468B0Shape, public BE468B0Listener {
+class hkpPairwiseCollisionFilter : public BE468B0Shape, public BE468B0Listener { // src: F3_EXE vtable 0x00e81cec (old: FUN_00e468b0_cls)
 public:
-    FUN_00e468b0_cls();
-    virtual ~FUN_00e468b0_cls();
+    hkpPairwiseCollisionFilter();
+    virtual ~hkpPairwiseCollisionFilter();
     virtual void OnA();
     virtual void OnB();
     virtual void OnC();
@@ -292,7 +292,7 @@ public:
 };
 
 // @fnv 0x00e468b0
-FUN_00e468b0_cls::FUN_00e468b0_cls()
+hkpPairwiseCollisionFilter::hkpPairwiseCollisionFilter()
 {
 }
 
@@ -375,7 +375,7 @@ public:
 // before the tail jump to the secondary base's implementation.
 struct ThunkPrimary
 {
-    virtual void FUN_00e4af50();
+    virtual void HavokError_enableAll();
     int unk04;
     int unk08;
     int unk0C;
@@ -390,7 +390,7 @@ struct ThunkSecondary
 struct ThunkDerived : ThunkPrimary, ThunkSecondary
 {
     ThunkDerived();
-    virtual void FUN_00e4af50();
+    virtual void HavokError_enableAll();
 };
 
 ThunkDerived::ThunkDerived()
@@ -398,7 +398,8 @@ ThunkDerived::ThunkDerived()
 }
 
 // @fnv 0x00e4af50
-void ThunkDerived::FUN_00e4af50()
+// pdb: HavokError::enableAll | HavokStream.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void ThunkDerived::HavokError_enableAll()
 {
     this->ThunkSecondary::FUN_00cb0c10();
 }
@@ -1798,7 +1799,7 @@ FUN_00bce490::~FUN_00bce490()
 void* operator new(size_t, void* p) { return p; }
 
 struct Actor : ActorEntry {
-    void FUN_00c9c5b0(CListener* listener);
+    void hkpEntity_addEntityListener(CListener* listener);
     __forceinline ExtendedListeners* listeners() {
         if (!m_pExtendedListeners) m_pExtendedListeners = new ExtendedListeners;
         return m_pExtendedListeners;

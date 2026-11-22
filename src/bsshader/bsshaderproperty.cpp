@@ -39,7 +39,7 @@ void BSShaderProperty::ShaderPassList::Add(NiGeometry* geometry, unsigned short 
     else
     {
         ShaderPassEntry* pass = m_kRenderPasses.m_pBase[iSize];
-        pass->FUN_00ba8c50(numLights, light0, light1, light2, light3);
+        pass->BSShaderProperty_RenderPass_SetLights(numLights, light0, light1, light2, light3);
         pass->SetFirstPass(firstPass);
         pass->SetGeometry(geometry);
         pass->SetPassEnum(passEnum);
@@ -154,7 +154,8 @@ void FUN_00baa000_shell::FUN_00baa000()
 
 extern const char g_01200464_arg1[];
 // @fnv 0x00a81450
-const char* __cdecl FUN_00a81450()
+// pdb: NiLight::GetRTTI | NiLight.obj | fnv360_1110_retail, objrun + bridge(vtable|objrun) + skyrim(objrun_open), high
+const char* __cdecl NiLight_GetRTTI()
 {
     return g_01200464_arg1;
 }
@@ -259,7 +260,8 @@ void __fastcall FUN_00ba8c30(FUN_00ba8c30_shell2* self, int)
 
 extern const char g_011fa018_arg1[];
 // @fnv 0x00ba8eb0
-const char* __cdecl FUN_00ba8eb0()
+// pdb: NiDX9AdditionalDepthStencilBufferData::GetRTTI | NiDX92DBufferData.obj | tesv_win, udata, high
+const char* __cdecl NiDX9AdditionalDepthStencilBufferData_GetRTTI()
 {
     return g_011fa018_arg1;
 }
@@ -312,7 +314,8 @@ struct S_00ba8c50_Slot
 
 // Grows the light array to numLights if needed, then stores numLights and copies the variadic ShadowSceneLight pointers into it.
 // @fnv 0x00ba8c50
-void __cdecl BSShaderProperty::ShaderPassEntry::FUN_00ba8c50(unsigned char numLights, ShadowSceneLight*, ...)
+// pdb: BSShaderProperty::RenderPass::SetLights | BSShaderProperty.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_seq), high
+void __cdecl BSShaderProperty::ShaderPassEntry::BSShaderProperty_RenderPass_SetLights(unsigned char numLights, ShadowSceneLight*, ...)
 {
     ShadowSceneLight** args = (ShadowSceneLight**)((unsigned int*)&numLights + 1);
 

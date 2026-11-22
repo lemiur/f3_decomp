@@ -3,7 +3,8 @@
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
 // @fnv 0x00cbc440
-int __stdcall FUN_00cbc440(int a, int b)
+// pdb: hkStreamReader::seek | hkStreamReader.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+int __stdcall hkStreamReader_seek(int a, int b)
 {
     return 1;
 }
@@ -19,7 +20,8 @@ int FUN_00cbbfc0()
 extern int g_CBBFD0Value;
 
 // @fnv 0x00cbbfd0
-int __cdecl FUN_00cbbfd0()
+// pdb: BGSCameraPathManager::GetDefaultPath | BGSCameraPathManager.obj | fnv360_0721_beta, udata + bridge(call_gap_sim|call_gap), high
+int __cdecl BGSCameraPathManager_GetDefaultPath()
 {
     return g_CBBFD0Value;
 }

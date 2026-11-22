@@ -293,8 +293,8 @@ struct AgentPhysics {
     void FUN_0098c830(Output *, Entry *);
 };
 struct AgentWorld {
-    void FUN_009037b0(Island *);
-    void FUN_009025e0(Island *);
+    void hkpWorld_lockIslandForConstraintUpdate(Island *);
+    void hkpWorld_unlockIslandForConstraintUpdate(Island *);
 };
 struct AgentGlobals {
     AgentWorld *world; AgentPhysics *simulation; int threadType, field0c;
@@ -392,7 +392,7 @@ int FUN_00d93380(Globals *globalsParam, Queue *queueParam, Job *jobParam) {
                 }
             } while (entry);
             if (!baseJob.header) {
-                tl.world->FUN_009037b0(island);
+                tl.world->hkpWorld_lockIslandForConstraintUpdate(island);
                 island->maximum = island->maximum > owner.maximum ? island->maximum : owner.maximum;
                 island->added += owner.added;
                 island->removed += owner.removed;
@@ -400,7 +400,7 @@ int FUN_00d93380(Globals *globalsParam, Queue *queueParam, Job *jobParam) {
                 if (owner.commands.size) {
                     FUN_00a7cd10(tl.world, (Command *)((char *)&owner.commands + owner.commands.offset), owner.commands.size);
                 }
-                tl.world->FUN_009025e0(island);
+                tl.world->hkpWorld_unlockIslandForConstraintUpdate(island);
             } else {
                 storeResults(baseJob.header->results[(short)baseJob.taskIndex], owner);
             }

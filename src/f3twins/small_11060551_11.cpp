@@ -67,7 +67,7 @@ C_00ae6990::C_00ae6990() : a(0), b(0), c(0) {}
 void FUN_00619210();
 void FUN_00619230();
 void FUN_00619250();
-void FUN_00a637c0();
+void hkInspectProcess_registerProcess();
 void FUN_00a63ef0();
 void FUN_00a647c0();
 
@@ -82,7 +82,7 @@ __declspec(noinline) void FUN_009ef3c0()
 {
     FUN_00a647c0();
     FUN_00a63ef0();
-    FUN_00a637c0();
+    hkInspectProcess_registerProcess();
 }
 
 // ---- family f105

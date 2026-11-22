@@ -2,7 +2,7 @@
 // src/havok/common/base/container/string/hkstringptr.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/common/base/container/string/hkstringptr.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-int __cdecl FUN_00cb10d0(const char* s);
+int __cdecl hkString_strLen(const char* s);
 char* __cdecl AllocateWithHeader(void* alloc, int size);
 
 // @f3 0x00923640 (community match, verified in this file)
@@ -37,7 +37,7 @@ FUN_00cb0a60::FUN_00cb0a60()
     unk00 = g_01268358;
 }
 
-int __cdecl FUN_00cb10d0(const char* s);
+int __cdecl hkString_strLen(const char* s);
 
 struct WriterCC0
 {
@@ -53,7 +53,7 @@ struct WriterCC0
 static __declspec(noinline) void FUN_00cc0080(WriterCC0* apWriter, const char* apString)
 {
     if (apString)
-        apWriter->Write(apString, FUN_00cb10d0(apString));
+        apWriter->Write(apString, hkString_strLen(apString));
     else
         apWriter->Write("(null)", 6);
 }
@@ -88,7 +88,7 @@ namespace fnv_00cb11b0 {
 
 extern "C"
 {
-    void* __cdecl FUN_00cb10d0(void* p);
+    void* __cdecl hkString_strLen(void* p);
     void* __cdecl AllocateWithHeader(void* p, int n);
 }
 

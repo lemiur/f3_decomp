@@ -1014,12 +1014,13 @@ struct FadeNodeObj
     }
     void FUN_0082d9f0(FadeCuller& culler);
     float FUN_00ad28b0();
-    void FUN_00ad2d80(FadeCuller& culler);
+    void BSFadeNode_OnVisible(FadeCuller& culler);
 };
 
 // Updates the fade state of a FadeNodeObj based on camera distance and fade thresholds, queueing a batch render when the fade target is in progress.
 // @fnv 0x00b4e490
-void FadeNodeObj::FUN_00ad2d80(FadeCuller& culler)
+// pdb: BSFadeNode::OnVisible | BSFadeNode.obj | fnv360_0822_retail, udata, high
+void FadeNodeObj::BSFadeNode_OnVisible(FadeCuller& culler)
 {
     if (!DAT_01067af0 || IsCulledFlag())
     {
@@ -2286,7 +2287,8 @@ FUN_00ad0e30::FUN_00ad0e30() : unk7c(0) {}
 extern int* volatile DAT_0116ef60;
 extern volatile unsigned int DAT_0116ef58;
 namespace f3m_00ada500 {
-unsigned int __cdecl FUN_00ada500() {
+// pdb: BSShaderManager::GetNextAvailableShadowMapAccumulator | BSShaderManager.obj | fnv360_0822_retail, udata + bridge(call_seq|call_gap_sim), high
+unsigned int __cdecl BSShaderManager_GetNextAvailableShadowMapAccumulator() {
  unsigned int i=DAT_0116ef58;
  int* e=DAT_0116ef60+i;
  DAT_0116ef58=i+1;
@@ -2444,12 +2446,13 @@ struct NiPSysCollider {int unk00,unk04,unk08,unk0c,unk10;NiPoint3 m_kCollisionPo
 struct NiPSysPlanarCollider:NiPSysCollider {int unk2c,unk30,unk34;NiPoint3 m_kFirstVector,m_kSecondPlaneVector;float m_fWidthSquared,m_fHeightSquared;NiPlane m_kHalfSpacePlane;NiPoint3 m_kPathOffset;RotationHelper rotation;};
 struct PlanarColliderExt : NiPSysPlanarCollider
 {
-    NiPSysCollider* FUN_00ac91f0(float time, float* collisionTime, BoundDataBlock* data, unsigned short particleId);
+    NiPSysCollider* NiPSysPlanarCollider_Resolve(float time, float* collisionTime, BoundDataBlock* data, unsigned short particleId);
     NiPSysCollider* FUN_00ad1cb0(float time, float* collisionTime, BoundDataBlock* data, unsigned short particleId);
 };
 
 
-NiPSysCollider* PlanarColliderExt::FUN_00ac91f0(float time, float* collisionTime, BoundDataBlock* data,
+// pdb: NiPSysPlanarCollider::Resolve | NiPSysPlanarCollider.obj | fnv360_0822_retail, uconst + bridge(vtable|uconst) + skyrim(uconst), high
+NiPSysCollider* PlanarColliderExt::NiPSysPlanarCollider_Resolve(float time, float* collisionTime, BoundDataBlock* data,
                                                 unsigned short particleId)
 {
     bool bCollided = false;

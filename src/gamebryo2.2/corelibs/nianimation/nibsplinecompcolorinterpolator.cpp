@@ -14,7 +14,7 @@ char __stdcall FUN_00a51210(char acValue)
 struct CloningProcess;
 struct FUN_00a50110_obj
 {
-    void FUN_00a57fd0(FUN_00a50110_obj*, CloningProcess&);
+    void NiBSplineInterpolator_CopyMembers(FUN_00a50110_obj*, CloningProcess&);
 };
 
 struct NiBSplineColorInterpolator
@@ -25,7 +25,7 @@ struct NiBSplineColorInterpolator
 // @fnv 0x00a51a60
 void NiBSplineColorInterpolator::CopyTo(FUN_00a50110_obj* apTarget, CloningProcess& proc)
 {
-    ((FUN_00a50110_obj*)this)->FUN_00a57fd0(apTarget, proc);
+    ((FUN_00a50110_obj*)this)->NiBSplineInterpolator_CopyMembers(apTarget, proc);
     *(int*)((char*)apTarget + 0x1c) = *(int*)((char*)this + 0x1c);
     *(int*)((char*)apTarget + 0x20) = *(int*)((char*)this + 0x20);
     *(int*)((char*)apTarget + 0x24) = *(int*)((char*)this + 0x24);
@@ -70,7 +70,7 @@ struct NiStream
 };
 struct BaseCall
 {
-    void FUN_00a51ca0(NiStream&);
+    void NiBSplineColorInterpolator_SaveBinary(NiStream&);
 };
 struct NiBSplineCompColorInterpolator
 {
@@ -82,7 +82,7 @@ struct NiBSplineCompColorInterpolator
 // @fnv 0x00a51970
 void NiBSplineCompColorInterpolator::SaveToStream(NiStream& aStream)
 {
-    ((BaseCall*)this)->FUN_00a51ca0(aStream);
+    ((BaseCall*)this)->NiBSplineColorInterpolator_SaveBinary(aStream);
     aStream.m_pBackingStream->Write(m_iFourthElementInteger, 8);
 }
 }  // namespace fnv_00a51970
@@ -132,7 +132,7 @@ struct NiStream
 };
 struct BaseHolder
 {
-    void FUN_00a51d30(NiStream&);
+    void NiBSplineColorInterpolator_LoadBinary(NiStream&);
 };
 struct NiBSplineCompColorInterpolator
 {
@@ -144,7 +144,7 @@ struct NiBSplineCompColorInterpolator
 // @fnv 0x00a51930
 void NiBSplineCompColorInterpolator::LoadFromStream(NiStream& stream)
 {
-    ((BaseHolder*)this)->FUN_00a51d30(stream);
+    ((BaseHolder*)this)->NiBSplineColorInterpolator_LoadBinary(stream);
     NiBinaryStream* __restrict input = stream.m_pUnderlyingStream;
     unsigned int size = 4;
     input->position += input->read(input, m_data, 8, &size, 1);
@@ -289,11 +289,12 @@ struct ColorInterpolatorLayout
     int unk30;
     volatile float m_fStartValue, m_fEndValue;
     void FUN_00a51ab0(int, unsigned int, int);
-    ColorInterpolatorLayout* FUN_00a51890(CloningProcess&);
+    ColorInterpolatorLayout* NiBSplineCompColorInterpolator_CreateClone(CloningProcess&);
 };
 // Allocates a new ColorInterpolatorLayout, initializes fields, calls CopyTo with it, then copies this object's start and end values.
 // @fnv 0x00a51890
-ColorInterpolatorLayout* ColorInterpolatorLayout::FUN_00a51890(CloningProcess& process)
+// pdb: NiBSplineCompColorInterpolator::CreateClone | NiBSplineCompColorInterpolator.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun) + skyrim(caller_sim), high
+ColorInterpolatorLayout* ColorInterpolatorLayout::NiBSplineCompColorInterpolator_CreateClone(CloningProcess& process)
 {
     ColorInterpolatorLayout* __restrict result = (ColorInterpolatorLayout*)FUN_00aa13e0(0x3c);
     if (result)

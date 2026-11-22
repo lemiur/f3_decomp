@@ -17,7 +17,8 @@ struct NiPoint3InterpolatorStandIn
 typedef void(__thiscall* GetPoint3Fn)(void*, NiPoint3*);
 
 // @fnv 0x00a57c20
-void* __fastcall FUN_00a57c20(void* self, int, unsigned short usIndex)
+// pdb: NiPoint3InterpController::CreatePoseInterpolator | NiPoint3InterpController.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc + skyrim(caller_sim), high
+void* __fastcall NiPoint3InterpController_CreatePoseInterpolator(void* self, int, unsigned short usIndex)
 {
     NiPoint3 kValue;
     (*(GetPoint3Fn**)self)[0xec / 4](self, &kValue);

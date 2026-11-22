@@ -12,7 +12,8 @@ void __cdecl FUN_00d3b1a0();
 void __cdecl FUN_00d3b220();
 
 // @fnv 0x00d3ab90
-void __cdecl FUN_00d3ab90(void** apTable)
+// pdb: hkpCapsuleTriangleAgent::initAgentFuncInverse | hkpCapsuleTriangleAgent.obj | fnv360_0822_retail, objrun + bridge(call_gap|objrun) + skyrim(call_seq), high
+void __cdecl hkpCapsuleTriangleAgent_initAgentFuncInverse(void** apTable)
 {
     apTable[0] = (void*)&CreateAllocatedObject;
     apTable[1] = (void*)&FUN_00d3b1a0;
@@ -232,11 +233,11 @@ void __cdecl FUN_00d3ac80(unsigned int first, unsigned int second,
 extern char DAT_010ce81c;
 struct FUN_00d3b160_tmp { const void* vt; unsigned char flag; unsigned int a4; };
 struct CallbackHost_d3b160 {
-    void FUN_00d3a620(void*, void*, void*, void*);
+    void hkpCapsuleTriangleAgent_getPenetrations(void*, void*, void*, void*);
     void FUN_00d3b160(void*, void*, void*, unsigned int);
 };
 
-// Builds a temporary object holding a4 and a cleared flag with a vtable, then calls FUN_00d3a620 with a2, a1, a3 and that object.
+// Builds a temporary object holding a4 and a cleared flag with a vtable, then calls hkpCapsuleTriangleAgent_getPenetrations with a2, a1, a3 and that object.
 // @fnv 0x00d3b160
 void CallbackHost_d3b160::FUN_00d3b160(void* a1, void* a2, void* a3, unsigned int a4)
 {
@@ -244,7 +245,7 @@ void CallbackHost_d3b160::FUN_00d3b160(void* a1, void* a2, void* a3, unsigned in
     t.a4 = a4;
     t.flag = 0;
     t.vt = &DAT_010ce81c;
-    FUN_00d3a620(a2, a1, a3, &t);
+    hkpCapsuleTriangleAgent_getPenetrations(a2, a1, a3, &t);
 }
 
 struct __declspec(align(16)) Vec4 {
@@ -484,7 +485,7 @@ struct CapsuleTriangleAgent {
     int unk0c;
     int unk10;
     int unk14;
-    void FUN_00d3a620(const hkpCdBody& bodyA, const hkpCdBody& bodyB, const CollisionInput* input, VirtObj* collector);
+    void hkpCapsuleTriangleAgent_getPenetrations(const hkpCdBody& bodyA, const hkpCdBody& bodyB, const CollisionInput* input, VirtObj* collector);
 };
 
 // Transforms capsule and triangle vertices into world space, tests for intersection, and reports a hit to the collector if found.
@@ -560,7 +561,8 @@ __forceinline void ProcessCapsuleTriangle(const hkpCdBody& bodyA, const hkpCdBod
     FUN_0096e450(capsule, capsuleShape->m_fSphereRadius, triangle, triangleShape->m_fSphereRadius, cache, reinterpret_cast<const NativeCollisionInput*>(input)->tolerance, 0, hit);
 }
 }
-void CapsuleTriangleAgent::FUN_00d3a620(const hkpCdBody& bodyA, const hkpCdBody& bodyB, const CollisionInput* input, VirtObj* collector)
+// pdb: hkpCapsuleTriangleAgent::getPenetrations | hkpCapsuleTriangleAgent.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void CapsuleTriangleAgent::hkpCapsuleTriangleAgent_getPenetrations(const hkpCdBody& bodyA, const hkpCdBody& bodyB, const CollisionInput* input, VirtObj* collector)
 {
     using namespace f3m_009c3990;
     extern char DAT_010cef80[], DAT_010c41f8[];

@@ -63,16 +63,16 @@ struct Registry {
 // Fills a HandlerSet with four handler functions and zeroed flags, then registers it with the registry using 5 and 5.
 // @f3 0x009c5720 (community match, verified in this file)
 void RegisterHandlers(Registry* registry) {
-    void FUN_009c4740();
-    void FUN_009c47e0();
-    void FUN_009c5400();
+    void hkpCapsuleCapsuleAgent_createCapsuleCapsuleAgent();
+    void hkpCapsuleCapsuleAgent_staticGetPenetrations();
+    void hkpCapsuleCapsuleAgent_staticGetClosestPoints();
     void FUN_00a3ab70();
     HandlerSet handlers;
     handlers.m_cFlagA=0;
     handlers.m_cFlagB=0;
-    handlers.m_pfnFirst=FUN_009c4740;
-    handlers.m_pfnSecond=FUN_009c47e0;
-    handlers.m_pfnThird=FUN_009c5400;
+    handlers.m_pfnFirst=hkpCapsuleCapsuleAgent_createCapsuleCapsuleAgent;
+    handlers.m_pfnSecond=hkpCapsuleCapsuleAgent_staticGetPenetrations;
+    handlers.m_pfnThird=hkpCapsuleCapsuleAgent_staticGetClosestPoints;
     handlers.m_pfnFourth=FUN_00a3ab70;
     registry->FUN_00cfbbe0(&handlers,6,6);
 }
@@ -807,7 +807,8 @@ __forceinline hkResult GetCapsuleCapsulePoint(const hkpCdBody& firstBody, const 
                         tolerance, pointOut);
 }
 
-void __stdcall FUN_00d3baf0(const hkpCdBody& firstBody, const hkpCdBody& secondBody,
+// pdb: hkpCapsuleCapsuleAgent::getClosestPoints | hkpCapsuleCapsuleAgent.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void __stdcall hkpCapsuleCapsuleAgent_getClosestPoints(const hkpCdBody& firstBody, const hkpCdBody& secondBody,
                             const CollisionAgentContext& options, hkpCdPointCollector& collector)
 {
     RecordCapsuleEvent(DAT_010d1074);

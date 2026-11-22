@@ -81,7 +81,7 @@ struct FUN_00dbc670_storage
 struct FUN_00dbc670_shell
 {
     void FUN_00dbc670();
-    void FUN_00dbda50(int, int, int);
+    void hkPackfileWriter_setContents(int, int, int);
     int ProcessPoly(int, int);
     void FUN_00dbc6e0();
 };

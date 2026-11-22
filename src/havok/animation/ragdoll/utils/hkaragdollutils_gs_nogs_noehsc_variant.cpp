@@ -99,7 +99,8 @@ extern hkError* DAT_010f3364;
 extern char str_00e7c1a8[];
 extern char str_00e7c1c4[];
 
-static __declspec(noinline) void* FUN_00ce9c40(ShapeOwner* owner)
+// pdb: _accessConstraintPivotA | hkaRagdollUtils.obj | fnv360_0822_retail, call_gap + bridge(call_gap|call_gap) + skyrim(call_seq), high
+static __declspec(noinline) void* _accessConstraintPivotA(ShapeOwner* owner)
 {
     Shape95e420* shape = (Shape95e420*)owner->inner;
     switch (shape->getType())
@@ -129,12 +130,12 @@ ShapeOwner* volatile g_a388Owner95e420;
 void* volatile g_a388Result95e420;
 void Emit95e420()
 {
-    g_a388Result95e420 = FUN_00ce9c40(g_a388Owner95e420);
+    g_a388Result95e420 = _accessConstraintPivotA(g_a388Owner95e420);
 }
 
 volatile int g_in9c40;
 volatile int g_out9c40;
 void CallTarget_ce9c40()
 {
-    g_out9c40 = (int)FUN_00ce9c40((ShapeOwner*)g_in9c40);
+    g_out9c40 = (int)_accessConstraintPivotA((ShapeOwner*)g_in9c40);
 }

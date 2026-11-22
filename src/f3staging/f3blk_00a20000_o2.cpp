@@ -157,7 +157,8 @@ struct Arg20 { unsigned int unk00; int key; char* base; };
 struct Env20 { unsigned int unk00,unk04; void* context; };
 struct Target20 { void FUN_00a21830(void*, Arg20*, Arg20*, Env20*, int); };
 void __cdecl FUN_00a23320(int,void*);
-void __cdecl FUN_00a23370(Env20* env, Target20* target, Arg20* arg) {
+// pdb: hkCpuSplitSimulationIslandJob | hkpCpuSplitSimulationIslandJob.obj | fnv360_0822_retail, ustr + bridge(ustr|ustr) + skyrim(ustr), high
+void __cdecl hkCpuSplitSimulationIslandJob(Env20* env, Target20* target, Arg20* arg) {
     Stream20* s = (Stream20*)TlsGetValue(DAT_0116913c);
     Command20* c=s->cursor;
     if(c<s->limit) {
@@ -296,7 +297,8 @@ extern "C" void _ReadWriteBarrier(void);
 
 typedef void(__cdecl* SectorVisitFn)(unsigned char* p, unsigned char* elem, void* in, void* collector);
 
-void __cdecl FUN_00a26c90(SectorTrack* track, ContactInput* in, SectorCollector* collector)
+// pdb: hkpAgentMachineUtil::calcNnStatistics | hkpAgentMachineUtil.obj | fnv360_0822_retail, call_gap + bridge(call_gap|call_seq) + skyrim(call_gap), high
+void __cdecl hkpAgentMachineUtil_calcNnStatistics(SectorTrack* track, ContactInput* in, SectorCollector* collector)
 {
     int k = 0;
     int i = 0;
@@ -410,7 +412,8 @@ namespace f3m_00a26a60 {
 struct Header22 { int v[8]; };
 struct S22 { int unk00; unsigned short count4; unsigned short count6; unsigned char unk08; unsigned char unk09; unsigned char byteA; unsigned char unk0b; int unk0c; Header22 hdr; float f[8]; };
 
-void __cdecl FUN_00a26a60(S22* dst, S22* src)
+// pdb: hkpSimpleContactConstraintAtomUtil::copyContents | hkpConstraintAtomUtil.obj | fnv360_0822_retail, call_gap_sim + bridge(call_gap_sim|call_gap) + skyrim(call_seq), high
+void __cdecl hkpSimpleContactConstraintAtomUtil_copyContents(S22* dst, S22* src)
 {
     dst->hdr = src->hdr;
     dst->count4 = src->count4;
@@ -608,7 +611,8 @@ static __forceinline void AddEncodedAxisA3(int& counts,int packed) {
     else if(axis==1) AddA3(counts,z+2*x+4);
     else AddA3(counts,z+2*y+8);
 }
-void __stdcall FUN_00a3b750(RecordA3* record,int first,int second) {
+// pdb: hkpBoxBoxCollisionDetection::checkCompleteness | hkpBoxBoxCollisionDetection.obj | fnv360_0822_retail, uconst + bridge(uconst|uconst) + skyrim(uconst), high
+void __stdcall hkpBoxBoxCollisionDetection_checkCompleteness(RecordA3* record,int first,int second) {
 
     if(record->count21<3) return;
 
@@ -715,12 +719,13 @@ struct Socket {
         ((unsigned short*)p)[2] = (unsigned short)size;
         return p;
     }
-    Socket* FUN_00a28f90();
+    Socket* hkBsdSocket_pollForNewClient();
 };
 }
 extern na28f90::Error* DAT_010f3364;
 namespace na28f90 {
-Socket* Socket::FUN_00a28f90()
+// pdb: hkBsdSocket::pollForNewClient | hkBsdSocket.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(ustr), high
+Socket* Socket::hkBsdSocket_pollForNewClient()
 {
     if (m_socket != -1)
     {
@@ -852,10 +857,11 @@ struct Owner_a216a0 {
     Data_a216a0* FUN_00a214a0(Context_a216a0* context);
     void FUN_00a214b0(int index, Data_a216a0* data);
     void FUN_00a213f0(Context_a216a0* context);
-    void FUN_00a216a0(int value, int mode, int index);
+    void hkJobQueue_addJob(int value, int mode, int index);
 };
 
-void Owner_a216a0::FUN_00a216a0(int value, int mode, int index)
+// pdb: hkJobQueue::addJob | hkJobQueue.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_seq) + skyrim(call_seq), high
+void Owner_a216a0::hkJobQueue_addJob(int value, int mode, int index)
 {
     Context_a216a0 context;
     Data_a216a0* data = FUN_00a214a0(&context);
@@ -1142,7 +1148,8 @@ struct hkpSimulationA235
 
 void __cdecl FUN_00a1b9f0(int* solverInfo, int jobIndex, int numTasks, int schemas, int accumulators, hkVector4* jacobians);
 
-void __cdecl FUN_00a235a0(hkpSimulationIslandA235* island, hkpSimulationA235* simulation, hkpSolverJobA235* job)
+// pdb: hkCpuSolveConstraintBatchJob | hkpCpuSolveConstraintsJobs.obj | fnv360_0822_retail, ustr_rel + bridge(ustr_rel|ustr_rel) + skyrim(ustr_rel), high
+void __cdecl hkCpuSolveConstraintBatchJob(hkpSimulationIslandA235* island, hkpSimulationA235* simulation, hkpSolverJobA235* job)
 {
     {
         hkMonitorStream& mStream = hkMonitorStream::getInstance();
@@ -2154,7 +2161,8 @@ struct TlsObjectA28420 {
     int unk28;
 };
 
-void __stdcall FUN_00a28420(unsigned int param1, unsigned int param2, SourceA28420* source) {
+// pdb: hkpDefaultToiResourceMgr::endToiAndFreeResources | hkpDefaultToiResourceMgr.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(objrun_sim), high
+void __stdcall hkpDefaultToiResourceMgr_endToiAndFreeResources(unsigned int param1, unsigned int param2, SourceA28420* source) {
     int value = source->unk18;
     TlsObjectA28420* object =
         (TlsObjectA28420*)TlsGetValue(DAT_010f3170);
@@ -2167,7 +2175,7 @@ void __stdcall FUN_00a28420(unsigned int param1, unsigned int param2, SourceA284
 
 // @f3 0x00a2b7c0 (community match, verified in this file)
 namespace f3m_00a2b7c0 {
-struct Transform { float m[12]; void FUN_00925110(const Transform& other); };
+struct Transform { float m[12]; void hkTransform_setInverse(const Transform& other); };
 struct Info {
     int a, b, c, d;
     Transform transform;
@@ -2187,7 +2195,7 @@ static __declspec(noinline) void FUN_00a2b7c0(const Info* in, Info* out)
     out->y = -in->y;
     out->z = -in->z;
     out->w = in->w;
-    out->transform.FUN_00925110(in->transform);
+    out->transform.hkTransform_setInverse(in->transform);
 }
 extern Info* volatile g_in;
 extern Info* volatile g_out;
@@ -2344,7 +2352,8 @@ public:
 };
 }
 
-void* __cdecl FUN_00a35760(void* a, void* b, void* unused, void* c)
+// pdb: hkpGskfAgent::createGskfAgent | hkpGskfAgent.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_gap), high
+void* __cdecl hkpGskfAgent_createGskfAgent(void* a, void* b, void* unused, void* c)
 {
     if (c)
         return new f3m_00a35760::FUN_00a35730(a, b, c);
@@ -2469,9 +2478,10 @@ struct A348Obj {
     float unk18;
     int unk1c;
     float unk20, unk24, unk28, unk2c;
-    void FUN_00a348a0(int unused);
+    void hkpGskBaseAgent_invalidateTim(int unused);
 };
-void A348Obj::FUN_00a348a0(int)
+// pdb: hkpGskBaseAgent::invalidateTim | hkpGskBaseAgent.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void A348Obj::hkpGskBaseAgent_invalidateTim(int)
 {
     unk20 = unk24 = unk28 = unk2c = 0.0f;
     unk18 = DAT_00db38b8;
@@ -2499,7 +2509,8 @@ struct A25fTracker {
     virtual void V00(); virtual void V01(); virtual void V02();
     virtual int V0c(const char* name, int size, int value);
 };
-int FUN_00a25f60(int unused, int* value, int unused2, A25fTracker* tracker)
+// pdb: hkAgent3Bridge::calcStatistics | hkpAgent3Bridge.obj | fnv360_0822_retail, ustr + bridge(ustr|ustr) + skyrim(ustr), high
+int hkAgent3Bridge_calcStatistics(int unused, int* value, int unused2, A25fTracker* tracker)
 {
     return tracker->V0c("ChildAgent2", 8, *value);
 }
@@ -2568,7 +2579,7 @@ struct A25baMember {
     int unk00;
     short unk04;
     void Reset() { unk00 = -47; unk04 = 0; }
-    void FUN_0098b5f0();
+    void hkMultiThreadCheck_disableChecks();
 };
 struct A25baObj {
     void** vtable;
@@ -2584,7 +2595,7 @@ A25baObj* A25baObj::FUN_00a25ba0()
     vtable = DAT_00e8568c;
     unk08.Reset();
     unk10 = 0;
-    unk08.FUN_0098b5f0();
+    unk08.hkMultiThreadCheck_disableChecks();
     return this;
 }
 }
@@ -2762,12 +2773,13 @@ struct Solver {int unk00,unk04;void* arg08;void* arg0c;void* arg10;};
 struct Arg {int unk00,unk04,unk08,unk0c;Solver* solver;};
 struct Context {char* world;int unk04;void* value;};
 struct Target {void FUN_00a21830(void*,Arg*,Arg*,int,int);};
-void __cdecl FUN_00a79670(void*,void*,void*,void*);
-void __cdecl FUN_00a23770(Context* context,Target* target,Arg* arg){
+void __cdecl hkExportImpulsesAndRhs(void*,void*,void*,void*);
+// pdb: hkCpuSolveExportResultsJob | hkpCpuSolveConstraintsJobs.obj | fnv360_0822_retail, ustr_rel + bridge(ustr_rel|ustr_rel) + skyrim(ustr_rel), high
+void __cdecl hkCpuSolveExportResultsJob(Context* context,Target* target,Arg* arg){
  Stream*s=(Stream*)TlsGetValue(DAT_0116913c);Cmd*c=(Cmd*)s->end;
  if((char*)c<s->limit){c->name=DAT_00e7d35c;*(const char**)((char*)c+12)=DAT_00e855ec;_ReadWriteBarrier();volatile unsigned ticks=(unsigned)__rdtsc();c->ticks=ticks;s->end=(char*)c+16;}
  Solver*solver=arg->solver;
- FUN_00a79670(context->world+0x1a0,solver->arg10,solver->arg0c,solver->arg08);
+ hkExportImpulsesAndRhs(context->world+0x1a0,solver->arg10,solver->arg0c,solver->arg08);
  Stream*s2=(Stream*)TlsGetValue(DAT_0116913c);Cmd*c2=(Cmd*)s2->end;
  if((char*)c2<s2->limit){c2->name=DAT_00e0811c;_ReadWriteBarrier();volatile unsigned ticks2=(unsigned)__rdtsc();c2->ticks=ticks2;s2->end=(char*)c2+12;}
  target->FUN_00a21830(context->value,arg,arg,0,0);
@@ -2947,10 +2959,11 @@ struct FUN_00a30be0_Obj {
     float unk138;
     float unk13C;
 
-    void FUN_00a30be0(int* param_1, float* param_2);
+    void hkpGsk_convertFeatureToClosestDistance(int* param_1, float* param_2);
 };
 
-void FUN_00a30be0_Obj::FUN_00a30be0(int* param_1, float* param_2) {
+// pdb: hkpGsk::convertFeatureToClosestDistance | hkpGsk.obj | fnv360_0822_debug, objrun + skyrim(call_gap), high
+void FUN_00a30be0_Obj::hkpGsk_convertFeatureToClosestDistance(int* param_1, float* param_2) {
     param_2[8] = *(float*)&param_1[3];
     param_2[0] = *(float*)&param_1[0];
     param_2[1] = *(float*)&param_1[1];
@@ -3370,10 +3383,11 @@ struct f3m_00a28390_Obj
     int unk00;
     int unk04;
     int m_iSize;
-    int FUN_00a28390(int value, int unused, f3m_00a28390::Info* info);
+    int hkpDefaultToiResourceMgr_beginToiAndSetupResources(int value, int unused, f3m_00a28390::Info* info);
 };
 
-int f3m_00a28390_Obj::FUN_00a28390(int value, int unused, f3m_00a28390::Info* info)
+// pdb: hkpDefaultToiResourceMgr::beginToiAndSetupResources | hkpDefaultToiResourceMgr.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(objrun_prop), high
+int f3m_00a28390_Obj::hkpDefaultToiResourceMgr_beginToiAndSetupResources(int value, int unused, f3m_00a28390::Info* info)
 {
     if (FUN_00a28310(value))
     {
@@ -3666,7 +3680,8 @@ inline void InitBlock(void* p, int size)
 }
 }
 
-f3m_00a254a0::Header* __cdecl FUN_00a254a0(int count, int stride)
+// pdb: hkpAgentSectorHeader::allocate | hkpDynamicsJobQueueUtils.obj | fnv360_0822_retail, call_gap + skyrim(call_gap), high
+f3m_00a254a0::Header* __cdecl hkpAgentSectorHeader_allocate(int count, int stride)
 {
     using namespace f3m_00a254a0;
     Header* header = (Header*)GetMem()->FUN_008f6d30((short)count * 4 + 0xc, 4);
@@ -4015,10 +4030,11 @@ struct Header {
     int m_iCount;
     int m_iCount2;
     int m_iBlockSize;
-    void FUN_00a25580();
+    void hkpAgentSectorHeader_deallocate();
     void* m_apBlocks[1];
 };
-void Header::FUN_00a25580()
+// pdb: hkpAgentSectorHeader::deallocate | hkpDynamicsJobQueueUtils.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_seq), high
+void Header::hkpAgentSectorHeader_deallocate()
 {
     void** blocks = m_apBlocks;
     if (m_iCount < 4) {
@@ -4304,18 +4320,19 @@ struct Job {
  unsigned short unk14; unsigned short numBlocks; unsigned short count; unsigned short capacity;
  int param; int config20,config24,config28,config2c; int unk30; unsigned short pitch;
 };
-void __cdecl FUN_00926f50(Device*,Setup*);
-void __cdecl FUN_00989600(Device*,char*,int);
+void __cdecl hkpWorldOperationUtil_markIslandInactiveMt(Device*,Setup*);
+void __cdecl hkpWorldCallbackUtil_fireContactImpulseLimitBreached(Device*,char*,int);
 struct Output {
  void* FUN_00a21d70(int zero,int one,void* context,Job* job,int unused);
  void* FUN_00a21830(void* context,Job* job,Job* same,Owner* owner,int unused);
 };
-void* __cdecl FUN_00a22ec0(Owner* owner,Output* output,Job* nextJobOut) {
+// pdb: hkpSingleThreadedJobsOnIsland::cpuBroadPhaseJob | hkpCpuBroadPhaseJob.obj | fnv360_0822_retail, ustr + bridge(ustr|ustr) + skyrim(ustr), high
+void* __cdecl hkpSingleThreadedJobsOnIsland_cpuBroadPhaseJob(Owner* owner,Output* output,Job* nextJobOut) {
  Job* job=nextJobOut;
  Setup* setup=job->setup;
  timer(str_00e8559c);
  if(job->block->pending && owner->device->enabled && (setup->newFlags & 12) && !(setup->oldFlags & 12))
-  FUN_00926f50(owner->device,setup);
+  hkpWorldOperationUtil_markIslandInactiveMt(owner->device,setup);
  char* marker=&job->block->state;
  owner->builder->FUN_0098df40(setup->unk48,setup->unk4c,owner->device,marker);
  Block* block=job->block;
@@ -4335,7 +4352,7 @@ void* __cdecl FUN_00a22ec0(Owner* owner,Output* output,Job* nextJobOut) {
     if(n>0) do { *dst++=*src++; } while(--n);
     index+=chunk->count;
    }
-   FUN_00989600(owner->device,copy,total);
+   hkpWorldCallbackUtil_fireContactImpulseLimitBreached(owner->device,copy,total);
    pool()->freeTemporary(copy);
   }
   *marker=2;
@@ -4363,7 +4380,7 @@ void* __cdecl FUN_00a22ec0(Owner* owner,Output* output,Job* nextJobOut) {
   job->kind=13;
   job->config20=device->unk190; job->config24=device->unk194; job->config28=device->unk198; job->config2c=device->unk19c;
   job->unk14=0; job->param=param; job->count=(unsigned short)count;job->capacity=(unsigned short)capacity;job->blocks=0;job->unk30=0;job->pitch=(unsigned short)pitch;
-  if(count>capacity) {int n=(count-1)/capacity+1;job->blocks=FUN_00a254a0(n,16);job->numBlocks=(unsigned short)n;}
+  if(count>capacity) {int n=(count-1)/capacity+1;job->blocks=hkpAgentSectorHeader_allocate(n,16);job->numBlocks=(unsigned short)n;}
   timer("Et");
   return output->FUN_00a21d70(0,1,owner->context,job,0);
  } else {
@@ -5100,7 +5117,7 @@ struct CdBody_a34a10 {
 struct Input_a34a10;
 
 struct Solver_a34a10 {
-    void FUN_00a32da0(const Shape_a34a10* a, const Shape_a34a10* b, const Transform_a34a10& aTb, Vector4_a34a10& normal);
+    void hkpGsk_getClosestFeature(const Shape_a34a10* a, const Shape_a34a10* b, const Transform_a34a10& aTb, Vector4_a34a10& normal);
 };
 
 void __cdecl FUN_00a34a10(const CdBody_a34a10& bodyA, const CdBody_a34a10& bodyB, const Input_a34a10& input,
@@ -5113,7 +5130,7 @@ void __cdecl FUN_00a34a10(const CdBody_a34a10& bodyA, const CdBody_a34a10& bodyB
     aTb.FUN_00925300(*bodyA.motion, *bodyB.motion);
 
     __declspec(align(16)) Vector4_a34a10 normal;
-    solver->FUN_00a32da0(shapeA, shapeB, aTb, normal);
+    solver->hkpGsk_getClosestFeature(shapeA, shapeB, aTb, normal);
 
     const Rotation_a34a10& r = bodyA.motion->rotation;
     separatingNormal.x = r.col0.x * normal.x + r.col1.x * normal.y + r.col2.x * normal.z;
@@ -5224,7 +5241,8 @@ struct Context {Tables* tables;int unk04,unk08,unk0c;int alternate;};
 struct Input {Object* left;Object* right;Context* context;void* extra;};
 struct Header {unsigned char type,unk01,flags;};
 struct Output {void* result;int unk04,unk08,unk0c;};
-Output* FUN_00a26030(Input* input,Header* header,Output* output){Object* right=input->right;Context* context=input->context;void* extra=input->extra;Object* left=input->left;int l=left->type->index;Tables* tables=context->tables;int r=right->type->index;unsigned index=(context->alternate?tables->second:tables->first)[l][r];Callback callback=tables->entries[index].call;output->result=callback(left,right,context,extra);header->type=6;header->flags=0xff;return output+1;}
+// pdb: hkAgent3Bridge::create | hkpAgent3Bridge.obj | fnv360_0822_retail, objrun + skyrim(objrun), high
+Output* hkAgent3Bridge_create(Input* input,Header* header,Output* output){Object* right=input->right;Context* context=input->context;void* extra=input->extra;Object* left=input->left;int l=left->type->index;Tables* tables=context->tables;int r=right->type->index;unsigned index=(context->alternate?tables->second:tables->first)[l][r];Callback callback=tables->entries[index].call;output->result=callback(left,right,context,extra);header->type=6;header->flags=0xff;return output+1;}
 }
 }   // namespace f3m_00a26030
 
@@ -5395,10 +5413,11 @@ struct GskCache {
     unsigned char m_maxDimA : 4;
     unsigned char m_maxDimB : 4;
     unsigned char m_gskFlags;
-    void FUN_00a3b030(const ConvexShape* shapeA, const ConvexShape* shapeB, const Transform& aTb);
+    void hkpGskCache_init(const ConvexShape* shapeA, const ConvexShape* shapeB, const Transform& aTb);
 };
 
-void GskCache::FUN_00a3b030(const ConvexShape* shapeA, const ConvexShape* shapeB, const Transform& aTb)
+// pdb: hkpGskCache::init | hkpGskCache.obj | fnv360_0822_retail, caller + bridge(call_seq|callee_sim) + skyrim(call_seq), high
+void GskCache::hkpGskCache_init(const ConvexShape* shapeA, const ConvexShape* shapeB, const Transform& aTb)
 {
     CdVertex vA, vB;
     unsigned short id = 0;
@@ -5471,7 +5490,7 @@ int __cdecl FUN_009233f0(const char* s) throw();
 void __cdecl FUN_00901e90(void* array, int count, int elemSize) throw();
 void __cdecl FUN_009234e0(char* dst, const char* src, int n) throw();
 void __cdecl FUN_00901f10(void* array, int elemSize) throw();
-int __cdecl FUN_009232c0(const char* a, const char* b) throw();
+int __cdecl hkString_strCmp(const char* a, const char* b) throw();
 char* __cdecl FUN_00923640(const char* s) throw();
 
 struct ThreadMemory
@@ -5571,7 +5590,7 @@ int FUN_00a288a0(const char* basePath, Listing& listingOut)
     bool more = find != (void*)-1;
     while (more)
     {
-        if (FUN_009232c0((const char*)fd.cFileName, ".") && FUN_009232c0((const char*)fd.cFileName, DAT_00e2c5c8))
+        if (hkString_strCmp((const char*)fd.cFileName, ".") && hkString_strCmp((const char*)fd.cFileName, DAT_00e2c5c8))
         {
             bool isDirectory = (fd.dwFileAttributes >> 4) & 1;
             if (isDirectory)
@@ -6192,11 +6211,12 @@ struct GskAgent
     void FUN_009cafa0();
     int FUN_00a3bc00(GskCache* cache);
     // Fake match (the FNV twin declares it the same way): noalias lets the key's slot be reused for float temps.
-    __declspec(noalias) int FUN_00a3d7c0(GskWork* work, GskKey* key, GskOut* out);
-    hkBool FUN_00a3e510(hkContactPoint& cp);
+    __declspec(noalias) int hkpBoxBoxCollisionDetection_findClosestPoint(GskWork* work, GskKey* key, GskOut* out);
+    hkBool hkpBoxBoxCollisionDetection_calculateClosestPoint(hkContactPoint& cp);
 };
 
-hkBool GskAgent::FUN_00a3e510(hkContactPoint& cp)
+// pdb: hkpBoxBoxCollisionDetection::calculateClosestPoint | hkpBoxBoxCollisionDetection.obj | fnv360_0822_retail, caller + bridge(call_gap|callee_sim) + skyrim(call_gap), high
+hkBool GskAgent::hkpBoxBoxCollisionDetection_calculateClosestPoint(hkContactPoint& cp)
 {
     hkBool result = false;
     // Fake match: four dead locals that only shift the compiler's symbol numbering; they set the x87 operand
@@ -6213,7 +6233,7 @@ hkBool GskAgent::FUN_00a3e510(hkContactPoint& cp)
     if (FUN_00a3bc00(&m_cache) == 0)
     {
         GskOut out;
-        if (FUN_00a3d7c0(&work, &key, &out) == 2)
+        if (hkpBoxBoxCollisionDetection_findClosestPoint(&work, &key, &out) == 2)
         {
             result = true;
             CdPoint ccp;
@@ -6292,10 +6312,11 @@ struct Simplex {
     int countA, countB, unk08, unk0c, unk10, status, unk18, unk1c;
     Vec a[8], verticesB[8], result, axis;
     void FUN_00a30ca0();
-    void FUN_00a32540(void*, void*, const Transform*);
+    void hkpGsk_handlePenetration(void*, void*, const Transform*);
 };
 
-void Simplex::FUN_00a32540(void* arg1, void* arg2, const Transform* transform) {
+// pdb: hkpGsk::handlePenetration | hkpGsk.obj | fnv360_0822_retail, objrun + skyrim(objrun), high
+void Simplex::hkpGsk_handlePenetration(void* arg1, void* arg2, const Transform* transform) {
     int count = 4;
     if (countB >= 3) {
         if (countB > 3)
@@ -6490,7 +6511,8 @@ __forceinline float inverseLength(const Vec& v) {
 }
 __forceinline void normalize(Vec& v) {v.mul(inverseLength(v));}
 
-void __cdecl FUN_00a27550(const Point& point,float time,Params& params,Motion* a,Motion* b,Manager* mgr,Result& result) {
+// pdb: hkpSimpleCollisionResponse::solveSingleContact | hkpSimpleCollisionResponse.obj | fnv360_0822_retail, call_gap + bridge(call_seq|call_gap) + skyrim(call_seq), high
+void __cdecl hkpSimpleCollisionResponse_solveSingleContact(const Point& point,float time,Params& params,Motion* a,Motion* b,Manager* mgr,Result& result) {
  Input ia,ib;
  {ia.inverseMass=a->invMass();Vec center;a->center(time,center);ia.relative.sub(point.position,center);a->inverseInertia(ia.inertia);}
  {ib.inverseMass=b->invMass();Vec center;b->center(time,center);ib.relative.sub(point.position,center);b->inverseInertia(ib.inertia);}
@@ -6871,7 +6893,7 @@ struct JobQueueEntry : PacketBase
 struct Queue
 {
     int __thiscall FUN_00a21d70(int a, int b, void* c, JobQueueEntry& next, int d);
-    void __thiscall FUN_00a216a0(JobQueueEntry& next, int a, int b);
+    void __thiscall hkJobQueue_addJob(JobQueueEntry& next, int a, int b);
     int __thiscall FUN_00a21830(void* a, const void* pkt, JobQueueEntry& next, TaskOwner* owner, int d);
 };
 
@@ -6887,7 +6909,7 @@ struct TaskSingleton
 extern TaskSingleton* DAT_010f3400;
 __forceinline TaskSingleton& getMemorySystem() { return *DAT_010f3400; }
 
-extern int __cdecl FUN_009aa3e0(const SolverParams* solver, const StepTiming* timing, const AccelVec* accel,
+extern int __cdecl hkRigidMotionUtilApplyForcesAndStep(const SolverParams* solver, const StepTiming* timing, const AccelVec* accel,
                                 void* const* entities, int numEntities, int offset);
 extern int __cdecl FUN_0099a2d0(const void* collisionInput, void* const* entities, int numEntities);
 extern int __cdecl FUN_00a0b010(const StepTiming* timing, const SolverParams* solver, const void* queryIn,
@@ -6895,7 +6917,7 @@ extern int __cdecl FUN_00a0b010(const StepTiming* timing, const SolverParams* so
 extern void __cdecl FUN_00a23320(SceneIsland* island, void* splitIslands);
 extern int __cdecl FUN_00a0af50(SceneIsland* island);
 extern void __cdecl FUN_00a0a680(SceneIsland* island, void* buffer, int count, JobHeader* header);
-extern void __cdecl FUN_00a240d0(SceneIsland* island, FlagByte buildOnSpu, JobHeader* header,
+extern void __cdecl createBuildJacobianAndSolveJacobianTaskCollection(SceneIsland* island, FlagByte buildOnSpu, JobHeader* header,
                                  BuildCollection* builds, SolveCollection* solves);
 
 __forceinline int estimateIslandSize(int numEntities, int numConstraints) { return maxVal(numEntities, numConstraints); }
@@ -6910,7 +6932,8 @@ __forceinline FlagByte checkIslandSparse(Settings* world, int size) { return siz
 // islandEntities and capacity, the initializer lists of the two collection constructors and the padded 16-bit header
 // counts are a guess at the original source that puts that count where the original has it; they change no other
 // instruction.
-int __cdecl FUN_00a24db0(TaskOwner& owner, Queue& queue, JobQueueEntry& nextJobOut)
+// pdb: integrateJob | hkpCpuIntegrateJob.obj | fnv360_0822_retail, ustr + bridge(ustr|ustr) + skyrim(ustr), high
+int __cdecl integrateJob(TaskOwner& owner, Queue& queue, JobQueueEntry& nextJobOut)
 {
     const DynamicsPacket& currentJob = reinterpret_cast<DynamicsPacket&>(nextJobOut);
 
@@ -7004,7 +7027,7 @@ int __cdecl FUN_00a24db0(TaskOwner& owner, Queue& queue, JobQueueEntry& nextJobO
                 stream.setEnd((char*)(ev + 1));
             }
         }
-        int inactiveFrames = FUN_009aa3e0(&stepCtx.solver, &stepInfo, &stepCtx.gravityStep,
+        int inactiveFrames = hkRigidMotionUtilApplyForcesAndStep(&stepCtx.solver, &stepInfo, &stepCtx.gravityStep,
                                           island->GetEntities().begin(), island->GetEntities().GetLogicalSize(), 0xd0);
         FUN_0099a2d0(island->getWorld()->getCollisionInput(), island->GetEntities().begin(),
                      island->GetEntities().GetLogicalSize());
@@ -7067,12 +7090,12 @@ int __cdecl FUN_00a24db0(TaskOwner& owner, Queue& queue, JobQueueEntry& nextJobO
             accJob.firstEntityIdx = 0;
             accJob.numEntities = (unsigned short)numEntities;
             header->openJobs = (numEntities - 1) / 128 + 2;
-            queue.FUN_00a216a0(nextJobOut, 0, 0);
+            queue.hkJobQueue_addJob(nextJobOut, 0, 0);
 
             {
                 BuildCollection outBuilds;
                 SolveCollection outSolves;
-                FUN_00a240d0(island, stepCtx.buildOnSpu, header, &outBuilds, &outSolves);
+                createBuildJacobianAndSolveJacobianTaskCollection(island, stepCtx.buildOnSpu, header, &outBuilds, &outSolves);
                 {
                     hkMonitorStream& stream = hkMonitorStream::getInstance();
                     if (stream.memoryAvailable())
@@ -8038,17 +8061,18 @@ struct hkpGskCache
     hkUint8 m_maxDimB : 4;
     hkUint8 m_gskFlags;
 
-    void FUN_00a3b030(const hkpConvexShape* shapeA, const hkpConvexShape* shapeB, const hkTransform& btoa);
-    void FUN_00a3b260(const hkpConvexShape* shapeA, const hkpTriangleShape* triangleB, const hkTransform& btoa);
+    void hkpGskCache_init(const hkpConvexShape* shapeA, const hkpConvexShape* shapeB, const hkTransform& btoa);
+    void hkpGskCache_initTriangle(const hkpConvexShape* shapeA, const hkpTriangleShape* triangleB, const hkTransform& btoa);
 };
 
 // hkpGskCache::initTriangle: seed the cache with the three vertices of the triangle and the vertex of shapeA
 // that lies furthest along the triangle normal, turned to face shapeA.
-void hkpGskCache::FUN_00a3b260(const hkpConvexShape* shapeA, const hkpTriangleShape* triangleB, const hkTransform& btoa)
+// pdb: hkpGskCache::initTriangle | hkpGskCache.obj | fnv360_0822_retail, call_gap + bridge(call_seq|callee_sim) + skyrim(call_seq), high
+void hkpGskCache::hkpGskCache_initTriangle(const hkpConvexShape* shapeA, const hkpTriangleShape* triangleB, const hkTransform& btoa)
 {
     if (triangleB->m_isExtruded)
     {
-        FUN_00a3b030(shapeA, triangleB, btoa);
+        hkpGskCache_init(shapeA, triangleB, btoa);
         return;
     }
 
@@ -12215,7 +12239,8 @@ static __forceinline void hkCpuBuildJacobiansFromTask(const hkBuildJacobiansFrom
     }
 }
 
-hkJobQueue::JobStatus __cdecl FUN_00a23aa0(hkpMtThreadStructure& tl, hkJobQueue& jobQueue, hkJobQueue::JobQueueEntry& jobInOut)
+// pdb: hkCpuBuildJacobiansJob | hkpCpuBuildJacobiansJob.obj | fnv360_0822_retail, ustr + bridge(ustr|ustr) + skyrim(ustr), high
+hkJobQueue::JobStatus __cdecl hkCpuBuildJacobiansJob(hkpMtThreadStructure& tl, hkJobQueue& jobQueue, hkJobQueue::JobQueueEntry& jobInOut)
 {
     {
         hkMonitorStream& mStream = hkMonitorStream::getInstance();

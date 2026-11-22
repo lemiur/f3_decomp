@@ -1468,7 +1468,8 @@ void B60A50Effect::CloneTo(B60A50Effect* pkDest, B60A50CloningProcess& kCloning)
 extern int g_unk011f9f00;
 
 // @fnv 0x00b60d60
-int* __cdecl FUN_00b60d60()
+// pdb: NiBooleanExtraData::GetRTTI | NiBooleanExtraData.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+int* __cdecl NiBooleanExtraData_GetRTTI()
 {
     return &g_unk011f9f00;
 }
@@ -2377,11 +2378,12 @@ struct ThisCls
     int m_130;
     void FUN_00ba95e0(int a);
     Ret30* FUN_00b69f30(ArgP* p);
-    Obj3c* FUN_00b69ff0(ArgP* p, int a2, int a3, int a4, int a5, int a6);
+    Obj3c* WaterShaderProperty_GetRenderPasses(ArgP* p, int a2, int a3, int a4, int a5, int a6);
 };
 
 // @fnv 0x00b69ff0
-Obj3c* ThisCls::FUN_00b69ff0(ArgP* p, int a2, int a3, int a4, int a5, int a6)
+// pdb: WaterShaderProperty::GetRenderPasses | WaterShaderProperty.obj | fnv360_0822_retail, udata + bridge(udata|caller_sim), high
+Obj3c* ThisCls::WaterShaderProperty_GetRenderPasses(ArgP* p, int a2, int a3, int a4, int a5, int a6)
 {
     TlsGuard guard;
     FlagSlot flagSlot;
@@ -2728,7 +2730,8 @@ FUN_00b6a520::~FUN_00b6a520()
 extern int DAT_011fa018;
 
 // @fnv 0x00b6a660
-int* __cdecl FUN_00b6a660()
+// pdb: NiAlphaAccumulator::GetRTTI | NiAlphaAccumulator.obj | fnv360_0822_retail, udata + bridge(vtable|udata) + skyrim(udata), high
+int* __cdecl NiAlphaAccumulator_GetRTTI()
 {
     return &DAT_011fa018;
 }
@@ -3890,7 +3893,7 @@ class Sub64
 class ObjOwner
 {
   public:
-    void FUN_00a64ce0(void** out);
+    void NiStream_LoadCString(void** out);
 
   public:
     unsigned int unk00;
@@ -4094,14 +4097,14 @@ class FUN_00b6fb20_cls
     unsigned int m_7C;
 };
 
-// Calls FUN_00ba92c0, reads m_6C from the stream, stores a value from FUN_00a64ce0 into m_64, and reads m_70..m_7C when p->m_04 is at least 0x1f.
+// Calls FUN_00ba92c0, reads m_6C from the stream, stores a value from NiStream_LoadCString into m_64, and reads m_70..m_7C when p->m_04 is at least 0x1f.
 // @fnv 0x00b6fb20
 void FUN_00b6fb20_cls::LoadFromStream(ObjOwner* p)
 {
     FUN_00ba92c0(p);
     ReadRaw(p->m_24c, &m_6C, 4);
     void* v = 0;
-    p->FUN_00a64ce0(&v);
+    p->NiStream_LoadCString(&v);
     m_64.FUN_004037f0(v, 0);
     FUN_00aa10f0(v);
     if (p->m_04 >= 0x1f)
@@ -8299,7 +8302,8 @@ FUN_00b60b10::FUN_00b60b10()
 void FUN_004ed900() throw();
 
 // @fnv 0x00b6a510
-void FUN_00b6a510()
+// pdb: BSDismemberSkinInstance::LinkObject | BSDismemberSkinInstance.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(caller_sim), high
+void BSDismemberSkinInstance_LinkObject()
 {
     FUN_004ed900();
 }
@@ -12236,11 +12240,12 @@ struct TailTarget
 
 struct C_00b6f460
 {
-    void FUN_00b6f460();
+    void NiDefaultAVObjectPalette_RegisterStreamables();
 };
 
 // @fnv 0x00b6f460
-void C_00b6f460::FUN_00b6f460()
+// pdb: NiDefaultAVObjectPalette::RegisterStreamables | NiDefaultAVObjectPalette.obj | fnv360_0822_retail, caller_sim + skyrim(caller_sim), high
+void C_00b6f460::NiDefaultAVObjectPalette_RegisterStreamables()
 {
     ((TailTarget*)this)->Tail();
 }
@@ -14063,7 +14068,8 @@ struct GrassQueue {
     virtual void QueueTask(B61Loaded*);
 };
 extern GrassQueue* DAT_0116d138;
-B61Entry* __cdecl FUN_00b61980(const char** ppcName)
+// pdb: TallGrassShaderProperty::GetCachedGeometry | TallGrassShaderProperty.obj | fnv360_0721_beta, udata + bridge(call_dedup|call_gap), high
+B61Entry* __cdecl TallGrassShaderProperty_GetCachedGeometry(const char** ppcName)
 {
     unsigned short usVerts;
     (void)usVerts;
@@ -14406,7 +14412,7 @@ struct RenderProperty
     int unk04, unk08, unk0C, unk10, unk14, unk18, unk1C;
     unsigned int flags20, flags24;
     float alpha;
-    void* FUN_00b70600(unsigned int* index);
+    void* BSShaderLightingProperty_GetFirstActiveNonShadowLight(unsigned int* index);
 };
 struct ShaderCameraBlock
 {
@@ -14556,7 +14562,7 @@ void S00b7ba70_Updater::FUN_00b7ba70(RenderProperty* property, ShaderType* shade
     {
         unsigned int alpha = 0;
         float x = 0.0f;
-        ShaderLink* light = static_cast<ShaderLink*>(property->FUN_00b70600(&alpha));
+        ShaderLink* light = static_cast<ShaderLink*>(property->BSShaderLightingProperty_GetFirstActiveNonShadowLight(&alpha));
         ShaderVector falloff = reinterpret_cast<ShaderLink*>(DAT_011f91c8)->linkE0->scene->GetColor();
         float gp = falloff.Luminance();
         if (light)

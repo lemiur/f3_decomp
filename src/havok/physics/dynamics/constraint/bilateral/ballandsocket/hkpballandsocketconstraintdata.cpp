@@ -14,11 +14,12 @@ struct D54270Bool
 
 struct D54270Object
 {
-    virtual D54270Bool FUN_00d54270() const;
+    virtual D54270Bool hkStdioStreamWriter_seekTellSupported() const;
 };
 
 // @fnv 0x00d54270
-D54270Bool D54270Object::FUN_00d54270() const
+// pdb: hkStdioStreamWriter::seekTellSupported | hkStdioStreamWriter.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+D54270Bool D54270Object::hkStdioStreamWriter_seekTellSupported() const
 {
     return true;
 }

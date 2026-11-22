@@ -1663,7 +1663,7 @@ struct NiCollDataStandIn
     unsigned char m_b49;
     int m_i4C;
 
-    __declspec(noinline) NiAVObjectStandIn* FUN_00ead0d0(NiAVObjectStandIn* pkNode);
+    __declspec(noinline) NiAVObjectStandIn* NiCollisionData_FindAncestorWithCollisionData(NiAVObjectStandIn* pkNode);
     void UpdateCollision(NiAVObjectStandIn* pkObject);
 };
 
@@ -1676,7 +1676,8 @@ __forceinline NiPoint3b operator+(const NiPoint3b& kA, const NiPoint3b& kB)
     return kResult;
 }
 
-NiAVObjectStandIn* NiCollDataStandIn::FUN_00ead0d0(NiAVObjectStandIn* pkNode)
+// pdb: NiCollisionData::FindAncestorWithCollisionData | NiCollisionData.obj | fnv360_0822_retail, objrun + bridge(hash|objrun), high
+NiAVObjectStandIn* NiCollDataStandIn::NiCollisionData_FindAncestorWithCollisionData(NiAVObjectStandIn* pkNode)
 {
     if (pkNode == 0)
         return 0;
@@ -1708,7 +1709,7 @@ void NiCollDataStandIn::UpdateCollision(NiAVObjectStandIn* pkObject)
                 if (pkNode)
                 {
                     if (pkNode->m_pkCollisionObject == 0)
-                        pkNode = FUN_00ead0d0(pkNode);
+                        pkNode = NiCollisionData_FindAncestorWithCollisionData(pkNode);
                     if (pkNode)
                         pkData = pkNode->m_pkCollisionObject;
                 }

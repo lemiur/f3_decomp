@@ -145,7 +145,7 @@ void FUN_004f18c0_cls::FUN_004f18c0(Out4f18* out, Req4f18* req)
 namespace f3m_004e7690 {
 struct Owner1131;
 struct Holder1131 { Owner1131* FUN_004237e0(); };
-struct Extra1131 { int head00; void* FUN_0040a4c0(int kind); Holder1131* FUN_0040aac0(); };
+struct Extra1131 { int head00; void* BaseExtraList_GetExtraData(int kind); Holder1131* FUN_0040aac0(); };
 struct Owner1131 {
     int unk000;
     int unk004;
@@ -168,7 +168,7 @@ struct Owner1131 {
 };
 void* Owner1131::FUN_004e7690() {
     Extra1131* extra = &extra40;
-    void* result = extra->FUN_0040a4c0(0x2a);
+    void* result = extra->BaseExtraList_GetExtraData(0x2a);
     if (!result) {
         Holder1131* holder = extra->FUN_0040aac0();
         if (holder && holder->FUN_004237e0()) {
@@ -542,7 +542,7 @@ struct Target {
  int unk34;
  int unk38;
  Cell* cell; BoundsRef bounds;
- void FUN_004ebb30(float);
+ void TESObjectREFR_SetScale(float);
  Matrix3 FUN_004e7c10();
  void FUN_004f85a0();
 };
@@ -551,7 +551,7 @@ void Target::FUN_004f85a0() {
  if(!cell) return;
  void* world=(cell->flags&1)?cell->world.FUN_00410f00():DAT_01071564;
  if(!world) return;
- FUN_004ebb30(1.0f);
+ TESObjectREFR_SetScale(1.0f);
  Scene* node=GetScene();
  node->scale=(float)fabs(1.0f);
  Update update;

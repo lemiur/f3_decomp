@@ -48,7 +48,7 @@ struct __declspec(align(16)) Desc {
 
 struct Owner {
     void FUN_0090c5a0(Arr*);
-    void FUN_009501f0(Desc*);
+    void bhkCylinderShape_CopyCinfo(Desc*);
     void FUN_00950780(Arr* a);
 };
 
@@ -70,7 +70,7 @@ void Owner::FUN_00950780(Arr* a)
     d.by = 0.0f;
     d.bz = 0.0f;
     d.bw = 0.0f;
-    FUN_009501f0(&d);
+    bhkCylinderShape_CopyCinfo(&d);
     val = FUN_00847dd0(DAT_00df71b0, d.unk20);
     a->Push(val);
     V3 v = { d.ax, d.ay, d.az };
@@ -295,7 +295,8 @@ struct hkQsTransform
 
 }
 
-void FUN_009582b0(int numTransforms, const short* parentIndices, const f3m_009582b0::hkQsTransform& worldFromModel,
+// pdb: hkaSkeletonUtils::transformLocalPoseToWorldPose | hkaSkeletonUtils.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_seq), high
+void hkaSkeletonUtils_transformLocalPoseToWorldPose(int numTransforms, const short* parentIndices, const f3m_009582b0::hkQsTransform& worldFromModel,
                   const f3m_009582b0::hkQsTransform* poseLocal, f3m_009582b0::hkQsTransform* poseModelOut)
 {
     using namespace f3m_009582b0;

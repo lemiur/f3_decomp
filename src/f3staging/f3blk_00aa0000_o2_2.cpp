@@ -284,8 +284,8 @@ struct Setting56 {
     const char* type;
 };
 int __cdecl FUN_00a9d930(const char*);
-void __cdecl FUN_00aa73e0(const Setting56*,char*);
-void __cdecl FUN_00aa7420(const Setting56*,char*);
+void __cdecl INISettingCollection_MainKey(const Setting56*,char*);
+void __cdecl INISettingCollection_SubKey(const Setting56*,char*);
 void __cdecl FUN_0061dbe0(unsigned int,unsigned int*,unsigned int*,unsigned int*,unsigned int*);
 int __cdecl FUN_00403230(char*,unsigned int,const char*,...);
 extern int (__stdcall* DAT_00d9b0fc)(const char*,const char*,const char*,const char*);
@@ -306,8 +306,8 @@ bool ProfileWriter56::FUN_00aa7510(const Setting56* setting) {
         if(handle) {
             int type=FUN_00a9d930(setting->type);
             char section[64],key[64],buffer[256];
-            FUN_00aa73e0(setting,section);
-            FUN_00aa7420(setting,key);
+            INISettingCollection_MainKey(setting,section);
+            INISettingCollection_SubKey(setting,key);
             switch(type) {
             case 6:
                 result=DAT_00d9b0fc(section,key,setting->value.text,filename)!=0;

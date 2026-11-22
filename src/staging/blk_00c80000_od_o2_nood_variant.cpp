@@ -2237,7 +2237,7 @@ inline unsigned int NativeRigidBody::GetFilterNative()
 NativeCollision* __cdecl FUN_007235f0(NativeAV* object);
 NativeCollision* __cdecl FUN_00424fe0(NativeAV* object);
 hkVector4& __cdecl FUN_00468f10(hkVector4& result, const NiPoint3& point);
-void __cdecl FUN_0092bbe0(NativeAV* object, const hkVector4& velocity, float scale);
+void __cdecl bhkForceController_TestForce2(NativeAV* object, const hkVector4& velocity, float scale);
 extern float DAT_00f7abf8[32];
 extern float DAT_00db7260, DAT_00f7a970, DAT_00f7a974, DAT_00f79460;
 extern unsigned int DAT_010f33dc;
@@ -2292,7 +2292,7 @@ void __cdecl FUN_00c9b670(NiAVObject* argument, const NiPoint3& velocity, unsign
                     if (!active->FUN_00825200((const NiRTTI*)&DAT_010f33dc))
                     {
                         new (&sharedPoint) NiPoint3(static_cast<const PointMul&>(velocity).FUN_00432b40(DAT_00f7a970));
-                        FUN_0092bbe0(active, FUN_00468f10(reinterpret_cast<hkVector4&>(work.vector), sharedPoint), DAT_00f7a974);
+                        bhkForceController_TestForce2(active, FUN_00468f10(reinterpret_cast<hkVector4&>(work.vector), sharedPoint), DAT_00f7a974);
                         argument = (NiAVObject*)active;
                     }
                 }

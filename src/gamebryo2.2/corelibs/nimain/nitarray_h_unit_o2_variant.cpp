@@ -271,7 +271,7 @@ struct C8AD40ViewerObj
     virtual void slot3();
     virtual void* GetType();
 };
-const char* __cdecl FUN_0097a770(void*);
+const char* __cdecl bhkConstraintManager_GetTypeName(void*);
 char* __cdecl FUN_00847e70(const char*, const char*);
 int __cdecl FUN_00403230(char*, unsigned int, const char*, ...);
 char* __cdecl FUN_00847d30(const char*, int);
@@ -282,7 +282,7 @@ void ViewerConstraint::FUN_00c8a560(BC8AD40StringArray* array)
     char buffer[32];
     if (object)
     {
-        text = FUN_00847e70("Type", FUN_0097a770(((C8AD40ViewerObj*)object)->GetType()));
+        text = FUN_00847e70("Type", bhkConstraintManager_GetTypeName(((C8AD40ViewerObj*)object)->GetType()));
         array->Add(text);
     }
     FUN_00403230(buffer, 32, "0x%8X", entityA);

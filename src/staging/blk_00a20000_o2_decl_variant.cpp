@@ -121,7 +121,7 @@ void __cdecl FUN_00a2af70();
 void __cdecl ComputeInterpolatedPosition();
 void __cdecl FUN_00a2b130();
 void __cdecl FUN_00a2b410();
-void __cdecl FUN_00a2b6d0();
+void __cdecl NiTCBPosKey_ComputeMaxCurvature();
 void __cdecl InsertBezPosKey();
 void __cdecl FUN_00a2baa0(int a, int b);
 struct FUN_00a2ceb0_cls
@@ -670,7 +670,7 @@ struct Inner_b5508
 void FUN_00a286e0(unsigned int a0, unsigned int a1, unsigned int a2, Vec4_b5508* out);
 struct FUN_00a28720_target
 {
-    void __thiscall FUN_00a6e4a0(void* value);
+    void __thiscall NiQuaternion_SaveBinary(void* value);
 };
 void __cdecl CallAnimCallback(void* a, void* b);
 void __cdecl FUN_00a28720(void* a, void* b);
@@ -717,7 +717,7 @@ struct SpawnTarget
     void Callee(float a, void* p1, void* p2, void* p3, void* p4);
 };
 void __cdecl CallSpawnTarget(float a, char* x, char* y, SpawnTarget* z);
-// Reconstruction of FUN_00a28dc0.
+// Reconstruction of NiBezRotKey_FillDerivedVals.
 //
 // The object is a fixed-size array of 36-byte key records:
 //   +0x00  quaternion q0   (16 bytes)
@@ -744,7 +744,7 @@ struct FNVAnim
 };
 extern void __cdecl FUN_00a28ab0(FNVAnim* obj, unsigned int count, unsigned int flag);
 extern FNVQuat* __cdecl FUN_00a6dd50(FNVQuat* out, FNVQuat* a, FNVQuat* b, FNVQuat* c);
-void __cdecl FUN_00a28dc0(FNVAnim* obj, unsigned int count, unsigned int flag);
+void __cdecl NiBezRotKey_FillDerivedVals(FNVAnim* obj, unsigned int count, unsigned int flag);
 // The game class NiBound - a 16-byte bound (three position floats and a radius).
 class NiBound
 {
@@ -942,7 +942,7 @@ struct FUN_00a29550_owner
 int __cdecl FUN_00a29550(int a1, int a2);
 struct Inner
 {
-    void FUN_00a698a0(void* target);
+    void NiColorA_SaveBinary(void* target);
 };
 struct Outer
 {
@@ -950,7 +950,7 @@ struct Outer
     Inner inner04;
 };
 void __cdecl CallAnimCallback(void* target, Outer* source);
-void __cdecl FUN_00a29660(void* target, Outer* source);
+void __cdecl NiColorKey_SaveBinary(void* target, Outer* source);
 // Reconstruction of UpdateArrayElements (0x00a29e40, 189 bytes).
 //
 // The original does two things:
@@ -1684,7 +1684,7 @@ struct FUN_00a2b980_cls
     unsigned int m_uiC;
 
     void FUN_00a27430(NiStreamImpl& stream);
-    void FUN_00a2b980(NiStreamImpl& stream);
+    void NiTCBPosKey_LoadBinary(NiStreamImpl& stream);
 };
 class BA2BA10BinaryStream
 {
@@ -2557,8 +2557,8 @@ struct FUN_00a2c9d0_cls
     int unk08;
     int unk0c;
     int unk10;
-    void FUN_00a26eb0(S_00a2c9d0_Owner* owner);
-    void FUN_00a2c9d0(S_00a2c9d0_Owner* owner);
+    void NiFloatKey_LoadBinary(S_00a2c9d0_Owner* owner);
+    void NiTCBFloatKey_LoadBinary(S_00a2c9d0_Owner* owner);
 };
 struct NiBinaryStreamW
 {
@@ -2605,7 +2605,7 @@ struct KeyframeElement
     float continuity;
     float bias;
     ~KeyframeElement();
-    void FUN_00a2c9d0(void* context);
+    void NiTCBFloatKey_LoadBinary(void* context);
     static void* operator new[](unsigned int bytes)
     {
         return ((P03MM*)&g_memoryManager)->Allocate(bytes);
@@ -2807,7 +2807,7 @@ class FUN_00a30540_cls
     unsigned int m_uiItemCount;
     void* unk10;
     A30540Entry* m_pEntries;
-    void FUN_00a30540();
+    void NiControllerSequence_DetachInterpolators();
 };
 extern "C" int __cdecl strcmp(const char* s1, const char* s2);
 struct FUN_00a305e0_cls

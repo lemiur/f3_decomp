@@ -171,10 +171,11 @@ struct FUN_00a38df0_shell
     void* m_pe4;
     void* m_pe8;
     void* m_p1e8;
-    void FUN_00a38df0();
+    void NiSingleInterpController_TargetIsRequiredType();
 };
 // @fnv 0x00a38df0
-void FUN_00a38df0_shell::FUN_00a38df0()
+// pdb: NiSingleInterpController::TargetIsRequiredType | NiSingleInterpController.obj | fnv360_0822_retail, call_seq + bridge(vtable|call_seq) + skyrim(call_seq), high
+void FUN_00a38df0_shell::NiSingleInterpController_TargetIsRequiredType()
 {
     ((void(__thiscall*)(void*, void*))(*reinterpret_cast<void***>(this))[0xe8 / 4])(this, m_p2c);
 }
@@ -234,10 +235,11 @@ struct FakeInterpGuarantee
 };
 struct FUN_00a38e90_shell
 {
-    void FUN_00a38e90(float, float);
+    void NiSingleInterpController_GuaranteeTimeRange(float, float);
 };
 // @fnv 0x00a38e90
-void FUN_00a38e90_shell::FUN_00a38e90(float m_fStartTime, float m_fMaximumDistance)
+// pdb: NiSingleInterpController::GuaranteeTimeRange | NiSingleInterpController.obj | fnv360_0822_retail, call_seq + bridge(vtable|call_seq) + skyrim(objrun_open), high
+void FUN_00a38e90_shell::NiSingleInterpController_GuaranteeTimeRange(float m_fStartTime, float m_fMaximumDistance)
 {
     NiInterpolator* p = ((NiSingleInterpController*)this)->m_spInterpolator;
     if (p)
@@ -696,11 +698,12 @@ class BSMultiTargetTreadTransfControllerStandIn
     int unk34;
     unsigned short unk38;
 
-    virtual unsigned short FUN_00a35890();
+    virtual unsigned short BSMultiTargetTreadTransfController_GetInterpolatorCount();
 };
 
 // @fnv 0x00a35890
-unsigned short BSMultiTargetTreadTransfControllerStandIn::FUN_00a35890()
+// pdb: BSMultiTargetTreadTransfController::GetInterpolatorCount | BSMultiTargetTreadTransfController.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun) + skyrim(objrun_open), high
+unsigned short BSMultiTargetTreadTransfControllerStandIn::BSMultiTargetTreadTransfController_GetInterpolatorCount()
 {
     return unk38;
 }

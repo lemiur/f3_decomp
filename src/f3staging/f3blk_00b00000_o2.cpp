@@ -1386,11 +1386,12 @@ struct BatchRenderer
     int unk00, unk04;
     BatchGroup* groups;
     BatchPassMap<unsigned int, unsigned int> map;
-    bool FUN_00b10420(unsigned&, int&, bool&);
-    bool FUN_00b104b0(unsigned&, int&, bool&, int);
+    bool BSBatchRenderer_PrepareNextRenderPass(unsigned&, int&, bool&);
+    bool BSBatchRenderer_RenderNextRenderPass(unsigned&, int&, bool&, int);
 };
 // @fnv 0x00b9a120
-bool BatchRenderer::FUN_00b104b0(unsigned& key, int& bucket, bool& kind, int flags)
+// pdb: BSBatchRenderer::RenderNextRenderPass | BSBatchRenderer.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_seq), high
+bool BatchRenderer::BSBatchRenderer_RenderNextRenderPass(unsigned& key, int& bucket, bool& kind, int flags)
 {
     unsigned index = 0;
     map.GetAt(key, index);
@@ -1466,7 +1467,7 @@ bool BatchRenderer::FUN_00b104b0(unsigned& key, int& bucket, bool& kind, int fla
     FUN_00b0e190(0, 0);
     bool result = true;
     if (!found)
-        result = FUN_00b10420(key, bucket, kind);
+        result = BSBatchRenderer_PrepareNextRenderPass(key, bucket, kind);
     return result;
 }
 }   // namespace f3m_00b104b0
@@ -3226,7 +3227,8 @@ struct SortPass
     SortGeom* pGeom;
 };
 // @fnv 0x00b98b20
-int __cdecl FUN_00b0e750(const void* apA, const void* apB)
+// pdb: RenderPassDepthSort | BSBatchRenderer.obj | fnv360_0822_retail, udata + bridge(udata|udata), high
+int __cdecl RenderPassDepthSort(const void* apA, const void* apB)
 {
     SortPass* pA = *(SortPass**)apA;
     SortPass* pB = *(SortPass**)apB;
@@ -3555,7 +3557,7 @@ extern bool DAT_0116f211;
 extern Shader_b994f0* DAT_01175eb4;
 extern unsigned int DAT_01175eb8;
 int __cdecl FUN_00b0e190(int, int);
-void __cdecl FUN_00b0f0d0(unsigned int, Shader_b994f0*);
+void __cdecl BSBatchRenderer_BeginPass(unsigned int, Shader_b994f0*);
 void __cdecl FUN_00b0ee50(Pass_b994f0*, bool, bool, bool);
 void __cdecl FUN_00b0ebc0(Pass_b994f0*, bool, bool, bool);
 
@@ -3572,7 +3574,7 @@ void FUN_00b0f230(Pass_b994f0* prenderpass, unsigned int uiPassId, bool balphaTe
     if (DAT_01175eb8 != uiPassId || uiPassId == 0x2f6 || pshader != DAT_01175eb4)
     {
         bfirstpass = true;
-        FUN_00b0f0d0(uiPassId, pshader);
+        BSBatchRenderer_BeginPass(uiPassId, pshader);
     }
     if (DAT_0116f211)
     {
@@ -3646,8 +3648,9 @@ struct RenderTaskThread : FUN_007240a0 {
     static void* operator new(unsigned n) {return DAT_01090a78.FUN_0086b930(n);}
     static void operator delete(void* p) {DAT_01090a78.FUN_0086ba60(p);}
 };
-struct Owner {RenderTaskThread* threads[2];void FUN_00b0cf00(int,unsigned,void (__cdecl*)(),const char*,unsigned);};
-void Owner::FUN_00b0cf00(int index,unsigned affinity,void (__cdecl* task)(),const char* name,unsigned stackSize) {
+struct Owner {RenderTaskThread* threads[2];void MTRenderingSystem_AddThread(int,unsigned,void (__cdecl*)(),const char*,unsigned);};
+// pdb: MTRenderingSystem::AddThread | MTRenderingSystem.obj | fnv360_0822_retail, ustr + bridge(ustr|ustr) + skyrim(ustr), high
+void Owner::MTRenderingSystem_AddThread(int index,unsigned affinity,void (__cdecl* task)(),const char* name,unsigned stackSize) {
     if(index<3 && index<2 && !threads[index]) {
         threads[index]=new RenderTaskThread(task);
         threads[index]->FUN_0086ce90(stackSize,name);
@@ -4339,7 +4342,7 @@ extern int DAT_01175a6c;
 
 
 
-void __cdecl FUN_00b0f370(int* p, int a);
+void __cdecl BSBatchRenderer_RenderPersistentPassList(int* p, int a);
 
 void __cdecl FUN_00b0da80(int a, int b);
 
@@ -4413,7 +4416,7 @@ struct Renderer_af60
 
     List2_af60 m_78[2];
 
-    void FUN_00b10b50(int idx, Cam_af60* cam, bool flag, float maxDist);
+    void BSBatchRenderer_RenderNextAlpha(int idx, Cam_af60* cam, bool flag, float maxDist);
 
 };
 
@@ -4493,7 +4496,8 @@ static __forceinline float CalcDist(Item_af60* a, const Point3_af60& dir, bool f
 
 // @fnv 0x00b9af60
 
-void Renderer_af60::FUN_00b10b50(int idx, Cam_af60* cam, bool abUseRadius, float maxDist)
+// pdb: BSBatchRenderer::RenderNextAlpha | BSBatchRenderer.obj | fnv360_0822_retail, udata + bridge(call_seq|caller_sim), high
+void Renderer_af60::BSBatchRenderer_RenderNextAlpha(int idx, Cam_af60* cam, bool abUseRadius, float maxDist)
 
 {
 
@@ -4531,7 +4535,7 @@ void Renderer_af60::FUN_00b10b50(int idx, Cam_af60* cam, bool abUseRadius, float
 
             {
 
-                FUN_00b0f370(&e->m_0c, 1);
+                BSBatchRenderer_RenderPersistentPassList(&e->m_0c, 1);
 
             }
 
@@ -5769,7 +5773,8 @@ extern void __cdecl FUN_00b0da30(bool first,int second);
 
 
 
-void __cdecl FUN_00b0f0d0(unsigned int pass,PassSetupFast::Shader* shader)
+// pdb: BSBatchRenderer::BeginPass | BSBatchRenderer.obj | fnv360_0822_retail, udata + bridge(call_gap|udata), high
+void __cdecl BSBatchRenderer_BeginPass(unsigned int pass,PassSetupFast::Shader* shader)
 
 {
 
@@ -6288,10 +6293,11 @@ struct FUN_00b0fc40 {
   void* owner;
   int unk08;
   SimpleArray items;
-  void FUN_00b0fa90();
+  void BSBatchRenderer_GeometryGroup_ClearPasses();
 };
 
-void FUN_00b0fc40::FUN_00b0fa90() {
+// pdb: BSBatchRenderer::GeometryGroup::ClearPasses | BSBatchRenderer.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_seq), high
+void FUN_00b0fc40::BSBatchRenderer_GeometryGroup_ClearPasses() {
   items.FUN_00ae7440();
   items.Reset();
   if (unk08 != 0)
@@ -7089,10 +7095,11 @@ int unk28;
 State state;
 };
 struct Payload { int unk00; };
-void FUN_00b0f370(Payload*,void*);
-struct Object { unsigned char flags,unk01; unsigned short count; int unk04; Target* target; Payload payload; void FUN_00b0fad0(void*); };
-void Object::FUN_00b0fad0(void* value) {
- if((flags&1)>0u) FUN_00b0f370(&payload,value);
+void BSBatchRenderer_RenderPersistentPassList(Payload*,void*);
+struct Object { unsigned char flags,unk01; unsigned short count; int unk04; Target* target; Payload payload; void BSBatchRenderer_GeometryGroup_Render(void*); };
+// pdb: BSBatchRenderer::GeometryGroup::Render | BSBatchRenderer.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+void Object::BSBatchRenderer_GeometryGroup_Render(void* value) {
+ if((flags&1)>0u) BSBatchRenderer_RenderPersistentPassList(&payload,value);
  else { Target* object=target; if(object) object->action(1,0x2f1,value); }
  Target* object=target;
  if(object) object->state.FUN_00ae8980();
@@ -7129,8 +7136,9 @@ FUN_00b0fa10::~FUN_00b0fa10(){if(target){delete target;target=0;}}
 namespace f3m_00b10420 {
 namespace Query299 {
 struct Leaf {int unk00;char unk04,unk05,unk06,value;};struct Value {int unk00,unk04;Leaf* leaf;};struct Cell {int unk00;Value* value;int unk08,unk0c,unk10;};struct Row {Cell cells[5];int tail;};struct Map {void FUN_00bea7b0(void*,int*);};
-struct Object {int unk00,unk04;Row* rows;Map map;bool FUN_00b0e710(int,int*);bool FUN_00b0f980(void**,int*);bool FUN_00b10420(void**,int*,char*);};
-bool Object::FUN_00b10420(void** key,int* column,char* out){bool result=true;int row=0;if(!*key){result=FUN_00b0f980(key,column);}else{map.FUN_00bea7b0(*key,&row);if(!FUN_00b0e710(row,column))result=FUN_00b0f980(key,column);}if(result){map.FUN_00bea7b0(*key,&row);*out=rows[row].cells[*column].value->leaf->value;}return result;}
+struct Object {int unk00,unk04;Row* rows;Map map;bool FUN_00b0e710(int,int*);bool FUN_00b0f980(void**,int*);bool BSBatchRenderer_PrepareNextRenderPass(void**,int*,char*);};
+// pdb: BSBatchRenderer::PrepareNextRenderPass | BSBatchRenderer.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_seq), high
+bool Object::BSBatchRenderer_PrepareNextRenderPass(void** key,int* column,char* out){bool result=true;int row=0;if(!*key){result=FUN_00b0f980(key,column);}else{map.FUN_00bea7b0(*key,&row);if(!FUN_00b0e710(row,column))result=FUN_00b0f980(key,column);}if(result){map.FUN_00bea7b0(*key,&row);*out=rows[row].cells[*column].value->leaf->value;}return result;}
 }
 
 }   // namespace f3m_00b10420
@@ -7311,7 +7319,8 @@ struct List {
 };
 void FUN_00b0e510();
 void FUN_00b0f230(Item*,unsigned,int,int,int);
-void FUN_00b0f370(List* list,int context) {
+// pdb: BSBatchRenderer::RenderPersistentPassList | BSBatchRenderer.obj | fnv360_0822_retail, call_seq + bridge(call_gap|caller_sim), high
+void BSBatchRenderer_RenderPersistentPassList(List* list,int context) {
  if(list->count>0) {
   FUN_00b0e510();
   Node* position=list->head;

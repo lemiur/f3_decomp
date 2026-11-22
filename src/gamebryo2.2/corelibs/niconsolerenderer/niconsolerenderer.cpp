@@ -241,7 +241,8 @@ const char* GraphicsRenderer::GetD3DFormatName(_D3DFORMAT format) {
 extern "C" void* g_011f4430;
 
 // @fnv 0x00a5f200
-void* __cdecl FUN_00a5f200()
+// pdb: BSPlayerDistanceCheckController::GetRTTI | BSPlayerDistanceCheckController.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(udata), high
+void* __cdecl BSPlayerDistanceCheckController_GetRTTI()
 {
     return &g_011f4430;
 }
@@ -261,7 +262,8 @@ int __cdecl FUN_00a5f500()
 }
 
 // @fnv 0x00dc9e60
-int __cdecl FUN_00dc9e60()
+// pdb: hkpGenericConstraintData::getType | hkpGenericConstraintData.obj | fnv360_0822_retail, objrun + skyrim(objrun), high
+int __cdecl hkpGenericConstraintData_getType()
 {
     return 10;
 }
@@ -1851,7 +1853,8 @@ struct FUN_00e79f40_Stream {
 
 // Converts s->count elements from src (via optional indices) into packed 32-bit values at dst, or fills dst with 0xff when src is null; returns total bytes.
 // @fnv 0x00e79f40
-int FUN_00e79f40(FUN_00e79f40_Stream* pStream)
+// pdb: NiD3DShaderDeclaration::Pack_ByteToUByteColor | NiD3DShaderDeclaration.obj | fnv360_0822_retail, objrun + skyrim(objrun_open), high
+int NiD3DShaderDeclaration_Pack_ByteToUByteColor(FUN_00e79f40_Stream* pStream)
 {
     char* src = pStream->src;
     unsigned short* indices = pStream->indices;
@@ -11496,7 +11499,8 @@ struct FUN_00e79370_Info {
 };
 
 // @f3 0x0087d080 (community match, verified in this file)
-unsigned int FUN_00e79370(FUN_00e79370_Info* pkInfo)
+// pdb: NiD3DShaderDeclaration::Pack_UnsignedLongToFloat | NiD3DShaderDeclaration.obj | fnv360_0822_retail, objrun + skyrim(objrun_open), high
+unsigned int NiD3DShaderDeclaration_Pack_UnsignedLongToFloat(FUN_00e79370_Info* pkInfo)
 {
     unsigned int uiTotal = 0;
     unsigned char* pucSrc = pkInfo->pucSrc;
@@ -12126,7 +12130,7 @@ struct PackingPacket {
     void* vertexData;
     void* stripLengths;
     bool FUN_00e8eeb0();
-    void FUN_00e8ef10(unsigned int);
+    void NiGeometryBufferData_SetStreamCount(unsigned int);
     void FUN_00e8eee0();
 };
 struct PackingData {
@@ -18346,7 +18350,7 @@ unsigned int unk00, flags; Owner108* owner; unsigned int unk0c,unk10; bool dynam
 unsigned int activeVertices,vertices,streamCount,unk24; void** streams; unsigned int indexCount,indexOffset; void* indexBuffer; unsigned int unk38,unk3c,stripLengths,triangles,stripCount;void* activeTriangles;void* indices;
 __forceinline void SetVertexCounts(unsigned short av,unsigned short v) { activeVertices=av; vertices=v; }
 __forceinline void SetTriangleCounts(unsigned short at,unsigned short t,void* lens,unsigned short strips,void* idx) { stripLengths=at; triangles=t; activeTriangles=lens; indices=idx; stripCount=strips; }
-bool FUN_00e8eeb0(); void FUN_00e8ef10(unsigned int); void FUN_00e8eee0();
+bool FUN_00e8eeb0(); void NiGeometryBufferData_SetStreamCount(unsigned int); void FUN_00e8eee0();
 };
 struct Geo108 {unsigned int unk00,unk04,unk08,unk0c,unk10,unk14,revision;};
 class NiD3DHLSLVertexShader {public:const char* GetEntryPoint();};
@@ -21235,7 +21239,8 @@ void* __cdecl FUN_00ec44d0(void*, const void*, unsigned int);
 
 // Copies or zeroes count destination elements using strides and optional indices, then returns the accumulated element sizes.
 // @fnv 0x00e78f80
-unsigned int __cdecl FUN_00e78f80(Stream_e78910* apStream)
+// pdb: NiD3DShaderDeclaration::Pack_FloatToFloat | NiD3DShaderDeclaration.obj | fnv360_0822_retail, objrun + skyrim(objrun_open), high
+unsigned int __cdecl NiD3DShaderDeclaration_Pack_FloatToFloat(Stream_e78910* apStream)
 {
     unsigned int total = 0;
     unsigned short* indices = apStream->indices;
@@ -21338,7 +21343,8 @@ struct PixRow_00e79760 {
 
 // Converts available 16-bit values to floats, zero-fills remaining output values, and returns the accumulated row sizes.
 // @f3 0x0087d480 (community match, verified in this file)
-unsigned int FUN_00e79760(PixRow_00e79760* r)
+// pdb: NiD3DShaderDeclaration::Pack_UnsignedShortToFloat | NiD3DShaderDeclaration.obj | fnv360_0822_retail, objrun + skyrim(objrun_open), high
+unsigned int NiD3DShaderDeclaration_Pack_UnsignedShortToFloat(PixRow_00e79760* r)
 {
   unsigned int total = 0;
   unsigned int base = r->m_srcBase;
@@ -21390,7 +21396,8 @@ unsigned int FUN_00e79760(PixRow_00e79760* r)
 
 
 // @fnv 0x00e79d00
-unsigned int FUN_00e79d00(NormalizedStream* s)
+// pdb: NiD3DShaderDeclaration::Pack_FloatToUByteColor | NiD3DShaderDeclaration.obj | fnv360_0822_retail, objrun + skyrim(objrun_open), high
+unsigned int NiD3DShaderDeclaration_Pack_FloatToUByteColor(NormalizedStream* s)
 {
     unsigned char* source = s->source;
     unsigned short* indices = s->indices;
@@ -22148,9 +22155,9 @@ struct SrcObj {
 
     unsigned short FUN_00c25db0(unsigned short row);
     unsigned short FUN_00c25dd0();
-    float FUN_00c25eb0(unsigned short row);
+    float BSStripPSysData_GetTexCoordDelta(unsigned short row);
     const PointE69* GetElementField(unsigned short row, unsigned short col);
-    const PointE69* FUN_00c25e90(unsigned short row, unsigned short col);
+    const PointE69* BSStripPSysData_GetPointNorms(unsigned short row, unsigned short col);
     const ColorF* GetParticleColor(unsigned short row, unsigned short col);
 };
 
@@ -22189,9 +22196,9 @@ void MeshGenerator::FUN_00e6d3a0(float* pDest, unsigned short* pIndex, SrcObj* p
             }
 
             pSrc->FUN_00c25dd0();
-            pSrc->FUN_00c25eb0(usRow);
+            pSrc->BSStripPSysData_GetTexCoordDelta(usRow);
             float fV = 0.0f;
-            float fStep = pSrc->FUN_00c25eb0(usRow);
+            float fStep = pSrc->BSStripPSysData_GetTexCoordDelta(usRow);
 
             unsigned short usBase = (unsigned short)(uiIndex + 2);
             unsigned short usCol = pSrc->strips[usRow].start;
@@ -22199,7 +22206,7 @@ void MeshGenerator::FUN_00e6d3a0(float* pDest, unsigned short* pIndex, SrcObj* p
             for (unsigned short i = 0; i < m_usPassCountLocal; i++) {
                 uiVerts += 4;
                 const PointE69* pPos = pSrc->GetElementField(usRow, usCol);
-                const PointE69* pNorm = pSrc->FUN_00c25e90(usRow, usCol);
+                const PointE69* pNorm = pSrc->BSStripPSysData_GetPointNorms(usRow, usCol);
 
                 unsigned int uiColor = (((fnv_FloatToInt(pSrc->GetParticleColor(usRow, usCol)->a * 255.0) << 8 | fnv_FloatToInt(pSrc->GetParticleColor(usRow, usCol)->r * 255.0)) << 8 | fnv_FloatToInt(pSrc->GetParticleColor(usRow, usCol)->g * 255.0)) << 8) | fnv_FloatToInt(pSrc->GetParticleColor(usRow, usCol)->b * 255.0);
 
@@ -25023,7 +25030,8 @@ static inline void S00e783b0_Pad(unsigned char* pucPad, unsigned short usCopy)
 
 // Copies vertex data from source to destination with optional index remapping and padding, returning total bytes written.
 // @fnv 0x00e783b0
-unsigned int __cdecl FUN_00e783b0(StreamCopyInfo* pkInfo)
+// pdb: NiD3DShaderDeclaration::Pack_UnsignedByteToUnsignedByte | NiXenonShaderDeclaration.obj | fnv360_0721_beta, objrun + skyrim(objopen_prop), high
+unsigned int __cdecl NiD3DShaderDeclaration_Pack_UnsignedByteToUnsignedByte(StreamCopyInfo* pkInfo)
 {
     unsigned int uiBytesWritten = 0;
     unsigned short* pusRemap = pkInfo->indices;
@@ -25072,7 +25080,8 @@ unsigned int __cdecl FUN_00e783b0(StreamCopyInfo* pkInfo)
 }
 
 // @fnv 0x00e78a70
-unsigned int FUN_00e78a70(Stream_e78910* apStream)
+// pdb: NiD3DShaderDeclaration::Pack_UnsignedShortToUByteColor | NiD3DShaderDeclaration.obj | fnv360_0822_retail, objrun + skyrim(objrun_open), high
+unsigned int NiD3DShaderDeclaration_Pack_UnsignedShortToUByteColor(Stream_e78910* apStream)
 {
     unsigned short* indices = apStream->indices;
     char* dst = apStream->dst;
@@ -25132,7 +25141,8 @@ struct Stream78 {
 };
 // With a source, copies bytes and zeroes following words; without one, zeroes each element, then returns accumulated element sizes.
 // @f3 0x0087cb40 (community match, verified in this file)
-unsigned int FUN_00e78e30(Stream78* pkInfo) {
+// pdb: NiD3DShaderDeclaration::Pack_Float_ExtraOutsToZero | NiD3DShaderDeclaration.obj | fnv360_0822_retail, objrun + skyrim(objrun_open), high
+unsigned int NiD3DShaderDeclaration_Pack_Float_ExtraOutsToZero(Stream78* pkInfo) {
  unsigned int uiTotalBytes=0;
  char* pucSrc=pkInfo->pucSrc;
  unsigned short* pusRemap=pkInfo->pusRemap;
@@ -29595,7 +29605,8 @@ struct CopyStreamData {
 };
 
 // @f3 0x0087ca60 (community match, verified in this file)
-int __cdecl FUN_00e78d50(CopyStreamData* apStreamData) {
+// pdb: NiD3DShaderDeclaration::Pack_Float_DropIns | NiD3DShaderDeclaration.obj | fnv360_0822_retail, objrun + skyrim(objrun_open), high
+int __cdecl NiD3DShaderDeclaration_Pack_Float_DropIns(CopyStreamData* apStreamData) {
     CopyFill zero = {};
     int total=zero.value;
     char* destination = apStreamData->unk2C;
@@ -30375,7 +30386,7 @@ struct StripStream {
 struct StripRendererData {
     unsigned int GetStride(unsigned int stream) const { return stream < streamCount ? strides[stream] : 0; }
     void SetVertexCount(unsigned int count) { maxVertices = vertexCount = count; }
-    void FUN_00e8ef10(unsigned int);
+    void NiGeometryBufferData_SetStreamCount(unsigned int);
     void SetComPointer(unsigned int);
     unsigned int unk000;
     unsigned int flags;
@@ -31236,7 +31247,7 @@ struct LineBufferData {
     unsigned int unk30;
     unsigned int unk34;
     unsigned int m_uiBufferSize;
-    void FUN_00e8ef10(unsigned int uiStreamCount);
+    void NiGeometryBufferData_SetStreamCount(unsigned int uiStreamCount);
     void FUN_00e8f010(unsigned int uiFVF);
 };
 struct LineGeomData {
@@ -34346,7 +34357,7 @@ struct VertexData : Holder_00e8f040 {
 
 
 
-    void FUN_00e8ef10(int flag);
+    void NiGeometryBufferData_SetStreamCount(int flag);
 
     // void SetComPointer(unsigned int val);
 
@@ -34633,7 +34644,7 @@ void RendererE70140::FUN_00e70140(SceneArg* apSceneArg)
 
     overlay = (unsigned int)(unsigned short)primitiveCount * 4;
     VertexData* buffer = a->vertex;
-    buffer->FUN_00e8ef10(1);
+    buffer->NiGeometryBufferData_SetStreamCount(1);
 
     buffer->unk018 = overlay;
     buffer->unk01c = (unsigned int)4 * (unsigned short)elementCount;

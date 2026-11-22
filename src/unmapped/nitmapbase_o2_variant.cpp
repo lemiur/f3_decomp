@@ -5,7 +5,7 @@
 
 struct NiStream
 {
-    void __thiscall FUN_00a64160(const char*);
+    void __thiscall NiStream_SaveCString(const char*);
 };
 struct NiMapBase
 {
@@ -16,7 +16,7 @@ struct NiMapBase
 void __thiscall NiMapBase::FUN_00b60210(NiStream* stream)
 {
     FUN_00bb7160(stream);
-    stream->FUN_00a64160(*(const char**)((char*)this + 0x88));
+    stream->NiStream_SaveCString(*(const char**)((char*)this + 0x88));
 }
 
 struct S_00b601a0_Item

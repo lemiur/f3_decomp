@@ -73,9 +73,10 @@ struct Matrix00925110 {
     float m20; float m21; float m22; float m23;
     float t0; float t1; float t2; float t3;
     void FUN_0096c450(Vec00925110*);
-    void FUN_00925110(Vec00925110*);
+    void hkTransform_setInverse(Vec00925110*);
 };
-void Matrix00925110::FUN_00925110(Vec00925110* v) {
+// pdb: hkTransform::setInverse | hkTransform.obj | fnv360_0822_debug, call_gap + bridge(call_gap|call_dedup) + skyrim(call_seq), high
+void Matrix00925110::hkTransform_setInverse(Vec00925110* v) {
     __declspec(align(16)) float n[4];
     FUN_0096c450(v);
     n[0] = -v->unk30;
@@ -678,7 +679,8 @@ struct World2352
 };
 void __cdecl FUN_0099a2d0(void* broadphase, Entity2352** entities, int count) throw();
 
-void __cdecl FUN_00928050(World2352* world, Entity2352* entity) throw()
+// pdb: hkpWorldOperationUtil::addEntityBP | hkpWorldOperationUtil.obj | fnv360_0822_retail, call_gap + bridge(call_gap|call_gap) + skyrim(call_gap), high
+void __cdecl hkpWorldOperationUtil_addEntityBP(World2352* world, Entity2352* entity) throw()
 {
     Sub2352* sub = &entity->sub;
     if (sub->shape)
@@ -940,14 +942,14 @@ struct __declspec(align(16)) Mat4 {
     Vec4 c0, c1, c2, c3;
     Mat4() {}
     __forceinline Mat4(const Mat4& o) : c0(o.c0), c1(o.c1), c2(o.c2), c3(o.c3) {}
-    void FUN_009251b0(const Mat4* m, int arg);
+    void hkTransform_setMul(const Mat4* m, int arg);
     void FUN_00925480(int arg);
 };
 void Mat4::FUN_00925480(int arg)
 {
     Mat4 a(*this);
     Mat4 b(a);
-    FUN_009251b0(&b, arg);
+    hkTransform_setMul(&b, arg);
 }
 }
 }   // namespace f3m_00925480
@@ -973,9 +975,10 @@ struct Matrix3 {
 struct Transform {
     Matrix3 rotation;
     Vector translation;
-    void FUN_009251b0(const Transform&, const Transform&);
+    void hkTransform_setMul(const Transform&, const Transform&);
 };
-void Transform::FUN_009251b0(const Transform& left, const Transform& right)
+// pdb: hkTransform::setMul | hkTransform.obj | fnv360_0822_debug, call_gap + skyrim(call_seq), high
+void Transform::hkTransform_setMul(const Transform& left, const Transform& right)
 {
     Vector r[3];
     r[0].x = left.rotation.col[0].x; r[0].y = left.rotation.col[0].y; r[0].z = left.rotation.col[0].z;
@@ -1327,7 +1330,7 @@ struct __declspec(align(16)) Vec4 { float x,y,z,w; Vec4& operator=(const Vec4& r
 struct Rot
 {
     Vec4 rows[3];
-    void FUN_00924b40(const void* src);
+    void hkRotation_set(const void* src);
 };
 
 struct HavokTransform
@@ -1520,7 +1523,7 @@ void Owner::FUN_00925e70(ArgObj* arg)
         body->FUN_008245d0(nameStr);
     }
     HavokTransform hk;
-    hk.basis.FUN_00924b40(&rotation);
+    hk.basis.hkRotation_set(&rotation);
     hk.position = vec30;
     NiTransform t;
     FUN_0056ac90(&t.m_kOrientation, &hk.basis);
@@ -1616,11 +1619,12 @@ struct S00921660_Cls
     int unk58;
     int unk5c;
     float unk60;
-    float FUN_00921660(S00921660_Body* a, S00921660_Body* b);
+    float hkpCharacterProxy_surfaceDistance(S00921660_Body* a, S00921660_Body* b);
 };
 
 
-float S00921660_Cls::FUN_00921660(S00921660_Body* a, S00921660_Body* b)
+// pdb: hkpCharacterProxy::surfaceDistance | hkpCharacterProxy.obj | fnv360_0822_debug, call_seq + skyrim(call_gap_sim), high
+float S00921660_Cls::hkpCharacterProxy_surfaceDistance(S00921660_Body* a, S00921660_Body* b)
 {
     S00921660_Shape* sa = a->unk28;
     float dot = a->unk10.dot3(b->unk10);
@@ -2430,10 +2434,11 @@ template <typename T> __forceinline T* __cdecl S00cb4230_AddByteOffset(T* base, 
 }
 void __cdecl FUN_0090c9b0(int mode, const S00cb4230_Vec4* p40, const S00cb4230_Quat* p80, float fret,
                           const InertiaTensor* out, const S00cb4230_Vec4* p90, float f0, float f1, MotionBase* motion);
-void __cdecl FUN_00977ab0(float f, S00cb4230_MotionStateData* p);
+void __cdecl hkSweptTransformUtil_freezeMotionState(float f, S00cb4230_MotionStateData* p);
 
 
-void __cdecl FUN_00927010(ThisObj* self, S00cb4230_MotionType mode, MotionFlag31 flagA, MotionFlag31 flagB, Node4* node)
+// pdb: hkpWorldOperationUtil::replaceMotionObject | hkpWorldOperationUtil.obj | fnv360_0822_retail, call_gap + bridge(call_gap|call_gap) + skyrim(call_gap), high
+void __cdecl hkpWorldOperationUtil_replaceMotionObject(ThisObj* self, S00cb4230_MotionType mode, MotionFlag31 flagA, MotionFlag31 flagB, Node4* node)
 {
     if (flagA)
     {
@@ -2486,7 +2491,7 @@ void __cdecl FUN_00927010(ThisObj* self, S00cb4230_MotionType mode, MotionFlag31
             float c = localState.GetMotionState()->getSweptTransform().getInvDeltaTime();
             if (c != 0.0f)
             {
-                FUN_00977ab0(node ? node->FUN_009022d0()
+                hkSweptTransformUtil_freezeMotionState(node ? node->FUN_009022d0()
                                                  : 1.0f / c +
                                                        localState.GetMotionState()->getSweptTransform().getBaseTime(),
                                             &pObj->m_kMotionState);
@@ -2695,7 +2700,8 @@ extern float DAT_00f7b22c;
 extern double DAT_00dbe5e0;
 f3m_0092bbe0::Ref* FUN_00424fe0(f3m_0092bbe0::Host* host);
 
-void FUN_0092bbe0(f3m_0092bbe0::Host* host, const f3m_0092bbe0::hkVector4* color, float value)
+// pdb: bhkForceController::TestForce2 | bhkForceController.obj | fnv360_0822_retail, udata + bridge(call_gap|call_gap_sim), high
+void bhkForceController_TestForce2(f3m_0092bbe0::Host* host, const f3m_0092bbe0::hkVector4* color, float value)
 {
     using namespace f3m_0092bbe0;
     Controller* c = host->FUN_00825200(&DAT_010f33dc);
@@ -3396,7 +3402,7 @@ struct hkQuaternion
     __forceinline hkReal getReal() const { return m_vec(3); }
     __forceinline void setIdentity() { m_vec.set(0.0f, 0.0f, 0.0f, 1.0f); }
     void FUN_009240d0(const hkVector4& axis, hkReal angle);     // setAxisAngle
-    void FUN_00924760(const hkVector4& v);
+    void hkQuaternion_removeAxisComponent(const hkVector4& v);
 };
 
 __forceinline void hkVector4::setRotatedDir(const hkQuaternion& quat, const hkVector4& direction)
@@ -3418,7 +3424,8 @@ __forceinline void hkVector4::setRotatedDir(const hkQuaternion& quat, const hkVe
     this->setAdd4(ret, ret);
 }
 
-void hkQuaternion::FUN_00924760(const hkVector4& axis)
+// pdb: hkQuaternion::removeAxisComponent | hkQuaternion.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc + skyrim(uconst), high
+void hkQuaternion::hkQuaternion_removeAxisComponent(const hkVector4& axis)
 {
     hkVector4 rotatedAxis;
     rotatedAxis.setRotatedDir(*this, axis);
@@ -4809,7 +4816,8 @@ struct Q81World {
 };
 }
 
-void __cdecl FUN_00928190(void* world, void* phantom)
+// pdb: hkpWorldOperationUtil::addPhantomBP | hkpWorldOperationUtil.obj | fnv360_0822_retail, call_gap + bridge(call_gap|call_seq) + skyrim(call_gap), high
+void __cdecl hkpWorldOperationUtil_addPhantomBP(void* world, void* phantom)
 {
     using namespace f3m_00928190;
     Q81World* w = (Q81World*)world;
@@ -5557,7 +5565,8 @@ struct __declspec(align(8)) MemberValue
 
 void FUN_932fc0(void* value, void* type, void* ctx);
 
-void FUN_00933010(const void* a, const void* b, void* ctx)
+// pdb: hkDataObjectNative::asObject | hkDataObjectNative.obj | fnv360_0822_debug, caller_sim + skyrim(caller_sim), high
+void hkDataObjectNative_asObject(const void* a, const void* b, void* ctx)
 {
     NumView t1(a, "numDeclaredMembers");
     NumView t2(b, "numDeclaredMembers");
@@ -5870,14 +5879,15 @@ struct Q93Lookup {
     bool* FUN_0093d640(bool* out);
     int* FUN_0093d670(int index);
 };
-static __declspec(noinline) void FUN_0093cae0(void* object, const char* name)
+// pdb: hkDataObjectNative::hasMember | hkDataObjectNative.obj | fnv360_0822_retail, caller_sim + bridge(caller_sim|vtable) + skyrim(caller_sim), high
+static __declspec(noinline) void hkDataObjectNative_hasMember(void* object, const char* name)
 {
     Q93Lookup lookup(object, name);
     bool valid;
     if (*lookup.FUN_0093d640(&valid))
         *lookup.FUN_0093d670(0) = 0;
 }
-void __cdecl Caller_0093cae0(int unused, void* object) { FUN_0093cae0(object, &DAT_00e37e58); }
+void __cdecl Caller_0093cae0(int unused, void* object) { hkDataObjectNative_hasMember(object, &DAT_00e37e58); }
 }
 }   // namespace f3m_0093cae0
 
@@ -6069,7 +6079,7 @@ public:
     }
 };
 typedef FUN_0093d7f0 hkClassAccessor;
-int __cdecl FUN_009232c0(const char* a, const char* b);
+int __cdecl hkString_strCmp(const char* a, const char* b);
 
 static __declspec(noinline) int FUN_00935000(const hkClassAccessor& object, const char* name)
 {
@@ -6083,17 +6093,17 @@ void __cdecl updateSkeletalAnimation(hkVariant&, hkVariant& newObject, hkObjectU
 {
     hkClassAccessor data(newObject);
     int& type = data.member("type").FUN_0093d6b0();
-    if (FUN_009232c0(newObject.type->FUN_009b0490(), "hkInterleavedSkeletalAnimation") == 0)
+    if (hkString_strCmp(newObject.type->FUN_009b0490(), "hkInterleavedSkeletalAnimation") == 0)
     {
         hkClassAccessor current(newObject);
         type = FUN_00935000(current, "HK_INTERLEAVED_ANIMATION");
     }
-    else if (FUN_009232c0(newObject.type->FUN_009b0490(), "hkDeltaCompressedSkeletalAnimation") == 0)
+    else if (hkString_strCmp(newObject.type->FUN_009b0490(), "hkDeltaCompressedSkeletalAnimation") == 0)
     {
         hkClassAccessor current(newObject);
         type = FUN_00935000(current, "HK_DELTA_COMPRESSED_ANIMATION");
     }
-    else if (FUN_009232c0(newObject.type->FUN_009b0490(), "hkWaveletSkeletalAnimation") == 0)
+    else if (hkString_strCmp(newObject.type->FUN_009b0490(), "hkWaveletSkeletalAnimation") == 0)
     {
         hkClassAccessor current(newObject);
         type = FUN_00935000(current, "HK_WAVELET_COMPRESSED_ANIMATION");

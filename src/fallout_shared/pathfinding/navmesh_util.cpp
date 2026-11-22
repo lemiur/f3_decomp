@@ -158,13 +158,13 @@ extern "C" int DAT_00dc4dc0;
 
 struct S_5fcac0
 {
-    void FUN_005fcac0(unsigned short, int, int);
+    void PathingLocation_SetupData(unsigned short, int, int);
 };
 
 int S006997b0::FUN_006997b0(unsigned short a, int b)
 {
     *(void**)this = (void*)&DAT_00dc4dc0;
-    ((S_5fcac0*)this)->FUN_005fcac0(a, b, 0);
+    ((S_5fcac0*)this)->PathingLocation_SetupData(a, b, 0);
     return (int)this;
 }
 

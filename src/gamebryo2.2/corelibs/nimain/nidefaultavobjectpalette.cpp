@@ -562,10 +562,11 @@ class FUN_00a6e7b0_class
     int unk04;
     PaletteMap m_map;
     bool FUN_00a88a50(FUN_00a6e7b0_class* other);
-    bool FUN_00a6e7b0(FUN_00a6e7b0_class* other);
+    bool NiDefaultAVObjectPalette_IsEqual(FUN_00a6e7b0_class* other);
 };
 // @fnv 0x00a6e7b0
-bool FUN_00a6e7b0_class::FUN_00a6e7b0(FUN_00a6e7b0_class* other)
+// pdb: NiDefaultAVObjectPalette::IsEqual | NiDefaultAVObjectPalette.obj | fnv360_0822_retail, caller_sim + bridge(vtable|objrun) + skyrim(caller_sim), high
+bool FUN_00a6e7b0_class::NiDefaultAVObjectPalette_IsEqual(FUN_00a6e7b0_class* other)
 {
     if (!FUN_00a88a50(other))
         return false;
@@ -603,7 +604,7 @@ struct MapNoAlias : NiTFixedStringMap_NiAVObject___
 };
 struct StreamSaveShell : public NiStream
 {
-    void FUN_00a64160(const char* pcString);
+    void NiStream_SaveCString(const char* pcString);
 };
 
 struct PaletteSaveShell : public NiDefaultAVObjectPalette
@@ -642,7 +643,7 @@ void PaletteSaveShell::FUN_00a6e6c0(NiStream& kStream)
             NiAVObject* pkObject;
             ((MapNoAlias&)m_kObjectMap).GetNext(pvPos, kKey, pkObject);
             pcKey = kKey.m_kHandle;
-            ((StreamSaveShell&)kStream).FUN_00a64160(pcKey);
+            ((StreamSaveShell&)kStream).NiStream_SaveCString(pcKey);
             ((NiStreamLinkObject)kStream.m_ppVirtualMethodTable[12])(&kStream, pkObject);
             if (pcKey != EmptyFS.m_kHandle)
                 InterlockedDecrement((volatile long*)(pcKey - 8));

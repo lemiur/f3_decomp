@@ -352,7 +352,8 @@ char* FnvCpu_FUN_00d081d0_CpuObject::FUN_00d081d0()
 }
 
 // @fnv 0x00d08370
-void __stdcall FUN_00d08370(int)
+// pdb: hkpContinuousSimulation::assertThereIsNoCollisionInformationForAgent | hkpContinuousSimulation.obj | fnv360_0822_retail, vtable_prefix + bridge(vtable_prefix|vtable), high
+void __stdcall hkpContinuousSimulation_assertThereIsNoCollisionInformationForAgent(int)
 {}
 
 // @fnv 0x00d0a2a0

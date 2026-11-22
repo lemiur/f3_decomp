@@ -33,7 +33,7 @@ struct NiTexture;
 struct NiThread;
 struct FUN_00a8aa30_shell : public NiTriBasedGeomData
 {
-    void FUN_00a8aa30(NiStream*);
+    void NiTriBasedGeomData_LoadBinary(NiStream*);
 };
 
 struct FakeBinaryStream
@@ -53,7 +53,8 @@ class NiStream
 
 // Loads NiGeometryData binary data from the stream, then reads 2 bytes from the stream's binary reader into this+0x40.
 // @fnv 0x00a8aa30
-void FUN_00a8aa30_shell::FUN_00a8aa30(NiStream* kStream)
+// pdb: NiTriBasedGeomData::LoadBinary | NiTriBasedGeomData.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun) + skyrim(caller_sim), high
+void FUN_00a8aa30_shell::NiTriBasedGeomData_LoadBinary(NiStream* kStream)
 {
     reinterpret_cast<NiGeometryData*>(this)->LoadBinary(*kStream);
     FakeBinaryStream* __restrict input = kStream->m_pkIstr;
@@ -72,7 +73,7 @@ struct NiTexture;
 struct NiThread;
 struct FUN_00a8aa70_shell : public NiTriBasedGeomData
 {
-    void FUN_00a8aa70(NiStream*);
+    void NiTriBasedGeomData_SaveBinary(NiStream*);
 };
 
 struct NiBinaryStream_Save
@@ -84,7 +85,8 @@ struct NiBinaryStream_Save
 };
 
 // @fnv 0x00a8aa70
-void FUN_00a8aa70_shell::FUN_00a8aa70(NiStream* kStream)
+// pdb: NiTriBasedGeomData::SaveBinary | NiTriBasedGeomData.obj | fnv360_0822_retail, call_seq + bridge(vtable|call_seq) + skyrim(caller_sim), high
+void FUN_00a8aa70_shell::NiTriBasedGeomData_SaveBinary(NiStream* kStream)
 {
     NiGeometryData::SaveBinary(*kStream);
     NiBinaryStream_Save* __restrict output = kStream->m_pkOstr;
@@ -195,18 +197,18 @@ struct S_00a8a9c0_Base
     int unk34;
     int unk38;
     int unk3c;
-    bool FUN_00a67840(const S_00a8a9c0_Base* pkObject);
+    bool NiGeometryData_IsEqual(const S_00a8a9c0_Base* pkObject);
 };
 struct S_00a8a9c0 : S_00a8a9c0_Base
 {
     unsigned short m_usTriangles;
     unsigned char MatchesTriangleCount(const S_00a8a9c0_Base* pkObject);
 };
-// Returns false if FUN_00a67840 fails, otherwise returns whether m_usTriangles equals the passed object's m_usTriangles.
+// Returns false if NiGeometryData_IsEqual fails, otherwise returns whether m_usTriangles equals the passed object's m_usTriangles.
 // @fnv 0x00a8a9c0
 unsigned char S_00a8a9c0::MatchesTriangleCount(const S_00a8a9c0_Base* pkObject)
 {
-    if (!FUN_00a67840(pkObject))
+    if (!NiGeometryData_IsEqual(pkObject))
         return false;
     return m_usTriangles == ((const S_00a8a9c0*)pkObject)->m_usTriangles;
 }

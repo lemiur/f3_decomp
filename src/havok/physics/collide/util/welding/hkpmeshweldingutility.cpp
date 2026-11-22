@@ -243,7 +243,8 @@ struct TopIface
     virtual SubIface* GetSub();
 };
 extern "C" void FUN_00a55e90_opaque();
-__declspec(noinline) char* FUN_00a55e90(char* out, Iface* self, void* sub, void* key, int index, int* n, int one)
+// pdb: hkpMeshWeldingUtility::calcBitcodeForTriangleEdge | hkpMeshWeldingUtility.obj | fnv360_0822_retail, call_seq + skyrim(call_seq), high
+__declspec(noinline) char* hkpMeshWeldingUtility_calcBitcodeForTriangleEdge(char* out, Iface* self, void* sub, void* key, int index, int* n, int one)
 {
     FUN_00a55e90_opaque();
     *n = *n;
@@ -267,7 +268,7 @@ bool* CheckSubQueries(bool* result, void* key, Iface* self)
     for (int i = 0; i < 3; i++)
     {
         char out;
-        if (!*FUN_00a55e90(&out, self, sub, key, i, &n, 1))
+        if (!*hkpMeshWeldingUtility_calcBitcodeForTriangleEdge(&out, self, sub, key, i, &n, 1))
         {
             *result = false;
             return result;
@@ -815,7 +816,7 @@ struct Outer {
     virtual Container* GetContainer();
 };
 char* __cdecl FUN_00a564b0(char* out, const Vec4* a, const Vec4* b, const Vec4* c, float tol);
-char* __cdecl FUN_00a55e90(char* out, Outer* outer, Triangle* tri, void* key, int i, int* result, void* p3);
+char* __cdecl hkpMeshWeldingUtility_calcBitcodeForTriangleEdge(char* out, Outer* outer, Triangle* tri, void* key, int i, int* result, void* p3);
 short __cdecl FUN_00a560b0(void* key, Outer* outer, void* p3)
 {
     ShapeBuffer buffer;
@@ -825,7 +826,7 @@ short __cdecl FUN_00a560b0(void* key, Outer* outer, void* p3)
         return 0;
     int result = 0;
     for (int i = 0; i < 3; i++)
-        FUN_00a55e90(&tmp, outer, tri, key, i, &result, p3);
+        hkpMeshWeldingUtility_calcBitcodeForTriangleEdge(&tmp, outer, tri, key, i, &result, p3);
     return (short)result;
 }
 }

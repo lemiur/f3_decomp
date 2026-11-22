@@ -79,7 +79,8 @@ struct FUN_00c85750_context
 FUN_00c85750_context* __cdecl FUN_00c85750();
 
 // @fnv 0x00d2b8b0
-int __stdcall FUN_00d2b8b0(int a, int b, int c)
+// pdb: hkSocket::asyncSelect | hkSocket.obj | fnv360_0721_beta, vtable + skyrim(objrun_sim), high
+int __stdcall hkSocket_asyncSelect(int a, int b, int c)
 {
     return 1;
 }
@@ -132,11 +133,12 @@ class FUN_00d2b740_cls
     unsigned int unk04;
     StreamIface* m_pBinaryStream;
 
-    int FUN_00d2b740(char* buf, int size);
+    int hkSocket_ReaderAdapter_read(char* buf, int size);
 };
 
 // @fnv 0x00d2b740
-int FUN_00d2b740_cls::FUN_00d2b740(char* apBuffer, int size)
+// pdb: hkSocket::ReaderAdapter::read | hkSocket.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+int FUN_00d2b740_cls::hkSocket_ReaderAdapter_read(char* apBuffer, int size)
 {
     int total = 0;
     if (size > 0)

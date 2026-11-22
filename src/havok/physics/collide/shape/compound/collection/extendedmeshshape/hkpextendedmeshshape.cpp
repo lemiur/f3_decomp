@@ -769,7 +769,8 @@ int bhkShapeOwner::GetShapeKey()
 
 
 // @fnv 0x00d554e0
-void __stdcall FUN_00d554e0(int a)
+// pdb: hkpNullBroadPhaseListener::addCollisionPair | hkpNullBroadPhaseListener.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void __stdcall hkpNullBroadPhaseListener_addCollisionPair(int a)
 {}
 
 // @fnv 0x00d554f0

@@ -17,7 +17,8 @@ extern char DAT_01171e20[];
 extern char DAT_01171240[];
 extern char DAT_01170660[];
 
-bool FUN_00afcab0()
+// pdb: ShadowLightShader::Initialize | ShadowLightShader.obj | fnv360_0822_retail, objrun + bridge(hash|objrun), high
+bool ShadowLightShader_Initialize()
 {
     FUN_00b58540();
     for (R_00afcab0** p = DAT_01173b08; (int)p < (int)(DAT_01173b08 + 156); p++) {
@@ -71,7 +72,7 @@ bool FUN_00afcab0()
 
 extern "C" char DAT_01175ebd;
 extern "C" int DAT_01175ec0;
-void FUN_00b0e750();
+void RenderPassDepthSort();
 struct S_00b0ea50 { void FUN_00b0ea50(void (*)()); };
 
 struct C_00b0f3f0 { void FUN_00b0f3f0(int a, char b); };
@@ -79,8 +80,8 @@ void C_00b0f3f0::FUN_00b0f3f0(int a, char b)
 {
     DAT_01175ec0 = a;
     DAT_01175ebd = b;
-    ((S_00b0ea50*)(*(char**)((char*)this + 0x70) + 0xc))->FUN_00b0ea50(FUN_00b0e750);
-    ((S_00b0ea50*)(*(char**)((char*)this + 0x74) + 0xc))->FUN_00b0ea50(FUN_00b0e750);
+    ((S_00b0ea50*)(*(char**)((char*)this + 0x70) + 0xc))->FUN_00b0ea50(RenderPassDepthSort);
+    ((S_00b0ea50*)(*(char**)((char*)this + 0x74) + 0xc))->FUN_00b0ea50(RenderPassDepthSort);
 }
 
 // ---- family f382

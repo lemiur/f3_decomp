@@ -312,10 +312,10 @@ struct Sectors {
 };
 struct Track { unsigned m_iBytesUsedInLastSector; Sectors m_kSectors; };
 struct PreviousBodies { Body a,b; Transform ta,tb; };
-void __cdecl FUN_00976cd0(const Swept&,float,Transform&);
+void __cdecl hkSweptTransformUtil_lerp2(const Swept&,float,Transform&);
 static __forceinline void fillPrevious(const Query& current,PreviousBodies& b,Query& previous) {
-    FUN_00976cd0(current.m_pBodyA->GetMotionState()->getSweptTransform(),current.m_pRayCastInput->m_pStepInfo.m_uiStartTime,b.ta);
-    FUN_00976cd0(current.m_pBodyB->GetMotionState()->getSweptTransform(),current.m_pRayCastInput->m_pStepInfo.m_uiStartTime,b.tb);
+    hkSweptTransformUtil_lerp2(current.m_pBodyA->GetMotionState()->getSweptTransform(),current.m_pRayCastInput->m_pStepInfo.m_uiStartTime,b.ta);
+    hkSweptTransformUtil_lerp2(current.m_pBodyB->GetMotionState()->getSweptTransform(),current.m_pRayCastInput->m_pStepInfo.m_uiStartTime,b.tb);
     previous.m_pBodyA=&b.a;
     previous.m_pBodyB=&b.b;
     previous.m_pContactManager=current.m_pContactManager;
@@ -425,7 +425,8 @@ extern unsigned long DAT_0116913c;
 extern const char DAT_00e7ddac[];
 struct Monitor { char *start,*end,*capacity,*limit; };
 
-void __cdecl FUN_00999b70(void* owner,Track& track,const Input& context) {
+// pdb: hkAgentNnMachine_ProcessTrack | hkpAgentNnMachine.obj | fnv360_0822_retail, call_gap + bridge(call_gap_sim|call_dedup) + skyrim(call_gap_sim), high
+void __cdecl hkAgentNnMachine_ProcessTrack(void* owner,Track& track,const Input& context) {
     int skipped=0;
     Output result(owner);
     for(int index=0;index<track.m_kSectors.GetLogicalSize();) {
@@ -459,12 +460,12 @@ void __cdecl FUN_00999b70(void* owner,Track& track,const Input& context) {
 
 // @f3 0x009841b0 (community match, verified in this file)
 namespace f3m_009841b0 {
-// FUN_009841b0 = Havok 5.5.0 hkpSimpleWorldRayCaster::addBroadPhaseHandle (protected virtual, hkpCollide.lib, hkpSimpleWorldRayCaster.obj;
+// hkpSimpleWorldRayCaster_addBroadPhaseHandle = Havok 5.5.0 hkpSimpleWorldRayCaster::addBroadPhaseHandle (protected virtual, hkpCollide.lib, hkpSimpleWorldRayCaster.obj;
 // ?addBroadPhaseHandle@hkpSimpleWorldRayCaster@@MAEMPBVhkpBroadPhaseHandle@@H@Z). The stock release object is byte-identical to the game.
 // No .cpp ships: the body is RECONSTRUCTED from the hybrid object's line records 19-41 and locals (col, shape; block: trans),
 // on the SDK's verbatim headers and inline bodies (hkFpuVector4.inl, hkMatrix3/hkTransform .inl, hkpCdBody.inl,
 // hkpTypedBroadPhaseHandle.inl, hkpCollidable.inl, hkpShape.inl), cut with hktrim.py.
-// Target named FUN_009841b0 (the pack symbol): the member is renamed in the class, in its base and at the definition.
+// Target named hkpSimpleWorldRayCaster_addBroadPhaseHandle (the pack symbol): the member is renamed in the class, in its base and at the definition.
 namespace f3m_009841b0 {
 typedef float  hkReal;
 typedef signed char		hkInt8;
@@ -911,7 +912,7 @@ class hkpBroadPhaseCastCollector
 {
 	public:
 		virtual ~hkpBroadPhaseCastCollector() { }
-		virtual	hkReal FUN_009841b0( const hkpBroadPhaseHandle* broadphaseHandle, int castIndex ) = 0;
+		virtual	hkReal hkpSimpleWorldRayCaster_addBroadPhaseHandle( const hkpBroadPhaseHandle* broadphaseHandle, int castIndex ) = 0;
 };
 
 class hkpRayShapeCollectionFilter;
@@ -943,7 +944,7 @@ class hkpSimpleWorldRayCaster : public hkpBroadPhaseCastCollector
 	public:
 		~hkpSimpleWorldRayCaster(){}
 	protected:
-		virtual	hkReal FUN_009841b0( const hkpBroadPhaseHandle* broadPhaseHandle, int castIndex );
+		virtual	hkReal hkpSimpleWorldRayCaster_addBroadPhaseHandle( const hkpBroadPhaseHandle* broadPhaseHandle, int castIndex );
 	protected:
 		const hkpWorldRayCastInput*   m_input;
 		const hkpRayCollidableFilter* m_filter;
@@ -965,7 +966,8 @@ class hkpRayCollidableFilter
 		virtual hkBool isCollisionEnabled( const hkpWorldRayCastInput& a, const hkpCollidable& collidableB ) const = 0;
 };
 
-hkReal hkpSimpleWorldRayCaster::FUN_009841b0( const hkpBroadPhaseHandle* broadPhaseHandle, int castIndex )
+// pdb: hkpSimpleWorldRayCaster::addBroadPhaseHandle | hkpSimpleWorldRayCaster.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+hkReal hkpSimpleWorldRayCaster::hkpSimpleWorldRayCaster_addBroadPhaseHandle( const hkpBroadPhaseHandle* broadPhaseHandle, int castIndex )
 {
 	const hkpCollidable* col = static_cast<hkpCollidable*>( static_cast<const hkpTypedBroadPhaseHandle*>(broadPhaseHandle)->getOwner() );
 	const hkpShape* shape = col->getShape();

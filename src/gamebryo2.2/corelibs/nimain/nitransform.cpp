@@ -74,12 +74,13 @@ struct TransformOutputStream : NiStream
 
 struct TransformSaver : NiTransform
 {
-    void FUN_00a86cd0(NiStream& stream);
+    void NiTransform_SaveBinary(NiStream& stream);
 };
 
 // Writes the orientation, translation, and scale of the transform to the given NiStream.
 // @fnv 0x00a86cd0
-void TransformSaver::FUN_00a86cd0(NiStream& stream)
+// pdb: NiTransform::SaveBinary | NiTransform.obj | fnv360_0822_retail, caller_sim + bridge(hash|caller_sim) + skyrim(caller_sim), high
+void TransformSaver::NiTransform_SaveBinary(NiStream& stream)
 {
     static_cast<TransformRotationSaver&>(m_kOrientation).ReadMatrixFromStream(&stream);
     static_cast<TransformTranslationSaver&>(m_kTranslation).FUN_00a69780(stream);

@@ -2,7 +2,7 @@
 // src/havok/physics/collide/agent/deprecated/convexlist/hkpconvexlistagent.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/physics/collide/agent/deprecated/convexlist/hkpconvexlistagent.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-extern "C" void __cdecl FUN_00da3510(void*, void*);
+extern "C" void __cdecl hkAgent1nMachine_InvalidateTim(void*, void*);
 
 struct hkpConvexListAgent
 {
@@ -16,18 +16,19 @@ void __thiscall hkpConvexListAgent::FUN_00d33770(int a)
     if (*(char*)((char*)this + 0x84))
         RemovePoint(a);
     else
-        FUN_00da3510(this + 0x30, (void*)a);
+        hkAgent1nMachine_InvalidateTim(this + 0x30, (void*)a);
 }
 
 extern "C" void __cdecl FUN_00d339d0(int, int, int, int);
 
 struct FUN_00d33b70_cls
 {
-    void __thiscall FUN_00d33b70(int a, int b, int c, int d);
+    void __thiscall hkpConvexListAgent_getClosestPoints(int a, int b, int c, int d);
 };
 
 // @fnv 0x00d33b70
-void __thiscall FUN_00d33b70_cls::FUN_00d33b70(int aiArg1, int aiArg2, int aiArg3, int aiArg4)
+// pdb: hkpConvexListAgent::getClosestPoints | hkpConvexListAgent.obj | fnv360_0822_retail, vtable_prefix + bridge(vtable_prefix|vtable) + skyrim(vtable_prefix), high
+void __thiscall FUN_00d33b70_cls::hkpConvexListAgent_getClosestPoints(int aiArg1, int aiArg2, int aiArg3, int aiArg4)
 {
     FUN_00d339d0(aiArg1, aiArg2, aiArg3, aiArg4);
 }
@@ -39,11 +40,12 @@ extern "C"
 
 struct FUN_00d33c80_class
 {
-    void __thiscall FUN_00d33c80(void* a, void* b, void* c, void* d);
+    void __thiscall hkpConvexListAgent_getPenetrations(void* a, void* b, void* c, void* d);
 };
 
 // @fnv 0x00d33c80
-void __thiscall FUN_00d33c80_class::FUN_00d33c80(void* apArg1, void* apArg2, void* apArg3, void* apArg4)
+// pdb: hkpConvexListAgent::getPenetrations | hkpConvexListAgent.obj | fnv360_0822_retail, vtable_prefix + bridge(vtable_prefix|vtable) + skyrim(vtable_prefix), high
+void __thiscall FUN_00d33c80_class::hkpConvexListAgent_getPenetrations(void* apArg1, void* apArg2, void* apArg3, void* apArg4)
 {
     FUN_00d33b90(apArg1, apArg2, apArg3, apArg4);
 }
@@ -54,11 +56,12 @@ extern void* __cdecl FUN_00d33ca0();
 struct FUN_00d337f0_self
 {
     void __thiscall FUN_00dacb20(int a);
-    void __thiscall FUN_00d337f0(int a);
+    void __thiscall hkpConvexListAgent_removePoint(int a);
 };
 
 // @fnv 0x00d337f0
-void __thiscall FUN_00d337f0_self::FUN_00d337f0(int a)
+// pdb: hkpConvexListAgent::removePoint | hkpConvexListAgent.obj | fnv360_0822_retail, vtable_prefix + bridge(vtable_prefix|vtable) + skyrim(vtable_prefix), high
+void __thiscall FUN_00d337f0_self::hkpConvexListAgent_removePoint(int a)
 {
     if (*(char*)((char*)this + 0x84))
         FUN_00dacb20(a);
@@ -71,11 +74,12 @@ struct hkpGskfAgent
 
 struct FUN_00d33810_cls : hkpGskfAgent
 {
-    void __thiscall FUN_00d33810(int a);
+    void __thiscall hkpConvexListAgent_commitPotential(int a);
 };
 
 // @fnv 0x00d33810
-void FUN_00d33810_cls::FUN_00d33810(int a)
+// pdb: hkpConvexListAgent::commitPotential | hkpConvexListAgent.obj | fnv360_0822_retail, vtable_prefix + bridge(vtable_prefix|vtable) + skyrim(vtable_prefix), high
+void FUN_00d33810_cls::hkpConvexListAgent_commitPotential(int a)
 {
     if (*(char*)((char*)this + 0x84))
         hkpGskfAgent::AddPotential(a);
@@ -118,16 +122,17 @@ void __thiscall FUN_00d33740_cls::FUN_00d33740(int a)
 }
 
 
-void __cdecl FUN_00da42b0(void*, int, int, int);
+void __cdecl hkAgent1nMachine_Destroy(void*, int, int, int);
 struct FUN_00d33850_cls
 {
-    void __thiscall FUN_00d33850(int a);
+    void __thiscall hkpConvexListAgent_switchToGskMode(int a);
 };
-// Calls FUN_00da42b0 with fields at offsets 0x30, 0x80 and 8 plus a, then clears the field at 0x30 and sets the byte at 0x84 to 1.
+// Calls hkAgent1nMachine_Destroy with fields at offsets 0x30, 0x80 and 8 plus a, then clears the field at 0x30 and sets the byte at 0x84 to 1.
 // @fnv 0x00d33850
-void __thiscall FUN_00d33850_cls::FUN_00d33850(int a)
+// pdb: hkpConvexListAgent::switchToGskMode | hkpConvexListAgent.obj | fnv360_0822_retail, objrun + bridge(hash|objrun) + skyrim(hash), high
+void __thiscall FUN_00d33850_cls::hkpConvexListAgent_switchToGskMode(int a)
 {
-    FUN_00da42b0(this + 0x30, *(int*)(this + 0x80), *(int*)(this + 8), a);
+    hkAgent1nMachine_Destroy(this + 0x30, *(int*)(this + 0x80), *(int*)(this + 8), a);
     *(int*)(this + 0x30) = 0;
     *(char*)(this + 0x84) = 1;
 }
@@ -210,15 +215,15 @@ struct D338e0Owner
     int unk80;
     unsigned char unk84;
 
-    void __thiscall FUN_00d338e0(int param1, int param2, int param3, int param4);
+    void __thiscall hkpConvexListAgent_updateShapeCollectionFilter(int param1, int param2, int param3, int param4);
 };
 
-extern "C" void __cdecl FUN_00da48e0(int*, D338e0Local*);
+extern "C" void __cdecl hkAgent1nMachine_UpdateShapeCollectionFilter(int*, D338e0Local*);
 
 inline void D338e0Dispatch(D338e0Local* local, int* ownerField, int result)
 {
     local->field0C = result;
-    FUN_00da48e0(ownerField, local);
+    hkAgent1nMachine_UpdateShapeCollectionFilter(ownerField, local);
 }
 
 // If unk84 is zero, fills a D338e0Local from the parameters and unk08, calls vf10 on the agent at param2, and dispatches the result with unk30.
@@ -232,7 +237,8 @@ struct D338e0AgentF3
     virtual void vf10();
     virtual int vf14();
 };
-void __thiscall D338e0Owner::FUN_00d338e0(int aiArg1, int apAgentPtr, int aiArg3, int aiArg4)
+// pdb: hkpConvexListAgent::updateShapeCollectionFilter | hkpConvexListAgent.obj | fnv360_0822_retail, vtable_prefix + bridge(vtable_prefix|vtable) + skyrim(vtable_prefix), high
+void __thiscall D338e0Owner::hkpConvexListAgent_updateShapeCollectionFilter(int aiArg1, int apAgentPtr, int aiArg3, int aiArg4)
 {
     if (*(char*)&unk84 == 0)
     {
@@ -455,12 +461,13 @@ struct hkObjD33E
     char unk85;
     short m_86;
 
-    void FUN_00d33ef0(void* arg);
+    void hkpConvexListAgent_switchToStreamMode(void* arg);
 };
 
 // Reinitializes the embedded array, clears m_84 and m_3c, and sets m_86 to 0x19.
 // @fnv 0x00d33ef0
-void hkObjD33E::FUN_00d33ef0(void* arg)
+// pdb: hkpConvexListAgent::switchToStreamMode | hkpConvexListAgent.obj | fnv360_0822_retail, objrun + bridge(call_dedup|objrun) + skyrim(call_gap), high
+void hkObjD33E::hkpConvexListAgent_switchToStreamMode(void* arg)
 {
     ReleaseAllEntries(&m_ppData, m_pObservedSource, arg);
     m_84 = 0;
@@ -606,7 +613,7 @@ struct hkMemberD337
     int unk00;
 };
 
-void __cdecl FUN_00da35f0(hkMemberD337* member, float a, float b, int c);
+void __cdecl hkAgent1nMachine_WarpTime(hkMemberD337* member, float a, float b, int c);
 
 class hkObjD337
 {
@@ -620,14 +627,14 @@ class hkObjD337
     void SetValue(float a, float b, int c);
 };
 
-// Sets a value on the object, calling SetValueIfExpected when m_84 is true, otherwise delegating to FUN_00da35f0 on m_30.
+// Sets a value on the object, calling SetValueIfExpected when m_84 is true, otherwise delegating to hkAgent1nMachine_WarpTime on m_30.
 // @fnv 0x00d337a0
 void hkObjD337::SetValue(float a, float b, int c)
 {
     if (m_84)
         SetValueIfExpected(a, b, c);
     else
-        FUN_00da35f0(&m_30, a, b, c);
+        hkAgent1nMachine_WarpTime(&m_30, a, b, c);
 }
 
 // @fnv 0x00d33890
@@ -677,7 +684,7 @@ void ContactAgent::FUN_00d33890(void* input)
     }
     else
     {
-        FUN_00da42b0(&contact30, state80, collidable08, (int)input);
+        hkAgent1nMachine_Destroy(&contact30, state80, collidable08, (int)input);
     }
     Invalidate(1);
 }

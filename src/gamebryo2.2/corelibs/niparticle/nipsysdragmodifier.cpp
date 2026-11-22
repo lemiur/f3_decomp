@@ -163,11 +163,12 @@ struct NiPoint3Stand
 
 struct FUN_00c2c4f0_cls : NiPSysDragModifier
 {
-    void FUN_00c2c4f0(NiStream& stream);
+    void NiPSysDragModifier_SaveBinary(NiStream& stream);
 };
 
 // @fnv 0x00c2c4f0
-void FUN_00c2c4f0_cls::FUN_00c2c4f0(NiStream& stream)
+// pdb: NiPSysDragModifier::SaveBinary | NiPSysDragModifier.obj | fnv360_0822_retail, caller_sim + bridge(vtable|objrun_prop) + skyrim(caller_sim), high
+void FUN_00c2c4f0_cls::NiPSysDragModifier_SaveBinary(NiStream& stream)
 {
     reinterpret_cast<NiPSysModifierStand*>(this)->LoadStream(stream);
     void** vt = *reinterpret_cast<void***>(&stream);

@@ -5,7 +5,8 @@
 extern const void* const g_01202698;
 
 // @fnv 0x00c273c0
-const void* __cdecl FUN_00c273c0()
+// pdb: NiUVData::GetRTTI | NiUVData.obj | fnv360_0822_retail, udata + bridge(vtable|udata) + skyrim(objrun_sim), high
+const void* __cdecl NiUVData_GetRTTI()
 {
     return &g_01202698;
 }

@@ -165,10 +165,11 @@ struct ConvexTranslateDD60
     const ShapeDD60* m_pContainedShape;
     int pad1c;
     Vec4DD m_vTranslation;
-    void* FUN_00a56d10(void* pHit, const RayInputDD60& input, RayOutputDD60& results);
+    void* hkpConvexTranslateShape_castRayImpl(void* pHit, const RayInputDD60& input, RayOutputDD60& results);
 };
 
-void* ConvexTranslateDD60::FUN_00a56d10(void* pHit, const RayInputDD60& input, RayOutputDD60& results)
+// pdb: hkpConvexTranslateShape::castRayImpl | hkpConvexTranslateShape.obj | fnv360_0822_retail, objopen_prop + bridge(ustr_rel|vtable) + skyrim(ustr_rel), high
+void* ConvexTranslateDD60::hkpConvexTranslateShape_castRayImpl(void* pHit, const RayInputDD60& input, RayOutputDD60& results)
 {
     TimerMark("TtrcConvTransl");
     RayInputDD60 subInput = input;
@@ -1320,7 +1321,7 @@ struct S00a46dc0_Registry { S00a46dc0_Manager* FUN_009b20b0(const char*); };
 extern S00a46dc0_Registry* DAT_011693ac;
 extern unsigned char DAT_0116a994;
 const char* __cdecl FUN_0093e470();
-int __cdecl FUN_009232c0(const char*, const char*);
+int __cdecl hkString_strCmp(const char*, const char*);
 struct S00a46dc0_Context
 {
     virtual void Slot0();
@@ -1399,7 +1400,7 @@ void* S00a46dc0_Owner::FUN_00a46dc0(const char* expected, void* input)
     }
     else
     {
-        if (!FUN_009232c0(FUN_0093e470(), GetName()))
+        if (!hkString_strCmp(FUN_0093e470(), GetName()))
         {
             S00a46dc0_Registry* registry = DAT_011693ac;
             S00a46dc0_Manager* manager = registry->FUN_009b20b0(GetName());
@@ -1430,7 +1431,7 @@ void* S00a46dc0_Owner::FUN_00a46dc0(const char* expected, void* input)
         contentsType = FUN_00a460a0();
     }
 compare:
-    if (expected && contentsType && FUN_009232c0(expected, contentsType))
+    if (expected && contentsType && hkString_strCmp(expected, contentsType))
         return 0;
     return contentsPtr;
 }
@@ -1978,7 +1979,7 @@ struct hkpGsk
     hkVector4 m_closestPointA;
 
     // runs the solver; separating normal in A space, distance in w
-    void FUN_00a32da0(const hkpConvexShape* shapeA, const hkpConvexShape* shapeB, const hkTransform& aTb,
+    void hkpGsk_getClosestFeature(const hkpConvexShape* shapeA, const hkpConvexShape* shapeB, const hkTransform& aTb,
                       hkVector4& separatingNormalOut);
 };
 
@@ -1990,7 +1991,7 @@ static __declspec(noinline) void FUN_00a41f60(const hkTransform* wTb, const hkTr
     aTb.FUN_00925300(*wTa, *wTb);
 
     hkVector4 separatingNormal;
-    gsk->FUN_00a32da0(shapeA, shapeB, aTb, separatingNormal);
+    gsk->hkpGsk_getClosestFeature(shapeA, shapeB, aTb, separatingNormal);
 
     normalOut->_setRotatedDir(wTa->getRotation(), separatingNormal);
 
@@ -2646,8 +2647,8 @@ public:
     __forceinline void _setRotatedInverseDir(const hkRotation& r, const hkVector4& b);
 
     // out-of-line transforms of one vector by a transform
-    void FUN_008d2a00(void* transform, void* v);
-    void FUN_008d28e0(void* transform, void* v);
+    void hkVector4_setRotatedDir(void* transform, void* v);
+    void hkVector4_setTransformedPos(void* transform, void* v);
     void FUN_00477880(void* transform, void* v);
 };
 
@@ -2726,7 +2727,7 @@ struct QueryFrames
 };
 
 // interpolates a swept transform at a time
-void FUN_00977030(char* swept, float time, float step, void* transformOut);
+void hkSweptTransformUtil_lerp2Ha(char* swept, float time, float step, void* transformOut);
 
 // rotates numVectors directions by the inverse of t; the rotation is copied first because the output may overlap it
 static __forceinline void rotateInversePoints(const hkRotation& t, const hkVector4* vectorsIn, int numVectors, hkVector4* vectorsOut)
@@ -2744,16 +2745,16 @@ void FUN_00a41610(QueryInput* a, float f, QueryFrames* out)
 {
     StepInfo* b = a->unk40;
     float t = b->unk08 * f;
-    FUN_00977030(a->unk00 + 0x40, b->unk00, t, out);
-    FUN_00977030(a->unk04 + 0x40, b->unk00, t, &out->second);
+    hkSweptTransformUtil_lerp2Ha(a->unk00 + 0x40, b->unk00, t, out);
+    hkSweptTransformUtil_lerp2Ha(a->unk04 + 0x40, b->unk00, t, &out->second);
     hkTransform* m = &out->relative;
     m->FUN_00925300(out, &out->second);
-    out->unkc0.FUN_008d2a00(m, &a->unk20);
-    out->unkd0.FUN_008d28e0(m, &a->unk30);
+    out->unkc0.hkVector4_setRotatedDir(m, &a->unk20);
+    out->unkd0.hkVector4_setTransformedPos(m, &a->unk30);
     out->unkc0(3) = -a->unk14;
     out->unk110 = *(hkVector4*)(a->unk00 + 0x80);
     rotateInversePoints(out->first.m_rotation, a->unk60, 2, out->unkf0);
-    out->unk120.FUN_008d28e0(m, a->unk04 + 0x80);
+    out->unk120.hkVector4_setTransformedPos(m, a->unk04 + 0x80);
     out->unke0.FUN_00477880(out, &a->unk50);
 }
 }   // namespace f3m_00a41610
@@ -3046,7 +3047,8 @@ __forceinline void buildLinearEnd(Lin2AngJacobian& jac, float rhs, float rhsFact
 
 __forceinline void flushJacobian() {}
 
-static __declspec(noinline) void FUN_00a4ef60(
+// pdb: hk1dLinearBilateralConstraintBuildJacobianWithCustomRhs_noSchema_inline | hkp1dBilateralConstraintBuildJacobian.obj | fnv360_0822_retail, objrun + skyrim(objrun), high
+static __declspec(noinline) void hk1dLinearBilateralConstraintBuildJacobianWithCustomRhs_noSchema_inline(
     const LinearBilateralConstraintInfo& info,
     const ConstraintQueryIn& in,
     Lin2AngJacobian& jac,
@@ -3066,7 +3068,7 @@ volatile float inputRhs_a4ef60;
 
 void caller_of_a4ef60()
 {
-    FUN_00a4ef60(*inputInfo_a4ef60, *inputQuery_a4ef60,
+    hk1dLinearBilateralConstraintBuildJacobianWithCustomRhs_noSchema_inline(*inputInfo_a4ef60, *inputQuery_a4ef60,
                  *outputJacobian_a4ef60, inputRhs_a4ef60);
 }
 }   // namespace f3m_00a4ef60
@@ -3317,7 +3319,8 @@ static __forceinline void buildJacobianInline_a4f510(
     buildLinearEnd_a4f510(jac, customRhs, in.m_rhsFactor);
 }
 
-void __cdecl FUN_00a4f510(
+// pdb: hk1dLinearBilateralConstraintBuildJacobianWithCustomRhs_noSchema | hkp1dBilateralConstraintBuildJacobian.obj | fnv360_0822_retail, objrun + bridge(call_gap|call_seq) + skyrim(call_gap), high
+void __cdecl hk1dLinearBilateralConstraintBuildJacobianWithCustomRhs_noSchema(
     const BilateralInfo_a4f510& info,
     const QueryIn_a4f510& in,
     Jacobian_a4f510& jac,
@@ -4576,11 +4579,12 @@ struct S00a54d90_Projector
     int m_unk00;
     int m_unk04;
     const S00a54d90_Container* m_container;
-    void FUN_00a54d90(const S00a54d90_Vector4& direction, int unused, const S00a54d90_ChildInfo* children, int numChildren,
+    void hkpMoppShapeMediator_findExtents(const S00a54d90_Vector4& direction, int unused, const S00a54d90_ChildInfo* children, int numChildren,
                       float* minOut, float* maxOut) const;
 };
 
-void S00a54d90_Projector::FUN_00a54d90(const S00a54d90_Vector4& direction, int unused, const S00a54d90_ChildInfo* children, int numChildren,
+// pdb: hkpMoppShapeMediator::findExtents | hkpMoppShapeMediator.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void S00a54d90_Projector::hkpMoppShapeMediator_findExtents(const S00a54d90_Vector4& direction, int unused, const S00a54d90_ChildInfo* children, int numChildren,
                                        float* minOut, float* maxOut) const
 {
     S00a54d90_ShapeBuffer buffer;
@@ -4664,7 +4668,7 @@ struct Aabb
 
 struct OutVec4 : Vec4
 {
-    void FUN_008d28e0(const Transform& t, const Vec4& v);
+    void hkVector4_setTransformedPos(const Transform& t, const Vec4& v);
 };
 
 static __forceinline float Min2(const float& a, const float& b) { return a < b ? a : b; }
@@ -4678,7 +4682,7 @@ static __declspec(noinline) void FUN_00a45660(const Vec4& halfExtents, const Vec
     p.z = halfExtents.z * dir.z;
     p.w = 0.0f;
     OutVec4 v;
-    v.FUN_008d28e0(t, p);
+    v.hkVector4_setTransformedPos(t, p);
     box.m_min.x = Min2(box.m_min.x, v.x);
     box.m_min.y = Min2(box.m_min.y, v.y);
     box.m_min.z = Min2(box.m_min.z, v.z);
@@ -5903,7 +5907,8 @@ __forceinline void initWork(const Manifold& manifold, const Vector& weldedNormal
     }
 }
 
-void __cdecl FUN_00a40940(const Input* input, AgentEntry* entry, AgentData* agentData,
+// pdb: hkGskAgentUtil_processCollisionNoTim | hkpGskAgentUtil.obj | fnv360_0822_retail, caller + bridge(call_gap|caller) + skyrim(call_gap), high
+void __cdecl hkGskAgentUtil_processCollisionNoTim(const Input* input, AgentEntry* entry, AgentData* agentData,
                           Cache* cache, Manifold* manifold, Vector* separatingNormal, Output* output)
 {
     GskInput gsk;

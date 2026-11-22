@@ -5,7 +5,8 @@
 extern "C" void* g_01202580;
 
 // @fnv 0x00c25870
-void* __cdecl FUN_00c25870()
+// pdb: BSLookIKNote::GetRTTI | BSLookIKNote.obj | fnv360_0822_retail, udata + bridge(vtable|udata) + skyrim(udata), high
+void* __cdecl BSLookIKNote_GetRTTI()
 {
     return &g_01202580;
 }

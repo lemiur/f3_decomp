@@ -556,7 +556,7 @@ bool S_00a58990::FUN_00a58990(float* diag, float* subd)
     return false;
 }
 
-float FUN_00a811f0(float fY, float fX);
+float NiFastATan2(float fY, float fX);
 
 static float DAT_011a9444 = 1.5707964f;
 
@@ -590,13 +590,13 @@ bool S_00a592c0_Matrix3::DecomposeToEulerAngles(float& rfXAngle, float& rfYAngle
     {
         if (rfYAngle > -DAT_011a9444)
         {
-            rfXAngle = -FUN_00a811f0(-m_afEntries[1][2], m_afEntries[2][2]);
-            rfZAngle = -FUN_00a811f0(-m_afEntries[0][1], m_afEntries[0][0]);
+            rfXAngle = -NiFastATan2(-m_afEntries[1][2], m_afEntries[2][2]);
+            rfZAngle = -NiFastATan2(-m_afEntries[0][1], m_afEntries[0][0]);
             return true;
         }
         else
         {
-            float fRmY = FUN_00a811f0(m_afEntries[1][0], m_afEntries[1][1]);
+            float fRmY = NiFastATan2(m_afEntries[1][0], m_afEntries[1][1]);
             rfZAngle = 0.0f;
             rfXAngle = fRmY - rfZAngle;
             return false;
@@ -604,7 +604,7 @@ bool S_00a592c0_Matrix3::DecomposeToEulerAngles(float& rfXAngle, float& rfYAngle
     }
     else
     {
-        float fRpY = FUN_00a811f0(m_afEntries[1][0], m_afEntries[1][1]);
+        float fRpY = NiFastATan2(m_afEntries[1][0], m_afEntries[1][1]);
         rfZAngle = 0.0f;
         rfXAngle = rfZAngle - fRpY;
         return false;

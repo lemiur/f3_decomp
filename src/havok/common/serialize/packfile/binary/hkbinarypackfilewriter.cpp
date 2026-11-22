@@ -15,7 +15,7 @@ extern int DAT_011b7aec;
 extern void* DAT_010d65bc;
 struct FUN_00dbdf30_s
 {
-    void FUN_00dbdf30(GlobalObjectO2_00d472a0*, int);
+    void hkPackfileWriter_setSectionForClass(GlobalObjectO2_00d472a0*, int);
 };
 struct FUN_00dbc670
 {
@@ -24,17 +24,17 @@ struct FUN_00dbc670
     FUN_00dbc670();
 };
 extern void FUN_00dbe4d0();
-// Calls FUN_00dbe4d0, sets m_vft, then calls FUN_00dbdef0 and FUN_00dbdf30 on four global objects with DAT_011b7aec.
+// Calls FUN_00dbe4d0, sets m_vft, then calls FUN_00dbdef0 and hkPackfileWriter_setSectionForClass on four global objects with DAT_011b7aec.
 // @fnv 0x00dbc670
 FUN_00dbc670::FUN_00dbc670()
 {
     FUN_00dbe4d0();
     m_vft = &DAT_010d65bc;
     FUN_00dbdef0(DAT_011b7a7c);
-    ((FUN_00dbdf30_s*)this)->FUN_00dbdf30(&g_0126cae8, DAT_011b7aec);
-    ((FUN_00dbdf30_s*)this)->FUN_00dbdf30(&g_0126ca58, DAT_011b7aec);
-    ((FUN_00dbdf30_s*)this)->FUN_00dbdf30(&g_0126cab8, DAT_011b7aec);
-    ((FUN_00dbdf30_s*)this)->FUN_00dbdf30(&g_0126ca88, DAT_011b7aec);
+    ((FUN_00dbdf30_s*)this)->hkPackfileWriter_setSectionForClass(&g_0126cae8, DAT_011b7aec);
+    ((FUN_00dbdf30_s*)this)->hkPackfileWriter_setSectionForClass(&g_0126ca58, DAT_011b7aec);
+    ((FUN_00dbdf30_s*)this)->hkPackfileWriter_setSectionForClass(&g_0126cab8, DAT_011b7aec);
+    ((FUN_00dbdf30_s*)this)->hkPackfileWriter_setSectionForClass(&g_0126ca88, DAT_011b7aec);
 }
 
 // @fnv 0x00dbd720
@@ -193,7 +193,7 @@ struct FUN_00dbc6f0_cls_key
     unsigned char m_byTag;
 };
 
-int __cdecl FUN_00cb10d0(void* apNode);
+int __cdecl hkString_strLen(void* apNode);
 
 typedef void(__thiscall* S_WriteFn)(FUN_00dbc6f0_cls_callee*, void*, int);
 
@@ -226,7 +226,7 @@ void __stdcall WriteNodeDiff(FUN_00dbc6f0_cls_owner* apOwner, FUN_00dbc6f0_cls_s
     int iDiff = apOwner->m_pCallee->Count() - aiDiff;
     apOwner->m_store.Store(pNode, iDiff);
     void** pVtable = *(void***)apOwner->m_pCallee;
-    ((S_WriteFn)pVtable[4])(apOwner->m_pCallee, pNode, FUN_00cb10d0(pNode) + 1);
+    ((S_WriteFn)pVtable[4])(apOwner->m_pCallee, pNode, hkString_strLen(pNode) + 1);
 }
 
 struct Target
@@ -244,11 +244,12 @@ struct FUN_00dbd760_cls
     int unk00;
     int unk04;
     Target* m_08;
-    void FUN_00dbd760();
+    void hkOstream_flush();
 };
 
 // @fnv 0x00dbd760
-void FUN_00dbd760_cls::FUN_00dbd760()
+// pdb: hkOstream::flush | hkOStream.obj | fnv360_0822_retail, objrun + skyrim(objrun), high
+void FUN_00dbd760_cls::hkOstream_flush()
 {
     m_08->unk14();
 }
@@ -1574,13 +1575,13 @@ struct ThisCls
     PairMap map2c;
     void WriteNodeDiff(Src* src, void* glob, int diff);
     int GetOrAddString(int v);
-    void FUN_00dbcea0(Src* arg);
+    void hkBinaryPackfileWriter_writeAllObjects(Src* arg);
 };
 extern int DAT_011b7aec;
 void* FUN_00c85750();
 extern void __cdecl ResizeAudioStream(void* allocator, void* vec, unsigned int elemSize);
 extern void __cdecl FUN_00c908c0(void* a, void* vec, int n, int elem);
-extern int __cdecl FUN_00cb10d0(void* p);
+extern int __cdecl hkString_strLen(void* p);
 struct Router
 {
     int unk00;
@@ -2142,7 +2143,8 @@ __forceinline void Writer::writeAllObjects(SaveContext& context)
 
 // The stand-in classes of the pack for the writer and its save context do not describe the layouts used here
 // (12-byte global fixups, key/value export map), so the body is written on the layouts above.
-void ThisCls::FUN_00dbcea0(Src* context)
+// pdb: hkBinaryPackfileWriter::writeAllObjects | hkBinaryPackfileWriter.obj | fnv360_0822_debug, call_seq + bridge(call_seq|callee_sim) + skyrim(call_seq), high
+void ThisCls::hkBinaryPackfileWriter_writeAllObjects(Src* context)
 {
     ((pfw9d7fd0::Writer*)this)->writeAllObjects(*(pfw9d7fd0::SaveContext*)context);
 }

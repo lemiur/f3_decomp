@@ -108,11 +108,12 @@ hkBoolE467 hkpProjectileGunE467::FUN_00e467d0(const hkpCollidableE467& kA, const
 
 struct FnvDisabledCollisionFilter : hkpDisableEntityCollisionFilter
 {
-    char* FUN_00e46820(char* wasRemoved, hkpEntity* entity);
+    char* hkpDisableEntityCollisionFilter_removeEntityFromFilter(char* wasRemoved, hkpEntity* entity);
 };
 // Removes the entity from the filter's array by swapping in the last element, writing 1 to wasRemoved if found, else 0.
 // @f3 0x00a73fe0 (community match, verified in this file)
-char* FnvDisabledCollisionFilter::FUN_00e46820(char* wasRemoved, hkpEntity* entity)
+// pdb: hkpDisableEntityCollisionFilter::removeEntityFromFilter | hkpDisableEntityCollisionFilter.obj | fnv360_0822_retail, call_seq + skyrim(call_seq), high
+char* FnvDisabledCollisionFilter::hkpDisableEntityCollisionFilter_removeEntityFromFilter(char* wasRemoved, hkpEntity* entity)
 {
     if (!entity)
     {
@@ -174,23 +175,24 @@ class hkpEntityListenerE46
 {
   public:
     virtual void EntityAddedCallback(hkpEntityE46* entity);
-    virtual void FUN_00e46880(hkpEntityE46* entity);
+    virtual void hkpDisableEntityCollisionFilter_entityRemovedCallback(hkpEntityE46* entity);
 };
 
 class hkpDisableEntityCollisionFilterE46 : public hkpCollisionFilterE46, public hkpEntityListenerE46
 {
   public:
-    hkBoolE46 FUN_00e46820(hkpEntityE46* entity);
-    virtual void FUN_00e46880(hkpEntityE46* entity);
+    hkBoolE46 hkpDisableEntityCollisionFilter_removeEntityFromFilter(hkpEntityE46* entity);
+    virtual void hkpDisableEntityCollisionFilter_entityRemovedCallback(hkpEntityE46* entity);
 };
 
-// If entity is non-null, calls FUN_00e46820(entity) and then FUN_00c9c670(this) on the entity.
+// If entity is non-null, calls hkpDisableEntityCollisionFilter_removeEntityFromFilter(entity) and then FUN_00c9c670(this) on the entity.
 // @f3 0x00a74040 (community match, verified in this file)
-void hkpDisableEntityCollisionFilterE46::FUN_00e46880(hkpEntityE46* entity)
+// pdb: hkpDisableEntityCollisionFilter::entityRemovedCallback | hkpDisableEntityCollisionFilter.obj | fnv360_0822_retail, caller_sim + skyrim(caller_sim), high
+void hkpDisableEntityCollisionFilterE46::hkpDisableEntityCollisionFilter_entityRemovedCallback(hkpEntityE46* entity)
 {
     if (entity)
     {
-        FUN_00e46820(entity);
+        hkpDisableEntityCollisionFilter_removeEntityFromFilter(entity);
         entity->FUN_00c9c670(this);
     }
 }

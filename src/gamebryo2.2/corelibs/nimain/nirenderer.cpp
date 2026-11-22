@@ -8,7 +8,8 @@ struct NiRenderer
 };
 
 // @fnv 0x00a62ae0
-void __cdecl FUN_00a62ae0()
+// pdb: NiRenderer::_SDMShutdown | NiRenderer.obj | fnv360_0822_retail, call_seq + bridge(call_dedup|call_dedup) + skyrim(call_gap_sim), high
+void __cdecl NiRenderer__SDMShutdown()
 {
     NiRenderer::ms_pRenderer = 0;
 }

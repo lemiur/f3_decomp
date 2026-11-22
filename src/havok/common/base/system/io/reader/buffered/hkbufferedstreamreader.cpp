@@ -34,10 +34,11 @@ struct FUN_00d2bb40_cls
     int m_14;
     int m_18;
     int m_1c;
-    int FUN_00d2bb40();
+    int hkBufferedStreamReader_rewindToMark();
 };
 // @fnv 0x00d2bb40
-int FUN_00d2bb40_cls::FUN_00d2bb40()
+// pdb: hkBufferedStreamReader::rewindToMark | hkBufferedStreamReader.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+int FUN_00d2bb40_cls::hkBufferedStreamReader_rewindToMark()
 {
     if (m_1c >= 0)
     {
@@ -90,11 +91,12 @@ struct FUN_00d2bb10_this
     int m_10;
     int m_14;
     int m_18;
-    bool* FUN_00d2bb10(bool* out);
+    bool* hkBufferedStreamReader_markSupported(bool* out);
 };
 
 // @fnv 0x00d2bb10
-bool* FUN_00d2bb10_this::FUN_00d2bb10(bool* out)
+// pdb: hkBufferedStreamReader::markSupported | hkBufferedStreamReader.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+bool* FUN_00d2bb10_this::hkBufferedStreamReader_markSupported(bool* out)
 {
     *out = (m_18 != 0);
     return out;
@@ -110,12 +112,13 @@ struct FUN_00d2ba00_cls : FUN_00d2ba80_cls
     int m_vContactPosition;
     int m_kRayEnd;
 
-    int FUN_00d2ba00(char* pBuffer, int nSize);
+    int hkBufferedStreamReader_read(char* pBuffer, int nSize);
 };
 
 // Copies up to nSize bytes from the internal buffer into pBuffer, refilling via v12 when exhausted, and returns the number of bytes read.
 // @fnv 0x00d2ba00
-int FUN_00d2ba00_cls::FUN_00d2ba00(char* apDest, int nSize)
+// pdb: hkBufferedStreamReader::read | hkBufferedStreamReader.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+int FUN_00d2ba00_cls::hkBufferedStreamReader_read(char* apDest, int nSize)
 {
     char* pDest = apDest;
     int nRemaining = nSize;
@@ -276,10 +279,11 @@ struct Stream
     int a, b;
     Reader* reader;
     int c, pos, end;
-    hkBool FUN_00d2bad0();
+    hkBool hkBufferedStreamReader_isOk();
 };
 // @fnv 0x00d2bad0
-hkBool Stream::FUN_00d2bad0()
+// pdb: hkBufferedStreamReader::isOk | hkBufferedStreamReader.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+hkBool Stream::hkBufferedStreamReader_isOk()
 {
     unsigned char byte;
     return hkBool(pos != end || *reader->v3(&byte) != 0);

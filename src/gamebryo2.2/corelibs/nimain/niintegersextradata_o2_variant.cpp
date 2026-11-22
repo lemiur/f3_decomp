@@ -7,7 +7,8 @@
 extern char const* const g_012043a4_arg1;
 
 // @fnv 0x00a99940
-char const* const* __cdecl FUN_00a99940()
+// pdb: NiSpecularProperty::GetRTTI | NiSpecularProperty.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+char const* const* __cdecl NiSpecularProperty_GetRTTI()
 {
     return &g_012043a4_arg1;
 }
@@ -96,10 +97,11 @@ struct Extra_00a998e0
     unsigned char _pad0[12];
     unsigned int m_uiSize;
     int* m_piValue;
-    bool FUN_00a998e0(Extra_00a998e0* pObject);
+    bool NiIntegersExtraData_IsEqual(Extra_00a998e0* pObject);
 };
 // @fnv 0x00a998e0
-bool Extra_00a998e0::FUN_00a998e0(Extra_00a998e0* pObject)
+// pdb: NiIntegersExtraData::IsEqual | NiIntegersExtraData.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(objrun_open), high
+bool Extra_00a998e0::NiIntegersExtraData_IsEqual(Extra_00a998e0* pObject)
 {
     Extra_00a998e0* pExtra = pObject;
     unsigned int i;
@@ -128,10 +130,11 @@ struct FUN_00a99870_shell : public NiExtraData
     unsigned int m_uiSize;
     int* m_piValue;
     void FUN_00a7b330(void* pDest, void* pCloning);
-    void __thiscall FUN_00a99870(FUN_00a99870_shell* pDest, void* pCloning);
+    void __thiscall NiIntegersExtraData_CopyMembers(FUN_00a99870_shell* pDest, void* pCloning);
 };
 // @fnv 0x00a99870
-void __thiscall FUN_00a99870_shell::FUN_00a99870(FUN_00a99870_shell* pDest, void* pCloning)
+// pdb: NiIntegersExtraData::CopyMembers | NiIntegersExtraData.obj | fnv360_0822_retail, call_dedup + bridge(call_seq|call_dedup) + skyrim(objrun_prop), high
+void __thiscall FUN_00a99870_shell::NiIntegersExtraData_CopyMembers(FUN_00a99870_shell* pDest, void* pCloning)
 {
     FUN_00a7b330(pDest, pCloning);
     if (m_piValue && m_uiSize > 0)
@@ -245,11 +248,12 @@ class NiPSysOwnerA99
 {
   public:
     void CopyMemberData(NiPSysBaseA99* pkDest, void* pvProcess);
-    NiPSysBaseA99* FUN_00a999b0(void* pvProcess);
+    NiPSysBaseA99* NiFloatsExtraData_CreateClone(void* pvProcess);
 };
 
 // @fnv 0x00a999b0
-NiPSysBaseA99* NiPSysOwnerA99::FUN_00a999b0(void* pvProcess)
+// pdb: NiFloatsExtraData::CreateClone | NiFloatsExtraData.obj | fnv360_0822_retail, caller_sim + bridge(vtable|objrun_prop) + skyrim(objrun_prop), high
+NiPSysBaseA99* NiPSysOwnerA99::NiFloatsExtraData_CreateClone(void* pvProcess)
 {
     NiPSysDerivedA99* pkClone = new NiPSysDerivedA99;
     CopyMemberData(pkClone, pvProcess);

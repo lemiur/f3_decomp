@@ -67,7 +67,8 @@ struct BSFadeNode
 };
 
 // @fnv 0x00a44380
-void* __cdecl FUN_00a44380()
+// pdb: BSGrabIKNote::CreateObject | BSGrabIKNote.obj | fnv360_0822_retail, objrun + bridge(hash|objrun), high
+void* __cdecl BSGrabIKNote_CreateObject()
 {
     BSFadeNode* node = static_cast<BSFadeNode*>(BSFadeNode::operator new(28));
     if (node)
@@ -92,11 +93,12 @@ struct BSAnimNote_shell
 
 struct FUN_00a43f10_shell : BSAnimNote_shell
 {
-    bool __thiscall FUN_00a43f10(NiStream&);
+    bool __thiscall NiVertWeightsExtraData_IsEqual(NiStream&);
 };
 
 // @fnv 0x00a43f10
-bool FUN_00a43f10_shell::FUN_00a43f10(NiStream& arStream)
+// pdb: NiVertWeightsExtraData::IsEqual | NiVertWeightsExtraData.obj | fnv360_0822_retail, caller_sim + skyrim(caller_sim), high
+bool FUN_00a43f10_shell::NiVertWeightsExtraData_IsEqual(NiStream& arStream)
 {
     return BSAnimNote_shell::FUN_00a84c70(arStream);
 }
@@ -108,10 +110,11 @@ struct FUN_00a44850_holder
 };
 struct FUN_00a443c0_shell : BSFadeNode
 {
-    void* FUN_00a443c0(CloningProcess* process);
+    void* BSGrabIKNote_CreateClone(CloningProcess* process);
 };
 // @fnv 0x00a443c0
-void* FUN_00a443c0_shell::FUN_00a443c0(CloningProcess* process)
+// pdb: BSGrabIKNote::CreateClone | BSGrabIKNote.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun) + skyrim(caller_sim), high
+void* FUN_00a443c0_shell::BSGrabIKNote_CreateClone(CloningProcess* process)
 {
     FUN_00a443c0_shell* node = new FUN_00a443c0_shell;
     if (node)
@@ -343,7 +346,7 @@ struct StreamOwner
 class FUN_00a445c0_cls
 {
   public:
-    void FUN_00a44a90(StreamOwner* stream);
+    void BSAnimNote_SaveBinary(StreamOwner* stream);
     void ReadFromStream(StreamOwner* stream);
 
   public:
@@ -364,7 +367,7 @@ static unsigned int StreamReadPart(StreamFile* f, void* buf)
 // @fnv 0x00a445c0
 void FUN_00a445c0_cls::ReadFromStream(StreamOwner* stream)
 {
-    FUN_00a44a90(stream);
+    BSAnimNote_SaveBinary(stream);
     StreamFile* f = stream->m_250;
     f->m_04 += StreamReadPart(f, &m_10);
     f = stream->m_250;
@@ -441,7 +444,7 @@ void ArmNote::FUN_00a44650(ViewerStrings* pkStrings)
 
 struct TextKeyHandlerBase
 {
-    bool FUN_00a44930(const char* apTextKey);
+    bool ParseTextKey(const char* apTextKey);
 };
 struct S00a44430_Str
 {
@@ -465,14 +468,15 @@ struct S00a44430_Obj : TextKeyHandlerBase
     unsigned int m_10;
     float m_14;
     unsigned int m_18;
-    bool FUN_00a44430(const char* apTextKey);
+    bool BSGrabIKNote_ParseTextKey(const char* apTextKey);
 };
 
 // Parses apTextKey for a prefix, side flag, gain value, and mode string, storing results in m_10, m_14, and m_18.
 // @fnv 0x00a44430
-bool S00a44430_Obj::FUN_00a44430(const char* apTextKey)
+// pdb: BSGrabIKNote::ParseTextKey | BSGrabIKNote.obj | fnv360_0822_retail, ustr_rel + bridge(vtable|ustr_rel) + skyrim(caller_sim), high
+bool S00a44430_Obj::BSGrabIKNote_ParseTextKey(const char* apTextKey)
 {
-    bool bret = FUN_00a44930(apTextKey);
+    bool bret = ParseTextKey(apTextKey);
     const char* ptext = (const char*)*(void**)((char*)apTextKey + 4);
     if (FUN_00ec8a19(ptext, str_01097dc4, 6) == 0)
     {

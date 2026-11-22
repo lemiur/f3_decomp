@@ -42,7 +42,7 @@ D92740Block* __cdecl AllocateBlock(int capacity, int typeA, int typeB, int extra
 // @f3 0x00a26c20 (community match, verified in this file)
 struct D92740Block;
 D92740Block* __cdecl FUN_00a269d0(int capacity, int typeA, int typeB, int extra);
-void __cdecl FUN_00a26a60(D92740Block* dst, D92740Block* src);
+void __cdecl hkpSimpleContactConstraintAtomUtil_copyContents(D92740Block* dst, D92740Block* src);
 struct D92740Heap
 {
     void FUN_008f6d90(D92740Block* p, int numBytes, int flag);
@@ -55,7 +55,7 @@ D92740Block* __cdecl ShrinkBlockIfSparse(D92740Block* block, int numToAdd, bool*
     {
         int capacity = block->m_pRayCursor >> 1;
         D92740Block* newBlock = FUN_00a269d0(capacity, block->m_iAgentTypeA, block->m_iAgentTypeB, block->m_extra);
-        FUN_00a26a60(newBlock, block);
+        hkpSimpleContactConstraintAtomUtil_copyContents(newBlock, block);
         D92740Heap* heap = (D92740Heap*)TlsGetValue(DAT_010f3170);
         heap->FUN_008f6d90(block, block->m_sizeClass, 4);
         *pbResized = true;

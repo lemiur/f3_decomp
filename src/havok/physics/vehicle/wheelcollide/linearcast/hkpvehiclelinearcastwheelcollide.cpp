@@ -52,7 +52,8 @@ void FUN_00e368a0_Class::FUN_00e368a0()
 
 void __cdecl FUN_00e36900();
 // @fnv 0x00e36aa0
-void __cdecl FUN_00e36aa0()
+// pdb: hkString::strRchr | hkString.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_seq), high
+void __cdecl hkString_strRchr()
 {
     FUN_00e36900();
 }

@@ -735,7 +735,7 @@ struct S00a46970_Base
 };
 struct S00a46970_StreamFix
 {
-    void FUN_00a645b0();
+    void NiStream_ReadLinkID();
 };
 struct S00a46970_Ctlr : public NiTextureTransformController
 {
@@ -753,7 +753,7 @@ void S00a46970_Ctlr::FUN_00a46970(S00a46970_Stream& kStream)
     S00a46970_StreamLoadBinary(kStream, uiMember);
     m_eMember = (NiTextureTransformController__TransformMember)uiMember;
     if (kStream.m_uiNifVersion < 0x0a010068)
-        reinterpret_cast<S00a46970_StreamFix*>(&kStream)->FUN_00a645b0();
+        reinterpret_cast<S00a46970_StreamFix*>(&kStream)->NiStream_ReadLinkID();
 }
 
 // @fnv 0x00a46950

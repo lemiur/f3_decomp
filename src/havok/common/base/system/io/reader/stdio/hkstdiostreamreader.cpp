@@ -50,10 +50,11 @@ struct FUN_00d2bd50_cls
     void* m_04;
     void* m_08;
     void* m_0c;
-    long FUN_00d2bd50();
+    long hkStdioStreamReader_tell();
 };
 // @fnv 0x00d2bd50
-long FUN_00d2bd50_cls::FUN_00d2bd50()
+// pdb: hkStdioStreamReader::tell | hkStdioStreamReader.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+long FUN_00d2bd50_cls::hkStdioStreamReader_tell()
 {
     return _ftell(m_0c);
 }
@@ -131,10 +132,11 @@ struct Owner : DispatchObject
 {
     int unk04;
     void* unk08;
-    void FUN_00d2bdf0();
+    void hkSeekableStreamReader_rewindToMark();
 };
 // @fnv 0x00d2bdf0
-void Owner::FUN_00d2bdf0()
+// pdb: hkSeekableStreamReader::rewindToMark | hkStdioStreamReader.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void Owner::hkSeekableStreamReader_rewindToMark()
 {
     invoke(unk08, 0);
 }
@@ -146,11 +148,12 @@ struct FUN_00d2bd00_cls
     int unk08;
     int unk0c;
     unsigned char unk10;
-    void FUN_00d2bd00(unsigned char* out);
+    void hkStdioStreamReader_isOk(unsigned char* out);
 };
 
 // @fnv 0x00d2bd00
-void FUN_00d2bd00_cls::FUN_00d2bd00(unsigned char* volatile out)
+// pdb: hkStdioStreamReader::isOk | hkStdioStreamReader.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void FUN_00d2bd00_cls::hkStdioStreamReader_isOk(unsigned char* volatile out)
 {
     unsigned char value = unk10;
     *out = value;
@@ -185,7 +188,8 @@ StdioStreamReader* StdioStreamReader::OpenFile(const char* fname)
 }
 
 // @f3twin 0x00a85100 of 0x0092e890
-void __stdcall F3_FUN_00a85100(unsigned char* output)
+// pdb: hkOffsetOnlyStreamWriter::seekTellSupported | hkOffsetOnlyStreamWriter.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void __stdcall hkOffsetOnlyStreamWriter_seekTellSupported(unsigned char* output)
 {
     *output = 1;
 }

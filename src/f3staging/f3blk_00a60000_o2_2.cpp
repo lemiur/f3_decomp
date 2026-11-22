@@ -286,7 +286,7 @@ void Cls_00a6b600::FUN_00a6b600(Obj_00a6b600* a1)
 
 // @f3 0x00a710b0 (community match, verified in this file)
 namespace f3m_00a710b0 {
-struct Tail { void __thiscall FUN_00924b40(int); };
+struct Tail { void __thiscall hkRotation_set(int); };
 struct Object {
     int unk00; int unk04; int unk08; int unk0C;
     int unk10; int unk14; int unk18; int unk1C;
@@ -302,7 +302,7 @@ void Object::FUN_00a710b0(int arg) {
     unk30 = 0.0f; unk34 = 0.0f; unk38 = 0.0f; unk3C = 0.0f;
     unk40 = 0.0f; unk44 = 0.0f; unk48 = 0.0f; unk4C = 0.0f;
     unk20 = 1.0f; unk34 = 1.0f; unk48 = 1.0f;
-    unk50.FUN_00924b40(arg);
+    unk50.hkRotation_set(arg);
 }
 }   // namespace f3m_00a710b0
 
@@ -660,7 +660,7 @@ struct Writer00a76d80 {
     int unk04;
     Arr00a76d80<unsigned short> words;
     Arr00a76d80<unsigned char> bytes;
-    void FUN_00a76d80(const Entry00a76d80* entries, int count);
+    void hkpConvexVerticesConnectivity_addFace(const Entry00a76d80* entries, int count);
 };
 
 void FUN_00901f10(void* arr, int elemSize);
@@ -673,7 +673,8 @@ inline void Push00a76d80(Arr00a76d80<T>& a, T v, int elemSize) {
 }
 
 
-void Writer00a76d80::FUN_00a76d80(const Entry00a76d80* entries, int count) {
+// pdb: hkpConvexVerticesConnectivity::addFace | hkpConvexVerticesConnectivity.obj | fnv360_0721_beta, objrun + skyrim(objrun), high
+void Writer00a76d80::hkpConvexVerticesConnectivity_addFace(const Entry00a76d80* entries, int count) {
     Push00a76d80(bytes, (unsigned char)count, 1);
     for (int i = 0; i < count; i++) {
         unsigned short key = entries[i].key;
@@ -1225,11 +1226,12 @@ template <class T> struct Array {
 struct Owner {
     int unk00, unk04, unk08, unk0c, unk10, unk14, unk18, unk1c, unk20, unk24, unk28, unk2c;
     Array<ReferencedObject*> objects;   // 0x30
-    void FUN_00a777a0(ReferencedObject* object);
+    void hkpCollisionFilterList_removeCollisionFilter(ReferencedObject* object);
 };
 }
 
-void f3m_00a777a0::Owner::FUN_00a777a0(ReferencedObject* object)
+// pdb: hkpCollisionFilterList::removeCollisionFilter | hkpCollisionFilterList.obj | fnv360_0822_retail, objrun + skyrim(objrun), high
+void f3m_00a777a0::Owner::hkpCollisionFilterList_removeCollisionFilter(ReferencedObject* object)
 {
     int index = objects.indexOf(object);
     objects.removeAt(index);
@@ -1681,8 +1683,8 @@ struct __declspec(align(16)) ZVec4 {
  void setMul4(const ZScalar& scalar,const ZVec4& v) { x=scalar.value*v.x;y=scalar.value*v.y;z=scalar.value*v.z;w=scalar.value*v.w; }
  void add(const ZVec4& v) { x=v.x+x;y=v.y+y;z=v.z+z;w=v.w+w; }
  void setAdd(const ZVec4& a,const ZVec4& b) { x=a.x+b.x;y=a.y+b.y;z=a.z+b.z;w=a.w+b.w; }
- void FUN_008d28e0(const void*,const ZVec4*);
- void FUN_008d2a00(const void*,const ZVec4*);
+ void hkVector4_setTransformedPos(const void*,const ZVec4*);
+ void hkVector4_setRotatedDir(const void*,const ZVec4*);
 };
 struct ZTransform { ZVec4 a,b,c,d; };
 struct ZLimits {
@@ -1713,12 +1715,12 @@ void ZDrawer::FUN_00a6e650(ZConstraint* constraint,ZDisplay* display,int tag) {
  unkc0.FUN_00a8f460(display);
  ZTransform a,b;
  FUN_00a6aa20(constraint,&a,&b);
- unk50.FUN_008d28e0(&a,&limits->unk90);
- unk40.FUN_008d28e0(&b,&limits->unk50);
+ unk50.hkVector4_setTransformedPos(&a,&limits->unk90);
+ unk40.hkVector4_setTransformedPos(&b,&limits->unk50);
  FUN_00a6a750(tag); FUN_00a6a7b0(tag);
  ZVec4 axis,perp;
- const ZVec4* axisInput=&limits->unk60; const void* rot=&unk90; axis.FUN_008d2a00(rot,axisInput);
- perp.FUN_008d2a00(&unk90,&limits->unk70);
+ const ZVec4* axisInput=&limits->unk60; const void* rot=&unk90; axis.hkVector4_setRotatedDir(rot,axisInput);
+ perp.hkVector4_setRotatedDir(&unk90,&limits->unk70);
  display->Line(unk40,unk50,0xffff0000,tag);
  {
  ZVec4 p0,p1;
@@ -1992,7 +1994,7 @@ namespace S00a72770_ns {
 struct __declspec(align(16)) S00a72770_Vec4 {
     float x, y, z, w;
     void set(float a, float b, float c, float d) { x = a; y = b; z = c; w = d; }
-    void FUN_008d28e0(const void* transform, const S00a72770_Vec4& v);
+    void hkVector4_setTransformedPos(const void* transform, const S00a72770_Vec4& v);
 };
 
 struct S00a72770_Aabb {
@@ -2038,7 +2040,7 @@ void S00a72770_Shape::FUN_00a72770(const void* transform, float tolerance, S00a7
 
     for (int i = 0; i < numVertices; i++) {
         S00a72770_Vec4 v;
-        v.FUN_008d28e0(transform, vertices[i]);
+        v.hkVector4_setTransformedPos(transform, vertices[i]);
         out.min.x = out.min.x < v.x ? out.min.x : v.x;
         out.min.y = out.min.y < v.y ? out.min.y : v.y;
         out.min.z = out.min.z < v.z ? out.min.z : v.z;
@@ -2219,7 +2221,7 @@ struct __declspec(align(16)) Vec
         w = o.w;
         return *this;
     }
-    void FUN_008d28e0(const struct Transform& t, const Vec& v);
+    void hkVector4_setTransformedPos(const struct Transform& t, const Vec& v);
 };
 
 struct Transform
@@ -2266,7 +2268,7 @@ void Box::FUN_00a67e10(VecArray& lines)
             v.y *= -1.0;
         if (i & 4)
             v.z *= -1.0;
-        corners[i].FUN_008d28e0(transform, v);
+        corners[i].hkVector4_setTransformedPos(transform, v);
     }
     int k = 0;
     for (int i = 0; i < 8; i++)
@@ -2368,7 +2370,7 @@ struct __declspec(align(16)) Vec
         w = o.w;
         return *this;
     }
-    void FUN_008d2a00(const Rotation& rotation, const Vec& v);
+    void hkVector4_setRotatedDir(const Rotation& rotation, const Vec& v);
 };
 
 // Three columns, 48 bytes: the frame keeps 0x30 bytes for it.
@@ -2412,7 +2414,7 @@ void Arc::FUN_00a6ada0(VecArray& points)
     current.y = startDir.y * r;
     current.z = startDir.z * r;
     current.w = startDir.w * r;
-    current.FUN_008d2a00(rotation, current);
+    current.hkVector4_setRotatedDir(rotation, current);
     current.x = center.x + current.x;
     current.y = center.y + current.y;
     current.z = center.z + current.z;
@@ -2440,7 +2442,7 @@ void Arc::FUN_00a6ada0(VecArray& points)
         next.y = previous.y - origin.y;
         next.z = previous.z - origin.z;
         next.w = previous.w - origin.w;
-        next.FUN_008d2a00(rotation, next);
+        next.hkVector4_setRotatedDir(rotation, next);
         next.x = origin.x + next.x;
         next.y = origin.y + next.y;
         next.z = origin.z + next.z;
@@ -3735,7 +3737,7 @@ struct hkTransform
     // the assignment, kept out of line
     hkTransform& FUN_008fda60(const hkTransform& t);
     // setMul: this = t1 * t2
-    void FUN_009251b0(const hkTransform& t1, const hkTransform& t2);
+    void hkTransform_setMul(const hkTransform& t1, const hkTransform& t2);
     // setMulInverseMul: this = inverse(bTa) * bTc
     void FUN_00925300(const hkTransform& bTa, const hkTransform& bTc);
 
@@ -3842,7 +3844,7 @@ void hkpPointToPathConstraintData::FUN_00a74910(const hkTransform& slidingBodyTr
 
     // the pivot in path space
     hkTransform pathToWorld;
-    pathToWorld.FUN_009251b0(referenceBodyTransform, pathToRefBodyTransform);
+    pathToWorld.hkTransform_setMul(referenceBodyTransform, pathToRefBodyTransform);
     hkVector4 pivotInPath;
     pivotInPath.FUN_008d2970(pathToWorld, pivotWs);
 
@@ -3861,8 +3863,8 @@ void hkpPointToPathConstraintData::FUN_00a74910(const hkTransform& slidingBodyTr
 
     // and that frame in the sliding body's space
     hkTransform constraintToRefBody;
-    constraintToRefBody.FUN_009251b0(pathToRefBodyTransform, constraintToPath);
-    pathToWorld.FUN_009251b0(referenceBodyTransform, constraintToRefBody);
+    constraintToRefBody.hkTransform_setMul(pathToRefBodyTransform, constraintToPath);
+    pathToWorld.hkTransform_setMul(referenceBodyTransform, constraintToRefBody);
     hkTransform constraintToSlidingBody;
     constraintToSlidingBody.FUN_00925300(slidingBodyTransform, pathToWorld);
     m_transform_OS_KS[0].FUN_008fda60(constraintToSlidingBody);
@@ -3924,9 +3926,9 @@ struct hkVector4
     __forceinline void setAddMul4(const hkVector4& a, const hkVector4& b, hkSimdRealParameter r);
 
     // setTransformedPos
-    void FUN_008d28e0(const hkTransform& t, const hkVector4& b);
+    void hkVector4_setTransformedPos(const hkTransform& t, const hkVector4& b);
     // setRotatedDir
-    void FUN_008d2a00(const hkRotation& r, const hkVector4& b);
+    void hkVector4_setRotatedDir(const hkRotation& r, const hkVector4& b);
 
     __declspec(align(16)) hkReal x;
     hkReal y;
@@ -4153,8 +4155,8 @@ void hkpPulleyDrawer::FUN_00a6d020(hkpConstraintInstance* constraint, hkDebugDis
         hkTransform refLocalToWorld;
         hkTransform attLocalToWorld;
         FUN_00a6aa20(constraint, refLocalToWorld, attLocalToWorld);
-        m_bodyBWPivot.FUN_008d28e0(refLocalToWorld, pulley->m_atoms.m_translations.m_translationB);
-        m_bodyAWPivot.FUN_008d28e0(attLocalToWorld, pulley->m_atoms.m_translations.m_translationA);
+        m_bodyBWPivot.hkVector4_setTransformedPos(refLocalToWorld, pulley->m_atoms.m_translations.m_translationB);
+        m_bodyAWPivot.hkVector4_setTransformedPos(attLocalToWorld, pulley->m_atoms.m_translations.m_translationA);
     }
 
     FUN_00a6a750(tag);
@@ -4168,7 +4170,7 @@ void hkpPulleyDrawer::FUN_00a6d020(hkpConstraintInstance* constraint, hkDebugDis
     // body B's part: one line per unit of leverage, side by side along the body's x axis, centred on its pivot
     int numLines = int(hkMath::max2(atom.m_leverageOnBodyB, 1.0f));
     hkVector4 shift; shift.set(0.07f, 0.0f, 0.0f);
-    shift.FUN_008d2a00(constraint->getRigidBodyB()->getTransform().getRotation(), shift);
+    shift.hkVector4_setRotatedDir(constraint->getRigidBodyB()->getTransform().getRotation(), shift);
 
     hkVector4 base; base.setMul4(-0.5f * (numLines - 1), shift);
 
@@ -4223,9 +4225,9 @@ struct hkVector4
     __forceinline void subMul4(hkSimdRealParameter rs, const hkVector4& a);
 
     // setTransformedPos
-    void FUN_008d28e0(const hkTransform& t, const hkVector4& b);
+    void hkVector4_setTransformedPos(const hkTransform& t, const hkVector4& b);
     // setRotatedDir
-    void FUN_008d2a00(const hkRotation& r, const hkVector4& b);
+    void hkVector4_setRotatedDir(const hkRotation& r, const hkVector4& b);
 
     __declspec(align(16)) hkReal x;
     hkReal y;
@@ -4413,8 +4415,8 @@ void hkpPointToPlaneDrawer::FUN_00a6d890(hkpConstraintInstance* constraint, hkDe
         hkTransform refLocalToWorld;
         hkTransform attLocalToWorld;
         FUN_00a6aa20(constraint, refLocalToWorld, attLocalToWorld);
-        m_bodyBWPivot.FUN_008d28e0(refLocalToWorld, plane->m_atoms.m_transforms.m_transformB.getTranslation());
-        m_bodyAWPivot.FUN_008d28e0(attLocalToWorld, plane->m_atoms.m_transforms.m_transformA.getTranslation());
+        m_bodyBWPivot.hkVector4_setTransformedPos(refLocalToWorld, plane->m_atoms.m_transforms.m_transformB.getTranslation());
+        m_bodyAWPivot.hkVector4_setTransformedPos(attLocalToWorld, plane->m_atoms.m_transforms.m_transformA.getTranslation());
     }
 
     FUN_00a6a750(tag);
@@ -4422,8 +4424,8 @@ void hkpPointToPlaneDrawer::FUN_00a6d890(hkpConstraintInstance* constraint, hkDe
     FUN_00a6a7b0(tag);
 
     // the two directions in the plane, in world space
-    hkVector4 perpVec0; perpVec0.FUN_008d2a00(m_RB, plane->m_atoms.m_transforms.m_transformB.getColumn((plane->m_atoms.m_lin.m_axisIndex + 1) % 3));
-    hkVector4 perpVec1; perpVec1.FUN_008d2a00(m_RB, plane->m_atoms.m_transforms.m_transformB.getColumn((plane->m_atoms.m_lin.m_axisIndex + 2) % 3));
+    hkVector4 perpVec0; perpVec0.hkVector4_setRotatedDir(m_RB, plane->m_atoms.m_transforms.m_transformB.getColumn((plane->m_atoms.m_lin.m_axisIndex + 1) % 3));
+    hkVector4 perpVec1; perpVec1.hkVector4_setRotatedDir(m_RB, plane->m_atoms.m_transforms.m_transformB.getColumn((plane->m_atoms.m_lin.m_axisIndex + 2) % 3));
 
     // three lines along each direction, through body B's pivot and 1.4 to either side of it
     hkVector4 lines[6][2];
@@ -4677,9 +4679,9 @@ struct hkVector4
     __forceinline void setMul4(hkSimdRealParameter rs, const hkVector4& a);
 
     // setTransformedPos
-    void FUN_008d28e0(const hkTransform& t, const hkVector4& b);
+    void hkVector4_setTransformedPos(const hkTransform& t, const hkVector4& b);
     // setRotatedDir
-    void FUN_008d2a00(const hkRotation& r, const hkVector4& b);
+    void hkVector4_setRotatedDir(const hkRotation& r, const hkVector4& b);
 
     __declspec(align(16)) hkReal x;
     hkReal y;
@@ -4897,8 +4899,8 @@ void hkpWheelDrawer::FUN_00a6ddd0(hkpConstraintInstance* constraint, hkDebugDisp
         hkTransform refLocalToWorld;
         hkTransform attLocalToWorld;
         FUN_00a6aa20(constraint, refLocalToWorld, attLocalToWorld);
-        m_bodyBWPivot.FUN_008d28e0(refLocalToWorld, wheel->m_atoms.m_suspensionBase.m_transformB.getTranslation());
-        m_bodyAWPivot.FUN_008d28e0(attLocalToWorld, wheel->m_atoms.m_suspensionBase.m_transformA.getTranslation());
+        m_bodyBWPivot.hkVector4_setTransformedPos(refLocalToWorld, wheel->m_atoms.m_suspensionBase.m_transformB.getTranslation());
+        m_bodyAWPivot.hkVector4_setTransformedPos(attLocalToWorld, wheel->m_atoms.m_suspensionBase.m_transformA.getTranslation());
     }
 
     FUN_00a6a7b0(tag);
@@ -4908,7 +4910,7 @@ void hkpWheelDrawer::FUN_00a6ddd0(hkpConstraintInstance* constraint, hkDebugDisp
     // between the two pivots
     displayHandler->displayLine(m_bodyAWPivot, m_bodyBWPivot, hkColor::RED, tag);
 
-    hkVector4 suspensionAxis; suspensionAxis.FUN_008d2a00(m_RB, wheel->m_atoms.m_suspensionBase.m_transformB.getColumn(hkpWheelConstraintData::Atoms::AXIS_SUSPENSION));
+    hkVector4 suspensionAxis; suspensionAxis.hkVector4_setRotatedDir(m_RB, wheel->m_atoms.m_suspensionBase.m_transformB.getColumn(hkpWheelConstraintData::Atoms::AXIS_SUSPENSION));
 
     // the suspension axis, through body B's pivot
     {
@@ -4925,7 +4927,7 @@ void hkpWheelDrawer::FUN_00a6ddd0(hkpConstraintInstance* constraint, hkDebugDisp
         hkReal suspensionMin = wheel->m_atoms.m_lin0Limit.m_min;
         hkReal suspensionMax = wheel->m_atoms.m_lin0Limit.m_max;
 
-        hkVector4 perpSuspension; perpSuspension.FUN_008d2a00(m_RB, wheel->m_atoms.m_suspensionBase.m_transformB.getColumn(hkpWheelConstraintData::Atoms::AXIS_PERP_SUSPENSION));
+        hkVector4 perpSuspension; perpSuspension.hkVector4_setRotatedDir(m_RB, wheel->m_atoms.m_suspensionBase.m_transformB.getColumn(hkpWheelConstraintData::Atoms::AXIS_PERP_SUSPENSION));
 
         hkVector4 p1; p1.setMul4(suspensionMax, suspensionAxis);
         p1.add4(m_bodyBWPivot);
@@ -4952,7 +4954,7 @@ void hkpWheelDrawer::FUN_00a6ddd0(hkpConstraintInstance* constraint, hkDebugDisp
 
     // the steering axis, through body B's pivot
     {
-        hkVector4 steeringAxis; steeringAxis.FUN_008d2a00(m_RB, wheel->m_atoms.m_steeringBase.m_rotationB.getColumn(hkpWheelConstraintData::Atoms::AXIS_STEERING));
+        hkVector4 steeringAxis; steeringAxis.hkVector4_setRotatedDir(m_RB, wheel->m_atoms.m_steeringBase.m_rotationB.getColumn(hkpWheelConstraintData::Atoms::AXIS_STEERING));
         hkVector4 p1; p1.setMul4(m_lineLength * -0.5f, steeringAxis);
         p1.add4(m_bodyBWPivot);
         hkVector4 p2; p2.setMul4(m_lineLength * 0.5f, steeringAxis);
@@ -4962,7 +4964,7 @@ void hkpWheelDrawer::FUN_00a6ddd0(hkpConstraintInstance* constraint, hkDebugDisp
 
     // the axle, through body A's pivot
     {
-        hkVector4 axle; axle.FUN_008d2a00(m_RA, wheel->m_atoms.m_steeringBase.m_rotationA.getColumn(hkpWheelConstraintData::Atoms::AXIS_AXLE));
+        hkVector4 axle; axle.hkVector4_setRotatedDir(m_RA, wheel->m_atoms.m_steeringBase.m_rotationA.getColumn(hkpWheelConstraintData::Atoms::AXIS_AXLE));
 
         hkVector4 p1; p1.setMul4(m_lineLength * -0.5f, axle);
         p1.add4(m_bodyAWPivot);
@@ -4987,7 +4989,7 @@ namespace f3m_00a70cc0 {
 namespace F3Spring2273 {
 struct __declspec(align(16)) Vector {
     float x, y, z, w;
-    void FUN_008d28e0(const void*, const Vector*);
+    void hkVector4_setTransformedPos(const void*, const Vector*);
     __forceinline Vector& operator=(const Vector& other) { x=other.x;y=other.y;z=other.z;w=other.w;return *this; }
     __forceinline float NormalizeWithLength3() {
         float length = sqrtf(x*x+y*y+z*z);
@@ -5055,16 +5057,17 @@ extern void __cdecl FUN_009fcb10(const Input&, Output&, void*, unsigned);
 extern Schema* __cdecl FUN_00a523d0(void*);
 extern void __cdecl FUN_00901f10(OffsetArray*, unsigned);
 extern void __cdecl FUN_00a4e400(Input*);
-extern void __cdecl FUN_00a4f510(const Pivots&, Input&, Schema*, float);
+extern void __cdecl hk1dLinearBilateralConstraintBuildJacobianWithCustomRhs_noSchema(const Pivots&, Input&, Schema*, float);
 extern void __cdecl FUN_00a520c0(int, float, float, float, const unsigned*, unsigned, Schema*, const Input&, Output&);
 struct Solver {
     unsigned unk00, unk04, unk08, unk0c, unk10, unk14;
     Link* links;
     unsigned unk1c, unk20;
     float tau, damping, maxError;
-    void FUN_00a70cc0(const Input&, Output&);
+    void hkpStiffSpringChainData_buildJacobian(const Input&, Output&);
 };
-void Solver::FUN_00a70cc0(const Input& input, Output& output)
+// pdb: hkpStiffSpringChainData::buildJacobian | hkpStiffSpringChainData.obj | fnv360_1110_retail, objrun + bridge(caller_sim|vtable) + skyrim(caller_sim), high
+void Solver::hkpStiffSpringChainData_buildJacobian(const Input& input, Output& output)
 {
     FUN_009fcb10(input, output, input.eventBuffer, 8);
     Input in = input;
@@ -5096,8 +5099,8 @@ void Solver::FUN_00a70cc0(const Input& input, Output& output)
         offsets.array.data[offsets.array.size++] = offsetB;
         in.transformB = &entity->transform;
         Pivots pivots;
-        pivots.a.FUN_008d28e0(in.transformA, &links[i].pivotA);
-        pivots.b.FUN_008d28e0(in.transformB, &links[i].pivotB);
+        pivots.a.hkVector4_setTransformedPos(in.transformA, &links[i].pivotA);
+        pivots.b.hkVector4_setTransformedPos(in.transformB, &links[i].pivotB);
         Vector axis;
         axis.x = pivots.a.x - pivots.b.x;
         axis.y = pivots.a.y - pivots.b.y;
@@ -5111,7 +5114,7 @@ void Solver::FUN_00a70cc0(const Input& input, Output& output)
             springLength = 0.0f;
         }
         FUN_00a4e400(&in);
-        FUN_00a4f510(pivots, in, schema, links[i].restLength - springLength);
+        hk1dLinearBilateralConstraintBuildJacobianWithCustomRhs_noSchema(pivots, in, schema, links[i].restLength - springLength);
         ++schema;
     }
     FUN_00a520c0(numConstraints, tau, damping, maxError, offsets.array.data, base, schema, input, output);
@@ -5141,13 +5144,13 @@ struct __declspec(align(16)) VectorQ {
     void setCross(const VectorQ& a, const VectorQ& b);
     void setAddMul4(const VectorQ& a, const VectorQ& b, float r) { x = a.x + r * b.x; y = a.y + r * b.y; z = a.z + r * b.z; w = a.w + r * b.w; }
     void FUN_008d2970(const struct TransformQ& t, const VectorQ& v);   // inverse-transform a position
-    void FUN_008d28e0(const struct TransformQ& t, const VectorQ& v);   // transform a position
-    void FUN_008d2a00(const struct TransformQ& t, const VectorQ& v);   // rotate a direction
+    void hkVector4_setTransformedPos(const struct TransformQ& t, const VectorQ& v);   // transform a position
+    void hkVector4_setRotatedDir(const struct TransformQ& t, const VectorQ& v);   // rotate a direction
 };
 
 struct __declspec(align(16)) TransformQ {
     VectorQ m_col0, m_col1, m_col2, m_translation;
-    void FUN_009251b0(const TransformQ& a, const TransformQ& b);       // this = a * b
+    void hkTransform_setMul(const TransformQ& a, const TransformQ& b);       // this = a * b
 };
 
 __forceinline float absQ(float r) { return fabsf(r); }
@@ -5245,9 +5248,9 @@ void PointToPathData::FUN_00a74b00(const QueryIn& in, QueryOut& out)
     AppendEventRecord(in, out, in.m_constraintRuntime, 8);
 
     TransformQ pathToWorld;
-    pathToWorld.FUN_009251b0(*in.m_transformB, m_transforms[1]);
+    pathToWorld.hkTransform_setMul(*in.m_transformB, m_transforms[1]);
     TransformQ bodyToWorld;
-    bodyToWorld.FUN_009251b0(*in.m_transformA, m_transforms[0]);
+    bodyToWorld.hkTransform_setMul(*in.m_transformA, m_transforms[0]);
 
     VectorQ& bodyAxis0 = bodyToWorld.m_col0;
     PathRuntime* runtime = in.m_constraintRuntime;
@@ -5262,12 +5265,12 @@ void PointToPathData::FUN_00a74b00(const QueryIn& in, QueryOut& out)
         runtime->m_parametricPosition =
             m_path->getNearestPoint(runtime->m_parametricPosition, pivotLocal, pivotLocal);
 
-        pathPointWs.FUN_008d28e0(pathToWorld, pivotLocal);
+        pathPointWs.hkVector4_setTransformedPos(pathToWorld, pivotLocal);
     }
     {
         VectorQ tangentLocal;
         m_path->getTangent(runtime->m_parametricPosition, tangentLocal);
-        tangentWs.FUN_008d2a00(pathToWorld, tangentLocal);
+        tangentWs.hkVector4_setRotatedDir(pathToWorld, tangentLocal);
     }
 
     // two directions perpendicular to the path
@@ -5318,7 +5321,7 @@ void PointToPathData::FUN_00a74b00(const QueryIn& in, QueryOut& out)
             m_path->getBinormal(runtime->m_parametricPosition, binormal);
 
             VectorQ binormalWs;
-            binormalWs.FUN_008d2a00(pathToWorld, binormal);
+            binormalWs.hkVector4_setRotatedDir(pathToWorld, binormal);
             angular.m_zeroErrorAxisA = bodyToWorld.m_col2;
             setNeg4(angular.m_constrainedDof, binormalWs);
             angular.m_perpZeroErrorAxisB = bodyAxis0;
@@ -5683,7 +5686,7 @@ unsigned int PackColorBigEndian(float r, float g, float b, float a);
 struct QTransform;
 struct __declspec(align(16)) QVec4 {
     float x, y, z, w;
-    void FUN_008d28e0(const QTransform& t, const QVec4& v);
+    void hkVector4_setTransformedPos(const QTransform& t, const QVec4& v);
 };
 struct __declspec(align(16)) QTransform { QVec4 col0, col1, col2, pos; };
 struct QBody {
@@ -5719,9 +5722,9 @@ void QThis::FUN_00a6e460(QArg* a, QDisplay* d, int tag)
     QTransform t2;
     FUN_00a6aa20(a, t1, t2);
     QVec4& end = v50;
-    end.FUN_008d28e0(t1, body->v30);
+    end.hkVector4_setTransformedPos(t1, body->v30);
     QVec4& start = v40;
-    start.FUN_008d28e0(t2, body->v20);
+    start.hkVector4_setTransformedPos(t2, body->v20);
     FUN_00a6a750(tag);
     FUN_00a6a7b0(tag);
     float radius = body->f44;
@@ -5754,8 +5757,8 @@ struct __declspec(align(16)) QA32Xf { float m[16]; };
 
 struct __declspec(align(16)) QA32V4 {
     float x, y, z, w;
-    void FUN_008d28e0(const QA32Xf& t, const QA32V4& p);
-    void FUN_008d2a00(const QA32Rot& r, const QA32V4& d);
+    void hkVector4_setTransformedPos(const QA32Xf& t, const QA32V4& p);
+    void hkVector4_setRotatedDir(const QA32Rot& r, const QA32V4& d);
     inline void setMul4(float s, const QA32V4& v) { x = v.x * s; y = v.y * s; z = v.z * s; w = v.w * s; }
     inline void add4(const QA32V4& v) { x += v.x; y += v.y; z += v.z; w += v.w; }
 };
@@ -5857,13 +5860,13 @@ void QA32::FUN_00a6f090(QA32Body* body, QA32Disp* disp, int tag)
     QA32Xf t1;
     QA32Xf t2;
     FUN_00a6aa20(body, &t1, &t2);
-    unk50.FUN_008d28e0(t1, obj->unk90);
-    unk40.FUN_008d28e0(t2, obj->unk50);
+    unk50.hkVector4_setTransformedPos(t1, obj->unk90);
+    unk40.hkVector4_setTransformedPos(t2, obj->unk50);
     FUN_00a6a7b0(tag);
     FUN_00a6a750(tag);
     disp->displayLine(unk40, unk50, 0xffff0000, tag);
     QA32V4 dir;
-    dir.FUN_008d2a00(unk90, obj->unk60);
+    dir.hkVector4_setRotatedDir(unk90, obj->unk60);
     QA32V4 a;
     a.setMul4(unk00 * 0.5, dir);
     a.add4(unk50);

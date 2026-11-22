@@ -689,9 +689,9 @@ struct PickShape
     int unk2C;
     PickMesh* m_pMesh;
     bool FUN_00a67360(int);
-    void FUN_00a67410(void*);
+    void NiGeometryData_GetVerticesIterator(void*);
     void GetBounds(void*);
-    void FUN_00a673d0();
+    void NiGeometryData_UnlockPackedVertexData();
 };
 
 struct PickMover
@@ -825,7 +825,7 @@ void EmitterPick::PickParticle(int aiIndex)
                 scratch.other.view.flag = 0;
                 if (pShape->FUN_00a67360(1) != 0)
                 {
-                    pShape->FUN_00a67410(&scratch.work.view);
+                    pShape->NiGeometryData_GetVerticesIterator(&scratch.work.view);
                     pShape->GetBounds(&scratch.other.view);
                     PickVector* __restrict pVecA =
                         (PickVector*)((char*)scratch.work.view.base + scratch.work.view.stride * uiRemainder);
@@ -833,7 +833,7 @@ void EmitterPick::PickParticle(int aiIndex)
                     PickVector* __restrict pVecB =
                         (PickVector*)((char*)scratch.other.view.base + scratch.other.view.stride * uiRemainder);
                     b = *pVecB;
-                    pShape->FUN_00a673d0();
+                    pShape->NiGeometryData_UnlockPackedVertexData();
                 }
             }
             else

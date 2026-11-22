@@ -101,11 +101,12 @@ float __thiscall FUN_00a89020_cls::GetValueAt(unsigned int uiIndex)
 
 struct NiFloatsExtraData_compare : NiFloatsExtraData
 {
-    bool __thiscall FUN_00a890b0(const NiFloatsExtraData* pOther);
+    bool __thiscall NiFloatsExtraData_IsEqual(const NiFloatsExtraData* pOther);
 };
 // Compares this NiFloatsExtraData with pOther: checks size, null-ness of the value array, and element-wise equality of the floats.
 // @fnv 0x00a890b0
-bool __thiscall NiFloatsExtraData_compare::FUN_00a890b0(const NiFloatsExtraData* pOther)
+// pdb: NiFloatsExtraData::IsEqual | NiFloatsExtraData.obj | fnv360_0822_retail, objrun_open + bridge(vtable|objrun) + skyrim(objrun_sim), high
+bool __thiscall NiFloatsExtraData_compare::NiFloatsExtraData_IsEqual(const NiFloatsExtraData* pOther)
 {
     if (!pOther)
         return false;

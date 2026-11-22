@@ -271,7 +271,7 @@ extern const __m128 DAT_010c71e0;
 struct Quat
 {
     __m128 m_vec;
-    void FUN_00cb2450(const __m128* axis, float angle);
+    void hkQuaternion_setAxisAngle(const __m128* axis, float angle);
 };
 
 struct Vec4

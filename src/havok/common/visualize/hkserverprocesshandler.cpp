@@ -46,11 +46,11 @@ struct FUN_00d60ca0_s
 {
     int FUN_00d60ca0(int a, int b);
 };
-int __cdecl FUN_00cb10d0(int);
+int __cdecl hkString_strLen(int);
 // @fnv 0x00d60ca0
 int FUN_00d60ca0_s::FUN_00d60ca0(int a, int b)
 {
-    int iClamped = FUN_00cb10d0(a);
+    int iClamped = hkString_strLen(a);
     if (iClamped > 0xffff)
         iClamped = 0xffff;
     ((FUN_00d60940_s*)*(void**)((char*)this + 0x10))->WriteInt32(iClamped + 7);
@@ -67,7 +67,7 @@ struct FUN_00d60940_Class
 };
 struct FUN_00d605d0_Class
 {
-    void FUN_00d605d0(unsigned int);
+    void hkOArchive_write8u(unsigned int);
 };
 struct FUN_00d60d10_Class
 {
@@ -78,7 +78,7 @@ struct FUN_00d60d10_Class
 int FUN_00d60d10_Class::FUN_00d60d10(unsigned int a)
 {
     ((FUN_00d60940_Class*)(*(int**)((char*)this + 0x10)))->WriteInt(5);
-    ((FUN_00d605d0_Class*)(*(int**)((char*)this + 0x10)))->FUN_00d605d0(0xc1);
+    ((FUN_00d605d0_Class*)(*(int**)((char*)this + 0x10)))->hkOArchive_write8u(0xc1);
     ((FUN_00d60940_Class*)(*(int**)((char*)this + 0x10)))->WriteInt(a);
     return 0;
 }

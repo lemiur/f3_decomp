@@ -64,7 +64,8 @@ BSAudio* FUN_00c85750();
 
 extern void __cdecl FUN_00d319e0(void*, void*, void*, void*);
 // @fnv 0x00d32170
-void __stdcall FUN_00d32170(void* apArg1, void* apArg2, void* apArg3, void* apArg4) {
+// pdb: hkpHeightFieldAgent::getClosestPoints | hkpHeightFieldAgent.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void __stdcall hkpHeightFieldAgent_getClosestPoints(void* apArg1, void* apArg2, void* apArg3, void* apArg4) {
     FUN_00d319e0(apArg1, apArg2, apArg3, apArg4);
 }
 

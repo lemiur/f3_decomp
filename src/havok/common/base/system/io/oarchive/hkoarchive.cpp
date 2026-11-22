@@ -24,11 +24,12 @@ void hkOArchive::FUN_00d609e0(int n, int m)
 struct FUN_00d60a20_class
 {
     void __thiscall WriteSwapped(const void* data, int type, unsigned int size);
-    void __thiscall FUN_00d60a20(const void* data, unsigned int size);
+    void __thiscall hkOArchive_writeArray8u(const void* data, unsigned int size);
 };
 
 // @fnv 0x00d60a20
-void __thiscall FUN_00d60a20_class::FUN_00d60a20(const void* data, unsigned int size)
+// pdb: hkOArchive::writeArray8u | hkOArchive.obj | fnv360_0822_debug, objrun + skyrim(objrun), high
+void __thiscall FUN_00d60a20_class::hkOArchive_writeArray8u(const void* data, unsigned int size)
 {
     WriteSwapped(data, 1, size);
 }
@@ -40,11 +41,12 @@ struct FUN_00d60600_class
 
 struct FUN_00d60a60_class : public FUN_00d60600_class
 {
-    void FUN_00d60a60(int a, int b);
+    void hkOArchive_writeArray16u(int a, int b);
 };
 
 // @fnv 0x00d60a60
-void FUN_00d60a60_class::FUN_00d60a60(int aiFirst, int aiSecond)
+// pdb: hkOArchive::writeArray16u | hkOArchive.obj | fnv360_0822_retail, objrun + skyrim(objrun), high
+void FUN_00d60a60_class::hkOArchive_writeArray16u(int aiFirst, int aiSecond)
 {
     WriteSwapped(aiFirst, 2, aiSecond);
 }
@@ -109,7 +111,8 @@ void hkOArchive_2::WriteInt(int aiValue)
 }
 
 // @fnv 0x00d60960
-void __stdcall FUN_00d60960(const float* p)
+// pdb: hkOArchive::write32u | hkOArchive.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_gap), high
+void __stdcall hkOArchive_write32u(const float* p)
 {
     WriteSwapped((void*)&p, 4, 1);
 }
@@ -128,11 +131,12 @@ void FUN_00d60980_class::FUN_00d60980(int aiValue, int aiUnused)
 struct FUN_00d609a0_Class
 {
     void WriteBinaryData(void* p, int n, int m);
-    void FUN_00d609a0(int value, int other);
+    void hkOArchive_write64u(int value, int other);
 };
 
 // @fnv 0x00d609a0
-void FUN_00d609a0_Class::FUN_00d609a0(int value, int)
+// pdb: hkOArchive::write64u | hkOArchive.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_seq), high
+void FUN_00d609a0_Class::hkOArchive_write64u(int value, int)
 {
     WriteBinaryData(&value, 8, 1);
 }
@@ -148,11 +152,12 @@ struct FUN_00d605b0_writer
 
 struct FUN_00d605b0_class
 {
-    void FUN_00d605b0(unsigned char value);
+    void hkOArchive_write8(unsigned char value);
 };
 
 // @fnv 0x00d605b0
-void FUN_00d605b0_class::FUN_00d605b0(unsigned char value)
+// pdb: hkOArchive::write8 | hkOArchive.obj | fnv360_0822_retail, call_gap + bridge(call_gap|call_gap) + skyrim(call_gap), high
+void FUN_00d605b0_class::hkOArchive_write8(unsigned char value)
 {
     FUN_00d605b0_writer* writer = *reinterpret_cast<FUN_00d605b0_writer**>(reinterpret_cast<char*>(this) + 8);
     writer->write(&value, 1);
@@ -172,11 +177,12 @@ struct FUN_00d605d0_class
     void* m_iWordAt00;
     void* m_iWordAt04;
     void* m_8;
-    void FUN_00d605d0(unsigned char value);
+    void hkOArchive_write8u(unsigned char value);
 };
 
 // @fnv 0x00d605d0
-void FUN_00d605d0_class::FUN_00d605d0(unsigned char value)
+// pdb: hkOArchive::write8u | hkOArchive.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(objrun), high
+void FUN_00d605d0_class::hkOArchive_write8u(unsigned char value)
 {
     reinterpret_cast<FUN_00d605d0_impl*>(m_8)->write(&value, 1);
 }
@@ -389,10 +395,11 @@ struct FnvCpu_FUN_00d607d0_CpuObject
     unsigned int unk04;
     unsigned int unk08;
     unsigned char value;
-    unsigned char* FUN_00d607d0(unsigned char* output);
+    unsigned char* hkOArchive_getByteSwap(unsigned char* output);
 };
 // @fnv 0x00d607d0
-unsigned char* FnvCpu_FUN_00d607d0_CpuObject::FUN_00d607d0(unsigned char* output)
+// pdb: hkOArchive::getByteSwap | hkOArchive.obj | fnv360_0822_retail, objrun + skyrim(objrun), high
+unsigned char* FnvCpu_FUN_00d607d0_CpuObject::hkOArchive_getByteSwap(unsigned char* output)
 {
     *output = value;
     return output;

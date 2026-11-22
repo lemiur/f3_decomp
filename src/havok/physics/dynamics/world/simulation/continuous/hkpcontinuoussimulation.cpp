@@ -229,8 +229,8 @@ struct ControllerVtableView
     virtual void process(Body** apBodies, int iCount, Context* pContext, ViewBool kMode);
 };
 
-void __cdecl FUN_009776f0(float fStart, void* pState);
-void __cdecl FUN_009a9cb0(TimeStep* pStep, Body** apBodies, int iCount, int iSize);
+void __cdecl hkSweptTransformUtil_backStepMotionState(float fStart, void* pState);
+void __cdecl hkRigidMotionUtilStep(TimeStep* pStep, Body** apBodies, int iCount, int iSize);
 void __cdecl FUN_0099a2d0(World* pWorld, Body** apBodies, int iCount);
 struct ControllerMemberView
 {
@@ -255,8 +255,8 @@ void Controller::ProcessBodies(Body** bodies, int count, Context* context, int f
     if (flags & 1)
     {
         for (int i = 0; i < count; ++i)
-            FUN_009776f0(start, (void*)((char*)bodies[i] + 0xE0));
-        FUN_009a9cb0(&step, bodies, count, 0xD0);
+            hkSweptTransformUtil_backStepMotionState(start, (void*)((char*)bodies[i] + 0xE0));
+        hkRigidMotionUtilStep(&step, bodies, count, 0xD0);
         FUN_0099a2d0(ctx->m_pWorld, bodies, count);
     }
     ((ControllerVtableView*)this)->process(bodies, count, context, ViewBool(true));
@@ -1777,8 +1777,8 @@ struct Output {float impulse,velocityA,velocityB;};
 struct __declspec(align(16)) State {unsigned type;int* constraint;Properties* properties;hkVector4* point;};
 struct Queue {Body** data;int size,cap;void add(Body* b){data[size++]=b;}};
 extern float DAT_00e35180[],DAT_00de6e60;
-void __cdecl FUN_00a27550(hkVector4*,float,Params*,Motion*,Motion*,Manager*,Output*);
-void __cdecl FUN_00989600(void*,State*,int);
+void __cdecl hkpSimpleCollisionResponse_solveSingleContact(hkVector4*,float,Params*,Motion*,Motion*,Manager*,Output*);
+void __cdecl hkpWorldCallbackUtil_fireContactImpulseLimitBreached(void*,State*,int);
 }
 // @fnv 0x00d0c480
 void __cdecl ProcessCollisionEvent(void* context, CollisionEvent* rawEvent, float deltaTime, CollisionQueue* rawQueue)
@@ -1796,7 +1796,7 @@ void __cdecl ProcessCollisionEvent(void* context, CollisionEvent* rawEvent, floa
     params.restitution = event->properties.restitution * (1.0 / 128.0);
     params.maximumImpulse = event->properties.maximumImpulse == 0 ? Task2017::DAT_00de6e60 : Task2017::DAT_00e35180[event->properties.maximumImpulse];
     Task2017::Output result;
-    Task2017::FUN_00a27550(&event->position, event->time, &params, motionA, motionB, event->manager, &result);
+    Task2017::hkpSimpleCollisionResponse_solveSingleContact(&event->position, event->time, &params, motionA, motionB, event->manager, &result);
     if (params.limitBreached) {
         Task2017::State callbackEvent;
         callbackEvent.type = 2;
@@ -1804,7 +1804,7 @@ void __cdecl ProcessCollisionEvent(void* context, CollisionEvent* rawEvent, floa
         callbackEvent.point = &event->position;
         callbackEvent.constraint = &event->manager->constraint;
         callbackEvent.properties = &event->properties;
-        Task2017::FUN_00989600(context, &callbackEvent, 1);
+        Task2017::hkpWorldCallbackUtil_fireContactImpulseLimitBreached(context, &callbackEvent, 1);
         return;
     }
     if (result.velocityA < 0.0f && result.velocityB < 0.0f) {
@@ -2053,7 +2053,7 @@ struct ArrStubF5 {
     int m_iCap;
 };
 
-void FUN_00976cd0(void* pTarget, float fValue, void* pMotion);
+void hkSweptTransformUtil_lerp2(void* pTarget, float fValue, void* pMotion);
 void FUN_00901f10(ArrStubF5* arr, unsigned int size);
 
 void CollectUnsaturatedObjects(SrcL* pSource, int level, float fValue, unsigned char** ppFlags, ArrL<ObjL*>* out)
@@ -2072,7 +2072,7 @@ void CollectUnsaturatedObjects(SrcL* pSource, int level, float fValue, unsigned 
             {
                 (*ppFlags)[owner->m_uiEdgeIndex] = 1;
                 MotionL* motion = &owner->m_pMotionState;
-                FUN_00976cd0(&motion->m_40, fValue, motion);
+                hkSweptTransformUtil_lerp2(&motion->m_40, fValue, motion);
             }
         }
         ArrStubF5* arr = (ArrStubF5*)out;
@@ -2824,7 +2824,7 @@ struct CurrentCtx {
 
 static inline void ReleaseCurrent(CurrentCtx* c) { --c->m_94; if(c->m_94 != 0) return; if(c->m_9c != 0) return; if(c->m_8c) c->FUN_00902550(); }
 namespace ConstraintStep1173 { extern const char DAT_00e7d3e4[], DAT_00e7d3cc[], DAT_00e32798[]; }
-void __cdecl FUN_00989550(CurrentCtx*, BodyL*, Param*);
+void __cdecl hkpWorldCallbackUtil_fireIslandPostCollideCallback(CurrentCtx*, BodyL*, Param*);
 void __fastcall FUN_00d0ef40(ThisFull* original, void* edx_unused, StepArg arg)
 {
     CurrentThisFull* th = (CurrentThisFull*)original;
@@ -2864,7 +2864,7 @@ void __fastcall FUN_00d0ef40(ThisFull* original, void* edx_unused, StepArg arg)
         if (DAT_010f3400->unk04 == 1) { ReleaseCurrent(th->m_0c); TickWrite<2>(ConstraintStep1173::DAT_00e32798, arg.tick); return; }
         if (th->m_0c->m_198 != 0) {
             TickWrite<0>(ConstraintStep1173::DAT_00e7d3cc, arg.tick);
-            FUN_00989550(th->m_0c, b, p);
+            hkpWorldCallbackUtil_fireIslandPostCollideCallback(th->m_0c, b, p);
             TickWrite<0>(ConstraintStep1173::DAT_00e32798, tA);
         }
     }
@@ -3737,7 +3737,7 @@ void FUN_0098c240(void);
 void FUN_0098c220(void);
 void FUN_00990430(void* base, int lo, int hi, void* cmp);
 void FUN_0098cd70(void* body, int level, float time, Se4b0_States* states, void* outArr);
-void FUN_00976cd0(const Se4b0_Transform& swept, float time, Se4b0_Transform& transform);
+void hkSweptTransformUtil_lerp2(const Se4b0_Transform& swept, float time, Se4b0_Transform& transform);
 void FUN_008f6d90(void* data, unsigned int bytes, int tag);
 void FUN_00901f10(void* arr, unsigned int elemSize);
 struct S91_Stack {
@@ -3826,7 +3826,7 @@ static __forceinline void S91_ensure(S91_Body* body, float time, Se4b0_States& s
     if (states[body->storageIndex] == 0) {
         states[body->storageIndex] = 1;
         S91_MotionState* ms = &body->motionState;
-        FUN_00976cd0(ms->getSwept(), time, ms->getTransform());
+        hkSweptTransformUtil_lerp2(ms->getSwept(), time, ms->getTransform());
     }
 }
 static __forceinline void S91_visit(S91_Body* body, S91_Constraint* c, int level, float time,
@@ -4016,7 +4016,7 @@ struct S_00d0e9c0 {
     int unk48;
     int m_iToiEventCount;
 
-    int FUN_00d0e9c0(float arg1);
+    int hkpContinuousSimulation_handleAllToisTill(float arg1);
     hkBool FUN_00d0bc20(S_00d0d150_ToiEvent* ev, float* fSubStepTime);
     void FUN_00d0e210(Context* ctx, S_00d0d150_ToiEvent* ev, float fStepTime, float fSubStepTime);
 };
@@ -4108,7 +4108,8 @@ static __forceinline void removeToiEventAt(S_00d0d150_Array<S_00d0e9c0_Event>& a
     reinterpret_cast<S_00d0e9c0_EventOps*>(&arr.m_data[index])->FUN_00990390(&arr.m_data[arr.m_iElementCount]);
 }
 
-int S_00d0e9c0::FUN_00d0e9c0(float minTime) {
+// pdb: hkpContinuousSimulation::handleAllToisTill | hkpContinuousSimulation.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_seq), high
+int S_00d0e9c0::hkpContinuousSimulation_handleAllToisTill(float minTime) {
     S_00d0e9c0_View* self = reinterpret_cast<S_00d0e9c0_View*>(this);
     while (true) {
         float earliest = minTime;
@@ -9375,11 +9376,11 @@ struct AdvanceSimulation {
     DWORD m_34;
     Res* FUN_00cf8820() throw();
     float GetClampedSimulationTime() throw();
-    Res* FUN_00d0e9c0(float f) throw();
+    Res* hkpContinuousSimulation_handleAllToisTill(float f) throw();
     Res* FUN_00d0ed10();
 };
 
-// Under timers, calls FUN_00cf8820 if m_p28 is set, else FUN_00d0e9c0 when m_34 is set; returns the Res found, or clears m_p28 and returns null.
+// Under timers, calls FUN_00cf8820 if m_p28 is set, else hkpContinuousSimulation_handleAllToisTill when m_34 is set; returns the Res found, or clears m_p28 and returns null.
 // @fnv 0x00d0ed10
 Res* AdvanceSimulation::FUN_00d0ed10()
 {
@@ -9396,7 +9397,7 @@ Res* AdvanceSimulation::FUN_00d0ed10()
         v.delta = GetClampedSimulationTime();
         if (m_34) {
             hkTimeSection secTOI("TtTOIs", ticks);
-            Res* p = FUN_00d0e9c0(v.delta);
+            Res* p = hkpContinuousSimulation_handleAllToisTill(v.delta);
             if (p) {
                 m_p28 = p;
                 return p;

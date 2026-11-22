@@ -51,7 +51,8 @@ struct RefObj
 extern RefObj* DAT_011f4410;
 // If the global RefObj pointer is set, decrements its reference count and clears the pointer.
 // @fnv 0x00a5cf60
-void FUN_00a5cf60()
+// pdb: NiAlphaProperty::_SDMShutdown | NiAlphaProperty.obj | fnv360_0822_retail, call_seq + bridge(call_dedup|call_dedup) + skyrim(call_gap_sim), high
+void NiAlphaProperty__SDMShutdown()
 {
     if (DAT_011f4410)
     {
@@ -122,7 +123,8 @@ __declspec(dllimport) long __stdcall InterlockedIncrement(volatile long*);
 
 // Allocates a 0x1c-byte NiAlphaProperty, initialises its vtable and flags, and stores it in DAT_011f4410 with reference counting.
 // @fnv 0x00a5cef0
-void FUN_00a5cef0()
+// pdb: NiAlphaProperty::_SDMInit | NiAlphaProperty.obj | fnv360_0822_retail, call_gap + bridge(call_seq|call_dedup) + skyrim(call_gap_sim), high
+void NiAlphaProperty__SDMInit()
 {
     char* pAlphaProperty = (char*)BSFadeNode::operator new(0x1c);
     if (pAlphaProperty)
@@ -512,12 +514,13 @@ struct S00a5ce30_cls
     unsigned char unk1a;
     void FUN_00a5c200();
     void FUN_00a5d7a0(S00a5ce30_cls* dst, int proc);
-    S00a5ce30_cls* FUN_00a5ce30(int a0);
+    S00a5ce30_cls* NiAlphaProperty_CreateClone(int a0);
 };
 void __stdcall CreateVertexBufferSet(S00a5ce30_cls* self, int proc);
 
 // @fnv 0x00a5ce30
-S00a5ce30_cls* S00a5ce30_cls::FUN_00a5ce30(int a0)
+// pdb: NiAlphaProperty::CreateClone | NiAlphaProperty.obj | fnv360_0822_debug, vtable + bridge(vtable|udata) + skyrim(caller_sim), high
+S00a5ce30_cls* S00a5ce30_cls::NiAlphaProperty_CreateClone(int a0)
 {
     if (unk0c == 0 && DAT_011f4404 == 0)
     {

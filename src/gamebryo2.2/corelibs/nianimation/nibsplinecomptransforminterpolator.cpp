@@ -21,7 +21,7 @@ void NiBSplineCompTransformInterpolator::LoadBinary(NiStream& stream)
 void NiBSplineCompTransformInterpolator::CopyMemberData(NiBSplineCompTransformInterpolator* destination,
                                                         CloningProcess& cloningProcess)
 {
-    FUN_00a57fd0(destination, cloningProcess);
+    NiBSplineInterpolator_CopyMembers(destination, cloningProcess);
     destination->m_kDefaultTransform = m_kDefaultTransform;
     destination->m_kTransCPHandle = m_kTransCPHandle;
     destination->m_kRotCPHandle = m_kRotCPHandle;
@@ -110,10 +110,11 @@ struct FUN_00a501b0_caller
 };
 struct FUN_00a50e00_shell : NiBSplineCompTransformInterpolator
 {
-    bool FUN_00a50e00(NiObject* pkObject);
+    bool NiBSplineCompTransformInterpolator_IsEqual(NiObject* pkObject);
 };
 // @fnv 0x00a50e00
-bool FUN_00a50e00_shell::FUN_00a50e00(NiObject* pkObject)
+// pdb: NiBSplineCompTransformInterpolator::IsEqual | NiBSplineCompTransformInterpolator.obj | fnv360_0822_retail, caller_sim + bridge(vtable|objrun_prop) + skyrim(caller_sim), high
+bool FUN_00a50e00_shell::NiBSplineCompTransformInterpolator_IsEqual(NiObject* pkObject)
 {
     NiBSplineCompTransformInterpolator* pkDest;
     unsigned int ui;
@@ -144,18 +145,19 @@ struct SStream
 };
 struct SBase
 {
-    void FUN_00a503e0(SStream&);
+    void NiBSplineTransformInterpolator_SaveBinary(SStream&);
 };
 struct SThis
 {
     char _pad[0x48];
     char m_buf[0x18];
-    void FUN_00a51180(SStream&);
+    void NiBSplineCompTransformInterpolator_SaveBinary(SStream&);
 };
 // @fnv 0x00a51180
-void SThis::FUN_00a51180(SStream& stream)
+// pdb: NiBSplineCompTransformInterpolator::SaveBinary | NiBSplineCompTransformInterpolator.obj | fnv360_0822_retail, caller_sim + bridge(vtable|caller_sim) + skyrim(caller_sim), high
+void SThis::NiBSplineCompTransformInterpolator_SaveBinary(SStream& stream)
 {
-    ((SBase*)this)->FUN_00a503e0(stream);
+    ((SBase*)this)->NiBSplineTransformInterpolator_SaveBinary(stream);
     SOut* __restrict output = stream.m_out;
     unsigned int size = 4;
     output->m_pos += output->m_pfnWrite(output, m_buf, 0x18, &size, 1);

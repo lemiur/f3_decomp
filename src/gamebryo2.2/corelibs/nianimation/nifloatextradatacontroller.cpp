@@ -119,7 +119,8 @@ static void* Init(void* p)
 }
 
 // @fnv 0x00a41280
-void* __fastcall FUN_00a41280(CopyHelper* self, int edx, void* kCloning)
+// pdb: NiFloatExtraDataController::CreateClone | NiFloatExtraDataController.obj | fnv360_1110_retail, objopen_prop + bridge(vtable|objopen_prop) + skyrim(caller_sim), high
+void* __fastcall NiFloatExtraDataController_CreateClone(CopyHelper* self, int edx, void* kCloning)
 {
     void* pMemory = BSFadeNode::operator new(0x40);
     void* pkObject = pMemory ? Init(pMemory) : 0;

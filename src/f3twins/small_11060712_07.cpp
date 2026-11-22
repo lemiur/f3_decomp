@@ -10,9 +10,9 @@ struct TESFile {
     unsigned int m_uiChunkSize;
     char pad260[0x39];
     bool m_bSwap;
-    int FUN_00448cc0();
-    unsigned int FUN_004487d0();
-    bool FUN_00447020();
+    int TESFile_GetTESForm();
+    unsigned int TESFile_GetTESChunk();
+    bool TESFile_NextChunk();
     bool FUN_00447d60(void* p, unsigned int size);
     bool FUN_00448800(void* p);
     unsigned int GetChunkSize() { return m_uiChunkSize; }
@@ -62,11 +62,11 @@ struct Ragdoll : TESForm, TESModel {
 
 bool n_00549bb0::Ragdoll::FUN_00549bb0(TESFile* file)
 {
-    if (file->FUN_00448cc0() != 0x63)
+    if (file->TESFile_GetTESForm() != 0x63)
         return false;
     FUN_00454410(file);
     int chunk;
-    while ((chunk = file->FUN_004487d0()) != 0)
+    while ((chunk = file->TESFile_GetTESChunk()) != 0)
     {
         switch (chunk)
         {
@@ -136,7 +136,7 @@ bool n_00549bb0::Ragdoll::FUN_00549bb0(TESFile* file)
             break;
         }
         }
-        if (!file->FUN_00447020())
+        if (!file->TESFile_NextChunk())
             break;
     }
     return true;

@@ -147,7 +147,7 @@ class hkClassMemberD86A
 class hkClassD86A
 {
   public:
-    int FUN_00d46f00() const;
+    int hkClass_getNumMembers() const;
     const hkClassMemberD86A& FUN_00d46f20(int i) const;
 };
 
@@ -163,7 +163,7 @@ int hkClassMemberD86A::GetAlignment() const
     if (type == TYPE_STRUCT)
     {
         int structAlign = 1;
-        for (int i = 0; i < m_class->FUN_00d46f00(); i++)
+        for (int i = 0; i < m_class->hkClass_getNumMembers(); i++)
         {
             if (m_class->FUN_00d46f20(i).GetAlignment() > structAlign)
                 structAlign = m_class->FUN_00d46f20(i).GetAlignment();

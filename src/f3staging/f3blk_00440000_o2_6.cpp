@@ -68,7 +68,7 @@ public:
     void* items[38];
     FUN_0044ed00();
     void FUN_0044ed20(void* form);
-    void FUN_0044ec40();
+    void FormComponentCollection_ClearDataAllComponents();
 };
 namespace f3m_00453cd0 {
 struct Member18 {
@@ -100,7 +100,7 @@ void Form::FUN_00453cd0()
     }
     FUN_0044ed00 cache;
     cache.FUN_0044ed20(this);
-    cache.FUN_0044ec40();
+    cache.FormComponentCollection_ClearDataAllComponents();
 }
 }
 }   // namespace f3m_00453cd0

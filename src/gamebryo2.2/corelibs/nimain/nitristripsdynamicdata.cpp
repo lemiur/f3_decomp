@@ -56,7 +56,8 @@ bool NiTriStripsDynamicData::IsEqualDynamic(NiObject* pkObject)
 extern "C" void* g_011f5e8c;
 
 // @fnv 0x00a92470
-void* __cdecl FUN_00a92470()
+// pdb: NiLinesData::GetRTTI | NiLinesData.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+void* __cdecl NiLinesData_GetRTTI()
 {
     return &g_011f5e8c;
 }
@@ -331,12 +332,13 @@ struct DynStripsData : NiTriStripsData
 {
     unsigned short m_usActiveVertices;
     unsigned short m_usActiveTriangles;
-    void FUN_00a924d0(NiStream& stream);
+    void NiTriStripsDynamicData_LoadBinary(NiStream& stream);
 };
 
 // Loads the base NiTriStripsData from the stream, then reads the active vertex and triangle counts.
 // @fnv 0x00a924d0
-void DynStripsData::FUN_00a924d0(NiStream& stream)
+// pdb: NiTriStripsDynamicData::LoadBinary | NiTriStripsDynamicData.obj | fnv360_0822_retail, objrun_prop + bridge(vtable|objrun_prop) + skyrim(objrun_prop), high
+void DynStripsData::NiTriStripsDynamicData_LoadBinary(NiStream& stream)
 {
     NiTriStripsData::LoadBinary(stream);
     ReadBinaryValue(stream, m_usActiveVertices);
@@ -445,7 +447,7 @@ struct NiStreamBufferStandin
 
 // Stand-in for NiTriStripsDynamicData (the pack's FUN_00a92340): the base
 // subobject occupies 0x00-0x4F, the two active counts are the shorts at
-// +0x50 and +0x52.  FUN_00a76340 is the base-class save routine (declared
+// +0x50 and +0x52.  NiTriStripsData_SaveBinary is the base-class save routine (declared
 // only, never defined, so the call target comes from the original bytes).
 struct NiStream_00a92530
 {
@@ -476,14 +478,15 @@ struct NiTriStripsStandin
     int unk4C;
     unsigned short m_usActiveVertices;
     unsigned short m_usActiveTriangles;
-    void __thiscall FUN_00a76340(unsigned int);
-    void __thiscall FUN_00a92530(void*);
+    void __thiscall NiTriStripsData_SaveBinary(unsigned int);
+    void __thiscall NiTriStripsDynamicData_SaveBinary(void*);
 };
 
 // @fnv 0x00a92530
-void __thiscall NiTriStripsStandin::FUN_00a92530(void* stream)
+// pdb: NiTriStripsDynamicData::SaveBinary | NiTriStripsDynamicData.obj | fnv360_0822_retail, caller_sim + bridge(vtable|caller_sim) + skyrim(caller_sim), high
+void __thiscall NiTriStripsStandin::NiTriStripsDynamicData_SaveBinary(void* stream)
 {
-    this->FUN_00a76340((unsigned int)stream);
+    this->NiTriStripsData_SaveBinary((unsigned int)stream);
     NiStreamBufferStandin* pBuffer = ((NiStream_00a92530*)stream)->m_pkOstr;
     int written;
     {

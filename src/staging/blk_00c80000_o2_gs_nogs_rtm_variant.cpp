@@ -209,7 +209,7 @@ struct RefNode
         next = 0;
     }
 };
-// FUN_00c81570 : a one-line function - getter
+// bhkWorld_GetRTTI : a one-line function - getter
 class C815B0Base
 {
   public:
@@ -5673,12 +5673,13 @@ class ScaleOwner
     ::__m128 unkA0;
     float unkB0;
 
-    void FUN_00c8cdf0(float scale);
+    void bhkRigidBodyCinfo_Scale(float scale);
 };
 
 // @f3 0x008fe5c0 (community match, verified in this file)
 struct __declspec(align(16)) ScaleVector { float x,y,z,w; __forceinline void Set(float value){x=y=z=w=value;} };
-void ScaleOwner::FUN_00c8cdf0(float scale)
+// pdb: bhkRigidBodyCinfo::Scale | bhkRigidBody.obj | fnv360_0822_retail, objrun + bridge(call_gap|call_dedup), high
+void ScaleOwner::bhkRigidBodyCinfo_Scale(float scale)
 {
     ScaleVector cubic;
     cubic.Set(scale * scale * scale);

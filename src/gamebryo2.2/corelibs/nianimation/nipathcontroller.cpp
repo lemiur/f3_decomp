@@ -328,7 +328,8 @@ struct SpawnedObject
 // @f3 0x008c5220 (community match, verified in this file)
 extern "C" void _ReadWriteBarrier(void);
 
-SpawnedObject* __cdecl FUN_00a4b270() throw()
+// pdb: NiPathController::CreateObject | NiPathController.obj | fnv360_0822_retail, objopen_prop + bridge(caller_sim|objopen_prop) + skyrim(caller_sim), high
+SpawnedObject* __cdecl NiPathController_CreateObject() throw()
 {
     SpawnedObject* p = (SpawnedObject*)FUN_00aa13e0(0x64);
     if (p != 0)
@@ -439,7 +440,7 @@ struct LegacyView
 };
 struct NiStream;
 void __stdcall func_0x00a6d5e0(NiStream* stream);
-void __fastcall FUN_00a645b0(NiStream* stream);
+void __fastcall NiStream_ReadLinkID(NiStream* stream);
 template <class T> inline void StreamRead(NiStream& stream, T& dst)
 {
     BinaryReader* reader = ((ReaderView*)((char*)&stream + 0x24c))->reader;
@@ -475,8 +476,8 @@ void NiPathControllerView::ReadFromStream(NiStream* stream)
     StreamRead(*stream, m_50);
     StreamRead(*stream, m_54);
     StreamRead(*stream, m_58);
-    FUN_00a645b0(stream);
-    FUN_00a645b0(stream);
+    NiStream_ReadLinkID(stream);
+    NiStream_ReadLinkID(stream);
 }
 
 extern "C" double __cdecl fmod(double, double);
@@ -488,11 +489,12 @@ inline float PathRemainder(float x, float y)
 }
 struct PathController : FUN_00a4a8e0_cls
 {
-    void FUN_00a4a980(float time, unsigned int* first, unsigned int* second, float* position);
+    void NiPathController_GetPercentLoc(float time, unsigned int* first, unsigned int* second, float* position);
 };
 // Adjusts time to the unit interval, then finds the path segment and refines its local parameter for that distance.
 // @fnv 0x00a4a980
-void PathController::FUN_00a4a980(float time, unsigned int* apFirstKey, unsigned int* apSecondKey, float* apLocalParam)
+// pdb: NiPathController::GetPercentLoc | NiPathController.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_seq), high
+void PathController::NiPathController_GetPercentLoc(float time, unsigned int* apFirstKey, unsigned int* apSecondKey, float* apLocalParam)
 {
     unsigned int count = keys ? keys->count : 0;
     if (time == 0.0f)
@@ -633,9 +635,9 @@ struct PathCtlr
     PathKeyData* m_pPathObject;
     PathKeyData* m_pPathInterp;
 
-    bool FUN_00a36250(float fTime);
-    void FUN_00a4ab50(float fPct, int* piIdx1, int* piIdx2, float* pfPct);
-    void FUN_00a49e70(int iIdx1, int iIdx2, float fPct, ThreeByThreeMatrix* pkRot);
+    bool NiTimeController_DontDoUpdate(float fTime);
+    void NiPathController_GetLoc(float fPct, int* piIdx1, int* piIdx2, float* pfPct);
+    void NiPathController_CalcRefFrame(int iIdx1, int iIdx2, float fPct, ThreeByThreeMatrix* pkRot);
     void InvokeIndexedCallback(NiPoint3* result, int iIdx1, int iIdx2, float fPct);
     void UpdatePathTarget(float* pfTime);
 };
@@ -658,18 +660,18 @@ void PathCtlr::UpdatePathTarget(float* apfTime)
     void* pkPathKeys = m_pPathObject->ComputePositionAtTime(uiNumPathKeys, ePathType, ucPathSize);
     if (!pkPathKeys)
         return;
-    if (FUN_00a36250(*apfTime))
+    if (NiTimeController_DontDoUpdate(*apfTime))
         return;
 
     float fPct = InterpolateKey(m_fControllerTime, pkPctKeys, ePctType, uiNumPctKeys, m_uiPercentKeyCount, ucPathSize);
     {
         PathIndices stIndices;
-        FUN_00a4ab50(fPct, (int*)&stIndices.first, (int*)&stIndices.second, &fPct);
+        NiPathController_GetLoc(fPct, (int*)&stIndices.first, (int*)&stIndices.second, &fPct);
         int i2;
         if ((GetFollow() ? (i2 = stIndices.second, true) : (i2 = stIndices.second, false)))
         {
             ThreeByThreeMatrix kRot;
-            FUN_00a49e70(stIndices.first, i2, fPct, &kRot);
+            NiPathController_CalcRefFrame(stIndices.first, i2, fPct, &kRot);
             m_pkTarget->m_kRotate = kRot;
         }
         NiPoint3 kPos;
@@ -802,10 +804,10 @@ struct PathObject : PathBase
 };
 struct PathShell
 {
-    void FUN_00a4b0b0(PathObject*, int);
+    void NiPathController_CopyMembers(PathObject*, int);
     PathObject* CreatePathObject(int value);
 };
-// Allocates and initializes a PathObject, then calls FUN_00a4b0b0 with the given value and returns the new object or null.
+// Allocates and initializes a PathObject, then calls NiPathController_CopyMembers with the given value and returns the new object or null.
 // @fnv 0x00a4b330
 PathObject* PathShell::CreatePathObject(int value)
 {
@@ -820,7 +822,7 @@ PathObject* PathShell::CreatePathObject(int value)
     {
         result = 0;
     }
-    FUN_00a4b0b0(result, value);
+    NiPathController_CopyMembers(result, value);
     return result;
 }
 
@@ -905,12 +907,13 @@ struct NiPathControllerStub : NiTimeControllerStub
         return ((m_uiObjectFlags >> n) & 1) ? true : false;
     }
     void GetLengths(unsigned int* a, unsigned int* count, int* c, unsigned char* d);
-    bool FUN_00a4a710(NiObject* pkObject);
+    bool NiPathController_IsEqual(NiObject* pkObject);
 };
 
 // Compares this NiPathControllerStub with pkObject, checking path, interpolation, part lengths, and various flags and fields for equality.
 // @fnv 0x00a4a710
-bool NiPathControllerStub::FUN_00a4a710(NiObject* pkObject)
+// pdb: NiPathController::IsEqual | NiPathController.obj | fnv360_0822_retail, caller_sim + bridge(vtable|objrun_sim) + skyrim(caller_sim), high
+bool NiPathControllerStub::NiPathController_IsEqual(NiObject* pkObject)
 {
     if (!TimeControllerIsEqual(pkObject))
         return false;
@@ -1193,12 +1196,13 @@ struct PathCtl : CloneableObj
             m_uiObjectFlags &= ~1;
         }
     }
-    void FUN_00a4b0b0(PathCtl* pDest, void* kCloning);
+    void NiPathController_CopyMembers(PathCtl* pDest, void* kCloning);
 };
 
 // Copies PathCtl state into pDest, cloning m_pPathObject and m_pPathInterp, and duplicating the m_pfPathLengths array.
 // @fnv 0x00a4b0b0
-void PathCtl::FUN_00a4b0b0(PathCtl* pDest, void* kCloning)
+// pdb: NiPathController::CopyMembers | NiPathController.obj | fnv360_0822_retail, caller_sim + bridge(call_seq|objopen_prop) + skyrim(caller_sim), high
+void PathCtl::NiPathController_CopyMembers(PathCtl* pDest, void* kCloning)
 {
     CloneableObj::FUN_00a6cfe0(pDest, kCloning);
     pDest->m_uiObjectFlags = m_uiObjectFlags;
@@ -1369,12 +1373,13 @@ struct PathController
     {
         return (flags & 2) >> 1;
     }
-    void FUN_00a49e70(unsigned, unsigned, float, PathMatrix&);
+    void NiPathController_CalcRefFrame(unsigned, unsigned, float, PathMatrix&);
 };
 
 // Evaluates the path at time t between keys first and second, applying smoothing, axis, reverse, and bank to produce the output matrix.
 // @fnv 0x00a49e70
-void PathController::FUN_00a49e70(unsigned aiFirstKey, unsigned aiSecondKey, float afTime, PathMatrix& output)
+// pdb: NiPathController::CalcRefFrame | NiPathController.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_seq), high
+void PathController::NiPathController_CalcRefFrame(unsigned aiFirstKey, unsigned aiSecondKey, float afTime, PathMatrix& output)
 {
     PathKeys* data = keys;
     NiPoint3 vTangent;
@@ -1541,16 +1546,17 @@ struct RetryCtlr : CloneableObj
         stride = 0;
         return 0;
     }
-    void FUN_00a4a980(float t, unsigned int& i0, unsigned int& i1, float& frac);
-    void FUN_00a4ab50(float t, unsigned int& i0, unsigned int& i1, float& frac);
+    void NiPathController_GetPercentLoc(float t, unsigned int& i0, unsigned int& i1, float& frac);
+    void NiPathController_GetLoc(float t, unsigned int& i0, unsigned int& i1, float& frac);
 };
 // Selects two key indices and a fraction for t, using path-distance lookup when follow is enabled.
 // @fnv 0x00a4ab50
-void RetryCtlr::FUN_00a4ab50(float afTime, unsigned int& aiKey0, unsigned int& aiKey1, float& frac)
+// pdb: NiPathController::GetLoc | NiPathController.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_seq), high
+void RetryCtlr::NiPathController_GetLoc(float afTime, unsigned int& aiKey0, unsigned int& aiKey1, float& frac)
 {
     if (IsFollow())
     {
-        FUN_00a4a980(afTime, aiKey0, aiKey1, frac);
+        NiPathController_GetPercentLoc(afTime, aiKey0, aiKey1, frac);
         lastIdx = aiKey0;
         return;
     }

@@ -1030,10 +1030,10 @@ class FUN_009f9f70_member
     int unk00;
 };
 
-class FUN_009f9f70_cls
+class CEnumPins // src: F3_EXE vtable 0x00e1fd20 (old: FUN_009f9f70_cls)
 {
   public:
-    virtual ~FUN_009f9f70_cls();
+    virtual ~CEnumPins();
     int unk04;
     int unk08;
     FUN_009f9f70_holder* m_0c;
@@ -1044,7 +1044,7 @@ class FUN_009f9f70_cls
 
 // Destructor that fetches the leaf callback from m_0c and invokes it with the leaf and the holder's m_0c address.
 // @fnv 0x009f9f70
-FUN_009f9f70_cls::~FUN_009f9f70_cls()
+CEnumPins::~CEnumPins()
 {
     FUN_009f9f70_holder* pLeafHolder = m_0c;
     FUN_009f9f70_leaf* pLeaf = pLeafHolder->m_0c;
@@ -2492,7 +2492,8 @@ void __stdcall FUN_009fe560(ForwardTarget* p)
 extern int DAT_011a6224;
 
 // @fnv 0x009fea24
-int __cdecl FUN_009fea24()
+// pdb: EffectSettingCollection::GetUsageMonitorEffectSetting | EffectSettingCollection.obj | fnv360_0822_debug, udata + bridge(udata|udata) + skyrim(callee_sim), high
+int __cdecl EffectSettingCollection_GetUsageMonitorEffectSetting()
 {
     return DAT_011a6224;
 }

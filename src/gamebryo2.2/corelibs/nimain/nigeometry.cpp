@@ -351,15 +351,15 @@ struct FUN_00a808f0_shell : public NiGeometry
 
 struct FUN_00a5a450_helper
 {
-    void FUN_00a5a450(bool* bSelectiveUpdate, bool bSelectiveUpdateTransforms, bool* bRigid);
+    void NiAVObject_SetSelectiveUpdateFlags(bool* bSelectiveUpdate, bool bSelectiveUpdateTransforms, bool* bRigid);
 };
 
-// Calls FUN_00a5a450, then if the field at offset 0xbc is nonzero sets flags 4 and 2 at 0x30, sets *bSelectiveUpdate true and *bRigid false.
+// Calls NiAVObject_SetSelectiveUpdateFlags, then if the field at offset 0xbc is nonzero sets flags 4 and 2 at 0x30, sets *bSelectiveUpdate true and *bRigid false.
 // @fnv 0x00a808f0
 void FUN_00a808f0_shell::UpdateSelectiveUpdateFlags(bool* bSelectiveUpdate, bool bSelectiveUpdateTransforms,
                                                     bool* bRigid)
 {
-    ((FUN_00a5a450_helper*)this)->FUN_00a5a450(bSelectiveUpdate, bSelectiveUpdateTransforms, bRigid);
+    ((FUN_00a5a450_helper*)this)->NiAVObject_SetSelectiveUpdateFlags(bSelectiveUpdate, bSelectiveUpdateTransforms, bRigid);
     if (m_spSkinInstance)
     {
         m_uFlags |= 4;
@@ -459,7 +459,7 @@ struct blob16
 };
 struct FUN_00a80930_shell : public NiGeometry
 {
-    void FUN_00a80930(bool);
+    void NiGeometry_CalculateConsistency(bool);
 };
 
 struct TimeCtrlView
@@ -567,7 +567,8 @@ struct NiRenderer
 };
 // Scans the controller list and skin partition, then passes a consistency flag (0x4000 or 0) to the object at offset 0xb8.
 // @fnv 0x00a80930
-void FUN_00a80930_shell::FUN_00a80930(bool bTool)
+// pdb: NiGeometry::CalculateConsistency | NiGeometry.obj | fnv360_0822_retail, caller_sim + bridge(vtable|caller_sim) + skyrim(caller_sim), high
+void FUN_00a80930_shell::NiGeometry_CalculateConsistency(bool bTool)
 {
     int eConsistency = 0x4000;
     TimeCtrlView* pkController = (TimeCtrlView*)m_spControllers;
@@ -667,10 +668,11 @@ struct GeomStub : BaseStub
     char unk00[0xB8];
     void* m_spModelData;  // src: FNV360_PDB NiGeometry +0xB8
     fnv_00a80930::SkinView* m_spSkinInstance;  // src: FNV360_PDB NiGeometry +0xBC
-    void FUN_00a809b0(NiRenderer*);
+    void NiGeometry_PurgeRendererData(NiRenderer*);
 };
 // @fnv 0x00a809b0
-void GeomStub::FUN_00a809b0(NiRenderer* pkRenderer)
+// pdb: NiGeometry::PurgeRendererData | NiGeometry.obj | fnv360_0822_debug, vtable + bridge(vtable|objrun_prop) + skyrim(objopen_prop), high
+void GeomStub::NiGeometry_PurgeRendererData(NiRenderer* pkRenderer)
 {
     BaseStub::FUN_00a59e50(pkRenderer);
     pkRenderer->UnkF0(m_spModelData);
@@ -832,14 +834,14 @@ struct S_00a80470_Data
 
 struct S_00a80470_Owner : public S_00a80470_Data
 {
-    bool FUN_00a5a260(S_00a80470_Data*);
+    bool NiAVObject_IsEqual(S_00a80470_Data*);
     bool FUN_00a80470(S_00a80470_Data*);
 };
 
 // @fnv 0x00a80470
 bool S_00a80470_Owner::FUN_00a80470(S_00a80470_Data* apData)
 {
-    if (!FUN_00a5a260(apData))
+    if (!NiAVObject_IsEqual(apData))
         return false;
 
     S_00a80470_Controller* thisBC = this->unkBC;
@@ -1668,14 +1670,14 @@ struct S00a7ff70_Geom : NiAVObject
     {
         return *(const S00a7ff70_Xf*)&m_kLocal;
     }
-    void FUN_00a7ff70(const ThreeByThreeMatrix& kMat, const S00a7ff70_P3& kTrn, bool bOnLeft);
+    void NiGeometry_ApplyTransform(const ThreeByThreeMatrix& kMat, const S00a7ff70_P3& kTrn, bool bOnLeft);
 };
 // Updates vertex and normal arrays using kMat and kTrn, with a different calculation when bOnLeft is true, then calls ComputeBoundingSphere.
 // @f3 0x0084ab10 (community match, verified in this file)
 struct MatrixInverseProxy
 {
     float m_afEntries[3][3];
-    bool FUN_00475380(ThreeByThreeMatrix& inv) const;
+    bool NiMatrix3_Inverse(ThreeByThreeMatrix& inv) const;
     S00a7ff70_P3 TransformLeftVertex(const S00a7ff70_P3& p) const
     {
         return S00a7ff70_P3(m_afEntries[0][0] * p.x + m_afEntries[0][1] * p.y + m_afEntries[0][2] * p.z,
@@ -1684,7 +1686,8 @@ struct MatrixInverseProxy
     }
 };
 
-void S00a7ff70_Geom::FUN_00a7ff70(const ThreeByThreeMatrix& kMat, const S00a7ff70_P3& kTrn, bool bOnLeft)
+// pdb: NiGeometry::ApplyTransform | NiGeometry.obj | fnv360_0822_debug, vtable + bridge(vtable|caller_sim) + skyrim(caller_sim), high
+void S00a7ff70_Geom::NiGeometry_ApplyTransform(const ThreeByThreeMatrix& kMat, const S00a7ff70_P3& kTrn, bool bOnLeft)
 {
     unsigned short usVertices = m_spModelData->GetActiveVertexQuantity();
     S00a7ff70_P3* pkVertex = m_spModelData->m_pkVertex;
@@ -1704,7 +1707,7 @@ void S00a7ff70_Geom::FUN_00a7ff70(const ThreeByThreeMatrix& kMat, const S00a7ff7
         if (pkNormal)
         {
             ThreeByThreeMatrix kInv;
-            ((const MatrixInverseProxy&)kRot).FUN_00475380(kInv);
+            ((const MatrixInverseProxy&)kRot).NiMatrix3_Inverse(kInv);
             for (i = 0; i < usVertices; i++)
                 pkNormal[i] = pkNormal[i] * kInv;
         }
@@ -1719,7 +1722,7 @@ void S00a7ff70_Geom::FUN_00a7ff70(const ThreeByThreeMatrix& kMat, const S00a7ff7
         if (pkNormal)
         {
             ThreeByThreeMatrix kInv;
-            ((const MatrixInverseProxy&)kMat).FUN_00475380(kInv);
+            ((const MatrixInverseProxy&)kMat).NiMatrix3_Inverse(kInv);
             for (i = 0; i < usVertices; i++)
                 pkNormal[i] = pkNormal[i] * kInv;
         }

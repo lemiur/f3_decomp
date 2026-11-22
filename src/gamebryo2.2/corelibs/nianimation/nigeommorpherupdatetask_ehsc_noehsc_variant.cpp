@@ -9,7 +9,7 @@ extern "C"
 {
     extern const void* g_011f4100;
 }
-const void* __cdecl FUN_00a56c00();
+const void* __cdecl BSTempEffectSimpleDecal_GetRTTI();
 struct NiGeomMorpherUpdateTask;
 extern int DAT_011a9414;
 extern int DAT_011a941c;

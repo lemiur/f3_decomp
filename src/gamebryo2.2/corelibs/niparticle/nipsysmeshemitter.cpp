@@ -5,7 +5,8 @@
 extern int g_01202500;
 
 // @fnv 0x00c1f4f0
-int* __cdecl FUN_00c1f4f0()
+// pdb: NiKeyBasedInterpolator::GetRTTI | NiKeyBasedInterpolator.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+int* __cdecl NiKeyBasedInterpolator_GetRTTI()
 {
     return &g_01202500;
 }
@@ -28,7 +29,8 @@ void NiPSysVolumeEmitter::FUN_00c1fa30(NiAVObject* pkEmitterObj)
 extern void* g_01202508;
 
 // @fnv 0x00c1fa40
-void* __cdecl FUN_00c1fa40()
+// pdb: NiColorInterpolator::GetRTTI | NiColorInterpolator.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun) + skyrim(objrun), high
+void* __cdecl NiColorInterpolator_GetRTTI()
 {
     return &g_01202508;
 }
@@ -37,14 +39,14 @@ struct NiPSysCylinderEmitter : NiPSysVolumeEmitter
 {
     float m_fEmitterRadius;  // src: FNV360_PDB +0x58 (old: m_fCylinderRadius)
     float m_fEmitterHeight;  // src: FNV360_PDB +0x5C (old: m_fCylinderHeight)
-    bool __thiscall FUN_00c31b80(NiAVObject* pkObject);
+    bool __thiscall NiPSysVolumeEmitter_IsEqual(NiAVObject* pkObject);
     bool __thiscall FUN_00c1f9e0(NiAVObject* pkObject);
 };
 // @fnv 0x00c1f9e0
 bool __thiscall NiPSysCylinderEmitter::FUN_00c1f9e0(NiAVObject* pkObject)
 {
     NiPSysCylinderEmitter* pkDest = (NiPSysCylinderEmitter*)pkObject;
-    if (FUN_00c31b80(pkObject) && m_fEmitterRadius == pkDest->m_fEmitterRadius &&
+    if (NiPSysVolumeEmitter_IsEqual(pkObject) && m_fEmitterRadius == pkDest->m_fEmitterRadius &&
         m_fEmitterHeight == pkDest->m_fEmitterHeight)
         return true;
     return false;
@@ -132,10 +134,11 @@ struct NiPSysMeshEmitter : NiPSysEmitter
         void FUN_00c1e9a0(unsigned int);
     } m_kGeometryEmitters;
     void SetSkinGeom(NiGeometry*);
-    void FUN_00c1f990(NiStream&);
+    void NiPSysMeshEmitter_LinkObject(NiStream&);
 };
 // @fnv 0x00c1f990
-void NiPSysMeshEmitter::FUN_00c1f990(NiStream& kStream)
+// pdb: NiPSysMeshEmitter::LinkObject | NiPSysMeshEmitter.obj | fnv360_0822_retail, caller_sim + bridge(vtable|caller_sim) + skyrim(caller_sim), high
+void NiPSysMeshEmitter::NiPSysMeshEmitter_LinkObject(NiStream& kStream)
 {
     NiPSysEmitter::LinkObject(kStream);
     unsigned int uiSize = kStream.GetLinkID();
@@ -190,11 +193,12 @@ struct FUN_00c1f5f0_shell : NiPSysMeshEmitter
     void __thiscall FUN_00c1e4e0(NiSkinInstance*, NiGeometry*, NiPoint3&, NiPoint3&);
     void __thiscall EmitFromMesh(NiGeometry*, NiPoint3&, NiPoint3&);
 
-    void __thiscall FUN_00c1f5f0(NiPoint3& kPosition, NiPoint3& kMotionVelocity);
+    void __thiscall NiPSysMeshEmitter_ComputeInitialPositionAndVelocity(NiPoint3& kPosition, NiPoint3& kMotionVelocity);
 };
 
 // @fnv 0x00c1f5f0
-void __thiscall FUN_00c1f5f0_shell::FUN_00c1f5f0(NiPoint3& kPosition, NiPoint3& kMotionVelocity)
+// pdb: NiPSysMeshEmitter::ComputeInitialPositionAndVelocity | NiPSysMeshEmitter.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun) + skyrim(caller_sim), high
+void __thiscall FUN_00c1f5f0_shell::NiPSysMeshEmitter_ComputeInitialPositionAndVelocity(NiPoint3& kPosition, NiPoint3& kMotionVelocity)
 {
     unsigned int uiEmitterIndex;
     NiGeometry* pkGeomEmitter;
@@ -581,7 +585,7 @@ class Stub_00c31b60
     int unk50;
     int unk54;
 
-    void FUN_00c22530(void* pkStream);
+    void NiPSysEmitter_SaveBinary(void* pkStream);
 };
 
 class C1E8E0Controller : public Stub_00c31b60
@@ -599,14 +603,15 @@ class C1E8E0Controller : public Stub_00c31b60
     float m_fValue1;
     NiColorSaveHelper m_kFogTint;
 
-    void FUN_00c1e8e0(NiStream& kStream);
+    void NiPSysMeshEmitter_SaveBinary(NiStream& kStream);
 };
 
 // Writes the object count, each object's link ID, m_fValue0, m_fValue1 and the color helper to the stream.
 // @fnv 0x00c1e8e0
-void C1E8E0Controller::FUN_00c1e8e0(NiStream& kStream)
+// pdb: NiPSysMeshEmitter::SaveBinary | NiPSysMeshEmitter.obj | fnv360_0822_retail, caller_sim + bridge(vtable|caller_sim) + skyrim(caller_sim), high
+void C1E8E0Controller::NiPSysMeshEmitter_SaveBinary(NiStream& kStream)
 {
-    FUN_00c22530(&kStream);
+    NiPSysEmitter_SaveBinary(&kStream);
     unsigned int uiObjectCount = m_usObjectCount;
     C1E8E0SaveBinary(kStream, uiObjectCount);
     for (unsigned int i = 0; i < uiObjectCount; i++)
@@ -2211,7 +2216,7 @@ class NiStreamC1E
     int unk244;
     int unk248;
     NiBinaryStreamC1E* m_pUnderlyingStream;
-    void FUN_00a64670();
+    void NiStream_ReadMultipleLinkIDs();
 };
 template <class T>
 inline unsigned int NiBinaryStreamLoad(NiBinaryStreamC1E& kBinStream, T* pValue, unsigned int uiNumEls)
@@ -2277,12 +2282,12 @@ class LoadObjectC1E
     void FUN_00c223b0(NiStreamC1E& kStream);
     void Load(NiStreamC1E& kStream);
 };
-// Calls FUN_00c223b0, FUN_00a64670, reads two unsigned ints into m_uiValue74 and m_uiValue78, then calls m_kMember7C.FUN_00a59be0.
+// Calls FUN_00c223b0, NiStream_ReadMultipleLinkIDs, reads two unsigned ints into m_uiValue74 and m_uiValue78, then calls m_kMember7C.FUN_00a59be0.
 // @fnv 0x00c1e850
 void LoadObjectC1E::Load(NiStreamC1E& kStream)
 {
     FUN_00c223b0(kStream);
-    kStream.FUN_00a64670();
+    kStream.NiStream_ReadMultipleLinkIDs();
     m_uiValue74 = ReadC1E<unsigned int>(*kStream.m_pUnderlyingStream);
     m_uiValue78 = ReadC1E<unsigned int>(*kStream.m_pUnderlyingStream);
     m_kMember7C.FUN_00a59be0(kStream);

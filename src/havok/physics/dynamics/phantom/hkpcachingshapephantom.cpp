@@ -548,13 +548,13 @@ struct View557 {
     int unk14C;
     Detail557* details;
     int count,capacity;
-    void FUN_00989a20(Collector557*) const;
+    void hkpPhantom_calcContentStatistics(Collector557*) const;
 };
 void hkpCachingShapePhantomD4CD::AddToCollector(hkStatisticsCollectorD4CD* collector) const throw() {
     const View557* self=reinterpret_cast<const View557*>(this);
     Collector557* out=reinterpret_cast<Collector557*>(collector);
     out->Begin(&DAT_00e801c8,2,self);
-    self->FUN_00989a20(out);
+    self->hkpPhantom_calcContentStatistics(out);
     if((self->capacity & 0x80000000u)==0) {
         int allocated=self->capacity & 0x3fffffff;
         allocated+=allocated;allocated+=allocated;allocated+=allocated;

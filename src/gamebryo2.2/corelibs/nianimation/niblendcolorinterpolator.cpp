@@ -204,11 +204,12 @@ struct CloneOwner
 };
 struct FUN_00a56090_shell : NiBlendColorInterpolator
 {
-    void* FUN_00a56090(CloningProcess&);
+    void* NiBlendColorInterpolator_CreateClone(CloningProcess&);
 };
 // Allocates a NiBlendColorInterpolator, initialises it from DAT_011a9430, copies color fields from this, and returns the clone.
 // @fnv 0x00a56090
-void* FUN_00a56090_shell::FUN_00a56090(CloningProcess& kCloning)
+// pdb: NiBlendColorInterpolator::CreateClone | NiBlendColorInterpolator.obj | fnv360_0822_retail, objrun + bridge(vtable|objopen_prop) + skyrim(caller_sim), high
+void* FUN_00a56090_shell::NiBlendColorInterpolator_CreateClone(CloningProcess& kCloning)
 {
     NiBlendColorInterpolator* pkObject = (NiBlendColorInterpolator*)BSFadeNode::operator new(0x44);
     if (pkObject)

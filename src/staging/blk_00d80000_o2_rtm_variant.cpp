@@ -133,8 +133,8 @@ inline int countBitsSetD866(unsigned int n)
     n = ((n >> 8) & 0x000f000f) + (n & 0x000f000f);
     return (n & 0xff) + (n >> 16);
 }
-int __cdecl FUN_00cb0fd0(const char*, const char*, unsigned int);
-const char* __cdecl FUN_00cb1140(const char*, int);
+int __cdecl hkString_strNcmp(const char*, const char*, unsigned int);
+const char* __cdecl BSBlendTreadTransfInterpolator_IsEqual(const char*, int);
 struct TypeEntry {
     const char* name;
     int unk04;
@@ -537,8 +537,8 @@ public:
         m_iElementCount = n;
     }
 };
-int __cdecl FUN_00cb0fd0(const char*, const char*, int) throw();
-const char* __cdecl FUN_00cb1140(const char*, int) throw();
+int __cdecl hkString_strNcmp(const char*, const char*, int) throw();
+const char* __cdecl BSBlendTreadTransfInterpolator_IsEqual(const char*, int) throw();
 int __cdecl GetTypeCode(const char*) throw();
 struct HkTempAllocator {
     virtual void slot00();

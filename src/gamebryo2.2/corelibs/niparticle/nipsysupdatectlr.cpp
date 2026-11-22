@@ -411,7 +411,7 @@ struct SpawnedOwner
 
 struct S00a36250
 {
-    bool FUN_00a36250(float v);
+    bool NiTimeController_DontDoUpdate(float v);
 };
 
 struct SpawnedController
@@ -495,7 +495,7 @@ void SpawnedController::FUN_00c271c0(const float* apPosition)
             }
         }
     }
-    bool handled = reinterpret_cast<S00a36250*>(this)->FUN_00a36250(*apPosition);
+    bool handled = reinterpret_cast<S00a36250*>(this)->NiTimeController_DontDoUpdate(*apPosition);
     m_18 = 0.0f;
     m_14 = 0.0f;
     SpawnedOwner* owner = m_2C;

@@ -10,7 +10,8 @@ extern "C"
 }
 
 // @fnv 0x00a60850
-bool __stdcall FUN_00a60850(NiStream& kStream)
+// pdb: NiTransformController::IsEqual | NiTransformController.obj | fnv360_0822_retail, caller_sim + skyrim(caller_sim), high
+bool __stdcall NiTransformController_IsEqual(NiStream& kStream)
 {
     return AttachToListener(&kStream);
 }
@@ -35,12 +36,13 @@ struct NiObject;
 struct NiSourceCubeMapShell : NiSourceCubeMap
 {
     bool __thiscall FUN_00a5fae0(NiObject*);
-    bool __thiscall FUN_00a60880(NiObject* pkObject);
+    bool __thiscall NiSourceCubeMap_IsEqual(NiObject* pkObject);
 };
 
 // Calls FUN_00a5fae0 on pkObject, then compares four fields of this and pkObject and returns true only if all match.
 // @fnv 0x00a60880
-bool __thiscall NiSourceCubeMapShell::FUN_00a60880(NiObject* pkObject)
+// pdb: NiSourceCubeMap::IsEqual | NiSourceCubeMap.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun) + skyrim(objrun_open), high
+bool __thiscall NiSourceCubeMapShell::NiSourceCubeMap_IsEqual(NiObject* pkObject)
 {
     if (FUN_00a5fae0(pkObject))
     {
@@ -664,7 +666,8 @@ struct SpawnedObject : FUN_00a5fc10_cls
 };
 
 // @fnv 0x00a61040
-SpawnedObject* __cdecl FUN_00a61040(char** ppName, int aValue, NiRenderer* pRenderer, int* pVec)
+// pdb: NiSourceCubeMap::Create | NiSourceCubeMap.obj | fnv360_0822_retail, call_gap + bridge(hash|objrun) + skyrim(caller_sim), high
+SpawnedObject* __cdecl NiSourceCubeMap_Create(char** ppName, int aValue, NiRenderer* pRenderer, int* pVec)
 {
     SpawnedObject* p = new SpawnedObject();
     p->m_18 = pVec[0];

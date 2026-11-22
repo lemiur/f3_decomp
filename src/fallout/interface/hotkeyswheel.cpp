@@ -7,7 +7,8 @@ int __cdecl HotkeyWheelProbeB(int, int);
 
 // Returns 1 if HotkeyWheelProbeA succeeds and any of HotkeyWheelProbeB(2/1/4/3, 0) is not -1, otherwise 0.
 // @f3 0x00618820 (community match, verified in this file)
-unsigned char FUN_00702140()
+// pdb: HotKeysWheel::IsDPadPressed | HotKeysWheel.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap_sim), high
+unsigned char HotKeysWheel_IsDPadPressed()
 {
     int result;
     if (HotkeyWheelProbeA() && (HotkeyWheelProbeB(2, 0) != -1 || HotkeyWheelProbeB(1, 0) != -1 ||

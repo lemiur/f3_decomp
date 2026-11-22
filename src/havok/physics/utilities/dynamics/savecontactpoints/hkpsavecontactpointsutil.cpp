@@ -15,8 +15,8 @@ unsigned long FUN_00dce8d0_class::GetValueOrDefault(unsigned long key)
 
 void __cdecl FUN_00d3fe90(void);
 void __cdecl FUN_00d39390(void);
-void __cdecl FUN_00d41a30(void);
-void __cdecl FUN_00d40d80(void);
+void __cdecl hkPredGskAgent3_process(void);
+void __cdecl hkPredGskCylinderAgent3_process(void);
 void __cdecl FUN_00d32cd0(void);
 void __cdecl BuildEventIndex(void);
 void __fastcall FUN_00d2d890(void*, int, void*, int);
@@ -24,25 +24,26 @@ void __cdecl FUN_00d35770(void);
 void __cdecl FUN_00d365d0(void);
 
 // @f3 0x00a4cba0 (community match, verified in this file)
-void __cdecl FUN_009ca130();
-void __cdecl FUN_009c2530();
+void __cdecl hkBoxBoxAgent3_process();
+void __cdecl hkCapsuleTriangleAgent3_process();
 void __cdecl FUN_009cc270();
 void __cdecl FUN_009cb440();
-void __cdecl FUN_009bcad0();
+void __cdecl hkConvexListAgent3_process();
 void __cdecl FUN_009babf0();
 void __cdecl FUN_009b5700();
 void __cdecl FUN_009cfcf0();
-int __cdecl FUN_00dcd4d0(void* p)
+// pdb: hkpSaveContactPointsUtil::getSerializedAgentType | hkpSaveContactPointsUtil.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_seq), high
+int __cdecl hkpSaveContactPointsUtil_getSerializedAgentType(void* p)
 {
-    if (p == (void*)&FUN_009ca130)
+    if (p == (void*)&hkBoxBoxAgent3_process)
         return 1;
-    if (p == (void*)&FUN_009c2530)
+    if (p == (void*)&hkCapsuleTriangleAgent3_process)
         return 2;
     if (p == (void*)&FUN_009cc270)
         return 3;
     if (p == (void*)&FUN_009cb440)
         return 4;
-    if (p == (void*)&FUN_009bcad0)
+    if (p == (void*)&hkConvexListAgent3_process)
         return 5;
     if (p == (void*)&FUN_009babf0)
         return 6;
@@ -1556,7 +1557,7 @@ void __cdecl DCD6A0Agent7();
 void __cdecl DCD6A0Agent8();
 void __cdecl DCD6A0Agent9();
 
-// File-static helper (reconstruction of FUN_00dcd4d0): maps a registered agent function to its id.
+// File-static helper (reconstruction of hkpSaveContactPointsUtil_getSerializedAgentType): maps a registered agent function to its id.
 static int DCD6A0GetAgentId(DCD6A0AgentFunc func)
 {
     if (func == DCD6A0Agent1)
@@ -1902,7 +1903,7 @@ struct ObjDCDDF3
 };
 struct ListenerDCDDF3
 {
-    void FUN_00a4e1f0(ObjDCDDF3* obj);
+    void hkpPhysicsSystemWithContacts_addContact(ObjDCDDF3* obj);
 };
 int __cdecl FUN_00a4cdf0(void* a, S_00dcdd80_Item* item, int c, ObjDCDDF3* obj);
 void FUN_00dcdd80(void* a, S_00dcdd80_Item** items, int count, S_00dcdd80_Listener* listener)
@@ -1913,7 +1914,7 @@ void FUN_00dcdd80(void* a, S_00dcdd80_Item** items, int count, S_00dcdd80_Listen
         ObjDCDDF3* obj = new ObjDCDDF3();
         int iWorldValue = *(int*)((char*)world + 0x6c);
         if (!FUN_00a4cdf0(a, items[i], iWorldValue, obj))
-            ((ListenerDCDDF3*)listener)->FUN_00a4e1f0(obj);
+            ((ListenerDCDDF3*)listener)->hkpPhysicsSystemWithContacts_addContact(obj);
         obj->removeReference();
     }
 }
@@ -1922,15 +1923,15 @@ void FUN_00dcdd80(void* a, S_00dcdd80_Item** items, int count, S_00dcdd80_Listen
 namespace fnv_00dcde10 {
 void* __cdecl FUN_00cb1260(void*, const void*, unsigned int);
 int __cdecl CopyAudioNodeTree(void*, void*, void*);
-int FUN_00dcd4d0(void* p)
+int hkpSaveContactPointsUtil_getSerializedAgentType(void* p)
 {
     if (p == reinterpret_cast<void*>(&FUN_00d3fe90))
         return 1;
     if (p == reinterpret_cast<void*>(&FUN_00d39390))
         return 2;
-    if (p == reinterpret_cast<void*>(&FUN_00d41a30))
+    if (p == reinterpret_cast<void*>(&hkPredGskAgent3_process))
         return 3;
-    if (p == reinterpret_cast<void*>(&FUN_00d40d80))
+    if (p == reinterpret_cast<void*>(&hkPredGskCylinderAgent3_process))
         return 4;
     if (p == reinterpret_cast<void*>(&FUN_00d32cd0))
         return 5;
@@ -2025,17 +2026,17 @@ struct LocalContext
     void* vtable;
 };
 extern int DAT_010d77c0;
-extern "C" void __cdecl FUN_00dcea10(int, int, int, LocalContext*);
-// Sets up a LocalContext with DAT_010d77c0 as its vtable and forwards first, second and third to FUN_00dcea10.
+extern "C" void __cdecl hkpSaveContactPointsUtil_loadContactPointsInternal(int, int, int, LocalContext*);
+// Sets up a LocalContext with DAT_010d77c0 as its vtable and forwards first, second and third to hkpSaveContactPointsUtil_loadContactPointsInternal.
 // @fnv 0x00dce7b0
 void __cdecl RunWithLocalContext(int first, int second, int third)
 {
     LocalContext local;
     local.vtable = &DAT_010d77c0;
-    FUN_00dcea10(first, second, third, &local);
+    hkpSaveContactPointsUtil_loadContactPointsInternal(first, second, third, &local);
 }
 
-void __cdecl FUN_00dcea10(int, int, int, void*);
+void __cdecl hkpSaveContactPointsUtil_loadContactPointsInternal(int, int, int, void*);
 int __cdecl FUN_00c85750();
 struct FUN_00dce7e0_local
 {
@@ -2047,11 +2048,12 @@ struct FUN_00dce7e0_local
     void __thiscall ProcessArgument(int);
     void __thiscall FUN_00a29680();
 };
-// Reads a value from *p, initializes a local via FUN_00dce840, calls FUN_00dcea10, then invokes two methods on the local using a value from FUN_00c85750.
+// Reads a value from *p, initializes a local via FUN_00dce840, calls hkpSaveContactPointsUtil_loadContactPointsInternal, then invokes two methods on the local using a value from FUN_00c85750.
 // @f3 0x00a4dea0 (community match, verified in this file)
 extern "C" void __cdecl FUN_00a4e040(int, int, int, void*);
 
-void __cdecl FUN_00dce7e0(int aiArg1, int aiArg2, int* p, int d)
+// pdb: hkpSaveContactPointsUtil::loadContactPoints | hkpSaveContactPointsUtil.obj | fnv360_0822_retail, caller_sim + skyrim(caller_sim), high
+void __cdecl hkpSaveContactPointsUtil_loadContactPoints(int aiArg1, int aiArg2, int* p, int d)
 {
     FUN_00dce7e0_local local;
     int value = *(int*)(*p + 8);
@@ -2563,7 +2565,7 @@ void __cdecl ProcessCollisionRecords(void* arg1, S_00dcda40_World* world, S_00dc
                 void* callbackArg = arg1;
                 int state = world->unk6C;
                 if (!FUN_00a4cdf0(callbackArg, (S_00dcdd80_Item*)p, state, entry))
-                    ((ListenerDCDDF3*)sink)->FUN_00a4e1f0(entry);
+                    ((ListenerDCDDF3*)sink)->hkpPhysicsSystemWithContacts_addContact(entry);
                 entry->removeReference();
                 p += ((CollisionRecordHeader*)p)->size;
             }
@@ -3027,10 +3029,10 @@ struct hkBool_dcd
     hkBool_dcd(bool b) : m_cBooleanValue((char)b)
     {}
 };
-int __cdecl FUN_00dcd550(const void* cur, hkBool_dcd flag, void* context, int* pItemSize, int* pField18, void** pSubPtr,
+int __cdecl hkpSaveContactPointsUtil_serializeEntry(const void* cur, hkBool_dcd flag, void* context, int* pItemSize, int* pField18, void** pSubPtr,
                          Struct0x20* child);
 
-// Iterates over chunks, calls FUN_00dcd550 to parse sub-structures, and populates out->arr1 with Block512 copies and out->arr2 with child nodes.
+// Iterates over chunks, calls hkpSaveContactPointsUtil_serializeEntry to parse sub-structures, and populates out->arr1 with Block512 copies and out->arr2 with child nodes.
 // @f3 0x00a4d000 (community match, verified in this file)
 extern "C" void _ReadWriteBarrier();
 struct NativeChunkChild;
@@ -3169,7 +3171,8 @@ struct NativeChunkChild {
 int FUN_00a4cc20(const void* cursor, hkBool_dcd flag, void* context,
     int* itemSize, int* auxiliary, void** subPointer, NativeChunkChild* child);
 
-int __cdecl FUN_00dcdf70(const hkArray<Block512*>& chunks, void* context, Struct0x20* out)
+// pdb: hkpSaveContactPointsUtil::serialize1nTrack | hkpSaveContactPointsUtil.obj | fnv360_0822_retail, call_seq + bridge(caller_sim|caller_sim) + skyrim(call_seq), high
+int __cdecl hkpSaveContactPointsUtil_serialize1nTrack(const hkArray<Block512*>& chunks, void* context, Struct0x20* out)
 {
     NativeChunkChild* result = reinterpret_cast<NativeChunkChild*>(out);
     result->chunks.Reserve(chunks.m_iElementCount);
@@ -3389,7 +3392,7 @@ struct Ctx
 };
 
 void* __cdecl FindEntryValue(unsigned int a, unsigned int b);
-int __cdecl FUN_00dce180(Resolver* a1, SpawnedItem* item, unsigned int edi, unsigned int ebx, unsigned int ctx78,
+int __cdecl hkpSaveContactPointsUtil_deserializeCollisionEntry(Resolver* a1, SpawnedItem* item, unsigned int edi, unsigned int ebx, unsigned int ctx78,
                          void* p);
 
 // @f3 0x00a4e040 (community match, verified in this file)
@@ -3406,7 +3409,8 @@ int __cdecl FUN_00a4d880(Resolver* resolver, SpawnedItem* item,
 void __cdecl FUN_00a85b20(unsigned int ctxField, SpawnedItem* item);
 void __cdecl FUN_00902550();
 
-void __cdecl FUN_00dcea10(Resolver* apResolver, ListOwner* apListOwner,
+// pdb: hkpSaveContactPointsUtil::loadContactPointsInternal | hkpSaveContactPointsUtil.obj | fnv360_0822_retail, call_seq + bridge(caller_sim|callee_sim) + skyrim(call_seq), high
+void __cdecl hkpSaveContactPointsUtil_loadContactPointsInternal(Resolver* apResolver, ListOwner* apListOwner,
                            Ctx* apCtx, Visitor* apVisitor)
 {
     apCtx->unk84++;
@@ -3497,15 +3501,15 @@ struct AgentKey
 {
     void* value;
 };
-__declspec(noinline) int __cdecl FUN_00dcd4d0(AgentKey key)
+__declspec(noinline) int __cdecl hkpSaveContactPointsUtil_getSerializedAgentType(AgentKey key)
 {
     if (key.value == (void*)FUN_00d3fe90)
         return 1;
     if (key.value == (void*)FUN_00d39390)
         return 2;
-    if (key.value == (void*)FUN_00d41a30)
+    if (key.value == (void*)hkPredGskAgent3_process)
         return 3;
-    if (key.value == (void*)FUN_00d40d80)
+    if (key.value == (void*)hkPredGskCylinderAgent3_process)
         return 4;
     if (key.value == (void*)FUN_00d32cd0)
         return 5;
@@ -3518,10 +3522,11 @@ __declspec(noinline) int __cdecl FUN_00dcd4d0(AgentKey key)
     return key.value == (void*)FUN_00d365d0 ? 9 : 0;
 }
 extern "C" void* __cdecl FUN_00d32ad0(void*, void*);
-extern "C" int __cdecl FUN_00dcdf70(void*, DCD6A0Context**, int);
+extern "C" int __cdecl hkpSaveContactPointsUtil_serialize1nTrack(void*, DCD6A0Context**, int);
 // Resolves the collision data pointer and type for a CollisionRecordHeader entry, writing results to output, size, and type out-parameters.
 // @f3 0x00a4cc20 (community match, verified in this file)
-int __cdecl FUN_00dcd550(CollisionRecordHeader* apRecord, char abOffset, DCD6A0Context** context, int* size, int* type,
+// pdb: hkpSaveContactPointsUtil::serializeEntry | hkpSaveContactPointsUtil.obj | fnv360_0822_retail, call_gap + bridge(caller_sim|caller_sim) + skyrim(call_gap), high
+int __cdecl hkpSaveContactPointsUtil_serializeEntry(CollisionRecordHeader* apRecord, char abOffset, DCD6A0Context** context, int* size, int* type,
                          void** output, int arg)
 {
     *output = 0;
@@ -3539,7 +3544,7 @@ int __cdecl FUN_00dcd550(CollisionRecordHeader* apRecord, char abOffset, DCD6A0C
         data = (unsigned char*)apRecord + (abOffset ? 32 : 16);
     process: {
         AgentKey key = {(void*)(*context)->m_entries[apRecord->unk01].m_key};
-        int t = FUN_00dcd4d0(key);
+        int t = hkpSaveContactPointsUtil_getSerializedAgentType(key);
         *type = t;
         switch (t)
         {
@@ -3556,14 +3561,14 @@ int __cdecl FUN_00dcd550(CollisionRecordHeader* apRecord, char abOffset, DCD6A0C
             if (data[11] & 32)
                 return 0;
             *output = FUN_00d32ad0(apRecord, data);
-            return FUN_00dcdf70(*output, context, arg);
+            return hkpSaveContactPointsUtil_serialize1nTrack(*output, context, arg);
         case 6:
         case 7:
         case 8:
             *size = apRecord->size;
             *type = t;
             *output = data;
-            return FUN_00dcdf70(data, context, arg);
+            return hkpSaveContactPointsUtil_serialize1nTrack(data, context, arg);
         default:
             return 1;
         }
@@ -3580,7 +3585,7 @@ int __cdecl FUN_00dcd550(CollisionRecordHeader* apRecord, char abOffset, DCD6A0C
 
 Holder* __cdecl _FUN_00c85750();
 
-int FUN_00dcd550(S00dcd720_Src*, S00dcd720_Bool, int, int*, int*, void**, void*);
+int hkpSaveContactPointsUtil_serializeEntry(S00dcd720_Src*, S00dcd720_Bool, int, int*, int*, void**, void*);
 extern "C" void FUN_00cb1260(void*, const void*, int);
 
 static inline S00dcd720_Part* S00dcd720_get(S00dcd720_Part* p)
@@ -3588,7 +3593,7 @@ static inline S00dcd720_Part* S00dcd720_get(S00dcd720_Part* p)
     return (p->m_type == 1) ? (S00dcd720_Part*)((char*)p + p->m_off) : 0;
 }
 
-// Calls FUN_00dcd550 on src, then copies shape header and arrays into out and sets the part fields via cb->m_fn or by storing them and calling FUN_00c90510.
+// Calls hkpSaveContactPointsUtil_serializeEntry on src, then copies shape header and arrays into out and sets the part fields via cb->m_fn or by storing them and calling FUN_00c90510.
 // @f3 0x00a4cdf0 (community match, verified in this file)
 extern "C" void __cdecl FUN_00901e90(void* array, unsigned int count, int elementSize);
 extern "C" int __cdecl FUN_00a4cc20(S00dcd720_Src* src, S00dcd720_Bool flag, int context,
@@ -7823,8 +7828,8 @@ extern "C" void FUN_00926420(void* obj, void* work, int one);
 extern "C" void FUN_009234e0(void*, const void*, int);
 extern "C" void FUN_00988bb0(void* a, void* item);
 extern "C" void FUN_00988180(NodeF3* p, void* item);
-extern "C" void FUN_00988c60(void* a, void* item);
-extern "C" void FUN_00988230(NodeF3* p, void* item);
+extern "C" void hkpWorldCallbackUtil_fireContactPointCallback(void* a, void* item);
+extern "C" void hkpEntityCallbackUtil_fireContactPointCallbackInternal(NodeF3* p, void* item);
 extern "C" void FUN_009985d0(void* p5, void* p4);
 
 
@@ -7851,7 +7856,8 @@ static __forceinline void GetConstraintInfo(const NodeG* block, CountInfoDce& in
     }
 }
 
-int __cdecl FUN_00dce180(Arg0* apFlags, NodeDce* apNodeRaw, NodeDce* apNodeARaw, NodeDce* apNodeBRaw, void* apContext, P5* p5Raw)
+// pdb: hkpSaveContactPointsUtil::deserializeCollisionEntry | hkpSaveContactPointsUtil.obj | fnv360_0822_retail, call_gap_sim + bridge(caller_sim|call_seq) + skyrim(call_gap_sim), high
+int __cdecl hkpSaveContactPointsUtil_deserializeCollisionEntry(Arg0* apFlags, NodeDce* apNodeRaw, NodeDce* apNodeARaw, NodeDce* apNodeBRaw, void* apContext, P5* p5Raw)
 {
     NodeF3* apNode = reinterpret_cast<NodeF3*>(apNodeRaw);
     NodeF3* apNodeA = reinterpret_cast<NodeF3*>(apNodeARaw);
@@ -7976,11 +7982,11 @@ int __cdecl FUN_00dce180(Arg0* apFlags, NodeDce* apNodeRaw, NodeDce* apNodeARaw,
                     z.m_0c = properties;
                     z.m_1c = 1;
                     z.m_20 = &c->u14;
-                    FUN_00988c60(apNodeA->m_008, &z);
+                    hkpWorldCallbackUtil_fireContactPointCallback(apNodeA->m_008, &z);
                     if (apNodeA->m_1f4)
-                        FUN_00988230(apNodeA, &z);
+                        hkpEntityCallbackUtil_fireContactPointCallbackInternal(apNodeA, &z);
                     if (apNodeB->m_1f4)
-                        FUN_00988230(apNodeB, &z);
+                        hkpEntityCallbackUtil_fireContactPointCallbackInternal(apNodeB, &z);
                 }
             }
             FUN_009985d0(p5, apContext);

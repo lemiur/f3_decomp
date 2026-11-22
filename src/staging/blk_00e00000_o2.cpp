@@ -449,10 +449,11 @@ struct Obj004361d0 {
     int unk60, unk64, unk68, unk6c, unk70, unk74, unk78, unk7c;
     int unk80, unk84, unk88, unk8c, unk90, unk94, unk98;
     Link004361d0 head;
-    short FUN_004361d0(int key);
+    short TES_GetDeadCount(int key);
 };
 
-short Obj004361d0::FUN_004361d0(int key)
+// pdb: TES::GetDeadCount | TES.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(objrun_prop), high
+short Obj004361d0::TES_GetDeadCount(int key)
 {
     Link004361d0* p = &head;
     if (p)
@@ -1472,8 +1473,8 @@ struct Member_a081d0
 {
     int unk00, unk04;
     void* unk08;
-    void FUN_009a1a00(void* p);
-    __forceinline Member_a081d0(FinishFlag_a081d0) throw() { FUN_009a1a00(unk08); }
+    void hkpBridgeConstraintAtom_init(void* p);
+    __forceinline Member_a081d0(FinishFlag_a081d0) throw() { hkpBridgeConstraintAtom_init(unk08); }
 };
 
 class RefObject_a081d0

@@ -19,7 +19,7 @@ struct FUN_00ca5310_class
 };
 float __fastcall GetField24Float(struct FUN_00ca5310_class* pClass);
 void __cdecl _delete(void* p, unsigned int size);
-extern "C" int __cdecl FUN_00cb10d0(int);
+extern "C" int __cdecl hkString_strLen(int);
 extern "C" void __cdecl operator delete(void*, unsigned int);
 extern int DAT_010c7310;
 void __cdecl FUN_00ca4490();
@@ -2680,7 +2680,7 @@ struct StandInStream : public NiStream
     int unk248;
     StandInBinaryStream* m_pkIStream;
 
-    void FUN_00a64df0(void* pLinkID);
+    void NiStream_LoadFixedString(void* pLinkID);
 };
 template <class T> inline void StreamRead(StandInStream& kStream, T& val)
 {
@@ -3396,7 +3396,7 @@ struct WorldObjectCAC4B0
     int unk0B8;
     int unk0BC;
     void* m_pkUserData;
-    ShapeHolderCAC4B0* FUN_00cac980();
+    ShapeHolderCAC4B0* hkpCharacterProxy_getShapePhantom();
 };
 void __cdecl FUN_00cac410();
 struct RefObjectCAC4B0
@@ -3454,10 +3454,10 @@ struct hkMemoryRouterC5E0
 };
 // FUN_00cb0aa0: allocator-backed string dup. Takes the source string in the
 // caller's edi (private convention derived for this static noinline helper):
-// length via FUN_00cb10d0 (+1 for the NUL), block allocated through the task
+// length via hkString_strLen (+1 for the NUL), block allocated through the task
 // memory router's allocator, contents filled by FUN_00cb1090.
 struct FNVTaskMemoryRouter;
-extern "C" int __cdecl FUN_00cb10d0(int);
+extern "C" int __cdecl hkString_strLen(int);
 extern "C" FNVTaskMemoryRouter* __cdecl FUN_00c85750();
 extern "C" void* __cdecl AllocateWithHeader(void* allocator, unsigned int count);
 extern int DAT_0102009c;
@@ -4699,7 +4699,7 @@ extern "C" void __cdecl CopyIfNonEmpty(void*, int, int);
 extern int DAT_01268358;
 static __declspec(noinline) void* FUN_00cb0ad0(char* s, int maxLen)
 {
-    int len = FUN_00cb10d0((int)s);
+    int len = hkString_strLen((int)s);
     if (len > maxLen)
         len = maxLen;
     char* p = (char*)AllocateWithHeader(FUN_00c85750()->allocator, len + 1);
@@ -6442,7 +6442,7 @@ struct S00cbfaa0_Obj
     int unk3c;
     int unk40;
     void* m_44;
-    void FUN_00cbfaa0(S00cbfaa0_Base* a0, S00cbfaa0_Src* a1, int a2, S00cbfaa0_Dst* a3, int a4, int a5, int a6);
+    void hkpWorldRayCaster_castRaysFromSinglePoint(S00cbfaa0_Base* a0, S00cbfaa0_Src* a1, int a2, S00cbfaa0_Dst* a3, int a4, int a5, int a6);
 };
 
 // @f3 0x00943080 (community match, verified in this file)
@@ -6472,7 +6472,8 @@ struct S00cbfaa0_Slot21
     virtual void vf21(S00cbfaa0_Rec* r, S00cbfaa0_Obj* o, int z);
 };
 
-void S00cbfaa0_Obj::FUN_00cbfaa0(S00cbfaa0_Base* a0, S00cbfaa0_Src* a1, int a2, S00cbfaa0_Dst* a3, int a4, int a5,
+// pdb: hkpWorldRayCaster::castRaysFromSinglePoint | hkpWorldRayCaster.obj | fnv360_0822_retail, ustr + skyrim(ustr), high
+void S00cbfaa0_Obj::hkpWorldRayCaster_castRaysFromSinglePoint(S00cbfaa0_Base* a0, S00cbfaa0_Src* a1, int a2, S00cbfaa0_Dst* a3, int a4, int a5,
                                  int a6)
 {
     volatile unsigned int ts;
@@ -6862,7 +6863,7 @@ struct Body : BodyHeader
     unsigned int unkf4;
     unsigned int unkf8;
     unsigned int unkfc;
-    float FUN_00c86430();
+    float hkpMotion_getMass();
     __forceinline void pointVelocity(const VectorValue& point, VectorValue& result) const
     {
         VectorValue offset;
@@ -7993,7 +7994,7 @@ struct BodyLocal
     int m_f80;
     float friction;
     float restitution;
-    MotionLocal* FUN_0090cdf0();
+    MotionLocal* hkpRigidBody_getStoredDynamicMotion();
     void FUN_0090c710(float);
 };
 
@@ -8091,7 +8092,7 @@ struct BodyOwnerLocal
     }
     __forceinline void SetMass(float mass)
     {
-        MotionLocal* motion = body ? body->FUN_0090cdf0() : 0;
+        MotionLocal* motion = body ? body->hkpRigidBody_getStoredDynamicMotion() : 0;
         if (motion)
             motion->SetMass(mass);
         else if (body)

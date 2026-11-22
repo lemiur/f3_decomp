@@ -58,7 +58,8 @@ ParticleSystem* ParticleOwner::CreateParticleSystem(unsigned int flags)
 
 void __cdecl FUN_00c1b0b0();
 // @fnv 0x00c21940
-void __cdecl FUN_00c21940()
+// pdb: NiSpotLight::LinkObject | NiSpotLight.obj | fnv360_0822_retail, objrun_prop + bridge(vtable|objrun_prop) + skyrim(objrun), high
+void __cdecl NiSpotLight_LinkObject()
 {
     FUN_00c1b0b0();
 }
@@ -105,7 +106,8 @@ void __cdecl FUN_00c25720()
 extern void FUN_00c1b1d0();
 
 // @fnv 0x00c21950
-void FUN_00c21950()
+// pdb: NiSpotLight::RegisterStreamables | NiSpotLight.obj | fnv360_0822_retail, caller_sim + bridge(vtable|caller_sim) + skyrim(objrun), high
+void NiSpotLight_RegisterStreamables()
 {
     FUN_00c1b1d0();
 }

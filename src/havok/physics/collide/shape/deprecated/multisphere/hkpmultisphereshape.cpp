@@ -115,7 +115,7 @@ static void* s00d2ab90_addr[10];
 static void* s00d2ab90_sink;
 void D2abExternCall();
 
-static __declspec(noinline) void* FUN_00d2a960(RayCtx* outB, RayCtx* in, hkVector4* spheres, void* owner, RayCtx* outA)
+static __declspec(noinline) void* castRayInternal(RayCtx* outB, RayCtx* in, hkVector4* spheres, void* owner, RayCtx* outA)
 {
     s00d2ab90_sink = outB;
     s00d2ab90_addr[0] = (void*)&in;
@@ -159,7 +159,7 @@ static __declspec(noinline) int My_Helper(hkVector4* spheres, RayCtx* keyB, RayC
 char* S00d2ab90_Shape::FUN_00d2ab90(char* ok, RayCtx* in, void* p3)
 {
     RayCtx keys[2];
-    void* r = FUN_00d2a960(&keys[0], in, m_kSpheres, m_disp, &keys[1]);
+    void* r = castRayInternal(&keys[0], in, m_kSpheres, m_disp, &keys[1]);
     int v = My_Helper(m_kSpheres, &keys[1], &keys[0], r, in, p3);
     *ok = (v != -1);
     return ok;
@@ -250,7 +250,8 @@ static __forceinline float TwiceProjection(const Sph_U& delta, const Sph_U& from
     return dot + dot;
 }
 
-static __declspec(noinline) int FUN_00d2a960(const Sph_Seg* seg, const Sph_V* spheres, int n,
+// pdb: castRayInternal | hkpMultiSphereShape.obj | fnv360_0822_retail, ustr + bridge(ustr|ustr) + skyrim(ustr), high
+static __declspec(noinline) int castRayInternal(const Sph_Seg* seg, const Sph_V* spheres, int n,
                                              int* apHitIndices, float* apHitParams)
 {
     {
@@ -317,7 +318,7 @@ static __declspec(noinline) int FUN_00d2a960(const Sph_Seg* seg, const Sph_V* sp
 
 int Sph_caller(const Sph_Seg* seg, const Sph_V* spheres, int n, int* a, float* b)
 {
-    return FUN_00d2a960(seg, spheres, n, a, b);
+    return castRayInternal(seg, spheres, n, a, b);
 }
 
 struct ShapeRayCastQuery
@@ -383,7 +384,7 @@ class hkpRayHitCollector
 
 struct DummyMultiSphere : hkpMultiSphereShape
 {
-    void FUN_00d2abe0(const ShapeRayCastQuery& input, const hkpCdBody& cdBody, hkpRayHitCollector& collector) const;
+    void hkpMultiSphereShape_castRayWithCollectorImpl(const ShapeRayCastQuery& input, const hkpCdBody& cdBody, hkpRayHitCollector& collector) const;
 };
 
 // Ray-casts against the multi-sphere shape, transforms each hit normal into world space, and reports hits to the collector.
@@ -406,7 +407,8 @@ struct __declspec(align(16)) AlignedVec4
     float x, y, z, w;
 };
 
-static __declspec(noinline) int FUN_009ad740(ShapeRayCastOutput* output, const hkVector4* spheres, float* fractions, int* hitIndices, int count, const ShapeRayCastQuery* query)
+// pdb: getBestHit | hkpMultiSphereShape.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_seq), high
+static __declspec(noinline) int getBestHit(ShapeRayCastOutput* output, const hkVector4* spheres, float* fractions, int* hitIndices, int count, const ShapeRayCastQuery* query)
 {
     int best = -1;
     for (int i = 0; i < count; i++) {
@@ -438,7 +440,8 @@ static __declspec(noinline) int FUN_009ad740(ShapeRayCastOutput* output, const h
     return best;
 }
 
-void DummyMultiSphere::FUN_00d2abe0(const ShapeRayCastQuery& query, const hkpCdBody& body,
+// pdb: hkpMultiSphereShape::castRayWithCollectorImpl | hkpMultiSphereShape.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc + skyrim(caller_sim), high
+void DummyMultiSphere::hkpMultiSphereShape_castRayWithCollectorImpl(const ShapeRayCastQuery& query, const hkpCdBody& body,
                                      hkpRayHitCollector& collector) const
 {
     float fractions[8];
@@ -451,7 +454,7 @@ void DummyMultiSphere::FUN_00d2abe0(const ShapeRayCastQuery& query, const hkpCdB
     do
     {
         output.reset();
-        int i = FUN_009ad740(&output, m_kSpheres, fractions, hitIndices, hits, &query);
+        int i = getBestHit(&output, m_kSpheres, fractions, hitIndices, hits, &query);
 
         const hkTransform& t = body.m_kMotionState->m_kMotionTransform;
         float x = output.m_vHitNormal.x;

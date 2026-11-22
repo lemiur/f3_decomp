@@ -88,7 +88,8 @@ char* FUN_00d5e0f0_cls::FUN_00d5e0f0()
 }
 
 // @fnv 0x00d5e0d0
-int __cdecl FUN_00d5e0d0()
+// pdb: hkpPhysicsSystemWithContacts::clone | hkpPhysicsSystemWithContacts.obj | fnv360_0822_retail, vtable + skyrim(vtable), high
+int __cdecl hkpPhysicsSystemWithContacts_clone()
 {
     return 0;
 }
@@ -694,7 +695,7 @@ struct Node
     virtual void v14();
     virtual void v18();
     virtual void v1C();
-    virtual bool* FUN_00d5e500(bool* __restrict result, void* other, State* st);
+    virtual bool* hkpConvexListShape_castRayImpl(bool* __restrict result, void* other, State* st);
     DWORD unk04, unk08, unk0C, unk10;
     Coll coll;
 };
@@ -705,7 +706,8 @@ struct __declspec(align(16)) Buf
 
 // Recursively searches coll children for a match, records the selected id in st->slots, and sets *result to whether one was found.
 // @fnv 0x00d5e500
-bool* Node::FUN_00d5e500(bool* __restrict result, void* other, State* st)
+// pdb: hkpConvexListShape::castRayImpl | hkpConvexListShape.obj | fnv360_0822_retail, ustr + bridge(ustr|vtable) + skyrim(ustr), high
+bool* Node::hkpConvexListShape_castRayImpl(bool* __restrict result, void* other, State* st)
 {
     Buf buf;
     struct F
@@ -727,7 +729,7 @@ bool* Node::FUN_00d5e500(bool* __restrict result, void* other, State* st)
     int iSelected = -1;
     for (int id = coll.First(); id != -1; id = coll.Next(id))
     {
-        coll.Get(id, &buf)->FUN_00d5e500(&found.d, other, st);
+        coll.Get(id, &buf)->hkpConvexListShape_castRayImpl(&found.d, other, st);
         if (found.d)
             iSelected = id;
     }

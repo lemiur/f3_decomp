@@ -208,8 +208,9 @@ unsigned int* __cdecl FUN_0085e250() {
 // @f3 0x00848ed0 (community match, verified in this file)
 namespace f3m_00848ed0 {
 struct P848ed0 { char pad[0xc]; int f; };
-struct O848ed0 { void FUN_00848700(int v); void FUN_0082d9f0(P848ed0* p); void FUN_00848ed0(P848ed0* p); };
-void O848ed0::FUN_00848ed0(P848ed0* p) { FUN_00848700(p->f); FUN_0082d9f0(p); }
+struct O848ed0 { void FUN_00848700(int v); void FUN_0082d9f0(P848ed0* p); void NiBillboardNode_OnVisible(P848ed0* p); };
+// pdb: NiBillboardNode::OnVisible | NiBillboardNode.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(caller_sim), high
+void O848ed0::NiBillboardNode_OnVisible(P848ed0* p) { FUN_00848700(p->f); FUN_0082d9f0(p); }
 }   // namespace f3m_00848ed0
 
 // @f3 0x0084be60 (community match, verified in this file)
@@ -782,10 +783,10 @@ struct Owner85be90 {
     const void* table;
     long refCount;
     char* name;
-    Owner85be90* FUN_0085be90(unsigned int flags);
+    Owner85be90* NiMaterialLibrary(unsigned int flags);
 };
 
-Owner85be90* Owner85be90::FUN_0085be90(unsigned int flags) {
+Owner85be90* Owner85be90::NiMaterialLibrary(unsigned int flags) {
     table = &DAT_00e251cc;
     FUN_0085bd20(this);
     if (name != DAT_00e207a8) InterlockedDecrement((long*)(name - 8));
@@ -944,14 +945,14 @@ class NiFixedString
 
 extern "C" void __cdecl FUN_0085bd20(void* p);
 
-class FUN_0085be90 : public NiRefObject
+class NiMaterialLibrary : public NiRefObject // src: F3_EXE vtable 0x00e251cc (old: FUN_0085be90)
 {
   public:
-    virtual ~FUN_0085be90();
+    virtual ~NiMaterialLibrary();
     NiFixedString m_kName;
 };
 
-FUN_0085be90::~FUN_0085be90()
+NiMaterialLibrary::~NiMaterialLibrary()
 {
     FUN_0085bd20(this);
 }
@@ -969,12 +970,12 @@ struct FUN_0085be90_obj
     const void* m_pVTable;
     long m_lRefCount;
     char* m_kName;
-    FUN_0085be90_obj* FUN_0085be90(unsigned int flags);
+    FUN_0085be90_obj* NiMaterialLibrary(unsigned int flags);
 };
 
 void __cdecl FUN_0085bd20(FUN_0085be90_obj* obj);
 
-FUN_0085be90_obj* FUN_0085be90_obj::FUN_0085be90(unsigned int flags)
+FUN_0085be90_obj* FUN_0085be90_obj::NiMaterialLibrary(unsigned int flags)
 {
     m_pVTable = &DAT_0109f7f4;
     FUN_0085bd20(this);

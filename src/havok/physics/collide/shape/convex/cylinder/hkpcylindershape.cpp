@@ -5,7 +5,8 @@
 #include "havok/hkpCylinderShape.h"
 
 // @fnv 0x00d571b0
-int __cdecl FUN_00d571b0()
+// pdb: hkpCylinderShape::getNumCollisionSpheresImpl | hkpCylinderShape.obj | fnv360_0822_retail, objrun + skyrim(objrun_open), high
+int __cdecl hkpCylinderShape_getNumCollisionSpheresImpl()
 {
     return 0x12;
 }

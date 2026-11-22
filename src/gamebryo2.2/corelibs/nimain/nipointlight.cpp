@@ -32,7 +32,8 @@ bool NiPointLight::FUN_00a7d730(NiObject* pObject)
 extern const char* const g_011f5ec4_arg1;
 
 // @fnv 0x00a7d790
-const char* const* __cdecl FUN_00a7d790()
+// pdb: NiAVObjectPalette::GetRTTI | NiControllerManager.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+const char* const* __cdecl NiAVObjectPalette_GetRTTI()
 {
     return &g_011f5ec4_arg1;
 }
@@ -71,7 +72,8 @@ void NiPointLight::FUN_00a7d7a0(NiUpdateData& update)
 extern const void* g_011f5f6c;
 
 // @fnv 0x00a9b390
-const void* __cdecl FUN_00a9b390()
+// pdb: NiParticleMeshesData::GetRTTI | NiParticleMeshesData.obj | fnv360_0822_retail, udata + bridge(vtable|udata) + skyrim(objrun), high
+const void* __cdecl NiParticleMeshesData_GetRTTI()
 {
     return &g_011f5f6c;
 }

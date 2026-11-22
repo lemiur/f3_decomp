@@ -162,11 +162,12 @@ struct FUN_00a7b2c0_shell
     void* vtable;
     unsigned int pad;
     char m_kName[1];
-    void FUN_00a7b2c0(NiStream& kStream);
+    void NiExtraData_SaveBinary(NiStream& kStream);
 };
 
 // @fnv 0x00a7b2c0
-void FUN_00a7b2c0_shell::FUN_00a7b2c0(NiStream& kStream)
+// pdb: NiExtraData::SaveBinary | NiExtraData.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(caller_sim), high
+void FUN_00a7b2c0_shell::NiExtraData_SaveBinary(NiStream& kStream)
 {
     reinterpret_cast<FUN_00a7b2c0_NiObject*>(this)->LinkObject(kStream);
     reinterpret_cast<FUN_00a7b2c0_NiStream*>(&kStream)->SerializeString(m_kName);

@@ -5,7 +5,8 @@
 extern "C" void __cdecl FUN_00d3f6a0(void* a, void* b, void* c, void* d);
 
 // @fnv 0x00d3fcc0
-void __stdcall FUN_00d3fcc0(void* apArg1, void* apArg2, void* apArg3, void* apArg4)
+// pdb: hkpSphereSphereAgent::getPenetrations | hkpSphereSphereAgent.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void __stdcall hkpSphereSphereAgent_getPenetrations(void* apArg1, void* apArg2, void* apArg3, void* apArg4)
 {
     FUN_00d3f6a0(apArg1, apArg2, apArg3, apArg4);
 }

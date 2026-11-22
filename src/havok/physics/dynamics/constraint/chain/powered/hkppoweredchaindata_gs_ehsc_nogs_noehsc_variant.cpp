@@ -378,7 +378,7 @@ struct PoweredChain : hkpPoweredChainData
     {
         return reinterpret_cast<ConstraintInfo*>(m_pConstraintInfo.m_data)[i];
     }
-    void FUN_00e3ba40(const QueryInput&, QueryOutput&);
+    void hkpPoweredChainData_buildJacobian(const QueryInput&, QueryOutput&);
 };
 // @f3 0x00a71810 (community match, verified in this file)
 struct QueryOutput;
@@ -395,7 +395,7 @@ struct F3ChainQuaternion {
 };
 struct F3ChainRotation {
  F3ChainQuaternion col[3];
- void FUN_00924b40(const F3ChainQuaternion*);
+ void hkRotation_set(const F3ChainQuaternion*);
 };
 struct F3ChainTransform { F3ChainRotation rotation; F3ChainQuaternion translation; };
 struct F3ConstraintInfo {
@@ -533,7 +533,8 @@ static __declspec(noinline) void FUN_00a71350(const F3ChainQuaternion& b, const 
     float dot=(float)(b.x*a.x+b.y*a.y+b.z*a.z+b.w*a.w);
     if(dot<0.0f) {out.x=-out.x;out.y=-out.y;out.z=-out.z;out.w=-out.w;}
 }
-void PoweredChain::FUN_00e3ba40(const QueryInput& rawInput, QueryOutput& output)
+// pdb: hkpPoweredChainData::buildJacobian | hkpPoweredChainData.obj | fnv360_0822_retail, objrun + bridge(caller_sim|vtable) + skyrim(caller_sim), high
+void PoweredChain::hkpPoweredChainData_buildJacobian(const QueryInput& rawInput, QueryOutput& output)
 {
     const F3QueryInput& input=reinterpret_cast<const F3QueryInput&>(rawInput);
     char* eventRuntime = input.runtime;
@@ -606,7 +607,7 @@ void PoweredChain::FUN_00e3ba40(const QueryInput& rawInput, QueryOutput& output)
             oldError.x=-oldError.x; oldError.y=-oldError.y; oldError.z=-oldError.z;
         }
         F3ChainRotation axes;
-        axes.FUN_00924b40(&rotationB);
+        axes.hkRotation_set(&rotationB);
         for (int axis = 0; axis < 3; ++axis)
         {
             F3ChainQuaternion direction = axes.col[axis];

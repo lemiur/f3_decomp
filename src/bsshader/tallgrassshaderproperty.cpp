@@ -282,7 +282,7 @@ struct NiVBSet
 {
     void Create(unsigned int key, void* val);
 };
-GeometryCacheEntry* __cdecl FUN_00b61980(IntegerDataBlock* p);
+GeometryCacheEntry* __cdecl TallGrassShaderProperty_GetCachedGeometry(IntegerDataBlock* p);
 void* __cdecl _memmove(void*, const void*, unsigned int);
 
 // Looks up a cached grass group for the cell, creating and attaching a new one to the node when none has remaining capacity, and returns its remaining count.
@@ -299,7 +299,7 @@ unsigned short __cdecl GetOrCreateGrassGroup(IntegerDataBlock* apGrassParam, int
     GeometryCacheEntry* pcachedGeom;
     FUN_00bd8f90* pgrassgroup;
     *apGrassGroup = 0;
-    pcachedGeom = FUN_00b61980(apGrassParam);
+    pcachedGeom = TallGrassShaderProperty_GetCachedGeometry(apGrassParam);
     if (!pcachedGeom)
         return 0;
     pGrassCache = 0;

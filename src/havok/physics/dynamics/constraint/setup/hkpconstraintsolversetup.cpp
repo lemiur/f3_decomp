@@ -872,7 +872,7 @@ struct NC88_Array {
 void __cdecl FUN_00d92900(NC88_ConstraintData* data, const NC88_QueryIn* in, S88_Atom* atom, int type);
 void __cdecl FUN_00d72190(S88_Atom* atom, const NC88_QueryIn& in, D88310Bool writeHeader, Native_S88_QueryOut_a0ac60& out);
 void __cdecl FUN_00d6f460(const S88_Atom* atoms, int atomsSize, const NC88_QueryIn& in, Native_S88_QueryOut_a0ac60& out);
-void __cdecl FUN_00a26440(NC88_ConstraintData*,const NC88_QueryIn*,S88_Atom*);
+void __cdecl hkSimpleContactConstraintData_fireCallbacks(NC88_ConstraintData*,const NC88_QueryIn*,S88_Atom*);
 void __cdecl FUN_00a00ec0(S88_Atom*,const NC88_QueryIn&,D88310Bool,Native_S88_QueryOut_a0ac60&);
 void __cdecl FUN_009fccc0(const S88_Atom*,int,const NC88_QueryIn&,Native_S88_QueryOut_a0ac60&);
 inline void S88_buildCurrentJacobianFromAtoms(S88_Atom* atoms,int size,const NC88_QueryIn& in,Native_S88_QueryOut_a0ac60& out) {
@@ -940,7 +940,7 @@ void __cdecl FUN_00d88760(S88_Resources& packS, S88_Instance** packConstraints, 
 
         if(instance->getInternal()->m_ucCallbackRequest&1) {
             NC88_ConstraintData* data=instance->getDataRw();
-            FUN_00a26440(data,&in,data->m_pAtom);
+            hkSimpleContactConstraintData_fireCallbacks(data,&in,data->m_pAtom);
         }
 
         if (instance->m_pConstraintInternal->m_ucCallbackRequest & 4)
@@ -2093,15 +2093,15 @@ void* InstanceN::getRuntime() const {return m_pConstraintInternal->m_pRuntime;}
 extern unsigned long DAT_010f3170,DAT_0116913c;
 extern const char str_00e854c0[],str_00e854b0[];
 extern void __cdecl FUN_00901f10(NativeCriticalArray*,int);
-extern VelocityAccumulatorN* __cdecl FUN_009abb20(const hkStepInfoD886*,EntityN* const*,int,int,VelocityAccumulatorN*);
-extern void __cdecl FUN_00a26440(ConstraintDataN*,QueryInN*,S88_Atom*);
+extern VelocityAccumulatorN* __cdecl hkRigidMotionUtilApplyForcesAndBuildAccumulators(const hkStepInfoD886*,EntityN* const*,int,int,VelocityAccumulatorN*);
+extern void __cdecl hkSimpleContactConstraintData_fireCallbacks(ConstraintDataN*,QueryInN*,S88_Atom*);
 extern void __cdecl FUN_00a00ec0(S88_Atom*,QueryInN*,D88310Bool,S88_QueryOut*);
 extern void __cdecl FUN_009fccc0(S88_Atom*,int,QueryInN*,S88_QueryOut*);
 extern int __cdecl FUN_00a14ee0(const void*,char*,VelocityAccumulatorN*,char*);
-extern void __cdecl FUN_00a79670(const void*,char*,char*,VelocityAccumulatorN*);
-extern int __cdecl FUN_009ac100(const void*,const hkStepInfoD886*,const VelocityAccumulatorN*,EntityN* const*,int,int);
+extern void __cdecl hkExportImpulsesAndRhs(const void*,char*,char*,VelocityAccumulatorN*);
+extern int __cdecl hkRigidMotionUtilApplyAccumulators(const void*,const hkStepInfoD886*,const VelocityAccumulatorN*,EntityN* const*,int,int);
 extern void __cdecl FUN_0099a2d0(const void*,EntityN* const*,int);
-extern void __cdecl FUN_00989600(void*,void*,int);
+extern void __cdecl hkpWorldCallbackUtil_fireContactImpulseLimitBreached(void*,void*,int);
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long);
 __forceinline NativeSolverMemory* NativeSolverMemory::current() { return static_cast<NativeSolverMemory*>(TlsGetValue(DAT_010f3170)); }
 void NativeCriticalArray::append(const ConstraintInternalN* c) {
@@ -2157,7 +2157,7 @@ static __forceinline void MakeNativeAccumulators(const hkStepInfoD886& stepInfo,
         unsigned offset=(i+1)*128;
         if(offset!=entities[i]->m_uiFilterInfo) entities[i]->m_uiFilterInfo=offset;
     }
-    VelocityAccumulatorN* accumEnd=FUN_009abb20(&stepInfo,entities,count,0xd0,accumulators+1);
+    VelocityAccumulatorN* accumEnd=hkRigidMotionUtilApplyForcesAndBuildAccumulators(&stepInfo,entities,count,0xd0,accumulators+1);
     accumEnd->m_type=3;
 
 }
@@ -2185,7 +2185,7 @@ static __forceinline void MakeNativeElements(QueryInN& in,
                 in.m_kBodyBLocalFrame=&b->getCollidable()->getTransform();
                 if(c->m_ucCallbackRequest&1) {
                     ConstraintDataN* data=c->m_pHavokConstraint->m_data;
-                    FUN_00a26440(data,&in,data->m_pAtom);
+                    hkSimpleContactConstraintData_fireCallbacks(data,&in,data->m_pAtom);
                 }
                 if(c->m_ucCallbackRequest&4) c->m_pHavokConstraint->m_data->BuildJacobianCallback(in);
             }
@@ -2266,12 +2266,12 @@ setPrimary:
         monitor->end=reinterpret_cast<char*>(value+1);
     }
     if(solved==1) {
-        FUN_00a79670(solverInfo,elementTemps,schemaStart,accumulators);
-        int res=FUN_009ac100(solverInfo,&stepInfo,accumulators+1,entities,count,0xd0);
+        hkExportImpulsesAndRhs(solverInfo,elementTemps,schemaStart,accumulators);
+        int res=hkRigidMotionUtilApplyAccumulators(solverInfo,&stepInfo,accumulators+1,entities,count,0xd0);
         FUN_0099a2d0(entities[0]->getWorld()->getCollisionInput(),entities,count);
         inactive=res;
         NativeBreachHeader* breaches=reinterpret_cast<NativeBreachHeader*>(schemaStart);
-        if(breaches->count) FUN_00989600(island.m_pOwningWorld,breaches+1,breaches->count);
+        if(breaches->count) hkpWorldCallbackUtil_fireContactImpulseLimitBreached(island.m_pOwningWorld,breaches+1,breaches->count);
     }
 
         if(extraStorage) NativeSolverMemory::current()->restore(extraStorage);

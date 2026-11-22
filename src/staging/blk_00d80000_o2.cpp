@@ -562,9 +562,9 @@ struct BinaryReader {
     }
 };
 
-int __cdecl FUN_00cb0fd0(const char*, const char*, unsigned int);
-const char* __cdecl FUN_00cb1150(const char*, int);
-const char* __cdecl FUN_00cb1140(const char*, int);
+int __cdecl hkString_strNcmp(const char*, const char*, unsigned int);
+const char* __cdecl BSTreadTransfInterpolator_IsEqual(const char*, int);
+const char* __cdecl BSBlendTreadTransfInterpolator_IsEqual(const char*, int);
 
 struct TypeEntry {
     const char* name;
@@ -620,27 +620,27 @@ struct StringBuf {
 // Matches typeName against known type prefixes and a type table, returning the corresponding type code or 0.
 // @fnv 0x00d86c00
 int __cdecl GetTypeCode(const char* typeName) {
-    if (FUN_00cb0fd0(typeName, "enum ", 5) == 0)
+    if (hkString_strNcmp(typeName, "enum ", 5) == 0)
         return 0x18;
-    if (FUN_00cb0fd0(typeName, "flags ", 6) == 0)
+    if (hkString_strNcmp(typeName, "flags ", 6) == 0)
         return 0x1f;
-    if (FUN_00cb0fd0(typeName, "hkArray<", 8) == 0)
+    if (hkString_strNcmp(typeName, "hkArray<", 8) == 0)
         return 0x16;
-    if (FUN_00cb0fd0(typeName, "hkSimpleArray<", 14) == 0)
+    if (hkString_strNcmp(typeName, "hkSimpleArray<", 14) == 0)
         return 0x1a;
-    if (FUN_00cb0fd0(typeName, "char*", 5) == 0)
+    if (hkString_strNcmp(typeName, "char*", 5) == 0)
         return 0x1d;
-    if (FUN_00cb0fd0(typeName, "hkStringPtr", 11) == 0)
+    if (hkString_strNcmp(typeName, "hkStringPtr", 11) == 0)
         return 0x21;
 
-    const char* star = FUN_00cb1150(typeName, '*');
+    const char* star = BSTreadTransfInterpolator_IsEqual(typeName, '*');
     if (star != 0 && star[1] == '\0')
         return 0x14;
 
     StringBuf buf;
     buf.FUN_00d61a50(typeName);
 
-    const char* bracket = FUN_00cb1140(typeName, '[');
+    const char* bracket = BSBlendTreadTransfInterpolator_IsEqual(typeName, '[');
     if (bracket != 0) {
         buf.FUN_00d61fc0(0, bracket - typeName);
     }
@@ -1226,11 +1226,13 @@ void __stdcall FUN_00d9fb40(unsigned char* output, int unused1)
 }
 
 // @fnv 0x00d9fca0
-void __stdcall FUN_00d9fca0(int) {
+// pdb: hkpCollisionAgent::createZombie | hkpCollisionAgent.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void __stdcall hkpCollisionAgent_createZombie(int) {
 }
 
 // @fnv 0x00d9fcb0
-void __stdcall FUN_00d9fcb0(int, int, int) {
+// pdb: hkpContinuousSimulation::assertThereIsNoCollisionInformationForEntities | hkpContinuousSimulation.obj | fnv360_0822_retail, vtable_prefix + bridge(vtable_prefix|vtable), high
+void __stdcall hkpContinuousSimulation_assertThereIsNoCollisionInformationForEntities(int, int, int) {
 }
 
 // @fnv 0x00d9fcc0
@@ -1242,7 +1244,8 @@ void __stdcall FUN_00d9fcd0(int) {
 }
 
 // @fnv 0x00d9fce0
-void __stdcall FUN_00d9fce0(int) {
+// pdb: hkpDisableEntityCollisionFilter::entityDeletedCallback | hkpDisableEntityCollisionFilter.obj | fnv360_0822_retail, objrun + skyrim(objrun), high
+void __stdcall hkpDisableEntityCollisionFilter_entityDeletedCallback(int) {
 }
 
 #include "fnv_asm_helpers.h"   // project x87 helpers (fnv_SinCos, fnv_FloatToInt), kept last so earlier code is unchanged
@@ -1701,9 +1704,9 @@ public:
     }
 };
 
-int __cdecl FUN_00cb0fd0(const char*, const char*, int) throw();
-int __cdecl FUN_00cb10d0(const char*) throw();
-const char* __cdecl FUN_00cb1140(const char*, int) throw();
+int __cdecl hkString_strNcmp(const char*, const char*, int) throw();
+int __cdecl hkString_strLen(const char*) throw();
+const char* __cdecl BSBlendTreadTransfInterpolator_IsEqual(const char*, int) throw();
 int __cdecl GetTypeCode(const char*) throw();
 
 struct HkTempAllocator {
@@ -1767,7 +1770,7 @@ extern HkMemRouter93e240* (__stdcall* const DAT_00d9b080)(unsigned long);
 void __cdecl FUN_00901e90(void* array, int capacity, int elementSize) throw();
 int __cdecl FUN_009232f0(const char* a, const char* b, int n) throw();
 int __cdecl FUN_009233f0(const char* s) throw();
-int __cdecl FUN_00923410(const char* s) throw();
+int __cdecl hkString_atoi(const char* s) throw();
 const char* __cdecl FUN_00923460(const char* s, int c) throw();
 void __cdecl FUN_009234e0(void* dst, const void* src, int n) throw();
 
@@ -1828,7 +1831,7 @@ int __cdecl GetTypeCodeFromString(const char* name) throw()
     if (openBracket) {
         int length = int(FUN_00923460(name, ']') - openBracket) - 1;
         HkString93e240 inner(openBracket + 1, length);
-        return FUN_00923410(inner.cString());
+        return hkString_atoi(inner.cString());
     }
     return 0;
 }
@@ -2554,10 +2557,10 @@ extern const __m128 DAT_011b6de0;
 namespace fnv_00d87aa0 {
 extern const char DAT_010d3cb4[];
 int __cdecl FUN_00cb0fa0(int a, int b);
-extern "C" int __cdecl FUN_00cb10d0(const char* s);
+extern "C" int __cdecl hkString_strLen(const char* s);
 int __cdecl FUN_00cb0f80(char* buf, const char* fmt, ...);
 int __cdecl FUN_00cb0f50(char* buf, int size, const char* fmt, va_list args);
-struct FUN_00cc0470_Stream { void FUN_00cc0470(const char* s, int n); };
+struct FUN_00cc0470_Stream { void hkOstream_write(const char* s, int n); };
 struct D87aa0Name { char m_name[32]; };
 struct D87aa0Reporter {
     int unk;
@@ -2585,12 +2588,12 @@ void __cdecl FUN_00d87aa0(D87aa0Reporter* apReporter, const char* id, const char
         va_start(args, fmt);
         if (*fmt == '#') {
             FUN_00cb0f80((char*)buf, DAT_010d3cb4, n);
-            apReporter->m_stream->FUN_00cc0470((char*)buf, FUN_00cb10d0((char*)buf));
+            apReporter->m_stream->hkOstream_write((char*)buf, hkString_strLen((char*)buf));
             FUN_00cb0f50((char*)buf, 0x400, fmt + 1, args);
         } else {
             FUN_00cb0f50((char*)buf, 0x400, fmt, args);
         }
-        apReporter->m_stream->FUN_00cc0470((char*)buf, FUN_00cb10d0((char*)buf));
+        apReporter->m_stream->hkOstream_write((char*)buf, hkString_strLen((char*)buf));
     }
 }
 }  // namespace fnv_00d87aa0
@@ -2705,7 +2708,7 @@ struct D94BodyF3 {
 struct D94ObjF3 {
     int FUN_00a21830(int a, D94Body* b, D94Body* c, char* d, int e);
 };
-void __cdecl FUN_009abb20(char* p, unsigned int a, unsigned int b, unsigned int c, unsigned int d);
+void __cdecl hkRigidMotionUtilApplyForcesAndBuildAccumulators(char* p, unsigned int a, unsigned int b, unsigned int c, unsigned int d);
 int __cdecl FUN_00d94df0(char* a1, D94Obj* a2, D94Body* a3)
 {
     D94TlsGetFn fn = (D94TlsGetFn)TlsGetValue;
@@ -2721,7 +2724,7 @@ int __cdecl FUN_00d94df0(char* a1, D94Obj* a2, D94Body* a3)
         tp->pCur = cur;
     }
     D94BodyF3* b = (D94BodyF3*)a3;
-    FUN_009abb20(a1 + 0x60, (unsigned int)(b->p10 + b->us14), b->us16, 0xd0, ((b->us14 + 1) << 7) + b->m08->m30);
+    hkRigidMotionUtilApplyForcesAndBuildAccumulators(a1 + 0x60, (unsigned int)(b->p10 + b->us14), b->us16, 0xd0, ((b->us14 + 1) << 7) + b->m08->m30);
     D94Tls* tp2 = (D94Tls*)fn(DAT_0126835c);
     D94Rec12* r = (D94Rec12*)tp2->pCur;
     if (r < (D94Rec12*)tp2->pEnd) {

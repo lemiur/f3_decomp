@@ -143,7 +143,7 @@ struct Reader {
  std::vector<unsigned char> bytes;
  int FUN_00ba92d0();
  float FUN_00ba92a0();
- FUN_00bc2e20* FUN_00bab1a0();
+ FUN_00bc2e20* CTreeFileAccess_ParseBranchParameter();
  bool readBool() {
   return bytes[position++]!=0;
  }
@@ -155,15 +155,15 @@ FUN_00bc4c70* __cdecl FUN_00bc4f60(Reader* reader) {
  int token=reader->FUN_00ba92d0();
  do {
   switch(token) {
-   case 6000: result->unk50.set(reader->FUN_00bab1a0());break;
-   case 6001: result->unk54.set(reader->FUN_00bab1a0());break;
-   case 6002: result->unk58.set(reader->FUN_00bab1a0());break;
-   case 6003: result->unk5c.set(reader->FUN_00bab1a0());break;
-   case 6017: result->unk70.set(reader->FUN_00bab1a0());break;
-   case 6004: result->unk60.set(reader->FUN_00bab1a0());break;
-   case 6005: result->unk64.set(reader->FUN_00bab1a0());break;
-   case 6006: result->unk68.set(reader->FUN_00bab1a0());break;
-   case 6007: result->unk6c.set(reader->FUN_00bab1a0());break;
+   case 6000: result->unk50.set(reader->CTreeFileAccess_ParseBranchParameter());break;
+   case 6001: result->unk54.set(reader->CTreeFileAccess_ParseBranchParameter());break;
+   case 6002: result->unk58.set(reader->CTreeFileAccess_ParseBranchParameter());break;
+   case 6003: result->unk5c.set(reader->CTreeFileAccess_ParseBranchParameter());break;
+   case 6017: result->unk70.set(reader->CTreeFileAccess_ParseBranchParameter());break;
+   case 6004: result->unk60.set(reader->CTreeFileAccess_ParseBranchParameter());break;
+   case 6005: result->unk64.set(reader->CTreeFileAccess_ParseBranchParameter());break;
+   case 6006: result->unk68.set(reader->CTreeFileAccess_ParseBranchParameter());break;
+   case 6007: result->unk6c.set(reader->CTreeFileAccess_ParseBranchParameter());break;
    case 6008: result->unk00=reader->FUN_00ba92d0();break;
    case 6009: result->unk04=reader->FUN_00ba92d0();break;
    case 6010: result->unk08=reader->FUN_00ba92a0();break;
@@ -333,12 +333,13 @@ struct FNV_GlobalState {
 extern FNV_GlobalState* DAT_011790c8;
 
 struct FNV_Bd2d40_Obj {
-    void FUN_00bd2d40();
+    void SetCompletionCallback();
 };
 
 extern volatile int DAT_00bd2d40_effect;
 
-__declspec(noinline) void FNV_Bd2d40_Obj::FUN_00bd2d40() {
+// pdb: BSAudioManager::SetCompletionCallback | BSAudioManager.obj | fnv360_1110_retail, call_seq + bridge(call_gap|call_gap), high
+__declspec(noinline) void FNV_Bd2d40_Obj::SetCompletionCallback() {
     DAT_00bd2d40_effect = 1;
 }
 
@@ -358,7 +359,7 @@ void FNV_Bd0510_Obj::FUN_00bd0510(FNV_Callback callback, int value) {
     int result = unk00;
     if (result != -1) {
         result = FUN_00bd6800(result, callback, value);
-        ((FNV_Bd2d40_Obj*)result)->FUN_00bd2d40();
+        ((FNV_Bd2d40_Obj*)result)->SetCompletionCallback();
     }
 }
 
@@ -870,27 +871,28 @@ struct Data1031 {
     int value44;
 };
 Data1031* __cdecl FUN_00bcb240(void* first, int third);
-void __cdecl FUN_00bce750(void* source, Output1031* output);
+void __cdecl FileFinder_PlatformGetFileTime(void* source, Output1031* output);
 void __cdecl FUN_00bc77c0(void* source, Output1031* output, int third) {
     memset(output, 0, sizeof(*output));
     Data1031* data = FUN_00bcb240(source, third);
     if (data) source = &data->value44;
-    FUN_00bce750(source, output);
+    FileFinder_PlatformGetFileTime(source, output);
 }
 }   // namespace f3m_00bc77c0
 
 // @f3 0x00bd2cf0 (community match, verified in this file)
 namespace f3m_00bd2cf0 {
-// FUN_00bd2cf0 -- posts event 0x26 with one value and always succeeds.
+// BSAudioManager_Release -- posts event 0x26 with one value and always succeeds.
 // Same shape as AFEventQueue::FUN_00bd2ca0 in the pack unit (matched there);
 // this one has a single dword parameter, zero value/extra, and returns true.
 
 struct AFEventQueueDerived : AFEventQueue
 {
-    bool FUN_00bd2cf0(int arg);
+    bool BSAudioManager_Release(int arg);
 };
 
-bool AFEventQueueDerived::FUN_00bd2cf0(int arg)
+// pdb: BSAudioManager::Release | BSAudioManager.obj | fnv360_0822_debug, call_seq + bridge(call_gap|call_seq), high
+bool AFEventQueueDerived::BSAudioManager_Release(int arg)
 {
     Post(0x26, arg, 0, 0, AFRefHandle(0), DAT_0108ec68);
     return true;
@@ -1550,10 +1552,11 @@ struct ThisAD
     const char* FUN_00bc9260(int);
     void FUN_00bce980(BSHashA*);
     int FUN_00bce9e0(char*, const char*, BSHashA*);
-    int FUN_00bc9a80();
+    int Archive_FindNewerAndInvalidate();
 };
 // Clear matching archive entries; FNV reference adapted to Fallout 3.
-int ThisAD::FUN_00bc9a80()
+// pdb: Archive::FindNewerAndInvalidate | Archive.obj | fnv360_0822_retail, udata, high
+int ThisAD::Archive_FindNewerAndInvalidate()
 {
     int count = 0;
     int i;
@@ -1729,7 +1732,7 @@ struct ArcInflateReadState {
     unsigned char* m_pNextOutputByte;
     unsigned int m_uiAvailableOutputBytes;
 };
-int __cdecl FUN_00b9be60(ArcInflateReadState*,int);
+int __cdecl inflate(ArcInflateReadState*,int);
 int __cdecl FUN_00b9d230(ArcInflateReadState*);
 struct DecompReadFile {
     unsigned int unk000;
@@ -1867,7 +1870,7 @@ unsigned int DecompReadFile::FUN_00bca160(char* buffer, unsigned int size)
 
                 if (available != 0)
                 {
-                    status = FUN_00b9be60(state, 2);
+                    status = inflate(state, 2);
                     if (status == -2 || status == 2 || status == -3 || status == -4)
                     {
                         FUN_00b9d230(state);
@@ -3637,7 +3640,7 @@ struct QAudioMgr
     int unk10;
     QSoundList unk14;
 
-    void FUN_00bcff30(const char* name, unsigned int flags);
+    void BSAudio_Precache(const char* name, unsigned int flags);
 };
 
 struct QAudioThread
@@ -3660,16 +3663,16 @@ void QAudioMenu::FUN_00bd71f0(int unused)
 {
     if (!*((unsigned char*)this + 0x110))
     {
-        DAT_011790c8->FUN_00bcff30("UIMenuMode", 0);
-        DAT_011790c8->FUN_00bcff30("UIMenuFocus", 0x20000);
-        DAT_011790c8->FUN_00bcff30("UIMenuCancel", 0x20001);
-        DAT_011790c8->FUN_00bcff30("UIMenuTab", 0x20000);
-        DAT_011790c8->FUN_00bcff30("UIMenuOK", 0x20001);
-        DAT_011790c8->FUN_00bcff30("UIMenuPrevNext", 1);
-        DAT_011790c8->FUN_00bcff30("WPNRifleAssaultFire3D", 0x102);
-        DAT_011790c8->FUN_00bcff30("FXBulletImpactConc", 0x102);
-        DAT_011790c8->FUN_00bcff30("UILoadScreenMicroFiche01", 0x101);
-        DAT_011790c8->FUN_00bcff30("UILoadScreenInitial", 0x101);
+        DAT_011790c8->BSAudio_Precache("UIMenuMode", 0);
+        DAT_011790c8->BSAudio_Precache("UIMenuFocus", 0x20000);
+        DAT_011790c8->BSAudio_Precache("UIMenuCancel", 0x20001);
+        DAT_011790c8->BSAudio_Precache("UIMenuTab", 0x20000);
+        DAT_011790c8->BSAudio_Precache("UIMenuOK", 0x20001);
+        DAT_011790c8->BSAudio_Precache("UIMenuPrevNext", 1);
+        DAT_011790c8->BSAudio_Precache("WPNRifleAssaultFire3D", 0x102);
+        DAT_011790c8->BSAudio_Precache("FXBulletImpactConc", 0x102);
+        DAT_011790c8->BSAudio_Precache("UILoadScreenMicroFiche01", 0x101);
+        DAT_011790c8->BSAudio_Precache("UILoadScreenInitial", 0x101);
         *((unsigned char*)this + 0x110) = 1;
     }
     FUN_00bd1690();
@@ -4896,7 +4899,8 @@ int FUN_00bcd0e0_Obj::FUN_00bcd0e0(LARGE_INTEGER* out) {
 // @f3 0x00bcd140 (community match, verified in this file)
 #include <windows.h>
 namespace f3m_00bcd140 {
-int FUN_00bcd140(const char* path)
+// pdb: BSSystemFile::DeleteFileA | BSSystemFile_Xenon.obj | fnv360_0822_retail, call_gap + bridge(caller|caller) + skyrim(call_gap_sim), high
+int BSSystemFile_DeleteFileA(const char* path)
 {
     return DeleteFileA(path) ? 0 : 4;
 }
@@ -6719,7 +6723,8 @@ inline unsigned long TextLength(const char* text)
 }
 // Builds a comma-separated list of .bsa files from Plugins.txt, loads each archive and registers it by type, returning false if any archive fails to load.
 // @fnv 0x00af4550
-bool __cdecl FUN_00bcc370()
+// pdb: ArchiveManager::OpenMasterArchives | Archive.obj | fnv360_0822_retail, ustr + bridge(ustr|ustr) + skyrim(ustr), high
+bool __cdecl ArchiveManager_OpenMasterArchives()
 {
     _iobuf* flags;
     char extra[260];
@@ -8762,10 +8767,11 @@ struct Win32File
     HANDLE m_handle;
 
     int FUN_00bcd070(int lo, int hi, int origin, __int64* pos);
-    int FUN_00bcd160(const char* name);
+    int BSSystemFile_DoOpen(const char* name);
 };
 
-int Win32File::FUN_00bcd160(const char* name)
+// pdb: BSSystemFile::DoOpen | BSSystemFile_Xenon.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(caller_sim), high
+int Win32File::BSSystemFile_DoOpen(const char* name)
 {
     DWORD access = 0;
     DWORD disposition = 0;
@@ -9405,7 +9411,7 @@ struct ArchiveNode
     ArchiveNode* m_pkNext;
 };
 
-const char* __cdecl FUN_00bce940(const char* apFileName);
+const char* __cdecl ArchiveManager_TrimFileName(const char* apFileName);
 unsigned int __cdecl FUN_00bc8b30(const char* apExtension);
 void __cdecl FUN_00bccca0(const char* apPath, FileNameHash& arDirHash, FileNameHash& arFileHash);
 
@@ -9433,7 +9439,7 @@ void* __cdecl FUN_00bcc7a0(const char* apFileName, unsigned int auiBufferSize, u
     FileNameHash kFileNameHash;
     FileNameHash kDirectoryNameHash;
 
-    apFileName = FUN_00bce940(apFileName);
+    apFileName = ArchiveManager_TrimFileName(apFileName);
     if (aeArchiveTypeFlags == 0xffff)
         aeArchiveTypeFlags = FUN_00bc8b30(apFileName + strlen(apFileName) - 3);
     FUN_00bccca0(apFileName, kDirectoryNameHash, kFileNameHash);
@@ -10232,7 +10238,7 @@ struct Archive
 extern BSSimpleList<NiPointer<Archive> >* DAT_011786f0;
 extern NiPointer<Archive> DAT_01178700;
 
-const char* __cdecl FUN_00bce940(const char* apPath);
+const char* __cdecl ArchiveManager_TrimFileName(const char* apPath);
 unsigned int __cdecl FUN_00bc8b30(const char* apExtension);
 
 Archive* __cdecl FUN_00bcb240(const char* apPath, unsigned int aeArchiveTypeFlags)
@@ -10243,7 +10249,7 @@ Archive* __cdecl FUN_00bcb240(const char* apPath, unsigned int aeArchiveTypeFlag
     unsigned int uiFileIndex;
     FileNameHash kFileNameHash;
     FileNameHash kDirectoryNameHash;
-    apPath = FUN_00bce940(apPath);
+    apPath = ArchiveManager_TrimFileName(apPath);
     if (aeArchiveTypeFlags == 0xffff)
         aeArchiveTypeFlags = FUN_00bc8b30(apPath + strlen(apPath) - 3);
     FileNameHash::CreateDirectoryAndFileHashes(apPath, kDirectoryNameHash, kFileNameHash);
@@ -11097,7 +11103,8 @@ extern double DAT_011785c0;
 extern const double DAT_00dc2748;
 namespace f3m_00bc6e80 {
 namespace f3m_00bc6e80 {
-float FUN_00bc6e80() {
+// pdb: Random::Raw | RobertDavies_Random.obj | fnv360_0822_retail, udata, high
+float Random_Raw() {
     int seed = (int)DAT_011785c0;
     int value = seed * 16807 - (seed / 127773) * 2147483647;
     if (value <= 0) value += 2147483647;
@@ -12290,11 +12297,12 @@ struct SoundHandle {
     int id;
     int unk04;
     int state;
-    bool FUN_00bd0390();
+    bool BSSoundHandle_IsValid();
 };
 }
 
-bool f3m_00bd0390::SoundHandle::FUN_00bd0390()
+// pdb: BSSoundHandle::IsValid | BSSoundHandle.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc + skyrim(call_seq), high
+bool f3m_00bd0390::SoundHandle::BSSoundHandle_IsValid()
 {
     if (id == -1)
         return false;
@@ -12337,11 +12345,12 @@ struct SoundHandle {
     int id;
     int unk04;
     int state;
-    bool FUN_00bd0140();
+    bool BSSoundHandle_Stop();
 };
 }
 
-bool f3m_00bd0140::SoundHandle::FUN_00bd0140()
+// pdb: BSSoundHandle::Stop | BSSoundHandle.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap) + skyrim(call_seq), high
+bool f3m_00bd0140::SoundHandle::BSSoundHandle_Stop()
 {
     if (id == -1)
         return false;
@@ -12519,7 +12528,8 @@ struct SoundHandle {
 };
 }
 
-void __stdcall FUN_00bcf590(int a, int b, int c)
+// pdb: BSAudio::MuteType | BSAudio.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap_sim), high
+void __stdcall BSAudio_MuteType(int a, int b, int c)
 {
     f3m_00bcf590::FUN_00bd6800()->FUN_00bd3150(a, b, c);
 }
@@ -12575,22 +12585,23 @@ namespace f3m_00bd03b0 {
 namespace f3m_00bd03b0 {
 struct Point3 { float x; float y; float z; };
 struct AudioManager {
-    bool FUN_00bd2cf0(int id);
+    bool BSAudioManager_Release(int id);
 };
 AudioManager* __cdecl FUN_00bd6800();   // audio manager singleton
 struct SoundHandle {
     int id;
     bool flag04;
     int state;
-    bool FUN_00bd03b0();
+    bool BSSoundHandle_Release();
 };
 }
 
-bool f3m_00bd03b0::SoundHandle::FUN_00bd03b0()
+// pdb: BSSoundHandle::Release | BSSoundHandle.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_gap) + skyrim(call_seq), high
+bool f3m_00bd03b0::SoundHandle::BSSoundHandle_Release()
 {
     if (id == -1)
         return false;
-    bool done = FUN_00bd6800()->FUN_00bd2cf0(id);
+    bool done = FUN_00bd6800()->BSAudioManager_Release(id);
     if (done)
         id = -1;
     return done;
@@ -13064,9 +13075,10 @@ struct Finder {
     int unk004; int unk008; int unk00c; int unk010; int unk014; int unk018; int unk01c; int unk020; int unk024; int unk028; int unk02c; int unk030; int unk034; int unk038; int unk03c; int unk040; int unk044; int unk048; int unk04c; int unk050; int unk054; int unk058; int unk05c; int unk060; int unk064; int unk068; int unk06c; int unk070; int unk074; int unk078; int unk07c; int unk080; int unk084; int unk088; int unk08c; int unk090; int unk094; int unk098; int unk09c; int unk0a0; int unk0a4; int unk0a8; int unk0ac; int unk0b0; int unk0b4; int unk0b8; int unk0bc; int unk0c0; int unk0c4; int unk0c8; int unk0cc; int unk0d0; int unk0d4; int unk0d8; int unk0dc; int unk0e0; int unk0e4; int unk0e8; int unk0ec; int unk0f0; int unk0f4; int unk0f8; int unk0fc; int unk100; int unk104; int unk108; int unk10c; int unk110; int unk114; int unk118; int unk11c; int unk120; int unk124; int unk128; int unk12c; int unk130; int unk134; int unk138; int unk13c; int unk140;
     char pattern[0x104];
     int found;
-    int FUN_00bce100(const char* path);
+    int BSSystemDir_DoOpen(const char* path);
 };
-int Finder::FUN_00bce100(const char* path)
+// pdb: BSSystemDir::DoOpen | BSSystemDir_Xenon.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_seq), high
+int Finder::BSSystemDir_DoOpen(const char* path)
 {
     if (!path)
         return 2;
@@ -13403,7 +13415,8 @@ int __cdecl FUN_00c02e76(const char* text, const char* pattern, int length);
 namespace ArchiveLookup
 {
 
-const char* __cdecl FUN_00bce940(const char* apFileName)
+// pdb: ArchiveManager::TrimFileName | Archive_Xenon.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc + skyrim(caller_sim), high
+const char* __cdecl ArchiveManager_TrimFileName(const char* apFileName)
 {
     const char* result = apFileName;
 
@@ -13889,7 +13902,7 @@ extern double DAT_011785c0;
 extern float DAT_011783c0[128];
 namespace f3m_00bc72b0 {
 
-float __cdecl FUN_00bc6e80();
+float __cdecl Random_Raw();
 
 void __cdecl FUN_00bc72b0(double seed)
 {
@@ -13897,7 +13910,7 @@ void __cdecl FUN_00bc72b0(double seed)
         throw std::logic_error("Newran: seed out of range");
     DAT_011785c0 = static_cast<long>(seed * 2147483648L);
     for (int i = 0; i < 128; ++i)
-        DAT_011783c0[i] = FUN_00bc6e80();
+        DAT_011783c0[i] = Random_Raw();
 }
 }   // namespace f3m_00bc72b0
 
@@ -13932,13 +13945,13 @@ void __cdecl FUN_00bc5f80()
 extern double DAT_011785c0;
 extern float DAT_011783c0[128];
 namespace f3m_00bc7180 {
-double __cdecl FUN_00bc6e80();
+double __cdecl Random_Raw();
 float __cdecl FUN_00bc7180() {
     if (DAT_011785c0 == 0.0)
         throw std::logic_error("Random number generator not initialised");
-    int i = (int)(FUN_00bc6e80() * 128.0);
+    int i = (int)(Random_Raw() * 128.0);
     float sample = DAT_011783c0[i];
-    DAT_011783c0[i] = (float)FUN_00bc6e80();
+    DAT_011783c0[i] = (float)Random_Raw();
     return sample;
 }
 }   // namespace f3m_00bc7180
@@ -14806,7 +14819,7 @@ extern __declspec(thread) int g_tls[];
 namespace f3m_00bcfaf0 {
 
 struct Mgr {
-    void FUN_00bd0ef0();
+    void BSAudioManager_StartAudioThread();
     void FUN_00bd3c30();
 };
 Mgr* __cdecl FUN_00bd6800();
@@ -14835,7 +14848,7 @@ void Thing::FUN_00bcfaf0(bool value)
             if (value)
             {
                 if (!f06)
-                    FUN_00bd6800()->FUN_00bd0ef0();
+                    FUN_00bd6800()->BSAudioManager_StartAudioThread();
             }
             else
             {
@@ -18158,7 +18171,8 @@ unsigned context;};
 __declspec(thread) ThreadData threadData;
 struct ScopedContext {unsigned previous;ScopedContext(unsigned v){previous=threadData.context;threadData.context=v;}~ScopedContext(){threadData.context=previous;}};
 struct AudioManager {void FUN_00bd40e0(char*,unsigned);};AudioManager* __cdecl FUN_00bd6800();
-struct Audio {void FUN_00bcff30(char*,unsigned);};void Audio::FUN_00bcff30(char* file,unsigned size){ScopedContext ctx(11);FUN_00bd6800()->FUN_00bd40e0(file,size);}
+// pdb: BSAudio::Precache | BSAudio.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_seq), high
+struct Audio {void BSAudio_Precache(char*,unsigned);};void Audio::BSAudio_Precache(char* file,unsigned size){ScopedContext ctx(11);FUN_00bd6800()->FUN_00bd40e0(file,size);}
 }
 }   // namespace f3m_00bcff30
 
@@ -18638,7 +18652,8 @@ unsigned int unk0a0;
 FUN_00bd7d70(); ~FUN_00bd7d70();
 };
 extern FUN_00bd7d70* DAT_011790c8;
-void __cdecl FUN_00bd76b0() {static FUN_00bd7d70 obj; DAT_011790c8=&obj;}
+// pdb: BSAudio::QCreate | BSAudio_Xenon.obj | fnv360_0822_retail, udata, high
+void __cdecl BSAudio_QCreate() {static FUN_00bd7d70 obj; DAT_011790c8=&obj;}
 }
 
 // @f3 0x00bcffb0 (community match, verified in this file)
@@ -18918,7 +18933,8 @@ FUN_00bd39d0* FUN_00bd6800() { static FUN_00bd39d0 instance; return &instance; }
 // @f3 0x00bce750 (community match, verified in this file)
 #include <windows.h>
 namespace f3m_00bce750 {
-bool FUN_00bce750(const char* path, FILETIME* apOutTime)
+// pdb: FileFinder::PlatformGetFileTime | FileFinder_Xenon.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+bool FileFinder_PlatformGetFileTime(const char* path, FILETIME* apOutTime)
 {
     void* h;
     WIN32_FIND_DATAA findData;
@@ -20620,7 +20636,7 @@ struct Bce1a0Owner
     int unk08;
     unsigned char unk0C;
 
-    int FUN_00bcd160(int value);
+    int BSSystemFile_DoOpen(int value);
     Bce1a0Owner* FUN_00bce1a0(int first, int second, int third, unsigned char fourth);
 };
 
@@ -20630,7 +20646,7 @@ Bce1a0Owner* Bce1a0Owner::FUN_00bce1a0(int first, int second, int third, unsigne
     unk08 = third;
     unk00 = 0;
     unk0C = fourth;
-    unk00 = FUN_00bcd160(first);
+    unk00 = BSSystemFile_DoOpen(first);
     return this;
 }
 }   // namespace f3m_00bce1a0
@@ -22507,7 +22523,8 @@ extern unsigned DAT_011786f4;
 int __cdecl FUN_00c007fc(char*,unsigned,const char*);
 
 // @fnv 0x00af43a0
-void __cdecl FUN_00bc8960(bool abUseArchives, char* apMasterFilePath, char* apArchiveList,
+// pdb: ArchiveManager::Init | Archive.obj | fnv360_0822_retail, udata, high
+void __cdecl ArchiveManager_Init(bool abUseArchives, char* apMasterFilePath, char* apArchiveList,
                           unsigned int aiFileBufferSize)
 {
     int ilistSize;
@@ -23466,12 +23483,12 @@ struct TLSData {char pad[0x298];int context;};
 __declspec(thread) TLSData tls;
 struct Scope {int old;Scope(int n){old=tls.context;tls.context=n;}~Scope(){tls.context=old;}};
 struct Sound {int id,state,flags;};
-struct Manager {Sound FUN_00bd65f0(const char*,unsigned int);};
+struct Manager {Sound BSAudioManager_GetSoundHandleByName(const char*,unsigned int);};
 Manager* __cdecl FUN_00bd6800();
 struct Audio {Sound FUN_00bcfcd0(const char*,unsigned int);};
 Sound Audio::FUN_00bcfcd0(const char* name,unsigned int flags) {
  Scope scope(11);
- return FUN_00bd6800()->FUN_00bd65f0(name,flags);
+ return FUN_00bd6800()->BSAudioManager_GetSoundHandleByName(name,flags);
 }
 }
 }   // namespace f3m_00bcfcd0
@@ -25211,7 +25228,7 @@ struct InitView_bce160 {
     unsigned int unk24c;
     unsigned int unk250;
     unsigned int unk254;
-    void FUN_00bce100(unsigned int);
+    void BSSystemDir_DoOpen(unsigned int);
     InitView_bce160* FUN_00bce160(unsigned int);
 };
 InitView_bce160* InitView_bce160::FUN_00bce160(unsigned int value)
@@ -25219,7 +25236,7 @@ InitView_bce160* InitView_bce160::FUN_00bce160(unsigned int value)
     unk248 = 0;
     unk250 = 0;
     unk254 = 0;
-    FUN_00bce100(value);
+    BSSystemDir_DoOpen(value);
     return this;
 }
 }   // namespace f3m_00bce160
@@ -25260,7 +25277,7 @@ struct AudioThread {
  unsigned int unk44;
  bool running;
  void Signal(){if(running)pending.Signal();}
- void FUN_0086cf00();
+ void BSThread_Close();
 };
 struct Audio {
  unsigned int unk000;
@@ -25340,7 +25357,7 @@ struct Audio {
 void Audio::FUN_00bd3cc0(){
  if(thread)thread->Signal();
  FUN_00bd24f0(0x34,0,0,0,0,DAT_0108ec68);
- if(thread){thread->done.Wait();thread->FUN_0086cf00();}
+ if(thread){thread->done.Wait();thread->BSThread_Close();}
 }
 }
 
@@ -25772,9 +25789,10 @@ struct Owner {
     int unk110;
     int handle;
     Worker* worker;
-    void FUN_00bd0ef0();
+    void BSAudioManager_StartAudioThread();
 };
-void Owner::FUN_00bd0ef0()
+// pdb: BSAudioManager::StartAudioThread | BSAudioManager.obj | fnv360_0822_retail, ustr + bridge(ustr|ustr) + skyrim(ustr), high
+void Owner::BSAudioManager_StartAudioThread()
 {
     if (!worker)
         return;
@@ -30979,7 +30997,7 @@ struct Sub14 {
 };
 
 struct Mgr {
-    void FUN_00bd0ef0();
+    void BSAudioManager_StartAudioThread();
 };
 
 Mgr* __cdecl FUN_00bd6800();
@@ -31011,7 +31029,7 @@ void Thing::FUN_00bcf9b0(int unused)
     } else {
         sub14.FUN_00bd7760();
         if (f06)
-            FUN_00bd6800()->FUN_00bd0ef0();
+            FUN_00bd6800()->BSAudioManager_StartAudioThread();
         f05 = true;
     }
 }
@@ -31114,7 +31132,7 @@ class NiFile : public NiBinaryStream
 class BSFile : public NiFile
 {
   public:
-    unsigned int FUN_0048be50(void*,unsigned int);
+    unsigned int NiBinaryStream_Read(void*,unsigned int);
     virtual bool FUN_00bcde70(bool, bool);           // v20
     virtual unsigned int GetSize();          // v28
     // MSVC places overloads in reverse declaration order: Read(char) is v2C, Read(wchar_t) v30
@@ -31349,7 +31367,7 @@ struct FUN_00bcb7c0 : Header077, FUN_00bcd300, NiRefObject077
     NameOffsetList077* fileOffsets;
     FUN_00bcb7c0(const char*, int, bool, bool);
     virtual ~FUN_00bcb7c0();
-    void FUN_00bc9a80();
+    void Archive_FindNewerAndInvalidate();
     bool FUN_00bcdd30(unsigned int);
     __forceinline void ReadArray(FUN_00bc8760* buffer, unsigned int count)
     {
@@ -31408,7 +31426,7 @@ FUN_00bcb7c0::FUN_00bcb7c0(const char* path, int mode, bool headerOnly, bool pre
     {
         unsigned int elapsedTmp = GetTickCount();
         entries = new FUN_00bc8760[Count()];
-        FUN_0048be50(entries, Count()*sizeof(FUN_00bc8760));
+        NiBinaryStream_Read(entries, Count()*sizeof(FUN_00bc8760));
         if (Has(1) && FUN_00bc87b0())
         {
             SetStatus<0x10>(true);
@@ -31430,14 +31448,14 @@ FUN_00bcb7c0::FUN_00bcb7c0(const char* path, int mode, bool headerOnly, bool pre
                 ArcLoadChars(*this, &length, 1);
                 if (FUN_00bc87b0())
                 {
-                    FUN_0048be50(directoryNames + dirOffset, length);
+                    NiBinaryStream_Read(directoryNames + dirOffset, length);
                     directoryOffsets[i].offset = dirOffset;
                     dirOffset += length;
                 }
                 else
                 {
                     char name[256];
-                    FUN_0048be50(name, length);
+                    NiBinaryStream_Read(name, length);
                 }
             }
             FUN_00bc8760* files = new FUN_00bc8760[FileCount(i)];
@@ -31450,7 +31468,7 @@ FUN_00bcb7c0::FUN_00bcb7c0(const char* path, int mode, bool headerOnly, bool pre
             namesOffset = TruePos();
             if (FUN_00bc87b0())
             {
-                FUN_0048be50(fileNames, FileNamesSize());
+                NiBinaryStream_Read(fileNames, FileNamesSize());
                 for (unsigned int i = 0; i < Count(); ++i)
                 {
                     fileOffsets[i].offsets = new NameOffset077[GetEntry(i)->size];
@@ -31472,7 +31490,7 @@ FUN_00bcb7c0::FUN_00bcb7c0(const char* path, int mode, bool headerOnly, bool pre
         if (DAT_01069081)
         {
             unsigned int uiElapsedTime = GetTickCount();
-            FUN_00bc9a80();
+            Archive_FindNewerAndInvalidate();
             uiElapsedTime = GetTickCount() - uiElapsedTime;
         }
         if (prepare)
@@ -31808,8 +31826,9 @@ unsigned Object::FUN_00bce040(bool* finished){if(!handle){handle=FindFirstFileA(
 extern int DAT_00e2c4d0,DAT_00e2c4d4,DAT_00e2c4d8;
 namespace f3m_00bcd270 {
 namespace Seekbcd270 {
-struct Object {virtual void v00(); virtual void v04(); virtual void v08(); virtual void v0c(); virtual void v10(); virtual void v14(); virtual void v18(); virtual void v1c(); virtual void v20(); virtual int length();int unk04; int unk08; int unk0c; int unk10; int unk14; int unk18; int unk1c; int unk20; int unk24; int direct;int unk02c; int unk030; int unk034; int unk038; int unk03c; int unk040; int unk044; int unk048; int unk04c; int unk050; int unk054; int unk058; int unk05c; int unk060; int unk064; int unk068; int unk06c; int unk070; int unk074; int unk078; int unk07c; int unk080; int unk084; int unk088; int unk08c; int unk090; int unk094; int unk098; int unk09c; int unk0a0; int unk0a4; int unk0a8; int unk0ac; int unk0b0; int unk0b4; int unk0b8; int unk0bc; int unk0c0; int unk0c4; int unk0c8; int unk0cc; int unk0d0; int unk0d4; int unk0d8; int unk0dc; int unk0e0; int unk0e4; int unk0e8; int unk0ec; int unk0f0; int unk0f4; int unk0f8; int unk0fc; int unk100; int unk104; int unk108; int unk10c; int unk110; int unk114; int unk118; int unk11c; int unk120; int unk124; int unk128; int unk12c; int unk130; int unk134; int unk138; int unk13c; int unk140; int unk144; int unk148; int unk14c; int position;void FUN_0089ef00(int,int);void FUN_00bcd270(int,int);};
-void Object::FUN_00bcd270(int offset,int mode){int target;if(mode==DAT_00e2c4d0){target=offset;if(!direct){mode=DAT_00e2c4d4;offset-=position;}}else if(mode==DAT_00e2c4d4)target=position+offset;else if(mode==DAT_00e2c4d8)target=length()-offset;else target=position;if(target!=position){FUN_0089ef00(offset,mode);position=target;}}
+struct Object {virtual void v00(); virtual void v04(); virtual void v08(); virtual void v0c(); virtual void v10(); virtual void v14(); virtual void v18(); virtual void v1c(); virtual void v20(); virtual int length();int unk04; int unk08; int unk0c; int unk10; int unk14; int unk18; int unk1c; int unk20; int unk24; int direct;int unk02c; int unk030; int unk034; int unk038; int unk03c; int unk040; int unk044; int unk048; int unk04c; int unk050; int unk054; int unk058; int unk05c; int unk060; int unk064; int unk068; int unk06c; int unk070; int unk074; int unk078; int unk07c; int unk080; int unk084; int unk088; int unk08c; int unk090; int unk094; int unk098; int unk09c; int unk0a0; int unk0a4; int unk0a8; int unk0ac; int unk0b0; int unk0b4; int unk0b8; int unk0bc; int unk0c0; int unk0c4; int unk0c8; int unk0cc; int unk0d0; int unk0d4; int unk0d8; int unk0dc; int unk0e0; int unk0e4; int unk0e8; int unk0ec; int unk0f0; int unk0f4; int unk0f8; int unk0fc; int unk100; int unk104; int unk108; int unk10c; int unk110; int unk114; int unk118; int unk11c; int unk120; int unk124; int unk128; int unk12c; int unk130; int unk134; int unk138; int unk13c; int unk140; int unk144; int unk148; int unk14c; int position;void FUN_0089ef00(int,int);void BSFile_Seek(int,int);};
+// pdb: BSFile::Seek | BSFile_Xenon.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc + skyrim(caller_sim), high
+void Object::BSFile_Seek(int offset,int mode){int target;if(mode==DAT_00e2c4d0){target=offset;if(!direct){mode=DAT_00e2c4d4;offset-=position;}}else if(mode==DAT_00e2c4d4)target=position+offset;else if(mode==DAT_00e2c4d8)target=length()-offset;else target=position;if(target!=position){FUN_0089ef00(offset,mode);position=target;}}
 }
 }   // namespace f3m_00bcd270
 
@@ -32109,9 +32128,10 @@ struct SoundHandle {
 };
 struct AudioManager {
     SoundHandle FUN_00bd3720(const char* path, unsigned int flags, int value);
-    SoundHandle FUN_00bd65f0(const char* name, unsigned int flags);
+    SoundHandle BSAudioManager_GetSoundHandleByName(const char* name, unsigned int flags);
 };
-SoundHandle AudioManager::FUN_00bd65f0(const char* name, unsigned int flags)
+// pdb: BSAudioManager::GetSoundHandleByName | BSAudioManager.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_seq), high
+SoundHandle AudioManager::BSAudioManager_GetSoundHandleByName(const char* name, unsigned int flags)
 {
     unsigned int outFlags = 0;
     if (DAT_011790c8->unk04) {
@@ -33811,7 +33831,7 @@ void FUN_00bcb4c0(Task2511::FileMatchList* apList, const char* apPath, const cha
     if (!DAT_011786f0)
         return;
 
-    apPath = FUN_00bce940(apPath);
+    apPath = ArchiveManager_TrimFileName(apPath);
 
     char acDirectory[260];
     strcpy_s(acDirectory, 260, apDirectory);
@@ -34974,7 +34994,7 @@ struct PathArchiveNode {
     PathArchivePointer value;
     PathArchiveNode* next;
 };
-const char* FUN_00bce940(const char*);
+const char* ArchiveManager_TrimFileName(const char*);
 extern PathArchiveNode* DAT_011786f0;
 extern PathArchivePointer DAT_01178700;
 struct Random { unsigned FUN_0086c4b0(unsigned); };
@@ -34986,7 +35006,7 @@ inline const char* ResolveName(ArchiveDirectory& dir, PathArchivePointer& archiv
 }
 bool FUN_00bca900(const char* path, char* output, unsigned mask) {
     unsigned directoryIndex = 0;
-    path = FUN_00bce940(path);
+    path = ArchiveManager_TrimFileName(path);
     unsigned length = strlen(path);
     if (mask == 65535 && path[length - 1] != '\\') mask = ExtensionType(path);
     ArchiveDirectoryKey key(path, 1);

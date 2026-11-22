@@ -131,11 +131,12 @@ FUN_00c24c90::FUN_00c24c90() : m70(0), m74(0), m78(0)
 
 struct FUN_00c25cd0_shell : BSStripPSysData
 {
-    bool __thiscall FUN_00c25cd0(NiObject* pkObject);
+    bool __thiscall BSStripPSysData_IsEqual(NiObject* pkObject);
 };
 // Compares the base fields and then usMaxPointCount, fStartCapSize, fEndCapSize and bDoZPrePass against another BSStripPSysData, returning true if all match.
 // @fnv 0x00c25cd0
-bool __thiscall FUN_00c25cd0_shell::FUN_00c25cd0(NiObject* pkObject)
+// pdb: BSStripPSysData::IsEqual | BSStripPSysData.obj | fnv360_0822_retail, caller_sim + bridge(vtable|objrun_open) + skyrim(caller_sim), high
+bool __thiscall FUN_00c25cd0_shell::BSStripPSysData_IsEqual(NiObject* pkObject)
 {
     BSStripPSysData* pkDest = (BSStripPSysData*)pkObject;
     if (IsEqual(pkObject) && pkDest->usMaxPointCount == usMaxPointCount && pkDest->fStartCapSize == fStartCapSize &&
@@ -168,7 +169,7 @@ float __thiscall FUN_00c25e20_shell::GetInnerValue(unsigned short ausOuterIndex,
 
 struct FUN_00c25e40_shell : BSStripPSysData
 {
-    float __thiscall FUN_00c25e40(unsigned short a, unsigned short b);
+    float __thiscall BSStripPSysData_GetPointRadii(unsigned short a, unsigned short b);
 };
 struct FUN_00c25e40_Inner
 {
@@ -182,7 +183,8 @@ struct FUN_00c25e40_Outer
 };
 // Reads a pointer from this+0x7c, indexes it by a, then indexes that object's p by b and returns the float v.
 // @fnv 0x00c25e40
-float __thiscall FUN_00c25e40_shell::FUN_00c25e40(unsigned short a, unsigned short b)
+// pdb: BSStripPSysData::GetPointRadii | BSStripPSysData.obj | fnv360_0822_retail, objrun + bridge(hash|objrun) + skyrim(call_seq), high
+float __thiscall FUN_00c25e40_shell::BSStripPSysData_GetPointRadii(unsigned short a, unsigned short b)
 {
     return pStripList[a].pPointList[b].fRadii;
 }
@@ -196,22 +198,24 @@ struct FUN_00c25e90_shell
 {
     char _pad[124];
     FUN_00c25e90_entry* arr;
-    void* __thiscall FUN_00c25e90(unsigned short a, unsigned short b);
+    void* __thiscall BSStripPSysData_GetPointNorms(unsigned short a, unsigned short b);
 };
 // Returns a pointer into the entry at index a, offset by b * 0x84 + 0x48 from its ptr.
 // @fnv 0x00c25e90
-void* __thiscall FUN_00c25e90_shell::FUN_00c25e90(unsigned short ausIndex, unsigned short b)
+// pdb: BSStripPSysData::GetPointNorms | BSStripPSysData.obj | fnv360_0822_retail, objrun + bridge(hash|objrun) + skyrim(call_gap_sim), high
+void* __thiscall FUN_00c25e90_shell::BSStripPSysData_GetPointNorms(unsigned short ausIndex, unsigned short b)
 {
     return (char*)arr[ausIndex].ptr + b * 0x84 + 0x48;
 }
 
 struct FUN_00c25eb0_shell : BSStripPSysData
 {
-    float __thiscall FUN_00c25eb0(unsigned short a);
+    float __thiscall BSStripPSysData_GetTexCoordDelta(unsigned short a);
 };
 // Returns 1.0 divided by (the unsigned short at offset 6 of the entry at this+0x7c indexed by a, minus 1.0).
 // @fnv 0x00c25eb0
-float __thiscall FUN_00c25eb0_shell::FUN_00c25eb0(unsigned short ausIndex)
+// pdb: BSStripPSysData::GetTexCoordDelta | BSStripPSysData.obj | fnv360_0822_retail, objrun + bridge(hash|objrun), high
+float __thiscall FUN_00c25eb0_shell::BSStripPSysData_GetTexCoordDelta(unsigned short ausIndex)
 {
     return 1.0f / ((float)pStripList[ausIndex].usHighestPointCount - 1.0f);
 }
@@ -432,7 +436,7 @@ struct S_00c26000_Base
     int unk74;
     int unk78;
     S_00c26000_Item* unk7c;
-    void FUN_00c24f20(S_00c26000_Strip* dest, S_00c26000_Proc* proc);
+    void NiPSysData_CopyMembers(S_00c26000_Strip* dest, S_00c26000_Proc* proc);
 };
 
 struct S_00c26000_Strip : S_00c26000_Base
@@ -451,7 +455,7 @@ void* FUN_00ec44d0(void* dst, const void* src, unsigned int n);
 // @fnv 0x00c26000
 void S_00c26000_Strip::CloneStrip(S_00c26000_Strip* dest, S_00c26000_Proc* proc)
 {
-    FUN_00c24f20(dest, proc);
+    NiPSysData_CopyMembers(dest, proc);
     dest->unk80 = unk80;
     dest->unk84 = unk84;
     dest->unk88 = unk88;
@@ -677,14 +681,15 @@ class FUN_00c26570_cls
     unsigned int m_84;
     unsigned int m_88;
     unsigned int m_8C;
-    void FUN_00c25560(StreamOwner* a1);
-    void FUN_00c26570(StreamOwner* a1);
+    void NiPSysData_SaveBinary(StreamOwner* a1);
+    void BSStripPSysData_SaveBinary(StreamOwner* a1);
 };
 
 // @fnv 0x00c26570
-void FUN_00c26570_cls::FUN_00c26570(StreamOwner* apOwner)
+// pdb: BSStripPSysData::SaveBinary | BSStripPSysData.obj | fnv360_0822_retail, caller_sim + bridge(vtable|objrun) + skyrim(caller_sim), high
+void FUN_00c26570_cls::BSStripPSysData_SaveBinary(StreamOwner* apOwner)
 {
-    FUN_00c25560(apOwner);
+    NiPSysData_SaveBinary(apOwner);
     StreamCtx* s = apOwner->m_250;
     {
         unsigned int n = 2;
@@ -727,7 +732,7 @@ struct FUN_00c25f40_cls
     unsigned short m50;
     char _52[0x2a];
     FUN_00c25f40_rec* m7c;
-    void FUN_00c24cc0(unsigned short a);
+    void NiPSysData_RemoveParticle(unsigned short a);
     void* PopRecord(unsigned int a);
 };
 
@@ -754,7 +759,7 @@ void* FUN_00c25f40_cls::PopRecord(unsigned int auiIndex)
     }
     unsigned short last = m50;
     last--;
-    FUN_00c24cc0(idx);
+    NiPSysData_RemoveParticle(idx);
     if (idx != last)
     {
         FUN_00c25f40_rec* cur = (FUN_00c25f40_rec*)((char*)m7c + off);
@@ -895,7 +900,7 @@ struct S_00c26410_Base
     int unk70;
     int unk74;
     int unk78;
-    void FUN_00c25340(S_00c26410_Stream* pkStream);
+    void NiPSysData_LoadBinary(S_00c26410_Stream* pkStream);
 };
 
 struct S_00c26410_Bin
@@ -1100,14 +1105,15 @@ struct FUN_00c26410_cls : S_00c26410_Mid
     float m_84;
     float m_88;
     unsigned char m_8C;
-    void FUN_00c26410(S_00c26410_Stream* pkStream);
+    void BSStripPSysData_LoadBinary(S_00c26410_Stream* pkStream);
 };
 
 // Reads m_80, m_84, m_88, m_8C from pkStream, allocates m_7C with m_08 elements, and initializes each element's fields from m_80 and DAT_01015f5c.
 // @fnv 0x00c26410
-void FUN_00c26410_cls::FUN_00c26410(S_00c26410_Stream* pkStream)
+// pdb: BSStripPSysData::LoadBinary | BSStripPSysData.obj | fnv360_0822_retail, caller_sim + bridge(vtable|caller_sim) + skyrim(caller_sim), high
+void FUN_00c26410_cls::BSStripPSysData_LoadBinary(S_00c26410_Stream* pkStream)
 {
-    FUN_00c25340(pkStream);
+    NiPSysData_LoadBinary(pkStream);
     S_BinRead(pkStream->m_pkBin, &m_80, 2);
     S_BinRead(pkStream->m_pkBin, &m_84, 4);
     S_BinRead(pkStream->m_pkBin, &m_88, 4);
@@ -1150,12 +1156,13 @@ struct StripCloneC263 : S_00c26000_Strip
         return FUN_00aa13e0(size);
     }
 
-    StripCloneC263* FUN_00c263b0(S_00c26000_Proc& cloning);
+    StripCloneC263* BSStripPSysData_CreateClone(S_00c26000_Proc& cloning);
 };
 
 // Allocates a new StripCloneC263 and copies the source strip into it via CloneStrip, returning the new object.
 // @fnv 0x00c263b0
-StripCloneC263* StripCloneC263::FUN_00c263b0(S_00c26000_Proc& cloning)
+// pdb: BSStripPSysData::CreateClone | BSStripPSysData.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun) + skyrim(caller_sim), high
+StripCloneC263* StripCloneC263::BSStripPSysData_CreateClone(S_00c26000_Proc& cloning)
 {
     StripCloneC263* result = new StripCloneC263;
     CloneStrip(result, &cloning);

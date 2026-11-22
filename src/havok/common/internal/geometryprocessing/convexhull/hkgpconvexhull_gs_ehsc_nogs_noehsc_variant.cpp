@@ -343,7 +343,7 @@ struct S_00d75cb0_Ref
 };
 
 int __cdecl Vsnprintf(void* buf, int size, const char* fmt, unsigned int arg);
-int __cdecl FUN_00cb10d0(int x);
+int __cdecl hkString_strLen(int x);
 extern const char str_010c1a98[];
 
 struct Cc0080Stream {
@@ -351,12 +351,12 @@ struct Cc0080Stream {
 };
 
 // Private-convention callee: str arrives in esi (entry null-check), out in edi
-// (used second, both live across FUN_00cb10d0).
+// (used second, both live across hkString_strLen).
 static __declspec(noinline) void FUN_00cc0080(Cc0080Stream* out, const char* str) {
     if (!str)
         out->Write("(null)", 6);
     else
-        out->Write(str, FUN_00cb10d0((int)str));
+        out->Write(str, hkString_strLen((int)str));
 }
 
 struct FUN_00cc02d0_cls {

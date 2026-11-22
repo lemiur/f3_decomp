@@ -144,10 +144,11 @@ struct BaseInterp
 };
 struct MyInterp : NiLookAtInterpolator
 {
-    bool __thiscall FUN_00a4bbe0(NiStream*);
+    bool __thiscall NiLookAtInterpolator_RegisterStreamables(NiStream*);
 };
 // @fnv 0x00a4bbe0
-bool __thiscall MyInterp::FUN_00a4bbe0(NiStream* kStream)
+// pdb: NiLookAtInterpolator::RegisterStreamables | NiLookAtInterpolator.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun) + skyrim(caller_sim), high
+bool __thiscall MyInterp::NiLookAtInterpolator_RegisterStreamables(NiStream* kStream)
 {
     unsigned int ui;
     if (!((BaseInterp*)this)->FUN_00a81fe0(kStream))
@@ -171,7 +172,8 @@ struct BSFadeNode
     void* __thiscall FUN_00a4bcf0(unsigned int a, unsigned int b, unsigned int c);
 };
 // @fnv 0x00a4c5a0
-void* __cdecl FUN_00a4c5a0()
+// pdb: NiLookAtInterpolator::CreateObject | NiLookAtInterpolator.obj | fnv360_0822_retail, objrun + bridge(hash|objrun), high
+void* __cdecl NiLookAtInterpolator_CreateObject()
 {
     void* p = BSFadeNode::operator new(0x44);
     if (p)
@@ -550,11 +552,12 @@ class A4BC40Data : public A4BC40Base
     A4BC40Transform m_kTransform;
     A4BC40Object* m_ppKeyData[3];
 
-    bool FUN_00a4bc40(A4BC40Object* pkObject);
+    bool NiLookAtInterpolator_IsEqual(A4BC40Object* pkObject);
 };
 
 // @fnv 0x00a4bc40
-bool A4BC40Data::FUN_00a4bc40(A4BC40Object* pkObject)
+// pdb: NiLookAtInterpolator::IsEqual | NiLookAtInterpolator.obj | fnv360_0721_beta, objrun + bridge(vtable|objrun) + skyrim(caller_sim), high
+bool A4BC40Data::NiLookAtInterpolator_IsEqual(A4BC40Object* pkObject)
 {
     if (!BaseIsEqual(pkObject))
         return false;
@@ -1001,12 +1004,13 @@ class C630Blend : public C630Interpolator
     C630Transform m_kTransform;
     C630Pointer<C630RefObject> m_akReferencedObjects[3];
 
-    void FUN_00a4c630(C630Stream& kStream);
+    void NiLookAtInterpolator_LoadBinary(C630Stream& kStream);
 };
 
 // Loads the blend from the stream: base interpolator data, flags, target, name (version-dependent), transform, and three ref objects.
 // @fnv 0x00a4c630
-void C630Blend::FUN_00a4c630(C630Stream& kStream)
+// pdb: NiLookAtInterpolator::LoadBinary | NiLookAtInterpolator.obj | fnv360_0721_beta, objrun + bridge(vtable|caller_sim) + skyrim(objrun), high
+void C630Blend::NiLookAtInterpolator_LoadBinary(C630Stream& kStream)
 {
     C630Interpolator::LoadBinary(kStream);
 
@@ -1210,7 +1214,7 @@ struct Transform341
     float translationX, translationY, translationZ;
     float rotationW, rotationX, rotationY, rotationZ;
     float scale;
-    void FUN_00a38b60(Stream341*);
+    void NiQuatTransform_SaveBinary(Stream341*);
 };
 struct Interpolator341
 {
@@ -1236,7 +1240,7 @@ void LookAt341::SaveToStream(Stream341* stream)
     SaveBinary341(*stream->output, flags);
     stream->SaveLink(target);
     stream->WriteObjectLink(&targetName);
-    transform.FUN_00a38b60(stream);
+    transform.NiQuatTransform_SaveBinary(stream);
     for (unsigned int i = 0; i < 3; ++i)
         stream->SaveLink(interpolators[i]);
 }
@@ -1345,12 +1349,13 @@ struct S_00a4ba30_Cls
     int unk34;
     S_00a4ba30_Ptr unk38[3];
     S_00a4ba30_Cls* __thiscall FUN_00a57050(float a, float b);
-    S_00a4ba30_Cls* __thiscall FUN_00a4ba30(float a, float b);
+    S_00a4ba30_Cls* __thiscall NiLookAtInterpolator_GetSequenceInterpolator(float a, float b);
 };
 
 // Calls FUN_00a57050 with the two floats, then assigns each non-null unk38[i] entry's v50 result to the corresponding entry in r.
 // @fnv 0x00a4ba30
-S_00a4ba30_Cls* __thiscall S_00a4ba30_Cls::FUN_00a4ba30(float a, float b)
+// pdb: NiLookAtInterpolator::GetSequenceInterpolator | NiLookAtInterpolator.obj | fnv360_0822_retail, caller_sim + bridge(vtable|objrun_open) + skyrim(caller_sim), high
+S_00a4ba30_Cls* __thiscall S_00a4ba30_Cls::NiLookAtInterpolator_GetSequenceInterpolator(float a, float b)
 {
     S_00a4ba30_Cls* pResult = FUN_00a57050(a, b);
     for (int i = 0; i < 3; i++)
@@ -1807,7 +1812,7 @@ struct S_00a4c4b0_Ref
     virtual void vf0();
     virtual void vf1();
     long m_refs;
-    S_00a4c4b0_Ref* FUN_00a5d680();
+    S_00a4c4b0_Ref* NiObject_Clone();
 };
 struct S_00a4c4b0_Ptr
 {
@@ -1891,7 +1896,7 @@ void __thiscall S_00a4c4b0_Obj::FUN_00a4c4b0(S_00a4c4b0_Obj* dest, S_00a4c4b0_Cl
     for (int i = 0; i < 3; i++)
     {
         if (m_ptr[i].m_p)
-            dest->m_ptr[i] = m_ptr[i].m_p->FUN_00a5d680();
+            dest->m_ptr[i] = m_ptr[i].m_p->NiObject_Clone();
     }
 }
 }  // namespace fnv_00a4c4b0

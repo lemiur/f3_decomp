@@ -4,11 +4,12 @@
 
 struct FUN_00cb7460_class
 {
-    int __thiscall FUN_00cb7460(int value);
+    int __thiscall hkpAgentNnTrack_getSectorSize(int value);
 };
 
 // @fnv 0x00cb7460
-int __thiscall FUN_00cb7460_class::FUN_00cb7460(int value)
+// pdb: hkpAgentNnTrack::getSectorSize | hkpWorldOperationUtil.obj | fnv360_0822_retail, call_gap + bridge(call_gap|call_gap) + skyrim(call_gap), high
+int __thiscall FUN_00cb7460_class::hkpAgentNnTrack_getSectorSize(int value)
 {
     if (value + 1 == *(int*)((char*)this + 8))
         return *(int*)this;
@@ -92,7 +93,8 @@ void __cdecl FUN_00d27ac0(FUN_00cb3ca0_object* object, int* value);
 void __cdecl FUN_00d00960(FUN_00cb3ca0_object* object, int* value);
 
 // @f3 0x00926420 (community match, verified in this file)
-int* __cdecl FUN_00cb3ca0(FUN_00cb3ca0_object* object, int* value, int shouldNotify)
+// pdb: hkpWorldOperationUtil::addConstraintImmediately | hkpWorldOperationUtil.obj | fnv360_0822_retail, call_gap + bridge(call_gap|call_gap) + skyrim(call_seq), high
+int* __cdecl hkpWorldOperationUtil_addConstraintImmediately(FUN_00cb3ca0_object* object, int* value, int shouldNotify)
 {
     ++object->unk84;
     FUN_00d27ac0(object, value);
@@ -342,7 +344,8 @@ void __cdecl NotifyTargets(CB3DD0World* world, CB3DD0Entity* entity);
 void __cdecl DetachRecord(CB3DD0Entity* entity);
 
 // @f3 0x009264b0 (community match, verified in this file)
-void __cdecl FUN_00cb3dd0(CB3DD0World* world, CB3DD0Entity* entity, int fireCallbacks)
+// pdb: hkpWorldOperationUtil::removeConstraintImmediately | hkpWorldOperationUtil.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_seq), high
+void __cdecl hkpWorldOperationUtil_removeConstraintImmediately(CB3DD0World* world, CB3DD0Entity* entity, int fireCallbacks)
 {
     CB3DD0Collidable* collidable = entity->m_kCollidable;
     collidable->m_flags = (collidable->m_flags & ~2) | 1;
@@ -539,7 +542,8 @@ struct WorldF3
     bool m_bFlag;
 };
 __declspec(nothrow) void __cdecl FUN_00926920(Obj* o, Agent* a);
-void __cdecl FUN_00cb4740(Obj* ctx, Obj* o)
+// pdb: hkpWorldOperationUtil::removeEntitySI | hkpWorldOperationUtil.obj | fnv360_0822_retail, call_gap_sim + bridge(call_gap_sim|call_seq) + skyrim(call_gap), high
+void __cdecl hkpWorldOperationUtil_removeEntitySI(Obj* ctx, Obj* o)
 {
     Agent* a = ((EntityF3*)o)->m_owner;
     ((EntityF3*)o)->m_8 = 0;
@@ -706,7 +710,8 @@ struct Object
 extern void __cdecl PropagateStateToChildren(Object*, int*);
 // If object->enabled is set, walks object->items backwards and calls PropagateStateToChildren for each item whose byte at offset 0x25 has bits 0-1 set.
 // @f3 0x00929630 (community match, verified in this file)
-void FUN_00cb6f30(Object* object) {
+// pdb: hkpWorldOperationUtil::splitSimulationIslands | hkpWorldOperationUtil.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_seq), high
+void hkpWorldOperationUtil_splitSimulationIslands(Object* object) {
     if (*reinterpret_cast<const unsigned char*>(&object->unkB8)) {
         for (int index = object->count - 1; index >= 0; --index) {
             int* item = object->items[index];
@@ -1231,7 +1236,8 @@ struct S_00cb3f90_Obj
 
 // Returns false if b is null, true if a is null, otherwise compares a's inner unkD4 against b's inner unkD4.
 // @f3 0x00926640 (community match, verified in this file)
-S_00cb3f90_Bool FUN_00cb3f90(S_00cb3f90_Obj* pObjA, S_00cb3f90_Obj* pObjB)
+// pdb: worldOperationUtil_less_hkSimulationIslandPtr | hkpWorldOperationUtil.obj | fnv360_0822_retail, objrun + skyrim(objrun), high
+S_00cb3f90_Bool worldOperationUtil_less_hkSimulationIslandPtr(S_00cb3f90_Obj* pObjA, S_00cb3f90_Obj* pObjB)
 {
     if (!pObjB)
         return false;
@@ -1502,7 +1508,8 @@ struct FUN_00cb5570_arg
 void __cdecl FUN_00cb4c60(ObjA* a1, int a2, int a3);
 
 // @f3 0x00928630 (community match, verified in this file)
-void __cdecl FUN_00cb5570(ObjA* apObjA, ObjB* apOwner, ObjB* apOther)
+// pdb: hkpWorldOperationUtil::mergeIslands | hkpWorldOperationUtil.obj | fnv360_0822_retail, call_seq + bridge(caller|call_dedup) + skyrim(call_gap), high
+void __cdecl hkpWorldOperationUtil_mergeIslands(ObjA* apObjA, ObjB* apOwner, ObjB* apOther)
 {
     int iOwnerValue = apOwner->unkB8;
     int iOtherValue = apOther->unkB8;
@@ -2250,7 +2257,7 @@ struct S_00cb5f50_World
     S_00cb5f50_Island* m_pFixedIsland;
 };
 
-void FUN_00cb5570(S_00cb5f50_World* world, S_00cb5f50_Entity* a, S_00cb5f50_Entity* b) throw();
+void hkpWorldOperationUtil_mergeIslands(S_00cb5f50_World* world, S_00cb5f50_Entity* a, S_00cb5f50_Entity* b) throw();
 
 }  // namespace fnv_00cb5f50
 
@@ -2300,12 +2307,13 @@ struct FUN_00cb7480_cls
     int m_10;
     int m_14;
 
-    void FUN_00cb7480(FUN_00cb7480_holder* a1, FUN_00cb7480_delta* a2);
+    void hkpConstraintOwner_subConstraintInfo(FUN_00cb7480_holder* a1, FUN_00cb7480_delta* a2);
 };
 
 // Subtracts the delta's m_04, m_08 and m_0c from m_0c, m_10 and m_14, and from the node's m_14, m_16 and m_18, when a1->m_30 is non-null.
 // @f3 0x00929b20 (community match, verified in this file)
-void FUN_00cb7480_cls::FUN_00cb7480(FUN_00cb7480_holder* apHolder, FUN_00cb7480_delta* apDelta)
+// pdb: hkpConstraintOwner::subConstraintInfo | hkpWorldOperationUtil.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_gap_sim), high
+void FUN_00cb7480_cls::hkpConstraintOwner_subConstraintInfo(FUN_00cb7480_holder* apHolder, FUN_00cb7480_delta* apDelta)
 {
     if (*(void* const*)((char*)apHolder + 0x28) != 0)
     {
@@ -3936,11 +3944,11 @@ struct hkpWorld
     unsigned char flag9c, unk9d, unk9e, unk9f;
     int unka0;
     int unka4;
-    void FUN_00c910a0(hkpSimulationIsland*);
+    void hkpConstraintInstance_entityAddedCallback(hkpSimulationIsland*);
     void FUN_00c91120();
     void FUN_00c91140();
 };
-void __cdecl FUN_00cb5100(hkpWorld*, hkpSimulationIsland*, hkBool);
+void __cdecl hkpWorldOperationUtil_internalActivateIsland(hkpWorld*, hkpSimulationIsland*, hkBool);
 void __cdecl FUN_00cff290(void*, void*);
 void __cdecl FUN_00c908c0(void*, void*, int, int);
 void __cdecl ResizeAudioStream(void*, void*, int);
@@ -3984,12 +3992,12 @@ void __cdecl FUN_00cb4c60(hkpWorld* apWorld, hkpSimulationIsland* apTarget, hkpS
         if (cl == 0)
         {
             apTarget->flags26 = (pf & 0xf7) | 4;
-            FUN_00cb5100(apWorld, apTarget, hkBool(false));
+            hkpWorldOperationUtil_internalActivateIsland(apWorld, apTarget, hkBool(false));
         }
         else if ((apSource->flags26 & 3) == 0)
         {
             apSource->flags26 = (apSource->flags26 & 0xf7) | 4;
-            FUN_00cb5100(apWorld, apSource, hkBool(false));
+            hkpWorldOperationUtil_internalActivateIsland(apWorld, apSource, hkBool(false));
         }
     }
     apTarget->flags25 |= (apSource->flags25 & 0xc);
@@ -4080,7 +4088,7 @@ void __cdecl FUN_00cb4c60(hkpWorld* apWorld, hkpSimulationIsland* apTarget, hkpS
             pActiveList->data[w] = pFirstIsland;
         }
     }
-    apWorld->FUN_00c910a0(apTarget);
+    apWorld->hkpConstraintInstance_entityAddedCallback(apTarget);
     if (--o->refCount94 == 0 && o->flag9c == 0)
     {
         if (o->unk8c != 0)
@@ -4126,9 +4134,9 @@ struct IslandNode
     IslandList first;
     IslandList second;
 };
-void __cdecl FUN_00cb6060(IslandNode* data, Object* object, IslandList* list, int value);
+void __cdecl hkpWorldOperationUtil_splitSimulationIsland(IslandNode* data, Object* object, IslandList* list, int value);
 void __cdecl AddItemToContainer(Object* object, IslandNode* item);
-// Picks a list by the node's low state, runs FUN_00cb6060, then for each new item copies that state, sets its index, and may call AddItemToContainer.
+// Picks a list by the node's low state, runs hkpWorldOperationUtil_splitSimulationIsland, then for each new item copies that state, sets its index, and may call AddItemToContainer.
 // @fnv 0x00cb6e70
 void __cdecl PropagateStateToChildren(Object* object, int* apNode)
 {
@@ -4141,7 +4149,7 @@ void __cdecl PropagateStateToChildren(Object* object, int* apNode)
         list = &((IslandNode*)object)->second;
     node->flags &= 0xfc;
     int initialIndex = list->count;
-    FUN_00cb6060(node, object, list, 0);
+    hkpWorldOperationUtil_splitSimulationIsland(node, object, list, 0);
     unsigned char uiHighState = (node->state >> 2) & 3;
     int currentIndex = initialIndex;
     while (currentIndex < list->count)
@@ -5264,7 +5272,8 @@ inline void IslandEntity926c70::setFilter(int a0, int a1, int a2)
 void __cdecl FUN_00901f10(S00cb5100_Arr* apArray, int aiElemSize);
 
 
-void FUN_00cb5100(S00cb5100_World* originalWorld, S00cb5100_Body* apBody, bool merge)
+// pdb: hkpWorldOperationUtil::internalActivateIsland | hkpWorldOperationUtil.obj | fnv360_0822_retail, call_gap + bridge(call_gap|call_gap) + skyrim(call_gap), high
+void hkpWorldOperationUtil_internalActivateIsland(S00cb5100_World* originalWorld, S00cb5100_Body* apBody, bool merge)
 {
     IslandWorld926c70* apWorld = reinterpret_cast<IslandWorld926c70*>(originalWorld);
     apWorld->data34[apBody->idx20] = apWorld->data34[apWorld->size38 - 1];
@@ -5443,7 +5452,7 @@ struct C6A870_World
     C6A870_Array<C6A870_Item*> m_items;
 };
 
-void __cdecl FUN_00cb55d0(C6A870_World* world);
+void __cdecl hkpWorldOperationUtil_cleanupDirtyIslands(C6A870_World* world);
 void __cdecl AddItemToContainer(C6A870_World* world, C6A870_Item* item);
 
 struct C6A870_Self;
@@ -5960,8 +5969,8 @@ struct Inner
 typedef void(__thiscall* FnFree)(void* self, void* p, int bytes);
 typedef void(__thiscall* Fn20)(void* self, void* p, int a, void* b, int c);
 
-void FUN_00cb4740(Inner* s, MotionObj* a0);
-void FUN_00cb3ca0(Inner* s, void* e, int z);
+void hkpWorldOperationUtil_removeEntitySI(Inner* s, MotionObj* a0);
+void hkpWorldOperationUtil_addConstraintImmediately(Inner* s, void* e, int z);
 struct ModeBool
 {
     bool value;
@@ -5986,7 +5995,7 @@ struct ModeBool
 };
 void FUN_00cb4640(Inner* s, int a5, int a7);
 void FUN_00cff290(void* m, void* w);
-void FUN_00cb5570(Inner* in, MotionObj* a0, MotionObj* e);
+void hkpWorldOperationUtil_mergeIslands(Inner* in, MotionObj* a0, MotionObj* e);
 void UpdateRotationInterpolation(float f, void* p);
 struct Elem8
 {
@@ -6277,7 +6286,7 @@ struct MotionBase : RefHeader31
     void FUN_00d1dff0();
     void SetFlagBits(int a, int b, int c);
     void FUN_00c86610(MotionBase* p);
-    float FUN_00c86430();
+    float hkpMotion_getMass();
     __forceinline static void* operator new(unsigned int nbytes)
     {
         S_00c6aca0_Heap& h = FUN_00c85750()->heap();
@@ -6962,7 +6971,7 @@ struct Holder
 
 Holder* __cdecl FUN_00c85750();
 void __cdecl ResizeAudioStream(void* apAllocator, void* apVector, unsigned int auiElemSize);
-void __cdecl FUN_00cb3dd0(int aCtx, int aObj, int aFlag);
+void __cdecl hkpWorldOperationUtil_removeConstraintImmediately(int aCtx, int aObj, int aFlag);
 
 }  // namespace fnv_00cb5000
 
@@ -7181,11 +7190,11 @@ struct S55Owner
     void __thiscall FUN_00c910b0();
 };
 
-void __cdecl FUN_00cb5100(S55Owner* owner, S55Item* item, S55Bool b);
+void __cdecl hkpWorldOperationUtil_internalActivateIsland(S55Owner* owner, S55Item* item, S55Bool b);
 
-extern "C" void __cdecl FUN_00cb5570(S55Owner* owner, ObjB* first, ObjB* second);
+extern "C" void __cdecl hkpWorldOperationUtil_mergeIslands(S55Owner* owner, ObjB* first, ObjB* second);
 
-// Sorts owner->m_40, then drains it by popping items, compacting their m_38 arrays, and applying state changes via FUN_00cb5100, FUN_00cb5310, or FUN_00cb5570.
+// Sorts owner->m_40, then drains it by popping items, compacting their m_38 arrays, and applying state changes via hkpWorldOperationUtil_internalActivateIsland, FUN_00cb5310, or hkpWorldOperationUtil_mergeIslands.
 // @f3 0x00927c80 (community match, verified in this file)
 namespace f3m_00927c80 {
 void __cdecl FUN_00990430(void** items, int low, int high, int (*less)(void*, void*));
@@ -7229,7 +7238,8 @@ __forceinline void RemoveNulls(S55Array<S55Item*>& a)
 }
 using namespace f3m_00927c80;
 
-void __cdecl FUN_00cb55d0(S55Owner* owner)
+// pdb: hkpWorldOperationUtil::cleanupDirtyIslands | hkpWorldOperationUtil.obj | fnv360_0721_beta, call_seq + bridge(call_gap|call_gap), high
+void __cdecl hkpWorldOperationUtil_cleanupDirtyIslands(S55Owner* owner)
 {
     if (owner->m_40.m_iElementCount > 1)
         FUN_00990430((void**)owner->m_40.m_data, 0, owner->m_40.m_iElementCount - 1, FUN_00926640);

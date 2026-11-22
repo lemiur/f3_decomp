@@ -69,11 +69,12 @@ struct FUN_00a3ccb0_Cls
     void* m_pKeyArray;
     int m_eRequestType;
     unsigned char m_ucKeyDataSize;
-    void FUN_00a3ccb0(void* keys, unsigned int numKeys, int type);
+    void NiFloatData_SetAnim(void* keys, unsigned int numKeys, int type);
 };
 // Stores the keys pointer, key count and type, caching DAT_41890871[type] as a byte; clears all fields when any argument is null or zero.
 // @fnv 0x00a3ccb0
-void FUN_00a3ccb0_Cls::FUN_00a3ccb0(void* keys, unsigned int numKeys, int type)
+// pdb: NiFloatData::SetAnim | NiFloatData.obj | fnv360_0822_retail, objrun + bridge(hash|objrun), high
+void FUN_00a3ccb0_Cls::NiFloatData_SetAnim(void* keys, unsigned int numKeys, int type)
 {
     if (keys && numKeys && type)
     {
@@ -222,7 +223,7 @@ void FUN_00a3cfd0_shell::WriteToStream(NiStream* stream)
 struct FUN_00a3ce20_shell : public NiFloatData
 {
     void FUN_00a3ce20(float m_fStartTime, float m_fMaximumDistance, NiFloatData** ppResult);
-    void FUN_00a5d510(NiFloatData** ppOut);
+    void NiObject_CreateDeepCopy(NiFloatData** ppOut);
 };
 
 extern "C" __declspec(dllimport) long __stdcall InterlockedIncrement(volatile long* Addend);
@@ -242,14 +243,14 @@ struct NiRefShell : public NiObject
     }
 };
 
-extern void __cdecl FUN_00a3d630(int, int, TimedAnimationKey*, unsigned int, float, float, TimedAnimationKey**,
+extern void __cdecl NiAnimationKey_CopySequence(int, int, TimedAnimationKey*, unsigned int, float, float, TimedAnimationKey**,
                                  unsigned int*);
 
 // @fnv 0x00a3ce20
 void FUN_00a3ce20_shell::FUN_00a3ce20(float m_fStartTime, float m_fMaximumDistance, NiFloatData** ppResult)
 {
     NiFloatData* pData = 0;
-    FUN_00a5d510(&pData);
+    NiObject_CreateDeepCopy(&pData);
     NiFloatData* pCur = pData;
     if (pCur != 0)
         ((NiRefShell*)pCur)->AcquireReference();
@@ -257,7 +258,7 @@ void FUN_00a3ce20_shell::FUN_00a3ce20(float m_fStartTime, float m_fMaximumDistan
     {
         TimedAnimationKey* pKeys = 0;
         unsigned int uiNumKeys = 0;
-        FUN_00a3d630(0, (int)m_eRequestType, m_pKeyArray, m_uiNumKeys, m_fStartTime, m_fMaximumDistance, &pKeys,
+        NiAnimationKey_CopySequence(0, (int)m_eRequestType, m_pKeyArray, m_uiNumKeys, m_fStartTime, m_fMaximumDistance, &pKeys,
                      &uiNumKeys);
         pCur->SetColorKeys(pKeys, uiNumKeys, m_eRequestType);
     }
@@ -282,12 +283,13 @@ extern FUN_00a3cd40_KeyCmp DAT_011f3ae0[];
 struct FUN_00a3cd40_cls : public NiFloatData
 {
     bool IsSameAs(NiFloatData* other);
-    bool FUN_00a3cd40(NiFloatData* other);
+    bool NiFloatData_IsEqual(NiFloatData* other);
 };
 
 // Compares this NiFloatData with another by checking key count, request type, key data size, and each key via a type-specific comparator.
 // @fnv 0x00a3cd40
-bool FUN_00a3cd40_cls::FUN_00a3cd40(NiFloatData* other)
+// pdb: NiFloatData::IsEqual | NiFloatData.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(objrun_prop), high
+bool FUN_00a3cd40_cls::NiFloatData_IsEqual(NiFloatData* other)
 {
     if (!IsSameAs(other))
     {
@@ -521,12 +523,13 @@ struct StreamView_cf
 
 struct FUN_00a3cf10_cls : public NiFloatData
 {
-    void FUN_00a3cf10(NiStream& stream);
+    void NiFloatData_LoadBinary(NiStream& stream);
 };
 
 // Loads animation key data from a NiStream, reading key count, type, and key values, then stores them via SetKeyData.
 // @fnv 0x00a3cf10
-void FUN_00a3cf10_cls::FUN_00a3cf10(NiStream& stream)
+// pdb: NiFloatData::LoadBinary | NiFloatData.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(caller_sim), high
+void FUN_00a3cf10_cls::NiFloatData_LoadBinary(NiStream& stream)
 {
     reinterpret_cast<StreamStand_cf*>(this)->LoadStream(stream);
     StreamView_cf* pStreamView = reinterpret_cast<StreamView_cf*>(&stream);

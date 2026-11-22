@@ -1122,8 +1122,8 @@ class MorphGeometryData
 {
   public:
     bool FUN_00a67360(bool);
-    void FUN_00a67410(BSFaceGenMorphData*);
-    void FUN_00a673d0();
+    void NiGeometryData_GetVerticesIterator(BSFaceGenMorphData*);
+    void NiGeometryData_UnlockPackedVertexData();
 };
 class NiTriBasedGeom
 {

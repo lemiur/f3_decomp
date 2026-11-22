@@ -7,12 +7,12 @@
 #include "niblendtransforminterpolator_NiObjectNET.h"
 struct FUN_00a40a40_shell : public NiBlendTransformInterpolator
 {
-    void* FUN_00a40a40();
+    void* BSSplatterExtraData_GetRTTI();
 };
 extern "C" const NiRTTI* g_011f3e64;
 struct FUN_00a40a20_shell : public NiBlendTransformInterpolator
 {
-    bool FUN_00a40a20(NiObject*);
+    bool BSDismemberSkinInstance_RegisterStreamables(NiObject*);
 };
 struct FUN_00a36fd0_tgt
 {

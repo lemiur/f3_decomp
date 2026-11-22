@@ -231,7 +231,7 @@ public:
     int m_38;
     NiFloatsExtraData* m_pkFloatsData;
     int m_iFloatsExtraDataIndex;
-    bool FUN_00a36250(float);
+    bool NiTimeController_DontDoUpdate(float);
     void UpdateController(const float& fTime);
 };
 
@@ -240,7 +240,7 @@ void Ctlr4edd::UpdateController(const float& fTime)
 {
     if (GetMC())
         m_fControllerTime = DAT_01096324;
-    else if (FUN_00a36250(fTime)
+    else if (NiTimeController_DontDoUpdate(fTime)
         && (!m_spControllerInterpolator || !m_spControllerInterpolator->AlwaysUpdate()))
         return;
 

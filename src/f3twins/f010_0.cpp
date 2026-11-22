@@ -116,7 +116,8 @@ __declspec(noinline) void* FUN_00456760()
     return &DAT_00db8cac;
 }
 
-__declspec(noinline) void* FUN_0046c1c0()
+// pdb: BSOcclusionPlane::GetRTTI | BGSPrimitive.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(udata), high
+__declspec(noinline) void* BSOcclusionPlane_GetRTTI()
 {
     return &DAT_0116d108;
 }
@@ -126,12 +127,14 @@ __declspec(noinline) void* FUN_0046c550()
     return &DAT_0116d9a0;
 }
 
-__declspec(noinline) void* FUN_004a38f0()
+// pdb: BGSAddonNodeSoundHandleExtra::GetRTTI | BGSAddonNode.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(udata), high
+__declspec(noinline) void* BGSAddonNodeSoundHandleExtra_GetRTTI()
 {
     return &DAT_010701bc;
 }
 
-__declspec(noinline) void* FUN_004ca580()
+// pdb: NiBinaryExtraData::GetRTTI | TESLand.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(objrun_open), high
+__declspec(noinline) void* NiBinaryExtraData_GetRTTI()
 {
     return &DAT_0108f4b0;
 }
@@ -151,22 +154,26 @@ __declspec(noinline) void* FUN_004e5ca0()
     return &DAT_010f317c;
 }
 
-__declspec(noinline) void* FUN_004e5d10()
+// pdb: bhkEntity::GetRTTI | TESObjectREFR.obj | fnv360_0822_retail, udata + bridge(vtable_prefix|vtable) + skyrim(objrun), high
+__declspec(noinline) void* bhkEntity_GetRTTI()
 {
     return &DAT_010f3244;
 }
 
-__declspec(noinline) void* FUN_004e5f90()
+// pdb: bhkSphereRepShape::GetRTTI | TESObjectREFR.obj | fnv360_0822_retail, udata + bridge(vtable_prefix|vtable), high
+__declspec(noinline) void* bhkSphereRepShape_GetRTTI()
 {
     return &DAT_010f325c;
 }
 
-__declspec(noinline) void* FUN_004e5fc0()
+// pdb: bhkConvexShape::GetRTTI | TESObjectREFR.obj | fnv360_0822_retail, udata + bridge(vtable_prefix|vtable) + skyrim(objrun), high
+__declspec(noinline) void* bhkConvexShape_GetRTTI()
 {
     return &DAT_010f3268;
 }
 
-__declspec(noinline) void* FUN_004e6360()
+// pdb: bhkShapePhantom::GetRTTI | TESObjectREFR.obj | fnv360_0822_retail, udata + bridge(vtable_prefix|vtable), high
+__declspec(noinline) void* bhkShapePhantom_GetRTTI()
 {
     return &DAT_010f3274;
 }
@@ -191,12 +198,14 @@ __declspec(noinline) void* FUN_004f0860()
     return &DAT_010f32f0;
 }
 
-__declspec(noinline) void* FUN_005692b0()
+// pdb: bhkBvTreeShape::GetRTTI | CellMopp.obj | fnv360_0822_retail, udata + bridge(vtable_prefix|vtable), high
+__declspec(noinline) void* bhkBvTreeShape_GetRTTI()
 {
     return &DAT_010f32c4;
 }
 
-__declspec(noinline) void* FUN_00587ea0()
+// pdb: BSFaceGenAnimationData::GetRTTI | BSFaceGenAnimationData.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(udata), high
+__declspec(noinline) void* BSFaceGenAnimationData_GetRTTI()
 {
     return &DAT_0107397c;
 }
@@ -211,7 +220,8 @@ __declspec(noinline) void* FUN_00597840()
     return &DAT_01073b94;
 }
 
-__declspec(noinline) void* FUN_00597890()
+// pdb: BSFaceGenBaseMorphExtraData::GetRTTI | BSFaceGenMorphData.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(udata), high
+__declspec(noinline) void* BSFaceGenBaseMorphExtraData_GetRTTI()
 {
     return &DAT_01073b8c;
 }
@@ -221,17 +231,20 @@ __declspec(noinline) void* FUN_00599870()
     return &DAT_01073bd4;
 }
 
-__declspec(noinline) void* FUN_0059f8e0()
+// pdb: bhkPCollisionObject::GetRTTI | BSTreeNode.obj | fnv360_0822_retail, udata + bridge(vtable_prefix|vtable), high
+__declspec(noinline) void* bhkPCollisionObject_GetRTTI()
 {
     return &DAT_010f31d0;
 }
 
-__declspec(noinline) void* FUN_0059f8f0()
+// pdb: bhkSPCollisionObject::GetRTTI | BSTreeNode.obj | fnv360_0822_retail, udata + bridge(vtable_prefix|vtable), high
+__declspec(noinline) void* bhkSPCollisionObject_GetRTTI()
 {
     return &DAT_010f33bc;
 }
 
-__declspec(noinline) void* FUN_0059f990()
+// pdb: bhkMultiSphereShape::GetRTTI | BSTreeNode.obj | fnv360_0822_debug, udata + bridge(vtable_prefix|vtable), high
+__declspec(noinline) void* bhkMultiSphereShape_GetRTTI()
 {
     return &DAT_010f33c8;
 }
@@ -241,7 +254,8 @@ __declspec(noinline) void* FUN_0059fef0()
     return &DAT_01073d6c;
 }
 
-__declspec(noinline) void* FUN_005af6c0()
+// pdb: BSTempEffectDebris::GetRTTI | BSTempEffectDebris.obj | fnv360_1110_retail, udata + bridge(vtable_prefix|udata) + skyrim(udata), high
+__declspec(noinline) void* BSTempEffectDebris_GetRTTI()
 {
     return &DAT_0107434c;
 }
@@ -251,7 +265,8 @@ __declspec(noinline) void* FUN_005b0540()
     return &DAT_0108f3cc;
 }
 
-__declspec(noinline) void* FUN_005b38f0()
+// pdb: BSTempEffectParticle::GetRTTI | BSTempEffectParticle.obj | fnv360_1110_retail, udata + bridge(vtable_prefix|udata) + skyrim(udata), high
+__declspec(noinline) void* BSTempEffectParticle_GetRTTI()
 {
     return &DAT_01074418;
 }
@@ -261,7 +276,8 @@ __declspec(noinline) void* FUN_0061a8d0()
     return &DAT_00dbe3e4;
 }
 
-__declspec(noinline) void* FUN_006b28d0()
+// pdb: MagicModelHitEffect::GetRTTI | MagicModelHitEffect.obj | fnv360_1110_retail, udata, high
+__declspec(noinline) void* MagicModelHitEffect_GetRTTI()
 {
     return &DAT_01078708;
 }
@@ -286,12 +302,14 @@ __declspec(noinline) void* FUN_0082f440()
     return &DAT_0108f20c;
 }
 
-__declspec(noinline) void* FUN_00830480()
+// pdb: NiSourceCubeMap::GetRTTI | NiSourceCubeMap.obj | fnv360_0822_retail, udata + bridge(vtable|udata) + skyrim(objrun_sim), high
+__declspec(noinline) void* NiSourceCubeMap_GetRTTI()
 {
     return &DAT_0108f214;
 }
 
-__declspec(noinline) void* FUN_00837e70()
+// pdb: NiTimeController::GetRTTI | NiTimeController.obj | fnv360_0822_retail, objrun + skyrim(objrun), high
+__declspec(noinline) void* NiTimeController_GetRTTI()
 {
     return &DAT_0108f3ec;
 }
@@ -306,12 +324,14 @@ __declspec(noinline) void* FUN_00840500()
     return &DAT_0108f470;
 }
 
-__declspec(noinline) void* FUN_00845a10()
+// pdb: NiExtraData::GetRTTI | Tile.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(objrun_open), high
+__declspec(noinline) void* NiExtraData_GetRTTI()
 {
     return &DAT_0108f480;
 }
 
-__declspec(noinline) void* FUN_00846820()
+// pdb: NiPixelData::GetRTTI | NiPixelData.obj | fnv360_0822_retail, udata + bridge(vtable|udata) + skyrim(objrun), high
+__declspec(noinline) void* NiPixelData_GetRTTI()
 {
     return &DAT_0108f490;
 }
@@ -326,12 +346,14 @@ __declspec(noinline) void* FUN_0084a560()
     return &DAT_0108f4c4;
 }
 
-__declspec(noinline) void* FUN_0084d6b0()
+// pdb: NiSkinPartition::GetRTTI | NiSkinPartition.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+__declspec(noinline) void* NiSkinPartition_GetRTTI()
 {
     return &DAT_01090510;
 }
 
-__declspec(noinline) void* FUN_00851680()
+// pdb: BSResizableTriShape::GetRTTI | BSResizableTriShape.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+__declspec(noinline) void* BSResizableTriShape_GetRTTI()
 {
     return &DAT_01090528;
 }
@@ -341,7 +363,8 @@ __declspec(noinline) void* FUN_00853230()
     return &DAT_01090544;
 }
 
-__declspec(noinline) void* FUN_00854080()
+// pdb: NiVertWeightsExtraData::GetRTTI | NiVertWeightsExtraData.obj | fnv360_0721_beta, udata, high
+__declspec(noinline) void* NiVertWeightsExtraData_GetRTTI()
 {
     return &DAT_0109055c;
 }
@@ -351,12 +374,14 @@ __declspec(noinline) void* FUN_00855410()
     return &DAT_01090574;
 }
 
-__declspec(noinline) void* FUN_00855810()
+// pdb: NiTriBasedGeomData::GetRTTI | NiTriBasedGeomData.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+__declspec(noinline) void* NiTriBasedGeomData_GetRTTI()
 {
     return &DAT_01090584;
 }
 
-__declspec(noinline) void* FUN_00855ed0()
+// pdb: NiPalette::GetRTTI | NiPalette.obj | fnv360_0822_retail, objrun_sim + bridge(vtable|objopen_prop) + skyrim(objrun), high
+__declspec(noinline) void* NiPalette_GetRTTI()
 {
     return &DAT_01090608;
 }
@@ -366,7 +391,8 @@ __declspec(noinline) void* FUN_0085a2e0()
     return &DAT_01090708;
 }
 
-__declspec(noinline) void* FUN_0085a740()
+// pdb: NiParticlesData::GetRTTI | NiParticlesData.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+__declspec(noinline) void* NiParticlesData_GetRTTI()
 {
     return &DAT_01090720;
 }
@@ -376,7 +402,8 @@ __declspec(noinline) void* FUN_0085bf20()
     return &DAT_01090854;
 }
 
-__declspec(noinline) void* FUN_0085ded0()
+// pdb: NiVectorExtraData::GetRTTI | NiVectorExtraData.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+__declspec(noinline) void* NiVectorExtraData_GetRTTI()
 {
     return &DAT_0109087c;
 }
@@ -386,22 +413,26 @@ __declspec(noinline) void* FUN_0085f520()
     return &DAT_010908a4;
 }
 
-__declspec(noinline) void* FUN_00860000()
+// pdb: NiSpotLight::GetRTTI | NiSpotLight.obj | fnv360_0822_retail, udata + bridge(vtable|udata) + skyrim(objrun_sim), high
+__declspec(noinline) void* NiSpotLight_GetRTTI()
 {
     return &DAT_010908b4;
 }
 
-__declspec(noinline) void* FUN_00860530()
+// pdb: NiSortAdjustNode::GetRTTI | NiSortAdjustNode.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+__declspec(noinline) void* NiSortAdjustNode_GetRTTI()
 {
     return &DAT_010908c8;
 }
 
-__declspec(noinline) void* FUN_00860a80()
+// pdb: NiScreenTexture::GetRTTI | NiScreenTexture.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+__declspec(noinline) void* NiScreenTexture_GetRTTI()
 {
     return &DAT_010908dc;
 }
 
-__declspec(noinline) void* FUN_00861130()
+// pdb: NiScreenLODData::GetRTTI | NiScreenLODData.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+__declspec(noinline) void* NiScreenLODData_GetRTTI()
 {
     return &DAT_010908e4;
 }
@@ -411,17 +442,20 @@ __declspec(noinline) void* FUN_00862440()
     return &DAT_010908f8;
 }
 
-__declspec(noinline) void* FUN_0086b130()
+// pdb: NiLODData::GetRTTI | NiLODData.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+__declspec(noinline) void* NiLODData_GetRTTI()
 {
     return &DAT_01090a58;
 }
 
-__declspec(noinline) void* FUN_00883010()
+// pdb: NiDX9ImplicitBufferData::GetRTTI | NiDX92DBufferData.obj | tesv_win, udata, high
+__declspec(noinline) void* NiDX9ImplicitBufferData_GetRTTI()
 {
     return &DAT_01091860;
 }
 
-__declspec(noinline) void* FUN_008830d0()
+// pdb: NiDX9ImplicitDepthStencilBufferData::GetRTTI | NiDX92DBufferData.obj | tesv_win, udata, high
+__declspec(noinline) void* NiDX9ImplicitDepthStencilBufferData_GetRTTI()
 {
     return &DAT_01091834;
 }
@@ -431,12 +465,14 @@ __declspec(noinline) void* FUN_00886740()
     return &DAT_01091988;
 }
 
-__declspec(noinline) void* FUN_008b6500()
+// pdb: NiFloatInterpolator::GetRTTI | NiFloatInterpolator.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun) + skyrim(objrun), high
+__declspec(noinline) void* NiFloatInterpolator_GetRTTI()
 {
     return &DAT_01091f90;
 }
 
-__declspec(noinline) void* FUN_008b9d10()
+// pdb: NiTransformInterpolator::GetRTTI | NiTransformInterpolator.obj | fnv360_0822_retail, objrun_prop + bridge(vtable|udata) + skyrim(objrun), high
+__declspec(noinline) void* NiTransformInterpolator_GetRTTI()
 {
     return &DAT_010926a0;
 }
@@ -446,7 +482,8 @@ __declspec(noinline) void* FUN_008ba820()
     return &DAT_010926a8;
 }
 
-__declspec(noinline) void* FUN_008bac80()
+// pdb: NiBlendTransformInterpolator::GetRTTI | NiBlendTransformInterpolator.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+__declspec(noinline) void* NiBlendTransformInterpolator_GetRTTI()
 {
     return &DAT_010926b4;
 }
@@ -456,22 +493,26 @@ __declspec(noinline) void* FUN_008bb5f0()
     return &DAT_010926bc;
 }
 
-__declspec(noinline) void* FUN_008bd1b0()
+// pdb: BSBlendTreadTransfInterpolator::GetRTTI | BSBlendTreadTransfInterpolator.obj | fnv360_0822_retail, udata + bridge(vtable|udata) + skyrim(udata), high
+__declspec(noinline) void* BSBlendTreadTransfInterpolator_GetRTTI()
 {
     return &DAT_01092710;
 }
 
-__declspec(noinline) void* FUN_008bdc80()
+// pdb: BSRotAccumTransfInterpolator::GetRTTI | BSRotAccumTransfInterpolator.obj | fnv360_0822_retail, udata + bridge(vtable|udata) + skyrim(udata), high
+__declspec(noinline) void* BSRotAccumTransfInterpolator_GetRTTI()
 {
     return &DAT_01092720;
 }
 
-__declspec(noinline) void* FUN_008be120()
+// pdb: BSAnimNote::GetRTTI | BSLookIKNote.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+__declspec(noinline) void* BSAnimNote_GetRTTI()
 {
     return &DAT_01092738;
 }
 
-__declspec(noinline) void* FUN_008be500()
+// pdb: BSGrabIKNote::GetRTTI | BSGrabIKNote.obj | fnv360_0822_retail, udata + bridge(vtable|udata) + skyrim(udata), high
+__declspec(noinline) void* BSGrabIKNote_GetRTTI()
 {
     return &DAT_01092730;
 }
@@ -501,22 +542,26 @@ __declspec(noinline) void* FUN_008c2580()
     return &DAT_01092798;
 }
 
-__declspec(noinline) void* FUN_008c2a30()
+// pdb: NiQuaternionInterpolator::GetRTTI | NiQuaternionInterpolator.obj | fnv360_0822_retail, udata + bridge(vtable|udata) + skyrim(objrun_open), high
+__declspec(noinline) void* NiQuaternionInterpolator_GetRTTI()
 {
     return &DAT_010927a0;
 }
 
-__declspec(noinline) void* FUN_008c3590()
+// pdb: NiPoint3Interpolator::GetRTTI | NiPoint3Interpolator.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun_prop) + skyrim(objrun_open), high
+__declspec(noinline) void* NiPoint3Interpolator_GetRTTI()
 {
     return &DAT_010927b0;
 }
 
-__declspec(noinline) void* FUN_008c3d50()
+// pdb: NiPathController::GetRTTI | NiPathController.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun) + skyrim(objrun_open), high
+__declspec(noinline) void* NiPathController_GetRTTI()
 {
     return &DAT_010927c0;
 }
 
-__declspec(noinline) void* FUN_008c5d50()
+// pdb: NiLookAtInterpolator::GetRTTI | NiLookAtInterpolator.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun) + skyrim(objrun_open), high
+__declspec(noinline) void* NiLookAtInterpolator_GetRTTI()
 {
     return &DAT_010927d0;
 }
@@ -536,12 +581,14 @@ __declspec(noinline) void* FUN_008c7150()
     return &DAT_010927e8;
 }
 
-__declspec(noinline) void* FUN_008c7a90()
+// pdb: NiKeyframeManager::GetRTTI | NiKeyframeManager.obj | fnv360_0822_retail, udata + bridge(vtable|udata) + skyrim(udata), high
+__declspec(noinline) void* NiKeyframeManager_GetRTTI()
 {
     return &DAT_010927f4;
 }
 
-__declspec(noinline) void* FUN_008c80c0()
+// pdb: NiTransformData::GetRTTI | NiTransformData.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+__declspec(noinline) void* NiTransformData_GetRTTI()
 {
     return &DAT_010927fc;
 }
@@ -556,7 +603,8 @@ __declspec(noinline) void* FUN_008c8f60()
     return &DAT_0109280c;
 }
 
-__declspec(noinline) void* FUN_008c95d0()
+// pdb: NiFlipController::GetRTTI | NiFlipController.obj | fnv360_0822_retail, udata, high
+__declspec(noinline) void* NiFlipController_GetRTTI()
 {
     return &DAT_01092814;
 }
@@ -566,62 +614,74 @@ __declspec(noinline) void* FUN_008c9ae0()
     return &DAT_0109281c;
 }
 
-__declspec(noinline) void* FUN_008c9ec0()
+// pdb: NiBSplineTransformInterpolator::GetRTTI | NiBSplineTransformInterpolator.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+__declspec(noinline) void* NiBSplineTransformInterpolator_GetRTTI()
 {
     return &DAT_01092824;
 }
 
-__declspec(noinline) void* FUN_008ca5a0()
+// pdb: NiBSplinePoint3Interpolator::GetRTTI | NiBSplinePoint3Interpolator.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+__declspec(noinline) void* NiBSplinePoint3Interpolator_GetRTTI()
 {
     return &DAT_01092834;
 }
 
-__declspec(noinline) void* FUN_008caa10()
+// pdb: NiBSplineFloatInterpolator::GetRTTI | NiBSplineFloatInterpolator.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+__declspec(noinline) void* NiBSplineFloatInterpolator_GetRTTI()
 {
     return &DAT_0109283c;
 }
 
-__declspec(noinline) void* FUN_008cacf0()
+// pdb: NiBSplineCompTransformInterpolator::GetRTTI | NiBSplineCompTransformInterpolator.obj | fnv360_0822_retail, udata + bridge(vtable|udata) + skyrim(objrun_open), high
+__declspec(noinline) void* NiBSplineCompTransformInterpolator_GetRTTI()
 {
     return &DAT_01092844;
 }
 
-__declspec(noinline) void* FUN_008cb120()
+// pdb: NiBSplineCompPoint3Interpolator::GetRTTI | NiBSplineCompPoint3Interpolator.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+__declspec(noinline) void* NiBSplineCompPoint3Interpolator_GetRTTI()
 {
     return &DAT_01092854;
 }
 
-__declspec(noinline) void* FUN_008cb3c0()
+// pdb: NiBSplineCompFloatInterpolator::GetRTTI | NiBSplineCompFloatInterpolator.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+__declspec(noinline) void* NiBSplineCompFloatInterpolator_GetRTTI()
 {
     return &DAT_0109285c;
 }
 
-__declspec(noinline) void* FUN_008cb630()
+// pdb: NiBSplineCompColorInterpolator::GetRTTI | NiBSplineCompColorInterpolator.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+__declspec(noinline) void* NiBSplineCompColorInterpolator_GetRTTI()
 {
     return &DAT_01092864;
 }
 
-__declspec(noinline) void* FUN_008cb980()
+// pdb: NiBSplineColorInterpolator::GetRTTI | NiBSplineColorInterpolator.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+__declspec(noinline) void* NiBSplineColorInterpolator_GetRTTI()
 {
     return &DAT_0109286c;
 }
 
-__declspec(noinline) void* FUN_008cd170()
+// pdb: NiBoolInterpolator::GetRTTI | NiBoolInterpolator.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun) + skyrim(objrun), high
+__declspec(noinline) void* NiBoolInterpolator_GetRTTI()
 {
     return &DAT_0109288c;
 }
 
-__declspec(noinline) void* FUN_008cf110()
+// pdb: NiBlendQuaternionInterpolator::GetRTTI | NiBlendQuaternionInterpolator.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+__declspec(noinline) void* NiBlendQuaternionInterpolator_GetRTTI()
 {
     return &DAT_010928a4;
 }
 
-__declspec(noinline) void* FUN_008cf720()
+// pdb: NiBlendPoint3Interpolator::GetRTTI | NiBlendPoint3Interpolator.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+__declspec(noinline) void* NiBlendPoint3Interpolator_GetRTTI()
 {
     return &DAT_010928ac;
 }
 
-__declspec(noinline) void* FUN_008cfc80()
+// pdb: NiBlendColorInterpolator::GetRTTI | NiBlendColorInterpolator.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+__declspec(noinline) void* NiBlendColorInterpolator_GetRTTI()
 {
     return &DAT_010928b4;
 }
@@ -631,12 +691,14 @@ __declspec(noinline) void* FUN_008d0240()
     return &DAT_010928bc;
 }
 
-__declspec(noinline) void* FUN_008d0830()
+// pdb: NiGeomMorpherUpdateTask::GetRTTI | NiGeomMorpherUpdateTask.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+__declspec(noinline) void* NiGeomMorpherUpdateTask_GetRTTI()
 {
     return &DAT_01092900;
 }
 
-__declspec(noinline) void* FUN_008d11b0()
+// pdb: NiFloatInterpController::GetRTTI | NiFloatInterpController.obj | fnv360_0822_retail, udata + bridge(vtable|objopen_prop) + skyrim(objrun_open), high
+__declspec(noinline) void* NiFloatInterpController_GetRTTI()
 {
     return &DAT_01092a20;
 }

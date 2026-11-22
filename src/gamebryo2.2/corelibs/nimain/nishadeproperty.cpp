@@ -919,7 +919,8 @@ extern PropertyHolder DAT_011f5ae8;
 
 // Allocates a 32-byte RefCountedProperty, initialises it via FUN_00a5c200, sets its vtable, defaultIndex to -1 and mode to 1, then stores it in DAT_011f5ae8.
 // @fnv 0x00a81520
-void __cdecl FUN_00a81520()
+// pdb: NiShadeProperty::_SDMInit | NiShadeProperty.obj | fnv360_0822_retail, call_gap + bridge(call_seq|call_dedup) + skyrim(call_gap_sim), high
+void __cdecl NiShadeProperty__SDMInit()
 {
     void* allocation = FUN_00aa13e0(32);
     RefCountedProperty* replacement;

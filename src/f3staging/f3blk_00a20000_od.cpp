@@ -136,9 +136,9 @@ struct S00a35270_hkpGsk
         shapeA->convertVertexIdsToVertices(cache.m_vertices, m_dimA, m_verticesA);
         shapeB->convertVertexIdsToVertices(cache.m_vertices + m_dimA, m_dimB, m_verticesB);
     }
-    void FUN_00a32da0(const S00a35270_hkpConvexShape* shapeA, const S00a35270_hkpConvexShape* shapeB, const S00a35270_hkTransform& aTb, S00a35270_hkVector4& separatingNormal);
+    void hkpGsk_getClosestFeature(const S00a35270_hkpConvexShape* shapeA, const S00a35270_hkpConvexShape* shapeB, const S00a35270_hkTransform& aTb, S00a35270_hkVector4& separatingNormal);
     void FUN_00a30af0(S00a35270_hkpGskCache& cache);
-    void FUN_00a30be0(const S00a35270_hkVector4& separatingNormal, S00a35270_hkpExtendedGskOut& output);
+    void hkpGsk_convertFeatureToClosestDistance(const S00a35270_hkVector4& separatingNormal, S00a35270_hkpExtendedGskOut& output);
 };
 
 struct S00a35270_hkpGskBaseAgent
@@ -176,12 +176,12 @@ S00a35270_hkBool S00a35270_hkpGskBaseAgent::FUN_00a35270(const S00a35270_hkCdBod
 
 
     S00a35270_hkVector4 separatingNormal;
-    gsk.FUN_00a32da0(shapeA, shapeB, aTb, separatingNormal);
+    gsk.hkpGsk_getClosestFeature(shapeA, shapeB, aTb, separatingNormal);
     if (gsk.m_featureChange)
     {
         gsk.FUN_00a30af0(m_cache);
     }
-    gsk.FUN_00a30be0(separatingNormal, output);
+    gsk.hkpGsk_convertFeatureToClosestDistance(separatingNormal, output);
 
     {
         const S00a35270_hkTransform& t = *bodyA.m_motion;
@@ -508,12 +508,13 @@ struct __declspec(align(16)) ContactParameters {
  float unk20,unk24;bool rejected;
 };
 struct ContactEvent {int type;ContactOwner* owner;ContactProperty* property;ContactPoint* point;};
-void __cdecl FUN_00988c60(ContactCallbackWorld*,ContactContext*);
-void __cdecl FUN_00988230(ContactBody*,ContactContext*);
-void __cdecl FUN_00989600(ContactCallbackWorld*,ContactEvent*,int);
-void __cdecl FUN_00a26f20(Data6440*,ContactPoint*,ContactParameters*,ContactBody*,ContactBody*,ContactTransform*,ContactTransform*,int*);
+void __cdecl hkpWorldCallbackUtil_fireContactPointCallback(ContactCallbackWorld*,ContactContext*);
+void __cdecl hkpEntityCallbackUtil_fireContactPointCallbackInternal(ContactBody*,ContactContext*);
+void __cdecl hkpWorldCallbackUtil_fireContactImpulseLimitBreached(ContactCallbackWorld*,ContactEvent*,int);
+void __cdecl hkpSimpleCollisionResponse_solveSingleContact2(Data6440*,ContactPoint*,ContactParameters*,ContactBody*,ContactBody*,ContactTransform*,ContactTransform*,int*);
 inline float DecodeRestitution(unsigned char value) {return (float)(value*DAT_00dcc5a0);}
-void __cdecl FUN_00a26440(Data6440* data,const QueryIn6440* in,Atom6440* atom)
+// pdb: hkSimpleContactConstraintData_fireCallbacks | hkpSimpleContactConstraintData.obj | fnv360_0822_retail, call_seq + bridge(uconst|call_seq) + skyrim(uconst), high
+void __cdecl hkSimpleContactConstraintData_fireCallbacks(Data6440* data,const QueryIn6440* in,Atom6440* atom)
 {
  ContactOwner* owner=in->owner;
  ContactBody* bodyA=owner->bodyA;
@@ -535,9 +536,9 @@ void __cdecl FUN_00a26440(Data6440* data,const QueryIn6440* in,Atom6440* atom)
    const ContactVector& normal=point->direction();
     ContactContext context(bodyA,bodyB,point,property,projectedVelocity,data);
     ContactCallbackWorld* eventId=bodyA->eventWorld;
-   FUN_00988c60(eventId,&context);
-   if(bodyA->callbackFlags)FUN_00988230(bodyA,&context);
-   if(bodyB->callbackFlags)FUN_00988230(bodyB,&context);
+   hkpWorldCallbackUtil_fireContactPointCallback(eventId,&context);
+   if(bodyA->callbackFlags)hkpEntityCallbackUtil_fireContactPointCallbackInternal(bodyA,&context);
+   if(bodyB->callbackFlags)hkpEntityCallbackUtil_fireContactPointCallbackInternal(bodyB,&context);
    float restitution=DecodeRestitution(property->restitution);
    float relativeVelocity=context.relativeVelocity;
     if(relativeVelocity < -eventId->input->settings->threshold && DAT_00db8b4c<restitution) {
@@ -550,11 +551,11 @@ void __cdecl FUN_00a26440(Data6440* data,const QueryIn6440* in,Atom6440* atom)
      parameters.maxImpulse=DAT_00de6e60;
     if(property->maxImpulse)parameters.maxImpulse=DAT_00e35180[property->maxImpulse];
     int bound;
-    FUN_00a26f20(data,point,&parameters,bodyA,bodyB,in->transformA,in->transformB,&bound);
+    hkpSimpleCollisionResponse_solveSingleContact2(data,point,&parameters,bodyA,bodyB,in->transformA,in->transformB,&bound);
     if(parameters.rejected) {
      ContactEvent event;
      event.owner=in->owner;event.type=1;event.point=point;event.property=property;
-     FUN_00989600(eventId,&event,1);
+     hkpWorldCallbackUtil_fireContactImpulseLimitBreached(eventId,&event,1);
     }
     property->impulse=0.0f;property->projectedVelocity=normal.w;
    } else {
@@ -1077,7 +1078,8 @@ __forceinline void basis(const Vector& normal,Matrix& out)
     out.getColumn(1).normalize3();
     out.getColumn(2).setCross(normal,out.getColumn(1));
 }
-void __cdecl FUN_00a26f20(Solver* solver,const Contact& contact,void* params,
+// pdb: hkpSimpleCollisionResponse::solveSingleContact2 | hkpSimpleCollisionResponse.obj | fnv360_0822_retail, call_gap + bridge(call_gap|call_gap) + skyrim(call_gap), high
+void __cdecl hkpSimpleCollisionResponse_solveSingleContact2(Solver* solver,const Contact& contact,void* params,
                          Owner* ownerA,Owner* ownerB,Accumulator* accA,Accumulator* accB,float& result)
 {
     Cache cache;
@@ -1139,7 +1141,7 @@ void __cdecl FUN_00a26f20(Solver* solver,const Contact& contact,void* params,
 
 // @f3 0x00a3d7c0 (community match, verified in this file)
 namespace f3m_00a3d7c0 {
-// FUN_00a3d7c0 = Havok 5.5.0 hkpBoxBoxCollisionDetection::findClosestPoint (hkpInternal.lib,
+// hkpBoxBoxCollisionDetection_findClosestPoint = Havok 5.5.0 hkpBoxBoxCollisionDetection::findClosestPoint (hkpInternal.lib,
 // hkpBoxBoxCollisionDetection.obj; the stock release object is byte-exact against the game).
 // Reconstructed (the .cpp is not shipped) from the hybrid library object's line records 1219-1315 and locals, the
 // release object's out-of-line helper copies (their own .cpp lines 139-169, 232-255, 698-710, 1134-1215), the pdb
@@ -1523,7 +1525,7 @@ class hkpBoxBoxCollisionDetection
 				int m_featureIndexB;
 		};
 	protected:
-		int FUN_00a3d7c0( hkpBoxBoxManifold& manifold, hkpFeatureContactPoint& fcp, hkpFeaturePointCache& fpp ) const;
+		int hkpBoxBoxCollisionDetection_findClosestPoint( hkpBoxBoxManifold& manifold, hkpFeatureContactPoint& fcp, hkpFeaturePointCache& fpp ) const;
 		__forceinline void faceAVertexBValidationDataFromFeatureIndex( hkpFeaturePointCache& fpp, int featureIndex ) const;
 		__forceinline void faceBVertexAValidationDataFromFeatureIndex( hkpFeaturePointCache& fpp, int featureIndex ) const;
 		__forceinline void edgeEdgeValidationDataFromFeatureIndex( hkpFeaturePointCache& fpp ) const;
@@ -1671,7 +1673,8 @@ void hkpBoxBoxCollisionDetection::edgeEdgeValidationDataFromFeatureIndex( hkpFea
 	fpp.m_vB = normal_in_B;
 }
 
-int hkpBoxBoxCollisionDetection::FUN_00a3d7c0( hkpBoxBoxManifold& manifold, hkpFeatureContactPoint& fcp, hkpFeaturePointCache& fpp ) const
+// pdb: hkpBoxBoxCollisionDetection::findClosestPoint | hkpBoxBoxCollisionDetection.obj | fnv360_0822_retail, objrun + bridge(call_dedup|call_gap_sim) + skyrim(call_gap), high
+int hkpBoxBoxCollisionDetection::hkpBoxBoxCollisionDetection_findClosestPoint( hkpBoxBoxManifold& manifold, hkpFeatureContactPoint& fcp, hkpFeaturePointCache& fpp ) const
 {
 	for ( int featuresToConsider = m_maxFeaturesToReject; featuresToConsider > 0; featuresToConsider-- )
 	{
@@ -3704,7 +3707,7 @@ hkJobQueue::JobStatus hkJobQueue::FUN_00a21830( ThreadType threadType, const Job
 
 // @f3 0x00a32da0 (community match, verified in this file)
 namespace f3m_00a32da0 {
-// FUN_00a32da0 = Havok 5.5.0 hkpGsk::getClosestFeature (hkpInternal.lib, hkpGsk.obj; the stock release object is
+// hkpGsk_getClosestFeature = Havok 5.5.0 hkpGsk::getClosestFeature (hkpInternal.lib, hkpGsk.obj; the stock release object is
 // byte-exact against the game). RECONSTRUCTED (the SDK ships neither hkpGsk.cpp nor hkpGsk.h) from the library
 // objects' debug records: hybrid line records 797-942 and locals, release/debug out-of-line copies of the static
 // helpers, pdb class layouts, and the SDK's verbatim inline bodies; cut to one file with hktrim.py.
@@ -4344,7 +4347,7 @@ class hkpGsk
 			hkPadSpu<const hkpConvexShape*> m_shapeB;
 			hkPadSpu<hkReal> m_collisionTolerance;
 		};
-		hkpGskStatus FUN_00a32da0( const hkpConvexShape* shapeA, const hkpConvexShape* shapeB, const hkTransform& aTb, hkVector4& separatingNormal );
+		hkpGskStatus hkpGsk_getClosestFeature( const hkpConvexShape* shapeA, const hkpConvexShape* shapeB, const hkTransform& aTb, hkVector4& separatingNormal );
 	protected:
 		ReduceDimensionResult reduceDimension();
 		void handlePenetration( const hkpConvexShape* shapeA, const hkpConvexShape* shapeB, const hkTransform& aTb );
@@ -4756,7 +4759,8 @@ penetration:
 	return REDUCE_DIMENSION_OK;
 }
 
-hkpGskStatus hkpGsk::FUN_00a32da0( const hkpConvexShape* shapeA, const hkpConvexShape* shapeB, const hkTransform& aTb, hkVector4& separatingNormalOut )
+// pdb: hkpGsk::getClosestFeature | hkpGsk.obj | fnv360_0822_debug, call_seq + bridge(call_seq|call_gap) + skyrim(call_seq), high
+hkpGskStatus hkpGsk::hkpGsk_getClosestFeature( const hkpConvexShape* shapeA, const hkpConvexShape* shapeB, const hkTransform& aTb, hkVector4& separatingNormalOut )
 {
 	hkVector4Util::transformPoints( aTb, &m_verticesBinB[0], m_dimB, &m_verticesBinA[0] );
 	int loopCounter = 0;
@@ -7278,7 +7282,7 @@ void hkpBoxBoxCollisionDetection::FUN_00a3d0e0( hkpBoxBoxManifold& manifold, hkp
 
 // @f3 0x00a3d5d0 (community match, verified in this file)
 namespace f3m_00a3d5d0 {
-// FUN_00a3d5d0 = Havok 5.5.0 hkpBoxBoxCollisionDetection::tryToAddPointOnEdge (hkpInternal.lib,
+// hkpBoxBoxCollisionDetection_tryToAddPointOnEdge = Havok 5.5.0 hkpBoxBoxCollisionDetection::tryToAddPointOnEdge (hkpInternal.lib,
 // hkpBoxBoxCollisionDetection.obj; the game bytes equal the stock release object, tools\hknear.py).
 // RECONSTRUCTED (the .cpp is not shipped) from the library objects' debug records: the target from the hybrid
 // object's lines 816-871 and locals; setEdgeFeatureBitSetFromAxisMap (232-245) from its release /
@@ -7965,7 +7969,7 @@ class hkpBoxBoxCollisionDetection
 				int m_featureIndexB;
 		};
 	protected:
-		void FUN_00a3d5d0( hkpBoxBoxManifold& manifold, int edgeA, int edgeB, int nextVertA, int nextVertB, const hkVector4& normalA, const hkVector4& normalB, hkReal closestPointDist ) const;
+		void hkpBoxBoxCollisionDetection_tryToAddPointOnEdge( hkpBoxBoxManifold& manifold, int edgeA, int edgeB, int nextVertA, int nextVertB, const hkVector4& normalA, const hkVector4& normalB, hkReal closestPointDist ) const;
 		void addAdditionalEdgeHelper( hkpBoxBoxManifold& manifold, hkpFeatureContactPoint& fcp, hkReal closestPointDist ) const;
 		__forceinline hkResult addPoint( hkpBoxBoxManifold& manifold, const hkpFeaturePointCache& fpp, hkpFeatureContactPoint& fcp ) const;
 		__forceinline void contactPointFromFeaturePointCache( hkpProcessCdPoint& ccpOut, const hkpFeatureContactPoint& fcp, const hkpFeaturePointCache& fpp ) const;
@@ -8229,7 +8233,8 @@ static __forceinline void setEdgeFeatureBitSetFromAxisMap( const hkVector4& axis
 	fcp.m_featureIdB = hkUint8( ( maskB << 4 ) + featureIndexB );
 }
 
-void hkpBoxBoxCollisionDetection::FUN_00a3d5d0( hkpBoxBoxManifold& manifold, int edgeA, int edgeB, int nextVertA, int nextVertB, const hkVector4& normalA, const hkVector4& normalB, hkReal closestPointDist ) const
+// pdb: hkpBoxBoxCollisionDetection::tryToAddPointOnEdge | hkpBoxBoxCollisionDetection.obj | fnv360_0822_retail, objrun + skyrim(objrun), high
+void hkpBoxBoxCollisionDetection::hkpBoxBoxCollisionDetection_tryToAddPointOnEdge( hkpBoxBoxManifold& manifold, int edgeA, int edgeB, int nextVertA, int nextVertB, const hkVector4& normalA, const hkVector4& normalB, hkReal closestPointDist ) const
 {
 	int HK_VECTOR3_X_SHIFT;
 	int HK_VECTOR3_Y_SHIFT;
@@ -12979,9 +12984,9 @@ checkReadSector:
 }
 
 // @f3 0x00a3e820 (community match, verified in this file)
-// FUN_00a3e820 = Havok 5.5.0 hkpBoxBoxCollisionDetection::calcManifold (hkpInternal.lib, hkpBoxBoxCollisionDetection.obj).
+// hkpBoxBoxCollisionDetection_calcManifold = Havok 5.5.0 hkpBoxBoxCollisionDetection::calcManifold (hkpInternal.lib, hkpBoxBoxCollisionDetection.obj).
 // Built /MT /Ox /Ob1 /Oi /Ot /GF /GS- (Havok release set; the pack lists /Od). Body = chk_2620779f645443579cc3 (another
-// contributor: real bodies for FUN_00a3d7c0 / FUN_00a3cc40, SDK accessors) plus one dead `if ( 0 )` block in
+// contributor: real bodies for hkpBoxBoxCollisionDetection_findClosestPoint / FUN_00a3cc40, SDK accessors) plus one dead `if ( 0 )` block in
 // findAdditionalManifoldPoints. That block emits no code; it only adds 23 reader temporaries before the first inlined
 // calcFaceFeatureBitSetFromAxisMap. The x|y|z|w mask chain is one flattened OPOR sorted by the multi-def ?: temps'
 // hash ((key << 6) & 0xffff): the y temp must lie past key 4096 while x stays below it, so that y is or-ed last (and
@@ -13822,7 +13827,7 @@ class hkpBoxBoxCollisionDetection
 				int m_featureIndexB;
 		};
 	protected:
-		__declspec(noalias) int FUN_00a3d7c0( hkpBoxBoxManifold& manifold, hkpFeatureContactPoint& fcp, hkpFeaturePointCache& fpp ) const;
+		__declspec(noalias) int hkpBoxBoxCollisionDetection_findClosestPoint( hkpBoxBoxManifold& manifold, hkpFeatureContactPoint& fcp, hkpFeaturePointCache& fpp ) const;
 		__forceinline void faceAVertexBValidationDataFromFeatureIndex( hkpFeaturePointCache& fpp, int featureIndex ) const;
 		__forceinline void faceBVertexAValidationDataFromFeatureIndex( hkpFeaturePointCache& fpp, int featureIndex ) const;
 		__forceinline void edgeEdgeValidationDataFromFeatureIndex( hkpFeaturePointCache& fpp ) const;
@@ -13830,7 +13835,7 @@ class hkpBoxBoxCollisionDetection
 		__forceinline hkBool isValidFaceBVertexA( hkpFeaturePointCache& fpp ) const;
 		__declspec(noalias) hkBool FUN_00a3cc40( hkpFeaturePointCache& fpp ) const;
 	public:
-		void FUN_00a3e820( hkpBoxBoxManifold& manifold ) const;
+		void hkpBoxBoxCollisionDetection_calcManifold( hkpBoxBoxManifold& manifold ) const;
 		hkResult checkIntersection( const hkVector4& tolerance ) const;
 	protected:
 		void initWorkVariables() const;
@@ -14427,7 +14432,8 @@ void hkpBoxBoxCollisionDetection::checkManifoldNormalConsistency( hkpBoxBoxManif
 	}
 }
 
-void hkpBoxBoxCollisionDetection::FUN_00a3e820( hkpBoxBoxManifold& manifold ) const
+// pdb: hkpBoxBoxCollisionDetection::calcManifold | hkpBoxBoxCollisionDetection.obj | fnv360_0822_retail, caller + bridge(call_seq|callee_sim) + skyrim(call_seq), high
+void hkpBoxBoxCollisionDetection::hkpBoxBoxCollisionDetection_calcManifold( hkpBoxBoxManifold& manifold ) const
 {
 	initWorkVariables();
 	hkpProcessCdPoint* ccp = m_result->getEnd();
@@ -14457,7 +14463,7 @@ void hkpBoxBoxCollisionDetection::FUN_00a3e820( hkpBoxBoxManifold& manifold ) co
 	{
 		hkpFeatureContactPoint fcp;
 		hkpFeaturePointCache fpp; fpp.m_nA.setZero4();
-		int validCollision = FUN_00a3d7c0( manifold, fcp, fpp );
+		int validCollision = hkpBoxBoxCollisionDetection_findClosestPoint( manifold, fcp, fpp );
 		if ( requestManifoldNormal && validCollision )
 		{
 			calcManifoldNormal( manifold.m_manifoldNormalA, fcp, fpp, validCollision == HK_FINDCLOSESTPOINT_VALID_POINT );

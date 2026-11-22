@@ -71,11 +71,11 @@ void Owner303::FUN_005ffc00() {
 class FUN_005fd540 {
 public:
     virtual ~FUN_005fd540();
-    void FUN_005fcac0(unsigned int first, unsigned int second, unsigned int third);
+    void PathingLocation_SetupData(unsigned int first, unsigned int second, unsigned int third);
     FUN_005fd540(unsigned int first, unsigned int second, unsigned int third);
 };
 FUN_005fd540::FUN_005fd540(unsigned int first, unsigned int second, unsigned int third) {
-    FUN_005fcac0(first, second, third);
+    PathingLocation_SetupData(first, second, third);
 }
 
 // @f3 0x005f14e0 (community match, verified in this file)
@@ -234,7 +234,7 @@ bool FUN_005f54e0(void* apFirst, void* apSecond, float* pfResult)
 extern int DAT_00dc4dc0;
 namespace f3m_005fd450 {
 // FUN_005fd450 -- F3 ctor (thiscall, 1 stack param). Sets vptr, resolves a provider pointer,
-// calls the object's vtable slot 0x1f4 and passes the result to this->FUN_005fcac0.
+// calls the object's vtable slot 0x1f4 and passes the result to this->PathingLocation_SetupData.
 
 
 extern void* DAT_0107a0d8;   // global object pointer
@@ -380,7 +380,7 @@ class FUN_005fd450_cls
 public:
     virtual void unk00();
     FUN_005fd450_cls(PV* apObj);
-    void FUN_005fcac0(void* apArg,int k);   // thiscall, 1 stack arg
+    void PathingLocation_SetupData(void* apArg,int k);   // thiscall, 1 stack arg
 };
 
 FUN_005fd450_cls::FUN_005fd450_cls(PV* apObj)
@@ -400,7 +400,7 @@ FUN_005fd450_cls::FUN_005fd450_cls(PV* apObj)
             }
         }
     }
-    FUN_005fcac0(apObj->v125(v),k);
+    PathingLocation_SetupData(apObj->v125(v),k);
 }
 }   // namespace f3m_005fd450
 
@@ -682,7 +682,7 @@ struct PVRef {
 class FUN_005fd6d0 {
 public:
     virtual ~FUN_005fd6d0();
-    void FUN_005fcac0(void* apKey, unsigned int first, unsigned int second);
+    void PathingLocation_SetupData(void* apKey, unsigned int first, unsigned int second);
     FUN_005fd6d0(PVRef* apObj);
 };
 
@@ -691,7 +691,7 @@ FUN_005fd6d0::FUN_005fd6d0(PVRef* apObj)
     unsigned int first = 0;
     unsigned int second = 0;
     apObj->FUN_004c0d50((void**)&first, (void**)&second);
-    FUN_005fcac0(apObj, first, second);
+    PathingLocation_SetupData(apObj, first, second);
 }
 
 }
@@ -989,14 +989,14 @@ struct Point5fcba0 { float x,y,z; };
 int __cdecl FUN_00501250(Point5fcba0*);
 struct Owner5fcba0 {
  int unk00; Point5fcba0 position; int unk10; int unk14; int unk18; void* unk1C; int unk20; unsigned short unk24;
- void FUN_005fcac0(const Point5fcba0*, int, void*);
+ void PathingLocation_SetupData(const Point5fcba0*, int, void*);
  void FUN_005fcba0(const Point5fcba0*);
 };
 void Owner5fcba0::FUN_005fcba0(const Point5fcba0* point) {
  position=*point;
  unk24=0xffff;
  if(unk1C && FUN_00501250(&position)!=unk20)
-  FUN_005fcac0(point,0,unk1C);
+  PathingLocation_SetupData(point,0,unk1C);
 }
 }   // namespace f3m_005fcba0
 
@@ -1406,7 +1406,7 @@ void Array5eb2::FUN_005eb2f0(unsigned index,bool shrink){if(shrink){if(unk0C>0x4
 // @f3 0x005eb7e0 (community match, verified in this file)
 extern unsigned int DAT_00e27ed4;
 namespace f3m_005eb7e0 {
-struct Heap1500 { void* FUN_0086c710(unsigned int,unsigned int); };
+struct Heap1500 { void* ScrapHeap_Allocate(unsigned int,unsigned int); };
 struct Owner1500
 {
     unsigned int unk00,unk04,unk08,unk0C;
@@ -1415,7 +1415,7 @@ struct Owner1500
 };
 void* Owner1500::FUN_005eb7e0(unsigned int bytes)
 {
-    return heap10->FUN_0086c710(bytes,DAT_00e27ed4);
+    return heap10->ScrapHeap_Allocate(bytes,DAT_00e27ed4);
 }
 }   // namespace f3m_005eb7e0
 
@@ -1449,10 +1449,10 @@ void __stdcall FUN_005eb0b0(Item5eb0b0* items,unsigned count) {
 // @f3 0x005fc4d0 (community match, verified in this file)
 namespace match5fc4d0 {
 extern void* DAT_00dc4dc0;extern void* DAT_00f47a58;extern void* DAT_00f47a3c;extern void* DAT_00f46078;
-void* FUN_00455190(unsigned);
+void* TESForm_GetFormByNumericID(unsigned);
 void* FUN_00c0050a(void*,int,void*,void*,int);
 struct Vector5fc4d0 {float x,y,z;};
-struct Source5fc4d0 {int unk00;unsigned lookupID;int unk08;unsigned id;int unk10;int unk14;int unk18;void* form;void* Get(){return form?form:FUN_00455190(lookupID);}};
+struct Source5fc4d0 {int unk00;unsigned lookupID;int unk08;unsigned id;int unk10;int unk14;int unk18;void* form;void* Get(){return form?form:TESForm_GetFormByNumericID(lookupID);}};
 struct Owner5fc4d0 {
  void* vtable;Vector5fc4d0 position;Source5fc4d0* source;unsigned unk14;void* first;void* second;unsigned id;unsigned short index;unsigned char flags;
  Owner5fc4d0* FUN_005fc4d0(Vector5fc4d0*,Source5fc4d0*);
@@ -1560,10 +1560,10 @@ bool __cdecl FUN_005f2190(Subject5f2190* subject,Vec5f2190* out) {
 // @f3 0x005fc670 (community match, verified in this file)
 namespace match5fc670 {
 extern void* DAT_00dc4dc0;extern void* DAT_00f47a58;extern void* DAT_00f47a3c;extern void* DAT_00f46078;
-void* FUN_00455190(unsigned);
+void* TESForm_GetFormByNumericID(unsigned);
 void* FUN_00c0050a(void*,int,void*,void*,int);
 struct Vector5fc670 {float x,y,z;};
-struct Source5fc670 {int unk00;unsigned lookupID;int unk08;unsigned id;int unk10;int unk14;int unk18;void* form;void* Get(){return form?form:FUN_00455190(lookupID);}};
+struct Source5fc670 {int unk00;unsigned lookupID;int unk08;unsigned id;int unk10;int unk14;int unk18;void* form;void* Get(){return form?form:TESForm_GetFormByNumericID(lookupID);}};
 struct Owner5fc670 {
  void* vtable;Vector5fc670 position;Source5fc670* source;unsigned unk14;void* first;void* second;unsigned id;unsigned short index;unsigned char flags;
  void FUN_005fc670(Source5fc670*);
@@ -1669,13 +1669,13 @@ char* Owner5FFE::FUN_005ffe10(unsigned key) {
 #include <string.h>
 extern unsigned int DAT_00e27ed4;
 namespace f3m_005eb970 {
-struct Alloc5eb970 {void* FUN_0086c710(unsigned int,unsigned int);void FUN_0086c7b0(void*);};
+struct Alloc5eb970 {void* ScrapHeap_Allocate(unsigned int,unsigned int);void ScrapHeap_Deallocate(void*);};
 struct Point5eb970 {float x;float y;float z;};
 struct Array5eb970 {int unk00;Point5eb970* buffer;unsigned int size;unsigned int capacity;Alloc5eb970* allocator;Point5eb970* FUN_005eb970(Point5eb970*,unsigned int);};
 Point5eb970* Array5eb970::FUN_005eb970(Point5eb970* old,unsigned int count) {
- Point5eb970* replacement=(Point5eb970*)allocator->FUN_0086c710(count*sizeof(Point5eb970),DAT_00e27ed4);
+ Point5eb970* replacement=(Point5eb970*)allocator->ScrapHeap_Allocate(count*sizeof(Point5eb970),DAT_00e27ed4);
  memmove(replacement,old,size*sizeof(Point5eb970));
- allocator->FUN_0086c7b0(old);
+ allocator->ScrapHeap_Deallocate(old);
  return replacement;
 }
 }   // namespace f3m_005eb970
@@ -1927,8 +1927,8 @@ void Array5F38::FUN_005f3840(){table=DAT_00e02100;if(data){DAT_00e02108(this,dat
 
 // @f3 0x005e6780 (community match, verified in this file)
 namespace f3m_005e6780 {
-struct Form5e67 {int unk00;unsigned char unk04;bool FUN_004b7c60();};struct Input5e67 {int unk00,unk04,unk08;void* unk0C;int unk10,unk14,unk18;Form5e67* unk1C;};struct Node5e67 {void* unk00;Node5e67* unk04;};struct List5e67 {Node5e67 head;Node5e67* Head(){return &head;}bool Contains(void* item){for(Node5e67* p=Head();p;p=p->unk04)if(p->unk00==item)return true;return false;}void FUN_00421610(void**);void FUN_0049fac0(void**);};struct Owner5e67 {int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; int unk1C; int unk20; int unk24; int unk28; List5e67 unk2C;int unk34; int unk38; int unk3C; int unk40; int unk44; int unk48; int unk4C; int unk50; int unk54; int unk58; int unk5C; int unk60; int unk64; int unk68; int unk6C; int unk70; int unk74; int unk78; int unk7C; int unk80; int unk84; int unk88; List5e67 unk8C,unk94;void FUN_005e6430(Input5e67*);void FUN_005e6780(Input5e67*);};
-void Owner5e67::FUN_005e6780(Input5e67* input){Input5e67* original=input;Form5e67* form=original->unk1C;if(form->unk04==0x1c&&!form->FUN_004b7c60())FUN_005e6430(original);unk2C.FUN_00421610((void**)&input);if(unk8C.Contains(original)){unk8C.FUN_00421610((void**)&input);return;}void* id=original->unk0C;if(!unk94.Contains(id)){input=(Input5e67*)id;unk94.FUN_0049fac0((void**)&input);}}
+struct Form5e67 {int unk00;unsigned char unk04;bool TESObjectDOOR_IsSlidingDoor();};struct Input5e67 {int unk00,unk04,unk08;void* unk0C;int unk10,unk14,unk18;Form5e67* unk1C;};struct Node5e67 {void* unk00;Node5e67* unk04;};struct List5e67 {Node5e67 head;Node5e67* Head(){return &head;}bool Contains(void* item){for(Node5e67* p=Head();p;p=p->unk04)if(p->unk00==item)return true;return false;}void FUN_00421610(void**);void FUN_0049fac0(void**);};struct Owner5e67 {int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; int unk1C; int unk20; int unk24; int unk28; List5e67 unk2C;int unk34; int unk38; int unk3C; int unk40; int unk44; int unk48; int unk4C; int unk50; int unk54; int unk58; int unk5C; int unk60; int unk64; int unk68; int unk6C; int unk70; int unk74; int unk78; int unk7C; int unk80; int unk84; int unk88; List5e67 unk8C,unk94;void FUN_005e6430(Input5e67*);void FUN_005e6780(Input5e67*);};
+void Owner5e67::FUN_005e6780(Input5e67* input){Input5e67* original=input;Form5e67* form=original->unk1C;if(form->unk04==0x1c&&!form->TESObjectDOOR_IsSlidingDoor())FUN_005e6430(original);unk2C.FUN_00421610((void**)&input);if(unk8C.Contains(original)){unk8C.FUN_00421610((void**)&input);return;}void* id=original->unk0C;if(!unk94.Contains(id)){input=(Input5e67*)id;unk94.FUN_0049fac0((void**)&input);}}
 }   // namespace f3m_005e6780
 
 // @f3 0x005f3a90 (community match, verified in this file)
@@ -2009,12 +2009,12 @@ bool FUN_005f8210(void* a,void* b) {Temporary5f8210 temporary(a,b);return tempor
 extern unsigned DAT_00e27ed4;
 namespace f3m_005e00d0 {
 extern void* __cdecl FUN_00bffa60(void*,const void*,unsigned);
-struct Allocator5E00 {void* FUN_0086c710(unsigned,unsigned);void FUN_0086c7b0(void*);};
+struct Allocator5E00 {void* ScrapHeap_Allocate(unsigned,unsigned);void ScrapHeap_Deallocate(void*);};
 struct Array5E00 {int unk00;void* data;unsigned size;unsigned capacity;Allocator5E00* allocator;void* FUN_005e00d0(void*,unsigned);};
 void* Array5E00::FUN_005e00d0(void* old,unsigned count){
- void* result=allocator->FUN_0086c710(count*4,DAT_00e27ed4);
+ void* result=allocator->ScrapHeap_Allocate(count*4,DAT_00e27ed4);
  FUN_00bffa60(result,old,size*4);
- allocator->FUN_0086c7b0(old);
+ allocator->ScrapHeap_Deallocate(old);
  return result;
 }
 }   // namespace f3m_005e00d0
@@ -2250,14 +2250,14 @@ float Array::FUN_005fc120(Point* point) { float total=0; unsigned remaining=coun
 
 // @f3 0x005fece0 (community match, verified in this file)
 namespace f3m_005fece0 {
-struct Stream5fece0 {void FUN_006e0750(void*,unsigned int);unsigned int FUN_006e08a0();};
+struct Stream5fece0 {void FUN_006e0750(void*,unsigned int);unsigned int BGSLoadGameBuffer_LoadVariableSizedValue();};
 struct Array5fece0 {int unk00;char* buffer;unsigned int size;unsigned int capacity;void FUN_005fe850(unsigned int,int);};
 struct Owner5fece0 {unsigned char kind;unsigned char unk01;unsigned short unk02;Array5fece0 data;int unk14;int unk18;void FUN_005fece0(Stream5fece0*);};
 void Owner5fece0::FUN_005fece0(Stream5fece0* stream) {
  stream->FUN_006e0750(&kind,1);
  stream->FUN_006e0750(&unk18,4);
  if(kind==0) {
- unsigned int count=stream->FUN_006e08a0();
+ unsigned int count=stream->BGSLoadGameBuffer_LoadVariableSizedValue();
  data.FUN_005fe850(count,1);
  for(unsigned int i=0;i<count;++i) stream->FUN_006e0750(data.buffer+i,1);
  }
@@ -2728,7 +2728,7 @@ bool __cdecl FUN_005f1140(){
 // @f3 0x005fc810 (community match, verified in this file)
 namespace f3m_005fc810 {
 namespace Serialize132{
-struct Writer132{void FUN_006e1830(const void*,unsigned int,int);void FUN_006e17a0(unsigned int,int);void FUN_006e17e0(void*,int);};
+struct Writer132{void FUN_006e1830(const void*,unsigned int,int);void BGSSaveGameBuffer_SaveFormID(unsigned int,int);void FUN_006e17e0(void*,int);};
 struct Vec132{float x,y,z;};
 struct Descriptor132{unsigned int id;};
 struct Owner132{
@@ -2737,7 +2737,7 @@ struct Owner132{
 };
 void Owner132::FUN_005fc810(Writer132* writer){
  writer->FUN_006e1830(&position,12,0);
- writer->FUN_006e17a0(descriptor?descriptor->id:0,0);
+ writer->BGSSaveGameBuffer_SaveFormID(descriptor?descriptor->id:0,0);
  writer->FUN_006e17e0(first,0);writer->FUN_006e17e0(second,0);
  writer->FUN_006e1830(&value,4,0);writer->FUN_006e1830(&index,2,0);writer->FUN_006e1830(&flags,1,0);
  bool present=primary!=0;writer->FUN_006e1830(&present,1,0);
@@ -2792,9 +2792,10 @@ namespace f3m_005fc730 {
 struct Alternative182{void* FUN_00501d90(unsigned int);};
 struct Owner182{
  unsigned int unk00,unk04,unk08,unk0c,unk10,unk14;void* first;Alternative182* second;unsigned int value;
- void* FUN_005fc730();
+ void* PathingLocation_GetCell();
 };
-void* Owner182::FUN_005fc730(){if(first)return first;if(second){void* result=second->FUN_00501d90(value);if(result)return result;}return 0;}
+// pdb: PathingLocation::GetCell | PathingLocation.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap_sim), high
+void* Owner182::PathingLocation_GetCell(){if(first)return first;if(second){void* result=second->FUN_00501d90(value);if(result)return result;}return 0;}
 }   // namespace f3m_005fc730
 
 // @f3 0x005e5de0 (community match, verified in this file)
@@ -2929,10 +2930,10 @@ bool Owner::FUN_005fc750(){if(!data)return false;if(!data->member)return false;i
 // @f3 0x005fe150 (community match, verified in this file)
 namespace f3m_005fe150 {
 namespace MatchFE1 {
-struct Stream {void FUN_006e1830(void*,unsigned,int);void FUN_006e18e0(unsigned);};
+struct Stream {void FUN_006e1830(void*,unsigned,int);void BGSSaveGameBuffer_SaveVariableSizedValue(unsigned);};
 struct Array {void* table;char* data;unsigned count;unsigned capacity;unsigned Size(){return this?count:0;} char& Get(unsigned i){return data[i];}};
 struct Owner {bool skip;unsigned char unk01;unsigned short unk02;Array array;int unk14;unsigned value;Array* GetArray(){return &array;} void FUN_005fe150(Stream*);};
-void Owner::FUN_005fe150(Stream* stream){stream->FUN_006e1830(this,1,0);stream->FUN_006e1830(&value,4,0);if(!skip){unsigned n=GetArray()?array.count:0;stream->FUN_006e18e0(n);for(unsigned i=0;i<n;++i)stream->FUN_006e1830(&array.Get(i),1,0);}}
+void Owner::FUN_005fe150(Stream* stream){stream->FUN_006e1830(this,1,0);stream->FUN_006e1830(&value,4,0);if(!skip){unsigned n=GetArray()?array.count:0;stream->BGSSaveGameBuffer_SaveVariableSizedValue(n);for(unsigned i=0;i<n;++i)stream->FUN_006e1830(&array.Get(i),1,0);}}
 }
 }   // namespace f3m_005fe150
 
@@ -3037,10 +3038,10 @@ bool Owner::FUN_005fc8b0(void** result){if(data&&!data->Disabled()){FUN_005b87d0
 // @f3 0x005f3870 (community match, verified in this file)
 extern unsigned DAT_00e27ed4;
 namespace f3m_005f3870 {
-struct Alloc5f38 {void* FUN_0086c710(unsigned,unsigned);void FUN_0086c7b0(void*);};
+struct Alloc5f38 {void* ScrapHeap_Allocate(unsigned,unsigned);void ScrapHeap_Deallocate(void*);};
 void* __cdecl FUN_00bffa60(void*,const void*,unsigned);
 struct Array5f38 {void**table;void*data;unsigned size;unsigned capacity;Alloc5f38*allocator;void* FUN_005f3870(void*,unsigned);};
-void* Array5f38::FUN_005f3870(void*old,unsigned nextCapacity){void*next=allocator->FUN_0086c710(nextCapacity*8,DAT_00e27ed4);FUN_00bffa60(next,old,size*8);allocator->FUN_0086c7b0(old);return next;}
+void* Array5f38::FUN_005f3870(void*old,unsigned nextCapacity){void*next=allocator->ScrapHeap_Allocate(nextCapacity*8,DAT_00e27ed4);FUN_00bffa60(next,old,size*8);allocator->ScrapHeap_Deallocate(old);return next;}
 }   // namespace f3m_005f3870
 
 // @f3 0x005eb680 (community match, verified in this file)
@@ -3651,8 +3652,8 @@ namespace f3m_005f1020 {
 namespace MatchF10 {
 struct Sub {int unk00;int unk04;int unk08;int unk0c;int unk10;int unk14;int unk18;int unk1c;int unk20;int unk24;int unk28;void FUN_005fc770();};struct Element {int unk00;Sub sub;void FUN_006102c0();};
 struct Storage {int unk00;int unk04;int unk08;Element* data;unsigned count;};
-struct Owner {void* table;Storage* storage;bool FUN_005eacb0(void*,int*,int*);bool FUN_005f0af0(void*);int FUN_005f1020(void*);};
-int Owner::FUN_005f1020(void* value){int last,first;first=-1;last=-1;if(!FUN_005eacb0(value,&first,&last))return 0;for(unsigned i=0;i<storage->count;++i)storage->data[i].sub.FUN_005fc770();if(first<=last){unsigned offset=(unsigned)first*sizeof(Element);unsigned remaining=(unsigned)(last-first+1);do{((Element*)((char*)storage->data+offset))->FUN_006102c0();offset+=sizeof(Element);}while(--remaining); }return FUN_005f0af0(value)?2:-1;}
+struct Owner {void* table;Storage* storage;bool FUN_005eacb0(void*,int*,int*);bool PathBuilder_BuildDetailedPath(void*);int FUN_005f1020(void*);};
+int Owner::FUN_005f1020(void* value){int last,first;first=-1;last=-1;if(!FUN_005eacb0(value,&first,&last))return 0;for(unsigned i=0;i<storage->count;++i)storage->data[i].sub.FUN_005fc770();if(first<=last){unsigned offset=(unsigned)first*sizeof(Element);unsigned remaining=(unsigned)(last-first+1);do{((Element*)((char*)storage->data+offset))->FUN_006102c0();offset+=sizeof(Element);}while(--remaining); }return PathBuilder_BuildDetailedPath(value)?2:-1;}
 }
 }   // namespace f3m_005f1020
 
@@ -3825,7 +3826,7 @@ struct NameMap
     }
 };
 
-void* FUN_00455190(const char* name);
+void* TESForm_GetFormByNumericID(const char* name);
 
 struct Owner
 {
@@ -3847,7 +3848,7 @@ void Owner::FUN_005e69b0(const char* name)
     NiPointer<RefCountedNamedObject> obj;
     if (map7C.GetAt(name, obj))
     {
-        void* found = FUN_00455190(obj->unk08->unk08);
+        void* found = TESForm_GetFormByNumericID(obj->unk08->unk08);
         if (found)
             FUN_005e6430(found);
     }
@@ -4073,14 +4074,14 @@ class FUN_005fd510
 {
 public:
     virtual ~FUN_005fd510();
-    void FUN_005fcac0(unsigned int first, unsigned int second, unsigned int third);
+    void PathingLocation_SetupData(unsigned int first, unsigned int second, unsigned int third);
     FUN_005fd510(unsigned int first, unsigned int second);
 };
 
 FUN_005fd510::FUN_005fd510(unsigned int first, unsigned int second)
 {
     *(void**)this = &DAT_00dc4dc0;
-    FUN_005fcac0(first, 0, second);
+    PathingLocation_SetupData(first, 0, second);
 }
 }   // namespace f3m_005fd510
 
@@ -4511,7 +4512,7 @@ struct QPt3 {
 struct QRng { unsigned int FUN_0086c4b0(unsigned int range); };
 QRng* FUN_0044a2d0();
 struct QGround { bool FUN_004d7380(QPt3* pos, float* z); };
-struct QFinder { int unk00; void* FUN_005fc730(); };
+struct QFinder { int unk00; void* PathingLocation_GetCell(); };
 struct QSpawn {
     int unk00, unk04, unk08;
     QFinder finder;
@@ -4536,7 +4537,7 @@ void FUN_005f6700(QSpawn* obj, QPt3* out)
     off.z = 0.0f;
     QPt3 p = obj->pos;
     *out = p + off;
-    QGround* g = (QGround*)obj->finder.FUN_005fc730();
+    QGround* g = (QGround*)obj->finder.PathingLocation_GetCell();
     float z;
     if (g && g->FUN_004d7380(out, &z))
         out->z = z;
@@ -4662,9 +4663,10 @@ struct QShape {
     int unk14, unk18, unk1c, unk20;
     unsigned short unk24;
     bool FUN_005fda30(int);
-    bool FUN_005fe020(float r);
+    bool PathingLocation_IsValidLocation(float r);
 };
-bool QShape::FUN_005fe020(float r)
+// pdb: PathingLocation::IsValidLocation | PathingLocation.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap_sim), high
+bool QShape::PathingLocation_IsValidLocation(float r)
 {
     FUN_005fda30(0);
     if (!owner || !owner->unk54)
@@ -4693,7 +4695,7 @@ struct QHeap { void* FUN_0086b930(unsigned n); void FUN_0086ba60(void* p); };
 extern QHeap DAT_01090a78;
 
 struct QStream {
-    unsigned FUN_006e08a0();
+    unsigned BGSLoadGameBuffer_LoadVariableSizedValue();
     void FUN_006e06d0(unsigned* out);
     void FUN_006e0750(void* dst, unsigned size);
 };
@@ -4725,7 +4727,7 @@ struct QOwner {
 
 void QOwner::FUN_005ff330(QStream* stream)
 {
-    unsigned count = stream->FUN_006e08a0();
+    unsigned count = stream->BGSLoadGameBuffer_LoadVariableSizedValue();
     for (unsigned i = 0; i < count; i++) {
         FUN_005ff110* entry = new FUN_005ff110;
         unsigned key;
@@ -5379,8 +5381,8 @@ namespace f3m_005eb800 {
 
 
 struct Allocator5eb800 {
-    void* FUN_0086c710(unsigned int key, int arg);
-    void FUN_0086c7b0(void* block);
+    void* ScrapHeap_Allocate(unsigned int key, int arg);
+    void ScrapHeap_Deallocate(void* block);
 };
 extern int DAT_00e27ed4;
 
@@ -5395,9 +5397,9 @@ public:
 };
 
 void* FUN_005eb800_owner::FUN_005eb800(void* block, unsigned int key) {
-    void* moved = allocator->FUN_0086c710(key, DAT_00e27ed4);
+    void* moved = allocator->ScrapHeap_Allocate(key, DAT_00e27ed4);
     memcpy(moved, block, size);
-    allocator->FUN_0086c7b0(block);
+    allocator->ScrapHeap_Deallocate(block);
     return moved;
 }
 }   // namespace f3m_005eb800
@@ -5509,13 +5511,13 @@ Array::Array(unsigned initialCapacity,unsigned initialCount,void* memory){
 // @f3 0x005fc5a0 (community match, verified in this file)
 extern int DAT_00dc4dc0,DAT_00f47a58,DAT_00f46078,DAT_00f47a3c;
 namespace f3m_005fc5a0 {
-extern void* __cdecl FUN_00455190(unsigned int);
+extern void* __cdecl TESForm_GetFormByNumericID(unsigned int);
 extern void* __cdecl FUN_00c0050a(void*,int,const void*,const void*,int);
 struct Vec89{float x,y,z;};
 struct Descriptor89{
  unsigned int unk00,id,unk08,value,unk10,unk14,unk18;
  void* object;
- void* GetObject(){return object?object:FUN_00455190(id);}
+ void* GetObject(){return object?object:TESForm_GetFormByNumericID(id);}
 };
 struct Owner89{
  void* vtable;Vec89 position;Descriptor89* descriptor;unsigned int unk14;
@@ -6027,7 +6029,7 @@ struct Pathing {unsigned unk00,unk04,unk08,unk0c,unk10,unk14,unk18;Map map;
  void* Find(unsigned id){void* found;return map.FUN_00bea7b0(id,&found)?found:0;}
 };
 struct Manager {Pathing* FUN_00433ff0();};extern Manager* DAT_0107a0d8;
-TESForm* FUN_00455190(unsigned);
+TESForm* TESForm_GetFormByNumericID(unsigned);
 void* FUN_005f1260(TESWorldSpace*,unsigned);
 void* FUN_005f1240(TESObjectCELL*);
 struct Point {float x,y,z;};
@@ -6037,8 +6039,8 @@ void Location::FUN_005fc950(Stream* stream) {
  unsigned id=0;
  stream->FUN_006e06d0(&id);
  navmesh=DAT_0107a0d8->FUN_00433ff0()->Find(id);
- cell=dynamic_cast<TESObjectCELL*>(FUN_00455190(stream->FUN_006e0670()));
- world=dynamic_cast<TESWorldSpace*>(FUN_00455190(stream->FUN_006e0670()));
+ cell=dynamic_cast<TESObjectCELL*>(TESForm_GetFormByNumericID(stream->FUN_006e0670()));
+ world=dynamic_cast<TESWorldSpace*>(TESForm_GetFormByNumericID(stream->FUN_006e0670()));
  stream->FUN_006e0750(&flags,4);
  stream->FUN_006e0750(&triangle,2);
  triangle=65535;
@@ -7112,7 +7114,8 @@ struct State {
     Buffer buffer;
 };
 extern State* __cdecl FUN_005e9ad0();
-void __stdcall FUN_005e9b70(void* input) {
+// pdb: bhkObstacleDeactivationListener::entityDeactivatedCallback | NavMeshObstacleManager.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void __stdcall bhkObstacleDeactivationListener_entityDeactivatedCallback(void* input) {
     if(input) {
         void* data=((Input*)input)->data;
         if(data) {
@@ -7208,9 +7211,9 @@ struct Val;
 struct Item { void FUN_005fe150(Stream*); };
 
 struct Stream {
-    unsigned FUN_006e16c0();
-    void FUN_006e17a0(unsigned value, int pad);
-    void FUN_006e18e0(unsigned count);
+    unsigned BGSSaveGameBuffer_StartVariableSizedValue();
+    void BGSSaveGameBuffer_SaveFormID(unsigned value, int pad);
+    void BGSSaveGameBuffer_SaveVariableSizedValue(unsigned count);
     void FUN_006e16e0(unsigned count, unsigned start);
     void FUN_006e1830(void* dst, unsigned size, int flag);
 };
@@ -7254,7 +7257,7 @@ struct Self {
 void Self::FUN_005fe1c0(Stream* stream)
 {
     unsigned count = 0;
-    unsigned start = stream->FUN_006e16c0();
+    unsigned start = stream->BGSSaveGameBuffer_StartVariableSizedValue();
     Val* pos = m_map.GetFirstPos();
     if (pos) {
         do {
@@ -7263,10 +7266,10 @@ void Self::FUN_005fe1c0(Stream* stream)
             m_map.FUN_0089a5d0(&pos, &key, &val);
             Val* v = *(Val* volatile*)&val;
             if (v) {
-                stream->FUN_006e17a0(key, 0);
-                stream->FUN_006e17a0(v->id ? *v->id : 0, 0);
+                stream->BGSSaveGameBuffer_SaveFormID(key, 0);
+                stream->BGSSaveGameBuffer_SaveFormID(v->id ? *v->id : 0, 0);
                 unsigned n = v->count;
-                stream->FUN_006e18e0(n);
+                stream->BGSSaveGameBuffer_SaveVariableSizedValue(n);
                 for (unsigned i = 0; i < n; ++i) {
                     v->data[i]->FUN_005fe150(stream);
                 }
@@ -7389,7 +7392,7 @@ FUN_005feff0::FUN_005feff0() : m_18(0.0f), m_44(0.0f), m_48(0.0f)
 // @f3 0x005e0a60 (community match, verified in this file)
 namespace f3m_005e2a10 {
 struct ScrapHeap5e0a {
-    void* FUN_0086c710(unsigned int a_uiSize, unsigned int a_uiAlign);
+    void* ScrapHeap_Allocate(unsigned int a_uiSize, unsigned int a_uiAlign);
 };
 
 struct EdgeArray5e0a : public ScrapArray<NavMeshObstacleEdge*> {
@@ -7472,7 +7475,7 @@ void NavMeshObstacleCutter::FUN_005e0a60() {
                 continue;
             if (!((CutterHelper5e0a*)this)->FUN_005dfc00(pFirst, pSecond))
                 continue;
-            EdgeInit5e0a* pEdge = (EdgeInit5e0a*)((ScrapHeap5e0a*)&unk0c)->FUN_0086c710(0x30, DAT_00e27ed4);
+            EdgeInit5e0a* pEdge = (EdgeInit5e0a*)((ScrapHeap5e0a*)&unk0c)->ScrapHeap_Allocate(0x30, DAT_00e27ed4);
             if (pEdge)
                 new (pEdge) EdgeInit5e0a(pFirst, pSecond);
             ((EdgeArray5e0a*)&Edges)->Add((NavMeshObstacleEdge*)pEdge);
@@ -7976,7 +7979,8 @@ struct State {
     Buffer buffer;
 };
 extern State* __cdecl FUN_005e9ad0();
-void __stdcall FUN_005e9bc0(void* input) {
+// pdb: bhkObstacleDeactivationListener::entityActivatedCallback | NavMeshObstacleManager.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void __stdcall bhkObstacleDeactivationListener_entityActivatedCallback(void* input) {
     if(input) {
         void* data=((Input*)input)->data;
         if(data) {
@@ -8023,7 +8027,7 @@ struct NiPoint3 {
     NiPoint3(float ax, float ay, float az) : x(ax), y(ay), z(az) {}
 };
 struct Cell { char pad[0x26]; unsigned char m26; };
-struct Grid { Cell* FUN_00501d20(); };
+struct Grid { Cell* TESWorldSpace_GetCellFromCellCoord(); };
 struct World {
     char pad[0x24];
     unsigned char m24;
@@ -8064,7 +8068,7 @@ bool __cdecl FUN_005e6fa0(Ctx* ctx, Array* out)
     int cy = (int)r->m14 >> 12;
     for (int x = cx - 1; x <= cx + 1; x++) {
         for (int y = cy - 1; y <= cy + 1; y++) {
-            Cell* c = w->FUN_004d3780(x, y)->FUN_00501d20();
+            Cell* c = w->FUN_004d3780(x, y)->TESWorldSpace_GetCellFromCellCoord();
             if (c && c->m26 == 6) {
                 NiPoint3 a((float)(x << 12), (float)(y << 12), -FLT_MAX);
                 if (FUN_005f1280(a, NiPoint3(a.x + 4096.0, a.y + 4096.0, FLT_MAX), ctx->m0->m58, ctx->m0->m64))
@@ -8850,7 +8854,7 @@ struct TriArr {
 };
 
 struct TESshell {
-    float FUN_00434200(NiPoint3* ap_Point, void* ap_Cell);
+    float TES_GetWaterHeight(NiPoint3* ap_Point, void* ap_Cell);
 };
 extern TESshell* DAT_0107a0d8;
 
@@ -8900,7 +8904,7 @@ bool ThisCls::FUN_005ee080(ArgObj* a0, ArgObj* a1, PathingLocation* apOutLocatio
             NiPoint3 wpt28 = navPtr->FUN_004d45e0(wIdxW);
             NiPoint3 xtmp40 = (upt4c + pt34G) * 0.45f + wpt28 * 0.1f;
             float vf50;
-            vf50 = DAT_0107a0d8->FUN_00434200(&xtmp40, navPtr->FUN_005b8480());
+            vf50 = DAT_0107a0d8->TES_GetWaterHeight(&xtmp40, navPtr->FUN_005b8480());
             if (vf50 + 25.0 > xtmp40.z)
                 xtmp40.z = vf50;
             apOutLocation->FUN_005fc480(PathingLocation(xtmp40, navPtr->FUN_005b84c0(), wIdxW));
@@ -8936,7 +8940,7 @@ bool ThisCls::FUN_005ee080(ArgObj* a0, ArgObj* a1, PathingLocation* apOutLocatio
         if (bestIdxz != 0xffff)
         {
             NiPoint3 pt90N = navPtr->FUN_004d45e0((unsigned short)bestIdxz);
-            rf94 = DAT_0107a0d8->FUN_00434200(&pt90N, navPtr->FUN_005b8480());
+            rf94 = DAT_0107a0d8->TES_GetWaterHeight(&pt90N, navPtr->FUN_005b8480());
             if (rf94 + 25.0 > pt90N.z)
                 pt90N.z = rf94;
             apOutLocation->FUN_005fc480(PathingLocation(pt90N, a0->FUN_00717e50()->FUN_005fcbf0(), (unsigned short)bestIdxz));
@@ -9621,7 +9625,7 @@ extern unsigned int DAT_00e27ed4;
 bool __cdecl FUN_005dd580(const NiPoint3& ar_P1, const NiPoint3& ar_P2, const NiPoint3& ar_P3, const NiPoint3& ar_P4, NiPoint3* ap_Result);
 
 struct ScrapHeap2110 {
-    void* FUN_0086c710(unsigned int a_uiSize, unsigned int a_uiAlign);
+    void* ScrapHeap_Allocate(unsigned int a_uiSize, unsigned int a_uiAlign);
 };
 
 struct RefObject2110 {
@@ -9688,7 +9692,7 @@ struct Cutter2110 {
     NavMeshObstacleVertex* FUN_005dfdc0(unsigned short a_usIndex, bool a_b1, bool a_b2, bool a_b3);
     Edge2110* FUN_005df800(NavMeshObstacleVertex* a_pStart, NavMeshObstacleVertex* a_pEnd, int a_iType);
     Edge2110* CreateEdge(NavMeshObstacleVertex* a_pStart, NavMeshObstacleVertex* a_pEnd, int a_iType) {
-        Edge2110* pNew = (Edge2110*)kHeap.FUN_0086c710(0x30, DAT_00e27ed4);
+        Edge2110* pNew = (Edge2110*)kHeap.ScrapHeap_Allocate(0x30, DAT_00e27ed4);
         if (pNew)
             pNew->FUN_005df350(a_pStart, a_pEnd, a_iType);
         return pNew;
@@ -10218,7 +10222,7 @@ void NavMeshObstacleCutter::FUN_005e0bc0()
                 continue;
             if (!((CutterHelper5e0a*)this)->FUN_005dfc00(pStart, pEnd))
                 continue;
-            EdgeInit5e0a* pEdge = (EdgeInit5e0a*)((ScrapHeap5e0a*)&unk0c)->FUN_0086c710(0x30, DAT_00e27ed4);
+            EdgeInit5e0a* pEdge = (EdgeInit5e0a*)((ScrapHeap5e0a*)&unk0c)->ScrapHeap_Allocate(0x30, DAT_00e27ed4);
             if (pEdge)
                 new (pEdge) EdgeInit5e0a(pStart, pEnd);
             ((EdgeArray5e0a*)&Edges)->Add((NavMeshObstacleEdge*)pEdge);
@@ -10906,8 +10910,8 @@ struct CellOps
     int unk00, unk04, unk08, unk0C, unk10, unk14, unk18, unk1C, unk20;
     unsigned char cCellFlags;
     bool IsInterior() { return cCellFlags & 1; }
-    int FUN_004d3430();
-    int FUN_004d3450();
+    int TESObjectCELL_GetDataX();
+    int TESObjectCELL_GetDataY();
 };
 
 
@@ -11071,8 +11075,8 @@ float __cdecl FUN_005faa80(CellOps* cell, const n5faa80::NiPoint3& pos, int mode
     }
     else
     {
-        kPoints = float(cell->FUN_004d3430() << 12);
-        eType = float(cell->FUN_004d3450() << 12);
+        kPoints = float(cell->TESObjectCELL_GetDataX() << 12);
+        eType = float(cell->TESObjectCELL_GetDataY() << 12);
         kNavMesh = kPoints + 4096.0;
         kTargetPoint = eType + 4096.0;
     }
@@ -11167,14 +11171,15 @@ struct Owner
     int unkA0[3];
     Map unkAC;
     void FUN_005e54d0(Input5e67* input);
-    void FUN_005e6560(Input5e67* input);
+    void NavMeshObstacleManager_OnDoorOpen(Input5e67* input);
 };
 
-void Owner::FUN_005e6560(Input5e67* input)
+// pdb: NavMeshObstacleManager::OnDoorOpen | NavMeshObstacleManager.obj | fnv360_0822_retail, call_gap + bridge(call_gap|call_gap) + skyrim(call_gap), high
+void Owner::NavMeshObstacleManager_OnDoorOpen(Input5e67* input)
 {
     Input5e67* original = input;
     Form5e67* form = original->unk1C;
-    if (form->unk04 == 0x1c && !form->FUN_004b7c60())
+    if (form->unk04 == 0x1c && !form->TESObjectDOOR_IsSlidingDoor())
         FUN_005e54d0(original);
     NiPointer<RefObj> ref;
     void* key = original->unk0C;
@@ -12003,7 +12008,7 @@ QRng* FUN_0044a2d0();
 struct QGround { bool FUN_004d7380(P3* pos, float* z); };
 struct QFinder {
     int unk00;
-    QGround* FUN_005fc730();
+    QGround* PathingLocation_GetCell();
     int FUN_004c0120();
 };
 struct QAvoid {
@@ -12030,7 +12035,7 @@ int FUN_005f3cb0(QSpawn* obj, QOut* out)
 {
     TlsTagGuard guard(0x2d);
     P3 start = obj->pos;
-    QGround* ground = obj->finder.FUN_005fc730();
+    QGround* ground = obj->finder.PathingLocation_GetCell();
     int cell = obj->finder.FUN_004c0120();
     P3 result;
     P3 center;
@@ -12194,7 +12199,7 @@ struct Ctl {
     int m8, mc;
     bool m10;
     bool FUN_005eacb0(int idx, int* a, int* b);
-    bool FUN_005f0af0(int idx);
+    bool PathBuilder_BuildDetailedPath(int idx);
     bool FUN_005f09e0();
     int FUN_005f0eb0(int idx, int a2);
 };
@@ -12228,7 +12233,7 @@ int Ctl::FUN_005f0eb0(int idx, int a2)
             return -1;
         m4->m20.FUN_005eb2f0(n - 1, 1);
     }
-    else if (!FUN_005f0af0(idx))
+    else if (!PathBuilder_BuildDetailedPath(idx))
         return -1;
     return 2;
 }
@@ -12390,7 +12395,7 @@ struct PathNode {
     int unk00;
     Vec3 pos;                     // +04
     Vec3 GetPos() const { return pos; }
-    PathCell* FUN_005fc730();
+    PathCell* PathingLocation_GetCell();
 };
 
 struct PathFilter {
@@ -12410,7 +12415,7 @@ struct PathProbe {
 unsigned char __cdecl FUN_005f25b0(void* first, void* second, void* dest, PathFilter* filter);
 
 struct HeightMgr {
-    float FUN_00434200(Vec3* pt, PathCell* cell);
+    float TES_GetWaterHeight(Vec3* pt, PathCell* cell);
 };
 
 
@@ -12442,13 +12447,13 @@ bool PathCheck::FUN_005ec510(PathNode* a1, PathNode* a2)
     {
         Vec3 q1 = a1->GetPos();
         Vec3 p1 = q1;
-        if (((HeightMgr*)DAT_0107a0d8)->FUN_00434200(&q1, a1->FUN_005fc730()) + 25.0 > p1.z)
+        if (((HeightMgr*)DAT_0107a0d8)->TES_GetWaterHeight(&q1, a1->PathingLocation_GetCell()) + 25.0 > p1.z)
             { m_pSink->FUN_005c5cf0(a1, (Vec3*)&DAT_0108ec68); return true; }
     }
     {
         Vec3 q2 = a2->GetPos();
         Vec3 p2 = q2;
-        if (((HeightMgr*)DAT_0107a0d8)->FUN_00434200(&q2, a2->FUN_005fc730()) + 25.0 > p2.z)
+        if (((HeightMgr*)DAT_0107a0d8)->TES_GetWaterHeight(&q2, a2->PathingLocation_GetCell()) + 25.0 > p2.z)
             { m_pSink->FUN_005c5cf0(a1, (Vec3*)&DAT_0108ec68); return true; }
     }
     {
@@ -12494,12 +12499,13 @@ struct OwnerView5e {
     Owner5e67 native;
     Map5e first;
     Map5e second;
-    void FUN_005e6670(Input5e67* input);
+    void NavMeshObstacleManager_OnDoorClose(Input5e67* input);
 };
-void OwnerView5e::FUN_005e6670(Input5e67* input) {
+// pdb: NavMeshObstacleManager::OnDoorClose | NavMeshObstacleManager.obj | fnv360_0822_retail, call_gap + bridge(call_gap|call_gap) + skyrim(call_gap), high
+void OwnerView5e::NavMeshObstacleManager_OnDoorClose(Input5e67* input) {
     Input5e67* original = input;
     Form5e67* form = original->unk1C;
-    if (form->unk04 == 0x1c && !form->FUN_004b7c60())
+    if (form->unk04 == 0x1c && !form->TESObjectDOOR_IsSlidingDoor())
         native.FUN_005e6430(original);
     Ptr5e<RefObject5e> result;
     void* firstKey = original->unk0C;
@@ -12820,7 +12826,7 @@ done:
 // @f3 0x005ea060 (community match, verified in this file)
 extern __declspec(thread) int DAT_0117c298;
 namespace f3m_005ea060 {
-// FUN_005ea060 at 0x005ea060 (this in ecx, no stack arguments)
+// ObstacleTaskData_Process at 0x005ea060 (this in ecx, no stack arguments)
 // Scene/task update: builds a 0x108 object into the smart pointer at this+0x20,
 // then dispatches every entry of the this+0x28 array through one of four
 // per-type calls, marking each entry handled (0) or not (1).
@@ -12911,7 +12917,7 @@ struct World5ea060 {
 };
 
 struct State5ea060 {
-    void FUN_005e6b60(void* item);
+    void NavMeshObstacleManager_AddProcessedTask(void* item);
 };
 
 State5ea060* __cdecl FUN_005e9ad0();
@@ -12933,10 +12939,11 @@ struct C5ea060 {
     int m40; int m44;
     Elem5ea060* m48;
     unsigned int m4c;
-    void FUN_005ea060();
+    void ObstacleTaskData_Process();
 };
 
-void C5ea060::FUN_005ea060()
+// pdb: ObstacleTaskData::Process | NavMeshObstacleTask.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void C5ea060::ObstacleTaskData_Process()
 {
     MemCtx5ea060 context;
     FUN_005e9ad0();
@@ -12994,7 +13001,7 @@ break;
         for (unsigned int i = 0; i < m2c; i++)
             m28[i].flag = 1;
     }
-    FUN_005e9ad0()->FUN_005e6b60(this);
+    FUN_005e9ad0()->NavMeshObstacleManager_AddProcessedTask(this);
     FUN_005e9ad0();
 }
 }   // namespace f3m_005ea060
@@ -13428,7 +13435,7 @@ struct Mesh {
  Vec3* GetVertex(unsigned short i){return &unk2c[i];}
  int unk00,unk04,unk08,unk0c,unk10,unk14,unk18,unk1c,unk20,unk24,unk28;
  Vec3* unk2c;int unk30,unk34,unk38;Triangle* unk3c;
- bool FUN_005b8a30(unsigned short,int,void**,unsigned short*,unsigned int*);
+ bool NavMesh_GetMatchingEdge(unsigned short,int,void**,unsigned short*,unsigned int*);
  void FUN_005be400(unsigned short,void**);
 };
 struct ShortArr {void* vt;unsigned short* unk04;unsigned unk08,unk0c;
@@ -13436,7 +13443,7 @@ struct ShortArr {void* vt;unsigned short* unk04;unsigned unk08,unk0c;
  unsigned Find(const unsigned short& v) const {for(unsigned i=0;i<unk08;++i) if(unk04 && unk04[i]==v) return i; return (unsigned)-1;}
 };
 struct Input {int unk00,unk04,unk08,unk0c,unk10,unk14,unk18,unk1c;ShortArr unk20;};
-struct Arena {int unk00,unk04,unk08,unk0c;void* FUN_0086c710(unsigned,unsigned);};
+struct Arena {int unk00,unk04,unk08,unk0c;void* ScrapHeap_Allocate(unsigned,unsigned);};
 struct Builder {
  Mesh* unk00;int unk04;Input* unk08;Arena unk0c;Array<Vertex*> unk1c;int unk2c;Array<Edge*> unk30;
  bool FUN_005df730(Vec3*);
@@ -13462,7 +13469,7 @@ void Builder::FUN_005e1810() {
    for(unsigned k=0;k<2;++k) {
     unsigned i=FindVertex(ids[k]);
     if(i==(unsigned)-1) {
-     Vertex* v=(Vertex*)unk0c.FUN_0086c710(8,DAT_00e27ed4);
+     Vertex* v=(Vertex*)unk0c.ScrapHeap_Allocate(8,DAT_00e27ed4);
      if(v) {v->unk00=ids[k];v->unk02=false;v->unk03=exterior;v->unk04=boundary;v->unk05=false;v->unk06=false;}
      v->unk05=(!v->unk03&&!v->unk04)?InArea(v):true;
      unk1c.Add(v);ends[k]=v;
@@ -13472,11 +13479,11 @@ void Builder::FUN_005e1810() {
      ends[k]=unk1c.unk04[i];
     }
    }
-   Edge* edge=(Edge*)unk0c.FUN_0086c710(48,DAT_00e27ed4);
+   Edge* edge=(Edge*)unk0c.ScrapHeap_Allocate(48,DAT_00e27ed4);
    if(edge) new(edge) Edge(ends[0],ends[1],kind);
    if(kind==2) {
     unsigned short linkedTri;unsigned int linkedEdge;void* linkedMesh;
-    if(unk00->FUN_005b8a30(unk08->unk20[t],e,&linkedMesh,&linkedTri,&linkedEdge)) {
+    if(unk00->NavMesh_GetMatchingEdge(unk08->unk20[t],e,&linkedMesh,&linkedTri,&linkedEdge)) {
      if(edge->unk08==65535) {edge->unk08=linkedTri;edge->unk0c=linkedEdge;}
      else if(edge->unk0a==65535) {edge->unk0a=linkedTri;edge->unk0e=linkedEdge;}
     }
@@ -13494,7 +13501,7 @@ namespace f3m_005fb040 {
 namespace path3108 {
 extern "C" __declspec(dllimport) long __stdcall InterlockedDecrement(long*);
 extern __declspec(thread) int DAT_0117c298;struct AutoMemHelper {int previous;AutoMemHelper(int v):previous(DAT_0117c298){DAT_0117c298=v;}~AutoMemHelper(){DAT_0117c298=previous;}};
-struct NiPoint3 {float x,y,z;NiPoint3(){}NiPoint3(float a,float b,float c):x(a),y(b),z(c){}NiPoint3 operator-(const NiPoint3&r)const{return NiPoint3(x-r.x,y-r.y,z-r.z);}NiPoint3 operator+(const NiPoint3&r)const{return NiPoint3(x+r.x,y+r.y,z+r.z);}NiPoint3 operator*(float f)const{return NiPoint3(x*f,y*f,z*f);}float FUN_00432c00();};struct ClosePointAccess:NiPoint3 {};
+struct NiPoint3 {float x,y,z;NiPoint3(){}NiPoint3(float a,float b,float c):x(a),y(b),z(c){}NiPoint3 operator-(const NiPoint3&r)const{return NiPoint3(x-r.x,y-r.y,z-r.z);}NiPoint3 operator+(const NiPoint3&r)const{return NiPoint3(x+r.x,y+r.y,z+r.z);}NiPoint3 operator*(float f)const{return NiPoint3(x*f,y*f,z*f);}float NiPoint3_UnitizeGetLength();};struct ClosePointAccess:NiPoint3 {};
 struct NavMeshInfo;
 struct RefBase {virtual void v0();virtual void Destroy();long refs;void Release(){if(InterlockedDecrement(&refs)==0)Destroy();}};struct NavMesh {int unk0;int unk4;int unk8;int unkC;int unk10;int unk14;int unk18;RefBase ref;};struct CloseMeshAccess:NavMesh {const NavMeshInfo* FUN_005b84c0();NiPoint3 FUN_004d45e0(unsigned short);};struct NavMeshPtr {NavMesh* mesh;NavMeshPtr():mesh(0){}~NavMeshPtr(){if(mesh)mesh->ref.Release();}};struct CloseMeshPointerAccess:NavMeshPtr {NavMesh* FUN_00458b50(){return mesh;}};
 struct PathingLocation {virtual ~PathingLocation(){} NiPoint3 position;int unk10;int unk14;int unk18;int unk1C;int unk20;unsigned short unk24;unsigned char locationFlags,unk27;PathingLocation(const PathingLocation&);PathingLocation(const NiPoint3&,const NavMeshInfo*);bool FUN_005fcc10();bool FUN_005fc8f0(NavMeshPtr&,unsigned short&);bool FUN_005fda30(int);NiPoint3& GetLocation(){return position;}};struct CloseLocationAccess:PathingLocation {bool FUN_006a9520(){return (locationFlags&2u)>0;}};
@@ -13628,7 +13635,7 @@ bool FUN_005fb040(PathingRequestClosePoint* request, PathingSolution* solution)
     if (FUN_005f9620((PathingLocation*)&b, ((CloseRequestAccess*)request)->GetFloatAtOffset68(), &k))
     {
         NiPoint3 j = e - k.second;
-        float p = ((ClosePointAccess*)&j)->FUN_00432c00();
+        float p = ((ClosePointAccess*)&j)->NiPoint3_UnitizeGetLength();
         if (p < ((CloseRequestAccess*)request)->GetFloatAtOffset68())
             e = k.second + j * ((CloseRequestAccess*)request)->GetFloatAtOffset68();
     }
@@ -13760,7 +13767,7 @@ struct S5ea710_Ptr {
 };
 
 struct S5ea710_List {
-    void FUN_00442e50(S5ea710_Ptr p);
+    void NavMeshArray_AddNavMesh(S5ea710_Ptr p);
     void FUN_005c2740(S5ea710_Ptr p);
 };
 
@@ -13804,7 +13811,7 @@ found:
     void* saved = unk1C->unk0C;
     S5ea710_Group* group = unk1C->FUN_005b8480();
     if (group) {
-        group->FUN_007e55b0()->FUN_00442e50(unk20);
+        group->FUN_007e55b0()->NavMeshArray_AddNavMesh(unk20);
         group->FUN_007e55b0()->FUN_005c2740(unk1C);
     }
     unk1C->FUN_005bb120(0);
@@ -13883,7 +13890,7 @@ struct Group : RefObj {
 };
 
 struct Listener {
-    void FUN_0090afd0(void* p);
+    void hkpEntity_removeEntityActivationListener(void* p);
     void FUN_0090b960(void* p);
 };
 
@@ -13896,7 +13903,7 @@ struct ItemSrc {
 inline void AttachA(ItemSrc* src, void* arg)
 {
     if (src && src->unk08)
-        src->unk08->FUN_0090afd0(arg);
+        src->unk08->hkpEntity_removeEntityActivationListener(arg);
 }
 
 inline void AttachB(ItemSrc* src, void* arg)
@@ -14277,7 +14284,7 @@ namespace Task2282 {
 struct S005ec160_Node
 {
     NiPoint3* FUN_004e7580();
-    void* FUN_004e74a0();
+    void* TESObjectREFR_GetTeleport();
 };
 
 struct S005ec160_Mesh
@@ -14355,7 +14362,7 @@ bool S005ec160_Handler::FUN_005ec160(void* a1, void* a2)
             S005ec160_Node* node = (S005ec160_Node*)((void**)transitions.unk04)[0];
             NiPoint3 pos = *node->FUN_004e7580();
             m_pPathingSolution->FUN_005ec080(route.data[0], &pos, node);
-            NiPoint3 dest = *((S005ec160_Mesh*)node->FUN_004e74a0())->FUN_00bd8090();
+            NiPoint3 dest = *((S005ec160_Mesh*)node->TESObjectREFR_GetTeleport())->FUN_00bd8090();
             m_pPathingSolution->FUN_005ec000(dest, route.data[1]);
         }
         for (unsigned int i = 1; i < route.FUN_0044ddc0() - 1; ++i)
@@ -14367,7 +14374,7 @@ bool S005ec160_Handler::FUN_005ec160(void* a1, void* a2)
                 {
                     NiPoint3 pos = *node->FUN_004e7580();
                     m_pPathingSolution->FUN_005ec080(route.data[i], &pos, node);
-                    NiPoint3 dest = *((S005ec160_Mesh*)node->FUN_004e74a0())->FUN_00bd8090();
+                    NiPoint3 dest = *((S005ec160_Mesh*)node->TESObjectREFR_GetTeleport())->FUN_00bd8090();
                     m_pPathingSolution->FUN_005ec000(dest, route.data[i + 1]);
                 }
             }
@@ -14760,7 +14767,7 @@ struct S5e1c70_Mesh : public NavMesh {
 };
 
 struct S5e1c70_Heap {
-    void* FUN_0086c710(unsigned int a_uiSize, unsigned int a_uiAlign);
+    void* ScrapHeap_Allocate(unsigned int a_uiSize, unsigned int a_uiAlign);
 };
 
 struct S5e1c70_Edge {
@@ -14852,7 +14859,7 @@ inline S5e1c70_Obstacle* S5e1c70_GetObstacle(const NiPointer<ObstacleData>& sp) 
 }
 
 inline S5e1c70_Edge* S5e1c70_CreateEdge(S5e1c70_Heap& a_rHeap, NavMeshObstacleVertex* const& a_pStart, NavMeshObstacleVertex* a_pEnd) {
-    S5e1c70_Edge* pEdge = (S5e1c70_Edge*)a_rHeap.FUN_0086c710(0x30, DAT_00e27ed4);
+    S5e1c70_Edge* pEdge = (S5e1c70_Edge*)a_rHeap.ScrapHeap_Allocate(0x30, DAT_00e27ed4);
     if (pEdge)
         new (pEdge) S5e1c70_Edge(a_pStart, a_pEnd);
     return pEdge;
@@ -14893,7 +14900,7 @@ void NavMeshObstacleCutter::FUN_005e1c70() {
         NavMeshVertex kVertex;
         kVertex.Location = kPoints[i];
         unsigned int uiIndex = ((S5e1c70_Mesh*)pNavMesh)->FUN_005ba320(kVertex);
-        NavMeshObstacleVertex* pVertex = (NavMeshObstacleVertex*)((S5e1c70_Heap*)&unk0c)->FUN_0086c710(8, DAT_00e27ed4);
+        NavMeshObstacleVertex* pVertex = (NavMeshObstacleVertex*)((S5e1c70_Heap*)&unk0c)->ScrapHeap_Allocate(8, DAT_00e27ed4);
         if (pVertex) {
             pVertex->usVertexIndex = (unsigned short)uiIndex;
             pVertex->bOnObstacle = true;
@@ -15389,9 +15396,9 @@ struct S005efb00_Point
     int unk00;
     void* FUN_004c0120();
     void* FUN_005fcbf0();
-    void* FUN_005fc730();
+    void* PathingLocation_GetCell();
     bool SameA(S005efb00_Point& other) { void* o = FUN_004c0120(); return other.FUN_004c0120() == o; }
-    bool SameB(S005efb00_Point& other) { void* o = FUN_005fc730(); return other.FUN_005fc730() == o; }
+    bool SameB(S005efb00_Point& other) { void* o = PathingLocation_GetCell(); return other.PathingLocation_GetCell() == o; }
 };
 
 struct S005efb00_Pair
@@ -15761,7 +15768,7 @@ bool Owner::FUN_005ff750(void* apParam) {
 
 // @f3 0x005e6b60 (community match, verified in this file)
 namespace f3m_005e6b60 {
-// Model of FUN_005e6b60 (68 bytes), third revision - v2 compiled at 72 vs 68 / 21 lines and the whole residue turned out to be addressing FORM ✓✓
+// Model of NavMeshObstacleManager_AddProcessedTask (68 bytes), third revision - v2 compiled at 72 vs 68 / 21 lines and the whole residue turned out to be addressing FORM ✓✓
 // Their build keeps two derived pointers rather than re-discounting from 'this':
 //     mov edi,ecx ; lea esi,[edi+100h]        - ESI = &this->monitor, taken once at entry and reused for the enter call AND for the release pair ([esi+4], [esi]) ✓✓
 //     add edi,0E8h ; mov ecx,edi              - EDI is RE-BASED onto &this->slots (an 'add', not another lea) and used as ECX plus later [edi+4] ✓✓
@@ -15792,12 +15799,13 @@ struct OwnerC5E {                                         // the NavMeshObstacle
     char pad100[0x100 - 0xF0];
     MonitorC5E monitor;                                   // +0x100 ✓✓
 
-    void FUN_005e6b60(int value);                         // thiscall with one stack parameter (retn 4) ✓✓
+    void NavMeshObstacleManager_AddProcessedTask(int value);                         // thiscall with one stack parameter (retn 4) ✓✓
 };
 
 extern long (__stdcall *DAT_00d9b06c)(long*, long, long);   // InterlockedCompareExchange through its import slot: 'call ds:InterlockedCompareExchange' ✓✓
 
-void OwnerC5E::FUN_005e6b60(int value) {
+// pdb: NavMeshObstacleManager::AddProcessedTask | NavMeshObstacleManager.obj | fnv360_0822_retail, ustr + bridge(ustr|ustr) + skyrim(ustr), high
+void OwnerC5E::NavMeshObstacleManager_AddProcessedTask(int value) {
     MonitorC5E* monitor = &this->monitor;                 // ORIG: lea esi,[edi+100h] taken before the enter call and still live at the release ✓✓
     monitor->FUN_00409a80(&DAT_00e01d2c);                 // ORIG: push offset 0xe01d2c ; mov ecx,esi ; call sub_409A80 ✓✓
 
@@ -16002,7 +16010,7 @@ struct Info {
 };
 struct Sub {
     int m00, m04, m08, m0c, m10, m14, m18, m1c, m20, m24, m28;
-    Info* FUN_005fc730();
+    Info* PathingLocation_GetCell();
 };
 struct Element {
     int flags;
@@ -16022,13 +16030,13 @@ struct Owner {
     bool FUN_005eacb0(int index, int* outStart, int* outEnd);
 };
 bool Owner::FUN_005eacb0(int index, int* outStart, int* outEnd) {
-    Info* info = storage->At(index)->sub.FUN_005fc730();
+    Info* info = storage->At(index)->sub.PathingLocation_GetCell();
     if (!info || info->kind != 6)
         return false;
     *outStart = index;
     *outEnd = index + 1;
     while (*outEnd < storage->count) {
-        Info* next = storage->At(*outEnd)->sub.FUN_005fc730();
+        Info* next = storage->At(*outEnd)->sub.PathingLocation_GetCell();
         if (!next || next->kind != 6)
             break;
         if (storage->data[*outEnd].flags & 4) {
@@ -16409,7 +16417,7 @@ struct PathQuery {
     unsigned int unk08;
     PathPoint point;
     bool FUN_005efb00(int a, int b);
-    bool FUN_005f0af0(int index);
+    bool PathBuilder_BuildDetailedPath(int index);
     bool FUN_005f0e10();
     PathElement* GetSecond() { return &storage->second; }
 };
@@ -16429,7 +16437,7 @@ bool PathQuery::FUN_005f0e10() {
         storage->first.FUN_005fda30(&point);
         storage->second.FUN_005fda30(&point);
     }
-    return FUN_005f0af0(0) ? true : false;
+    return PathBuilder_BuildDetailedPath(0) ? true : false;
 }
 }
 }   // namespace f3m_005f0e10
@@ -16443,8 +16451,8 @@ struct Cell {
     unsigned unk00,unk04,unk08,unk0c,unk10,unk14,unk18,unk1c,unk20;
     unsigned char flags;
     World* FUN_004d3780();
-    int FUN_004d3450();
-    int FUN_004d3430();
+    int TESObjectCELL_GetDataY();
+    int TESObjectCELL_GetDataX();
 };
 struct Mesh;
 struct Meshes { unsigned unk00; Mesh** data; unsigned count; };
@@ -16455,9 +16463,10 @@ Meshes* __cdecl FUN_005f1240(Cell*);
 struct Location {
     unsigned unk00; Point position; Mesh* mesh; Meshes* meshes;
     Cell* cell; World* world; unsigned key; unsigned short triangle;unsigned char state;
-    void FUN_005fcac0(const Point*,Cell*,World*);
+    void PathingLocation_SetupData(const Point*,Cell*,World*);
 };
-void Location::FUN_005fcac0(const Point* point,Cell* inputCell,World* inputWorld) {
+// pdb: PathingLocation::SetupData | PathingLocation.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+void Location::PathingLocation_SetupData(const Point* point,Cell* inputCell,World* inputWorld) {
     position=*point;
     state=0;
     if(inputWorld) {
@@ -16469,7 +16478,7 @@ void Location::FUN_005fcac0(const Point* point,Cell* inputCell,World* inputWorld
         meshes=FUN_005f1240(inputCell);
         if(inputCell && !(inputCell->flags&1)) {
             world=inputCell->FUN_004d3780();
-            key=FUN_00501240(inputCell->FUN_004d3430(),inputCell->FUN_004d3450());
+            key=FUN_00501240(inputCell->TESObjectCELL_GetDataX(),inputCell->TESObjectCELL_GetDataY());
             cell=0;
         } else {
             cell=inputCell;
@@ -16632,7 +16641,7 @@ struct Heap5fee {
 extern Heap5fee DAT_01090a78;
 
 struct Stream5fee {
-    unsigned int FUN_006e08a0();
+    unsigned int BGSLoadGameBuffer_LoadVariableSizedValue();
     void FUN_006e06d0(unsigned int* a_puiOut);
 };
 
@@ -16732,7 +16741,7 @@ void FUN_005ff110::FUN_005feea0(Stream5fee* a_pStream) {
     a_pStream->FUN_006e06d0(&uiFormID);
     pForm = LookupForm5fee(uiFormID);
 
-    unsigned int uiCount = a_pStream->FUN_006e08a0();
+    unsigned int uiCount = a_pStream->BGSLoadGameBuffer_LoadVariableSizedValue();
     SetSize(uiCount);
     for (unsigned int i = 0; i < uiCount; i++) {
         Element5fee*& rpElement = pBuffer[i];
@@ -17335,9 +17344,10 @@ struct Owner {
     PathData* data;
     bool FUN_005eacb0(void*, int*, int*);
     bool FUN_005f09e0();
-    bool FUN_005f0af0(void*);
+    bool PathBuilder_BuildDetailedPath(void*);
 };
-bool Owner::FUN_005f0af0(void* request)
+// pdb: PathBuilder::BuildDetailedPath | PathBuilder.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+bool Owner::PathBuilder_BuildDetailedPath(void* request)
 {
     data->FUN_005ec100();
     {
@@ -18019,7 +18029,7 @@ struct Pt3
     {
         return Pt3(y * kPt.z - z * kPt.y, z * kPt.x - x * kPt.z, x * kPt.y - y * kPt.x);
     }
-    Pt3 FUN_004c8df0(const Pt3& kPt) const;
+    Pt3 NiPoint3_UnitCross(const Pt3& kPt) const;
 };
 
 struct Mat3
@@ -18296,7 +18306,7 @@ bool __cdecl FUN_005e3250(Obstacle* pObstacle)
         kForward = -kForward;
     }
     kUp = DAT_00f725b0;
-    kRight = kUp.FUN_004c8df0(kForward);
+    kRight = kUp.NiPoint3_UnitCross(kForward);
     pObstacle->m_kOrientation.SetCol(0, -kRight.Cross(kUp));
     pObstacle->m_kOrientation.SetCol(1, kRight);
     pObstacle->m_kOrientation.SetCol(2, kUp);
@@ -18632,7 +18642,7 @@ struct IdList5e64
 
 struct Target5e64
 {
-    void FUN_0090afd0(int value);
+    void hkpEntity_removeEntityActivationListener(int value);
     void FUN_0090b960(int value);
 };
 
@@ -18640,7 +18650,7 @@ struct Holder5e64
 {
     int unk00; int unk04; Target5e64* unk08;
     Target5e64* Get() { return this ? unk08 : 0; }
-    void Apply1(int value) { Target5e64* t = Get(); if (t) t->FUN_0090afd0(value); }
+    void Apply1(int value) { Target5e64* t = Get(); if (t) t->hkpEntity_removeEntityActivationListener(value); }
     void Apply2(int value) { Target5e64* t = Get(); if (t) t->FUN_0090b960(value); }
 };
 
@@ -18702,7 +18712,7 @@ struct Map5e64
     }
 };
 
-inline void FreeApply1(Holder5e64* holder, int value) { if (holder && holder->unk08) holder->unk08->FUN_0090afd0(value); }
+inline void FreeApply1(Holder5e64* holder, int value) { if (holder && holder->unk08) holder->unk08->hkpEntity_removeEntityActivationListener(value); }
 inline void FreeApply2(Holder5e64* holder, int value) { if (holder && holder->unk08) holder->unk08->FUN_0090b960(value); }
 
 struct Owner5e64
@@ -21704,7 +21714,7 @@ struct NavMeshInfoArray {
 };
 
 struct Mgr {
-    float FUN_00434200(const Vec3* location, void* cell);
+    float TES_GetWaterHeight(const Vec3* location, void* cell);
 };
 extern Mgr* DAT_0107a0d8;
 extern const double DAT_00de8060;
@@ -21719,12 +21729,12 @@ struct PathingLocation {
     unsigned int cellKey;
     unsigned short triangle;
     unsigned char flags;
-    void FUN_005fcac0(Vec3* location, void* cell, void* worldSpace);
+    void PathingLocation_SetupData(Vec3* location, void* cell, void* worldSpace);
     bool FUN_005fcc10();
 };
 
 bool PathingLocation::FUN_005fcc10() {
-    FUN_005fcac0(&location, cell, worldSpace);
+    PathingLocation_SetupData(&location, cell, worldSpace);
     if (!navMeshInfo && !navMeshes)
         return false;
     if (navMeshInfo && triangle != 0xFFFF)
@@ -21752,7 +21762,7 @@ bool PathingLocation::FUN_005fcc10() {
         bool found = false;
         unsigned int count = navMeshes->size;
         bool below = false;
-        if (DAT_0107a0d8->FUN_00434200(&location, cell) + DAT_00de8060 > location.z)
+        if (DAT_0107a0d8->TES_GetWaterHeight(&location, cell) + DAT_00de8060 > location.z)
             below = true;
         for (unsigned int i = 0; i < count; ++i) {
             unsigned int tri = 0xFFFF;
@@ -22327,7 +22337,7 @@ public:
         }
         return false;
     }
-    void FUN_005fcac0(const pathing_005fd570::Point* p, pathing_005fd570::Cell* cell, pathing_005fd570::World* world);
+    void PathingLocation_SetupData(const pathing_005fd570::Point* p, pathing_005fd570::Cell* cell, pathing_005fd570::World* world);
 };
 }
 
@@ -22360,7 +22370,7 @@ f3m_005f0eb0::n5f0eb0::FUN_005fd570::FUN_005fd570(int pointArg, void* hintArg)
         if (!existingWorld || !(existingCell = existingWorld->FUN_00501d90(hint->pathingFlags)))
             existingCell = 0;
     }
-    self->FUN_005fcac0(position, existingCell, existingWorld);
+    self->PathingLocation_SetupData(position, existingCell, existingWorld);
 }
 
 // @f3 0x005e8650 (community match, verified in this file)
@@ -22769,8 +22779,8 @@ struct World;
 struct Cell {
     unsigned unk00, unk04, unk08, unk0c, unk10, unk14, unk18, unk1c, unk20;
     unsigned char flags;
-    int FUN_004d3430();
-    int FUN_004d3450();
+    int TESObjectCELL_GetDataX();
+    int TESObjectCELL_GetDataY();
     World* FUN_004d3780();
     Registry* FUN_007e55b0();
     bool SameWorld(Cell* other) {
@@ -22779,7 +22789,7 @@ struct Cell {
         return FUN_004d3780() == other->FUN_004d3780();
     }
 };
-struct World { Cell* FUN_00501d20(int x, int y); };
+struct World { Cell* TESWorldSpace_GetCellFromCellCoord(int x, int y); };
 struct Sink {
     void* vtable;
     NavPtr* data;
@@ -22796,7 +22806,7 @@ struct Sink {
 struct Location {
     void* vtable;
     Vec3 pos;
-    Cell* FUN_005fc730();
+    Cell* PathingLocation_GetCell();
     bool FUN_005fda30(int);
     bool FUN_005fc8b0(NavPtrOut* out);
     bool AddNavMesh(struct Sink* sink);
@@ -22815,7 +22825,7 @@ bool __cdecl FUN_005f1280(Vec3* a, Vec3* b, Vec3* c, Vec3* d);
 bool __cdecl FUN_005f5eb0(Location* loc, float radius, Sink* sink, bool useLoc)
 {
     Vec3 pos = loc->pos;
-    Cell* cell = loc->FUN_005fc730();
+    Cell* cell = loc->PathingLocation_GetCell();
     if (!cell)
         return false;
     float minX = pos.x - radius;
@@ -22828,18 +22838,18 @@ bool __cdecl FUN_005f5eb0(Location* loc, float radius, Sink* sink, bool useLoc)
     if (!useLoc) {
         CellArray cells;
         if (!(cell->flags & 1)) {
-            for (int x = cell->FUN_004d3430() - 1; x < cell->FUN_004d3430() + 2; x++) {
-                for (int y = cell->FUN_004d3450() - 1; y < cell->FUN_004d3450() + 2; y++) {
+            for (int x = cell->TESObjectCELL_GetDataX() - 1; x < cell->TESObjectCELL_GetDataX() + 2; x++) {
+                for (int y = cell->TESObjectCELL_GetDataY() - 1; y < cell->TESObjectCELL_GetDataY() + 2; y++) {
                     cmin.x = (float)(x << 12);
                     cmin.y = (float)(y << 12);
                     pos.x = (float)(x << 12) + 4096.0;
                     pos.y = (float)(y << 12) + 4096.0;
                     if (!(minX >= pos.x || maxX <= cmin.x || minY >= pos.y || maxY <= cmin.y))
-                        cells.Add(cell->FUN_004d3780()->FUN_00501d20(x, y));
+                        cells.Add(cell->FUN_004d3780()->TESWorldSpace_GetCellFromCellCoord(x, y));
                 }
             }
         } else {
-            cells.Add(loc->FUN_005fc730());
+            cells.Add(loc->PathingLocation_GetCell());
         }
         if (cells.count == 0)
             return false;
@@ -23533,7 +23543,7 @@ struct S005e7990_Array
 
 struct S005e7990_Sub
 {
-    void FUN_0090afd0(int value);
+    void hkpEntity_removeEntityActivationListener(int value);
     void FUN_0090b960(int value);
     void FUN_0090ba10(int value);
     void FUN_0090b880(int value);
@@ -23545,7 +23555,7 @@ struct S005e7990_Comp
     int unk04;
     S005e7990_Sub* sub;
     S005e7990_Sub* Get() { return this ? sub : 0; }
-    void Apply1(int value) { S005e7990_Sub* t = Get(); if (t) t->FUN_0090afd0(value); }
+    void Apply1(int value) { S005e7990_Sub* t = Get(); if (t) t->hkpEntity_removeEntityActivationListener(value); }
     void Apply2(int value) { S005e7990_Sub* t = Get(); if (t) t->FUN_0090b960(value); }
     void Remove1(int value) { S005e7990_Sub* t = Get(); if (t) t->FUN_0090ba10(value); }
     void Remove2(int value) { S005e7990_Sub* t = Get(); if (t) t->FUN_0090b880(value); }
@@ -23840,7 +23850,7 @@ struct Point5f30 {
     Point5f30 operator-(const Point5f30& other) const { return Point5f30(x - other.x, y - other.y, z - other.z); }
     Point5f30 operator*(float scale) const { return Point5f30(x * scale, y * scale, z * scale); }
     float SquaredLength() const { return x * x + y * y + z * z; }
-    __declspec(noalias) Point5f30 FUN_004c8df0(const Point5f30& other) const;
+    __declspec(noalias) Point5f30 NiPoint3_UnitCross(const Point5f30& other) const;
 };
 
 
@@ -23911,7 +23921,7 @@ Point5f30 FUN_005f30c0(float angle, const Location5f30& context, float radius)
     if (!FUN_005f1970(&base, &endpoint, 0, 65535, &result, 0))
         endpoint = result.position;
     Point5f30 displacement = endpoint - origin;
-    Point5f30 offset = Point5f30(displacement).FUN_004c8df0(*(const Point5f30*)DAT_00f725b0) * radius;
+    Point5f30 offset = Point5f30(displacement).NiPoint3_UnitCross(*(const Point5f30*)DAT_00f725b0) * radius;
     Location5f30 minusStart(origin - offset, base);
     Location5f30 minusEnd(endpoint - offset, base);
     if (!FUN_005f25b0(&minusStart, &minusEnd, &result, 0)) {
@@ -23950,8 +23960,8 @@ struct Vec3 {
     Vec3& operator+=(const Vec3& b) { x += b.x; y += b.y; z += b.z; return *this; }
     Vec3& operator-=(const Vec3& b) { x -= b.x; y -= b.y; z -= b.z; return *this; }
     float SquareLength() const { return x * x + y * y + z * z; }
-    Vec3 FUN_004c8df0(const Vec3& b) const;
-    float FUN_00432c00();
+    Vec3 NiPoint3_UnitCross(const Vec3& b) const;
+    float NiPoint3_UnitizeGetLength();
     float Dot(const Vec3& b) const { return x * b.x + y * b.y + z * b.z; }
 };
 
@@ -24003,7 +24013,7 @@ f3m_005f27d0::Vec3 __cdecl FUN_005f27d0(float angle, const f3m_005f27d0::PathPoi
     if (!FUN_005f1970(&start, &destination, 0, 65535, &hit, 0))
         destination = hit.GetLocation();
     Vec3 delta = destination - origin;
-    Vec3 side = Vec3(delta.x, delta.y, delta.z).FUN_004c8df0(*(const Vec3*)DAT_00f725b0) * radius;
+    Vec3 side = Vec3(delta.x, delta.y, delta.z).NiPoint3_UnitCross(*(const Vec3*)DAT_00f725b0) * radius;
     PathPoint minusStart(origin - side, start);
     PathPoint minusEnd(destination - side, start);
     if (!FUN_005f25b0(&minusStart, &minusEnd, &hit, 0)) {
@@ -24036,7 +24046,7 @@ f3m_005f27d0::Vec3 __cdecl FUN_005f27d0(float angle, const f3m_005f27d0::PathPoi
         return *(const Vec3*)&::DAT_0108ec68;
     } else {
         Vec3 direction = endPosition - origin;
-        float length = direction.FUN_00432c00();
+        float length = direction.NiPoint3_UnitizeGetLength();
         float dot = direction.Dot(forward);
         if (DAT_00e02110 > dot) {
             return *(const Vec3*)&::DAT_0108ec68;
@@ -24612,7 +24622,7 @@ struct NavMesh {
     // exit edge of the 2D segment start-end from the triangle (-1: none), reached = the crossing point
     int FUN_005bde60(unsigned short triangle, int edge, const Vec2& start, const Vec2& end, Vec2& reached);
     // neighbour across an edge: its mesh, triangle and entry edge
-    bool FUN_005b8a30(unsigned short triangle, int edge, NavMesh*& adjMesh, unsigned short& adjTriangle, int& adjEdge);
+    bool NavMesh_GetMatchingEdge(unsigned short triangle, int edge, NavMesh*& adjMesh, unsigned short& adjTriangle, int& adjEdge);
     VertexPair FUN_005b8900(unsigned short triangle, int edge);  // the two vertices of an edge
 };
 // FUN_004d45e0 and FUN_005f1460 are leaf functions whose bodies the original compiler saw (header inlines left as
@@ -24838,7 +24848,7 @@ bool __cdecl FUN_005f5590(PathingLocation* location, NiPointer<LOSMap>& data, bo
                     NavMesh* adjMesh;
                     unsigned short adjTriangle;
                     int adjEdge;
-                    if (walkMesh->FUN_005b8a30(walkTriangle, exitEdge, adjMesh, adjTriangle, adjEdge)) {
+                    if (walkMesh->NavMesh_GetMatchingEdge(walkTriangle, exitEdge, adjMesh, adjTriangle, adjEdge)) {
                         edgeInfo = walkMesh->GetEdgeInfo(walkTriangle, exitEdge);
                         if (edgeInfo && edgeInfo->type == 1)
                             break;
@@ -25732,12 +25742,12 @@ extern __declspec(thread) int DAT_0117c298;
 namespace f3m_005f8280 {
 extern const char DAT_00db5c04, DAT_00dc4dc0;
 extern const double DAT_00db7de8;
-struct Vec {float x,y,z; Vec(){} Vec(float a,float b,float c):x(a),y(b),z(c){} float FUN_00432c00(); Vec operator*(float f) const {return Vec(x*f,y*f,z*f);} Vec operator-(const Vec& b) const {return Vec(x-b.x,y-b.y,z-b.z);} void Set(const Vec& o){x=o.x;y=o.y;z=o.z;} float LengthSquared() const {return x*x+y*y+z*z;} };
+struct Vec {float x,y,z; Vec(){} Vec(float a,float b,float c):x(a),y(b),z(c){} float NiPoint3_UnitizeGetLength(); Vec operator*(float f) const {return Vec(x*f,y*f,z*f);} Vec operator-(const Vec& b) const {return Vec(x-b.x,y-b.y,z-b.z);} void Set(const Vec& o){x=o.x;y=o.y;z=o.z;} float LengthSquared() const {return x*x+y*y+z*z;} };
 struct ContextScope {int previous; ContextScope(int v):previous(::DAT_0117c298){::DAT_0117c298=v;} ~ContextScope(){::DAT_0117c298=previous;} };
 struct RefPart {virtual void v000(); virtual void Destroy(); long references; void Release(){if(!InterlockedDecrement(&references))Destroy();}};
 struct Resource {int unk00,unk04,unk08,unk0C,unk10,unk14,unk18; RefPart ref; void IncRefCount(){InterlockedIncrement(&ref.references);} void DecRefCount(){ref.Release();} void* FUN_005b84c0(); void FUN_004d45e0(Vec&, unsigned short); Vec GetPoint(unsigned short i){Vec r;FUN_004d45e0(r,i);return r;}};
 typedef NiPointer<Resource> ResourcePtr;
-struct Reader {int unk00; Vec start; int unk10,unk14,unk18,unk1C,unk20,unk24,unk28;Vec end; bool FUN_005fcc10(); bool FUN_005fc8f0(ResourcePtr&,unsigned short&); void* FUN_005fc730(); void* FUN_004c0120();};
+struct Reader {int unk00; Vec start; int unk10,unk14,unk18,unk1C,unk20,unk24,unk28;Vec end; bool FUN_005fcc10(); bool FUN_005fc8f0(ResourcePtr&,unsigned short&); void* PathingLocation_GetCell(); void* FUN_004c0120();};
 struct Request {int unk00,unk04,unk08; Reader reader;};
 struct Output {int unk00,unk04,unk08,unk0C,unk10,unk14; int unk18,unk1C; void FUN_005ec000(const Vec&,void*);};
 struct Record {Resource* resource;unsigned short flags;unsigned short unk06;Vec position; void SetPosition(const Vec& c){position.x=c.x;position.y=c.y;position.z=c.z;} Vec GetPosition() const {Vec r;r.x=position.x;r.y=position.y;r.z=position.z;return r;}};
@@ -25901,11 +25911,11 @@ bool FUN_005f8280(FullRequest* request,Output* output) {
   // Scope block: the braces emit no code, but the match depends on them. They end the lifetime of
   // "direction" here, so the compiler packs it into the dead "start" copy's stack slot.
   Vec direction=destination-start;
-  distance=direction.FUN_00432c00();
+  distance=direction.NiPoint3_UnitizeGetLength();
   adjusted.Set(destination-direction*middle);
   width=(float)fabs(middle-distance);
  }
- if(!FUN_005f1540(reader->FUN_004c0120(),reader->FUN_005fc730(),adjusted,projected))return false;
+ if(!FUN_005f1540(reader->FUN_004c0120(),reader->PathingLocation_GetCell(),adjusted,projected))return false;
  Vec delta=projected-adjusted;
  if(delta.LengthSquared()>width*width)return false;
  SearchSource source(projected,reader);
@@ -26659,7 +26669,7 @@ struct NiPoint3
     NiPoint3(float fX, float fY, float fZ) : x(fX), y(fY), z(fZ) {}
 };
 
-TESForm* __cdecl FUN_00455190(unsigned int auiFormID);   // LookupFormByID
+TESForm* __cdecl TESForm_GetFormByNumericID(unsigned int auiFormID);   // LookupFormByID
 
 // NavMeshInfo (twin include\NavMeshInfo.h; only the members this function reaches)
 class NavMeshInfo
@@ -26672,7 +26682,7 @@ public:
     NiPoint3 ApproxLocation;
     TESForm* pParentSpace;
 
-    TESForm* GetParentSpace() const { return pParentSpace ? pParentSpace : FUN_00455190(ParentSpaceID); }
+    TESForm* GetParentSpace() const { return pParentSpace ? pParentSpace : TESForm_GetFormByNumericID(ParentSpaceID); }
     TESWorldSpace* FUN_005b8450() const;   // GetParentWorldSpace
     TESObjectCELL* FUN_005d96e0() const;   // GetInteriorCell
 };
@@ -26775,7 +26785,7 @@ struct TeleportData
 class TESObjectREFR
 {
 public:
-    w5f50d0::TeleportData* FUN_004e74a0();   // GetTeleport
+    w5f50d0::TeleportData* TESObjectREFR_GetTeleport();   // GetTeleport
 };
 
 namespace w5f50d0 {
@@ -26927,7 +26937,7 @@ bool __cdecl w5f50d0::FUN_005f50d0(PathingLocation* aOrigin, PathingLocation* aD
                 {
                     TeleportLink link;
                     link.pDoor = doors[i];
-                    link.kLocation = doors[i]->FUN_004e74a0()->FUN_00bd8090();
+                    link.kLocation = doors[i]->TESObjectREFR_GetTeleport()->FUN_00bd8090();
                     apRetPath->Doors.Add(link);
                     ParentSpaceNode nextSpace;
                     nextSpace.pWorldSpace = infos[i + 1]->FUN_005b8450();

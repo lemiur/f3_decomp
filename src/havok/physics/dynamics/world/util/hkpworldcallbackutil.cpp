@@ -2275,7 +2275,8 @@ static __declspec(noinline) void D015A0CleanupNullPointers(D015A0ListenerArray* 
     }
 }
 
-void __cdecl FUN_00d015a0(D015A0World* world, void* apFirst, void* pkSecond)
+// pdb: hkpWorldCallbackUtil::fireIslandPostIntegrateCallback | hkpWorldCallbackUtil.obj | fnv360_0822_retail, call_gap + bridge(call_gap|call_gap) + skyrim(call_gap), high
+void __cdecl hkpWorldCallbackUtil_fireIslandPostIntegrateCallback(D015A0World* world, void* apFirst, void* pkSecond)
 {
     volatile unsigned int ticks1;
     volatile unsigned int ticks2;

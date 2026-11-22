@@ -16,7 +16,7 @@ struct BSFadeNode
     static void* __cdecl operator new(unsigned int);
 };
 extern void* DAT_0109827c;
-void* __cdecl FUN_00a46b70();
+void* __cdecl NiTextKeyExtraData_CreateObject();
 struct NiMemObject
 {
     char _pad_0[1];
@@ -194,7 +194,7 @@ class NiPSysOwnerA46
 {
   public:
     void CopyMemberData(NiPSysBaseA46* pkDest, void* pvProcess);
-    NiPSysBaseA46* FUN_00a46da0(void* pvProcess);
+    NiPSysBaseA46* NiTextKeyExtraData_CreateClone(void* pvProcess);
 };
 
 struct MemoryManager

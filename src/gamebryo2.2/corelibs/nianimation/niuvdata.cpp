@@ -214,11 +214,12 @@ struct NiUVDataStandIn : public NiObject
     {
         return pk + i * uc;
     }
-    bool FUN_00a45090(NiUVDataStandIn* pkOther);
+    bool NiUVData_IsEqual(NiUVDataStandIn* pkOther);
 };
 
 // @fnv 0x00a45090
-bool NiUVDataStandIn::FUN_00a45090(NiUVDataStandIn* pkOther)
+// pdb: NiUVData::IsEqual | NiUVData.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun) + skyrim(caller_sim), high
+bool NiUVDataStandIn::NiUVData_IsEqual(NiUVDataStandIn* pkOther)
 {
     if (!NiObject::IsEqual(pkOther))
         return false;
@@ -511,12 +512,13 @@ class NiUVDataLoader : public NiUVObject
     void ReplaceVOffsetKeys(NiUVKey* pkKeys, unsigned int uiNumKeys, NiUVKeyType eType);
     void ReplaceUTilingKeys(NiUVKey* pkKeys, unsigned int uiNumKeys, NiUVKeyType eType);
     void ReplaceVTilingKeys(NiUVKey* pkKeys, unsigned int uiNumKeys, NiUVKeyType eType);
-    void FUN_00a453a0(NiUVStream& kStream);
+    void NiUVData_LoadBinary(NiUVStream& kStream);
 };
 
 // Loads the base object, then reads U/V offset and U/V tiling key blocks from the stream and replaces each key set.
 // @fnv 0x00a453a0
-void NiUVDataLoader::FUN_00a453a0(NiUVStream& kStream)
+// pdb: NiUVData::LoadBinary | NiUVData.obj | fnv360_0822_retail, caller_sim + bridge(vtable|caller_sim) + skyrim(caller_sim), high
+void NiUVDataLoader::NiUVData_LoadBinary(NiUVStream& kStream)
 {
     NiUVObject::LoadBinary(kStream);
 
@@ -777,12 +779,13 @@ struct NiUVDataLB : NiObjectLB
     unsigned int m_uiNumVTilingKeys;
     void* m_pVTilingKeys;
     unsigned int m_uiVTilingKeyStride;
-    void FUN_00a45610(NiStreamX& kStream);
+    void NiUVData_SaveBinary(NiStreamX& kStream);
 };
 
 // Loads the base object, then reads the U/V offset and tiling key counts and, when nonzero, reads each key array via the key-type loader table.
 // @fnv 0x00a45610
-void NiUVDataLB::FUN_00a45610(NiStreamX& kStream)
+// pdb: NiUVData::SaveBinary | NiUVData.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun) + skyrim(objrun_open), high
+void NiUVDataLB::NiUVData_SaveBinary(NiStreamX& kStream)
 {
     NiObjectLB::LoadBinary(kStream);
     ReadBinaryValue(kStream, m_uiNumUOffsetKeys);

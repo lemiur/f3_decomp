@@ -8,7 +8,8 @@ extern NiRTTI g_01202798;
 extern "C" const void* g_012027a0;
 
 // @fnv 0x00c2f3d0
-const void* __cdecl FUN_00c2f3d0()
+// pdb: NiBoneLODController::GetRTTI | NiBoneLODController.obj | fnv360_0822_retail, udata + bridge(vtable|udata) + skyrim(objrun), high
+const void* __cdecl NiBoneLODController_GetRTTI()
 {
     return &g_012027a0;
 }
@@ -210,11 +211,12 @@ struct NiPSysAgeDeathModifierClone : NiPSysPositionModifier
     bool m_bHasString;
     NiPSysSpawnModifier* m_pSpawnModifier;
     void CopyMemberData(NiPSysModifier*, CloningProcess&);
-    NiPSysAgeDeathModifierClone* FUN_00c2f150(CloningProcess& kCloning);
+    NiPSysAgeDeathModifierClone* NiPSysAgeDeathModifier_CreateClone(CloningProcess& kCloning);
 };
 extern int DAT_010c0304;
 // @fnv 0x00c2f150
-NiPSysAgeDeathModifierClone* NiPSysAgeDeathModifierClone::FUN_00c2f150(CloningProcess& kCloning)
+// pdb: NiPSysAgeDeathModifier::CreateClone | NiPSysAgeDeathModifier.obj | fnv360_0822_retail, caller_sim + bridge(vtable|objrun) + skyrim(caller_sim), high
+NiPSysAgeDeathModifierClone* NiPSysAgeDeathModifierClone::NiPSysAgeDeathModifier_CreateClone(CloningProcess& kCloning)
 {
     NiPSysAgeDeathModifierClone* pkObject = (NiPSysAgeDeathModifierClone*)BSFadeNode::operator new(0x20);
     if (pkObject)
@@ -523,11 +525,12 @@ struct NiPSysModifier_c2f200
 struct NiPSysAgeDeathModifier_c2f200 : NiPSysModifier_c2f200
 {
     bool m_bHasString;
-    void FUN_00c2f200(NiStream_c2f200& kStream);
+    void NiPSysAgeDeathModifier_LoadBinary(NiStream_c2f200& kStream);
 };
 
 // @fnv 0x00c2f200
-void NiPSysAgeDeathModifier_c2f200::FUN_00c2f200(NiStream_c2f200& kStream)
+// pdb: NiPSysAgeDeathModifier::LoadBinary | NiPSysAgeDeathModifier.obj | fnv360_0822_retail, caller_sim + bridge(vtable|caller_sim) + skyrim(caller_sim), high
+void NiPSysAgeDeathModifier_c2f200::NiPSysAgeDeathModifier_LoadBinary(NiStream_c2f200& kStream)
 {
     NiPSysModifier_c2f200::LoadBinary(kStream);
     unsigned char ucFlag;

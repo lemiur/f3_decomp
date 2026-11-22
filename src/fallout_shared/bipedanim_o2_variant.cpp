@@ -11,11 +11,12 @@ struct NiShader
 };
 struct Holder
 {
-    bool FUN_00a5ba40(NiTexture* pkTex);
-    bool FUN_00a5bc40(const NiFixedString& kName, NiTexture* pkTex);
+    bool NiObjectNET_InsertExtraData(NiTexture* pkTex);
+    bool NiObjectNET_AddExtraData(const NiFixedString& kName, NiTexture* pkTex);
 };
 // @fnv 0x00a5bc40
-bool Holder::FUN_00a5bc40(const NiFixedString& kName, NiTexture* pkTex)
+// pdb: NiObjectNET::AddExtraData | NiObjectNET.obj | fnv360_0822_debug, objrun + bridge(call_gap|caller) + skyrim(caller_sim), high
+bool Holder::NiObjectNET_AddExtraData(const NiFixedString& kName, NiTexture* pkTex)
 {
     if ((int)kName.data == EmptyFS)
         return false;
@@ -30,7 +31,7 @@ bool Holder::FUN_00a5bc40(const NiFixedString& kName, NiTexture* pkTex)
         if (kName.data != ((NiShader*)pkTex)->GetFilename().data)
             return false;
     }
-    return FUN_00a5ba40(pkTex);
+    return NiObjectNET_InsertExtraData(pkTex);
 }
 
 struct FUN_00b553d0_PropertyLayout

@@ -163,11 +163,11 @@ template <> char* NiTPointerListBase<NiTPointerAllocator<unsigned int>, char*>::
     return result;
 }
 extern "C" void* g_011f4430;
-void* __cdecl FUN_00a5f200();
+void* __cdecl BSPlayerDistanceCheckController_GetRTTI();
 extern "C" int g_011f443c;
 int __cdecl FUN_00a5f4f0();
 int __cdecl FUN_00a5f500();
-int __cdecl FUN_00dc9e60();
+int __cdecl hkpGenericConstraintData_getType();
 struct NiDX9Renderer
 {
     unsigned int pad[0x228];
@@ -901,7 +901,7 @@ struct FUN_00e79f40_Stream
     unsigned int pad28;
     char* dst;
 };
-int FUN_00e79f40(FUN_00e79f40_Stream* s);
+int NiD3DShaderDeclaration_Pack_ByteToUByteColor(FUN_00e79f40_Stream* s);
 struct FUN_00e78bd0_shell
 {
     bool flag;       // +0x00
@@ -9625,7 +9625,7 @@ struct FUN_00e79370_Info
     unsigned int pad28;
     unsigned char* pucDest;
 };
-unsigned int FUN_00e79370(FUN_00e79370_Info* pkInfo);
+unsigned int NiD3DShaderDeclaration_Pack_UnsignedLongToFloat(FUN_00e79370_Info* pkInfo);
 struct NormalizedStream
 {
     unsigned short lastComponent, unk02;
@@ -10045,7 +10045,7 @@ struct PackingPacket
     void* vertexData;
     void* stripLengths;
     bool FUN_00e8eeb0();
-    void FUN_00e8ef10(unsigned int);
+    void NiGeometryBufferData_SetStreamCount(unsigned int);
     void FUN_00e8eee0();
 };
 struct PackingData

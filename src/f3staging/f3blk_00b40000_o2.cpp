@@ -9852,13 +9852,14 @@ struct ShaderBdaf10
     unsigned short GetShadowCount() const { return m_c8; }
     IterObj* __thiscall FUN_00af32e0(void*);
     IterObj* __thiscall FUN_00af33d0(void*);
-    void __thiscall FUN_00b5d130(NiGeometry* geom, ShadowSceneLight* light, unsigned short* count,
+    void __thiscall BSShaderPPLightingProperty_AddLandscapePasses_1x(NiGeometry* geom, ShadowSceneLight* light, unsigned short* count,
                                      unsigned char type, bool* out, bool flag6);
 };
 
 // Emits shadow rendering passes for geom and light into m_3c, or increments *count when type is not 1.
 // @fnv 0x00bdaf10
-void __thiscall ShaderBdaf10::FUN_00b5d130(NiGeometry* geom, ShadowSceneLight* light, unsigned short* count,
+// pdb: BSShaderPPLightingProperty::AddLandscapePasses_1x | BSShaderPPLightingProperty_Passes_1x.obj | fnv360_0822_retail, udata + bridge(caller_sim|caller_sim), high
+void __thiscall ShaderBdaf10::BSShaderPPLightingProperty_AddLandscapePasses_1x(NiGeometry* geom, ShadowSceneLight* light, unsigned short* count,
                                                unsigned char type, bool* out, bool flag6)
 {
     GeomInfo* info = geom->FUN_00826590(3);
@@ -11341,7 +11342,7 @@ struct ShaderPassBuilder : DynCastHelper
     void FUN_00b5bbe0(SceneGeometry*, DrawLight*, unsigned short*, unsigned char, bool*, bool, bool, bool, bool, bool,
                       bool);
     void FUN_00b5bce0(SceneGeometry*, unsigned short*, unsigned char, bool*, bool, bool);
-    void FUN_00b5d130(SceneGeometry*, DrawLight*, unsigned short*, unsigned char, bool*, bool);
+    void BSShaderPPLightingProperty_AddLandscapePasses_1x(SceneGeometry*, DrawLight*, unsigned short*, unsigned char, bool*, bool);
     void FUN_00b5bde0(SceneGeometry*, unsigned short*, unsigned char, bool*, bool, bool, bool);
     ShaderPassEntry* FUN_00b5c1b0(SceneGeometry*, unsigned short*, unsigned char, bool*, bool);
     ShaderPassEntry* FUN_00b5bf20(SceneGeometry*, unsigned short*, unsigned char, bool*, bool);
@@ -11678,7 +11679,7 @@ __forceinline void ShaderPassBuilder::GenerateLightingPasses(
     }
 afterLighting:
     if (opaque)
-        FUN_00b5d130(geometry, primaryLight, count, effectType, &first, false);
+        BSShaderPPLightingProperty_AddLandscapePasses_1x(geometry, primaryLight, count, effectType, &first, false);
     if (passMask == DAT_00e8ff6c && !needsShadow)
         FUN_00b5bde0(geometry, count, effectType, &first, hasNoOverlay, attr0, useAlpha);
     if (extraContext)
@@ -12772,10 +12773,11 @@ struct Owner_b47040
     int unk40, unk44, unk48, unk4C, unk50, unk54, unk58, unk5C;
     ViewerColor_b47040 color60;
     void FUN_00b2b9f0(ViewerStrings_b47040* strings);
-    void FUN_00b47040(ViewerStrings_b47040* strings);
+    void VolumetricFogShaderProperty_GetViewerStrings(ViewerStrings_b47040* strings);
 };
 
-void Owner_b47040::FUN_00b47040(ViewerStrings_b47040* strings)
+// pdb: VolumetricFogShaderProperty::GetViewerStrings | VolumetricFogShaderProperty.obj | fnv360_0822_retail, ustr_rel + bridge(ustr_rel|ustr_rel), high
+void Owner_b47040::VolumetricFogShaderProperty_GetViewerStrings(ViewerStrings_b47040* strings)
 {
     FUN_00b2b9f0(strings);
     strings->Add(FUN_00847b50((const char*)DAT_0126bea0));

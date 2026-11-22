@@ -48,7 +48,7 @@ struct ManagerStub : public Manager
 
 struct ItemStub : public Item
 {
-    void FUN_00989940(int* pValue);
+    void hkpPhantom_removePhantomOverlapListener(int* pValue);
     void FUN_009316f0();
 };
 
@@ -70,7 +70,7 @@ void AllocatorOwner::ReleaseEntries()
         ((ManagerStub*)pBody->m_pManager)->FUN_009078c0(pBody->m_pEntries, 6);
         for (int i = 0; i < 6; ++i)
         {
-            ((ItemStub*)pBody->m_pEntries[i])->FUN_00989940(&pBody->unk0C);
+            ((ItemStub*)pBody->m_pEntries[i])->hkpPhantom_removePhantomOverlapListener(&pBody->unk0C);
             ((ItemStub*)pBody->m_pEntries[i])->FUN_009316f0();
             pBody->m_pEntries[i] = 0;
         }
@@ -119,7 +119,7 @@ struct RestartDispatchOwner {
 struct RestartDispatchItem {
     unsigned int unk00, unk04;
     RestartDispatchOwner* owner;
-    void FUN_0090cbf0(unsigned char kind, unsigned char enabled, unsigned char flag);
+    void hkpRigidBody_setMotionType(unsigned char kind, unsigned char enabled, unsigned char flag);
 };
 struct RestartDispatchLayout {
     unsigned int unk00, unk04, unk08, unk0c;
@@ -133,10 +133,10 @@ void Dispatcher::DispatchItemByMode(DispatchItem* item) {
     RestartDispatchItem* target = reinterpret_cast<RestartDispatchItem*>(item);
     switch (layout->mode) {
     case 0:
-        target->FUN_0090cbf0(7, 1, 0);
+        target->hkpRigidBody_setMotionType(7, 1, 0);
         break;
     case 1:
-        target->FUN_0090cbf0(7, 1, 0);
+        target->hkpRigidBody_setMotionType(7, 1, 0);
         break;
     case 2:
         layout->owner->FUN_009037f0(reinterpret_cast<RestartDispatchItem**>(&item), target);

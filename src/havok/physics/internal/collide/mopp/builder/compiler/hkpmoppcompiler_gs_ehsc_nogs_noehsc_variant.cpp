@@ -322,7 +322,7 @@ struct hkpMoppDefaultSplitter
     {
         FUN_00e09bd0();
     }
-    int FUN_00e0a550(PrimitiveSource*, hkpMoppCostFunction*, hkpMoppDefaultAssembler*, int*, ScratchLayout*) throw();
+    int hkpMoppDefaultSplitter_buildTree(PrimitiveSource*, hkpMoppCostFunction*, hkpMoppDefaultAssembler*, int*, ScratchLayout*) throw();
 };
 struct EncodedReference
 {

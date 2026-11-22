@@ -979,7 +979,7 @@ struct LODStreamEx : NiStream
     {
         return *(unsigned*)((char*)this + 0xd8);
     }
-    void __thiscall FUN_00a645b0();
+    void __thiscall NiStream_ReadLinkID();
 };
 template <class T> inline unsigned LODBinaryStreamLoad(LODBinStream& binstream, T* pValue, unsigned uiNumEls)
 {
@@ -1067,6 +1067,6 @@ void __thiscall LODLoader::FUN_00a994d0(NiStream* pStream)
     }
     else
     {
-        stream->FUN_00a645b0();
+        stream->NiStream_ReadLinkID();
     }
 }

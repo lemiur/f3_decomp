@@ -611,10 +611,11 @@ struct Shader
     {
         return fogPixel;
     }
-    void FUN_00b34130(Geometry*, int, int, PassInfo*, int, int, Bound*);
+    void SpeedTreeLeafShader_UpdatePipelineForInstance(Geometry*, int, int, PassInfo*, int, int, Bound*);
 };
 // @fnv 0x00b34130
-void Shader::FUN_00b34130(Geometry* geometry, int unused1, int unused2, PassInfo* info, int FlushUsageData, int unused4,
+// pdb: SpeedTreeLeafShader::UpdatePipelineForInstance | SpeedTreeLeafShader.obj | fnv360_1110_retail, udata, high
+void Shader::SpeedTreeLeafShader_UpdatePipelineForInstance(Geometry* geometry, int unused1, int unused2, PassInfo* info, int FlushUsageData, int unused4,
                           Bound* bound)
 {
     unsigned int mode = info->mode;
@@ -1842,7 +1843,7 @@ namespace PortB20340 {
 struct NiPoint3 {
     float x,y,z;
     void FUN_00468d00();
-    NiPoint3* FUN_004c8df0(NiPoint3*,const NiPoint3&) const;
+    NiPoint3* NiPoint3_UnitCross(NiPoint3*,const NiPoint3&) const;
     NiPoint3* FUN_00432b40(NiPoint3*,float) const;
     NiPoint3& FUN_00432b70(const NiPoint3&);
     float FUN_00432bd0() const;
@@ -2062,9 +2063,9 @@ extern ShadowEvents DAT_01175720;
 float FUN_00401e20(float,float);
 float FUN_0090d870(float,float);
 bool FUN_00530bb0();
-BSShaderAccumulator* FUN_00ada500();
+BSShaderAccumulator* BSShaderManager_GetNextAvailableShadowMapAccumulator();
 inline void ShadowSet(NiPoint3& v,float x,float y,float z) {v.x=x;v.y=y;v.z=z;}
-inline NiPoint3* ShadowCross(const NiPoint3& v,NiPoint3* r,const NiPoint3& o) {return v.FUN_004c8df0(r,o);}
+inline NiPoint3* ShadowCross(const NiPoint3& v,NiPoint3* r,const NiPoint3& o) {return v.NiPoint3_UnitCross(r,o);}
 __forceinline NiPoint3* ShadowScale(const NiPoint3& v,NiPoint3* r,float s) {return v.FUN_00432b40(r,s);}
 inline float ShadowOrderedScale(const NiAVObject* o) {_ReadWriteBarrier();return o->m_kWorld.m_fScale;}
 inline float ShadowRadius(const NiBound& b) {return b.radius;}
@@ -2233,7 +2234,7 @@ void ShadowSceneCameraUpdate::FUN_00b20340(void* unused, unsigned char* renderFl
 
         if (bCastShadow && FUN_00530bb0())
         {
-            reinterpret_cast<NiPointerDispatch&>(spShadowAccumulator).FUN_008e9650(reinterpret_cast<NiRefObject*>(FUN_00ada500()));
+            reinterpret_cast<NiPointerDispatch&>(spShadowAccumulator).FUN_008e9650(reinterpret_cast<NiRefObject*>(BSShaderManager_GetNextAvailableShadowMapAccumulator()));
             reinterpret_cast<ShadowAccumulator*>(spShadowAccumulator.m_pObject)->SetPass(7);
             if (!GetShadowCamera())
             {

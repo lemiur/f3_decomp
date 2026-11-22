@@ -47,7 +47,8 @@ struct Owner
 void __cdecl FUN_00cb3da0(void* apTarget, Owner* apOwner);
 
 // @fnv 0x00d070e0
-void __stdcall FUN_00d070e0(Owner* apOwner)
+// pdb: hkpSimulationIsland::removeConstraintFromCriticalLockedIsland | hkpSimulationIsland.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void __stdcall hkpSimulationIsland_removeConstraintFromCriticalLockedIsland(Owner* apOwner)
 {
     FUN_00cb3da0(apOwner->m_pHolder->m_pFlagTarget, apOwner);
 }
@@ -326,7 +327,8 @@ struct GlobalObjectO2_00d472a0
 };
 extern GlobalObjectO2_00d472a0 g_012687cc;
 // @fnv 0x00d078d0
-GlobalObjectO2_00d472a0* FUN_00d078d0()
+// pdb: bhkCharControllerShape::GetRTTI | bhkCharControllerShape.obj | fnv360_0822_retail, udata + bridge(vtable_prefix|udata) + skyrim(udata), high
+GlobalObjectO2_00d472a0* bhkCharControllerShape_GetRTTI()
 {
     return &g_012687cc;
 }
@@ -897,10 +899,11 @@ using namespace N0098b230;
 
 struct S0098b230_Island
 {
-    hkBool FUN_0098b230(hkUnionFind& unionFind) throw();
+    hkBool hkpSimulationIsland_isFullyConnected(hkUnionFind& unionFind) throw();
 };
 
-hkBool S0098b230_Island::FUN_0098b230(hkUnionFind& unionFind) throw()
+// pdb: hkpSimulationIsland::isFullyConnected | hkpSimulationIsland.obj | fnv360_0822_retail, call_gap_sim + bridge(call_gap_sim|call_gap) + skyrim(call_gap_sim), high
+hkBool S0098b230_Island::hkpSimulationIsland_isFullyConnected(hkUnionFind& unionFind) throw()
 {
     hkpSimulationIsland* island = reinterpret_cast<hkpSimulationIsland*>(this);
 

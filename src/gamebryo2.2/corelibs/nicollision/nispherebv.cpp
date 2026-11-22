@@ -20,11 +20,12 @@ struct NiSphere
 struct NiSphereBV : NiObject
 {
     NiSphere m_kBoundingSphere;
-    void FUN_00eab860(NiStream& kStream);
+    void NiPosKey_LoadBinary(NiStream& kStream);
 };
 
 // @fnv 0x00eab860
-void NiSphereBV::FUN_00eab860(NiStream& kStream)
+// pdb: NiPosKey::LoadBinary | NiPosKey.obj | fnv360_0822_retail, caller_sim + bridge(call_seq|call_seq) + skyrim(caller_sim), high
+void NiSphereBV::NiPosKey_LoadBinary(NiStream& kStream)
 {
     NiObject::LinkObject(kStream);
     m_kBoundingSphere.LoadBinary(kStream);

@@ -13,7 +13,8 @@ NiAlphaProperty::NiAlphaProperty()
 extern char const* const g_011f4454_arg1;
 
 // @fnv 0x00a5fc80
-char const* const* __cdecl FUN_00a5fc80()
+// pdb: bhkHingeConstraint::GetRTTI | MissileProjectile.obj | fnv360_0822_retail, udata + bridge(vtable_prefix|vtable) + skyrim(udata), high
+char const* const* __cdecl bhkHingeConstraint_GetRTTI()
 {
     return &g_011f4454_arg1;
 }
@@ -21,7 +22,8 @@ char const* const* __cdecl FUN_00a5fc80()
 extern "C" void* g_011f5ecc;
 
 // @fnv 0x00a950d0
-void* __cdecl FUN_00a950d0()
+// pdb: NiMaterial::GetRTTI | NiMaterial.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+void* __cdecl NiMaterial_GetRTTI()
 {
     return &g_011f5ecc;
 }

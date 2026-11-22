@@ -302,7 +302,7 @@ class Emitter : public NiPSysEmitter
     virtual void slot40();
     virtual void slot41();
     virtual void GetPositionAndDirection(NiPoint3& kPosition, NiPoint3& kMotionVelocity);
-    void FUN_00c220c0(float fTime, unsigned short usNumParticles, const float* afAges);
+    void NiPSysEmitter_EmitParticles(float fTime, unsigned short usNumParticles, const float* afAges);
 };
 inline float NiFastSin(float fAngleDifference)
 {
@@ -313,7 +313,8 @@ inline float NiFastCos(float fAngleDifference)
     return DAT_011f4ae0[(int)(fAngleDifference * (512.0 / DAT_011aeae8)) & 511];
 }
 // @fnv 0x00c220c0
-void Emitter::FUN_00c220c0(float fTime, unsigned short usNumParticles, const float* afAges)
+// pdb: NiPSysEmitter::EmitParticles | NiPSysEmitter.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(udata), high
+void Emitter::NiPSysEmitter_EmitParticles(float fTime, unsigned short usNumParticles, const float* afAges)
 {
     NiPSysData* pkData = m_pkTarget->m_spGeometryData;
     NiPoint3* pkVertex = pkData->m_pkVertex;
@@ -381,7 +382,7 @@ class BC21FE0FixedString
 
 struct EmitterColorWriter
 {
-    void FUN_00a698a0(NiStream& stream);
+    void NiColorA_SaveBinary(NiStream& stream);
 };
 struct S_00c22530_BinaryStream : NiBinaryStream
 {
@@ -404,11 +405,12 @@ inline void S_00c22530_ReadFloat(S_00c22530_Stream& s, float& f)
 struct S_00c22530_Emitter : NiPSysEmitter
 {
     void FUN_00c31950(NiStream& stream);
-    void FUN_00c22530(S_00c22530_Stream& stream);
+    void NiPSysEmitter_SaveBinary(S_00c22530_Stream& stream);
 };
 // Calls FUN_00c31950, then reads emitter fields and particle color from the stream.
 // @fnv 0x00c22530
-void S_00c22530_Emitter::FUN_00c22530(S_00c22530_Stream& stream)
+// pdb: NiPSysEmitter::SaveBinary | NiPSysEmitter.obj | fnv360_0822_retail, call_seq + bridge(vtable|caller_sim) + skyrim(caller_sim), high
+void S_00c22530_Emitter::NiPSysEmitter_SaveBinary(S_00c22530_Stream& stream)
 {
     FUN_00c31950(stream);
     S_00c22530_ReadFloat(stream, m_fEmissionSpeed);
@@ -417,7 +419,7 @@ void S_00c22530_Emitter::FUN_00c22530(S_00c22530_Stream& stream)
     S_00c22530_ReadFloat(stream, m_fDeclinationVariation);
     S_00c22530_ReadFloat(stream, m_fEmissionPlanarAngle);
     S_00c22530_ReadFloat(stream, m_fPlanarAngleVariation);
-    reinterpret_cast<EmitterColorWriter*>(&m_kParticleColor)->FUN_00a698a0(stream);
+    reinterpret_cast<EmitterColorWriter*>(&m_kParticleColor)->NiColorA_SaveBinary(stream);
     S_00c22530_ReadFloat(stream, m_fEmissionRadius);
     S_00c22530_ReadFloat(stream, m_fRadiusVariation);
     S_00c22530_ReadFloat(stream, m_fYValue);

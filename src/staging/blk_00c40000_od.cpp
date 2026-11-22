@@ -1727,7 +1727,7 @@ struct FUN_00c47b50Vec3 {
 #include "fnv_asm_helpers.h"   // project x87 helpers (fnv_SinCos, fnv_FloatToInt), kept last so earlier code is unchanged
 
 // FUN_00c43d00: builds the INISettings list snapshot ("INISettings" name + AddFirstEmpty,
-// then count via FUN_0044f890 and "Total INISettings" message + AddFirstEmpty).
+// then count via TESActorBaseData_SetKarma and "Total INISettings" message + AddFirstEmpty).
 // SinkSave is a stand-in for the TU's local aggregate frame reservation.
 
 extern "C" __declspec(dllimport) int __stdcall WritePrivateProfileStringA(const char*, const char*, const char*, const char*);

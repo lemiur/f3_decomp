@@ -300,11 +300,12 @@ void __thiscall FUN_00a755f0_Class::CopyCullingData(void* dst, CloningProcess& p
 
 struct FUN_00a72590_Class
 {
-    int FUN_00a72590(unsigned int index, int* out);
+    int NiAdditionalGeometryData_LockDataBlock(unsigned int index, int* out);
 };
 
 // @fnv 0x00a72590
-int FUN_00a72590_Class::FUN_00a72590(unsigned int index, int* out)
+// pdb: NiAdditionalGeometryData::LockDataBlock | NiAdditionalGeometryData.obj | fnv360_0822_retail, call_seq + bridge(hash|call_seq) + skyrim(call_gap), high
+int FUN_00a72590_Class::NiAdditionalGeometryData_LockDataBlock(unsigned int index, int* out)
 {
     *out = 0;
     unsigned short count = *(unsigned short*)((char*)this + 0x26);
@@ -2330,7 +2331,7 @@ template <class T> inline void BA72DB0SaveBinary(BA72DB0Stream& kStream, const T
 class BA72DB0Data
 {
   public:
-    void FUN_00a72db0(BA72DB0Stream& kStream);
+    void NiAdditionalGeometryData_NiAGDDataStream_SaveBinary(BA72DB0Stream& kStream);
 
     bool m_bFlag;
     int m_iValue0;
@@ -2343,7 +2344,8 @@ class BA72DB0Data
 
 // Writes m_iValue0 through m_iValue5 and m_bFlag to kStream via BA72DB0SaveBinary.
 // @fnv 0x00a72db0
-void BA72DB0Data::FUN_00a72db0(BA72DB0Stream& kStream)
+// pdb: NiAdditionalGeometryData::NiAGDDataStream::SaveBinary | NiAdditionalGeometryData.obj | fnv360_0822_retail, call_seq + bridge(hash|call_seq) + skyrim(objrun_open), high
+void BA72DB0Data::NiAdditionalGeometryData_NiAGDDataStream_SaveBinary(BA72DB0Stream& kStream)
 {
     BA72DB0SaveBinary(kStream, m_iValue0);
     BA72DB0SaveBinary(kStream, m_iValue1);
@@ -2874,12 +2876,13 @@ struct FUN_00a7d1a0_Class
     int m_i10;
     Entry m_entries[4];
 
-    void FUN_00a7d1a0(NiStream& stream);
+    void NiPixelFormat_SaveBinary(NiStream& stream);
 };
 
 // Writes the object's fields and its four Entry records to the given NiStream in a fixed order.
 // @fnv 0x00a7d1a0
-void FUN_00a7d1a0_Class::FUN_00a7d1a0(NiStream& stream)
+// pdb: NiPixelFormat::SaveBinary | NiPixelFormat.obj | fnv360_0822_retail, call_seq + bridge(hash|call_seq) + skyrim(call_seq), high
+void FUN_00a7d1a0_Class::NiPixelFormat_SaveBinary(NiStream& stream)
 {
     SerializeValue(stream, m_i4);
     SerializeValue(stream, m_c1);
@@ -4204,10 +4207,10 @@ template <class T> inline void TextureBinaryStreamLoad(TextureBinaryInput& input
 }
 struct TextureLoadStream : NiStream
 {
-    void FUN_00a64ea0(NiFixedString*);
-    void FUN_00a64df0(NiFixedString*);
+    void NiStream_LoadCStringAsFixedString(NiFixedString*);
+    void NiStream_LoadFixedString(NiFixedString*);
     void FUN_00a64700(unsigned int);
-    void FUN_00a645b0();
+    void NiStream_ReadLinkID();
     void FUN_00a636f0(const char*);
     bool FUN_00a636b0(char*, unsigned int);
     void FUN_00a633d0(const char*, NiObjectA61**);
@@ -4295,7 +4298,7 @@ void NiSourceTexture::FUN_00a60180(TextureLoadStream& stream)
         stream.Read(ucExternal);
         if (ucExternal)
         {
-            stream.FUN_00a64ea0(&fileName);
+            stream.NiStream_LoadCStringAsFixedString(&fileName);
             if (rendererData)
             {
                 rendererData->DecRefCount();
@@ -4312,7 +4315,7 @@ void NiSourceTexture::FUN_00a60180(TextureLoadStream& stream)
             if (ucHasPixels)
             {
                 stream.FUN_00a64700(1);
-                stream.FUN_00a645b0();
+                stream.NiStream_ReadLinkID();
             }
             else
             {
@@ -4329,11 +4332,11 @@ void NiSourceTexture::FUN_00a60180(TextureLoadStream& stream)
     {
         stream.Read(bOldVersion);
         if (stream.Version() < 0x14010001)
-            stream.FUN_00a64ea0(&fileName);
+            stream.NiStream_LoadCStringAsFixedString(&fileName);
         else
-            stream.FUN_00a64df0(&fileName);
+            stream.NiStream_LoadFixedString(&fileName);
         stream.FUN_00a64700(1);
-        stream.FUN_00a645b0();
+        stream.NiStream_ReadLinkID();
     }
     if (fileName.m_handle)
         FUN_00a76960(&fileName, &resolvedName);

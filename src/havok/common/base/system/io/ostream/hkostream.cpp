@@ -100,7 +100,7 @@ void CpuObject::FUN_00cc0460()
     target->Invoke();
 }
 
-// FUN_00cc0470 : the stub family - load a sub-object out of `this` and tail-jump to
+// hkOstream_write : the stub family - load a sub-object out of `this` and tail-jump to
 // one of its virtuals (vtable offset 0x10).
 struct Sub_00cc0470
 {
@@ -116,11 +116,12 @@ struct Own_00cc0470
     int u00;
     int u04;
     Sub_00cc0470* m_sub;
-    void __thiscall FUN_00cc0470(void* a);
+    void __thiscall hkOstream_write(void* a);
 };
 
 // @fnv 0x00cc0470
-void __thiscall Own_00cc0470::FUN_00cc0470(void* a)
+// pdb: hkOstream::write | hkOStream.obj | fnv360_0822_retail, call_seq + skyrim(call_seq), high
+void __thiscall Own_00cc0470::hkOstream_write(void* a)
 {
     m_sub->v10(a);
 }
@@ -142,7 +143,8 @@ int __cdecl FUN_00cc0770()
 }
 
 // @fnv 0x00e3b490
-void __stdcall FUN_00e3b490(bool* p)
+// pdb: hkOffsetOnlyStreamWriter::isOk | hkOffsetOnlyStreamWriter.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void __stdcall hkOffsetOnlyStreamWriter_isOk(bool* p)
 {
     *p = true;
 }
@@ -1241,8 +1243,9 @@ unsigned int bhkMoppBvTreeShape::FUN_00cc9f60(NiStream& stream)
 
 
 // @f3twin 0x009d88f0 of 0x00902310
-struct F3Twin_009d88f0 : public CpuObject { void F3_FUN_009d88f0() ; };
-void F3Twin_009d88f0::F3_FUN_009d88f0() 
+struct F3Twin_009d88f0 : public CpuObject { void hkSubStreamWriter_flush() ; };
+// pdb: hkSubStreamWriter::flush | hkBinaryPackfileWriter.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void F3Twin_009d88f0::hkSubStreamWriter_flush() 
 {
     target->Invoke();
 }

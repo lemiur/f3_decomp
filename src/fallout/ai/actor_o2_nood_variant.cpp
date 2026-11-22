@@ -82,7 +82,7 @@ struct BlendAccess {
 struct BlendAllocator { char* top; };
 extern BlendAllocator* __cdecl FUN_00c85750();
 extern __int64 __cdecl FUN_00aa4d80();
-extern void __cdecl FUN_00cddef0(int, BlendTransform*, BlendTransform*, BlendTransform*);
+extern void __cdecl hkaSkeletonUtils_transformModelPoseToLocalPose(int, BlendTransform*, BlendTransform*, BlendTransform*);
 extern void __cdecl CallWithGlobal(int, BlendTransform*, void*, BlendTransform*);
 extern void __cdecl FUN_00ce3a00(int, int, int, BlendTransform*, int);
 struct BlendBuffer {
@@ -362,7 +362,7 @@ struct GameBlendAllocator {
 extern __int64 __cdecl FUN_0086c140();
 extern void __cdecl FUN_009588d0(int, const short*, GameBlendTransform*, GameBlendTransform*);
 extern void __cdecl FUN_009584b0(int, const short*, GameBlendTransform*, GameBlendTransform*);
-extern void __cdecl FUN_00962a60(NativeMapper*, const GameBlendTransform*, const GameBlendTransform*, GameBlendTransform*, int);
+extern void __cdecl hkaSkeletonMapper_mapPose(NativeMapper*, const GameBlendTransform*, const GameBlendTransform*, GameBlendTransform*, int);
 struct GameBlendBuffer {
  GameBlendTransform* data; int size;
  __forceinline GameBlendTransform& operator[](int i) { return data[i]; }
@@ -576,7 +576,7 @@ void BlendController::FUN_00c7c870()
     GameBlendTransform* mapped = mappedLocal.data;
     FUN_009584b0(jointCount, rig->getParentIndices(), rig->getMappingRef(), mapped);
     const GameBlendTransform* source = controller->access->sourceValue();
-    FUN_00962a60(controller->GetReferenceTimeStep()->source, source, rig->getMappingRef(), mapped, 2);
+    hkaSkeletonMapper_mapPose(controller->GetReferenceTimeStep()->source, source, rig->getMappingRef(), mapped, 2);
     FUN_009588d0(jointCount, rig->getParentIndices(), mapped, result);
     const int poseJointCount = controller->pose->count;
     for (int joint = 0; joint < poseJointCount; ++joint) {
@@ -590,7 +590,7 @@ void BlendController::FUN_00c7c870()
     FUN_009584b0(jointCount, rig->getParentIndices(), result, mapped);
     GameBlendTransform* destination = controller->access->valueA();
     GameBlendTransform* outputBasis = controller->access->valueB();
-    FUN_00962a60(controller->GetReferenceTimeStep()->dest, mapped, outputBasis, destination, 2);
+    hkaSkeletonMapper_mapPose(controller->GetReferenceTimeStep()->dest, mapped, outputBasis, destination, 2);
     controller->access->FUN_00954fc0();
     }
 }
@@ -976,7 +976,7 @@ struct SceneOwner {
     __forceinline char* GetName() { return name; }
     void FUN_00c7e9a0(Argument*, const char*);
     void FUN_00c7e3b0();
-    unsigned char FUN_00c75460();
+    unsigned char bhkRagdollController_InitGrabIK();
     void FUN_00c79e20();
 };
 
@@ -1171,7 +1171,7 @@ struct Vector4 {
 struct __declspec(align(16)) BodyTransform {
     Vector4 column0, column1, column2;
     Vector4 translation;
-    void FUN_00924b40(const Vector4*);
+    void hkRotation_set(const Vector4*);
 };
 struct TransformedBody {
     int reserved0, reserved4, reserved8, reservedc;
@@ -1275,13 +1275,13 @@ extern RagdollSetup::ShareDataMap DAT_00f79774;
 extern int DAT_010f33b4;
 extern RagdollSetup::CollisionObject* __cdecl FUN_008f1d20(Argument*);
 extern void __cdecl FUN_008e34c0(RagdollSetup::SceneObject*, RagdollSetup::Array*, RagdollSetup::Array*);
-extern int __cdecl FUN_0095ef20(RagdollSetup::Array*, RagdollSetup::Array*);
+extern int __cdecl hkaRagdollUtils_reorderForRagdoll(RagdollSetup::Array*, RagdollSetup::Array*);
 extern RagdollSetup::Skeleton* __cdecl FUN_0095e7a0(RagdollSetup::Array*, RagdollSetup::Array*);
 extern void* __cdecl FUN_0095f8b0(RagdollSetup::Skeleton*, RagdollSetup::Array*, RagdollSetup::Array*);
 extern void __cdecl FUN_008db970(void*, const RagdollSetup::ObjectTransform*);
 extern RagdollSetup::TransformedBody* __cdecl FUN_00424d50(void*, void*);
 extern void __cdecl FUN_0056ad20(RagdollSetup::ObjectTransform*, const RagdollSetup::BodyTransform*);
-extern void __cdecl FUN_00964cd0(RagdollSetup::MapperParams*, RagdollSetup::MapperData*, RagdollSetup::MapperData*);
+extern void __cdecl hkaSkeletonMapperUtils_createMapping(RagdollSetup::MapperParams*, RagdollSetup::MapperData*, RagdollSetup::MapperData*);
 namespace RagdollSetup {
 inline void ShareData::SetReferenceTransform(const ObjectTransform& transform) { FUN_008db970(skeleton->referencePose, &transform); }
 }
@@ -1307,7 +1307,7 @@ void SceneOwner::FUN_00c7e9a0(Argument* sourceInput, const char* requestedName) 
         LocalArray bodies(64);
         LocalArray constraints(64);
         FUN_008e34c0(collision->GetSceneObject(), &bodies, &constraints);
-        int result = FUN_0095ef20(&bodies, &constraints);
+        int result = hkaRagdollUtils_reorderForRagdoll(&bodies, &constraints);
         if (result != 1) {
             if (!ShareOf(this)->skeleton) {
                 ShareOf(this)->skeleton = FUN_0095e7a0(&bodies, &constraints);
@@ -1321,7 +1321,7 @@ void SceneOwner::FUN_00c7e9a0(Argument* sourceInput, const char* requestedName) 
                 if (body) {
                     BodyTransform physicsTransform;
                     physicsTransform.translation = body->translation;
-                    physicsTransform.FUN_00924b40(&body->rotation);
+                    physicsTransform.hkRotation_set(&body->rotation);
                     FUN_0056ad20(&bodyTransform, &physicsTransform);
                 }
                 ObjectTransform rootTransform;
@@ -1354,7 +1354,7 @@ void SceneOwner::FUN_00c7e9a0(Argument* sourceInput, const char* requestedName) 
                     params.skeletonA = ShareOf(this)->animation;
                     params.skeletonB = ShareOf(this)->skeleton;
                     params.autodetectChains = 0;
-                    FUN_00964cd0(&params, &ragdollToAnimation, &animationToRagdoll);
+                    hkaSkeletonMapperUtils_createMapping(&params, &ragdollToAnimation, &animationToRagdoll);
                 }
                 ((OwnerMethods*)this)->FUN_008e2bb0();
                 ShareOf(this)->ragdollToAnimation = new FUN_00963a00(&ragdollToAnimation);
@@ -2829,7 +2829,7 @@ struct Skeleton {
 };
 extern float DAT_010c7948[];
 void CallWithGlobal(int, void*, void*, Transform48*);
-void FUN_00cddef0(int, void*, Transform48*, Transform48*);
+void hkaSkeletonUtils_transformModelPoseToLocalPose(int, void*, Transform48*, Transform48*);
 void FUN_00ce3a00(void*,void*,void*,Transform48*,int);
 
 namespace ControllerFloatHardware { extern "C" __m128 _mm_set_ps1(float); }

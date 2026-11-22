@@ -41,7 +41,8 @@ int FUN_004af1b0()
     return DAT_00f4e534;
 }
 
-int FUN_00840c30()
+// pdb: NiImageConverter::GetImageConverter | NiImageConverter.obj | fnv360_0822_retail, call_gap + bridge(call_seq|call_seq) + skyrim(call_seq), high
+int NiImageConverter_GetImageConverter()
 {
     return DAT_0108f47c;
 }

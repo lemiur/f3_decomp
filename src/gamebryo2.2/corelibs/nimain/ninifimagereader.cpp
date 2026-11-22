@@ -385,12 +385,13 @@ struct SubObj
 
 struct FnvMgr
 {
-    Obj* FUN_00a8aec0(const char* name, int unused);
+    Obj* NiNIFImageReader_ReadFile(const char* name, int unused);
 };
 
 // Calls sub->v04 with name, then returns the object if its node list contains DAT_011f4a90.
 // @fnv 0x00a8aec0
-Obj* FnvMgr::FUN_00a8aec0(const char* name, int unused)
+// pdb: NiNIFImageReader::ReadFile | NiNIFImageReader.obj | fnv360_0822_retail, caller_sim + bridge(vtable|caller_sim) + skyrim(vtable), high
+Obj* FnvMgr::NiNIFImageReader_ReadFile(const char* name, int unused)
 {
     CRITICAL_SECTION* cs = (CRITICAL_SECTION*)((char*)this + 0x80);
     EnterCriticalSection(cs);

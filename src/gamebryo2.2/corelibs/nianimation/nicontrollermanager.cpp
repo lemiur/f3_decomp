@@ -265,11 +265,12 @@ const char* __cdecl FUN_00a2e1e0()
 
 struct FUN_00a2e420_shell : public NiControllerManager
 {
-    unsigned char __thiscall FUN_00a2e420(float f);
+    unsigned char __thiscall NiControllerManager_StopTransSourceSequence(float f);
 };
 
 // @fnv 0x00a2e420
-unsigned char __thiscall FUN_00a2e420_shell::FUN_00a2e420(float f)
+// pdb: NiControllerManager::StopTransSourceSequence | NiControllerManager.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_seq), high
+unsigned char __thiscall FUN_00a2e420_shell::NiControllerManager_StopTransSourceSequence(float f)
 {
     unsigned int i = 0;
     while (i < m_kActiveSequences.m_uiUsed)
@@ -371,7 +372,8 @@ struct NiRTTI
 };
 extern NiRTTI DAT_011f36ac;
 // @fnv 0x00a2ec40
-const NiRTTI* __cdecl FUN_00a2ec40()
+// pdb: NiAlphaProperty::GetRTTI | MultiBoundMarkerData.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+const NiRTTI* __cdecl NiAlphaProperty_GetRTTI()
 {
     return &DAT_011f36ac;
 }
@@ -382,7 +384,8 @@ struct GlobalObjectO2_00a7b610
 };
 extern GlobalObjectO2_00a7b610 g_011f4a04;
 // @fnv 0x00a2ede0
-GlobalObjectO2_00a7b610* __cdecl FUN_00a2ede0()
+// pdb: BSTempNodeManager::GetRTTI | TES.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(udata), high
+GlobalObjectO2_00a7b610* __cdecl BSTempNodeManager_GetRTTI()
 {
     return &g_011f4a04;
 }
@@ -435,7 +438,7 @@ struct Seq
     int f5c;
     bool FUN_004eeae0(int);
     void FUN_0043b9f0(int*);
-    bool FUN_00a32c70(int);
+    bool NiControllerSequence_StoreTargets(int);
 };
 struct Mgr2
 {
@@ -465,7 +468,7 @@ bool __fastcall AttachSeqToOwner(Owner* pOwner, int edx, Seq* s, int* name, Seq*
     s->m_pkOwner = pOwner;
     if (s->f5c == 0)
         s->FUN_004eeae0(pOwner->f2c + 8);
-    if ((char)(int)flag && !s->FUN_00a32c70(pOwner->f2c))
+    if ((char)(int)flag && !s->NiControllerSequence_StoreTargets(pOwner->f2c))
     {
         s->m_pkOwner = 0;
         return false;
@@ -495,7 +498,7 @@ struct CloningProcess
 typedef char _sizecheck_NiCloningProcess[sizeof(CloningProcess) == 16 ? 1 : -1];
 struct FUN_00a2f850_shell : public NiControllerManager
 {
-    NiObject* FUN_00a2f850(CloningProcess*);
+    NiObject* NiControllerManager_CreateClone(CloningProcess*);
 };
 
 struct BSFadeNode
@@ -512,7 +515,8 @@ struct FUN_00a2f380_shell
 };
 
 // @fnv 0x00a2f850
-NiObject* FUN_00a2f850_shell::FUN_00a2f850(CloningProcess* kCloning)
+// pdb: NiControllerManager::CreateClone | NiControllerManager.obj | fnv360_0822_retail, objrun_prop + bridge(vtable|objrun_prop) + skyrim(caller_sim), high
+NiObject* FUN_00a2f850_shell::NiControllerManager_CreateClone(CloningProcess* kCloning)
 {
     FUN_00a2eed0_tgt* mem = (FUN_00a2eed0_tgt*)BSFadeNode::operator new(0x7c);
     NiObject* pkObject;
@@ -551,19 +555,20 @@ struct NiTexture;
 struct NiThread;
 struct FUN_00a2e2e0_shell : public NiControllerManager
 {
-    void FUN_00a2e2e0(NiStream*);
+    void NiControllerManager_PostLinkObject(NiStream*);
 };
 
 struct Seq
 {
-    bool FUN_00a32c70(int);
+    bool NiControllerSequence_StoreTargets(int);
 };
 struct LinkHack
 {
     void LinkObject(NiStream&);
 };
 // @fnv 0x00a2e2e0
-void FUN_00a2e2e0_shell::FUN_00a2e2e0(NiStream* kStream)
+// pdb: NiControllerManager::PostLinkObject | NiControllerManager.obj | fnv360_0822_retail, caller_sim + bridge(vtable|objrun) + skyrim(caller_sim), high
+void FUN_00a2e2e0_shell::NiControllerManager_PostLinkObject(NiStream* kStream)
 {
     ((LinkHack*)this)->LinkHack::LinkObject(*kStream);
     NiAVObject* pkRoot;
@@ -574,7 +579,7 @@ void FUN_00a2e2e0_shell::FUN_00a2e2e0(NiStream* kStream)
     {
         pkSequence = m_kSequenceArray.m_pBase[ui].m_pObject;
         if (pkSequence)
-            ((Seq*)pkSequence)->FUN_00a32c70((int)pkRoot);
+            ((Seq*)pkSequence)->NiControllerSequence_StoreTargets((int)pkRoot);
     }
 }
 }  // namespace fnv_00a2e2e0
@@ -1217,7 +1222,7 @@ void FUN_00a2e9f0_cls::FUN_00a2e9f0(NiStreamImpl& stream)
 
 struct NiAVObject
 {
-    void FUN_00a64670();
+    void NiStream_ReadMultipleLinkIDs();
     NiAVObjectPalette* FUN_00a64620();
 };
 void __stdcall FUN_00a6d5e0(NiAVObject*);
@@ -1229,10 +1234,11 @@ struct SequenceNotifier
 };
 struct NiControllerManagerFacade : NiControllerManager
 {
-    void FUN_00a2eaa0(NiAVObject* source);
+    void NiControllerManager_LoadBinary(NiAVObject* source);
 };
 // @fnv 0x00a2eaa0
-void NiControllerManagerFacade::FUN_00a2eaa0(NiAVObject* source)
+// pdb: NiControllerManager::LoadBinary | NiControllerManager.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc + skyrim(caller_sim), high
+void NiControllerManagerFacade::NiControllerManager_LoadBinary(NiAVObject* source)
 {
     FUN_00a6d5e0(source);
     SequenceNotifier* notifier = *reinterpret_cast<SequenceNotifier**>(reinterpret_cast<char*>(source) + 0x24c);
@@ -1242,7 +1248,7 @@ void NiControllerManagerFacade::FUN_00a2eaa0(NiAVObject* source)
         notifier->m_uiPending += notifier->m_pfnNotify(notifier, &firstOutput, 1, &isActive, 1);
         m_bCumulative = firstOutput != 0;
     }
-    source->FUN_00a64670();
+    source->NiStream_ReadMultipleLinkIDs();
     if (*reinterpret_cast<unsigned int*>(reinterpret_cast<char*>(source) + 0xd8) >= 0x0a010068u)
     {
         NiAVObjectPalette* replacement = source->FUN_00a64620();
@@ -1665,7 +1671,7 @@ struct CloneProc
 
 struct CSeq : CObj
 {
-    bool FUN_00a32c70(int);
+    bool NiControllerSequence_StoreTargets(int);
 };
 
 struct CTimeCtrlBase : CObj
@@ -1733,7 +1739,7 @@ void CCtrlMgr::FUN_00a2f420(CloneProc& kCloning)
         if (pkSeq)
         {
             pkSeq->ProcessClone(kCloning);
-            pkSeq->FUN_00a32c70(m_pkTarget);
+            pkSeq->NiControllerSequence_StoreTargets(m_pkTarget);
         }
     }
 
@@ -1862,7 +1868,8 @@ class Sequence
 
 // Deactivates pkSource and starts pkDest with the given arguments when pkSource is active and pkDest is not.
 // @fnv 0x00a2e280
-bool __stdcall FUN_00a2e280(Sequence* pkSource, Sequence* pkDest, float fTime, int iArg0, int iArg1, float fDuration,
+// pdb: NiControllerManager::CrossFade | NiControllerManager.obj | fnv360_0721_beta, objrun + bridge(hash|call_gap_sim), high
+bool __stdcall NiControllerManager_CrossFade(Sequence* pkSource, Sequence* pkDest, float fTime, int iArg0, int iArg1, float fDuration,
                             int iArg2)
 {
     if (!pkSource->m_iActive || pkDest->m_iActive)
@@ -2290,7 +2297,8 @@ SeqTarget* __stdcall GetTempBlendSequence(NiControllerSequence* seq, int key);
 
 // If the sequence is inactive, look up the target by key and call its FUN_00a350d0 with the given parameters, returning the result.
 // @fnv 0x00a2f800
-bool __stdcall FUN_00a2f800(NiControllerSequence* seq, float a, float b, int c, int key)
+// pdb: NiControllerManager::BlendFromPose | NiControllerManager.obj | fnv360_0822_retail, objrun + bridge(hash|objrun), high
+bool __stdcall NiControllerManager_BlendFromPose(NiControllerSequence* seq, float a, float b, int c, int key)
 {
     if (seq->m_eAnimationState != NiControllerSequence::INACTIVE)
     {

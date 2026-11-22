@@ -210,7 +210,7 @@ extern void __cdecl FUN_009ec800(void* stridedVerts, hkGeometry* geometry, int m
 struct VectorA692
 {
     float x, y, z, w;
-    void FUN_008d28e0(const hkTransform& t, const VectorA692& v);
+    void hkVector4_setTransformedPos(const hkTransform& t, const VectorA692& v);
 };
 struct DisplayConvexA692 : hkpShape
 {
@@ -245,7 +245,7 @@ static hkpShape* FUN_00de3360(const VertexSource* src, const hkTransform& transf
     }
     output.m_size = count;
     for (int i = 0; i < count; ++i)
-        ((VectorA692*)output.m_data)[i].FUN_008d28e0(transform, ((VectorA692*)input.m_data)[i]);
+        ((VectorA692*)output.m_data)[i].hkVector4_setTransformedPos(transform, ((VectorA692*)input.m_data)[i]);
 
     ThreadMemoryA692* pool = (ThreadMemoryA692*)TlsGetValue(DAT_010f3170);
     hkGeometry* raw;

@@ -491,7 +491,7 @@ struct Motion
     __m128 axisZ;
     int m40, m44, m48, m4c, m50, m54, m58, m5c;
     __m128 pos;
-    float FUN_00c86430();
+    float hkpMotion_getMass();
 };
 
 struct Body
@@ -546,7 +546,7 @@ struct COMViewer : HandlerOwner, COMViewerPart
 {
 };
 
-// For each body whose motion.FUN_00c86430() is nonzero, draws red, green and blue lines from its position along its three axes through the display handler.
+// For each body whose motion.hkpMotion_getMass() is nonzero, draws red, green and blue lines from its position along its three axes through the display handler.
 // @f3 0x009f65f0 (community match, verified in this file)
 namespace f3_center_axes {
 struct __declspec(align(16)) AxisPoint {

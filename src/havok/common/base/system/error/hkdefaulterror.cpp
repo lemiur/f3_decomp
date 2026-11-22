@@ -131,7 +131,7 @@ struct S_00d2b3e0
     int unk1c;
     void(__cdecl* m_callback)(const char*, int);
     int m_user;
-    void FUN_00d2b3e0(const char* kind, int code, const char* msg, const char* file, int line, char trace);
+    void hkDefaultError_showMessage(const char* kind, int code, const char* msg, const char* file, int line, char trace);
 };
 
 // Formats a message with optional file/line/code/kind, invokes m_callback, and optionally dumps a stack trace via DAT_01269a84.
@@ -184,7 +184,8 @@ struct D3Stream
 };
 void __cdecl FUN_009232a0(D3Str* out, const char* fmt, int v);
 
-void S_00d2b3e0::FUN_00d2b3e0(const char* kind, int code, const char* msg, const char* file, int line, char trace)
+// pdb: hkDefaultError::showMessage | hkDefaultError.obj | fnv360_0822_retail, ustr + bridge(ustr|ustr) + skyrim(ustr), high
+void S_00d2b3e0::hkDefaultError_showMessage(const char* kind, int code, const char* msg, const char* file, int line, char trace)
 {
     D3Trace tr;
     D3Stream st;
@@ -267,11 +268,11 @@ struct D2ErrorHost
             return data[size - 1];
         }
     } items;
-    void FUN_00d2b3e0(const char* name, int key, int a3, int a4, int a5, Bool8 flags);
+    void hkDefaultError_showMessage(const char* name, int key, int a3, int a4, int a5, Bool8 flags);
     int FUN_00d2b4f0(int mode, int index, int a3, int a4, int a5);
 };
 
-// Resolves index to last item if -1, validates it via v14, maps mode to a name and flag, calls FUN_00d2b3e0, returns 1 for modes 2 or 3.
+// Resolves index to last item if -1, validates it via v14, maps mode to a name and flag, calls hkDefaultError_showMessage, returns 1 for modes 2 or 3.
 // @fnv 0x00d2b4f0
 int D2ErrorHost::FUN_00d2b4f0(int mode, int index, int aiArg3, int aiArg4, int aiArg5)
 {
@@ -301,7 +302,7 @@ int D2ErrorHost::FUN_00d2b4f0(int mode, int index, int aiArg3, int aiArg4, int a
         flag = true;
         break;
     }
-    FUN_00d2b3e0(name, index, aiArg3, aiArg4, aiArg5, flag);
+    hkDefaultError_showMessage(name, index, aiArg3, aiArg4, aiArg5, flag);
     if (mode == 2 || mode == 3)
         return 1;
     return 0;

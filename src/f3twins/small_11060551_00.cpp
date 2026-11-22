@@ -5,7 +5,7 @@
 void __fastcall FUN_00c24b70(void*);
 void __fastcall FUN_006bd950(void*);
 void __fastcall FUN_006ccf20(void*);
-void __fastcall FUN_006d62a0(void*);
+void __fastcall BGSCellNumericIDArrayMap_Clear(void*);
 void __fastcall FUN_006dacd0(void*);
 void __fastcall FUN_007b65a0(void*);
 void __fastcall FUN_007e94e0(void*);
@@ -17,24 +17,24 @@ struct D_004c3330 : B_004c3330 { virtual ~D_004c3330(); };
 D_004c3330::~D_004c3330() { FUN_00c24b70(this); }
 
 struct B_006ca9c0 { void* pad; virtual ~B_006ca9c0(); };
-struct D_006ca9c0 : B_006ca9c0 { virtual ~D_006ca9c0(); };
-D_006ca9c0::~D_006ca9c0() { FUN_006bd950(this); }
+struct BGSReconstructFormsMap : B_006ca9c0 { virtual ~BGSReconstructFormsMap(); }; // src: F3_EXE vtable 0x00e0e1c0 (old: D_006ca9c0)
+BGSReconstructFormsMap::~BGSReconstructFormsMap() { FUN_006bd950(this); }
 
 struct B_006cd480 { void* pad; virtual ~B_006cd480(); };
 struct D_006cd480 : B_006cd480 { virtual ~D_006cd480(); };
 D_006cd480::~D_006cd480() { FUN_006ccf20(this); }
 
 struct B_006d6760 { void* pad; virtual ~B_006d6760(); };
-struct D_006d6760 : B_006d6760 { virtual ~D_006d6760(); };
-D_006d6760::~D_006d6760() { FUN_006d62a0(this); }
+struct BGSCellNumericIDArrayMap : B_006d6760 { virtual ~BGSCellNumericIDArrayMap(); }; // src: F3_EXE vtable 0x00e0f608 (old: D_006d6760)
+BGSCellNumericIDArrayMap::~BGSCellNumericIDArrayMap() { BGSCellNumericIDArrayMap_Clear(this); }
 
 struct B_006dc570 { void* pad; virtual ~B_006dc570(); };
 struct D_006dc570 : B_006dc570 { virtual ~D_006dc570(); };
 D_006dc570::~D_006dc570() { FUN_006dacd0(this); }
 
 struct B_007b6dc0 { void* pad; virtual ~B_007b6dc0(); };
-struct D_007b6dc0 : B_007b6dc0 { virtual ~D_007b6dc0(); };
-D_007b6dc0::~D_007b6dc0() { FUN_007b65a0(this); }
+struct CombatThreatMap : B_007b6dc0 { virtual ~CombatThreatMap(); }; // src: F3_EXE vtable 0x00e1b0a4 (old: D_007b6dc0)
+CombatThreatMap::~CombatThreatMap() { FUN_007b65a0(this); }
 
 struct B_007e96f0 { void* pad; virtual ~B_007e96f0(); };
 struct D_007e96f0 : B_007e96f0 { virtual ~D_007e96f0(); };
@@ -45,8 +45,8 @@ struct D_00952000 : B_00952000 { virtual ~D_00952000(); };
 D_00952000::~D_00952000() { FUN_008f7ef0(this); }
 
 struct B_00bdc4b0 { void* pad; virtual ~B_00bdc4b0(); };
-struct D_00bdc4b0 : B_00bdc4b0 { virtual ~D_00bdc4b0(); };
-D_00bdc4b0::~D_00bdc4b0() { FUN_00be4650(this); }
+struct BSFaceGenBinaryFile : B_00bdc4b0 { virtual ~BSFaceGenBinaryFile(); }; // src: F3_EXE vtable 0x00ea90ec (old: D_00bdc4b0)
+BSFaceGenBinaryFile::~BSFaceGenBinaryFile() { FUN_00be4650(this); }
 
 // ---- family f042
 
@@ -146,8 +146,8 @@ struct C_004312a0 : B_004312a0 { C_004312a0(void*); virtual void v(); };
 C_004312a0::C_004312a0(void* a) : B_004312a0(a) {}
 
 struct B_009b7930 { B_009b7930(void*); virtual void w(); };
-struct C_009b7930 : B_009b7930 { C_009b7930(void*); virtual void v(); };
-C_009b7930::C_009b7930(void* a) : B_009b7930(a) {}
+struct hkpMoppAgent : B_009b7930 { hkpMoppAgent(void*); virtual void v(); }; // src: F3_EXE vtable 0x00e7eae8 (old: C_009b7930)
+hkpMoppAgent::hkpMoppAgent(void* a) : B_009b7930(a) {}
 
 struct B_00b8e660 { B_00b8e660(void*); virtual void w(); };
 struct C_00b8e660 : B_00b8e660 { C_00b8e660(void*); virtual void v(); };
@@ -192,7 +192,8 @@ __declspec(noinline) void FUN_00429ea0()
     FUN_00429db0(DAT_0106ca70);
 }
 
-__declspec(noinline) void FUN_00454350()
+// pdb: TESForm::SaveNumericID | TESForm.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+__declspec(noinline) void TESForm_SaveNumericID()
 {
     FUN_006defa0(DAT_01079ca4);
 }
@@ -238,7 +239,8 @@ extern char DAT_01178274;
 extern char DAT_01178275;
 extern char DAT_011786e4;
 
-void FUN_005539f0(char c)
+// pdb: TESIdleManager::SetUsedItemActivate | TESIdleManager.obj | fnv360_0822_debug, udata + bridge(udata|call_seq), high
+void TESIdleManager_SetUsedItemActivate(char c)
 {
     DAT_010721c0 = c;
 }
@@ -248,7 +250,8 @@ void FUN_006e2d90(char c)
     DAT_00f6dad0 = c;
 }
 
-void FUN_0076ceb0(char c)
+// pdb: PlayerCharacter::SetGodMode | PlayerCharacter.obj | fnv360_0721_beta, caller + bridge(caller|call_seq) + skyrim(objrun_prop), high
+void PlayerCharacter_SetGodMode(char c)
 {
     DAT_0107ba65 = c;
 }
@@ -263,12 +266,14 @@ void FUN_00b2adb0(char c)
     DAT_011761dc = c;
 }
 
-void FUN_00ba1460(char c)
+// pdb: CSpeedTreeRT::SetDropToBillboard | SpeedTreeRT.obj | fnv360_0822_retail, udata, high
+void CSpeedTreeRT_SetDropToBillboard(char c)
 {
     DAT_01178274 = c;
 }
 
-void FUN_00ba1930(char c)
+// pdb: CSpeedTreeRT::SetTextureFlip | SpeedTreeRT.obj | fnv360_0822_retail, udata, high
+void CSpeedTreeRT_SetTextureFlip(char c)
 {
     DAT_01178275 = c;
 }

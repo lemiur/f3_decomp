@@ -25,10 +25,11 @@ struct FUN_00d54420_Owner
     unsigned char padding[0x30];
     FUN_00d54420_Interface* m_pInterface;
 
-    void FUN_00d54420(int, float, int);
+    void hkpMoppBvTreeShape_getAabbImpl(int, float, int);
 };
 
-void FUN_00d54420_Owner::FUN_00d54420(int a, float b, int c)
+// pdb: hkpMoppBvTreeShape::getAabbImpl | hkpMoppBvTreeShape.obj | fnv360_0822_retail, objrun + bridge(hash|vtable) + skyrim(hash), high
+void FUN_00d54420_Owner::hkpMoppBvTreeShape_getAabbImpl(int a, float b, int c)
 {
     m_pInterface->FUN_00d54420_f6(a, b, c);
 }

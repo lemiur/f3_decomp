@@ -49,7 +49,8 @@ void* __cdecl FUN_00a44f10()
 extern const char* const g_011f3ec8_arg1;
 
 // @fnv 0x00a57660
-const char* __cdecl FUN_00a57660()
+// pdb: bhkCharacterProxy::GetRTTI | bhkCharacterListenerSpell.obj | fnv360_0822_retail, udata + bridge(vtable_prefix|vtable), high
+const char* __cdecl bhkCharacterProxy_GetRTTI()
 {
     return (const char*)&g_011f3ec8_arg1;
 }
@@ -57,7 +58,8 @@ const char* __cdecl FUN_00a57660()
 extern const char* const g_011f3f08_arg1;
 
 // @fnv 0x00a577b0
-const char* const* __cdecl FUN_00a577b0()
+// pdb: MagicHitEffect::GetRTTI | MagicHitEffect.obj | fnv360_1110_retail, udata, high
+const char* const* __cdecl MagicHitEffect_GetRTTI()
 {
     return &g_011f3f08_arg1;
 }
@@ -470,7 +472,7 @@ class NiVisControllerA44E
 {
   public:
     virtual void vfn_00();
-    bool FUN_00a36250(float fTime);
+    bool NiTimeController_DontDoUpdate(float fTime);
     void FUN_00a44e10(NiUpdateDataA44E& kUpdateData);
 
     bool GetManagerControlled() const
@@ -501,7 +503,7 @@ void NiVisControllerA44E::FUN_00a44e10(NiUpdateDataA44E& kUpdateData)
     {
         m_fControllerTime = DAT_01096324;
     }
-    else if (FUN_00a36250(kUpdateData.m_fTime) &&
+    else if (NiTimeController_DontDoUpdate(kUpdateData.m_fTime) &&
              (!m_spControllerInterpolator || !m_spControllerInterpolator->AlwaysUpdate()))
     {
         return;

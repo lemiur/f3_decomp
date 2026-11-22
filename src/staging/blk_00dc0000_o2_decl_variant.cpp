@@ -1,6 +1,6 @@
 #include "f3_common.h"
 // src/staging/blk_00dc0000_o2_decl_variant.cpp - declaration variant unit created 2026-10-27 by decl_variants.py for paused function 0x00dcc820: the skeleton of src/staging/blk_00dc0000_o2.cpp
-// with declarations corrected to what the original code does (unit: static __declspec(noinline) unsigned short FUN_00dcc240(unsi -> static __declspec(noinline) __int64 FUN_00dcc240(unsigned ch). Move the function to its real unit once
+// with declarations corrected to what the original code does (unit: static __declspec(noinline) unsigned short readInteger64(unsi -> static __declspec(noinline) __int64 readInteger64(unsigned ch). Move the function to its real unit once
 // that unit declares it this way.
 
 // src/staging/blk_00dc0000_o2.cpp - STAGING unit created 2026-10-16 by stage_units.py for functions with no attributed unit
@@ -146,7 +146,8 @@ struct IniTokenStream
     void* m_vt;
 };
 extern "C" void ReadIniLine(void);
-static __declspec(noinline) unsigned short FUN_00dcc240(IniTokenStream* stream, unsigned char* negative)
+// pdb: readInteger64 | hkIStream.obj | fnv360_0822_retail, caller_sim + skyrim(caller_sim), high
+static __declspec(noinline) unsigned short readInteger64(IniTokenStream* stream, unsigned char* negative)
 {
     *negative = 0;
     ReadIniLine();
@@ -167,7 +168,8 @@ struct S_00dcc240_Reader
     unsigned short unk08;
 };
 extern "C" void __cdecl SkipWhitespace(void);
-static __declspec(noinline) __int64 FUN_00dcc240(unsigned char* ok, S_00dcc240_Reader* reader)
+// pdb: readInteger64 | hkIStream.obj | fnv360_0822_retail, caller_sim + skyrim(caller_sim), high
+static __declspec(noinline) __int64 readInteger64(unsigned char* ok, S_00dcc240_Reader* reader)
 {
     *ok = 0;
     SkipWhitespace();
@@ -314,7 +316,7 @@ struct stub_cls
 static stub_cls* volatile g_stub_self;
 static int volatile g_stub_v;
 static int volatile g_stub_out;
-// ReadSignedInt: thiscall member returning this; parses an int through FUN_00dcc240
+// ReadSignedInt: thiscall member returning this; parses an int through readInteger64
 // (per-TU private convention: stream on the stack, sign-flag address in EAX),
 // negates it when the flag byte is set, and stores it through the int* argument.
 struct S_00dcc7e0_Stream
@@ -322,7 +324,8 @@ struct S_00dcc7e0_Stream
     void* m_vt;
 };
 extern "C" void ReadIniLine(void);
-static __declspec(noinline) int FUN_00dcc240(S_00dcc7e0_Stream* stream, unsigned char* negative)
+// pdb: readInteger64 | hkIStream.obj | fnv360_0822_retail, caller_sim + skyrim(caller_sim), high
+static __declspec(noinline) int readInteger64(S_00dcc7e0_Stream* stream, unsigned char* negative)
 {
     *negative = 0;
     ReadIniLine();
@@ -436,7 +439,7 @@ extern "C" void __cdecl SkipWhitespace(void);
 S_00dcc820_Class* __thiscall S_00dcc820_Class::FUN_00dcc820(int* result)
 {
     unsigned char ok;
-    int value = FUN_00dcc240(&ok, m_08);
+    int value = readInteger64(&ok, m_08);
 
     *result = ok ? -value : value;
     return this;

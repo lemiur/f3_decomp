@@ -15,7 +15,7 @@ void __cdecl RunCollector();
 void __cdecl RunSymmetricAgentFlipCollector();
 void __cdecl BuildHeaderAndDispatchHandler();
 void __cdecl ProcessTransformShapeCollision();
-void __cdecl FUN_00d42e50();
+void __cdecl hkpTransformAgent_staticGetClosestPoints();
 void __cdecl DispatchClosestPoints();
 
 struct Target {
@@ -70,10 +70,11 @@ struct FUN_00d42a60_class {
     void* unk04;
     void* unk08;
     FUN_00d42a60_interface* unk0c;
-    int __thiscall FUN_00d42a60();
+    int __thiscall hkpTransformAgent_createZombie();
 };
 // @fnv 0x00d42a60
-int FUN_00d42a60_class::FUN_00d42a60() {
+// pdb: hkpTransformAgent::createZombie | hkpTransformAgent.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+int FUN_00d42a60_class::hkpTransformAgent_createZombie() {
     FUN_00d42a60_method method = unk0c->vtable->slot34;
     return method(unk0c);
 }
@@ -250,9 +251,10 @@ struct Handler {
     virtual int V4(); virtual int V5(); virtual int V6(); virtual int V7();
     virtual int Dispatch(DispatchData*, int, int, int);
 };
-struct Owner { int unk00; int unk04; int unk08; Handler* handler; int FUN_00d42fc0(Input*, int, int, int); };
+struct Owner { int unk00; int unk04; int unk08; Handler* handler; int hkpTransformAgent_updateShapeCollectionFilter(Input*, int, int, int); };
 // @fnv 0x00d42fc0
-int Owner::FUN_00d42fc0(Input* input, int aiArg1, int aiArg2, int aiArg3)
+// pdb: hkpTransformAgent::updateShapeCollectionFilter | hkpTransformAgent.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+int Owner::hkpTransformAgent_updateShapeCollectionFilter(Input* input, int aiArg1, int aiArg2, int aiArg3)
 {
     Object* object = input->object;
     Matrix43 temp;
@@ -296,7 +298,7 @@ void __cdecl RunCollector(int aiArgA, int aiArgB, int aiArgC, int aiData)
 }
 
 extern float DAT_0104da48;
-extern void __cdecl FUN_00d42e50(void*, void*, int, void*);
+extern void __cdecl hkpTransformAgent_staticGetClosestPoints(void*, void*, int, void*);
 
 struct hkpSymmetricAgentFlipCollector
 {
@@ -305,14 +307,14 @@ struct hkpSymmetricAgentFlipCollector
     int unk08;
 };
 
-// Builds a local hkpSymmetricAgentFlipCollector from DAT_0104da48 and arg4, then calls FUN_00d42e50 with arg2, arg1, arg3 and the collector.
+// Builds a local hkpSymmetricAgentFlipCollector from DAT_0104da48 and arg4, then calls hkpTransformAgent_staticGetClosestPoints with arg2, arg1, arg3 and the collector.
 // @fnv 0x00d43330
 void __cdecl RunSymmetricAgentFlipCollector(void* arg1, void* arg2, int arg3, int arg4)
 {
     hkpSymmetricAgentFlipCollector local;
     local.unk04 = DAT_0104da48;
     local.unk08 = arg4;
-    FUN_00d42e50(arg2, arg1, arg3, &local);
+    hkpTransformAgent_staticGetClosestPoints(arg2, arg1, arg3, &local);
 }
 
 struct CallData { void* descriptor; float bound; unsigned int value; };
@@ -419,11 +421,12 @@ struct S_00d42a40_H {
     int unk04;
     int unk08;
     S_00d42a40_T* m_0C;
-    void FUN_00d42a40(int a);
+    void hkpTransformAgent_removePoint(int a);
 };
 
 // @fnv 0x00d42a40
-void S_00d42a40_H::FUN_00d42a40(int a) {
+// pdb: hkpTransformAgent::removePoint | hkpTransformAgent.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void S_00d42a40_H::hkpTransformAgent_removePoint(int a) {
     m_0C->v2C(a);
 }
 
@@ -509,7 +512,7 @@ struct BlockAllocator {
 __declspec(align(16)) struct MotionState {
     void* entries[44];
     MotionState* FUN_009cdcb0(const void* src);
-    void FUN_009251b0(const void* rot, const hkVector4& t);
+    void hkTransform_setMul(const void* rot, const hkVector4& t);
 };
 
 Header* __cdecl BuildHeaderAndDispatchHandler(InputA* pSource,InputB* pPathInput,InputC* pStateInput,int value) {
@@ -523,7 +526,7 @@ Header* __cdecl BuildHeaderAndDispatchHandler(InputA* pSource,InputB* pPathInput
     Meta* meta = *(Meta**)&root->meta;
     MotionState ms;
     ms.FUN_009cdcb0((const void*)pSource->data);
-    ms.FUN_009251b0((const void*)pSource->data, *(const hkVector4*)&root->portion30);
+    ms.hkTransform_setMul((const void*)pSource->data, *(const hkVector4*)&root->portion30);
     CallbackArgs callbackArgs = {meta,0,(WorkArea*)&ms,pSource};
     Path* path = pPathInput->path;
     bool flag = pStateInput->unk10 != 0;
@@ -636,14 +639,14 @@ void __cdecl ProcessTransformShapeCollision(
         &childBody, second, input, output);
 }
 
-struct CallTarget_00d42fc0 { int FUN_00d42fc0(int, int, int, int); };
+struct CallTarget_00d42fc0 { int hkpTransformAgent_updateShapeCollectionFilter(int, int, int, int); };
 struct SearchObject {
     int FUN_00d43600(unsigned int arg0, unsigned int arg1, unsigned int arg2, unsigned int arg3);
 };
 // @fnv 0x00d43600
 int SearchObject::FUN_00d43600(unsigned int arg0, unsigned int arg1, unsigned int arg2, unsigned int arg3)
 {
-    unsigned int uiResult = (unsigned int)((CallTarget_00d42fc0*)this)->FUN_00d42fc0((int)arg1, (int)arg0, (int)arg2, (int)arg3);
+    unsigned int uiResult = (unsigned int)((CallTarget_00d42fc0*)this)->hkpTransformAgent_updateShapeCollectionFilter((int)arg1, (int)arg0, (int)arg2, (int)arg3);
     return (int)uiResult;
 }
 
@@ -1002,7 +1005,7 @@ struct S9cdb30_TransformAgent : S_00d43030_Agent {
         const S_00d43030_Shape* childShape = tShapeA->m_pContainedShape;
         MotionState ms;
         ms.FUN_009cdcb0(bodyA.m_pMotionState);
-        ms.FUN_009251b0(bodyA.m_pMotionState, *(const hkVector4*)&tShapeA->m_kMotionTransform);
+        ms.hkTransform_setMul(bodyA.m_pMotionState, *(const hkVector4*)&tShapeA->m_kMotionTransform);
         S_00d43030_CdBody newOperandA(&bodyA, (const S_00d43030_MotionState*)&ms, childShape, 0);
         const S_00d43030_Dispatcher* d = input.m_pCollisionDispatcher;
         int typeA = newOperandA.getShape()->m_type;
@@ -1151,11 +1154,12 @@ struct S_00d42b50_Cls {
     int unk04;
     int unk08;
     S_00d42b50_Agent* m_pAgent;
-    void FUN_00d42b50(const S_00d42b50_CdBody& bodyA, const S_00d42b50_CdBody& bodyB, const S_00d42b50_Input& input, S_00d42b50_Output& output);
+    void hkpTransformAgent_processCollision(const S_00d42b50_CdBody& bodyA, const S_00d42b50_CdBody& bodyB, const S_00d42b50_Input& input, S_00d42b50_Output& output);
 };
 
 // @f3 0x009cd5c0 (community match, verified in this file)
-void S_00d42b50_Cls::FUN_00d42b50(const S_00d42b50_CdBody& bodyA, const S_00d42b50_CdBody& bodyB, const S_00d42b50_Input& input, S_00d42b50_Output& output)
+// pdb: hkpTransformAgent::processCollision | hkpTransformAgent.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void S_00d42b50_Cls::hkpTransformAgent_processCollision(const S_00d42b50_CdBody& bodyA, const S_00d42b50_CdBody& bodyB, const S_00d42b50_Input& input, S_00d42b50_Output& output)
 {
     union Scratch {
         unsigned int tick;
@@ -1253,11 +1257,12 @@ struct TransformTimForwarder
     int unk04;
     int unk08;
     TimInvalidationTarget* m_pAgent;
-    void FUN_00d42a00(const CollisionAgentContext& input);
+    void hkpTransformAgent_invalidateTim(const CollisionAgentContext& input);
 };
 
 // @fnv 0x00d42a00
-void TransformTimForwarder::FUN_00d42a00(const CollisionAgentContext& input)
+// pdb: hkpTransformAgent::invalidateTim | hkpTransformAgent.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void TransformTimForwarder::hkpTransformAgent_invalidateTim(const CollisionAgentContext& input)
 {
     m_pAgent->RemovePoint(input);
 }
@@ -1348,7 +1353,8 @@ struct __declspec(align(16)) TransformClosestFrame
 };
 
 // @fnv 0x00d42e50
-void __cdecl FUN_00d42e50(const CollisionBody_00d42f40* bodyA,
+// pdb: hkpTransformAgent::staticGetClosestPoints | hkpTransformAgent.obj | fnv360_0822_retail, objrun + bridge(hash|objrun) + skyrim(hash), high
+void __cdecl hkpTransformAgent_staticGetClosestPoints(const CollisionBody_00d42f40* bodyA,
                          const CollisionBody_00d42f40* bodyB,
                          const CollisionInput_00d42f40* input, void* collector)
 {

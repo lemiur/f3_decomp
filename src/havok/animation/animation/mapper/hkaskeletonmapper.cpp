@@ -921,7 +921,7 @@ class hkaSkeletonMapper : public hkReferencedObject
 	public:
 		class hkaSkeletonMapperData m_mapping;
 	public:
-		static void __cdecl FUN_00962880(const hkaSkeletonMapperData& mapping);
+		static void __cdecl hkaSkeletonMapper_checkMapping(const hkaSkeletonMapperData& mapping);
 	public:
 		hkaSkeletonMapper( hkFinishLoadedObjectFlag f ) : hkReferencedObject(f), m_mapping(f) { }
 };
@@ -953,7 +953,8 @@ class hkaSkeleton
 	public:
 		__forceinline hkaSkeleton( hkFinishLoadedObjectFlag flag ) {}
 };
-void hkaSkeletonMapper::FUN_00962880( const hkaSkeletonMapperData& m_mapping )
+// pdb: hkaSkeletonMapper::checkMapping | hkaSkeletonMapper.obj | fnv360_0822_retail, ustr + bridge(ustr|ustr) + skyrim(ustr), high
+void hkaSkeletonMapper::hkaSkeletonMapper_checkMapping( const hkaSkeletonMapperData& m_mapping )
 {
 	for ( int i = 0; i < m_mapping.m_simpleMappings.getSize(); i++ )
 	{

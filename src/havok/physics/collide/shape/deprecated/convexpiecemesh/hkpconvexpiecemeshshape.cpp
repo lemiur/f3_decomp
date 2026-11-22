@@ -81,10 +81,11 @@ struct FUN_00e49290_Class
     FUN_00e49290_Data* data;
     FUN_00e49290_Owner* owner;
 
-    int FUN_00e49290(unsigned int index);
+    int hkpConvexPieceMeshShape_getCollisionFilterInfo(unsigned int index);
 };
 
-int FUN_00e49290_Class::FUN_00e49290(unsigned int index)
+// pdb: hkpConvexPieceMeshShape::getCollisionFilterInfo | hkpConvexPieceMeshShape.obj | fnv360_0822_retail, objrun + bridge(hash|vtable), high
+int FUN_00e49290_Class::hkpConvexPieceMeshShape_getCollisionFilterInfo(unsigned int index)
 {
     int result;
 

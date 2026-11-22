@@ -1722,7 +1722,8 @@ struct BE3E7E0Entry
 void __cdecl SetEntity();
 
 // @fnv 0x00e36f40
-void __cdecl FUN_00e36f40()
+// pdb: hkString::memCpy | hkString.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_seq), high
+void __cdecl hkString_memCpy()
 {
     SetEntity();
 }
@@ -1748,7 +1749,8 @@ float FUN_00e39e80_class::FUN_00e39e80()
 int __cdecl FUN_00e3dfb0(int param_1, int* param_2);
 
 // @fnv 0x00e3e020
-int __cdecl FUN_00e3e020(int param_1, int* param_2)
+// pdb: hkString::memSet | hkString.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_seq), high
+int __cdecl hkString_memSet(int param_1, int* param_2)
 {
     return FUN_00e3dfb0(param_1, param_2);
 }
@@ -3057,7 +3059,7 @@ template <class T> struct TyremarkArray
 
 // @f3 0x0093d830 (community match, verified in this file)
 namespace f3m_0093d830 {
-int __cdecl FUN_009232c0(const char* pcA, const char* pcB);
+int __cdecl hkString_strCmp(const char* pcA, const char* pcB);
 
 struct Entry93d830
 {
@@ -3078,7 +3080,7 @@ int* Table93d830::FUN_0093d830(const char* pcName)
 {
     for (int i = 0; i < m_iCount; i++)
     {
-        if (FUN_009232c0(m_pkEntries[i].m_pcName, pcName) == 0)
+        if (hkString_strCmp(m_pkEntries[i].m_pcName, pcName) == 0)
             return &m_pkEntries[i].unk04;
     }
     return 0;

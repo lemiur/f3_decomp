@@ -260,14 +260,15 @@ struct FNVMain
     unsigned char enabled30;
     unsigned char state31, state32, state33;
     FNVChild child34;
-    void __thiscall FUN_00c321f0(FNVParameter*);
-    void __thiscall FUN_00c2ce70(FNVParameter*);
+    void __thiscall NiPSysFieldModifier_SaveBinary(FNVParameter*);
+    void __thiscall NiPSysDragFieldModifier_SaveBinary(FNVParameter*);
 };
-// Calls FUN_00c321f0, invokes the owner's callback0c with the enabled byte and adds its result to total04, then calls child34.FUN_00a69780.
+// Calls NiPSysFieldModifier_SaveBinary, invokes the owner's callback0c with the enabled byte and adds its result to total04, then calls child34.FUN_00a69780.
 // @fnv 0x00c2ce70
-void __thiscall FNVMain::FUN_00c2ce70(FNVParameter* pParameter)
+// pdb: NiPSysDragFieldModifier::SaveBinary | NiPSysDragFieldModifier.obj | fnv360_0822_retail, caller_sim + bridge(vtable|caller_sim) + skyrim(caller_sim), high
+void __thiscall FNVMain::NiPSysDragFieldModifier_SaveBinary(FNVParameter* pParameter)
 {
-    FUN_00c321f0(pParameter);
+    NiPSysFieldModifier_SaveBinary(pParameter);
     unsigned char enabled = enabled30;
     FNVCallbackOwner* owner = pParameter->owner();
     int(__cdecl * pCallback)(FNVCallbackOwner*, unsigned char*, int, int*, int) = owner->callback0c;

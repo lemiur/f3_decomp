@@ -10,7 +10,7 @@ namespace f3m_00925920 {
 struct __declspec(align(16)) Vector4 { float x,y,z,w; };
 struct Transform {
     Vector4 rotation[3], translation;
-    void FUN_00924b40(const Vector4*);
+    void hkRotation_set(const Vector4*);
 };
 struct Frame;
 struct FrameMethods {
@@ -26,7 +26,7 @@ Transform* Frame::FUN_00925920(Transform* result) {
     Vector4 rotation;
     methods->translation(this,&result->translation);
     methods->rotation(this,&rotation);
-    result->FUN_00924b40(&rotation);
+    result->hkRotation_set(&rotation);
     return result;
 }
 }   // namespace f3m_00925920

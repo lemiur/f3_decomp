@@ -596,11 +596,12 @@ struct FUN_00db75b0_class
     FUN_00db75b0_entry* unk04;
     int unk08;
 
-    unsigned int __thiscall FUN_00db75b0(int a1, unsigned int* a2);
+    unsigned int __thiscall hkClassEnum_getValueOfName(int a1, unsigned int* a2);
 };
 
 // @fnv 0x00db75b0
-unsigned int __thiscall FUN_00db75b0_class::FUN_00db75b0(int a1, unsigned int* a2)
+// pdb: hkClassEnum::getValueOfName | hkClassEnum.obj | fnv360_0822_retail, call_gap + bridge(call_gap|call_gap) + skyrim(call_gap), high
+unsigned int __thiscall FUN_00db75b0_class::hkClassEnum_getValueOfName(int a1, unsigned int* a2)
 {
     for (int index = 0; index < unk08; ++index)
     {
@@ -919,20 +920,20 @@ extern int DAT_010d4de4;
 
 extern BSAudio* __cdecl FUN_00c85750();
 
-void __cdecl FUN_00da44d0(int a, int b, void* pvCallback);
+void __cdecl hkAgent1nMachine_VisitAllAgents(int a, int b, void* pvCallback);
 void __cdecl ProcessCollisionEntry();
 
 // @fnv 0x00da4900
 void __cdecl FUN_00da4900(int a, int b)
 {
-    FUN_00da44d0(a, b, reinterpret_cast<void*>(&ProcessCollisionEntry));
+    hkAgent1nMachine_VisitAllAgents(a, b, reinterpret_cast<void*>(&ProcessCollisionEntry));
 }
 
-void* __cdecl FUN_00da3510(void*, void*);
+void* __cdecl hkAgent1nMachine_InvalidateTim(void*, void*);
 // @fnv 0x00da6e10
 void* __cdecl FUN_00da6e10(void* apUnused, void* b, void* c)
 {
-    return FUN_00da3510(b, c);
+    return hkAgent1nMachine_InvalidateTim(b, c);
 }
 
 extern int DAT_010cf7d4;
@@ -1194,13 +1195,13 @@ namespace sda3740 {
 
 }
 
-void __cdecl FUN_00da42b0(void* a, void* b, void* c, void* d);
+void __cdecl hkAgent1nMachine_Destroy(void* a, void* b, void* c, void* d);
 
-// Calls FUN_00da42b0 with arg2, arg5, arg3 and arg4; arg1 is unused.
+// Calls hkAgent1nMachine_Destroy with arg2, arg5, arg3 and arg4; arg1 is unused.
 // @fnv 0x00da6dc0
 void __cdecl FUN_00da6dc0(void* aUnused, void* arg2, void* arg3, void* arg4, void* arg5)
 {
-    FUN_00da42b0(arg2, arg5, arg3, arg4);
+    hkAgent1nMachine_Destroy(arg2, arg5, arg3, arg4);
 }
 
 struct S06c0_Alloc

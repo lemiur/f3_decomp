@@ -242,8 +242,8 @@ struct SObj
 void __cdecl FUN_00e0bd40(SObj* s, MiniStr* ms, int a, int b, Vec3* v3, void* g, Vec4* v4);
 struct Stream
 {
-    void FUN_00d60960(int total);
-    void FUN_00d605d0(int a);
+    void hkOArchive_write32u(int total);
+    void hkOArchive_write8u(int a);
     void WriteInt(int a);
     void FUN_00d607b0(int a, int b);
 };

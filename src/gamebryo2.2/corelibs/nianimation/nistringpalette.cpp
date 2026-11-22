@@ -6,7 +6,8 @@ extern "C" void* g_011f3f30;
 
 // Returns the address of the global g_011f3f30.
 // @fnv 0x00a47140
-void* __cdecl FUN_00a47140()
+// pdb: NiStringPalette::GetRTTI | NiStringPalette.obj | fnv360_0822_retail, udata + bridge(vtable|udata) + skyrim(udata), high
+void* __cdecl NiStringPalette_GetRTTI()
 {
     return &g_011f3f30;
 }

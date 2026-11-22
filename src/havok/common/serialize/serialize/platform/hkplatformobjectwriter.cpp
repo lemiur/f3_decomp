@@ -524,12 +524,13 @@ struct E02A80_cls
     E02A80Iface* unk08;
     E02A80Helper* unk0c;
 
-    int FUN_00e02a80(E02A80Arg* arg1, int arg2, E02A80Helper* arg3, int arg4);
+    int hkPlatformObjectWriter_writeObject(E02A80Arg* arg1, int arg2, E02A80Helper* arg3, int arg4);
 };
 
 // Resolves a helper, optionally seeks and builds a box via the iface, then calls unk0C and returns whether the result string is empty.
 // @fnv 0x00e02a80
-int E02A80_cls::FUN_00e02a80(E02A80Arg* apArg, int aiValue, E02A80Helper* apHelper, int arg4)
+// pdb: hkPlatformObjectWriter::writeObject | hkPlatformObjectWriter.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+int E02A80_cls::hkPlatformObjectWriter_writeObject(E02A80Arg* apArg, int aiValue, E02A80Helper* apHelper, int arg4)
 {
     E02A80Helper* pResolvedHelper;
     E02A80Helper* pHelper = unk0c;

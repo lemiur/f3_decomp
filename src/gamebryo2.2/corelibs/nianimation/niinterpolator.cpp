@@ -96,12 +96,12 @@ class NiAnimTarget
     virtual void v52();
 };
 
-extern "C" void* __cdecl FUN_00a5d680();
+extern "C" void* __cdecl NiObject_Clone();
 
 // @fnv 0x00a57050
 NiAnimTarget* __stdcall FUN_00a57050(int a, int b)
 {
-    NiAnimTarget* p = (NiAnimTarget*)FUN_00a5d680();
+    NiAnimTarget* p = (NiAnimTarget*)NiObject_Clone();
     p->v52();
     return p;
 }

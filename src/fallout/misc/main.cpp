@@ -1692,10 +1692,10 @@ struct ImageSpaceManager
 {
     void BeginParamModifiers();
     void FUN_00b8b500();
-    void FUN_00b8aea0();
+    void ImageSpaceManager_ResetWeatherData();
     void FUN_00b8ccb0();
     void FUN_00b8d020();
-    void FUN_00b8b440(bool);
+    void ImageSpaceManager_ApplyCurrentParameterData(bool);
 };
 ImageSpaceManager* __cdecl FUN_004e3270();
 struct ISMI_0086fd90
@@ -3003,7 +3003,7 @@ struct ShadowSystem
     void FUN_00b5b060();
     void FUN_00b5c3c0();
     void* FUN_00b5cbd0(ShadowNode*);
-    void FUN_00b5cde0(void*);
+    void ShadowSceneNode_SortShadowLights(void*);
     ShadowMap* FUN_00b5afc0();
     ShadowMap* FUN_00b5b010();
     void* FUN_00454b30();

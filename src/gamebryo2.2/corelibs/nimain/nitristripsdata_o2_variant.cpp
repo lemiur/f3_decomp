@@ -424,7 +424,7 @@ class A76340GeomData
     unsigned short m_usTriangles;
     unsigned short unk42;
 
-    void FUN_00a8aa70(A76340Stream& kStream);
+    void NiTriBasedGeomData_SaveBinary(A76340Stream& kStream);
 };
 
 // NiTriStripsData::SaveBinary
@@ -440,13 +440,14 @@ class A76340StripsData : public A76340GeomData
     {
         return m_usTriangles + 2 * m_usStrips;
     }
-    void FUN_00a76340(A76340Stream& kStream);
+    void NiTriStripsData_SaveBinary(A76340Stream& kStream);
 };
 
 // @fnv 0x00a76340
-void A76340StripsData::FUN_00a76340(A76340Stream& kStream)
+// pdb: NiTriStripsData::SaveBinary | NiTriStripsData.obj | fnv360_0822_retail, caller_sim + bridge(vtable|caller_sim) + skyrim(caller_sim), high
+void A76340StripsData::NiTriStripsData_SaveBinary(A76340Stream& kStream)
 {
-    FUN_00a8aa70(kStream);
+    NiTriBasedGeomData_SaveBinary(kStream);
     A76340SaveBinary(kStream, m_usStrips);
     if (m_usStrips > 0)
     {
@@ -701,16 +702,17 @@ struct SharedView
 };
 struct BaseLoad
 {
-    void FUN_00a8aa30(NiStream&);
+    void NiTriBasedGeomData_LoadBinary(NiStream&);
 };
 struct StripLoad : NiTriStripsDataStandin
 {
-    void FUN_00a761c0(NiStream&);
+    void NiTriStripsData_LoadBinary(NiStream&);
 };
 // @fnv 0x00a761c0
-void StripLoad::FUN_00a761c0(NiStream& stream)
+// pdb: NiTriStripsData::LoadBinary | NiTriStripsData.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun) + skyrim(objrun_sim), high
+void StripLoad::NiTriStripsData_LoadBinary(NiStream& stream)
 {
-    ((BaseLoad*)this)->FUN_00a8aa30(stream);
+    ((BaseLoad*)this)->NiTriBasedGeomData_LoadBinary(stream);
     stream.binary->Read(&m_uiItemCount, 2, 2);
     if (m_uiItemCount > 0)
     {

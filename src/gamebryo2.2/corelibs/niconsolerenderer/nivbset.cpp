@@ -31,7 +31,7 @@ struct NiVBSet
     char _10[12];
     NiVBSetBlockArray m_kBlockArray;
     void RemoveNode(NiVBBlock*);
-    void FUN_00e94330(NiVBBlock*);
+    void NiVBSet_FreeBlock(NiVBBlock*);
     void FUN_00e94490(unsigned int uiArrayIndex, unsigned int uiChipIndex);
 };
 
@@ -51,7 +51,7 @@ void NiVBSet::FUN_00e94490(unsigned int uiArrayIndex, unsigned int uiChipIndex)
     if (pkVBBlock->m_uiValue28 == pkVBBlock->m_uiSize)
     {
         m_kBlockArray.FUN_00a93c50(uiArrayIndex);
-        FUN_00e94330(pkVBBlock);
+        NiVBSet_FreeBlock(pkVBBlock);
     }
     else
     {
@@ -207,7 +207,7 @@ struct VBSet
     char _00[0x30];
     unsigned int m_uiThreshold;
     VBBlock* RemoveFirstNodeAtLeast(unsigned int uiSize);
-    VBBlock* FUN_00e94580(unsigned int uiSize);
+    VBBlock* NiVBSet_CreateBlock(unsigned int uiSize);
     void InsertSortedNode(VBBlock* pkBlock);
     void* FUN_00e94650(unsigned int uiSize, bool bForceNew);
 };
@@ -220,7 +220,7 @@ void* VBSet::FUN_00e94650(unsigned int uiSize, bool bForceNew)
     if (!bForceNew)
         pkBlock = RemoveFirstNodeAtLeast(uiSize);
     if (!pkBlock)
-        pkBlock = FUN_00e94580(uiSize);
+        pkBlock = NiVBSet_CreateBlock(uiSize);
     if (pkBlock)
     {
         pvChip = pkBlock->FUN_00e98660(uiSize);
@@ -381,7 +381,7 @@ struct VBSetX
     unsigned int m_u14;
     unsigned int m_u18;
     VBArr m_kArr;
-    VBBlk* FUN_00e94580(unsigned int uiSize);
+    VBBlk* NiVBSet_CreateBlock(unsigned int uiSize);
 };
 
 __forceinline VBBlk* PopBlock()
@@ -399,7 +399,8 @@ __forceinline VBBlk* PopBlock()
 
 // Allocates a VBBlk of at least uiSize bytes via the device, fills its fields, and inserts it into the VBArr.
 // @fnv 0x00e94580
-VBBlk* VBSetX::FUN_00e94580(unsigned int uiSize)
+// pdb: NiVBSet::CreateBlock | NiVBSet.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_seq), high
+VBBlk* VBSetX::NiVBSet_CreateBlock(unsigned int uiSize)
 {
     unsigned int uiAllocSize = uiSize;
     if ((m_u08 & 0x10000000) == 0)

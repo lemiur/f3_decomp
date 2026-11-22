@@ -241,7 +241,7 @@ struct RefX
 
 void* __cdecl FUN_004780d0(CollidableX* apCollidable);
 RefX* __cdecl FUN_004e7b90(void* apObject);
-void __cdecl FUN_00518df0(void* apSource, int* apExtra, unsigned int auiEvent);
+void __cdecl Script_SetActionFlag(void* apSource, int* apExtra, unsigned int auiEvent);
 
 struct RefBaseX
 {
@@ -350,8 +350,8 @@ bool RefBaseX::FUN_007cc260()
                                 pObject->FUN_00424270().GetLayer() == 0x18)
                             {
                                 bFound = true;
-                                FUN_00518df0(this, &pRef->extra40, 0x80);
-                                FUN_00518df0(DAT_010716a4, &pRef->extra40, 0x100);
+                                Script_SetActionFlag(this, &pRef->extra40, 0x80);
+                                Script_SetActionFlag(DAT_010716a4, &pRef->extra40, 0x100);
                             }
                         }
                     }
@@ -495,8 +495,8 @@ struct Base8280 : Primary8280, Secondary8280 {
     void FUN_004e8750(float);
     void FUN_004e8710(float);
     void FUN_004e8730(float);
-    void FUN_004e8670(void*);
-    void FUN_00454240(int);
+    void TESObjectREFR_SetObjectReference(void*);
+    void TESForm_SetInitialized(int);
 };
 struct Setting8280 { float* FUN_00401eb0(); };
 extern Setting8280 DAT_00f607c4, DAT_00f607b8;
@@ -554,7 +554,7 @@ FUN_007c8280::FUN_007c8280(void* base,Source8280* source,Weapon8280* weapon,Poin
     unk138=0;
     unk13c=0;
     unkec=1.0f;
-    FUN_004e8670(base);
+    TESObjectREFR_SetObjectReference(base);
     if(weapon) {
         Entry8280* entry=0;
         unkf0=weapon;
@@ -594,7 +594,7 @@ FUN_007c8280::FUN_007c8280(void* base,Source8280* source,Weapon8280* weapon,Poin
     if(unkf4 && unkf4->test()) {
         if(unkf4->unkf8) unkc0|=0x80000;
     }
-    FUN_00454240(0);
+    TESForm_SetInitialized(0);
 }
 
 

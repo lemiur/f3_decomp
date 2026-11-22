@@ -80,11 +80,12 @@ struct NiBSPNode : NiNode
 {
     char _pad_0x00[0xac];
     NiSphere m_pSphere;
-    void FUN_00a9a740(NiStream& stream);
+    void NiBSPNode_SaveBinary(NiStream& stream);
 };
 
 // @fnv 0x00a9a740
-void NiBSPNode::FUN_00a9a740(NiStream& stream)
+// pdb: NiBSPNode::SaveBinary | NiBSPNode.obj | fnv360_0822_retail, caller_sim + skyrim(caller_sim), high
+void NiBSPNode::NiBSPNode_SaveBinary(NiStream& stream)
 {
     NiNode::SaveBinary(stream);
     m_pSphere.SaveBinary(stream);
@@ -95,7 +96,7 @@ struct NiStream;
 
 struct FUN_00a59e00_shell
 {
-    void FUN_00a59e00(NiStream& stream);
+    void NiAVObject_Cull(NiStream& stream);
 };
 
 struct FUN_0049da80_shell
@@ -238,22 +239,22 @@ void FUN_00a9ac10_shell::LoadFromStream(NiStream& stream)
     {
         if (b != 0)
         {
-            b->FUN_00a59e00(stream);
+            b->NiAVObject_Cull(stream);
         }
         if (a != 0)
         {
-            a->FUN_00a59e00(stream);
+            a->NiAVObject_Cull(stream);
         }
     }
     else
     {
         if (a != 0)
         {
-            a->FUN_00a59e00(stream);
+            a->NiAVObject_Cull(stream);
         }
         if (b != 0)
         {
-            b->FUN_00a59e00(stream);
+            b->NiAVObject_Cull(stream);
         }
     }
 }

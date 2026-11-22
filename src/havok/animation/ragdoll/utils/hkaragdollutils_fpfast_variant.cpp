@@ -240,7 +240,8 @@ static __declspec(noinline) bool IsSupportedRagdollConstraint(Obj* obj, bool rep
     return obj->inner != 0 && reportError;
 }
 
-static __declspec(noinline) Vec4* FUN_00ce9c40(Obj* obj) throw()
+// pdb: _accessConstraintPivotA | hkaRagdollUtils.obj | fnv360_0822_retail, call_gap + bridge(call_gap|call_gap) + skyrim(call_seq), high
+static __declspec(noinline) Vec4* _accessConstraintPivotA(Obj* obj) throw()
 {
     Inner* inner = obj->inner;
     int t = inner->getSomething();
@@ -311,7 +312,8 @@ static __declspec(noinline) V4A* FUN_0095e420(Obj* obj) throw()
     return (V4A*)((char*)inner + (t <= 8 ? 0x20 : 0x50));
 }
 
-static __declspec(noinline) int FUN_0095de50(Qs* xf, Shape* shape) throw()
+// pdb: moveRigidBodyPivot | hkaRagdollUtils.obj | fnv360_0822_retail, call_seq + skyrim(call_gap), high
+static __declspec(noinline) int moveRigidBodyPivot(Qs* xf, Shape* shape) throw()
 {
     g_pivotXf = xf;
     int s = (*(Shape* volatile*)&shape)->v0();
@@ -350,7 +352,7 @@ int __cdecl FUN_00ce9db0(A1W constraints, void* warnOnAlignment)
         volatile float lenSq = childFromConstraint.translation.z*childFromConstraint.translation.z + (childFromConstraint.translation.x*childFromConstraint.translation.x + childFromConstraint.translation.y*childFromConstraint.translation.y);
         if (lenSq > 1e-6f)
         {
-            if (FUN_0095de50(&childFromConstraint, shape) != 0)
+            if (moveRigidBodyPivot(&childFromConstraint, shape) != 0)
                 result = 1;
         }
     }

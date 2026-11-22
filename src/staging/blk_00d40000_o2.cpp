@@ -84,7 +84,7 @@ void __cdecl FUN_00d400f0(void* apObject)
 }
 
 void __cdecl DispatchInputRecord();
-void __cdecl FUN_00d41a30();
+void __cdecl hkPredGskAgent3_process();
 void __cdecl FUN_00d41930();
 void __cdecl FUN_00d41860();
 void __cdecl RemoveEntryById();
@@ -94,10 +94,11 @@ void __cdecl ForwardToTarget();
 
 // Fills the object's vtable slots with function pointers and sets the byte at p+48 to 1.
 // @fnv 0x00d41ec0
-void __cdecl FUN_00d41ec0(int* pObject)
+// pdb: hkPredGskAgent3::initAgentFunc | hkpPredGskAgent3.obj | fnv360_0822_retail, objrun + bridge(hash|objrun) + skyrim(call_gap), high
+void __cdecl hkPredGskAgent3_initAgentFunc(int* pObject)
 {
     *pObject = (int)&DispatchInputRecord;
-    pObject[0x2c / 4] = (int)&FUN_00d41a30;
+    pObject[0x2c / 4] = (int)&hkPredGskAgent3_process;
     pObject[0x28 / 4] = (int)&FUN_00d41930;
     pObject[2] = (int)&FUN_00d41860;
     pObject[3] = (int)&RemoveEntryById;
@@ -846,7 +847,8 @@ struct TailTarget
 };
 
 // @fnv 0x00d4b380
-void __cdecl FUN_00d4b380(TailTarget* pTarget)
+// pdb: cleanupLoadedObjecthkpEntityExtendedListeners | hkpEntityClass.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc + skyrim(caller_sim), high
+void __cdecl cleanupLoadedObjecthkpEntityExtendedListeners(TailTarget* pTarget)
 {
     pTarget->Run();
 }
@@ -1368,7 +1370,8 @@ struct D51760Stats
 };
 
 // @f3 0x009df600 (community match, verified in this file)
-void __cdecl FUN_00d51760(D51760Buffer* buf, D51760Stats* stats)
+// pdb: hkpConstraintConstructionKit::computeConstraintInfo | hkpConstraintConstructionKit.obj | fnv360_0822_retail, call_seq + bridge(call_seq|objrun_prop) + skyrim(call_seq), high
+void __cdecl hkpConstraintConstructionKit_computeConstraintInfo(D51760Buffer* buf, D51760Stats* stats)
 {
     unsigned int* p = buf->data;
     unsigned int* end = p + buf->count;
@@ -2609,11 +2612,12 @@ class hkListNodeD46D
     int unk00;
     hkListNodeD46D* m_next;
 
-    int FUN_00d46d70() const;
+    int hkClass_getInheritanceDepth() const;
 };
 
 // @fnv 0x00d46d70
-int hkListNodeD46D::FUN_00d46d70() const
+// pdb: hkClass::getInheritanceDepth | hkClass.obj | fnv360_0822_retail, objrun + skyrim(objrun), high
+int hkListNodeD46D::hkClass_getInheritanceDepth() const
 {
     int iCount = 0;
     for (const hkListNodeD46D* pkNode = this; pkNode; pkNode = pkNode->m_next)
@@ -2646,7 +2650,8 @@ int hkBlockD46E::SumLinkedValues() const
 }
 
 // @fnv 0x00d46e00
-int __stdcall FUN_00d46e00(int arg0)
+// pdb: hkClass::getInterface | hkClass.obj | fnv360_0822_retail, objrun + skyrim(objrun), high
+int __stdcall hkClass_getInterface(int arg0)
 {
     return 0;
 }
@@ -2663,11 +2668,12 @@ struct FUN_00d46e20_cls
     void* unk04;
     void* unk08;
     int unk0C;
-    int __thiscall FUN_00d46e20();
+    int __thiscall hkpMoppShapeMediator_getNumPrimitives();
 };
 
 // @fnv 0x00d46e20
-int FUN_00d46e20_cls::FUN_00d46e20()
+// pdb: hkpMoppShapeMediator::getNumPrimitives | hkpMoppShapeMediator.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+int FUN_00d46e20_cls::hkpMoppShapeMediator_getNumPrimitives()
 {
     return unk0C;
 }
@@ -2964,11 +2970,12 @@ struct FUN_00d54da0_Class
     int unk0c;
     float m_10;
 
-    void FUN_00d54da0(float value);
+    void hkpMoppCompilerInput_setRelativeFitToleranceOfInternalNodes(float value);
 };
 
 // @fnv 0x00d54da0
-void FUN_00d54da0_Class::FUN_00d54da0(float value)
+// pdb: hkpMoppCompilerInput::setRelativeFitToleranceOfInternalNodes | hkpMoppCompilerInput.obj | fnv360_0822_retail, objrun + skyrim(objrun), high
+void FUN_00d54da0_Class::hkpMoppCompilerInput_setRelativeFitToleranceOfInternalNodes(float value)
 {
     m_10 = value;
 }
@@ -2997,11 +3004,12 @@ struct FUN_00d54dc0_cls
     int unk10;
     float unk14;
 
-    void __thiscall FUN_00d54dc0(float value);
+    void __thiscall hkpMoppCompilerInput_setAbsoluteFitToleranceOfInternalNodes(float value);
 };
 
 // @fnv 0x00d54dc0
-void __thiscall FUN_00d54dc0_cls::FUN_00d54dc0(float value)
+// pdb: hkpMoppCompilerInput::setAbsoluteFitToleranceOfInternalNodes | hkpMoppCompilerInput.obj | fnv360_0822_retail, objrun + skyrim(objrun), high
+void __thiscall FUN_00d54dc0_cls::hkpMoppCompilerInput_setAbsoluteFitToleranceOfInternalNodes(float value)
 {
     unk14 = value;
 }
@@ -4899,14 +4907,16 @@ int F3Twin_009b0620::F3_FUN_009b0620()
 }
 
 // @f3twin 0x009e27e0 of 0x0046c1f0
-struct F3Twin_009e27e0 : public FnvCpu_FUN_00d54d70_CpuObject { float F3_FUN_009e27e0() ; };
-float F3Twin_009e27e0::F3_FUN_009e27e0() 
+struct F3Twin_009e27e0 : public FnvCpu_FUN_00d54d70_CpuObject { float hkpMoppCompilerInput_getAbsoluteFitToleranceOfTriangles() ; };
+// pdb: hkpMoppCompilerInput::getAbsoluteFitToleranceOfTriangles | hkpMoppCompilerInput.obj | fnv360_0822_retail, call_gap + bridge(call_gap|call_seq) + skyrim(call_seq), high
+float F3Twin_009e27e0::hkpMoppCompilerInput_getAbsoluteFitToleranceOfTriangles() 
 {
     return value;
 }
 
 // @f3twin 0x009e5240 of 0x0044f5c0
-float __fastcall F3_FUN_009e5240(char* self, int)
+// pdb: hkpCylinderShape::getCylinderRadius | hkpCylinderShape.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap_sim) + skyrim(call_gap), high
+float __fastcall hkpCylinderShape_getCylinderRadius(char* self, int)
 {
     return *(float*)(self + 0x14);
 }

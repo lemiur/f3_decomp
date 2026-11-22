@@ -44,7 +44,8 @@ struct GlobalObjectO2_00a7b610
 };
 extern GlobalObjectO2_00a7b610 g_011f406c;
 // @fnv 0x00a55af0
-GlobalObjectO2_00a7b610* __cdecl FUN_00a55af0()
+// pdb: NiSkinInstance::GetRTTI | BSTempEffectGeometryDecal.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+GlobalObjectO2_00a7b610* __cdecl NiSkinInstance_GetRTTI()
 {
     return &g_011f406c;
 }
@@ -206,11 +207,12 @@ struct CloneOwner
 };
 struct FUN_00a55b20_shell : public NiBlendPoint3Interpolator
 {
-    void* FUN_00a55b20(CloningProcess*);
+    void* NiBlendPoint3Interpolator_CreateClone(CloningProcess*);
 };
 // Allocates a NiBlendPoint3Interpolator, initialises it, copies the point3 fields and flag from this, and returns the clone.
 // @fnv 0x00a55b20
-void* FUN_00a55b20_shell::FUN_00a55b20(CloningProcess* kCloning)
+// pdb: NiBlendPoint3Interpolator::CreateClone | NiBlendPoint3Interpolator.obj | fnv360_0721_retail, objrun + bridge(vtable|objrun) + skyrim(caller_sim), high
+void* FUN_00a55b20_shell::NiBlendPoint3Interpolator_CreateClone(CloningProcess* kCloning)
 {
     NiBlendPoint3Interpolator* pkObject = static_cast<NiBlendPoint3Interpolator*>(BSFadeNode::operator new(0x40));
     if (pkObject)

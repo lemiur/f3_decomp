@@ -52,7 +52,8 @@ struct NiGeometryBufferData
     NiVBChip** m_ppkVertexBuffers;
 };
 // @fnv 0x00e94770
-void __stdcall FUN_00e94770(NiGeometryBufferData* pkBuffData, unsigned int uiStream)
+// pdb: NiStaticGeometryGroup::ReleaseChip | NiStaticGeometryGroup.obj | fnv360_0822_retail, caller_sim + bridge(vtable|caller_sim) + skyrim(caller_sim), high
+void __stdcall NiStaticGeometryGroup_ReleaseChip(NiGeometryBufferData* pkBuffData, unsigned int uiStream)
 {
     NiVBChip* pkChip;
     NiVBBlock* pkBlock;
@@ -556,7 +557,7 @@ struct FUN_00e94650_cls
 {
     VbNode* FUN_00e94650(unsigned int size, bool flag);
 };
-void* __cdecl FUN_00e94b80(unsigned int a, void* b, unsigned int key, unsigned int usage, unsigned int c);
+void* __cdecl NiVBSet_Create(unsigned int a, void* b, unsigned int key, unsigned int usage, unsigned int c);
 
 struct VbDesc
 {
@@ -637,7 +638,7 @@ VbNode* FUN_00e94c20_cls::GetOrCreateNode(VbDesc* apDesc, unsigned int uiStrideI
     }
     if (!((FUN_00a53c30_cls*)&owner->map)->FUN_00a53c30(key, (void**)&pNode) || !(object = pNode))
     {
-        object = (VbNode*)FUN_00e94b80(0x10000, owner->m_08, key, usage, 0);
+        object = (VbNode*)NiVBSet_Create(0x10000, owner->m_08, key, usage, 0);
         ((FUN_00b57ea0_cls*)&owner->map)->InsertOrUpdate(key, object);
     }
     unsigned int count = apDesc->GetCount();
@@ -664,7 +665,8 @@ inline void* operator new(unsigned int n, S00e94b80_Heap) throw()
 }
 // Allocates a FUN_00e94b00, assigns its fields, AddRefs b when nonnull, releases the prior stored pointer otherwise, and calls FUN_00e941a0.
 // @fnv 0x00e94b80
-void* __cdecl FUN_00e94b80(unsigned int a, void* apUnknown, unsigned int key, unsigned int usage, unsigned int c)
+// pdb: NiVBSet::Create | NiStaticGeometryGroup.obj | fnv360_0822_retail, call_seq + skyrim(caller_sim), high
+void* __cdecl NiVBSet_Create(unsigned int a, void* apUnknown, unsigned int key, unsigned int usage, unsigned int c)
 {
     FUN_00e94b00* object = new (s00e94b80_heap) FUN_00e94b00;
     if (object)

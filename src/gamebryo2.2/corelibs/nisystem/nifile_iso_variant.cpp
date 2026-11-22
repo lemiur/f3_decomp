@@ -8,7 +8,7 @@
 void __cdecl ReadFileData();
 void __cdecl FUN_00aa19c0();
 void __cdecl FUN_00aa19e0();
-void __cdecl FUN_00aa1ad0();
+void __cdecl NiFile_WriteAndSwap();
 
 struct FileTransferCallbacks
 {
@@ -16,16 +16,17 @@ struct FileTransferCallbacks
     unsigned int bytesProcessed;
     void(__cdecl* readFunction)();
     void(__cdecl* writeFunction)();
-    void FUN_00aa1b30(bool enableSwap);
+    void NiFile_SetEndianSwap(bool enableSwap);
 };
 
 // @fnv 0x00aa1b30
-void FileTransferCallbacks::FUN_00aa1b30(bool enableSwap)
+// pdb: NiFile::SetEndianSwap | NiFile.obj | fnv360_0822_retail, objrun + skyrim(call_gap), high
+void FileTransferCallbacks::NiFile_SetEndianSwap(bool enableSwap)
 {
     if (enableSwap)
     {
         readFunction = FUN_00aa19e0;
-        writeFunction = FUN_00aa1ad0;
+        writeFunction = NiFile_WriteAndSwap;
     }
     else
     {
@@ -57,7 +58,8 @@ extern "C" NiFile* __cdecl FUN_00aa1b60(const char* filename, NiFile::OpenMode m
 ::NiFile* __cdecl FUN_00aa1b60(const char*, ::NiFile::OpenMode, unsigned int);
 
 // @fnv 0x00aa1b90
-void __cdecl FUN_00aa1b90(::NiFile*(__cdecl* replacement)(const char*, ::NiFile::OpenMode, unsigned int))
+// pdb: NiFile::SetFileCreateFunc | NiFile.obj | fnv360_0822_retail, udata + bridge(udata|udata) + skyrim(udata), high
+void __cdecl NiFile_SetFileCreateFunc(::NiFile*(__cdecl* replacement)(const char*, ::NiFile::OpenMode, unsigned int))
 {
     ::DAT_011ac224 = &FUN_00aa1b60;
     if (replacement)

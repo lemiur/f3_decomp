@@ -5,7 +5,8 @@
 extern "C" void* g_012026b0;
 
 // @fnv 0x00c285c0
-void* __cdecl FUN_00c285c0()
+// pdb: NiSequence::GetRTTI | NiSequence.obj | fnv360_0721_beta, udata + bridge(vtable|udata) + skyrim(udata), high
+void* __cdecl NiSequence_GetRTTI()
 {
     return &g_012026b0;
 }
@@ -61,10 +62,11 @@ struct NiPSysFieldModifier
 struct NiPSysRadialFieldModifier : NiPSysFieldModifier
 {
     float m_fBoundRadius;
-    void FUN_00c28760(NiStream&);
+    void NiPSysRadialFieldModifier_LoadBinary(NiStream&);
 };
 // @fnv 0x00c28760
-void NiPSysRadialFieldModifier::FUN_00c28760(NiStream& stream)
+// pdb: NiPSysRadialFieldModifier::LoadBinary | NiPSysRadialFieldModifier.obj | fnv360_0822_retail, caller_sim + bridge(vtable|objrun) + skyrim(caller_sim), high
+void NiPSysRadialFieldModifier::NiPSysRadialFieldModifier_LoadBinary(NiStream& stream)
 {
     NiPSysFieldModifier::LoadBinary(stream);
     NiBinaryStream* __restrict input = stream.m_pUnderlyingStream;

@@ -65,7 +65,8 @@ struct S_00d02020_Pair
 
 // For each handle in the pair whose m_type is 2, calls v24 on the owner's owner with the other handle's owner as argument.
 // @fnv 0x00d02020
-void __stdcall FUN_00d02020(S_00d02020_Pair* pair)
+// pdb: hkpMultiThreadedSimulation::MtPhantomBroadPhaseListener::removeCollisionPair | hkpMultithreadedSimulation.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void __stdcall hkpMultiThreadedSimulation_MtPhantomBroadPhaseListener_removeCollisionPair(S_00d02020_Pair* pair)
 {
     if (pair->m_kPointA->m_type == 2)
     {
@@ -139,7 +140,7 @@ struct Array
     {}
 };
 
-// FUN_00d01fc0  (0x00d01fc0, 89 bytes)
+// hkpMultiThreadedSimulation_MtPhantomBroadPhaseListener_addCollisionPair  (0x00d01fc0, 89 bytes)
 //
 // The function takes a pair of "handle" pointers.  Each handle is a small
 // header (a dword, a one byte type tag at +4 and a signed byte offset at +5)
@@ -196,7 +197,8 @@ struct SubNode
 
 // For each handle in the pair whose type is 2, resolves its node and calls v07 on the target with the other handle's adjusted pointer.
 // @fnv 0x00d01fc0
-void __stdcall FUN_00d01fc0(HandlePair* pHandlePair)
+// pdb: hkpMultiThreadedSimulation::MtPhantomBroadPhaseListener::addCollisionPair | hkpMultithreadedSimulation.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void __stdcall hkpMultiThreadedSimulation_MtPhantomBroadPhaseListener_addCollisionPair(HandlePair* pHandlePair)
 {
     Handle* h = pHandlePair->first;
     if (h->type == 2)
@@ -248,7 +250,7 @@ struct FUN_00d026e0_cls
 // Resolves two records from pr, and either appends the pair to the array at world+0x6c or updates sub+0x14 and calls FUN_00cc0f40 based on a grid lookup.
 // @f3 0x00981c30 (community match, verified in this file)
 void __cdecl FUN_00901f10(PairArray* arr, int elemSize);
-void __cdecl FUN_00944650(char* a, char* b, char* c);
+void __cdecl hkpWorldAgentUtil_addAgent(char* a, char* b, char* c);
 void FUN_00d026e0_cls::ProcessPair(int* aiPair)
 {
     int a = aiPair[0];
@@ -286,7 +288,7 @@ void FUN_00d026e0_cls::ProcessPair(int* aiPair)
     {
         int v = *(int*)(base + ((int)t << 6) + 0x1c30);
         *(int*)(sub + 0x10) = v;
-        FUN_00944650((char*)x, (char*)y, sub);
+        hkpWorldAgentUtil_addAgent((char*)x, (char*)y, sub);
     }
 }
 
@@ -780,7 +782,8 @@ void __stdcall FUN_00d02200(int)
 
 // Empty function that takes three int arguments and does nothing.
 // @fnv 0x00d02210
-void __stdcall FUN_00d02210(int, int, int)
+// pdb: hkpCollisionAgent::warpTime | hkpCollisionAgent.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void __stdcall hkpCollisionAgent_warpTime(int, int, int)
 {}
 
 struct OwnerD020;

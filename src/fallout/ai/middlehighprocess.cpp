@@ -4462,7 +4462,7 @@ struct Member
     void FUN_008c6970(ResolveBuffer*);
 };
 TESForm* __cdecl FUN_004839c0(unsigned int);
-void* __cdecl FUN_0040a250(void*);
+void* __cdecl BaseExtraList_RemoveAll(void*);
 void* __cdecl FUN_00825550(void*);
 extern RefStub* DAT_011dea3c;
 struct Target
@@ -7772,7 +7772,7 @@ struct Anim
 {
     void FUN_00c7ba10(int);
     void FUN_00c7d810();
-    void FUN_00c7c150(int);
+    void bhkRagdollController_DisableRagdollAnim(int);
     void FUN_00c7a8d0();
 };
 struct Magic
@@ -8192,7 +8192,7 @@ struct Timer
 };
 extern Timer DAT_011f6394;
 extern Node* DAT_011e0410;
-void __cdecl FUN_00c6a350(Node*, int, int, int, int);
+void __cdecl bhkWorld_SetMotion(Node*, int, int, int, int);
 void __cdecl ApplyHavokOperation(Node*, int);
 void __cdecl ApplyHavokOperation(Node*, int, int);
 void __cdecl FUN_005b5e40(const char*, ...);
@@ -10784,7 +10784,7 @@ struct EquipActor
     EquipAnim* FUN_00950a60(int);
     void GetWeaponObject();
     FUN_0041a250* FUN_005d43c0();
-    bool FUN_00524d10();
+    bool Script_IsCurrentFurnitureObj();
     void FUN_00884f80();
 };
 struct EquipProcess
@@ -11381,7 +11381,7 @@ struct TESSaveLoadGame
 extern TESSaveLoadGame* g_TESSaveLoadGame;
 
 TESForm* FUN_004839c0(unsigned int);
-MagicItem* FUN_0040a250(unsigned int);
+MagicItem* BaseExtraList_RemoveAll(unsigned int);
 MagicTarget* FUN_00825550(unsigned int);
 
 }  // namespace fnv_00925490
@@ -12497,7 +12497,7 @@ struct Setting91
 };
 extern Setting91 settingA91, settingB91, settingC91;
 extern bool FUN_008c7aa0();
-extern void FUN_00c6a350(NiNode*, int, bool, bool, bool);
+extern void bhkWorld_SetMotion(NiNode*, int, bool, bool, bool);
 
 namespace fnv_00926690 {
 namespace load926 {
@@ -13913,7 +13913,7 @@ NiAVObject* FUN_00c54400(::NiNode*);
 }
 void FUN_00a582f0(const ThreeByThreeMatrix&, NiPoint3*, int, const NiPoint3*, const NiPoint3*);
 void FUN_00c69fc0(NiAVObject*, bool, bool, bool);
-void FUN_00c6a350(NiAVObject*, bool, bool, bool, bool);
+void bhkWorld_SetMotion(NiAVObject*, bool, bool, bool, bool);
 
 namespace fnv_00928510 {
 using ::Actor;

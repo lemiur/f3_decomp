@@ -99,7 +99,7 @@ struct FUN_00a43e90_cls
     int unk40;
     int unk44;
     QuadInts m_48;
-    void FUN_00a40360(BSRotAccumTransfInterpolator* obj, int a);
+    void NiTransformInterpolator_CopyMembers(BSRotAccumTransfInterpolator* obj, int a);
     BSRotAccumTransfInterpolator* CreateInterpolator(int a);
 };
 
@@ -120,7 +120,7 @@ BSRotAccumTransfInterpolator* FUN_00a43e90_cls::CreateInterpolator(int a)
     {
         obj = 0;
     }
-    FUN_00a40360(obj, a);
+    NiTransformInterpolator_CopyMembers(obj, a);
     *(QuadInts*)&obj->q0 = m_48;
     return obj;
 }

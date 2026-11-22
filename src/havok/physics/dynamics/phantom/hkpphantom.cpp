@@ -706,7 +706,7 @@ public:
 
 class hkpAabbPhantomD07 : public hkpPhantomD07 {
 public:
-    void FUN_00d07ec0(const hkAabbD07& kNewAabb) throw();
+    void hkpPhantom_updateBroadPhase(const hkAabbD07& kNewAabb) throw();
     void updateOverlaps() throw();
     void setAabbData(const hkAabbD07& kNewAabb) throw();
 };
@@ -876,7 +876,8 @@ struct OverlapArrF3 {
     int m_capacityAndFlags;
 };
 
-static __declspec(noinline) void FUN_009897a0(OverlapArrF3* arr)
+// pdb: hkpPhantom::removeNullOverlapListeners | hkpPhantom.obj | fnv360_0822_retail, call_gap_sim + skyrim(call_gap_sim), high
+static __declspec(noinline) void hkpPhantom_removeNullOverlapListeners(OverlapArrF3* arr)
 {
     for (int i = arr->m_size - 1; i >= 0; --i) {
         if (arr->m_data[i] == 0) {
@@ -899,7 +900,8 @@ struct AabbPhantomViewF3 {
     OverlapArrF3 m_overlappingCollidables;
 };
 
-void hkpAabbPhantomD07::FUN_00d07ec0(const hkAabbD07& newAabb)
+// pdb: hkpPhantom::updateBroadPhase | hkpPhantom.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_gap_sim), high
+void hkpAabbPhantomD07::hkpPhantom_updateBroadPhase(const hkAabbD07& newAabb)
 {
     AabbPhantomViewF3* self = reinterpret_cast<AabbPhantomViewF3*>(this);
     if (self->m_world) {
@@ -922,7 +924,7 @@ void hkpAabbPhantomD07::FUN_00d07ec0(const hkAabbD07& newAabb)
             self->m_world->m_broadPhaseDispatcher->removePairs(delPairs.m_data, delPairs.m_size);
             self->m_world->m_broadPhaseDispatcher->addPairs(newPairs.m_data, newPairs.m_size,
                 self->m_world->m_collisionFilter ? &self->m_world->m_collisionFilter->m_filter : 0);
-            FUN_009897a0(&self->m_overlappingCollidables);
+            hkpPhantom_removeNullOverlapListeners(&self->m_overlappingCollidables);
         }
         self->m_world->m_broadPhase->unlock();
         self->m_world->unlockAndAttemptToExecutePendingOperations();

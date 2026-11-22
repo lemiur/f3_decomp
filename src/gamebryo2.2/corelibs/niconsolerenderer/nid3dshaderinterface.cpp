@@ -92,14 +92,16 @@ void* __fastcall FUN_00a8f440(void* apObject)
 
 extern const char* const g_011f603c_arg1;
 // @fnv 0x00a8f1b0
-const char* const* __fastcall FUN_00a8f1b0(void* p, int)
+// pdb: BSSegmentedTriShape::GetRTTI | BSSegmentedTriShape.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+const char* const* __fastcall BSSegmentedTriShape_GetRTTI(void* p, int)
 {
     return &g_011f603c_arg1;
 }
 
 extern const char* const g_0126f75c_arg1;
 // @fnv 0x00a8f480
-const char* const* __fastcall FUN_00a8f480(void* p, int)
+// pdb: NiScreenElementsData::GetRTTI | NiScreenElementsData.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+const char* const* __fastcall NiScreenElementsData_GetRTTI(void* p, int)
 {
     return &g_0126f75c_arg1;
 }
@@ -136,7 +138,7 @@ struct VF
     virtual void v27();
     virtual void Op(int);
 };
-void FUN_00aa0000();
+void NiShaderFactory_ReleaseAllShaders();
 void DestroyProgram();
 // @fnv 0x00e819f0
 int FUN_00e819f0()
@@ -144,7 +146,7 @@ int FUN_00e819f0()
     VF* pShaderFactory = (VF*)NiD3DShaderFactory::GetShaderFactory();
     if (pShaderFactory)
     {
-        FUN_00aa0000();
+        NiShaderFactory_ReleaseAllShaders();
         pShaderFactory->Op(0);
     }
     FUN_00e7f920(0);

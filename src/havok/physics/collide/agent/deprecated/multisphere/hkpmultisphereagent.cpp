@@ -1280,7 +1280,7 @@ struct S00d443e0_S_Owner
     int unk8;
     S00d443e0_S_Entry* arr;
     int count;
-    void FUN_00d443e0(S00d443e0_S_Wrap* in, int a, int b, int d);
+    void hkpMultiSphereAgent_getClosestPoints(S00d443e0_S_Wrap* in, int a, int b, int d);
 };
 
 // Iterates entries in reverse, adds a rotation term to the input copy, and dispatches each child's v6 with a shared context.
@@ -1307,7 +1307,8 @@ struct Ctx443
 };
 struct ChildCall443e0 { virtual void v0(); virtual void v1(); virtual void v2(); virtual void v3(); virtual void v4(Ctx443*, int, int, int); };
 
-void S00d443e0_S_Owner::FUN_00d443e0(S00d443e0_S_Wrap* wrap, int a, int b, int d)
+// pdb: hkpMultiSphereAgent::getClosestPoints | hkpMultiSphereAgent.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void S00d443e0_S_Owner::hkpMultiSphereAgent_getClosestPoints(S00d443e0_S_Wrap* wrap, int a, int b, int d)
 {
     S_V4* base = wrap->base;
     S00d443e0_S_Input copy(*wrap->src);

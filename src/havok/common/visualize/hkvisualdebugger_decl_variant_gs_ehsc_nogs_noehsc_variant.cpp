@@ -121,8 +121,8 @@ class hkTargetCD0E
 class hkControllerCD0E
 {
   public:
-    void FUN_00d60960(int mode);
-    void FUN_00d605d0(unsigned int flags);
+    void hkOArchive_write32u(int mode);
+    void hkOArchive_write8u(unsigned int flags);
     void HashUInt(float t);
     hkTargetCD0E* FUN_00d60800();
 };
@@ -327,7 +327,7 @@ struct View : DebuggerReference523
     unsigned char unk81, unk82, unk83;
     int numFrames;
     void FUN_009530f0(int,float);
-    void FUN_00953070(int);
+    void hkVisualDebugger_deleteClient(int);
 
 };
 
@@ -372,7 +372,7 @@ void VisualDebugger523::FUN_00cd0ec0(float timeStep)
                 Task1679::DAT_010f3364->report(0, -1, buffer, ".\\hkVisualDebugger.cpp", 0x11c);
             }
             Task1679::DAT_010f3364->end();
-            self->FUN_00953070(index);
+            self->hkVisualDebugger_deleteClient(index);
         }
     }
     if (self->timingEnabled)

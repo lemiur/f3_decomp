@@ -1345,7 +1345,8 @@ static __forceinline void hkSolverExportWriteResult128( hkReal impulse0, hkReal 
 	sr[1].m_impulseApplied = impulse1;
 	sr[1].m_internalSolverData = rhs1;
 }
-void __cdecl FUN_00a77a70( const hkpSolverInfo& info, const hkpSolverElemTemp* solverInputs, const hkpJacobianSchema* schemas, const hkpVelocityAccumulator* accums )
+// pdb: hkSolverExport::exportImpulsesAndRhs | hkpSolverExport.obj | fnv360_0822_retail, call_seq + skyrim(call_seq), high
+void __cdecl hkSolverExport_exportImpulsesAndRhs( const hkpSolverInfo& info, const hkpSolverElemTemp* solverInputs, const hkpJacobianSchema* schemas, const hkpVelocityAccumulator* accums )
 {
 	const hkpSolverElemTemp* solverIn = solverInputs;
 	const hkpJacobianSchema* com = schemas;

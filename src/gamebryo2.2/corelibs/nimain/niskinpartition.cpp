@@ -19,7 +19,8 @@ unsigned int NiSkinPartition::Partition::GetStripIndexCount()
 const void* g_011f5b1c;
 
 // @fnv 0x00a820d0
-const void* __cdecl FUN_00a820d0()
+// pdb: NiDirectionalLight::GetRTTI | NiDirectionalLight.obj | fnv360_0721_retail, objrun + bridge(vtable|objopen_prop) + skyrim(objrun_open), high
+const void* __cdecl NiDirectionalLight_GetRTTI()
 {
     return &g_011f5b1c;
 }
@@ -299,12 +300,12 @@ struct MyCls
     int _40;
     int _44;
     void _Call_a5d3a0();
-    void FUN_00a853c0(int);
+    void NiSkinData_ComputeBoneBounds(int);
     MyCls* InitFromData(int, int, const Dummy13&, int);
 };
 extern int DAT_0109e574;
-int __cdecl FUN_00a853c0();
-// Initialises the object: sets the vtable, clears _08, copies a3 into _0c, stores a2 and a1, then calls FUN_00a853c0(a4) and returns this.
+int __cdecl NiSkinData_ComputeBoneBounds();
+// Initialises the object: sets the vtable, clears _08, copies a3 into _0c, stores a2 and a1, then calls NiSkinData_ComputeBoneBounds(a4) and returns this.
 // @fnv 0x00a854c0
 MyCls* MyCls::InitFromData(int a1, int a2, const Dummy13& aData, int a4)
 {
@@ -314,7 +315,7 @@ MyCls* MyCls::InitFromData(int a1, int a2, const Dummy13& aData, int a4)
     _0c = aData;
     _40 = a2;
     _44 = a1;
-    FUN_00a853c0(a4);
+    NiSkinData_ComputeBoneBounds(a4);
     return this;
 }
 
@@ -1096,7 +1097,7 @@ struct SkinBuilder
     int unk04;
     unsigned int count;
     __declspec(nothrow) void BuildBoneLODControllerSets(SkinGeom*, void*, SkinItems*, int*) throw();
-    __declspec(nothrow) void FUN_00a839d0(unsigned int, SkinItems*) throw();
+    __declspec(nothrow) void NiSkinPartition_MergeBoneSets(unsigned int, SkinItems*) throw();
     bool BuildTriangleSetMapping(SkinGeom*, void*, unsigned int, void*, SkinItems*, int**, int*) throw();
 };
 // Builds a per-triangle set index mapping from group IDs or weights, compacts unused sets, and returns false if a triangle's vertices span three distinct groups.
@@ -1106,7 +1107,7 @@ bool SkinBuilder::BuildTriangleSetMapping(SkinGeom* geom, void* unused, unsigned
 {
     unsigned int triangles = geom->triangleCount;
     BuildBoneLODControllerSets(geom, weights, sets, groupIDs);
-    FUN_00a839d0(input, sets);
+    NiSkinPartition_MergeBoneSets(input, sets);
     *mapping = (int*)NiMalloc(triangles * sizeof(int));
     unsigned int setCount = sets->count;
     unsigned char* pUsedFlags = (unsigned char*)NiMalloc(setCount);

@@ -806,7 +806,7 @@ struct NiObject
         return *(NiObject * * const*)((const char*)this + 0x1c);
     }
     void __thiscall ApplyToAllObjects(unsigned int);
-    void __thiscall FUN_00a809b0(unsigned int);
+    void __thiscall NiGeometry_PurgeRendererData(unsigned int);
     void __thiscall FUN_00c21cb0(unsigned int);
 };
 struct NiObjectNode
@@ -824,7 +824,7 @@ struct NiObjectNode
 // @fnv 0x00c21cb0
 void __thiscall NiObject::FUN_00c21cb0(unsigned int value)
 {
-    FUN_00a809b0(value);
+    NiGeometry_PurgeRendererData(value);
     NiObject* pLinkedObject = *(NiObject**)((char*)this + 0xb8);
     if (pLinkedObject)
     {
@@ -1166,11 +1166,12 @@ struct FUN_00c21a80_cls
     unsigned int unk10C;
     float m_f110;
     char m_b114;
-    void __thiscall FUN_00c21a80(NiUpdateData&, unsigned int);
+    void __thiscall NiMeshParticleSystem_UpdateDownwardPass(NiUpdateData&, unsigned int);
 };
 // Runs update callbacks over the node and object lists, defers the found object's v37, then stores the update time and flag.
 // @fnv 0x00c21a80
-void FUN_00c21a80_cls::FUN_00c21a80(NiUpdateData& aUpdateData, unsigned int arg2)
+// pdb: NiMeshParticleSystem::UpdateDownwardPass | NiMeshParticleSystem.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun) + skyrim(objopen_prop), high
+void FUN_00c21a80_cls::NiMeshParticleSystem_UpdateDownwardPass(NiUpdateData& aUpdateData, unsigned int arg2)
 {
     if (aUpdateData.m_bRender)
     {

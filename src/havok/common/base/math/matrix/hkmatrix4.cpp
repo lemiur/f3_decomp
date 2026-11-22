@@ -46,10 +46,11 @@ struct CB20B0_Class
 struct Matrix44_shell
 {
     float m_data[16];
-    void FUN_00de9130(CB20B0_Class* dst);
+    void TESForm_LoadForm(CB20B0_Class* dst);
 };
 // @fnv 0x00de9130
-void Matrix44_shell::FUN_00de9130(CB20B0_Class* dst)
+// pdb: TESForm::LoadForm | TESForm.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap) + skyrim(call_gap), high
+void Matrix44_shell::TESForm_LoadForm(CB20B0_Class* dst)
 {
     dst->FUN_00cb20b0(this);
 }

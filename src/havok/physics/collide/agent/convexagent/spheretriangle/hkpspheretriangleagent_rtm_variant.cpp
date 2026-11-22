@@ -209,7 +209,7 @@ class S00d3d6b0_SphereTriAgent {
 public:
     int unk00,unk04,unk08,unk0C;
     float unk10;
-    void FUN_00d3d6b0(S00d3d6b0_BodyHolderB* a, S00d3d6b0_BodyHolderB* b, S00d3d6b0_Input* input, S00d3d6b0_Sink* sink);
+    void hkpSphereTriangleAgent_getClosestPoints(S00d3d6b0_BodyHolderB* a, S00d3d6b0_BodyHolderB* b, S00d3d6b0_Input* input, S00d3d6b0_Sink* sink);
 };
 // @f3 0x009c74a0 (community match, verified in this file)
 extern unsigned long DAT_0116913c;
@@ -273,7 +273,7 @@ __forceinline void NativeTransformPoints(const NativeTransform& transform, const
 }
 static __forceinline bool GetSphereTriHit(S00d3d6b0_BodyHolderB* a, S00d3d6b0_BodyHolderB* b, S00d3d6b0_Input* input, float* cache, S00d3d6b0_HitInfo& hit);
 }
-void FUN_00970580(S00d3d6b0_Vec4*, const void*, float*, S00d3d6b0_Res*);
+void hkpCollideTriangleUtil_closestPointTriangle(S00d3d6b0_Vec4*, const void*, float*, S00d3d6b0_Res*);
 static __forceinline bool f3m_009c74a0::GetSphereTriHit(S00d3d6b0_BodyHolderB* a, S00d3d6b0_BodyHolderB* b, S00d3d6b0_Input* input, float* cache, S00d3d6b0_HitInfo& hit) {
     S00d3d6b0_BodyB* shapeA = a->obj;
     S00d3d6b0_BodyB* shapeB = b->obj;
@@ -282,7 +282,7 @@ static __forceinline bool f3m_009c74a0::GetSphereTriHit(S00d3d6b0_BodyHolderB* a
     if (0) { DeadFloats d0; DeadFloats u0 = *reinterpret_cast<const DeadFloats*>(input); d0 = u0; }
     NativeTransformPoints(*reinterpret_cast<const NativeTransform*>(b->xf), reinterpret_cast<const NativeFloat4*>(shapeB->vertices), tri, 3);
     S00d3d6b0_Res out;
-    FUN_00970580(center, tri, cache, &out);
+    hkpCollideTriangleUtil_closestPointTriangle(center, tri, cache, &out);
     float sum = shapeA->radius + shapeB->radius;
     float distance = out.d;
     float threshold = reinterpret_cast<const NativeSphereInput*>(input)->tolerance + sum;
@@ -300,7 +300,8 @@ static __forceinline bool f3m_009c74a0::GetSphereTriHit(S00d3d6b0_BodyHolderB* a
     }
     return false;
 }
-void S00d3d6b0_SphereTriAgent::FUN_00d3d6b0(S00d3d6b0_BodyHolderB* a, S00d3d6b0_BodyHolderB* b, S00d3d6b0_Input* input, S00d3d6b0_Sink* sink)
+// pdb: hkpSphereTriangleAgent::getClosestPoints | hkpSphereTriangleAgent.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void S00d3d6b0_SphereTriAgent::hkpSphereTriangleAgent_getClosestPoints(S00d3d6b0_BodyHolderB* a, S00d3d6b0_BodyHolderB* b, S00d3d6b0_Input* input, S00d3d6b0_Sink* sink)
 {
     using namespace f3m_009c74a0;
     {
@@ -502,7 +503,7 @@ int __cdecl FUN_00cd7850(const S_00d3d520_V4* pos, const S_00d3d520_V4* tri, int
 // @f3 0x009c7290 (community match, verified in this file)
 struct S_00d3d520_Tol { int unk00; float distance; };
 
-int __cdecl FUN_00970580(const S_00d3d520_V4* pos, const S_00d3d520_V4* tri, int a4, S_00d3d520_Res* out);
+int __cdecl hkpCollideTriangleUtil_closestPointTriangle(const S_00d3d520_V4* pos, const S_00d3d520_V4* tri, int a4, S_00d3d520_Res* out);
 
 struct TransformScalar974 {
     float value;
@@ -553,7 +554,7 @@ int __cdecl FUN_00d3d520(S_00d3d520_A* a, S_00d3d520_Body* b, S_00d3d520_Info* i
     } while (--i >= 0);
 
     S_00d3d520_Res& pen = scratch.contact;
-    int r = FUN_00970580(center, v, a4, &pen);
+    int r = hkpCollideTriangleUtil_closestPointTriangle(center, v, a4, &pen);
     float k = sphere->radius + tri->radius;
 
     float thr = reinterpret_cast<const S_00d3d520_Tol*>(info)->distance + k;

@@ -5,7 +5,8 @@
 extern "C" void* g_01202688;
 
 // @fnv 0x00c26810
-void* __cdecl FUN_00c26810()
+// pdb: BSAnimNotes::GetRTTI | BSAnimNote.obj | fnv360_0822_retail, udata + bridge(vtable|udata) + skyrim(udata), high
+void* __cdecl BSAnimNotes_GetRTTI()
 {
     return &g_01202688;
 }
@@ -22,10 +23,11 @@ struct NiPSysFieldModifier
 struct NiPSysVortexFieldModifier : NiPSysFieldModifier
 {
     NiColor m_kFogTint;
-    void FUN_00c267d0(NiStream& stream);
+    void NiBlendQuaternionInterpolator_SaveBinary(NiStream& stream);
 };
 // @fnv 0x00c267d0
-void NiPSysVortexFieldModifier::FUN_00c267d0(NiStream& stream)
+// pdb: NiBlendQuaternionInterpolator::SaveBinary | NiBlendQuaternionInterpolator.obj | fnv360_0822_retail, caller_sim + skyrim(caller_sim), high
+void NiPSysVortexFieldModifier::NiBlendQuaternionInterpolator_SaveBinary(NiStream& stream)
 {
     NiPSysFieldModifier::LoadBinary(stream);
     ((NiColor*)((char*)this + 0x30))->LoadBinary(stream);
@@ -179,12 +181,13 @@ struct CloneHost
     char _pad_0[0x30];
     CloneVec3 m_30;
     void FUN_00c32020(CloneItem* pItem, int a);
-    CloneItem* FUN_00c26940(int a);
+    CloneItem* NiPSysVortexFieldModifier_CreateClone(int a);
 };
 
 // Allocates a CloneItem, passes it with a to FUN_00c32020, copies m_30 into the item's m_30, and returns it.
 // @fnv 0x00c26940
-CloneItem* CloneHost::FUN_00c26940(int a)
+// pdb: NiPSysVortexFieldModifier::CreateClone | NiPSysVortexFieldModifier.obj | fnv360_0822_retail, caller_sim + skyrim(caller_sim), high
+CloneItem* CloneHost::NiPSysVortexFieldModifier_CreateClone(int a)
 {
     CloneItem* pItem = new CloneItem;
     this->FUN_00c32020(pItem, a);

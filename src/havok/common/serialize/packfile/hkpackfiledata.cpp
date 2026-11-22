@@ -31,7 +31,7 @@ struct E06C20Writer
 };
 struct FUN_00e06800_Class
 {
-    void FUN_00e06800(int a, void* b);
+    void hkpMoppCodeGenerator_addCommand16(int a, void* b);
 };
 
 struct FUN_00e06d70_Class
@@ -48,7 +48,7 @@ void FUN_00e06d70_Class::WriteSize(unsigned int size)
     if (size < 0x100)
         ((ByteSink*)p)->PutBytePair(9, (char)size);
     else if (size < 0x10000)
-        ((FUN_00e06800_Class*)p)->FUN_00e06800(0xa, (void*)size);
+        ((FUN_00e06800_Class*)p)->hkpMoppCodeGenerator_addCommand16(0xa, (void*)size);
     else
         ((E06C20Writer*)p)->FUN_00e069a0(0xb, (void*)size);
 }

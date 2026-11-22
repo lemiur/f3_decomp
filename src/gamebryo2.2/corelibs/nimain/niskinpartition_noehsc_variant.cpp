@@ -5,7 +5,7 @@
 
 #include "niskinpartition_decls.h"
 const void* g_011f5b1c;
-const void* __cdecl FUN_00a820d0();
+const void* __cdecl NiDirectionalLight_GetRTTI();
 void __stdcall FUN_00a82600(int a, int b, float c);
 struct Holder
 {
@@ -89,11 +89,11 @@ struct MyCls
     int _40;
     int _44;
     void _Call_a5d3a0();
-    void FUN_00a853c0(int);
+    void NiSkinData_ComputeBoneBounds(int);
     MyCls* InitFromData(int, int, const Dummy13&, int);
 };
 extern int DAT_0109e574;
-int __cdecl FUN_00a853c0();
+int __cdecl NiSkinData_ComputeBoneBounds();
 void* __cdecl _NiMalloc(unsigned int);
 void __cdecl _NiFree(void*);
 struct FUN_00a826b0_shell
@@ -566,7 +566,7 @@ struct SkinBuilder
     int unk04;
     unsigned int count;
     __declspec(nothrow) void BuildBoneLODControllerSets(SkinGeom*, void*, SkinItems*, int*) throw();
-    __declspec(nothrow) void FUN_00a839d0(unsigned int, SkinItems*) throw();
+    __declspec(nothrow) void NiSkinPartition_MergeBoneSets(unsigned int, SkinItems*) throw();
     bool BuildTriangleSetMapping(SkinGeom*, void*, unsigned int, void*, SkinItems*, int**, int*) throw();
 };
 template <class T> class SkinTArray

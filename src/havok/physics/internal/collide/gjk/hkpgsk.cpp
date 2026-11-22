@@ -1244,7 +1244,7 @@ struct S00daac40_RayParams
 class S00daac40_FUN_00daac40_cls
 {
   public:
-    bool* FUN_00daac40(S00daac40_RayArgument<bool*> out, int p2, int p3,
+    bool* hkpGsk_castRay(S00daac40_RayArgument<bool*> out, int p2, int p3,
                        S00daac40_RayArgument<S00daac40_RayParams*> p4);
     void FUN_00da9b30(bool* hit, int p2, int zero, S00daac40_Mat3* m, int p3, S00daac40_RayParams* p);
 };
@@ -1260,7 +1260,8 @@ struct F3MirrorCast
     void FUN_007c8a50(S00daac40_RayParams* p);
 };
 
-bool* S00daac40_FUN_00daac40_cls::FUN_00daac40(S00daac40_RayArgument<bool*> out, int p2, int p3,
+// pdb: hkpGsk::castRay | hkpGsk.obj | fnv360_0822_retail, ustr + skyrim(ustr), high
+bool* S00daac40_FUN_00daac40_cls::hkpGsk_castRay(S00daac40_RayArgument<bool*> out, int p2, int p3,
                                                S00daac40_RayArgument<S00daac40_RayParams*> apRayParams)
 {
     volatile unsigned long ticks;

@@ -4275,7 +4275,7 @@ struct DebugTableDispatcher : DispatcherReferencedObject
     CollisionAgentEntry* m_tableContinuous3;
     void RegisterAgentType(signed char (*)[32], signed char, int, int, signed char, signed char, CollisionAgentEntry (*)[32],
                       int);
-    void FUN_00cfc1d0();
+    void hkpCollisionDispatcher_debugPrintTable();
 };
 // @f3 0x00986190 (community match, verified in this file)
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long);
@@ -4338,7 +4338,8 @@ struct LogBuffers {
 };
 }
 
-void DebugTableDispatcher::FUN_00cfc1d0()
+// pdb: hkpCollisionDispatcher::debugPrintTable | hkpCollisionDispatcher.obj | fnv360_0822_retail, ustr + bridge(ustr|ustr) + skyrim(ustr), high
+void DebugTableDispatcher::hkpCollisionDispatcher_debugPrintTable()
 {
     using namespace dispatch_debug_1585;
     DAT_010f3364->BeginSection(0x5e4345e4,"hkpCollisionDispatcher::debugPrintTable");

@@ -28,12 +28,13 @@ void NiPSysMeshUpdateModifier::LoadBinary(NiStream& stream)
 
 struct FUN_00c20a00_shell : public NiPSysRotationModifier
 {
-    void FUN_00c20a00(NiStream*);
+    void NiPSysRotationModifier_PostLinkObject(NiStream*);
 };
 
 // Links the object to the stream and, for older stream versions, fills the particle rotation speeds array with the modifier's rotation speed value.
 // @fnv 0x00c20a00
-void FUN_00c20a00_shell::FUN_00c20a00(NiStream* kStream)
+// pdb: NiPSysRotationModifier::PostLinkObject | NiPSysRotationModifier.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun) + skyrim(objrun_sim), high
+void FUN_00c20a00_shell::NiPSysRotationModifier_PostLinkObject(NiStream* kStream)
 {
     NiObject::LinkObject(*kStream);
     if (*(unsigned int*)((char*)kStream + 0xD8) < 0x14000002)
@@ -208,7 +209,7 @@ void FUN_00c20d00_shell::AddRotationStrings(void* ptr)
 
 
 // ---------------------------------------------------------------------------
-// FUN_00c20c00 - the save helper of the rotation particle-system modifier.
+// NiPSysRotationModifier_SaveBinary - the save helper of the rotation particle-system modifier.
 //
 // The object hands four floats, two byte flags and one point to the output
 // stream that the NiStream keeps at +0x250.  That stream object keeps its
@@ -253,12 +254,13 @@ struct FnvRotMod : public FnvModBase
     FnvPoint3 m_kRotationAxis;
     bool m_bUseRandomRotationAxis;
     bool m_bRandomInitialRotationSpeedSign;
-    void FUN_00c20c00(NiStream* stream);
+    void NiPSysRotationModifier_SaveBinary(NiStream* stream);
 };
 
 // Calls the base save, writes four floats and two bytes to the stream, then saves the point.
 // @fnv 0x00c20c00
-void FnvRotMod::FUN_00c20c00(NiStream* stream)
+// pdb: NiPSysRotationModifier::SaveBinary | NiPSysRotationModifier.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun) + skyrim(objrun_open), high
+void FnvRotMod::NiPSysRotationModifier_SaveBinary(NiStream* stream)
 {
     FnvModBase::FUN_00c31950(stream);
 
@@ -515,7 +517,7 @@ class CC20AE0Modifier
 class CC20AE0FieldModifier : public CC20AE0Modifier
 {
   public:
-    void FUN_00c20ae0(CC20AE0Stream& kStream);
+    void NiPSysRotationModifier_LoadBinary(CC20AE0Stream& kStream);
 
     float m_fInfluence;
     float m_fFieldAttenuation;
@@ -528,7 +530,8 @@ class CC20AE0FieldModifier : public CC20AE0Modifier
 
 // Loads the base modifier, then reads float fields, version-gated fields and two bool flags, and a point from the stream.
 // @fnv 0x00c20ae0
-void CC20AE0FieldModifier::FUN_00c20ae0(CC20AE0Stream& kStream)
+// pdb: NiPSysRotationModifier::LoadBinary | NiPSysRotationModifier.obj | fnv360_0822_retail, caller_sim + bridge(vtable|caller_sim) + skyrim(caller_sim), high
+void CC20AE0FieldModifier::NiPSysRotationModifier_LoadBinary(CC20AE0Stream& kStream)
 {
     CC20AE0Modifier::LoadBinary(kStream);
 

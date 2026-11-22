@@ -5,10 +5,11 @@
 extern "C" __declspec(dllimport) long __stdcall InterlockedDecrement(volatile long*);
 struct RC_00b530e0 { virtual void V0(); virtual void Release(); long refs; };
 struct R_00b530e0 { char pad[0x64]; int refs; void FUN_00888c10(); };
-struct C_00b530e0 { char pad[0x8c]; RC_00b530e0* a1[26]; RC_00b530e0* a2[13]; void FUN_00b58540(); bool FUN_00b530e0(); };
+struct C_00b530e0 { char pad[0x8c]; RC_00b530e0* a1[26]; RC_00b530e0* a2[13]; void FUN_00b58540(); bool SkinShader_Initialize(); };
 extern R_00b530e0* DAT_01178060[26];
 
-bool C_00b530e0::FUN_00b530e0()
+// pdb: SkinShader::Initialize | SkinShader.obj | fnv360_0822_retail, objrun + bridge(hash|objrun), high
+bool C_00b530e0::SkinShader_Initialize()
 {
     FUN_00b58540();
     for (int i = 0; i < 26; i++) {

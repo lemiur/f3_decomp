@@ -1639,8 +1639,9 @@ int F3Twin_00a484a0::F3_FUN_00a484a0()
 }
 
 // @f3twin 0x00a54fe0 of 0x0042ba00
-struct F3Twin_00a54fe0 : public FnvCpu_FUN_00be0aa0_CpuObject { int F3_FUN_00a54fe0() ; };
-int F3Twin_00a54fe0::F3_FUN_00a54fe0() 
+struct F3Twin_00a54fe0 : public FnvCpu_FUN_00be0aa0_CpuObject { int hkpMoppCachedShapeMediator_getNumPrimitives() ; };
+// pdb: hkpMoppCachedShapeMediator::getNumPrimitives | hkpMoppCachedShapeMediator.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+int F3Twin_00a54fe0::hkpMoppCachedShapeMediator_getNumPrimitives() 
 {
     return value;
 }

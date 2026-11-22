@@ -114,11 +114,12 @@ struct Self
     char d1[0x20];
     QT acc;
     Item* items;
-    bool FUN_00a394b0(QT* kValue);
+    bool NiBlendAccumTransformInterpolator_GetValue(QT* kValue);
 };
 extern double _DAT_010241b0;
 // @fnv 0x00a394b0
-bool Self::FUN_00a394b0(QT* kValue)
+// pdb: NiBlendAccumTransformInterpolator::GetValue | NiBlendAccumTransformInterpolator.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun) + skyrim(caller_sim), high
+bool Self::NiBlendAccumTransformInterpolator_GetValue(QT* kValue)
 {
     const QT* pAcc = &acc;
     if (pAcc->s == _DAT_010241b0 && pAcc->r[1] == _DAT_010241b0 && pAcc->t[0] == _DAT_010241b0)
@@ -144,7 +145,8 @@ struct Obj
 };
 
 // @fnv 0x00a39700
-void* __cdecl FUN_00a39700()
+// pdb: NiBlendAccumTransformInterpolator::CreateObject | NiBlendAccumTransformInterpolator.obj | fnv360_0822_retail, objrun + bridge(hash|objrun), high
+void* __cdecl NiBlendAccumTransformInterpolator_CreateObject()
 {
     void* p = BSFadeNode::operator new(0x58);
     if (p)
@@ -167,7 +169,7 @@ struct NiTexture;
 struct NiThread;
 struct FUN_00a39720_shell : public NiBlendAccumTransformInterpolator
 {
-    void FUN_00a39720(NiStream*);
+    void NiBlendAccumTransformInterpolator_SaveBinary(NiStream*);
 };
 
 struct FUN_00a37ec0_tgt
@@ -176,7 +178,7 @@ struct FUN_00a37ec0_tgt
 };
 struct FUN_00a38b60_tgt
 {
-    void FUN_00a38b60(NiStream*);
+    void NiQuatTransform_SaveBinary(NiStream*);
 };
 struct FUN_00a59a90_tgt
 {
@@ -184,18 +186,19 @@ struct FUN_00a59a90_tgt
 };
 
 // @fnv 0x00a39720
-void FUN_00a39720_shell::FUN_00a39720(NiStream* kStream)
+// pdb: NiBlendAccumTransformInterpolator::SaveBinary | NiBlendAccumTransformInterpolator.obj | fnv360_0822_retail, caller_sim + bridge(vtable|caller_sim) + skyrim(caller_sim), high
+void FUN_00a39720_shell::NiBlendAccumTransformInterpolator_SaveBinary(NiStream* kStream)
 {
     ((FUN_00a37ec0_tgt*)this)->FUN_00a37ec0(kStream);
     unsigned char uc;
     for (uc = 0; uc < *((unsigned char*)this + 0xd); uc++)
     {
         char* p = *(char**)((char*)this + 0x50) + uc * 0x68;
-        ((FUN_00a38b60_tgt*)(p + 4))->FUN_00a38b60(kStream);
-        ((FUN_00a38b60_tgt*)(p + 0x24))->FUN_00a38b60(kStream);
+        ((FUN_00a38b60_tgt*)(p + 4))->NiQuatTransform_SaveBinary(kStream);
+        ((FUN_00a38b60_tgt*)(p + 0x24))->NiQuatTransform_SaveBinary(kStream);
         ((FUN_00a59a90_tgt*)(p + 0x44))->ReadMatrixFromStream(kStream);
     }
-    ((FUN_00a38b60_tgt*)((char*)this + 0x30))->FUN_00a38b60(kStream);
+    ((FUN_00a38b60_tgt*)((char*)this + 0x30))->NiQuatTransform_SaveBinary(kStream);
 }
 
 struct NiObject;
@@ -247,7 +250,7 @@ struct Base
     char d[0xd];
     unsigned char count;
     char e[2];
-    bool FUN_00a37690();
+    bool NiBlendInterpolator_ReallocateArrays();
 };
 struct Self : Base
 {
@@ -255,12 +258,12 @@ struct Self : Base
     Item* items;
     bool ResizeItems();
 };
-// Calls FUN_00a37690; if it succeeds, allocates a new Item array of size count, copies the old items over, frees the old array and stores the new one.
+// Calls NiBlendInterpolator_ReallocateArrays; if it succeeds, allocates a new Item array of size count, copies the old items over, frees the old array and stores the new one.
 // @fnv 0x00a39ec0
 bool Self::ResizeItems()
 {
     unsigned char ucOldCount = count;
-    bool bResized = FUN_00a37690();
+    bool bResized = NiBlendInterpolator_ReallocateArrays();
     if (bResized)
     {
         Item* pkNewAccumArray = new Item[count];
@@ -454,7 +457,8 @@ struct Holder
 };
 // Allocates a FUN_00a39230, passes it with p to Holder::FUN_00a3a450, and returns the new object.
 // @fnv 0x00a3a660
-FUN_00a39230* __fastcall FUN_00a3a660(Holder* self, int unused, void* p)
+// pdb: NiBlendAccumTransformInterpolator::CreateClone | NiBlendAccumTransformInterpolator.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun) + skyrim(caller_sim), high
+FUN_00a39230* __fastcall NiBlendAccumTransformInterpolator_CreateClone(Holder* self, int unused, void* p)
 {
     FUN_00a39230* o = new FUN_00a39230;
     self->FUN_00a3a450(o, p);
@@ -644,12 +648,13 @@ __forceinline void InvalidateAccumulatedValue(AccumItem& item)
 struct AccumulationQuery : NiBlendAccumTransformInterpolator
 {
     unsigned char FUN_00a36970(NiInterpolator*, float, unsigned char, float);
-    unsigned char FUN_00a392b0(NiInterpolator*, float, unsigned char, float);
+    unsigned char NiBlendAccumTransformInterpolator_AddInterpInfo(NiInterpolator*, float, unsigned char, float);
 };
 
 // Invalidates the selected slot and, with two interpolators, may combine and invalidate the old slot.
 // @fnv 0x00a392b0
-unsigned char AccumulationQuery::FUN_00a392b0(NiInterpolator* interpolator, float weight, unsigned char priority,
+// pdb: NiBlendAccumTransformInterpolator::AddInterpInfo | NiBlendAccumTransformInterpolator.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun_prop) + skyrim(caller_sim), high
+unsigned char AccumulationQuery::NiBlendAccumTransformInterpolator_AddInterpInfo(NiInterpolator* interpolator, float weight, unsigned char priority,
                                               float ease)
 {
     unsigned char oldIndex = m_ucSingleIdx;

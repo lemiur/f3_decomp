@@ -589,7 +589,8 @@ struct RecShim { void FUN_00a2b780(const ContactRecord& source); };
 }
 
 
-int FUN_00daf1e0(ContactManifold* set, void* a, void* b, void* c, ContactContext* context, S_00dad4d0_Key* key,
+// pdb: hkGskManifold_addPoint | hkpGskManifoldUtil.obj | fnv360_0822_retail, call_gap_sim + bridge(call_seq|call_gap) + skyrim(call_seq), high
+int hkGskManifold_addPoint(ContactManifold* set, void* a, void* b, void* c, ContactContext* context, S_00dad4d0_Key* key,
 
 
 

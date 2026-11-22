@@ -112,12 +112,13 @@ struct Val1 {
 
 struct Host {
     void FUN_00d24b50(int a1, int a2, Val1 v, float f, Local12* pLocal);
-    void FUN_00d260d0(int a1, int a2, const Arg3* a3);
+    void hkpSampledHeightFieldShape_castRayWithCollectorImpl(int a1, int a2, const Arg3* a3);
 };
 
 // Builds a local record from DAT_010ce310 and a3 (its float and pointer), then calls FUN_00d24b50 with a1, a2, a default Val1, 0.0f and that record.
 // @fnv 0x00d260d0
-void Host::FUN_00d260d0(int a1, int a2, const Arg3* a3)
+// pdb: hkpSampledHeightFieldShape::castRayWithCollectorImpl | hkpSampledHeightFieldShape.obj | fnv360_0822_retail, uvref + bridge(uvref|vtable) + skyrim(uvref), high
+void Host::hkpSampledHeightFieldShape_castRayWithCollectorImpl(int a1, int a2, const Arg3* a3)
 {
     Local12 local;
     local.m_00 = &DAT_010ce310;
@@ -151,12 +152,13 @@ struct Obj {
     float unk24;
 
     void FUN_00d24b50(RayData* data, void* arg2, hkBoolD260 arg3, float arg4, void* arg5);
-    void FUN_00d26120(Input* input, void* arg2, void* arg3);
+    void hkpSampledHeightFieldShape_castSphere(Input* input, void* arg2, void* arg3);
 };
 
 // Copies the input ray, offsets its Y and endY by a signed value, and calls FUN_00d24b50 with the modified ray.
 // @fnv 0x00d26120
-void Obj::FUN_00d26120(Input* input, void* arg2, void* arg3) {
+// pdb: hkpSampledHeightFieldShape::castSphere | hkpSampledHeightFieldShape.obj | fnv360_0822_retail, objrun + bridge(hash|vtable) + skyrim(hash), high
+void Obj::hkpSampledHeightFieldShape_castSphere(Input* input, void* arg2, void* arg3) {
     float a = input->f30;
     RayData local = input->base;
 

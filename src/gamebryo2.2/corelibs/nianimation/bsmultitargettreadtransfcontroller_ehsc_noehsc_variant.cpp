@@ -11,7 +11,7 @@ struct FUN_00a35950_shell : public BSMultiTargetTreadTransfController
 extern int g_011f36e4;
 struct FUN_00a35e90_shell : public BSMultiTargetTreadTransfController
 {
-    char* FUN_00a35e90(unsigned short);
+    char* BSMultiTargetTreadTransfController_GetInterpolatorID(unsigned short);
 };
 struct FUN_00a35fc0_shell : BSMultiTargetTreadTransfController
 {
@@ -490,7 +490,7 @@ struct Controller112
     unsigned short count, field3a;
     Link112** links;
     unsigned short linkCount;
-    void FUN_00a35c00(float* time);
+    void BSMultiTargetTreadTransfController_Update(float* time);
 };
 
 struct ArrayCount
@@ -572,10 +572,11 @@ struct TargetA35
     unsigned short count;
     NodeA35** nodes;
     unsigned short nodeCount;
-    void FUN_00a35a80(unsigned short, unsigned short);
+    void BSMultiTargetTreadTransfController_AllocateStorage(unsigned short, unsigned short);
 };
 // @fnv 0x00a35a80
-void TargetA35::FUN_00a35a80(unsigned short n, unsigned short m)
+// pdb: BSMultiTargetTreadTransfController::AllocateStorage | BSMultiTargetTreadTransfController.obj | fnv360_0822_retail, call_seq + bridge(call_gap|objrun) + skyrim(call_gap), high
+void TargetA35::BSMultiTargetTreadTransfController_AllocateStorage(unsigned short n, unsigned short m)
 {
     count = n;
     nodeCount = m;

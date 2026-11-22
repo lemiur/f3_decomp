@@ -306,11 +306,12 @@ struct NiObjectBaseEq : NiObject
 
 struct TransformDataEqual : NiTransformData
 {
-    bool FUN_00a4e130(NiObject* pkObject);
+    bool NiTransformData_IsEqual(NiObject* pkObject);
 };
 
 // @fnv 0x00a4e130
-bool TransformDataEqual::FUN_00a4e130(NiObject* pkObject)
+// pdb: NiTransformData::IsEqual | NiTransformData.obj | fnv360_0822_retail, caller_sim + bridge(vtable|objrun) + skyrim(caller_sim), high
+bool TransformDataEqual::NiTransformData_IsEqual(NiObject* pkObject)
 {
     if (!((NiObjectBaseEq*)this)->IsSameAs(pkObject))
         return false;
@@ -417,7 +418,7 @@ class PSysData4e4 : public PSysRef4e4
     void FUN_00a4e3b0(int iA, int iB, void* pvSrc);
 };
 
-void __cdecl FUN_00a3d630(int iKind, void* pvData, void* pvExtra, unsigned int ItemUpdateArray, float fA, float fB, int* piOutA,
+void __cdecl NiAnimationKey_CopySequence(int iKind, void* pvData, void* pvExtra, unsigned int ItemUpdateArray, float fA, float fB, int* piOutA,
                           int* piOutB);
 
 struct FUN_00a4e410_shell
@@ -436,7 +437,7 @@ struct FUN_00a4e410_shell
     void* m_pvExtra1;
     void* m_pvExtra2;
 
-    void FUN_00a5d510(PSysData4e4** ppkData);
+    void NiObject_CreateDeepCopy(PSysData4e4** ppkData);
     void FUN_00a4e410(float fA, float fB, PSysPtr4e4<PSysData4e4>& spOut);
 };
 
@@ -444,7 +445,7 @@ struct FUN_00a4e410_shell
 void FUN_00a4e410_shell::FUN_00a4e410(float fA, float fB, PSysPtr4e4<PSysData4e4>& spOut)
 {
     PSysData4e4* pkData = 0;
-    FUN_00a5d510(&pkData);
+    NiObject_CreateDeepCopy(&pkData);
     PSysData4e4* pkResult = pkData;
     if (pkResult)
         pkResult->IncRefCount();
@@ -452,17 +453,17 @@ void FUN_00a4e410_shell::FUN_00a4e410(float fA, float fB, PSysPtr4e4<PSysData4e4
     int iOutB = 0;
     if (m_usCount0 > 0)
     {
-        FUN_00a3d630(2, m_pvData0, m_pvExtra0, m_usCount0, fA, fB, &iOutA, &iOutB);
+        NiAnimationKey_CopySequence(2, m_pvData0, m_pvExtra0, m_usCount0, fA, fB, &iOutA, &iOutB);
         pkResult->FUN_00a4e2e0(iOutA, iOutB, m_pvData0);
     }
     if (m_usCount1 > 0)
     {
-        FUN_00a3d630(1, m_pvData1, m_pvExtra1, m_usCount1, fA, fB, &iOutA, &iOutB);
+        NiAnimationKey_CopySequence(1, m_pvData1, m_pvExtra1, m_usCount1, fA, fB, &iOutA, &iOutB);
         pkResult->FUN_00a4e350(iOutA, iOutB, m_pvData1);
     }
     if (m_usCount2 > 0)
     {
-        FUN_00a3d630(0, m_pvData2, m_pvExtra2, m_usCount2, fA, fB, &iOutA, &iOutB);
+        NiAnimationKey_CopySequence(0, m_pvData2, m_pvExtra2, m_usCount2, fA, fB, &iOutA, &iOutB);
         pkResult->FUN_00a4e3b0(iOutA, iOutB, m_pvData2);
     }
     spOut = pkResult;
@@ -647,11 +648,12 @@ extern PositionSave g_011f3a68[];
 extern ScaleSave g_011f3a50[];
 struct TransformSaveQuery : NiTransformData
 {
-    void FUN_00a4e810(NiStream& stream);
+    void NiTransformData_SaveBinary(NiStream& stream);
 };
 // Saves the transform data's rotation, position and scale key counts and key arrays to the stream via the per-type save function tables.
 // @fnv 0x00a4e810
-void TransformSaveQuery::FUN_00a4e810(NiStream& stream)
+// pdb: NiTransformData::SaveBinary | NiTransformData.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun) + skyrim(objrun_open), high
+void TransformSaveQuery::NiTransformData_SaveBinary(NiStream& stream)
 {
     NiObject::SaveBinary(stream);
     unsigned int count = m_usNumRotKeys;
@@ -913,11 +915,12 @@ void __cdecl FUN_00a29680(const char* message);
 class TransformDataLoader : public NiTransformData
 {
   public:
-    void FUN_00a4e5d0(NiStream& stream);
+    void NiTransformData_LoadBinary(NiStream& stream);
 };
 // Reads rotation, position, and scale key data from a NiStream, creating and loading each key set via type-specific factory and load functions.
 // @fnv 0x00a4e5d0
-void TransformDataLoader::FUN_00a4e5d0(NiStream& stream)
+// pdb: NiTransformData::LoadBinary | NiTransformData.obj | fnv360_0822_retail, ustr + bridge(vtable|ustr) + skyrim(ustr), high
+void TransformDataLoader::NiTransformData_LoadBinary(NiStream& stream)
 {
     NiObject::LoadBinary(stream);
     unsigned int numKeys;

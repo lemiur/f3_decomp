@@ -849,7 +849,7 @@ public:
     void FUN_004eeae0(Q6bPoint* p);
     void FUN_004e86c0(Q6bPoint p);
     void FUN_00764ec0(int v);
-    void FUN_004e8670(int v);
+    void TESObjectREFR_SetObjectReference(int v);
 };
 int FUN_006b3860();
 
@@ -863,6 +863,6 @@ Q6b3e70::Q6b3e70(Q6bForm* form, int a, int b, int c, Q6bPoint pos, Q6bPoint rot)
     FUN_004e86c0(rot);
     Q6bData* d = form->Get2c();
     if (d) FUN_00764ec0(d->unk3c);
-    FUN_004e8670(FUN_006b3860());
+    TESObjectREFR_SetObjectReference(FUN_006b3860());
 }
 }   // namespace f3m_006b3e70

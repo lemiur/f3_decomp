@@ -16,7 +16,7 @@ public:
 class hkParentedNodeU {
 public:
     hkParentedNodeU* getParent() const;
-    hkBool FUN_009b04e0(const hkParentedNodeU* node) const;
+    hkBool hkClass_isSuperClass(const hkParentedNodeU* node) const;
     int unk00;
     hkParentedNodeU* m_parent;
 };
@@ -26,7 +26,8 @@ __declspec(noinline) hkParentedNodeU* hkParentedNodeU::getParent() const
     return m_parent;
 }
 
-hkBool hkParentedNodeU::FUN_009b04e0(const hkParentedNodeU* node) const
+// pdb: hkClass::isSuperClass | hkClass.obj | fnv360_0822_retail, call_dedup + bridge(call_dedup|call_dedup) + skyrim(call_gap), high
+hkBool hkParentedNodeU::hkClass_isSuperClass(const hkParentedNodeU* node) const
 {
     while (node)
     {
@@ -50,9 +51,10 @@ class CallbackRegistry {
 public:
     unsigned int unk00, unk04;
     CallbackTable table;
-    CallbackRecord* FUN_009b01b0(void* context, const char* name);
+    CallbackRecord* hkTypeInfoRegistry_finishLoadedObject(void* context, const char* name);
 };
-CallbackRecord* CallbackRegistry::FUN_009b01b0(void* context, const char* name) {
+// pdb: hkTypeInfoRegistry::finishLoadedObject | hkBuiltinTypeRegistry.obj | fnv360_0721_beta, objrun + skyrim(objrun_open), high
+CallbackRecord* CallbackRegistry::hkTypeInfoRegistry_finishLoadedObject(void* context, const char* name) {
     CallbackRecord* record = table.FUN_009b10f0(name, 0);
     if (record) {
         if (record->callback)
@@ -66,11 +68,11 @@ CallbackRecord* CallbackRegistry::FUN_009b01b0(void* context, const char* name) 
 namespace f3m_009b6e20 {
 namespace f3m_009b6e20 {
 
-void __cdecl FUN_009b6dd0();
+void __cdecl hkpBvTreeStreamAgent_createBvTreeShapeAgent();
 void __cdecl FUN_009b59a0();
 void __cdecl FUN_009b70d0();
 void __cdecl FUN_009b7110();
-void __cdecl FUN_009b5e60();
+void __cdecl hkpBvTreeStreamAgent_createShapeBvAgent();
 void __cdecl FUN_009ba3c0();
 void __cdecl FUN_009ba1b0();
 void __cdecl FUN_009b9ff0();
@@ -96,7 +98,7 @@ using namespace f3m_009b6e20;
 void __cdecl FUN_009b6e20(CollisionDispatcher* dispatcher)
 {
     AgentFuncs af;
-    af.m_createFunc = FUN_009b6dd0;
+    af.m_createFunc = hkpBvTreeStreamAgent_createBvTreeShapeAgent;
     af.m_getPenetrationsFunc = FUN_009b59a0;
     af.m_getClosestPointsFunc = FUN_009b70d0;
     af.m_linearCastFunc = FUN_009b7110;
@@ -104,7 +106,7 @@ void __cdecl FUN_009b6e20(CollisionDispatcher* dispatcher)
     af.m_isPredictive = true;
     dispatcher->FUN_00985b30(af, 9, 1);
 
-    af.m_createFunc = FUN_009b5e60;
+    af.m_createFunc = hkpBvTreeStreamAgent_createShapeBvAgent;
     af.m_getPenetrationsFunc = FUN_009ba3c0;
     af.m_getClosestPointsFunc = FUN_009ba1b0;
     af.m_linearCastFunc = FUN_009b9ff0;
@@ -137,11 +139,12 @@ class BvTreeAgent
 public:
     char pad[0x30];
     PtrArray m_sectors;
-    void FUN_009b5da0(Collector* collector);
+    void hkpBvTreeStreamAgent_calcContentStatistics(Collector* collector);
 };
 }
 using namespace f3m_009b5da0;
-void BvTreeAgent::FUN_009b5da0(Collector* collector)
+// pdb: hkpBvTreeStreamAgent::calcContentStatistics | hkpBvTreeStreamAgent.obj | fnv360_0822_retail, ustr_rel + bridge(ustr_rel|vtable), high
+void BvTreeAgent::hkpBvTreeStreamAgent_calcContentStatistics(Collector* collector)
 {
     collector->BeginObject("BvTreeAgt3", 8, this);
     PtrArray* arr = &m_sectors;
@@ -355,10 +358,11 @@ public:
     virtual void unk14();
     virtual void unk18();
     virtual void ProcessItem(void* item, bool flag);
-    void FUN_009b0100(ItemSource* src);
+    void hkDynamicClassNameRegistry_merge(ItemSource* src);
 };
 
-void FUN_009b0100_cls::FUN_009b0100(ItemSource* src)
+// pdb: hkDynamicClassNameRegistry::merge | hkBuiltinTypeRegistry.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void FUN_009b0100_cls::hkDynamicClassNameRegistry_merge(ItemSource* src)
 {
     ArrRaw arr;
     arr.data = 0;
@@ -485,7 +489,7 @@ FUN_009b30a0::~FUN_009b30a0()
 
 // @f3 0x009affd0 (community match, verified in this file)
 namespace f3m_009affd0 {
-// FUN_009affd0 - __thiscall, one stack parameter (the array), callee pops 4.
+// hkDynamicClassNameRegistry_getClasses - __thiscall, one stack parameter (the array), callee pops 4.
 //
 // Iterates an inner iterator object living at this+0xC.  For a valid element
 // the value is appended to the array, then the iterator advances and is
@@ -513,10 +517,11 @@ public:
     int m_unk04;
     int m_unk08;
     hkInnerIterU m_iter;
-    void FUN_009affd0(hkArrayU* values);
+    void hkDynamicClassNameRegistry_getClasses(hkArrayU* values);
 };
 
-void hkOwnerU::FUN_009affd0(hkArrayU* values)
+// pdb: hkDynamicClassNameRegistry::getClasses | hkBuiltinTypeRegistry.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void hkOwnerU::hkDynamicClassNameRegistry_getClasses(hkArrayU* values)
 {
     bool hasValue;
     int iter = m_iter.FUN_009b0dc0();
@@ -872,7 +877,8 @@ FUN_009ae9d0::~FUN_009ae9d0() { if (p) { p->FUN_009316f0(); p = 0; } }
 // @f3 0x009afc10 (community match, verified in this file)
 namespace f3m_009afc10 {
 namespace f3m_009afc10 { extern unsigned long DAT_010f3170; extern void* (__stdcall* DAT_00d9b080)(unsigned long); struct R { char pad[4]; unsigned short w; void FUN_00a28d60(int a); }; struct T { R* FUN_008f6d30(int a, int b); }; }
-void __cdecl FUN_009afc10() { f3m_009afc10::T* t = (f3m_009afc10::T*)f3m_009afc10::DAT_00d9b080(f3m_009afc10::DAT_010f3170); f3m_009afc10::R* r = t->FUN_008f6d30(0x24, 0x15); r->w = 0x24; r->FUN_00a28d60(-1); }
+// pdb: hkSocketCreate | hkSocket.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc + skyrim(objrun), high
+void __cdecl hkSocketCreate() { f3m_009afc10::T* t = (f3m_009afc10::T*)f3m_009afc10::DAT_00d9b080(f3m_009afc10::DAT_010f3170); f3m_009afc10::R* r = t->FUN_008f6d30(0x24, 0x15); r->w = 0x24; r->FUN_00a28d60(-1); }
 }   // namespace f3m_009afc10
 
 // @f3 0x009b8200 (community match, verified in this file)
@@ -1014,8 +1020,9 @@ void Holder_9afec0::FUN_009afec0() {
 // @f3 0x009aea00 (community match, verified in this file)
 namespace f3m_009aea00 {
 namespace f3m_009aea00 { struct Arr { int* data; unsigned int size; unsigned int cap; }; void __cdecl FUN_00901f10(Arr* a, int n); }
-struct O9aea00 { char pad[0x18]; int f18; void FUN_009aea00(f3m_009aea00::Arr* a); };
-void O9aea00::FUN_009aea00(f3m_009aea00::Arr* a) { using namespace f3m_009aea00; if (a->size == (a->cap & 0x3fffffff)) FUN_00901f10(a, 4); a->data[a->size] = f18; a->size++; }
+struct O9aea00 { char pad[0x18]; int f18; void hkpUnaryAction_getEntities(f3m_009aea00::Arr* a); };
+// pdb: hkpUnaryAction::getEntities | hkpUnaryAction.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void O9aea00::hkpUnaryAction_getEntities(f3m_009aea00::Arr* a) { using namespace f3m_009aea00; if (a->size == (a->cap & 0x3fffffff)) FUN_00901f10(a, 4); a->data[a->size] = f18; a->size++; }
 }   // namespace f3m_009aea00
 
 // @f3 0x009a21f0 (community match, verified in this file)
@@ -1049,7 +1056,8 @@ O009b0290* O009b0290::FUN_009b0290(unsigned int flags) { m.FUN_009b1160(); vt = 
 // @f3 0x009b5e60 (community match, verified in this file)
 namespace f3m_009b5e60 {
 namespace f3m_009b5e60 { extern unsigned long DAT_010f3170; extern void* (__stdcall* DAT_00d9b080)(unsigned long); struct R { char pad[4]; unsigned short w; void* FUN_009b5e00(int a, int b, int c, int d); }; struct T { R* FUN_008f6d30(int a, int b); }; }
-void* __cdecl FUN_009b5e60(int a, int b, int c, int d) { f3m_009b5e60::T* t = (f3m_009b5e60::T*)f3m_009b5e60::DAT_00d9b080(f3m_009b5e60::DAT_010f3170); f3m_009b5e60::R* r = t->FUN_008f6d30(0x40, 0x1f); r->w = 0x40; return r->FUN_009b5e00(a, b, c, d); }
+// pdb: hkpBvTreeStreamAgent::createShapeBvAgent | hkpBvTreeStreamAgent.obj | fnv360_0822_debug, objrun + bridge(caller_sim|caller_sim) + skyrim(objrun), high
+void* __cdecl hkpBvTreeStreamAgent_createShapeBvAgent(int a, int b, int c, int d) { f3m_009b5e60::T* t = (f3m_009b5e60::T*)f3m_009b5e60::DAT_00d9b080(f3m_009b5e60::DAT_010f3170); f3m_009b5e60::R* r = t->FUN_008f6d30(0x40, 0x1f); r->w = 0x40; return r->FUN_009b5e00(a, b, c, d); }
 }   // namespace f3m_009b5e60
 
 // @f3 0x009baee0 (community match, verified in this file)
@@ -1061,14 +1069,15 @@ void* __cdecl FUN_009baee0(int a, int b, int c, int d) { f3m_009baee0::T* t = (f
 // @f3 0x009bf0c0 (community match, verified in this file)
 namespace f3m_009bf0c0 {
 namespace f3m_009bf0c0 { extern unsigned long DAT_010f3170; extern void* (__stdcall* DAT_00d9b080)(unsigned long); struct R { char pad[4]; unsigned short w; void* FUN_009bf070(int a, int b, int c, int d); }; struct T { R* FUN_008f6d30(int a, int b); }; }
-void* __cdecl FUN_009bf0c0(int a, int b, int c, int d) { f3m_009bf0c0::T* t = (f3m_009bf0c0::T*)f3m_009bf0c0::DAT_00d9b080(f3m_009bf0c0::DAT_010f3170); f3m_009bf0c0::R* r = t->FUN_008f6d30(0x1c, 0x1f); r->w = 0x1c; return r->FUN_009bf070(a, b, c, d); }
+// pdb: hkpListAgent::createListBAgent | hkpListAgent.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc + skyrim(objrun), high
+void* __cdecl hkpListAgent_createListBAgent(int a, int b, int c, int d) { f3m_009bf0c0::T* t = (f3m_009bf0c0::T*)f3m_009bf0c0::DAT_00d9b080(f3m_009bf0c0::DAT_010f3170); f3m_009bf0c0::R* r = t->FUN_008f6d30(0x1c, 0x1f); r->w = 0x1c; return r->FUN_009bf070(a, b, c, d); }
 }   // namespace f3m_009bf0c0
 
 // @f3 0x009b6eb0 (community match, verified in this file)
 namespace f3m_009b6eb0 {
 namespace task0798 {
-void FUN_009b6dd0(); void FUN_009b59a0(); void FUN_009b70d0(); void FUN_009b7110();
-void FUN_009b5e60(); void FUN_009ba3c0(); void FUN_009ba1b0(); void FUN_009b9ff0();
+void hkpBvTreeStreamAgent_createBvTreeShapeAgent(); void FUN_009b59a0(); void FUN_009b70d0(); void FUN_009b7110();
+void hkpBvTreeStreamAgent_createShapeBvAgent(); void FUN_009ba3c0(); void FUN_009ba1b0(); void FUN_009b9ff0();
 struct AgentFunctions {
  void (*create)(); void (*getPenetrations)(); void (*getClosestPoints)(); void (*linearCast)();
  bool flipped; bool predictive;
@@ -1076,14 +1085,14 @@ struct AgentFunctions {
 struct Registry { void FUN_00985b30(AgentFunctions*, int, int); };
 void FUN_009b6eb0(Registry* registry) {
  AgentFunctions entry;
- entry.create=FUN_009b6dd0;
+ entry.create=hkpBvTreeStreamAgent_createBvTreeShapeAgent;
  entry.getPenetrations=FUN_009b59a0;
  entry.getClosestPoints=FUN_009b70d0;
  entry.linearCast=FUN_009b7110;
  entry.flipped=true;
  entry.predictive=true;
  registry->FUN_00985b30(&entry,9,23);
- entry.create=FUN_009b5e60;
+ entry.create=hkpBvTreeStreamAgent_createShapeBvAgent;
  entry.getPenetrations=FUN_009ba3c0;
  entry.getClosestPoints=FUN_009ba1b0;
  entry.linearCast=FUN_009b9ff0;
@@ -1150,15 +1159,15 @@ int O_9a1f60::FUN_009a1f60(Tgt_9a1f60* t) {
 // @f3 0x009bbcc0 (community match, verified in this file)
 namespace f3m_009bbcc0 {
 namespace task0796 {
-void FUN_009baf20();
-void FUN_009bbc70();
+void hkpHeightFieldAgent_staticGetPenetrations();
+void hkpHeightFieldAgent_createHeightFieldAAgent();
 void FUN_009bc450();
 void FUN_009bc490();
 void FUN_009bc4d0();
 void FUN_009baee0();
 
-void FUN_009bb290();
-void FUN_009bb7d0();
+void hkpHeightFieldAgent_staticGetClosestPoints();
+void hkpHeightFieldAgent_staticLinearCast();
 struct Conversion
 {
     void (*convert)();
@@ -1176,7 +1185,7 @@ struct Registry
 void FUN_009bbcc0(Registry* registry)
 {
     Conversion conversionEntry;
-    conversionEntry.convert = FUN_009bbc70;
+    conversionEntry.convert = hkpHeightFieldAgent_createHeightFieldAAgent;
     conversionEntry.create = FUN_009bc450;
     conversionEntry.copy = FUN_009bc490;
     conversionEntry.destroy = FUN_009bc4d0;
@@ -1184,9 +1193,9 @@ void FUN_009bbcc0(Registry* registry)
     conversionEntry.supported = true;
     registry->FUN_00985b30(&conversionEntry, 24, 25);
     conversionEntry.convert = FUN_009baee0;
-    conversionEntry.create = (void (*)())FUN_009baf20;
-    conversionEntry.copy = FUN_009bb290;
-    conversionEntry.destroy = FUN_009bb7d0;
+    conversionEntry.create = (void (*)())hkpHeightFieldAgent_staticGetPenetrations;
+    conversionEntry.copy = hkpHeightFieldAgent_staticGetClosestPoints;
+    conversionEntry.destroy = hkpHeightFieldAgent_staticLinearCast;
     conversionEntry.enabled = false;
     conversionEntry.supported = true;
     registry->FUN_00985b30(&conversionEntry, 25, 24);
@@ -1305,7 +1314,8 @@ struct Derived : Base {
     virtual ~Derived();
 };
 }
-n9bf130::Base* FUN_009bf130(int a, int b, int c, int d) {
+// pdb: hkpListAgent::createListAAgent | hkpListAgent.obj | fnv360_0822_retail, uvref + bridge(uvref|uvref) + skyrim(uvref), high
+n9bf130::Base* hkpListAgent_createListAAgent(int a, int b, int c, int d) {
     return new n9bf130::Derived(b, a, c, d);
 }
 
@@ -1336,11 +1346,11 @@ namespace f3m_009b5b80 {
 namespace collision_agent_registration_009b5b80 {
 void FUN_009b59a0();
 void FUN_009b59e0();
-void FUN_009b5e60();
-void FUN_009b6dd0();
+void hkpBvTreeStreamAgent_createShapeBvAgent();
+void hkpBvTreeStreamAgent_createBvTreeShapeAgent();
 void FUN_009b70d0();
-void FUN_009b7950();
-void FUN_009b7b40();
+void hkpMoppAgent_staticLinearCast();
+void hkpMoppAgent_createBvBvAgent();
 void FUN_009ba1b0();
 void FUN_009ba3c0();
 struct AgentFunctions {
@@ -1354,22 +1364,22 @@ struct AgentFunctions {
 struct Dispatcher { void FUN_00985b30(const AgentFunctions&,int,int); };
 void FUN_009b5b80(Dispatcher* dispatcher) {
     AgentFunctions functions;
-    functions.create=FUN_009b6dd0;
+    functions.create=hkpBvTreeStreamAgent_createBvTreeShapeAgent;
     functions.penetrations=FUN_009b59a0;
     functions.closestPoints=FUN_009b70d0;
     functions.linearCast=FUN_009b59e0;
     functions.flipped=true;functions.predictive=true;
     dispatcher->FUN_00985b30(functions,11,1);
-    functions.create=FUN_009b5e60;
+    functions.create=hkpBvTreeStreamAgent_createShapeBvAgent;
     functions.penetrations=FUN_009ba3c0;
     functions.closestPoints=FUN_009ba1b0;
-    functions.linearCast=FUN_009b7950;
+    functions.linearCast=hkpMoppAgent_staticLinearCast;
     functions.flipped=false;functions.predictive=true;
     dispatcher->FUN_00985b30(functions,1,11);
-    functions.create=FUN_009b7b40;
+    functions.create=hkpMoppAgent_createBvBvAgent;
     functions.penetrations=FUN_009ba3c0;
     functions.closestPoints=FUN_009ba1b0;
-    functions.linearCast=FUN_009b7950;
+    functions.linearCast=hkpMoppAgent_staticLinearCast;
     functions.flipped=false;functions.predictive=true;
     dispatcher->FUN_00985b30(functions,11,11);
 }
@@ -1381,10 +1391,10 @@ namespace f3m_009be540 {
 namespace collision_agent_registration_009be540 {
 void FUN_009bd790();
 void FUN_009bd940();
-void FUN_009bda50();
+void hkpConvexListAgent_staticLinearCast();
 void FUN_009bdb80();
-void FUN_009be250();
-void FUN_009be380();
+void hkpConvexListAgent_createConvexConvexListAgent();
+void hkpConvexListAgent_createConvexListConvexListAgent();
 void FUN_009be820();
 void FUN_009be860();
 void FUN_009be8a0();
@@ -1397,7 +1407,8 @@ struct AgentFunctions {
     bool predictive;
 };
 struct Dispatcher { void FUN_00985b30(const AgentFunctions&,int,int); };
-void FUN_009be540(Dispatcher* dispatcher) {
+// pdb: hkpConvexListAgent::registerAgent | hkpConvexListAgent.obj | fnv360_0822_retail, objrun_sim + bridge(caller_sim|objrun) + skyrim(caller_sim), high
+void hkpConvexListAgent_registerAgent(Dispatcher* dispatcher) {
     AgentFunctions functions;
     functions.create=FUN_009bdb80;
     functions.penetrations=FUN_009be820;
@@ -1405,16 +1416,16 @@ void FUN_009be540(Dispatcher* dispatcher) {
     functions.linearCast=FUN_009be8a0;
     functions.flipped=true;functions.predictive=true;
     dispatcher->FUN_00985b30(functions,21,1);
-    functions.create=FUN_009be250;
+    functions.create=hkpConvexListAgent_createConvexConvexListAgent;
     functions.penetrations=FUN_009bd940;
     functions.closestPoints=FUN_009bd790;
-    functions.linearCast=FUN_009bda50;
+    functions.linearCast=hkpConvexListAgent_staticLinearCast;
     functions.flipped=false;functions.predictive=true;
     dispatcher->FUN_00985b30(functions,1,21);
-    functions.create=FUN_009be380;
+    functions.create=hkpConvexListAgent_createConvexListConvexListAgent;
     functions.penetrations=FUN_009bd940;
     functions.closestPoints=FUN_009bd790;
-    functions.linearCast=FUN_009bda50;
+    functions.linearCast=hkpConvexListAgent_staticLinearCast;
     functions.flipped=false;functions.predictive=true;
     dispatcher->FUN_00985b30(functions,21,21);
 }
@@ -1440,7 +1451,8 @@ struct hkpHeightFieldAgent {
 template<class Agent> struct hkpSymmetricAgent : Agent {
     __forceinline hkpSymmetricAgent(const CollisionBody& first,const CollisionBody& second,const CollisionInput& input,ContactManager* manager) throw() : Agent(second,first,input,manager) {}
 };
-hkpSymmetricAgent<hkpHeightFieldAgent>* FUN_009bbc70(const CollisionBody& first,const CollisionBody& second,const CollisionInput& input,ContactManager* manager) {
+// pdb: hkpHeightFieldAgent::createHeightFieldAAgent | hkpHeightFieldAgent.obj | fnv360_0822_retail, uvref + bridge(uvref|uvref) + skyrim(uvref), high
+hkpSymmetricAgent<hkpHeightFieldAgent>* hkpHeightFieldAgent_createHeightFieldAAgent(const CollisionBody& first,const CollisionBody& second,const CollisionInput& input,ContactManager* manager) {
     MemoryManager* allocator=static_cast<MemoryManager*>(DAT_00d9b080(DAT_010f3170));
     hkpSymmetricAgent<hkpHeightFieldAgent>* agent=static_cast<hkpSymmetricAgent<hkpHeightFieldAgent>*>(allocator->FUN_008f6d30(sizeof(hkpSymmetricAgent<hkpHeightFieldAgent>),31));
     agent->memorySizeAndFlags=sizeof(hkpSymmetricAgent<hkpHeightFieldAgent>);
@@ -1658,7 +1670,8 @@ struct Agent {
  virtual void End();
 };
 void __cdecl FUN_00a26d90(int, int, Agent*);
-void __cdecl FUN_009bab20(int first, int second, int third, Agent* agent) {
+// pdb: hkListAgent3::calcStatistics | hkpListAgent3.obj | fnv360_0822_retail, ustr + bridge(ustr|ustr) + skyrim(ustr), high
+void __cdecl hkListAgent3_calcStatistics(int first, int second, int third, Agent* agent) {
  agent->Begin("hkListAgent3");
  FUN_00a26d90(second, third, agent);
  agent->End();
@@ -1898,7 +1911,8 @@ struct Item9bca80 {
 
 void __cdecl FUN_009cc140(int a, int b, Item9bca80* item, Vec9bca80* out);
 
-void __cdecl FUN_009bca80(int a, int b, Item9bca80* item, Vec9bca80* out) {
+// pdb: hkConvexListAgent3::sepNormal | hkpConvexListAgent3.obj | fnv360_0822_retail, objrun + bridge(caller_sim|caller_sim) + skyrim(caller_sim), high
+void __cdecl hkConvexListAgent3_sepNormal(int a, int b, Item9bca80* item, Vec9bca80* out) {
     if (item->unk0b & 0x20) {
         FUN_009cc140(a, b, item, out);
         return;
@@ -2019,7 +2033,8 @@ public:
     virtual void VFunc04();
 };
 
-hkpCollisionAgent* __cdecl FUN_009b6dd0(const hkpCdBody& bodyA, const hkpCdBody& bodyB, const hkpCollisionInput& input, hkpContactMgr* mgr)
+// pdb: hkpBvTreeStreamAgent::createBvTreeShapeAgent | hkpBvTreeStreamAgent.obj | fnv360_0822_debug, objrun + bridge(caller_sim|caller_sim) + skyrim(caller_sim), high
+hkpCollisionAgent* __cdecl hkpBvTreeStreamAgent_createBvTreeShapeAgent(const hkpCdBody& bodyA, const hkpCdBody& bodyB, const hkpCollisionInput& input, hkpContactMgr* mgr)
 {
     return new hkpSymmetricAgent<hkpBvTreeStreamAgent>(bodyA, bodyB, input, mgr);
 }
@@ -2058,7 +2073,8 @@ static __forceinline Obj* NewObj(unsigned int size)
     return o;
 }
 
-Obj* FUN_009be380(int a1, int a2, Node* a3, int a4)
+// pdb: hkpConvexListAgent::createConvexListConvexListAgent | hkpConvexListAgent.obj | fnv360_0822_debug, objrun + bridge(caller_sim|caller_sim) + skyrim(caller_sim), high
+Obj* hkpConvexListAgent_createConvexListConvexListAgent(int a1, int a2, Node* a3, int a4)
 {
     if (a4 != 0) {
     switch (a3->unkC->Classify(a1, a2, (Sel*)a3)) {
@@ -2142,7 +2158,8 @@ static void* Mem(unsigned int size)
     return al->FUN_008f6d30(size, 0x1f);
 }
 
-void* FUN_009be250(int a1, int a2, Holder* a3, int a4)
+// pdb: hkpConvexListAgent::createConvexConvexListAgent | hkpConvexListAgent.obj | fnv360_0822_debug, objrun + bridge(caller_sim|caller_sim) + skyrim(caller_sim), high
+void* hkpConvexListAgent_createConvexConvexListAgent(int a1, int a2, Holder* a3, int a4)
 {
     if (a4 != 0) {
         switch (a3->unk0C->v3(a2, a1, (int)a3)) {
@@ -2416,12 +2433,12 @@ struct hkDynamicClassNameRegistry : hkReferencedObject {
     const char* version;
     StringMap classes;
     __forceinline hkDynamicClassNameRegistry() throw() : version(0),classes(FinishFlag(false)) {}
-    void FUN_009b0100(const hkClass* const*) throw();
+    void hkDynamicClassNameRegistry_merge(const hkClass* const*) throw();
 };
 struct ValidatedClassNameRegistry : hkDynamicClassNameRegistry {
     ValidatedClassNameRegistry(const hkClass* const*) throw();
 };
-ValidatedClassNameRegistry::ValidatedClassNameRegistry(const hkClass* const* records) throw() { if(records)FUN_009b0100(records); }
+ValidatedClassNameRegistry::ValidatedClassNameRegistry(const hkClass* const* records) throw() { if(records)hkDynamicClassNameRegistry_merge(records); }
 }
 }   // namespace f3m_009b1920
 
@@ -2650,8 +2667,9 @@ void Cls_9120::FUN_009a9120()
 // @f3 0x009add30 (community match, verified in this file)
 namespace f3m_009add30 {
 struct VectorB9add30 { float x,y,z,w; void set(const VectorB9add30& v){x=v.x;y=v.y;z=v.z;w=v.w;} };
-struct OwnerB9add30 { int unk00,unk04,unk08,unk0c; int count; int unk14,unk18,unk1c; VectorB9add30 data[1]; VectorB9add30* FUN_009add30(VectorB9add30* out); };
-VectorB9add30* OwnerB9add30::FUN_009add30(VectorB9add30* out){for(int i=0;i<count;++i) out[i].set(data[i]); return out;}
+struct OwnerB9add30 { int unk00,unk04,unk08,unk0c; int count; int unk14,unk18,unk1c; VectorB9add30 data[1]; VectorB9add30* hkpMultiSphereShape_getCollisionSpheresImpl(VectorB9add30* out); };
+// pdb: hkpMultiSphereShape::getCollisionSpheresImpl | hkpMultiSphereShape.obj | fnv360_0822_retail, objrun + skyrim(objrun), high
+VectorB9add30* OwnerB9add30::hkpMultiSphereShape_getCollisionSpheresImpl(VectorB9add30* out){for(int i=0;i<count;++i) out[i].set(data[i]); return out;}
 }   // namespace f3m_009add30
 
 // @f3 0x009a1c20 (community match, verified in this file)
@@ -2896,10 +2914,11 @@ public:
     int unk08;
     SlotEntry** m_slots;
     void ResetSlots();
-    void FUN_009b0d50(PtrArray* entries);
+    void hkStaticClassNameRegistry_getClasses(PtrArray* entries);
 };
 
-void FUN_00db7ae0_cls::FUN_009b0d50(PtrArray* entries)
+// pdb: hkStaticClassNameRegistry::getClasses | hkStaticClassNameRegistry.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void FUN_00db7ae0_cls::hkStaticClassNameRegistry_getClasses(PtrArray* entries)
 {
     ResetSlots();
     for (int i = 0; m_slots[i] != 0; ++i)
@@ -3094,7 +3113,8 @@ struct Meta {unsigned unk00,unk04,unk08,unk0c;unsigned short unk10,offset;};
 struct Registry {Meta* FUN_009b06c0(const char*);};
 extern Registry DAT_0116c25c;
 extern const char DAT_00e73dc8[],DAT_00e3c0f0[];
-void FUN_009b2c30(Node* node,Map* visited){
+// pdb: `anonymous namespace'::updateClassVersion1Inplace | hkClassUpdate.obj | fnv360_0822_retail, ustr + bridge(ustr|ustr) + skyrim(ustr), high
+void updateClassVersion1Inplace(Node* node,Map* visited){
  unsigned flags=visited->FUN_009227d0(node,0);
  if(!(flags&1)){
   visited->FUN_00922710(node,flags|1);
@@ -3111,9 +3131,9 @@ void FUN_009b2c30(Node* node,Map* visited){
   *reinterpret_cast<int*>(reinterpret_cast<char*>(ancestor)+offset)=0;
   for(int i=0;i<node->FUN_009b06a0();++i){
    Member* member=node->FUN_009b06b0(i);
-   if(member->type)FUN_009b2c30(member->FUN_0093d890(),visited);
+   if(member->type)updateClassVersion1Inplace(member->FUN_0093d890(),visited);
   }
-  if(node->FUN_009b04b0())FUN_009b2c30(node->FUN_009b04b0(),visited);
+  if(node->FUN_009b04b0())updateClassVersion1Inplace(node->FUN_009b04b0(),visited);
  }
 }
 }
@@ -3172,8 +3192,8 @@ void* FUN_009bf500::DeleteThis(int flag) throw()
 
 // @f3 0x009b1250 (community match, verified in this file)
 namespace f3m_009b1250 {
-int FUN_009232c0(int, int);
-static __declspec(noinline) int FUN_009b1250(int a0, int a1) { return FUN_009232c0(a0, a1) == 0; }
+int hkString_strCmp(int, int);
+static __declspec(noinline) int FUN_009b1250(int a0, int a1) { return hkString_strCmp(a0, a1) == 0; }
 volatile int g_in; volatile int g_in2; volatile int g_out;
 void caller_of_FUN_009b1250() { g_out = FUN_009b1250(g_in, g_in2); }
 }   // namespace f3m_009b1250
@@ -3190,7 +3210,8 @@ FUN_009a0ef0::FUN_009a0ef0():zero(0),one(1){}
 // @f3 0x009b7b40 (community match, verified in this file)
 namespace f3m_009b7b40 {
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long);
-namespace Factory427{extern unsigned long DAT_010f3170;extern int DAT_00e7eb2c;struct Heap{void*FUN_008f6d30(unsigned int,int);};struct Priority{unsigned int unk00,unk04,unk08,unk0c,unk10,unk14,unk18,unk1c,unk20;int value;};struct Entry{unsigned int unk00,unk04,unk08,unk0c;Priority*priority;};struct FUN_009b7930{void*vtable;unsigned short memory,refs;unsigned int unk08,unk0c,unk10,unk14,unk18,unk1c,unk20,unk24,unk28,unk2c,unk30,unk34,unk38,unk3c;FUN_009b7930(void*)throw();static void*operator new(unsigned int size){Heap*heap=(Heap*)TlsGetValue(DAT_010f3170);FUN_009b7930*memory=(FUN_009b7930*)heap->FUN_008f6d30(size,31);memory->memory=(unsigned short)size;return memory;}};struct Derived:FUN_009b7930{Derived(void*context):FUN_009b7930(context){vtable=&DAT_00e7eb2c;}};FUN_009b7930*__cdecl FUN_009b7b40(Entry*const*a,Entry*const*b,void*unused,void*context){if((*a)->priority->value<(*b)->priority->value)return new FUN_009b7930(context);return new Derived(context);}}
+// pdb: hkpMoppAgent::createBvBvAgent | hkpMoppAgent.obj | fnv360_0822_retail, uvref + bridge(uvref|uvref) + skyrim(uvref), high
+namespace Factory427{extern unsigned long DAT_010f3170;extern int DAT_00e7eb2c;struct Heap{void*FUN_008f6d30(unsigned int,int);};struct Priority{unsigned int unk00,unk04,unk08,unk0c,unk10,unk14,unk18,unk1c,unk20;int value;};struct Entry{unsigned int unk00,unk04,unk08,unk0c;Priority*priority;};struct FUN_009b7930{void*vtable;unsigned short memory,refs;unsigned int unk08,unk0c,unk10,unk14,unk18,unk1c,unk20,unk24,unk28,unk2c,unk30,unk34,unk38,unk3c;FUN_009b7930(void*)throw();static void*operator new(unsigned int size){Heap*heap=(Heap*)TlsGetValue(DAT_010f3170);FUN_009b7930*memory=(FUN_009b7930*)heap->FUN_008f6d30(size,31);memory->memory=(unsigned short)size;return memory;}};struct Derived:FUN_009b7930{Derived(void*context):FUN_009b7930(context){vtable=&DAT_00e7eb2c;}};FUN_009b7930*__cdecl hkpMoppAgent_createBvBvAgent(Entry*const*a,Entry*const*b,void*unused,void*context){if((*a)->priority->value<(*b)->priority->value)return new FUN_009b7930(context);return new Derived(context);}}
 }   // namespace f3m_009b7b40
 
 // @f3 0x009a7ea0 (community match, verified in this file)
@@ -3300,13 +3321,13 @@ Vector first,second;};static __declspec(noinline) float FUN_009a9b30(const Owner
 // @f3 0x009b1330 (community match, verified in this file)
 namespace f3m_009b1330 {
 namespace w9b1330 {
-int __cdecl FUN_009232c0(const char* a, const char* b);
+int __cdecl hkString_strCmp(const char* a, const char* b);
 struct Item { virtual void v00(); virtual void v01(); virtual void v02(); virtual const char* GetName(); };
 struct ItemArray { Item** data; int count; };
 static __declspec(noinline) Item* FUN_009b1330(const ItemArray& items, const char* name) {
     for (int i = items.count - 1; i >= 0; i--) {
         const char* itemName = items.data[i]->GetName();
-        if (FUN_009232c0(itemName, name) == 0) return items.data[i];
+        if (hkString_strCmp(itemName, name) == 0) return items.data[i];
     }
     return 0;
 }
@@ -3321,8 +3342,9 @@ struct C9bTarget {virtual void v0();virtual void v4();virtual void v8();virtual 
 struct C9bHandle {C9bTarget* object;};
 struct C9bTask {int a;C9bHandle* handle;int unk08;unsigned result;int c;void* owner;int d;int unk1c; };
 void __cdecl FUN_00a2b420(void*,C9bTask*);
-struct C9bOwner {int unk00;int unk04;void* owner;int unk0c;C9bVector first,second;int task;void FUN_009b5d30(int,C9bHandle*,int,int);};
-void C9bOwner::FUN_009b5d30(int a,C9bHandle* handle,int c,int d) {
+struct C9bOwner {int unk00;int unk04;void* owner;int unk0c;C9bVector first,second;int task;void hkpBvTreeStreamAgent_updateShapeCollectionFilter(int,C9bHandle*,int,int);};
+// pdb: hkpBvTreeStreamAgent::updateShapeCollectionFilter | hkpBvTreeStreamAgent.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void C9bOwner::hkpBvTreeStreamAgent_updateShapeCollectionFilter(int a,C9bHandle* handle,int c,int d) {
     first.Set(0.0f,0.0f,0.0f,0.0f);
     second.Set(0.0f,0.0f,0.0f,0.0f);
     unsigned result=handle->object->Get();
@@ -3521,7 +3543,8 @@ void __cdecl FUN_00901f10(PairArray* a, int elemSize);
 struct Reg { char pad[0x24]; virtual void vfn00(); virtual void vfn04(); virtual void vfn08(); virtual void vfn0c(); virtual void vfn10(); virtual void vfn14(); virtual void vfn18(); virtual void vfn1c(); virtual int vfn20(); };
 struct Ctx { Reg* FUN_009ee790(); void FUN_009ee740(const char* s, unsigned int n); };
 extern unsigned int __cdecl FUN_009233f0(const char* s);
-static __declspec(noinline) int FUN_009b3360(int a0, int a1, int a2, PairArray* arr, const char* name, Ctx* ctx, unsigned int id) {
+// pdb: saveCstring | hkObjectCopier.obj | fnv360_0822_retail, call_gap + bridge(call_gap|objrun) + skyrim(call_gap), high
+static __declspec(noinline) int saveCstring(int a0, int a1, int a2, PairArray* arr, const char* name, Ctx* ctx, unsigned int id) {
     int v = ctx->FUN_009ee790()->vfn20();
     if (arr->size == (int)(arr->capAndFlags & 0x3fffffff)) FUN_00901f10(arr, 8);
     Pair* data = arr->data;
@@ -3534,7 +3557,7 @@ static __declspec(noinline) int FUN_009b3360(int a0, int a1, int a2, PairArray* 
     return 0;
 }
 volatile int g0,g1,g2,g3,g4,g5,g6; volatile int g_out;
-void caller_of_FUN_009b3360() { g_out = FUN_009b3360(g0,g1,g2,(PairArray*)g3,(const char*)g4,(Ctx*)g5,(unsigned)g6); }
+void caller_of_FUN_009b3360() { g_out = saveCstring(g0,g1,g2,(PairArray*)g3,(const char*)g4,(Ctx*)g5,(unsigned)g6); }
 }   // namespace f3m_009b3360
 
 // @f3 0x009aec10 (community match, verified in this file)
@@ -3810,7 +3833,7 @@ struct Heap {
 };
 void __cdecl FUN_00901e90(void* arr, int cap, int elemSize) throw();
 void __cdecl FUN_00901f10(void* arr, int elemSize) throw();
-int __cdecl FUN_009232c0(const char* a, const char* b) throw();
+int __cdecl hkString_strCmp(const char* a, const char* b) throw();
 
 template <class T> struct Array {
     T* data;
@@ -3861,7 +3884,7 @@ struct EdgeSet {
 
 int EdgeSet::FUN_009b1490(const char* start, const char* end, Array<Edge*>* out)
 {
-    if (FUN_009232c0(start, end) == 0)
+    if (hkString_strCmp(start, end) == 0)
         return 0;
 
     Array<int> prev;
@@ -3870,8 +3893,8 @@ int EdgeSet::FUN_009b1490(const char* start, const char* end, Array<Edge*>* out)
     Array<int> frontier;
 
     for (int i = 0; i < items.count; i++) {
-        if (FUN_009232c0(end, getEdge(i)->getB()) == 0) {
-            if (FUN_009232c0(start, getEdge(i)->getA()) == 0) {
+        if (hkString_strCmp(end, getEdge(i)->getB()) == 0) {
+            if (hkString_strCmp(start, getEdge(i)->getA()) == 0) {
                 out->pushBack(items[i]);
                 return 0;
             }
@@ -3887,9 +3910,9 @@ int EdgeSet::FUN_009b1490(const char* start, const char* end, Array<Edge*>* out)
             int cur = others[qi];
             for (int ri = 0; ri < frontier.count; ri++) {
                 int r = frontier[ri];
-                if (FUN_009232c0(getEdge(cur)->getB(), getEdge(r)->getA()) == 0) {
+                if (hkString_strCmp(getEdge(cur)->getB(), getEdge(r)->getA()) == 0) {
                     prev[cur] = r;
-                    if (FUN_009232c0(getEdge(cur)->getA(), start) == 0) {
+                    if (hkString_strCmp(getEdge(cur)->getA(), start) == 0) {
                         for (int idx = cur; idx != -1; idx = prev[idx])
                             out->pushBack(items[idx]);
                         return 0;
@@ -4103,7 +4126,7 @@ struct VisitorB9b1e40:hkBaseObject {
     unsigned int unknown04,unknown08;
     S_00dbd8a0_Mem30 map;
     __declspec(nothrow) VisitorB9b1e40(bool) throw();
-    __declspec(nothrow) void FUN_009b0100(void*) throw();
+    __declspec(nothrow) void hkDynamicClassNameRegistry_merge(void*) throw();
 
 };
 struct Pair9b1e40 {void* name;void* target;};
@@ -4133,7 +4156,7 @@ __declspec(nothrow) int Owner9b1e40::FUN_009b1e40(Source9b1e40* source,int from,
     VisitorB9b1e40 objects(false);
     for(Source9b1e40* entry=source;entry;entry=entry->next) {
         if(entry->object)
-            objects.FUN_009b0100(entry->object);
+            objects.hkDynamicClassNameRegistry_merge(entry->object);
         Pair9b1e40* pair=entry->pairs;
         if(pair) {
             void* name=pair->name;
@@ -4467,8 +4490,8 @@ extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long) thro
 extern unsigned int DAT_010f3170;
 struct ClassKey770;
 const ClassKey770* FUN_0093e470() throw();
-int FUN_009232c0(const ClassKey770*,const ClassKey770*) throw();
-inline bool SameKey770(const ClassKey770* a,const ClassKey770* b) throw() { return FUN_009232c0(a,b)==0; }
+int hkString_strCmp(const ClassKey770*,const ClassKey770*) throw();
+inline bool SameKey770(const ClassKey770* a,const ClassKey770* b) throw() { return hkString_strCmp(a,b)==0; }
 struct Memory770 {
     void* FUN_008f6d30(int,int) throw();
     void FUN_008f6d90(void*,int,int) throw();
@@ -4528,7 +4551,7 @@ __declspec(noinline) static Factory770* FUN_009b1330(const FactoryArray770& fact
 {
     const ClassKey770* key=input;
     for(int i=factories.size-1;i>=0;--i)
-        if(!FUN_009232c0(factories.data[i]->getType(),key))
+        if(!hkString_strCmp(factories.data[i]->getType(),key))
             return factories.data[i];
     return 0;
 }
@@ -4578,7 +4601,7 @@ Wrapper770* ClassRegistry770::FUN_009b1ae0(const ClassKey770* input) throw()
         map.FUN_009b0e60(rootKey,type);
     }
     Wrapper770* wrapper=0;
-    if(!FUN_009232c0(key,FUN_0093e470())) {
+    if(!hkString_strCmp(key,FUN_0093e470())) {
         // Fake match: reuse the dead parameter home for the map output.
         if(!map.FUN_009b0fb0(key,reinterpret_cast<Wrapper770**>(static_cast<void*>(&input))))
             wrapper=reinterpret_cast<Wrapper770*>(const_cast<ClassKey770*>(input));
@@ -4718,7 +4741,7 @@ struct Host {
     int f10;
     StreamObj* FUN_009b06c0(int v);
     void FUN_009b34f0(StreamObj* a, Item* it);
-    int FUN_009b3800(StreamObj* p0, StreamObj* p1, StreamObj* p2, DescriptorList* p3);
+    int hkObjectCopier_saveBody(StreamObj* p0, StreamObj* p1, StreamObj* p2, DescriptorList* p3);
 };
 __declspec(noinline) int __cdecl FUN_009b4900(int a, int b) { int d = a - b; return b + (d & (d >> 31)); }
 int __cdecl FUN_009b32d0(DescriptorList* a, Item* it, int i, int e);
@@ -4798,7 +4821,8 @@ struct LookupResult { int value; };
 struct ValueArray { int* data; int size; int capacity; };
 // Iterates descriptor items, compares matching items, dispatches by type, and writes values through the supplied stream.
 
-int Host::FUN_009b3800(StreamObj* apSourceStream, StreamObj* apLookupStream, StreamObj* apOutputStream, DescriptorList* apDescriptorList)
+// pdb: hkObjectCopier::saveBody | hkObjectCopier.obj | fnv360_0822_retail, call_gap + bridge(call_gap|ustr) + skyrim(call_gap), high
+int Host::hkObjectCopier_saveBody(StreamObj* apSourceStream, StreamObj* apLookupStream, StreamObj* apOutputStream, DescriptorList* apDescriptorList)
 {
     int base; int index;
     StreamPosition* posInterface;
@@ -4920,7 +4944,7 @@ int Host::FUN_009b3800(StreamObj* apSourceStream, StreamObj* apLookupStream, Str
                 do {
                     int v = ((DescriptorList*)h1)->FUN_009b0760();
                     const char* iAccumulated = (const char*)iSourceOffset + v * k;
-                    this->FUN_009b3800((StreamObj*)iAccumulated, (StreamObj*)h1, apOutputStream, (DescriptorList*)h2);
+                    this->hkObjectCopier_saveBody((StreamObj*)iAccumulated, (StreamObj*)h1, apOutputStream, (DescriptorList*)h2);
                     k++;
                 } while (k < iRemaining);
                 break;

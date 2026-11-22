@@ -37,7 +37,8 @@ void __stdcall FUN_00d1df30(int, int)
 {}
 
 // @fnv 0x00d1df40
-void __stdcall FUN_00d1df40(int a, int b, int c)
+// pdb: hkpMultiThreadedSimulation::assertThereIsNoCollisionInformationForEntities | hkpMultithreadedSimulation.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(objrun_open), high
+void __stdcall hkpMultiThreadedSimulation_assertThereIsNoCollisionInformationForEntities(int a, int b, int c)
 {}
 
 // @fnv 0x00d1df50

@@ -437,12 +437,13 @@ struct SkinDataLike : SkinObjectBase
     SkinTransform m_kSkinTransform;
     SkinBoneData* m_pBoneData;
     unsigned int m_uiBoneCount;
-    void FUN_00a85250(SkinStream& kStream);
+    void NiSkinData_SaveBinary(SkinStream& kStream);
 };
 
 // Saves the skin object base, transform, bone count, vertex-weight flag and each bone's transform, bound, vertex count and optional vertex weights to the stream.
 // @fnv 0x00a85250
-void SkinDataLike::FUN_00a85250(SkinStream& kStream)
+// pdb: NiSkinData::SaveBinary | NiSkinData.obj | fnv360_0822_retail, caller_sim + bridge(vtable|caller_sim) + skyrim(caller_sim), high
+void SkinDataLike::NiSkinData_SaveBinary(SkinStream& kStream)
 {
     SkinObjectBase::SaveBinary(kStream);
     m_kSkinTransform.SaveBinary(kStream);
@@ -507,12 +508,13 @@ struct SkinDataBounds : SkinObjectBase
     SkinTransform m_kSkinTransform;
     SkinBoneData* m_pBoneData;
     unsigned int m_uiBoneCount;
-    void FUN_00a853c0(Point3* vertices);
+    void NiSkinData_ComputeBoneBounds(Point3* vertices);
 };
 
 // For each bone, collects vertex positions from its weighted vertices, computes their bounding sphere, and transforms it into bone space.
 // @fnv 0x00a853c0
-void SkinDataBounds::FUN_00a853c0(Point3* vertices)
+// pdb: NiSkinData::ComputeBoneBounds | NiSkinData.obj | fnv360_0822_retail, call_seq + bridge(call_seq|objrun_prop) + skyrim(objopen_prop), high
+void SkinDataBounds::NiSkinData_ComputeBoneBounds(Point3* vertices)
 {
     PointList points;
     for (unsigned int i = 0; i < m_uiBoneCount; ++i)
@@ -694,7 +696,7 @@ struct SkinLoadStream : SkinStream
     int unk3b0;
     int unk3b4;
     int unk3b8;
-    void FUN_00a645b0();
+    void NiStream_ReadLinkID();
 };
 struct SkinLoadError
 {
@@ -755,18 +757,19 @@ struct SkinLoadData : SkinObjectBase
     SkinTransform rootParentToSkin;
     ResetFields* bones;
     unsigned int boneCount;
-    void FUN_00a84f50(SkinLoadStream& stream);
+    void NiSkinData_LoadBinary(SkinLoadStream& stream);
 };
 // Reads skin data from a stream: base, transform, bone count, per-bone transforms/bounds/weights, and an optional trailing flag.
 // @fnv 0x00a84f50
-void SkinLoadData::FUN_00a84f50(SkinLoadStream& stream)
+// pdb: NiSkinData::LoadBinary | NiSkinData.obj | fnv360_0822_retail, ustr + bridge(vtable|ustr) + skyrim(ustr), high
+void SkinLoadData::NiSkinData_LoadBinary(SkinLoadStream& stream)
 {
     ((SkinLoadBase*)this)->ReadGroup(stream);
     ((SkinLoadTransform*)&rootParentToSkin)->FUN_00a86c80(stream);
     SkinLoadBinary(stream, boneCount);
     bones = new ResetFields[boneCount];
     if ((unsigned int)stream.unk0d8 >= 0x04000001 && (unsigned int)stream.unk0d8 < 0x0a010065)
-        stream.FUN_00a645b0();
+        stream.NiStream_ReadLinkID();
     bool hasWeights;
     if ((unsigned int)stream.unk0d8 >= 0x0401000d)
         SkinLoadBinary(stream, hasWeights);

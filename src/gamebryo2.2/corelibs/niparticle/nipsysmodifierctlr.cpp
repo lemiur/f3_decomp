@@ -274,10 +274,11 @@ struct ControllerStandin
 struct ModifierControllerStandin : ControllerStandin
 {
     void __thiscall FUN_00c31400();
-    void __thiscall FUN_00c31590(NiStream& stream);
+    void __thiscall NiPSysModifierCtlr_PostLinkObject(NiStream& stream);
 };
 // @fnv 0x00c31590
-void ModifierControllerStandin::FUN_00c31590(NiStream& stream)
+// pdb: NiPSysModifierCtlr::PostLinkObject | NiPSysModifierCtlr.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(caller_sim), high
+void ModifierControllerStandin::NiPSysModifierCtlr_PostLinkObject(NiStream& stream)
 {
     ControllerStandin::FUN_00a89af0(stream);
     if (target_2c)

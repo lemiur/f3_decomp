@@ -1953,7 +1953,7 @@ struct P440Shader
     void SortShadowSceneLights(P440Position*);
     P440Light* FUN_00b70590(void**);
     P440Light* FUN_00b70680(void**);
-    P440Light* FUN_00b70600(void**);
+    P440Light* BSShaderLightingProperty_GetFirstActiveNonShadowLight(void**);
     P440Light* FUN_00b70700(void**);
     P440List* GetPasses(P440Geometry*, unsigned int, int, unsigned int, P440Renderer*, int);
 };

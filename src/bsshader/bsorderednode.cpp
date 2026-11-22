@@ -124,7 +124,7 @@ class DummyNode
     unsigned char unk9c[0x10];  // +0x9c
     BoundSphere bound;          // +0xac
     bool staticBound;           // +0xbc
-    void FUN_00a5dbe0(NiCullingProcess* culling);
+    void NiNode_OnVisible(NiCullingProcess* culling);
     void UpdateCullingBound(NiCullingProcess* culling);
 };
 
@@ -154,7 +154,7 @@ void DummyNode::UpdateCullingBound(NiCullingProcess* culling)
         accum->RenderBound(*b, 0);
     }
 
-    FUN_00a5dbe0(culling);
+    NiNode_OnVisible(culling);
     accum->DispatchBatchRenderer();
 }
 

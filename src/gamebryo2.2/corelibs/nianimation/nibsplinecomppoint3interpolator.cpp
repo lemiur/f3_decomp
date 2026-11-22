@@ -24,10 +24,11 @@ struct BaseFor51230
 struct OwnerFor51230 : BaseFor51230
 {
     float m_afOffsetAndHalfRange[2];
-    bool FUN_00a51230(NiObject* pkObject);
+    bool NiBSplineCompPoint3Interpolator_IsEqual(NiObject* pkObject);
 };
 // @fnv 0x00a51230
-bool OwnerFor51230::FUN_00a51230(NiObject* pkObject)
+// pdb: NiBSplineCompPoint3Interpolator::IsEqual | NiBSplineCompPoint3Interpolator.obj | fnv360_0822_retail, objrun_prop + bridge(vtable|objrun_prop) + skyrim(caller_sim), high
+bool OwnerFor51230::NiBSplineCompPoint3Interpolator_IsEqual(NiObject* pkObject)
 {
     OwnerFor51230* pkDest;
     unsigned int iIndex;
@@ -137,12 +138,13 @@ struct Point3InterpolatorStand
 
 struct FUN_00a51440_cls : public NiBSplineCompPoint3Interpolator
 {
-    void FUN_00a51440(NiStream& stream);
+    void NiBSplineCompPoint3Interpolator_SaveBinary(NiStream& stream);
 };
 
 // Loads the base point3 interpolator from the stream, then reads two floats into the array via the binary stream.
 // @fnv 0x00a51440
-void FUN_00a51440_cls::FUN_00a51440(NiStream& stream)
+// pdb: NiBSplineCompPoint3Interpolator::SaveBinary | NiBSplineCompPoint3Interpolator.obj | fnv360_0822_retail, caller_sim + bridge(vtable|caller_sim) + skyrim(caller_sim), high
+void FUN_00a51440_cls::NiBSplineCompPoint3Interpolator_SaveBinary(NiStream& stream)
 {
     reinterpret_cast<Point3InterpolatorStand*>(this)->LoadStream(stream);
 
@@ -192,12 +194,13 @@ class ObjA513 : public FUN_00a506c0
     float m_30;
 
     void CopyUnknownFields(ObjA513* dest, CloningProcessA513& cloning);
-    ObjA513* FUN_00a51360(CloningProcessA513& cloning);
+    ObjA513* NiBSplineCompPoint3Interpolator_CreateClone(CloningProcessA513& cloning);
 };
 
 // Allocates a new ObjA513, copies unknown fields via cloning, then overwrites m_2c and m_30 with the source values and returns the new object.
 // @fnv 0x00a51360
-ObjA513* ObjA513::FUN_00a51360(CloningProcessA513& cloning)
+// pdb: NiBSplineCompPoint3Interpolator::CreateClone | NiBSplineCompPoint3Interpolator.obj | fnv360_0721_retail, objrun + bridge(vtable|objrun) + skyrim(caller_sim), high
+ObjA513* ObjA513::NiBSplineCompPoint3Interpolator_CreateClone(CloningProcessA513& cloning)
 {
     ObjA513* pNew = new ObjA513;
     if (pNew)

@@ -10,9 +10,10 @@ namespace f3m_00c01b0b {
 namespace FallbackC01 {
 struct ValueOwner {
  int unk00; void* value;
- void* FUN_00c01b0b();
+ void* std_exception_what();
 };
-void* ValueOwner::FUN_00c01b0b() {
+// pdb: std::exception::what | xthrow.obj | fnv360_0822_retail, ustr + bridge(vtable|ustr) + skyrim(vtable), high
+void* ValueOwner::std_exception_what() {
  void* result = value;
  if (!result) result = &DAT_00eaab1c;
  return result;
@@ -173,7 +174,8 @@ namespace f3m_00c1bbff {
 namespace f3m_00c1bbff {
 void __cdecl FUN_00c0687d(int n);
 }
-void __cdecl FUN_00c1bbff()
+// pdb: _fptrap | crt0fp.obj | fnv360_0822_retail, caller_sim + bridge(caller_sim|caller_sim) + skyrim(caller_sim), high
+void __cdecl _fptrap()
 {
     f3m_00c1bbff::FUN_00c0687d(2);
 }
@@ -206,7 +208,8 @@ void __cdecl FUN_00c06b2f()
 // @f3 0x00c17151 (community match, verified in this file)
 extern int DAT_0117a484;
 namespace f3m_00c17151 {
-void __cdecl FUN_00c17151(int v)
+// pdb: _initp_heap_handler | handler.obj | fnv360_0822_retail, udata + skyrim(call_seq), high
+void __cdecl _initp_heap_handler(int v)
 {
     DAT_0117a484 = v;
 }

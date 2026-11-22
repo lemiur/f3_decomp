@@ -353,7 +353,7 @@ void __fastcall FUN_0086fd70(void*);
 float __cdecl FUN_00453850();
 bool __cdecl FUN_005c42d0();
 void __cdecl FUN_005ae270();
-void __cdecl FUN_005a9d60();
+void __cdecl TESAmbushPackageData_Copy();
 void __cdecl FUN_008c80d0();
 void __cdecl ProcessPlayerCellActors();
 void __fastcall FUN_00991dc0(void*);
@@ -417,7 +417,7 @@ struct FUN_0096cb50_shell
 void* __stdcall FUN_00713d80(int);
 float __cdecl FUN_00453850(void);
 void __cdecl FUN_005ae270(void);
-void __cdecl FUN_005a9d60(void);
+void __cdecl TESAmbushPackageData_Copy(void);
 extern int g_TES;
 extern int DAT_011e0e80;
 
@@ -497,7 +497,7 @@ extern GlobalObject_0045cf30 g_011d73e4;
 void* __cdecl FUN_00713d80();
 void __fastcall FUN_0086fd70(void*);
 void __fastcall FUN_00991dc0(void*);
-void __cdecl FUN_005a9d60();
+void __cdecl TESAmbushPackageData_Copy();
 void __cdecl FUN_005ae270();
 bool __cdecl FUN_005c42d0();
 void __cdecl FUN_008c80d0();

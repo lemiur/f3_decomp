@@ -8,7 +8,8 @@ extern "C"
 }
 
 // @fnv 0x00a56c00
-const void* __cdecl FUN_00a56c00()
+// pdb: BSTempEffectSimpleDecal::GetRTTI | BSTempEffectSimpleDecal.obj | fnv360_1110_retail, udata + bridge(vtable_prefix|udata), high
+const void* __cdecl BSTempEffectSimpleDecal_GetRTTI()
 {
     return &g_011f4100;
 }

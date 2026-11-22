@@ -28,13 +28,14 @@ NiParticleMeshes::NiParticleMeshes()
 
 struct FUN_00a98ec0_shell : public NiParticleMeshes
 {
-    void* FUN_00a98ec0();
+    void* NiStringsExtraData_GetRTTI();
 };
 
 extern NiRTTI* g_011f5f14;
 
 // @fnv 0x00a98ec0
-void* FUN_00a98ec0_shell::FUN_00a98ec0()
+// pdb: NiStringsExtraData::GetRTTI | NiStringsExtraData.obj | fnv360_0822_retail, udata + bridge(vtable|udata) + skyrim(objrun_open), high
+void* FUN_00a98ec0_shell::NiStringsExtraData_GetRTTI()
 {
     return &g_011f5f14;
 }
@@ -61,16 +62,17 @@ class NiRenderer;
 class NiParticleMeshesData;
 struct HackBase
 {
-    void FUN_00a809b0(NiRenderer*);
+    void NiGeometry_PurgeRendererData(NiRenderer*);
 };
 struct FUN_00a99090_shell : public NiParticleMeshes
 {
-    void FUN_00a99090(NiRenderer* pkRenderer);
+    void NiParticleMeshes_PurgeRendererData(NiRenderer* pkRenderer);
 };
 // @fnv 0x00a99090
-void FUN_00a99090_shell::FUN_00a99090(NiRenderer* pkRenderer)
+// pdb: NiParticleMeshes::PurgeRendererData | NiParticleMeshes.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun) + skyrim(objrun_open), high
+void FUN_00a99090_shell::NiParticleMeshes_PurgeRendererData(NiRenderer* pkRenderer)
 {
-    ((HackBase*)this)->FUN_00a809b0(pkRenderer);
+    ((HackBase*)this)->NiGeometry_PurgeRendererData(pkRenderer);
     NiParticleMeshesData* pkPMData = *(NiParticleMeshesData**)((char*)this + 0xb8);
     if (pkPMData)
     {
@@ -168,10 +170,11 @@ struct NiNode
 };
 struct FUN_00a99000_shell
 {
-    void FUN_00a99000(bool&, bool, bool&);
+    void NiParticleMeshes_SetSelectiveUpdateFlags(bool&, bool, bool&);
 };
 // @fnv 0x00a99000
-void FUN_00a99000_shell::FUN_00a99000(bool& bSelectiveUpdate, bool bSelectiveUpdateTransforms, bool& bRigid)
+// pdb: NiParticleMeshes::SetSelectiveUpdateFlags | NiParticleMeshes.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun) + skyrim(objopen_prop), high
+void FUN_00a99000_shell::NiParticleMeshes_SetSelectiveUpdateFlags(bool& bSelectiveUpdate, bool bSelectiveUpdateTransforms, bool& bRigid)
 {
     ((FUN_00a808f0_shell*)this)->UpdateSelectiveUpdateFlags(&bSelectiveUpdate, true, &bRigid);
     NiNode* pkParticlesContainer = *(NiNode**)((char*)*(void**)((char*)this + 0xb8) + 0x70);

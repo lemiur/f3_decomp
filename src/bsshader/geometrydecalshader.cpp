@@ -47,11 +47,12 @@ extern NiGPUProgram* DAT_012021e4;
 
 struct FUN_00bcbc90_shell
 {
-    NiGPUProgram* FUN_00bcbc90(void* obj, void* extra);
+    NiGPUProgram* GeometryDecalShader_GetShaderDecl(void* obj, void* extra);
 };
 
 // @fnv 0x00bcbc90
-NiGPUProgram* __thiscall FUN_00bcbc90_shell::FUN_00bcbc90(void* obj, void* extra)
+// pdb: GeometryDecalShader::GetShaderDecl | GeometryDecalShader.obj | fnv360_0822_retail, objrun + bridge(hash|objrun), high
+NiGPUProgram* __thiscall FUN_00bcbc90_shell::GeometryDecalShader_GetShaderDecl(void* obj, void* extra)
 {
     return *(NiGPUProgram**)((char*)obj + 0xbc) ? DAT_012021e4 : DAT_012021e0;
 }

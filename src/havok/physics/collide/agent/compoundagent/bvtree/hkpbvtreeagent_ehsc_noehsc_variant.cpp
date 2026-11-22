@@ -74,7 +74,7 @@ struct Global
 };
 extern "C" Global* __cdecl FUN_00c85750();
 
-void __cdecl FUN_00d312f0(void* apA, void* apB, void* apC, void* apD);
+void __cdecl hkpBvTreeAgent_staticGetPenetrations(void* apA, void* apB, void* apC, void* apD);
 struct D2FA00Allocator
 {
     virtual void unk00();
@@ -505,7 +505,8 @@ struct Collector {virtual void slot00();Bool earlyOut;};
 
 }
 
-void __cdecl FUN_00d312f0(void* apA,void* apB,void* apC,void* apD){
+// pdb: hkpBvTreeAgent::staticGetPenetrations | hkpBvTreeAgent.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_seq), high
+void __cdecl hkpBvTreeAgent_staticGetPenetrations(void* apA,void* apB,void* apC,void* apD){
 
  using namespace NativeBv312;
 

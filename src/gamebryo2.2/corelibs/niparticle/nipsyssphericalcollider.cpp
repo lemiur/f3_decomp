@@ -356,14 +356,14 @@ struct SphericalColliderReader : NiPSysCollider
     {
         return *reinterpret_cast<float*>(reinterpret_cast<char*>(this) + 0x30);
     }
-    void FUN_00c32900(NiStream& stream);
+    void NiPSysCollider_SaveBinary(NiStream& stream);
     void ReadSphericalCollider(NiStream& stream);
 };
 // Reads the base collider data, then reads the link id and radius float from the stream.
 // @fnv 0x00c280c0
 void SphericalColliderReader::ReadSphericalCollider(NiStream& stream)
 {
-    FUN_00c32900(stream);
+    NiPSysCollider_SaveBinary(stream);
     StreamView& reader = reinterpret_cast<StreamView&>(stream);
     reader.ReadObject(linkId());
     reader.Input()->ReadFloat(radius());
@@ -586,7 +586,7 @@ struct FUN_00c27ae0_obj
 
 struct FUN_00c27ae0_base
 {
-    bool FUN_00c326b0(FUN_00c27ae0_base* pkObject);
+    bool NiPSysCollider_IsEqual(FUN_00c27ae0_base* pkObject);
 };
 
 struct FUN_00c27ae0_cls : FUN_00c27ae0_base
@@ -604,14 +604,15 @@ struct FUN_00c27ae0_cls : FUN_00c27ae0_base
     int unk28;
     FUN_00c27ae0_obj* m_pkColliderObject;
     float m_fBoundRadius;
-    bool FUN_00c27ae0(FUN_00c27ae0_cls* pkObject);
+    bool NiPSysSphericalCollider_IsEqual(FUN_00c27ae0_cls* pkObject);
 };
 
 // Returns false if the base comparison, collider-object comparison, or bound-radius comparison fails.
 // @fnv 0x00c27ae0
-bool FUN_00c27ae0_cls::FUN_00c27ae0(FUN_00c27ae0_cls* pkObject)
+// pdb: NiPSysSphericalCollider::IsEqual | NiPSysSphericalCollider.obj | fnv360_0822_retail, objrun_prop + bridge(vtable|objrun_prop) + skyrim(caller_sim), high
+bool FUN_00c27ae0_cls::NiPSysSphericalCollider_IsEqual(FUN_00c27ae0_cls* pkObject)
 {
-    if (!FUN_00c326b0(pkObject))
+    if (!NiPSysCollider_IsEqual(pkObject))
         return false;
 
     FUN_00c27ae0_cls* pkDest = pkObject;

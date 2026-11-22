@@ -286,7 +286,7 @@ struct __declspec(align(16)) S009f0d00_Vector4 {
 struct S009f0d00_Rotation {
     S009f0d00_Vector4 c0, c1, c2;
     __forceinline float operator()(int r, int c) const { return (&(&c0)[c].x)[r]; }
-    void FUN_00924b40(const S009f0d00_Vector4* q);
+    void hkRotation_set(const S009f0d00_Vector4* q);
 };
 
 __forceinline void S009f0d00_Vector4::setRotatedDir(const S009f0d00_Rotation& a, const S009f0d00_Vector4& b)
@@ -316,7 +316,7 @@ struct S009f0d00_SweptTransform {
 __forceinline void S009f0d00_calcTransAtT0(const S009f0d00_SweptTransform& sweptTrans, S009f0d00_Transform& transformOut)
 {
     const S009f0d00_Vector4& q0 = sweptTrans.m_rotation0;
-    transformOut.rot.FUN_00924b40(&q0);
+    transformOut.rot.hkRotation_set(&q0);
     S009f0d00_Vector4 centerShift;
     centerShift.setRotatedDir(transformOut.rot, sweptTrans.m_centerOfMassLocal);
     transformOut.trans.setSub4(sweptTrans.m_centerOfMass0, centerShift);
@@ -325,7 +325,7 @@ __forceinline void S009f0d00_calcTransAtT0(const S009f0d00_SweptTransform& swept
 __forceinline void S009f0d00_calcTransAtT1(const S009f0d00_SweptTransform& sweptTrans, S009f0d00_Transform& transformOut)
 {
     const S009f0d00_Vector4& q1 = sweptTrans.m_rotation1;
-    transformOut.rot.FUN_00924b40(&q1);
+    transformOut.rot.hkRotation_set(&q1);
     S009f0d00_Vector4 centerShift;
     centerShift.setRotatedDir(transformOut.rot, sweptTrans.m_centerOfMassLocal);
     transformOut.trans.setSub4(sweptTrans.m_centerOfMass1, centerShift);
@@ -836,7 +836,7 @@ void __cdecl FUN_009e5170(int* dst, const int* src);
 
 struct CB2FC0Object
 {
-    void FUN_00924b40(void* q);
+    void hkRotation_set(void* q);
 };
 
 struct EmsTransform
@@ -846,7 +846,7 @@ struct EmsTransform
 
     EmsTransform(const EmsVector4& q, const EmsVector4& t) : m_translation(t)
     {
-        ((CB2FC0Object*)this)->FUN_00924b40((void*)&q);
+        ((CB2FC0Object*)this)->hkRotation_set((void*)&q);
     }
 };
 
@@ -4167,7 +4167,7 @@ void __cdecl standInCallerOfRagdollMotorAtom( const hkpConstraintAtom* atoms, co
 }   // namespace f3m_009fac30
 
 // @f3 0x009e16f0 (community match, verified in this file)
-// virtual void hkpBallSocketChainData::FUN_009e16f0(class hkpConstraintQueryIn const &,class hkpConstraintQueryOut &)  (?buildJacobian@hkpBallSocketChainData@@UAEXABVhkpConstraintQueryIn@@AAVhkpConstraintQueryOut@@@Z; Havok 5.5.0 hkpDynamics.lib / hkpBallSocketChainData.obj)
+// virtual void hkpBallSocketChainData::hkpBallSocketChainData_buildJacobian(class hkpConstraintQueryIn const &,class hkpConstraintQueryOut &)  (?buildJacobian@hkpBallSocketChainData@@UAEXABVhkpConstraintQueryIn@@AAVhkpConstraintQueryOut@@@Z; Havok 5.5.0 hkpDynamics.lib / hkpBallSocketChainData.obj)
 // reduced by hktrim.py from sdk.cpp; compile: cl -c -Ox -Ob1 -Oi -Ot -GF -MT -GS- -Z7 -TP -X
 extern "C" {
 			__declspec(dllimport) void* _stdcall TlsGetValue( unsigned long dwTlsIndex );
@@ -5446,7 +5446,7 @@ class hkpBallSocketChainData : public hkpConstraintChainData
 		{
 		};
 	public:
-		virtual void FUN_009e16f0( const hkpConstraintQueryIn &in, hkpConstraintQueryOut &out );
+		virtual void hkpBallSocketChainData_buildJacobian( const hkpConstraintQueryIn &in, hkpConstraintQueryOut &out );
 		virtual void getConstraintInfo( hkpConstraintData::ConstraintInfo& info ) const;
 		virtual void getRuntimeInfo( hkBool wantRuntime, hkpConstraintData::RuntimeInfo& infoOut ) const;
 	public:
@@ -5541,7 +5541,8 @@ extern "C"
 	void __cdecl FUN_00a51540( int numConstraints, hkReal tau, hkReal damping, hkReal cfm, hkpVelocityAccumulatorOffset* accumulators, const hkpVelocityAccumulator* baseAccum, hkp1Lin2AngJacobian* jacobians, const hkpConstraintQueryIn& in, hkpConstraintQueryOut& out );
 }
 
-void hkpBallSocketChainData::FUN_009e16f0( const hkpConstraintQueryIn &inChain, hkpConstraintQueryOut &out )
+// pdb: hkpBallSocketChainData::buildJacobian | hkpBallSocketChainData.obj | fnv360_0721_retail, objrun + bridge(caller_sim|vtable) + skyrim(caller_sim), high
+void hkpBallSocketChainData::hkpBallSocketChainData_buildJacobian( const hkpConstraintQueryIn &inChain, hkpConstraintQueryOut &out )
 {
 	hkpSolverResults* solverResults = static_cast<hkpSolverResults*>( inChain.m_constraintRuntime.val() );
 	FUN_009fcb10( inChain, out, solverResults, sizeof(hkpSolverResults) );

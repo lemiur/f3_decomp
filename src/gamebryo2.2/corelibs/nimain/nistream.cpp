@@ -148,7 +148,7 @@ bool NiStream::Save(char*& buffer, int& size)
     typedef bool(__thiscall * SaveFunction)(NiStream*, NiBinaryStream*);
     bool result = ((SaveFunction*)m_ppVirtualMethodTable)[4](this, &stream);
     size = stream.m_uiLogicalSize;
-    buffer = stream.FUN_00aa2d60();
+    buffer = stream.NiMemStream_Str();
     stream.NiMemStreamDestructor();
     return result;
 }
@@ -1115,11 +1115,12 @@ int FUN_00a633f0_shell::FindIndex(int* pVal)
 
 struct FUN_00a63460_shell : public NiStream
 {
-    unsigned int FUN_00a63460();
+    unsigned int NiStream_GetNumberOfLinkIDs();
 };
 
 // @fnv 0x00a63460
-unsigned int FUN_00a63460_shell::FUN_00a63460()
+// pdb: NiStream::GetNumberOfLinkIDs | NiStream.obj | fnv360_0822_retail, call_seq + bridge(hash|call_seq) + skyrim(call_seq), high
+unsigned int FUN_00a63460_shell::NiStream_GetNumberOfLinkIDs()
 {
     unsigned int idx = m_uiLinkBlockIndex++;
     return m_kLinkIDBlocks.m_pBase[idx];
@@ -1138,7 +1139,8 @@ struct FUN_00a63480_holder
 };
 
 // @fnv 0x00a63480
-unsigned int __fastcall FUN_00a63480(FUN_00a63480_holder* self, int, const char* name)
+// pdb: NiStream::GetLinkIDFromObject | NiStream.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+unsigned int __fastcall NiStream_GetLinkIDFromObject(FUN_00a63480_holder* self, int, const char* name)
 {
     if (!name)
         return 0xffffffff;
@@ -2031,12 +2033,13 @@ struct Loader
     int unk24c;
     BinaryStream* m_pDataStream;
 
-    int FUN_00a63df0();
+    int NiStream_PreSaveObjectSizeTable();
 };
 
 // Reads m_uiSkipCount binary values from m_pDataStream and returns the stream position captured before the reads.
 // @fnv 0x00a63df0
-int Loader::FUN_00a63df0()
+// pdb: NiStream::PreSaveObjectSizeTable | NiStream.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+int Loader::NiStream_PreSaveObjectSizeTable()
 {
     int iPosition = m_pDataStream->GetPosition();
     int iSkipped = 0;
@@ -2134,7 +2137,7 @@ struct NiFixedString
 typedef char _sizecheck_NiFixedString[sizeof(NiFixedString) == 4 ? 1 : -1];
 struct FUN_00a63ee0_shell : public NiStream
 {
-    void FUN_00a63ee0();
+    void NiStream_SaveFixedStringTable();
 };
 
 extern char* _EmptyFS;
@@ -2173,7 +2176,8 @@ inline unsigned int GetSize_a63ee0(const char* self)
 
 // Writes the string array size, max length, and each string's length and data to the binary stream at offset 0x250.
 // @fnv 0x00a63ee0
-void FUN_00a63ee0_shell::FUN_00a63ee0()
+// pdb: NiStream::SaveFixedStringTable | NiStream.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_gap) + skyrim(call_seq), high
+void FUN_00a63ee0_shell::NiStream_SaveFixedStringTable()
 {
     char* self = (char*)this;
     SaveBinary_a63ee0(**(BinStream_a63ee0**)(self + 0x250), GetSize_a63ee0(self));
@@ -2235,12 +2239,13 @@ class NiStreamLoadStandIn
     char pad1e4[0x2dc];
     char m_acPath[0x104];
 
-    bool FUN_00a640b0(const char* name);
+    bool NiStream_Save(const char* name);
 };
 
 // Copies and standardizes the input file path, opens it read-only via NiFile::GetFile, and delegates to Load if the file is valid.
 // @fnv 0x00a640b0
-bool NiStreamLoadStandIn::FUN_00a640b0(const char* name)
+// pdb: NiStream::Save | NiStream.obj | fnv360_0822_retail, objrun + bridge(vtable|caller_sim) + skyrim(vtable), high
+bool NiStreamLoadStandIn::NiStream_Save(const char* name)
 {
     strcpy_s(m_acFileName, 0x104, name);
     _fnv_StandardizeFilePath(m_acFileName);
@@ -2430,7 +2435,7 @@ struct FUN_00a64160_cls
     int unk248;
     int unk24C;
     NiStreamW* m_250;
-    void FUN_00a64160(const char* str);
+    void NiStream_SaveCString(const char* str);
 };
 
 static __forceinline void S_Save(NiStreamW* o, const void* v, unsigned int n, unsigned int elem)
@@ -2441,7 +2446,8 @@ static __forceinline void S_Save(NiStreamW* o, const void* v, unsigned int n, un
 
 // Writes the length of str and, if non-zero, the string bytes to m_250 via S_Save.
 // @fnv 0x00a64160
-void FUN_00a64160_cls::FUN_00a64160(const char* apString)
+// pdb: NiStream::SaveCString | NiStream.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_seq), high
+void FUN_00a64160_cls::NiStream_SaveCString(const char* apString)
 {
     unsigned int len;
     if (apString != 0)
@@ -2804,12 +2810,13 @@ class FUN_00a645b0_cls
     NiStreamLoader* m_pStreamLoader;
     unsigned int unk0250;
     U32Array m_ppData;
-    void FUN_00a645b0();
+    void NiStream_ReadLinkID();
 };
 
 // Reads a 4-byte value from m_pStreamLoader, grows m_ppData if full, and appends the value to m_ppData.
 // @fnv 0x00a645b0
-void FUN_00a645b0_cls::FUN_00a645b0()
+// pdb: NiStream::ReadLinkID | NiStream.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_seq), high
+void FUN_00a645b0_cls::NiStream_ReadLinkID()
 {
     unsigned int value;
     NiStreamLoader* loader = m_pStreamLoader;
@@ -3049,17 +3056,18 @@ struct S_00a64670_Foo : S_00a64670_Base
     int unk260;
     S_00a64670_Array unk264;
 
-    void FUN_00a645b0();
-    void FUN_00a64670();
+    void NiStream_ReadLinkID();
+    void NiStream_ReadMultipleLinkIDs();
 };
 
 inline void ReadStreamCount(S_00a64670_Ctx* ctx, int* output, int size)
 {
     ctx->unk04 += ctx->unk08(ctx, output, size, &size, 1);
 }
-// Reads a count, appends it to the array, then calls FUN_00a645b0 once per count.
+// Reads a count, appends it to the array, then calls NiStream_ReadLinkID once per count.
 // @fnv 0x00a64670
-void S_00a64670_Foo::FUN_00a64670()
+// pdb: NiStream::ReadMultipleLinkIDs | NiStream.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_seq), high
+void S_00a64670_Foo::NiStream_ReadMultipleLinkIDs()
 {
     unsigned int count;
     S_00a64670_Ctx* ctx = unk24c;
@@ -3074,7 +3082,7 @@ void S_00a64670_Foo::FUN_00a64670()
     if (limit > 0)
         do
         {
-            FUN_00a645b0();
+            NiStream_ReadLinkID();
             limit = *(volatile unsigned int*)&count;
             ++i;
         } while (i < limit);
@@ -3789,7 +3797,7 @@ void StreamHack::Clear()
 
 struct FUN_00a64ce0_shell : public NiStream
 {
-    void FUN_00a64ce0(char**);
+    void NiStream_LoadCString(char**);
 };
 
 void* __cdecl _NiMalloc(size_t);
@@ -3810,7 +3818,8 @@ struct LocalBinaryStream
 
 // Reads a length-prefixed null-terminated string from the stream into pcString, allocating memory when the length is positive.
 // @fnv 0x00a64ce0
-void FUN_00a64ce0_shell::FUN_00a64ce0(char** ppString)
+// pdb: NiStream::LoadCString | NiStream.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_seq), high
+void FUN_00a64ce0_shell::NiStream_LoadCString(char** ppString)
 {
     int iStringLength;
     ((LocalBinaryStream*)m_pkIstr)->Read(&iStringLength, 4, 4);
@@ -3827,7 +3836,7 @@ void FUN_00a64ce0_shell::FUN_00a64ce0(char** ppString)
 }
 
 // ---------------------------------------------------------------------------
-// FUN_00a64d80 - read a length-prefixed block out of a NiStream.
+// NiStream_LoadRTTIString - read a length-prefixed block out of a NiStream.
 //
 // The function is a member of the game's stream object; the low level buffer
 // it works on sits at +0x24c.  The buffer keeps its read cursor at +0x04 and
@@ -4005,11 +4014,12 @@ class FnvNiStream
     unsigned int unk244;               // +0x244
     unsigned int unk248;               // +0x248
     FnvStreamBuffer* m_pBinaryStream;  // +0x24c
-    void FUN_00a64d80(unsigned int param);
+    void NiStream_LoadRTTIString(unsigned int param);
 };
 
 // @fnv 0x00a64d80
-void FnvNiStream::FUN_00a64d80(unsigned int param)
+// pdb: NiStream::LoadRTTIString | NiStream.obj | fnv360_0822_retail, call_gap + bridge(hash|call_gap) + skyrim(call_seq), high
+void FnvNiStream::NiStream_LoadRTTIString(unsigned int param)
 {
     unsigned int count;
     FnvStreamBuffer* s = m_pBinaryStream;
@@ -4087,12 +4097,13 @@ class Cls_a64ea0
     unsigned int unk220, unk224, unk228, unk22C, unk230, unk234, unk238, unk23C;
     unsigned int unk240, unk244, unk248;
     StreamIO* m_stream;
-    void FUN_00a64ea0(char** target);
+    void NiStream_LoadCStringAsFixedString(char** target);
 };
 
 // Reads a length-prefixed string into *target, using allocated storage for lengths >= 0x400 and a stack buffer for positive smaller lengths.
 // @fnv 0x00a64ea0
-void Cls_a64ea0::FUN_00a64ea0(char** apString)
+// pdb: NiStream::LoadCStringAsFixedString | NiStream.obj | fnv360_0822_retail, call_gap + bridge(call_seq|call_gap) + skyrim(call_gap), high
+void Cls_a64ea0::NiStream_LoadCStringAsFixedString(char** apString)
 {
     unsigned int len;
     char buf[0x400];
@@ -5296,12 +5307,13 @@ struct NiStreamLs
     void LoadGroups();
     void Clear();
     void FUN_00a63d10();
-    bool FUN_00a65c60();
+    bool NiStream_LoadStream();
 };
 
 // Loads a NIF stream by reading the header, objects, and top-level links, then runs post-process functions and cleans up.
 // @fnv 0x00a65c60
-bool NiStreamLs::FUN_00a65c60()
+// pdb: NiStream::LoadStream | NiStream.obj | fnv360_0822_retail, call_gap + bridge(vtable|call_gap) + skyrim(vtable), high
+bool NiStreamLs::NiStream_LoadStream()
 {
     if (!LoadHeader())
         return false;
@@ -5641,7 +5653,8 @@ extern bool DAT_011f4780;
 
 // Allocates a global A660A0Map and NiUnionBV, and sets the DAT_011f4780 flag to true.
 // @fnv 0x00a660a0
-void __cdecl FUN_00a660a0()
+// pdb: NiStream::_SDMInit | NiStream.obj | fnv360_0822_retail, call_gap + bridge(uvref|call_dedup) + skyrim(uvref), high
+void __cdecl NiStream__SDMInit()
 {
     DAT_011f4784 = new A660A0Map;
     DAT_011f4788 = new NiUnionBV;
@@ -6276,12 +6289,13 @@ struct S_00a66480
         }
         return -1;
     }
-    bool FUN_00a66480(const S_00a66480_Str& str);
+    bool NiStream_RegisterFixedString(const S_00a66480_Str& str);
 };
 
 // Adds str to names if Find(str) returns -1, then returns true.
 // @fnv 0x00a66480
-bool S_00a66480::FUN_00a66480(const S_00a66480_Str& str)
+// pdb: NiStream::RegisterFixedString | NiStream.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+bool S_00a66480::NiStream_RegisterFixedString(const S_00a66480_Str& str)
 {
     if (Find(str) == -1)
         names.FUN_00a65f80(str);
@@ -6577,12 +6591,13 @@ struct NiStreamLoader
     unsigned int unk3b4;
     unsigned int error;
     char errorMessage[260];
-    void FUN_00a64d80(char*);
-    bool FUN_00a664e0();
+    void NiStream_LoadRTTIString(char*);
+    bool NiStream_LoadObject();
 };
 // Looks up a class factory by name, creates and ref-counts a NiObject, adds it to topObjects, and calls load on it.
 // @fnv 0x00a664e0
-bool NiStreamLoader::FUN_00a664e0()
+// pdb: NiStream::LoadObject | NiStream.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+bool NiStreamLoader::NiStream_LoadObject()
 {
     char className[256];
     union Creation
@@ -6590,7 +6605,7 @@ bool NiStreamLoader::FUN_00a664e0()
         NiObject*(__cdecl* factory)();
         NiPointer instance;
     } creation;
-    FUN_00a64d80(className);
+    NiStream_LoadRTTIString(className);
     if (!DAT_011f4784->GetAt(className, creation.factory))
     {
         error = 5;
@@ -6792,7 +6807,7 @@ struct RtStream
     char pad1fc[0x250 - 0x1fc];
     RtBinaryStream* m_pkOstr;  // src: FNV360_PDB +0x250 (old: m_pBackingStream)
 
-    void FUN_00a64160(const char* pcString);
+    void NiStream_SaveCString(const char* pcString);
     void WriteRTTIHeader();
 };
 
@@ -6823,7 +6838,7 @@ void RtStream::WriteRTTIHeader()
 
     m_pkOstr->Write(&usNumRTTI);
     for (i = 0; i < usNumRTTI; i++)
-        FUN_00a64160(ppcRTTINames[i]);
+        NiStream_SaveCString(ppcRTTINames[i]);
     FUN_00aa10f0(ppcRTTINames);
 
     for (i = 0; i < m_uiNumObjects; i++)
@@ -6848,7 +6863,7 @@ struct NiMemObject
 typedef char _sizecheck_NiMemObject[sizeof(NiMemObject) == 1 ? 1 : -1];
 struct FUN_00a66850_shell : public NiStream
 {
-    bool FUN_00a66850();
+    bool NiStream_SaveStream();
 };
 
 class TESForm;
@@ -6959,14 +6974,15 @@ struct VStream
     virtual unsigned int GetStartingOffset();
     virtual void BackPatch(unsigned int);
     void WriteRTTIHeader();
-    void FUN_00a63ee0();
+    void NiStream_SaveFixedStringTable();
     void UpdateTextureSwapList();
     void WriteData();
 };
 
 // Registers save objects, writes the header and each object's binary data, records per-object sizes, then back-patches and clears the object lists.
 // @fnv 0x00a66850
-bool FUN_00a66850_shell::FUN_00a66850()
+// pdb: NiStream::SaveStream | NiStream.obj | fnv360_0822_retail, call_gap + bridge(vtable|call_dedup) + skyrim(vtable), high
+bool FUN_00a66850_shell::NiStream_SaveStream()
 {
     VStream* pkThis = (VStream*)this;
     pkThis->RegisterSaveObjects();
@@ -6975,7 +6991,7 @@ bool FUN_00a66850_shell::FUN_00a66850()
     pkThis->SaveHeader();
     pkThis->WriteRTTIHeader();
     unsigned int uiStartingOffset = pkThis->GetStartingOffset();
-    pkThis->FUN_00a63ee0();
+    pkThis->NiStream_SaveFixedStringTable();
     pkThis->UpdateTextureSwapList();
     pkThis->WriteData();
     for (unsigned int i = 0; i < m_kObjects.m_uiSize; i++)
@@ -7139,7 +7155,7 @@ struct Thing
 
 struct Stream
 {
-    void FUN_00a63460();
+    void NiStream_GetNumberOfLinkIDs();
     Thing* FUN_00a63430();
 };
 
@@ -7323,7 +7339,7 @@ struct S_00ca76b0_Stream
 {
     int unk00;
     unsigned int unk04;
-    unsigned int FUN_00a63460();
+    unsigned int NiStream_GetNumberOfLinkIDs();
     S_00ca76b0_Obj* FUN_00a63430();
 };
 
@@ -7387,7 +7403,7 @@ void S_00ca76b0_Cls::FUN_00ca76b0(S_00ca76b0_Stream* apStream)
     S_00ca76b0_Holder* h = vfn_b4(&flag);
     if (h)
     {
-        unsigned int count = apStream->FUN_00a63460();
+        unsigned int count = apStream->NiStream_GetNumberOfLinkIDs();
         if (apStream->unk04 < 2)
         {
             S_00ca76b0_Arr* arr = &h->arr;
@@ -7649,11 +7665,12 @@ class FUN_00a64df0_Stream
     unsigned int unk244;
     unsigned int unk248;
     BinaryStream* input;
-    void __thiscall FUN_00a64df0(NiFixedString& result);
+    void __thiscall NiStream_LoadFixedString(NiFixedString& result);
 };
 
 // @fnv 0x00a64df0
-void FUN_00a64df0_Stream::FUN_00a64df0(NiFixedString& result)
+// pdb: NiStream::LoadFixedString | NiStream.obj | fnv360_0822_retail, call_gap + bridge(call_seq|call_gap) + skyrim(call_gap), high
+void FUN_00a64df0_Stream::NiStream_LoadFixedString(NiFixedString& result)
 {
     unsigned int id;
     input->Read(&id, 4);

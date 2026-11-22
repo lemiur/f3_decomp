@@ -253,14 +253,14 @@ struct Property {
     int unk00,unk04;
     float unk08;
     void* unk0c;
-    void FUN_00beafa0();
-    void FUN_00bf0720(bool);
+    void Tile_Value_ClearActions();
+    void Tile_Value_CalculateValue(bool);
     __forceinline void Set(float f) {
         bool changed = unk08 != f || unk0c != 0;
         unk08 = f;
         if(unk0c) { DAT_01090a78.FUN_0086ba60(unk0c); unk0c=0; }
-        FUN_00beafa0();
-        FUN_00bf0720(changed);
+        Tile_Value_ClearActions();
+        Tile_Value_CalculateValue(changed);
     }
 };
 struct Widget {

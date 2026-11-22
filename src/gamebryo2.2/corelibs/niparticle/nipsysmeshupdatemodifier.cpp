@@ -103,10 +103,11 @@ struct NiPSysMeshUpdateModifier
     NiAVObject** m_ppkMeshes;
     char _pad2[2];
     unsigned short m_usElementCount;
-    bool FUN_00c20f80(NiStream&);
+    bool NiPSysMeshUpdateModifier_RegisterStreamables(NiStream&);
 };
 // @fnv 0x00c20f80
-bool NiPSysMeshUpdateModifier::FUN_00c20f80(NiStream& kStream)
+// pdb: NiPSysMeshUpdateModifier::RegisterStreamables | NiPSysMeshUpdateModifier.obj | fnv360_0721_beta, objrun + bridge(vtable|objopen_prop) + skyrim(caller_sim), high
+bool NiPSysMeshUpdateModifier::NiPSysMeshUpdateModifier_RegisterStreamables(NiStream& kStream)
 {
     if (!((Holder31670*)this)->FUN_00c31670(kStream))
         return false;
@@ -235,7 +236,7 @@ class FUN_00c212b0_ref
 class FUN_00c212b0_src
 {
   public:
-    void* FUN_00a5d680();
+    void* NiObject_Clone();
 };
 
 class FUN_00c212b0_item
@@ -253,11 +254,12 @@ class FUN_00c212b0_cls
     FUN_00c212b0_item** m_ppItems;
     char unk90[2];
     unsigned short m_usNumMeshes;
-    void FUN_00c212b0(unsigned int a1, FUN_00c212b0_src* a2);
+    void NiMeshPSysData_FillPool(unsigned int a1, FUN_00c212b0_src* a2);
 };
 
 // @fnv 0x00c212b0
-void FUN_00c212b0_cls::FUN_00c212b0(unsigned int uiIndex, FUN_00c212b0_src* pSource)
+// pdb: NiMeshPSysData::FillPool | NiPSysMeshUpdateModifier.obj | fnv360_0822_retail, caller_sim + bridge(call_seq|caller_sim) + skyrim(caller_sim), high
+void FUN_00c212b0_cls::NiMeshPSysData_FillPool(unsigned int uiIndex, FUN_00c212b0_src* pSource)
 {
     if (uiIndex < m_usNumMeshes && m_ppItems[uiIndex] != 0)
     {
@@ -267,7 +269,7 @@ void FUN_00c212b0_cls::FUN_00c212b0(unsigned int uiIndex, FUN_00c212b0_src* pSou
         {
             do
             {
-                FUN_00c212b0_ref* p = (FUN_00c212b0_ref*)pSource->FUN_00a5d680();
+                FUN_00c212b0_ref* p = (FUN_00c212b0_ref*)pSource->NiObject_Clone();
                 void* out = p;
                 if (p != 0)
                 {
@@ -745,7 +747,7 @@ extern "C" __declspec(dllimport) long __stdcall InterlockedIncrement(volatile lo
 extern "C" __declspec(dllimport) long __stdcall InterlockedDecrement(volatile long*);
 struct ReferenceSource
 {
-    unsigned int FUN_00a63460();
+    unsigned int NiStream_GetNumberOfLinkIDs();
     NiRefObject* FUN_00a63430();
 };
 struct ReferenceArray
@@ -770,7 +772,7 @@ struct ReferenceContainer
 void ReferenceContainer::CopyReferencesFromSource(ReferenceSource* source)
 {
     FUN_00c31650(source);
-    unsigned int count = source->FUN_00a63460();
+    unsigned int count = source->NiStream_GetNumberOfLinkIDs();
     ReferenceArray* array = &this->array;
     array->FUN_0060bef0(count);
     for (unsigned int index = 0; index < count; ++index)
@@ -846,12 +848,13 @@ class NiPSysMeshUpdateModifierC212 : public NiPSysModifierC212
   public:
     NiTPrimitiveArrayC212<NiObjectC212*> m_kSceneObjects;
 
-    bool FUN_00c21230(NiObjectC212* pkObject);
+    bool NiPSysMeshUpdateModifier_IsEqual(NiObjectC212* pkObject);
 };
 
 // Compares m_kSceneObjects with pkObject's m_kSceneObjects, returning true only if both arrays have the same size and each element is equal.
 // @fnv 0x00c21230
-bool NiPSysMeshUpdateModifierC212::FUN_00c21230(NiObjectC212* pkObject)
+// pdb: NiPSysMeshUpdateModifier::IsEqual | NiPSysMeshUpdateModifier.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun_open) + skyrim(objrun_open), high
+bool NiPSysMeshUpdateModifierC212::NiPSysMeshUpdateModifier_IsEqual(NiObjectC212* pkObject)
 {
     if (!FUN_00c31830(pkObject))
     {
@@ -1062,7 +1065,8 @@ struct MeshPSysData
 
 // For each active vertex, copies position and scale to its mesh, optionally sets rotation, then calls UpdateDownwardPass.
 // @f3 0x00ac0240 (community match, verified in this file)
-void __stdcall FUN_00c21080(float fTime, MeshPSysData* pkData)
+// pdb: NiPSysMeshUpdateModifier::Update | NiPSysMeshUpdateModifier.obj | fnv360_0721_beta, objrun + bridge(vtable|objopen_prop) + skyrim(caller_sim), high
+void __stdcall NiPSysMeshUpdateModifier_Update(float fTime, MeshPSysData* pkData)
 {
     float* pfRotationAngles = pkData->m_pfRotationAngles;
     MeshNiPoint3* pkRotationAxes = pkData->m_pkRotationAxes;
@@ -1150,7 +1154,7 @@ class Mesh_c21
 class Src_c21
 {
   public:
-    Mesh_c21* FUN_00a5d680();
+    Mesh_c21* NiObject_Clone();
 };
 
 class Sink_c21
@@ -1257,7 +1261,7 @@ void FUN_00c21400_cls::AttachMesh(MeshLookup* pkLookup, unsigned short usIndex)
     ((Lk2_c21*)pkLookup)->GetMeshHandle(usMesh, (CloneHandle*)&pkOut);
     if (!pkOut)
     {
-        Mesh_c21* pkClone = m_1c[usMesh]->FUN_00a5d680();
+        Mesh_c21* pkClone = m_1c[usMesh]->NiObject_Clone();
         if (pkClone)
         {
             pkOut = pkClone;
@@ -1379,11 +1383,12 @@ struct C21550ParticleSystem : MeshSystem
 class C21550PostLink : public NiPSysMeshUpdateModifierC212
 {
   public:
-    void FUN_00c21550(NiStream& stream);
+    void NiPSysMeshUpdateModifier_PostLinkObject(NiStream& stream);
 };
 
 // @fnv 0x00c21550
-void C21550PostLink::FUN_00c21550(NiStream& stream)
+// pdb: NiPSysMeshUpdateModifier::PostLinkObject | NiPSysMeshUpdateModifier.obj | fnv360_0822_retail, objrun + bridge(vtable|caller_sim) + skyrim(caller_sim), high
+void C21550PostLink::NiPSysMeshUpdateModifier_PostLinkObject(NiStream& stream)
 {
     reinterpret_cast<C21550LinkBase*>(this)->FUN_00a89af0(stream);
     C21550StreamView* streamView = reinterpret_cast<C21550StreamView*>(&stream);
@@ -1407,7 +1412,7 @@ void C21550PostLink::FUN_00c21550(NiStream& stream)
                 NiObjectC212* mesh = m_kSceneObjects.m_pBase[index];
                 if (mesh != 0)
                 {
-                    reinterpret_cast<FUN_00c212b0_cls*>(data)->FUN_00c212b0(index,
+                    reinterpret_cast<FUN_00c212b0_cls*>(data)->NiMeshPSysData_FillPool(index,
                                                                             reinterpret_cast<FUN_00c212b0_src*>(mesh));
                 }
             }

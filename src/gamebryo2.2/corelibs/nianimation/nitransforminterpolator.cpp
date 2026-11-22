@@ -191,13 +191,14 @@ int __thiscall FUN_00a3f990_shell::FUN_00a3f990(unsigned int* puiValue, int* piV
 
 struct FUN_00a3fad0_shell : public NiTransformInterpolator
 {
-    void* FUN_00a3fad0();
+    void* bhkUnaryAction_GetRTTI();
 };
 
 extern "C" const char* g_011f3ee0_arg1;
 
 // @fnv 0x00a3fad0
-void* FUN_00a3fad0_shell::FUN_00a3fad0()
+// pdb: bhkUnaryAction::GetRTTI | GlobalFunc.obj | fnv360_0822_retail, udata + bridge(vtable_prefix|vtable), high
+void* FUN_00a3fad0_shell::bhkUnaryAction_GetRTTI()
 {
     return &g_011f3ee0_arg1;
 }
@@ -225,7 +226,7 @@ struct BSRotAccumTransfInterpolator : public NiTransformInterpolator
 typedef char _sizecheck_BSRotAccumTransfInterpolator[sizeof(BSRotAccumTransfInterpolator) == 88 ? 1 : -1];
 struct FUN_00a3fd10_shell : public NiTransformInterpolator
 {
-    NiInterpolator* FUN_00a3fd10(float, float);
+    NiInterpolator* NiTransformInterpolator_GetSequenceInterpolator(float, float);
 };
 
 struct FUN_00a57050_tgt
@@ -249,7 +250,8 @@ struct RcObj
 __declspec(dllimport) long __stdcall InterlockedDecrement(volatile long*);
 
 // @fnv 0x00a3fd10
-NiInterpolator* FUN_00a3fd10_shell::FUN_00a3fd10(float m_fStartTime, float m_fMaximumDistance)
+// pdb: NiTransformInterpolator::GetSequenceInterpolator | NiTransformInterpolator.obj | fnv360_0822_retail, caller_sim + bridge(vtable|caller_sim) + skyrim(caller_sim), high
+NiInterpolator* FUN_00a3fd10_shell::NiTransformInterpolator_GetSequenceInterpolator(float m_fStartTime, float m_fMaximumDistance)
 {
     NiTransformInterpolator* pkSeqInterp =
         (NiTransformInterpolator*)((FUN_00a57050_tgt*)this)->FUN_00a57050(m_fStartTime, m_fMaximumDistance);
@@ -378,7 +380,7 @@ struct CloningProcess
 typedef char _sizecheck_NiCloningProcess[sizeof(CloningProcess) == 16 ? 1 : -1];
 struct FUN_00a40460_shell : public NiTransformInterpolator
 {
-    NiObject* FUN_00a40460(CloningProcess*);
+    NiObject* NiTransformInterpolator_CreateClone(CloningProcess*);
 };
 
 inline void* operator new(unsigned int, void* pkMem)
@@ -395,14 +397,15 @@ struct FUN_00a3fa30 : public NiTransformInterpolator
 };
 struct NiTransformInterpolatorCopy
 {
-    void FUN_00a40360(NiTransformInterpolator* pkDest, CloningProcess* kCloning);
+    void NiTransformInterpolator_CopyMembers(NiTransformInterpolator* pkDest, CloningProcess* kCloning);
 };
-// Allocates a new NiTransformInterpolator and copies this interpolator's data into it via FUN_00a40360, returning it as a NiObject.
+// Allocates a new NiTransformInterpolator and copies this interpolator's data into it via NiTransformInterpolator_CopyMembers, returning it as a NiObject.
 // @fnv 0x00a40460
-NiObject* FUN_00a40460_shell::FUN_00a40460(CloningProcess* kCloning)
+// pdb: NiTransformInterpolator::CreateClone | NiTransformInterpolator.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun) + skyrim(objrun_open), high
+NiObject* FUN_00a40460_shell::NiTransformInterpolator_CreateClone(CloningProcess* kCloning)
 {
     NiTransformInterpolator* pkObject = new (BSFadeNode::operator new(sizeof(NiTransformInterpolator))) FUN_00a3fa30(0);
-    ((NiTransformInterpolatorCopy*)this)->FUN_00a40360(pkObject, kCloning);
+    ((NiTransformInterpolatorCopy*)this)->NiTransformInterpolator_CopyMembers(pkObject, kCloning);
     return (NiObject*)pkObject;
 }
 
@@ -1018,7 +1021,7 @@ struct FUN_00a95ca0_helper
 
 struct FUN_00a38b60_tgt
 {
-    void __thiscall FUN_00a38b60(NiStream* stream);
+    void __thiscall NiQuatTransform_SaveBinary(NiStream* stream);
 };
 
 struct FUN_00a3f8a0_stream
@@ -1053,7 +1056,7 @@ struct FUN_00a3f8a0_t
 void __thiscall FUN_00a3f8a0_t::FUN_00a3f8a0(NiStream* stream)
 {
     reinterpret_cast<FUN_00a95ca0_helper*>(this)->FUN_00a95ca0(stream);
-    reinterpret_cast<FUN_00a38b60_tgt*>(&m_kTransformValue)->FUN_00a38b60(stream);
+    reinterpret_cast<FUN_00a38b60_tgt*>(&m_kTransformValue)->NiQuatTransform_SaveBinary(stream);
     reinterpret_cast<FUN_00a3f8a0_stream*>(stream)->vf30(m_spData);
 }
 
@@ -1103,7 +1106,8 @@ struct S_00a40360_Source
 
 // Calls FUN_00aa0ab0, then copies 32 bytes at offset 0x0c plus fields 0x38-0x40, the ref-counted pointer at 0x2c and the shorts at 0x30-0x34 into pkDest.
 // @fnv 0x00a40360
-void NiTransformInterpolatorCopy::FUN_00a40360(NiTransformInterpolator* pkDest, CloningProcess* kCloning)
+// pdb: NiTransformInterpolator::CopyMembers | NiTransformInterpolator.obj | fnv360_0822_retail, objrun + bridge(call_seq|objrun) + skyrim(objrun_open), high
+void NiTransformInterpolatorCopy::NiTransformInterpolator_CopyMembers(NiTransformInterpolator* pkDest, CloningProcess* kCloning)
 {
     S_00a40360_Source* pSource = reinterpret_cast<S_00a40360_Source*>(this);
     S_00a40360_Source* pDest = reinterpret_cast<S_00a40360_Source*>(pkDest);
@@ -1128,7 +1132,8 @@ inline void* __cdecl operator new(unsigned int, void* address)
     return address;
 }
 // @fnv 0x00a403f0
-FUN_00a3fa30* __cdecl FUN_00a403f0()
+// pdb: NiTransformInterpolator::CreateObject | NiTransformInterpolator.obj | fnv360_0822_retail, objrun + bridge(hash|objrun), high
+FUN_00a3fa30* __cdecl NiTransformInterpolator_CreateObject()
 {
     void* storage = FUN_00aa13e0(sizeof(FUN_00a3fa30));
     if (storage)
@@ -1312,11 +1317,12 @@ struct S00a3ffd0_Interp : NiTransformInterpolator
     {
         return (S00a3ffd0_Data*)m_spData.p;
     }
-    void FUN_00a3ffd0();
+    void NiTransformInterpolator_Collapse();
 };
 // Evaluates position, rotation, and scale keys to determine if they are constant, updating m_kTransformValue and clearing m_spData if all are absent.
 // @fnv 0x00a3ffd0
-void S00a3ffd0_Interp::FUN_00a3ffd0()
+// pdb: NiTransformInterpolator::Collapse | NiTransformInterpolator.obj | fnv360_0822_retail, caller_sim + bridge(vtable|caller_sim) + skyrim(caller_sim), high
+void S00a3ffd0_Interp::NiTransformInterpolator_Collapse()
 {
     if (!m_spData.p)
         return;

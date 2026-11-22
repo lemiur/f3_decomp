@@ -354,13 +354,14 @@ struct Mesh308Compat
 };
 struct DerivedThis308 : This308
 {
-    char __thiscall FUN_00c24de0(This308*);
-    char __thiscall FUN_00c30970(This308*);
+    char __thiscall NiPSysData_IsEqual(This308*);
+    char __thiscall NiMeshPSysData_IsEqual(This308*);
 };
 // @fnv 0x00c30970
-char __thiscall DerivedThis308::FUN_00c30970(This308* other)
+// pdb: NiMeshPSysData::IsEqual | NiMeshPSysData.obj | fnv360_0822_retail, caller_sim + skyrim(caller_sim), high
+char __thiscall DerivedThis308::NiMeshPSysData_IsEqual(This308* other)
 {
-    if (!FUN_00c24de0(other))
+    if (!NiPSysData_IsEqual(other))
         return 0;
     Mesh308Compat* thisMesh = reinterpret_cast<Mesh308Compat*>(m7c);
     Mesh308* otherMesh = other->m7c;
@@ -740,14 +741,14 @@ struct MeshSave
     unsigned int unk88;
     SavedElement** elements;
     unsigned short capacity, count, growth, unk96;
-    void FUN_00c25560(SaveStream&);
+    void NiPSysData_SaveBinary(SaveStream&);
     void WriteToStream(SaveStream&);
 };
-// Calls FUN_00c25560, then writes value, active, count and each element's id (or zero) to the stream, and saves a link to particleMeshes.
+// Calls NiPSysData_SaveBinary, then writes value, active, count and each element's id (or zero) to the stream, and saves a link to particleMeshes.
 // @fnv 0x00c30cc0
 void MeshSave::WriteToStream(SaveStream& stream)
 {
-    FUN_00c25560(stream);
+    NiPSysData_SaveBinary(stream);
     stream.buffer->Write(&value, 4);
     {
         bool bActive = active;
@@ -1094,7 +1095,7 @@ struct NiParticleInfoSI
 
 struct NiPSysData_StandIn
 {
-    void FUN_00c24cc0(unsigned short usParticle);
+    void NiPSysData_RemoveParticle(unsigned short usParticle);
 };
 
 struct NiMeshPSysDataSI : NiPSysData_StandIn
@@ -1143,7 +1144,7 @@ void NiMeshPSysDataSI::FUN_00c30e80(unsigned short usParticleIndex)
     unsigned short usLastParticle = m_usActive - 1;
     unsigned short usParticleGeneration = m_pkParticleInfo[usParticleIndex].m_usFirstValue;
 
-    FUN_00c24cc0(usParticleIndex);
+    NiPSysData_RemoveParticle(usParticleIndex);
 
     NiAVObjectPtrSI spParticle = 0;
     if (usParticleIndex == usLastParticle)
@@ -1523,7 +1524,7 @@ struct PSysDataBase
 struct NiMeshPSysDataStub : PSysDataBase
 {
     void FillPools(bool bFill);
-    void FUN_00c31090(NiStream& kStream);
+    void NiMeshPSysData_LoadBinary(NiStream& kStream);
 };
 
 struct NiMeshPSysDataLayout : NiMeshPSysDataStub
@@ -1570,7 +1571,8 @@ inline void S00c31090_AddPool(PoolArrayArray& kPools, unsigned int uiIndex, Pool
 
 // Loads base particle data, fills pools for older versions, and otherwise reads pool sizes and creates a pool for each nonzero size.
 // @f3 0x00ad14d0 (community match, verified in this file)
-void NiMeshPSysDataStub::FUN_00c31090(NiStream& kStream)
+// pdb: NiMeshPSysData::LoadBinary | NiMeshPSysData.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun) + skyrim(caller_sim), high
+void NiMeshPSysDataStub::NiMeshPSysData_LoadBinary(NiStream& kStream)
 {
     NiMeshPSysDataLayout* pkThis = (NiMeshPSysDataLayout*)this;
     unsigned int uiPoolSize;

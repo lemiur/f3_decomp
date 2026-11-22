@@ -27,7 +27,7 @@ struct S_Router
     }
 };
 S_Router* FUN_00c85750();
-int FUN_00cb10d0(const char* s);
+int hkString_strLen(const char* s);
 
 struct S_Arr
 {
@@ -60,7 +60,7 @@ struct S_Out
     int unkc;
     S_Out* FUN_00dda690(S_Arr* a);
     S_Out* FUN_00dda6e0(const char* name);
-    void FUN_00d605d0(unsigned v);
+    void hkOArchive_write8u(unsigned v);
     void WriteInt(unsigned v);
     void WriteUInt16(unsigned v);
     void FUN_00d607b0(const void* p, int n);

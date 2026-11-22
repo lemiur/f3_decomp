@@ -115,7 +115,8 @@ struct Heap92 { void* FUN_008f6d30(int size,int tag); void FUN_008f6d90(void* me
 struct Source92;
 struct SourceMethods92 { void (__thiscall* destroy)(Source92*,int); };
 struct Source92 { SourceMethods92* methods; unsigned short size; short references; int unk08; int unk0c; Source92* FUN_009af710(const char*); };
-ObjB* __stdcall FUN_00cbbee0(int name) {
+// pdb: hkNativeFileSystem::openWriter | hkBaseSystem.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+ObjB* __stdcall hkNativeFileSystem_openWriter(int name) {
  Buffer92 buffer; buffer.data=0; buffer.count=0; buffer.capacity=0x80000000;
  Heap92* heap=(Heap92*)FUN_00d9b080(DAT_010f3170);
  Source92* object=(Source92*)heap->FUN_008f6d30(0x10,0x1a); object->size=0x10;

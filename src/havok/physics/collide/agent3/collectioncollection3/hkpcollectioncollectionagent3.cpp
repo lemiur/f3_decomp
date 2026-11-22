@@ -45,13 +45,13 @@ void FUN_00d36270(FUN_00d36270_s* self)
     self->m_flag = 1;
 }
 
-void __cdecl FUN_00da35f0(void*, float, float, void*);
+void __cdecl hkAgent1nMachine_WarpTime(void*, float, float, void*);
 
-// Calls FUN_00da35f0 with b, c, d and e, ignoring a.
+// Calls hkAgent1nMachine_WarpTime with b, c, d and e, ignoring a.
 // @fnv 0x00d34d80
 void __cdecl FUN_00d34d80(void* apUnused, void* b, float afValue1, float afValue2, void* e)
 {
-    FUN_00da35f0(b, afValue1, afValue2, e);
+    hkAgent1nMachine_WarpTime(b, afValue1, afValue2, e);
 }
 
 struct __declspec(align(16)) D36270Data {

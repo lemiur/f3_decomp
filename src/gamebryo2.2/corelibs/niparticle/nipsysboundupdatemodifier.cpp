@@ -76,7 +76,7 @@ struct NiPSysBoundUpdateModifier : NiPSysPositionModifier
     void* m_pkBounds;
     NiPSysBoundUpdateModifier() throw();
     void SetUpdateSkipCounter(int);
-    NiObject* FUN_00c2dec0(CloningProcess&);
+    NiObject* NiPSysBoundUpdateModifier_CreateClone(CloningProcess&);
 };
 inline NiPSysBoundUpdateModifier::NiPSysBoundUpdateModifier() throw()
 {
@@ -86,7 +86,8 @@ inline NiPSysBoundUpdateModifier::NiPSysBoundUpdateModifier() throw()
     m_pkBounds = 0;
 }
 // @fnv 0x00c2dec0
-NiObject* NiPSysBoundUpdateModifier::FUN_00c2dec0(CloningProcess& kCloning)
+// pdb: NiPSysBoundUpdateModifier::CreateClone | NiPSysBoundUpdateModifier.obj | fnv360_0822_retail, caller_sim + bridge(vtable|caller_sim) + skyrim(caller_sim), high
+NiObject* NiPSysBoundUpdateModifier::NiPSysBoundUpdateModifier_CreateClone(CloningProcess& kCloning)
 {
     NiPSysBoundUpdateModifier* pkObject = new NiPSysBoundUpdateModifier;
     CopyMemberData(pkObject, kCloning);
@@ -318,7 +319,7 @@ class BC2E370Emitter : public BC2E370Modifier
 {
   public:
     virtual void LoadBinary(BC2E370Stream& kStream);
-    void FUN_00c2e370(BC2E370Stream& kStream);
+    void NiPSysBoundUpdateModifier_LoadBinary(BC2E370Stream& kStream);
     void SetFlags(unsigned short usFlags);
 
     int unk04;
@@ -331,7 +332,8 @@ class BC2E370Emitter : public BC2E370Modifier
 
 // Loads the modifier base data, then reads the flags (or a local usFlags on older file versions) and applies them via SetFlags.
 // @fnv 0x00c2e370
-void BC2E370Emitter::FUN_00c2e370(BC2E370Stream& kStream)
+// pdb: NiPSysBoundUpdateModifier::LoadBinary | NiPSysBoundUpdateModifier.obj | fnv360_0822_retail, uconst + bridge(vtable|uconst) + skyrim(uconst), high
+void BC2E370Emitter::NiPSysBoundUpdateModifier_LoadBinary(BC2E370Stream& kStream)
 {
     BC2E370Modifier::LoadBinary(kStream);
     if (kStream.m_uiFileVersion <= 0x0A010064)
@@ -624,7 +626,7 @@ struct FUN_00c25db0_shell
 };
 struct FUN_00c25e40_shell
 {
-    float FUN_00c25e40(unsigned short, unsigned short);
+    float BSStripPSysData_GetPointRadii(unsigned short, unsigned short);
 };
 struct FUN_00c25e20_shell
 {
@@ -677,7 +679,7 @@ void BoundUpdater::FUN_00c2d880(float time, TESBoundObjectBounds* apBounds)
         for (unsigned short j = 0; j < n; ++j)
         {
             NiPoint3* p = apBounds->GetSlotData((unsigned short)i, j);
-            float r = ((FUN_00c25e40_shell*)apBounds)->FUN_00c25e40((unsigned short)i, j) *
+            float r = ((FUN_00c25e40_shell*)apBounds)->BSStripPSysData_GetPointRadii((unsigned short)i, j) *
                       ((FUN_00c25e20_shell*)apBounds)->GetInnerValue((unsigned short)i, j);
             double fTemp;
             fTemp = p->x - r;

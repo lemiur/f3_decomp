@@ -235,7 +235,7 @@ __forceinline void store3(const hkVector4& v, hkReal* p)
 
 struct S00d4e0f0_Object : hkpBreakableConstraintData
 {
-    void FUN_00d4e0f0(const hkpConstraintQueryInD4E0& in, int out);
+    void hkpBreakableConstraintData_buildJacobian(const hkpConstraintQueryInD4E0& in, int out);
 };
 
 // If the runtime flag is clear, saves body velocities and calls FUN_00d72190 or FUN_00d6f460; else calls FUN_00d4de30 and optionally removes the constraint.
@@ -279,14 +279,15 @@ struct hkpQueryW130
 };
 struct hkpWorldW130
 {
-    void FUN_00908400(hkBool* result, struct hkpConstraintInstanceD4E0* constraint);
+    void hkpWorld_removeConstraint(hkBool* result, struct hkpConstraintInstanceD4E0* constraint);
 };
 void __stdcall FUN_009dabb0(const hkpConstraintQueryInD4E0& in, int out);
 void __cdecl FUN_00a00ec0(hkpConstraintAtom* atoms, const hkpConstraintQueryInD4E0& in, hkpBoolResultD4E0 flag,
                           int out);
 void __cdecl FUN_009fccc0(hkpConstraintAtom* atoms, int sizeOfAllAtoms, const hkpConstraintQueryInD4E0& in, int out);
 
-void S00d4e0f0_Object::FUN_00d4e0f0(const hkpConstraintQueryInD4E0& in, int out)
+// pdb: hkpBreakableConstraintData::buildJacobian | hkpBreakableConstraintData.obj | fnv360_0822_retail, caller_sim + bridge(caller_sim|vtable) + skyrim(caller_sim), high
+void S00d4e0f0_Object::hkpBreakableConstraintData_buildJacobian(const hkpConstraintQueryInD4E0& in, int out)
 {
     const hkpQueryW130& q = reinterpret_cast<const hkpQueryW130&>(in);
     RuntimeD4E0* runtime = reinterpret_cast<RuntimeD4E0*>(q.m_pByteBuffer + m_usRuntimeOffset);
@@ -322,7 +323,7 @@ void S00d4e0f0_Object::FUN_00d4e0f0(const hkpConstraintQueryInD4E0& in, int out)
         {
             hkBool result;
             hkpConstraintInstanceD4E0* instance = q.m_pConstraintChainInstance;
-            reinterpret_cast<hkpWorldW130*>(instance->m_entities0->m_pOwningWorld)->FUN_00908400(&result, instance);
+            reinterpret_cast<hkpWorldW130*>(instance->m_entities0->m_pOwningWorld)->hkpWorld_removeConstraint(&result, instance);
         }
     }
 }

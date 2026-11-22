@@ -66,10 +66,11 @@ class FUN_00dee820_Class
     unsigned int unk58;
     unsigned int unk5c;
     unsigned int m_60;
-    void FUN_00dee820(unsigned int a, FUN_00c7f640_Class* owner);
+    void hkpPointToPathConstraintData_calcPivot(unsigned int a, FUN_00c7f640_Class* owner);
 };
 // @fnv 0x00dee820
-void FUN_00dee820_Class::FUN_00dee820(unsigned int uiValue, FUN_00c7f640_Class* owner)
+// pdb: hkpPointToPathConstraintData::calcPivot | hkpPointToPathConstraintData.obj | fnv360_0822_retail, call_gap + bridge(call_seq|call_gap) + skyrim(caller_sim), high
+void FUN_00dee820_Class::hkpPointToPathConstraintData_calcPivot(unsigned int uiValue, FUN_00c7f640_Class* owner)
 {
     owner->FUN_00c7f640(uiValue, &m_60);
 }

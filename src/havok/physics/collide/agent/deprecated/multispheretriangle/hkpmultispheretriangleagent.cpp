@@ -132,12 +132,13 @@ class FUN_00d37e10_cls
     unsigned int unk18;
     unsigned short m_w1C[8];
 
-    void FUN_00d37e10(int arg);
+    void hkpMultiSphereTriangleAgent_cleanup(int arg);
 };
 
 // Calls m_pSub->v14 for each non-0xffff entry in m_w1C, then destroys this with vDtor(1).
 // @fnv 0x00d37e10
-void FUN_00d37e10_cls::FUN_00d37e10(int arg)
+// pdb: hkpMultiSphereTriangleAgent::cleanup | hkpMultiSphereTriangleAgent.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void FUN_00d37e10_cls::hkpMultiSphereTriangleAgent_cleanup(int arg)
 {
     unsigned short* p = m_w1C;
     int n = 8;

@@ -96,7 +96,7 @@ struct CFCA90Object
     void ProcessShapePair(CFCA90Shape*, CFCA90Shape*, void*, CFCA90Range*);
 };
 // @f3 0x00986af0 (community match, verified in this file)
-void __cdecl FUN_00988390(void*, void*);
+void __cdecl hkpEntityCallbackUtil_fireContactProcessInternal(void*, void*);
 
 void CFCA90Object::ProcessShapePair(CFCA90Shape* shapeA, CFCA90Shape* shapeB, void* unusedInput, CFCA90Range* range)
 {
@@ -118,9 +118,9 @@ void CFCA90Object::ProcessShapePair(CFCA90Shape* shapeA, CFCA90Shape* shapeB, vo
         work.m_scratchIndices[iIndex] = 0;
     NotifyShapeSetListeners(m_controller, &work);
     if (*(unsigned short*)(partA + 0x1f4))
-        FUN_00988390(partA, &work);
+        hkpEntityCallbackUtil_fireContactProcessInternal(partA, &work);
     if (*(unsigned short*)(partB + 0x1f4))
-        FUN_00988390(partB, &work);
+        hkpEntityCallbackUtil_fireContactProcessInternal(partB, &work);
 }
 
 
@@ -317,8 +317,8 @@ struct Owner
 };
 // Builds a Contact from the owner's entities and state, calls FUN_00d01900 on the world, then calls FUN_00d001c0 on each active entity.
 // @f3 0x00986960 (community match, verified in this file)
-void __cdecl FUN_00988d10(World* world, Contact* eventData);
-void __cdecl FUN_009882e0(Entity* entity, Contact* eventData);
+void __cdecl hkpWorldCallbackUtil_fireContactPointRemoved(World* world, Contact* eventData);
+void __cdecl hkpEntityCallbackUtil_fireContactPointRemovedInternal(Entity* entity, Contact* eventData);
 void Owner::NotifyContact(unsigned short flags, unsigned int state)
 {
     Entity* const entityA = a;
@@ -330,11 +330,11 @@ void Owner::NotifyContact(unsigned short flags, unsigned int state)
     contact.entityB = entityB;
     contact.owner = this;
     contact.state = state;
-    FUN_00988d10(world, &contact);
+    hkpWorldCallbackUtil_fireContactPointRemoved(world, &contact);
     if (*(unsigned short*)&entityA->unk1f4 != 0)
-        FUN_009882e0(entityA, &contact);
+        hkpEntityCallbackUtil_fireContactPointRemovedInternal(entityA, &contact);
     if (*(unsigned short*)&entityB->unk1f4 != 0)
-        FUN_009882e0(entityB, &contact);
+        hkpEntityCallbackUtil_fireContactPointRemovedInternal(entityB, &contact);
 }
 
 

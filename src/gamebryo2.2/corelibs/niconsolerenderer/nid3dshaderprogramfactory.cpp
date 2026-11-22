@@ -183,7 +183,8 @@ struct NiD3DVertexShader
 };
 // If a global flag is set and pkVertexShader is non-null, returns true when already recreated, otherwise asks its creator to recreate it.
 // @fnv 0x00e92ee0
-bool __cdecl FUN_00e92ee0(NiD3DVertexShader* pkVertexShader)
+// pdb: NiD3DShaderProgramFactory::RecreateVertexShader | NiD3DShaderProgramFactory.obj | fnv360_0721_retail, objrun + bridge(hash|objopen_prop), high
+bool __cdecl NiD3DShaderProgramFactory_RecreateVertexShader(NiD3DVertexShader* pkVertexShader)
 {
     NiD3DShaderProgramCreator* pkCreator;
     if (DAT_0126fa10 && pkVertexShader)
@@ -207,10 +208,11 @@ struct NiD3DShaderProgramFactory_00e93020
 {
     int m_auiShapeKeys[5];
     NiTStringPointerMap_00e93020* m_pShaderBufferMap;
-    ShaderBufferRecord* __thiscall FUN_00e93020(const char* pcShaderName);
+    ShaderBufferRecord* __thiscall NiD3DShaderProgramFactory_GetVertexShader(const char* pcShaderName);
 };
 // @fnv 0x00e93020
-ShaderBufferRecord* NiD3DShaderProgramFactory_00e93020::FUN_00e93020(const char* pcShaderName)
+// pdb: NiD3DShaderProgramFactory::GetVertexShader | NiD3DShaderProgramFactory.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_seq), high
+ShaderBufferRecord* NiD3DShaderProgramFactory_00e93020::NiD3DShaderProgramFactory_GetVertexShader(const char* pcShaderName)
 {
     if (!m_pShaderBufferMap)
         return 0;
@@ -325,7 +327,8 @@ struct NiD3DPixelShader
 };
 // Returns true if the pixel shader can be recreated or its creator successfully recreates it, otherwise false.
 // @fnv 0x00e92f30
-bool FUN_00e92f30(NiD3DPixelShader* pkPixelShader)
+// pdb: NiD3DShaderProgramFactory::RecreatePixelShader | NiD3DShaderProgramFactory.obj | fnv360_0721_retail, objrun + bridge(hash|objopen_prop), high
+bool NiD3DShaderProgramFactory_RecreatePixelShader(NiD3DPixelShader* pkPixelShader)
 {
     NiD3DShaderProgramCreator* pkCreator;
     if (DAT_0126fa10 && pkPixelShader)
@@ -632,7 +635,7 @@ class NiShaderLibraryE93
                                               void* pvArg5, void* pvArg6);
 };
 
-NiShaderLibraryE93* __cdecl FUN_00e932f0(const char* pcLibName);
+NiShaderLibraryE93* __cdecl NiD3DShaderProgramFactory_GetShaderCreator(const char* pcLibName);
 
 // Returns the cached entry for pcName, or creates a shader with pkLibrary, registers it, and returns it.
 // @fnv 0x00e938e0
@@ -647,7 +650,7 @@ void* __cdecl FUN_00e938e0(void* pkDesc, void* pkRenderer, const char* pcLibName
         reinterpret_cast<NiD3DShaderProgramFactory_00e93060*>(DAT_0126fa10)->FUN_00e93060(pcName);
     if (pkEntry)
         return pkEntry;
-    NiShaderLibraryE93* pkLibrary = FUN_00e932f0(pcLibName);
+    NiShaderLibraryE93* pkLibrary = NiD3DShaderProgramFactory_GetShaderCreator(pcLibName);
     if (!pkLibrary)
         return 0;
     FakeShader_00e93820* pkShader = pkLibrary->CreateShader(pkDesc, pkRenderer, pcName, pvArg4, pvArg5, pvArg6);
@@ -871,7 +874,7 @@ class NiD3DShaderProgramCreator
                                     unsigned int p6, unsigned int p7, unsigned int p8, unsigned int p9);
 };
 
-NiD3DShaderProgramCreator* FUN_00e932f0(const char* p2);
+NiD3DShaderProgramCreator* NiD3DShaderProgramFactory_GetShaderCreator(const char* p2);
 
 // Returns a cached ShaderArg for p3, or creates one via the NiD3DShaderProgramCreator for p2 and registers it with the factory.
 // @fnv 0x00e93850
@@ -885,11 +888,11 @@ ShaderArg* FUN_00e93850(const char* p0, const char* p1, const char* apCreatorNam
     if (!p0 || !p1)
         return 0;
 
-    ShaderArg* pkShader = (ShaderArg*)((NiD3DShaderProgramFactory_00e93020*)DAT_0126fa10)->FUN_00e93020(apShaderName);
+    ShaderArg* pkShader = (ShaderArg*)((NiD3DShaderProgramFactory_00e93020*)DAT_0126fa10)->NiD3DShaderProgramFactory_GetVertexShader(apShaderName);
     if (pkShader)
         return pkShader;
 
-    NiD3DShaderProgramCreator* pkCreator = FUN_00e932f0(apCreatorName);
+    NiD3DShaderProgramCreator* pkCreator = NiD3DShaderProgramFactory_GetShaderCreator(apCreatorName);
     if (!pkCreator)
         return (ShaderArg*)pkCreator;
 
@@ -1001,7 +1004,8 @@ char __cdecl FUN_00ec67aa(int c);
 
 // Looks up a value in DAT_0126fa14 using the lowercased extension, or the filename when no extension is extracted.
 // @fnv 0x00e932f0
-void* __cdecl FUN_00e932f0(const char* pcFilename)
+// pdb: NiD3DShaderProgramFactory::GetShaderCreator | NiD3DShaderProgramFactory.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_seq), high
+void* __cdecl NiD3DShaderProgramFactory_GetShaderCreator(const char* pcFilename)
 {
     char acFileExt[256];
     void* creator;

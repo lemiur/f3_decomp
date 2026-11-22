@@ -46,11 +46,12 @@ struct S_00d3c3c0_Obj
     int unk04;
     S_00d3c3c0_Holder* unk08;
     unsigned short unk0c;
-    void FUN_00d3c3c0(int arg);
+    void hkpSphereBoxAgent_cleanup(int arg);
 };
 // If unk0c is not 0xffff, calls v14 on unk08 with unk0c and arg, then calls v00 with 1.
 // @fnv 0x00d3c3c0
-void S_00d3c3c0_Obj::FUN_00d3c3c0(int arg)
+// pdb: hkpSphereBoxAgent::cleanup | hkpSphereBoxAgent.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void S_00d3c3c0_Obj::hkpSphereBoxAgent_cleanup(int arg)
 {
     int idx = unk0c;
     if ((unsigned short)idx != 0xffff)

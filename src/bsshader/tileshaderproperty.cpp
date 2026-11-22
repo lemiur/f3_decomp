@@ -507,7 +507,7 @@ struct NiStreamStub
     int unk244;
     int unk248;
     NiBinStream* m_pBackingStream;
-    void FUN_00a64ce0(unsigned int* out);
+    void NiStream_LoadCString(unsigned int* out);
 };
 struct FUN_sub94
 {
@@ -563,14 +563,14 @@ struct FUN_00bb7b60_cls
     void FUN_00ba92c0(NiStreamStub* a1);
     void FUN_00bb7b60(NiStreamStub* a1);
 };
-// Calls FUN_00ba92c0, saves m_8c to the backing stream, reads a value via FUN_00a64ce0, and passes it to m_94 and FUN_00aa10f0.
+// Calls FUN_00ba92c0, saves m_8c to the backing stream, reads a value via NiStream_LoadCString, and passes it to m_94 and FUN_00aa10f0.
 // @fnv 0x00bb7b60
 void FUN_00bb7b60_cls::FUN_00bb7b60(NiStreamStub* a1)
 {
     FUN_00ba92c0(a1);
     SaveBin(*a1->m_pBackingStream, m_8c);
     unsigned int v = 0;
-    a1->FUN_00a64ce0(&v);
+    a1->NiStream_LoadCString(&v);
     m_94.FUN_004037f0(v, 0);
     FUN_00aa10f0(v);
 }
@@ -745,7 +745,7 @@ struct NiStreamStub
     int unk248;
     int unk24c;
     NiBinStream* m_pBackingStream;
-    void FUN_00a64160(int a1);
+    void NiStream_SaveCString(int a1);
 };
 
 struct FUN_00bb7be0_cls
@@ -797,13 +797,13 @@ template <class T> inline void SaveBin(NiBinStream& kStream, const T& val)
     unsigned int uiSize = sizeof(T);
     kStream.BinaryWrite(&val, sizeof(T), &uiSize, 1);
 }
-// Calls FUN_00ba9380, writes m_8c to the backing stream via SaveBin, and calls a1->FUN_00a64160 with m_94.
+// Calls FUN_00ba9380, writes m_8c to the backing stream via SaveBin, and calls a1->NiStream_SaveCString with m_94.
 // @fnv 0x00bb7be0
 void FUN_00bb7be0_cls::FUN_00bb7be0(NiStreamStub* a1)
 {
     FUN_00ba9380(a1);
     SaveBin(*a1->m_pBackingStream, m_8c);
-    a1->FUN_00a64160(m_94);
+    a1->NiStream_SaveCString(m_94);
 }
 }  // namespace fnv_00bb7be0
 

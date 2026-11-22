@@ -5,7 +5,8 @@
 extern char const* const g_011f5f1c_arg1;
 
 // @fnv 0x00a943f0
-char const* const* __cdecl FUN_00a943f0()
+// pdb: Ni2DBuffer::GetRTTI | Ni2DBuffer.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun) + skyrim(objrun), high
+char const* const* __cdecl Ni2DBuffer_GetRTTI()
 {
     return &g_011f5f1c_arg1;
 }
@@ -280,7 +281,7 @@ struct NiPointer
 };
 struct FUN_00a5ee30_shell
 {
-    void __thiscall FUN_00a5ee30(unsigned int, NiAVObject*, NiPointer&);
+    void __thiscall NiNode_SetAt(unsigned int, NiAVObject*, NiPointer&);
 };
 struct FUN_00a944a0_shell : public NiSwitchNode
 {
@@ -298,7 +299,7 @@ void FUN_00a944a0_shell::SetChildAtIndex(unsigned int uiIndex, NiAVObject* pkChi
     if (uiIndex >= arr->m_usMaxSize)
         arr->SetSize(arr->m_usGrowBy + uiIndex);
     arr->SetAt(uiIndex, p);
-    ((FUN_00a5ee30_shell*)this)->FUN_00a5ee30(uiIndex, pkChild, spobject);
+    ((FUN_00a5ee30_shell*)this)->NiNode_SetAt(uiIndex, pkChild, spobject);
 }
 
 extern "C" __declspec(dllimport) long __stdcall InterlockedIncrement(long*);
@@ -475,7 +476,7 @@ struct SwitchChildB10050
     virtual void f39();
     virtual void f40();
     virtual void f41(void* out, bool flag);
-    void __thiscall FUN_00a59e00(unsigned int);
+    void __thiscall NiAVObject_Cull(unsigned int);
 };
 
 struct SwitchHolderB10050
@@ -523,7 +524,7 @@ void __thiscall FUN_00a93ef0_cls::UpdateSwitchChild(unsigned int arg)
                 block.m_08 = 0;
                 child->f41(&block, false);
             }
-            child->FUN_00a59e00(arg);
+            child->NiAVObject_Cull(arg);
         }
     }
 }
@@ -1441,7 +1442,7 @@ class SwitchNodeBase : public SwitchAVObject
     SwitchAVObject** m_ppChildren;  // +0xa0
     int unka4;
     int unka8;
-    void FUN_00a5e1f0(FNV_UpdateFlags* apData, unsigned int auiFlags);
+    void NiNode_UpdateRigidDownwardPass(FNV_UpdateFlags* apData, unsigned int auiFlags);
 };
 
 class SwitchRevList
@@ -1494,7 +1495,7 @@ void SwitchNodeUpdate::FUN_00a94220(FNV_UpdateFlags* apData, unsigned int auiFla
     }
     else
     {
-        FUN_00a5e1f0(apData, auiFlags);
+        NiNode_UpdateRigidDownwardPass(apData, auiFlags);
     }
 }
 

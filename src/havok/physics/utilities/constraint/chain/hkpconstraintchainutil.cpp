@@ -77,7 +77,8 @@ struct FUN_008d2970_cls
 {
     void FUN_008d2970(const __m128* m, const __m128* v);
 };
-void FUN_00e5b3a0(XfScene_cls* a1, XfScene_cls* a2, const __m128* a3)
+// pdb: hkpConstraintChainUtil::addConstraintToBallSocketChain | hkpConstraintChainUtil.obj | fnv360_0822_retail, caller_sim + skyrim(caller_sim), high
+void hkpConstraintChainUtil_addConstraintToBallSocketChain(XfScene_cls* a1, XfScene_cls* a2, const __m128* a3)
 {
     XfSub_cls* sub = a1->m_0c;
     char** arr = *reinterpret_cast<char***>(reinterpret_cast<char*>(a1) + 0x2c);
@@ -241,7 +242,7 @@ struct S_00a91590_Owner
     unsigned int unk10;
     unsigned int unk14;
     S_00a91590_PairList m_18;
-    void FUN_009e15b0(S_00a91590_Vec* a, S_00a91590_Vec* b);
+    void hkpBallSocketChainData_addConstraintInfoInBodySpace(S_00a91590_Vec* a, S_00a91590_Vec* b);
 };
 
 struct S_00a91590_List
@@ -280,7 +281,7 @@ struct __declspec(align(16)) S_00a91590_Pair
     S_00a91590_Vec hi;
 };
 
-int FUN_00a908d0(S_00a91590_Key* a, S_00a91590_Vec* lo, S_00a91590_Vec* hi);
+int hkpConstraintUtils_getConstraintPivots(S_00a91590_Key* a, S_00a91590_Vec* lo, S_00a91590_Vec* hi);
 
 int FUN_00e5b8f0(KeyOwnerA* a1, ListB* a2, OwnerC* a3, ...)
 {
@@ -291,7 +292,7 @@ int FUN_00e5b8f0(KeyOwnerA* a1, ListB* a2, OwnerC* a3, ...)
     S_00a91590_Owner* k3 = reinterpret_cast<S_00a91590_Owner*>(a3);
     S_00a91590_ObjArray& list = k2->m_2c;
 
-    if (FUN_00a908d0(k1, &lo, &hi) != 0)
+    if (hkpConstraintUtils_getConstraintPivots(k1, &lo, &hi) != 0)
     {
         return 1;
     }
@@ -302,13 +303,13 @@ int FUN_00e5b8f0(KeyOwnerA* a1, ListB* a2, OwnerC* a3, ...)
     S_00a91590_Entity* last = list.m_data[list.m_size - 1];
     if (last == k1->m_14)
     {
-        k3->FUN_009e15b0(&lo, &hi);
+        k3->hkpBallSocketChainData_addConstraintInfoInBodySpace(&lo, &hi);
         k2->FUN_00a50b70(k1->m_18);
         return 0;
     }
     if (last == k1->m_18)
     {
-        k3->FUN_009e15b0(&hi, &lo);
+        k3->hkpBallSocketChainData_addConstraintInfoInBodySpace(&hi, &lo);
         k2->FUN_00a50b70(k1->m_14);
         return 0;
     }

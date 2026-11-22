@@ -132,7 +132,8 @@ struct TCChain
     TCChain* m_pNext;
 };
 // @fnv 0x00a6cd00
-unsigned int __fastcall FUN_00a6cd00(TCChain* p, int edx)
+// pdb: NiTimeController::ItemsInList | NiTimeController.obj | fnv360_0822_retail, call_gap_sim + bridge(call_seq|call_gap_sim) + skyrim(call_seq), high
+unsigned int __fastcall NiTimeController_ItemsInList(TCChain* p, int edx)
 {
     unsigned int n = 0;
     while (p)
@@ -878,7 +879,7 @@ class NiTimeControllerA362
     virtual void vfn_9c();
     virtual void vfn_a0();
     virtual float ComputeScaledTime(float fTime);
-    bool FUN_00a36250(float fTime);
+    bool NiTimeController_DontDoUpdate(float fTime);
 
     unsigned int m_uiRefCount;
     unsigned short m_uiObjectFlags;
@@ -910,7 +911,8 @@ class NiTimeControllerA362
 
 // When active and time changed or force-update is set, it may return true if scaled time matches; otherwise it deactivates and returns false.
 // @fnv 0x00a36250
-bool NiTimeControllerA362::FUN_00a36250(float fTime)
+// pdb: NiTimeController::DontDoUpdate | NiPSysEmitterCtlr.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_seq), high
+bool NiTimeControllerA362::NiTimeController_DontDoUpdate(float fTime)
 {
     if (GetActive())
     {
@@ -1175,7 +1177,7 @@ inline float AddLowKey(double remainder, float lowKey)
 class ScaledTimeController : public NiTimeController
 {
   public:
-    float FUN_00a6cd60(float fTime);
+    float NiTimeController_ComputeScaledTime(float fTime);
 };
 
 __declspec(thread) float ts_fLastScaledTime = 0.0f;
@@ -1186,7 +1188,8 @@ __declspec(thread) float ts_fLastHiKeyTime = 0.0f;
 
 // Computes a scaled time from fTime using frequency, phase, and cycle type, caching the result in thread-local storage when inputs are unchanged.
 // @fnv 0x00a6cd60
-float ScaledTimeController::FUN_00a6cd60(float fTime)
+// pdb: NiTimeController::ComputeScaledTime | NiTimeController.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(caller_sim), high
+float ScaledTimeController::NiTimeController_ComputeScaledTime(float fTime)
 {
     if (m_fStartTime == -3.402823466e+38F)
         m_fStartTime = fTime;

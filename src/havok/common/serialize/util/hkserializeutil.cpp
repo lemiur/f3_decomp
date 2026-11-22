@@ -491,7 +491,7 @@ struct S00d48950_Root
 };
 struct S00d48950_Entry
 {
-    int FUN_00d47120();
+    int hkClass_getDescribedVersion();
 };
 struct S00d48950_Lookup
 {

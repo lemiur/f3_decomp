@@ -214,13 +214,14 @@ struct FUN_00a712f0 : BSFadeNode
 };
 struct CamStub
 {
-    void FUN_00a70f60(void*, CloningProcess*);
+    void NiCamera_CopyMembers(void*, CloningProcess*);
 };
 // @fnv 0x00a713e0
-void* __fastcall FUN_00a713e0(CamStub* self, int edx, CloningProcess* kCloning)
+// pdb: NiCamera::CreateClone | NiCamera.obj | fnv360_0822_retail, caller_sim + bridge(vtable|caller_sim) + skyrim(caller_sim), high
+void* __fastcall NiCamera_CreateClone(CamStub* self, int edx, CloningProcess* kCloning)
 {
     FUN_00a712f0* pkObject = new FUN_00a712f0();
-    self->FUN_00a70f60(pkObject, kCloning);
+    self->NiCamera_CopyMembers(pkObject, kCloning);
     return pkObject;
 }
 
@@ -359,14 +360,14 @@ void FUN_00a71920_shell::FUN_00a71920(StrArr* strings)
 
 struct ComparableCamera : NiCamera
 {
-    bool FUN_00a5a260(NiObject*);
+    bool NiAVObject_IsEqual(NiObject*);
     bool IsEqualTo(NiObject* other);
 };
 // @fnv 0x00a6ff20
 bool ComparableCamera::IsEqualTo(NiObject* other)
 {
     NiCamera* camera = (NiCamera*)other;
-    if (FUN_00a5a260(other) && m_kViewFrustum.m_fLeftBound == camera->m_kViewFrustum.m_fLeftBound &&
+    if (NiAVObject_IsEqual(other) && m_kViewFrustum.m_fLeftBound == camera->m_kViewFrustum.m_fLeftBound &&
         m_kViewFrustum.m_fRightBound == camera->m_kViewFrustum.m_fRightBound &&
         m_kViewFrustum.m_fTopBound == camera->m_kViewFrustum.m_fTopBound &&
         m_kViewFrustum.m_fBottomBound == camera->m_kViewFrustum.m_fBottomBound &&
@@ -538,8 +539,8 @@ bool FUN_00a6ff10_StandIn::FUN_00a6ff10(NiStream& stream)
 
 struct NiStreamTail
 {
-    void FUN_00a645b0();
-    void FUN_00a64670();
+    void NiStream_ReadLinkID();
+    void NiStream_ReadMultipleLinkIDs();
 };
 
 struct NiCameraHack : NiCamera
@@ -605,16 +606,16 @@ void NiCameraHack::FUN_00a71450(NiStream& stream)
     ReadBinaryValue(stream, m_kPort.m_fMaximumV);
     ReadBinaryValue(stream, m_fTrailingValue);
 
-    reinterpret_cast<NiStreamTail*>(&stream)->FUN_00a645b0();
-    reinterpret_cast<NiStreamTail*>(&stream)->FUN_00a64670();
+    reinterpret_cast<NiStreamTail*>(&stream)->NiStream_ReadLinkID();
+    reinterpret_cast<NiStreamTail*>(&stream)->NiStream_ReadMultipleLinkIDs();
 
     if (stream.m_uiNifVersion >= 0x04010004)
     {
-        reinterpret_cast<NiStreamTail*>(&stream)->FUN_00a64670();
+        reinterpret_cast<NiStreamTail*>(&stream)->NiStream_ReadMultipleLinkIDs();
         if (stream.m_uiNifVersion >= 0x0A000107)
         {
             if (stream.m_uiNifVersion < 0x0A00010F)
-                reinterpret_cast<NiStreamTail*>(&stream)->FUN_00a64670();
+                reinterpret_cast<NiStreamTail*>(&stream)->NiStream_ReadMultipleLinkIDs();
         }
     }
 }
@@ -824,12 +825,13 @@ union FUN_00a70f60_FloatBits
 
 struct FUN_00a70f60_Obj
 {
-    void __thiscall FUN_00a70f60(NiCamera* destination, int second);
+    void __thiscall NiCamera_CopyMembers(NiCamera* destination, int second);
 };
 
 // Copies NiCamera state from source to destination via base copy, memcpy, and field assignments.
 // @fnv 0x00a70f60
-void __thiscall FUN_00a70f60_Obj::FUN_00a70f60(NiCamera* destination, int second)
+// pdb: NiCamera::CopyMembers | NiCamera.obj | fnv360_0822_retail, caller_sim + bridge(hash|call_dedup) + skyrim(caller_sim), high
+void __thiscall FUN_00a70f60_Obj::NiCamera_CopyMembers(NiCamera* destination, int second)
 {
     NiCamera* source = reinterpret_cast<NiCamera*>(this);
 

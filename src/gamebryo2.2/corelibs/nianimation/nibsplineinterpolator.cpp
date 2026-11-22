@@ -346,7 +346,7 @@ class A57E90Controller : public A57E90Object
 {
   public:
     bool BaseIsEqual(A57E90Object* pkObject);
-    bool FUN_00a57e90(A57E90Object* pkObject);
+    bool NiBSplineInterpolator_IsEqual(A57E90Object* pkObject);
 
     int unk04;
     int unk08;
@@ -357,7 +357,8 @@ class A57E90Controller : public A57E90Object
 };
 
 // @fnv 0x00a57e90
-bool A57E90Controller::FUN_00a57e90(A57E90Object* pkObject)
+// pdb: NiBSplineInterpolator::IsEqual | NiBSplineInterpolator.obj | fnv360_0822_retail, caller_sim + bridge(vtable|objrun_prop) + skyrim(call_seq), high
+bool A57E90Controller::NiBSplineInterpolator_IsEqual(A57E90Object* pkObject)
 {
     if (!BaseIsEqual(pkObject))
         return false;

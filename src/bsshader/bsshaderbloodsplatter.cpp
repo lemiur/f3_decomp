@@ -190,7 +190,8 @@ int __thiscall FUN_00b807c0_shell::FUN_00b807c0(void* a, void* b)
 extern int g_011fedc8;
 
 // @fnv 0x00b807b0
-int* __cdecl FUN_00b807b0()
+// pdb: NiAccumulator::GetRTTI | NiAccumulator.obj | fnv360_0822_retail, udata + bridge(vtable|udata) + skyrim(udata), high
+int* __cdecl NiAccumulator_GetRTTI()
 {
     return &g_011fedc8;
 }

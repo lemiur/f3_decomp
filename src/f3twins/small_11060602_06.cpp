@@ -132,7 +132,7 @@ void __cdecl FUN_009cc0c0(int a, int b, int c, int d, int e)
 // ---- family f315
 
 extern char DAT_00e7e9d4;
-struct O_009d4300 { void FUN_009d3da0(void*, void*, void*, void*); };
+struct O_009d4300 { void hkpBvAgent_getPenetrations(void*, void*, void*, void*); };
 
 struct T_009d4300 { const void* vt; unsigned char flag; unsigned int a4; };
 struct C_009d4300 { void __thiscall FUN_009d4300_(void* a1, void* a2, void* a3, unsigned int a4); };
@@ -142,7 +142,7 @@ void C_009d4300::FUN_009d4300_(void* a1, void* a2, void* a3, unsigned int a4)
     t.a4 = a4;
     t.flag = 0;
     t.vt = &DAT_00e7e9d4;
-    ((O_009d4300*)this)->FUN_009d3da0(a2, a1, a3, &t);
+    ((O_009d4300*)this)->hkpBvAgent_getPenetrations(a2, a1, a3, &t);
 }
 
 // ---- family f318

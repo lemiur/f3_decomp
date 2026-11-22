@@ -28,12 +28,12 @@ struct FUN_004019c0_owner
 };
 struct ContainerUpdate63
 {
-    bool FUN_0047d260(int);
+    bool ItemChange_GetWorn(int);
     int FUN_007270f0();
     char* FUN_0047d5b0();
     void FUN_00bf11a0(int, char*, int);
     void FUN_00bee190(int, float, int);
-    char* FUN_00becf60(int);
+    char* Tile_GetString(int);
 };
 void __cdecl FUN_00403230(char* buf, unsigned size, const char* fmt, char* name, int count);
 
@@ -43,7 +43,7 @@ void __cdecl FUN_0075d160(void* param1, void* param2)
     ContainerUpdate63* other = (ContainerUpdate63*)param2;
     ContainerUpdate63* self = (ContainerUpdate63*)param1;
 
-    if (other->FUN_0047d260(0))
+    if (other->ItemChange_GetWorn(0))
     {
         ContainerUpdate63* sub = *(ContainerUpdate63**)(*(char**)((char*)param1 + 4) + 8);
         sub->FUN_00bee190(0xfa3, 1.0f, 1);
@@ -58,7 +58,7 @@ void __cdecl FUN_0075d160(void* param1, void* param2)
     char* name = other->FUN_0047d5b0();
     ((FUN_004019c0_owner*)((char*)param1 + 0x20))->FUN_004019c0(name, 0);
     ContainerUpdate63** pp = (ContainerUpdate63**)(*(char**)((char*)param1 + 8) + 8);
-    (*pp)->FUN_00bf11a0(0xfc4, self->FUN_00becf60(0xfc4), 1);
+    (*pp)->FUN_00bf11a0(0xfc4, self->Tile_GetString(0xfc4), 1);
     self->FUN_00bee190(0xfb0, 0.0f, 1);
 }
 
@@ -1158,7 +1158,7 @@ struct MenuReference
 struct MenuForm
 {
     int FUN_00401170();
-    MenuForm* FUN_00525980(MenuReference*);
+    MenuForm* Script_IsInListFunction(MenuReference*);
 };
 struct MenuTileValue
 {

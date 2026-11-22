@@ -61,7 +61,7 @@ struct HeapD926F3
     void FUN_008f6d90(void* p, unsigned int bytes, unsigned int tag);
 };
 S_00d92690* FUN_00a269d0(int cap, int a, int b, int maxCap);
-void FUN_00a26a60(S_00d92690* dst, S_00d92690* src);
+void hkpSimpleContactConstraintAtomUtil_copyContents(S_00d92690* dst, S_00d92690* src);
 S_00d92690* FUN_00d92690(S_00d92690* apContainer, bool* grew)
 {
     S_00d92690* result = apContainer;
@@ -74,7 +74,7 @@ S_00d92690* FUN_00d92690(S_00d92690* apContainer, bool* grew)
         if (iNewCapacity >= apContainer->maxCapacity)
             iNewCapacity = apContainer->maxCapacity;
         result = FUN_00a269d0(iNewCapacity, apContainer->unk8, apContainer->unk9, apContainer->maxCapacity);
-        FUN_00a26a60(result, apContainer);
+        hkpSimpleContactConstraintAtomUtil_copyContents(result, apContainer);
         HeapD926F3* heap = (HeapD926F3*)TlsGetValue(DAT_010f3170);
         heap->FUN_008f6d90(apContainer, apContainer->unk2, 4);
         pContainer = result;

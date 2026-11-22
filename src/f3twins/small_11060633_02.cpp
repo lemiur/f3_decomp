@@ -139,7 +139,8 @@ struct T_009bca20 { char pad[0xb]; unsigned char fb; char pad2[4]; };
 struct Info_009bca20 { int a; int b; int pad8; int c; int d; int e; int f; int pad1c; };
 void __cdecl FUN_00a2b420(void*, Info_009bca20*);
 
-void __cdecl FUN_009bca20(int a1, T_009bca20* a2, int a3, H_009bca20* a4, int a5, int a6, int a7)
+// pdb: hkConvexListAgent3::updateFilter | hkpConvexListAgent3.obj | fnv360_0822_retail, objrun + bridge(caller_sim|objrun) + skyrim(caller_sim), high
+void __cdecl hkConvexListAgent3_updateFilter(int a1, T_009bca20* a2, int a3, H_009bca20* a4, int a5, int a6, int a7)
 {
     if (!(a2->fb & 0x20)) {
         Info_009bca20 i;
@@ -180,7 +181,7 @@ S_009f39a0* S_009f39a0::FUN_009f39a0(int f)
 // ---- family s071
 
 extern char DAT_0116ebc8;
-void __cdecl FUN_0082a370(const char*);
+void __cdecl NiStream_UnregisterLoader(const char*);
 void __cdecl FUN_00ac6ac0(void);
 extern const char DAT_00e8c090;
 extern const char DAT_00e8c080;
@@ -238,57 +239,57 @@ void FUN_00aba5f0()
 {
     if (DAT_0116ebc8) {
         DAT_0116ebc8 = 0;
-        FUN_0082a370(&DAT_00e8c090);
-        FUN_0082a370(&DAT_00e8c080);
-        FUN_0082a370(&DAT_00e8c06c);
-        FUN_0082a370(&DAT_00e8c04c);
-        FUN_0082a370(&DAT_00e8c028);
-        FUN_0082a370(&DAT_00e8c010);
-        FUN_0082a370(&DAT_00e8bff4);
-        FUN_0082a370(&DAT_00e8bfdc);
-        FUN_0082a370(&DAT_00e8bfc8);
-        FUN_0082a370(&DAT_00e8bfac);
-        FUN_0082a370(&DAT_00e8bf98);
-        FUN_0082a370(&DAT_00e8bf80);
-        FUN_0082a370(&DAT_00e8bf6c);
-        FUN_0082a370(&DAT_00e8bf54);
-        FUN_0082a370(&DAT_00e8bf48);
-        FUN_0082a370(&DAT_00e8bf30);
-        FUN_0082a370(&DAT_00e8bf1c);
-        FUN_0082a370(&DAT_00e8bf08);
-        FUN_0082a370(&DAT_00e8bef0);
-        FUN_0082a370(&DAT_00e8bed0);
-        FUN_0082a370(&DAT_00e8beb0);
-        FUN_0082a370(&DAT_00e8be90);
-        FUN_0082a370(&DAT_00e8be74);
-        FUN_0082a370(&DAT_00e8be54);
-        FUN_0082a370(&DAT_00e8be34);
-        FUN_0082a370(&DAT_00e8be1c);
-        FUN_0082a370(&DAT_00e8be00);
-        FUN_0082a370(&DAT_00e8bde4);
-        FUN_0082a370(&DAT_00e8bdc8);
-        FUN_0082a370(&DAT_00e8bdb0);
-        FUN_0082a370(&DAT_00e8bd94);
-        FUN_0082a370(&DAT_00e8bd78);
-        FUN_0082a370(&DAT_00e8bd60);
-        FUN_0082a370(&DAT_00e8bd44);
-        FUN_0082a370(&DAT_00e8bd24);
-        FUN_0082a370(&DAT_00e8bd08);
-        FUN_0082a370(&DAT_00e8bce8);
-        FUN_0082a370(&DAT_00e8bcd4);
-        FUN_0082a370(&DAT_00e8bcb8);
-        FUN_0082a370(&DAT_00e8bc9c);
-        FUN_0082a370(&DAT_00e8bc84);
-        FUN_0082a370(&DAT_00e8bc6c);
-        FUN_0082a370(&DAT_00e8bc50);
-        FUN_0082a370(&DAT_00e8bc38);
-        FUN_0082a370(&DAT_00e8bc20);
-        FUN_0082a370(&DAT_00e8bc0c);
-        FUN_0082a370(&DAT_00e8bbf8);
-        FUN_0082a370(&DAT_00e8bbe0);
-        FUN_0082a370(&DAT_00e8bbc0);
-        FUN_0082a370(&DAT_00e8bbac);
-        FUN_0082a370(&DAT_00e8bb90);
+        NiStream_UnregisterLoader(&DAT_00e8c090);
+        NiStream_UnregisterLoader(&DAT_00e8c080);
+        NiStream_UnregisterLoader(&DAT_00e8c06c);
+        NiStream_UnregisterLoader(&DAT_00e8c04c);
+        NiStream_UnregisterLoader(&DAT_00e8c028);
+        NiStream_UnregisterLoader(&DAT_00e8c010);
+        NiStream_UnregisterLoader(&DAT_00e8bff4);
+        NiStream_UnregisterLoader(&DAT_00e8bfdc);
+        NiStream_UnregisterLoader(&DAT_00e8bfc8);
+        NiStream_UnregisterLoader(&DAT_00e8bfac);
+        NiStream_UnregisterLoader(&DAT_00e8bf98);
+        NiStream_UnregisterLoader(&DAT_00e8bf80);
+        NiStream_UnregisterLoader(&DAT_00e8bf6c);
+        NiStream_UnregisterLoader(&DAT_00e8bf54);
+        NiStream_UnregisterLoader(&DAT_00e8bf48);
+        NiStream_UnregisterLoader(&DAT_00e8bf30);
+        NiStream_UnregisterLoader(&DAT_00e8bf1c);
+        NiStream_UnregisterLoader(&DAT_00e8bf08);
+        NiStream_UnregisterLoader(&DAT_00e8bef0);
+        NiStream_UnregisterLoader(&DAT_00e8bed0);
+        NiStream_UnregisterLoader(&DAT_00e8beb0);
+        NiStream_UnregisterLoader(&DAT_00e8be90);
+        NiStream_UnregisterLoader(&DAT_00e8be74);
+        NiStream_UnregisterLoader(&DAT_00e8be54);
+        NiStream_UnregisterLoader(&DAT_00e8be34);
+        NiStream_UnregisterLoader(&DAT_00e8be1c);
+        NiStream_UnregisterLoader(&DAT_00e8be00);
+        NiStream_UnregisterLoader(&DAT_00e8bde4);
+        NiStream_UnregisterLoader(&DAT_00e8bdc8);
+        NiStream_UnregisterLoader(&DAT_00e8bdb0);
+        NiStream_UnregisterLoader(&DAT_00e8bd94);
+        NiStream_UnregisterLoader(&DAT_00e8bd78);
+        NiStream_UnregisterLoader(&DAT_00e8bd60);
+        NiStream_UnregisterLoader(&DAT_00e8bd44);
+        NiStream_UnregisterLoader(&DAT_00e8bd24);
+        NiStream_UnregisterLoader(&DAT_00e8bd08);
+        NiStream_UnregisterLoader(&DAT_00e8bce8);
+        NiStream_UnregisterLoader(&DAT_00e8bcd4);
+        NiStream_UnregisterLoader(&DAT_00e8bcb8);
+        NiStream_UnregisterLoader(&DAT_00e8bc9c);
+        NiStream_UnregisterLoader(&DAT_00e8bc84);
+        NiStream_UnregisterLoader(&DAT_00e8bc6c);
+        NiStream_UnregisterLoader(&DAT_00e8bc50);
+        NiStream_UnregisterLoader(&DAT_00e8bc38);
+        NiStream_UnregisterLoader(&DAT_00e8bc20);
+        NiStream_UnregisterLoader(&DAT_00e8bc0c);
+        NiStream_UnregisterLoader(&DAT_00e8bbf8);
+        NiStream_UnregisterLoader(&DAT_00e8bbe0);
+        NiStream_UnregisterLoader(&DAT_00e8bbc0);
+        NiStream_UnregisterLoader(&DAT_00e8bbac);
+        NiStream_UnregisterLoader(&DAT_00e8bb90);
         FUN_00ac6ac0();
     }
 }

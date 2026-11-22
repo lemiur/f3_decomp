@@ -62,7 +62,8 @@ int S_00902360::FUN_00902360(float f)
 
 
 
-int __cdecl FUN_009232c0(const char* a, const char* b)
+// pdb: hkString::strCmp | hkString.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_dedup) + skyrim(call_seq), high
+int __cdecl hkString_strCmp(const char* a, const char* b)
 {
     return strcmp(a, b);
 }
@@ -137,8 +138,9 @@ int FUN_0096ae50()
 
 void __cdecl FUN_009a19e0();
 
-struct C_009a1a00 { int p; void* f4; int f8; void FUN_009a1a00(int a); };
-void C_009a1a00::FUN_009a1a00(int a)
+struct C_009a1a00 { int p; void* f4; int f8; void hkpBridgeConstraintAtom_init(int a); };
+// pdb: hkpBridgeConstraintAtom::init | hkpConstraintAtom.obj | fnv360_0822_retail, call_seq + bridge(call_dedup|call_seq) + skyrim(call_seq), high
+void C_009a1a00::hkpBridgeConstraintAtom_init(int a)
 {
     f8 = a;
     f4 = (void*)FUN_009a19e0;
@@ -175,32 +177,32 @@ void FUN_009b7e40(char* p)
 // ---- family f309
 
 void __cdecl FUN_009bc950(void);
-void __cdecl FUN_009bcad0(void);
-void __cdecl FUN_009bca80(void);
-void __cdecl FUN_009bc9b0(void);
-void __cdecl FUN_009bc9c0(void);
-void __cdecl FUN_009bc9e0(void);
-void __cdecl FUN_009bca00(void);
-void __cdecl FUN_009bca20(void);
+void __cdecl hkConvexListAgent3_process(void);
+void __cdecl hkConvexListAgent3_sepNormal(void);
+void __cdecl hkConvexListAgent3_cleanup(void);
+void __cdecl hkConvexListAgent3_removePoint(void);
+void __cdecl hkConvexListAgent3_commitPotential(void);
+void __cdecl hkConvexListAgent3_createZombie(void);
+void __cdecl hkConvexListAgent3_updateFilter(void);
 void __cdecl FUN_009bc8c0(void);
 void __cdecl FUN_009bc900(void);
 void __cdecl FUN_009bc920(void);
-void __cdecl FUN_009bc980(void);
+void __cdecl hkConvexListAgent3_destroy(void);
 
 void FUN_009bcf00(void* p)
 {
     *(void**)((char*)p + 0x0) = (void*)FUN_009bc950;
-    *(void**)((char*)p + 0x2c) = (void*)FUN_009bcad0;
-    *(void**)((char*)p + 0x28) = (void*)FUN_009bca80;
-    *(void**)((char*)p + 0x8) = (void*)FUN_009bc9b0;
-    *(void**)((char*)p + 0xc) = (void*)FUN_009bc9c0;
-    *(void**)((char*)p + 0x10) = (void*)FUN_009bc9e0;
-    *(void**)((char*)p + 0x14) = (void*)FUN_009bca00;
-    *(void**)((char*)p + 0x18) = (void*)FUN_009bca20;
+    *(void**)((char*)p + 0x2c) = (void*)hkConvexListAgent3_process;
+    *(void**)((char*)p + 0x28) = (void*)hkConvexListAgent3_sepNormal;
+    *(void**)((char*)p + 0x8) = (void*)hkConvexListAgent3_cleanup;
+    *(void**)((char*)p + 0xc) = (void*)hkConvexListAgent3_removePoint;
+    *(void**)((char*)p + 0x10) = (void*)hkConvexListAgent3_commitPotential;
+    *(void**)((char*)p + 0x14) = (void*)hkConvexListAgent3_createZombie;
+    *(void**)((char*)p + 0x18) = (void*)hkConvexListAgent3_updateFilter;
     *(void**)((char*)p + 0x1c) = (void*)FUN_009bc8c0;
     *(void**)((char*)p + 0x20) = (void*)FUN_009bc900;
     *(void**)((char*)p + 0x24) = (void*)FUN_009bc920;
-    *(void**)((char*)p + 0x4) = (void*)FUN_009bc980;
+    *(void**)((char*)p + 0x4) = (void*)hkConvexListAgent3_destroy;
     *((char*)p + 0x30) = 1;
 }
 
@@ -211,7 +213,8 @@ void FUN_009c3cc0();
 void FUN_009c3590();
 void FUN_00a3ab70();
 
-void FUN_009c4000(char* p)
+// pdb: hkpCapsuleTriangleAgent::initAgentFunc | hkpCapsuleTriangleAgent.obj | fnv360_0822_retail, objrun + bridge(call_gap|objrun) + skyrim(call_seq), high
+void hkpCapsuleTriangleAgent_initAgentFunc(char* p)
 {
     *(void**)(p + 0) = FUN_009c2a70;
     *(void**)(p + 4) = FUN_009c3cc0;
@@ -223,9 +226,10 @@ void FUN_009c4000(char* p)
 
 // ---- family f312
 
-void FUN_009c5c30(int, int, int, int);
+void hkpSphereBoxAgent_staticGetPenetrations(int, int, int, int);
 
-__declspec(noinline) void __stdcall FUN_009c5e50(int a, int b, int c, int d)
+// pdb: hkpSphereBoxAgent::getPenetrations | hkpSphereBoxAgent.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+__declspec(noinline) void __stdcall hkpSphereBoxAgent_getPenetrations(int a, int b, int c, int d)
 {
-    FUN_009c5c30(a, b, c, d);
+    hkpSphereBoxAgent_staticGetPenetrations(a, b, c, d);
 }

@@ -34,14 +34,14 @@ struct Owner4F {
     bool FUN_004f1620(Tag4F* tag);
 };
 
-extern bool __cdecl FUN_004d3c60(unsigned char type);
+extern bool __cdecl TESObjectCELL_IsFormTypeCellChild(unsigned char type);
 extern Interface4F* __cdecl FUN_00c0050a(
     Tag4F* tag, int zero, const char* kind, const char* name, int flags);
 
 bool Owner4F::FUN_004f1620(Tag4F* tag)
 {
     bool result = false;
-    if (FUN_004d3c60(tag->type)) {
+    if (TESObjectCELL_IsFormTypeCellChild(tag->type)) {
         Interface4F* helper =
             FUN_00c0050a(tag, 0, &DAT_00f46078, &DAT_00f4efe8, 0);
         Interface4F* helperValue = helper->Value();

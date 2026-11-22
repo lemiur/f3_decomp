@@ -813,10 +813,11 @@ struct FUN_00ba52b0_Class
     char m0[0x74];
     void* m_0x74;
     void* m_0x78;
-    void __thiscall FUN_00ba52b0(int a);
+    void __thiscall ParticleShader_InitPass(int a);
 };
 // @fnv 0x00ba52b0
-void __thiscall FUN_00ba52b0_Class::FUN_00ba52b0(int a)
+// pdb: ParticleShader::InitPass | ParticleShader.obj | fnv360_0822_retail, objrun + bridge(hash|objrun), high
+void __thiscall FUN_00ba52b0_Class::ParticleShader_InitPass(int a)
 {
     if (a == 0x41)
         DAT_0126f74c = (int)m_0x78;
@@ -1204,7 +1205,7 @@ void __thiscall FUN_00bb9590_Class::FUN_00bb9590()
 struct FUN_00bb9660_Class : LodShaderBase
 {
     char m0[0x28];
-    void FUN_00bb9660();
+    void Lighting30Shader_RecreateRendererData();
 };
 
 extern void* DAT_01200dd8[0x39];
@@ -1212,7 +1213,8 @@ extern void* DAT_01200c48[0x32];
 extern void* DAT_01200d10[0x32];
 
 // @fnv 0x00bb9660
-void FUN_00bb9660_Class::FUN_00bb9660()
+// pdb: Lighting30Shader::RecreateRendererData | Lighting30Shader.obj | fnv360_0822_retail, objrun_sim + bridge(hash|objrun_open), high
+void FUN_00bb9660_Class::Lighting30Shader_RecreateRendererData()
 {
     if (*(int*)((char*)this + 0x28) != 0)
     {
@@ -3312,7 +3314,8 @@ FUN_00baa570::~FUN_00baa570()
 extern int DAT_01200508;
 
 // @fnv 0x00baa630
-int* FUN_00baa630()
+// pdb: NiShader::NiShaderInstanceDescriptor::GetRTTI | NiXenonFragmentShader.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+int* NiShader_NiShaderInstanceDescriptor_GetRTTI()
 {
     return &DAT_01200508;
 }
@@ -3946,7 +3949,7 @@ struct S_baeb00_Stream
     int unk248;
     int unk24c;
     S_baeb00_BinStream* m_pBackingStream;
-    void FUN_00a64160(int);
+    void NiStream_SaveCString(int);
 };
 template <class T> inline void WriteBinaryArray(S_baeb00_BinStream& kStream, const T* pkValue, unsigned int uiNumEls)
 {
@@ -4006,7 +4009,7 @@ void S_baeb00_Obj::Serialize(S_baeb00_Stream& kStream)
 {
     S_baeb00_Base::FUN_00ba9380(kStream);
     SerializeValue(kStream, unk7c);
-    kStream.FUN_00a64160(unk74);
+    kStream.NiStream_SaveCString(unk74);
     SerializeValue(kStream, unk8c);
 }
 
@@ -7596,7 +7599,7 @@ struct FUN_00bb3a50_cls
     unsigned char m_74;
     void __thiscall FUN_00ba95e0(int a);
     short __thiscall FUN_00b707d0();
-    int __thiscall FUN_00b70600(int* out);
+    int __thiscall BSShaderLightingProperty_GetFirstActiveNonShadowLight(int* out);
     void* __thiscall FUN_00bb3a50(int a1, int a2, unsigned short* a3, int a4, int a5, int a6);
 };
 
@@ -7620,7 +7623,7 @@ void* FUN_00bb3a50_cls::FUN_00bb3a50(int a1, int aiKeyLow, unsigned short* apOut
         else
         {
             aiKeyHigh = 0;
-            int r = FUN_00b70600(&aiKeyHigh);
+            int r = BSShaderLightingProperty_GetFirstActiveNonShadowLight(&aiKeyHigh);
             m_3c->FUN_00ba9ee0(a1, 0x3f, 1, 2, edi, r, 0, 0);
         }
         m_38 = key;
@@ -14164,7 +14167,7 @@ struct FUN_00baea50_arg
     int unk244;
     int unk248;
     StreamObj* m_24C;
-    void FUN_00a64ce0(int* out);
+    void NiStream_LoadCString(int* out);
 };
 
 struct FUN_00baea50_cls
@@ -14219,7 +14222,7 @@ void FUN_00baea50_cls::FUN_00baea50(FUN_00baea50_arg* a1)
     FUN_00ba92c0(a1);
     a1->m_24C->Read(&m_7C, 4);
     int out = 0;
-    a1->FUN_00a64ce0(&out);
+    a1->NiStream_LoadCString(&out);
     m_74.FUN_004037f0(out, 0);
     FUN_00aa10f0(out);
     a1->m_24C->Read(&m_8C, 4);
@@ -17633,7 +17636,7 @@ struct Node
     Node* m_2c;
     Node* m_30;
     void __thiscall SetAccumulatorAt(int a, void* b, int c);
-    void __thiscall FUN_00b8a6e0(int a, int b, int c);
+    void __thiscall ImageSpaceShaderParam_SetTexOffset(int a, int b, int c);
     void __thiscall FUN_00b8a790(int a, float b, float c, float d, float e);
 };
 struct Ctx
@@ -18058,7 +18061,7 @@ void __thiscall Badb90This::FUN_00badb90(int a0, int a1, int a2, int a3)
         {
             Tex* rt1 = texA.FUN_00ba3780();
             Tex* rt2 = texA.FUN_00ba3780();
-            pParamNode->FUN_00b8a6e0(0, rt2->GetW37(), rt1->GetH38());
+            pParamNode->ImageSpaceShaderParam_SetTexOffset(0, rt2->GetW37(), rt1->GetH38());
         }
         pRenderNode->Draw4(a0, a1, pParamNode, 1);
         pRenderNode->SetAccumulatorAt(0, &texB, 0);
@@ -18066,7 +18069,7 @@ void __thiscall Badb90This::FUN_00badb90(int a0, int a1, int a2, int a3)
         {
             Tex* rt1 = texB.FUN_00ba3780();
             Tex* rt2 = texA.FUN_00ba3780();
-            pParamNode->FUN_00b8a6e0(0, rt2->GetW37(), rt1->GetH38());
+            pParamNode->ImageSpaceShaderParam_SetTexOffset(0, rt2->GetW37(), rt1->GetH38());
         }
         char* enabled = (char*)pRenderNode->m_2c->m_04;
         *enabled = 1;
@@ -19389,7 +19392,7 @@ struct P368Shader
     void FUN_00ba95e0(int);
     void FUN_00ba8ab0(float);
     void SortShadowSceneLights(P368Sphere*);
-    P368Light* FUN_00b70600(void**);
+    P368Light* BSShaderLightingProperty_GetFirstActiveNonShadowLight(void**);
     P368Light* FUN_00b70700(void**);
     P368Light* FUN_00b70590(void**);
     P368Light* FUN_00b70680(void**);

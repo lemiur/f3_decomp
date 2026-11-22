@@ -1495,7 +1495,8 @@ GlobalObjectO2_00d472a0* __cdecl FUN_00de82d0()
 extern int DAT_01269f28;
 
 // @fnv 0x00de82f0
-void* __cdecl FUN_00de82f0()
+// pdb: BSMultiBound::GetRTTI | BSMultiBound.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(udata), high
+void* __cdecl BSMultiBound_GetRTTI()
 {
     return &DAT_01269f28;
 }
@@ -1534,7 +1535,8 @@ void* __cdecl FUN_00de8390()
 
 extern int DAT_0126a048;
 // @fnv 0x00de83b0
-int* FUN_00de83b0()
+// pdb: BSReference::GetRTTI | BSStream.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(udata), high
+int* BSReference_GetRTTI()
 {
     return &DAT_0126a048;
 }
@@ -1542,7 +1544,8 @@ int* FUN_00de83b0()
 struct CpuOpaque;
 extern CpuOpaque DAT_0126a078;
 // @fnv 0x00de83d0
-CpuOpaque* __cdecl FUN_00de83d0()
+// pdb: BSNodeReferences::GetRTTI | BSStream.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(udata), high
+CpuOpaque* __cdecl BSNodeReferences_GetRTTI()
 {
     return &DAT_0126a078;
 }
@@ -1558,7 +1561,8 @@ void* __cdecl FUN_00de83f0()
 extern int DAT_0126a0d8;
 
 // @fnv 0x00de8410
-void* __cdecl FUN_00de8410()
+// pdb: BSRangeNode::GetRTTI | BSRangeNode.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(udata), high
+void* __cdecl BSRangeNode_GetRTTI()
 {
     return &DAT_0126a0d8;
 }
@@ -1573,7 +1577,8 @@ int* __cdecl FUN_00de8430()
 extern int DAT_0126a138;
 
 // @fnv 0x00de8450
-void* __cdecl FUN_00de8450()
+// pdb: BSWindModifier::GetRTTI | BSWindModifier.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(udata), high
+void* __cdecl BSWindModifier_GetRTTI()
 {
     return &DAT_0126a138;
 }
@@ -1605,7 +1610,8 @@ void* __cdecl FUN_00de84b0()
 extern FUN_00de87c0_class DAT_0126a1f8;
 
 // @fnv 0x00de84d0
-FUN_00de87c0_class* __cdecl FUN_00de84d0()
+// pdb: BSMultiBoundShape::GetRTTI | BSMultiBoundShape.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(udata), high
+FUN_00de87c0_class* __cdecl BSMultiBoundShape_GetRTTI()
 {
     return &DAT_0126a1f8;
 }
@@ -1623,7 +1629,8 @@ int* __cdecl FUN_00de84f0()
 struct CpuOpaque;
 extern CpuOpaque DAT_0126a258;
 // @fnv 0x00de8510
-CpuOpaque* __cdecl FUN_00de8510()
+// pdb: BSParticleSystemManager::GetRTTI | BSParticleSystemManager.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(udata), high
+CpuOpaque* __cdecl BSParticleSystemManager_GetRTTI()
 {
     return &DAT_0126a258;
 }
@@ -1631,7 +1638,8 @@ CpuOpaque* __cdecl FUN_00de8510()
 extern int g_0126a288;
 
 // @fnv 0x00de8530
-int* __cdecl FUN_00de8530()
+// pdb: BSSceneGraph::GetRTTI | BSSceneGraph.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(udata), high
+int* __cdecl BSSceneGraph_GetRTTI()
 {
     return &g_0126a288;
 }
@@ -1840,7 +1848,7 @@ struct FUN_00df7a60_class
     int unk18;
     void* m_p1c;
 
-    void __thiscall FUN_00df7a60();
+    void __thiscall TESForm_SetTemporary();
 };
 
 extern "C" __declspec(dllimport) long __stdcall InterlockedExchangeAdd(volatile long* value, long increment);
@@ -1848,7 +1856,7 @@ extern "C" __declspec(dllimport) long __stdcall InterlockedExchangeAdd(volatile 
 // @f3 0x004553b0 (community match, verified in this file)
 struct C004552a0
 {
-    void __thiscall FUN_004552a0();
+    void __thiscall TESForm_RemoveFromDataStructures();
 };
 struct C006dcd50
 {
@@ -1861,9 +1869,10 @@ struct C006ce6f0
 extern C006dcd50* DAT_01079ca4;
 extern C006ce6f0* DAT_01079858;
 
-void __thiscall FUN_00df7a60_class::FUN_00df7a60()
+// pdb: TESForm::SetTemporary | TESForm.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap_sim) + skyrim(call_gap_sim), high
+void __thiscall FUN_00df7a60_class::TESForm_SetTemporary()
 {
-    ((C004552a0*)this)->FUN_004552a0();
+    ((C004552a0*)this)->TESForm_RemoveFromDataStructures();
     if (DAT_01079ca4)
         DAT_01079ca4->FUN_006dcd50(this, 0);
     if (DAT_01079858)
@@ -1904,7 +1913,8 @@ int __thiscall FloatPair::FUN_00dfb040(ParserContext* ctx, int input, int* outA,
 struct CpuOpaque;
 extern CpuOpaque DAT_0126a5f8;
 // @fnv 0x00dfb260
-CpuOpaque* __cdecl FUN_00dfb260()
+// pdb: BSNiNode::GetRTTI | BSNiNode.obj | fnv360_0822_retail, vtable + skyrim(objopen_prop), high
+CpuOpaque* __cdecl BSNiNode_GetRTTI()
 {
     return &DAT_0126a5f8;
 }
@@ -1966,7 +1976,8 @@ int __cdecl FUN_00dfb4d0()
 
 extern int DAT_0126ad00;
 // @fnv 0x00dfb4f0
-void* __cdecl FUN_00dfb4f0()
+// pdb: BSDecalPlacementVectorExtraData::GetRTTI | BSDecalPVExtraData.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(udata), high
+void* __cdecl BSDecalPlacementVectorExtraData_GetRTTI()
 {
     return &DAT_0126ad00;
 }
@@ -2050,15 +2061,17 @@ int* __cdecl FUN_00dfb860()
 extern unsigned char g_fnvDat0126ae08;
 
 // @fnv 0x00dfb880
-void* FUN_00dfb880()
+// pdb: NiPSysSphereEmitter::GetRTTI | NiPSysSphereEmitter.obj | fnv360_0822_retail, udata + bridge(vtable|objopen_prop) + skyrim(objrun_open), high
+void* NiPSysSphereEmitter_GetRTTI()
 {
     return &g_fnvDat0126ae08;
 }
 
-// FUN_00dfb8a0 : a one-line function - getter
+// NiPSysBoxEmitter_GetRTTI : a one-line function - getter
 extern int g_target_00dfb8a0;
 // @fnv 0x00dfb8a0
-void* FUN_00dfb8a0()
+// pdb: NiPSysBoxEmitter::GetRTTI | NiPSysBoxEmitter.obj | fnv360_0822_retail, udata + bridge(vtable|objopen_prop) + skyrim(objrun_open), high
+void* NiPSysBoxEmitter_GetRTTI()
 {
     return &g_target_00dfb8a0;
 }
@@ -2187,7 +2200,8 @@ FreeHolder* __cdecl FUN_00c85750() throw();
 struct CpuOpaque;
 extern CpuOpaque DAT_0126b000;
 // @fnv 0x00dfbb20
-CpuOpaque* __cdecl FUN_00dfbb20()
+// pdb: BSStripPSysData::GetRTTI | BSStripPSysData.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun) + skyrim(objrun_open), high
+CpuOpaque* __cdecl BSStripPSysData_GetRTTI()
 {
     return &DAT_0126b000;
 }
@@ -2195,7 +2209,8 @@ CpuOpaque* __cdecl FUN_00dfbb20()
 extern int DAT_0126b030;
 
 // @fnv 0x00dfbb40
-void* __cdecl FUN_00dfbb40()
+// pdb: NiPSysModifier::GetRTTI | NiPSysModifier.obj | fnv360_1110_retail, objrun + skyrim(objrun_open), high
+void* __cdecl NiPSysModifier_GetRTTI()
 {
     return &DAT_0126b030;
 }
@@ -2209,7 +2224,8 @@ extern int DAT_010de90c;
 extern int DAT_010de90c;
 
 // @fnv 0x00dfbb70
-void* __cdecl FUN_00dfbb70()
+// pdb: NiPSysVolumeEmitter::GetRTTI | NiPSysVolumeEmitter.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+void* __cdecl NiPSysVolumeEmitter_GetRTTI()
 {
     return &DAT_010de90c;
 }
@@ -2225,7 +2241,8 @@ extern "C" void* __cdecl FUN_00dfbc10()
 struct CpuOpaque;
 extern CpuOpaque DAT_0126b0a8;
 // @fnv 0x00dfbc50
-CpuOpaque* __cdecl FUN_00dfbc50()
+// pdb: NiPSysUpdateTask::GetRTTI | NiPSysUpdateTask.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+CpuOpaque* __cdecl NiPSysUpdateTask_GetRTTI()
 {
     return &DAT_0126b0a8;
 }
@@ -2255,7 +2272,8 @@ GlobalObject* __cdecl FUN_00dfbcc0()
 extern int DAT_0126b138;
 
 // @fnv 0x00dfbce0
-void* __cdecl FUN_00dfbce0()
+// pdb: NiPSysTurbulenceFieldModifier::GetRTTI | NiPSysTurbulenceFieldModifier.obj | fnv360_0822_retail, udata + bridge(vtable|udata) + skyrim(objrun_open), high
+void* __cdecl NiPSysTurbulenceFieldModifier_GetRTTI()
 {
     return &DAT_0126b138;
 }
@@ -2274,7 +2292,8 @@ extern int DAT_010debe4;
 extern int DAT_010dec3c;
 
 // @fnv 0x00dfbd30
-void* __cdecl FUN_00dfbd30()
+// pdb: NiPSysSphericalCollider::GetRTTI | NiPSysSphericalCollider.obj | fnv360_0822_retail, udata + bridge(vtable|udata) + skyrim(objrun_sim), high
+void* __cdecl NiPSysSphericalCollider_GetRTTI()
 {
     return &DAT_010dec3c;
 }
@@ -2290,7 +2309,8 @@ void* __cdecl FUN_00dfbdc0()
 extern int DAT_0126b1b0;
 
 // @fnv 0x00dfbde0
-void* __cdecl FUN_00dfbde0()
+// pdb: NiPSysRadialFieldModifier::GetRTTI | NiPSysRadialFieldModifier.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+void* __cdecl NiPSysRadialFieldModifier_GetRTTI()
 {
     return &DAT_0126b1b0;
 }
@@ -2306,7 +2326,8 @@ void* __cdecl FUN_00dfbe90()
 extern unsigned char DAT_0126b228;
 
 // @fnv 0x00dfbeb0
-void* __cdecl FUN_00dfbeb0()
+// pdb: NiPSysPlanarCollider::GetRTTI | NiPSysPlanarCollider.obj | fnv360_0822_retail, udata + bridge(vtable|udata) + skyrim(objrun_open), high
+void* __cdecl NiPSysPlanarCollider_GetRTTI()
 {
     return &DAT_0126b228;
 }
@@ -2355,7 +2376,8 @@ int* __cdecl FUN_00dfbf40()
 }
 
 // @fnv 0x00dfbf60
-int* __cdecl FUN_00dfbf60()
+// pdb: NiPSysGrowFadeModifier::GetRTTI | NiPSysGrowFadeModifier.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+int* __cdecl NiPSysGrowFadeModifier_GetRTTI()
 {
     return &DAT_010df89c;
 }
@@ -2511,7 +2533,8 @@ int* __cdecl FUN_00dfc360()
 extern int g_unk0126b4e0;
 
 // @fnv 0x00dfc370
-void* __cdecl FUN_00dfc370()
+// pdb: NiPSysEmitterCtlrData::GetRTTI | NiPSysEmitterCtlrData.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+void* __cdecl NiPSysEmitterCtlrData_GetRTTI()
 {
     return &g_unk0126b4e0;
 }
@@ -2519,7 +2542,8 @@ void* __cdecl FUN_00dfc370()
 extern void* DAT_0126b558;
 
 // @fnv 0x00dfc390
-void* FUN_00dfc390()
+// pdb: NiPSysDragModifier::GetRTTI | NiPSysDragModifier.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+void* NiPSysDragModifier_GetRTTI()
 {
     return &DAT_0126b558;
 }
@@ -2535,10 +2559,11 @@ void __cdecl FUN_00dfc3a0(FUN_00e05c20_class* p)
     p->FUN_00e05c20();
 }
 
-// FUN_00dfc440 : a one-line function - getter
+// NiPSysDragFieldModifier_GetRTTI : a one-line function - getter
 extern int g_target_00dfc440;
 // @fnv 0x00dfc440
-void* FUN_00dfc440()
+// pdb: NiPSysDragFieldModifier::GetRTTI | NiPSysDragFieldModifier.obj | fnv360_0822_retail, udata + bridge(vtable|udata) + skyrim(objrun_open), high
+void* NiPSysDragFieldModifier_GetRTTI()
 {
     return &g_target_00dfc440;
 }
@@ -2566,7 +2591,8 @@ int __cdecl FUN_00dfc460()
 extern int DAT_010e04ac;
 
 // @fnv 0x00dfc480
-void* __cdecl FUN_00dfc480()
+// pdb: NiPSysBoundUpdateModifier::GetRTTI | NiPSysBoundUpdateModifier.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+void* __cdecl NiPSysBoundUpdateModifier_GetRTTI()
 {
     return &DAT_010e04ac;
 }
@@ -2574,7 +2600,8 @@ void* __cdecl FUN_00dfc480()
 extern int g_unk0126b678;
 
 // @fnv 0x00dfc4d0
-void* __cdecl FUN_00dfc4d0()
+// pdb: NiPSysBombModifier::GetRTTI | NiPSysBombModifier.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+void* __cdecl NiPSysBombModifier_GetRTTI()
 {
     return &g_unk0126b678;
 }
@@ -2582,7 +2609,8 @@ void* __cdecl FUN_00dfc4d0()
 extern int DAT_0126b648;
 
 // @fnv 0x00dfc4f0
-int* __cdecl FUN_00dfc4f0()
+// pdb: NiPSysAgeDeathModifier::GetRTTI | NiPSysAgeDeathModifier.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+int* __cdecl NiPSysAgeDeathModifier_GetRTTI()
 {
     return &DAT_0126b648;
 }
@@ -2606,7 +2634,8 @@ int* __cdecl FUN_00dfc530()
 extern int DAT_0126b6a8;
 
 // @fnv 0x00dfc590
-int* __cdecl FUN_00dfc590(void)
+// pdb: NiMeshPSysData::GetRTTI | NiMeshPSysData.obj | fnv360_0822_retail, objrun_prop + bridge(vtable|objrun_prop) + skyrim(objrun), high
+int* __cdecl NiMeshPSysData_GetRTTI(void)
 {
     return &DAT_0126b6a8;
 }
@@ -2622,7 +2651,8 @@ void* FUN_00dfc5b0()
 extern int DAT_0126b708;
 
 // @fnv 0x00dfc5d0
-int* __cdecl FUN_00dfc5d0()
+// pdb: NiPSysCollider::GetRTTI | NiPSysCollider.obj | fnv360_0822_retail, udata + bridge(vtable|udata) + skyrim(objrun_open), high
+int* __cdecl NiPSysCollider_GetRTTI()
 {
     return &DAT_0126b708;
 }
@@ -2630,7 +2660,8 @@ int* __cdecl FUN_00dfc5d0()
 extern int DAT_0126b738;
 
 // @fnv 0x00dfc5f0
-void* __cdecl FUN_00dfc5f0()
+// pdb: NiPSysModifierBoolCtlr::GetRTTI | NiPSysModifierBoolCtlr.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+void* __cdecl NiPSysModifierBoolCtlr_GetRTTI()
 {
     return &DAT_0126b738;
 }
@@ -2664,15 +2695,17 @@ int* __cdecl FUN_00dfc630()
 extern int DAT_0126b7b0;
 
 // @fnv 0x00dfc660
-int* __cdecl FUN_00dfc660()
+// pdb: DistantLODShaderProperty::GetRTTI | DistantLODShaderProperty.obj | fnv360_0822_retail, udata + bridge(udata|udata), high
+int* __cdecl DistantLODShaderProperty_GetRTTI()
 {
     return &DAT_0126b7b0;
 }
 
-// FUN_00dfc680 : a one-line function - getter
+// TallGrassShaderProperty_GetRTTI : a one-line function - getter
 extern int g_target_00dfc680;
 // @fnv 0x00dfc680
-void* FUN_00dfc680()
+// pdb: TallGrassShaderProperty::GetRTTI | TallGrassShaderProperty.obj | fnv360_0822_retail, udata + bridge(udata|udata), high
+void* TallGrassShaderProperty_GetRTTI()
 {
     return &g_target_00dfc680;
 }
@@ -2699,7 +2732,8 @@ void* __cdecl FUN_00dfc6a0()
 extern int DAT_010d0a64;
 
 // @fnv 0x00dfc6d0
-int* __cdecl FUN_00dfc6d0()
+// pdb: BSShaderAccumulator::GetRTTI | BSShaderAccumulator.obj | fnv360_0822_retail, udata, high
+int* __cdecl BSShaderAccumulator_GetRTTI()
 {
     return &DAT_010d0a64;
 }
@@ -2731,7 +2765,8 @@ int* __cdecl FUN_00dfc740()
 extern int g_unk0126b8d0;
 
 // @fnv 0x00dfc760
-int* __cdecl FUN_00dfc760()
+// pdb: BSShaderLightingProperty::GetRTTI | BSShaderLightingProperty.obj | fnv360_0721_beta, udata + bridge(udata|objrun_prop), high
+int* __cdecl BSShaderLightingProperty_GetRTTI()
 {
     return &g_unk0126b8d0;
 }
@@ -2747,7 +2782,8 @@ struct Handler_cls
 extern int g_0126b900;
 
 // @fnv 0x00dfc7c0
-int* __cdecl FUN_00dfc7c0()
+// pdb: ShadowLightShader::GetRTTI | ShadowLightShader.obj | fnv360_0822_retail, udata + bridge(udata|udata), high
+int* __cdecl ShadowLightShader_GetRTTI()
 {
     return &g_0126b900;
 }
@@ -2755,7 +2791,8 @@ int* __cdecl FUN_00dfc7c0()
 extern int DAT_0126b948;
 
 // @fnv 0x00dfc7e0
-int* __cdecl FUN_00dfc7e0()
+// pdb: BSShaderBloodSplatter::GetRTTI | BSShaderBloodSplatter.obj | fnv360_0822_retail, udata + bridge(udata|udata), high
+int* __cdecl BSShaderBloodSplatter_GetRTTI()
 {
     return &DAT_0126b948;
 }
@@ -2763,7 +2800,8 @@ int* __cdecl FUN_00dfc7e0()
 extern int DAT_0126b978;
 
 // @fnv 0x00dfc800
-void* __cdecl FUN_00dfc800()
+// pdb: BSShaderBloodSplatterProperty::GetRTTI | BSShaderBloodSplatterProperty.obj | fnv360_0822_retail, udata + bridge(udata|udata), high
+void* __cdecl BSShaderBloodSplatterProperty_GetRTTI()
 {
     return &DAT_0126b978;
 }
@@ -2791,7 +2829,8 @@ class SpawnedMid
 extern int DAT_0126b9c0;
 
 // @fnv 0x00dfc8c0
-int* __cdecl FUN_00dfc8c0()
+// pdb: WaterShader::GetRTTI | WaterShader.obj | fnv360_0822_retail, udata + bridge(udata|udata), high
+int* __cdecl WaterShader_GetRTTI()
 {
     return &DAT_0126b9c0;
 }
@@ -2799,14 +2838,16 @@ int* __cdecl FUN_00dfc8c0()
 extern int g_unk0126b9f0;
 
 // @fnv 0x00dfc8e0
-int* __cdecl FUN_00dfc8e0()
+// pdb: BSBatchRenderer::GetRTTI | BSBatchRenderer.obj | fnv360_0822_retail, udata + bridge(udata|udata), high
+int* __cdecl BSBatchRenderer_GetRTTI()
 {
     return &g_unk0126b9f0;
 }
 
 extern int DAT_010e11ec;
 // @fnv 0x00dfc910
-int* __cdecl FUN_00dfc910()
+// pdb: SkyShader::GetRTTI | SkyShader.obj | fnv360_0822_retail, udata + bridge(udata|udata), high
+int* __cdecl SkyShader_GetRTTI()
 {
     return &DAT_010e11ec;
 }
@@ -2814,7 +2855,8 @@ int* __cdecl FUN_00dfc910()
 extern int g_0126ba38;
 
 // @fnv 0x00dfc930
-int* __cdecl FUN_00dfc930()
+// pdb: ParticleShader::GetRTTI | ParticleShader.obj | fnv360_0822_retail, udata + bridge(udata|udata), high
+int* __cdecl ParticleShader_GetRTTI()
 {
     return &g_0126ba38;
 }
@@ -2864,7 +2906,8 @@ int* __cdecl FUN_00dfc9a0()
 extern int DAT_0126bab0;
 
 // @fnv 0x00dfc9c0
-int* __cdecl FUN_00dfc9c0()
+// pdb: BSShaderProperty::GetRTTI | BSShaderProperty.obj | fnv360_0822_retail, udata + bridge(udata|udata), high
+int* __cdecl BSShaderProperty_GetRTTI()
 {
     return &DAT_0126bab0;
 }
@@ -2884,7 +2927,8 @@ void FUN_00dfc9d0(DFC9D0Object* pkObject)
 extern int DAT_0126bae0;
 
 // @fnv 0x00dfc9e0
-int* __cdecl FUN_00dfc9e0()
+// pdb: TallGrassShader::GetRTTI | TallGrassShader.obj | fnv360_0822_retail, udata + bridge(udata|udata), high
+int* __cdecl TallGrassShader_GetRTTI()
 {
     return &DAT_0126bae0;
 }
@@ -2892,7 +2936,8 @@ int* __cdecl FUN_00dfc9e0()
 extern int DAT_010cb71c;
 
 // @fnv 0x00dfca30
-void* __cdecl FUN_00dfca30()
+// pdb: SkyShaderProperty::GetRTTI | SkyShaderProperty.obj | fnv360_0822_retail, udata, high
+void* __cdecl SkyShaderProperty_GetRTTI()
 {
     return &DAT_010cb71c;
 }
@@ -2900,7 +2945,8 @@ void* __cdecl FUN_00dfca30()
 extern int DAT_0126bb28;
 
 // @fnv 0x00dfca50
-void* __cdecl FUN_00dfca50()
+// pdb: PrecipitationShader::GetRTTI | PrecipitationShader.obj | fnv360_0822_retail, udata + bridge(udata|udata), high
+void* __cdecl PrecipitationShader_GetRTTI()
 {
     return &DAT_0126bb28;
 }
@@ -2920,7 +2966,8 @@ void FUN_00dfca60(DFCA60Object* pkObject)
 extern char g_unk0126bb58;
 
 // @fnv 0x00dfca70
-void* __cdecl FUN_00dfca70()
+// pdb: PrecipitationShaderProperty::GetRTTI | PrecipitationShaderProperty.obj | fnv360_0822_retail, udata + bridge(udata|udata), high
+void* __cdecl PrecipitationShaderProperty_GetRTTI()
 {
     return &g_unk0126bb58;
 }
@@ -2928,7 +2975,8 @@ void* __cdecl FUN_00dfca70()
 extern int DAT_010da04c;
 
 // @fnv 0x00dfcaa0
-int* __cdecl FUN_00dfcaa0()
+// pdb: SpeedTreeLeafShader::GetRTTI | SpeedTreeLeafShader.obj | fnv360_0822_retail, udata + bridge(udata|udata), high
+int* __cdecl SpeedTreeLeafShader_GetRTTI()
 {
     return &DAT_010da04c;
 }
@@ -2936,7 +2984,8 @@ int* __cdecl FUN_00dfcaa0()
 extern int DAT_0126bba0;
 
 // @fnv 0x00dfcac0
-int* __cdecl FUN_00dfcac0()
+// pdb: SpeedTreeLeafShaderProperty::GetRTTI | SpeedTreeLeafShaderProperty.obj | fnv360_0822_retail, udata + bridge(udata|udata), high
+int* __cdecl SpeedTreeLeafShaderProperty_GetRTTI()
 {
     return &DAT_0126bba0;
 }
@@ -2944,14 +2993,16 @@ int* __cdecl FUN_00dfcac0()
 extern void* DAT_0126bbd0;
 
 // @fnv 0x00dfcae0
-int __cdecl FUN_00dfcae0()
+// pdb: SpeedTreeShaderPPLightingProperty::GetRTTI | SpeedTreeShaderProperty.obj | fnv360_0822_retail, udata + bridge(udata|udata), high
+int __cdecl SpeedTreeShaderPPLightingProperty_GetRTTI()
 {
     return reinterpret_cast<int>(&DAT_0126bbd0);
 }
 
 extern int DAT_010d0b3c;
 // @fnv 0x00dfcb10
-int* __cdecl FUN_00dfcb10()
+// pdb: SpeedTreeShaderLightingProperty::GetRTTI | SpeedTreeShaderProperty.obj | fnv360_0822_retail, udata + bridge(udata|udata), high
+int* __cdecl SpeedTreeShaderLightingProperty_GetRTTI()
 {
     return &DAT_010d0b3c;
 }
@@ -2973,7 +3024,8 @@ struct Handler_cls
 
 extern int DAT_0126bc48;
 // @fnv 0x00dfcb90
-int* __cdecl FUN_00dfcb90()
+// pdb: GeometryDecalShaderProperty::GetRTTI | GeometryDecalShaderProperty.obj | fnv360_0822_retail, udata + bridge(udata|udata), high
+int* __cdecl GeometryDecalShaderProperty_GetRTTI()
 {
     return &DAT_0126bc48;
 }
@@ -3002,22 +3054,25 @@ void __cdecl FUN_00dfcbc0(FUN_00dfcbc0_vt* pObject)
 extern int DAT_0126bcc0;
 
 // @fnv 0x00dfcbd0
-void* __cdecl FUN_00dfcbd0()
+// pdb: BSDistantTreeShader::GetRTTI | BSDistantTreeShader.obj | fnv360_0822_retail, udata + bridge(udata|udata) + skyrim(udata), high
+void* __cdecl BSDistantTreeShader_GetRTTI()
 {
     return &DAT_0126bcc0;
 }
 
 extern void* DAT_010d37e4;
 // @fnv 0x00dfcc00
-void** __cdecl FUN_00dfcc00()
+// pdb: BSDistantTreeShaderProperty::GetRTTI | BSDistantTreeShaderProperty.obj | fnv360_0822_retail, udata + bridge(udata|udata), high
+void** __cdecl BSDistantTreeShaderProperty_GetRTTI()
 {
     return &DAT_010d37e4;
 }
 
-// FUN_00dfcc20 : a one-line function - getter
+// TileShaderProperty_GetRTTI : a one-line function - getter
 extern int g_target_00dfcc20;
 // @fnv 0x00dfcc20
-void* FUN_00dfcc20()
+// pdb: TileShaderProperty::GetRTTI | TileShaderProperty.obj | fnv360_0822_retail, udata + bridge(udata|udata), high
+void* TileShaderProperty_GetRTTI()
 {
     return &g_target_00dfcc20;
 }
@@ -3028,15 +3083,17 @@ struct S_00dfcc40_Obj
 };
 extern S_00dfcc40_Obj DAT_0126bd38;
 // @fnv 0x00dfcc40
-S_00dfcc40_Obj* __cdecl FUN_00dfcc40()
+// pdb: BSFogProperty::GetRTTI | BSFogProperty.obj | fnv360_0822_retail, udata + bridge(udata|udata), high
+S_00dfcc40_Obj* __cdecl BSFogProperty_GetRTTI()
 {
     return &DAT_0126bd38;
 }
 
-// FUN_00dfcc70 : a one-line function - getter
+// Lighting30Shader_GetRTTI : a one-line function - getter
 extern int g_target_00dfcc70;
 // @fnv 0x00dfcc70
-void* FUN_00dfcc70()
+// pdb: Lighting30Shader::GetRTTI | Lighting30Shader.obj | fnv360_0822_retail, udata + bridge(udata|udata), high
+void* Lighting30Shader_GetRTTI()
 {
     return &g_target_00dfcc70;
 }
@@ -3044,7 +3101,8 @@ void* FUN_00dfcc70()
 extern int DAT_0126bd80;
 
 // @fnv 0x00dfcc90
-int* __cdecl FUN_00dfcc90()
+// pdb: BoltShader::GetRTTI | BoltShader.obj | fnv360_0822_retail, udata + bridge(udata|udata), high
+int* __cdecl BoltShader_GetRTTI()
 {
     return &DAT_0126bd80;
 }
@@ -3073,7 +3131,8 @@ void* FUN_00dfccb0()
 extern int DAT_010d0be4;
 
 // @fnv 0x00dfcce0
-void* __cdecl FUN_00dfcce0()
+// pdb: BSClearZNode::GetRTTI | BSClearZNode.obj | fnv360_0822_retail, udata + bridge(udata|udata) + skyrim(udata), high
+void* __cdecl BSClearZNode_GetRTTI()
 {
     return &DAT_010d0be4;
 }
@@ -3113,7 +3172,8 @@ int* __cdecl FUN_00dfcd70()
 extern int DAT_0126bea0;
 
 // @fnv 0x00dfcda0
-void* __cdecl FUN_00dfcda0()
+// pdb: VolumetricFogShaderProperty::GetRTTI | VolumetricFogShaderProperty.obj | fnv360_0822_retail, udata + bridge(udata|udata), high
+void* __cdecl VolumetricFogShaderProperty_GetRTTI()
 {
     return &DAT_0126bea0;
 }
@@ -3121,7 +3181,8 @@ void* __cdecl FUN_00dfcda0()
 extern char DAT_0126bed0;
 
 // @fnv 0x00dfcdd0
-void* __cdecl FUN_00dfcdd0()
+// pdb: HairShaderProperty::GetRTTI | HairShaderProperty.obj | fnv360_0822_retail, udata + bridge(udata|udata), high
+void* __cdecl HairShaderProperty_GetRTTI()
 {
     return &DAT_0126bed0;
 }
@@ -3129,7 +3190,8 @@ void* __cdecl FUN_00dfcdd0()
 extern int DAT_0126bf00;
 
 // @fnv 0x00dfce30
-void* __cdecl FUN_00dfce30()
+// pdb: BeamShader::GetRTTI | BeamShader.obj | fnv360_0822_retail, udata + bridge(udata|udata), high
+void* __cdecl BeamShader_GetRTTI()
 {
     return &DAT_0126bf00;
 }
@@ -3137,7 +3199,8 @@ void* __cdecl FUN_00dfce30()
 extern int DAT_0126bf48;
 
 // @fnv 0x00dfce50
-int* __cdecl FUN_00dfce50()
+// pdb: VolumetricFogShader::GetRTTI | VolumetricFogShader.obj | fnv360_0822_retail, udata + bridge(udata|udata), high
+int* __cdecl VolumetricFogShader_GetRTTI()
 {
     return &DAT_0126bf48;
 }
@@ -3167,7 +3230,8 @@ void* __cdecl FUN_00dfce70()
 
 extern int DAT_010d0cd4;
 // @fnv 0x00dfcea0
-int* __cdecl FUN_00dfcea0()
+// pdb: TileShader::GetRTTI | TileShader.obj | fnv360_0822_retail, udata + bridge(udata|udata), high
+int* __cdecl TileShader_GetRTTI()
 {
     return &DAT_010d0cd4;
 }
@@ -3175,7 +3239,8 @@ int* __cdecl FUN_00dfcea0()
 struct CpuOpaque;
 extern CpuOpaque DAT_0126bfc0;
 // @fnv 0x00dfcec0
-CpuOpaque* __cdecl FUN_00dfcec0()
+// pdb: GeometryDecalShader::GetRTTI | GeometryDecalShader.obj | fnv360_0822_retail, udata + bridge(udata|udata), high
+CpuOpaque* __cdecl GeometryDecalShader_GetRTTI()
 {
     return &DAT_0126bfc0;
 }
@@ -3201,7 +3266,8 @@ extern "C" void* DAT_010305a8;
 extern int DAT_0126c068;
 
 // @fnv 0x00dfd0c0
-void* FUN_00dfd0c0()
+// pdb: HairShader::GetRTTI | HairShader.obj | fnv360_0822_retail, udata + bridge(udata|udata), high
+void* HairShader_GetRTTI()
 {
     return &DAT_0126c068;
 }
@@ -3220,7 +3286,8 @@ void FUN_00dfd0d0(FUN_00dfd0d0_cls* pTarget)
 extern int DAT_0126c098;
 
 // @fnv 0x00dfd0e0
-void* FUN_00dfd0e0()
+// pdb: SpeedTreeFrondShader::GetRTTI | SpeedTreeFrondShader.obj | fnv360_0822_retail, udata + bridge(udata|udata), high
+void* SpeedTreeFrondShader_GetRTTI()
 {
     return &DAT_0126c098;
 }
@@ -3228,7 +3295,8 @@ void* FUN_00dfd0e0()
 extern "C" void* DAT_010e222c;
 
 // @fnv 0x00dfd120
-void* __cdecl FUN_00dfd120()
+// pdb: SpeedTreeBranchShader::GetRTTI | SpeedTreeBranchShader.obj | fnv360_0822_retail, udata + bridge(udata|udata), high
+void* __cdecl SpeedTreeBranchShader_GetRTTI()
 {
     return &DAT_010e222c;
 }
@@ -3289,7 +3357,8 @@ void __cdecl FUN_00dfd1c0(void* p)
 extern int DAT_0126c110;
 
 // @fnv 0x00dfd1d0
-void* __cdecl FUN_00dfd1d0()
+// pdb: BSCubeMapCamera::GetRTTI | BSCubeMapCamera.obj | fnv360_0822_retail, udata + bridge(udata|udata) + skyrim(udata), high
+void* __cdecl BSCubeMapCamera_GetRTTI()
 {
     return &DAT_0126c110;
 }
@@ -3467,7 +3536,8 @@ int* __cdecl FUN_00dfd950()
 extern int DAT_0126c500;
 
 // @fnv 0x00dfda40
-void* FUN_00dfda40()
+// pdb: NiSCMExtraData::GetRTTI | NiSCMExtraData.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+void* NiSCMExtraData_GetRTTI()
 {
     return &DAT_0126c500;
 }

@@ -854,7 +854,8 @@ struct FUN_00b70600_list
 };
 
 // @fnv 0x00b70600
-FUN_00b70600_obj* __fastcall FUN_00b70600(FUN_00b70600_list* self, int unused, FUN_00b70600_node** it)
+// pdb: BSShaderLightingProperty::GetFirstActiveNonShadowLight | BSShaderLightingProperty.obj | fnv360_0822_retail, call_seq + bridge(call_gap|caller), high
+FUN_00b70600_obj* __fastcall BSShaderLightingProperty_GetFirstActiveNonShadowLight(FUN_00b70600_list* self, int unused, FUN_00b70600_node** it)
 {
     FUN_00b70600_node* n = self->head;
     *it = n;
@@ -1572,7 +1573,7 @@ class B6FC20Stream
     int unk24C;
     B6FC20BinaryStream* m_pBackingStream;
 
-    void FUN_00a64160(const char* pcString);
+    void NiStream_SaveCString(const char* pcString);
 };
 
 template <class T> inline void B6FC20SaveBinary(B6FC20Stream& kStream, const T& value)
@@ -1638,7 +1639,7 @@ void B6FC20Object::SaveToStream(B6FC20Stream& kStream)
 {
     FUN_00ba9380(kStream);
     B6FC20SaveBinary(kStream, m_uiType);
-    kStream.FUN_00a64160(m_pcName);
+    kStream.NiStream_SaveCString(m_pcName);
     B6FC20SaveBinary(kStream, m_kFogTint);
 }
 
@@ -3057,7 +3058,7 @@ struct Bdf3e0_cls
     int unk34;
     int unk38;
     Bdf3e0_list* list;
-    Bdf3e0_node* FUN_00b70600(int* it);
+    Bdf3e0_node* BSShaderLightingProperty_GetFirstActiveNonShadowLight(int* it);
     Bdf3e0_node* FUN_00b70700(int* it);
     void FUN_00bdf3e0(int a0, int a1, unsigned short* a2, char a3, char* a4, int a5, char a6);
 };
@@ -3067,7 +3068,7 @@ struct Bdf3e0_cls
 void Bdf3e0_cls::FUN_00bdf3e0(int a0, int a1, unsigned short* apCount, char acMode, char* apFlag, int a5, char acAdjust)
 {
     int it = 0;
-    Bdf3e0_node* p = FUN_00b70600(&it);
+    Bdf3e0_node* p = BSShaderLightingProperty_GetFirstActiveNonShadowLight(&it);
     while (p && p->info->vec.isDef())
         p = FUN_00b70700(&it);
     Bdf3e0_node* q = FUN_00b70700(&it);

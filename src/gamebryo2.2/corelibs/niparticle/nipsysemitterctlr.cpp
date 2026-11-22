@@ -136,13 +136,14 @@ struct NiTimeControllerStop
 {
     void ResetTiming();
 };
-struct FUN_00c1ba30 : NiTimeControllerStop
+struct NiPSysEmitterCtlr_Stop : NiTimeControllerStop
 {
     char pad[0x48 - 1];
     float m48;
 };
 // @fnv 0x00c1ba30
-void __fastcall FUN_00c1ba30(FUN_00c1ba30* self, int unused)
+// pdb: NiPSysEmitterCtlr::Stop | NiPSysEmitterCtlr.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(objrun_open), high
+void __fastcall NiPSysEmitterCtlr_Stop(NiPSysEmitterCtlr_Stop* self, int unused)
 {
     self->m48 = DAT_01015f5c;
     self->ResetTiming();
@@ -153,12 +154,13 @@ extern int DAT_011ae758;
 
 struct NiPSysEmitterCtlr_shell : NiPSysEmitterCtlr
 {
-    void FUN_00c1bcc0(NiInterpolator* pkInterpolator, unsigned short usIndex);
+    void NiPSysEmitterCtlr_SetInterpolator(NiInterpolator* pkInterpolator, unsigned short usIndex);
 };
 
 // Stores pkInterpolator into the interpolator slot at offset 0x34 (ref-counted) when usIndex is 0, or at offset 0x40 when usIndex is 1.
 // @fnv 0x00c1bcc0
-void NiPSysEmitterCtlr_shell::FUN_00c1bcc0(NiInterpolator* pkInterpolator, unsigned short usIndex)
+// pdb: NiPSysEmitterCtlr::SetInterpolator | NiPSysEmitterCtlr.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(objrun_open), high
+void NiPSysEmitterCtlr_shell::NiPSysEmitterCtlr_SetInterpolator(NiInterpolator* pkInterpolator, unsigned short usIndex)
 {
     if (usIndex == 0)
     {
@@ -396,7 +398,7 @@ void S_00c1beb0::FUN_00c1beb0(unsigned int uiNewCapacity)
 
 struct A00c1bff0
 {
-    bool FUN_00a38df0();
+    bool NiSingleInterpController_TargetIsRequiredType();
 };
 struct B00c1bff0
 {
@@ -422,11 +424,11 @@ struct H00c1bff0
     int _d;
     bool FUN_00c1bff0();
 };
-// Checks FUN_00a38df0, resolves a modifier via _b->FUN_00c1b0f0(&_d), then scans its RTTI chain for g_01202500_arg1 and returns whether it is found.
+// Checks NiSingleInterpController_TargetIsRequiredType, resolves a modifier via _b->FUN_00c1b0f0(&_d), then scans its RTTI chain for g_01202500_arg1 and returns whether it is found.
 // @fnv 0x00c1bff0
 bool H00c1bff0::FUN_00c1bff0()
 {
-    if (!((A00c1bff0*)this)->FUN_00a38df0())
+    if (!((A00c1bff0*)this)->NiSingleInterpController_TargetIsRequiredType())
         return false;
     M00c1bff0* pkModifier = (M00c1bff0*)_b->FUN_00c1b0f0(&_d);
     if (!pkModifier)
@@ -532,7 +534,7 @@ bool Holder00c2b7d0::FUN_00c2b7d0(void* pkTarget)
 
 struct CallBase
 {
-    void FUN_00a38e90(float m_fStartTime, float m_fMaximumDistance);
+    void NiSingleInterpController_GuaranteeTimeRange(float m_fStartTime, float m_fMaximumDistance);
 };
 struct InterpDummy
 {
@@ -589,12 +591,13 @@ struct InterpDummy
 };
 struct MyCtlr : NiPSysEmitterCtlr
 {
-    void FUN_00c1bbc0(float m_fStartTime, float m_fMaximumDistance);
+    void NiPSysEmitterCtlr_GuaranteeTimeRange(float m_fStartTime, float m_fMaximumDistance);
 };
 // @fnv 0x00c1bbc0
-void MyCtlr::FUN_00c1bbc0(float afValue1, float afValue2)
+// pdb: NiPSysEmitterCtlr::GuaranteeTimeRange | NiPSysEmitterCtlr.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(objopen_prop), high
+void MyCtlr::NiPSysEmitterCtlr_GuaranteeTimeRange(float afValue1, float afValue2)
 {
-    ((CallBase*)this)->FUN_00a38e90(afValue1, afValue2);
+    ((CallBase*)this)->NiSingleInterpController_GuaranteeTimeRange(afValue1, afValue2);
     InterpDummy* pk = (InterpDummy*)m_spEmitterActiveInterpolator.m_pObject;
     if (pk)
         pk->v49(afValue1, afValue2);
@@ -615,7 +618,8 @@ struct FUN_00a56560_shell
 };
 // Allocates a 0x34-byte NiBlendInterpolator and constructs variant 0 or 1 based on usIndex, returning null otherwise.
 // @fnv 0x00c1bb20
-NiBlendInterpolator* __stdcall FUN_00c1bb20(unsigned short usVariant, bool bAccumulateAnimations,
+// pdb: NiPSysEmitterCtlr::CreateBlendInterpolator | NiPSysEmitterCtlr.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(caller_sim), high
+NiBlendInterpolator* __stdcall NiPSysEmitterCtlr_CreateBlendInterpolator(unsigned short usVariant, bool bAccumulateAnimations,
                                             bool bManagerControlled, float fWeightThreshold, unsigned char ucArraySize)
 {
     if (usVariant == 0)
@@ -699,12 +703,13 @@ struct CClsA
     char pad[0x10];
     CPtrA m_ptr;
     int m14;
-    void FUN_00c1bf10(unsigned int a, unsigned int b, unsigned int c);
+    void NiBoolInterpolator_ReplaceKeys(unsigned int a, unsigned int b, unsigned int c);
 };
 
 // Ensures m_ptr holds a CChildA, calls M(a, c, b) and clears m14 when c > 0, otherwise calls M(0, 0, 0) if m_ptr is set.
 // @fnv 0x00c1bf10
-void CClsA::FUN_00c1bf10(unsigned int auiFirst, unsigned int auiThird, unsigned int auiSecond)
+// pdb: NiBoolInterpolator::ReplaceKeys | NiPSysEmitterCtlr.obj | fnv360_0822_retail, call_gap + bridge(call_seq|call_gap) + skyrim(caller_sim), high
+void CClsA::NiBoolInterpolator_ReplaceKeys(unsigned int auiFirst, unsigned int auiThird, unsigned int auiSecond)
 {
     if (auiSecond > 0)
     {
@@ -1111,11 +1116,12 @@ class NiBaseC1B : public NiObjectC1B
     int unk3C;
     NiPointerC1B<NiObjectC1B> m_spTransformData;
 
-    bool FUN_00c1be60(NiObjectC1B* pkObject);
+    bool NiPSysEmitterCtlr_IsEqual(NiObjectC1B* pkObject);
 };
 
 // @fnv 0x00c1be60
-bool NiBaseC1B::FUN_00c1be60(NiObjectC1B* pkObject)
+// pdb: NiPSysEmitterCtlr::IsEqual | NiPSysEmitterCtlr.obj | fnv360_0822_retail, call_seq + bridge(vtable|call_seq) + skyrim(caller_sim), high
+bool NiBaseC1B::NiPSysEmitterCtlr_IsEqual(NiObjectC1B* pkObject)
 {
     if (!BaseIsEqual(pkObject))
         return false;
@@ -1290,7 +1296,8 @@ __forceinline bool C040Has(C040Owner* o, void* p)
 
 // Checks whether obj contains one of the global nodes for the given type (0 or 1), or for type 1 whether FUN_0043b300 matches DAT_011f407c.
 // @fnv 0x00c1c040
-bool __stdcall FUN_00c1c040(C040Owner* pOwner, unsigned short type)
+// pdb: NiPSysEmitterCtlr::InterpolatorIsCorrectType | NiPSysEmitterCtlr.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(objrun_open), high
+bool __stdcall NiPSysEmitterCtlr_InterpolatorIsCorrectType(C040Owner* pOwner, unsigned short type)
 {
     if (type == 0)
     {
@@ -1540,18 +1547,19 @@ struct C630Ctlr
     bool m_bLastActive;  // src: FNV360_PDB +0x4C (old: m_bIsInitialized)
     void EmitParticlesInInterval(float a, float b, float c, float d, float e, float f);
 
-    bool FUN_00a36250(float);
+    bool NiTimeController_DontDoUpdate(float);
     C630Interp* GetObjectValueByKey();
     C630Interp* FUN_00639b60();
     bool Manager() const
     {
         return (bool)(((m_uFlags & 0x20) >> 5) & 1);
     }
-    void FUN_00c1c630(float* time);
+    void NiPSysEmitterCtlr_Update(float* time);
 };
 // Updates the particle controller time and emits particles over the active intervals between the old and new times using the rate interpolator.
 // @fnv 0x00c1c630
-void C630Ctlr::FUN_00c1c630(float* time)
+// pdb: NiPSysEmitterCtlr::Update | NiPSysEmitterCtlr.obj | fnv360_0822_retail, objrun + bridge(vtable|caller_sim) + skyrim(caller_sim), high
+void C630Ctlr::NiPSysEmitterCtlr_Update(float* time)
 {
     if (m_fLastTime > *time)
         m_fLastScaledTime = DAT_01015f5c;
@@ -1562,7 +1570,7 @@ void C630Ctlr::FUN_00c1c630(float* time)
     if (m_fLastTime != DAT_010241b0 && !(m_uFlags & 6) &&
         *time - m_fLastTime > ((C630Modifier*)m_pkModifier)->span)
         m_fLastTime = *time;
-    if (FUN_00a36250(*time))
+    if (NiTimeController_DontDoUpdate(*time))
         return;
     if (!m_spEmitterActiveInterpolator.m_pObject || !m_spInterpolator.m_pObject)
         return;

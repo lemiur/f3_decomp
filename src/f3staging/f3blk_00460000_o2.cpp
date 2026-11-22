@@ -137,7 +137,7 @@ struct FUN_0047af50_Obj {
     int unk04;
     int unk08;
 
-    bool __thiscall FUN_0047af50(int param2, int param3);
+    bool __thiscall GridArray_SetCenter(int param2, int param3);
 };
 
 void FUN_0047af50_Obj::vf00() {}
@@ -147,7 +147,8 @@ void FUN_0047af50_Obj::vf0C() {}
 void FUN_0047af50_Obj::vf10() {}
 void FUN_0047af50_Obj::vf14(int, int) {}
 
-bool __thiscall FUN_0047af50_Obj::FUN_0047af50(int param2, int param3) {
+// pdb: GridArray::SetCenter | GridArray.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+bool __thiscall FUN_0047af50_Obj::GridArray_SetCenter(int param2, int param3) {
     int deltaX = param2 - unk04;
     int deltaY = param3 - unk08;
 
@@ -986,7 +987,7 @@ void* FUN_00479b00()
 // @f3 0x0047ce90 (community match, verified in this file)
 class Item47ce90 {
 public:
-    bool FUN_0040ac70();
+    bool ExtraDataList_HasLeveledItem();
 };
 
 struct Node47ce90 {
@@ -1006,7 +1007,7 @@ bool List47ce90::FUN_0047ce90()
     for (Node47ce90* node = first; node; node = node->next) {
         if (!node->item)
             break;
-        if (node->item->FUN_0040ac70())
+        if (node->item->ExtraDataList_HasLeveledItem())
             return true;
     }
     return false;
@@ -1724,19 +1725,20 @@ struct GameStateB47b2f0 {
 
 extern GameStateB47b2f0* DAT_0106cdcc;
 
-void FUN_004d46f0();
+void TESObjectCELL_KillStatics();
 
 class Updater47b2f0 {
 public:
     void FUN_007f97f0();
-    void FUN_0047b2f0();
+    void GridCellArray_KillAll();
 };
 
-void Updater47b2f0::FUN_0047b2f0()
+// pdb: GridCellArray::KillAll | GridCell.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable_prefix), high
+void Updater47b2f0::GridCellArray_KillAll()
 {
     FUN_007f97f0();
     if (DAT_0106cdcc->flag5A9)
-        FUN_004d46f0();
+        TESObjectCELL_KillStatics();
 }
 
 // @f3 0x0047b3c0 (community match, verified in this file)
@@ -1759,10 +1761,11 @@ public:
             return &data10[row * size0C + col];
         return 0;
     }
-    void FUN_0047b3c0(unsigned int row, unsigned int col);
+    void GridCellArray_ClearItem(unsigned int row, unsigned int col);
 };
 
-void Matrix47b3c0::FUN_0047b3c0(unsigned int row, unsigned int col)
+// pdb: GridCellArray::ClearItem | GridCell.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable_prefix), high
+void Matrix47b3c0::GridCellArray_ClearItem(unsigned int row, unsigned int col)
 {
     *GetCell(row, col) = 0;
     valid20 = false;
@@ -1884,7 +1887,7 @@ void FUN_004788d0(AVObject4788d0* object)
 // @f3 0x0047e210 (community match, verified in this file)
 struct ExtraList47e210
 {
-    bool FUN_0040aed0(int flag);
+    bool ExtraDataList_GetWorn(int flag);
 };
 
 struct InnerNode47e210
@@ -2029,7 +2032,7 @@ bool Container47e210::FUN_0047e210()
         {
             for (InnerNode47e210* inner = entry->extras; inner && inner->item && !found; inner = inner->next)
             {
-                if (inner->item->FUN_0040aed0(0) && (form->flags17A & 1))
+                if (inner->item->ExtraDataList_GetWorn(0) && (form->flags17A & 1))
                     found = true;
             }
         }
@@ -2241,7 +2244,8 @@ int FUN_00476720(const RadiusVector3* vector, float radius) {
 }
 
 // @f3 0x0047af00 (community match, verified in this file)
-void __fastcall FUN_0047af00(int* ecx)
+// pdb: GridArray::Init | GridArray.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void __fastcall GridArray_Init(int* ecx)
 {
     ecx[2] = 0xffffd8f0;
     ecx[1] = 0xffffd8f0;
@@ -2277,7 +2281,7 @@ void FUN_00468d00_Vec::FUN_00468d00() {
 // @f3 0x0047ce40 (community match, verified in this file)
 struct Entry_0047ce40 {
     bool __thiscall FUN_0040c080(int value);
-    bool __thiscall FUN_0040aed0(int value);
+    bool __thiscall ExtraDataList_GetWorn(int value);
     short __thiscall FUN_0040ac80();
 };
 
@@ -2300,7 +2304,7 @@ int __thiscall Owner_0047ce40::FUN_0047ce40(char flag) {
         Entry_0047ce40* entry = current->item;
 
         if (!entry->FUN_0040c080(0)) {
-            if (flag != 0 || !entry->FUN_0040aed0(0)) {
+            if (flag != 0 || !entry->ExtraDataList_GetWorn(0)) {
                 total += entry->FUN_0040ac80();
             }
         }
@@ -2558,10 +2562,11 @@ struct FUN_00474b30_Node {
     int* value;
     FUN_00474b30_Node* next;
 
-    int* __thiscall FUN_00474b30(int key);
+    int* __thiscall BSClonePools_RequestClone(int key);
 };
 
-int* __thiscall FUN_00474b30_Node::FUN_00474b30(int key) {
+// pdb: BSClonePools::RequestClone | BSClonePool.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+int* __thiscall FUN_00474b30_Node::BSClonePools_RequestClone(int key) {
     int* found = 0;
 
     for (FUN_00474b30_Node* current = this; current; current = current->next) {
@@ -2819,7 +2824,7 @@ struct Target {
 struct Form {
     char unk00[0x26];
     unsigned char typeID;
-    Target* FUN_004d5270();
+    Target* TESObjectCELL_GetLand();
 };
 struct Grid {
     int unk00;
@@ -2839,7 +2844,7 @@ void Grid::FUN_0047b740(int arg) {
         for (unsigned int y = 0; y < dim; y++) {
             Form* form = *GetAt(x, y);
             if (form && form->typeID == 6) {
-                Target* t = form->FUN_004d5270();
+                Target* t = form->TESObjectCELL_GetLand();
                 if (t)
                     t->FUN_004cea70(arg);
             }
@@ -2992,9 +2997,10 @@ struct Grid {
             return &cells[x * size + y];
         return 0;
     }
-    bool FUN_0047b2a0(unsigned int x, unsigned int y);
+    bool GridCellArray_GetAttached(unsigned int x, unsigned int y);
 };
-bool Grid::FUN_0047b2a0(unsigned int x, unsigned int y)
+// pdb: GridCellArray::GetAttached | GridCell.obj | fnv360_0822_retail, call_gap + bridge(call_gap_sim|call_gap) + skyrim(call_gap_sim), high
+bool Grid::GridCellArray_GetAttached(unsigned int x, unsigned int y)
 {
     Cell* c = *GetAt(x, y);
     if (c)
@@ -3405,7 +3411,8 @@ int FUN_0046e6b0(Owner670* owner)
 // @f3 0x004750c0 (community match, verified in this file)
 extern const unsigned short DAT_00f4c6d4[12];
 namespace f3m_004750c0 {
-unsigned short FUN_004750c0(int month)
+// pdb: Date::GetDaysInMonth | Date.obj | fnv360_0822_retail, udata + bridge(call_gap_sim|udata), high
+unsigned short Date_GetDaysInMonth(int month)
 {
     if (month >= 12)
         return 0;
@@ -3678,9 +3685,10 @@ struct Owner805 {
     int unk0ec;
     int unk0f0;
     unsigned char state;
-    int FUN_0047cb00();
+    int TESObjectWEAP_IsThrownWeapon();
 };
-int Owner805::FUN_0047cb00()
+// pdb: TESObjectWEAP::IsThrownWeapon | InventoryChanges.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+int Owner805::TESObjectWEAP_IsThrownWeapon()
 {
     unsigned char value = state;
     if (InWideRange805(value) && !InNarrowRange805(value)) return 1;
@@ -4064,14 +4072,15 @@ public:
 class GroupList {
 public:
     GroupNode* head;
-    void FUN_0047f930(Stream* s);
+    void InventoryChanges_InitLoadGame(Stream* s);
 };
 
 }
 
 using namespace f3m_0047f930;
 
-void GroupList::FUN_0047f930(Stream* s)
+// pdb: InventoryChanges::InitLoadGame | InventoryChanges.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+void GroupList::InventoryChanges_InitLoadGame(Stream* s)
 {
     int saved24 = s->VFunc04();
     unsigned int saved17 = *(unsigned int*)((char*)s + 0x17);
@@ -4252,7 +4261,7 @@ struct FUN_0047af10_Obj {
     int unk08;
     unsigned int count;
 
-    void __thiscall FUN_0047af10();
+    void __thiscall GridArray_DetachAll();
 };
 void FUN_0047af10_Obj::vf00() {}
 void FUN_0047af10_Obj::vf04() {}
@@ -4261,7 +4270,8 @@ void FUN_0047af10_Obj::vf0C() {}
 void FUN_0047af10_Obj::vf10() {}
 void FUN_0047af10_Obj::vf14() {}
 void FUN_0047af10_Obj::vf18(unsigned int, unsigned int) {}
-void __thiscall FUN_0047af10_Obj::FUN_0047af10() {
+// pdb: GridArray::DetachAll | GridArray.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void __thiscall FUN_0047af10_Obj::GridArray_DetachAll() {
     for (unsigned int row = 0; row < count; ++row) {
         for (unsigned int col = 0; col < count; ++col) {
             vf18(row, col);
@@ -4659,15 +4669,16 @@ struct FUN_004708d0_Obj {
     FUN_004708d0_Extra* FUN_00824a50(void* name);
 };
 
-void __cdecl FUN_004f37d0(void* value);
+void __cdecl TESObjectREFR_AddAddonNodes(void* value);
 
-void __cdecl FUN_004708d0(FUN_004708d0_Obj* obj, void* value) {
+// pdb: BipedAnim::AddAddonNodes | BipedAnim.obj | fnv360_0822_retail, objrun + bridge(call_gap|call_gap_sim), high
+void __cdecl BipedAnim_AddAddonNodes(FUN_004708d0_Obj* obj, void* value) {
     FUN_004708d0_Extra* extra = obj->FUN_00824a50(DAT_01202ddc);
     if (extra != 0) {
         unsigned int flags = *(volatile unsigned int*)&extra->unk0C;
         flags >>= 4;
         if ((unsigned char)flags & 1) {
-            FUN_004f37d0(value);
+            TESObjectREFR_AddAddonNodes(value);
         }
     }
 }
@@ -4676,11 +4687,11 @@ void __cdecl FUN_004708d0(FUN_004708d0_Obj* obj, void* value) {
 // @f3 0x00475490 (community match, verified in this file)
 namespace f3m_00475490 {
 struct Mat33 { float m[3][3]; };
-bool __stdcall FUN_00475380(Mat33* m);
+bool __stdcall NiMatrix3_Inverse(Mat33* m);
 
 Mat33* __stdcall FUN_00475490(Mat33* m)
 {
-    if (!FUN_00475380(m))
+    if (!NiMatrix3_Inverse(m))
     {
         m->m[0][0] = 0.0f;
         m->m[1][0] = 0.0f;
@@ -4711,7 +4722,8 @@ int FUN_00465120(const Vec3_465120* a, const Vec3_465120* b)
 namespace f3m_00468fd0 {
 struct Random964 { unsigned int FUN_0086c4b0(unsigned int maximum); };
 Random964* __cdecl FUN_0044a2d0();
-float __cdecl FUN_00468fd0() {
+// pdb: RandomFloatTwoPi | BGSDecalManager.obj | fnv360_0822_retail, call_seq + skyrim(call_gap), high
+float __cdecl RandomFloatTwoPi() {
     Random964* random = FUN_0044a2d0();
     unsigned int value = random->FUN_0086c4b0(0xffffffffu);
     return (float)value * 1.462918119976564e-09;
@@ -4976,8 +4988,8 @@ namespace f3m_0047e280 {
 
 struct EntryM
 {
-    bool FUN_0040aed0(int a);
-    bool FUN_0040af00();
+    bool ExtraDataList_GetWorn(int a);
+    bool ExtraDataList_GetCanNotWear();
     void FUN_0040b5e0(int a, int b);
 };
 
@@ -5003,10 +5015,11 @@ struct OuterNodeM
 struct ListM
 {
     OuterNodeM* head;
-    EntryM* FUN_0047e280(int key, bool flag);
+    EntryM* InventoryChanges_WearingObject(int key, bool flag);
 };
 
-EntryM* ListM::FUN_0047e280(int key, bool flag)
+// pdb: InventoryChanges::WearingObject | InventoryChanges.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+EntryM* ListM::InventoryChanges_WearingObject(int key, bool flag)
 {
     OuterNodeM* node = head;
     bool searching = true;
@@ -5025,9 +5038,9 @@ EntryM* ListM::FUN_0047e280(int key, bool flag)
             EntryM* e = in->data;
             if (!e)
                 break;
-            if (e->FUN_0040aed0(0))
+            if (e->ExtraDataList_GetWorn(0))
                 return e;
-            if (e->FUN_0040af00() && flag)
+            if (e->ExtraDataList_GetCanNotWear() && flag)
             {
                 e->FUN_0040b5e0(1, 0);
                 return e;
@@ -5451,15 +5464,15 @@ struct Cell47b3
     int unk10;
     Point47b3 pos;
     bool unk20;
-    bool FUN_0047af50(int x, int y);
-    bool FUN_0047b310(int x, int y);
+    bool GridArray_SetCenter(int x, int y);
+    bool GridCellArray_SetCenter(int x, int y);
 };
 }
 using namespace f3m_0047b310;
 
 static __forceinline void Move47b3(Cell47b3* c, int x, int y, bool& result)
 {
-    if (c->FUN_0047af50(x, y))
+    if (c->GridArray_SetCenter(x, y))
     {
         c->pos.x = (float)(x << 12);
         c->pos.y = (float)(y << 12);
@@ -5470,7 +5483,8 @@ static __forceinline void Move47b3(Cell47b3* c, int x, int y, bool& result)
     }
 }
 
-bool Cell47b3::FUN_0047b310(int x, int y)
+// pdb: GridCellArray::SetCenter | GridCell.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable_prefix), high
+bool Cell47b3::GridCellArray_SetCenter(int x, int y)
 {
     bool r = false;
     Move47b3(this, x, y, r);
@@ -5935,11 +5949,12 @@ struct Grid {
     Cell** GetCellPtr(unsigned int x, unsigned int y) {
         return (x < size && y < size) ? &cells[x * size + y] : 0;
     }
-    void __thiscall FUN_0047b560(int arg, unsigned int x, unsigned int y);
+    void __thiscall GridCellArray_AttachToWorld(int arg, unsigned int x, unsigned int y);
 };
 }
 using namespace f3m_0047b560;
-void __thiscall Grid::FUN_0047b560(int arg, unsigned int x, unsigned int y)
+// pdb: GridCellArray::AttachToWorld | GridCell.obj | fnv360_0822_retail, call_gap + bridge(call_gap|call_gap) + skyrim(call_gap_sim), high
+void __thiscall Grid::GridCellArray_AttachToWorld(int arg, unsigned int x, unsigned int y)
 {
     Cell* cell = *GetCellPtr(x, y);
     if (cell)
@@ -6054,11 +6069,12 @@ struct List {
 struct Owner {
     List list;
     Source* source;
-    int __thiscall FUN_0047e4f0(int key);
+    int __thiscall InventoryChanges_GetObjectCount(int key);
 };
 }
 using namespace f3m_0047e4f0;
-int __thiscall Owner::FUN_0047e4f0(int key)
+// pdb: InventoryChanges::GetObjectCount | InventoryChanges.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(objrun_prop), high
+int __thiscall Owner::InventoryChanges_GetObjectCount(int key)
 {
     Counter* c = source ? source->FUN_004e66c0() : 0;
     int count;
@@ -6417,15 +6433,16 @@ Vert* __cdecl FUN_00477d30(Obj* obj)
 
 // @f3 0x0047d260 (community match, verified in this file)
 namespace f3m_0047d260 {
-struct Object1045 { bool FUN_0040aed0(bool highOnly); };
+struct Object1045 { bool ExtraDataList_GetWorn(bool highOnly); };
 struct Node1045 { Object1045* object00; Node1045* next04; };
-struct Owner1045 { Node1045* head00; bool FUN_0047d260(bool highOnly); };
-bool Owner1045::FUN_0047d260(bool highOnly) {
+struct Owner1045 { Node1045* head00; bool ItemChange_GetWorn(bool highOnly); };
+// pdb: ItemChange::GetWorn | InventoryChanges.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+bool Owner1045::ItemChange_GetWorn(bool highOnly) {
     Node1045* node = head00;
     while (node) {
         Object1045* object = node->object00;
         if (!object) break;
-        if (object->FUN_0040aed0(highOnly)) return true;
+        if (object->ExtraDataList_GetWorn(highOnly)) return true;
         node = node->next04;
     }
     return false;
@@ -6801,7 +6818,8 @@ extern double DAT_00dc0760;
 extern float DAT_00db38b8;
 namespace f3m_004759f0 {
 
-float FUN_004759f0(float from, float to, float* out)
+// pdb: GetAngleDelta | GlobalFunc.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+float GetAngleDelta(float from, float to, float* out)
 {
     float d = to - from;
     *out = 0.0f;
@@ -7101,8 +7119,8 @@ int __cdecl FUN_004789f0(int a, unsigned char b, unsigned char c, unsigned char 
 
 // @f3 0x0047b500 (community match, verified in this file)
 namespace f3m_0047b500 {
-struct Next1223 {void FUN_004cdb00();};
-struct Item1223 {Next1223* FUN_004d5270();};
+struct Next1223 {void TESObjectLAND_InitDistantTextureBlending();};
+struct Item1223 {Next1223* TESObjectCELL_GetLand();};
 struct Owner1223 {
  int unk00,unk04,unk08;unsigned int dimension;Item1223** items;
  __forceinline Item1223** At(unsigned int x,unsigned int y){if(x>=dimension||y>=dimension)return 0;return &items[dimension*x+y];}
@@ -7110,7 +7128,7 @@ struct Owner1223 {
 };
 void Owner1223::FUN_0047b500(){
  unsigned int count=dimension;
- for(unsigned int x=0;x<count;++x)for(unsigned int y=0;y<count;++y){Item1223** slot=At(x,y);if(slot&&*slot)(*slot)->FUN_004d5270()->FUN_004cdb00();}
+ for(unsigned int x=0;x<count;++x)for(unsigned int y=0;y<count;++y){Item1223** slot=At(x,y);if(slot&&*slot)(*slot)->TESObjectCELL_GetLand()->TESObjectLAND_InitDistantTextureBlending();}
 }
 }   // namespace f3m_0047b500
 
@@ -7510,17 +7528,17 @@ Point475280 Point475280::FUN_00475280(const Point475280& p) const
 struct Item47f6a0 { short FUN_0047dca0(); };
 struct Obj47f6a0 { virtual void v0();virtual void v1();virtual void v2();virtual void v3();virtual void v4();virtual void v5();virtual void v6();virtual void v7();virtual void v8();virtual void v9();virtual void v10();virtual void v11();virtual void v12();virtual void v13();virtual void v14();virtual void v15();virtual void v16();virtual void v17();virtual void v18();virtual void v19();virtual void v20();virtual void v21();virtual void v22();virtual void v23();virtual void v24();virtual void v25();virtual void v26();virtual void v27();virtual void v28();virtual void v29();virtual void v30();virtual void v31();virtual void v32();virtual void v33();virtual void v34();virtual void v35();virtual void v36();virtual void v37();virtual void v38();virtual void v39();virtual void v40();virtual void v41();virtual void v42();virtual void v43();virtual void v44();virtual void v45();virtual void v46();virtual void v47();virtual void v48();virtual void v49();virtual void v50();virtual void v51();virtual void v52();virtual void v53();virtual void v54();virtual void v55();virtual void v56();virtual void v57();virtual void v58();virtual void v59();virtual void v60();virtual void v61();virtual void v62();virtual void v63();virtual void v64();virtual void v65();virtual void v66();virtual void v67();virtual void v68();virtual void v69();virtual void v70();virtual void v71();virtual void v72();virtual void v73();virtual void v74();virtual void v75(); virtual int GetId(); };
 struct Ent47f6a0 { int form; char kind; char idb[4]; };
-struct Data47f6a0 { char pad[0x88]; Ent47f6a0* ent; bool FUN_006daa00(); };
+struct Data47f6a0 { char pad[0x88]; Ent47f6a0* ent; bool TESSaveLoadGame_UseSaveGameBlocks(); };
 struct Node47f6a0 { Item47f6a0* item; Node47f6a0* next; bool Empty() const { return next == 0 && item == 0; } Item47f6a0* Get() const { return item; } };
 struct List47f6a0 { Node47f6a0* head; unsigned short FUN_0047f6a0(); };
 extern Data47f6a0* DAT_01079ca4;
 extern bool DAT_01079d20;
-Obj47f6a0* __cdecl FUN_00455190(int form);
+Obj47f6a0* __cdecl TESForm_GetFormByNumericID(int form);
 void __cdecl FUN_00c24b70(const char* fmt, ...);
 unsigned short List47f6a0::FUN_0047f6a0()
 {
     unsigned short size = 0;
-    if (DAT_01079ca4->FUN_006daa00()) size = 6;
+    if (DAT_01079ca4->TESSaveLoadGame_UseSaveGameBlocks()) size = 6;
     size += 2;
     for (Node47f6a0* n = head; n; n = n->next) {
         if (n->Empty()) break;
@@ -7530,7 +7548,7 @@ unsigned short List47f6a0::FUN_0047f6a0()
     if (DAT_01079d20) {
         Ent47f6a0* e = DAT_01079ca4->ent;
         if (e) {
-            Obj47f6a0* o = FUN_00455190(e->form);
+            Obj47f6a0* o = TESForm_GetFormByNumericID(e->form);
             FUN_00c24b70("GetSaveSize(): %-5i for form %08X %s with flags %08X ending at line %i in file %s", size, e->form, o->GetId(), *(int*)e->idb, 0x236a, "c:\\_Fallout3\\Platforms\\Common\\Code\\Fallout Shared\\InventoryChanges.cpp");
         }
     }
@@ -7567,27 +7585,27 @@ struct GridCoords_464e60
 };
 struct GridOwner_464e60
 {
-    GridCoords_464e60* FUN_004d5270(GridOrigin_464e60* out, int mode);
-    int FUN_004d3430();
-    int FUN_004d3450();
+    GridCoords_464e60* TESObjectCELL_GetLand(GridOrigin_464e60* out, int mode);
+    int TESObjectCELL_GetDataX();
+    int TESObjectCELL_GetDataY();
 };
 
 int __cdecl FUN_00464e60(GridOwner_464e60* object, float x, float y)
 {
     int result = 0;
     GridState_464e60 state;
-    object->FUN_004d5270(&state.origin, 0)->FUN_004c8ff0();
+    object->TESObjectCELL_GetLand(&state.origin, 0)->FUN_004c8ff0();
     x += state.origin.x;
     y += state.origin.y;
 
-    state.corners.x0 = (float)(object->FUN_004d3430() << 12);
-    state.corners.y0 = (float)(object->FUN_004d3450() << 12);
-    state.corners.x1 = (float)((object->FUN_004d3430() + 1) << 12);
-    state.corners.y0again = (float)(object->FUN_004d3450() << 12);
-    state.corners.x0again = (float)(object->FUN_004d3430() << 12);
-    state.corners.y1 = (float)((object->FUN_004d3450() + 1) << 12);
-    state.corners.x1again = (float)((object->FUN_004d3430() + 1) << 12);
-    state.corners.y1again = (float)((object->FUN_004d3450() + 1) << 12);
+    state.corners.x0 = (float)(object->TESObjectCELL_GetDataX() << 12);
+    state.corners.y0 = (float)(object->TESObjectCELL_GetDataY() << 12);
+    state.corners.x1 = (float)((object->TESObjectCELL_GetDataX() + 1) << 12);
+    state.corners.y0again = (float)(object->TESObjectCELL_GetDataY() << 12);
+    state.corners.x0again = (float)(object->TESObjectCELL_GetDataX() << 12);
+    state.corners.y1 = (float)((object->TESObjectCELL_GetDataY() + 1) << 12);
+    state.corners.x1again = (float)((object->TESObjectCELL_GetDataX() + 1) << 12);
+    state.corners.y1again = (float)((object->TESObjectCELL_GetDataY() + 1) << 12);
 
     if (x == state.corners.x0 && y == state.corners.y0)
         result = 9;
@@ -8794,7 +8812,7 @@ struct InvNode {
     InvEntry* item;
     InvNode* next;
 };
-bool __cdecl FUN_00452670(Form* form);
+bool __cdecl TESContainer_IsGold(Form* form);
 struct Owner {
     InvNode* entries;
     BaseForm* baseForm;
@@ -8810,7 +8828,7 @@ int Owner::FUN_0047e810()
             if (!node->next && !node->item)
                 break;
             Form* form = node->item->form;
-            if (form && FUN_00452670(form)) {
+            if (form && TESContainer_IsGold(form)) {
                 InvNode* n = entries;
                 bool searching = true;
                 while (n && searching) {
@@ -8833,7 +8851,7 @@ int Owner::FUN_0047e810()
         if (!n->next && !n->item)
             break;
         Form* form = n->item->form;
-        if (form && FUN_00452670(form)) {
+        if (form && TESContainer_IsGold(form)) {
             if (!container || (!container->FUN_004528c0(form) && n->item->countDelta > 0))
                 total += n->item->countDelta;
         }
@@ -9156,7 +9174,7 @@ struct Entry460af0
 };
 extern Entry460af0 DAT_00f5aca8[];
 
-int FUN_0054b780(unsigned char id);
+int TESAnimGroup_GetType(unsigned char id);
 
 class Item460af0
 {
@@ -9260,7 +9278,7 @@ void* Owner460af0::FUN_00460af0(unsigned short id, int kind)
     long obj;
     obj = kind;
     if (-1 == obj)
-        obj = DAT_00f5aca8[FUN_0054b780((unsigned char)id)].kind00;
+        obj = DAT_00f5aca8[TESAnimGroup_GetType((unsigned char)id)].kind00;
     void* x;
     switch (obj)
     {
@@ -9420,7 +9438,7 @@ public:
     int unk14;
     short unk18;
     FUN_0040eda0();
-    void FUN_0041b3c0(FUN_0040eda0* item);
+    void ExtraDataList_DuplicateExtraListForContainer(FUN_0040eda0* item);
     static void* operator new(unsigned int bytes) { return DAT_01090a78.FUN_0086b930(bytes); }
 };
 
@@ -9437,7 +9455,7 @@ FUN_0047fd60::FUN_0047fd60(const FUN_0047fd60& src)
     unk00 = new Node();
     for (Node* n = src.unk00; n && n->item; n = n->next) {
         FUN_0040eda0* obj = new FUN_0040eda0();
-        obj->FUN_0041b3c0(n->item);
+        obj->ExtraDataList_DuplicateExtraListForContainer(n->item);
         if (obj) {
             Node* tail = unk00;
             while (tail->next)
@@ -9492,10 +9510,11 @@ struct Grid1253 {
  virtual void MoveItem(unsigned int,unsigned int,unsigned int,unsigned int);
  int iHorizontalPixelCenterObj,iCenterPixelY;
  unsigned int uiDimension;
- void FUN_0047af80(int,int);
+ void GridArray_Shift(int,int);
 };
 // @fnv 0x004b9f70
-void Grid1253::FUN_0047af80(int aiShiftX, int aiShiftY)
+// pdb: GridArray::Shift | GridArray.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void Grid1253::GridArray_Shift(int aiShiftX, int aiShiftY)
 {
     unsigned int j = 0;
     unsigned int i = 0;
@@ -9865,9 +9884,10 @@ class Visitor_470620
 public:
     Cell_470620* cell;
     void FUN_004704a0(void* data, int arg);
-    void FUN_00470620(int arg);
+    void BGSTextureUseMap_CollectTextureUseDataForLoadedArea(int arg);
 };
-void Visitor_470620::FUN_00470620(int arg)
+// pdb: BGSTextureUseMap::CollectTextureUseDataForLoadedArea | BGSTextureUseMap.obj | fnv360_0822_retail, call_gap + skyrim(call_gap_sim), high
+void Visitor_470620::BGSTextureUseMap_CollectTextureUseDataForLoadedArea(int arg)
 {
     Cell_470620* c = DAT_0107a0d8->cached;
     if (c)
@@ -10377,7 +10397,7 @@ struct WaterTerrain {
 };
 struct WaterWorld { bool FUN_00501180(); };
 struct WaterCell {
-    WaterTerrain* FUN_004d5270();
+    WaterTerrain* TESObjectCELL_GetLand();
     float FUN_004d5350();
     WaterWorld* FUN_004d3780();
 };
@@ -10396,8 +10416,9 @@ __forceinline void addBoundary(FUN_004654e0& boundaryGroups,int a,int b,const Wa
     else if ((a&8) && (b&8)) boundaryGroups[3].append(point);
 }
 
-void __cdecl FUN_00466b80(WaterCell* cell) {
-    WaterTerrain* terrain=cell->FUN_004d5270();
+// pdb: BGSAutoWater::GatherLineSegments | BGSAutoWater.obj | fnv360_0721_beta, udata, high
+void __cdecl BGSAutoWater_GatherLineSegments(WaterCell* cell) {
+    WaterTerrain* terrain=cell->TESObjectCELL_GetLand();
     float water=cell->FUN_004d5350();
     if (!DAT_0106dedc) DAT_0106dedc=new WaterPoints;
     else DAT_0106dedc->clear();
@@ -10677,9 +10698,10 @@ struct Smart {
 };
 struct Owner {
  unsigned unk000; unsigned unk004; unsigned unk008; unsigned unk00c; unsigned unk010; unsigned unk014; unsigned unk018; unsigned unk01c; unsigned unk020; unsigned unk024; unsigned unk028; unsigned unk02c; unsigned unk030; unsigned unk034; unsigned unk038; unsigned unk03c; unsigned unk040; unsigned unk044; unsigned unk048; unsigned unk04c; unsigned unk050; unsigned unk054; unsigned unk058; unsigned unk05c; unsigned unk060; unsigned unk064; unsigned unk068; unsigned unk06c; unsigned unk070; unsigned unk074; unsigned unk078; unsigned unk07c; unsigned unk080; unsigned unk084; unsigned unk088; unsigned unk08c; unsigned unk090; unsigned unk094; unsigned unk098; unsigned unk09c; unsigned unk0a0; unsigned unk0a4; unsigned unk0a8; unsigned unk0ac; unsigned unk0b0; unsigned unk0b4; unsigned unk0b8; unsigned unk0bc; unsigned unk0c0; unsigned unk0c4; unsigned unk0c8; unsigned unk0cc; unsigned unk0d0; unsigned unk0d4; unsigned unk0d8; unsigned unk0dc; unsigned unk0e0; unsigned unk0e4; unsigned unk0e8; unsigned unk0ec; unsigned unk0f0; unsigned unk0f4; unsigned unk0f8; unsigned unk0fc; unsigned unk100; unsigned unk104; unsigned unk108; unsigned unk10c; unsigned unk110; unsigned unk114; unsigned unk118;Smart current;
- void FUN_004635f0(); void FUN_00464b10(unsigned,unsigned,unsigned);
+ void FUN_004635f0(); void Animation_SpecialIdleReplace(unsigned,unsigned,unsigned);
 };
-void Owner::FUN_00464b10(unsigned first,unsigned second,unsigned third) {
+// pdb: Animation::SpecialIdleReplace | Animation.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+void Owner::Animation_SpecialIdleReplace(unsigned first,unsigned second,unsigned third) {
  TagScope tag(0x33);
  if(!DAT_01079858->Alternate()) current=new FUN_00460ba0(first,third,0,second,0,this);
  else current=new FUN_00460ba0(first,third,0,second,1,0);
@@ -11250,7 +11272,7 @@ struct Table {
 struct Reference {
     Table* table;
     Inventory* FUN_004e66c0();
-    unsigned short FUN_006f4cd0();
+    unsigned short Actor_GetLevel();
     unsigned FUN_004ec070(int);
     __forceinline bool IsSpecial(){return table->isSpecial(this);}
 };
@@ -11264,7 +11286,7 @@ void Owner::FUN_0047f350() {
     Node* node=inventory->Head();
     unsigned index=0;
     unsigned level;
-    if(reference->IsSpecial()) level=reference->FUN_006f4cd0();
+    if(reference->IsSpecial()) level=reference->Actor_GetLevel();
     else level=reference->FUN_004ec070(1);
     for(;node;node=node->next) {
         if(!node->next && !node->item) break;
@@ -11308,11 +11330,12 @@ struct Node : AV {unsigned unk04;unsigned unk08;unsigned unk0c;unsigned unk10;un
 bool IsVisual(){return visual && visual->value!=0.0f;} unsigned Size(){return count;} AV* At(unsigned i){return children[i];}
 };
 void __cdecl FUN_00ade300(AV*,int,int);
-void __cdecl FUN_0047adc0(AV* object){
+// pdb: PrepareObjectWithNoLightingRecurse | GlobalFunc.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+void __cdecl PrepareObjectWithNoLightingRecurse(AV* object){
 if(object->GetGeometry() && !object->FUN_00826590(3)) {
 FUN_00af2240* prop=new FUN_00af2240;
 prop->SetFlag(0x30,true);object->FUN_004236f0(prop);object->FUN_008268a0();FUN_00ade300(object,0,0);
-}else{Node* node=object->GetNode();if(node && node->IsVisual())for(unsigned i=0;i<node->Size();i++){AV* child=node->At(i);if(child)FUN_0047adc0(child);}}
+}else{Node* node=object->GetNode();if(node && node->IsVisual())for(unsigned i=0;i<node->Size();i++){AV* child=node->At(i);if(child)PrepareObjectWithNoLightingRecurse(child);}}
 }
 }
 }   // namespace f3m_0047adc0
@@ -11643,8 +11666,8 @@ public:
 
     bool FUN_0040c080(int flag);
     short FUN_0040ac80();
-    int FUN_0040a2d0();
-    void FUN_0040b910();
+    int BaseExtraList_ItemsInList();
+    void ExtraDataList_RemoveCount();
 };
 
 struct ListNode
@@ -11672,8 +11695,8 @@ int EntryData::FUN_0047fee0()
         if (!item->FUN_0040c080(0) && item->FUN_0040ac80() > 0)
             count++;
         node = node->next;
-        if (item->FUN_0040a2d0() == 1 && item->FUN_0040ac80() > 1) {
-            item->FUN_0040b910();
+        if (item->BaseExtraList_ItemsInList() == 1 && item->FUN_0040ac80() > 1) {
+            item->ExtraDataList_RemoveCount();
             extendData->FUN_00421610(&key);
             delete item;
             node = extendData;
@@ -11968,7 +11991,7 @@ Collector::Collector(){earlyOut=1.0f;hits.count=0;}
 namespace f3m_0047ce10 {
 struct Object984 {
     virtual ~Object984();
-    void FUN_0040a250(bool enabled);
+    void BaseExtraList_RemoveAll(bool enabled);
 };
 struct Node984 { Object984* object00; Node984* next04; };
 struct Owner984 { Node984* head00; void FUN_0047ce10(); };
@@ -11977,7 +12000,7 @@ void Owner984::FUN_0047ce10() {
     while (node && node->object00) {
         Object984* object = node->object00;
         node = node->next04;
-        object->FUN_0040a250(true);
+        object->BaseExtraList_RemoveAll(true);
         delete object;
     }
 }
@@ -12103,7 +12126,7 @@ __forceinline void ReleaseVal46a9(RefObj46a9* p)
     }
 }
 
-extern "C" void FUN_0056a290();
+extern "C" void DecalCaster_ClearInstance();
 
 struct FUN_00abb340 { char pad[12]; ~FUN_00abb340(); };
 struct FUN_00bd12d0 { char pad[12]; __declspec(nothrow) ~FUN_00bd12d0(); };
@@ -12120,7 +12143,7 @@ struct FUN_0046a9a0 {
 
 FUN_0046a9a0::~FUN_0046a9a0()
 {
-    FUN_0056a290();
+    DecalCaster_ClearInstance();
     if (DAT_0106dfbc) {
         ReleaseVal46a9(DAT_0106dfbc);
         DAT_0106dfbc = 0;
@@ -12543,7 +12566,7 @@ unsigned int unk050;
 unsigned int unk054;
 unsigned int unk058;
 unsigned int unk05c;
-Process* process;Process* GetProcess(){return process;}void FUN_00701ab0(bool);Animation* FUN_006f8f30();bool FUN_006f6c70();
+Process* process;Process* GetProcess(){return process;}void FUN_00701ab0(bool);Animation* Actor_GetAnimation();bool FUN_006f6c70();
 bool FUN_0076cd40(Owner*);Node* FUN_0076ff40(bool);Owner* FUN_0076cd20(bool);Animation* FUN_0076cce0(bool);
 };
 struct LoadState {
@@ -13251,10 +13274,10 @@ if(proc && !DAT_0106cdcc->loading && this!=DAT_0107a104->FUN_0076cd20(true))a->F
 if(proc && !DAT_01079858->Blocked()){
 Animation* anim=0;
 if(actor==DAT_0107a104 && this==DAT_0107a104->FUN_0076cd20(true))anim=DAT_0107a104->FUN_0076cce0(true);
-else anim=a->FUN_006f8f30();
+else anim=a->Actor_GetAnimation();
 if(anim)anim->FUN_0045e4c0(4,false);
 if(actor==DAT_0107a104 && this==DAT_0107a104->FUN_0076cd20(true))a->GetProcess()->UpdateWeaponDrawn(a->FUN_006f6c70(),this,DAT_0107a104->FUN_0076cce0(true),a);
-else a->GetProcess()->UpdateWeaponDrawn(a->FUN_006f6c70(),this,a->FUN_006f8f30(),a);
+else a->GetProcess()->UpdateWeaponDrawn(a->FUN_006f6c70(),this,a->Actor_GetAnimation(),a);
 }}
 }
 }
@@ -13446,7 +13469,7 @@ struct TagScope {
 
 struct Obj47b860B { void FUN_004cfe50(); };
 struct Cell47b860 {
-    Obj47b860B* FUN_004d5270();
+    Obj47b860B* TESObjectCELL_GetLand();
     void FUN_004dc950();
 };
 
@@ -13479,7 +13502,7 @@ void Grid47b860::FUN_0047b860()
         for (unsigned int y = 0; y < n; ++y) {
             Cell47b860** p = GetAt(x, y);
             if (p && *p) {
-                (*p)->FUN_004d5270()->FUN_004cfe50();
+                (*p)->TESObjectCELL_GetLand()->FUN_004cfe50();
                 (*p)->FUN_004dc950();
             }
         }
@@ -13576,7 +13599,7 @@ struct Buf {
     char* m14;
     char pad18[0x70];
     Rec* m88;
-    bool FUN_006daa00();
+    bool TESSaveLoadGame_UseSaveGameBlocks();
     void FUN_006db460(const void* p, unsigned int n);
     void FUN_006defa0(const void* p, unsigned int n);
 };
@@ -13584,7 +13607,7 @@ extern Buf* DAT_01079ca4;
 extern bool DAT_01079d20;
 extern char DAT_00dc0bd0[];
 extern char DAT_00db5d40[];
-Form* __cdecl FUN_00455190(int id);
+Form* __cdecl TESForm_GetFormByNumericID(int id);
 void __cdecl FUN_00c24b70(const char* fmt, ...);
 struct Item { void FUN_00412920(int a, int b); };
 struct Node { Item* m0; Node* m4; };
@@ -13600,7 +13623,7 @@ void Self::FUN_0047dd50()
     short size = 0;
     char* start = DAT_01079ca4->m14;
     char* sizePos = 0;
-    if (DAT_01079ca4->FUN_006daa00())
+    if (DAT_01079ca4->TESSaveLoadGame_UseSaveGameBlocks())
     {
         int tag = 0x424c4f4b;
         DAT_01079ca4->FUN_006db460(&tag, 4);
@@ -13625,11 +13648,11 @@ void Self::FUN_0047dd50()
         char* cur = DAT_01079ca4->m14;
         if (r)
         {
-            Form* f = FUN_00455190(r->m0);
+            Form* f = TESForm_GetFormByNumericID(r->m0);
             FUN_00c24b70(DAT_00db5d40, cur - start, r->m0, f->V130(), *(int*)r->m5, 0x54f, DAT_00dc0bd0);
         }
     }
-    if (DAT_01079ca4->FUN_006daa00())
+    if (DAT_01079ca4->TESSaveLoadGame_UseSaveGameBlocks())
         *(short*)sizePos = (short)(DAT_01079ca4->m14 - sizePos);
 }
 }
@@ -14523,7 +14546,7 @@ public:
     NiControllerManagerPtr controllerManager;
     AnimSequenceMap* sequences;
 
-    bool FUN_0045cc40();
+    bool Animation_ShouldQueueSequenceCloning();
     void FUN_00461a70(KFModel* model, bool queue);
     bool FUN_00464330(FileList* files, NiNode* rootNode, TESObjectREFR* actor, bool activate);
 };
@@ -14543,7 +14566,7 @@ bool Animation::FUN_00464330(FileList* files, NiNode* rootNode, TESObjectREFR* a
             nodes[i] = FUN_00aab350(rootNode, DAT_00f5c78c[i], true);
     root->flags &= ~2;
     controllerManager = new NiControllerManager(root, true);
-    bool queue = FUN_0045cc40();
+    bool queue = Animation_ShouldQueueSequenceCloning();
     while (!files->FUN_00645c20())
     {
         const char* file = files->item;
@@ -14677,21 +14700,21 @@ struct Data47f750 {
     int unk18, unk1C, unk20, unk24, unk28, unk2C, unk30, unk34, unk38, unk3C, unk40, unk44, unk48, unk4C;
     int unk50, unk54, unk58, unk5C, unk60, unk64, unk68, unk6C, unk70, unk74, unk78, unk7C, unk80, unk84;
     Ent47f750* ent;
-    bool FUN_006daa00();
+    bool TESSaveLoadGame_UseSaveGameBlocks();
     void FUN_006db460(const void* data, int size);
 };
 struct Node47f750 { Item47f750* item; Node47f750* next; bool Empty() const { return next == 0 && item == 0; } Item47f750* Get() const { return item; } };
 struct List47f750 { Node47f750* head; void FUN_0047f750(); };
 extern Data47f750* DAT_01079ca4;
 extern bool DAT_01079d20;
-Obj47f750* __cdecl FUN_00455190(int form);
+Obj47f750* __cdecl TESForm_GetFormByNumericID(int form);
 void __cdecl FUN_00c24b70(const char* fmt, ...);
 void List47f750::FUN_0047f750()
 {
     short blockSize = 0;
     char* start = DAT_01079ca4->pos;
     char* sizePos = 0;
-    if (DAT_01079ca4->FUN_006daa00()) {
+    if (DAT_01079ca4->TESSaveLoadGame_UseSaveGameBlocks()) {
         int tag = 'BLOK';
         DAT_01079ca4->FUN_006db460(&tag, 4);
         sizePos = DAT_01079ca4->pos;
@@ -14713,11 +14736,11 @@ void List47f750::FUN_0047f750()
         Ent47f750* e = DAT_01079ca4->ent;
         char* end = DAT_01079ca4->pos;
         if (e) {
-            Obj47f750* o = FUN_00455190(e->form);
+            Obj47f750* o = TESForm_GetFormByNumericID(e->form);
             FUN_00c24b70("SaveGame(): %-5i for form %08X %s with flags %08X ending at line %i in file %s", end - start, e->form, o->GetId(), *(int*)e->idb, 0x2386, "c:\\_Fallout3\\Platforms\\Common\\Code\\Fallout Shared\\InventoryChanges.cpp");
         }
     }
-    if (DAT_01079ca4->FUN_006daa00())
+    if (DAT_01079ca4->TESSaveLoadGame_UseSaveGameBlocks())
         *(short*)sizePos = (short)DAT_01079ca4->pos - (short)sizePos;
 }
 }
@@ -14764,7 +14787,7 @@ struct ModelForm {
     SceneObject* FUN_008257a0(LoadOptions*);
 };
 struct SceneRoot {
-    void FUN_00459180(SceneObject*);
+    void TESModelTextureSwap_SwapTextures(SceneObject*);
 };
 struct AttachProvider {
     virtual void Slot00();
@@ -14875,7 +14898,7 @@ SceneObject* Owner::FUN_00471ca0(const void* enabled,ModelForm* model,unsigned i
         if (entries[index].attachment) {
             SceneRoot* root=entries[index].attachment->GetRoot();
             if (root)
-                root->FUN_00459180(scene);
+                root->TESModelTextureSwap_SwapTextures(scene);
         }
         if (entries[index].updateOwner && entries[index].updateOwner->CheckUpdate())
             FUN_00479030(scene);
@@ -15828,7 +15851,7 @@ struct Ref {
     void* unk3c;
     Model* FUN_004e8880();
 };
-struct Counter { void FUN_00410170(int n); };
+struct Counter { void ExtraDataList_SetCount(int n); };
 struct Result {
     virtual void w0(); virtual void w1(); virtual void w2(); virtual void w3(); virtual void w4(); virtual void w5(); virtual void w6(); virtual void w7(); virtual void w8(); virtual void w9(); virtual void w10(); virtual void w11(); virtual void w12(); virtual void w13(); virtual void w14(); virtual void w15(); virtual void w16(); virtual void w17();
     virtual void SetFlags(int f);
@@ -15861,7 +15884,7 @@ Result* __stdcall FUN_0047cc10(Ref* ref, int a2, int count, int a4, NiPt* pos, N
     if (!rot) rot = ref ? &ref->rot : &n47cc10::DAT_0108ec68;
     void* u = ref->unk3c; NiPt r = *rot;
     Result* result = n47cc10::DAT_0106cdcc->FUN_0043def0(a2, &p, &r, u, ref->FUN_004e8880(), a4, 0, 0);
-    if (count > 1) result->counter.FUN_00410170(count);
+    if (count > 1) result->counter.ExtraDataList_SetCount(count);
     result->SetFlags(0x400);
     return result;
 }
@@ -15891,7 +15914,7 @@ template <class T> struct RefPtr {
 struct Sound;
 struct Controller {
     void FUN_0044db80(Sound* sound, float time);
-    void FUN_0045c7f0(float time);
+    void NiControllerManager_DeactivateAll(float time);
 };
 struct Sound {
     int unk00, unk04, unk08, unk0C, unk10, unk14, unk18, unk1C, unk20, unk24, unk28, unk2C;
@@ -15950,10 +15973,10 @@ public:
     bool unk114;
     RefPtr<RefObject> unk118;
     RefPtr<RefObject> unk11C;
-    void FUN_0045db50(int slot, float time);
+    void Animation_ClearGroup(int slot, float time);
     void FUN_0045dca0();
     void FUN_0045feb0(RefPtr<RefObject>* ptr);
-    void FUN_004610b0();
+    void Animation_ClearBlendInterps();
     void FUN_0045e360(int a);
     void FUN_00461190(int unused);
     __forceinline void StopAnim(int i)
@@ -15972,16 +15995,16 @@ public:
 void Process::FUN_00461190(int unused)
 {
     if (FUN_006191f0() != 1) {
-        FUN_0045db50(7, 0.0f);
+        Animation_ClearGroup(7, 0.0f);
         if (!unk114)
-            FUN_0045db50(0, 0.0f);
+            Animation_ClearGroup(0, 0.0f);
     }
-    FUN_0045db50(1, 0.0f);
+    Animation_ClearGroup(1, 0.0f);
     if (FUN_006191f0() != 1)
-        FUN_0045db50(2, 0.0f);
-    FUN_0045db50(3, 0.0f);
-    FUN_0045db50(5, 0.0f);
-    FUN_0045db50(6, 0.0f);
+        Animation_ClearGroup(2, 0.0f);
+    Animation_ClearGroup(3, 0.0f);
+    Animation_ClearGroup(5, 0.0f);
+    Animation_ClearGroup(6, 0.0f);
     StopAnim(0);
     FUN_0045dca0();
     if (unk118)
@@ -15993,9 +16016,9 @@ void Process::FUN_00461190(int unused)
     unkFC = 0;
     StopAnim(1);
     if (unkD8)
-        unkD8->FUN_0045c7f0(0.0f);
+        unkD8->NiControllerManager_DeactivateAll(0.0f);
     FUN_0045e290(unk08);
-    FUN_004610b0();
+    Animation_ClearBlendInterps();
     FUN_0045e360(1);
 }
 }
@@ -16113,7 +16136,7 @@ struct QHolder {
     TESBoundObject* unk1C;
 };
 struct Loader {
-    void FUN_0042ca20(Part* part, int a, int b, int c, bool d, int e, int f);
+    void ModelLoader_QueueModel(Part* part, int a, int b, int c, bool d, int e, int f);
     void FUN_0042cac0(const char* name, int a, int b, int c, bool d, int e, int f);
 };
 extern Loader* DAT_0106ca70;
@@ -16166,9 +16189,9 @@ void Owner::FUN_004715f0(int a, ModelPtr* out, int b)
                     if (unk2B0 == DAT_0107a104) {
                         Part* other = FUN_00470b00(i, part);
                         if (other != slots[i].part)
-                            DAT_0106ca70->FUN_0042ca20(other, a, b, 3, true, 0, 0);
+                            DAT_0106ca70->ModelLoader_QueueModel(other, a, b, 3, true, 0, 0);
                     }
-                    DAT_0106ca70->FUN_0042ca20(slots[i].part, a, b, 3, true, 0, 0);
+                    DAT_0106ca70->ModelLoader_QueueModel(slots[i].part, a, b, 3, true, 0, 0);
                     Form* form = FUN_00451da0(slots[i].formId);
                     if (form) {
                         const char* name = form->unkC4.GetName();
@@ -16477,7 +16500,8 @@ extern void* DAT_0106e814;
 extern void* DAT_0106e818;
 extern void* DAT_0106e81c;
 extern const char DAT_00dc09a4[];
-bool __cdecl FUN_00478350(Node_478* node)
+// pdb: RemoveEditorMarkers | GlobalFunc.obj | fnv360_0822_retail, ustr_rel + bridge(ustr_rel|ustr_rel), high
+bool __cdecl RemoveEditorMarkers(Node_478* node)
 {
     bool result = false;
     if (!node)
@@ -16514,7 +16538,7 @@ bool __cdecl FUN_00478350(Node_478* node)
         if (child) {
             Node_478* sub = child->GetAsNiNode();
             if (sub) {
-                result = FUN_00478350(sub);
+                result = RemoveEditorMarkers(sub);
                 if (result) {
                     if (DAT_0106e99c == node) {
                         DAT_0106e99c = 0;
@@ -18122,7 +18146,7 @@ extern bool DAT_0106ea1c;
 namespace f3m_0047b5a0 {
 namespace f3m_0047b5a0 {
 void __cdecl FUN_004d7360(float t);
-class GridCell { public: void FUN_004df9a0(float t, bool off); };
+class GridCell { public: void TESObjectCELL_UpdateManagedNodes(float t, bool off); };
 class CellGrid
 {
 public:
@@ -18157,7 +18181,7 @@ void CellGrid::FUN_0047b5a0(float t)
             }
             GridCell* cell = *At(x, y);
             if (cell)
-                cell->FUN_004df9a0(t, !update);
+                cell->TESObjectCELL_UpdateManagedNodes(t, !update);
         }
     }
 }
@@ -18225,7 +18249,7 @@ struct Box
 };
 struct Manager
 {
-    Box* FUN_00435b30(float* position);
+    Box* TES_GetLandGeometry(float* position);
 };
 extern Manager* DAT_0107a0d8;
 extern const double DAT_00db88e8;
@@ -18261,7 +18285,7 @@ void* __cdecl FUN_004780d0(Collidable* collidable)
                 pos[1] = (float)(body->y * DAT_00db88e8);
                 // scale first: the original multiplies z the other way round
                 pos[2] = (float)(DAT_00db88e8 * body->z);
-                Box* box = f3m_004780d0::DAT_0107a0d8->FUN_00435b30(pos);
+                Box* box = f3m_004780d0::DAT_0107a0d8->TES_GetLandGeometry(pos);
                 if (box && box->object)
                     result = box->object;
             }
@@ -18282,7 +18306,7 @@ namespace ModelAttach471ef0 {
 extern long (__stdcall* DAT_00d9b064)(long*);
 extern long (__stdcall* DAT_00d9b068)(long*);
 struct Scene;
-struct TextureSwap { void FUN_00459180(Scene*); };
+struct TextureSwap { void TESModelTextureSwap_SwapTextures(Scene*); };
 struct Model {
     virtual void Slot00();
     virtual void Slot04();
@@ -18380,7 +18404,7 @@ extern int DAT_00f4c3d0[];
 extern const void* DAT_00f4c35c[];
 bool FUN_00478250(Scene*);
 void FUN_00479030(Scene*);
-void FUN_004708d0(Scene*,Scene*,int,Actor*);
+void BipedAnim_AddAddonNodes(Scene*,Scene*,int,Actor*);
 void FUN_004ef0a0(Scene*);
 bool FUN_00424d20(const void*,Scene*);
 bool FUN_0045cd20(Scene*);
@@ -18404,9 +18428,9 @@ Scene* __cdecl FUN_00471ef0(Form* form,Model* model,int slot,Actor* actor,Scene*
         result=copy.object;
     } else result=loaded->FUN_008257a0(&context);
     TextureSwap* swap=model->GetAsModelTextureSwap();
-    if(swap) swap->FUN_00459180(result);
+    if(swap) swap->TESModelTextureSwap_SwapTextures(result);
     if(form && form->CheckUpdate()) FUN_00479030(result);
-    FUN_004708d0(loaded,result,slot,actor);
+    BipedAnim_AddAddonNodes(loaded,result,slot,actor);
     FUN_004ef0a0(result);
     Retained extra(result->FUN_00824a50(DAT_0106e804));
     result->FUN_00824c30();
@@ -18539,7 +18563,8 @@ struct W2A {
   void FUN_004345e0(W2Obj*);
   bool FUN_007fba00(W2Pt*, void*, bool);
 };
-bool __cdecl FUN_00477bc0(W2A* a, W2Pt* origin, void* arg2, float radius, W2Obj* obj)
+// pdb: PickDistanceRecursive | GlobalFunc.obj | fnv360_0822_retail, call_gap + skyrim(call_gap), high
+bool __cdecl PickDistanceRecursive(W2A* a, W2Pt* origin, void* arg2, float radius, W2Obj* obj)
 {
   bool result = false;
   if (a && obj && (!a->unk11 || !(obj->flags & 1))) {
@@ -18554,7 +18579,7 @@ bool __cdecl FUN_00477bc0(W2A* a, W2Pt* origin, void* arg2, float radius, W2Obj*
         int cnt = n->count;
         for (int i = 0; i < cnt; i++) {
           W2Obj* child = n->children[i];
-          if (FUN_00477bc0(a, origin, arg2, radius, child))
+          if (PickDistanceRecursive(a, origin, arg2, radius, child))
             result = true;
         }
       } else {
@@ -18713,7 +18738,7 @@ void __cdecl FUN_004781c0(Node* n);
 void __cdecl FUN_00887da0(const char* fmt, ...);
 void __cdecl FUN_008da420(Node* n, int a);
 const char* __cdecl FUN_008242a0(const char* s);
-void __cdecl FUN_008d7b20(Node* n, int a, int b);
+void __cdecl bhkWorld_KillHavok(Node* n, int a, int b);
 T* __cdecl FUN_00424fe0(Node* n);
 void __cdecl FUN_008d7b90(Node* n, int a, int b, int c, int d);
 
@@ -18788,7 +18813,7 @@ void __cdecl FUN_00471830(Root* a0, Node* obj, Node* flag, void* a3, int a4)
 
     if (a3) {
         if (a3 == DAT_0107a104->FUN_0076cd20(1)) {
-            FUN_008d7b20(obj, 1, 1);
+            bhkWorld_KillHavok(obj, 1, 1);
             return;
         }
     }
@@ -19158,7 +19183,7 @@ struct FUN_00460340_anim {
     void* unk54;
     int unk58;
     void FUN_0044db80(int p, float f);
-    void FUN_0045c7f0(float f);
+    void NiControllerManager_DeactivateAll(float f);
 };
 struct FUN_00460340_act {
     virtual void v00();
@@ -19317,7 +19342,7 @@ struct FUN_00460340_cls {
     void* unk120;
     void* unk124;
     FUN_00460340_node unk128;
-    void FUN_0045db50(int i, float f);
+    void Animation_ClearGroup(int i, float f);
     void FUN_0045dca0();
     void FUN_0045feb0(FUN_00460340_res** p);
     void FUN_00460340(int a);
@@ -19327,16 +19352,16 @@ void FUN_00460340_cls::FUN_00460340(int a)
 {
     unk114 = 0;
     if (FUN_006191f0() != 1) {
-        FUN_0045db50(7, 0.0f);
+        Animation_ClearGroup(7, 0.0f);
         if (unk114 == 0)
-            FUN_0045db50(0, 0.0f);
+            Animation_ClearGroup(0, 0.0f);
     }
-    FUN_0045db50(1, 0.0f);
+    Animation_ClearGroup(1, 0.0f);
     if (FUN_006191f0() != 1)
-        FUN_0045db50(2, 0.0f);
-    FUN_0045db50(3, 0.0f);
-    FUN_0045db50(5, 0.0f);
-    FUN_0045db50(6, 0.0f);
+        Animation_ClearGroup(2, 0.0f);
+    Animation_ClearGroup(3, 0.0f);
+    Animation_ClearGroup(5, 0.0f);
+    Animation_ClearGroup(6, 0.0f);
     if (unkd8 && unkf0 && unkf0->unk44) {
         if (unkf0->unk58)
             unkd8->FUN_0044db80(unkf0->unk58, 0.0f);
@@ -19363,7 +19388,7 @@ void FUN_00460340_cls::FUN_00460340(int a)
     *(volatile unsigned short*)&unkaa = 0xff;
     *(volatile int*)&unk78 = -1;
     FUN_00460340_anim* an = *(FUN_00460340_anim* volatile*)&unkd8;
-    if (an) an->FUN_0045c7f0(0.0f);
+    if (an) an->NiControllerManager_DeactivateAll(0.0f);
     for (FUN_00460340_node* n = &unk128; n; n = n->unk04)
         g_heap460340.FUN_0086ba60(n->unk00);
     ((FUN_00460340_list*)&unk128)->FUN_006c8220();
@@ -19378,10 +19403,11 @@ struct Mat33 { float m[3][3]; };
 
 struct Mat33_This {
     float m[3][3];
-    bool __thiscall FUN_00475380(Mat33* d);
+    bool __thiscall NiMatrix3_Inverse(Mat33* d);
 };
 
-bool __thiscall Mat33_This::FUN_00475380(Mat33* d)
+// pdb: NiMatrix3::Inverse | GlobalFunc.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(caller), high
+bool __thiscall Mat33_This::NiMatrix3_Inverse(Mat33* d)
 {
     d->m[0][0] = m[2][2] * m[1][1] - m[2][1] * m[1][2];
     d->m[0][1] = m[2][1] * m[0][2] - m[0][1] * m[2][2];
@@ -19489,7 +19515,7 @@ struct EffectItem {
     int unk0C;
     int unk10;
     EffectSetting* setting;
-    int FUN_004022f0();
+    int EffectItem_GetMagnitude();
 };
 
 struct EffectNode {
@@ -19604,7 +19630,7 @@ float CostOwner::FUN_0047d610(bool applyPerks, Actor* actor, bool isPlayer)
                             if (setting->IsFlag8())
                                 mag = (int)*g_settingF.FUN_00401eb0();
                             else
-                                mag = item->FUN_004022f0();
+                                mag = item->EffectItem_GetMagnitude();
                             result += setting->cost * mag;
                             EffectNode* n = p->head.next;
                             p = n ? (EffectItemList*)((char*)n - 4) : 0;
@@ -20264,10 +20290,10 @@ unsigned unk058;
 Scene*scene;bool FUN_0076cd40(Holder*);Node*GetRefNode(){Node*r;if(scene)r=scene->node;else r=0;return r;}Node*Get3DSimple(){if(this==DAT_0117c000.actor)return DAT_0117c000.node;return GetRefNode();}};extern Actor*DAT_0107a104;
 struct Bone{unsigned char flags;Node*pParent;};struct Object{Form*pParent;void*model;Node*m_pSceneObject;bool bHasAnimation;};
 extern unsigned DAT_00f4c3d0[];extern const char*DAT_00f4c380[];extern const char DAT_00dbfeb4[];
-void __cdecl FUN_00471830(Node*,Node*,Node*,Holder*,int,Face*);void __cdecl FUN_004f37d0(Node*);
+void __cdecl FUN_00471830(Node*,Node*,Node*,Holder*,int,Face*);void __cdecl TESObjectREFR_AddAddonNodes(Node*);
 struct Holder{Node*root;Bone bone[5];Object object[20];Object previous[20];float fade;Actor*m_pActor;
 Node*FUN_00473ab0(Node*,int,bool,bool,Face*);
-void ApplyReferenceExtraData(Node*model,Node*clone,int,Actor*){Extra*e=model->FUN_00824a50(DAT_0116d6e0);if(e&&e->Test())FUN_004f37d0(clone);}
+void ApplyReferenceExtraData(Node*model,Node*clone,int,Actor*){Extra*e=model->FUN_00824a50(DAT_0116d6e0);if(e&&e->Test())TESObjectREFR_AddAddonNodes(clone);}
 void FUN_00473c50(Face*,Node*,int);
 };
 void Holder::FUN_00473c50(Face* apFaceGenModel, Node* apNode, int aeBipedObject)
@@ -20438,7 +20464,7 @@ struct Proc {
     EntryList f128;
     void FUN_00460090(int a, int b);
     bool FUN_00461a70(Target* t, int a);
-    void* FUN_00461690(int a, int b, int c, int d);
+    void* Animation_PlayGroup(int a, int b, int c, int d);
     bool FUN_00463650();
 };
 bool Proc::FUN_00463650()
@@ -20460,14 +20486,14 @@ bool Proc::FUN_00463650()
             {
                 int a4 = f118->f14;
                 Inner* o = t->f8;
-                r = FUN_00461690(o->FUN_0054bef0(), 1, -1, a4);
+                r = Animation_PlayGroup(o->FUN_0054bef0(), 1, -1, a4);
             }
             else
             {
                 int a4 = f118->f14;
                 Form* f = f118->f2c;
                 Inner* o = t->f8;
-                r = FUN_00461690(o->FUN_0054bef0(), 1, f->FUN_00552ad0(), a4);
+                r = Animation_PlayGroup(o->FUN_0054bef0(), 1, f->FUN_00552ad0(), a4);
             }
             if (r)
             {
@@ -20949,7 +20975,7 @@ public:
     int unk2a8;
     int unk2ac;
     TESObjectREFR* m_pRequester;                      // +0x2b0
-    static BSShaderPPLightingProperty* FindLightingShaderProperty(NiAVObject* obj);             // FUN_00470900
+    static BSShaderPPLightingProperty* FindLightingShaderProperty(NiAVObject* obj);             // BipedAnim_GetLightingProperty
     static BIPED_OBJECT GetSkinBipedObject(NiAVObject* obj, BSShaderPPLightingProperty* prop); // FUN_00470960
     void FUN_004730a0(NiAVObject* apObj, bool abForceReadjust);
 };
@@ -21063,7 +21089,7 @@ struct ZObj {
     void* FUN_00825200(void* rtti);
     void FUN_00825110(void* o);
     void FUN_008a8d50();
-    void FUN_0045c7f0(float t);
+    void NiControllerManager_DeactivateAll(float t);
     ZObj* unk2C;
 };
 
@@ -21219,7 +21245,7 @@ FUN_004613b0::~FUN_004613b0()
             unk08.p->FUN_00825110(a);
         if (b)
             unk08.p->FUN_00825110(b);
-        unkD8->FUN_0045c7f0(0.0f);
+        unkD8->NiControllerManager_DeactivateAll(0.0f);
         unkD8->FUN_008a8d50();
         ZObj* o = unkD8->unk2C;
         if (o && o->v0C())
@@ -21268,7 +21294,7 @@ struct S47f4b0_Form {
     int unk00;
     unsigned char type;               // 0x04
     unsigned int flags;               // 0x08
-    bool FUN_00518c40(void* a, int b);
+    bool Script_Run(void* a, int b);
     bool IsFlag3() const { return (flags >> 3) & 1; }
 };
 
@@ -21295,7 +21321,7 @@ struct S47f4b0_ItemNode {
 
 struct S47f4b0_Sub {
     void FUN_0040b510(int);
-    void FUN_0040a6b0(int);
+    void ExtraDataList_RemoveAllCopyableExtra(int);
 };
 
 struct S47f4b0_Triple { int a, b, c; };
@@ -21307,7 +21333,7 @@ struct S47f4b0_Glob {
     int unk3c;                        // 0x3c
     S47f4b0_Sub unk40;                // 0x40
     void FUN_004e72f0(void* p);
-    void FUN_004e8670(int v);
+    void TESObjectREFR_SetObjectReference(int v);
 };
 namespace S47f4b0_g { extern S47f4b0_Glob* DAT_0106ea24; }
 using S47f4b0_g::DAT_0106ea24;
@@ -21367,11 +21393,11 @@ bool S47f4b0_Owner::FUN_0047f4b0(S47f4b0_Param* param)
                 if (form && form->IsFlag3()) {
                     if (form->type == 0x11) {
                         DAT_0106ea24->FUN_004e72f0(e);
-                        DAT_0106ea24->FUN_004e8670(item->unk08);
-                        if (form->FUN_00518c40(DAT_0106ea24, e->FUN_0040ad00(param, 0)))
+                        DAT_0106ea24->TESObjectREFR_SetObjectReference(item->unk08);
+                        if (form->Script_Run(DAT_0106ea24, e->FUN_0040ad00(param, 0)))
                             result = true;
                         DAT_0106ea24->unk40.FUN_0040b510(0);
-                        DAT_0106ea24->unk40.FUN_0040a6b0(1);
+                        DAT_0106ea24->unk40.ExtraDataList_RemoveAllCopyableExtra(1);
                     }
                     if (unk10)
                         break;
@@ -21384,7 +21410,7 @@ bool S47f4b0_Owner::FUN_0047f4b0(S47f4b0_Param* param)
             node = node->unk04;
         }
         DAT_0106ea24->unk3c = 0;
-        DAT_0106ea24->FUN_004e8670(0);
+        DAT_0106ea24->TESObjectREFR_SetObjectReference(0);
     }
     DAT_0106ea80.Unlock();
     return result;
@@ -21858,7 +21884,7 @@ struct Owner {
         animIdA2[i * 3] = 0xff;
         unk68[i].unk00 = -1;
     }
-    void FUN_00461690(int id, int a, int b, int c);
+    void Animation_PlayGroup(int id, int a, int b, int c);
     void FUN_004617a0(float t);
 };
 
@@ -21872,7 +21898,7 @@ void Owner::FUN_004617a0(float t)
         return;
     }
     if (!anims[0].anim) {
-        FUN_00461690(0xa6, 1, -1, -1);
+        Animation_PlayGroup(0xa6, 1, -1, -1);
         if (anims[0].anim)
             anims[0].anim->FUN_008ae930(anims[0].anim->unk2C + unkD0, true);
     }
@@ -22507,10 +22533,11 @@ struct Manager {
     unsigned short unk10;
     unsigned short count;
 
-    void FUN_00474930(Arg* arg);
+    void BSAnimNoteReceiver_Update(Arg* arg);
 };
 
-void Manager::FUN_00474930(Arg* arg)
+// pdb: BSAnimNoteReceiver::Update | BSAnimNoteReceiver.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void Manager::BSAnimNoteReceiver_Update(Arg* arg)
 {
     for (unsigned int i = 0; i < count; ++i) {
         Entry* entry = entries[i];
@@ -22563,7 +22590,7 @@ struct Data {
     int unk60, unk64, unk68, unk6c, unk70, unk74, unk78, unk7c;
     int unk80, unk84;
     Ent* ent;
-    bool FUN_006daa00();
+    bool TESSaveLoadGame_UseSaveGameBlocks();
 };
 
 struct Node {
@@ -22582,13 +22609,13 @@ extern Data* DAT_01079ca4;
 extern bool DAT_01079d20;
 extern const char DAT_00dc0bd0[];
 extern const char DAT_00db4360[];
-Obj* __cdecl FUN_00455190(int form);
+Obj* __cdecl TESForm_GetFormByNumericID(int form);
 void __cdecl FUN_00c24b70(const char* fmt, ...);
 
 unsigned short Item::FUN_0047dca0()
 {
     unsigned short size = 0;
-    if (DAT_01079ca4->FUN_006daa00())
+    if (DAT_01079ca4->TESSaveLoadGame_UseSaveGameBlocks())
         size = 6;
     size += 12;
     for (Node* n = head; n; n = n->next) {
@@ -22599,7 +22626,7 @@ unsigned short Item::FUN_0047dca0()
     if (DAT_01079d20) {
         Ent* e = DAT_01079ca4->ent;
         if (e) {
-            Obj* o = FUN_00455190(e->form);
+            Obj* o = TESForm_GetFormByNumericID(e->form);
             FUN_00c24b70(DAT_00db4360, size, e->form, o->GetId(), *(int*)&e->b5, 0x530, DAT_00dc0bd0);
         }
     }
@@ -22681,9 +22708,10 @@ struct Object {
  virtual void v10();virtual void v14();virtual void v18();virtual void remove(unsigned,unsigned);
  int unk04,unk08;unsigned dimension;Item** data;
  Item** at(unsigned row,unsigned col){if(row<dimension && col<dimension)return data+row*dimension+col;return 0;}
- void FUN_0047b370(unsigned,unsigned);
+ void GridCellArray_Detach(unsigned,unsigned);
 };
-void Object::FUN_0047b370(unsigned row,unsigned col) {
+// pdb: GridCellArray::Detach | GridCell.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable_prefix), high
+void Object::GridCellArray_Detach(unsigned row,unsigned col) {
  Item* item=*at(row,col);
  if(item){item->FUN_004e50d0(1);remove(row,col);}
 }
@@ -22766,11 +22794,12 @@ namespace f3m_00468d80 {
 namespace n468d80 {
 struct Matrix3 {
     float m[3][3];
-    void FUN_00468d80(float angle);
+    void NiMatrix3_MakeZRotation(float angle);
 };
 }
 
-void n468d80::Matrix3::FUN_00468d80(float angle)
+// pdb: NiMatrix3::MakeZRotation | BGSDecalManager.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_gap) + skyrim(call_gap), high
+void n468d80::Matrix3::NiMatrix3_MakeZRotation(float angle)
 {
     float s,c;
     fnv_SinCos(angle,s,c);
@@ -22817,7 +22846,7 @@ struct Node {
 };
 struct Owner {
     int unk00;
-    bool FUN_0045cc40();
+    bool Animation_ShouldQueueSequenceCloning();
     void FUN_00461a70(int value, bool flag);
     void FUN_004646a0(Node* list);
 };
@@ -22826,7 +22855,7 @@ void Owner::FUN_004646a0(Node* list)
     if (!list)
         return;
     TagScope scope(0x33);
-    bool flag = FUN_0045cc40();
+    bool flag = Animation_ShouldQueueSequenceCloning();
     while (!list->FUN_00645c20()) {
         Item* item = list->item;
         int value=DAT_0106ca70->FUN_0042cff0(item);
@@ -22896,7 +22925,7 @@ namespace c47def0 {
 struct Stream {
     void FUN_006e17e0(int value, int flags);
     void FUN_006e1830(void* data, int size, int flags);
-    int FUN_006e16c0();
+    int BGSSaveGameBuffer_StartVariableSizedValue();
     void FUN_006e16e0(int count, int position);
 };
 struct Item { void FUN_00415080(Stream* stream); };
@@ -22916,7 +22945,7 @@ void Owner::FUN_0047def0(Stream* stream)
     stream->FUN_006e17e0(unk08, 0);
     stream->FUN_006e1830(&unk04, 4, 0);
     int count = 0;
-    int position = stream->FUN_006e16c0();
+    int position = stream->BGSSaveGameBuffer_StartVariableSizedValue();
     for (Node* node = head; node; node = node->next) {
         if (node->item) {
             node->item->FUN_00415080(stream);
@@ -23007,7 +23036,8 @@ struct Vec3{float x,y,z;};struct Node{Node* next;int key;Vec3 value;};struct Map
 // @f3 0x0047b460 (community match, verified in this file)
 namespace f3m_0047b460 {
 namespace Swap345 {
-struct Matrix{virtual void v0();virtual void v4();virtual void v8();virtual void vc();virtual void v10();virtual void v14();virtual void v18();virtual void clear(unsigned,unsigned);int unk04,unk08;unsigned size;int* data;int* get(unsigned r,unsigned c){return r<size&&c<size?data+r*size+c:0;}void set(unsigned r,unsigned c,const int* value){if(r<size&&c<size){if(value)data[r*size+c]=*value;else clear(r,c);}}void FUN_0047b460(unsigned,unsigned,unsigned,unsigned);};void Matrix::FUN_0047b460(unsigned r,unsigned c,unsigned r2,unsigned c2){int temp=*get(r,c);set(r,c,get(r2,c2));set(r2,c2,&temp);}
+// pdb: GridCellArray::SwapItem | GridCell.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable_prefix), high
+struct Matrix{virtual void v0();virtual void v4();virtual void v8();virtual void vc();virtual void v10();virtual void v14();virtual void v18();virtual void clear(unsigned,unsigned);int unk04,unk08;unsigned size;int* data;int* get(unsigned r,unsigned c){return r<size&&c<size?data+r*size+c:0;}void set(unsigned r,unsigned c,const int* value){if(r<size&&c<size){if(value)data[r*size+c]=*value;else clear(r,c);}}void GridCellArray_SwapItem(unsigned,unsigned,unsigned,unsigned);};void Matrix::GridCellArray_SwapItem(unsigned r,unsigned c,unsigned r2,unsigned c2){int temp=*get(r,c);set(r,c,get(r2,c2));set(r2,c2,&temp);}
 }
 }   // namespace f3m_0047b460
 
@@ -23083,10 +23113,11 @@ struct Owner
         return FUN_0045ba50(object, arg);
     }
 
-    const char* FUN_0047d500(int arg);
+    const char* ItemChange_GetIconOne(int arg);
 };
 
-const char* Owner::FUN_0047d500(int arg)
+// pdb: ItemChange::GetIconOne | InventoryChanges.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+const char* Owner::ItemChange_GetIconOne(int arg)
 {
     const char* path = GetModelPath(arg);
     if (path && *path)
@@ -23121,9 +23152,10 @@ class Grid47b { public:                                   // ORIG: thiscall memb
                       void** dataAt10;               // +0x10: a POINTER FIELD that their build LOADS before indexing ('mov ecx,dword ptr [ecx+10h]' ✗✓ then 'lea eax,[ecx+eax*4]' off
                                      //     that loaded base ✓ ) - my second pass had this as an inline array member and so emitted no load at all, costing two bytes of extent ✗✓ It is a pointer to the row-major cell run, not the cells
                                      //     themselves ✓ (that extra indirection is also why their index math adds four-times-the-combined-index to a REGISTER rather than to the receiver with a displacement ✓ ) 
-                      void FUN_0047b250(unsigned long row, unsigned long column, void* value); };   // ORIG: three stack parameters, callee cleans twelve bytes ✗✓ all of them full
+                      void GridCellArray_Set(unsigned long row, unsigned long column, void* value); };   // ORIG: three stack parameters, callee cleans twelve bytes ✗✓ all of them full
                                                   //     32-bit values here - no movzx anywhere on those operands ✓ 
-void Grid47b::FUN_0047b250(unsigned long row, unsigned long column, void* value) {   // ORIG: 'push edi ; mov edi,[esp+4+arg_8] ; test edi,edi' ✓✗→✓ the
+// pdb: GridCellArray::Set | GridCell.obj | fnv360_0822_retail, call_gap + bridge(call_gap|call_gap) + skyrim(call_gap_sim), high
+void Grid47b::GridCellArray_Set(unsigned long row, unsigned long column, void* value) {   // ORIG: 'push edi ; mov edi,[esp+4+arg_8] ; test edi,edi' ✓✗→✓ the
                                      //     third parameter fetched into a saved register FIRST and tested against null before anything else in the function ✗ 
     if (value != 0) {                               // v3 POLARITY FIX ✓✗→✓✓ their build is 'test edi,edi ; je L_0038' - the virtual path being a block placed at the END of
                                        //     the function that the null case JUMPS TO ✓ while the storing path is the fall-through ✗ My second pass wrote the inverse condition and this compiler put the store in a jumped-over middle
@@ -23195,7 +23227,8 @@ public:
     virtual void* vf18();                            
     struct Child470* FUN_00826590(unsigned int kind);   
 };
-void* FUN_00470900(Object470* object) {
+// pdb: BipedAnim::GetLightingProperty | BipedAnim.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+void* BipedAnim_GetLightingProperty(Object470* object) {
  if(object && object->vf18()) {
   object->FUN_00826590(2);
   object->FUN_00826590(5);
@@ -23379,9 +23412,10 @@ struct Owner {
     unsigned int unk100;
     FUN_006c8220 pending;
     bool FUN_0045c980();
-    void FUN_004610b0();
+    void Animation_ClearBlendInterps();
 };
-void Owner::FUN_004610b0() {
+// pdb: Animation::ClearBlendInterps | Animation.obj | fnv360_0822_retail, udata + bridge(call_gap|call_gap), high
+void Owner::Animation_ClearBlendInterps() {
     if (graph) {
         unsigned int count = graph->size;
         for (int i = 0; i < count; ++i) {
@@ -24280,11 +24314,11 @@ void Statistics::FUN_0046ef10(SceneObject* object, Counters* supplied, bool desc
 #pragma pack(pop)
 namespace f3m_0047f8b0 {
 namespace Small528 {
-struct Writer {virtual unsigned Position();unsigned unk04,unk08,unk0c,unk10;unsigned char unk14,unk15,unk16;unsigned char flags17[4];unsigned char unk1b,unk1c,unk1d,unk1e,unk1f;unsigned position20;unsigned& Flags(){return *reinterpret_cast<unsigned*>(flags17);}unsigned FUN_006e16c0();void FUN_006e16e0(unsigned,unsigned);};
+struct Writer {virtual unsigned Position();unsigned unk04,unk08,unk0c,unk10;unsigned char unk14,unk15,unk16;unsigned char flags17[4];unsigned char unk1b,unk1c,unk1d,unk1e,unk1f;unsigned position20;unsigned& Flags(){return *reinterpret_cast<unsigned*>(flags17);}unsigned BGSSaveGameBuffer_StartVariableSizedValue();void FUN_006e16e0(unsigned,unsigned);};
 struct Item {void FUN_0047def0(Writer*);};
 struct Node {Item* item;Node* next;};
 struct Owner {Node* head;void FUN_0047f8b0(Writer*);};
-void Owner::FUN_0047f8b0(Writer* writer){unsigned oldPosition=writer->Position();unsigned oldFlags=writer->Flags();unsigned count=0;writer->position20=0;writer->Flags()=0x400;unsigned marker=writer->FUN_006e16c0();for(Node* node=head;node;node=node->next){if(node->item){node->item->FUN_0047def0(writer);++count;}}writer->FUN_006e16e0(count,marker);writer->position20=oldPosition;writer->Flags()=oldFlags;}
+void Owner::FUN_0047f8b0(Writer* writer){unsigned oldPosition=writer->Position();unsigned oldFlags=writer->Flags();unsigned count=0;writer->position20=0;writer->Flags()=0x400;unsigned marker=writer->BGSSaveGameBuffer_StartVariableSizedValue();for(Node* node=head;node;node=node->next){if(node->item){node->item->FUN_0047def0(writer);++count;}}writer->FUN_006e16e0(count,marker);writer->position20=oldPosition;writer->Flags()=oldFlags;}
 }
 
 }   // namespace f3m_0047f8b0
@@ -24327,7 +24361,8 @@ struct Table {
 };
 Table* FUN_0046b690();
 extern int DAT_0106def4, DAT_0106def8, DAT_0106defc, DAT_0106df00;
-void FUN_0046b790() {
+// pdb: BGSDecalManager::RemoveAllDecals | BGSDecalManager.obj | fnv360_0822_retail, udata, high
+void BGSDecalManager_RemoveAllDecals() {
     DAT_0106def4 = 0;
     DAT_0106def8 = 0;
     DAT_0106defc = 0;
@@ -24773,9 +24808,9 @@ unsigned unk050;
 unsigned unk054;
 unsigned unk058;
 unsigned unk05c;
-FUN_004f9970();static void* operator new(unsigned n) throw(){return DAT_01090a78.FUN_0086b930(n);} static void operator delete(void*p){DAT_01090a78.FUN_0086ba60(p);}void FUN_004e8670(void*);void FUN_004553b0();void FUN_004fa540();};
+FUN_004f9970();static void* operator new(unsigned n) throw(){return DAT_01090a78.FUN_0086b930(n);} static void operator delete(void*p){DAT_01090a78.FUN_0086ba60(p);}void TESObjectREFR_SetObjectReference(void*);void FUN_004553b0();void FUN_004fa540();};
 struct Terrain {Vec* FUN_004c8ff0(Vec*,int);};
-struct Cell {Terrain* FUN_004d5270();float FUN_004d5350();World* FUN_004d5710();void FUN_004e52d0(FUN_004f9970*,int);};
+struct Cell {Terrain* TESObjectCELL_GetLand();float FUN_004d5350();World* TESObjectCELL_GetWaterType();void TESObjectCELL_AddReference(FUN_004f9970*,int);};
 struct Work {unsigned unk000,unk004,unk008,unk00c,unk010,unk014,unk018,unk01c,unk020,unk024,unk028;Object* first;Geometry* second;Object* GetFirst(){return first;} Geometry* GetSecond(){return second;} void FUN_00aabf90();};
 struct Node {Node* next;Node* prev;Work* data;};
 struct List {Node* first;Node* last;unsigned count;void FUN_005878f0();void FUN_00469b60();void FUN_00ade560(Node*);
@@ -24786,7 +24821,7 @@ void FUN_00ade300(Object*,int,int);
 void FUN_00466330(Cell* cell){
  Assign464b10::TagScope tag(0x1d);
  if(DAT_0106dee0){
- float x,y;{Vec b1;x=cell->FUN_004d5270()->FUN_004c8ff0(&b1,0)->x;Vec b2;y=cell->FUN_004d5270()->FUN_004c8ff0(&b2,0)->y;}
+ float x,y;{Vec b1;x=cell->TESObjectCELL_GetLand()->FUN_004c8ff0(&b1,0)->x;Vec b2;y=cell->TESObjectCELL_GetLand()->FUN_004c8ff0(&b2,0)->y;}
  float z=cell->FUN_004d5350();
  Vec position(x,y,z);bool updated=false;
  Node* node=DAT_0106dee0->first;if(node)do {
@@ -24798,7 +24833,7 @@ void FUN_00466330(Cell* cell){
    work->second->FUN_004236f0(new FUN_00aedf60);
    FUN_00ade300(work->first,0,0);
    Material* material=new Material;material->flags|=0xc00;work->second->FUN_004236f0(material);
-   reference->FUN_004e8670(cell->FUN_004d5710()->FUN_004fe240());
+   reference->TESObjectREFR_SetObjectReference(cell->TESObjectCELL_GetWaterType()->FUN_004fe240());
    FUN_00ad2a40* root=new FUN_00ad2a40;root->unk030|=0x8000;reference->SetRoot(root,1);
    root->unk058=position;reference->unk02c=position;
    FUN_00aa0b10* shape=new FUN_00aa0b10;
@@ -24815,7 +24850,7 @@ void FUN_00466330(Cell* cell){
    FUN_00aaa070* object=new FUN_00aaa070;object->Shape()=holder;
    root->Attach(object,1);object->Attach(work->first,1);
    struct Update {float time;bool b0,b1,b2,b3,b4;} update={0,false,false,false,false,false};root->FUN_008264c0(&update);
-   cell->FUN_004e52d0(reference,0);reference->FUN_004553b0();
+   cell->TESObjectCELL_AddReference(reference,0);reference->FUN_004553b0();
    if(DAT_01072a48&&!updated){reference->FUN_004fa540();updated=true;}
    work->FUN_00aabf90();DAT_01090a78.FUN_0086ba60(work);
    DAT_0106dee0->Remove(node);
@@ -25256,7 +25291,7 @@ struct Heap47bbc0 {
 };
 extern Heap47bbc0 DAT_01090a78;
 void __cdecl FUN_007f97f0();
-void __cdecl FUN_004d46f0();
+void __cdecl TESObjectCELL_KillStatics();
 
 struct __declspec(novtable) Base47aef0 {
     virtual void v00();
@@ -25281,16 +25316,16 @@ struct Ptr24 {
 struct FUN_0047bbc0 : Base47aef0 {
     Ptr24 unk24;
     void FUN_0047ba30();
-    void FUN_0047b2f0() {
+    void GridCellArray_KillAll() {
         FUN_007f97f0();
         if (GameState47bbc0::Get()->IsFlag5A9())
-            FUN_004d46f0();
+            TESObjectCELL_KillStatics();
     }
     ~FUN_0047bbc0();
 };
 
 FUN_0047bbc0::~FUN_0047bbc0() {
-    FUN_0047b2f0();
+    GridCellArray_KillAll();
     FUN_0047ba30();
     void* data = data10;
     DAT_01090a78.FUN_0086ba60(data);
@@ -25612,9 +25647,9 @@ bool F7Owner::FUN_0047fa70(F7Iter* s, void** out, unsigned int flags)
 // @f3 0x0047b2e0 (community match, verified in this file)
 namespace f3m_0047b2e0 {
 namespace Forward47 {
-void FUN_0047af00();
+void GridArray_Init();
 void FUN_004e2320();
-void FUN_0047b2e0() { FUN_0047af00(); FUN_004e2320(); }
+void FUN_0047b2e0() { GridArray_Init(); FUN_004e2320(); }
 }
 }   // namespace f3m_0047b2e0
 
@@ -26266,7 +26301,7 @@ struct WaterCell468bd0 {
 struct PointList468bd0 { void FUN_00bd12d0(); };
 extern f3m_00466b80::WaterPoints* DAT_0106dedc;
 extern PointList468bd0* DAT_0106dee0;
-void __cdecl FUN_00466b80(WaterCell468bd0* cell);
+void __cdecl BGSAutoWater_GatherLineSegments(WaterCell468bd0* cell);
 void __cdecl FUN_004655b0(WaterCell468bd0* cell);
 void __cdecl FUN_00466330(WaterCell468bd0* cell);
 }
@@ -26280,7 +26315,7 @@ void __cdecl FUN_00468bd0(f3m_00468bd0::WaterCell468bd0* cell)
         DAT_0106dedc->clear();
     if (DAT_0106dee0)
         DAT_0106dee0->FUN_00bd12d0();
-    FUN_00466b80(cell);
+    BGSAutoWater_GatherLineSegments(cell);
     FUN_004655b0(cell);
     FUN_00466330(cell);
 }
@@ -26999,10 +27034,11 @@ __forceinline void Texture::WriteUsage(BSFile& file, Usage* result)
 struct TextureUseMap {
     unsigned unk00;
     UsageMap map;
-    bool FUN_00470190(const char* path);
+    bool BGSTextureUseMap_WriteToFile(const char* path);
 };
 
-bool TextureUseMap::FUN_00470190(const char* path)
+// pdb: BGSTextureUseMap::WriteToFile | BGSTextureUseMap.obj | fnv360_0822_retail, ustr + bridge(ustr|ustr) + skyrim(ustr), high
+bool TextureUseMap::BGSTextureUseMap_WriteToFile(const char* path)
 {
     bool success=false;
     {
@@ -27492,7 +27528,7 @@ struct ExtraList {
     int unk00;
     int unk04;
     ExtraLev* FUN_0040ac60();
-    void FUN_0040ecb0(ExtraLev* extra, int flag);
+    void BaseExtraList_RemoveExtra(ExtraLev* extra, int flag);
     bool IsEmpty() { return unk04 == 0; }
 };
 struct Heap { void FUN_0086ba60(void* memory); };
@@ -27553,7 +27589,7 @@ ExtraLev* FUN_0047ff70_cls::FUN_0047ff70()
         ExtraList* extra = node->GetItem();
         if (extra && extra->FUN_0040ac60()) {
             result = extra->FUN_0040ac60();
-            extra->FUN_0040ecb0(result, 0);
+            extra->BaseExtraList_RemoveExtra(result, 0);
             if (extra->IsEmpty())
                 lists->FUN_00421610(extra);
             node = lists;
@@ -27641,7 +27677,7 @@ float __cdecl FUN_0045c010(TESForm* form);
 struct ContainerEntry { int count; TESForm* form; };
 struct ContainerNode { ContainerEntry* item; ContainerNode* next; };
 struct Container { int unk00; ContainerNode list; bool FUN_004528c0(TESForm* form); };
-struct InventoryEntry { void* extraLists; int countDelta; TESForm* form; bool FUN_0047d260(bool highOnly); };
+struct InventoryEntry { void* extraLists; int countDelta; TESForm* form; bool ItemChange_GetWorn(bool highOnly); };
 struct InventoryNode { InventoryEntry* item; InventoryNode* next; };
 struct ActorValueOwner { int unk00; };
 void __cdecl FUN_006f9560(ActorValueOwner* owner, int index, float oldValue, float delta, int unk);
@@ -27719,7 +27755,7 @@ float InventoryChanges::FUN_0047ee00()
                 if (form && form->type04 == 0x18)
                     armor = form;
                 int count = e->countDelta;
-                if (actor && armor && e->FUN_0047d260(false)) {
+                if (actor && armor && e->ItemChange_GetWorn(false)) {
                     // Fake match: keep the copy and nested count guard rather than flattening the condition.
                     float worn = weight;
                     if (count > 0) {
@@ -28067,7 +28103,7 @@ struct Form {
     unsigned char typeID;
     unsigned char GetType() { return typeID; }
 };
-struct Extra { bool FUN_0040aed0(bool flag); };
+struct Extra { bool ExtraDataList_GetWorn(bool flag); };
 struct ExtraNode { Extra* item; ExtraNode* next; Extra* GetItem() { return item; } ExtraNode* GetNext() { return next; } };
 struct Entry {
     ExtraNode* extras;
@@ -28077,7 +28113,7 @@ struct Entry {
         ExtraNode* cur = extras;
         while (cur && cur->GetItem()) {
             Extra* pextra = cur->GetItem();
-            if (pextra && pextra->FUN_0040aed0(flag))
+            if (pextra && pextra->ExtraDataList_GetWorn(flag))
                 return true;
             cur = cur->GetNext();
         }
@@ -28187,7 +28223,7 @@ float __cdecl FUN_0045c010(Form* form);
 void* __cdecl FUN_00c0050a(void* object, int unused, const void* baseType, const void* targetType, int flags);
 struct List {
     Node* head;
-    int FUN_0047e4f0(Form* form);
+    int InventoryChanges_GetObjectCount(Form* form);
     float FUN_0047f1e0(Actor* actor);
 };
 
@@ -28207,9 +28243,9 @@ float List::FUN_0047f1e0(Actor* actor)
             // the original. The tested condition is a guess: it leaves no instruction.
             int count;
             if (form->GetType() == 0x18)
-                count = FUN_0047e4f0(item->GetObject());
+                count = InventoryChanges_GetObjectCount(item->GetObject());
             else
-                count = FUN_0047e4f0(item->GetObject());
+                count = InventoryChanges_GetObjectCount(item->GetObject());
             if (form->GetType() == 0x18) {
                 FUN_00c0050a(form, 0, DAT_00f4611c, DAT_00f46b3c, 0);
             } else if (form->GetType() == 0x28) {
@@ -28835,7 +28871,7 @@ public:
     unsigned int unk74;
     NiControllerSequence();
     void FUN_00424390();
-    void FUN_0045c7f0(float value);
+    void NiControllerManager_DeactivateAll(float value);
     void FUN_008aecd0(int,int,float,float,int,int);
     void FUN_0049cd70(LoadStream*,float);
 };
@@ -28877,7 +28913,7 @@ public:
         return false;
     }
 };
-class BlendLoad { public: void FUN_0044db80(NiControllerSequence*,float); void FUN_0045c7f0(float); };
+class BlendLoad { public: void FUN_0044db80(NiControllerSequence*,float); void NiControllerManager_DeactivateAll(float); };
 namespace IdleTaskLoad {
 class FUN_00460ba0 {
 public:
@@ -29516,7 +29552,7 @@ public:
     virtual void s0(); virtual void s4(); virtual void s8(); virtual ActorLoad* GetActor();
     unsigned int unk04,unk08,position;
     void FUN_006e0750(void*,unsigned);
-    unsigned int FUN_006e08a0();
+    unsigned int BGSLoadGameBuffer_LoadVariableSizedValue();
     unsigned int FUN_006e0670();
     bool FUN_006e06d0(unsigned int*);
 };
@@ -29551,7 +29587,7 @@ struct FlagLoad { unsigned int unk00,unk04,unk08; unsigned short flags;
 };
 extern FlagLoad* __cdecl FUN_008f1d20(void*);
 extern void __cdecl FUN_008f1d80(bool,void*);
-extern TESForm* __cdecl FUN_00455190(unsigned int);
+extern TESForm* __cdecl TESForm_GetFormByNumericID(unsigned int);
 extern int __cdecl FUN_006191f0();
 
 class ModelLoad { public: void FUN_0049de40(float); void FUN_0049dd70(float,NodeLoad*); };
@@ -29599,7 +29635,7 @@ public:
     IdleEntry* idleHead;
     IdleNode* idleNext;
     void FUN_00461a70(NiControllerSequence*,int);
-    void FUN_0045db50(int,float);
+    void Animation_ClearGroup(int,float);
     void FUN_0045f220(float,VectorLoad*,int);
     void FUN_0045ce90();
     void FUN_0045dca0();
@@ -29629,14 +29665,15 @@ public:
         otherIds[i] = 0xff;
         channelData[i] = -1;
     }
-    void FUN_004637f0(LoadStream* stream);
+    void Animation_LoadGame(LoadStream* stream);
 };
 static __forceinline bool QueryModelFlag(ModelLoad* model)
 {
     FlagLoad* flags=FUN_008f1d20(model);
     return flags && flags->Has20() && !flags->Has40();
 }
-void AnimState::FUN_004637f0(LoadStream* stream)
+// pdb: Animation::LoadGame | Animation.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+void AnimState::Animation_LoadGame(LoadStream* stream)
 {
     if (!GetModel()) return;
     ActorLoad* actor = stream->GetActor();
@@ -29656,12 +29693,12 @@ void AnimState::FUN_004637f0(LoadStream* stream)
     actor->process->Attach(actor,this);
     if(actor->IsSpecial(0) || actor->IsOther()) {
         if(FUN_006191f0()!=1) {
-            FUN_0045db50(7,0.0f);
-            if(!initialized) FUN_0045db50(0,0.0f);
+            Animation_ClearGroup(7,0.0f);
+            if(!initialized) Animation_ClearGroup(0,0.0f);
         }
-        FUN_0045db50(1,0.0f);
-        if(FUN_006191f0()!=1) FUN_0045db50(2,0.0f);
-        FUN_0045db50(3,0.0f); FUN_0045db50(5,0.0f); FUN_0045db50(6,0.0f);
+        Animation_ClearGroup(1,0.0f);
+        if(FUN_006191f0()!=1) Animation_ClearGroup(2,0.0f);
+        Animation_ClearGroup(3,0.0f); Animation_ClearGroup(5,0.0f); Animation_ClearGroup(6,0.0f);
         StopAnim(4);
         NiControllerSequence* p;
         if(lookup->FUN_0045c6e0(0xa5,p) && p->Get(-1)) {
@@ -29700,19 +29737,19 @@ FlagLoad* flags = FUN_008f1d20(GetModel());
     if(oldFlag) FUN_008f1d80(false,GetModel());
     FUN_0045ce90();
     if(oldFlag) FUN_008f1d80(oldFlag,GetModel());
-    if(FUN_006191f0()!=1) { FUN_0045db50(7,0.0f); if(!initialized) FUN_0045db50(0,0.0f); }
-    FUN_0045db50(1,0.0f);
-    if(FUN_006191f0()!=1) FUN_0045db50(2,0.0f);
-    FUN_0045db50(3,0.0f); FUN_0045db50(5,0.0f); FUN_0045db50(6,0.0f);
+    if(FUN_006191f0()!=1) { Animation_ClearGroup(7,0.0f); if(!initialized) Animation_ClearGroup(0,0.0f); }
+    Animation_ClearGroup(1,0.0f);
+    if(FUN_006191f0()!=1) Animation_ClearGroup(2,0.0f);
+    Animation_ClearGroup(3,0.0f); Animation_ClearGroup(5,0.0f); Animation_ClearGroup(6,0.0f);
     StopAnim2(4);
     FUN_0045dca0();
-    if(blender) blender->FUN_0045c7f0(0.0f);
+    if(blender) blender->NiControllerManager_DeactivateAll(0.0f);
     stream->FUN_006e0750(&unk10C,4); stream->FUN_006e0750(&unk110,4); stream->FUN_006e0750(&unk10,12);
     stream->FUN_006e0750(&unk48,4); stream->FUN_006e0750(&enabled,1); stream->FUN_006e0750(&unkD4,4); stream->FUN_006e0750(&unk116,2);
-    unsigned count=stream->FUN_006e08a0();
+    unsigned count=stream->BGSLoadGameBuffer_LoadVariableSizedValue();
     for(unsigned i=0;i<count;++i) {
         IdleEntry* e=(IdleEntry*)((LoadHeap*)&f3m_00477d30::DAT_01090a78)->FUN_0086b930(8);
-        e->form=dynamic_cast<TESIdleForm*>(FUN_00455190(stream->FUN_006e0670()));
+        e->form=dynamic_cast<TESIdleForm*>(TESForm_GetFormByNumericID(stream->FUN_006e0670()));
         stream->FUN_006e0750(&e->value,4);
         if(idleHead) {
             IdleNode* n=new IdleNode(idleHead);
@@ -29721,12 +29758,12 @@ FlagLoad* flags = FUN_008f1d20(GetModel());
         idleHead=e;
     }
     TESIdleForm* idle=0;
-    if(stream->FUN_006e06d0((unsigned int*)&idle)) stream->position+=stream->FUN_006e08a0();
+    if(stream->FUN_006e06d0((unsigned int*)&idle)) stream->position+=stream->BGSLoadGameBuffer_LoadVariableSizedValue();
     else if(idle) {
-        idle=dynamic_cast<TESIdleForm*>(FUN_00455190((unsigned int)idle));
-        if(!idle) stream->position+=stream->FUN_006e08a0();
+        idle=dynamic_cast<TESIdleForm*>(TESForm_GetFormByNumericID((unsigned int)idle));
+        if(!idle) stream->position+=stream->BGSLoadGameBuffer_LoadVariableSizedValue();
         else {
-            stream->FUN_006e08a0();
+            stream->BGSLoadGameBuffer_LoadVariableSizedValue();
             IdleTaskLoad::FUN_00460ba0* fresh=new IdleTaskLoad::FUN_00460ba0(idle,7,1,actor,1,0);
             IdleTaskLoad::FUN_00460ba0* old=task;
             if(old!=fresh) {
@@ -29756,7 +29793,7 @@ FlagLoad* flags = FUN_008f1d20(GetModel());
                 else {
                     BSAnimGroupSequence temporary;
                     temporary.FUN_0049cd70(stream,time);
-                    FUN_0045db50(index,0.0f);
+                    Animation_ClearGroup(index,0.0f);
                 }
             }
         }
@@ -31528,7 +31565,7 @@ struct Retained {
     void FUN_008e9650(Obj* p);
 };
 struct Obj3 { void FUN_00ad2840(unsigned); };
-struct Root { void FUN_00459180(Obj*); };
+struct Root { void TESModelTextureSwap_SwapTextures(Obj*); };
 struct Obj {
     virtual ~Obj();
     virtual void DeleteThis();
@@ -31635,7 +31672,7 @@ struct Actor {
     bool FUN_0076cd40(Owner* o);
     Owner* FUN_0076cd20(bool b);
     Animation* FUN_0076cce0(bool b);
-    Animation* FUN_006f8f30();
+    Animation* Actor_GetAnimation();
     bool FUN_006f6c70();
     void FUN_004f5750(Form0* w);
     const char* FUN_004e9a10();
@@ -31780,7 +31817,7 @@ __declspec(noinline) int __cdecl FUN_00403a00(String* out, const char* fmt, ...)
     va_start(args, fmt);
     return out->FormatArgs(fmt, args);
 }
-void __cdecl FUN_004f37d0(Obj* n);
+void __cdecl TESObjectREFR_AddAddonNodes(Obj* n);
 void __cdecl FUN_00542160(int k, Obj* n);
 
 // NiPointer<T>::operator= (0x8e9650) is header template code, so its body was visible in the original file.
@@ -31904,7 +31941,7 @@ void Owner::FUN_00473ea0(bool deferred)
         if (entries[i].form) {
             Root* root2 = (entries[i].form)->GetRoot();
             if (root2)
-                root2->FUN_00459180(node);
+                root2->TESModelTextureSwap_SwapTextures(node);
         }
         if (cur.owner && cur.owner->CheckUpdate())
             FUN_00479030(node);
@@ -31952,7 +31989,7 @@ void Owner::FUN_00473ea0(bool deferred)
                         proc->UpdateWeaponDrawn(a->FUN_006f6c70(), this, DAT_0107a104->FUN_0076cce0(true), a);
                     } else {
                         Process* proc = a->process;
-                        proc->UpdateWeaponDrawn(a->FUN_006f6c70(), this, a->FUN_006f8f30(), a);
+                        proc->UpdateWeaponDrawn(a->FUN_006f6c70(), this, a->Actor_GetAnimation(), a);
                     }
                 }
             }
@@ -31962,7 +31999,7 @@ void Owner::FUN_00473ea0(bool deferred)
         ((NameTarget*)attached)->FUN_008245d0(FixedStr(str.ptr));
         Extra* extra = model->FUN_00824a50(DAT_0116d6e0);
         if (extra && extra->IsFlag4())
-            FUN_004f37d0(node);
+            TESObjectREFR_AddAddonNodes(node);
         if (!cur.hidden && attached->GetAsNode()) {
             Obj* parent = attached->parent;
             if (slotIdx == -1) {
@@ -32531,7 +32568,7 @@ struct TESObjectLAND {
     NiPoint3 FUN_004c8ff0(int aiBlock);  // GetWorldOffsetForBlock
 };
 struct TESObjectCELL {
-    TESObjectLAND* FUN_004d5270();  // GetLand
+    TESObjectLAND* TESObjectCELL_GetLand();  // GetLand
     float FUN_004d5350();           // GetWaterHeight
 };
 
@@ -32700,7 +32737,7 @@ void __cdecl FUN_004655b0(TESObjectCELL* apCell)
                 }
             }
         }
-        NiPoint3 worldtranslate(apCell->FUN_004d5270()->FUN_004c8ff0(0).x, apCell->FUN_004d5270()->FUN_004c8ff0(0).y, apCell->FUN_004d5350());
+        NiPoint3 worldtranslate(apCell->TESObjectCELL_GetLand()->FUN_004c8ff0(0).x, apCell->TESObjectCELL_GetLand()->FUN_004c8ff0(0).y, apCell->FUN_004d5350());
         if (bclosed) {
             FUN_00aad1b0* pnewPoly = new FUN_00aad1b0(poutline);
             if (pnewPoly->GetNumVertices() > 2) {
@@ -33154,7 +33191,7 @@ struct Obj46ab00 {
     NameHolder46ab00* extra;
 
     bool FUN_005b5b10();
-    void FUN_005b6500();
+    void BSTempEffectSimpleDecal_FinalizeGeometry();
     void FUN_005b6bd0(const Color46ab00& color, int mode);
     void IncRefCount() {
         ::InterlockedIncrement(&m_uiRefCount);
@@ -33275,7 +33312,7 @@ void f3m_0046ab00::Manager46ab00::FUN_0046ab00()
             }
 
             if (obj->unk19 && !obj->unk18)
-                obj->FUN_005b6500();
+                obj->BSTempEffectSimpleDecal_FinalizeGeometry();
 
             if (obj->unk18)
             {

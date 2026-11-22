@@ -7,7 +7,7 @@
 #include "../../include/layout_support.h"
 
 struct hkReferencedObject {
-    void __thiscall FUN_00c903a0();
+    void __thiscall hkSweptTransformUtil_setTimeInformation();
 };
 extern "C" void* DAT_010c9314;
 struct hkOstream {
@@ -253,7 +253,7 @@ FUN_00cc8da0_Class* FUN_00cc8da0_Class::FUN_00cc8da0(bool b)
 }
 
 extern "C" void __cdecl _delete(void*, int);
-extern "C" void __cdecl FUN_00d54e60();
+extern "C" void __cdecl bhkConstraintChain();
 
 void __cdecl FUN_00ccbc00();
 
@@ -478,7 +478,7 @@ FUN_00cca950_class* FUN_00cca950_class::FUN_00cca950()
 }
 }  // namespace fnv_00cca950
 
-extern "C" void __cdecl FUN_00d54e60();
+extern "C" void __cdecl bhkConstraintChain();
 extern "C" void __cdecl _delete(void*, int);
 extern int DAT_010ca4dc;
 extern int DAT_0126866c;
@@ -615,7 +615,8 @@ void __thiscall FUN_00ccfe20_class::FUN_00ccfe20(bool a)
 }
 
 // @fnv 0x00cde9f0
-void __fastcall FUN_00cde9f0(void* self, int, float v)
+// pdb: hkpRagdollConstraintData::setMaxFrictionTorque | hkpRagdollConstraintData.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc + skyrim(objrun_open), high
+void __fastcall hkpRagdollConstraintData_setMaxFrictionTorque(void* self, int, float v)
 {
     *(float*)((char*)self + 0xf8) = v;
 }
@@ -643,7 +644,7 @@ struct OutS {
     bhkLimitedHingeVector m_kPointB;
     bhkLimitedHingeVector m_iThirdValue;
 };
-void __fastcall FUN_00c9fb70(MyObj* self, int, OutS* out);
+void __fastcall bhkConvexShape_CopyCinfo(MyObj* self, int, OutS* out);
 
 namespace fnv_00ccb1b0 {
 struct bhkLimitedHingeVector {
@@ -1122,11 +1123,12 @@ struct NiStreamVirtual
 struct FUN_00ccf570_class
 {
     void __thiscall FUN_00c9fbc0(NiStream* stream);
-    void __thiscall FUN_00ccf570(NiStream* stream);
+    void __thiscall bhkConvexSweepShape_LoadBinary(NiStream* stream);
 };
 
 // @fnv 0x00ccf570
-void FUN_00ccf570_class::FUN_00ccf570(NiStream* stream)
+// pdb: bhkConvexSweepShape::LoadBinary | bhkConvexSweepShape.obj | fnv360_0822_retail, caller_sim + bridge(vtable_prefix|caller_sim) + skyrim(caller_sim), high
+void FUN_00ccf570_class::bhkConvexSweepShape_LoadBinary(NiStream* stream)
 {
     void* resolved = reinterpret_cast<NiStreamResolveLinkID*>(stream)->DeserializeObject();
     FUN_00c9fbc0(stream);
@@ -2393,7 +2395,8 @@ FUN_00cc3270::~FUN_00cc3270()
 extern int DAT_012685bc;
 
 // @fnv 0x00cc32e0
-void* __cdecl FUN_00cc32e0()
+// pdb: bhkRagdollConstraint::GetRTTI | bhkRagdollTemplate.obj | fnv360_0822_retail, udata + bridge(vtable_prefix|udata) + skyrim(udata), high
+void* __cdecl bhkRagdollConstraint_GetRTTI()
 {
     return &DAT_012685bc;
 }
@@ -2784,7 +2787,8 @@ FUN_00cc39b0::~FUN_00cc39b0()
 extern int DAT_012685c8;
 
 // @fnv 0x00cc3a20
-void* __cdecl FUN_00cc3a20()
+// pdb: bhkRagdollTemplateData::GetRTTI | bhkRagdollTemplate.obj | fnv360_0822_retail, udata + bridge(vtable|udata) + skyrim(udata), high
+void* __cdecl bhkRagdollTemplateData_GetRTTI()
 {
     return &DAT_012685c8;
 }
@@ -3053,7 +3057,8 @@ public:
 extern int DAT_012685d4;
 
 // @fnv 0x00cc41f0
-int* __cdecl FUN_00cc41f0()
+// pdb: bhkRagdollTemplate::GetRTTI | bhkRagdollTemplate.obj | fnv360_0822_retail, udata + bridge(vtable|udata) + skyrim(udata), high
+int* __cdecl bhkRagdollTemplate_GetRTTI()
 {
     return &DAT_012685d4;
 }
@@ -3765,7 +3770,8 @@ FUN_00cc5090::~FUN_00cc5090()
 extern int g_unk012685ec;
 
 // @fnv 0x00cc5100
-void* __cdecl FUN_00cc5100(void)
+// pdb: bhkPoseArray::GetRTTI | bhkPoseArray.obj | fnv360_0822_retail, udata + bridge(vtable|udata) + skyrim(udata), high
+void* __cdecl bhkPoseArray_GetRTTI(void)
 {
     return &g_unk012685ec;
 }
@@ -3970,7 +3976,8 @@ FUN_00cc5e60::~FUN_00cc5e60()
 extern int DAT_01268604;
 
 // @fnv 0x00cc5ed0
-int* __cdecl FUN_00cc5ed0()
+// pdb: bhkExtraData::GetRTTI | bhkExtraData.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+int* __cdecl bhkExtraData_GetRTTI()
 {
     return &DAT_01268604;
 }
@@ -4530,7 +4537,8 @@ extern int DAT_01268624;
 extern int DAT_01268628;
 
 // @fnv 0x00cc7d70
-int* __cdecl FUN_00cc7d70()
+// pdb: bhkMotorAction::GetRTTI | bhkMotorAction.obj | fnv360_0822_retail, udata + bridge(vtable_prefix|udata), high
+int* __cdecl bhkMotorAction_GetRTTI()
 {
     return &DAT_01268628;
 }
@@ -4689,7 +4697,8 @@ FUN_00cc8ce0::~FUN_00cc8ce0() {
 extern int DAT_01268640;
 
 // @fnv 0x00cc8d50
-int* __cdecl FUN_00cc8d50()
+// pdb: bhkBreakableConstraint::GetRTTI | bhkBreakableConstraint.obj | fnv360_0822_retail, udata + bridge(vtable_prefix|udata) + skyrim(udata), high
+int* __cdecl bhkBreakableConstraint_GetRTTI()
 {
     return &DAT_01268640;
 }
@@ -4703,7 +4712,8 @@ int __cdecl FUN_00cc8d60()
 extern int DAT_01268f84;
 
 // @fnv 0x00cc8d70
-int* FUN_00cc8d70()
+// pdb: bhkWheelConstraint::GetRTTI | bhkWheelConstraint.obj | fnv360_0822_retail, udata + bridge(vtable_prefix|udata) + skyrim(udata), high
+int* bhkWheelConstraint_GetRTTI()
 {
     return &DAT_01268f84;
 }
@@ -5071,16 +5081,16 @@ public:
     void Shutdown();
 };
 
-class FUN_00cc9c60 : public CC9C60Base {
+class bhkBallAndSocketConstraint : public CC9C60Base { // src: F3_EXE vtable 0x00e36ee4 (old: FUN_00cc9c60)
 public:
-    virtual ~FUN_00cc9c60();
+    virtual ~bhkBallAndSocketConstraint();
 
     static unsigned int ms_uiInstances;
 };
 
 // Destructor that calls Shutdown and decrements the static instance counter ms_uiInstances.
 // @fnv 0x00cc9c60
-FUN_00cc9c60::~FUN_00cc9c60()
+bhkBallAndSocketConstraint::~bhkBallAndSocketConstraint()
 {
     Shutdown();
     --ms_uiInstances;
@@ -5119,7 +5129,8 @@ struct FUN_00cc9d80_cls {
 extern int DAT_01268658;
 
 // @fnv 0x00cc9db0
-void* __cdecl FUN_00cc9db0()
+// pdb: bhkRagdollLimitsConstraint::GetRTTI | bhkRagdollLimitsConstraint.obj | fnv360_0822_retail, udata + bridge(vtable_prefix|udata) + skyrim(udata), high
+void* __cdecl bhkRagdollLimitsConstraint_GetRTTI()
 {
     return &DAT_01268658;
 }
@@ -5164,7 +5175,7 @@ struct S_00cc9df0_Cls {
     int unk00;
     int unk04;
     S_00cc9df0_Data* m_iFourthElementInteger;
-    void FUN_00ca4e10(S_00cc9df0_Out* out);
+    void bhkBvTreeShape_CopyCinfo(S_00cc9df0_Out* out);
     void SetRatioFromValues(S_00cc9df0_Out* out);
 };
 
@@ -5793,7 +5804,8 @@ char* __cdecl FUN_00a7d330(const char* pcString);
 
 extern int DAT_01268670;
 // @fnv 0x00ccb130
-void* __cdecl FUN_00ccb130() {
+// pdb: bhkGenericConstraint::GetRTTI | bhkFixedConstraint.obj | fnv360_0822_retail, udata + bridge(vtable_prefix|udata) + skyrim(udata), high
+void* __cdecl bhkGenericConstraint_GetRTTI() {
     return &DAT_01268670;
 }
 
@@ -6142,7 +6154,8 @@ struct CCB730Child {
 extern int DAT_01268684;
 
 // @fnv 0x00ccb990
-void* __cdecl FUN_00ccb990()
+// pdb: bhkHingeLimitsConstraint::GetRTTI | bhkHingeLimitsConstraint.obj | fnv360_0822_retail, udata + bridge(vtable_prefix|udata) + skyrim(udata), high
+void* __cdecl bhkHingeLimitsConstraint_GetRTTI()
 {
     return &DAT_01268684;
 }
@@ -6302,7 +6315,8 @@ FUN_00ccbaa0::FUN_00ccbaa0(RefObjCC* apObject)
 extern int DAT_0126867c;
 
 // @fnv 0x00ccbb30
-int __cdecl FUN_00ccbb30() {
+// pdb: bhkConstraintChain::GetRTTI | bhkBallSocketConstraintChain.obj | fnv360_0822_retail, udata + bridge(vtable_prefix|udata) + skyrim(udata), high
+int __cdecl bhkConstraintChain_GetRTTI() {
     return reinterpret_cast<int>(&DAT_0126867c);
 }
 
@@ -6747,10 +6761,11 @@ public:
     }
 };
 
-// FUN_00ccd0f0 : a one-line function - getter
+// bhkBallSocketConstraintChain_GetRTTI : a one-line function - getter
 extern int g_target_00ccd0f0;
 // @fnv 0x00ccd0f0
-void* FUN_00ccd0f0() { return &g_target_00ccd0f0; }
+// pdb: bhkBallSocketConstraintChain::GetRTTI | bhkBallSocketConstraintChain.obj | fnv360_0822_retail, udata + bridge(vtable_prefix|udata) + skyrim(udata), high
+void* bhkBallSocketConstraintChain_GetRTTI() { return &g_target_00ccd0f0; }
 
 namespace fnv_00ccd1d0 {
 extern int DAT_01267e30;
@@ -7332,7 +7347,8 @@ struct S_00ccd610_RefObj {
 extern int g_012686a0;
 
 // @fnv 0x00ccdc30
-int* __cdecl FUN_00ccdc30()
+// pdb: bhkMoppBvTreeShape::GetRTTI | bhkMoppBvTreeShape.obj | fnv360_0822_debug, udata + bridge(vtable_prefix|udata), high
+int* __cdecl bhkMoppBvTreeShape_GetRTTI()
 {
     return &g_012686a0;
 }
@@ -7898,7 +7914,8 @@ struct Holder403 {
 extern int DAT_012686b8;
 
 // @fnv 0x00ccf550
-void* __cdecl FUN_00ccf550()
+// pdb: bhkHeightFieldShape::GetRTTI | bhkPlaneShape.obj | fnv360_0822_retail, udata + bridge(vtable_prefix|udata), high
+void* __cdecl bhkHeightFieldShape_GetRTTI()
 {
     return &DAT_012686b8;
 }
@@ -8020,7 +8037,8 @@ void* __cdecl CreatePackedObj() {
 extern int DAT_012686c4;
 
 // @fnv 0x00ccf7b0
-void* __cdecl FUN_00ccf7b0()
+// pdb: bhkPlaneShape::GetRTTI | bhkPlaneShape.obj | fnv360_0822_retail, udata + bridge(vtable_prefix|udata), high
+void* __cdecl bhkPlaneShape_GetRTTI()
 {
     return &DAT_012686c4;
 }
@@ -8123,7 +8141,7 @@ struct LinkCollection {
 };
 struct Owner {
     void** m_ppVirtualMethodTable;
-    void __thiscall FUN_00c84df0(void* item, void* key);
+    void __thiscall bhkShape_CopyMembers(void* item, void* key);
     void __thiscall FUN_00ccf900(void* item, void* key);
 };
 typedef LinkCollection* (__thiscall *AcquireLinks)(Owner*, unsigned char*);
@@ -8999,15 +9017,15 @@ struct SpawnedObjectBase
     }
 };
 
-struct FUN_00cd3f90 : SpawnedObjectBase
+struct bhkCharacterStateInAir : SpawnedObjectBase // src: F3_EXE vtable 0x00e7c6a4 (old: FUN_00cd3f90)
 {
     virtual void Unk00();
 
-    FUN_00cd3f90();
+    bhkCharacterStateInAir();
 };
 
 // @fnv 0x00cd3f90
-FUN_00cd3f90::FUN_00cd3f90()
+bhkCharacterStateInAir::bhkCharacterStateInAir()
 {
 }
 
@@ -9245,7 +9263,8 @@ FUN_00cd7e80::FUN_00cd7e80(unsigned int auiValue) {
 extern int DAT_012686e8;
 
 // @fnv 0x00cd7f20
-int* __cdecl FUN_00cd7f20()
+// pdb: bhkExtendedMeshShape::GetRTTI | bhkExtendedMeshShape.obj | fnv360_0822_retail, udata, high
+int* __cdecl bhkExtendedMeshShape_GetRTTI()
 {
     return &DAT_012686e8;
 }
@@ -12087,7 +12106,7 @@ void* hkObjCC01::DispatchToTarget(void* pv)
 }
 
 extern "C" int __cdecl Vsnprintf(char* dst, int maxlen, const char* fmt, ...);
-extern "C" int __cdecl FUN_00cb10d0(const char* s);
+extern "C" int __cdecl hkString_strLen(const char* s);
 
 struct hkStreamWriter {
     virtual void unk00() = 0;
@@ -12099,7 +12118,7 @@ struct hkStreamWriter {
 
 static __declspec(noinline) void FUN_00cc0080(hkStreamWriter* writer, const char* str) {
     if (str) {
-        writer->write(str, FUN_00cb10d0(str));
+        writer->write(str, hkString_strLen(str));
     } else {
         writer->write("(null)", 6);
     }
@@ -12144,7 +12163,7 @@ CpuOpaque* __cdecl FUN_00cc1280()
 }
 
 struct FUN_00a5d2f0_shell {
-    bool FUN_00a5d2f0(void* apStream);
+    bool NiObject_RegisterStreamables(void* apStream);
 };
 struct FUN_00cc1310_class : FUN_00a5d2f0_shell {
     unsigned int m_uiUnk0;
@@ -12156,7 +12175,7 @@ struct FUN_00cc1310_class : FUN_00a5d2f0_shell {
 // @fnv 0x00cc1310
 bool FUN_00cc1310_class::FUN_00cc1310(void* apStream)
 {
-    bool b = FUN_00a5d2f0(apStream);
+    bool b = NiObject_RegisterStreamables(apStream);
     if (b) {
         for (unsigned int i = 0; i < m_uiCount; ++i)
             ((void (__thiscall *)(void*, void*))(*(void***)apStream)[8])(apStream, (char*)m_pData + i * 4);
@@ -12347,7 +12366,8 @@ public:
 void __cdecl FUN_00ca4f00();
 
 // @fnv 0x00cc9cd0
-void __cdecl FUN_00cc9cd0()
+// pdb: NiFloatInterpController::LoadBinary | NiFloatInterpController.obj | fnv360_0721_beta, call_seq + bridge(vtable|call_seq) + skyrim(caller_sim), high
+void __cdecl NiFloatInterpController_LoadBinary()
 {
     FUN_00ca4f00();
 }
@@ -12442,7 +12462,7 @@ struct FE50Out {
 struct FE50Wrap {
     int m0, m4;
     FE50Hk* m8;
-    void FUN_00c9fb70(FE50Out* out);
+    void bhkConvexShape_CopyCinfo(FE50Out* out);
     float GetF() { if (this && m8) return m8->m18; return 0.0f; }
     int GetB() { if (this && m8) return m8->FUN_00d5e0c0(); return 0; }
     unsigned int GetCount() { FE50Hk* p; if (this && (p = m8) != 0) return p->m_kIter.GetCount(); if (0) return m8->m_kIter.GetCount(); return 0; }
@@ -12657,11 +12677,12 @@ struct FUN_00cdea20_cls {
     int unkDC;
     int m_e0;
 
-    int FUN_00cdea20() const;
+    int hkpRagdollConstraintData_getTwistMotor() const;
 };
 
 // @fnv 0x00cdea20
-int FUN_00cdea20_cls::FUN_00cdea20() const
+// pdb: hkpRagdollConstraintData::getTwistMotor | hkpRagdollConstraintData.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_seq), high
+int FUN_00cdea20_cls::hkpRagdollConstraintData_getTwistMotor() const
 {
     return m_e0;
 }
@@ -12670,7 +12691,7 @@ struct CC0280Stream {
     virtual void Write(const char* str, int len);
 };
 
-int FUN_00cb10d0(int);
+int hkString_strLen(int);
 
 static void __declspec(noinline) FUN_00cc0080(CC0280Stream* s, const char* str)
 {
@@ -12678,7 +12699,7 @@ static void __declspec(noinline) FUN_00cc0080(CC0280Stream* s, const char* str)
         s->Write("(null)", 6);
         return;
     }
-    s->Write(str, FUN_00cb10d0((int)str));
+    s->Write(str, hkString_strLen((int)str));
 }
 
 struct CC0280Writer : hkOstream {
@@ -12693,7 +12714,7 @@ CC0280Writer* CC0280Writer::WriteBool(bool abValue)
     return this;
 }
 
-int __cdecl FUN_00cb10d0(int);
+int __cdecl hkString_strLen(int);
 int __cdecl Vsnprintf(char*, unsigned int, const char*, ...);
 
 struct WriterObj {
@@ -12709,7 +12730,7 @@ static __declspec(noinline) void FUN_00cc0080(WriterObj* obj, const char* str)
     if (!str)
         obj->Write("(null)", 6);
     else
-        obj->Write(str, FUN_00cb10d0((int)str));
+        obj->Write(str, hkString_strLen((int)str));
 }
 
 struct FUN_00cc01e0_class {
@@ -12862,11 +12883,12 @@ struct SaveObject {
  int unk00;SaveBody* body;
  void FUN_00c8a280(SaveCtx*);
  void SaveShape(unsigned int,SaveCtx*);
- void FUN_00cc6ef0(SaveCtx*);
+ void hkRagdollConstraintCinfo_SaveBinary(SaveCtx*);
 };
 // Calls FUN_00c8a280, writes transform, inverse and six more body fields to the stream, saves the shape, and writes enabled if field0e0 is nonzero.
 // @fnv 0x00cc6ef0
-void SaveObject::FUN_00cc6ef0(SaveCtx* stream) {
+// pdb: hkRagdollConstraintCinfo::SaveBinary | bhkRagdollConstraint.obj | fnv360_0822_retail, objrun_sim + bridge(hash|objrun), high
+void SaveObject::hkRagdollConstraintCinfo_SaveBinary(SaveCtx* stream) {
  FUN_00c8a280(stream);
  SaveBody* data=body;
  stream->m_pBinaryStream->Write(&data->transform,64);
@@ -14211,16 +14233,16 @@ struct NameRef {
  NameRef(const char* n) { name=FUN_00a5b690(n); }
  ~NameRef() throw() { if ((unsigned int)name!=DAT_0109b220) InterlockedDecrement((long volatile*)(name-8)); }
 };
-struct FUN_00cc1d80 : FUN_00a7b2e0 {
+struct bhkExtraData : FUN_00a7b2e0 { // src: F3_EXE vtable 0x00e7a35c (old: FUN_00cc1d80)
  ExtraMember member;
 
  void AssignFixedString(const void*);
- FUN_00cc1d80();
- ~FUN_00cc1d80();
+ bhkExtraData();
+ ~bhkExtraData();
 };
 // Constructs the object and calls AssignFixedString with a name reference built from the string at str_010c9488.
 // @fnv 0x00cc1d80
-FUN_00cc1d80::FUN_00cc1d80() {
+bhkExtraData::bhkExtraData() {
 
  AssignFixedString(&NameRef(&str_010c9488));
 }
@@ -14622,13 +14644,14 @@ struct FUN_00cdfe00_Object {
     virtual int* vf40();
 };
 
-void __cdecl FUN_00d27690(int* a, FUN_00cdfe00_Object* b, int c);
+void __cdecl hkpWorldConstraintUtil_removeAndDeleteModifier(int* a, FUN_00cdfe00_Object* b, int c);
 
 typedef void* (__stdcall *TlsGetValueFunc)(int);
 
-// If vf40 returns non-null, calls vf18 on param2, logs a TtClrSurfVel TLS entry, calls FUN_00d27690(result, param2, 0x1a), then logs an Et entry.
+// If vf40 returns non-null, calls vf18 on param2, logs a TtClrSurfVel TLS entry, calls hkpWorldConstraintUtil_removeAndDeleteModifier(result, param2, 0x1a), then logs an Et entry.
 // @fnv 0x00cdfe00
-void FUN_00cdfe00(FUN_00cdfe00_Object* param1, FUN_00cdfe00_Object* param2) {
+// pdb: hkpResponseModifier::clearSurfaceVelocity | hkpResponseModifier.obj | fnv360_0822_retail, ustr + skyrim(ustr), high
+void hkpResponseModifier_clearSurfaceVelocity(FUN_00cdfe00_Object* param1, FUN_00cdfe00_Object* param2) {
     int* result = param1->vf40();
     if (result != 0) {
         param2->vf18();
@@ -14645,7 +14668,7 @@ void FUN_00cdfe00(FUN_00cdfe00_Object* param1, FUN_00cdfe00_Object* param2) {
             *reinterpret_cast<char**>(pTlsBuffer + 4) = entry + 12;
         }
 
-        FUN_00d27690(result, param2, 0x1a);
+        hkpWorldConstraintUtil_removeAndDeleteModifier(result, param2, 0x1a);
 
         pTlsBuffer = reinterpret_cast<char*>(getTls(DAT_0126835c));
         entry = *reinterpret_cast<char**>(pTlsBuffer + 4);
@@ -16226,8 +16249,9 @@ void __cdecl FUN_00c87700();
 
 
 // @f3twin 0x0095a000 of 0x0073b180
-struct F3Twin_0095a000 : public FUN_00cdea80_cls { int F3_FUN_0095a000() ; };
-int F3Twin_0095a000::F3_FUN_0095a000() 
+struct F3Twin_0095a000 : public FUN_00cdea80_cls { int hkpRagdollConstraintData_getConeMotor() ; };
+// pdb: hkpRagdollConstraintData::getConeMotor | hkpRagdollConstraintData.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_seq), high
+int F3Twin_0095a000::hkpRagdollConstraintData_getConeMotor() 
 {
     return m_e8;
 }

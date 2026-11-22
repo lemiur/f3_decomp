@@ -434,7 +434,7 @@ struct Subject {
  Vec pos; __forceinline Vec GetPos() {return pos;}
 };
 struct Controller {
- void FUN_00ba1310(float,float,float); void FUN_00ba6b90(float); void FUN_00ba6a30(); float FUN_00ba1440(); void FUN_00ba2070(State*,float); short FUN_00ba1ec0(float); short FUN_00ba14a0(); Controller* FUN_00ba12f0(); int FUN_00ba6d10(int*);
+ void FUN_00ba1310(float,float,float); void FUN_00ba6b90(float); void CSpeedTreeRT_ComputeLodLevel(); float CSpeedTreeRT_GetLodLevel(); void CSpeedTreeRT_GetBSGeometryLODData(State*,float); short FUN_00ba1ec0(float); short FUN_00ba14a0(); Controller* FUN_00ba12f0(); int FUN_00ba6d10(int*);
 };
 struct Output {void FUN_00b352e0(int,int);};
 struct Settings {
@@ -457,8 +457,8 @@ void Owner::FUN_0059c5e0(Subject* obj) {
   Vec position=obj->GetPos(); ctrl->FUN_00ba1310(position.x,position.y,position.z);
   float weight;
   if(FUN_0059baa0(1)->mode) { ctrl->FUN_00ba6b90(1.0f); weight=1.0f; }
-  else {ctrl->FUN_00ba6a30(); weight=ctrl->FUN_00ba1440();}
-  ctrl->FUN_00ba2070(&state,weight);
+  else {ctrl->CSpeedTreeRT_ComputeLodLevel(); weight=ctrl->CSpeedTreeRT_GetLodLevel();}
+  ctrl->CSpeedTreeRT_GetBSGeometryLODData(&state,weight);
   bool changed=false;
   if(state.ff0) {changed=true;obj->v13c((unsigned char)state.ffc);}
   obj->v130(changed);
@@ -467,7 +467,7 @@ void Owner::FUN_0059c5e0(Subject* obj) {
    changed=false;
    short count=FUN_0059c3d0();
    if(count>0) {
-    short current=ctrl->FUN_00ba1ec0(ctrl->FUN_00ba1440());
+    short current=ctrl->FUN_00ba1ec0(ctrl->CSpeedTreeRT_GetLodLevel());
     for(short i=0;i<count;++i) {
      if(current==i) {changed=true;obj->v134(i,(unsigned char)state.f38);}
      else obj->v134(i,255);
@@ -750,9 +750,9 @@ struct Owner {
     void FUN_00599c30(bool);
     void FUN_00599550(Context*); void FUN_005992d0(Context*); void FUN_00599370(Context*); void FUN_005995f0(Context*);
 };
-extern void* FUN_0058ada0(Actor*);
+extern void* BSFaceGenManager_GetFaceGenMorphDataHead(Actor*);
 extern void FUN_0058ae60(Actor*,Data*);
-extern Vec* FUN_00599260();
+extern Vec* BSFaceGenManager_GetCameraPosition();
 extern bool FUN_00619160();
 extern void* DAT_01073b7c;
 extern float DAT_01073b38,DAT_01073b44;
@@ -767,7 +767,7 @@ void Owner::FUN_00599c30(bool force) {
   if(!entry) continue;
   ctx.actor=entry->resolve();
   if(!ctx.actor || !ctx.actor->controller) continue;
-  ctx.helper=FUN_0058ada0(ctx.actor);
+  ctx.helper=BSFaceGenManager_GetFaceGenMorphDataHead(ctx.actor);
   if(!ctx.helper) continue;
   ctx.keyword=ctx.actor?ctx.actor->FUN_00824a50(DAT_01073b7c):0;
   if(!ctx.keyword) continue;
@@ -776,7 +776,7 @@ void Owner::FUN_00599c30(bool force) {
   ctx.count=ctx.actor->controller->count;
   if(force || reset) { FUN_0058ae60(ctx.actor,&ctx.data);ctx.loaded=true;reset=false; }
   bool completed=false,acted=false;
-  Vec pos=*FUN_00599260();
+  Vec pos=*BSFaceGenManager_GetCameraPosition();
   Vec delta; delta.x=pos.x-unk8c;delta.y=pos.y-unk90;delta.z=pos.z-unk94;
   float distance=delta.FUN_00432bd0();
   float nearThreshold=DAT_01073b38,farThreshold=DAT_01073b44;
@@ -3580,7 +3580,8 @@ extern char* DAT_01073a0c;
 extern Vec DAT_0108ec68;
 namespace f3m_00599260 {
 
-Vec* FUN_00599260() {
+// pdb: BSFaceGenManager::GetCameraPosition | BSFaceGenNiNode.obj | fnv360_0721_beta, udata, high
+Vec* BSFaceGenManager_GetCameraPosition() {
     if (DAT_01073a0c) {
         return (Vec*)(DAT_01073a0c + 0x8c);
     }
@@ -4232,7 +4233,8 @@ void Vector5941::FUN_00594190(){values.erase(values.begin(),values.end());}
 namespace f3m_0058c300 {
 struct Child58c3 {void FUN_0058c200();};
 struct Owner58c3 {int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; int unk1C; int unk20; int unk24; int unk28; int unk2C; int unk30; int unk34; int unk38; int unk3C; int unk40; int unk44; int unk48; int unk4C; int unk50; int unk54; int unk58; int unk5C; int unk60; int unk64; int unk68; int unk6C; int unk70; int unk74; int unk78; int unk7C; int unk80; int unk84; int unk88; int unk8C; int unk90; int unk94; int unk98; int unk9C; int unkA0; int unkA4; int unkA8; int unkAC; int unkB0; int unkB4; int unkB8; int unkBC; int unkC0; int unkC4; int unkC8; int unkCC; int unkD0; int unkD4; int unkD8; int unkDC; int unkE0; int unkE4; int unkE8; int unkEC; int unkF0; int unkF4; int unkF8; int unkFC; int unk100; int unk104; int unk108; int unk10C; int unk110; int unk114; int unk118; int unk11C; int unk120; int unk124; int unk128; int unk12C; int unk130; int unk134; int unk138; int unk13C; int unk140; int unk144; int unk148; int unk14C; int unk150; int unk154; int unk158; int unk15C; int unk160; int unk164; int unk168; int unk16C; int unk170; int unk174; int unk178; int unk17C; int unk180; int unk184; int unk188; int unk18C; int unk190; int unk194; int unk198; int unk19C; int unk1A0; int unk1A4; int unk1A8; int unk1AC; int unk1B0; int unk1B4; int unk1B8; int unk1BC; int unk1C0; int unk1C4; int unk1C8; int unk1CC; int unk1D0; int unk1D4; int unk1D8; int unk1DC; int unk1E0; int unk1E4; int unk1E8; int unk1EC; int unk1F0; int unk1F4; int unk1F8; int unk1FC; int unk200; int unk204; int unk208; int unk20C; int unk210; int unk214; int unk218; int unk21C; int unk220; int unk224; int unk228; int unk22C; int unk230; int unk234; int unk238; int unk23C; int unk240; int unk244; int unk248; int unk24C; int unk250; int unk254; int unk258; int unk25C; int unk260; int unk264; int unk268; int unk26C; int unk270; int unk274; int unk278; int unk27C; int unk280; int unk284; int unk288; int unk28C; int unk290; int unk294; int unk298; int unk29C; int unk2A0; int unk2A4; int unk2A8; int unk2AC; int unk2B0; int unk2B4; int unk2B8; int unk2BC; int unk2C0; int unk2C4; int unk2C8; int unk2CC; int unk2D0; int unk2D4; int unk2D8; int unk2DC; int unk2E0; int unk2E4; int unk2E8; int unk2EC; int unk2F0; int unk2F4; int unk2F8; int unk2FC; int unk300; int unk304; int unk308; int unk30C; int unk310; int unk314; int unk318; int unk31C; int unk320; int unk324; int unk328; int unk32C; int unk330; int unk334; int unk338; int unk33C; int unk340; int unk344; int unk348; int unk34C; int unk350; int unk354; int unk358; int unk35C; int unk360; int unk364; int unk368; int unk36C; int unk370; int unk374; int unk378; int unk37C; int unk380; int unk384; int unk388; int unk38C; int unk390; int unk394; int unk398; int unk39C; int unk3A0; int unk3A4; int unk3A8; int unk3AC; int unk3B0; int unk3B4; int unk3B8; int unk3BC; int unk3C0; int unk3C4; int unk3C8; int unk3CC; int unk3D0; int unk3D4; int unk3D8; int unk3DC; int unk3E0; int unk3E4; int unk3E8; int unk3EC; int unk3F0; int unk3F4; int unk3F8; int unk3FC; int unk400; int unk404; int unk408; int unk40C; int unk410; int unk414; int unk418; int unk41C; int unk420; int unk424; int unk428; int unk42C; int unk430; int unk434; int unk438; int unk43C; int unk440; int unk444; int unk448; int unk44C; int unk450; int unk454; int unk458; int unk45C; int unk460; int unk464; int unk468; int unk46C; int unk470; int unk474; int unk478; int unk47C; int unk480; int unk484; int unk488; int unk48C; int unk490; int unk494; int unk498; int unk49C; int unk4A0; int unk4A4; int unk4A8; int unk4AC; int unk4B0; int unk4B4; int unk4B8; int unk4BC; int unk4C0; int unk4C4; int unk4C8; int unk4CC; int unk4D0; int unk4D4; int unk4D8; int unk4DC; int unk4E0; int unk4E4; int unk4E8; int unk4EC; int unk4F0; int unk4F4; int unk4F8; int unk4FC; int unk500; int unk504; int unk508; int unk50C; int unk510; int unk514; int unk518; int unk51C; int unk520; int unk524; int unk528; int unk52C; int unk530; int unk534; int unk538; int unk53C; int unk540; int unk544; int unk548; int unk54C; int unk550; int unk554; int unk558; int unk55C; int unk560; int unk564; int unk568; int unk56C; int unk570; int unk574; int unk578; int unk57C; int unk580; int unk584; int unk588; int unk58C; int unk590; int unk594; int unk598; int unk59C; int unk5A0; int unk5A4; int unk5A8; int unk5AC; int unk5B0; int unk5B4; int unk5B8; int unk5BC; int unk5C0; int unk5C4; int unk5C8; int unk5CC; int unk5D0; int unk5D4; int unk5D8; int unk5DC; int unk5E0; int unk5E4; int unk5E8; int unk5EC; int unk5F0; int unk5F4; int unk5F8; int unk5FC; int unk600; int unk604; int unk608; int unk60C; int unk610; int unk614; int unk618; int unk61C; int unk620; int unk624; int unk628; int unk62C; int unk630; int unk634; int unk638; int unk63C; int unk640; int unk644; int unk648; int unk64C; int unk650; int unk654; int unk658; int unk65C; int unk660; int unk664; int unk668; int unk66C; int unk670; int unk674; int unk678; int unk67C; int unk680; int unk684; int unk688; int unk68C; int unk690; int unk694; int unk698; int unk69C; int unk6A0; int unk6A4; int unk6A8; int unk6AC; int unk6B0; int unk6B4; int unk6B8; int unk6BC; int unk6C0; int unk6C4; int unk6C8; int unk6CC; int unk6D0; int unk6D4; int unk6D8; int unk6DC; int unk6E0; int unk6E4; int unk6E8; int unk6EC; int unk6F0; int unk6F4; int unk6F8; int unk6FC; int unk700; int unk704; int unk708; int unk70C; int unk710; int unk714; int unk718; int unk71C; int unk720; int unk724; int unk728; int unk72C; int unk730; int unk734; int unk738; int unk73C; int unk740; int unk744; int unk748; int unk74C; int unk750; int unk754; int unk758; int unk75C; int unk760; int unk764; int unk768; int unk76C; int unk770; int unk774; int unk778; int unk77C; int unk780; int unk784; int unk788; int unk78C; int unk790; int unk794; int unk798; int unk79C; int unk7A0; int unk7A4; int unk7A8; int unk7AC; int unk7B0; int unk7B4; int unk7B8; int unk7BC; int unk7C0; int unk7C4; int unk7C8; int unk7CC; int unk7D0; int unk7D4; int unk7D8; int unk7DC; int unk7E0; int unk7E4; int unk7E8; int unk7EC; int unk7F0; int unk7F4; int unk7F8; int unk7FC; int unk800; int unk804; int unk808; int unk80C; int unk810; int unk814; int unk818; int unk81C; int unk820; int unk824; int unk828; int unk82C; int unk830; int unk834; int unk838; int unk83C; int unk840; int unk844; int unk848; int unk84C; int unk850; int unk854; int unk858; int unk85C; int unk860; int unk864; int unk868; int unk86C; int unk870; int unk874; int unk878; int unk87C; int unk880; int unk884; int unk888; int unk88C; int unk890; int unk894; int unk898; int unk89C; int unk8A0; int unk8A4; int unk8A8; int unk8AC; int unk8B0; int unk8B4; int unk8B8; int unk8BC; int unk8C0; int unk8C4; int unk8C8; int unk8CC; int unk8D0; int unk8D4; int unk8D8; int unk8DC; int unk8E0; int unk8E4; int unk8E8; int unk8EC; int unk8F0; int unk8F4; int unk8F8; int unk8FC; int unk900; int unk904; int unk908; int unk90C; int unk910; int unk914; int unk918; int unk91C; int unk920; int unk924; int unk928; int unk92C; int unk930; int unk934; int unk938; int unk93C; int unk940; int unk944; int unk948; int unk94C; int unk950; int unk954; int unk958; int unk95C; int unk960; int unk964; int unk968; int unk96C; int unk970; int unk974; int unk978; int unk97C; int unk980; int unk984; int unk988; int unk98C; int unk990; int unk994; int unk998; int unk99C; int unk9A0; int unk9A4; int unk9A8; int unk9AC; int unk9B0; int unk9B4; int unk9B8; int unk9BC; int unk9C0; int unk9C4; int unk9C8; int unk9CC; int unk9D0; int unk9D4; int unk9D8; int unk9DC; int unk9E0; int unk9E4; int unk9E8; int unk9EC; int unk9F0; int unk9F4; int unk9F8; int unk9FC; int unkA00; int unkA04; int unkA08; int unkA0C; int unkA10; int unkA14; int unkA18; int unkA1C; int unkA20; int unkA24; int unkA28; int unkA2C; int unkA30; int unkA34; int unkA38; int unkA3C; int unkA40; int unkA44; int unkA48; int unkA4C; int unkA50; int unkA54; int unkA58; int unkA5C; int unkA60; int unkA64; int unkA68; int unkA6C; int unkA70; int unkA74; int unkA78; int unkA7C; int unkA80; int unkA84; int unkA88; int unkA8C; int unkA90; int unkA94; int unkA98; int unkA9C; int unkAA0; int unkAA4; int unkAA8; int unkAAC; int unkAB0; int unkAB4; int unkAB8; int unkABC; int unkAC0; int unkAC4; int unkAC8; int unkACC; int unkAD0; int unkAD4; int unkAD8; int unkADC; int unkAE0; int unkAE4; int unkAE8; int unkAEC; int unkAF0; int unkAF4; int unkAF8; int unkAFC; int unkB00; int unkB04; int unkB08; int unkB0C; int unkB10; int unkB14; int unkB18; int unkB1C; int unkB20; int unkB24; int unkB28; int unkB2C; int unkB30; int unkB34; int unkB38; int unkB3C; int unkB40; int unkB44; int unkB48; int unkB4C; int unkB50; int unkB54; int unkB58; int unkB5C; int unkB60; int unkB64; int unkB68; int unkB6C; int unkB70; int unkB74; int unkB78; int unkB7C; int unkB80; int unkB84; int unkB88; int unkB8C; int unkB90; int unkB94; int unkB98; int unkB9C; int unkBA0; int unkBA4; int unkBA8; int unkBAC; int unkBB0; int unkBB4; int unkBB8; int unkBBC; int unkBC0; int unkBC4; int unkBC8; int unkBCC; int unkBD0; int unkBD4; int unkBD8; int unkBDC; int unkBE0; int unkBE4; int unkBE8; int unkBEC; int unkBF0; int unkBF4; int unkBF8; int unkBFC; int unkC00; int unkC04; int unkC08; int unkC0C; int unkC10; int unkC14; int unkC18; int unkC1C; int unkC20; int unkC24; int unkC28; int unkC2C; int unkC30; int unkC34; int unkC38; int unkC3C; int unkC40; int unkC44; int unkC48; int unkC4C; int unkC50; int unkC54; int unkC58; int unkC5C; int unkC60; int unkC64; int unkC68; int unkC6C; int unkC70; int unkC74; int unkC78; int unkC7C; int unkC80; int unkC84; int unkC88; int unkC8C; int unkC90; int unkC94; int unkC98; int unkC9C; int unkCA0; int unkCA4; int unkCA8; int unkCAC; int unkCB0; int unkCB4; int unkCB8; int unkCBC; int unkCC0; int unkCC4; int unkCC8; int unkCCC; int unkCD0; int unkCD4; int unkCD8; int unkCDC; int unkCE0; int unkCE4; int unkCE8; int unkCEC; int unkCF0; int unkCF4; int unkCF8; int unkCFC; int unkD00; int unkD04; int unkD08; int unkD0C; int unkD10; int unkD14; int unkD18; int unkD1C; int unkD20; int unkD24; int unkD28; int unkD2C; int unkD30; int unkD34; int unkD38; int unkD3C; int unkD40; int unkD44; int unkD48; int unkD4C; int unkD50; int unkD54; int unkD58; int unkD5C; int unkD60; int unkD64; int unkD68; int unkD6C; int unkD70; int unkD74; int unkD78; int unkD7C; int unkD80; int unkD84; int unkD88; int unkD8C; int unkD90; int unkD94; int unkD98; int unkD9C; int unkDA0; int unkDA4; int unkDA8; Child58c3* unkDAC;};extern Owner58c3* DAT_01073a08;
-void FUN_0058c300(){if(DAT_01073a08&&DAT_01073a08->unkDAC)DAT_01073a08->unkDAC->FUN_0058c200();}
+// pdb: BSFaceGenManager::ClearEGTCache | BSFaceGenManager.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+void BSFaceGenManager_ClearEGTCache(){if(DAT_01073a08&&DAT_01073a08->unkDAC)DAT_01073a08->unkDAC->FUN_0058c200();}
 }   // namespace f3m_0058c300
 
 // @f3 0x0058aa00 (community match, verified in this file)
@@ -4973,7 +4975,8 @@ struct Input { int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14;
 extern "C" void* __cdecl __RTDynamicCast(void*,long,void*,void*,int);
 extern char DAT_00f5c824; extern char DAT_00f47aa8;
 extern float __cdecl FUN_00582460(void*,Input*,int);
-float FUN_00584110(void* object,Input* input,float amount) { float result; if(input->kind<=2) { float base=input->base; result=Multiplier(amount)*base; } else { float factor=Multiplier(amount); result=FUN_00582460(__RTDynamicCast(object,0,&DAT_00f5c824,&DAT_00f47aa8,0),input,1)*factor; } return input->count*result; }
+// pdb: CombatFormulas::GetWeaponRateOfFire | CombatFormulas.obj | fnv360_0822_retail, objrun + bridge(call_gap|call_gap_sim), high
+float CombatFormulas_GetWeaponRateOfFire(void* object,Input* input,float amount) { float result; if(input->kind<=2) { float base=input->base; result=Multiplier(amount)*base; } else { float factor=Multiplier(amount); result=FUN_00582460(__RTDynamicCast(object,0,&DAT_00f5c824,&DAT_00f47aa8,0),input,1)*factor; } return input->count*result; }
 }
 
 // @f3 0x00593770 (community match, verified in this file)
@@ -5320,7 +5323,8 @@ void __stdcall FUN_00594b00(Entry594b00* first,Entry594b00* last) {
 extern float DAT_00f62904;
 extern int DAT_00f62b98;
 namespace f3m_005859c0 {
-bool __cdecl FUN_005859c0(int value,float scale) {
+// pdb: MagicFormulas::CheckTargetLevelMagnitude | MagicFormulas.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+bool __cdecl MagicFormulas_CheckTargetLevelMagnitude(int value,float scale) {
  scale=DAT_00f62904*scale;
  if(scale>=DAT_00f62b98) return true;
  return value<=scale;
@@ -5779,7 +5783,8 @@ Element588d* FUN_00588d10(unsigned count){if(count<=0)count=0;else if((unsigned(
 // @f3 0x0058c1e0 (community match, verified in this file)
 namespace f3m_0058c1e0 {
 struct Child58c1 {void FUN_0058bb80();};struct Owner58c1 {int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; int unk1C; int unk20; int unk24; int unk28; int unk2C; int unk30; int unk34; int unk38; int unk3C; int unk40; int unk44; int unk48; int unk4C; int unk50; int unk54; int unk58; int unk5C; int unk60; int unk64; int unk68; int unk6C; int unk70; int unk74; int unk78; int unk7C; int unk80; int unk84; int unk88; int unk8C; int unk90; int unk94; int unk98; int unk9C; int unkA0; int unkA4; int unkA8; int unkAC; int unkB0; int unkB4; int unkB8; int unkBC; int unkC0; int unkC4; int unkC8; int unkCC; int unkD0; int unkD4; int unkD8; int unkDC; int unkE0; int unkE4; int unkE8; int unkEC; int unkF0; int unkF4; int unkF8; int unkFC; int unk100; int unk104; int unk108; int unk10C; int unk110; int unk114; int unk118; int unk11C; int unk120; int unk124; int unk128; int unk12C; int unk130; int unk134; int unk138; int unk13C; int unk140; int unk144; int unk148; int unk14C; int unk150; int unk154; int unk158; int unk15C; int unk160; int unk164; int unk168; int unk16C; int unk170; int unk174; int unk178; int unk17C; int unk180; int unk184; int unk188; int unk18C; int unk190; int unk194; int unk198; int unk19C; int unk1A0; int unk1A4; int unk1A8; int unk1AC; int unk1B0; int unk1B4; int unk1B8; int unk1BC; int unk1C0; int unk1C4; int unk1C8; int unk1CC; int unk1D0; int unk1D4; int unk1D8; int unk1DC; int unk1E0; int unk1E4; int unk1E8; int unk1EC; int unk1F0; int unk1F4; int unk1F8; int unk1FC; int unk200; int unk204; int unk208; int unk20C; int unk210; int unk214; int unk218; int unk21C; int unk220; int unk224; int unk228; int unk22C; int unk230; int unk234; int unk238; int unk23C; int unk240; int unk244; int unk248; int unk24C; int unk250; int unk254; int unk258; int unk25C; int unk260; int unk264; int unk268; int unk26C; int unk270; int unk274; int unk278; int unk27C; int unk280; int unk284; int unk288; int unk28C; int unk290; int unk294; int unk298; int unk29C; int unk2A0; int unk2A4; int unk2A8; int unk2AC; int unk2B0; int unk2B4; int unk2B8; int unk2BC; int unk2C0; int unk2C4; int unk2C8; int unk2CC; int unk2D0; int unk2D4; int unk2D8; int unk2DC; int unk2E0; int unk2E4; int unk2E8; int unk2EC; int unk2F0; int unk2F4; int unk2F8; int unk2FC; int unk300; int unk304; int unk308; int unk30C; int unk310; int unk314; int unk318; int unk31C; int unk320; int unk324; int unk328; int unk32C; int unk330; int unk334; int unk338; int unk33C; int unk340; int unk344; int unk348; int unk34C; int unk350; int unk354; int unk358; int unk35C; int unk360; int unk364; int unk368; int unk36C; int unk370; int unk374; int unk378; int unk37C; int unk380; int unk384; int unk388; int unk38C; int unk390; int unk394; int unk398; int unk39C; int unk3A0; int unk3A4; int unk3A8; int unk3AC; int unk3B0; int unk3B4; int unk3B8; int unk3BC; int unk3C0; int unk3C4; int unk3C8; int unk3CC; int unk3D0; int unk3D4; int unk3D8; int unk3DC; int unk3E0; int unk3E4; int unk3E8; int unk3EC; int unk3F0; int unk3F4; int unk3F8; int unk3FC; int unk400; int unk404; int unk408; int unk40C; int unk410; int unk414; int unk418; int unk41C; int unk420; int unk424; int unk428; int unk42C; int unk430; int unk434; int unk438; int unk43C; int unk440; int unk444; int unk448; int unk44C; int unk450; int unk454; int unk458; int unk45C; int unk460; int unk464; int unk468; int unk46C; int unk470; int unk474; int unk478; int unk47C; int unk480; int unk484; int unk488; int unk48C; int unk490; int unk494; int unk498; int unk49C; int unk4A0; int unk4A4; int unk4A8; int unk4AC; int unk4B0; int unk4B4; int unk4B8; int unk4BC; int unk4C0; int unk4C4; int unk4C8; int unk4CC; int unk4D0; int unk4D4; int unk4D8; int unk4DC; int unk4E0; int unk4E4; int unk4E8; int unk4EC; int unk4F0; int unk4F4; int unk4F8; int unk4FC; int unk500; int unk504; int unk508; int unk50C; int unk510; int unk514; int unk518; int unk51C; int unk520; int unk524; int unk528; int unk52C; int unk530; int unk534; int unk538; int unk53C; int unk540; int unk544; int unk548; int unk54C; int unk550; int unk554; int unk558; int unk55C; int unk560; int unk564; int unk568; int unk56C; int unk570; int unk574; int unk578; int unk57C; int unk580; int unk584; int unk588; int unk58C; int unk590; int unk594; int unk598; int unk59C; int unk5A0; int unk5A4; int unk5A8; int unk5AC; int unk5B0; int unk5B4; int unk5B8; int unk5BC; int unk5C0; int unk5C4; int unk5C8; int unk5CC; int unk5D0; int unk5D4; int unk5D8; int unk5DC; int unk5E0; int unk5E4; int unk5E8; int unk5EC; int unk5F0; int unk5F4; int unk5F8; int unk5FC; int unk600; int unk604; int unk608; int unk60C; int unk610; int unk614; int unk618; int unk61C; int unk620; int unk624; int unk628; int unk62C; int unk630; int unk634; int unk638; int unk63C; int unk640; int unk644; int unk648; int unk64C; int unk650; int unk654; int unk658; int unk65C; int unk660; int unk664; int unk668; int unk66C; int unk670; int unk674; int unk678; int unk67C; int unk680; int unk684; int unk688; int unk68C; int unk690; int unk694; int unk698; int unk69C; int unk6A0; int unk6A4; int unk6A8; int unk6AC; int unk6B0; int unk6B4; int unk6B8; int unk6BC; int unk6C0; int unk6C4; int unk6C8; int unk6CC; int unk6D0; int unk6D4; int unk6D8; int unk6DC; int unk6E0; int unk6E4; int unk6E8; int unk6EC; int unk6F0; int unk6F4; int unk6F8; int unk6FC; int unk700; int unk704; int unk708; int unk70C; int unk710; int unk714; int unk718; int unk71C; int unk720; int unk724; int unk728; int unk72C; int unk730; int unk734; int unk738; int unk73C; int unk740; int unk744; int unk748; int unk74C; int unk750; int unk754; int unk758; int unk75C; int unk760; int unk764; int unk768; int unk76C; int unk770; int unk774; int unk778; int unk77C; int unk780; int unk784; int unk788; int unk78C; int unk790; int unk794; int unk798; int unk79C; int unk7A0; int unk7A4; int unk7A8; int unk7AC; int unk7B0; int unk7B4; int unk7B8; int unk7BC; int unk7C0; int unk7C4; int unk7C8; int unk7CC; int unk7D0; int unk7D4; int unk7D8; int unk7DC; int unk7E0; int unk7E4; int unk7E8; int unk7EC; int unk7F0; int unk7F4; int unk7F8; int unk7FC; int unk800; int unk804; int unk808; int unk80C; int unk810; int unk814; int unk818; int unk81C; int unk820; int unk824; int unk828; int unk82C; int unk830; int unk834; int unk838; int unk83C; int unk840; int unk844; int unk848; int unk84C; int unk850; int unk854; int unk858; int unk85C; int unk860; int unk864; int unk868; int unk86C; int unk870; int unk874; int unk878; int unk87C; int unk880; int unk884; int unk888; int unk88C; int unk890; int unk894; int unk898; int unk89C; int unk8A0; int unk8A4; int unk8A8; int unk8AC; int unk8B0; int unk8B4; int unk8B8; int unk8BC; int unk8C0; int unk8C4; int unk8C8; int unk8CC; int unk8D0; int unk8D4; int unk8D8; int unk8DC; int unk8E0; int unk8E4; int unk8E8; int unk8EC; int unk8F0; int unk8F4; int unk8F8; int unk8FC; int unk900; int unk904; int unk908; int unk90C; int unk910; int unk914; int unk918; int unk91C; int unk920; int unk924; int unk928; int unk92C; int unk930; int unk934; int unk938; int unk93C; int unk940; int unk944; int unk948; int unk94C; int unk950; int unk954; int unk958; int unk95C; int unk960; int unk964; int unk968; int unk96C; int unk970; int unk974; int unk978; int unk97C; int unk980; int unk984; int unk988; int unk98C; int unk990; int unk994; int unk998; int unk99C; int unk9A0; int unk9A4; int unk9A8; int unk9AC; int unk9B0; int unk9B4; int unk9B8; int unk9BC; int unk9C0; int unk9C4; int unk9C8; int unk9CC; int unk9D0; int unk9D4; int unk9D8; int unk9DC; int unk9E0; int unk9E4; int unk9E8; int unk9EC; int unk9F0; int unk9F4; int unk9F8; int unk9FC; int unkA00; int unkA04; int unkA08; int unkA0C; int unkA10; int unkA14; int unkA18; int unkA1C; int unkA20; int unkA24; int unkA28; int unkA2C; int unkA30; int unkA34; int unkA38; int unkA3C; int unkA40; int unkA44; int unkA48; int unkA4C; int unkA50; int unkA54; int unkA58; int unkA5C; int unkA60; int unkA64; int unkA68; int unkA6C; int unkA70; int unkA74; int unkA78; int unkA7C; int unkA80; int unkA84; int unkA88; int unkA8C; int unkA90; int unkA94; int unkA98; int unkA9C; int unkAA0; int unkAA4; int unkAA8; int unkAAC; int unkAB0; int unkAB4; int unkAB8; int unkABC; int unkAC0; int unkAC4; int unkAC8; int unkACC; int unkAD0; int unkAD4; int unkAD8; int unkADC; int unkAE0; int unkAE4; int unkAE8; int unkAEC; int unkAF0; int unkAF4; int unkAF8; int unkAFC; int unkB00; int unkB04; int unkB08; int unkB0C; int unkB10; int unkB14; int unkB18; int unkB1C; int unkB20; int unkB24; int unkB28; int unkB2C; int unkB30; int unkB34; int unkB38; int unkB3C; int unkB40; int unkB44; int unkB48; int unkB4C; int unkB50; int unkB54; int unkB58; int unkB5C; int unkB60; int unkB64; int unkB68; int unkB6C; int unkB70; int unkB74; int unkB78; int unkB7C; int unkB80; int unkB84; int unkB88; int unkB8C; int unkB90; int unkB94; int unkB98; int unkB9C; int unkBA0; int unkBA4; int unkBA8; int unkBAC; int unkBB0; int unkBB4; int unkBB8; int unkBBC; int unkBC0; int unkBC4; int unkBC8; int unkBCC; int unkBD0; int unkBD4; int unkBD8; int unkBDC; int unkBE0; int unkBE4; int unkBE8; int unkBEC; int unkBF0; int unkBF4; int unkBF8; int unkBFC; int unkC00; int unkC04; int unkC08; int unkC0C; int unkC10; int unkC14; int unkC18; int unkC1C; int unkC20; int unkC24; int unkC28; int unkC2C; int unkC30; int unkC34; int unkC38; int unkC3C; int unkC40; int unkC44; int unkC48; int unkC4C; int unkC50; int unkC54; int unkC58; int unkC5C; int unkC60; int unkC64; int unkC68; int unkC6C; int unkC70; int unkC74; int unkC78; int unkC7C; int unkC80; int unkC84; int unkC88; int unkC8C; int unkC90; int unkC94; int unkC98; int unkC9C; int unkCA0; int unkCA4; int unkCA8; int unkCAC; int unkCB0; int unkCB4; int unkCB8; int unkCBC; int unkCC0; int unkCC4; int unkCC8; int unkCCC; int unkCD0; int unkCD4; int unkCD8; int unkCDC; int unkCE0; int unkCE4; int unkCE8; int unkCEC; int unkCF0; int unkCF4; int unkCF8; int unkCFC; int unkD00; int unkD04; int unkD08; int unkD0C; int unkD10; int unkD14; int unkD18; int unkD1C; int unkD20; int unkD24; int unkD28; int unkD2C; int unkD30; int unkD34; int unkD38; int unkD3C; int unkD40; int unkD44; int unkD48; int unkD4C; int unkD50; int unkD54; int unkD58; int unkD5C; int unkD60; int unkD64; int unkD68; int unkD6C; int unkD70; int unkD74; int unkD78; int unkD7C; int unkD80; int unkD84; int unkD88; int unkD8C; int unkD90; int unkD94; int unkD98; int unkD9C; int unkDA0; int unkDA4; int unkDA8; Child58c1* unkDAC;};extern Owner58c1* DAT_01073a08;
-void FUN_0058c1e0(){if(DAT_01073a08&&DAT_01073a08->unkDAC)DAT_01073a08->unkDAC->FUN_0058bb80();}
+// pdb: BSFaceGenManager::ClearModelCache | BSFaceGenManager.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+void BSFaceGenManager_ClearModelCache(){if(DAT_01073a08&&DAT_01073a08->unkDAC)DAT_01073a08->unkDAC->FUN_0058bb80();}
 }   // namespace f3m_0058c1e0
 
 // @f3 0x0059fb90 (community match, verified in this file)
@@ -5819,7 +5824,8 @@ extern float flt_00f5e6e0;
 extern const double DAT_00db7de8;
 namespace f3m_005812e0 {
 
-float __cdecl FUN_005812e0(int value)
+// pdb: AiFormulas::ComputeTimeTillNextWander | AiFormulas.obj | fnv360_0822_retail, objrun + bridge(call_gap|objrun), high
+float __cdecl AiFormulas_ComputeTimeTillNextWander(int value)
 {
     float t = value * flt_00f5e6ec + flt_00f5e6e0;
     return (flt_00f5e6f8 - t) * DAT_00db7de8;
@@ -6686,7 +6692,8 @@ static inline float& SettingValue581730(Setting581730* setting) {
     DAT_0116d104 = 0.0f;
     return DAT_0116d104;
 }
-void FUN_00581730(int index, int* outId, float* outValue) {
+// pdb: AiFormulas::AVGetDerivedSkillPrimaryAttributeAndBase | AiFormulas.obj | fnv360_0822_retail, udata, high
+void AiFormulas_AVGetDerivedSkillPrimaryAttributeAndBase(int index, int* outId, float* outValue) {
     *outId = DAT_00f5e0ec[index];
     *outValue = SettingValue581730(DAT_00f5e124[index]);
 }
@@ -7570,8 +7577,8 @@ namespace f3m_005843d0 {
 namespace Match843 {
 struct Object {int unk000;int unk004;int unk008;int unk00c;int unk010;int unk014;int unk018;int unk01c;int unk020;int unk024;int unk028;int unk02c;int unk030;int unk034;int unk038;int unk03c;int unk040;int unk044;int unk048;int unk04c;int unk050;int unk054;int unk058;int unk05c;int unk060;int unk064;int unk068;int unk06c;int unk070;int unk074;int unk078;int unk07c;int unk080;int unk084;int unk088;int unk08c;int unk090;int unk094;int unk098;int unk09c;int unk0a0;int unk0a4;int unk0a8;int unk0ac;int unk0b0;int unk0b4;int unk0b8;int unk0bc;int unk0c0;int unk0c4;int unk0c8;int unk0cc;int unk0d0;int unk0d4;int unk0d8;int unk0dc;int unk0e0;int unk0e4;int unk0e8;int unk0ec;int unk0f0;unsigned char kind;unsigned char unk0f5;unsigned char unk0f6;unsigned char unk0f7;unsigned char unk0f8;unsigned char unk0f9;unsigned char unk0fa;unsigned char unk0fb;unsigned char unk0fc;unsigned char unk0fd;unsigned char unk0fe;unsigned char unk0ff;unsigned char flags;};extern void* DAT_0107a104;
 __forceinline void* Context(){return DAT_0107a104?(char*)DAT_0107a104+0x9c:0;}
-float __cdecl FUN_00583a40(void*,Object*,float,float,int,int);void __cdecl FUN_00543420(int,void*,Object*,void*,float*);float __cdecl FUN_00584110(void*,Object*,float);
-float __cdecl FUN_005843d0(Object* object,float input){float result=0.0f;if(object && (object->flags&2) && object->kind<=2){object->flags&=~2;result=FUN_00583a40(Context(),object,input,1.0f,0,0);object->flags|=2;}else result=FUN_00583a40(Context(),object,input,1.0f,0,0);FUN_00543420(0,DAT_0107a104,object,DAT_0107a104,&result);if((object->flags&2) && object->kind>2)result=FUN_00584110(Context(),object,input)*result;return result;}
+float __cdecl FUN_00583a40(void*,Object*,float,float,int,int);void __cdecl FUN_00543420(int,void*,Object*,void*,float*);float __cdecl CombatFormulas_GetWeaponRateOfFire(void*,Object*,float);
+float __cdecl FUN_005843d0(Object* object,float input){float result=0.0f;if(object && (object->flags&2) && object->kind<=2){object->flags&=~2;result=FUN_00583a40(Context(),object,input,1.0f,0,0);object->flags|=2;}else result=FUN_00583a40(Context(),object,input,1.0f,0,0);FUN_00543420(0,DAT_0107a104,object,DAT_0107a104,&result);if((object->flags&2) && object->kind>2)result=CombatFormulas_GetWeaponRateOfFire(Context(),object,input)*result;return result;}
 }
 }   // namespace f3m_005843d0
 
@@ -8018,13 +8025,13 @@ struct Owner2 : Owner {
     void FUN_00599670(int);
 };
 
-Vec* FUN_00599260() {
+Vec* BSFaceGenManager_GetCameraPosition() {
     if (DAT_01073a0c) return (Vec*)((char*)DAT_01073a0c + 0x8c);
     return (Vec*)DAT_0108ec68;
 }
 
 void Owner2::FUN_00599670(int param) {
-    Vec pos = *FUN_00599260();
+    Vec pos = *BSFaceGenManager_GetCameraPosition();
     Vec delta;
     delta.x = pos.x - unk8c;
     delta.y = pos.y - unk90;
@@ -8319,7 +8326,8 @@ struct FUN_0058ada0_Node {
 };
 void* __cdecl FUN_00424d50(void* table, void* key);
 
-void* __cdecl FUN_0058ada0(FUN_0058ada0_Node* node)
+// pdb: BSFaceGenManager::GetFaceGenMorphDataHead | BSFaceGenManager.obj | fnv360_0822_retail, udata + bridge(udata|udata), high
+void* __cdecl BSFaceGenManager_GetFaceGenMorphDataHead(FUN_0058ada0_Node* node)
 {
     void* r = 0;
     if (node) {
@@ -11024,7 +11032,7 @@ int unk9c;
  void FUN_00ba63b0(int); void FUN_00ba6500(int); void FUN_00ba6280(int); void FUN_00ba5d50(int); void FUN_00ba5fb0(int); void FUN_00ba5e80(int);
  void FUN_00ba1470(float,float);
  bool FUN_00ba7860(int,void*,int);
- void FUN_00ba3550(); unsigned FUN_00ba5c50(); float FUN_00ba13e0(); float FUN_00ba13c0();
+ void FUN_00ba3550(); unsigned CSpeedTreeRT_GetSeed(); float FUN_00ba13e0(); float FUN_00ba13c0();
  void FUN_00ba5ae0(); void FUN_00ba6be0(); void FUN_00ba46f0();
 };
 struct Name59 { virtual void v0(); virtual void v1(); virtual void v2(); virtual void v3(); virtual void v4(); virtual const char* name(); };
@@ -11056,7 +11064,7 @@ bool Owner59::FUN_0059c9c0(Input59* input,Arg59 arg) {
   }
   active=1;resource=r;attach(input);
   bool started=r->FUN_00ba7860(0,arg.p,1); if(!started) return started;
-  r->FUN_00ba3550();handle=r->FUN_00ba5c50();width=r->FUN_00ba13e0();height=r->FUN_00ba13c0();notify(input);
+  r->FUN_00ba3550();handle=r->CSpeedTreeRT_GetSeed();width=r->FUN_00ba13e0();height=r->FUN_00ba13c0();notify(input);
   r->FUN_00ba5ae0();r->FUN_00ba6be0();r->FUN_00ba46f0();return true;
  }
  delete r;return false;
@@ -11697,8 +11705,8 @@ public:
 };
 
 void __cdecl FUN_00ba67f0(unsigned int value);
-void __cdecl FUN_00ba1460(unsigned int value);
-void __cdecl FUN_00ba1930(unsigned int value);
+void __cdecl CSpeedTreeRT_SetDropToBillboard(unsigned int value);
+void __cdecl CSpeedTreeRT_SetTextureFlip(unsigned int value);
 extern unsigned char DAT_01073c98;
 extern unsigned int DAT_01073cfc;
 extern float DAT_01173610;
@@ -11740,8 +11748,8 @@ TreeRenderResources::TreeRenderResources() : timer(0.0f)
 
     flags = new BSXFlags(3);
     FUN_00ba67f0(4);
-    FUN_00ba1460(1);
-    FUN_00ba1930(1);
+    CSpeedTreeRT_SetDropToBillboard(1);
+    CSpeedTreeRT_SetTextureFlip(1);
     DAT_01173610 = static_cast<float>(DAT_01073cfc);
     instances = new LockFreeMap<TESObjectREFR*, BSTreeNode*>(2, 0x25, 0xc);
 }
@@ -13783,7 +13791,8 @@ struct Name_585b40 {
 
 extern Name_585b40* DAT_01073968;
 
-void __cdecl FUN_00585b40() {
+// pdb: BSFaceGenAnimationData::InitSDM | BSFaceGenAnimationData.obj | fnv360_0822_retail, udata, high
+void __cdecl BSFaceGenAnimationData_InitSDM() {
     DAT_01073968 = new Name_585b40("FAD");
 }
 }   // namespace f3m_00585b40
@@ -13871,12 +13880,12 @@ struct CDC40LevelA : public CDC40Root, public CDC40Payload {
     CDC40LevelA() : unk10(0) { ++DAT_012680f8; }
 };
 
-struct FUN_00c8bed0_cls : public CDC40LevelA {
+struct bhkTransformShape : public CDC40LevelA { // src: F3_EXE vtable 0x00dfcfd4 (old: FUN_00c8bed0_cls)
     void FUN_008fe050(hkGeometry* geometry);
-    FUN_00c8bed0_cls(hkGeometry* geometry);
+    bhkTransformShape(hkGeometry* geometry);
 };
 
-FUN_00c8bed0_cls::FUN_00c8bed0_cls(hkGeometry* geometry)
+bhkTransformShape::bhkTransformShape(hkGeometry* geometry)
 {
     FUN_008fe050(geometry);
     ++DAT_012681b0;
@@ -17270,7 +17279,8 @@ extern Owner59c260* DAT_01073c1c;extern NiPointer<Ref59c260> DAT_0116f3d4;
 struct Manager59c260 {void FUN_00435310(const char*,int);};extern Manager59c260* DAT_0107a0d8;extern const char DAT_00dfc9ec[];
 void FUN_0059b8e0(int);
 inline Owner59c260* Get59c260(){if(!DAT_01073c1c)FUN_0059b8e0(0);return DAT_01073c1c;}
-void FUN_0059c260() {
+// pdb: BSTreeManager::ClearCanopyShadow | BSTreeManager.obj | fnv360_0822_debug, ustr_rel + bridge(ustr_rel|ustr_rel), high
+void BSTreeManager_ClearCanopyShadow() {
  Owner59c260* o=Get59c260();
  if(((RawOwner59c260*)o)->raw) {o->object=(Ref59c260*)0;DAT_0116f3d4=(Ref59c260*)0;DAT_0107a0d8->FUN_00435310(DAT_00dfc9ec,0);}
 }
@@ -19302,12 +19312,12 @@ public:
 
 class Get5817e0 {
 public:
-    void* FUN_006f5800();
+    void* Actor_GetClass();
 };
 
 class Get2_5817e0 {
 public:
-    void* FUN_006f5800(int index);
+    void* Actor_GetClass(int index);
 };
 
 class Check5817e0 {
@@ -19352,8 +19362,8 @@ float __cdecl FUN_005817e0(f3m_005817e0::Actor5817e0* obj, unsigned int index, b
 
     f3m_005817e0::Tail5817e0* ctx = obj->v09();
     if (ctx && ctx->f0() && ctx->f4()
-        && ((f3m_005817e0::Get5817e0*)ctx)->FUN_006f5800()
-        && ((f3m_005817e0::Check5817e0*)((f3m_005817e0::Get2_5817e0*)ctx)->FUN_006f5800(index))->FUN_0051dfb0())
+        && ((f3m_005817e0::Get5817e0*)ctx)->Actor_GetClass()
+        && ((f3m_005817e0::Check5817e0*)((f3m_005817e0::Get2_5817e0*)ctx)->Actor_GetClass(index))->FUN_0051dfb0())
     {
         result += *DAT_00f5f154.FUN_00401eb0();
     }
@@ -19509,7 +19519,7 @@ extern Player2460* DAT_0107a104;
 extern int DAT_00f4eb6c[];
 
 unsigned short __cdecl FUN_0054b730(int a_iFirst, int a_iSecond, unsigned int a_uiThird, int a_iFourth);
-unsigned int __cdecl FUN_0054b780(unsigned short a_usIndex);
+unsigned int __cdecl TESAnimGroup_GetType(unsigned short a_usIndex);
 
 struct Item2460 {
     int unk000;
@@ -19620,7 +19630,7 @@ float __cdecl FUN_00582460(void* a_pObject, Item2460* a_pItem, bool a_bAverage) 
             uiSkill = 0x8e;
         unsigned int uiKeyId = FUN_0054b730(0, DAT_00f4eb6c[a_pItem->GetType()], uiSkill, 0);
         unsigned short usIndex = pStats->FUN_0045d6a0(uiKeyId, 0);
-        if (FUN_0054b780(usIndex) == uiSkill) {
+        if (TESAnimGroup_GetType(usIndex) == uiSkill) {
             Entry2460* pEntry = pStats->FUN_0045dd90(usIndex);
             if (pEntry) {
                 float fBase = a_pItem->fBase;
@@ -19635,7 +19645,7 @@ float __cdecl FUN_00582460(void* a_pObject, Item2460* a_pItem, bool a_bAverage) 
             uiKey = 0x20;
         unsigned int uiKeyId = FUN_0054b730(0, DAT_00f4eb6c[a_pItem->GetType()], uiKey, 0);
         unsigned short usIndex = pStats->FUN_0045d6a0(uiKeyId, 0);
-        if (FUN_0054b780(usIndex) == uiKey)
+        if (TESAnimGroup_GetType(usIndex) == uiKey)
         {
             Entry2460* pEntry = pStats->FUN_0045dd90(usIndex);
             fRate = 1.0f / pEntry->FUN_0054bb40(3);
@@ -21539,7 +21549,7 @@ struct Follower {
     unsigned int unk38;
     unsigned int unk3c;
     FollowerList list;
-    FollowerPackage* FUN_00766020();
+    FollowerPackage* MobileObject_GetCurrentPackage();
     float FUN_006f9ec0();
 };
 
@@ -21558,7 +21568,7 @@ float __cdecl FUN_00581bf0(Follower* wanted, Follower* owner)
         if (!node->next && !node->follower)
             goto finish;
         for (FollowerNode* n = set->head; n; n = n->next) {
-            FollowerPackage* package = n->follower->FUN_00766020();
+            FollowerPackage* package = n->follower->MobileObject_GetCurrentPackage();
             if (package && package->type == 1)
                 ++count;
         }
@@ -21568,7 +21578,7 @@ float __cdecl FUN_00581bf0(Follower* wanted, Follower* owner)
         unsigned int index = 0;
         for (node = set->head; node; node = node->next) {
             Follower* follower = node->follower;
-            FollowerPackage* package = follower->FUN_00766020();
+            FollowerPackage* package = follower->MobileObject_GetCurrentPackage();
             if (package && package->type == 1) {
                 FollowerDist& entry = distances.entries[index];
                 entry.follower = follower;
@@ -21701,7 +21711,8 @@ struct Grid {
     Matrix cells[2][2];
 };
 
-void __cdecl FUN_0058e170(const Grid* source, Grid* destination, bool first, bool second)
+// pdb: BSFaceGenManager::CopyFaceGenCoord | BSFaceGenManager.obj | fnv360_0822_retail, call_seq + bridge(call_gap|caller), high
+void __cdecl BSFaceGenManager_CopyFaceGenCoord(const Grid* source, Grid* destination, bool first, bool second)
 {
     if (!source || !destination)
         return;
@@ -22187,7 +22198,7 @@ inline FaceGenModel* GetFaceGenModelFromGeom(AVObj* pkGeom)
     return 0;
 }
 
-__declspec(noalias) void __cdecl FUN_0058e170(int* pkSrc, FaceGenCoord* pkCoord, bool a, bool b);
+__declspec(noalias) void __cdecl BSFaceGenManager_CopyFaceGenCoord(int* pkSrc, FaceGenCoord* pkCoord, bool a, bool b);
 __declspec(noalias) const char* __cdecl FUN_0058c410(BSString* pkOut, const char* pcPath);
 __declspec(noalias) const char* __cdecl FUN_0058c660(BSString* pkOut, const char* pcPath);
 __declspec(noalias) const char* __cdecl FUN_0058cc20(BSString* pkOut, const char* pcPath);
@@ -22223,7 +22234,7 @@ void __cdecl FUN_0058f8e0(Node* apFaceNode, int aiLOD)
                 BSString kTextureName;
                 FaceGenCoord akCoord[4];
                 int* pkCoordSrc = GetFaceGenCoordSrc();
-                FUN_0058e170(pkCoordSrc, akCoord, false, false);
+                BSFaceGenManager_CopyFaceGenCoord(pkCoordSrc, akCoord, false, false);
                 FUN_0058c410(&kBaseNIFName, pkSampleModel->GetFileName());
                 switch (aiLOD)
                 {
@@ -27746,7 +27757,8 @@ namespace f3m_00584fe0 {
 // Scales a fixed-point value into world units.
 
 
-float __cdecl FUN_00584fe0(int iValue)
+// pdb: GamePlayFormulas::SwimBreathTime | GamePlayFormulas.obj | fnv360_0721_retail, objrun + bridge(call_gap|call_gap_sim), high
+float __cdecl GamePlayFormulas_SwimBreathTime(int iValue)
 {
     float fResult = (float)iValue * DAT_00f612b4 + DAT_00f612a8;
     return fResult;
@@ -27822,7 +27834,8 @@ extern float DAT_00f624a8;
 extern float DAT_00f6249c;
 }
 
-float __cdecl FUN_00585750(float a, int b) {
+// pdb: MagicFormulas::AdjustMagicSpellCost | MagicFormulas.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+float __cdecl MagicFormulas_AdjustMagicSpellCost(float a, int b) {
     float f = (float)(b / DAT_00dba730);
     f = (1.0f - f) * f3m_00585750::DAT_00f624a8 + f3m_00585750::DAT_00f6249c;
     f = f * a;
@@ -29844,7 +29857,7 @@ struct FUN_0059c410 : S0059bac0_Target {
     static void operator delete(void* p) { FUN_0089ebe0(p); }
     int unk48; int unk4C;
     FUN_0059c410();
-    bool FUN_0059ed00(S0059bac0_Target* source);
+    bool BSTreeModel_InitAsInstance(S0059bac0_Target* source);
 };
 
 struct QPtr {
@@ -29897,7 +29910,7 @@ S0059bac0_Result* S0059bac0_Owner::FUN_0059bac0(S0059bac0_Actor* actor, S0059bac
         return 0;
     if (((S0059bac0_Target*)entry)->GetRefCount() > 2) {
         target = new FUN_0059c410;
-        if (!((FUN_0059c410*)target)->FUN_0059ed00(entry)) {
+        if (!((FUN_0059c410*)target)->BSTreeModel_InitAsInstance(entry)) {
             delete target;
             return 0;
         }
@@ -30318,7 +30331,7 @@ struct BSTreeModel : NiRefObject
     float unk3c;
     unsigned int unk40, unk44;
     float unk48, unk4c;
-    // The two section conditions in FUN_0059ed00 read the source's arrays through these accessors
+    // The two section conditions in BSTreeModel_InitAsInstance read the source's arrays through these accessors
     // while the loops read the members directly. That mix is a guess at the source: it is kept
     // because it gives the model pointer its register (edi); direct reads in the conditions
     // compile to the same instructions with edi/ebx/ebp exchanged through the whole function.
@@ -30328,10 +30341,11 @@ struct BSTreeModel : NiRefObject
     NiPointer<NiNode>* GetLeafNodes() const { return leafNodes; }
     unsigned short FUN_0059c3d0();   // branch count: runtime ? runtime->FUN_00ba1490() : 0
     unsigned short GetLeafCount() { return runtime ? runtime->FUN_00ba14a0() : 0; }
-    bool FUN_0059ed00(BSTreeModel* model);
+    bool BSTreeModel_InitAsInstance(BSTreeModel* model);
 };
 
-bool BSTreeModel::FUN_0059ed00(BSTreeModel* model)
+// pdb: BSTreeModel::InitAsInstance | BSTreeModel.obj | fnv360_0822_debug, udata + bridge(udata|call_gap), high
+bool BSTreeModel::BSTreeModel_InitAsInstance(BSTreeModel* model)
 {
     EnterCriticalSection(&DAT_01073d3c);
     AutoMemContext context(31);
@@ -31072,18 +31086,18 @@ struct Matrix58e230 {
 struct MatrixSet58e230 {
     Matrix58e230 matrices[2][2];
 };
-void __cdecl FUN_0058e170(MatrixSet58e230* source, MatrixSet58e230* out, bool first, bool second);
+void __cdecl BSFaceGenManager_CopyFaceGenCoord(MatrixSet58e230* source, MatrixSet58e230* out, bool first, bool second);
 void __cdecl FUN_0058e230(MatrixSet58e230* a, MatrixSet58e230* b, MatrixSet58e230* out, bool copyFirst, float maxRms)
 {
     if (!out)
         return;
     if (!a) {
         if (b)
-            FUN_0058e170(b, out, false, false);
+            BSFaceGenManager_CopyFaceGenCoord(b, out, false, false);
         return;
     }
     if (!b) {
-        FUN_0058e170(a, out, false, false);
+        BSFaceGenManager_CopyFaceGenCoord(a, out, false, false);
         return;
     }
     MatrixSet58e230* target = out;
@@ -32352,7 +32366,7 @@ struct ColorA {
 
 struct Matrix3 {
     float m[3][3];
-    void FUN_00468d80(float angle);
+    void NiMatrix3_MakeZRotation(float angle);
     void FUN_00423fd0(float angle);
     Matrix3 FUN_00424020(const Matrix3& rhs) const;
     __forceinline void MakeZ(float angle) {
@@ -32501,10 +32515,11 @@ public:
     bool unk24;
     void FUN_00634f80(Sky* sky, float dt);
     float FUN_0057ff70();
-    void FUN_00580050(Sky* sky, float dt);
+    void Sun_Update(Sky* sky, float dt);
 };
 
-void Sun::FUN_00580050(Sky* sky, float dt)
+// pdb: Sun::Update | Sun.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void Sun::Sun_Update(Sky* sky, float dt)
 {
     FUN_00402b80 scope;
     float dayTime = sky->unkEC;
@@ -32529,7 +32544,7 @@ void Sun::FUN_00580050(Sky* sky, float dt)
         Matrix3 rot = DAT_00f72574;
         AngleSource* src = DAT_0107a0d8 ? DAT_0107a0d8->GetSource() : 0;
         if (src) {
-            rot.FUN_00468d80((float)src->FUN_004d4de0() * 0.017453292f);
+            rot.NiMatrix3_MakeZRotation((float)src->FUN_004d4de0() * 0.017453292f);
             Matrix3 tilt;
             tilt.FUN_00423fd0((float)src->FUN_004d4e20() * 0.017453292f);
             rot = rot.FUN_00424020(tilt);
@@ -34811,7 +34826,7 @@ S591_Model* __cdecl FUN_0058a8b0(void* source);
 void __cdecl FUN_00ade300(S591_Node*, int, int);
 void __cdecl FUN_0058b640(S591_Node*, int, int);
 char* __cdecl FUN_0058caf0(S591_String* out, int mode, unsigned char percent, const char* path);
-void __cdecl FUN_0045bbf0(S591_String* out, const char* path);
+void __cdecl TESTexture_GetAsNormalFile(S591_String* out, const char* path);
 S591_Ref* __cdecl FUN_00470bc0();
 // Visible bodies, written from the image and marked as stand-ins: the string members (0x004019c0 set, 0x00402540
 // append, 0x00403a00 format, 0x00403870 its va_list worker), the path builder FUN_0058caf0 (a copy of the unit's
@@ -35024,7 +35039,7 @@ void __cdecl FUN_00591330(S591::S591_Root* ref, S591::S591_Data* data)
                 model->FUN_00595130(data, &baseTexture, S591::DAT_01073a6c);
             const char* fullPath = path.pString;
             S591::DAT_0107a0d8->FUN_004353f0(fullPath, &loaded, 1, 1);
-            S591::FUN_0045bbf0(&texturePath, fullPath);
+            S591::TESTexture_GetAsNormalFile(&texturePath, fullPath);
         } else {
             if (!data->unka4.size || !*data->unka4.GetAtPointer(i))
                 model->FUN_00595130(data, &baseTexture, S591::DAT_01073a6c);
@@ -35756,7 +35771,7 @@ struct ModelFile {
     Text name;
     unsigned GetLength() const { return name.m_len == 0xFFFF ? strlen(name.m_data) : name.m_len; }
     const char* GetName() const { return name.m_data ? name.m_data : DAT_00db3438; }
-    void FUN_00459180(struct Geometry* geom);
+    void TESModelTextureSwap_SwapTextures(struct Geometry* geom);
 };
 
 template <class T> struct Array {
@@ -36193,7 +36208,8 @@ void __cdecl FUN_0058ff50(Node** mainParent, Node** otherParent, FaceData* info,
 void __cdecl FUN_00590860(Node** mainParent, Node** otherParent, FaceData* info, bool attachFirst);
 extern const char DAT_00dfbf7c[], DAT_00dfbfb4[];
 
-bool __cdecl FUN_005923f0(Node** mainParent, Node** otherParent, FaceData* info, bool attachFirst)
+// pdb: BSFaceGenManager::CreateFaceGenHead | BSFaceGenManager.obj | fnv360_0822_debug, ustr_rel + bridge(ustr_rel|ustr_rel), high
+bool __cdecl BSFaceGenManager_CreateFaceGenHead(Node** mainParent, Node** otherParent, FaceData* info, bool attachFirst)
 {
     MemContext memContext(0x37);
     FUN_00593340* faceModel = 0;
@@ -36318,7 +36334,7 @@ bool __cdecl FUN_005923f0(Node** mainParent, Node** otherParent, FaceData* info,
         if (faceModel && faceModel->FUN_00596870(info, &geom) && geom) {
             geom->SetRotate(rot);
             (*mainParent)->AttachChild(geom, true);
-            link->item->file.FUN_00459180(geom);
+            link->item->file.TESModelTextureSwap_SwapTextures(geom);
             geom->FUN_008245d0(FixedString(DAT_00dfbfb4));
         }
         link = link->next;

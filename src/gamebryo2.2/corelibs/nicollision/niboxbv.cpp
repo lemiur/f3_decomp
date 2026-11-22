@@ -4,7 +4,8 @@
 
 // Returns the constant value 1.
 // @fnv 0x00b6f470
-int __cdecl FUN_00b6f470()
+// pdb: hkpDefaultToiResourceMgr::resourcesDepleted | hkpDefaultToiResourceMgr.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(objrun), high
+int __cdecl hkpDefaultToiResourceMgr_resourcesDepleted()
 {
     return 1;
 }
@@ -1152,7 +1153,8 @@ class OBoxBV
 };
 
 // @fnv 0x00ea0ad0
-bool __cdecl FUN_00ea0ad0(float fTime, const OBoxBV& kBV0, const Point3& kV0, const OBoxBV& kBV1, const Point3& kV1)
+// pdb: NiBoxBV::BoxBoxTestIntersect | NiBoxBV.obj | fnv360_0822_retail, objrun + bridge(hash|objrun), high
+bool __cdecl NiBoxBV_BoxBoxTestIntersect(float fTime, const OBoxBV& kBV0, const Point3& kV0, const OBoxBV& kBV1, const Point3& kV1)
 {
     const OBox& kBox0 = kBV0.m_kBoundsBox;
     const OBox& kBox1 = kBV1.m_kBoundsBox;
@@ -1934,7 +1936,8 @@ static inline float AbsF(float f)
 
 // Checks if a sphere overlaps a box via axis projections, or if their velocities cause a collision within the given time step.
 // @fnv 0x00ea2030
-bool FUN_00ea2030(float fTime, const CenteredPointBounds* pBox, const void* pVel0, const SphereShape* pSphere, const void* pVel1)
+// pdb: NiBoxBV::BoxCapsuleTestIntersect | NiBoxBV.obj | fnv360_0822_retail, objrun + bridge(hash|objrun), high
+bool NiBoxBV_BoxCapsuleTestIntersect(float fTime, const CenteredPointBounds* pBox, const void* pVel0, const SphereShape* pSphere, const void* pVel1)
 {
     BoxPt d = pSphere->center - pBox->center;
 

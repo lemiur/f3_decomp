@@ -214,7 +214,7 @@ struct RegistryMethods
 };
 extern const char DAT_00e459d4[];
 extern RegistryMethods DAT_011693b0;
-int __cdecl FUN_009232c0(const char*, const char*);
+int __cdecl hkString_strCmp(const char*, const char*);
 static __declspec(noinline) void FUN_00e04cc0(TraverseNode* node, VisitMap* visited)
 {
     void* nodePtr = node;
@@ -224,7 +224,7 @@ static __declspec(noinline) void FUN_00e04cc0(TraverseNode* node, VisitMap* visi
     {
         map->FUN_00922710(nodePtr, flags | 4);
         NodeMethods* nodeView = (NodeMethods*)node;
-        if (FUN_009232c0(nodeView->FUN_009b0490(), DAT_00e459d4) == 0)
+        if (hkString_strCmp(nodeView->FUN_009b0490(), DAT_00e459d4) == 0)
         {
             char* member = nodeView->FUN_009b06b0(2);
             TypeDefinitionView* definition = DAT_011693b0.FUN_009b0650(4);

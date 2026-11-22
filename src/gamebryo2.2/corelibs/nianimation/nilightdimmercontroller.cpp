@@ -5,7 +5,8 @@
 extern "C" char __stdcall FUN_00a57c10(void* a);
 
 // @fnv 0x00a4cf50
-char __stdcall FUN_00a4cf50(void* pThis)
+// pdb: NiAlphaAccumulator::IsEqual | NiAlphaAccumulator.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun) + skyrim(caller_sim), high
+char __stdcall NiAlphaAccumulator_IsEqual(void* pThis)
 {
     return FUN_00a57c10(pThis) != 0;
 }
@@ -187,7 +188,7 @@ class NiLightDimmerControllerW
     {
         return ((m_uiObjectFlags >> 5) & 1) != 0;
     }
-    bool FUN_00a36250(float fTime);
+    bool NiTimeController_DontDoUpdate(float fTime);
     void UpdateDimmer(const float& fTime);
 };
 
@@ -200,7 +201,7 @@ void NiLightDimmerControllerW::UpdateDimmer(const float& fTime)
     {
         m_fControllerTime = DAT_01096324;
     }
-    else if (FUN_00a36250(fTime) && (!m_spControllerInterpolator || !m_spControllerInterpolator->AlwaysUpdate()))
+    else if (NiTimeController_DontDoUpdate(fTime) && (!m_spControllerInterpolator || !m_spControllerInterpolator->AlwaysUpdate()))
     {
         return;
     }

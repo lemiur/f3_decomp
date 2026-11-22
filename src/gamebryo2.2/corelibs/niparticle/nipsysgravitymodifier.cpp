@@ -305,7 +305,7 @@ struct S_00c236b0_Stream
     int unk248;
     S_00c236b0_BinaryStream* m_pUnderlyingStream;  // +24C
 
-    void FUN_00a645b0();
+    void NiStream_ReadLinkID();
 };
 
 template <class T> inline void S_00c236b0_StreamLoadBinary(S_00c236b0_Stream& kStream, T& value)
@@ -351,7 +351,7 @@ struct S_00c236b0_Obj : S_00c236b0_Base
 void S_00c236b0_Obj::LoadFromStream(S_00c236b0_Stream& kStream)
 {
     FUN_00c318b0(kStream);
-    kStream.FUN_00a645b0();
+    kStream.NiStream_ReadLinkID();
     m_1C.FUN_00a59be0(kStream);
     S_00c236b0_StreamLoadBinary(kStream, m_28);
     S_00c236b0_StreamLoadBinary(kStream, m_2C);
@@ -1059,7 +1059,8 @@ __declspec(noinline) void __fastcall FUN_00468d00(DirectVectorC22* point)
         point->x = point->y = point->z = 0.0f;
     }
 }
-__declspec(noinline) float __fastcall FUN_00432c00(DirectVectorC22* point)
+// pdb: NiPoint3::UnitizeGetLength | TES.obj | fnv360_0822_debug, call_seq + skyrim(caller), high
+__declspec(noinline) float __fastcall NiPoint3_UnitizeGetLength(DirectVectorC22* point)
 {
     float length = point->Length();
     if (length > 9.999999974752427e-07)
@@ -1336,7 +1337,7 @@ void EffectC22::FUN_00c22b70(float elapsed, EmitterC22* emitter)
 
                 vForceDirection.Z() = pForm.translation.Z() - y->z;
 
-                float fDecay = DecayExp((float)(-GetDecay() * FUN_00432c00(&vForceDirection)));
+                float fDecay = DecayExp((float)(-GetDecay() * NiPoint3_UnitizeGetLength(&vForceDirection)));
 
                 float s = fDecay * fSourceStrength * (elapsed - pParticle->GetActiveTime());
                 AddPoint4(pParticle->GetPosition(),vForceDirection * s);
@@ -1370,7 +1371,7 @@ void EffectC22::FUN_00c22b70(float elapsed, EmitterC22* emitter)
                 DirectVectorC22 z = pForm.translation - *y;
 
                 float fDecay;
-                fDecay = DecayExp((float)(-GetDecay() * FUN_00432c00(&z)));
+                fDecay = DecayExp((float)(-GetDecay() * NiPoint3_UnitizeGetLength(&z)));
 
                 pParticle->ApplyMotion(kIter * fDecay + vOffset, elapsed);
             }

@@ -496,7 +496,7 @@ struct ScratchGeometry {
     unsigned char useA, useB, specialShape, useD, useE;
     void FUN_00d54de0();
 };
-extern void* __cdecl FUN_00d54cd0(const void*, ScratchGeometry*, unsigned int);
+extern void* __cdecl hkpMoppUtility_buildCode(const void*, ScratchGeometry*, unsigned int);
 union Quaternion525 {
     __m128 value;
     char bytes[16]; // the real xmmintrin __m128 also overlays __int8 m128_i8[16]
@@ -1007,7 +1007,7 @@ struct InitializePathingRequestFromPosition {
 struct RefCountedObject {
     void FUN_00c905b0();
 };
-namespace fnvc_adapt { extern SourceGeometry* __cdecl FUN_00d54cd0(const void* attributes,
+namespace fnvc_adapt { extern SourceGeometry* __cdecl hkpMoppUtility_buildCode(const void* attributes,
                                               ScratchGeometry* scratch,
                                               unsigned int options); }
 extern int DAT_0102e368;
@@ -2816,7 +2816,7 @@ struct MotionData {
     __m128 orientation;
     __m128 direction;
 };
-struct ProxyHolder { const char* FUN_00cac950(); };
+struct ProxyHolder { const char* hkpCharacterProxy_getLinearVelocity(); };
 struct MotionController;
 struct MotionListener {
     virtual void slot00();
@@ -2829,7 +2829,7 @@ struct MotionListener {
     virtual void slot07();
     virtual void update(MotionController* controller);
 };
-struct ListenerTable { MotionListener* FUN_00cbc510(unsigned int index); };
+struct ListenerTable { MotionListener* hkpCharacterStateManager_getState(unsigned int index); };
 struct MotionVTable {
     void* slot00;
     void* slot01;
@@ -3263,7 +3263,7 @@ public:
     int unk30; int unk34; int unk38; int unk3c;
     CCEAE0Vector m_40;
 
-    void FUN_00c84df0(void* a1, CCEAE0Arg* a2);
+    void bhkShape_CopyMembers(void* a1, CCEAE0Arg* a2);
     void FUN_00cceae0(void* a1, CCEAE0Arg* a2);
 };
 
@@ -3497,7 +3497,7 @@ struct hkQuaternion
 __forceinline void copyRotation(const hkQuaternion& q) {*(QuadWords*)&m_vec=*(const QuadWords*)&q.m_vec;}
     void FUN_00c66320(const hkQuaternion& q0, const hkQuaternion& q1);
     __declspec(noalias) void FUN_005611c0();
-    void FUN_00cb2450(const IkVector4& axis, float angle);
+    void hkQuaternion_setAxisAngle(const IkVector4& axis, float angle);
     void FUN_00cdb910(float gain, const IkVector4& from, const IkVector4& to);
     void FUN_00c74ac0(const hkQuaternion& q0, const hkQuaternion& q1);
     void FUN_00cb2850(const hkQuaternion& q0, const hkQuaternion& q1, float t);

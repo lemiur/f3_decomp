@@ -19,7 +19,8 @@ struct BSFadeNode
 extern int DAT_0109ff64;
 
 // @fnv 0x00a93870
-void* __cdecl FUN_00a93870()
+// pdb: NiSwitchStringExtraData::CreateObject | NiSwitchStringExtraData.obj | fnv360_0822_retail, objrun + bridge(hash|objopen_prop), high
+void* __cdecl NiSwitchStringExtraData_CreateObject()
 {
     void* p = BSFadeNode::operator new(0x18);
     if (p)
@@ -359,7 +360,7 @@ struct NiStreamView
     {
         return *reinterpret_cast<NiBinaryStreamView**>(reinterpret_cast<char*>(this) + 0x250);
     }
-    void FUN_00a64160(unsigned int linkId);
+    void NiStream_SaveCString(unsigned int linkId);
 };
 
 struct NiExtraDataView
@@ -370,7 +371,7 @@ struct NiExtraDataView
     unsigned int m_uiNumEntries;
     unsigned int* m_pLinkIds;
     unsigned int m_uiNumLinkIds;
-    void FUN_00a7b2c0(NiStreamView& kStream);
+    void NiExtraData_SaveBinary(NiStreamView& kStream);
     void LoadFromStream(NiStreamView& kStream);
 };
 
@@ -387,10 +388,10 @@ template <class T> __forceinline void ReadBinaryValue(NiStreamView& kStream, T& 
 // @fnv 0x00a939d0
 void NiExtraDataView::LoadFromStream(NiStreamView& kStream)
 {
-    FUN_00a7b2c0(kStream);
+    NiExtraData_SaveBinary(kStream);
     ReadBinaryValue(kStream, m_uiNumEntries);
     for (unsigned int i = 0; i < m_uiNumEntries; ++i)
-        kStream.FUN_00a64160(m_pLinkIds[i]);
+        kStream.NiStream_SaveCString(m_pLinkIds[i]);
     ReadBinaryValue(kStream, m_uiNumLinkIds);
 }
 
@@ -462,7 +463,7 @@ class NiStreamA939
     int unk000[0x24c / 4];
     NiBinaryStreamA939* m_pUnderlyingStream;
 
-    void FUN_00a64ce0(NiObjectA939** ppkObject);
+    void NiStream_LoadCString(NiObjectA939** ppkObject);
 };
 
 class NiExtraDataA939
@@ -494,7 +495,7 @@ void LinkArrayExtraA939::FUN_00a93930(NiStreamA939& kStream)
     {
         m_ppkObjects = (NiObjectA939**)NiMalloc(m_uiCount * sizeof(NiObjectA939*));
         for (unsigned int i = 0; i < m_uiCount; i++)
-            kStream.FUN_00a64ce0(&m_ppkObjects[i]);
+            kStream.NiStream_LoadCString(&m_ppkObjects[i]);
     }
     else
     {

@@ -1043,7 +1043,8 @@ extern const char str_00e945c0[];
 extern const char str_00e945a8[];
 extern const char str_00e94584[];
 
-void FUN_00b55bb0()
+// pdb: BSShaderManager::GenerateNormalizationCubeMap | BSShaderManager.obj | fnv360_0822_retail, ustr + bridge(ustr|ustr) + skyrim(ustr), high
+void BSShaderManager_GenerateNormalizationCubeMap()
 {
 
     NiPixelData* faceData;

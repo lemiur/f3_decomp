@@ -39,11 +39,11 @@ struct D338e0Local
     int field18;
     int field1C;
 };
-extern "C" void __cdecl FUN_00da48e0(int*, D338e0Local*);
+extern "C" void __cdecl hkAgent1nMachine_UpdateShapeCollectionFilter(int*, D338e0Local*);
 inline void D338e0Dispatch(D338e0Local* local, int* ownerField, int result)
 {
     local->field0C = result;
-    FUN_00da48e0(ownerField, local);
+    hkAgent1nMachine_UpdateShapeCollectionFilter(ownerField, local);
 }
 struct hkAllocatorD33D
 {
@@ -529,8 +529,8 @@ struct Rec12
 void FUN_00d33670(void* a);
 void FUN_00d33600(void* a, void* b, void* c, void* d);
 void* FUN_00cb22f0(void* a, void* b);
-void FUN_00d33850(void* a);
-void FUN_00d33ef0(void* a);
+void hkpConvexListAgent_switchToGskMode(void* a);
+void hkpConvexListAgent_switchToStreamMode(void* a);
 void FUN_00d42020(void* a, void* b, void* c, void* d);
 struct AddressValue
 {
@@ -601,13 +601,13 @@ struct Agent
     char m_84;
     char m_85;
     short m_86;
-    void __thiscall FUN_00d33850(void*);
-    void __thiscall FUN_00d33ef0(void*);
+    void __thiscall hkpConvexListAgent_switchToGskMode(void*);
+    void __thiscall hkpConvexListAgent_switchToStreamMode(void*);
     void __thiscall FUN_00d42020(const Shape&, const Shape&, const Arg3&, Arg4&);
     __forceinline void processCached(const Shape&, const Shape&, const Arg3&, Arg4&, const Vec4&, Workspace&, StackObj&,
                                      ScalarScratch&, bool&);
     void streamCollision(const Shape&, const Shape&, const Arg3&, Arg4&, const Vec4&, ShapeHead*);
-    void __thiscall FUN_00d33f40(const Shape& a, const Shape& b, const Arg3& c, Arg4& d);
+    void __thiscall hkpConvexListAgent_processCollision(const Shape& a, const Shape& b, const Arg3& c, Arg4& d);
 };
 
 __forceinline void projectDistance(Vec4& normal, const Vec4& vec)
@@ -749,7 +749,7 @@ __forceinline void Agent::processCached(const Shape& a, const Shape& b, const Ar
                 return;
         }
         ws.FUN_00d33600(a, b, d, m_08);
-        FUN_00d33ef0(d.m_04);
+        hkpConvexListAgent_switchToStreamMode(d.m_04);
         retry = true;
         return;
     }
@@ -882,7 +882,8 @@ static __forceinline bool cachedFO(Agent* self,const Shape& a,const Shape& b,con
  }
 }
 }
-void __thiscall Agent::FUN_00d33f40(const Shape& a,const Shape& b,const Arg3& c,Arg4& d) {
+// pdb: hkpConvexListAgent::processCollision | hkpConvexListAgent.obj | fnv360_0822_retail, vtable_prefix + bridge(vtable_prefix|vtable) + skyrim(vtable_prefix), high
+void __thiscall Agent::hkpConvexListAgent_processCollision(const Shape& a,const Shape& b,const Arg3& c,Arg4& d) {
  Workspace ws;
  n9bdcf0::BigFO big;
  CollObj co;

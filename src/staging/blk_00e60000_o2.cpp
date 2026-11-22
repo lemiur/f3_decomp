@@ -212,7 +212,8 @@ D3DRenderStateGroup* DAT_0126f718;
 NiD3DRenderStateEntry* DAT_0126f71c;
 // Allocates two 0x18-byte structures, zeroes their four pointers, sets their a/b fields to 8 and 0x10, and stores them in DAT_0126f718 and DAT_0126f71c.
 // @fnv 0x00e7f2b0
-void __cdecl FUN_00e7f2b0()
+// pdb: NiD3DRenderStateGroup::InitializePools | NiD3DRenderStateGroup.obj | fnv360_0822_retail, udata + bridge(hash|objrun), high
+void __cdecl NiD3DRenderStateGroup_InitializePools()
 {
     D3DRenderStateGroup* p =
         static_cast<D3DRenderStateGroup*>(reinterpret_cast<P03MM*>(&g_memoryManager)->Allocate(0x18));
@@ -8720,7 +8721,7 @@ struct File1871
     virtual void Unk10();
     virtual void Unk14();
     virtual unsigned int GetFileSize();
-    unsigned int FUN_0048be50(void* pvBuffer, unsigned int uiBytes);
+    unsigned int NiBinaryStream_Read(void* pvBuffer, unsigned int uiBytes);
 };
 struct Filename1871
 {
@@ -8792,7 +8793,7 @@ bool NiDX9SourceTextureDataQ::LoadFromFilename(const char* pcFilename, NiDX9Rend
         }
 
         unsigned char* pucBuffer = (unsigned char*)FUN_00aa1070(uiSize);
-        pkFile->FUN_0048be50(pucBuffer, uiSize);
+        pkFile->NiBinaryStream_Read(pucBuffer, uiSize);
         pkFile->Release(1);
 
         if (FUN_00c2087a(pucBuffer, uiSize, &info) < 0)

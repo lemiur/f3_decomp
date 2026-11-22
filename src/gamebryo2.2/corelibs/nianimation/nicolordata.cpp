@@ -95,11 +95,12 @@ extern bool(__cdecl* DAT_011f3b28[])(ColorAnimationKey*, ColorAnimationKey*);
 
 struct FUN_00a3d190_shell : public NiColorData
 {
-    bool FUN_00a3d190(NiColorData* other);
+    bool NiColorData_IsEqual(NiColorData* other);
 };
 
 // @fnv 0x00a3d190
-bool FUN_00a3d190_shell::FUN_00a3d190(NiColorData* other)
+// pdb: NiColorData::IsEqual | NiColorData.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(udata), high
+bool FUN_00a3d190_shell::NiColorData_IsEqual(NiColorData* other)
 {
     if (!IsSameAs(other))
         return false;
@@ -329,12 +330,13 @@ class NiColorDataA3D : public NiObjectA3D
 {
   public:
     void SetColorKeys(NiColorKeyA3D* pkKeys, unsigned int uiNumKeys, KeyTypeA3D eType);
-    void FUN_00a3d370(A3D370Stream& kStream);
+    void NiColorData_LoadBinary(A3D370Stream& kStream);
 };
 
 // Loads the base object, reads the key count, and if nonzero reads the key type and creates and stores the color keys via the matching create function.
 // @fnv 0x00a3d370
-void NiColorDataA3D::FUN_00a3d370(A3D370Stream& kStream)
+// pdb: NiColorData::LoadBinary | NiColorData.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(udata), high
+void NiColorDataA3D::NiColorData_LoadBinary(A3D370Stream& kStream)
 {
     NiObjectA3D::LoadBinary(kStream);
 

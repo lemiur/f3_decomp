@@ -793,7 +793,7 @@ void __cdecl FUN_00cfe020(void* track, hkpAgentNnEntryCFEA* entry);
 // @f3 0x00999390 (community match, verified in this file)
 void __cdecl FUN_00cfea30(void* track, hkpAgentNnEntryCFEA* entry, hkpCollisionDispatcherCFEA* dispatch, void* constraintOwner)
 {
-    void __cdecl FUN_00901fb0(void* array, int elemSize, void* storage, int newCapacity);
+    void __cdecl hkArrayUtil__reduce(void* array, int elemSize, void* storage, int newCapacity);
     switch (entry->m_ucAgentType)
     {
     case 2:
@@ -826,7 +826,7 @@ void __cdecl FUN_00cfea30(void* track, hkpAgentNnEntryCFEA* entry, hkpCollisionD
             int totalSize = in + 1;
             if (totalSize <= (entries.m_iCapacityState & 0x3fffffff))
             {
-                FUN_00901fb0(&entries, sizeof(hkpCollisionEntryCFEA), 0, totalSize);
+                hkArrayUtil__reduce(&entries, sizeof(hkpCollisionEntryCFEA), 0, totalSize);
             }
         }
     }
@@ -929,7 +929,7 @@ void __cdecl CloneRecord(hkpAgentNnTrackCFF2* track, hkpAgentNnEntryCFF2* entry)
 
 extern unsigned int DAT_010f3170;
 extern "C" void _ReadWriteBarrier(void);
-void __cdecl FUN_00901fb0(hkSectorArrayCFF2* array, int elemSize, void* storage, int newCapacity);
+void __cdecl hkArrayUtil__reduce(hkSectorArrayCFF2* array, int elemSize, void* storage, int newCapacity);
 struct hkMemoryAllocatorCFF2F3
 {
     void __thiscall FUN_008f6d90(void* block, int size, int tag);
@@ -965,9 +965,9 @@ void __cdecl FUN_00cff290(hkpAgentNnTrackCFF2* track, hkpAgentNnTrackCFF2* appen
         {
             int newCapacity = hkNextPowerOf2CFF2(sectors->m_iElementCount + 4);
             if (newCapacity < 1)
-                FUN_00901fb0(sectors, sizeof(hkpAgentNnSectorCFF2*), sectors->m_kStorage, 1);
+                hkArrayUtil__reduce(sectors, sizeof(hkpAgentNnSectorCFF2*), sectors->m_kStorage, 1);
             else if (newCapacity < sectors->getCapacity())
-                FUN_00901fb0(sectors, sizeof(hkpAgentNnSectorCFF2*), 0, newCapacity);
+                hkArrayUtil__reduce(sectors, sizeof(hkpAgentNnSectorCFF2*), 0, newCapacity);
         }
     }
 
@@ -1151,7 +1151,7 @@ struct S_cfe020_Pool
 #include <windows.h>
 
 extern unsigned int DAT_010f3170;
-void __cdecl FUN_00901fb0(S_cfe020_Blocks* array, int elemSize, void* storage, int newCapacity);
+void __cdecl hkArrayUtil__reduce(S_cfe020_Blocks* array, int elemSize, void* storage, int newCapacity);
 
 struct S_cfe020_OwnerFix
 {
@@ -1216,11 +1216,11 @@ void FUN_00cfe020(S_cfe020_Pool* pool, S_cfe020_Entry* dest)
         int newCap = n + 1;
         if (newCap < 1)
         {
-            FUN_00901fb0(blocks, sizeof(char*), &blocks->local, 1);
+            hkArrayUtil__reduce(blocks, sizeof(char*), &blocks->local, 1);
         }
         else if (newCap < (blocks->cap & 0x3fffffff))
         {
-            FUN_00901fb0(blocks, sizeof(char*), 0, newCap);
+            hkArrayUtil__reduce(blocks, sizeof(char*), 0, newCap);
         }
     }
 }
@@ -1443,13 +1443,13 @@ struct Task1440Input
     ValueWrapper<void*> manager;
     Transform relative;
 };
-void __cdecl FUN_00976cd0(const SweptPose&, float, Transform&);
+void __cdecl hkSweptTransformUtil_lerp2(const SweptPose&, float, Transform&);
 static __declspec(noinline) void FUN_00cfde10(PairInput& rawOut, PairInput& rawIn, PairTemporary& temp)
 {
     Task1440Input& out = reinterpret_cast<Task1440Input&>(rawOut);
     Task1440Input& in = reinterpret_cast<Task1440Input&>(rawIn);
-    FUN_00976cd0(in.bodyA->GetMotionState()->getSweptTransform(), in.context->step.start, temp.ta);
-    FUN_00976cd0(in.bodyB->GetMotionState()->getSweptTransform(), in.context->step.start, temp.tb);
+    hkSweptTransformUtil_lerp2(in.bodyA->GetMotionState()->getSweptTransform(), in.context->step.start, temp.ta);
+    hkSweptTransformUtil_lerp2(in.bodyB->GetMotionState()->getSweptTransform(), in.context->step.start, temp.tb);
     out.bodyA = &temp.a;
     out.bodyB = &temp.b;
     out.manager = in.manager;

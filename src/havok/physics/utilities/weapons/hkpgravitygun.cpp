@@ -48,7 +48,7 @@ class FUN_00e46300 : public FUN_00e466a0
 
     FUN_00e46300(hkFinishLoadedObjectFlagE463 flag);
     void finishLoadedObject(hkFinishLoadedObjectFlagE463 flag);
-    void FUN_00448cc0();
+    void TESFile_GetTESForm();
     virtual ~FUN_00e46300();
 };
 
@@ -123,7 +123,7 @@ void FUN_00e46300::finishLoadedObject(hkFinishLoadedObjectFlagE463 flag)
     s->f26c = 0;
     memset(&s->v240, 0, 24);
     if (flag.m_bFinishing)
-        FUN_00448cc0();
+        TESFile_GetTESForm();
 }
 
 

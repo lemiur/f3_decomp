@@ -172,8 +172,8 @@ class hkTargetCD0E
 class hkControllerCD0E
 {
   public:
-    void FUN_00d60960(int mode);
-    void FUN_00d605d0(unsigned int flags);
+    void hkOArchive_write32u(int mode);
+    void hkOArchive_write8u(unsigned int flags);
     void HashUInt(float t);
     hkTargetCD0E* FUN_00d60800();
 };

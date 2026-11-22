@@ -2112,8 +2112,8 @@ public:
  unsigned unk24;
  unsigned unk28;
  bool valid;
- void FUN_0048be50(void*,unsigned);
- void ReadBytes(void* p,unsigned n) { FUN_0048be50(p,n); }
+ void NiBinaryStream_Read(void*,unsigned);
+ void ReadBytes(void* p,unsigned n) { NiBinaryStream_Read(p,n); }
 };
 struct ShaderBufferRecord {};
 struct CacheEntryView {
@@ -12566,7 +12566,7 @@ struct PShader
 
 
     virtual void fallback(PGeom*, int, unsigned short*, int, PRenderer*, unsigned char);
-    void FUN_00b61a20(PGeom*, int, unsigned short*, int, PRenderer*, unsigned char);
+    void BSShaderPPLightingProperty_GetRenderPasses_2x(PGeom*, int, unsigned short*, int, PRenderer*, unsigned char);
     bool IsKindOf(const RuntimeType* wanted) const {for(const RuntimeType* t=GetType();t;t=t->parent)if(t==wanted)return true;return false;}
 PShader* CastTo(const RuntimeType* wanted){return IsKindOf(wanted)?this:0;}
     bool FUN_00468ec0(unsigned int);
@@ -12637,7 +12637,8 @@ extern RuntimeType DAT_01176520, DAT_0117826c, DAT_01176508;
 PContext* __cdecl FUN_00ad5a50();
 bool __cdecl FUN_00530bb0();
 
-void PShader::FUN_00b61a20(PGeom* geom, int renderFlags, unsigned short* count, int mode, PRenderer* renderer,
+// pdb: BSShaderPPLightingProperty::GetRenderPasses_2x | BSShaderPPLightingProperty_Passes_2x.obj | fnv360_0721_beta, udata + bridge(caller_sim|caller_sim), high
+void PShader::BSShaderPPLightingProperty_GetRenderPasses_2x(PGeom* geom, int renderFlags, unsigned short* count, int mode, PRenderer* renderer,
                            unsigned char passMode)
 {
     bool diffusePass = (flags & 1) > 0;

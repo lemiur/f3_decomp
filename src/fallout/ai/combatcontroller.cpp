@@ -3592,7 +3592,7 @@ struct CombatStand
     int unk144, unk148;
     void LoadPackage(LoadBufferStand*);
     void LoadCombatProcedure(ProcedureStand**, LoadBufferStand*);
-    void FUN_00981d00(LoadBufferStand*);
+    void hkpMultiThreadedSimulation_MtEntityEntityBroadPhaseListener_removeCollisionPair(LoadBufferStand*);
 };
 }  // namespace fnv_00981d00
 

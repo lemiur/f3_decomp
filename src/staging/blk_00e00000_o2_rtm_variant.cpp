@@ -2455,11 +2455,12 @@ struct SortedList
     int unk04;
     SortItem** ppItems;
 
-    void FUN_00e09670(SortItem* apItem);
+    void hkpMoppDefaultSplitter_hkpMoppMaxList_addElement(SortItem* apItem);
 };
 
 // @fnv 0x00e09670
-void SortedList::FUN_00e09670(SortItem* apItem)
+// pdb: hkpMoppDefaultSplitter::hkpMoppMaxList::addElement | hkpMoppDefaultSplitter.obj | fnv360_0822_retail, call_gap_sim + bridge(call_seq|callee_sim) + skyrim(call_seq), high
+void SortedList::hkpMoppDefaultSplitter_hkpMoppMaxList_addElement(SortItem* apItem)
 {
     float fPriority = apItem->fPriority;
     int i;

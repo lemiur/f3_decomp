@@ -46,7 +46,7 @@ void __thiscall hkBsdSocket::Destroy()
 }
 
 extern "C" void __cdecl FUN_00d2b850(void);
-extern "C" void __cdecl FUN_00da2de0(void*);
+extern "C" void __cdecl hkBsdSocket_createSocket(void*);
 extern int DAT_010d5030;
 
 struct FUN_00da30a0_cls
@@ -54,11 +54,11 @@ struct FUN_00da30a0_cls
     void* m_vft;
     char m_auiShapeKeys[28];
     int m_field_0x20;
-    void FUN_00da2de0();
+    void hkBsdSocket_createSocket();
     void* __thiscall InitWithParam(int param);
 };
 
-// Calls FUN_00d2b850, sets the vtable to DAT_010d5030 and m_field_0x20 to param, calls FUN_00da2de0 if param is -1, and returns this.
+// Calls FUN_00d2b850, sets the vtable to DAT_010d5030 and m_field_0x20 to param, calls hkBsdSocket_createSocket if param is -1, and returns this.
 // @fnv 0x00da30a0
 void* __thiscall FUN_00da30a0_cls::InitWithParam(int param)
 {
@@ -66,7 +66,7 @@ void* __thiscall FUN_00da30a0_cls::InitWithParam(int param)
     m_vft = &DAT_010d5030;
     m_field_0x20 = param;
     if (param == -1)
-        FUN_00da2de0();
+        hkBsdSocket_createSocket();
     return this;
 }
 
@@ -74,11 +74,12 @@ struct FUN_00da2db0_cls
 {
     char m_auiShapeKeys[0x20];
     int m_pSocket;
-    bool* __thiscall FUN_00da2db0(bool* pOut);
+    bool* __thiscall hkBsdSocket_isOk(bool* pOut);
 };
 
 // @fnv 0x00da2db0
-bool* FUN_00da2db0_cls::FUN_00da2db0(bool* pOut)
+// pdb: hkBsdSocket::isOk | hkBsdSocket.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(objrun_open), high
+bool* FUN_00da2db0_cls::hkBsdSocket_isOk(bool* pOut)
 {
     *pOut = (m_pSocket != -1);
     return pOut;
@@ -92,11 +93,12 @@ struct FUN_00da2e60_cls
     void* m_vft;  // +0x00
     char m_auiShapeKeys[0x1c];
     int m_pSocket;  // +0x20
-    int FUN_00da2e60(int, int);
+    int hkBsdSocket_write(int, int);
 };
 
 // @fnv 0x00da2e60
-int FUN_00da2e60_cls::FUN_00da2e60(int a, int b)
+// pdb: hkBsdSocket::write | hkBsdSocket.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(objrun), high
+int FUN_00da2e60_cls::hkBsdSocket_write(int a, int b)
 {
     int r;
     if (m_pSocket != -1)
@@ -127,11 +129,12 @@ struct FUN_00da2de0_class
     char m_auiShapeKeys[0x1c];
     int m_pSocket;
 
-    int FUN_00da2de0();
+    int hkBsdSocket_createSocket();
 };
 
 // @fnv 0x00da2de0
-int FUN_00da2de0_class::FUN_00da2de0()
+// pdb: hkBsdSocket::createSocket | hkBsdSocket.obj | fnv360_0721_beta, objrun + bridge(hash|objrun) + skyrim(hash), high
+int FUN_00da2de0_class::hkBsdSocket_createSocket()
 {
     this->f4();
 
@@ -333,13 +336,14 @@ struct SocketConnector
     int unk18;
     int unk1c;
     int socket;
-    int FUN_00da2de0();
-    int FUN_00da2ec0(const char* host, int port);
+    int hkBsdSocket_createSocket();
+    int hkBsdSocket_connect(const char* host, int port);
 };
 
 // Resolves the host to an IPv4 address, ensures a socket exists, and calls the connection routine with the address and port.
 // @fnv 0x00da2ec0
-int SocketConnector::FUN_00da2ec0(const char* host, int port)
+// pdb: hkBsdSocket::connect | hkBsdSocket.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(caller_sim), high
+int SocketConnector::hkBsdSocket_connect(const char* host, int port)
 {
     IPv4SocketAddress target;
     FUN_00cb1280(&target, 0, sizeof(target));
@@ -358,7 +362,7 @@ int SocketConnector::FUN_00da2ec0(const char* host, int port)
         FUN_00cb1260(&target.address, pHostEntry->addresses[0], pHostEntry->address_length);
     }
 
-    if (socket == -1 && FUN_00da2de0())
+    if (socket == -1 && hkBsdSocket_createSocket())
         return 1;
     int iResult = FUN_00ee6d62(socket, &target, sizeof(target));
     if (iResult != -1)
@@ -449,8 +453,8 @@ class hkBsdSocketDA30
     int m_1c;
     unsigned int m_pSocket;
 
-    int FUN_00da2de0() throw();
-    int FUN_00da30d0(int iPort) throw();
+    int hkBsdSocket_createSocket() throw();
+    int hkBsdSocket_listen(int iPort) throw();
 };
 
 // Binds the socket to the given port, sets it to listen with backlog 2, and logs the host name and port.
@@ -481,8 +485,9 @@ struct Report573 {
     Report573& FUN_009437d0(int);
     void FUN_00943a60();
 };
-int hkBsdSocketDA30::FUN_00da30d0(int port) throw(){
-    if(FUN_00da2de0()!=0)return 1;
+// pdb: hkBsdSocket::listen | hkBsdSocket.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(ustr), high
+int hkBsdSocketDA30::hkBsdSocket_listen(int port) throw(){
+    if(hkBsdSocket_createSocket()!=0)return 1;
     sockaddr_inDA30 address;
     address.sin_family=2;address.sin_addr=0;address.sin_port=FUN_00ee6d74(port);
     int on=1;

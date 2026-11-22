@@ -100,7 +100,7 @@ void NiBinaryExtraData::FUN_00a7f9a0(NiStream& stream)
 }
 
 namespace fnv_00a7fa20 {
-// FUN_00a7fa20 - NiBinaryExtraData::SaveBinary (vtable slot 22 of
+// NiBinaryExtraData_SaveBinary - NiBinaryExtraData::SaveBinary (vtable slot 22 of
 // NiBinaryExtraData, overriding NiExtraData::SaveBinary).
 //
 //   this  : the extra-data object
@@ -282,14 +282,15 @@ struct NiBinaryExtraData
     void* unk08;
     void* unk0c;         // the payload pointer
     unsigned int unk10;  // the payload size
-    void FUN_00a7b2c0(NiStreamLike* s);
-    void FUN_00a7fa20(NiStreamLike* s);
+    void NiExtraData_SaveBinary(NiStreamLike* s);
+    void NiBinaryExtraData_SaveBinary(NiStreamLike* s);
 };
 
 // @fnv 0x00a7fa20
-void NiBinaryExtraData::FUN_00a7fa20(NiStreamLike* apStream)
+// pdb: NiBinaryExtraData::SaveBinary | NiBinaryExtraData.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(caller_sim), high
+void NiBinaryExtraData::NiBinaryExtraData_SaveBinary(NiStreamLike* apStream)
 {
-    this->FUN_00a7b2c0(apStream);
+    this->NiExtraData_SaveBinary(apStream);
     FadeNode* node = apStream->unk250;
     {
         int flag = 4;
@@ -431,7 +432,7 @@ class A7F920BinaryExtraData : public A7F920ExtraData
     }
     virtual void vfunc00();
 
-    A7F920ExtraData* FUN_00a7f920(CloningProcess& kCloning);
+    A7F920ExtraData* NiBinaryExtraData_CreateClone(CloningProcess& kCloning);
 
     char* m_pByteBuffer;
     unsigned int m_uiSize;
@@ -439,7 +440,8 @@ class A7F920BinaryExtraData : public A7F920ExtraData
 
 // Creates a new A7F920BinaryExtraData, copies member data, and duplicates the byte buffer when m_uiSize is non-zero.
 // @fnv 0x00a7f920
-A7F920ExtraData* A7F920BinaryExtraData::FUN_00a7f920(CloningProcess& kCloning)
+// pdb: NiBinaryExtraData::CreateClone | NiBinaryExtraData.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(caller_sim), high
+A7F920ExtraData* A7F920BinaryExtraData::NiBinaryExtraData_CreateClone(CloningProcess& kCloning)
 {
     A7F920BinaryExtraData* pkClone = new A7F920BinaryExtraData;
     CopyMemberData(pkClone, kCloning);

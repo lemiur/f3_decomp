@@ -272,7 +272,8 @@ struct S_00cc10b0_WorldF3
     int m_74;
 };
 void __cdecl FUN_00999390(int* p, S_00cc10b0_Agent* agent, int w, S_00cc10b0_Island* island);
-void __cdecl FUN_00cc10b0(S_00cc10b0_Agent* agent)
+// pdb: hkpWorldAgentUtil::removeAgent | hkpWorldAgentUtil.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_seq), high
+void __cdecl hkpWorldAgentUtil_removeAgent(S_00cc10b0_Agent* agent)
 {
     S_00cc10b0_EntityF3* entityA = (S_00cc10b0_EntityF3*)agent->m_pCollidableA->getOwner();
     S_00cc10b0_Island* islandA = entityA->m_pCurrentSimulationIsland;
@@ -399,8 +400,8 @@ struct Owner
     int unk0c;
     Root* root;
 };
-void __cdecl FUN_00cc10b0(Owner* owner);
-// Calls Invoke on the interface object reached through root's displacement-indexed entry, then calls FUN_00cc10b0.
+void __cdecl hkpWorldAgentUtil_removeAgent(Owner* owner);
+// Calls Invoke on the interface object reached through root's displacement-indexed entry, then calls hkpWorldAgentUtil_removeAgent.
 // @f3 0x009447d0 (community match, verified in this file)
 void __cdecl FUN_00944730(Owner* owner);
 
@@ -559,14 +560,14 @@ struct ItemOwner
 
 // @f3 0x007a6d70 (community match, verified in this file)
 struct ItemOwner;
-struct Call7a6d70 { void FUN_0079fc80(void* item, int n); };
+struct Call7a6d70 { void CombatGroup_SetMemberGroupStrategyAssignment(void* item, int n); };
 struct Ent7a6d70 { int key; void* item; };
 struct Ctx7a6d70 { char pad[0x1c]; Ent7a6d70* entries; int count; };
 void __stdcall FUN_00cc0ea0(ItemOwner* pOwner, void* pContext)
 {
     Ctx7a6d70* c = (Ctx7a6d70*)pContext;
     for (int i = 0; i < c->count; ++i)
-        ((Call7a6d70*)pOwner)->FUN_0079fc80(c->entries[i].item, 4);
+        ((Call7a6d70*)pOwner)->CombatGroup_SetMemberGroupStrategyAssignment(c->entries[i].item, 4);
 }
 
 

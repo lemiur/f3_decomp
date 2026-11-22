@@ -27,9 +27,10 @@ class CleanupObject237 { public: void FUN_0082b560(); };
 class CleanupContext237 {
 public:
     void FUN_0085ac70(CleanupObject237* object);
-    void FUN_00862c60(CleanupObject237* object);
+    void NiParticleMeshesData_LoadBinary(CleanupObject237* object);
 };
-void CleanupContext237::FUN_00862c60(CleanupObject237* object) {
+// pdb: NiParticleMeshesData::LoadBinary | NiParticleMeshesData.obj | fnv360_0822_retail, caller_sim + skyrim(caller_sim), high
+void CleanupContext237::NiParticleMeshesData_LoadBinary(CleanupObject237* object) {
     FUN_0085ac70(object);
     object->FUN_0082b560();
 }
@@ -1863,7 +1864,8 @@ struct NormalizedStream {
     unsigned char* dest;
 };
 // @fnv 0x00e79b40
-unsigned __cdecl FUN_0087d880(NormalizedStream* pStream) {
+// pdb: NiD3DShaderDeclaration::Pack_UnsignedByteToFloat | NiD3DShaderDeclaration.obj | fnv360_0822_retail, objrun + skyrim(objrun_open), high
+unsigned __cdecl NiD3DShaderDeclaration_Pack_UnsignedByteToFloat(NormalizedStream* pStream) {
     unsigned a = 0;
     unsigned char* src = pStream->source;
     unsigned short* indices = pStream->indices;
@@ -1990,9 +1992,10 @@ struct Owner {
     int unk24;
     int unk28;
     unsigned char active;
-    void FUN_0086cf00();
+    void BSThread_Close();
 };
-void Owner::FUN_0086cf00() {
+// pdb: BSThread::Close | BSThread_Xenon.obj | fnv360_0822_retail, objrun + bridge(call_gap|objopen_prop), high
+void Owner::BSThread_Close() {
     if (handle) {
         active = 0;
         fnv_EnterCriticalSection(&unk04);
@@ -3205,7 +3208,7 @@ struct Manager {
  int unk0f8;
  int unk0fc;
  Heap* defaultHeap;
- Heap* FUN_0086b7d0(void*);
+ Heap* MemoryManager_GetHeapForPointer(void*);
  void FUN_0086ba60(void* p);
 };
 void Manager::FUN_0086ba60(void* p) {
@@ -3214,7 +3217,7 @@ void Manager::FUN_0086ba60(void* p) {
  if (!defaultHeap) { FUN_00c064b8(p); return; }
  Pool* pool = DAT_01090be0[(unsigned int)p >> 24];
  if (pool && pool->FUN_0086b870(p)) { pool->FUN_0086d930(p); return; }
- Heap* heap = FUN_0086b7d0(p);
+ Heap* heap = MemoryManager_GetHeapForPointer(p);
  if (heap) heap->Free(p,0);
  else FUN_00c064b8(p);
 }
@@ -3362,8 +3365,8 @@ virtual void v6();
 virtual void v7();
 virtual void v8();
 virtual unsigned int Query(unsigned int,int);
-};unsigned int __cdecl FUN_00c067da(unsigned int);struct Owner302{Region302* FUN_0086b7d0(unsigned int);Region302* FUN_0086b820(unsigned int);unsigned int FUN_0086b8c0(unsigned int);};
-unsigned int Owner302::FUN_0086b8c0(unsigned int address){Cache302*cached=DAT_01090be0[address>>24];if(cached&&address>=cached->base&&address<cached->base+cached->length)return cached->value;Region302*region=FUN_0086b7d0(address);if(!region)region=FUN_0086b820(address);if(region)return region->Query(address,0);return FUN_00c067da(address);}
+};unsigned int __cdecl FUN_00c067da(unsigned int);struct Owner302{Region302* MemoryManager_GetHeapForPointer(unsigned int);Region302* MemoryManager_GetHeapForPhysicalPointer(unsigned int);unsigned int FUN_0086b8c0(unsigned int);};
+unsigned int Owner302::FUN_0086b8c0(unsigned int address){Cache302*cached=DAT_01090be0[address>>24];if(cached&&address>=cached->base&&address<cached->base+cached->length)return cached->value;Region302*region=MemoryManager_GetHeapForPointer(address);if(!region)region=MemoryManager_GetHeapForPhysicalPointer(address);if(region)return region->Query(address,0);return FUN_00c067da(address);}
 }
 }   // namespace f3m_0086b8c0
 
@@ -3500,7 +3503,8 @@ extern "C" __declspec(dllimport) void* __stdcall VirtualAlloc(void*, unsigned in
 namespace task0858 {
 struct MemoryManager { int FUN_006e2080(unsigned int,int,bool*); };
 extern MemoryManager DAT_01090a78;
-char* __stdcall FUN_0086c6a0(unsigned int initialSize) {
+// pdb: ScrapHeapManager::AllocateBuffer | ScrapHeap.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+char* __stdcall ScrapHeapManager_AllocateBuffer(unsigned int initialSize) {
  char* buffer=(char*)VirtualAlloc(0,0x400000u,0x2000u,4);
  int memoryPass=0;
  while(!(bool)(int)(VirtualAlloc(buffer,initialSize,0x1000u,4)!=0)) {
@@ -4476,9 +4480,10 @@ struct TimeScale901 {
     float scaledValue;
     unsigned int unk10, unk14;
     bool useGlobal;
-    void FUN_0086c220(float mult, bool now);
+    void BSTimer_SetGlobalTimeMultiplier(float mult, bool now);
 };
-void TimeScale901::FUN_0086c220(float mult, bool now)
+// pdb: BSTimer::SetGlobalTimeMultiplier | BSTimer.obj | fnv360_0822_retail, call_dedup + bridge(call_gap|call_gap) + skyrim(objrun_prop), high
+void TimeScale901::BSTimer_SetGlobalTimeMultiplier(float mult, bool now)
 {
     bool global = useGlobal;
     if (global) {
@@ -4568,9 +4573,10 @@ struct Allocator {
  int unk10c;
  int unk110;
  Pool** pools;
- Pool* FUN_0086b820(void*);
+ Pool* MemoryManager_GetHeapForPhysicalPointer(void*);
 };
-Pool* Allocator::FUN_0086b820(void* memory) {
+// pdb: MemoryManager::GetHeapForPhysicalPointer | MemoryManager.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_seq), high
+Pool* Allocator::MemoryManager_GetHeapForPhysicalPointer(void* memory) {
  Pool* found=0;
  for(unsigned short i=0;i<count && !found;i++) {
   if(pools[i]->Contains(memory)) found=pools[i];
@@ -4640,10 +4646,11 @@ struct FUN_00aa45a0_Class
     unsigned short m_uiItemCount;
     unsigned int m_unknown;
     FUN_00aa45a0_vt** m_items;
-    FUN_00aa45a0_vt* __thiscall FUN_0086b7d0(int arg);
+    FUN_00aa45a0_vt* __thiscall MemoryManager_GetHeapForPointer(int arg);
 };
 // @fnv 0x00aa45a0
-FUN_00aa45a0_vt* FUN_00aa45a0_Class::FUN_0086b7d0(int arg)
+// pdb: MemoryManager::GetHeapForPointer | MemoryManager.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_seq), high
+FUN_00aa45a0_vt* FUN_00aa45a0_Class::MemoryManager_GetHeapForPointer(int arg)
 {
     for (unsigned short i = 0; i < m_uiItemCount; ++i)
     {
@@ -4823,7 +4830,8 @@ extern "C" __declspec(dllimport) void* __stdcall VirtualAlloc(void*,unsigned lon
 namespace Task0874 {
 struct Manager {int FUN_006e2080(int,int,bool*);};
 extern Manager DAT_01090a78;
-void __stdcall FUN_0086c640(char* buffer,unsigned int size,unsigned int additional) {
+// pdb: ScrapHeapManager::ExpandBuffer | ScrapHeap.obj | fnv360_0822_retail, call_seq + bridge(caller|call_gap) + skyrim(callee_sim), high
+void __stdcall ScrapHeapManager_ExpandBuffer(char* buffer,unsigned int size,unsigned int additional) {
  int pass=0;
  while(!VirtualAlloc(buffer+size,additional,0x1000,4)) {
   bool allow=true;
@@ -5769,10 +5777,11 @@ struct ScrapHeap {
     char* m_top;
     char* m_end;
     ScrapBlock* m_last;
-    void FUN_0086c7b0(void* memory);
+    void ScrapHeap_Deallocate(void* memory);
 };
 
-void ScrapHeap::FUN_0086c7b0(void* memory)
+// pdb: ScrapHeap::Deallocate | ScrapHeap.obj | fnv360_0822_retail, call_seq + skyrim(call_seq), high
+void ScrapHeap::ScrapHeap_Deallocate(void* memory)
 {
     if (!memory)
         return;
@@ -6167,8 +6176,8 @@ public:
     unsigned int cachedBytes;
     unsigned int unk208,unk20C,unk210,unk214,unk218,unk21C;
     RecursiveLock lock;
-    void* FUN_0086c6a0(unsigned int bytes) throw();
-    void FUN_0086c640(void* memory,unsigned int oldBytes,unsigned int additionalBytes) throw();
+    void* ScrapHeapManager_AllocateBuffer(unsigned int bytes) throw();
+    void ScrapHeapManager_ExpandBuffer(void* memory,unsigned int oldBytes,unsigned int additionalBytes) throw();
     void* FUN_0086c840(unsigned int* bytes);
 };
 }
@@ -6176,11 +6185,11 @@ public:
 void* CacheAllocateFast::Cache::FUN_0086c840(unsigned int* bytes)
 {
     if(count==0)
-        return FUN_0086c6a0(*bytes);
+        return ScrapHeapManager_AllocateBuffer(*bytes);
     lock.FUN_00409a80(DAT_00e27ed8);
     if(count==0)
     {
-        void* memory=FUN_0086c6a0(*bytes);
+        void* memory=ScrapHeapManager_AllocateBuffer(*bytes);
         lock.Unlock();
         return memory;
     }
@@ -6210,7 +6219,7 @@ void* CacheAllocateFast::Cache::FUN_0086c840(unsigned int* bytes)
     cachedBytes-=entries[largestIndex].bytes;
     if(largestIndex<count)
         entries[largestIndex]=entries[count];
-    FUN_0086c640(memory,largestBytes,*bytes-largestBytes);
+    ScrapHeapManager_ExpandBuffer(memory,largestBytes,*bytes-largestBytes);
     lock.Unlock();
     return memory;
 }
@@ -6863,7 +6872,7 @@ void FUN_0085b8c0();
 void FUN_0088bcc0();
 void FUN_00882980();
 void FUN_00884eb0(void* p);
-void FUN_0082a370(void (*f)());
+void NiStream_UnregisterLoader(void (*f)());
 void FUN_00e24890();
 void FUN_008626b0();
 extern ZMgr g_mgr;
@@ -7665,7 +7674,7 @@ FUN_0087a310::~FUN_0087a310() throw()
     FUN_0089e890(ma90);
     this->FUN_00873bf0();
     this->FUN_00873c60();
-    FUN_0082a370(FUN_00e24890);
+    NiStream_UnregisterLoader(FUN_00e24890);
     FUN_008626b0();
 }
 
@@ -7673,7 +7682,7 @@ FUN_0087a310::~FUN_0087a310() throw()
 namespace f3m_0086c710 {
 namespace f3m_0086c710 {
 struct VmMgr86c710 {
-    void __thiscall FUN_0086c640(void* base, unsigned int oldSize, unsigned int addSize);
+    void __thiscall ScrapHeapManager_ExpandBuffer(void* base, unsigned int oldSize, unsigned int addSize);
 };
 VmMgr86c710* __cdecl FUN_006e1cd0();
 
@@ -7688,10 +7697,11 @@ struct Arena86c710 {
     char* end;
     Hdr86c710* lastHdr;
 
-    void* FUN_0086c710(unsigned int size, unsigned int align);
+    void* ScrapHeap_Allocate(unsigned int size, unsigned int align);
 };
 
-void* Arena86c710::FUN_0086c710(unsigned int size, unsigned int align) {
+// pdb: ScrapHeap::Allocate | ScrapHeap.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_seq), high
+void* Arena86c710::ScrapHeap_Allocate(unsigned int size, unsigned int align) {
     char* c = cur;
     char* payload = c + 8;
     Hdr86c710* hdr;
@@ -7713,7 +7723,7 @@ void* Arena86c710::FUN_0086c710(unsigned int size, unsigned int align) {
                 totalCap *= 2;
                 addCap = totalCap - curCap;
             }
-            FUN_006e1cd0()->FUN_0086c640(base, curCap, addCap);
+            FUN_006e1cd0()->ScrapHeapManager_ExpandBuffer(base, curCap, addCap);
             end += addCap;
         }
     }

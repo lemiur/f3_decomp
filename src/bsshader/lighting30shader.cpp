@@ -5479,7 +5479,7 @@ struct S00bbe9c0_Obj
     unsigned int flags;
     float opacity;
     bool FUN_004a2020(int mode);
-    S00bbe9c0_Node* FUN_00b70600(int* selected);
+    S00bbe9c0_Node* BSShaderLightingProperty_GetFirstActiveNonShadowLight(int* selected);
 };
 extern double DAT_010ae8b8, DAT_010ae8c0, DAT_010ae8b0;
 }  // namespace fnv_00bbe9c0

@@ -139,7 +139,7 @@ class hkVisitorDC12
         FUN_00dc1670();
     }
     void FUN_00dc1670() throw();
-    void FUN_00dc1bb0(void* pvObject, hkPointerMapDC12& kDone, int iFlags) throw();
+    void hkStructureLayout_computeMemberOffsetsInplace(void* pvObject, hkPointerMapDC12& kDone, int iFlags) throw();
 };
 
 // @f3 0x0093e5f0 (community match, verified in this file)
@@ -222,17 +222,18 @@ class SectionsDC10
 {
   public:
     int FUN_00d470d0() throw();
-    int FUN_00d46f00() throw();
+    int hkClass_getNumMembers() throw();
     EntryDC10* FUN_00d46f20(int i) throw();
     void InvokeTarget(int i, FUN_00d27520* pkWriter) throw();
 };
 
 // Writes entries from pkSections whose key is not in pkSet to pvBuf via a FUN_00d274c0 writer.
 // @fnv 0x00dc1070
-void __cdecl FUN_00dc1070(void* apvBuffer, SetDC10* pkSet, SectionsDC10* pkSections)
+// pdb: hkVersionUtil::copyDefaults | hkVersionUtil.obj | fnv360_0822_retail, caller_sim + skyrim(caller_sim), high
+void __cdecl hkVersionUtil_copyDefaults(void* apvBuffer, SetDC10* pkSet, SectionsDC10* pkSections)
 {
     FUN_00d274c0 kWriter(apvBuffer, pkSections->FUN_00d470d0(), false);
-    for (int i = 0; i < pkSections->FUN_00d46f00(); i++)
+    for (int i = 0; i < pkSections->hkClass_getNumMembers(); i++)
     {
         EntryDC10* pkEntry = pkSections->FUN_00d46f20(i);
         int key = pkEntry->m_key;

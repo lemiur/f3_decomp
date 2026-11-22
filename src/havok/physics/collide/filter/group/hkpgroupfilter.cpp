@@ -260,12 +260,13 @@ class hkpGroupFilterE48 : public hkReferencedObjectE48,
 class GFilterE488 : public hkpGroupFilter
 {
   public:
-    void FUN_00e488e0(hkUint32 infoA, hkUint32 infoB);
+    void hkpGroupFilter_enableCollisionsUsingBitfield(hkUint32 infoA, hkUint32 infoB);
 };
 
 // For each of 32 collision groups, if infoA has the bit set, OR infoB into the group mask, and if infoB has the bit set, OR infoA into it.
 // @f3 0x00a768f0 (community match, verified in this file)
-void GFilterE488::FUN_00e488e0(hkUint32 infoA, hkUint32 infoB) {
+// pdb: hkpGroupFilter::enableCollisionsUsingBitfield | hkpGroupFilter.obj | fnv360_0822_retail, objrun + skyrim(objrun), high
+void GFilterE488::hkpGroupFilter_enableCollisionsUsingBitfield(hkUint32 infoA, hkUint32 infoB) {
     for (int i = 0; i < 32; ++i) {
         hkUint32 mask = 1U << i;
         if (infoA & mask) m_uiCollisionGroupMasks[i] |= infoB;

@@ -2232,14 +2232,14 @@ extern void* DAT_0116b57c;
 extern void* DAT_0116b580;
 namespace f3m_00d80aa0 {
 extern int FUN_00a081d0();
-extern void FUN_00a081a0();
+extern void finishLoadedObjecthkpPointToPathConstraintData();
 extern void FUN_00a08190();
 
 void FUN_00d80aa0()
 {
     int r = FUN_00a081d0();
     DAT_0116b574 = DAT_00e45ae8;
-    DAT_0116b578 = (void*)&FUN_00a081a0;
+    DAT_0116b578 = (void*)&finishLoadedObjecthkpPointToPathConstraintData;
     DAT_0116b57c = (void*)&FUN_00a08190;
     DAT_0116b580 = (void*)r;
 }

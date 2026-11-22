@@ -8,7 +8,8 @@ void FUN_00bffa60(void*, void*, unsigned);
 void FUN_0089f580(void*, unsigned, int, int);
 void FUN_0089e890(void*);
 
-int FUN_008a0160(X_008a0160* a1, void* a2, unsigned n, int a4, int a5)
+// pdb: NiMemStream::WriteAndSwap | NiMemStream.obj | fnv360_0822_retail, objrun + bridge(caller_sim|objrun) + skyrim(objrun), high
+int NiMemStream_WriteAndSwap(X_008a0160* a1, void* a2, unsigned n, int a4, int a5)
 {
     if (n <= 0) return 0;
     void* h = FUN_0089e810(n);
@@ -41,7 +42,8 @@ inline S_008d9e30::~S_008d9e30() { if (p != DAT_00e207a8) IMP_00d9b064(p - 8); }
 inline S_008d9e30::S_008d9e30(const char* n) { p = FUN_008242a0(n); }
 struct O_008d9e30 { virtual void v0(); virtual void v1(); virtual void v2(); virtual void v3(); virtual void v4(); virtual void v5(); virtual void v6(); virtual void v7(); virtual void v8(); virtual void v9(); virtual void v10(); virtual void v11(); virtual void v12(); virtual void v13(); virtual void v14(); virtual void v15(); virtual void v16(); virtual void v17(); virtual void v18(); virtual void v19(); virtual void v20(); virtual void v21(); virtual void v22(); virtual void v23(); virtual void v24(); virtual void v25(); virtual void v26(); virtual void v27(); virtual void v28(); virtual void v29(); virtual void v30(); virtual void v31(); virtual void v32(); virtual void v33(); virtual void v34(); virtual void v35(); virtual void v36(); virtual void v37(); virtual void v38(); virtual O_008d9e30* Look(S_008d9e30*); char pad[0x80]; float fv; };
 
-bool FUN_008d9e30(O_008d9e30* o, const char* name)
+// pdb: bhkNiCollisionObject::GetFaceUp | bhkNiCollisionObject.obj | fnv360_0822_retail, call_gap + bridge(hash|call_gap_sim) + skyrim(objrun_prop), high
+bool bhkNiCollisionObject_GetFaceUp(O_008d9e30* o, const char* name)
 {
     bool r = false;
     if (o) {
@@ -63,7 +65,8 @@ inline S_008d9ee0::~S_008d9ee0() { if (p != DAT_00e207a8) IMP_00d9b064(p - 8); }
 inline S_008d9ee0::S_008d9ee0(const char* n) { p = FUN_008242a0(n); }
 struct O_008d9ee0 { virtual void v0(); virtual void v1(); virtual void v2(); virtual void v3(); virtual void v4(); virtual void v5(); virtual void v6(); virtual void v7(); virtual void v8(); virtual void v9(); virtual void v10(); virtual void v11(); virtual void v12(); virtual void v13(); virtual void v14(); virtual void v15(); virtual void v16(); virtual void v17(); virtual void v18(); virtual void v19(); virtual void v20(); virtual void v21(); virtual void v22(); virtual void v23(); virtual void v24(); virtual void v25(); virtual void v26(); virtual void v27(); virtual void v28(); virtual void v29(); virtual void v30(); virtual void v31(); virtual void v32(); virtual void v33(); virtual void v34(); virtual void v35(); virtual void v36(); virtual void v37(); virtual void v38(); virtual O_008d9ee0* Look(S_008d9ee0*); char pad[0x84]; float fv; };
 
-bool FUN_008d9ee0(O_008d9ee0* o, const char* name)
+// pdb: bhkNiCollisionObject::GetLeftUp | bhkNiCollisionObject.obj | fnv360_0822_retail, call_seq + skyrim(objrun_prop), high
+bool bhkNiCollisionObject_GetLeftUp(O_008d9ee0* o, const char* name)
 {
     bool r = false;
     if (o) {

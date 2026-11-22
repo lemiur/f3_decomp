@@ -1102,7 +1102,8 @@ struct FUN_00e942d0_Class {
 extern int DAT_0126fa30;
 
 // @fnv 0x00e94330
-void __stdcall FUN_00e94330(void* p)
+// pdb: NiVBSet::FreeBlock | NiVBSet.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_seq), high
+void __stdcall NiVBSet_FreeBlock(void* p)
 {
     if (!p)
         return;

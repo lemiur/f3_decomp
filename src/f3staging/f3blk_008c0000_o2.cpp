@@ -2433,7 +2433,8 @@ S_00c69f50_Obj* FUN_00aa60f0(S_00c69f50_Obj* obj);
 void FUN_008d5790(S_00c69f50_Obj* obj, int* ctx, void* g);
 
 // @fnv 0x00c69f50
-bool FUN_008d7b20(S_00c69f50_Obj* obj, unsigned char ucValue, unsigned char ucForce)
+// pdb: bhkWorld::KillHavok | bhkWorld.obj | fnv360_0822_retail, call_seq + bridge(call_gap_sim|call_gap_sim) + skyrim(objrun), high
+bool bhkWorld_KillHavok(S_00c69f50_Obj* obj, unsigned char ucValue, unsigned char ucForce)
 {
     bool result = false;
     if (obj)
@@ -2475,7 +2476,7 @@ struct RefObj {
         }
     }
 };
-struct Target { void FUN_00908400(char* out, RefObj* obj); };
+struct Target { void hkpWorld_removeConstraint(char* out, RefObj* obj); };
 }
 struct FUN_008d4c10_t {
     virtual void v0();
@@ -2530,7 +2531,7 @@ void FUN_008d4c10_t::FUN_008d4c10() {
     for (unsigned int i = 0; i < m_count; ++i) {
         if (m_items[i] && m_items[i]->m8) {
             char out;
-            t->FUN_00908400(&out, m_items[i]);
+            t->hkpWorld_removeConstraint(&out, m_items[i]);
         }
         if (m_items[i]) m_items[i]->RemoveReference();
     }
@@ -3208,7 +3209,7 @@ struct Base {
     char pad[0x10 - 4];
 };
 }
-struct FUN_008d3a60 : n8d3a60::Base {
+struct bhkWorldCinfo : n8d3a60::Base { // src: F3_EXE vtable 0x00e32184 (old: FUN_008d3a60)
     volatile float m10; float m14, m18, m1c;
     int m20;
     float m24;
@@ -3219,10 +3220,10 @@ struct FUN_008d3a60 : n8d3a60::Base {
     char ma7;
     char padA8[0xbd - 0xa8];
     char mbd;
-    FUN_008d3a60();
-    virtual ~FUN_008d3a60();
+    bhkWorldCinfo();
+    virtual ~bhkWorldCinfo();
 };
-FUN_008d3a60::FUN_008d3a60()
+bhkWorldCinfo::bhkWorldCinfo()
 {
     m10 = 0.0f;
     m14 = n8d3a60::FUN_00dcd8a0;
@@ -4267,9 +4268,10 @@ struct M3 { V4 c0, c1, c2; };
 }
 struct Vec8d2a00 {
     float x, y, z, w;
-    void FUN_008d2a00(const n8d2a00::M3& m, const n8d2a00::V4& v);
+    void hkVector4_setRotatedDir(const n8d2a00::M3& m, const n8d2a00::V4& v);
 };
-void Vec8d2a00::FUN_008d2a00(const n8d2a00::M3& m, const n8d2a00::V4& v)
+// pdb: hkVector4::setRotatedDir | hkVector4.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_seq), high
+void Vec8d2a00::hkVector4_setRotatedDir(const n8d2a00::M3& m, const n8d2a00::V4& v)
 {
     float vx = v.x;
     float vy = v.y;
@@ -4446,7 +4448,8 @@ struct Stream39 {
 };
 __declspec(noinline) Object39* __cdecl FUN_00424d50(const void* type,Object39* object){if(!object)return 0;RTTI39* r=object->GetRTTI();bool found=false;while(r){if(r==type){found=true;break;}r=r->parent;}return found?object:0;}
 Object39* __cdecl FUN_008c1c80(Stream39*,unsigned int,void*);
-void __cdecl FUN_008c1ed0(Stream39* stream,unsigned int index,Ref39& result,void* extra) throw() {
+// pdb: NiSequence::CreateFromKFFile | NiSequence.obj | fnv360_0822_retail, objrun + bridge(call_seq|call_gap_sim) + skyrim(call_gap), high
+void __cdecl NiSequence_CreateFromKFFile(Stream39* stream,unsigned int index,Ref39& result,void* extra) throw() {
     Ref39 program;
     if(stream->version<0x04010003) program.FUN_008e9650(FUN_008c1c80(stream,index,extra));
     else {
@@ -6038,7 +6041,7 @@ void NormalPlane::FUN_008db880(NormalPlane* out){out->x=x;out->y=y;out->z=z;out-
 
 // @f3 0x008d5670 (community match, verified in this file)
 namespace f3m_008d5670 {
-namespace create670 {extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long);extern unsigned long DAT_010f3170;struct Alloc {void* FUN_008f6d30(unsigned,int);};struct FUN_008d3a60 {void* table;unsigned short size;short count;
+namespace create670 {extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long);extern unsigned long DAT_010f3170;struct Alloc {void* FUN_008f6d30(unsigned,int);};struct bhkWorldCinfo {void* table;unsigned short size;short count; // src: F3_EXE vtable 0x00e32184 (old: FUN_008d3a60)
 int unk08;
 int unk0c;
 int unk10;
@@ -6089,7 +6092,7 @@ int unkc0;
 int unkc4;
 int unkc8;
 int unkcc;
-static void* operator new(unsigned size){Alloc* a=(Alloc*)TlsGetValue(DAT_010f3170);FUN_008d3a60* p=(FUN_008d3a60*)a->FUN_008f6d30(size,0x2f);p->size=(unsigned short)size;return p;}FUN_008d3a60();};struct Owner;struct Table {
+static void* operator new(unsigned size){Alloc* a=(Alloc*)TlsGetValue(DAT_010f3170);bhkWorldCinfo* p=(bhkWorldCinfo*)a->FUN_008f6d30(size,0x2f);p->size=(unsigned short)size;return p;}bhkWorldCinfo();};struct Owner;struct Table {
 void* unk00;
 void* unk04;
 void* unk08;
@@ -6139,7 +6142,7 @@ void* unkb4;
 void* unkb8;
 void* unkbc;
 void* unkc0;
-void (__thiscall *set)(Owner*,FUN_008d3a60*);};struct Owner {Table* table;int unk04;int enabled;void* tail;void* FUN_008d5670(bool*);};void* Owner::FUN_008d5670(bool* created){if(!tail){FUN_008d3a60* object=new FUN_008d3a60;tail=object?(char*)object+0xd0:0;if(enabled){FUN_008d3a60* adjusted=tail?(FUN_008d3a60*)((char*)tail-0xd0):0;table->set(this,adjusted);}*created=true;}else *created=false;return tail;}}
+void (__thiscall *set)(Owner*,bhkWorldCinfo*);};struct Owner {Table* table;int unk04;int enabled;void* tail;void* FUN_008d5670(bool*);};void* Owner::FUN_008d5670(bool* created){if(!tail){bhkWorldCinfo* object=new bhkWorldCinfo;tail=object?(char*)object+0xd0:0;if(enabled){bhkWorldCinfo* adjusted=tail?(bhkWorldCinfo*)((char*)tail-0xd0):0;table->set(this,adjusted);}*created=true;}else *created=false;return tail;}}
 }   // namespace f3m_008d5670
 
 // @f3 0x008d4ad0 (community match, verified in this file)
@@ -6208,7 +6211,7 @@ struct ListenerResult8da {
 struct ListenerValue8da {void* object;void* context;};
 struct ListenerList8da {
     ListenerResult8da FUN_009317a0(const void* key);
-    void FUN_00931740(const void* key, ListenerValue8da value);
+    void hkpWorldObject_addProperty(const void* key, ListenerValue8da value);
 };
 
 class Source8da : public NiRefObject {
@@ -6239,7 +6242,7 @@ void Owner8da::FUN_008da000(Source8da* source)
         ListenerValue8da value={this,0};
         ListenerList8da* listeners = m_source->m_listeners;
         if (listeners)
-            listeners->FUN_00931740(&DAT_010f2c30, value);
+            listeners->hkpWorldObject_addProperty(&DAT_010f2c30, value);
     }
 }
 }   // namespace f3m_008da000
@@ -6551,7 +6554,7 @@ extern B8d3ba0* DAT_01169138;
 extern RefObj8d3ba0* DAT_010f2a68;
 void __cdecl FUN_008e9140();
 void __cdecl FUN_008e9170();
-void __cdecl FUN_0092ecb0();
+void __cdecl hkBaseSystem_quit();
 
 void __cdecl FUN_008d3ba0() {
     if (DAT_01169104) DAT_01169104->vf10(1);
@@ -6562,7 +6565,7 @@ void __cdecl FUN_008d3ba0() {
         DAT_010f2a68->removeReference();
         DAT_010f2a68 = 0;
     }
-    FUN_0092ecb0();
+    hkBaseSystem_quit();
 }
 
 // @f3 0x008da450 (community match, verified in this file)
@@ -6882,10 +6885,11 @@ struct Out8d2970 {
     float y;
     float z;
     float w;
-    void FUN_008d28e0(const Transform8d2970& t, const Vec8d2970& v);
+    void hkVector4_setTransformedPos(const Transform8d2970& t, const Vec8d2970& v);
 };
 
-void Out8d2970::FUN_008d28e0(const Transform8d2970& t, const Vec8d2970& v)
+// pdb: hkVector4::setTransformedPos | hkVector4.obj | fnv360_0822_retail, call_seq + bridge(call_dedup|call_gap_sim) + skyrim(call_seq), high
+void Out8d2970::hkVector4_setTransformedPos(const Transform8d2970& t, const Vec8d2970& v)
 {
     float vx = v.x;
     float vy = v.y;
@@ -7821,10 +7825,11 @@ struct RayCaster
     virtual void v90();
     virtual void v94();
     virtual World* GetWorld();
-    bool FUN_008d6d50(Query* query);
+    bool bhkWorld_PickObject(Query* query);
 };
 // @fnv 0x008d6d50
-bool RayCaster::FUN_008d6d50(Query* query)
+// pdb: bhkWorld::PickObject | bhkWorld.obj | fnv360_0822_retail, ustr + bridge(vtable|ustr) + skyrim(ustr), high
+bool RayCaster::bhkWorld_PickObject(Query* query)
 {
     CastStorage storage;
     Scratch scratch;
@@ -8328,7 +8333,7 @@ struct S_Mgr
 {
     void FUN_009027a0(hkpEntity* entity, int active);
     void FUN_00903980(hkpEntity* entity);
-    void FUN_00906740(void** items, int count, int flag);
+    void hkpWorld_addEntityBatch(void** items, int count, int flag);
     hkBoolRet ProcessTarget(hkpEntity* entity);
 };
 void __cdecl PropagateStateToChildren(S_Mgr* mgr, S_Shape* shape);
@@ -8511,7 +8516,7 @@ void S_Owner::FUN_008d8370(hkpEntity* entity)
                     S_Mgr* m = GetMgr();
                     if (m)
                     {
-                        m->FUN_00906740((void**)(m_pending + remaining), removeCount, 0);
+                        m->hkpWorld_addEntityBatch((void**)(m_pending + remaining), removeCount, 0);
                         bool bShapeUpdated = false;
                         for (unsigned int i = remaining; i < m_pendingCount; i++)
                         {
@@ -8798,7 +8803,7 @@ struct Rec466 {
 // Gamebryo quaternion {w,x,y,z}; converts itself into a 3x3 matrix.
 struct Quat466 {
     float w, x, y, z;
-    __declspec(noalias) void FUN_0049da00(ThreeByThreeMatrix* out);
+    __declspec(noalias) void NiQuaternion_ToRotation(ThreeByThreeMatrix* out);
 };
 
 struct Pose466 {
@@ -8997,7 +9002,7 @@ void Pose466::FUN_008dccb0()
             q.y *= invLen;
             q.z *= invLen;
             NiTransform lt;
-            q.FUN_0049da00(&lt.m_kOrientation);
+            q.NiQuaternion_ToRotation(&lt.m_kOrientation);
             NiTransform* __restrict dst = &node->m_kLocalTransform;
             lt.m_kTranslation.x = rec->tx * DAT_00db88e8;
             lt.m_kTranslation.y = rec->ty * DAT_00db88e8;
@@ -9284,7 +9289,7 @@ struct S8d7d80_World
 };
 
 void FUN_00927c80(S8d7d80_World* world);
-void FUN_00926f00(S8d7d80_World* world, S8d7d80_Item* item);
+void hkpWorldOperationUtil_markIslandInactive(S8d7d80_World* world, S8d7d80_Item* item);
 
 struct S8d7d80_Owner
 {
@@ -9370,7 +9375,7 @@ void S8d7d80_Owner::FUN_008d7d80()
             }
             if (!changed)
             {
-                FUN_00926f00(world, item);
+                hkpWorldOperationUtil_markIslandInactive(world, item);
             }
         }
         FUN_00927c80(world);
@@ -9430,7 +9435,7 @@ struct S8d91e0_Elem
 
 struct S8d91e0_Obj
 {
-    void FUN_00906740(S8d91e0_Elem** dst, unsigned n, int z);
+    void hkpWorld_addEntityBatch(S8d91e0_Elem** dst, unsigned n, int z);
     void FUN_009037f0(char* out, S8d91e0_Elem* e);
 };
 
@@ -9512,7 +9517,7 @@ void S8d91e0_Mgr::FUN_008d91e0(char a)
                     S8d91e0_Obj* obj = this->v38();
                     if (obj != 0)
                     {
-                        obj->FUN_00906740(&this->unk34[excess], n, 0);
+                        obj->hkpWorld_addEntityBatch(&this->unk34[excess], n, 0);
                         char flag = 0;
                         char ch;
                         for (unsigned i = excess; i < this->unk38; i++)
@@ -9986,7 +9991,7 @@ struct Owner {
     int unk00, unk04, unk08, unk0c, unk10, unk14, unk18;
     bool unk1c;
 
-    bool FUN_008d7650(Obj* obj, unsigned char a2, bool a3, int a4, bool force);
+    bool bhkWorld_AddObjects(Obj* obj, unsigned char a2, bool a3, int a4, bool force);
 };
 
 struct Ev {
@@ -10002,7 +10007,8 @@ struct Ev {
 void __cdecl FUN_008d5790(Obj* obj, Ev* ev, void* handler);
 
 
-bool Owner::FUN_008d7650(Obj* obj, unsigned char a2, bool a3, int a4, bool force)
+// pdb: bhkWorld::AddObjects | bhkWorld.obj | fnv360_0822_retail, caller_sim + bridge(vtable|caller_sim) + skyrim(caller_sim), high
+bool Owner::bhkWorld_AddObjects(Obj* obj, unsigned char a2, bool a3, int a4, bool force)
 {
     bool result = false;
     if (obj && (force || Enabled(obj))) {
@@ -10825,7 +10831,8 @@ Owner* owner;
 };
 struct Owner {int unk00,unk04,unk08,unk0c,unk10,unk14,unk18; Object* object;};
 struct Arg {int unk00,unk04;Owner* owner;};
-void FUN_008d5a50(Arg* arg) {
+// pdb: bhkWorld::ActivateObject | bhkWorld.obj | fnv360_0721_beta, objrun + skyrim(objopen_prop), high
+void bhkWorld_ActivateObject(Arg* arg) {
  Owner* owner=arg->owner;
  if(owner) {
  Object* previous=owner->object;
@@ -10864,7 +10871,8 @@ State* FUN_00aa60f0(void*);
 inline unsigned mask(void* object) { State* state=FUN_00aa60f0(object); return state ? state->flags&2 : 0; }
 extern void (*DAT_00f794a0)();
 void FUN_008d5790(void*,Query*,void(*)());
-bool FUN_008d7c80(void* object,bool active,bool force) {
+// pdb: bhkWorld::IsActive | bhkWorld.obj | fnv360_0822_retail, call_seq + bridge(caller_sim|call_gap_sim) + skyrim(objrun_open), high
+bool bhkWorld_IsActive(void* object,bool active,bool force) {
  bool result=false;
  if(object) {
  State* state;
@@ -11073,9 +11081,9 @@ bool FUN_008d9cd0(const Matrix* a,const Matrix* b,float tolerance){for(unsigned 
 // @f3 0x008d6140 (community match, verified in this file)
 namespace f3m_008d6140 {
 namespace Insert8d6140 {
-struct Item {int unk00;unsigned short kind,refs;};struct Manager {void FUN_00908400(Item**,Item*);};
+struct Item {int unk00;unsigned short kind,refs;};struct Manager {void hkpWorld_removeConstraint(Item**,Item*);};
 struct Object {virtual void v00(); virtual void v04(); virtual void v08(); virtual void v0c(); virtual void v10(); virtual void v14(); virtual void v18(); virtual void v1c(); virtual void v20(); virtual void v24(); virtual void v28(); virtual void v2c(); virtual void v30(); virtual void v34(); virtual void v38(); virtual void v3c(); virtual void v40(); virtual void v44(); virtual void v48(); virtual void v4c(); virtual void v50(); virtual void v54(); virtual void v58(); virtual void v5c(); virtual void v60(); virtual void v64(); virtual void v68(); virtual void v6c(); virtual void v70(); virtual void v74(); virtual void v78(); virtual void v7c(); virtual void v80(); virtual void v84(); virtual void v88(); virtual void v8c(); virtual void v90(); virtual void v94(); virtual Manager* get();int unk04; int unk08; int unk0c; int unk10; int unk14; int unk18; int unk1c; int unk20; unsigned count;int unk28; int unk2c; int unk30; int unk34; int unk38; int unk3c; int unk40; int unk44; int unk48; Item** items;unsigned size;void FUN_008d4c10();void FUN_008d4b60();void FUN_008d4ad0();void FUN_008d4a40();bool FUN_008d6140(Item*);};
-bool Object::FUN_008d6140(Item* input){bool result=false;Manager* m=get();if(m){Item* item=*(Item* volatile*)&input;if(item){result=true;if(count>0){if(size>=200){FUN_008d4c10();FUN_008d4b60();FUN_008d4ad0();FUN_008d4a40();}if(item->kind)++item->refs;items[size]=item;++size;}else m->FUN_00908400(&input,item);}}return result;}
+bool Object::FUN_008d6140(Item* input){bool result=false;Manager* m=get();if(m){Item* item=*(Item* volatile*)&input;if(item){result=true;if(count>0){if(size>=200){FUN_008d4c10();FUN_008d4b60();FUN_008d4ad0();FUN_008d4a40();}if(item->kind)++item->refs;items[size]=item;++size;}else m->hkpWorld_removeConstraint(&input,item);}}return result;}
 }
 
 }   // namespace f3m_008d6140
@@ -11219,7 +11227,7 @@ struct ModelEffect
     float unkac;
     ModelEffect* FUN_0095b0f0();
     void FUN_0092b6d0(ModelItem* item, UpdateFlag flag);
-    void FUN_0095a690(ModelItem* item, UpdateFlag flag);
+    void hkpRagdollConstraintData_setMotorsActive(ModelItem* item, UpdateFlag flag);
     void FUN_00959ee0(void* data);
 };
 
@@ -11279,7 +11287,7 @@ void __cdecl FUN_008dca30(ItemTable* table)
             effect->unkac = 0.0f;
             break;
         case 7:
-            effect->FUN_0095a690(item, true);
+            effect->hkpRagdollConstraintData_setMotorsActive(item, true);
             effect->FUN_00959ee0(&DAT_010f3370);
             break;
         }
@@ -11392,7 +11400,8 @@ static __forceinline bool isType(const Type* type) {
     }
     return false;
 }
-void __cdecl FUN_008dd390(Root* root, Array& first, Array& second) {
+// pdb: bhkRagdollController::AddToArrays | bhkRagdollController.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_seq), high
+void __cdecl bhkRagdollController_AddToArrays(Root* root, Array& first, Array& second) {
     if(root) {
         append(first,root->value);
         Link* link=&root->children;
@@ -12213,7 +12222,7 @@ struct Node8DC {
     virtual void filler00C();                        
     virtual int kind010();                           
     struct Node8DC* FUN_0095b0f0();                  
-    void FUN_0095a690(struct Entry8DC* entry, Flag flag);   
+    void hkpRagdollConstraintData_setMotorsActive(struct Entry8DC* entry, Flag flag);   
     void FUN_0092b6d0(struct Entry8DC* entry, Flag flag);   
 };
 struct Entry8DC { int unk00,unk04,unk08; struct Node8DC* node0C; };     
@@ -12240,7 +12249,7 @@ void FUN_008dcae0(struct GateSet8DC* set) {
         int kind = node->kind010();                  
         switch(kind) {
          case 2: node->FUN_0092b6d0(entry,Flag(false));break;
-         case 7: node->FUN_0095a690(entry,Flag(false));break;
+         case 7: node->hkpRagdollConstraintData_setMotorsActive(entry,Flag(false));break;
         }
     }
 }
@@ -12275,7 +12284,8 @@ __forceinline unsigned allowed(void* input) {
  Gate8D7* gate=FUN_00aa60f0(input);
  return gate ? gate->flags&2 : 0;
 }
-bool FUN_008d7790(void* first,unsigned char second,bool third) {
+// pdb: bhkWorld::UpdatePosition | bhkWorld.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap) + skyrim(objrun_sim), high
+bool bhkWorld_UpdatePosition(void* first,unsigned char second,bool third) {
  bool answer=false;
  if(first && (third || allowed(first))) {
   Local8D7 local;
@@ -12928,7 +12938,7 @@ struct Entity {
     void FUN_009316f0();
 };
 struct World {
-    void FUN_00906740(Entity**,unsigned,int);
+    void hkpWorld_addEntityBatch(Entity**,unsigned,int);
     hkBool FUN_009037f0(Entity*);
     void FUN_00907120(void*);
 };
@@ -13054,7 +13064,7 @@ void Manager::FUN_008d8af0(Input* input) {
                     unsigned start=unk38-count;
                     World* w=world();
                     if(w) {
-                        w->FUN_00906740(unk34+start,count,0);
+                        w->hkpWorld_addEntityBatch(unk34+start,count,0);
                         bool did=false;
                         for(unsigned i=start;i<unk38;++i) {
                             
@@ -13462,7 +13472,7 @@ struct Matrix;
 struct __declspec(align(16)) Vec4 {float x,y,z,w;void Set(const Vec4& v){x=v.x;y=v.y;z=v.z;w=v.w;}void FUN_008d2b00(const Matrix*,const Vec4*);};
 struct Matrix {Vec4 a,b,c;};
 struct Source {const Vec4* FUN_00956290(int);};
-struct Skeleton {unsigned u00,u04,u08,u0c;Matrix* data;unsigned u14,u18;unsigned* flags;Matrix* FUN_009550e0(int);Matrix* Get(int index){if(!(flags[index]&2))return data+index;return FUN_009550e0(index);}};
+struct Skeleton {unsigned u00,u04,u08,u0c;Matrix* data;unsigned u14,u18;unsigned* flags;Matrix* hkaPose_calculateBoneModelSpace(int);Matrix* Get(int index){if(!(flags[index]&2))return data+index;return hkaPose_calculateBoneModelSpace(index);}};
 struct Vec3{float x,y,z;};
 struct Owner {
  unsigned u000;
@@ -15726,7 +15736,7 @@ struct ObjE {
 };
 
 struct SceneE {
-    void FUN_00906740(ObjE** objs, unsigned int count, int flags);
+    void hkpWorld_addEntityBatch(ObjE** objs, unsigned int count, int flags);
     void FUN_009037f0(unsigned char* out, ObjE* obj);
 };
 void __cdecl FUN_00929570(SceneE* scene, SoundRefE* sound);
@@ -15797,9 +15807,9 @@ void QueueE::FUN_008d4540(int unused, bool force)
         // start*4 is used once in each arm; that puts start*4 in eax and the scene pointer in ecx, as in
         // the original.  With a single call the scene pointer stays in eax (7 instructions off).
         if (DAT_010f2a62)
-            scene->FUN_00906740(&unk34[start], count, 0);
+            scene->hkpWorld_addEntityBatch(&unk34[start], count, 0);
         else
-            scene->FUN_00906740(&unk34[start], count, 0);
+            scene->hkpWorld_addEntityBatch(&unk34[start], count, 0);
         bool played = false;
         for (unsigned int i = start; i < unk38; i++) {
             ObjE* obj = unk34[i];
@@ -15862,7 +15872,7 @@ public:
     }
     __forceinline void setRotatedInverseDir(const Quat& q, const Vec4& v);
     __forceinline void ApplyQuaternionRotation(const Vec4& direction, const Quat& quat);
-    void FUN_008d28e0(const Transform& t, const Vec4& v);
+    void hkVector4_setTransformedPos(const Transform& t, const Vec4& v);
 };
 
 class Quat
@@ -16120,7 +16130,7 @@ public:
     unsigned m_uFlags;
     Matrix3 m_kRotate;
     Point3 m_kTranslate;
-    void FUN_0056ff10(CollisionObject* collision);
+    void NiAVObject_SetCollisionObject(CollisionObject* collision);
 };
 
 struct ExtraFlags { unsigned m_00, m_04, m_08, m_uFlags; };
@@ -16165,10 +16175,11 @@ public:
     unsigned m_14;
     unsigned m_18;
     bool m_bAdding;
-    bool FUN_008d7020(AVObject* apObject, AVObject* apRoot);
+    bool bhkWorld_AddObjectsAndMoveController(AVObject* apObject, AVObject* apRoot);
 };
 
-bool World::FUN_008d7020(AVObject* apObject, AVObject* apRoot)
+// pdb: bhkWorld::AddObjectsAndMoveController | bhkWorld.obj | fnv360_0822_retail, objrun + bridge(vtable|caller_sim) + skyrim(objrun), high
+bool World::bhkWorld_AddObjectsAndMoveController(AVObject* apObject, AVObject* apRoot)
 {
     bool bres = false;
     World* const world = this;
@@ -16225,20 +16236,20 @@ bool World::FUN_008d7020(AVObject* apObject, AVObject* apRoot)
                         Transform objectTrans;
                         FUN_004e5e40(&objectTrans, &apObject->m_kRotate);
                         tmp.ApplyQuaternionRotation(pbody->m_translation,pbody->m_rotation);
-                        pos.FUN_008d28e0(objectTrans, tmp);
+                        pos.hkVector4_setTransformedPos(objectTrans, tmp);
                         tmpRot.FUN_00924360(objectTrans);
                         rot.FUN_008d3290(pbody->m_rotation, tmpRot);
                         tmp.setRotatedInverseDir(pbody->m_rotation, pos);
                         pbody->m_translation = tmp;
                         pbody->m_rotation.m_vec = rot.m_vec;
-                        apRoot->FUN_0056ff10(pcol);
-                        apObject->FUN_0056ff10(0);
+                        apRoot->NiAVObject_SetCollisionObject(pcol);
+                        apObject->NiAVObject_SetCollisionObject(0);
                         apObject->m_uFlags = (apObject->m_uFlags & ~0x10) | 6;
                     }
                     else
                     {
-                        apRoot->FUN_0056ff10(pcol);
-                        apObject->FUN_0056ff10(0);
+                        apRoot->NiAVObject_SetCollisionObject(pcol);
+                        apObject->NiAVObject_SetCollisionObject(0);
                         apObject->m_kRotate = DAT_00f72574;
                         apObject->m_kTranslate = DAT_0108ec68;
                         apObject->m_uFlags = (apObject->m_uFlags & ~0x10) | 6;
@@ -16459,13 +16470,13 @@ struct hkaPose
     int unk14, unk18;
     unsigned int* m_boneFlags;
 
-    const hkQsTransform& FUN_009550e0(int boneIdx);
+    const hkQsTransform& hkaPose_calculateBoneModelSpace(int boneIdx);
     const hkVector4& FUN_00956290(int boneIdx);
     __forceinline const hkQsTransform& getBoneModelSpace(int boneIdx)
     {
         if (!(m_boneFlags[boneIdx] & 2))
             return m_modelPose[boneIdx];
-        return FUN_009550e0(boneIdx);
+        return hkaPose_calculateBoneModelSpace(boneIdx);
     }
 };
 
@@ -16643,8 +16654,8 @@ struct Chain1 {int unk00,unk04;Chain2* next;};
 struct Chain0 {Chain1* next;};
 struct OwnerLink {int unk00,unk04;Chain0* link;};
 struct Rotation {Vec basis;Vec q;};
-struct RotOwner {int unk00,unk04,unk08,unk0c;Rotation* direct;int unk14,unk18;unsigned int* flags;Rotation* FUN_009550e0(int);};
-struct CastWorld {void FUN_00945a80(CastInput*,CastOutput*);};
+struct RotOwner {int unk00,unk04,unk08,unk0c;Rotation* direct;int unk14,unk18;unsigned int* flags;Rotation* hkaPose_calculateBoneModelSpace(int);};
+struct CastWorld {void hkpCachingShapePhantomRay_castRay(CastInput*,CastOutput*);};
 struct Transform { Vec shift; Vec rotation; Vec scale; };
 struct Controller {
  int unk000;
@@ -16842,7 +16853,7 @@ hkBool Controller::FUN_008df210(const Vec& from,const Vec& to,float& fraction,Ve
   input.flag20=0;
   output.fraction=1.0f;output.hit=0;output.rootBody=0;
   input.from.set(from);input.filter=filter;input.to.set(to);
-  castWorld->FUN_00945a80(&input,&output);
+  castWorld->hkpCachingShapePhantomRay_castRay(&input,&output);
   if(output.rootBody){fraction=output.fraction;normalize(*normal,output.normal);hit=true;goto finish;}
  }
  }
@@ -16851,9 +16862,9 @@ finish:
  heightPoint.setInterpolate4(from,to,t);
  if(!hit){cache[row].slots[cursor].fraction=-1.0f;}
  else{
-  Rotation* r=(!(*rotation->flags&2))?rotation->direct:rotation->FUN_009550e0(0);
+  Rotation* r=(!(*rotation->flags&2))?rotation->direct:rotation->hkaPose_calculateBoneModelSpace(0);
   transformed.FUN_008d2b00(geometry,r->basis);
-  r=(!(*rotation->flags&2))?rotation->direct:rotation->FUN_009550e0(0);
+  r=(!(*rotation->flags&2))?rotation->direct:rotation->hkaPose_calculateBoneModelSpace(0);
   Vec dir; dir.set(0.0f,0.0f,1.0f,0.0f);
   Vec up; up.setRotatedDir(r->q,dir);
   if(mode==2 && fabs(up(2))>DAT_00dba5c8) {
@@ -17180,7 +17191,7 @@ struct Pose {
     __forceinline void clearFlagExplicit (PoseFlag& flag, PoseFlag enumToCheck) const;
     __forceinline void makeAllChildrenLocalSpace (int boneIdx) const;
     __forceinline void makeFirstChildrenModelSpace (int boneIdx) const;
-    const Transform& FUN_009550e0(int) const;
+    const Transform& hkaPose_calculateBoneModelSpace(int) const;
 };
 int Pose::isFlagOn (int boneIdx, PoseFlag enumToCheck) const { return boneFlags[boneIdx] & enumToCheck; }
 void Pose::setFlag (int boneIdx, PoseFlag enumToCheck) const { boneFlags[boneIdx] |= enumToCheck; }
@@ -17192,7 +17203,7 @@ const Transform& Pose::getBoneModelSpace (int boneIdx) const {
     if (!isFlagOn (boneIdx, F_BONE_MODEL_DIRTY)) {
         return modelPose[boneIdx];
     } else {
-        return FUN_009550e0(boneIdx);
+        return hkaPose_calculateBoneModelSpace(boneIdx);
     }
 }
 const Transform& Pose::getBoneLocalSpace (int boneIdx) const {
@@ -18071,7 +18082,7 @@ struct World95 {
     unsigned unk2b8;
     unsigned unk2bc;
     float inverseSteps;
-    void FUN_00906740(Entity95**,unsigned,int);
+    void hkpWorld_addEntityBatch(Entity95**,unsigned,int);
     Bool95 FUN_009037f0(Entity95*);
     void FUN_009023a0();
     void FUN_00902dd0(float);
@@ -18182,7 +18193,7 @@ bool Owner95::FUN_008d95f0()
             unsigned remain=count-take;
             World95* world=GetWorld();
             if(world) {
-                world->FUN_00906740(entities+remain,take,0);
+                world->hkpWorld_addEntityBatch(entities+remain,take,0);
                 bool propagated=false;
                 for(unsigned i=remain;i<count;++i) {
                     Entity95* entity=entities[i];

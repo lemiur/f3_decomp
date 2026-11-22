@@ -1914,7 +1914,7 @@ void* __stdcall FUN_006315e0(unsigned type) {
     case 1054: return new Menu22; // FUN_0062ddf0
     case 1056: return new Menu23; // FUN_00631500
     case 1048: return new Menu24; // FUN_00636420
-    case 1060: return new Menu25; // FUN_00630b00
+    case 1060: return new Menu25; // SPECIALBookMenu
     case 1051: return new Menu26; // FUN_0062dca0
     default: return 0;
     }

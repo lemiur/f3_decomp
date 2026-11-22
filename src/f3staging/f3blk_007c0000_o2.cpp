@@ -751,7 +751,7 @@ struct InitOwner {
     int unk34;
     int unk38;
     int unk3C;
-    bool FUN_006f9660();
+    bool Actor_GetIronSights();
     int GetUnk3C() const { return unk3C; }
 };
 
@@ -764,7 +764,7 @@ struct InitRefCounted {
 struct InitActor;
 
 struct InitCell {
-    void FUN_004e52d0(InitActor* actor, int value);
+    void TESObjectCELL_AddReference(InitActor* actor, int value);
 };
 
 struct InitGlobalState {
@@ -1219,11 +1219,11 @@ struct InitActor {
     bool GetFormFlag(unsigned int bit) const { return (unk08 >> bit) & 1; }
     bool GetFlagC0(unsigned int bit) const { return (unkC0 >> bit) & 1; }
     InitBaseForm* GetBaseForm() const { return baseForm; }
-    void FUN_004540f0(int value);
-    void FUN_00454240(int value);
+    void TESForm_SetDestructible(int value);
+    void TESForm_SetInitialized(int value);
     void FUN_007c8790();
-    void FUN_007c91a0();
-    void FUN_007c8dc0();
+    void Projectile_AttachLight();
+    void Projectile_SpawnMuzzleFlash();
     bool FUN_007cd730();
     void FUN_007cc260();
     void FUN_007ca1c0();
@@ -1238,8 +1238,8 @@ void InitActor::FUN_007cd9b0()
     if (unkF0 == 0)
         unkF0 = GetBaseForm()->unkA0;
     if (FUN_0044b010(GetBaseForm()))
-        FUN_004540f0(1);
-    FUN_00454240(1);
+        TESForm_SetDestructible(1);
+    TESForm_SetInitialized(1);
     unkC0 |= 0x10000;
     if (unkF4 && !skip)
         Va228(unkF4->GetUnk3C());
@@ -1262,10 +1262,10 @@ void InitActor::FUN_007cd9b0()
         }
     }
     if (unk3C)
-        unk3C->FUN_004e52d0(this, 0);
-    FUN_007c91a0();
+        unk3C->TESObjectCELL_AddReference(this, 0);
+    Projectile_AttachLight();
     if (!skip)
-        FUN_007c8dc0();
+        Projectile_SpawnMuzzleFlash();
     if (noProcess)
         DAT_0107c0a0.FUN_0078bce0(this, 0, 0, 0, 0);
     if (GetFlagC0(7)) {
@@ -1275,7 +1275,7 @@ void InitActor::FUN_007cd9b0()
     unkCC = GetBaseForm()->unk6C;
     if (!skip && unkF4 && unkF4->IsVO100()) {
         InitOwner* owner = unkF4;
-        if (owner->IsVO35C() && owner->FUN_006f9660() && unkF0 && (unkF0->unk100 & 4))
+        if (owner->IsVO35C() && owner->Actor_GetIronSights() && unkF0 && (unkF0->unk100 & 4))
             unkCC *= *DAT_00f5f54c.FUN_00401eb0();
     }
     bool handled = false;
@@ -1345,7 +1345,7 @@ class TESBoundObject : public TESForm {
 public:
 };
 
-TESForm* FUN_00455190(unsigned int formID);
+TESForm* TESForm_GetFormByNumericID(unsigned int formID);
 
 struct LoadBuffer_1a20 {
     void FUN_006e06d0(unsigned int* out);
@@ -1369,7 +1369,7 @@ void Record_1a20::FUN_007d1a20(LoadBuffer_1a20* buf)
 {
     FUN_007ab5c0(buf);
     buf->FUN_006e06d0(&value10);
-    object = dynamic_cast<TESBoundObject*>(FUN_00455190(buf->FUN_006e0670()));
+    object = dynamic_cast<TESBoundObject*>(TESForm_GetFormByNumericID(buf->FUN_006e0670()));
     buf->FUN_006e0750(&value18, 1);
 }
 
@@ -1935,7 +1935,7 @@ struct Cls_007d4ba0 {
 
     SubObj_007d4ba0* FUN_007ab510();
     void FUN_007ab530(int a);
-    void FUN_007d5e20();
+    void CombatProcedureAttackMelee_HandleAdvance();
 
     void FUN_007d4ba0();
 };
@@ -1953,7 +1953,7 @@ void Cls_007d4ba0::FUN_007d4ba0()
     FUN_007ab530(3);
     m_28 = DAT_0108cba0;
     m_2c = 3.0f;
-    FUN_007d5e20();
+    CombatProcedureAttackMelee_HandleAdvance();
 }
 
 // @f3 0x007c1d10 (community match, verified in this file)
@@ -2369,7 +2369,7 @@ public:
     unsigned unk60, unk64, unk68, unk6c;
     unsigned unk70;
     bool enabled74;
-    void FUN_007defe0(bool);
+    void ActorMover_SetPathingFailed(bool);
     void FUN_007df860(void*);
 };
 void Owner::FUN_007df860(void*)
@@ -2385,7 +2385,7 @@ void Owner::FUN_007df860(void*)
         if (FUN_0044f4b0()->FUN_00607e70(subject1c, resource30.value, true))
             return;
     }
-    FUN_007defe0(true);
+    ActorMover_SetPathingFailed(true);
     enabled74 = false;
 }
 }
@@ -2408,7 +2408,7 @@ struct FUN_00a59660_cls {
 };
 
 struct RotationMatrix : FUN_00a59660_cls {
-    bool FUN_00a59400(float& a, float& b, float& c);
+    bool NiMatrix3_ToEulerAnglesZXY(float& a, float& b, float& c);
 };
 
 struct Node3D {
@@ -2554,12 +2554,13 @@ struct ActorX {
     int unkC4, unkC8, unkCC, unkD0, unkD4, unkD8, unkDC, unkE0, unkE4, unkE8, unkEC, unkF0, unkF4, unkF8;
     Vec3 unkFC;          // 0xfc
     bool GetFlagC0(unsigned int bit) const { return (unkC0 >> bit) & 1; }
-    void FUN_007c7730(bool arg1, bool arg2);
+    void Projectile_Sync3DWithReference(bool arg1, bool arg2);
 };
 
 extern "C" float f3_asin(float);
 
-void ActorX::FUN_007c7730(bool arg1, bool arg2)
+// pdb: Projectile::Sync3DWithReference | Projectile.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+void ActorX::Projectile_Sync3DWithReference(bool arg1, bool arg2)
 {
     Node3D* node = Get3D();
     if (node == 0)
@@ -2581,7 +2582,7 @@ void ActorX::FUN_007c7730(bool arg1, bool arg2)
         float b;
         float c;
         mat = node->rot;
-        mat.FUN_00a59400(a, b, c);
+        mat.NiMatrix3_ToEulerAnglesZXY(a, b, c);
         vec = unkFC;
         b = -f3_asin(vec.z);
         mat.FUN_00a59660(a, b, c);
@@ -3032,7 +3033,7 @@ struct QProj {
     int unk13C;
     float unk140;
     void FUN_007c1210(float dt);
-    void FUN_007c7fd0(const Mat3& m);
+    void Projectile_SetProjectileOrientation(const Mat3& m);
     void FUN_004eeae0(QVec3* p);
     void FUN_007cb030(float f);
     void FUN_007c8650();
@@ -3048,7 +3049,7 @@ void QProj::FUN_007c1210(float dt)
     QAV* node = v1D0();
     if (parent && node) {
         node->rot34 = unk8C_m * parent->rot68;
-        FUN_007c7fd0(unk8C_m * parent->rot68);
+        Projectile_SetProjectileOrientation(unk8C_m * parent->rot68);
         node->pos58 = parent->pos8C;
         FUN_004eeae0(&parent->pos8C);
     }
@@ -4410,9 +4411,10 @@ public:
     int state;
     unsigned unk70;
     bool pending;
-    void FUN_007df400();
+    void ActorMover_ClearCurrentData();
 };
-void Owner7df400::FUN_007df400()
+// pdb: ActorMover::ClearCurrentData | ActorMover.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap_sim), high
+void Owner7df400::ActorMover_ClearCurrentData()
 {
     state = 6;
     a.Clear();
@@ -4600,7 +4602,7 @@ struct Record_d740 {
 void Record_d740::FUN_007dd740(LoadBuffer_1a20* buf)
 {
     FUN_007ab5c0(buf);
-    weapon = dynamic_cast<TESObjectWEAP*>(FUN_00455190(buf->FUN_006e0670()));
+    weapon = dynamic_cast<TESObjectWEAP*>(TESForm_GetFormByNumericID(buf->FUN_006e0670()));
     buf->FUN_006e0750(&value14, 1);
 }
 }   // namespace f3m_007dd740
@@ -5089,7 +5091,7 @@ void Procedure::FUN_007d26e0(LoadBuffer* buffer) {
     buffer->FUN_006e0750(&value10,4);
     buffer->FUN_006e0750(&value14,4);
     buffer->FUN_006e0750(&value18,4);
-    weapon=dynamic_cast<TESObjectWEAP*>(FUN_00455190(buffer->FUN_006e0670()));
+    weapon=dynamic_cast<TESObjectWEAP*>(TESForm_GetFormByNumericID(buffer->FUN_006e0670()));
 }
 }
 }   // namespace f3m_007d26e0
@@ -5186,7 +5188,7 @@ void O_7d66f0::FUN_007d66f0(int x) { ac_ = &DAT_00e1d570; a8 = 1; }
 
 // @f3 0x007c1550 (community match, verified in this file)
 namespace f3m_007c1550 {
-namespace Matrix326{struct Matrix326{float m00,m01,m02,m10,m11,m12,m20,m21,m22;bool FUN_00475380(Matrix326&);Matrix326 FUN_00424020(const Matrix326&);void Zero(){m00=0;m10=0;m20=0;m01=0;m11=0;m21=0;m02=0;m12=0;m22=0;}};struct Update326{float time;bool f4,f5,f6,f7,f8;};struct Node326{
+namespace Matrix326{struct Matrix326{float m00,m01,m02,m10,m11,m12,m20,m21,m22;bool NiMatrix3_Inverse(Matrix326&);Matrix326 FUN_00424020(const Matrix326&);void Zero(){m00=0;m10=0;m20=0;m01=0;m11=0;m21=0;m02=0;m12=0;m22=0;}};struct Update326{float time;bool f4,f5,f6,f7,f8;};struct Node326{
 virtual void n0();
 virtual void n1();
 virtual void n2();
@@ -5392,7 +5394,7 @@ virtual void s128();
 virtual void s129();
 virtual void s130();
 virtual Node326* GetNode();
-};float __cdecl FUN_007c1460(Node326*);extern const double DAT_00e012a0;struct Owner326{
+};float __cdecl FlameProjectile_FindFlameConeAngle(Node326*);extern const double DAT_00e012a0;struct Owner326{
 virtual void o0();
 virtual void o1();
 virtual void o2();
@@ -5583,7 +5585,7 @@ unsigned int unk138;
 unsigned int unk13c;
 unsigned int unk140;
 float value;void FUN_007c1550();};
-void Owner326::FUN_007c1550(){Node326*node=GetNode();if(node){Node326*other=source->GetNode();if(other){Update326 update;update.time=0.0f;update.f4=false;update.f5=false;update.f6=false;update.f7=false;update.f8=false;node->Update(&update);Matrix326 inverse;if(!other->matrix.FUN_00475380(inverse))inverse.Zero();Node326*current=GetNode();matrix=current->matrix.FUN_00424020(inverse);}value=(float)(FUN_007c1460(node)*DAT_00e012a0);}}
+void Owner326::FUN_007c1550(){Node326*node=GetNode();if(node){Node326*other=source->GetNode();if(other){Update326 update;update.time=0.0f;update.f4=false;update.f5=false;update.f6=false;update.f7=false;update.f8=false;node->Update(&update);Matrix326 inverse;if(!other->matrix.NiMatrix3_Inverse(inverse))inverse.Zero();Node326*current=GetNode();matrix=current->matrix.FUN_00424020(inverse);}value=(float)(FlameProjectile_FindFlameConeAngle(node)*DAT_00e012a0);}}
 }
 }   // namespace f3m_007c1550
 
@@ -6918,8 +6920,8 @@ virtual void v168();
 virtual void v169();
 virtual void v170();
 virtual void GetVector(Vector343*);
-unsigned int FUN_006f58b0();};struct Owner343{Actor343* FUN_007ab520();float FUN_007d2e90();};
-float Owner343::FUN_007d2e90(){if(FUN_007ab520()&&(FUN_007ab520()->FUN_006f58b0()&15)){Vector343 vector=DAT_0108ec68;FUN_007ab520()->GetVector(&vector);float squared=vector.y*vector.y+vector.x*vector.x;return (float)sqrt(squared);}return 0.0f;}
+unsigned int FUN_006f58b0();};struct Owner343{Actor343* CombatProcedure_GetTarget();float FUN_007d2e90();};
+float Owner343::FUN_007d2e90(){if(CombatProcedure_GetTarget()&&(CombatProcedure_GetTarget()->FUN_006f58b0()&15)){Vector343 vector=DAT_0108ec68;CombatProcedure_GetTarget()->GetVector(&vector);float squared=vector.y*vector.y+vector.x*vector.x;return (float)sqrt(squared);}return 0.0f;}
 }
 }   // namespace f3m_007d2e90
 
@@ -7602,7 +7604,7 @@ void Attack::FUN_007d2690(Buffer* b) {
 extern int DAT_00f47aa8,DAT_00f46078;
 namespace f3m_007d1a80 {
 namespace task0900 {
-void* __cdecl FUN_00455190(void*);
+void* __cdecl TESForm_GetFormByNumericID(void*);
 void* __cdecl FUN_00c0050a(void*,int,void*,void*,int);
 struct Reference { void FUN_004e6a90(int); };
 struct Procedure {
@@ -7613,7 +7615,7 @@ struct Procedure {
 };
 void Procedure::FUN_007d1a80(unsigned int arg) {
  FUN_0078c030(arg);
- reference=reference ? static_cast<Reference*>(FUN_00c0050a(FUN_00455190(reference),0,&DAT_00f46078,&DAT_00f47aa8,0)) : 0;
+ reference=reference ? static_cast<Reference*>(FUN_00c0050a(TESForm_GetFormByNumericID(reference),0,&DAT_00f46078,&DAT_00f47aa8,0)) : 0;
  if(reference) reference->FUN_004e6a90(1);
 }
 }
@@ -7623,7 +7625,7 @@ void Procedure::FUN_007d1a80(unsigned int arg) {
 extern int DAT_00f460fc,DAT_00f46078;
 namespace f3m_007dd870 {
 namespace Task0914 {
-void* FUN_00455190(unsigned int);
+void* TESForm_GetFormByNumericID(unsigned int);
 void* FUN_00c0050a(void*,int,void*,void*,int);
 struct Buffer {unsigned int FUN_006e0670();void FUN_006e0750(void*,unsigned int);};
 struct Procedure {
@@ -7633,7 +7635,7 @@ struct Procedure {
 };
 void Procedure::FUN_007dd870(Buffer* buffer) {
  FUN_007ab5c0(buffer);
- weapon=FUN_00c0050a(FUN_00455190(buffer->FUN_006e0670()),0,&DAT_00f46078,&DAT_00f460fc,0);
+ weapon=FUN_00c0050a(TESForm_GetFormByNumericID(buffer->FUN_006e0670()),0,&DAT_00f46078,&DAT_00f460fc,0);
  buffer->FUN_006e0750(&state,1);
 }
 }
@@ -8030,10 +8032,11 @@ struct ST_00931e50
     virtual void v176(float);
     virtual void vm(float);
     void FUN_00765440(float);
-    void FUN_007c7fd0(ST_00a59400*);
+    void Projectile_SetProjectileOrientation(ST_00a59400*);
 };
 // @fnv 0x009c6330
-void ST_00931e50::FUN_007c7fd0(ST_00a59400* p)
+// pdb: Projectile::SetProjectileOrientation | Projectile.obj | fnv360_0822_retail, call_seq + bridge(call_gap_sim|call_gap_sim) + skyrim(caller_sim), high
+void ST_00931e50::Projectile_SetProjectileOrientation(ST_00a59400* p)
 {
     float c;
     float b;
@@ -8060,7 +8063,7 @@ struct RefHolder945 {
 void RefHolder945::FUN_007dc400(unsigned int flags)
 {
     FUN_0078c030(flags);
-    reference = reference ? dynamic_cast<TESObjectREFR*>(FUN_00455190((unsigned int)reference)) : 0;
+    reference = reference ? dynamic_cast<TESObjectREFR*>(TESForm_GetFormByNumericID((unsigned int)reference)) : 0;
 }
 }   // namespace f3m_007dc400
 
@@ -8297,7 +8300,7 @@ namespace f3m_007c89a0 {
 
 struct Vec3 {
     float x, y, z;
-    float FUN_00432c00();
+    float NiPoint3_UnitizeGetLength();
 };
 
 struct Ref {
@@ -8443,7 +8446,7 @@ void Ref::FUN_007c89a0(float value, Vec3 pos)
     pos.y = newPos.y - oldPos.y;
     pos.z = newPos.z - oldPos.z;
     vecFC = pos;
-    unk108 += vecFC.FUN_00432c00();
+    unk108 += vecFC.NiPoint3_UnitizeGetLength();
 }
 
 }
@@ -8539,12 +8542,13 @@ class FUN_009dc780_cls
     unsigned char unk74;
     bool m_75;
 
-    void FUN_007dd990();
+    void ActorMover_OnMoveToLow();
 };
 
 // Sets m_75 based on whether m_24 is non-null and its v34() returns non-zero; clears m_75 when v34() returns 0.
 // @fnv 0x009dc780
-void FUN_009dc780_cls::FUN_007dd990()
+// pdb: ActorMover::OnMoveToLow | ActorMover.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+void FUN_009dc780_cls::ActorMover_OnMoveToLow()
 {
     if (m_24 == 0)
     {
@@ -8911,8 +8915,8 @@ struct FUN_007c63d0_c {
     n7c63d0::List* list;
     char pad88[0x140 - 0x88];
     int type;
-    void FUN_007c5260();
-    void FUN_007c4fb0();
+    void MissileProjectile_ProcessImpale();
+    void MissileProjectile_ProcessStick();
     void FUN_007c63d0();
 };
 void FUN_007c63d0_c::FUN_007c63d0()
@@ -8923,10 +8927,10 @@ void FUN_007c63d0_c::FUN_007c63d0()
         if (t == 4)
             e = list ? list->head : 0;
         if (e && e->ref && e->ref->v100())
-            FUN_007c5260();
+            MissileProjectile_ProcessImpale();
     }
     if (type == 4)
-        FUN_007c4fb0();
+        MissileProjectile_ProcessStick();
 }
 }   // namespace f3m_007c63d0
 
@@ -9176,7 +9180,7 @@ void Object::FUN_007d3c70(){Actor* a=FUN_007ab510();a->FUN_006f8cc0();a->FUN_006
 // @f3 0x007c7fa0 (community match, verified in this file)
 namespace f3m_007c7fa0 {
 namespace task1023 {
-struct Sound {bool FUN_00bd0390(); void FUN_00bd0140(); void FUN_00bd03b0();};
+struct Sound {bool BSSoundHandle_IsValid(); void BSSoundHandle_Stop(); void BSSoundHandle_Release();};
 struct Projectile {
  unsigned field000;
  unsigned field004;
@@ -9256,7 +9260,7 @@ struct Projectile {
  Sound sound;
  void FUN_007c7fa0();
 };
-void Projectile::FUN_007c7fa0() {if(sound.FUN_00bd0390()) {sound.FUN_00bd0140(); if(sound.FUN_00bd0390()) sound.FUN_00bd03b0();}}
+void Projectile::FUN_007c7fa0() {if(sound.BSSoundHandle_IsValid()) {sound.BSSoundHandle_Stop(); if(sound.BSSoundHandle_IsValid()) sound.BSSoundHandle_Release();}}
 }
 }   // namespace f3m_007c7fa0
 
@@ -9769,7 +9773,7 @@ namespace n7d0630 {
 struct Heap { void FUN_0086ba60(void* p); };
 extern Heap DAT_01090a78;
 struct Res { void FUN_00460090(); };
-struct Mgr { Res* FUN_006f8f30(int a, int b); };
+struct Mgr { Res* Actor_GetAnimation(int a, int b); };
 extern Mgr* DAT_0108d034;
 struct Item {
     char pad[0x14];
@@ -9796,7 +9800,7 @@ struct List7d0630 {
 void List7d0630::FUN_007d0630()
 {
     if (handle) {
-        n7d0630::DAT_0108d034->FUN_006f8f30(1, 0)->FUN_00460090();
+        n7d0630::DAT_0108d034->Actor_GetAnimation(1, 0)->FUN_00460090();
         handle = 0;
     }
     while (!FUN_00645c20()) {
@@ -10711,7 +10715,7 @@ void Cls::FUN_007db060(NiStreamM& stream)
     Sub1* s = FUN_007ab510();
     FUN_0078c030(stream);
     TESForm* form = m38;
-    m38 = form ? dynamic_cast<TESObjectREFR*>(FUN_00455190((unsigned int)form)) : 0;
+    m38 = form ? dynamic_cast<TESObjectREFR*>(TESForm_GetFormByNumericID((unsigned int)form)) : 0;
     if (m5c) {
         RefCounted* p = s->FUN_00702da0();
         RefCounted* old = m58;
@@ -11618,12 +11622,12 @@ struct Cls_007d65e0 {
     BigObj_7d65e0* m_04;
     NiPoint3* FUN_007d65e0(NiPoint3* out, int arg);
     SubObj_7b9e10* FUN_007ab510();
-    NiPoint3* FUN_007ab520();
+    NiPoint3* CombatProcedure_GetTarget();
 };
 
 NiPoint3* Cls_007d65e0::FUN_007d65e0(NiPoint3* __restrict out, int arg)
 {
-    NiPoint3* p = FUN_007ab520();
+    NiPoint3* p = CombatProcedure_GetTarget();
     if (!p) {
         *out = _NiPoint3_ZERO;
         return out;
@@ -11762,9 +11766,9 @@ float Owner::FUN_007cf120() {
 
 // @f3 0x007c7480 (community match, verified in this file)
 namespace f3m_007c7480 {
-struct Data7c74 { char FUN_0043be40(void*); }; extern Data7c74* DAT_0106cdcc;
+struct Data7c74 { char TESDataHandler_IsFormIDCreated(void*); }; extern Data7c74* DAT_0106cdcc;
 struct Owner7c74 { int unk00; int unk04; int unk08; void* value; char FUN_007c7480(); };
-char Owner7c74::FUN_007c7480() { void* argument=value; return DAT_0106cdcc->FUN_0043be40(argument)!=0; }
+char Owner7c74::FUN_007c7480() { void* argument=value; return DAT_0106cdcc->TESDataHandler_IsFormIDCreated(argument)!=0; }
 }   // namespace f3m_007c7480
 
 // @f3 0x007c73e0 (community match, verified in this file)
@@ -12104,7 +12108,7 @@ struct Actor_d7b0;
 struct Process_d7b0 {
     char pad[0x28];
     int unk28;
-    void FUN_0072ff10(Actor_d7b0* actor, Form_d7b0* item, int arg);
+    void HighProcess_FindSpecialIdletoPlay(Actor_d7b0* actor, Form_d7b0* item, int arg);
 };
 class Actor_d7b0 {
 public:
@@ -12271,7 +12275,7 @@ void Proc_d7b0::FUN_007dd7b0()
                 return;
         }
         if (!started) {
-            actor->process->FUN_0072ff10(actor, item, 0);
+            actor->process->HighProcess_FindSpecialIdletoPlay(actor, item, 0);
             started = true;
             return;
         }
@@ -12365,7 +12369,7 @@ bool Cls_9cd0::FUN_007c9cd0(Object_9cd0* obj, Point3_9cd0* out)
 // @f3 0x007c45b0 (community match, verified in this file)
 namespace f3m_007c45b0 {
 namespace state_or_permission_predicate {
-struct Service {bool FUN_0043be40(unsigned int);};extern Service* DAT_0106cdcc;
+struct Service {bool TESDataHandler_IsFormIDCreated(unsigned int);};extern Service* DAT_0106cdcc;
 struct Owner {
  unsigned int unk000;
  unsigned int unk004;
@@ -12450,7 +12454,7 @@ struct Owner {
  unsigned int state;
  int FUN_007c45b0();
 };
-int Owner::FUN_007c45b0(){if(state!=4 && DAT_0106cdcc->FUN_0043be40(key))return 0;return 1;}
+int Owner::FUN_007c45b0(){if(state!=4 && DAT_0106cdcc->TESDataHandler_IsFormIDCreated(key))return 0;return 1;}
 }
 
 }   // namespace f3m_007c45b0
@@ -12637,7 +12641,7 @@ struct BGSSaveFormBuffer {
  void FUN_006e17e0(void*,int);
  void FUN_006e1830(void*,unsigned,int);
  void FUN_006e18b0(void*,unsigned,int);
- unsigned FUN_006e16c0();
+ unsigned BGSSaveGameBuffer_StartVariableSizedValue();
  void FUN_006e16e0(int,unsigned);
 };
 struct ActorCauseHelper { unsigned unk00,unk04,unk08,unk0c,unk10; unsigned ref; unsigned GetRef() {return ref;} };
@@ -12756,7 +12760,7 @@ void ProjectileHelper::FUN_007c93e0(BGSSaveFormBuffer* buf)
     }
 
     unsigned int count2 = 0;
-    unsigned int pos5 = buf->FUN_006e16c0();
+    unsigned int pos5 = buf->BGSSaveGameBuffer_StartVariableSizedValue();
     ListNodeHelper* curr = (ListNodeHelper*)&this->list;
     while (curr)
     {
@@ -13698,7 +13702,8 @@ static bool IsKindOf(const RTTICls* p, const RTTICls* target)
     return false;
 }
 
-float FUN_007c1460(NodeC* node)
+// pdb: FlameProjectile::FindFlameConeAngle | FlameProjectile.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+float FlameProjectile_FindFlameConeAngle(NodeC* node)
 {
     float result = 0.0f;
     if (node)
@@ -13722,7 +13727,7 @@ float FUN_007c1460(NodeC* node)
             for (unsigned int j = 0; j < list->unkA6; j++)
             {
                 NodeC* elem = list->unkA0[j];
-                float v = FUN_007c1460(elem);
+                float v = FlameProjectile_FindFlameConeAngle(elem);
                 if (v > result)
                     result = v;
             }
@@ -14080,7 +14085,7 @@ virtual void v34c();
 virtual void v350();
 virtual void v354();
 virtual void v358();
-virtual bool Active();bool FUN_00703950(void*);void FUN_0071e150(void*,void*,Owner*);};struct Owner{
+virtual bool Active();bool Actor_IsInCombatWithActor(void*);void FUN_0071e150(void*,void*,Owner*);};struct Owner{
 unsigned int unk00;
 unsigned int unk04;
 unsigned int unk08;
@@ -14142,7 +14147,7 @@ unsigned int unke4;
 unsigned int unke8;
 unsigned int unkec;
 unsigned int unkf0;
-Actor*actor;unsigned char State(){return (unsigned char)(flags>>19);}void FUN_007c7870(void*,void*);};void Owner::FUN_007c7870(void*a,void*b){if(actor&&actor->Ready()){Actor*target=actor;if(target->Active()||!(State()&1)||target->FUN_00703950(a))target->FUN_0071e150(a,b,this);}}}
+Actor*actor;unsigned char State(){return (unsigned char)(flags>>19);}void FUN_007c7870(void*,void*);};void Owner::FUN_007c7870(void*a,void*b){if(actor&&actor->Ready()){Actor*target=actor;if(target->Active()||!(State()&1)||target->Actor_IsInCombatWithActor(a))target->FUN_0071e150(a,b,this);}}}
 
 }   // namespace f3m_007c7870
 
@@ -14228,7 +14233,7 @@ unsigned int unk130;
 unsigned int unk134;
 unsigned int unk138;
 unsigned int unk13c;
-float amount;void FUN_007c8dc0();void FUN_007c1640();};void Owner::FUN_007c1640(){amount=0;while(!list.Empty()){if(list.item)delete list.item;FUN_006c8220*next=list.next;if(next){list.next=next->next;list.item=next->item;next->next=0;delete next;}else list.item=0;}FUN_007c8dc0();flag=false;}}
+float amount;void Projectile_SpawnMuzzleFlash();void FUN_007c1640();};void Owner::FUN_007c1640(){amount=0;while(!list.Empty()){if(list.item)delete list.item;FUN_006c8220*next=list.next;if(next){list.next=next->next;list.item=next->item;next->next=0;delete next;}else list.item=0;}Projectile_SpawnMuzzleFlash();flag=false;}}
 }   // namespace f3m_007c1640
 
 // @f3 0x007c8dc0 (community match, verified in this file)
@@ -14390,7 +14395,8 @@ struct OwnerActorX {
 
 void FUN_007c6980(InitOwner* owner, InitActor* self);
 
-void InitActor::FUN_007c8dc0()
+// pdb: Projectile::SpawnMuzzleFlash | Projectile.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap_sim), high
+void InitActor::Projectile_SpawnMuzzleFlash()
 {
     InitBaseFormX* form = (InitBaseFormX*)GetBaseForm();
     if (!form->GetFlag60(3))
@@ -14510,9 +14516,9 @@ bool Owner::FUN_007cbc10(ColB* ref, float* out)
 // @f3 0x007c1db0 (community match, verified in this file)
 namespace f3m_007c1db0 {
 namespace predicate_query {
-struct Registry {bool FUN_0043be40(void*);};extern Registry* DAT_0106cdcc;
+struct Registry {bool TESDataHandler_IsFormIDCreated(void*);};extern Registry* DAT_0106cdcc;
 struct Owner {virtual void f0();virtual void f1();virtual void f2();virtual void f3();virtual void f4();virtual void f5();virtual void f6();virtual void f7();virtual void f8();virtual void f9();virtual void f10();virtual void f11();virtual void f12();virtual void f13();virtual void f14();virtual void f15();virtual void f16();virtual void f17();virtual void f18();virtual void f19();virtual void f20();virtual void f21();virtual void f22();virtual void f23();virtual void f24();virtual void f25();virtual void f26();virtual void f27();virtual void f28();virtual void f29();virtual void f30();virtual void f31();virtual void f32();virtual void f33();virtual void f34();virtual void f35();virtual void f36();virtual void f37();virtual void f38();virtual void f39();virtual void f40();virtual void f41();virtual void f42();virtual void f43();virtual void f44();virtual void f45();virtual void f46();virtual void f47();virtual void f48();virtual void f49();virtual void f50();virtual void f51();virtual void f52();virtual void f53();virtual void f54();virtual void f55();virtual void f56();virtual void f57();virtual void f58();virtual void f59();virtual void f60();virtual void f61();virtual void f62();virtual void f63();virtual void f64();virtual void f65();virtual void f66();virtual void f67();virtual void f68();virtual void f69();virtual void f70();virtual void f71();virtual void f72();virtual void f73();virtual void f74();virtual void f75();virtual void f76();virtual void f77();virtual void f78();virtual void f79();virtual void f80();virtual void f81();virtual void f82();virtual void f83();virtual void f84();virtual void f85();virtual void f86();virtual void f87();virtual void f88();virtual void f89();virtual void f90();virtual void f91();virtual void f92();virtual void f93();virtual void f94();virtual void f95();virtual void f96();virtual void f97();virtual void f98();virtual void f99();virtual void f100();virtual void f101();virtual void f102();virtual void f103();virtual void f104();virtual void f105();virtual void f106();virtual void f107();virtual void f108();virtual void f109();virtual void f110();virtual void f111();virtual void f112();virtual void f113();virtual void f114();virtual void f115();virtual void f116();virtual void f117();virtual void f118();virtual void f119();virtual void f120();virtual void f121();virtual void f122();virtual void f123();virtual void f124();virtual void f125();virtual void f126();virtual void f127();virtual void f128();virtual void f129();virtual void f130();virtual void f131();virtual void f132();virtual void f133();virtual void f134();virtual void f135();virtual void f136();virtual void f137();virtual void f138();virtual void f139();virtual void f140();virtual void f141();virtual void f142();virtual void f143();virtual void f144();virtual void f145();virtual void f146();virtual void f147();virtual void f148();virtual void f149();virtual void f150();virtual void f151();virtual void f152();virtual void f153();virtual void f154();virtual void f155();virtual void f156();virtual void f157();virtual void f158();virtual void f159();virtual void f160();virtual void f161();virtual void f162();virtual void f163();virtual void f164();virtual void f165();virtual void f166();virtual void f167();virtual void f168();virtual void f169();virtual void f170();virtual void f171();virtual void f172();virtual void f173();virtual void f174();virtual void f175();virtual void f176();virtual void f177();virtual void f178();virtual void f179();virtual void f180();virtual void f181();virtual void f182();virtual void f183();virtual void f184();virtual void f185();virtual void f186();virtual void f187();virtual void f188();virtual void f189();virtual void f190();virtual void f191();virtual void f192();virtual void f193();virtual void f194();virtual void f195();virtual void f196();virtual void f197();virtual bool Query();unsigned int unk04,unk08;void* key;int FUN_007c1db0();};
-int Owner::FUN_007c1db0(){Owner* context=this;if(!context->Query()){context=(Owner*)context->key;if(DAT_0106cdcc->FUN_0043be40(context))return 0;}return 1;}
+int Owner::FUN_007c1db0(){Owner* context=this;if(!context->Query()){context=(Owner*)context->key;if(DAT_0106cdcc->TESDataHandler_IsFormIDCreated(context))return 0;}return 1;}
 }
 }   // namespace f3m_007c1db0
 
@@ -14762,7 +14768,7 @@ struct QUpd {
     int unk00;
     unsigned char unk04;
     int unk08;
-    bool FUN_00bd0390();
+    bool BSSoundHandle_IsValid();
 };
 
 struct QProj {
@@ -14778,19 +14784,19 @@ struct QProj {
     int unk100; int unk104; int unk108; int unk10C; int unk110; int unk114; int unk118; int unk11C;
     int unk120; int unk124; int unk128;
     QUpd unk12C;
-    QUpd* FUN_00766c00(QUpd* out, int a, int b, int c, int d);
+    QUpd* MobileObject_PlaySound(QUpd* out, int a, int b, int c, int d);
     void FUN_007c7f40();
 };
 
 void QProj::FUN_007c7f40()
 {
     QUpd* dst = &unk12C;
-    if (!dst->FUN_00bd0390()) {
+    if (!dst->BSSoundHandle_IsValid()) {
         QInner* src = unk1C->unk98;
         if (src) {
             int id = src->unk0C;
             QUpd tmp;
-            QUpd* r = FUN_00766c00(&tmp, id, 0, 0x40000102, 1);
+            QUpd* r = MobileObject_PlaySound(&tmp, id, 0, 0x40000102, 1);
             dst->unk00 = r->unk00;
             dst->unk04 = r->unk04;
             dst->unk08 = r->unk08;
@@ -14915,8 +14921,8 @@ struct Cell7c9630 {
 void Cell7c9630::FUN_007c9630(ArgObj* arg)
 {
     FUN_00769a50(arg);
-    unkF4 = unkF4 ? dynamic_cast<TESObjectREFR*>(FUN_00455190((unsigned int)unkF4)) : 0;
-    unkF8 = unkF8 ? dynamic_cast<TESObjectREFR*>(FUN_00455190((unsigned int)unkF8)) : 0;
+    unkF4 = unkF4 ? dynamic_cast<TESObjectREFR*>(TESForm_GetFormByNumericID((unsigned int)unkF4)) : 0;
+    unkF8 = unkF8 ? dynamic_cast<TESObjectREFR*>(TESForm_GetFormByNumericID((unsigned int)unkF8)) : 0;
     if (unk13C)
         unk13C->FUN_0047df50(arg);
     if (arg->vf00() >= 0xe) {
@@ -14924,7 +14930,7 @@ void Cell7c9630::FUN_007c9630(ArgObj* arg)
             TESObjectREFR** slot = n->slot;
             if (slot) {
                 TESObjectREFR* ref = *slot;
-                ref = ref ? dynamic_cast<TESObjectREFR*>(FUN_00455190((unsigned int)ref)) : 0;
+                ref = ref ? dynamic_cast<TESObjectREFR*>(TESForm_GetFormByNumericID((unsigned int)ref)) : 0;
                 *slot = ref;
                 if (ref)
                     ref->FUN_004e6a90(true);
@@ -15136,9 +15142,9 @@ struct Info9290 {
 };
 struct ActionHandle9290 {
     int id; int unk04; int status;
-    bool FUN_00bd0390();
-    bool FUN_00bd0140();
-    bool FUN_00bd03b0();
+    bool BSSoundHandle_IsValid();
+    bool BSSoundHandle_Stop();
+    bool BSSoundHandle_Release();
     void FUN_005b37f0(const float*);
     void FUN_00bd00c0(int);
 };
@@ -15425,11 +15431,11 @@ struct InitActor {
     bool GetFormFlag(unsigned int bit) const { return (unk08 >> bit) & 1; }
     bool GetFlagC0(unsigned int bit) const { return (unkC0 >> bit) & 1; }
     InitBaseForm* GetBaseForm() const { return baseForm; }
-    void FUN_004540f0(int value);
-    void FUN_00454240(int value);
+    void TESForm_SetDestructible(int value);
+    void TESForm_SetInitialized(int value);
     void FUN_007c8790();
-    void FUN_007c91a0();
-    void FUN_007c8dc0();
+    void Projectile_AttachLight();
+    void Projectile_SpawnMuzzleFlash();
     bool FUN_007cd730();
     void FUN_007cc260();
     void FUN_007ca1c0();
@@ -15441,7 +15447,7 @@ struct InitActor {
     int unk124;
     int unk128;
     ActionHandle9290 action;
-    Tagged9290* FUN_004f26c0();
+    Tagged9290* TESObjectREFR_GetOwner();
     bool FUN_007c78e0(int, InitOwner*, Tagged9290*);
     bool FUN_007c9290(int, bool);
 };
@@ -15450,9 +15456,9 @@ bool InitActor::FUN_007c9290(int reason, bool skip)
 {
     bool result = false;
     if (baseForm->GetFlag60(5) && !GetFlagC0(9)) {
-    if (action.FUN_00bd0390()) {
-        action.FUN_00bd0140();
-        if (action.FUN_00bd0390()) action.FUN_00bd03b0();
+    if (action.BSSoundHandle_IsValid()) {
+        action.BSSoundHandle_Stop();
+        if (action.BSSoundHandle_IsValid()) action.BSSoundHandle_Release();
     }
     if (!skip) {
         Info9290* info = reinterpret_cast<Info9290*>(baseForm->unk9C);
@@ -15469,7 +15475,7 @@ bool InitActor::FUN_007c9290(int reason, bool skip)
     Tagged9290* tagged = 0;
     if (unkF4 && unkF4->IsVO100()) allowed = unkF4;
     else {
-        Tagged9290* found = FUN_004f26c0();
+        Tagged9290* found = TESObjectREFR_GetOwner();
         if (found && found->type == 8) tagged = found;
     }
     if (!skip && (unkDC != 3.4028234663852886e+38 || FUN_007c78e0(reason,allowed,tagged))) {
@@ -15490,7 +15496,7 @@ bool InitActor::FUN_007c9290(int reason, bool skip)
 extern unsigned DAT_01090bb0;
 namespace f3m_007de880 {
 namespace task1831 {
-struct BGSSaveFormBuffer {void FUN_006e1830(void*,unsigned,int);void FUN_006e17a0(unsigned,unsigned);};
+struct BGSSaveFormBuffer {void FUN_006e1830(void*,unsigned,int);void BGSSaveGameBuffer_SaveFormID(unsigned,unsigned);};
 struct NiPoint3 { float x,y,z; }; struct Actor;
 struct SavedRequest {
 virtual void v00();virtual void v04();virtual void v08();virtual void v0c();
@@ -15598,7 +15604,7 @@ void FUN_007de880_shell::FUN_007de880(BGSSaveFormBuffer* buffer)
     buffer->FUN_006e1830(&elapsed, 4, 0);
     buffer->FUN_006e1830(&field84, 4, 0);
     location.Save(buffer);
-    buffer->FUN_006e17a0(reference, 0);
+    buffer->BGSSaveGameBuffer_SaveFormID(reference, 0);
     unsigned char flags = 0;
     if (request.FUN_00559450())
         flags |= 1;
@@ -16623,7 +16629,7 @@ struct Vec
 struct WorldPos
 {
     int a, b, c, d;
-    float FUN_004c0dc0(const WorldPos& o);
+    float BGSWorldLocation_GetDistanceSquared(const WorldPos& o);
 };
 
 struct Clock
@@ -16719,7 +16725,7 @@ struct ActorStub
     bool FUN_006f8d60();
     bool FUN_006f8c60();
     bool FUN_006f8d70();
-    WorldPos FUN_004eea80();
+    WorldPos TESObjectREFR_GetWorldLocation();
 };
 
 struct Hiding
@@ -16784,8 +16790,8 @@ struct SettingStub
 };
 
 float FUN_007b7eb0(void*, int, int);
-void FUN_007ba000(OwnerStub*, Hiding*, Vec*, Vec*);
-Vec FUN_007b8030(ActorStub*, int);
+void CombatUtilities_CalculateCoverPositions(OwnerStub*, Hiding*, Vec*, Vec*);
+Vec CombatUtilities_GetTargetFiringLocation(ActorStub*, int);
 
 }
 
@@ -16830,14 +16836,14 @@ void HideProcedure::FUN_007da3d0()
         if (found7)
         {
             hiding->active = true;
-            FUN_007ba000(owner, hiding, &destination, &rotation);
+            CombatUtilities_CalculateCoverPositions(owner, hiding, &destination, &rotation);
             rotation.z += FUN_007b7eb0(enemy2 ? enemy2 : actor2, 2, 0);
         }
         else
         {
             destination = actor2->position();
             if (enemy2)
-                rotation = FUN_007b8030(enemy2, 2);
+                rotation = CombatUtilities_GetTargetFiringLocation(enemy2, 2);
         }
         const Vec& p7 = actor2->position();
         const Vec& d7 = destination;
@@ -16897,7 +16903,7 @@ void HideProcedure::FUN_007da3d0()
             if (shouldEnd3)
             {
                 Cover* cover = target7->cover();
-                if (cover && cover->kind == 1 && cover->pos.FUN_004c0dc0(actor2->FUN_004eea80()) < 4096.0f)
+                if (cover && cover->kind == 1 && cover->pos.BGSWorldLocation_GetDistanceSquared(actor2->TESObjectREFR_GetWorldLocation()) < 4096.0f)
                     shouldEnd3 = false;
             }
             if (shouldEnd3)
@@ -16913,9 +16919,9 @@ void HideProcedure::FUN_007da3d0()
                     }
                     if (enemy2)
                     {
-                        WorldPos actorPosition = actor2->FUN_004eea80();
-                        WorldPos targetPosition = enemy2->FUN_004eea80();
-                        if (actorPosition.FUN_004c0dc0(targetPosition) <
+                        WorldPos actorPosition = actor2->TESObjectREFR_GetWorldLocation();
+                        WorldPos targetPosition = enemy2->TESObjectREFR_GetWorldLocation();
+                        if (actorPosition.BGSWorldLocation_GetDistanceSquared(targetPosition) <
                             *DAT_00f5f78c.FUN_00401eb0() * *DAT_00f5f78c.FUN_00401eb0())
                         {
                             owner->FUN_00586150()->FUN_007b0d80(1);
@@ -17413,7 +17419,7 @@ extern Manager* DAT_0108c7a8;
 
 void __cdecl FUN_007b9530(Combatant* a, WeaponObj* b, float* x, float* y, float* z);
 bool __cdecl FUN_007baf20(Actor* a, Actor* b, Weapon* c, void* d, unsigned char* e, Pt3* f, float g);
-bool __cdecl FUN_007b9730(void* a);
+bool __cdecl CombatUtilities_IsDangerousExplosion(void* a);
 
 struct Tail
 {
@@ -17435,7 +17441,7 @@ struct Package
     unsigned char m_30;
     Tail m_34;
     Actor* FUN_007ab510();
-    Actor* FUN_007ab520();
+    Actor* CombatProcedure_GetTarget();
     void Fail(const char* msg) { m_0c = msg; m_08 = 1; }
     void FUN_007ab580();
     void FUN_007ab550(Pt3* p, int a);
@@ -17447,7 +17453,7 @@ struct Package
 void Package::FUN_007d2380()
 {
     Actor* actor = FUN_007ab510();
-    Actor* target = FUN_007ab520();
+    Actor* target = CombatProcedure_GetTarget();
     Obj9c* n = m_04->GetObj9c();
     WeaponObj* s = m_04->GetWeaponObj();
     AnimObj* anim = actor->GetAnim();
@@ -17538,7 +17544,7 @@ void Package::FUN_007d2380()
     actor->m_60->SetFlag(1);
     actor->FUN_0070e560(0x6d);
     m_10 = 1;
-    if (proj && FUN_007b9730(proj))
+    if (proj && CombatUtilities_IsDangerousExplosion(proj))
     {
         DAT_0108c7a8->FUN_0079d080(m_04, 2, 4, 1);
     }
@@ -17979,7 +17985,7 @@ struct Setting
     float* FUN_00401eb0();
 };
 
-void __cdecl FUN_007ba000(Manager*, CoverLocation*, Point&, Point&);
+void __cdecl CombatUtilities_CalculateCoverPositions(Manager*, CoverLocation*, Point&, Point&);
 
 extern Setting DAT_00f5f4d4;
 extern Setting DAT_00f5f4e0;
@@ -18003,7 +18009,7 @@ struct CoverProcedure
     Clock blocked;
 
     Actor* FUN_007ab510();
-    Actor* FUN_007ab520();
+    Actor* CombatProcedure_GetTarget();
     void FUN_007ab530(int);
     void FUN_007ab550(const Point&, int);
     void FUN_007ab580();
@@ -18019,7 +18025,7 @@ void CoverProcedure::FUN_007d7bf0()
         return;
     }
     Actor* actor = FUN_007ab510();
-    Actor* target = FUN_007ab520();
+    Actor* target = CombatProcedure_GetTarget();
     CombatState* combat = manager->GetCombat();
     Group* group = manager->group;
     bool evaluated = false;
@@ -18059,7 +18065,7 @@ void CoverProcedure::FUN_007d7bf0()
     {
     case 0: {
         location->occupied = false;
-        FUN_007ba000(manager, location, coverPosition, firePosition);
+        CombatUtilities_CalculateCoverPositions(manager, location, coverPosition, firePosition);
         lookPosition = firePosition;
         float height = manager->active ? actor->FUN_006fb050(false) : actor->FUN_006f5de0();
         lookPosition.z = height * 0.75 + lookPosition.z;
@@ -18431,18 +18437,18 @@ struct Self {
     char pad0[0x5c];
     float m5c;
     Actor* FUN_007ab510();
-    Actor* FUN_007ab520();
+    Actor* CombatProcedure_GetTarget();
     bool FUN_007d2d40();
 };
 bool Self::FUN_007d2d40()
 {
     NiPoint3 off = DAT_0108ec68;
-    if (FUN_007ab520() && (FUN_007ab520()->FUN_006f58b0() & 0xf)) {
-        FUN_007ab520()->V2ac(&off);
+    if (CombatProcedure_GetTarget() && (CombatProcedure_GetTarget()->FUN_006f58b0() & 0xf)) {
+        CombatProcedure_GetTarget()->V2ac(&off);
         off.z = 0.0f;
-        NiPoint3 p = *FUN_007ab520()->V1f4() + off;
+        NiPoint3 p = *CombatProcedure_GetTarget()->V1f4() + off;
         if (m5c < 0.0f)
-            m5c = FUN_007b8c50(FUN_007ab510(), FUN_007ab520(), 0);
+            m5c = FUN_007b8c50(FUN_007ab510(), CombatProcedure_GetTarget(), 0);
         float r = m5c;
         NiPoint3 d = *FUN_007ab510()->V1f4() - p;
         float lenSq = d.SqrLength();
@@ -19447,7 +19453,7 @@ extern IPRef* DAT_0107a104;
 extern IPRef* DAT_0108d030;
 extern int DAT_0108d0a0;
 }
-namespace N7ce6e0 { void __cdecl FUN_006bd920(); }
+namespace N7ce6e0 { void __cdecl FalloutAudio_MysteriousStrangerKillsTarget(); }
 void __cdecl FUN_007c41c0(IPLoadedProjectile* obj, int a, IPRef* target, int b, struct IPProjectile* proj);
 
 struct IPProjectile {
@@ -19674,7 +19680,7 @@ bool IPProjectile::FUN_007ce6e0()
                     {
                         if (N7ce6e0::DAT_0108d030 && N7ce6e0::DAT_0108d030 == GetShooter() && aTarget && aTarget->IsActor() &&
                             aTarget->CheckFlag(0) && inverse)
-                            N7ce6e0::FUN_006bd920();
+                            N7ce6e0::FalloutAudio_MysteriousStrangerKillsTarget();
                         IPItemSub* sub = hit->item ? hit->item->GetSub() : 0;
                         FUN_007cce80(aTarget, &hit->position, &hit->normal, sub, hit->unk20);
                         FUN_007c8be0(hit->position, posFC, sub);
@@ -19703,7 +19709,7 @@ extern Mgr* DAT_011790c8;
 struct Info { int f0, f4, f8, fc, f10, f14, f18, f1c, f20; };
 struct Data { char pad[0x34]; const char* f34; char pad38[0xc]; Info f44; };
 struct Ref { char pad[0x60]; unsigned int f60; char pad64[0x18]; float f7c; char pad80[8]; Data* f88; };
-struct Checker { bool FUN_0043be40(int); };
+struct Checker { bool TESDataHandler_IsFormIDCreated(int); };
 extern Checker* DAT_0106cdcc;
 extern unsigned int DAT_00f79e58;
 int __cdecl FUN_00541960(int);
@@ -19885,7 +19891,7 @@ void Obj::FUN_007c1e80(float dt)
     }
     Ref* r = f1c;
     float lim = Bit(r->f60, 2) && r->f7c > 0.0f ? flt_00f60564 : flt_00f60558;
-    if (lim != 0.0f && fd0 > lim && DAT_0106cdcc->FUN_0043be40(Arg(fc)))
+    if (lim != 0.0f && fd0 > lim && DAT_0106cdcc->TESDataHandler_IsFormIDCreated(Arg(fc)))
         FUN_007c8650();
     if (Bit(fc0, 10) && ff8)
     {
@@ -20640,7 +20646,7 @@ struct Actor
     bool FUN_006f8d60();
     bool FUN_006f8d70();
     bool FUN_006f9650(PathingRequest* request);
-    WorldLocation FUN_004eea80();
+    WorldLocation TESObjectREFR_GetWorldLocation();
 };
 
 struct Controller
@@ -20810,7 +20816,7 @@ void CombatProcedureEvade::FUN_007d9f60()
         }
         else if (actor->FUN_006f8d70())
         {
-            pController->FUN_007ace80(&actor->FUN_004eea80(), location);
+            pController->FUN_007ace80(&actor->TESObjectREFR_GetWorldLocation(), location);
             SetDone();
         }
         break;
@@ -21240,7 +21246,7 @@ extern Heap DAT_01090a78;
 struct Player;
 extern Player* DAT_0107a104;
 extern Player* DAT_0108d034;
-struct Timer { void FUN_0086c220(float scale, int flag); };
+struct Timer { void BSTimer_SetGlobalTimeMultiplier(float scale, int flag); };
 extern Timer DAT_01090ba0;
 extern float DAT_0108d028;
 extern float DAT_0108d01c;
@@ -21270,7 +21276,7 @@ struct Cmd {
 __forceinline Cmd* Pass(Cmd* c) { return c; }
 struct Point2 { float x, y; Point2(float ax, float ay) : x(ax), y(ay) {} };
 struct Effect { char pad[0x18]; unsigned int flags; };
-void FUN_004c2660(Effect* effect);
+void ImageSpaceModifierInstance_Stop(Effect* effect);
 Effect* FUN_004c2ac0(float a, float b, float c, float d, float e, const Point2& size, float f);
 void FUN_0064de10(int mode);
 struct FUN_007d08a0_Obj {
@@ -21293,7 +21299,7 @@ void FUN_007d08a0_Obj::FUN_007d08a0() {
         if ((DAT_0108d028 == 0.0f || !IsEmpty()) && (IsEmpty() || item->action != 15)) {
             FUN_007d0630();
             DAT_0108d028 = DAT_00f5fe04.value;
-            DAT_01090ba0.FUN_0086c220(1.0f, 0);
+            DAT_01090ba0.BSTimer_SetGlobalTimeMultiplier(1.0f, 0);
         }
     }
     Cmd* cmd = new Cmd;
@@ -21312,11 +21318,11 @@ void FUN_007d08a0_Obj::FUN_007d08a0() {
         Effect* a = effectA;
         DAT_0108d02c = false;
         if (a) {
-            FUN_004c2660(a);
+            ImageSpaceModifierInstance_Stop(a);
             effectA = 0;
         }
         if (effectB) {
-            FUN_004c2660(effectB);
+            ImageSpaceModifierInstance_Stop(effectB);
             effectB = 0;
         }
         effectB = FUN_004c2ac0(0.0f, DAT_00f5fe1c.value, DAT_00f5fe28.value, DAT_00f5fe34.value, DAT_00f5fe40.value, Point2(0.5f, 0.5f), 0.0f);
@@ -22669,9 +22675,9 @@ struct Actor;
 struct ProcVt { virtual void Destroy(int del); };
 struct Proc { void* vt; char pad[0x24]; int unk28; };
 struct Detector { bool FUN_004298f0(Actor* actor); };
-struct Combat { bool FUN_00433170(void* key, int mode); };
-struct Registry { bool FUN_0043be40(void* key); };
-struct GlobalState { void FUN_006cebf0(Actor* actor, int a); };
+struct Combat { bool TES_IsCellLoaded(void* key, int mode); };
+struct Registry { bool TESDataHandler_IsFormIDCreated(void* key); };
+struct GlobalState { void BGSSaveLoadGame_UnloadForm(Actor* actor, int a); };
 struct HighMgr { void FUN_0078bd00(Actor* actor, int unk28); };
 extern Detector* DAT_0106ca70;
 extern Combat* DAT_0107a0d8;
@@ -22706,9 +22712,9 @@ bool Actor::FUN_007c7af0()
     bool b = ((VBool)vt[0x324 / 4])(this);
     void* key = unk3c;
     if (((VInt)vt[0x1d0 / 4])(this) || DAT_0106ca70->FUN_004298f0(this)) {
-        if (DAT_0107a0d8->FUN_00433170(key, 1))
+        if (DAT_0107a0d8->TES_IsCellLoaded(key, 1))
             state = 0;
-        else if (b && DAT_0107a0d8->FUN_00433170(key, 0))
+        else if (b && DAT_0107a0d8->TES_IsCellLoaded(key, 0))
             state = 1;
     }
     if (prev == state)
@@ -22722,9 +22728,9 @@ bool Actor::FUN_007c7af0()
         return true;
     }
     void* k = unk0c;
-    if (DAT_0106cdcc->FUN_0043be40(k)) {
+    if (DAT_0106cdcc->TESDataHandler_IsFormIDCreated(k)) {
         if (b)
-            DAT_01079858->FUN_006cebf0(this, 0);
+            DAT_01079858->BGSSaveLoadGame_UnloadForm(this, 0);
         ((VVoidI)vt[0xc4 / 4])(this, 1);
         return false;
     }
@@ -22810,7 +22816,7 @@ bool Owner_007de300::FUN_007de300(Vec3_007de300* out) {
 // @f3 0x007d2d10 (community match, verified in this file)
 namespace f3m_007d2d10 {
 extern "C" {
-unsigned int __cdecl FUN_007ab520();
+unsigned int __cdecl CombatProcedure_GetTarget();
 float __cdecl FUN_007b8c50(unsigned int a, unsigned int b, unsigned int c);
 }
 
@@ -22846,7 +22852,7 @@ struct StandIn_FUN_007d2d10_Obj {
 
 float StandIn_FUN_007d2d10_Obj::FUN_007d2d10() {
     if (unk5C < 0.0f) {
-        unk5C = FUN_007b8c50(FUN_007ab510(), FUN_007ab520(), 0);
+        unk5C = FUN_007b8c50(FUN_007ab510(), CombatProcedure_GetTarget(), 0);
     }
     return unk5C;
 }
@@ -23458,16 +23464,16 @@ struct Task
     Ctx* m_ctx;
     int unk08[3];
     int m_state;
-    Actor* FUN_007ab520();
+    Actor* CombatProcedure_GetTarget();
     void FUN_007d53c0();
     void FUN_007d45b0();
     void FUN_007d3430();
-    void FUN_007d4ec0();
+    void CombatProcedureAttackMelee_MeleeDecision();
     void FUN_007d5470();
 };
 void Task::FUN_007d5470()
 {
-    Actor* actor = FUN_007ab520();
+    Actor* actor = CombatProcedure_GetTarget();
     switch (m_state)
     {
     case 0:
@@ -23486,7 +23492,7 @@ void Task::FUN_007d5470()
         if (!m_ctx->FUN_00799540() && !inv)
         {
             if (!actor || !actor->v22c(inv))
-                FUN_007d4ec0();
+                CombatProcedureAttackMelee_MeleeDecision();
         }
         break;
     }
@@ -23810,7 +23816,7 @@ struct Procedure {
     float currentRange;
     float destinationRange;
     Actor* FUN_007ab510();
-    Destination* FUN_007ab520();
+    Destination* CombatProcedure_GetTarget();
     bool FUN_007d2d40();
     void FUN_007d4ba0();
     void FUN_007d5d50();
@@ -23821,7 +23827,7 @@ struct Procedure {
 
 float __cdecl FUN_007b8c50(Actor*, Destination*, int);
 float __cdecl FUN_007b7810(Actor*, PathContext*);
-bool __cdecl FUN_007b7890(Actor*, Destination*, int);
+bool __cdecl CombatUtilities_IsTargetWithinStrikeAngle(Actor*, Destination*, int);
 extern const double DAT_00db38b0;
 extern float DAT_00f601e0;
 
@@ -23831,9 +23837,9 @@ void Procedure::FUN_007d61b0()
         return;
 
     Actor* source = FUN_007ab510();
-    Destination* destination = FUN_007ab520();
+    Destination* destination = CombatProcedure_GetTarget();
     if (destinationRange < 0.0f)
-        destinationRange = FUN_007b8c50(FUN_007ab510(), FUN_007ab520(), 0);
+        destinationRange = FUN_007b8c50(FUN_007ab510(), CombatProcedure_GetTarget(), 0);
     const float remaining = destinationRange;
 
     Actor* current = FUN_007ab510();
@@ -23848,7 +23854,7 @@ void Procedure::FUN_007d61b0()
     const double reachedRange = range + DAT_00db38b0;
     if (remaining <= reachedRange &&
         !actor->FUN_00798580() &&
-        FUN_007b7890(source, destination, 0)) {
+        CombatUtilities_IsTargetWithinStrikeAngle(source, destination, 0)) {
         return FUN_007d4ba0();
     }
 
@@ -23966,10 +23972,10 @@ void __cdecl FUN_008d7880(Node* n, int a, int b, int c);
 void __cdecl FUN_00570a30(Node* n, NiPoint3* p, int flag);
 struct Mgr
 {
-    bool FUN_0043be40(int id);
+    bool TESDataHandler_IsFormIDCreated(int id);
 };
 extern Mgr* DAT_0106cdcc;
-inline bool IsLoaded(int id) { return DAT_0106cdcc->FUN_0043be40(id); }
+inline bool IsLoaded(int id) { return DAT_0106cdcc->TESDataHandler_IsFormIDCreated(id); }
 struct Ref
 {
     virtual void v000();
@@ -24127,7 +24133,7 @@ void Ref::FUN_007c8890()
 namespace w7cf9b0 {
 struct Vec3 {
     float x, y, z;
-    float FUN_00432c00();
+    float NiPoint3_UnitizeGetLength();
     Vec3 operator-(const Vec3& o) const { Vec3 r; r.x = x - o.x; r.y = y - o.y; r.z = z - o.z; return r; }
     Vec3 operator*(float s) const { Vec3 r; r.x = x * s; r.y = y * s; r.z = z * s; return r; }
     Vec3& operator+=(const Vec3& o) { x += o.x; y += o.y; z += o.z; return *this; }
@@ -24298,7 +24304,7 @@ Vec3 Cam::FUN_007cf9b0(float scale)
                 target = *DAT_0108d014->GetPos();
         }
         Vec3 d = target - out;
-        float len = d.FUN_00432c00();
+        float len = d.NiPoint3_UnitizeGetLength();
         out += d * len * scale * 0.01f;
     }
     return out;
@@ -24452,10 +24458,10 @@ struct V9
     {
         return this;
     }
-    void FUN_00468d80(float f);
+    void NiMatrix3_MakeZRotation(float f);
     void FUN_004bbca0(float f);
     V9 FUN_00424020(const V9& b) const;
-    bool FUN_00475380(V9& out) const;
+    bool NiMatrix3_Inverse(V9& out) const;
     V operator*(const V& p) const
     {
         return V(m00 * p.x + m01 * p.y + m02 * p.z, m10 * p.x + m11 * p.y + m12 * p.z,
@@ -24518,7 +24524,7 @@ __declspec(noinline) Xform Xform::FUN_0056fe20(const Xform& b) const
 // NiTransform::Invert.
 __declspec(noinline) void Xform::FUN_006f4280(Xform& out) const
 {
-    rot.FUN_00475380(out.rot);
+    rot.NiMatrix3_Inverse(out.rot);
     out.scale = 1.0f / scale;
     out.pos = out.scale * (out.rot * -pos);
 }
@@ -25326,7 +25332,7 @@ struct Ref : Obj
 struct Ctl
 {
     HandleSrc FUN_0061f4f0();
-    void FUN_008ea270(V5* v);
+    void bhkCharacterController_SetPosition(V5* v);
 };
 
 struct Owner
@@ -25544,7 +25550,7 @@ struct Watch
     {
         return unk20;
     }
-    void FUN_007d0830(int a);
+    void VATS_SetLastProjectile(int a);
 };
 
 extern Setting DAT_00f5f600;
@@ -25563,8 +25569,8 @@ inline int FUN_009b7cb0()
 }
 
 bool FUN_0045cd20(Node* a);
-void FUN_00472750(Node* a, Node* b, Node* c, int d);
-void FUN_008d7790(Node* a, int b, int c);
+void BipedAnim_AttachToSkeleton(Node* a, Node* b, Node* c, int d);
+void bhkWorld_UpdatePosition(Node* a, int b, int c);
 void FUN_008d7b90(Node* a, int b, int c, int d, int e);
 void FUN_008d7c10(Node* a, int b, int c, int d);
 void FUN_008d78f0(Node* a, int b, int c, int d);
@@ -25699,21 +25705,22 @@ struct Proj : Obj
             unkC0 &= ~flag;
     }
     void FUN_004eeae0(const V& p);
-    void FUN_007c7730(int a, int b);
+    void Projectile_Sync3DWithReference(int a, int b);
     void FUN_007c8650();
-    void FUN_007c4fb0();
+    void MissileProjectile_ProcessStick();
     float FUN_00765430();
     Ctl* FUN_00764ea0();
     float FUN_0076b480();
     V FUN_007c2840();
-    void FUN_007c5260();
+    void MissileProjectile_ProcessImpale();
 };
 
 }  // namespace f3_7c5260
 
 using namespace f3_7c5260;
 
-void Proj::FUN_007c5260()
+// pdb: MissileProjectile::ProcessImpale | MissileProjectile.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+void Proj::MissileProjectile_ProcessImpale()
 {
     static float s_offset = *DAT_00f5f600.FUN_00403e20();
     bool noMove = DAT_01079858->FUN_0042ce10();
@@ -25762,7 +25769,7 @@ void Proj::FUN_007c5260()
                             {
                                 Node* p90 = p88->FUN_0043b4a0(j);
                                 if (p90 && FUN_0045cd20(p90))
-                                    FUN_00472750(p88, p90, p88, 0);
+                                    BipedAnim_AttachToSkeleton(p88, p90, p88, 0);
                             }
                         }
                         UpdData v9c;
@@ -25778,7 +25785,7 @@ void Proj::FUN_007c5260()
                             Xform xd4 = *p88->FUN_0043b4a0(0)->FUN_00461130();
                             if (!noMove)
                                 FUN_004eeae0(owner->unk04);
-                            FUN_007c7730(0, 0);
+                            Projectile_Sync3DWithReference(0, 0);
                             UpdData ve0;
                             ve0.FUN_0043d410(0.0f, 0, 0);
                             p28->vfb8(&ve0);
@@ -25793,7 +25800,7 @@ void Proj::FUN_007c5260()
                         }
                         p28->vfdc(p60, 1);
                         p60->FUN_008245d0(FUN_009b7cb0());
-                        FUN_008d7790(p60, 1, 1);
+                        bhkWorld_UpdatePosition(p60, 1, 1);
                         FUN_008d7b90(p60, 6, 1, 1, 1);
                         UpdData v188;
                         v188.FUN_0043d410(0.0f, 0, 0);
@@ -25811,7 +25818,7 @@ void Proj::FUN_007c5260()
                                 v25c = *vf1f4();
                                 V9 m28c;
                                 m28c.FUN_006815c0();
-                                m28c.FUN_00468d80(vf2bc(0));
+                                m28c.NiMatrix3_MakeZRotation(vf2bc(0));
                                 V9 m2b0;
                                 m2b0.FUN_006815c0();
                                 m2b0.FUN_004bbca0(FUN_00765430());
@@ -25869,7 +25876,7 @@ void Proj::FUN_007c5260()
                                     v83c = *vf1f4();
                                     V9 m86c;
                                     m86c.FUN_006815c0();
-                                    m86c.FUN_00468d80(vf2bc(0));
+                                    m86c.NiMatrix3_MakeZRotation(vf2bc(0));
                                     V9 m890;
                                     m890.FUN_006815c0();
                                     m890.FUN_004bbca0(FUN_00765430());
@@ -25930,7 +25937,7 @@ void Proj::FUN_007c5260()
                         {
                             if (FUN_008d8b80())
                                 FUN_008126e0(0);
-                            FUN_008d7790(p60, 1, 1);
+                            bhkWorld_UpdatePosition(p60, 1, 1);
                             FUN_008d7b90(p60, 6, 1, 1, 1);
                             if (FUN_00764ea0())
                             {
@@ -25941,9 +25948,9 @@ void Proj::FUN_007c5260()
                                     V5 vcc0;
                                     vcc0.FUN_006815c0();
                                     FUN_00468f10(&vcc0, owner->unk04);
-                                    FUN_00764ea0()->FUN_008ea270(&vcc0);
+                                    FUN_00764ea0()->bhkCharacterController_SetPosition(&vcc0);
                                 }
-                                FUN_007c7730(0, 0);
+                                Projectile_Sync3DWithReference(0, 0);
                             }
                             if (!noMove)
                                 unk88 = 0;
@@ -25952,17 +25959,17 @@ void Proj::FUN_007c5260()
                         {
                             if (!noMove)
                                 FUN_004eeae0(owner->unk04);
-                            FUN_007c7730(0, 0);
+                            Projectile_Sync3DWithReference(0, 0);
                             FUN_005de0a0(4, true);
                             vf2a4();
-                            FUN_008d7790(p60, 1, 1);
+                            bhkWorld_UpdatePosition(p60, 1, 1);
                             FUN_008d7c10(p28, p34->FUN_00766b00().FUN_004a3a20(), 1, 1);
                             FUN_008d7b90(p28, 1, 1, 1, 1);
                             FUN_008d78f0(p28, 1, 1, 0);
                             V vcd0 = FUN_007c2840().FUN_00432b40(FUN_0076b480()).FUN_004c8dc0(2.0f);
                             FUN_00570a30(p28, &vcd0, 1);
                             if (DAT_0108d098.FUN_007af430() == this)
-                                DAT_0108d098.FUN_007d0830(0);
+                                DAT_0108d098.VATS_SetLastProjectile(0);
                         }
                     }
                     return;
@@ -25973,7 +25980,7 @@ void Proj::FUN_007c5260()
         }
     }
     uiImpactResult = 4;
-    FUN_007c4fb0();
+    MissileProjectile_ProcessStick();
 }
 
 // @f3 0x007d6710 (community match, verified in this file)
@@ -26038,7 +26045,7 @@ struct Heap
 extern Heap DAT_01090a78;
 struct Sound
 {
-    void FUN_0086c220(float a, int b);
+    void BSTimer_SetGlobalTimeMultiplier(float a, int b);
 };
 extern Sound DAT_01090ba0;
 void __cdecl FUN_007d0630();
@@ -26105,7 +26112,7 @@ void List::FUN_007d0710(bool a, bool b)
     {
         FUN_007d0630();
         DAT_0108d028 = DAT_00f5fe08;
-        DAT_01090ba0.FUN_0086c220(1.0f, 0);
+        DAT_01090ba0.BSTimer_SetGlobalTimeMultiplier(1.0f, 0);
     }
 }
 }
@@ -26300,7 +26307,7 @@ namespace q7c91a0 {
 struct Ref;
 struct Owner
 {
-    void* FUN_004b1140(Ref* r, void* a, int b);
+    void* TESObjectLIGH_GenDynamic(Ref* r, void* a, int b);
 };
 struct Base
 {
@@ -26437,16 +26444,17 @@ struct Ref
     Base* m_base;
     char pad20[0x10c - 0x20];
     Holder m_10c;
-    void FUN_007c91a0();
+    void Projectile_AttachLight();
 };
-void Ref::FUN_007c91a0()
+// pdb: Projectile::AttachLight | Projectile.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+void Ref::Projectile_AttachLight()
 {
     if (!v1d0())
         return;
     Owner* o = m_base->m_70;
     if (!o || IsDisabled())
         return;
-    m_10c.FUN_008e9650(o->FUN_004b1140(this, v1d0(), 0));
+    m_10c.FUN_008e9650(o->TESObjectLIGH_GenDynamic(this, v1d0(), 0));
 }
 }
 }   // namespace f3m_007c91a0
@@ -26474,9 +26482,10 @@ struct Task
     bool IsEmpty() const { return !m_next && !m_item; }
     void FUN_007d02e0(Item* it);
     bool FUN_007cf4a0();
-    void FUN_007d0830(int p);
+    void VATS_SetLastProjectile(int p);
 };
-void Task::FUN_007d0830(int p)
+// pdb: VATS::SetLastProjectile | VATS.obj | fnv360_0822_retail, call_seq + bridge(call_gap|caller), high
+void Task::VATS_SetLastProjectile(int p)
 {
     m_20 = p;
     if (!m_10)
@@ -26595,9 +26604,9 @@ struct Form
     virtual const char* v130();
     int pad04[2];
     unsigned int m_formID;
-    int FUN_00449cb0();
+    int TESForm_GetFormEditorIDLength();
     const char* FUN_004e9a10();
-    const char* GetName() { return FUN_00449cb0() ? v130() : FUN_004e9a10(); }
+    const char* GetName() { return TESForm_GetFormEditorIDLength() ? v130() : FUN_004e9a10(); }
 };
 struct Target
 {
@@ -26606,10 +26615,10 @@ struct Target
 };
 struct Mgr
 {
-    bool FUN_0043be40(int id);
+    bool TESDataHandler_IsFormIDCreated(int id);
 };
 extern Mgr* DAT_0106cdcc;
-inline bool IsLoaded(int id) { return DAT_0106cdcc->FUN_0043be40(id); }
+inline bool IsLoaded(int id) { return DAT_0106cdcc->TESDataHandler_IsFormIDCreated(id); }
 struct Ref;
 void __cdecl FUN_00691300(Ref* r);
 struct Ref
@@ -26672,7 +26681,7 @@ struct Ref
     int m_84;
     char pad88[0x138 - 0x88];
     Target* m_138;
-    void FUN_004f9500();
+    void TESObjectREFR_Disable();
     void FUN_007c8650();
 };
 void Ref::FUN_007c8650()
@@ -26681,7 +26690,7 @@ void Ref::FUN_007c8650()
     {
         Part* part = GetPart(m_138->m_partID);
         Form* form = m_138->m_form;
-        const char* name = form->FUN_00449cb0() ? form->v130() : form->FUN_004e9a10();
+        const char* name = form->TESForm_GetFormEditorIDLength() ? form->v130() : form->FUN_004e9a10();
         FUN_00c24b70(str_00e1bb54, name, form->m_formID);
         FUN_00c24b70(str_00e1cc04, part ? part->m_name : "");
     }
@@ -26690,7 +26699,7 @@ void Ref::FUN_007c8650()
     if (IsLoaded(m_c))
         v0c4(1);
     else
-        FUN_004f9500();
+        TESObjectREFR_Disable();
 }
 }
 
@@ -27153,7 +27162,7 @@ struct Actor
     unsigned int m_flags;
     bool Flag4() const { return (m_flags >> 4) & 1; }
     bool FUN_006f7f80(int a);
-    float FUN_006fd7f0();
+    float Actor_GetCurrentSpeed();
     int FUN_006f7370();
     bool FUN_006faf70();
 };
@@ -27219,7 +27228,7 @@ void Ctrl::FUN_007ddee0()
             if (!m_actor->FUN_006f7f80(7))
             {
                 float s = DAT_01090bac;
-                vel = NiPoint3(0.0f, m_actor->FUN_006fd7f0() * s, 0.0f);
+                vel = NiPoint3(0.0f, m_actor->Actor_GetCurrentSpeed() * s, 0.0f);
             }
             moved = true;
         }
@@ -28256,10 +28265,10 @@ void S7d8570_CoverState::FUN_007d8570(S7d8570_Output* apOut, int aiLine, int aiC
 namespace f3m_007dc2c0 {
 extern void* __cdecl FUN_007ab510();
 namespace f3m_007dc2c0 {
-struct Ret7dc2c0 { void FUN_006f8ce0(); void FUN_006f9cd0(); };
+struct Ret7dc2c0 { void FUN_006f8ce0(); void Actor_FadeIn(); };
 struct Slot7dc2c0 {
     unsigned int unk00; unsigned int unk04; unsigned int unk08; unsigned int unk0C; unsigned int unk10; unsigned int unk14; unsigned int unk18; unsigned int unk1C; unsigned int unk20; unsigned int unk24; unsigned int unk28; unsigned int unk2C; unsigned int unk30; unsigned int unk34; unsigned int unk38; unsigned int unk3C; unsigned int unk40; unsigned int unk44; unsigned int unk48; unsigned int unk4C; unsigned int unk50; unsigned int unk54; unsigned int unk58; unsigned int unk5C; unsigned int unk60; unsigned int unk64; unsigned int unk68; unsigned int unk6C; unsigned int unk70; unsigned int unk74; unsigned int unk78; unsigned int unk7C; unsigned int unk80; unsigned int unk84; unsigned int unk88; unsigned int unk8C; unsigned int unk90; unsigned int unk94; unsigned int unk98; unsigned int unk9C; unsigned int unkA0; unsigned int unkA4; unsigned int unkA8; unsigned int unkAC; unsigned int unkB0; unsigned int unkB4; unsigned int unkB8; unsigned int unkBC; unsigned int unkC0; unsigned int unkC4; unsigned int unkC8; unsigned int unkCC; unsigned int unkD0; unsigned int unkD4; unsigned int unkD8; unsigned int unkDC; unsigned int unkE0; unsigned int unkE4; unsigned int unkE8; Ret7dc2c0* unkEC;
-    void FUN_0079eab0(void* arg);
+    void CombatGroup_UnreserveSearchDoor(void* arg);
 };
 struct Mgr7dc2c0 {
     unsigned int unk00; unsigned int unk04; unsigned int unk08; unsigned int unk0C; unsigned int unk10; unsigned int unk14; unsigned int unk18; unsigned int unk1C; unsigned int unk20; unsigned int unk24; unsigned int unk28; unsigned int unk2C; unsigned int unk30; unsigned int unk34; unsigned int unk38; unsigned int unk3C; unsigned int unk40; unsigned int unk44; unsigned int unk48; unsigned int unk4C; unsigned int unk50; unsigned int unk54; unsigned int unk58; unsigned int unk5C; unsigned int unk60; unsigned int unk64; unsigned int unk68; unsigned int unk6C; unsigned int unk70; unsigned int unk74; unsigned int unk78; unsigned int unk7C; Slot7dc2c0* unk80;
@@ -28280,9 +28289,9 @@ void Owner7dc2c0::FUN_007dc2c0()
     r->FUN_006f8ce0();
     FUN_007ab540();
     if (unk10 == 5 || unk10 == 4)
-        r->FUN_006f9cd0();
+        r->Actor_FadeIn();
     if (unk10 == 2 && slot && unk3C)
-        slot->FUN_0079eab0(unk3C);
+        slot->CombatGroup_UnreserveSearchDoor(unk3C);
 }
 }
 }   // namespace f3m_007dc2c0
@@ -28306,10 +28315,10 @@ void Class7c45e0::FUN_007c45e0(Base7c45e0* a, Base7c45e0* b)
 // @f3 0x007d06c0 (community match, verified in this file)
 namespace f3m_007d06c0 {
 namespace f3m_007d06c0 {
-void __cdecl FUN_004c2660(void* p);
+void __cdecl ImageSpaceModifierInstance_Stop(void* p);
 
 struct Sub10 {
-    void FUN_00508310();
+    void BGSCameraShot_FreeCamera();
 };
 
 struct Owner7d06c0 {
@@ -28329,18 +28338,18 @@ struct Owner7d06c0 {
 void Owner7d06c0::FUN_007d06c0() {
     FUN_007d0630();
     if (unk10) {
-        unk10->FUN_00508310();
+        unk10->BGSCameraShot_FreeCamera();
     }
     f14 = 0.0f;
     f18 = 0.0f;
     unk0c = 0;
     unk10 = 0;
     if (unk28) {
-        FUN_004c2660(unk28);
+        ImageSpaceModifierInstance_Stop(unk28);
         unk28 = 0;
     }
     if (unk2c) {
-        FUN_004c2660(unk2c);
+        ImageSpaceModifierInstance_Stop(unk2c);
         unk2c = 0;
     }
 }
@@ -29438,7 +29447,7 @@ struct Actor {
     int unk3c;
     void FUN_004eeae0(Vec3* p);
     Cell* FUN_004e8880();
-    int FUN_00766d80();
+    int MobileObject_GetDesiredProcessLevel();
 };
 struct Mgr { void FUN_006f3370(Actor* actor, Vec3* p); void FUN_006f2bb0(Actor* actor); };
 extern Mgr* DAT_0107a79c;
@@ -29465,7 +29474,7 @@ bool Tgt13::FUN_007ddbc0(Vec3* p)
         int current = actor->unk3c;
         if (current != cell->FUN_005048f0(p))
             FUN_004ee3e0(actor, 0, cell);
-        if (actor->FUN_00766d80() || DAT_0107a104->FUN_0076c8e0()) return true;
+        if (actor->MobileObject_GetDesiredProcessLevel() || DAT_0107a104->FUN_0076c8e0()) return true;
         return false;
     }
     return true;
@@ -29670,7 +29679,7 @@ struct Actor {
     virtual int Slot1F4();
 };
 float __cdecl FUN_007b7810(Context* context, int value);
-void __cdecl FUN_007ba310(NiPoint3* out, Context* context, Actor* actor, int value, float distance);
+void __cdecl CombatUtilities_ComputeFaceTargetLocation(NiPoint3* out, Context* context, Actor* actor, int value, float distance);
 struct Owner {
     unsigned int unk00;
     Data* data;
@@ -29683,10 +29692,10 @@ struct Owner {
     unsigned int unk5c; unsigned int unk60;
     unsigned char flagged;
     Context* FUN_007ab510();
-    Actor* FUN_007ab520();
+    Actor* CombatProcedure_GetTarget();
     void FUN_007ab530(int a);
     void FUN_007d5860(NiPoint3* pos);
-    void FUN_007d5b00();
+    void CombatProcedureAttackMelee_HandleClose();
     void SetState(int mode) {
         if (state != mode) {
             if (mode == 4 || state == 4) data->FUN_00c24b70();
@@ -29700,7 +29709,7 @@ void Owner::FUN_007d5d50()
 {
     SetState(3);
     Context* context = FUN_007ab510();
-    Actor* actor = FUN_007ab520();
+    Actor* actor = CombatProcedure_GetTarget();
     FUN_007ab530(1);
     Context* current = FUN_007ab510();
     if (unk58 < 0.0f)
@@ -29710,9 +29719,9 @@ void Owner::FUN_007d5d50()
     }
     float distance = unk58;
     NiPoint3 pos;
-    FUN_007ba310(&pos, context, actor, actor->Slot1F4(), distance);
+    CombatUtilities_ComputeFaceTargetLocation(&pos, context, actor, actor->Slot1F4(), distance);
     FUN_007d5860(&pos);
-    FUN_007d5b00();
+    CombatProcedureAttackMelee_HandleClose();
 }
 }
 }   // namespace f3m_007d5d50
@@ -30282,7 +30291,7 @@ struct ProjItem;
 bool __cdecl FUN_007c8ac0(void*,Body*,ProjItem*,int);
 struct ProjItem : f3_7c5260::Proj {
  bool FUN_007ca9f0(void*,void*,void*,Body*,unsigned,unsigned);
- void FUN_007c4a10();
+ void MissileProjectile_DetermineImpactResult();
  bool FUN_007c4ea0(void*,void*,void*,Body*,unsigned,unsigned);
 };
 bool ProjItem::FUN_007c4ea0(void* first,void* second,void* third,Body* body,unsigned fifth,unsigned sixth){
@@ -30291,7 +30300,7 @@ bool ProjItem::FUN_007c4ea0(void* first,void* second,void* third,Body* body,unsi
  if(eligible && FUN_007c8ac0(first,body,this,cvr(unk1C))){
   if(uiImpactResult==3 && layer!=1 && layer!=2 && layer!=9 && layer!=17 && layer!=13 && layer!=20)return false;
   if(FUN_007ca9f0(first,second,third,body,fifth,sixth)){
-   FUN_007c4a10();return true;
+   MissileProjectile_DetermineImpactResult();return true;
   }
  }
  return false;
@@ -30320,7 +30329,7 @@ struct VatsMgr {
     Proj7c6800* proj1C;
     Proj7c6800* proj20;
     void FUN_007cf040(int arg);
-    void FUN_007d0830(int arg);
+    void VATS_SetLastProjectile(int arg);
 };
 
 extern VatsMgr DAT_0108d098;
@@ -30351,9 +30360,9 @@ struct Proj7c6800 {
     float FUN_0076b480();
     bool FUN_007ce6e0();
     void FUN_007c8650();
-    void FUN_007c4aa0();
-    void FUN_007c5260();
-    void FUN_007c4fb0();
+    void MissileProjectile_ProcessBounce();
+    void MissileProjectile_ProcessImpale();
+    void MissileProjectile_ProcessStick();
     bool FUN_007c6800();
 };
 
@@ -30372,19 +30381,19 @@ bool Proj7c6800::FUN_007c6800()
             if (DAT_0108d098.proj1C == this)
                 DAT_0108d098.FUN_007cf040(0);
             if (DAT_0108d098.proj20 == this)
-                DAT_0108d098.FUN_007d0830(0);
+                DAT_0108d098.VATS_SetLastProjectile(0);
             switch (impactResult140) {
             case 1:
                 FUN_007c8650();
                 break;
             case 2:
-                FUN_007c4aa0();
+                MissileProjectile_ProcessBounce();
                 break;
             case 3:
-                FUN_007c5260();
+                MissileProjectile_ProcessImpale();
                 break;
             case 4:
-                FUN_007c4fb0();
+                MissileProjectile_ProcessStick();
                 break;
             }
         }
@@ -30732,7 +30741,7 @@ struct BasePrimary {
     unsigned int f04;
     unsigned int flags08;
     unsigned int f0c, f10, f14;
-    void FUN_00454240(bool val);
+    void TESForm_SetInitialized(bool val);
 };
 
 struct BaseSecondary {
@@ -30799,7 +30808,7 @@ Proc7c80a0::Proc7c80a0(int)
     mec = 1.0f;
     m138 = 0;
     m13c = 0;
-    FUN_00454240(false);
+    TESForm_SetInitialized(false);
 }
 
 } // namespace ns_007c80a0
@@ -30847,7 +30856,7 @@ struct Str7c6f40 {
 };
 
 struct AddOn7c6f40 {
-    void* FUN_004b1140(void* r, Node7c6f40* n, int b);
+    void* TESObjectLIGH_GenDynamic(void* r, Node7c6f40* n, int b);
 };
 
 struct Form7c6f40 {
@@ -30892,7 +30901,7 @@ void Self7c6f40::FUN_007c6f40(void* arg)
         FUN_00570580(m0c);
         FUN_007c6a50(arg);
         if (m0c && m14->m74)
-            m10.FUN_008e9650(m14->m74->FUN_004b1140(0, m0c, 1));
+            m10.FUN_008e9650(m14->m74->TESObjectLIGH_GenDynamic(0, m0c, 1));
         FUN_00837ec0(m0c);
         m0c->FUN_008268a0();
         UpdData7c6f40 data;
@@ -31250,7 +31259,7 @@ struct Task
     int m_state;
     int m_prevState;
     Ctx* FUN_007ab510();
-    Actor* FUN_007ab520();
+    Actor* CombatProcedure_GetTarget();
     void FUN_007d5470();
     void FUN_007d3200();
     void FUN_007d45b0();
@@ -31260,7 +31269,7 @@ void Task::FUN_007d45b0()
     if (m_state != 1)
         return;
     Ctx* ctx = FUN_007ab510();
-    Actor* actor = FUN_007ab520();
+    Actor* actor = CombatProcedure_GetTarget();
     if (!ctx->FUN_006fcb00())
     {
         m_prevState = m_state;
@@ -32622,9 +32631,10 @@ struct Mover
     int m_state;
     bool Bit0() const { return m_c0 & 1; }
     bool Bit1() const { return (m_c0 >> 1) & 1; }
-    void FUN_007c4a10();
+    void MissileProjectile_DetermineImpactResult();
 };
-void Mover::FUN_007c4a10()
+// pdb: MissileProjectile::DetermineImpactResult | MissileProjectile.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+void Mover::MissileProjectile_DetermineImpactResult()
 {
     if (m_state == 3)
     {
@@ -33002,7 +33012,7 @@ struct Procedure
     unsigned int m_0c;
     int m_10;
     Actor* FUN_007ab510();
-    Actor* FUN_007ab520();
+    Actor* CombatProcedure_GetTarget();
     int FUN_007d3460(float, float, bool, bool, int);
     bool IsWithin(float afValue, float afLimit, int aiUnused)
     {
@@ -33028,7 +33038,7 @@ int n7d4220::Procedure::FUN_007d4220(bool abMidAttack, float afDistance, float a
     Actor* pattacker;
 
     pattacker = FUN_007ab510();
-    ptarget = FUN_007ab520();
+    ptarget = CombatProcedure_GetTarget();
     *abSwitchAttack = false;
     iAttack = 0xff;
     pweapon = m_04->GetWeapon();
@@ -33769,7 +33779,7 @@ struct Timer
     float GetElapsed() { return GetTime() - m_fTime; }
 };
 bool __cdecl FUN_0054bf50(unsigned short);
-bool __cdecl FUN_007b7890(Actor*, Actor*, int);
+bool __cdecl CombatUtilities_IsTargetWithinStrikeAngle(Actor*, Actor*, int);
 unsigned int __cdecl FUN_00456900();
 float __cdecl FUN_00581f40(Style*, int, int, bool, bool, bool, bool, bool);
 float __cdecl FUN_00581ea0(Style*, int, int, bool, bool);
@@ -33804,7 +33814,7 @@ struct Procedure
     Timer m_60;
     int GetState() { return m_14; }
     Actor* FUN_007ab510();
-    Actor* FUN_007ab520();
+    Actor* CombatProcedure_GetTarget();
     int FUN_007d3460(float, float, bool, bool, int);
     bool FUN_007d2bb0(int);
     void FUN_007d31c0(int, int);
@@ -33833,7 +33843,7 @@ void n7d4c00::Procedure::FUN_007d4c00(float afDistance, float afReach)
     if (GetState() != 3)
         return;
     pattacker = FUN_007ab510();
-    ptarget = FUN_007ab520();
+    ptarget = CombatProcedure_GetTarget();
     if (!ptarget)
         return;
     if (m_60.GetElapsed() < 1.0)
@@ -33849,7 +33859,7 @@ void n7d4c00::Procedure::FUN_007d4c00(float afDistance, float afReach)
         return;
     if (!m_04->FUN_00798580())
         return;
-    if (!FUN_007b7890(pattacker, ptarget, 0))
+    if (!CombatUtilities_IsTargetWithinStrikeAngle(pattacker, ptarget, 0))
         return;
     iAnimAction = ptarget->FUN_006f7370();
     btargetAttacking = ptarget->FUN_006fcad0();
@@ -33923,8 +33933,8 @@ struct LoadBuffer
     unsigned int FUN_006e0670();
     void FUN_006e06d0(void*);
     void FUN_006e0750(void*, unsigned int);
-    void FUN_006e0840(void*, unsigned int);
-    unsigned int FUN_006e08a0();
+    void BGSLoadGameBuffer_LoadData(void*, unsigned int);
+    unsigned int BGSLoadGameBuffer_LoadVariableSizedValue();
 };
 struct ActorCause
 {
@@ -33962,7 +33972,7 @@ struct ExtraList
     unsigned int m_08;
     ExtraList();
     ~ExtraList();
-    void FUN_004807d0(LoadBuffer*);
+    void ItemChange_LoadGame(LoadBuffer*);
     void FUN_0047ce10();
     unsigned int GetCount() { return m_08; }
     static void* operator new(size_t auiSize) { return DAT_01090a78.FUN_0086b930(auiSize); }
@@ -34218,14 +34228,14 @@ void n7cb6a0::Projectile::FUN_007cb6a0(LoadBuffer* apBuffer)
     apBuffer->FUN_006e0750(&m_d8, 4);
     apBuffer->FUN_006e0750(&m_dc, 4);
     apBuffer->FUN_006e0750(&m_e0, 4);
-    m_f0 = dynamic_cast<TESObjectWEAP*>(FUN_00455190(apBuffer->FUN_006e0670()));
+    m_f0 = dynamic_cast<TESObjectWEAP*>(TESForm_GetFormByNumericID(apBuffer->FUN_006e0670()));
     apBuffer->FUN_006e06d0(&m_f4);
     apBuffer->FUN_006e06d0(&m_f8);
     apBuffer->FUN_006e0750(&m_fc, 12);
     apBuffer->FUN_006e0750(&m_108, 4);
     apBuffer->FUN_006e0750(&m_110, 1);
     apBuffer->FUN_006e0750(&m_11c, 4);
-    apBuffer->FUN_006e0840(&m_8c, 36);
+    apBuffer->BGSLoadGameBuffer_LoadData(&m_8c, 36);
     if (apBuffer->GetVersion() >= 13)
     {
         apBuffer->FUN_006e0750(&m_8c.m_kTranslate, 12);
@@ -34248,7 +34258,7 @@ void n7cb6a0::Projectile::FUN_007cb6a0(LoadBuffer* apBuffer)
         if (bHasExtra)
         {
             m_13c = new ExtraList;
-            m_13c->FUN_004807d0(apBuffer);
+            m_13c->ItemChange_LoadGame(apBuffer);
             if (!m_13c->GetCount())
             {
                 m_13c->FUN_0047ce10();
@@ -34259,7 +34269,7 @@ void n7cb6a0::Projectile::FUN_007cb6a0(LoadBuffer* apBuffer)
     }
     if (apBuffer->GetVersion() >= 14)
     {
-        unsigned int uiCount = apBuffer->FUN_006e08a0();
+        unsigned int uiCount = apBuffer->BGSLoadGameBuffer_LoadVariableSizedValue();
         for (unsigned int uiIndex = 0; uiIndex < uiCount; ++uiIndex)
         {
             Impact* pImpact = new Impact;
@@ -35105,19 +35115,19 @@ struct Task
     int unk2C;
     bool m_30;
     Ctx* FUN_007ab510();
-    Actor* FUN_007ab520();
+    Actor* CombatProcedure_GetTarget();
     NiPoint3 FUN_007d1e40();
 };
 NiPoint3 Task::FUN_007d1e40()
 {
-    if (!m_14 && !FUN_007ab520())
+    if (!m_14 && !CombatProcedure_GetTarget())
         return DAT_0108ec68;
     Anim* anim = m_owner->m_proc->m_anim;
     float scale = m_30 ? DAT_00f5f4b4 : 1.0f;
     float s = anim->m_speed * scale;
     NiPoint3 r;
     if (!m_14)
-        r = FUN_007b9e10(FUN_007ab510(), FUN_007ab520(), 0, anim, s, m_30);
+        r = FUN_007b9e10(FUN_007ab510(), CombatProcedure_GetTarget(), 0, anim, s, m_30);
     else
         r = FUN_007b9f90(FUN_007ab510(), &m_18, 0, anim, s, m_30);
     return r;
@@ -35163,7 +35173,7 @@ struct Cls7d5780 {
     int unk4c;
     bool unk50;
 
-    Obj6fc* FUN_007ab520();
+    Obj6fc* CombatProcedure_GetTarget();
     float FUN_007d2d10();
     float FUN_007d2b10();
     void FUN_007ab510();
@@ -35186,7 +35196,7 @@ void Cls7d5780::FUN_007d5780()
     if (unk10 != 1)
         return;
 
-    Obj6fc* obj = FUN_007ab520();
+    Obj6fc* obj = CombatProcedure_GetTarget();
 
     if (clock.IsExpired())
     {
@@ -35460,8 +35470,8 @@ struct Proj
     void FUN_007c63d0();
     const Xform& GetLocal() const { return unk8C; }
     void FUN_007c8650();
-    void FUN_007c7730(bool a, bool b);
-    void FUN_007c7fd0(const M3& m);
+    void Projectile_Sync3DWithReference(bool a, bool b);
+    void Projectile_SetProjectileOrientation(const M3& m);
     void FUN_004eeae0(const V& p);
     void FUN_007c9b90(V p);
     void FUN_007ca970(float dt);
@@ -35486,11 +35496,11 @@ void Proj::FUN_007c6430(float dt)
         if (body && node) {
             Xform x = body->xform68.FUN_0056fe20(unk8C);
             node->rot34 = x.rot;
-            FUN_007c7fd0(x.rot);
+            Projectile_SetProjectileOrientation(x.rot);
             node->pos58 = x.pos;
             FUN_004eeae0(x.pos);
         }
-        FUN_007c7730(true, false);
+        Projectile_Sync3DWithReference(true, false);
     } else if (!unk88 || ((unsigned char)unkC0 & 1) || unk140 == 3) {
         bool stopped = !(unkD0 > 0.0f);
         bool far = false;
@@ -35523,7 +35533,7 @@ void Proj::FUN_007c6430(float dt)
             if (!(unkC0 & 1) || unk108 > unkCC)
                 FUN_004eeae0(unk80->pos04);
         }
-        FUN_007c7730(far, !stopped);
+        Projectile_Sync3DWithReference(far, !stopped);
         if (Get3D())
             Get3D()->FUN_008330a0();
     }
@@ -35574,7 +35584,7 @@ struct Pkg
     float m_58;
     bool Flag3() const { return (m_flags >> 3) & 1; }
     bool FUN_005084e0();
-    void FUN_00508310();
+    void BGSCameraShot_FreeCamera();
 };
 struct Node
 {
@@ -35606,7 +35616,7 @@ bool Task::FUN_007cf4a0()
         Node* next = n->m_next;
         if (next) {
             if (m_cur) {
-                m_cur->FUN_00508310();
+                m_cur->BGSCameraShot_FreeCamera();
                 m_cur = 0;
             }
             m_cur = next->m_item;
@@ -35620,7 +35630,7 @@ bool Task::FUN_007cf4a0()
         }
     }
     if (!result && m_cur && !m_cur->FUN_005084e0()) {
-        m_cur->FUN_00508310();
+        m_cur->BGSCameraShot_FreeCamera();
         m_cur = 0;
     }
     return result;
@@ -35901,7 +35911,7 @@ struct ShotPtr
 
 void __cdecl FUN_007c3290(Shot* s, Actor* a, Target* t, float f);
 float __cdecl FUN_0044a330(float lo, float hi);
-float __cdecl FUN_00584110(Base9C* b, Weapon* w, float f);
+float __cdecl CombatFormulas_GetWeaponRateOfFire(Base9C* b, Weapon* w, float f);
 
 extern const float FUN_00f5fb50;
 extern const float FUN_00f5fb44;
@@ -35919,14 +35929,14 @@ struct Proc
     Weapon* unk1C;
 
     Actor* FUN_007ab510();
-    Target* FUN_007ab520();
+    Target* CombatProcedure_GetTarget();
     void FUN_007d2750();
 };
 
 void Proc::FUN_007d2750()
 {
     Actor* actor = FUN_007ab510();
-    Target* target = FUN_007ab520();
+    Target* target = CombatProcedure_GetTarget();
     Data* data = unk04->unk9C;
     if (!target || target->FUN_004e8810() != actor->FUN_004e8810()) {
         unk0C = "Target is in different space";
@@ -35964,7 +35974,7 @@ void Proc::FUN_007d2750()
     if (unk1C && unk1C->GetAmmo() && actor->FUN_006f7820(unk1C)) {
         Form* ammo = unk1C->GetAmmo();
         int count = actor->FUN_004e8650(ammo);
-        int n = (int)FUN_00584110(actor ? &actor->base9C : 0, unk1C, unk18);
+        int n = (int)CombatFormulas_GetWeaponRateOfFire(actor ? &actor->base9C : 0, unk1C, unk18);
         if (n <= 1)
             n = 1;
         if (n >= count)
@@ -36287,7 +36297,7 @@ struct Actor
     void* FUN_004e8880();
     void FUN_006f8ba0(Request* r, Vec* p, void* cell, void* b, float radius, int c);
     bool FUN_00702d60(Request* r);
-    WorldPos FUN_004eea80();
+    WorldPos TESObjectREFR_GetWorldLocation();
 };
 
 struct Data
@@ -36321,7 +36331,7 @@ struct Proc
 
     float Elapsed() { return DAT_0108cba0 - unk60; }
     Actor* FUN_007ab510();
-    Actor* FUN_007ab520();
+    Actor* CombatProcedure_GetTarget();
     void FUN_007ab530(int a);
     bool FUN_007d8b20(bool arg);
 };
@@ -36333,7 +36343,7 @@ if (Elapsed() < 5.0f)
     if (FUN_00f70c38) {
         unk33 = true;
         Actor* actor = FUN_007ab510();
-        Actor* target = FUN_007ab520();
+        Actor* target = CombatProcedure_GetTarget();
         AttackRequest request;
         actor->FUN_006f8ba0(&request, target->GetPos(), actor->GetCell(), actor->FUN_004e8880(), 16.0f, 0);
         request.unkB0 = unk14;
@@ -36342,14 +36352,14 @@ if (Elapsed() < 5.0f)
         request.unkBC = unk1C;
         if (!actor->FUN_00702d60(&request))
             return false;
-        unk50 = target->FUN_004eea80();
+        unk50 = target->TESObjectREFR_GetWorldLocation();
         FUN_007ab530(arg ? 3 : 1);
         unk33 = false;
         return true;
     }
     unk33 = true;
     Actor* actor = FUN_007ab510();
-    Actor* target = FUN_007ab520();
+    Actor* target = CombatProcedure_GetTarget();
     Spot spot;
     Data* data = unk04->unk9C;
     if (!data->FUN_007ac3a0(unk14, unk18, unk14 * 0.5, unk1C, &spot, 1))
@@ -36361,7 +36371,7 @@ if (Elapsed() < 5.0f)
     if (!actor->FUN_00702d60(&request))
         return false;
     unk40 = spot.where;
-    unk50 = target->FUN_004eea80();
+    unk50 = target->TESObjectREFR_GetWorldLocation();
     FUN_007ab530(arg ? 3 : 1);
     return true;
 }
@@ -36509,7 +36519,7 @@ struct Ref
 struct Handle
 {
     int value;
-    Ref* FUN_005fc730();
+    Ref* PathingLocation_GetCell();
 };
 
 struct Spot
@@ -36523,7 +36533,7 @@ struct Spot
     int unk20;
     int unk24;
     Vec GetPos() const { return pos; }
-    Ref* GetCell() { return handle.FUN_005fc730(); }
+    Ref* GetCell() { return handle.PathingLocation_GetCell(); }
 };
 
 struct Info
@@ -36543,8 +36553,8 @@ struct World
 struct TES
 {
     World* FUN_00433ff0(void* space, int cell);
-    float FUN_00434200(const Vec* p, Ref* r);
-    float Dist(Vec p, Ref* r) { return FUN_00434200(&p, r); }
+    float TES_GetWaterHeight(const Vec* p, Ref* r);
+    float Dist(Vec p, Ref* r) { return TES_GetWaterHeight(&p, r); }
 };
 extern TES* DAT_0107a0d8;
 extern unsigned int DAT_01090bb0;
@@ -36610,10 +36620,11 @@ struct Proc
 
     void FUN_007de400();
     Info* GetInfo() { return unk1C; }
-    void FUN_007defe0(bool arg);
+    void ActorMover_SetPathingFailed(bool arg);
 };
 
-void Proc::FUN_007defe0(bool arg)
+// pdb: ActorMover::SetPathingFailed | ActorMover.obj | fnv360_0822_retail, call_seq + bridge(call_gap|caller), high
+void Proc::ActorMover_SetPathingFailed(bool arg)
 {
     unk70 = arg;
     if (!arg) {
@@ -36638,20 +36649,20 @@ void Proc::FUN_007defe0(bool arg)
     }
     float limit = unk28->FUN_006f7f80(7) ? 3.0f : 1.5f;
     if (unk1C) {
-        Ref* refA = GetInfo()->a.handle.FUN_005fc730();
-        Ref* refB = GetInfo()->b.handle.FUN_005fc730();
+        Ref* refA = GetInfo()->a.handle.PathingLocation_GetCell();
+        Ref* refB = GetInfo()->b.handle.PathingLocation_GetCell();
         if (refA && refB) {
             bool farA;
             {
                 Vec q = unk1C->a.pos;
                 Vec p = q;
-                farA = DAT_0107a0d8->FUN_00434200(&q, refA) > p.z;
+                farA = DAT_0107a0d8->TES_GetWaterHeight(&q, refA) > p.z;
             }
             bool farB;
             {
                 Vec q = unk1C->b.pos;
                 Vec p = q;
-                farB = DAT_0107a0d8->FUN_00434200(&q, refB) > p.z;
+                farB = DAT_0107a0d8->TES_GetWaterHeight(&q, refB) > p.z;
             }
             if (farA != farB)
                 limit = 1.0f;
@@ -36865,7 +36876,7 @@ struct Actor
     int unke0; int unke4; int unke8; int unkec; int unkf0;
     Actor* mf4;
     bool GetFlagC0(unsigned int bit) const { return (mc0 >> bit) & 1; }
-    Tagged* FUN_004f26c0();
+    Tagged* TESObjectREFR_GetOwner();
     bool FUN_006f49f0();
     bool FUN_006f7ba0();
     bool FUN_007c78e0(Actor* a, Actor* allowed, Tagged* tagged);
@@ -36900,7 +36911,7 @@ bool Actor::FUN_007c8e70()
     if (mf4 && mf4->V100())
         allowed = mf4;
     else {
-        Tagged* t = FUN_004f26c0();
+        Tagged* t = TESObjectREFR_GetOwner();
         if (t && t->type == 8)
             tagged = t;
     }
@@ -37553,7 +37564,7 @@ extern Camera DAT_0108d098;
 extern void* DAT_0108d014;
 
 struct Player {
-    void FUN_007034e0(int a, int b, int c);
+    void Actor_SetIronSights(int a, int b, int c);
     void FUN_00707830(int a);
     void FUN_0070da60(int a, int b, int c, int d, int e, int f);
 };
@@ -37569,7 +37580,7 @@ Ui* __cdecl FUN_00619e50();
 
 struct Effect { int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; unsigned int flags; };
 struct Pt2 { float x, y; };
-void __cdecl FUN_004c2660(Effect* e);
+void __cdecl ImageSpaceModifierInstance_Stop(Effect* e);
 Effect* __cdecl FUN_004c2ac0(float a, float b, float c, float d, float e, Pt2* p, float f);
 extern float DAT_00f5fe20;
 extern float DAT_00f5fe2c;
@@ -37578,9 +37589,9 @@ extern float DAT_00f5fe44;
 
 struct Deletable { virtual void v00(); virtual void v04(); virtual void v08(); virtual void v0c(); virtual void v10(int flag); };
 extern Deletable* DAT_0108d030;
-struct Fader { void FUN_0086c220(float a, int b); };
+struct Fader { void BSTimer_SetGlobalTimeMultiplier(float a, int b); };
 extern Fader DAT_01090ba0;
-struct Thing { void FUN_00508310(); };
+struct Thing { void BGSCameraShot_FreeCamera(); };
 
 struct SceneMgr {
     virtual void v000();
@@ -37710,11 +37721,11 @@ void Mgr::FUN_007cfb90(int newState)
             Effect* e = effect28;
             DAT_0108d02c = false;
             if (e) {
-                FUN_004c2660(e);
+                ImageSpaceModifierInstance_Stop(e);
                 effect28 = 0;
             }
             if (effect2C) {
-                FUN_004c2660(effect2C);
+                ImageSpaceModifierInstance_Stop(effect2C);
                 effect2C = 0;
             }
             Pt2 scale;
@@ -37730,12 +37741,12 @@ void Mgr::FUN_007cfb90(int newState)
                 DAT_0108d030->v10(1);
                 DAT_0108d030 = 0;
             }
-            DAT_01090ba0.FUN_0086c220(1.0f, 1);
+            DAT_01090ba0.BSTimer_SetGlobalTimeMultiplier(1.0f, 1);
             DAT_0108d008 = 0;
             DAT_0108d00c = 0;
             DAT_0108d010 = 0;
             if (thing)
-                thing->FUN_00508310();
+                thing->BGSCameraShot_FreeCamera();
             DAT_0108d000 = 0;
             unk14 = 0.0f;
             unk0C = 0;
@@ -37746,15 +37757,15 @@ void Mgr::FUN_007cfb90(int newState)
             DAT_0108d024 = 0;
             DAT_0108d01b = false;
             if (effect28) {
-                FUN_004c2660(effect28);
+                ImageSpaceModifierInstance_Stop(effect28);
                 effect28 = 0;
             }
             if (effect2C) {
-                FUN_004c2660(effect2C);
+                ImageSpaceModifierInstance_Stop(effect2C);
                 effect2C = 0;
             }
             unk38 = true;
-            DAT_0107a104->FUN_007034e0(0, 0, 0);
+            DAT_0107a104->Actor_SetIronSights(0, 0, 0);
             DAT_0107a104->FUN_00707830(0);
             DAT_0107a0d4->FUN_006e4eb0(6)->FUN_00be8b50();
             if (unk40) {
@@ -37863,8 +37874,8 @@ struct Path {
     int unk24;
     Path(Vec3* pos, Actor* actor);
     ~Path() { vtbl = DAT_00dc4dc0; }
-    bool FUN_005fe020(float f);
-    void* FUN_005fc730();
+    bool PathingLocation_IsValidLocation(float f);
+    void* PathingLocation_GetCell();
     void* FUN_004c0120();
 };
 
@@ -38044,7 +38055,7 @@ struct Actor {
     bool FUN_00702d60(Request* request);
 };
 bool __cdecl FUN_007b9aa0(Actor* actor, Actor* target, Vec3* pos, Vec3* targetPos, int a, int b);
-float __cdecl FUN_007b8e70(Actor* actor, Actor* target, float dist);
+float __cdecl CombatUtilities_ComputeFaceTargetDistance(Actor* actor, Actor* target, float dist);
 float __cdecl FUN_007b7810(Actor* actor, int value);
 
 struct Flags {
@@ -38165,17 +38176,17 @@ struct Owner {
     int unk54;
     float unk58;
     Actor* FUN_007ab510();
-    Actor* FUN_007ab520();
+    Actor* CombatProcedure_GetTarget();
     void FUN_007d5860(Vec3* pos);
 };
 
 void Owner::FUN_007d5860(Vec3* pos)
 {
     Actor* actor = FUN_007ab510();
-    Actor* target = FUN_007ab520();
+    Actor* target = CombatProcedure_GetTarget();
     Request request;
     Path path(pos, actor);
-    if (path.FUN_005fe020(actor->FUN_006f9ec0()) && FUN_007b9aa0(actor, target, pos, target->GetPos(), 0, 30)) {
+    if (path.PathingLocation_IsValidLocation(actor->FUN_006f9ec0()) && FUN_007b9aa0(actor, target, pos, target->GetPos(), 0, 30)) {
         NiPointer<Route> route = new Route;
         Entry e;
         e.pos = *target->GetPos();
@@ -38184,7 +38195,7 @@ void Owner::FUN_007d5860(Vec3* pos)
         e.c = 0;
         route->entries[route->FUN_007433b0()] = e;
         Vec3 dest = path.pos;
-        actor->FUN_006f8ba0(&request, &dest, path.FUN_005fc730(), path.FUN_004c0120(), 5.0f, route);
+        actor->FUN_006f8ba0(&request, &dest, path.PathingLocation_GetCell(), path.FUN_004c0120(), 5.0f, route);
     } else {
         float dist = 10.0f;
         Flags* fl = data->flags;
@@ -38195,7 +38206,7 @@ void Owner::FUN_007d5860(Vec3* pos)
                 unk58 = FUN_007b7810(cur, value);
             }
             float range = unk58;
-            dist = FUN_007b8e70(actor, target, range);
+            dist = CombatUtilities_ComputeFaceTargetDistance(actor, target, range);
         }
         target->SendFrom(actor, &request, dist);
     }
@@ -38645,7 +38656,7 @@ struct Procedure
     float currentRange;
     float destinationRange;
     Actor* FUN_007ab510();
-    Destination* FUN_007ab520();
+    Destination* CombatProcedure_GetTarget();
     __forceinline void Finish(Actor* a)
     {
         if (a->FUN_006fcb00())
@@ -38664,7 +38675,7 @@ void Procedure::FUN_007d3200()
     if (FUN_007ab510()->V1e4() && FUN_007ab510()->V1e4()->me8 && FUN_007ab510()->V1e4()->me8->m44 != 1)
         return;
     Actor* a = FUN_007ab510();
-    Destination* target = FUN_007ab520();
+    Destination* target = CombatProcedure_GetTarget();
     if (!actor->FUN_007995a0() && pendingState != 1)
         return;
     if (!target) {
@@ -38677,7 +38688,7 @@ void Procedure::FUN_007d3200()
     if (target->V41c())
         busy = target->V41c()->FUN_007995a0();
     if (destinationRange < 0.0f)
-        destinationRange = FUN_007b8c50(FUN_007ab510(), FUN_007ab520(), 0);
+        destinationRange = FUN_007b8c50(FUN_007ab510(), CombatProcedure_GetTarget(), 0);
     float remaining = destinationRange;
     Actor* cur = FUN_007ab510();
     if (currentRange < 0.0f) {
@@ -39089,7 +39100,7 @@ struct Ammo {
 float __cdecl FUN_00582700(float a, float b);
 float __cdecl FUN_00582750(int a, int b, float c, bool d, bool e);
 float __cdecl FUN_0090d870(float a, float b);
-bool __cdecl FUN_007b7890(Actor* actor, void* source, int c);
+bool __cdecl CombatUtilities_IsTargetWithinStrikeAngle(Actor* actor, void* source, int c);
 
 struct Data {
     void* item;
@@ -39151,7 +39162,7 @@ void Data::FUN_007c2990(bool flag)
     if (!flag) {
         bool ok = target->v234() ? false : target->FUN_006fcb00();
         flag = target->process->v148() == 0 && ok;
-        if (ok && FUN_007b7890(target, proj ? proj : item, 0)) {
+        if (ok && CombatUtilities_IsTargetWithinStrikeAngle(target, proj ? proj : item, 0)) {
             flags |= 1;
             bool c = false;
             if (target->process->v148() && target->FUN_006f6c70())
@@ -39251,7 +39262,7 @@ struct xMelee {
     void FUN_007d46e0();
     void FUN_007d4ba0();
     Actor* FUN_007ab510();
-    Actor* FUN_007ab520();
+    Actor* CombatProcedure_GetTarget();
     void FUN_007d2c70();
     void FUN_007d5470();
     void FUN_007d3c70();
@@ -39283,7 +39294,7 @@ void xMelee::FUN_007d5510()
         return;
     }
     Actor* qfTOqo = FUN_007ab510();
-    Actor* qpqRa = FUN_007ab520();
+    Actor* qpqRa = CombatProcedure_GetTarget();
     int qSVM = qfTOqo->FUN_006f58b0();
     if ((qfTOqo->FUN_006f58b0() & 0xf) == 0)
     {
@@ -39373,7 +39384,7 @@ struct Res
 struct Pt { float x, y, z, w; };
 struct Actor
 {
-    Pt* FUN_004eea80(Pt* out);
+    Pt* TESObjectREFR_GetWorldLocation(Pt* out);
 };
 struct Proc9c
 {
@@ -39394,7 +39405,7 @@ struct Sub64
 };
 float __cdecl FUN_007b8c50(Ctx* c, Actor* a, int b);
 float __cdecl FUN_007b7810(Ctx* c, void* p);
-Res __cdecl FUN_007b8030(Actor* a, int b);
+Res __cdecl CombatUtilities_GetTargetFiringLocation(Actor* a, int b);
 struct Task
 {
     int unk00;
@@ -39412,19 +39423,19 @@ struct Task
     int unk60;
     Sub64 m_64;
     Ctx* FUN_007ab510();
-    Actor* FUN_007ab520();
+    Actor* CombatProcedure_GetTarget();
     void FUN_007d5470();
     void FUN_007d61b0();
     void FUN_007d5780();
     void FUN_007d5510();
-    void FUN_007d5b00();
-    void FUN_007d5e20();
+    void CombatProcedureAttackMelee_HandleClose();
+    void CombatProcedureAttackMelee_HandleAdvance();
     void FUN_007ab580();
     void FUN_007ab550(const Res& r, int a);
     float GetRange()
     {
         if (m_5c < 0.0f)
-            m_5c = FUN_007b8c50(FUN_007ab510(), FUN_007ab520(), 0);
+            m_5c = FUN_007b8c50(FUN_007ab510(), CombatProcedure_GetTarget(), 0);
         return m_5c;
     }
     float GetDist()
@@ -39442,7 +39453,7 @@ struct Task
 void Task::FUN_007d6300()
 {
     Ctx* ctx = FUN_007ab510();
-    Actor* actor = FUN_007ab520();
+    Actor* actor = CombatProcedure_GetTarget();
     m_5c = DAT_01012054;
     m_64.FUN_007d41b0(m_owner);
     FUN_007d5470();
@@ -39460,7 +39471,7 @@ void Task::FUN_007d6300()
                 m_owner->m_9c->m_flags |= 2;
                 Proc9c* p = m_owner->m_9c;
                 Pt tmp;
-                p->FUN_007ae580(actor->FUN_004eea80(&tmp));
+                p->FUN_007ae580(actor->TESObjectREFR_GetWorldLocation(&tmp));
                 m_c = str_00e1d4f8;
                 m_8 = 1;
             }
@@ -39475,15 +39486,15 @@ void Task::FUN_007d6300()
     case 0: FUN_007d61b0(); break;
     case 2: FUN_007d5510(); break;
     case 1: FUN_007d5780(); break;
-    case 3: FUN_007d5b00(); break;
-    case 4: FUN_007d5e20(); break;
+    case 3: CombatProcedureAttackMelee_HandleClose(); break;
+    case 4: CombatProcedureAttackMelee_HandleAdvance(); break;
     }
     bool done = false;
     if (m_14 == 3 && m_state != 3)
         done = !(GetRange() - GetDist() < ctx->FUN_004e6d80() * DAT_00f601ec * DAT_00e1a690);
     if (!done)
     {
-        Res r = FUN_007b8030(actor, 2);
+        Res r = CombatUtilities_GetTargetFiringLocation(actor, 2);
         FUN_007ab550(r, 4);
     }
     else
@@ -39701,8 +39712,8 @@ public:
     void FUN_004eeae0(NiPoint3* pos);
     TESObjectWEAP* FUN_006f6c90();
     float FUN_00721aa0();
-    void FUN_00721ad0(float value);
-    void FUN_00722a10();
+    void Actor_SetAlphaMult(float value);
+    void Actor_UpdateAlpha();
 };
 
 class TESIdleForm
@@ -39790,7 +39801,7 @@ public:
 
 struct IdleManager
 {
-    TESIdleForm* FUN_00553d70(Actor* actor, TESObjectREFR* target);
+    TESIdleForm* TESIdleManager_GetIdleToPlay(Actor* actor, TESObjectREFR* target);
 };
 
 struct Setting
@@ -39869,8 +39880,8 @@ void f3m_007d00e0::VATS::FUN_007d00e0(VATSCommand* cmd)
                     distance = DAT_00f5fe74;
                     if (DAT_0108d030->FUN_00721aa0() != 1.0f)
                     {
-                        DAT_0108d030->FUN_00721ad0(1.0f);
-                        DAT_0108d030->FUN_00722a10();
+                        DAT_0108d030->Actor_SetAlphaMult(1.0f);
+                        DAT_0108d030->Actor_UpdateAlpha();
                         FUN_006bd8d0();
                     }
                 }
@@ -39898,7 +39909,7 @@ void f3m_007d00e0::VATS::FUN_007d00e0(VATSCommand* cmd)
                 DAT_0108d034->Get3D()->FUN_0045ce90();
             }
         }
-        m_idle = DAT_010721b8->FUN_00553d70(DAT_0108d034, cmd->target);
+        m_idle = DAT_010721b8->TESIdleManager_GetIdleToPlay(DAT_0108d034, cmd->target);
         if (m_idle && m_idle->FUN_00552a10() != 4)
         {
             FUN_00887da0("COMBAT: Bad VATS Melee Attack '%s' in the idle manager. Attacks should be tagged for 'Weapon' anim group section.", m_idle->GetEditorID());
@@ -40091,7 +40102,7 @@ public:
     unsigned char m_category;
 
     void* FUN_007ab510();
-    Target* FUN_007ab520();
+    Target* CombatProcedure_GetTarget();
     bool FUN_007d2020(void* form, ::NiPoint3* position, float distance);
     void Reset() { m_state = 2; }
     bool FUN_007d20c0(::NiPoint3* output, ::NiPoint3* input);
@@ -40102,7 +40113,7 @@ public:
 bool f3m_007d20c0::CombatProcedureAttackGrenade::FUN_007d20c0(::NiPoint3* output, ::NiPoint3* input)
 {
     void* actor = FUN_007ab510();
-    Target* target = FUN_007ab520();
+    Target* target = CombatProcedure_GetTarget();
     Manager* manager = m_owner->ManagerGet();
     Item* item = manager->Select(actor);
     void* form = item->Sound();
@@ -40117,7 +40128,7 @@ bool f3m_007d20c0::CombatProcedureAttackGrenade::FUN_007d20c0(::NiPoint3* output
     }
     else
     {
-        if (FUN_007baf20(FUN_007ab510(), FUN_007ab520(), manager->Select(actor), input, &m_category, &m_destination, -1.0f))
+        if (FUN_007baf20(FUN_007ab510(), CombatProcedure_GetTarget(), manager->Select(actor), input, &m_category, &m_destination, -1.0f))
         {
             *output = m_destination;
             result = true;
@@ -40154,7 +40165,7 @@ struct TESObjectWEAP
 {
     unsigned char unk00[0xf4];
     unsigned char m_weaponType;
-    bool FUN_0047cb00();
+    bool TESObjectWEAP_IsThrownWeapon();
     bool IsMelee() const { return m_weaponType <= 2; }
 };
 
@@ -40452,10 +40463,10 @@ struct Actor
     unsigned char unk00[0x60];
     Process* m_process;
     int FUN_006f7370();
-    void FUN_006fef60(bool draw);
+    void Actor_SetWantWeaponDrawn(bool draw);
     int FUN_004e8650(TESObjectWEAP* weapon);
-    void FUN_007198e0(TESObjectWEAP* weapon, int count, void* extra, bool a4, bool a5, bool a6);
-    void FUN_007133e0(TESObjectWEAP* weapon, int extra, bool a3, bool a4, bool a5, bool a6);
+    void Actor_QueueEquipObject(TESObjectWEAP* weapon, int count, void* extra, bool a4, bool a5, bool a6);
+    void Actor_QueueUnEquipObject(TESObjectWEAP* weapon, int extra, bool a3, bool a4, bool a5, bool a6);
 };
 
 struct CombatController
@@ -40497,27 +40508,27 @@ void f3m_007dd5d0::CombatProcedureSwitchWeapon::FUN_007dd5d0()
     {
         if (actor->m_process->IsWeaponOut())
         {
-            actor->FUN_006fef60(false);
+            actor->Actor_SetWantWeaponDrawn(false);
             return;
         }
         TESObjectWEAP* current = m_weapon;
         if (current)
         {
             int count = 1;
-            if (current->FUN_0047cb00())
+            if (current->TESObjectWEAP_IsThrownWeapon())
                 count = actor->FUN_004e8650(current);
-            actor->FUN_007198e0(m_weapon, count, 0, true, false, true);
+            actor->Actor_QueueEquipObject(m_weapon, count, 0, true, false, true);
         }
         else
         {
-            actor->FUN_007133e0(weapon, entry->FUN_007270f0(), false, false, false, true);
+            actor->Actor_QueueUnEquipObject(weapon, entry->FUN_007270f0(), false, false, false, true);
         }
         m_weaponState = true;
     }
     else if (weapon == m_weapon)
     {
         if (!actor->m_process->IsWeaponOut())
-            actor->FUN_006fef60(true);
+            actor->Actor_SetWantWeaponDrawn(true);
         if (!weapon || weapon->IsMelee())
             m_controller->FUN_0079aad0();
         SetDone();
@@ -40786,7 +40797,7 @@ public:
     bool IsFlagSet(unsigned int bit) const { return (m_flags >> bit) & 1; }
     float FUN_0076b480();
     void FUN_007c89a0(float scale, NiPoint3 position);
-    void FUN_007c7730(bool a1, bool a2);
+    void Projectile_Sync3DWithReference(bool a1, bool a2);
     void FUN_007c4820();
 };
 
@@ -40815,7 +40826,7 @@ void f3m_007c4820::Projectile::FUN_007c4820()
             float length = diff.Length() + bound.m_radius;
             float scale = length / FUN_0076b480();
             FUN_007c89a0(scale, NiPoint3(0.0f, length, 0.0f));
-            FUN_007c7730(false, true);
+            Projectile_Sync3DWithReference(false, true);
             NiUpdateData data(0.0f);
             node->UpdateWorldData(data);
             if (m_valueA > m_valueB)
@@ -40922,7 +40933,7 @@ struct Sequence {
 struct Process {
     unsigned unk00, unk04, unk08, unk0c, unk10, unk14, unk18, unk1c, unk20, unk24;
     int level;
-    bool FUN_0072ff10(Actor* actor, unsigned refID, Ref* ref);
+    bool HighProcess_FindSpecialIdletoPlay(Actor* actor, unsigned refID, Ref* ref);
 };
 
 struct Tile {
@@ -41033,7 +41044,7 @@ struct Ref {
     unsigned unk00, unk04, unk08, unk0c, unk10, unk14, unk18;
     unsigned refID;
     int FUN_004e8650(int v);
-    void FUN_004ee000(Actor* actor, int a2, void* a3, int a4);
+    void TESObjectREFR_Activate(Actor* actor, int a2, void* a3, int a4);
 };
 
 struct CombatController {
@@ -41278,7 +41289,7 @@ struct CombatProc {
     void FUN_007d1ae0();
 };
 
-__forceinline bool F4(Ref* r, unsigned id, Actor* a, Process* self) { return self->FUN_0072ff10(a, id, r); }
+__forceinline bool F4(Ref* r, unsigned id, Actor* a, Process* self) { return self->HighProcess_FindSpecialIdletoPlay(a, id, r); }
 
 void CombatProc::FUN_007d1ae0()
 {
@@ -41363,14 +41374,14 @@ void CombatProc::FUN_007d1ae0()
                 {
                     if (c < 0)
                         c = -c;
-                    ref->FUN_004ee000(actor, 1, (void*)arr[j], c);
+                    ref->TESObjectREFR_Activate(actor, 1, (void*)arr[j], c);
                 }
             }
         }
         else
         {
             tile->FUN_007acdf0(ref);
-            ref->FUN_004ee000(actor, 1, 0, 1);
+            ref->TESObjectREFR_Activate(actor, 1, 0, 1);
         }
         if (!actor->inCombat)
             return;
@@ -41950,8 +41961,8 @@ unsigned int __cdecl FUN_00456900();
 float __cdecl FUN_007b8c50(h_Context* c, h_Actor* a, int b);
 float __cdecl FUN_007b7810(h_Context* c, void* p);
 float __cdecl FUN_007b7760(h_Context* c, h_Actor* a);
-bool __cdecl FUN_007b7890(h_Context* c, h_Actor* a, int b);
-void __cdecl FUN_007ba310(h_NiPoint3* out, h_Context* c, h_Actor* a, h_NiPoint3* pos, float dist);
+bool __cdecl CombatUtilities_IsTargetWithinStrikeAngle(h_Context* c, h_Actor* a, int b);
+void __cdecl CombatUtilities_ComputeFaceTargetLocation(h_NiPoint3* out, h_Context* c, h_Actor* a, h_NiPoint3* pos, float dist);
 
 struct h_Task {
     char pad00[4];
@@ -41964,7 +41975,7 @@ struct h_Task {
     float m_5c;
 
     h_Context* FUN_007ab510();
-    h_Actor* FUN_007ab520();
+    h_Actor* CombatProcedure_GetTarget();
     bool FUN_007d2d40();
     bool FUN_007d2b50(float delta, float limit, int unused);
     void FUN_007d5860(h_NiPoint3* pos);
@@ -41975,7 +41986,7 @@ struct h_Task {
 
     float GetRange() {
         if (m_5c < 0.0f)
-            m_5c = FUN_007b8c50(FUN_007ab510(), FUN_007ab520(), 0);
+            m_5c = FUN_007b8c50(FUN_007ab510(), CombatProcedure_GetTarget(), 0);
         return m_5c;
     }
     float GetDist() {
@@ -41987,18 +41998,19 @@ struct h_Task {
         return m_58;
     }
 
-    void FUN_007d5e20();
+    void CombatProcedureAttackMelee_HandleAdvance();
 };
 
 extern const char* DAT_00f781d0;
 
-void h_Task::FUN_007d5e20()
+// pdb: CombatProcedureAttackMelee::HandleAdvance | CombatProcedureAttackMelee.obj | fnv360_0721_retail, call_seq + bridge(call_gap|call_gap), high
+void h_Task::CombatProcedureAttackMelee_HandleAdvance()
 {
     if (m_state != 4)
         return;
 
     h_Context* ctx = FUN_007ab510();
-    h_Actor* target = FUN_007ab520();
+    h_Actor* target = CombatProcedure_GetTarget();
     float reach = GetRange();
     float dist = GetDist();
     bool mid4 = FUN_007d2d40();
@@ -42009,7 +42021,7 @@ void h_Task::FUN_007d5e20()
     if ((reach >= threshold && m_owner->FUN_00798580()) || !m_owner->FUN_00798580())
     {
         h_NiPoint3 point2;
-        FUN_007ba310(&point2, ctx, target, target->Slot1F4(), GetDist());
+        CombatUtilities_ComputeFaceTargetLocation(&point2, ctx, target, target->Slot1F4(), GetDist());
         bool ready3 = false;
         if (ctx->FUN_006f8d90())
             ready3 = true;
@@ -42057,7 +42069,7 @@ void h_Task::FUN_007d5e20()
         ctx->Slot218() &&
         process && process->Slot3F4())
     {
-        if (FUN_007b7890(ctx, target, 0))
+        if (CombatUtilities_IsTargetWithinStrikeAngle(ctx, target, 0))
         {
             if (FUN_00456900() % 100 < (int)(*DAT_00f60260.FUN_00401eb0() * 100.0))
             {
@@ -42524,20 +42536,20 @@ int u134;
 int u138;
 int u13c;
 char f140; bool flag141;
-int FUN_006f7370(); float FUN_006f6590(); float FUN_006f5ad0(); int FUN_006fcb20(int,int,int,int); float FUN_006fccd0(int); void FUN_006f8cb0(int); void FUN_006f8cc0(); void FUN_006f8ce0(); bool FUN_006f8d80(); const char* FUN_004e9a10(); };
+int FUN_006f7370(); float FUN_006f6590(); float Actor_GetWalkSpeed(); int Actor_GetAnimGroup(int,int,int,int); float FUN_006fccd0(int); void FUN_006f8cb0(int); void FUN_006f8cc0(); void FUN_006f8ce0(); bool FUN_006f8d80(); const char* FUN_004e9a10(); };
 struct Random { unsigned FUN_0086c4b0(int); }; struct Setting { float* FUN_00401eb0(); };
 extern Actor* DAT_0107a104; extern double DAT_00de8060,DAT_00dc2d10,DAT_00dba730,DAT_00db38b0; extern float DAT_0108cba0; extern bool DAT_0108c66c; extern Setting DAT_00f5f324;
 extern const char DAT_00e1d344[],DAT_00e1d33c[],DAT_00e1d4c8[],DAT_00e1d4c0[],DAT_00e1d484[];
-bool __cdecl FUN_007b8840(Actor*); float __cdecl FUN_00582150(Style*,int,float,bool); Random* __cdecl FUN_0044a2d0(); float __cdecl FUN_007b8c50(Actor*,Actor*,int); float __cdecl FUN_007b7810(Actor*,void*); unsigned short __cdecl FUN_005821e0(Style*,bool,bool,float,float,bool,bool,unsigned short); float __cdecl FUN_005829d0(float,float); int __cdecl FUN_0054b780(int); float __cdecl FUN_00401e20(float,float); void __cdecl FUN_006195d0(const char*,...);
+bool __cdecl FUN_007b8840(Actor*); float __cdecl FUN_00582150(Style*,int,float,bool); Random* __cdecl FUN_0044a2d0(); float __cdecl FUN_007b8c50(Actor*,Actor*,int); float __cdecl FUN_007b7810(Actor*,void*); unsigned short __cdecl FUN_005821e0(Style*,bool,bool,float,float,bool,bool,unsigned short); float __cdecl FUN_005829d0(float,float); int __cdecl TESAnimGroup_GetType(int); float __cdecl FUN_00401e20(float,float); void __cdecl FUN_006195d0(const char*,...);
 struct Timer {float start,duration; __forceinline void Set(float value){start=DAT_0108cba0;duration=value;} };
 struct Options { unsigned short value; __forceinline unsigned short Get(){return value;} };
-struct Procedure { void* u00; Context* context; int u08,u0c,state,previous,u18,u1c; float u20,u24; Timer reactionTimer,durationTimer; int u38,u3c,u40,u44,u48,u4c; bool flag50; char b51,b52,b53; int u54; float reach,range; int u60; bool flag64; char b65,b66,b67; int u68; Options options; Actor* FUN_007ab510(); Actor* FUN_007ab520(); __forceinline float GetReach(){Actor* a=FUN_007ab510();if(reach<0.0f)reach=FUN_007b7810(a,context->GetWeapon());return reach;} void FUN_007d2c70(); __forceinline void SetMode(int mode){ if(state!=mode){if(state==4)context->FUN_00c24b70();if(!FUN_007ab510()->FUN_006f8d80())flag64=true;}state=mode;} void FUN_007d4730(); };
+struct Procedure { void* u00; Context* context; int u08,u0c,state,previous,u18,u1c; float u20,u24; Timer reactionTimer,durationTimer; int u38,u3c,u40,u44,u48,u4c; bool flag50; char b51,b52,b53; int u54; float reach,range; int u60; bool flag64; char b65,b66,b67; int u68; Options options; Actor* FUN_007ab510(); Actor* CombatProcedure_GetTarget(); __forceinline float GetReach(){Actor* a=FUN_007ab510();if(reach<0.0f)reach=FUN_007b7810(a,context->GetWeapon());return reach;} void FUN_007d2c70(); __forceinline void SetMode(int mode){ if(state!=mode){if(state==4)context->FUN_00c24b70();if(!FUN_007ab510()->FUN_006f8d80())flag64=true;}state=mode;} void FUN_007d4730(); };
 void Procedure::FUN_007d4730() {
- Actor* actor=FUN_007ab510(); Actor* target=FUN_007ab520(); if(!target)return;
+ Actor* actor=FUN_007ab510(); Actor* target=CombatProcedure_GetTarget(); if(!target)return;
  bool target2=target->FUN_006f7370()==2;
  bool condition=FUN_007b8840(target);
  Style* style=context->style;
- float chance=FUN_00582150(style,(int)actor->FUN_006f5ad0(),actor->FUN_006f6590(),target2);
+ float chance=FUN_00582150(style,(int)actor->Actor_GetWalkSpeed(),actor->FUN_006f6590(),target2);
  if(chance<0.0f)chance=0.0f;
  if(flag50)chance+=DAT_00de8060;
  if(previous==2)chance+=DAT_00dc2d10;
@@ -42547,14 +42559,14 @@ void Procedure::FUN_007d4730() {
  float roll=(float)(random->FUN_0086c4b0(-1)%100u);
  if(roll<=chance) {
  bool actor2=actor->FUN_006f7370()==2;
- if(range<0.0f)range=FUN_007b8c50(FUN_007ab510(),FUN_007ab520(),0);
+ if(range<0.0f)range=FUN_007b8c50(FUN_007ab510(),CombatProcedure_GetTarget(),0);
  float distance=range; float r=GetReach();
  unsigned short code=FUN_005821e0(context->GetStyle(),actor2,target2,distance,r,flag50,condition,options.Get());
  if(code) {
  if(FUN_007ab510()->GetAnim()) {
  int action=3;float duration;
  switch(code&15){case 2:action=4;duration=FUN_005829d0(context->GetStyle()->Get6c(),context->GetStyle()->Get70());break;case 4:action=5;duration=FUN_005829d0(context->GetStyle()->Get5c(),context->GetStyle()->Get60());break;case 8:action=6;duration=FUN_005829d0(context->GetStyle()->Get5c(),context->GetStyle()->Get60());break;default:duration=FUN_005829d0(context->GetStyle()->Get64(),context->GetStyle()->Get68());break;}
- if(FUN_0054b780(FUN_007ab510()->FUN_006fcb20(action,0,0,0))==action){
+ if(TESAnimGroup_GetType(FUN_007ab510()->Actor_GetAnimGroup(action,0,0,0))==action){
   float time=actor->FUN_006fccd0(action);duration=FUN_00401e20(time,duration);
   actor->FUN_006f8cb0(target2 && *DAT_00f5f324.FUN_00401eb0()<DAT_00db38b0 ? code|0x200 : code|0x100);reactionTimer.Set(duration);durationTimer.Set(time);
   SetMode(2);
@@ -42636,7 +42648,7 @@ struct Xform_7c4fb0
 
 struct Proj_7c4fb0
 {
-    void FUN_007c4aa0();
+    void MissileProjectile_ProcessBounce();
 };
 
 inline HitBody_7c4fb0* GetBody_7c4fb0(Coll2_7c4fb0* c)
@@ -42649,14 +42661,15 @@ inline bool Flag7_7c4fb0(unsigned int flags)
     return (flags >> 7) & 1;
 }
 
-void Proj::FUN_007c4fb0()
+// pdb: MissileProjectile::ProcessStick | MissileProjectile.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+void Proj::MissileProjectile_ProcessStick()
 {
     static float offset = DAT_00f5f5f8;
     bool noMove = DAT_01079858->FUN_0042ce10();
     if (vf1d0() && !kImpacts.IsEmpty())
     {
         if (DAT_0108d098.unk20 == this)
-            DAT_0108d098.FUN_007d0830(0);
+            DAT_0108d098.VATS_SetLastProjectile(0);
         Owner* impact = kImpacts.GetItem();
         if (!impact || !impact->unk1C)
             return;
@@ -42679,8 +42692,8 @@ void Proj::FUN_007c4fb0()
             }
             if (!noMove)
                 FUN_004eeae0(((V_7c4fb0*)&impact->unk04)->FUN_00422970(FUN_007c2840().FUN_00432b40(offset)));
-            FUN_007c7730(0, 0);
-            FUN_008d7790(root, 1, 1);
+            Projectile_Sync3DWithReference(0, 0);
+            bhkWorld_UpdatePosition(root, 1, 1);
             UpdData update;
             update.FUN_0043d410(0.0f, 0, 0);
             root->FUN_008264c0(update);
@@ -42708,7 +42721,7 @@ void Proj::FUN_007c4fb0()
                 FUN_008d7b90(child, 1, 1, 1, 1);
         }
         else
-            ((Proj_7c4fb0*)this)->FUN_007c4aa0();
+            ((Proj_7c4fb0*)this)->MissileProjectile_ProcessBounce();
     }
 }
 
@@ -42936,7 +42949,7 @@ virtual void v350();
 virtual void v354();
 virtual void v358();
 virtual bool v35c();
-bool FUN_0045c200(); bool FUN_00703950(Actor*); bool FUN_00705930(int,Actor*,int,int,int); int FUN_007086f0(int,Actor*,bool*,bool,int,bool,int);
+bool FUN_0045c200(); bool Actor_IsInCombatWithActor(Actor*); bool FUN_00705930(int,Actor*,int,int,int); int FUN_007086f0(int,Actor*,bool*,bool,int,bool,int);
 };
 struct Sub { virtual void v0(); virtual void v4(); virtual void v8(); virtual void vc(); virtual bool v10(); };
 struct Weapon {
@@ -43069,7 +43082,7 @@ void State::FUN_007c2d10() {
     FUN_00543420(0x24, unk04, unk30 ? unk30 : DAT_01071694, unk00, &chance);
     if (unk54) chance += DAT_00f5fec8;
     chance *= DAT_00dc2d10;
-    if (unk00 && unk00->v35c() && unk04 && unk04->v100() && !unk04->v22c(false) && unk00->FUN_0045c200() && !unk04->FUN_00703950(unk00)) {
+    if (unk00 && unk00->v35c() && unk04 && unk04->v100() && !unk04->v22c(false) && unk00->FUN_0045c200() && !unk04->Actor_IsInCombatWithActor(unk00)) {
         bool detected = unk04->FUN_00705930(0, unk00, 1, 0, 0);
         int detection = unk04->FUN_007086f0(0, unk00, &detected, false, 0, false, 0);
         if (detection <= 0) {
@@ -43114,7 +43127,7 @@ struct NiPoint3
 struct NiMatrix3
 {
     float m_pEntry[3][3];
-    void FUN_00468d80(float fAngle);
+    void NiMatrix3_MakeZRotation(float fAngle);
 };
 
 NiPoint3 __cdecl FUN_00475320(const NiPoint3& kPt, const NiMatrix3& kMat);
@@ -43373,7 +43386,7 @@ void VATS::FUN_007cf5f0(Actor* apActor)
                     NiPoint3 kDir = *DAT_0108d034->GetPos() - *apActor->GetPos();
 
                     NiMatrix3 kRotX;
-                    kRotX.FUN_00468d80(DAT_0108d12c);
+                    kRotX.NiMatrix3_MakeZRotation(DAT_0108d12c);
 
                     kDir.FUN_00468d00();
                     kDir = FUN_00475320(kDir, kRotX);
@@ -43665,7 +43678,7 @@ struct e1fba3d_Task;
 float __cdecl FUN_007b8c50(e1fba3d_Ctx* c, e1fba3d_Actor* a, int b);
 float __cdecl FUN_007b7810(e1fba3d_Ctx* c, void* p);
 float __cdecl FUN_007b7760(e1fba3d_Ctx* c, e1fba3d_Actor* a);
-void __cdecl FUN_007ba310(e1fba3d_NiPoint3* out, e1fba3d_Ctx* c, e1fba3d_Actor* a, e1fba3d_NiPoint3* pos, float dist);
+void __cdecl CombatUtilities_ComputeFaceTargetLocation(e1fba3d_NiPoint3* out, e1fba3d_Ctx* c, e1fba3d_Actor* a, e1fba3d_NiPoint3* pos, float dist);
 
 struct e1fba3d_Task {
     int unk00;
@@ -43681,7 +43694,7 @@ struct e1fba3d_Task {
     float m_58;
     float m_5c;
     e1fba3d_Ctx* FUN_007ab510();
-    e1fba3d_Actor* FUN_007ab520();
+    e1fba3d_Actor* CombatProcedure_GetTarget();
     void FUN_007d5470();
     void FUN_007d4ba0();
     void FUN_007d46e0();
@@ -43689,7 +43702,7 @@ struct e1fba3d_Task {
     bool FUN_007d2b50(float delta, float limit, int unused);
     float GetRange() {
         if (m_5c < 0.0f)
-            m_5c = FUN_007b8c50(FUN_007ab510(), FUN_007ab520(), 0);
+            m_5c = FUN_007b8c50(FUN_007ab510(), CombatProcedure_GetTarget(), 0);
         return m_5c;
     }
     float GetDist() {
@@ -43700,19 +43713,20 @@ struct e1fba3d_Task {
         }
         return m_58;
     }
-    void FUN_007d5b00();
+    void CombatProcedureAttackMelee_HandleClose();
 };
 
 extern const double DAT_00db38b0;
 extern float DAT_00f601e0;
 extern e1fba3d_Setting DAT_00f601dc;
 
-void e1fba3d_Task::FUN_007d5b00()
+// pdb: CombatProcedureAttackMelee::HandleClose | CombatProcedureAttackMelee.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+void e1fba3d_Task::CombatProcedureAttackMelee_HandleClose()
 {
     if (m_state != 3)
         return;
     e1fba3d_Ctx* ctx = FUN_007ab510();
-    e1fba3d_Actor* target = FUN_007ab520();
+    e1fba3d_Actor* target = CombatProcedure_GetTarget();
     float reach = GetRange();
     float dist = GetDist();
     unsigned short flags = ctx->FUN_006f58b0();
@@ -43722,7 +43736,7 @@ void e1fba3d_Task::FUN_007d5b00()
         return;
     }
     e1fba3d_NiPoint3 point2;
-    FUN_007ba310(&point2, ctx, target, target->Slot1F4(), GetDist());
+    CombatUtilities_ComputeFaceTargetLocation(&point2, ctx, target, target->Slot1F4(), GetDist());
     if (reach > DAT_00f601e0 * 2.0f)
     {
         if (!m_14)
@@ -44178,7 +44192,7 @@ struct H3380Extra {int unk00;bool active;unsigned char unk05,unk06,unk07;unsigne
 struct H3380Setting {float* FUN_00401eb0();};
 extern H3380Setting DAT_00f5fee8;
 extern H3380Weapon* DAT_01071694;
-int __cdecl FUN_0054b780(unsigned short);
+int __cdecl TESAnimGroup_GetType(unsigned short);
 float __cdecl FUN_00581e50(int,int);
 void __cdecl FUN_00584330(H3380Values*,bool,float*,float*);
 float __cdecl FUN_00582640(H3380Weapon*);
@@ -44203,7 +44217,7 @@ void __cdecl FUN_007c3f00(H3380HitData* data,H3380Actor* actor,H3380Actor* targe
     if(data->extra && !data->extra->active && (!data->weapon || data->weapon->IsSpecial())) scale=true;
     H3380Anim* animation=actor->Anim();
     unsigned int group=animation->group;
-    int kind=FUN_0054b780(group);
+    int kind=TESAnimGroup_GetType(group);
     if(scale) {
         if(data->weapon) {
             float mult=1.0f;
@@ -44239,7 +44253,7 @@ void __cdecl FUN_007c3f00(H3380HitData* data,H3380Actor* actor,H3380Actor* targe
 namespace n7cb030 {
 struct Base;
 struct Point { float x,y,z; };
-struct Matrix { float m[3][3]; void FUN_00468d80(float); };
+struct Matrix { float m[3][3]; void NiMatrix3_MakeZRotation(float); };
 struct Scene {
     int unk00;
     int unk04;
@@ -45119,7 +45133,7 @@ extern Matrix DAT_00f72574;
 extern Actor* DAT_0107a104;
 extern const char DAT_00dce40c[];
 Scene* FUN_00aab350(Scene*, const char*, bool);
-float FUN_00468fd0();
+float RandomFloatTwoPi();
 Matrix FUN_00aab6b0(Point);
 Result* FUN_007bc5b0(Explosion*,Actor*,int,void*,Point,Matrix);
 void FUN_0048c3a0(int,int);
@@ -45216,10 +45230,10 @@ void Proj::FUN_007cb030(float elapsed)
             if ((DAT_00f707e0 > 0 || Flag(13)) && !impacts.Empty())
             {
                 Hit* impact8 = impacts.head;
-                float angle = FUN_00468fd0();
+                float angle = RandomFloatTwoPi();
                 // Fake match: Narrow this temporary's lifetime to reproduce matrix storage reuse.
                 { Matrix temp;
-                temp.FUN_00468d80(angle); }
+                temp.NiMatrix3_MakeZRotation(angle); }
                 rotationX = FUN_00aab6b0(impact8->normal);
                 position8 = impact8->position;
             }
@@ -45571,7 +45585,7 @@ struct Obj
     BodyPart* FUN_00702db0(Vec, Vec);
     int FUN_006f8e30(BodyPart*);
     void FUN_004e6a90(bool);
-    int FUN_00449cb0();
+    int TESForm_GetFormEditorIDLength();
     const char* FUN_004e9a10();
     int GetNextListItem();
     int unk04, unk08;
@@ -46091,11 +46105,11 @@ bool ProjectileHit::FUN_007ca9f0(Obj* object, Vec const& point, Vec const& norma
         Obj* actual = vatsResult138->ref;
         valid = object == actual && (void*)expectedObject == (void*)expected;
         FUN_00c24b70("Targetted VATS Projectile Result: %s", valid ? "SUCCESS" : "FAILURE");
-        FUN_00c24b70("Target Ref ID:\t%s %08X", actual->FUN_00449cb0() ? actual->GetName() : actual->FUN_004e9a10(),
+        FUN_00c24b70("Target Ref ID:\t%s %08X", actual->TESForm_GetFormEditorIDLength() ? actual->GetName() : actual->FUN_004e9a10(),
                      actual->formID0c);
         FUN_00c24b70("Target Part:\t%s", expected ? expected->name08 : "");
         FUN_00c24b70("Hit Ref ID:\t\t%s %08X",
-                     object ? (object->FUN_00449cb0() ? object->GetName() : object->FUN_004e9a10()) : "Land",
+                     object ? (object->TESForm_GetFormEditorIDLength() ? object->GetName() : object->FUN_004e9a10()) : "Land",
                      object ? object->formID0c : 0);
         FUN_00c24b70("Hit Part:\t\t%s\n", expectedObject ? ((Node*)expectedObject)->name08 : "");
     }
@@ -46352,7 +46366,7 @@ struct clm_CombatController {
 };
 
 bool __stdcall FUN_007995c0(int action);
-void __cdecl FUN_007ba310(NiPoint3* out, clm_Actor* actor, clm_Actor* target, const NiPoint3* startPos, float dist);
+void __cdecl CombatUtilities_ComputeFaceTargetLocation(NiPoint3* out, clm_Actor* actor, clm_Actor* target, const NiPoint3* startPos, float dist);
 bool __cdecl FUN_007b9aa0(clm_Actor* actor, clm_Actor* target, const NiPoint3* pos, const NiPoint3* startPos, int a, int b);
 
 struct FUN_005fd4b0 {
@@ -46360,7 +46374,7 @@ struct FUN_005fd4b0 {
     int pad_00,pad_04,pad_08,pad_0c,pad_10,pad_14,pad_18,pad_1c,pad_20;
     FUN_005fd4b0(const NiPoint3* pos, clm_Actor* actor);
     ~FUN_005fd4b0() { vtable=DAT_00dc4dc0; }
-    bool FUN_005fe020(float f);
+    bool PathingLocation_IsValidLocation(float f);
 };
 
 struct FUN_006019c0 {
@@ -46395,14 +46409,14 @@ struct clm_FullOwner {
     int m_60;
 
     clm_Actor* FUN_007ab510();
-    clm_Actor* FUN_007ab520();
+    clm_Actor* CombatProcedure_GetTarget();
     void FUN_007ab530(int mode);
 };
 
 bool Owner::FUN_007db110(Pointer* output) {
     clm_FullOwner* const self = (clm_FullOwner*)this;
     clm_Actor* const a = self->FUN_007ab510();
-    self->FUN_007ab520();
+    self->CombatProcedure_GetTarget();
 
     float request;
     // Fake match: interleaved component initialization reproduces store scheduling.
@@ -46444,9 +46458,9 @@ bool Owner::FUN_007db110(Pointer* output) {
         request = self->m_rate;
 
     if (self->m_mode == 1 && self->m_moveState == 1 && self->m_target38) {
-        FUN_007ba310(&pos, a, self->m_target38, &self->m_startPos, -1.0f);
+        CombatUtilities_ComputeFaceTargetLocation(&pos, a, self->m_target38, &self->m_startPos, -1.0f);
         FUN_005fd4b0 location(&pos, a);
-        if (location.FUN_005fe020(a->FUN_006f9ec0()) && FUN_007b9aa0(a, self->m_target38, &pos, &self->m_startPos, 0, -1)) {
+        if (location.PathingLocation_IsValidLocation(a->FUN_006f9ec0()) && FUN_007b9aa0(a, self->m_target38, &pos, &self->m_startPos, 0, -1)) {
             self->m_currentPos = pos;
             if (!output->value) {
                 ((clm_FullPointer*)output)->FUN_005f1300(new FUN_006019c0());
@@ -46518,9 +46532,9 @@ struct Vec { float x,y,z; };
 struct Area { int unk00,unk04,unk08,unk0C,unk10,unk14,unk18,unk1C,unk20; unsigned int unk24; };
 struct Loc {
  int unk00; Vec pos; int unk10,unk14,unk18,unk1C,unk20; unsigned short unk24; unsigned char flags26; unsigned char unk27;
- Area* FUN_005fc730(); void* FUN_004c0120(); void FUN_005fc770();
+ Area* PathingLocation_GetCell(); void* FUN_004c0120(); void FUN_005fc770();
  Vec GetPosition() const { return pos; }
- __forceinline bool Same(Loc& other) { Area* a=FUN_005fc730(); bool exterior=!(a && (a->unk24 & 1)); return exterior ? FUN_004c0120()==other.FUN_004c0120() : a==other.FUN_005fc730(); }
+ __forceinline bool Same(Loc& other) { Area* a=PathingLocation_GetCell(); bool exterior=!(a && (a->unk24 & 1)); return exterior ? FUN_004c0120()==other.FUN_004c0120() : a==other.PathingLocation_GetCell(); }
 };
 struct Request : Alloc {
  virtual void v00(); virtual void v04(); virtual void v08(); virtual void Prepare(); virtual unsigned int Kind();
@@ -46544,7 +46558,7 @@ struct FUN_00603630 : Request { int unkAC,unkB0,unkB4,unkB8; FUN_00603630(Reques
 struct FUN_00603560 : Request { int unkAC,unkB0,unkB4,unkB8,unkBC; FUN_00603560(Request*); };
 struct FUN_00602bb0 : Request { int unkAC,unkB0,unkB4,unkB8,unkBC,unkC0,unkC4,unkC8,unkCC,unkD0,unkD4,unkD8,unkDC,unkE0,unkE4,unkE8,unkEC,unkF0,unkF4,unkF8,unkFC,unk100,unk104,unk108; FUN_00602bb0(Request*); };
 struct ActorInfo { int unk00,unk04,unk08,unk0C,unk10,unk14,unk18,unk1C,unk20; unsigned short unk24; unsigned char kind,unk27; };
-struct Actor7d { int unk00,unk04,unk08,unk0C,unk10,unk14,unk18,unk1C,unk20,unk24,unk28,unk2C,unk30,unk34,unk38; ActorInfo* info; float FUN_004e9080(); };
+struct Actor7d { int unk00,unk04,unk08,unk0C,unk10,unk14,unk18,unk1C,unk20,unk24,unk28,unk2C,unk30,unk34,unk38; ActorInfo* info; float TESObjectREFR_GetRelevantWaterHeight(); };
 inline unsigned int AtomicDrop(unsigned int& value) { return InterlockedDecrement((volatile long*)&value); }
 inline unsigned int AtomicAdd(unsigned int& value) { return InterlockedIncrement((volatile long*)&value); }
 struct Ref { virtual void v00(); virtual void DeleteThis(); unsigned int count; void Release() { if(AtomicDrop(count)==0) DeleteThis(); } void Retain() { AtomicAdd(count); } };
@@ -46595,7 +46609,7 @@ struct PathController {
  bool noAttach; unsigned char unk71; unsigned short unk72;
  bool success; unsigned char unk75; unsigned short unk76;
  int unk78,unk7C,unk80,unk84;
- void FUN_007df4d0(int); void FUN_007df780(int); bool FUN_007df5a0(float,int); void FUN_007df400(); void FUN_007defe0(int);
+ void FUN_007df4d0(int); void FUN_007df780(int); bool FUN_007df5a0(float,int); void ActorMover_ClearCurrentData(); void ActorMover_SetPathingFailed(int);
  bool FUN_007dfb70(Request*);
  FUN_007434e0* Aux() const { return aux; }
 };
@@ -46610,8 +46624,8 @@ bool PathController::FUN_007dfb70(Request* r) {
    Loc* start=&r->Start();
    Loc* end=r->End();
    bool same=start->Same(*end);
-   bool above=start->GetPosition().z < actor->FUN_004e9080()+50.0;
-   bool aboveEnd=end->GetPosition().z < actor->FUN_004e9080()+50.0;
+   bool above=start->GetPosition().z < actor->TESObjectREFR_GetRelevantWaterHeight()+50.0;
+   bool aboveEnd=end->GetPosition().z < actor->TESObjectREFR_GetRelevantWaterHeight()+50.0;
    if(same && !above && !aboveEnd) {
       Vec dest=end->GetPosition();
       Vec origin=start->GetPosition();
@@ -46657,7 +46671,7 @@ bool PathController::FUN_007dfb70(Request* r) {
    aux=new FUN_007434e0();
  }
  if(!FUN_0044f4b0()->FUN_00607e70(request,aux,!b)) {
-    FUN_007df400(); unk6C=7; FUN_007defe0(1);
+    ActorMover_ClearCurrentData(); unk6C=7; ActorMover_SetPathingFailed(1);
  } else { success=true; result=true; }
  }
  return result;
@@ -46724,7 +46738,7 @@ struct RefT {
     virtual void v210(); virtual void v214(); virtual void v218(); virtual void v21c();
     virtual void v220(); virtual void v224(); virtual void v228();
     virtual bool V22C(int);
-    float FUN_004e7230();
+    float TESObjectREFR_GetHealth();
 };
 struct Node {
     Item* item;
@@ -46734,7 +46748,7 @@ struct Node {
     static void operator delete(void* p) { DAT_01090a78.FUN_0086ba60(p); }
 };
 struct Res { void FUN_00460090(); };
-struct Mgr { Res* FUN_006f8f30(int a, int b); };
+struct Mgr { Res* Actor_GetAnimation(int a, int b); };
 extern Mgr* DAT_0108d034;
 extern Mgr* DAT_0108d030;
 extern int DAT_00f5fe8c;
@@ -46770,14 +46784,14 @@ void Queue::FUN_007cff00()
         return;
     RemoveHead(first);
     if (f24) {
-        DAT_0108d034->FUN_006f8f30(1, 0)->FUN_00460090();
+        DAT_0108d034->Actor_GetAnimation(1, 0)->FUN_00460090();
         f24 = 0;
     }
     while (!FUN_00645c20()) {
         Item* it = cur;
         if (!it)
             return;
-        if (it->fc && (it->fc->V22C(0) || (it->f6 && it->fc->FUN_004e7230() > DAT_00f5fe8c))) {
+        if (it->fc && (it->fc->V22C(0) || (it->f6 && it->fc->TESObjectREFR_GetHealth() > DAT_00f5fe8c))) {
             RemoveHead(it);
         } else {
             if (it->f6) {
@@ -46837,7 +46851,7 @@ struct NiNode
     NiBound* GetWorldBound() { return m_pWorldBound ? m_pWorldBound : &DAT_0108edc8; }
     void FUN_008264c0(NiUpdateData& d);
 };
-void __cdecl FUN_008d7790(NiNode* n, int a, int b);
+void __cdecl bhkWorld_UpdatePosition(NiNode* n, int a, int b);
 void __cdecl FUN_00570a30(NiNode* n, const NiPoint3& p, int flag);
 struct Mgr { bool FUN_008257f0(); };
 extern Mgr* DAT_01079ca4;
@@ -46904,7 +46918,7 @@ bool Projectile::FUN_007c2030()
         if (!DAT_01079ca4->FUN_008257f0())
         {
             NiPoint3 dir;
-            FUN_008d7790(node, 1, 0);
+            bhkWorld_UpdatePosition(node, 1, 0);
             float scale = node->GetWorldBound()->radius;
             node->m_kTranslate = obj->pos + obj->dir * scale;
             NiUpdateData data;
@@ -47124,7 +47138,7 @@ struct Res
     FormF0* mf0;
 };
 
-struct Mgr { Res* FUN_006f8f30(); };
+struct Mgr { Res* Actor_GetAnimation(); };
 struct Setting { int* FUN_004241e0(); };
 
 extern Mgr* DAT_0108d034;
@@ -47154,7 +47168,7 @@ void Task::FUN_007d02e0(Item* it)
     if (!it)
         cur = m_item;
     if (cur && cur->m0 <= 2) {
-        Res* res = DAT_0108d034->FUN_006f8f30();
+        Res* res = DAT_0108d034->Actor_GetAnimation();
         if (DAT_0108d000)
             return;
         FormF0* f = res->mf0;
@@ -47259,7 +47273,8 @@ struct MoveVec
         return *this;
     }
     float Length() const { return sqrtf(x * x + y * y + z * z); }
-    float FUN_00432c00()
+    // pdb: NiPoint3::UnitizeGetLength | TES.obj | fnv360_0822_debug, call_seq + skyrim(caller), high
+    float NiPoint3_UnitizeGetLength()
     {
         float length = Length();
         if (length > 1e-06f)
@@ -47285,7 +47300,7 @@ struct MoveLoc
     MoveVec point;
     int cell;
     MoveVec* Point() { return &point; }
-    float FUN_004c0dc0(const MoveLoc& other);
+    float BGSWorldLocation_GetDistanceSquared(const MoveLoc& other);
     bool FUN_00914770(const MoveLoc& other) const;
     void Set(const MoveVec& p, int c)
     {
@@ -47361,7 +47376,7 @@ virtual void v78(); virtual void v79(); virtual void v7a(); virtual void v7b(); 
     bool FUN_006f8d60();                // path failed
     bool FUN_006f8c60();                // path building failed
     int FUN_004e8810();                 // cell
-    MoveLoc FUN_004eea80();             // location
+    MoveLoc TESObjectREFR_GetWorldLocation();             // location
     int FUN_006f8c70();                 // path index
     bool FUN_006f8c80(int index, MoveVec* point);
     void FUN_006f8ce0();                // stop
@@ -47693,7 +47708,7 @@ struct MoveOwner
     MoveManager* manager;
 };
 
-void FUN_007ba000(MoveOwner* owner, MovePath* path, MoveVec* pos, MoveVec* position);
+void CombatUtilities_CalculateCoverPositions(MoveOwner* owner, MovePath* path, MoveVec* pos, MoveVec* position);
 float FUN_007b7eb0(MoveRef* actor, int a, int b);
 bool FUN_005bcbd0(const MoveVec& a, const MoveVec& b, const MoveVec& c, const MoveVec& d);
 bool FUN_005f2730(MoveProbe* probe, MoveVec* point, int a, int b);
@@ -47723,7 +47738,7 @@ struct MoveProcedure
     MoveTimer probe;
 
     MoveRef* FUN_007ab510();
-    MoveRef* FUN_007ab520();
+    MoveRef* CombatProcedure_GetTarget();
     bool FUN_007db5c0();
     void FUN_007dab90(MoveRequest* avoid);
     float FUN_007da8b0();
@@ -47758,7 +47773,7 @@ void MoveProcedure::FUN_007db650()
 {
     MoveRef* actor = FUN_007ab510();
     void* actorStatus = actor->FUN_007650b0();
-    MoveRef* other = FUN_007ab520();
+    MoveRef* other = CombatProcedure_GetTarget();
     MoveManager* manager = owner->manager;
     bool changed;
     bool stop;
@@ -47794,7 +47809,7 @@ void MoveProcedure::FUN_007db650()
                             active = true;
                             MoveVec pos;
                             MovePath* newPath = manager->path;
-                            FUN_007ba000(owner, newPath, &pos, &position);
+                            CombatUtilities_CalculateCoverPositions(owner, newPath, &pos, &position);
                             position.z += FUN_007b7eb0(actor, 2, 0);
                             check.Set(0.5f);
                         }
@@ -47871,14 +47886,14 @@ void MoveProcedure::FUN_007db650()
             void* targetStatus = 0;
             if (target->IsActor())
                 targetStatus = target->FUN_007650b0();
-            MoveLoc location = target->FUN_004eea80();
+            MoveLoc location = target->TESObjectREFR_GetWorldLocation();
             float distance;
             if (!actorStatus && !targetStatus)
                 distance = state == 2 ? *DAT_00f5f564.FUN_00401eb0() * *DAT_00f5f564.FUN_00401eb0()
                                       : *DAT_00f5f558.FUN_00401eb0() * *DAT_00f5f558.FUN_00401eb0();
             else
                 distance = *DAT_00f5f570.FUN_00401eb0() * *DAT_00f5f570.FUN_00401eb0();
-            if (location.FUN_004c0dc0(destination) > distance)
+            if (location.BGSWorldLocation_GetDistanceSquared(destination) > distance)
             {
                 destination = location;
                 changed = true;
@@ -47893,9 +47908,9 @@ void MoveProcedure::FUN_007db650()
                     changed = true;
                 else
                 {
-                    MoveLoc otherLoc = other->FUN_004eea80();
-                    MoveLoc actorLoc = actor->FUN_004eea80();
-                    if (actorLoc.FUN_004c0dc0(otherLoc) < 16777216.0f)
+                    MoveLoc otherLoc = other->TESObjectREFR_GetWorldLocation();
+                    MoveLoc actorLoc = actor->TESObjectREFR_GetWorldLocation();
+                    if (actorLoc.BGSWorldLocation_GetDistanceSquared(otherLoc) < 16777216.0f)
                     {
                         MoveVec pathPoint = path->location.Position();
                         if (!FUN_005bcbd0(pathPoint, *other->Position(), path->start, path->end))
@@ -47941,7 +47956,7 @@ void MoveProcedure::FUN_007db650()
                 {
                     pathIndex = pathIndex + 1;
                     MoveVec delta = point - previous;
-                    float segment = delta.FUN_00432c00();
+                    float segment = delta.NiPoint3_UnitizeGetLength();
                     if (length + segment > 1536.0)
                     {
                         delta.FUN_006b1f50(float(1536.0 - length));
@@ -47960,7 +47975,7 @@ void MoveProcedure::FUN_007db650()
                         manager->FUN_007ac700(manager->path);
                         MoveVec pos;
                         MovePath* newPath = manager->path;
-                        FUN_007ba000(owner, newPath, &pos, &position);
+                        CombatUtilities_CalculateCoverPositions(owner, newPath, &pos, &position);
                         position.z += FUN_007b7eb0(actor, 2, 0);
                         state = 2;
                         current.Set(pos, actor->FUN_004e8810());
@@ -47975,8 +47990,8 @@ void MoveProcedure::FUN_007db650()
         stop = false;
         if (mode == 15 && probe.FUN_0073bc30())
         {
-            MoveLoc loc = actor->FUN_004eea80();
-            if (loc.FUN_004c0dc0(destination) < *DAT_00f5f918.FUN_00401eb0() * *DAT_00f5f918.FUN_00401eb0())
+            MoveLoc loc = actor->TESObjectREFR_GetWorldLocation();
+            if (loc.BGSWorldLocation_GetDistanceSquared(destination) < *DAT_00f5f918.FUN_00401eb0() * *DAT_00f5f918.FUN_00401eb0())
             {
                 MoveProbe request(destination);
                 if (FUN_005f2730(&request, loc.Point(), 0, 0))
@@ -48093,7 +48108,7 @@ struct CombatProcedure {
     int unk20; int unk24; int unk28; int unk2c; int unk30; int unk34; int unk38;
     int mode;
     Actor* FUN_007ab510();
-    Actor* FUN_007ab520();
+    Actor* CombatProcedure_GetTarget();
     void FUN_007dab90(Pointer* out);
 };
 void CombatProcedure::FUN_007dab90(Pointer* out)
@@ -48107,7 +48122,7 @@ void CombatProcedure::FUN_007dab90(Pointer* out)
     switch (mode) {
     case 0:
     case 1:
-        target = FUN_007ab520();
+        target = CombatProcedure_GetTarget();
         break;
     case 4:
         out->FUN_005f1300(context->GetMovement()->FUN_007a4620(actor, &position, 0.0f, out->Get()));
@@ -48331,7 +48346,7 @@ struct Loaded
 
 bhkCollisionObject* __cdecl FUN_00477d90(NiAVObject* pNode);
 void __cdecl FUN_008d7720(NiAVObject* pNode, bool bArg1, bool bArg2);
-void __cdecl FUN_008d7790(NiAVObject* pNode, bool bArg1, bool bArg2);
+void __cdecl bhkWorld_UpdatePosition(NiAVObject* pNode, bool bArg1, bool bArg2);
 
 struct TESObjectREFR
 {
@@ -48527,7 +48542,7 @@ void TESObjectREFR::FUN_007cbcb0(int iUnused)
             if (bChanged)
                 pOldWorld->AddObject(p3D, true, true, 0, 0);
             else
-                FUN_008d7790(p3D, true, false);
+                bhkWorld_UpdatePosition(p3D, true, false);
         }
     }
 }
@@ -48620,9 +48635,9 @@ struct ListHead {
 };
 struct SoundHandle {
     int unk00, unk04, unk08;
-    bool FUN_00bd0390();
-    void FUN_00bd0140();
-    void FUN_00bd03b0();
+    bool BSSoundHandle_IsValid();
+    void BSSoundHandle_Stop();
+    void BSSoundHandle_Release();
 };
 struct BaseData {
     int unk00;
@@ -49052,7 +49067,7 @@ struct Resource { void FUN_0047fd30(); };
 struct Wrapper { int unk00; RefObject* object; };
 struct Heap { void FUN_0086ba60(void*); };
 extern Heap DAT_01090a78;
-struct CameraManager { void FUN_007cf040(int); void FUN_007d0830(int); };
+struct CameraManager { void FUN_007cf040(int); void VATS_SetLastProjectile(int); };
 extern CameraManager DAT_0108d098;
 class Projectile;
 extern Projectile* DAT_0108d0b4;
@@ -49519,16 +49534,16 @@ Projectile::~Projectile()
         FUN_004ef150(FUN_00424eb0()->GetData());
     }
     FUN_004fc020(0, 1);
-    if (sound12C.FUN_00bd0390()) {
-        sound12C.FUN_00bd0140();
-        if (sound12C.FUN_00bd0390()) sound12C.FUN_00bd03b0();
+    if (sound12C.BSSoundHandle_IsValid()) {
+        sound12C.BSSoundHandle_Stop();
+        if (sound12C.BSSoundHandle_IsValid()) sound12C.BSSoundHandle_Release();
     }
     if (base && !base->Flag7()) {
-        sound120.FUN_00bd0140();
-        sound120.FUN_00bd03b0();
+        sound120.BSSoundHandle_Stop();
+        sound120.BSSoundHandle_Release();
     }
     if (DAT_0108d0b4 == this) DAT_0108d098.FUN_007cf040(0);
-    if (DAT_0108d0b8 == this) DAT_0108d098.FUN_007d0830(0);
+    if (DAT_0108d0b8 == this) DAT_0108d098.VATS_SetLastProjectile(0);
     if (Flag7()) {
         Projectile* self = this;
         DAT_0107c110.FUN_00421610(&self);
@@ -50204,7 +50219,7 @@ public:
 class NiMatrix3 {
 public:
     float m_pEntry[3][3];
-    NiMatrix3 FUN_00475380() const;                    /* Transpose */
+    NiMatrix3 NiMatrix3_Inverse() const;                    /* Transpose */
     NiPoint3 FUN_004752c0(const NiPoint3& pt) const;  /* operator*(const NiPoint3&) */
 };
 
@@ -50255,7 +50270,7 @@ struct Selection {
     int unk00, unk04, unk08, unk0C, unk10, unk14, unk18, unk1C;
     Proj* pForm;
     Proj* GetForm() const { return pForm; }
-    void FUN_007d0830(int iValue);                     /* SetValue */
+    void VATS_SetLastProjectile(int iValue);                     /* SetValue */
 };
 extern Selection DAT_0108d098;
 
@@ -50306,7 +50321,7 @@ public:
     NiPoint3 GetContactDirection() const { return m_kVelocity; }
     void SetImpactFlag(unsigned int uiFlag, bool bSet) { if (bSet) m_uiFlags |= uiFlag; else m_uiFlags &= ~uiFlag; }
     int IsImpactResponseSuppressed() const { return unk13C; }
-    bool FUN_007c4aa0();
+    bool MissileProjectile_ProcessBounce();
 };
 
 extern NiPoint3 DAT_0108ec68;                          /* NiPoint3::ZERO */
@@ -50314,7 +50329,7 @@ extern unsigned int DAT_00f79e58;
 struct Game { bool FUN_008257f0(); };
 extern Game* DAT_01079ca4;
 bhkNiCollisionObject* FUN_00477d90(NiNode* pkNode);   /* FindFirstCollisionObject */
-void FUN_004bbc10(NiPoint3& kPt);                      /* NiPoint3::UnitizeVector */
+void NiPoint3_UnitizeVector(NiPoint3& kPt);                      /* NiPoint3::UnitizeVector */
 void FUN_008d7b90(NiNode* pkNode, int a2, int a3, int a4, int a5);   /* bhkWorld::SetMotion */
 void FUN_008d7c10(NiNode* pkNode, unsigned int uiGroup, int a3, int a4);   /* bhkWorld::SetGroup */
 void FUN_008d78f0(NiNode* pkNode, int a2, int a3, int a4);           /* bhkWorld::EnableCollision */
@@ -50332,12 +50347,13 @@ inline unsigned int GetNewSystemGroup()
     return DAT_00f79e58;
 }
 
-bool Proj::FUN_007c4aa0()
+// pdb: MissileProjectile::ProcessBounce | MissileProjectile.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+bool Proj::MissileProjectile_ProcessBounce()
 {
     if (Get3D() && !kImpacts.IsEmpty())
     {
         if (DAT_0108d098.GetForm() == this)
-            DAT_0108d098.FUN_007d0830(0);
+            DAT_0108d098.VATS_SetLastProjectile(0);
         NiNode* p3d = Get3D();
         CollisionData* psCollisionData = *kImpacts.GetHead();
         SetImpactFlag(4, true);
@@ -50360,8 +50376,8 @@ bool Proj::FUN_007c4aa0()
             {
             NiPoint3 vton;
             vton = GetContactDirection() * -1.0f;
-            FUN_004bbc10(vton);
-            FUN_004bbc10(psCollisionData->normal);
+            NiPoint3_UnitizeVector(vton);
+            NiPoint3_UnitizeVector(psCollisionData->normal);
             float fnormalDotDirection = psCollisionData->normal.Dot(vton);
             NiPoint3 accum = 2.0f * (fnormalDotDirection * psCollisionData->normal - vton);
             reflectedVelocity = vton + accum;
@@ -50370,14 +50386,14 @@ bool Proj::FUN_007c4aa0()
             FUN_00570a30(p3d, reflectedVelocity, 1);
             NiPoint3 angularVelocity = DAT_0108ec68;
             {
-            NiMatrix3 invrot = Get3D()->GetWorldRotate().FUN_00475380();
+            NiMatrix3 invrot = Get3D()->GetWorldRotate().NiMatrix3_Inverse();
             NiPoint3 angle = invrot.FUN_004752c0(psCollisionData->normal);
             float fAbsY = NiAbs(angle.y);
             float fAbsZ = NiAbs(angle.z);
             if (fAbsY > fAbsZ)
                 angle.z = fAbsY * FUN_00571be0(angle.z);
             angle.y = 0.0f;
-            FUN_004bbc10(angle);
+            NiPoint3_UnitizeVector(angle);
             NiPoint3 spin2;
             spin2.Set(-angle.z, 0.0f, -angle.x);
             angularVelocity = p3d->GetWorldRotate().FUN_004752c0(spin2);
@@ -50630,8 +50646,8 @@ struct Task
     int m_state;
     int m_prevState;
     Ctx* FUN_007ab510();
-    Actor* FUN_007ab520();
-    void FUN_007d4ec0();
+    Actor* CombatProcedure_GetTarget();
+    void CombatProcedureAttackMelee_MeleeDecision();
     void SetState(int s)
     {
         m_prevState = m_state;
@@ -50644,13 +50660,13 @@ void Task::FUN_007d53c0()
     if (m_state != 0)
         return;
     Ctx* ctx = FUN_007ab510();
-    FUN_007ab520();
+    CombatProcedure_GetTarget();
     if (FUN_0054bf00(ctx->v1e4()->GetGroup(4)))
     {
         if (ctx->v1e4()->GetSlot(4) == 3)
         {
             SetState(3);
-            FUN_007d4ec0();
+            CombatProcedureAttackMelee_MeleeDecision();
         }
         Item* item = m_owner->m_f0;
         if (item && FUN_0054bf30(item->FUN_004bc700()))
@@ -51158,11 +51174,11 @@ unsigned int m_field05C;
 ImpShooterProcess* process; }; struct ImpOwnerRef { ImpShooter* ptr; };
 struct ImpSound { int a,b,c; void FUN_00bd0290(float,float,float); void FUN_00bd00c0(int); }; struct ImpAudio { ImpSound FUN_00bcfc40(void*,int,ImpSoundDesc*); }; extern void* DAT_011790c8;
 bool __cdecl FUN_004768c0(ImpPoint,ImpCamera*,float);
-void __cdecl FUN_00518df0(void*,ImpExtraList*,int);
+void __cdecl Script_SetActionFlag(void*,ImpExtraList*,int);
 float __cdecl FUN_0044a330(float,float);
 ImpDecal* __cdecl FUN_0056a180(float,int);
 void __cdecl FUN_008f4400(int,int,int);
-float __cdecl FUN_00468fd0();
+float __cdecl RandomFloatTwoPi();
 void* __cdecl FUN_004756f0(ImpSurface*);
 ImpAttachHandle __cdecl FUN_00477960(void*,void*);
 ImpAttach* __cdecl FUN_008f1bf0(ImpSurface*);
@@ -51368,9 +51384,9 @@ void ImpProjectile::FUN_007cce80(ImpTarget* apTarget, ImpPoint* apPos, ImpPoint*
     {
         if (apTarget)
         {
-            FUN_00518df0(this, apTarget->Extra(), 0x80);
+            Script_SetActionFlag(this, apTarget->Extra(), 0x80);
             if (pImpacts)
-                FUN_00518df0(pImpacts, apTarget->Extra(), 0x100);
+                Script_SetActionFlag(pImpacts, apTarget->Extra(), 0x100);
         }
         int iMaterial = aiMaterial;
         ImpImpact* pImpactTmp = pImpacts ? pImpacts->FUN_004bc720(iMaterial) : 0;
@@ -51396,7 +51412,7 @@ void ImpProjectile::FUN_007cce80(ImpTarget* apTarget, ImpPoint* apPos, ImpPoint*
                     ImpResults kResultsVal;
                     pNewDecal->FUN_00569c60(apPos, &kResultsVal);
                     int iTheCount = kResultsVal.count;
-                    float fPathHeading = FUN_00468fd0();
+                    float fPathHeading = RandomFloatTwoPi();
                     unsigned char m_ucClipIdentifier = (int)TargetFloor(FUN_0044a330(0.0f, 4.0f));
                     ImpSurface* pLastSurface = 0;
                     for (int i = 0; i < iTheCount; i++)
@@ -52554,7 +52570,7 @@ struct CombatProcedureAttackMelee
     CombatTimer kTimer;
 
     Actor* FUN_007ab510();
-    Actor* FUN_007ab520();
+    Actor* CombatProcedure_GetTarget();
     float FUN_007d2d10();
     float FUN_007d2b10();
     int FUN_007d4220(bool abFollowThrough, float afDistance, float afReach, bool abTargetAttacking,
@@ -52579,7 +52595,7 @@ struct CombatProcedureAttackMelee
             bresult = true;
         return bresult;
     }
-    void FUN_007d4ec0();
+    void CombatProcedureAttackMelee_MeleeDecision();
 };
 
 int CombatProcedureAttackMelee::FUN_007d4220(bool abMidAttack, float afDistance, float afReach, bool abTargetAttacking,
@@ -52587,7 +52603,7 @@ int CombatProcedureAttackMelee::FUN_007d4220(bool abMidAttack, float afDistance,
                                              bool* abSwitchAttack)
 {
     Actor* pattacker = FUN_007ab510();
-    Actor* ptarget = FUN_007ab520();
+    Actor* ptarget = CombatProcedure_GetTarget();
     *abSwitchAttack = false;
     int eattack = 0xff;
     TESObjectWEAP* pweapon = pController->GetCurrentWeapon();
@@ -52663,10 +52679,11 @@ int CombatProcedureAttackMelee::FUN_007d4220(bool abMidAttack, float afDistance,
     return eattack;
 }
 
-void CombatProcedureAttackMelee::FUN_007d4ec0()
+// pdb: CombatProcedureAttackMelee::MeleeDecision | CombatProcedureAttackMelee.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+void CombatProcedureAttackMelee::CombatProcedureAttackMelee_MeleeDecision()
 {
     Actor* pattacker = FUN_007ab510();
-    Actor* ptarget = FUN_007ab520();
+    Actor* ptarget = CombatProcedure_GetTarget();
     if (GetState() != 3 || ptarget == 0)
         return;
     if (pController->FUN_00799ef0())
@@ -52733,7 +52750,7 @@ void CombatProcedureAttackMelee::FUN_007d4ec0()
                                        btargetPostAttack, &bdoPowerAttack, &bswitchAttack);
             if (eattack != 0xff)
             {
-                if (FUN_007ab520()->GetNiNode() != 0)
+                if (CombatProcedure_GetTarget()->GetNiNode() != 0)
                 {
                     if (bdoPowerAttack)
                     {
@@ -53278,8 +53295,8 @@ struct VatsCam {
     int GetFirstModifier() const { return m_field34; }
     int GetImageModifier() const { return id70; }
     bool FUN_005084e0();
-    void FUN_00508310();
-    void FUN_00508630(float t);
+    void BGSCameraShot_FreeCamera();
+    void BGSCameraShot_Update(float t);
     void FUN_005080b0(void* p);
     void FUN_005081d0(void* p);
     void FUN_00507cd0(void* a, int b);
@@ -53333,9 +53350,9 @@ struct VatsActor : VirtualTarget {
     char flag119;
     int FUN_00887da0();
     int FUN_006f7370();
-    HighProc* FUN_006f8f30();
-    bool FUN_006f7110();
-    void FUN_006fef60(bool v);
+    HighProc* Actor_GetAnimation();
+    bool Actor_GetWantWeaponDrawn();
+    void Actor_SetWantWeaponDrawn(bool v);
     void* FUN_006f6c90();
     void FUN_006f6120(int code, float value);
     void FUN_00775430(int v);
@@ -53379,7 +53396,7 @@ struct LinkObj {
 struct ImageMod {
     int m_field00, m_field04, m_field08, m_field0C, m_field10, m_field14;
     unsigned flags18;
-    void FUN_004c2270(int a, float b, float c, int d);
+    void ImageSpaceModifierInstanceForm_StartTransition(int a, float b, float c, int d);
 };
 
 struct PartName {
@@ -53448,7 +53465,7 @@ struct CamFx {
     int m_f00, m_f04, m_f08;
     float delta0C;
     float GetDelta() { return delta0C; }
-    void FUN_0086c220(float v, int flag);
+    void BSTimer_SetGlobalTimeMultiplier(float v, int flag);
 };
 
 struct SettingView {
@@ -53476,14 +53493,14 @@ struct VatsMgr {
     __forceinline bool IsEmpty() const { return !link && !shot; }
     bool FUN_007cf4a0();
     void FUN_007cf180(VatsShot* s);
-    void FUN_007d0830(int z);
+    void VATS_SetLastProjectile(int z);
     void FUN_007d00e0(VatsShot* s);
     void FUN_007d02e0(VatsShot* s);
     bool FUN_007cf990(VatsShot* s);
     void FUN_007cff00();
     void FUN_007cfb90(int z);
     void FUN_007d0630();
-    void FUN_007d0ae0();
+    void VATS_Update();
 };
 
 
@@ -53494,7 +53511,7 @@ bool __cdecl FUN_005a19b0(unsigned kind);
 bool __cdecl FUN_005a19f0(unsigned kind);
 bool __cdecl FUN_0054bf30(unsigned short w);
 void* __cdecl FUN_00470720(void* a, const char* b);
-ImageMod* __cdecl FUN_004c2700(int a, float b, int c);
+ImageMod* __cdecl ImageSpaceModifierInstanceForm_Trigger(int a, float b, int c);
 
 void __cdecl FUN_00543420(int code, void* a, void* b, void* c, float* out);
 
@@ -53511,7 +53528,8 @@ bool VatsMgr::FUN_007cf990(VatsShot* s) {
     return false;
 }
 
-void VatsMgr::FUN_007d0ae0() {
+// pdb: VATS::Update | VATS.obj | fnv360_0822_retail, udata, high
+void VatsMgr::VATS_Update() {
     DAT_010f2a88 = (unsigned char)(this->mode == 4);
     if (this->mode != 4)
         return;
@@ -53534,7 +53552,7 @@ void VatsMgr::FUN_007d0ae0() {
             }
         } else {
             if (this->cam && y != (VatsShot*)DAT_0108d144) {
-                this->cam->FUN_00508310();
+                this->cam->BGSCameraShot_FreeCamera();
                 DAT_0108d000 = 0;
                 this->timer14 = 0.0f;
                 this->timer18 = 0.0f;
@@ -53586,7 +53604,7 @@ void VatsMgr::FUN_007d0ae0() {
                         if (DAT_0108d034 == DAT_0108d030 && y->byte06)
                             y->byte08 = 0;
                         else
-                            this->FUN_007d0830(0);
+                            this->VATS_SetLastProjectile(0);
                     }
                 } else {
                     this->cam = this->slot->GetItem();
@@ -53605,12 +53623,12 @@ void VatsMgr::FUN_007d0ae0() {
                 DAT_0108d140 = 0;
         }
 
-        LinkObj* b = ((VatsActor*)DAT_0108d034)->FUN_006f8f30()->link118.Get();
+        LinkObj* b = ((VatsActor*)DAT_0108d034)->Actor_GetAnimation()->link118.Get();
         if (this->tag24) {
             if (!b || b->tag2C != this->tag24 || (b->count08 >= 2 && !b->live18)) {
                 int hit;
                 hit = this->tag24->FUN_00552a10();
-                ((VatsActor*)DAT_0108d034)->FUN_006f8f30()->FUN_00460ed0(this->tag24, hit);
+                ((VatsActor*)DAT_0108d034)->Actor_GetAnimation()->FUN_00460ed0(this->tag24, hit);
             }
         }
 
@@ -53633,7 +53651,7 @@ void VatsMgr::FUN_007d0ae0() {
                     else
                         this->cam->FUN_00507cd0(DAT_0108d034, DAT_0108d010);
 
-                    HighProc* selectedTarget = ((VatsActor*)DAT_0108d034)->FUN_006f8f30();
+                    HighProc* selectedTarget = ((VatsActor*)DAT_0108d034)->Actor_GetAnimation();
                     int fromPair = ((LimbNode*)selectedTarget->node0C)->FUN_00434470(0);
                     void* done = 0;
                     void* who = 0;
@@ -53735,9 +53753,9 @@ void VatsMgr::FUN_007d0ae0() {
                     int id = c->GetImageModifier();
                     if (this->image28) {
                         int mod = c->GetFirstModifier();
-                        this->image28->FUN_004c2270(mod, *DAT_00f5fdf8.FUN_00401eb0(), 1.0f, id);
+                        this->image28->ImageSpaceModifierInstanceForm_StartTransition(mod, *DAT_00f5fdf8.FUN_00401eb0(), 1.0f, id);
                     } else {
-                        ImageMod* got = FUN_004c2700(c->GetFirstModifier(), 1.0f, id);
+                        ImageMod* got = ImageSpaceModifierInstanceForm_Trigger(c->GetFirstModifier(), 1.0f, id);
                         this->image28 = got;
                         if (got)
                             got->flags18 |= 1;
@@ -53757,7 +53775,7 @@ void VatsMgr::FUN_007d0ae0() {
                     && (IsEmpty() || GetItem()->kind != 0xf)) {
                     this->FUN_007d0630();
                     DAT_0108d028 = DAT_00f5fe08;
-                    ((CamFx*)&DAT_01090ba0)->FUN_0086c220(1.0f, 0);
+                    ((CamFx*)&DAT_01090ba0)->BSTimer_SetGlobalTimeMultiplier(1.0f, 0);
                 }
             }
 
@@ -53766,17 +53784,17 @@ void VatsMgr::FUN_007d0ae0() {
                     Player()->FUN_00775430(0);
                     DAT_0108d01b = 0;
                 }
-                this->cam->FUN_00508630(DAT_0108d01c);
+                this->cam->BGSCameraShot_Update(DAT_0108d01c);
                 if (DAT_01071970)
-                    ((CamFx*)&DAT_01090ba0)->FUN_0086c220(0.0001f, 0);
+                    ((CamFx*)&DAT_01090ba0)->BSTimer_SetGlobalTimeMultiplier(0.0001f, 0);
                 else
-                    ((CamFx*)&DAT_01090ba0)->FUN_0086c220(this->cam->speed50, 0);
+                    ((CamFx*)&DAT_01090ba0)->BSTimer_SetGlobalTimeMultiplier(this->cam->speed50, 0);
                 float x = DAT_01071978;
                 if (x > 0.5f)
                     x = 1.0f - x;
                 this->rb2C->value0C = *DAT_00f5fe10.FUN_00401eb0() * x;
             } else {
-                ((CamFx*)&DAT_01090ba0)->FUN_0086c220(1.0f, 0);
+                ((CamFx*)&DAT_01090ba0)->BSTimer_SetGlobalTimeMultiplier(1.0f, 0);
             }
         }
 
@@ -53794,7 +53812,7 @@ void VatsMgr::FUN_007d0ae0() {
                 if (!this->cam || this->timer18 == 0.0f) {
                     if (this->FUN_007cf990(y)) {
                         this->FUN_007d02e0(y);
-                        if (((VatsActor*)DAT_0108d034)->FUN_006f7370() == -1 || FUN_0054bf30(((VatsActor*)DAT_0108d034)->FUN_006f8f30()->GetGroup(4)))
+                        if (((VatsActor*)DAT_0108d034)->FUN_006f7370() == -1 || FUN_0054bf30(((VatsActor*)DAT_0108d034)->Actor_GetAnimation()->GetGroup(4)))
                             removeCommand = true;
                     } else if (!this->ref20) {
                         removeCommand = true;
@@ -53814,7 +53832,7 @@ void VatsMgr::FUN_007d0ae0() {
             switch (y->kind) {
             case 13:
                 if (((VatsActor*)DAT_0108d034)->FUN_006f7370() == -1) {
-                    ((VatsActor*)DAT_0108d034)->FUN_006fef60(!((VatsActor*)DAT_0108d034)->FUN_006f7110());
+                    ((VatsActor*)DAT_0108d034)->Actor_SetWantWeaponDrawn(!((VatsActor*)DAT_0108d034)->Actor_GetWantWeaponDrawn());
                     DAT_0108d01a = 1;
                 }
                 break;
@@ -53858,7 +53876,7 @@ void VatsMgr::FUN_007d0ae0() {
         } else {
             DAT_0108d028 -= ((CamFx*)&DAT_01090ba0)->GetDelta() * DAT_00f75450 / DAT_00f7544c;
             if (DAT_0108d028 <= 0.0f) {
-                ((CamFx*)&DAT_01090ba0)->FUN_0086c220(1.0f, 0);
+                ((CamFx*)&DAT_01090ba0)->BSTimer_SetGlobalTimeMultiplier(1.0f, 0);
 
                 if (DAT_0108d034 == DAT_0108d030 || ((VatsActor*)DAT_0108d034)->FUN_006f7370() == -1 || ((VatsActor*)DAT_0108d034)->FUN_006f7370() == 7 || ((VatsActor*)DAT_0108d034)->FUN_006f7370() == 9) {
                     this->FUN_007cfb90(0);
@@ -53877,13 +53895,13 @@ void VatsMgr::FUN_007d0ae0() {
             } else {
                 DAT_0108d01c += ((CamFx*)&DAT_01090ba0)->GetDelta() / DAT_00f7544c;
                 if (this->cam && this->cam->FUN_005084e0())
-                    this->cam->FUN_00508630(DAT_0108d01c);
+                    this->cam->BGSCameraShot_Update(DAT_0108d01c);
                 if (DAT_01071970)
-                    ((CamFx*)&DAT_01090ba0)->FUN_0086c220(0.0001f, 0);
+                    ((CamFx*)&DAT_01090ba0)->BSTimer_SetGlobalTimeMultiplier(0.0001f, 0);
                 else if (this->cam && this->cam->FUN_005084e0())
-                    ((CamFx*)&DAT_01090ba0)->FUN_0086c220(this->cam->speed50, 0);
+                    ((CamFx*)&DAT_01090ba0)->BSTimer_SetGlobalTimeMultiplier(this->cam->speed50, 0);
                 else
-                    ((CamFx*)&DAT_01090ba0)->FUN_0086c220(1.0f, 0);
+                    ((CamFx*)&DAT_01090ba0)->BSTimer_SetGlobalTimeMultiplier(1.0f, 0);
                 if (DAT_0108d02c && Player()->FUN_006f7370() != 9) {
                     ((VatsRoot*)DAT_0107a0d4)->FUN_006e4eb0()->FUN_00be9590(6);
                 }
@@ -53917,7 +53935,7 @@ struct WorldLocation
     Space* space;
     Point& GetPosition() { return position; }
     Space* GetSpace() const { return space; }
-    float FUN_004c0dc0(const WorldLocation&);
+    float BGSWorldLocation_GetDistanceSquared(const WorldLocation&);
     void FUN_004c0d50(Cell**, World**);
 };
 
@@ -54136,7 +54154,7 @@ struct Actor
     Cell* GetCell() const { return cell; }
     Process* GetProcess() const { return process; }
     World* FUN_004e8880();
-    WorldLocation FUN_004eea80();
+    WorldLocation TESObjectREFR_GetWorldLocation();
     void FUN_006f8bf0(PathingRequest*, const Point&, Space*, float, int);
     void FUN_006f8ba0(PathingRequest*, const Point&, Cell*, World*, float, int);
     bool FUN_00702d60(PathingRequest*);
@@ -54229,7 +54247,7 @@ struct EngageProc
     WorldLocation destination, lastTarget;
     Timestamp lastFailed;
     Actor* FUN_007ab510();
-    Actor* FUN_007ab520();
+    Actor* CombatProcedure_GetTarget();
     void FUN_007ab550(const Point*, bool);
     void FUN_007ab530(int);
     void FUN_007ab540();
@@ -54248,7 +54266,7 @@ bool __cdecl FUN_007b9aa0(Actor*, Actor*, const Point&, const Point&, int, int);
 void EngageProc::FUN_007d91b0()
 {
     Actor* attacker = FUN_007ab510();
-    Actor* target = FUN_007ab520();
+    Actor* target = CombatProcedure_GetTarget();
     CombatState* combat = controller->GetState();
     if (target == 0)
     {
@@ -54272,9 +54290,9 @@ void EngageProc::FUN_007d91b0()
     {
         changed = true;
     }
-    WorldLocation targetLoc = target->FUN_004eea80();
-    WorldLocation attackerLoc = attacker->FUN_004eea80();
-    float distSq = attackerLoc.FUN_004c0dc0(targetLoc);
+    WorldLocation targetLoc = target->TESObjectREFR_GetWorldLocation();
+    WorldLocation attackerLoc = attacker->TESObjectREFR_GetWorldLocation();
+    float distSq = attackerLoc.BGSWorldLocation_GetDistanceSquared(targetLoc);
     bool tooFar = distSq > maxRange * maxRange;
     bool tooClose = distSq < minRange * minRange;
     bool outsideAbsolute = distSq > absoluteRange * absoluteRange;
@@ -54639,7 +54657,7 @@ void EngageProc::FUN_007d91b0()
             }
             if (!done)
             {
-                float moved = targetLoc.FUN_004c0dc0(lastTarget);
+                float moved = targetLoc.BGSWorldLocation_GetDistanceSquared(lastTarget);
                 if ((changed || moved > 65536.0) && FUN_007d8b20(outsideAbsolute))
                 {
                     return;
@@ -54704,7 +54722,7 @@ struct DebugText
 
 struct Actor
 {
-    float FUN_00767dd0();
+    float MobileObject_GetActualHeading();
     bool FUN_006f8d80();
 };
 
@@ -54775,13 +54793,13 @@ struct CombatProcedureAttackRanged
     Timer blocked, firing, cooldown, fireDelay, suppression;
 
     Actor* FUN_007ab510();
-    Actor* FUN_007ab520();
+    Actor* CombatProcedure_GetTarget();
     void FUN_007d74e0(DebugText*, int, int);
 };
 
-void __cdecl FUN_007b9d70(NiPoint3*, Actor*, NiPoint3);
+void __cdecl CombatUtilities_GetAngleToProjectedPoint(NiPoint3*, Actor*, NiPoint3);
 float __cdecl FUN_00475910(float);
-float __cdecl FUN_004759f0(float, float, float*);
+float __cdecl GetAngleDelta(float, float, float*);
 
 inline bool Different(const NiPoint3& a, const NiPoint3& b)
 {
@@ -54800,7 +54818,7 @@ void CombatProcedureAttackRanged::FUN_007d74e0(DebugText* display, int location,
         display->Print(location, justify, "FIRING");
         if (firing.IsRunning())
             display->Print(location, justify, "Firing Timer: %.02f/%.02f", firing.Elapsed(), firing.TargetTime());
-        if (FUN_007ab520())
+        if (CombatProcedure_GetTarget())
             display->Print(location, justify, "Target location: %.02f, %.02f, %.02f",
                            targetedPoint.x, targetedPoint.y, targetedPoint.z);
         if (!fireDelay.Expired())
@@ -54827,11 +54845,11 @@ void CombatProcedureAttackRanged::FUN_007d74e0(DebugText* display, int location,
     if (Different(targetedPoint, DAT_0108ec68) && weapon && weapon->GetFiringArc() > 0.0f)
     {
         NiPoint3 rot;
-        FUN_007b9d70(&rot, attacker, targetedPoint);
-        float heading = attacker->FUN_00767dd0();
+        CombatUtilities_GetAngleToProjectedPoint(&rot, attacker, targetedPoint);
+        float heading = attacker->MobileObject_GetActualHeading();
         rot.z = FUN_00475910(rot.z);
         float direction = 0.0f;
-        float delta = (float)fabs(FUN_004759f0(heading, rot.z, &direction));
+        float delta = (float)fabs(GetAngleDelta(heading, rot.z, &direction));
         float firingArc = weapon->GetFiringArc();
         if (!attacker->FUN_006f8d80())
         {
@@ -54869,7 +54887,7 @@ struct WorldLocation
 
 struct Actor
 {
-    WorldLocation FUN_004eea80();
+    WorldLocation TESObjectREFR_GetWorldLocation();
 };
 
 struct Timestamp
@@ -54916,13 +54934,13 @@ struct CombatProcedureEngageTarget
     WorldLocation destination, lastTarget;
     Timestamp lastFailed;
 
-    Actor* FUN_007ab520();
+    Actor* CombatProcedure_GetTarget();
     void FUN_007d8e30(Output* apDebugText, int aeLocation, int aeJustify);
 };
 
 void CombatProcedureEngageTarget::FUN_007d8e30(Output* apDebugText, int aeLocation, int aeJustify)
 {
-    Actor* target = FUN_007ab520();
+    Actor* target = CombatProcedure_GetTarget();
     switch (state)
     {
     case 0:
@@ -54941,7 +54959,7 @@ void CombatProcedureEngageTarget::FUN_007d8e30(Output* apDebugText, int aeLocati
         apDebugText->Print(aeLocation, aeJustify, "Range: %.2f - %.2f", minRange, maxRange);
         if (target)
         {
-            WorldLocation location = target->FUN_004eea80();
+            WorldLocation location = target->TESObjectREFR_GetWorldLocation();
             apDebugText->Print(aeLocation, aeJustify, "Target movement distance: %.2f/%.2f", location.FUN_004c0e20(lastTarget), 256.0);
         }
         break;
@@ -54950,7 +54968,7 @@ void CombatProcedureEngageTarget::FUN_007d8e30(Output* apDebugText, int aeLocati
         apDebugText->Print(aeLocation, aeJustify, "Range: %.2f - %.2f", minRange, maxRange);
         if (target)
         {
-            WorldLocation location = target->FUN_004eea80();
+            WorldLocation location = target->TESObjectREFR_GetWorldLocation();
             apDebugText->Print(aeLocation, aeJustify, "Target movement distance: %.2f/%.2f", location.FUN_004c0e20(lastTarget), 256.0);
         }
         break;
@@ -55207,7 +55225,7 @@ struct WorldLocation {
     void* space;
     const Vec& Position() const { return point; }
     void* Space() const { return space; }
-    float FUN_004c0dc0(const WorldLocation&) const;
+    float BGSWorldLocation_GetDistanceSquared(const WorldLocation&) const;
 };
 
 struct InvestigationPoint : WorldLocation {
@@ -55329,11 +55347,11 @@ struct TeleportData {
     const Vec& FUN_00bd8090();
 };
 struct Door {
-    WorldLocation FUN_004eea80();
+    WorldLocation TESObjectREFR_GetWorldLocation();
     void* FUN_004e8810();
     const Vec& FUN_004e7580();
-    const Vec& FUN_004e75b0();
-    TeleportData* FUN_004e74a0();
+    const Vec& TESObjectREFR_GetLinkedDoorTeleportRotation();
+    TeleportData* TESObjectREFR_GetTeleport();
 };
 struct Actor {
     virtual void slot000(); virtual void slot004(); virtual void slot008(); virtual void slot00c();
@@ -55377,14 +55395,14 @@ struct Actor {
     bool FUN_00702d60(Request*);
     bool FUN_006f9650(LOSRequest*);
     void* FUN_004e8810();
-    WorldLocation FUN_004eea80();
+    WorldLocation TESObjectREFR_GetWorldLocation();
     bool FUN_006f8d60();
     bool FUN_006f8c60();
     PathingLocation* FUN_006f8c90();
     bool FUN_006f8d70();
     void FUN_006f8ce0();
     void FUN_006f9cf0();
-    void FUN_006f9cd0();
+    void Actor_FadeIn();
     float FUN_006f9d10();
     void FUN_004e8750(float);
     bool FUN_006f8b90(PathingLocation*);
@@ -55475,7 +55493,7 @@ struct CombatProcedureSearch {
     WorldLocation investigate;
     Door* searchDoor;
     Actor* FUN_007ab510();
-    Actor* FUN_007ab520();
+    Actor* CombatProcedure_GetTarget();
     void FUN_007ab530(int);
     void Fail(const char* message) { reason = message; status = 1; }
     void FUN_007dc8b0();
@@ -55484,7 +55502,7 @@ struct CombatProcedureSearch {
 void CombatProcedureSearch::FUN_007dc8b0()
 {
     Actor* actor = FUN_007ab510();
-    FUN_007ab520();
+    CombatProcedure_GetTarget();
     void* processLevel = actor->FUN_007650b0();
     CombatGroup* group = controller->group;
     Graph* graph = group->graph;
@@ -55525,7 +55543,7 @@ void CombatProcedureSearch::FUN_007dc8b0()
                 {
                     Request req;
                     actor->FUN_006f8bf0(&req, door->FUN_004e7580(), door->FUN_004e8810(), 0.0f, 0);
-                    Vec rot = door->FUN_004e75b0();
+                    Vec rot = door->TESObjectREFR_GetLinkedDoorTeleportRotation();
                     req.SetTargetAngle(FUN_00475910(rot.z - 3.1415927410125732));
                     if (!actor->FUN_00702d60(&req))
                     {
@@ -55541,8 +55559,8 @@ void CombatProcedureSearch::FUN_007dc8b0()
                     WorldLocation center = group->FUN_007dc240();
                     if (graph == 0 || center.Space() != actor->FUN_004e8810())
                     {
-                        WorldLocation world = actor->FUN_004eea80();
-                        if (world.FUN_004c0dc0(center) > 16384.0f)
+                        WorldLocation world = actor->TESObjectREFR_GetWorldLocation();
+                        if (world.BGSWorldLocation_GetDistanceSquared(center) > 16384.0f)
                         {
                             Request req;
                             if (combatState->FUN_007ae4a0(center, 1, 0))
@@ -55628,8 +55646,8 @@ void CombatProcedureSearch::FUN_007dc8b0()
             bool forceComplete = false;
             if (state == 1 && checkDestination.FUN_0073bc30())
             {
-                WorldLocation world = actor->FUN_004eea80();
-                if (world.FUN_004c0dc0(investigate) <
+                WorldLocation world = actor->TESObjectREFR_GetWorldLocation();
+                if (world.BGSWorldLocation_GetDistanceSquared(investigate) <
                     *DAT_00f5f918.FUN_00401eb0() * *DAT_00f5f918.FUN_00401eb0())
                 {
                     PathingLocation investigationPath(investigate);
@@ -55658,7 +55676,7 @@ void CombatProcedureSearch::FUN_007dc8b0()
         {
             if (!actor->FUN_006f8c60() && searchDoor)
             {
-                combatState->FUN_007ae580(searchDoor->FUN_004eea80());
+                combatState->FUN_007ae580(searchDoor->TESObjectREFR_GetWorldLocation());
                 group->FUN_0079ea30(searchDoor);
             }
             Fail(actor->FUN_006f8c60() ? "Pathing failed while moving to search door"
@@ -55679,7 +55697,7 @@ void CombatProcedureSearch::FUN_007dc8b0()
                 else
                 {
                     Request req;
-                    TeleportData* teleport = searchDoor->FUN_004e74a0();
+                    TeleportData* teleport = searchDoor->TESObjectREFR_GetTeleport();
                     if (!teleport)
                     {
                         break;
@@ -55787,7 +55805,7 @@ void CombatProcedureSearch::FUN_007dc8b0()
         {
             if (searchDoor)
             {
-                Vec rot = searchDoor->FUN_004e75b0();
+                Vec rot = searchDoor->TESObjectREFR_GetLinkedDoorTeleportRotation();
                 actor->FUN_004e8750(FUN_00475910(rot.z));
             }
             state = 5;
@@ -55799,7 +55817,7 @@ void CombatProcedureSearch::FUN_007dc8b0()
         {
             if (actor->FUN_006f9d10() < 1.0f)
             {
-                actor->FUN_006f9cd0();
+                actor->Actor_FadeIn();
             }
             state = 0;
         }
@@ -56485,13 +56503,13 @@ struct Manager { void FUN_0079d080(Controller*, int, int, int); };
 struct World { bool FUN_007a83a0(Actor*, Explosion*, Point*, float); };
 bool FUN_007ba460(Actor*, const Point*, float, float);
 void FUN_007b9530(Controller*, Weapon*, float*, float*, float*);
-int FUN_0054b780(unsigned short);
+int TESAnimGroup_GetType(unsigned short);
 bool FUN_0054bf30(unsigned short);
 void FUN_007b7d60(Point*, Actor*);
-bool FUN_007ba590(Actor*, Projectile*, float, Point, Point, Point*, Actor**, float*);
+bool CombatUtilities_CalculateProjectileLOS(Actor*, Projectile*, float, Point, Point, Point*, Actor**, float*);
 float FUN_007b8fc0(Projectile*, Point, Point, int, float);
 float FUN_0044a330(float, float);
-bool FUN_007b9730(Explosion*);
+bool CombatUtilities_IsDangerousExplosion(Explosion*);
 
 struct CombatProcedureAttackRanged {
     void* vtable;
@@ -56502,7 +56520,7 @@ struct CombatProcedureAttackRanged {
     Point TargetedPoint;
     Timer ExplosiveProjectileBlockedTimer, FiringTimer, CooldownTimer, FireDelayTimer, SuppressiveFireTimer;
     Actor* FUN_007ab510();
-    Actor* FUN_007ab520();
+    Actor* CombatProcedure_GetTarget();
     void Fail(const char* reason) { failureReason = reason; status = 1; }
     Point* FUN_007d65e0(Point*, int);
     void FUN_007d65a0();
@@ -56517,7 +56535,7 @@ void FUN_007b9e10(Point*, Actor*, Actor*, int, Projectile*, float, int);
 
 Point* CombatProcedureAttackRanged::FUN_007d65e0(Point* __restrict out, int part)
 {
-    Actor* target = FUN_007ab520();
+    Actor* target = CombatProcedure_GetTarget();
     if (!target) {
         static_cast<::NiPoint3&>(*out) = ::DAT_0108ec68;
         return out;
@@ -56532,7 +56550,7 @@ Point* CombatProcedureAttackRanged::FUN_007d65e0(Point* __restrict out, int part
 void CombatProcedureAttackRanged::FUN_007d68f0()
 {
     Actor* actor = FUN_007ab510();
-    Actor* target = FUN_007ab520();
+    Actor* target = CombatProcedure_GetTarget();
     State* combatState = controller->GetState();
     CombatGroup* combatGroup = controller->GetGroup();
     unsigned int attack = 255;
@@ -56590,7 +56608,7 @@ void CombatProcedureAttackRanged::FUN_007d68f0()
                 {
                     float duration = *DAT_00f5f5ac.FUN_00401eb0();
                     unsigned short group = animation->GetGroup(4);
-                    if (FUN_0054b780(group) == 80 || FUN_0054b780(group) == 86)
+                    if (TESAnimGroup_GetType(group) == 80 || TESAnimGroup_GetType(group) == 86)
                     {
                         SequenceBase* sequence;
                         if (animation->GetMap()->FUN_0045c6e0(group, sequence))
@@ -56739,7 +56757,7 @@ void CombatProcedureAttackRanged::FUN_007d68f0()
     float fraction = 0.0f;
     Point firingLocation;
     FUN_007b7d60(&firingLocation, actor);
-    bool hit = FUN_007ba590(actor, projectile, 0.0f, firingLocation, destination, &hitPoint, &hitRef, &fraction);
+    bool hit = CombatUtilities_CalculateProjectileLOS(actor, projectile, 0.0f, firingLocation, destination, &hitPoint, &hitRef, &fraction);
     if (hit)
     {
         bool canFirePastHit = false;
@@ -56749,7 +56767,7 @@ void CombatProcedureAttackRanged::FUN_007d68f0()
             if (hitRef && hitRef->IsActor())
             {
                 hitActor = hitRef;
-                if (hitActor == FUN_007ab520() || combatGroup->FUN_007a3d70(hitActor))
+                if (hitActor == CombatProcedure_GetTarget() || combatGroup->FUN_007a3d70(hitActor))
                     canFirePastHit = true;
             }
             if (!canFirePastHit)
@@ -56851,7 +56869,7 @@ void CombatProcedureAttackRanged::FUN_007d68f0()
             float maxDelay = weapon->GetMaxDelay() * controller->GetStyle()->GetMaxMult();
             FireDelayTimer.Start(FUN_0044a330(minDelay, maxDelay));
         }
-        if (explosion && FUN_007b9730(explosion))
+        if (explosion && CombatUtilities_IsDangerousExplosion(explosion))
             DAT_0108c7a8->FUN_0079d080(controller, 2, 4, 1);
     }
 }

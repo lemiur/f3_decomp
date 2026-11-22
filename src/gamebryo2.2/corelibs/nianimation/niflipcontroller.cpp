@@ -5,7 +5,8 @@
 extern "C" const void* g_011f3fd4;
 
 // @fnv 0x00a4f5d0
-const void* __cdecl FUN_00a4f5d0()
+// pdb: bhkTriSampledHeightFieldBvTreeShape::GetRTTI | CellMopp.obj | fnv360_0822_retail, udata + bridge(vtable_prefix|vtable), high
+const void* __cdecl bhkTriSampledHeightFieldBvTreeShape_GetRTTI()
 {
     return &g_011f3fd4;
 }
@@ -802,7 +803,7 @@ struct NiStream
     unsigned int m_d8;
     char m_dc[0x170];
     StreamIo* m_io;
-    unsigned int __thiscall FUN_00a64670();
+    unsigned int __thiscall NiStream_ReadMultipleLinkIDs();
 };
 
 struct MemoryManager
@@ -948,7 +949,7 @@ void __thiscall CtrlA4F610::LoadFromStream(NiStream* stream)
         float fStep;
         stream->m_io->Read4(&fStart);
         stream->m_io->Read4(&fStep);
-        unsigned int count = stream->FUN_00a64670();
+        unsigned int count = stream->NiStream_ReadMultipleLinkIDs();
         NiFloatData* data = new NiFloatData();
         if (count > 0)
         {
@@ -983,7 +984,7 @@ void __thiscall CtrlA4F610::LoadFromStream(NiStream* stream)
     }
     else
     {
-        stream->FUN_00a64670();
+        stream->NiStream_ReadMultipleLinkIDs();
     }
 }
 
@@ -1058,7 +1059,7 @@ void __thiscall FlipCopy::FUN_00a4f8a0(void* apRef, unsigned int aiIndex)
 
 struct A4F990Stream
 {
-    unsigned int __thiscall FUN_00a63460() throw();
+    unsigned int __thiscall NiStream_GetNumberOfLinkIDs() throw();
     F570RefObject* __thiscall FUN_00a63430() throw();
 };
 
@@ -1100,7 +1101,7 @@ void A4F990Flip::FUN_00a4f990(A4F990Stream& kStream) throw()
     FUN_00a57630(kStream);
     if (unk2C)
     {
-        unsigned int uiSize = kStream.FUN_00a63460();
+        unsigned int uiSize = kStream.NiStream_GetNumberOfLinkIDs();
         m_kTextureSwapList.FUN_0060bef0(uiSize);
         for (unsigned int i = 0; i < uiSize; i++)
         {

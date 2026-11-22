@@ -844,7 +844,7 @@ struct S7e3_Actor
     int unk13c;
     unsigned char unk140, unk141;
     float FUN_006f5b00();
-    float FUN_006f5ad0();
+    float Actor_GetWalkSpeed();
     float FUN_006f9ec0();
 };
 struct PointLocation
@@ -949,7 +949,7 @@ struct S7e3_Extra
     P3Update FUN_007ddb50();
 };
 P3Update __cdecl FUN_007b7bf0(S7e3_Actor* actor);
-P3Update __cdecl FUN_007b9d70(S7e3_Actor* actor, P3Update point);
+P3Update __cdecl CombatUtilities_GetAngleToProjectedPoint(S7e3_Actor* actor, P3Update point);
 struct S7e3_UpdateHandler
 {
     int unk00;
@@ -1039,7 +1039,7 @@ __declspec(noinline) void S7e3_UpdateHandler::FUN_007e3780(float& heading, float
             turn = actor->Heading(false);
         else
         {
-            P3Update orientation = FUN_007b9d70(actor, target);
+            P3Update orientation = CombatUtilities_GetAngleToProjectedPoint(actor, target);
             if (!actor->unk141)
                 look = orientation.x;
             if (actor->FUN_006f9ec0() < 100.0)
@@ -1102,7 +1102,7 @@ float S7e3_UpdateHandler::FUN_007e3ac0(float dt, float* mult)
             P3Update tmp;
             P3Update d = PointDifference_7e3ac0(tether, actor->Position());
             look = (float)sqrt((float)(d.x * d.x + d.y * d.y + d.z * d.z));
-            ptr = (moveMode & 0x200) ? actor->FUN_006f5b00() : actor->FUN_006f5ad0();
+            ptr = (moveMode & 0x200) ? actor->FUN_006f5b00() : actor->Actor_GetWalkSpeed();
             distance2 = ptr;
             tmp = tether;
             if (look < distance2)

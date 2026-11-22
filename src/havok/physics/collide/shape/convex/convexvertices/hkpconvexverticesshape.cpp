@@ -8,11 +8,12 @@ struct FUN_00d58d60_t
 {
     char pad[0x40];
     float* m;
-    void FUN_00d58d60(float* out);
+    void hkpConvexVerticesShape_getFirstVertex(float* out);
 };
 
 // @fnv 0x00d58d60
-void FUN_00d58d60_t::FUN_00d58d60(float* out)
+// pdb: hkpConvexVerticesShape::getFirstVertex | hkpConvexVerticesShape.obj | fnv360_0822_retail, objrun + bridge(hash|vtable) + skyrim(hash), high
+void FUN_00d58d60_t::hkpConvexVerticesShape_getFirstVertex(float* out)
 {
     float* p = m;
     out[0] = p[0];

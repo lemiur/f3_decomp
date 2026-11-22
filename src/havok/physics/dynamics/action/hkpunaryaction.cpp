@@ -99,7 +99,7 @@ class hkpWorld
 {
   public:
     void RemoveActionFromEntity(hkpUnaryAction* action, hkpEntity* entity);
-    void FUN_00c92bd0(hkpUnaryAction* action, hkpEntity* entity);
+    void hkpWorld_attachActionToEntity(hkpUnaryAction* action, hkpEntity* entity);
 };
 
 class UnaryActionHelper : public hkpUnaryAction
@@ -124,7 +124,7 @@ void UnaryActionHelper::SetEntity(hkpEntity* entity)
     m_pEntity->RetainReference();
     if (hkpWorld* world = (hkpWorld*)m_pOwningWorld)
     {
-        world->FUN_00c92bd0(this, m_pEntity);
+        world->hkpWorld_attachActionToEntity(this, m_pEntity);
     }
 }
 
@@ -174,8 +174,9 @@ template <class T> class hkArrayXd2b2f0
 };
 
 // @f3twin 0x009ae940 of 0x00979da0
-struct F3Twin_009ae940 : public UnaryActionHelper { void F3_FUN_009ae940(hkpEntity* entity) ; };
-void F3Twin_009ae940::F3_FUN_009ae940(hkpEntity* entity) 
+struct F3Twin_009ae940 : public UnaryActionHelper { void hkpUnaryAction_setEntity(hkpEntity* entity) ; };
+// pdb: hkpUnaryAction::setEntity | hkpUnaryAction.obj | fnv360_0822_retail, objrun + skyrim(objrun), high
+void F3Twin_009ae940::hkpUnaryAction_setEntity(hkpEntity* entity) 
 {
     if (m_pEntity)
     {
@@ -190,6 +191,6 @@ void F3Twin_009ae940::F3_FUN_009ae940(hkpEntity* entity)
     m_pEntity->RetainReference();
     if (hkpWorld* world = (hkpWorld*)m_pOwningWorld)
     {
-        world->FUN_00c92bd0(this, m_pEntity);
+        world->hkpWorld_attachActionToEntity(this, m_pEntity);
     }
 }

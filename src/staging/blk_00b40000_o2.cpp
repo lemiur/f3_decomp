@@ -336,11 +336,12 @@ struct NiTPrimitiveArray_int___
 
 struct FUN_00b5a3a0_Class
 {
-    void FUN_00b5a3a0();
+    void ImageSpaceEffectDepthRadialBlur_ReturnTextures();
 };
 
 // @fnv 0x00b5a3a0
-void FUN_00b5a3a0_Class::FUN_00b5a3a0()
+// pdb: ImageSpaceEffectDepthRadialBlur::ReturnTextures | ImageSpaceEffectRadialBlur.obj | fnv360_0721_beta, objrun + bridge(hash|caller_sim), high
+void FUN_00b5a3a0_Class::ImageSpaceEffectDepthRadialBlur_ReturnTextures()
 {
     int iZero;
     ImageSpaceTexture* tex = *(ImageSpaceTexture**)((char*)this + 0x2c);
@@ -3372,7 +3373,7 @@ struct FrustumCalls {
  void FUN_00aa9020(Frustum*, Portal*);
  void FUN_00aa8280() throw();
 };
-struct PortalCalls { bool FUN_00a9eea0(int, Position*); int FUN_00aa7c10(); };
+struct PortalCalls { bool BSOcclusionPlane_WithinFrustumDistFirst(int, Position*); int FUN_00aa7c10(); };
 struct RegionCalls { void FUN_004344f0(Frustum*); };
 struct WorldCalls { void FUN_00ae2f10(Region*); };
 __forceinline Frustum::~Frustum() throw() { reinterpret_cast<FrustumCalls*>(this)->FUN_00aa8280(); }
@@ -3398,7 +3399,7 @@ void Traversal::UpdateVisibility(Region* start, View* view, int arg, bool reset)
             {
                 Portal* portal = (Portal*)Next(pos);
                 if (portal && (portal->state == 1   ? true
-                               : portal->state == 0 ? reinterpret_cast<PortalCalls*>(portal)->FUN_00a9eea0(arg, &position)
+                               : portal->state == 0 ? reinterpret_cast<PortalCalls*>(portal)->BSOcclusionPlane_WithinFrustumDistFirst(arg, &position)
                                                     : false))
                 {
                     if (!begun)
@@ -3430,7 +3431,7 @@ void Traversal::UpdateVisibility(Region* start, View* view, int arg, bool reset)
         for (Link* pos = start->portals; pos;)
         {
             Portal* portal = (Portal*)Next(pos);
-            if (portal && (portal->state == 1 || (portal->state == 0 && reinterpret_cast<PortalCalls*>(portal)->FUN_00a9eea0(arg, &position))))
+            if (portal && (portal->state == 1 || (portal->state == 0 && reinterpret_cast<PortalCalls*>(portal)->BSOcclusionPlane_WithinFrustumDistFirst(arg, &position))))
             {
                 if (!begun)
                 {

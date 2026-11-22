@@ -5,7 +5,8 @@
 extern char const* const g_01202688_arg1;
 
 // @fnv 0x00c320f0
-char const* const* __cdecl FUN_00c320f0()
+// pdb: NiExtraDataController::GetRTTI | NiExtraDataController.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+char const* const* __cdecl NiExtraDataController_GetRTTI()
 {
     return &g_01202688_arg1;
 }
@@ -259,7 +260,7 @@ struct StreamOwner
     unsigned int unk244;
     unsigned int unk248;
     StreamCtx* m_24c;
-    void FUN_00a645b0();
+    void NiStream_ReadLinkID();
 };
 
 class FUN_00c32120_cls
@@ -286,7 +287,7 @@ class FUN_00c32120_cls
 void FUN_00c32120_cls::LoadFromStream(StreamOwner* apOwner)
 {
     FUN_00c318b0(apOwner);
-    apOwner->FUN_00a645b0();
+    apOwner->NiStream_ReadLinkID();
     StreamCtx* s = apOwner->m_24c;
     {
         unsigned int n = 4;
@@ -521,12 +522,13 @@ struct NiPSysFieldModifierImpl
     float m_fDistanceLimit;
 
     void __thiscall FUN_00c31950(NiStream& kStream);
-    void __thiscall FUN_00c321f0(NiStream& kStream);
+    void __thiscall NiPSysFieldModifier_SaveBinary(NiStream& kStream);
 };
 
 // Calls FUN_00c31950, then writes the link ID and the float, float, bool and float fields to the stream.
 // @fnv 0x00c321f0
-void NiPSysFieldModifierImpl::FUN_00c321f0(NiStream& kStream)
+// pdb: NiPSysFieldModifier::SaveBinary | NiPSysFieldModifier.obj | fnv360_0822_retail, caller_sim + bridge(vtable|call_seq) + skyrim(caller_sim), high
+void NiPSysFieldModifierImpl::NiPSysFieldModifier_SaveBinary(NiStream& kStream)
 {
     FUN_00c31950(kStream);
     kStream.SaveLinkID(m_pkFieldObject);

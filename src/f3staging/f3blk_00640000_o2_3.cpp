@@ -120,7 +120,7 @@ struct Player {
     virtual void v470(); virtual void v474(); virtual void v478();
     virtual double Get(void* item, bool& flag);
 
-    Obj51d* FUN_006f5800(void* p);
+    Obj51d* Actor_GetClass(void* p);
 };
 
 struct Setting {
@@ -136,7 +136,7 @@ extern void* DAT_01076900;
 
 extern void __cdecl FUN_0061a730(int a);
 extern void __cdecl FUN_00657540(Tile* tile);
-extern void __cdecl FUN_006554e0(Tile* tile, int val);
+extern void __cdecl LevelUpMenu_ResetSkillsFunc(Tile* tile, int val);
 
 class Manager {
 public:
@@ -184,7 +184,7 @@ bool Manager::FUN_00657580(int action, Tile* tile) {
             action = (action != 12) ? 1 : -1;
             unk50[unk28] += action;
             unk04->FUN_00bee190(DAT_010768e8, (float)unk50[unk28], 1);
-            if (DAT_0107a104->FUN_006f5800(item)->FUN_0051dfb0()) {
+            if (DAT_0107a104->Actor_GetClass(item)->FUN_0051dfb0()) {
                 action *= *DAT_00f5ee80.FUN_004241e0();
             }
             float delta = (float)action;
@@ -217,7 +217,7 @@ bool Manager::FUN_00657580(int action, Tile* tile) {
         unk04->FUN_00bee190(DAT_010768e8, (float)unk50[unk28], 1);
         switch (unk28) {
         case 0:
-            sub60.FUN_00655800(FUN_006554e0, 0, 0x7fffffff);
+            sub60.FUN_00655800(LevelUpMenu_ResetSkillsFunc, 0, 0x7fffffff);
             break;
         case 1:
             sub90.FUN_00655800(FUN_00657540, 0, 0x7fffffff);

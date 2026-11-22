@@ -73,7 +73,8 @@ void __thiscall NiParticleSystem::LoadModifiers(NiStream* kStream)
 extern char const* const g_01202538_arg1;
 
 // @fnv 0x00c1b5b0
-char const* const* __cdecl FUN_00c1b5b0()
+// pdb: NiGeomMorpherController::GetRTTI | NiGeomMorpherController.obj | fnv360_0822_retail, udata + bridge(vtable|objrun) + skyrim(objrun_open), high
+char const* const* __cdecl NiGeomMorpherController_GetRTTI()
 {
     return &g_01202538_arg1;
 }
@@ -458,11 +459,12 @@ struct S_00c1b120
     int unkCC;
     int unkD0;
     float unkD4;
-    void FUN_00c1b120();
+    void NiParticleSystem_PerformSystemReset();
 };
 
 // @fnv 0x00c1b120
-void S_00c1b120::FUN_00c1b120()
+// pdb: NiParticleSystem::PerformSystemReset | NiParticleSystem.obj | fnv360_0822_retail, call_seq + bridge(call_seq|objrun_prop) + skyrim(call_gap), high
+void S_00c1b120::NiParticleSystem_PerformSystemReset()
 {
     S_00c1b120_Data* pkData = unkB8;
     pkData->vfn_8c(false);
@@ -1218,12 +1220,13 @@ struct S_00c1b260_System : NiParticleSystem
     int unkD0;
     float m_fLastTime;
     bool m_bHasAccumulation;
-    void FUN_00c1b120();
-    void FUN_00c1b260(float fTime);
+    void NiParticleSystem_PerformSystemReset();
+    void NiParticleSystem_Do_UpdateSystem(float fTime);
 };
 
 // @fnv 0x00c1b260
-void S_00c1b260_System::FUN_00c1b260(float fTime)
+// pdb: NiParticleSystem::Do_UpdateSystem | NiParticleSystem.obj | fnv360_0822_retail, caller_sim + bridge(vtable|objrun) + skyrim(caller_sim), high
+void S_00c1b260_System::NiParticleSystem_Do_UpdateSystem(float fTime)
 {
     S_00c1b260_Data* pkData = m_pUserData;
     bool bWasEmpty = false;
@@ -1232,7 +1235,7 @@ void S_00c1b260_System::FUN_00c1b260(float fTime)
     pkData->vAC();
     if (m_bHasAccumulation || m_fLastTime > fTime)
     {
-        FUN_00c1b120();
+        NiParticleSystem_PerformSystemReset();
         m_bHasAccumulation = false;
     }
     if (m_fLastTime == DAT_010241b0)
@@ -1431,7 +1434,7 @@ struct Obj_c1b3a0
     int unk244;
     int unk248;
     Sub_c1b3a0* m_24c;
-    void __thiscall FUN_00a64670();
+    void __thiscall NiStream_ReadMultipleLinkIDs();
 };
 
 struct Nps_c1b3a0
@@ -1503,7 +1506,7 @@ void Nps_c1b3a0::FUN_00c1b3a0(Obj_c1b3a0* pObj)
     }
     pSub->m_04 += nResult;
     m_c4 = (bFlag != 0);
-    pObj->FUN_00a64670();
+    pObj->NiStream_ReadMultipleLinkIDs();
 }
 
 struct FUN_00a59fd0_shell
@@ -2792,11 +2795,12 @@ struct Ref_00c258e0
     unsigned int unkb0;
     unsigned int unkb4;
     BoundDataBlock* data;
-    void FUN_00c1ae40(float time);
+    void NiParticleSystem_UpdateSystem(float time);
 };
 // When the task manager is enabled, data time is positive, and the current thread matches the stored ID, it tries to queue a task; otherwise it calls Update.
 // @fnv 0x00c1ae40
-void Ref_00c258e0::FUN_00c1ae40(float time)
+// pdb: NiParticleSystem::UpdateSystem | NiParticleSystem.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+void Ref_00c258e0::NiParticleSystem_UpdateSystem(float time)
 {
     if (DAT_012024d8 && DAT_011f5b04 && ((TaskManager*)DAT_011f5b04)->enabled && data->time > 0.0f &&
         GetCurrentThreadId() == DAT_012024dc)

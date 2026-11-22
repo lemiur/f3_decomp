@@ -90,9 +90,10 @@ struct Entity {
 void __cdecl FUN_009808f0(void* a, void* b, Entity* e);
 struct World {
     void FUN_00981160(void* a, void* b, Motion* m, void* e);
-    void FUN_00981330(void* a, void* b, Entity* entity, const Vec4* pos, void* e);
+    void hkpSimulation_collideEntitiesDiscrete(void* a, void* b, Entity* entity, const Vec4* pos, void* e);
 };
-void World::FUN_00981330(void* a, void* b, Entity* entity, const Vec4* pos, void* e)
+// pdb: hkpSimulation::collideEntitiesDiscrete | hkpSimulation.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(caller_sim), high
+void World::hkpSimulation_collideEntitiesDiscrete(void* a, void* b, Entity* entity, const Vec4* pos, void* e)
 {
     Vec4 saved = *pos;
     Motion* m = entity->motion;

@@ -100,10 +100,11 @@ struct WorldObject1940 {
     void* propData;
     int propSize;
     int propCapacityAndFlags;
-    void FUN_00931940(StatsCollector1940* collector);
+    void hkpWorldObject_calcContentStatistics(StatsCollector1940* collector);
 };
 
-void WorldObject1940::FUN_00931940(StatsCollector1940* collector)
+// pdb: hkpWorldObject::calcContentStatistics | hkpWorldObject.obj | fnv360_0822_retail, ustr + bridge(ustr|vtable) + skyrim(ustr), high
+void WorldObject1940::hkpWorldObject_calcContentStatistics(StatsCollector1940* collector)
 {
     collector->AddChildObject("Shape", 1, shape);
     if ((collAgtCapacityAndFlags & 0x80000000) == 0)
@@ -655,7 +656,7 @@ struct Object_9265a0
     unsigned char formType;
 };
 
-extern "C" void __cdecl FUN_00998d40(void* records, int item);
+extern "C" void __cdecl hkAgentNnMachine_CopyAndRelinkAgentEntry(void* records, int item);
 extern "C" void __cdecl FUN_00998ba0(void* owner, int item);
 Island* PickIslandByValue(unsigned int value, Island* first, Island* second);
 
@@ -672,7 +673,7 @@ void FUN_009265a0(void* owner, List_9265a0* list, void* records, int mode)
             if (sub->formType == 7)
             {
                 int item = entry->item;
-                FUN_00998d40(records, item);
+                hkAgentNnMachine_CopyAndRelinkAgentEntry(records, item);
                 FUN_00998ba0(owner, item);
             }
             else if (mode == 7)
@@ -680,7 +681,7 @@ void FUN_009265a0(void* owner, List_9265a0* list, void* records, int mode)
                 if (PickIslandByValue(entry->item, list->island, sub->island) == list->island)
                 {
                     int item = entry->item;
-                    FUN_00998d40((char*)sub->island + 0x58, item);
+                    hkAgentNnMachine_CopyAndRelinkAgentEntry((char*)sub->island + 0x58, item);
                     FUN_00998ba0(owner, item);
                 }
             }
@@ -1577,9 +1578,10 @@ public:
 struct Owner92f3d0 {
     int f0, f4;
     n92f3d0::RefObj* entries[8];
-    void FUN_0092f3d0(n92f3d0::RefObj* obj, int index);
+    void hkpCharacterStateManager_registerState(n92f3d0::RefObj* obj, int index);
 };
-void Owner92f3d0::FUN_0092f3d0(n92f3d0::RefObj* obj, int index)
+// pdb: hkpCharacterStateManager::registerState | hkpCharacterStateManager.obj | fnv360_0822_retail, objrun + skyrim(objopen_prop), high
+void Owner92f3d0::hkpCharacterStateManager_registerState(n92f3d0::RefObj* obj, int index)
 {
     obj->addReference();
     if (entries[index]) entries[index]->removeReference();
@@ -1944,7 +1946,8 @@ unsigned int unk34;
 unsigned int unk38;
 unsigned int unk3c;
 Array315 array;};
-void __cdecl FUN_00926fc0(Owner315*owner,Entry315*entry){entry->flags=(entry->flags&~8)|4;if(entry->index==0xffff){entry->index=(unsigned short)owner->array.size;Array315*array=&owner->array;if(array->size==(array->capacityFlags&0x3fffffff))FUN_00901f10(array,4);array->data[array->size]=entry;++array->size;}}
+// pdb: hkpWorldOperationUtil::markIslandActive | hkpWorldOperationUtil.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_seq), high
+void __cdecl hkpWorldOperationUtil_markIslandActive(Owner315*owner,Entry315*entry){entry->flags=(entry->flags&~8)|4;if(entry->index==0xffff){entry->index=(unsigned short)owner->array.size;Array315*array=&owner->array;if(array->size==(array->capacityFlags&0x3fffffff))FUN_00901f10(array,4);array->data[array->size]=entry;++array->size;}}
 }
 }   // namespace f3m_00926fc0
 
@@ -2164,7 +2167,8 @@ void __cdecl FUN_00935f00(void* srcObj, void* dstObj)
 // @f3 0x00923410 (community match, verified in this file)
 namespace f3m_00923410 {
 int __cdecl FUN_00c03188(int a, int b, int c);
-int __cdecl FUN_00923410(int a) { return FUN_00c03188(a, 0, 0); }
+// pdb: hkString::atoi | hkString.obj | fnv360_0822_retail, call_gap + skyrim(call_gap), high
+int __cdecl hkString_atoi(int a) { return FUN_00c03188(a, 0, 0); }
 }   // namespace f3m_00923410
 
 // @f3 0x009330f0 (community match, verified in this file)
@@ -2226,7 +2230,8 @@ struct World {
     Lock* lock;
 };
 }
-void __cdecl FUN_00926f50(n926f50::World* world, n926f50::Obj* obj) {
+// pdb: hkpWorldOperationUtil::markIslandInactiveMt | hkpWorldOperationUtil.obj | fnv360_0822_retail, call_gap_sim + bridge(call_gap_sim|call_seq) + skyrim(call_gap_sim), high
+void __cdecl hkpWorldOperationUtil_markIslandInactiveMt(n926f50::World* world, n926f50::Obj* obj) {
     obj->flags &= 0xf3;
     world->lock->FUN_00908a00();
     if (obj->index == 0xffff) {
@@ -2278,7 +2283,7 @@ void* FUN_0092e780_c::FUN_0092e780(unsigned int flags) throw()
 // @f3 0x00938d80 (community match, verified in this file)
 namespace f3m_00938d80 {
 namespace n938d80 {
-int __cdecl FUN_009232c0(const char* a, const char* b);
+int __cdecl hkString_strCmp(const char* a, const char* b);
 struct Enum { void FUN_009b2360(const char* name, int* out); };
 struct Pair { const char* key; const char* value; };
 }
@@ -2296,7 +2301,7 @@ char __cdecl FUN_00938d80(const char* className, n938d80::Enum* e)
     };
     const char* name = "MOTION_INVALID";
     for (int i = 0; table[i].key; i++) {
-        if (n938d80::FUN_009232c0(table[i].key, className) == 0) {
+        if (n938d80::hkString_strCmp(table[i].key, className) == 0) {
             name = table[i].value;
             break;
         }
@@ -2386,12 +2391,13 @@ struct FUN_00931740_Object {
     int unk70;
     FUN_00931740_Array entries;
 
-    void FUN_00931740(int key, int value3, int value4);
+    void hkpWorldObject_addProperty(int key, int value3, int value4);
 };
 
 void __cdecl FUN_00901f10(FUN_00931740_Array* array, int stride);
 
-void FUN_00931740_Object::FUN_00931740(int key, int value3, int value4)
+// pdb: hkpWorldObject::addProperty | hkpWorldObject.obj | fnv360_0822_retail, caller + bridge(call_gap|call_seq) + skyrim(objrun_prop), high
+void FUN_00931740_Object::hkpWorldObject_addProperty(int key, int value3, int value4)
 {
     int count = entries.count;
     int i = 0;
@@ -2852,7 +2858,8 @@ public:
     static void* operator new(unsigned int n) { Alloc* a = TlsGetValue(DAT_010f3170); void* p = a->FUN_008f6d30(n, 0x15); ((Obj*)p)->w4 = (unsigned short)n; return p; }
 };
 class Obj2 : public Obj { public: Obj2() throw() {} virtual void v0(); };
-Obj* __cdecl FUN_0092e960() { return new Obj2; }
+// pdb: hkDummySingletoncreate | hkBaseSystem.obj | fnv360_0822_retail, uvref + bridge(uvref|uvref) + skyrim(uvref), high
+Obj* __cdecl hkDummySingletoncreate() { return new Obj2; }
 }
 
 // @f3 0x009283d0 (community match, verified in this file)
@@ -2917,7 +2924,8 @@ struct Sink { void FUN_00984cc0(Pair* p, int n) throw(); };
 struct World { char p00[0x54]; Collector* collector; Sink* sink; char p5c[0x2f8 - 0x5c]; int count; };
 struct Key { char p00[0x24]; int k; };
 }
-void __cdecl FUN_009283d0(n9283d0::World* w, n9283d0::Key* key)
+// pdb: hkpWorldOperationUtil::removePhantomBP | hkpWorldOperationUtil.obj | fnv360_0822_retail, objrun + skyrim(call_gap), high
+void __cdecl hkpWorldOperationUtil_removePhantomBP(n9283d0::World* w, n9283d0::Key* key)
 {
     using namespace n9283d0;
     LocalArray<Pair> arr(w->count);
@@ -3010,13 +3018,13 @@ struct Node_0093c0a0 {
     Node_0093c0a0* FUN_009b04a0();
 };
 
-extern "C" int __cdecl FUN_009232c0(const char* text, const char* key);
+extern "C" int __cdecl hkString_strCmp(const char* text, const char* key);
 
 unsigned char* __cdecl FUN_0093c0a0(unsigned char* out, Node_0093c0a0* node, const char* key)
 {
     if (node) {
         do {
-            if (FUN_009232c0(node->FUN_009b0490(), key) == 0)
+            if (hkString_strCmp(node->FUN_009b0490(), key) == 0)
                 break;
             node = node->FUN_009b04a0();
         } while (node);
@@ -3135,10 +3143,11 @@ void __cdecl FUN_00901f10(PtrArray* arr, int stride);
 struct Owner {
     int unk00, unk04, unk08, unk0C, unk10;
     PtrArray array14;
-    void FUN_0092f290(void* value, int unk);
+    void hkDefaultError_sectionBegin(void* value, int unk);
 };
 
-void Owner::FUN_0092f290(void* value, int unk)
+// pdb: hkDefaultError::sectionBegin | hkDefaultError.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(objrun_open), high
+void Owner::hkDefaultError_sectionBegin(void* value, int unk)
 {
     PtrArray* arr = &array14;
     if (arr->count == (int)(arr->capacityAndFlags & 0x3fffffff))
@@ -3402,13 +3411,13 @@ struct Mgr {
     int unk188;
     int unk18c;
     float unk190;
-    void FUN_009023e0();
+    void hkpWorld_checkDeterminism();
 };
 extern const char DAT_01092a50[];
 bool FUN_009a9ba0(float* a, Child** b, int n, int sz);
 void FUN_00901f10(PtrArr* a, int n);
-void FUN_00977ab0(float f, void* p);
-void FUN_009890d0(Mgr* m, Item* i);
+void hkSweptTransformUtil_freezeMotionState(float f, void* p);
+void hkpWorldCallbackUtil_fireIslandDeactivated(Mgr* m, Item* i);
 
 void FUN_00926df0(Mgr* mgr, Item* item)
 {
@@ -3431,13 +3440,13 @@ void FUN_00926df0(Mgr* mgr, Item* item)
     item->unk44 = mgr->unk190;
     for (int i = 0; i < item->unk4c; i++) {
         Child* c = item->unk48[i];
-        FUN_00977ab0(item->unk44, (char*)c + 0xe0);
+        hkSweptTransformUtil_freezeMotionState(item->unk44, (char*)c + 0xe0);
         Sub* s = (Sub*)((char*)c + 0xd0);
         s->v40(DAT_01092a50);
         s->v44(DAT_01092a50);
     }
-    FUN_009890d0(mgr, item);
-    mgr->FUN_009023e0();
+    hkpWorldCallbackUtil_fireIslandDeactivated(mgr, item);
+    mgr->hkpWorld_checkDeterminism();
 }
 }   // namespace f3m_00926df0
 
@@ -4054,7 +4063,8 @@ struct Arr {
     }
 };
 struct Owner { char pad[0x40]; Arr arr; };
-void __cdecl FUN_00926f00(Owner* o, Child* c) {
+// pdb: hkpWorldOperationUtil::markIslandInactive | hkpWorldOperationUtil.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap) + skyrim(call_gap), high
+void __cdecl hkpWorldOperationUtil_markIslandInactive(Owner* o, Child* c) {
     c->flags &= 0xf3;
     if (c->idx == 0xffff) {
         c->idx = (unsigned short)o->arr.size;
@@ -4467,7 +4477,8 @@ void* unk74;
 void* unk78;
 void* unk7c;
 void (__thiscall *query)(Interface*,int,Mode,Array*) throw(); }; struct Interface { Ops* ops; }; extern Interface* DAT_010f3400;
-int __cdecl FUN_0092ecb0() { int result=0; bool ready=DAT_010f3408==1; if(ready) { FUN_0092ebc0(); if(DAT_0116939d && DAT_01061264) { DAT_01061264(); DAT_0116939d=0; } FUN_0056b560(0); FUN_0056b5b0(0); FUN_0092e920(); if(DAT_010f3400->ops->active(DAT_010f3400)) { Interface* receiver=DAT_010f3400; Array array={0,0,0}; receiver->ops->query(receiver,0,Mode(true),&array); result=array.count>0; array.FUN_009aea60(); } FUN_0092e830(0); DAT_010f3408=0; } return result; } }
+// pdb: hkBaseSystem::quit | hkBaseSystem.obj | fnv360_0822_retail, udata + bridge(udata|udata) + skyrim(udata), high
+int __cdecl hkBaseSystem_quit() { int result=0; bool ready=DAT_010f3408==1; if(ready) { FUN_0092ebc0(); if(DAT_0116939d && DAT_01061264) { DAT_01061264(); DAT_0116939d=0; } FUN_0056b560(0); FUN_0056b5b0(0); FUN_0092e920(); if(DAT_010f3400->ops->active(DAT_010f3400)) { Interface* receiver=DAT_010f3400; Array array={0,0,0}; receiver->ops->query(receiver,0,Mode(true),&array); result=array.count>0; array.FUN_009aea60(); } FUN_0092e830(0); DAT_010f3408=0; } return result; } }
 }   // namespace f3m_0092ecb0
 
 // @f3 0x00934270 (community match, verified in this file)
@@ -4716,8 +4727,9 @@ Owner* Owner::FUN_00922c50(int requested){int n=requested*3;int capacity=4;size=
 // @f3 0x0093cb40 (community match, verified in this file)
 namespace f3m_0093cb40 {
 extern char DAT_00e37e58; struct Q93Lookup {int unk00;int unk04;void FUN_0093d600(void*,const char*);unsigned char* FUN_0093d640(unsigned char*);int* FUN_0093d670(int);};
-static __declspec(noinline) void FUN_0093cae0(void* object,const char* name){Q93Lookup lookup;lookup.FUN_0093d600(object,name);unsigned char flag;unsigned char* test=lookup.FUN_0093d640(&flag);if(*test){int* result=lookup.FUN_0093d670(0);*result=0;}}
-void __cdecl FUN_0093cb40(int unused,void* object){FUN_0093cae0(object,&DAT_00e37e58);}
+// pdb: hkDataObjectNative::hasMember | hkDataObjectNative.obj | fnv360_0822_retail, caller_sim + bridge(caller_sim|vtable) + skyrim(caller_sim), high
+static __declspec(noinline) void hkDataObjectNative_hasMember(void* object,const char* name){Q93Lookup lookup;lookup.FUN_0093d600(object,name);unsigned char flag;unsigned char* test=lookup.FUN_0093d640(&flag);if(*test){int* result=lookup.FUN_0093d670(0);*result=0;}}
+void __cdecl FUN_0093cb40(int unused,void* object){hkDataObjectNative_hasMember(object,&DAT_00e37e58);}
 }   // namespace f3m_0093cb40
 
 // @f3 0x0093c0e0 (community match, verified in this file)
@@ -5613,7 +5625,7 @@ namespace f3m_0092a960 {
 
 struct Sub {
     void FUN_0090b960(void* owner);
-    void FUN_009898e0(void* owner);
+    void hkpPhantom_removePhantomListener(void* owner);
 };
 
 class Owner {
@@ -5668,7 +5680,7 @@ void Owner::FUN_0092a960()
         m_arr8c[i]->FUN_0090b960(&m_a08);
     m_count90 = 0;
     for (int i = 0; i < m_count9c; i++)
-        m_arr98[i]->FUN_009898e0(&m_b0c);
+        m_arr98[i]->hkpPhantom_removePhantomListener(&m_b0c);
     m_count9c = 0;
 }
 
@@ -6538,14 +6550,15 @@ extern char DAT_00e3bd24;
 namespace f3m_0093cb20 {
 
 
-static __declspec(noinline) int FUN_0093cae0(int x, char* a)
+// pdb: hkDataObjectNative::hasMember | hkDataObjectNative.obj | fnv360_0822_retail, caller_sim + bridge(caller_sim|vtable) + skyrim(caller_sim), high
+static __declspec(noinline) int hkDataObjectNative_hasMember(int x, char* a)
 {
     return x + (int)a;
 }
 
 static __declspec(noinline) int FUN_0093cb20(int x, int c)
 {
-    return FUN_0093cae0(x, &DAT_00e3bd24);
+    return hkDataObjectNative_hasMember(x, &DAT_00e3bd24);
 }
 
 void emit_0093cb20(int x, int c) { FUN_0093cb20(x, c); }
@@ -7116,13 +7129,13 @@ struct Variant {void* object;ClassInfo* type;};
 struct VariantArray {Variant* data;int size;};
 extern ClassInfo DAT_01117274,DAT_01117694,DAT_01117de4;
 extern const char DAT_00e54f38[],DAT_00e55124[],DAT_00e55574[];
-extern int __cdecl FUN_009232c0(const char*,const char*);
+extern int __cdecl hkString_strCmp(const char*,const char*);
 static __declspec(noinline) void FUN_009339a0(VariantArray* objects) {
     for(int i=0;i<objects->size;++i) {
         const char* name=objects->data[i].type->FUN_009b0490();
-        if(FUN_009232c0(name,DAT_00e54f38)==0)objects->data[i].type=&DAT_01117274;
-        else if(FUN_009232c0(name,DAT_00e55124)==0)objects->data[i].type=&DAT_01117694;
-        else if(FUN_009232c0(name,DAT_00e55574)==0)objects->data[i].type=&DAT_01117de4;
+        if(hkString_strCmp(name,DAT_00e54f38)==0)objects->data[i].type=&DAT_01117274;
+        else if(hkString_strCmp(name,DAT_00e55124)==0)objects->data[i].type=&DAT_01117694;
+        else if(hkString_strCmp(name,DAT_00e55574)==0)objects->data[i].type=&DAT_01117de4;
     }
 }
 struct ClassRegistry;
@@ -7632,7 +7645,7 @@ struct FUN_0093d600 {
     int* FUN_0093d6b0(int index);
     QItem* FUN_0093d790(const char* name, int* out);
 };
-int __cdecl FUN_009232c0(const char* a, const char* b);
+int __cdecl hkString_strCmp(const char* a, const char* b);
 static __declspec(noinline) int FUN_00935000(FUN_0093d7f0* obj, const char* name)
 {
     int result;
@@ -7647,13 +7660,13 @@ void __cdecl FUN_00935040(void* unused, QSrc* src)
     FUN_0093d7f0 self(src);
     FUN_0093d600 field(&self, "type");
     int* out = field.FUN_0093d6b0(0);
-    if (FUN_009232c0(src->unk04->FUN_009b0490(), "hkInterleavedSkeletalAnimation") == 0) {
+    if (hkString_strCmp(src->unk04->FUN_009b0490(), "hkInterleavedSkeletalAnimation") == 0) {
         FUN_0093d7f0 o(src);
         *out = FUN_00935000(&o, "HK_INTERLEAVED_ANIMATION");
-    } else if (FUN_009232c0(src->unk04->FUN_009b0490(), "hkDeltaCompressedSkeletalAnimation") == 0) {
+    } else if (hkString_strCmp(src->unk04->FUN_009b0490(), "hkDeltaCompressedSkeletalAnimation") == 0) {
         FUN_0093d7f0 o(src);
         *out = FUN_00935000(&o, "HK_DELTA_COMPRESSED_ANIMATION");
-    } else if (FUN_009232c0(src->unk04->FUN_009b0490(), "hkWaveletSkeletalAnimation") == 0) {
+    } else if (hkString_strCmp(src->unk04->FUN_009b0490(), "hkWaveletSkeletalAnimation") == 0) {
         FUN_0093d7f0 o(src);
         *out = FUN_00935000(&o, "HK_WAVELET_COMPRESSED_ANIMATION");
     } else {
@@ -8126,7 +8139,7 @@ const char* __cdecl FUN_00923470(const char* s, int c) throw();
 const char* __cdecl FUN_00923460(const char* s, int c) throw();
 int __cdecl FUN_009233f0(const char* s) throw();
 void __cdecl FUN_009234e0(void* dst, const void* src, int n) throw();
-int __cdecl FUN_009232c0(const char* a, const char* b) throw();
+int __cdecl hkString_strCmp(const char* a, const char* b) throw();
 void __cdecl FUN_00901e90(void* arr, int n, int sizeElem) throw();
 struct hkThreadMemory { void FUN_008f6d90(void* p, int size, int cls) throw(); };
 extern unsigned long DAT_010f3170;
@@ -8196,13 +8209,14 @@ struct hkString {
         *this = hkString(m_string.m_data + index, maxChars);
     }
     __forceinline hkString& operator=(const hkString& o) { m_string = o.m_string; return *this; }
-    __forceinline bool operator==(const char* s) const { return FUN_009232c0(m_string.m_data, s) == 0; }
+    __forceinline bool operator==(const char* s) const { return hkString_strCmp(m_string.m_data, s) == 0; }
 };
 }
 
 using namespace N93df80;
 
-int __cdecl FUN_0093df80(const char* typeName)
+// pdb: hkClassMember::getTypeOf | hkClassMember.obj | fnv360_0822_retail, ustr + skyrim(ustr), high
+int __cdecl hkClassMember_getTypeOf(const char* typeName)
 {
     if (FUN_009232f0(typeName, "enum ", 5) == 0)
         return 0x18;
@@ -9076,7 +9090,8 @@ struct World { char p00[8]; Notifier* notifier; char p0c[0x54 - 0xc]; Collector*
 struct Sub { int m0; char p04[0x10]; int k; };
 struct Key { char p00[0x10]; Sub sub; };
 }
-void __cdecl FUN_009282b0(n9282b0::World* w, n9282b0::Key* key)
+// pdb: hkpWorldOperationUtil::removeEntityBP | hkpWorldOperationUtil.obj | fnv360_0822_retail, call_gap + bridge(call_gap|call_gap) + skyrim(call_gap), high
+void __cdecl hkpWorldOperationUtil_removeEntityBP(n9282b0::World* w, n9282b0::Key* key)
 {
     using namespace n9282b0;
     Sub* s = &key->sub;
@@ -11525,7 +11540,7 @@ extern const char DAT_00e55c94[];
 namespace f3m_0093c130 {
 namespace c93c130 {
 struct Node { const char* FUN_009b0490(); Node* FUN_009b04a0(); };
-int __cdecl FUN_009232c0(const char* a, const char* b);
+int __cdecl hkString_strCmp(const char* a, const char* b);
 void __cdecl FUN_00901f10(void* arr, int elemSize);
 struct Entry { int key; Node* node; };
 struct EntryArray {
@@ -11547,7 +11562,7 @@ void World::FUN_0093c130(EntryArray* arr)
     for (int i = 0; i < arr->size; ) {
         Node* n;
         for (n = arr->data[i].node; n; n = n->FUN_009b04a0()) {
-            if (FUN_009232c0(n->FUN_009b0490(), DAT_00e55c94) == 0)
+            if (hkString_strCmp(n->FUN_009b0490(), DAT_00e55c94) == 0)
                 break;
         }
         if (n) {
@@ -11765,10 +11780,11 @@ namespace S00924b40_ns {
 
 struct OutMat {
     float m[12];
-    void FUN_00924b40(const float* q);
+    void hkRotation_set(const float* q);
 };
 
-void OutMat::FUN_00924b40(const float* q)
+// pdb: hkRotation::set | hkRotation.obj | fnv360_0822_retail, call_seq + bridge(call_dedup|call_seq) + skyrim(call_seq), high
+void OutMat::hkRotation_set(const float* q)
 {
     float x2 = q[0] + q[0];
     float y2 = q[1] + q[1];
@@ -12245,7 +12261,8 @@ template <class T> struct hkArray {
 
 extern Node* DAT_0116932c;
 
-void __cdecl FUN_0092e990() throw()
+// pdb: hkBaseSystem::initSingletons | hkBaseSystem.obj | fnv360_0822_retail, call_seq + bridge(call_gap_sim|call_gap) + skyrim(objrun), high
+void __cdecl hkBaseSystem_initSingletons() throw()
 {
     Node** link = &DAT_0116932c;
     hkArray<Node*> failed;
@@ -12428,7 +12445,7 @@ struct Island {
     hkArray<Entity*> entities;
     char pad54[4];
     char f58[4];
-    void FUN_0098adb0();
+    void hkpSimulationIsland_markForWrite();
     void FUN_0098ae70(Island* other);
 };
 struct World {
@@ -12441,15 +12458,16 @@ struct World {
     int lockCount;
     char pad88[4];
     char f8c;
-    void FUN_009037d0(Island* island);
-    void FUN_00902600(Island* island);
+    void hkpWorld_lockForIslandSplit(Island* island);
+    void hkpWorld_unlockForIslandSplit(Island* island);
     void FUN_00902550();
 };
 void __cdecl FUN_00926c70(World* world, Island* island);
 void __cdecl FUN_009994c0(void* a, void* b);
 void __cdecl FUN_00926680(World* world, Island* island);
 
-Island* __cdecl FUN_00927940(World* world, Island* a, Island* b)
+// pdb: hkpWorldOperationUtil::internalMergeTwoIslands | hkpWorldOperationUtil.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_gap) + skyrim(call_seq), high
+Island* __cdecl hkpWorldOperationUtil_internalMergeTwoIslands(World* world, Island* a, Island* b)
 {
     if (a->entities.size <= b->entities.size &&
         (a->entities.size < b->entities.size || a->storageIndex > b->storageIndex))
@@ -12473,10 +12491,10 @@ Island* __cdecl FUN_00927940(World* world, Island* a, Island* b)
         }
     }
     a->raw25 |= b->raw25 & 0xc;
-    world->FUN_009037d0(a);
-    b->FUN_0098adb0();
+    world->hkpWorld_lockForIslandSplit(a);
+    b->hkpSimulationIsland_markForWrite();
     FUN_009994c0(a->f58, b->f58);
-    world->FUN_00902600(a);
+    world->hkpWorld_unlockForIslandSplit(a);
 
     {
         int oldSize = a->entities.size;
@@ -12629,10 +12647,11 @@ public:
 };
 class Obj : public FUN_0092e340 {
 public:
-    FUN_0092e340* FUN_0092e650(const EntityArray& a, const EntityArray& b) const;
+    FUN_0092e340* hkpMouseSpringAction_clone(const EntityArray& a, const EntityArray& b) const;
 };
 
-FUN_0092e340* Obj::FUN_0092e650(const EntityArray& a, const EntityArray& b) const
+// pdb: hkpMouseSpringAction::clone | hkpMouseSpringAction.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+FUN_0092e340* Obj::hkpMouseSpringAction_clone(const EntityArray& a, const EntityArray& b) const
 {
     if (a.getSize() != 1)
         return 0;
@@ -13183,7 +13202,7 @@ public:
 
 char __cdecl FUN_00938d80(const char* className, int value);
 void __cdecl FUN_0093ba60(const QHkVariant& a, const QHkVariant& b);
-int __cdecl FUN_009232c0(const char* a, const char* b);
+int __cdecl hkString_strCmp(const char* a, const char* b);
 
 void __cdecl FUN_0093bbc0(QHkVariant& oldObj, QHkVariant& newObj)
 {
@@ -13213,9 +13232,9 @@ void __cdecl FUN_0093bbc0(QHkVariant& oldObj, QHkVariant& newObj)
     }
     }
 
-    if (FUN_009232c0("hkBoxMotion", oldClass->FUN_009b0490())
-        && FUN_009232c0("hkStabilizedBoxMotion", oldClass->FUN_009b0490())
-        && FUN_009232c0("hkThinBoxMotion", oldClass->FUN_009b0490())) {
+    if (hkString_strCmp("hkBoxMotion", oldClass->FUN_009b0490())
+        && hkString_strCmp("hkStabilizedBoxMotion", oldClass->FUN_009b0490())
+        && hkString_strCmp("hkThinBoxMotion", oldClass->FUN_009b0490())) {
         QHkVector4 v;
         {
             FUN_0093d600 a(oldMotion, "particleMinInertiaDiagInv");
@@ -13359,7 +13378,7 @@ struct Constraint {
     }
 };
 struct Island {
-    void FUN_0098b150(Constraint* c) throw();
+    void hkpSimulationIsland_addAction(Constraint* c) throw();
 };
 struct Entity {
     char p00[8];
@@ -13376,7 +13395,8 @@ struct Context {
 void __cdecl FUN_00928630(void* owner, Entity* a, Entity* b) throw();
 __forceinline void AddPair(Entity* a, Entity* b) { if (a->motionType != 7 && b->motionType != 7 && a->island != b->island) FUN_00928630(a->unk08, a, b); }
 }
-void __cdecl FUN_00928690(f3m_00928690::Context* ctx, f3m_00928690::Entity* self,
+// pdb: hkpWorldOperationUtil::addActionsToEntitysIsland | hkpWorldOperationUtil.obj | fnv360_0721_beta, caller_sim + bridge(call_gap|call_gap_sim) + skyrim(call_gap), high
+void __cdecl hkpWorldOperationUtil_addActionsToEntitysIsland(f3m_00928690::Context* ctx, f3m_00928690::Entity* self,
                           f3m_00928690::Array<f3m_00928690::Constraint*>* list)
 {
     using namespace f3m_00928690;
@@ -13386,7 +13406,7 @@ void __cdecl FUN_00928690(f3m_00928690::Context* ctx, f3m_00928690::Entity* self
         Constraint* c = list->data[i];
         Island* fixed = ctx->fixedIsland;
         if (island != fixed) {
-            island->FUN_0098b150(c);
+            island->hkpSimulationIsland_addAction(c);
             c->RemoveReference();
             entities.size = 0;
             c->GetEntities(entities);
@@ -13395,7 +13415,7 @@ void __cdecl FUN_00928690(f3m_00928690::Context* ctx, f3m_00928690::Entity* self
                     AddPair(entities[j], self);
             }
         } else {
-            fixed->FUN_0098b150(c);
+            fixed->hkpSimulationIsland_addAction(c);
             c->RemoveReference();
         }
     }
@@ -13916,7 +13936,7 @@ public:
     void fireContactAdded(const f3m_920d10::hkpRootCdPoint& point) const throw();
     int findSurface(const f3m_920d10::hkpRootCdPoint& info) const throw();
 
-    void FUN_00920d10(const f3m_920d10::hkpAllCdPointCollector& startPointCollector,
+    void hkpCharacterProxy_updateManifold(const f3m_920d10::hkpAllCdPointCollector& startPointCollector,
                       const f3m_920d10::hkpAllCdPointCollector& castCollector);
 
     f3m_920d10::hkVector4 m_velocity;
@@ -13941,7 +13961,8 @@ public:
 };
 
 
-void hkpCharacterProxy::FUN_00920d10(const f3m_920d10::hkpAllCdPointCollector& startPointCollector,
+// pdb: hkpCharacterProxy::updateManifold | hkpCharacterProxy.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void hkpCharacterProxy::hkpCharacterProxy_updateManifold(const f3m_920d10::hkpAllCdPointCollector& startPointCollector,
                                      const f3m_920d10::hkpAllCdPointCollector& castCollector)
 {
     // Remove listeners from all bodies and phantoms

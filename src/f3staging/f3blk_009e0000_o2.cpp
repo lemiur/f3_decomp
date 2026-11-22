@@ -1008,9 +1008,10 @@ struct Vec4 { float x, y, z, w; };
 struct Obj9e5ac0 {
     char pad[0x30];
     float x, y, z, w;
-    void FUN_009e5ac0(n9e5ac0::Vec4* out) const;
+    void hkpCylinderShape_getFirstVertex(n9e5ac0::Vec4* out) const;
 };
-void Obj9e5ac0::FUN_009e5ac0(n9e5ac0::Vec4* out) const
+// pdb: hkpCylinderShape::getFirstVertex | hkpCylinderShape.obj | fnv360_0822_retail, objrun + skyrim(objrun), high
+void Obj9e5ac0::hkpCylinderShape_getFirstVertex(n9e5ac0::Vec4* out) const
 {
     out->x = x;
     out->y = y;
@@ -1274,7 +1275,7 @@ struct World {
  int unkdc;
  int unke0;
  void** items; int count;
- void FUN_00903b20(void*);
+ void hkpWorld_addPhantomListener(void*);
  void FUN_00903be0(void*);
 };
 struct Listener {virtual void v0(); virtual void callback(void*);};
@@ -1295,7 +1296,7 @@ struct Viewer {
 };
 void Viewer::FUN_009f3150(World* world) {
  void* p1=this ? &listener:0;
- world->FUN_00903b20(p1);
+ world->hkpWorld_addPhantomListener(p1);
  void* p2=this ? &secondary:0;
  world->FUN_00903be0(p2);
  int i=0;
@@ -1705,9 +1706,10 @@ struct C9e4c20 {
     n9e4c20::Elem* data;
     int count;
     void FUN_009e4640();
-    n9e4c20::Elem* FUN_009e4c20();
+    n9e4c20::Elem* hkpExtendedMeshShape_expandOneShapesSubparts();
 };
-n9e4c20::Elem* C9e4c20::FUN_009e4c20()
+// pdb: hkpExtendedMeshShape::expandOneShapesSubparts | hkpExtendedMeshShape.obj | fnv360_0822_retail, call_gap + bridge(call_gap|call_seq) + skyrim(call_gap), high
+n9e4c20::Elem* C9e4c20::hkpExtendedMeshShape_expandOneShapesSubparts()
 {
     using namespace n9e4c20;
     int n = count + 1;
@@ -1824,9 +1826,10 @@ struct C9e5a70 {
     char pad[0x20];
     n9e5a70::Vec4 a;
     n9e5a70::Vec4 b;
-    void FUN_009e5a70(n9e5a70::Vec4* out);
+    void hkpCylinderShape_getCentreImpl(n9e5a70::Vec4* out);
 };
-void C9e5a70::FUN_009e5a70(n9e5a70::Vec4* out)
+// pdb: hkpCylinderShape::getCentreImpl | hkpCylinderShape.obj | fnv360_0822_retail, objrun + skyrim(objrun), high
+void C9e5a70::hkpCylinderShape_getCentreImpl(n9e5a70::Vec4* out)
 {
     out->setAdd(a, b);
     out->x *= 0.5;
@@ -3565,9 +3568,9 @@ namespace f3m_009e1680 {
 namespace task1713 {
 struct Finish {int flag;};
 struct Base {virtual void v0();unsigned short size,refs;unsigned int userData;Base(Finish):refs(1){}};
-struct Handle {unsigned int a,b;void* value;void FUN_009a1a00(void*);Handle(Finish){FUN_009a1a00(value);}};
+struct Handle {unsigned int a,b;void* value;void hkpBridgeConstraintAtom_init(void*);Handle(Finish){hkpBridgeConstraintAtom_init(value);}};
 struct FUN_009e1680:Base {Handle handle;FUN_009e1680(Finish);};
-FUN_009e1680::FUN_009e1680(Finish flag):Base(flag),handle(flag){handle.FUN_009a1a00(this);}
+FUN_009e1680::FUN_009e1680(Finish flag):Base(flag),handle(flag){handle.hkpBridgeConstraintAtom_init(this);}
 }
 }   // namespace f3m_009e1680
 
@@ -3635,7 +3638,7 @@ namespace f3m_009f2720 {
 struct Item494 {virtual void slot00();virtual void* Description();};
 struct List494 {Item494** data;int count; __forceinline Item494*& operator[](int i) {return data[i];} };
 struct Array494 {unsigned int data,count,capacity;void FUN_00922cb0(); void Init(){data=0;count=0;capacity=0x80000000u;}};
-int __cdecl FUN_009232c0(const char*,void*);
+int __cdecl hkString_strCmp(const char*,void*);
 struct Owner494 {
     void* table00;unsigned int unk04;void* table08;unsigned int unk0c,unk10,unk14,unk18,unk1c;
     void* table20;unsigned int unk24;void* table28;void* table2c;
@@ -3657,7 +3660,7 @@ Owner494* Owner494::FUN_009f2720(List494* list) {
     int count=list->count;
     int i;
     for(i=0;i<count;++i) {
-        if(FUN_009232c0(DAT_00e80cc4,list->data[i]->Description())==0) goto found;
+        if(hkString_strCmp(DAT_00e80cc4,list->data[i]->Description())==0) goto found;
     }
     return this;
 found:
@@ -3995,10 +3998,11 @@ public:
     int unk3C;
     int unk40;
     Arr_9edf50 arr;
-    void FUN_009edf50(Item_9edf50** items, int n);
+    void hkpConvexListShape_setShapesAndRadius(Item_9edf50** items, int n);
 };
 
-void Owner9edf50::FUN_009edf50(Item_9edf50** items, int n)
+// pdb: hkpConvexListShape::setShapesAndRadius | hkpConvexListShape.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc + skyrim(objrun_prop), high
+void Owner9edf50::hkpConvexListShape_setShapesAndRadius(Item_9edf50** items, int n)
 {
     Arr_9edf50* a = &arr;
     int cap = a->cap & 0x3fffffff;
@@ -4034,9 +4038,10 @@ extern void __cdecl FUN_00901f10(Array*, int);
 struct Owner {
     unsigned unk00,unk04,unk08,unk0c,unk10,unk14;
     Array pairs;
-    Pair* FUN_009e15b0(const Vector*, const Vector*);
+    Pair* hkpBallSocketChainData_addConstraintInfoInBodySpace(const Vector*, const Vector*);
 };
-Pair* Owner::FUN_009e15b0(const Vector* first, const Vector* second)
+// pdb: hkpBallSocketChainData::addConstraintInfoInBodySpace | hkpBallSocketChainData.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_seq), high
+Pair* Owner::hkpBallSocketChainData_addConstraintInfoInBodySpace(const Vector* first, const Vector* second)
 {
     Array* a=&pairs;
     int capacity=a->capacity&0x3fffffff;
@@ -4543,7 +4548,7 @@ struct FNV_ALIGN(16) SimdRotation
     SimdVec4 m_col1;
     SimdVec4 m_col2;
 
-    void FUN_00924b40(const SimdQuat& q);
+    void hkRotation_set(const SimdQuat& q);
 };
 
 struct SimdTransform
@@ -4554,7 +4559,7 @@ struct SimdTransform
     __forceinline SimdTransform(const SimdQuat& q, const SimdVec4& t)
         : m_translation(t)
     {
-        m_rotation.FUN_00924b40(q);
+        m_rotation.hkRotation_set(q);
     }
 };
 
@@ -4656,9 +4661,10 @@ struct Owner
     const Planar* blocks;
     int unused[2];
     int count;
-    Vector* FUN_009e7960(Vector*);
+    Vector* hkpConvexVerticesShape_getCollisionSpheresImpl(Vector*);
 };
-Vector* Owner::FUN_009e7960(Vector* output)
+// pdb: hkpConvexVerticesShape::getCollisionSpheresImpl | hkpConvexVerticesShape.obj | fnv360_0822_retail, objrun + skyrim(objrun), high
+Vector* Owner::hkpConvexVerticesShape_getCollisionSpheresImpl(Vector* output)
 {
     __declspec(align(16)) volatile Vector temp;
     const Planar* block = blocks;
@@ -5533,10 +5539,10 @@ struct __declspec(align(16)) Vec4 {
     void Add(float value){x+=value;y+=value;z+=value;w+=value;}
     void Min(const Vec4& o){if(!(x<o.x))x=o.x;if(!(y<o.y))y=o.y;if(!(z<o.z))z=o.z;if(!(w<o.w))w=o.w;}
     void Max(const Vec4& o){if(!(x>o.x))x=o.x;if(!(y>o.y))y=o.y;if(!(z>o.z))z=o.z;if(!(w>o.w))w=o.w;}
-    void FUN_008d28e0(const Transform* transform,const Vec4* vector);
+    void hkVector4_setTransformedPos(const Transform* transform,const Vec4* vector);
 };
 struct Aabb { Vec4 minimum,maximum; void Reset(){minimum.SetAll(DAT_00de6e60);maximum.SetAll(DAT_00de731c);} void Merge(const Aabb& o){minimum.Min(o.minimum);maximum.Max(o.maximum);} };
-struct Transform { Vec4 rotation[3],position; void FUN_00924b40(const Vec4* quaternion); };
+struct Transform { Vec4 rotation[3],position; void hkRotation_set(const Vec4* quaternion); };
 extern const Transform DAT_010f3370;
 struct Shape {
     virtual void v00();virtual void v04();virtual void v08();virtual void v0C();virtual void v10();virtual void v14();virtual void v18();
@@ -5564,7 +5570,7 @@ struct CompoundPart {
 static __declspec(noinline) void FUN_009e3220(Aabb* output,const float* vertex,const Vec4* scale,const Transform* transform) {
     Vec4 scaled(vertex[0]*scale->x,vertex[1]*scale->y,vertex[2]*scale->z,0.0f);
     Vec4 point;
-    point.FUN_008d28e0(transform,&scaled);
+    point.hkVector4_setTransformedPos(transform,&scaled);
     output->minimum.Min(point);
     output->maximum.Max(point);
 }
@@ -5587,7 +5593,7 @@ static __declspec(noinline) void FUN_009e3630(Aabb* output,const CompoundPart* p
     output->Reset();
     Transform transform;
     transform.position=part->translation;
-    transform.FUN_00924b40(&part->rotation);
+    transform.hkRotation_set(&part->rotation);
     for(int i=0;i<part->count;++i){
         Aabb bounds;
         part->shapes[i]->GetAabb(&transform,0.0f,&bounds);
@@ -7794,8 +7800,8 @@ void S009f7bd0_caller()
 // @f3 0x009ee3d0 (community match, verified in this file)
 namespace Init9ee3d0 {
 extern char DAT_00e35eec,DAT_00e8088c,DAT_00e80864;
-struct Object {void* volatile vtable;volatile unsigned short unk04,refs;volatile int zero,type;volatile float scalar;void* volatile table;volatile float factor;int unk1c,unk20,unk24,unk28,unk2c,unk30,unk34,unk38,unk3c,unk40;volatile int data,count;volatile unsigned capacity;void FUN_009edf50(void*,void*);void FUN_009edc20(int);Object* FUN_009ee3d0(void*,void*);};
-Object* Object::FUN_009ee3d0(void* a,void* b){scalar=0;zero=0;refs=1;type=0x15;table=&DAT_00e35eec;vtable=&DAT_00e8088c;table=&DAT_00e80864;data=0;count=0;capacity=0x80000000u;factor=1;FUN_009edf50(a,b);FUN_009edc20(1);return this;}
+struct Object {void* volatile vtable;volatile unsigned short unk04,refs;volatile int zero,type;volatile float scalar;void* volatile table;volatile float factor;int unk1c,unk20,unk24,unk28,unk2c,unk30,unk34,unk38,unk3c,unk40;volatile int data,count;volatile unsigned capacity;void hkpConvexListShape_setShapesAndRadius(void*,void*);void hkpConvexListShape_setUseCachedAabb(int);Object* FUN_009ee3d0(void*,void*);};
+Object* Object::FUN_009ee3d0(void* a,void* b){scalar=0;zero=0;refs=1;type=0x15;table=&DAT_00e35eec;vtable=&DAT_00e8088c;table=&DAT_00e80864;data=0;count=0;capacity=0x80000000u;factor=1;hkpConvexListShape_setShapesAndRadius(a,b);hkpConvexListShape_setUseCachedAabb(1);return this;}
 }
 
 // @f3 0x009f2f50 (community match, verified in this file)
@@ -8622,7 +8628,7 @@ struct S009f0d00_Vector4 {
 struct S009f0d00_Rotation {
     S009f0d00_Vector4 c0, c1, c2;
     __forceinline float operator()(int r, int c) const { return (&(&c0)[c].x)[r]; }
-    void FUN_00924b40(const S009f0d00_Vector4* q);
+    void hkRotation_set(const S009f0d00_Vector4* q);
 };
 
 __forceinline void S009f0d00_Vector4::setRotatedDir(const S009f0d00_Rotation& a, const S009f0d00_Vector4& b)
@@ -8652,7 +8658,7 @@ struct S009f0d00_SweptTransform {
 __forceinline void S009f0d00_calcTransAtT0(const S009f0d00_SweptTransform& sweptTrans, S009f0d00_Transform& transformOut)
 {
     const S009f0d00_Vector4& q0 = sweptTrans.m_rotation0;
-    transformOut.rot.FUN_00924b40(&q0);
+    transformOut.rot.hkRotation_set(&q0);
     S009f0d00_Vector4 centerShift;
     centerShift.setRotatedDir(transformOut.rot, sweptTrans.m_centerOfMassLocal);
     transformOut.trans.setSub4(sweptTrans.m_centerOfMass0, centerShift);
@@ -8661,7 +8667,7 @@ __forceinline void S009f0d00_calcTransAtT0(const S009f0d00_SweptTransform& swept
 __forceinline void S009f0d00_calcTransAtT1(const S009f0d00_SweptTransform& sweptTrans, S009f0d00_Transform& transformOut)
 {
     const S009f0d00_Vector4& q1 = sweptTrans.m_rotation1;
-    transformOut.rot.FUN_00924b40(&q1);
+    transformOut.rot.hkRotation_set(&q1);
     S009f0d00_Vector4 centerShift;
     centerShift.setRotatedDir(transformOut.rot, sweptTrans.m_centerOfMassLocal);
     transformOut.trans.setSub4(sweptTrans.m_centerOfMass1, centerShift);
@@ -9168,7 +9174,7 @@ struct __declspec(align(16)) Vec4 {
 
 struct Transform {
     Vec4 c0, c1, c2, t;
-    void FUN_009251b0(const Transform* a, const Transform* b);
+    void hkTransform_setMul(const Transform* a, const Transform* b);
 };
 
 struct RayInput {
@@ -9199,7 +9205,7 @@ struct TransformShape {
     Shape* child;
     unsigned int unk1c;
     Transform xf;
-    void FUN_009ed320(const RayInput& input, const CdBody& parent, void* collector);
+    void hkpConvexTransformShape_castRayWithCollectorImpl(const RayInput& input, const CdBody& parent, void* collector);
 };
 
 __forceinline void InvPos(Vec4& out, const Transform& a, const Vec4& b)
@@ -9225,7 +9231,8 @@ __forceinline void InvPos2(Vec4& out, const Transform& a, const Vec4& b)
     out.w = 0.0f;
 }
 
-void TransformShape::FUN_009ed320(const RayInput& input, const CdBody& parent, void* collector)
+// pdb: hkpConvexTransformShape::castRayWithCollectorImpl | hkpConvexTransformShape.obj | fnv360_0822_retail, ustr + bridge(ustr|vtable) + skyrim(ustr), high
+void TransformShape::hkpConvexTransformShape_castRayWithCollectorImpl(const RayInput& input, const CdBody& parent, void* collector)
 {
     Stream* s = (Stream*)TlsGetValue(DAT_0116913c);
     Command* c = s->cursor;
@@ -9243,7 +9250,7 @@ void TransformShape::FUN_009ed320(const RayInput& input, const CdBody& parent, v
     InvPos(sub.from, xf, input.from);
     InvPos2(sub.to, xf, input.to);
     Transform world;
-    world.FUN_009251b0(parent.motion, &xf);
+    world.hkTransform_setMul(parent.motion, &xf);
     CdBody body(&parent, &world);
     body.shape = child;
     body.key = 0;
@@ -9306,10 +9313,11 @@ public:
     bool flag40;
     FUN_009edc20_Child** children44;
     int count48;
-    void FUN_009edc20(bool flag);
+    void hkpConvexListShape_setUseCachedAabb(bool flag);
 };
 
-void FUN_009edc20_Owner::FUN_009edc20(bool flag) {
+// pdb: hkpConvexListShape::setUseCachedAabb | hkpConvexListShape.obj | fnv360_0822_retail, objrun + bridge(call_seq|objrun) + skyrim(objrun_prop), high
+void FUN_009edc20_Owner::hkpConvexListShape_setUseCachedAabb(bool flag) {
     flag40 = flag;
     if (!flag) {
         return;
@@ -9351,8 +9359,9 @@ struct __declspec(align(16)) hkVector4 {float x,y,z;union {float w;unsigned id;}
 typedef hkVector4 CylinderSupportStore;
 struct hkpCylinderShape {int unk00,unk04,unk08,unk0c;float unk10,m_fCylinderRadius;int unk18,unk1c;hkVector4 m_kVertices[2],m_kPerpendicular1,m_kPerpendicular2;
  enum {VERTEX_ID_ENCODING_VALUE_MASK=15,VERTEX_ID_ENCODING_IS_BASE_A_SHIFT=7,VERTEX_ID_ENCODING_SIN_SIGN_SHIFT=6,VERTEX_ID_ENCODING_COS_SIGN_SHIFT=5,VERTEX_ID_ENCODING_IS_SIN_LESSER_SHIFT=4};};
-struct CylinderSupportShape:hkpCylinderShape {void FUN_009e5520(const hkVector4&,CylinderSupportStore&)const;};
-void CylinderSupportShape::FUN_009e5520(const hkVector4& direction, CylinderSupportStore& output) const
+struct CylinderSupportShape:hkpCylinderShape {void hkpCylinderShape_getSupportingVertexImpl(const hkVector4&,CylinderSupportStore&)const;};
+// pdb: hkpCylinderShape::getSupportingVertexImpl | hkpCylinderShape.obj | fnv360_0822_retail, objrun + bridge(udata|vtable) + skyrim(udata), high
+void CylinderSupportShape::hkpCylinderShape_getSupportingVertexImpl(const hkVector4& direction, CylinderSupportStore& output) const
 {
     int vertexId;
     {
@@ -9524,10 +9533,11 @@ static __declspec(noinline) void fnv_callee_9f5050(int a, Vec_9f5050* v, Sub_9f5
 }
 
 struct C_9f5050 {
-    void FUN_009f5050(Obj_9f5050* a);
+    void hkpToiContactPointViewer_contactPointCallback(Obj_9f5050* a);
 };
 
-void C_9f5050::FUN_009f5050(Obj_9f5050* a)
+// pdb: hkpToiContactPointViewer::contactPointCallback | hkpToiContactPointViewer.obj | fnv360_0822_retail, udata + bridge(udata|vtable), high
+void C_9f5050::hkpToiContactPointViewer_contactPointCallback(Obj_9f5050* a)
 {
     char* m = (char*)a->unk0c;
     if (*(float*)(m + 0x3030) != fnv_limit_9f5050) {
@@ -9562,7 +9572,7 @@ struct __declspec(align(16)) S9e4ef0_Transform
     S9e4ef0_Vec4 col1;
     S9e4ef0_Vec4 col2;
     S9e4ef0_Vec4 translation;
-    void FUN_00924b40(const S9e4ef0_Vec4* rotation);
+    void hkRotation_set(const S9e4ef0_Vec4* rotation);
 };
 
 struct __declspec(align(16)) S9e4ef0_Aabb
@@ -9616,7 +9626,7 @@ static __declspec(noinline) void FUN_009e3630(S9e4ef0_Aabb* out, S9e4ef0_List* l
     out->max[3] = -out->min[3];
     S9e4ef0_Transform xf;
     xf.translation = list->m_translation;
-    xf.FUN_00924b40(&list->m_rotation);
+    xf.hkRotation_set(&list->m_rotation);
     for (int i = 0; i < list->m_size; i++)
     {
         S9e4ef0_Aabb box;
@@ -9645,7 +9655,7 @@ struct S9e4ef0_Owner
     int unk2c;
     float m_halfExtent[4];
     float m_center[4];
-    S9e4ef0_List* FUN_009e4c20();
+    S9e4ef0_List* hkpExtendedMeshShape_expandOneShapesSubparts();
     void FUN_009e4ef0(S9e4ef0_List* src);
 };
 
@@ -9653,7 +9663,7 @@ void S9e4ef0_Owner::FUN_009e4ef0(S9e4ef0_List* src)
 {
     S9e4ef0_Aabb box;
     S9e4ef0_Aabb bound;
-    S9e4ef0_List* t = FUN_009e4c20();
+    S9e4ef0_List* t = hkpExtendedMeshShape_expandOneShapesSubparts();
     t->FUN_009d5e80(src);
     int count = t->m_size;
     S9e4ef0_Heap* heap = DAT_00d9b080(DAT_010f3170);
@@ -9792,10 +9802,11 @@ public:
     hkArray<hkFourTransposedPoints> m_rotatedVertices;
     int m_numVertices;
 
-    void FUN_009e7b60(const hkVector4& direction, hkVector4& supportingVertexOut) const;
+    void hkpConvexVerticesShape_getSupportingVertexImpl(const hkVector4& direction, hkVector4& supportingVertexOut) const;
 };
 
-void hkpConvexVerticesShape::FUN_009e7b60(const hkVector4& direction, hkVector4& supportingVertexOut) const
+// pdb: hkpConvexVerticesShape::getSupportingVertexImpl | hkpConvexVerticesShape.obj | fnv360_0822_retail, objrun + skyrim(objrun), high
+void hkpConvexVerticesShape::hkpConvexVerticesShape_getSupportingVertexImpl(const hkVector4& direction, hkVector4& supportingVertexOut) const
 {
     const hkReal minReal = -3.40282e38f;
     hkVector4 bestDot;
@@ -10301,7 +10312,8 @@ struct InfoF{
 };
 struct RowF{VecF linear,angularA,angularB;};
 extern VecF DAT_010f3370[3];
-void __cdecl FUN_009f8810(const VecF& pointA,const VecF& pointB,const InfoF& info,RowF*& output){
+// pdb: _hkBallSocketConstraintBuildJacobian | hkpBuildJacobianFromAtoms.obj | fnv360_0721_beta, objrun + skyrim(objrun), high
+void __cdecl _hkBallSocketConstraintBuildJacobian(const VecF& pointA,const VecF& pointB,const InfoF& info,RowF*& output){
  float inv=1.0f/info.timestep;
  BodyF* a=info.first;BodyF* b=info.second;
  VecF correction;correction.sub4(pointB,pointA);
@@ -12925,7 +12937,7 @@ public:
 class hkpCylinderShape
 {
 public:
-    const hkSphere* FUN_009e5ae0(hkSphere* sphereBuffer) const;
+    const hkSphere* hkpCylinderShape_getCollisionSpheresImpl(hkSphere* sphereBuffer) const;
 
     __forceinline hkReal getRadius() const { return m_radius; }
     __forceinline hkReal getCylinderRadius() const { return m_cylRadius; }
@@ -12945,7 +12957,8 @@ public:
     hkVector4 m_perpendicular2;
 };
 
-const hkSphere* hkpCylinderShape::FUN_009e5ae0(hkSphere* sphereBuffer) const
+// pdb: hkpCylinderShape::getCollisionSpheresImpl | hkpCylinderShape.obj | fnv360_0822_retail, objrun + bridge(uconst|vtable) + skyrim(objrun), high
+const hkSphere* hkpCylinderShape::hkpCylinderShape_getCollisionSpheresImpl(hkSphere* sphereBuffer) const
 {
     hkReal radius = getCylinderRadius();
     hkReal cylRadius = radius;
@@ -15148,7 +15161,7 @@ struct hkMatrix3 {
     hkReal& operator()(int r, int c) { return getColumn(c)(r); }
     const hkReal& operator()(int r, int c) const { return getColumn(c)(r); }
 
-    void FUN_00924b40(const hkQuaternion& q);
+    void hkRotation_set(const hkQuaternion& q);
 };
 
 __forceinline void hkVector4::_setMul3(const hkMatrix3& r, const hkVector4& v)
@@ -15167,7 +15180,7 @@ struct hkTransform {
 
     hkMatrix3& getRotation() { return m_rotation; }
     hkVector4& getTranslation() { return m_translation; }
-    void setRotation(const hkQuaternion& q) { m_rotation.FUN_00924b40(q); }
+    void setRotation(const hkQuaternion& q) { m_rotation.hkRotation_set(q); }
 };
 
 struct hkSweptTransform {
@@ -15458,10 +15471,11 @@ struct F3This {
     Vec4 n;                 // 0x10
     Vec4 c;                 // 0x20
     Vec4 e;                 // 0x30
-    void FUN_009e2a20(F3Arg* p, void* a1, F3Vt* a2);
+    void hkpPlaneShape_castSphere(F3Arg* p, void* a1, F3Vt* a2);
 };
 
-void F3This::FUN_009e2a20(F3Arg* arg, void* a1, F3Vt* a2)
+// pdb: hkpPlaneShape::castSphere | hkpPlaneShape.obj | fnv360_0822_retail, objrun + skyrim(objrun), high
+void F3This::hkpPlaneShape_castSphere(F3Arg* arg, void* a1, F3Vt* a2)
 {
     const F3Arg& p = *arg;
     float r = p.r;
@@ -15600,7 +15614,7 @@ void EndpointBasis::FUN_009e52e0()
 }   // namespace f3m_009e52e0
 
 // @f3 0x009e6380 (community match, verified in this file)
-// FUN_009e6380 = Havok 5.5.0 hkpCylinderShape::castRayImpl (hkpCollide.lib, hkpCylinderShape.obj; the stock release
+// hkpCylinderShape_castRayImpl = Havok 5.5.0 hkpCylinderShape::castRayImpl (hkpCollide.lib, hkpCylinderShape.obj; the stock release
 // object is byte-exact against the game). Ray against a cylinder with convex padding: side hit through the infinite
 // line distance, else a hit on the end cap the ray starts beyond.
 // Written from the Havok 5.5.0 SDK headers and inline bodies and the hybrid library object's debug records
@@ -16114,7 +16128,7 @@ class hkpCylinderShape : public hkpConvexShape
 		virtual int getNumCollisionSpheresImpl(  ) const;
 		virtual const hkSphere* getCollisionSpheresImpl(  hkSphere* sphereBuffer ) const;
 		virtual void getAabbImpl(  const hkTransform& localToWorld, hkReal tolerance, hkAabb& out ) const;
-		virtual hkBool FUN_009e6380(  const hkpShapeRayCastInput& input, hkpShapeRayCastOutput& results) const;
+		virtual hkBool hkpCylinderShape_castRayImpl(  const hkpShapeRayCastInput& input, hkpShapeRayCastOutput& results) const;
 		virtual void getFirstVertex(hkVector4& v) const;
 		virtual void calcStatistics( hkStatisticsCollector* collector) const;
 	protected:
@@ -16188,7 +16202,8 @@ struct hkpShapeRayCastInput
 	const hkpRayShapeCollectionFilter*	m_rayShapeCollectionFilter;
 };
 
-hkBool hkpCylinderShape::FUN_009e6380( const hkpShapeRayCastInput& input, hkpShapeRayCastOutput& results ) const
+// pdb: hkpCylinderShape::castRayImpl | hkpCylinderShape.obj | fnv360_0822_retail, ustr + bridge(ustr|vtable) + skyrim(ustr), high
+hkBool hkpCylinderShape::hkpCylinderShape_castRayImpl( const hkpShapeRayCastInput& input, hkpShapeRayCastOutput& results ) const
 {
 	const hkpCylinderShape* thisObj = this;
 	{ hkMonitorStream& mStream = hkMonitorStream::getInstance(); if ( mStream.memoryAvailable() ) { hkMonitorStream::TimerCommand* h = reinterpret_cast<hkMonitorStream::TimerCommand*>(mStream.getEnd()); h->m_commandAndMonitor = "T" "t" "rcCylinder"; h->setTime(); mStream.setEnd( (char*)(h+1) ); } };

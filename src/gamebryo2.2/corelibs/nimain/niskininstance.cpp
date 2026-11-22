@@ -35,11 +35,12 @@ struct FUN_00a864d0_Class
     char pad[8];
     void* m_pSkinData;            // +0x08
     void* m_pkSkinMeshPartition;  // +0x0c
-    bool FUN_00a864d0(A46BB0Object* pkObject);
+    bool NiSkinInstance_IsEqual(A46BB0Object* pkObject);
 };
 
 // @fnv 0x00a864d0
-bool FUN_00a864d0_Class::FUN_00a864d0(A46BB0Object* pkObject)
+// pdb: NiSkinInstance::IsEqual | NiSkinInstance.obj | fnv360_0822_retail, call_seq + bridge(vtable|call_seq) + skyrim(caller_sim), high
+bool FUN_00a864d0_Class::NiSkinInstance_IsEqual(A46BB0Object* pkObject)
 {
     FUN_00a864d0_Class* pkSkinInstance = (FUN_00a864d0_Class*)pkObject;
     if (!((A46BB0Object*)this)->IsEqual(pkObject))
@@ -69,7 +70,7 @@ struct SkinGraph
     NiObject* skinPartition;
     NiObject* rootParent;
     NiObject** bones;
-    bool FUN_00a5d2f0(NiStream&);
+    bool NiObject_RegisterStreamables(NiStream&);
     bool VisitSkinGraphLinks(NiStream& stream);
 };
 typedef void(__thiscall* VisitStreamable)(NiObject*, NiStream&);
@@ -81,7 +82,7 @@ __forceinline void VisitLinkedObject(NiObject* object, NiStream& stream)
 // @fnv 0x00a86460
 bool SkinGraph::VisitSkinGraphLinks(NiStream& stream)
 {
-    if (!FUN_00a5d2f0(stream))
+    if (!NiObject_RegisterStreamables(stream))
         return false;
     VisitLinkedObject(skinData, stream);
     if (skinPartition)

@@ -620,7 +620,7 @@ struct OutputWriter
 };
 struct MyStreamWriter : MyStream
 {
-    void FUN_00a645b0();
+    void NiStream_ReadLinkID();
     OutputWriter* Output()
     {
         return *reinterpret_cast<OutputWriter**>(&_004[0x248]);
@@ -637,7 +637,7 @@ void MyUVController::WriteToStream(MyStreamWriter* stream)
 {
     FUN_00a6d5e0(stream);
     stream->Output()->Write(&m_usValue, sizeof(m_usValue));
-    stream->FUN_00a645b0();
+    stream->NiStream_ReadLinkID();
 }
 
 // IsEqual: base comparison, then the type value and the (optional) child object must match.

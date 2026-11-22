@@ -108,7 +108,8 @@ struct GlobalObjectO2_00a7b610
 };
 extern GlobalObjectO2_00a7b610 g_011f407c;
 // @fnv 0x00a56620
-void* __cdecl FUN_00a56620()
+// pdb: BSTempEffectGeometryDecal::GetRTTI | BSTempEffectGeometryDecal.obj | fnv360_1110_retail, udata, high
+void* __cdecl BSTempEffectGeometryDecal_GetRTTI()
 {
     return &g_011f407c;
 }
@@ -139,7 +140,8 @@ struct M76Obj
 };
 // Allocates and initialises an M76Obj, passes it to self's FUN_00a37510 with cloning, copies self's m_bBoolValue into it and returns it.
 // @fnv 0x00a56650
-M76Obj* __fastcall FUN_00a56650(M76Obj* self, int, void* cloning)
+// pdb: NiBlendBoolInterpolator::CreateClone | NiBlendBoolInterpolator.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun) + skyrim(caller_sim), high
+M76Obj* __fastcall NiBlendBoolInterpolator_CreateClone(M76Obj* self, int, void* cloning)
 {
     M76Obj* pkObject = new M76Obj;
     if (pkObject)

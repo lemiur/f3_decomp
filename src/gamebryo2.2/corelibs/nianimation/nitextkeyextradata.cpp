@@ -24,7 +24,8 @@ struct BSFadeNode
 extern void* DAT_0109827c;
 
 // @fnv 0x00a46b70
-void* __cdecl FUN_00a46b70()
+// pdb: NiTextKeyExtraData::CreateObject | NiTextKeyExtraData.obj | fnv360_0822_retail, objrun + bridge(hash|objrun), high
+void* __cdecl NiTextKeyExtraData_CreateObject()
 {
     void* p = BSFadeNode::operator new(0x14);
     if (p)
@@ -325,11 +326,12 @@ class NiPSysOwnerA46
 {
   public:
     void CopyMemberData(NiPSysBaseA46* pkDest, void* pvProcess);
-    NiPSysBaseA46* FUN_00a46da0(void* pvProcess);
+    NiPSysBaseA46* NiTextKeyExtraData_CreateClone(void* pvProcess);
 };
 
 // @fnv 0x00a46da0
-NiPSysBaseA46* NiPSysOwnerA46::FUN_00a46da0(void* pvProcess)
+// pdb: NiTextKeyExtraData::CreateClone | NiTextKeyExtraData.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun) + skyrim(caller_sim), high
+NiPSysBaseA46* NiPSysOwnerA46::NiTextKeyExtraData_CreateClone(void* pvProcess)
 {
     NiPSysDerivedA46* pkClone = new NiPSysDerivedA46;
     CopyMemberData(pkClone, pvProcess);
@@ -528,7 +530,7 @@ class S00a46cf0_Entry
 class S00a46cf0_Base
 {
   public:
-    void LoadBinary(S00a46cf0_Stream& kStream);  // FUN_00a7b2c0
+    void LoadBinary(S00a46cf0_Stream& kStream);  // NiExtraData_SaveBinary
     void* m_ppVirtualMethodTable;
     unsigned int unk04;
     unsigned int unk08;
@@ -537,14 +539,15 @@ class S00a46cf0_Base
 class S00a46cf0_Object : public S00a46cf0_Base
 {
   public:
-    void FUN_00a46cf0(S00a46cf0_Stream& kStream);  // LoadBinary
+    void NiTextKeyExtraData_SaveBinary(S00a46cf0_Stream& kStream);  // LoadBinary
     unsigned int m_uiCount;
     S00a46cf0_Entry* m_pEntries;
 };
 
 // Calls the base LoadBinary, reads m_uiCount from kStream, then loads each of the m_uiCount entries via their LoadBinary method.
 // @fnv 0x00a46cf0
-void S00a46cf0_Object::FUN_00a46cf0(S00a46cf0_Stream& kStream)
+// pdb: NiTextKeyExtraData::SaveBinary | NiTextKeyExtraData.obj | fnv360_0822_retail, caller_sim + bridge(vtable|caller_sim) + skyrim(caller_sim), high
+void S00a46cf0_Object::NiTextKeyExtraData_SaveBinary(S00a46cf0_Stream& kStream)
 {
     S00a46cf0_Base::LoadBinary(kStream);
     ReadBinaryValue(kStream, m_uiCount);

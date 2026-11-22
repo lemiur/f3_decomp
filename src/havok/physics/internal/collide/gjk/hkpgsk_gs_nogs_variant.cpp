@@ -56,7 +56,7 @@ struct Simplex
     Vector verticesB[4];
     Vector supportB[4];
     int FUN_00da8500(const Vector*, const Vector*, int);
-    void FUN_00da98f0();
+    void hkpGsk_reduceDimensionExtended();
 };
 // @f3 0x00a30ca0 (community match, verified in this file)
 extern const signed char DAT_00e7c778[];
@@ -74,7 +74,7 @@ struct SimplexView_a30ca0
     Vector verticesB[4];
     Vector supportB[4];
     int FUN_00a2ee70(const Vector*, const Vector*, int);
-    __forceinline void FUN_00da98f0()
+    __forceinline void hkpGsk_reduceDimensionExtended()
     {
     if (countB == 3)
     {
@@ -136,9 +136,10 @@ struct SimplexView_a30ca0
 };
 }
 
-void Simplex::FUN_00da98f0()
+// pdb: hkpGsk::reduceDimensionExtended | hkpGsk.obj | fnv360_0822_retail, objrun + bridge(udata|objrun) + skyrim(udata), high
+void Simplex::hkpGsk_reduceDimensionExtended()
 {
-    reinterpret_cast<f3m_00a30ca0::SimplexView_a30ca0*>(this)->FUN_00da98f0();
+    reinterpret_cast<f3m_00a30ca0::SimplexView_a30ca0*>(this)->hkpGsk_reduceDimensionExtended();
 }
 
 
@@ -237,7 +238,8 @@ struct Collision_workspace
 };
 
 // @f3 0x00a345e0 (community match, verified in this file)
-int FUN_00dabca0(Collision_ctx* self, Collision_in* in, Collision_vector* out, Collision_vector* out2)
+// pdb: hkpGsk::getClosestPoint | hkpGsk.obj | fnv360_0822_retail, caller + bridge(call_seq|call_gap) + skyrim(call_seq), high
+int hkpGsk_getClosestPoint(Collision_ctx* self, Collision_in* in, Collision_vector* out, Collision_vector* out2)
 {
     struct Collision_shape_view
     {

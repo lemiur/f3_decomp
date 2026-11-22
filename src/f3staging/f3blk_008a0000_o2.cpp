@@ -137,13 +137,15 @@ O8ab1a0* O8ab1a0::FUN_008ab1a0() { a0 = 0; a4 = 0; a8 = 0; c = f3m_008ab1a0::DAT
 // @f3 0x008a0810 (community match, verified in this file)
 namespace f3m_008a0810 {
 namespace f3m_008a0810 { extern unsigned char DAT_01091e99; void __cdecl FUN_0089f7c0(); void __cdecl FUN_0089ec60(); }
-void __cdecl FUN_008a0810() { using namespace f3m_008a0810; if (!DAT_01091e99) { DAT_01091e99 = 1; FUN_0089f7c0(); FUN_0089ec60(); } }
+// pdb: NiSystemSDM::Init | NiSystemSDM.obj | fnv360_0822_debug, udata + bridge(call_seq|call_seq) + skyrim(hash), high
+void __cdecl NiSystemSDM_Init() { using namespace f3m_008a0810; if (!DAT_01091e99) { DAT_01091e99 = 1; FUN_0089f7c0(); FUN_0089ec60(); } }
 }   // namespace f3m_008a0810
 
 // @f3 0x008a0830 (community match, verified in this file)
 namespace f3m_008a0830 {
 namespace f3m_008a0830 { extern unsigned char DAT_01091e99; void __cdecl FUN_0089ecc0(); void __cdecl FUN_00c24b70(); }
-void __cdecl FUN_008a0830() { using namespace f3m_008a0830; if (DAT_01091e99) { DAT_01091e99 = 0; FUN_0089ecc0(); FUN_00c24b70(); } }
+// pdb: NiSystemSDM::Shutdown | NiSystemSDM.obj | fnv360_0822_retail, udata + bridge(call_seq|call_seq) + skyrim(udata), high
+void __cdecl NiSystemSDM_Shutdown() { using namespace f3m_008a0830; if (DAT_01091e99) { DAT_01091e99 = 0; FUN_0089ecc0(); FUN_00c24b70(); } }
 }   // namespace f3m_008a0830
 
 // @f3 0x008a86b0 (community match, verified in this file)
@@ -590,12 +592,13 @@ struct TreadInterpolator : FUN_008a8490
 
 struct TreadController
 {
-    TreadInterpolator* __thiscall FUN_008b4040(unsigned int index);
+    TreadInterpolator* __thiscall BSMultiTargetTreadTransfController_CreateClone(unsigned int index);
     void __thiscall FUN_008a8470(TreadInterpolator* interp, unsigned int index);
 };
 
 // @fnv 0x00a35a10
-TreadInterpolator* TreadController::FUN_008b4040(unsigned int index)
+// pdb: BSMultiTargetTreadTransfController::CreateClone | BSMultiTargetTreadTransfController.obj | fnv360_0822_retail, caller_sim + bridge(vtable|caller_sim) + skyrim(caller_sim), high
+TreadInterpolator* TreadController::BSMultiTargetTreadTransfController_CreateClone(unsigned int index)
 {
     TreadInterpolator* interp = new TreadInterpolator;
     FUN_008a8470(interp, index);
@@ -919,9 +922,10 @@ struct Owner
     unsigned int unk00, unk04, unk08, unk0c, unk10, unk14, unk18, unk1c;
     unsigned int unk20, unk24, unk28, unk2c, unk30, unk34;
     Inner* inner38;
-    unsigned short FUN_008b4dc0() const;
+    unsigned short NiGeomMorpherController_GetInterpolatorCount() const;
 };
-unsigned short Owner::FUN_008b4dc0() const
+// pdb: NiGeomMorpherController::GetInterpolatorCount | NiGeomMorpherController.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun) + skyrim(objrun_open), high
+unsigned short Owner::NiGeomMorpherController_GetInterpolatorCount() const
 {
     return inner38 ? inner38->value08 : static_cast<unsigned short>(0);
 }

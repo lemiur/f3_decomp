@@ -78,7 +78,7 @@ class hkVisitorDC12
         FUN_00dc1670();
     }
     void FUN_00dc1670() throw();
-    void FUN_00dc1bb0(void* pvObject, hkPointerMapDC12& kDone, int iFlags) throw();
+    void hkStructureLayout_computeMemberOffsetsInplace(void* pvObject, hkPointerMapDC12& kDone, int iFlags) throw();
 };
 // @fnv 0x00dc1230
 class hkBoolDC10
@@ -252,7 +252,7 @@ struct CopyWriter : Object
     int position;
     int options;
     void FUN_00dc1040(CopyOption*, CopyOption*);
-    int FUN_00e04920(void*, int, int, int, Relocations*);
+    int hkObjectCopier_copyObject(void*, int, int, int, Relocations*);
     ~CopyWriter()
     {
         FUN_00e03160();

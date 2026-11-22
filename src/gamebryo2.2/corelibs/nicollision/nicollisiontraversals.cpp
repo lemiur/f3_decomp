@@ -432,7 +432,8 @@ bool __cdecl FUN_00e9c490(S_00e9c490_Pt* pPoint1, S_00e9c490_Pt* pPoint2, S_00e9
 }
 
 // @fnv 0x00e9c7c0
-int FUN_00e9c7c0()
+// pdb: hkStreamReader::tell | hkStreamReader.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+int hkStreamReader_tell()
 {
     return -1;
 }
@@ -642,8 +643,8 @@ struct GeometryData
     NiPoint2* texcoords;
     struct Provider* provider;
     bool FUN_00a67360(bool);
-    void FUN_00a673d0();
-    void FUN_00a67410(Buffer*);
+    void NiGeometryData_UnlockPackedVertexData();
+    void NiGeometryData_GetVerticesIterator(Buffer*);
     void GetBounds(Buffer*);
     void FUN_00a67660(Buffer*);
     void GetKeyAndMode(unsigned, Buffer*);
@@ -1444,11 +1445,11 @@ struct Mesh
 
     bool FUN_00a67360(int);
 
-    void FUN_00a67410(BufferView*);
+    void NiGeometryData_GetVerticesIterator(BufferView*);
 
     unsigned short* FUN_00a75f10();
 
-    void FUN_00a673d0();
+    void NiGeometryData_UnlockPackedVertexData();
 
     void GetKeyAndMode(int, BufferView*);
 
@@ -1719,8 +1720,8 @@ struct Mesh
     int unk34, unk38, unk3C, unk40;
     unsigned short unk44;
     bool FUN_00a67360(int);
-    void FUN_00a67410(BufferView*);
-    void FUN_00a673d0();
+    void NiGeometryData_GetVerticesIterator(BufferView*);
+    void NiGeometryData_UnlockPackedVertexData();
     void GetKeyAndMode(int, BufferView*);
     void GetBounds(BufferView*);
     void FUN_00a67660(BufferView*);
@@ -2105,7 +2106,7 @@ extern ZType DAT_0108f414;
 extern int DAT_0108f440;
 inline bool ZIsKindOfType(const ZType* wanted, Shape* shape) { ZType* t=shape->GetType(); while(t) {if(t==wanted)return true; t=t->parent;}return false; }
 extern bool __cdecl FUN_00424d20(const void*,Shape*);
-extern bool __cdecl FUN_007fbff0(const NiPoint3*,const NiPoint3*,Options*,Shape*);
+extern bool __cdecl NiCollisionTraversals_FindIntersectionsOneStripFastPath(const NiPoint3*,const NiPoint3*,Options*,Shape*);
 extern NiPoint3 __cdecl FUN_00475320(const NiPoint3&,const Matrix*);
 struct Bound { NiPoint3 center; float radius; };
 extern Bound DAT_0108edc8;
@@ -2136,7 +2137,7 @@ bool __cdecl ::fnv_00e9b4f0::RaycastShape(const ::fnv_00e9b4f0::NiPoint3* startA
         if (w324::ZIsKindOfType(&w324::DAT_0108f414, shape))
         {
             if (shape->data->unk44 == 1)
-                return w324::FUN_007fbff0(rayStart, rayDirection, options, shape);
+                return w324::NiCollisionTraversals_FindIntersectionsOneStripFastPath(rayStart, rayDirection, options, shape);
         }
         else if (w324::FUN_00424d20(&w324::DAT_0108f440, shape))
             return w324::RaycastGeometry(rayStart, rayDirection, options, shape);

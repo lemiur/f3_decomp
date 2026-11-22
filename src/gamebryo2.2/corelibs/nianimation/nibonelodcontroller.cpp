@@ -11,7 +11,8 @@ struct GlobalObjectO2_00a7b610
 extern GlobalObjectO2_00a7b610 g_011f405c;
 
 // @fnv 0x00a55120
-GlobalObjectO2_00a7b610* __cdecl FUN_00a55120()
+// pdb: BSTempEffect::GetRTTI | BSTempEffect.obj | fnv360_1110_retail, udata + bridge(vtable_prefix|udata), high
+GlobalObjectO2_00a7b610* __cdecl BSTempEffect_GetRTTI()
 {
     return &g_011f405c;
 }
@@ -123,11 +124,12 @@ struct NiBoneLODController : NiObject
     unsigned char _pad[0x30];
     int m_iLOD;
     void FUN_00a541f0(int);
-    void FUN_00a54340(NiStream&);
+    void NiBoneLODController_PostLinkObject(NiStream&);
 };
 // Calls NiObject::LinkObject, saves m_iLOD, sets m_iLOD to -1, then passes the saved value to FUN_00a541f0.
 // @fnv 0x00a54340
-void NiBoneLODController::FUN_00a54340(NiStream& kStream)
+// pdb: NiBoneLODController::PostLinkObject | NiBoneLODController.obj | fnv360_0721_beta, objrun_prop + bridge(vtable|objrun_prop) + skyrim(caller_sim), high
+void NiBoneLODController::NiBoneLODController_PostLinkObject(NiStream& kStream)
 {
     NiObject::LinkObject(kStream);
     int iLOD = m_iLOD;
@@ -820,7 +822,7 @@ class EqTimeController : public EqObject
 class EqBoneLODController : public EqTimeController
 {
   public:
-    bool FUN_00a53ea0(EqObject* pkObject);
+    bool NiBoneLODController_IsEqual(EqObject* pkObject);
 
     int m_iLOD;
     unsigned int m_uiNumLODs;
@@ -831,7 +833,8 @@ class EqBoneLODController : public EqTimeController
 
 // Compares LOD, LOD counts, node/skin/shape sets and their elements against pkObject after BaseIsEqual, returning false on any mismatch.
 // @fnv 0x00a53ea0
-bool EqBoneLODController::FUN_00a53ea0(EqObject* pkObject)
+// pdb: NiBoneLODController::IsEqual | NiBoneLODController.obj | fnv360_0822_retail, caller_sim + bridge(vtable|objrun_prop) + skyrim(caller_sim), high
+bool EqBoneLODController::NiBoneLODController_IsEqual(EqObject* pkObject)
 {
     if (!BaseIsEqual(pkObject))
         return false;
@@ -1060,7 +1063,7 @@ struct LODStream
     int unk244;
     int unk248;
     StreamBinary* binary;
-    void FUN_00a645b0();
+    void NiStream_ReadLinkID();
     void Read32(void* data)
     {
         StreamBinary* file = binary;
@@ -1192,7 +1195,7 @@ void BoneLODLoader::ReadFromStream(LODStream* stream)
         {
             void* object = this;
             group->Add(object);
-            stream->FUN_00a645b0();
+            stream->NiStream_ReadLinkID();
         }
     }
     unsigned int skinCount = 0;
@@ -1207,8 +1210,8 @@ void BoneLODLoader::ReadFromStream(LODStream* stream)
         {
             LinkSkinInfo* info = new LinkSkinInfo;
             group->Add(info);
-            stream->FUN_00a645b0();
-            stream->FUN_00a645b0();
+            stream->NiStream_ReadLinkID();
+            stream->NiStream_ReadLinkID();
         }
     }
     unsigned int extraCount = 0;
@@ -1217,7 +1220,7 @@ void BoneLODLoader::ReadFromStream(LODStream* stream)
     {
         void* object = this;
         extraLinks.Add(object);
-        stream->FUN_00a645b0();
+        stream->NiStream_ReadLinkID();
     }
 }
 
@@ -1416,7 +1419,7 @@ struct BoneLODSerializer : BaseHack
     NiTPrimitiveArray<NodeCollection*> nodes;
     NiTPrimitiveArray<PairCollection*> skins;
     NodeCollection defaultNodes;
-    virtual void FUN_00a549d0(NiStream& stream);
+    virtual void NiBoneLODController_SaveBinary(NiStream& stream);
 };
 template <class T> inline void SaveStream(NiStream& kStream, const T& value)
 {
@@ -1424,7 +1427,8 @@ template <class T> inline void SaveStream(NiStream& kStream, const T& value)
 }
 // Serializes the LOD level, node groups, skin groups, and default nodes of a bone LOD entry to the stream.
 // @fnv 0x00a549d0
-void BoneLODSerializer::FUN_00a549d0(NiStream& stream)
+// pdb: NiBoneLODController::SaveBinary | NiBoneLODController.obj | fnv360_0822_retail, caller_sim + bridge(vtable|caller_sim) + skyrim(caller_sim), high
+void BoneLODSerializer::NiBoneLODController_SaveBinary(NiStream& stream)
 {
     BaseHack::FUN_00a6d730(stream);
     SaveStream(stream, lod);
@@ -2080,12 +2084,13 @@ struct BoneLODCtrl : NiTimeControllerStub
     NiTArrayStub<NiTPrimitiveSet<NiNode*>*> m_kBoneSetArray;
     NiTArrayStub<NiTPrimitiveSet<GeometrySkinInstancePair*>*> m_kSkinInfoSets;
     NiTPrimitiveSet<NiTriBasedGeom*> m_kShapeGroups;
-    void FUN_00a53d70(NiStream& kStream);
+    void NiBoneLODController_LinkObject(NiStream& kStream);
 };
 
 // Calls the base LinkObject, then loads objects into bone sets, skin pair fields, and shape groups.
 // @fnv 0x00a53d70
-void BoneLODCtrl::FUN_00a53d70(NiStream& kStream)
+// pdb: NiBoneLODController::LinkObject | NiBoneLODController.obj | fnv360_0822_retail, objrun_prop + bridge(vtable|caller_sim) + skyrim(caller_sim), high
+void BoneLODCtrl::NiBoneLODController_LinkObject(NiStream& kStream)
 {
     NiTimeControllerStub::LinkObject(kStream);
 

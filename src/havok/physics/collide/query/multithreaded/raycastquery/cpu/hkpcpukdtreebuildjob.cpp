@@ -422,7 +422,7 @@ void __cdecl FUN_00d947e0( S00d947e0_Obj** a1, S00d947e0_Queue* apQueue, S00d947
 {
     extern void* (__stdcall* DAT_00d9b080)( unsigned long );
     void __cdecl FUN_00a14ee0( void* info, void* schemas, void* accumulators, void* temp );
-    void __cdecl FUN_00a79670( void* info, void* solverTemp, void* schemas, void* accumulators );
+    void __cdecl hkExportImpulsesAndRhs( void* info, void* solverTemp, void* schemas, void* accumulators );
     extern const char DAT_00e7d35c[];
     extern const char DAT_00e855d8[];
     extern const char DAT_00e855ec[];
@@ -482,7 +482,7 @@ void __cdecl FUN_00d947e0( S00d947e0_Obj** a1, S00d947e0_Queue* apQueue, S00d947
         }
     }
 
-    FUN_00a79670( (char*)( (P2PThreadFields*)a1 )->m_world + 0x1a0, pHeader->m_solverTempBase, pHeader->m_schemasBase,
+    hkExportImpulsesAndRhs( (char*)( (P2PThreadFields*)a1 )->m_world + 0x1a0, pHeader->m_solverTempBase, pHeader->m_schemasBase,
                   pHeader->m_accumulatorsBase );
 
     {

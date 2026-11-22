@@ -276,11 +276,12 @@ class C29D80Object : public C29D80Base
     virtual ~C29D80Object();
 
     void CopyMemberData(C29D80Object* pkDest, void* pvCloning);
-    C29D80Object* FUN_00c29d80(void* pvCloning);
+    C29D80Object* NiPSysModifierActiveCtlr_CreateClone(void* pvCloning);
 };
 
 // @fnv 0x00c29d80
-C29D80Object* C29D80Object::FUN_00c29d80(void* pvCloning)
+// pdb: NiPSysModifierActiveCtlr::CreateClone | NiPSysModifierActiveCtlr.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun) + skyrim(caller_sim), high
+C29D80Object* C29D80Object::NiPSysModifierActiveCtlr_CreateClone(void* pvCloning)
 {
     C29D80Object* pkClone = new C29D80Object;
     CopyMemberData(pkClone, pvCloning);
@@ -320,7 +321,7 @@ struct ArgStandIn
 class FUN_00c32bf0_cls
 {
   public:
-    void FUN_00c32bf0(ArgStandIn* arg);
+    void NiPSysModifierBoolCtlr_LinkObject(ArgStandIn* arg);
     void FUN_00a57630(ArgStandIn* arg);
 
     char unk00[0x34];
@@ -329,7 +330,8 @@ class FUN_00c32bf0_cls
 
 // Calls FUN_00a57630, allocates an object using the returned pointer, and replaces m_34 while updating reference counts.
 // @fnv 0x00c32bf0
-void FUN_00c32bf0_cls::FUN_00c32bf0(ArgStandIn* arg)
+// pdb: NiPSysModifierBoolCtlr::LinkObject | NiPSysModifierBoolCtlr.obj | fnv360_0822_retail, caller_sim + bridge(vtable|objrun) + skyrim(caller_sim), high
+void FUN_00c32bf0_cls::NiPSysModifierBoolCtlr_LinkObject(ArgStandIn* arg)
 {
     FUN_00a57630(arg);
     if (arg->m_d8 >= 0xa010068)

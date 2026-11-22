@@ -135,7 +135,7 @@ struct Stream
         }
     }
 
-    void FUN_00e06800(int a, int b);
+    void hkpMoppCodeGenerator_addCommand16(int a, int b);
 };
 extern "C" void __cdecl GrowBuffer();
 struct S_00e07680_Writer
@@ -155,7 +155,7 @@ struct S_00e07680_Writer
             GrowBuffer();
     }
 };
-extern int __cdecl FUN_00cbfef0(float f);
+extern int __cdecl hkMath_hkFloatToInt(float f);
 struct S_00e07da0_Bounds
 {
     int unk0;
@@ -279,7 +279,7 @@ class FUN_00e095d0_cls
     void __thiscall FUN_00e09540();
 };
 // Emit an opcode with an immediate, choosing the byte, short or int form (and its opcode offset) by value range.
-extern int __cdecl FUN_00cbfef0(float f);
+extern int __cdecl hkMath_hkFloatToInt(float f);
 struct Node07400
 {
     int unk00;
@@ -583,7 +583,7 @@ struct BvNode
     BvNode* m_fMinimumU;
     BvNode* m_fMaximumU;
 };
-void __stdcall FUN_00e07c50(struct BvNode* node, FUN_00e095d0_cls* parent, FUN_00e095d0_cls* stack);
+void __stdcall hkpMoppDefaultAssembler_assembleCutAndTerminalCommand(struct BvNode* node, FUN_00e095d0_cls* parent, FUN_00e095d0_cls* stack);
 static void FUN_00e08320(BvArray<BvFixup>* destination, BvArray<BvFixup>* source, int adjustment)
 {
     for (int i = 0; i < source->m_iElementCount; ++i)
@@ -738,7 +738,7 @@ struct P154Tree
     P154Settings* settings;
     int unk18, unk1c, unk20, unk24, unk28, unk2c;
     int scale30, scale34, scale38;
-    void FUN_00e07c50(P154Node*, P154Region*, P154Region*);
+    void hkpMoppDefaultAssembler_assembleCutAndTerminalCommand(P154Node*, P154Region*, P154Region*);
     void FUN_00e07510(P154Node*, P154Region*, P154Region*, P154Result*);
     void FUN_00e07ca0(P154Node*, P154Region*, P154Region*, P154Result*);
     __forceinline int getCost(P154Array& a, int size)
@@ -880,7 +880,7 @@ struct Tree : public FUN_00e09640_class
     virtual void vf08() throw();
     virtual void vf0c() throw();
     virtual void vf10() throw();
-    virtual void FUN_00e08cc0(S_00e07da0_Node* node, int arg2, int arg3);
+    virtual void hkpMoppDefaultAssembler_assemble(S_00e07da0_Node* node, int arg2, int arg3);
     virtual void vf18(S_00e07da0_Node* node, void* p) throw();
 
     int unk08;
@@ -1001,8 +1001,8 @@ union hkVector4Copy
     E078Quad m_q;
 };
 
-hkReal FUN_00cbfd80(hkReal f);
-int FUN_00cbfef0(hkReal f);
+hkReal hkMath_hkFloor(hkReal f);
+int hkMath_hkFloatToInt(hkReal f);
 int FUN_00cbfe20(hkReal f);
 
 struct QuantNode
@@ -1067,12 +1067,12 @@ struct KdQuantizer
     int unk2c;
     hkVector4Unaligned m_vRayOrigins;
 
-    void FUN_00e07880(const QuantNode* node, const KdRegion* region, int* hiOut, int* loOut);
+    void hkpMoppDefaultAssembler_findPlanes(const QuantNode* node, const KdRegion* region, int* hiOut, int* loOut);
 };
 
 static __forceinline int toCell(hkReal scale, double x)
 {
-    return FUN_00cbfef0(FUN_00cbfd80(x * scale));
+    return hkMath_hkFloatToInt(hkMath_hkFloor(x * scale));
 }
 
 static __forceinline int clampIndex(int i)
@@ -1097,7 +1097,8 @@ extern int __cdecl FUN_00954c40(float);
 static __forceinline int QuantizeCellNative(float scale,double x) {
     return FUN_00954d20(FUN_00954ba0(float(x*scale)));
 }
-void KdQuantizer::FUN_00e07880(const QuantNode* node, const KdRegion* region, int* hiOut, int* loOut)
+// pdb: hkpMoppDefaultAssembler::findPlanes | hkpMoppDefaultAssembler.obj | fnv360_0822_retail, uconst + bridge(uconst|uconst) + skyrim(uconst), high
+void KdQuantizer::hkpMoppDefaultAssembler_findPlanes(const QuantNode* node, const KdRegion* region, int* hiOut, int* loOut)
 {
     const hkReal* n = &node->m_vHitNormal->m_vComponents.m128_f32[0];
     int numNonZero;

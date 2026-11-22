@@ -7,7 +7,8 @@
 extern void* DAT_011f6044;
 
 // @fnv 0x00aa0000
-void FUN_00aa0000()
+// pdb: NiShaderFactory::ReleaseAllShaders | NiShaderFactory.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+void NiShaderFactory_ReleaseAllShaders()
 {
     if (DAT_011f6044)
         ((void(__thiscall*)(void*)) * (void**)(*(char**)DAT_011f6044 + 0x20))(DAT_011f6044);
@@ -447,7 +448,8 @@ struct FUN_00aa4060_shell
     void __thiscall FUN_00aa4060(void* arg);
 };
 // @fnv 0x00aa2170
-void __cdecl FUN_00aa2170()
+// pdb: NiStaticDataManager::Shutdown | NiStaticDataManager.obj | fnv360_0822_retail, call_gap + bridge(call_gap_sim|call_gap_sim) + skyrim(caller_sim), high
+void __cdecl NiStaticDataManager_Shutdown()
 {
     for (unsigned int i = 0; i < DAT_011f6108; ++i)
     {
@@ -678,11 +680,12 @@ struct FUN_00aa2d60_cls
     int unk1C;
     unsigned char unk20;
     unsigned char m_21;
-    void* FUN_00aa2d60();
+    void* NiMemStream_Str();
 };
 
 // @fnv 0x00aa2d60
-void* FUN_00aa2d60_cls::FUN_00aa2d60()
+// pdb: NiMemStream::Str | NiMemStream.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_seq), high
+void* FUN_00aa2d60_cls::NiMemStream_Str()
 {
     m_21 = 1;
     return m_10;
@@ -1200,7 +1203,8 @@ void __cdecl FUN_00aa10f0(void* buffer);
 
 // If size is non-zero, copies data to a temporary buffer, calls SwapBufferBySizes on it, returns state->FUN_00aa1810(buffer, size) and frees the buffer; else 0.
 // @fnv 0x00aa1ad0
-unsigned int __cdecl FUN_00aa1ad0(ProcessingState* state, const void* data, unsigned int size, void* optionA,
+// pdb: NiFile::WriteAndSwap | NiFile.obj | fnv360_0822_retail, caller_sim + skyrim(objrun_prop), high
+unsigned int __cdecl NiFile_WriteAndSwap(ProcessingState* state, const void* data, unsigned int size, void* optionA,
                                   void* optionB)
 {
     if (size <= 0u)
@@ -1403,7 +1407,8 @@ void __cdecl FUN_00aa3050();
 }
 // Sets TLS unk2b4 to 15, selects or allocates the object stored in DAT_011f6118, runs FUN_00aa3050 and the init callbacks, restores unk2b4 and sets DAT_011f610c.
 // @fnv 0x00aa20b0
-void __cdecl FUN_00aa20b0(void* value)
+// pdb: NiStaticDataManager::Init | NiStaticDataManager.obj | fnv360_0822_retail, call_gap + bridge(call_gap_sim|call_gap_sim) + skyrim(caller_sim), high
+void __cdecl NiStaticDataManager_Init(void* value)
 {
     int oldState = s_tlsData.unk2b4;
     s_tlsData.unk2b4 = 15;

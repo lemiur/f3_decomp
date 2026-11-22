@@ -894,7 +894,8 @@ extern "C" double __cdecl fabs(double);
 
 // Computes the angle of the vector (x, y) using a polynomial approximation of atan, handling zero and quadrant cases.
 // @fnv 0x00a811f0
-float __cdecl FUN_00a811f0(float y, float x)
+// pdb: NiFastATan2 | NiMath.obj | fnv360_0822_retail, caller + bridge(uconst|call_seq) + skyrim(uconst), high
+float __cdecl NiFastATan2(float y, float x)
 {
     if (x == 0.0f && y == 0.0f)
         return 0.0f;
@@ -1174,7 +1175,8 @@ struct SpawnedObject
 
 // Allocates a 0x34-byte SpawnedObject, runs InitBase, installs the vtable, zeroes most fields, sets m18 to -1, and returns it (or null).
 // @fnv 0x00a866f0
-SpawnedObject* __cdecl FUN_00a866f0() throw()
+// pdb: NiSkinInstance::CreateObject | NiSkinInstance.obj | fnv360_0822_retail, objrun + bridge(hash|objrun), high
+SpawnedObject* __cdecl NiSkinInstance_CreateObject() throw()
 {
     SpawnedObject* p = (SpawnedObject*)FUN_00aa13e0(0x34);
     if (p != 0)
@@ -1309,7 +1311,8 @@ int __thiscall FUN_00a88c60_Class::FUN_00a88c60(FUN_00a88c60_Class* other) {
 }
 
 // @fnv 0x00a89650
-void FUN_00a89650(const short* psCompressed, unsigned int uiUnused, float afBase, float fHalfRange, float* pfValues,
+// pdb: NiCompUtility::DecompressFloatArray | NiCompUtility.obj | fnv360_0822_retail, objrun_prop + bridge(call_gap|objrun_prop) + skyrim(call_seq), high
+void NiCompUtility_DecompressFloatArray(const short* psCompressed, unsigned int uiUnused, float afBase, float fHalfRange, float* pfValues,
                   unsigned int ItemUpdateArray)
 {
     for (unsigned int i = 0; i < ItemUpdateArray; i++)

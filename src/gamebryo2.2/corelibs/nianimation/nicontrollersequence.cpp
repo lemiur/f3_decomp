@@ -219,11 +219,11 @@ void FUN_00a33bf0_s::SaveToStream(NiStream& kStream)
 
 struct FUN_00a2e420_shell
 {
-    unsigned char FUN_00a2e420(float);
+    unsigned char NiControllerManager_StopTransSourceSequence(float);
 };
 struct FUN_00a30540_shell
 {
-    void FUN_00a30540();
+    void NiControllerSequence_DetachInterpolators();
 };
 extern float DAT_01015f5c;
 extern double DAT_010241b0;
@@ -247,21 +247,22 @@ unsigned char FUN_00a35030_shell::SetEaseOut(float fEaseOutTime, bool bTransitio
     if (m_fLastTime != DAT_010241b0)
         m_fOffset = m_fWeightedLastTime / m_fFrequency - m_fLastTime + m_fOffset;
     if (m_eState == 5 && m_pkOwner)
-        ((FUN_00a2e420_shell*)m_pkOwner)->FUN_00a2e420(0.0f);
+        ((FUN_00a2e420_shell*)m_pkOwner)->NiControllerManager_StopTransSourceSequence(0.0f);
     m_fDestFrame = DAT_01015f5c;
     m_eState = 0;
     m_pkPartnerSequence = 0;
-    ((FUN_00a30540_shell*)this)->FUN_00a30540();
+    ((FUN_00a30540_shell*)this)->NiControllerSequence_DetachInterpolators();
     return 1;
 }
 
 struct FUN_00a30900_shell : NiControllerSequence
 {
-    void FUN_00a30900(char m_ucRegionPriority);
+    void NiControllerSequence_AttachInterpolators(char m_ucRegionPriority);
 };
 
 // @fnv 0x00a30900
-void FUN_00a30900_shell::FUN_00a30900(char cDefaultPriority)
+// pdb: NiControllerSequence::AttachInterpolators | NiControllerSequence.obj | fnv360_1110_retail, call_seq + bridge(call_seq|call_dedup) + skyrim(call_seq), high
+void FUN_00a30900_shell::NiControllerSequence_AttachInterpolators(char cDefaultPriority)
 {
     unsigned int ui;
     SeqInterpArrayItem* kItem;
@@ -689,11 +690,12 @@ float SequenceA30970::FUN_00a30970(float time, bool update)
 struct FUN_00a30c80_shell
 {
     unsigned __int64 __thiscall IsNotInChain(void* arg);
-    bool __thiscall FUN_00a30c80(void* arg);
+    bool __thiscall NiControllerSequence_CanSyncTo(void* arg);
 };
 bool __stdcall MatchesTextKeys(void* arg);
 // @fnv 0x00a30c80
-bool FUN_00a30c80_shell::FUN_00a30c80(void* arg)
+// pdb: NiControllerSequence::CanSyncTo | NiControllerSequence.obj | fnv360_0721_beta, objrun + bridge(hash|objrun), high
+bool FUN_00a30c80_shell::NiControllerSequence_CanSyncTo(void* arg)
 {
     if (arg)
     {
@@ -811,7 +813,7 @@ struct ObjectView
 {
     int vtable;
     int refs;
-    bool FUN_00a5d2f0(StreamView&);
+    bool NiObject_RegisterStreamables(StreamView&);
 };
 struct ItemView
 {
@@ -857,12 +859,13 @@ struct SequenceView : ObjectView
     int unk68;
     RefView** notes;
     unsigned short noteCount;
-    bool FUN_00a30ea0(StreamView&);
+    bool NiControllerSequence_RegisterStreamables(StreamView&);
 };
 // @fnv 0x00a30ea0
-bool SequenceView::FUN_00a30ea0(StreamView& stream)
+// pdb: NiControllerSequence::RegisterStreamables | NiControllerSequence.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(caller_sim), high
+bool SequenceView::NiControllerSequence_RegisterStreamables(StreamView& stream)
 {
-    if (!FUN_00a5d2f0(stream))
+    if (!NiObject_RegisterStreamables(stream))
         return false;
     for (unsigned int i = 0; i < count; i++)
     {
@@ -2310,7 +2313,7 @@ struct AnimationSequence : S_00a30880_Base
     unsigned short noteCount;
     float GetMorphedTime(AnimationSequence*, float);
     float FUN_00a30970(float, bool);
-    void FUN_00a32290(float, float, float);
+    void NiControllerSequence_SetInterpsWeightAndTime(float, float, float);
     void FUN_00a34ba0(float time, bool update);
     __forceinline bool SetState(int value)
     {
@@ -2425,7 +2428,7 @@ void AnimationSequence::FUN_00a34ba0(float time, bool update)
         }
         else
             localTime = time + offset;
-        FUN_00a32290(weight * transition, ease, FUN_00a30970(localTime, true));
+        NiControllerSequence_SetInterpsWeightAndTime(weight * transition, ease, FUN_00a30970(localTime, true));
         if (notes)
         {
             if (fOldScaledTime > scaledTime)
@@ -2711,11 +2714,12 @@ extern "C" void* __cdecl FUN_00aa13e0(unsigned int size);
 struct FUN_00a344f0_cls
 {
     void __thiscall FUN_00a33570(void* obj, unsigned int param);
-    void* FUN_00a344f0(unsigned int param);
+    void* NiControllerSequence_CreateClone(unsigned int param);
 };
 
 // @fnv 0x00a344f0
-void* FUN_00a344f0_cls::FUN_00a344f0(unsigned int param)
+// pdb: NiControllerSequence::CreateClone | NiControllerSequence.obj | fnv360_0822_retail, call_seq + skyrim(caller_sim), high
+void* FUN_00a344f0_cls::NiControllerSequence_CreateClone(unsigned int param)
 {
     void* p = FUN_00aa13e0(0x74);
     void* result = p ? ((FUN_00a316a0_shell*)p)->FUN_00a316a0() : 0;
@@ -3085,7 +3089,7 @@ struct Sequence31910
     void* partner;
     const char* rootName;
     Node31910* accum;
-    bool FUN_00a31910(Node31910*, Node31910*, int);
+    bool NiControllerSequence_ResolveTransformInterpolators(Node31910*, Node31910*, int);
 };
 extern Rtti31910 DAT_011f36bc, DAT_011f36e4, DAT_011f4a04, g_011f36ec;
 extern unsigned int DAT_011f36c8, DAT_011f36d0;
@@ -3241,7 +3245,8 @@ static const char* TreadType870()
     return DAT_01091f14;
 }
 
-bool Sequence31910::FUN_00a31910(Node31910* target, Node31910* root, int unused)
+// pdb: NiControllerSequence::ResolveTransformInterpolators | NiControllerSequence.obj | fnv360_0822_retail, ustr + bridge(ustr|ustr) + skyrim(ustr), high
+bool Sequence31910::NiControllerSequence_ResolveTransformInterpolators(Node31910* target, Node31910* root, int unused)
 {
     bool spMorphController;
     spMorphController = false;
@@ -4495,11 +4500,12 @@ struct BindSequence
     unsigned short unk70;
     bool missing;
     bool Attach(bool, BindObj*, bool);
-    bool FUN_00a32c70(bool arg);
+    bool NiControllerSequence_StoreTargets(bool arg);
 };
 // Resolves interpolators, objects, and controllers for each BindItem, creating blends and updating the owner's target.
 // @f3 0x008acc40 (community match, verified in this file)
-bool BindSequence::FUN_00a32c70(bool abUpdate)
+// pdb: NiControllerSequence::StoreTargets | NiControllerSequence.obj | fnv360_0822_retail, call_gap + bridge(call_seq|objrun) + skyrim(caller_sim), high
+bool BindSequence::NiControllerSequence_StoreTargets(bool abUpdate)
 {
     BindObj* root = owner->root;
     if (rootName != (const char*)DAT_0109b220)

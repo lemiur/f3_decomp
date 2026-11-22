@@ -62,11 +62,12 @@ struct S00a67410
     char _pad34[6];
     unsigned char m_bModifierActive;  // +0x3a
 
-    void FUN_00a67410(BSFaceGenMorphData* outData);
+    void NiGeometryData_GetVerticesIterator(BSFaceGenMorphData* outData);
 };
 
 // @fnv 0x00a67410
-void S00a67410::FUN_00a67410(BSFaceGenMorphData* outData)
+// pdb: NiGeometryData::GetVerticesIterator | NiGeometryData.obj | fnv360_0822_retail, call_gap + bridge(call_dedup|call_gap_sim) + skyrim(call_gap), high
+void S00a67410::NiGeometryData_GetVerticesIterator(BSFaceGenMorphData* outData)
 {
     if (!m_bModifierActive)
         return;

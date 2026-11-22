@@ -95,7 +95,8 @@ extern AllocCallback DAT_011f3930[];
 extern CopyCallback DAT_011f39c0[];
 
 // @fnv 0x00a3d630
-void FUN_00a3d630(int a1, int a2, void* apData, int aiCount, float afMin, float afMax, void** apOut, int* apiOutCount)
+// pdb: NiAnimationKey::CopySequence | NiAnimationKey.obj | fnv360_0822_retail, call_gap + bridge(call_dedup|call_gap) + skyrim(caller_sim), high
+void NiAnimationKey_CopySequence(int a1, int a2, void* apData, int aiCount, float afMin, float afMax, void** apOut, int* apiOutCount)
 {
     if (a2 == 4)
     {
@@ -109,7 +110,7 @@ void FUN_00a3d630(int a1, int a2, void* apData, int aiCount, float afMin, float 
             unsigned char idx = (unsigned char)uiIndex;
             unsigned int m20 = state->m20[idx];
             local_m20[uiIndex] = m20;
-            FUN_00a3d630(0, m20, state->m30[idx], (int)state->m14[idx], afMin, afMax, &local_bufs[uiIndex],
+            NiAnimationKey_CopySequence(0, m20, state->m30[idx], (int)state->m14[idx], afMin, afMax, &local_bufs[uiIndex],
                          &local_counts[uiIndex]);
         }
 

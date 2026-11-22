@@ -227,7 +227,7 @@ struct S_00e40800_Router
 };
 
 S_00e40800_Router* FUN_00c85750() throw();
-int FUN_00cb10d0(const char* s) throw();
+int hkString_strLen(const char* s) throw();
 char* FUN_00cb1090(char* dst, const char* src) throw();
 void FUN_00c908c0(S_00e40800_Allocator& alloc, void* array, int numElem, int sizeElem) throw();
 
@@ -289,7 +289,7 @@ struct S_00e40800_String
 
     __forceinline void set(const char* s) throw()
     {
-        m_kStringBuffer.SetSizeAndGrow(FUN_00cb10d0(s) + 1);
+        m_kStringBuffer.SetSizeAndGrow(hkString_strLen(s) + 1);
         FUN_00cb1090(m_kStringBuffer.m_data, s);
     }
 };

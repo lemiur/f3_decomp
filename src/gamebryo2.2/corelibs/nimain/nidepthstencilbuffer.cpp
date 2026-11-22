@@ -10,7 +10,8 @@ extern "C"
 extern const NiRTTI DAT_011f603c;
 
 // @fnv 0x00a9fe50
-const NiRTTI* __cdecl FUN_00a9fe50()
+// pdb: NiLODNode::GetRTTI | NiLODNode.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+const NiRTTI* __cdecl NiLODNode_GetRTTI()
 {
     return &DAT_011f603c;
 }

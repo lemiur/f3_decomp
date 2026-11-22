@@ -293,7 +293,8 @@ struct NiColorA_SaveHelper
     void SaveBinary(NiStream*);
 };
 // @fnv 0x00a51ca0
-void __fastcall FUN_00a51ca0(Obj34* self, void* unused, NiStream* stream)
+// pdb: NiBSplineColorInterpolator::SaveBinary | NiBSplineColorInterpolator.obj | fnv360_0822_retail, caller_sim + bridge(vtable|caller_sim) + skyrim(caller_sim), high
+void __fastcall NiBSplineColorInterpolator_SaveBinary(Obj34* self, void* unused, NiStream* stream)
 {
     ((FUN_00a58160_shell*)self)->SaveToStream(stream);
     ((NiColorA_SaveHelper*)&self->f1)->SaveBinary(stream);
@@ -517,13 +518,13 @@ struct FUN_00a51cf0_cls
     unsigned int unk28;
     unsigned int m_2c;
 
-    bool FUN_00a57e90(FUN_00a51cf0_cls* other);
+    bool NiBSplineInterpolator_IsEqual(FUN_00a51cf0_cls* other);
     bool FUN_00a51cf0(FUN_00a51cf0_cls* other);
 };
 // @fnv 0x00a51cf0
 bool FUN_00a51cf0_cls::FUN_00a51cf0(FUN_00a51cf0_cls* other)
 {
-    if (!FUN_00a57e90(other))
+    if (!NiBSplineInterpolator_IsEqual(other))
     {
         return false;
     }
@@ -560,12 +561,13 @@ struct A51D30ColorLoader
 
 struct A51D30Loader : FnvBSplineColorInterpolator
 {
-    void __thiscall FUN_00a51d30(NiStream* stream);
+    void __thiscall NiBSplineColorInterpolator_LoadBinary(NiStream* stream);
 };
 
 // Loads spline data from a NiStream by calling base and color loader functions, then reading a key value into m_iKey.
 // @fnv 0x00a51d30
-void A51D30Loader::FUN_00a51d30(NiStream* stream)
+// pdb: NiBSplineColorInterpolator::LoadBinary | NiBSplineColorInterpolator.obj | fnv360_0822_retail, caller_sim + bridge(vtable|caller_sim) + skyrim(caller_sim), high
+void A51D30Loader::NiBSplineColorInterpolator_LoadBinary(NiStream* stream)
 {
     reinterpret_cast<A51D30BaseLoader*>(this)->FUN_00a58080(*stream);
     reinterpret_cast<A51D30ColorLoader*>(&m_kDiffuseColor)->FUN_00a69800(stream);

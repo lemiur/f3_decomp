@@ -7,7 +7,8 @@ struct NiRTTI;
 extern NiRTTI g_011f5f5c;
 
 // @fnv 0x00a9af30
-NiRTTI* __cdecl FUN_00a9af30()
+// pdb: NiRangeLODData::GetRTTI | NiRangeLODData.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+NiRTTI* __cdecl NiRangeLODData_GetRTTI()
 {
     return &g_011f5f5c;
 }
@@ -25,7 +26,8 @@ struct BSFadeNode
 extern int DAT_010a112c;
 
 // @fnv 0x00a9af90
-void* __cdecl FUN_00a9af90()
+// pdb: NiBooleanExtraData::CreateObject | NiBooleanExtraData.obj | fnv360_0822_retail, objrun + bridge(hash|objrun), high
+void* __cdecl NiBooleanExtraData_CreateObject()
 {
     void* p = BSFadeNode::operator new(0x10);
     if (p)
@@ -107,11 +109,12 @@ struct S_00a9af40 : NiExtraData
         unkC = false;
     }
     void FUN_00a7b330(S_00a9af40* pkClone, CloningProcess* pkCloning);
-    S_00a9af40* FUN_00a9af40(CloningProcess* pkCloning);
+    S_00a9af40* NiBooleanExtraData_CreateClone(CloningProcess* pkCloning);
 };
 
 // @fnv 0x00a9af40
-S_00a9af40* S_00a9af40::FUN_00a9af40(CloningProcess* pkCloning)
+// pdb: NiBooleanExtraData::CreateClone | NiBooleanExtraData.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun) + skyrim(caller_sim), high
+S_00a9af40* S_00a9af40::NiBooleanExtraData_CreateClone(CloningProcess* pkCloning)
 {
     S_00a9af40* pkClone = new S_00a9af40;
     FUN_00a7b330(pkClone, pkCloning);
@@ -487,11 +490,12 @@ struct FnVNode
     int unk08;
     unsigned char unk0c;
     void helper_b2c0(FnVArg* a);
-    void FUN_00a9b040(FnVArg* s);
+    void NiBooleanExtraData_SaveBinary(FnVArg* s);
 };
 
 // @fnv 0x00a9b040
-void FnVNode::FUN_00a9b040(FnVArg* s)
+// pdb: NiBooleanExtraData::SaveBinary | NiBooleanExtraData.obj | fnv360_0721_beta, objrun + bridge(vtable|objrun) + skyrim(caller_sim), high
+void FnVNode::NiBooleanExtraData_SaveBinary(FnVArg* s)
 {
     this->helper_b2c0(s);
     unsigned char ucValue = this->unk0c;

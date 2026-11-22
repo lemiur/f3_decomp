@@ -76,12 +76,13 @@ class BoxPointLookup
 class BoxPointInsertion : public FUN_00db0920
 {
   public:
-    int FUN_00db0960(unsigned int a, unsigned int b, const unsigned char* key);
+    int hkpBoxBoxManifold_addPoint(unsigned int a, unsigned int b, const unsigned char* key);
 };
 
 // Inserts a key into the entries array if the count is under 8 and the key is not already present, returning the index or -1 on failure.
 // @fnv 0x00db0960
-int BoxPointInsertion::FUN_00db0960(unsigned int aiUnused, unsigned int b, const unsigned char* key)
+// pdb: hkpBoxBoxManifold::addPoint | hkpBoxBoxManifold.obj | fnv360_0822_retail, call_gap + bridge(call_dedup|call_gap) + skyrim(call_gap), high
+int BoxPointInsertion::hkpBoxBoxManifold_addPoint(unsigned int aiUnused, unsigned int b, const unsigned char* key)
 {
     FUN_00db0920* self = this;
     unsigned char count = self->count;

@@ -18,10 +18,11 @@ struct FUN_00dbdf30_s
 {
     int m_kPointA;
     int m_kPointB;
-    void __thiscall FUN_00dbdf30(int a, int b);
+    void __thiscall hkPackfileWriter_setSectionForClass(int a, int b);
 };
 // @fnv 0x00dbdf30
-void __thiscall FUN_00dbdf30_s::FUN_00dbdf30(int pNameSource, int a)
+// pdb: hkPackfileWriter::setSectionForClass | hkPackfileWriter.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void __thiscall FUN_00dbdf30_s::hkPackfileWriter_setSectionForClass(int pNameSource, int a)
 {
     int idx = ((FUN_00dbdd40_s*)this)->GetOrAddString(a);
     const char* name = ((FUN_00d46d40_s*)(void*)pNameSource)->FUN_00d46d40();
@@ -102,14 +103,15 @@ struct FUN_00dbda80_s
     unsigned int unk18;
     unsigned int unk1c;
     DepthLimit firstDepth;
-    void FUN_00dbda80(void* key, int value);
+    void hkPackfileWriter_addImport(void* key, int value);
 };
 // @f3 0x00a4a5d0 (community match, verified in this file)
 struct HashMap397 {
     int FUN_009227d0(const void* key, int defaultValue);
     void FUN_00922710(void* key, int value);
 };
-void FUN_00dbda80_s::FUN_00dbda80(void* key, int value) {
+// pdb: hkPackfileWriter::addImport | hkPackfileWriter.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void FUN_00dbda80_s::hkPackfileWriter_addImport(void* key, int value) {
     HashMap397& indices = reinterpret_cast<HashMap397&>(entryIndex);
     int index = indices.FUN_009227d0(key, -1);
     if (index >= 0)
@@ -151,7 +153,7 @@ struct FUN_00e02ef0_Obj
 
 struct FUN_00e02a80_Obj
 {
-    void FUN_00e02a80(void* a, void* b, void* c, void* d);
+    void hkPlatformObjectWriter_writeObject(void* a, void* b, void* c, void* d);
 };
 
 struct FUN_00e02c70_Obj
@@ -160,14 +162,15 @@ struct FUN_00e02c70_Obj
 };
 
 // @fnv 0x00dbdb10
-void __cdecl FUN_00dbdb10(void* apArg1, void* apArg2, void* apArg3)
+// pdb: chasePointers | hkPackfileWriter.obj | fnv360_0822_retail, call_gap_sim + bridge(hash|call_gap_sim) + skyrim(call_gap), high
+void __cdecl chasePointers(void* apArg1, void* apArg2, void* apArg3)
 {
     FUN_00dbdb10_buf buf;
 
     reinterpret_cast<FUN_00dc1670_Obj*>(&buf.unk00)->FUN_00dc1670();
     reinterpret_cast<FUN_00e02bb0_Obj*>(&buf.unk14)->FUN_00e02bb0(&buf);
     reinterpret_cast<FUN_00e02ef0_Obj*>(&buf.unk04)->FUN_00e02ef0();
-    reinterpret_cast<FUN_00e02a80_Obj*>(&buf.unk14)->FUN_00e02a80(&buf.unk04, apArg1, apArg2, apArg3);
+    reinterpret_cast<FUN_00e02a80_Obj*>(&buf.unk14)->hkPlatformObjectWriter_writeObject(&buf.unk04, apArg1, apArg2, apArg3);
     buf.unk04 = (int)&DAT_0102e388;
     reinterpret_cast<FUN_00e02c70_Obj*>(&buf.unk14)->FUN_00e02c70();
 }
@@ -292,7 +295,7 @@ class hkPackfileWriterDB7
 // @f3 0x00a4a630 (community match, verified in this file)
 extern char DAT_00e44a74, DAT_00e44a8c, DAT_00e865d8, DAT_00e865b8;
 struct ClassDB7View { const char* FUN_009b0490() const; unsigned int FUN_009b0bb0(int flags) const; };
-extern int __cdecl FUN_009232c0(const char*,const char*);
+extern int __cdecl hkString_strCmp(const char*,const char*);
 struct StringDB7View { void* FUN_009b10f0(const char* key,void* def) const; void FUN_009b0e60(const char* key,void* val); };
 struct StreamDB7View {
     void* vtable;
@@ -318,7 +321,7 @@ struct DBD7MapView
 struct Fwd { static __forceinline const char* key(const char* k) { return k; } };
 int hkPackfileWriterDB7::RegisterObject(void* pvObject,const hkClassDB7* pkClass) throw()
 {
-    if (FUN_009232c0(((const ClassDB7View*)pkClass)->FUN_009b0490(), &DAT_00e44a74) == 0)
+    if (hkString_strCmp(((const ClassDB7View*)pkClass)->FUN_009b0490(), &DAT_00e44a74) == 0)
     {
         const hkClassDB7* vObj = (const hkClassDB7*)pvObject;
         const char* pcName = ((const ClassDB7View*)(void*)vObj)->FUN_009b0490();
@@ -342,7 +345,7 @@ int hkPackfileWriterDB7::RegisterObject(void* pvObject,const hkClassDB7* pkClass
         }
         ((StringDB7View*)&m_kObjectNameMap)->FUN_009b0e60(Fwd::key(((const ClassDB7View*)(void*)vObj)->FUN_009b0490()),(void*)(void*)vObj);
     }
-    else if(FUN_009232c0(((const ClassDB7View*)pkClass)->FUN_009b0490(),&DAT_00e44a8c)==0)
+    else if(hkString_strCmp(((const ClassDB7View*)pkClass)->FUN_009b0490(),&DAT_00e44a8c)==0)
     {
         const char* pcName2 = *(const char**)pvObject;
         const hkClassDB7* candidate = (const hkClassDB7*)m_kClassLookupMap.FindValueForKey(pcName2,0);
@@ -735,11 +738,12 @@ struct Cls
     virtual void v1();
     virtual void v2();
     virtual void vf3(void* a, void* b, void* r, void* c);
-    void FUN_00dbda50(void* a, void* b, void* c);
+    void hkPackfileWriter_setContents(void* a, void* b, void* c);
 };
 // Invokes vf3 on the object, passing a, b, the result of DAT_01268b08->vf5(), and c.
 // @fnv 0x00dbda50
-void Cls::FUN_00dbda50(void* apArg1, void* apArg2, void* apArg3)
+// pdb: hkPackfileWriter::setContents | hkPackfileWriter.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void Cls::hkPackfileWriter_setContents(void* apArg1, void* apArg2, void* apArg3)
 {
     vf3(apArg1, apArg2, DAT_01268b08->vf5(), apArg3);
 }
@@ -922,11 +926,11 @@ struct Class_00dbe680
     int m_8c;
     int m_90;
 
-    void FUN_00dbe150(int a1, void* a2, S00dbe680_A3* a3, int a4, void* a5);
+    void hkPackfileWriter_addObject(int a1, void* a2, S00dbe680_A3* a3, int a4, void* a5);
     void FUN_00dbe680(int a1, S00dbe680_A2* a2, S00dbe680_A3* a3, int a4);
 };
 
-__declspec(noinline) void Class_00dbe680::FUN_00dbe150(int a1, void* a2, S00dbe680_A3* a3, int a4, void* a5)
+__declspec(noinline) void Class_00dbe680::hkPackfileWriter_addObject(int a1, void* a2, S00dbe680_A3* a3, int a4, void* a5)
 {
     unk00 = a1;
     unk04 = a4;
@@ -1020,7 +1024,7 @@ struct OwnerE150
     MapB8E150 mapb8;
     int __thiscall RegisterObject(void* a, void* b);
     void __thiscall FUN_00dbde40(void* a, void* b, void* c, void* d, void* e);
-    void __thiscall FUN_00dbe150(void* a1, void* a2, void* a3, void* a4, void* a5);
+    void __thiscall hkPackfileWriter_addObject(void* a1, void* a2, void* a3, void* a4, void* a5);
 };
 
 // Processes a1 and a2 using map14, may recurse through buffered entries, and logs a message when FUN_00dbd9f0 returns null.
@@ -1041,7 +1045,8 @@ void __cdecl FUN_00a4a950(void* a, void* b, TupleListE150* out);
 extern void* DAT_01065194;
 struct E150RegisterProxy { int FUN_00a4a630(void* a, void* b); void FUN_00a4a8a0(void* a, void* b, void* c, void* d, void* e); };
 struct E150Callback { virtual void v0(); virtual void v1(); virtual void v2(); virtual void v3(void* a, void* b); };
-void OwnerE150::FUN_00dbe150(void* a1, void* a2, void* a3, void* a4, void* a5)
+// pdb: hkPackfileWriter::addObject | hkPackfileWriter.obj | fnv360_0822_retail, call_gap + bridge(call_gap|ustr) + skyrim(call_gap), high
+void OwnerE150::hkPackfileWriter_addObject(void* a1, void* a2, void* a3, void* a4, void* a5)
 {
     FUN_00cb18f0_t* pm = &map14;
     if (pm->FindSlot((int)a1) <= pm->unk08) return;
@@ -1072,9 +1077,9 @@ void OwnerE150::FUN_00dbe150(void* a1, void* a2, void* a3, void* a4, void* a5)
             for (int i = 0; i < entries.m_count; ++i) {
                 void* b = entries.m_data[i].b;
                 void* c = entries.m_data[i].c;
-                if (c && b) FUN_00dbe150(b, c, a3, a4, a5);
+                if (c && b) hkPackfileWriter_addObject(b, c, a3, a4, a5);
             }
-            FUN_00dbe150(linked, &DAT_0116a994, a3, a4, DAT_01065194);
+            hkPackfileWriter_addObject(linked, &DAT_0116a994, a3, a4, DAT_01065194);
             entries.FUN_009b2fd0();
             return;
         }

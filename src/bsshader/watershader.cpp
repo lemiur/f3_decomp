@@ -2210,7 +2210,7 @@ struct WaterSetup
 
     WaterProgram* pixel;
 
-    void FUN_00b864d0(WaterRenderArg*);
+    void WaterShader_SetupGeometryConstants(WaterRenderArg*);
 };
 
 struct WaterFog
@@ -2362,7 +2362,8 @@ __forceinline void SetWaterAlpha(WaterMaterial* material, unsigned int mode)
 
 // Fills global water shader constants from the material, fog and lights, then calls Setup on the vertex and pixel WaterPrograms.
 // @fnv 0x00b864d0
-void WaterSetup::FUN_00b864d0(WaterRenderArg* arg)
+// pdb: WaterShader::SetupGeometryConstants | WaterShader.obj | fnv360_0822_retail, udata + bridge(udata|caller_sim), high
+void WaterSetup::WaterShader_SetupGeometryConstants(WaterRenderArg* arg)
 {
 
     WaterSetup* volatile savedSetup = this;

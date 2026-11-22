@@ -1177,7 +1177,7 @@ public:
     virtual void v0c8();
     virtual void vcc(int a);
     void FUN_008e9e90(int time, S6b1280_Refr* owner);
-    void FUN_008ee870(S6b1280_Owner* owner);
+    void bhkCharacterController_SetWorld(S6b1280_Owner* owner);
     void FUN_004e94e0(void* obj);
     void* FUN_006a8fb0();
     void FUN_004e6580(S6b1280_Point3* pos);
@@ -1571,7 +1571,7 @@ void S6b1280_Refr::FUN_006b1280()
             ref->unk3c8 = DAT_00e0abd0;
         S6b1280_SceneNode* sceneNode = ref->GetScene()->unk08;
         void* node = sceneNode ? sceneNode->unk310 : 0;
-        ref->FUN_008ee870(owner);
+        ref->bhkCharacterController_SetWorld(owner);
         void* obj3D = v1d0();
         if (ref->GetCtrlObj() != obj3D) {
             ref->FUN_004e94e0(obj3D);

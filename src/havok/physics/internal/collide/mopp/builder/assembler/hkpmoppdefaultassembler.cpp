@@ -253,7 +253,7 @@ struct S_00e06aa0
     int unk6C;
     int unk70;
     bool m_enabled;
-    void FUN_00e06aa0(S_00e06aa0_Item* item);
+    void hkpMoppDefaultAssembler_releaseNode(S_00e06aa0_Item* item);
 };
 // If the item is not flagged and this object is enabled, frees the item's two pointers through the pool and nulls them.
 // @f3 0x00a86210 (community match, verified in this file)
@@ -286,7 +286,8 @@ struct R2_Obj
     int unk60;
     bool m_enabled;
 };
-void S_00e06aa0::FUN_00e06aa0(S_00e06aa0_Item* item)
+// pdb: hkpMoppDefaultAssembler::releaseNode | hkpMoppDefaultAssembler.obj | fnv360_0822_retail, call_gap + bridge(call_seq|call_gap) + skyrim(call_gap), high
+void S_00e06aa0::hkpMoppDefaultAssembler_releaseNode(S_00e06aa0_Item* item)
 {
     if (!item->m_flag && ((R2_Obj*)this)->m_enabled)
     {
@@ -504,9 +505,9 @@ struct S_e07c50
     int unk24;
     int m_uiItemCount;
     void FUN_00e06b20(S_e07c50_Item* item);
-    void FUN_00e06e00(S_e07c50_Item* item, int b, int c);
-    void FUN_00e07550(S_e07c50_Item* item, int c);
-    int FUN_00e07c50(S_e07c50_Item* item, int b, int c);
+    void hkpMoppDefaultAssembler_addTerminals(S_e07c50_Item* item, int b, int c);
+    void hkpMoppDefaultAssembler_addCut(S_e07c50_Item* item, int c);
+    int hkpMoppDefaultAssembler_assembleCutAndTerminalCommand(S_e07c50_Item* item, int b, int c);
 };
 struct S_e07c50_Item
 {
@@ -539,13 +540,14 @@ struct S_e07c50_Item
     int m_kRayEnd;
 };
 // @fnv 0x00e07c50
-int S_e07c50::FUN_00e07c50(S_e07c50_Item* item, int b, int c)
+// pdb: hkpMoppDefaultAssembler::assembleCutAndTerminalCommand | hkpMoppDefaultAssembler.obj | fnv360_0822_retail, caller + bridge(call_gap_sim|call_gap) + skyrim(call_gap), high
+int S_e07c50::hkpMoppDefaultAssembler_assembleCutAndTerminalCommand(S_e07c50_Item* item, int b, int c)
 {
     FUN_00e06b20(item);
     m_uiItemCount++;
     int start = m_buf->m_iElementCount;
-    FUN_00e06e00(item, b, c);
-    FUN_00e07550(item, c);
+    hkpMoppDefaultAssembler_addTerminals(item, b, c);
+    hkpMoppDefaultAssembler_addCut(item, c);
     item->m_kRayEnd = m_buf->m_iElementCount;
     int r = m_buf->m_iElementCount - start;
     item->m_flag38 = 1;
@@ -625,11 +627,12 @@ struct FUN_00e06800_cls
     char* m_buf;
 
     void __thiscall Flush();
-    void __thiscall FUN_00e06800(char a, int v);
+    void __thiscall hkpMoppCodeGenerator_addCommand16(char a, int v);
 };
 
 // @fnv 0x00e06800
-void __thiscall FUN_00e06800_cls::FUN_00e06800(char acByte, int aiValue)
+// pdb: hkpMoppCodeGenerator::addCommand16 | hkpMoppDefaultAssembler.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_seq), high
+void __thiscall FUN_00e06800_cls::hkpMoppCodeGenerator_addCommand16(char acByte, int aiValue)
 {
     m_buf[m_cap - m_uiItemCount - 1] = (char)aiValue;
     m_uiItemCount++;
@@ -855,7 +858,7 @@ struct Stream
         }
     }
 
-    void FUN_00e06800(int a, int b);
+    void hkpMoppCodeGenerator_addCommand16(int a, int b);
 };
 
 struct FUN_00e06c40_class
@@ -871,7 +874,7 @@ int __thiscall FUN_00e06c40_class::FUN_00e06c40(int a1, int a2)
 {
     m_stream->AppendChar((char)a2);
     m_stream->AppendChar((char)(a2 >> 8));
-    m_stream->FUN_00e06800(0xd, a1);
+    m_stream->hkpMoppCodeGenerator_addCommand16(0xd, a1);
     return 5;
 }
 
@@ -970,7 +973,7 @@ struct S_00e06e00_Buf
     int unkC;
     int unk10;
     void PutBytePair(int tag, unsigned int v);
-    void FUN_00e06800(int tag, unsigned int v);
+    void hkpMoppCodeGenerator_addCommand16(int tag, unsigned int v);
     void FUN_00e06880(int tag, unsigned int v);
     void FUN_00e069a0(int tag, unsigned int v);
 };
@@ -1040,12 +1043,13 @@ struct S_00e06e00_Cls
     int unk8;
     int unkC;
     S_00e06e00_Buf* unk10;
-    int FUN_00e06e00(S_00e06e00_A0* a, S_00e06e00_A1* b, S_00e06e00_A2* c);
+    int hkpMoppDefaultAssembler_addTerminals(S_00e06e00_A0* a, S_00e06e00_A1* b, S_00e06e00_A2* c);
     void WriteOp(int idx, S_00e06e00_Item* item);
 };
 
 // @fnv 0x00e06e00
-int S_00e06e00_Cls::FUN_00e06e00(S_00e06e00_A0* a, S_00e06e00_A1* b, S_00e06e00_A2* c)
+// pdb: hkpMoppDefaultAssembler::addTerminals | hkpMoppDefaultAssembler.obj | fnv360_0822_retail, call_gap_sim + bridge(call_seq|objrun) + skyrim(call_seq), high
+int S_00e06e00_Cls::hkpMoppDefaultAssembler_addTerminals(S_00e06e00_A0* a, S_00e06e00_A1* b, S_00e06e00_A2* c)
 {
     int start = unk10->unkC;
     unsigned int v = *a->unk60 - c->unk34;
@@ -1065,7 +1069,7 @@ int S_00e06e00_Cls::FUN_00e06e00(S_00e06e00_A0* a, S_00e06e00_A1* b, S_00e06e00_
     }
     else if (v < 0x10000)
     {
-        buf->FUN_00e06800(0x51, v);
+        buf->hkpMoppCodeGenerator_addCommand16(0x51, v);
     }
     else if (v < (unsigned int)&DAT_01000000)
     {
@@ -1249,11 +1253,12 @@ struct S_00e07680
     int unkc;
     S_00e07680_Writer* w;
     void WriteOffsetDelta(int);
-    void FUN_00e07680(int a1, int a2, int a3, int a4, int a5);
+    void hkpMoppDefaultAssembler_addSplit(int a1, int a2, int a3, int a4, int a5);
 };
 
 // @fnv 0x00e07680
-void S_00e07680::FUN_00e07680(int a1, int a2, int a3, int a4, int a5)
+// pdb: hkpMoppDefaultAssembler::addSplit | hkpMoppDefaultAssembler.obj | fnv360_0822_retail, call_gap + bridge(call_seq|call_gap) + skyrim(call_seq), high
+void S_00e07680::hkpMoppDefaultAssembler_addSplit(int a1, int a2, int a3, int a4, int a5)
 {
     int e = w->m_pos;
     int d = e - a5;
@@ -1336,11 +1341,11 @@ struct Handler
     Entry* unk10;
     void __thiscall FUN_00e06b20(Entry*);
     int __thiscall ClassifyVec3Region(int);
-    void __thiscall FUN_00e07880(Entry*, Entry*, Entry**, Entry**);
-    void __thiscall FUN_00e07680(Entry*, Entry*, int, int, int);
+    void __thiscall hkpMoppDefaultAssembler_findPlanes(Entry*, Entry*, Entry**, Entry**);
+    void __thiscall hkpMoppDefaultAssembler_addSplit(Entry*, Entry*, int, int, int);
     void __thiscall WriteSize(int);
     void __thiscall FUN_00e06db0(Entry*, Entry*, Entry*);
-    void __thiscall FUN_00e07550(Entry*, Entry*);
+    void __thiscall hkpMoppDefaultAssembler_addCut(Entry*, Entry*);
     void __thiscall WritePacket(char*);
     int __thiscall FUN_00e07ca0(Entry*, Entry*, Entry*, char*);
 };
@@ -1352,13 +1357,13 @@ int __thiscall Handler::FUN_00e07ca0(Entry* first, Entry* second, Entry* third, 
     int previous = unk10->unk0c;
     int value = ClassifyVec3Region(originalFirst->unk60);
     Entry* originalThird = third;
-    FUN_00e07880(originalFirst, originalThird, &first, &third);
-    FUN_00e07680(third, first, value, originalFirst->unk70->unk5c, originalFirst->unk74->unk5c);
+    hkpMoppDefaultAssembler_findPlanes(originalFirst, originalThird, &first, &third);
+    hkpMoppDefaultAssembler_addSplit(third, first, value, originalFirst->unk70->unk5c, originalFirst->unk74->unk5c);
     int difference = originalThird->unk34 - second->unk34;
     if (difference != 0)
         WriteSize(difference);
     FUN_00e06db0(originalFirst, second, originalThird);
-    FUN_00e07550(originalFirst, originalThird);
+    hkpMoppDefaultAssembler_addCut(originalFirst, originalThird);
     if (*flag)
         WritePacket(flag);
     originalFirst->unk5c = unk10->unk0c;
@@ -1366,7 +1371,7 @@ int __thiscall Handler::FUN_00e07ca0(Entry* first, Entry* second, Entry* third, 
     return unk10->unk0c - previous;
 }
 
-extern int __cdecl FUN_00cbfef0(float f);
+extern int __cdecl hkMath_hkFloatToInt(float f);
 
 struct S_00e07da0_Bounds
 {
@@ -1476,7 +1481,7 @@ struct S_00e07da0_Tree
     void ComputeNodeBounds(S_00e07da0_Node* node, S_00e07da0_Region* region);
     void FUN_00e07070(S_00e07da0_Region* parent, S_00e07da0_Region* region, S_00e07da0_Result* out);
     int ClassifyVec3Region(void* p);
-    void FUN_00e07880(S_00e07da0_Node* node, S_00e07da0_Region* region, int* lo, int* hi);
+    void hkpMoppDefaultAssembler_findPlanes(S_00e07da0_Node* node, S_00e07da0_Region* region, int* lo, int* hi);
 };
 
 // Recursively builds a region for node from parent and region, merging child bounds and states into node->info.
@@ -1588,7 +1593,7 @@ struct Tree
     void EdgeRange(Node* node, Region* region, int* lo, int* hi);
 };
 }
-extern int __cdecl FUN_00cbfef0(float);
+extern int __cdecl hkMath_hkFloatToInt(float);
 
 void S_00e07da0_Tree::BuildRegion(S_00e07da0_Node* pNode, S_00e07da0_Region* pParent, S_00e07da0_Region* pRegion)
 {
@@ -1627,7 +1632,7 @@ void S_00e07da0_Tree::BuildRegion(S_00e07da0_Node* pNode, S_00e07da0_Region* pPa
     {
         float sc = self->unk3C;
         float* ps = &sc;
-        FUN_00cbfef0(self->unk44 * *ps);
+        hkMath_hkFloatToInt(self->unk44 * *ps);
         info->mins[k] = 0;
         info->maxs[k] = 0x7fffffff;
     }
@@ -1934,7 +1939,7 @@ void FUN_00e06ed0_Class::WriteOffsetDelta(int iTargetValue)
         if (iOffset < 0xff)
             m_pStreamWriter->PutBytePair(5, iOffset);
         else if (iOffset < 0xffff)
-            m_pStreamWriter->FUN_00e06800(6, iOffset);
+            m_pStreamWriter->hkpMoppCodeGenerator_addCommand16(6, iOffset);
         else if (iOffset < 0xffffff)
             m_pStreamWriter->FUN_00e06880(7, iOffset);
         else
@@ -1942,7 +1947,7 @@ void FUN_00e06ed0_Class::WriteOffsetDelta(int iTargetValue)
     }
 }
 
-extern int __cdecl FUN_00cbfef0(float f);
+extern int __cdecl hkMath_hkFloatToInt(float f);
 
 struct Node07400
 {
@@ -2016,7 +2021,7 @@ void Tree07400::ComputeNodeBounds(Node07400* node, Region07400* region)
         if (fExtent < fMaxCount)
             fCount = Min07400(fCount, fMaxCount);
         float fScale = *(float*)((char*)this + 0x3c);
-        int iMargin = FUN_00cbfef0(fScale * fCount);
+        int iMargin = hkMath_hkFloatToInt(fScale * fCount);
         int iHi = region->ranges[i].hi;
         pNode->mins[i] = region->ranges[i].lo - iMargin;
         pNode->maxs[i] = iHi + iMargin + 1;
@@ -2075,11 +2080,12 @@ struct FUN_00e07550_cls
     int unk08;
     int unk0c;
     BufWriter* m_10;
-    void __thiscall FUN_00e07550(Arg1Flags* a1, Arg2Layout* a2);
+    void __thiscall hkpMoppDefaultAssembler_addCut(Arg1Flags* a1, Arg2Layout* a2);
 };
 
 // @fnv 0x00e07550
-void FUN_00e07550_cls::FUN_00e07550(Arg1Flags* apFlags, Arg2Layout* apLayout)
+// pdb: hkpMoppDefaultAssembler::addCut | hkpMoppDefaultAssembler.obj | fnv360_0822_retail, call_gap_sim + bridge(call_seq|call_gap_sim) + skyrim(call_seq), high
+void FUN_00e07550_cls::hkpMoppDefaultAssembler_addCut(Arg1Flags* apFlags, Arg2Layout* apLayout)
 {
     int i = 0;
     int* pHighValue = &apLayout->m_0c[0].m_ucHighNibble;
@@ -2379,7 +2385,8 @@ static __forceinline void SetVecF3(FUN_00e07b90_vector* v, float x, float y, flo
     v->z = z;
     v->w = w;
 }
-void __stdcall FUN_00e07b90(const FUN_00e07b90_bounds* bounds, FUN_00e07b90_vector* result)
+// pdb: hkpMoppDefaultAssembler::getScaleInfo | hkpMoppDefaultAssembler.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void __stdcall hkpMoppDefaultAssembler_getScaleInfo(const FUN_00e07b90_bounds* bounds, FUN_00e07b90_vector* result)
 {
     SetVecF3(result, bounds->minimumX, bounds->minimumY, bounds->minimumZ, 0.0f);
     float fLargestExtent = 0.0f;
@@ -2605,7 +2612,7 @@ struct BvRange
     int unk10;
 };
 
-void __stdcall FUN_00e07c50(struct BvNode* node, FUN_00e095d0_cls* parent, FUN_00e095d0_cls* stack);
+void __stdcall hkpMoppDefaultAssembler_assembleCutAndTerminalCommand(struct BvNode* node, FUN_00e095d0_cls* parent, FUN_00e095d0_cls* stack);
 void* __cdecl FUN_00cb1260(void*, const void*, int);
 static void FUN_00e08320(BvArray<BvFixup>* destination, BvArray<BvFixup>* source, int adjustment)
 {
@@ -2706,7 +2713,7 @@ void BvBuilder::FUN_00e08a60(BvNode* node, FUN_00e095d0_cls* parent, FUN_00e095d
 
     if (node->m_isLeaf)
     {
-        FUN_00e07c50(node, parent, stack);
+        hkpMoppDefaultAssembler_assembleCutAndTerminalCommand(node, parent, stack);
         const int& index = node->m_info->m_uiEdgeIndex;
         refs->AddBack(*FUN_00c85750(), index);
         return;
@@ -2869,7 +2876,7 @@ struct P154Tree
     P154Settings* settings;
     int unk18, unk1c, unk20, unk24, unk28, unk2c;
     int scale30, scale34, scale38;
-    void FUN_00e07c50(P154Node*, P154Region*, P154Region*);
+    void hkpMoppDefaultAssembler_assembleCutAndTerminalCommand(P154Node*, P154Region*, P154Region*);
     void FUN_00e07510(P154Node*, P154Region*, P154Region*, P154Result*);
     void FUN_00e07ca0(P154Node*, P154Region*, P154Region*, P154Result*);
     __forceinline int getCost(P154Array& a, int size)
@@ -3195,7 +3202,7 @@ struct Tree : public FUN_00e09640_class
     virtual void vf08() throw();
     virtual void vf0c() throw();
     virtual void vf10() throw();
-    virtual void FUN_00e08cc0(S_00e07da0_Node* node, int arg2, int arg3);
+    virtual void hkpMoppDefaultAssembler_assemble(S_00e07da0_Node* node, int arg2, int arg3);
     virtual void vf18(S_00e07da0_Node* node, void* p) throw();
 
     int unk08;
@@ -3240,7 +3247,7 @@ typedef void(__thiscall* Vf18Fn)(Tree*, S_00e07da0_Node*, void*) throw();
 // Sets up MyBounds and MyRegion state for node, then writes node data into streams via m_pAssemblerHelper if present, else calls OptimizeTree.
 // @f3 0x00a88610 (community match, verified in this file)
 // Game function 00a88610 = hkpMoppDefaultAssembler::assemble (Havok 5.5.0, hkpInternal.lib, hkpMoppDefaultAssembler.obj),
-// defined under the unit's stand-in symbol Tree::FUN_00e08cc0, with the file-static function it calls,
+// defined under the unit's stand-in symbol Tree::hkpMoppDefaultAssembler_assemble, with the file-static function it calls,
 // copyCodeAndEmbedTerminals (FUN_00a882d0). The call at +0x3d7 passes that function's second parameter in esi:
 // a static function whose callers are all in its file gets its own register convention, so its body is here.
 //
@@ -3251,7 +3258,7 @@ typedef void(__thiscall* Vf18Fn)(Tree*, S_00e07da0_Node*, void*) throw();
 // Callees are named by game address (the SDK name is in the comment beside each).
 // The unit is compiled with /EHsc, the library was not, so the callees declared here carry throw(). The match
 // needs it on seven of them: the code generator's constructor and destructor, FUN_00a87db0, FUN_00a87cd0,
-// FUN_00a883e0, FUN_00a863b0 and the static FUN_00a882d0 (each is called while a local with a destructor lives).
+// hkpMoppDefaultAssembler_assembleSubNodeIntoChunks, FUN_00a863b0 and the static FUN_00a882d0 (each is called while a local with a destructor lives).
 
 typedef float  hkReal;
 typedef signed char		hkInt8;
@@ -3907,7 +3914,7 @@ class hkpMoppDefaultAssembler : public hkpMoppAssembler
 
 		int FUN_00a87db0(hkpMoppTreeNode* node, const hkpMoppAssemblerNodeInfo& parentInfo, hkpMoppAssemblerNodeInfo& currentInfo, hkArray<unsigned int>& chunkPrims) throw();	// calcChunkPoints
 		int FUN_00a87cd0(hkpMoppTreeNode* node, int chunkId, int idx) throw();	// calcTerminalIdsForChunks
-		void FUN_00a883e0(hkpMoppTreeNode* node, const hkpMoppAssemblerNodeInfo& parentInfo, hkpMoppAssemblerNodeInfo& currentInfo, int chunkId, hkArray<unsigned int>& terminals) throw();	// assembleSubNodeIntoChunks
+		void hkpMoppDefaultAssembler_assembleSubNodeIntoChunks(hkpMoppTreeNode* node, const hkpMoppAssemblerNodeInfo& parentInfo, hkpMoppAssemblerNodeInfo& currentInfo, int chunkId, hkArray<unsigned int>& terminals) throw();	// assembleSubNodeIntoChunks
 
 	protected:
 		friend struct Tree;	// the unit's stand-in class, under whose symbol assemble() is defined below
@@ -3969,7 +3976,8 @@ static int FUN_00a882d0(hkpMoppCompilerChunkInfo* chunkInfo, hkpMoppCodeGenerato
 
 // ---- hkpMoppDefaultAssembler::assemble(rootNode, mgr, minAssembledElems) ----
 
-void Tree::FUN_00e08cc0(S_00e07da0_Node* node, int arg2, int arg3)
+// pdb: hkpMoppDefaultAssembler::assemble | hkpMoppDefaultAssembler.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void Tree::hkpMoppDefaultAssembler_assemble(S_00e07da0_Node* node, int arg2, int arg3)
 {
 	hkpMoppDefaultAssembler* const self = reinterpret_cast<hkpMoppDefaultAssembler*>(this);
 	hkpMoppTreeNode* const rootNode = reinterpret_cast<hkpMoppTreeNode*>(node);
@@ -4040,7 +4048,7 @@ void Tree::FUN_00e08cc0(S_00e07da0_Node* node, int arg2, int arg3)
 			hkArray<unsigned int> rootTerminals;
 			hkpMoppCodeGenerator rootChunkCode( 0x100000 );
 			self->m_code = &rootChunkCode;
-			self->FUN_00a883e0( rootNode, parentInfo, currentInfo, rootNode->m_assemblerData.m_chunkId, rootTerminals );
+			self->hkpMoppDefaultAssembler_assembleSubNodeIntoChunks( rootNode, parentInfo, currentInfo, rootNode->m_assemblerData.m_chunkId, rootTerminals );
 
 			if ( self->m_chunkInfo->m_compressor )
 			{

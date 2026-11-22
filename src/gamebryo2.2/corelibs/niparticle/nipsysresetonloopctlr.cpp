@@ -127,17 +127,17 @@ struct FUN_00c28490_shell
     char* unk2c;
     int unk30;
     float unk34;
-    char FUN_00a36250(float value);
+    char NiTimeController_DontDoUpdate(float value);
     void FUN_00c28490(float* p);
 };
-// Clears two flags, and if unk2c is set and FUN_00a36250(*p) returns 0, resets unk34 to unk28 and sets unk2c[0xd8] when unk34 exceeds unk28.
+// Clears two flags, and if unk2c is set and NiTimeController_DontDoUpdate(*p) returns 0, resets unk34 to unk28 and sets unk2c[0xd8] when unk34 exceeds unk28.
 // @fnv 0x00c28490
 void FUN_00c28490_shell::FUN_00c28490(float* pfValue)
 {
     flags &= 0xfff9;
     if (unk2c != 0)
     {
-        if (FUN_00a36250(*pfValue) == 0)
+        if (NiTimeController_DontDoUpdate(*pfValue) == 0)
         {
             if ((double)unk34 == _DAT_010241b0)
                 unk34 = unk28;

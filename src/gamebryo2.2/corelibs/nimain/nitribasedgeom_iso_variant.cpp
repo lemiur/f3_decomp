@@ -8,7 +8,8 @@ class GlobalObjectO2_00a7b610;
 extern GlobalObjectO2_00a7b610 g_011f4a48;
 
 // @fnv 0x00a74790
-const GlobalObjectO2_00a7b610* FUN_00a74790()
+// pdb: NiDynamicEffect::GetRTTI | NiDynamicEffect.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+const GlobalObjectO2_00a7b610* NiDynamicEffect_GetRTTI()
 {
     return &g_011f4a48;
 }

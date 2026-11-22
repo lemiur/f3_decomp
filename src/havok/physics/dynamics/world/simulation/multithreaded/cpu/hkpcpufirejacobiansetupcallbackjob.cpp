@@ -348,7 +348,7 @@ struct JobQueueReply_v1 {
     void Reply(int a, S_00d94c40_Job* b, S_00d94c40_Job* c, int d, int e);
 };
 extern DWORD DAT_010f3170;
-extern void __cdecl FUN_00a26440(S_00d94c40_Data* data, S_00d94c40_Input* input, S_00d94c40_Node* node);
+extern void __cdecl hkSimpleContactConstraintData_fireCallbacks(S_00d94c40_Data* data, S_00d94c40_Input* input, S_00d94c40_Node* node);
 extern void __cdecl FUN_00e0811c();
 
 void __cdecl ExecuteConstraintCallbacks(S_00d94c40_Context* context, S_00d94c40_JobQueue* jobQueue, S_00d94c40_Job* job)
@@ -375,7 +375,7 @@ void __cdecl ExecuteConstraintCallbacks(S_00d94c40_Context* context, S_00d94c40_
                 {
                     node = node->m_next;
                 }
-                FUN_00a26440(data, input, node);
+                hkSimpleContactConstraintData_fireCallbacks(data, input, node);
             }
             if (pConstraint->m_callbackFlags & 4)
             {

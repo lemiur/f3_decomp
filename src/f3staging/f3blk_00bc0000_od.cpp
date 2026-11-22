@@ -63,7 +63,7 @@ extern long (__stdcall *DAT_00d9b068)(long*);
 
 extern long (__stdcall *DAT_00d9b064)(long*);
 
-void* __cdecl FUN_00bce940(void*);
+void* __cdecl ArchiveManager_TrimFileName(void*);
 
 void __cdecl FUN_00bccca0(void*, PathKey*, PathKey*);
 
@@ -113,7 +113,7 @@ bool __cdecl FUN_00bcb0e0(void* request)
 
         PathKey entryKey;
 
-        void* path = FUN_00bce940(request);
+        void* path = ArchiveManager_TrimFileName(request);
 
         FUN_00bccca0(path, &groupKey, &entryKey);
 

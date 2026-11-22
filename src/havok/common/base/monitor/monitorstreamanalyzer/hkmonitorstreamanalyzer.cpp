@@ -165,7 +165,7 @@ void __cdecl FUN_00e0c700(Node* node, int index, float factor)
         FUN_00e0c700(node->children[i], index, factor);
 }
 
-extern "C" int __cdecl FUN_00cb10d0(const char* str);
+extern "C" int __cdecl hkString_strLen(const char* str);
 
 struct E0C860Node;
 
@@ -211,7 +211,7 @@ struct E0C860Node
 // @fnv 0x00e0c860
 int __cdecl GetTreeWidth(E0C860Node* node, int depth, int indent, bool onlyExpanded)
 {
-    int width = FUN_00cb10d0(node->m_name) + depth * indent + 8;
+    int width = hkString_strLen(node->m_name) + depth * indent + 8;
     if (!onlyExpanded || (node->m_flags & 1))
     {
         for (int i = 0; i < node->m_children.GetLogicalSize(); i++)

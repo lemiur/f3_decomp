@@ -43,7 +43,7 @@ extern GO_009d7850 O_0116a934;
 struct C_009d7850
 {
     void* m_vft;
-    void FUN_00a4a9b0(int);
+    void hkPackfileWriter_addSection(int);
     void FUN_00a4a9f0(GO_009d7850*, int);
     C_009d7850();
 };
@@ -51,7 +51,7 @@ __declspec(noinline) C_009d7850::C_009d7850()
 {
     FUN_00a4aa20();
     m_vft = &DAT_00e80090;
-    FUN_00a4a9b0(DAT_01062b58);
+    hkPackfileWriter_addSection(DAT_01062b58);
     FUN_00a4a9f0(&O_0116a994, DAT_01065194);
     FUN_00a4a9f0(&O_011693b0, DAT_01065194);
     FUN_00a4a9f0(&O_0116a964, DAT_01065194);
@@ -76,9 +76,10 @@ struct S_009e2f60
     char pad[0x20];
     char a[0x10];
     char b[0x10];
-    void FUN_009e2f60(int a1, float f, int c);
+    void hkpPlaneShape_getAabbImpl(int a1, float f, int c);
 };
-void S_009e2f60::FUN_009e2f60(int a1, float f, int c)
+// pdb: hkpPlaneShape::getAabbImpl | hkpPlaneShape.obj | fnv360_0822_retail, objrun + bridge(hash|vtable) + skyrim(objrun), high
+void S_009e2f60::hkpPlaneShape_getAabbImpl(int a1, float f, int c)
 {
     FUN_009a7a80(a1, b, a, f, c);
 }
@@ -153,8 +154,9 @@ void FUN_00a07700(void** p)
 
 struct T_009227d0 { int __thiscall FUN_009227d0(int, int); };
 
-struct S_00a4df50 { int pad; int __thiscall FUN_00a4df50(int); };
-int S_00a4df50::FUN_00a4df50(int a)
+struct S_00a4df50 { int pad; int __thiscall hkEntitySelectorListed_isEntityOk(int); };
+// pdb: `anonymous namespace'::hkEntitySelectorListed::isEntityOk | hkpSaveContactPointsUtil.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+int S_00a4df50::hkEntitySelectorListed_isEntityOk(int a)
 {
     return ((T_009227d0*)((char*)this + 4))->FUN_009227d0(a, 0);
 }
@@ -247,7 +249,8 @@ void C_00aaf700::FUN_00aaf700(int a)
 
 struct O_00ac5340 { void FUN_00ac5340(int); };
 
-void __stdcall FUN_00ab5ef0(O_00ac5340* o, int v)
+// pdb: BSPSysStripUpdateModifier::Initialize | BSPSysStripUpdateModifier.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(objrun_prop), high
+void __stdcall BSPSysStripUpdateModifier_Initialize(O_00ac5340* o, int v)
 {
     o->FUN_00ac5340(v);
 }
@@ -258,8 +261,8 @@ void __stdcall FUN_00ab5ef0(O_00ac5340* o, int v)
 
 void __fastcall FUN_00863b50(void*);
 void __cdecl FUN_0089ec10(void*, unsigned int);
-struct C_00ab7c70 { virtual ~C_00ab7c70(); char p[20 - 4]; static void operator delete(void* q, unsigned int s) { FUN_0089ec10(q, s); } };
-C_00ab7c70::~C_00ab7c70() { FUN_00863b50(this); }
+struct BSWArray { virtual ~BSWArray(); char p[20 - 4]; static void operator delete(void* q, unsigned int s) { FUN_0089ec10(q, s); } }; // src: F3_EXE vtable 0x00e8b7a4 (old: C_00ab7c70)
+BSWArray::~BSWArray() { FUN_00863b50(this); }
 
 // ---- family f346
 
@@ -405,8 +408,9 @@ void S_00afc6f0::FUN_00afc6f0(int x, char y)
 
 struct A_00afd030 { char p[0xbc]; int f; };
 struct B_00afd030 { char p[0x20]; unsigned f; };
-struct C_00afd030 { char p[0x6c]; int f6c, f70, f74, f78; int FUN_00afd030_(A_00afd030* a, B_00afd030* b); };
-int C_00afd030::FUN_00afd030_(A_00afd030* a, B_00afd030* b)
+struct C_00afd030 { char p[0x6c]; int f6c, f70, f74, f78; int ShadowLightShader_GetShaderDecl(A_00afd030* a, B_00afd030* b); };
+// pdb: ShadowLightShader::GetShaderDecl | ShadowLightShader.obj | fnv360_0721_beta, objrun + bridge(hash|objrun), high
+int C_00afd030::ShadowLightShader_GetShaderDecl(A_00afd030* a, B_00afd030* b)
 {
     if (a->f) return f70;
     if (b && (b->f & 0x1000) > 0) return f74;

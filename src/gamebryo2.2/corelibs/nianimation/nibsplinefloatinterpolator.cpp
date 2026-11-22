@@ -47,7 +47,7 @@ void __fastcall SetHandleIfFirstIndex(CPX* self, int, unsigned int h, unsigned s
 
 struct IsEqX
 {
-    bool FUN_00a57e90(void*);
+    bool NiBSplineInterpolator_IsEqual(void*);
 };
 struct FInterpX
 {
@@ -55,11 +55,11 @@ struct FInterpX
     float f1c;
     unsigned int h;
 };
-// Returns true when FUN_00a57e90 matches other and both f1c and h are equal; otherwise false.
+// Returns true when NiBSplineInterpolator_IsEqual matches other and both f1c and h are equal; otherwise false.
 // @fnv 0x00a50b30
 bool __fastcall IsInterpEqual(FInterpX* self, int, FInterpX* other)
 {
-    if (!reinterpret_cast<IsEqX*>(self)->FUN_00a57e90(other))
+    if (!reinterpret_cast<IsEqX*>(self)->NiBSplineInterpolator_IsEqual(other))
         return false;
     if (self->f1c != other->f1c)
         return false;
@@ -86,7 +86,7 @@ struct FUN_00a57f20_shell
 };
 struct FUN_00a50110_obj
 {
-    void FUN_00a57fd0(FUN_00a50110_obj*, CloningProcess&);
+    void NiBSplineInterpolator_CopyMembers(FUN_00a50110_obj*, CloningProcess&);
 };
 struct BSFadeNode
 {
@@ -115,7 +115,7 @@ FUN_00a50c20Cls* FUN_00a50c20Cls::Clone(CloningProcess& kCloning)
     {
         pkObject = 0;
     }
-    ((FUN_00a50110_obj*)this)->FUN_00a57fd0((FUN_00a50110_obj*)pkObject, kCloning);
+    ((FUN_00a50110_obj*)this)->NiBSplineInterpolator_CopyMembers((FUN_00a50110_obj*)pkObject, kCloning);
     pkObject->m_fFloatValue = m_fFloatValue;
     pkObject->m_kFloatCPHandle = m_kFloatCPHandle;
     return pkObject;

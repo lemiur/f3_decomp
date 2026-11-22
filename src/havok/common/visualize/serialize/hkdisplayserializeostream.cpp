@@ -309,7 +309,7 @@ struct Shape
 };
 struct DDA8C0Writer
 {
-    void FUN_00d605b0(int v);
+    void hkOArchive_write8(int v);
     void WriteTransform(const void* p);
     void FUN_00dda730(const void* p);
     void HashUInt(float f);
@@ -328,7 +328,7 @@ void DDA8C0Writer::WriteShape(Shape* p)
     Vec4A b4;
     Vec4A b5;
     int tag = p->tag;
-    FUN_00d605b0(tag);
+    hkOArchive_write8(tag);
     switch (tag) {
     case 6:
         WriteTransform(&p->unk10);

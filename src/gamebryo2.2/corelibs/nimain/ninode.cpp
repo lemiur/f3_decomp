@@ -336,11 +336,12 @@ struct BSBlastNode : public BSRangeNode
 typedef char _sizecheck_BSBlastNode[sizeof(BSBlastNode) == 224 ? 1 : -1];
 struct FUN_00a5dbe0_shell : public NiNode
 {
-    void FUN_00a5dbe0(NiCullingProcess*);
+    void NiNode_OnVisible(NiCullingProcess*);
 };
 
 // @fnv 0x00a5dbe0
-void FUN_00a5dbe0_shell::FUN_00a5dbe0(NiCullingProcess* kCuller)
+// pdb: NiNode::OnVisible | NiNode.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(call_seq), high
+void FUN_00a5dbe0_shell::NiNode_OnVisible(NiCullingProcess* kCuller)
 {
     if (m_kWorldBound && m_kWorldBound->m_fRadius != 0.0f)
     {
@@ -490,13 +491,14 @@ bool __fastcall HasNodeWithNonZeroValue(NiAVObject* pThis);
 
 struct FUN_00a5e3a0_Helper
 {
-    void FUN_00a5e3a0(NiPropertyState*& pkState);
+    void NiNode_UpdatePropertiesUpward(NiPropertyState*& pkState);
     void* FUN_00aa3e40(unsigned int uiSize);
     NiPropertyState* FUN_00a89ab0();
 };
 
 // @fnv 0x00a5e3a0
-void __fastcall FUN_00a5e3a0(NiAVObject* pThis, int, NiPropertyState*& pkState)
+// pdb: NiNode::UpdatePropertiesUpward | NiNode.obj | fnv360_0822_debug, call_seq + bridge(call_gap|call_gap), high
+void __fastcall NiNode_UpdatePropertiesUpward(NiAVObject* pThis, int, NiPropertyState*& pkState)
 {
     NiPropertyState* pkParentState = 0;
 
@@ -508,7 +510,7 @@ void __fastcall FUN_00a5e3a0(NiAVObject* pThis, int, NiPropertyState*& pkState)
     FUN_00a5e3a0_Helper* pkParent = (FUN_00a5e3a0_Helper*)pThis->m_pkParent;
     if (pkParent)
     {
-        pkParent->FUN_00a5e3a0(pkParentState);
+        pkParent->NiNode_UpdatePropertiesUpward(pkParentState);
     }
     else
     {
@@ -730,7 +732,8 @@ struct BaseStub
 
 // Calls FUN_00a59e50 on the node, then calls PurgeRendererData on each non-null child in the node's child array.
 // @fnv 0x00a5dc30
-void __fastcall FUN_00a5dc30(NiNode* node, int, NiRenderer* pkRenderer)
+// pdb: NiNode::PurgeRendererData | NiNode.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(objrun_sim), high
+void __fastcall NiNode_PurgeRendererData(NiNode* node, int, NiRenderer* pkRenderer)
 {
     ((BaseStub*)node)->FUN_00a59e50(pkRenderer);
     for (unsigned int i = 0; i < node->m_kChildren.GetSize(); i++)
@@ -742,7 +745,8 @@ void __fastcall FUN_00a5dc30(NiNode* node, int, NiRenderer* pkRenderer)
 }
 
 // @fnv 0x00a5e1f0
-void __fastcall FUN_00a5e1f0(NiNode* node, int, NiUpdateData& kData, unsigned int uFlags)
+// pdb: NiNode::UpdateRigidDownwardPass | NiNode.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(objrun_prop), high
+void __fastcall NiNode_UpdateRigidDownwardPass(NiNode* node, int, NiUpdateData& kData, unsigned int uFlags)
 {
     unsigned int nodeFlags = node->m_uFlags;
     bool bOldUpdateControllers = kData.updateControllers;
@@ -1210,11 +1214,12 @@ struct ChildNode
     int unk94;
     int unk98;
     ChildArray m_kChildren;  // src: FNV360_PDB +0x9C (old: m_kChildList)
-    void FUN_00a5ee30(unsigned int i, ChildObj* pkChild, ChildObj*& spOld);
+    void NiNode_SetAt(unsigned int i, ChildObj* pkChild, ChildObj*& spOld);
 };
 
 // @fnv 0x00a5ee30
-void ChildNode::FUN_00a5ee30(unsigned int i, ChildObj* pkChild, ChildObj*& spOld)
+// pdb: NiNode::SetAt | NiNode.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(caller_sim), high
+void ChildNode::NiNode_SetAt(unsigned int i, ChildObj* pkChild, ChildObj*& spOld)
 {
     if (m_kChildren.m_usSize <= i)
     {
@@ -1457,11 +1462,12 @@ class FUN_00a5edc0_cls
     FUN_00a5edc0_sub m_sub;
 
     void SetParent(void* owner);
-    void FUN_00a5edc0(NiRefObject* a1, NiRefObject* a2);
+    void NiNode_InsertChildAt(NiRefObject* a1, NiRefObject* a2);
 };
 
 // @fnv 0x00a5edc0
-void FUN_00a5edc0_cls::FUN_00a5edc0(NiRefObject* apArg, NiRefObject* apRefObject)
+// pdb: NiNode::InsertChildAt | NiNode.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(caller_sim), high
+void FUN_00a5edc0_cls::NiNode_InsertChildAt(NiRefObject* apArg, NiRefObject* apRefObject)
 {
     if (apRefObject)
     {
@@ -1775,13 +1781,13 @@ struct NiEqAVObject
 };
 struct NiNodeEq : NiNode
 {
-    bool FUN_00a5a260(NiAVObject* pkObject);
+    bool NiAVObject_IsEqual(NiAVObject* pkObject);
     bool FUN_00a5e600(NiAVObject* pkObject);
 };
 // @fnv 0x00a5e600
 bool NiNodeEq::FUN_00a5e600(NiAVObject* pkObject)
 {
-    if (!FUN_00a5a260(pkObject))
+    if (!NiAVObject_IsEqual(pkObject))
         return false;
 
     NiNodeEq* pkNode = (NiNodeEq*)pkObject;
@@ -1934,9 +1940,9 @@ struct SUNode
     unsigned int m_uFlags;  // src: FNV360_PDB +0x30 (old: m_uiObjectFlags)
     char unk34[0x68];
     SUArray m_kChildren;  // src: FNV360_PDB +0x9C
-    bool FUN_00a5a0e0();
+    bool NiAVObject_HasTransformController();
     bool HasNodeWithNonZeroValue();
-    void FUN_00a5e440(bool& bSelectiveUpdate, bool bSelectiveUpdateTransforms, bool& bRigid);
+    void NiNode_SetSelectiveUpdateFlags(bool& bSelectiveUpdate, bool bSelectiveUpdateTransforms, bool& bRigid);
     bool GetSelectiveUpdateTransformsOverride() const
     {
         return (m_uFlags >> 7) & 1;
@@ -1974,9 +1980,10 @@ struct SUNode
 
 // Computes selective update flags from this node and child results, then stores them in this node's flag word.
 // @fnv 0x00a5e440
-void SUNode::FUN_00a5e440(bool& bSelectiveUpdate, bool bSelectiveUpdateTransforms, bool& bRigid)
+// pdb: NiNode::SetSelectiveUpdateFlags | NiNode.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(objrun_open), high
+void SUNode::NiNode_SetSelectiveUpdateFlags(bool& bSelectiveUpdate, bool bSelectiveUpdateTransforms, bool& bRigid)
 {
-    bool bTransformControllers = FUN_00a5a0e0();
+    bool bTransformControllers = NiAVObject_HasTransformController();
     if (!bSelectiveUpdateTransforms)
         bSelectiveUpdateTransforms = bTransformControllers || GetSelectiveUpdateTransformsOverride();
     bSelectiveUpdate = bSelectiveUpdateTransforms;
@@ -2334,7 +2341,7 @@ struct Stream
     int unk0d4;
     unsigned int m_uiFileVersion;
 
-    unsigned int FUN_00a63460();
+    unsigned int NiStream_GetNumberOfLinkIDs();
     Object* FUN_00a63430();
 };
 
@@ -2459,7 +2466,7 @@ class Node
 void Node::ReadChildListFromStream(Stream* pkStream)
 {
     ReadFromStream(pkStream);
-    unsigned int ItemUpdateArray = pkStream->FUN_00a63460();
+    unsigned int ItemUpdateArray = pkStream->NiStream_GetNumberOfLinkIDs();
     if (ItemUpdateArray)
     {
         m_kChildren.FUN_0060bef0(ItemUpdateArray);
@@ -2469,7 +2476,7 @@ void Node::ReadChildListFromStream(Stream* pkStream)
             SetAt(i, pkChild);
         }
     }
-    unsigned int uiEffects = pkStream->FUN_00a63460();
+    unsigned int uiEffects = pkStream->NiStream_GetNumberOfLinkIDs();
     if (pkStream->m_uiFileVersion < 0x4010008)
     {
         while (uiEffects--)

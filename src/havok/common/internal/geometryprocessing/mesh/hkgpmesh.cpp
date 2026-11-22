@@ -872,11 +872,12 @@ struct hkgpMesh_IConvexOverlap {
     int unkE0;
     hkgpConvexHull* pConvexHull;    // 0xe4  the hull this overlap belongs to
 
-    hkgpConvexHull* FUN_00e114a0();
+    hkgpConvexHull* hkpRagdollConstraintData_getPlaneMotor();
 };
 
 // @fnv 0x00e114a0
-hkgpConvexHull* hkgpMesh_IConvexOverlap::FUN_00e114a0()
+// pdb: hkpRagdollConstraintData::getPlaneMotor | hkpRagdollConstraintData.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_seq), high
+hkgpConvexHull* hkgpMesh_IConvexOverlap::hkpRagdollConstraintData_getPlaneMotor()
 {
     return pConvexHull;
 }
@@ -3069,7 +3070,7 @@ struct E142Hull {
 void __cdecl FUN_00de9650(const E142Vector4* in, E142Vector4* out);
 
 struct E142Obj {
-    E142Hull* FUN_00e114a0();
+    E142Hull* hkpRagdollConstraintData_getPlaneMotor();
     float FUN_00e14160(const E142Vector4& dir, float bound);
     float FUN_00e142d0(E142Vector4& out);
 };
@@ -3080,7 +3081,7 @@ static inline float E142ToReal(__m128 v) { float f; _mm_store_ss(&f, v); return 
 // @fnv 0x00e142d0
 float E142Obj::FUN_00e142d0(E142Vector4& out)
 {
-    E142Vec V = *FUN_00e114a0()->FUN_00d75600();
+    E142Vec V = *hkpRagdollConstraintData_getPlaneMotor()->FUN_00d75600();
     float lo[2];
     float hi[2];
     lo[0] = 0.0f;
@@ -4297,7 +4298,7 @@ __declspec(nothrow) bool __cdecl TriangleHasVertexAtPoint(const E12160Triangle* 
 
 struct Piece {
     virtual void destroy(unsigned int);
-    hkgpConvexHull* FUN_00e114a0();
+    hkgpConvexHull* hkpRagdollConstraintData_getPlaneMotor();
 };
 template<class T> struct Array360 {
     T* data;

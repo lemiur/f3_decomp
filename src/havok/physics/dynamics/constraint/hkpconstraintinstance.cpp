@@ -4,7 +4,7 @@
 
 #include "havok/hkpConstraintInstance.h"
 
-void __cdecl FUN_00cb3dd0(void* a, void* b, int c);
+void __cdecl hkpWorldOperationUtil_removeConstraintImmediately(void* a, void* b, int c);
 struct FUN_00cf3090_class
 {
     void* m0;
@@ -13,12 +13,12 @@ struct FUN_00cf3090_class
     void* m3;
     void FUN_00cf3090(void* arg);
 };
-// If m2 is set, calls FUN_00cb3dd0 with the pointer at arg+8, this, and 1.
+// If m2 is set, calls hkpWorldOperationUtil_removeConstraintImmediately with the pointer at arg+8, this, and 1.
 // @fnv 0x00cf3090
 void FUN_00cf3090_class::FUN_00cf3090(void* arg)
 {
     if (m2)
-        FUN_00cb3dd0(*(void**)((char*)arg + 8), this, 1);
+        hkpWorldOperationUtil_removeConstraintImmediately(*(void**)((char*)arg + 8), this, 1);
 }
 
 struct DDCC60World
@@ -372,7 +372,7 @@ hkpModifierConstraintAtom* __cdecl FindModifierConstraintAtom(hkpConstraintInsta
     return atom;
 }
 
-extern "C" void __cdecl FUN_00d06cb0(void* apvArray, int iSizeElem);
+extern "C" void __cdecl hkSmallArrayUtil__reserveMore(void* apvArray, int iSizeElem);
 extern "C" void _ReadWriteBarrier();
 
 struct S00cf3df0_Arr
@@ -406,7 +406,7 @@ struct S00cf3df0_Arr
             } while (i < m_iElementCount);
         }
         if (n == (m_cap & 0x3fff))
-            FUN_00d06cb0(this, 4);
+            hkSmallArrayUtil__reserveMore(this, 4);
         m_data[m_iElementCount++] = a;
     }
 };
@@ -555,7 +555,7 @@ struct WaterShaderSettings
     int fieldb8;
     int fieldbc;
     int fieldc0;
-    void FUN_004fe0f0();
+    void WaterShaderData_Initialize();
 };
 
 struct TESWaterForm
@@ -608,7 +608,7 @@ void TESWaterForm::FUN_004fed10()
     cFlags = 0;
     m_pWaterSound = 0;
     m_kMaterialId.Set(0, 0);
-    GetSettings()->FUN_004fe0f0();
+    GetSettings()->WaterShaderData_Initialize();
 
     for (int i = 0; i < 3; ++i)
         m_apWaterForms[i] = 0;

@@ -55,7 +55,7 @@ void* __stdcall FUN_008f6f60(Owner337* owner, unsigned int size) {
 }
 
 // @f3 0x008e9e90 (community match, verified in this file)
-struct Channel376 { void FUN_00931740(unsigned int value, __int64 amount); };
+struct Channel376 { void hkpWorldObject_addProperty(unsigned int value, __int64 amount); };
 struct Handler376 {
     unsigned int unk00;
     unsigned int unk04;
@@ -336,7 +336,7 @@ void Owner376::FUN_008e9e90(unsigned int value, volatile int amount) {
     if (current && !current->FUN_008e96a0(value)) {
         Channel376* channel = current->channel;
         __int64 wideAmount = amount;
-        if (channel) channel->FUN_00931740(value, wideAmount);
+        if (channel) channel->hkpWorldObject_addProperty(value, wideAmount);
     }
 }
 
@@ -1043,7 +1043,7 @@ public:
     int   unk08;
     int   unk0C;
     float alpha10;
-    void FUN_00c84df0(FUN_00c84df0_cls* a, FUN_00c84df0_cls* b);
+    void bhkShape_CopyMembers(FUN_00c84df0_cls* a, FUN_00c84df0_cls* b);
     void FUN_008fdca0(FUN_00c84df0_cls* input, FUN_00c84df0_cls* arg);
 };
 
@@ -1073,7 +1073,7 @@ void FUN_00c84df0_cls::FUN_008fdca0(FUN_00c84df0_cls* input, FUN_00c84df0_cls* a
         }
     }
 complete:
-    FUN_00c84df0(input, arg);
+    bhkShape_CopyMembers(input, arg);
 }
 }   // namespace f3m_008fdca0
 
@@ -1107,9 +1107,9 @@ public:
     S_cb9a90_A() : unk0C(0), unk10(0) { ++g_iCDC40LevelACount; }
 };
 
-class FUN_00c8bed0_cls : public S_cb9a90_A {
+class bhkTransformShape : public S_cb9a90_A { // src: F3_EXE vtable 0x00dfcfd4 (old: FUN_00c8bed0_cls)
 public:
-    FUN_00c8bed0_cls() { ++DAT_012681b0; }
+    bhkTransformShape() { ++DAT_012681b0; }
 };
 
 class ShapeHolder {
@@ -1162,14 +1162,14 @@ public:
     virtual void vf45();
     virtual void vf46();
     virtual void vf47();
-    virtual FUN_00c8bed0_cls* vf48(FUN_00c8bed0_cls* shape, int a);
-    FUN_00c8bed0_cls* FUN_008fdbe0(int a);
+    virtual bhkTransformShape* vf48(bhkTransformShape* shape, int a);
+    bhkTransformShape* FUN_008fdbe0(int a);
 };
 
-FUN_00c8bed0_cls* ShapeHolder::FUN_008fdbe0(int a)
+bhkTransformShape* ShapeHolder::FUN_008fdbe0(int a)
 {
     EnterCriticalSection(&DAT_010f3194);
-    FUN_00c8bed0_cls* shape = new FUN_00c8bed0_cls();
+    bhkTransformShape* shape = new bhkTransformShape();
     vf48(shape, a);
     LeaveCriticalSection(&DAT_010f3194);
     return shape;
@@ -1449,7 +1449,7 @@ struct SceneObject {
     unsigned int field20, field24, field28, field2c;
     unsigned int flags;
 
-    void FUN_0056ff10(Collision* value);
+    void NiAVObject_SetCollisionObject(Collision* value);
     Controller* FUN_00825200(const ControllerType* type);
 };
 
@@ -1557,8 +1557,8 @@ bool __cdecl FUN_008f3510(SceneObject* object)
                     if (childName && _stricmp(childName + 6, str_00e2d084) == 0) {
                         Collision* collision = FUN_007235f0(node);
                         if (collision) {
-                            child->FUN_0056ff10(collision);
-                            node->FUN_0056ff10(0);
+                            child->NiAVObject_SetCollisionObject(collision);
+                            node->NiAVObject_SetCollisionObject(0);
                             child->flags = (child->flags & ~0x10u) | 6;
                             repaired = true;
                             Controller* controller = node->FUN_00825200(&DAT_010f32f8);
@@ -1646,7 +1646,7 @@ void* FUN_008f33c0()
 // @f3 0x008f8530 (community match, verified in this file)
 namespace f3m_008f8530 {
 struct FUN_009786b0_Obj {
-    void FUN_009786b0(float* value, unsigned int amount);
+    void hkMotionState_initMotionState(float* value, unsigned int amount);
 };
 
 struct FUN_008f8530_Obj {
@@ -1749,7 +1749,7 @@ FUN_008f8530_Obj* FUN_008f8530_Obj::FUN_008f8530(float* value, unsigned int amou
     *(volatile float*)&unkE0 = 0.0f;
 
     reinterpret_cast<FUN_009786b0_Obj*>(
-        reinterpret_cast<char*>(this) + 0x10)->FUN_009786b0(value, amount);
+        reinterpret_cast<char*>(this) + 0x10)->hkMotionState_initMotionState(value, amount);
 
     *(volatile float*)&unkB4 = 0.0f;
     *(volatile float*)&unkB8 = 0.0f;
@@ -2106,7 +2106,7 @@ struct Body {
  unsigned int unkc8;
  unsigned int unkcc;
  Motion unkD0;
- void FUN_0090cbf0(int,int,int);
+ void hkpRigidBody_setMotionType(int,int,int);
  void FUN_0090c670(int);
  void FUN_0090b500();
 };
@@ -2329,8 +2329,8 @@ void Owner::FUN_008e5c40(bool enabled) {
  int index=unk048->unk20[i];
  if(index>=0){Body* body=unk048->unk08[index];if(body){
  if(unk2a4.get()->unk18->unk40.Find((unsigned short)i)!=-1){
- if(enabled){if(body->unkD0.unk08==6 || body->unk2a!=4){body->FUN_0090cbf0(1,1,0);body->unk2a=4;body->FUN_0090c670(1);}}
- else {if(body->unkD0.unk08!=6 || body->unk2a!=2){body->FUN_0090cbf0(6,1,0);body->unk2a=2;body->FUN_0090c670(2);}}
+ if(enabled){if(body->unkD0.unk08==6 || body->unk2a!=4){body->hkpRigidBody_setMotionType(1,1,0);body->unk2a=4;body->FUN_0090c670(1);}}
+ else {if(body->unkD0.unk08!=6 || body->unk2a!=2){body->hkpRigidBody_setMotionType(6,1,0);body->unk2a=2;body->FUN_0090c670(2);}}
  }
  body->FUN_0090b500();body->unkD0.SetFirst(a+i);body->FUN_0090b500();body->unkD0.SetSecond(b+i);
  }}
@@ -3626,8 +3626,9 @@ FUN_008e30b0::~FUN_008e30b0() { Clear(true); }
 // @f3 0x008e9260 (community match, verified in this file)
 extern double DAT_00dbe7c0;
 namespace f3m_008e9260 {
-struct O_8e9260 { char pad[0x350]; int state; char pad2[0x78]; float f; void FUN_008e9260(float x); };
-void O_8e9260::FUN_008e9260(float x) { state = 1; f = (float)(x * DAT_00dbe7c0); }
+struct O_8e9260 { char pad[0x350]; int state; char pad2[0x78]; float f; void bhkCharacterController_Jump(float x); };
+// pdb: bhkCharacterController::Jump | bhkCharacterController.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+void O_8e9260::bhkCharacterController_Jump(float x) { state = 1; f = (float)(x * DAT_00dbe7c0); }
 }   // namespace f3m_008e9260
 
 // @f3 0x008e3080 (community match, verified in this file)
@@ -5015,9 +5016,10 @@ struct Node {virtual void V0();virtual void V4();virtual Type* GetType();int unk
  Node* Cast(Type* type){return IsKind(type)?this:0;}
  float GetValue(){if(value){float result=value->value;return result;}float result=DAT_00f7a690;return result;}
 };
-struct Owner {int unk000; int unk004; int unk008; int unk00C; int unk010; int unk014; int unk018; int unk01C; int unk020; int unk024; int unk028; int unk02C; int unk030; int unk034; int unk038; int unk03C; int unk040; int unk044; int unk048; int unk04C; int unk050; int unk054; int unk058; int unk05C; int unk060; int unk064; int unk068; int unk06C; int unk070; int unk074; int unk078; int unk07C; int unk080; int unk084; int unk088; int unk08C; int unk090; int unk094; int unk098; int unk09C; int unk0A0; int unk0A4; int unk0A8; int unk0AC; int unk0B0; int unk0B4; int unk0B8; int unk0BC; int unk0C0; int unk0C4; int unk0C8; int unk0CC; int unk0D0; int unk0D4; int unk0D8; int unk0DC; int unk0E0; int unk0E4; int unk0E8; int unk0EC; int unk0F0; int unk0F4; int unk0F8; int unk0FC; int unk100; int unk104; int unk108; int unk10C; int unk110; int unk114; int unk118; int unk11C; int unk120; int unk124; int unk128; int unk12C; int unk130; int unk134; int unk138; int unk13C; int unk140; int unk144; int unk148; int unk14C; int unk150; int unk154; int unk158; int unk15C; int unk160; int unk164; int unk168; int unk16C; int unk170; int unk174; int unk178; int unk17C; int unk180; int unk184; int unk188; int unk18C; int unk190; int unk194; int unk198; int unk19C; int unk1A0; int unk1A4; int unk1A8; int unk1AC; int unk1B0; int unk1B4; int unk1B8; int unk1BC; int unk1C0; int unk1C4; int unk1C8; int unk1CC; int unk1D0; int unk1D4; int unk1D8; int unk1DC; int unk1E0; int unk1E4; int unk1E8; int unk1EC; int unk1F0; int unk1F4; int unk1F8; int unk1FC; int unk200; int unk204; int unk208; int unk20C; int unk210; int unk214; int unk218; int unk21C; int unk220; int unk224; int unk228; int unk22C; int unk230; int unk234; int unk238; int unk23C; int unk240; int unk244; int unk248; int unk24C; int unk250; int unk254; int unk258; int unk25C; int unk260; int unk264; int unk268; int unk26C; int unk270; int unk274; int unk278; int unk27C; int unk280; int unk284; int unk288; int unk28C; int unk290; int unk294; int unk298; int unk29C; int unk2A0; int unk2A4; int unk2A8; int unk2AC; int unk2B0; int unk2B4; int unk2B8; int unk2BC; int unk2C0; int unk2C4; int unk2C8; int unk2CC; int unk2D0; int unk2D4; int unk2D8; int unk2DC; int unk2E0; int unk2E4; int unk2E8; int unk2EC; int unk2F0; int unk2F4; int unk2F8; int unk2FC; int unk300; int unk304; int unk308; int unk30C; int unk310; int unk314; int unk318; int unk31C; int unk320; int unk324; int unk328; int unk32C; int unk330; int unk334; int unk338; int unk33C; int unk340; int unk344; int unk348; int unk34C; int unk350; int unk354; int unk358; int unk35C; int unk360; int unk364; int unk368; int unk36C; int unk370; int unk374; int unk378; int unk37C; int unk380; int unk384; int unk388; int unk38C; int unk390; int unk394; int unk398; int unk39C; int unk3A0; int unk3A4; int unk3A8; int unk3AC; int unk3B0; int unk3B4; int unk3B8; int unk3BC; int unk3C0; int unk3C4; int unk3C8; int unk3CC; int unk3D0; int unk3D4; int unk3D8; int unk3DC; int unk3E0; int unk3E4; int unk3E8; int unk3EC; int unk3F0; int unk3F4; int unk3F8; int unk3FC; int unk400; int unk404; int unk408; int unk40C; int unk410; int unk414; int unk418; int unk41C; int unk420; int unk424; int unk428; int unk42C; int unk430; int unk434; Node* node;int unk43C; int unk440; int unk444; int unk448; int unk44C; int unk450; int unk454; int unk458; int unk45C; int unk460; int unk464; int unk468; int unk46C; int unk470; int unk474; int unk478; int unk47C; float fallback;__forceinline float Get();float FUN_008ea150();};
+struct Owner {int unk000; int unk004; int unk008; int unk00C; int unk010; int unk014; int unk018; int unk01C; int unk020; int unk024; int unk028; int unk02C; int unk030; int unk034; int unk038; int unk03C; int unk040; int unk044; int unk048; int unk04C; int unk050; int unk054; int unk058; int unk05C; int unk060; int unk064; int unk068; int unk06C; int unk070; int unk074; int unk078; int unk07C; int unk080; int unk084; int unk088; int unk08C; int unk090; int unk094; int unk098; int unk09C; int unk0A0; int unk0A4; int unk0A8; int unk0AC; int unk0B0; int unk0B4; int unk0B8; int unk0BC; int unk0C0; int unk0C4; int unk0C8; int unk0CC; int unk0D0; int unk0D4; int unk0D8; int unk0DC; int unk0E0; int unk0E4; int unk0E8; int unk0EC; int unk0F0; int unk0F4; int unk0F8; int unk0FC; int unk100; int unk104; int unk108; int unk10C; int unk110; int unk114; int unk118; int unk11C; int unk120; int unk124; int unk128; int unk12C; int unk130; int unk134; int unk138; int unk13C; int unk140; int unk144; int unk148; int unk14C; int unk150; int unk154; int unk158; int unk15C; int unk160; int unk164; int unk168; int unk16C; int unk170; int unk174; int unk178; int unk17C; int unk180; int unk184; int unk188; int unk18C; int unk190; int unk194; int unk198; int unk19C; int unk1A0; int unk1A4; int unk1A8; int unk1AC; int unk1B0; int unk1B4; int unk1B8; int unk1BC; int unk1C0; int unk1C4; int unk1C8; int unk1CC; int unk1D0; int unk1D4; int unk1D8; int unk1DC; int unk1E0; int unk1E4; int unk1E8; int unk1EC; int unk1F0; int unk1F4; int unk1F8; int unk1FC; int unk200; int unk204; int unk208; int unk20C; int unk210; int unk214; int unk218; int unk21C; int unk220; int unk224; int unk228; int unk22C; int unk230; int unk234; int unk238; int unk23C; int unk240; int unk244; int unk248; int unk24C; int unk250; int unk254; int unk258; int unk25C; int unk260; int unk264; int unk268; int unk26C; int unk270; int unk274; int unk278; int unk27C; int unk280; int unk284; int unk288; int unk28C; int unk290; int unk294; int unk298; int unk29C; int unk2A0; int unk2A4; int unk2A8; int unk2AC; int unk2B0; int unk2B4; int unk2B8; int unk2BC; int unk2C0; int unk2C4; int unk2C8; int unk2CC; int unk2D0; int unk2D4; int unk2D8; int unk2DC; int unk2E0; int unk2E4; int unk2E8; int unk2EC; int unk2F0; int unk2F4; int unk2F8; int unk2FC; int unk300; int unk304; int unk308; int unk30C; int unk310; int unk314; int unk318; int unk31C; int unk320; int unk324; int unk328; int unk32C; int unk330; int unk334; int unk338; int unk33C; int unk340; int unk344; int unk348; int unk34C; int unk350; int unk354; int unk358; int unk35C; int unk360; int unk364; int unk368; int unk36C; int unk370; int unk374; int unk378; int unk37C; int unk380; int unk384; int unk388; int unk38C; int unk390; int unk394; int unk398; int unk39C; int unk3A0; int unk3A4; int unk3A8; int unk3AC; int unk3B0; int unk3B4; int unk3B8; int unk3BC; int unk3C0; int unk3C4; int unk3C8; int unk3CC; int unk3D0; int unk3D4; int unk3D8; int unk3DC; int unk3E0; int unk3E4; int unk3E8; int unk3EC; int unk3F0; int unk3F4; int unk3F8; int unk3FC; int unk400; int unk404; int unk408; int unk40C; int unk410; int unk414; int unk418; int unk41C; int unk420; int unk424; int unk428; int unk42C; int unk430; int unk434; Node* node;int unk43C; int unk440; int unk444; int unk448; int unk44C; int unk450; int unk454; int unk458; int unk45C; int unk460; int unk464; int unk468; int unk46C; int unk470; int unk474; int unk478; int unk47C; float fallback;__forceinline float Get();float bhkCharacterController_GetRadius();};
 __forceinline float Owner::Get(){if(node){Node* selected=node->Cast(&DAT_010f3350);if(selected){float result=selected->GetValue();return result;}}float result=fallback;return result;}
-float Owner::FUN_008ea150(){return Get();}
+// pdb: bhkCharacterController::GetRadius | bhkCharacterController.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap_sim), high
+float Owner::bhkCharacterController_GetRadius(){return Get();}
 }
 }   // namespace f3m_008ea150
 
@@ -5083,7 +5085,7 @@ unsigned int u0b0;
 unsigned int u0b4;
 unsigned int u0b8;
 unsigned char ubc;Z1350 z;};
-struct A1350 {Y1350* FUN_0090cdf0();
+struct A1350 {Y1350* hkpRigidBody_getStoredDynamicMotion();
 unsigned int u000;
 unsigned int u004;
 unsigned int u008;
@@ -5189,7 +5191,7 @@ __forceinline float Obj1350::Value(){
  float ret;
  if(this && owner){
   A1350* a=owner;
-  Y1350* result=a->FUN_0090cdf0();
+  Y1350* result=a->hkpRigidBody_getStoredDynamicMotion();
   Z1350* z; Z1350 local;
   if(result)z=&result->z;
   else{ret=DAT_00e35180[a->index];local.FUN_0090aba0(&ret);z=&local;}
@@ -5452,7 +5454,8 @@ unsigned int unk20;
 unsigned int unk24;
 unsigned int unk28;
 unsigned int unk2c;
-};struct Record{Header header;Payload payload;Node*last;unsigned int unk54,unk58,unk5c;void Set(const Header&h){header.a=h.a;header.b=h.b;header.c=h.c;header.d=h.d;header.e=h.e;header.first=h.first;header.second=h.second;header.third=h.third;}};struct Array{Record*data;unsigned int count,capacityFlags;Record*Append();};void __cdecl FUN_00901f10(Array*,unsigned int);__forceinline Record*Array::Append(){if(count==(capacityFlags&0x3fffffff))FUN_00901f10(this,96);return &data[count++];}void __cdecl FUN_009712f0(Payload*,int,Node*);struct Owner{unsigned int unk00,unk04,unk08,unk0c;Array array;void FUN_008f7070(Node*,const Header*);};void Owner::FUN_008f7070(Node*node,const Header*header){Record*record=array.Append();record->Set(*header);FUN_009712f0(&record->payload,8,node);Node*last=node;while(last->next)last=last->next;record->last=last;}}
+// pdb: hkpAllRayHitCollector::addRayHit | hkpAllRayHitCollector.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(caller_sim), high
+};struct Record{Header header;Payload payload;Node*last;unsigned int unk54,unk58,unk5c;void Set(const Header&h){header.a=h.a;header.b=h.b;header.c=h.c;header.d=h.d;header.e=h.e;header.first=h.first;header.second=h.second;header.third=h.third;}};struct Array{Record*data;unsigned int count,capacityFlags;Record*Append();};void __cdecl FUN_00901f10(Array*,unsigned int);__forceinline Record*Array::Append(){if(count==(capacityFlags&0x3fffffff))FUN_00901f10(this,96);return &data[count++];}void __cdecl FUN_009712f0(Payload*,int,Node*);struct Owner{unsigned int unk00,unk04,unk08,unk0c;Array array;void hkpAllRayHitCollector_addRayHit(Node*,const Header*);};void Owner::hkpAllRayHitCollector_addRayHit(Node*node,const Header*header){Record*record=array.Append();record->Set(*header);FUN_009712f0(&record->payload,8,node);Node*last=node;while(last->next)last=last->next;record->last=last;}}
 }   // namespace f3m_008f7070
 
 // @f3 0x008f86a0 (community match, verified in this file)
@@ -6454,7 +6457,7 @@ struct f3Mat3;
 struct __declspec(align(16)) f3Vec4
 {
     float x, y, z, w;
-    void FUN_008d2a00(f3Mat3* mat, f3Vec3* point);
+    void hkVector4_setRotatedDir(f3Mat3* mat, f3Vec3* point);
 };
 
 struct f3ObjA
@@ -6747,7 +6750,7 @@ void f3Owner::FUN_008ea1f0(f3Vec4* out)
     f3Vec4 local;
     char* holder = this->unk424 ? this->unk424->unk08 : 0;
     f3Mat3* mat = (f3Mat3*)(holder + 0xa0);
-    local.FUN_008d2a00(mat, &this->unk400);
+    local.hkVector4_setRotatedDir(mat, &this->unk400);
     f3Vec4* pos = this->unk08 ? this->unk08->FUN_0091dd60() : &g_f3UnknownVec4;
     out->x = pos->x - local.x;
     out->y = pos->y - local.y;
@@ -6869,7 +6872,7 @@ struct C74570_Mat
 struct C74570_Xf
 {
     C74570_Vec a;
-    void FUN_008d2a00(void* p, void* q);
+    void hkVector4_setRotatedDir(void* p, void* q);
 };
 struct C74570_This
 {
@@ -6924,7 +6927,7 @@ void C74570_This::FUN_008f15c0(float dt)
             v0.x=0.0f;v0.y=0.0f;v0.z=1.0f;v0.w=0.0f;
             C74570_Mat m;
             m.FUN_00924c60(&v0, b);
-            xf.FUN_008d2a00(&m, &v1);
+            xf.hkVector4_setRotatedDir(&m, &v1);
             if (obj)
             {
                 obj->FUN_0090b500();
@@ -7117,7 +7120,7 @@ public:
     __forceinline const hkArray<hkpRootCdPoint>& getHits() const { return m_hits; }
     __forceinline hkArray<hkpRootCdPoint>& getHits() { return m_hits; }
     __forceinline hkBool hasHit() const { return m_hits.getSize() > 0; }
-    void FUN_00cabad0();
+    void hkpAllCdPointCollector_sortHits();
 
 protected:
     hkInplaceArray<hkpRootCdPoint, 8> m_hits;
@@ -7202,7 +7205,7 @@ public:
     }
 
     __declspec(noalias) void FUN_008ea1f0(hkVector4& a_kPos);
-    __declspec(noalias) void FUN_008ea270(const hkVector4& a_kPos);
+    __declspec(noalias) void bhkCharacterController_SetPosition(const hkVector4& a_kPos);
     void FUN_008ef910(float a_fTime);
 };
 
@@ -7218,13 +7221,13 @@ void bhkCharacterController_StandIn::FUN_008ef910(float a_fTime)
         spShapePhantom->FUN_00568600(kStart, lcInput, collector, 0);
         if (collector.hasHit())
         {
-            collector.FUN_00cabad0();
+            collector.hkpAllCdPointCollector_sortHits();
             for (int i = 0; i < collector.getHits().getSize(); ++i)
             {
                 listener.contactPointAddedCallback(collector.getHits()[i]);
             }
         }
-        FUN_008ea270(lcInput.m_to);
+        bhkCharacterController_SetPosition(lcInput.m_to);
     }
     else
     {
@@ -7232,7 +7235,7 @@ void bhkCharacterController_StandIn::FUN_008ef910(float a_fTime)
         FUN_008ea1f0(kStart);
         hkVector4 kEnd;
         kEnd.setAddMul4(kStart, OutVelocity, a_fTime);
-        FUN_008ea270(kEnd);
+        bhkCharacterController_SetPosition(kEnd);
     }
 }
 }   // namespace f3m_008ef910
@@ -7573,7 +7576,7 @@ struct Controller:Proxy,Context,Listener,SurfaceInfo {
     List8 list;
     Controller(const Info*);
     virtual ~Controller();
-    void FUN_008efb10(const Info*);
+    void bhkCharacterController_Init(const Info*);
 };
 typedef char SizeController[(sizeof(Controller)==0x4e0)?1:-1];
 Controller::Controller(const Info* info):Context(info->state,info->manager),Listener(Vector4::Up(),(float)(DAT_00f79adc*0.01745329238474369),info->Product()),buffer(5) {
@@ -7590,7 +7593,7 @@ Controller::Controller(const Info* info):Context(info->state,info->manager),List
     unk350=0;value4C4=0;mode430=2;mode434=2;
     unk494=0;unk498=0;unk49C=0;unk4C0=0;unk4C8=0;
     Listener::velocity.SetZero();buffer.count=0;flag4A0=0;vector4B0.SetZero();
-    FUN_008efb10(info);
+    bhkCharacterController_Init(info);
 }
 }
 }   // namespace f3m_008f1290
@@ -7900,7 +7903,7 @@ struct HolderResult
 
 struct Holder
 {
-    HolderResult* FUN_00cac980();
+    HolderResult* hkpCharacterProxy_getShapePhantom();
 };
 
 struct PickOwner
@@ -7940,7 +7943,7 @@ char PickOwner::FUN_008ea4f0(int index, Vec4* position)
     GetFilterInfo(&value);
     *(int*)&pick.filterInfo = *(int*)&value;
 
-    HolderResult* result = this && holder ? holder->FUN_00cac980() : 0;
+    HolderResult* result = this && holder ? holder->hkpCharacterProxy_getShapePhantom() : 0;
     WorldObject* object = result->object;
     bhkWorld* world = object ? object->GetWorld() : 0;
     if (world)
@@ -8382,7 +8385,7 @@ struct Pose { float m00,m04,m08,m0c,m10,m14,m18,m1c,m20; float x,y,z,scale; };
 struct Source { int unk00,unk04,unk08,unk0c,unk10,unk14,unk18,unk1c,unk20,unk24,unk28,unk2c,unk30,unk34,unk38,unk3c,unk40,unk44,unk48,unk4c,unk50,unk54,unk58,unk5c,unk60,unk64; Pose pose; void FUN_008330a0(); };
 struct BoundsTarget {
  virtual void v00(); virtual void v04(); virtual void v08(); virtual void v0c(); virtual void v10(); virtual void v14(); virtual void GetBounds(Bounds*);
- void FUN_00978770(Bounds*);
+ void hkpAabbPhantom_setAabb(Bounds*);
 };
 struct Node { int unk00,unk04; BoundsTarget* target; void FUN_00c24b70(); };
 struct Lock { volatile long owner; long count; void FUN_00409a80(int); };
@@ -8408,7 +8411,7 @@ void Owner::FUN_008f96c0() {
  b.high.x+=position.x; b.high.y+=position.y; b.high.z+=position.z; b.high.w+=position.w;
  DAT_010f2c40.FUN_00409a80(0);
  BoundsTarget* t=n->target;
- if(t) { n->FUN_00c24b70(); t->FUN_00978770(&b); n->FUN_00c24b70(); }
+ if(t) { n->FUN_00c24b70(); t->hkpAabbPhantom_setAabb(&b); n->FUN_00c24b70(); }
  if(--DAT_010f2c40.count==0) { long old=DAT_010f2c40.owner; DAT_00d9b06c(&DAT_010f2c40.owner,0,old); }
 }
 }
@@ -8815,13 +8818,14 @@ struct Data { unsigned unk000; unsigned unk004; unsigned unk008; unsigned unk00c
 struct Owner {
     unsigned unk000; unsigned unk004;
     Data* data;
-    void FUN_008fe150(Receiver*);
+    void bhkTransformShape_BuildDisplayGeometry(Receiver*);
 };
 }
 inline void* operator new(size_t size, int) { return Scene659::FUN_0089eb90(size); }
 inline void operator delete(void* storage, int) { Scene659::FUN_0086ba60(storage); }
 namespace Scene659 {
-void Owner::FUN_008fe150(Receiver* receiver) {
+// pdb: bhkTransformShape::BuildDisplayGeometry | bhkTransformShape.obj | fnv360_0822_retail, ustr_rel + bridge(ustr_rel|vtable), high
+void Owner::bhkTransformShape_BuildDisplayGeometry(Receiver* receiver) {
     FUN_008fda60 world(this && data ? &data->transform : &DAT_010f3370);
     Transform local;
     FUN_0056ac90(&local, &world);
@@ -9385,7 +9389,7 @@ struct NodeType { int unk00; int unk04; int unk08; int type; };
 struct Transform;
 struct FNV_ALIGN(16) Vector {
     float x, y, z, w;
-    void FUN_008d28e0(const Transform*, const Vector*);
+    void hkVector4_setTransformedPos(const Transform*, const Vector*);
     void raiseFirst(const float& value) { z += value; }
     void raise(float value) { z += value; }
 };
@@ -9683,7 +9687,7 @@ void Owner::FUN_008ea6d0() {
     {
     int count = 2;
     do {
-        reinterpret_cast<Vector*>(corner - 2)->FUN_008d28e0(transform, &point);
+        reinterpret_cast<Vector*>(corner - 2)->hkVector4_setTransformedPos(transform, &point);
         reinterpret_cast<Vector*>(corner - 2)->raiseFirst(height);
         corner += 4;
         point.y = farSide;
@@ -9697,7 +9701,7 @@ void Owner::FUN_008ea6d0() {
     {
     int count = 2;
     do {
-        reinterpret_cast<Vector*>(corner - 2)->FUN_008d28e0(transform, &point);
+        reinterpret_cast<Vector*>(corner - 2)->hkVector4_setTransformedPos(transform, &point);
         reinterpret_cast<Vector*>(corner - 2)->raise(height);
         corner += 4;
         point.x = nearSide;
@@ -10354,7 +10358,7 @@ int unk490;
 
     void FUN_008ed0a0(int a);
 
-    void FUN_008ed480(float step);
+    void bhkCharacterController_ChangeSize(float step);
 
 };
 
@@ -10373,7 +10377,8 @@ __forceinline float AdvanceValue(float previous, const float& target, float& del
     return next;
 }
 
-void Mover8::FUN_008ed480(float step)
+// pdb: bhkCharacterController::ChangeSize | bhkCharacterController.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap_sim), high
+void Mover8::bhkCharacterController_ChangeSize(float step)
 
 {
 
@@ -10466,7 +10471,7 @@ extern int DAT_010f3350, DAT_010f2ee0, DAT_010f33b4;
 namespace f3m_008f1880 {
 struct Obj;
 struct __declspec(align(16)) Mat4 { float m00, m01, m02, m03, m04, m05, m06, m07, m08, m09, m0a, m0b, m0c, m0d, m0e, m0f;
-    void FUN_009251b0(Mat4* a, Obj* o); };
+    void hkTransform_setMul(Mat4* a, Obj* o); };
 struct Xf { float x0, x1, x2, x3; };
 struct __declspec(align(16)) Obj {
     float p00, p01, p02, p03, p04, p05, p06, p07, p08, p09, p0a, p0b;
@@ -10544,7 +10549,7 @@ bool FUN_008f1880(Item* ref, void* a, Result* b, bool flag)
                                         loc2.m0f = loc.m0f;
                                     Obj o(&t->unk20);
                                     o.s30 = t->unk30; o.s34 = t->unk34; o.s38 = t->unk38; o.s3c = t->unk3c;
-                                    loc.FUN_009251b0(&loc2, &o);
+                                    loc.hkTransform_setMul(&loc2, &o);
                                 }
                             }
                         } else {
@@ -11413,8 +11418,8 @@ int unk250;
 int unk254;
 int unk258;
 int unk25c;
-State state;void FUN_008ed480(float);void FUN_008ed680(Input*,bool);};
-void Object::FUN_008ed680(Input* input,bool useVector){bool special=state.FUN_00919ef0()==2;if(useVector&&special){input->vector=DAT_0108ec68;apply(input);}else FUN_008ed480(input->value);}
+State state;void bhkCharacterController_ChangeSize(float);void FUN_008ed680(Input*,bool);};
+void Object::FUN_008ed680(Input* input,bool useVector){bool special=state.FUN_00919ef0()==2;if(useVector&&special){input->vector=DAT_0108ec68;apply(input);}else bhkCharacterController_ChangeSize(input->value);}
 }
 }   // namespace f3m_008ed680
 
@@ -11470,7 +11475,7 @@ struct Obj8ed0a0 {
 
     void FUN_008ecaa0();
     void* FUN_008e98a0(void* p);
-    void FUN_008e91c0(void* p);
+    void bhkCharacterController_SetShape(void* p);
     void* GetSub() const { return sub08 ? sub08->FUN_0091dd60() : &DAT_01092a50; }
     void FUN_008ed0a0(int a);
 };
@@ -11482,7 +11487,7 @@ void Obj8ed0a0::FUN_008ed0a0(int a) {
             FUN_008ecaa0();
         }
         unk430 = a;
-        FUN_008e91c0(FUN_008e98a0(GetSub()));
+        bhkCharacterController_SetShape(FUN_008e98a0(GetSub()));
         if (flag) {
             v51(0);
         }
@@ -11609,7 +11614,7 @@ struct Target_8e8c80 {
 };
 
 struct World_8e8c80 {
-    void FUN_0091f230(int arg, Sub_8e8c80* a, Snapshot_8e8c80* snapshot, Sub_8e8c80* b);
+    void hkpCharacterProxy_integrateImplementation(int arg, Sub_8e8c80* a, Snapshot_8e8c80* snapshot, Sub_8e8c80* b);
 };
 
 struct Owner_8e8c80 {
@@ -11631,7 +11636,7 @@ void Owner_8e8c80::FUN_008e8c80(int arg)
         if (world) {
             Snapshot_8e8c80 snapshot(&sub10);
             Target_8e8c80* target = GetTarget();
-            world->FUN_0091f230(arg, &target->sub10, &snapshot, &sub10);
+            world->hkpCharacterProxy_integrateImplementation(arg, &target->sub10, &snapshot, &sub10);
             sub10.FUN_0096a1d0();
         }
     }
@@ -12277,7 +12282,7 @@ extern "C" struct Collision8E3* FUN_007235f0(void* object);
 
 extern "C" void* FUN_00424d50(void* table, void* key);         
 
-extern "C" void FUN_008dd390(void* item, void* second, void* third);   
+extern "C" void bhkRagdollController_AddToArrays(void* item, void* second, void* third);   
 
 void FUN_008e34c0(void* first, void* second, void* third) {   
     if (first == 0) return;                          
@@ -12294,7 +12299,7 @@ void FUN_008e34c0(void* first, void* second, void* third) {
 
         if (secondLookup != 0 && firstLookup == 0) {  
 
-            FUN_008dd390(secondLookup, secondParameter, thirdParameter);   
+            bhkRagdollController_AddToArrays(secondLookup, secondParameter, thirdParameter);   
         }                                           
 
     }                                               
@@ -12351,9 +12356,10 @@ Object* Owner::FUN_008e98a0(){
 extern double DAT_00db7de8;
 namespace f3m_008ed3e0 {
 namespace f3m_008ed3e0 {
-struct Mover:task2126::Mover8 {void FUN_008ed3e0(float);};
+struct Mover:task2126::Mover8 {void bhkCharacterController_SetSize(float);};
 inline double Cap(float value,double maximum){return value>maximum?(double)(float)maximum:(double)value;}
-void Mover::FUN_008ed3e0(float input){
+// pdb: bhkCharacterController::SetSize | bhkCharacterController.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_seq), high
+void Mover::bhkCharacterController_SetSize(float input){
  double value;
  if(flags294&1)return;
  double maximum=*reinterpret_cast<float*>(&unk484)*DAT_00db7de8;
@@ -12931,7 +12937,7 @@ struct Body
     int unkb0, unkb4, unkb8, unkbc, unkc0, unkc4, unkc8, unkcc;
     int unkd0, unkd4;
     unsigned char state;
-    void FUN_0090cbf0(int layer, bool a, int b);
+    void hkpRigidBody_setMotionType(int layer, bool a, int b);
 };
 inline int IsLowLayer(int layer) { return layer < 6 || layer == 8; }
 inline unsigned PickLayerType(char low) { return low ? 0x1d : 8; }
@@ -12981,7 +12987,7 @@ bool Phantom::FUN_008ff4c0(int layer)
             Apply(newFlags);
             vc0();
             FUN_00c24b70();
-            o->FUN_0090cbf0(layer, true, 0);
+            o->hkpRigidBody_setMotionType(layer, true, 0);
             FUN_00c24b70();
             return true;
         }
@@ -12997,7 +13003,7 @@ bool Phantom::FUN_008ff4c0(int layer)
                 break;
             }
             FUN_00c24b70();
-            o->FUN_0090cbf0(layer, true, 0);
+            o->hkpRigidBody_setMotionType(layer, true, 0);
             FUN_00c24b70();
             return true;
         }
@@ -13596,11 +13602,12 @@ struct Owner
     bool Flag0() const { return (flags294 & 1) != 0; }
     bool Flag20() const { return (flags294 >> 20) & 1; }
     void FUN_0092ac50();
-    void FUN_008ed3e0(float value);
+    void bhkCharacterController_SetSize(float value);
     void FUN_008ea020(float value);
-    void FUN_008ee870(Anim* anim);
+    void bhkCharacterController_SetWorld(Anim* anim);
 };
-void Owner::FUN_008ee870(Anim* anim)
+// pdb: bhkCharacterController::SetWorld | bhkCharacterController.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+void Owner::bhkCharacterController_SetWorld(Anim* anim)
 {
     Anim* current = GetCurrent();
     if (current != anim)
@@ -13634,9 +13641,9 @@ void Owner::FUN_008ee870(Anim* anim)
             {
                 if (!Flag0() && !Flag20())
                 {
-                    FUN_008ed3e0(0.001428767223842442f);
+                    bhkCharacterController_SetSize(0.001428767223842442f);
                     FUN_008ea020(0.001428767223842442f);
-                    FUN_008ed3e0(0.0f);
+                    bhkCharacterController_SetSize(0.0f);
                 }
                 unk424->v09c(anim);
                 Node* node = unk424;
@@ -13870,7 +13877,7 @@ struct B0Skel {
     int unk14;
     int unk18;
     int* unk1C;      // flags
-    B0Quat* FUN_009550e0(int i);
+    B0Quat* hkaPose_calculateBoneModelSpace(int i);
 };
 
 struct B0Tgt {
@@ -13886,7 +13893,7 @@ extern void FUN_008db970(B0T12* a, B0Xform* b);
 static inline B0Quat* B0Get(B0Skel* sk, int i) {
     char* e;
     if ((((char*)sk->unk1C)[i * 4] & 2) == 0) e = (char*)sk->unk10 + i * 0x30;
-    else e = (char*)sk->FUN_009550e0(i);
+    else e = (char*)sk->hkaPose_calculateBoneModelSpace(i);
     return (B0Quat*)(e + 0x10);
 }
 
@@ -15312,7 +15319,7 @@ struct Q54 {                                     // 0x38 bytes, pool 5
         d.SetSize(data->f20);
     }
     void FUN_00955070();
-    void FUN_00955810();
+    void hkaPose_syncModelSpace();
     static void* operator new(unsigned int size) { return PoolTake(5, 0xe); }
     static void  operator delete(void* p) { if (p) PoolGive(p, 5, 0xe); }
 };
@@ -15425,7 +15432,7 @@ bool Owner::FUN_008e4d50(const char* arg) {
                 Q54* q = new Q54(GetSub()->p1c->data);
                 p54 = q;
                 q->FUN_00955070();
-                p54->FUN_00955810();
+                p54->hkaPose_syncModelSpace();
 
                 v100.Set(0.0f, 1.0f, 0.0f, 0.0f);
                 v110.Set(0.0f, 1.0f, 0.0f, 0.0f);
@@ -16955,9 +16962,10 @@ struct Actor {
     void FUN_008ee9e0(Input* input);
     FUN_008e8a50* FUN_008e98a0();
     void FUN_0092acf0(Input* input);
-    void FUN_008efb10(Input* input);
+    void bhkCharacterController_Init(Input* input);
 };
-void Actor::FUN_008efb10(Input* input)
+// pdb: bhkCharacterController::Init | bhkCharacterController.obj | fnv360_0721_beta, call_seq + bridge(call_gap|vtable), high
+void Actor::bhkCharacterController_Init(Input* input)
 {
     HeapTag tag;
     if (input) {
@@ -17864,10 +17872,11 @@ struct Owner {
     int unk240,unk244,unk248,unk24c,unk250,unk254,unk258,unk25c,unk260,unk264,unk268,unk26c,unk270,unk274,unk278,unk27c;
     int unk280,unk284,unk288,unk28c,unk290,unk294,unk298,unk29c,unk2a0;
     Definition* definition2a4;
-    void FUN_008e1dd0();
+    void bhkRagdollController_GetSGPoseLocalSpace();
 };
 
-void Owner::FUN_008e1dd0()
+// pdb: bhkRagdollController::GetSGPoseLocalSpace | bhkRagdollController.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+void Owner::bhkRagdollController_GetSGPoseLocalSpace()
 {
     hkReal scale = config58->scale98;
     for (int i = 0; i < definition2a4->skeleton->m_numBones; ++i)
@@ -17934,9 +17943,9 @@ struct __declspec(align(16)) hkVector4
     }
     __forceinline void setTransformedPos(const hkTransform& t, const hkVector4& b);
 
-    void FUN_008d28e0(const hkTransform& t, const hkVector4& b);
+    void hkVector4_setTransformedPos(const hkTransform& t, const hkVector4& b);
     void FUN_008d2970(const hkTransform& t, const hkVector4& b);
-    void FUN_008d2a00(const hkTransform& t, const hkVector4& b);
+    void hkVector4_setRotatedDir(const hkTransform& t, const hkVector4& b);
 };
 
 struct hkTransform
@@ -18253,7 +18262,7 @@ bool ParentC::FUN_008eadd0(hkpRootCdPoint* contact)
                     if (i == 1)
                         p.y = (float)(p.y * -1.0);
                 }
-                m_points[i].FUN_008d28e0(phantom->getTransform(), p);
+                m_points[i].hkVector4_setTransformedPos(phantom->getTransform(), p);
                 // Guess at the source: the lane writes through operator() below set which operand of the two "+= height"
                 // adds is loaded first (height first here at +0x34d, q.z first at +0x58a).
                 m_points[i](2) += height;
@@ -18371,7 +18380,7 @@ bool ParentC::FUN_008eadd0(hkpRootCdPoint* contact)
             bool sameKey = true;
             if (hitKey != contact->m_shapeKeyB)
             {
-                normal.FUN_008d2a00(transform, output.m_normal);
+                normal.hkVector4_setRotatedDir(transform, output.m_normal);
                 if (!normal.equals4(dir, 0.01f))
                     sameKey = false;
             }
@@ -18916,9 +18925,9 @@ struct Body
     int mode;
     HitArray* FUN_0091dd50();
     Vec* FUN_0091dd60();
-    void FUN_0091dd70(Vec*);
+    void hkpCharacterProxy_setPosition(Vec*);
     Vec* FUN_0091dda0();
-    void FUN_0091ddb0(Vec*);
+    void hkpCharacterProxy_setLinearVelocity(Vec*);
     WorldObject* FUN_0091ddd0();
     void FUN_009215d0(Vec*, unsigned*);
 };
@@ -19415,7 +19424,7 @@ struct Controller : ControllerBase
     void FUN_008ecfc0();
     void FUN_008e8f70();
     bool FUN_008e8f40();
-    void FUN_008ed480(float);
+    void bhkCharacterController_ChangeSize(float);
     float FUN_008e8970(float, float);
     void FUN_008ea300(Rotation*);
     void FUN_008ea6d0();
@@ -19432,7 +19441,7 @@ struct Controller : ControllerBase
     __forceinline WorldDraw* getDraw() { World* w = getWorld(); return w ? w->draw : 0; }
     __forceinline void draw(unsigned id, unsigned packed) { getDraw()->FUN_008d5730(id, packed); }
     __forceinline Vec* getBodyVelocity() { return body ? body->FUN_0091dda0() : &DAT_01092a50; }
-    __forceinline void setBodyVelocity(Vec* v) { if (body) body->FUN_0091ddb0(v); }
+    __forceinline void setBodyVelocity(Vec* v) { if (body) body->hkpCharacterProxy_setLinearVelocity(v); }
     __forceinline void checkSupport(Vec* direction, unsigned* out)
     {
         Body* b = body;
@@ -19444,7 +19453,7 @@ struct Controller : ControllerBase
         }
     }
 
-    int FUN_008efe30(MovementInput* in);
+    int bhkCharacterController_Move(MovementInput* in);
 };
 
 // Visible body of the same-file speed helper: the caller keeps the input pointer in edx across this call, which the
@@ -19471,7 +19480,8 @@ typedef char check_axis[(offsetof(Controller, axis) == 0x360) ? 1 : -1];
 typedef char check_hits[(offsetof(Controller, hits) == 0x4cc) ? 1 : -1];
 typedef char check_hit[(sizeof(Hit) == 0x40) ? 1 : -1];
 
-int Controller::FUN_008efe30(MovementInput* in)
+// pdb: bhkCharacterController::Move | bhkCharacterController.obj | fnv360_0822_retail, ustr + bridge(ustr|vtable) + skyrim(ustr), high
+int Controller::bhkCharacterController_Move(MovementInput* in)
 {
     int result = 0;
     bool changed;
@@ -19515,7 +19525,7 @@ int Controller::FUN_008efe30(MovementInput* in)
             Vec negAxis;
             Rotation rot;
             int iterations = 1;
-            FUN_008ed480(dt);
+            bhkCharacterController_ChangeSize(dt);
             value2b4 = 0x20;
             value2b8 = 0;
             in->speed = FUN_008e8970(in->speed, in->dt);
@@ -19674,7 +19684,7 @@ int Controller::FUN_008efe30(MovementInput* in)
                         Vec position = *target->FUN_0091dd60();
                         float gravity = DAT_010f2e84->acceleration * stepTime;
                         position.z = value408 + DAT_010f2e80 + gravity;
-                        target->FUN_0091dd70(&position);
+                        target->hkpCharacterProxy_setPosition(&position);
                         position.z = gravity + DAT_010f2e80;
                         FUN_0092ac40();
                     }
@@ -19858,7 +19868,7 @@ struct ShapeInput
     unsigned int GetIndex() const { return existingShape ? 0 : index; }
 };
 
-Geometry* __cdecl FUN_00ab0ef0(NodeBounds*);
+Geometry* __cdecl BSBound_Find(NodeBounds*);
 ShapeRef* __cdecl FUN_008e8880(NiPoint3*, NiPoint3*, float);
 ShapeRef* __cdecl FUN_008ec700(NiPoint3 const&, NiPoint3 const&, float, float);
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long);
@@ -19978,7 +19988,7 @@ void ShapeOwner::FUN_008ee9e0(ShapeInput* input)
         NiPoint3 scaled, b;
         if (input->node && !input->flag96)
         {
-            Geometry* geometry = FUN_00ab0ef0(input->node);
+            Geometry* geometry = BSBound_Find(input->node);
             if (geometry)
             {
                 extents = geometry->extents.FUN_00432b40(input->GetScale());
@@ -20895,7 +20905,7 @@ struct Pose {
     __forceinline void setFlagExplicit (PoseFlag& flag, PoseFlag enumToCheck) const;
     __forceinline void clearFlagExplicit (PoseFlag& flag, PoseFlag enumToCheck) const;
     __forceinline void makeAllChildrenLocalSpace (int boneIdx) const;
-    const Transform& FUN_009550e0(int) const;
+    const Transform& hkaPose_calculateBoneModelSpace(int) const;
 };
 int Pose::isFlagOn (int boneIdx, PoseFlag enumToCheck) const { return boneFlags[boneIdx] & enumToCheck; }
 void Pose::setFlag (int boneIdx, PoseFlag enumToCheck) const { boneFlags[boneIdx] |= enumToCheck; }
@@ -20907,7 +20917,7 @@ const Transform& Pose::getBoneModelSpace (int boneIdx) const {
     if (!isFlagOn (boneIdx, F_BONE_MODEL_DIRTY)) {
         return modelPose[boneIdx];
     } else {
-        return FUN_009550e0(boneIdx);
+        return hkaPose_calculateBoneModelSpace(boneIdx);
     }
 }
 const Transform& Pose::getBoneLocalSpace (int boneIdx) const {
@@ -22362,7 +22372,7 @@ struct __declspec(align(16)) hkVector4
         return v[i];
     }
 
-    void FUN_008d28e0(const hkTransform& t, const hkVector4& o);
+    void hkVector4_setTransformedPos(const hkTransform& t, const hkVector4& o);
     void FUN_008d2970(const hkTransform& t, const hkVector4& o);
 };
 
@@ -22881,7 +22891,7 @@ void ParentC::FUN_008ed6f0(hkArray<hkpRootCdPoint>& contacts, hkpSimplexSolverIn
                 float r0 = rcap.getRadius();
                 quadStiltSphereTop1(2) += r0;
                 const hkTransform& rtransf = pbody->m_transform;
-                sphere0.FUN_008d28e0(rtransf, quadStiltSphereTop1);
+                sphere0.hkVector4_setTransformedPos(rtransf, quadStiltSphereTop1);
                 hkpCapsuleShape* pp;
                 pp = static_cast<hkpCapsuleShape*>(pshape->getChildShapeInl(2));
                 if (pp && pp->getType() == 6)
@@ -22889,7 +22899,7 @@ void ParentC::FUN_008ed6f0(hkArray<hkpRootCdPoint>& contacts, hkpSimplexSolverIn
                     hkVector4 quadStiltSphereTop2 = pp->m_vertexA;
                     float r1 = pp->getRadius();
                     quadStiltSphereTop2.v[2] += r1;
-                    sphere1.FUN_008d28e0(rtransf, quadStiltSphereTop2);
+                    sphere1.hkVector4_setTransformedPos(rtransf, quadStiltSphereTop2);
                     float accumulated = pp->getRadius();
                     fcheckradSqr = (float)(accumulated * DAT_00e337d8);
                     fcheckradSqr *= fcheckradSqr;
@@ -23404,7 +23414,7 @@ struct Map : PoolObj {
     int unk08; int unk0c; int unk10; int unk14; int unk18; int unk1c;
     int unk20; int unk24; int unk28; int unk2c; int unk30;
     Map();
-    void FUN_0092f3d0(RefObj* o, int key);
+    void hkpCharacterStateManager_registerState(RefObj* o, int key);
 };
 struct ObjB : PoolObj { int unk08; ObjB(); };
 struct ObjC : PoolObj { ObjC(); };
@@ -23518,26 +23528,26 @@ FUN_008e9900::FUN_008e9900(bool flag) {
             n8e9900::Map* m = new n8e9900::Map;
             n8e9900::DAT_010f2e7c = m;
             n8e9900::ObjB* b = new n8e9900::ObjB;
-            n8e9900::DAT_010f2e7c->FUN_0092f3d0(b, 0);
+            n8e9900::DAT_010f2e7c->hkpCharacterStateManager_registerState(b, 0);
             n8e9900::Rel(b);
             n8e9900::ObjC* ptr = new n8e9900::ObjC;
-            n8e9900::DAT_010f2e7c->FUN_0092f3d0(ptr, 5);
+            n8e9900::DAT_010f2e7c->hkpCharacterStateManager_registerState(ptr, 5);
             n8e9900::Rel(ptr);
             n8e9900::ObjD* c5 = new n8e9900::ObjD;
-            n8e9900::DAT_010f2e7c->FUN_0092f3d0(c5, 1);
+            n8e9900::DAT_010f2e7c->hkpCharacterStateManager_registerState(c5, 1);
             n8e9900::Rel(c5);
             n8e9900::ObjE* g = new n8e9900::ObjE;
-            n8e9900::DAT_010f2e7c->FUN_0092f3d0(g, 2);
+            n8e9900::DAT_010f2e7c->hkpCharacterStateManager_registerState(g, 2);
             n8e9900::Rel(g);
             bhkCharacterStateClimbing* f = new bhkCharacterStateClimbing;
-            n8e9900::DAT_010f2e7c->FUN_0092f3d0(f, 3);
+            n8e9900::DAT_010f2e7c->hkpCharacterStateManager_registerState(f, 3);
             n8e9900::Rel(f);
             bhkCharacterStateFlying* j = new bhkCharacterStateFlying;
-            n8e9900::DAT_010f2e7c->FUN_0092f3d0(j, 4);
+            n8e9900::DAT_010f2e7c->hkpCharacterStateManager_registerState(j, 4);
             n8e9900::Rel(j);
             n8e9900::ObjH* e;
             e = new n8e9900::ObjH;
-            n8e9900::DAT_010f2e7c->FUN_0092f3d0(e, 6);
+            n8e9900::DAT_010f2e7c->hkpCharacterStateManager_registerState(e, 6);
             n8e9900::Rel(e);
         }
         FUN_008e90f0(n8e9900::DAT_010f2e7c);
@@ -23743,7 +23753,7 @@ struct Pose {
     __forceinline void setFlagExplicit (PoseFlag& flag, PoseFlag enumToCheck) const;
     __forceinline void clearFlagExplicit (PoseFlag& flag, PoseFlag enumToCheck) const;
     __forceinline void makeAllChildrenLocalSpace (int boneIdx) const;
-    const Transform& FUN_009550e0(int) const;
+    const Transform& hkaPose_calculateBoneModelSpace(int) const;
 };
 int Pose::isFlagOn (int boneIdx, PoseFlag enumToCheck) const { return boneFlags[boneIdx] & enumToCheck; }
 void Pose::setFlag (int boneIdx, PoseFlag enumToCheck) const { boneFlags[boneIdx] |= enumToCheck; }
@@ -23755,7 +23765,7 @@ const Transform& Pose::getBoneModelSpace (int boneIdx) const {
     if (!isFlagOn (boneIdx, F_BONE_MODEL_DIRTY)) {
         return modelPose[boneIdx];
     } else {
-        return FUN_009550e0(boneIdx);
+        return hkaPose_calculateBoneModelSpace(boneIdx);
     }
 }
 const Transform& Pose::getBoneLocalSpace (int boneIdx) const {

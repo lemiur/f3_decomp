@@ -65,5 +65,5 @@ FNV_STATIC_ASSERT(offsetof(NiBSplineData, m_uiCompactControlPointCount) == 20);
 FNV_STATIC_ASSERT(sizeof(NiBSplineData) == 24);
 
 void* __cdecl FUN_00aa1070(unsigned int size);
-void __cdecl FUN_00a89650(const short*, unsigned int, float, float, float*, unsigned int);
+void __cdecl NiCompUtility_DecompressFloatArray(const short*, unsigned int, float, float, float*, unsigned int);
 #endif

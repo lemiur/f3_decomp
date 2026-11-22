@@ -189,7 +189,8 @@ extern const char str_010d19d0[];
 extern void RegisterCallback();
 
 // @fnv 0x00d651c0
-void FUN_00d651c0()
+// pdb: hkpPhantomDisplayViewer::registerViewer | hkpPhantomDisplayViewer.obj | fnv360_0822_retail, ustr_rel + bridge(ustr_rel|ustr_rel), high
+void hkpPhantomDisplayViewer_registerViewer()
 {
     DAT_01268fdc = DAT_01269cd0->Register(str_010d19d0, RegisterCallback);
 }

@@ -979,7 +979,8 @@ void FUN_00c67aa0_Class::FlushEntries()
 
 // 0x00c910a0  ret 4
 // @fnv 0x00c910a0
-void __stdcall FUN_00c910a0(int) {
+// pdb: hkpConstraintInstance::entityAddedCallback | hkpConstraintInstance.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void __stdcall hkpConstraintInstance_entityAddedCallback(int) {
 }
 
 extern void (__stdcall *DAT_00fdf100)(void*);
@@ -1348,7 +1349,7 @@ public:
     void FUN_00c91140() throw();
     void FUN_00c91160(const hkWorldOperationBaseC914& kOperation) throw();
 
-    hkpEntityC914* FUN_00c914d0(hkpEntityC914* pkEntity, int iInitialActivationState) throw();
+    hkpEntityC914* hkpWorld_addEntity(hkpEntityC914* pkEntity, int iInitialActivationState) throw();
 };
 
 void __cdecl NotifyEntityAdded(hkpWorldC914* pkWorld, hkpEntityC914* pkEntity) throw();
@@ -1404,10 +1405,11 @@ struct WorldView9027a0 {
 };
 
 void __cdecl FUN_009266b0(hkpWorldC914* pkWorld, hkpEntityC914* pkEntity, int iInitialActivationState) throw();
-void __cdecl FUN_00928050(hkpWorldC914* pkWorld, hkpEntityC914* pkEntity) throw();
+void __cdecl hkpWorldOperationUtil_addEntityBP(hkpWorldC914* pkWorld, hkpEntityC914* pkEntity) throw();
 void __cdecl FUN_00987d30(hkpEntityC914* pkEntity) throw();
 
-hkpEntityC914* hkpWorldC914::FUN_00c914d0(hkpEntityC914* pkEntity, int iInitialActivationState) throw()
+// pdb: hkpWorld::addEntity | hkpWorld.obj | fnv360_0822_retail, call_seq + bridge(call_gap_sim|call_seq) + skyrim(call_gap_sim), high
+hkpEntityC914* hkpWorldC914::hkpWorld_addEntity(hkpEntityC914* pkEntity, int iInitialActivationState) throw()
 {
     WorldView9027a0* pkWorld = reinterpret_cast<WorldView9027a0*>(this);
     if (pkWorld->m_iCriticalOperationsLockCount != 0) {
@@ -1438,7 +1440,7 @@ hkpEntityC914* hkpWorldC914::FUN_00c914d0(hkpEntityC914* pkEntity, int iInitialA
 
     pkWorld->m_iCriticalOperationsLockCount++;
     pkWorld->m_bBlockExecutingPendingOperationQueues = true;
-    FUN_00928050(this, pkEntity);
+    hkpWorldOperationUtil_addEntityBP(this, pkEntity);
     NotifyEntityAdded(this, pkEntity);
     FUN_00987d30(pkEntity);
     pkWorld->m_iCriticalOperationsLockCount--;
@@ -1824,8 +1826,8 @@ struct W29World {
     void FUN_00902550();
 };
 void FUN_00901f10(void* arr, int elemSize);
-void FUN_00928190(void* world, hkpPhantom* phantom);
-void FUN_00988840(void* world, hkpPhantom* phantom);
+void hkpWorldOperationUtil_addPhantomBP(void* world, hkpPhantom* phantom);
+void hkpWorldCallbackUtil_firePhantomAdded(void* world, hkpPhantom* phantom);
 
 hkpPhantom* FUN_00c936a0_World::FUN_00c936a0(hkpPhantom* phantom)
 {
@@ -1854,8 +1856,8 @@ hkpPhantom* FUN_00c936a0_World::FUN_00c936a0(hkpPhantom* phantom)
     arr->data[arr->count] = phantom;
     arr->count++;
 
-    FUN_00928190(this, phantom);
-    FUN_00988840(this, phantom);
+    hkpWorldOperationUtil_addPhantomBP(this, phantom);
+    hkpWorldCallbackUtil_firePhantomAdded(this, phantom);
     ((W29Phantom*)phantom)->FUN_00989860();
 
     if (--self->m_iCriticalOperationsLockCount == 0 && !self->m_bBlockExecutingPendingOperations && self->m_iPendingOperationCount) {
@@ -2771,8 +2773,8 @@ inline int findNull(const hkArray<void*>& values) {
 }
 struct SystemWorld : hkpWorld {
     void FUN_00c94bd0(void**, int, int);
-    void FUN_00c914d0(void*, int);
-    void FUN_00c954e0(void**, int);
+    void hkpWorld_addEntity(void*, int);
+    void hkpWorld_addPhantomBatch(void**, int);
     void FUN_00c936a0(void*);
     void FUN_00c97370(void*);
     void FUN_00c97d30(SystemObject*);
@@ -2787,13 +2789,13 @@ void SystemWorld::FUN_00c97f80(PhysicsSystem* system) {
         } else {
             for (int i = 0; i < system->entities.m_iElementCount; ++i) {
                 if (system->entities.m_data[i])
-                    FUN_00c914d0(system->entities.m_data[i], system->isActive() ? 1 : 0);
+                    hkpWorld_addEntity(system->entities.m_data[i], system->isActive() ? 1 : 0);
             }
         }
     }
     if (system->phantoms.m_iElementCount > 0) {
         if (findNull(system->phantoms) == -1) {
-            FUN_00c954e0(system->phantoms.m_data, system->phantoms.m_iElementCount);
+            hkpWorld_addPhantomBatch(system->phantoms.m_data, system->phantoms.m_iElementCount);
         } else {
             for (int i = 0; i < system->phantoms.m_iElementCount; ++i) {
                 if (system->phantoms.m_data[i])
@@ -4061,7 +4063,7 @@ void This676::ClearIndexedValues()
         SystemWorld* world = ((Poly676*)this)->v38();
         if (world != 0)
         {
-            world->FUN_00c954e0((void**)self->m_aiIndexedValues, (int)self->m_uiItemCount);
+            world->hkpWorld_addPhantomBatch((void**)self->m_aiIndexedValues, (int)self->m_uiItemCount);
 
             for (unsigned int i = 0; i < self->m_uiItemCount; i++)
             {
@@ -4350,7 +4352,7 @@ struct FUN_00c91620_Class {
 
 void __cdecl FUN_00d005a0(FUN_00c91620_Class* self, FUN_00c91620_Target* target);
 void __cdecl FUN_00cffab0(FUN_00c91620_Target* target);
-void __cdecl FUN_00cb4740(FUN_00c91620_Class* self, FUN_00c91620_Target* target);
+void __cdecl hkpWorldOperationUtil_removeEntitySI(FUN_00c91620_Class* self, FUN_00c91620_Target* target);
 
 // If m_94 is nonzero, calls FUN_00c91160 with type 2 and writes 0 to *result; otherwise runs the helper calls on target and writes 1 to *result.
 // @f3 0x009037f0 (community match, verified in this file)
@@ -4401,8 +4403,8 @@ struct FUN_008f6d90_Pool {
     void FUN_008f6d90(void* p, unsigned int size, int tag);
 };
 
-void __cdecl FUN_009282b0(FO3Cls* self, FO3Target* target);
-void __cdecl FUN_009886e0(FO3Cls* self, FO3Target* target);
+void __cdecl hkpWorldOperationUtil_removeEntityBP(FO3Cls* self, FO3Target* target);
+void __cdecl hkpWorldCallbackUtil_fireEntityRemoved(FO3Cls* self, FO3Target* target);
 void __cdecl FUN_00987de0(FO3Target* target);
 void __cdecl FUN_00927460(FO3Cls* self, FO3Target* target);
 
@@ -4422,8 +4424,8 @@ unsigned char* FUN_00c91620_Class::ProcessTarget(
     }
 
     self->m_84 = 1;
-    FUN_009282b0(self, target);
-    FUN_009886e0(self, target);
+    hkpWorldOperationUtil_removeEntityBP(self, target);
+    hkpWorldCallbackUtil_fireEntityRemoved(self, target);
     FUN_00987de0(target);
     self->m_8d = 0;
     FUN_00927460(self, target);
@@ -5186,7 +5188,7 @@ void zz_call_c92860(void)
     InvokeOnAllOwners(zz_ctx_c92860, s);
 }
 
-void __cdecl FUN_00d06cb0(void* apvArray, int iSizeElem);
+void __cdecl hkSmallArrayUtil__reserveMore(void* apvArray, int iSizeElem);
 
 class EntityC92B;
 
@@ -5217,7 +5219,7 @@ struct hkSmallArrayC92B {
     void AddBack(const T& e)
     {
         if (m_iElementCount == getCapacity())
-            FUN_00d06cb0(this, sizeof(T));
+            hkSmallArrayUtil__reserveMore(this, sizeof(T));
         m_data[m_iElementCount++] = e;
     }
 };
@@ -5234,16 +5236,17 @@ public:
 
 class ListenerC92B {
 public:
-    void FUN_00c92bd0(EntityC92B* pkEntity, WorldC92B* pkWorld);
+    void hkpWorld_attachActionToEntity(EntityC92B* pkEntity, WorldC92B* pkWorld);
 };
 
-void __cdecl FUN_00cb5570(ListenerC92B* pkThis, WorldC92B* pkWorld, int* pkCurrentObject);
+void __cdecl hkpWorldOperationUtil_mergeIslands(ListenerC92B* pkThis, WorldC92B* pkWorld, int* pkCurrentObject);
 
-// Appends pkEntity to m_kActorEntries; moves it to the fixed island if its island's storage index is 0xffff, else calls FUN_00cb5570 if islands differ.
+// Appends pkEntity to m_kActorEntries; moves it to the fixed island if its island's storage index is 0xffff, else calls hkpWorldOperationUtil_mergeIslands if islands differ.
 // @f3 0x009038e0 (community match, verified in this file)
 void __cdecl FUN_0098a9f0(void* array, int elementSize);
 
-void ListenerC92B::FUN_00c92bd0(EntityC92B* pkEntity, WorldC92B* pkWorld)
+// pdb: hkpWorld::attachActionToEntity | hkpWorld.obj | fnv360_0822_retail, caller_sim + bridge(caller_sim|caller_sim) + skyrim(caller_sim), high
+void ListenerC92B::hkpWorld_attachActionToEntity(EntityC92B* pkEntity, WorldC92B* pkWorld)
 {
     hkSmallArrayC92B<EntityC92B*>* pkEntries = (hkSmallArrayC92B<EntityC92B*>*)((char*)pkWorld + 0x1f8);
     unsigned short usCapacity = (unsigned short)(pkEntries->m_iCapacityState & 0x3fff);
@@ -5265,7 +5268,7 @@ void ListenerC92B::FUN_00c92bd0(EntityC92B* pkEntity, WorldC92B* pkWorld)
         return;
     if (*((unsigned char*)pkWorld + 0xd8) == 7)
         return;
-    FUN_00cb5570(this, pkWorld, *pkIsland->m_pEntities);
+    hkpWorldOperationUtil_mergeIslands(this, pkWorld, *pkIsland->m_pEntities);
 }
 
 
@@ -5397,7 +5400,7 @@ struct WorldOps92C {
     void FUN_00902550();
 };
 extern "C" void __cdecl FUN_008888f0(WorldView92C* pkWorld, ActionC92C* pkAction);
-extern "C" void __cdecl FUN_009283d0(WorldView92C* pkWorld, ActionC92C* pkAction);
+extern "C" void __cdecl hkpWorldOperationUtil_removePhantomBP(WorldView92C* pkWorld, ActionC92C* pkAction);
 template <class T>
 struct hkArray92C {
     T* m_data;
@@ -5440,7 +5443,7 @@ void WorldC92C::FUN_00c92c70(ActionC92C* pkAction)
     pkWorld->m_iCriticalOperationsLockCount++;
     FUN_008888f0(pkWorld, pkAction);
     ((ActionOps92C*)pkAction)->FUN_00989820();
-    FUN_009283d0(pkWorld, pkAction);
+    hkpWorldOperationUtil_removePhantomBP(pkWorld, pkAction);
     int iIndex = pkWorld->m_ppActions.indexOf(pkAction);
     pkWorld->m_ppActions.m_iElementCount--;
     pkWorld->m_ppActions.m_data[iIndex] = pkWorld->m_ppActions.m_data[pkWorld->m_ppActions.m_iElementCount];
@@ -6598,7 +6601,7 @@ struct C97E80CleanupShell {
     void __thiscall FUN_00c91120();
     void __thiscall FUN_00c91140();
 };
-void __cdecl FUN_00cb3dd0(hkpWorld* world, C97E80Action* action, int flags);
+void __cdecl hkpWorldOperationUtil_removeConstraintImmediately(hkpWorld* world, C97E80Action* action, int flags);
 struct C97E80Return { bool m_iResultCode; };
 struct C97E80World : hkpWorld {
     C97E80Return __thiscall FUN_00c97e80(C97E80Action* action);
@@ -6621,7 +6624,7 @@ C97E80Return __thiscall C97E80World::FUN_00c97e80(C97E80Action* action) {
         ((C97E80RemoveShell*)this)->FUN_00c97510(action->m_owner44);
     }
     ((RefObj*)action)->FUN_00c90510();
-    FUN_00cb3dd0(this, action, 1);
+    hkpWorldOperationUtil_removeConstraintImmediately(this, action, 1);
     ((C97E80ActionChangeShell*)action)->RemoveReferenceFromSlots(this);
     ((C97E80ReleaseShell*)action)->FUN_00c905b0();
     --m_iCriticalOperationsLockCount;
@@ -7800,7 +7803,7 @@ struct FilterCommand {
     unsigned char updateShape;
 };
 struct CallRet : hkpWorld {
-    void FUN_00c946e0(CollisionEntity*, int, int);
+    void hkpWorld_updateCollisionFilterOnEntity(CollisionEntity*, int, int);
     void FUN_00c91160(FilterCommand*);
     void FUN_00c91120();
     void FUN_00c91140();
@@ -7992,7 +7995,8 @@ static void SyncOverlap(OverlapPhantom* phantom, OverlapCollidable* other, Overl
 
 }
 
-void CallRet::FUN_00c946e0(CollisionEntity* entity, int updateCollection, int updateShape)
+// pdb: hkpWorld::updateCollisionFilterOnEntity | hkpWorld.obj | fnv360_0822_retail, ustr + bridge(ustr|ustr) + skyrim(ustr), high
+void CallRet::hkpWorld_updateCollisionFilterOnEntity(CollisionEntity* entity, int updateCollection, int updateShape)
 {
     using namespace f3m_009062d0;
     WorldView& w = *(WorldView*)this;
@@ -8867,7 +8871,7 @@ inline void* getMemoryRouter() throw() { return &hkRouterXc937a0::FUN_00c85750()
 extern "C" void __cdecl FUN_00c908c0(void* inst, void* arr, int num, int elemSize) throw();
 extern "C" void __cdecl FUN_00d005a0(hkpWorld* world, void* entity) throw();
 extern "C" void __cdecl FUN_00cffab0(void* entity) throw();
-extern "C" void __cdecl FUN_00cb4740(hkpWorld* world, void* entity) throw();
+extern "C" void __cdecl hkpWorldOperationUtil_removeEntitySI(hkpWorld* world, void* entity) throw();
 
 class hkMemory_00c951b0 {
 public:
@@ -9281,7 +9285,7 @@ struct Q6DWorld {
     void FUN_00902570(Q6DOp* op) throw();
     void FUN_00902550() throw();
 };
-void __cdecl FUN_009886e0(Q6DWorld* w, Q6DEntity* e) throw();
+void __cdecl hkpWorldCallbackUtil_fireEntityRemoved(Q6DWorld* w, Q6DEntity* e) throw();
 void __cdecl FUN_00987de0(Q6DEntity* e) throw();
 void __cdecl FUN_00927460(Q6DWorld* w, Q6DEntity* e) throw();
 }
@@ -9384,7 +9388,7 @@ void HostWorld_00c951b0::RemoveEntities(void* const* entityBatch, int numEntitie
         }
     }
     for (void* const* it = entityBatch; it != end; it++) {
-        FUN_009886e0(w, (Q6DEntity*)*it);
+        hkpWorldCallbackUtil_fireEntityRemoved(w, (Q6DEntity*)*it);
         FUN_00987de0((Q6DEntity*)*it);
         FUN_00927460(w, (Q6DEntity*)*it);
         Q6DEntity* e = (Q6DEntity*)*it;
@@ -9494,7 +9498,7 @@ struct Mgr {
   void FUN_00c97370(Info* i);
   void* FUN_00c97d30(Item* it);
 };
-// If m_94 is nonzero, queues an op of type 8 for it and returns 0; otherwise sets it up, calls FUN_00cb3ca0 and returns its result.
+// If m_94 is nonzero, queues an op of type 8 for it and returns 0; otherwise sets it up, calls hkpWorldOperationUtil_addConstraintImmediately and returns its result.
 // @f3 0x009082b0 (community match, verified in this file)
 struct SubFix
 {
@@ -9948,7 +9952,7 @@ void __cdecl FUN_00cfeba0(S96_Constraint*,void*,S96_Island*);
 void __cdecl FUN_00cc1160(S96_Constraint*);
 struct S96_RemovalList {S96_Constraint** data; int size; int capacity; S96_Constraint* local[32]; void clear(){size=0;} int GetLogicalSize() const {return size;} S96_Constraint*& back(){return data[size-1];} void popBack(){--size;}};
 struct S96_WorldShell : hkpWorld {
- void FUN_00c91160(const S96_Operation&); void FUN_00c946e0(void*,int,int); void UpdatePhantom(void*,int); void FUN_00c91120(); void FUN_00c91140();
+ void FUN_00c91160(const S96_Operation&); void hkpWorld_updateCollisionFilterOnEntity(void*,int,int); void UpdatePhantom(void*,int); void FUN_00c91120(); void FUN_00c91140();
  __forceinline void S96_attempt() {
   if(!m_iCriticalOperationsLockCount && !m_bBlockExecutingPendingOperations) {
    if(m_iPendingOperationCount) FUN_00c91120();
@@ -9986,7 +9990,7 @@ struct S96_WorldShell : hkpWorld {
  __forceinline bool S96_enabled(S96_Constraint* c) {
   return ((S96_Filter*)m_pCollisionFilter)->unk08.Check(c->unk10,c->unk14).value && ((char*)m_pDispatcher)[0x1bb0+c->unk10->unk1A*10+c->unk14->unk1A];
  }
- void FUN_00c96ff0(int mode,int update);
+ void hkpWorld_updateCollisionFilterOnWorld(int mode,int update);
 };
 // @f3 0x00907f30 (community match, verified in this file)
 struct TimingEntry1135 {
@@ -10090,7 +10094,8 @@ static __forceinline void End1960() {
   reinterpret_cast<TimingEntry1135*>(entry)->setTime(); timer->unk04=entry+1;
  }
 }
-void S96_WorldShell::FUN_00c96ff0(int mode,int update) {
+// pdb: hkpWorld::updateCollisionFilterOnWorld | hkpWorld.obj | fnv360_0822_retail, ustr + bridge(ustr|ustr) + skyrim(ustr), high
+void S96_WorldShell::hkpWorld_updateCollisionFilterOnWorld(int mode,int update) {
  NativeWorld1960* self=(NativeWorld1960*)this;
  if(self->m_iCriticalOperationsLockCount) {
   S96_Operation op;
@@ -12092,7 +12097,7 @@ struct ActionObj {
 };
 
 struct FUN_00cac980_Holder {
-    void* __thiscall FUN_00cac980();
+    void* __thiscall hkpCharacterProxy_getShapePhantom();
 };
 
 struct FUN_00cac910_shell : FUN_00cac980_Holder {
@@ -12343,7 +12348,7 @@ struct Q78World {
     void FUN_00902570(Q78Op* op) throw();
     void FUN_00902550() throw();
 };
-void __cdecl FUN_009888f0(Q78World* w, Q78Phantom* p) throw();
+void __cdecl hkpWorldCallbackUtil_firePhantomRemoved(Q78World* w, Q78Phantom* p) throw();
 }
 
 void World_RemovePhantomBatch::FUN_00c95800(hkpPhantom** phantomBatch, int numPhantoms) throw()
@@ -12365,7 +12370,7 @@ void World_RemovePhantomBatch::FUN_00c95800(hkpPhantom** phantomBatch, int numPh
         Q78Phantom* p = (Q78Phantom*)phantomBatch[i];
         handles.data[handles.size] = &p->handle;
         handles.size++;
-        FUN_009888f0(w, p);
+        hkpWorldCallbackUtil_firePhantomRemoved(w, p);
         p->FUN_00989820();
     }
     {
@@ -12626,7 +12631,7 @@ struct WorldHelper : public hkpWorld {
     void __thiscall FUN_00c91120() throw();
     void __thiscall FUN_00c91140() throw();
 
-    void FUN_00c954e0(hkpPhantom* const* phantomBatch, int numPhantoms) throw();
+    void hkpWorld_addPhantomBatch(hkpPhantom* const* phantomBatch, int numPhantoms) throw();
 };
 
 // Adds a batch of phantoms to the world (queued as a pending op if locked), updates broad phase pairs, and passes them to FUN_00cf7080.
@@ -12726,10 +12731,11 @@ struct Q75World {
     void FUN_00902570(Q75Op* op) throw();
     void FUN_00902550() throw();
 };
-void __cdecl FUN_00988840(Q75World* w, Q75Phantom* p) throw();
+void __cdecl hkpWorldCallbackUtil_firePhantomAdded(Q75World* w, Q75Phantom* p) throw();
 }
 
-void BatchAdd::WorldHelper::FUN_00c954e0(hkpPhantom* const* phantomBatch, int numPhantoms) throw()
+// pdb: hkpWorld::addPhantomBatch | hkpWorld.obj | fnv360_0822_retail, call_seq + bridge(call_gap_sim|caller_sim) + skyrim(call_gap), high
+void BatchAdd::WorldHelper::hkpWorld_addPhantomBatch(hkpPhantom* const* phantomBatch, int numPhantoms) throw()
 {
     using namespace f3m_00907570;
     Q75World* w = reinterpret_cast<Q75World*>(this);
@@ -12761,7 +12767,7 @@ void BatchAdd::WorldHelper::FUN_00c954e0(hkpPhantom* const* phantomBatch, int nu
             f3m_00907570::FUN_00901f10(&a, 4);
         a.data[a.size] = p;
         a.size++;
-        FUN_00988840(w, p);
+        hkpWorldCallbackUtil_firePhantomAdded(w, p);
         p->FUN_00989860();
     }
 
@@ -12985,7 +12991,7 @@ struct Entity {
     char p00[0x1f8];
     SmallArray<Action*> actions;
 };
-void __cdecl FUN_00988580(World* w, Action* a) throw();
+void __cdecl hkpWorldCallbackUtil_fireActionRemoved(World* w, Action* a) throw();
 }
 void hkpWorldDecomp::FUN_00c97510(hkpAction* a)
 {
@@ -12994,7 +13000,7 @@ void hkpWorldDecomp::FUN_00c97510(hkpAction* a)
     World* self = (World*)this;
     action->AddReference();
     self->lockCount++;
-    FUN_00988580(self, action);
+    hkpWorldCallbackUtil_fireActionRemoved(self, action);
     {
         InplaceArray<Entity*, 4> entities;
         action->GetEntities(entities);

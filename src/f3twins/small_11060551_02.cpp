@@ -39,7 +39,7 @@ __declspec(noinline) void __cdecl FUN_00d98f70()
 
 struct T_005abd50 { int pad; int FUN_005abd50(); };
 struct T_00723670 { int pad; int FUN_00723670(); };
-struct T_00723ca0 { int pad; int FUN_00723ca0(int); };
+struct T_00723ca0 { int pad; int ActorPackage_FinishLoadGame(int); };
 struct T_0078ba80 { int pad; int FUN_0078ba80(int, int); };
 
 struct S_005aaf30 { int pad; int FUN_005aaf30(); };
@@ -57,7 +57,7 @@ int S_00727100::FUN_00727100()
 struct S_00727950 { int pad; int FUN_00727950(int); };
 int S_00727950::FUN_00727950(int a0)
 {
-    return ((T_00723ca0*)((char*)this + 4))->FUN_00723ca0(a0);
+    return ((T_00723ca0*)((char*)this + 4))->ActorPackage_FinishLoadGame(a0);
 }
 
 struct S_0078bd00 { int pad; int FUN_0078bd00(int, int); };

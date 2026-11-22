@@ -453,7 +453,7 @@ class hkpWorld
         FUN_00c95a80(info, 0x111d4);
     }
     void FUN_00c97f80(hkpPhysicsSystem* system) throw();
-    void FUN_00c96ff0(int a, int b) throw();
+    void hkpWorld_updateCollisionFilterOnWorld(int a, int b) throw();
 };
 
 struct ContactOptions
@@ -526,7 +526,7 @@ hkpWorld* PhysicsDataExt::CreateWorld(char bRegisterWithMemoryManager) throw()
     }
     if (this->m_pWorldCinfo && *(void**)((char*)this->m_pWorldCinfo + 0x54))
     {
-        world->FUN_00c96ff0(0, 1);
+        world->hkpWorld_updateCollisionFilterOnWorld(0, 1);
     }
     return world;
 }
@@ -637,7 +637,7 @@ struct HostType
     int m_04;
     void* m_08;
     ArrayType m_0c;
-    void FUN_00d4c2d0(ClientType*, unsigned char);
+    void hkpPhysicsData_populateFromWorld(ClientType*, unsigned char);
 };
 
 // Ensures m_08 is allocated, registers client and m_0c, and when value is set allocates a SmallType, calls ProcessCollisionRecords, and appends it to m_0c.
@@ -696,7 +696,8 @@ struct HostCallData
 void __cdecl FUN_00a4d390(HostCallData* pkData, ClientType* pkClient, ItemType* pkItem);
 void __cdecl FUN_00901f10(ArrayType* pkArray, int iElementSize);
 
-void HostType::FUN_00d4c2d0(ClientType* client, unsigned char flag)
+// pdb: hkpPhysicsData::populateFromWorld | hkpPhysicsData.obj | fnv360_0822_retail, call_seq + skyrim(call_seq), high
+void HostType::hkpPhysicsData_populateFromWorld(ClientType* client, unsigned char flag)
 {
     if (m_08 == 0)
     {
@@ -796,7 +797,8 @@ template <class T> __forceinline int findValue(T* self, Value* value)
 typedef int Owner::*MemberPtr;
 // If value is in owner's list but not entity's, sets entity->m_40, calls entity->AddShape(value) and owner->FUN_00d06130 with the owner index.
 // @fnv 0x00d4bf70
-static __declspec(noinline) void FUN_00d4bf70(Owner* owner, Entity* volatile apEntity, MemberPtr valueArg)
+// pdb: hkpPhysicsSystem::removeRigidBody | hkpPhysicsSystem.obj | fnv360_0822_retail, call_gap + bridge(call_gap|call_gap) + skyrim(call_gap), high
+static __declspec(noinline) void hkpPhysicsSystem_removeRigidBody(Owner* owner, Entity* volatile apEntity, MemberPtr valueArg)
 {
     Entity* entity = apEntity;
     Value* pValue;
@@ -818,7 +820,7 @@ void probeCaller()
 {
     OwnerArg o = {probeOwner};
     ValueArg v = {probeValue};
-    FUN_00d4bf70(o.p, probeEntity, *(MemberPtr*)&v.p);
+    hkpPhysicsSystem_removeRigidBody(o.p, probeEntity, *(MemberPtr*)&v.p);
 }
 
 namespace fnv_00d4c250 {

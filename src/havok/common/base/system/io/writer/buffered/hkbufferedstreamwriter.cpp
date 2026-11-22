@@ -46,7 +46,7 @@ int __thiscall FUN_00d27260_standin::FUN_00d27260(const void* data, int size)
     return size;
 }
 
-void __cdecl FUN_00d272e0();
+void __cdecl hkBufferedStreamWriter_flush();
 void* __cdecl _D1A0E0GetMemoryRouter();
 
 namespace fnv_00d27570 {
@@ -139,11 +139,12 @@ struct FUN_00d272e0_class
     int unk04;
     FUN_00d272e0_target* unk08;
 
-    void FUN_00d272e0();
+    void hkBufferedStreamWriter_flush();
 };
 
 // @fnv 0x00d272e0
-void FUN_00d272e0_class::FUN_00d272e0()
+// pdb: hkBufferedStreamWriter::flush | hkBufferedStreamWriter.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void FUN_00d272e0_class::hkBufferedStreamWriter_flush()
 {
     reinterpret_cast<FUN_00d27260_standin*>(this)->FlushToDestination();
 
@@ -348,12 +349,13 @@ class FUN_00d273f0_cls
     int unk0C;
     int m_base;
 
-    int FUN_00d273f0() const;
+    int hkBufferedStreamWriter_tell() const;
 };
 
 // Returns m_base plus the child count from m_inner, or -1 when the count is negative.
 // @fnv 0x00d273f0
-int FUN_00d273f0_cls::FUN_00d273f0() const
+// pdb: hkBufferedStreamWriter::tell | hkBufferedStreamWriter.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+int FUN_00d273f0_cls::hkBufferedStreamWriter_tell() const
 {
     int n = m_inner ? m_inner->getNumChildren() : 0;
     if (n >= 0)

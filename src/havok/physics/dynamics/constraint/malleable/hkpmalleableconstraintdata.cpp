@@ -166,11 +166,12 @@ struct FUN_00cdf6d0_t
 {
     int m_auiShapeKeys[3];
     int m_field_c;
-    int FUN_00cdf6d0();
+    int hkClass_getNumDeclaredInterfaces();
 };
 
 // @fnv 0x00cdf6d0
-int FUN_00cdf6d0_t::FUN_00cdf6d0()
+// pdb: hkClass::getNumDeclaredInterfaces | hkClass.obj | fnv360_0822_retail, call_gap_sim + bridge(call_gap|call_seq) + skyrim(call_gap), high
+int FUN_00cdf6d0_t::hkClass_getNumDeclaredInterfaces()
 {
     return m_field_c;
 }

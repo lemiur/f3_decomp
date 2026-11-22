@@ -149,9 +149,10 @@ bool C_00b0f980::FUN_00b0f980(unsigned int& ruiPass, int iSubBucketIndex)
 
 struct E_00b445f0 { int unk00; short unk04; unsigned char unk06; };
 struct L_00b445f0 { int unk00; E_00b445f0** m_pData; int unk08; int unk0C; int m_uiItemCount; void FUN_00b2c0b0(int, int, bool, int, int, int, int, int); };
-struct C_00b445f0 { char pad[0x3c]; L_00b445f0* m_pPassList; void FUN_00b2b740(int); L_00b445f0* FUN_00b445f0(int, int, int, int, int, int); };
+struct C_00b445f0 { char pad[0x3c]; L_00b445f0* m_pPassList; void FUN_00b2b740(int); L_00b445f0* BoltShaderProperty_GetRenderPasses(int, int, int, int, int, int); };
 
-L_00b445f0* C_00b445f0::FUN_00b445f0(int geom, int, int, int, int, int)
+// pdb: BoltShaderProperty::GetRenderPasses | BoltShaderProperty.obj | fnv360_0822_retail, objrun + bridge(hash|objopen_prop), high
+L_00b445f0* C_00b445f0::BoltShaderProperty_GetRenderPasses(int geom, int, int, int, int, int)
 {
     FUN_00b2b740(1);
     L_00b445f0* passes = m_pPassList;
@@ -247,9 +248,10 @@ struct G_00b5b460 { char pad[0x2f8]; V_00b5b460 m_2f8; };
 extern G_00b5b460* DAT_0116ef9c;
 struct R_00b5b460 { int FUN_00b23bc0(int flag, float x, float y, float z, float w); };
 struct I_00b5b460 { R_00b5b460* m_00; };
-struct C_00b5b460 { char pad[0x1c]; I_00b5b460* m_1c; bool FUN_00b5b460(unsigned char flag); };
+struct C_00b5b460 { char pad[0x1c]; I_00b5b460* m_1c; bool ImageSpaceEffectRefraction_UpdateParams(unsigned char flag); };
 
-bool C_00b5b460::FUN_00b5b460(unsigned char flag)
+// pdb: ImageSpaceEffectRefraction::UpdateParams | ImageSpaceEffectRefraction.obj | fnv360_0822_retail, objrun_sim + bridge(hash|objrun_sim), high
+bool C_00b5b460::ImageSpaceEffectRefraction_UpdateParams(unsigned char flag)
 {
     V_00b5b460 tmp;
     tmp = DAT_0116ef9c->m_2f8;

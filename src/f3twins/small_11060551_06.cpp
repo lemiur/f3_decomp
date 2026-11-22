@@ -139,7 +139,8 @@ void FUN_006557a0(int a)
     DAT_010768ec->FUN_006551a0(a);
 }
 
-void FUN_0082a370(int a)
+// pdb: NiStream::UnregisterLoader | NiStream.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_seq), high
+void NiStream_UnregisterLoader(int a)
 {
     DAT_0108f104->FUN_00899cf0(a);
 }
@@ -265,8 +266,9 @@ void __stdcall FUN_0082a130(int a, int b)
 
 
 
-struct C_0083b590 { void FUN_00833110(int); void FUN_0083af80(); void FUN_0083b590_(int); };
-void C_0083b590::FUN_0083b590_(int a)
+struct C_0083b590 { void FUN_00833110(int); void FUN_0083af80(); void NiCamera_UpdateWorldData(int); };
+// pdb: NiCamera::UpdateWorldData | NiCamera.obj | fnv360_0822_retail, caller_sim + bridge(vtable|caller_sim) + skyrim(caller_sim), high
+void C_0083b590::NiCamera_UpdateWorldData(int a)
 {
     FUN_00833110(a);
     FUN_0083af80();

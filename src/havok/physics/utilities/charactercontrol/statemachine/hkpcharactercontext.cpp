@@ -80,7 +80,7 @@ class hkpCharacterStateCA96
 class hkpCharacterStateManagerCA96
 {
   public:
-    hkpCharacterStateCA96* FUN_00cbc510(int iState) const throw();
+    hkpCharacterStateCA96* hkpCharacterStateManager_getState(int iState) const throw();
 };
 
 class hkpCharacterContextCA96
@@ -100,9 +100,9 @@ class hkpCharacterContextCA96
 void hkpCharacterContextCA96::SetState(int iState, const hkpCharacterInputCA96& kInput, hkpCharacterOutputCA96& kOutput)
 {
     int iPrevState = m_iPreviousState;
-    pCharacterStateManager->FUN_00cbc510(m_iPreviousState)->leaveState(*this, iState, kInput, kOutput);
+    pCharacterStateManager->hkpCharacterStateManager_getState(m_iPreviousState)->leaveState(*this, iState, kInput, kOutput);
     m_iPreviousState = iState;
-    pCharacterStateManager->FUN_00cbc510(iState)->enterState(*this, iPrevState, kInput, kOutput);
+    pCharacterStateManager->hkpCharacterStateManager_getState(iState)->enterState(*this, iPrevState, kInput, kOutput);
 }
 
 #include <xmmintrin.h>

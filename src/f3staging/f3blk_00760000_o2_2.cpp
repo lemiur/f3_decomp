@@ -1270,7 +1270,7 @@ struct Scene {
  Pair* FUN_0061f4f0(Pair*);
  void FUN_0056c440(unsigned int);
  Pair* FUN_00766b00(Pair*);
- void FUN_00919380(int,int);
+ void bhkRagdollPenetrationUtil_Initialize(int,int);
  Scene* FUN_008f9c90(int);
  void FUN_004e94e0(Scene*);
  Scene* FUN_006a8fb0();
@@ -1642,7 +1642,7 @@ void Scene::FUN_00769230() {
   }
  } else if(actor) active=actor; else active=0;
  if(owner && owner->unk20>0) scene->unk294|=(1<<22);
- if(active && special) { Pair p; int h=active->FUN_00766b00(&p)->high; active->unka8->FUN_00919380(active->GetNode(),h); }
+ if(active && special) { Pair p; int h=active->FUN_00766b00(&p)->high; active->unka8->bhkRagdollPenetrationUtil_Initialize(active->GetNode(),h); }
  Scene* current=scene->unk424?scene->unk424->FUN_008f9c90(0):0;
  actor=(ActorView*)Parent(this);
  if(current!=actor) {

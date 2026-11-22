@@ -53,10 +53,11 @@ struct MeshShape_5c90 {
     MeshSubpart_5c90* m_subparts;
     int m_subpartsSize;
     int m_subpartsCapacityAndFlags;
-    void FUN_00a45c90(hkStatisticsCollector* collector) const;
+    void hkpMeshShape_calcContentStatistics(hkStatisticsCollector* collector) const;
 };
 
-void MeshShape_5c90::FUN_00a45c90(hkStatisticsCollector* collector) const
+// pdb: hkpMeshShape::calcContentStatistics | hkpMeshShape.obj | fnv360_0822_retail, ustr + bridge(ustr|vtable) + skyrim(ustr), high
+void MeshShape_5c90::hkpMeshShape_calcContentStatistics(hkStatisticsCollector* collector) const
 {
     collector->beginObject(DAT_00e80638, 1, this);
     if (!(m_subpartsCapacityAndFlags & 0x80000000)) {
@@ -113,7 +114,7 @@ struct Count399 {
     unsigned int unk10;
     int count;
 };
-int __cdecl FUN_009232c0(const Record399* record, const void* key);
+int __cdecl hkString_strCmp(const Record399* record, const void* key);
 struct Search399 {
     unsigned int unk00;
     unsigned int unk04;
@@ -128,7 +129,7 @@ struct Search399 {
 };
 int Search399::FUN_00a46010(const void* key) {
     for (int index = 0; index < context->count; ++index) {
-        if (FUN_009232c0(&records[index], key) == 0)
+        if (hkString_strCmp(&records[index], key) == 0)
             return index;
     }
     return -1;
@@ -295,10 +296,11 @@ struct Class_a4ae40
     int unk8c;
     int unk90;
     void FUN_00a4ac50(int a1, int a2, int a3, int a4, int extra);
-    void FUN_00a4ae40(int a1, int a2, int a3, int a4);
+    void hkPackfileWriter_setContentsWithRegistry(int a1, int a2, int a3, int a4);
 };
 
-void Class_a4ae40::FUN_00a4ae40(int a1, int a2, int a3, int a4)
+// pdb: hkPackfileWriter::setContentsWithRegistry | hkPackfileWriter.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void Class_a4ae40::hkPackfileWriter_setContentsWithRegistry(int a1, int a2, int a3, int a4)
 {
     FUN_00a4ac50(a1, a2, a3, a4, DAT_01065190);
     unk8c = hashTable.FUN_009227d0(a1, -1);
@@ -716,7 +718,7 @@ struct ContactPoints {
 };
 
 struct System {
-    void FUN_00a4e1f0(ContactPoints* obj) throw();
+    void hkpPhysicsSystemWithContacts_addContact(ContactPoints* obj) throw();
 };
 
 int __cdecl FUN_00a4cdf0(void* input, void* agentEntry, void* collisionInput, ContactPoints* out) throw();
@@ -725,7 +727,8 @@ int __cdecl FUN_00a4cdf0(void* input, void* agentEntry, void* collisionInput, Co
 
 using namespace f3m_00a4d550;
 
-void __cdecl FUN_00a4d550(void* input, Entity** entities, int numEntities, System* out)
+// pdb: hkpSaveContactPointsUtil::saveContactPoints | hkpSaveContactPointsUtil.obj | fnv360_0822_retail, objrun + skyrim(objrun), high
+void __cdecl hkpSaveContactPointsUtil_saveContactPoints(void* input, Entity** entities, int numEntities, System* out)
 {
     World* world = entities[0]->m_world;
     PointerMap set(numEntities);
@@ -737,7 +740,7 @@ void __cdecl FUN_00a4d550(void* input, Entity** entities, int numEntities, Syste
             if (!set.isValid(set.FUN_00922790(entry.m_partner))) {
                 ContactPoints* obj = new ContactPoints();
                 if (FUN_00a4cdf0(input, entry.m_agentEntry, world->getCollisionInput(), obj) == 0)
-                    out->FUN_00a4e1f0(obj);
+                    out->hkpPhysicsSystemWithContacts_addContact(obj);
                 obj->removeReference();
             }
         }
@@ -963,7 +966,7 @@ void FUN_00a5e610(void* a1, Src_cf* s, void* a3, unsigned short a4, Seed_cf* see
 
 // @f3 0x00a49730 (community match, verified in this file)
 namespace f3m_00a49730 {
-int __cdecl FUN_009232c0(const char* a, const char* b);
+int __cdecl hkString_strCmp(const char* a, const char* b);
 
 struct XmlElement_9730;
 struct XmlNode_9730 {
@@ -981,8 +984,8 @@ struct XmlElement_9730 : XmlNode_9730 {
 
 static __declspec(noinline) bool FUN_00a48420(const char* className)
 {
-    if (className && FUN_009232c0(className, "hkClass") && FUN_009232c0(className, "hkClassMember")
-        && FUN_009232c0(className, "hkClassEnum") && FUN_009232c0(className, "hkClassEnumItem"))
+    if (className && hkString_strCmp(className, "hkClass") && hkString_strCmp(className, "hkClassMember")
+        && hkString_strCmp(className, "hkClassEnum") && hkString_strCmp(className, "hkClassEnumItem"))
         return true;
     return false;
 }
@@ -1010,12 +1013,12 @@ int XmlReader_9730::FUN_00a49730(XmlNode_9730** node, void* stream)
     if (result == 0 && m_stop == 0) {
         if (XmlElement_9730* element = (*node)->asElement()) {
             const char* className = element->FUN_00a80eb0("class", 0);
-            if (!(m_depth > 0) && (FUN_009232c0(element->cString(), "hkobject") || FUN_00a48420(className))) {
-                if (m_readObjects && !FUN_009232c0(element->cString(), "hkobject") && FUN_00a48420(className))
+            if (!(m_depth > 0) && (hkString_strCmp(element->cString(), "hkobject") || FUN_00a48420(className))) {
+                if (m_readObjects && !hkString_strCmp(element->cString(), "hkobject") && FUN_00a48420(className))
                     result = FUN_00a49670(element, node, stream);
             } else {
                 m_depth++;
-                if (!FUN_009232c0(element->cString(), "hkparam") && !FUN_009232c0("attributes", element->FUN_00a80eb0("name", 0))) {
+                if (!hkString_strCmp(element->cString(), "hkparam") && !hkString_strCmp("attributes", element->FUN_00a80eb0("name", 0))) {
                     m_depth--;
                     result = FUN_00a49670(element, node, stream);
                 }
@@ -1613,7 +1616,7 @@ void* Grid::FUN_00a460a0()
 // @f3 0x00a484b0 (community match, verified in this file)
 namespace f3m_00a484b0 {
 
-int __cdecl FUN_00923410(const char* text);
+int __cdecl hkString_atoi(const char* text);
 const char* __cdecl FUN_00923640(const char* text);
 
 struct XmlElement {
@@ -1624,7 +1627,7 @@ static __declspec(noinline) int FUN_00a484b0(int* classVersion, XmlElement* elem
 {
     const char* text = element->FUN_00a80eb0("classversion", 0);
     if (text) {
-        int version = FUN_00923410(text);
+        int version = hkString_atoi(text);
         *classVersion = version;
         if (version != 1) {
             if (version < 2 || version > 5)
@@ -2335,9 +2338,10 @@ struct A4a9Obj {
     int unk00[39];
     A4a9Sub unk9c;
     int FUN_00a4a7b0(int b);
-    int FUN_00a4a9c0(int a, int b);
+    int hkPackfileWriter_setSectionForPointer(int a, int b);
 };
-int A4a9Obj::FUN_00a4a9c0(int a, int b)
+// pdb: hkPackfileWriter::setSectionForPointer | hkPackfileWriter.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+int A4a9Obj::hkPackfileWriter_setSectionForPointer(int a, int b)
 {
     return unk9c.FUN_00922710(a, FUN_00a4a7b0(b));
 }
@@ -2599,9 +2603,10 @@ struct C00a546b0Obj {
     float a0, a1, a2, a3;
     int i60;
     char b64;
-    void FUN_00a546b0(const C00a546b0Src* s);
+    void hkpMoppCompiler_setAssemblerParams(const C00a546b0Src* s);
 };
-void C00a546b0Obj::FUN_00a546b0(const C00a546b0Src* s)
+// pdb: hkpMoppCompiler::setAssemblerParams | hkpMoppCompiler.obj | fnv360_0822_retail, call_gap + bridge(call_gap|call_seq) + skyrim(call_seq), high
+void C00a546b0Obj::hkpMoppCompiler_setAssemblerParams(const C00a546b0Src* s)
 {
     x = s->x;
     y = s->y;
@@ -2636,9 +2641,10 @@ struct A4e1Array {
 struct A4e1Obj {
     int unk00[17];
     A4e1Array unk44;
-    void FUN_00a4e1f0(A4e1Ref* r);
+    void hkpPhysicsSystemWithContacts_addContact(A4e1Ref* r);
 };
-void A4e1Obj::FUN_00a4e1f0(A4e1Ref* r)
+// pdb: hkpPhysicsSystemWithContacts::addContact | hkpPhysicsSystemWithContacts.obj | fnv360_0822_retail, call_gap + skyrim(call_gap), high
+void A4e1Obj::hkpPhysicsSystemWithContacts_addContact(A4e1Ref* r)
 {
     if (r) {
         if (r->memSizeAndFlags != 0)
@@ -2759,7 +2765,7 @@ int A4717Obj::FUN_00a47170(A4717Src* src, int index, int c)
 // @f3 0x00a45f70 (community match, verified in this file)
 namespace f3m_00a45f70 {
 namespace f3m_00a45f70 {
-int FUN_009232c0(const char* a, const char* b);
+int hkString_strCmp(const char* a, const char* b);
 struct A45f7Class {
     const char* FUN_009b0490();
     int FUN_00a45f70();
@@ -2767,8 +2773,8 @@ struct A45f7Class {
 int A45f7Class::FUN_00a45f70()
 {
     const char* name = FUN_009b0490();
-    if (FUN_009232c0(name, "hkClass") && FUN_009232c0(name, "hkClassMember") &&
-        FUN_009232c0(name, "hkClassEnum") && FUN_009232c0(name, "hkClassEnumItem"))
+    if (hkString_strCmp(name, "hkClass") && hkString_strCmp(name, "hkClassMember") &&
+        hkString_strCmp(name, "hkClassEnum") && hkString_strCmp(name, "hkClassEnumItem"))
         return 1;
     return 0;
 }
@@ -3740,7 +3746,7 @@ extern const char DAT_00e86298[];
 extern const char DAT_00e44a74[];
 namespace f3m_00a461e0 {
 namespace f3m_00a461e0 {
-int __cdecl FUN_009232c0(const char*,const char*) throw();
+int __cdecl hkString_strCmp(const char*,const char*) throw();
 void __cdecl FUN_00901f10(void*,int) throw();
 template<class T> struct Array {
     T* data;
@@ -3778,7 +3784,7 @@ struct Reader {
 };
 void Reader::FUN_00a461e0(Array<Item>& output)
 {
-    if(header->fileVersion<4 && FUN_009232c0(GetVersion(),DAT_00e862a8)!=0) {
+    if(header->fileVersion<4 && hkString_strCmp(GetVersion(),DAT_00e862a8)!=0) {
         int index=FindSection(DAT_00e86298);
         if(index<0) return;
         int bytes=sections[index].localFixupsOffset;
@@ -3810,7 +3816,7 @@ void Reader::FUN_00a461e0(Array<Item>& output)
                     int destinationSection=fixups[i+1];
                     int destinationOffset=fixups[i+2];
                     const char* name=(const char*)Resolve(destinationSection,destinationOffset);
-                    if(FUN_009232c0(name,DAT_00e44a74)==0) {
+                    if(hkString_strCmp(name,DAT_00e44a74)==0) {
                         void* object=data+sourceOffset;
                         Item& slot=output.ExpandOne();
                         slot.object=object;
@@ -7297,7 +7303,8 @@ __forceinline SweepPair* collideOneT<false>(const SweepBounds* bounds, const Swe
 
 // Sweep-and-prune of two lists sorted on the first axis: writes the overlapping key pairs into the buffer, counts
 // the pairs that did not fit, and returns the number written. The caller clears the skipped counter.
-int __cdecl FUN_00a450c0(const SweepBounds* apBoundsA, int aiCountA, const SweepBounds* apBoundsB, int aiCountB,
+// pdb: hk1AxisSweep::collide | hk1AxisSweep.obj | fnv360_0822_retail, call_gap_sim + skyrim(call_gap_sim), high
+int __cdecl hk1AxisSweep_collide(const SweepBounds* apBoundsA, int aiCountA, const SweepBounds* apBoundsB, int aiCountB,
                          SweepPair* __restrict pairs, int capacity, int& skipped)
 {
     SweepPair* out = pairs;
@@ -8720,9 +8727,9 @@ extern void* DAT_010f3364;
 extern void* DAT_011693ac;
 extern const char* DAT_01065098[];
 
-extern __declspec(nothrow) int __cdecl FUN_009232c0(const char*, const char*) throw();
+extern __declspec(nothrow) int __cdecl hkString_strCmp(const char*, const char*) throw();
 extern __declspec(nothrow) char* __cdecl FUN_00923640(const char*) throw();
-extern __declspec(nothrow) int __cdecl FUN_00923410(const char*) throw();
+extern __declspec(nothrow) int __cdecl hkString_atoi(const char*) throw();
 extern __declspec(nothrow) void __cdecl FUN_009234e0(void*, const void*, int) throw();
 extern __declspec(nothrow) int __cdecl FUN_009233f0(const char*) throw();
 extern __declspec(nothrow) int __cdecl FUN_009232f0(const char*, const char*, int) throw();
@@ -9020,8 +9027,8 @@ static __declspec(noinline) bool FUN_00a483d0(const char* s) throw()
 
 static __declspec(noinline) bool FUN_00a48420(const char* className) throw()
 {
-    if (className && FUN_009232c0(className, "hkClass") && FUN_009232c0(className, "hkClassMember")
-        && FUN_009232c0(className, "hkClassEnum") && FUN_009232c0(className, "hkClassEnumItem"))
+    if (className && hkString_strCmp(className, "hkClass") && hkString_strCmp(className, "hkClassMember")
+        && hkString_strCmp(className, "hkClassEnum") && hkString_strCmp(className, "hkClassEnumItem"))
         return true;
     return false;
 }
@@ -9030,7 +9037,7 @@ static __declspec(noinline) int FUN_00a484b0(int* classVersion, Node* element, c
 {
     const char* text = element->FUN_00a80eb0("classversion", 0);
     if (text) {
-        int version = FUN_00923410(text);
+        int version = hkString_atoi(text);
         *classVersion = version;
         if (version != 1) {
             if (version < 2 || version > 5)
@@ -9096,7 +9103,7 @@ int Owner::FUN_00a48970(void* input, void* out) throw()
     while (result == 0) {
         Node* element = node->element();
         if (element) {
-            if (FUN_009232c0(element->cString(), DAT_00e86404) == 0) {
+            if (hkString_strCmp(element->cString(), DAT_00e86404) == 0) {
                 const char* type = element->FUN_00a80eb0(DAT_00e3be04, 0);
                 value = FUN_00a48550(type, &output, &classMap, &globalRefs, version, getType());
                 const char* name = element->FUN_00a80eb0(DAT_00e40028, 0);
@@ -9118,7 +9125,7 @@ int Owner::FUN_00a48970(void* input, void* out) throw()
                 if (reader.FUN_00a84ab0(&stream, &buffer, value, &references) != 0)
                     return 1;
                 void* current;
-                if (FUN_009232c0(((String*)value)->FUN_009b0490(), DAT_00e44a74) == 0) {
+                if (hkString_strCmp(((String*)value)->FUN_009b0490(), DAT_00e44a74) == 0) {
                     references.FUN_009b2eb0(buffer.data);
                     String* declaredClass = (String*)buffer.data;
                     void* declared = FUN_00a48550(declaredClass->FUN_009b0490(), &output, &classMap, &globalRefs, version, getType());
@@ -9137,7 +9144,7 @@ int Owner::FUN_00a48970(void* input, void* out) throw()
                     context->FUN_00a801c0(exported, current);
                 localNames.FUN_009b0e60(objectName, current);
                 FUN_00a48780(objectName, current, &references, &localNames, &futureMap);
-                if (FUN_009232c0(((String*)value)->FUN_009b0490(), DAT_00e44a74) == 0) {
+                if (hkString_strCmp(((String*)value)->FUN_009b0490(), DAT_00e44a74) == 0) {
                     const char* className = ((String*)current)->FUN_009b0490();
                     classMap.FUN_009b0e60(className, current);
                 } else if (FUN_00a48420(((String*)value)->FUN_009b0490())) {
@@ -9148,11 +9155,11 @@ int Owner::FUN_00a48970(void* input, void* out) throw()
                         root->setContentsWithName(fix.object, ((String*)value)->FUN_009b0490());
                 }
                 references.clear();
-            } else if (FUN_009232c0(element->cString(), DAT_00e86484) == 0) {
+            } else if (hkString_strCmp(element->cString(), DAT_00e86484) == 0) {
                 const char* section = element->FUN_00a80eb0(DAT_00e40028, DAT_00e86280);
                 void* cls = getType();
                 if (FUN_00a483d0((const char*)cls)) {
-                    parser.flag24 = FUN_009232c0(section, DAT_00e862b8) == 0;
+                    parser.flag24 = hkString_strCmp(section, DAT_00e862b8) == 0;
                     parser.flag28 += parser.flag24 ? -1 : 1;
                 }
                 int foundSection;
@@ -9166,7 +9173,7 @@ int Owner::FUN_00a48970(void* input, void* out) throw()
                     strings.append(copy);
                     globalNames.FUN_009b0e60(strings.back(), (void*)idx);
                 }
-            } else if (FUN_009232c0(element->cString(), DAT_00e86478) == 0) {
+            } else if (hkString_strCmp(element->cString(), DAT_00e86478) == 0) {
                 void* text = 0;
                 FUN_00a484b0(&version, element, (const char**)&text);
                 setVersion(text);

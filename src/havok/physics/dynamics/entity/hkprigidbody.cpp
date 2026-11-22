@@ -153,7 +153,7 @@ struct Owner
     unsigned int unkdc;
     Subobject subobjectE0;
     void FUN_00ca8150(unsigned int value, Vec4* result);
-    void FUN_00ca85f0(unsigned int value);
+    void hkpRigidBody_setCenterOfMassLocal(unsigned int value);
 };
 // @f3 0x0090cdb0 (community match, verified in this file)
 struct FUN_00ca85f0_Layout
@@ -166,15 +166,16 @@ struct FUN_00ca85f0_Layout
 
 struct FUN_00ca85f0_Self : Owner
 {
-    void FUN_0090c830(unsigned int value, Vec4* result);
+    void hkpRigidBody_updateCachedShapeInfo(unsigned int value, Vec4* result);
 };
 
-void Owner::FUN_00ca85f0(unsigned int value)
+// pdb: hkpRigidBody::setCenterOfMassLocal | hkpRigidBody.obj | fnv360_0822_retail, call_gap + bridge(caller_sim|caller_sim) + skyrim(call_gap), high
+void Owner::hkpRigidBody_setCenterOfMassLocal(unsigned int value)
 {
     Vec4 vec;
     FUN_00ca85f0_Layout* self = (FUN_00ca85f0_Layout*)this;
     self->m_sub.update(value);
-    ((FUN_00ca85f0_Self*)this)->FUN_0090c830(self->m_unk10, &vec);
+    ((FUN_00ca85f0_Self*)this)->hkpRigidBody_updateCachedShapeInfo(self->m_unk10, &vec);
 }
 
 
@@ -258,7 +259,7 @@ struct FUN_00ca8800_Class
     int unkD8;
     int unkDC;
     AudioInterface interfaceE0;
-    void FUN_00ca8800(int value);
+    void hkpRigidBody_setPosition(int value);
 };
 extern "C" void __cdecl FUN_00ca8700(FUN_00ca8800_Class* self);
 // Calls the interface's dispatch with value, then invokes FUN_00ca8700 on this object.
@@ -275,7 +276,8 @@ struct FUN_00ca8800_ClassOrig
     AudioInterface interface;
 };
 
-void FUN_00ca8800_Class::FUN_00ca8800(int value)
+// pdb: hkpRigidBody::setPosition | hkpRigidBody.obj | fnv360_0822_retail, call_seq + skyrim(call_seq), high
+void FUN_00ca8800_Class::hkpRigidBody_setPosition(int value)
 {
     FUN_00ca8800_ClassOrig* self = (FUN_00ca8800_ClassOrig*)this;
     self->interface.vtbl->dispatch(&self->interface, value);
@@ -402,7 +404,7 @@ struct FUN_00ca8860_cls
     int unkd8;
     int unkdc;
     SubObject m_sub;
-    void FUN_00ca8860(int aiFirst, int aiSecond);
+    void hkpRigidBody_setPositionAndRotation(int aiFirst, int aiSecond);
 };
 
 // Calls the sub-object's Do virtual with aiFirst and aiSecond, then invokes FUN_00ca8700 on this.
@@ -464,7 +466,8 @@ struct FUN_00ca8860_body
     SubObject m_sub;
 };
 
-void FUN_00ca8860_cls::FUN_00ca8860(int aiFirst, int aiSecond)
+// pdb: hkpRigidBody::setPositionAndRotation | hkpRigidBody.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_gap), high
+void FUN_00ca8860_cls::hkpRigidBody_setPositionAndRotation(int aiFirst, int aiSecond)
 {
     FUN_00ca8860_body* body = (FUN_00ca8860_body*)this;
     body->m_sub.m_pVtbl->Do(&body->m_sub, aiFirst, aiSecond);
@@ -1565,7 +1568,7 @@ struct S_00ca84b0_Entity
 
     void FUN_00ca8150(S_00ca84b0_Shape* shape, S_00ca84b0_Vector4* extentOut);
     void UpdateBoundingVolume(S_00ca84b0_World* world, S_00ca84b0_Shape* shape);
-    int FUN_00ca84b0(S_00ca84b0_Shape* shape);
+    int hkpRigidBody_setShape(S_00ca84b0_Shape* shape);
 };
 
 // Sets the entity's collision shape, updating penetration depth and notifying the owning world of the change.
@@ -1586,7 +1589,7 @@ struct S_00ca84b0_EntityStub
 
 {
 
-    void FUN_0090c830(S_00ca84b0_Shape* shape, S_00ca84b0_Vector4* extentOut);
+    void hkpRigidBody_updateCachedShapeInfo(S_00ca84b0_Shape* shape, S_00ca84b0_Vector4* extentOut);
 
     void FUN_0090b280(S_00ca84b0_World* world, S_00ca84b0_Shape* shape);
 
@@ -1604,13 +1607,13 @@ struct S_00ca84b0_RefShape
 
 };
 
-void FUN_009282b0(S_00ca84b0_World* world, S_00ca84b0_Entity* entity);
+void hkpWorldOperationUtil_removeEntityBP(S_00ca84b0_World* world, S_00ca84b0_Entity* entity);
 
-void FUN_00928050(S_00ca84b0_World* world, S_00ca84b0_Entity* entity);
+void hkpWorldOperationUtil_addEntityBP(S_00ca84b0_World* world, S_00ca84b0_Entity* entity);
 
-void FUN_00988790(S_00ca84b0_World* world, S_00ca84b0_Entity* entity);
+void hkpWorldCallbackUtil_fireEntityShapeSet(S_00ca84b0_World* world, S_00ca84b0_Entity* entity);
 
-void FUN_00988020(S_00ca84b0_Entity* entity);
+void hkpEntityCallbackUtil_fireEntityShapeSet(S_00ca84b0_Entity* entity);
 
 static __forceinline float Minimum90c7(float a,float b){return a<b?a:b;}
 static __declspec(noinline) void FUN_0090c7b0(void* collidable,const S_00ca84b0_Vector4& extent){
@@ -1621,7 +1624,8 @@ static __declspec(noinline) void FUN_0090c7b0(void* collidable,const S_00ca84b0_
 
 
 
-int S_00ca84b0_Entity::FUN_00ca84b0(S_00ca84b0_Shape* shape)
+// pdb: hkpRigidBody::setShape | hkpRigidBody.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(caller_sim), high
+int S_00ca84b0_Entity::hkpRigidBody_setShape(S_00ca84b0_Shape* shape)
 
 {
 
@@ -1655,7 +1659,7 @@ int S_00ca84b0_Entity::FUN_00ca84b0(S_00ca84b0_Shape* shape)
 
         m_pOwningWorld->unk84++;
 
-        FUN_009282b0(m_pOwningWorld, this);
+        hkpWorldOperationUtil_removeEntityBP(m_pOwningWorld, this);
 
     }
 
@@ -1689,7 +1693,7 @@ int S_00ca84b0_Entity::FUN_00ca84b0(S_00ca84b0_Shape* shape)
 
         __declspec(align(16)) S_00ca84b0_Vector4 extent;
 
-        ((S_00ca84b0_EntityStub*)this)->FUN_0090c830(shape, &extent);
+        ((S_00ca84b0_EntityStub*)this)->hkpRigidBody_updateCachedShapeInfo(shape, &extent);
 
 
 
@@ -1707,15 +1711,15 @@ int S_00ca84b0_Entity::FUN_00ca84b0(S_00ca84b0_Shape* shape)
 
     if (m_pOwningWorld)
 
-        FUN_00988790(m_pOwningWorld, this);
+        hkpWorldCallbackUtil_fireEntityShapeSet(m_pOwningWorld, this);
 
-    FUN_00988020(this);
+    hkpEntityCallbackUtil_fireEntityShapeSet(this);
 
     if (m_pOwningWorld)
 
     {
 
-        FUN_00928050(m_pOwningWorld, this);
+        hkpWorldOperationUtil_addEntityBP(m_pOwningWorld, this);
 
         S_00ca84b0_World* world = m_pOwningWorld;
 
@@ -1778,7 +1782,7 @@ struct S_00ca8f50_Sub
     virtual void v3();
     virtual void v4();
     virtual void getTransform(S_00ca8f50_Transform& out);
-    float FUN_00c86430();
+    float hkpMotion_getMass();
     int unk4;
     unsigned char unk8;
     unsigned char unk9;

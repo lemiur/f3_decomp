@@ -33,7 +33,7 @@ extern MM g_memoryManager;
 void __cdecl FUN_00cc8ce0();
 void __cdecl operator delete(void* p, unsigned int size);
 extern "C" void __cdecl _delete(void*, int);
-extern "C" void __cdecl FUN_00d54e60();
+extern "C" void __cdecl bhkConstraintChain();
 void __cdecl _delete(void*, unsigned int);
 void __cdecl operator delete(void* p, unsigned int size);
 void __cdecl operator delete(void* p, unsigned int size);
@@ -41,7 +41,7 @@ extern "C" void __cdecl _delete(void*, int);
 void __cdecl NiFreeAlias(void* p);
 extern MM g_memoryManager;
 extern int DAT_0126860c;
-extern "C" void __cdecl FUN_00d54e60();
+extern "C" void __cdecl bhkConstraintChain();
 extern "C" void __cdecl _delete(void*, int);
 extern int DAT_010ca4dc;
 extern int DAT_0126866c;
@@ -63,7 +63,7 @@ struct OutS
     bhkLimitedHingeVector m_kPointB;
     bhkLimitedHingeVector m_iThirdValue;
 };
-void __fastcall FUN_00c9fb70(MyObj* self, int, OutS* out);
+void __fastcall bhkConvexShape_CopyCinfo(MyObj* self, int, OutS* out);
 struct FUN_00cce990
 {
     void* m_p;
@@ -2767,7 +2767,7 @@ struct S_00cc9df0_Cls
     int unk00;
     int unk04;
     S_00cc9df0_Data* m_iFourthElementInteger;
-    void FUN_00ca4e10(S_00cc9df0_Out* out);
+    void bhkBvTreeShape_CopyCinfo(S_00cc9df0_Out* out);
     void SetRatioFromValues(S_00cc9df0_Out* out);
 };
 inline S_00cc9df0_Data* GetD(S_00cc9df0_Cls* c)
@@ -3476,7 +3476,7 @@ class CCCF00BinaryStream
         return BinaryWrite(p, n, &size, 1);
     }
 };
-// FUN_00ccd0f0 : a one-line function - getter
+// bhkBallSocketConstraintChain_GetRTTI : a one-line function - getter
 extern void* __cdecl FUN_00aa13e0(unsigned int size);
 struct FUN_00ccd100
 {
@@ -4275,7 +4275,7 @@ struct LinkCollection
 struct Owner
 {
     void** m_ppVirtualMethodTable;
-    void __thiscall FUN_00c84df0(void* item, void* key);
+    void __thiscall bhkShape_CopyMembers(void* item, void* key);
     void __thiscall FUN_00ccf900(void* item, void* key);
 };
 typedef LinkCollection*(__thiscall* AcquireLinks)(Owner*, unsigned char*);
@@ -6888,7 +6888,7 @@ template <class T> struct Array
         size = n;
     }
 };
-extern "C" int __cdecl FUN_00cb10d0(const char* s);
+extern "C" int __cdecl hkString_strLen(const char* s);
 struct hkStreamWriter
 {
     virtual void unk00() = 0;
@@ -6901,7 +6901,7 @@ static __declspec(noinline) void FUN_00cc0080(hkStreamWriter* writer, const char
 {
     if (str)
     {
-        writer->write(str, FUN_00cb10d0(str));
+        writer->write(str, hkString_strLen(str));
     }
     else
     {
@@ -7156,7 +7156,7 @@ struct FE50Wrap
 {
     int m0, m4;
     FE50Hk* m8;
-    void FUN_00c9fb70(FE50Out* out);
+    void bhkConvexShape_CopyCinfo(FE50Out* out);
     float GetF()
     {
         if (this && m8)

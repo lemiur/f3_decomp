@@ -1491,7 +1491,7 @@ void FUN_005e58f0(int, ActivateActor*, float*);
 void FUN_00600900(ActivateKey*);
 void FUN_00600940(int);
 void FUN_00600920(int);
-int FUN_0047b250(ActivateReference*);
+int GridCellArray_Set(ActivateReference*);
 void FUN_0047a560(ActivateReference*, ActivateActor*, int);
 
 }  // namespace fnv_00516dc0
@@ -1507,7 +1507,7 @@ template <> struct VSlots<0>
 {
 };
 void FUN_0047a560(ActivationRef*, ActivationRef*, int);
-int FUN_0047b250(ActivationRef*);
+int GridCellArray_Set(ActivationRef*);
 
 struct TESBoundObject
 {

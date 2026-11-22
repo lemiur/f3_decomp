@@ -111,7 +111,7 @@ class hkpPhantomOverlapDD04
 // @f3 0x00a50b70 (community match, verified in this file)
 struct FUN_00c903a0_class
 {
-    void FUN_00c903a0();
+    void hkSweptTransformUtil_setTimeInformation();
 };
 
 struct hkpPhantomOverlapLayout
@@ -138,14 +138,14 @@ void hkpPhantomOverlapDD04::AddReferencedObject(hkReferencedObjectDD04* pkObject
     if (iSlot < 2 && self->m_pHeadNode[iSlot] == 0)
     {
         self->m_pHeadNode[iSlot] = pkObject;
-        ((FUN_00c903a0_class*)pkObject)->FUN_00c903a0();
+        ((FUN_00c903a0_class*)pkObject)->hkSweptTransformUtil_setTimeInformation();
     }
     hkArrayDD04<hkReferencedObjectDD04*>* arr = &self->m_kTrackedObjects;
     if (arr->m_iElementCount == arr->getCapacity())
         FUN_00901f10(arr, 4);
     arr->m_data[arr->m_iElementCount] = pkObject;
     arr->m_iElementCount++;
-    ((FUN_00c903a0_class*)pkObject)->FUN_00c903a0();
+    ((FUN_00c903a0_class*)pkObject)->hkSweptTransformUtil_setTimeInformation();
 }
 
 

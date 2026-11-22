@@ -60,7 +60,7 @@ void FUN_00a57ba0();
 void FUN_00a05900();
 void FUN_00a2a1c0();
 void FUN_00a4a7b0();
-void FUN_00a77a70();
+void hkSolverExport_exportImpulsesAndRhs();
 void FUN_00a80660();
 void FUN_00929ad0();
 void FUN_00863fa0();
@@ -150,7 +150,7 @@ void FUN_00bc7180();
 void FUN_00bce0c0();
 void FUN_00bcd130();
 void FUN_00be48a0();
-void FUN_00be4930();
+void FutBinaryFileC_readHeader();
 void FUN_00bfcb40();
 void FUN_00bf5110();
 void FUN_00bf9990();
@@ -264,12 +264,14 @@ __declspec(noinline) void FUN_00830030()
     FUN_0082fdc0();
 }
 
-__declspec(noinline) void FUN_0083c0f0()
+// pdb: NiTriShape::LinkObject | NiTriShape.obj | fnv360_0721_beta, objrun_prop + bridge(vtable|objopen_prop) + skyrim(caller_sim), high
+__declspec(noinline) void NiTriShape_LinkObject()
 {
     FUN_008553f0();
 }
 
-__declspec(noinline) void FUN_0083f540()
+// pdb: NiTriShape::CopyMembers | NiTriShape.obj | fnv360_0822_retail, caller_sim + bridge(call_dedup|caller_sim) + skyrim(objrun_prop), high
+__declspec(noinline) void NiTriShape_CopyMembers()
 {
     FUN_00853ec0();
 }
@@ -309,12 +311,14 @@ __declspec(noinline) void FUN_0088d360()
     FUN_0088bd60();
 }
 
-__declspec(noinline) void FUN_008a0700()
+// pdb: NiFilename::GetFullPath | NiFilename.obj | fnv360_0822_retail, call_gap_sim + bridge(call_seq|call_gap) + skyrim(call_seq), high
+__declspec(noinline) void NiFilename_GetFullPath()
 {
     FUN_008a0540();
 }
 
-__declspec(noinline) void FUN_008b3eb0()
+// pdb: BSMultiTargetTreadTransfController::IsEqual | BSMultiTargetTreadTransfController.obj | fnv360_0822_retail, caller_sim + bridge(vtable|caller_sim) + skyrim(caller_sim), high
+__declspec(noinline) void BSMultiTargetTreadTransfController_IsEqual()
 {
     FUN_00ac88b0();
 }
@@ -389,7 +393,8 @@ __declspec(noinline) void FUN_00984b30()
     FUN_00984a80();
 }
 
-__declspec(noinline) void FUN_009b0690()
+// pdb: hkClass::getMember | hkClass.obj | fnv360_0822_retail, call_gap + bridge(call_gap|call_seq) + skyrim(call_gap), high
+__declspec(noinline) void hkClass_getMember()
 {
     FUN_009b0650();
 }
@@ -404,7 +409,8 @@ __declspec(noinline) void FUN_009bed90()
     FUN_009be640();
 }
 
-__declspec(noinline) void FUN_009bedc0()
+// pdb: hkpListAgent::staticLinearCast | hkpListAgent.obj | fnv360_0822_retail, caller_sim + bridge(caller_sim|objrun) + skyrim(caller_sim), high
+__declspec(noinline) void hkpListAgent_staticLinearCast()
 {
     FUN_009be680();
 }
@@ -444,14 +450,16 @@ __declspec(noinline) void FUN_00a297c0()
     FUN_00a2a1c0();
 }
 
-__declspec(noinline) void FUN_00a4a9b0()
+// pdb: hkPackfileWriter::addSection | hkPackfileWriter.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+__declspec(noinline) void hkPackfileWriter_addSection()
 {
     FUN_00a4a7b0();
 }
 
-__declspec(noinline) void FUN_00a79670()
+// pdb: hkExportImpulsesAndRhs | hkpSolverExport.obj | fnv360_0822_retail, call_seq + skyrim(call_seq), high
+__declspec(noinline) void hkExportImpulsesAndRhs()
 {
-    FUN_00a77a70();
+    hkSolverExport_exportImpulsesAndRhs();
 }
 
 __declspec(noinline) void FUN_00a808a0()
@@ -639,7 +647,8 @@ __declspec(noinline) void FUN_00ac5170()
     FUN_00abafe0();
 }
 
-__declspec(noinline) void FUN_00ac6200()
+// pdb: NiPSysVolumeEmitter::CopyMembers | NiPSysVolumeEmitter.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(objrun_open), high
+__declspec(noinline) void NiPSysVolumeEmitter_CopyMembers()
 {
     FUN_00ac1a70();
 }
@@ -664,17 +673,20 @@ __declspec(noinline) void FUN_00ac88b0()
     FUN_00837860();
 }
 
-__declspec(noinline) void FUN_00ac9040()
+// pdb: NiPSysPositionModifier::LoadBinary | NiPSysPositionModifier.obj | fnv360_0822_retail, caller_sim + bridge(vtable|caller_sim) + skyrim(caller_sim), high
+__declspec(noinline) void NiPSysPositionModifier_LoadBinary()
 {
     FUN_00ac5fa0();
 }
 
-__declspec(noinline) void FUN_00ac9050()
+// pdb: NiPSysPositionModifier::SaveBinary | NiPSysPositionModifier.obj | fnv360_0822_retail, caller_sim + bridge(vtable|caller_sim) + skyrim(caller_sim), high
+__declspec(noinline) void NiPSysPositionModifier_SaveBinary()
 {
     FUN_00ac6040();
 }
 
-__declspec(noinline) void FUN_00ac9060()
+// pdb: NiPSysPositionModifier::IsEqual | NiPSysPositionModifier.obj | fnv360_0822_retail, caller_sim + bridge(vtable|caller_sim) + skyrim(caller_sim), high
+__declspec(noinline) void NiPSysPositionModifier_IsEqual()
 {
     FUN_00ac5f20();
 }
@@ -689,7 +701,8 @@ __declspec(noinline) void FUN_00acb6e0()
     FUN_008d0610();
 }
 
-__declspec(noinline) void FUN_00accc90()
+// pdb: NiPSysDragFieldModifier::LinkObject | NiPSysDragFieldModifier.obj | fnv360_0721_beta, objrun_open + bridge(vtable|objrun_open) + skyrim(caller_sim), high
+__declspec(noinline) void NiPSysDragFieldModifier_LinkObject()
 {
     FUN_00ac2550();
 }
@@ -901,10 +914,11 @@ __declspec(noinline) void FUN_00be49c0()
 
 __declspec(noinline) void FUN_00be49d0()
 {
-    FUN_00be4930();
+    FutBinaryFileC_readHeader();
 }
 
-__declspec(noinline) void FUN_00bea750()
+// pdb: Tile::GetMaximumDepth | Tile.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+__declspec(noinline) void Tile_GetMaximumDepth()
 {
     FUN_00bfcb40();
 }

@@ -274,12 +274,13 @@ union __declspec(intrin_type) __declspec(align(16)) __m128
 
 struct MotionMassView : hkpMotionC864F
 {
-    float FUN_00c86430();
+    float hkpMotion_getMass();
 };
 
 // Reads the inverse-mass component from m_kInertiaAndMassInv, returns 0.0f if it is zero, otherwise returns its reciprocal as the mass.
 // @f3 0x008f8410 (community match, verified in this file)
-float MotionMassView::FUN_00c86430()
+// pdb: hkpMotion::getMass | hkpMotion.obj | fnv360_0822_retail, call_seq + bridge(call_dedup|call_seq) + skyrim(call_seq), high
+float MotionMassView::hkpMotion_getMass()
 {
     float invMass = m_kInertiaAndMassInv.m_vComponents.m128_f32[3];
     if (invMass == 0.0f)

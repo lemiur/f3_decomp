@@ -3491,7 +3491,7 @@ extern "C" void FUN_009cc140(void*, void*, void*, void*);
 extern "C" float FUN_009cb280(LocalSource*, void*, FNVFlags*);
 extern "C" void FUN_00a433d0(Pair*, float, float, float, Cache*, Vec*, Output*);
 extern "C" void FUN_00a38200(unsigned char*, VertexData*, int, Output*, void*);
-extern "C" void FUN_00a40940(Pair*, State*, Cache*, Feature*, unsigned char*, Vec*, Output*);
+extern "C" void hkGskAgentUtil_processCollisionNoTim(Pair*, State*, Cache*, Feature*, unsigned char*, Vec*, Output*);
 
 namespace fn_009cb440
 {
@@ -3567,7 +3567,7 @@ namespace fn_009cb440
 
     struct VectorView
     {
-        void FUN_008d2a00(Transform*, Vec*);
+        void hkVector4_setRotatedDir(Transform*, Vec*);
     };
 
     struct VertexShape
@@ -3724,7 +3724,8 @@ namespace fn_009cb440
     }
 } // namespace fn_009cb440
 
-Cache* __cdecl FUN_00d40d80(Pair* pairInput, State* state, Cache* cache, VecArg normal, Output* output)
+// pdb: hkPredGskCylinderAgent3::process | hkpPredGskCylinderAgent3.obj | fnv360_0822_retail, objrun + bridge(ustr_rel|ustr_rel) + skyrim(ustr_rel), high
+Cache* __cdecl hkPredGskCylinderAgent3_process(Pair* pairInput, State* state, Cache* cache, VecArg normal, Output* output)
 {
     using namespace fn_009cb440;
     Agent3Input* pair = reinterpret_cast<Agent3Input*>(pairInput);
@@ -3763,7 +3764,7 @@ Cache* __cdecl FUN_00d40d80(Pair* pairInput, State* state, Cache* cache, VecArg 
             VecOps axis;
             axis.setSub4(shape->maxBound, shape->minBound);
             axis.mul4(InverseLength(axis.lengthSquared3()));
-            ((VectorView*)&axis)->FUN_008d2a00((*bodies[i])->transform, &axis);
+            ((VectorView*)&axis)->hkVector4_setRotatedDir((*bodies[i])->transform, &axis);
             float dotValue = direction.dot3(axis);
             float magnitude = absReal(dotValue);
             if (active[i])
@@ -3918,7 +3919,7 @@ distant:
                 }
             }
         }
-        FUN_00a40940(pairInput, state, cache, feature, &contact->numA, normal, output);
+        hkGskAgentUtil_processCollisionNoTim(pairInput, state, cache, feature, &contact->numA, normal, output);
     }
     else if (contact->numContacts)
         ReleaseAllEntries(&contact->numA, pair->contactMgr, output->stream);

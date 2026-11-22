@@ -2,20 +2,21 @@
 // src/havok/physics/collide/agent/compoundagent/bvtreestream/hkpbvtreestreamagent.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/physics/collide/agent/compoundagent/bvtreestream/hkpbvtreestreamagent.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-extern "C" void __cdecl FUN_00d312f0(void*, void*, void*, void*);
+extern "C" void __cdecl hkpBvTreeAgent_staticGetPenetrations(void*, void*, void*, void*);
 
 struct FUN_00d2dd30_class
 {
-    void __thiscall FUN_00d2dd30(void* a, void* b, void* c, void* d);
+    void __thiscall hkpBvTreeStreamAgent_getPenetrations(void* a, void* b, void* c, void* d);
 };
 
 // @fnv 0x00d2dd30
-void __thiscall FUN_00d2dd30_class::FUN_00d2dd30(void* apArg1, void* apArg2, void* apArg3, void* apArg4)
+// pdb: hkpBvTreeStreamAgent::getPenetrations | hkpBvTreeStreamAgent.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void __thiscall FUN_00d2dd30_class::hkpBvTreeStreamAgent_getPenetrations(void* apArg1, void* apArg2, void* apArg3, void* apArg4)
 {
-    FUN_00d312f0(apArg1, apArg2, apArg3, apArg4);
+    hkpBvTreeAgent_staticGetPenetrations(apArg1, apArg2, apArg3, apArg4);
 }
 
-extern "C" void __cdecl FUN_00da3510(void* a, void* b);
+extern "C" void __cdecl hkAgent1nMachine_InvalidateTim(void* a, void* b);
 
 struct FUN_00d2ddd0_class
 {
@@ -25,7 +26,7 @@ struct FUN_00d2ddd0_class
 // @fnv 0x00d2ddd0
 void __thiscall FUN_00d2ddd0_class::FUN_00d2ddd0(int aiValue)
 {
-    FUN_00da3510((char*)this + 0x30, (void*)aiValue);
+    hkAgent1nMachine_InvalidateTim((char*)this + 0x30, (void*)aiValue);
 }
 
 extern "C" void __cdecl FUN_00d31110(void*, void*, void*, void*);
@@ -35,16 +36,16 @@ extern "C" void __stdcall FUN_00d2dd50(void* apArg1, void* apArg2, void* apArg3,
     FUN_00d31110(apArg1, apArg2, apArg3, apArg4);
 }
 
-void __cdecl FUN_00d30f50(void*, void*, void*, void*, void*);
+void __cdecl hkpBvTreeAgent_staticLinearCast(void*, void*, void*, void*, void*);
 struct OperationAdapter
 {
     void FUN_00d2dd70(void* a, void* b, void* c, void* d, void* e);
 };
-// Forwards all five arguments to FUN_00d30f50.
+// Forwards all five arguments to hkpBvTreeAgent_staticLinearCast.
 // @fnv 0x00d2dd70
 void OperationAdapter::FUN_00d2dd70(void* a, void* b, void* c, void* d, void* e)
 {
-    FUN_00d30f50(a, b, c, d, e);
+    hkpBvTreeAgent_staticLinearCast(a, b, c, d, e);
 }
 
 struct FUN_00d2dda0_class
@@ -64,25 +65,25 @@ struct FUN_00d2dda0_class
     int unk30;
     void __thiscall FUN_00d2dda0(int value);
 };
-extern void __cdecl FUN_00da42b0(void*, int, int, int);
-// Passes unk0c, unk08 and value to FUN_00da42b0 with &unk30, then calls finish(1).
+extern void __cdecl hkAgent1nMachine_Destroy(void*, int, int, int);
+// Passes unk0c, unk08 and value to hkAgent1nMachine_Destroy with &unk30, then calls finish(1).
 // @fnv 0x00d2dda0
 void FUN_00d2dda0_class::FUN_00d2dda0(int value)
 {
-    FUN_00da42b0(&unk30, unk0c, unk08, value);
+    hkAgent1nMachine_Destroy(&unk30, unk0c, unk08, value);
     finish(1);
 }
 
-void __cdecl FUN_00da35f0(void* self, float a, float b, void* c);
+void __cdecl hkAgent1nMachine_WarpTime(void* self, float a, float b, void* c);
 struct FUN_00d2ddf0_Class
 {
     void __thiscall FUN_00d2ddf0(float a, float b, void* c);
 };
-// Calls FUN_00da35f0 with the subobject at offset 0x30 of this object and the three arguments.
+// Calls hkAgent1nMachine_WarpTime with the subobject at offset 0x30 of this object and the three arguments.
 // @fnv 0x00d2ddf0
 void __thiscall FUN_00d2ddf0_Class::FUN_00d2ddf0(float a, float b, void* c)
 {
-    FUN_00da35f0((char*)this + 0x30, a, b, c);
+    hkAgent1nMachine_WarpTime((char*)this + 0x30, a, b, c);
 }
 
 struct hkMemoryAllocator
@@ -115,20 +116,20 @@ void FUN_00d2e9f0();
 void FUN_00d2df50();
 
 void FUN_00d31110();
-void FUN_00d30f50();
+void hkpBvTreeAgent_staticLinearCast();
 
 typedef void*(__cdecl* S_00d2e8e0_CreateFunc)(void*, void*, void*, void*);
 typedef void(__cdecl* S_00d2e8e0_GetPenetrationsFunc)(void*, void*, void*, void*);
 typedef void(__cdecl* S_00d2e8e0_GetClosestPointsFunc)(void*, void*, void*, void*);
 typedef void(__cdecl* S_00d2e8e0_LinearCastFunc)(void*, void*, void*, void*, void*);
 
-void* FUN_00d2e7f0(void*, void*, void*, void*);
+void* hkpBvTreeStreamAgent_dispatchBvTreeConvexList(void*, void*, void*, void*);
 void FUN_00d2e970(void*, void*, void*, void*);
 void FUN_00d2e9b0(void*, void*, void*, void*);
 void FUN_00d2e9f0(void*, void*, void*, void*, void*);
-void* FUN_00d2e5a0(void*, void*, void*, void*);
+void* hkpBvTreeStreamAgent_dispatchConvexListBvTree(void*, void*, void*, void*);
 void FUN_00d31110(void*, void*, void*, void*);
-void FUN_00d30f50(void*, void*, void*, void*, void*);
+void hkpBvTreeAgent_staticLinearCast(void*, void*, void*, void*, void*);
 
 extern float g_D2E9B0MaxDistance;
 
@@ -218,7 +219,7 @@ struct Collector
     void* collector;
 };
 
-// Builds a Collector on the stack with the given collector and vtable, then calls FUN_00d312f0 with bodyB, bodyA, arg3 and the Collector.
+// Builds a Collector on the stack with the given collector and vtable, then calls hkpBvTreeAgent_staticGetPenetrations with bodyB, bodyA, arg3 and the Collector.
 // @fnv 0x00d2e970
 void __cdecl FUN_00d2e970(void* bodyA, void* bodyB, void* arg3, void* orig_collector)
 {
@@ -226,7 +227,7 @@ void __cdecl FUN_00d2e970(void* bodyA, void* bodyB, void* arg3, void* orig_colle
     c.collector = orig_collector;
     c.flip = 0;
     c.vtable = &DAT_010ce81c;
-    FUN_00d312f0(bodyB, bodyA, arg3, &c);
+    hkpBvTreeAgent_staticGetPenetrations(bodyB, bodyA, arg3, &c);
 }
 
 struct FUN_00d2eb50_nib
@@ -286,7 +287,7 @@ struct FUN_00d2ebb0_tmp
 
 struct FUN_00d2dd30_obj
 {
-    void __thiscall FUN_00d2dd30(void* a, void* b, void* c, void* d);
+    void __thiscall hkpBvTreeStreamAgent_getPenetrations(void* a, void* b, void* c, void* d);
 };
 
 struct FUN_00d2ebb0_cls
@@ -294,7 +295,7 @@ struct FUN_00d2ebb0_cls
     void __thiscall DispatchWithFlag(void* a1, void* a2, void* a3, unsigned int a4);
 };
 
-// Builds a temporary holding a4 and a zero flag with a vtable pointer, then forwards a2, a1, a3 and the temporary to FUN_00d2dd30.
+// Builds a temporary holding a4 and a zero flag with a vtable pointer, then forwards a2, a1, a3 and the temporary to hkpBvTreeStreamAgent_getPenetrations.
 // @fnv 0x00d2ebb0
 void FUN_00d2ebb0_cls::DispatchWithFlag(void* a1, void* a2, void* a3, unsigned int a4)
 {
@@ -302,7 +303,7 @@ void FUN_00d2ebb0_cls::DispatchWithFlag(void* a1, void* a2, void* a3, unsigned i
     t.a4 = a4;
     t.flag = 0;
     t.vt = &DAT_010ce81c;
-    ((FUN_00d2dd30_obj*)this)->FUN_00d2dd30(a2, a1, a3, &t);
+    ((FUN_00d2dd30_obj*)this)->hkpBvTreeStreamAgent_getPenetrations(a2, a1, a3, &t);
 }
 }  // namespace fnv_00d2ebb0
 
@@ -398,7 +399,7 @@ void __thiscall FUN_00d43cd0_class::FUN_00d2ed90(void* a1, void* a2, void* a3, v
 }
 
 #include <xmmintrin.h>
-extern "C" void __cdecl FUN_00da48e0(void* a, void* b);
+extern "C" void __cdecl hkAgent1nMachine_UpdateShapeCollectionFilter(void* a, void* b);
 
 struct FUN_00d2de20_obj
 {
@@ -433,7 +434,7 @@ struct FUN_00d2de20_cls
     void FUN_00d2de20(int a0, FUN_00d2de20_obj** a1, int a2, int a3);
 };
 
-// Zeroes m_10 and m_20, builds an ArgPack from a0, a1, a2, m_08, a3 and the vSlot10 result, then calls FUN_00da48e0 with m_30 and the pack.
+// Zeroes m_10 and m_20, builds an ArgPack from a0, a1, a2, m_08, a3 and the vSlot10 result, then calls hkAgent1nMachine_UpdateShapeCollectionFilter with m_30 and the pack.
 // @fnv 0x00d2de20
 void FUN_00d2de20_cls::FUN_00d2de20(int a0, FUN_00d2de20_obj** a1, int a2, int a3)
 {
@@ -447,7 +448,7 @@ void FUN_00d2de20_cls::FUN_00d2de20(int a0, FUN_00d2de20_obj** a1, int a2, int a
     args.m_14 = m_08;
     args.m_0C = r;
     args.m_18 = a3;
-    FUN_00da48e0(&m_30, &args);
+    hkAgent1nMachine_UpdateShapeCollectionFilter(&m_30, &args);
 }
 
 struct FUN_00d2def0_cls
@@ -498,7 +499,7 @@ struct Record_d2e9
     int m_uiFilterValue;
 };
 
-void __cdecl FUN_00d30f50(int a1, int a2, Input_d2e9* input, Record_d2e9* rec, Record_d2e9* optRec);
+void __cdecl hkpBvTreeAgent_staticLinearCast(int a1, int a2, Input_d2e9* input, Record_d2e9* rec, Record_d2e9* optRec);
 
 namespace fnv_00d2ec50 {
 union __declspec(intrin_type) __declspec(align(16)) __m128
@@ -709,9 +710,10 @@ static __forceinline O64* Make64(void* second, void* first, void* context, unsig
     return obj;
 }
 }
-void* __cdecl FUN_00d2e5a0(void* second, void* first, void* context, void* flags);
-namespace fnv_00d2e5a0 { void* __cdecl FUN_00d2e5a0(void* second, void* first, void* context, void* flags); }
-void* __cdecl ::fnv_00d2e5a0::FUN_00d2e5a0(void* second, void* first, void* context, void* flags)
+void* __cdecl hkpBvTreeStreamAgent_dispatchConvexListBvTree(void* second, void* first, void* context, void* flags);
+namespace fnv_00d2e5a0 { void* __cdecl hkpBvTreeStreamAgent_dispatchConvexListBvTree(void* second, void* first, void* context, void* flags); }
+// pdb: hkpBvTreeStreamAgent::dispatchConvexListBvTree | hkpBvTreeStreamAgent.obj | fnv360_0822_debug, objrun + bridge(caller_sim|caller_sim) + skyrim(objrun), high
+void* __cdecl ::fnv_00d2e5a0::hkpBvTreeStreamAgent_dispatchConvexListBvTree(void* second, void* first, void* context, void* flags)
 {
     if (flags)
     {
@@ -773,7 +775,7 @@ extern "C"
 
     void FUN_00d2df50();
     void FUN_00d31110();
-    void FUN_00d30f50();
+    void hkpBvTreeAgent_staticLinearCast();
 }
 
 }  // namespace fnv_00d2e6d0
@@ -946,7 +948,8 @@ static __forceinline Obj64B* Make64B(void* second, void* first, void* context, u
     obj->vtable = g_00e7ea34;
     return obj;
 }
-Header* FUN_00d2e7f0(void* first, void* second, StreamDispatchInput* context, unsigned int flags)
+// pdb: hkpBvTreeStreamAgent::dispatchBvTreeConvexList | hkpBvTreeStreamAgent.obj | fnv360_0822_retail, caller_sim + skyrim(objrun_prop), high
+Header* hkpBvTreeStreamAgent_dispatchBvTreeConvexList(void* first, void* second, StreamDispatchInput* context, unsigned int flags)
 {
     if (flags)
     {

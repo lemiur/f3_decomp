@@ -146,10 +146,11 @@ struct CloneHost
 {
     char _pad[0x38];
     unsigned short m_uiObjectFlags;
-    void* __thiscall FUN_00a4d4b0(CloningProcess&);
+    void* __thiscall NiLightColorController_CreateClone(CloningProcess&);
 };
 // @fnv 0x00a4d4b0
-void* __thiscall CloneHost::FUN_00a4d4b0(CloningProcess& kCloning)
+// pdb: NiLightColorController::CreateClone | NiLightColorController.obj | fnv360_0721_retail, objrun + bridge(vtable|objrun) + skyrim(caller_sim), high
+void* __thiscall CloneHost::NiLightColorController_CreateClone(CloningProcess& kCloning)
 {
     CloneHost* pkObject = (CloneHost*)BSFadeNode::operator new(0x3c);
     if (pkObject)
@@ -393,7 +394,7 @@ struct NiTimeController
     Controller34* controller34;
     unsigned int flags38;
 
-    bool __thiscall FUN_00a36250(float value);
+    bool __thiscall NiTimeController_DontDoUpdate(float value);
     void __thiscall EvaluateAndApplyOutput(float& parameter);
 };
 
@@ -602,7 +603,7 @@ struct Stream_d530 : VersionedDataBlock
     unsigned short unk284;
     unsigned short legacyFlags;
 
-    void FUN_00a645b0();
+    void NiStream_ReadLinkID();
 };
 
 struct LoadHost_d530 : Host
@@ -626,5 +627,5 @@ void LoadHost_d530::ReadFromStream(Stream_d530& stream)
         stream.input->ReadFlags(flags);
     }
     if (stream.version < 0x0a010068)
-        stream.FUN_00a645b0();
+        stream.NiStream_ReadLinkID();
 }

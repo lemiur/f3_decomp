@@ -58,7 +58,7 @@ struct FUN_00ddacd0_shell
 {
     void __thiscall FUN_00dd8fe0(void* output, int elementSize, int count);
     void __thiscall FUN_00ddac60(void* output);
-    void __thiscall FUN_00ddac00(void* output);
+    void __thiscall hkDisplaySerializeIStream_readTriangle(void* output);
     void __thiscall FUN_00ddacd0(ArrayPair* arrays);
 };
 // @f3 0x00a62a00 (community match, verified in this file)
@@ -189,7 +189,8 @@ void hkDisplaySerializeIStream::FUN_00ddac80(FUN_008cd6a0_Class* target)
 
 // Reads three 4-byte integers via FUN_00dd8fe0 and stores them sequentially into the output buffer.
 // @fnv 0x00ddac00
-__declspec(noinline) void __thiscall FUN_00ddacd0_shell::FUN_00ddac00(void* output)
+// pdb: hkDisplaySerializeIStream::readTriangle | hkDisplaySerializeIStream.obj | fnv360_0822_retail, objrun + bridge(hash|caller_sim), high
+__declspec(noinline) void __thiscall FUN_00ddacd0_shell::hkDisplaySerializeIStream_readTriangle(void* output)
 {
     int* dst = (int*)output;
     {

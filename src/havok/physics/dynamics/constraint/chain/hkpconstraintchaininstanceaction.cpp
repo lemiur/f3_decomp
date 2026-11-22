@@ -21,16 +21,18 @@ struct FnvCpu_FUN_00e063e0_CpuOwner
     unsigned int unk10;
     unsigned int unk14;
     FnvCpu_FUN_00e063e0_CpuInterface* target;
-    void FUN_00e063e0(int arg0);
+    void hkpConstraintChainInstanceAction_entityRemovedCallback(int arg0);
 };
 // @fnv 0x00e063e0
-void FnvCpu_FUN_00e063e0_CpuOwner::FUN_00e063e0(int arg0)
+// pdb: hkpConstraintChainInstanceAction::entityRemovedCallback | hkpConstraintChainInstanceAction.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void FnvCpu_FUN_00e063e0_CpuOwner::hkpConstraintChainInstanceAction_entityRemovedCallback(int arg0)
 {
     target->Invoke(arg0);
 }
 
 // @fnv 0x00e063c0
-void __stdcall FUN_00e063c0(int)
+// pdb: hkpConstraintChainInstanceAction::applyAction | hkpConstraintChainInstanceAction.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void __stdcall hkpConstraintChainInstanceAction_applyAction(int)
 {}
 
 struct FnvEntityArray

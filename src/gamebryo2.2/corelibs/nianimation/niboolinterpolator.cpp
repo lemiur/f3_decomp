@@ -640,12 +640,13 @@ class NiBoolInterpA535 : public FUN_00a3ca10
     unsigned int m_uiLastKeyIndex;
 
     void CloneTo(NiBoolInterpA535* dest, CloningProcessA535& cloning);
-    NiBoolInterpA535* FUN_00a53590(CloningProcessA535& cloning);
+    NiBoolInterpA535* NiBoolInterpolator_CreateClone(CloningProcessA535& cloning);
 };
 
 // Allocates a new NiBoolInterpA535, copies this object into it via CloneTo, and returns the new instance.
 // @fnv 0x00a53590
-NiBoolInterpA535* NiBoolInterpA535::FUN_00a53590(CloningProcessA535& cloning)
+// pdb: NiBoolInterpolator::CreateClone | NiBoolInterpolator.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc + skyrim(caller_sim), high
+NiBoolInterpA535* NiBoolInterpA535::NiBoolInterpolator_CreateClone(CloningProcessA535& cloning)
 {
     NiBoolInterpA535* p = new NiBoolInterpA535;
     CloneTo(p, cloning);

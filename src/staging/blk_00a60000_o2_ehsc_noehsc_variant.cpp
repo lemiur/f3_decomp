@@ -1400,10 +1400,10 @@ template <class T> inline void TextureBinaryStreamLoad(TextureBinaryInput& input
 }
 struct TextureLoadStream : NiStream
 {
-    void FUN_00a64ea0(NiFixedString*);
-    void FUN_00a64df0(NiFixedString*);
+    void NiStream_LoadCStringAsFixedString(NiFixedString*);
+    void NiStream_LoadFixedString(NiFixedString*);
     void FUN_00a64700(unsigned int);
-    void FUN_00a645b0();
+    void NiStream_ReadLinkID();
     void FUN_00a636f0(const char*);
     bool FUN_00a636b0(char*, unsigned int);
     void FUN_00a633d0(const char*, NiObjectA61**);

@@ -901,7 +901,7 @@ struct NetEqual : NiObjectNET
 };
 struct CountController : NiTimeController
 {
-    unsigned int FUN_00a6cd00();
+    unsigned int NiTimeController_ItemsInList();
 };
 
 // Compares two NiObjectNET objects by checking name handle, geometry controller extra data, and time controller lists for equality.
@@ -939,8 +939,8 @@ bool NetEqual::FUN_00a5c820(NiObjectNET* other)
     }
     NiTimeController* pOtherController = other->m_pControllers;
     NiTimeController* pController = m_pControllers;
-    unsigned int i = pController ? ((CountController*)pController)->FUN_00a6cd00() : 0;
-    unsigned int uiOtherControllerCount = pOtherController ? ((CountController*)pOtherController)->FUN_00a6cd00() : 0;
+    unsigned int i = pController ? ((CountController*)pController)->NiTimeController_ItemsInList() : 0;
+    unsigned int uiOtherControllerCount = pOtherController ? ((CountController*)pOtherController)->NiTimeController_ItemsInList() : 0;
     if (i != uiOtherControllerCount)
         goto fail;
     while (pController && pOtherController)
@@ -1114,7 +1114,7 @@ struct NiShader
 class NiTexture;
 struct Holder
 {
-    bool FUN_00a5ba40(NiTexture*);
+    bool NiObjectNET_InsertExtraData(NiTexture*);
 };
 struct RTTIName
 {
@@ -1132,7 +1132,7 @@ char* CopyFilePath(char*, unsigned int, const char*, unsigned int);
 int _strcat_s(char*, unsigned int, const char*);
 void NiFree(void*);
 
-// When the shader filename is empty, derives a name from RTTI and an index, sets it, then returns FUN_00a5ba40's result.
+// When the shader filename is empty, derives a name from RTTI and an index, sets it, then returns NiObjectNET_InsertExtraData's result.
 // @fnv 0x00a5bca0
 bool FUN_00a5bca0_shell::SetExtraDataName(NiExtraData* pkExtra)
 {
@@ -1157,7 +1157,7 @@ bool FUN_00a5bca0_shell::SetExtraDataName(NiExtraData* pkExtra)
             NiFree(pcGeneratedKey);
         }
     }
-    return ((Holder*)this)->FUN_00a5ba40((NiTexture*)pkExtra);
+    return ((Holder*)this)->NiObjectNET_InsertExtraData((NiTexture*)pkExtra);
 }
 
 inline NiFixedString::operator const char*() const

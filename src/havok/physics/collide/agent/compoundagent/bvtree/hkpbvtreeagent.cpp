@@ -105,13 +105,14 @@ void __cdecl FUN_00d2f9d0(int aiUnused1, int aiUnused2, int aiUnused3, int arg4)
     pBuilt->FUN_00d2f980(arg4);
 }
 
-void __cdecl FUN_00d30f50(void* apFirst, void* apSecond, void* apThird, void* apFourth, void* apFifth);
+void __cdecl hkpBvTreeAgent_staticLinearCast(void* apFirst, void* apSecond, void* apThird, void* apFourth, void* apFifth);
 
-// Calls FUN_00d30f50, passing along all five arguments unchanged.
+// Calls hkpBvTreeAgent_staticLinearCast, passing along all five arguments unchanged.
 // @fnv 0x00d315a0
-void __stdcall FUN_00d315a0(void* apFirst, void* apSecond, void* apThird, void* apFourth, void* apFifth)
+// pdb: hkpBvTreeAgent::linearCast | hkpBvTreeAgent.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void __stdcall hkpBvTreeAgent_linearCast(void* apFirst, void* apSecond, void* apThird, void* apFourth, void* apFifth)
 {
-    FUN_00d30f50(apFirst, apSecond, apThird, apFourth, apFifth);
+    hkpBvTreeAgent_staticLinearCast(apFirst, apSecond, apThird, apFourth, apFifth);
 }
 
 extern "C" void __cdecl FUN_00d31110(void* arg0, void* arg1, void* arg2, void* arg3);
@@ -121,12 +122,12 @@ extern "C" void __stdcall FUN_00d315d0(void* arg0, void* arg1, void* arg2, void*
     FUN_00d31110(arg0, arg1, arg2, arg3);
 }
 
-void __cdecl FUN_00d312f0(void* apA, void* apB, void* apC, void* apD);
+void __cdecl hkpBvTreeAgent_staticGetPenetrations(void* apA, void* apB, void* apC, void* apD);
 
 // @fnv 0x00d315f0
 void __stdcall FUN_00d315f0(void* apA, void* apB, void* apC, void* apD)
 {
-    FUN_00d312f0(apA, apB, apC, apD);
+    hkpBvTreeAgent_staticGetPenetrations(apA, apB, apC, apD);
 }
 
 struct D2FA00Allocator
@@ -347,12 +348,13 @@ class OwnerD2F5
     int unk04[2];
     hkArrayD2F5<EntryD2F5> m_entries;
 
-    void FUN_00d2f550(void* pArg);
+    void hkpBvTreeAgent_cleanup(void* pArg);
 };
 
 // Invokes vf1C on each non-null listener in m_entries with pArg, then deletes this object.
 // @fnv 0x00d2f550
-void OwnerD2F5::FUN_00d2f550(void* pArg)
+// pdb: hkpBvTreeAgent::cleanup | hkpBvTreeAgent.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void OwnerD2F5::hkpBvTreeAgent_cleanup(void* pArg)
 {
     for (EntryD2F5 *it = m_entries.begin(), *itEnd = m_entries.end(); it != itEnd; ++it)
     {
@@ -1116,7 +1118,7 @@ struct S_00d30f50_LinearCastInput
     S_00d30f50_Dispatcher* m_pCollisionDispatcher;
 };
 
-void __cdecl FUN_00d30f50(const S_00d30f50_CdBody& bodyA, const S_00d30f50_CdBody& bodyB,
+void __cdecl hkpBvTreeAgent_staticLinearCast(const S_00d30f50_CdBody& bodyA, const S_00d30f50_CdBody& bodyB,
                           const S_00d30f50_LinearCastInput& input, S_00d30f50_CdPointCollector& collector,
                           S_00d30f50_CdPointCollector* startCollector) throw();
 
@@ -1189,7 +1191,8 @@ static inline void S_00d30f50_Timer116(const char* name, unsigned int& t)
     }
 }
 
-void __cdecl FUN_00d30f50(const S_00d30f50_CdBody& bodyA, const S_00d30f50_CdBody& bodyB,
+// pdb: hkpBvTreeAgent::staticLinearCast | hkpBvTreeAgent.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_seq), high
+void __cdecl hkpBvTreeAgent_staticLinearCast(const S_00d30f50_CdBody& bodyA, const S_00d30f50_CdBody& bodyB,
                           const S_00d30f50_LinearCastInput& input, S_00d30f50_CdPointCollector& collector,
                           S_00d30f50_CdPointCollector* startCollector) throw()
 {
@@ -1364,9 +1367,9 @@ extern "C" void FUN_00d2e970();
 extern "C" void FUN_00d2e9b0();
 extern "C" void FUN_00d2e9f0();
 extern "C" void FUN_00d2f9d0();
-extern "C" void FUN_00d312f0();
+extern "C" void hkpBvTreeAgent_staticGetPenetrations();
 extern "C" void FUN_00d31110();
-extern "C" void FUN_00d30f50();
+extern "C" void hkpBvTreeAgent_staticLinearCast();
 extern "C" void FUN_00d2fa40();
 
 // Sets up three DescRecord entries with function pointers and flags, then passes each to self->FUN_00cfbbe0 with different index pairs.
@@ -1383,17 +1386,17 @@ void FUN_00d314e0(SpawnedObject* self)
     self->FUN_00cfbbe0(&desc, 8, -1);
 
     desc.fn0 = FUN_00d2f9d0;
-    desc.fn1 = FUN_00d312f0;
+    desc.fn1 = hkpBvTreeAgent_staticGetPenetrations;
     desc.fn2 = FUN_00d31110;
-    desc.fn3 = FUN_00d30f50;
+    desc.fn3 = hkpBvTreeAgent_staticLinearCast;
     desc.flagA = 0;
     desc.flagB = 1;
     self->FUN_00cfbbe0(&desc, -1, 8);
 
     desc.fn0 = FUN_00d2fa40;
-    desc.fn1 = FUN_00d312f0;
+    desc.fn1 = hkpBvTreeAgent_staticGetPenetrations;
     desc.fn2 = FUN_00d31110;
-    desc.fn3 = FUN_00d30f50;
+    desc.fn3 = hkpBvTreeAgent_staticLinearCast;
     desc.flagA = 0;
     desc.flagB = 1;
     self->FUN_00cfbbe0(&desc, 8, 8);

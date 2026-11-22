@@ -320,22 +320,23 @@ struct FloatController
     unsigned int unk38;
     NiFloatsExtraData* extraData;
     int index;
-    bool FUN_00a36250(float time);
+    bool NiTimeController_DontDoUpdate(float time);
     bool IsManaged() const
     {
         return ((unsigned char)(flags >> 5) & 1) != 0;
     }
-    void FUN_00a4f0c0(float* updateData);
+    void NiFloatsExtraDataController_Update(float* updateData);
 };
 // Updates lastTime for managed controllers, evaluates the interpolator when present, and writes a successful value to extraData.
 // @fnv 0x00a4f0c0
-void FloatController::FUN_00a4f0c0(float* updateData)
+// pdb: NiFloatsExtraDataController::Update | NiFloatsExtraDataController.obj | fnv360_0822_retail, caller_sim + bridge(vtable|objrun_prop) + skyrim(caller_sim), high
+void FloatController::NiFloatsExtraDataController_Update(float* updateData)
 {
     if (IsManaged())
     {
         lastTime = DAT_01096324;
     }
-    else if (FUN_00a36250(*updateData))
+    else if (NiTimeController_DontDoUpdate(*updateData))
     {
         if (!interpolator || !interpolator->AlwaysUpdate())
             return;

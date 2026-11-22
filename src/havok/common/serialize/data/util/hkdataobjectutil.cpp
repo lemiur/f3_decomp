@@ -204,14 +204,14 @@ namespace fnv_00dc3530 {
 extern int DAT_01268b08;
 
 // @f3 0x00a498d0 (community match, verified in this file)
-extern "C" int __cdecl FUN_009232c0(int key, int* table);
+extern "C" int __cdecl hkString_strCmp(int key, int* table);
 int* __cdecl FUN_0093e470();
 struct Owner;
 int __fastcall FUN_00dc3530(Owner* owner);
 namespace fnv_00dc3530 { struct Owner; int __fastcall FUN_00dc3530(Owner* owner); }
 int __fastcall ::fnv_00dc3530::FUN_00dc3530(::fnv_00dc3530::Owner* owner)
 {
-    return FUN_009232c0(*(int*)((char*)owner + 0x14), FUN_0093e470()) == 0;
+    return hkString_strCmp(*(int*)((char*)owner + 0x14), FUN_0093e470()) == 0;
 }
 
 }  // namespace fnv_00dc3530

@@ -108,7 +108,8 @@ NiTriStrips* __cdecl CreateNiTriShapeX()
 
 extern const char g_011f5b34_arg1[];
 // @fnv 0x00a74520
-const char* __cdecl FUN_00a74520()
+// pdb: NiGeometryData::GetRTTI | NiGeometryData.obj | fnv360_0822_retail, udata + bridge(vtable|udata) + skyrim(objrun), high
+const char* __cdecl NiGeometryData_GetRTTI()
 {
     return g_011f5b34_arg1;
 }

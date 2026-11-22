@@ -60,7 +60,8 @@ struct TlsSlotAlloc
     void FUN_008f6d90(void* ptr, unsigned int size, int tag);
 };
 
-void __cdecl FUN_00d06cb0(GrowBuf* buf, unsigned int elemSize)
+// pdb: hkSmallArrayUtil::_reserveMore | hkSmallArray.obj | fnv360_0822_retail, call_seq + bridge(call_gap_sim|call_seq) + skyrim(call_gap), high
+void __cdecl hkSmallArrayUtil__reserveMore(GrowBuf* buf, unsigned int elemSize)
 {
     unsigned int newCount;
     if (buf->m_uCap != 0)
@@ -226,7 +227,8 @@ int __cdecl FUN_00d06f80(int aiB, int aiC);
 
 // Returns one of five fixed string pointers for values 0 through 4, or a fallback pointer otherwise.
 // @f3 0x005a24f0 (community match, verified in this file)
-const char* __cdecl FUN_00d06e60(int value)
+// pdb: ActorValue::GetSectionCount | ActorValue.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+const char* __cdecl ActorValue_GetSectionCount(int value)
 {
     switch (value)
     {

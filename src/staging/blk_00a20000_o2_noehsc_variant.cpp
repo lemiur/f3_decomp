@@ -504,7 +504,7 @@ struct Obj_a28
 };
 bool __cdecl AreFloatsEqual(Obj_a28* a, Obj_a28* b);
 bool __cdecl FUN_00a28a80(Obj_a28* a, Obj_a28* b);
-// Reconstruction of FUN_00a28dc0.
+// Reconstruction of NiBezRotKey_FillDerivedVals.
 //
 // The object is a fixed-size array of 36-byte key records:
 //   +0x00  quaternion q0   (16 bytes)
@@ -530,7 +530,7 @@ struct FNVAnim
     FNVKey keys[64];
 };
 extern void __cdecl FUN_00a28ab0(FNVAnim* obj, unsigned int count, unsigned int flag);
-void __cdecl FUN_00a28dc0(FNVAnim* obj, unsigned int count, unsigned int flag);
+void __cdecl NiBezRotKey_FillDerivedVals(FNVAnim* obj, unsigned int count, unsigned int flag);
 // The game class NiBound - a 16-byte bound (three position floats and a radius).
 class NiBound
 {
@@ -568,7 +568,7 @@ struct FUN_00a29550_stream
 };
 struct Inner
 {
-    void FUN_00a698a0(void* target);
+    void NiColorA_SaveBinary(void* target);
 };
 struct Outer
 {
@@ -1879,7 +1879,7 @@ struct KeyframeElement
     float continuity;
     float bias;
     ~KeyframeElement();
-    void FUN_00a2c9d0(void* context);
+    void NiTCBFloatKey_LoadBinary(void* context);
     static void* operator new[](unsigned int bytes)
     {
         return ((P03MM*)&g_memoryManager)->Allocate(bytes);
@@ -2379,7 +2379,7 @@ bool FindKeyIndex(float t, TCBKeyS* keys, unsigned int count, unsigned int* idx,
 FUN_00a289b0_Vec4* __cdecl SampleKeyedVec4(FUN_00a289b0_Vec4* out, float t, char* keys, void* arg4, unsigned int count,
                                            unsigned char stride);
 struct FNVAnim;
-void __cdecl FUN_00a28dc0(FNVAnim* obj, unsigned int count, unsigned int flag);
+void __cdecl NiBezRotKey_FillDerivedVals(FNVAnim* obj, unsigned int count, unsigned int flag);
 
 struct QuatS
 {
@@ -2431,7 +2431,7 @@ bool FUN_00a28f50(float t, RotKeyS*& pkKeys, unsigned int& uiNumKeys)
         uiNumKeys++;
         delete[] pkOld;
         pkKeys = pkNewKeys;
-        FUN_00a28dc0((FNVAnim*)pkNewKeys, uiNumKeys, sizeof(TCBRotKeyS));
+        NiBezRotKey_FillDerivedVals((FNVAnim*)pkNewKeys, uiNumKeys, sizeof(TCBRotKeyS));
         return true;
     }
     return false;
@@ -2491,7 +2491,7 @@ struct TimedRotationKey : AnimKeyBase
     }
 };
 
-void FUN_00a298f0(RotKeyQuat* pkResult, float fTime, TimedRotationKey* pkKeys, int eType, unsigned int uiNumKeys,
+void NiColorKey_GenInterpDefault(RotKeyQuat* pkResult, float fTime, TimedRotationKey* pkKeys, int eType, unsigned int uiNumKeys,
                   unsigned int uiKeySize);
 
 // @fnv 0x00a2a390
@@ -2507,7 +2507,7 @@ bool FUN_00a2a390(float fTime, TimedRotationKey*& pkKeys, unsigned int& uiNumKey
             _memmove(&pkNew[uiIndex + 1], &pkOld[uiIndex], (uiNumKeys - uiIndex) * sizeof(TimedRotationKey));
 
         RotKeyQuat kQuat;
-        FUN_00a298f0(&kQuat, fTime, pkOld, 1, uiNumKeys, sizeof(TimedRotationKey));
+        NiColorKey_GenInterpDefault(&kQuat, fTime, pkOld, 1, uiNumKeys, sizeof(TimedRotationKey));
         TimedRotationKey* pkKey = &pkNew[uiIndex];
         pkKey->time = fTime;
         pkKey->m_kRotationValue = kQuat;
@@ -2680,7 +2680,8 @@ bool FindKeyIndex(float, ScalarKeyA2*, unsigned int, unsigned int*, unsigned int
 float GetValueAtTime(float, ScalarKeyA2*, int, unsigned int, unsigned int);
 void FUN_00a2c7a0(ScalarKeyA2*, unsigned int, unsigned int);
 // @fnv 0x00a2c890
-bool FUN_00a2c890(float time, ScalarKeyA2** keys, unsigned int* count)
+// pdb: NiTCBFloatKey::Insert | NiTCBFloatKey.obj | fnv360_0721_beta, objopen_prop + bridge(caller_sim|objopen_prop) + skyrim(caller_sim), high
+bool NiTCBFloatKey_Insert(float time, ScalarKeyA2** keys, unsigned int* count)
 {
     ScalarKeyA2* old = *keys;
     unsigned int index;
@@ -2761,7 +2762,7 @@ struct QuatKey
     }
 };
 
-QuatR FUN_00a298f0(float t, QuatKey* keys, int type, unsigned int count, unsigned int stride);
+QuatR NiColorKey_GenInterpDefault(float t, QuatKey* keys, int type, unsigned int count, unsigned int stride);
 
 // @fnv 0x00a2d000
 bool FUN_00a2d000(float t, QuatKey** pKeys, unsigned int* pCount)
@@ -2775,7 +2776,7 @@ bool FUN_00a2d000(float t, QuatKey** pKeys, unsigned int* pCount)
         _memmove(newKeys, keys, idx * sizeof(QuatKey));
         if (*pCount > idx)
             _memmove(&newKeys[idx + 1], &keys[idx], (*pCount - idx) * sizeof(QuatKey));
-        QuatR q = FUN_00a298f0(t, keys, 5, *pCount, sizeof(QuatKey));
+        QuatR q = NiColorKey_GenInterpDefault(t, keys, 5, *pCount, sizeof(QuatKey));
         QuatKey& key = newKeys[idx];
         key.time = t;
         key.q = q;

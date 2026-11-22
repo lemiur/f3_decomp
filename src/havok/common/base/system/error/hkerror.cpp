@@ -178,7 +178,8 @@ struct DiagLogger
 extern const char str_010c85ac[];
 
 // @f3 0x009231a0 (community match, verified in this file)
-void FUN_00cb1750(const char* apMsg)
+// pdb: hkErrorMessage | hkError.obj | fnv360_0822_retail, uconst + bridge(uconst|uconst) + skyrim(uconst), high
+void hkErrorMessage(const char* apMsg)
 {
     DiagBuffer buf;
     buf.FUN_00cb1600(buf.m_buf, 0x200);

@@ -10,11 +10,12 @@ struct FUN_00e3b720_s
     int m_iElementCount;  // +0xc
     int pad1[3];
     int m_uiItemCount;  // +0x1c
-    void FUN_00e3b720(int* info) const;
+    void hkpPoweredChainData_getConstraintInfo(int* info) const;
 };
 
 // @fnv 0x00e3b720
-void FUN_00e3b720_s::FUN_00e3b720(int* info) const
+// pdb: hkpPoweredChainData::getConstraintInfo | hkpPoweredChainData.obj | fnv360_0822_retail, objrun_sim + bridge(hash|vtable) + skyrim(hash), high
+void FUN_00e3b720_s::hkpPoweredChainData_getConstraintInfo(int* info) const
 {
     info[4] = (int)&m_iElementCount;
     int zero = 0;

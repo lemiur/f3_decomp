@@ -54,8 +54,8 @@ struct ResultData
 // @f3 0x009cc0e0 (community match, verified in this file)
 struct RResult
 {
-    void FUN_00a3b260(void* a, void* b, void* c);
-    void FUN_00a3b030(void* a, void* b, void* c);
+    void hkpGskCache_initTriangle(void* a, void* b, void* c);
+    void hkpGskCache_init(void* a, void* b, void* c);
 };
 
 void* __cdecl DispatchInputRecord(InputData* input, unsigned char* status, ResultData* result)
@@ -64,9 +64,9 @@ void* __cdecl DispatchInputRecord(InputData* input, unsigned char* status, Resul
     void* table = pObject->vtable;
     InputRecord* record = *input->unk04;
     if (record->type == 4)
-        ((RResult*)result)->FUN_00a3b260(table, record, &input->unk10);
+        ((RResult*)result)->hkpGskCache_initTriangle(table, record, &input->unk10);
     else
-        ((RResult*)result)->FUN_00a3b030(table, record, &input->unk10);
+        ((RResult*)result)->hkpGskCache_init(table, record, &input->unk10);
     status[2] = 0;
     result->unk0B &= 0xEF;
     result->unk0C = 0;
@@ -83,7 +83,7 @@ extern "C" void __cdecl InsertSlotId(int a, int b, int c, int d);
 extern "C" void __cdecl FindEntryByKey(int a, int b, int c, int d);
 extern "C" void __cdecl ConvertPairFlags(int a, int b, int c, int d);
 extern "C" void __cdecl FUN_00d41930(int a, int b, int c, int d);
-extern "C" void __cdecl FUN_00d40d80(int a, int b, int c, int d);
+extern "C" void __cdecl hkPredGskCylinderAgent3_process(int a, int b, int c, int d);
 
 // The handler table that is handed to CScript::RegisterHandler.  It is kept
 // 16 byte aligned, which is what makes the compiler emit the aligned frame
@@ -732,10 +732,11 @@ __forceinline void hkGskManifold_init(const hkpGskManifold& manifold, const hkVe
 using namespace N009cc270;
 
 void __cdecl FUN_00a433d0(Request*, float, float, float, ResultData*, AlignedVec*, Output*);
-void __cdecl FUN_00a40940(Request*, unsigned char*, ResultData*, ResultData*, hkpGskManifold*, AlignedVec*, Output*);
+void __cdecl hkGskAgentUtil_processCollisionNoTim(Request*, unsigned char*, ResultData*, ResultData*, hkpGskManifold*, AlignedVec*, Output*);
 void __cdecl FUN_00a38200(hkpGskManifold*, hkpGskManifoldWork*, int, hkpProcessCollisionOutput*, void*);
 
-void* __cdecl FUN_00d41a30(Request* inputIn, unsigned char* entry, ResultData* agentData, AlignedVec* separatingNormalIn,
+// pdb: hkPredGskAgent3::process | hkpPredGskAgent3.obj | fnv360_0822_retail, objrun + bridge(call_gap|call_gap) + skyrim(call_gap), high
+void* __cdecl hkPredGskAgent3_process(Request* inputIn, unsigned char* entry, ResultData* agentData, AlignedVec* separatingNormalIn,
                            Output* outputIn)
 {
     const hkpAgent3ProcessInput& input = *reinterpret_cast<const hkpAgent3ProcessInput*>(inputIn);
@@ -789,7 +790,7 @@ void* __cdecl FUN_00d41a30(Request* inputIn, unsigned char* entry, ResultData* a
     else
     {
     PROCESS_AT_T1:
-        FUN_00a40940(inputIn, entry, agentData, agentData, gskManifold, separatingNormalIn, outputIn);
+        hkGskAgentUtil_processCollisionNoTim(inputIn, entry, agentData, agentData, gskManifold, separatingNormalIn, outputIn);
     }
 
     entry[2] = gskManifold->m_numContactPoints;

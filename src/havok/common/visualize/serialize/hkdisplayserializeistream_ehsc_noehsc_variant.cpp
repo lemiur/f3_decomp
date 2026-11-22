@@ -52,7 +52,7 @@ struct FUN_00ddacd0_shell
 {
     void __thiscall FUN_00dd8fe0(void* output, int elementSize, int count);
     void __thiscall FUN_00ddac60(void* output);
-    void __thiscall FUN_00ddac00(void* output);
+    void __thiscall hkDisplaySerializeIStream_readTriangle(void* output);
     void __thiscall FUN_00ddacd0(ArrayPair* arrays);
 };
 struct AudioAllocator

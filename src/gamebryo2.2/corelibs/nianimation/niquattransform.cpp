@@ -493,7 +493,7 @@ class KeyA38
 class DataA38 : public NiObjectA38
 {
   public:
-    void FUN_00a38b60(NiStreamA38& kStream);
+    void NiQuatTransform_SaveBinary(NiStreamA38& kStream);
 
     KeyA38 m_kControlPoint;
     unsigned int m_uiCurrentValue;
@@ -501,7 +501,8 @@ class DataA38 : public NiObjectA38
 
 // Saves the base NiObjectA38, the KeyA38 member and the unsigned int member to the stream.
 // @fnv 0x00a38b60
-void DataA38::FUN_00a38b60(NiStreamA38& kStream)
+// pdb: NiQuatTransform::SaveBinary | NiQuatTransform.obj | fnv360_0822_retail, call_seq + bridge(hash|call_seq) + skyrim(call_seq), high
+void DataA38::NiQuatTransform_SaveBinary(NiStreamA38& kStream)
 {
     NiObjectA38::SaveBinary(kStream);
     m_kControlPoint.SaveBinary(&kStream);

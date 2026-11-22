@@ -1788,7 +1788,7 @@ struct PlayerCharacter
     Vec3* GetFieldAtOffsetDD4();
     float FUN_0070c3b0();
     float GetScale();
-    bool FUN_00524d10();
+    bool Script_IsCurrentFurnitureObj();
     Vec3 GetPosition();
     float GetLooking();
     CollisionFilter GetVectorElement();

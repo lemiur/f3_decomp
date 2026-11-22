@@ -242,7 +242,8 @@ static __declspec(noinline) bool IsSupportedRagdollConstraint(Obj* obj, bool rep
     return false;
 }
 
-static __declspec(noinline) Vec4* FUN_00ce9c40(Obj* obj) throw()
+// pdb: _accessConstraintPivotA | hkaRagdollUtils.obj | fnv360_0822_retail, call_gap + bridge(call_gap|call_gap) + skyrim(call_seq), high
+static __declspec(noinline) Vec4* _accessConstraintPivotA(Obj* obj) throw()
 {
     Inner* inner = obj->inner;
     int t = inner->getSomething();

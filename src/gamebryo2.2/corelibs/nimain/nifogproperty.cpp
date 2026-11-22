@@ -12,7 +12,8 @@ extern Obj00a9a120* DAT_011f5f3c;
 extern "C" __declspec(dllimport) long __stdcall InterlockedDecrement(long volatile*);
 // If the global object exists, decrements its reference count, calls its virtual f1 when the count reaches zero, and clears the global pointer.
 // @fnv 0x00a9a120
-void FUN_00a9a120()
+// pdb: NiFogProperty::_SDMShutdown | NiFogProperty.obj | fnv360_0822_retail, call_seq + bridge(call_dedup|call_dedup) + skyrim(call_gap_sim), high
+void NiFogProperty__SDMShutdown()
 {
     if (DAT_011f5f3c)
     {
@@ -465,12 +466,13 @@ class SaverA9A2 : public FUN_00a5d7b0_helper
     float m_f1C;
     NiColorA9A2 m_kFogTint;
 
-    void FUN_00a9a230(NiStreamA9A2& kStream);
+    void NiFogProperty_SaveBinary(NiStreamA9A2& kStream);
 };
 
 // Calls FUN_00a5d7b0, reads m_us18 and m_f1C, then calls m_kFogTint.FUN_00a69780 with kStream.
 // @fnv 0x00a9a230
-void SaverA9A2::FUN_00a9a230(NiStreamA9A2& kStream)
+// pdb: NiFogProperty::SaveBinary | NiFogProperty.obj | fnv360_0721_beta, objrun + bridge(vtable|objrun) + skyrim(caller_sim), high
+void SaverA9A2::NiFogProperty_SaveBinary(NiStreamA9A2& kStream)
 {
     FUN_00a5d7b0(kStream);
     ReadBinaryValue(kStream, m_us18);

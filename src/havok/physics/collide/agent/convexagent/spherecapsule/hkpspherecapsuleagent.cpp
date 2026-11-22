@@ -55,7 +55,8 @@ void FUN_00d3e2b0_cls::FUN_00d3e2b0(int a1)
 void __cdecl FUN_00d3e330(int a, int b, int c, int d);
 
 // @fnv 0x00d3e510
-void __stdcall FUN_00d3e510(int a, int b, int c, int d)
+// pdb: hkpSphereCapsuleAgent::getPenetrations | hkpSphereCapsuleAgent.obj | fnv360_0822_retail, vtable + skyrim(vtable), high
+void __stdcall hkpSphereCapsuleAgent_getPenetrations(int a, int b, int c, int d)
 {
     FUN_00d3e330(a, b, c, d);
 }
@@ -88,10 +89,10 @@ struct AgentDispatchDescriptor {
     volatile unsigned int tag;
 };
 struct CollisionDispatcher {
-    void FUN_00d3e510(void* bodyB, void* bodyA, void* input, AgentDispatchDescriptor* descriptor);
+    void hkpSphereCapsuleAgent_getPenetrations(void* bodyB, void* bodyA, void* input, AgentDispatchDescriptor* descriptor);
     void FUN_00d3f000(void* bodyA, void* bodyB, void* volatile input, unsigned int tag);
 };
-// Builds an AgentDispatchDescriptor with the given tag and a fixed dispatch table, then calls FUN_00d3e510 with the bodies swapped.
+// Builds an AgentDispatchDescriptor with the given tag and a fixed dispatch table, then calls hkpSphereCapsuleAgent_getPenetrations with the bodies swapped.
 // @fnv 0x00d3f000
 void CollisionDispatcher::FUN_00d3f000(void* bodyA, void* bodyB, void* volatile input, unsigned int tag)
 {
@@ -99,7 +100,7 @@ void CollisionDispatcher::FUN_00d3f000(void* bodyA, void* bodyB, void* volatile 
     descriptor.tag = tag;
     descriptor.isFlipped = false;
     descriptor.dispatchTable = &DAT_010ce81c;
-    FUN_00d3e510(bodyB, bodyA, input, &descriptor);
+    hkpSphereCapsuleAgent_getPenetrations(bodyB, bodyA, input, &descriptor);
 }
 
 union __declspec(intrin_type) __declspec(align(16)) __m128 {

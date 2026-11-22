@@ -1188,7 +1188,8 @@ extern Matrix215 DAT_01200470, DAT_012004b0;
 extern Point215 DAT_012004f0;
 // If neither flag is set, copies the renderer's two matrices and the source's x/y/z point into globals and sets DAT_0120045e true and DAT_011adcdc false.
 // @fnv 0x00ba9420
-void FUN_00ba9420(const Source215* source)
+// pdb: BSShaderProperty::PreviousTransform::SaveCamera | BSShaderProperty.obj | fnv360_0721_beta, udata + bridge(hash|udata), high
+void BSShaderProperty_PreviousTransform_SaveCamera(const Source215* source)
 {
     if (!DAT_0120045c && !DAT_0120045d)
     {

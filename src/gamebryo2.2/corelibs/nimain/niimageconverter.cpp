@@ -300,7 +300,7 @@ struct NiPixelFormat
 typedef char _sizecheck_NiPixelFormat[sizeof(NiPixelFormat) == 68 ? 1 : -1];
 struct FUN_00a76c10_shell : public NiImageConverter
 {
-    NiPixelData* FUN_00a76c10(void*, void*, NiPixelData*, bool);
+    NiPixelData* NiImageConverter_ConvertPixelData(void*, void*, NiPixelData*, bool);
 };
 
 void* _memmove(void* dst, const void* src, unsigned int size);
@@ -343,7 +343,8 @@ struct NiPixelData
 };
 
 // @fnv 0x00a76c10
-NiPixelData* FUN_00a76c10_shell::FUN_00a76c10(void* src, void* apDestFmt, NiPixelData* pkOptDest, bool bMipmap)
+// pdb: NiImageConverter::ConvertPixelData | NiImageConverter.obj | fnv360_0822_retail, caller_sim + bridge(vtable|caller_sim) + skyrim(vtable), high
+NiPixelData* FUN_00a76c10_shell::NiImageConverter_ConvertPixelData(void* src, void* apDestFmt, NiPixelData* pkOptDest, bool bMipmap)
 {
     const NiPixelData& kSrc = *(const NiPixelData*)src;
     const NiPixelFormat& kDestFmt = *(const NiPixelFormat*)apDestFmt;

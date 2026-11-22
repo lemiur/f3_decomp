@@ -140,7 +140,8 @@ struct T_0085bda0 { unsigned int m_unk00; unsigned int m_bucketCount; N_0085bda0
 extern void* DAT_00e207a8;
 extern T_0085bda0* DAT_0109082c;
 
-unsigned int __cdecl FUN_0085bda0(unsigned int* pKey)
+// pdb: NiMaterial::GetMaterial | NiMaterialLibrary.obj | fnv360_0721_beta, objrun + bridge(hash|objrun_prop), high
+unsigned int __cdecl NiMaterial_GetMaterial(unsigned int* pKey)
 {
     unsigned int key = *pKey;
     if (key == (unsigned int)DAT_00e207a8) goto zero;

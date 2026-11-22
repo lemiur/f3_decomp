@@ -26,7 +26,8 @@ extern const char DAT_00e7bb64;
 void __cdecl FUN_00a64790(void);
 extern void* DAT_0116c49c;
 
-void FUN_009ef920()
+// pdb: hkpWorldMemoryViewer::registerViewer | hkpWorldMemoryViewer.obj | fnv360_0822_debug, udata + bridge(ustr|ustr), high
+void hkpWorldMemoryViewer_registerViewer()
 {
     DAT_011697e4 = DAT_0116c490->FUN_00a61250(&DAT_00e80a00, (void*)FUN_009ef7e0);
 }
@@ -41,7 +42,8 @@ void FUN_009f5090()
     DAT_0116981c = DAT_0116c490->FUN_00a61250(&DAT_00e80f74, (void*)FUN_009f5010);
 }
 
-void FUN_009f51a0()
+// pdb: hkpInactiveContactPointViewer::registerViewer | hkpInactiveContactPointViewer.obj | fnv360_0822_debug, udata + bridge(ustr|ustr), high
+void hkpInactiveContactPointViewer_registerViewer()
 {
     DAT_01169820 = DAT_0116c490->FUN_00a61250(&DAT_00e80ff8, (void*)FUN_009f5160);
 }
@@ -51,7 +53,8 @@ void FUN_009f7490()
     DAT_0116983c = DAT_0116c490->FUN_00a61250(&DAT_00e812d0, (void*)FUN_009f6c90);
 }
 
-void FUN_00a637c0()
+// pdb: hkInspectProcess::registerProcess | hkInspectProcess.obj | fnv360_0822_debug, udata, high
+void hkInspectProcess_registerProcess()
 {
     DAT_0116c494 = DAT_0116c490->FUN_00a61250(&DAT_00e86d74, (void*)FUN_00a63780);
 }
@@ -85,7 +88,8 @@ void FUN_0048f980()
     }
 }
 
-void FUN_008608b0()
+// pdb: NiShadeProperty::_SDMShutdown | NiShadeProperty.obj | fnv360_0822_retail, call_seq + bridge(call_dedup|call_dedup) + skyrim(call_gap_sim), high
+void NiShadeProperty__SDMShutdown()
 {
     if (DAT_010908d8) {
         DAT_010908d8->Dec();
@@ -332,7 +336,7 @@ void FUN_00d98850()
 
 void __fastcall FUN_004590a0(void*);
 void __fastcall FUN_00457d60(void*);
-void __fastcall FUN_00955370(void*);
+void __fastcall hkaPose_syncLocalSpace(void*);
 void __fastcall FUN_00954f90(void*);
 void __fastcall FUN_00b24110(void*);
 void __fastcall FUN_00b253e0(void*);
@@ -349,7 +353,7 @@ __declspec(noinline) void __fastcall FUN_00459330(void* p)
 
 __declspec(noinline) void __fastcall FUN_00955aa0(void* p)
 {
-    FUN_00955370(p);
+    hkaPose_syncLocalSpace(p);
     FUN_00954f90(p);
 }
 

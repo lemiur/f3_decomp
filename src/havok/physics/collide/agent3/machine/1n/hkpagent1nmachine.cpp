@@ -3,12 +3,13 @@
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
 void ProcessEntryPair();
-void FUN_00da44d0(int, int, void*);
+void hkAgent1nMachine_VisitAllAgents(int, int, void*);
 
 // @fnv 0x00da48e0
-void FUN_00da48e0(int b, int a)
+// pdb: hkAgent1nMachine_UpdateShapeCollectionFilter | hkpAgent1nMachine.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_seq), high
+void hkAgent1nMachine_UpdateShapeCollectionFilter(int b, int a)
 {
-    FUN_00da44d0(b, a, (void*)&ProcessEntryPair);
+    hkAgent1nMachine_VisitAllAgents(b, a, (void*)&ProcessEntryPair);
 }
 
 typedef unsigned int BlockPoolsize_t;
@@ -1922,7 +1923,8 @@ struct CollisionAgentContext
 extern const float DAT_00db38b8;
 
 
-void FUN_00da3510(AgentSectorPointerArray& agentTrack, CollisionAgentContext& input)
+// pdb: hkAgent1nMachine_InvalidateTim | hkpAgent1nMachine.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_seq), high
+void hkAgent1nMachine_InvalidateTim(AgentSectorPointerArray& agentTrack, CollisionAgentContext& input)
 {
     hkpAgent1nSector* sector = agentTrack.m_kSectors[0];
     FourByteState* entry = sector->getBegin();
@@ -1980,7 +1982,8 @@ struct Da35Stream
 
 // Iterates through Da35Stream chunks, dispatching commands via function pointers and updating float fields based on fa and fb.
 // @f3 0x00a2a3a0 (community match, verified in this file)
-void __cdecl FUN_00da35f0(Da35Stream*** container, float fa, float fb, void** holder)
+// pdb: hkAgent1nMachine_WarpTime | hkpAgent1nMachine.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_seq), high
+void __cdecl hkAgent1nMachine_WarpTime(Da35Stream*** container, float fa, float fb, void** holder)
 {
     Da35Stream* stream = **container;
     unsigned char* p = (unsigned char*)stream + 0x10;
@@ -2167,7 +2170,8 @@ static __forceinline void ReleaseSectorF3(BlockPoolBlock* block)
     }
 }
 
-void FUN_00da42b0(BlockPoolArray* blocks, S_00da40e0_Dispatcher* dispatcher, S_00da40e0_ContactMgr* mgr,
+// pdb: hkAgent1nMachine_Destroy | hkpAgent1nMachine.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_seq), high
+void hkAgent1nMachine_Destroy(BlockPoolArray* blocks, S_00da40e0_Dispatcher* dispatcher, S_00da40e0_ContactMgr* mgr,
                   S_00da40e0_ConstraintOwner& owner)
 {
     BlockPoolBlock** sectors = blocks->m_data;
@@ -2326,7 +2330,8 @@ __forceinline BlockPoolBlock** expandAt(BlockPoolArray* blocks, int count)
     return src;
 }
 
-void FUN_00da44d0(int apBlocks, int apHeader, void* apTransform)
+// pdb: hkAgent1nMachine_VisitAllAgents | hkpAgent1nMachine.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_seq), high
+void hkAgent1nMachine_VisitAllAgents(int apBlocks, int apHeader, void* apTransform)
 {
     BlockPoolArray* blocks = (BlockPoolArray*)apBlocks;
     BlockPoolBlock* input = blocks->m_data[0];

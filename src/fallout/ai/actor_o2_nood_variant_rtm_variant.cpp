@@ -83,7 +83,7 @@ struct BlendAccess {
 struct BlendAllocator { char* top; };
 extern BlendAllocator* __cdecl FUN_00c85750();
 extern __int64 __cdecl FUN_00aa4d80();
-extern void __cdecl FUN_00cddef0(int, BlendTransform*, BlendTransform*, BlendTransform*);
+extern void __cdecl hkaSkeletonUtils_transformModelPoseToLocalPose(int, BlendTransform*, BlendTransform*, BlendTransform*);
 extern void __cdecl CallWithGlobal(int, BlendTransform*, void*, BlendTransform*);
 extern void __cdecl FUN_00ce3a00(int, int, int, BlendTransform*, int);
 struct BlendBuffer {
@@ -652,7 +652,7 @@ struct SceneOwner {
     __forceinline char* GetName() { return name; }
     void FUN_00c7e9a0(Argument*, const char*);
     void FUN_00c7e3b0();
-    unsigned char FUN_00c75460();
+    unsigned char bhkRagdollController_InitGrabIK();
     void FUN_00c79e20();
 };
 namespace VectorHardware {
@@ -1953,7 +1953,7 @@ struct Skeleton {
 };
 extern float DAT_010c7948[];
 void CallWithGlobal(int, void*, void*, Transform48*);
-void FUN_00cddef0(int, void*, Transform48*, Transform48*);
+void hkaSkeletonUtils_transformModelPoseToLocalPose(int, void*, Transform48*, Transform48*);
 void FUN_00ce3a00(void*,void*,void*,Transform48*,int);
 namespace ControllerFloatHardware { extern "C" __m128 _mm_set_ps1(float); }
 extern void* DAT_01071aec;

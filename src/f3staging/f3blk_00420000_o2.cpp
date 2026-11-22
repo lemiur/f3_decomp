@@ -355,9 +355,10 @@ struct FUN_0043bd00_cls
     int unk19C;
     int unk1A0;
     int unk1A4;
-    int FUN_0043bd00();
+    int TESDataHandler_CountCompiled();
 };
-int FUN_0043bd00_cls::FUN_0043bd00()
+// pdb: TESDataHandler::CountCompiled | TESDataHandler.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+int FUN_0043bd00_cls::TESDataHandler_CountCompiled()
 {
     return unk1A4;
 }
@@ -835,11 +836,11 @@ public:
     virtual ~TESForm();
 };
 class TESSound : public TESForm {};
-TESForm* __cdecl FUN_00455190(unsigned int id);
+TESForm* __cdecl TESForm_GetFormByNumericID(unsigned int id);
 
 TESSound* __stdcall FUN_0043bc60(unsigned int id)
 {
-    return dynamic_cast<TESSound*>(FUN_00455190(id));
+    return dynamic_cast<TESSound*>(TESForm_GetFormByNumericID(id));
 }
 
 // @f3 0x004216b0 (community match, verified in this file)
@@ -863,9 +864,10 @@ struct F3Comparison_004227d0 {
     virtual void slot0(); virtual void slot1(); virtual void slot2();
     virtual bool compare(F3Comparison_004227d0*);
     unsigned int unk04,unk08; unsigned char flag,unk0d; unsigned short kind;
-    unsigned char FUN_004227d0(F3Comparison_004227d0*);
+    unsigned char MapMarkerData_Compare(F3Comparison_004227d0*);
 };
-unsigned char F3Comparison_004227d0::FUN_004227d0(F3Comparison_004227d0* other) {
+// pdb: MapMarkerData::Compare | MapMarkerData.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_seq), high
+unsigned char F3Comparison_004227d0::MapMarkerData_Compare(F3Comparison_004227d0* other) {
     if(compare(other)) return true;
     if(flag != other->flag) return true;
     return kind != other->kind;
@@ -2227,7 +2229,8 @@ struct AeRef3C140
     void FUN_004d66e0(int a, float b, int c, float d, AeTarget3C140* e, int f);
 };
 
-void __stdcall FUN_0043c140(AeRef3C140* ref, int a, float b, int c, float d, AeTarget3C140* e, int f)
+// pdb: TESDataHandler::EnumReferencesCloseToPoint | TESDataHandler.obj | fnv360_0721_beta, call_seq + bridge(call_gap|call_gap), high
+void __stdcall TESDataHandler_EnumReferencesCloseToPoint(AeRef3C140* ref, int a, float b, int c, float d, AeTarget3C140* e, int f)
 {
     if (ref && e)
     {
@@ -2403,10 +2406,11 @@ struct FlagHolder422850 {
     int unk08;
     unsigned char flags0C;
 
-    void FUN_00422850(bool set);
+    void MapMarkerData_SetTravelLoc(bool set);
 };
 
-void FlagHolder422850::FUN_00422850(bool set)
+// pdb: MapMarkerData::SetTravelLoc | MapMarkerData.obj | fnv360_0822_retail, call_seq + bridge(call_gap|caller), high
+void FlagHolder422850::MapMarkerData_SetTravelLoc(bool set)
 {
     if (set)
         flags0C |= 2;
@@ -2611,7 +2615,7 @@ struct Grid_4880 {
     int unk2C;
     int unk30;
     Cell_4880* unk34;
-    Cell_4880* FUN_00434810(int x, int y);
+    Cell_4880* TES_GetGridCellCell(int x, int y);
     Cell_4880* FUN_00434880(float x, float y, float z);
 };
 
@@ -2619,7 +2623,7 @@ Cell_4880* Grid_4880::FUN_00434880(float x, float y, float z)
 {
     if (unk34)
         return unk34;
-    Cell_4880* cell = FUN_00434810((int)x >> 12, (int)y >> 12);
+    Cell_4880* cell = TES_GetGridCellCell((int)x >> 12, (int)y >> 12);
     if (cell) {
         switch ((int)cell->type) {
         case 2:
@@ -3439,7 +3443,7 @@ struct UpdateData4334a0 {
     UpdateData4334a0(float t) : time(t), unk04(false), unk05(false), unk06(false), unk07(false), unk08(false) {}
 };
 struct Controller4334a0 {
-    void FUN_0057e0a0(float time);
+    void Sky_Update(float time);
 };
 struct Node4334a0 {
     void FUN_008264c0(const UpdateData4334a0& data);
@@ -3455,7 +3459,7 @@ struct FUN_004334a0_Obj {
 void FUN_004334a0_Obj::FUN_004334a0()
 {
     float time = FUN_00619b80() ? DAT_0106de64 * DAT_01090bac : DAT_0107a0f8;
-    controller->FUN_0057e0a0(time);
+    controller->Sky_Update(time);
     node->FUN_008264c0(UpdateData4334a0(DAT_0106caf8));
 }
 }
@@ -3659,7 +3663,8 @@ struct Owner587{Target587* target;int FUN_00423880();};
 int Owner587::FUN_00423880(){return target?target->FUN_004e8810():0;}
 
 // @f3 0x0043be40 (community match, verified in this file)
-int __stdcall FUN_0043be40(unsigned int value){return value>=0xff000000u;}
+// pdb: TESDataHandler::IsFormIDCreated | TESDataHandler.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(objrun_prop), high
+int __stdcall TESDataHandler_IsFormIDCreated(unsigned int value){return value>=0xff000000u;}
 
 // @f3 0x0043c1c0 (community match, verified in this file)
 struct Target602{void FUN_00486750();};
@@ -4580,9 +4585,10 @@ struct Owner669 {
     int unk04;
     int unk08;
     unsigned char flags;
-    void FUN_00422820(bool enabled);
+    void MapMarkerData_SetVisible(bool enabled);
 };
-void Owner669::FUN_00422820(bool enabled)
+// pdb: MapMarkerData::SetVisible | MapMarkerData.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+void Owner669::MapMarkerData_SetVisible(bool enabled)
 {
     if (enabled)
         flags |= 1;
@@ -4857,17 +4863,17 @@ void Owner702::FUN_00433030()
 
 // @f3 0x004340c0 (community match, verified in this file)
 namespace f3m_004340c0 {
-void FUN_00585b40();
+void BSFaceGenAnimationData_InitSDM();
 void FUN_00593380();
 void FUN_005978a0();
-void FUN_004a3960();
+void BGSAddonNodeSoundHandleExtra_InitSDM();
 void FUN_004917c0();
 void FUN_004340c0()
 {
-    FUN_00585b40();
+    BSFaceGenAnimationData_InitSDM();
     FUN_00593380();
     FUN_005978a0();
-    FUN_004a3960();
+    BGSAddonNodeSoundHandleExtra_InitSDM();
     FUN_004917c0();
 }
 }   // namespace f3m_004340c0
@@ -4958,10 +4964,10 @@ void FUN_00424760()
 // @f3 0x0043bcc0 (community match, verified in this file)
 namespace f3m_0043bcc0 {
 struct Form757 { int unk00; unsigned char type; };
-Form757* FUN_004551c0(const char* name);
+Form757* TESForm_GetFormByEditorID(const char* name);
 Form757* __stdcall FUN_0043bcc0(const char* name)
 {
-    Form757* form = FUN_004551c0(name);
+    Form757* form = TESForm_GetFormByEditorID(name);
     if (form && form->type == 0x0d) return form;
     return 0;
 }
@@ -5245,9 +5251,10 @@ struct Owner {
     int unk020;
     int unk024;
     unsigned int value;
-    bool FUN_004245e0(char* output, unsigned int size);
+    bool QueuedHelmet_GetDescription(char* output, unsigned int size);
 };
-bool Owner::FUN_004245e0(char* output, unsigned int size)
+// pdb: QueuedHelmet::GetDescription | ModelLoader.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(ustr), high
+bool Owner::QueuedHelmet_GetDescription(char* output, unsigned int size)
 {
     FUN_00403230(output, size, DAT_00db7818, value);
     return true;
@@ -5537,7 +5544,7 @@ FUN_00426fc0::~FUN_00426fc0()
 // @f3 0x00428060 (community match, verified in this file)
 namespace f3m_00428060 {
 struct First854 { void FUN_0045f320(int value); };
-struct Second854 { void FUN_004262f0(); };
+struct Second854 { void QueuedReplacementKFList_NotifyChildFinishedPostProcessing(); };
 struct Owner854 {
     int unk00, unk04, unk08, state0C;
     int unk10;
@@ -5557,7 +5564,7 @@ void Owner854::FUN_00428060() {
     if (state0C != 6) {
         first38->FUN_0045f320(value30);
         Second854* second = second3C;
-        if (second) second->FUN_004262f0();
+        if (second) second->QueuedReplacementKFList_NotifyChildFinishedPostProcessing();
     }
 }
 }   // namespace f3m_00428060
@@ -5708,7 +5715,7 @@ struct TES436200
     unsigned char version80;
     int unk84;
     Entry436200* current88;
-    bool FUN_006daa00();
+    bool TESSaveLoadGame_UseSaveGameBlocks();
 };
 
 extern TES436200* DAT_01079ca4;
@@ -5724,13 +5731,14 @@ struct Form436200
     int unk60; int unk64; int unk68; int unk6C; int unk70; int unk74; int unk78; int unk7C;
     int unk80; int unk84; int unk88; int unk8C; int unk90; int unk94; int unk98;
     Node436200 list9C;
-    unsigned short FUN_00436200();
+    unsigned short TES_GetSaveSize();
 };
 
-unsigned short Form436200::FUN_00436200()
+// pdb: TES::GetSaveSize | TES.obj | fnv360_0721_beta, objrun + bridge(call_gap|call_gap), high
+unsigned short Form436200::TES_GetSaveSize()
 {
     unsigned short size = 0;
-    if (DAT_01079ca4->FUN_006daa00())
+    if (DAT_01079ca4->TESSaveLoadGame_UseSaveGameBlocks())
         size = 6;
     size += 4;
     unsigned int count = 0;
@@ -5747,7 +5755,7 @@ unsigned short Form436200::FUN_00436200()
         Entry436200* e = DAT_01079ca4->current88;
         if (e)
         {
-            DbgForm436200* form = (DbgForm436200*)FUN_00455190(e->id);
+            DbgForm436200* form = (DbgForm436200*)TESForm_GetFormByNumericID(e->id);
             FUN_00c24b70("GetSaveSize(): %-5i for form %08X %s with flags %08X ending at line %i in file %s", size, e->id,
                          form->vf130(), *(unsigned int*)((char*)e + 5), 0x1818, "c:\\_Fallout3\\Platforms\\Common\\Code\\Fallout Shared\\TES.cpp");
         }
@@ -5762,7 +5770,7 @@ class TESObjectCELL;
 class TESWorldSpace
 {
 public:
-    TESObjectCELL* FUN_00501d20(int x, int y);
+    TESObjectCELL* TESWorldSpace_GetCellFromCellCoord(int x, int y);
 };
 
 void __cdecl FUN_00887da0(const char* format, ...);
@@ -5776,7 +5784,7 @@ struct FUN_0043c690_cls
     char pad010[0x5a6 - 0x10];
     char noCreate5A6;
 
-    TESObjectCELL* FUN_0043c3c0(void* a, int x, int y, TESWorldSpace* ws);
+    TESObjectCELL* TESDataHandler_NewCell(void* a, int x, int y, TESWorldSpace* ws);
     TESObjectCELL* FUN_0043c690(int x, int y, TESWorldSpace* ws, bool create);
 };
 
@@ -5791,11 +5799,11 @@ TESObjectCELL* FUN_0043c690_cls::FUN_0043c690(int x, int y, TESWorldSpace* ws, b
         FUN_00887da0("CELLS: Trying to get exterior cell for invalid cell coordinate. Values must be between %i and %i.", -0x8000, 0x7fff);
         return 0;
     }
-    TESObjectCELL* cell = ws->FUN_00501d20(x, y);
+    TESObjectCELL* cell = ws->TESWorldSpace_GetCellFromCellCoord(x, y);
     if (cell)
         return cell;
     if (!noCreate5A6 && create)
-        return FUN_0043c3c0(&FUN_00db3438, x, y, ws);
+        return TESDataHandler_NewCell(&FUN_00db3438, x, y, ws);
     return 0;
 }
 }   // namespace f3m_0043c690
@@ -5805,7 +5813,7 @@ extern const char DAT_00f46078[], DAT_00f494d0[];
 namespace f3m_0043bc30 {
 void* __cdecl FUN_00c0050a(void* object, int unused, const void* baseType, const void* targetType, int flags);
 void* __stdcall FUN_0043bc30(unsigned int id) {
-    return FUN_00c0050a(FUN_00455190(id), 0, DAT_00f46078, DAT_00f494d0, 0);
+    return FUN_00c0050a(TESForm_GetFormByNumericID(id), 0, DAT_00f46078, DAT_00f494d0, 0);
 }
 }   // namespace f3m_0043bc30
 
@@ -5814,7 +5822,7 @@ extern const char DAT_00f46078[], DAT_00f47bf4[];
 namespace f3m_0043bc90 {
 void* __cdecl FUN_00c0050a(void* object, int unused, const void* baseType, const void* targetType, int flags);
 void* __stdcall FUN_0043bc90(unsigned int id) {
-    return FUN_00c0050a(FUN_00455190(id), 0, DAT_00f46078, DAT_00f47bf4, 0);
+    return FUN_00c0050a(TESForm_GetFormByNumericID(id), 0, DAT_00f46078, DAT_00f47bf4, 0);
 }
 }   // namespace f3m_0043bc90
 
@@ -6251,8 +6259,8 @@ namespace f3m_0043cc40 {
 
 namespace f3m_0043cc40 {
 struct Item {
-    bool FUN_00446f20();
-    void FUN_00449c50();
+    bool TESFile_GetChecked();
+    void TESFile_GetThreadSafeFile();
 };
 struct Node {
     Item* item;
@@ -6375,8 +6383,8 @@ void Owner::FUN_0043cc40()
         if (n->IsEmpty())
             return;
         Item* it = n->item;
-        if (it->FUN_00446f20())
-            it->FUN_00449c50();
+        if (it->TESFile_GetChecked())
+            it->TESFile_GetThreadSafeFile();
     }
 }
 }   // namespace f3m_0043cc40
@@ -6766,8 +6774,8 @@ namespace f3m_004336d0 {
 void* __cdecl FUN_00ec7230(void*, const void*, unsigned int);
 namespace f3m_004336d0 {
 struct Cell {
-    int FUN_004d3430();
-    int FUN_004d3450();
+    int TESObjectCELL_GetDataX();
+    int TESObjectCELL_GetDataY();
 };
 }
 struct Grid_004336d0 {
@@ -6787,8 +6795,8 @@ void Grid_004336d0::FUN_004336d0()
     unsigned int i = n * n;
 f3m_004336d0::Cell* c;
     while ((c = GetCell(i)) != 0) {
-        int x = c->FUN_004d3430();
-        int y = c->FUN_004d3450();
+        int x = c->TESObjectCELL_GetDataX();
+        int y = c->TESObjectCELL_GetDataY();
         int dx = unk2C - x;
         int dy = unk30 - y;
         if (dx >= -half && dx <= half && dy >= -half && dy <= half && last) {
@@ -6868,7 +6876,7 @@ namespace f3m_0043bb00 {
 namespace f3m_0043bb00 {
 struct Buf0043bb00 {
     unsigned char FUN_00446f00();
-    bool FUN_00446f50();
+    bool TESFile_GetActive();
 };
 
 struct Form0043bb00 {
@@ -6891,7 +6899,8 @@ struct Form0043bb00 {
     void FUN_00453ff0(unsigned char v);
 };
 
-bool __cdecl FUN_0043bb00(Form0043bb00* form, Buf0043bb00* buf)
+// pdb: TESDataHandler::LoadForm | TESDataHandler.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap) + skyrim(call_gap_sim), high
+bool __cdecl TESDataHandler_LoadForm(Form0043bb00* form, Buf0043bb00* buf)
 {
     bool flag = (form->flags & 1) != 0;
     bool result = form->V20(buf);
@@ -6899,7 +6908,7 @@ bool __cdecl FUN_0043bb00(Form0043bb00* form, Buf0043bb00* buf)
         form->FUN_00453ff0(buf->FUN_00446f00());
     else
         form->FUN_00453ff0(1);
-    if (buf->FUN_00446f50())
+    if (buf->TESFile_GetActive())
         form->VC8(1);
     return result;
 }
@@ -7611,12 +7620,13 @@ struct Obj {
     virtual void V24();
     virtual void V28();
     virtual int V2C(int a);
-    void FUN_004278c0(int a);
+    void NiStream_SaveLinkID(int a);
     char unk04[0x24c];
     Stream* stream;
 };
 
-void Obj::FUN_004278c0(int a)
+// pdb: NiStream::SaveLinkID | ModelLoader.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void Obj::NiStream_SaveLinkID(int a)
 {
     int v = V2C(a);
     stream->Write(&v, 4);
@@ -7885,10 +7895,11 @@ struct NiPoint3 {
     float x;
     float y;
     float z;
-    float FUN_00432c00();
+    float NiPoint3_UnitizeGetLength();
 };
 
-float NiPoint3::FUN_00432c00()
+// pdb: NiPoint3::UnitizeGetLength | TES.obj | fnv360_0822_debug, call_seq + skyrim(caller), high
+float NiPoint3::NiPoint3_UnitizeGetLength()
 {
     float dot = x * x + y * y + z * z;
     volatile float t = (float)sqrt((double)dot);
@@ -7941,10 +7952,11 @@ public:
     FUN_00914770_Obj unk10;
     unsigned char unk1c;
 
-    unsigned char FUN_00423ec0(int* other);
+    unsigned char DoorTeleportData_Compare(int* other);
 };
 
-unsigned char FUN_00423ec0_Owner::FUN_00423ec0(int* other) {
+// pdb: DoorTeleportData::Compare | TeleportData.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_seq), high
+unsigned char FUN_00423ec0_Owner::DoorTeleportData_Compare(int* other) {
     FUN_00423ec0_Owner* otherOwner =
         reinterpret_cast<FUN_00423ec0_Owner*>(other);
 
@@ -7963,7 +7975,7 @@ unsigned char FUN_00423ec0_Owner::FUN_00423ec0(int* other) {
 
 // @f3 0x00423d80 (community match, verified in this file)
 namespace f3m_00423d80 {
-// FUN_00423d80: __thiscall (this = Cls_00423d80*), 2 stack params (Holder*, int)
+// DoorTeleportData_SetConnectedCellsPublic: __thiscall (this = Cls_00423d80*), 2 stack params (Holder*, int)
 struct Cls_00423d80_Target {
     int unkDaae0();
     void unkD3360(int a);
@@ -7990,10 +8002,11 @@ struct Cls_00423d80_Holder {
 
 struct Cls_00423d80 {
     Cls_00423d80_Holder* m_pHolder;
-    void FUN_00423d80(Cls_00423d80_Holder* a1, int a2);
+    void DoorTeleportData_SetConnectedCellsPublic(Cls_00423d80_Holder* a1, int a2);
 };
 
-void Cls_00423d80::FUN_00423d80(Cls_00423d80_Holder* a1, int a2) {
+// pdb: DoorTeleportData::SetConnectedCellsPublic | TeleportData.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap_sim) + skyrim(call_gap), high
+void Cls_00423d80::DoorTeleportData_SetConnectedCellsPublic(Cls_00423d80_Holder* a1, int a2) {
     if (a1 == 0) return;
     Cls_00423d80_Holder* p = m_pHolder;
     if (p != 0) {
@@ -8628,8 +8641,9 @@ struct Type1185 { int unk00; unsigned char kind04; };
 struct TypeName1185 { const char* name; int unk04,unk08; };
 extern TypeName1185 DAT_00f4a74c[];
 struct Object1185 { virtual void v000(); virtual void v004(); virtual void v008(); virtual void v00C(); virtual void v010(); virtual void v014(); virtual void v018(); virtual void v01C(); virtual void v020(); virtual void v024(); virtual void v028(); virtual void v02C(); virtual void v030(); virtual void v034(); virtual void v038(); virtual void v03C(); virtual void v040(); virtual void v044(); virtual void v048(); virtual void v04C(); virtual void v050(); virtual void v054(); virtual void v058(); virtual void v05C(); virtual void v060(); virtual void v064(); virtual void v068(); virtual void v06C(); virtual void v070(); virtual void v074(); virtual void v078(); virtual void v07C(); virtual void v080(); virtual void v084(); virtual void v088(); virtual void v08C(); virtual void v090(); virtual void v094(); virtual void v098(); virtual void v09C(); virtual void v0A0(); virtual void v0A4(); virtual void v0A8(); virtual void v0AC(); virtual void v0B0(); virtual void v0B4(); virtual void v0B8(); virtual void v0BC(); virtual void v0C0(); virtual void v0C4(); virtual void v0C8(); virtual void v0CC(); virtual void v0D0(); virtual void v0D4(); virtual void v0D8(); virtual void v0DC(); virtual void v0E0(); virtual void v0E4(); virtual void v0E8(); virtual void v0EC(); virtual void v0F0(); virtual void v0F4(); virtual void v0F8(); virtual void v0FC(); virtual void v100(); virtual void v104(); virtual void v108(); virtual void v10C(); virtual void v110(); virtual void v114(); virtual void v118(); virtual void v11C(); virtual void v120(); virtual void v124(); virtual void v128(); virtual void v12C(); virtual const char* Name(); int unk04,unk08; unsigned int id0C; int unk10,unk14,unk18; Type1185* base1C; };
-struct Owner1185 { int unk00,unk04,unk08,mode0C,unk10,unk14,unk18,unk1C,unk20,unk24; Object1185* object28; bool FUN_00426af0(char*,unsigned int); };
-bool Owner1185::FUN_00426af0(char* buffer,unsigned int size) {
+struct Owner1185 { int unk00,unk04,unk08,mode0C,unk10,unk14,unk18,unk1C,unk20,unk24; Object1185* object28; bool QueuedReference_GetDescription(char*,unsigned int); };
+// pdb: QueuedReference::GetDescription | ModelLoader.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(ustr), high
+bool Owner1185::QueuedReference_GetDescription(char* buffer,unsigned int size) {
  if(mode0C==6)return false;
  Object1185* object=object28;
  FUN_00403230(buffer,size,DAT_00db7cdc,object->Name(),object->id0C,DAT_00f4a74c[object->base1C->kind04].name);
@@ -10460,7 +10474,7 @@ struct Ref
     void FUN_00c24b70();
     void FUN_004eb9f0();
     float FUN_004e6d80();
-    void FUN_00722a10();
+    void Actor_UpdateAlpha();
 };
 
 struct Obj3
@@ -10546,7 +10560,7 @@ struct Cell
     short unka8;
     unsigned short unkaa;
     void FUN_004e31d0();
-    void FUN_004e3dc0(Ref* r, int a);
+    void TESObjectCELL_AttachReference3D(Ref* r, int a);
     void FUN_004d5980(Pos pos, int n, float f);
 };
 struct Mgr16
@@ -10714,7 +10728,7 @@ void* __cdecl FUN_00c0050a(void* object, int unused, const void* baseType, const
 void __cdecl FUN_004ef150(Node* n);
 void __cdecl FUN_004ef0a0(Node* n);
 void __cdecl FUN_005166a0(Ref* r, int* p);
-void __cdecl FUN_00518df0(Ref* r, int* p, int n);
+void __cdecl Script_SetActionFlag(Ref* r, int* p, int n);
 void __cdecl FUN_00478c40(int a, int b);
 
 struct Mgr
@@ -10776,7 +10790,7 @@ void Mgr::FUN_004348e0(Ref* ref, Cell* cell, Obj3* obj3, bool skip)
                 cell->unkaa++;
             if (ref->m_base->m_type != 0x23 || !((unsigned char)(ref->m_base->unk48 >> 30) & 1))
             {
-                cell->FUN_004e3dc0(ref, 0);
+                cell->TESObjectCELL_AttachReference3D(ref, 0);
                 ref->FUN_004ed420();
             }
             if ((((unsigned char*)ref)[0xb] & 1) && ref->FUN_004e9160())
@@ -10795,7 +10809,7 @@ void Mgr::FUN_004348e0(Ref* ref, Cell* cell, Obj3* obj3, bool skip)
     if (!((unsigned char)(DAT_01079858->unk244 >> 1) & 1))
     {
         FUN_005166a0(ref, &ref->unk40);
-        FUN_00518df0(ref, &ref->unk40, 0x1000);
+        Script_SetActionFlag(ref, &ref->unk40, 0x1000);
     }
     if (type == 0x25)
     {
@@ -10814,7 +10828,7 @@ void Mgr::FUN_004348e0(Ref* ref, Cell* cell, Obj3* obj3, bool skip)
     }
     if (ref->v100())
     {
-        ref->FUN_00722a10();
+        ref->Actor_UpdateAlpha();
         if (ref != DAT_0107a104)
             FUN_00478c40(ref->FUN_00424eb0(), ref->unk0c);
     }
@@ -11315,7 +11329,7 @@ struct FUN_004246b0_Param2 {
     int unk1C;
 
     int __thiscall FUN_004f2df0();
-    FUN_004246b0_Result* __thiscall FUN_004f26c0();
+    FUN_004246b0_Result* __thiscall TESObjectREFR_GetOwner();
 };
 
 struct FUN_004246b0_Result {
@@ -11361,7 +11375,7 @@ int __stdcall FUN_004246b0(FUN_004246b0_Param1* param1, FUN_004246b0_Param2* par
             int value = 0;
 
             if (param2 != 0) {
-                FUN_004246b0_Result* object = param2->FUN_004f26c0();
+                FUN_004246b0_Result* object = param2->TESObjectREFR_GetOwner();
                 if (object != 0 && object->unk04 == '*') {
                     value = object->FUN_0054a930();
                 }
@@ -11509,10 +11523,11 @@ class ExtraReflectedRefs : public BSExtraData
 {
 public:
     f3m_00420d70::ReflectorNode list;
-    bool FUN_00420ac0(BSExtraData* other);
+    bool ExtraReflectedRefs_Compare(BSExtraData* other);
 };
 
-bool ExtraReflectedRefs::FUN_00420ac0(BSExtraData* other)
+// pdb: ExtraReflectedRefs::Compare | ExtraDataObjects.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+bool ExtraReflectedRefs::ExtraReflectedRefs_Compare(BSExtraData* other)
 {
     ExtraReflectedRefs* o = dynamic_cast<ExtraReflectedRefs*>(other);
     if (!o)
@@ -11693,7 +11708,7 @@ struct Snd43a30 {
 };
 
 struct Chk43a30 {
-    bool FUN_007f9d20();
+    bool MoviePlayer_GetPlayingSequence();
 };
 
 struct Alloc43a30 {
@@ -11811,7 +11826,7 @@ bool This43a30::FUN_00433a30(char flag, Node43a30* node)
         }
     }
 
-    if (DAT_01079041 == 0 && DAT_0108ebbc->FUN_007f9d20() == false)
+    if (DAT_01079041 == 0 && DAT_0108ebbc->MoviePlayer_GetPlayingSequence() == false)
     {
         if (proc != 0)
         {
@@ -13007,7 +13022,8 @@ using namespace f3m_0043c230;
 
 extern FUN_0057afc0* DAT_01072f90;
 
-FUN_0057afc0* __cdecl FUN_0043c230()
+// pdb: Sky::GetInstance | TESDataHandler.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_gap), high
+FUN_0057afc0* __cdecl Sky_GetInstance()
 {
     if (!DAT_01072f90) {
         TlsHeapContext context;
@@ -13451,7 +13467,7 @@ struct Ref {
     char unk00[0x1a0];
     int unk1a0;
 };
-struct PartA { void FUN_004265a0(Ref* ref, int v); };
+struct PartA { void QueuedHead_Attach(Ref* ref, int v); };
 struct PartB { void FUN_00426730(); };
 struct Owner {
     char unk00[0x18];
@@ -13470,7 +13486,7 @@ void Owner::FUN_004284e0()
     AllocTagScope scope(m_iTag);
     if (!unk34) {
         if (m_pA)
-            m_pA->FUN_004265a0(m_pRef, m_pRef->unk1a0);
+            m_pA->QueuedHead_Attach(m_pRef, m_pRef->unk1a0);
         if (m_pB)
             m_pB->FUN_00426730();
     }
@@ -13645,7 +13661,7 @@ extern char DAT_00f46078, DAT_00f47aa8;
 void* __cdecl FUN_00c0050a(void* object, int unused, const void* baseType, const void* targetType, int flags);
 struct Owner1056 { void* reference00; void* FUN_00423d40(int unused); };
 void* Owner1056::FUN_00423d40(int unused) {
-    reference00 = reference00 ? FUN_00c0050a(FUN_00455190(reinterpret_cast<unsigned int>(reference00)), 0, &DAT_00f46078, &DAT_00f47aa8, 0) : 0;
+    reference00 = reference00 ? FUN_00c0050a(TESForm_GetFormByNumericID(reinterpret_cast<unsigned int>(reference00)), 0, &DAT_00f46078, &DAT_00f47aa8, 0) : 0;
     return reference00;
 }
 }   // namespace f3m_00423d40
@@ -14026,10 +14042,11 @@ struct FUN_00433630_cls {
     Elem* unk34;
     Elem** unk38;
 
-    int FUN_00433630(bool flag);
+    int TES_FreeInteriorBuffer(bool flag);
 };
 
-int FUN_00433630_cls::FUN_00433630(bool flag)
+// pdb: TES::FreeInteriorBuffer | TES.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+int FUN_00433630_cls::TES_FreeInteriorBuffer(bool flag)
 {
     int count = 0;
     bool f = flag;
@@ -14079,7 +14096,7 @@ class NiOwner
 {
   public:
     void FUN_00428630(int p1, NiPointer<NiRefObject>* out, int p2, int p3, int p4, int p5, int p6, int p7);
-    void FUN_0042ca20(int p1, int p2, int p3, int p4, int p5, int p6, int p7);
+    void ModelLoader_QueueModel(int p1, int p2, int p3, int p4, int p5, int p6, int p7);
 };
 
 struct NiHolder
@@ -14097,7 +14114,8 @@ struct NiHolder
     }
 };
 
-void NiOwner::FUN_0042ca20(int p1, int p2, int p3, int p4, int p5, int p6, int p7)
+// pdb: ModelLoader::QueueModel | ModelLoader.obj | fnv360_0721_retail, call_seq + bridge(call_gap|caller), high
+void NiOwner::ModelLoader_QueueModel(int p1, int p2, int p3, int p4, int p5, int p6, int p7)
 {
     NiHolder ret;
     FUN_00428630(p1, (NiPointer<NiRefObject>*)&ret, p2, p3, p4, p5, p6, p7);
@@ -14348,10 +14366,10 @@ QueuedTexture::QueuedTexture(const char* path,int mode):Base1269(mode),resource3
 namespace f3m_00423e00 {
 struct Form1280{int unk00,unk04,unk08;unsigned int id0C;};
 struct Record1280{unsigned int id,field04,field08,field0C,field10,field14,field18;unsigned char flag1C,unk1D,unk1E,unk1F;};
-extern bool DAT_0106dd0e;void __cdecl FUN_004548c0(unsigned int,const void*,unsigned int);
+extern bool DAT_0106dd0e;void __cdecl TESForm___AddChunkData(unsigned int,const void*,unsigned int);
 inline void Swap1280(unsigned int& v){v=_byteswap_ulong(v);}
 struct Owner1280{Form1280* form;unsigned int field04,field08,field0C,field10,field14,field18;unsigned char flag1C;void FUN_00423e00();};
-void Owner1280::FUN_00423e00(){if(form){Record1280 record;memset(&record,0,sizeof(record));record.id=form->id0C;record.field04=field04;record.field08=field08;record.field0C=field0C;record.field10=field10;record.field14=field14;record.field18=field18;record.flag1C=flag1C;if(DAT_0106dd0e){Swap1280(record.id);Swap1280(record.field04);Swap1280(record.field08);Swap1280(record.field0C);Swap1280(record.field10);Swap1280(record.field14);Swap1280(record.field18);}FUN_004548c0(0x4c455458,&record,0x20);}}
+void Owner1280::FUN_00423e00(){if(form){Record1280 record;memset(&record,0,sizeof(record));record.id=form->id0C;record.field04=field04;record.field08=field08;record.field0C=field0C;record.field10=field10;record.field14=field14;record.field18=field18;record.flag1C=flag1C;if(DAT_0106dd0e){Swap1280(record.id);Swap1280(record.field04);Swap1280(record.field08);Swap1280(record.field0C);Swap1280(record.field10);Swap1280(record.field14);Swap1280(record.field18);}TESForm___AddChunkData(0x4c455458,&record,0x20);}}
 }   // namespace f3m_00423e00
 
 // @f3 0x0042f100 (community match, verified in this file)
@@ -14864,7 +14882,7 @@ void __stdcall FUN_0043c020(const char* path)
 extern int g_step4377c0;
 extern unsigned int (*g_pfn4377c0)();
 void Printf4377c0(const char* fmt, ...);
-extern "C" void FUN_0076ceb0(char v);
+extern "C" void PlayerCharacter_SetGodMode(char v);
 void FUN_006194f0();
 
 struct Elem4377c0 {
@@ -14988,7 +15006,7 @@ struct Elem4377c0 {
     float b1;
     float b2;
     float b3;
-    void* FUN_00501d20(int x, int y);
+    void* TESWorldSpace_GetCellFromCellCoord(int x, int y);
     void* FUN_00503ea0(int x, int y);
 };
 
@@ -15027,8 +15045,8 @@ struct C4377c0 {
     unsigned char unk50;
     unsigned char flag51;
     unsigned char flag52;
-    void FUN_00435fb0(Elem4377c0* e);
-    void FUN_004365d0(void* p, int param, unsigned int tick);
+    void TES_SetWorldSpace(Elem4377c0* e);
+    void TES_TestCell(void* p, int param, unsigned int tick);
     void FUN_004377c0(int param);
 };
 
@@ -15046,7 +15064,7 @@ void C4377c0::FUN_004377c0(int param)
     void* p;
 
     flag51 = 1;
-    FUN_0076ceb0(1);
+    PlayerCharacter_SetGodMode(1);
     Printf4377c0("Running Cell Test");
     FUN_006194f0();
     tick = g_pfn4377c0();
@@ -15054,7 +15072,7 @@ void C4377c0::FUN_004377c0(int param)
         elem = (Elem4377c0*)n->m_data;
         if (!elem)
             continue;
-        FUN_00435fb0(elem);
+        TES_SetWorldSpace(elem);
         minX = (int)elem->b0 >> 12;
         minY = (int)elem->b1 >> 12;
         maxX = (int)elem->b2 >> 12;
@@ -15067,11 +15085,11 @@ void C4377c0::FUN_004377c0(int param)
                      elem->id, s, minX, minY, maxX, maxY);
         for (x = minX; x < maxX; x += g_step4377c0) {
             for (y = minY; y < maxY; y += g_step4377c0) {
-                p = elem->FUN_00501d20(x, y);
+                p = elem->TESWorldSpace_GetCellFromCellCoord(x, y);
                 if (!p)
                     p = elem->FUN_00503ea0(x, y);
                 if (p)
-                    FUN_004365d0(p, param, tick);
+                    TES_TestCell(p, param, tick);
             }
         }
     }
@@ -15079,7 +15097,7 @@ void C4377c0::FUN_004377c0(int param)
     unsigned int count = g_mgr4377c0->FUN_0043c5f0();
     for (unsigned int i = 0; i < count; i++) {
         void* q = g_mgr4377c0->FUN_0043ec40(i);
-        FUN_004365d0(q, param, tick);
+        TES_TestCell(q, param, tick);
     }
     flag52 = 0;
 }
@@ -15310,7 +15328,7 @@ struct Src4238d0 {
     unsigned char m_297;
     unsigned char m_298;
     unsigned char m_299;
-    int FUN_004487d0();
+    int TESFile_GetTESChunk();
     void FUN_00447d60(void* buf, unsigned int size);
 };
 
@@ -15326,7 +15344,7 @@ struct Text4238d0 {
 void Text4238d0::FUN_004238d0(Src4238d0* src) {
     if (!src)
         return;
-    if (src->FUN_004487d0() != 0x4c455458)
+    if (src->TESFile_GetTESChunk() != 0x4c455458)
         return;
     Text4238d0 d = {};
     src->FUN_00447d60(&d, 0x20);
@@ -15401,11 +15419,12 @@ struct FUN_004262f0_Obj {
 
     int count;
 
-    void FUN_004262f0();
+    void QueuedReplacementKFList_NotifyChildFinishedPostProcessing();
 
 };
 
-void FUN_004262f0_Obj::FUN_004262f0()
+// pdb: QueuedReplacementKFList::NotifyChildFinishedPostProcessing | ModelLoader.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+void FUN_004262f0_Obj::QueuedReplacementKFList_NotifyChildFinishedPostProcessing()
 
 {
 
@@ -15530,10 +15549,10 @@ public:
 namespace f3m_00420690 {
 
 struct SaveArg420690 {
-    int FUN_00455470(int a);
+    int TESForm_GetFile(int a);
 };
 
-void __cdecl FUN_00454a40(unsigned int* pId, int ctx);
+void __cdecl TESForm_AddCompileIndex(unsigned int* pId, int ctx);
 
 struct RefNode420690 {
     TESObjectREFR* item;
@@ -15587,8 +15606,8 @@ void Owner420690::FUN_00420690(SaveArg420690* arg)
     RefNode420690 tmpList;
     while (cur && (cur->next || cur->item)) {
         unsigned int id = (unsigned int)cur->item;
-        FUN_00454a40(&id, arg->FUN_00455470(-1));
-        TESObjectREFR* ref = dynamic_cast<TESObjectREFR*>(::FUN_00455190(id));
+        TESForm_AddCompileIndex(&id, arg->TESForm_GetFile(-1));
+        TESObjectREFR* ref = dynamic_cast<TESObjectREFR*>(::TESForm_GetFormByNumericID(id));
         if (ref && ref->FUN_004eb8f0()) {
             ref->m_extra.FUN_004172c0(arg, true);
             tmpList.Prepend(ref);
@@ -16018,11 +16037,11 @@ void FUN_004256f0_Owner::FUN_004256f0()
 namespace Task1741 {
 struct SaveBuffer
 {
-    unsigned int FUN_006e16c0();
+    unsigned int BGSSaveGameBuffer_StartVariableSizedValue();
     void FUN_006e17e0(void* form, int flags);
     void FUN_006e1830(void* data, unsigned int size, int flags);
     void FUN_006e16e0(int count, unsigned int offset);
-    void FUN_006e17a0(unsigned int refID, unsigned int flags);
+    void BGSSaveGameBuffer_SaveFormID(unsigned int refID, unsigned int flags);
 };
 
 struct ListEntry
@@ -16056,7 +16075,7 @@ struct CellGrid
 
 struct DataHandlerStub
 {
-    bool FUN_0043be40(unsigned int refID);
+    bool TESDataHandler_IsFormIDCreated(unsigned int refID);
 };
 extern DataHandlerStub* DAT_0106cdcc;
 
@@ -16115,7 +16134,7 @@ struct TESGridOwner
 void TESGridOwner::FUN_00436420(SaveBuffer* buffer)
 {
     int count = 0;
-    unsigned int offset = buffer->FUN_006e16c0();
+    unsigned int offset = buffer->BGSSaveGameBuffer_StartVariableSizedValue();
     EntryListNode* node6 = &entries;
     while (node6)
     {
@@ -16136,8 +16155,8 @@ void TESGridOwner::FUN_00436420(SaveBuffer* buffer)
         for (unsigned int y_ = 0; y_ < gridSizeB; y_++)
         {
             CellRef* cell = grid->FUN_0047b220(xTmp, y_)->ref;
-            unsigned int refID8 = (cell && DAT_0106cdcc->FUN_0043be40(cell->GetRefID())) ? cell->GetRefID() : 0;
-            buffer->FUN_006e17a0(refID8, 0);
+            unsigned int refID8 = (cell && DAT_0106cdcc->TESDataHandler_IsFormIDCreated(cell->GetRefID())) ? cell->GetRefID() : 0;
+            buffer->BGSSaveGameBuffer_SaveFormID(refID8, 0);
         }
     }
 }
@@ -16384,7 +16403,7 @@ int unk20;
 unsigned char flags;
 bool FUN_004d5390(const Point*,float*);
 float FUN_004d5350();
-int FUN_004d3430(); int FUN_004d3450();
+int TESObjectCELL_GetDataX(); int TESObjectCELL_GetDataY();
 };
 inline bool IsInterior(Cell* c) { return (c->flags&1)!=0; }
 inline float CellHeight(Cell* c) { return c->FUN_004d5350(); }
@@ -16421,7 +16440,7 @@ int unk70;
 int unk74;
 int unk78;
 float defaultHeight;
-Cell* FUN_005048f0(const Point*); Cell* FUN_00501d20(int,int);
+Cell* FUN_005048f0(const Point*); Cell* TESWorldSpace_GetCellFromCellCoord(int,int);
 float GetDefault() { return defaultHeight; }
 };
 struct Global {
@@ -16480,10 +16499,11 @@ int unk2c;
 int unk30;
 Cell* current;
 Cell* GetCurrent() { return current; }
-float FUN_00434200(const Point*,Cell*);
+float TES_GetWaterHeight(const Point*,Cell*);
 };
 // @fnv 0x0045cbc0
-float Manager::FUN_00434200(const Point* apPos, Cell* apCell)
+// pdb: TES::GetWaterHeight | TES.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+float Manager::TES_GetWaterHeight(const Point* apPos, Cell* apCell)
 {
     float fRate = DAT_00db7260;
     if (apCell)
@@ -16513,8 +16533,8 @@ float Manager::FUN_00434200(const Point* apPos, Cell* apCell)
     int iBaseY;
     if (apCell)
     {
-        iWorldX = apCell->FUN_004d3430();
-        iBaseY = apCell->FUN_004d3450();
+        iWorldX = apCell->TESObjectCELL_GetDataX();
+        iBaseY = apCell->TESObjectCELL_GetDataY();
     }
     else
     {
@@ -16526,7 +16546,7 @@ float Manager::FUN_00434200(const Point* apPos, Cell* apCell)
     {
         for (int iY = iBaseY - 1; iY < iBaseY + 2; iY++)
         {
-            Cell* pCell = DAT_0107a0d8->GetWorld()->FUN_00501d20(iX, iY);
+            Cell* pCell = DAT_0107a0d8->GetWorld()->TESWorldSpace_GetCellFromCellCoord(iX, iY);
             if (pCell && pCell != apCell && pCell->FUN_004d5390(apPos, &fOtherHeight))
                 return fOtherHeight;
         }
@@ -17261,7 +17281,7 @@ extern G430* DAT_0106ca70;
 extern Object393* DAT_0116d138;
 extern Gaa9* DAT_0116d714;
 extern Elem393* DAT_0116efb8[4];
-void FUN_004c1d70();void FUN_0058c1e0();void FUN_0059ace0(int);void FUN_005b5f90();void FUN_0048c5c0();void FUN_00aaae80();void FUN_006d0870();void FUN_006d5ea0();void FUN_00494150();void FUN_00ae6870();void FUN_0056b350();
+void FUN_004c1d70();void BSFaceGenManager_ClearModelCache();void FUN_0059ace0(int);void FUN_005b5f90();void FUN_0048c5c0();void NiObjectGarbage_ClearAll();void FUN_006d0870();void FUN_006d5ea0();void FUN_00494150();void FUN_00ae6870();void FUN_0056b350();
 inline void freeBuffer(void* p){DAT_01090a78.FUN_0086ba60(p);}
 struct FUN_00439300 {
  int* unk00;int unk04;Object393* unk08;
@@ -17289,7 +17309,7 @@ struct FUN_00439300 {
  List393 list8c,list94,list9c;Ptr8 refa4;Ptr4 refa8;Ptr8 refac;
  int unkb0;unsigned char unkb4,unkb5,unkb6,unkb7;int unkb8,unkbc;Ptr4 refc0;
  ~FUN_00439300();
- void FUN_00435070(int,int);bool FUN_00433540(void*);void FUN_00433630(int);void FUN_00436190();void FUN_004391f0();void FUN_004368e0();
+ void FUN_00435070(int,int);bool FUN_00433540(void*);void TES_FreeInteriorBuffer(int);void FUN_00436190();void FUN_004391f0();void FUN_004368e0();
 };
 FUN_00439300::~FUN_00439300(){
  unk00=&DAT_00db8d18;
@@ -17306,12 +17326,12 @@ FUN_00439300::~FUN_00439300(){
  FUN_00435070(0,0);
  void* item=unk34;
  if(item && !FUN_00433540(item))DAT_0106cdcc->FUN_0043cb10(item);
- FUN_00433630(0);unk34=0;unkb4=1;list94.FUN_006c8220();
- FUN_00436190();FUN_0058c1e0();FUN_0059ace0(0);FUN_004391f0();FUN_004368e0();
+ TES_FreeInteriorBuffer(0);unk34=0;unkb4=1;list94.FUN_006c8220();
+ FUN_00436190();BSFaceGenManager_ClearModelCache();FUN_0059ace0(0);FUN_004391f0();FUN_004368e0();
  refa4.clear();refac.clear();
  FUN_005b5f90();FUN_0048c5c0();DAT_0108d098.FUN_007d06c0();DAT_0106cdcc->FUN_004432c0();
  {Resource393* p=unk64;if(p){p->FUN_00496ad0();DAT_01090a78.FUN_0086ba60(p);}}unk64=0;
- DAT_0106cdcc->flag5a9=1;FUN_00aaae80();
+ DAT_0106cdcc->flag5a9=1;NiObjectGarbage_ClearAll();
  delete DAT_0106ca70;DAT_0106ca70=0;
  delete DAT_0116d138;DAT_0116d138=0;
  delete DAT_0116d714;DAT_0116d714=0;
@@ -17947,7 +17967,7 @@ struct Lock {long volatile owner;unsigned int depth;void FUN_00409a80(const char
 extern Lock DAT_0106ce80;
 struct Q006ce750 { char FUN_006ce750(unsigned int id); };
 extern Q006ce750* DAT_01079858;
-void* __cdecl FUN_00455190(unsigned int id);
+void* __cdecl TESForm_GetFormByNumericID(unsigned int id);
 struct Handler {
     unsigned int unk00;
     unsigned int unk04;
@@ -18052,10 +18072,11 @@ struct Handler {
     unsigned int unk190;
     unsigned int nextID;
     void Advance() { ++nextID; if ((nextID & 0xffffff) >= 0x7fffff) nextID = (nextID & 0xff000000) + 0x800; }
-    static bool InUse(unsigned int id) { return FUN_00455190(id) || DAT_01079858->FUN_006ce750(id); }
-    unsigned int FUN_0043bd80();
+    static bool InUse(unsigned int id) { return TESForm_GetFormByNumericID(id) || DAT_01079858->FUN_006ce750(id); }
+    unsigned int TESDataHandler_GetNextID();
 };
-unsigned int Handler::FUN_0043bd80() {
+// pdb: TESDataHandler::GetNextID | TESDataHandler.obj | fnv360_0822_retail, ustr + bridge(ustr|ustr) + skyrim(ustr), high
+unsigned int Handler::TESDataHandler_GetNextID() {
     DAT_0106ce80.FUN_00409a80("TESDataHandler::GetNextID");
     while (InUse(nextID))
         Advance();
@@ -19129,7 +19150,7 @@ struct Form {
     bool FUN_004d3b60();
     void FUN_004d6de0(int a);
     void FUN_004d36f0(bool a);
-    Result5270* FUN_004d5270();
+    Result5270* TESObjectCELL_GetLand();
     void FUN_004e0ca0();
     Result3780* FUN_004d3780(Form* a);
 };
@@ -19677,7 +19698,7 @@ void __stdcall FUN_0043cb10(Form* form)
     if (DAT_0106cdcc->flag5a9 == 0)
         form->FUN_004d36f0(!DAT_0107a104->FUN_0076c8e0());
     if (!(form->unk24 & 1))
-        form->FUN_004d5270()->FUN_004cfbe0();
+        form->TESObjectCELL_GetLand()->FUN_004cfbe0();
     form->FUN_004e0ca0();
     form->unk50 = 0;
     if (!(form->unk24 & 1))
@@ -20147,12 +20168,13 @@ struct Owner {
     Cell* unk88;
     void FUN_00434d40();
     int FUN_00435070(int a, Cell* cell);
-    int FUN_00433630(int a);
+    int TES_FreeInteriorBuffer(int a);
     void FUN_00433420(int a);
-    void FUN_00435fb0(Cell* cell);
+    void TES_SetWorldSpace(Cell* cell);
 };
 
-void Owner::FUN_00435fb0(Cell* cell)
+// pdb: TES::SetWorldSpace | TES.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+void Owner::TES_SetWorldSpace(Cell* cell)
 {
     if (!cell || unk88 == cell)
         return;
@@ -20161,7 +20183,7 @@ void Owner::FUN_00435fb0(Cell* cell)
             FUN_00434d40();
         int count = FUN_00435070(1, unk88);
         if (!unk34)
-            count += FUN_00433630(1);
+            count += TES_FreeInteriorBuffer(1);
         if (count)
             FUN_00433420(0);
     }
@@ -20710,7 +20732,7 @@ struct FUN_004e0580 {
     FUN_004e0580();
     static void* operator new(unsigned int n) { return DAT_01090a78.FUN_0086b930(n); }
     static void operator delete(void* p) { DAT_01090a78.FUN_0086ba60(p); }
-    void FUN_004d3320(int a);
+    void TESObjectCELL_SetInterior(int a);
     void FUN_004d33b0();
     void FUN_004d3470(int x, int y);
 };
@@ -20719,13 +20741,14 @@ struct WorldSpace {
     int unk04;
     int unk08;
     int unk0c;
-    bool FUN_00501dc0(FUN_004e0580* cell);
+    bool TESWorldSpace_AddCell(FUN_004e0580* cell);
 };
 struct Mgr {
     void* FUN_006dd1e0(int a, int x, int y);
 };
 extern Mgr* DAT_01079ca4;
-FUN_004e0580* __stdcall FUN_0043c3c0(void* a, int x, int y, WorldSpace* ws)
+// pdb: TESDataHandler::NewCell | TESDataHandler.obj | fnv360_0822_retail, call_dedup + bridge(call_gap|call_gap) + skyrim(call_gap_sim), high
+FUN_004e0580* __stdcall TESDataHandler_NewCell(void* a, int x, int y, WorldSpace* ws)
 {
     if (!ws)
         return 0;
@@ -20737,11 +20760,11 @@ FUN_004e0580* __stdcall FUN_0043c3c0(void* a, int x, int y, WorldSpace* ws)
         cell->v128(r, 1);
     if (a)
         cell->v134(a);
-    cell->FUN_004d3320(0);
+    cell->TESObjectCELL_SetInterior(0);
     cell->unk24 = 2;
     cell->FUN_004d33b0();
     cell->FUN_004d3470(x, y);
-    if (!ws->FUN_00501dc0(cell)) {
+    if (!ws->TESWorldSpace_AddCell(cell)) {
         cell->v010(1);
         cell = 0;
     } else {
@@ -21239,7 +21262,7 @@ extern float DAT_01090bac;
 void __cdecl FUN_00aaa9d0(float a, float b);
 void __cdecl FUN_008f15a0(float a, float b);
 bool FUN_00619b80();
-struct Scene { void FUN_004df9a0(float value, int flag); };
+struct Scene { void TESObjectCELL_UpdateManagedNodes(float value, int flag); };
 struct Clock { void FUN_0047b5a0(float value); };
 struct Singleton { void FUN_0056aa50(); };
 Singleton* FUN_00432f70();
@@ -21265,7 +21288,7 @@ struct Focus {
     int unk000; int unk004; int unk008; int unk00c; int unk010; int unk014; int unk018; int unk01c; int unk020; int unk024; int unk028; int unk02c; int unk030; int unk034; int unk038; int unk03c; int unk040; int unk044; int unk048; int unk04c; int unk050; int unk054; int unk058; int unk05c; int unk060; int unk064; int unk068; int unk06c; int unk070; int unk074; int unk078; int unk07c; int unk080; int unk084; int unk088; int unk08c; int unk090; int unk094; int unk098; int unk09c; int unk0a0; int unk0a4; int unk0a8; int unk0ac; int unk0b0; int unk0b4; int unk0b8; int unk0bc; int unk0c0; int unk0c4; int unk0c8; 
     float x;
     float y;
-    void FUN_0057e0a0(float time);
+    void Sky_Update(float time);
 };
 void Owner::FUN_00437290(float delta)
 {
@@ -21283,7 +21306,7 @@ void Owner::FUN_00437290(float delta)
     DAT_0106caf8 += delta;
     Lock(true);
     if (scene)
-        scene->FUN_004df9a0(DAT_0106caf8, 0);
+        scene->TESObjectCELL_UpdateManagedNodes(DAT_0106caf8, 0);
     else
         unk08->FUN_0047b5a0(DAT_0106caf8);
     Lock(false);
@@ -21292,7 +21315,7 @@ void Owner::FUN_00437290(float delta)
     FUN_00432f70()->FUN_0056aa50();
     if (DAT_0106cd30 == 1) {
         delta = FUN_00619b80() ? DAT_0106de64 * DAT_01090bac : delta;
-        unk68->FUN_0057e0a0(delta);
+        unk68->Sky_Update(delta);
     }
     if (DAT_0106cd30 == 1)
         FUN_004334a0();
@@ -21527,8 +21550,8 @@ struct Cell {
     const char* unk1c;
     int unk20;
     unsigned char unk24;
-    int FUN_004d3430();
-    int FUN_004d3450();
+    int TESObjectCELL_GetDataX();
+    int TESObjectCELL_GetDataY();
     const char* Name() { return unk1c ? unk1c : ""; }
 };
 struct Mgr7a104 { void FUN_00783100(int a, Cell* c); };
@@ -21542,7 +21565,8 @@ extern Mgr79f68 DAT_01079f68;
 extern Mgr7c0a0 DAT_0107c0a0;
 extern Mgr79ca4* DAT_01079ca4;
 int __cdecl FUN_00c24b70(const char* format, ...);
-void __stdcall FUN_004365d0(Cell* cell, unsigned int type, unsigned int start)
+// pdb: TES::TestCell | TES.obj | fnv360_0822_retail, ustr + bridge(ustr|ustr) + skyrim(ustr), high
+void __stdcall TES_TestCell(Cell* cell, unsigned int type, unsigned int start)
 {
     if (!cell)
         return;
@@ -21551,7 +21575,7 @@ void __stdcall FUN_004365d0(Cell* cell, unsigned int type, unsigned int start)
     else {
         const char* name = cell->Name();
         unsigned int id = cell->unk0c;
-        FUN_00c24b70("Moving to exterior cell %08X (%i,%i) %s", id, cell->FUN_004d3430(), cell->FUN_004d3450(), name);
+        FUN_00c24b70("Moving to exterior cell %08X (%i,%i) %s", id, cell->TESObjectCELL_GetDataX(), cell->TESObjectCELL_GetDataY(), name);
     }
     unsigned long begin = GetTickCount();
     DAT_0107a104->FUN_00783100(0, cell);
@@ -21567,7 +21591,7 @@ void __stdcall FUN_004365d0(Cell* cell, unsigned int type, unsigned int start)
     if (cell->unk24 & 1)
         FUN_00c24b70("Interior cell finished loading in %.02f seconds.  Total test time: %02i:%02i:%02i", (double)(float)elapsed / 1000.0, hours, minutes, seconds);
     else
-        FUN_00c24b70("Exterior cell (%i,%i) finished loading in %.02f seconds.  Total test time: %02i:%02i:%02i", cell->FUN_004d3430(), cell->FUN_004d3450(), (double)(float)elapsed / 1000.0, hours, minutes, seconds);
+        FUN_00c24b70("Exterior cell (%i,%i) finished loading in %.02f seconds.  Total test time: %02i:%02i:%02i", cell->TESObjectCELL_GetDataX(), cell->TESObjectCELL_GetDataY(), (double)(float)elapsed / 1000.0, hours, minutes, seconds);
     DAT_01079f68.FUN_006e28b0(120.0f);
     DAT_0107c0a0.FUN_0078ed50();
     DAT_0107c0a0.FUN_007932d0();
@@ -22356,9 +22380,10 @@ extern Manager9750* DAT_0116d138;
 struct Owner9750 {
     int unk00, unk04, unk08, unk0c;
     Source9750* m_source;
-    void FUN_00429750(int key);
+    void ModelLoader_CancelAnimIdle(int key);
 };
-void Owner9750::FUN_00429750(int key)
+// pdb: ModelLoader::CancelAnimIdle | ModelLoader.obj | fnv360_0822_retail, call_seq + bridge(call_gap|objrun), high
+void Owner9750::ModelLoader_CancelAnimIdle(int key)
 {
     Ptr9750 obj;
     if (m_source->Find(key, &obj))
@@ -24043,13 +24068,13 @@ public:
     int unk04;
     char pad08[0x20];
     Item_00434190* unk28;
-    void FUN_004cdb00();
+    void TESObjectLAND_InitDistantTextureBlending();
 };
 
 class Cell_00434190
 {
 public:
-    Item_00434190* FUN_004d5270();
+    Item_00434190* TESObjectCELL_GetLand();
 };
 
 class Owner_00434190
@@ -24071,9 +24096,9 @@ void Owner_00434190::FUN_00434190()
             Cell_00434190* cell = *grid->FUN_0047b220(i, j);
             if (cell)
             {
-                Item_00434190* item = cell->FUN_004d5270();
+                Item_00434190* item = cell->TESObjectCELL_GetLand();
                 if (item && item->unk28 && item->unk28->unk04)
-                    cell->FUN_004d5270()->FUN_004cdb00();
+                    cell->TESObjectCELL_GetLand()->TESObjectLAND_InitDistantTextureBlending();
             }
         }
     }
@@ -24646,7 +24671,7 @@ namespace f3m_00438ae0 {
 namespace T2143 {
 int __cdecl FUN_00c00b80(char*,const char*,...);
 struct Point2 {float x,y;};
-struct Land {bool FUN_004d1680(bool); void FUN_004d0820(int,int); void FUN_004cd5d0(Point2*); void FUN_004cea70(bool);};
+struct Land {bool FUN_004d1680(bool); void FUN_004d0820(int,int); void TESObjectLAND_GetMinMaxLandHeight(Point2*); void FUN_004cea70(bool);};
 struct Cell {
     int unk00;
     int unk04;
@@ -24669,15 +24694,15 @@ struct Cell {
     int unk48;
     int unk4c;
     unsigned char unk50;
-    void FUN_004d3b40(bool);int FUN_004d3430();int FUN_004d3450();Land* FUN_004d5270();float FUN_004d5350();
+    void FUN_004d3b40(bool);int TESObjectCELL_GetDataX();int TESObjectCELL_GetDataY();Land* TESObjectCELL_GetLand();float FUN_004d5350();
     const char* GetName() const {return DAT_00db3438;}
     unsigned int GetFormID() const {return unk0c;}
     void SetFlag2(bool b){if(b) flags|=2;else flags&=~2;}
 };
-struct World {Cell* FUN_00503ea0(int,int);void FUN_00502030(Cell*);};
+struct World {Cell* FUN_00503ea0(int,int);void TESWorldSpace_AssignPersistentRefsToCell(Cell*);};
 struct Data {Cell* FUN_0043c690(int,int,World*,bool);};extern Data* DAT_0106cdcc;
 void FUN_00468bd0(Cell*);
-struct Grid {bool FUN_0047b2a0(int,int);void FUN_0047b250(int,int,Cell*);void FUN_0047b560(void*,int,int);};
+struct Grid {bool GridCellArray_GetAttached(int,int);void GridCellArray_Set(int,int,Cell*);void GridCellArray_AttachToWorld(void*,int,int);};
 struct Owner {
 int unk00,unk04;Grid* grid;void* root;
     int unk10;
@@ -24714,23 +24739,24 @@ World* world;
 World* GetWorld()const {return world;}
 void FUN_00433570(Cell*);void FUN_00434ff0(Cell*);
 void AddCell(Cell* c){if(c){if(c->flags&1) FUN_00433570(c);else FUN_00434ff0(c);}}
-void FUN_00438ae0(int,int,int,int);
+void TES_LoadGridCell(int,int,int,int);
 };
-void Owner::FUN_00438ae0(int gx,int gy,int cx,int cy){
+// pdb: TES::LoadGridCell | TES.obj | fnv360_0822_retail, ustr + bridge(ustr|ustr) + skyrim(ustr), high
+void Owner::TES_LoadGridCell(int gx,int gy,int cx,int cy){
 if(!GetWorld())return;
 Cell* cell=0;
 Point2 extents;
 Land* land;
 char message[260];
 cell=GetWorld()->FUN_00503ea0(cx,cy);
-if(!cell){cell=DAT_0106cdcc->FUN_0043c690(cx,cy,GetWorld(),true);GetWorld()->FUN_00502030(cell);cell->FUN_004d3b40(true);}
-if(grid->FUN_0047b2a0(gx,gy)){AddCell(cell);return;}
-FUN_00c00b80(message,DAT_00db8d1c,cell->GetName(),cell->FUN_004d3430(),cell->FUN_004d3450(),cell->GetFormID());
-grid->FUN_0047b250(gx,gy,cell);
-grid->FUN_0047b560(root,gx,gy);
-land=cell->FUN_004d5270();
+if(!cell){cell=DAT_0106cdcc->FUN_0043c690(cx,cy,GetWorld(),true);GetWorld()->TESWorldSpace_AssignPersistentRefsToCell(cell);cell->FUN_004d3b40(true);}
+if(grid->GridCellArray_GetAttached(gx,gy)){AddCell(cell);return;}
+FUN_00c00b80(message,DAT_00db8d1c,cell->GetName(),cell->TESObjectCELL_GetDataX(),cell->TESObjectCELL_GetDataY(),cell->GetFormID());
+grid->GridCellArray_Set(gx,gy,cell);
+grid->GridCellArray_AttachToWorld(root,gx,gy);
+land=cell->TESObjectCELL_GetLand();
 if(!land->FUN_004d1680(true))land->FUN_004d0820(0,0);
-cell->FUN_004d5270()->FUN_004cd5d0(&extents);
+cell->TESObjectCELL_GetLand()->TESObjectLAND_GetMinMaxLandHeight(&extents);
 cell->SetFlag2(extents.x<cell->FUN_004d5350());
 if(DAT_0106fdcc && (cell->flags&2) && !cell->unk50)FUN_00468bd0(cell);
 land->FUN_004cea70(region);
@@ -24988,7 +25014,7 @@ extern Player* DAT_0106cdcc;
 struct Loader {
  Model* FUN_00429eb0(const char* path, int a, int b, int c, int d, int e);
  void FUN_00429640(const char* path, int a, int b);
- void FUN_0042ca20(PathSrc* p1, int p2, FUN_00aa5160* p3, int p4, int p5, int p6, int p7);
+ void ModelLoader_QueueModel(PathSrc* p1, int p2, FUN_00aa5160* p3, int p4, int p5, int p6, int p7);
 };
 extern Loader* DAT_0106ca70;
 struct Scene { virtual void v00(); virtual void v01(); virtual void v02(); virtual void v03(); virtual void v04(); virtual void v05(); virtual void v06(); virtual void v07(); virtual void v08(); virtual void v09(); virtual void v0a(); virtual void v0b(); virtual void v0c(); virtual void v0d(); virtual void v0e(); virtual void v0f(); virtual void v10(); virtual void v11(); virtual void v12(); virtual void v13(); virtual void v14(); virtual void v15(); virtual void v16(); virtual void v17(); virtual void v18(); virtual void v19(); virtual void v1a(); virtual void v1b(); virtual void v1c(); virtual void v1d(); virtual void v1e(); virtual void v1f(); virtual void v20(); virtual void v21(); virtual void v22(); virtual void v23(); virtual void v24(); virtual void v25(); virtual void v26(); virtual void v27(); virtual void v28(); virtual void v29(); virtual void v2a(); virtual void v2b(); virtual void v2c(); virtual void v2d(); virtual void v2e(); virtual void v2f(); virtual void v30(); virtual void v31(); virtual void v32(); virtual void v33(); virtual void v34(); virtual void v35(); virtual void v36(); virtual void Add(Model* m, int flag); };
@@ -25017,7 +25043,7 @@ void Owner::FUN_00437990() {
      }
      DAT_0106ca70->FUN_00429640(e->path30.GetPath(), 1, 1);
     } else {
-     DAT_0106ca70->FUN_0042ca20(&e->path30, 5, unka4.ptr, 0, 1, 0, 0);
+     DAT_0106ca70->ModelLoader_QueueModel(&e->path30, 5, unka4.ptr, 0, 1, 0, 0);
     }
    }
   }
@@ -25116,11 +25142,11 @@ struct QMgrB { int unk00; };
 struct QMgr : QMgrA, QMgrB {
     bool FUN_0054ad30(QObj* o);
     void FUN_0054e7d0(QObj* o);
-    void FUN_0054f680(QObj* o, int a, bool b, int c);
+    void TESCreature_InitDefaultWorn(QObj* o, int a, bool b, int c);
 };
 struct QObj {
     virtual void V000();
-    QInfo* FUN_00766020();
+    QInfo* MobileObject_GetCurrentPackage();
     int unk04; int unk08; int unk0c; int unk10; int unk14; int unk18;
     QMgr* unk1c;
 };
@@ -25145,13 +25171,13 @@ void QThis::FUN_0042fc80()
     QScope scope(unk18);
     QMgr* mgr = unk28->unk1c;
     bool flag = true;
-    QInfo* info = unk28->FUN_00766020();
+    QInfo* info = unk28->MobileObject_GetCurrentPackage();
     if (info && info->IsX())
         flag = false;
     if (!mgr->FUN_0054ad30(unk28))
         mgr->FUN_0054e7d0(unk28);
     else
-        mgr->FUN_0054f680(unk28, 1, flag, 0);
+        mgr->TESCreature_InitDefaultWorn(unk28, 1, flag, 0);
     QMgrB* mb = mgr;
     DAT_0106ca70->FUN_0042ea50(mb, (unsigned char)(unk10 >> 16), this, unk28, 1, 0);
     DAT_0106ca70->FUN_0042e8e0(mb, (unsigned char)(unk10 >> 16), this, unk28);
@@ -25967,10 +25993,11 @@ struct Owner {
     int unk80; int unk84; int unk88; int unk8C; int unk90; int unk94; int unk98; int unk9C;
     int unkA0; int unkA4; int unkA8;
     QueuedPtr unkAC;
-    void FUN_00437b60();
+    void TES_PreloadForms();
 };
 
-void Owner::FUN_00437b60()
+// pdb: TES::PreloadForms | TES.obj | fnv360_0822_retail, call_gap_sim + skyrim(call_gap), high
+void Owner::TES_PreloadForms()
 {
     FUN_00aa5160* cur = unkAC.ptr;
     if (cur == 0) {
@@ -26309,7 +26336,7 @@ struct Buf {
     unsigned char m80;
     char pad81[7];
     Rec* m88;
-    bool FUN_006daa00();
+    bool TESSaveLoadGame_UseSaveGameBlocks();
     void FUN_006db460(const void* p, unsigned int n);
     void FUN_006defa0(const void* p, unsigned int n);
 };
@@ -26318,7 +26345,7 @@ extern bool DAT_01079d20;
 extern float DAT_0106caf8;
 extern char DAT_00db8b50[];
 extern char DAT_00db5d40[];
-Form* __cdecl FUN_00455190(unsigned int id);
+Form* __cdecl TESForm_GetFormByNumericID(unsigned int id);
 void __cdecl FUN_00c24b70(const char* fmt, ...);
 struct Marker { char* pos; int size; int count; };
 struct Owner { char pad[0xc]; int mc; };
@@ -26338,7 +26365,7 @@ void Self::FUN_004362b0()
     m.size = 0;
     char* start = DAT_01079ca4->m14;
     m.pos = 0;
-    if (DAT_01079ca4->FUN_006daa00())
+    if (DAT_01079ca4->TESSaveLoadGame_UseSaveGameBlocks())
     {
         int tag = 0x424c4f4b;
         DAT_01079ca4->FUN_006db460(&tag, 4);
@@ -26368,11 +26395,11 @@ void Self::FUN_004362b0()
         char* cur = DAT_01079ca4->m14;
         if (r)
         {
-            Form* f = FUN_00455190(r->m0);
+            Form* f = TESForm_GetFormByNumericID(r->m0);
             FUN_00c24b70(DAT_00db5d40, cur - start, r->m0, f->V130(), *(int*)r->m5, 0x1877, DAT_00db8b50);
         }
     }
-    if (DAT_01079ca4->FUN_006daa00())
+    if (DAT_01079ca4->TESSaveLoadGame_UseSaveGameBlocks())
         *(short*)m.pos = (short)(DAT_01079ca4->m14 - m.pos);
 }
 }
@@ -26466,7 +26493,7 @@ namespace n437650 {
 struct Heap { void* FUN_0086b930(unsigned int bytes); void FUN_0086ba60(void* memory); };
 extern Heap DAT_01090a78;
 struct Loader {
-    unsigned int FUN_006e08a0();
+    unsigned int BGSLoadGameBuffer_LoadVariableSizedValue();
     unsigned int FUN_006e0670();
     void FUN_006e0750(void* buffer, unsigned int bytes);
     void FUN_006e06d0(unsigned int* refID);
@@ -26552,9 +26579,9 @@ struct Cell {
     unsigned int GetFormID() const {return formID;}
 };
 struct Grid { Cell** FUN_0047b220(unsigned int x, unsigned int y); };
-struct Checker { bool FUN_0043be40(unsigned int formID); };
+struct Checker { bool TESDataHandler_IsFormIDCreated(unsigned int formID); };
 extern Checker* DAT_0106cdcc;
-struct Resolver { void FUN_006cf040(unsigned int refID); };
+struct Resolver { void BGSSaveLoadGame_ClearFormID(unsigned int refID); };
 extern Resolver* DAT_01079858;
 }
 class TESActorBase;
@@ -26593,10 +26620,10 @@ struct Owner437650 {
     void FUN_00437650(n437650::Loader* loader);
 };
 void Owner437650::FUN_00437650(n437650::Loader* loader) {
-    unsigned int n = loader->FUN_006e08a0();
+    unsigned int n = loader->BGSLoadGameBuffer_LoadVariableSizedValue();
     for (unsigned int i = 0; i < n; i++) {
         Entry437650* entry = new Entry437650;
-        entry->base = (TESActorBase*)FUN_00c0050a(FUN_00455190(loader->FUN_006e0670()), 0, DAT_00f46078, DAT_00f47bbc, 0);
+        entry->base = (TESActorBase*)FUN_00c0050a(TESForm_GetFormByNumericID(loader->FUN_006e0670()), 0, DAT_00f46078, DAT_00f47bbc, 0);
         loader->FUN_006e0750(&entry->count, 2);
         entries.AddHead(entry);
     }
@@ -26607,8 +26634,8 @@ void Owner437650::FUN_00437650(n437650::Loader* loader) {
             n437650::Cell* cell = *grid->FUN_0047b220(x, y);
             unsigned int refID = 0;
             loader->FUN_006e06d0(&refID);
-            if (cell && refID && n437650::DAT_0106cdcc->FUN_0043be40(cell->GetFormID())) {
-                n437650::DAT_01079858->FUN_006cf040(refID);
+            if (cell && refID && n437650::DAT_0106cdcc->TESDataHandler_IsFormIDCreated(cell->GetFormID())) {
+                n437650::DAT_01079858->BGSSaveLoadGame_ClearFormID(refID);
                 cell->SetRef(refID, true);
             }
         }
@@ -27132,8 +27159,8 @@ virtual const char* GetName(); unsigned char type,unk05,unk06,unk07; unsigned in
 class TESObjectREFR : public TESForm { public: int unk10,unk14,unk18; TESForm* baseForm; TESForm* GetBase(){return baseForm;} };
 struct FormTypeInfo { const char* name; int unk04,unk08; }; extern FormTypeInfo DAT_00f4a74c[];
 struct Vector3 { float x,y,z; }; extern Vector3 DAT_0108ec68;
-struct LoadContext { void* FUN_00455470(int); };
-void FUN_00454a40(unsigned int*,void*); TESForm* FUN_00455190(unsigned int); void FUN_00887da0(const char*,...);
+struct LoadContext { void* TESForm_GetFile(int); };
+void TESForm_AddCompileIndex(unsigned int*,void*); TESForm* TESForm_GetFormByNumericID(unsigned int); void FUN_00887da0(const char*,...);
 struct TeleportData {
     union { unsigned int formID; TESObjectREFR* reference; };
     Vector3 position,angles;
@@ -27141,8 +27168,8 @@ struct TeleportData {
 };
 bool TeleportData::FUN_00423980(LoadContext* context) {
     unsigned int resolvedID=formID;
-    FUN_00454a40(&resolvedID,context->FUN_00455470(-1));
-    reference=dynamic_cast<TESObjectREFR*>(FUN_00455190(resolvedID));
+    TESForm_AddCompileIndex(&resolvedID,context->TESForm_GetFile(-1));
+    reference=dynamic_cast<TESObjectREFR*>(TESForm_GetFormByNumericID(resolvedID));
     if(!reference) {
         FUN_00887da0(DAT_00db76f0,resolvedID);
         return false;
@@ -28047,7 +28074,7 @@ struct FUN_004c3190 : FormBuiltIn {
     unsigned int unk050;
     unsigned int unk054;
     FUN_004c3190();
-    void FUN_004c3240();
+    void TESClimate_MakeDefault();
 };
 struct FUN_004c3740 : FormBuiltIn {
     unsigned int unk018;
@@ -28830,7 +28857,7 @@ struct FUN_00500680 : FormBuiltIn {
     unsigned int unk2ec;
     unsigned int unk2f0;
     FUN_00500680();
-    void FUN_005004b0();
+    void TESWeather_MakeDefault();
 };
 struct FUN_00505a30 : FormBuiltIn {
     unsigned int unk018;
@@ -28944,7 +28971,7 @@ struct FUN_00551cc0 : FormBuiltIn {
     unsigned int unk044;
     FUN_00551cc0();
     void FUN_00551c00();
-    void FUN_00454240(bool);
+    void TESForm_SetInitialized(bool);
 };
 struct FUN_0055a180 : FormBuiltIn {
     unsigned int unk018;
@@ -29087,14 +29114,14 @@ struct FormNodeBuiltIn : AllocBuiltIn {
 struct FormRegistryBuiltIn { void FUN_004b2bd0(FormBuiltIn*); };
 struct EditorRegistryBuiltIn { void FUN_00402e60(const char*, FormBuiltIn*); };
 extern EditorRegistryBuiltIn* DAT_0106dd1c;
-struct InitializerBuiltIn { void FUN_005072a0(); };
+struct InitializerBuiltIn { void BGSCameraPathManager_CreateDefaultPath(); };
 extern InitializerBuiltIn* DAT_0107195c;
 struct LastServiceBuiltIn {
     virtual void v00(); virtual void v04(); virtual void v08(); virtual void v0c(); virtual void v10(); virtual void v14();
 };
 LastServiceBuiltIn* __cdecl FUN_00508dc0();
-struct OtherServiceBuiltIn { void FUN_0057e3b0(); };
-OtherServiceBuiltIn* __stdcall FUN_0043c230(int,bool);
+struct OtherServiceBuiltIn { void Sky_SetCurrentClimate(); };
+OtherServiceBuiltIn* __stdcall Sky_GetInstance(int,bool);
 extern "C" void* __cdecl FUN_00c0050a(void*, long, const void*, const void*, int);
 
 extern const char str_00db3438[];
@@ -29266,15 +29293,15 @@ extern FUN_0054a210* DAT_01071fe8;
 extern FUN_00551cc0* DAT_010720cc;
 extern FUN_00551230* DAT_01072138;
 extern FormBuiltIn* DAT_010723f0;
-void __cdecl FUN_005a3000();
+void __cdecl ActorValue_RegisterActorValues();
 void __cdecl FUN_00565360();
 void __cdecl FUN_00407c30();
 void __cdecl FUN_006c4eb0();
-void __cdecl FUN_0050a140();
+void __cdecl BGSImpactDataSet_CreateDefaultImpactDataSet();
 void __cdecl FUN_0044d020();
-void __cdecl FUN_00543270();
-void __cdecl FUN_0050cf30();
-void __cdecl FUN_004bfd80();
+void __cdecl BGSBodyPartData_GenerateDefaultBodyPartData();
+void __cdecl BGSTextureSet_CreateNullTextureSet();
+void __cdecl BGSEncounterZone_CreateNoZone();
 void __cdecl FUN_00405220(FormBuiltIn*);
 extern __declspec(thread) unsigned int DAT_0117c298;
 struct MemoryContextBuiltIn {
@@ -29354,7 +29381,7 @@ struct DataOwnerBuiltIn {
     unsigned int unk144;
     unsigned int unk148;
     FormNodeBuiltIn list14c;
-    void FUN_0043ede0();
+    void TESDataHandler_GenerateDefaultObjects();
 };
 __declspec(noinline) void FormNodeBuiltIn::FUN_00421610(void* input) {
     FormBuiltIn* value = *(FormBuiltIn* const*)input;
@@ -29390,7 +29417,8 @@ __declspec(noinline) void FormNodeBuiltIn::FUN_0049fac0(void* input) {
     }
 }
 
-void DataOwnerBuiltIn::FUN_0043ede0() {
+// pdb: TESDataHandler::GenerateDefaultObjects | TESDataHandler.obj | fnv360_0822_retail, ustr + bridge(ustr|ustr) + skyrim(ustr), high
+void DataOwnerBuiltIn::TESDataHandler_GenerateDefaultObjects() {
     MemoryContextBuiltIn context;
     union FormTablesBuiltIn {
         unsigned int ids[40];
@@ -29420,10 +29448,10 @@ void DataOwnerBuiltIn::FUN_0043ede0() {
     DAT_0107169c = 0;
     DAT_010716a0 = 0;
     DAT_010716a4 = 0;
-    FUN_005a3000();
-    DAT_0107195c->FUN_005072a0();
+    ActorValue_RegisterActorValues();
+    DAT_0107195c->BGSCameraPathManager_CreateDefaultPath();
     // Form 0x1f5: 0043eeea-0043ef9b.
-    DAT_010716a0 = (FUN_004a55a0*)FUN_00c0050a(FUN_00455190(0x1f5), 0, DAT_00f46078, DAT_00f496f4, 0);
+    DAT_010716a0 = (FUN_004a55a0*)FUN_00c0050a(TESForm_GetFormByNumericID(0x1f5), 0, DAT_00f46078, DAT_00f496f4, 0);
     if (!DAT_010716a0) {
         DAT_010716a0 = new FUN_004a55a0;
         DAT_010716a0->SetFormID(0x1f5, true);
@@ -29433,7 +29461,7 @@ void DataOwnerBuiltIn::FUN_0043ede0() {
         DAT_010716a0->SetChanged(false);
     }
     // Form 0x1f6: 0043efac-0043f05b.
-    DAT_010716a4 = (FUN_004bf540*)FUN_00c0050a(FUN_00455190(0x1f6), 0, DAT_00f46078, DAT_00f46a14, 0);
+    DAT_010716a4 = (FUN_004bf540*)FUN_00c0050a(TESForm_GetFormByNumericID(0x1f6), 0, DAT_00f46078, DAT_00f46a14, 0);
     if (!DAT_010716a4) {
         DAT_010716a4 = new FUN_004bf540;
         DAT_010716a4->SetFormID(0x1f6, true);
@@ -29443,7 +29471,7 @@ void DataOwnerBuiltIn::FUN_0043ede0() {
         DAT_010716a4->SetChanged(false);
     }
     // Form 0x1a: 0043f069-0043f111.
-    DAT_01072138 = (FUN_00551230*)FUN_00c0050a(FUN_00455190(0x1a), 0, DAT_00f46078, DAT_00f496dc, 0);
+    DAT_01072138 = (FUN_00551230*)FUN_00c0050a(TESForm_GetFormByNumericID(0x1a), 0, DAT_00f46078, DAT_00f496dc, 0);
     if (!DAT_01072138) {
         DAT_01072138 = new FUN_00551230;
         DAT_01072138->SetFormID(0x1a, true);
@@ -29453,7 +29481,7 @@ void DataOwnerBuiltIn::FUN_0043ede0() {
         DAT_01072138->SetChanged(false);
     }
     // Form 0x1b: 0043f11f-0043f1cb.
-    DAT_01071698 = (FUN_004b3f30*)FUN_00c0050a(FUN_00455190(0x1b), 0, DAT_00f46078, DAT_00f496c0, 0);
+    DAT_01071698 = (FUN_004b3f30*)FUN_00c0050a(TESForm_GetFormByNumericID(0x1b), 0, DAT_00f46078, DAT_00f496c0, 0);
     if (!DAT_01071698) {
         DAT_01071698 = new FUN_004b3f30;
         DAT_01071698->SetFormID(0x1b, true);
@@ -29463,7 +29491,7 @@ void DataOwnerBuiltIn::FUN_0043ede0() {
         DAT_01071698->SetChanged(false);
     }
     // Form 0x22: 0043f1d9-0043f285.
-    DAT_0107169c = (FUN_004b3f30*)FUN_00c0050a(FUN_00455190(0x22), 0, DAT_00f46078, DAT_00f496c0, 0);
+    DAT_0107169c = (FUN_004b3f30*)FUN_00c0050a(TESForm_GetFormByNumericID(0x22), 0, DAT_00f46078, DAT_00f496c0, 0);
     if (!DAT_0107169c) {
         DAT_0107169c = new FUN_004b3f30;
         DAT_0107169c->SetFormID(0x22, true);
@@ -29473,7 +29501,7 @@ void DataOwnerBuiltIn::FUN_0043ede0() {
         DAT_0107169c->SetChanged(false);
     }
     // Form 0x2d: 0043f293-0043f326.
-    DAT_01071fe4 = (FUN_0054a210*)FUN_00c0050a(FUN_00455190(0x2d), 0, DAT_00f46078, DAT_00f496a4, 0);
+    DAT_01071fe4 = (FUN_0054a210*)FUN_00c0050a(TESForm_GetFormByNumericID(0x2d), 0, DAT_00f46078, DAT_00f496a4, 0);
     if (!DAT_01071fe4) {
         DAT_01071fe4 = new FUN_0054a210;
         DAT_01071fe4->SetFormID(0x2d, true);
@@ -29482,7 +29510,7 @@ void DataOwnerBuiltIn::FUN_0043ede0() {
         DAT_01071fe4->SetChanged(false);
     }
     // Form 0x2e: 0043f334-0043f3c7.
-    DAT_01071fe8 = (FUN_0054a210*)FUN_00c0050a(FUN_00455190(0x2e), 0, DAT_00f46078, DAT_00f496a4, 0);
+    DAT_01071fe8 = (FUN_0054a210*)FUN_00c0050a(TESForm_GetFormByNumericID(0x2e), 0, DAT_00f46078, DAT_00f496a4, 0);
     if (!DAT_01071fe8) {
         DAT_01071fe8 = new FUN_0054a210;
         DAT_01071fe8->SetFormID(0x2e, true);
@@ -29491,7 +29519,7 @@ void DataOwnerBuiltIn::FUN_0043ede0() {
         DAT_01071fe8->SetChanged(false);
     }
     // Form 0x18: 0043f3d5-0043f46b.
-    DAT_01071858 = (FUN_004ff260*)FUN_00c0050a(FUN_00455190(0x18), 0, DAT_00f46078, DAT_00f47b2c, 0);
+    DAT_01071858 = (FUN_004ff260*)FUN_00c0050a(TESForm_GetFormByNumericID(0x18), 0, DAT_00f46078, DAT_00f47b2c, 0);
     if (!DAT_01071858) {
         DAT_01071858 = new FUN_004ff260;
         DAT_01071858->SetFormID(0x18, true);
@@ -29500,7 +29528,7 @@ void DataOwnerBuiltIn::FUN_0043ede0() {
         DAT_01071858->SetChanged(false);
     }
     // Form 0x12: 0043f479-0043f524.
-    DAT_01071688 = (FUN_004ba100*)FUN_00c0050a(FUN_00455190(0x12), 0, DAT_00f46078, DAT_00f49688, 0);
+    DAT_01071688 = (FUN_004ba100*)FUN_00c0050a(TESForm_GetFormByNumericID(0x12), 0, DAT_00f46078, DAT_00f49688, 0);
     if (!DAT_01071688) {
         DAT_01071688 = new FUN_004ba100;
         DAT_01071688->SetFormID(0x12, true);
@@ -29510,7 +29538,7 @@ void DataOwnerBuiltIn::FUN_0043ede0() {
         DAT_01071688->SetChanged(false);
     }
     // Form 0xa: 0043f532-0043f5c6.
-    DAT_01071684 = (FUN_004b9fa0*)FUN_00c0050a(FUN_00455190(0xa), 0, DAT_00f46078, DAT_00f4966c, 0);
+    DAT_01071684 = (FUN_004b9fa0*)FUN_00c0050a(TESForm_GetFormByNumericID(0xa), 0, DAT_00f46078, DAT_00f4966c, 0);
     if (!DAT_01071684) {
         DAT_01071684 = new FUN_004b9fa0;
         DAT_01071684->SetFormID(0xa, true);
@@ -29519,7 +29547,7 @@ void DataOwnerBuiltIn::FUN_0043ede0() {
         DAT_01071684->SetChanged(false);
     }
     // Form 0x1: 0043f5d4-0043f67f.
-    DAT_01071644 = (FUN_004ba100*)FUN_00c0050a(FUN_00455190(0x1), 0, DAT_00f46078, DAT_00f49688, 0);
+    DAT_01071644 = (FUN_004ba100*)FUN_00c0050a(TESForm_GetFormByNumericID(0x1), 0, DAT_00f46078, DAT_00f49688, 0);
     if (!DAT_01071644) {
         DAT_01071644 = new FUN_004ba100;
         DAT_01071644->SetFormID(0x1, true);
@@ -29530,7 +29558,7 @@ void DataOwnerBuiltIn::FUN_0043ede0() {
     }
     // Form 0x3c: 0043f68d-0043f72f.
     {
-    FUN_00505a30* form11 = (FUN_00505a30*)FUN_00c0050a(FUN_00455190(0x3c), 0, DAT_00f46078, DAT_00f47a58, 0);
+    FUN_00505a30* form11 = (FUN_00505a30*)FUN_00c0050a(TESForm_GetFormByNumericID(0x3c), 0, DAT_00f46078, DAT_00f47a58, 0);
     if (!form11) {
         FUN_00505a30* created = new FUN_00505a30;
         form11 = created;
@@ -29545,7 +29573,7 @@ void DataOwnerBuiltIn::FUN_0043ede0() {
     }
     }
     // Form 0x15: 0043f75d-0043f808.
-    DAT_0107164c = (FUN_004ba100*)FUN_00c0050a(FUN_00455190(0x15), 0, DAT_00f46078, DAT_00f49688, 0);
+    DAT_0107164c = (FUN_004ba100*)FUN_00c0050a(TESForm_GetFormByNumericID(0x15), 0, DAT_00f46078, DAT_00f49688, 0);
     if (!DAT_0107164c) {
         DAT_0107164c = new FUN_004ba100;
         DAT_0107164c->SetFormID(0x15, true);
@@ -29555,7 +29583,7 @@ void DataOwnerBuiltIn::FUN_0043ede0() {
         DAT_0107164c->SetChanged(false);
     }
     // Form 0x17: 0043f816-0043f8c1.
-    DAT_01071650 = (FUN_004ba100*)FUN_00c0050a(FUN_00455190(0x17), 0, DAT_00f46078, DAT_00f49688, 0);
+    DAT_01071650 = (FUN_004ba100*)FUN_00c0050a(TESForm_GetFormByNumericID(0x17), 0, DAT_00f46078, DAT_00f49688, 0);
     if (!DAT_01071650) {
         DAT_01071650 = new FUN_004ba100;
         DAT_01071650->SetFormID(0x17, true);
@@ -29565,7 +29593,7 @@ void DataOwnerBuiltIn::FUN_0043ede0() {
         DAT_01071650->SetChanged(false);
     }
     // Form 0x1f: 0043f8cf-0043f97a.
-    DAT_01071654 = (FUN_004ba100*)FUN_00c0050a(FUN_00455190(0x1f), 0, DAT_00f46078, DAT_00f49688, 0);
+    DAT_01071654 = (FUN_004ba100*)FUN_00c0050a(TESForm_GetFormByNumericID(0x1f), 0, DAT_00f46078, DAT_00f49688, 0);
     if (!DAT_01071654) {
         DAT_01071654 = new FUN_004ba100;
         DAT_01071654->SetFormID(0x1f, true);
@@ -29575,7 +29603,7 @@ void DataOwnerBuiltIn::FUN_0043ede0() {
         DAT_01071654->SetChanged(false);
     }
     // Form 0x20: 0043f988-0043fa33.
-    DAT_01071658 = (FUN_004ba100*)FUN_00c0050a(FUN_00455190(0x20), 0, DAT_00f46078, DAT_00f49688, 0);
+    DAT_01071658 = (FUN_004ba100*)FUN_00c0050a(TESForm_GetFormByNumericID(0x20), 0, DAT_00f46078, DAT_00f49688, 0);
     if (!DAT_01071658) {
         DAT_01071658 = new FUN_004ba100;
         DAT_01071658->SetFormID(0x20, true);
@@ -29585,7 +29613,7 @@ void DataOwnerBuiltIn::FUN_0043ede0() {
         DAT_01071658->SetChanged(false);
     }
     // Form 0x21: 0043fa41-0043faec.
-    DAT_0107165c = (FUN_004ba100*)FUN_00c0050a(FUN_00455190(0x21), 0, DAT_00f46078, DAT_00f49688, 0);
+    DAT_0107165c = (FUN_004ba100*)FUN_00c0050a(TESForm_GetFormByNumericID(0x21), 0, DAT_00f46078, DAT_00f49688, 0);
     if (!DAT_0107165c) {
         DAT_0107165c = new FUN_004ba100;
         DAT_0107165c->SetFormID(0x21, true);
@@ -29595,7 +29623,7 @@ void DataOwnerBuiltIn::FUN_0043ede0() {
         DAT_0107165c->SetChanged(false);
     }
     // Form 0x3b: 0043fafa-0043fba5.
-    DAT_01071660 = (FUN_004ba100*)FUN_00c0050a(FUN_00455190(0x3b), 0, DAT_00f46078, DAT_00f49688, 0);
+    DAT_01071660 = (FUN_004ba100*)FUN_00c0050a(TESForm_GetFormByNumericID(0x3b), 0, DAT_00f46078, DAT_00f49688, 0);
     if (!DAT_01071660) {
         DAT_01071660 = new FUN_004ba100;
         DAT_01071660->SetFormID(0x3b, true);
@@ -29605,7 +29633,7 @@ void DataOwnerBuiltIn::FUN_0043ede0() {
         DAT_01071660->SetChanged(false);
     }
     // Form 0x34: 0043fbb3-0043fc5e.
-    DAT_01071664 = (FUN_004ba100*)FUN_00c0050a(FUN_00455190(0x34), 0, DAT_00f46078, DAT_00f49688, 0);
+    DAT_01071664 = (FUN_004ba100*)FUN_00c0050a(TESForm_GetFormByNumericID(0x34), 0, DAT_00f46078, DAT_00f49688, 0);
     if (!DAT_01071664) {
         DAT_01071664 = new FUN_004ba100;
         DAT_01071664->SetFormID(0x34, true);
@@ -29615,7 +29643,7 @@ void DataOwnerBuiltIn::FUN_0043ede0() {
         DAT_01071664->SetChanged(false);
     }
     // Form 0x32: 0043fc6c-0043fd17.
-    DAT_01071668 = (FUN_004ba100*)FUN_00c0050a(FUN_00455190(0x32), 0, DAT_00f46078, DAT_00f49688, 0);
+    DAT_01071668 = (FUN_004ba100*)FUN_00c0050a(TESForm_GetFormByNumericID(0x32), 0, DAT_00f46078, DAT_00f49688, 0);
     if (!DAT_01071668) {
         DAT_01071668 = new FUN_004ba100;
         DAT_01071668->SetFormID(0x32, true);
@@ -29625,7 +29653,7 @@ void DataOwnerBuiltIn::FUN_0043ede0() {
         DAT_01071668->SetChanged(false);
     }
     // Form 0x10: 0043fd25-0043fdd0.
-    DAT_01071648 = (FUN_004ba100*)FUN_00c0050a(FUN_00455190(0x10), 0, DAT_00f46078, DAT_00f49688, 0);
+    DAT_01071648 = (FUN_004ba100*)FUN_00c0050a(TESForm_GetFormByNumericID(0x10), 0, DAT_00f46078, DAT_00f49688, 0);
     if (!DAT_01071648) {
         DAT_01071648 = new FUN_004ba100;
         DAT_01071648->SetFormID(0x10, true);
@@ -29635,7 +29663,7 @@ void DataOwnerBuiltIn::FUN_0043ede0() {
         DAT_01071648->SetChanged(false);
     }
     // Form 0x2: 0043fdde-0043fe89.
-    DAT_0107166c = (FUN_004ba100*)FUN_00c0050a(FUN_00455190(0x2), 0, DAT_00f46078, DAT_00f49688, 0);
+    DAT_0107166c = (FUN_004ba100*)FUN_00c0050a(TESForm_GetFormByNumericID(0x2), 0, DAT_00f46078, DAT_00f49688, 0);
     if (!DAT_0107166c) {
         DAT_0107166c = new FUN_004ba100;
         DAT_0107166c->SetFormID(0x2, true);
@@ -29645,7 +29673,7 @@ void DataOwnerBuiltIn::FUN_0043ede0() {
         DAT_0107166c->SetChanged(false);
     }
     // Form 0x3: 0043fe97-0043ff42.
-    DAT_01071670 = (FUN_004ba100*)FUN_00c0050a(FUN_00455190(0x3), 0, DAT_00f46078, DAT_00f49688, 0);
+    DAT_01071670 = (FUN_004ba100*)FUN_00c0050a(TESForm_GetFormByNumericID(0x3), 0, DAT_00f46078, DAT_00f49688, 0);
     if (!DAT_01071670) {
         DAT_01071670 = new FUN_004ba100;
         DAT_01071670->SetFormID(0x3, true);
@@ -29655,7 +29683,7 @@ void DataOwnerBuiltIn::FUN_0043ede0() {
         DAT_01071670->SetChanged(false);
     }
     // Form 0x4: 0043ff50-0043fffe.
-    DAT_01071674 = (FUN_004b90c0*)FUN_00c0050a(FUN_00455190(0x4), 0, DAT_00f46078, DAT_00f49650, 0);
+    DAT_01071674 = (FUN_004b90c0*)FUN_00c0050a(TESForm_GetFormByNumericID(0x4), 0, DAT_00f46078, DAT_00f49650, 0);
     if (!DAT_01071674) {
         DAT_01071674 = new FUN_004b90c0;
         DAT_01071674->SetFormID(0x4, true);
@@ -29665,7 +29693,7 @@ void DataOwnerBuiltIn::FUN_0043ede0() {
         DAT_01071674->SetChanged(false);
     }
     // Form 0x6: 0044000c-004400b7.
-    DAT_01071678 = (FUN_004ba100*)FUN_00c0050a(FUN_00455190(0x6), 0, DAT_00f46078, DAT_00f49688, 0);
+    DAT_01071678 = (FUN_004ba100*)FUN_00c0050a(TESForm_GetFormByNumericID(0x6), 0, DAT_00f46078, DAT_00f49688, 0);
     if (!DAT_01071678) {
         DAT_01071678 = new FUN_004ba100;
         DAT_01071678->SetFormID(0x6, true);
@@ -29675,7 +29703,7 @@ void DataOwnerBuiltIn::FUN_0043ede0() {
         DAT_01071678->SetChanged(false);
     }
     // Form 0x5: 004400c5-00440170.
-    DAT_0107167c = (FUN_004ba100*)FUN_00c0050a(FUN_00455190(0x5), 0, DAT_00f46078, DAT_00f49688, 0);
+    DAT_0107167c = (FUN_004ba100*)FUN_00c0050a(TESForm_GetFormByNumericID(0x5), 0, DAT_00f46078, DAT_00f49688, 0);
     if (!DAT_0107167c) {
         DAT_0107167c = new FUN_004ba100;
         DAT_0107167c->SetFormID(0x5, true);
@@ -29685,7 +29713,7 @@ void DataOwnerBuiltIn::FUN_0043ede0() {
         DAT_0107167c->SetChanged(false);
     }
     // Form 0x33: 0044017e-00440229.
-    DAT_01071680 = (FUN_004ba100*)FUN_00c0050a(FUN_00455190(0x33), 0, DAT_00f46078, DAT_00f49688, 0);
+    DAT_01071680 = (FUN_004ba100*)FUN_00c0050a(TESForm_GetFormByNumericID(0x33), 0, DAT_00f46078, DAT_00f49688, 0);
     if (!DAT_01071680) {
         DAT_01071680 = new FUN_004ba100;
         DAT_01071680->SetFormID(0x33, true);
@@ -29695,7 +29723,7 @@ void DataOwnerBuiltIn::FUN_0043ede0() {
         DAT_01071680->SetChanged(false);
     }
     // Form 0x13: 00440237-004402f6.
-    DAT_010720cc = (FUN_00551cc0*)FUN_00c0050a(FUN_00455190(0x13), 0, DAT_00f46078, DAT_00f47bd8, 0);
+    DAT_010720cc = (FUN_00551cc0*)FUN_00c0050a(TESForm_GetFormByNumericID(0x13), 0, DAT_00f46078, DAT_00f47bd8, 0);
     if (!DAT_010720cc) {
         DAT_010720cc = new FUN_00551cc0;
         DAT_010720cc->SetFormID(0x13, true);
@@ -29703,12 +29731,12 @@ void DataOwnerBuiltIn::FUN_0043ede0() {
         list084.FUN_0049fac0(&DAT_010720cc);
         DAT_010720cc->container.FUN_0045a060(DAT_010720cc, 100);
         DAT_010720cc->FUN_00551c00();
-        DAT_010720cc->FUN_00454240(true);
+        DAT_010720cc->TESForm_SetInitialized(true);
         DAT_010720cc->SetChanged(false);
     }
     // Form 0xf: 004402f8-0044036d.
     {
-    if (!FUN_00455190(0xf)) {
+    if (!TESForm_GetFormByNumericID(0xf)) {
         FUN_004b9fa0* form28 = new FUN_004b9fa0;
         form28->SetFormID(0xf, true);
         form28->SetEditorID(str_00db9d68);
@@ -29717,7 +29745,7 @@ void DataOwnerBuiltIn::FUN_0043ede0() {
     }
     }
     // Form 0xe: 0044036f-0044044a.
-    DAT_0106cde0 = (FUN_004b7ae0*)FUN_00455190(0xe);
+    DAT_0106cde0 = (FUN_004b7ae0*)TESForm_GetFormByNumericID(0xe);
     if (!DAT_0106cde0) {
         DAT_0106cde0 = new FUN_004b7ae0;
         DAT_0106cde0->SetFormID(0xe, true);
@@ -29728,7 +29756,7 @@ void DataOwnerBuiltIn::FUN_0043ede0() {
         DAT_0106cde0->SetChanged(false);
     }
     // Form 0x1f4: 0044044f-004404ed.
-    DAT_01071694 = (FUN_004bf540*)FUN_00455190(0x1f4);
+    DAT_01071694 = (FUN_004bf540*)TESForm_GetFormByNumericID(0x1f4);
     if (!DAT_01071694) {
         DAT_01071694 = new FUN_004bf540;
         DAT_01071694->SetFormID(0x1f4, true);
@@ -29819,7 +29847,7 @@ void DataOwnerBuiltIn::FUN_0043ede0() {
         editorNames[38] = str_00db9a38;
         editorNames[39] = str_00db9a24;
         for (int i = 0; i < 40; ++i) {
-            FUN_004ba100* form = (FUN_004ba100*)FUN_00455190(tables.ids[i]);
+            FUN_004ba100* form = (FUN_004ba100*)TESForm_GetFormByNumericID(tables.ids[i]);
             if (!form) {
                 form = new FUN_004ba100;
                 form->SetFormID(tables.ids[i], true);
@@ -29830,7 +29858,7 @@ void DataOwnerBuiltIn::FUN_0043ede0() {
         }
     }
     FUN_00565360();
-    if (!FUN_00455190(0x35)) {
+    if (!TESForm_GetFormByNumericID(0x35)) {
         FUN_00515da0* form = new FUN_00515da0;
         form->SetFormID(0x35, true);
         form->SetEditorID(str_00db9a18);
@@ -29838,7 +29866,7 @@ void DataOwnerBuiltIn::FUN_0043ede0() {
         list0ac.Prepend(form);
         DAT_0106dd1c->FUN_00402e60(str_00db9a18, form);
     }
-    if (!FUN_00455190(0x36)) {
+    if (!TESForm_GetFormByNumericID(0x36)) {
         FUN_00515da0* form = new FUN_00515da0;
         form->SetFormID(0x36, true);
         form->SetEditorID(str_00db9a08);
@@ -29846,7 +29874,7 @@ void DataOwnerBuiltIn::FUN_0043ede0() {
         list0ac.Prepend(form);
         DAT_0106dd1c->FUN_00402e60(str_00db9a08, form);
     }
-    if (!FUN_00455190(0x37)) {
+    if (!TESForm_GetFormByNumericID(0x37)) {
         FUN_00515da0* form = new FUN_00515da0;
         form->SetFormID(0x37, true);
         form->SetEditorID(str_00db99fc);
@@ -29854,7 +29882,7 @@ void DataOwnerBuiltIn::FUN_0043ede0() {
         list0ac.Prepend(form);
         DAT_0106dd1c->FUN_00402e60(str_00db99fc, form);
     }
-    if (!FUN_00455190(0x38)) {
+    if (!TESForm_GetFormByNumericID(0x38)) {
         FUN_00515da0* form = new FUN_00515da0;
         form->SetFormID(0x38, true);
         form->SetEditorID(str_00db99ec);
@@ -29862,7 +29890,7 @@ void DataOwnerBuiltIn::FUN_0043ede0() {
         list0ac.Prepend(form);
         DAT_0106dd1c->FUN_00402e60(str_00db99ec, form);
     }
-    if (!FUN_00455190(0x39)) {
+    if (!TESForm_GetFormByNumericID(0x39)) {
         FUN_00515da0* form = new FUN_00515da0;
         form->SetFormID(0x39, true);
         form->SetEditorID(str_00db99d8);
@@ -29870,7 +29898,7 @@ void DataOwnerBuiltIn::FUN_0043ede0() {
         list0ac.Prepend(form);
         DAT_0106dd1c->FUN_00402e60(str_00db99d8, form);
     }
-    if (!FUN_00455190(0x3a)) {
+    if (!TESForm_GetFormByNumericID(0x3a)) {
         FUN_00515da0* form = new FUN_00515da0;
         form->SetFormID(0x3a, true);
         form->SetEditorID(str_00db99cc);
@@ -29878,7 +29906,7 @@ void DataOwnerBuiltIn::FUN_0043ede0() {
         list0ac.Prepend(form);
         DAT_0106dd1c->FUN_00402e60(str_00db99cc, form);
     }
-    void* cast7 = FUN_00c0050a(FUN_00455190(7), 0, DAT_00f46078, DAT_00f46b24, 0);
+    void* cast7 = FUN_00c0050a(TESForm_GetFormByNumericID(7), 0, DAT_00f46078, DAT_00f46b24, 0);
     if (!cast7) {
         FUN_0055a180* form = new FUN_0055a180;
         form->SetFormID(7, true);
@@ -29886,28 +29914,28 @@ void DataOwnerBuiltIn::FUN_0043ede0() {
         registry->FUN_004b2bd0(form);
         form->SetChanged(false);
     }
-    if (!FUN_00455190(0x15e)) {
+    if (!TESForm_GetFormByNumericID(0x15e)) {
         FUN_00500680* form = new FUN_00500680;
         form->SetFormID(0x15e, true);
         form->SetEditorID(str_00db99b0);
-        form->FUN_005004b0();
+        form->TESWeather_MakeDefault();
         list02c.Prepend(form);
     }
-    if (!FUN_00455190(0x15f)) {
+    if (!TESForm_GetFormByNumericID(0x15f)) {
         FUN_004c3190* form = new FUN_004c3190;
         form->SetFormID(0x15f, true);
         form->SetEditorID(str_00db99a0);
-        form->FUN_004c3240();
+        form->TESClimate_MakeDefault();
         list014.Prepend(form);
     }
-    FUN_0043c230(0, true)->FUN_0057e3b0();
-    if (!FUN_00455190(0x163)) {
+    Sky_GetInstance(0, true)->Sky_SetCurrentClimate();
+    if (!TESForm_GetFormByNumericID(0x163)) {
         FUN_0050a8c0* form = new FUN_0050a8c0;
         form->SetFormID(0x163, true);
         form->SetEditorID(str_00db9990);
         list134.Prepend(form);
     }
-    if (!FUN_00455190(0x165)) {
+    if (!TESForm_GetFormByNumericID(0x165)) {
         FUN_0050a8c0* form = new FUN_0050a8c0;
         form->SetFormID(0x165, true);
         form->SetEditorID(str_00db9980);
@@ -29958,7 +29986,7 @@ void DataOwnerBuiltIn::FUN_0043ede0() {
             }
         }
     }
-    if (!FUN_00455190(0x160)) {
+    if (!TESForm_GetFormByNumericID(0x160)) {
         FUN_004c3740* form = new FUN_004c3740;
         form->SetFormID(0x160, true);
         form->SetEditorID(str_00db985c);
@@ -29970,21 +29998,21 @@ void DataOwnerBuiltIn::FUN_0043ede0() {
         form->FUN_004c3670();
         list01c.Prepend(form);
     }
-    if (!FUN_00455190(0x162)) {
+    if (!TESForm_GetFormByNumericID(0x162)) {
         FUN_004c8ad0* form = new FUN_004c8ad0;
         form->SetFormID(0x162, true);
         form->SetEditorID(str_00db9838);
         form->FUN_004c4bb0();
         list024.Prepend(form);
     }
-    if (!FUN_00455190(0x166)) {
+    if (!TESForm_GetFormByNumericID(0x166)) {
         FUN_004c8ad0* form = new FUN_004c8ad0;
         form->SetFormID(0x166, true);
         form->SetEditorID(str_00db9828);
         form->FUN_004c4bb0();
         list024.Prepend(form);
     }
-    if (!FUN_00455190(0x164)) {
+    if (!TESForm_GetFormByNumericID(0x164)) {
         FUN_004c8ad0* form = new FUN_004c8ad0;
         form->SetFormID(0x164, true);
         form->SetEditorID(str_00db9810);
@@ -29992,7 +30020,7 @@ void DataOwnerBuiltIn::FUN_0043ede0() {
         list024.Prepend(form);
     }
     FUN_00407c30();
-    if (!FUN_00455190(0x14a)) {
+    if (!TESForm_GetFormByNumericID(0x14a)) {
         FUN_00404f20* form = new FUN_00404f20;
         form->SetFormID(0x14a, true);
         form->SetEditorID(str_00db449c);
@@ -30000,18 +30028,18 @@ void DataOwnerBuiltIn::FUN_0043ede0() {
         FUN_00405220(form);
     }
     FUN_006c4eb0();
-    FUN_0050a140();
+    BGSImpactDataSet_CreateDefaultImpactDataSet();
     FUN_0044d020();
-    FUN_00543270();
-    FUN_0050cf30();
-    FUN_004bfd80();
-    if (!FUN_00455190(0x3d)) {
+    BGSBodyPartData_GenerateDefaultBodyPartData();
+    BGSTextureSet_CreateNullTextureSet();
+    BGSEncounterZone_CreateNoZone();
+    if (!TESForm_GetFormByNumericID(0x3d)) {
         FUN_004ab3d0* form = new FUN_004ab3d0;
         form->SetFormID(0x3d, true);
         form->SetEditorID(str_00db97fc);
         list0dc.Prepend(form);
     }
-    DAT_0106cddc = (FUN_00515da0*)FUN_00455190(0x63);
+    DAT_0106cddc = (FUN_00515da0*)TESForm_GetFormByNumericID(0x63);
     if (!DAT_0106cddc) {
         DAT_0106cddc = new FUN_00515da0;
         DAT_0106cddc->SetFormID(0x63, true);
@@ -30304,7 +30332,7 @@ extern int DAT_0106c79c;
 
 struct F2fThis;
 struct F2fMgr {
-    void FUN_0042ca20(void* p, int b, F2fThis* t, int a4, int a5, int a6, int a7);
+    void ModelLoader_QueueModel(void* p, int b, F2fThis* t, int a4, int a5, int a6, int a7);
     void FUN_0042cee0(F2fY* y, int a2, int b, F2fThis* t, int a5);
     void FUN_0042ea50(void* p, int b, F2fThis* t, int a4, int a5, int a6);
 };
@@ -30330,7 +30358,7 @@ void F2fThis::FUN_0042f6e0()
 {
     bool done = false;
     if (unk2c->name.Length() > 0 && !unk2c->FUN_00404660()) {
-        DAT_0106ca70->FUN_0042ca20(static_cast<F2fA2cBase18*>(unk2c), (unsigned char)(unk10 >> 16), this, 0, 1, 0, 0);
+        DAT_0106ca70->ModelLoader_QueueModel(static_cast<F2fA2cBase18*>(unk2c), (unsigned char)(unk10 >> 16), this, 0, 1, 0, 0);
         done = true;
     }
     unk2c->FUN_004045f0();
@@ -30345,11 +30373,11 @@ void F2fThis::FUN_0042f6e0()
                 if (x) {
                     if (ref->Bit16()) {
                         if (x->type == 0x28 && x->name.Length() > 0)
-                            { int b = (unsigned char)(unk10 >> 16); DAT_0106ca70->FUN_0042ca20(&x->unk3c, b, this, FUN_00434130(x), 1, 0, 0); }
+                            { int b = (unsigned char)(unk10 >> 16); DAT_0106ca70->ModelLoader_QueueModel(&x->unk3c, b, this, FUN_00434130(x), 1, 0, 0); }
                     } else if (ref->Bit17()) {
                         if (x->type == 0x18) {
-                            { int b = (unsigned char)(unk10 >> 16); DAT_0106ca70->FUN_0042ca20(x->unk70.FUN_004521a0(0), b, this, FUN_00434130(x), 1, 0, 0); }
-                            { int b = (unsigned char)(unk10 >> 16); DAT_0106ca70->FUN_0042ca20(x->unk70.FUN_004521a0(1), b, this, FUN_00434130(x), 1, 0, 0); }
+                            { int b = (unsigned char)(unk10 >> 16); DAT_0106ca70->ModelLoader_QueueModel(x->unk70.FUN_004521a0(0), b, this, FUN_00434130(x), 1, 0, 0); }
+                            { int b = (unsigned char)(unk10 >> 16); DAT_0106ca70->ModelLoader_QueueModel(x->unk70.FUN_004521a0(1), b, this, FUN_00434130(x), 1, 0, 0); }
                         }
                     } else if (ref->Bit18()) {
                         if (x->type == 0x2a) {
@@ -30359,7 +30387,7 @@ void F2fThis::FUN_0042f6e0()
                             delete y;
                         } else if (x->type == 0x2b) {
                             DAT_0106ca70->FUN_0042ea50(&x->unkdc, (unsigned char)(unk10 >> 16), this, 0, 1, 1);
-                            { int b = (unsigned char)(unk10 >> 16); DAT_0106ca70->FUN_0042ca20(&x->unkdc, b, this, FUN_00434130(x), 1, 0, 0); }
+                            { int b = (unsigned char)(unk10 >> 16); DAT_0106ca70->ModelLoader_QueueModel(&x->unkdc, b, this, FUN_00434130(x), 1, 0, 0); }
                         }
                     }
                 }
@@ -31145,9 +31173,9 @@ struct ReloadManager
     bool FUN_00433540(ReloadScene*);
     void FUN_008d7dc0(int x) { unk34=x; }
     void FUN_004346d0(int, ReloadPoint*);
-    int FUN_00435b30(ReloadPoint*);
+    int TES_GetLandGeometry(ReloadPoint*);
     void FUN_004399f0(ReloadPoint*, bool);
-    ReloadCell* FUN_00434810(int, int);
+    ReloadCell* TES_GetGridCellCell(int, int);
     void FUN_00433a30(int, ReloadCell*);
     ReloadShader* FUN_0044ddc0() { return (ReloadShader*)unk08; }
     void FUN_004384b0();
@@ -31206,7 +31234,7 @@ void ReloadManager::FUN_0043a670(ReloadPoint* point)
                 savedX = 0x7fffffff;
                 savedY = 0x7fffffff;
             }
-            else if (!FUN_00435b30(point))
+            else if (!TES_GetLandGeometry(point))
             {
                 gridX = 0x7fffffff;
                 gridY = 0x7fffffff;
@@ -31231,7 +31259,7 @@ void ReloadManager::FUN_0043a670(ReloadPoint* point)
     mode = DAT_01079858->FUN_0042ce10();
     stateB = DAT_01079ca4->FUN_008257f0();
     FUN_004399f0(point, !stateB);
-    ReloadCell* cellA = FUN_00434810(gridX, gridY);
+    ReloadCell* cellA = TES_GetGridCellCell(gridX, gridY);
     if (DAT_0106ca70->FUN_00424890(cellA))
         FUN_00433a30(1, cellA);
     if (ReloadGetRoot())
@@ -31500,14 +31528,14 @@ struct File {
     RecordHeader* Header() { return &header; }
     bool FUN_00446f10();
     bool FUN_00449ac0(int a, int b);
-    bool FUN_00448ef0(int a);
-    bool FUN_00448da0();
+    bool TESFile_NextForm(int a);
+    bool TESFile_NextGroup();
     File* FUN_00446ec0(unsigned int index);
     unsigned char FUN_00447100();
-    int FUN_004487d0();
+    int TESFile_GetTESChunk();
     void FUN_00447d60(void* buf, int size);
-    bool FUN_00447020();
-    void FUN_004485f0();
+    bool TESFile_NextChunk();
+    void TESFile_CloseTES();
 };
 struct Item {
     bool FUN_00503cd0(const char* name, int* px, int* py);
@@ -31529,7 +31557,7 @@ extern Owner* DAT_0106cdcc;
 extern unsigned int DAT_00f4a768;
 extern unsigned int DAT_00f4aa5c;
 extern unsigned int DAT_00f4a9fc;
-void* __cdecl FUN_00455190(unsigned int id);
+void* __cdecl TESForm_GetFormByNumericID(unsigned int id);
 void __cdecl FUN_00455100(unsigned int v);
 void* __cdecl FUN_00c0050a(void* object, int unused, const void* baseType, const void* targetType, int flags);
 void* __cdecl FUN_00c00610(void* dst, int v, unsigned int n);
@@ -31688,12 +31716,12 @@ void* Handler::FUN_0043c730(const char* name, int* px, int* py)
                 if (h->type == DAT_00f4a768) {
                     if (h->unk0c == 0 && h->unk08 == DAT_00f4aa5c) {
                         found = true;
-                        read = file->FUN_00448ef0(1);
+                        read = file->TESFile_NextForm(1);
                     } else {
-                        read = file->FUN_00448da0();
+                        read = file->TESFile_NextGroup();
                     }
                 } else {
-                    read = file->FUN_00448ef0(1);
+                    read = file->TESFile_NextForm(1);
                 }
                 if (read)
                     h = file->Header();
@@ -31714,10 +31742,10 @@ void* Handler::FUN_0043c730(const char* name, int* px, int* py)
                             master = file;
                         unsigned int index = master->FUN_00447100();
                         unsigned int formId = (index << 24) | (id & 0xffffff);
-                        result = FUN_00c0050a(FUN_00455190(formId), 0, DAT_00f46078, DAT_00f47a58, 0);
-                        ok = file->FUN_00448ef0(1);
+                        result = FUN_00c0050a(TESForm_GetFormByNumericID(formId), 0, DAT_00f46078, DAT_00f47a58, 0);
+                        ok = file->TESFile_NextForm(1);
                     } else if (type == DAT_00f4a9fc) {
-                        int sub = file->FUN_004487d0();
+                        int sub = file->TESFile_GetTESChunk();
                         if (sub == 0x44494445) {
                             unsigned int size = file->unk25c + 1;
                             char* buf = (char*)DAT_01090a78.FUN_0086b930(size);
@@ -31736,14 +31764,14 @@ void* Handler::FUN_0043c730(const char* name, int* px, int* py)
                                         *py = xclc.y;
                                         break;
                                     }
-                                    if (!file->FUN_00447020())
+                                    if (!file->TESFile_NextChunk())
                                         break;
-                                    sub = file->FUN_004487d0();
+                                    sub = file->TESFile_GetTESChunk();
                                 }
                             }
                             DAT_01090a78.FUN_0086ba60(buf);
                         }
-                        ok = file->FUN_00448ef0(1);
+                        ok = file->TESFile_NextForm(1);
                     } else if (type == DAT_00f4a768) {
                         switch (h->unk0c) {
                         case 0:
@@ -31754,10 +31782,10 @@ void* Handler::FUN_0043c730(const char* name, int* px, int* py)
                         case 1:
                         case 4:
                         case 5:
-                            ok = file->FUN_00448ef0(1);
+                            ok = file->TESFile_NextForm(1);
                             break;
                         case 6:
-                            ok = file->FUN_00448da0();
+                            ok = file->TESFile_NextGroup();
                             break;
                         default:
                             goto done;
@@ -31772,7 +31800,7 @@ void* Handler::FUN_0043c730(const char* name, int* px, int* py)
                 }
             }
     done:
-            file->FUN_004485f0();
+            file->TESFile_CloseTES();
             if (found)
                 break;
             result = 0;
@@ -31958,7 +31986,7 @@ extern __declspec(thread) TLS tls;
 struct MemGuard {unsigned previous;MemGuard(unsigned c):previous(tls.context){tls.context=c;}~MemGuard(){tls.context=previous;}};
 struct Heap{void FUN_0086ba60(void*);};extern Heap DAT_01090a78;
 struct FileList {char* item;FileList* next;bool FUN_00645c20();void FUN_00415d70();void FUN_006c8220();~FileList(){FUN_006c8220();}static void operator delete(void* p){DAT_01090a78.FUN_0086ba60(p);}};
-struct Manager{void* FUN_00553cc0(char*,int);void* FUN_00554680(char*,void*,bool);};extern Manager* DAT_010721b8;
+struct Manager{void* TESIdleManager_GetRootFilenameList(char*,int);void* FUN_00554680(char*,void*,bool);};extern Manager* DAT_010721b8;
 void* __cdecl FUN_00bc7e30(char*,char*,bool,void*);
 struct Loader{void* FUN_0042a040(void*,void*);void* FUN_0042d160(char*,bool,bool,int);};
 void* Loader::FUN_0042d160(char* apPath, bool abLoadLocomotion, bool arg2, int aiIndex)
@@ -31968,7 +31996,7 @@ void* Loader::FUN_0042d160(char* apPath, bool abLoadLocomotion, bool arg2, int a
     char buf6[260];
     char* p;
     void* res3;
-    if (DAT_010721b8 != 0 && DAT_010721b8->FUN_00553cc0(apPath, 0) != 0)
+    if (DAT_010721b8 != 0 && DAT_010721b8->TESIdleManager_GetRootFilenameList(apPath, 0) != 0)
     {
         retVal_2 = 0;
         if (aiIndex == 12)
@@ -31978,22 +32006,22 @@ void* Loader::FUN_0042d160(char* apPath, bool abLoadLocomotion, bool arg2, int a
             {
                 if (retVal_2 != 0)
                 {
-                    FUN_0042a040(DAT_010721b8->FUN_00553cc0(apPath, i5), retVal_2);
+                    FUN_0042a040(DAT_010721b8->TESIdleManager_GetRootFilenameList(apPath, i5), retVal_2);
                 }
                 else
                 {
-                    retVal_2 = FUN_0042a040(DAT_010721b8->FUN_00553cc0(apPath, i5), 0);
+                    retVal_2 = FUN_0042a040(DAT_010721b8->TESIdleManager_GetRootFilenameList(apPath, i5), 0);
                 }
             }
         }
         else if (aiIndex != 0 && arg2)
         {
-            retVal_2 = FUN_0042a040(DAT_010721b8->FUN_00553cc0(apPath, 0), 0);
-            FUN_0042a040(DAT_010721b8->FUN_00553cc0(apPath, aiIndex), retVal_2);
+            retVal_2 = FUN_0042a040(DAT_010721b8->TESIdleManager_GetRootFilenameList(apPath, 0), 0);
+            FUN_0042a040(DAT_010721b8->TESIdleManager_GetRootFilenameList(apPath, aiIndex), retVal_2);
         }
         else
         {
-            retVal_2 = FUN_0042a040(DAT_010721b8->FUN_00553cc0(apPath, aiIndex), 0);
+            retVal_2 = FUN_0042a040(DAT_010721b8->TESIdleManager_GetRootFilenameList(apPath, aiIndex), 0);
         }
         return retVal_2;
     }
@@ -32154,7 +32182,7 @@ struct Cell4346d0 {
 
 struct Lookup4346d0 {
     Cell4346d0** FUN_0047b220(unsigned int x, unsigned int y);
-    void FUN_0047b560(int a, unsigned int x, unsigned int y);
+    void GridCellArray_AttachToWorld(int a, unsigned int x, unsigned int y);
 };
 
 struct Child4346d0 {
@@ -32223,7 +32251,7 @@ void Obj4346d0::FUN_004346d0(bool flag, int unused)
                     cell->FUN_004e50d0(0);
             } else {
                 if (cell && cell->unk26 == 3) {
-                    lookup08->FUN_0047b560(unk0C, x, y);
+                    lookup08->GridCellArray_AttachToWorld(unk0C, x, y);
                     cell->FUN_004e4670(0);
                 }
             }
@@ -32657,7 +32685,7 @@ struct Cell435 {
 };
 
 struct World435 { Cell435* FUN_00503ea0(int x, int y); };
-struct Lookup435 { void* FUN_0047b220(unsigned int x, unsigned int y); bool FUN_0047b2a0(unsigned int x, unsigned int y); };
+struct Lookup435 { void* FUN_0047b220(unsigned int x, unsigned int y); bool GridCellArray_GetAttached(unsigned int x, unsigned int y); };
 struct Data435 { Cell435* FUN_0043c690(int x, int y, World435* w, bool create); };
 namespace N435 { extern Data435* DAT_0106cdcc; }
 
@@ -32711,7 +32739,7 @@ void Owner435::FUN_00435ea0(int mode)
     for (unsigned i = 0; this && i < DAT_0106e9cc; i++) {
         for (unsigned j = 0; this && j < DAT_0106e9cc; j++) {
             switch (mode) {
-            case 0: if (lookup->FUN_0047b2a0(i, j)) continue; break;
+            case 0: if (lookup->GridCellArray_GetAttached(i, j)) continue; break;
             case 1: if (lookup->FUN_0047b220(i, j)) continue; break;
             }
             if (world) {
@@ -34155,10 +34183,10 @@ extern Heap DAT_01090a78;
 extern int DAT_00f46078;
 extern int DAT_00f47aa8;
 struct SaveArg {
-    int FUN_00455470(int a);
+    int TESForm_GetFile(int a);
 };
-void __cdecl FUN_00454a40(unsigned int* pId, int ctx);
-void* __cdecl FUN_00455190(unsigned int id);
+void __cdecl TESForm_AddCompileIndex(unsigned int* pId, int ctx);
+void* __cdecl TESForm_GetFormByNumericID(unsigned int id);
 void* __cdecl FUN_00c0050a(void* p, int offset, void* srcType, void* dstType, int isRef);
 
 struct Item {
@@ -34228,8 +34256,8 @@ void Owner::FUN_00420590(SaveArg* arg) {
         Item* item = cur->item;
         Item* key = item;
         unsigned int id = (unsigned int)item->form;
-        FUN_00454a40(&id, arg->FUN_00455470(-1));
-        void* resolved = FUN_00c0050a(FUN_00455190(id), 0, &DAT_00f46078, &DAT_00f47aa8, 0);
+        TESForm_AddCompileIndex(&id, arg->TESForm_GetFile(-1));
+        void* resolved = FUN_00c0050a(TESForm_GetFormByNumericID(id), 0, &DAT_00f46078, &DAT_00f47aa8, 0);
         if (!resolved) {
             if (prev) {
                 prev->FUN_00421610(key);
@@ -34249,7 +34277,7 @@ void Owner::FUN_00420590(SaveArg* arg) {
 
 // @f3 0x00439940 (community match, verified in this file)
 namespace f3m_00439940 {
-void __stdcall FUN_00435fb0(void* value);
+void __stdcall TES_SetWorldSpace(void* value);
 void __cdecl FUN_005736a0();
 
 struct FUN_00439940_Owner {
@@ -34302,7 +34330,7 @@ void __thiscall FUN_00439940_Owner::FUN_00439940(float* position, unsigned int f
     int savedY = unk28;
 
     if (unk88 == 0) {
-        FUN_00435fb0((void*)f3m_00433ff0::DAT_0106cdcc->unk00c);
+        TES_SetWorldSpace((void*)f3m_00433ff0::DAT_0106cdcc->unk00c);
     }
 
     if (position != 0) {
@@ -34353,9 +34381,10 @@ struct Cell;
 struct World;
 struct DataHandler {
     Cell* FUN_0043c690(int x, int y, World* world, bool create);
-    Cell* FUN_0043eda0(float x, float y, World* world, bool create);
+    Cell* TESDataHandler_GetCellFromWorldCoord(float x, float y, World* world, bool create);
 };
-Cell* DataHandler::FUN_0043eda0(float x, float y, World* world, bool create)
+// pdb: TESDataHandler::GetCellFromWorldCoord | TESDataHandler.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+Cell* DataHandler::TESDataHandler_GetCellFromWorldCoord(float x, float y, World* world, bool create)
 {
     int cellX = fnv_FloatToInt(x);
     int cellY = fnv_FloatToInt(y);
@@ -34378,16 +34407,16 @@ struct Point3 {
     __forceinline Scalar GetY() const { return Scalar(y); }
 };
 struct QueryResult { float x,y,z,w; };
-struct Land { bool FUN_004cd700(const Point3* position, QueryResult* output); };
+struct Land { bool TESObjectLAND_GetLandColor(const Point3* position, QueryResult* output); };
 struct Cell {
     int unk00,unk04,unk08,unk0c,unk10,unk14,unk18,unk1c,unk20;
     unsigned short unk24;
     unsigned char state;
-    Land* FUN_004d5270();
+    Land* TESObjectCELL_GetLand();
     __forceinline bool SupportsQuery() const { switch (static_cast<int>(state)) { case 2: return true; case 3: return true; case 4: return true; case 5: return true; case 6: return true; default: return false; } }
 };
 struct Grid {
-    Cell* FUN_00434810(int x, int y);
+    Cell* TES_GetGridCellCell(int x, int y);
     bool FUN_00435a50(const Point3* position, QueryResult* output);
 };
 bool Grid::FUN_00435a50(const Point3* position, QueryResult* output) {
@@ -34395,9 +34424,9 @@ bool Grid::FUN_00435a50(const Point3* position, QueryResult* output) {
     int cellY = fnv_FloatToInt(position->GetY());
     if (cellX % 4096 == 0 && position->x < static_cast<double>(cellX)) --cellX;
     if (cellY % 4096 == 0 && position->y < static_cast<double>(cellY)) --cellY;
-    Cell* cell = FUN_00434810(cellX >> 12, cellY >> 12);
+    Cell* cell = TES_GetGridCellCell(cellX >> 12, cellY >> 12);
     if (cell && cell->SupportsQuery())
-        return cell->FUN_004d5270()->FUN_004cd700(position, output);
+        return cell->TESObjectCELL_GetLand()->TESObjectLAND_GetLandColor(position, output);
     return false;
 }
 }
@@ -34421,11 +34450,11 @@ struct Cell {
     int unk00,unk04,unk08,unk0c,unk10,unk14,unk18,unk1c,unk20;
     unsigned short unk24;
     unsigned char state;
-    Land* FUN_004d5270();
+    Land* TESObjectCELL_GetLand();
     __forceinline bool SupportsQuery() const { switch (static_cast<int>(state)) { case 2: return true; case 3: return true; case 4: return true; case 5: return true; case 6: return true; default: return false; } }
 };
 struct Grid {
-    Cell* FUN_00434810(int x, int y);
+    Cell* TES_GetGridCellCell(int x, int y);
     bool FUN_00435950(const Point3* position, Point3* normal, Point3* output);
 };
 bool Grid::FUN_00435950(const Point3* position, Point3* normal, Point3* output) {
@@ -34435,9 +34464,9 @@ bool Grid::FUN_00435950(const Point3* position, Point3* normal, Point3* output) 
     if (cellY % 4096 == 0 && position->y < static_cast<double>(cellY)) --cellY;
     *normal = DAT_0108ec68;
     normal->z = 1.0f;
-    Cell* cell = FUN_00434810(cellX >> 12, cellY >> 12);
+    Cell* cell = TES_GetGridCellCell(cellX >> 12, cellY >> 12);
     if (cell && cell->SupportsQuery())
-        return cell->FUN_004d5270()->FUN_004ccb20(position, normal, output);
+        return cell->TESObjectCELL_GetLand()->FUN_004ccb20(position, normal, output);
     return false;
 }
 }
@@ -34547,16 +34576,16 @@ struct Point {
     float x, y, z;
 };
 struct Land {
-    bool FUN_004ce320(const Point& pos, float& outZ);
+    bool TESObjectLAND_GetLandHeight(const Point& pos, float& outZ);
 };
 struct Cell {
     int unk00, unk04, unk08, unk0c, unk10, unk14, unk18, unk1c, unk20;
     unsigned short unk24;
     unsigned char type;
-    Land* FUN_004d5270();
+    Land* TESObjectCELL_GetLand();
 };
 struct TES {
-    Cell* FUN_00434810(int x, int y);
+    Cell* TES_GetGridCellCell(int x, int y);
     bool FUN_00435870(const Point& pos, float& outZ);
 };
 bool TES::FUN_00435870(const Point& pos, float& outZ) {
@@ -34567,7 +34596,7 @@ bool TES::FUN_00435870(const Point& pos, float& outZ) {
     if (iy % 4096 == 0 && pos.y < (float)iy)
         --iy;
     outZ = DAT_00db889c;
-    Cell* cell = FUN_00434810(ix >> 12, iy >> 12);
+    Cell* cell = TES_GetGridCellCell(ix >> 12, iy >> 12);
     if (cell) {
         switch (cell->type) {
         case 2:
@@ -34581,7 +34610,7 @@ bool TES::FUN_00435870(const Point& pos, float& outZ) {
         default:
             return false;
         }
-        return cell->FUN_004d5270()->FUN_004ce320(pos, outZ);
+        return cell->TESObjectCELL_GetLand()->TESObjectLAND_GetLandHeight(pos, outZ);
     }
     return false;
 }
@@ -34845,9 +34874,9 @@ virtual void slot150();
 virtual void slot151();
 virtual void reset();
 };
-struct Manager {void FUN_0078f2d0(Actor*);};
+struct Manager {void ProcessLists_RemoveActorFromTempChangeList(Actor*);};
 extern Manager DAT_0107c0a0;
-void __stdcall FUN_004333f0(Actor* actor){if(actor->isActor()){actor->reset();DAT_0107c0a0.FUN_0078f2d0(actor);}}
+void __stdcall FUN_004333f0(Actor* actor){if(actor->isActor()){actor->reset();DAT_0107c0a0.ProcessLists_RemoveActorFromTempChangeList(actor);}}
 }
 
 // @f3 0x00427b80 (community match, verified in this file)
@@ -35309,10 +35338,10 @@ struct Reference {
     unsigned unk20, unk24, unk28, unk2c;
     unsigned unk30, unk34, unk38, unk3c;
     ExtraList extra40;
-    void FUN_004e6b20(bool);
+    void TESObjectREFR_SetRefPersists(bool);
 };
 struct World {
-    Cell* FUN_00501d20(int x, int y);
+    Cell* TESWorldSpace_GetCellFromCellCoord(int x, int y);
     void* FUN_00896c00();
 };
 struct Player {
@@ -35329,7 +35358,7 @@ Reference* __stdcall FUN_0043bf10(Form* form, const Vector3* position, const Vec
     if (world) {
         int x = fnv_FloatToInt(position->x);
         int y = fnv_FloatToInt(position->y);
-        destination = world->FUN_00501d20(x >> 12, y >> 12);
+        destination = world->TESWorldSpace_GetCellFromCellCoord(x >> 12, y >> 12);
         if (!destination)
             DAT_0107a104->FUN_004e8880();
     } else {
@@ -35339,7 +35368,7 @@ Reference* __stdcall FUN_0043bf10(Form* form, const Vector3* position, const Vec
     matrix.FUN_00823a50(angles->z, angles->y, angles->x);
     result = FUN_007bc5b0(form, 0, 0, destination, *position, matrix);
     if (!destination && world) {
-        result->FUN_004e6b20(true);
+        result->TESObjectREFR_SetRefPersists(true);
         result->extra40.FUN_00411890(world->FUN_00896c00());
     }
     }
@@ -35520,7 +35549,7 @@ struct Stream {
     unsigned int unk294;
     unsigned char unk298;
     unsigned char swapBytes;
-    unsigned int FUN_004487d0();
+    unsigned int TESFile_GetTESChunk();
     void FUN_00447d60(void* destination, unsigned int size);
 };
 struct Word {
@@ -35535,7 +35564,7 @@ struct Owner {
 };
 bool Owner::FUN_00422a30(Stream* stream) {
     bool success = false;
-    if (stream && stream->FUN_004487d0() == 0x4F424D58) {
+    if (stream && stream->TESFile_GetTESChunk() == 0x4F424D58) {
         stream->FUN_00447d60(this, 12);
         if (stream->swapBytes != success) {
             firstWord.Swap();
@@ -35669,9 +35698,10 @@ struct Grid {
     int unk80;
     int unk84;
     World* world;
-    Cell* FUN_00434810(int x, int y);
+    Cell* TES_GetGridCellCell(int x, int y);
 };
-Cell* Grid::FUN_00434810(int x, int y) {
+// pdb: TES::GetGridCellCell | TES.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+Cell* Grid::TES_GetGridCellCell(int x, int y) {
     unsigned int dimension = DAT_0106e9cc;
     int ix = (dimension >> 1) - originX + x;
     int iy = (dimension >> 1) - originY + y;
@@ -35834,7 +35864,7 @@ struct Owner{int unk00,unk04,unk08;Node head;void FUN_00420960();void FUN_00421c
 // @f3 0x00422700 (community match, verified in this file)
 namespace f3m_00422700 {
 namespace Load352 {
-struct Reader{unsigned FUN_004487d0();bool FUN_00447020();void FUN_00447d60(void*,unsigned);void FUN_00448830(unsigned short*);};struct Owner;void FUN_00456560(Owner*,Reader*);struct Owner{int unk00,unk04,unk08;unsigned char first,second;unsigned short value;bool FUN_00422700(Reader*);};bool Owner::FUN_00422700(Reader* r){if(r&&r->FUN_004487d0()==0x4b524d58&&r->FUN_00447020()){if(r->FUN_004487d0()==0x4d414e46){r->FUN_00447d60(&first,1);second=first;if(!r->FUN_00447020())return false;}if(r->FUN_004487d0()==0x4c4c5546){FUN_00456560(this,r);if(r->FUN_00447020()&&r->FUN_004487d0()==0x4d414e54){r->FUN_00448830(&value);return true;}}}return false;}
+struct Reader{unsigned TESFile_GetTESChunk();bool TESFile_NextChunk();void FUN_00447d60(void*,unsigned);void TESFile_GetChunkData(unsigned short*);};struct Owner;void FUN_00456560(Owner*,Reader*);struct Owner{int unk00,unk04,unk08;unsigned char first,second;unsigned short value;bool FUN_00422700(Reader*);};bool Owner::FUN_00422700(Reader* r){if(r&&r->TESFile_GetTESChunk()==0x4b524d58&&r->TESFile_NextChunk()){if(r->TESFile_GetTESChunk()==0x4d414e46){r->FUN_00447d60(&first,1);second=first;if(!r->TESFile_NextChunk())return false;}if(r->TESFile_GetTESChunk()==0x4c4c5546){FUN_00456560(this,r);if(r->TESFile_NextChunk()&&r->TESFile_GetTESChunk()==0x4d414e54){r->TESFile_GetChunkData(&value);return true;}}}return false;}
 }
 }   // namespace f3m_00422700
 
@@ -35933,7 +35963,7 @@ struct Form {
     int unk04;
     unsigned int flags08;
     bool TestBit(unsigned int bit) const { return (flags08 >> bit) & 1; }
-    Target* FUN_00455470(int index);
+    Target* TESForm_GetFile(int index);
 };
 struct Owner {
     int unk000, unk004, unk008, unk00C, unk010, unk014, unk018, unk01C;
@@ -35957,7 +35987,7 @@ bool Owner::FUN_0043bb60(Form* form, int unused)
 {
     if (!target198)
         return false;
-    Target* found = form->FUN_00455470(-1);
+    Target* found = form->TESForm_GetFile(-1);
     if (found != target198 || target198->FUN_00446f00()) {
         if (!form->TestBit(1))
             return false;
@@ -36227,7 +36257,7 @@ namespace Notify451 {
 struct Owner;
 struct Child { int unk00,unk04,unk08,unk0c,unk10,unk14; int payload; };
 struct Attachments {Child* slots[9];};
-struct Manager {void FUN_0042ca20(void*,unsigned,Owner*,int,int,int,int);};
+struct Manager {void ModelLoader_QueueModel(void*,unsigned,Owner*,int,int,int,int);};
 struct Update {
  virtual void Slot00();virtual void Slot04();virtual void Slot08();virtual void Slot0c();
  virtual void Slot10();virtual void Slot14();virtual void Slot18();virtual void Slot1c();
@@ -36248,7 +36278,7 @@ void Owner::FUN_0042e2f0() {
  if(attachments) {
   for(int i=7;i<9;++i) {
    Child* child=attachments->slots[i];
-   if(child) DAT_0106ca70->FUN_0042ca20(&child->payload,(unsigned char)(flags>>16),this,2,1,0,0);
+   if(child) DAT_0106ca70->ModelLoader_QueueModel(&child->payload,(unsigned char)(flags>>16),this,2,1,0,0);
   }
  }
  DAT_0116d138->Remove(this);
@@ -36682,9 +36712,10 @@ struct Owner {
     unsigned unk28;
     Scene* first;
     Scene* second;
-    void FUN_004265a0(Reference* reference,int argument);
+    void QueuedHead_Attach(Reference* reference,int argument);
 };
-void Owner::FUN_004265a0(Reference* reference,int argument)
+// pdb: QueuedHead::Attach | ModelLoader.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+void Owner::QueuedHead_Attach(Reference* reference,int argument)
 {
     MemContext context(0x37);
     reference->receiver->FUN_005564a0(reference,argument,first,second);
@@ -36995,7 +37026,7 @@ struct Reference {
 };
 extern Reference* DAT_0107a104;
 struct WorldManager {
-    bool FUN_00433170(Cell* cell,bool force);
+    bool TES_IsCellLoaded(Cell* cell,bool force);
     bool FUN_004333c0(Reference* reference);
 };
 extern WorldManager* DAT_0107a0d8;
@@ -37061,7 +37092,7 @@ void Owner::FUN_0042fa80() {
     if(related && !asset.value) asset.FUN_00424a00(related->asset);
     bool direct=false;
     if(asset.value && reference!=DAT_0107a104 &&
-       DAT_0107a0d8->FUN_00433170(reference->GetParentCell(),false) &&
+       DAT_0107a0d8->TES_IsCellLoaded(reference->GetParentCell(),false) &&
        DAT_0107a0d8->FUN_004333c0(reference) && !reference->FUN_00424eb0())
         direct=true;
     if(!reference->IsSpecial224() && !reference->IsSpecial220() && direct)
@@ -37579,7 +37610,7 @@ struct Resource {
  ObjectRecord* record;
  Object* Loaded(){if(this==threadContext.currentOwner)return (Object*)threadContext.currentResource;return record->GetObject();}
 };
-struct Manager {bool FUN_00433170(unsigned,int);bool FUN_004333c0(Resource*);};
+struct Manager {bool TES_IsCellLoaded(unsigned,int);bool FUN_004333c0(Resource*);};
 extern Manager* DAT_0107a0d8;
 struct ObjectPtr {Object* p;void FUN_008e9650(Object*);};
 struct Owner {
@@ -37594,7 +37625,7 @@ struct Owner {
 bool Owner::FUN_00426a00(){
  bool result=false;
  TagScope scope(allocationTag);
- if(DAT_0107a0d8->FUN_00433170(resource->GetFormId(),0)){
+ if(DAT_0107a0d8->TES_IsCellLoaded(resource->GetFormId(),0)){
  if(DAT_0107a0d8->FUN_004333c0(resource) && !resource->Loaded()){
   object.FUN_008e9650(resource->Create(true));
   if(object.p)object.p->FUN_00401e70();
@@ -37745,7 +37776,7 @@ namespace f3m_0043be50 {
 namespace F43be50 {
 struct NiPoint3 { float x, y, z; };
 struct Cell;
-struct World { Cell* FUN_00501d20(int x, int y); };
+struct World { Cell* TESWorldSpace_GetCellFromCellCoord(int x, int y); };
 struct Form { int unk00; unsigned char type; };
 void* __cdecl FUN_007c9d80(Form* form, int a, int b, int c, NiPoint3 position, float angleZ, float angleX, int d, int e, int f, int g, float h, float i, Cell* cell);
 void* __stdcall FUN_0043be50(Form* form, NiPoint3* position, NiPoint3* angle, Cell* cell, World* world)
@@ -37755,7 +37786,7 @@ void* __stdcall FUN_0043be50(Form* form, NiPoint3* position, NiPoint3* angle, Ce
         if (world) {
             int x = fnv_FloatToInt(position->x);
             int y = fnv_FloatToInt(position->y);
-            cell = world->FUN_00501d20(x >> 12, y >> 12);
+            cell = world->TESWorldSpace_GetCellFromCellCoord(x >> 12, y >> 12);
         }
         if (cell)
             result = FUN_007c9d80(form, 0, 0, 0, *position, angle->z, angle->x, 0, 0, 0, 0, 0.0f, 0.0f, cell);
@@ -38247,21 +38278,22 @@ struct Cell {
     int unk00,unk04,unk08,unk0c,unk10,unk14,unk18,unk1c,unk20;
     unsigned short unk24;
     unsigned char state;
-    Land* FUN_004d5270();
+    Land* TESObjectCELL_GetLand();
     __forceinline bool SupportsQuery() const { switch (static_cast<int>(state)) { case 2: return true; case 3: return true; case 4: return true; case 5: return true; case 6: return true; default: return false; } }
 };
 struct Grid {
-    Cell* FUN_00434810(int x, int y);
-    LandData* FUN_00435b30(const Point3* position);
+    Cell* TES_GetGridCellCell(int x, int y);
+    LandData* TES_GetLandGeometry(const Point3* position);
 };
-LandData* Grid::FUN_00435b30(const Point3* position) {
+// pdb: TES::GetLandGeometry | TES.obj | fnv360_0822_retail, call_seq + bridge(call_gap|caller), high
+LandData* Grid::TES_GetLandGeometry(const Point3* position) {
     int cellX = fnv_FloatToInt(position->GetX());
     int cellY = fnv_FloatToInt(position->GetY());
     if (cellX % 4096 == 0 && position->x < static_cast<double>(cellX)) --cellX;
     if (cellY % 4096 == 0 && position->y < static_cast<double>(cellY)) --cellY;
-    Cell* cell = FUN_00434810(cellX >> 12, cellY >> 12);
+    Cell* cell = TES_GetGridCellCell(cellX >> 12, cellY >> 12);
     if (cell && cell->SupportsQuery())
-        return cell->FUN_004d5270()->FUN_004ce2c0(position);
+        return cell->TESObjectCELL_GetLand()->FUN_004ce2c0(position);
     return 0;
 }
 }
@@ -38285,13 +38317,13 @@ struct Cell {
     int unk00,unk04,unk08,unk0c,unk10,unk14,unk18,unk1c,unk20;
     unsigned short unk24;
     unsigned char state;
-    Land* FUN_004d5270();
+    Land* TESObjectCELL_GetLand();
 };
 extern int DAT_00f493fc;
 extern int DAT_00f493f8;
 extern LandData* DAT_0106cd80;
 struct Grid {
-    Cell* FUN_00434810(int x, int y);
+    Cell* TES_GetGridCellCell(int x, int y);
     LandData* FUN_00435c00(const Point3* position);
 };
 LandData* Grid::FUN_00435c00(const Point3* position) {
@@ -38305,9 +38337,9 @@ LandData* Grid::FUN_00435c00(const Point3* position) {
     if (blockX == DAT_00f493fc && blockX == DAT_00f493fc) {
         data = DAT_0106cd80;
     } else {
-        Cell* cell = FUN_00434810(cellX >> 12, cellY >> 12);
+        Cell* cell = TES_GetGridCellCell(cellX >> 12, cellY >> 12);
         if (cell) {
-            data = cell->FUN_004d5270()->FUN_004ce270(position);
+            data = cell->TESObjectCELL_GetLand()->FUN_004ce270(position);
             if (data) {
                 DAT_0106cd80 = data;
                 DAT_00f493fc = blockX;
@@ -38381,8 +38413,8 @@ struct ExtraValue : BSExtraData {
 struct BaseExtraList {
     int unk000; int unk004; int unk008; int unk00c; int unk010; int unk014; int unk018; int unk01c;
     void FUN_004174f0(int unused, int data);
-    void FUN_0040a320(BSExtraData* data);
-    void FUN_0040b8e0();
+    void BaseExtraList_AddExtra(BSExtraData* data);
+    void ExtraDataList_RemoveContainerChanges();
 };
 struct BaseForm30 {
     bool FUN_0044f600();
@@ -38408,7 +38440,7 @@ struct Unk3C {
 struct Unk47 {
     void FUN_0047f350();
     void FUN_004854d0();
-    void FUN_00485790();
+    void InventoryChanges_InitScripts();
     bool FUN_0040ead0();
 };
 struct TESObjectCELL;
@@ -38447,13 +38479,13 @@ struct TESObjectREFR {
     Unk3C* unk3c;
     BaseExtraList extraList;
     bool FUN_004eb8f0();
-    void FUN_004e6b20(bool flag);
-    void FUN_004e8670(TESForm* form);
+    void TESObjectREFR_SetRefPersists(bool flag);
+    void TESObjectREFR_SetObjectReference(TESForm* form);
     bool FUN_004eb7f0();
     bool FUN_004e6ab0();
     void FUN_004e6af0(bool flag);
     void FUN_00454220(bool flag);
-    void FUN_004540f0(bool flag);
+    void TESForm_SetDestructible(bool flag);
     void FUN_004eeae0(NiPoint3* pos);
     void FUN_004e86c0(NiPoint3 angle);
     void* FUN_004e66c0();
@@ -38488,10 +38520,10 @@ struct FUN_004f9970 : TESObjectREFR {
 struct TESObjectCELL {
     int unk000; int unk004; int unk008; int unk00c; int unk010; int unk014; int unk018; int unk01c; int unk020;
     unsigned char flags;
-    void FUN_004e52d0(TESObjectREFR* ref, bool flag);
+    void TESObjectCELL_AddReference(TESObjectREFR* ref, bool flag);
 };
 struct TESWorldSpace {
-    TESObjectCELL* FUN_00501d20(int x, int y);
+    TESObjectCELL* TESWorldSpace_GetCellFromCellCoord(int x, int y);
     void FUN_00501fe0(TESObjectREFR* ref);
 };
 struct Actor {
@@ -38537,7 +38569,7 @@ struct Actor {
     unsigned int flags;
 };
 struct Loader {
-    bool FUN_00433170(TESObjectCELL* cell, bool flag);
+    bool TES_IsCellLoaded(TESObjectCELL* cell, bool flag);
 };
 extern Loader* DAT_0107a0d8;
 extern TESForm* DAT_0107164c;
@@ -38572,11 +38604,11 @@ TESObjectREFR* DataHandler::FUN_0043def0(TESForm* form, NiPoint3* pos, NiPoint3*
     result = ref;
     if (ref) {
         wasSet = ref->FUN_004eb8f0();
-        ref->FUN_004e6b20(false);
+        ref->TESObjectREFR_SetRefPersists(false);
         if (ref->unk3c)
             ref->unk3c->FUN_004de880(ref);
         if (!ref->baseForm)
-            ref->FUN_004e8670(form);
+            ref->TESObjectREFR_SetObjectReference(form);
         if (ref->FUN_004eb7f0())
             wasSet = true;
     } else {
@@ -38597,9 +38629,9 @@ TESObjectREFR* DataHandler::FUN_0043def0(TESForm* form, NiPoint3* pos, NiPoint3*
         }
         if (form == DAT_01071658 && extra2)
             result->extraList.FUN_004174f0(0, extra2);
-        result->FUN_004e8670(form);
+        result->TESObjectREFR_SetObjectReference(form);
         if (extra)
-            result->extraList.FUN_0040a320(new ExtraValue(extra));
+            result->extraList.BaseExtraList_AddExtra(new ExtraValue(extra));
         if (result->FUN_004e6ab0())
             result->FUN_004e6af0(true);
         wasSet = result->FUN_004eb7f0();
@@ -38612,24 +38644,24 @@ TESObjectREFR* DataHandler::FUN_0043def0(TESForm* form, NiPoint3* pos, NiPoint3*
     if (result->formID >= 0xff000000)
         result->v18(0);
     if (FUN_0044b010(result->GetBaseObject()))
-        result->FUN_004540f0(true);
+        result->TESForm_SetDestructible(true);
     result->FUN_004eeae0(pos);
     result->FUN_004e86c0(*angle);
     TESObjectCELL* target;
     if (world) {
         int x = fnv_FloatToInt(pos->x) >> 12;
         int y = fnv_FloatToInt(pos->y) >> 12;
-        target = world->FUN_00501d20(x, y);
+        target = world->TESWorldSpace_GetCellFromCellCoord(x, y);
     } else {
         target = cell;
     }
     if (!target) {
         result->v115(0, true);
-        result->FUN_004e6b20(true);
+        result->TESObjectREFR_SetRefPersists(true);
         world->FUN_00501fe0(result);
         goto done;
     }
-    if (DAT_0107a0d8->FUN_00433170(target, false)) {
+    if (DAT_0107a0d8->TES_IsCellLoaded(target, false)) {
         if (form == DAT_0107164c || form == DAT_01071650 || form == DAT_01071644 || form == DAT_0107166c
             || form == DAT_01071660 || form == DAT_01071664 || form == DAT_01071648)
             result->v115(new NiNode(0), true);
@@ -38638,15 +38670,15 @@ TESObjectREFR* DataHandler::FUN_0043def0(TESForm* form, NiPoint3* pos, NiPoint3*
             Unk47* x = FUN_0047e090(result);
             x->FUN_0047f350();
             x->FUN_004854d0();
-            x->FUN_00485790();
+            x->InventoryChanges_InitScripts();
             if (x->FUN_0040ead0())
-                result->extraList.FUN_0040b8e0();
+                result->extraList.ExtraDataList_RemoveContainerChanges();
         }
         result->v138(0);
     }
     result->FUN_004e69f0(true);
-    target->FUN_004e52d0(result, false);
-    result->FUN_004e6b20(wasSet);
+    target->TESObjectCELL_AddReference(result, false);
+    result->TESObjectREFR_SetRefPersists(wasSet);
     {
         NiNode* node = result->v116();
         if (node) {
@@ -39045,7 +39077,7 @@ int unk180; int unk184; int unk188; int unk18c; int unk190; int unk194; int unk1
     int unk1a0;
     int GetValue() const { return unk1a0; }
 };
-struct Handler { void FUN_004265a0(Target* target, int value); };
+struct Handler { void QueuedHead_Attach(Target* target, int value); };
 struct Finisher { void FUN_00426730(); };
 struct Owner {
 int unk000; int unk004; int unk008; int unk00c; int unk010; int unk014;
@@ -39068,7 +39100,7 @@ bool Owner::FUN_00428410()
         SetCurrent((int)unk28, unk34);
         int value = unk28->GetValue();
         if (unk40)
-            unk40->FUN_004265a0(unk28, value);
+            unk40->QueuedHead_Attach(unk28, value);
         if (unk44)
             unk44->FUN_00426730();
         SetCurrent(0, 0);
@@ -39611,7 +39643,7 @@ extern unsigned DAT_0106e9cc, DAT_0106cb70;
 namespace f3m_00434c20 {
 struct Cell;
 struct Grid { Cell** FUN_0047b220(unsigned, unsigned); };
-struct World { Cell* FUN_00501d20(int, int); };
+struct World { Cell* TESWorldSpace_GetCellFromCellCoord(int, int); };
 struct Manager { int unk00; int unk04; int unk08; int unk0c; int unk10; int unk14; int unk18; int unk1c; int unk20; int unk24; int unk28; int unk2c; int unk30; int unk34; int unk38; int unk3c; int unk40; int unk44; int unk48; int unk4c; int unk50; int unk54; int unk58; int unk5c; int unk60; int unk64; int unk68; int unk6c; int unk70; int unk74; int unk78; int unk7c; int unk80; int unk84; World* world; };
 struct Owner
 {
@@ -39641,7 +39673,7 @@ bool Owner::FUN_00434c20()
                 if (!cell)
                 {
                     World* world = ((Manager*)DAT_0107a0d8)->world;
-                    cell = world->FUN_00501d20(row + x0, column + y0);
+                    cell = world->TESWorldSpace_GetCellFromCellCoord(row + x0, column + y0);
                     if (!cell)
                         return false;
                 }
@@ -39870,7 +39902,7 @@ struct TESObjectREFR
 
 struct TES
 {
-    bool FUN_00433170(TESObjectCELL* cell, bool flag);
+    bool TES_IsCellLoaded(TESObjectCELL* cell, bool flag);
     void FUN_004348e0(TESObjectREFR* ref, TESObjectCELL* cell, void* task, bool flag);
 };
 extern TES* DAT_0107a0d8;
@@ -39924,7 +39956,7 @@ void f3m_0042e4f0::QueuedReference::FUN_0042e4f0()
     if (IsCanceled())
         return;
     bool disabled = m_ref->IsDisabled() || m_ref->IsDeleted();
-    if (!disabled && DAT_0107a0d8->FUN_00433170(m_ref->GetParentCell(), false))
+    if (!disabled && DAT_0107a0d8->TES_IsCellLoaded(m_ref->GetParentCell(), false))
     {
         if (m_modelEntry)
             DAT_0106ca70->FUN_0042db50(m_ref, m_modelEntry->m_model);
@@ -40585,10 +40617,11 @@ struct ModelLoader430090 {
     int unk24;
     int unk28;
     unsigned char unk2c;
-    void FUN_00430090(bool flag);
+    void ModelLoader_ClearUnusedModels(bool flag);
 };
 
-void ModelLoader430090::FUN_00430090(bool flag)
+// pdb: ModelLoader::ClearUnusedModels | ModelLoader.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+void ModelLoader430090::ModelLoader_ClearUnusedModels(bool flag)
 {
     if (!flag) {
         if (DAT_01079858 != 0 && ((unsigned char)(DAT_01079858->unk244 >> 1) & 1)) {
@@ -41250,7 +41283,7 @@ struct ActorQ
 
     void* FUN_006f6cc0();
 
-    int FUN_006f4a50();
+    int Actor_GetSex();
 
 };
 
@@ -41266,7 +41299,7 @@ struct AnimManager
 
 {
 
-    void* FUN_00553cc0(char* path, int flags, AnimList* list);
+    void* TESIdleManager_GetRootFilenameList(char* path, int flags, AnimList* list);
 
 };
 
@@ -41454,7 +41487,7 @@ void AnimLoader::FUN_0042ea50(TESModel* model, int priority, void* queued, Actor
 
                     strcpy_s(directorySlash, 260 - (directorySlash - path) - 1, DAT_00db856c);
 
-                else if (actor->FUN_006f4a50() == 1)
+                else if (actor->Actor_GetSex() == 1)
 
                     strcpy_s(directorySlash, 260 - (directorySlash - path) - 1, DAT_00db854c);
 
@@ -41464,7 +41497,7 @@ void AnimLoader::FUN_0042ea50(TESModel* model, int priority, void* queued, Actor
 
                 { void* m = N42ea50::DAT_01090a78.FUN_0086b930(8); memset(&list,0,sizeof(list)); if(m != list) { ((AnimList**)m)[0]=list; ((AnimList**)m)[1]=list; list=(AnimList*)m; } }
 
-                N42ea50::DAT_0106ca70->FUN_0042a040(N42ea50::DAT_010721b8->FUN_00553cc0(path, loadFlags, list));
+                N42ea50::DAT_0106ca70->FUN_0042a040(N42ea50::DAT_010721b8->TESIdleManager_GetRootFilenameList(path, loadFlags, list));
 
             }
 
@@ -41778,7 +41811,7 @@ struct Model {
     Entry** entries;
     int unk224;
     unsigned int count;
-    void FUN_00aa6910();
+    void BSStream_FreeAllObjects();
 };
 struct NodePtr {
     Node* obj;
@@ -41803,7 +41836,7 @@ extern const char DAT_00db79b0[];
 extern const char DAT_00db7960[];
 extern long DAT_0116d6bc;
 bool FUN_00bc84f0(const char* text, const char* pattern);
-void FUN_00478350(Node* node);
+void RemoveEditorMarkers(Node* node);
 bool FUN_00478250(Node* node);
 void FUN_00ade300(Node* node, bool a, bool b);
 void __cdecl FUN_00887da0(const char* format, ...);
@@ -41829,7 +41862,7 @@ void Loaded::FUN_00425190(const char* path, Model* model, bool a, bool b) {
     memset(&pair, 0, sizeof(pair));
     SetName(path);
     if (model->count == 0) {
-        model->FUN_00aa6910();
+        model->BSStream_FreeAllObjects();
         if (!model->Load(DAT_00db7a14, 0)) {
             name = 0;
             return;
@@ -41858,7 +41891,7 @@ void Loaded::FUN_00425190(const char* path, Model* model, bool a, bool b) {
         }
         if (!found) return;
     }
-    FUN_00478350(node);
+    RemoveEditorMarkers(node);
     if (DAT_00f4882c) {
         Entry* child = node->unk0c;
         if (child) {
@@ -42521,11 +42554,11 @@ extern char DAT_00f46078;
 extern char DAT_00f47aa8;
 
 void* __cdecl FUN_00c0050a(void* object, int unused, void* baseType, void* targetType, int flags);
-void* __cdecl FUN_00455190(unsigned int id);
-void __cdecl FUN_00454a40(unsigned int* pId, int context);
+void* __cdecl TESForm_GetFormByNumericID(unsigned int id);
+void __cdecl TESForm_AddCompileIndex(unsigned int* pId, int context);
 
 struct SaveArg {
-    int FUN_00455470(int index);
+    int TESForm_GetFile(int index);
 };
 
 struct ExtraList {
@@ -42631,8 +42664,8 @@ void Owner::FUN_00421bb0(SaveArg* arg)
         Item* item = cur->item;
         bool remove = true;
         unsigned int id = (unsigned int)item->form;
-        FUN_00454a40(&id, arg->FUN_00455470(-1));
-        RefObj* ref = (RefObj*)FUN_00c0050a(FUN_00455190(id), 0, &DAT_00f46078, &DAT_00f47aa8, 0);
+        TESForm_AddCompileIndex(&id, arg->TESForm_GetFile(-1));
+        RefObj* ref = (RefObj*)FUN_00c0050a(TESForm_GetFormByNumericID(id), 0, &DAT_00f46078, &DAT_00f47aa8, 0);
         if (ref && ref->FUN_004eb8f0()) {
             if (item->flags04 & 1)
                 ref->m_extra.FUN_004142f0(arg, true);
@@ -44507,7 +44540,7 @@ struct Grid_00438c80
     World* world;
     World* GetWorld() { return world; }
     CellList list8c;
-    void FUN_00438ae0(unsigned int gx, unsigned int gy, int cx, int cy);
+    void TES_LoadGridCell(unsigned int gx, unsigned int gy, int cx, int cy);
     void FUN_00433570(Cell* cell);
     void FUN_00434ff0(Cell* cell);
     void PushBuffered(Cell* cell)
@@ -44541,7 +44574,7 @@ void Grid_00438c80::FUN_00438c80()
     {
         for (unsigned int gy = 0; gy >= 0 && gy < GetGridsToLoad(); ++gy)
         {
-            FUN_00438ae0(gx, gy, cornerX + gx, cornerY + gy);
+            TES_LoadGridCell(gx, gy, cornerX + gx, cornerY + gy);
             // the world through the inline accessor: read directly, the outer loop's index and count trade eax/ecx
             Cell* cell = DAT_0106cdcc->FUN_0043c690(cornerX + gx, cornerY + gy, GetWorld(), false);
             // the inlined test on the buffers global: each search arm loads the global into esi and the two
@@ -45052,10 +45085,10 @@ struct S004399f0_TES {
 
     void FUN_004384b0();
     void FUN_00438420();
-    S004399f0_Cell* FUN_00434810(int x, int y);
-    int FUN_00433630(bool b);
+    S004399f0_Cell* TES_GetGridCellCell(int x, int y);
+    int TES_FreeInteriorBuffer(bool b);
     void FUN_00433420(bool b);
-    void FUN_00435fb0(void* p);
+    void TES_SetWorldSpace(void* p);
     void FUN_00434c20();
     void FUN_00435ea0(bool b);
     void FUN_00438c80();
@@ -45099,7 +45132,7 @@ int S004399f0_TES::FUN_004399f0(const S004399f0_Point* pos, bool arg)
     S004399f0_Cell* cell = interior;
     if (!cell) {
         if (gridX != 0x7fffffff && gridY != 0x7fffffff)
-            cell = FUN_00434810(gridX, gridY);
+            cell = TES_GetGridCellCell(gridX, gridY);
         else
             cell = 0;
     }
@@ -45123,7 +45156,7 @@ int S004399f0_TES::FUN_004399f0(const S004399f0_Point* pos, bool arg)
                 int cx = x >> 12;
                 int cy = y >> 12;
                 if (lastX != cx || lastY != cy) {
-                    if (*DAT_0106cc0c.Get() && FUN_00433630(true))
+                    if (*DAT_0106cc0c.Get() && TES_FreeInteriorBuffer(true))
                         FUN_00433420(false);
                     int half = *DAT_0106e9c8.Get() >> 1;
                     int newX = lastX;
@@ -45181,10 +45214,10 @@ int S004399f0_TES::FUN_004399f0(const S004399f0_Point* pos, bool arg)
         if (DAT_01070b50->FUN_004c1a50())
             DAT_01070b50->FUN_004c1b10();
         if (!interior || forced) {
-            if (DAT_0106cc10 && FUN_00433630(true))
+            if (DAT_0106cc10 && TES_FreeInteriorBuffer(true))
                 FUN_00433420(false);
             if (!world)
-                FUN_00435fb0(DAT_0106cdcc->unk0c);
+                TES_SetWorldSpace(DAT_0106cdcc->unk0c);
             bool moved = false;
             if (abs(ddx) > 1 || abs(ddy) > 1)
                 moved = true;
@@ -45246,8 +45279,8 @@ namespace f3m_00433c10 {
 struct S00433c10_Cell {
     int unk00; int unk04; int unk08; int unk0C; int unk10; int unk14; int unk18; int unk1C; int unk20;
     unsigned char flags24;
-    int FUN_004d3430();
-    int FUN_004d3450();
+    int TESObjectCELL_GetDataX();
+    int TESObjectCELL_GetDataY();
 };
 S00433c10_Cell* DAT_0106cd5c;
 int DAT_0106cd58;
@@ -45266,12 +45299,12 @@ int S00433c10_Grid::FUN_00433c10(S00433c10_Cell* cell, const float* pos)
         y = DAT_0106e9cc >> 1;
     }
     else if (pos) {
-        x = cell->FUN_004d3430() + ((DAT_0106e9cc >> 1) - (fnv_FloatToInt(pos[0]) >> 12));
-        y = cell->FUN_004d3450() + ((DAT_0106e9cc >> 1) - (fnv_FloatToInt(pos[1]) >> 12));
+        x = cell->TESObjectCELL_GetDataX() + ((DAT_0106e9cc >> 1) - (fnv_FloatToInt(pos[0]) >> 12));
+        y = cell->TESObjectCELL_GetDataY() + ((DAT_0106e9cc >> 1) - (fnv_FloatToInt(pos[1]) >> 12));
     }
     else {
-        x = cell->FUN_004d3430() + ((DAT_0106e9cc >> 1) - unk24);
-        y = cell->FUN_004d3450() + ((DAT_0106e9cc >> 1) - unk28);
+        x = cell->TESObjectCELL_GetDataX() + ((DAT_0106e9cc >> 1) - unk24);
+        y = cell->TESObjectCELL_GetDataY() + ((DAT_0106e9cc >> 1) - unk28);
     }
     int dx = x - (DAT_0106e9cc >> 1);
     int dy = y - (DAT_0106e9cc >> 1);
@@ -45536,7 +45569,7 @@ struct S43a040_Cell {
     int fielda4;
     int fielda8;
     S43a040_ListNode list;
-    S43a040_Obj4bf* FUN_004d5240();
+    S43a040_Obj4bf* TESObjectCELL_GetEncounterZone();
     int FUN_004d36a0();
     void FUN_004e50d0(bool);
     void FUN_004df450();
@@ -45774,7 +45807,7 @@ struct S43a040_Render { void FUN_00ae8580(); void FUN_00ae6aa0(); };
 S43a040_Render* __cdecl FUN_00ad5a50();
 extern unsigned char DAT_0106cc10;
 bool __cdecl FUN_0061ac60(int id, int extra);
-struct S43a040_Menu { bool FUN_007f9d20(); };
+struct S43a040_Menu { bool MoviePlayer_GetPlayingSequence(); };
 extern void* DAT_0108ebbc;
 void __cdecl FUN_00509c50(int);
 struct S43a040_Mgr16 { void FUN_00ae4e90(int); void FUN_00ae6580(); void FUN_00ae39b0(); void FUN_00ae33e0(void*); };
@@ -46111,9 +46144,9 @@ void S43a040_TES::FUN_0043a040(S43a040_Cell* cell, const float* position)
                 FUN_00433420(false);
         }
     }
-    if (!((unsigned char)(((S43a040_Settings*)DAT_01079858)->displayFlags244 >> 1) & 1) && !FUN_0061ac60(0x3ef, 0) && !((S43a040_Menu*)DAT_0108ebbc)->FUN_007f9d20())
+    if (!((unsigned char)(((S43a040_Settings*)DAT_01079858)->displayFlags244 >> 1) & 1) && !FUN_0061ac60(0x3ef, 0) && !((S43a040_Menu*)DAT_0108ebbc)->MoviePlayer_GetPlayingSequence())
         ((S43a040_UI*)DAT_0107a0d4)->FUN_006ed560();
-    S43a040_Obj4bf* obj = cell->FUN_004d5240();
+    S43a040_Obj4bf* obj = cell->TESObjectCELL_GetEncounterZone();
     if (obj)
         obj->FUN_004bfba0();
     FUN_00509c50(cell->FUN_004d36a0());

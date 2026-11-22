@@ -597,10 +597,11 @@ class hkpContinuousSimulation
 {
 public:
     void FUN_0098c830(const hkpProcessCollisionOutput& output, const hkpAgentNnEntry& entry);
-    void FUN_0098e4c0(hkpEntity** entities, int numEntities, hkpProcessCollisionInput& input);
+    void collideEntitiesOfOneIslandNarrowPhaseContinuous_toiOnly(hkpEntity** entities, int numEntities, hkpProcessCollisionInput& input);
 };
 
-void hkpContinuousSimulation::FUN_0098e4c0(hkpEntity** entities, int numEntities, hkpProcessCollisionInput& input)
+// pdb: hkpContinuousSimulation::collideEntitiesOfOneIslandNarrowPhaseContinuous_toiOnly | hkpContinuousSimulation.obj | fnv360_0822_retail, objrun_prop + bridge(ustr_rel|vtable), high
+void hkpContinuousSimulation::collideEntitiesOfOneIslandNarrowPhaseContinuous_toiOnly(hkpEntity** entities, int numEntities, hkpProcessCollisionInput& input)
 {
     hkpSimulationIsland* island = entities[0]->m_simulationIsland;
     int n = island->m_numEntities;
@@ -2447,10 +2448,11 @@ struct S16c50_Sweep {
         intsOut[2] = out.u16[2];
         intsOut[3] = out.u16[3];
     }
-    void FUN_00995490(const S16c50_CastAabbInput& input, S16c50_Collector& collector) const;
+    void hkp3AxisSweep_castAabb(const S16c50_CastAabbInput& input, S16c50_Collector& collector) const;
 };
 
-void S16c50_Sweep::FUN_00995490(const S16c50_CastAabbInput& input, S16c50_Collector& collector) const
+// pdb: hkp3AxisSweep::castAabb | hkp3AxisSweep.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc + skyrim(caller_sim), high
+void S16c50_Sweep::hkp3AxisSweep_castAabb(const S16c50_CastAabbInput& input, S16c50_Collector& collector) const
 {
     S16c50_Vec4 fromMin; fromMin.setSub4(input.m_vFrom, input.m_vHalfExtents);
     S16c50_Vec4 fromMax; fromMax.setAdd4(input.m_vFrom, input.m_vHalfExtents);

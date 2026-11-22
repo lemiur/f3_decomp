@@ -120,10 +120,10 @@ struct BoundDataBlock
 };
 struct PlanarColliderResponse : NiPSysPlanarCollider
 {
-    void FUN_00c32490(float, BoundDataBlock*, unsigned short);
+    void NiPSysCollider_Update(float, BoundDataBlock*, unsigned short);
     void ApplyPlanarCollision(float, BoundDataBlock*, unsigned short);
 };
-// Projects the particle velocity onto the plane normal and reflects or removes the normal component, then calls FUN_00c32490.
+// Projects the particle velocity onto the plane normal and reflects or removes the normal component, then calls NiPSysCollider_Update.
 // @fnv 0x00c29320
 void PlanarColliderResponse::ApplyPlanarCollision(float time, BoundDataBlock* particles, unsigned short index)
 {
@@ -147,7 +147,7 @@ void PlanarColliderResponse::ApplyPlanarCollision(float time, BoundDataBlock* pa
         velocity.z = (float)(velocity.z - twice.z);
         velocity *= m_fBounceFactor;
     }
-    FUN_00c32490(time, particles, index);
+    NiPSysCollider_Update(time, particles, index);
 }
 
 class FUN_00c297f0_owner
@@ -344,12 +344,13 @@ class FUN_00c297f0_cls
     FUN_00c297f0_sub m_38;
     FUN_00c297f0_sub m_44;
     void Pre(FUN_00c297f0_owner* o);
-    void FUN_00c297f0(FUN_00c297f0_owner* o);
+    void NiPSysPlanarCollider_SaveBinary(FUN_00c297f0_owner* o);
 };
 
 // Calls Pre, writes m_2c via o->v30, then reads 4 bytes into m_30 and m_34 through o->m_250's read callback, and calls m_38 and m_44.
 // @fnv 0x00c297f0
-void FUN_00c297f0_cls::FUN_00c297f0(FUN_00c297f0_owner* apOwner)
+// pdb: NiPSysPlanarCollider::SaveBinary | NiPSysPlanarCollider.obj | fnv360_0822_retail, caller_sim + bridge(vtable|objrun) + skyrim(caller_sim), high
+void FUN_00c297f0_cls::NiPSysPlanarCollider_SaveBinary(FUN_00c297f0_owner* apOwner)
 {
     Pre(apOwner);
     apOwner->v30(m_2c);
@@ -447,7 +448,8 @@ struct CollisionHelper
 extern CollisionHelper* __cdecl FUN_00aa13e0(unsigned int);
 
 // @fnv 0x00c29af0
-int __cdecl FUN_00c29af0()
+// pdb: NiPSysPlanarCollider::CreateObject | NiPSysPlanarCollider.obj | fnv360_0822_retail, objrun + bridge(hash|objrun) + skyrim(caller_sim), high
+int __cdecl NiPSysPlanarCollider_CreateObject()
 {
     CollisionHelper* helper = FUN_00aa13e0(0x100);
     if (helper)
@@ -590,13 +592,14 @@ struct Coll
     float m_f34;
     Call_439090_tgt m_k38;
     Call_439090_tgt m_k44;
-    bool FUN_00c326b0(Coll* p);
-    bool FUN_00c29870(Coll* p);
+    bool NiPSysCollider_IsEqual(Coll* p);
+    bool NiPSysPlanarCollider_IsEqual(Coll* p);
 };
 // @fnv 0x00c29870
-bool Coll::FUN_00c29870(Coll* p)
+// pdb: NiPSysPlanarCollider::IsEqual | NiPSysPlanarCollider.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun) + skyrim(caller_sim), high
+bool Coll::NiPSysPlanarCollider_IsEqual(Coll* p)
 {
-    if (!FUN_00c326b0(p))
+    if (!NiPSysCollider_IsEqual(p))
         return false;
     if ((m_spSub && !p->m_spSub) || (!m_spSub && p->m_spSub) ||
         (m_spSub && p->m_spSub && !m_spSub->IsEqual(p->m_spSub)))

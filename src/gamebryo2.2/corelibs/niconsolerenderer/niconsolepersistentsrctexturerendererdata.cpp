@@ -331,7 +331,8 @@ struct BooleanKey
     }
 };
 // @fnv 0x00a2cdc0
-BooleanKey* __cdecl FUN_00a2cdc0(NiStream& kStream, unsigned int uiElementCount)
+// pdb: NiStepBoolKey::CreateFromStream | NiStepBoolKey.obj | fnv360_0822_retail, objopen_prop + bridge(caller_sim|objopen_prop) + skyrim(objrun_open), high
+BooleanKey* __cdecl NiStepBoolKey_CreateFromStream(NiStream& kStream, unsigned int uiElementCount)
 {
     BooleanKey* p = new BooleanKey[uiElementCount];
     for (unsigned int i = 0; i < uiElementCount; ++i)
@@ -1478,12 +1479,13 @@ struct NiSequence : NiObject
     StrArr m_kStringArray;
     char pad[0x30 - 0x0c - sizeof(StrArr)];
     unsigned int m_uiSequenceValue;
-    void FUN_00a47660(NiStream& kStream);
+    void NiSequence_LoadBinary(NiStream& kStream);
 };
 
 // Loads the sequence from a stream: base object, name, an unsigned int, then a key-name array sized by a count read from the stream.
 // @fnv 0x00a47660
-void NiSequence::FUN_00a47660(NiStream& kStream)
+// pdb: NiSequence::LoadBinary | NiSequence.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc + skyrim(caller_sim), high
+void NiSequence::NiSequence_LoadBinary(NiStream& kStream)
 {
     NiObject::LoadBinary(kStream);
     m_pcName = 0;
@@ -7457,7 +7459,7 @@ static bool FnvIsPowerOfTwo(unsigned value)
 // Creates an FnvOutput for a source and device, resolving pixel data and texture resources while handling failures and reference counting.
 // @f3 0x0087bfe0 (community match, verified in this file)
 FnvOutput* __cdecl FUN_0088a3a0(FnvSource*, FnvDevice*);
-FnvResourceManager* __cdecl FUN_00840c30();
+FnvResourceManager* __cdecl NiImageConverter_GetImageConverter();
 void __cdecl FUN_00c24b70(void*, int);
 extern unsigned char DAT_00e295ac;
 int __cdecl FUN_00881ef0(const SourcePixelFormat*);
@@ -7502,7 +7504,7 @@ FnvOutput* __cdecl FUN_00e68ef0(FnvSource* source, FnvDevice* device)
                     return output;
                 }
             }
-            cached = FUN_00840c30()->Acquire(kind, 0, 0);
+            cached = NiImageConverter_GetImageConverter()->Acquire(kind, 0, 0);
         }
     }
     void* pixelData = 0;
@@ -7651,7 +7653,7 @@ FnvOutput* __cdecl FUN_00e68ef0(FnvSource* source, FnvDevice* device)
         if (output->m_failure)
             chosen = cached;
         else
-            chosen = FUN_00840c30()->Convert(cached, pixelData, cached, output->m_hasMipmaps);
+            chosen = NiImageConverter_GetImageConverter()->Convert(cached, pixelData, cached, output->m_hasMipmaps);
         if (!output->m_64)
             reinterpret_cast<TextureCalls*>(output)->FUN_0087b170(chosen);
         if (output->m_64)

@@ -351,7 +351,7 @@ struct FUN_00a94e40_cls
     float m_f010c;
     float m_f0110;
     void __thiscall SaveToStream(FUN_00a94e40_arg* a);
-    void __thiscall FUN_00a94e40(FUN_00a94e40_arg* a);
+    void __thiscall NiSpotLight_LoadBinary(FUN_00a94e40_arg* a);
 };
 
 struct StreamCb
@@ -514,7 +514,8 @@ struct FUN_00a94e40_arg
 };
 
 // @fnv 0x00a94e40
-void __thiscall FUN_00a94e40_cls::FUN_00a94e40(FUN_00a94e40_arg* apArg)
+// pdb: NiSpotLight::LoadBinary | NiSpotLight.obj | fnv360_0822_retail, caller_sim + bridge(vtable|caller_sim) + skyrim(caller_sim), high
+void __thiscall FUN_00a94e40_cls::NiSpotLight_LoadBinary(FUN_00a94e40_arg* apArg)
 {
     SaveToStream(apArg);
     StreamCb* s = apArg->m_024c;

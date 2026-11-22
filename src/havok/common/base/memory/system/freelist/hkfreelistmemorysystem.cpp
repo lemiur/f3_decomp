@@ -71,11 +71,12 @@ struct PtrArrayMember
 
 struct CD0730Object
 {
-    virtual int FUN_00cd0730(const void* info) const;
+    virtual int hkStreamReader_setMark(const void* info) const;
 };
 
 // @fnv 0x00cd0730
-int CD0730Object::FUN_00cd0730(const void* info) const
+// pdb: hkStreamReader::setMark | hkStreamReader.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+int CD0730Object::hkStreamReader_setMark(const void* info) const
 {
     return 1;
 }

@@ -82,7 +82,7 @@ struct S_00cc0d60_A
     int unk10;
     int unk14;
     void FUN_00d4c220();
-    void FUN_00d4c2d0(void* a, int b);
+    void hkpPhysicsData_populateFromWorld(void* a, int b);
     void FUN_00d4c250();
 };
 S_00cc0d60_R* FUN_00cc0d30(void** pa, S_00cc0d60_A* a, void* b, int c, int d);
@@ -96,7 +96,7 @@ S_00cc0d60_R FUN_00cc0d60(void* a2, void* a3, int a4, int a5, int a6)
     {
         S_00cc0d60_A obj;
         obj.FUN_00d4c220();
-        obj.FUN_00d4c2d0(c, a6);
+        obj.hkpPhysicsData_populateFromWorld(c, a6);
         char r = FUN_00cc0d30(&a2, &obj, a3, a4, a5)->v;
         obj.FUN_00d4c250();
         res.v = r;
@@ -149,7 +149,7 @@ struct FUN_00cc08f0_cls
     unsigned int unk04;
     PtrList m_08;
 
-    void FUN_00cc08f0(void** a1, void** a2);
+    void hkpHavokSnapshot_ConvertListener_addObjectCallback(void** a1, void** a2);
 };
 
 // Checks type matchers on *a2, allocates and links a new object into m_08, or clears the pointer when the back-reference matches.
@@ -163,7 +163,7 @@ struct QHeap39
 };
 struct QMatcher39
 {
-    hkBool FUN_009b04e0(void* v);
+    hkBool hkClass_isSuperClass(void* v);
 };
 extern QMatcher39 DAT_011696e4;
 extern QMatcher39 DAT_011695f4;
@@ -212,9 +212,10 @@ static inline void* QAlloc39(unsigned int size)
     return h->FUN_008f6d30(size, 0x27);
 }
 
-void FUN_00cc08f0_cls::FUN_00cc08f0(void** a1, void** a2)
+// pdb: hkpHavokSnapshot::ConvertListener::addObjectCallback | hkpHavokSnapshot.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void FUN_00cc08f0_cls::hkpHavokSnapshot_ConvertListener_addObjectCallback(void** a1, void** a2)
 {
-    if (DAT_011696e4.FUN_009b04e0(*a2) && *a2 != (void*)&DAT_01169674)
+    if (DAT_011696e4.hkClass_isSuperClass(*a2) && *a2 != (void*)&DAT_01169674)
     {
         void* v = *a1;
         QObjA39* o = (QObjA39*)QAlloc39(0x70);
@@ -228,7 +229,7 @@ void FUN_00cc08f0_cls::FUN_00cc08f0(void** a1, void** a2)
         *a1 = o;
         *a2 = (void*)&DAT_01169674;
     }
-    if (DAT_011695f4.FUN_009b04e0(*a2) && *a2 != (void*)&DAT_01169524)
+    if (DAT_011695f4.hkClass_isSuperClass(*a2) && *a2 != (void*)&DAT_01169524)
     {
         void* v = *a1;
         QObjB39* o = (QObjB39*)QAlloc39(0xe0);
@@ -243,7 +244,7 @@ void FUN_00cc08f0_cls::FUN_00cc08f0(void** a1, void** a2)
         *a2 = (void*)&DAT_01169524;
         return;
     }
-    if (DAT_01169464.FUN_009b04e0(*a2) && *a2 != (void*)&DAT_01169434)
+    if (DAT_01169464.hkClass_isSuperClass(*a2) && *a2 != (void*)&DAT_01169434)
     {
         void* v = *a1;
         QObjC39* o = (QObjC39*)QAlloc39(0x70);
@@ -258,7 +259,7 @@ void FUN_00cc08f0_cls::FUN_00cc08f0(void** a1, void** a2)
         *a2 = (void*)&DAT_01169434;
         return;
     }
-    if (DAT_011693f4.FUN_009b04e0(*a2))
+    if (DAT_011693f4.hkClass_isSuperClass(*a2))
     {
         QLink39* v = (QLink39*)*a1;
         QLink39* back = v->m_08;

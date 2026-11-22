@@ -14779,10 +14779,10 @@ void __cdecl FUN_00c9d8f0(){DAT_01072b80.FUN_005752c0(DAT_00de7a60,DAT_00de7a70)
 extern char DAT_010706ed;
 namespace f3m_00c955d0 {
 
-extern int FUN_004b0c30();
+extern int GetAttenuationSettings();
 
 void __cdecl FUN_00c955d0() {
-    DAT_010706ed = FUN_004b0c30();
+    DAT_010706ed = GetAttenuationSettings();
 }
 }   // namespace f3m_00c955d0
 

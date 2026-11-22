@@ -66,7 +66,8 @@ void* __fastcall AssignNiD3DPass(void* pThis, int, void* param)
 extern "C" void* g_012003f8;
 
 // @fnv 0x00ba5730
-void* __cdecl FUN_00ba5730()
+// pdb: NiDX9TextureBufferData::GetRTTI | NiDX92DBufferData.obj | tesv_win, udata, high
+void* __cdecl NiDX9TextureBufferData_GetRTTI()
 {
     return &g_012003f8;
 }

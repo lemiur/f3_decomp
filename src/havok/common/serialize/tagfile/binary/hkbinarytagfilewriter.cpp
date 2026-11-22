@@ -349,7 +349,7 @@ int __cdecl FUN_00933ce0(int value, CallbackTarget* target, int source)
 
 struct Obj
 {
-    void __thiscall FUN_00d605d0(unsigned char);
+    void __thiscall hkOArchive_write8u(unsigned char);
     void __thiscall WriteVarint(__int64);
 };
 

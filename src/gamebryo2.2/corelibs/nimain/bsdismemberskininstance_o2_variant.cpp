@@ -19,7 +19,8 @@ inline void* __cdecl operator new(unsigned int, void* p)
     return p;
 }
 // @fnv 0x00a6c8a0
-BSDismemberSkinInstance* FUN_00a6c8a0()
+// pdb: BSDismemberSkinInstance::CreateObject | BSDismemberSkinInstance.obj | fnv360_0822_retail, objrun + bridge(hash|objrun), high
+BSDismemberSkinInstance* BSDismemberSkinInstance_CreateObject()
 {
     BSDismemberSkinInstance* p = (BSDismemberSkinInstance*)BSFadeNode::operator new(0x40);
     if (p)

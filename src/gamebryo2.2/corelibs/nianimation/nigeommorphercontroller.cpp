@@ -88,14 +88,15 @@ struct CloningProcess
 typedef char _sizecheck_NiCloningProcess[sizeof(CloningProcess) == 16 ? 1 : -1];
 struct FUN_00a3ba70_shell : public NiGeomMorpherController
 {
-    void FUN_00a3ba70(NiGeomMorpherController*, CloningProcess*);
+    void NiGeomMorpherController_CopyMembers(NiGeomMorpherController*, CloningProcess*);
 };
 
 extern bool DAT_011f3724;
 
 // Copies interpolator pointers and weights from this controller into pkDest, cloning each interpolator and updating reference counts.
 // @fnv 0x00a3ba70
-void FUN_00a3ba70_shell::FUN_00a3ba70(NiGeomMorpherController* pkDest, CloningProcess* kCloning)
+// pdb: NiGeomMorpherController::CopyMembers | NiGeomMorpherController.obj | fnv360_0822_retail, caller_sim + bridge(call_seq|caller_sim) + skyrim(caller_sim), high
+void FUN_00a3ba70_shell::NiGeomMorpherController_CopyMembers(NiGeomMorpherController* pkDest, CloningProcess* kCloning)
 {
     NiInterpController::CopyMemberData(pkDest, *kCloning);
     pkDest->m_uiObjectFlags = m_uiObjectFlags;
@@ -458,12 +459,13 @@ extern float DAT_011a8538[5];
 struct FUN_00a3e680_shell
 {
     float SampleLength(int iA, int iB, float fT);
-    float FUN_00a3e680(int iA, int iB, float fT);
+    float NiPathInterpolator_PathLength(int iA, int iB, float fT);
 };
 
 // Samples SampleLength at five scaled points from DAT_011a854c, weights each by DAT_011a8538, sums them and multiplies by fT.
 // @fnv 0x00a3e680
-float FUN_00a3e680_shell::FUN_00a3e680(int iA, int iB, float fT)
+// pdb: NiPathInterpolator::PathLength | NiPathInterpolator.obj | fnv360_0822_retail, call_gap + skyrim(call_gap), high
+float FUN_00a3e680_shell::NiPathInterpolator_PathLength(int iA, int iB, float fT)
 {
     float fWeightedSum = 0.0f;
     for (int i = 0; i < 5; i++)
@@ -1455,12 +1457,13 @@ struct FUN_00a3acb0_cls
     FUN_00a3acb0_item* items;
     void FUN_00a6d0c0(void* p);
     unsigned int FUN_008d3ed0();
-    void FUN_00a3acb0(void* p);
+    void NiGeomMorpherController_ProcessClone(void* p);
 };
 
 // Calls FUN_00a6d0c0(p), then forwards p to Slot26 on each non-null item pointer in items up to FUN_008d3ed0().
 // @fnv 0x00a3acb0
-void FUN_00a3acb0_cls::FUN_00a3acb0(void* p)
+// pdb: NiGeomMorpherController::ProcessClone | NiGeomMorpherController.obj | fnv360_0822_retail, caller_sim + bridge(vtable|objrun) + skyrim(caller_sim), high
+void FUN_00a3acb0_cls::NiGeomMorpherController_ProcessClone(void* p)
 {
     FUN_00a6d0c0(p);
     unsigned short i;
@@ -1971,7 +1974,8 @@ struct Obj_b10413F3 : public Base_b10413F3
         return FUN_0089eb90(size);
     }
 };
-Obj_b10413* __cdecl FUN_00a3b550()
+// pdb: NiGeomMorpherController::CreateObject | NiGeomMorpherController.obj | fnv360_0822_retail, objrun + bridge(caller_sim|objrun) + skyrim(caller_sim), high
+Obj_b10413* __cdecl NiGeomMorpherController_CreateObject()
 {
     return (Obj_b10413*)new Obj_b10413F3(0);
 }
@@ -2031,7 +2035,7 @@ class MorphController
   public:
     bool FUN_00c283f0(MorphObject* pkObject);  // NiInterpController::IsEqual
     unsigned int FUN_008d3ed0();               // GetNumTargets
-    bool FUN_00a3ad00(MorphObject* pkObject);
+    bool NiGeomMorpherController_IsEqual(MorphObject* pkObject);
 
     int unk00[14];
     MorphPointer<MorphObject> m_spMorphTargetData;  // +0x38
@@ -2039,7 +2043,8 @@ class MorphController
 };
 
 // @fnv 0x00a3ad00
-bool MorphController::FUN_00a3ad00(MorphObject* pkObject)
+// pdb: NiGeomMorpherController::IsEqual | NiGeomMorpherController.obj | fnv360_0822_retail, caller_sim + bridge(vtable|objrun) + skyrim(caller_sim), high
+bool MorphController::NiGeomMorpherController_IsEqual(MorphObject* pkObject)
 {
     if (!FUN_00c283f0(pkObject))
         return false;
@@ -2135,15 +2140,16 @@ class NiGeomMorpherControllerA3B : public a3bb::FUN_00a2f8c0
     bool m_bNeedsUpdate;
     bool m_bUpdateBounds;
 
-    void FUN_00a3ba70(NiGeomMorpherControllerA3B* pkClone, NiCloningProcessA3B& kCloning);
-    NiGeomMorpherControllerA3B* FUN_00a3bb80(NiCloningProcessA3B& kCloning);
+    void NiGeomMorpherController_CopyMembers(NiGeomMorpherControllerA3B* pkClone, NiCloningProcessA3B& kCloning);
+    NiGeomMorpherControllerA3B* NiGeomMorpherController_CreateClone(NiCloningProcessA3B& kCloning);
 };
-// Allocates a new NiGeomMorpherControllerA3B, calls FUN_00a3ba70 with it and kCloning, and returns it.
+// Allocates a new NiGeomMorpherControllerA3B, calls NiGeomMorpherController_CopyMembers with it and kCloning, and returns it.
 // @fnv 0x00a3bb80
-NiGeomMorpherControllerA3B* NiGeomMorpherControllerA3B::FUN_00a3bb80(NiCloningProcessA3B& kCloning)
+// pdb: NiGeomMorpherController::CreateClone | NiGeomMorpherController.obj | fnv360_0822_retail, caller_sim + bridge(vtable|caller_sim) + skyrim(caller_sim), high
+NiGeomMorpherControllerA3B* NiGeomMorpherControllerA3B::NiGeomMorpherController_CreateClone(NiCloningProcessA3B& kCloning)
 {
     NiGeomMorpherControllerA3B* pkClone = new NiGeomMorpherControllerA3B;
-    FUN_00a3ba70(pkClone, kCloning);
+    NiGeomMorpherController_CopyMembers(pkClone, kCloning);
     return pkClone;
 }
 
@@ -2202,11 +2208,12 @@ struct NiGMCShell_a3b350 : NiGeomMorpherController
             return m_spMorphTargetData.m_pObject->m_uiNumTargets;
         return 0;
     }
-    void FUN_00a3b350(NiStreamSV& stream);
+    void NiGeomMorpherController_SaveBinary(NiStreamSV& stream);
 };
 // Calls FUN_00c27120, then saves a value, morph target link, update flag, target count, and interpolator links and weights.
 // @fnv 0x00a3b350
-void NiGMCShell_a3b350::FUN_00a3b350(NiStreamSV& stream)
+// pdb: NiGeomMorpherController::SaveBinary | NiGeomMorpherController.obj | fnv360_0822_retail, caller_sim + bridge(vtable|caller_sim) + skyrim(caller_sim), high
+void NiGMCShell_a3b350::NiGeomMorpherController_SaveBinary(NiStreamSV& stream)
 {
     reinterpret_cast<S00c27120*>(this)->FUN_00c27120(stream);
     stream.Save(m_uiObjectFlags);

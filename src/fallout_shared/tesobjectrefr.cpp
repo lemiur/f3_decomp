@@ -6063,7 +6063,7 @@ struct NiControllerSequence
     int GetState();
     float FUN_00759450();
     float FUN_00508100();
-    void FUN_0098adb0(float);
+    void hkpSimulationIsland_markForWrite(float);
 };
 struct BSAnimGroupSequence : public NiControllerSequence
 {
@@ -9258,7 +9258,7 @@ struct BoneCountData
 
 struct bhkCharController
 {
-    void FUN_00c7c150(bool);
+    void bhkRagdollController_DisableRagdollAnim(bool);
 };
 
 struct RefX
@@ -12851,7 +12851,7 @@ extern LoadManager* g_TESSaveLoadGame;
 void __cdecl FNV_Warning(const char*, ...);
 struct LoadAux
 {
-    void FUN_004d3cc0();
+    void TESObjectCELL_AdjustCoordForNorthRotation();
 };
 LoadAux* __cdecl FUN_004bf220(LoadObject*);
 extern const float DAT_01015f5c;
@@ -13078,7 +13078,7 @@ struct Reference
 struct Effect
 {
 
-    void FUN_0098adb0(float magnitude);
+    void hkpSimulationIsland_markForWrite(float magnitude);
     float FUN_00759450(int kind, int selector);
 };
 struct ResourceName;
@@ -13871,7 +13871,7 @@ struct Flag79
 struct Sequence79
 {
     int FUN_0059bb30();
-    void FUN_0098adb0(float);
+    void hkpSimulationIsland_markForWrite(float);
     float FUN_00759450();
 };
 struct Controller79
@@ -15244,7 +15244,7 @@ struct SequenceTime
 struct Sequence
 {
     float FUN_00508100();
-    void FUN_0098adb0(float);
+    void hkpSimulationIsland_markForWrite(float);
     SequenceTime* FUN_0048f7f0(int);
 };
 struct Anim
@@ -15257,7 +15257,7 @@ struct Anim
 };
 struct Physics
 {
-    void FUN_00c7c150(int);
+    void bhkRagdollController_DisableRagdollAnim(int);
 };
 struct Process
 {
@@ -17515,7 +17515,7 @@ struct EntryOps
     EntryOps* GetOrFallback(int);
     EntryOps* FUN_004fd400();
     bool FUN_004c0bf0();
-    EntryOps* FUN_00525980(RefOps*);
+    EntryOps* Script_IsInListFunction(RefOps*);
 };
 struct ListOps
 {
@@ -19745,7 +19745,7 @@ struct RemapExtra
     void FUN_00420160(RemapRef*, int);
     RemapList* FUN_0041e780();
     void FUN_0041e7f0(RemapRef*);
-    void FUN_0041ea30(RemapRef*, float);
+    void ExtraAmmo_Compare(RemapRef*, float);
     void FUN_0041edd0(RemapRef*);
     bool FUN_0041eb60();
     void FUN_0041eba0(bool);
@@ -20920,7 +20920,7 @@ struct NiAVObject
 struct Seq
 {
     int FUN_008041a0();
-    void FUN_0098adb0(float f);
+    void hkpSimulationIsland_markForWrite(float f);
     float FUN_009a9350();
 };
 
@@ -23724,9 +23724,9 @@ struct E
 {
     R* FUN_0041e310();
     bool FUN_0041dc20();
-    bool FUN_0041dbd0();
+    bool ExtraEncounterZone_Compare();
 };
-bool __fastcall FUN_0041dbd0(E*);
+bool __fastcall ExtraEncounterZone_Compare(E*);
 struct F
 {
     int FUN_00401170();
@@ -24252,7 +24252,7 @@ extern TESSaveLoadGame* DAT_011de45c;
 struct Sub
 {
     int FUN_004228f0();
-    void FUN_00422850(int arg);
+    void MapMarkerData_SetTravelLoc(int arg);
 };
 struct Thing
 {

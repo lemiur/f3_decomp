@@ -1093,7 +1093,8 @@ static void FUN_00ba08d0(ct_data* tree, int max_code, ushf* bl_count)
         }
 }
 
-static void FUN_00ba0960(deflate_state* s, tree_desc* desc)
+// pdb: build_tree | trees.obj | fnv360_0721_beta, call_gap_sim + skyrim(call_seq), high
+static void build_tree(deflate_state* s, tree_desc* desc)
 {
     ct_data *tree         = desc->dyn_tree;
     const ct_data *stree  = desc->stat_desc->static_tree;
@@ -1161,7 +1162,7 @@ static unsigned bi_reverse(unsigned code, int len)
 
 deflate_state* volatile input_state_0077;
 tree_desc* volatile input_tree_0077;
-void EmitTree0077() { FUN_00ba0960(input_state_0077, input_tree_0077); }
+void EmitTree0077() { build_tree(input_state_0077, input_tree_0077); }
 }   // namespace f3m_00ba0960
 
 // @f3 0x00ba2db0 (community match, verified in this file)
@@ -1392,7 +1393,8 @@ static __declspec(noinline) void FUN_00ba06d0(deflate_state* s)
         s->bi_valid -= 8;
     }
 }
-void __cdecl FUN_00ba0cd0(deflate_state* s)
+// pdb: _tr_align | trees.obj | fnv360_0822_retail, call_gap + skyrim(objrun), high
+void __cdecl _tr_align(deflate_state* s)
 {
 {
     int len = 3;
@@ -1596,7 +1598,7 @@ typedef struct internal_state {
 } deflate_state;
 
 typedef char charf;
-void FUN_00ba0c30(deflate_state*,charf*,ulg,int);
+void _tr_stored_block(deflate_state*,charf*,ulg,int);
 static const int extra_lbits[29] 
    = {0,0,0,0,0,0,0,0,1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5,0};
 
@@ -1748,10 +1750,10 @@ static void FUN_00b9f670     (deflate_state *s);
 static void pqdownheap     (deflate_state *s, ct_data *tree, int k);
 static void gen_bitlen     (deflate_state *s, tree_desc *desc);
 static void gen_codes      (ct_data *tree, int max_code, ushf *bl_count);
-static void FUN_00ba0960     (deflate_state *s, tree_desc *desc);
+static void build_tree     (deflate_state *s, tree_desc *desc);
 static void scan_tree      (deflate_state *s, ct_data *tree, int max_code);
 static void send_tree      (deflate_state *s, ct_data *tree, int max_code);
-static int  FUN_00ba0b60  (deflate_state *s);
+static int  build_bl_tree  (deflate_state *s);
 static void FUN_00b9ffd0 (deflate_state *s, int lcodes, int dcodes, int blcodes);
 static void FUN_00ba0230 (deflate_state *s, ct_data *ltree, ct_data *dtree);
 static void FUN_00ba0640  (deflate_state *s);
@@ -1880,7 +1882,7 @@ static void gen_codes(ct_data *tree, int max_code, ushf *bl_count)
     }
 }
 
-static void FUN_00ba0960(deflate_state *s, tree_desc *desc)
+static void build_tree(deflate_state *s, tree_desc *desc)
 {
     ct_data *tree         = desc->dyn_tree;
     const ct_data *stree  = desc->stat_desc->static_tree;
@@ -2017,14 +2019,15 @@ static void send_tree(deflate_state *s, ct_data *tree, int max_code)
     }
 }
 
-static int FUN_00ba0b60(deflate_state *s)
+// pdb: build_bl_tree | trees.obj | fnv360_0721_beta, call_gap_sim + skyrim(call_seq), high
+static int build_bl_tree(deflate_state *s)
 {
     int max_blindex;  
 
     scan_tree(s, (ct_data *)s->dyn_ltree, s->l_desc.max_code);
     scan_tree(s, (ct_data *)s->dyn_dtree, s->d_desc.max_code);
 
-    FUN_00ba0960(s, (tree_desc *)(&(s->bl_desc)));
+    build_tree(s, (tree_desc *)(&(s->bl_desc)));
 
     for (max_blindex = 19-1; max_blindex >= 3; max_blindex--) {
         if (s->bl_tree[bl_order[max_blindex]].dl.len != 0) break;
@@ -2059,7 +2062,8 @@ static void FUN_00b9ffd0(deflate_state *s, int lcodes, int dcodes, int blcodes)
     ;
 }
 
-void FUN_00ba0c30(deflate_state *s, charf *buf, ulg stored_len, int eof)
+// pdb: _tr_stored_block | trees.obj | fnv360_0822_retail, call_gap + skyrim(call_seq), high
+void _tr_stored_block(deflate_state *s, charf *buf, ulg stored_len, int eof)
 {
     { int len = 3; if (s->bi_valid > (int)(8 * 2*sizeof(char)) - len) { int val = (0<<1)+eof; s->bi_buf |= (val << s->bi_valid); { {s->pending_buf[s->pending++] = ((uch)((s->bi_buf) & 0xff));}; {s->pending_buf[s->pending++] = ((uch)((ush)(s->bi_buf) >> 8));}; }; s->bi_buf = (ush)val >> ((8 * 2*sizeof(char)) - s->bi_valid); s->bi_valid += len - (8 * 2*sizeof(char)); } else { s->bi_buf |= ((0<<1)+eof) << s->bi_valid; s->bi_valid += len; }};  
 
@@ -2075,13 +2079,13 @@ void FUN_00ba0ec0(deflate_state *s, charf *buf, ulg stored_len, int eof)
 
         if (s->data_type == 2) FUN_00ba0640(s);
 
-        FUN_00ba0960(s, (tree_desc *)(&(s->l_desc)));
+        build_tree(s, (tree_desc *)(&(s->l_desc)));
         ;
 
-        FUN_00ba0960(s, (tree_desc *)(&(s->d_desc)));
+        build_tree(s, (tree_desc *)(&(s->d_desc)));
         ;
 
-        max_blindex = FUN_00ba0b60(s);
+        max_blindex = build_bl_tree(s);
 
         opt_lenb = (s->opt_len+3+7)>>3;
         static_lenb = (s->static_len+3+7)>>3;
@@ -2097,7 +2101,7 @@ void FUN_00ba0ec0(deflate_state *s, charf *buf, ulg stored_len, int eof)
 
     if (stored_len+4 <= opt_lenb && buf != (char*)0) {
 
-        FUN_00ba0c30(s, buf, stored_len, eof);
+        _tr_stored_block(s, buf, stored_len, eof);
 
     } else if (static_lenb == opt_lenb) {
 
@@ -3759,9 +3763,10 @@ namespace f3m_00bbd8d0 {
 namespace task1488 {
 struct Stream {
  int field00,field04,state,exceptions;
- void FUN_00bbd8d0(int value,bool reraise);
+ void std_ios_base_clear(int value,bool reraise);
 };
-void Stream::FUN_00bbd8d0(int value,bool reraise) {
+// pdb: std::ios_base::clear | algs.obj | fnv360_0822_retail, ustr + bridge(ustr|ustr) + skyrim(ustr), high
+void Stream::std_ios_base_clear(int value,bool reraise) {
  state=value & 0x17;
  if((state & exceptions)==0) ;
  else if(reraise) throw;
@@ -4764,10 +4769,11 @@ struct SelfAd00
     int m3c;
     int m40;
     unsigned char m44;
-    void __thiscall FUN_00ba2070(OutAd00* out, float param);
+    void __thiscall CSpeedTreeRT_GetBSGeometryLODData(OutAd00* out, float param);
 };
 // @fnv 0x00b0ad00
-void __thiscall SelfAd00::FUN_00ba2070(OutAd00* out, float param)
+// pdb: CSpeedTreeRT::GetBSGeometryLODData | SpeedTreeRT.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+void __thiscall SelfAd00::CSpeedTreeRT_GetBSGeometryLODData(OutAd00* out, float param)
 {
     float asinRad;
     float t2;
@@ -5589,9 +5595,10 @@ public:
 struct BranchLoader5b0 {
     char unknown00[0x60];
     std::vector<BranchRecord5b0*> branches;
-    void FUN_00bbf5b0(BinaryReader5b0*);
+    void CTreeEngine_ParseBranchInfo(BinaryReader5b0*);
 };
-void BranchLoader5b0::FUN_00bbf5b0(BinaryReader5b0* reader)
+// pdb: CTreeEngine::ParseBranchInfo | TreeEngine.obj | fnv360_0822_retail, ustr_rel + bridge(ustr_rel|ustr_rel), high
+void BranchLoader5b0::CTreeEngine_ParseBranchInfo(BinaryReader5b0* reader)
 {
     branches.clear();
     int count = reader->FUN_00ba92d0();
@@ -7522,10 +7529,11 @@ public:
     int unk30;
     void* unk34;
 
-    float __thiscall FUN_00ba1440();
+    float __thiscall CSpeedTreeRT_GetLodLevel();
 };
 
-float FUN_00ba1440_Obj::FUN_00ba1440()
+// pdb: CSpeedTreeRT::GetLodLevel | SpeedTreeRT.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+float FUN_00ba1440_Obj::CSpeedTreeRT_GetLodLevel()
 {
     volatile float result;
 
@@ -11496,7 +11504,8 @@ static void __cdecl FUN_00b9f670(State* s) {
  s->opt_len=s->static_len=0L;
  s->last_lit=s->matches=0;
 }
-void __cdecl FUN_00ba0860(State* s) {
+// pdb: _tr_init | trees.obj | fnv360_0822_retail, call_seq + skyrim(call_gap), high
+void __cdecl _tr_init(State* s) {
  s->l_desc.dyn_tree=s->dyn_ltree;
  s->l_desc.stat_desc=&DAT_01068a18;
  s->d_desc.dyn_tree=s->dyn_dtree;
@@ -12531,9 +12540,10 @@ struct Object {
 };
 struct Reader {
     std::string FUN_00ba9460();
-    Object* FUN_00bab1a0();
+    Object* CTreeFileAccess_ParseBranchParameter();
 };
-Object* Reader::FUN_00bab1a0()
+// pdb: CTreeFileAccess::ParseBranchParameter | Branch.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+Object* Reader::CTreeFileAccess_ParseBranchParameter()
 {
     return new Object(FUN_00ba9460());
 }
@@ -15177,7 +15187,7 @@ template<class T,class U> bool operator!=(const TreeAllocatorReader<T>&,const Tr
 typedef std::basic_string<char,std::char_traits<char>,TreeAllocatorReader<char> > ReaderString;
 
 struct Reader {
- int FUN_00ba92d0(); float FUN_00ba92a0(); bool FUN_00ba1a80(); void* FUN_00bab1a0(); ReaderString FUN_00ba9460();
+ int FUN_00ba92d0(); float FUN_00ba92a0(); bool FUN_00ba1a80(); void* CTreeFileAccess_ParseBranchParameter(); ReaderString FUN_00ba9460();
 };
 struct FUN_00ba37a0 : std::string {
  FUN_00ba37a0() {}
@@ -15209,7 +15219,7 @@ void Target::FUN_00bba060(Reader* r) {
  case 0x32ca: unk38=r->FUN_00ba92d0(); break;
  case 0x32cb: unk28=r->FUN_00ba92d0(); break;
  case 0x32cc: unk2C=r->FUN_00ba92d0(); break;
- case 0x32cd: FUN_00bb45d0(r->FUN_00bab1a0()); break;
+ case 0x32cd: FUN_00bb45d0(r->CTreeFileAccess_ParseBranchParameter()); break;
  case 0x32ce: unk34=r->FUN_00ba92d0(); break;
  case 0x32cf: unk3C=r->FUN_00ba1a80(); break;
  case 0x32d1: unk50=r->FUN_00ba92d0(); break;
@@ -17508,7 +17518,7 @@ struct GeneralTreeLoader70 {
     float f4c;
     float f50;
 
-    void FUN_00bbf5b0(BinaryReader70*);
+    void CTreeEngine_ParseBranchInfo(BinaryReader70*);
     void FUN_00bbdb10(int);
     void FUN_00bbfd70(BinaryReader70* reader);
 };
@@ -17519,7 +17529,7 @@ void GeneralTreeLoader70::FUN_00bbfd70(BinaryReader70* reader)
     do {
         switch (token) {
         case 1014:
-            FUN_00bbf5b0(reader);
+            CTreeEngine_ParseBranchInfo(reader);
             break;
         case 2000:
             textureName = reader->FUN_00ba9460();
@@ -21279,10 +21289,11 @@ struct TreeData {
 
 struct Tree {
     TreeData* data;
-    unsigned int FUN_00ba5c50() const;
+    unsigned int CSpeedTreeRT_GetSeed() const;
 };
 
-unsigned int Tree::FUN_00ba5c50() const {
+// pdb: CSpeedTreeRT::GetSeed | SpeedTreeRT.obj | fnv360_0822_retail, ustr_rel + bridge(ustr_rel|ustr_rel), high
+unsigned int Tree::CSpeedTreeRT_GetSeed() const {
     using namespace sol7d10;
     unsigned int result = 0;
     try {
@@ -22041,9 +22052,10 @@ struct Tree {
     Engine* engine;
     int state04, state08, state0c, state10, state14, state18, state1c, state20, state24, state28, state2c, state30;
     Instance* instance;
-    void FUN_00ba6a30();
+    void CSpeedTreeRT_ComputeLodLevel();
 };
-void Tree::FUN_00ba6a30() {
+// pdb: CSpeedTreeRT::ComputeLodLevel | SpeedTreeRT.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
+void Tree::CSpeedTreeRT_ComputeLodLevel() {
     try {
         if (instance) {
             Position savedPosition = engine->position;
@@ -22182,7 +22194,7 @@ struct TreeFile {
     virtual void slot07();
     virtual void slot08();
     virtual int GetSize();
-    int FUN_0048be50(unsigned char* buffer, int size);
+    int NiBinaryStream_Read(unsigned char* buffer, int size);
 };
 TreeFile* FUN_00bc7fc0(const char* filename, int mode, int flags, bool buffered);
 int* FUN_00c02a76() throw();
@@ -22203,7 +22215,7 @@ bool Tree::FUN_00ba8fd0(const char* filename) {
                 if (size > 0) {
                     unsigned char* buffer = static_cast<unsigned char*>(
                         DAT_01090a78.FUN_0086b930(size));
-                    int count = file->FUN_0048be50(buffer, size);
+                    int count = file->NiBinaryStream_Read(buffer, size);
                     if (count == size) {
                         loaded = FUN_00ba8c40(buffer, size);
                         DAT_01090a78.FUN_0086ba60(buffer);

@@ -66,7 +66,8 @@ struct ClosestOut47 { Vec47 a,b; float distSq; };
 extern "C" int __cdecl FUN_0096f780(const Vec47&,const Vec47&,const Vec47&,const Vec47&,ClosestOut47&);
 struct Record47 { const char* tag; unsigned time,extra; };
 struct Monitor47 { Record47* start; Record47* next; Record47* capacity; Record47* limit; };
-void __cdecl FUN_009c47e0(const Body47& bodyA,const Body47& bodyB,const Input47& input,Collector47& collector) {
+// pdb: hkpCapsuleCapsuleAgent::staticGetPenetrations | hkpCapsuleCapsuleAgent.obj | fnv360_0822_retail, call_seq + bridge(caller_sim|objrun_prop) + skyrim(call_seq), high
+void __cdecl hkpCapsuleCapsuleAgent_staticGetPenetrations(const Body47& bodyA,const Body47& bodyB,const Input47& input,Collector47& collector) {
     {
         Monitor47* mon=(Monitor47*)DAT_00d9b080(DAT_0116913c);
         if(mon->next<mon->limit) {

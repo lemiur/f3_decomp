@@ -930,7 +930,8 @@ class hkSourceE392
 void __cdecl FUN_00e39190();
 
 // @fnv 0x00e392f0
-void __cdecl FUN_00e392f0()
+// pdb: hkString::memMove | hkString.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_seq), high
+void __cdecl hkString_memMove()
 {
     FUN_00e39190();
 }

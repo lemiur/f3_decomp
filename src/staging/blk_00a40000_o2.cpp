@@ -547,17 +547,17 @@ void* FUN_00a47f20()
 namespace fnv_00a50aa0 {
 struct A51BF0Base
 {
-    void* __thiscall FUN_00a57fd0(void* dst, void* proc);
+    void* __thiscall NiBSplineInterpolator_CopyMembers(void* dst, void* proc);
 };
 struct FUN_00a50aa0_class : A51BF0Base
 {
     void FUN_00a50aa0(void* dst, void* proc);
 };
-// Copies the base part via FUN_00a57fd0, then copies the float at offset 0x1c and the int at offset 0x20 from this into dst.
+// Copies the base part via NiBSplineInterpolator_CopyMembers, then copies the float at offset 0x1c and the int at offset 0x20 from this into dst.
 // @fnv 0x00a50aa0
 void FUN_00a50aa0_class::FUN_00a50aa0(void* apDest, void* proc)
 {
-    FUN_00a57fd0(apDest, proc);
+    NiBSplineInterpolator_CopyMembers(apDest, proc);
     *(float*)((char*)apDest + 0x1c) = *(float*)((char*)this + 0x1c);
     *(int*)((char*)apDest + 0x20) = *(int*)((char*)this + 0x20);
 }
@@ -767,7 +767,7 @@ struct S_00a42290_Q : FUN_00a5d3a0
     {}
     virtual ~S_00a42290_Q() throw()
     {}
-    void FUN_00a3ccb0(void* a, unsigned int b, int c);
+    void NiFloatData_SetAnim(void* a, unsigned int b, int c);
 };
 struct S_00a42290_Ptr
 {
@@ -794,12 +794,12 @@ void S_00a42290_Cls::FUN_00a42290(void* a, unsigned int b, int c)
             S_00a42290_Q* q = new S_00a42290_Q;
             m10.FUN_0066b0d0(q);
         }
-        m10.p->FUN_00a3ccb0(a, b, c);
+        m10.p->NiFloatData_SetAnim(a, b, c);
         unk14 = 0;
     }
     else if (m10.p != 0)
     {
-        m10.p->FUN_00a3ccb0(0, 0, 0);
+        m10.p->NiFloatData_SetAnim(0, 0, 0);
     }
 }
 
@@ -1797,17 +1797,17 @@ class A5F4D0Property
     int unk14;
 };
 
-class FUN_00a5f4d0 : public A5F4D0Property
+class NiZBufferProperty : public A5F4D0Property // src: F3_EXE vtable 0x00e20f1c (old: FUN_00a5f4d0)
 {
   public:
     unsigned short m_usFlags;
 
-    FUN_00a5f4d0();
-    virtual ~FUN_00a5f4d0();
+    NiZBufferProperty();
+    virtual ~NiZBufferProperty();
 };
 
 // @fnv 0x00a5f4d0
-FUN_00a5f4d0::FUN_00a5f4d0()
+NiZBufferProperty::NiZBufferProperty()
 {
     m_usFlags = 0xf;
 }
@@ -1834,7 +1834,7 @@ struct FUN_00a5fca0_cls
     CountedRef* m_38;
     CountedRef* m_3c;
 
-    void FUN_00a5f800();
+    void NiTexture_RemoveTextureFromList();
     void DestroyFogProperty();
     void FUN_00a5fca0();
 };
@@ -1891,7 +1891,7 @@ void FUN_00a5fca0_cls::FUN_00a5fca0()
     {
         e->Vslot00(1);
     }
-    FUN_00a5f800();
+    NiTexture_RemoveTextureFromList();
     DestroyFogProperty();
 }
 
@@ -3447,12 +3447,13 @@ class CloneSourceA5d6
     virtual void v64();
     virtual void ProcessClone(CloningProcessA5d6& kCloning);
 
-    CloneSourceA5d6* FUN_00a5d680();
+    CloneSourceA5d6* NiObject_Clone();
 };
 
 // Constructs a CloningProcess (0x101), calls this object's MakeClone and ProcessClone with it, deletes its two maps, and returns the clone.
 // @fnv 0x00a5d680
-CloneSourceA5d6* CloneSourceA5d6::FUN_00a5d680()
+// pdb: NiObject::Clone | NiObject.obj | fnv360_0822_debug, caller + bridge(hash|caller) + skyrim(call_seq), high
+CloneSourceA5d6* CloneSourceA5d6::NiObject_Clone()
 {
     CloningProcessA5d6 kCloning(0x101);
     CloneSourceA5d6* pkClone = MakeClone(kCloning);
@@ -4043,12 +4044,13 @@ struct StreamDev
 
 struct FUN_00a5d2f0_class
 {
-    void FUN_00a5d2f0(StreamDev* pStream);
+    void NiObject_RegisterStreamables(StreamDev* pStream);
 };
 
 // Invokes the virtual vf09 on pStream, passing this object as the owner argument.
 // @fnv 0x00a5d2f0
-void FUN_00a5d2f0_class::FUN_00a5d2f0(StreamDev* pStream)
+// pdb: NiObject::RegisterStreamables | NiObject.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(call_seq), high
+void FUN_00a5d2f0_class::NiObject_RegisterStreamables(StreamDev* pStream)
 {
     pStream->vf09(this);
 }
@@ -4558,7 +4560,7 @@ struct Stream
     int unk0d4;
     unsigned int m_uiFileVersion;
 
-    unsigned int FUN_00a63460();
+    unsigned int NiStream_GetNumberOfLinkIDs();
     unsigned int FUN_00a63430();
 };
 
@@ -4588,12 +4590,12 @@ struct Controller
     void Load(Stream* pkStream);
 };
 
-// Calls FUN_00a47360; if FUN_00a63460 is nonzero, reads a link ID into m_spPrimary or m_spSecondary by file version and m_bUsePrimary, clearing the other.
+// Calls FUN_00a47360; if NiStream_GetNumberOfLinkIDs is nonzero, reads a link ID into m_spPrimary or m_spSecondary by file version and m_bUsePrimary, clearing the other.
 // @fnv 0x00a5f9a0
 void Controller::Load(Stream* pkStream)
 {
     FUN_00a47360(pkStream);
-    if (pkStream->FUN_00a63460())
+    if (pkStream->NiStream_GetNumberOfLinkIDs())
     {
         if (pkStream->m_uiFileVersion >= 0x14020004 && m_bUsePrimary)
         {
@@ -5295,11 +5297,12 @@ struct NiObjectNET
 };
 struct Holder : NiObjectNET
 {
-    bool FUN_00a5ba40(NiTexture* p);
+    bool NiObjectNET_InsertExtraData(NiTexture* p);
 };
 // Inserts p into the sorted texture array, growing it as needed, and returns false if a duplicate name is found.
 // @fnv 0x00a5ba40
-bool Holder::FUN_00a5ba40(NiTexture* p)
+// pdb: NiObjectNET::InsertExtraData | NiObjectNET.obj | fnv360_0822_debug, objrun + bridge(call_seq|call_gap) + skyrim(call_gap), high
+bool Holder::NiObjectNET_InsertExtraData(NiTexture* p)
 {
     if (!p)
         return false;
@@ -5461,7 +5464,8 @@ struct TextureListView : NiTexture
 
 // Unlinks the given TextureListView node from the doubly linked list guarded by DAT_011f4580, updating head, tail and neighbour pointers.
 // @fnv 0x00a5f800
-void __fastcall FUN_00a5f800(TextureListView* texture)
+// pdb: NiTexture::RemoveTextureFromList | NiXenonDirect3DTexture.obj | fnv360_0822_retail, udata + bridge(hash|udata) + skyrim(call_seq), high
+void __fastcall NiTexture_RemoveTextureFromList(TextureListView* texture)
 {
     EnterCriticalSection(reinterpret_cast<CRITICAL_SECTION_STUB*>(&DAT_011f4580));
     if (DAT_011f4500 == reinterpret_cast<int>(texture))

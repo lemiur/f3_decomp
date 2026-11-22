@@ -74,11 +74,12 @@ NiInterpolator* NiMultiTargetTransformController::GetInterpolatorAtIndex(unsigne
 
 struct FUN_00a2fd40_shell : public NiMultiTargetTransformController
 {
-    char* FUN_00a2fd40(unsigned short);
+    char* NiMultiTargetTransformController_GetInterpolatorID(unsigned short);
 };
 
 // @fnv 0x00a2fd40
-char* FUN_00a2fd40_shell::FUN_00a2fd40(unsigned short usIndex)
+// pdb: NiMultiTargetTransformController::GetInterpolatorID | NiMultiTargetTransformController.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun) + skyrim(objrun_open), high
+char* FUN_00a2fd40_shell::NiMultiTargetTransformController_GetInterpolatorID(unsigned short usIndex)
 {
     return *((char**)m_ppkTargets[usIndex] + 2);
 }
@@ -445,7 +446,7 @@ struct CloningProcess
 typedef char _sizecheck_NiCloningProcess[sizeof(CloningProcess) == 16 ? 1 : -1];
 struct FUN_00a302d0_shell : public NiMultiTargetTransformController
 {
-    NiObject* FUN_00a302d0(CloningProcess*);
+    NiObject* NiMultiTargetTransformController_CreateClone(CloningProcess*);
 };
 
 struct FUN_00a30070_shell
@@ -477,7 +478,8 @@ struct CloneCtl : CloneBase
 };
 // Allocates a CloneCtl, passes it with kCloning to CloneTo, and returns it as a NiObject.
 // @fnv 0x00a302d0
-NiObject* FUN_00a302d0_shell::FUN_00a302d0(CloningProcess* kCloning)
+// pdb: NiMultiTargetTransformController::CreateClone | NiMultiTargetTransformController.obj | fnv360_0822_retail, caller_sim + bridge(vtable|caller_sim) + skyrim(caller_sim), high
+NiObject* FUN_00a302d0_shell::NiMultiTargetTransformController_CreateClone(CloningProcess* kCloning)
 {
     CloneCtl* pkObject = new CloneCtl;
     reinterpret_cast<FUN_00a30070_shell*>(this)->CloneTo(reinterpret_cast<NiMultiTargetTransformController*>(pkObject),
@@ -1357,11 +1359,12 @@ class NiMultiTargetTransformControllerA30 : public NiMultiTargetTransformControl
   public:
     void FUN_00a2f910(NiStream& kStream);
     void FUN_00a2feb0(unsigned short ausNumInterps);
-    void FUN_00a303d0(NiStream& kStream);
+    void NiMultiTargetTransformController_LoadBinary(NiStream& kStream);
 };
 // Calls FUN_00a2f910, reads m_usNumInterps, passes it to FUN_00a2feb0, then assigns returned pointers to m_ppkTargets.
 // @fnv 0x00a303d0
-void NiMultiTargetTransformControllerA30::FUN_00a303d0(NiStream& kStream)
+// pdb: NiMultiTargetTransformController::LoadBinary | NiMultiTargetTransformController.obj | fnv360_0822_retail, caller_sim + bridge(vtable|caller_sim) + skyrim(caller_sim), high
+void NiMultiTargetTransformControllerA30::NiMultiTargetTransformController_LoadBinary(NiStream& kStream)
 {
     FUN_00a2f910(kStream);
     ReadBinaryValue(kStream, m_usNumInterps);

@@ -246,8 +246,8 @@ hkBool __cdecl FUN_00cc0d60(hkpWorld* world, hkArrayStreamWriter* writer, hkBool
 
 struct hkDisplaySerializeOStream
 {
-    void FUN_00d60960(int n);
-    void FUN_00d605d0(unsigned int b);
+    void hkOArchive_write32u(int n);
+    void hkOArchive_write8u(unsigned int b);
     void WriteInt(int n);
     void FUN_00d607b0(const char* buf, int n);
 };
@@ -407,12 +407,12 @@ void FUN_00d63040_cls::FUN_00d63040(float frameTimeInMs)
             int length = storage.m_size;
             if (length >= 1)
             {
-                m_pDisplayStream->FUN_00d60960(length + 9);
-                m_pDisplayStream->FUN_00d605d0(0xd0);
-                m_pDisplayStream->FUN_00d605d0(rules.m_ucBytesInPointer);
-                m_pDisplayStream->FUN_00d605d0(rules.m_bLittleEndian);
-                m_pDisplayStream->FUN_00d605d0(rules.m_bReusePaddingOptimization);
-                m_pDisplayStream->FUN_00d605d0(rules.m_bEmptyBaseClassOptimization);
+                m_pDisplayStream->hkOArchive_write32u(length + 9);
+                m_pDisplayStream->hkOArchive_write8u(0xd0);
+                m_pDisplayStream->hkOArchive_write8u(rules.m_ucBytesInPointer);
+                m_pDisplayStream->hkOArchive_write8u(rules.m_bLittleEndian);
+                m_pDisplayStream->hkOArchive_write8u(rules.m_bReusePaddingOptimization);
+                m_pDisplayStream->hkOArchive_write8u(rules.m_bEmptyBaseClassOptimization);
                 m_pDisplayStream->WriteInt(length);
                 m_pDisplayStream->FUN_00d607b0(storage.m_data, length);
             }

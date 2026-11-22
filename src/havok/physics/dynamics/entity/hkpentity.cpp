@@ -437,7 +437,7 @@ struct Entity
     int unk1ec;
     SmallArray m_contactListeners;
 
-    void FUN_00931940(StatisticsCollector* collector) const;
+    void hkpWorldObject_calcContentStatistics(StatisticsCollector* collector) const;
 };
 
 }
@@ -474,13 +474,13 @@ void hkpEntityStats::CollectStats(hkStatisticsCollector* statsCollector) const
                                 (activationListeners.m_capacityAndFlags & 0x3fff) * 4);
         }
     }
-    self->FUN_00931940(collector);
+    self->hkpWorldObject_calcContentStatistics(collector);
     collector->addChildObject("SavedMotion", 4, self->m_savedMotion);
     collector->endObject();
 }
 
 
-void __cdecl FUN_00d06cb0(void* array, int elemSize);
+void __cdecl hkSmallArrayUtil__reserveMore(void* array, int elemSize);
 
 template <typename T> class hkSmallArrayC9C5
 {
@@ -505,7 +505,7 @@ template <typename T> class hkSmallArrayC9C5
     void AddBack(const T& t)
     {
         if (m_iElementCount == getCapacity())
-            FUN_00d06cb0(this, sizeof(T));
+            hkSmallArrayUtil__reserveMore(this, sizeof(T));
         m_data[m_iElementCount++] = t;
     }
 };

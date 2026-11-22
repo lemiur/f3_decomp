@@ -23,7 +23,7 @@ float FUN_0058f580(Keyframe*, int, int);
 void FUN_00592370(Keyframe*, int, int, float);
 void FUN_0058e510(void*, Keyframe*, Keyframe*, int);
 bool FUN_0058ca80(Keyframe*, void*);
-void FUN_0058e170(Keyframe*, void*, int, int);
+void BSFaceGenManager_CopyFaceGenCoord(Keyframe*, void*, int, int);
 struct RefCache { virtual void slot00(); virtual void destroy(); long unk04; };
 struct Actor55 {
     int unk00;
@@ -175,7 +175,7 @@ void Actor55::FUN_0055a310(bool keepFirst, bool keepSecond, bool keepStored)
     void* saved=unk194 ? unk194 : &unk134;
     if (FUN_0058ca80(baseline,saved)) {
         saved=unk194 ? unk194 : &unk134;
-        FUN_0058e170(baseline,saved,0,0);
+        BSFaceGenManager_CopyFaceGenCoord(baseline,saved,0,0);
         RefCache* ref=unk1ac;
         if (ref) {
             if (!InterlockedDecrement(&ref->unk04)) ref->destroy();

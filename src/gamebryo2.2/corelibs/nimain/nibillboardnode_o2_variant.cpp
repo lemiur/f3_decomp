@@ -84,7 +84,7 @@ struct NiUpdateData
 };
 struct BaseNode
 {
-    void FUN_00a5e1f0(NiUpdateData&, unsigned int);
+    void NiNode_UpdateRigidDownwardPass(NiUpdateData&, unsigned int);
 };
 struct StandIn
 {
@@ -94,7 +94,7 @@ struct StandIn
 void StandIn::FUN_00a7dab0(NiUpdateData& UpdateData, unsigned int uFlags)
 {
     *(float*)((char*)this + 0xb0) = UpdateData.m_fTime;
-    ((BaseNode*)this)->FUN_00a5e1f0(UpdateData, uFlags);
+    ((BaseNode*)this)->NiNode_UpdateRigidDownwardPass(UpdateData, uFlags);
     ((void(__thiscall**)(void*)) * (void***)this)[47](this);
 }
 }  // namespace fnv_00a7dab0
@@ -234,10 +234,11 @@ struct StandIn
 {
     char _pad[172];
     short m_field;
-    void FUN_00a7e850(NiStream&);
+    void NiBillboardNode_SaveBinary(NiStream&);
 };
 // @fnv 0x00a7e850
-void StandIn::FUN_00a7e850(NiStream& kStream)
+// pdb: NiBillboardNode::SaveBinary | NiBillboardNode.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(objrun_open), high
+void StandIn::NiBillboardNode_SaveBinary(NiStream& kStream)
 {
     ((NiNodeBase*)this)->FUN_00a5e880(kStream);
     NiBinaryStream* __restrict pkOstr = kStream.m_pBackingStream;
@@ -838,10 +839,11 @@ struct BoardObject
     float time;
     __declspec(noalias) bool FUN_00a7dc40(const BoardObject*, const BoardVector&, BoardVector&, BoardVector&,
                                           BoardVector&);
-    void FUN_00a7de40(const BoardObject*);
+    void NiBillboardNode_RotateToCamera(const BoardObject*);
 };
 // @f3 0x00848700 (community match, verified in this file)
-void BoardObject::FUN_00a7de40(const BoardObject* camera)
+// pdb: NiBillboardNode::RotateToCamera | NiBillboardNode.obj | fnv360_0822_retail, uconst + bridge(uconst|uconst) + skyrim(uconst), high
+void BoardObject::NiBillboardNode_RotateToCamera(const BoardObject* camera)
 {
     CompositionResult composition;
     BillboardResults results;

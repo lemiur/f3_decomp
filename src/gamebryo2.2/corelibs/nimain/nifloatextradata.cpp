@@ -85,7 +85,8 @@ struct BSFadeNode
 };
 
 // @fnv 0x00a9a480
-void* __cdecl FUN_00a9a480()
+// pdb: NiFloatExtraData::CreateObject | NiFloatExtraData.obj | fnv360_0822_retail, objrun + bridge(hash|objrun), high
+void* __cdecl NiFloatExtraData_CreateObject()
 {
     void* p = BSFadeNode::operator new(0x10);
     if (p)

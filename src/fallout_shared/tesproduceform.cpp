@@ -139,8 +139,8 @@ struct FUN_00485b60_Stub {
     int unk08;
     unsigned int unk0C;
 
-    TESFile* FUN_00455470(int aIndex);
-    int FUN_00449cb0();
+    TESFile* TESForm_GetFile(int aIndex);
+    int TESForm_GetFormEditorIDLength();
 };
 
 struct FUN_0048b720_Stub {
@@ -153,8 +153,8 @@ struct FUN_00408ec0_Obj {
     void FUN_00408ec0(FUN_00485b60_Cls* apArg);
 };
 
-void FUN_00454a40(unsigned int* apFormID, TESFile* apFile);
-TESForm* FUN_00455190(unsigned int aFormID);
+void TESForm_AddCompileIndex(unsigned int* apFormID, TESFile* apFile);
+TESForm* TESForm_GetFormByNumericID(unsigned int aFormID);
 void FUN_00887da0(const char* apMsg, ...);
 
 extern const char DAT_00dbcb38[];
@@ -164,16 +164,16 @@ extern const char DAT_00dbcaa0[];
 void FUN_0048b720_Cls::ResolveIngredient(FUN_00485b60_Cls* apArg)
 {
     unsigned int formID = (unsigned int)pIngredient;
-    FUN_00454a40(&formID, apArg->GetFile(-1));
+    TESForm_AddCompileIndex(&formID, apArg->GetFile(-1));
 
-    pIngredient = dynamic_cast<TESBoundObject*>(FUN_00455190(formID));
+    pIngredient = dynamic_cast<TESBoundObject*>(TESForm_GetFormByNumericID(formID));
 
     if (pIngredient == 0) {
         if (apArg != 0) {
             FUN_00485b60_Stub* owner =
                 reinterpret_cast<FUN_00485b60_Stub*>(apArg);
 
-            if (owner->FUN_00449cb0()) {
+            if (owner->TESForm_GetFormEditorIDLength()) {
                 FUN_00887da0(
                     DAT_00dbcb38,
                     formID,

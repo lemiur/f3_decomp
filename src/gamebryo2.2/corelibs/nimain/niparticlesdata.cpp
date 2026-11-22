@@ -30,7 +30,8 @@ void __fastcall FUN_00a968e0(char* this_ptr, int, void* param_2, unsigned char p
 extern const char* const g_011f5f0c_arg1;
 
 // @fnv 0x00a967d0
-const char* const* __cdecl FUN_00a967d0()
+// pdb: NiTriStripsDynamicData::GetRTTI | NiTriStripsDynamicData.obj | fnv360_0822_retail, udata + bridge(vtable|udata), high
+const char* const* __cdecl NiTriStripsDynamicData_GetRTTI()
 {
     return &g_011f5f0c_arg1;
 }
@@ -286,18 +287,19 @@ inline bool EqualParticleOffset(const RgbaColor& left, const RgbaColor& right)
 }
 struct GeometryEquality : NiGeometryData
 {
-    bool FUN_00a67840(NiObject* other);
+    bool NiGeometryData_IsEqual(NiObject* other);
 };
 struct ParticlesEquality : NiParticlesData
 {
-    bool FUN_00a96a30(NiObject* object);
+    bool NiParticlesData_IsEqual(NiObject* object);
 };
 
 // @f3 0x0085a9b0 (community match, verified in this file)
 namespace f3m_0085a9b0 { inline bool Differs(const NiQuaternion& a, const NiQuaternion& b) { return a.w != b.w || a.x != b.x || a.y != b.y || a.z != b.z; } }
-bool ParticlesEquality::FUN_00a96a30(NiObject* apOther)
+// pdb: NiParticlesData::IsEqual | NiParticlesData.obj | fnv360_0822_retail, caller_sim + bridge(vtable|caller_sim) + skyrim(caller_sim), high
+bool ParticlesEquality::NiParticlesData_IsEqual(NiObject* apOther)
 {
-    if (!static_cast<GeometryEquality*>(static_cast<NiGeometryData*>(this))->FUN_00a67840(apOther))
+    if (!static_cast<GeometryEquality*>(static_cast<NiGeometryData*>(this))->NiGeometryData_IsEqual(apOther))
         return false;
     NiParticlesData* other = static_cast<NiParticlesData*>(apOther);
     if ((m_pfRadii && !other->m_pfRadii) || (!m_pfRadii && other->m_pfRadii))
@@ -525,7 +527,7 @@ struct NiStream
 };
 struct GeoSave
 {
-    void FUN_00a68520(NiStream&);
+    void NiGeometryData_SaveBinary(NiStream&);
 };
 struct NiColorA_SaveHelper
 {
@@ -534,13 +536,14 @@ struct NiColorA_SaveHelper
 };
 struct FUN_00a97290_holder : NiParticlesData
 {
-    void FUN_00a97290(NiStream&);
+    void NiParticlesData_SaveBinary(NiStream&);
 };
 // Writes presence flags for radii, sizes, rotations, angles, axes and texture indices, then the sub-texture offset count and each offset to the stream.
 // @fnv 0x00a97290
-void FUN_00a97290_holder::FUN_00a97290(NiStream& stream)
+// pdb: NiParticlesData::SaveBinary | NiParticlesData.obj | fnv360_0822_retail, caller_sim + bridge(vtable|caller_sim) + skyrim(caller_sim), high
+void FUN_00a97290_holder::NiParticlesData_SaveBinary(NiStream& stream)
 {
-    ((GeoSave*)this)->FUN_00a68520(stream);
+    ((GeoSave*)this)->NiGeometryData_SaveBinary(stream);
     bool hasRadii = m_pfRadii != 0;
     stream.output->Write(&hasRadii, 1);
     stream.output->Write(&m_usActive, 2);

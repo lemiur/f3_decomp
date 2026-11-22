@@ -2994,7 +2994,7 @@ struct DisplayForm
     float FUN_004be380(bool);
     int GetField19C();
     unsigned char FUN_00525b20(bool, int, DisplayPlayer*);
-    DisplayForm* FUN_00525980(DisplayPlayer*);
+    DisplayForm* Script_IsInListFunction(DisplayPlayer*);
     const char* GetStringAtOffsetC4();
     int GetFlaggedValue(bool);
     float FUN_00709430(int);

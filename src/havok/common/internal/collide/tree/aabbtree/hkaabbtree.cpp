@@ -377,7 +377,8 @@ struct S_00d9d650_Node
 void __cdecl AppendElement();
 
 // @fnv 0x00d9c2d0
-void __cdecl FUN_00d9c2d0(int param_1, unsigned short param_2) {
+// pdb: hkString::strStr | hkString.obj | fnv360_0822_debug, objrun + bridge(caller_sim|call_gap) + skyrim(caller_sim), high
+void __cdecl hkString_strStr(int param_1, unsigned short param_2) {
     AppendElement();
 }
 

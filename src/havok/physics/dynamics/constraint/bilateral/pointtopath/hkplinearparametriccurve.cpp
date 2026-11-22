@@ -111,7 +111,7 @@ extern "C" __m128 _mm_add_ps(__m128 a, __m128 b);
 
 extern const __m128 DAT_010ec7f0;
 
-int __cdecl FUN_00cbfef0(float f);
+int __cdecl hkMath_hkFloatToInt(float f);
 
 struct hkSimdRealE474
 {
@@ -173,7 +173,7 @@ extern "C" __m128 _mm_shuffle_ps(__m128, __m128, unsigned int);
 extern "C" __m128 _mm_set_ss(float);
 extern "C" __m128 _mm_set_ps1(float);
 extern "C" void _mm_store_ss(float*, __m128);
-extern int __cdecl FUN_00cbfef0(float f);
+extern int __cdecl hkMath_hkFloatToInt(float f);
 
 extern const __m128 DAT_010ec7f0;
 
@@ -276,7 +276,7 @@ union hkVector4q
 
 extern __m128 DAT_010ec7f0;
 
-int __cdecl FUN_00cbfef0(hkReal r);
+int __cdecl hkMath_hkFloatToInt(hkReal r);
 
 struct LinearCurveT : public hkpLinearParametricCurve
 {
@@ -289,7 +289,7 @@ struct LinearCurveT : public hkpLinearParametricCurve
 
 }  // namespace fnv_00e478d0
 
-int __cdecl FUN_00cbfef0(float f);
+int __cdecl hkMath_hkFloatToInt(float f);
 
 class FUN_00e47c30_cls
 {
@@ -302,11 +302,11 @@ class FUN_00e47c30_cls
     float GetInterpolatedValue(float t) const;
 };
 
-// Linearly interpolates, or extrapolates past the ends, between entries of m_iSlotIds at t using the index from FUN_00cbfef0.
+// Linearly interpolates, or extrapolates past the ends, between entries of m_iSlotIds at t using the index from hkMath_hkFloatToInt.
 // @fnv 0x00e47c30
 float FUN_00e47c30_cls::GetInterpolatedValue(float t) const
 {
-    int i = FUN_00cbfef0(t);
+    int i = hkMath_hkFloatToInt(t);
     float fInterval;
     if (i >= m_uiArrayCount - 1)
     {

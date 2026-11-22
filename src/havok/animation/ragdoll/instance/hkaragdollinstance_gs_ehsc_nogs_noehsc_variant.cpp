@@ -1378,7 +1378,7 @@ struct UnkCall
     __m128 m_kAngularVelocity;
 
     void FUN_00c9c1d0();
-    void FUN_00ca8860(const hkVec4* pos, const FUN_005611c0_t* rot);
+    void hkpRigidBody_setPositionAndRotation(const hkVec4* pos, const FUN_005611c0_t* rot);
 
     void SetTranslationalVelocity(const float* v)
     {

@@ -2,7 +2,7 @@
 // src/havok/physics/collide/agent/convexagent/boxbox/hkpboxboxagent.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/physics/collide/agent/convexagent/boxbox/hkpboxboxagent.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-extern "C" void* __cdecl FUN_00d401d0(void);
+extern "C" void* __cdecl hkpBoxBoxAgent_createBoxBoxAgent(void);
 extern "C" void* __cdecl FUN_00d406c0(void);
 extern "C" void* __cdecl FUN_00dac450(void);
 extern "C" void* __cdecl FUN_00daf8e0(void);
@@ -21,7 +21,7 @@ struct FUN_00d408e0_1
 // @fnv 0x00d408e0
 void __cdecl FUN_00d408e0(FUN_00d408e0_1* a)
 {
-    a->p1 = (void*)&FUN_00d401d0;
+    a->p1 = (void*)&hkpBoxBoxAgent_createBoxBoxAgent;
     a->p2 = (void*)&FUN_00d406c0;
     a->p3 = (void*)&FUN_00dac450;
     a->p4 = (void*)&FUN_00daf8e0;
@@ -163,8 +163,9 @@ struct SubStubFn_d401
 {
     void FUN_00a3b580();
 };
-void* FUN_00a35760(void* apFirst, void* apSecond, void* a3, void* a4);
-void* FUN_00d401d0(void* apFirst, void* apSecond, void* a3, void* a4)
+void* hkpGskfAgent_createGskfAgent(void* apFirst, void* apSecond, void* a3, void* a4);
+// pdb: hkpBoxBoxAgent::createBoxBoxAgent | hkpBoxBoxAgent.obj | fnv360_0822_retail, uvref + bridge(uvref|uvref) + skyrim(uvref), high
+void* hkpBoxBoxAgent_createBoxBoxAgent(void* apFirst, void* apSecond, void* a3, void* a4)
 {
     SrcObjFn* src = (SrcObjFn*)a3;
     float fSrcValue = src->m_04;
@@ -187,7 +188,7 @@ void* FUN_00d401d0(void* apFirst, void* apSecond, void* a3, void* a4)
     ((SubStubFn_d401*)((char*)pSpawned + 0x10))->FUN_00a3b580();
     return pSpawned;
 callPath:
-    return FUN_00a35760(apFirst, apSecond, a3, a4);
+    return hkpGskfAgent_createGskfAgent(apFirst, apSecond, a3, a4);
 }
 
 
@@ -204,7 +205,8 @@ typedef void(__cdecl* FUN_00d406c0_fn4)(void*, void*, void*, void*);
 extern "C" void* __cdecl FUN_00d406c0(void);
 
 // @fnv 0x00d408c0
-void __stdcall FUN_00d408c0(void* a1, void* a2, void* a3, void* a4)
+// pdb: hkpBoxBoxAgent::getPenetrations | hkpBoxBoxAgent.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
+void __stdcall hkpBoxBoxAgent_getPenetrations(void* a1, void* a2, void* a3, void* a4)
 {
     ((FUN_00d406c0_fn4)FUN_00d406c0)(a1, a2, a3, a4);
 }

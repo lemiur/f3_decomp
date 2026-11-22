@@ -282,7 +282,8 @@ struct Holder {
 
 unsigned int __stdcall FUN_0041a4b0(Node** out);
 
-unsigned int __stdcall FUN_00442e50(Holder h) {
+// pdb: NavMeshArray::AddNavMesh | TESDataHandler.obj | fnv360_0822_retail, call_seq + skyrim(call_gap), high
+unsigned int __stdcall NavMeshArray_AddNavMesh(Holder h) {
     unsigned int r = FUN_0041a4b0(&h.node);
     return r;
 }

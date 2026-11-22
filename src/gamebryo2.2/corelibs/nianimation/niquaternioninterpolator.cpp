@@ -127,7 +127,7 @@ struct FUN_00a95ca0_helper
 struct QVal
 {
     char data[16];
-    void FUN_00a6e4a0(NiStream*);
+    void NiQuaternion_SaveBinary(NiStream*);
 };
 struct TargetWrap
 {
@@ -140,7 +140,7 @@ struct TargetWrap
 void TargetWrap::SaveToStream(NiStream* kStream)
 {
     ((FUN_00a95ca0_helper*)this)->FUN_00a95ca0(kStream);
-    _q.FUN_00a6e4a0(kStream);
+    _q.NiQuaternion_SaveBinary(kStream);
     kStream->SaveLink(_p);
 }
 
@@ -405,14 +405,15 @@ class BA48A50Base : public BA48A50Object
 class BA48A50Interpolator : public BA48A50Base
 {
   public:
-    bool FUN_00a48a50(BA48A50Object* pkObject);
+    bool NiQuaternionInterpolator_IsEqual(BA48A50Object* pkObject);
 
     BA48A50Quaternion m_kValue;
     BA48A50Pointer<BA48A50Object> m_spTransformData;
 };
 
 // @fnv 0x00a48a50
-bool BA48A50Interpolator::FUN_00a48a50(BA48A50Object* pkObject)
+// pdb: NiQuaternionInterpolator::IsEqual | NiQuaternionInterpolator.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun) + skyrim(caller_sim), high
+bool BA48A50Interpolator::NiQuaternionInterpolator_IsEqual(BA48A50Object* pkObject)
 {
     if (!BaseIsEqual(pkObject))
         return false;

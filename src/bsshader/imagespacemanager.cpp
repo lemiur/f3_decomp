@@ -333,11 +333,12 @@ void FUN_00b8af60_shell::RaiseBlurRadius(float afBlurRadius)
 
 struct FUN_00b8af90_shell : public ImageSpaceManager
 {
-    void FUN_00b8af90(float);
+    void ImageSpaceManager_ApplyMotionBlurStrengthParamModifierWeather(float);
 };
 
 // @fnv 0x00b8af90
-void FUN_00b8af90_shell::FUN_00b8af90(float afBlurRadius)
+// pdb: ImageSpaceManager::ApplyMotionBlurStrengthParamModifierWeather | ImageSpaceManager.obj | fnv360_0822_retail, call_seq + bridge(call_gap|objrun), high
+void FUN_00b8af90_shell::ImageSpaceManager_ApplyMotionBlurStrengthParamModifierWeather(float afBlurRadius)
 {
     *(float*)((char*)this + 0x2f4) += afBlurRadius;
 }
@@ -407,7 +408,8 @@ struct PtrTable
 };
 
 // @fnv 0x00b8b440
-void __fastcall FUN_00b8b440(char* pThis, int, bool bFlag)
+// pdb: ImageSpaceManager::ApplyCurrentParameterData | ImageSpaceManager.obj | fnv360_0721_beta, udata + bridge(hash|objrun), high
+void __fastcall ImageSpaceManager_ApplyCurrentParameterData(char* pThis, int, bool bFlag)
 {
     PtrTable** ppTable = (PtrTable**)(pThis + 8);
     if ((*ppTable)->p00)
@@ -874,7 +876,8 @@ void* UnkClass::DestroyIfFlagged(unsigned int auiFlags)
 }
 
 // @fnv 0x00b8aea0
-void __fastcall FUN_00b8aea0(char* self)
+// pdb: ImageSpaceManager::ResetWeatherData | ImageSpaceManager.obj | fnv360_0822_retail, objrun + bridge(hash|objrun), high
+void __fastcall ImageSpaceManager_ResetWeatherData(char* self)
 {
     float* p = (float*)(self + 0x14c);
     int i = 0xf;
@@ -935,7 +938,8 @@ void B8AD00Header::SwapEndian()
 extern ImageSpaceModifierParameterData DAT_011ff940;
 
 // @fnv 0x00b8ad70
-void __cdecl FUN_00b8ad70()
+// pdb: ImageSpaceManager::InitDefaultParameter | ImageSpaceManager.obj | fnv360_0822_retail, objrun + bridge(hash|call_seq), high
+void __cdecl ImageSpaceManager_InitDefaultParameter()
 {
     DAT_011ff940.m_afFirstParameterSet[0] = 0.5f;
     DAT_011ff940.m_afFirstParameterSet[1] = 7.0f;
@@ -2765,12 +2769,13 @@ class AutoMemContext
 class PartialScreenGeometryReceiver : public ImageSpaceManager
 {
   public:
-    void FUN_00b8c3b0(float a1, float a2, NiPointer<NiScreenElements>& a3);
+    void ImageSpaceManager_CreatePartialScreenGeometry(float a1, float a2, NiPointer<NiScreenElements>& a3);
 };
 
 // Creates NiScreenElements, sets rectangle bounds and data using a1 and a2, then assigns the elements to a3.
 // @fnv 0x00b8c3b0
-void PartialScreenGeometryReceiver::FUN_00b8c3b0(float afWidth, float afHeight,
+// pdb: ImageSpaceManager::CreatePartialScreenGeometry | ImageSpaceManager.obj | fnv360_0822_retail, ustr + bridge(ustr|ustr) + skyrim(ustr), high
+void PartialScreenGeometryReceiver::ImageSpaceManager_CreatePartialScreenGeometry(float afWidth, float afHeight,
                                                  NiPointer<NiScreenElements>& apScreenElements)
 {
     AutoMemContext memContext(0x27);

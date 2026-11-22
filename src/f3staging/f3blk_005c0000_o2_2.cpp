@@ -827,7 +827,7 @@ struct ScrapHeapBuffer
     char* m_pCurrentPosition;
     char* m_pBufferLimit;
     void* m_pBufferHeader;
-    void* FUN_0086c710(unsigned int size, unsigned int align);
+    void* ScrapHeap_Allocate(unsigned int size, unsigned int align);
 };
 
 struct AStarNode
@@ -857,7 +857,7 @@ struct AStarNodeFresh : AStarNode
     }
     static void* operator new(unsigned int size, ScrapHeapBuffer& pool) throw()
     {
-        return pool.FUN_0086c710(size, ::DAT_00e27ed4);
+        return pool.ScrapHeap_Allocate(size, ::DAT_00e27ed4);
     }
 };
 

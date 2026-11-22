@@ -1019,17 +1019,17 @@ void FUN_00a286e0(unsigned int auiUnused0, unsigned int auiUnused1, unsigned int
 }
 
 struct FUN_00a28720_target {
-    void __thiscall FUN_00a6e4a0(void* value);
+    void __thiscall NiQuaternion_SaveBinary(void* value);
 };
 
 void __cdecl CallAnimCallback(void* a, void* b);
 
-// Calls CallAnimCallback with a and b, then invokes FUN_00a6e4a0 on the object at b+4 passing a.
+// Calls CallAnimCallback with a and b, then invokes NiQuaternion_SaveBinary on the object at b+4 passing a.
 // @fnv 0x00a28720
 void __cdecl FUN_00a28720(void* a, void* b) {
     CallAnimCallback(a, b);
     reinterpret_cast<FUN_00a28720_target*>(
-        reinterpret_cast<char*>(b) + 4)->FUN_00a6e4a0(a);
+        reinterpret_cast<char*>(b) + 4)->NiQuaternion_SaveBinary(a);
 }
 
 extern "C" unsigned int DAT_011f366c;
@@ -1112,7 +1112,7 @@ void __cdecl CallSpawnTarget(float afValue, char* pBufferX, char* pBufferY, Spaw
     pTarget->Callee(afValue, pBufferX + 4, pBufferX + 0x14, pBufferY + 0x14, pBufferY + 4);
 }
 
-// Reconstruction of FUN_00a28dc0.
+// Reconstruction of NiBezRotKey_FillDerivedVals.
 //
 // The object is a fixed-size array of 36-byte key records:
 //   +0x00  quaternion q0   (16 bytes)
@@ -1143,7 +1143,8 @@ extern FNVQuat* __cdecl FUN_00a6dd50(FNVQuat* out, FNVQuat* a, FNVQuat* b, FNVQu
 
 // For count >= 2, calls FUN_00a28ab0 then fills each key's q1 with FUN_00a6dd50 results from neighbouring q0 values, clamping the ends.
 // @f3 0x008a3270 (community match, verified in this file)
-void __cdecl FUN_00a28dc0(FNVAnim* pAnim, unsigned int count, unsigned int flag)
+// pdb: NiBezRotKey::FillDerivedVals | NiBezRotKey.obj | fnv360_0822_retail, objrun_prop + bridge(caller_sim|caller_sim) + skyrim(caller_sim), high
+void __cdecl NiBezRotKey_FillDerivedVals(FNVAnim* pAnim, unsigned int count, unsigned int flag)
 {
     if (count < 2) {
         return;
@@ -1256,19 +1257,20 @@ struct FUN_00a29550_stream {
 };
 
 struct Inner {
-    void FUN_00a698a0(void* target);
+    void NiColorA_SaveBinary(void* target);
 };
 struct Outer {
     int unk00;
     Inner inner04;
 };
 void __cdecl CallAnimCallback(void* target, Outer* source);
-// Calls CallAnimCallback with target and source, then invokes source->inner04.FUN_00a698a0 on target.
+// Calls CallAnimCallback with target and source, then invokes source->inner04.NiColorA_SaveBinary on target.
 // @fnv 0x00a29660
-void __cdecl FUN_00a29660(void* target, Outer* source)
+// pdb: NiColorKey::SaveBinary | NiColorKey.obj | fnv360_0822_retail, caller_sim + bridge(caller_sim|objrun_prop) + skyrim(caller_sim), high
+void __cdecl NiColorKey_SaveBinary(void* target, Outer* source)
 {
     CallAnimCallback(target, source);
-    source->inner04.FUN_00a698a0(target);
+    source->inner04.NiColorA_SaveBinary(target);
 }
 
 // Reconstruction of UpdateArrayElements (0x00a29e40, 189 bytes).
@@ -2145,12 +2147,13 @@ struct FUN_00a2b980_cls {
     unsigned int m_uiC;
 
     void FUN_00a27430(NiStreamImpl& stream);
-    void FUN_00a2b980(NiStreamImpl& stream);
+    void NiTCBPosKey_LoadBinary(NiStreamImpl& stream);
 };
 
 // Calls FUN_00a27430, then reads m_uiA, m_uiB and m_uiC from the stream.
 // @fnv 0x00a2b980
-void FUN_00a2b980_cls::FUN_00a2b980(NiStreamImpl& stream)
+// pdb: NiTCBPosKey::LoadBinary | NiTCBPosKey.obj | fnv360_0822_retail, caller_sim + bridge(call_seq|caller_sim) + skyrim(caller_sim), high
+void FUN_00a2b980_cls::NiTCBPosKey_LoadBinary(NiStreamImpl& stream)
 {
     FUN_00a27430(stream);
     ReadBinaryValue(stream, m_uiA);
@@ -3237,15 +3240,16 @@ struct FUN_00a2c9d0_cls {
     int unk08;
     int unk0c;
     int unk10;
-    void FUN_00a26eb0(S_00a2c9d0_Owner* owner);
-    void FUN_00a2c9d0(S_00a2c9d0_Owner* owner);
+    void NiFloatKey_LoadBinary(S_00a2c9d0_Owner* owner);
+    void NiTCBFloatKey_LoadBinary(S_00a2c9d0_Owner* owner);
 };
 
-// Calls FUN_00a26eb0, then reads three 4-byte values from owner->m_stream into unk08, unk0c and unk10.
+// Calls NiFloatKey_LoadBinary, then reads three 4-byte values from owner->m_stream into unk08, unk0c and unk10.
 // @fnv 0x00a2c9d0
-void FUN_00a2c9d0_cls::FUN_00a2c9d0(S_00a2c9d0_Owner* owner)
+// pdb: NiTCBFloatKey::LoadBinary | NiTCBFloatKey.obj | fnv360_0822_retail, caller_sim + bridge(hash|objrun_open) + skyrim(caller_sim), high
+void FUN_00a2c9d0_cls::NiTCBFloatKey_LoadBinary(S_00a2c9d0_Owner* owner)
 {
-    FUN_00a26eb0(owner);
+    NiFloatKey_LoadBinary(owner);
     owner->m_stream->Read(&unk08, 4);
     owner->m_stream->Read(&unk0c, 4);
     owner->m_stream->Read(&unk10, 4);
@@ -3303,7 +3307,7 @@ struct KeyframeElement {
     float continuity;
     float bias;
     ~KeyframeElement();
-    void FUN_00a2c9d0(void* context);
+    void NiTCBFloatKey_LoadBinary(void* context);
     static void* operator new[](unsigned int bytes) {
         return ((P03MM*)&g_memoryManager)->Allocate(bytes);
     }
@@ -3314,7 +3318,7 @@ KeyframeElement* __cdecl AllocateKeyframeElements(void* context, unsigned int co
     if (count > 0) {
         KeyframeElement* cursor = elements;
         do {
-            cursor->FUN_00a2c9d0(context);
+            cursor->NiTCBFloatKey_LoadBinary(context);
             ++cursor;
             --count;
         } while (count != 0);
@@ -3715,11 +3719,12 @@ public:
     unsigned int m_uiItemCount;
     void* unk10;
     A30540Entry* m_pEntries;
-    void FUN_00a30540();
+    void NiControllerSequence_DetachInterpolators();
 };
 
 // @fnv 0x00a30540
-void FUN_00a30540_cls::FUN_00a30540()
+// pdb: NiControllerSequence::DetachInterpolators | NiControllerSequence.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_seq), high
+void FUN_00a30540_cls::NiControllerSequence_DetachInterpolators()
 {
     for (unsigned int index = 0; index < m_uiItemCount; index++) {
         A30540Entry* entry = &m_pEntries[index];
@@ -4604,9 +4609,9 @@ bool FUN_00a2c550(const A2C550Key& kA, const A2C550Key& kB)
         && kA.m_fData6 == kB.m_fData6 && kA.m_fData7 == kB.m_fData7;
 }
 
-void __cdecl FUN_00a29660(void* dst, const void* src);
+void __cdecl NiColorKey_SaveBinary(void* dst, const void* src);
 // @fnv 0x00a2cfd0
-void __cdecl FUN_00a2cfd0(void* target, const unsigned char* source, unsigned int count) { for (unsigned int remaining = count; remaining > 0; --remaining) { FUN_00a29660(target, source); source += 20; } }
+void __cdecl FUN_00a2cfd0(void* target, const unsigned char* source, unsigned int count) { for (unsigned int remaining = count; remaining > 0; --remaining) { NiColorKey_SaveBinary(target, source); source += 20; } }
 
 namespace fnv_00a2d1d0 {
 struct FloatRecord_b5532;
@@ -4748,7 +4753,8 @@ NiColorA_K __cdecl InterpolateColor(float fTime, NiColorKey_K* pkKeys, unsigned 
     unsigned int uiNumKeys, unsigned int& uiLastIdx, unsigned char ucSize);
 // Returns the color at fTime by clamping to the first or last key when out of range, otherwise calling InterpolateColor to interpolate between keys.
 // @fnv 0x00a298f0
-NiColorA_K __cdecl FUN_00a298f0(float fTime, NiColorKey_K* pkKeys, unsigned int eType,
+// pdb: NiColorKey::GenInterpDefault | NiColorKey.obj | fnv360_0721_beta, objrun_open + bridge(caller_sim|objrun_open) + skyrim(caller_sim), high
+NiColorA_K __cdecl NiColorKey_GenInterpDefault(float fTime, NiColorKey_K* pkKeys, unsigned int eType,
     unsigned int uiNumKeys, unsigned char ucSize)
 {
     if (uiNumKeys) {
@@ -4789,7 +4795,8 @@ struct EulerQuat {
 };
 float InterpolateKey(float, unsigned int, unsigned int, void*, unsigned int*, unsigned char);
 // @fnv 0x00a29b10
-void FUN_00a29b10(float fTime, const void* pkKey0, const void* pkKey1, void* pvResult)
+// pdb: NiEulerRotKey::Interpolate | NiEulerRotKey.obj | fnv360_0822_retail, objopen_prop + bridge(caller_sim|caller_sim) + skyrim(caller_sim), high
+void NiEulerRotKey_Interpolate(float fTime, const void* pkKey0, const void* pkKey1, void* pvResult)
 {
     RotationChannels* pkEuler = (RotationChannels*)pkKey0;
     float afAngle[3];

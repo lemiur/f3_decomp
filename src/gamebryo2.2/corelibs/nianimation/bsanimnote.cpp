@@ -19,11 +19,12 @@ struct BSAnimNote
 {
     unsigned char m_b0[12];
     float fTime;
-    bool __thiscall FUN_00a44930(const TimedTextEntry* apTextKey);
+    bool __thiscall ParseTextKey(const TimedTextEntry* apTextKey);
 };
 
 // @fnv 0x00a44930
-bool __thiscall BSAnimNote::FUN_00a44930(const TimedTextEntry* apTextKey)
+// pdb: BSAnimNote::ParseTextKey | BSAnimNote.obj | fnv360_0822_retail, call_seq + bridge(vtable|call_seq) + skyrim(call_seq), high
+bool __thiscall BSAnimNote::ParseTextKey(const TimedTextEntry* apTextKey)
 {
     fTime = apTextKey->m_fTime;
     return true;
@@ -43,7 +44,8 @@ struct _Call_a5d3a0
 
 // Allocates a 0x10-byte BSFadeNode, calls Init on it, sets its vtable to DAT_01097dd4, and returns the pointer or 0.
 // @fnv 0x00a44940
-void* __cdecl FUN_00a44940()
+// pdb: BSAnimNotes::CreateObject | BSAnimNote.obj | fnv360_0822_retail, objrun + bridge(hash|objrun), high
+void* __cdecl BSAnimNotes_CreateObject()
 {
     void* p = BSFadeNode::operator new(0x10);
     if (p)
@@ -480,11 +482,12 @@ class A4AF0Node : public A4AF0Object
     A4AF0Object** m_ppkChildren;
     unsigned short m_usChildCount;
 
-    void FUN_00a44af0(A4AF0Stream& kStream);
+    void BSAnimNotes_LoadBinary(A4AF0Stream& kStream);
 };
 
 // @fnv 0x00a44af0
-void A4AF0Node::FUN_00a44af0(A4AF0Stream& kStream)
+// pdb: BSAnimNotes::LoadBinary | BSAnimNote.obj | fnv360_0822_retail, caller_sim + bridge(vtable|caller_sim) + skyrim(caller_sim), high
+void A4AF0Node::BSAnimNotes_LoadBinary(A4AF0Stream& kStream)
 {
     A4AF0Object::LoadBinary(kStream);
 
@@ -615,12 +618,13 @@ class LoaderA44 : public FUN_00a89af0_helper
     int m_08;
     int m_0C;
 
-    void FUN_00a44a90(NiStreamA44& kStream);
+    void BSAnimNote_SaveBinary(NiStreamA44& kStream);
 };
 
 // Calls the base class load routine, then reads m_08 and m_0C from the stream.
 // @fnv 0x00a44a90
-void LoaderA44::FUN_00a44a90(NiStreamA44& kStream)
+// pdb: BSAnimNote::SaveBinary | BSAnimNote.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun) + skyrim(objrun), high
+void LoaderA44::BSAnimNote_SaveBinary(NiStreamA44& kStream)
 {
     FUN_00a89af0(kStream);
     ReadBinaryValue(kStream, m_08);
@@ -828,11 +832,12 @@ class B80Notes : public B80Object
     NiObject** m_ppkNotes;
     unsigned short m_usNumNotes;
 
-    void FUN_00a44b80(B80Stream& kStream);
+    void BSAnimNotes_SaveBinary(B80Stream& kStream);
 };
 // Saves the B80Notes object by calling the base B80Object save, writing m_usNumNotes, and saving each NiObject link ID in m_ppkNotes.
 // @fnv 0x00a44b80
-void B80Notes::FUN_00a44b80(B80Stream& kStream)
+// pdb: BSAnimNotes::SaveBinary | BSAnimNote.obj | fnv360_0822_retail, objrun + bridge(vtable|objrun) + skyrim(objrun_open), high
+void B80Notes::BSAnimNotes_SaveBinary(B80Stream& kStream)
 {
     B80Object::FUN_00a89af0(kStream);
     B80SaveBinary(*kStream.m_pBackingStream, m_usNumNotes);

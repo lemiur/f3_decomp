@@ -20,11 +20,12 @@ struct NiPSysFieldModifier
 struct NiPSysGravityFieldModifier : NiPSysFieldModifier
 {
     NiPSysGravityFieldModifier();
-    void FUN_00c267f0(NiStream&);
+    void NiBlendPoint3Interpolator_SaveBinary(NiStream&);
 };
 
 // @fnv 0x00c267f0
-void NiPSysGravityFieldModifier::FUN_00c267f0(NiStream& stream)
+// pdb: NiBlendPoint3Interpolator::SaveBinary | NiBlendPoint3Interpolator.obj | fnv360_0822_retail, caller_sim + skyrim(caller_sim), high
+void NiPSysGravityFieldModifier::NiBlendPoint3Interpolator_SaveBinary(NiStream& stream)
 {
     NiPSysFieldModifier::SaveBinary(stream);
     ((NiColor*)(this + 0x30))->SaveBinary(stream);
