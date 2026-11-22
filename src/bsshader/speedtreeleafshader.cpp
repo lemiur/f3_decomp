@@ -254,7 +254,7 @@ SpeedTreeLeafShader* CreateSpeedTreeLeafShader()
     pDecl->SetEntry(2, 7, 5, 1, 0);
     pDecl->SetEntry8(0, 3, 8, 0x80000000, 3, 2, 0, 0);
     pDecl->Finalize();
-    SpeedTreeLeafShader* pLeafShader = new ((FadeTag*)0) SpeedTreeLeafShader;
+    SpeedTreeLeafShader* pLeafShader = new SpeedTreeLeafShader;
     ((LeafV*)pLeafShader)->Init19();
     ((LeafV*)pLeafShader)->Init79();
     ((FUN_00bb1d40_t*)pLeafShader)->CreatePasses();

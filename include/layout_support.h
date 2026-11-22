@@ -310,20 +310,6 @@ template <class T, class Allocator> class NiTArray
     unsigned int GetSize();
     T& GetAt(unsigned int index);
     T RemoveAtAndFill(unsigned int index);
-    // Names: FNV360_PDB (NiTArray::SetSize, SetAt, SetAtGrow, Add).
-    void SetSize(unsigned int uiMaxSize);
-    void SetAt(unsigned int uiIndex, const T& element);
-    unsigned int SetAtGrow(unsigned int uiIndex, const T& element)
-    {
-        if (uiIndex >= m_usMaxSize)
-            SetSize(uiIndex + m_usGrowBy);
-        SetAt(uiIndex, element);
-        return uiIndex;
-    }
-    unsigned int Add(const T& element)
-    {
-        return SetAtGrow(m_usSize, element);
-    }
 };
 template <class T> class NiTObjectArray : public NiTArray<T, NiTNewInterface<T> >
 {

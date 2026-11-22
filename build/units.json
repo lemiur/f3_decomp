@@ -3381,7 +3381,8 @@
     "?$S1@?1??ResetColorSlots@@YAXH@Z@4IA": "0x011702f8",
     "?kDef@?1??ResetColorSlots@@YAXH@Z@4URgbaColor@@A": "0x011702e8",
     "?FUN_00ba8ab0@FUN_00ba8ab0_shell@@QAEXM@Z": "0x00b2ad00",
-    "?RemovePos@?$NiTPointerListBase@V?$NiTPointerAllocator@I@@PAD@@QAEPADAAPAX@Z": "0x00496910"
+    "?RemovePos@?$NiTPointerListBase@V?$NiTPointerAllocator@I@@PAD@@QAEPADAAPAX@Z": "0x00496910",
+    "??2NiMemObject@@SAPAXI@Z": "0x0089eb90"
    }
   },
   {
@@ -8335,7 +8336,7 @@
     },
     {
      "address": "0x00b2a8c0",
-     "symbol": "?GetTexture@BSShaderTextureSet@@UAEXW4TextureTypeEnum@BSShaderProperty@@AAV?$NiPointer@VNiTexture@@@@@Z",
+     "symbol": "?GetTexture@BSShaderTextureSet@@UBEXW4TextureTypeEnum@BSShaderProperty@@AAV?$NiPointer@VNiTexture@@@@@Z",
      "size": 217
     },
     {
@@ -8370,7 +8371,9 @@
     "?WriteStreamString@NiStream@@QAEXPBD@Z": "0x0082af70",
     "??1?$NiPointer@VNiTexture@@@@QAE@XZ": "0x00424aa0",
     "??0?$NiPointer@VNiTexture@@@@QAE@XZ": "0x004280b0",
-    "__ehhandler$?GetTexture@BSShaderTextureSet@@UAEXW4TextureTypeEnum@BSShaderProperty@@AAV?$NiPointer@VNiTexture@@@@@Z": "0x00c335a8"
+    "__ehhandler$?GetTexture@BSShaderTextureSet@@UAEXW4TextureTypeEnum@BSShaderProperty@@AAV?$NiPointer@VNiTexture@@@@@Z": "0x00c335a8",
+    "?LoadBinary@NiObject@@UAEXAAVNiStream@@@Z": "0x00825ad0",
+    "__ehhandler$?GetTexture@BSShaderTextureSet@@UBEXW4TextureTypeEnum@BSShaderProperty@@AAV?$NiPointer@VNiTexture@@@@@Z": "0x00c335a8"
    }
   },
   {
@@ -15162,7 +15165,8 @@
     "__ehhandler$??0SpeedTreeLeafShader@@QAE@XZ": "0x00c7b4d8",
     "__ehhandler$?UpdateShaderConstants@SpeedTreeLeafShader@@QAEXXZ": "0x00c7b53f",
     "__ehhandler$?CreateSpeedTreeLeafShader@@YAPAVSpeedTreeLeafShader@@XZ": "0x00c7b512",
-    "?DeleteThis@NiRefObject@@UAEXXZ": "0x00987c70"
+    "?DeleteThis@NiRefObject@@UAEXXZ": "0x00987c70",
+    "??2NiMemObject@@SAPAXI@Z": "0x0089eb90"
    }
   },
   {
@@ -516312,22 +516316,11 @@
     "__imp__InterlockedDecrement@4": "0x00d9b064",
     "__imp__InterlockedIncrement@4": "0x00d9b068",
     "?_delete@@YAXPAXI@Z": "0x0089ec10",
-    "?FUN_00a7d330@@YAPADPBD@Z": "0x00847b50",
-    "?FUN_00a7d550@@YAPADPBDM@Z": "0x00847dd0",
     "__real@00000000": "0x00eaad58",
     "?LoadBinary@NiInterpolator@@UAEXAAVNiStream@@@Z": "0x00c22010",
-    "?DeserializeObject@NiStream@@QAEPAVNiObject@@XZ": "0x0082b5d0",
     "_g_011f3fe4_arg1": "0x010787c4",
-    "?FUN_00a81fe0@BaseThunk@@QAE_NAAVNiStream@@@Z": "0x008c1240",
     "?DAT_010231b0@@3NA": "0x00dc2d78",
     "?DAT_010241b0@@3NA": "0x00db7268",
-    "?FUN_00a62660@Basis@@QAEPAXXZ": "0x00c24260",
-    "?BaseIsEqual@A57E90Controller@@QAE_NPAVA57E90Object@@@Z": "0x008c1550",
-    "?FUN_00a724d0@S_00a58160_Foo@@QAEXPAUS_00a58160_Stream@@@Z": "0x008cbd30",
-    "?BaseGetViewerStrings@BA58200Sequence@@QAEXPAVBA58200StringArray@@@Z": "0x008d0d30",
-    "?g_pcA58200Name@@3PBDB": "0x01092a40",
-    "?SetSize@BA58200StringArray@@QAEXI@Z": "0x00555790",
-    "?SetAt@BA58200StringArray@@QAEXIABQAD@Z": "0x005b3880",
     "??_C@_0N@JEILANCK@m_fStartTime?$AA@": "0x00e22110",
     "??_C@_0L@JCPHBAKJ@m_fEndTime?$AA@": "0x00e3195c",
     "?FUN_00a57f80@@YIXPAX@Z": "0x004c1f50",
@@ -516339,9 +516332,9 @@
     "?GetViewerStrings@NiInterpolator@@UAEXPAV?$NiTPrimitiveArray@PAD@@@Z": "0x008d0d30",
     "?ms_RTTI@NiBSplineInterpolator@@2VNiRTTI@@B": "0x01092a40",
     "?NiGetViewerString@@YAPADPBD@Z": "0x00847b50",
-    "?SetSize@?$NiTArray@PADV?$NiTMallocInterface@PAD@@@@QAEXI@Z": "0x00555790",
-    "?SetAt@?$NiTArray@PADV?$NiTMallocInterface@PAD@@@@QAEXIABQAD@Z": "0x005b3880",
-    "?NiGetViewerString@@YAPADPBDM@Z": "0x00847dd0"
+    "?NiGetViewerString@@YAPADPBDM@Z": "0x00847dd0",
+    "?SetSize@?$NiTPrimitiveArray@PAD@@QAEXI@Z": "0x00555790",
+    "?SetAt@?$NiTPrimitiveArray@PAD@@QAEXIABQAD@Z": "0x005b3880"
    }
   },
   {

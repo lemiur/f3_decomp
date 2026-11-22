@@ -19,10 +19,10 @@
 // @fnv 0x00ba87f0
 // pdb: BSShaderTextureSet::GetTexture | BSShaderTextureSet.obj | fnv360_0822_retail, vtable, medium
 // pdb params: aiType, aspTexture
-void BSShaderTextureSet::GetTexture(BSShaderProperty::TextureTypeEnum textureType, NiPointer<NiTexture>& textureOut)
+void BSShaderTextureSet::GetTexture(BSShaderProperty::TextureTypeEnum textureType, NiPointer<NiTexture>& textureOut) const
 {
     NiPointer<NiTexture> texture;
-    register const char* textureName = GetTexture(textureType);
+    register const char* textureName = GetTextureFilename(textureType);
     if (textureName)
         BSShaderManager::GetTexture(textureName, true, texture, true, textureType == BSShaderProperty::TEXTYPE_ENV);
     if (textureOut.m_pObject != texture.m_pObject)

@@ -6080,11 +6080,9 @@ extern NiRTTIStub g_kPointLightRTTI;  // 0x011f4a98
 class NiLightObj : public NiObject
 {
   public:
-    virtual const NiRTTIStub* GetRTTI() const;
-
     bool IsExactKindOf(const NiRTTIStub* pkRTTI) const
     {
-        return GetRTTI() == pkRTTI;
+        return (const NiRTTIStub*)GetRTTI() == pkRTTI;
     }
     static bool IsExactKindOf(const NiRTTIStub* pkRTTI, const NiLightObj* pkObject)
     {

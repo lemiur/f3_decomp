@@ -1102,17 +1102,6 @@ void RenderOwner::DrawSlots(void* destination)
     }
 }
 
-class NiRTTI
-{
-  public:
-    const char* m_pcName;
-    const NiRTTI* m_pBaseRTTI;
-
-    const NiRTTI* GetBaseRTTI() const
-    {
-        return m_pBaseRTTI;
-    }
-};
 
 class NiRTTIObject : public NiTexture
 {

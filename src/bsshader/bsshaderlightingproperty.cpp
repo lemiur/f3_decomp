@@ -209,14 +209,6 @@ void __fastcall FUN_00b70290(Dummy_00b70290* pThis, int edx_val, int arg)
     pThis->v50(arg);
 }
 
-struct NiRTTI
-{
-    char* GetName();
-    void* GetBaseRTTI();
-    char* m_pcName;
-    void* m_pBaseRTTI;
-};
-typedef char _sizecheck_NiRTTI[sizeof(NiRTTI) == 8 ? 1 : -1];
 struct FUN_00b702b0_shell : public NiRTTI
 {
     void FUN_00b702b0(char*, void*);
@@ -2223,6 +2215,7 @@ struct S00b700d0_RTTI;
 class S00b700d0_Alpha : public NiProperty
 {
   public:
+    virtual int Type() const;
     static void* operator new(unsigned int);
     static void operator delete(void*, unsigned int);
     S00b700d0_Alpha();
@@ -2276,21 +2269,10 @@ struct S00b700d0_B8
 class S00b700d0_Geom : public NiObjectNET
 {
   public:
-    virtual const S00b700d0_RTTI* GetRTTI() const;
-    virtual void virt0C();
-    virtual void virt10();
-    virtual void virt14();
-    virtual void virt18();
-    virtual void virt1C();
-    virtual void virt20();
-    virtual void virt24();
-    virtual void virt28();
-    virtual void virt2C();
-    virtual int virt30();
 
     bool IsExactKindOf(const S00b700d0_RTTI* r) const
     {
-        return GetRTTI() == r;
+        return (const S00b700d0_RTTI*)GetRTTI() == r;
     }
 
     NiProperty* FUN_00a59d30(unsigned int);
@@ -2371,8 +2353,8 @@ bool S00b700d0_Shader::ApplyAlphaProperty(S00b700d0_Geom* geom)
     if (geom->m_pkBC)
         SetBit(ulFlags[0], iLastRenderPassState, 2);
 
-    if (geom->virt30() &&
-        !SameRtti(geom->GetRTTI(), reinterpret_cast<S00b700d0_RTTI*>(DAT_0116ec58)))
+    if (geom->IsParticlesGeom() &&
+        !SameRtti((const S00b700d0_RTTI*)geom->GetRTTI(), reinterpret_cast<S00b700d0_RTTI*>(DAT_0116ec58)))
     {
         S00b700d0_Data* data = geom->m_pData;
         if (data)
