@@ -2,7 +2,11 @@
 // src/havok/physics/dynamics/world/simulation/multithreaded/cpu/hkpcpuagentsectorjob.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/physics/dynamics/world/simulation/multithreaded/cpu/hkpcpuagentsectorjob.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
+// hkpDeferredConstraintOwner: the members addConstraintToCriticalLockedIsland sets (New Vegas Xbox 360 PDB names).
 struct FUN_00d93330 {
+    char unk00[0x18];
+    int m_constraintAddRemoveCounter;  // +0x18
+    int m_constraintForCommand;        // +0x1C
     void __thiscall UpdateConstraint(int);
 };
 // @fnv 0x00d93330
@@ -10,8 +14,8 @@ struct FUN_00d93330 {
 // pdb params: constraint
 void __thiscall FUN_00d93330::UpdateConstraint(int v)
 {
-    ++(*(int*)((char*)this + 0x18));
-    *(int*)((char*)this + 0x1c) = v;
+    ++m_constraintAddRemoveCounter;
+    m_constraintForCommand = v;
 }
 
 struct FUN_00d93340_StandIn {

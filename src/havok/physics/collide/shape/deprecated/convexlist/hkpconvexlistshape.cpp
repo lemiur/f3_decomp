@@ -5,8 +5,13 @@
 
 #include "havok/hkpConvexListShape.h"
 
+// The hkpShapeContainer subobject of hkpConvexListShape (its second Fallout 3 vtable sits at +0x14): +0x30 and +0x34
+// are the shape's m_childShapes.m_data and m_size (+0x44 and +0x48 of the shape).
 struct FUN_00d5e2e0_Class
 {
+    char unk00[0x30];
+    void* m_childShapesData;
+    int m_childShapesSize;
     int GetNextKey(int key);
 };
 
@@ -16,7 +21,7 @@ struct FUN_00d5e2e0_Class
 int FUN_00d5e2e0_Class::GetNextKey(int key)
 {
     ++key;
-    if (key >= *(int*)((char*)this + 0x34))
+    if (key >= m_childShapesSize)
         key = -1;
     return key;
 }
