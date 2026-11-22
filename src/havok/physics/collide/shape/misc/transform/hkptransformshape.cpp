@@ -4,7 +4,7 @@
 
 #include "havok/hkpTransformShape.h"
 
-struct FnvCpu_FUN_00cf58f0_CpuObject
+struct FnvCpu_FUN_00cf58f0_CpuObject : public hkpTransformShape
 {
     char* FUN_00cf58f0();
 };
@@ -12,7 +12,7 @@ struct FnvCpu_FUN_00cf58f0_CpuObject
 // pdb: hkpTransformShape::getContainer | hkpTransformShape.obj | fnv360_0822_retail, objrun_sim, medium
 char* FnvCpu_FUN_00cf58f0_CpuObject::FUN_00cf58f0()
 {
-    return reinterpret_cast<char*>(this) + 16;
+    return reinterpret_cast<char*>(&m_pContainedShape);
 }
 
 class hkMemoryAllocatorCF5E

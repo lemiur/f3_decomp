@@ -30,11 +30,17 @@ char* FUN_00cfd3f0_class::FUN_00cfd3f0(unsigned short index)
     return (char*)m_3c + 0x30 + (unsigned char)*(unsigned char*)((char*)m_20 + index) * 32;
 }
 
+// hkpSimpleContactConstraintAtom (New Vegas Xbox 360 PDB layout)
 struct FUN_00cfcc70_data {
-    unsigned int m_00;
-    unsigned short m_04;
-    unsigned short m_08;
-    unsigned short m_0c;
+    unsigned short m_type;
+    unsigned short m_sizeOfAllAtoms;
+    unsigned short m_numContactPoints;            // +0x04
+    unsigned short m_numReservedContactPoints;
+    unsigned char m_numUserDatasForBodyA;
+    unsigned char m_numUserDatasForBodyB;
+    unsigned char m_contactPointPropertiesStriding;
+    unsigned char unk0B;
+    unsigned short m_maxNumContactPoints;         // +0x0C
 };
 
 struct FUN_00cfcc70_class {
@@ -54,9 +60,8 @@ struct FUN_00cfcc70_class {
 // pdb params: numPoints
 int FUN_00cfcc70_class::FUN_00cfcc70(int value) {
     FUN_00cfcc70_data* data = static_cast<FUN_00cfcc70_data*>(m_3c);
-    int field4 = data->m_04;
-    int limit = *reinterpret_cast<unsigned short*>(
-        reinterpret_cast<unsigned char*>(data) + 0x0c);
+    int field4 = data->m_numContactPoints;
+    int limit = data->m_maxNumContactPoints;
     int current = m_10;
 
     field4 += value;
@@ -211,12 +216,18 @@ int* __cdecl FUN_00cfdad0()
     return &DAT_01268798;
 }
 
-struct FnvCpu_FUN_00cfcc60_CpuObject { char* FUN_00cfcc60(); };
+// hkpSimpleConstraintContactMgr: m_constraint (an hkpConstraintInstance) at +0x44 (New Vegas Xbox 360 PDB).
+struct FnvCpu_FUN_00cfcc60_CpuObject
+{
+    char unk00[0x44];
+    char m_constraint[0x38];  // +0x44 hkpConstraintInstance
+    char* FUN_00cfcc60();
+};
 // @fnv 0x00cfcc60
 // pdb: hkpSimpleConstraintContactMgr::getConstraintInstance | hkpSimpleConstraintContactMgr.obj | fnv360_0822_retail, objrun_open, low
 char* FnvCpu_FUN_00cfcc60_CpuObject::FUN_00cfcc60()
 {
-    return reinterpret_cast<char*>(this) + 68;
+    return m_constraint;
 }
 
 struct FUN_00cfccc0_target {

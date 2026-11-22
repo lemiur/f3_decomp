@@ -4,7 +4,7 @@
 
 #include "havok/hkpBreakableConstraintData.h"
 
-struct FUN_00d4de80_class
+struct FUN_00d4de80_class : public hkpBreakableConstraintData
 {
     void FUN_00d4de80(int, void* out);
 };
@@ -13,8 +13,8 @@ struct FUN_00d4de80_class
 // pdb params: wantRuntime, infoOut
 void FUN_00d4de80_class::FUN_00d4de80(int, void* out)
 {
-    ((int*)out)[1] = *(unsigned short*)((char*)this + 0x1e);
-    ((int*)out)[0] = *(unsigned short*)((char*)this + 0x1c) + 0x34;
+    ((int*)out)[1] = m_usNumSolverResults;
+    ((int*)out)[0] = m_usRuntimeOffset + 0x34;
 }
 
 struct GenericConstraintAtomScheme

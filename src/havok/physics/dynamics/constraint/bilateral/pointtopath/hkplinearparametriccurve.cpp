@@ -4,7 +4,7 @@
 
 #include "havok/hkpLinearParametricCurve.h"
 
-struct FUN_00e47c20_s
+struct FUN_00e47c20_s : public hkpLinearParametricCurve
 {
     double FUN_00e47c20() const;
 };
@@ -13,7 +13,7 @@ struct FUN_00e47c20_s
 // pdb: hkpLinearParametricCurve::getEnd | hkpLinearParametricCurve.obj | fnv360_0822_retail, objrun_open, low
 double FUN_00e47c20_s::FUN_00e47c20() const
 {
-    return static_cast<double>(static_cast<int>(*(const int*)((const char*)this + 0x24)) - 1);
+    return static_cast<double>(m_kPoints.m_iElementCount - 1);
 }
 
 struct Vec : public hkVector4
