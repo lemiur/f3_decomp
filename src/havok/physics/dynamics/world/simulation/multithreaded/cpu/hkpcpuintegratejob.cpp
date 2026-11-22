@@ -1654,10 +1654,7 @@ static __forceinline void createAndAppendNewTask( const hkpBuildJacobianTaskHead
 		hkpBuildJacobianTask* buildTask = new hkpBuildJacobianTask;
 		if ( !prevBuildTask )
 		{
-			if ( putOnPpuOnlyBuildJacobianTaskList )
-			{
-			}
-			else
+			if ( !putOnPpuOnlyBuildJacobianTaskList )
 			{
 				outBuildCollection->m_buildJacobianTasks = buildTask;
 				outBuildCollection->m_numBuildJacobianTasks = 0;
@@ -1938,10 +1935,7 @@ static __declspec(noinline) void FUN_00a23e70( const hkpBuildJacobianTaskHeader*
 		hkpBuildJacobianTask* buildTask = new hkpBuildJacobianTask;
 		if ( !prevBuildTask )
 		{
-			if ( putOnPpuOnlyBuildJacobianTaskList )
-			{
-			}
-			else
+			if ( !putOnPpuOnlyBuildJacobianTaskList )
 			{
 				outBuildCollection->m_buildJacobianTasks = buildTask;
 				outBuildCollection->m_numBuildJacobianTasks = 0;
