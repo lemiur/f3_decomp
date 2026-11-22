@@ -1,8 +1,44 @@
 #include "f3_common.h"
+struct NiObject;
+#include "NiPoint3.h"
 // src/gamebryo2.2/corelibs/niparticle/bsstrippsysdata.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/_fallout3/platforms/common/code/gamebryo2.2/corelibs/niparticle/bsstrippsysdata.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-struct FUN_00c25dd0_shell
+struct NiObject;
+struct BSStripPSysData
+{
+    struct PointData
+    {
+        NiPoint3 kPoint;  // src: FNV360_PDB +0x0
+        NiPoint3 kVertex[4];  // src: FNV360_PDB +0xC
+        NiPoint3 kDir;  // src: FNV360_PDB +0x3C
+        NiPoint3 kNormal[2];  // src: FNV360_PDB +0x48
+        NiPoint3 kVelocity;  // src: FNV360_PDB +0x60
+        float kColor[4];  // src: FNV360_PDB +0x6C (NiColorA)
+        float fSize;  // src: FNV360_PDB +0x7C
+        float fRadii;  // src: FNV360_PDB +0x80
+    };
+    struct StripData
+    {
+        PointData* pPointList;  // src: FNV360_PDB +0x0
+        unsigned short usPointCount;  // src: FNV360_PDB +0x4
+        unsigned short usHighestPointCount;  // src: FNV360_PDB +0x6
+        int iStartIndex;  // src: FNV360_PDB +0x8
+        int iStopIndex;  // src: FNV360_PDB +0xC
+        int usMaxPointCount;  // src: FNV360_PDB +0x10
+        int iFirstIndex;  // src: FNV360_PDB +0x14
+        int iLastIndex;  // src: FNV360_PDB +0x18
+        float fLastTime;  // src: FNV360_PDB +0x1C
+    };
+    bool __thiscall IsEqual(NiObject*);
+    char _pad[0x7c];
+    StripData* pStripList;  // src: FNV360_PDB +0x7C
+    unsigned short usMaxPointCount;
+    float fStartCapSize;
+    float fEndCapSize;
+    bool bDoZPrePass;
+};
+struct FUN_00c25dd0_shell : BSStripPSysData
 {
     short __thiscall FUN_00c25dd0();
 };
@@ -10,7 +46,7 @@ struct FUN_00c25dd0_shell
 // @fnv 0x00c25dd0
 short __thiscall FUN_00c25dd0_shell::FUN_00c25dd0()
 {
-    return *reinterpret_cast<short*>(this + 0x80);
+    return usMaxPointCount;
 }
 
 extern "C" void* g_01202680;
@@ -21,7 +57,7 @@ void* __cdecl FUN_00c25ee0()
     return &g_01202680;
 }
 
-struct FUN_00c25e70_shell
+struct FUN_00c25e70_shell : BSStripPSysData
 {
     void* __thiscall GetElementField(unsigned short a, unsigned short b);
 };
@@ -30,9 +66,7 @@ struct FUN_00c25e70_shell
 // @fnv 0x00c25e70
 void* FUN_00c25e70_shell::GetElementField(unsigned short ausIndex, unsigned short ausSubIndex)
 {
-    void* base = *reinterpret_cast<void**>(reinterpret_cast<unsigned char*>(this) + 0x7c);
-    void* pElement = *reinterpret_cast<void**>(reinterpret_cast<unsigned char*>(base) + ausIndex * 32);
-    return reinterpret_cast<unsigned char*>(pElement) + ausSubIndex * 0x84 + 0xc;
+    return pStripList[ausIndex].pPointList[ausSubIndex].kVertex;
 }
 
 extern "C" void __cdecl _delete(void* ptr, unsigned int size);
@@ -52,19 +86,17 @@ void* __thiscall FUN_00c26380_shell::DestroyIfFlagged(unsigned int flags)
     return this;
 }
 
-struct FUN_00c25db0_shell
+struct FUN_00c25db0_shell : BSStripPSysData
 {
     unsigned short __thiscall FUN_00c25db0(unsigned short index);
 };
 // @fnv 0x00c25db0
 unsigned short __thiscall FUN_00c25db0_shell::FUN_00c25db0(unsigned short index)
 {
-    return *reinterpret_cast<unsigned short*>(reinterpret_cast<unsigned char*>(*reinterpret_cast<unsigned int**>(
-                                                  reinterpret_cast<unsigned char*>(this) + 0x7c)) +
-                                              4 + index * 32);
+    return pStripList[index].usPointCount;
 }
 
-struct FUN_00c25de0_shell
+struct FUN_00c25de0_shell : BSStripPSysData
 {
     float __thiscall GetEntryFloat(unsigned short idx);
 };
@@ -72,7 +104,7 @@ struct FUN_00c25de0_shell
 // @fnv 0x00c25de0
 float __thiscall FUN_00c25de0_shell::GetEntryFloat(unsigned short usIndex)
 {
-    return *(float*)((char*)*(int**)((char*)this + 0x7c) + 0x1c + (int)usIndex * 32);
+    return pStripList[usIndex].fLastTime;
 }
 
 struct FUN_00a963f0
@@ -97,16 +129,6 @@ FUN_00c24c90::FUN_00c24c90() : m70(0), m74(0), m78(0)
     m7a = 0;
 }
 
-struct NiObject;
-struct BSStripPSysData
-{
-    bool __thiscall IsEqual(NiObject*);
-    char _pad[0x80];
-    unsigned short usMaxPointCount;
-    float fStartCapSize;
-    float fEndCapSize;
-    bool bDoZPrePass;
-};
 struct FUN_00c25cd0_shell : BSStripPSysData
 {
     bool __thiscall FUN_00c25cd0(NiObject* pkObject);
@@ -133,7 +155,7 @@ struct S20_25e20
     void* p;
     char _4[28];
 };
-struct FUN_00c25e20_shell
+struct FUN_00c25e20_shell : BSStripPSysData
 {
     float __thiscall GetInnerValue(unsigned short, unsigned short);
 };
@@ -141,12 +163,10 @@ struct FUN_00c25e20_shell
 // @fnv 0x00c25e20
 float __thiscall FUN_00c25e20_shell::GetInnerValue(unsigned short ausOuterIndex, unsigned short ausInnerIndex)
 {
-    S20_25e20* base = *(S20_25e20**)((char*)this + 0x7c);
-    S84_25e20* inner = (S84_25e20*)base[ausOuterIndex].p;
-    return inner[ausInnerIndex].v;
+    return pStripList[ausOuterIndex].pPointList[ausInnerIndex].fSize;
 }
 
-struct FUN_00c25e40_shell
+struct FUN_00c25e40_shell : BSStripPSysData
 {
     float __thiscall FUN_00c25e40(unsigned short a, unsigned short b);
 };
@@ -164,7 +184,7 @@ struct FUN_00c25e40_Outer
 // @fnv 0x00c25e40
 float __thiscall FUN_00c25e40_shell::FUN_00c25e40(unsigned short a, unsigned short b)
 {
-    return (*(FUN_00c25e40_Outer**)((char*)this + 0x7c))[a].p[b].v;
+    return pStripList[a].pPointList[b].fRadii;
 }
 
 struct FUN_00c25e90_entry
@@ -185,7 +205,7 @@ void* __thiscall FUN_00c25e90_shell::FUN_00c25e90(unsigned short ausIndex, unsig
     return (char*)arr[ausIndex].ptr + b * 0x84 + 0x48;
 }
 
-struct FUN_00c25eb0_shell
+struct FUN_00c25eb0_shell : BSStripPSysData
 {
     float __thiscall FUN_00c25eb0(unsigned short a);
 };
@@ -193,7 +213,7 @@ struct FUN_00c25eb0_shell
 // @fnv 0x00c25eb0
 float __thiscall FUN_00c25eb0_shell::FUN_00c25eb0(unsigned short ausIndex)
 {
-    return 1.0f / ((float)*(unsigned short*)(*(char**)((char*)this + 0x7c) + (ausIndex << 5) + 6) - 1.0f);
+    return 1.0f / ((float)pStripList[ausIndex].usHighestPointCount - 1.0f);
 }
 
 struct DataBufferInfo
