@@ -446,15 +446,6 @@ void FUN_00a758c0_cls::FUN_00a758c0(BA758C0Stream& kStream)
     BA758C0SaveBinary(kStream, m_fEmitMult);
 }
 
-struct NiRTTI
-{
-    const char* m_pcName;
-    const char* GetName() const
-    {
-        return m_pcName;
-    }
-};
-
 struct NiViewerStringsArray
 {
     void* m_ppVirtualMethodTable;

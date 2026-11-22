@@ -3,7 +3,7 @@
 #define FNV_NIBLENDPOINT3INTERPOLATOR_PRIVATE_DECLS_H
 #include "f3_common.h"
 
-#include "NiObject.h"
+#include "NiInterpolator.h"
 #include "NiPoint3.h"
 
 class NiObjectNET;
@@ -11,50 +11,6 @@ class NiAVObject;
 class NiQuatTransform;
 class NiStream;
 class NiBlendInterpolator__InterpArrayItem;
-
-// The PC NiObject slots preceding the interpolator Update overloads.
-class NiInterpolator : public NiObject
-{
-  public:
-    virtual void GetType();
-    virtual void GetNiNode();
-    virtual void GetFadeNode();
-    virtual void GetMultiBoundNode();
-    virtual void GetNiGeometry();
-    virtual void GetTriBasedGeom();
-    virtual void GetTriStrips();
-    virtual void GetTriShape();
-    virtual void GetSegmentedTriShape();
-    virtual void GetResizableTriShape();
-    virtual void GetNiParticles();
-    virtual void GetNiLines();
-    virtual void GetCollisionObject();
-    virtual void GetBlendCollisionObject();
-    virtual void GetRigidBody();
-    virtual void GetLimitedHingeConstraint();
-    virtual void Clone();
-    virtual void LoadBinary(NiStream&);
-    virtual void LinkObject();
-    virtual void RegisterStreamables();
-    virtual void SaveBinary();
-    virtual void Compare();
-    virtual void GetViewerStrings();
-    virtual void AddViewerStrings();
-    virtual void ProcessClone();
-    virtual void PostLinkObject();
-    virtual void StreamCanSkip();
-    virtual void GetStreamableRTTI();
-    virtual void SetWorldBound();
-    virtual void GetBlockAllocationSize();
-    virtual void Unk_20();
-    virtual void Unk_21(unsigned int);
-    virtual void GetControllerManager();
-    virtual bool Update(float, NiObjectNET*, NiPoint3&);
-    virtual bool Update(float, NiObjectNET*, float&);
-    virtual bool Update(float, NiAVObject*, const NiQuatTransform&);
-
-    float m_fLastTime;
-};
 
 class NiBlendInterpolator : public NiInterpolator
 {
@@ -90,7 +46,6 @@ class NiBlendPoint3Interpolator : public NiBlendInterpolator
 extern const float DAT_0109696c;
 extern const NiPoint3 DAT_011a9424;
 
-FNV_STATIC_ASSERT(sizeof(NiInterpolator) == 12);
 FNV_STATIC_ASSERT(sizeof(NiBlendInterpolator) == 48);
 FNV_STATIC_ASSERT(sizeof(NiBlendPoint3Interpolator) == 64);
 FNV_STATIC_ASSERT(offsetof(NiBlendInterpolator, m_pkSingleInterpolator) == 24);

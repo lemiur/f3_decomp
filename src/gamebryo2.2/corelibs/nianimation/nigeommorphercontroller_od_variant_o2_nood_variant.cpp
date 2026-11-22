@@ -19,11 +19,6 @@ char* FUN_00a7d330(char*);
 char* FUN_00a7d510(const char*, unsigned int);
 void* NiMalloc(unsigned int);
 extern char* DAT_011f3728;
-struct NiRTTI
-{
-    const char* name;
-    NiRTTI* parent;
-};
 extern NiRTTI DAT_011f3e58, DAT_011f3738;
 struct StrArr
 {
@@ -59,7 +54,7 @@ void StrArr::SetAt(unsigned int index, char*& value)
 }
 struct InterpolatorView : NiInterpolator
 {
-    virtual NiRTTI* GetRTTI();
+    virtual const NiRTTI* GetRTTI() const;
     __forceinline bool IsKindOfType(const NiRTTI* wanted)
     {
         const NiRTTI* rtti = GetRTTI();
@@ -67,7 +62,7 @@ struct InterpolatorView : NiInterpolator
         {
             if (rtti == wanted)
                 return true;
-            rtti = rtti->parent;
+            rtti = rtti->m_pkBaseRTTI;
         }
         return false;
     }

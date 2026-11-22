@@ -519704,7 +519704,9 @@
     "??_C@_05OPEIBKFE@?$CFd?5?$CFs?$AA@": "0x00e05410",
     "?NiMalloc@@YAPAXI@Z": "0x0089e810",
     "_strcpy_s": "0x00c007fc",
-    "@__security_check_cookie@4": "0x00c0018c"
+    "@__security_check_cookie@4": "0x00c0018c",
+    "?DAT_010926a8@@3VNiRTTI@@A": "0x010926a8",
+    "?DAT_01091f90@@3VNiRTTI@@A": "0x01091f90"
    }
   },
   {
@@ -542357,7 +542359,8 @@
     "??_C@_08BJGBDGHA@m_fAlpha?$AA@": "0x00e2306c",
     "??_C@_0M@KCACPOIA@m_fEmitMult?$AA@": "0x00e23060",
     "?DestroyFogProperty@@YIXPAX@Z": "0x00824ed0",
-    "?FUN_00a75650@@YIPAXPAX@Z": "0x0083fc40"
+    "?FUN_00a75650@@YIPAXPAX@Z": "0x0083fc40",
+    "?g_011f4a5c@@3VNiRTTI@@A": "0x0108f45c"
    }
   },
   {
