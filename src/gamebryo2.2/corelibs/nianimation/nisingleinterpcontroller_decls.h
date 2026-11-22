@@ -65,7 +65,7 @@ class NiInterpController : public NiTimeController
 class NiSingleInterpController : public NiInterpController
 {
   public:
-    NiInterpolator* m_spControllerInterpolator;
+    NiInterpolator* m_spInterpolator;  // src: FNV360_PDB +0x34 (old: m_spControllerInterpolator)
     virtual void ProcessClone(CloningProcess&);
     virtual void LoadBinary(NiStream&);
 };

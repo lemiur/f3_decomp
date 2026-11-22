@@ -2,10 +2,39 @@
 // src/gamebryo2.2/corelibs/nianimation/niuvcontroller.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/_fallout3/platforms/common/code/gamebryo2.2/corelibs/nianimation/niuvcontroller.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-struct FUN_00a45a90_shell
+// NiUVData's four key channels (FNV360_PDB): count, keys and key type per channel, then the key sizes.
+struct UVData_00a459f0
 {
-    // +0x48
-    void* m_pSomePtr;
+    void* unk00;
+    unsigned int unk04;
+    unsigned int m_uiNumUOffsetKeys;  // src: FNV360_PDB NiUVData +0x8
+    int m_pkUOffsetKeys;  // src: FNV360_PDB +0xC
+    int m_eUOffsetType;  // src: FNV360_PDB +0x10
+    unsigned int m_uiNumVOffsetKeys;  // src: FNV360_PDB +0x14
+    int m_pkVOffsetKeys;  // src: FNV360_PDB +0x18
+    int m_eVOffsetType;  // src: FNV360_PDB +0x1C
+    unsigned int m_uiNumUTilingKeys;  // src: FNV360_PDB +0x20
+    int m_pkUTilingKeys;  // src: FNV360_PDB +0x24
+    int m_eUTilingType;  // src: FNV360_PDB +0x28
+    unsigned int m_uiNumVTilingKeys;  // src: FNV360_PDB +0x2C
+    int m_pkVTilingKeys;  // src: FNV360_PDB +0x30
+    int m_eVTilingType;  // src: FNV360_PDB +0x34
+    float m_fLastUOffset;  // src: FNV360_PDB +0x38
+    float m_fLastVOffset;  // src: FNV360_PDB +0x3C
+    float m_fLastUTiling;  // src: FNV360_PDB +0x40
+    float m_fLastVTiling;  // src: FNV360_PDB +0x44
+    char m_ucUOffsetSize;  // src: FNV360_PDB +0x48
+    char m_ucVOffsetSize;  // src: FNV360_PDB +0x49
+    char m_ucUTilingSize;  // src: FNV360_PDB +0x4A
+    char m_ucVTilingSize;  // src: FNV360_PDB +0x4B
+};
+struct UVController_00a459f0
+{
+    unsigned char unk00[0x48];
+    UVData_00a459f0* m_spUVData;  // src: FNV360_PDB NiUVController +0x48
+};
+struct FUN_00a45a90_shell : UVController_00a459f0
+{
     int __thiscall GetSomeValues(int* a, int* b, char* c);
 };
 
@@ -13,13 +42,13 @@ struct FUN_00a45a90_shell
 // @fnv 0x00a45a90
 int __thiscall FUN_00a45a90_shell::GetSomeValues(int* piValue1, int* piValue2, char* c)
 {
-    void* p = *(void**)((char*)this + 0x48);
+    UVData_00a459f0* p = m_spUVData;
     if (p)
     {
-        *piValue1 = *(int*)((char*)p + 0x20);
-        *piValue2 = *(int*)((char*)p + 0x28);
-        *c = *(char*)((char*)p + 0x4a);
-        return *(int*)((char*)p + 0x24);
+        *piValue1 = p->m_uiNumUTilingKeys;
+        *piValue2 = p->m_eUTilingType;
+        *c = p->m_ucUTilingSize;
+        return p->m_pkUTilingKeys;
     }
     else
     {
@@ -38,7 +67,7 @@ int* __cdecl FUN_00a45b30()
     return &g_011f3f18;
 }
 
-struct FUN_00a459f0_shell
+struct FUN_00a459f0_shell : UVController_00a459f0
 {
     int __thiscall GetDataFromMember(int* a, int* b, char* c);
 };
@@ -46,14 +75,13 @@ struct FUN_00a459f0_shell
 // @fnv 0x00a459f0
 int __thiscall FUN_00a459f0_shell::GetDataFromMember(int* piValue1, int* piValue2, char* c)
 {
-    void* p = *(void**)((char*)this + 0x48);
+    UVData_00a459f0* p = m_spUVData;
     if (p)
     {
-        char* q = (char*)p;
-        *piValue1 = *(int*)(q + 8);
-        *piValue2 = *(int*)(q + 0x10);
-        *c = q[0x48];
-        return *(int*)(q + 0xc);
+        *piValue1 = p->m_uiNumUOffsetKeys;
+        *piValue2 = p->m_eUOffsetType;
+        *c = p->m_ucUOffsetSize;
+        return p->m_pkUOffsetKeys;
     }
     else
     {
@@ -64,10 +92,8 @@ int __thiscall FUN_00a459f0_shell::GetDataFromMember(int* piValue1, int* piValue
     }
 }
 
-struct FUN_00a45ae0_shell
+struct FUN_00a45ae0_shell : UVController_00a459f0
 {
-    // +0x48
-    void* m_pSomePtr;
     int __thiscall GetSomePtrValues(int* a, int* b, char* c);
 };
 
@@ -75,14 +101,13 @@ struct FUN_00a45ae0_shell
 // @fnv 0x00a45ae0
 int __thiscall FUN_00a45ae0_shell::GetSomePtrValues(int* piValue1, int* piValue2, char* c)
 {
-    void* p = *(void**)((char*)this + 0x48);
+    UVData_00a459f0* p = m_spUVData;
     if (p)
     {
-        char* pc = (char*)p;
-        *piValue1 = *(int*)(pc + 0x2c);
-        *piValue2 = *(int*)(pc + 0x34);
-        *c = pc[0x4b];
-        return *(int*)(pc + 0x30);
+        *piValue1 = p->m_uiNumVTilingKeys;
+        *piValue2 = p->m_eVTilingType;
+        *c = p->m_ucVTilingSize;
+        return p->m_pkVTilingKeys;
     }
     else
     {
@@ -93,10 +118,8 @@ int __thiscall FUN_00a45ae0_shell::GetSomePtrValues(int* piValue1, int* piValue2
     }
 }
 
-struct FUN_00a45a40_shell
+struct FUN_00a45a40_shell : UVController_00a459f0
 {
-    // +0x48
-    void* m_pSomePtr;
     int __thiscall GetSomeData(int* a, int* b, char* c);
 };
 
@@ -104,14 +127,13 @@ struct FUN_00a45a40_shell
 // @fnv 0x00a45a40
 int __thiscall FUN_00a45a40_shell::GetSomeData(int* piFirst, int* piSecond, char* c)
 {
-    void* p = *(void**)((char*)this + 0x48);
+    UVData_00a459f0* p = m_spUVData;
     if (p)
     {
-        int* q = (int*)((char*)p + 0x14);
-        *piFirst = q[0];
-        *piSecond = q[2];
-        *c = *(char*)((char*)q + 0x35);
-        return q[1];
+        *piFirst = p->m_uiNumVOffsetKeys;
+        *piSecond = p->m_eVOffsetType;
+        *c = p->m_ucVOffsetSize;
+        return p->m_pkVOffsetKeys;
     }
     else
     {

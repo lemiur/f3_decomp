@@ -6,7 +6,7 @@
 void NiSingleInterpController::ProcessClone(CloningProcess& process)
 {
     NiTimeController::ProcessClone(process);
-    NiInterpolator* pInterpolator = m_spControllerInterpolator;
+    NiInterpolator* pInterpolator = m_spInterpolator;
     if (pInterpolator)
         pInterpolator->ProcessClone(process);
 }
@@ -17,12 +17,12 @@ void NiSingleInterpController::LoadBinary(NiStream& stream)
     if (stream.version >= 0x0a010068)
     {
         NiInterpolator* value = (NiInterpolator*)stream.DeserializeObject();
-        NiInterpolator* old = m_spControllerInterpolator;
+        NiInterpolator* old = m_spInterpolator;
         if (old != value)
         {
             if (old && InterlockedDecrement(&((NiObject*)old)->refCount) == 0)
                 ((NiObject*)old)->DeleteThis();
-            m_spControllerInterpolator = value;
+            m_spInterpolator = value;
             if (value)
                 InterlockedIncrement(&((NiObject*)value)->refCount);
         }
@@ -104,7 +104,7 @@ struct FUN_00a38e30_shell : public NiSingleInterpController
 // @fnv 0x00a38e30
 NiInterpolator* __thiscall FUN_00a38e30_shell::FUN_00a38e30(unsigned short usIndex)
 {
-    return *reinterpret_cast<NiInterpolator**>(reinterpret_cast<unsigned char*>(this) + 0x34);
+    return m_spInterpolator;
 }
 
 struct FUN_00a2f8e0_shell : public NiInterpController
@@ -250,7 +250,7 @@ struct FUN_00a38e90_shell
 // @fnv 0x00a38e90
 void FUN_00a38e90_shell::FUN_00a38e90(float m_fStartTime, float m_fMaximumDistance)
 {
-    NiInterpolator* p = ((NiSingleInterpController*)this)->m_spControllerInterpolator;
+    NiInterpolator* p = ((NiSingleInterpController*)this)->m_spInterpolator;
     if (p)
         ((FakeInterpGuarantee*)p)->SetActiveTimeRange(m_fStartTime, m_fMaximumDistance);
 }
@@ -291,7 +291,7 @@ bool FUN_00a38fe0_shell::RegisterInterpolatorStreamables(NiStream& kStream)
 {
     if (!FUN_00a2f8b0(kStream))
         return false;
-    NiInterpolator* pkInterp = *(NiInterpolator**)((char*)this + 0x34);
+    NiInterpolator* pkInterp = m_spInterpolator;
     if (pkInterp)
         ((InterpHelper*)pkInterp)->RegisterStreamables(kStream);
     return true;
@@ -310,11 +310,17 @@ void FUN_00a39010_shell::FUN_00a39010(NiStream& kStream)
 {
     ((S00c27120*)this)->FUN_00c27120(kStream);
     ((void(__thiscall*)(NiStream*, NiInterpolator*))(*(void***)&kStream)[12])(&kStream,
-                                                                              *(NiInterpolator**)((char*)this + 0x34));
+                                                                              m_spInterpolator);
 }
 
 struct StrArr
 {
+    void* unk00;
+    char** m_pBase;  // src: FNV360_PDB NiTPrimitiveArray +0x4
+    unsigned short m_usMaxSize;  // src: FNV360_PDB +0x8
+    unsigned short m_usSize;  // src: FNV360_PDB +0xA
+    unsigned short m_usESize;  // src: FNV360_PDB +0xC
+    unsigned short m_usGrowBy;  // src: FNV360_PDB +0xE
     void SetSize(unsigned int);
     void SetAt(unsigned int, char*&);
 };
@@ -352,7 +358,7 @@ struct InterpWrap
     virtual void f23();
     virtual void GetViewerStrings(StrArr*);
 };
-struct Holder00a390a0
+struct Holder00a390a0 : NiSingleInterpController
 {
     void FUN_00a390a0(StrArr*);
 };
@@ -362,11 +368,11 @@ void Holder00a390a0::FUN_00a390a0(StrArr* pkStrings)
 {
     ((BaseWrap*)this)->WriteManagerControlledFlag(pkStrings);
     char* psz = _FUN_00a7d330(DAT_01091f5c);
-    unsigned int uiIdx = *(unsigned short*)((char*)pkStrings + 0xA);
-    if (uiIdx >= *(unsigned short*)((char*)pkStrings + 8))
-        pkStrings->SetSize(uiIdx + *(unsigned short*)((char*)pkStrings + 0xE));
+    unsigned int uiIdx = pkStrings->m_usSize;
+    if (uiIdx >= pkStrings->m_usMaxSize)
+        pkStrings->SetSize(uiIdx + pkStrings->m_usGrowBy);
     pkStrings->SetAt(uiIdx, psz);
-    InterpWrap* pInterp = *(InterpWrap**)((char*)this + 0x34);
+    InterpWrap* pInterp = (InterpWrap*)m_spInterpolator;
     if (pInterp)
         pInterp->GetViewerStrings(pkStrings);
 }
@@ -381,7 +387,7 @@ struct FUN_00a38e40_cls : public NiSingleInterpController
 // @fnv 0x00a38e40
 void FUN_00a38e40_cls::FUN_00a38e40(NiInterpolator* apNewInterpolator, unsigned int unused)
 {
-    NiInterpolator* pOld = m_spControllerInterpolator;
+    NiInterpolator* pOld = m_spInterpolator;
     if (pOld == apNewInterpolator)
     {
         return;
@@ -393,7 +399,7 @@ void FUN_00a38e40_cls::FUN_00a38e40(NiInterpolator* apNewInterpolator, unsigned 
             ((NiObject*)pOld)->DeleteThis();
         }
     }
-    m_spControllerInterpolator = apNewInterpolator;
+    m_spInterpolator = apNewInterpolator;
     if (apNewInterpolator != 0)
     {
         InterlockedIncrement(&((NiObject*)apNewInterpolator)->refCount);
@@ -439,13 +445,13 @@ bool FUN_00a39030_cls::IsCompatibleWith(NiSingleInterpController* other)
 {
     if (!CheckCompatible(other))
         return false;
-    if ((m_spControllerInterpolator && !other->m_spControllerInterpolator) ||
-        (!m_spControllerInterpolator && other->m_spControllerInterpolator))
+    if ((m_spInterpolator && !other->m_spInterpolator) ||
+        (!m_spInterpolator && other->m_spInterpolator))
         return false;
-    if (m_spControllerInterpolator)
+    if (m_spInterpolator)
     {
-        S_00a39030_Interp* p = (S_00a39030_Interp*)m_spControllerInterpolator;
-        NiInterpolator* o = other->m_spControllerInterpolator;
+        S_00a39030_Interp* p = (S_00a39030_Interp*)m_spInterpolator;
+        NiInterpolator* o = other->m_spInterpolator;
         if (!p->v23(o))
             return false;
     }
@@ -593,7 +599,7 @@ class NiTimeControllerA38
     int unk28;
     int unk2C;
     int unk30;
-    NiPointerA38<NiTargetA38> m_spControllerInterpolator;
+    NiPointerA38<NiTargetA38> m_spInterpolator;  // src: FNV360_PDB +0x34 (old: m_spControllerInterpolator)
 };
 
 // @fnv 0x00a38ec0
@@ -602,8 +608,8 @@ void NiTimeControllerA38::UpdateKeyTimes()
     if (GetManagerControlled())
         return;
     AdvanceControllerTime();
-    if (m_spControllerInterpolator)
-        m_spControllerInterpolator->GetBeginEndKeyTimes(&m_fLoKeyTime, &m_fHiKeyTime);
+    if (m_spInterpolator)
+        m_spInterpolator->GetBeginEndKeyTimes(&m_fLoKeyTime, &m_fHiKeyTime);
 }
 
 extern void FUN_00c9a6b0();
