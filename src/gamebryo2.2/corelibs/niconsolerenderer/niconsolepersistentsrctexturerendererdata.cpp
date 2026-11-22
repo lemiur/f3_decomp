@@ -131,7 +131,31 @@ GlobalObjectO2_00a7b610* FUN_00e90550()
 
 extern "C" void __cdecl FUN_00e87a50();
 
-struct FUN_00e90d80_shell
+struct NiDX9RenderState
+{
+    char _pad[0xE20];
+    struct Entry
+    {
+        unsigned int value;
+        unsigned int unk;
+    } mState[8][5];
+    char unkF60[0x10e0 - 0xf60];
+    int unk10E0;
+    char unk10E4[0x10f8 - 0x10e4];
+    void* unk10F8;
+    void* unk10FC;
+    unsigned char unk1100;
+    void* unk1104;
+    void* unk1108;
+    int unk110C;
+    int unk1110;
+    unsigned char unk1114;
+    char unk1115[0x1138 - 0x1115];
+    unsigned int unk1138;
+    unsigned int GetStateValue(unsigned int, unsigned int);
+};
+
+struct FUN_00e90d80_shell : NiDX9RenderState
 {
     void FUN_00e90d80();
 };
@@ -140,14 +164,13 @@ struct FUN_00e90d80_shell
 // @fnv 0x00e90d80
 void FUN_00e90d80_shell::FUN_00e90d80()
 {
-    unsigned char* p = (unsigned char*)this + 0x1100;
     unsigned int v = 0;
     unsigned int one = 1;
-    *p = (unsigned char)v;
-    *(unsigned int*)(p + 4) = v;
-    *(unsigned int*)(p + 8) = one;
-    *(unsigned int*)(p + 12) = v;
-    *(unsigned int*)(p + 16) = one;
+    unk1100 = (unsigned char)v;
+    unk1104 = (void*)v;
+    unk1108 = (void*)one;
+    unk110C = v;
+    unk1110 = one;
     FUN_00e87a50();
 }
 
@@ -227,7 +250,7 @@ GlobalObjectO2_00a7b610* FUN_00e91740()
     return &g_0126f9f8;
 }
 
-struct FUN_00e90e40_Class
+struct FUN_00e90e40_Class : NiDX9RenderState
 {
     int __thiscall FUN_00e90e40();
 };
@@ -235,7 +258,7 @@ struct FUN_00e90e40_Class
 // @fnv 0x00e90e40
 int __thiscall FUN_00e90e40_Class::FUN_00e90e40()
 {
-    return *reinterpret_cast<int*>(reinterpret_cast<unsigned char*>(this) + 0x10e0);
+    return unk10E0;
 }
 
 extern void __cdecl _delete(void* p, int size);
@@ -282,7 +305,7 @@ void* __thiscall FUN_00e90560_shell::FUN_00e90560(int aiFlags)
 }
 }  // namespace fnv_00e90560
 
-struct FUN_00e91060_shell
+struct FUN_00e91060_shell : NiDX9RenderState
 {
     void FUN_00e91060(int arg);
 };
@@ -291,12 +314,12 @@ struct FUN_00e91060_shell
 // @fnv 0x00e91060
 void FUN_00e91060_shell::FUN_00e91060(int arg)
 {
-    if (arg && (*(unsigned char*)((char*)this + 0x1100)))
+    if (arg && unk1100)
     {
-        if (*(int*)((char*)this + 0x110c) == arg)
-            *(int*)((char*)this + 0x110c) = 0;
-        if (*(int*)((char*)this + 0x1110) == arg)
-            *(int*)((char*)this + 0x1110) = 0;
+        if (unk110C == arg)
+            unk110C = 0;
+        if (unk1110 == arg)
+            unk1110 = 0;
     }
 }
 
@@ -391,21 +414,28 @@ void* FUN_00e8fd60_shell::InitWithArgs(int aiArg1, int aiArg2, int aiArg3)
 extern int DAT_010f02fc;
 struct S_00e8fd80
 {
+    void* unk00;
+    int unk04;
+    int unk08;
+    char unk0C[0x60 - 0xc];
+    void* unk60;
+    char unk64[8];
+    void* unk6C;
     void FUN_00e8a2b0();
     void FUN_00e8fd80();
 };
 // @fnv 0x00e8fd80
 void S_00e8fd80::FUN_00e8fd80()
 {
-    void* v0 = *(void**)((char*)this + 0x60);
-    int v1 = *(int*)((char*)this + 8);
+    void* v0 = unk60;
+    int v1 = unk08;
     *(void**)this = (void*)&DAT_010f02fc;
     ((void(__thiscall*)(void*, int))(*(void***)v0)[0x15c / 4])(v0, v1);
-    void* v2 = *(void**)((char*)this + 0x6c);
+    void* v2 = unk6C;
     if (v2)
     {
         ((unsigned long(__stdcall*)(void*))(*(void***)v2)[2])(v2);
-        *(void**)((char*)this + 0x6c) = 0;
+        unk6C = 0;
     }
     return FUN_00e8a2b0();
 }
@@ -444,13 +474,18 @@ struct H00e90300
 typedef void(__thiscall* Fn00e90300)(void*, int);
 struct S00e90300
 {
+    void* unk00;
+    int unk04;
+    int unk08;
+    char unk0C[0x60 - 0xc];
+    void* unk60;
     void* __thiscall FUN_00e90300(unsigned int);
 };
 // @fnv 0x00e90300
 void* __thiscall S00e90300::FUN_00e90300(unsigned int auiFlags)
 {
-    void* o = *(void**)((char*)this + 0x60);
-    int a = *(int*)((char*)this + 8);
+    void* o = unk60;
+    int a = unk08;
     *(void**)this = (void*)&DAT_010f05ec;
     (*(Fn00e90300**)o)[0x58](o, a);
     ((H00e90300*)this)->FUN_00e8a2b0();
@@ -461,6 +496,8 @@ void* __thiscall S00e90300::FUN_00e90300(unsigned int auiFlags)
 
 struct NiD3DShader
 {
+    char unk00[0x10];
+    bool unk10;
     bool Initialize();
 };
 void __fastcall FUN_00e90970(void*);
@@ -472,7 +509,7 @@ struct NiDX9ErrorShader : NiD3DShader
 // @fnv 0x00e90a50
 bool NiDX9ErrorShader::FUN_00e90a50()
 {
-    if (*((char*)this + 0x10) == 0)
+    if (unk10 == 0)
     {
         if (NiD3DShader::Initialize())
         {
@@ -501,6 +538,11 @@ struct S00e90a80
     void* fc;
     void* FUN_00e90a80(void*);
 };
+struct Renderer_00e90a80
+{
+    char unk000[0x288];
+    void* unk288;
+};
 // @fnv 0x00e90a80
 void* S00e90a80::FUN_00e90a80(void* p)
 {
@@ -509,7 +551,7 @@ void* S00e90a80::FUN_00e90a80(void* p)
     InterlockedIncrement(&DAT_011f4400);
     f0 = &DAT_010f086c;
     fc = p;
-    void* dev = *(void**)((char*)p + 0x288);
+    void* dev = ((Renderer_00e90a80*)p)->unk288;
     f8 = dev;
     ((Dev00e90a80*)dev)->AddRef();
     return this;
@@ -719,9 +761,8 @@ void S::FUN_00e90ec0(void* pNew, bool bSavePrev)
     p->Foo(pNew);
 }
 
-struct FUN_00e90f60_Holder
+struct FUN_00e90f60_Holder : NiDX9RenderState
 {
-    char _pad[0x110C];
     void FUN_00e90f60(void*);
 };
 // @fnv 0x00e90f60
@@ -729,16 +770,16 @@ void FUN_00e90f60_Holder::FUN_00e90f60(void* pTarget)
 {
     if (!pTarget)
         return;
-    if (*(unsigned char*)((char*)this + 0x1100))
+    if (unk1100)
         return;
-    if (*(void**)((char*)this + 0x1104) == pTarget)
+    if (unk1104 == pTarget)
     {
-        void* v = *(void**)((char*)this + 0x10F8);
-        *(int*)((char*)this + 0x1104) = 2;
+        void* v = unk10F8;
+        unk1104 = (void*)2;
         ((void(__stdcall*)(void*, int))(*(void***)v)[89])(v, 2);
     }
-    if (*(void**)((char*)this + 0x1108) == pTarget)
-        *(int*)((char*)this + 0x1108) = 2;
+    if (unk1108 == pTarget)
+        unk1108 = (void*)2;
 }
 
 namespace fnv_00e90fc0 {
@@ -860,7 +901,7 @@ void S::FUN_00e90fc0(void* apTarget, bool abSavePrevious)
 }  // namespace fnv_00e90fc0
 
 extern unsigned short DAT_0126f92c[];
-struct FUN_00e910a0_shell
+struct FUN_00e910a0_shell : NiDX9RenderState
 {
     void FUN_00e910a0(int, int, int, int);
 };
@@ -870,11 +911,11 @@ void FUN_00e910a0_shell::FUN_00e910a0(int a1, int aiIndex, int aiValue, int aiUn
     unsigned short v = DAT_0126f92c[aiIndex];
     if (v >= 5)
         return;
-    int* p = (int*)((char*)this + 0xE20 + (a1 * 5 + v) * 8);
+    unsigned int* p = &mState[a1][v].value;
     if (*p != aiValue)
     {
         *p = aiValue;
-        void* dev = *(void**)((char*)this + 0x10F8);
+        void* dev = unk10F8;
         void** vt = *(void***)dev;
         void(__stdcall * fn)(void*, int, int, int) = (void(__stdcall*)(void*, int, int, int))vt[69];
         fn(dev, a1, aiIndex, aiValue);
@@ -882,7 +923,7 @@ void FUN_00e910a0_shell::FUN_00e910a0(int a1, int aiIndex, int aiValue, int aiUn
 }
 
 extern unsigned short DAT_0126f92c[];
-struct FUN_00e91120_shell
+struct FUN_00e91120_shell : NiDX9RenderState
 {
     void FUN_00e91120(int, int);
 };
@@ -893,7 +934,7 @@ void FUN_00e91120_shell::FUN_00e91120(int a1, int a2)
     if (idx >= 5)
         return;
     ((void(__thiscall*)(void*, int, int, int, int))(*(int***)this)[51])(
-        this, a1, a2, *(int*)((char*)this + 0xe24 + (a1 * 5 + idx) * 8), 0);
+        this, a1, a2, mState[a1][idx].unk, 0);
 }
 
 namespace fnv_00e91160 {
@@ -918,7 +959,12 @@ void* __thiscall FUN_00e91160_shell::FUN_00e91160(int aiFlags)
 }
 }  // namespace fnv_00e91160
 
-struct FUN_00e91190_Holder
+struct RendererCaps_00e91190
+{
+    unsigned char unk000[0x5d5];
+    unsigned char unk5D5;
+};
+struct FUN_00e91190_Holder : NiDX9RenderState
 {
     void SetFlag(bool b);
 };
@@ -926,15 +972,15 @@ struct FUN_00e91190_Holder
 // @fnv 0x00e91190
 void FUN_00e91190_Holder::SetFlag(bool b)
 {
-    if (b == *(unsigned char*)((char*)this + 0x1114))
+    if (b == unk1114)
         return;
-    void* p1 = *(void**)((char*)this + 0x10FC);
-    if (*(unsigned char*)((char*)p1 + 0x5D5) == 0)
+    RendererCaps_00e91190* p1 = (RendererCaps_00e91190*)unk10FC;
+    if (p1->unk5D5 == 0)
         return;
-    void* p2 = *(void**)((char*)this + 0x10F8);
-    *(unsigned char*)((char*)this + 0x1114) = (unsigned char)b;
+    void* p2 = unk10F8;
+    unk1114 = (unsigned char)b;
     ((void(__stdcall*)(void*, int)) * (void**)((char*)*(void**)p2 + 0x134))(p2, b);
-    ((void(__thiscall*)(void*, int)) * (void**)((char*)*(void**)this + 0x98))(this, *(int*)((char*)this + 0x10E0));
+    ((void(__thiscall*)(void*, int)) * (void**)((char*)*(void**)this + 0x98))(this, unk10E0);
 }
 
 namespace fnv_00e916d0 {
@@ -1017,6 +1063,12 @@ bool Holder_E91790::FUN_00e91790(Base_E91790* pk)
 namespace fnv_00e91a90 {
 struct StrArr
 {
+    void* unk00;
+    char** m_pBase;  // src: FNV360_PDB NiTPrimitiveArray +0x4
+    unsigned short m_usMaxSize;  // src: FNV360_PDB +0x8
+    unsigned short m_usSize;  // src: FNV360_PDB +0xA
+    unsigned short m_usESize;  // src: FNV360_PDB +0xC
+    unsigned short m_usGrowBy;  // src: FNV360_PDB +0xE
     void SetSize(unsigned int);
     void SetAt(unsigned int, char*&);
 };
@@ -1029,11 +1081,11 @@ void __stdcall FUN_00e91a90(StrArr* pkStrings)
 {
     AppendToStrings(pkStrings);
     char* psz = _FUN_00a7d330(g_0126f9f8);
-    unsigned int uiSize = *(unsigned short*)((char*)pkStrings + 10);
-    unsigned int uiAlloc = *(unsigned short*)((char*)pkStrings + 8);
+    unsigned int uiSize = pkStrings->m_usSize;
+    unsigned int uiAlloc = pkStrings->m_usMaxSize;
     if (uiSize >= uiAlloc)
     {
-        unsigned int uiGrow = *(unsigned short*)((char*)pkStrings + 14);
+        unsigned int uiGrow = pkStrings->m_usGrowBy;
         pkStrings->SetSize(uiGrow + uiSize);
     }
     pkStrings->SetAt(uiSize, psz);
@@ -1113,20 +1165,29 @@ struct Rnd00
     virtual void v56();
     virtual void Purge(void*);
 };
+struct Renderer_00e8a2b0
+{
+    char unk000[0x8b8];
+    Rnd00* unk8B8;
+};
 struct S_00e8a2b0 : NiRefObject
 {
+    int unk04;
+    char unk08[0x60 - 0x8];
+    Renderer_00e8a2b0* unk60;
+    Tex00* unk64;
     void FUN_00e8a2b0();
 };
 // @fnv 0x00e8a2b0
 void S_00e8a2b0::FUN_00e8a2b0()
 {
-    Tex00* a = *(Tex00**)((char*)this + 0x64);
+    Tex00* a = unk64;
     *(void**)this = (void*)&DAT_010efb7c;
     if (a)
     {
-        (*(Rnd00**)((char*)*(void**)((char*)this + 0x60) + 0x8b8))->Purge(a);
-        (*(Tex00**)((char*)this + 0x64))->Release();
-        *(Tex00**)((char*)this + 0x64) = 0;
+        unk60->unk8B8->Purge(a);
+        unk64->Release();
+        unk64 = 0;
     }
     *(void**)this = (void*)&DAT_010a080c;
     NiRefObject::~NiRefObject();
@@ -1345,16 +1406,6 @@ void Dummy_00e90e70::ClearIfMatches(void* pValue)
 }
 
 extern unsigned short DAT_0126f92c[];
-struct NiDX9RenderState
-{
-    char _pad[0xE20];
-    struct Entry
-    {
-        unsigned int value;
-        unsigned int unk;
-    } mState[8][5];
-    unsigned int GetStateValue(unsigned int, unsigned int);
-};
 // Looks up DAT_0126f92c[a2] as a state index and returns mState[a1][s].value when s < 5, otherwise 0.
 // @fnv 0x00e910f0
 unsigned int NiDX9RenderState::GetStateValue(unsigned int auiStateGroup, unsigned int auiStateIndex)
@@ -1540,6 +1591,12 @@ struct NiRenderer;
 
 struct NiD3DVertexDeclaration
 {
+    void* unk00;
+    long unk04;
+    char unk08[0x18 - 0x8];
+    NiRenderer* unk18;
+    char unk1C[0x28 - 0x1c];
+    NiD3DVertexDeclaration* unk28;
     static NiD3DVertexDeclaration* __cdecl Create(NiRenderer*, unsigned int, unsigned int);
     bool FUN_00e90970();
 };
@@ -1547,22 +1604,22 @@ struct NiD3DVertexDeclaration
 // @fnv 0x00e90970
 bool NiD3DVertexDeclaration::FUN_00e90970()
 {
-    NiD3DVertexDeclaration* pNew = NiD3DVertexDeclaration::Create(*(NiRenderer**)((char*)this + 0x18), 1, 1);
+    NiD3DVertexDeclaration* pNew = NiD3DVertexDeclaration::Create(unk18, 1, 1);
 
-    NiD3DVertexDeclaration* pOld = *(NiD3DVertexDeclaration**)((char*)this + 0x28);
+    NiD3DVertexDeclaration* pOld = unk28;
     if (pOld != pNew)
     {
         if (pOld)
         {
-            if (InterlockedDecrement((long*)((char*)pOld + 4)) == 0)
+            if (InterlockedDecrement(&pOld->unk04) == 0)
                 (*(void(__thiscall**)(NiD3DVertexDeclaration*))(*(int*)pOld + 4))(pOld);
         }
-        *(NiD3DVertexDeclaration**)((char*)this + 0x28) = pNew;
+        unk28 = pNew;
         if (pNew)
-            InterlockedIncrement((long*)((char*)pNew + 4));
+            InterlockedIncrement(&pNew->unk04);
     }
 
-    NiD3DVertexDeclaration* p = *(NiD3DVertexDeclaration**)((char*)this + 0x28);
+    NiD3DVertexDeclaration* p = unk28;
     (*(void(__thiscall**)(NiD3DVertexDeclaration*, int, int, int, int, int))(*(int*)p + 0x8c))(p, 0, 0, 0, 2, 0);
 
     return true;
