@@ -545,6 +545,11 @@ struct Rec989340 {
     const void* label;
     unsigned int ticks;
     unsigned int unk08;
+
+    // hkMonitorStream::TimerCommand::setTime (class and member names: FNV360_PDB)
+    // RULE-EXCEPTION: R18, Havok's IA32 setTime reads the TSC with inline asm: retail stores eax to a stack local and reloads it, which __rdtsc() does not emit
+    __forceinline void setTime() { unsigned int time; __asm { rdtsc
+        mov time, eax } ticks = time; }
 };
 
 struct Buf989340 {
@@ -594,12 +599,7 @@ void __cdecl hkpWorldCallbackUtil_firePostIntegrateCallback(Container989340* sel
             if (r < b->end) {
                 r->label = DAT_00e7d950;
                 _ReadWriteBarrier();
-unsigned int t;
-                __asm {
-                    rdtsc
-                    mov dword ptr[t], eax
-                }
-                r->ticks = t;
+r->setTime();
                 b->cur = r + 1;
             }
             arr->data[i]->Run(self, a);
@@ -608,12 +608,7 @@ unsigned int t;
             if (r < b->end) {
                 r->label = DAT_00e32798;
                 _ReadWriteBarrier();
-unsigned int t2;
-                __asm {
-                    rdtsc
-                    mov dword ptr[t2], eax
-                }
-                r->ticks = t2;
+r->setTime();
                 b->cur = r + 1;
             }
         }
@@ -1239,12 +1234,7 @@ void __cdecl FUN_00988e70(Container988e70* self) {
                 if (r < b->end) {
                     r->label = DAT_00e7d904;
                     _ReadWriteBarrier();
-                    unsigned int ticks;
-                    __asm {
-                        rdtsc
-                        mov dword ptr[ticks], eax
-                    }
-                    r->ticks = ticks;
+                    r->setTime();
                     b->cur = r + 1;
                 }
                 ((Item988e70*)arr->data[i])->Run(self);
@@ -1253,12 +1243,7 @@ void __cdecl FUN_00988e70(Container988e70* self) {
                 if (r < b->end) {
                     r->label = DAT_00e32798;
                     _ReadWriteBarrier();
-                    unsigned int ticks2;
-                    __asm {
-                        rdtsc
-                        mov dword ptr[ticks2], eax
-                    }
-                    r->ticks = ticks2;
+                    r->setTime();
                     b->cur = r + 1;
                 }
             }
@@ -4019,7 +4004,12 @@ struct Item {
     virtual void v0();
     virtual void Run(void* a, void* b);
 };
-struct Rec { const void* label; unsigned int ticks; unsigned int unk08; };
+struct Rec { const void* label; unsigned int ticks; unsigned int unk08; 
+    // hkMonitorStream::TimerCommand::setTime (class and member names: FNV360_PDB)
+    // RULE-EXCEPTION: R18, Havok's IA32 setTime reads the TSC with inline asm: retail stores eax to a stack local and reloads it, which __rdtsc() does not emit
+    __forceinline void setTime() { unsigned int time; __asm { rdtsc
+        mov time, eax } ticks = time; }
+};
 struct Buf { int unk00; Rec* cur; int unk08; Rec* end; };
 extern Buf* (__stdcall* const DAT_00d9b080)(unsigned long);
 struct Arr { Item** data; int count; };
@@ -4045,12 +4035,7 @@ void __cdecl hkpWorldCallbackUtil_fireContactImpulseLimitBreached(n989600::Conta
                 if (r < buf->end) {
                     r->label = DAT_00e7d96c;
                     _ReadWriteBarrier();
-                    unsigned int t;
-                    __asm {
-                        rdtsc
-                        mov dword ptr[t], eax
-                    }
-                    r->ticks = t;
+                    r->setTime();
                     buf->cur = r + 1;
                 }
                 arr->data[i]->Run(a, b);
@@ -4059,12 +4044,7 @@ void __cdecl hkpWorldCallbackUtil_fireContactImpulseLimitBreached(n989600::Conta
                 if (r < buf->end) {
                     r->label = DAT_00e32798;
                     _ReadWriteBarrier();
-                    unsigned int t2;
-                    __asm {
-                        rdtsc
-                        mov dword ptr[t2], eax
-                    }
-                    r->ticks = t2;
+                    r->setTime();
                     buf->cur = r + 1;
                 }
             }
@@ -4828,29 +4808,24 @@ extern unsigned long DAT_0116913c;
 extern const char DAT_00e7d300[],DAT_00e32798[];
 namespace f3m_00981a30 {
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long);
-struct Event981 {const char* name;unsigned int ticks;int unk08;};
+struct Event981 {const char* name;unsigned int ticks;int unk08;
+    // hkMonitorStream::TimerCommand::setTime (class and member names: FNV360_PDB)
+    // RULE-EXCEPTION: R18, Havok's IA32 setTime reads the TSC with inline asm: retail stores eax to a stack local and reloads it, which __rdtsc() does not emit
+    __forceinline void setTime() { unsigned int time; __asm { rdtsc
+        mov time, eax } ticks = time; }
+};
 struct Monitor981 {int unk00;Event981* current;int unk08;Event981* end;};
 struct Input981 {int type;};
 struct Owner981 {void FUN_009817a0(int);void FUN_00981a30(Input981*);};
 void Owner981::FUN_00981a30(Input981* input){
  Monitor981* mon=(Monitor981*)TlsGetValue(DAT_0116913c);
  if(mon->current<mon->end){Event981* event=mon->current;event->name=DAT_00e7d300;
- unsigned int ticks;
- __asm {
- rdtsc
- mov dword ptr[ticks], eax
- }
- event->ticks=ticks;mon->current=event+1;}
+ event->setTime();mon->current=event+1;}
  int type=input->type;
  if(type==0) FUN_009817a0(2);else if(type==1) FUN_009817a0(type);else FUN_009817a0(0);
  mon=(Monitor981*)TlsGetValue(DAT_0116913c);
  if(mon->current<mon->end){Event981* event=mon->current;event->name=DAT_00e32798;
- unsigned int ticks;
- __asm {
- rdtsc
- mov dword ptr[ticks], eax
- }
- event->ticks=ticks;mon->current=event+1;}
+ event->setTime();mon->current=event+1;}
 }
 }   // namespace f3m_00981a30
 
@@ -5021,7 +4996,12 @@ extern const char DAT_00e7d8f8[],DAT_00e32798[];
 namespace f3m_00988dc0 {
 namespace visit988 {
 extern unsigned long DAT_0116913c;extern void* (__stdcall *DAT_00d9b080)(unsigned long);
-struct Event {const char* tag;unsigned ticks;int unk08;};struct Monitor {int unk00;Event* current;int unk08;Event* end;};
+struct Event {const char* tag;unsigned ticks;int unk08;
+    // hkMonitorStream::TimerCommand::setTime (class and member names: FNV360_PDB)
+    // RULE-EXCEPTION: R18, Havok's IA32 setTime reads the TSC with inline asm: retail stores eax to a stack local and reloads it, which __rdtsc() does not emit
+    __forceinline void setTime() { unsigned int time; __asm { rdtsc
+        mov time, eax } ticks = time; }
+};struct Monitor {int unk00;Event* current;int unk08;Event* end;};
 struct Out {int unk00,unk04,unk08;};struct Elem {virtual void V0();virtual void V4();virtual void V8();virtual void Visit(Out*);};
 struct List {Elem** data;int size,capacity;};
 static __declspec(noinline) void FUN_00988440(List* list){for(int i=list->size-1;i>=0;--i){if(!list->data[i]){--list->size;for(int j=i;j<list->size;++j)list->data[j]=list->data[j+1];}}}
@@ -5029,20 +5009,10 @@ struct Owner {int unk000; int unk004; int unk008; int unk00C; int unk010; int un
 // pdb: hkpWorldCallbackUtil::fireContactProcess | hkpWorldCallbackUtil.obj | fnv360_0822_retail, ustr + bridge(ustr|ustr) + skyrim(ustr), high
 void hkpWorldCallbackUtil_fireContactProcess(Owner* owner,Out* out){List* list=&owner->list;out->unk08=0;int i=list->size-1;if(i>=0){void* (__stdcall *tls)(unsigned long)=DAT_00d9b080;do{if(list->data[i]){
  Monitor* m=(Monitor*)tls(DAT_0116913c);
- if(m->current<m->end){Event* event=m->current;event->tag=DAT_00e7d8f8;unsigned ticks;
- __asm {
- rdtsc
- mov dword ptr[ticks], eax
- }
- event->ticks=ticks;m->current=event+1;}
+ if(m->current<m->end){Event* event=m->current;event->tag=DAT_00e7d8f8;event->setTime();m->current=event+1;}
  list->data[i]->Visit(out);
  m=(Monitor*)tls(DAT_0116913c);
- if(m->current<m->end){Event* event=m->current;event->tag=DAT_00e32798;unsigned ticks;
- __asm {
- rdtsc
- mov dword ptr[ticks], eax
- }
- event->ticks=ticks;m->current=event+1;}
+ if(m->current<m->end){Event* event=m->current;event->tag=DAT_00e32798;event->setTime();m->current=event+1;}
  }}while(--i>=0);}FUN_00988440(list);}
 }
 }   // namespace f3m_00988dc0
@@ -7279,6 +7249,11 @@ struct Rec {
     const void* label;
     unsigned int ticks;
     unsigned int unk08;
+
+    // hkMonitorStream::TimerCommand::setTime (class and member names: FNV360_PDB)
+    // RULE-EXCEPTION: R18, Havok's IA32 setTime reads the TSC with inline asm: retail stores eax to a stack local and reloads it, which __rdtsc() does not emit
+    __forceinline void setTime() { unsigned int time; __asm { rdtsc
+        mov time, eax } ticks = time; }
 };
 
 struct Stream {
@@ -7340,12 +7315,7 @@ void __cdecl hkpWorldCallbackUtil_firePostSimulationCallback(World* world)
             if (r < b->end) {
                 r->label = DAT_00e7d944;
                 _ReadWriteBarrier();
-                unsigned int t;
-                __asm {
-                    rdtsc
-                    mov dword ptr[t], eax
-                }
-                r->ticks = t;
+                r->setTime();
                 b->cur = r + 1;
             }
             listeners.data[i]->postSimulationCallback(world);
@@ -7354,12 +7324,7 @@ void __cdecl hkpWorldCallbackUtil_firePostSimulationCallback(World* world)
             if (r < b->end) {
                 r->label = DAT_00e32798;
                 _ReadWriteBarrier();
-                unsigned int t2;
-                __asm {
-                    rdtsc
-                    mov dword ptr[t2], eax
-                }
-                r->ticks = t2;
+                r->setTime();
                 b->cur = r + 1;
             }
         }
@@ -13575,6 +13540,10 @@ struct ProfRec_L
     void* id;
     unsigned int time;
     int unk08;
+    // hkMonitorStream::TimerCommand::setTime (class and member names: FNV360_PDB)
+    // RULE-EXCEPTION: R18, Havok's IA32 setTime reads the TSC with inline asm: retail stores eax to a stack local and reloads it, which __rdtsc() does not emit
+    __forceinline void setTime() { unsigned int ticks; __asm { rdtsc
+        mov ticks, eax } time = ticks; }
 };
 struct ProfSlot_L
 {
@@ -13668,17 +13637,12 @@ class Owner_L
 // pdb: hkpShapeCollection::castRayWithCollectorImpl | hkpShapeCollection.obj | fnv360_0822_retail, objrun_prop + skyrim(objrun_prop), high
 void Owner_L::hkpShapeCollection_castRayWithCollectorImpl(Arg0_L* arg0, Arg1_L* arg1, Arg2_L* arg2)
 {
-    unsigned int uiTimestamp;
     ProfSlot_L* pProfSlot = (ProfSlot_L*)TlsGetValue(DAT_0116913c);
     ProfRec_L* pProfRec = pProfSlot->head;
     if (pProfRec < pProfSlot->end)
     {
         pProfRec->id = &DAT_00e7de28;
-        __asm {
-            rdtsc
-            mov dword ptr[uiTimestamp], eax
-        }
-        pProfRec->time = uiTimestamp;
+        pProfRec->setTime();
         pProfSlot->head = pProfRec + 1;
     }
     ShapeBuf_L buffer;
@@ -13725,11 +13689,7 @@ void Owner_L::hkpShapeCollection_castRayWithCollectorImpl(Arg0_L* arg0, Arg1_L* 
     if (pProfRec < pProfSlot->end)
     {
         pProfRec->id = &DAT_00e32798;
-        __asm {
-            rdtsc
-            mov dword ptr[uiTimestamp], eax
-        }
-        pProfRec->time = uiTimestamp;
+        pProfRec->setTime();
         pProfSlot->head = pProfRec + 1;
     }
 }

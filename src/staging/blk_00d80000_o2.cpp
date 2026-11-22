@@ -2176,17 +2176,18 @@ struct S00d944d0_Stream {
     char* m_kRayEnd;
 };
 
-struct S00d944d0_Ent16 {
-    char* m_name;
-    unsigned int m_ts;
-    int unk08;
-    char* m_ucOperationType;
+// hkMonitorStream::TimerCommand and TimerBeginListCommand (class and member names: FNV360_PDB)
+struct S00d944d0_Ent12 {
+    char* m_commandAndMonitor;
+    unsigned int m_time0;
+    unsigned int m_time1;
+    // RULE-EXCEPTION: R18, Havok's IA32 setTime reads the TSC with inline asm: retail stores eax to a stack local and reloads it, which __rdtsc() does not emit
+    __forceinline void setTime() { unsigned int ticks; __asm { rdtsc
+        mov dword ptr[ticks], eax } m_time0 = ticks; }
 };
 
-struct S00d944d0_Ent12 {
-    char* m_name;
-    unsigned int m_ts;
-    int unk08;
+struct S00d944d0_Ent16 : S00d944d0_Ent12 {
+    char* m_nameOfFirstSplit;
 };
 
 struct S00d944d0_Sub {
@@ -2231,14 +2232,9 @@ void __cdecl FUN_00d944d0(S00d944d0_Obj* apObj, S00d944d0_Arg1* a2, S00d944d0_Ar
     S00d944d0_Stream* stream = (S00d944d0_Stream*)TlsGetValue(DAT_0126835c);
     if (stream->m_cur < stream->m_kRayEnd) {
         S00d944d0_Ent16* ent = (S00d944d0_Ent16*)stream->m_cur;
-        ent->m_name = timer3182::DAT_00e7d35c;
-        ent->m_ucOperationType = timer3182::DAT_00e855cc;
-        unsigned int ticks;
-        __asm {
-            rdtsc
-            mov dword ptr [ticks], eax
-        }
-        ent->m_ts = ticks;
+        ent->m_commandAndMonitor = timer3182::DAT_00e7d35c;
+        ent->m_nameOfFirstSplit = timer3182::DAT_00e855cc;
+        ent->setTime();
         stream->m_cur = (char*)(ent + 1);
     }
 
@@ -2248,13 +2244,8 @@ void __cdecl FUN_00d944d0(S00d944d0_Obj* apObj, S00d944d0_Arg1* a2, S00d944d0_Ar
     stream = (S00d944d0_Stream*)TlsGetValue(DAT_0126835c);
     if (stream->m_cur < stream->m_kRayEnd) {
         S00d944d0_Ent12* ent2 = (S00d944d0_Ent12*)stream->m_cur;
-        ent2->m_name = timer3182::DAT_00e0811c;
-        unsigned int ticks2;
-        __asm {
-            rdtsc
-            mov dword ptr [ticks2], eax
-        }
-        ent2->m_ts = ticks2;
+        ent2->m_commandAndMonitor = timer3182::DAT_00e0811c;
+        ent2->setTime();
         stream->m_cur = (char*)(ent2 + 1);
     }
 

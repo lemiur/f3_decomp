@@ -64,7 +64,12 @@ struct Input47;
 struct Collector47 { virtual void v00(); virtual void AddPair(const Body47&, const Body47&); };
 struct ClosestOut47 { Vec47 a,b; float distSq; };
 extern "C" int __cdecl FUN_0096f780(const Vec47&,const Vec47&,const Vec47&,const Vec47&,ClosestOut47&);
-struct Record47 { const char* tag; unsigned time,extra; };
+struct Record47 { const char* tag; unsigned time,extra; 
+    // hkMonitorStream::TimerCommand::setTime (class and member names: FNV360_PDB)
+    // RULE-EXCEPTION: R18, Havok's IA32 setTime reads the TSC with inline asm: retail stores eax to a stack local and reloads it, which __rdtsc() does not emit
+    __forceinline void setTime() { unsigned int ticks; __asm { rdtsc
+        mov ticks, eax } time = ticks; }
+};
 struct Monitor47 { Record47* start; Record47* next; Record47* capacity; Record47* limit; };
 // pdb: hkpCapsuleCapsuleAgent::staticGetPenetrations | hkpCapsuleCapsuleAgent.obj | fnv360_0822_retail, call_seq + bridge(caller_sim|objrun_prop) + skyrim(call_seq), high
 void __cdecl hkpCapsuleCapsuleAgent_staticGetPenetrations(const Body47& bodyA,const Body47& bodyB,const Input47& input,Collector47& collector) {
@@ -73,12 +78,7 @@ void __cdecl hkpCapsuleCapsuleAgent_staticGetPenetrations(const Body47& bodyA,co
         if(mon->next<mon->limit) {
             Record47* rec=mon->next;
             rec->tag=DAT_00e7f134;
-            unsigned int ticks;
-            __asm {
-                rdtsc
-                mov dword ptr[ticks], eax
-            }
-            rec->time=ticks;
+            rec->setTime();
             mon->next=rec+1;
         }
     }
@@ -99,12 +99,7 @@ void __cdecl hkpCapsuleCapsuleAgent_staticGetPenetrations(const Body47& bodyA,co
         if(mon->next<mon->limit) {
             Record47* rec=mon->next;
             rec->tag=DAT_00e32798;
-            unsigned int ticks;
-            __asm {
-                rdtsc
-                mov dword ptr[ticks], eax
-            }
-            rec->time=ticks;
+            rec->setTime();
             mon->next=rec+1;
         }
     }

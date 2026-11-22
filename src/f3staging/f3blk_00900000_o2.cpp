@@ -15415,6 +15415,16 @@ namespace f3m_00907b70 {
 namespace f3m_00907b70 {
 __declspec(dllimport) void* __stdcall FUN_00d9b080(unsigned long) throw();
 struct Monitor { int r0; char* cur; int r8; char* end; };
+// hkMonitorStream::TimerCommand and TimerBeginListCommand (class and member names: FNV360_PDB)
+struct TimerCommand {
+    const char* m_commandAndMonitor;
+    unsigned int m_time0;
+    unsigned int m_time1;
+    // RULE-EXCEPTION: R18, Havok's IA32 setTime reads the TSC with inline asm: retail stores eax to a stack local and reloads it, which __rdtsc() does not emit
+    __forceinline void setTime() { unsigned int ticks; __asm { rdtsc
+        mov ticks, eax } m_time0 = ticks; }
+};
+struct TimerBeginListCommand : TimerCommand { const char* m_nameOfFirstSplit; };
 struct Heap { void FUN_008f6d90(void* p, int bytes, int tag) throw(); };
 
 struct Pair { void* a; char* b; };
@@ -15867,15 +15877,11 @@ void World::FUN_00907b70(const Collidable* collA, const Input* input, Collector*
         Monitor* m = (Monitor*)FUN_00d9b080(DAT_0116913c);
         char* p = m->cur;
         if (p < m->end) {
-            *(const char**)p = "LthkpWorld::getClosestPoints";
-            *(const char**)(p + 0xc) = "Stbroadphase";
-            unsigned int t1;
-            __asm {
-                rdtsc
-                mov dword ptr[t1], eax
-            }
-            *(unsigned int*)(p + 4) = t1;
-            m->cur = p + 0x10;
+            TimerBeginListCommand* h = (TimerBeginListCommand*)p;
+            h->m_commandAndMonitor = "LthkpWorld::getClosestPoints";
+            h->m_nameOfFirstSplit = "Stbroadphase";
+            h->setTime();
+            m->cur = (char*)(h + 1);
         }
     }
     Aabb aabb;
@@ -15888,14 +15894,10 @@ void World::FUN_00907b70(const Collidable* collA, const Input* input, Collector*
         Monitor* m = (Monitor*)FUN_00d9b080(DAT_0116913c);
         char* p = m->cur;
         if (p < m->end) {
-            *(const char**)p = "Stnarrowphase";
-            unsigned int t2;
-            __asm {
-                rdtsc
-                mov dword ptr[t2], eax
-            }
-            *(unsigned int*)(p + 4) = t2;
-            m->cur = p + 0xc;
+            TimerCommand* h = (TimerCommand*)p;
+            h->m_commandAndMonitor = "Stnarrowphase";
+            h->setTime();
+            m->cur = (char*)(h + 1);
         }
     }
     for (int i = hits.size - 1; i >= 0; pairs++, i--) {
@@ -15915,14 +15917,10 @@ void World::FUN_00907b70(const Collidable* collA, const Input* input, Collector*
         Monitor* m = (Monitor*)FUN_00d9b080(DAT_0116913c);
         char* p = m->cur;
         if (p < m->end) {
-            *(const char**)p = "lt";
-            unsigned int t3;
-            __asm {
-                rdtsc
-                mov dword ptr[t3], eax
-            }
-            *(unsigned int*)(p + 4) = t3;
-            m->cur = p + 0xc;
+            TimerCommand* h = (TimerCommand*)p;
+            h->m_commandAndMonitor = "lt";
+            h->setTime();
+            m->cur = (char*)(h + 1);
         }
     }
 }

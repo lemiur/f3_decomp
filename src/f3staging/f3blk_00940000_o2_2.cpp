@@ -1153,7 +1153,12 @@ extern int DAT_00e32798;
 namespace f3m_00942cf0 {
 
 
-struct ProfEntry { void* tag; unsigned int start; unsigned int unk08; };
+struct ProfEntry { void* tag; unsigned int start; unsigned int unk08; 
+    // hkMonitorStream::TimerCommand::setTime (class and member names: FNV360_PDB)
+    // RULE-EXCEPTION: R18, Havok's IA32 setTime reads the TSC with inline asm: retail stores eax to a stack local and reloads it, which __rdtsc() does not emit
+    __forceinline void setTime() { unsigned int ticks; __asm { rdtsc
+        mov ticks, eax } start = ticks; }
+};
 struct ProfStream { int unk00; ProfEntry* cur; int unk08; ProfEntry* end; };
 
 struct Vec4 { float x, y, z, w; };
@@ -1229,12 +1234,7 @@ void Owner::hkpWorldRayCaster_castRayGroup(Obj* a1, Blk* a2, int a3, char* a4, i
         ProfEntry* e = ps->cur;
         if (e < ps->end) {
             e->tag = &DAT_00e7a1c8;
-            unsigned int ticks;
-            __asm {
-                rdtsc
-                mov dword ptr[ticks], eax
-            }
-            e->start = ticks;
+            e->setTime();
             ps->cur = e + 1;
         }
     }
@@ -1299,12 +1299,7 @@ void Owner::hkpWorldRayCaster_castRayGroup(Obj* a1, Blk* a2, int a3, char* a4, i
         ProfEntry* e2 = ps2->cur;
         if (e2 < ps2->end) {
             e2->tag = &DAT_00e32798;
-            unsigned int ticks;
-            __asm {
-                rdtsc
-                mov dword ptr[ticks], eax
-            }
-            e2->start = ticks;
+            e2->setTime();
             ps2->cur = e2 + 1;
         }
     }
@@ -1323,6 +1318,11 @@ struct S945a80_ProfRec {
     const char* m_pName;
     unsigned int m_iTick;
     unsigned int m_iEnd;
+
+    // hkMonitorStream::TimerCommand::setTime (class and member names: FNV360_PDB)
+    // RULE-EXCEPTION: R18, Havok's IA32 setTime reads the TSC with inline asm: retail stores eax to a stack local and reloads it, which __rdtsc() does not emit
+    __forceinline void setTime() { unsigned int ticks; __asm { rdtsc
+        mov ticks, eax } m_iTick = ticks; }
 };
 
 struct S945a80_ProfBuf {
@@ -1483,12 +1483,7 @@ void S945a80_Picker::hkpCachingShapePhantomRay_castRay(S945a80_RayIn* in, S945a8
     bool room = rec < buf->m_pEnd;
     if (room) {
         rec->m_pName = DAT_00e7a3fc;
-        unsigned int ticks;
-        __asm {
-            rdtsc
-            mov dword ptr[ticks], eax
-        }
-        rec->m_iTick = ticks;
+        rec->setTime();
         buf->m_pCur = rec + 1;
     }
 
@@ -1538,12 +1533,7 @@ void S945a80_Picker::hkpCachingShapePhantomRay_castRay(S945a80_RayIn* in, S945a8
     rec = buf->m_pCur;
     if (rec < buf->m_pEnd) {
         rec->m_pName = DAT_00e32798;
-        unsigned int ticks;
-        __asm {
-            rdtsc
-            mov dword ptr[ticks], eax
-        }
-        rec->m_iTick = ticks;
+        rec->setTime();
         buf->m_pCur = rec + 1;
     }
 }

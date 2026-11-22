@@ -799,6 +799,11 @@ struct S009c5c30_Ev {
     const char* id;
     unsigned int tick;
     unsigned int unk08;
+
+    // hkMonitorStream::TimerCommand::setTime (class and member names: FNV360_PDB)
+    // RULE-EXCEPTION: R18, Havok's IA32 setTime reads the TSC with inline asm: retail stores eax to a stack local and reloads it, which __rdtsc() does not emit
+    __forceinline void setTime() { unsigned int ticks; __asm { rdtsc
+        mov ticks, eax } tick = ticks; }
 };
 
 struct S009c5c30_Tls {
@@ -861,12 +866,7 @@ void hkpSphereBoxAgent_staticGetPenetrations(S009c5c30_A* a, S009c5c30_B* b, uns
     S009c5c30_Ev* ev = tls->cur;
     if (ev < tls->end) {
         ev->id = DAT_00e7f1b8;
-        unsigned int ticks;
-        __asm {
-            rdtsc
-            mov dword ptr[ticks], eax
-        }
-        ev->tick = ticks;
+        ev->setTime();
         tls->cur = ev + 1;
     }
 
@@ -911,12 +911,7 @@ void hkpSphereBoxAgent_staticGetPenetrations(S009c5c30_A* a, S009c5c30_B* b, uns
     ev = tls->cur;
     if (ev < tls->end) {
         ev->id = DAT_00e32798;
-        unsigned int ticks;
-        __asm {
-            rdtsc
-            mov dword ptr[ticks], eax
-        }
-        ev->tick = ticks;
+        ev->setTime();
         tls->cur = ev + 1;
     }
 }
@@ -1533,6 +1528,16 @@ namespace S009c2530_ns {
 __declspec(dllimport) void* __stdcall FUN_00d9b080(unsigned long) throw();
 
 struct S009c2530_Stream { char* m_start; char* m_cur; char* m_spare; char* m_end; };
+// hkMonitorStream::TimerCommand (class and member names: FNV360_PDB)
+struct S009c2530_TimerCommand
+{
+    const char* m_commandAndMonitor;
+    unsigned int m_time0;
+    unsigned int m_time1;
+    // RULE-EXCEPTION: R18, Havok's IA32 setTime reads the TSC with inline asm: retail stores eax to a stack local and reloads it, which __rdtsc() does not emit
+    __forceinline void setTime() { unsigned int ticks; __asm { rdtsc
+        mov dword ptr[ticks], eax } m_time0 = ticks; }
+};
 
 struct hkTransform;
 
@@ -1689,14 +1694,10 @@ S009c2530_AgentData* hkCapsuleTriangleAgent3_process(const hkpAgent3ProcessInput
         char* cur = s->m_cur;
         if (cur < s->m_end)
         {
-            *(const char**)cur = "TtCapsTri3";
-            unsigned int ticks;
-            __asm {
-                rdtsc
-                mov dword ptr[ticks], eax
-            }
-            *(unsigned int*)(cur + 4) = ticks;
-            s->m_cur = cur + 12;
+            S009c2530_TimerCommand* h = (S009c2530_TimerCommand*)cur;
+            h->m_commandAndMonitor = "TtCapsTri3";
+            h->setTime();
+            s->m_cur = (char*)(h + 1);
         }
     }
 
@@ -1784,14 +1785,10 @@ storeId:
         char* cur = s->m_cur;
         if (cur < s->m_end)
         {
-            *(const char**)cur = "Et";
-            unsigned int ticks;
-            __asm {
-                rdtsc
-                mov dword ptr[ticks], eax
-            }
-            *(unsigned int*)(cur + 4) = ticks;
-            s->m_cur = cur + 12;
+            S009c2530_TimerCommand* h = (S009c2530_TimerCommand*)cur;
+            h->m_commandAndMonitor = "Et";
+            h->setTime();
+            s->m_cur = (char*)(h + 1);
         }
     }
     return agentData + 1;

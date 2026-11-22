@@ -9372,7 +9372,12 @@ extern const char DAT_00e32798[];
 namespace f3m_009ed320 {
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long);
 
-struct Command { const char* name; unsigned int ticks; unsigned int unk08; };
+struct Command { const char* name; unsigned int ticks; unsigned int unk08; 
+    // hkMonitorStream::TimerCommand::setTime (class and member names: FNV360_PDB)
+    // RULE-EXCEPTION: R18, Havok's IA32 setTime reads the TSC with inline asm: retail stores eax to a stack local and reloads it, which __rdtsc() does not emit
+    __forceinline void setTime() { unsigned int time; __asm { rdtsc
+        mov time, eax } ticks = time; }
+};
 struct Stream { unsigned int unk00; Command* cursor; unsigned int unk08; Command* limit; };
 
 struct __declspec(align(16)) Vec4 {
@@ -9445,12 +9450,7 @@ void TransformShape::hkpConvexTransformShape_castRayWithCollectorImpl(const RayI
     Command* c = s->cursor;
     if (c < s->limit) {
         c->name = DAT_00e80834;
-        unsigned int ticks;
-        __asm {
-            rdtsc
-            mov dword ptr[ticks], eax
-        }
-        c->ticks = ticks;
+        c->setTime();
         s->cursor = c + 1;
     }
     RayInput sub = input;
@@ -9466,12 +9466,7 @@ void TransformShape::hkpConvexTransformShape_castRayWithCollectorImpl(const RayI
     Command* c2 = s2->cursor;
     if (c2 < s2->limit) {
         c2->name = DAT_00e32798;
-        unsigned int ticks2;
-        __asm {
-            rdtsc
-            mov dword ptr[ticks2], eax
-        }
-        c2->ticks = ticks2;
+        c2->setTime();
         s2->cursor = c2 + 1;
     }
 }

@@ -4611,6 +4611,11 @@ struct S687a0_TimerCommand
     const char* m_commandAndMonitor;
     unsigned int m_time;
     unsigned int m_time2;
+
+    // hkMonitorStream::TimerCommand::setTime (class and member names: FNV360_PDB)
+    // RULE-EXCEPTION: R18, Havok's IA32 setTime reads the TSC with inline asm: retail stores eax to a stack local and reloads it, which __rdtsc() does not emit
+    __forceinline void setTime() { unsigned int ticks; __asm { rdtsc
+        mov ticks, eax } m_time = ticks; }
 };
 
 struct S687a0_MonitorStream
@@ -4632,12 +4637,7 @@ static __declspec(noinline) void FUN_00a687a0(const S687a0_Vector4& from, const 
         {
             S687a0_TimerCommand* h = (S687a0_TimerCommand*)s->m_end;
             h->m_commandAndMonitor = "TthkContactPointViewer_displayArrow";
-            unsigned int ticks;
-            __asm {
-                rdtsc
-                mov dword ptr[ticks], eax
-            }
-            h->m_time = ticks;
+            h->setTime();
             s->m_end = (char*)(h + 1);
         }
     }
@@ -4648,12 +4648,7 @@ static __declspec(noinline) void FUN_00a687a0(const S687a0_Vector4& from, const 
         {
             S687a0_TimerCommand* h = (S687a0_TimerCommand*)s->m_end;
             h->m_commandAndMonitor = "Et";
-            unsigned int ticks;
-            __asm {
-                rdtsc
-                mov dword ptr[ticks], eax
-            }
-            h->m_time = ticks;
+            h->setTime();
             s->m_end = (char*)(h + 1);
         }
         return;
@@ -4678,12 +4673,7 @@ static __declspec(noinline) void FUN_00a687a0(const S687a0_Vector4& from, const 
         {
             S687a0_TimerCommand* h = (S687a0_TimerCommand*)s->m_end;
             h->m_commandAndMonitor = "Et";
-            unsigned int ticks;
-            __asm {
-                rdtsc
-                mov dword ptr[ticks], eax
-            }
-            h->m_time = ticks;
+            h->setTime();
             s->m_end = (char*)(h + 1);
         }
     }

@@ -1056,6 +1056,9 @@ class hkMonitorStream
     {
         hkUint32 m_time0;
         hkUint32 m_time1;
+        // RULE-EXCEPTION: R18, Havok's IA32 setTime reads the TSC with inline asm: retail stores eax to a stack local and reloads it, which __rdtsc() does not emit
+        __forceinline void setTime() { hkUint32 ticks; __asm { rdtsc
+            mov dword ptr[ticks], eax } m_time0 = ticks; }
     };
     struct TimerBeginListCommand : public TimerCommand
     {
@@ -1169,12 +1172,7 @@ void __cdecl hkCpuSolveConstraintBatchJob(hkpSimulationIslandA235* island, hkpSi
             hkMonitorStream::TimerBeginListCommand* h = reinterpret_cast<hkMonitorStream::TimerBeginListCommand*>(mStream.getEnd());
             h->m_commandAndMonitor = "LtIntegrate";
             h->m_nameOfFirstSplit = "StSolve";
-            unsigned int ticks;
-            __asm {
-                rdtsc
-                mov dword ptr[ticks], eax
-            }
-            h->m_time0 = ticks;
+            h->setTime();
             mStream.setEnd(reinterpret_cast<char*>(h + 1));
         }
     }
@@ -1214,12 +1212,7 @@ void __cdecl hkCpuSolveConstraintBatchJob(hkpSimulationIslandA235* island, hkpSi
         {
             hkMonitorStream::TimerCommand* h = reinterpret_cast<hkMonitorStream::TimerCommand*>(mStream.getEnd());
             h->m_commandAndMonitor = "lt";
-            unsigned int ticks;
-            __asm {
-                rdtsc
-                mov dword ptr[ticks], eax
-            }
-            h->m_time0 = ticks;
+            h->setTime();
             mStream.setEnd(reinterpret_cast<char*>(h + 1));
         }
     }
@@ -4699,6 +4692,11 @@ struct Sa21d70_TimerCommand {
     const char* m_name;
     unsigned int m_ticks;
     unsigned int unk08;
+
+    // hkMonitorStream::TimerCommand::setTime (class and member names: FNV360_PDB)
+    // RULE-EXCEPTION: R18, Havok's IA32 setTime reads the TSC with inline asm: retail stores eax to a stack local and reloads it, which __rdtsc() does not emit
+    __forceinline void setTime() { unsigned int ticks; __asm { rdtsc
+        mov ticks, eax } m_ticks = ticks; }
 };
 
 struct Sa21d70_MonitorStream {
@@ -4810,12 +4808,7 @@ int Sa21d70_JobQueue::FUN_00a21d70(int queueIndexOfNewJob, int addAtBack, int th
         Sa21d70_TimerCommand* h = mon->m_end;
         if (h < mon->m_capacityMinusEpsilon) {
             h->m_name = "TtGetNextJob";
-            unsigned int ticks;
-            __asm {
-                rdtsc
-                mov dword ptr[ticks], eax
-            }
-            h->m_ticks = ticks;
+            h->setTime();
             mon->m_end = h + 1;
         }
     }
@@ -4903,12 +4896,7 @@ int Sa21d70_JobQueue::FUN_00a21d70(int queueIndexOfNewJob, int addAtBack, int th
             Sa21d70_TimerCommand* h = mon->m_end;
             if (h < mon->m_capacityMinusEpsilon) {
                 h->m_name = "Et";
-                unsigned int ticks;
-                __asm {
-                    rdtsc
-                    mov dword ptr[ticks], eax
-                }
-                h->m_ticks = ticks;
+                h->setTime();
                 mon->m_end = h + 1;
             }
             return 0;
@@ -4921,12 +4909,7 @@ int Sa21d70_JobQueue::FUN_00a21d70(int queueIndexOfNewJob, int addAtBack, int th
             Sa21d70_TimerCommand* h = mon->m_end;
             if (h < mon->m_capacityMinusEpsilon) {
                 h->m_name = "Et";
-                unsigned int ticks;
-                __asm {
-                    rdtsc
-                    mov dword ptr[ticks], eax
-                }
-                h->m_ticks = ticks;
+                h->setTime();
                 mon->m_end = h + 1;
             }
             return 3;
@@ -4938,12 +4921,7 @@ int Sa21d70_JobQueue::FUN_00a21d70(int queueIndexOfNewJob, int addAtBack, int th
             Sa21d70_TimerCommand* h = mon->m_end;
             if (h < mon->m_capacityMinusEpsilon) {
                 h->m_name = "EtGetNextJob";
-                unsigned int ticks;
-                __asm {
-                    rdtsc
-                    mov dword ptr[ticks], eax
-                }
-                h->m_ticks = ticks;
+                h->setTime();
                 mon->m_end = h + 1;
             }
             return 1;
@@ -4957,12 +4935,7 @@ int Sa21d70_JobQueue::FUN_00a21d70(int queueIndexOfNewJob, int addAtBack, int th
                 Sa21d70_TimerCommand* h = mon->m_end;
                 if (h < mon->m_capacityMinusEpsilon) {
                     h->m_name = "TtWaitForSignal";
-                    unsigned int ticks;
-                    __asm {
-                        rdtsc
-                        mov dword ptr[ticks], eax
-                    }
-                    h->m_ticks = ticks;
+                    h->setTime();
                     mon->m_end = h + 1;
                 }
             }
@@ -4972,12 +4945,7 @@ int Sa21d70_JobQueue::FUN_00a21d70(int queueIndexOfNewJob, int addAtBack, int th
                 Sa21d70_TimerCommand* h = mon->m_end;
                 if (h < mon->m_capacityMinusEpsilon) {
                     h->m_name = "Et";
-                    unsigned int ticks;
-                    __asm {
-                        rdtsc
-                        mov dword ptr[ticks], eax
-                    }
-                    h->m_ticks = ticks;
+                    h->setTime();
                     mon->m_end = h + 1;
                 }
             }
@@ -4989,12 +4957,7 @@ int Sa21d70_JobQueue::FUN_00a21d70(int queueIndexOfNewJob, int addAtBack, int th
                 Sa21d70_TimerCommand* h = mon->m_end;
                 if (h < mon->m_capacityMinusEpsilon) {
                     h->m_name = "TtWaitForSignal";
-                    unsigned int ticks;
-                    __asm {
-                        rdtsc
-                        mov dword ptr[ticks], eax
-                    }
-                    h->m_ticks = ticks;
+                    h->setTime();
                     mon->m_end = h + 1;
                 }
             }
@@ -5004,12 +4967,7 @@ int Sa21d70_JobQueue::FUN_00a21d70(int queueIndexOfNewJob, int addAtBack, int th
                 Sa21d70_TimerCommand* h = mon->m_end;
                 if (h < mon->m_capacityMinusEpsilon) {
                     h->m_name = "Et";
-                    unsigned int ticks;
-                    __asm {
-                        rdtsc
-                        mov dword ptr[ticks], eax
-                    }
-                    h->m_ticks = ticks;
+                    h->setTime();
                     mon->m_end = h + 1;
                 }
             }
