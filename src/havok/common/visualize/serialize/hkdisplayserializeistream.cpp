@@ -10,16 +10,20 @@ struct DdabeTag
     {}
 };
 
+class hkClass;
+class hkStatisticsCollector;
+// hkIStream: the three slots of the Fallout 3 vtable of hkDisplaySerializeIStream (0x00e86d68).
 struct DdabeBase
 {
     DdabeBase(int a, DdabeTag t);
-    virtual void unk00();
+    virtual ~DdabeBase();
+    virtual const hkClass* getClassType() const;
+    virtual void calcContentStatistics(hkStatisticsCollector* collector, const hkClass* cls) const;
 };
 
 struct FUN_00ddabe0 : DdabeBase
 {
     FUN_00ddabe0(int a);
-    virtual void unk00();
 };
 
 // @fnv 0x00ddabe0

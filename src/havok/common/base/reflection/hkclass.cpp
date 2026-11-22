@@ -163,9 +163,14 @@ void FUN_00d87150_class::InitBitOffset(int baseOffset, FUN_00d46fe0_class* apCla
         m_offset = baseOffset + m_kMemberDescriptor->m_bitOffset;
 }
 
+class hkClass;
+class hkStatisticsCollector;
+// hkpCharacterContext: the three slots of its Fallout 3 vtable (0x00e36654).
 struct FUN_00d470e0_Class
 {
-    virtual void vf00();
+    virtual ~FUN_00d470e0_Class();
+    virtual const hkClass* getClassType() const;
+    virtual void calcContentStatistics(hkStatisticsCollector* collector, const hkClass* cls) const;
     int unk04;
     int unk08;
     void __thiscall hkpCharacterContext_setCharacterType(int value);
