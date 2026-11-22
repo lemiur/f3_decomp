@@ -86,7 +86,7 @@ bool NiColorInterpolator::IsColorConstant(unsigned short) const
     return m_kColorValue.FUN_004a4cc0(DAT_011a9430) ? false : true;
 }
 
-struct CloningProcess
+struct NiCloningProcess
 {
     void __dflt_ctor_closure();
     void* __vecDelDtor(unsigned int);
@@ -96,10 +96,10 @@ struct CloningProcess
     char m_bExactType;
     char _pad_d[3];
 };
-typedef char _sizecheck_NiCloningProcess[sizeof(CloningProcess) == 16 ? 1 : -1];
+typedef char _sizecheck_NiCloningProcess[sizeof(NiCloningProcess) == 16 ? 1 : -1];
 struct FUN_00a3ba70_shell : public NiGeomMorpherController
 {
-    void NiGeomMorpherController_CopyMembers(NiGeomMorpherController*, CloningProcess*);
+    void NiGeomMorpherController_CopyMembers(NiGeomMorpherController*, NiCloningProcess*);
 };
 
 extern bool DAT_011f3724;
@@ -107,9 +107,9 @@ extern bool DAT_011f3724;
 // Copies interpolator pointers and weights from this controller into pkDest, cloning each interpolator and updating reference counts.
 // @fnv 0x00a3ba70
 // pdb: NiGeomMorpherController::CopyMembers | NiGeomMorpherController.obj | fnv360_0822_retail, caller_sim + bridge(call_seq|caller_sim) + skyrim(caller_sim), high
-void FUN_00a3ba70_shell::NiGeomMorpherController_CopyMembers(NiGeomMorpherController* pkDest, CloningProcess* kCloning)
+void FUN_00a3ba70_shell::NiGeomMorpherController_CopyMembers(NiGeomMorpherController* pkDest, NiCloningProcess* kCloning)
 {
-    NiInterpController::CopyMemberData(pkDest, *kCloning);
+    NiInterpController::CopyMembers(pkDest, *kCloning);
     pkDest->m_uiObjectFlags = m_uiObjectFlags;
     if (m_spMorphTargetData.m_pObject)
     {
@@ -296,7 +296,7 @@ void __fastcall FUN_00a3aba0(FUN_00a3aba0_t* self, int)
     }
 }
 
-struct CloningProcess;
+struct NiCloningProcess;
 struct NiFloatInterpolator;
 struct NiStream;
 struct FUN_00a3ae50_shell : public NiGeomMorpherController
@@ -779,7 +779,6 @@ struct NiD3DShaderProgram
 struct FUN_00a3b5a0_shell : public NiGeomMorpherController
 {
     void ClearInterpolatorArray();
-    void LinkObject(NiStream& kStream);
     void FUN_00a3b5a0(NiStream& kStream);
 };
 
@@ -792,7 +791,7 @@ void FUN_00a3b5a0_shell::FUN_00a3b5a0(NiStream& kStream)
     typedef void(__thiscall * SetInterpolatorType)(NiGeomMorpherController*, const char*, unsigned int);
     typedef void(__thiscall * SetTimeType)(NiGeomMorpherController*, float, float);
 
-    LinkObject(kStream);
+    NiInterpController::LinkObject(kStream);
 
     m_spMorphTargetData = static_cast<NiMorphData*>(kStream.GetLoadedObject());
 
@@ -1307,7 +1306,7 @@ extern const float DAT_01015f5c;
 
 __forceinline unsigned char IsManaged(const NiTimeController* object)
 {
-    return (object->m_uiObjectFlags >> 5) & 1;
+    return (object->m_uFlags >> 5) & 1;
 }
 struct FUN_00a3a950_shell : NiGeomMorpherController
 {
@@ -1529,8 +1528,8 @@ class A3AF10InterpController : public NiObject
     float m_fHiKeyTime;
     float m_fStartTime;
     float m_fLastTime;
-    float m_fWeightAdjustedLastTime;
-    float m_fControllerTime;
+    float m_fWeightedLastTime;
+    float m_fScaledTime;
     NiObjectNET* m_pkTarget;
     NiTimeController* m_pkNext;
 

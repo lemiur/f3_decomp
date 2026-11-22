@@ -36,6 +36,8 @@ class NiInterpController : public NiTimeController
     virtual void GuaranteeTimeRange(float, float) = 0;                                       // 56
     virtual bool InterpolatorIsCorrectType(NiInterpolator*, unsigned short) const = 0;       // 57
 
+    void CopyMembers(NiInterpController* pkDest, NiCloningProcess& kCloning);
+
     static const NiRTTI ms_RTTI;
     static const unsigned short INVALID_INDEX;
     static const float INVALID_TIME;

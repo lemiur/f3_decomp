@@ -34,6 +34,8 @@ class NiSingleInterpController : public NiInterpController
 
     NiPointer<NiInterpolator> m_spInterpolator;    // +0x34
 
+    void CopyMembers(NiSingleInterpController* pkDest, NiCloningProcess& kCloning);
+
     static const NiRTTI ms_RTTI;
 };
 #pragma pack(pop)

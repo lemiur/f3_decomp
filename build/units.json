@@ -519504,7 +519504,7 @@
     },
     {
      "address": "0x008b5a60",
-     "symbol": "?NiGeomMorpherController_CopyMembers@FUN_00a3ba70_shell@@QAEXPAVNiGeomMorpherController@@PAUCloningProcess@@@Z",
+     "symbol": "?NiGeomMorpherController_CopyMembers@FUN_00a3ba70_shell@@QAEXPAVNiGeomMorpherController@@PAUNiCloningProcess@@@Z",
      "size": 265
     },
     {
@@ -519622,7 +519622,10 @@
     "__real@3f800000": "0x00db39b8",
     "??3@YAXPAX@Z": "0x00401010",
     "?NiStricmp@@YAHPBD0@Z": "0x0089eb00",
-    "?DeleteThis@NiRefObject@@UAEXXZ": "0x00987c70"
+    "?DeleteThis@NiRefObject@@UAEXXZ": "0x00987c70",
+    "?LinkObject@NiInterpController@@UAEXAAUNiStream@@@Z": "0x00914720",
+    "?CopyMembers@NiInterpController@@QAEXPAV1@AAUNiCloningProcess@@@Z": "0x008a8470",
+    "?FUN_00a5d3f0@NiInterpolator@@QAEPAV1@AAUNiCloningProcess@@@Z": "0x00825850"
    }
   },
   {

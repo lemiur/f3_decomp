@@ -62,6 +62,8 @@ class NiTimeController : public NiObject
     NiObjectNET* m_pkTarget;                       // +0x2C
     NiPointer<NiTimeController> m_spNext;          // +0x30
 
+    void CopyMembers(NiTimeController* pkDest, NiCloningProcess& kCloning);
+
     static const NiRTTI ms_RTTI;
 };
 #pragma pack(pop)

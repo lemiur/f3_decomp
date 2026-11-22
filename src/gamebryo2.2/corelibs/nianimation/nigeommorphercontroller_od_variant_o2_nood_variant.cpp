@@ -78,54 +78,6 @@ struct FloatValueView : InterpolatorView
 };
 struct MorphViewer : NiGeomMorpherController
 {
-    virtual void slot02();
-    virtual void slot03();
-    virtual void slot04();
-    virtual void slot05();
-    virtual void slot06();
-    virtual void slot07();
-    virtual void slot08();
-    virtual void slot09();
-    virtual void slot10();
-    virtual void slot11();
-    virtual void slot12();
-    virtual void slot13();
-    virtual void slot14();
-    virtual void slot15();
-    virtual void slot16();
-    virtual void slot17();
-    virtual void slot18();
-    virtual void slot19();
-    virtual void slot20();
-    virtual void slot21();
-    virtual void slot22();
-    virtual void slot23();
-    virtual void slot24();
-    virtual void slot25();
-    virtual void slot26();
-    virtual void slot27();
-    virtual void slot28();
-    virtual void slot29();
-    virtual void slot30();
-    virtual void slot31();
-    virtual void slot32();
-    virtual void slot33();
-    virtual void slot34();
-    virtual void slot35();
-    virtual void slot36();
-    virtual void slot37();
-    virtual void slot38();
-    virtual void slot39();
-    virtual void slot40();
-    virtual void slot41();
-    virtual void slot42();
-    virtual void slot43();
-    virtual void slot44();
-    virtual void slot45();
-    virtual void slot46();
-    virtual void slot47();
-    virtual void slot48();
-    virtual InterpolatorView* GetInterpolator(unsigned int);
     void FUN_00a3b700(StrArr*);
 };
 // @f3 0x008b56f0 (community match, verified in this file)
@@ -165,7 +117,7 @@ void MorphViewer::FUN_00a3b700(StrArr* array)
                     ? reinterpret_cast<NiMorphData::MorphTarget*>(
                           reinterpret_cast<char*>(m_spMorphTargetData.m_pObject->m_pMorphTargets) + offset)
                     : 0;
-            InterpolatorView* interpolator = GetInterpolator(i);
+            InterpolatorView* interpolator = (InterpolatorView*)GetInterpolator(i);
             char buffer[256];
             if (interpolator)
             {
