@@ -522885,7 +522885,7 @@
    "functions": [
     {
      "address": "0x008b2830",
-     "symbol": "?FUN_00a390a0@Holder00a390a0@@QAEXPAUStrArr@@@Z",
+     "symbol": "?GetViewerStrings@NiSingleInterpController@@UAEXPAV?$NiTPrimitiveArray@PAD@@@Z",
      "size": 93
     }
    ],
@@ -522911,7 +522911,12 @@
     "?FUN_00c283f0@@YAGPAX0@Z": "0x004b2430",
     "?FUN_00a2f8b0@@YAXH@Z": "0x004553f0",
     "?g_011f36bc_arg1@@3QBDB": "0x0116d700",
-    "?DAT_01091f5c@@3QBDB": "0x01091f5c"
+    "?DAT_01091f5c@@3QBDB": "0x01091f5c",
+    "?GetViewerStrings@NiInterpController@@UAEXPAV?$NiTPrimitiveArray@PAD@@@Z": "0x008a8570",
+    "?ms_RTTI@NiSingleInterpController@@2VNiRTTI@@B": "0x01091f5c",
+    "?NiGetViewerString@@YAPADPBD@Z": "0x00847b50",
+    "?SetSize@?$NiTPrimitiveArray@PAD@@QAEXI@Z": "0x00555790",
+    "?SetAt@?$NiTPrimitiveArray@PAD@@QAEXIABQAD@Z": "0x005b3880"
    }
   },
   {
@@ -522962,17 +522967,17 @@
     },
     {
      "address": "0x008b25c0",
-     "symbol": "?FUN_00a38e30@FUN_00a38e30_shell@@QAEPAVNiInterpolator@@G@Z",
+     "symbol": "?GetInterpolator@NiSingleInterpController@@UBEPAVNiInterpolator@@G@Z",
      "size": 6
     },
     {
      "address": "0x008b25d0",
-     "symbol": "?FUN_00a38e40@FUN_00a38e40_cls@@QAEXPAVNiInterpolator@@I@Z",
+     "symbol": "?SetInterpolator@NiSingleInterpController@@UAEXPAVNiInterpolator@@G@Z",
      "size": 66
     },
     {
      "address": "0x008b2620",
-     "symbol": "?NiSingleInterpController_GuaranteeTimeRange@FUN_00a38e90_shell@@QAEXMM@Z",
+     "symbol": "?GuaranteeTimeRange@NiSingleInterpController@@UAEXMM@Z",
      "size": 38
     },
     {
@@ -522982,7 +522987,7 @@
     },
     {
      "address": "0x008b26e0",
-     "symbol": "?ProcessClone@NiSingleInterpController@@UAEXAAVCloningProcess@@@Z",
+     "symbol": "?ProcessClone@NiSingleInterpController@@UAEXAAVNiCloningProcess@@@Z",
      "size": 34
     },
     {
@@ -522992,17 +522997,17 @@
     },
     {
      "address": "0x008b2770",
-     "symbol": "?RegisterInterpolatorStreamables@FUN_00a38fe0_shell@@QAE_NAAVNiStream@@@Z",
+     "symbol": "?RegisterStreamables@NiSingleInterpController@@UAE_NAAVNiStream@@@Z",
      "size": 45
     },
     {
      "address": "0x008b27a0",
-     "symbol": "?FUN_00a39010@FUN_00a39010_shell@@QAEXAAVNiStream@@@Z",
+     "symbol": "?SaveBinary@NiSingleInterpController@@UAEXAAVNiStream@@@Z",
      "size": 32
     },
     {
      "address": "0x008b27c0",
-     "symbol": "?IsCompatibleWith@FUN_00a39030_cls@@QAE_NPAVNiSingleInterpController@@@Z",
+     "symbol": "?IsEqual@NiSingleInterpController@@UAE_NPAVNiObject@@@Z",
      "size": 74
     },
     {
@@ -523037,7 +523042,12 @@
     "?SaveBinary@A30440Controller@@QAEXAAUA30440Stream@@@Z": "0x00455410",
     "?FUN_00c283f0@@YAGPAX0@Z": "0x004b2430",
     "?FUN_00a2f8b0@@YAXH@Z": "0x004553f0",
-    "?g_011f36bc_arg1@@3QBDB": "0x0116d700"
+    "?g_011f36bc_arg1@@3QBDB": "0x0116d700",
+    "?ProcessClone@NiTimeController@@UAEXAAVNiCloningProcess@@@Z": "0x00837ca0",
+    "?ResolveLinkID@NiStream@@QAEPAVNiObject@@XZ": "0x0082b5d0",
+    "?RegisterStreamables@NiInterpController@@UAE_NAAVNiStream@@@Z": "0x008a8480",
+    "?SaveBinary@NiInterpController@@UAEXAAVNiStream@@@Z": "0x00ac75b0",
+    "?IsEqual@NiInterpController@@UAE_NPAVNiObject@@@Z": "0x00ac88b0"
    }
   },
   {

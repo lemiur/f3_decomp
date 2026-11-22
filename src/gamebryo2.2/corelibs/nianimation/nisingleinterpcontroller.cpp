@@ -1,36 +1,25 @@
 // gamebryo2.2/corelibs/nianimation/nisingleinterpcontroller.cpp: NiSingleInterpController, BSMultiTargetTreadTransfControllerStandIn (19 functions)
 #include "f3_common.h"
 #include "nisingleinterpcontroller_decls.h"
-// Calls the base NiTimeController::ProcessClone, then forwards the clone process to the interpolator if one is set.
+#include "NiInterpolator.h"
+#include "NiViewerStrings.h"
 // @fnv 0x00a38f50
 // pdb: NiSingleInterpController::ProcessClone | NiSingleInterpController.obj | fnv360_0822_retail, call_dedup, high
 // pdb params: kCloning
-void NiSingleInterpController::ProcessClone(CloningProcess& process)
+void NiSingleInterpController::ProcessClone(NiCloningProcess& kCloning)
 {
-    NiTimeController::ProcessClone(process);
-    NiInterpolator* pInterpolator = m_spInterpolator;
-    if (pInterpolator)
-        pInterpolator->ProcessClone(process);
+    NiInterpController::ProcessClone(kCloning);
+    if (m_spInterpolator)
+        m_spInterpolator->ProcessClone(kCloning);
 }
 // @fnv 0x00a38f80
 // pdb: NiSingleInterpController::LoadBinary | NiSingleInterpController.obj | fnv360_0822_retail, call_seq, high
 // pdb params: kStream
-void NiSingleInterpController::LoadBinary(NiStream& stream)
+void NiSingleInterpController::LoadBinary(NiStream& kStream)
 {
-    NiInterpController::LoadBinary(stream);
-    if (stream.version >= 0x0a010068)
-    {
-        NiInterpolator* value = (NiInterpolator*)stream.DeserializeObject();
-        NiInterpolator* old = m_spInterpolator;
-        if (old != value)
-        {
-            if (old && InterlockedDecrement(&((NiObject*)old)->refCount) == 0)
-                ((NiObject*)old)->DeleteThis();
-            m_spInterpolator = value;
-            if (value)
-                InterlockedIncrement(&((NiObject*)value)->refCount);
-        }
-    }
+    NiInterpController::LoadBinary(kStream);
+    if (kStream.GetFileVersion() >= NiStream::GetVersion(10, 1, 0, 104))
+        m_spInterpolator = (NiInterpolator*)kStream.ResolveLinkID();
 }
 
 extern int DAT_0109632c;
@@ -52,44 +41,6 @@ struct NiBlendInterpolator;
 struct CloningProcess;
 struct NiObjectNET;
 struct NiUpdateData;
-struct NiFloatInterpController : public NiSingleInterpController
-{
-    virtual void __vslot_0();
-    virtual void UpdateFloatValue(float*);
-    virtual void* GetRTTI();
-    void CopyMemberData(NiFloatInterpController*, CloningProcess*);
-    virtual void LoadBinary(NiStream*);
-    virtual void LinkObject(NiStream*);
-    virtual bool RegisterStreamables(NiStream*);
-    virtual void SaveBinary(NiStream*);
-    virtual bool IsEqual(NiObject*);
-    virtual void GetViewerStrings(void*);
-    virtual NiInterpolator* GetInterpolatorAtIndex(unsigned short);
-    virtual void SetInterpolatorForTarget(NiInterpolator*, unsigned short);
-    virtual NiBlendInterpolator* GetBlendInterpolator(unsigned short, bool, bool, float, unsigned char);
-    virtual bool ControlsTransform(NiInterpolator*, unsigned short);
-    void __local_vftable_ctor_closure();
-};
-typedef char _sizecheck_NiFloatInterpController[sizeof(NiFloatInterpController) == 56 ? 1 : -1];
-struct BSFrustumFOVController : public NiFloatInterpController
-{
-    virtual void __vslot_0();
-    virtual void* GetRTTI();
-    virtual NiObject* MakeClone(CloningProcess*);
-    void CopyMemberData(BSFrustumFOVController*, CloningProcess*);
-    virtual void LoadBinary(NiStream*);
-    virtual void LinkObject(NiStream*);
-    virtual bool RegisterStreamables(NiStream*);
-    virtual void SaveBinary(NiStream*);
-    virtual bool IsEqual(NiObject*);
-    static NiObject* CreateObject();
-    virtual void GetViewerStrings(void*);
-    virtual void Update(NiUpdateData*);
-    virtual bool TargetIsRequired(NiObjectNET*);
-    virtual void UpdateFloatValue(float*);
-    void __local_vftable_ctor_closure();
-};
-typedef char _sizecheck_BSFrustumFOVController[sizeof(BSFrustumFOVController) == 56 ? 1 : -1];
 struct FUN_00a38e30_shell : public NiSingleInterpController
 {
     NiInterpolator* FUN_00a38e30(unsigned short);
@@ -97,8 +48,8 @@ struct FUN_00a38e30_shell : public NiSingleInterpController
 
 // @fnv 0x00a38e30
 // pdb: NiSingleInterpController::GetInterpolatorIndex | NiSingleInterpController.obj | fnv360_0822_debug, objrun_open, low
-// pdb params: pcID
-NiInterpolator* __thiscall FUN_00a38e30_shell::FUN_00a38e30(unsigned short usIndex)
+// F3_EXE: NiSingleInterpController vtable slot 49 (GetInterpolator)
+NiInterpolator* NiSingleInterpController::GetInterpolator(unsigned short usIndex) const
 {
     return m_spInterpolator;
 }
@@ -247,11 +198,10 @@ struct FUN_00a38e90_shell
 };
 // @fnv 0x00a38e90
 // pdb: NiSingleInterpController::GuaranteeTimeRange | NiSingleInterpController.obj | fnv360_0822_retail, call_seq + bridge(vtable|call_seq) + skyrim(objrun_open), high
-void FUN_00a38e90_shell::NiSingleInterpController_GuaranteeTimeRange(float m_fStartTime, float m_fMaximumDistance)
+void NiSingleInterpController::GuaranteeTimeRange(float fStartTime, float fEndTime)
 {
-    NiInterpolator* p = ((NiSingleInterpController*)this)->m_spInterpolator;
-    if (p)
-        ((FakeInterpGuarantee*)p)->SetActiveTimeRange(m_fStartTime, m_fMaximumDistance);
+    if (m_spInterpolator)
+        m_spInterpolator->GuaranteeTimeRange(fStartTime, fEndTime);
 }
 
 struct InterpHelper
@@ -284,17 +234,15 @@ struct FUN_00a38fe0_shell : NiSingleInterpController
     bool FUN_00a2f8b0(NiStream&);
     bool RegisterInterpolatorStreamables(NiStream&);
 };
-// Calls FUN_00a2f8b0, then if the interpolator at offset 0x34 is set, registers its streamables with kStream; returns true unless the first call fails.
 // @fnv 0x00a38fe0
 // pdb: NiSingleInterpController::RegisterStreamables | NiSingleInterpController.obj | fnv360_0822_retail, call_seq, high
 // pdb params: kStream
-bool FUN_00a38fe0_shell::RegisterInterpolatorStreamables(NiStream& kStream)
+bool NiSingleInterpController::RegisterStreamables(NiStream& kStream)
 {
-    if (!FUN_00a2f8b0(kStream))
+    if (!NiInterpController::RegisterStreamables(kStream))
         return false;
-    NiInterpolator* pkInterp = m_spInterpolator;
-    if (pkInterp)
-        ((InterpHelper*)pkInterp)->RegisterStreamables(kStream);
+    if (m_spInterpolator)
+        m_spInterpolator->RegisterStreamables(kStream);
     return true;
 }
 
@@ -308,12 +256,12 @@ struct FUN_00a39010_shell : NiSingleInterpController
 };
 // @fnv 0x00a39010
 // pdb: NiSingleInterpController::SaveBinary | NiSingleInterpController.obj | fnv360_0822_retail, call_gap, low
+// F3_EXE: NiSingleInterpController vtable slot 22 (SaveBinary)
 // pdb params: kStream
-void FUN_00a39010_shell::FUN_00a39010(NiStream& kStream)
+void NiSingleInterpController::SaveBinary(NiStream& kStream)
 {
-    ((S00c27120*)this)->FUN_00c27120(kStream);
-    ((void(__thiscall*)(NiStream*, NiInterpolator*))(*(void***)&kStream)[12])(&kStream,
-                                                                              m_spInterpolator);
+    NiInterpController::SaveBinary(kStream);
+    kStream.SaveLinkID(m_spInterpolator);
 }
 
 struct StrArr
@@ -365,21 +313,15 @@ struct Holder00a390a0 : NiSingleInterpController
 {
     void FUN_00a390a0(StrArr*);
 };
-// @f3 0x008b2830 (community match, verified in this file)
-extern const char* const DAT_01091f5c;
+// @f3 0x008b2830
 // pdb: NiSingleInterpController::GetViewerStrings | NiSingleInterpController.obj | fnv360_0822_retail, call_seq, medium
 // pdb params: pkStrings
-void Holder00a390a0::FUN_00a390a0(StrArr* pkStrings)
+void NiSingleInterpController::GetViewerStrings(NiTPrimitiveArray<char*>* pkStrings)
 {
-    ((BaseWrap*)this)->WriteManagerControlledFlag(pkStrings);
-    char* psz = _FUN_00a7d330(DAT_01091f5c);
-    unsigned int uiIdx = pkStrings->m_usSize;
-    if (uiIdx >= pkStrings->m_usMaxSize)
-        pkStrings->SetSize(uiIdx + pkStrings->m_usGrowBy);
-    pkStrings->SetAt(uiIdx, psz);
-    InterpWrap* pInterp = (InterpWrap*)m_spInterpolator;
-    if (pInterp)
-        pInterp->GetViewerStrings(pkStrings);
+    NiInterpController::GetViewerStrings(pkStrings);
+    pkStrings->Add(NiGetViewerString(ms_RTTI.GetName()));
+    if (m_spInterpolator)
+        m_spInterpolator->GetViewerStrings(pkStrings);
 }
 
 
@@ -388,28 +330,12 @@ struct FUN_00a38e40_cls : public NiSingleInterpController
     void FUN_00a38e40(NiInterpolator* pNew, unsigned int unused);
 };
 
-// Replaces the stored interpolator pointer, releasing the old one and incrementing the new one's reference count.
 // @fnv 0x00a38e40
 // pdb: NiSingleInterpController::SetInterpolator | NiSingleInterpController.obj | tesv_win, objrun_sim, low
-void FUN_00a38e40_cls::FUN_00a38e40(NiInterpolator* apNewInterpolator, unsigned int unused)
+// F3_EXE: NiSingleInterpController vtable slot 50 (SetInterpolator)
+void NiSingleInterpController::SetInterpolator(NiInterpolator* pkInterpolator, unsigned short usIndex)
 {
-    NiInterpolator* pOld = m_spInterpolator;
-    if (pOld == apNewInterpolator)
-    {
-        return;
-    }
-    if (pOld != 0)
-    {
-        if (InterlockedDecrement(&((NiObject*)pOld)->refCount) == 0)
-        {
-            ((NiObject*)pOld)->DeleteThis();
-        }
-    }
-    m_spInterpolator = apNewInterpolator;
-    if (apNewInterpolator != 0)
-    {
-        InterlockedIncrement(&((NiObject*)apNewInterpolator)->refCount);
-    }
+    m_spInterpolator = pkInterpolator;
 }
 
 struct S_00a39030_Interp
@@ -449,20 +375,15 @@ struct FUN_00a39030_cls : public NiSingleInterpController
 // @fnv 0x00a39030
 // pdb: NiSingleInterpController::IsEqual | NiSingleInterpController.obj | fnv360_0822_retail, call_seq, high
 // pdb params: pkObject
-bool FUN_00a39030_cls::IsCompatibleWith(NiSingleInterpController* other)
+bool NiSingleInterpController::IsEqual(NiObject* pkObject)
 {
-    if (!CheckCompatible(other))
+    if (!NiInterpController::IsEqual(pkObject))
         return false;
-    if ((m_spInterpolator && !other->m_spInterpolator) ||
-        (!m_spInterpolator && other->m_spInterpolator))
+    NiSingleInterpController* pkOther = (NiSingleInterpController*)pkObject;
+    if ((m_spInterpolator && !pkOther->m_spInterpolator) || (!m_spInterpolator && pkOther->m_spInterpolator))
         return false;
-    if (m_spInterpolator)
-    {
-        S_00a39030_Interp* p = (S_00a39030_Interp*)m_spInterpolator;
-        NiInterpolator* o = other->m_spInterpolator;
-        if (!p->v23(o))
-            return false;
-    }
+    if (m_spInterpolator && !m_spInterpolator->IsEqual(pkOther->m_spInterpolator))
+        return false;
     return true;
 }
 
