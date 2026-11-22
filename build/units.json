@@ -226348,7 +226348,6 @@
     "__real@3f4ccccd": "0x00de20b0",
     "?FUN_00921880@hkColor@f3m_00a6d890@2@SAHMMMM@Z": "0x00921880",
     "__real@3e99999a": "0x00db8b4c",
-    "?S687a0_tlsIndex@@3KA": "0x0116913c",
     "??_C@_0CE@NJGFBPGK@TthkContactPointViewer_displayAr@": "0x00e86fac",
     "__real@34000000": "0x00de6e70",
     "??_C@_02DNLMNFDE@Et?$AA@": "0x00e32798",
@@ -226429,7 +226428,8 @@
     "?DAT_010f3170@f3m_00a68b40@@3IA": "0x010f3170",
     "?FUN_00a687a0@ContactViewer@f3m_00a68b40@@YAXPAUDisplayHandler@12@ABUVec4@12@1HH@Z": "0x00a687a0",
     "?FUN_008f6d90@ThreadMemory@ContactViewer@f3m_00a68b40@@QAEXPAXHH@Z": "0x008f6d90",
-    "?DAT_00e32798@f3m_00a68b40@@3QBDB": "0x00e32798"
+    "?DAT_00e32798@f3m_00a68b40@@3QBDB": "0x00e32798",
+    "?hkMonitorStream__m_instance@@3V?$hkThreadLocalData@PAVhkMonitorStream@@@@A": "0x0116913c"
    }
   },
   {

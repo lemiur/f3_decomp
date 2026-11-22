@@ -4521,6 +4521,7 @@ void hkpPointToPlaneDrawer::FUN_00a6d890(hkpConstraintInstance* constraint, hkDe
 #include <windows.h>
 #include <math.h>
 extern DWORD S687a0_tlsIndex;
+#include "havok/hkMonitorStream.h"
 namespace f3m_00a687a0 {
 // 0x00a687a0: hkpContactPointViewer's displayArrow: draws an arrow from `from` along `dir` (the shaft and two
 // head lines at 85% of its length), inside a monitor timer ("TthkContactPointViewer_displayArrow" ... "Et").
@@ -4606,17 +4607,6 @@ struct S687a0_Handler
     virtual void displayLine(const S687a0_Vector4& from, const S687a0_Vector4& to, int color, int id);
 };
 
-struct S687a0_TimerCommand
-{
-    const char* m_commandAndMonitor;
-    unsigned int m_time;
-    unsigned int m_time2;
-
-    // hkMonitorStream::TimerCommand::setTime (class and member names: FNV360_PDB)
-    // RULE-EXCEPTION: R18, Havok's IA32 setTime reads the TSC with inline asm: retail stores eax to a stack local and reloads it, which __rdtsc() does not emit
-    __forceinline void setTime() { unsigned int ticks; __asm { rdtsc
-        mov ticks, eax } m_time = ticks; }
-};
 
 struct S687a0_MonitorStream
 {
@@ -4632,25 +4622,11 @@ static __declspec(noinline) void FUN_00a687a0(const S687a0_Vector4& from, const 
 {
     const S687a0_Vector4& d = dir;     // read through a local reference, which sets the original's operand order
     {
-        S687a0_MonitorStream* s = (S687a0_MonitorStream*)TlsGetValue(S687a0_tlsIndex);
-        if (s->m_end < s->m_capacityMinus16)
-        {
-            S687a0_TimerCommand* h = (S687a0_TimerCommand*)s->m_end;
-            h->m_commandAndMonitor = "TthkContactPointViewer_displayArrow";
-            h->setTime();
-            s->m_end = (char*)(h + 1);
-        }
+        HK_TIMER_BEGIN("hkContactPointViewer_displayArrow", HK_NULL);
     }
     if (d.lengthSquared3() < 1.1920928955078125e-07f)
     {
-        S687a0_MonitorStream* s = (S687a0_MonitorStream*)TlsGetValue(S687a0_tlsIndex);
-        if (s->m_end < s->m_capacityMinus16)
-        {
-            S687a0_TimerCommand* h = (S687a0_TimerCommand*)s->m_end;
-            h->m_commandAndMonitor = "Et";
-            h->setTime();
-            s->m_end = (char*)(h + 1);
-        }
+        HK_TIMER_END();
         return;
     }
 
@@ -4667,16 +4643,7 @@ static __declspec(noinline) void FUN_00a687a0(const S687a0_Vector4& from, const 
     handler->displayLine(to, left, color, id);
     handler->displayLine(to, right, color, id);
 
-    {
-        S687a0_MonitorStream* s = (S687a0_MonitorStream*)TlsGetValue(S687a0_tlsIndex);
-        if (s->m_end < s->m_capacityMinus16)
-        {
-            S687a0_TimerCommand* h = (S687a0_TimerCommand*)s->m_end;
-            h->m_commandAndMonitor = "Et";
-            h->setTime();
-            s->m_end = (char*)(h + 1);
-        }
-    }
+    HK_TIMER_END();
 }
 
 volatile int g687a0_in;
