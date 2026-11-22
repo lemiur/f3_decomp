@@ -80,6 +80,15 @@ order. Tiers are **measured**: the same linker is run between two references tha
 Xbox 360 build), and a method's tier is the precision it reached there (high ≥ 99%, medium ≥ 90%, low below). Only
 high-tier links rename; medium and low links appear as comments, labelled with their tier.
 
+Promotion by agreement counts only between **independent** chains, and only at the precision measured for that
+pair of methods: the direct link to the Xbox 360 build, the link to Skyrim, and the bridge through New Vegas PC (an
+x86 build of the same engine) are independent of each other; the several Xbox 360 builds are not (they share
+code, so one method makes the same mistake on each). A link loses its tier when a string the Fallout 3 function
+itself uses names a different class (`"Actor::..."`), unless the string belongs to a linked caller or callee.
+Library prototypes (other games' PC builds with symbols, sharing Gamebryo or Havok code) name only functions of that
+library, only by exact normalised code of 32 bytes or more that is unique on both sides, and only where that rule
+measured ≥ 99% against the Xbox 360 names of the same library.
+
 Provenance markers:
 
 ```cpp
