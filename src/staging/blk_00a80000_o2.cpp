@@ -91,15 +91,6 @@ void __cdecl FUN_00aa2060(void*, void*);
 struct FUN_00a8a5f0_class {
     void* FUN_00a8a5f0();
 };
-// @fnv 0x00a8a5f0
-void* FUN_00a8a5f0_class::FUN_00a8a5f0()
-{
-    void* old = (void*)DAT_011f5b84;
-    ++DAT_011f5b84;
-    if (!old)
-        FUN_00aa2060((void*)&InitializeGameSystems, (void*)&FUN_00a8a280);
-    return this;
-}
 
 struct FUN_00a8f060_class {
     void FUN_00a8f060();
@@ -349,22 +340,6 @@ struct NiProperty {
     int m_1c;
     NiProperty();
 };
-// Allocates a 0x1c-byte NiProperty, constructs it, sets m_18 to 0 and its vtbl to DAT_010a02e4, returning the object or null on allocation failure.
-// @fnv 0x00a95160
-NiProperty* __cdecl FUN_00a95160()
-{
-    NiProperty* p = 0;
-    if (void* mem = BSFadeNode::operator new(0x1c))
-    {
-        p = (NiProperty*)mem;
-        p->NiProperty::NiProperty();
-        p->m_18 = 0;
-        p->vtbl = &DAT_010a02e4;
-    }
-    else
-        return 0;
-    return p;
-}
 
 struct NiParticleMeshes {
     void* vft;
@@ -399,20 +374,6 @@ struct FUN_00a99800_shell {
     void* m_10;
     void AssignPointerArray(unsigned int count, const void* src);
 };
-// @fnv 0x00a99800
-void FUN_00a99800_shell::AssignPointerArray(unsigned int count, const void* src)
-{
-    NiFree(m_10);
-    if (!src || count <= 0) {
-        m_iThirdValue = 0;
-        m_10 = 0;
-    } else {
-        m_iThirdValue = count;
-        m_10 = NiMalloc(count * 4);
-        for (unsigned int i = 0; i < count; ++i)
-            ((void**)m_10)[i] = (void*)((const void**)src)[i];
-    }
-}
 
 extern const void* DAT_010a12cc;
 
@@ -881,12 +842,6 @@ void NiCullingProperty::FUN_00a99e00(
 
 void __cdecl FUN_00a9b8b0();
 void __cdecl FUN_00a9b9b0();
-// @fnv 0x00a9ba80
-void __cdecl FUN_00a9ba80()
-{
-    FUN_00a9b8b0();
-    FUN_00a9b9b0();
-}
 
 struct SpawnedRef {
     virtual void Vslot00();
@@ -958,12 +913,6 @@ struct FUN_00a80fc0_class {
     void __thiscall FUN_00a80fc0();
 };
 
-// @fnv 0x00a80fc0
-void __thiscall FUN_00a80fc0_class::FUN_00a80fc0() {
-    *reinterpret_cast<void**>(this) = reinterpret_cast<void*>(&DAT_0109e174);
-    FUN_00a5d3d0();
-}
-
 extern float DAT_011ab3f8;
 static const float kPi = 3.1415927f;
 extern "C" double __cdecl fabs(double);
@@ -1023,24 +972,6 @@ struct FUN_00a81760_obj
 
     void FUN_00a7b690();
 };
-
-// @fnv 0x00a81760
-FUN_00a81760_obj* __cdecl FUN_00a81760()
-{
-    FUN_00a81760_obj* p = (FUN_00a81760_obj*)FUN_00aa13e0(0x5c);
-    if (p != 0)
-    {
-        p->FUN_00a7b690();
-        p->m_58 = 0;
-        p->m_pVTable = (void*)&DAT_0109e32c;
-        p->m_5a = 0;
-    }
-    else
-    {
-        p = 0;
-    }
-    return p;
-}
 
 struct S_a819e0_O {
 virtual ~S_a819e0_O() {}
@@ -1428,11 +1359,6 @@ struct FUN_00a89760_base {
 struct FUN_00a89760_cls : FUN_00a89760_base {
     virtual ~FUN_00a89760_cls();
 };
-
-// @fnv 0x00a89760
-FUN_00a89760_cls::~FUN_00a89760_cls()
-{
-}
 
 struct BaseCls {
     void __thiscall FUN_00a67b20(int, int, int, int, int, int, int);
@@ -1952,12 +1878,6 @@ struct FUN_00a9b4a0_Class {
     void __thiscall FUN_00a9b4a0();
 };
 
-// @fnv 0x00a9b4a0
-void __thiscall FUN_00a9b4a0_Class::FUN_00a9b4a0() {
-    *reinterpret_cast<void**>(this) = reinterpret_cast<void*>(&DAT_010a13ac);
-    FUN_00aa0dc0();
-}
-
 extern unsigned short DAT_011f5f7c;
 extern unsigned short DAT_011f5f7e;
 extern unsigned short DAT_011f5f80;
@@ -1977,30 +1897,6 @@ extern int DAT_011f5fa8;
 extern int DAT_011f5fac;
 extern int DAT_011f5fb0;
 extern unsigned char DAT_011f6001;
-
-// @fnv 0x00a9b9b0
-void __cdecl FUN_00a9b9b0()
-{
-    DAT_011f5f90 = 0;
-    DAT_011f5f94 = 1;
-    DAT_011f5f7c = 0x0;
-    DAT_011f5f7e = 0x100;
-    DAT_011f5f80 = 0x200;
-    DAT_011f5f82 = 0x300;
-    DAT_011f5f84 = 0x400;
-    DAT_011f5f86 = 0x500;
-    DAT_011f5f88 = 0x600;
-    DAT_011f5f98 = 2;
-    DAT_011f5f9c = 3;
-    DAT_011f5fa0 = 4;
-    DAT_011f5fa4 = 5;
-    DAT_011f5fa8 = 6;
-    DAT_011f5fac = 7;
-    DAT_011f5fb0 = 8;
-    DAT_011f5f8a = 0x700;
-    DAT_011f5f8c = 0x800;
-    DAT_011f6001 = 1;
-}
 
 extern "C" void* DAT_0109b220;
 
@@ -2565,32 +2461,6 @@ struct SdmBase {
     HashNode_cls** m_buckets;
 };
 
-// Looks up pKey's value in the global hash table's bucket chain and returns the matching node's stored value, or 0 if not found.
-// @fnv 0x00a8fe20
-unsigned int __cdecl FUN_00a8fe20(unsigned int* pKey)
-{
-    unsigned int key = *pKey;
-    if (key == (unsigned int)DAT_0109b220) goto zero;
-    unsigned int tag = *(unsigned int*)(key - 4);
-    if (tag == 0) return tag;
-    {
-        unsigned int result = 0;
-        unsigned int idx = key % DAT_011f5e34->m_bucketCount;
-        HashNode_cls** buckets = DAT_011f5e34->m_buckets;
-        HashNode_cls* node = buckets[idx];
-        while (node != 0) {
-            if (key == node->m_key) {
-                result = node->m_uiFilterValue;
-                break;
-            }
-            node = node->m_pNext;
-        }
-        return result;
-    }
-zero:
-    return 0;
-}
-
 extern const void* DAT_0109f7f4;
 extern unsigned int DAT_011f5e48;
 struct FNVObj {
@@ -2984,10 +2854,6 @@ void __stdcall FUN_00a85510(int, int, int, int, int, int, int, int) {
 }
 
 extern void __cdecl FUN_00a98ea0();
-// @fnv 0x00a877d0
-void __cdecl FUN_00a877d0() {
-    FUN_00a98ea0();
-}
 
 extern "C" void __cdecl FUN_00a71d10();
 
@@ -3890,33 +3756,3 @@ struct MaterialLibraryView {
     int m_8;
     void FUN_00a8fdb0();
 };
-
-// Swap-removes this from the pointer array at DAT_011f5e44, releases m_8 via DAT_00fdf1c4 unless it is _EmptyFS, and sets the NiRefObject vtable.
-// @fnv 0x00a8fdb0
-void MaterialLibraryView::FUN_00a8fdb0()
-{
-    vtbl = &DAT_0109f7f4;
-    unsigned int count = DAT_011f5e4c;
-    unsigned int i = 0;
-    if (count > 0) {
-        int* arr = (int*)DAT_011f5e44;
-        do {
-            if (arr[i] == (int)this) {
-                if ((int)i >= 0) {
-                    count--;
-                    DAT_011f5e4c = count;
-                    arr[i] = arr[count];
-                }
-                break;
-            }
-            i++;
-        } while (i < count);
-    }
-    int h = m_8;
-    int (__stdcall* fn)(void*) = DAT_00fdf1c4;
-    if (h != (int)_EmptyFS) {
-        fn((void*)(h - 8));
-    }
-    vtbl = (void*)&vftable_NiRefObject;
-    fn((void*)&DAT_011f4400);
-}

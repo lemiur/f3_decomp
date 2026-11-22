@@ -288,10 +288,6 @@ struct FUN_00aa09c0_cls : FUN_00aa09c0_base
     virtual ~FUN_00aa09c0_cls();
 };
 
-// @fnv 0x00aa09c0
-FUN_00aa09c0_cls::~FUN_00aa09c0_cls()
-{}
-
 struct FUN_00aa0ff0_cls
 {
     int unk00;
@@ -355,15 +351,6 @@ struct FUN_00aa1d10_cls
     FUN_00aa1d10_cls();
 };
 
-// @fnv 0x00aa1d10
-FUN_00aa1d10_cls::FUN_00aa1d10_cls()
-{
-    m_pVTable = (void*)&DAT_010a24b8;
-    m_iValue08 = 0;
-    m_iValue0c = 0;
-    m_iValue04 = 0;
-}
-
 extern int DAT_010a24b8;
 
 struct FUN_00aa1d30_cls
@@ -372,12 +359,6 @@ struct FUN_00aa1d30_cls
 
     void FUN_00aa1d30();
 };
-
-// @fnv 0x00aa1d30
-void FUN_00aa1d30_cls::FUN_00aa1d30()
-{
-    m_vptr00 = (int)&DAT_010a24b8;
-}
 
 class FUN_00aa1fd0_cls
 {
@@ -575,10 +556,6 @@ struct FUN_00aa2230_BSNiAllocator
     virtual void m_virtual0();
     FUN_00aa2230_BSNiAllocator();
 };
-
-// @fnv 0x00aa2230
-FUN_00aa2230_BSNiAllocator::FUN_00aa2230_BSNiAllocator()
-{}
 
 extern char DAT_010a2554[];
 

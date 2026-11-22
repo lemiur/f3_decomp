@@ -252,14 +252,6 @@ class D68910Object
     D68910Object* DestroyAndFree(unsigned int uiFlags);
 };
 
-// @fnv 0x00d68910
-D68910Object* D68910Object::DestroyAndFree(unsigned int uiFlags)
-{
-    this->~D68910Object();
-    if (uiFlags & 1)
-        FUN_00c85750().heap().ReleaseBlock(this, m_usMemSizeAndFlags);
-    return this;
-}
 }  // namespace fnv_00d68910
 
 extern char DAT_0126905c;
@@ -292,15 +284,6 @@ struct FUN_00c90e00_Obj
 {
     void __thiscall FUN_00c90e00(int value);
 };
-
-// @fnv 0x00d6ae90
-void __cdecl FUN_00d6ae90(FUN_00c90e00_Obj* pObj, int iValue)
-{
-    if (pObj != 0)
-    {
-        pObj->FUN_00c90e00(iValue);
-    }
-}
 
 // 13-byte cdecl forwarder: loads the object pointer, fetches its vtable and
 // calls the first virtual slot with a literal 0 argument.
@@ -534,10 +517,6 @@ class FUN_00d60540 : public hkReferencedObjectD605
     virtual ~FUN_00d60540();
 };
 
-// @fnv 0x00d60540
-FUN_00d60540::FUN_00d60540(hkFinishLoadedObjectFlagD605 flag) : hkReferencedObjectD605(flag)
-{}
-
 extern int DAT_010d14f8;
 extern int DAT_0102e388;
 
@@ -554,14 +533,6 @@ struct D60590Object
 
     void FUN_00d60590();
 };
-
-// @fnv 0x00d60590
-void D60590Object::FUN_00d60590()
-{
-    vtable = &DAT_010d14f8;
-    callback->FUN_00c905b0();
-    vtable = &DAT_0102e388;
-}
 
 namespace fnv_00d60860 {
 struct HKMemoryManager
@@ -635,47 +606,12 @@ class hkStringBufD614
     int FindSubstring(const char* pcNeedle, int iStartIndex, int iEndIndex) throw();
 };
 
-// Searches m_data from iStartIndex for pcNeedle and returns its offset, or -1 if not found.
-// @fnv 0x00d61480
-int hkStringBufD614::FindSubstring(const char* pcNeedle, int iStartIndex, int iEndIndex) throw()
-{
-    char* pData = m_data;
-    char* p = FUN_00cb1130(pData + iStartIndex, pcNeedle);
-    if (p)
-        return static_cast<int>(p - m_data);
-    return -1;
-}
-
-inline char toLowerD614(char c)
-{
-    return (c >= 'A' && c <= 'Z') ? c - 'A' + 'a' : c;
-}
-
 struct hkStringD614
 {
     const char* m_kStringBuffer;
 
     int FindCaseInsensitive(const char* needle) const;
 };
-
-// Returns the index of the first case-insensitive occurrence of needle in the string, or -1 if not found.
-// @fnv 0x00d614b0
-int hkStringD614::FindCaseInsensitive(const char* needle) const
-{
-    const char* str = m_kStringBuffer;
-    for (int i = 0; str[i] != 0; ++i)
-    {
-        int j;
-        for (j = 0; needle[j] != 0; ++j)
-        {
-            if (toLowerD614(str[i + j]) != toLowerD614(needle[j]))
-                break;
-        }
-        if (needle[j] == 0)
-            return i;
-    }
-    return -1;
-}
 
 int __cdecl FUN_00cb1130(int a1, int a2);
 struct FUN_00d61520_cls
@@ -705,26 +641,6 @@ struct FnvString
     int FUN_00d61560(const char* other);
 };
 
-// @fnv 0x00d61560
-int FnvString::FUN_00d61560(const char* other)
-{
-    unsigned int i = 0;
-    while (text[i] != 0)
-    {
-        if (other[i] == 0)
-            break;
-        if (text[i] != other[i])
-            return 0;
-        ++i;
-    }
-    return other[i] == 0;
-}
-
-inline char toLowerD615(char c)
-{
-    return (c >= 'A' && c <= 'Z') ? c - 'A' + 'a' : c;
-}
-
 struct hkStringD615
 {
     const char* m_kStringBuffer;
@@ -732,40 +648,12 @@ struct hkStringD615
     int FUN_00d615a0(const char* other) const;
 };
 
-// @fnv 0x00d615a0
-int hkStringD615::FUN_00d615a0(const char* other) const
-{
-    for (int i = 0; m_kStringBuffer[i] != 0; ++i)
-    {
-        if (other[i] == 0)
-            return 1;
-        if (toLowerD615(m_kStringBuffer[i]) != toLowerD615(other[i]))
-            return 0;
-    }
-    return 1;
-}
-
 struct FNV_00d61600_Buffer
 {
     unsigned char* data;
     int length;
     int FindCharacter(unsigned char character, int start, int limit);
 };
-// Scans data from start up to limit (clamped to length-1) and returns the index of the first byte equal to character, or -1 if none is found.
-// @fnv 0x00d61600
-int FNV_00d61600_Buffer::FindCharacter(unsigned char character, int start, int limit)
-{
-    int end = limit;
-    int last = length - 1;
-    if (end >= last)
-        end = last;
-    for (int index = start; index < end; ++index)
-    {
-        if (data[index] == character)
-            return index;
-    }
-    return -1;
-}
 
 struct FUN_00d61640_cls
 {
@@ -798,12 +686,6 @@ struct FUN_00d61680_Obj
 
 int __cdecl FUN_00cb0fa0(int, int);
 
-// @fnv 0x00d61680
-void __thiscall FUN_00d61680_Obj::FUN_00d61680(unsigned int uiValue)
-{
-    FUN_00cb0fa0(unk00, uiValue);
-}
-
 void __cdecl CompareStringsCaseInsensitive(void* pvOwner, int iValue);
 
 struct FUN_00d616a0_cls
@@ -813,19 +695,7 @@ struct FUN_00d616a0_cls
     void FUN_00d616a0(int iValue);
 };
 
-// @fnv 0x00d616a0
-void FUN_00d616a0_cls::FUN_00d616a0(int iValue)
-{
-    CompareStringsCaseInsensitive(m_pOwnerObject, iValue);
-}
-
 int __stdcall FUN_00d61680(unsigned int value);
-
-// @fnv 0x00d616e0
-int __stdcall FUN_00d616e0(unsigned int value)
-{
-    return FUN_00d61680(value) == 0;
-}
 
 int __cdecl FUN_00cb10d0(int s);
 struct FUN_00d61700_cls
@@ -834,33 +704,8 @@ struct FUN_00d61700_cls
     int m_04;
     int EndsWith(char* s);
 };
-// @fnv 0x00d61700
-int FUN_00d61700_cls::EndsWith(char* aString)
-{
-    int len = FUN_00cb10d0((int)aString);
-    if (len > m_04 - 1)
-    {
-        return 0;
-    }
-    int start = m_04 - len - 1;
-    for (int i = 0; i < len; ++i)
-    {
-        if (m_00[start + i] != aString[i])
-        {
-            return 0;
-        }
-    }
-    return 1;
-}
 
 int __cdecl FUN_00cb10d0(const char* str);
-
-static inline int tolower_custom(char c)
-{
-    if ((unsigned char)(c - 'A') <= 25)
-        return c + 0x20;
-    return c;
-}
 
 struct FUN_00d61750_cls
 {
@@ -870,50 +715,12 @@ struct FUN_00d61750_cls
     int EndsWithIgnoreCase(const char* suffix);
 };
 
-// Case-insensitively compares the tail of m_data with suffix, returning 1 if it matches and fits within the buffer length.
-// @fnv 0x00d61750
-int FUN_00d61750_cls::EndsWithIgnoreCase(const char* suffix)
-{
-    int len = FUN_00cb10d0(suffix);
-    if (len > m_fRestLength - 1)
-        return 0;
-
-    int offset = m_fRestLength - len - 1;
-    for (int i = 0; i < len; ++i)
-    {
-        char c1 = tolower_custom(m_data[offset + i]);
-        char c2 = tolower_custom(suffix[i]);
-        if (c1 != c2)
-            return 0;
-    }
-    return 1;
-}
-
 struct FUN_00d617d0_cls
 {
     char* m_p00;
     int m_i04;
     void RemoveFront(int count);
 };
-// Removes count bytes from the front of the buffer by shifting the remaining bytes down and reducing m_i04.
-// @fnv 0x00d617d0
-void FUN_00d617d0_cls::RemoveFront(int count)
-{
-    if (count > 0)
-    {
-        m_i04 -= count;
-        int remaining = m_i04;
-        char* destination = m_p00;
-        char* source = destination + count;
-        if (remaining > 0)
-        {
-            for (int i = 0; i < remaining; ++i)
-            {
-                destination[i] = source[i];
-            }
-        }
-    }
-}
 
 struct hkMathD618
 {
@@ -934,16 +741,6 @@ class hkStringBufD618
     void RemoveFront(int n);
     void TrimToFileName();
 };
-
-// Finds the last '\\' or '/' in the buffer and, if found, truncates the string to start just after it.
-// @fnv 0x00d61800
-void hkStringBufD618::TrimToFileName()
-{
-    int iLastSeparator =
-        hkMathD618::max2(FindLastCharInRange('\\', 0, 0x7fffffff), FindLastCharInRange('/', 0, 0x7fffffff));
-    if (iLastSeparator >= 0)
-        RemoveFront(iLastSeparator + 1);
-}
 
 struct hkStringD618
 {
@@ -1011,13 +808,6 @@ class hkStringBufD618
     void ToLower();
 };
 
-// Converts every character of the string buffer except the last to lowercase in place.
-// @fnv 0x00d61890
-void hkStringBufD618::ToLower()
-{
-    for (int i = 0; i < m_kStringBuffer.GetLogicalSize() - 1; i++)
-        m_kStringBuffer[i] = hkStringD618::toLower(m_kStringBuffer[i]);
-}
 }  // namespace fnv_00d61890
 
 class hkMemoryAllocatorD61B;
@@ -1085,15 +875,6 @@ class FUN_00d61b10
     FUN_00d61b10(const char* pcString, int iLength) throw();
 };
 
-// Resizes the inline char array to iLength+1, null-terminates it, and copies iLength bytes from pcString into it.
-// @fnv 0x00d61b10
-FUN_00d61b10::FUN_00d61b10(const char* pcString, int iLength) throw()
-{
-    m_kStringBuffer.SetSizeAndGrow(iLength + 1);
-    m_kStringBuffer[iLength] = 0;
-    FUN_00cb1260(m_kStringBuffer.begin(), pcString, iLength);
-}
-
 int __cdecl FUN_00cb10d0(int);
 void* __cdecl FUN_00c85750();
 struct FUN_00d62630_Obj
@@ -1106,16 +887,6 @@ struct FUN_00d61df0_cls
     int unk04;
     FUN_00d61df0_cls* FUN_00d61df0(int arg);
 };
-// Computes a value from arg, reads a record via FUN_00c85750, and calls FUN_00d62630 with rec[3], unk04-1, arg and that value; returns this.
-// @fnv 0x00d61df0
-FUN_00d61df0_cls* FUN_00d61df0_cls::FUN_00d61df0(int arg)
-{
-    int ebx = FUN_00cb10d0(arg);
-    int ebp = unk04;
-    int* rec = reinterpret_cast<int*>(FUN_00c85750());
-    reinterpret_cast<FUN_00d62630_Obj*>(this)->FUN_00d62630(rec[3], ebp - 1, arg, ebx);
-    return this;
-}
 
 class hkMemoryAllocatorD61E;
 
@@ -1161,31 +932,6 @@ class hkStringBufD61E
     void AppendStrings(const char* s0, const char* s1, const char* s2, const char* s3, const char* s4,
                        const char* s5) throw();
 };
-
-// Appends up to six C strings to the buffer, resizing it to fit the combined length plus a terminator.
-// @fnv 0x00d61e30
-void hkStringBufD61E::AppendStrings(const char* pcString0, const char* pcString1, const char* pcString2,
-                                    const char* pcString3, const char* pcString4, const char* pcString5) throw()
-{
-    int aiLengths[6] = {};
-    const char* apcStrings[] = {pcString0, pcString1, pcString2, pcString3, pcString4, pcString5, 0};
-    int iOrigLen = getLength();
-    int iTotalLen = iOrigLen;
-    int i;
-    for (i = 0; apcStrings[i] != 0; i++)
-    {
-        aiLengths[i] = FUN_00cb10d0(apcStrings[i]);
-        iTotalLen += aiLengths[i];
-    }
-    SetSizeAndGrow(iTotalLen + 1);
-    m_data[iTotalLen] = 0;
-    int iDstOffset = iOrigLen;
-    for (i = 0; apcStrings[i] != 0; i++)
-    {
-        FUN_00cb1260(m_data + iDstOffset, apcStrings[i], aiLengths[i]);
-        iDstOffset += aiLengths[i];
-    }
-}
 
 class hkMemoryAllocatorD620;
 
@@ -1238,15 +984,6 @@ class hkStringBufD620
     void Assign(void* src, int len);
 };
 
-// Reserves len+1 bytes, null-terminates the buffer at index len, then copies len bytes from src into m_data.
-// @fnv 0x00d62020
-void hkStringBufD620::Assign(void* src, int len)
-{
-    SetSizeAndGrow(len + 1);
-    m_data[len] = 0;
-    FUN_00d2caa0(m_data, src, len);
-}
-
 int __cdecl FUN_00cb10d0(int value);
 void* __cdecl FUN_00c85750();
 void __cdecl FUN_00c908c0(int value1, int value2, int value3, int value4);
@@ -1269,37 +1006,6 @@ struct D62080_Object
     void __thiscall FUN_00d62080(int param2, int param3);
 };
 
-// @fnv 0x00d62080
-void __thiscall D62080_Object::FUN_00d62080(int aData, int param3)
-{
-    if (param3 < 0)
-        param3 = FUN_00cb10d0(aData);
-
-    int oldCount = m_uiItemCount;
-    oldCount--;
-
-    int index = oldCount + param3;
-    int newCount = index + 1;
-
-    D62080_Audio* audio = (D62080_Audio*)FUN_00c85750();
-    int audioValue = audio->unk0c;
-
-    int capacity = (int)(m_pRayCursor & 0x3fffffff);
-    if (capacity < newCount)
-    {
-        capacity *= 2;
-        if (newCount >= capacity)
-            capacity = newCount;
-
-        FUN_00c908c0(audioValue, (int)this, capacity, 1);
-    }
-
-    m_uiItemCount = newCount;
-    m_data[index] = 0;
-
-    FUN_00d2caa0(m_data + oldCount, aData, param3);
-}
-
 extern int __cdecl FUN_00cb10d0(int value);
 struct Router_d62100
 {
@@ -1313,14 +1019,6 @@ struct FUN_00d62100_Class
     int __thiscall FUN_00d62630(int context, int first, int second, int third);
     int __thiscall FUN_00d62100(int first, int second, int third);
 };
-// @fnv 0x00d62100
-int FUN_00d62100_Class::FUN_00d62100(int first, int second, int third)
-{
-    if (third < 0)
-        third = FUN_00cb10d0(second);
-    Router_d62100* router = static_cast<Router_d62100*>(FUN_00c85750());
-    return FUN_00d62630(router->m_iValueAtOffset0C, first, second, third);
-}
 
 struct SearchBase
 {
@@ -1332,18 +1030,6 @@ struct SearchController : SearchBase
     int FUN_00d61fc0(int start, int position);
     int FUN_00d62140();
 };
-
-// @fnv 0x00d62140
-int SearchController::FUN_00d62140()
-{
-    int first = FindLastCharInRange(0x2f, 0, 0x7fffffff);
-    int second = FindLastCharInRange(0x5c, 0, 0x7fffffff);
-    if (second <= first)
-        second = first;
-    if (second >= 0)
-        return FUN_00d61fc0(0, second);
-    return FUN_00d61cc0();
-}
 
 struct hkStringPtr
 {
@@ -1366,15 +1052,6 @@ struct FUN_00d623a0
     FUN_00d623a0(const hkStringPtr& str);
 };
 
-// @fnv 0x00d623a0
-FUN_00d623a0::FUN_00d623a0(const hkStringPtr& str)
-{
-    m_data = &m_kStorage;
-    m_iElementCount = 0;
-    m_iCapacityState = 0x80000080;
-    FUN_00d61c10(str.cString());
-}
-
 struct FUN_00d623d0
 {
     void* m_p00;
@@ -1392,18 +1069,6 @@ struct FUN_00d623d0
     FUN_00d623d0(int a, int b, int c, int d, int e, int f);
 };
 
-// Sets up the object's internal pointer and counters, then forwards the six arguments to AppendStrings.
-// @fnv 0x00d623d0
-FUN_00d623d0::FUN_00d623d0(int a, int b, int c, int d, int e, int f)
-{
-    m_p00 = (void*)&m_i0c;
-    m_i04 = 0;
-    m_i08 = 0x80000080;
-    ((char*)m_p00)[0] = 0;
-    ++m_i04;
-    AppendStrings(a, b, c, d, e, f);
-}
-
 struct FUN_00d62100_Obj
 {
     int FUN_00d62100(int a, int b, int c);
@@ -1412,11 +1077,6 @@ struct FUN_00d62580_Cls
 {
     int FUN_00d62580(int a, int b);
 };
-// @fnv 0x00d62580
-int FUN_00d62580_Cls::FUN_00d62580(int a, int b)
-{
-    return reinterpret_cast<FUN_00d62100_Obj*>(this)->FUN_00d62100(0, a, b);
-}
 
 class hkObjectD626
 {
@@ -1424,12 +1084,6 @@ class hkObjectD626
     int ReplaceRange(int a, int b, int c, int d, int e);
     int FUN_00d62630(int a, int b, int d, int e);
 };
-
-// @fnv 0x00d62630
-int hkObjectD626::FUN_00d62630(int a, int b, int d, int e)
-{
-    return ReplaceRange(a, b, 0, d, e);
-}
 
 struct FUN_00ddccb0_Obj
 {
@@ -1489,15 +1143,6 @@ struct HeapBlockMetadata
     unsigned short reserved;
     HeapBlockMetadata* FUN_00d62ef0(void* data, unsigned int enabled);
 };
-// @fnv 0x00d62f60
-void* __cdecl AllocateRecordWithData(void* data)
-{
-    MemorySystem* memory = static_cast<MemorySystem*>(FUN_00c85750());
-    HeapBlockMetadata* record = static_cast<HeapBlockMetadata*>(memory->heap->Allocate(44));
-    record->size = 44;
-    HeapBlockMetadata* result = record->FUN_00d62ef0(data, 1);
-    return result ? reinterpret_cast<char*>(result) + 8 : 0;
-}
 
 struct Allocator_d632c0
 {
@@ -1841,16 +1486,6 @@ class FUN_00d63340
     FUN_00d63340* Destroy(unsigned int uiFlags) throw();
 };
 
-// Calls the destructor, and if bit 0 of uiFlags is set, frees the object through operator delete; returns this.
-// @fnv 0x00d63450
-FUN_00d63340* FUN_00d63340::Destroy(unsigned int uiFlags) throw()
-{
-    this->FUN_00d63340::~FUN_00d63340();
-    if (uiFlags & 1)
-        FUN_00d63340::operator delete(this);
-    return this;
-}
-
 class hkPart0D642
 {
   public:
@@ -2008,12 +1643,6 @@ struct FUN_00d65250_cls
     void __thiscall FUN_00d65250(unsigned char value);
 };
 
-// @fnv 0x00d65250
-void __thiscall FUN_00d65250_cls::FUN_00d65250(unsigned char value)
-{
-    unk61 = value;
-}
-
 struct FnvCpu_FUN_00d65260_CpuObject
 {
     unsigned int unk00;
@@ -2163,10 +1792,6 @@ void FnvCpu_FUN_00d65290_CpuObject::FUN_00d65290(unsigned char arg0)
 {
     value = arg0;
 }
-
-// @fnv 0x00d6add0
-void __cdecl FUN_00d6add0()
-{}
 
 extern "C" void __cdecl FUN_00d72e90();
 // @fnv 0x00d73380
@@ -2342,18 +1967,6 @@ struct FUN_00d608a0
     unsigned char mode;
     FUN_00d608a0(int first, int second, unsigned char mode);
 };
-// Initializes count, vptr, and mode, then allocates and constructs a FUN_00d274c0 child node via the router allocator.
-// @fnv 0x00d608a0
-FUN_00d608a0::FUN_00d608a0(int first, int second, unsigned char mode)
-{
-    count = 1;
-    vptr = &DAT_010d14f8;
-    this->mode = mode;
-    hkRouterD608* router = static_cast<hkRouterD608*>(FUN_00c85750());
-    FUN_00d274c0* next = static_cast<FUN_00d274c0*>(router->allocator->Allocate(28));
-    next->allocatedSize = 28;
-    child = new (next) FUN_00d274c0(first, second, hkBoolD608());
-}
 
 int __cdecl FUN_00cb0fa0(int, int);
 struct R
@@ -2367,11 +1980,6 @@ struct S
     int value;
     R IsLessThan(int other) const;
 };
-// @fnv 0x00d616c0
-R S::IsLessThan(int other) const
-{
-    return FUN_00cb0fa0(value, other) < 0;
-}
 
 class hkMemoryAllocatorD619;
 
@@ -2435,24 +2043,6 @@ class hkStringD619
     int FindCharacter(int c, int iStart, int iEnd) const;
     int SplitString(int c, hkArrayD619<const char*>& kBits);
 };
-
-// Splits m_kStringBuffer in place at each c found from index 1 by writing nulls, appends each piece pointer to kBits, and returns kBits's size.
-// @fnv 0x00d61910
-int hkStringD619::SplitString(int c, hkArrayD619<const char*>& kBits)
-{
-    kBits.AddBack(m_kStringBuffer);
-    int iNumBits = kBits.GetLogicalSize();
-    int iCur = FindCharacter(c, 1, 0x7fffffff);
-    while (iCur >= 0)
-    {
-        m_kStringBuffer[iCur] = 0;
-        int iStart = iCur + 1;
-        kBits.AddBack(m_kStringBuffer + iStart);
-        iNumBits = kBits.GetLogicalSize();
-        iCur = FindCharacter(c, iStart, 0x7fffffff);
-    }
-    return iNumBits;
-}
 
 class hkMemoryAllocatorD61
 {
@@ -2521,56 +2111,6 @@ char* __cdecl FUN_00cb10d0(int value);
 void __cdecl FUN_00c908c0(int allocator, FUN_00d61a50_cls* array, int capacity, int value);
 void __cdecl FUN_00cb1260(int* data, int value, char* source);
 
-// Initializes the string buffer, grows capacity if needed, copies value into m_data, and returns this.
-// @fnv 0x00d61a50
-int* FUN_00d61a50_cls::FUN_00d61a50(int value)
-{
-    m_data = (int*)((char*)this + 0x0C);
-    m_iElementCount = 0;
-    m_iCapacityState = 0x80000080;
-
-    if (value != 0)
-    {
-        char* source = fnvc_adapt::FUN_00cb10d0(value);
-        int count = (int)source + 1;
-
-        void* audio = FUN_00c85750();
-        int allocator = *(int*)((char*)audio + 0x0C);
-        int capacity = m_iCapacityState & 0x3FFFFFFF;
-
-        if (capacity < count)
-        {
-            capacity = capacity * 2;
-            if (count >= capacity)
-                capacity = count;
-            FUN_00c908c0(allocator, this, capacity, 1);
-        }
-
-        m_iElementCount = count;
-        *(char*)(source + (int)m_data) = 0;
-        FUN_00cb1260(m_data, value, source);
-    }
-    else
-    {
-        void* audio = FUN_00c85750();
-        int allocator = *(int*)((char*)audio + 0x0C);
-        int capacity = m_iCapacityState & 0x3FFFFFFF;
-
-        if (capacity < 1)
-        {
-            capacity = capacity * 2;
-            if (capacity <= 1)
-                capacity = 1;
-            FUN_00c908c0(allocator, this, capacity, 1);
-        }
-
-        m_iElementCount = 1;
-        *(char*)m_data = 0;
-    }
-
-    return (int*)this;
-}
-
 class hkMemoryAllocatorD61B8
 {
   public:
@@ -2638,11 +2178,6 @@ class FUN_00d61b80
     FUN_00d61b80(const FUN_00d61b80& kOther) throw();
 };
 
-// Copy-constructs a FUN_00d61b80 by delegating to the hkInplaceArrayD61B8 copy constructor for m_kStringBuffer.
-// @fnv 0x00d61b80
-FUN_00d61b80::FUN_00d61b80(const FUN_00d61b80& kOther) throw() : m_kStringBuffer(kOther.m_kStringBuffer)
-{}
-
 struct C6DF60Router;
 C6DF60Router* __cdecl _FNV_e03300_arena();
 struct C6DF60Router
@@ -2673,23 +2208,6 @@ struct FUN_00d61cc0_t
     void FUN_00d61cc0();
 };
 void __cdecl ArrayReserveImpl(void*, void*, int, int);
-// If the capacity bits of m_iState2 are below 1, reserves via ArrayReserveImpl, then sets m_iFadeIndex to 1 and writes a null at m_pBuffer.
-// @fnv 0x00d61cc0
-void FUN_00d61cc0_t::FUN_00d61cc0()
-{
-    C6DF60Router* router = _FNV_e03300_arena();
-    C540BC0Allocator* allocator = (C540BC0Allocator*)(void*)router->unk0c;
-    int state = m_iState2 & 0x3fffffff;
-    if (state < 1)
-    {
-        int count = state << 1;
-        if (count <= 1)
-            count = 1;
-        ArrayReserveImpl(allocator, this, count, 1);
-    }
-    m_iFadeIndex = 1;
-    *m_pBuffer = 0;
-}
 
 class hkMemoryAllocatorD61F;
 
@@ -2755,18 +2273,6 @@ class hkStringBufD61F
     void FUN_00d61f70(int n);
 };
 
-// If n > 0, removes the last n characters by resizing the buffer to its size minus n and null-terminating it.
-// @fnv 0x00d61f70
-void hkStringBufD61F::FUN_00d61f70(int n)
-{
-    if (n > 0)
-    {
-        int iLen = m_kStringBuffer.GetLogicalSize() - n - 1;
-        m_kStringBuffer.SetSizeAndGrow(iLen + 1);
-        m_kStringBuffer[iLen] = 0;
-    }
-}
-
 namespace fnv_00d61fc0 {
 class hkMemoryAllocatorD61F;
 
@@ -2803,23 +2309,6 @@ class hkStringBufD61F
     void FUN_00d61fc0(int iOffset, int iLength);
 };
 
-// @fnv 0x00d61fc0
-void hkStringBufD61F::FUN_00d61fc0(int iOffset, int iLength)
-{
-    if (iOffset)
-        FUN_00d2cc70(m_data, m_data + iOffset, iLength);
-    int n = iLength + 1;
-    hkMemoryAllocatorD61F& kAlloc = hkRouterD61F::FUN_00c85750().temp();
-    const int iCap = getCapacity();
-    if (iCap < n)
-    {
-        int iCap2 = 2 * iCap;
-        int iNewCap = (n < iCap2) ? iCap2 : n;
-        FUN_00c908c0(kAlloc, this, iNewCap, sizeof(char));
-    }
-    m_iElementCount = n;
-    m_data[iLength] = 0;
-}
 }  // namespace fnv_00d61fc0
 
 class hkMemoryAllocatorD62
@@ -2878,13 +2367,6 @@ class FUN_00d62ef0 : public hkReferencedObjectD62, public hkpCollisionAgentD62
 
     int unk0C, unk10, unk14, unk18, unk1C, unk20, unk24, unk28;
 };
-
-// Allocates a FUN_00d62ef0 object via the hkReferencedObjectD62 operator new, passing contactMgr and 0 as flags, and returns it as hkpCollisionAgentD62*.
-// @fnv 0x00d62f20
-hkpCollisionAgentD62* __cdecl FUN_00d62f20(void* contactMgr)
-{
-    return new FUN_00d62ef0(contactMgr, 0);
-}
 
 // @fnv 0x00d6c1a0
 __declspec(noinline) static void FUN_00d6c1a0(int* piValue)
@@ -2947,44 +2429,6 @@ struct Node
     Node* right;
     unsigned unk1c, unk20, unk24, unk28, flags;
 };
-// For each node whose left and right children are both active, rewrites their flags with seed and 5-bit ids from a running counter or the other child.
-// @fnv 0x00d74b70
-void __cdecl AssignNodeFlags(Node** nodes, int count, unsigned auSeed)
-{
-    unsigned nextId = 0;
-    int index = 0;
-    if (count > 0)
-    {
-        do
-        {
-            Node* item = nodes[index];
-            Node* left = item->left;
-            Node* right = item->right;
-            if (left && left->active && right && right->active)
-            {
-                unsigned leftPacked = left->flags;
-                unsigned rightPacked = right->flags;
-                unsigned midLeft = (leftPacked >> 5) & 31;
-                unsigned midRight = (rightPacked >> 5) & 31;
-                unsigned highLeft = (leftPacked >> 10) & 31;
-                unsigned highRight = (rightPacked >> 10) & 31;
-                unsigned lowLeft = leftPacked & 31;
-                unsigned lowRight = rightPacked & 31;
-                if (!midLeft)
-                    midLeft = nextId++;
-                if (!midRight)
-                    midRight = nextId++;
-                if (!highLeft)
-                    highLeft = midRight;
-                else
-                    highRight = midLeft;
-                left->flags = ((((auSeed << 6) | highLeft) << 5) | midLeft) << 5 | lowLeft;
-                right->flags = ((((auSeed << 6) | highRight) << 5) | midRight) << 5 | lowRight;
-            }
-            ++index;
-        } while (index < count);
-    }
-}
 
 struct FUN_00d7e740_cls
 {
@@ -3000,13 +2444,6 @@ struct FUN_00d76c20_cls
     int ForwardToTarget(int iSelector, int iArg0, int iArg1, int iArg2);
 };
 
-// Forwards a call to m_target->FUN_00d7e740, passing iSelector == 0 as the third argument.
-// @fnv 0x00d76c20
-int FUN_00d76c20_cls::ForwardToTarget(int iSelector, int iArg0, int iArg1, int iArg2)
-{
-    return m_target->FUN_00d7e740(iArg0, iArg1, iSelector == 0, iArg2);
-}
-
 struct hkResultD794
 {
     int m_bHasHit;
@@ -3014,41 +2451,11 @@ struct hkResultD794
 
 void __cdecl FUN_00d79250(void* a, void* b, hkResultD794* out, int flags, float f);
 
-// Calls FUN_00d79250 with flags 0 and returns whether out->m_bHasHit is set.
-// @fnv 0x00d794e0
-bool __cdecl FUN_00d794e0(void* a, void* b, hkResultD794* apResult, float f)
-{
-    FUN_00d79250(a, b, apResult, 0, f);
-    return apResult->m_bHasHit != 0;
-}
-
-// @fnv 0x00d61430
-static __declspec(noinline) int ToLowerCase(char c)
-{
-    return ((unsigned char)(c - 'A') <= 25) ? c + 0x20 : c;
-}
-
 volatile char g_d61430_c;
 char g_d61430_sink;
 
-void d61430_caller()
-{
-    g_d61430_sink = (char)ToLowerCase(g_d61430_c);
-}
-
-// @fnv 0x00d61450
-static __declspec(noinline) int FUN_00d61450(char c)
-{
-    return ((unsigned char)(c - 'a') <= 25) ? c - 0x20 : c;
-}
-
 volatile char g_d61450_c;
 char g_d61450_sink;
-
-void d61450_caller()
-{
-    g_d61450_sink = (char)FUN_00d61450(g_d61450_c);
-}
 
 struct D6C1B0Owner
 {
@@ -3086,29 +2493,6 @@ extern "C" __m128 g_d6c1d0_src[4];
 extern "C" __m128 g_d6c1d0_mat[4];
 extern "C" __m128 g_d6c1d0_out[4];
 
-// For i=0..3 sets out[i] to b[i].x*a[0] + b[i].y*a[1] + b[i].z*a[2], then adds a[3] to out[3].
-// @fnv 0x00d6c1d0
-static __declspec(noinline) void FUN_00d6c1d0(__m128* __restrict out, const __m128* __restrict a,
-                                              const __m128* __restrict b)
-{
-    const __m128& c1 = a[1];
-    const __m128& c0 = a[0];
-    const __m128& c2 = a[2];
-    for (int i = 3; i >= 0; i--)
-    {
-        const __m128& v = b[i];
-        out[i] =
-            _mm_add_ps(_mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v, v, 0), c0), _mm_mul_ps(_mm_shuffle_ps(v, v, 0x55), c1)),
-                       _mm_mul_ps(_mm_shuffle_ps(v, v, 0xaa), c2));
-    }
-    out[3] = _mm_add_ps(a[3], out[3]);
-}
-
-void fnv_probe_d6c1d0()
-{
-    FUN_00d6c1d0(g_d6c1d0_out, g_d6c1d0_mat, g_d6c1d0_src);
-}
-
 extern float DAT_011b6924;
 extern float DAT_011b6928;
 extern float DAT_010c8440;
@@ -3120,43 +2504,14 @@ struct IntegratorD720
     float unk0c;
     float state;
 };
-// @fnv 0x00d720a0
-float __cdecl FUN_00d720a0(IntegratorD720* self)
-{
-    float value = self->state;
-    float delta = self->unk00 - value;
-    float error = -self->offset - delta;
-    float limit = DAT_011b6924 * self->unk08;
-    float proposed = -DAT_011b6928 * value;
-    float change = proposed < limit ? proposed : limit;
-    value += change;
-    delta -= change;
-    if (error > limit + 2.0f * change)
-    {
-        value -= error;
-        delta += error;
-    }
-    self->state = DAT_010c8440 > value ? value : DAT_010c8440;
-    return delta;
-}
 
 IntegratorD720* volatile integratorD720;
 volatile float inputD720, stepD720, resultD720;
-void invokeD720()
-{
-    resultD720 = FUN_00d720a0(integratorD720);
-}
 
 struct FUN_00d74dc0_cls
 {
     void* FUN_00d74dc0();
 };
-
-// @fnv 0x00d74dc0
-void* FUN_00d74dc0_cls::FUN_00d74dc0()
-{
-    return (char*)this + 0x10;
-}
 
 #include <stdarg.h>
 struct hkAllocatorD624
@@ -3262,35 +2617,6 @@ class hkOstreamD624
     void WriteFormatted(const char* pcFormat, ...) throw();
 };
 
-// Formats pcFormat and varargs into a growable buffer via FUN_00cb0f50, resizing and retrying until it fits, then passes it to FUN_00d62080 with length -1.
-// @fnv 0x00d62420
-void hkOstreamD624::WriteFormatted(const char* pcFormat, ...) throw()
-{
-    hkStringBufD624 kBuf;
-    while (1)
-    {
-        int iSize = kBuf.m_kStringBuffer.getCapacity();
-        va_list kArgs;
-        va_start(kArgs, pcFormat);
-        int iNumChars = FUN_00cb0f50(kBuf.m_kStringBuffer.begin(), iSize, pcFormat, kArgs);
-        va_end(kArgs);
-        if (iNumChars >= 0 && iNumChars < iSize)
-        {
-            kBuf.setLength(iNumChars);
-            break;
-        }
-        else if (iNumChars < 0)
-        {
-            kBuf.setLength((2 * iSize > 255) ? 2 * iSize : 255);
-        }
-        else
-        {
-            kBuf.setLength(iNumChars);
-        }
-    }
-    FUN_00d62080(kBuf.cString(), -1);
-}
-
 // sub ecx,8; jmp target  ==  MSVC adjustor thunk: Derived overrides a virtual that both of its bases
 // declare, so the second base's vtable gets a thunk that moves `this` back by the first base's size (8).
 struct PrimaryBase
@@ -3351,21 +2677,6 @@ struct Node_d6c580
     char pad[0x12];
     Node_d6c580* m_parent;
 };
-
-// @fnv 0x00d6c580
-static __declspec(noinline) Node_d6c580* FUN_00d6c580(Node_d6c580* n)
-{
-    do
-    {
-        n = n->m_parent;
-    } while (n->m_type >= 0x17);
-    return n;
-}
-
-Node_d6c580* zz_probe_d6c580(Node_d6c580* n)
-{
-    return FUN_00d6c580(n);
-}
 
 // @fnv 0x00d6c590
 static __declspec(noinline) void FUN_00d6c590(int* p)
@@ -3443,24 +2754,6 @@ class hkStringBufD61C
     hkStringBufD61C& FUN_00d61c10(const char* s);
 };
 
-// Copies a null-terminated string into the internal buffer, growing it as needed, or clears it to an empty string when the input is null.
-// @fnv 0x00d61c10
-hkStringBufD61C& hkStringBufD61C::FUN_00d61c10(const char* apcString)
-{
-    if (apcString)
-    {
-        int len = FUN_00cb10d0(apcString);
-        m_kStringBuffer.SetSizeAndGrow(len + 1);
-        m_kStringBuffer[len] = 0;
-        FUN_00cb1260(m_kStringBuffer.begin(), apcString, len);
-    }
-    else
-    {
-        m_kStringBuffer.SetSizeAndGrow(1);
-        m_kStringBuffer[0] = 0;
-    }
-    return *this;
-}
 }  // namespace fnv_00d61c10
 
 namespace fnv_00d63340 {
@@ -3559,17 +2852,6 @@ class RotationColumns
     QuadDirection columns[3];
 };
 
-__forceinline void QuadDirection::multiply(const RotationColumns& rotation, const QuadDirection& input)
-{
-    const __m128 componentX = _mm_shuffle_ps(input.value, input.value, 0);
-    const __m128 termX = _mm_mul_ps(rotation.column(0).value, componentX);
-    const __m128 componentY = _mm_shuffle_ps(input.value, input.value, 0x55);
-    const __m128 termY = _mm_mul_ps(rotation.column(1).value, componentY);
-    const __m128 componentZ = _mm_shuffle_ps(input.value, input.value, 0xaa);
-    const __m128 termZ = _mm_mul_ps(rotation.column(2).value, componentZ);
-    value = _mm_add_ps(_mm_add_ps(termX, termY), termZ);
-}
-
 class Orientation : public RotationColumns
 {
 };
@@ -3614,32 +2896,6 @@ struct LocalOrientations
     Orientation localB;
 };
 
-static __forceinline void RotateDirections(const RotationColumns& rotation, const QuadDirection* source, int count,
-                                           QuadDirection* destination)
-{
-    RotationColumns saved = rotation;
-    int i = count - 1;
-    do
-    {
-        destination[i].multiply(saved, source[i]);
-    } while (--i >= 0);
-}
-
-// Rotates four vectors from local.localA and local.localB by the rotations of input.transformA and transformB, storing them in outputA and outputB.
-// @fnv 0x00d6c3c0
-static __declspec(noinline) void FUN_00d6c3c0(const LocalOrientations& local, const ConstraintQuery& input,
-                                              RigidTransform& outputA, RigidTransform& outputB)
-{
-    RotateDirections(input.transformA.get()->rotation(), &local.localA.column(0), 4, &outputA.rotation().column(0));
-    RotateDirections(input.transformB.get()->rotation(), &local.localB.column(0), 4, &outputB.rotation().column(0));
-}
-
-void RotateLocalFrames(const LocalOrientations& local, const ConstraintQuery& input, RigidTransform& outputA,
-                       RigidTransform& outputB)
-{
-    FUN_00d6c3c0(local, input, outputA, outputB);
-}
-
 extern "C" __m128 _mm_load_ps(const float* p);
 extern "C" void _mm_store_ps(float* p, __m128 a);
 
@@ -3662,26 +2918,6 @@ struct D73390Data
     void FUN_00de8f10();
 };
 
-// Copies three float arrays from source into data, loads a fourth from DAT_01267e30, calls FUN_00de8f10, then calls FUN_00d73380 with data and count.
-// @fnv 0x00d73390
-void __cdecl FUN_00d73390(D73390Source* source, int count)
-{
-    D73390Data data;
-
-    _mm_store_ps(data.value0, _mm_load_ps(source->value0));
-    _mm_store_ps(data.value1, _mm_load_ps(source->value1));
-    _mm_store_ps(data.value2, _mm_load_ps(source->value2));
-    _mm_store_ps(data.value3, _mm_load_ps((const float*)&DAT_01267e30));
-
-    data.FUN_00de8f10();
-    ((void(__cdecl*)(int*, int))FUN_00d73380)((int*)&data, count);
-}
-
-inline char hkToUpperD618(char c)
-{
-    return (c >= 'a' && c <= 'z') ? c - ('a' - 'A') : c;
-}
-
 class UpperCaseBufferD618 : public hkStringBufD618
 {
   public:
@@ -3691,16 +2927,6 @@ class UpperCaseBufferD618 : public hkStringBufD618
     }
     void FUN_00d618d0();
 };
-
-// Converts every character in the buffer to its uppercase equivalent using hkToUpperD618.
-// @fnv 0x00d618d0
-void UpperCaseBufferD618::FUN_00d618d0()
-{
-    for (int i = 0; i < getLength(); i++)
-    {
-        m_data[i] = hkToUpperD618(m_data[i]);
-    }
-}
 
 extern "C" __m128 _mm_load_ps(const float*);
 struct TransformContext
@@ -3728,57 +2954,10 @@ struct TransformPair
     __m128 m_row[4];
 };
 
-// Transforms four src vectors by the rows at ctx->m_pM1 into dest->m_row and four more by ctx->m_pM2 into out, adding the fourth row of each as an offset.
-// @fnv 0x00d6c240
-static __declspec(noinline) void FUN_00d6c240(TransformPair* dest, const __m128* src, const TransformContext* ctx,
-                                              __m128* out)
-{
-    const __m128* pMatrix = ctx->m_pM1;
-    __m128 a = pMatrix[0];
-    __m128 b = pMatrix[1];
-    __m128 c = pMatrix[2];
-    for (int n = 3; n >= 0; --n)
-    {
-        __m128 v = src[n + 1];
-        __m128 r = _mm_add_ps(
-            _mm_mul_ps(_mm_shuffle_ps(_mm_load_ps(src[n + 1].m128_f32), _mm_load_ps(src[n + 1].m128_f32), 0), a),
-            _mm_mul_ps(_mm_shuffle_ps(v, v, 0x55), b));
-        dest->m_row[n] = _mm_add_ps(r, _mm_mul_ps(_mm_shuffle_ps(v, v, 0xaa), c));
-    }
-    dest->m_row[3] = _mm_add_ps(dest->m_row[3], pMatrix[3]);
-
-    pMatrix = ctx->m_pM2;
-    a = pMatrix[0];
-    b = pMatrix[1];
-    c = pMatrix[2];
-    for (int n = 3; n >= 0; --n)
-    {
-        __m128 v = src[n + 5];
-        __m128 r = _mm_add_ps(
-            _mm_mul_ps(_mm_shuffle_ps(_mm_load_ps(src[n + 5].m128_f32), _mm_load_ps(src[n + 5].m128_f32), 0), a),
-            _mm_mul_ps(_mm_shuffle_ps(v, v, 0x55), b));
-        out[n] = _mm_add_ps(r, _mm_mul_ps(_mm_shuffle_ps(v, v, 0xaa), c));
-    }
-    out[3] = _mm_add_ps(out[3], pMatrix[3]);
-}
-
 TransformPair* volatile inputDest;
 const __m128* volatile inputSource;
 const TransformContext* volatile inputContext;
 __m128* volatile inputOut;
-void invokeTransform()
-{
-    FUN_00d6c240(inputDest, inputSource, inputContext, inputOut);
-}
-
-inline void SetTransformedPositionC320(QuadDirection& output, const RigidTransform& frame, const QuadDirection& input)
-{
-    const __m128 v = input.value;
-    __m128 y = _mm_mul_ps(_mm_shuffle_ps(v, v, 0x55), frame.orientation.column(1).value);
-    __m128 x = _mm_mul_ps(_mm_shuffle_ps(v, v, 0), frame.orientation.column(0).value);
-    __m128 z = _mm_mul_ps(_mm_shuffle_ps(v, v, 0xaa), frame.orientation.column(2).value);
-    output.value = _mm_add_ps(_mm_add_ps(y, x), _mm_add_ps(z, frame.translation.value));
-}
 
 struct PivotsC320
 {
@@ -3794,27 +2973,10 @@ struct TransformOutputC320
     {}
 };
 
-// Applies the rigid transforms of two bodies to their respective pivot points, writing the resulting translations into the output transforms.
-// @fnv 0x00d6c320
-static __declspec(noinline) void __cdecl FUN_00d6c320(const PivotsC320* pivots, const ConstraintQuery* bodies,
-                                                      TransformOutputC320 outA, TransformOutputC320 outB)
-{
-    SetTransformedPositionC320(outA.p->translation, *bodies->transformA.get(), pivots->m_kPivotA);
-    SetTransformedPositionC320(outB.p->translation, *bodies->transformB.get(), pivots->m_kPivotB);
-}
-
 const ConstraintQuery* volatile bodiesSourceC320;
 const PivotsC320* volatile pivotsSourceC320;
 RigidTransform* volatile outASourceC320;
 RigidTransform* volatile outBSourceC320;
-void InvokeTransformC320()
-{
-    const ConstraintQuery* bodies = bodiesSourceC320;
-    const PivotsC320* pivots = pivotsSourceC320;
-    RigidTransform* a = outASourceC320;
-    RigidTransform* b = outBSourceC320;
-    FUN_00d6c320(pivots, bodies, a, b);
-}
 
 // @f3 0x00a00dd0 (community match, verified in this file)
     extern float DAT_01063590;

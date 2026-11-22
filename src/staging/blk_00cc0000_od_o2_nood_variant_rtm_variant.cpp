@@ -238,21 +238,6 @@ struct PoseQuaternion {PoseVector vector; void FUN_00c66320(const PoseQuaternion
 extern "C" unsigned int __security_cookie;
 extern "C" void __fastcall __security_check_cookie(unsigned int);
 struct QuaternionProduct {__m128 quad;};
-__declspec(noinline) void PoseQuaternion::FUN_00c66320(const PoseQuaternion& a,const PoseQuaternion& b) {
-    unsigned int cookie=__security_cookie;
-    PoseVector cross;cross.cross(a.vector,b.vector);
-    __m128 aw=_mm_shuffle_ps(a.vector.value,a.vector.value,0xff);
-    __m128 bw=_mm_shuffle_ps(b.vector.value,b.vector.value,0xff);
-    __m128 xyz=_mm_add_ps(_mm_add_ps(_mm_mul_ps(aw,b.vector.value),cross.value),_mm_mul_ps(bw,a.vector.value));
-    __m128 product=_mm_mul_ps(a.vector.value,b.vector.value);
-    __m128 sum=_mm_add_ss(_mm_shuffle_ps(product,product,0x55),product);
-    sum=_mm_add_ss(_mm_shuffle_ps(product,product,0xaa),sum);
-    __m128 real=_mm_sub_ps(product,_mm_shuffle_ps(sum,sum,0));
-    QuaternionProduct result;
-    result.quad=_mm_shuffle_ps(xyz,_mm_unpackhi_ps(xyz,real),0xc4);
-    vector.value=result.quad;
-    __security_check_cookie(cookie);
-}
 struct PoseTransform {
     PoseVector translation;
     PoseQuaternion rotation;
@@ -2492,39 +2477,6 @@ virtual void SlotAC();
 
 };
 void* __cdecl NiMalloc(unsigned);
-__declspec(noinline) void IndexArray::Resize(unsigned requested) {
-
-    if(requested==capacity) return;
-
-    if(requested<size) {
-
-        for(unsigned short i=(unsigned short)requested;i<size;++i) {
-
-            if(data[i]) {data[i]=0;--used;}
-
-        }
-
-        size=(unsigned short)requested;
-
-    }
-
-    unsigned short* old=data;
-
-    capacity=(unsigned short)requested;
-
-    if(requested>0) {
-
-        data=(unsigned short*)NiMalloc((unsigned short)requested*2);
-
-        for(unsigned short i=0;i<size;++i) data[i]=old[i];
-
-        for(unsigned short i=size;i<capacity;++i) data[i]=0;
-
-    } else data=0;
-
-    FreeStorage(old);
-
-}
 struct FUN_00ccea00Block
 {
     __m128 m_v0;
@@ -2785,24 +2737,6 @@ public:
     void ReleaseObject(FUN_00d4edc0* output,MotionScale* scale);
     void FUN_00cc51e0(FUN_00d4edc0* output,MotionScale* scale);
 };
-// @fnv 0x00cc51e0
-void MotionOwner::FUN_00cc51e0(FUN_00d4edc0* output,MotionScale* scale) {
-    AllocationTypeScope allocation(0x10);
-    FUN_00d4edc0* source=motion;
-    if(!output)output=new FUN_00d4edc0;
-    output->state50.quad=source->state50.quad;
-    output->state90.quad=source->state90.quad;
-    output->valueA4=source->valueA4;
-    output->valueA8=source->valueA8;
-    output->valueB0=source->valueB0;
-    output->valueB4=source->valueB4;
-    float factor=scale->factor;
-    if(factor!=1.0f) {
-        output->state50.Mul(SimdReal(factor));
-        output->state90.Mul(SimdReal(factor));
-    }
-    ReleaseObject(output,scale);
-}
 
 extern "C" __m128 _mm_load_ss(const float*);
 struct BlockAllocator {
@@ -2992,15 +2926,6 @@ __forceinline void scale(__m128& v, float f)
     v = _mm_mul_ps(_mm_shuffle_ps(q, q, 0), v);
 }
 
-// @fnv 0x00cc96b0
-void __cdecl FUN_00cc96b0(float value, S00cc96b0_ScaleObject* object)
-{
-    if (object && value != 1.0f) {
-        scale(object->vector20, value);
-        scale(object->vector30, value);
-    }
-}
-
 extern "C" __m128 _mm_load_ss(const float*);
 
 
@@ -3061,20 +2986,6 @@ public:
     void FUN_00c84df0(TargetArg* pkTarget, ScaleArg* pkArg);
     void FUN_00ccbf00(TargetArg* pkTarget, ScaleArg* pkArg);
 };
-
-// @fnv 0x00ccbf00
-void ScaledNode::FUN_00ccbf00(TargetArg* pkTarget, ScaleArg* pkArg)
-{
-    TargetArg* pkDst = *(TargetArg* volatile*)&pkTarget;
-    ScaleArg* volatile pkScale = pkArg;
-    bool bFlag;
-    QuadHolder* pkQuad = vb4(&bFlag);
-    float fScale = pkArg->unk10;
-    __m128 x = _mm_load_ss(&fScale);
-    pkQuad->m_vComponents = _mm_mul_ps(_mm_shuffle_ps(x, x, 0), pkQuad->m_vComponents);
-    pkDst->unk14 = unk14;
-    FUN_00c84df0(pkDst, pkScale);
-}
 
 extern "C" {
 __m128 _mm_sub_ss(__m128,__m128);
@@ -3456,77 +3367,6 @@ extern "C" void __cdecl FUN_00d6aef0(Step*, __m128*);
 
 extern __m128 DAT_010c7160;
 extern float DAT_01011d78;
-__forceinline void transferScalar(float& destination, float source) {
-    *static_cast<volatile float*>(&destination)=source;
-}
-// @fnv 0x00cd3cb0
-void __stdcall FUN_00cd3cb0(Motion* object) {
-    float b,z;
-    Step scale;
-    StoredVector amount;
-    _mm_store_ss(&b,object->vec4f0);
-    scale.surfaceVelocity = object->vec4d0;
-    StoredVector cv;
-    scale.up = object->vec4c0;
-    scale.normal = object->vec4c0;
-    if (b < -100000000.0f) {
-        (*(0 + object->vec4f0.m128_f32)) = 0.0f;
-        scale.oldVelocity = object->vec4f0;
-        scale.time = 1.0f;
-        _mm_store_ss(&b,_mm_shuffle_ps(object->vec510,object->vec510,0xaa));
-        transferScalar(z,b);
-        _mm_store_ss(&b,object->vec510);
-        transferScalar(b,b);
-        _mm_store_ss(((0)[&scale.gravity.m128_f32]),_mm_shuffle_ps(object->vec510,object->vec510,0x55));
-        scale.gravity = _mm_setr_ps(scale.gravity.m128_f32[0],b,z,0.0f);
-        scale.limit = 100000.0f;
-        scale.basis = object->vec4a0;
-        FUN_00d6aef0(&scale,&object->vec4f0);
-    } else {
-        *static_cast<volatile float*>(&scale.time)=object->value534;
-        scale.oldVelocity = object->vec4f0;
-        _mm_store_ss(&z,_mm_shuffle_ps(object->vec510,object->vec510,0xaa));
-        transferScalar(b,z);
-        _mm_store_ss(&z,object->vec510);
-        transferScalar(z,z);
-        _mm_store_ss(((&scale.gravity.m128_f32)[0]),_mm_shuffle_ps(object->vec510,object->vec510,0x55));
-        scale.gravity = _mm_setr_ps((((scale.gravity.m128_f32)[(0)])),z,b,0.0f);
-        scale.limit = 100000.0f;
-        scale.basis = object->vec4a0;
-        FUN_00d6aef0(&scale,&object->vec4f0);
-        b = object->value54c;
-        if (b > 0.0f) {
-            __m128 normal=object->vec4c0;
-            __m128 n=_mm_mul_ps(_mm_load_ps(reinterpret_cast<const float*>(&normal)),object->vec4f0);
-            __m128 v=_mm_add_ss(_mm_shuffle_ps(n,n,0x55),n);
-            __m128 product;
-            __m128 idx=_mm_add_ss(_mm_shuffle_ps(n,n,0xaa),v);
-            _ReadBarrier();
-            product = _mm_sub_ss(DAT_010c7160,idx);
-                    object->vec4f0=_mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(product,product,0),normal),object->vec4f0);
-            _ReadWriteBarrier();
-            normal=object->vec4c0;
-            n=_mm_mul_ps(_mm_load_ps(reinterpret_cast<const float*>(&normal)),scale.oldVelocity);
-            v=_mm_add_ss(_mm_shuffle_ps(n,n,0x55),n);
-            idx=_mm_add_ss(_mm_shuffle_ps(n,n,0xaa),v);
-            object->vec4f0=_mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(idx,idx,0),normal),object->vec4f0);
-        }
-        __m128 y;
-        object->SubtractVectors(reinterpret_cast<__m128*>(&amount));
-        y = amount;
-        _mm_store_ss(&z,_mm_shuffle_ps(y,y,0xaa));
-        if (z > object->value53c) {
-            object->vtable->getTransform(object);
-            cv = object->vtable->getTransform(object)->b;
-            object->vtable->getTransform(object);
-            __m128 pForm=_mm_load_ss(&b);
-            transferScalar(z,object->value4e8);
-            __m128 q=_mm_load_ss(&z);
-            object->vec4f0 = _mm_add_ps(_mm_mul_ps(_mm_mul_ps(_mm_shuffle_ps(pForm,pForm,0),cv),_mm_shuffle_ps(q,q,0)),object->vec4f0);
-        }
-    }
-    if (11 != object->state) reinterpret_cast<FUN_00c6cba0_class*>(object)->FUN_00c6cba0();
-}
 
 extern "C" void _ReadBarrier(void);
 #pragma intrinsic(_ReadBarrier)
@@ -4028,69 +3868,6 @@ struct S00cd3fb0_MotionContext {
 };
 
 struct S00cd3fb0_MotionScalarLane { __m128 value; __forceinline S00cd3fb0_MotionScalarLane(float v) { value = _mm_load_ss(&v); } __forceinline S00cd3fb0_MotionScalarLane(S00cd3fb0_RealValue v) { value=_mm_load_ss(&v.value); } __forceinline __m128 broadcast() const { return _mm_shuffle_ps(value,value,0); } };
-// @fnv 0x00cd3fb0
-void S00cd3fb0_MotionContext::FUN_00cd3fb0(S00cd3fb0_MotionObject* object)
-{
-    if ((unsigned char)(object->m_flags >> 8) & 1) {
-        object->m_uiContentCount = 0;
-        const_cast<volatile unsigned int&>(object->m_flags) |= 0x80;
-    }
-    if (object->m_uiContentCount == 11 && object->m_factor > 1.0f && ((S00cd3fb0_FUN_00c70550_class*)object)->FUN_00c70550() < 0.10000000149011612) {
-        object->m_uiContentCount = 0;
-        object->m_bSlotEnabled = 1;
-        __m128 v;
-        ((S00cd3fb0_FUN_00c6e300_class*)object)->SubtractVectors(&v);
-        object->m_v620.m_vComponents = v;
-    }
-    if (object->m_uiContentCount != 11) {
-        if (object->m_uiContentCount != 1) {
-            object->m_factor = 0.0f;
-            ((S00cd3fb0_FUN_00c6cba0_class*)object)->FUN_00c6cba0();
-            return;
-        }
-        object->m_uiContentCount = 11;
-    }
-    if (object->m_uiCommandId > 0.0f) {
-        S00cd3fb0_MotionParams params;
-        params.m_factor = (object->m_flags & 0x1800) ? 1.0f : object->m_uiCommandId * DAT_011b0140 + DAT_01267bbc;
-        params.m_v10 = object->m_v4d0;
-        params.m_vScale = m_vScale;
-        params.m_vHitNormal = object->m_vHitNormal;
-        params.m_normal2 = object->m_vHitNormal;
-        params.m_v70 = object->m_v4a0;
-        params.m_fVelocity = object->m_fVelocity;
-        {
-            float x = object->getX510();
-            __m128 source = object->m_v510.m_vComponents;
-            _ReadBarrier();
-            _mm_store_ss(&params.m_v50.m_vComponents.m128_f32[0], _mm_shuffle_ps(source,source,0x55));
-            params.m_v50.set(params.m_v50.m_vComponents.m128_f32[0],x,DAT_01011d78,DAT_01011d78);
-        }
-        S00cd3fb0_hkVector4* vel = &object->m_fVelocity;
-        FUN_00d6aef0(&params, vel);
-        __m128 normal = object->m_vHitNormal.m_vComponents;
-        __m128 product = _mm_mul_ps(_mm_load_ps(reinterpret_cast<const float*>(&normal)),object->m_fVelocity.m_vComponents);
-        __m128 sum = _mm_add_ss(_mm_shuffle_ps(product,product,0x55),product);
-        __m128 dot = _mm_add_ss(_mm_shuffle_ps(product,product,0xaa),sum);
-        __m128 neg = _mm_sub_ss(DAT_010c7160,dot);
-        vel->m_vComponents = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(neg,neg,0),normal),vel->m_vComponents);
-        normal = object->m_vHitNormal.m_vComponents;
-        product = _mm_mul_ps(_mm_load_ps(reinterpret_cast<const float*>(&normal)),params.m_fVelocity.m_vComponents);
-        sum = _mm_add_ss(_mm_shuffle_ps(product,product,0x55),product);
-        dot = _mm_add_ss(_mm_shuffle_ps(product,product,0xaa),sum);
-        vel->m_vComponents = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(dot,dot,0),normal),vel->m_vComponents);
-    }
-    object->vtable->GetResult(object);
-    __m128 dir = object->vtable->GetResult(object)->m_direction.m_vComponents;
-    object->vtable->GetResult(object);
-    S00cd3fb0_MotionScalarLane s1(object->scale54c());
-    __m128 a = s1.broadcast();
-    S00cd3fb0_MotionScalarLane s2(object->scale4e8());
-    __m128 result = _mm_mul_ps(a,dir);
-    result = _mm_mul_ps(result,s2.broadcast());
-    object->m_fVelocity.m_vComponents = _mm_add_ps(result,object->m_fVelocity.m_vComponents);
-    ((S00cd3fb0_FUN_00c6e2e0_cls*)object)->FUN_00c6e2e0();
-}
 
 extern "C" {
 void _ReadWriteBarrier();
@@ -4522,83 +4299,6 @@ void __cdecl FUN_00458620(__m128* result, const __m128* vector);
 union __declspec(align(16)) GsVec4 { __m128 v; float f[4]; char c[16]; };
 
 
-static __forceinline __m128 splatFloat(const float* f) {
-    __m128 v = _mm_load_ss(f);
-    return _mm_shuffle_ps(v, v, 0);
-}
-
-
-
-__forceinline __m128 invLength(__m128 value)
-{
-    __m128 squared = _mm_mul_ps(value, value);
-    __m128 partial = _mm_add_ss(_mm_shuffle_ps(squared, squared, 0x55), squared);
-    __m128 sum = partial;
-    sum = _mm_add_ss(_mm_shuffle_ps(squared, squared, 0xaa), partial);
-    __m128 reciprocal = _mm_rsqrt_ss(sum);
-    __m128 correction = _mm_mul_ss(_mm_mul_ss(sum, reciprocal), reciprocal);
-    __m128 zeroMask = _mm_cmpeq_ss(sum, _mm_set_ss(DAT_01011d78));
-    correction = _mm_sub_ss(_mm_set_ss(DAT_01017718), correction);
-    reciprocal = _mm_mul_ss(_mm_mul_ss(_mm_set_ss(DAT_01016248), reciprocal), correction);
-    reciprocal = _mm_andnot_ps(zeroMask, reciprocal);
-    return reciprocal;
-}
-
-// @fnv 0x00cd4280
-void __stdcall FUN_00cd4280(MotionController* controller)
-{
-    if (controller->state != 11 && (controller->state == 0 || controller->state == 3)) {
-        controller->FUN_00c6cba0();
-        return;
-    }
-    controller->flags |= 0x2000; _ReadWriteBarrier();
-    controller->vtable->getMotionData(controller);
-    GsVec4 reciprocal;
-    {
-        __m128 direction = controller->vtable->getMotionData(controller)->direction;
-        controller->vtable->getMotionData(controller);
-        struct { float s; float scale; } tmp;
-        tmp.scale = controller->directionScale;
-        __m128 scaleVec = _mm_set_ps1(tmp.scale);
-        tmp.scale = (float)fabs(controller->acceleration);
-        double absAccel = tmp.scale;
-        direction = _mm_mul_ps(scaleVec, direction);
-        reciprocal.v = invLength(direction);
-        __m128 squared = _mm_mul_ps(direction, direction);
-        __m128 length = _mm_add_ss(_mm_shuffle_ps(squared, squared, 0x55), squared);
-        length = _mm_add_ss(_mm_shuffle_ps(squared, squared, 0xaa), length);
-        reciprocal.v = _mm_shuffle_ps(reciprocal.v, reciprocal.v, 0);
-        length = _mm_mul_ss(length, reciprocal.v);
-        _mm_store_ss(&tmp.s, length); float magnitude = -(float)sqrt((float)((tmp.s + tmp.s) * absAccel));
-        __m128 norm = _mm_mul_ps(reciprocal.v, direction);
-        direction = _mm_mul_ps(splatFloat(&magnitude), norm);
-        ProxyHolder* proxy = controller->proxy;
-        const float* reference = &DAT_01267e30;
-        __m128 dir;
-        if (proxy) {
-            controller->FUN_00c89720();
-            reference = reinterpret_cast<const float*>(proxy->FUN_00cac950());
-            controller->FUN_00c89720();
-            dir = direction;
-        } else {
-            dir = direction;
-        }
-        direction = _mm_load_ps(reference);
-        direction.m128_f32[2] = 0.0f;
-        controller->velocity = _mm_add_ps(_mm_load_ps(direction.m128_f32), dir);
-    }
-    {
-        __m128 outBuf;
-        controller->SubtractVectors(&reciprocal.v);
-        FUN_00458620(&outBuf, &reciprocal.v);
-        controller->heading = outBuf.m128_f32[2];
-    }
-    controller->state = 2;
-    controller->FUN_00c6cba0();
-    controller->flags &= 0xfffdfeff; _ReadWriteBarrier();
-    controller->listeners->FUN_00cbc510(controller->listenerIndex)->update(controller);
-}
-
 extern "C" __m128 _mm_load_ss(const float*);
 
 
@@ -4647,29 +4347,6 @@ public:
     void FUN_00c84df0(void* a1, CCEAE0Arg* a2);
     void FUN_00cceae0(void* a1, CCEAE0Arg* a2);
 };
-
-// @fnv 0x00cceae0
-void CCEAE0Node::FUN_00cceae0(void* a1, CCEAE0Arg* a2)
-{
-    bool flag;
-    CCEAE0Node* p = v45(&flag);
-    CCEAE0Node* q = p->m_08 ? p->m_08->m_08 : 0;
-    float f = a2->m_10;
-    if (f != 1.0f) {
-        hkVec4 s;
-        s.m_vComponents = _mm_load_ss(&f);
-        s.m_vComponents = _mm_shuffle_ps(s.m_vComponents, s.m_vComponents, 0);
-        *reinterpret_cast<__m128*>(&p->m_40) = _mm_mul_ps(s.m_vComponents, *reinterpret_cast<__m128*>(&p->m_40));
-    } else if (!q || q->v52(a2)) {
-        goto done;
-    }
-    {
-        CCEAE0Node* r = q->v18(a2);
-        p->m_08 = r ? r->m_08 : 0;
-    }
-done:
-    FUN_00c84df0(a1, a2);
-}
 
 template<class T> struct NativeArray {
     T* data;int size,capacity;
@@ -4755,30 +4432,6 @@ public:
     void FUN_00c66320(const NQuaternion&,const NQuaternion&);
     void FUN_005611c0();
 };
-__forceinline void NVector::SetRotatedDirection(const NQuaternion& q,const NVector& a) {
-    NVector half;half.quad()=DAT_010c71e0;
-    NVector real;real.splatFrom(q.m_vec,3);
-    NVector scale;scale.triple(half,real,real);
-    NVector accum;accum.setMul4(a,scale);
-    NVector dot;dot.quad()=q.imag().dot3(a).bitsValue();
-    dot.broadcast(0);
-    accum.addMul4(dot,q.imag());
-    NVector cp;cp.cross(q.imag(),a);
-    accum.addMul4(real,cp);
-    setAdd4(accum,accum);
-}
-__forceinline void NVector::inverseRotate(const NQuaternion& q,const NVector& a) {
-    NVector half;half.quad()=DAT_010c71e0;
-    NVector real;real.splatFrom(q.m_vec,3);
-    NVector scale;scale.triple(half,real,real);
-    NVector accum;accum.setMul4(a,scale);
-    NVector dot;dot.quad()=q.imag().dot3(a).bitsValue();
-    dot.broadcast(0);
-    accum.addMul4(dot,q.imag());
-    NVector cp;cp.cross(a,q.imag());
-    accum.addMul4(real,cp);
-    setAdd4(accum,accum);
-}
 static __forceinline ::__m128 reciprocalValue(::__m128 a) {::__m128 seed=_mm_rcp_ps(a);::__m128 error=_mm_mul_ps(_mm_mul_ps(a,seed),seed);return _mm_sub_ps(_mm_add_ps(seed,seed),error);}
 struct NTransform {
     NVector m_vTranslation;
@@ -4800,15 +4453,10 @@ struct NTransform {
         m_vScale.xyzZero(inv);
     }
 };
-__forceinline void NVector::_setTransformedPos(const NTransform& a,const NVector& b) {
-    NVector v(b);v.mul4(a.m_vScale);SetRotatedDirection(a.m_rotation,v);add4(a.m_vTranslation);
-}
 struct NativeBool {char value;NativeBool(){}NativeBool(bool a):value(a){}operator bool() const {return value!=0;}NativeBool& operator=(bool a){value=a;return *this;}};
 
 extern "C" ::__m128 _mm_cmple_ps(::__m128,::__m128);
 extern "C" int _mm_movemask_ps(::__m128);
-template<class T> static __forceinline T valueMax(T a,T b) {return a>b?a:b;}
-template<class T> static __forceinline T valueMin(T a,T b) {return a<b?a:b;}
 struct NativePose {
     void* skeleton;NativeArray<NTransform> locals,transforms;NativeArray<unsigned> flags;
     bool modelSync,localSync;
@@ -4862,56 +4510,11 @@ struct NativeSolver {
 
 extern const float  DAT_01017d00;
 extern const ::__m128 DAT_01017d10;
-__declspec(noinline) bool NativeSolver::FUN_00cd8a50(const NativeInput& a,const NVector& foot,const NVector& toe,NVector& projected,NVector& normal) const {
-    float above=settings.unk7c, below=settings.unk80;
-    float span=above+below;
-    float fraction0=::DAT_0104da48,fraction1=::DAT_0104da48;
-    NVector start,end,n0,n1;
-    start.setAddMul4(foot,settings.direction,above);
-    end.setAddMul4(foot,settings.direction,-below);
-    bool hit0=RayCast(a,start,end,fraction0,n0),hit1=false;
-    ::__m128 delta=_mm_and_ps(_mm_sub_ps(toe.quad(),foot.quad()),DAT_01017d10);
-    ::__m128 epsilonVector=_mm_set_ps1(DAT_01017d00);
-    if ((_mm_movemask_ps(_mm_cmple_ps(delta,epsilonVector))&7)!=7) {
-        start.setAddMul4(toe,settings.direction,above);
-        end.setAddMul4(toe,settings.direction,-below);
-        hit1=RayCast(a,start,end,fraction1,n1);
-        if (hit1) {
-            float up=n1.dot3(settings.direction);
-            if(up<=0.0f)hit1=false;
-            else {
-                NVector position,ray;
-                ray.setSub4(end,start);position.setAddMul4(start,ray,fraction1);
-                float planeHeight=-float(position.dot3(n1));
-                start.setAddMul4(foot,settings.direction,above);
-                float height=start.dot3(n1);
-                fraction1=-(planeHeight+height)/(-span*up);
-            }
-        }
-    }
-    if(!hit0&&!hit1)return false;
-    if(hit0&&fraction0<=fraction1) {normal=n0;fraction1=fraction0;}
-    else normal=n1;
-    projected.setAddMul4(foot,settings.direction,-(fraction1*span-above));
-    return true;
-}
 
 static __forceinline ::__m128 rawDot(::__m128 a,::__m128 b) {
     ::__m128 p=_mm_mul_ps(a,b);
     ::__m128 y=_mm_add_ss(_mm_shuffle_ps(p,p,0x55),p);
     return _mm_add_ss(_mm_shuffle_ps(p,p,0xaa),y);
-}
-static __forceinline void rotateFront(NVector& out,const NQuaternion& quat,const NVector& dir) {
-    const ::__m128& q=quat.m_vec.quad();
-    ::__m128 a=dir.quad();
-    ::__m128 cross=_mm_sub_ps(_mm_mul_ps(_mm_shuffle_ps(q,q,0xc9),_mm_shuffle_ps(a,a,0xd2)),_mm_mul_ps(_mm_shuffle_ps(q,q,0xd2),_mm_shuffle_ps(a,a,0xc9)));
-    ::__m128 r=_mm_shuffle_ps(q,q,0xff);
-    ::__m128 h=_mm_add_ps(_mm_mul_ps(r,r),DAT_010c71e0);
-    ::__m128 result=_mm_mul_ps(a,h);
-    ::__m128 dot=rawDot(q,a);
-    result=_mm_add_ps(result,_mm_mul_ps(_mm_shuffle_ps(dot,dot,0),q));
-    result=_mm_add_ps(result,_mm_mul_ps(cross,r));
-    out.quad()=_mm_add_ps(result,result);
 }
 extern "C" ::__m128 _mm_rsqrt_ps(::__m128);
 extern "C" ::__m128 _mm_sqrt_ps(::__m128);
@@ -4926,203 +4529,8 @@ static const ::__m128 opposedLimit={{-0.99999f,-0.99999f,-0.99999f,-0.99999f}};
 static const ::__m128 correctionLimit={{-0.999f,-0.999f,-0.999f,-0.999f}};
 static const ::__m128 axisFirst={{1.0f,0.0f,0.0f,0.0f}};
 static const ::__m128 axisSecond={{0.0f,1.0f,0.0f,0.0f}};
-static __forceinline ::__m128 inverseRoot(::__m128 value) {
-    ::__m128 r=_mm_rsqrt_ps(value);
-    return _mm_mul_ps(_mm_mul_ps(quaternionHalf,r),_mm_sub_ps(quaternionThree,_mm_mul_ps(_mm_mul_ps(value,r),r)));
-}
-static __forceinline ::__m128 normalizedQuaternion(::__m128 value) {
-    ::__m128 p=_mm_mul_ps(value,value);
-    ::__m128 sum=_mm_add_ps(p,_mm_shuffle_ps(p,p,0x4e));
-    sum=_mm_add_ps(sum,_mm_shuffle_ps(sum,sum,0xb1));
-    return _mm_mul_ps(value,inverseRoot(sum));
-}
-inline void NQuaternion::FUN_00cd9d10(const NVector& from,const NVector& to) {
-    ::__m128 dot=rawDot(from.quad(),to.quad());
-    dot=_mm_shuffle_ps(dot,dot,0);
-    if (_mm_movemask_ps(_mm_cmpgt_ps(dot,parallelLimit))) m_vec.quad()=quaternionUnit;
-    else if (_mm_movemask_ps(_mm_cmplt_ps(dot,opposedLimit))) {
-        NVector axis;
-        float x=from.quad().m128_f32[0];
-        if(x> -0.5f && x<0.5f)axis.quad()=axisFirst;
-        else axis.quad()=axisSecond;
-        NVector perpendicular;perpendicular.cross(from,axis);
-        perpendicular(3)=0.0f;
-        m_vec.quad()=normalizedQuaternion(perpendicular.quad());
-    } else {
-        ::__m128 halfAngle=_mm_mul_ps(quaternionHalf,_mm_add_ps(quaternionOne,dot));
-        ::__m128 invCosine=inverseRoot(halfAngle);
-        NVector cross;cross.cross(from,to);
-        ::__m128 factor=_mm_mul_ps(quaternionHalf,invCosine);
-        if(_mm_movemask_ps(_mm_cmplt_ps(dot,correctionLimit))) {
-            ::__m128 length=rawDot(cross.quad(),cross.quad());
-            length=_mm_shuffle_ps(length,length,0);
-            factor=_mm_mul_ps(_mm_sqrt_ps(_mm_sub_ps(halfAngle,dot)),inverseRoot(length));
-        }
-        ::__m128 imaginary=_mm_mul_ps(cross.quad(),factor);
-        ::__m128 real=_mm_mul_ps(halfAngle,invCosine);
-        m_vec.quad()=_mm_shuffle_ps(imaginary,_mm_unpackhi_ps(imaginary,real),0xc4);
-    }
-}
 
-__declspec(noinline) void NQuaternion::FUN_00c66320(const NQuaternion& a,const NQuaternion& b) {
-    ::__m128 av=a.m_vec.quad(),bv=b.m_vec.quad();
-    ::__m128 cp=_mm_sub_ps(_mm_mul_ps(_mm_shuffle_ps(av,av,0xc9),_mm_shuffle_ps(bv,bv,0xd2)),_mm_mul_ps(_mm_shuffle_ps(av,av,0xd2),_mm_shuffle_ps(bv,bv,0xc9)));
-    ::__m128 xyz=_mm_add_ps(_mm_add_ps(cp,_mm_mul_ps(_mm_shuffle_ps(av,av,0xff),bv)),_mm_mul_ps(_mm_shuffle_ps(bv,bv,0xff),av));
-    ::__m128 p=_mm_mul_ps(av,bv);::__m128 dot=rawDot(av,bv);
-    ::__m128 w=_mm_sub_ps(p,_mm_shuffle_ps(dot,dot,0));
-    m_vec.quad()=_mm_shuffle_ps(xyz,_mm_unpackhi_ps(xyz,w),0xc4);
-}
-
-static __forceinline float scalarDotValue(::__m128 a,::__m128 b) {float f;(::_mm_store_ss)(&f,rawDot(a,b));return f;}
 static __forceinline void scalarDotStore(float& f,::__m128 a,::__m128 b){(::_mm_store_ss)(&f,rawDot(a,b));}
-
-// @fnv 0x00cd8d90
-extern "C" void __fastcall FUN_00cd8d90(NativeSolver* self,void*,const NativeInput& a,NativeOutput& out,NativePose& pose) {
-    const NTransform& world=a.world;
-    NTransform inverse;
-    inverse.SetConjugate(world);
-    NVector localDirection;
-    rotateFront(localDirection,inverse.getRotation(),self->settings.direction);
-    out.active=true;
-    float initialDistance=a.desired.getTranslation().dot3(self->settings.plane);
-    const NQuaternion& originalRotation=a.desired.getRotation();
-    NQuaternion inputRotation=pose.get(self->settings.bone2).getRotation();
-    NTransform base(pose.get(self->settings.bone2));
-    NVector target;
-    const NVector& position=base.getTranslation();target._setTransformedPos(world,position);
-    bool enabled=a.enabled;
-    NVector savedNormal;
-    NVector point;
-    float adjustment,actual;
-
-    if (!enabled) {
-        out.active=false;
-        savedNormal=self->oldNormal;
-        point.setAddMul4(base.getTranslation(),localDirection,self->previous);
-        actual=float(target.dot3(self->settings.direction))+self->previous-initialDistance;
-        adjustment=actual;
-        out.error=0.0f;
-
-        self->cached=false;
-    } else {
-        const bool wasCached=self->cached;
-        NVector normal;
-        if (self->settings.lock) {
-            self->cached=false;
-            if (initialDistance<self->settings.minDistance) {
-                if (wasCached) {
-                    target=self->cachePoint;
-                    base.m_vTranslation._setTransformedPos(inverse,target);
-                } else {
-                    self->cachePoint=target;
-                    NVector local;
-                    local._setTransformedPos(base,self->settings.localPoint);
-                    self->cacheTarget._setTransformedPos(world,local);
-                }
-                self->cached=true;
-            }
-        }
-        NVector local;
-        local._setTransformedPos(base,self->settings.localPoint);
-        NVector rayPoint;
-        if (self->settings.lock && self->cached) rayPoint=self->cacheTarget;
-        else rayPoint._setTransformedPos(world,local);
-        bool hit=self->FUN_00cd8a50(a,target,rayPoint,normal,savedNormal);
-        if (!hit) {
-            out.active=false;
-            enabled=false;
-            savedNormal=self->oldNormal;
-            point.setAddMul4(base.getTranslation(),localDirection,self->previous);
-            actual=float(target.dot3(self->settings.direction))+self->previous-initialDistance;
-            adjustment=actual;
-            out.error=0.0f;
-    
-            self->cached=false;
-        } else {
-            if (self->cached) {
-                target=normal;
-                self->cachePoint=normal;
-                base.m_vTranslation._setTransformedPos(inverse,normal);
-                NVector local;
-                local._setTransformedPos(base,self->settings.localPoint);
-                self->cacheTarget._setTransformedPos(world,local);
-            }
-            out.active=true;
-            actual=normal.dot3(self->settings.direction);
-            float distance=scalarDotValue(self->settings.direction.quad(),a.world.m_vTranslation.quad());out.error=actual-(self->settings.offset+distance);
-            savedNormal(3)=0.0f;
-const NVector& offset=self->drift;
-            NVector perpendicular;
-            perpendicular.setAddMul4(normal,self->settings.direction,-actual);
-            float speed=1.0f-(initialDistance-self->settings.minDistance)/(self->settings.maxDistance-self->settings.minDistance);
-            speed=valueMax<float>(0.0f,speed);
-            speed=valueMin<float>(1.0f,speed);
-            speed=speed*a.speed0+(1.0f-speed)*a.speed1;
-            if (self->weight==0.0f) adjustment=actual;
-            else {
-                const float rate=self->correction>actual?a.fall:a.rise;
-                const float factor=rate*speed;
-                adjustment=(actual-self->correction)*factor+self->correction;
-            }
-            if (self->settings.lock) {
-                if (self->cached) self->drift.setZero4();
-                else {
-                    if (wasCached) {
-                        NVector delta;delta.setSub4(self->cachePoint,perpendicular);self->drift=delta;self->drift.subMul4(self->settings.direction.dot3(delta),self->settings.direction);
-                    }
-                    perpendicular.add4(offset);
-                    self->drift.mul4(1.0f-a.decay);
-                }
-            }
-            NVector movedWorld,movedLocal;
-            movedWorld.setAddMul4(perpendicular,self->settings.direction,adjustment);
-            movedLocal._setTransformedPos(inverse,movedWorld);
-            point.setAddMul4(movedLocal,localDirection,initialDistance-self->settings.offset);
-            const float low=self->settings.lowerLimit, high=self->settings.upperLimit;
-            float projection=point.dot3(self->settings.plane);
-            if (projection>low) point.addMul4(low-projection,self->settings.plane);
-            if (high>projection) {
-                out.active=false;
-                enabled=false;
-                savedNormal=self->oldNormal;
-                point.setAddMul4(base.getTranslation(),localDirection,self->previous);
-                adjustment=float(target.dot3(self->settings.direction))+self->previous-initialDistance;
-                out.error=0.0f;
-            }
-            NVector delta;
-            delta.setSub4(point,base.getTranslation());
-            self->previous=delta.dot3(self->settings.plane);
-
-        }
-    }
-    const float requested=enabled?1.0f:0.0f;
-    self->weight+=(requested-self->weight)*a.blend;
-    if (self->weight<0.01f) self->weight=0.0f;
-    if (self->weight>0.0f) {
-        {
-            NativeSetup setup;
-            setup.bone0=self->settings.bone0;setup.bone1=self->settings.bone1;setup.bone2=self->settings.bone2;
-            setup.axis=self->settings.axis;setup.point=point;
-            setup.limit=self->settings.limit;setup.gain=self->settings.gain;
-            setup.weight=self->weight;setup.weight2=self->weight;setup.weight3=self->weight;
-            FUN_00cdbae0(setup,pose);
-        }
-        {
-            const NVector& desiredUp=savedNormal;
-            NVector localUp,localNormal;
-            localUp.SetRotatedDirection(inverse.getRotation(),self->settings.direction);
-            localNormal.SetRotatedDirection(inverse.getRotation(),desiredUp);
-            NQuaternion rotation,combined,interpolated;
-            rotation.FUN_00cd9d10(localUp,localNormal);
-            combined.FUN_00c66320(rotation,originalRotation);
-            interpolated.m_vec.setInterpolate4(originalRotation.m_vec,combined.m_vec,self->weight);
-            interpolated.FUN_005611c0();
-            pose.FUN_00cdad80(self->settings.bone2,1).SetBodyOrientation(interpolated);
-        }
-    } else out.error=0.0f;
-    self->oldNormal=savedNormal;
-    self->correction=adjustment;
-}
 
 typedef unsigned long DWORD;
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(DWORD);
@@ -5226,13 +4634,6 @@ __forceinline void copyRotation(const hkQuaternion& q) {*(QuadWords*)&m_vec=*(co
 
 float __cdecl ClampedAcos(float x);
 
-static __forceinline ::__m128 Dot3(::__m128 a, ::__m128 b)
-{
-    ::__m128 x2 = _mm_mul_ps(a, b);
-    ::__m128 s = _mm_add_ss(_mm_shuffle_ps(x2, x2, 0x55), x2);
-    return _mm_add_ss(_mm_shuffle_ps(x2, x2, 0xaa), s);
-}
-
 struct VectorComponentValue
 {
     ::__m128 m_vValue;
@@ -5286,34 +4687,6 @@ public:
  __forceinline void operator=(const ::__m128& x){quad=x;}
  __forceinline operator const ::__m128&()const{return quad;}
 };
-static __forceinline ::__m128 RotatedDir(const ::__m128& q,const ::__m128& v) {
-MathQuad rotation(q);
-MathQuad scalar; scalar.component<0xff>(rotation);
-
-MathQuad input(v);
-MathQuad bias(DAT_010c71e0);
-MathQuad factor; factor.sumProduct(bias,scalar,scalar);
-MathQuad value; value.product(input,factor);
-DotValue wrapped(v);MathQuad projection(Dot3S(rotation.m_vComponents,(::__m128)wrapped).m_vValue); projection.component<0>(projection);
-value.accumulate(projection,rotation);
-MathQuad perpendicular; perpendicular.m_vComponents=_mm_sub_ps(_mm_mul_ps(_mm_shuffle_ps(rotation.m_vComponents,rotation.m_vComponents,0xc9),_mm_shuffle_ps(input.m_vComponents,input.m_vComponents,0xd2)),_mm_mul_ps(_mm_shuffle_ps(input.m_vComponents,input.m_vComponents,0xc9),_mm_shuffle_ps(rotation.m_vComponents,rotation.m_vComponents,0xd2)));
-value.accumulate(scalar,perpendicular);
-value.doubleValue(value);
-return value.m_vComponents;
-}
-static __forceinline ::__m128 TargetRotation(const ::__m128& q, const ::__m128& v)
-{
-    MathQuad rotation(q), input(v), bias(DAT_010c71e0);
-    MathQuad scalar; scalar.component<0xff>(rotation);
-    MathQuad factor; factor.sumProduct(bias,scalar,scalar);
-    MathQuad value; value.product(input,factor);
-    MathQuad projection(rotation.dotted(input).m_vValue); projection.component<0>(projection);
-    value.accumulate(projection,rotation);
-    MathQuad perpendicular; perpendicular.crossed(rotation,input);
-    value.accumulate(scalar,perpendicular);
-    MathQuad result; result.doubleValue(value);
-    return result.m_vComponents;
-}
 struct HingeScalar {
 private: ::__m128 quad;
 public:
@@ -5335,19 +4708,6 @@ struct HingeVector {
  __forceinline void splat(const HingeVector& a) {quad=_mm_shuffle_ps(a.quad,a.quad,0xff);}
  __forceinline void broadcast() {quad=_mm_shuffle_ps(quad,quad,0);}
 };
-static __forceinline ::__m128 HingeRotation(const ::__m128& q,const ::__m128& v) {
-const HingeVector& rotation=*(const HingeVector*)&q;const HingeVector& input=*(const HingeVector*)&v;
-HingeVector bias(DAT_010c71e0);
-HingeVector w;w.splat(rotation);
-HingeVector factor;factor.addMul(bias,w,w);
-HingeVector value;value.mul(input,factor);
-HingeVector projection(rotation.dot(input));projection.broadcast();
-value.accum(projection,rotation);
-HingeVector cross;cross.cross(rotation,input);
-value.accum(w,cross);
-HingeVector out;out.plus(value,value);
-return out.quad;
-}
 static __forceinline ::__m128 ForwardDot(const ::__m128& a,const ::__m128& b) { const ::__m128 x=_mm_mul_ps(b,a); const ::__m128 xy=_mm_add_ss(_mm_shuffle_ps(x,x,0x55),x); const ::__m128 z=_mm_shuffle_ps(x,x,0xaa); return _mm_add_ss(z,xy); }
 static __forceinline ::__m128 RotateForward(const ::__m128& q, const ::__m128& v)
 {
@@ -5419,37 +4779,6 @@ static __forceinline ::__m128 RotatedInverseDir(const ::__m128& q, const ::__m12
     return _mm_add_ps(c.m_vComponents, c.m_vComponents);
 }
 
-static __forceinline ::__m128 Normalized3(const ::__m128& v)
-{
-    const ::__m128 lenSq = Dot3S(v, v).m_vValue;
-    ::__m128 r = _mm_rsqrt_ss(lenSq);
-    ::__m128 inv = _mm_mul_ss(_mm_mul_ss(_mm_set_ss(0.5f), r),
-                            _mm_sub_ss(_mm_set_ss(3.0f), _mm_mul_ss(_mm_mul_ss(lenSq, r), r)));
-    inv = _mm_andnot_ps(_mm_cmpeq_ss(lenSq, _mm_set_ss(0.0f)), inv);
-    return _mm_mul_ps(_mm_shuffle_ps(inv, inv, 0), v);
-}
-
-static __forceinline ::__m128 Normalized3Approx(const ::__m128& v)
-{
-    const ::__m128 lenSq = Dot3S(v, v).m_vValue;
-    ::__m128 r = _mm_rsqrt_ss(lenSq);
-    return _mm_mul_ps(_mm_shuffle_ps(r, r, 0), v);
-}
-
-static __forceinline float ToReal(::__m128 x)
-{
-    float f; (_mm_store_ss)(&f,x); return f;
-}
-
-static __forceinline float Sqrt(float x)
-{
-    return (float)sqrt(x);
-}
-
-template <typename T> static __forceinline T Min2(T a, T b) { return b < a ? b : a; }
-template <typename T> static __forceinline T Max2(T a, T b) { return a > b ? a : b; }
-
-
 __declspec(noinline) void MultiplyQuaternions(const hkQuaternion& q0,const hkQuaternion& q1,hkQuaternion& out)
 {
     const ::__m128 a=q0.m_vec.m_vComponents;
@@ -5474,22 +4803,6 @@ __declspec(noinline) void hkQuaternion::FUN_00c66320(const hkQuaternion& q0, con
 extern "C" {
 ::__m128 _mm_rsqrt_ps(::__m128);::__m128 _mm_cmpeq_ps(::__m128,::__m128);
 ::__m128 _mm_unpacklo_ps(::__m128,::__m128);::__m128 _mm_movelh_ps(::__m128,::__m128);
-}
-__declspec(noinline) void hkQuaternion::FUN_005611c0(){const ::__m128 half=_mm_set_ps1(0.5f),three=_mm_set_ps1(3.0f),zero=_mm_setzero_ps();
-
- const ::__m128 input=m_vec.m_vComponents;
- const ::__m128 x=_mm_shuffle_ps(input,input,0);
- const ::__m128 y=_mm_shuffle_ps(input,input,0x55);
- const ::__m128 z=_mm_shuffle_ps(input,input,0xaa);
- const ::__m128 w=_mm_shuffle_ps(input,input,0xff);
- const ::__m128 length=_mm_add_ps(_mm_add_ps(_mm_mul_ps(x,x),_mm_mul_ps(z,z)),_mm_add_ps(_mm_mul_ps(y,y),_mm_mul_ps(w,w)));
- const ::__m128 mask=_mm_cmpeq_ps(length,zero);
- const ::__m128 root=_mm_rsqrt_ps(length);
- const ::__m128 correction=_mm_sub_ps(three,_mm_mul_ps(_mm_mul_ps(length,root),root));
- const ::__m128 scale=_mm_andnot_ps(mask,_mm_mul_ps(_mm_mul_ps(half,root),correction));
- const ::__m128 lower=_mm_unpacklo_ps(_mm_mul_ps(x,scale),_mm_mul_ps(y,scale));
- const ::__m128 upper=_mm_unpacklo_ps(_mm_mul_ps(z,scale),_mm_mul_ps(w,scale));
- m_vec.m_vComponents=_mm_movelh_ps(lower,upper);
 }
 
 struct hkQsTransform
@@ -5770,211 +5083,3 @@ struct hkBool
 extern "C" double __cdecl acos(double);
 extern "C" double __cdecl fabs(double);
 extern "C" const float DAT_0102b3c8;
-__declspec(noinline) float __cdecl ClampedAcos(float x)
-{
-    if ((float)fabs(x)>=1.0f) return x<0.0f ? DAT_0102b3c8 : 0.0f;
-    return (float)acos(x);
-}
-// @fnv 0x00cdbae0
-extern "C" hkBool __cdecl FUN_00cdbae0(const hkaTwoJointsIkSetup& setup, SkeletonPoseData& pose)
-{
-IkVector4 secondTwist;
-    {
-        ProfBuf* pBuf;
-        pBuf = (ProfBuf*)TlsGetValue(DAT_0126835c);
-        if (pBuf->m_pCur < pBuf->m_pRecordEnd)
-        {
-            ProfRec2* firstMSRW;
-            firstMSRW = (ProfRec2*)pBuf->m_pCur;
-            firstMSRW->m_pName = "LtTWOJOINTSOLVER";
-            firstMSRW->m_pName2 = "StINIT";
-            firstMSRW->setTime();
-            pBuf->m_pCur = (char*)(firstMSRW + 1);
-        }
-    }
-
-    if (!setup.m_bFirstIkOption && !setup.m_bSecondIkOption) return hkBool(true);
-    {
-        hkQsTransform val;
-        val.setIdentity();
-        hkQsTransform secondPos;
-        secondPos.setIdentity();
-
-        if (setup.m_sFourthJointIndex >= 0)
-        {
-            const hkQsTransform& oldRot = pose.getBoneModelSpace(setup.m_sFourthJointIndex);
-            const hkQsTransform& twistMS = pose.getBoneModelSpace(setup.m_sFirstJointIndex);
-            val.setRelativeContext(twistMS,oldRot);
-        }
-
-        if (setup.m_sFifthJointIndex >= 0)
-        {
-            const hkQsTransform& oldRot = pose.getBoneModelSpace(setup.m_sFifthJointIndex);
-            const hkQsTransform& twistMS = pose.getBoneModelSpace(setup.m_sSecondJointIndex);
-            secondPos.setRelativeContext(twistMS,oldRot);
-        }
-
-        if (setup.m_bFirstIkOption)
-        {
-            IkVector4 ptr;
-            {
-                {
-                    ProfBuf* pBuf = (ProfBuf*)TlsGetValue(DAT_0126835c);
-                    if (pBuf->m_pCur < pBuf->m_pRecordEnd)
-                    {
-                        ProfRec* firstMSRW;
-                        firstMSRW = (ProfRec*)pBuf->m_pCur;
-                        firstMSRW->m_pName = "StFIXLENGTH";
-                        firstMSRW->setTime();
-                        pBuf->m_pCur = (char*)(1 + firstMSRW);
-                    }
-                }
-
-                const hkQsTransform& x = pose.getBoneModelSpace(setup.m_sFirstJointIndex);
-                const hkQsTransform& currentCos = pose.getBoneModelSpace(setup.m_sSecondJointIndex);
-                const hkQsTransform& endPos2 = pose.getBoneModelSpace(setup.m_sThirdJointIndex);
-
-                if (0 == setup.m_bSecondIkOption)
-                {
-                    ptr = setup.m_vFirstIkVector;
-                    secondTwist.FUN_00c7f7a0(endPos2, setup.m_vSecondIkVector);
-                }
-                else
-                {
-                    ::__m128 q = RotatedInverseDir(setup.m_qSecondIkRotation.m_vec.m_vComponents, setup.m_vSecondIkVector.m_vComponents);
-                    q = TargetRotation(setup.m_qFirstIkRotation.m_vec.m_vComponents, q);
-                    ptr.m_vComponents = _mm_sub_ps(setup.m_vFirstIkVector.m_vComponents, q);
-                    secondTwist = endPos2.m_vTranslation;
-                }
-
-                float cosTheta;
-                float a;
-                {
-                    const ::__m128 h2 = currentCos.m_vTranslation.m_vComponents;
-                    const ::__m128 endPosMS = x.m_vTranslation.m_vComponents;
-                    IkVector4 firstToSecond; firstToSecond.m_vComponents = _mm_sub_ps(h2, endPosMS);
-                    IkVector4 secondToEnd; secondToEnd.m_vComponents = _mm_sub_ps(secondTwist.m_vComponents, h2);
-                    IkVector4 firstToTarget; firstToTarget.m_vComponents = _mm_sub_ps(ptr.m_vComponents, endPosMS);
-
-                    hkQuaternion firstPos;firstPos.copyRotation(pose.getBoneModelSpace(setup.m_sSecondJointIndex).m_rotation);
-                    firstPos.FUN_005611c0();
-                    const ::__m128 hingeAxis = HingeRotation(firstPos.m_vec.m_vComponents,setup.m_vHingeAxisLS.m_vComponents);
-
-                    
-                    const VectorComponentValue secondMSDot={Dot3(firstToSecond.m_vComponents,hingeAxis)}; const float secondMS=ToReal(secondMSDot.m_vValue);
-                    const ::__m128 h1 = _mm_mul_ps(_mm_shuffle_ps(_mm_load_ss(&secondMS),_mm_load_ss(&secondMS),0), hingeAxis);
-                    IkVector4 f2sProj; f2sProj.m_vComponents = _mm_sub_ps(firstToSecond.m_vComponents, h1);
-                    const VectorComponentValue pRecDot={Dot3(secondToEnd.m_vComponents,hingeAxis)}; const float pRec=ToReal(pRecDot.m_vValue);
-                    const ::__m128 firstMS2 = _mm_mul_ps(_mm_set_ps1(pRec), hingeAxis);
-                    IkVector4 s2eProj; s2eProj.m_vComponents = _mm_sub_ps(secondToEnd.m_vComponents, firstMS2);
-                    const ::__m128 endTargetMS = _mm_sub_ps(h1, firstMS2);
-                    float oldRot2;
-                    const ::__m128 squaredOffset=_mm_mul_ps(endTargetMS,endTargetMS);
-                     
-                     const float minLimit=setup.m_fSecondIkParameter;
-const ::__m128 sy=_mm_shuffle_ps(squaredOffset,squaredOffset,0x55);
-                    const ::__m128 sz=_mm_shuffle_ps(squaredOffset,squaredOffset,0xaa);
-                    const ::__m128 xy=_mm_add_ss(sy,squaredOffset);
-                    (_mm_store_ss)(&oldRot2,_mm_add_ss(sz,xy));
-
-                    const float hingeLenSq = ToReal(Dot3(firstToTarget.m_vComponents, firstToTarget.m_vComponents)) - oldRot2;
-                    const float hingeAxis2 = ToReal(Dot3(f2sProj.m_vComponents, f2sProj.m_vComponents));
-                    const float secondMSRW = ToReal(Dot3(s2eProj.m_vComponents, s2eProj.m_vComponents));
-                    cosTheta = Max2(setup.m_fFirstIkParameter, Min2((float)((hingeLenSq - hingeAxis2 - secondMSRW) / (-2.0 * Sqrt(hingeAxis2) * Sqrt(secondMSRW))),minLimit));
-
-                    const ::__m128 y = _mm_xor_ps(Normalized3(f2sProj.m_vComponents), DAT_010c4c00);
-                    const ::__m128 d1 = Normalized3(s2eProj.m_vComponents);
-                    (_mm_store_ss)(&a, Dot3(y, d1));
-                }
-                {
-                    hkQsTransform& secondRot = pose.FUN_00cdad80(setup.m_sSecondJointIndex, 1);
-                    IkVector4 pForm;
-                    const hkQuaternion fromDir = secondRot.m_rotation; 
-                    pForm.m_vComponents = Normalized3Approx(RotatedDir(fromDir.m_vec.m_vComponents, setup.m_vHingeAxisLS.m_vComponents));
-
-                    float firstMS;
-                    firstMS = ClampedAcos(cosTheta) - ClampedAcos(a);
-                    firstMS = setup.m_fFourthIkParameter * firstMS;
-                    hkQuaternion s2eN;
-                    s2eN.FUN_00cb2450(pForm, firstMS);
-                    secondRot.m_rotation.FUN_00c66320(s2eN, fromDir);
-                    secondRot.m_rotation.FUN_005611c0();
-                }
-            }
-
-                {
-                    ProfBuf* pBuf = (ProfBuf*)TlsGetValue(DAT_0126835c);
-                    if (pBuf->m_pCur < pBuf->m_pRecordEnd)
-                    {
-                        ProfRec* firstMSRW;
-                        firstMSRW = (ProfRec*)pBuf->m_pCur;
-                        firstMSRW->m_pName = "StFIXDIRECTION";
-                        firstMSRW->setTime();
-                        pBuf->m_pCur = (char*)(1 + firstMSRW);
-                    }
-                }
-            {
-
-                IkVector4 endMS;
-                const hkQsTransform& b = pose.getBoneModelSpace(setup.m_sFirstJointIndex);
-                if (setup.m_bSecondIkOption)
-                {
-                    endMS = pose.getBoneModelSpace(setup.m_sThirdJointIndex).m_vTranslation;
-                }
-                else
-                {
-                    endMS.FUN_00c7f7a0(pose.getBoneModelSpace(setup.m_sThirdJointIndex), setup.m_vSecondIkVector);
-                }
-
-IkVector4 jointMS; jointMS.m_vComponents = Normalized3(_mm_sub_ps(endMS.m_vComponents, b.m_vTranslation.m_vComponents));
-hkQuaternion kIter;
-{ IkVector4 desired; desired.m_vComponents = Normalized3(_mm_sub_ps(ptr.m_vComponents, b.m_vTranslation.m_vComponents));
-kIter.FUN_00cdb910(setup.m_fThirdIkParameter, jointMS, desired); }
-
-                hkQsTransform& firstTwist = pose.FUN_00cdad80(setup.m_sFirstJointIndex, 1);
-                const hkQuaternion d2 = firstTwist.m_rotation;
-                firstTwist.m_rotation.FUN_00c66320(kIter, d2);
-                firstTwist.m_rotation.FUN_005611c0();
-            }
-            }
-
-        if (setup.m_bSecondIkOption)
-        {
-            hkQuaternion hd;
-            hd.FUN_00c74ac0(setup.m_qFirstIkRotation, setup.m_qSecondIkRotation);
-            const hkQsTransform& endPos2 = pose.getBoneModelSpace(setup.m_sThirdJointIndex);
-            hkQsTransform j;
-            j = endPos2;
-            j.m_rotation.FUN_00cb2850(endPos2.m_rotation, hd, setup.m_fFifthIkParameter);
-            pose.setBoneModelSpace(setup.m_sThirdJointIndex, j);
-        }
-
-        if (setup.m_sFourthJointIndex >= 0)
-        {
-            hkQsTransform oldRot;
-            oldRot.setMulFirst(pose.getBoneModelSpace(setup.m_sFirstJointIndex),val);
-            ((hkaPoseTyped&)pose).setBoneModelSpace(setup.m_sFourthJointIndex, oldRot);
-        }
-
-        if (setup.m_sFifthJointIndex >= 0)
-        {
-            hkQsTransform oldRot;
-            oldRot.setMulContext(pose.getBoneModelSpace(setup.m_sSecondJointIndex), secondPos);
-            pose.setBoneModelSpace(setup.m_sFifthJointIndex, oldRot,true);
-        }
-    }
-
-    {
-        ProfBuf* pBuf;
-        pBuf = (ProfBuf*)TlsGetValue(DAT_0126835c);
-        if (pBuf->m_pCur < pBuf->m_pRecordEnd)
-        {
-            ProfRec* firstMSRW;
-            firstMSRW = (ProfRec*)pBuf->m_pCur;
-            firstMSRW->m_pName = "lt";
-            firstMSRW->setTime();
-            pBuf->m_pCur = (char*)(firstMSRW + 1);
-        }
-    }
-    return hkBool(true);
-}

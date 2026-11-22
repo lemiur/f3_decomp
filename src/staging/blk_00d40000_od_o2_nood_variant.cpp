@@ -98,18 +98,6 @@ struct D51Writer
     int FUN_00d51c30(const D51Input& input);
 };
 
-// @fnv 0x00d51c30
-int D51Writer::FUN_00d51c30(const D51Input& input)
-{
-    m_stream->m_commands.AddBack(8);
-    int index = m_stream->m_kShapeVectorData.GetLogicalSize();
-    m_stream->m_kShapeVectorData.AddBack(input.m_kPointA);
-    m_stream->m_kShapeVectorData.AddBack(input.m_kPointB);
-    m_stream->m_kShapeVectorData.AddBack(input.m_iThirdValue);
-    m_bValueAt0C = true;
-    return index;
-}
-
 namespace fnv_00d52640 {
 union __declspec(intrin_type) __declspec(align(16)) __m128
 {
@@ -204,25 +192,6 @@ struct FUN_00d52640_c
     int FUN_00d52640(bool flag, const hkReferencedObject* object);
 };
 
-// @fnv 0x00d52640
-int FUN_00d52640_c::FUN_00d52640(bool flag, const hkReferencedObject* object)
-{
-    m_pStreamWriter->m_commands.AddBack(0xe);
-    m_pStreamWriter->m_commands.AddBack(flag);
-
-    int index = m_pStreamWriter->m_kShapeVectorData.m_iElementCount;
-    hkVector4 v;
-    v.set((float)m_pStreamWriter->m_kTrackedObjects.m_iElementCount, 0.0f, 0.0f, 0.0f);
-    object->FUN_00c90510();
-    m_pStreamWriter->m_kShapeVectorData.AddBack(v);
-    m_pStreamWriter->m_kTrackedObjects.AddBack(object);
-
-    S00d52640_Writer* writer = m_pStreamWriter;
-    writer->unk08 += 1;
-    writer->unk04 += 0x40;
-    writer->unk0c += 3;
-    return index;
-}
 }  // namespace fnv_00d52640
 
 namespace fnv_00d56470 {
@@ -271,17 +240,6 @@ struct FUN_00d56470_cls
     FUN_00d56470_cls* FUN_00d56470(int bCompute);
 };
 
-// @fnv 0x00d56470
-FUN_00d56470_cls* FUN_00d56470_cls::FUN_00d56470(int bCompute)
-{
-    if (bCompute)
-    {
-        const int iTranslated = !m_vTranslation.equals3(DAT_01267e30, DAT_01017d00);
-        const int iRotated = (m_rotation.GetAngle() < DAT_01017d00) ? 0 : 2;
-        reinterpret_cast<int*>(&m_vTranslation)[3] = iRotated | iTranslated | 0x3f000000;
-    }
-    return this;
-}
 }  // namespace fnv_00d56470
 
 struct __declspec(align(16)) hkpAgent3FuncsD40
@@ -310,22 +268,6 @@ class hkpCollisionDispatcherD40
 };
 
 void __cdecl FUN_00d400f0(void* buf);
-
-// @fnv 0x00d40130
-void __cdecl FUN_00d40130(hkpCollisionDispatcherD40* self)
-{
-    hkpAgent3FuncsD40 kFuncs;
-    kFuncs.m_bIsPredictive = false;
-    kFuncs.m_bAgentFlag1 = false;
-    kFuncs.m_bAgentFlag2 = false;
-    kFuncs.m_pAgentFunction7 = 0;
-    kFuncs.m_pAgentFunction8 = 0;
-    kFuncs.m_pUpdateFilterFunc = 0;
-    kFuncs.m_pAgentFunction10 = 0;
-    kFuncs.m_pAgentFunction11 = 0;
-    FUN_00d400f0(&kFuncs);
-    self->AddEntry(kFuncs, 4, 4);
-}
 
 struct Handle_d49550
 {
@@ -472,13 +414,6 @@ struct __declspec(align(16)) FUN_00c9ce00
     int unk21C;
 };
 extern int DAT_010c7888;
-// @fnv 0x00d49550
-int* __cdecl FUN_00d49550()
-{
-    Handle_d49550 kHandle = {0};
-    FUN_00c9ce00 kObject(kHandle);
-    return &DAT_010c7888;
-}
 
 struct FinishingFlag
 {
@@ -658,15 +593,6 @@ struct __declspec(align(16)) HolderD4B
     void FUN_00d56f10(ZeroD4B arg);
 };
 
-// @fnv 0x00d4b330
-int FUN_00d4b330()
-{
-    HolderD4B holder;
-    ZeroD4B z = {0};
-    holder.FUN_00d56f10(z);
-    return *(int*)&holder.unk00;
-}
-
 namespace fnv_00d4be60 {
 struct FinishingFlag
 {
@@ -810,13 +736,6 @@ struct FnvCpu_FUN_00d4f7f0_CpuObject
     __m128 field40;
     void FUN_00d4f7f0(FnvCpu_FUN_00d4f7f0_CpuData0* input0);
 };
-// @fnv 0x00d4f7f0
-void FnvCpu_FUN_00d4f7f0_CpuObject::FUN_00d4f7f0(FnvCpu_FUN_00d4f7f0_CpuData0* input0)
-{
-    input0->field00 = this->field20;
-    input0->field10 = this->field30;
-    input0->field20 = this->field40;
-}
 
 struct FnvCpu_FUN_00d4f820_CpuData0
 {
@@ -851,13 +770,6 @@ struct FnvCpu_FUN_00d4f820_CpuObject
     __m128 field70;
     void FUN_00d4f820(FnvCpu_FUN_00d4f820_CpuData0* input0);
 };
-// @fnv 0x00d4f820
-void FnvCpu_FUN_00d4f820_CpuObject::FUN_00d4f820(FnvCpu_FUN_00d4f820_CpuData0* input0)
-{
-    input0->field00 = this->field50;
-    input0->field10 = this->field60;
-    input0->field20 = this->field70;
-}
 
 namespace fnv_00d51890 {
 struct HkRouterD51
@@ -927,16 +839,6 @@ struct HkOwnerD51
     int FUN_00d51890(const HkVecD51& v, int index);
 };
 
-// @fnv 0x00d51890
-int HkOwnerD51::FUN_00d51890(const HkVecD51& v, int index)
-{
-    m_core->m_auiHeaderValues.AddBack(3);
-    m_core->m_auiHeaderValues.AddBack(index);
-    int result = m_core->m_vecs.m_iElementCount;
-    m_core->m_vecs.AddBack(v);
-    m_flags[index] = 1;
-    return result;
-}
 }  // namespace fnv_00d51890
 
 namespace fnv_00d51d40 {
@@ -994,41 +896,6 @@ struct GeometryBuilder
     bool updated;
     unsigned int FUN_00d51d40(const __m128* vectors);
 };
-// @fnv 0x00d51d40
-unsigned int GeometryBuilder::FUN_00d51d40(const __m128* vectors)
-{
-    IndexArray* indexBuffer = &arrays->indices;
-    HeapContext* heap = FUN_00c85750();
-    if (indexBuffer->count == (indexBuffer->capacityFlags & 0x3fffffff))
-        ResizeAudioStream(heap->allocator, indexBuffer, 4);
-    hkConstructWithCopy(indexBuffer->elements + indexBuffer->count, 1, 9u);
-    ++indexBuffer->count;
-
-    unsigned int previousCount = arrays->vertices.count;
-    VectorArray* positions = &arrays->vertices;
-    heap = FUN_00c85750();
-    if (positions->count == (positions->capacityFlags & 0x3fffffff))
-        ResizeAudioStream(heap->allocator, positions, 16);
-    positions->elements[positions->count] = vectors[0];
-    ++positions->count;
-
-    positions = &arrays->vertices;
-    heap = FUN_00c85750();
-    if (positions->count == (positions->capacityFlags & 0x3fffffff))
-        ResizeAudioStream(heap->allocator, positions, 16);
-    positions->elements[positions->count] = vectors[1];
-    ++positions->count;
-
-    positions = &arrays->vertices;
-    heap = FUN_00c85750();
-    if (positions->count == (positions->capacityFlags & 0x3fffffff))
-        ResizeAudioStream(heap->allocator, positions, 16);
-    positions->elements[positions->count] = vectors[2];
-    ++positions->count;
-
-    updated = true;
-    return previousCount;
-}
 }  // namespace fnv_00d51d40
 
 namespace fnv_00d52000 {
@@ -1089,15 +956,6 @@ struct D52Class
     bool m_dirty;
     int FUN_00d52000(const VecD52& v);
 };
-// @fnv 0x00d52000
-int D52Class::FUN_00d52000(const VecD52& v)
-{
-    m_pOwnerObject->m_auiHeaderValues.AddBack(1);
-    int index = m_pOwnerObject->m_vecs.GetLogicalSize();
-    m_pOwnerObject->m_vecs.AddBack(v);
-    m_dirty = true;
-    return index;
-}
 }  // namespace fnv_00d52000
 
 extern "C" __m128 _mm_setr_ps(float e0, float e1, float e2, float e3);
@@ -1146,20 +1004,6 @@ struct D529E0_Builder
     D529E0_Batch* m_batch;
     int FUN_00d529e0(unsigned char a1, float a2);
 };
-// @fnv 0x00d529e0
-int D529E0_Builder::FUN_00d529e0(unsigned char a1, float a2)
-{
-    m_batch->m_commands.AddBack(0x15);
-    m_batch->m_commands.AddBack(a1);
-    __m128 v = _mm_setr_ps(a2, DAT_01011d78, DAT_01011d78, DAT_01011d78);
-    int index = m_batch->m_kShapeVectorData.m_iElementCount;
-    m_batch->m_kShapeVectorData.AddBack(v);
-    D529E0_Batch* batch = m_batch;
-    batch->m_04 += 0x40;
-    batch->m_08 += 1;
-    batch->m_0C += 2;
-    return index;
-}
 
 extern "C"
 {
@@ -1227,21 +1071,6 @@ struct BasisPair
     Vec normalB;
     const Vec* FUN_00d52ce0(const Vec* a, const Vec* c, const Vec* b, const Vec* d);
 };
-// @fnv 0x00d52ce0
-const Vec* BasisPair::FUN_00d52ce0(const Vec* a, const Vec* c, const Vec* b, const Vec* d)
-{
-    axisA.copy(*a);
-    axisA.normalize();
-    axisB.copy(*b);
-    axisB.normalize();
-    normalA.setCross(*a, *b);
-    axisC.copy(*c);
-    axisC.normalize();
-    axisD.copy(*d);
-    axisD.normalize();
-    normalB.set(Vec::cross(c->get(), d->get()));
-    return c;
-}
 
 extern "C"
 {
@@ -1346,48 +1175,11 @@ void Frame172::FUN_00d53060(int first,int second,const Vector172* direction)
 }
 
 
-__forceinline __m128 normalize3(const __m128& v)
-{
-    __m128 square = _mm_mul_ps(v, v);
-    __m128 y = _mm_shuffle_ps(square, square, 0x55);
-    y = _mm_add_ss(y, square);
-    square = _mm_shuffle_ps(square, square, 0xaa);
-    square = _mm_add_ss(square, y);
-    __m128 reciprocal = _mm_rsqrt_ss(square);
-    __m128 correction = _mm_mul_ss(square, reciprocal);
-    correction = _mm_mul_ss(correction, reciprocal);
-    correction = _mm_sub_ss(_mm_set_ss(3.0f), correction);
-    __m128 factor = _mm_mul_ss(_mm_set_ss(0.5f), reciprocal);
-    factor = _mm_mul_ss(factor, correction);
-    __m128 mask = _mm_cmpeq_ss(square, _mm_set_ss(0.0f));
-    factor = _mm_andnot_ps(mask, factor);
-    factor = _mm_shuffle_ps(factor, factor, 0);
-    return _mm_mul_ps(factor, v);
-}
-__forceinline __m128 cross3(const __m128& b, const __m128& a)
-{
-    return _mm_sub_ps(_mm_mul_ps(_mm_shuffle_ps(b, b, 0xd2), _mm_shuffle_ps(a, a, 0xc9)),
-                      _mm_mul_ps(_mm_shuffle_ps(a, a, 0xd2), _mm_shuffle_ps(b, b, 0xc9)));
-}
 // Reuse the current source's vector layout and basis storage without redefining either.
 struct BasisPairSetup : BasisPair
 {
     const __m128& FUN_00d4f5d0(const __m128&, const __m128&, const __m128&, const __m128&);
 };
-// @fnv 0x00d4f5d0
-const __m128& BasisPairSetup::FUN_00d4f5d0(const __m128& referenceA, const __m128& referenceB, const __m128& inputAxisA,
-                                           const __m128& inputAxisB)
-{
-    axisA.quad = normalize3(inputAxisA);
-    axisB.quad = referenceA;
-    axisB.quad = normalize3(axisB.quad);
-    normalA.quad = cross3(axisB.quad, axisA.quad);
-    axisC.quad = normalize3(inputAxisB);
-    axisD.quad = referenceB;
-    axisD.quad = normalize3(axisD.quad);
-    normalB.quad = cross3(axisD.quad, axisC.quad);
-    return inputAxisB;
-}
 
 namespace WorldLinearDof {
 
@@ -1402,18 +1194,6 @@ struct Writer
     int FUN_00d51a50(const D51Vector4& direction, int axis);
 };
 
-// @fnv 0x00d51a50
-int Writer::FUN_00d51a50(const D51Vector4& direction, int axis)
-{
-    m_stream->m_commands.AddBack(5);
-    m_stream->m_commands.AddBack(axis);
-    int index = m_stream->m_kShapeVectorData.GetLogicalSize();
-    m_stream->m_kShapeVectorData.AddBack(direction);
-    m_specifiedA[axis] = 1;
-    m_specifiedB[axis] = 1;
-    return index;
-}
-
 }
 
 struct PivotBWriter
@@ -1426,13 +1206,3 @@ struct PivotBWriter
 
     int FUN_00d520a0(const D51Vector4& pivot);
 };
-
-// @fnv 0x00d520a0
-int PivotBWriter::FUN_00d520a0(const D51Vector4& pivot)
-{
-    m_stream->m_commands.AddBack(2);
-    int index = m_stream->m_kShapeVectorData.GetLogicalSize();
-    m_stream->m_kShapeVectorData.AddBack(pivot);
-    m_pivotBSet = true;
-    return index;
-}

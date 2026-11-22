@@ -6587,10 +6587,6 @@ struct CAC980_Twin_class
     void* m_30;
     void* TwinGet();
 };
-void* CAC980_Twin_class::TwinGet()
-{
-    return m_30;
-}
 struct GetterCAC990
 {
     int unk00;

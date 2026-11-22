@@ -1,4 +1,4 @@
-// staging/blk_00ca0000_o2_rtm_variant.cpp: hkQuaternion, AryType, RayCaster_rc1c, VelocityController and more (19 functions)
+// staging/blk_00ca0000_o2_rtm_variant.cpp: hkQuaternion, AryType, RayCaster_rc1c, VelocityController and more (7 functions)
 #include <xmmintrin.h>
 // src/staging/blk_00ca0000_o2_rtm_variant.cpp - RTM variant unit created 2026-11-01 by rtm_route.py: community reworks of src/staging/blk_00ca0000_o2.cpp that match byte for byte only
 // with VC9 RTM (cl 15.00.21022.08, the compiler the game was built with). Declarations copied from that unit's skeleton.
@@ -6589,10 +6589,6 @@ struct CAC980_Twin_class
     void* m_30;
     void* TwinGet();
 };
-void* CAC980_Twin_class::TwinGet()
-{
-    return m_30;
-}
 struct GetterCAC990
 {
     int unk00;
@@ -9077,17 +9073,6 @@ struct World
     Mgr* m_pManager;
 };
 
-// @fnv 0x00ca0b70
-void __stdcall FUN_00ca0b70(void* a1, Collidable* a2, void* a3)
-{
-    LocalEvent ev;
-    ev.m_a1 = a1;
-    ev.m_a2 = a2;
-
-    World* world = a2->getOwner()->m_pOwningWorld;
-    Mgr* mgr = world ? world->m_pManager : 0;
-    mgr->m_target->v1c(ev);
-}
 }  // namespace fnv_00ca0b70
 
 #include <xmmintrin.h>
@@ -9162,10 +9147,6 @@ struct hkpWorldObject_rc1c
         return m_kCollidable.m_uiCollisionFilterData;
     }
 };
-inline const hkpWorldObject_rc1c* getBody(const hkpCollidable_rc1c* c)
-{
-    return c->getType() == 1 ? (const hkpWorldObject_rc1c*)c->getOwner() : 0;
-}
 
 struct hkpWorldRayCastOutput_rc1c
 {
@@ -9294,69 +9275,6 @@ struct RayCaster_rc1c
     hkBool FUN_00ca1c50(const hkpWorld_rc1c* world, const hkVector4_rc1c& from, const hkVector4_rc1c& to,
                         hkVector4_rc1c& pointOut, hkVector4_rc1c& normalOut);
 };
-
-// @fnv 0x00ca1c50
-hkBool RayCaster_rc1c::FUN_00ca1c50(const hkpWorld_rc1c* world, const hkVector4_rc1c& from, const hkVector4_rc1c& to,
-                                    hkVector4_rc1c& pointOut, hkVector4_rc1c& normalOut)
-{
-    bool found = false;
-    hkpWorldRayCastInput_rc1c input;
-    hkpAllRayHitCollector_rc1c collector;
-    RayFilter_rc1c filter(0);
-    filter.AddObjectReference(m_systemGroup);
-    filter.setLayer(29);
-
-    input.m_vFrom = from;
-    input.m_vTo = to;
-    input.m_uiFilterInfo = filter;
-    collector.reset();
-    world->FUN_00cf2510(input, collector);
-    for (int i = 0; i < collector.m_kHits.m_iElementCount && !found; i++)
-    {
-        hkpWorldRayCastOutput_rc1c hit = collector.m_kHits.m_data[i];
-        const hkpWorldObject_rc1c* owner = getBody(hit.m_pRootCollidable);
-        if (owner)
-        {
-            {
-                RayFilter_rc1c hitFilter(owner->GetFilterInfoForKey());
-                if (!hitFilter.bip())
-                {
-                    pointOut.setInterpolate4(input.m_vFrom, input.m_vTo, hit.m_fHitFraction);
-                    normalOut = hit.m_vHitNormal;
-                    found = true;
-                }
-            }
-        }
-    }
-
-    if (!found)
-    {
-        input.m_vFrom = to;
-        input.m_vTo = from;
-        input.m_uiFilterInfo = filter;
-        input.m_bEnableShapeCollectionFilter = true;
-        collector.reset();
-        world->FUN_00cf2510(input, collector);
-        for (int i = 0; i < collector.m_kHits.m_iElementCount && !found; i++)
-        {
-            hkpWorldRayCastOutput_rc1c hit = collector.m_kHits.m_data[i];
-            const hkpWorldObject_rc1c* owner = getBody(hit.m_pRootCollidable);
-            if (owner)
-            {
-                {
-                    RayFilter_rc1c hitFilter(owner->GetFilterInfoForKey());
-                    if (!hitFilter.bip())
-                    {
-                        pointOut.setInterpolate4(input.m_vFrom, input.m_vTo, hit.m_fHitFraction);
-                        normalOut = hit.m_vHitNormal;
-                        found = true;
-                    }
-                }
-            }
-        }
-    }
-    return found;
-}
 
 struct Ca35Owner;
 struct Ca35Record
@@ -9514,34 +9432,6 @@ struct S00ca4120_Geom
     unsigned int unk9c, count;
     void FUN_00ca4120(const S00ca4120_Xf* input);
 };
-// @fnv 0x00ca4120
-void S00ca4120_Geom::FUN_00ca4120(const S00ca4120_Xf* input)
-{
-    *(::__m128*)&transform.c0.q = *(::__m128 const*)&input->c0.q;
-    *(::__m128*)&transform.c1.q = *(::__m128 const*)&input->c1.q;
-    *(::__m128*)&transform.c2.q = *(::__m128 const*)&input->c2.q;
-    *(::__m128*)&transform.c3.q = *(::__m128 const*)&input->c3.q;
-    *(::__m128*)&minimum.q = (_mm_setr_ps)(3.40282e38F, 3.40282e38F, 3.40282e38F, 0.0f);
-    *(::__m128*)&maximum.q = (_mm_setr_ps)(-3.40282e38F, -3.40282e38F, -3.40282e38F, 0.0f);
-    unsigned int n = count;
-    const S00ca4120_Vec& s = scale;
-    for (unsigned int i = 0; i < n; ++i)
-    {
-        S00ca4120_Mesh* mesh = entries[i].mesh;
-        S00ca4120_Pt* p = mesh->positions;
-        unsigned int m = mesh->count;
-        for (unsigned int j = 0; j < m; ++j)
-        {
-            S00ca4120_Vec pt;
-            pt.set(p[j].x * DAT_012682c8, p[j].y * DAT_012682c8, p[j].z * DAT_012682c8, 0.0f);
-            pt.mul4(s);
-            S00ca4120_Vec r;
-            r.FUN_00c7f640(input, &pt);
-            minimum.setMin4(minimum, r);
-            maximum.setMax4(maximum, r);
-        }
-    }
-}
 
 #include <xmmintrin.h>
 
@@ -10051,15 +9941,6 @@ struct FUN_00cbd9e0_cls
     CBD9E0V4 m_v90;
 };
 
-// @fnv 0x00cbd9e0
-void FUN_00cbd9e0(float scale, FUN_00cbd9e0_cls* p)
-{
-    if (p == 0 || scale == 1.0f)
-        return;
-    p->m_v50.mul(scale);
-    p->m_v90.mul(scale);
-}
-
 extern int DAT_010c91ec;
 
 struct S00cbe7b0_Obj
@@ -10086,41 +9967,6 @@ struct S00cbe7b0_Obj
     unsigned char m_a2;
     S00cbe7b0_Obj* FUN_00cbe7b0();
 };
-
-// @fnv 0x00cbe7b0
-S00cbe7b0_Obj* S00cbe7b0_Obj::FUN_00cbe7b0()
-{
-    m_6 = 1;
-    m_8 = 0;
-    m_vtbl = &DAT_010c91ec;
-    reinterpret_cast< ::FUN_00cbe820_cls*>(reinterpret_cast<char*>(this) + 0x10)->FUN_00cbe820();
-    ::__m128 z = (_mm_setzero_ps)();
-    (_mm_store_ps)((float*)&q20, z);
-    (_mm_store_ps)((float*)&q30, z);
-    (_mm_store_ps)((float*)&q40, z);
-    q20.m128_f32[0] = 1.0f;
-    q30.m128_f32[1] = 1.0f;
-    q40.m128_f32[2] = 1.0f;
-    (_mm_store_ps)((float*)&q50, z);
-    (_mm_store_ps)((float*)&q60, z);
-    (_mm_store_ps)((float*)&q70, z);
-    (_mm_store_ps)((float*)&q80, z);
-    q60.m128_f32[0] = 1.0f;
-    q70.m128_f32[1] = 1.0f;
-    q80.m128_f32[2] = 1.0f;
-    (_mm_store_ps)((float*)&q90, z);
-    m_a2 = 0;
-    return this;
-}
-
-static inline ::NiPoint3 Scale_00cbe8d0(::NiPoint3 p, float fScalar)
-{
-    ::NiPoint3 kResult;
-    kResult.x = p.x * fScalar;
-    kResult.y = p.y * fScalar;
-    kResult.z = p.z * fScalar;
-    return kResult;
-}
 
 union BoundCenter
 {
@@ -10564,46 +10410,6 @@ class BoundOwner
     void FUN_00cbe8d0();
 };
 
-// @fnv 0x00cbe8d0
-void BoundOwner::FUN_00cbe8d0()
-{
-    if (DAT_01268440 || !m_pkNode)
-        return;
-
-    BoundCenter kTargetCenter;
-    float fRadius;
-    BoundSource* pkSource = m_pkNode->m_pkSource;
-    BoundItem* pkItem;
-    if (pkSource && (pkItem = pkSource->FUN_00c85c80(0)) != 0)
-    {
-        BoundView_00cbe8d0* __restrict source = pkItem->m_pkBound ? pkItem->m_pkBound : &DAT_011f4288;
-        BoundView_00cbe8d0 kBound = *source;
-        kTargetCenter.m_kPoint = kBound.m_kCenter;
-        fRadius = kBound.m_fBoundRadius;
-    }
-    else
-    {
-        kTargetCenter.m_vComponents = *m_pkNode->FUN_00621a40();
-        kTargetCenter.m_kPoint = Scale_00cbe8d0(kTargetCenter.m_kPoint, DAT_011b21e8);
-        fRadius = 1.0f;
-    }
-
-    ScaledHolder* pkHolder = m_pkHolder;
-    ScaledList* pkList = 0;
-    if (pkHolder)
-    {
-        FUN_00a29680();
-        pkList = (ScaledList*)pkHolder;
-        FUN_00a29680();
-    }
-    Scaled* pkScaled = pkList ? pkList->m_pkScaled : 0;
-
-    if (!(fRadius > 0.0f))
-        fRadius = 1.0f;
-    pkScaled->m_fScale = DAT_0126844c * fRadius;
-    FUN_006230f0(reinterpret_cast<const ::NiPoint3*>(&kTargetCenter.m_bytes[0]));
-}
-
 namespace TriStripIntrinsics {
 extern "C" __m128 _mm_mul_ps(__m128, __m128);
 extern "C" __m128 _mm_load_ps(float const*);
@@ -10723,56 +10529,6 @@ struct S00ca45b0_Shape
     S00ca45b0_Tri* FUN_00ca45b0(unsigned int key, S00ca45b0_Alloc* alloc);
 };
 
-// @fnv 0x00ca45b0
-S00ca45b0_Tri* S00ca45b0_Shape::FUN_00ca45b0(unsigned int key, S00ca45b0_Alloc* alloc)
-{
-    S00ca45b0_Chunk* chunk = m_slots[key >> 20].m_pCurrentMemoryChunk;
-    unsigned short numStrips = chunk->m_numStrips;
-    unsigned short* idx = chunk->FUN_00a75f10();
-    unsigned short* lengths = chunk->m_pStripIndices;
-    float* verts = chunk->m_verts;
-    unsigned short s = 0;
-    unsigned int t = key & 0xfffff;
-    for (; s < numStrips; s++)
-    {
-        if (t < (unsigned int)(lengths[s] - 2))
-            break;
-        t -= lengths[s] - 2;
-        idx += lengths[s];
-    }
-    unsigned short* p = &idx[t];
-    unsigned short i0 = *p;
-    unsigned short i1 = *++p;
-    unsigned short i2 = *++p;
-    if (i0 == i1 || i0 == i2 || i1 == i2)
-        return 0;
-    const float* a = &verts[i0 * 3];
-    const float* b = &verts[i1 * 3];
-    const float* c = &verts[i2 * 3];
-    S00ca45b0_Tri* tri = alloc ? alloc->FUN_00ca39a0(m_fSphereRadius) : 0;
-    S00ca45b0_Vec v;
-    float* q = v.m_vComponents.m128_f32;
-    q[0] = *(float volatile*)&a[0] * DAT_012682c8;
-    q[1] = a[1] * DAT_012682c8;
-    q[2] = a[2] * DAT_012682c8;
-    q[3] = 0.0f;
-    v.mul4(m_vScale);
-    tri->m_v0 = v;
-    q[0] = b[0] * DAT_012682c8;
-    q[1] = b[1] * DAT_012682c8;
-    q[2] = b[2] * DAT_012682c8;
-    q[3] = 0.0f;
-    v.mul4(m_vScale);
-    tri->m_v1 = v;
-    q[0] = c[0] * DAT_012682c8;
-    q[1] = c[1] * DAT_012682c8;
-    q[2] = c[2] * DAT_012682c8;
-    q[3] = 0.0f;
-    v.mul4(m_vScale);
-    tri->m_v2 = v;
-    return tri;
-}
-
 namespace PointBoundsSse {
 extern "C" __m128 _mm_load_ps1(float const* p);
 extern "C" __m128 _mm_min_ps(__m128 a, __m128 b);
@@ -10809,34 +10565,6 @@ struct BoundsArg
     BoundsArg(PointBounds* v) : p(v)
     {}
 };
-
-// @fnv 0x00cbebf0
-void FUN_00cbebf0(PointArrayArg points, int n, BoundsArg bounds)
-{
-    if (!n)
-    {
-        PointBounds* pd = bounds.p;
-        _ReadWriteBarrier();
-        pd->min.quad = PointBoundsSse::_mm_load_ps1(&DAT_0104da48);
-        pd->max.quad = PointBoundsSse::_mm_load_ps1(&DAT_0104e148);
-    }
-    else
-    {
-        BoundVector** pa = points.p;
-        __m128 first = pa[0]->quad;
-        _ReadWriteBarrier();
-        PointBounds* pd = bounds.p;
-        pd->min.quad = first;
-        pd->max.quad = pa[0]->quad;
-        for (int i = 1; i < n; ++i)
-        {
-            pd->min.quad = PointBoundsSse::_mm_min_ps(pa[i]->quad, pd->min.quad);
-            pd->max.quad = PointBoundsSse::_mm_max_ps(pa[i]->quad, pd->max.quad);
-        }
-        pd->min.w = 0.0f;
-        pd->max.w = 0.0f;
-    }
-}
 
 namespace StripsBoundsIntrinsics {
 extern "C"
@@ -10918,53 +10646,6 @@ class StripsBoundsShape
     void FUN_00ca4280(const StripsBoundsTransform& t, float tolerance, StripsBoundsAabb& out);
 };
 
-// @fnv 0x00ca4280
-void StripsBoundsShape::FUN_00ca4280(const StripsBoundsTransform& t, float tolerance, StripsBoundsAabb& out)
-{
-    if (m_cachedMin.getX() != 3.402820018375656e+38 && m_pAccessManager.FUN_00cb2160(t, 0.001f).m_cBooleanValue)
-    {
-        out.m_kMinimumCorner.m_vComponents.simd = m_cachedMin.m_vComponents.simd;
-        out.m_kMaximumCorner.m_vComponents.simd = m_cachedMax.m_vComponents.simd;
-    }
-    else
-    {
-        out.m_kMinimumCorner.m_vComponents.simd =
-            StripsBoundsIntrinsics::_mm_setr_ps(3.40282e38f, 3.40282e38f, 3.40282e38f, 0.0f);
-        out.m_kMaximumCorner.m_vComponents.simd =
-            StripsBoundsIntrinsics::_mm_setr_ps(-3.40282e38f, -3.40282e38f, -3.40282e38f, 0.0f);
-        unsigned n = count;
-        const StripsBoundsVector& scale = m_vScale;
-        for (unsigned i = 0; i < n; ++i)
-        {
-            StripsBoundsData* data = entries[i].data;
-            const StripsBoundsVertex* p = data->vertices;
-            unsigned vertices = data->count;
-            for (unsigned j = 0; j < vertices; ++j)
-            {
-                StripsBoundsVector v;
-                v.m_vComponents.lanes[0] = p[j].x * DAT_012682c8;
-                v.m_vComponents.lanes[1] = p[j].y * DAT_012682c8;
-                v.m_vComponents.lanes[2] = p[j].z * DAT_012682c8;
-                v.m_vComponents.lanes[3] = 0.0f;
-                v.m_vComponents.simd =
-                    StripsBoundsIntrinsics::_mm_mul_ps(scale.m_vComponents.simd, v.m_vComponents.simd);
-                StripsBoundsVector tv;
-                tv.FUN_00c7f640(t, v);
-                out.m_kMinimumCorner.m_vComponents.simd =
-                    StripsBoundsIntrinsics::_mm_min_ps(out.m_kMinimumCorner.m_vComponents.simd, tv.m_vComponents.simd);
-                out.m_kMaximumCorner.m_vComponents.simd =
-                    StripsBoundsIntrinsics::_mm_max_ps(out.m_kMaximumCorner.m_vComponents.simd, tv.m_vComponents.simd);
-            }
-        }
-    }
-    float radius = m_fSphereRadius + tolerance;
-    StripsBoundsQuad r;
-    r.simd = StripsBoundsIntrinsics::_mm_load_ps1(&radius);
-    out.m_kMinimumCorner.m_vComponents.simd =
-        StripsBoundsIntrinsics::_mm_sub_ps(out.m_kMinimumCorner.m_vComponents.simd, r.simd);
-    out.m_kMaximumCorner.add(r);
-}
-
 namespace PackedDisplayIntrinsics {
 extern "C" void _mm_store_ss(float*, __m128);
 extern "C" __m128 _mm_shuffle_ps(__m128, __m128, int);
@@ -10989,10 +10670,6 @@ extern char str_010c3fc0[];
 static float DAT_011b1864 = 6.9991255f;
 extern int DAT_0109b2d4;
 void* __cdecl FUN_00ec44d0(void* dst, const void* src, unsigned int n);
-__forceinline void* S00ca5da0_Memcpy(void* dst, const void* src, unsigned int n)
-{
-    return FUN_00ec44d0(dst, src, n);
-}
 
 union __declspec(align(16)) DisplayVector
 {
@@ -11363,103 +11040,6 @@ struct S00ca5da0_Builder
     void FUN_00ca5da0(S00ca5da0_Node* parent, S00ca5da0_Pt* pt);
 };
 double __fastcall GetField24Float(S00ca5da0_Builder* self);
-
-// @fnv 0x00ca5da0
-void S00ca5da0_Builder::FUN_00ca5da0(S00ca5da0_Node* parent, S00ca5da0_Pt* pt)
-{
-    TlsGuard_t guard;
-    S00ca5da0_Geom* geom = (this ? m_08 : 0)->m_84;
-    S00ca5da0_Arr arr;
-    unsigned short base = 0;
-    unsigned short flag;
-    unsigned short c;
-    unsigned short prevJ = 0;
-    unsigned short a;
-    unsigned short j = 0;
-    unsigned short b;
-    for (int i = 0; i < geom->m_10; i++)
-    {
-        a = 0;
-        b = 0;
-        c = 0;
-        flag = 0;
-        do
-        {
-            S00ca5da0_Entry* e = &geom->m_14[j];
-            if (flag == 0)
-            {
-                a = e->f0;
-                b = e->f1;
-                c = e->f2;
-                if (a >= base + geom->m_24[i].count)
-                    break;
-                arr.Add((unsigned short)(a - base));
-                arr.Add((unsigned short)(b - base));
-                arr.Add((unsigned short)(c - base));
-                j++;
-                flag = 1;
-            }
-            else if (b == e->f0 && c == e->f1)
-            {
-                a = b;
-                b = c;
-                c = e->f2;
-                arr.Add((unsigned short)(a - base));
-                arr.Add((unsigned short)(b - base));
-                arr.Add((unsigned short)(c - base));
-                flag++;
-                j++;
-            }
-            else
-            {
-                flag = 0;
-            }
-        } while (a < base + geom->m_24[i].count && j < geom->m_08);
-
-        S00ca5da0_Mesh* mesh = new S00ca5da0_Mesh;
-        unsigned short cnt = (unsigned short)geom->m_24[i].count;
-        S00ca5da0_Vec3* verts = new S00ca5da0_Vec3[cnt];
-        for (unsigned short k = base; k < base + cnt; k++)
-        {
-            DisplayVector storage;
-            __m128& v = *(__m128*)&storage.byteLanes[0];
-            float* t = storage.lanes;
-            t[0] = geom->m_18[k].x;
-            t[1] = geom->m_18[k].y;
-            t[2] = geom->m_18[k].z;
-            t[3] = 0.0f;
-            float x, y, z;
-            PackedDisplayIntrinsics::_mm_store_ss(&x, v);
-            PackedDisplayIntrinsics::_mm_store_ss(&y, PackedDisplayIntrinsics::_mm_shuffle_ps(v, v, 0x55));
-            PackedDisplayIntrinsics::_mm_store_ss(&z, PackedDisplayIntrinsics::_mm_shuffle_ps(v, v, 0xaa));
-            S00ca5da0_Vec3* d = &verts[k - base];
-            d->x = x * DAT_011b1864;
-            d->y = y * DAT_011b1864;
-            d->z = z * DAT_011b1864;
-        }
-        mesh->FUN_00a66b30(cnt, verts, 0, 0, 0, 0, 0);
-        unsigned short nTri = (unsigned short)(j - prevJ);
-        unsigned short* tris = (unsigned short*)new S00ca5da0_Index[nTri * 3];
-        S00ca5da0_Memcpy(tris, arr.m_pBase, arr.m_usSize * sizeof(unsigned short));
-        mesh->FUN_00a7b700(nTri, tris);
-
-        S00ca5da0_Shape* shape = new S00ca5da0_Shape(mesh);
-        shape->AssignFixedString(NiFixedString(str_010c3fc0));
-        float f = (float)GetField24Float(this);
-        shape->m_64 = (float)fabs(f);
-        arr.RemoveAll();
-
-        S00ca5da0_Prop* prop = new S00ca5da0_Prop;
-        prop->m_28 = pt->x;
-        prop->m_2c = pt->y;
-        prop->m_30 = pt->z;
-        prop->m_44++;
-        shape->FUN_00439410(prop);
-        parent->AttachChildInAvailableSlot(shape, 1);
-        base += cnt;
-        prevJ = j;
-    }
-}
 
 extern const char DAT_010c9288[];
 extern const char DAT_010c41f8[];
@@ -12497,101 +12077,6 @@ struct UpdateManager
     __int64 startTime, duration;
     void FUN_00ca1410();
 };
-// @fnv 0x00ca1410
-void UpdateManager::FUN_00ca1410()
-{
-    for (unsigned int i = 0; i < entries.GetLogicalSize(); ++i)
-    {
-        Entry* entry = entries[i];
-        Rig* rig = entry->rig;
-        bool excluded = false;
-        for (int k = 0; k < rig->bones.GetLogicalSize() && !excluded; ++k)
-        {
-            unsigned char type = rig->bones[k]->body.type;
-            excluded = type == 4 || type == 5;
-        }
-        if (rig->getWorld() && !excluded && (entry->active || FUN_00aa4d80() - startTime <= duration))
-        {
-            if (FUN_00aa4d80() - startTime <= duration || entries[i]->active)
-                entries[i]->controller->ResetEntries();
-            FUN_00c7c030 pose(entries[i]->rig->getSkeleton());
-            entries[i]->rig->FUN_00ce18d0(pose.FUN_00cd9fe0().begin());
-            if (entries[i]->rig->getWorld() != entries[i]->observer->getWorld())
-            {
-                World* w = entries[i]->rig->getWorld();
-                entries[i]->observer->setWorld(w ? w->context : 0);
-            }
-            bool wasActive = entries[i]->active;
-            entries[i]->active = entries[i]->controller->FUN_00d1fb00(pose, entries[i]->contacts);
-            int j;
-            if (entries[i]->active)
-            {
-                const ArrayBase<int>& states = entries[i]->controller->getStates();
-                for (j = 0; j < entries[i]->rig->getNumBones(); ++j)
-                {
-                    Bone* bone = entries[i]->rig->getBone(j);
-                    if (bone && bone->wrapper)
-                    {
-                        Wrapper* wrapper = bone->wrapper;
-                        if (states[j])
-                        {
-                            wrapper->changeFlag(true);
-                            if (states[j] == 1)
-                            {
-                                VectorValue position(DAT_01011d78, DAT_01011d78, DAT_01011d78, DAT_01011d78);
-                                VectorValue direction(DAT_01011d78, DAT_01011d78, DAT_01012068, DAT_01011d78);
-                                for (int k = 0; k < entries[i]->contacts.GetLogicalSize(); ++k)
-                                {
-                                    if (j == entries[i]->contacts[k].bone)
-                                    {
-                                        position = entries[i]->contacts[k].point;
-                                        direction = entries[i]->contacts[k].direction;
-                                    }
-                                }
-                                VectorValue velocity;
-                                bone->body.pointVelocity(position, velocity);
-                                float speed = velocity.length();
-                                float projection;
-                                if (speed > DAT_0104da4c)
-                                {
-                                    velocity.normalize();
-                                    projection = direction.dot(velocity);
-                                }
-                                else
-                                    projection = 0;
-                                float mass = bone->body.FUN_00c86430();
-                                float impulse = mass * (DAT_0126829c - projection * speed);
-                                impulse = impulse > DAT_012682a8 ? DAT_012682a8 : impulse;
-                                impulse = impulse < -DAT_012682a8 ? -DAT_012682a8 : impulse;
-                                VectorValue force;
-                                force.scale(ScalarValue(impulse), direction);
-                                bone->FUN_00c9c1d0();
-                                bone->body.apply(&force, &position);
-                            }
-                        }
-                        else
-                            wrapper->changeFlag(false);
-                    }
-                }
-            }
-            else if (wasActive)
-            {
-                entries[i]->controller->ResetEntries();
-                for (j = 0; j < entries[i]->rig->getNumBones(); ++j)
-                {
-                    Bone* bone = entries[i]->rig->getBone(j);
-                    if (bone && bone->wrapper)
-                        bone->wrapper->changeFlag(false);
-                }
-            }
-        }
-        else
-        {
-            if (entries[i]->rig->getWorld())
-                entries[i]->controller->ResetEntries();
-        }
-    }
-}
 
 }  // namespace fnv_00ca1410
 
@@ -14236,40 +13721,6 @@ class bhkForceController : public NiTimeController
         unk0c = 1.0f;
     }
 };
-// @fnv 0x00cb94a0
-void __cdecl FUN_00cb94a0(MyHost* param1, const __m128* param2, float param3)
-{
-    TlsGuard_t guard;
-    bhkForceController* controller = param1->FUN_00a5c570((const MyRTTI*)&g_012683f4);
-    if (!controller)
-    {
-        controller = new bhkForceController();
-        controller->V38(param1);
-    }
-    DynCastHelper* castObj =
-        !param1->unk1c ? 0 : param1->unk1c->FUN_00653290((const GlobalObjectO2_00a7b610*)&g_012043f8);
-    __m128 val = *param2;
-    if (castObj && castObj->unk10)
-    {
-        ChildObj* child = castObj->unk10;
-        float scale = FUN_0062ab20(child);
-        scale = DAT_011b1d3c * scale;
-        ChildInner* inner = *(ChildInner* const volatile*)&child->unk08;
-        __m128 original = *param2;
-        __m128 r1 = _mm_load1_ps(&scale);
-        double s2 = inner->unk194 * 0.75;
-        _ReadWriteBarrier();
-        __m128 first = _mm_mul_ps(r1, val);
-        scale = (float)s2;
-        __m128 r2 = _mm_load_ss(&scale);
-        r2 = _mm_shuffle_ps(r2, r2, 0);
-        val = _mm_add_ps(_mm_mul_ps(r2, original), first);
-    }
-    bhkForceController* __restrict output = controller;
-    output->Configure(param3);
-    output->unk40 = val;
-    output->V35(DAT_01015f5c);
-}
 }  // namespace fnv_00cb94a0
 
 // @f3 0x00931b40 (community match, verified in this file)

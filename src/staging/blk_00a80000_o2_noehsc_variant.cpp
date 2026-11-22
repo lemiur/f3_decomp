@@ -16,10 +16,6 @@ struct NiCollisionObject
     NiCollisionObject();
     NiCollisionObject* Construct();
 };
-NiCollisionObject::NiCollisionObject()
-{
-    _Call_a5d3a0();
-}
 extern unsigned char* DAT_011f5b04;
 void __cdecl FUN_00714960(int);
 void __cdecl FUN_00a81a20();

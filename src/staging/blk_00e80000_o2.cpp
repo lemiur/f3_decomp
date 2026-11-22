@@ -9,12 +9,6 @@ struct FUN_00e87a40_This {
     void FUN_00e87a40();
 };
 
-// @fnv 0x00e87a40
-void FUN_00e87a40_This::FUN_00e87a40()
-{
-    ((FUN_00e87a40_This*)((char*)this + 0xf8))->ReleaseOwnedObject();
-}
-
 struct FUN_00e87a70_Class {
     void __thiscall FUN_00e87a70();
 };
@@ -51,15 +45,6 @@ int __thiscall FUN_00e88a50_Class::FUN_00e88a50(int index)
 struct FUN_00e87a50_Class {
     void __thiscall FUN_00e87a50();
 };
-// Sets four consecutive int fields at offsets 0x10e0-0x10ec to 0, 1, 0, 1.
-// @fnv 0x00e87a50
-void __thiscall FUN_00e87a50_Class::FUN_00e87a50()
-{
-    *(int*)((char*)this + 0x10e0) = 0;
-    *(int*)((char*)this + 0x10e4) = 1;
-    *(int*)((char*)this + 0x10e8) = 0;
-    *(int*)((char*)this + 0x10ec) = 1;
-}
 
 struct FUN_00e87ea0_Class {
     int __thiscall CallVirtualWithFlags(void* p);
@@ -188,16 +173,6 @@ void* __thiscall FUN_00e93650_Class::FUN_00e93650(int aiFlags)
 }
 
 extern bool DAT_0126f0d0;
-// Sets p[5] to 8 or 0x18 depending on the sign bit of p[2], and sets p[6] to 0 or 1 based on DAT_0126f0d0.
-// @fnv 0x00e941a0
-void __cdecl FUN_00e941a0(void* apData)
-{
-    int* p = (int*)apData;
-    p[5] = 8;
-    if (p[2] & 0x80000000)
-        p[5] = 0x18;
-    p[6] = DAT_0126f0d0 ? 0 : 1;
-}
 
 struct FUN_00e95b80_Class {
     void __thiscall FUN_00e95b80();
@@ -234,14 +209,6 @@ extern int DAT_010f0f7c;
 struct FUN_00e98640_Class {
     void __thiscall FUN_00e98640();
 };
-
-// @fnv 0x00e98640
-void __thiscall FUN_00e98640_Class::FUN_00e98640()
-{
-    void* p = *(void**)((char*)this + 0x30);
-    *(int*)((char*)this + 0x2c) = (int)&DAT_010f0f7c;
-    NiFreeAlias(p);
-}
 
 struct FUN_00e81d00_Class {
     char m_auiShapeKeys[0x38];
@@ -438,24 +405,6 @@ extern int DAT_0126f9a0;
 
 struct P03MM { void* __thiscall Allocate(unsigned int); };
 
-// @fnv 0x00e895f0
-void FUN_00e895f0()
-{
-    void* p = reinterpret_cast<P03MM*>(&g_memoryManager)->Allocate(0x18);
-    if (p)
-    {
-        *(int*)p = 0;
-        *(int*)((char*)p + 4) = 0;
-        *(int*)((char*)p + 8) = 0;
-        *(int*)((char*)p + 0xc) = 0;
-        *(int*)((char*)p + 0x10) = 8;
-        *(int*)((char*)p + 0x14) = 8;
-        DAT_0126f9a0 = (int)p;
-    }
-    else
-        DAT_0126f9a0 = 0;
-}
-
 struct NiConsoleRendererStub {
     void* m_pCurrentRenderState;
     void* m_pD3DDevice;
@@ -571,28 +520,6 @@ void __cdecl FUN_00e91b40();
 void __cdecl FUN_00e91b90();
 void __cdecl CreateHLSLShaderProgramCreator();
 
-// @fnv 0x00e91dc0
-void __cdecl FUN_00e91dc0()
-{
-    if (!DAT_0126fa00) {
-        DAT_0126fa00 = true;
-        AddKeyToList(21);
-        AddKeyToList(22);
-        AddKeyToList(25);
-        AddKeyToList(24);
-        AddKeyToList(23);
-        FUN_00e7f2b0();
-        FUN_00e895f0();
-        FUN_00e80620();
-        FUN_00e7a860();
-        NiD3DShaderFactory::InitializePoint3();
-        FUN_00e93df0();
-        FUN_00e91b40();
-        FUN_00e91b90();
-        CreateHLSLShaderProgramCreator();
-        NiD3DShader::InitializePoint3();
-    }
-}
 }  // namespace fnv_00e91dc0
 
 extern int DAT_010f0e50;
@@ -606,19 +533,6 @@ struct FUN_00e936b0_Class {
     void* __thiscall DestroyMapBase(int unused);
 };
 
-// @fnv 0x00e936b0
-void* __thiscall FUN_00e936b0_Class::DestroyMapBase(int aiFlags)
-{
-    *reinterpret_cast<int**>(this) = &DAT_010f0e70;
-    reinterpret_cast<NiTMapBaseStub*>(this)->RemoveAll();
-    *reinterpret_cast<int**>(this) = &DAT_010f0e50;
-    reinterpret_cast<NiTMapBaseStub*>(this)->RemoveAll();
-    NiFree(m_iThirdValue);
-    if (aiFlags & 1)
-        g_memoryManager.Deallocate(this);
-    return this;
-}
-
 extern int DAT_010f0eb0;
 extern int DAT_010f0ed0;
 void __cdecl NiFree(void*);
@@ -626,20 +540,6 @@ void __cdecl NiFree(void*);
 struct FUN_00e93750_Class {
     void* __thiscall FUN_00e93750(int unused);
 };
-
-// Resets the two vtable pointers, clears both map bases, frees the pointer at offset 8, and optionally deallocates this.
-// @fnv 0x00e93750
-void* __thiscall FUN_00e93750_Class::FUN_00e93750(int unused)
-{
-    *(int**)this = &DAT_010f0ed0;
-    ((NiTMapBaseStub*)this)->RemoveAll();
-    *(int**)this = &DAT_010f0eb0;
-    ((NiTMapBaseStub*)this)->RemoveAll();
-    NiFree(*(void**)(this + 8));
-    if (unused & 1)
-        g_memoryManager.Deallocate(this);
-    return this;
-}
 
 struct FUN_00e941d0_Node { unsigned int pad[9]; unsigned int count; unsigned int pad2[5]; FUN_00e941d0_Node* next; FUN_00e941d0_Node* prev; };
 struct FUN_00e941d0_This { int pad[11]; FUN_00e941d0_Node* head; };
@@ -981,19 +881,6 @@ struct FUN_00e8b4e0_Class : NiTMapBaseStub {
 
 extern int DAT_010efdd8;
 
-// Sets the vtable, removes all entries, releases m_ptr, and frees this when flags has bit 0 set; returns this.
-// @fnv 0x00e8b4e0
-void* __thiscall FUN_00e8b4e0_Class::FUN_00e8b4e0(unsigned int flags)
-{
-    *(void**)this = (void*)&DAT_010efdd8;
-    RemoveAll();
-    _NiFree(m_ptr);
-    if (flags & 1) {
-        g_memoryManager.Deallocate(this);
-    }
-    return this;
-}
-
 struct FUN_00e8b520_Class : NiTMapBaseStub {
     void* __thiscall FUN_00e8b520(int deletingFlag);
 };
@@ -1001,25 +888,6 @@ struct FUN_00e8b520_Class : NiTMapBaseStub {
 extern int DAT_010efdf8;
 extern int DAT_010efdd8;
 void __cdecl _NiFree(void* p);
-
-// Resets two vtable pointers, calls RemoveAll on both bases, releases the pointer at offset 8, and frees this when deletingFlag has bit 0 set.
-// @fnv 0x00e8b520
-void* __thiscall FUN_00e8b520_Class::FUN_00e8b520(int deletingFlag)
-{
-    *reinterpret_cast<void**>(this) = reinterpret_cast<void*>(&DAT_010efdf8);
-    NiTMapBaseStub::RemoveAll();
-
-    *reinterpret_cast<void**>(this) = reinterpret_cast<void*>(&DAT_010efdd8);
-    NiTMapBaseStub::RemoveAll();
-
-    _NiFree(*reinterpret_cast<void**>(reinterpret_cast<char*>(this) + 8));
-
-    if (deletingFlag & 1) {
-        g_memoryManager.Deallocate(this);
-    }
-
-    return this;
-}
 
 void __cdecl _NiFree(void* p);
 extern int DAT_010efe54;
@@ -1030,16 +898,6 @@ struct FUN_00e8ce30_Class : NiTMapBaseStub {
     void* m_pUnk08;
     FUN_00e8ce30_Class(int flags);
 };
-
-// @fnv 0x00e8ce30
-FUN_00e8ce30_Class::FUN_00e8ce30_Class(int flags)
-{
-    *(void**)this = (void*)&DAT_010efe54;
-    RemoveAll();
-    _NiFree(m_pUnk08);
-    if (flags & 1)
-        _g_memoryManager.Deallocate(this);
-}
 
 extern int DAT_010efe54;
 extern int DAT_010efe74;
@@ -1053,25 +911,6 @@ struct FUN_00e8ce70_Class : NiTMapBaseStub {
 
     void* __thiscall FUN_00e8ce70(int flag);
 };
-
-// Resets both map bases, frees m_data, and optionally deallocates the object when flag bit 0 is set.
-// @fnv 0x00e8ce70
-void* __thiscall FUN_00e8ce70_Class::FUN_00e8ce70(int flag)
-{
-    m_ppVirtualMethodTable = &DAT_010efe74;
-    RemoveAll();
-
-    m_ppVirtualMethodTable = &DAT_010efe54;
-    RemoveAll();
-
-    _NiFree(m_data);
-
-    if (flag & 1) {
-        _g_memoryManager.Deallocate(this);
-    }
-
-    return this;
-}
 
 extern "C" void __cdecl operator delete(void*, unsigned int);
 struct FUN_00e8ceb0_Class {
@@ -1127,15 +966,6 @@ void __cdecl FUN_00e91c80();
 struct FUN_00e91e30_This {
     void* FUN_00e91e30();
 };
-// @fnv 0x00e91e30
-void* FUN_00e91e30_This::FUN_00e91e30()
-{
-    int old = DAT_0126fa04;
-    ++DAT_0126fa04;
-    if (!old)
-        FUN_00aa2080((void*)FUN_00e91dc0, (void*)FUN_00e91c80);
-    return this;
-}
 
 extern void* DAT_0126fa0c;
 
@@ -1253,17 +1083,6 @@ struct FUN_00e935d0 : NiTMapBaseStub {
     FUN_00e935d0(int unused);
 };
 
-// Initialises the map base vtable, clears all entries, frees the data buffer, and deallocates the object when the low bit of unused is set.
-// @fnv 0x00e935d0
-FUN_00e935d0::FUN_00e935d0(int unused)
-{
-    *(int*)this = (int)&DAT_010f0df0;
-    RemoveAll();
-    NiFree(m_data);
-    if (unused & 1)
-        g_memoryManager.Deallocate(this);
-}
-
 extern int DAT_010f0df0;
 extern int DAT_010f0e10;
 extern MemoryManager _g_memoryManager;
@@ -1276,25 +1095,6 @@ struct FUN_00e93610_Class {
     FUN_00e93610_Class* __thiscall FUN_00e93610(int flags);
 };
 
-// Resets two vtable pointers, clears both map bases, frees m_data, and deallocates this when flags has bit 0 set.
-// @fnv 0x00e93610
-FUN_00e93610_Class* __thiscall FUN_00e93610_Class::FUN_00e93610(int flags)
-{
-    m_vptr = reinterpret_cast<void*>(&DAT_010f0e10);
-    reinterpret_cast<NiTMapBaseStub*>(this)->RemoveAll();
-
-    m_vptr = reinterpret_cast<void*>(&DAT_010f0df0);
-    reinterpret_cast<NiTMapBaseStub*>(this)->RemoveAll();
-
-    NiFree(m_data);
-
-    if (flags & 1) {
-        _g_memoryManager.Deallocate(this);
-    }
-
-    return this;
-}
-
 void __cdecl NiFree(void* p);
 extern int DAT_010f0e50;
 extern MemoryManager g_memoryManager;
@@ -1305,18 +1105,6 @@ struct FUN_00e93670_Class {
     void* m_ptr;
     void* __thiscall FUN_00e93670(int unused);
 };
-
-// Resets the map, frees m_ptr, and optionally deallocates the object when the low bit of unused is set.
-// @fnv 0x00e93670
-void* FUN_00e93670_Class::FUN_00e93670(int aiFlags)
-{
-    m_ppVirtualMethodTable = &DAT_010f0e50;
-    ((NiTMapBaseStub*)this)->RemoveAll();
-    NiFree(m_ptr);
-    if (aiFlags & 1)
-        g_memoryManager.Deallocate(this);
-    return this;
-}
 
 void __cdecl FUN_00e934d0();
 struct FUN_00e936f0_Class {
@@ -1340,19 +1128,6 @@ struct FUN_00e93710_Class : NiTMapBaseStub {
     void* m_ptr;
     void* __thiscall FUN_00e93710(int unused);
 };
-
-// Sets the vtable, clears all entries, releases m_ptr, and frees this when the low bit of unused is set.
-// @fnv 0x00e93710
-void* __thiscall FUN_00e93710_Class::FUN_00e93710(int aiFlags)
-{
-    *(int*)this = (int)&DAT_010f0eb0;
-    RemoveAll();
-    _NiFree(m_ptr);
-    if (aiFlags & 1) {
-        g_memoryManager.Deallocate(this);
-    }
-    return this;
-}
 
 struct NiTMapBase {
     bool __thiscall RemoveAt(const char* name);
@@ -1469,20 +1244,6 @@ struct FUN_00e94390_Class {
 
     void* __thiscall FUN_00e94390(int flags);
 };
-
-// @fnv 0x00e94390
-void* __thiscall FUN_00e94390_Class::FUN_00e94390(int flags)
-{
-    void* p = m_ptr;
-    m_vptr = reinterpret_cast<void*>(&DAT_010f0f7c);
-    _NiFree(p);
-
-    if (flags & 1) {
-        g_memoryManager.Deallocate(this);
-    }
-
-    return this;
-}
 
 extern int DAT_010f0f94;
 extern int DAT_010f0fb4;
@@ -1616,16 +1377,6 @@ struct FUN_00e98b10_Class {
 
 extern void** DAT_010f16dc;
 extern MemoryManager _g_memoryManager;
-
-// @fnv 0x00e98b10
-FUN_00e98b10_Class* __thiscall FUN_00e98b10_Class::FUN_00e98b10(unsigned char flag)
-{
-    m_ppVirtualMethodTable = &DAT_010f16dc;
-    NiFree(m_data);
-    if (flag & 1)
-        _g_memoryManager.Deallocate(this);
-    return this;
-}
 
 struct SpawnedObject {
     void __thiscall ReleaseResources();
@@ -8726,26 +8477,6 @@ struct MapProcessor {
     void FUN_00e8b170();
     MapProcessor* FUN_00e8bae0(void* context, Observer* observer);
 };
-// @fnv 0x00e8bae0
-MapProcessor* MapProcessor::FUN_00e8bae0(void* context, Observer* observer) {
-    vtable = &DAT_010efdd8;
-    bucketCount = 37;
-    itemCount = 0;
-    buckets = FUN_00aa1070(148);
-    FUN_00ec61c0(buckets, 0, bucketCount * sizeof(void*));
-    vtable = &DAT_010efdf8;
-    field18 = 0;
-    field10 = 0;
-    field14 = 0;
-    context20 = context;
-    index24 = -1;
-    observer1c = observer;
-    observer->Slot1();
-    field38 = 0;
-    FUN_00ec61c0(data3c, 0, sizeof(data3c));
-    FUN_00e8b170();
-    return this;
-}
 
 namespace fnv_00e8bd40 {
 struct Record;
@@ -10167,31 +9898,6 @@ struct FUN_00e93540_Map : public NiTMapBaseStub {
     void __thiscall FUN_00e93540();
 };
 
-// Sets the vtable, frees each stored data pointer when m_ownsData is set, then clears the map and frees the bucket array.
-// @fnv 0x00e93540
-void FUN_00e93540_Map::FUN_00e93540() {
-    m_vptr = (unsigned int)&DAT_010f0ef0;
-
-    if (m_ownsData) {
-        for (unsigned int index = 0; index < m_uiItemCount; ++index) {
-            FUN_00e93540_Node* node = m_buckets[index];
-            while (node) {
-                FUN_00e93540_Node* current = node;
-                node = node->next;
-                FUN_00aa10f0(current->data);
-            }
-        }
-    }
-
-    m_vptr = (unsigned int)&DAT_010f0ed0;
-    RemoveAll();
-
-    m_vptr = (unsigned int)&DAT_010f0eb0;
-    RemoveAll();
-
-    FUN_00aa10f0(m_buckets);
-}
-
 struct FUN_00e89740_Obj {
     int unk00;
     int unk04;
@@ -10200,15 +9906,6 @@ struct FUN_00e89740_Obj {
 
     void Cleanup();
 };
-// @fnv 0x00e89740
-void FUN_00e89740()
-{
-    FUN_00e89740_Obj* p = (FUN_00e89740_Obj*)DAT_0126f9a0;
-    if (DAT_0126f9a0) {
-        ((FUN_00e89740_Obj*)DAT_0126f9a0)->Cleanup();
-        _g_memoryManager.Deallocate(p);
-    }
-}
 
 extern "C" __declspec(dllimport) long __stdcall InterlockedIncrement(long volatile* plValue);
 extern "C" __declspec(dllimport) long __stdcall InterlockedDecrement(long volatile* plValue);
@@ -10688,11 +10385,6 @@ struct FUN_00e8d350_Class {
     int* __thiscall FUN_00e8d350();
 };
 
-// @fnv 0x00e8d350
-int* __thiscall FUN_00e8d350_Class::FUN_00e8d350() {
-    return &unk3C;
-}
-
 struct Item9ea;
 
 bool DispatchByVirtualIndex(float fTime, Item9ea* pkItem, void* p2, void* p3, void* p4, void* p5, void* p6);
@@ -11157,43 +10849,6 @@ struct TextureInfo {
 
     bool InitFromTexture(BaseTex* pTexture);
 };
-
-// Stores level count, dimensions, and pixel template from a texture, rejecting formats 40 and 41.
-// @fnv 0x00e8a120
-bool TextureInfo::InitFromTexture(BaseTex* pTexture)
-{
-    m_levelCount = pTexture->GetLevelCount();
-    int eType = pTexture->GetType();
-    if (eType == 3) {
-        SurfDesc kDesc;
-        if (0 > ((Tex2D*)pTexture)->GetLevelDesc(0, &kDesc))
-            return false;
-        m_fMaxFriction = kDesc.Width;
-        m_height = kDesc.Height;
-        if (kDesc.Format == 40 || kDesc.Format == 41)
-            return false;
-        GetPixelTemplateForFormat(kDesc.Format, &m_format14);
-    } else if (eType == 5) {
-        SurfDesc kDesc;
-        if (0 > ((TexCube*)pTexture)->GetLevelDesc(0, &kDesc))
-            return false;
-        m_fMaxFriction = kDesc.Width;
-        m_height = kDesc.Height;
-        if (kDesc.Format == 40 || kDesc.Format == 41)
-            return false;
-        GetPixelTemplateForFormat(kDesc.Format, &m_format14);
-    } else if (eType == 4) {
-        VolDesc kDesc;
-        if (0 > ((TexVol*)pTexture)->GetLevelDesc(0, &kDesc))
-            return false;
-        m_fMaxFriction = kDesc.Width;
-        m_height = kDesc.Height;
-        if (kDesc.Format == 40 || kDesc.Format == 41)
-            return false;
-        GetPixelTemplateForFormat(kDesc.Format, &m_format14);
-    }
-    return true;
-}
 
 void __cdecl FUN_00aa1460(void* pvMem, unsigned int uiSize);
 

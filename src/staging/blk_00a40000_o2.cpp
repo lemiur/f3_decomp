@@ -1,4 +1,4 @@
-// staging/blk_00a40000_o2.cpp: Owner, Controller, Arr, ExtraOwner and more (111 functions)
+// staging/blk_00a40000_o2.cpp: Owner, Controller, Arr, ExtraOwner and more (97 functions)
 #include "f3_common.h"
 #include <string.h>
 // src/staging/blk_00a40000_o2.cpp - STAGING unit created 2026-10-16 by stage_units.py for functions with no attributed unit
@@ -26,19 +26,6 @@ struct BSFadeNode
 {
     static void* operator new(unsigned int);
 };
-
-// @fnv 0x00a409d0
-void* __cdecl FUN_00a409d0()
-{
-    void* p = BSFadeNode::operator new(0x30);
-    if (p)
-    {
-        FUN_00a36890(p);
-        *(void**)p = (void*)0x0109750c;
-        return p;
-    }
-    return 0;
-}
 
 namespace fnv_00a411f0 {
 int* __fastcall InitTimeController(int*);
@@ -163,16 +150,6 @@ struct FUN_00a540a0 : NiTMapBaseStub
     void* p;
     void Init();
 };
-// Sets vtbl to DAT_0109a284, calls RemoveAll, sets vtbl to DAT_0109a264, calls RemoveAll again, then frees p via NiFreeAlias.
-// @fnv 0x00a540a0
-void FUN_00a540a0::Init()
-{
-    vtbl = (int)&DAT_0109a284;
-    RemoveAll();
-    vtbl = (int)&DAT_0109a264;
-    RemoveAll();
-    NiFreeAlias(p);
-}
 
 extern "C" char* __cdecl _strcat_s(char* destination, unsigned int destinationSize, const char* source);
 
@@ -244,17 +221,6 @@ struct FUN_00a4d700_class : NiTMapBaseStub
     void* m_p;
     void* __thiscall FUN_00a4d700(unsigned char flags);
 };
-// Restores the vtable, removes all entries, frees m_p, and optionally deallocates the object when flags bit 0 is set.
-// @fnv 0x00a4d700
-void* __thiscall FUN_00a4d700_class::FUN_00a4d700(unsigned char flags)
-{
-    m_pVTable = (void*)&DAT_01098ec8;
-    RemoveAll();
-    NiFree(m_p);
-    if (flags & 1)
-        _g_memoryManager.Deallocate(this);
-    return this;
-}
 
 extern int DAT_010997f4;
 struct BaseHolder
@@ -307,17 +273,6 @@ struct FUN_00a54060_class : NiTMapBaseStub
     void* m_p;
     void* InitBuffer(unsigned int size);
 };
-// Sets the vtable, stores the size, allocates size*4 bytes, zeroes them, and returns this.
-// @fnv 0x00a54060
-void* FUN_00a54060_class::InitBuffer(unsigned int size)
-{
-    m_iElementCount = size;
-    m_vtbl = (int)&DAT_0109a264;
-    m_p = 0;
-    m_data = NiMalloc(size * 4);
-    fnv_zlib_memset(m_data, 0, m_iElementCount * 4);
-    return this;
-}
 
 struct FUN_00a540d0_class : NiTMapBaseStub
 {
@@ -625,21 +580,6 @@ struct FUN_00a4d740_class
     void* m_p;
     void* __thiscall DestroyAndFree(unsigned int flags);
 };
-
-// @fnv 0x00a4d740
-void* __thiscall FUN_00a4d740_class::DestroyAndFree(unsigned int flags)
-{
-    m_pVTable = &DAT_01098ee8;
-    reinterpret_cast<NiTMapBaseStub*>(this)->RemoveAll();
-    m_pVTable = &DAT_01098ec8;
-    reinterpret_cast<NiTMapBaseStub*>(this)->RemoveAll();
-    _NiFree(m_p);
-    if (flags & 1)
-    {
-        _g_memoryManager.Deallocate(this);
-    }
-    return this;
-}
 
 namespace fnv_00a50aa0 {
 struct A51BF0Base
@@ -1125,10 +1065,6 @@ struct FUN_00a42f80_cls : FUN_00a42f80_base
     virtual ~FUN_00a42f80_cls();
 };
 
-// @fnv 0x00a42f80
-FUN_00a42f80_cls::~FUN_00a42f80_cls()
-{}
-
 struct FUN_00a44830_base
 {
     virtual ~FUN_00a44830_base();
@@ -1138,10 +1074,6 @@ struct FUN_00a44830_cls : FUN_00a44830_base
 {
     virtual ~FUN_00a44830_cls();
 };
-
-// @fnv 0x00a44830
-FUN_00a44830_cls::~FUN_00a44830_cls()
-{}
 
 namespace fnv_00a44ff0 {
 struct ControllerAllocation : FUN_00a44f90_class, BSFadeNode
@@ -1376,22 +1308,6 @@ struct FUN_00a54110
 
     FUN_00a54110(unsigned int count);
 };
-
-// Allocates a buffer of count ints (or null when count is 0), sets reservedSize to count and size to 0.
-// @fnv 0x00a54110
-FUN_00a54110::FUN_00a54110(unsigned int count)
-{
-    if (count > 0)
-    {
-        pBuffer = static_cast<int*>(FUN_00aa1070(count * sizeof(int)));
-    }
-    else
-    {
-        pBuffer = 0;
-    }
-    reservedSize = count;
-    size = 0;
-}
 
 extern "C" __declspec(dllimport) long __stdcall InterlockedDecrement(long volatile* plAddend);
 
@@ -1636,12 +1552,6 @@ struct SingletonTarget
     void __thiscall FUN_00a5b3c0();
 };
 extern SingletonTarget* g_011f42c0;
-
-// @fnv 0x00a5b460
-void __cdecl FUN_00a5b460()
-{
-    g_011f42c0->FUN_00a5b3c0();
-}
 
 extern void __cdecl FUN_00aa10f0(char* psz);
 extern int DAT_0102102c;
@@ -1959,14 +1869,6 @@ struct FUN_00a5f1e0_cls
 
     FUN_00a5f1e0_cls();
 };
-
-// @fnv 0x00a5f1e0
-FUN_00a5f1e0_cls::FUN_00a5f1e0_cls()
-{
-    Init();
-    m_w18 = 8;
-    m_pVTable = &DAT_0109b72c;
-}
 
 class A5F4D0Property
 {
@@ -2622,19 +2524,6 @@ struct Obj
             DeleteThis();
     }
 };
-inline bool IsKind(const RTT* type, const Obj* object) throw()
-{
-    for (const RTT* r = object->GetType(); r; r = r->base)
-        if (r == type)
-            return true;
-    return false;
-}
-inline Obj* CastInline(const RTT* type, Obj* object) throw()
-{
-    if (!object)
-        return 0;
-    return (int)IsKind(type, object) ? object : 0;
-}
 struct Ptr
 {
     Obj* p;
@@ -2822,48 +2711,6 @@ struct Stream
     unsigned int unk224;
     unsigned int size;
 };
-// @fnv 0x00a47ce0
-Result* __cdecl CreateResultFromStreamObject(Stream* stream, unsigned int index, const char* name)
-{
-    if (stream->unk0d8 >= 0x4010003)
-        return 0;
-    if (index >= stream->size)
-        return 0;
-    Obj* object = stream->objects[index];
-    Obj* source = object ? object->Cast(&g_011f3f38) : 0;
-    if (!source)
-        return 0;
-    if (!name)
-        name = source->name;
-    Result* result = new Result(name, 12, 12);
-    result->unk30 = 0;
-    for (unsigned int i = 0; i < source->count; ++i)
-    {
-        Obj* extra = source->extras[(unsigned short)i];
-        Obj* found = extra ? extra->Cast(&g_011f3f28) : 0;
-        if (found)
-        {
-            result->FUN_00a47420(found);
-            source->FUN_00a5bf50((unsigned short)i);
-            break;
-        }
-    }
-    Ptr controller(source->controller);
-    for (unsigned int j = 0; j < source->count; ++j)
-    {
-        Obj* extra = CastInline(&g_011f4a38, source->extras[(unsigned short)j]);
-        result->AddSeq((void*)extra->controller, CastInline(&g_011f36ec, controller.p));
-        Ptr next(controller.p->next);
-        if (controller.p->next)
-        {
-            controller.p->next->Dec();
-            controller.p->next = 0;
-        }
-        controller = next.p;
-    }
-    source->ClearExtraData();
-    return result;
-}
 
 extern "C" __declspec(dllimport) long __stdcall InterlockedIncrement(volatile long*);
 extern "C" __declspec(dllimport) long __stdcall InterlockedDecrement(volatile long*);
@@ -3072,34 +2919,6 @@ struct BinaryDataRecord
     unsigned int count;
 };
 NiGPUProgram* CreateResultFromStreamObject(BinaryDataRecord*, unsigned int, void*) throw();
-// Looks up the GPU program at index in the stream (or via CreateResultFromStreamObject for older versions), optionally passes extra to it, and stores it in result.
-// @fnv 0x00a47f40
-void GetGPUProgram(BinaryDataRecord* stream, unsigned int index, NiPointer<NiGPUProgram>& result, void* extra)
-{
-    NiPointer<NiGPUProgram> program;
-    if (stream->version < 0x04010003)
-    {
-        program = CreateResultFromStreamObject(stream, index, extra);
-    }
-    else
-    {
-        if (index >= stream->count)
-        {
-            result = (NiGPUProgram*)0;
-            return;
-        }
-        DynCastHelper* object = stream->objects[index];
-        program = !object ? 0 : (NiGPUProgram*)object->DynamicCast(&g_011f3f48);
-    }
-    if (program == (NiGPUProgram*)0)
-    {
-        result = (NiGPUProgram*)0;
-        return;
-    }
-    if (extra)
-        program.ptr->SetString(extra);
-    result = program;
-}
 
 void __cdecl NiFreeA4D(void* pvMem) throw();
 
@@ -4425,40 +4244,6 @@ struct FUN_00a5abe0_list
     FUN_00a5abe0_node* m_pFirstNode;
 };
 
-// Under a global lock, walks the list p2 and for each item with vfn35() below 7 resolves it with ctx and passes it to self->m_24.FUN_00439fd0.
-// @fnv 0x00a5abe0
-void __stdcall FUN_00a5abe0(FUN_00a5abe0_owner* apOwner, void* apList, void* volatile apContext)
-{
-    DAT_011f42a0.FUN_0040fbf0(0);
-    FUN_00a5abe0_node* node = ((FUN_00a5abe0_list*)apList)->m_pFirstNode;
-    while (node != 0)
-    {
-        void** ppItem = &node->m_item;
-        node = node->m_next;
-        FUN_00a5abe0_item* item = (FUN_00a5abe0_item*)*ppItem;
-
-        if (item == 0)
-            continue;
-        if (item->vfn35() >= 7)
-            continue;
-        item = item->FUN_00a5d3f0(apContext);
-        if (item->vfn35() >= 7)
-            continue;
-        apList = item;
-        InterlockedIncrement(&item->m_iWordAt04);
-        apOwner->m_24.FUN_00439fd0(&apList);
-        if (InterlockedDecrement(&item->m_iWordAt04) == 0)
-        {
-            item->vSlot01();
-        }
-    }
-    DAT_011f42a0.m_uiItemCount--;
-    if (DAT_011f42a0.m_uiItemCount == 0)
-    {
-        DAT_011f42a0.m_pOwnerObject = 0;
-    }
-}
-
 class RefObjB
 {
   public:
@@ -4575,11 +4360,6 @@ struct FUN_00a5d2f0_class
 void FUN_00a5d2f0_class::FUN_00a5d2f0(StreamDev* pStream)
 {
     pStream->vf09(this);
-}
-
-void StreamDev::FUN_00a5d310()
-{
-    vf02();
 }
 
 namespace sa5f8b0 {
@@ -5673,30 +5453,6 @@ struct ThreadedTable
     unsigned int __thiscall FUN_00a5b270(const char* key, unsigned int flags);
     void __thiscall FUN_00a5b5a0(const char** key, unsigned int flags);
 };
-
-// Temporarily sets per-thread field 0x2b4 to 8; under the lock calls FUN_00a5b4b0 on the entry indexed by FUN_00a5b270 and updates two counters.
-// @fnv 0x00a5b5a0
-void __thiscall ThreadedTable::FUN_00a5b5a0(const char** key, unsigned int flags)
-{
-    unsigned int tlsIndex = _tls_index;
-    unsigned char* threadData = reinterpret_cast<unsigned char**>(__readfsdword(0x2c))[tlsIndex];
-    const unsigned int previousMode = *reinterpret_cast<unsigned int*>(threadData + 0x2b4);
-    *reinterpret_cast<unsigned int*>(threadData + 0x2b4) = 8;
-
-    unsigned int index = FUN_00a5b270(*key, flags);
-    CRITICAL_SECTION_STUB* criticalSection =
-        reinterpret_cast<CRITICAL_SECTION_STUB*>(reinterpret_cast<char*>(this) + 0x2080);
-    EnterCriticalSection(criticalSection);
-
-    const unsigned int entryOffset = index << 4;
-    if (*reinterpret_cast<short*>(reinterpret_cast<char*>(this) + entryOffset + 0x0c) != 0)
-        ++DAT_011f42c8;
-
-    reinterpret_cast<ThreadedTableEntry*>(reinterpret_cast<char*>(this) + entryOffset)->FUN_00a5b4b0(key);
-    ++DAT_011f42c4;
-    LeaveCriticalSection(criticalSection);
-    *reinterpret_cast<unsigned int*>(threadData + 0x2b4) = previousMode;
-}
 
 struct FUN_00a5d310_Class
 {

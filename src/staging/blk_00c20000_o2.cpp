@@ -1,4 +1,4 @@
-// staging/blk_00c20000_o2.cpp: NiPSysParticle, NiPSysBoxEmitter, Host, NiPSysBoxEmitterWrapper and more (45 functions)
+// staging/blk_00c20000_o2.cpp: NiPSysParticle, NiPSysBoxEmitter, Host, NiPSysBoxEmitterWrapper and more (41 functions)
 #include "f3_common.h"
 #include <windows.h>
 // src/staging/blk_00c20000_o2.cpp - STAGING unit created 2026-10-16 by stage_units.py for functions with no attributed unit
@@ -231,19 +231,6 @@ struct FUN_00c32d80
     void FUN_00c32d80_Ctor();
 };
 
-// @fnv 0x00c2b720
-void* __cdecl FUN_00c2b720()
-{
-    BSFadeNode* node = (BSFadeNode*)BSFadeNode::operator new(0x40);
-    if (node)
-    {
-        FUN_00c32d80* obj = (FUN_00c32d80*)node;
-        obj->FUN_00c32d80_Ctor();
-        node->m_vftable = (void*)0x010bfa54;
-        return node;
-    }
-    return 0;
-}
 }  // namespace fnv_00c2b720
 
 namespace fnv_00c2b870 {
@@ -911,25 +898,6 @@ struct FUN_00c31720_This
     void FUN_00c31720();
 };
 
-// @fnv 0x00c2a2b0
-void* __cdecl FUN_00c2a2b0()
-{
-    void* pObject = FUN_00aa13e0(0x2c);
-    if (pObject != NULL)
-    {
-        ((FUN_00c31720_This*)pObject)->FUN_00c31720();
-        float zero = 0.0f;
-        *(float*)((char*)pObject + 0x18) = zero;
-        *(float*)((char*)pObject + 0x20) = zero;
-        *(short*)((char*)pObject + 0x1c) = 0;
-        *(float*)((char*)pObject + 0x28) = zero;
-        *(int*)pObject = 0x10bf0bc;
-        *(short*)((char*)pObject + 0x24) = 0;
-        return pObject;
-    }
-    return NULL;
-}
-
 extern int DAT_010bf654;
 
 struct ParticleEmitterAllocation : FUN_00c32d80
@@ -1038,29 +1006,6 @@ struct FUN_00c31440_cls
     FUN_00c31440_cls* AssignString(char** src);
 };
 
-// @fnv 0x00c31440
-FUN_00c31440_cls* FUN_00c31440_cls::AssignString(char** src)
-{
-    reinterpret_cast<NiStringBaseHelper*>(this)->FUN_00a38e00();
-    vptr = (void*)&DAT_010c08ac;
-    *(char* volatile*)&m_38 = DAT_0109b220;
-    m_3c = 0;
-    char* edi = *src;
-    if (m_38 != edi)
-    {
-        if (edi != DAT_0109b220)
-        {
-            DAT_00fdf1c0(edi - 8);
-        }
-        if (m_38 != DAT_0109b220)
-        {
-            DAT_00fdf1c4(m_38 - 8);
-        }
-        m_38 = edi;
-    }
-    return this;
-}
-
 // Factory: allocates a 0x40-byte object, runs the FUN_00c32d80 base constructor and
 // installs this type's vtable (same pattern as ParticleObjectFactoryType / CreateParticleObjectFactory).
 extern int DAT_010bf754;
@@ -1129,12 +1074,6 @@ struct NiPSysBoxEmitterWrapper : NiPSysBoxEmitter
 {
     void FUN_00c31b10(NiPSysModifier* destination, CloningProcess& process);
 };
-
-// @fnv 0x00c31b10
-void NiPSysBoxEmitterWrapper::FUN_00c31b10(NiPSysModifier* destination, CloningProcess& process)
-{
-    CopyTo(destination, process);
-}
 
 struct TrailVector
 {

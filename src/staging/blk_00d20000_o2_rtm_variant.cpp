@@ -918,12 +918,6 @@ public:
     virtual int Dispatch(int iArg0, int iArg1);
 };
 
-// @fnv 0x00d21cc0
-int FUN_00d21cc0(Target* pkTarget, int iArg0, int iArg1)
-{
-    return pkTarget->Dispatch(iArg0, iArg1);
-}
-
 }
 struct __declspec(align(16)) Vector4D22DC0 {
     float x;
@@ -1843,15 +1837,6 @@ static __forceinline int maxSize(int minimum, int value) {
 }
 int FUN_00d365d0(A1Rec* a1, int a2, int a3, int a4, int a5);
 __declspec(noinline) void __cdecl FUN_00d36c30(void* apObject);
-__declspec(noinline) void __cdecl FUN_00d36bb0(CollisionAgentFunctionTable* f)
-{
-    f->a = (void*)(void (__cdecl*)())&FUN_00d36b70;
-    f->b = (void*)&FUN_00d34790;
-    f->c = (void*)(void (__cdecl*)())&QueryClosestPoints;
-    f->d = (void*)&FUN_00d34810;
-    f->e = 0;
-    f->f = 1;
-}
 void __cdecl FUN_00d36c60(void* p);
 
 #include <xmmintrin.h>
@@ -1998,54 +1983,6 @@ struct hkOrientHingedBodyAction {
 
     void __thiscall FUN_00d2ad50(const hkStepInfo& stepInfo);
 };
-
-// @fnv 0x00d2ad50
-void hkOrientHingedBodyAction::FUN_00d2ad50(const hkStepInfo& stepInfo)
-{
-    if (m_bSlotEnabled)
-    {
-        hkpRigidBodyStub* rb = m_pEntity;
-
-        hkVecQ forwardWS;
-        __m128 forwardQuad = hkVecQ::rotated(rb->m_pMotionState.m_rotation, m_forwardAxisLS);
-        forwardWS.getQuad() = forwardQuad;
-
-        hkVecQ hingeWS;
-        __m128 hingeQuad = hkVecQ::rotated(rb->m_pMotionState.m_rotation, m_vHingeAxisLS);
-        _mm_store_ps(reinterpret_cast<float*>(&hingeWS), hingeQuad);
-
-        hkVecQ targetProj;
-        targetProj.setAddMul4(m_targetForwardWS, hingeQuad, -hkVecQ::dot(_mm_load_ps(reinterpret_cast<const float*>(&hingeQuad)), m_targetForwardWS.getQuad()));
-        targetProj.normalize3();
-
-        m_fConeAngle = ClampedAcos(hkVecQ::dot(targetProj.getQuad(), forwardQuad));
-
-        forwardWS.setCross(targetProj, forwardWS);
-
-        float rotMaj = forwardWS(forwardWS.getMajorAxis(targetProj));
-        float hingeMaj = hingeWS(hingeWS.getMajorAxis(targetProj));
-
-        if ((rotMaj < 0.0f) != (hingeMaj < 0.0f))
-        {
-            m_fConeAngle = -m_fConeAngle;
-        }
-
-        float dampFactor = m_fMotorDamping * stepInfo.m_fInverseDeltaTime;
-        __m128 dampS = _mm_load_ss(&dampFactor);
-        hkVecQ damping;
-        damping.getQuad() = rb->m_pMotionState.m_kAngularVelocity.getQuad();
-        damping.getQuad() = _mm_mul_ps(_mm_shuffle_ps(dampS, dampS, 0), damping.getQuad());
-
-        float strengthFactor = m_fSpringStrength * m_fConeAngle * stepInfo.m_fInverseDeltaTime;
-        __m128 strengthS = _mm_load_ss(&strengthFactor);
-        forwardWS = hingeWS;
-        forwardWS.getQuad() = _mm_mul_ps(_mm_shuffle_ps(strengthS, strengthS, 0), forwardWS.getQuad());
-
-        forwardWS.getQuad() = _mm_sub_ps(forwardWS.getQuad(), damping.getQuad());
-
-        rb->ApplyAngularImpulseToBodies(forwardWS);
-    }
-}
 
 namespace S00d386c0_N {
 union __declspec(intrin_type) __declspec(align(16)) __m128 { float m128_f32[4]; };
@@ -2704,25 +2641,3 @@ struct S_00d3dca0_Fns {
 struct S_00d3dca0_Obj {
     void AddSpawnEntry(S_00d3dca0_Fns* f, int a, int b);
 };
-__declspec(noinline) void FUN_00d3dbe0(void* storage) {
-    S_00d3dca0_Fns* f = static_cast<S_00d3dca0_Fns*>(storage);
-    f->fn0 = reinterpret_cast<void*>(static_cast<void (*)()>(&CreateRetObj));
-    f->fn4 = reinterpret_cast<void*>(static_cast<void (*)()>(&FUN_00d3d3e0));
-    f->fn8 = reinterpret_cast<void*>(static_cast<void (*)()>(&FUN_00d3d8c0));
-    f->fnC = reinterpret_cast<void*>(static_cast<void (*)()>(&FUN_00daf8e0));
-    f->b10 = 0;
-    f->b11 = 0;
-}
-// @fnv 0x00d3dca0
-void FUN_00d3dca0(S_00d3dca0_Obj* o)
-{
-    S_00d3dca0_Fns f;
-    f.b10 = 0;
-    f.b11 = 0;
-    FUN_00d3dc10(&f);
-    o->AddSpawnEntry(&f, 3, 1);
-    f.b10 = 0;
-    f.b11 = 0;
-    FUN_00d3dbe0(&f);
-    o->AddSpawnEntry(&f, 1, 3);
-}

@@ -601,8 +601,6 @@ struct FUN_00e003d0 : S_00e003d0_Base, S_00e003d0_Arrs
     S_00e003d0_Arr arr160;
     FUN_00e003d0(int flag);
 };
-void S_00e003d0_Base::unk00()
-{}
 extern int DAT_0126dbe0;
 int* __cdecl FUN_00e00440(void);
 extern int DAT_010c6dc4;
@@ -664,12 +662,6 @@ struct S_00e00610_Mid : S_00e00610_P, S_00e00610_S
         }
     }
 };
-void S_00e00610_P::unk00()
-{}
-void S_00e00610_S::unk00()
-{}
-void S_00e00610_Mid::unk00()
-{}
 struct FUN_00e00610 : S_00e00610_Mid
 {
     FUN_00e00610(int flag);
@@ -851,10 +843,6 @@ extern "C" struct FUN_00e009c0_vt
     virtual void m0(int);
 };
 // @fnv 0x00e009c0
-extern "C" void __cdecl FUN_00e009c0(FUN_00e009c0_vt* p)
-{
-    p->m0(0);
-}
 struct CpuOpaque;
 extern CpuOpaque DAT_0126de68;
 CpuOpaque* __cdecl FUN_00e009d0();

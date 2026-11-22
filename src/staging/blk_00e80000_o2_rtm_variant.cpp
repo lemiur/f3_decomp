@@ -6862,10 +6862,6 @@ inline bool FUN_00e9e840_Class::m_virtual09(int value)
 {
     return value != 0;
 }
-bool FUN_00e9e840_Class::FUN_00e9e840(int value)
-{
-    return !m_virtual09(value);
-}
 struct ItemArrayOwner {
     unsigned int unk00;
     unsigned int unk04;
@@ -9597,14 +9593,6 @@ struct ShaderValidator093 {
 struct PixelComponentReader093 {
     char GetEntryData(int, int*, int*, char*, char*);
 };
-__declspec(noinline) char PixelComponentReader093::GetEntryData(int index, int* type, int* format, char* width, char* flag) {
-    ShaderRequest093* request = (ShaderRequest093*)this;
-    *flag = request->components[index].flag;
-    *width = request->components[index].width;
-    *format = request->components[index].format;
-    *type = request->components[index].type;
-    return *type != 19;
-}
 void* __stdcall FUN_00e8a300(ShaderRequest093* request, ShaderTraits093* traits, ShaderChoices093* choices);
 struct FUN_00e8b0c0_Item {
     char m_uiStandInValue[0x4c];

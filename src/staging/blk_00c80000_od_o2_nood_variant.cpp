@@ -207,48 +207,6 @@ struct SceneBranch : SceneObject
     unsigned short capacity;
     unsigned short count;
 };
-// @fnv 0x00c803a0
-void __cdecl FUN_00c803a0(SceneObject* object, float scale)
-{
-    if (object)
-    {
-        if (object->collision)
-        {
-            CollisionState* state = object->collision->FUN_00653290(&DAT_012043f8);
-            if (state && state->physics)
-            {
-                PhysicsWrapper* wrapper = state->physics;
-                ScaledBackend* backend = wrapper->backend;
-                ScaledVector values[2];
-                values[0].value = backend ? backend->firstVector : DAT_01267e30;
-                values[1].value = backend ? backend->secondVector : DAT_01267e30;
-                values[0].Multiply(ScalarFactor(scale));
-                values[1].Multiply(ScalarFactor(scale));
-                if (backend)
-                {
-                    wrapper->FUN_00a29680();
-                    backend->OnTrigger(&values[0].value);
-                    wrapper->FUN_00a29680();
-                }
-                backend = wrapper->backend;
-                if (backend)
-                {
-                    wrapper->FUN_00a29680();
-                    backend->FUN_00561800(&values[1].value);
-                    wrapper->FUN_00a29680();
-                }
-            }
-        }
-        SceneBranch* branch = object->GetBranch();
-        if (branch)
-        {
-            for (unsigned int index = 0; index < branch->count; ++index)
-            {
-                FUN_00c803a0(branch->children[index], scale);
-            }
-        }
-    }
-}
 
 void __cdecl FUN_00c7fcc0(void* first, const void* second, void* result, bool option);
 union __declspec(align(16)) ResultBuffer
@@ -258,13 +216,6 @@ union __declspec(align(16)) ResultBuffer
     ResultBuffer() : hit(0)
     {}
 };
-// @fnv 0x00c806b0
-void* FUN_00c806b0(void* first, const void* second, bool option)
-{
-    ResultBuffer result;
-    FUN_00c7fcc0(first, second, &result, option);
-    return result.hit;
-}
 
 struct FUN_00c86660_cls
 {
@@ -287,28 +238,6 @@ struct FUN_00c86660_cls
 
     FUN_00c86660_cls* FUN_00c86660(const FUN_00c86660_cls* src);
 };
-
-// @fnv 0x00c86660
-FUN_00c86660_cls* FUN_00c86660_cls::FUN_00c86660(const FUN_00c86660_cls* src)
-{
-    m_v00 = src->m_v00;
-    m_v10 = src->m_v10;
-    m_v20 = src->m_v20;
-    m_v30 = src->m_v30;
-    m_v40 = src->m_v40;
-    m_v50 = src->m_v50;
-    m_v60 = src->m_v60;
-    m_v70 = src->m_v70;
-    m_v80 = src->m_v80;
-    m_v90 = src->m_v90;
-    m_fA0 = src->m_fA0;
-    m_fA4 = src->m_fA4;
-    m_fA8 = src->m_fA8;
-    m_bAC = src->m_bAC;
-    m_bAD = src->m_bAD;
-    m_bAE = src->m_bAE;
-    return this;
-}
 
 class bhkLimitedHingeVector
 {
@@ -336,23 +265,6 @@ class bhkLimitedHingeVectorSet
     void FUN_00c8bf50();
 };
 
-// @fnv 0x00c8bf50
-void bhkLimitedHingeVectorSet::FUN_00c8bf50()
-{
-    bhkLimitedHingeVector& v1 = m_v1;
-    bhkLimitedHingeVector& v2 = m_v2;
-    Vec4Tmp a;
-    a.v = _mm_setr_ps(m_v0.x, m_v0.y, m_v0.z, m_v0.w);
-    Vec4Tmp b;
-    b.v = _mm_setr_ps(v1.x, v1.y, v1.z, v1.w);
-    Vec4Tmp c;
-    c.v = _mm_setr_ps(v2.x, v2.y, v2.z, v2.w);
-    a.FUN_00cb2fc0();
-    m_v0.FUN_004b4db0((const float*)&a);
-    v1.FUN_004b4db0((const float*)&b);
-    v2.FUN_004b4db0((const float*)&c);
-}
-
 extern int DAT_010c69f4;
 
 struct FUN_00c99ff0_base
@@ -368,17 +280,6 @@ struct FUN_00c99ff0_cls : FUN_00c99ff0_base
     __m128 m_c0;
     FUN_00c99ff0_cls* FUN_00c99ff0(void* a1, __m128* a2, __m128* a3);
 };
-
-// @fnv 0x00c99ff0
-FUN_00c99ff0_cls* FUN_00c99ff0_cls::FUN_00c99ff0(void* a1, __m128* a2, __m128* a3)
-{
-    ((FUN_00c99ff0_base*)this)->FUN_00c69010(a1);
-    *(int*)this = (int)&DAT_010c69f4;
-    m_a0 = *a2;
-    m_b0 = *a3;
-    m_c0 = *(__m128*)((char*)a1 + 0x40);
-    return this;
-}
 
 struct FnvMat4
 {
@@ -446,22 +347,6 @@ struct Owner00c9ec00
     void FUN_00c9ec00(FnvMat4* out);
 };
 
-// @fnv 0x00c9ec00
-void Owner00c9ec00::FUN_00c9ec00(FnvMat4* out)
-{
-    if (!this)
-        return;
-    Obj00c9ec00* p = unk08;
-    if (!p)
-        return;
-    Noop00a29680();
-    out->m_uiX = p->m_mat.m_uiX;
-    out->m_uiY = p->m_mat.m_uiY;
-    out->m_uiZ = p->m_mat.m_uiZ;
-    out->m_w = p->m_mat.m_w;
-    Noop00a29680();
-}
-
 struct __declspec(align(16)) hkVector4C9E
 {
     __m128 m_vComponents;
@@ -500,15 +385,6 @@ struct NiTransformC9E
 void __stdcall FUN_00c9ec00(hkTransformC9E* pkTransform);
 void __cdecl FUN_00624b10(NiMatrix3C9E* pkOut, const hkRotationC9E* pkRotation);
 void __cdecl FUN_00458620(NiPoint3C9E* pkOut, const hkVector4C9E* pkVector);
-
-// @fnv 0x00c9ec60
-void __stdcall FUN_00c9ec60(NiTransformC9E* pkOut)
-{
-    hkTransformC9E kTransform;
-    FUN_00c9ec00(&kTransform);
-    FUN_00624b10(&pkOut->m_kOrientation, &kTransform.m_rotation);
-    FUN_00458620(&pkOut->m_kTranslation, &kTransform.m_vTranslation);
-}
 
 namespace fnv_00c9ecb0 {
 union __declspec(intrin_type) __declspec(align(16)) __m128
@@ -566,18 +442,6 @@ struct FUN_00c9ecb0_cls
     void FUN_00c9ecb0(HingeVectorSet* set);
 };
 
-// @fnv 0x00c9ecb0
-void FUN_00c9ecb0_cls::FUN_00c9ecb0(HingeVectorSet* set)
-{
-    FillOutputFromState(set);
-    hkMatrix4 m;
-    FUN_00c9ec00(m);
-    bhkLimitedHingeVector* vectors = set->m_akVectors;
-    vectors[0].FUN_004b4db0(m.m_kColumn0.m_vComponents.m128_f32);
-    vectors[1].FUN_004b4db0(m.m_kColumn1.m_vComponents.m128_f32);
-    vectors[2].FUN_004b4db0(m.m_kColumn2.m_vComponents.m128_f32);
-    vectors[3].FUN_004b4db0(m.m_kColumn3.m_vComponents.m128_f32);
-}
 }  // namespace fnv_00c9ecb0
 
 #include <xmmintrin.h>
@@ -669,43 +533,6 @@ void __cdecl AccumulateParentTransforms(SceneObject*, SceneObject*, Transform*);
 void __cdecl FUN_00624ad0(Transform*, FnvMat4*);
 void __cdecl FUN_004a3e00(FourFloatVector&, const Vec3&);
 
-// @fnv 0x00c88520
-void __cdecl FUN_00c88520(SceneObject* a0, SceneObject* a1)
-{
-    Wrapper* p = a0 ? FUN_00c802d0(a0) : 0;
-    SceneObject* source = p->GetSource();
-    _ReadWriteBarrier();
-    SceneObject* destination = p->GetDestination();
-    CastObject* cast = a1 && a1->unk1c ? a1->unk1c->FUN_00653290(&DAT_012043f8) : 0;
-    _ReadWriteBarrier();
-    SceneObject* body = cast->GetBody();
-    if (destination && body && source && a1 && a1->unk18)
-    {
-        FnvMat4 world;
-        Transform converted;
-        Transform relative;
-        ((void(__thiscall*)(SceneObject*, FnvMat4*))body->vtable[61])(body, &world);
-        FUN_00624ad0(&converted, &world);
-        converted.scale = a1->unk98;
-        AccumulateParentTransforms(source, a1, &relative);
-        Transform combined = converted.FUN_0062c250(relative);
-        Quaternion q;
-        q.FUN_00a6df40(combined);
-        __m128 position;
-        FUN_004a3e00(*reinterpret_cast<FourFloatVector*>(&position), combined.translate);
-        __m128 rotation;
-        rotation.m128_f32[0] = q.x;
-        rotation.m128_f32[1] = q.y;
-        rotation.m128_f32[2] = q.z;
-        rotation.m128_f32[3] = q.w;
-        reinterpret_cast<FourFloatVector*>(&rotation)->FUN_005611c0();
-        reinterpret_cast<LockObject*>(&DAT_01267b80)->FUN_0040fbf0(0);
-        ((void(__thiscall*)(SceneObject*, FourFloatVector*, FourFloatVector*))destination->vtable[58])(
-            destination, reinterpret_cast<FourFloatVector*>(&position), reinterpret_cast<FourFloatVector*>(&rotation));
-        if (--DAT_01267b84 == 0)
-            DAT_01267b80 = 0;
-    }
-}
 }  // namespace fnv_00c88520
 
 #include <string.h>

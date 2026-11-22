@@ -1,4 +1,4 @@
-// staging/blk_00ba0000_o2.cpp: GeomList_S, Owner, BSFogProperty, FnvOdbObject and more (245 functions)
+// staging/blk_00ba0000_o2.cpp: GeomList_S, Owner, BSFogProperty, FnvOdbObject and more (226 functions)
 #include "f3_common.h"
 #include <windows.h>
 // src/staging/blk_00ba0000_o2.cpp - STAGING unit created 2026-10-16 by stage_units.py for functions with no attributed unit
@@ -74,13 +74,6 @@ struct FUN_00ba3d10_Class
     void* m1;
     void __thiscall FUN_00ba3d10();
 };
-// @fnv 0x00ba3d10
-void __thiscall FUN_00ba3d10_Class::FUN_00ba3d10()
-{
-    void* p = m1;
-    m0 = (int)&DAT_010b9d24;
-    NiFreeAlias(p);
-}
 
 namespace fnv_00ba4170 {
 struct MemoryManager
@@ -177,12 +170,6 @@ struct FUN_00baa160_Class : ImageSpaceEffect
 {
     FUN_00baa160_Class();
 };
-
-// @fnv 0x00baa160
-FUN_00baa160_Class::FUN_00baa160_Class()
-{
-    *(const void**)this = &DAT_010b895c;
-}
 
 namespace fnv_00baa220 {
 struct MemoryManager
@@ -544,16 +531,6 @@ struct FUN_00ba3ce0_Class
     void* m1;
     void* __thiscall FUN_00ba3ce0(bool flag);
 };
-// Sets m0 to DAT_010b9d24, frees m1 with NiFree, and if flag bit 0 is set deallocates this via g_memoryManager, returning this.
-// @fnv 0x00ba3ce0
-void* __thiscall FUN_00ba3ce0_Class::FUN_00ba3ce0(bool abFree)
-{
-    m0 = &DAT_010b9d24;
-    NiFree(m1);
-    if (abFree & 1)
-        g_memoryManager.Deallocate(this);
-    return this;
-}
 
 // Returns the element of a fixed lookup table at index a - 1.
 // @fnv 0x00ba5060
@@ -830,18 +807,6 @@ struct StrArr
 };
 void __stdcall WriteToSettingArray(StrArr*);
 
-// @fnv 0x00bb74e0
-void __stdcall FUN_00bb74e0(StrArr* a)
-{
-    WriteToSettingArray(a);
-    char* p = FUN_00a7d330(*(void**)&g_011fa05c);
-    unsigned int i = *(unsigned short*)((char*)a + 0xa);
-    unsigned int c = *(unsigned short*)((char*)a + 0x8);
-    if (i >= c)
-        a->SetSize(i + *(unsigned short*)((char*)a + 0xe));
-    a->SetAt(i, p);
-}
-
 void __cdecl NiFreeAlias(void*);
 struct FUN_00ba4050_Class
 {
@@ -849,16 +814,6 @@ struct FUN_00ba4050_Class
     void* m_obj;
     void* __thiscall FUN_00ba4050(bool);
 };
-// Resets the vtable, frees m_obj via NiFreeAlias, and deallocates this when del is set.
-// @fnv 0x00ba4050
-void* FUN_00ba4050_Class::FUN_00ba4050(bool del)
-{
-    m_vft = (int)&DAT_010b9d24;
-    NiFreeAlias(m_obj);
-    if (del & 1)
-        g_memoryManager.Deallocate(this);
-    return this;
-}
 
 struct FUN_00ba4580_Class
 {
@@ -952,12 +907,6 @@ FUN_00bad560_Class* FUN_00bad560_Class::FUN_00bad560(char flag)
 
 extern const char* const DAT_012005b8;
 
-// @fnv 0x00baec70
-const char* const* __cdecl FUN_00baec70()
-{
-    return &DAT_012005b8;
-}
-
 extern "C" void __cdecl _delete(void*, unsigned int);
 struct FUN_00baec90_Class
 {
@@ -1001,16 +950,6 @@ struct FUN_00bb3070_Class
     void __thiscall FUN_00bb3500(int a);
     void* __thiscall FUN_00bb3070(int a);
 };
-// Calls FUN_00bb3500, sets the vtable to DAT_010b9338 and initializes m_0x58 to 4 and m_0x1c to 10, then returns this.
-// @fnv 0x00bb3070
-void* __thiscall FUN_00bb3070_Class::FUN_00bb3070(int a)
-{
-    FUN_00bb3500(a);
-    m_vft = (void*)&DAT_010b9338;
-    m_0x58 = 4;
-    m_0x1c = 10;
-    return this;
-}
 
 struct FUN_00bb3400_Class
 {
@@ -1297,22 +1236,6 @@ struct FUN_00bb8900_Class : ImageSpaceEffect
 
     FUN_00bb8900_Class();
 };
-
-// Initializes the vtable pointer, sizes the texture array to 5, clears m_flag, and copies four globals into DAT_01200800..0c.
-// @fnv 0x00bb8900
-FUN_00bb8900_Class::FUN_00bb8900_Class()
-{
-    m_vft = &DAT_010b9f04;
-
-    m_ppData.SetSize(5);
-
-    m_flag = 0;
-
-    DAT_01200800 = DAT_011a9be0;
-    DAT_01200804 = DAT_011a9be4;
-    DAT_01200808 = DAT_011a9be8;
-    DAT_0120080c = DAT_011a9bec;
-}
 
 struct FUN_00bb8ea0_Class
 {
@@ -8158,23 +8081,7 @@ struct FUN_00bb4540 : SpawnBaseObj
     FUN_00bb4540(SpawnArgIface* arg);
 };
 
-// Calls arg->vCC(this), then sets m_58 to 0x1d and m_1c to 0xc.
-// @fnv 0x00bb4540
-FUN_00bb4540::FUN_00bb4540(SpawnArgIface* pSpawnArg) : SpawnBaseObj()
-{
-    pSpawnArg->vCC(this);
-    m_58 = 0x1d;
-    m_1c = 0xc;
-}
-
 extern int DAT_010b9910;
-
-// @fnv 0x00bb45b0
-void __fastcall FUN_00bb45b0(unsigned int* param_1)
-{
-    *param_1 = reinterpret_cast<unsigned int>(&DAT_010b9910);
-    FUN_00b67380(param_1);
-}
 
 // FUN_00bb45c0 : a one-line function - getter
 extern int g_target_00bb45c0;
@@ -9029,62 +8936,6 @@ struct ShaderPassParameters
     float parameter74;
     void AppendShaderParameters(StrArr*);
 };
-// @fnv 0x00bb7f90
-void ShaderPassParameters::AppendShaderParameters(StrArr* array)
-{
-    WriteToSettingArray(array);
-    StrArrView* arrayView = reinterpret_cast<StrArrView*>(array);
-    char* value = FUN_00a7d330(DAT_012007d8);
-    {
-        unsigned int at = arrayView->count;
-        if (at >= arrayView->capacity)
-            array->SetSize(at + arrayView->growBy);
-        array->SetAt(at, value);
-    }
-    value = FUN_00a7d550(DAT_010b9e1c, parameter68);
-    {
-        unsigned int at = arrayView->count;
-        if (at >= arrayView->capacity)
-            array->SetSize(at + arrayView->growBy);
-        array->SetAt(at, value);
-    }
-    value = FUN_00a7d550(DAT_010b9e0c, parameter6c);
-    {
-        unsigned int at = arrayView->count;
-        if (at >= arrayView->capacity)
-            array->SetSize(at + arrayView->growBy);
-        array->SetAt(at, value);
-    }
-    value = FUN_00a7d550(DAT_010b9dfc, parameter70);
-    {
-        unsigned int at = arrayView->count;
-        if (at >= arrayView->capacity)
-            array->SetSize(at + arrayView->growBy);
-        array->SetAt(at, value);
-    }
-    value = FUN_00a7d550(DAT_010b9df4, parameter74);
-    {
-        unsigned int at = arrayView->count;
-        if (at >= arrayView->capacity)
-            array->SetSize(at + arrayView->growBy);
-        array->SetAt(at, value);
-    }
-    if (enabledData)
-    {
-        GameGraphicsObject* object = FUN_00653290(&DAT_011f444c);
-        if (object)
-        {
-            unsigned int graphicalValue = *object->GetGraphicsValue();
-            value = FUN_00a7d5e0(DAT_010b9dec, graphicalValue);
-            {
-                unsigned int at = arrayView->count;
-                if (at >= arrayView->capacity)
-                    array->SetSize(at + arrayView->growBy);
-                array->SetAt(at, value);
-            }
-        }
-    }
-}
 
 void* __cdecl FUN_00aa13e0(unsigned int);
 void __cdecl FUN_00aa1460(void*, unsigned int);
@@ -13436,12 +13287,6 @@ struct FUN_00ba8630_Class : FUN_00b6f460_class
     void FUN_00ba8650(NiStream* stream);
 };
 
-// @fnv 0x00ba8650
-void FUN_00ba8630_Class::FUN_00ba8650(NiStream* stream)
-{
-    LoadAndSetAdditional(stream);
-}
-
 struct NiObj_s
 {
     bool IsEqual(NiObj_s*);
@@ -13457,19 +13302,8 @@ bool FUN_00ba87d0_Class::FUN_00ba87d0(NiObj_s* a)
 }
 
 void __cdecl FUN_00a950c0();
-// @fnv 0x00ba8a70
-void __cdecl FUN_00ba8a70()
-{
-    FUN_00a950c0();
-}
 
 void __cdecl FUN_00a99e40();
-
-// @fnv 0x00ba8a80
-void __cdecl FUN_00ba8a80()
-{
-    FUN_00a99e40();
-}
 
 // @fnv 0x00ba8a90
 int __stdcall FUN_00ba8a90(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5)
@@ -13762,35 +13596,6 @@ struct FUN_00bb1160_Class
     unsigned int field98;
     void __thiscall FUN_00bb1160(StrArr* array);
 };
-// Appends formatted entries for DAT_012005fc, field60, field90 (via FUN_00c4bb40 or FUN_00a7d5a0), a disabled flag, and field98 to the array.
-// @fnv 0x00bb1160
-void __thiscall FUN_00bb1160_Class::FUN_00bb1160(StrArr* array)
-{
-    WriteToSettingArray(array);
-    ((FNVArray*)array)->Append(FUN_00a7d330(DAT_012005fc));
-    ((FNVArray*)array)->Append(FUN_00a7d4d0(&DAT_010b90ec, field60));
-    if (field90)
-    {
-        void* name = (void*)FUN_00c4bb40(field90);
-        char* value;
-        if (name)
-        {
-            value = FUN_00a7d5e0(&DAT_010ae79c, (unsigned int)name);
-            ((FNVArray*)array)->Append(value);
-        }
-        else
-        {
-            name = field90;
-            value = FUN_00a7d5a0(&DAT_010ae79c, name);
-            ((FNVArray*)array)->Append(value);
-        }
-    }
-    if (!IsEnabled())
-    {
-        ((FNVArray*)array)->Append(FUN_00a7d370(&DAT_010ae344, 1));
-    }
-    ((FNVArray*)array)->Append(FUN_00a7db60(&DAT_010b90dc, field98));
-}
 }  // namespace fnv_00bb1160
 
 union FogSlots_00bb1b50
@@ -13913,11 +13718,6 @@ struct FUN_00bb44f0_class : FUN_00b68dc0_class
 {
     void FUN_00bb44f0(NiStream&);
 };
-// @fnv 0x00bb44f0
-void FUN_00bb44f0_class::FUN_00bb44f0(NiStream& a)
-{
-    LoadFromStream(a);
-}
 
 void __cdecl CheckAndNotify();
 // @fnv 0x00bb4500
@@ -14020,25 +13820,6 @@ struct S00baa660_Tls
 };
 
 typedef void(__thiscall* S00baa660_VFn)(S00baa660_Obj*);
-
-// If FUN_00e80570 returns true, calls virtual functions at offsets 0x12c, 0x134, and 0x130 on this object.
-// @fnv 0x00baa660
-bool S00baa660_Obj::FUN_00baa660()
-{
-    S00baa660_Tls tls;
-    bool result = FUN_00e80570();
-    if (result)
-    {
-        void** vt = *(void***)this;
-        ((S00baa660_VFn)vt[0x12c / 4])(this);
-        vt = *(void***)this;
-        ((S00baa660_VFn)vt[0x134 / 4])(this);
-        vt = *(void***)this;
-        ((S00baa660_VFn)vt[0x130 / 4])(this);
-        result = true;
-    }
-    return result;
-}
 
 extern int DAT_011f91e4;
 extern bool DAT_011f9ef0;
@@ -17495,16 +17276,6 @@ struct FUN_00bb7170 : BaseShim
     FUN_00bb7170();
 };
 
-// Sets the vtable pointer, m_058 to 8, m_060 from FUN_00bb6030, allocates m_064 as m_060 PoolElement20 entries, and sets m_01c to 0x18.
-// @fnv 0x00bb7170
-FUN_00bb7170::FUN_00bb7170()
-{
-    m_vptr = (int)&DAT_010b9c40;
-    m_058 = 8;
-    m_060 = FUN_00bb6030();
-    m_064 = new PoolElement20[m_060];
-    m_01c = 0x18;
-}
 }  // namespace fnv_00bb7170
 
 struct GameHeap
@@ -17923,49 +17694,6 @@ void BA01A0Owner::FUN_00ba01a0(BA01A0Item* item, void* key)
     }
 }
 
-
-__declspec(noinline) RefPtr_b9fcc0 List_b9fcc0::FUN_00b9efa0(void*& key)
-{
-    SessionNode* node = (SessionNode*)key;
-    if (node == head)
-    {
-        key = node->next;
-        return PopFront();
-    }
-    if (node == tail)
-    {
-        key = 0;
-        return PopBack();
-    }
-    SessionNode* previous = node->prev;
-    SessionNode* following = node->next;
-    key = following;
-    if (previous)
-        previous->next = following;
-    if (following)
-        following->prev = previous;
-    RefPtr_b9fcc0 result = node->value;
-    ReleaseRefCountedNode(node);
-    --count;
-    return result;
-}
-
-__declspec(noinline) RefPtr_b9fcc0 List_b9fcc0::FUN_00b9fcc0(const RefPtr_b9fcc0& item)
-{
-    SessionNode* node = head;
-    while (node)
-    {
-        SessionNode* current = node;
-        node = node->next;
-        if (current->value.m_p == item.m_p)
-        {
-            node = current;
-            break;
-        }
-    }
-    void* cursor = node;
-    return cursor ? FUN_00b9efa0(cursor) : item;
-}
 
 struct S2760_Xf
 {
@@ -19285,17 +19013,6 @@ class FUN_00baeb80 : public FUN_00ba8e50
     FUN_00baeb80();
     virtual ~FUN_00baeb80();
 };
-// Constructor: sets m_7c to 3, clears m_80, m_84 and m_88, sets m_8c to 8, copies a color from DAT_011a9be0 into m_60, and writes 13 at offset 0x1c.
-// @fnv 0x00baeb80
-FUN_00baeb80::FUN_00baeb80() : m_7c(3)
-{
-    m_80 = 0;
-    m_84 = 0.0f;
-    m_88 = 0;
-    m_8c = 8;
-    m_60 = *(nb::Color*)&DAT_011a9be0;
-    *(int*)((char*)this + 0x1c) = 13;
-}
 }  // namespace fnv_00baeb80
 
 namespace fnv_00bb8ea0 {
@@ -20429,10 +20146,6 @@ struct P368Shader
     P368PassArray* FUN_00bb4740(P368Geom*, unsigned int, bool, unsigned int, P368Context*, bool);
 };
 
-__declspec(noinline) bool P368Shader::FUN_004a2020(int n)
-{
-    return double(shaderFlagWords[unsigned(n) >> 5] & (1u << (unsigned(n) % 32))) > 0.0;
-}
 // Selects and builds the P368PassArray for a given pass index, updating lights, distance, and blend state based on shader flags and context.
 // @f3 0x00b368e0 (community match, verified in this file)
 bool FUN_00530bb0();

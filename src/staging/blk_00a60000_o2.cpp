@@ -1,4 +1,4 @@
-// staging/blk_00a60000_o2.cpp: NiShader, PivotGeometry, NiDirectionalLight, NiTMapBaseStub and more (116 functions)
+// staging/blk_00a60000_o2.cpp: NiShader, PivotGeometry, NiDirectionalLight, NiTMapBaseStub and more (108 functions)
 #include "f3_common.h"
 #include <windows.h>
 // src/staging/blk_00a60000_o2.cpp - STAGING unit created 2026-10-16 by stage_units.py for functions with no attributed unit
@@ -363,36 +363,6 @@ struct FUN_00a63850_Class
     void DestroyMap();
 };
 
-// @fnv 0x00a63850
-void FUN_00a63850_Class::DestroyMap()
-{
-    char* self = reinterpret_cast<char*>(this);
-    *reinterpret_cast<int*>(self) = (int)&DAT_0109bcc4;
-    if (self[0x10])
-    {
-        unsigned int i = 0;
-        if (*reinterpret_cast<unsigned int*>(self + 4) > 0)
-        {
-            do
-            {
-                char* node = *reinterpret_cast<char**>(*reinterpret_cast<char**>(self + 8) + i * 4);
-                while (node)
-                {
-                    char* cur = node;
-                    node = *reinterpret_cast<char**>(cur);
-                    _NiFree(*reinterpret_cast<void**>(cur + 4));
-                }
-                ++i;
-            } while (i < *reinterpret_cast<unsigned int*>(self + 4));
-        }
-    }
-    *reinterpret_cast<int*>(self) = (int)&DAT_0109bca4;
-    reinterpret_cast<NiTMapBaseStub*>(this)->RemoveAll();
-    *reinterpret_cast<int*>(self) = (int)&DAT_0109bc84;
-    reinterpret_cast<NiTMapBaseStub*>(this)->RemoveAll();
-    _NiFree(*reinterpret_cast<void**>(self + 8));
-}
-
 namespace fnv_00a63a20 {
 struct NiTMapBaseStub
 {
@@ -636,20 +606,6 @@ struct NiTriStrips
 };
 
 extern int DAT_0109cd44;
-
-// Allocates 0xc4 bytes, constructs a NiTriStrips in place, sets its vtable to DAT_0109cd44, and returns the pointer or 0 on failure.
-// @fnv 0x00a71ce0
-void* CreateNiTriStrips()
-{
-    NiTriStrips* p = (NiTriStrips*)A51BF0Base::operator new(0xc4);
-    if (p)
-    {
-        p->NiTriStrips::NiTriStrips();
-        *(int*)p = (int)&DAT_0109cd44;
-        return p;
-    }
-    return 0;
-}
 
 struct NiTPrimitiveArray_ImageSpaceTexture___
 {
@@ -1577,18 +1533,6 @@ struct FUN_00a639e0_Class
     FUN_00a639e0_Class* __thiscall FUN_00a639e0(char param_2);
 };
 
-// Resets m_baseData0, clears the map, frees m_baseData2, and optionally deallocates this object.
-// @fnv 0x00a639e0
-FUN_00a639e0_Class* __thiscall FUN_00a639e0_Class::FUN_00a639e0(char abFreeMemory)
-{
-    m_baseData0 = &DAT_0109bc84;
-    ((NiTMapBaseStub*)this)->RemoveAll();
-    NiFreeAlias(m_baseData2);
-    if (abFreeMemory & 1)
-        _g_memoryManager.Deallocate(this);
-    return this;
-}
-
 struct FUN_00a66960_cls
 {
     int m_00;
@@ -1991,27 +1935,6 @@ struct FUN_00a71c40_cls
                                          unsigned int a9, unsigned int a10, unsigned int a11);
 };
 
-// @fnv 0x00a71c40
-FUN_00a71c40_cls* FUN_00a71c40_cls::ConstructWithAlloc(unsigned int a1, unsigned int a2, unsigned int a3,
-                                                       unsigned int a4, unsigned int a5, unsigned int a6,
-                                                       unsigned int a7, unsigned int a8, unsigned int a9,
-                                                       unsigned int a10, unsigned int a11)
-{
-    void* obj;
-    void* mem = FUN_00aa13e0(0x50);
-    if (mem != 0)
-    {
-        obj = ((FUN_00a75dc0_cls*)mem)->FUN_00a75dc0(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11);
-    }
-    else
-    {
-        obj = 0;
-    }
-    this->FUN_00a89720(obj);
-    this->m_vt = &DAT_0109cd44;
-    return this;
-}
-
 // FUN_00a71cc0 : constructor-like helper that calls a base routine with the
 // argument and then installs the class vtable pointer, returning itself.
 
@@ -2023,14 +1946,6 @@ struct FUN_00a71cc0_cls
     void FUN_00a89720(int arg);
     FUN_00a71cc0_cls* FUN_00a71cc0(int arg);
 };
-
-// @fnv 0x00a71cc0
-FUN_00a71cc0_cls* FUN_00a71cc0_cls::FUN_00a71cc0(int arg)
-{
-    FUN_00a89720(arg);
-    m_pVTable = (void*)&DAT_0109cd44;
-    return this;
-}
 
 struct FUN_00a72550_Class
 {
@@ -2507,12 +2422,6 @@ SceneFactoryObject* CreateSceneFactoryObject()
 
 extern int DAT_011aa04c;
 
-// @fnv 0x00a74d80
-void __cdecl FUN_00a74d80(int param_1)
-{
-    DAT_011aa04c = param_1;
-}
-
 // FUN_00a74d90 - installs a callback pointer into the global slot at 0x011aa050.
 //
 // Original bytes:
@@ -2525,12 +2434,6 @@ void __cdecl FUN_00a74d80(int param_1)
 // own address.  The name is spelled with a void* type so that it does not
 // collide with the canonical "?DAT_011aa050@@3HA" entry in the symbol DB.
 extern void* DAT_011aa050;
-
-// @fnv 0x00a74d90
-void __cdecl FUN_00a74d90(void* callback)
-{
-    DAT_011aa050 = callback;
-}
 
 struct CallTarget_00a74e10
 {
@@ -4752,11 +4655,6 @@ void __cdecl ConvertPixelFormat(unsigned int uiWidth, unsigned int uiHeight, uns
 }
 
 void __cdecl FUN_00a8a9a0();
-// @fnv 0x00a7b7d0
-void __cdecl FUN_00a7b7d0()
-{
-    FUN_00a8a9a0();
-}
 
 struct Vec3
 {

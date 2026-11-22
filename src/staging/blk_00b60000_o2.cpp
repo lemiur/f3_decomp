@@ -83,13 +83,6 @@ struct FUN_00b603e0_class
     void* p8;
     void FUN_00b603e0();
 };
-// @fnv 0x00b603e0
-void FUN_00b603e0_class::FUN_00b603e0()
-{
-    p0 = (int)&DAT_010ade18;
-    ((NiTMapBaseStub*)this)->RemoveAll();
-    NiFreeAlias(p8);
-}
 
 namespace fnv_00b60400 {
 extern int DAT_010ade34;
@@ -210,16 +203,6 @@ struct FUN_00b664f0_class
 {
     void* FUN_00b664f0(unsigned int flags);
 };
-
-// Calls FUN_00b656e0, then deletes this with size 0x280 if flags has bit 0 set, and returns this.
-// @fnv 0x00b664f0
-void* FUN_00b664f0_class::FUN_00b664f0(unsigned int flags)
-{
-    FUN_00b656e0();
-    if (flags & 1)
-        operator delete(this, 0x280);
-    return this;
-}
 
 void __cdecl FUN_00b65c60(void*);
 struct NiAccumulator
@@ -430,16 +413,6 @@ struct FUN_00b605a0_class
     void* m_8;
     FUN_00b605a0_class* __thiscall FUN_00b605a0(int flags);
 };
-// @fnv 0x00b605a0
-FUN_00b605a0_class* __thiscall FUN_00b605a0_class::FUN_00b605a0(int flags)
-{
-    m_iWordAt00 = (int)&DAT_010ade18;
-    ((NiTMapBaseStub*)this)->RemoveAll();
-    NiFreeAlias(m_8);
-    if (flags & 1)
-        g_memoryManager.Deallocate(this);
-    return this;
-}
 
 // @fnv 0x00b60d70
 void __fastcall FUN_00b60d70(void* self, int, int value)
@@ -463,19 +436,6 @@ struct NiTAbstractPoolAllocator_unsigned_int
     };
     static LinkedListEntry* ms_pFreeList;
 };
-// @fnv 0x00b63df0
-void __stdcall FreePoolNode(void* p)
-{
-    NiTAbstractPoolAllocator_unsigned_int::LinkedListEntry* n = (NiTAbstractPoolAllocator_unsigned_int::LinkedListEntry*)p;
-    *(unsigned char*)((char*)n + 8) = 0;
-    g_011c5f80.Lock(0);
-    n->m_pkPrev = 0;
-    n->m_pkNext = NiTAbstractPoolAllocator_unsigned_int::ms_pFreeList;
-    --DAT_011c5f84;
-    NiTAbstractPoolAllocator_unsigned_int::ms_pFreeList = n;
-    if (!DAT_011c5f84)
-        *(unsigned int*)&g_011c5f80 = 0;
-}
 
 extern int DAT_011ff9f0;
 struct BSRenderStateManager
@@ -547,24 +507,6 @@ struct FUN_00b6f460_class
     void FUN_00b6f460(NiStream* s);
     void LoadAndSetAdditional(NiStream* kStream);
 };
-// @fnv 0x00b66780
-void FUN_00b6f460_class::LoadAndSetAdditional(NiStream* kStream)
-{
-    FUN_00b6f460(kStream);
-    NiObject* pkAdditional = (NiObject*)kStream->GetLoadedObject();
-    NiObject* old = *(NiObject**)((char*)this + 0xa4);
-    if (old != pkAdditional)
-    {
-        if (old)
-        {
-            if (InterlockedDecrement((volatile long*)((char*)old + 4)) == 0)
-                old->v1();
-        }
-        *(NiObject**)((char*)this + 0xa4) = pkAdditional;
-        if (pkAdditional)
-            InterlockedIncrement((volatile long*)((char*)pkAdditional + 4));
-    }
-}
 
 extern "C" void* __cdecl memmove(void* dst, const void* src, unsigned int n);
 struct FUN_00b71ad0_class
@@ -777,15 +719,6 @@ struct FUN_00b60c90_class : FUN_00b606f0_class
 {
     FUN_00b60c90_class* __thiscall FUN_00b60c90(int flags);
 };
-// Runs the base class destructor, frees this via g_memoryManager when flags has bit 0 set, and returns this.
-// @fnv 0x00b60c90
-FUN_00b60c90_class* FUN_00b60c90_class::FUN_00b60c90(int flags)
-{
-    this->FUN_00b606f0_class::~FUN_00b606f0_class();
-    if (flags & 1)
-        g_memoryManager.Deallocate(this);
-    return this;
-}
 
 void __cdecl FUN_00b60b50();
 struct FUN_00b60f30_class
@@ -1861,34 +1794,6 @@ class FUN_00b63a90_cls
     unsigned int m_uiCount;
     int SumItemSubValues();
 };
-
-// Sums m_usValue of each item's m_pSub over m_items[0..m_uiCount-1] and returns the total.
-// @fnv 0x00b63a90
-int FUN_00b63a90_cls::SumItemSubValues()
-{
-    int count = (int)m_uiCount;
-    unsigned int tail = 0;
-    unsigned int sumA = 0;
-    unsigned int sumB = 0;
-    unsigned int idx = 0;
-    if (count >= 2)
-    {
-        unsigned int n = ((unsigned int)count - 2) / 2 + 1;
-        FUN_00b63a90_Item** p = &m_items[1];
-        idx = n * 2;
-        do
-        {
-            sumA += (*(p - 1))->m_pSub->m_usValue;
-            sumB += (*p)->m_pSub->m_usValue;
-            p += 2;
-        } while (--n != 0);
-    }
-    if (idx < (unsigned int)count)
-    {
-        tail = m_items[idx]->m_pSub->m_usValue;
-    }
-    return (int)(sumB + sumA + tail);
-}
 
 struct PoolAllocator_b8522
 {
@@ -3709,11 +3614,6 @@ struct CpuObject
     int value;
     int FUN_00b6d120();
 };
-// @fnv 0x00b6d120
-int CpuObject::FUN_00b6d120()
-{
-    return value;
-}
 
 struct b6d130_Counted
 {
@@ -3771,21 +3671,6 @@ struct FUN_00b6d130_cls
 
     void ReleaseCounted();
 };
-
-// Decrements the reference count of m_pCounted and calls Release when it reaches zero, then clears m_pCounted.
-// @fnv 0x00b6d130
-void FUN_00b6d130_cls::ReleaseCounted()
-{
-    b6d130_Counted* pCounted = m_pCounted;
-    if (pCounted != 0)
-    {
-        if (InterlockedDecrement((long volatile*)&pCounted->m_iObjectReferenceCount) == 0)
-        {
-            pCounted->Release();
-        }
-        m_pCounted = 0;
-    }
-}
 
 struct NiGlobalStringTable
 {
@@ -4705,82 +4590,6 @@ struct S_00b7ac20_Class
 
     void __thiscall FUN_00b7ac20(int index);
 };
-
-void __thiscall S_00b7ac20_Class::FUN_00b7ac20(int index)
-{
-    if (DAT_011fb4c0[index] != 0)
-    {
-        unsigned int eax = 1;
-        S_00b7ac20_Node** esi = DAT_011febdc;
-
-        do
-        {
-            S_00b7ac20_Node* node = esi[-1];
-            if (node != 0)
-            {
-                if (node->unk08 != 0)
-                {
-                    unsigned int mask = (eax << 1) | (eax >> 31);
-                    node->unk08 = (DAT_011fb4c0[index] & mask) == 0;
-                }
-            }
-
-            eax = (eax << 1) | (eax >> 31);
-
-            node = esi[0];
-            if (node != 0)
-            {
-                if (node->unk08 != 0)
-                {
-                    unsigned int mask = (eax << 1) | (eax >> 31);
-                    node->unk08 = (DAT_011fb4c0[index] & mask) == 0;
-                }
-            }
-
-            esi += 2;
-            eax = (eax << 1) | (eax >> 31);
-        } while ((int)esi < (int)DAT_011fec34);
-
-        unk34->FUN_00b7ac20_v24();
-    }
-
-    if (DAT_011fa8e0[index] != 0)
-    {
-        int* selected = &DAT_011fa8e0[index];
-        unsigned int eax = 1;
-        S_00b7ac20_Node** esi = DAT_011fec34;
-
-        do
-        {
-            S_00b7ac20_Node* node = esi[-1];
-            if (node != 0)
-            {
-                if (node->unk08 != 0)
-                {
-                    unsigned int mask = (eax << 1) | (eax >> 31);
-                    node->unk08 = (*selected & mask) == 0;
-                }
-            }
-
-            eax = (eax << 1) | (eax >> 31);
-
-            node = esi[0];
-            if (node != 0)
-            {
-                if (node->unk08 != 0)
-                {
-                    unsigned int mask = (eax << 1) | (eax >> 31);
-                    node->unk08 = (*selected & mask) == 0;
-                }
-            }
-
-            esi += 2;
-            eax = (eax << 1) | (eax >> 31);
-        } while ((int)esi < (int)DAT_011fec8c);
-
-        unk30->FUN_00b7ac20_v24();
-    }
-}
 
 struct V4
 {
@@ -8639,12 +8448,6 @@ struct FnvB60150Thunk : FUN_00b6f460_class
     void __thiscall FUN_00b60150(NiStream* stream);
 };
 
-// @fnv 0x00b60150
-void __thiscall FnvB60150Thunk::FUN_00b60150(NiStream* stream)
-{
-    FUN_00b6f460(stream);
-}
-
 void __cdecl FUN_00bc3770();
 
 // @fnv 0x00b60160
@@ -9438,17 +9241,6 @@ struct FUN_00b617f0 : B617Head, B617Holder
 {
     FUN_00b617f0();
 };
-// Constructor that sets hashSize to 0x65 and count to 0, allocates and zeroes a 0x194-byte hashTable via FUN_00aa1070, then sets the vtable to DAT_010ade50.
-// @fnv 0x00b617f0
-FUN_00b617f0::FUN_00b617f0()
-{
-    vtable = &DAT_010ade18;
-    hashSize = 0x65;
-    count = 0;
-    hashTable = FUN_00aa1070(0x194);
-    FUN_00ec61c0(hashTable, 0, hashSize * 4);
-    vtable = &DAT_010ade50;
-}
 
 class NiCamera;
 extern NiCamera* DAT_011f917c;
@@ -11121,51 +10913,6 @@ void __cdecl ReleaseStringHolders()
     DAT_011fa054 = 0;
 }
 
-// Returns 1 if the high bit is set, otherwise returns the value if it is between 2 and 16, else 0.
-// @fnv 0x00b6c200
-int __cdecl FUN_00b6c200(int aiValue)
-{
-    if (aiValue & 0x80000000)
-        return 1;
-    switch (aiValue)
-    {
-    case 0:
-    case 1:
-        return 0;
-    case 2:
-        return 2;
-    case 3:
-        return 3;
-    case 4:
-        return 4;
-    case 5:
-        return 5;
-    case 6:
-        return 6;
-    case 7:
-        return 7;
-    case 8:
-        return 8;
-    case 9:
-        return 9;
-    case 10:
-        return 10;
-    case 11:
-        return 11;
-    case 12:
-        return 12;
-    case 13:
-        return 13;
-    case 14:
-        return 14;
-    case 15:
-        return 15;
-    case 16:
-        return 16;
-    }
-    return 0;
-}
-
 struct RefObj;
 
 struct PoolRef
@@ -11231,68 +10978,6 @@ struct Pool
     }
     RefObj* FUN_00b6e110(unsigned int a, unsigned int type, unsigned int flags, unsigned int noReuse, unsigned int e);
 };
-
-// With noReuse 0, returns the head of the type's list (adding it to its set) or else CreateNew's result; with noReuse nonzero, returns 0.
-// @fnv 0x00b6e110
-RefObj* Pool::FUN_00b6e110(unsigned int a, unsigned int type, unsigned int flags, unsigned int noReuse, unsigned int e)
-{
-    if (noReuse == 0)
-    {
-        switch (type)
-        {
-        case 43:
-            if (m_list0.m_uiCount > 0)
-            {
-                RefObj* obj = m_list0.m_pkHead->m_element;
-                m_set0.Insert(obj);
-                m_list0.RemoveHead();
-                return obj;
-            }
-            break;
-        case 17:
-            if (m_list1.m_uiCount > 0)
-            {
-                RefObj* obj = m_list1.m_pkHead->m_element;
-                m_set1.Insert(obj);
-                m_list1.RemoveHead();
-                return obj;
-            }
-            break;
-        case 9:
-            if (m_list2.m_uiCount > 0)
-            {
-                RefObj* obj = m_list2.m_pkHead->m_element;
-                m_set2.Insert(obj);
-                m_list2.RemoveHead();
-                return obj;
-            }
-            break;
-        case 22:
-            if (m_list3.m_uiCount > 0)
-            {
-                RefObj* obj = m_list3.m_pkHead->m_element;
-                m_set3.Insert(obj);
-                m_list3.RemoveHead();
-                return obj;
-            }
-            break;
-        case 19:
-            if (m_list4.m_uiCount > 0)
-            {
-                RefObj* obj = m_list4.m_pkHead->m_element;
-                m_set4.Insert(obj);
-                m_list4.RemoveHead();
-                return obj;
-            }
-            break;
-        }
-    }
-    if (noReuse != 0)
-        return 0;
-    {
-        return CreateNew(a, type, flags, e);
-    }
-}
 
 extern __declspec(thread) int g_tlsMemContext;
 struct PoolGuard
@@ -12433,55 +12118,6 @@ extern ShaderVector _DAT_011FA0C0[];
 extern bool DAT_011f941e;
 struct LightMatrix;
 NiPoint3* __stdcall FUN_00ee6df8(NiPoint3*, const NiPoint3*, const LightMatrix*);
-// Fills shader constant arrays with transformed light positions, radii, and colors from the active light set.
-// @fnv 0x00b7cb00
-void __stdcall UpdateShaderLights(const LightMatrix* matrix, float radiusScale, ScaleSource* source)
-{
-    LightSet* lights = reinterpret_cast<LightSet*>(DAT_011f91e0);
-    float alpha = lights->property->alpha->vtable->GetAlpha(lights->property->alpha);
-    ShaderVector ambient(99.0f, 99.0f, 99.0f, alpha);
-    reinterpret_cast<ShaderManager*>(DAT_0126f74c)->holder->SetVSConst(25, &ambient.x, 1);
-    int count = (int)lights->count - 1;
-    if (count < 2)
-        count = 2;
-    DAT_011fec38->active20 = count;
-    if (DAT_011fec4c->enabled)
-        DAT_011fec4c->count = (int)lights->count - 1;
-    float lightCount;
-    float scale = source ? source->scale : 30.0f;
-    lightCount = (float)lights->count - 1.0;
-    ShaderVector result;
-    for (unsigned char i = 1; i < lights->count; ++i)
-    {
-        LightEntry* entry = lights->entries[i];
-        ShaderLightData* light = entry->light;
-        NiPoint3 position = light->position;
-        NiPoint3 offset = DAT_011f91c8->translate;
-        position.x += offset.x;
-        position.y += offset.y;
-        position.z += offset.z;
-        NiPoint3 transformed;
-        FUN_00ee6df8(&transformed, &position, matrix);
-        float radius = light->radius / radiusScale;
-        DAT_011fd9a8[i].x = transformed.x;
-        DAT_011fd9a8[i].y = transformed.y;
-        DAT_011fd9a8[i].z = transformed.z;
-        DAT_011fd9a8[i].w = radius;
-        reinterpret_cast<ShaderManager*>(DAT_0126f74c)->holder->SetVSConst(25 + i, &DAT_011fd9a8[i].x, 1);
-        float dimmer = light->dimmer;
-        if (!DAT_011f941e && 1.0 < dimmer)
-            dimmer = 1.0f;
-        LightVector color = light->diffuse * dimmer * entry->GetDimmer();
-        result = ShaderVector(color.x, color.y, color.z, lightCount);
-        _DAT_011FA0C0[i] = result;
-        lightCount = scale;
-    }
-    if (lights->count == 2)
-    {
-        result = ShaderVector(0.0f, 0.0f, 0.0f, scale);
-        _DAT_011FA0C0[2] = result;
-    }
-}
 }  // namespace fnv_00b7cb00
 
 // Sets two global values into specific slots of DAT_0126f74c based on which pass identifier is supplied.
@@ -15722,10 +15358,6 @@ extern int shaderFlags;
 extern int DAT_011f95e4, DAT_011f91c0;
 extern float DAT_011fd890;
 void __cdecl FUN_00ba8c50(void*, int, void*);
-inline int ShadowFeatureEnabled()
-{
-    return (shaderFlags & 16) > 0;
-}
 struct ShaderPassBuilder
 {
     int unk00, unk04, unk08, unk0c, unk10, unk14, unk18, unk1c, unk20;
@@ -15740,105 +15372,6 @@ struct ShaderPassBuilder
     Light* FUN_00b70680(void**);
     PassArray* FUN_00b60790(void*, unsigned int, int, unsigned int, int, int);
 };
-// @fnv 0x00b60790
-PassArray* ShaderPassBuilder::FUN_00b60790(void* geometry, unsigned int mode, int unused, unsigned int variant,
-                                           int unused2, int FlushUsageData)
-{
-    MemScope scope;
-    if (cached != mode)
-    {
-        FUN_00ba95e0(2);
-        array->count = 0;
-        void* position = 0;
-        unsigned short lightCount = DAT_011f9ef0 ? FUN_00b707d0() : 0;
-        bool special = (flags & 0x400) > 0;
-        bool textured = (flags & 0x1000) > 0;
-        bool alternate = (flags & 0x2000) > 0;
-        bool extra = !DAT_011f9427 && DAT_011f95e4 && (shaderFlags & 0x20) && DAT_011f91c0 >= 2 &&
-                     (unsigned int)DAT_011fd890 != 0;
-        unsigned int pass = (DAT_011f941e ? 0x246 : 0);
-        unsigned short noLights = 0;
-        pass += lightCount > noLights ? 0x14 : 0;
-        if (special)
-        {
-            if (textured)
-            {
-                if (!extra)
-                    array->FUN_00ba9ee0(geometry, pass + 0x19, true, 0, 0, 0, 0, 0);
-                else
-                    array->FUN_00ba9ee0(geometry, pass + 0x21, true, 0, 0, 0, 0, 0);
-            }
-            else
-            {
-                if (!extra)
-                    array->FUN_00ba9ee0(geometry, pass + 0x17, true, 0, 0, 0, 0, 0);
-                else
-                    array->FUN_00ba9ee0(geometry, pass + 0x1f, true, 0, 0, 0, 0, 0);
-            }
-        }
-        else if (textured)
-        {
-            if (alternate)
-                array->FUN_00ba9ee0(geometry, pass + 0x27, true, 0, 0, 0, 0, 0);
-            else
-            {
-                if (!extra)
-                    array->FUN_00ba9ee0(geometry, pass + 0x18, true, 0, 0, 0, 0, 0);
-                else
-                    array->FUN_00ba9ee0(geometry, pass + 0x20, true, 0, 0, 0, 0, 0);
-            }
-        }
-        else
-        {
-            if (alternate)
-                array->FUN_00ba9ee0(geometry, pass + 0x26, true, 0, 0, 0, 0, 0);
-            else
-            {
-                if (!extra)
-                    array->FUN_00ba9ee0(geometry, pass + 0x16, true, 0, 0, 0, 0, 0);
-                else
-                    array->FUN_00ba9ee0(geometry, pass + 0x1e, true, 0, 0, 0, 0, 0);
-            }
-        }
-        if (lightCount > 0)
-        {
-            void* light = FUN_00b70600(&position);
-            FUN_00ba8c50(array->passes[array->count - 1], 1, light);
-        }
-        if (DAT_011f91c0 >= 3)
-        {
-            int enabled = ShadowFeatureEnabled();
-            const bool& bShadow = *(bool*)&enabled;
-            if (bShadow)
-            {
-                Light* light = FUN_00b70590(&position);
-                while (light)
-                {
-                    if (light->active)
-                    {
-                        if (textured)
-                        {
-                            if (alternate)
-                                array->FUN_00ba9ee0(geometry, 0x287, false, 1, light, 0, 0, 0);
-                            else
-                                array->FUN_00ba9ee0(geometry, 0x285, false, 1, light, 0, 0, 0);
-                        }
-                        else
-                        {
-                            if (alternate)
-                                array->FUN_00ba9ee0(geometry, 0x286, false, 1, light, 0, 0, 0);
-                            else
-                                array->FUN_00ba9ee0(geometry, 0x284, false, 1, light, 0, 0, 0);
-                        }
-                    }
-                    light = FUN_00b70680(&position);
-                }
-            }
-        }
-        cached = mode | (variant << 8);
-    }
-    return array;
-}
 }  // namespace fnv_00b60790
 
 namespace fnv_00b6b0b0 {

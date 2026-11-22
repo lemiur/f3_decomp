@@ -4,31 +4,12 @@
 
 #include "../../include/layout_support.h"
 
-// @fnv 0x00e30f20
-int __cdecl PackBitFields(int a, int aiMiddleBits, int aiHighBits)
-{
-    return (((aiHighBits << 4) | aiMiddleBits) << 1) << 1 | a;
-}
-
 extern void* DAT_011be488[];
-
-// @fnv 0x00e30f50
-void __cdecl CallHandlerByIndex(int iHandlerIndex, int b, int c)
-{
-    ((void (*)(int, int))DAT_011be488[iHandlerIndex])(b, c);
-}
 
 struct FUN_00e39e60_class
 {
     int ComputeIndex(int param);
 };
-
-// @fnv 0x00e39e60
-int FUN_00e39e60_class::ComputeIndex(int aiOffset)
-{
-    return (((*reinterpret_cast<const int*>(this + 8)) + aiOffset) % *reinterpret_cast<const int*>(this + 12)) * 32 +
-           *reinterpret_cast<const int*>(this + 16);
-}
 
 struct FUN_00e3f340_Class
 {
@@ -69,12 +50,6 @@ int __thiscall FUN_00e3f900_class::FUN_00e3f900(int a)
     return (int)this;
 }
 
-// @fnv 0x00e30f40
-int __cdecl FUN_00e30f40(int a, int b)
-{
-    return ((unsigned char)b << 1) | (unsigned char)a;
-}
-
 struct S_00df8990_Obj;
 extern void(__cdecl* DAT_0126ec04)(void*, void*, S_00df8990_Obj*);
 void __cdecl FUN_00e2b9b0(void*, void*, S_00df8990_Obj*);
@@ -88,34 +63,6 @@ extern int DAT_010eb3b8[];
 extern int DAT_010eb3d0[];
 int __cdecl FUN_00e30ff0(int a, int b);
 
-// @fnv 0x00e31010
-void __cdecl AlignAndAdvance(char flags, int aiCount, int aiIndex, int* p)
-{
-    if (!flags)
-        return;
-
-    int align = DAT_010eb3b8[aiIndex];
-    *p = (*p + align - 1) & ~(align - 1);
-
-    if (flags & 0xf0)
-    {
-        if (aiCount < 0)
-            return;
-        int count = aiCount + 1;
-        do
-        {
-            FUN_00e30ff0(aiIndex, *p);
-            *p += DAT_010eb3d0[aiIndex];
-            count--;
-        } while (count);
-    }
-    else
-    {
-        FUN_00e30ff0(aiIndex, *p);
-        *p += DAT_010eb3d0[aiIndex];
-    }
-}
-
 extern int DAT_010eb770;
 struct FUN_00e34800
 {
@@ -126,12 +73,6 @@ struct FUN_00e34800
     void __thiscall m(int);
     FUN_00e34800(int x);
 };
-// @fnv 0x00e34800
-FUN_00e34800::FUN_00e34800(int aiValue)
-{
-    vtbl = (int)&DAT_010eb770;
-    ((FUN_00e34800*)((char*)this + 0xc))->m(aiValue);
-}
 
 struct CB2FC0Object
 {
@@ -141,13 +82,6 @@ struct FUN_00e3b4d0_Class
 {
     void __thiscall ApplyToBothObjects(void* a, void* b);
 };
-// Calls FUN_00cb2d90 on the object at this+0x20 with a and on the object at this+0x50 with b.
-// @fnv 0x00e3b4d0
-void __thiscall FUN_00e3b4d0_Class::ApplyToBothObjects(void* a, void* b)
-{
-    ((CB2FC0Object*)(this + 0x20))->FUN_00cb2d90(a);
-    ((CB2FC0Object*)(this + 0x50))->FUN_00cb2d90(b);
-}
 
 int __cdecl CompareStringsCaseInsensitive(int, int);
 
@@ -155,26 +89,6 @@ struct FUN_00e3ec30_Class
 {
     int __thiscall FUN_00e3ec30(int arg);
 };
-
-// @fnv 0x00e3ec30
-int FUN_00e3ec30_Class::FUN_00e3ec30(int arg)
-{
-    if (!arg)
-        return 0;
-    for (int i = 0; i < *(int*)((char*)this + 0x2c); ++i)
-    {
-        int* p = *(int**)((char*)this + 0x28);
-        int pEntry = p[i];
-        int eax = *(int*)(pEntry + 0x14);
-        if ((eax & 0xfffffffe) != 0)
-        {
-            eax &= 0xfffffffe;
-            if (CompareStringsCaseInsensitive(eax, arg) == 0)
-                return pEntry;
-        }
-    }
-    return 0;
-}
 
 struct D481D0RefVariant
 {
@@ -233,39 +147,6 @@ struct SplitChunk
     int unk6c;
 };
 
-// @fnv 0x00e2aa70
-void __cdecl InitSplitChunks(int a1, int aiTotal, int a3, int a4, int a5, SplitChunk* out)
-{
-    if (a5 > aiTotal)
-    {
-        a5 = aiTotal;
-    }
-    int n = a5;
-    int q = aiTotal / n;
-    out->unk10 = a4;
-    out->unk50 = a1;
-    out->unk54 = a3;
-    out->unk58 = 0;
-    out->unk5c = q;
-    if (n > 1)
-    {
-        int bnd = q;
-        int* e = &out[1].unk5c;
-        int cnt = n - 1;
-        do
-        {
-            SplitChunk* p = (SplitChunk*)((char*)e - 0x5c);
-            *p = *out;
-            e[-1] = bnd;
-            bnd += q;
-            *e = bnd;
-            e = (int*)((char*)e + 0x70);
-            cnt--;
-        } while (cnt != 0);
-    }
-    out[n - 1].unk5c = aiTotal;
-}
-
 struct E2baaSrc
 {
     int unk00;
@@ -314,24 +195,6 @@ struct E2baaDst
     int unk50;
     int unk54;
 };
-
-// Initializes an output record from a source record: sets a float, copies several source fields, and derives unk54 from src->unk20 and flag.
-// @fnv 0x00e2baa0
-E2baaDst* __cdecl FUN_00e2baa0(E2baaDst* out, E2baaSrc* src, int flag)
-{
-    out->unk14 = 1.0f;
-    out->unk18 = 0;
-    *(volatile int*)&out->unk24 = *(volatile int*)&src->unk30;
-    int iSrc30 = src->unk30;
-    *(volatile int*)&out->unk20 = (int)src;
-    out->unk28 = iSrc30;
-    int iSrc24 = src->unk24;
-    *(volatile int*)&out->unk1C = (int)src;
-    out->unk50 = iSrc24;
-    int v = ((src->unk20 != 0) ? -1 : 0) & flag;
-    out->unk54 = (v != 0) ? v + 0x10 : 0;
-    return out;
-}
 
 struct FUN_00e2d0d0_cls;
 struct E2d0Ref;
@@ -1434,15 +1297,6 @@ struct FUN_00e2f680_Class
     FUN_00e2f680_Class& CopyFrom(const FUN_00e2f680_Class& other);
 };
 
-// Copies the reference holder and the keyed-entry array from other into this object and returns *this.
-// @fnv 0x00e2f680
-FUN_00e2f680_Class& FUN_00e2f680_Class::CopyFrom(const FUN_00e2f680_Class& other)
-{
-    m_ref = other.m_ref;
-    m_entries = other.m_entries;
-    return *this;
-}
-
 class FUN_00e30f10
 {
   public:
@@ -1451,140 +1305,11 @@ class FUN_00e30f10
     FUN_00e30f10();
 };
 
-// @fnv 0x00e30f10
-FUN_00e30f10::FUN_00e30f10() : m_kPointA(0x100), m_kPointB(0)
-{}
-
-// Map fValue from [fMin, fScaledValue] onto the 16-bit range.
-// @fnv 0x00e30fb0
-unsigned short NormalizeToUShort(float fMin, float fScaledValue, float fValue)
-{
-    return (unsigned short)((fValue - fMin) / (fScaledValue - fMin) * 65535.0);
-}
-
-// Reverses the byte order of the n-byte block at *pp for n of 2 or 4, then advances *pp by n bytes.
-// @fnv 0x00e31510
-void __cdecl SwapBytesAndAdvance(int iByteCount, unsigned char** ppBuffer)
-{
-    if (iByteCount != 1)
-    {
-        if (iByteCount == 2)
-        {
-            unsigned char* b = *ppBuffer;
-            unsigned char lo = b[1];
-            unsigned char hi = b[0];
-            b[0] = lo;
-            b[1] = hi;
-        }
-        else if (iByteCount == 4)
-        {
-            unsigned char* b = *ppBuffer;
-            unsigned char t0 = b[3];
-            unsigned char t3 = b[0];
-            b[0] = t0;
-            b[3] = t3;
-            b = *ppBuffer;
-            unsigned char t1 = b[2];
-            unsigned char t2 = b[1];
-            b[1] = t1;
-            b[2] = t2;
-        }
-    }
-    *ppBuffer += iByteCount;
-}
-
-// Fills values[0..count] with a linear interpolation from first to last, using i/count as the fraction.
-// @fnv 0x00e31650
-void __cdecl FillInterpolatedValues(int count, float** array, float first, float last)
-{
-    float* values = *array;
-    *values = first;
-    values[count] = last;
-    int i = 1;
-    if (count - 1 >= 4)
-    {
-        int limit = count - 3;
-        int j = 3;
-        do
-        {
-            values[i] = (float)i / (float)count * (last - first) + first;
-            values[i + 1] = (float)(j - 1) / (float)count * (last - first) + first;
-            values[i + 2] = (float)j / (float)count * (last - first) + first;
-            values[i + 3] = (float)(i + 3) / (float)count * (last - first) + first;
-            i += 4;
-            j += 4;
-        } while (i < limit);
-    }
-    if (i < count)
-    {
-        float* output = values + i;
-        do
-        {
-            *output = (float)i / (float)count * (last - first) + first;
-            ++output;
-            ++i;
-        } while (i < count);
-    }
-}
-
 unsigned int __cdecl FUN_00e31570(unsigned char a1, unsigned int* a2);
 int __cdecl FUN_00e315a0(unsigned char a1, unsigned int a2, unsigned int a3, unsigned int* a4);
 
-// @fnv 0x00e31740
-void __cdecl FUN_00e31740(unsigned char flag, unsigned int uiValue, unsigned int* puiOut)
-{
-    if (flag != 0)
-    {
-        unsigned int r = FUN_00e31570(flag, puiOut);
-        FUN_00e315a0(flag, r, uiValue, puiOut);
-        *puiOut = (*puiOut + 3) & 0xfffffffcu;
-    }
-}
-
 int __cdecl FUN_00e31570(int a, int* c);
 void __cdecl AlignAndAdvance(int a, int result, int b, int* c);
-
-// @fnv 0x00e31780
-void __cdecl FUN_00e31780(int a, int b, int* c)
-{
-    if ((a & 0xff) != 0)
-    {
-        int result = FUN_00e31570(a, c);
-        AlignAndAdvance(a, result, b, c);
-        *c = (*c + 3) & 0xfffffffc;
-    }
-}
-
-// @fnv 0x00e32d90
-int __cdecl FindKeyInterval(int aiLowIndex, int aiHighIndex, unsigned char key, unsigned char* aucTable)
-{
-    if (key >= aucTable[aiLowIndex + 1])
-        return aiLowIndex;
-    if (key <= aucTable[0])
-        return aiHighIndex;
-    int hi = aiHighIndex;
-    int lo = aiLowIndex + 1;
-    int mid = (lo + hi) / 2;
-    for (;;)
-    {
-        if (aucTable[mid] <= key && key < aucTable[mid + 1])
-            return mid;
-        if (key < aucTable[mid])
-            lo = mid;
-        else
-            hi = mid;
-        mid = (lo + hi) / 2;
-    }
-}
-
-// Writes to *pDest whether value is 0 or 1, then returns pDest.
-// @fnv 0x00e32e30
-unsigned char* StoreBoolFlag(unsigned char* pDest, int value)
-{
-    bool bIsZeroOrOne = (value == 0 || value == 1);
-    *pDest = bIsZeroOrOne;
-    return pDest;
-}
 
 struct FUN_00e33910_item
 {
@@ -1605,32 +1330,6 @@ class FUN_00e33910_cls
     int m_uiItemCount;
     bool* AreAllItemsValid(bool* out);
 };
-
-// Iterates over m_pItems calling Test on each item; writes 0 to out and returns early if any Test fails, otherwise writes 1.
-// @fnv 0x00e33910
-bool* FUN_00e33910_cls::AreAllItemsValid(bool* out)
-{
-    bool flag;
-    int i = 0;
-    int off;
-    if (i < m_uiItemCount)
-    {
-        off = 0;
-        do
-        {
-            FUN_00e33910_item* item = (FUN_00e33910_item*)((char*)m_pItems + off);
-            if (*item->Test(&flag) == 0)
-            {
-                *out = 0;
-                return out;
-            }
-            off += 0x1c;
-            ++i;
-        } while (i < m_uiItemCount);
-    }
-    *out = 1;
-    return out;
-}
 
 extern "C" void _ReadWriteBarrier(void);
 extern int DAT_010eb770;
@@ -1713,20 +1412,6 @@ struct S_00e34950_Foo
     S_00e34950_Foo* Init();
 };
 
-// Initialises the object's fields to fixed defaults (8, 0xffff, 0.0f, 0.01f, 0.001f, 0.01f, 0.001f) and returns this.
-// @fnv 0x00e34950
-S_00e34950_Foo* S_00e34950_Foo::Init()
-{
-    unk00 = 8;
-    unk02 = 0xffff;
-    unk04 = 0.0f;
-    unk08 = 0.01f;
-    unk0c = 0.001f;
-    unk10 = 0.01f;
-    unk14 = 0.001f;
-    return this;
-}
-
 extern int DAT_010df9f4;
 
 class FUN_00e39a80
@@ -1741,18 +1426,6 @@ class FUN_00e39a80
     float m_14;
     FUN_00e39a80();
 };
-
-// @fnv 0x00e39a80
-FUN_00e39a80::FUN_00e39a80()
-{
-    float zero = 0.0f;
-    *(volatile unsigned short*)&m_06 = 1;
-    *(volatile int*)&m_vptr00 = (int)&DAT_010df9f4;
-    *(volatile int*)&m_08 = 0;
-    *(volatile int*)&m_0c = 0;
-    *(volatile int*)&m_10 = 0x80000000;
-    *(volatile float*)&m_14 = zero;
-}
 
 struct S_00e3a270_RefObj
 {
@@ -1882,18 +1555,6 @@ struct FUN_00e3b060_Class
     LinkOwner links;
     FUN_00e3b060_Class* __thiscall ReleaseLinks(ReleaseFlags flags);
 };
-// Sets the vtable and, depending on flags, releases the link owner's handle and/or the owner itself, then returns this.
-// @fnv 0x00e3b060
-FUN_00e3b060_Class* FUN_00e3b060_Class::ReleaseLinks(ReleaseFlags aReleaseFlags)
-{
-    vtable = &DAT_010eb98c;
-    LinkOwner* owner = &links;
-    if (aReleaseFlags.releaseHandle)
-        owner->FUN_00d21ce0(owner->unk08);
-    if (aReleaseFlags.releaseOwner)
-        owner->FUN_00d21ce0(this);
-    return this;
-}
 
 namespace fnv_00e3b0a0 {
 struct AudioAllocator
@@ -1933,23 +1594,6 @@ struct FUN_00e3b0a0_cls
     void FUN_00e3b0a0();
 };
 
-// Sets the vtable, frees the data array through the audio allocator if capacity is not flagged, then resets the data pointer and capacity and sets a new vtable.
-// @fnv 0x00e3b0a0
-void FUN_00e3b0a0_cls::FUN_00e3b0a0()
-{
-    m_vptr00 = (int)&DAT_010eb98c;
-    AudioHolder* pHolder = FUN_00c85750();
-    AudioAllocator* pAllocator = pHolder->m_pAllocator;
-    unsigned int uCapBits = m_uCapBits;
-    m_iArrayLength = 0;
-    if ((uCapBits & 0x80000000u) == 0)
-    {
-        pAllocator->FreeArray(m_pData, (uCapBits & 0x3fffffffu) * 48);
-    }
-    m_pData = 0;
-    m_uCapBits = 0x80000000u;
-    m_vptr00 = (int)&DAT_0102e388;
-}
 }  // namespace fnv_00e3b0a0
 
 struct S_00e3c5b0_Obj
@@ -2014,25 +1658,6 @@ struct ScriptRecordList
 
     ScriptRecord* FindByTypeAndOccurrence(int type, int occurrence);
 };
-
-// Scans records for the entry whose type matches the given type, returning the one at the requested occurrence index, or null if none.
-// @fnv 0x00e3df60
-ScriptRecord* ScriptRecordList::FindByTypeAndOccurrence(int type, int occurrence)
-{
-    int matched = 0;
-    for (int index = 0; index < count; ++index)
-    {
-        if (records[index].type == static_cast<short>(type))
-        {
-            if (matched == occurrence)
-            {
-                return &records[index];
-            }
-            ++matched;
-        }
-    }
-    return 0;
-}
 
 struct FUN_00e3dfb0_arg
 {
@@ -2198,54 +1823,6 @@ struct S_00e3ed00_Foo
 
 void __cdecl ResizeAudioStream(int param1, S_00e3ed00_List* param2, int param3);
 
-// Appends this node to param2's list, then recurses into children until param1 is found; returns 0 on match, 1 otherwise (rolling back the append).
-// @fnv 0x00e3ed00
-int __thiscall S_00e3ed00_Foo::AppendToTraversalList(S_00e3ed00_Foo* pTarget, S_00e3ed00_List* pList)
-{
-    S_00e3ed00_Result* resultInfo = this->FUN_00c85750();
-
-    if (pList->count == (pList->capacity & 0x3fffffff))
-    {
-        ResizeAudioStream(resultInfo->unk10, pList, 4);
-    }
-
-    S_00e3ed00_Foo** slot = pList->elements + (unsigned)pList->count;
-    *(S_00e3ed00_Foo**)((char*)slot - 0) = this;
-    *slot = this;
-
-    int result = 1;
-    pList->count += result;
-
-    if (this == pTarget)
-    {
-        result = 0;
-    }
-    else
-    {
-        int index = 0;
-        if (this->childCount > 0)
-        {
-            do
-            {
-                S_00e3ed00_Foo* child = this->children[index];
-                result = child->AppendToTraversalList(pTarget, pList);
-                if (!result)
-                {
-                    break;
-                }
-                ++index;
-            } while (index < this->childCount);
-        }
-
-        if (result)
-        {
-            pList->count -= 1;
-        }
-    }
-
-    return result;
-}
-
 struct hkMemoryAllocator
 {
     virtual ~hkMemoryAllocator();
@@ -2404,19 +1981,6 @@ struct FUN_00e3ed80 : BaseE3EAA0
     virtual ~FUN_00e3ed80();
 };
 
-// Releases m_40, deallocates the m_34, m_28 and m_1c arrays, releases m_18 and m_14, then calls Shutdown.
-// @fnv 0x00e3ed80
-FUN_00e3ed80::~FUN_00e3ed80()
-{
-    m_40.release();
-    m_34.ClearAndRelease();
-    m_28.ClearAndRelease();
-    m_1c.ClearAndRelease();
-    m_18.release();
-    m_14.release();
-    Shutdown();
-}
-
 struct E3F0F0Less
 {
 };
@@ -2436,13 +2000,6 @@ struct E3F0F0Owner
 
     void FUN_00e3f0f0();
 };
-
-// @fnv 0x00e3f0f0
-void E3F0F0Owner::FUN_00e3f0f0()
-{
-    E3F0F0Less kPred;
-    HeapSort(m_piFirst, m_piLast, kPred);
-}
 
 namespace fnv_00e3f110 {
 struct AudioAllocator
@@ -2517,63 +2074,6 @@ struct FUN_00e3f110_cls
     void Destroy() throw();
 };
 
-// Releases m_p7c and every element of the two reference arrays, frees their buffers via the allocator, resets m_sub14 and calls BaseTeardown.
-// @fnv 0x00e3f110
-void FUN_00e3f110_cls::Destroy() throw()
-{
-    *(volatile int*)&m_vptr00 = (int)&DAT_010e33dc;
-    AudioRefObject* pRef = *(AudioRefObject* volatile*)&m_p7c;
-    if (pRef != 0)
-    {
-        pRef->Release();
-    }
-    m_p7c = 0;
-    AudioHolder* pHolder = (AudioHolder*)FUN_00c85750();
-    int count = m_iCount74;
-    AudioRefObject** pBuf = m_pBuf70;
-    AudioAllocator* pAllocator = pHolder->m_pAllocator;
-    for (int i = 0; i < count; i++)
-    {
-        if (pBuf[i] != 0)
-        {
-            pBuf[i]->Release();
-        }
-        pBuf[i] = 0;
-    }
-    m_iCount74 = 0;
-    if ((m_uCap78 & 0x80000000u) == 0)
-    {
-        pAllocator->FreeArray(m_pBuf70, (m_uCap78 & 0x3fffffffu) * 4);
-    }
-    m_pBuf70 = 0;
-    m_uCap78 = 0x80000000u;
-    AudioHolder* pHolder2 = (AudioHolder*)FUN_00c85750();
-    AudioAllocator* pAllocator2 = pHolder2->m_pAllocator;
-    int* pEntry = (int*)m_pBuf18;
-    if (m_iCount1c > 0)
-    {
-        int n = m_iCount1c;
-        do
-        {
-            if (*pEntry != 0)
-            {
-                ((AudioRefObject*)*pEntry)->Release();
-            }
-            *pEntry = 0;
-            pEntry += 3;
-            n--;
-        } while (n != 0);
-    }
-    m_iCount1c = 0;
-    if ((m_uCap20 & 0x80000000u) == 0)
-    {
-        pAllocator2->FreeArray(m_pBuf18, (m_uCap20 & 0x3fffffffu) * 12);
-    }
-    m_pBuf18 = 0;
-    m_uCap20 = 0x80000000u;
-    m_sub14.Reset();
-    BaseTeardown();
-}
 }  // namespace fnv_00e3f110
 
 struct FUN_00e3f210_cls
@@ -2581,21 +2081,6 @@ struct FUN_00e3f210_cls
     char m_buf[2];
     unsigned char HasDelimiter();
 };
-
-// Scans m_buf until a NUL and returns 1 if any character is <= 0x20, '=' or ';', otherwise 0.
-// @fnv 0x00e3f210
-unsigned char FUN_00e3f210_cls::HasDelimiter()
-{
-    char* p = m_buf;
-    char c;
-    while ((c = *p) != 0)
-    {
-        if (c <= 0x20 || c == '=' || c == ';')
-            return 1;
-        ++p;
-    }
-    return 0;
-}
 
 int __cdecl CompareStringsCaseInsensitive(unsigned int a, int b);
 
@@ -2614,34 +2099,9 @@ struct FUN_00e3f230_cls
     int FindEntryByKey(int arg);
 };
 
-// Scans m_pEntries for the first entry whose masked key matches arg via CompareStringsCaseInsensitive, returning its index or -1.
-// @fnv 0x00e3f230
-int FUN_00e3f230_cls::FindEntryByKey(int arg)
-{
-    int i = 0;
-    if (m_uiItemCount > 0)
-    {
-        do
-        {
-            unsigned int key = m_pEntries[i].m_flagged & 0xfffffffeu;
-            if (CompareStringsCaseInsensitive(key, arg) == 0)
-            {
-                return i;
-            }
-            i++;
-        } while (i < m_uiItemCount);
-    }
-    return -1;
-}
-
 namespace fnv_00e30ff0 {
 extern int(__cdecl* DAT_011be4a0[])(int);
 
-// @fnv 0x00e30ff0
-void __cdecl FUN_00e30ff0(int index, int arg)
-{
-    DAT_011be4a0[index](arg);
-}
 }  // namespace fnv_00e30ff0
 
 int __cdecl CompareStringsCaseInsensitive(const char* pcA, const char* pcB);
@@ -2669,21 +2129,6 @@ class BE3E7E0Table
 
     BE3E7E0Entry* FindEntryByName(const char* pcName);
 };
-
-// Searches the table's entries for one whose name matches pcName via CompareStringsCaseInsensitive, returning a pointer to it or null.
-// @fnv 0x00e3e7e0
-BE3E7E0Entry* BE3E7E0Table::FindEntryByName(const char* pcName)
-{
-    if (!pcName)
-        return 0;
-    for (int i = 0; i < m_iArrayLength; i++)
-    {
-        BE3E7E0Entry& kEntry = m_pkEntryArray[i];
-        if (kEntry.GetName() && CompareStringsCaseInsensitive(kEntry.GetName(), pcName) == 0)
-            return &kEntry;
-    }
-    return 0;
-}
 
 void __cdecl SetEntity();
 
@@ -2715,12 +2160,6 @@ struct FUN_00e3df50_Class
 {
     FUN_00e3df50_Class* __thiscall FUN_00e3df50(int param);
 };
-
-// @fnv 0x00e3df50
-FUN_00e3df50_Class* FUN_00e3df50_Class::FUN_00e3df50(int param)
-{
-    return this;
-}
 
 int __cdecl FUN_00e3dfb0(int param_1, int* param_2);
 
@@ -2911,11 +2350,6 @@ class Base
     int unk0C;
     int FUN_00e3f270();
 };
-// @fnv 0x00e3f270
-int Base::FUN_00e3f270()
-{
-    return unk0C;
-}
 
 struct FUN_00e31080
 {
@@ -2962,19 +2396,6 @@ FUN_00e31080::FUN_00e31080()
 }
 
 
-// Checks whether mode is in the range 0 to 5, stores the result in out, and returns out.
-// @fnv 0x00e32df0
-bool* IsValidMode(bool* pbValid, unsigned int mode)
-{
-    bool r;
-    if (mode == 0 || mode == 1 || mode == 2 || mode == 3 || mode == 4 || mode == 5)
-        r = true;
-    else
-        r = false;
-    *pbValid = r;
-    return pbValid;
-}
-
 struct E3F290Entry
 {
     int unk00;
@@ -2988,12 +2409,6 @@ struct E3F290Class
     E3F290Entry* unk08;
     int __thiscall GetEntryValue(int index);
 };
-
-// @fnv 0x00e3f290
-int E3F290Class::GetEntryValue(int index)
-{
-    return unk08[index].unk04 & ~1;
-}
 
 struct FUN_00e3f370_handle
 {
@@ -3015,19 +2430,6 @@ struct FUN_00e3f370_cls
     int m_iArrayLength;
     void ReleaseItems();
 };
-
-// @fnv 0x00e3f370
-void FUN_00e3f370_cls::ReleaseItems()
-{
-    FUN_00e3f370_pair* p = m_pItems;
-    int n = m_iArrayLength;
-    for (int i = 0; i < n; i++)
-    {
-        p[i].second.Release();
-        p[i].first.Release();
-    }
-    m_iArrayLength = 0;
-}
 
 // Probe for 0x00e29900: does cl 15.00.30729.01 /GL + /LTCG deliver this
 // wrapper's pointer argument in EAX, so the body compiles to
@@ -3056,69 +2458,11 @@ __int64 probe_caller(void)
 typedef __int64 (*probe_fn)(void);
 probe_fn volatile g_keep = probe_caller;
 
-int main(void)
-{
-    g_ptr = 0;
-    probe_fn f = g_keep;
-    return (int)f();
-}
-
-// @fnv 0x00e2abd0
-void __cdecl FUN_00e2abd0()
-{
-    return;
-    __debugbreak();
-    __debugbreak();
-    __debugbreak();
-    __debugbreak();
-    __debugbreak();
-    __debugbreak();
-    __debugbreak();
-    __debugbreak();
-    __debugbreak();
-    __debugbreak();
-    __debugbreak();
-    __debugbreak();
-    __debugbreak();
-    __debugbreak();
-    __debugbreak();
-}
-
 extern "C" unsigned int be_arg_src_e2f9(void);
 
 volatile unsigned int g_be_sink_e2f9;
 
-// Swaps the byte order of x by writing its bytes in reverse into u and returning u.
-// @fnv 0x00e2f9a0
-static __declspec(noinline) unsigned int SwapByteOrder(unsigned int auiValue)
-{
-    unsigned int u;
-    unsigned char* p = (unsigned char*)&u;
-    p[0] = (unsigned char)(auiValue >> 24);
-    p[1] = (unsigned char)(auiValue >> 16);
-    p[2] = (unsigned char)(auiValue >> 8);
-    p[3] = (unsigned char)auiValue;
-    return u;
-}
-
-void call_byteswap_e2f9(void)
-{
-    g_be_sink_e2f9 = SwapByteOrder(be_arg_src_e2f9());
-}
-
-// Normalizes fValue between fMin and fScaledValue and scales the result to a 0-255 unsigned byte.
-// @fnv 0x00e30f70
-unsigned char __cdecl ScaleToByte(float fMin, float fScaledValue, float fValue)
-{
-    return (unsigned char)(((fValue - fMin) / (fScaledValue - fMin)) * 255.0);
-}
-
 extern "C" double __cdecl fabs(double);
-inline float S00e311f0_abs(float x)
-{
-    float result = (float)fabs(x);
-    return result;
-}
 struct S00e311f0_V
 {
     float m[4];
@@ -3147,73 +2491,12 @@ struct S00e311f0_T
         return value;
     }
 };
-// Compares each component of a against b, c and d within eps, setting bit 16<<i if it differs from b or c, else bit 1<<i if it differs from d.
-// @fnv 0x00e311f0
-unsigned char __cdecl FUN_00e311f0(S00e311f0_PA apVecA, S00e311f0_PB apVecB, const S00e311f0_V* apVecC, S00e311f0_T eps,
-                                   const S00e311f0_V* apVecD)
-{
-    unsigned char result = 0;
-    for (int i = 0; i < 4; i++)
-    {
-        if (!(S00e311f0_abs(apVecA->m[i] - apVecB->m[i]) <= eps.value) ||
-            !(S00e311f0_abs(apVecA->m[i] - apVecC->m[i]) <= eps.value))
-            result |= 16 << i;
-        else if (!(S00e311f0_abs(apVecA->m[i] - apVecD->m[i]) <= eps.value) ||
-                 !(S00e311f0_abs(apVecA->m[i] - apVecD->m[i]) <= eps.value))
-            result |= 1 << i;
-    }
-    return result;
-}
 
 namespace se34af0 {
-
-// Swaps the byte order of a float value by reversing its four bytes and returns the result.
-// @fnv 0x00e34af0
-float FUN_00e34af0(float fValue)
-{
-    union
-    {
-        float f;
-        unsigned int ui;
-        unsigned char auc[4];
-    } kSwap;
-
-    kSwap.f = fValue;
-    unsigned int uiBits = kSwap.ui;
-    kSwap.auc[0] = (unsigned char)(uiBits >> 24);
-    kSwap.auc[1] = (unsigned char)(uiBits >> 16);
-    kSwap.auc[2] = (unsigned char)(uiBits >> 8);
-    kSwap.auc[3] = (unsigned char)uiBits;
-    return kSwap.f;
-}
 
 }
 
 extern "C" unsigned short stub_val_e34b20(void);
-
-// Swaps the two bytes of the input unsigned short and returns the result.
-// @fnv 0x00e34b20
-static __declspec(noinline) unsigned short FUN_00e34b20(unsigned short v)
-{
-    union SwapWordE34B20
-    {
-        unsigned short w;
-        struct SwapBytesE34B20
-        {
-            unsigned char lo;
-            unsigned char hi;
-        } bytes;
-    } u;
-
-    u.bytes.lo = (unsigned char)(v >> 8);
-    u.bytes.hi = (unsigned char)v;
-    return u.w;
-}
-
-unsigned short call_e34b20()
-{
-    return FUN_00e34b20(stub_val_e34b20());
-}
 
 #include <xmmintrin.h>
 struct hkVector4X
@@ -3309,27 +2592,6 @@ struct FUN_00e39da0 : hkRefObjX
     hkBoolX m_bWheelsUseChassisForGround;
     FUN_00e39da0();
 };
-// Constructor: zeroes the gravity vector, chassis orientation, wheel count, mass and torque max, and sets fixed torque and inertia factors.
-// @fnv 0x00e39da0
-FUN_00e39da0::FUN_00e39da0()
-{
-    m_iWheelCount = 0;
-    m_kChassisOrientation.setZero();
-    m_fChassisMass = 0.0f;
-    m_fTorqueMax = 0.0f;
-    m_vChassisUnitInertiaAndMassInv.setZero4();
-    m_kGravity.setZero4();
-    m_fTorqueMin = 1.0f;
-    m_fTorqueFactor = 0.0f;
-    m_fTorquePitchFactor = 10.0f;
-    m_fTorqueRollFactor = 1.0f;
-    m_fTorqueYawFactor = 1.0f;
-    m_fExtraTorqueFactor = 1.0f;
-    m_fChassisUnitInertiaRoll = 0.0f;
-    m_fChassisUnitInertiaPitch = 0.1f;
-    m_bWheelsUseChassisForGround = false;
-    m_fChassisUnitInertiaYaw = 30.0f;
-}
 
 struct FUN_00e39e50_cls
 {
@@ -3337,14 +2599,6 @@ struct FUN_00e39e50_cls
     __m128 m_v1;
     FUN_00e39e50_cls* __thiscall FUN_00e39e50();
 };
-
-// @fnv 0x00e39e50
-FUN_00e39e50_cls* FUN_00e39e50_cls::FUN_00e39e50()
-{
-    m_v0 = _mm_setzero_ps();
-    m_v1 = _mm_setzero_ps();
-    return this;
-}
 
 extern float DAT_010d0c80;
 
@@ -3456,21 +2710,6 @@ struct FUN_00e3b5c0
     FUN_00e3b5c0();
 };
 
-// Sets the vtable pointer, stores constants in several small fields, and sets m_rot20 and m_rot50 to identity matrices.
-// @fnv 0x00e3b5c0
-FUN_00e3b5c0::FUN_00e3b5c0()
-{
-    *(int**)this = &DAT_010e11ec;
-    m_06 = 1;
-    m_08 = 0;
-    m_10 = 4;
-    m_80 = 13;
-    m_rot20.setIdentity();
-    m_rot50.setIdentity();
-    m_82 = 0;
-    m_83 = 3;
-}
-
 namespace se3b790 {
 
 struct Cell
@@ -3519,21 +2758,6 @@ struct Grid
     CellArray* m_pkArray;
 };
 
-inline void SetPair(Cell* pkCell, int iByte, int iPair, unsigned char ucValue)
-{
-    int iShift = iPair * 2;
-    pkCell->m_aucFlags[iByte] =
-        (pkCell->m_aucFlags[iByte] & ~(unsigned char)(3 << iShift)) | (unsigned char)(ucValue << iShift);
-}
-
-// Sets the iPair bit-pair in byte iByte of the current cell's flags to zero via SetPair.
-// @fnv 0x00e3b790
-void FUN_00e3b790(Grid* pkGrid, int iByte, int iPair)
-{
-    Cell* pkCell = &pkGrid->m_pkArray->m_pkCells[pkGrid->m_pkInfo->m_iIndex];
-    SetPair(pkCell, iByte, iPair, 0);
-}
-
 }
 
 namespace se3d200 {
@@ -3552,14 +2776,6 @@ struct Mesh
     void FUN_00e3cd50(int iV0, int iV1, int iV2, float fValue, int iArg0, int iArg1, int iArg2);
     void FUN_00e3d200(int iTri, float fValue, int iArg0, int iArg1, int iArg2);
 };
-
-// Calls FUN_00e3cd50 with m_pusIndices[iTri], [iTri+1], [iTri+2] each multiplied by 3, then fValue and the three remaining arguments.
-// @fnv 0x00e3d200
-void Mesh::FUN_00e3d200(int iTri, float fValue, int iArg0, int iArg1, int iArg2)
-{
-    FUN_00e3cd50(m_pusIndices[iTri] * 3, m_pusIndices[iTri + 1] * 3, m_pusIndices[iTri + 2] * 3, fValue, iArg0, iArg1,
-                 iArg2);
-}
 
 }
 
@@ -3589,22 +2805,6 @@ template <class T> struct hkRefPtr_e3e8
 
 hkRefPtr_e3e8<Resource_e3e8> __stdcall FindWorldByKey(const char* name) throw();
 
-// Finds an object by name with FindWorldByKey and returns it if expected is null or their FUN_00d46d40 strings match case-insensitively, otherwise returns null.
-// @fnv 0x00e3e8e0
-Resource_e3e8* __stdcall FUN_00e3e8e0(const char* name, Resource_e3e8* expected)
-{
-    if (!name)
-        return 0;
-    hkRefPtr_e3e8<Resource_e3e8> found = FindWorldByKey(name);
-    if (found.m_pRetainedObject)
-    {
-        if (!expected ||
-            ns_e3e8::CompareStringsCaseInsensitive(expected->FUN_00d46d40(), found.FUN_00d477a0()->FUN_00d46d40()) == 0)
-            return found.m_pRetainedObject;
-    }
-    return 0;
-}
-
 struct S_00e3f280_Entry
 {
     int unk00;
@@ -3621,17 +2821,6 @@ struct S_00e3f280_Class
     int __thiscall GetEntryValue(int index);
 };
 
-// @fnv 0x00e3f280
-int S_00e3f280_Class::FUN_00e3f280(int index)
-{
-    return unk08[index].unk00 & 0xfffffffe;
-}
-
-int S_00e3f280_Class::GetEntryValue(int index)
-{
-    return unk08[index].unk04 & 0xfffffffe;
-}
-
 struct FUN_00e22d50
 {
     virtual ~FUN_00e22d50();
@@ -3640,10 +2829,6 @@ struct FUN_00e22d50
         GetMemoryRouter().heap().ReleaseBlock(p, 0x30);
     }
 };
-
-// @fnv 0x00e22d50
-FUN_00e22d50::~FUN_00e22d50()
-{}
 
 class hkMemoryAllocatorE3A3
 {
@@ -3712,13 +2897,6 @@ class hkpTyremarksInfo : public hkE3A3::hkReferencedObject
     hkArrayE3A3<hkE3A3::hkReferencedObject*> m_kTyremarksWheels;
 };
 
-// Releases each referenced wheel object in m_kTyremarksWheels by calling FUN_00c905b0 on every entry.
-// @fnv 0x00e3a360
-hkpTyremarksInfo::~hkpTyremarksInfo()
-{
-    for (int i = 0; i < m_kTyremarksWheels.m_iElementCount; i++)
-        m_kTyremarksWheels.m_data[i]->FUN_00c905b0();
-}
 }
 
 struct RefObject_e3f4e0
@@ -3748,11 +2926,6 @@ struct Owner_e3f4e0 : RefObject_e3f4e0
     Owner_e3f4e0();
     virtual ~Owner_e3f4e0();
 };
-
-// Default constructor for Owner_e3f4e0 that initializes the base RefObject_e3f4e0 and the m_entries array member.
-// @fnv 0x00e3f4e0
-Owner_e3f4e0::Owner_e3f4e0()
-{}
 
 struct S_00df8990_Obj
 {
@@ -3820,64 +2993,6 @@ struct __declspec(align(16)) CastCollector
 };
 extern int DAT_010dbaf8, DAT_010dbae4, DAT_010dbad8, DAT_010dbacc, DAT_010dbb04;
 void __cdecl FUN_00d98ca0(void*, void*, S_00df8990_Obj*, void*, void*);
-// Initializes a CastCollector from source and value, optionally fills a CastOutput, then calls FUN_00d98ca0 with the caster and source.
-// @fnv 0x00e2abf0
-void __cdecl FUN_00e2abf0(void* caster, S_00df8990_Obj* source, int value, CastOutput* output)
-{
-    if (caster)
-    {
-        CastCollector collector;
-        unsigned char result;
-        collector.vtable00 = &DAT_010dbaf8;
-        collector.vtable04 = &DAT_010dbae4;
-        collector.vtable08 = &DAT_010dbad8;
-        collector.vtable0c = &DAT_010dbacc;
-        collector.fraction14 = 1.0f;
-        collector.hit18 = 0;
-        collector.value10 = value;
-        collector.owner20 = source;
-        collector.owner1c = source;
-        collector.shape24 = source->unk30;
-        collector.shape28 = source->unk30;
-        collector.extra50 = source->unk24;
-        int adjusted = source->unk20 ? -1 : 0;
-        adjusted &= value;
-        if (adjusted)
-            collector.adjusted54 = adjusted + 0x10;
-        else
-            collector.adjusted54 = 0;
-        if (source->unk3c)
-        {
-            if (output)
-            {
-                int b = source->unk34;
-                int a = source->unk30;
-                output->fraction = 1.0f;
-                output->vtable = &DAT_010dbb04;
-                output->shape08 = a;
-                output->shape0c = a;
-                output->shape10 = b;
-                output->shape14 = 0;
-                output->shape18 = 0;
-                collector.output60 = output;
-            }
-            else
-                collector.output60 = 0;
-            DAT_0126ec04 = FUN_00e2b9b0;
-        }
-        else
-            collector.output60 = 0;
-        FUN_00d98ca0(&result, caster, source, &source->unk10, &collector.vtable04);
-    }
-}
-
-// @fnv 0x00e2cfc0
-void __cdecl FUN_00e2cfc0()
-{}
-
-// @fnv 0x00e2cfd0
-void FUN_00e2cfd0()
-{}
 
 #include <xmmintrin.h>
 namespace fnv_00e2cfe0 {
@@ -3981,22 +3096,6 @@ struct TrianglePlane
     void ComputePlane();
 };
 
-// Computes the normalized plane normal from the triangle's three vertices and stores the plane constant in m_40.
-// @fnv 0x00e2cfe0
-void TrianglePlane::ComputePlane()
-{
-    PlaneVector vEdgeAB;
-    PlaneVector vEdgeBC;
-    PlaneVector* first = m_10;
-    vEdgeAB.difference(*first, *m_20);
-    vEdgeBC.difference(*m_20, *m_30);
-    PlaneVector& normal = m_00;
-    normal.cross(vEdgeAB, vEdgeBC);
-    __m128 vInvLength = normal.inverseLength().splat();
-    __m128 vScaledNormal = _mm_mul_ps(vInvLength, normal.q);
-    m_00.q = vScaledNormal;
-    m_40 = m_00.dot(*first);
-}
 }  // namespace fnv_00e2cfe0
 
 float __cdecl FUN_00e52f40();
@@ -4005,41 +3104,6 @@ float __cdecl FUN_00e52f60();
 float __cdecl FUN_00e52f70();
 float __cdecl FUN_00e52f80();
 float __cdecl FUN_00e52f90();
-
-// Returns a float value from one of six type-specific getters selected by the type argument, or 0.0f for unknown types.
-// @fnv 0x00e32e50
-float __cdecl FUN_00e32e50(int type)
-{
-    switch (type)
-    {
-    case 4:
-        return FUN_00e52f40();
-    case 3:
-        return FUN_00e52f50();
-    case 0:
-        return FUN_00e52f60();
-    case 1:
-        return FUN_00e52f70();
-    case 2:
-        return FUN_00e52f80();
-    case 5:
-        return FUN_00e52f90();
-    }
-    return 0.0f;
-}
-
-// @fnv 0x00e32ea0
-float __cdecl FUN_00e32ea0(int type)
-{
-    switch (type)
-    {
-    case 0:
-        return 0.0078125f;
-    case 1:
-        return 3.0517578125e-05f;
-    }
-    return 0.0f;
-}
 
 extern "C" void _ReadWriteBarrier(void);
 struct Chain
@@ -4253,90 +3317,6 @@ struct WorkArray : hkArr<WorkItem>
         return m_data + old;
     }
 };
-// Splits indices 0..count-1 using a work stack of plane nodes, calling FUN_00e2c100 on each popped item and pushing non-empty left and right results.
-// @fnv 0x00e2cc30
-void FUN_00e2cc30(SplitInput* input, int a2, int a3, int a4, int a5, int a6, int count)
-{
-    if (!input)
-        return;
-    S_00e3ae70_Holder* router = FUN_00c85750();
-    struct WeightArray : hkArr<float>
-    {
-        float* localMemory;
-    } weightArray;
-    float* weights = (float*)router->unk00;
-    weightArray.m_data = weights;
-    weightArray.localMemory = weights;
-    router->unk00 = (int)weights + ((count * 4 + 127) & -128);
-    weightArray.m_iElementCount = count;
-    weightArray.m_iCapacityState = count | 0x80000000;
-    for (int i = 0; i < count; ++i)
-        weights[i] = 1.0f;
-    FUN_00e4e3f0();
-    int populations[2] = {0, 0};
-    int& usedA = populations[0];
-    int& usedB = populations[1];
-    FUN_00e4e3f0();
-    router = FUN_00c85750();
-    WorkArray stack;
-    WorkItem* data = (WorkItem*)router->unk00;
-    stack.m_data = data;
-    stack.localMemory = data;
-    router->unk00 = (int)data + 384;
-    int iMaxDepth = 0;
-    stack.m_iElementCount = 0;
-    stack.m_iCapacityState = 10 | 0x80000000;
-    WorkItem* root = stack.expand(1);
-    root->plane = *input->root;
-    root->node = 0;
-    root->side = 0;
-    root->count = count;
-    int indices[2][250];
-    for (int i = 0; i < count; ++i)
-        indices[0][usedA++] = i;
-
-    WorkItem item;
-    do
-    {
-        item = stack.m_data[stack.m_iElementCount - 1];
-        --stack.m_iElementCount;
-
-        PackedPlane desc = item.plane;
-        PackedPlane children[2];
-        int leftCount, rightCount;
-        populations[item.side] -= item.count;
-        FUN_00e2c100(input, &desc, item.node, a2, a5, a6, a3, a4, weights, indices[item.side] + populations[item.side],
-                     item.count, 10 - stack.m_iElementCount, 250 - usedA, 250 - usedB, indices[0] + usedA, &leftCount,
-                     indices[1] + usedB, &rightCount, &children[0], &children[1]);
-        usedA += leftCount;
-        usedB += rightCount;
-        if (leftCount)
-        {
-
-            WorkItem* next = stack.expand(1);
-            next->plane = children[0];
-            next->node = input->nodes.GetEntryOffset(desc.left);
-            next->side = 0;
-            next->count = leftCount;
-        }
-        _ReadWriteBarrier();
-        if (rightCount)
-        {
-
-            WorkItem* next = stack.expand(1);
-            next->plane = children[1];
-            next->node = desc.extra.value != 0x7fff ? input->nodes.GetEntryOffset(desc.extra) : 0;
-            next->side = 1;
-            next->count = rightCount;
-        }
-        if (iMaxDepth <= stack.m_iElementCount)
-            iMaxDepth = stack.m_iElementCount;
-    } while (stack.m_iElementCount);
-    FUN_00c85750()->unk00 = (int)stack.localMemory;
-    stack.ClearAndRelease();
-    FUN_00c85750()->unk00 = (int)weightArray.localMemory;
-    weightArray.ClearAndRelease();
-}
 
 #include <xmmintrin.h>
 namespace fnv_00e2c8a0 {
@@ -4474,95 +3454,11 @@ __forceinline Item* growItems(Item* data, int old, int size) throw()
     constructItems(p, delta);
     return p;
 }
-__forceinline Item* growAt(Item* data, int offset, int old, int size) throw()
-{
-    int delta = size - old;
-    Item* p = (Item*)((char*)data + offset);
-    constructItems(p, delta);
-    return p;
-}
 struct Outputs
 {
     Bounds out0;
     Bounds out1;
 };
-// Pops an item stack, calls FUN_00e2bbd0 on each item, and pushes non-empty first and second results until the stack is empty.
-// @fnv 0x00e2c8a0
-void FUN_00e2c8a0(Owner* owner, int p2, int p3, int p4, int p5, int p6, int aiCount)
-{
-    if (!owner)
-        return;
-    Weights weights(aiCount);
-    int counts[2] = {0, 0};
-    int indices[2][250];
-    FUN_00e4e3f0();
-    Scratch* scratch = scratchRouter();
-    Item* stack = (Item*)scratch->top;
-    scratch->top += 640;
-    int highWater = 0;
-    int stackSize = 1;
-    new (stack) InitItem;
-    Item* first = stack;
-    first->bounds.assign(*owner->bounds);
-    first->data = 0;
-    first->kind = 0;
-    first->count = aiCount;
-    for (int i = 0; i < aiCount; ++i)
-        indices[0][counts[0]++] = i;
-    int stackBytes = sizeof(Item);
-    int depth = 9;
-    do
-    {
-        Outputs outs;
-        Item current = stack[stackSize - 1];
-        --stackSize;
-        stackBytes -= sizeof(Item);
-        Bounds input = current.bounds;
-        outs.out0.f24 = 0;
-        outs.out1.f24 = 0;
-        counts[current.kind] -= current.count;
-        int* inputIndices = &indices[current.kind][counts[current.kind]];
-        ++depth;
-        int count0, count1;
-        FUN_00e2bbd0(owner, &input, current.data, p2, p5, p6, p3, p4, weights.data, inputIndices, current.count, depth,
-                     250 - counts[0], 250 - counts[1], &indices[0][counts[0]], &count0, &indices[1][counts[1]], &count1,
-                     &outs.out0, &outs.out1);
-        counts[0] += count0;
-        const int generated1 = count1;
-        counts[1] += generated1;
-        if (count0)
-        {
-            int oldSize = stackSize;
-            int oldBytes = stackBytes;
-            stackBytes += sizeof(Item);
-            ++stackSize;
-            --depth;
-            Item* next = growAt(stack, oldBytes, oldSize, stackSize);
-            next->bounds.assign(outs.out0);
-            next->data = owner->lookup.FUN_00d1bb40(input.index22);
-            next->kind = 0;
-            next->count = count0;
-        }
-        if (generated1)
-        {
-            int oldSize = stackSize;
-            int oldBytes = stackBytes;
-            stackBytes += sizeof(Item);
-            ++stackSize;
-            --depth;
-            Item* next = growAt(stack, oldBytes, oldSize, stackSize);
-            next->bounds.assign(outs.out1);
-            next->data = input.index26.value != 0x7fff ? owner->lookup.FUN_00d1bb40(input.index26) : 0;
-            next->kind = 1;
-            next->count = generated1;
-        }
-        if (highWater <= stackSize)
-            highWater = stackSize;
-    } while (stackSize);
-    scratchRouter()->top = (char*)stack;
-    FUN_00c85750();
-    weights.release();
-}
 }  // namespace fnv_00e2c8a0
 
 namespace FanSpace {
@@ -4778,14 +3674,6 @@ struct FanBuilder
     }
     int FUN_00e2d1b0(int count, FanEdge* chain, FanVertex* apex);
 };
-// Allocates the requested number of triangles and initializes them into a fan around the apex vertex.
-// @fnv 0x00e2d1b0
-int FanBuilder::FUN_00e2d1b0(int count, FanEdge* chain, FanVertex* apex)
-{
-    FanTriangle* fresh[100];
-    allocate(count, fresh);
-    return initialize(fresh, count, chain, apex);
-}
 }
 
 #include <xmmintrin.h>
@@ -4832,81 +3720,10 @@ struct HullWalker
     HullFace* FUN_00e2d550(HullFace* start);
 };
 
-// Walks from start across twin edges to neighbouring faces, stopping when no edge qualifies or the next face already has m_uiContentCount equal to 3.
-// @fnv 0x00e2d550
-HullFace* HullWalker::FUN_00e2d550(HullFace* start)
-{
-    ClearEntries();
-    HullFace* face = start;
-    HullEdge* pFromEdge = 0;
-    bool done = false;
-    int i;
-    do
-    {
-        if (done)
-            break;
-        face->m_uiContentCount = 3;
-        for (i = 0; i < 3; i++)
-        {
-            HullEdge* edge = &face->m_kEdges[i];
-            if (edge == pFromEdge)
-                continue;
-            __m128 p = *edge->m_kRayStart;
-            __m128 n;
-            (void)n;
-            __m128 q = **edge->m_kRayEnd;
-            __m128 vDir = _mm_sub_ps(q, p);
-            __m128 vSq = _mm_mul_ps(vDir, vDir);
-            float fLenSq;
-            _mm_store_ss(&fLenSq,
-                         _mm_add_ss(_mm_shuffle_ps(vSq, vSq, 0xaa), _mm_add_ss(_mm_shuffle_ps(vSq, vSq, 0x55), vSq)));
-            n = face->m_vHitNormal;
-            __m128 dy = _mm_shuffle_ps(vDir, vDir, 0xc9);
-            __m128 nz = _mm_shuffle_ps(n, n, 0xd2);
-            __m128 p0 = _mm_mul_ps(dy, nz);
-            __m128 dz = _mm_shuffle_ps(vDir, vDir, 0xd2);
-            __m128 ny = _mm_shuffle_ps(n, n, 0xc9);
-            __m128 p1 = _mm_mul_ps(dz, ny);
-            __m128 c = _mm_sub_ps(p0, p1);
-            __m128 sp = _mm_mul_ps(c, p);
-            float side;
-            _mm_store_ss(&side, _mm_add_ss(_mm_shuffle_ps(sp, sp, 0xaa), _mm_add_ss(_mm_shuffle_ps(sp, sp, 0x55), sp)));
-            if (side * (float)fabs(side) < (float)(fLenSq * -9.99999949475751e-11))
-            {
-                HullFace* next = edge->m_twin->m_face;
-                if (!(start->m_fClosestPointDistanceSquared > 0.0f) ||
-                    !(next->m_fClosestPointDistanceSquared <
-                      start->m_fClosestPointDistanceSquared * 0.8999999761581421))
-                {
-                    pFromEdge = face->m_kEdges[i].m_twin;
-                    face = next;
-                    done = next->m_uiContentCount == 3;
-                    break;
-                }
-            }
-        }
-    } while (i != 3);
-    return face;
-}
 }  // namespace fnv_00e2d550
 
 namespace fnv_00e31570 {
 extern void __cdecl SwapBytesAndAdvance(int, unsigned char**);
-// If flags & 0xf0, calls SwapBytesAndAdvance(2, pp), advances *pp by the byte at *pp plus the short at *pp-2 plus 3 and returns that short; otherwise returns -1.
-// @fnv 0x00e31570
-unsigned int __cdecl FUN_00e31570(unsigned char flags, unsigned int* pp)
-{
-    if (flags & 0xf0)
-    {
-        SwapBytesAndAdvance(2, (unsigned char**)pp);
-        unsigned int& p = *pp;
-        unsigned int b = *(unsigned char*)p;
-        unsigned int len = *(unsigned short*)(p - 2);
-        p = p + b + len + 3;
-        return len;
-    }
-    return -1;
-}
 }  // namespace fnv_00e31570
 
 extern int DAT_010e00dc;
@@ -4945,15 +3762,6 @@ struct TyremarkWheelView : FUN_00e3a270
     void FUN_00e3a1e0(int pointCount);
 };
 
-inline TyremarkWheelView* allocateTyremarkWheel()
-{
-    void* memory =
-        reinterpret_cast<hkMemoryRouterE3A3*>(FUN_00c85750())->heap().AllocateMemoryBlock(sizeof(TyremarkWheelView));
-    TyremarkWheelView* wheel = static_cast<TyremarkWheelView*>(memory);
-    wheel->m_usMemSizeAndFlags = sizeof(TyremarkWheelView);
-    return wheel->FUN_00e3a270();
-}
-
 struct TyremarkVehicleView
 {
     int unk00, unk04, unk08, unk0c, unk10, unk14, unk18, unk1c;
@@ -4972,43 +3780,11 @@ struct TyremarkInfoView
     TyremarkInfoView* FUN_00e3a2a0(const TyremarkVehicleView* vehicle, int pointCount);
 };
 
-// Initializes the TyremarkInfoView from a TyremarkVehicleView, allocating and storing wheel views for each wheel in the vehicle.
-// @fnv 0x00e3a2a0
-TyremarkInfoView* TyremarkInfoView::FUN_00e3a2a0(const TyremarkVehicleView* vehicle, int pointCount)
-{
-    m_ppVirtualMethodTable = &DAT_010e00dc;
-    m_sReferenceCount = 1;
-    m_wheels.initialize();
-    m_fMinTyremarkPointDistance = 0.0f;
-    m_fMaxTyremarkPointDistance = 0.0f;
-    m_wheels.SetSizeAndGrow(vehicle->m_iWheelCount);
-    for (int index = 0; index < m_wheels.m_iElementCount; ++index)
-    {
-        TyremarkWheelView* wheel = allocateTyremarkWheel();
-        wheel->FUN_00e3a1e0(pointCount);
-        m_wheels.m_data[index] = wheel;
-    }
-    return this;
-}
-
 struct Q_cls
 {
     char m_buf[2];
     __declspec(noinline) unsigned char HasDelimiter();
 };
-
-__declspec(noinline) unsigned char Q_cls::HasDelimiter()
-{
-    char* p = m_buf;
-    char c;
-    while ((c = *p) != 0)
-    {
-        if (c <= 0x20 || c == '=' || c == ';')
-            return 1;
-        ++p;
-    }
-    return 0;
-}
 
 struct S_Pair2b0
 {
@@ -5038,23 +3814,6 @@ struct S_Class2b0
 
     void FUN_00e3f2b0(S_Out2b0* param);
 };
-
-// Writes unk0c pairs from unk08 to param, formatting each with DAT_01021184 or DAT_01011584 based on Q_cls::HasDelimiter and joining with str_010ebaa0.
-// @fnv 0x00e3f2b0
-void S_Class2b0::FUN_00e3f2b0(S_Out2b0* apOut)
-{
-    apOut->FUN_00d61cc0();
-    for (int i = 0; i < unk0c; i++)
-    {
-        Q_cls* first = (Q_cls*)(unk08[i].first & ~1u);
-        Q_cls* second = (Q_cls*)(unk08[i].second & ~1u);
-        const char* a = first->HasDelimiter() ? DAT_01021184 : DAT_01011584;
-        const char* b = second->HasDelimiter() ? DAT_01021184 : DAT_01011584;
-        WriteFormatted(apOut, str_010ebaa4, a, first, a, b, second, b);
-        if (i < unk0c - 1)
-            apOut->FUN_00d61df0(str_010ebaa0);
-    }
-}
 
 // @f3 0x0093d830 (community match, verified in this file)
 namespace f3m_0093d830 {

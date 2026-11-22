@@ -11,23 +11,11 @@ struct FUN_007e6760_cls
     bool __thiscall FUN_007e6760();
 };
 
-// @fnv 0x007e6760
-bool __thiscall FUN_007e6760_cls::FUN_007e6760()
-{
-    return FUN_007ab810() != 0;
-}
-
 struct BSAudio_
 {
     void FUN_00ad8510(int, int);
     void FUN_007eb8a0();
 };
-
-// @fnv 0x007eb8a0
-void BSAudio_::FUN_007eb8a0()
-{
-    FUN_00ad8510(0x3002, 0);
-}
 
 extern "C" void __cdecl FUN_007004e0();
 
@@ -37,35 +25,15 @@ struct FUN_007f7770_Class
     void __thiscall FUN_007f7770();
 };
 
-// @fnv 0x007f7770
-void __thiscall FUN_007f7770_Class::FUN_007f7770()
-{
-    FUN_007004e0();
-}
-
 extern float DAT_012007d0;
 extern float DAT_012007d4;
 extern char DAT_011ae5d4;
-
-// @fnv 0x007f7a50
-void __cdecl FUN_007f7a50(float afValue1, float afValue2)
-{
-    DAT_012007d0 = afValue1;
-    DAT_012007d4 = afValue2;
-    DAT_011ae5d4 = 1;
-}
 
 struct FOPipboyManager
 {
     void InitializeMenuLight();
     void FUN_007fa200();
 };
-
-// @fnv 0x007fa200
-void FOPipboyManager::FUN_007fa200()
-{
-    InitializeMenuLight();
-}
 
 struct Flt
 {
@@ -77,12 +45,6 @@ struct FUN_007fa970_Class
     unsigned int FUN_007fa970();
 };
 
-// @fnv 0x007fa970
-unsigned int FUN_007fa970_Class::FUN_007fa970()
-{
-    return ((Flt*)((char*)this + 0xe0))->operator unsigned int();
-}
-
 struct GO
 {
     void* operator=(void*);
@@ -93,11 +55,6 @@ struct FUN_007fd620_Class
     GO m_go;
     void SetGo(void* p);
 };
-// @fnv 0x007fd620
-void FUN_007fd620_Class::SetGo(void* apValue)
-{
-    m_go = apValue;
-}
 
 namespace fnv_007fd640 {
 struct Flt
@@ -110,11 +67,6 @@ struct FUN_007fd640Class
     unsigned int FUN_007fd640();
 };
 
-// @fnv 0x007fd640
-unsigned int FUN_007fd640Class::FUN_007fd640()
-{
-    return ((Flt*)((char*)this + 0x90))->operator unsigned int();
-}
 }  // namespace fnv_007fd640
 
 struct RaceSexMenu
@@ -122,12 +74,6 @@ struct RaceSexMenu
     void OnRaceSelected(void*);
     void FUN_007fe910(void* apList);
 };
-
-// @fnv 0x007fe910
-void RaceSexMenu::FUN_007fe910(void* apList)
-{
-    OnRaceSelected(apList);
-}
 
 struct NavMeshPtr
 {
@@ -144,20 +90,6 @@ struct FUN_007e66a0_cls
     char _0[0x28];
     void __thiscall FUN_007e66a0(int a, int b);
 };
-// If b is zero and a is in [0,3), reads b from this[a+10]; for a==1, sets g_011daed8 from the navmesh pointer at this+0x34 and calls FUN_007e65b0.
-// @fnv 0x007e66a0
-void __thiscall FUN_007e66a0_cls::FUN_007e66a0(int aiIndex, int aiValue)
-{
-    if (aiValue == 0 && aiIndex >= 0 && aiIndex < 3)
-        aiValue = ((int*)this)[aiIndex + 10];
-    switch (aiIndex)
-    {
-    case 1:
-        g_011daed8.Set((const char*)((NavMeshPtr*)((char*)this + 0x34))->FUN_00458b50(), 0);
-        FUN_007e65b0();
-        break;
-    }
-}
 
 void __cdecl DestroyList(void*);
 struct FUN_007f69d0_Class
@@ -165,14 +97,6 @@ struct FUN_007f69d0_Class
     void __thiscall DestroyList();
     void* __thiscall FUN_007f69d0(unsigned int flags);
 };
-// @fnv 0x007f69d0
-void* __thiscall FUN_007f69d0_Class::FUN_007f69d0(unsigned int flags)
-{
-    DestroyList();
-    if (flags & 1)
-        operator delete(this);
-    return this;
-}
 
 struct GameTimerRecord
 {
@@ -194,18 +118,6 @@ struct FUN_007f7880_Class
     float f10;
     void __thiscall FUN_007f7880(float a, float b, float c);
 };
-// @fnv 0x007f7880
-void __thiscall FUN_007f7880_Class::FUN_007f7880(float a, float b, float c)
-{
-    bActive = 1;
-    f2 = a;
-    f3 = a;
-    f4 = b;
-    f8 = c;
-    f5 = g_timeGlobal.GetTime();
-    f10 = 0.0f;
-    f6 = 0.0f;
-}
 
 struct ModelLoader
 {
@@ -250,14 +162,6 @@ struct FUN_007e0e30_Class
     void FUN_007e0e30(bool(__cdecl* fn)(void*, unsigned int), unsigned int v);
 };
 
-// Calls fn on m_p with v and, if that returns true and m_sub is set, recurses into m_sub with the same arguments.
-// @fnv 0x007e0e30
-void FUN_007e0e30_Class::FUN_007e0e30(bool(__cdecl* fn)(void*, unsigned int), unsigned int uiValue)
-{
-    if (fn(m_p, uiValue) && m_sub)
-        ((FUN_007e0e30_Class*)m_sub)->FUN_007e0e30(fn, uiValue);
-}
-
 struct FUN_007f7830_Class
 {
     char _0[0x28];
@@ -265,14 +169,6 @@ struct FUN_007f7830_Class
     void __thiscall UpdateFalloff(float);
     void __thiscall UpdateIfActive();
 };
-// Reads the global time and, when bActive is set, calls UpdateFalloff with that time as a float.
-// @fnv 0x007f7830
-void FUN_007f7830_Class::UpdateIfActive()
-{
-    float fappTime = (float)g_timeGlobal.GetTime();
-    if (bActive)
-        UpdateFalloff(fappTime);
-}
 
 struct FUN_007fecc0_Class
 {
@@ -284,33 +180,11 @@ struct FUN_007fecc0_Class
     void __thiscall FUN_007fecc0();
 };
 
-// Sets bActive to 1, stores the current global time in fTime and resets fValue to 0.0f.
-// @fnv 0x007fecc0
-void __thiscall FUN_007fecc0_Class::FUN_007fecc0()
-{
-    bActive = 1;
-    fTime = (float)g_timeGlobal.GetTime();
-    fValue = 0.0f;
-}
-
 struct FUN_007eb8d0_Class
 {
     char _0[0x28];
     bool __thiscall HasAllSlotsSet(int* p);
 };
-
-// Sets *p to 1 and checks that each of the 31 int slots at this+0x28 is non-zero, returning false on the first zero.
-// @fnv 0x007eb8d0
-bool __thiscall FUN_007eb8d0_Class::HasAllSlotsSet(int* piIndex)
-{
-    *piIndex = 1;
-    for (; *piIndex <= 0x1f; ++*piIndex)
-    {
-        if (*(int*)((char*)this + *piIndex * 4 + 0x28) == 0)
-            return false;
-    }
-    return true;
-}
 
 struct Tile
 {
@@ -325,16 +199,6 @@ struct SimpleList
     SimpleList* __thiscall GetNext();
 };
 extern SimpleList* DAT_011daec4;
-// @fnv 0x007e65b0
-void FUN_007e65b0()
-{
-    if (DAT_011daec4)
-    {
-        ((Tile*)DAT_011daec4->GetNext())->Set(0x1772, 1);
-        ((Menu*)DAT_011daec4)->LoadMenuData();
-        DAT_011daec4 = 0;
-    }
-}
 
 struct ListX
 {
@@ -346,11 +210,6 @@ struct FUN_007f6a00_Class
     ListX l;
     void __thiscall DestroyList();
 };
-// @fnv 0x007f6a00
-void __thiscall FUN_007f6a00_Class::DestroyList()
-{
-    l.ListX::~ListX();
-}
 
 struct NiPoint2
 {
@@ -374,19 +233,6 @@ struct FUN_007f78f0_Class
     void __thiscall InitFromPoints(const NiPoint2* a, const NiPoint2* b, const NiPoint2* c);
 };
 
-// Marks the object active, copies three NiPoint2 inputs into f2/f4/f6, stores the global time in fTime and DAT_011f4980 in f8.
-// @fnv 0x007f78f0
-void __thiscall FUN_007f78f0_Class::InitFromPoints(const NiPoint2* apPoint1, const NiPoint2* apPoint2,
-                                                   const NiPoint2* apPoint3)
-{
-    bActive = 1;
-    f2 = *apPoint1;
-    f4 = *apPoint2;
-    f6 = *apPoint3;
-    fTime = g_timeGlobal.GetTime();
-    f8 = DAT_011f4980;
-}
-
 struct FUN_007e0d80_shell : Flt
 {
     char* m_buffer;
@@ -399,41 +245,6 @@ struct FUN_007e0d80_shell : Flt
     FUN_007e0d80_shell* AppendString(FUN_007e0d80_shell* other);
 };
 extern "C" void* __cdecl memcpy(void*, const void*, unsigned int);
-
-// @fnv 0x007e0d80
-FUN_007e0d80_shell* FUN_007e0d80_shell::AppendString(FUN_007e0d80_shell* other)
-{
-    if ((unsigned int)*other)
-    {
-        if ((unsigned int)*this)
-        {
-            unsigned int newLength = FUN_004048e0() + other->FUN_004048e0();
-            if (newLength > FUN_004039a0())
-            {
-                FUN_004037f0((char*)(unsigned int)*this, newLength);
-            }
-            memcpy(m_buffer + FUN_004048e0(), (char*)(unsigned int)*other, other->GetLengthPlusOne());
-            FUN_004039c0(newLength);
-        }
-        else
-        {
-            FUN_00438470(other);
-        }
-    }
-    return this;
-}
-
-// @fnv 0x007e1970
-int FUN_007e1970()
-{
-    return 0x41e;
-}
-
-// @fnv 0x007e65a0
-int __cdecl FUN_007e65a0()
-{
-    return 0x41b;
-}
 
 struct SysMgr
 {
@@ -546,47 +357,7 @@ class FUN_007e9130_cls : public Base
     MemB m_11c;
 };
 
-// @fnv 0x007e9130
-FUN_007e9130_cls::~FUN_007e9130_cls()
-{
-    g_sysMgr->Init(0, 0);
-    Fn7f6920();
-    TaskA* pTask = g_mgrB->GetTask();
-    TaskA* p = pTask;
-    (void)(p ? p->Run(1) : 0);
-    g_mgrB = 0;
-}
-
 extern unsigned int* DAT_011f4aa8;
-// Computes the squared length of a 3-component vector and returns its approximate square root via a bit-manipulation lookup table.
-// @fnv 0x007eb7f0
-float __cdecl FastSqrt(const float* v)
-{
-    float f;
-    unsigned int* p = (unsigned int*)&f;
-    short e;
-    f = v[0] * v[0] + v[1] * v[1] + v[2] * v[2];
-    if (*p == 0)
-    {
-        return 0.0f;
-    }
-    else
-    {
-        e = (short)((*p >> 23) - 0x7f);
-        *p &= 0x7fffff;
-        if (e & 1)
-            *p |= 0x800000;
-        e >>= 1;
-        *p = DAT_011f4aa8[*p >> 16] | ((e + 0x7f) << 23);
-        return f;
-    }
-}
-
-// @fnv 0x007eb8c0
-int __cdecl FUN_007eb8c0()
-{
-    return (int)1056u;
-}
 
 class B7F7790Ref
 {
@@ -639,14 +410,6 @@ class FUN_007f7790_cls
     B7F7790Object* m_pPointer;
 };
 
-// Resets m_kRef to null and deletes the owned object pointer.
-// @fnv 0x007f7790
-FUN_007f7790_cls::~FUN_007f7790_cls()
-{
-    m_kRef.Reset(0);
-    delete m_pPointer;
-}
-
 class NiColor;
 
 struct ImageSpaceEffectParam
@@ -674,18 +437,6 @@ struct PipboyStub : FOPipboyManager
     void FUN_007f7f40();
 };
 
-// @fnv 0x007f7f40
-void PipboyStub::FUN_007f7f40()
-{
-    ImageSpaceEffectParam p(0.0f, 0.0f, 0.0f, 0.0f);
-    if (reinterpret_cast<SystemColorManager*>(FUN_00718b60())->GetColor(4, *(NiColor*)&p))
-    {
-        SetQuad(&p);
-        FUN_007f7fb0(&p);
-        InitializeMenuLight();
-    }
-}
-
 struct FUN_007f7fb0_Value
 {
     unsigned int field00;
@@ -702,13 +453,6 @@ struct FUN_007f7fb0_Class
     void __thiscall FUN_007f7fb0(const FUN_007f7fb0_Value* value);
 };
 
-// Copies the four-field value into the object's unkC0 member.
-// @fnv 0x007f7fb0
-void __thiscall FUN_007f7fb0_Class::FUN_007f7fb0(const FUN_007f7fb0_Value* value)
-{
-    unkC0 = *value;
-}
-
 struct Quad4
 {
     unsigned int a;
@@ -723,13 +467,6 @@ struct FUN_007f7fe0_cls
     Quad4 m_q;
     void __thiscall SetQuad(const Quad4* src);
 };
-
-// Copies the four unsigned ints from src into the m_q member of this object.
-// @fnv 0x007f7fe0
-void __thiscall FUN_007f7fe0_cls::SetQuad(const Quad4* apQuad)
-{
-    m_q = *apQuad;
-}
 
 struct SoundPlaybackHandle
 {
@@ -923,22 +660,6 @@ struct FUN_007fa0f0_Class
     void __thiscall SetValue(int index, bool play);
 };
 
-// @fnv 0x007fa0f0
-void FUN_007fa0f0_Class::SetValue(int index, bool play)
-{
-    if (unk120 != values[index])
-    {
-        unk120 = values[index];
-        unk12c = *g_011db288.Float();
-        if (g_burstSoundEnabled && play)
-        {
-            BSSoundHandleEx handle;
-            handle = BSAudio::GetSingleton()->GetSoundHandleByEditorID("UIPipBoyTab", 0x121);
-            handle.Play(false);
-        }
-    }
-}
-
 struct FUN_007fb730_Class
 {
     float x;
@@ -947,20 +668,6 @@ struct FUN_007fb730_Class
 
     FUN_007fb730_Class* __thiscall Add(FUN_007fb730_Class* output, const FUN_007fb730_Class* input);
 };
-
-// Adds the input vector's x, y and z to this vector's components and writes the sum to output, returning output.
-// @fnv 0x007fb730
-FUN_007fb730_Class* __thiscall FUN_007fb730_Class::Add(FUN_007fb730_Class* output, const FUN_007fb730_Class* input)
-{
-    FUN_007fb730_Class result = *this;
-
-    result.x = result.x + input->x;
-    result.y = result.y + input->y;
-    result.z = result.z + input->z;
-
-    *output = result;
-    return output;
-}
 
 class NiBound7FD
 {
@@ -1006,13 +713,6 @@ class Light7FD
     NiPointer7FD<NiAVObject7FD> m_spNode;
     NiPointer7FD<NiAVObject7FD> m_spLight;
 };
-
-// @fnv 0x007fd660
-void Light7FD::FUN_007fd660(float fScale)
-{
-    float fRadius = m_spNode.Get()->GetBoundingVolume().GetRadius() * 3.0 * fScale;
-    FUN_00450b80(3)->GetShadowSceneLight(m_spLight.Get(), fRadius);
-}
 
 struct NiNode;
 template <class T> class NiPtrS
@@ -1096,23 +796,6 @@ class FUN_007fed10 : public FUN_007fad10
     virtual ~FUN_007fed10();
 };
 
-// Destructor that clears the four m_spA and m_spB NiNode smart pointers and the six m_sp0-m_sp5 pointers by assigning null.
-// @fnv 0x007fed10
-FUN_007fed10::~FUN_007fed10()
-{
-    for (int i = 0; i < 4; i++)
-    {
-        m_spA[i] = 0;
-        m_spB[i] = 0;
-    }
-    m_sp0 = 0;
-    m_sp1 = 0;
-    m_sp2 = 0;
-    m_sp3 = 0;
-    m_sp4 = 0;
-    m_sp5 = 0;
-}
-
 struct Entry;
 struct ValueX
 {
@@ -1165,45 +848,6 @@ struct ListOwner
     int Mode();
     TileX* FUN_007e0e70(int data, const char* text, void* compare, const char* name);
 };
-// @fnv 0x007e0e70
-TileX* ListOwner::FUN_007e0e70(int data, const char* text, void* compare, const char* name)
-{
-    if (parent && (templateName || name))
-    {
-        TileX* tile = parent->GetMenu()->Create(parent, name ? name : templateName, 0);
-        if (!tile->GetValue(0xfaa))
-            tile->Set(0xfaa, -1);
-        if (text)
-            tile->Set(0xfc4, text, true);
-        if (compare)
-        {
-            entries.Insert(new Entry(tile, &data), compare);
-            if (Test(0))
-                Refresh();
-        }
-        else
-        {
-            entries.AddTail(new Entry(tile, &data));
-            if (Test(0))
-            {
-                Select(tile);
-                Update();
-            }
-            tile->Set(0xfac, count++);
-        }
-        if (Mode() == 1 && parent->GetFloat(GetTrait("_number_of_visible_items", -1)) > 0.0)
-        {
-            ValueX* value = parent->GetAction(0xfb0);
-            value->Clear();
-            value->Copy(0x7d0, tile, 0xfb0);
-            value->SetFloat(0x7d3, parent->GetFloat(GetTrait("_number_of_visible_items", -1)));
-            value->Finish(0);
-        }
-        return tile;
-    }
-    else
-        return 0;
-}
 
 struct WXObject;
 
@@ -1312,37 +956,6 @@ struct FUN_007faa20
     FUN_007faa20();
     virtual ~FUN_007faa20();
 };
-
-// @fnv 0x007faa20
-FUN_007faa20::FUN_007faa20()
-    : spObject04(0), spObject08(0), spObject0C(0), spObject10(0), spObject14(0), spObject1C(0), spObject24(0),
-      kPoint2C(0.0f, 0.0f, 0.0f), kParamA8(0.0f, 0.0f, 0.0f, 0.0f), spObjectBC(0), kParamC0(0.0f, 0.0f, 0.0f, 0.0f),
-      spObjectD4(0)
-{
-    spObject24 = 0;
-    spObject04 = 0;
-    spObject14 = 0;
-    spObject0C = 0;
-    spObject10 = 0;
-    iValue18 = 0;
-    bFlag28 = false;
-    bFlag29 = false;
-    bFlag4D = false;
-    bFlag60 = false;
-    bFlag74 = false;
-    bFlagB8 = false;
-    bFlagB9 = false;
-    fValue8C = 0.0f;
-    fValue90 = 0.0f;
-    spObject1C = 0;
-    kParamA8 = WXParam(0.0f, 0.0f, 0.0f, 0.0f);
-    bFlag2A = false;
-    bFlag95 = false;
-    fTimeA4 = (double)g_kWXTimeGlobal.GetTime() + WXRand() % *g_kWXRandomRange.Int();
-    fDurationA0 = *g_kWXDuration.Float();
-    bFlag94 = false;
-    iValue20 = 0;
-}
 
 struct Accum
 {
@@ -1636,40 +1249,6 @@ struct FUN_007ffec0
     Ref unk2cc;
     FUN_007ffec0();
 };
-// Initializes the object's fields, loads a texture, creates a disabled Accum, and clears the 16 per-slot arrays.
-// @fnv 0x007ffec0
-FUN_007ffec0::FUN_007ffec0()
-{
-    unk118 = false;
-    unk129 = true;
-    unk28c = 0.0f;
-    unk290 = *g_011db6bc.Float();
-    unk298 = false;
-    unk284 = false;
-    unk2ac = 0.0f;
-    unk2b0 = 0.0f;
-    unk2c0 = 0.0f;
-    unk294 = (double)g_timeGlobal.GetTime() + rand() % *g_011db75c.Int();
-    unk2b4 = false;
-    unk2b5 = false;
-    unk240 = 0;
-    first.value = 0;
-    first.node = 0;
-    LoadTexture(g_011db744.String(), true, unk2c4, false, false);
-    unk000 = 0;
-    unk00c = 0;
-    unk010 = -1;
-    unk2cc = new Accum(0x65, 1, 0x2f7);
-    ((Accum*)unk2cc)->SetEnabled(false);
-    unk2c8 = 1;
-    for (int index = 0; index < 16; ++index)
-    {
-        active[index] = false;
-        states[index] = 0;
-        values[index] = 0;
-        flags[index] = false;
-    }
-}
 
 struct RemoveTile
 {
@@ -1715,64 +1294,3 @@ struct RemoveView : RemoveBase, RemoveNode
     void FUN_00726090();
     bool RemoveNodeFromList(RemoveNode*, RemoveNode*);
 };
-// @fnv 0x007f7380
-bool RemoveView::RemoveNodeFromList(RemoveNode* node, RemoveNode* previous)
-{
-    if (node)
-    {
-        if ((*node->FUN_006815c0())->tile == selected)
-        {
-            selected = node->FUN_00726070() ? (*node->FUN_00726070()->FUN_006815c0())->tile
-                                            : (previous && previous != node ? (*previous->FUN_006815c0())->tile : 0);
-            if (selected)
-                FUN_004b7210()->FUN_00715860(selected, 0xfc3, true);
-        }
-        if (container && (*node->FUN_006815c0())->filtered)
-        {
-            container->FUN_00a012d0(FUN_00a01860("_num_filtered"),
-                                    (float)(container->FUN_00a011b0(FUN_00a01860("_num_filtered")) - 1.0), true);
-        }
-        RemoveTile* tile_2 = (*node->FUN_006815c0())->tile;
-        RemoveTile* tileCopyA = tile_2;
-        tileCopyA ? tileCopyA->Destroy(1) : 0;
-        if (FUN_007242c0(true))
-        {
-            RemoveOwned* owned3 = (*node->FUN_006815c0())->owned;
-            RemoveOwned* ownedCopyB = owned3;
-            ownedCopyB ? ownedCopyB->FUN_004459e0(1) : 0;
-        }
-        {
-            RemoveData* record7 = *node->FUN_006815c0();
-            FUN_00401030(record7);
-        }
-        if (node == static_cast<RemoveNode*>(this))
-        {
-            if (next)
-            {
-                previous = next;
-                next = previous->FUN_00726070();
-                data = *previous->FUN_006815c0();
-                previous->FUN_006ecd40(0);
-                RemoveNode* oldA = previous;
-                RemoveNode* oldCopyATmp = oldA;
-                oldCopyATmp ? oldCopyATmp->FUN_004702f0(1) : 0;
-            }
-            else
-            {
-                data = 0;
-            }
-        }
-        else
-        {
-            previous->FUN_006ecd40(node->FUN_00726070());
-            node->FUN_006ecd40(0);
-            RemoveNode* oldB = node;
-            RemoveNode* oldCopyB4 = oldB;
-            oldCopyB4 ? oldCopyB4->FUN_004702f0(1) : 0;
-        }
-        if (FUN_007242c0(false))
-            FUN_00726090();
-        return true;
-    }
-    return false;
-}

@@ -179,13 +179,6 @@ FUN_009fbca0* __thiscall FUN_009fbca0::Method(bool abDelete)
 
 int __stdcall FUN_009fd0a0(int);
 
-// @fnv 0x009fc450
-int __stdcall FUN_009fc450(int a)
-{
-    int b = *(int*)((int)a + 8);
-    return FUN_009fd0a0(b);
-}
-
 struct FUN_009fc460_Class
 {
     int __thiscall FUN_009fa560();
@@ -260,14 +253,6 @@ struct FUN_009fddd0_class
     void __thiscall FUN_009fd3c0();
     FUN_009fddd0_class* __thiscall FUN_009fddd0(int);
 };
-// @fnv 0x009fddd0
-FUN_009fddd0_class* __thiscall FUN_009fddd0_class::FUN_009fddd0(int a)
-{
-    FUN_009fd3c0();
-    if (a & 1)
-        delete this;
-    return this;
-}
 
 void __fastcall FUN_009fdc10(void*);
 void __cdecl _Deallocate(void*);
@@ -1142,26 +1127,6 @@ struct Intf
     virtual int m1();
 };
 
-int Intf::unk0()
-{
-    return 0;
-}
-int Intf::unk1()
-{
-    return 0;
-}
-int Intf::unk2()
-{
-    return 0;
-}
-int Intf::unk3()
-{
-    return 0;
-}
-int Intf::unk4()
-{
-    return 0;
-}
 int Intf::m0()
 {
     return 0;
@@ -5977,9 +5942,6 @@ struct Derived_009fdd60 : PrimaryBase_009fdd60, SecondaryBase_009fdd60
 // @fnv 0x009fdd60
     virtual void __cdecl FUN_009fdd60();
 };
-
-Derived_009fdd60::Derived_009fdd60()
-{}
 
 namespace fnv_009fddf0 {
 extern "C" __declspec(dllimport) void __stdcall InitializeCriticalSection(void* lpCriticalSection);

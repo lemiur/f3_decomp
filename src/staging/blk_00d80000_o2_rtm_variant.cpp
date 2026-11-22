@@ -1298,28 +1298,6 @@ struct BoolResult {
     BoolResult(bool bValue) : m_bValue(bValue) {}
 };
 
-// @fnv 0x00d84c50
-BoolResult FUN_00d84c50(const Shape* pkShape)
-{
-    switch (pkShape->GetType())
-    {
-    case 0:
-    case 1:
-    case 2:
-    case 6:
-    case 7:
-    case 8:
-    case 9:
-    case 12:
-    case 13:
-    case 14:
-    case 15:
-        return BoolResult(true);
-    default:
-        return BoolResult(false);
-    }
-}
-
 }
 extern char DAT_01267e30;
 class ShapeD84D {
@@ -1596,13 +1574,6 @@ public:
     int unk04;
     unsigned __int64 m_uiCurrentValue;
 };
-__declspec(noinline) extern "C" void* __cdecl FUN_00ec61c0(void* destination, int value, unsigned int size)
-{
-    unsigned char* p = (unsigned char*)destination;
-    for (unsigned int i = 0; i < size; ++i)
-        p[i] = (unsigned char)value;
-    return destination;
-}
 struct MonitorBuffer {
     void* m_ppVirtualMethodTable;
     int m_uiItemCount;
@@ -2148,52 +2119,6 @@ struct TransformShape : Shape {
     int unk1c;
     Transform m_akTransforms[1];
 };
-
-// @fnv 0x00d85040
-void FUN_00d85040(Shape* pkShape, const Transform& kTransform, int iIndex)
-{
-    for (;;)
-    {
-        switch (pkShape->GetType())
-        {
-        case 12:
-            pkShape = ((ContainerShape*)pkShape)->m_pkChild;
-            break;
-        case 13:
-            pkShape = ((ListShape*)pkShape)->FUN_00cdf6c0();
-            break;
-        case 1:
-            ((TransformShape*)pkShape)->m_akTransforms[iIndex].FUN_00c6cd60(kTransform);
-            return;
-        case 2:
-            ((TransformShape*)pkShape)->m_akTransforms[iIndex].FUN_00c6cd60(kTransform);
-            return;
-        case 6:
-            ((TransformShape*)pkShape)->m_akTransforms[iIndex].FUN_00c6cd60(kTransform);
-            return;
-        case 7:
-            ((TransformShape*)pkShape)->m_akTransforms[iIndex].FUN_00c6cd60(kTransform);
-            return;
-        case 14:
-            ((TransformShape*)pkShape)->m_akTransforms[iIndex].FUN_00c6cd60(kTransform);
-            return;
-        case 9:
-            ((TransformShape*)pkShape)->m_akTransforms[iIndex].FUN_00c6cd60(kTransform);
-            return;
-        case 0:
-            ((VertexShape*)pkShape)->m_akVertices[iIndex].m_vComponents = kTransform.m_kTranslation.m_vComponents;
-            return;
-        case 8:
-            ((VertexShape*)pkShape)->m_akVertices[iIndex].m_vComponents = kTransform.m_kTranslation.m_vComponents;
-            return;
-        case 15:
-            ((VertexShape*)pkShape)->m_akVertices[iIndex].m_vComponents = kTransform.m_kTranslation.m_vComponents;
-            return;
-        default:
-            return;
-        }
-    }
-}
 
 }
 struct hkBool_d86 {
@@ -2762,10 +2687,6 @@ struct RouterD86 {
 static __declspec(noinline) unsigned char FUN_00d868b0(int t) {
     return (t >= 0 && (t < 20 || t == 28 || t == 30 || t == 29 || t == 32 || t == 33)) ? 1 : 0;
 }
-static __declspec(noinline) void FUN_00d868e0(int t, TextD86* text, int extent) {
-    if (!extent) text->FUN_00d61c10(DAT_011b6ab4[t].name);
-    else FUN_00d61d00(text, str_010d3a74, DAT_011b6ab4[t].name, extent);
-}
 struct MemberD86 {
     int unk00;
     TypeNameD86* classType;
@@ -2861,11 +2782,7 @@ extern "C" int __fastcall FUN_00d86ec0(MemberD86* self, void*, char* output, int
     return result;
 }volatile int type93,extent93;
 Text93* volatile text93;
-void EmitFormat93() { FormatPrimitive93(type93,text93,extent93); }
 
 volatile int d86_type;
 TextD86* volatile d86_text;
 volatile int d86_extent;
-void D86HelperUse() {
-    FUN_00d868e0(d86_type, d86_text, d86_extent);
-}

@@ -423,10 +423,6 @@ struct FUN_00ee88d0_cls : FUN_00ee88d0_base
     virtual ~FUN_00ee88d0_cls();
 };
 
-// @fnv 0x00ee88d0
-FUN_00ee88d0_cls::~FUN_00ee88d0_cls()
-{}
-
 class FUN_00eea550_cls
 {
   public:
@@ -485,11 +481,6 @@ struct CpuObject
     int value;
     void FUN_00eea570(int value);
 };
-// @fnv 0x00eea570
-void CpuObject::FUN_00eea570(int value)
-{
-    this->value = value;
-}
 }  // namespace fnv_00eea570
 
 extern "C" __declspec(dllimport) long __stdcall InterlockedDecrement(volatile long* value);
@@ -573,12 +564,6 @@ class FUN_00eea4f0_cls
 
     int* FUN_00eea4f0();
 };
-
-// @fnv 0x00eea4f0
-int* FUN_00eea4f0_cls::FUN_00eea4f0()
-{
-    return &unk0C;
-}
 
 struct FUN_00eea500_Holder
 {

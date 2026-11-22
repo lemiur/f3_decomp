@@ -136,73 +136,6 @@ template <class T> struct PointerParam
         return p;
     }
 };
-// @fnv 0x00ce2d10
-void __cdecl FUN_00ce2d10(const Transform* parents, PointerParam<const Transform> local, const short* indices,
-                          int count, Transform* output)
-{
-    if (!indices)
-    {
-        for (int i = 0; i < count; ++i)
-        {
-            const Transform& l = local[i];
-            const Transform& p = parents[i];
-            __m128 v = l.translation;
-            __m128 q = p.rotation.value;
-            __m128 t1 = _mm_mul_ps(_mm_shuffle_ps(v, v, 0xd2), _mm_shuffle_ps(q, q, 0xc9));
-            __m128 t2 = _mm_mul_ps(_mm_shuffle_ps(v, v, 0xc9), _mm_shuffle_ps(q, q, 0xd2));
-            __m128 cross = _mm_sub_ps(t1, t2);
-            __m128 w = _mm_shuffle_ps(q, q, 0xff);
-            __m128 product = _mm_mul_ps(v, q);
-            __m128 s55 = _mm_add_ss(_mm_shuffle_ps(product, product, 0x55), product);
-            __m128 dot = _mm_add_ss(_mm_shuffle_ps(product, product, 0xaa), s55);
-            __m128 rotated =
-                _mm_add_ps(_mm_mul_ps(cross, w), _mm_add_ps(_mm_mul_ps(_mm_add_ps(_mm_mul_ps(w, w), DAT_010c71e0), v),
-                                                            _mm_mul_ps(_mm_shuffle_ps(dot, dot, 0), q)));
-            output[i].translation = _mm_add_ps(_mm_add_ps(rotated, rotated), p.translation);
-            output[i].rotation.FUN_00c66320(&p.rotation, &l.rotation);
-            output[i].scale = _mm_mul_ps(l.scale, p.scale);
-        }
-    }
-    else
-    {
-        int i = 0;
-        if (i >= count)
-            return;
-        const Transform* source = local.p;
-        do
-        {
-            short index = indices[i];
-            if (index >= 0)
-            {
-                Transform parent;
-                parent.rotation.value = parents[index].rotation.value;
-                parent.scale = parents[index].scale;
-                parent.translation = parents[index].translation;
-                __m128 v = source->translation;
-                __m128 q = parent.rotation.value;
-                __m128 t1 = _mm_mul_ps(_mm_shuffle_ps(v, v, 0xd2), _mm_shuffle_ps(q, q, 0xc9));
-                __m128 t2 = _mm_mul_ps(_mm_shuffle_ps(v, v, 0xc9), _mm_shuffle_ps(q, q, 0xd2));
-                __m128 cross = _mm_sub_ps(t1, t2);
-                __m128 w = _mm_shuffle_ps(q, q, 0xff);
-                __m128 product = _mm_mul_ps(v, q);
-                __m128 s55 = _mm_add_ss(_mm_shuffle_ps(product, product, 0x55), product);
-                __m128 dot = _mm_add_ss(_mm_shuffle_ps(product, product, 0xaa), s55);
-                __m128 rotated = _mm_add_ps(_mm_mul_ps(cross, w),
-                                            _mm_add_ps(_mm_mul_ps(_mm_add_ps(_mm_mul_ps(w, w), DAT_010c71e0), v),
-                                                       _mm_mul_ps(_mm_shuffle_ps(dot, dot, 0), q)));
-                output[index].translation = _mm_add_ps(_mm_add_ps(rotated, rotated), parent.translation);
-                output[index].rotation.FUN_00c66320(&parent.rotation, &source->rotation);
-                output[index].scale = _mm_mul_ps(source->scale, parent.scale);
-                ++source;
-            }
-            else
-            {
-                ++source;
-            }
-            ++i;
-        } while (i < count);
-    }
-}
 
 struct Cls
 {
@@ -210,22 +143,6 @@ struct Cls
     __m128 v10, v20, v30, v40, v50, v60;
     Cls* FUN_00ce4a50(Cls* src);
 };
-
-// @fnv 0x00ce4a50
-Cls* Cls::FUN_00ce4a50(Cls* src)
-{
-    m0 = src->m0;
-    m2 = src->m2;
-    m4 = src->m4;
-    m6 = src->m6;
-    v10 = src->v10;
-    v20 = src->v20;
-    v30 = src->v30;
-    v40 = src->v40;
-    v50 = src->v50;
-    v60 = src->v60;
-    return this;
-}
 
 struct SortRec
 {
@@ -388,71 +305,6 @@ static inline void S00cfac20_timer(const char* name)
         *(unsigned int*)(p + 4) = t;
         p += 0xc;
         mon->cur = p;
-    }
-}
-static __forceinline void S00cfac20_calcAabb(const S00cfac20_Ray* rays, int count, S00cfac20_Aabb& aabb)
-{
-    S00cfac20_Vec mn;
-    mn.setMin4(rays->from, rays->to);
-    aabb.mn.q = mn.q;
-    aabb.mx.setMax4(rays->from, rays->to);
-    const S00cfac20_Ray* p = rays + 1;
-    int i = count - 2;
-    if (i >= 0)
-    {
-        do
-        {
-            mn.setMin4(mn, p->to);
-            aabb.mx.setMax4(aabb.mx, p->to);
-            mn.setMin4(mn, p->from);
-            aabb.mx.setMax4(aabb.mx, p->from);
-            ++p;
-        } while (--i >= 0);
-        aabb.mn.q = mn.q;
-    }
-}
-// @fnv 0x00cfac20
-void S00cfac20_Grp::FUN_00cfac20(S00cfac20_Builder* b, S00cfac20_Ray* rays, int count, void* ctx, char* out)
-{
-    char* dst;
-    int j;
-    {
-        S00cfac20_Mon* mon = (S00cfac20_Mon*)TlsGetValue(DAT_0126835c);
-        char* p = mon->cur;
-        if (p < mon->end)
-        {
-            *(const char**)p = DAT_010cc678;
-            _ReadWriteBarrier();
-            *(volatile unsigned*)&dst = (unsigned)__rdtsc();
-            *(unsigned int*)(p + 4) = *(volatile unsigned*)&dst;
-            p += 0xc;
-            mon->cur = p;
-        }
-    }
-    S00cfac20_Aabb aabb;
-    S00cfac20_calcAabb(rays, count, aabb);
-    char* mem = ((S00cfac20_Stack*)FUN_00c85750())->alloc(b->GetLogicalSize());
-    b->init(&aabb, mem);
-    S00cfac20_Ray* r = rays;
-    dst = out;
-    for (j = count - 1; j >= 0; --j)
-    {
-        RecordAndDispatch(b, r++, ctx, mem, dst);
-        dst += 0x60;
-    }
-    ((S00cfac20_Stack*)FUN_00c85750())->release(mem);
-    {
-        S00cfac20_Mon* mon = (S00cfac20_Mon*)TlsGetValue(DAT_0126835c);
-        char* p = mon->cur;
-        if (p < mon->end)
-        {
-            *(const char**)p = DAT_010c41f8;
-            _ReadWriteBarrier();
-            *(volatile unsigned*)&j = (unsigned)__rdtsc();
-            *(unsigned int*)(p + 4) = *(volatile unsigned*)&j;
-            p += 0xc;
-            mon->cur = p;
-        }
     }
 }
 }  // namespace fnv_00cfac20
@@ -685,19 +537,3 @@ struct ShapeData
 
     ShapeData& FUN_00ce4ae0(const ShapeData& other);
 };
-
-// @fnv 0x00ce4ae0
-ShapeData& ShapeData::FUN_00ce4ae0(const ShapeData& other)
-{
-    m_kFirstReferencedObject = other.m_kFirstReferencedObject;
-    m_kSecondReferencedObject = other.m_kSecondReferencedObject;
-    m_kVertices = other.m_kVertices;
-    m_faces = other.m_faces;
-    m_ppIndices._copyFromArrayPod(containerHeap(), other.m_ppIndices);
-    m_kMinimumCorner = other.m_kMinimumCorner;
-    m_kMaximumCorner = other.m_kMaximumCorner;
-    m_kCenterPosition = other.m_kCenterPosition;
-    m_flag = other.m_flag;
-    m_uiItemCount = other.m_uiItemCount;
-    return *this;
-}

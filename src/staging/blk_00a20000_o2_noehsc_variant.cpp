@@ -3750,15 +3750,6 @@ struct A2CF60Elem
     }
 };
 
-// @fnv 0x00a2cf60
-A2CF60Elem* __cdecl FUN_00a2cf60(void* apStream, unsigned int auiCount)
-{
-    A2CF60Elem* pkItems = new A2CF60Elem[auiCount];
-    for (unsigned int i = 0; i < auiCount; i++)
-        pkItems[i].FUN_00a29640(apStream);
-    return pkItems;
-}
-
 namespace fnv_00a2d000 {
 struct QuatS
 {

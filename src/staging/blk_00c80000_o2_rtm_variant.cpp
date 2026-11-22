@@ -114,10 +114,6 @@ struct FUN_00c9a040_cls
 {
     void* __thiscall FUN_00c9a040(bool b);
 };
-__forceinline int Sign_00c9a070(float f)
-{
-    return f < 0.0f ? -1 : 1;
-}
 struct Range_00c9a070
 {
     float fHi;
@@ -125,14 +121,6 @@ struct Range_00c9a070
     Range_00c9a070(float h, float l) : fHi(h), fLo(l)
     {}
 };
-__forceinline void Adjust_00c9a070(float& out, float v, float fHi, float fLo)
-{
-    Range_00c9a070 r(fHi, fLo);
-    float s = (float)Sign_00c9a070(v);
-    float t = v + (r.fHi - r.fLo) * s;
-    if (t * s > 0.0f)
-        out -= t;
-}
 struct FUN_00c9a070_shell
 {
     char _pad0[0xa0];
@@ -6995,46 +6983,6 @@ struct ControllerList
     ~ControllerList();
     void RemoveNode(const ControllerPtr& key);
 };
-void ControllerList::RemoveNode(const ControllerPtr& key)
-{
-    if (!key.m_pObject)
-        return;
-    if (!next && !item.m_pObject)
-        return;
-    ControllerList* prev = this;
-    ControllerList* cur = this;
-    while (cur->item.m_pObject != key.m_pObject)
-    {
-        prev = cur;
-        cur = cur->next;
-        if (!cur)
-            return;
-    }
-    if (cur == this)
-    {
-        ControllerList* pNext = next;
-        if (pNext)
-        {
-            next = pNext->next;
-            item = pNext->item;
-            pNext->next = 0;
-            pNext->~ControllerList();
-            _g_memoryManager.Deallocate(pNext);
-        }
-        else if (item.m_pObject)
-        {
-            item.m_pObject->DecRefCount();
-            item.m_pObject = 0;
-        }
-    }
-    else
-    {
-        prev->next = cur->next;
-        cur->next = 0;
-        cur->~ControllerList();
-        _g_memoryManager.Deallocate(cur);
-    }
-}
 struct ControllerCollection
 {
     unsigned int unk, unk04, unk08, unk0C, unk10;
@@ -10915,11 +10863,6 @@ __forceinline bool Mask135(unsigned int a, unsigned int b)
     return (DAT_01268078[(a >> 8) & 31] & (1 << ((b >> 8) & 31))) != 0;
 }
 bool FUN_00c84740(unsigned int a, unsigned int b);
-__declspec(noinline) bool C00624070::FUN_00624070()
-{
-    unsigned int layer = value & 127;
-    return layer == 8 || layer == 29;
-}
 // @fnv 0x00c85d20
 struct B0
 {
@@ -10932,14 +10875,6 @@ struct F
 struct O : B0, F
 {
 };
-unsigned Apply(unsigned bits, char on)
-{
-    if (on == 0)
-        bits |= 0x4000u;
-    else
-        bits &= ~0x4000u;
-    return bits;
-}
 struct C
 {
     void** vt;
@@ -10947,18 +10882,6 @@ struct C
     O* object;
     void FUN_00c85d20(char active);
 };
-void C::FUN_00c85d20(char active)
-{
-    O* item = object;
-    F* part = item;
-    unsigned bits = part ? part->bits : 0;
-    bits = Apply(bits, active);
-    part = item;
-    if (part)
-        part->bits = bits;
-    typedef void(__thiscall * Fn)(C*);
-    ((Fn*)vt)[49](this);
-}
 extern "C" unsigned long __readfsdword(unsigned long);
 extern volatile unsigned long DAT_0126fd98;
 struct MemoryCategoryScope_00c89dd0
@@ -13428,108 +13351,6 @@ struct TlsLocal : ThreadTlsBlock
     int unk2b8, unk2bc;
     TlsModeLocal mode;
 };
-inline TlsModeLocal& GetBlendMode()
-{
-    return ((TlsLocal*)&g_tls)->mode;
-}
-// @fnv 0x00c81e30
-void BlendLocal::FUN_00c81e30()
-{
-    SceneLocal* node = scene;
-    BodyLocal* rigid = body;
-    bool forced = (flags & 0x100) != 0;
-    float timestep = DAT_011afe64;
-    unsigned int desiredMotion = 1;
-    int mode;
-    TlsModeLocal* tls;
-    if (heirGain == 0.0f)
-    {
-        int state = GetBlendMode().value;
-        tls = &GetBlendMode();
-        if (state == 1)
-        {
-            node->FUN_00a68bf0();
-            return;
-        }
-        mode = velGain == 0.0f || forced ? 1 : 0;
-    }
-    else if (heirGain == 1.0f)
-    {
-        tls = &GetBlendMode();
-        mode = GetBlendMode().value == 2 ? 1 : 2;
-        desiredMotion = 4;
-    }
-    else
-    {
-        tls = &GetBlendMode();
-        mode = GetBlendMode().value == 2 ? 1 : 0;
-    }
-    bool changed = false;
-    if (motion != desiredMotion)
-    {
-        if (motion == 4)
-            Reset();
-        else if (rigid)
-        {
-            rigid->FUN_00561690(DAT_01267e30);
-            rigid->FUN_005617c0(DAT_01267e30);
-        }
-        DAT_01267b80.FUN_0040fbf0(0);
-        FUN_00c65f40(desiredMotion, rigid, false);
-        DAT_01267b80.Unlock();
-        motion = desiredMotion;
-        changed = true;
-    }
-    switch (mode)
-    {
-    case 0: {
-        node->FUN_00a68bf0();
-        SceneTransLocal& world = node->world;
-        NiPoint3& worldPosition = world.position;
-        VecLocal position;
-        position.v.m128_f32[0] = worldPosition.x * DAT_01267e6c;
-        position.v.m128_f32[1] = worldPosition.y * DAT_01267e6c;
-        position.v.m128_f32[2] = worldPosition.z * DAT_01267e6c;
-        position.v.m128_f32[3] = 0.0f;
-        RotLocal converted;
-        VisitAndFetchThree(&converted, &world.rotation);
-        QuatLocal desiredRotation;
-        desiredRotation.FUN_00cb26e0(converted);
-        VecLocal currentPosition;
-        rigid->GetPosition(currentPosition);
-        QuatLocal currentRotation;
-        rigid->GetRotation(currentRotation);
-        VecLocal blendedPosition;
-        float blend = heirGain;
-        __m128 t = _mm_load_ss(&blend);
-        t = _mm_shuffle_ps(t, t, 0);
-        blendedPosition.v =
-            _mm_add_ps(_mm_mul_ps(_mm_sub_ps(DAT_010ec7f0, t), currentPosition.v), _mm_mul_ps(position.v, t));
-        QuatLocal blendedRotation;
-        blendedRotation.FUN_00cb2850(currentRotation, desiredRotation, heirGain);
-        blendedRotation.FUN_005611c0();
-        TransLocal output;
-        output.position = forced ? blendedPosition : position;
-        output.rotation.FUN_00cb2d90(blendedRotation);
-        FUN_00624b10(&world.rotation, &output.rotation);
-        FUN_00458620(&worldPosition, &output.position);
-        if (tls->value == 0)
-            Publish(&world);
-        float inverseTimestep = timestep != 0.0f ? 1.0f / timestep : 1.0f;
-        float gain = forced ? 1.0f : velGain;
-        rigid->FUN_00c8de20(blendedPosition, blendedRotation, inverseTimestep, gain);
-        break;
-    }
-    case 1:
-        FUN_00c65a80();
-        break;
-    case 2:
-        Reset();
-        break;
-    }
-    if (changed && target && target->count <= 0)
-        FUN_00c81aa0();
-}
 }
 
 struct LayerGain
@@ -15326,28 +15147,6 @@ class RayHitCollectorE700
     virtual void AddRayHit(const CdBodyE700& kBody, const RayOutputE700& kOutput);
 };
 
-// @fnv 0x00c9e700
-void __stdcall FUN_00c9e700(const RayInputE700& kInput, const CdBodyE700& kBody, RayHitCollectorE700* pkCollector)
-{
-    ScopedMemoryCategory kScope;
-    const ParentE700* pkParent = kBody.m_pParentNode;
-    if (pkParent)
-    {
-        const ContainerShapeE700* pkShape = pkParent->m_pkShape;
-        if (pkParent->m_pvMotion && pkShape && pkShape->m_type == 0x1b)
-        {
-            const ShapeE700* pkChild = pkShape->m_pkChild;
-            if (pkChild)
-            {
-                RayOutputE700 kOutput;
-                pkChild->CastRay(kInput, kOutput);
-                if (kOutput.HasHit())
-                    pkCollector->AddRayHit(kBody, kOutput);
-            }
-        }
-    }
-}
-
 namespace RigidCinfoSimd {
 union __declspec(intrin_type) __declspec(align(16)) __m128
 {
@@ -15644,12 +15443,6 @@ struct WorldWrapAdjust : FUN_00c9a070_shell
     void AdjustVector(float*);
 };
 
-__declspec(noinline) void WorldWrapAdjust::AdjustVector(float* p)
-{
-    Adjust_00c9a070(p[0], p[0], fHi[0], fLo[0]);
-    Adjust_00c9a070(p[1], p[1], fHi[1], fLo[1]);
-    Adjust_00c9a070(p[2], p[2], fHi[2], fLo[2]);
-}
 struct PositionTarget
 {
     void FUN_00c66c00(float* value);
@@ -15702,35 +15495,5 @@ struct MotionBounds
 
     bool FUN_00c9a1f0(__m128* value);
 };
-
-// @fnv 0x00c9a1f0
-bool MotionBounds::FUN_00c9a1f0(__m128* value)
-{
-    bool hit = false;
-    __m128 base = m_60;
-    __m128 input = *value;
-    __m128 d = _mm_sub_ps(input, base);
-    for (unsigned int i = 0; i < 3; ++i)
-    {
-        if (hit)
-            break;
-        float t = (float)fabs(((float*)&d)[i]);
-        hit = (t >= m_b0[i]);
-    }
-    if (hit)
-    {
-        d = input;
-        ((WorldWrapAdjust*)this)->AdjustVector((float*)&d);
-        __m128 diff = _mm_sub_ps(d, base);
-        __m128 absdiff = _mm_and_ps(diff, DAT_01017d10);
-        __m128 cmp = _mm_cmple_ps(absdiff, _mm_set_ps1(DAT_01016248));
-        unsigned int mask = _mm_movemask_ps(cmp) & 7;
-        bool result = mask != 7;
-        if (result)
-            ((PositionTarget*)this)->FUN_00c66c00((float*)&d);
-        hit = result;
-    }
-    return hit;
-}
 
 }

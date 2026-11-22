@@ -342,10 +342,6 @@ struct FUN_00d49c50_cls
 };
 extern "C" int DAT_01268c8c;
 // @fnv 0x00d4b160
-extern "C" void* __cdecl FUN_00d4b160()
-{
-    return &DAT_01268c8c;
-}
 struct S_00d4b170
 {
     void FUN_00d4a170(int a);
@@ -1353,15 +1349,6 @@ struct Owner
     Writer* m_pkWriter;
     void AppendPairAndAdvance(int v);
 };
-// Appends 0xc and v to the writer's int array, then calls Add twice to advance the writer's counters and byte count.
-// @fnv 0x00d51ef0
-void Owner::AppendPairAndAdvance(int aiValue)
-{
-    m_pkWriter->m_kArr.AddBack(0xc);
-    m_pkWriter->m_kArr.AddBack(aiValue);
-    m_pkWriter->Add();
-    m_pkWriter->Add();
-}
 }
 void FUN_00d42760();
 void __cdecl FUN_00d42780();
@@ -1811,13 +1798,6 @@ struct D46E50Helper
 
     __declspec(noinline) int SumListValues();
 };
-int D46E50Helper::SumListValues()
-{
-    int sum = unk14;
-    for (void* p = m_pNext; p; p = ((D46E50Helper*)p)->m_pNext)
-        sum += ((D46E50Helper*)p)->unk14;
-    return sum + unk00;
-}
 struct MemberD472
 {
     int m_data;
@@ -4064,17 +4044,6 @@ struct ConstraintBuilder
     int count;
     int FUN_00d52ae0(float value);
 };
-// @fnv 0x00d52ae0
-int ConstraintBuilder::FUN_00d52ae0(float value)
-{
-    ++count;
-    state->events.AddBack(0x16);
-    RecordVector record;
-    record.set(value, 0.0f, 0.0f, 0.0f);
-    int result = state->values.GetLogicalSize();
-    state->values.AddBack(record);
-    return result;
-}
 
 extern "C"
 {
@@ -4163,17 +4132,6 @@ struct FUN_00d59760 : ConvexBase380
 
     FUN_00d59760(TransposedPoints380*, int, Vector380*, int, const Bounds380&, float);
 };
-// @fnv 0x00d59760
-FUN_00d59760::FUN_00d59760(TransposedPoints380* vertexData, int count, Vector380* planeData, int planeCount,
-                           const Bounds380& bounds, float r)
-    : ConvexBase380(r), vertices((vtable = DAT_010d0fc4, references = 1, vertexData), count), vertexCount(count),
-      unk50(0), planes(planeData, planeCount), connectivity(0)
-{
-    halfExtents.SetSub(bounds.maximum, bounds.minimum);
-    halfExtents.Multiply(0.5f);
-    center.SetAdd(bounds.minimum, bounds.maximum);
-    center.Multiply(0.5f);
-}
 
 namespace AngularFrictionIntrinsics {
 extern "C" ::D4F2A0Simd::__m128 _mm_setr_ps(float, float, float, float);
@@ -4215,18 +4173,6 @@ struct AngularFrictionWriter
     AngularFrictionState* state;
     int FUN_00d528e0(unsigned char value, float f);
 };
-// @fnv 0x00d528e0
-int AngularFrictionWriter::FUN_00d528e0(unsigned char value, float f)
-{
-    state->values.AddBack(0x14);
-    state->values.AddBack(value);
-    AngularFrictionRecord tmp;
-    ::D4F2A0Simd::_mm_store_ps(&tmp.x, AngularFrictionIntrinsics::_mm_setr_ps(f, 0.0f, 0.0f, 0.0f));
-    int result = state->records.m_iElementCount;
-    state->records.AddBack(tmp);
-    state->budget.add(0x30, 1, 2);
-    return result;
-}
 
 namespace MoppBuildSimd {
 extern "C" ::D4F2A0Simd::__m128 _mm_load_ps(const float*);

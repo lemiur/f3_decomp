@@ -48,15 +48,6 @@ struct FUN_00d06d50_cls
 };
 extern "C" void __cdecl FUN_00cf6920(int, int, int);
 
-// Calls FindClass on b with a; if it returns nonzero, passes a, the result and b to FUN_00cf6920.
-// @fnv 0x00cf6950
-void __cdecl FUN_00cf6950(int a, int apObject)
-{
-    int c = ((FUN_00d06d50_cls*)apObject)->FindClass(a);
-    if (c)
-        FUN_00cf6920(a, c, apObject);
-}
-
 struct FUN_00cf86f0_class
 {
     int IsFieldEqual();
@@ -68,17 +59,6 @@ int FUN_00cf86f0_class::IsFieldEqual()
     if (*(float*)((char*)this + 0x14) == *(float*)((char*)this + 0x20))
         return 1;
     return 0;
-}
-
-// @fnv 0x00cfcb80
-unsigned short FUN_00cfcb80(unsigned short a, unsigned short b)
-{
-    unsigned short r = a;
-    if (a < b)
-        r = a;
-    else
-        r = b;
-    return r;
 }
 
 extern int DAT_010cb864;
@@ -95,23 +75,8 @@ struct FUN_00ce4a20_cls
     int m_iFourthElementInteger;
     int __thiscall FUN_00ce4a20(int a);
 };
-// @fnv 0x00ce4a20
-int __thiscall FUN_00ce4a20_cls::FUN_00ce4a20(int a)
-{
-    m_iThirdValue = 1;
-    m_kPointA = (int)&DAT_010cb864;
-    ((FUN_00ce4ae0_cls*)((char*)this + 0x10))->FUN_00ce5310();
-    ((FUN_00ce4ae0_cls*)((char*)this + 0x10))->FUN_00ce4ae0(a);
-    return (int)this;
-}
 
 extern int DAT_0102e378;
-// @fnv 0x00cf69a0
-void __cdecl FUN_00cf69a0(int* a)
-{
-    if (a)
-        *a = (int)&DAT_0102e378;
-}
 
 struct FUN_00cf69c0_class
 {
@@ -122,20 +87,6 @@ struct FUN_00cf69c0_class
 };
 
 int __cdecl FUN_00cb0fa0(int a, int b);
-
-// @fnv 0x00cf69c0
-int __thiscall FUN_00cf69c0_class::FUN_00cf69c0(int a)
-{
-    FUN_00cf69c0_class* self = this;
-    for (;;)
-    {
-        if (self->m_kPointA && !FUN_00cb0fa0(a, self->m_kPointA))
-            return (int)self;
-        if (!self->m_kPointB)
-            return 0;
-        self = (FUN_00cf69c0_class*)self->m_kPointB;
-    }
-}
 
 struct FUN_00cf86e0_class
 {
@@ -159,28 +110,12 @@ struct FUN_00cf4820_class
     FUN_00cf4820_class();
 };
 
-// @fnv 0x00cf4820
-FUN_00cf4820_class::FUN_00cf4820_class()
-{
-    m1 = 0;
-    m2 = 1;
-    m3 = 0;
-    m4 = 0;
-    vtbl = &DAT_010cc2e0;
-}
-
 extern int DAT_0102e388;
 
 struct FUN_00cf86d0_cls
 {
     void FUN_00cf86d0();
 };
-
-// @fnv 0x00cf86d0
-void FUN_00cf86d0_cls::FUN_00cf86d0()
-{
-    *(int*)this = (int)&DAT_0102e388;
-}
 
 // FUN_00ce29e0: member function that (re)initialises the object.
 //   - installs the base vtable pointer at [this],
@@ -205,14 +140,6 @@ struct FUN_00ce29e0_cls
     void FUN_00ce29e0();
 };
 
-// @fnv 0x00ce29e0
-void FUN_00ce29e0_cls::FUN_00ce29e0()
-{
-    m_pVTable = &DAT_010cb864;
-    m_sub.FUN_00ce5370();
-    m_pVTable = &DAT_0102e388;
-}
-
 struct FnvSpawnedObject;
 
 struct FnvProbe
@@ -236,39 +163,9 @@ struct FnvSpawnedObject
     unsigned char* Check(FnvSpawnedObject** ref);
 };
 
-// Returns false if the first probe's Match or the object's Check fails, otherwise returns the result of the second probe's Check.
-// @fnv 0x00ce2a00
-bool __cdecl FUN_00ce2a00(int unused, FnvSpawnedObject* obj)
-{
-    FnvSpawnedObject* self = obj;
-    if (*self->m_10.Match(&obj) == 0)
-    {
-        return false;
-    }
-    if (*self->Check(&obj) == 0)
-    {
-        return false;
-    }
-    return *self->m_20.Check(&obj) ? true : false;
-}
-
 void __cdecl FUN_00ce2ca0(int a1, int a2, int* a3, int a4);
 
-// @fnv 0x00ce2cf0
-void __cdecl FUN_00ce2cf0(int pObject, int param_2, int param_3)
-{
-    FUN_00ce2ca0(*reinterpret_cast<int*>(reinterpret_cast<char*>(pObject) + 0x74), param_3,
-                 reinterpret_cast<int*>(reinterpret_cast<char*>(pObject) + 0x40), param_2);
-}
-
 void __cdecl FUN_00ce3090(int a1, int a2, int a3, int a4, int a5, int a6);
-
-// Calls FUN_00ce3090 with a1, a2, a3, two zero arguments, and a4.
-// @fnv 0x00ce4330
-void __cdecl FUN_00ce4330(int a1, int a2, int a3, int a4)
-{
-    FUN_00ce3090(a1, a2, a3, 0, 0, a4);
-}
 
 namespace fnv_00ce5370 {
 extern "C" void _ReadWriteBarrier(void);
@@ -315,58 +212,6 @@ struct FUN_00ce5370_cls
     void FUN_00ce5370();
 };
 
-// Frees the three arrays through the audio allocator, resets their counts, pointers and capacities, then releases and clears both object references.
-// @fnv 0x00ce5370
-void FUN_00ce5370_cls::FUN_00ce5370()
-{
-    AudioHolder* pHolder = FUN_00c85750();
-    AudioAllocator* pAllocator = pHolder->m_pAllocator;
-    unsigned int uCapA = m_uCapA;
-    m_iCountA = 0;
-    if ((uCapA & 0x80000000u) == 0)
-    {
-        pAllocator->FreeArray(m_pDataA, (uCapA & 0x3fffffffu) * 2);
-    }
-    m_pDataA = 0;
-    m_uCapA = 0x80000000u;
-
-    AudioHolder* pHolder2 = FUN_00c85750();
-    AudioAllocator* pAllocator2 = pHolder2->m_pAllocator;
-    unsigned int uCapB = m_uCapB;
-    m_iCountB = 0;
-    if ((uCapB & 0x80000000u) == 0)
-    {
-        pAllocator2->FreeArray(m_pDataB, (uCapB & 0x3fffffffu) * 0x70);
-    }
-    m_pDataB = 0;
-    m_uCapB = 0x80000000u;
-
-    AudioHolder* pHolder3 = FUN_00c85750();
-    AudioAllocator* pAllocator3 = pHolder3->m_pAllocator;
-    unsigned int uCapC = m_uCapC;
-    m_iCountC = 0;
-    if ((uCapC & 0x80000000u) == 0)
-    {
-        pAllocator3->FreeArray(m_pDataC, (uCapC & 0x3fffffffu) * 0x40);
-    }
-    m_pDataC = 0;
-    m_uCapC = 0x80000000u;
-
-    _ReadWriteBarrier();
-    AudioObjectRef* pObj4 = m_pObj4;
-    if (pObj4 != 0)
-    {
-        pObj4->Release();
-    }
-    m_pObj4 = 0;
-    _ReadWriteBarrier();
-    AudioObjectRef* pObj0 = m_pObj0;
-    if (pObj0 != 0)
-    {
-        pObj0->Release();
-    }
-    m_pObj0 = 0;
-}
 }  // namespace fnv_00ce5370
 
 struct FnvKeyRec
@@ -717,18 +562,6 @@ class CF4BC0Saver
 
 CF4BC0Saver* __cdecl CF4BC0CreateSaver(unsigned int uiType);
 
-// @fnv 0x00cf4bc0
-void __cdecl FUN_00cf4bc0(CF4BC0Stream& kStream, CF4BC0Object* pkObject)
-{
-    CF4BC0AllocTagScope kScope(0x10);
-    unsigned int uiType = pkObject->GetSaveType();
-    CF4BC0Saver* pkSaver = CF4BC0CreateSaver(uiType);
-    pkSaver->SetObject(pkObject);
-    CF4BC0SaveBinary(kStream, uiType);
-    pkSaver->SaveBinary(kStream);
-    pkSaver->DeleteThis(true);
-}
-
 extern int DAT_010cc2fc;
 extern int DAT_0102e388;
 
@@ -769,21 +602,6 @@ struct FUN_00cf4eb0_cls
     FUN_00cf4eb0_cls* Destroy(unsigned char acFlags);
 };
 
-// @fnv 0x00cf4eb0
-FUN_00cf4eb0_cls* FUN_00cf4eb0_cls::Destroy(unsigned char acFlags)
-{
-    m_vptr = (int)&DAT_010cc2fc;
-    m_sub.Release();
-    m_vptr = (int)&DAT_0102e388;
-    if (acFlags & 1)
-    {
-        AudioHolder* pHolder = FUN_00c85750();
-        AudioAllocator* pAllocator = pHolder->m_pAllocator;
-        pAllocator->Free(this, m_uSize);
-    }
-    return this;
-}
-
 struct S_00cf4f00
 {
     int unk00;
@@ -810,19 +628,6 @@ struct S_00cf4f00
     unsigned int m_bits[1];
     void __thiscall ClearBit(unsigned int idx);
 };
-// Clears bit idx in the m_bits array and increments the counter if the bit was set.
-// @fnv 0x00cf4f00
-void __thiscall S_00cf4f00::ClearBit(unsigned int auiBitIndex)
-{
-    unsigned int i = auiBitIndex >> 5;
-    unsigned int old = m_bits[i];
-    unsigned int nw = old & ~(1u << (auiBitIndex & 0x1f));
-    if (old != nw)
-    {
-        m_bits[i] = nw;
-        m_uiItemCount++;
-    }
-}
 
 struct FUN_00cf4f30_class
 {
@@ -850,20 +655,6 @@ struct FUN_00cf4f30_class
     unsigned int bits[8];
     void SetBit(unsigned int index);
 };
-// Sets bit (index & 31) in bits[index >> 5] and decrements counter by one if the bit was not already set.
-// @fnv 0x00cf4f30
-void FUN_00cf4f30_class::SetBit(unsigned int index)
-{
-    unsigned int mask = 1u << (index & 31);
-    unsigned int group = index >> 5;
-    unsigned int old = bits[group];
-    unsigned int updated = old | mask;
-    if (old != updated)
-    {
-        bits[group] = updated;
-        counter += 0xffff;
-    }
-}
 
 struct FUN_00cf4f70_src
 {
@@ -902,27 +693,6 @@ class FUN_00cf4f70_cls
     void InitFromSource(FUN_00cf4f70_src* src);
 };
 
-// Copies src->m_04 ints from src->m_00 into the array at this+0x50, then stores m_1c minus CountBitsInWords(src->m_00, src->m_04) into m_26.
-// @fnv 0x00cf4f70
-void FUN_00cf4f70_cls::InitFromSource(FUN_00cf4f70_src* pSource)
-{
-    int* dst;
-    int i = 0;
-    if (pSource->m_04 > 0)
-    {
-        dst = (int*)((char*)this + 0x50);
-        do
-        {
-            *dst = pSource->m_00[i];
-            dst++;
-            i++;
-        } while (i < pSource->m_04);
-    }
-    int base = m_1c;
-    int r = CountBitsInWords(pSource->m_00, pSource->m_04);
-    m_26 = (unsigned short)(base - r);
-}
-
 struct FUN_00cf6980_class
 {
     virtual void FUN_00cf6980(int);
@@ -942,11 +712,6 @@ int* __cdecl FUN_00cf6990()
 }
 
 extern int DAT_0102e378;
-// @fnv 0x00cf69b0
-int* __cdecl FUN_00cf69b0()
-{
-    return &DAT_0102e378;
-}
 
 namespace fnv_00cf6b10 {
 extern "C" void* DAT_01268794;
@@ -1010,35 +775,6 @@ struct S_00cf6b50_Foo
     void __thiscall UpdateState(int a);
 };
 
-// @fnv 0x00cf6b50
-void __thiscall S_00cf6b50_Foo::UpdateState(int a)
-{
-    short flag = m_iWordAt04;
-    flag = (short)((unsigned short)flag >> 15);
-
-    unsigned char byteFlag = (unsigned char)~flag;
-    if ((byteFlag & 1) == 0)
-    {
-        return;
-    }
-
-    if (m_iWordAt00 == -63 || m_iWordAt00 == -31 || m_iWordAt00 == -15)
-    {
-        FUN_00fdf05c(DAT_01268794);
-
-        m_iWordAt00 = (a == 1) ? -31 : -63;
-    }
-    else
-    {
-        FUN_00fdf05c(DAT_01268794);
-    }
-
-    m_6 <<= 1;
-    ++m_iWordAt04;
-
-    FUN_00fdf100(DAT_01268794);
-}
-
 struct FUN_00cf6d50_cls
 {
     int m_00;
@@ -1046,12 +782,6 @@ struct FUN_00cf6d50_cls
     unsigned short m_06;
     void FUN_00cf6d50();
 };
-
-// @fnv 0x00cf6d50
-void FUN_00cf6d50_cls::FUN_00cf6d50()
-{
-    m_04 &= 0x7fff;
-}
 
 struct FUN_00cf6f80_cls
 {
@@ -1167,39 +897,6 @@ struct Saver13 : CF4840Saver
     Saver13() throw();
 };
 
-// Allocates and returns a CF4840Saver-derived object chosen by uiType, or null for unsupported types.
-// @fnv 0x00cf4840
-CF4840Saver* __cdecl CreateSaver(unsigned int uiType)
-{
-    CF4BC0AllocTagScope kScope(0x10);
-    switch (uiType)
-    {
-    case 0:
-        return new Saver00;
-    case 1:
-        return new Saver01;
-    case 2:
-        return new Saver02;
-    case 3:
-        return new Saver03;
-    case 6:
-        return new Saver06;
-    case 7:
-        return new Saver07;
-    case 8:
-        return new Saver08;
-    case 9:
-        return new Saver09;
-    case 10:
-        return new Saver10;
-    case 12:
-        return new Saver12;
-    case 13:
-        return new Saver13;
-    }
-    return 0;
-}
-
 // Build the Havok object for a serialized node: find its creator, run it, keep the result and delete the creator.
 
 extern __declspec(thread) int g_iF4A30AllocTag;
@@ -1252,23 +949,6 @@ class F4A30Creator
 
 F4A30Creator* __cdecl F4A30FindCreator(int iTypeID);
 
-// @fnv 0x00cf4a30
-F4A30Result* CreateF4A30Result(F4A30Node* pkNode, void* pvContext)
-{
-    F4A30AllocTagScope kScope(0x10);
-    F4A30Creator* pkCreator = F4A30FindCreator(pkNode->GetTypeID());
-    if (pkCreator)
-    {
-        pkCreator->Init(pkNode);
-        pkCreator->Create(0, pvContext);
-        F4A30Result* pkResult = pkCreator->m_pkResult;
-        pkResult->RetainReference();
-        delete pkCreator;
-        return pkResult;
-    }
-    return 0;
-}
-
 void __cdecl FUN_00ce51f0();
 // @fnv 0x00ce5300
 void __cdecl FUN_00ce5300()
@@ -1285,35 +965,17 @@ class FUN_00ce5360_This
     unsigned int FUN_00ce5360(unsigned int arg);
 };
 
-unsigned int FUN_00ce5360_This::FUN_00ce5360(unsigned int arg)
-{
-    return reinterpret_cast<unsigned int>(this);
-}
-
 class FUN_00ce9800_obj
 {
   public:
     virtual ~FUN_00ce9800_obj();
 };
 
-// @fnv 0x00ce9800
-void __cdecl DeleteObjectIfNotNull(FUN_00ce9800_obj* pkObject)
-{
-    if (pkObject)
-        delete pkObject;
-}
-
 struct FUN_00ce9820_vt
 {
     virtual void FUN_00ce9820_v0(int a);
     virtual void FUN_00ce9820_v1(int a);
 };
-// @fnv 0x00ce9820
-void __cdecl CallVirtualMethodWithOne(FUN_00ce9820_vt* pObject)
-{
-    if (pObject)
-        pObject->FUN_00ce9820_v0(1);
-}
 
 struct Stream;
 typedef int (*StreamIOFunc)(Stream* stream, void* data, int size, int* count, int flag);
@@ -1714,20 +1376,6 @@ struct hkMultiThreadCheckCF6B
     void MarkForRead();
 };
 
-// @fnv 0x00cf6bc0
-void hkMultiThreadCheckCF6B::MarkForRead()
-{
-    if (isCheckingEnabled())
-    {
-        hkCriticalSectionLockCF6B lock((hkCriticalSectionCF6B*)DAT_01268794);
-        unsigned int threadId = FUN_00d87a40();
-        m_usMarkedForWrite++;
-        m_usMarkCount = (m_usMarkCount << 1) | 1;
-        if (m_uiThreadId == 0xfffffff1)
-            m_uiThreadId = threadId;
-    }
-}
-
 extern "C" __declspec(dllimport) void __stdcall EnterCriticalSection(void* cs) throw();
 extern "C" __declspec(dllimport) void __stdcall LeaveCriticalSection(void* cs) throw();
 
@@ -1766,18 +1414,6 @@ struct hkMultiThreadCheckCF61
     bool IsCurrentThreadOwner();
 };
 
-// Returns true if multithread checking is disabled or the stored thread id matches the current thread id, otherwise false.
-// @fnv 0x00cf6c10
-bool hkMultiThreadCheckCF61::IsCurrentThreadOwner()
-{
-    if (!isCheckingEnabled())
-        return true;
-    hkCriticalSectionLockCF61 lock((hkCriticalSectionCF61*)DAT_01268794);
-    if (m_uiThreadId == FUN_00d87a40())
-        return true;
-    return false;
-}
-
 extern "C" __declspec(dllimport) void __stdcall EnterCriticalSection(void* cs) throw();
 extern "C" __declspec(dllimport) void __stdcall LeaveCriticalSection(void* cs) throw();
 
@@ -1813,19 +1449,6 @@ struct hkMultiThreadCheckCF6C
 
     void FUN_00cf6c60();
 };
-
-// @fnv 0x00cf6c60
-void hkMultiThreadCheckCF6C::FUN_00cf6c60()
-{
-    if (isCheckingEnabled())
-    {
-        hkCriticalSectionLockCF6C lock((hkCriticalSectionCF6C*)DAT_01268794);
-        m_usMarkCount >>= 1;
-        m_usMarkedForWrite--;
-        if (m_usMarkedForWrite == 0)
-            m_uiThreadId = 0xfffffff1;
-    }
-}
 
 extern "C" __declspec(dllimport) void __stdcall EnterCriticalSection(void* cs) throw();
 extern "C" __declspec(dllimport) void __stdcall LeaveCriticalSection(void* cs) throw();
@@ -1863,19 +1486,6 @@ struct hkMultiThreadCheckCF6D
     void FUN_00cf6cb0();
 };
 
-// @fnv 0x00cf6cb0
-void hkMultiThreadCheckCF6D::FUN_00cf6cb0()
-{
-    if (isCheckingEnabled())
-    {
-        hkCriticalSectionLockCF6D lock((hkCriticalSectionCF6D*)DAT_01268794);
-        m_usMarkCount >>= 1;
-        m_usMarkedForWrite--;
-        if (m_usMarkedForWrite == 0)
-            m_uiThreadId = 0xfffffff1;
-    }
-}
-
 struct hkMultiThreadCheckCF6E
 {
     unsigned int m_uiThreadId;
@@ -1889,16 +1499,6 @@ struct hkMultiThreadCheckCF6E
 
     void ResetThreadCheck();
 };
-
-// @fnv 0x00cf6d30
-void hkMultiThreadCheckCF6E::ResetThreadCheck()
-{
-    if (!isCheckingEnabled())
-    {
-        m_uiThreadId = 0xfffffff1;
-        m_usMarkedForWrite = 0;
-    }
-}
 
 struct CC9F10Shape
 {
@@ -1940,14 +1540,6 @@ struct hkOwnerCF74
     int unk9C, unkA0, unkA4, unkA8, unkAC, unkB0, unkB4, unkB8, unkBC, unkC0, unkC4, unkC8, unkCC, unkD0;
     unsigned int m_d4;
 };
-
-// @fnv 0x00cf74b0
-int __cdecl FUN_00cf74b0(const hkEntryCF74& aEntryA, const hkEntryCF74& aEntryB)
-{
-    if (aEntryA.m_pOwnerObject == aEntryB.m_pOwnerObject)
-        return aEntryA.m_08 > aEntryB.m_08;
-    return aEntryA.m_pOwnerObject->m_d4 < aEntryB.m_pOwnerObject->m_d4;
-}
 
 struct hkBoolCF74
 {
@@ -2036,25 +1628,12 @@ struct hkPairCF74
     hkEntityCF74* m_kPointB;
 };
 
-// Compares two pairs by their entities' quality priority, falling back to the second entity's priority when the first priorities are equal.
-// @fnv 0x00cf74e0
-hkBoolCF74 __cdecl LessThanPairPriority(const hkPairCF74& aPairA, const hkPairCF74& aPairB)
-{
-    unsigned int a = aPairA.m_kPointA->m_quality->m_priority;
-    unsigned int b = aPairB.m_kPointA->m_quality->m_priority;
-    return a < b || (a == b && aPairA.m_kPointB->m_quality->m_priority < aPairB.m_kPointB->m_quality->m_priority);
-}
-
 // @fnv 0x00cfb050
 void* __cdecl FUN_00cfb050(void* pvUnused, bool* pbOut, void* pvResult)
 {
     *pbOut = false;
     return pvResult;
 }
-
-// @fnv 0x00cfb060
-void FUN_00cfb060()
-{}
 
 // @fnv 0x00cfb070
 int __cdecl FUN_00cfb070(int a, int b, int c)
@@ -2074,12 +1653,6 @@ struct FUN_00cfc590_class
 
     void __thiscall FUN_00cfc590();
 };
-
-// @fnv 0x00cfc590
-void __thiscall FUN_00cfc590_class::FUN_00cfc590()
-{
-    vtable = &DAT_0102e388;
-}
 
 extern int DAT_010cc86c;
 
@@ -2145,26 +1718,6 @@ struct FUN_00cfc5a0
     FUN_00cfc5a0(int a1, S_00cfc5a0* a2, S_00cfc5a0* a3);
 };
 
-// Sets up the object with a1, stores a2 and a3, and records the smaller of their unkAA values in unk18.
-// @fnv 0x00cfc5a0
-FUN_00cfc5a0::FUN_00cfc5a0(int aiValue, S_00cfc5a0* apFirst, S_00cfc5a0* apSecond)
-{
-    unk06 = 1;
-    unk08 = 1;
-    vtbl = &DAT_010cc86c;
-    unsigned short w3 = apSecond->unkAA;
-    unsigned short w2 = apFirst->unkAA;
-    unsigned short chosen = w2 < w3 ? w2 : w3;
-    unk10 = apFirst;
-    unk14 = apSecond;
-    unk18 = chosen;
-    unk0c = aiValue;
-}
-
-// @fnv 0x00cfdb40
-void FUN_00cfdb40()
-{}
-
 // Per-thread profiler ring: TlsGetValue(index) -> buffer with head@+4 / end@+0xc,
 // 0xc-byte events {tag, timestamp, pad}.
 struct CE0020Event
@@ -2187,20 +1740,6 @@ extern char DAT_010c41f8[];
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long);
 extern "C" unsigned __int64 __rdtsc(void);
 extern "C" void _ReadWriteBarrier(void);
-
-__forceinline void CE0020TimerMark(const char* pTag)
-{
-    CE0020Buffer* pBuffer = (CE0020Buffer*)TlsGetValue(DAT_0126835c);
-    CE0020Event* pEvent = pBuffer->m_pHead;
-    if (pEvent < pBuffer->m_pRecordEnd)
-    {
-        pEvent->m_pTag = pTag;
-        _ReadWriteBarrier();
-        volatile unsigned int uiStamp = (unsigned int)__rdtsc();
-        pEvent->m_uiEventId = uiStamp;
-        pBuffer->m_pHead = pEvent + 1;
-    }
-}
 
 // 4-byte flags struct passed by value (bool first member).
 class CE0020Flag
@@ -2258,29 +1797,6 @@ class CE0020Subject
 };
 
 void __cdecl FUN_00d27690(CE0020Target* pTarget, CE0020Subject* pSubject, int iType);
-
-// @fnv 0x00ce0020
-void __cdecl EnableConstraintsAndZeroArrays(CE0020Target* pTarget, CE0020Subject* pSubject)
-{
-    pSubject->EnableConstraints();
-    CE0020TimerMark(DAT_010cb81c);
-    FUN_00d27690(pTarget, pSubject, 0x1b);
-    float* pFloats = pTarget->m_pArrayData->m_pFloats;
-    if (pFloats)
-    {
-        CE0020Flag kFlags;
-        CE0020ZeroInfo kInfo;
-        kFlags.m_bEnableState = true;
-        pTarget->m_pHolder->Fill(kFlags, &kInfo);
-        double dZero = 0.0;
-        for (int i = 0; i < kInfo.m_iArrayLength; i++)
-        {
-            pFloats[2 * i] = (float)dZero;
-            pFloats[2 * i + 1] = (float)dZero;
-        }
-    }
-    CE0020TimerMark(DAT_010c41f8);
-}
 
 void __cdecl FUN_00ce2d10();
 
@@ -2391,23 +1907,6 @@ class FUN_00cf43b0
 
     FUN_00cf43b0();
 };
-
-// Initializes a motor with default force limits, damping, tau, and velocity clamp settings, and sets its vftable.
-// @fnv 0x00cf43b0
-FUN_00cf43b0::FUN_00cf43b0()
-{
-    m_sReferenceCount = 1;
-    m_fMinForce = -1000000.0f;
-    m_fMaxForce = 1000000.0f;
-    hkBoolC43 kClamp = {};
-    m_motorType = 2;
-    m_fMotorDamping = 1.0f;
-    m_fTau = 0.8f;
-    _ReadWriteBarrier();
-    m_useVelocityClamp = kClamp.v;
-    _ReadWriteBarrier();
-    m_vftable = DAT_010cc0ec;
-}
 
 struct NiBinaryStreamCF44
 {
@@ -2660,11 +2159,6 @@ struct TagState
     int oldTag;
     int newTag;
 };
-__forceinline TagState GetTag(int tag)
-{
-    TagState state = {g_iCF4BC0AllocTag, tag};
-    return state;
-}
 struct AllocScope
 {
     int saved;
@@ -2677,31 +2171,6 @@ struct AllocScope
         g_iCF4BC0AllocTag = saved;
     }
 };
-// Reads a type ID from the stream, creates a saver, loads its binary data, and returns the retained object pointer.
-// @fnv 0x00cf4af0
-hkReferencedObject* __cdecl FUN_00cf4af0(CF4BC0Stream& kStream)
-{
-    AllocScope kAllocTag(GetTag(16));
-    CF4BC0StreamInput& kIn = (CF4BC0StreamInput&)kStream;
-    CF4BC0BinaryStreamIn* pIstr = (CF4BC0BinaryStreamIn*)kIn.m_pUnderlyingStream;
-    unsigned int uiType;
-    pIstr->Load(&uiType);
-    CF4BC0Saver* pSaver = CF4BC0CreateSaver(uiType);
-    if (pSaver)
-    {
-        CF4BC0SaverLoader* pLoader = (CF4BC0SaverLoader*)pSaver;
-        pLoader->LoadBinary(kStream);
-        hkReferencedObject* pObject = pLoader->m_pPointer;
-        pObject->RetainReference();
-        pSaver->DeleteThis(true);
-        return pObject;
-    }
-    return 0;
-}
-
-// @fnv 0x00cf6d10
-__declspec(noinline) void FUN_00cf6d10()
-{}
 
 class hkBaseObject
 {
@@ -2806,18 +2275,6 @@ struct __declspec(align(16)) CE5430Pose
     void SetIdentity();
 };
 
-// Resets the pose indices to zero and sets both transforms to their identity state.
-// @fnv 0x00ce5430
-void CE5430Pose::SetIdentity()
-{
-    m_sIndex0 = 0;
-    m_sIndex1 = 0;
-    m_sIndex2 = 0;
-    m_sIndex3 = 0;
-    m_kTransform0.setIdentity();
-    m_kTransform1.setIdentity();
-}
-
 struct __declspec(align(16)) hkVector4CE98
 {
     __m128 m_vComponents;
@@ -2841,14 +2298,6 @@ struct hkElementCE98
     hkVector4CE98 m_vector;
 };
 
-// Copies the m_vector field from pkSrc to pkDst for iCount elements.
-// @fnv 0x00ce9840
-void __cdecl CopyVectors(hkElementCE98* pkDst, const hkElementCE98* pkSrc, int iCount)
-{
-    for (int i = 0; i < iCount; i++)
-        pkDst[i].m_vector = pkSrc[i].m_vector;
-}
-
 struct FUN_00cf0820
 {
     float field00;
@@ -2861,17 +2310,6 @@ struct FUN_00cf0820
     __m128 field40;
     FUN_00cf0820(const FUN_00cf0820& input);
 };
-// Copy constructor: copies field00, field04, field10, field20, field30 and field40 from input, leaving unk08 and unk0c unset.
-// @fnv 0x00cf0820
-FUN_00cf0820::FUN_00cf0820(const FUN_00cf0820& input)
-{
-    field00 = input.field00;
-    field04 = input.field04;
-    field10 = input.field10;
-    field20 = input.field20;
-    field30 = input.field30;
-    field40 = input.field40;
-}
 
 extern __declspec(align(16)) float DAT_01017d10[4];
 extern float DAT_01017d00;
@@ -2880,29 +2318,6 @@ struct FUN_00cf08c0_VectorArray
     float* values;
     int count;
 };
-// Returns true when both arrays have the same count and every component differs by at most the tolerance DAT_01017d00.
-// @fnv 0x00cf08c0
-bool __cdecl FUN_00cf08c0(const FUN_00cf08c0_VectorArray* left, const FUN_00cf08c0_VectorArray* right)
-{
-    bool equal = left->count == right->count;
-    if (equal)
-    {
-        int i = 0;
-        if (i < left->count)
-        {
-            const __m128 absoluteMask = _mm_load_ps(DAT_01017d10);
-            for (; i < left->count && equal; ++i)
-            {
-                __m128 delta = _mm_sub_ps(_mm_load_ps(left->values + 4 * i), _mm_load_ps(right->values + 4 * i));
-                __m128 tolerance = _mm_load1_ps(&DAT_01017d00);
-                __m128 absoluteDelta = _mm_and_ps(delta, absoluteMask);
-                int bits = _mm_movemask_ps(_mm_cmple_ps(absoluteDelta, tolerance));
-                equal = (bits & 15) == 15;
-            }
-        }
-    }
-    return equal;
-}
 
 struct BinaryStreamCF0
 {
@@ -2940,29 +2355,6 @@ struct hkMatrixCF0
     hkVector4CF0 m_kColumn1;
     hkVector4CF0 m_kColumn2;
 };
-
-// Reads 10 floats from the view's stream into pkDest's columns: x,y,z for columns 0 and 2 (w set to 0) and x,y,z,w for column 1.
-// @fnv 0x00cf0b00
-void __cdecl FUN_00cf0b00(StreamViewCF0* pkView, hkMatrixCF0* pkDest)
-{
-    int n = 4;
-    unsigned int sz;
-    float x, y, z, w;
-    BinaryStreamCF0* bs;
-    pkView->stream()->Load(&x, n);
-    pkView->stream()->Load(&y, n);
-    pkView->stream()->Load(&z, n);
-    pkDest->m_kColumn0.set(x, y, z, 0.0f);
-    pkView->stream()->Load(&x, n);
-    pkView->stream()->Load(&y, n);
-    pkView->stream()->Load(&z, n);
-    pkView->stream()->Load(&w, n);
-    pkDest->m_kColumn1.set(x, y, z, w);
-    pkView->stream()->Load(&x, n);
-    pkView->stream()->Load(&y, n);
-    pkView->stream()->Load(&z, n);
-    pkDest->m_kColumn2.set(x, y, z, 0.0f);
-}
 
 struct S00cf0cf0_Stream
 {
@@ -3131,32 +2523,6 @@ struct S00cf0cf0_Obj
     S00cf0cf0_Stream* m_pBinaryStream;
 };
 
-static unsigned int S00cf0cf0_SaveRaw(S00cf0cf0_Stream* s, const void* p, unsigned int n, unsigned int elemSize)
-{
-    unsigned int uiSize = elemSize;
-    return s->m_pfnWrite(s, p, n * elemSize, &uiSize, 1);
-}
-
-// Writes arr's count and then each 16-byte element to the binary stream, and returns count * 16.
-// @fnv 0x00cf0cf0
-int __cdecl FUN_00cf0cf0(S00cf0cf0_Obj* self, S00cf0cf0_Arr* arr)
-{
-    S00cf0cf0_Arr* a = arr;
-    int count = a->count;
-    {
-        S00cf0cf0_Stream* s = self->m_pBinaryStream;
-        s->m_uiStreamFlags += S00cf0cf0_SaveRaw(s, &count, 1, 4);
-    }
-    int total = count << 4;
-    for (int i = 0; i < count; i++)
-    {
-        __m128 tmp = a->data[i];
-        S00cf0cf0_Stream* s = self->m_pBinaryStream;
-        s->m_uiStreamFlags += S00cf0cf0_SaveRaw(s, &tmp, 1, 16);
-    }
-    return total;
-}
-
 struct TargetType
 {
     int unk00;
@@ -3193,43 +2559,6 @@ unsigned int FUN_00cf0dc0(CF4BC0Stream& stream, TargetType* obj)
     return size;
 }
 
-
-// Returns the Havok constraint class name string for the given eType, or "Unknown" if the type is not recognized.
-// @fnv 0x00cf4790
-const char* __cdecl GetConstraintTypeName(int eType)
-{
-    switch (eType)
-    {
-    case 0:
-        return "hkBallAndSocketConstraint";
-    case 1:
-        return "hkHingeConstraint";
-    case 2:
-        return "hkLimitedHingeConstraint";
-    case 3:
-        return "hkPointToPathConstraint";
-    case 6:
-        return "hkPrismaticConstraint";
-    case 7:
-        return "hkRagdollConstraint";
-    case 8:
-        return "hkStiffSpringConstraintC";
-    case 9:
-        return "hkWheelConstraint";
-    case 10:
-        return "hkGenericConstraint";
-    case 12:
-        return "hkBreakableConstraint";
-    case 13:
-        return "hkMalleableConstraint";
-    }
-    return "Unknown";
-}
-
-// @fnv 0x00cf6d00
-void __stdcall FUN_00cf6d00(int)
-
-{}
 
 extern void* DAT_010c63bc;
 extern void* DAT_010cc4e0;
@@ -3279,10 +2608,6 @@ FUN_00cf6f90::FUN_00cf6f90()
         for (int j = 0; j < 8; j++)
             m_apSlots[i][j] = &m_kDefault;
 }
-
-// @fnv 0x00cf8810
-void __stdcall FUN_00cf8810(int a)
-{}
 
 extern char DAT_010cc688[];
 struct VecCFAD
@@ -3358,28 +2683,6 @@ struct SelfCFAD
     void* context;
     void FUN_00cfad60(TargetCFAD*, InputCFAD*, void*, ContextCFAD*, unsigned int, unsigned int);
 };
-// Stores input, output flags, extra and context, builds a DescCFAD from the input and flagsIn, then calls target->unk5C, timed by CE0020TimerMark.
-// @fnv 0x00cfad60
-void SelfCFAD::FUN_00cfad60(TargetCFAD* target, InputCFAD* apInput, void* data, ContextCFAD* apContext,
-                            unsigned int flagsIn, unsigned int flagsOut)
-{
-    CE0020TimerMark(DAT_010cc688);
-    input = apInput;
-    flags = flagsOut;
-    extra = apContext ? &apContext->unk14 : 0;
-    if (apInput->enabled)
-        context = apContext ? &apContext->unk10 : 0;
-    else
-        context = 0;
-    DescCFAD desc;
-    desc.vec.v = apInput->vec.v;
-    desc.extra = &apInput->unk10;
-    desc.flags = flagsIn;
-    desc.data = data;
-    desc.size = 0x30;
-    target->unk5C(&desc, this, 0);
-    CE0020TimerMark(DAT_010c41f8);
-}
 
 struct Cfd50Range
 {
@@ -3465,21 +2768,6 @@ struct Edge_cfdb70
     Node_cfdb70* m_kPointB;
 };
 
-// Stores the edge pointer in the slot arrays of both connected nodes at their respective indices.
-// @fnv 0x00cfdb70
-static __declspec(noinline) void LinkEdge(Edge_cfdb70* apEdge)
-{
-    unsigned short a = apEdge->m_idxA;
-    unsigned short b = apEdge->m_idxB;
-    apEdge->m_kPointA->m_slots[a].m_p = apEdge;
-    apEdge->m_kPointB->m_slots[b].m_p = apEdge;
-}
-
-void zz_probe_cfdb70(Edge_cfdb70* e)
-{
-    LinkEdge(e);
-}
-
 struct BlockArr_cfd
 {
     unsigned* m_data;
@@ -3502,20 +2790,6 @@ struct BlockList_cfd
     unsigned m_lastSize;
     BlockArr_cfd m_kBlocks;
 };
-
-// Checks whether addr falls within any block range in list->m_kBlocks, using m_lastSize for the final block and 0x200 for the others.
-// @fnv 0x00cfdb90
-bool __cdecl IsAddressInBlock(const BlockList_cfd* list, unsigned addr)
-{
-    for (int i = 0; i < list->m_kBlocks.GetLogicalSize(); i++)
-    {
-        unsigned base = list->m_kBlocks[i];
-        unsigned size = (i + 1 == list->m_kBlocks.GetLogicalSize()) ? list->m_lastSize : 0x200;
-        if (base <= addr && addr < base + size)
-            return true;
-    }
-    return false;
-}
 
 inline AudioAllocator& heap_cfde()
 {
@@ -3572,27 +2846,6 @@ struct BlockStack_cfde
     int m_uiBufferCapacity;
     BlockArr_cfde m_kBlocks;
 };
-
-// Subtracts 0x80 from m_uiBufferCapacity; at zero frees the last block, pops it and resets capacity to 0x200; then calls OptimizeCapacity(4).
-// @fnv 0x00cfdeb0
-static __declspec(noinline) void FUN_00cfdeb0(BlockStack_cfde* s)
-{
-    s->m_uiBufferCapacity -= 0x80;
-    if (s->m_uiBufferCapacity == 0)
-    {
-        char* block = s->m_kBlocks.back();
-        s->m_kBlocks.popBack();
-        AudioHolder* h = FUN_00c85750();
-        h->m_pAllocator->Free(block, 0x200);
-        s->m_uiBufferCapacity = 0x200;
-    }
-    s->m_kBlocks.OptimizeCapacity(4);
-}
-
-void zz_probe_cfdeb0(BlockStack_cfde* s)
-{
-    FUN_00cfdeb0(s);
-}
 
 // Havok: build index maps for a selection and propagate it through records and links (hkArray<hkInt16> maps).
 typedef short hkInt16;
@@ -3775,65 +3028,6 @@ struct SelectionMapper
                       hkArrayX<hkInt16>& output);
 };
 
-// Maps a Selection's source indices to target indices via records and links, filling sourceMap, targetMap, and output arrays.
-// @fnv 0x00ce35f0
-void SelectionMapper::MapSelection(const Selection& sel, hkArrayX<hkInt16>& sourceMap, hkArrayX<hkInt16>& targetMap,
-                                   hkArrayX<hkInt16>& output)
-{
-    hkInt16 i;
-    const hkArrayX<hkInt16>& selIdx = sel.m_ppIndices;
-    const IndexSource* src = m_pObservedSource;
-    const IndexSource* dst = m_target;
-
-    sourceMap.clear();
-    sourceMap.SetSizeAndGrow(src->m_iStridedVertexCount, -1);
-    for (i = 0; i < selIdx.GetLogicalSize(); i++)
-        sourceMap[selIdx[i]] = i;
-
-    output.clear();
-    targetMap.clear();
-    targetMap.SetSizeAndGrow(dst->m_iStridedVertexCount, -1);
-
-    for (hkInt16 recordI = 0; recordI < m_numRecords; ++recordI)
-    {
-        if (sourceMap[m_records[recordI].m_vFrom] >= 0)
-            output.AddBack(m_records[recordI].m_vTo);
-    }
-    for (i = 0; i < m_numLinks; i++)
-    {
-        {
-            hkInt16 linkIndex = i;
-            hkArrayX<hkInt16> a;
-            hkArrayX<hkInt16> b;
-            if (!WalkChainUntilLimit(src, m_ppLinks[linkIndex].m_kPointA, m_ppLinks[linkIndex].m_kPointB, a))
-                continue;
-            if (!WalkChainUntilLimit(dst, m_ppLinks[linkIndex].m_iThirdValue, m_ppLinks[linkIndex].m_iFourthElementInteger, b))
-                continue;
-            bool complete = true;
-            for (int j = 0; j < a.GetLogicalSize(); ++j)
-            {
-                if (sourceMap[a[j]] < 0)
-                {
-                    complete = false;
-                    break;
-                }
-            }
-            if (!complete)
-                continue;
-            for (int k = 0; k < b.GetLogicalSize(); ++k)
-            {
-                hkInt16 v = b[k];
-                output.AddBack(v);
-            }
-        }
-    nextLink:;
-    }
-
-    targetMap.SetSizeAndGrow(dst->m_iStridedVertexCount, -1);
-    for (i = 0; i < output.GetLogicalSize(); i++)
-        targetMap[output[i]] = i;
-}
-
 #include <xmmintrin.h>
 namespace fnv_00ce0ca0 {
 union __declspec(intrin_type) __declspec(align(16)) __m128
@@ -3858,49 +3052,6 @@ struct FUN_00ce0ca0_Quaternion
     void __thiscall FUN_00ce0ca0(const FUN_00ce0ca0_Quaternion& rhs);
 };
 
-// Computes the Hamilton product of two quaternions using SSE intrinsics and stores the result in value.
-// @fnv 0x00ce0ca0
-void FUN_00ce0ca0_Quaternion::FUN_00ce0ca0(const FUN_00ce0ca0_Quaternion& rhs)
-{
-    __m128 b = rhs.value;
-    __m128 a = value;
-
-    __m128 v = _mm_shuffle_ps(a, a, 0xc9);
-    __m128 t = _mm_shuffle_ps(b, b, 0xd2);
-    v = _mm_mul_ps(v, t);
-
-    __m128 u = _mm_shuffle_ps(b, b, 0xc9);
-    t = _mm_shuffle_ps(a, a, 0xd2);
-    t = _mm_mul_ps(t, u);
-    v = _mm_sub_ps(v, t);
-
-    t = _mm_shuffle_ps(a, a, 0xff);
-    t = _mm_shuffle_ps(t, t, 0);
-    t = _mm_mul_ps(t, b);
-    t = _mm_add_ps(t, v);
-
-    v = _mm_shuffle_ps(b, b, 0xff);
-    v = _mm_shuffle_ps(v, v, 0);
-    v = _mm_mul_ps(v, a);
-
-    v = _mm_add_ps(v, t);
-    a = _mm_mul_ps(a, b);
-
-    t = _mm_shuffle_ps(a, a, 0x55);
-    t = _mm_add_ss(t, a);
-
-    b = _mm_shuffle_ps(a, a, 0xaa);
-    b = _mm_add_ss(b, t);
-
-    t = v;
-    b = _mm_shuffle_ps(b, b, 0);
-    a = _mm_sub_ps(a, b);
-
-    v = _mm_unpackhi_ps(v, a);
-    t = _mm_shuffle_ps(t, v, 0xc4);
-
-    value = t;
-}
 }  // namespace fnv_00ce0ca0
 
 #include <xmmintrin.h>
@@ -3958,28 +3109,6 @@ struct ShapeCollection
     void FUN_00cf4fb0(Bounds* bounds);
 };
 
-// Computes the combined bounding box of all shapes in the collection, then derives center and halfExtent from the min/max bounds.
-// @fnv 0x00cf4fb0
-void ShapeCollection::FUN_00cf4fb0(Bounds* bounds)
-{
-    entries[0].shape->getBounds(&DAT_01268370, 0.0f, bounds);
-    for (int i = 1; i < count; ++i)
-    {
-        Bounds local;
-        BoundShape* shape = entries[i].shape;
-        shape->getBounds(&DAT_01268370, 0.0f, &local);
-        bounds->minimum.quad = _mm_min_ps(bounds->minimum.quad, local.minimum.quad);
-        __m128 localMaximum = local.maximum.quad;
-        __m128 maximum = bounds->maximum.quad;
-        bounds->maximum.quad = _mm_max_ps(maximum, localMaximum);
-    }
-    __m128 minimum = bounds->minimum.quad;
-    __m128 maximum = bounds->maximum.quad;
-    center.quad = _mm_mul_ps(_mm_add_ps(maximum, minimum), DAT_010c71d0);
-    minimum = bounds->minimum.quad;
-    maximum = bounds->maximum.quad;
-    halfExtent.quad = _mm_mul_ps(_mm_sub_ps(maximum, minimum), DAT_010c71d0);
-}
 }  // namespace fnv_00cf4fb0
 
 namespace fnv_00cf6d60 {
@@ -4004,19 +3133,6 @@ struct AudioHolder
 AudioHolder* __cdecl FUN_00c85750() throw();
 
 extern CRITICAL_SECTION* DAT_01268794;
-// Deletes the global critical section and frees its memory through the audio holder's allocator.
-// @fnv 0x00cf6d60
-void FUN_00cf6d60()
-{
-    if (DAT_01268794 != 0)
-    {
-        CRITICAL_SECTION* p = DAT_01268794;
-        DeleteCriticalSection(DAT_01268794);
-        AudioHolder* pHolder = FUN_00c85750();
-        pHolder->m_pAllocator->Free(p, 0x18);
-        DAT_01268794 = 0;
-    }
-}
 }  // namespace fnv_00cf6d60
 
 extern "C" bool __cdecl FUN_00ce2a00(int mappingType, const FnvSpawnedObject* transform);
@@ -4100,137 +3216,6 @@ struct CECountArray
     int* m_pStackAllocation;
 };
 
-// Validates a CEMap by checking single and range bone mappings, counting target bone usage, and reporting errors via CEError.
-// @fnv 0x00ce43e0
-void __cdecl FUN_00ce43e0(CEMap* map)
-{
-    int count = map->b->count;
-    AudioHolder* scratch = FUN_00c85750();
-    CECountArray counts;
-    counts.m_data = reinterpret_cast<int*>(scratch->unk00);
-    scratch->unk00 += (count * 4 + 127) & -128;
-    counts.m_iElementCount = count;
-    counts.m_iCapacityState = count | 0x80000000;
-    counts.m_pStackAllocation = counts.m_data;
-    int* data = counts.m_data;
-    for (int z = 0; z < count; ++z)
-        data[z] = 0;
-    int buffer[128];
-    for (int i = 0; i < map->singleCount; ++i)
-    {
-        CESingle* single = &map->singles[i];
-        int checkerS = map->checker;
-        if (!FUN_00ce2a00(checkerS, static_cast<const FnvSpawnedObject*>(&single->transform)))
-        {
-            char* bufPtr = (char*)buffer;
-            FUN_00cb1600 s1(bufPtr, 512);
-            s1.FUN_00cc01c0(&DAT_010cba14);
-            reinterpret_cast<CEError*>(DAT_01268360)->report(1, 0xabbabac1, (char*)buffer, &DAT_010cb8d0, 0x227);
-            s1.FUN_00cc00e0();
-        }
-        if (single->source < 0 || single->source >= map->a->count)
-        {
-            FUN_00cb1600 s2((char*)buffer, 512);
-            s2.FUN_00cc01c0(&DAT_010cb9f8);
-            reinterpret_cast<CEError*>(DAT_01268360)->report(1, 0xabba3f01, (char*)buffer, &DAT_010cb8d0, 0x22c);
-            s2.FUN_00cc00e0();
-        }
-        if (single->target < 0 || single->target >= map->b->count)
-        {
-            FUN_00cb1600 s3((char*)buffer, 512);
-            s3.FUN_00cc01c0(&DAT_010cb9f8);
-            reinterpret_cast<CEError*>(DAT_01268360)->report(1, 0xabbaeab2, (char*)buffer, &DAT_010cb8d0, 0x231);
-            s3.FUN_00cc00e0();
-        }
-        ++data[single->target];
-        if (data[single->target] > 1)
-        {
-            FUN_00cb1600 s4((char*)buffer, 512);
-            s4.FUN_00cc01c0(&DAT_010cb9d8);
-            reinterpret_cast<CEError*>(DAT_01268360)->report(1, 0xabba819f, (char*)buffer, &DAT_010cb8d0, 0x239);
-            s4.FUN_00cc00e0();
-        }
-    }
-    for (int j = 0; j < map->rangeCount; ++j)
-    {
-        CERange* range = &map->ranges[j];
-        int checkerA = map->checker;
-        if (!FUN_00ce2a00(checkerA, static_cast<const FnvSpawnedObject*>(&range->transformA)))
-        {
-            FUN_00cb1600 s5((char*)buffer, 512);
-            s5.FUN_00cc01c0(&DAT_010cba14);
-            reinterpret_cast<CEError*>(DAT_01268360)->report(1, 0xabbabac1, (char*)buffer, &DAT_010cb8d0, 0x246);
-            s5.FUN_00cc00e0();
-        }
-        int checkerB = map->checker;
-        if (!FUN_00ce2a00(checkerB, static_cast<const FnvSpawnedObject*>(&range->transformB)))
-        {
-            FUN_00cb1600 s6((char*)buffer, 512);
-            s6.FUN_00cc01c0(&DAT_010cba14);
-            reinterpret_cast<CEError*>(DAT_01268360)->report(1, 0xabbabac1, (char*)buffer, &DAT_010cb8d0, 0x24b);
-            s6.FUN_00cc00e0();
-        }
-        if (range->endA <= range->startA)
-        {
-            FUN_00cb1600 s7((char*)buffer, 512);
-            s7.FUN_00cc01c0(&DAT_010cb9c4);
-            reinterpret_cast<CEError*>(DAT_01268360)->report(1, 0xabba819f, (char*)buffer, &DAT_010cb8d0, 0x250);
-            s7.FUN_00cc00e0();
-        }
-        if (range->endB <= range->startB)
-        {
-            FUN_00cb1600 s8((char*)buffer, 512);
-            s8.FUN_00cc01c0(&DAT_010cb9c4);
-            reinterpret_cast<CEError*>(DAT_01268360)->report(1, 0xabba819f, (char*)buffer, &DAT_010cb8d0, 0x255);
-            s8.FUN_00cc00e0();
-        }
-        if (range->endA < 0 || range->endA >= map->a->count)
-        {
-            FUN_00cb1600 s9((char*)buffer, 512);
-            s9.FUN_00cc01c0(&DAT_010cb9b0);
-            reinterpret_cast<CEError*>(DAT_01268360)->report(1, 0x17626ee1, (char*)buffer, &DAT_010cb8d0, 0x25a);
-            s9.FUN_00cc00e0();
-        }
-        if (range->startA < 0 || range->startA >= map->a->count)
-        {
-            FUN_00cb1600 s10((char*)buffer, 512);
-            s10.FUN_00cc01c0(&DAT_010cb9b0);
-            reinterpret_cast<CEError*>(DAT_01268360)->report(1, 0x06073fdc, (char*)buffer, &DAT_010cb8d0, 0x25f);
-            s10.FUN_00cc00e0();
-        }
-        if (range->endB < 0 || range->endB >= map->b->count)
-        {
-            FUN_00cb1600 s11((char*)buffer, 512);
-            s11.FUN_00cc01c0(&DAT_010cb9b0);
-            reinterpret_cast<CEError*>(DAT_01268360)->report(1, 0x19a18bfd, (char*)buffer, &DAT_010cb8d0, 0x264);
-            s11.FUN_00cc00e0();
-        }
-        if (range->startB < 0 || range->startB >= map->b->count)
-        {
-            FUN_00cb1600 s12((char*)buffer, 512);
-            s12.FUN_00cc01c0(&DAT_010cb9b0);
-            reinterpret_cast<CEError*>(DAT_01268360)->report(1, 0x0fb695b1, (char*)buffer, &DAT_010cb8d0, 0x269);
-            s12.FUN_00cc00e0();
-        }
-        for (int bone = range->endB; bone >= range->startB; bone = map->b->parents[bone])
-        {
-            ++data[bone];
-            if (data[bone] > 1)
-            {
-                FUN_00cb1600 s13((char*)buffer, 512);
-                CEBoneName* boneName = &map->b->names[bone];
-                s13.FUN_00cc01c0(&DAT_010cb964).WriteName(boneName).FUN_00cc01c0(&DAT_010cb98c);
-                reinterpret_cast<CEError*>(DAT_01268360)->report(1, 0xabba819f, (char*)buffer, &DAT_010cb8d0, 0x275);
-                s13.FUN_00cc00e0();
-            }
-        }
-    }
-    FUN_00c85750()->unk00 = reinterpret_cast<int>(data);
-    CEAllocator* allocator = reinterpret_cast<CEAllocator*>(FUN_00c85750()->m_pAllocator);
-    if ((counts.m_iCapacityState & (int)0x80000000) == 0)
-        allocator->free(data, (counts.m_iCapacityState & 0x3fffffff) * 4);
-}
-
 extern __m128 DAT_010c71b0;
 extern float DAT_01012068;
 
@@ -4263,29 +3248,6 @@ struct MapperInitialization
     unsigned char unk60;
     void __thiscall FUN_00ce5310();
 };
-
-// @fnv 0x00ce5310
-void MapperInitialization::FUN_00ce5310()
-{
-    MapperInitialization* data = reinterpret_cast<MapperInitialization*>(this);
-
-    data->unk00 = 0;
-    data->unk04 = 0;
-    data->unk08 = 0;
-    data->unk0C = 0;
-    data->unk10 = 0x80000000;
-    data->unk14 = 0;
-    data->unk18 = 0;
-    data->unk1C = 0x80000000;
-    data->unk20 = 0;
-    data->unk24 = 0;
-    data->unk28 = 0x80000000;
-    data->unk60 = 1;
-
-    _mm_store_ps(reinterpret_cast<float*>(&data->unk30), _mm_setzero_ps());
-    _mm_store_ps(reinterpret_cast<float*>(&data->unk40), DAT_010c71b0);
-    _mm_store_ps(reinterpret_cast<float*>(&data->unk50), _mm_set1_ps(DAT_01012068));
-}
 
 // @f3 0x00684240 (community match, verified in this file)
 namespace f3m_00684240 {

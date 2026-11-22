@@ -13048,18 +13048,6 @@ struct Block
     unsigned long m_iFourthElementInteger;
 };
 void __cdecl FUN_00c8c020(Block* b);
-inline void Swap32(unsigned long& v)
-{
-    v = _byteswap_ulong(v);
-}
-inline void SwapBlock(Block* b)
-{
-    Swap32(b->m_kPointA);
-    Swap32(b->m_kPointB);
-    Swap32(b->m_iThirdValue);
-    Swap32(b->m_iFourthElementInteger);
-    FUN_00c8c020(b);
-}
 struct Hdr
 {
     char pad[0x10];
@@ -13147,22 +13135,6 @@ struct Obj
     void FUN_00c9fc00(Writer* w);
     void FUN_00ccec00(Writer* w);
 };
-static inline void* GetName(Obj* o)
-{
-    return (o && o->m_pMeta && o->m_pMeta->m_pObjectInfo) ? o->m_pMeta->m_pObjectInfo->m_pName : 0;
-}
-// @fnv 0x00ccec00
-void Obj::FUN_00ccec00(Writer* w)
-{
-    w->SetName(GetName(this));
-    int iSize;
-    Hdr* h = GetHeader(&iSize);
-    if (w->m_ucMode != 1)
-        SwapBlock(&h->m_kBlock);
-    FUN_00c9fc00(w);
-    if (w->m_ucMode != 1)
-        SwapBlock(&h->m_kBlock);
-}
 }
 
 extern char g_vtblInst0104da28[];

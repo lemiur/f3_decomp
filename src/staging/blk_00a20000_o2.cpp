@@ -182,13 +182,6 @@ void StoreGlobalByte(int a, int b, int c, unsigned char* pDest)
 }
 
 struct Inner_00a6db50 { void Set(float, float, float, float); };
-// Calls Set on the object with each element of c multiplied by b, then returns the object.
-// @fnv 0x00a2bc90
-Inner_00a6db50* ScaleAndApply(Inner_00a6db50* apObject, float afScale, const float* afValues)
-{
-    apObject->Set(afScale * afValues[0], afScale * afValues[1], afScale * afValues[2], afScale * afValues[3]);
-    return apObject;
-}
 
 // Copies seven consecutive floats from src to dst.
 // @fnv 0x00a2c5d0
@@ -298,20 +291,6 @@ void __cdecl FUN_00a2b130();
 void __cdecl FUN_00a2b410();
 void __cdecl FUN_00a2b6d0();
 void __cdecl InsertBezPosKey();
-
-// Stores seven function pointers into seven global tables at the slot computed from a and b.
-// @fnv 0x00a2baa0
-void __cdecl FUN_00a2baa0(int a, int b)
-{
-    unsigned int idx = (b + a * 6) * 4;
-    *(void**)(0x011f3d20 + idx) = (void*)FUN_00a2b6d0;
-    *(void**)(0x011f3c90 + idx) = (void*)FUN_00a2af70;
-    *(void**)(0x011f3c00 + idx) = (void*)ComputeInterpolatedPosition;
-    *(void**)(0x011f3b70 + idx) = (void*)FUN_00a2b130;
-    *(void**)(0x011f3ae0 + idx) = (void*)IsLightEqual;
-    *(void**)(0x011f3780 + idx) = (void*)FUN_00a2b410;
-    *(void**)(0x011f3810 + idx) = (void*)InsertBezPosKey;
-}
 
 struct FUN_00a2ceb0_cls {
     float pad;
@@ -475,20 +454,6 @@ struct SStream;
 struct SObj;
 void __cdecl WriteFloatToStream(SStream*, SObj*);
 
-// Calls WriteFloatToStream for each of c SObj entries starting at b, advancing 8 bytes per entry.
-// @fnv 0x00a2d230
-void __cdecl FUN_00a2d230(SStream* pStream, SObj* b, unsigned int c)
-{
-    if (c > 0) {
-        SObj* d = b;
-        unsigned int n = c;
-        do {
-            WriteFloatToStream(pStream, d);
-            d = (SObj*)((char*)d + 8);
-        } while (--n);
-    }
-}
-
 namespace fnv_00a2d5b0 {
 void __cdecl FUN_00a291e0();
 void __cdecl SelectKeyVec();
@@ -504,19 +469,6 @@ extern unsigned int DAT_011f3ae0;
 extern unsigned int DAT_011f3780;
 extern unsigned int DAT_011f3810;
 
-// Fills the seven function-pointer tables at index (param_2 + param_1 * 6) * 4 with the given handler addresses.
-// @fnv 0x00a2d5b0
-void FUN_00a2d5b0(int param_1, int param_2)
-{
-    int iVar1 = (param_2 + param_1 * 6) * 4;
-    *(void**)((char*)&DAT_011f3d20 + iVar1) = (void*)&FUN_00a291e0;
-    *(void**)((char*)&DAT_011f3c90 + iVar1) = (void*)&SelectKeyVec;
-    *(void**)((char*)&DAT_011f3c00 + iVar1) = (void*)&FUN_00a2d420;
-    *(void**)((char*)&DAT_011f3b70 + iVar1) = (void*)&FUN_00a27470;
-    *(void**)((char*)&DAT_011f3ae0 + iVar1) = (void*)&FUN_00a2a7e0;
-    *(void**)((char*)&DAT_011f3780 + iVar1) = (void*)&FUN_00a29680;
-    *(void**)((char*)&DAT_011f3810 + iVar1) = (void*)&FUN_00a2d4a0;
-}
 }  // namespace fnv_00a2d5b0
 
 struct NiTFixedStringMap_NiAVObject___ {
@@ -577,18 +529,6 @@ bool AreRecordsEqual(FloatRecord_b5532* apRecordA, FloatRecord_b5532* apRecordB)
 }
 
 typedef void (__thiscall *Fn_00a26fa0_cb)(void *);
-
-// Walks a strided array backwards: the callback is invoked with
-// pBase + step*(count-1) down to pBase, one element per step.
-// @fnv 0x00a26fa0
-void __stdcall ApplyCallbackBackwards(char *pBase, int iStride, int nCount, Fn_00a26fa0_cb pFn)
-{
-    pBase += iStride * nCount;
-    while (--nCount >= 0) {
-        pBase -= iStride;
-        pFn(pBase);
-    }
-}
 
 struct TempArrayElement
 {
@@ -1142,15 +1082,6 @@ struct Obj_a28 {
 
 bool __cdecl AreFloatsEqual(Obj_a28* a, Obj_a28* b);
 
-// Returns false if AreFloatsEqual(a, b) fails, otherwise returns the result of comparing a->m_kSub with b->m_kSub via FUN_00a92660.
-// @fnv 0x00a28a80
-bool __cdecl FUN_00a28a80(Obj_a28* apObjA, Obj_a28* apObjB)
-{
-    if (!AreFloatsEqual(apObjA, apObjB))
-        return false;
-    return apObjA->m_kSub.FUN_00a92660(&apObjB->m_kSub);
-}
-
 struct Blk16 {
     unsigned int m_00;
     unsigned int m_04;
@@ -1262,16 +1193,6 @@ struct UHelper {
 
 // The primary comparison: the float at +0 and the NiBound sub-object at +4.
 bool FUN_00a28a80(UHelper* a, UHelper* b);
-
-// Adds the comparison of the NiBound sub-object at +0x14.
-// Returns false if FUN_00a28a80 fails; otherwise compares the unk14 NiBound of both UHelper objects via FUN_00a92660.
-// @fnv 0x00a28ea0
-bool CompareBounds(UHelper* pFirst, UHelper* pSecond) {
-    if (!FUN_00a28a80(pFirst, pSecond)) {
-        return false;
-    }
-    return pFirst->unk14.FUN_00a92660(pSecond->unk14);
-}
 
 namespace fnv_00a28ed0 {
 // FUN_00a28ed0: cdecl loop calling FUN_00a28720(base, elem) over count elements of stride 0x24.
@@ -1485,16 +1406,6 @@ struct FUN_00a29550_owner {
     unsigned int unk24C;
     FUN_00a29550_stream* m_250;
 };
-
-// @fnv 0x00a29550
-int __cdecl FUN_00a29550(int apOwner, int a2) {
-    FUN_00a29550_stream* s = reinterpret_cast<FUN_00a29550_owner*>(apOwner)->m_250;
-    FUN_00a29550_fn fn = s->m_0c;
-    apOwner = 1;
-    int r = fn(s, a2, 1, &apOwner, 1);
-    s->m_04 += r;
-    return r;
-}
 
 struct Inner {
     void FUN_00a698a0(void* target);
@@ -4877,19 +4788,8 @@ void FUN_00a2d420(float unused,const Key415& a,const Key415& b,Point415& result)
 
 struct FNVAnim;
 void __cdecl FUN_00a28ab0(FNVAnim* object, unsigned int count, unsigned int flags);
-// @fnv 0x00a2d670
-void __cdecl FUN_00a2d670(FNVAnim* object, unsigned int count, unsigned int flags)
-{
-    FUN_00a28ab0(object, count, flags);
-}
 
 bool FUN_00a28a80(UHelper* a, UHelper* b);
-
-// @fnv 0x00a2d680
-bool FUN_00a2d680(UHelper* a, UHelper* b)
-{
-    return FUN_00a28a80(a, b);
-}
 
 #include "fnv_asm_helpers.h"   // project x87 helpers (fnv_SinCos, fnv_FloatToInt), kept last so earlier code is unchanged
 
@@ -4910,16 +4810,6 @@ struct FUN_00a31240_T {
 };
 
 extern "C" unsigned char DAT_01096968;
-
-// @fnv 0x00a31240
-FUN_00a31240_T& FUN_00a31240_T::FUN_00a31240() {
-    this->unk00 = 0;
-    this->unk04 = 0;
-    this->unk08 = 0;
-    this->unk0C = DAT_01096968;
-    this->unk0D = 0xff;
-    return *this;
-}
 
 namespace KeyTables {
 typedef void* KeyFn;

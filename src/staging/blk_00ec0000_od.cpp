@@ -9,12 +9,6 @@ struct BGSMoviePlayer
     void __thiscall FUN_00ec2760(int a);
 };
 extern BGSMoviePlayer* DAT_0126fac4;
-// @fnv 0x00ec16b0
-int __stdcall FUN_00ec16b0(int a)
-{
-    DAT_0126fac4->FUN_00ec2760(a);
-    return 0;
-}
 
 struct P03MM
 {
@@ -25,12 +19,6 @@ struct FUN_00ec1a40_Class
 {
     void* FUN_00ec1a40();
 };
-// @fnv 0x00ec1a40
-void* FUN_00ec1a40_Class::FUN_00ec1a40()
-{
-    void* result = g_memoryManager.Allocate(0xc);
-    return result;
-}
 
 extern "C" int __cdecl _NiStricmp(const char*, const char*);
 
@@ -39,13 +27,6 @@ struct FUN_00ec1c90_class
     int __thiscall AreStringsEqualIgnoreCase(const char* a, const char* b);
 };
 
-// Returns nonzero when the two strings compare equal ignoring case, via _NiStricmp.
-// @fnv 0x00ec1c90
-int __thiscall FUN_00ec1c90_class::AreStringsEqualIgnoreCase(const char* pcStringA, const char* pcStringB)
-{
-    return !_NiStricmp(pcStringA, pcStringB);
-}
-
 extern int __cdecl __stricmp(const char*, const char*);
 
 struct FUN_00ec1dc0_Class
@@ -53,25 +34,11 @@ struct FUN_00ec1dc0_Class
     int __thiscall IsStringEqualIgnoreCase(const char* a, const char* b);
 };
 
-// Returns nonzero when the two strings are equal ignoring case, using __stricmp.
-// @fnv 0x00ec1dc0
-int __thiscall FUN_00ec1dc0_Class::IsStringEqualIgnoreCase(const char* pcStringA, const char* pcStringB)
-{
-    return !__stricmp(pcStringA, pcStringB);
-}
-
 struct FUN_00ec1f20Class
 {
     void FUN_00ec1570();
     void* FUN_00ec1f20();
 };
-
-// @fnv 0x00ec1f20
-void* FUN_00ec1f20Class::FUN_00ec1f20()
-{
-    FUN_00ec1570();
-    return this;
-}
 
 struct FUN_00ec1f40Class
 {
@@ -79,34 +46,18 @@ struct FUN_00ec1f40Class
     void __thiscall FUN_00ec1f40();
 };
 
-// @fnv 0x00ec1f40
-void __thiscall FUN_00ec1f40Class::FUN_00ec1f40()
-{
-    FUN_00ec1020();
-}
-
 namespace fnv_00ec20a0 {
 struct MemoryManager
 {
     void Deallocate(void*);
 };
 extern MemoryManager g_memoryManager;
-// @fnv 0x00ec20a0
-void __stdcall FUN_00ec20a0(void* apMemory)
-{
-    g_memoryManager.Deallocate(apMemory);
-}
 }  // namespace fnv_00ec20a0
 
 struct FUN_00ec29b0_class
 {
     void FUN_00ec29b0();
 };
-// @fnv 0x00ec29b0
-void FUN_00ec29b0_class::FUN_00ec29b0()
-{
-    ((char*)this)[0x21] = 1;
-}
 
 struct FUN_00ec2c10
 {
@@ -125,13 +76,6 @@ struct FUN_00ec2c10
     void __thiscall SetThreadPriorityLevel(int);
     void __thiscall FUN_00ec2c10_init();
 };
-// If m_002c is below 5, calls SetThreadPriorityLevel with m_002c + 1.
-// @fnv 0x00ec2c10
-void __thiscall FUN_00ec2c10::FUN_00ec2c10_init()
-{
-    if (m_002c < 5)
-        SetThreadPriorityLevel(m_002c + 1);
-}
 
 struct FUN_00ec1570_t
 {
@@ -146,21 +90,6 @@ struct FUN_00ec1570_t
     int i;
     bool j;
 };
-// Resets all fields of the structure: integer fields to 0, f to 1.0, g and h to 0.0, and j to false.
-// @fnv 0x00ec1570
-void __fastcall FUN_00ec1570(FUN_00ec1570_t* p)
-{
-    p->a = 0;
-    p->b = 0;
-    p->c = 0;
-    p->d = 0;
-    p->e = 0;
-    p->f = 1.0f;
-    p->g = 0.0f;
-    p->h = 0.0f;
-    p->i = 0;
-    p->j = false;
-}
 
 struct MemoryManager
 {
@@ -174,14 +103,6 @@ struct FUN_00ec19d0_class
 {
     void* __thiscall FUN_00ec19d0(unsigned int flags);
 };
-// @fnv 0x00ec19d0
-void* __thiscall FUN_00ec19d0_class::FUN_00ec19d0(unsigned int flags)
-{
-    ((FUN_00ec15e0_shell*)this)->FUN_00ec15e0();
-    if (flags & 1)
-        ((MemoryManager*)&g_memoryManager)->Deallocate(this);
-    return this;
-}
 
 struct FUN_00ec0cd0_Class
 {
@@ -193,19 +114,6 @@ struct FUN_00ec1f60_Class
     unsigned char m_0024;
     unsigned char InitAndCheck(int a, unsigned char b);
 };
-// @fnv 0x00ec1f60
-unsigned char FUN_00ec1f60_Class::InitAndCheck(int aiValue, unsigned char b)
-{
-    *(int*)((char*)this + 0x20) = 2;
-    *(unsigned char*)((char*)this + 0x24) = 1;
-    if (!((FUN_00ec0cd0_Class*)this)->InitPlayback(aiValue, 1, b, 0))
-    {
-        *(unsigned char*)((char*)this + 0x24) = 0;
-        return 0;
-    }
-    *(unsigned char*)((char*)this + 0x24) = 0;
-    return 1;
-}
 
 void __cdecl FNV_Warning(const char*);
 struct FUN_00ec1fb0_class
@@ -221,19 +129,6 @@ struct FUN_00ec2a10_class
     int m_0010;
     void __thiscall PauseMovie();
 };
-// If a movie is set, warns when another is already paused, calls DisableThreadPriorityBoost on it, stores it as the paused movie and clears the active movie pointer.
-// @fnv 0x00ec2a10
-void __thiscall FUN_00ec2a10_class::PauseMovie()
-{
-    if (!m_000c)
-        return;
-    if (m_0010)
-        FNV_Warning(
-            "DEFAULT: Trying to pause a movie while another movie is already paused.  This is not currently supported.");
-    ((FUN_00ec1fb0_class*)m_000c)->DisableThreadPriorityBoost();
-    m_0010 = m_000c;
-    m_000c = 0;
-}
 
 struct FUN_00ec2d40_class
 {
@@ -248,15 +143,6 @@ struct FUN_00ec2d40_class
     int m_0020;
     void __thiscall SetValueAndReset(int a);
 };
-// Stores a into m_0014, clears m_0004, calls the callback at m_001c, then clears m_001c.
-// @fnv 0x00ec2d40
-void __thiscall FUN_00ec2d40_class::SetValueAndReset(int aiValue)
-{
-    m_0014 = aiValue;
-    m_0004 = 0;
-    ((void(__thiscall*)(void))this->m_001c)();
-    m_001c = 0;
-}
 
 struct FUN_00ec2aa0_Class
 {
@@ -274,50 +160,8 @@ struct FUN_00ec2aa0_Class
     virtual unsigned int v11();
     float __thiscall ComputeRatio(unsigned int a, unsigned int b, bool c);
 };
-// Returns v10() divided by a when c is true, otherwise v11() divided by b, as a float.
-// @fnv 0x00ec2aa0
-float __thiscall FUN_00ec2aa0_Class::ComputeRatio(unsigned int auiDivisorA, unsigned int auiDivisorB, bool abUseFirst)
-{
-    if (abUseFirst)
-        return (float)v10() / auiDivisorA;
-    else
-        return (float)v11() / auiDivisorB;
-}
 
 extern "C" __declspec(dllimport) int __stdcall SetThreadPriority(void* hThread, int priority);
-
-// Maps a level 0-5 to a thread priority, stores the level in m_002c and applies the priority to the thread handle at offset 8.
-// @fnv 0x00ec18a0
-void __thiscall FUN_00ec2c10::SetThreadPriorityLevel(int aiLevel)
-{
-    int b;
-    switch (aiLevel)
-    {
-    case 0:
-        b = -2;
-        break;
-    case 1:
-        b = -1;
-        break;
-    case 2:
-        b = 0;
-        break;
-    case 3:
-        b = 1;
-        break;
-    case 4:
-        b = 2;
-        break;
-    case 5:
-        b = 15;
-        break;
-    default:
-        b = 0;
-        break;
-    }
-    m_002c = aiLevel;
-    SetThreadPriority(*(void**)((char*)this + 8), b);
-}
 
 struct FUN_00ec1fd0_shell
 {
@@ -332,19 +176,6 @@ struct FUN_00ec2a60_class
     int m_0010;
     void __thiscall FUN_00ec2a60();
 };
-// If m_000c is clear and m_0010 is set, moves m_0010 into m_000c, clears m_0010 and calls UnpauseBink on it.
-// @fnv 0x00ec2a60
-void __thiscall FUN_00ec2a60_class::FUN_00ec2a60()
-{
-    if (m_000c)
-        return;
-    if (m_0010)
-    {
-        m_000c = m_0010;
-        m_0010 = 0;
-        ((FUN_00ec1fd0_shell*)m_000c)->UnpauseBink();
-    }
-}
 
 struct FUN_00ec2bb0_Class
 {
@@ -363,15 +194,6 @@ struct FUN_00ec2bb0_Class
     float FUN_00ec2bb0(float, unsigned int, bool);
 };
 
-// If c is set, returns half of the difference between v11() and b times a; otherwise returns 0.0f.
-// @fnv 0x00ec2bb0
-float FUN_00ec2bb0_Class::FUN_00ec2bb0(float afValue, unsigned int b, bool abEnabled)
-{
-    if (!abEnabled)
-        return 0.0f;
-    return (v11() - b * afValue) / 2.0;
-}
-
 extern "C" __declspec(dllimport) int __stdcall GetExitCodeThread(void* hThread, unsigned long* pExitCode);
 
 struct FUN_00ec17c0_Class
@@ -381,17 +203,6 @@ struct FUN_00ec17c0_Class
     void* m_0008;
     bool FUN_00ec17c0();
 };
-
-// Returns true when m_0008 is set and GetExitCodeThread reports exit code 0x103 for it.
-// @fnv 0x00ec17c0
-bool FUN_00ec17c0_Class::FUN_00ec17c0()
-{
-    if (!m_0008)
-        return false;
-    unsigned long iexitCode;
-    GetExitCodeThread(m_0008, &iexitCode);
-    return iexitCode == 0x103;
-}
 
 struct FUN_00ec19a0_Class
 {
@@ -431,14 +242,6 @@ struct FUN_00ec1a60_class
 {
     void __thiscall FreeStruct(FUN_00ec1a60_t* p);
 };
-// Clears the third field of the struct, then deallocates it through g_memoryManager.
-// @fnv 0x00ec1a60
-void __thiscall FUN_00ec1a60_class::FreeStruct(FUN_00ec1a60_t* pStruct)
-{
-    pStruct->c = 0;
-    FUN_00ec1a60_t* q = pStruct;
-    ((MemoryManager*)&g_memoryManager)->Deallocate(q);
-}
 
 extern "C" void __cdecl _NiFree(void*);
 extern int DAT_010f1ca4;
@@ -453,15 +256,6 @@ struct FUN_00ec1b80_Class
     int m_0008;
     void __thiscall Initialize();
 };
-// @fnv 0x00ec1b80
-void __thiscall FUN_00ec1b80_Class::Initialize()
-{
-    int pad1;
-    int pad2;
-    m_0000 = (int)&DAT_010f1ca4;
-    ((FUN_00ec1b80_Map*)this)->RemoveAll();
-    _NiFree((void*)m_0008);
-}
 
 void* __cdecl _NiMalloc(unsigned int size);
 unsigned int __cdecl _strlen(const char* s);
@@ -471,24 +265,6 @@ struct FUN_00ec1cc0_Class
 {
     void __thiscall AssignString(void* a, const char* b, int c);
 };
-
-// Stores a string into a+4 (copying it when this+0x10 is set) and stores c into a+8.
-// @fnv 0x00ec1cc0
-void __thiscall FUN_00ec1cc0_Class::AssignString(void* apTarget, const char* apString, int aiValue)
-{
-    if (*(unsigned char*)((char*)this + 0x10))
-    {
-        unsigned int uiLen = _strlen(apString) + 1;
-        *(void**)((char*)apTarget + 4) = _NiMalloc(uiLen);
-        void* dest = *(void**)((char*)apTarget + 4);
-        _strcpy_s((char*)dest, uiLen, apString);
-    }
-    else
-    {
-        *(void**)((char*)apTarget + 4) = (void*)apString;
-    }
-    *(int*)((char*)apTarget + 8) = aiValue;
-}
 
 extern int DAT_010f1c20;
 struct FUN_00ec1a90_Class
@@ -500,19 +276,6 @@ struct FUN_00ec1d30_Class : FUN_00ec1a90_Class
 {
     void __thiscall FUN_00ec1d30();
 };
-// @fnv 0x00ec1d30
-void __thiscall FUN_00ec1d30_Class::FUN_00ec1d30()
-{
-    int a;
-    int b;
-    int c;
-    int d;
-    int e;
-    int f;
-    int g;
-    m_ppVirtualMethodTable = (int)&DAT_010f1c20;
-    FUN_00ec1a90();
-}
 
 struct FUN_00ec0460_cls
 {
@@ -588,21 +351,6 @@ struct FUN_00ec0460_cls
     virtual void __stdcall v69(int a, int b, int c);
 };
 
-// @fnv 0x00ec0460
-void __cdecl FUN_00ec0460(FUN_00ec0460_cls* p)
-{
-    p->v57(0x1b, 0);
-    p->v67(0, 4, 2);
-    p->v67(0, 2, 2);
-    p->v67(0, 5, 2);
-    p->v67(0, 1, 4);
-    p->v69(0, 6, 2);
-    p->v69(0, 5, 2);
-    p->v69(0, 7, 2);
-    p->v69(0, 1, 3);
-    p->v69(0, 2, 3);
-}
-
 struct GridDesc
 {
     int unk00;
@@ -624,48 +372,6 @@ struct GridDesc
 };
 
 void __cdecl FUN_00ec0720(int target, float x, float y, float sx, float sy, unsigned int w, unsigned int h);
-
-// @fnv 0x00ec0550
-void __cdecl FUN_00ec0550(GridDesc* grid, float startX, float startY, float scaleX, float scaleY)
-{
-    float x;
-    unsigned int row;
-    unsigned int col_2;
-    float stepY;
-    float y_;
-    float stepX4;
-
-    stepX4 = (float)grid->cellSize * scaleX;
-    stepY = (float)grid->cellSize * scaleY;
-    y_ = startY;
-    for (row = 0; row < grid->rows; row++)
-    {
-        x = startX;
-        for (col_2 = 0; col_2 < grid->cols; col_2++)
-        {
-            FUN_00ec0720(grid->unk00, x, y_, scaleX, scaleY, grid->cellSize, grid->cellSize);
-            x += stepX4;
-        }
-        if (grid->extraX)
-        {
-            FUN_00ec0720(grid->unk00, x, y_, scaleX, scaleY, grid->extraX, grid->cellSize);
-        }
-        y_ += stepY;
-    }
-    if (grid->extraY)
-    {
-        x = startX;
-        for (col_2 = 0; col_2 < grid->cols; col_2++)
-        {
-            FUN_00ec0720(grid->unk00, x, y_, scaleX, scaleY, grid->cellSize, grid->extraY);
-            x += stepX4;
-        }
-        if (grid->extraX)
-        {
-            FUN_00ec0720(grid->unk00, x, y_, scaleX, scaleY, grid->extraX, grid->extraY);
-        }
-    }
-}
 
 struct NiPlaybackFrameSize
 {
@@ -710,28 +416,6 @@ class NiPlaybackFile
     bool InitPlayback(const char* pcName, bool bQuiet, bool bLoop, bool bLooping);
 };
 
-// Loads the playback size if needed, queries the manager for renderer, frame rate and scales, allocates textures and warns on failure.
-// @fnv 0x00ec0cd0
-bool NiPlaybackFile::InitPlayback(const char* pcName, bool bQuiet, bool bLoop, bool bLooping)
-{
-    if (m_pkSize == 0 && !FindString(pcName, bQuiet, bLoop, false))
-        return false;
-
-    m_iRenderer = ((NiPlaybackManager*)DAT_0126fac4)->GetRenderer();
-    m_fTextureScale = ((NiPlaybackManager*)DAT_0126fac4)->GetFrameRate(m_pkSize->uiWidth, m_pkSize->uiHeight, bLooping);
-    m_fWidthScale = ((NiPlaybackManager*)DAT_0126fac4)->GetWidthScale(m_fTextureScale, m_pkSize->uiWidth, bLooping);
-    m_fHeightScale = ((NiPlaybackManager*)DAT_0126fac4)->GetHeightScale(m_fTextureScale, m_pkSize->uiHeight, bLooping);
-    m_pkTextures = CreatePlaybackTextures(m_iRenderer, m_pkSize->uiWidth, m_pkSize->uiHeight, 4, 0x100, 0x16);
-    if (m_pkTextures == 0)
-    {
-        if (!bQuiet)
-            FNV_Warning("Could not allocate textures for %s playback.", pcName);
-        m_iFadeIndex = 0;
-        return false;
-    }
-    return true;
-}
-
 extern "C" __declspec(dllimport) void __stdcall BinkClose(int handle);
 void __cdecl ReleaseInterfaceArray(int value);
 
@@ -742,20 +426,6 @@ struct FUN_00ec1020_cls
     int m_08;
     void FUN_00ec1020();
 };
-
-// @fnv 0x00ec1020
-void FUN_00ec1020_cls::FUN_00ec1020()
-{
-    if (m_00 != 0)
-    {
-        BinkClose(m_00);
-    }
-    if (m_08 != 0)
-    {
-        ReleaseInterfaceArray(m_08);
-    }
-    FUN_00ec1570((FUN_00ec1570_t*)this);
-}
 
 struct FUN_00ec14d0_bink
 {
@@ -773,27 +443,6 @@ extern "C" __declspec(dllimport) int __stdcall BinkCopyToBufferRect(void* hBink,
                                                                     unsigned int srcY, unsigned int srcWidth,
                                                                     unsigned int srcHeight, unsigned int flags);
 
-// @fnv 0x00ec14d0
-unsigned char __cdecl DecodeBinkFrame(FUN_00ec14d0_bink* a1, unsigned int a2, int a3)
-{
-    int result2 = 1;
-    int v1;
-    int v2;
-    int v3;
-    int v8;
-    int vB;
-    int v7;
-
-    BinkDoFrame(a1);
-    while (LockNextTile(a2, &v7, &vB, &v8, &v3, &v2, &v1) != 0)
-    {
-        result2 = BinkCopyToBufferRect(a1, (void*)v7, vB, a1->m_04, 0, 0, v8, v3, v2, v1,
-                                       ((a3 != 0 ? -1 : 0) & 0x80000000u) | 3u);
-        ApplyLastEffect(a2);
-    }
-    return result2 != 0;
-}
-
 // EnableSoundSystem: enables the Bink direct-sound output path.
 // The Bink library is reached through the executable's import table; the
 // address of the direct-sound entry point is passed to BinkSetSoundSystem.
@@ -806,16 +455,6 @@ class FUN_00ec1680_cls
   public:
     void EnableSoundSystem(bool bEnableSound);
 };
-
-// If bEnableSound is set, installs BinkOpenDirectSound as the Bink sound system with flags 0.
-// @fnv 0x00ec1680
-void FUN_00ec1680_cls::EnableSoundSystem(bool bEnableSound)
-{
-    if (bEnableSound)
-    {
-        BinkSetSoundSystem((void*)&BinkOpenDirectSound, 0);
-    }
-}
 
 extern "C" __declspec(dllimport) void* __stdcall CreateThread(void* pvSecurity, unsigned long ulStackSize,
                                                               unsigned long(__stdcall* pfnStart)(void*), void* pvParam,
@@ -864,37 +503,6 @@ class BEC16D0MoviePlayerThread
     void FUN_00ec16d0(void* pvParam, bool bFlag22, int iPriority, bool bFlag23, bool bFlag24, float fValue28);
 };
 
-// Creates the movie player thread, stores the flags and value, sets its priority, resumes it and waits on the start semaphore.
-// @fnv 0x00ec16d0
-void BEC16D0MoviePlayerThread::FUN_00ec16d0(void* pvParam, bool bFlag22, int iPriority, bool bFlag23, bool bFlag24,
-                                            float fValue28)
-{
-    unsigned long ulThreadId3;
-    m_hThread = CreateThread(0, 0, (unsigned long(__stdcall*)(void*))FUN_00ec16b0, pvParam, 4, &ulThreadId3);
-    FUN_00aa2740(ulThreadId3, "MoviePlayer");
-    m_bFlag22 = bFlag22;
-    m_bFlag23 = bFlag23;
-    m_bFlag24 = bFlag24;
-    m_fValue28 = fValue28;
-    if (iPriority == -1)
-    {
-        int* piPriority = &g_kEC16D0PrioritySetting ? &g_kEC16D0PrioritySetting.m_iValue
-                                                    : (g_iEC16D0DefaultSetting = 0, &g_iEC16D0DefaultSetting);
-        SetPriority(*piPriority);
-    }
-    else
-    {
-        SetPriority(iPriority);
-    }
-    ResumeThread(m_hThread);
-    ulThreadId3 = 0;
-    {
-        BEC16D0Semaphore* pkSemaphore = &m_kStartSemaphore;
-        WaitForSingleObject(pkSemaphore->m_pSemaphore, 0xffffffff);
-        InterlockedDecrement(&pkSemaphore->m_lCount);
-    }
-}
-
 extern int DAT_010f1ca4;
 void __cdecl FUN_00aa10f0(int aValue);
 
@@ -914,21 +522,6 @@ struct FUN_00ec1df0_cls
 
     FUN_00ec1df0_cls* FUN_00ec1df0(unsigned int acFlags);
 };
-
-// @fnv 0x00ec1df0
-FUN_00ec1df0_cls* FUN_00ec1df0_cls::FUN_00ec1df0(unsigned int acFlags)
-{
-    int unk00;
-    int unk04;
-    m_vptr = (int)&DAT_010f1ca4;
-    BaseCleanup();
-    FUN_00aa10f0(m_08);
-    if (acFlags & 1)
-    {
-        DAT_011f6238.FUN_00aa4060(this);
-    }
-    return this;
-}
 
 namespace fnv_00ec1ee0 {
 extern int DAT_010f1c20;
@@ -961,35 +554,11 @@ struct FUN_00ec1ee0_cls
     FUN_00ec1ee0_cls* FUN_00ec1ee0(unsigned int auiFlags);
 };
 
-// @fnv 0x00ec1ee0
-FUN_00ec1ee0_cls* FUN_00ec1ee0_cls::FUN_00ec1ee0(unsigned int auiFlags)
-{
-    FUN_00ec1ee0_frame frame;
-    m_vptr = (int)&DAT_010f1c20;
-    BaseCleanup();
-    if (auiFlags & 1)
-    {
-        DAT_011f6238.FUN_00aa4060(this);
-    }
-    return this;
-}
 }  // namespace fnv_00ec1ee0
 
 extern "C" __declspec(dllimport) int __stdcall SetThreadPriorityBoost(void* hThread, int fDisable);
 
-// @fnv 0x00ec1fb0
-void FUN_00ec1fb0_class::DisableThreadPriorityBoost()
-{
-    SetThreadPriorityBoost(reinterpret_cast<void*>(reinterpret_cast<int*>(this)[0]), 1);
-}
-
 extern "C" __declspec(dllimport) void __stdcall _BinkPause_8(void*, int);
-
-// @fnv 0x00ec1fd0
-void __thiscall FUN_00ec1fd0_shell::UnpauseBink()
-{
-    _BinkPause_8(*(void**)this, 0);
-}
 
 namespace fnv_00ec25e0 {
 struct FUN_00aa4060_Obj
@@ -1008,19 +577,6 @@ struct FUN_00ec25e0_cls
     void __thiscall FUN_00ec25e0();
 };
 
-// If m_000c is set, calls FUN_00ec1f40 and DAT_011f6238.FUN_00aa4060 on it, clears m_000c, then calls FUN_00ec2a60.
-// @fnv 0x00ec25e0
-void __thiscall FUN_00ec25e0_cls::FUN_00ec25e0()
-{
-    if (m_000c != 0)
-    {
-        FUN_00ec1f40Class* t2 = m_000c;
-        FUN_00ec1f40Class* p = t2;
-        p != 0 ? (p->FUN_00ec1f40(), (((0, 1) & 1) ? DAT_011f6238.FUN_00aa4060(p) : (void)0), p) : 0;
-        m_000c = 0;
-    }
-    FUN_00ec2a60();
-}
 }  // namespace fnv_00ec25e0
 
 struct S_00ec2b20
@@ -1041,14 +597,6 @@ struct S_00ec2b20
     virtual unsigned int v13();
     float __thiscall ComputeAdjustedValue(float a, unsigned int b, bool c);
 };
-// Returns v13() as a float when c is set, otherwise v13() plus half of (v10() minus b times a).
-// @fnv 0x00ec2b20
-float __thiscall S_00ec2b20::ComputeAdjustedValue(float afScale, unsigned int auiValue, bool abDirect)
-{
-    if (abDirect)
-        return (float)v13();
-    return (float)((double)v13() + ((double)v10() - (double)auiValue * afScale) / 2.0);
-}
 
 extern int DAT_0126fae0;
 extern int DAT_0126fae4;
@@ -1071,17 +619,6 @@ struct FUN_00ec2c40_cls
     void __thiscall SetThreadPriorityLevel(int);
     void FUN_00ec2c40();
 };
-
-// If m_002c exceeds the current limit (DAT_0126fae4 or DAT_01202800), calls SetThreadPriorityLevel with m_002c - 1.
-// @fnv 0x00ec2c40
-void FUN_00ec2c40_cls::FUN_00ec2c40()
-{
-    int* q = (&DAT_0126fae0 != 0) ? &DAT_0126fae4 : (DAT_01202800 = 0, &DAT_01202800);
-    if (m_002c > *q)
-    {
-        SetThreadPriorityLevel(m_002c - 1);
-    }
-}
 
 namespace fnv_00ec2d80 {
 struct S_00ec2f00_Class
@@ -1122,24 +659,6 @@ extern S_00aa3e40_Class DAT_011f6238;
 char* __cdecl FUN_00ec6130(int a);
 void __cdecl FUN_00ec65a6(char* a, char* b, int c);
 
-// @fnv 0x00ec2d80
-void __thiscall S_00ec2d80_Class::FUN_00ec2d80(int a, int b)
-{
-    char* p;
-    char* oB;
-    char* n;
-    char* m;
-    char* l;
-    char* k;
-    char* j;
-
-    oB = FUN_00ec6130(b);
-    n = DAT_011f6238.FUN_00aa3e40(oB + 1);
-    p = n;
-
-    FUN_00ec65a6(p, oB + 1, b);
-    this->m_0040.AddOrUpdate(a, p);
-}
 }  // namespace fnv_00ec2d80
 
 // Look up the file name registered under a key and copy it into a MAX_PATH buffer.
@@ -1175,22 +694,6 @@ class EC2DF0Registry
 
     bool GetNameByKey(unsigned int uiKey, char* pcPath);
 };
-
-// Looks up uiKey in m_kNames and, if found, copies the name into pcPath with strcpy_s and returns true; otherwise returns false.
-// @fnv 0x00ec2df0
-bool EC2DF0Registry::GetNameByKey(unsigned int uiKey, char* pcPath)
-{
-    const char* pcFile = 0;
-    char* pcDest;             // declared but never used in this build
-    unsigned int uiDestSize;  // declared but never used in this build
-    if (m_kNames.GetAt(uiKey, pcFile))
-    {
-        const char* pcSource = pcFile;
-        strcpy_s(pcPath, 260, pcSource);
-        return true;
-    }
-    return false;
-}
 
 struct EC0280Vertex
 {
@@ -1899,58 +1402,6 @@ struct EC0280Renderer
 };
 extern EC0280Renderer* g_pkEC0280Renderer;
 
-// @fnv 0x00ec0280
-void __cdecl DrawTexturedQuad(EC0280Device* pkDevice, float fX, float fY, float fScaleX, float fScaleY, int iWidth,
-                              int iHeight)
-{
-    EC0280Vertex akVertsVal[4];
-    {
-        void* pkDecl_2;
-        EC0280Renderer* pkRenderer5;
-        EC0280RenderState* _pkRet1;
-        EC0280Renderer* pkRendererTmp;
-        EC0280RenderState* pkRetVal;
-        EC0280Renderer* pkRenderer4;
-        EC0280RenderState* pkRet4;
-        akVertsVal[0].x = fX;
-        akVertsVal[0].y = fY;
-        akVertsVal[0].z = 0.0f;
-        akVertsVal[0].rhw = 1.0f;
-        akVertsVal[0].u = 0.0f;
-        akVertsVal[0].v = 0.0f;
-        akVertsVal[1] = akVertsVal[0];
-        akVertsVal[1].y = iHeight * fScaleY + fY;
-        akVertsVal[1].v = 1.0f;
-        akVertsVal[2] = akVertsVal[0];
-        akVertsVal[2].x = iWidth * fScaleX + fX;
-        akVertsVal[2].u = 1.0f;
-        akVertsVal[3] = akVertsVal[2];
-        akVertsVal[3].y = akVertsVal[1].y;
-        akVertsVal[3].v = 1.0f;
-
-        {
-            pkRenderer5 = g_pkEC0280Renderer;
-            EC0280RenderState* kPkState1 = _pkRet1;
-            kPkState1 = pkRenderer5->m_pCurrentRenderState;
-            kPkState1->SetStage(0, 1);
-            pkRendererTmp = g_pkEC0280Renderer;
-            EC0280RenderState* pkState2 = pkRetVal;
-            pkState2 = pkRendererTmp->m_pCurrentRenderState;
-            pkState2->SetTexture(0, 0);
-            pkDecl_2 = 0;
-            pkDevice->GetVertexDeclaration(&pkDecl_2);
-            pkDevice->SetFVF(0x104);
-            pkDevice->DrawPrimitiveUP(5, 2, akVertsVal, sizeof(EC0280Vertex));
-            pkDevice->SetFVF(0);
-            pkDevice->SetVertexDeclaration(pkDecl_2);
-            pkRenderer4 = g_pkEC0280Renderer;
-            EC0280RenderState* pkState5 = pkRet4;
-            pkState5 = pkRenderer4->m_pCurrentRenderState;
-            pkState5->Commit();
-        }
-    }
-}
-
 struct FUN_00ec0720_Vertex
 {
     float x;
@@ -1987,52 +1438,6 @@ struct FUN_00ec0720_Device : FUN_00ec0460_cls
     virtual void __stdcall v91();
     virtual void __stdcall v92(int a);
 };
-
-// @fnv 0x00ec0720
-void __cdecl FUN_00ec0720(FUN_00ec0720_Device* pDevice, float x, float y, float fScaleX, float fScaleY, int iWidth,
-                          int iHeight)
-{
-    FUN_00ec0720_Vertex vertices[12];
-
-    vertices[0].x = x;
-    vertices[0].y = y;
-    vertices[0].z = 0.0f;
-    vertices[0].rhw = 1.0f;
-    vertices[0].u = 0.0f;
-    vertices[0].v = 0.0f;
-
-    vertices[1] = vertices[0];
-    vertices[1].x = (float)iWidth * fScaleX + x;
-    vertices[1].y = y;
-
-    vertices[2] = vertices[1];
-
-    vertices[3] = vertices[1];
-    vertices[3].y = (float)iHeight * fScaleY + y;
-
-    vertices[4] = vertices[3];
-
-    vertices[5] = vertices[3];
-    vertices[5].x = x;
-
-    vertices[6] = vertices[5];
-
-    vertices[7] = vertices[0];
-
-    vertices[8] = vertices[0];
-
-    vertices[9] = vertices[3];
-
-    vertices[10] = vertices[2];
-
-    vertices[11] = vertices[6];
-
-    pDevice->v67(0, 2, 0);
-    pDevice->v67(0, 5, 0);
-    pDevice->v92(0);
-    pDevice->v89(0x104);
-    pDevice->v83(2, 6, vertices, 0x18);
-}
 
 struct EC1060Size
 {
@@ -2204,75 +1609,6 @@ struct EC1060File
     int state;
     bool Update(bool, bool, bool);
 };
-// @fnv 0x00ec1060
-bool EC1060File::Update(bool arg1, bool abLoop, bool abNoClip)
-{
-    EC1060Viewport h, i;
-    EC1060Rect a, s;
-    EC1060Size *eb, *cf, *q, *b;
-    unsigned char p = false;
-    if (!((EC1060Player*)DAT_0126fac4)->v16(arg1))
-        return false;
-    bool f = ((EC1060Player*)DAT_0126fac4)->paused;
-    if (!f)
-    {
-        if (!BinkWait(apDirectSound))
-        {
-            p = DecodeBinkFrame((FUN_00ec14d0_bink*)apDirectSound, texture, 0);
-            if (p)
-            {
-                decoded++;
-                FUN_0040fbe0(&DAT_010f1be4, frame, decoded);
-            }
-            BinkNextFrame(apDirectSound);
-            frame++;
-        }
-        else if (!(unsigned char)(state == 2))
-        {
-            Sleep(1);
-            return true;
-        }
-    }
-    device->v43(0, 0, 1, 0xff000000, 1.0f, 0);
-    if (!abNoClip && *(unsigned char*)&DAT_011f9426)
-    {
-        eb = &(*(EC1060Renderer* volatile*)&DAT_011f4748)->v53();
-        h.x = eb->width;
-        cf = &(*(EC1060Renderer* volatile*)&DAT_011f4748)->v53();
-        h.y = cf->height;
-        h.lo = 0.0f;
-        h.hi = 1.0f;
-        a.left = (unsigned int)(h.x * *(float*)&DAT_011ad840);
-        a.right = (unsigned int)((*(float*)&DAT_011ad844 - *(float*)&DAT_011ad840) * h.x);
-        a.top = (unsigned int)(h.y * *(float*)&DAT_011ad84c);
-        a.bottom = (unsigned int)((*(float*)&DAT_011ad848 - *(float*)&DAT_011ad84c) * h.y);
-        device->v47(&a);
-    }
-    if (!((EC1060Player*)DAT_0126fac4)->v12())
-        device->v41();
-    FUN_00ebff30(texture, x, y, scale, scale);
-    if (!((EC1060Player*)DAT_0126fac4)->v12())
-        device->v42();
-    if (!(unsigned char)(state == 2))
-        device->v17(0, 0, 0, 0);
-    if (!abNoClip && *(unsigned char*)&DAT_011f9426)
-    {
-        q = &(*(EC1060Renderer* volatile*)&DAT_011f4748)->v53();
-        i.x = q->width;
-        b = &(*(EC1060Renderer* volatile*)&DAT_011f4748)->v53();
-        i.y = b->height;
-        i.lo = 0.0f;
-        i.hi = 1.0f;
-        s.left = 0;
-        s.top = 0;
-        s.right = i.x;
-        s.bottom = i.y;
-        device->v47(&s);
-    }
-    if (frame >= apDirectSound->frames && !abLoop)
-        return false;
-    return true;
-}
 
 class StrMapW
 {
@@ -2281,19 +1617,6 @@ class StrMapW
     unsigned int m_uiHashSize;
     unsigned int HashKey(const char* pKey);
 };
-// Computes a rolling hash over the characters of pKey and returns it modulo m_uiHashSize.
-// @fnv 0x00ec1c30
-unsigned int StrMapW::HashKey(const char* pKey)
-{
-    unsigned int uiHash = 0;
-    while (*pKey)
-    {
-        char c = *pKey;
-        uiHash = uiHash + (c + (uiHash << 5));
-        pKey++;
-    }
-    return uiHash % m_uiHashSize;
-}
 
 extern "C" __declspec(dllimport) void __stdcall Sleep(unsigned long dwMilliseconds);
 
@@ -2320,15 +1643,6 @@ struct MoviePlayer
     void __thiscall WaitForJobCompletion();
 };
 
-// Sleeps 1 ms in a loop while m_0008 is set and the job is missing or its m_0024 flag is nonzero.
-// @fnv 0x00ec29d0
-void MoviePlayer::WaitForJobCompletion()
-{
-    unsigned char busy;
-    while (m_0008 != 0 && (m_000c == 0 || (busy = m_000c->m_0024) != 0))
-        Sleep(1);
-}
-
 struct FUN_00ec2f00_item
 {
     FUN_00ec2f00_item* next;
@@ -2350,37 +1664,6 @@ struct FUN_00ec2f00_cls
     void AddOrUpdate(void* arg8, unsigned int argc);
 };
 
-// Finds an item in the m08 bucket matching arg8 via v02, updates it, or allocates and inserts a new one via v03.
-// @fnv 0x00ec2f00
-void FUN_00ec2f00_cls::AddOrUpdate(void* apKey, unsigned int uiValue)
-{
-    void* mem;
-    FUN_00ec2f00_item* item;
-    int idx = v01(apKey);
-    item = m08[idx];
-    int count = 0;
-    while (item)
-    {
-        count++;
-        if (v02(apKey, item->m04))
-        {
-            if (!m10)
-            {
-                item->m04 = apKey;
-            }
-            item->m08 = uiValue;
-            return;
-        }
-        item = item->next;
-    }
-    mem = reinterpret_cast<P03MM*>(&DAT_011f6238)->Allocate(12);
-    item = (FUN_00ec2f00_item*)mem;
-    v03(item, apKey, (void*)uiValue);
-    item->next = m08[idx];
-    m08[idx] = item;
-    m0c++;
-}
-
 extern "C" int __cdecl _tolower(int c);
 
 struct FUN_00ec1d50_class
@@ -2390,23 +1673,6 @@ struct FUN_00ec1d50_class
 
     unsigned int __thiscall HashString(const char* a);
 };
-
-// Computes a case-insensitive string hash using a shift-and-add algorithm and returns the result modulo unk04.
-// @fnv 0x00ec1d50
-unsigned int FUN_00ec1d50_class::HashString(const char* apString)
-{
-    unsigned int h = 0;
-    char cLower;
-    if (1)
-    {
-    }
-    if (1)
-    {
-    }
-    while (*apString)
-        h = (h << 5) + h + (cLower = (char)_tolower(*apString++));
-    return h % unk04;
-}
 
 namespace fnv_00ec1940 {
 #include <windows.h>
@@ -2428,17 +1694,6 @@ class FUN_00ec1940_cls
     void FUN_00ec1940(void* param, int value);
 };
 
-// Stores value in m_1c, creates a suspended thread running FUN_00ec2ca0 with param, names it MovieLoader, then resumes it.
-// @fnv 0x00ec1940
-void FUN_00ec1940_cls::FUN_00ec1940(void* apThreadArg, int value)
-{
-    DWORD threadId;
-    m_1c = value;
-    m_04 = CreateThread(NULL, 0, FUN_00ec2ca0, apThreadArg, CREATE_SUSPENDED, &threadId);
-    FUN_00aa2740(threadId, "MovieLoader");
-    ResumeThread(m_04);
-    threadId = 0;
-}
 }  // namespace fnv_00ec1940
 
 extern "C" __declspec(dllimport) int __stdcall ReleaseSemaphore(void*, long, long*);
@@ -2450,16 +1705,6 @@ struct MovieSignalState : BEC16D0MoviePlayerThread
 
     void FUN_00ec1a00();
 };
-
-// Releases m_kStartSemaphore, increments its m_lCount, and sets the signaled flag to 1.
-// @fnv 0x00ec1a00
-void MovieSignalState::FUN_00ec1a00()
-{
-    BEC16D0Semaphore* semaphore = &m_kStartSemaphore;
-    ReleaseSemaphore(semaphore->m_pSemaphore, 1, 0);
-    InterlockedIncrement(&semaphore->m_lCount);
-    signaled = 1;
-}
 
 struct PlaybackMessage
 {
@@ -2488,19 +1733,3 @@ struct PlaybackContinueState : MoviePlayer
 
     bool __thiscall FUN_00ec1840(bool allowInterruption);
 };
-
-// Pumps pending Windows messages and returns false if the playback was interrupted, otherwise true.
-// @fnv 0x00ec1840
-bool __thiscall PlaybackContinueState::FUN_00ec1840(bool allowInterruption)
-{
-    PlaybackMessage msg;
-    while (PeekMessageA(&msg, 0, 0, 0, 1))
-    {
-        TranslateMessage(&msg);
-        DispatchMessageA(&msg);
-    }
-    unsigned char c = interrupted;
-    if (c)
-        return false;
-    return true;
-}

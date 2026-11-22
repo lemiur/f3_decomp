@@ -11,12 +11,6 @@ struct ImageSpaceManager
 
 extern ImageSpaceManager* DAT_011f91ac;
 
-// @fnv 0x00b4f430
-void __cdecl FUN_00b4f430(int arg)
-{
-    DAT_011f91ac->SetValue(arg);
-}
-
 struct BSRenderedTexture;
 struct BSTextureManager
 {
@@ -43,12 +37,6 @@ struct ImageSpaceTexture
 struct ImageSpaceManager;
 extern ImageSpaceManager* DAT_011f91ac;
 
-// @fnv 0x00b540b0
-void FUN_00b540b0()
-{
-    ((ImageSpaceTexture*)((char*)DAT_011f91ac + 0x204))->AddRenderedTexture();
-}
-
 extern int DAT_011ffa0c;
 extern int DAT_011ffa10;
 void __cdecl AddToCounterIfIdle(unsigned int, unsigned int);
@@ -63,15 +51,6 @@ void __cdecl FUN_00b540d0()
 
 extern int DAT_011f9168;
 extern int* DAT_011f9170;
-
-// @fnv 0x00b540f0
-int __cdecl PopNextInt()
-{
-    int index = DAT_011f9168;
-    int* p = DAT_011f9170 + index;
-    DAT_011f9168 = DAT_011f9168 + 1;
-    return *p;
-}
 
 struct FUN_00b58110_Class
 {
@@ -475,12 +454,6 @@ FUN_00b4e1e0::~FUN_00b4e1e0()
 }
 
 extern int DAT_011f9168;
-
-// @fnv 0x00b4f570
-void __cdecl FUN_00b4f570()
-{
-    DAT_011f9168 = 0;
-}
 
 extern int DAT_011f95ec;
 
@@ -3911,22 +3884,3 @@ unsigned short __cdecl GetOrCreateItem(RTKey* key, unsigned int pos, RTItem** pp
 
 // @f3twin 0x00bd1190 of 0x00ad3b80
 struct F3Twin_00bd1190 : public PointerMap { void F3_FUN_00bd1190(unsigned int key, NiPointer<MapRefObject> value) ; };
-void F3Twin_00bd1190::F3_FUN_00bd1190(unsigned int key, NiPointer<MapRefObject> value) 
-{
-    unsigned int hash = Hash(key);
-    PointerMapNode* node = buckets[hash];
-    while (node)
-    {
-        if (Equal(key, node->key))
-        {
-            node->value = value;
-            return;
-        }
-        node = node->next;
-    }
-    node = NewItem();
-    Assign(node, key, value);
-    node->next = buckets[hash];
-    buckets[hash] = node;
-    ++count;
-}

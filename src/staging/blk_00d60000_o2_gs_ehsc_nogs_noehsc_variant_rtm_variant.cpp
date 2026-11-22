@@ -1578,13 +1578,6 @@ struct Z0
     int m_iUnk0C;
     void FUN_00d73400();
 };
-__declspec(noinline) void Z0::FUN_00d73400()
-{
-    m_iUnk00 = 0;
-    m_iUnk04 = 0;
-    m_iUnk08 = 0;
-    m_iUnk0C = 0;
-}
 class FUN_00d73410
 {
   public:

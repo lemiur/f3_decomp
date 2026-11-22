@@ -1933,19 +1933,6 @@ struct Arr
     unsigned short m_usMaxSize, m_usSize, m_usESize, m_usGrowBy;
     Ptr FUN_00a47540(unsigned int i) throw();
 };
-// @fnv 0x00a47540
-Ptr Arr::FUN_00a47540(unsigned int i) throw()
-{
-    if (i >= m_usSize)
-        return Ptr(0);
-    Ptr sp = m_pBase[i];
-    m_pBase[i] = Ptr(0);
-    if (sp != Ptr(0))
-        m_usESize--;
-    if (i == (unsigned short)(m_usSize - 1))
-        m_usSize--;
-    return sp;
-}
 }
 
 extern "C" void __cdecl FUN_00a39010();

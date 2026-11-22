@@ -8783,10 +8783,6 @@ inline bool FUN_00e9e840_Class::m_virtual09(int value)
 {
     return value != 0;
 }
-bool FUN_00e9e840_Class::FUN_00e9e840(int value)
-{
-    return !m_virtual09(value);
-}
 struct ItemArrayOwner
 {
     unsigned int unk00;

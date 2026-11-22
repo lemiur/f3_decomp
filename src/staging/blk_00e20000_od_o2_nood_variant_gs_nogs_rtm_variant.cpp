@@ -48,23 +48,6 @@ static __forceinline __m128 dot3(__m128 a, __m128 b) {
     __m128 v = _mm_mul_ps(a,b);
     return _mm_add_ss(_mm_shuffle_ps(v,v,0xaa), _mm_add_ss(_mm_shuffle_ps(v,v,0x55),v));
 }
-Vertex* Face::ComputePlane() {
-    Vertex* first = edges[0].vertex;
-    __m128 a = _mm_sub_ps(first->position,edges[1].vertex->position);
-    __m128 b = _mm_sub_ps(edges[1].vertex->position,edges[2].vertex->position);
-    __m128 n = _mm_sub_ps(_mm_mul_ps(_mm_shuffle_ps(a,a,0xc9),_mm_shuffle_ps(b,b,0xd2)),_mm_mul_ps(_mm_shuffle_ps(a,a,0xd2),_mm_shuffle_ps(b,b,0xc9)));
-    __m128 len = dot3(n,n);
-    __m128 inv = _mm_rsqrt_ss(len);
-    __m128 scale = _mm_mul_ss(_mm_mul_ss(_mm_set_ss(DAT_01016248),inv), _mm_sub_ss(_mm_set_ss(DAT_01017718), _mm_mul_ss(_mm_mul_ss(len,inv),inv)));
-    scale = _mm_andnot_ps(_mm_cmpeq_ss(len,_mm_set_ss(DAT_01011d78)), scale);
-    normal = n;
-    _ReadWriteBarrier();
-    normal = _mm_mul_ps(n,_mm_shuffle_ps(scale,scale,0));
-    float d;
-    _mm_store_ss(&d,dot3(normal,first->position));
-    distance = d;
-    return first;
-}
 struct InitEntry { int vertexOffset; int faceOffset; int edgeOffset; };
 extern InitEntry DAT_010ed0f0[];
 struct Hull {

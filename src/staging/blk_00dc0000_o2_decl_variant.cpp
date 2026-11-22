@@ -801,17 +801,6 @@ static stub_cls* volatile g_stub_self;
 static int volatile g_stub_v;
 static int volatile g_stub_out;
 extern "C" int stub_val(void);
-static __declspec(noinline) float FUN_00dcc3b0(int arg)
-{
-    g_stub_out = arg;
-    stub_cls* s = g_stub_self;
-    s->unk00 = s->unk04 + g_stub_v;
-    return (float)s->unk00;
-}
-float stub_caller(void)
-{
-    return FUN_00dcc3b0(stub_val());
-}
 class FUN_00dcc5c0_cls
 {
   public:

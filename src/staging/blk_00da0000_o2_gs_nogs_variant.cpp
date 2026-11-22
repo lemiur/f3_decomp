@@ -857,34 +857,11 @@ struct Vec4
     __declspec(align(16)) float v[4];
 };
 
-// @fnv 0x00db0dc0
-static __declspec(noinline) void FUN_00db0dc0(float* pFirst, float* pSecond, int idxFirst, int idxSecond,
-                                              unsigned char* pOut)
-{
-    Vec4 first = *(Vec4*)pFirst;
-    Vec4 second = *(Vec4*)pSecond;
-
-    first.v[idxFirst] = 1.0f;
-    second.v[idxSecond] = 1.0f;
-
-    __m128 zero = _mm_setzero_ps();
-    unsigned int maskFirst = _mm_movemask_ps(_mm_cmplt_ps(*(const __m128*)&first, zero));
-    unsigned int maskSecond = _mm_movemask_ps(_mm_cmplt_ps(*(const __m128*)&second, zero));
-
-    pOut[0] = (unsigned char)(((maskFirst | 0xf8) << 4) | idxFirst);
-    pOut[1] = (unsigned char)((((~maskSecond) & 7) << 4) + idxSecond);
-}
-
 volatile int gA;
 volatile int gB;
 volatile int gI;
 volatile int gJ;
 volatile int gO;
-
-void drive_db0dc0(void)
-{
-    FUN_00db0dc0((float*)gA, (float*)gB, gI, gJ, (unsigned char*)gO);
-}
 
 #include <string.h>
 extern "C" __declspec(dllimport) void* __stdcall GetCurrentProcess();
@@ -1103,10 +1080,6 @@ extern "C" const RowTable* get_rows();
 extern "C" dad340_quad* get_quad();
 extern "C" __m128* get_output();
 volatile int dad340_result;
-void dad340_drive()
-{
-    dad340_result = FUN_00dad340(get_quad(), get_rows(), get_output());
-}
 
 union __declspec(intrin_type) __declspec(align(16)) __m128i
 {
@@ -1193,10 +1166,6 @@ class GridVector
     static __forceinline const GridVector& zero();
 };
 extern "C" GridVector DAT_01267e30;
-__forceinline const GridVector& GridVector::zero()
-{
-    return DAT_01267e30;
-}
 
 struct GridBounds
 {
@@ -1268,37 +1237,3 @@ struct GridMesh
 {
     GridArray vertices;
 };
-
-// @fnv 0x00da0d50
-void __cdecl FUN_00da0d50(GridMesh& mesh, int resolution)
-{
-    GridBounds bounds;
-    bounds.reset();
-    for (int i = 0; i < mesh.vertices.size(); ++i)
-        bounds.include(mesh.vertices[i]);
-    GridVector border;
-    border.fill(0.01f);
-    bounds.lower.subtract(border);
-    bounds.upper.add(border);
-    GridVector width;
-    width.difference(bounds.upper, bounds.lower);
-    GridVector domain;
-    domain.fill(float(resolution - 1.0));
-    GridVector step;
-    step.quotient(width, domain);
-    GridVector reciprocal;
-    reciprocal.quotient(domain, width);
-    for (int i = 0; i < mesh.vertices.size(); ++i)
-    {
-        GridVector value;
-        value.difference(mesh.vertices[i], bounds.lower);
-        value.multiply(reciprocal);
-        GridUInt packed;
-        packed.encode(value);
-        packed.decode(value);
-        value.maximum(GridVector::zero(), value);
-        value.minimum(domain, value);
-        value.multiply(step);
-        mesh.vertices[i].sum(value, bounds.lower);
-    }
-}

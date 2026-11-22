@@ -549,31 +549,6 @@ struct Vec3
 {
     float x, y, z;
 };
-static __forceinline Vec3 sumVec(const Vec3& a, const Vec3& b)
-{
-    Vec3 r;
-    r.x = a.x + b.x;
-    r.y = a.y + b.y;
-    r.z = a.z + b.z;
-    return r;
-}
-static __forceinline Vec3 diffVec(const Vec3& a, const Vec3& b)
-{
-    Vec3 r;
-    r.x = a.x - b.x;
-    r.y = a.y - b.y;
-    r.z = a.z - b.z;
-    return r;
-}
-static __forceinline Vec3 sumVecB(const Vec3& a, const Vec3& b)
-{
-    Vec3 r;
-    const volatile float& first = a.x;
-    r.x = first + b.x;
-    r.y = a.y + b.y;
-    r.z = a.z + b.z;
-    return r;
-}
 struct Triangle3
 {
     Vec3 origin, edge0, edge1;
@@ -584,93 +559,6 @@ struct Segment3
 };
 extern float __cdecl FUN_00eaff20(const Segment3*, const Triangle3*, float*, float*, float*);
 extern float __cdecl FUN_00eb1d20(const Segment3*, const Triangle3*, float*, float*, float*);
-// @fnv 0x00eb3230
-float __cdecl TriangleTriangleDistance(const Triangle3* aTriA, const Triangle3* aTriB, float* aU, float* aV, float* bU,
-                                       float* bV)
-{
-    Segment3 segEdge;
-    segEdge.origin = aTriA->origin;
-    segEdge.direction = aTriA->edge0;
-    float fBestDist = FUN_00eaff20(&segEdge, aTriB, aU, bU, bV);
-    *aV = 0.0f;
-
-    float av, au;
-    struct Pair
-    {
-        float bv, bu;
-    } baryB;
-    segEdge.direction = aTriA->edge1;
-    float candidate = FUN_00eaff20(&segEdge, aTriB, &av, &baryB.bu, &baryB.bv);
-    au = 0.0f;
-    if (candidate < fBestDist)
-    {
-        fBestDist = candidate;
-        *aU = au;
-        *aV = av;
-        *bU = baryB.bu;
-        *bV = baryB.bv;
-    }
-    segEdge.origin = sumVec(aTriA->edge0, segEdge.origin);
-    segEdge.direction = diffVec(segEdge.direction, aTriA->edge0);
-    candidate = FUN_00eaff20(&segEdge, aTriB, &av, &baryB.bu, &baryB.bv);
-    au = 1.0f - av;
-    if (candidate < fBestDist)
-    {
-        fBestDist = candidate;
-        *aU = au;
-        *aV = av;
-        *bU = baryB.bu;
-        *bV = baryB.bv;
-    }
-
-    segEdge.origin = aTriB->origin;
-    segEdge.direction = aTriB->edge0;
-    candidate = FUN_00eb1d20(&segEdge, aTriA, &baryB.bu, &au, &av);
-    baryB.bv = 0.0f;
-    if (candidate < fBestDist)
-    {
-        fBestDist = candidate;
-        *aU = au;
-        *aV = av;
-        *bU = baryB.bu;
-        *bV = baryB.bv;
-    }
-    segEdge.direction = aTriB->edge1;
-    candidate = FUN_00eb1d20(&segEdge, aTriA, &baryB.bv, &au, &av);
-    baryB.bu = 0.0f;
-    if (candidate < fBestDist)
-    {
-        fBestDist = candidate;
-        *aU = au;
-        *aV = av;
-        *bU = baryB.bu;
-        *bV = baryB.bv;
-    }
-    segEdge.origin = sumVecB(aTriB->edge1, aTriB->origin);
-    segEdge.direction = aTriB->edge0;
-    candidate = FUN_00eb1d20(&segEdge, aTriA, &baryB.bu, &au, &av);
-    baryB.bv = 1.0f;
-    if (candidate < fBestDist)
-    {
-        fBestDist = candidate;
-        *aU = au;
-        *aV = av;
-        *bU = baryB.bu;
-        *bV = baryB.bv;
-    }
-    segEdge.origin = sumVec(aTriB->origin, aTriB->edge0);
-    segEdge.direction = aTriB->edge1;
-    candidate = FUN_00eb1d20(&segEdge, aTriA, &baryB.bv, &au, &av);
-    if (candidate < fBestDist)
-    {
-        fBestDist = candidate;
-        *aU = au;
-        *aV = av;
-        *bU = 1.0f;
-        *bV = baryB.bv;
-    }
-    return fBestDist;
-}
 }  // namespace fnv_00eb3230
 
 struct FUN_00eb5f10_Tail
@@ -2397,12 +2285,6 @@ extern float* volatile probeSquared;
 extern float* volatile probeParameter;
 extern const ExtentBox* volatile probeBox;
 extern const AxisValues* volatile probeDirection;
-void probeCaller()
-{
-    BoxInput b = {probeBox};
-    AxisIndex a = {probeAxis0};
-    FUN_00eb5010(probePoint, probeAxis1, probeAxis2, probeSquared, b, a, probeDirection, probeParameter);
-}
 
 struct Alloc139
 {
@@ -2767,93 +2649,6 @@ void LBCase000(LBPoint3& rkPnt, const LBBox& rkBox, float& rfSqrDistance);
 static float Dot(const LBPoint3& a, const LBPoint3& b)
 {
     return a.x * b.x + a.y * b.y + a.z * b.z;
-}
-
-float LBSqrDistance(const LBLine3& rkLine, const LBBox& rkBox, float* pfLParam, float* pfBParam0, float* pfBParam1,
-                    float* pfBParam2)
-{
-    LBPoint3 kDiff;
-    kDiff.x = rkLine.m_kStartPoint.x - rkBox.m_kCenter.x;
-    kDiff.y = rkLine.m_kStartPoint.y - rkBox.m_kCenter.y;
-    kDiff.z = rkLine.m_kStartPoint.z - rkBox.m_kCenter.z;
-    LBPoint3 kPnt, kWorldPosition;
-    kPnt.x = Dot(kDiff, rkBox.m_akAxes[0]);
-    kPnt.y = Dot(kDiff, rkBox.m_akAxes[1]);
-    kPnt.z = Dot(kDiff, rkBox.m_akAxes[2]);
-    kWorldPosition.x = Dot(rkLine.m_kLightVector, rkBox.m_akAxes[0]);
-    kWorldPosition.y = Dot(rkLine.m_kLightVector, rkBox.m_akAxes[1]);
-    kWorldPosition.z = Dot(rkLine.m_kLightVector, rkBox.m_akAxes[2]);
-
-    bool bReflect[3];
-    int i;
-    for (i = 0; i < 3; i++)
-    {
-        if (kWorldPosition[i] < 0.0f)
-        {
-            kPnt[i] = -kPnt[i];
-            kWorldPosition[i] = -kWorldPosition[i];
-            bReflect[i] = true;
-        }
-        else
-        {
-            bReflect[i] = false;
-        }
-    }
-
-    float fSqrDistance = 0.0f;
-
-    if (kWorldPosition.x > 0.0f)
-    {
-        if (kWorldPosition.y > 0.0f)
-        {
-            if (kWorldPosition.z > 0.0f)
-                FUN_00eb4cd0(kPnt, kWorldPosition, rkBox, pfLParam, fSqrDistance);
-            else
-                LBCase0(0, 1, 2, kPnt, kWorldPosition, rkBox, pfLParam, fSqrDistance);
-        }
-        else
-        {
-            if (kWorldPosition.z > 0.0f)
-                LBCase0(0, 2, 1, kPnt, kWorldPosition, rkBox, pfLParam, fSqrDistance);
-            else
-                LBCase00(0, 1, 2, kPnt, kWorldPosition, rkBox, pfLParam, fSqrDistance);
-        }
-    }
-    else
-    {
-        if (kWorldPosition.y > 0.0f)
-        {
-            if (kWorldPosition.z > 0.0f)
-                LBCase0(1, 2, 0, kPnt, kWorldPosition, rkBox, pfLParam, fSqrDistance);
-            else
-                LBCase00(1, 0, 2, kPnt, kWorldPosition, rkBox, pfLParam, fSqrDistance);
-        }
-        else
-        {
-            if (kWorldPosition.z > 0.0f)
-                LBCase00(2, 0, 1, kPnt, kWorldPosition, rkBox, pfLParam, fSqrDistance);
-            else
-            {
-                LBCase000(kPnt, rkBox, fSqrDistance);
-                if (pfLParam)
-                    *pfLParam = 0.0f;
-            }
-        }
-    }
-
-    if (pfBParam0)
-    {
-        for (i = 0; i < 3; i++)
-        {
-            if (bReflect[i])
-                kPnt[i] = -kPnt[i];
-        }
-        *pfBParam0 = kPnt.x;
-        *pfBParam1 = kPnt.y;
-        *pfBParam2 = kPnt.z;
-    }
-
-    return fSqrDistance;
 }
 
 float __cdecl DistanceSquaredToSegment(const NiPoint3&, const OriginDirectionPair&, float&);
@@ -4035,14 +3830,3 @@ struct MemoryManagerAllocHelper
 {
     void* Allocate(unsigned int auiSize);
 };
-
-// Allocates 0x40 bytes, builds a NiBoundingVolume via FUN_00ea0820 from five global NiPoint3 values, calls LoadBinary(apStream) and returns it.
-// @fnv 0x00ea7490
-NiBoundingVolume* __cdecl FUN_00ea7490(void* apStream)
-{
-    Helper* pkHelper = (Helper*)((MemoryManagerAllocHelper*)&_g_memoryManager)->Allocate(0x40);
-    NiBoundingVolume* pkVolume =
-        pkHelper ? pkHelper->FUN_00ea0820(DAT_011a9490, DAT_011f426c, DAT_011a946c, DAT_011a9478, DAT_011a9484) : 0;
-    pkVolume->LoadBinary(apStream);
-    return pkVolume;
-}

@@ -20,12 +20,6 @@ void __cdecl InitArrayEntries(int** apEntries, int count)
     }
 }
 
-// @fnv 0x00d081f0
-int __cdecl CompareByNestedValue(int** ppLeft, int** ppRight)
-{
-    return *(int**)(*(ppLeft + 1) + 5) < *(int**)(*(ppRight + 1) + 5);
-}
-
 struct FUN_00d97710_class
 {
     void ClearEntryByKey(int);
@@ -39,11 +33,6 @@ struct FUN_00d0a270_class
     FUN_00d97710_class* pv;
     void FUN_00d0a270(int ai);
 };
-// @fnv 0x00d0a270
-void FUN_00d0a270_class::FUN_00d0a270(int ai)
-{
-    pv->ClearEntryByKey(ai + 0x10);
-}
 
 struct D107A0RTTI;
 extern D107A0RTTI g_D107A0RTTI;
@@ -77,13 +66,6 @@ struct FUN_00c9ce00_cls
 {
     void FUN_00c9ce00(int);
 };
-
-// @fnv 0x00d1f180
-void __cdecl FUN_00d1f180(FUN_00c9ce00_cls* obj, int v)
-{
-    if (obj)
-        obj->FUN_00c9ce00(v);
-}
 
 struct FUN_00d1fa20_t
 {
@@ -123,25 +105,6 @@ struct FUN_00d06c30_cls
     unsigned short m_usElementCount;
     unsigned short m_usCap;
 };
-
-// @fnv 0x00d06c30
-extern "C" void __cdecl FUN_00d06c30(FUN_00d06c30_cls* self, unsigned int newCap, unsigned int elemSize)
-{
-    AllocHolder* holder = FUN_00c85750();
-    SpawnedAllocator* alloc = holder->m_pAllocator;
-    char* newBuf = (char*)alloc->Alloc(newCap * elemSize);
-    FUN_00ec44d0(newBuf, self->m_pData, self->m_usElementCount * elemSize);
-    if ((self->m_usCap & 0x8000) == 0)
-    {
-        unsigned int size = (self->m_usCap & 0x3fff) * elemSize;
-        char* oldBuf = self->m_pData;
-        holder = FUN_00c85750();
-        alloc = holder->m_pAllocator;
-        alloc->Free(oldBuf, size);
-    }
-    self->m_pData = newBuf;
-    self->m_usCap = (unsigned short)((self->m_usCap & 0x4000) | (unsigned short)newCap);
-}
 
 class FUN_00d07910_cls;
 
@@ -439,46 +402,6 @@ int __cdecl FUN_00d93380(int, void*, D01E50Node*);
 int __cdecl AccumulateShapes(int, void*, D01E50Node*);
 int __cdecl FUN_00d94340(int, void*, D01E50Node*);
 
-// Dispatches on node->kind to one of several handlers, passing node->payload, ctx and node; returns 1 for unknown kinds.
-// @fnv 0x00d01e50
-int __cdecl DispatchNodeByKind(void* pContext, D01E50Node* node)
-{
-    switch (node->kind)
-    {
-    case 0:
-        return FUN_00d95cf0(node->payload, pContext, node);
-    case 1:
-        return FUN_00d94df0(node->payload, pContext, node);
-    case 3:
-        return ExecuteConstraintCallbacks(node->payload, pContext, node);
-    case 4:
-        return FUN_00d94a80(node->payload, pContext, node);
-    case 6:
-        return FUN_00d947e0(node->payload, pContext, node);
-    case 7:
-        return FUN_00d944d0(node->payload, pContext, node);
-    case 8:
-        return FUN_00d94570(node->payload, pContext, node);
-    case 9:
-        return LogIntegrateVelocity(node->payload, pContext, node);
-    case 10:
-        return FUN_00d94730(node->payload, pContext, node);
-    case 11:
-        return FUN_00d943d0(node->payload, pContext, node);
-    case 5:
-        return FUN_00d94340(node->payload, pContext, node);
-    case 12:
-        return FUN_00d93ba0(node->payload, pContext, node);
-    case 15:
-    case 13:
-        return FUN_00d93380(node->payload, pContext, node);
-    case 14:
-        return AccumulateShapes(node->payload, pContext, node);
-    default:
-        return 1;
-    }
-}
-
 int __fastcall FUN_00d04380(void*);
 // @fnv 0x00d043b0
 int __cdecl FUN_00d043b0(void* ap)
@@ -514,11 +437,6 @@ struct FnvCpu_FUN_00d04430_CpuObject
     FnvCpu_FUN_00d04430_CpuScalar* value;
     int FUN_00d04430();
 };
-// @fnv 0x00d04430
-int FnvCpu_FUN_00d04430_CpuObject::FUN_00d04430()
-{
-    return value->value;
-}
 
 struct FnvCpu_FUN_00d04440_CpuScalar
 {
@@ -541,16 +459,6 @@ struct FnvCpu_FUN_00d04440_CpuObject
     FnvCpu_FUN_00d04440_CpuScalar* value;
     int FUN_00d04440();
 };
-// @fnv 0x00d04440
-int FnvCpu_FUN_00d04440_CpuObject::FUN_00d04440()
-{
-    return value->value;
-}
-
-// 0x00d05de0  bare ret
-// @fnv 0x00d05de0
-void FUN_00d05de0()
-{}
 
 struct FUN_00d06f70_s
 {
@@ -564,26 +472,6 @@ struct FUN_00d07070_s : FUN_00d06f70_s
 
     int __thiscall FUN_00d07070(unsigned char flag);
 };
-
-// @fnv 0x00d07070
-int __thiscall FUN_00d07070_s::FUN_00d07070(unsigned char flag)
-{
-    this->FUN_00d06f70();
-
-    if (flag & 1)
-    {
-        AllocHolder* holder = FUN_00c85750();
-        unsigned short value = unk04;
-        holder->m_pAllocator->Free(reinterpret_cast<void*>(this), value);
-    }
-
-    return reinterpret_cast<int>(this);
-}
-
-// 0x00d070b0  bare ret
-// @fnv 0x00d070b0
-void FUN_00d070b0()
-{}
 
 struct FnvCpu_FUN_00d081d0_CpuObject
 {
@@ -627,30 +515,12 @@ class FUN_00d081e0_cls
     FUN_00d081e0_ret* FUN_00d081e0();
 };
 
-// @fnv 0x00d081e0
-FUN_00d081e0_ret* FUN_00d081e0_cls::FUN_00d081e0()
-{
-    return &unk50;
-}
-
 // @fnv 0x00d08370
 void __stdcall FUN_00d08370(int)
 {}
 
 // @fnv 0x00d0a2a0
 void __stdcall FUN_00d0a2a0(int)
-{}
-
-// @fnv 0x00d10760
-void __cdecl FUN_00d10760()
-{}
-
-// @fnv 0x00d10770
-void FUN_00d10770()
-{}
-
-// @fnv 0x00d10780
-void __cdecl FUN_00d10780()
 {}
 
 extern int DAT_010cd664;
@@ -667,26 +537,6 @@ FUN_00d1bab0_t::FUN_00d1bab0_t(bool fInit)
     if (fInit & 1)
         FUN_00401030(this);
 }
-
-// @fnv 0x00d1f100
-void __cdecl FUN_00d1f100()
-{}
-
-// @fnv 0x00d1f120
-void __cdecl FUN_00d1f120()
-{}
-
-// @fnv 0x00d1f170
-void FUN_00d1f170()
-{}
-
-// @fnv 0x00d1fa10
-void __cdecl FUN_00d1fa10()
-{}
-
-// @fnv 0x00d043f0
-void __stdcall FUN_00d043f0(int)
-{}
 
 inline void* operator new(unsigned int, void* address)
 {
@@ -823,45 +673,7 @@ struct ArrayRecord
     ArrayRecord& FUN_00d05b50(const ArrayRecord& source);
 };
 
-// Copies type, flag, value and arrays from source into this ArrayRecord and returns a reference to this.
-// @fnv 0x00d05b50
-ArrayRecord& ArrayRecord::FUN_00d05b50(const ArrayRecord& source)
-{
-    type = source.type;
-    flag = source.flag;
-    value = source.value;
-    arrays = source.arrays;
-    return *this;
-}
-
-// @fnv 0x00d05dd0
-void FUN_00d05dd0()
-{}
-
 extern "C" int __cdecl FUN_00d61d00(void* dst, const char* format, ...);
-
-// Writes a human-readable size string (Bytes, Kb, or Mb) into dst using FUN_00d61d00 based on the value of size.
-// @fnv 0x00d06eb0
-void __cdecl FUN_00d06eb0(int size, void* dst)
-{
-    if (size < 0x400)
-    {
-        FUN_00d61d00(dst, "%i Bytes", size);
-    }
-    else if (size < 0x2800)
-    {
-        FUN_00d61d00(dst, "%.1f Kb", (double)size * (1.0 / 1024.0));
-    }
-    else if (size < 0x100000)
-    {
-        FUN_00d61d00(dst, "%i Kb", size / 1024);
-    }
-    else
-    {
-        float mb = (float)((double)size * (1.0 / 1048576.0));
-        FUN_00d61d00(dst, "%.2f Mb", mb);
-    }
-}
 
 struct FUN_00d0bc20_Outer;
 
@@ -903,16 +715,6 @@ struct FUN_00d0bc20_Outer
     unsigned char unk26;
     unsigned char unk27;
 };
-
-// Sets bit 0 of object->unk27, calls the virtual Method on object->unk14, and stores the negation of bit 3 of unk27 into result.
-// @fnv 0x00d0bc20
-unsigned char* __stdcall FUN_00d0bc20(unsigned char* result, FUN_00d0bc20_Outer* object, unsigned int value)
-{
-    object->unk27 |= 1;
-    object->unk14->Method(object, value);
-    *result = (unsigned char)(~(object->unk27 >> 3) & 1);
-    return result;
-}
 
 extern int DAT_010c63bc;
 extern int DAT_010cd588;
@@ -987,25 +789,6 @@ struct S00d1b7f0_Frame
 };
 
 extern "C" void __cdecl QueryKdTree(int a, int b, int c, const __m128* d, const int* e, int f, int g);
-
-// Subtracts the vector at p+0x30 from the one at p+0x40 and calls QueryKdTree with p->m00 twice, p->m1C, the difference and the p+0x30 values.
-// @fnv 0x00d1b7f0
-void __cdecl FUN_00d1b7f0(S00d1b7f0_Input* p, int argB, int argC)
-{
-    S00d1b7f0_Frame frame;
-
-    int first = p->m00;
-    frame.v0 = p->m30;
-    frame.v1 = p->m34;
-    frame.v2 = p->m38;
-    frame.v3 = p->m3C;
-
-    int m1c = p->m1C;
-
-    frame.diff = _mm_sub_ps(*reinterpret_cast<const __m128*>(&p->m40), *reinterpret_cast<const __m128*>(&p->m30));
-
-    QueryKdTree(first, first, m1c, &frame.diff, &frame.v0, argB, argC);
-}
 
 // @fnv 0x00d043e0
 int FUN_00d043e0()
@@ -1092,23 +875,6 @@ struct DispatchContext
     DispatchEntry handlers[256];
 };
 extern "C" void _ReadWriteBarrier(void);
-// Computes a byte offset from the node subtype and invokes the handler pointer stored at that offset in the context's handler table.
-// @fnv 0x00d04570
-int __cdecl FUN_00d04570(DispatchContext* apContext, int b, DispatchNode* apNode)
-{
-    unsigned off = apNode->subtype << 4;
-
-    return reinterpret_cast<DispatchEntry*>(reinterpret_cast<char*>(apContext->handlers) + off)
-        ->handler(apContext, b, apNode);
-}
-
-// @fnv 0x00d05dc0
-void FUN_00d05dc0()
-{}
-
-// @fnv 0x00d083d0
-void __cdecl FUN_00d083d0()
-{}
 
 struct D10E90Obj
 {
@@ -1153,12 +919,6 @@ int* MyClass::GetField20()
 
 extern __m128 DAT_011b3810;
 
-// @fnv 0x00d1b280
-__m128 __cdecl FUN_00d1b280()
-{
-    return DAT_011b3810;
-}
-
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long dwTlsIndex);
 extern "C" unsigned __int64 __rdtsc(void);
 extern "C" void _ReadWriteBarrier(void);
@@ -1200,63 +960,7 @@ struct QueryObj
 
 void __cdecl FUN_00d1b4d0(const void* a, int b, const Vec4* c, const Vec4* d, int e, int f, int g, int h, int i, int j);
 
-// Records two HkTimer profiling markers around a call to FUN_00d1b4d0 with the QueryObj vertex data and bounds.
-// @fnv 0x00d1b850
-void __cdecl FUN_00d1b850(QueryObj* obj, int arg1, int arg2)
-{
-    HkTimer* prof = (HkTimer*)TlsGetValue(DAT_0126835c);
-    char* cur = prof->head;
-    if (cur < prof->end)
-    {
-        *(const char**)cur = DAT_010cd648;
-        _ReadWriteBarrier();
-        volatile unsigned int stamp = (unsigned int)__rdtsc();
-        *(unsigned int*)(cur + 4) = stamp;
-        prof->head = cur + 12;
-    }
-
-    void* verts = obj->unk00;
-    int vcount = obj->unk1c;
-    Vec4 mn = *(const Vec4*)&obj->min;
-    __m128 dv = _mm_sub_ps(obj->max, obj->min);
-    const Vec4* delta = (const Vec4*)&dv;
-    int count = obj->unk0c > 0 ? obj->unk0c : 128;
-    FUN_00d1b4d0(verts, vcount, delta, &mn, arg1, count, arg2, 0, 0, 0);
-
-    prof = (HkTimer*)TlsGetValue(DAT_0126835c);
-    cur = prof->head;
-    if (cur < prof->end)
-    {
-        *(const char**)cur = DAT_010c41f8;
-        _ReadWriteBarrier();
-        volatile unsigned int stamp2 = (unsigned int)__rdtsc();
-        *(unsigned int*)(cur + 4) = stamp2;
-        prof->head = cur + 12;
-    }
-}
-
 extern "C" void __cdecl FUN_00d1b4d0(int, int, const __m128*, const int*, int, int, int, int, int, int);
-
-// Builds a frame from the vectors at p->m30 and p->m40 (start and difference) and calls FUN_00d1b4d0 with count m0C, or 128 if that is not positive.
-// @fnv 0x00d1b930
-void __cdecl FUN_00d1b930(S00d1b7f0_Input* p, int argB, int argC, int argD)
-{
-    S00d1b7f0_Frame frame;
-    __m128 end = _mm_load_ps(reinterpret_cast<const float*>(&p->m40));
-    __m128 start = _mm_load_ps(reinterpret_cast<const float*>(&p->m30));
-    __m128 difference = _mm_sub_ps(end, start);
-    int first = p->m00;
-    int second = p->m1C;
-    frame.v0 = p->m30;
-    frame.v1 = p->m34;
-    frame.v2 = p->m38;
-    frame.v3 = p->m3C;
-    frame.diff = difference;
-    int count = p->m0C;
-    if (count <= 0)
-        count = 128;
-    FUN_00d1b4d0(first, second, &frame.diff, &frame.v0, argB, count, 0, 0, argC, argD);
-}
 
 struct FUN_00d1ba90
 {
@@ -1290,27 +994,6 @@ struct D01B40_cls
     D01B40_Obj* pObj;
     bool* FUN_00d01b40(bool* pbResult);
 };
-// Writes false to pbResult if pObj is null, if unk0C is 0xF, or if unk0C is 7, 9 or 0x17 and GetValue() exceeds 100; otherwise true.
-// @fnv 0x00d01b40
-bool* D01B40_cls::FUN_00d01b40(bool* pbResult)
-{
-    if (!pObj)
-    {
-        *pbResult = false;
-        return pbResult;
-    }
-    bool bOk = true;
-    if (pObj->unk0C == 9 && pObj->kSub.GetValue() > 100)
-        bOk = false;
-    if (pObj->unk0C == 0x17 && pObj->kSub.GetValue() > 100)
-        bOk = false;
-    if (pObj->unk0C == 7 && pObj->kSub.GetValue() > 100)
-        bOk = false;
-    if (pObj->unk0C == 0xF)
-        bOk = false;
-    *pbResult = bOk;
-    return pbResult;
-}
 
 typedef union __declspec(intrin_type) __declspec(align(16)) __m128i
 {
@@ -1396,136 +1079,17 @@ struct __declspec(align(16)) RawWords
     int d0, d1, d2, d3;
 };
 
-static __forceinline __m128 u32_to_f(__m128i x, const ScaleSplat& magic)
-{
-    __m128i hi = _mm_srli_epi32(x, 16);
-    __m128i lo = _mm_srli_epi32(_mm_slli_epi32(x, 16), 16);
-    return _mm_add_ps(_mm_mul_ps(_mm_cvtepi32_ps(hi), *(__m128*)&magic), _mm_cvtepi32_ps(lo));
-}
-
 struct FloatPair
 {
     __m128 lo;
     __m128 hi;
 };
-static __forceinline void convertPair(__m128i raw, __m128i zero, const ScaleSplat& c1, const ScaleSplat& c2,
-                                      FloatPair& out)
-{
-    __m128i l = _mm_unpacklo_epi16(raw, zero);
-    __m128i h = _mm_unpackhi_epi16(raw, zero);
-    out.lo = u32_to_f(l, c1);
-    out.hi = u32_to_f(h, c2);
-}
 struct ChildInfo
 {
     int axis;
     KdNode* left;
     KdNode* right;
 };
-// @fnv 0x00d1b290
-void __cdecl QueryKdTree(void* tree, KdNode* node, const Aabb16* prims, const float* scale, const float* offset,
-                         const QueryAabb* __restrict query, PrimIds* hits)
-{
-    int a = node->a;
-    unsigned int b = node->b;
-    while (~(a >> 31) == 0)
-    {
-        KdNode* __restrict cur = node;
-        ChildInfo info;
-        info.left = (KdNode*)((char*)cur + (cur->a & 0x7ffffffc));
-        info.axis = a & 3;
-        info.right = (KdNode*)((char*)cur + (cur->a & 0x7ffffffc)) + 1;
-        float maxv = query->max[info.axis];
-        int lo16 = (int)(unsigned short)b;
-        float lo = (float)((float)lo16 / DAT_010217d0 * scale[info.axis] + offset[info.axis]);
-        if (maxv < lo)
-        {
-            node = info.left;
-        }
-        else
-        {
-            float minv = query->min[info.axis];
-            int hi16 = (int)(b >> 16);
-            float hi = (float)((float)hi16 / DAT_010217d0 * scale[info.axis] + offset[info.axis]);
-            if (minv > hi)
-            {
-                node = info.right;
-            }
-            else
-            {
-                QueryKdTree(tree, info.left, prims, scale, offset, query, hits);
-                node = info.right;
-            }
-        }
-        a = node->a;
-        b = node->b;
-    }
-
-    if ((a ^ 0x7fffffff) == 0)
-        return;
-    if ((int)b <= 0)
-        return;
-
-    ScaleSplat kHi;
-    ScaleSplat kLo;
-    kHi.x = DAT_010cd644;
-    kHi.y = DAT_010cd644;
-    kHi.z = DAT_010cd644;
-    kHi.w = DAT_010cd644;
-    kLo.x = DAT_010cd644;
-    kLo.y = DAT_010cd644;
-    kLo.z = DAT_010cd644;
-    kLo.w = DAT_010cd644;
-
-    __m128i zero = _mm_setzero_si128();
-    const unsigned short* prim = &prims[a & 0x7fffffff].key1;
-    int count = (int)b;
-    do
-    {
-        union
-        {
-            struct
-            {
-                unsigned short lo;
-                unsigned short hi;
-            } s;
-            int packed;
-        } key;
-        key.s.lo = prim[-4];
-        key.s.hi = prim[0];
-
-        __m128 sc = _mm_mul_ps(_mm_load_ps(scale), DAT_011b3810);
-        RawWords bits;
-        bits.d0 = ((const Aabb16*)(prim - 7))->words.d0;
-        bits.d1 = ((const Aabb16*)(prim - 7))->words.d1;
-        bits.d2 = ((const Aabb16*)(prim - 7))->words.d2;
-        bits.d3 = ((const Aabb16*)(prim - 7))->words.d3;
-
-        __m128 off = _mm_load_ps(offset);
-        __m128i raw = _mm_load_si128((const __m128i*)&bits);
-        FloatPair decoded;
-        convertPair(raw, zero, kHi, kLo, decoded);
-        __m128 lower, upper;
-        upper = off;
-        lower = off;
-        upper = _mm_add_ps(_mm_mul_ps(decoded.hi, sc), lower);
-        lower = _mm_add_ps(_mm_mul_ps(decoded.lo, sc), off);
-        __m128 cmp =
-            _mm_and_ps(_mm_cmple_ps(lower, _mm_load_ps(query->max)), _mm_cmple_ps(_mm_load_ps(query->min), upper));
-        if ((_mm_movemask_ps(cmp) & 7) == 7)
-        {
-            AllocHolder* holder = (AllocHolder*)MemSource::FUN_00c85750();
-            if (hits->size == (hits->capacity & 0x3fffffff))
-                ResizeAudioStream((void*)holder->unk0C, hits, 4);
-            int* dst = hits->data + hits->size;
-            for (int once = 0; once < 1; ++once)
-                dst[once] = key.packed;
-            hits->size++;
-        }
-        prim += 8;
-        --count;
-    } while (count);
-}
 
 extern "C" __m128 _mm_shuffle_ps(__m128 a, __m128 b, unsigned int imm);
 extern "C" __m128 _mm_cmpeq_ps(__m128 a, __m128 b);
@@ -1609,93 +1173,8 @@ struct HkRayBundle
     HkBundle m_vInverseDirection;
     int m_uiMask;
 };
-// Transposes four from vectors and four to vectors into bundles, then returns an HkRayBundle built from them with the given mask.
-// @fnv 0x00d1bb50
-HkRayBundle __cdecl FUN_00d1bb50(const HkVec4& from0, const HkVec4& to0, const HkVec4& from1, const HkVec4& to1,
-                                 const HkVec4& from2, const HkVec4& to2, const HkVec4& from3, const HkVec4& to3,
-                                 int mask)
-{
-    HkBundle bundleFrom;
-    HkBundle bundleTo;
-    HkVec4 tmpFrom;
-    HkVec4 tmpTo;
-    bundleFrom.m_data[0] = from0;
-    bundleFrom.m_data[1] = from1;
-    bundleFrom.m_data[2] = from2;
-    tmpFrom = from3;
-    bundleTo.m_data[0] = to0;
-    bundleTo.m_data[1] = to1;
-    bundleTo.m_data[2] = to2;
-    tmpTo = to3;
-    {
-        __m128 tmp3, tmp2, tmp1, tmp0;
-
-        tmp0 = _mm_shuffle_ps((bundleFrom.m_data[0]), (bundleFrom.m_data[1]), 0x44);
-        tmp2 = _mm_shuffle_ps((bundleFrom.m_data[0]), (bundleFrom.m_data[1]), 0xEE);
-        tmp1 = _mm_shuffle_ps((bundleFrom.m_data[2]), (tmpFrom), 0x44);
-        tmp3 = _mm_shuffle_ps((bundleFrom.m_data[2]), (tmpFrom), 0xEE);
-
-        (bundleFrom.m_data[0]) = _mm_shuffle_ps(tmp0, tmp1, 0x88);
-        (bundleFrom.m_data[1]) = _mm_shuffle_ps(tmp0, tmp1, 0xDD);
-        (bundleFrom.m_data[2]) = _mm_shuffle_ps(tmp2, tmp3, 0x88);
-        (tmpFrom) = _mm_shuffle_ps(tmp2, tmp3, 0xDD);
-    }
-    {
-        __m128 tmp3, tmp2, tmp1, tmp0;
-
-        tmp0 = _mm_shuffle_ps((bundleTo.m_data[0]), (bundleTo.m_data[1]), 0x44);
-        tmp2 = _mm_shuffle_ps((bundleTo.m_data[0]), (bundleTo.m_data[1]), 0xEE);
-        tmp1 = _mm_shuffle_ps((bundleTo.m_data[2]), (tmpTo), 0x44);
-        tmp3 = _mm_shuffle_ps((bundleTo.m_data[2]), (tmpTo), 0xEE);
-
-        (bundleTo.m_data[0]) = _mm_shuffle_ps(tmp0, tmp1, 0x88);
-        (bundleTo.m_data[1]) = _mm_shuffle_ps(tmp0, tmp1, 0xDD);
-        (bundleTo.m_data[2]) = _mm_shuffle_ps(tmp2, tmp3, 0x88);
-        (tmpTo) = _mm_shuffle_ps(tmp2, tmp3, 0xDD);
-    }
-    return HkRayBundle(bundleFrom, bundleTo, mask);
-}
 
 typedef void*(__stdcall* S00d1b9b0_TlsGet)(unsigned long dwTlsIndex);
-
-// Records a TtqueryAabb timer, calls FUN_00d1b4d0 with the query AABB and count, then records an Et timer.
-// @fnv 0x00d1b9b0
-void __cdecl FUN_00d1b9b0(QueryObj* pQuery, int p1, int p2)
-{
-    volatile unsigned int tick;
-    S00d1b9b0_TlsGet pfnTls = TlsGetValue;
-    HkTimer* pBuf = (HkTimer*)pfnTls(DAT_0126835c);
-    if (pBuf->head < pBuf->end)
-    {
-        char* pRec = pBuf->head;
-        *(const char**)pRec = "TtqueryAabb";
-        _ReadWriteBarrier();
-        tick = (unsigned int)__rdtsc();
-        *(unsigned int*)(pRec + 4) = tick;
-        pBuf->head = pRec + 0xc;
-    }
-
-    const void* a = pQuery->unk00;
-    int b = pQuery->unk1c;
-    Vec4 vMin = *(const Vec4*)&pQuery->min;
-    Vec4 vExtent;
-    *(__m128*)&vExtent = _mm_sub_ps(pQuery->max, pQuery->min);
-    int count = pQuery->unk0c;
-    if (count <= 0)
-        count = 0x80;
-    FUN_00d1b4d0(a, b, &vExtent, &vMin, p1, count, 0, p2, 0, 0);
-
-    pBuf = (HkTimer*)pfnTls(DAT_0126835c);
-    if (pBuf->head < pBuf->end)
-    {
-        char* pRec = pBuf->head;
-        *(const char**)pRec = "Et";
-        _ReadWriteBarrier();
-        tick = (unsigned int)__rdtsc();
-        *(unsigned int*)(pRec + 4) = tick;
-        pBuf->head = pRec + 0xc;
-    }
-}
 
 // Today's unit (blk_00d00000_o2.cpp) declares __m128 and most SSE1 intrinsics as
 // extern "C" functions instead of including <xmmintrin.h>; declare the four the
@@ -1704,27 +1183,6 @@ extern "C" __m128 _mm_max_ps(__m128 a, __m128 b);
 extern "C" __m128 _mm_min_ps(__m128 a, __m128 b);
 extern "C" __m128 _mm_add_ss(__m128 a, __m128 b);
 extern "C" float _mm_cvtss_f32(__m128 a);
-
-// Returns the squared distance from the point at b to the box with min at a and max at a+4 floats, or 0.0f when the point is inside.
-// @fnv 0x00d1bad0
-float __cdecl FUN_00d1bad0(float* a, float* b)
-{
-    __m128 va2 = *reinterpret_cast<__m128*>(a + 4);
-    __m128 vb = *reinterpret_cast<__m128*>(b);
-    __m128 va = *reinterpret_cast<__m128*>(a);
-    __m128 overlap = _mm_and_ps(_mm_cmple_ps(va, vb), _mm_cmple_ps(vb, va2));
-    int mask = _mm_movemask_ps(overlap);
-    if ((mask & 7) == 7)
-        return 0.0f;
-    __m128 clamped = _mm_max_ps(_mm_min_ps(vb, va2), va);
-    __m128 delta = _mm_sub_ps(clamped, vb);
-    __m128 squared = _mm_mul_ps(delta, delta);
-    __m128 y = _mm_shuffle_ps(squared, squared, 0x55);
-    __m128 z = _mm_shuffle_ps(squared, squared, 0xaa);
-    __m128 sum = _mm_add_ss(y, squared);
-    sum = _mm_add_ss(z, sum);
-    return _mm_cvtss_f32(sum);
-}
 
 extern "C" __m128 _mm_setzero_ps(void);
 
@@ -1737,15 +1195,6 @@ struct FUN_00d1f9f0
 
     FUN_00d1f9f0();
 };
-
-// @fnv 0x00d1f9f0
-FUN_00d1f9f0::FUN_00d1f9f0()
-{
-    boneBegin = 0;
-    boneEnd = 1;
-    penetrationPoint = _mm_setzero_ps();
-    penetrationNormal = _mm_setzero_ps();
-}
 
 struct S00d1b4d0_Node
 {
@@ -1830,11 +1279,6 @@ struct S00d1b4d0_Bounds
 
 void __cdecl ResizeAudioStream(void*, void*, int);
 
-static __forceinline float S00d1b4d0_decode(int v, const RealVec& scale, const RealVec& offset, unsigned axis)
-{
-    return (float)(v / 65535.0 * scale.at(axis) + offset.at(axis));
-}
-
 struct IVector
 {
     __m128i q;
@@ -1865,133 +1309,3 @@ struct FVector
         q = _mm_add_ps(a.q, b);
     }
 };
-static __forceinline void copyResult(unsigned* target, int count, const unsigned& value)
-{
-    for (int i = 0; i < count; ++i)
-        target[i] = value;
-}
-// @fnv 0x00d1b4d0
-int __cdecl FUN_00d1b4d0(S00d1b4d0_Node* node, S00d1b4d0_Entry* entries, const RealVec& scale, const RealVec& offset,
-                         S00d1b4d0_Bounds* query, int capacity, S00d1b4d0_List* list, S00d1b4d0_Callback* callback,
-                         unsigned** output, int limit)
-{
-    S00d1b4d0_Node* cur = node;
-    S00d1b4d0_Id id;
-    __declspec(align(16)) S00d1b4d0_NodeCopy n;
-    n.set(cur);
-    AllocHolder* alloc = FUN_00c85750();
-    S00d1b4d0_Node** base = (S00d1b4d0_Node**)alloc->unk00;
-    S00d1b4d0_Node** top = base;
-    int bytes = (capacity * 4 + 127) & ~127;
-    alloc->unk00 = (int)((char*)base + bytes);
-    S00d1b4d0_Bounds bounds = *query;
-    int found = 0;
-    for (;;)
-    {
-        while (n.code & 0x80000000)
-        {
-            S00d1b4d0_Node* child = cur->child();
-            n.code &= 3;
-            unsigned axis = n.code;
-            n.code = n.packed;
-            S00d1b4d0_Node* other = cur->child() + 1;
-            if (!(bounds.max[axis] < S00d1b4d0_decode((unsigned short)n.code, scale, offset, axis)))
-            {
-                if (bounds.min[axis] > S00d1b4d0_decode((int)(n.code >> 16), scale, offset, axis))
-                    cur = other;
-                else
-                {
-                    *top++ = other;
-                    cur = child;
-                }
-            }
-            else
-                cur = child;
-            n.set(*(S00d1b4d0_Node* volatile*)&cur);
-        }
-        if ((n.code ^ 0x7fffffffu) != 0)
-        {
-            int count = (int)n.packed;
-            int i = 0;
-            if (count > i)
-            {
-                __m128i packedData;
-                __m128 biasLo;
-                __m128 biasHi;
-                __m128i zeroData;
-                biasLo.m128_f32[0] = 1e16f;
-                biasLo.m128_f32[1] = 1e16f;
-                biasLo.m128_f32[2] = 1e16f;
-                biasLo.m128_f32[3] = 1e16f;
-                biasHi.m128_f32[0] = 1e16f;
-                biasHi.m128_f32[1] = 1e16f;
-                biasHi.m128_f32[2] = 1e16f;
-                biasHi.m128_f32[3] = 1e16f;
-                zeroData = _mm_setzero_si128();
-                unsigned short* p = &entries[n.code & 0x7fffffff].unk0e;
-                do
-                {
-                    id.lo = p[-4];
-                    id.hi = p[0];
-                    __m128 factor = _mm_mul_ps(DAT_011b3810, scale.q);
-                    packedData.m128i_i32[0] =
-                        ((const S00d1b4d0_Entry*)((const char*)p - offsetof(S00d1b4d0_Entry, unk0e)))->word0;
-                    packedData.m128i_i32[1] =
-                        ((const S00d1b4d0_Entry*)((const char*)p - offsetof(S00d1b4d0_Entry, unk0e)))->word1;
-                    packedData.m128i_i32[2] =
-                        ((const S00d1b4d0_Entry*)((const char*)p - offsetof(S00d1b4d0_Entry, unk0e)))->word2;
-                    packedData.m128i_i32[3] =
-                        ((const S00d1b4d0_Entry*)((const char*)p - offsetof(S00d1b4d0_Entry, unk0e)))->word3;
-                    __m128 off = offset.q;
-                    IVector data = {packedData}, zero = {zeroData};
-                    IVector lo, hi;
-                    lo.unpackLo(data, zero);
-                    hi.unpackHi(data, zero);
-                    FVector vmin, vmax;
-                    vmin.convert(lo, biasLo);
-                    vmax.convert(hi, biasHi);
-                    vmax.mul(vmax, factor);
-                    vmax.add(vmax, off);
-                    vmin.mul(vmin, factor);
-                    vmin.add(vmin, off);
-                    S00d1b4d0_Aabb box;
-                    box.m_kMinimumCorner = vmin.q;
-                    box.m_kMaximumCorner = vmax.q;
-                    __m128 mincomp = _mm_cmple_ps(box.m_kMinimumCorner, *(const __m128*)query->max);
-                    __m128 maxcomp = _mm_cmple_ps(*(const __m128*)query->min, box.m_kMaximumCorner);
-                    if ((_mm_movemask_ps(_mm_and_ps(mincomp, maxcomp)) & 7) == 7)
-                    {
-                        if (callback)
-                        {
-                            if (callback->slot1(id))
-                                goto done;
-                        }
-                        else if (list)
-                        {
-                            AllocHolder* grow = FUN_00c85750();
-                            if (list->size == (int)(list->capacity & 0x3fffffff))
-                                ResizeAudioStream((void*)grow->unk0C, list, 4);
-                            copyResult(list->data + list->size, 1, *(unsigned*)&id);
-                            list->size++;
-                        }
-                        else if (output)
-                        {
-                            *(*output)++ = *(unsigned*)&id;
-                            if (++found >= limit)
-                                goto done;
-                        }
-                    }
-                    p += 8;
-                    ++i;
-                } while (i < count);
-            }
-        }
-        if (top == base)
-            break;
-        cur = *--top;
-        n.set(cur);
-    }
-done:
-    FUN_00c85750()->unk00 = (int)base;
-    return found;
-}

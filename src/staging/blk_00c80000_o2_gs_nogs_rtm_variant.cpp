@@ -6995,46 +6995,6 @@ struct ControllerList
     ~ControllerList();
     void RemoveNode(const ControllerPtr& key);
 };
-void ControllerList::RemoveNode(const ControllerPtr& key)
-{
-    if (!key.m_pObject)
-        return;
-    if (!next && !item.m_pObject)
-        return;
-    ControllerList* prev = this;
-    ControllerList* cur = this;
-    while (cur->item.m_pObject != key.m_pObject)
-    {
-        prev = cur;
-        cur = cur->next;
-        if (!cur)
-            return;
-    }
-    if (cur == this)
-    {
-        ControllerList* pNext = next;
-        if (pNext)
-        {
-            next = pNext->next;
-            item = pNext->item;
-            pNext->next = 0;
-            pNext->~ControllerList();
-            _g_memoryManager.Deallocate(pNext);
-        }
-        else if (item.m_pObject)
-        {
-            item.m_pObject->DecRefCount();
-            item.m_pObject = 0;
-        }
-    }
-    else
-    {
-        prev->next = cur->next;
-        cur->next = 0;
-        cur->~ControllerList();
-        _g_memoryManager.Deallocate(cur);
-    }
-}
 struct ControllerCollection
 {
     unsigned int unk, unk04, unk08, unk0C, unk10;
@@ -10915,11 +10875,6 @@ __forceinline bool Mask135(unsigned int a, unsigned int b)
     return (DAT_01268078[(a >> 8) & 31] & (1 << ((b >> 8) & 31))) != 0;
 }
 bool FUN_00c84740(unsigned int a, unsigned int b);
-__declspec(noinline) bool C00624070::FUN_00624070()
-{
-    unsigned int layer = value & 127;
-    return layer == 8 || layer == 29;
-}
 // @fnv 0x00c85d20
 struct B0
 {
@@ -10932,14 +10887,6 @@ struct F
 struct O : B0, F
 {
 };
-unsigned Apply(unsigned bits, char on)
-{
-    if (on == 0)
-        bits |= 0x4000u;
-    else
-        bits &= ~0x4000u;
-    return bits;
-}
 struct C
 {
     void** vt;
@@ -10947,18 +10894,6 @@ struct C
     O* object;
     void FUN_00c85d20(char active);
 };
-void C::FUN_00c85d20(char active)
-{
-    O* item = object;
-    F* part = item;
-    unsigned bits = part ? part->bits : 0;
-    bits = Apply(bits, active);
-    part = item;
-    if (part)
-        part->bits = bits;
-    typedef void(__thiscall * Fn)(C*);
-    ((Fn*)vt)[49](this);
-}
 extern "C" unsigned long __readfsdword(unsigned long);
 extern volatile unsigned long DAT_0126fd98;
 struct MemoryCategoryScope_00c89dd0

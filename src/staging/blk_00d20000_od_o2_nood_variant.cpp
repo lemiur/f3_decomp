@@ -451,27 +451,6 @@ struct CastObj
     void __thiscall FUN_00d31610(int a1, int a2, int a3, LinearCastState& st);
 };
 
-// @fnv 0x00d31610
-void __thiscall CastObj::FUN_00d31610(int a1, int a2, int a3, LinearCastState& st)
-{
-    LinearCastState* s = &st;
-    float oldDistance = s->m_fClosestPointDistanceSquared;
-    LinearCastVertex* v = s->m_kRayEnd;
-    FUN_00d302d0(a2, a1, a3, st);
-    for (; v < s->m_kRayEnd; v++)
-    {
-        hkVector4q w;
-        w.setBroadcast3(v->m_direction);
-        v->m_vContactPosition.addMul4(w, v->m_direction);
-        v->m_direction.setNeg4(v->m_direction);
-    }
-    if (oldDistance != s->m_fClosestPointDistanceSquared)
-    {
-        s->m_vHitNormal.setNeg4b(s->m_vHitNormal);
-
-        s->m_pAccessManager.flip();
-    }
-}
 }  // namespace fnv_00d31610
 
 namespace fnv_00d36d60 {
@@ -535,45 +514,6 @@ class SimplexProcessor
     void FUN_00d36d60(int a, int b, int c, Simplex* s);
 };
 
-// @fnv 0x00d36d60
-void SimplexProcessor::FUN_00d36d60(int a, int b, int c, Simplex* s)
-{
-    SimplexVertex* v = s->m_kRayEnd;
-    float oldDistance = s->m_fClosestPointDistanceSquared;
-    FUN_00d369a0(b, a, c, s);
-    for (; v < s->m_kRayEnd; v++)
-    {
-        const __m128* pb = &v->m_kPointB;
-        __m128 w = _mm_shuffle_ps(*pb, *pb, 0xff);
-        v->m_kPointA = _mm_add_ps(_mm_mul_ps(w, v->m_kPointB), v->m_kPointA);
-        v->m_kPointB = _mm_xor_ps(v->m_kPointB, DAT_010c4c00);
-    }
-    if (oldDistance != s->m_fClosestPointDistanceSquared)
-    {
-        __m128* n = &s->m_vHitNormal;
-        *n = _mm_xor_ps(*n, DAT_010c4c00);
-        {
-            unsigned char t = s->m_dims.m_ucLowNibble;
-            s->m_dims.m_ucLowNibble = s->m_dims.m_ucHighNibble;
-            s->m_dims.m_ucHighNibble = t;
-        }
-        {
-            unsigned char t = s->m_ucDimensionA;
-            s->m_ucDimensionA = s->m_ucDimensionB;
-            s->m_ucDimensionB = t;
-        }
-        int last = s->m_ucDimensionA + s->m_ucDimensionB - 1;
-        unsigned short t0 = s->m_ids[0];
-        s->m_ids[0] = s->m_ids[last];
-        s->m_ids[last] = t0;
-        if ((s->m_ucDimensionA & s->m_ucDimensionB) == 2)
-        {
-            unsigned short t1 = s->m_ids[1];
-            s->m_ids[1] = s->m_ids[2];
-            s->m_ids[2] = t1;
-        }
-    }
-}
 }  // namespace fnv_00d36d60
 
 namespace fnv_00d23380 {
@@ -628,26 +568,6 @@ struct SortList
     int m_iNumberOfEntries;
 };
 
-// @fnv 0x00d23380
-void FUN_00d23380(SortList* list)
-{
-    for (int i = 0; i < list->m_iNumberOfEntries - 1; i++)
-    {
-        for (int j = i + 1; j < list->m_iNumberOfEntries; j++)
-        {
-            SortEntry& a = list->m_entries[i];
-            SortEntry& b = list->m_entries[j];
-            if (a.m_object->m_priority < b.m_object->m_priority)
-                continue;
-            if (a.m_object->m_priority == b.m_object->m_priority &&
-                a.m_object->m_vContactPosition.lengthSquared3() < b.m_object->m_vContactPosition.lengthSquared3())
-                continue;
-            SortEntry t = a;
-            a = b;
-            b = t;
-        }
-    }
-}
 }  // namespace fnv_00d23380
 
 inline void* operator new(unsigned int, void* p) throw()
@@ -661,13 +581,6 @@ struct FinishingFlag
 {
     int m_bFinishing;
 };
-
-static inline FinishingFlag NotFinishing()
-{
-    FinishingFlag flag;
-    flag.m_bFinishing = 0;
-    return flag;
-}
 
 class S00d2c8a0_Base
 {
@@ -691,15 +604,6 @@ class S00d2c8a0_Derived : public S00d2c8a0_Base
     virtual void vf04();
     __m128 m_kScaleFactors;
 };
-
-// Havok getVtable helper: placement-construct into a local buffer with the finish-loading flag.
-// @fnv 0x00d2c8a0
-const void* __cdecl FUN_00d2c8a0()
-{
-    __declspec(align(16)) char buffer[sizeof(S00d2c8a0_Derived)];
-    S00d2c8a0_Derived* pObject = new (buffer) S00d2c8a0_Derived(NotFinishing());
-    return *reinterpret_cast<const void**>(pObject);
-}
 
 namespace fnv_00d32850 {
 union __declspec(intrin_type) __declspec(align(16)) __m128
@@ -765,45 +669,6 @@ struct Agent : AgentBase
     void FUN_00d32850(int a, int b, int c, Simplex* s);
 };
 
-// @fnv 0x00d32850
-void Agent::FUN_00d32850(int a, int b, int c, Simplex* s)
-{
-    SimplexVertex* v = s->m_kRayEnd;
-    float oldDistance = s->m_fClosestPointDistanceSquared;
-    AgentBase::FUN_00d324e0(b, a, c, s);
-    for (; v < s->m_kRayEnd; v++)
-    {
-        const __m128* pb = &v->m_kPointB;
-        __m128 w = _mm_shuffle_ps(*pb, *pb, 0xff);
-        v->m_kPointA = _mm_add_ps(_mm_mul_ps(w, v->m_kPointB), v->m_kPointA);
-        v->m_kPointB = _mm_xor_ps(v->m_kPointB, DAT_010c4c00);
-    }
-    if (oldDistance != s->m_fClosestPointDistanceSquared)
-    {
-        __m128* n = &s->m_vHitNormal;
-        *n = _mm_xor_ps(*n, DAT_010c4c00);
-        {
-            unsigned char t = s->m_dims.m_ucLowNibble;
-            s->m_dims.m_ucLowNibble = s->m_dims.m_ucHighNibble;
-            s->m_dims.m_ucHighNibble = t;
-        }
-        {
-            unsigned char t = s->m_ucDimensionA;
-            s->m_ucDimensionA = s->m_ucDimensionB;
-            s->m_ucDimensionB = t;
-        }
-        int last = s->m_ucDimensionA + s->m_ucDimensionB - 1;
-        unsigned short t0 = s->m_ids[0];
-        s->m_ids[0] = s->m_ids[last];
-        s->m_ids[last] = t0;
-        if ((s->m_ucDimensionA & s->m_ucDimensionB) == 2)
-        {
-            unsigned short t1 = s->m_ids[1];
-            s->m_ids[1] = s->m_ids[2];
-            s->m_ids[2] = t1;
-        }
-    }
-}
 }  // namespace fnv_00d32850
 
 struct SortPair
@@ -899,14 +764,6 @@ class hkpCollisionDispatcherD367
     void AddEntry(const hkpAgent3FuncsD367& kFuncs, int iTypeA, int iTypeB);
 };
 
-// @fnv 0x00d367d0
-void __cdecl FUN_00d367d0(hkpCollisionDispatcherD367* pkDispatcher)
-{
-    __declspec(align(16)) hkpAgent3FuncsD367 kFuncs;
-    FUN_00d367b0(kFuncs);
-    pkDispatcher->AddEntry(kFuncs, 0x12, 7);
-}
-
 namespace fnv_00d36e80 {
 union __declspec(intrin_type) __declspec(align(16)) __m128
 {
@@ -990,23 +847,6 @@ struct Agent : AgentBase
                       hkpCdPointCollector& collector, hkpCdPointCollector* startCollector);
 };
 
-// @fnv 0x00d36e80
-void Agent::FUN_00d36e80(const hkpCdBody& bodyA, const hkpCdBody& bodyB, const ShapeSweepParameters& input,
-                         hkpCdPointCollector& collector, hkpCdPointCollector* startCollector)
-{
-    ShapeSweepParameters flippedInput = input;
-    flippedInput.m_path.m_vComponents = _mm_xor_ps(input.m_path.m_vComponents, DAT_010c44d0);
-    hkpSymmetricAgentFlipCastCollector flippedCollector(input.m_path, collector);
-    if (startCollector)
-    {
-        hkpSymmetricAgentFlipCastCollector flippedStartCollector(input.m_path, *startCollector);
-        AgentBase::FUN_00d36960(bodyB, bodyA, flippedInput, flippedCollector, &flippedStartCollector);
-    }
-    else
-    {
-        AgentBase::FUN_00d36960(bodyB, bodyA, flippedInput, flippedCollector, 0);
-    }
-}
 }  // namespace fnv_00d36e80
 
 namespace fnv_00d37c10 {
@@ -1073,45 +913,6 @@ struct Agent : AgentBase
     void FUN_00d37c10(int a, int b, int c, Simplex* s);
 };
 
-// @fnv 0x00d37c10
-void Agent::FUN_00d37c10(int a, int b, int c, Simplex* s)
-{
-    SimplexVertex* v = s->m_kRayEnd;
-    float oldDistance = s->m_fClosestPointDistanceSquared;
-    AgentBase::FUN_00d378e0(b, a, c, s);
-    for (; v < s->m_kRayEnd; v++)
-    {
-        const __m128* pb = &v->m_kPointB;
-        __m128 w = _mm_shuffle_ps(*pb, *pb, 0xff);
-        v->m_kPointA = _mm_add_ps(_mm_mul_ps(w, v->m_kPointB), v->m_kPointA);
-        v->m_kPointB = _mm_xor_ps(v->m_kPointB, DAT_010c4c00);
-    }
-    if (oldDistance != s->m_fClosestPointDistanceSquared)
-    {
-        __m128* n = &s->m_vHitNormal;
-        *n = _mm_xor_ps(*n, DAT_010c4c00);
-        {
-            unsigned char t = s->m_dims.m_ucLowNibble;
-            s->m_dims.m_ucLowNibble = s->m_dims.m_ucHighNibble;
-            s->m_dims.m_ucHighNibble = t;
-        }
-        {
-            unsigned char t = s->m_ucDimensionA;
-            s->m_ucDimensionA = s->m_ucDimensionB;
-            s->m_ucDimensionB = t;
-        }
-        int last = s->m_ucDimensionA + s->m_ucDimensionB - 1;
-        unsigned short t0 = s->m_ids[0];
-        s->m_ids[0] = s->m_ids[last];
-        s->m_ids[last] = t0;
-        if ((s->m_ucDimensionA & s->m_ucDimensionB) == 2)
-        {
-            unsigned short t1 = s->m_ids[1];
-            s->m_ids[1] = s->m_ids[2];
-            s->m_ids[2] = t1;
-        }
-    }
-}
 }  // namespace fnv_00d37c10
 
 struct hkpAgent3FuncsD398
@@ -1244,45 +1045,6 @@ struct Agent : AgentBase
     void FUN_00d3f500(int a, int b, int c, Simplex* s);
 };
 
-// @fnv 0x00d3f500
-void Agent::FUN_00d3f500(int a, int b, int c, Simplex* s)
-{
-    SimplexVertex* v = s->m_kRayEnd;
-    float oldDistance = s->m_fClosestPointDistanceSquared;
-    AgentBase::FUN_00d3f080(b, a, c, s);
-    for (; v < s->m_kRayEnd; v++)
-    {
-        const __m128* pb = &v->m_kPointB;
-        __m128 w = _mm_shuffle_ps(*pb, *pb, 0xff);
-        v->m_kPointA = _mm_add_ps(_mm_mul_ps(w, v->m_kPointB), v->m_kPointA);
-        v->m_kPointB = _mm_xor_ps(v->m_kPointB, DAT_010c4c00);
-    }
-    if (oldDistance != s->m_fClosestPointDistanceSquared)
-    {
-        __m128* n = &s->m_vHitNormal;
-        *n = _mm_xor_ps(*n, DAT_010c4c00);
-        {
-            unsigned char t = s->m_dims.m_ucLowNibble;
-            s->m_dims.m_ucLowNibble = s->m_dims.m_ucHighNibble;
-            s->m_dims.m_ucHighNibble = t;
-        }
-        {
-            unsigned char t = s->m_ucDimensionA;
-            s->m_ucDimensionA = s->m_ucDimensionB;
-            s->m_ucDimensionB = t;
-        }
-        int last = s->m_ucDimensionA + s->m_ucDimensionB - 1;
-        unsigned short t0 = s->m_ids[0];
-        s->m_ids[0] = s->m_ids[last];
-        s->m_ids[last] = t0;
-        if ((s->m_ucDimensionA & s->m_ucDimensionB) == 2)
-        {
-            unsigned short t1 = s->m_ids[1];
-            s->m_ids[1] = s->m_ids[2];
-            s->m_ids[2] = t1;
-        }
-    }
-}
 }  // namespace fnv_00d3f500
 
 namespace fnv_00d3fe90 {
@@ -1406,47 +1168,6 @@ struct Processor
     }
     void FUN_00db2960(unsigned char*);
 };
-// @fnv 0x00d3fe90
-void* __cdecl FUN_00d3fe90(Params* p, unsigned char* out, unsigned char* obj, int unused, int z)
-{
-    ProfileBuffer* buf = (ProfileBuffer*)TlsGetValue(DAT_0126835c);
-    if (buf->current < buf->end)
-    {
-        ProfileSample* rec = buf->current;
-        rec->name = "TtBoxBox3";
-        _ReadWriteBarrier();
-        volatile unsigned int tick = (unsigned int)__rdtsc();
-        rec->time = tick;
-        buf->current = rec + 1;
-    }
-    Body* a = p->a;
-    Shape* shapeA = static_cast<Shape*>(a->shape);
-    float radiusA = *(volatile float*)&shapeA->radius;
-    Shape* shapeB = static_cast<Shape*>(p->b->shape);
-    __m128 ba = _mm_set_ps1(radiusA);
-    Vector halfA;
-    halfA.quad = _mm_add_ps(ba, shapeA->halfExtents);
-    float radiusB = shapeB->radius;
-    __m128 bb = _mm_set_ps1(radiusB);
-    Vector halfB;
-    halfB.quad = _mm_add_ps(bb, shapeB->halfExtents);
-    CollisionInput* input = p->input;
-    float tol = input->tolerance;
-    Processor state(*a, *p->b, input, p->unk10, z, p->relative, *a->transform, halfA, *p->b->transform, halfB, tol);
-    state.FUN_00db2960(obj);
-    out[2] = obj[0x21];
-    buf = (ProfileBuffer*)TlsGetValue(DAT_0126835c);
-    if (buf->current < buf->end)
-    {
-        ProfileSample* rec = buf->current;
-        rec->name = "Et";
-        _ReadWriteBarrier();
-        volatile unsigned int tick = (unsigned int)__rdtsc();
-        rec->time = tick;
-        buf->current = rec + 1;
-    }
-    return obj + 0x40;
-}
 }  // namespace fnv_00d3fe90
 
 extern "C"
@@ -1468,63 +1189,6 @@ struct ClosestPointResult
     __m128 p1;
     __m128 p2;
 };
-
-static __forceinline void Dot3(float& result, __m128 u, __m128 v)
-{
-    __m128 m = _mm_mul_ps(u, v);
-    __m128 y = _mm_shuffle_ps(m, m, 0x55);
-    __m128 z = _mm_shuffle_ps(m, m, 0xaa);
-    _mm_store_ss(&result, _mm_add_ss(z, _mm_add_ss(y, m)));
-}
-
-// @fnv 0x00d231b0
-int FUN_00d231b0(const __m128* pa, const __m128* pb, const __m128* pc, const __m128* pd, ClosestPointResult* out)
-{
-    const __m128& d = *pd;
-    const __m128& b = *pb;
-    __m128 a = *pa;
-    __m128 c = *pc;
-
-    __m128 ca = _mm_sub_ps(c, a);
-    float p;
-    Dot3(p, d, b);
-    float q;
-    Dot3(q, b, ca);
-    float r;
-    Dot3(r, d, ca);
-    float bb;
-    Dot3(bb, b, b);
-    float dd;
-    Dot3(dd, d, d);
-
-    float denom = dd * bb - p * p;
-    int result;
-    float s;
-    if ((float)fabs(denom) > (float)((p * p + (float)fabs((float)(dd * bb))) * 9.5367431640625e-07))
-    {
-        s = (dd * q - r * p) / denom;
-        result = 0;
-    }
-    else
-    {
-        s = 0.0f;
-        result = 1;
-    }
-    float t = (p * s - r) / dd;
-
-    __m128 p1 = _mm_add_ps(_mm_mul_ps(_mm_set_ps1(s), b), a);
-    __m128 p2 = _mm_add_ps(_mm_mul_ps(_mm_set_ps1(t), d), c);
-    __m128 diff = _mm_sub_ps(p1, p2);
-    float distSq;
-    Dot3(distSq, diff, diff);
-
-    out->distSq = distSq;
-    _mm_store_ps(out->p1.m128_f32, p1);
-    _mm_store_ps(out->p2.m128_f32, p2);
-    out->s = s;
-    out->t = t;
-    return result;
-}
 
 extern "C" void _mm_store_ps(float*, __m128);
 extern "C" __m128 _mm_xor_ps(__m128, __m128);
@@ -1595,23 +1259,6 @@ struct D2fWorld
     void FUN_00d2f460(int a1, int a2, const D2fInput* a3, int a4, void* a5);
 };
 
-// @fnv 0x00d2f460
-void D2fWorld::FUN_00d2f460(int a1, int a2, const D2fInput* a3, int a4, void* a5)
-{
-    D2fInput tmp = *a3;
-    tmp.m_vec.setNeg4(a3->m_vec);
-    D2fCollector c1(a3->m_vec, (void*)a4);
-    if (a5)
-    {
-        D2fCollector c2(a3->m_vec, a5);
-        FUN_00d315a0(a2, a1, &tmp, &c1, &c2);
-    }
-    else
-    {
-        FUN_00d315a0(a2, a1, &tmp, &c1, 0);
-    }
-}
-
 namespace N {
 union __declspec(intrin_type) __declspec(align(16)) __m128
 {
@@ -1652,9 +1299,3 @@ class FUN_00d2c910 : public S00d2c910_Base
     virtual void vf00();
     N::__m128 m_kScaleFactors;
 };
-
-// @fnv 0x00d2c910
-FUN_00d2c910::FUN_00d2c910(void* a, int b) : S00d2c910_Base(a, b)
-{
-    m_kScaleFactors = N::_mm_setr_ps(0.0f, 0.0f, 0.0f, 0.0f);
-}

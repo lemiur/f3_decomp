@@ -365,12 +365,6 @@ class FUN_00a61920_Class
 
     bool __thiscall FindShaderByHash(int, int, NiShader**);
 };
-void NiShader::Release()
-{}
-int* NiShader::GetHash()
-{
-    return &m_iShaderValue;
-}
 class FUN_00a61ec0_cls;
 class RefCountedNodeObject
 {
