@@ -52,12 +52,12 @@ void hkpCharacterMotionD1E::SetInertiaAndMassInv(const hkMatrix3D1E& inertia)
     m_kInertiaAndMassInv.z = fInvMaxDiag;
 }
 
-struct FUN_00d1edd0_stub
+struct FUN_00d1edd0_stub : public hkpMotion
 {
     void SetMinOfThree(const float* src);
 };
 
-// Stores the minimum of src[0], src[5], and src[10] into the three floats at offsets 0xc0, 0xc4, and 0xc8 of this.
+// Stores the smallest diagonal element of the 4x4 src (src[0], src[5], src[10]) as all three inverse inertias.
 // @fnv 0x00d1edd0
 void FUN_00d1edd0_stub::SetMinOfThree(const float* src)
 {
@@ -66,9 +66,9 @@ void FUN_00d1edd0_stub::SetMinOfThree(const float* src)
     float c = a < b ? a : b;
     float fThird = src[10];
     float fMinAll = c < fThird ? c : fThird;
-    *(float*)((char*)this + 0xc0) = fMinAll;
-    *(float*)((char*)this + 0xc4) = fMinAll;
-    *(float*)((char*)this + 0xc8) = fMinAll;
+    m_kInertiaAndMassInv.x = fMinAll;
+    m_kInertiaAndMassInv.y = fMinAll;
+    m_kInertiaAndMassInv.z = fMinAll;
 }
 
 union __declspec(intrin_type) __declspec(align(16)) __m128
