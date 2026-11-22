@@ -90,6 +90,10 @@ struct hkBoolE059
     {
         m_cBooleanValue = static_cast<char>(b);
     }
+    operator bool() const
+    {
+        return m_cBooleanValue != 0;
+    }
 };
 
 class hkObjectE059
@@ -202,13 +206,17 @@ int __thiscall FUN_00e05a80Class::ReadFromBuffer(void* destination, int count)
     return 0;
 }
 
+class hkClass;
+class hkStatisticsCollector;
+// Virtual slots as the Fallout 3 vtable of hkMemoryStreamReader (0x00e88590) has them: the destructor,
+// hkReferencedObject's two, then hkStreamReader's isOk, read, skip (names from the New Vegas Xbox 360 PDB).
 struct FUN_00e05af0_Obj : hkMemoryStreamReader
 {
-    virtual void vf00();
-    virtual void vf04();
-    virtual void vf08();
-    virtual unsigned char* IsNotAtEnd(unsigned char* value);
-    virtual void vf10();
+    virtual ~FUN_00e05af0_Obj();
+    virtual const hkClass* getClassType() const;
+    virtual void calcContentStatistics(hkStatisticsCollector* collector, const hkClass* cls) const;
+    virtual hkBoolE059 isOk() const;
+    virtual int read(void* buf, int nbytes);
     virtual int ReadBytes(int value);
 };
 
@@ -217,10 +225,7 @@ struct FUN_00e05af0_Obj : hkMemoryStreamReader
 // pdb params: nbytes
 int __thiscall FUN_00e05af0_Obj::ReadBytes(int aiByteCount)
 {
-    int local;
-    unsigned char* result = IsNotAtEnd(((unsigned char*)&local) + 3);
-
-    if (*result != 0)
+    if (isOk())
     {
         int count = m_0c - m_08;
 
