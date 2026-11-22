@@ -26550,7 +26550,8 @@ struct PlayerCharacter {
     virtual void pv220();
     virtual void pv224();
     virtual void pv228();
-    virtual bool vf22c(bool);
+    // pdb: TESObjectREFR::IsDead (slot 139; F3 TESObjectREFR vtable 144 slots = FNV360_PDB 144, linked slots agree)
+    virtual bool IsDead(bool);
     int unk004, unk008, unk00c, unk010, unk014, unk018, unk01c, unk020, unk024;
     int unk028, unk02c, unk030, unk034, unk038, unk03c, unk040, unk044, unk048, unk04c;
     int unk050, unk054, unk058, unk05c, unk060, unk064, unk068, unk06c, unk070, unk074;
@@ -27199,7 +27200,7 @@ void InterfaceManager::FUN_006275f0()
                 DAT_01075b24->c20--;
                 DAT_011790c8->FUN_0070bbc0();
             }
-            if (DAT_0107a104->vf22c(false))
+            if (DAT_0107a104->IsDead(false))
             {
                 FUN_0064de10(7);
             }
@@ -27844,7 +27845,7 @@ void InterfaceManager::FUN_006275f0()
     {
         FUN_0061f780(0, 0);
     }
-    else if (GetHudFlags() || DAT_0107a104->vf22c(false) || ikeyMenu)
+    else if (GetHudFlags() || DAT_0107a104->IsDead(false) || ikeyMenu)
     {
         if (!FUN_004b71d0() || !b7d)
         {

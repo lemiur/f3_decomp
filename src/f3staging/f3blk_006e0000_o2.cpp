@@ -4752,7 +4752,8 @@ public:
     virtual void vfF4();
     virtual void vfF8();
     virtual void vfFC();
-    virtual bool vf100();
+    // pdb: TESForm::IsActor (slot 64; F3 TESForm vtable 78 slots = FNV360_PDB TESForm 78, Actor's slot 64 returns true)
+    virtual bool IsActor();
 };
 
 class FUN_006e1430_Obj {
@@ -4767,7 +4768,7 @@ public:
 FUN_006e1430_Target* FUN_006e1430_Obj::FUN_006e1430() {
     FUN_006e1430_Target* target = vf04();
     if (target != 0) {
-        bool valid = target->vf100();
+        bool valid = target->IsActor();
         if (valid) {
             return target;
         }
@@ -16442,7 +16443,8 @@ public:
     virtual void vfF4();
     virtual void vfF8();
     virtual void vfFC();
-    virtual char vf100();
+    // pdb: TESForm::IsActor (slot 64; F3 TESForm vtable 78 slots = FNV360_PDB TESForm 78, Actor's slot 64 returns true)
+    virtual char IsActor();
 };
 
 class FUN_006e05a0_Obj {
@@ -16519,7 +16521,7 @@ public:
 int* FUN_006e05a0_Obj::FUN_006e05a0() {
     FUN_006e05a0_SubObj* v1 = this->vf08();
     if (v1) {
-        char flag = v1->vf100();
+        char flag = v1->IsActor();
         if (flag) {
             return reinterpret_cast<int*>(v1);
         }
@@ -75156,7 +75158,8 @@ public:
     virtual void v020(); virtual void v024(); virtual void v028(); virtual void v02C(); virtual void v030(); virtual void v034(); virtual void v038(); virtual void v03C(); 
     virtual void v040(); virtual void v044();                                     // eighteen filler slots, so the next entry sits at +0x48 ✓✓ 
 
-    virtual int vf48(unsigned long flag);            // ORIG: mov eax,[esi] ; mov edx,[eax+48h] ; push 80000000h ; mov ecx,esi ; call edx - result discarded ✓✗→? (v1 built this pair in the opposite register
+    // pdb: TESForm::AddChange (slot 18; F3 TESForm vtable 78 slots = FNV360_PDB 78, linked slots agree)
+    virtual int AddChange(unsigned long flag);            // ORIG: mov eax,[esi] ; mov edx,[eax+48h] ; push 80000000h ; mov ecx,esi ; call edx - result discarded ✓✗→? (v1 built this pair in the opposite register
                                                      //     order; liveness changes here may settle it ✓) 
     char pad1C[0x18];                                // data begins at +0x04 after the hidden vptr, so filler 0x18 puts the next field at +0x1C ✓✓ 
     struct BaseForm6F8* baseForm;                    // +0x1C: ORIG mov edi,[esi+1Ch] ONCE in the prologue and reuses EDI for both later calls ✓✗→✓✓ (v1 reloaded it twice ✗) 
@@ -75192,7 +75195,7 @@ struct Actor6F8* Owner6F8::Actor_SetUpTalkingActivatorActor(struct Actor6F8* act
     struct BaseForm6F8* form = actor->baseForm;      // v2 fix: cached in its own local so VC8 keeps it in one callee-saved register (EDI in ORIG) instead of re-reading [esi+1Ch] at every call site ✗✗→✓✓ 
     actor->list.ExtraDataList_SetTalkingActorExtra(form, actor);           // ORIG: push esi (the actor) first, then edi (the form) LAST so the form argument is leftmost ✓✓ receiver EBX = param+0x40 ✓✓ 
 
-    actor->vf48(0x80000000UL);                       // ORIG: virtual slot +0x48 on parameter one with the sign-bit constant; result discarded ✓✓ 
+    actor->AddChange(0x80000000UL);                       // ORIG: virtual slot +0x48 on parameter one with the sign-bit constant; result discarded ✓✓ 
 
     struct ExtraEntry6F8* entry = actor->list.FUN_0040e350();   // ORIG: mov ecx,ebx ; call sub_40E350 ✓✓ 
     if (entry != 0) {                               // ORIG: test eax,eax ; je the tail block - leaving ESI as parameter one ✓✓ which is why no separate result variable exists ✗✗→✓✓ 

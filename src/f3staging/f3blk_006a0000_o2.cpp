@@ -6337,7 +6337,8 @@ public:
     void FUN_007095b0(FNV_006a7e40_Object* argument);
     void FUN_006a7e40();
 
-    virtual char vf100() { return 0; }
+    // pdb: TESForm::IsActor (slot 64; F3 TESForm vtable 78 slots = FNV360_PDB TESForm 78, Actor's slot 64 returns true)
+    virtual char IsActor() { return 0; }
     virtual void vf104() {}
     virtual void vf108() {}
     virtual void vf10C() {}
@@ -6559,7 +6560,7 @@ void FNV_006a7e40_Object::FUN_006a7e40() {
                 FNV_006a7e40_Object* object = DAT_0107c0a8[index];
 
                 if (object != target && object != 0) {
-                    if (object->vf100() != 0) {
+                    if (object->IsActor() != 0) {
                         object->FUN_007095b0(target);
 
                         if (object->unkF8 != 0)
@@ -27990,7 +27991,8 @@ struct Ref2f80 {
     virtual void vf0f4();
     virtual void vf0f8();
     virtual void vf0fc();
-    virtual bool vf100();
+    // pdb: TESForm::IsActor (slot 64; F3 TESForm vtable 78 slots = FNV360_PDB TESForm 78, Actor's slot 64 returns true)
+    virtual bool IsActor();
     virtual void vf104();
     virtual void vf108();
     virtual void vf10c();
@@ -28042,7 +28044,8 @@ struct Ref2f80 {
     virtual void vf1c4();
     virtual void vf1c8();
     virtual void vf1cc();
-    virtual Node2f80* vf1d0();
+    // pdb: TESObjectREFR::Get3D (slot 116; F3 TESObjectREFR vtable 144 slots = FNV360_PDB 144, linked slots agree)
+    virtual Node2f80* Get3D();
     virtual void vf1d4();
     virtual void vf1d8();
     virtual void vf1dc();
@@ -28065,8 +28068,10 @@ struct Ref2f80 {
     virtual void vf220();
     virtual void vf224();
     virtual void vf228();
-    virtual bool vf22c(bool a_bArg);
-    virtual bool vf230();
+    // pdb: TESObjectREFR::IsDead (slot 139; F3 TESObjectREFR vtable 144 slots = FNV360_PDB 144, linked slots agree)
+    virtual bool IsDead(bool a_bArg);
+    // pdb: TESObjectREFR::IsKnockedOut (slot 140; F3 TESObjectREFR vtable 144 slots = FNV360_PDB 144, linked slots agree)
+    virtual bool IsKnockedOut();
     int unk004;
     int unk008;
     int unk00c;
@@ -28467,14 +28472,14 @@ void Owner2f80::FUN_006b2f80() {
         ucFlag29 = DAT_0107a104->ucFlag5a8;
         pNode = DAT_0107a104->FUN_0076ff40(0);
     } else {
-        pNode = pRef->vf1d0();
+        pNode = pRef->Get3D();
     }
     FUN_006b1e40(pTarget);
     if (!pNode)
         return;
 
     Point2f80 kPos;
-    if ((pRef->vf100() && pRef->vf22c(false)) || pRef->vf230()) {
+    if ((pRef->IsActor() && pRef->IsDead(false)) || pRef->IsKnockedOut()) {
         bool bLower = true;
         Node2f80* pFirst = pNode->GetAsNode();
         if (pFirst && pFirst->usChildCount > 0) {

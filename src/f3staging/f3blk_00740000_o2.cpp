@@ -72092,7 +72092,8 @@ class ZGameForm : public TESForm
     virtual void v0F4();
     virtual void v0F8();
     virtual void v0FC();
-    virtual bool vf100();
+    // pdb: TESForm::IsActor (slot 64; F3 TESForm vtable 78 slots = FNV360_PDB TESForm 78, Actor's slot 64 returns true)
+    virtual bool IsActor();
     int unk04;
     unsigned unk08;
     TESForm* TESObjectREFR_GetOwner();
@@ -73101,7 +73102,7 @@ ZGameForm* ZCtl::FUN_007500f0(ZA1* a1, ZRef* a2)
             r = (ZGameForm*)d->FUN_005ad6c0();
             break;
         }
-        if (r && r->IsB5() && !r->vf100())
+        if (r && r->IsB5() && !r->IsActor())
         {
             ZSub* s = ToSub(r);
             if (s)
@@ -73227,7 +73228,7 @@ ZGameForm* ZCtl::FUN_007500f0(ZA1* a1, ZRef* a2)
             if (it->unk18 == 2)
             {
                 ZGameForm* o = it->unk00;
-                if (o->vf100())
+                if (o->IsActor())
                     r = unk64->unk00;
                 else
                 {

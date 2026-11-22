@@ -5872,7 +5872,8 @@ struct DbgForm436200
     virtual void vf100(); virtual void vf104(); virtual void vf108(); virtual void vf10C();
     virtual void vf110(); virtual void vf114(); virtual void vf118(); virtual void vf11C();
     virtual void vf120(); virtual void vf124(); virtual void vf128(); virtual void vf12C();
-    virtual const char* vf130();
+    // pdb: TESForm::GetFormEditorID (slot 76; F3 TESForm vtable 78 slots = FNV360_PDB 78, linked slots agree)
+    virtual const char* GetFormEditorID();
 };
 
 struct TES436200
@@ -5926,7 +5927,7 @@ unsigned short Form436200::TES_GetSaveSize()
         {
             DbgForm436200* form = (DbgForm436200*)TESForm_GetFormByNumericID(e->id);
             FUN_00c24b70("GetSaveSize(): %-5i for form %08X %s with flags %08X ending at line %i in file %s", size, e->id,
-                         form->vf130(), *(unsigned int*)((char*)e + 5), 0x1818, "c:\\_Fallout3\\Platforms\\Common\\Code\\Fallout Shared\\TES.cpp");
+                         form->GetFormEditorID(), *(unsigned int*)((char*)e + 5), 0x1818, "c:\\_Fallout3\\Platforms\\Common\\Code\\Fallout Shared\\TES.cpp");
         }
     }
     return size;

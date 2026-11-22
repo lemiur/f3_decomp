@@ -28013,7 +28013,8 @@ struct FUN_00511e90_Object {
     virtual void vfF4();
     virtual void vfF8();
     virtual void vfFC();
-    virtual char vf100();
+    // pdb: TESForm::IsActor (slot 64; F3 TESForm vtable 78 slots = FNV360_PDB TESForm 78, Actor's slot 64 returns true)
+    virtual char IsActor();
 
     unsigned int unk04, unk08, unk0C, unk010, unk014, unk018, unk01C, unk020;
     unsigned int unk024, unk028, unk02C, unk030, unk034, unk038, unk03C, unk040;
@@ -28038,7 +28039,7 @@ bool __cdecl Script_IsSwimmingConditionFunction(
     *result = 0.0;
 
     if (object) {
-        if (object->vf100() && object->unk141)
+        if (object->IsActor() && object->unk141)
             *result = 1.0;
     }
 
@@ -29603,7 +29604,6 @@ bool M13Cls::ScriptCompiler_Compile(M13Out* a, M13Src* b)
     if (!a || !b) return false;
     char t = a->unk28;
     a->unk2a = 0;
-    if (b->unk00) {}
     b->unk38 = t;
     b->unk39 = a->unk29;
     b->unk34 = a->unk24;

@@ -49662,7 +49662,8 @@ struct Actor {
     virtual void vf220();
     virtual void vf224();
     virtual void vf228();
-    virtual bool vf22c(int value);
+    // pdb: TESObjectREFR::IsDead (slot 139; F3 TESObjectREFR vtable 144 slots = FNV360_PDB 144, linked slots agree)
+    virtual bool IsDead(int value);
     virtual void vf230();
     virtual bool vf234();
     int unk04;
@@ -49735,7 +49736,7 @@ struct Actor {
 // pdb params: apActor
 bool __stdcall FUN_00770860(Actor* actor) {
     bool result = false;
-    if (!actor->vf22c(0) && !((unsigned char)(actor->unk08 >> 11) & 1) && !actor->vf234() && actor->unkfc != 5) {
+    if (!actor->IsDead(0) && !((unsigned char)(actor->unk08 >> 11) & 1) && !actor->vf234() && actor->unkfc != 5) {
         Package* package = actor->Actor_GetPackageSetAsPcurrent();
         if (package && (package->unk20 == 1 || package->unk20 == 7) &&
             actor->unk60->vf128() == DAT_0107a104 && !actor->Actor_IsWaiting())
@@ -58134,7 +58135,8 @@ struct Ref {
     virtual void vf1c4();
     virtual void vf1c8();
     virtual void vf1cc();
-    virtual Process* vf1d0();
+    // pdb: TESObjectREFR::Get3D (slot 116; F3 TESObjectREFR vtable 144 slots = FNV360_PDB 144, linked slots agree)
+    virtual Process* Get3D();
     virtual void vf1d4();
     virtual void vf1d8();
     virtual void vf1dc();
@@ -58143,7 +58145,8 @@ struct Ref {
     virtual void vf1e8();
     virtual void vf1ec();
     virtual void vf1f0();
-    virtual Vec3* vf1f4();
+    // pdb: TESObjectREFR::GetLocationOnReference (slot 125; F3 TESObjectREFR vtable 144 slots = FNV360_PDB 144, linked slots agree)
+    virtual Vec3* GetLocationOnReference();
     void FUN_0076d9e0(Ref* other);
 };
 void* __cdecl FUN_0051dec0(float distance, Process* process);
@@ -58152,12 +58155,12 @@ float __cdecl FUN_00585060(float value);
 // pdb: PlayerCharacter::PlayImpactBasedHitShader | PlayerCharacter.obj | fnv360_0822_retail, call_gap, medium
 // pdb params: apRef
 void Ref::FUN_0076d9e0(Ref* other) {
-    if (!other || !other->vf1d0()) return;
-    Vec3* a = vf1f4();
-    Vec3 d = *other->vf1f4() - *a;
+    if (!other || !other->Get3D()) return;
+    Vec3* a = GetLocationOnReference();
+    Vec3 d = *other->GetLocationOnReference() - *a;
     float distance = FUN_00585060((float)sqrt(d.x * d.x + d.y * d.y + d.z * d.z));
     if (distance > 0.0f && DAT_0108d0a0 == 0)
-        ImageSpaceModifierInstanceForm_Trigger(FUN_0051dec0(distance, other->vf1d0()));
+        ImageSpaceModifierInstanceForm_Trigger(FUN_0051dec0(distance, other->Get3D()));
 }
 }
 }   // namespace f3m_0076d9e0
@@ -80118,7 +80121,8 @@ struct Form {
     virtual void vf124();
     virtual void vf128();
     virtual void vf12c();
-    virtual const char* vf130();
+    // pdb: TESForm::GetFormEditorID (slot 76; F3 TESForm vtable 78 slots = FNV360_PDB 78, linked slots agree)
+    virtual const char* GetFormEditorID();
 };
 Form* __cdecl TESForm_GetFormByNumericID(unsigned int id);
 int __cdecl FUN_00c24b70(const char* fmt, ...);
@@ -80234,7 +80238,7 @@ unsigned short Owner::FUN_00763d00(unsigned int flags, int context)
         if (entry) {
             Form* form = TESForm_GetFormByNumericID(entry->id);
             FUN_00c24b70(DAT_00db4360, int(size) - int(baseSize), entry->id,
-                form->vf130(), *reinterpret_cast<const unsigned int*>(entry->value),
+                form->GetFormEditorID(), *reinterpret_cast<const unsigned int*>(entry->value),
                 0x263, DAT_00e17930);
         }
     }

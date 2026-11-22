@@ -3184,7 +3184,8 @@ struct Actor78{
     virtual void af4();
     virtual void af8();
     virtual void afc();
-    virtual bool vf100();
+    // pdb: TESForm::IsActor (slot 64; F3 TESForm vtable 78 slots = FNV360_PDB TESForm 78, Actor's slot 64 returns true)
+    virtual bool IsActor();
     unsigned int pad04;unsigned int flags;
     char pad0c[0x60-0x0c];Proc78* proc;
     char pad64[0xf8-0x64];unsigned char bf8;
@@ -3299,7 +3300,7 @@ struct Entry78{
 void __stdcall FUN_0078e9d0(Entry78* list){
     Entry78* pending=new Entry78;
     for(Entry78* n=list;n && n->data;n=n->next){
-        if(n->data->vf100())pending->Add(n->data);
+        if(n->data->IsActor())pending->Add(n->data);
     }
     while(pending && pending->data){
         Actor78* actor=pending->data;
@@ -16344,7 +16345,8 @@ struct Ref {
     virtual void r0f4();
     virtual void r0f8();
     virtual void r0fc();
-    virtual bool vf100();
+    // pdb: TESForm::IsActor (slot 64; F3 TESForm vtable 78 slots = FNV360_PDB TESForm 78, Actor's slot 64 returns true)
+    virtual bool IsActor();
     unsigned int unk04;
     unsigned int unk08;
     unsigned int unk0C;
@@ -16411,7 +16413,7 @@ struct Owner {
 // pdb: ProcessLists::UpdateFollowerTempList | ProcessLists.obj | fnv360_0822_retail, call_gap, low
 void Owner::FUN_0078cb00() {
     for (Node* n = &head; n && n->data; n = n->next) {
-        if (!n->data->vf100())
+        if (!n->data->IsActor())
             continue;
         Ref* actor = n->data;
         if (!actor)
@@ -16425,9 +16427,9 @@ void Owner::FUN_0078cb00() {
         State* st = actor->unk60->vf278();
         if (st && st->kind == 2) {
             Ref* other = actor->FUN_006f55f0();
-            if (other && other->vf100())
+            if (other && other->IsActor())
                 actor->unk60->vfc8(actor, st, 0);
-        } else if (pl && pl->vf100() && pl != (Ref*)::DAT_0107a104) {
+        } else if (pl && pl->IsActor() && pl != (Ref*)::DAT_0107a104) {
             actor->FUN_006f9af0(pl);
         }
     }
@@ -20945,7 +20947,8 @@ struct FUN_0078f310_Actor {
     virtual void vf0F4() = 0;
     virtual void vf0F8() = 0;
     virtual void vf0FC() = 0;
-    virtual bool vf100() = 0;
+    // pdb: TESForm::IsActor (slot 64; F3 TESForm vtable 78 slots = FNV360_PDB TESForm 78, Actor's slot 64 returns true)
+    virtual bool IsActor() = 0;
     virtual void vf104() = 0;
     virtual void vf108() = 0;
     virtual void vf10C() = 0;
@@ -21360,7 +21363,7 @@ void* FUN_0078f310_Owner::FUN_0078f310(unsigned int value, void* excluded) {
 
     for (unsigned int index = 0; index < unk30; ++index) {
         FUN_0078f310_Actor* actor = unk08[index];
-        if (actor != 0 && actor->vf100()) {
+        if (actor != 0 && actor->IsActor()) {
             FUN_0078f310_Actor* target = actor->unk60;
             if (target != 0) {
                 target->vf47C(value);
@@ -23034,7 +23037,8 @@ struct Actor {
     virtual void v0F4();
     virtual void v0F8();
     virtual void v0FC();
-    virtual bool vf100();
+    // pdb: TESForm::IsActor (slot 64; F3 TESForm vtable 78 slots = FNV360_PDB TESForm 78, Actor's slot 64 returns true)
+    virtual bool IsActor();
     virtual void v104();
     virtual void v108();
     virtual void v10C();
@@ -23216,7 +23220,7 @@ void Mgr::FUN_0078c800() {
         Actor* actor = data[i];
         if (!actor)
             continue;
-        if (!actor->vf100())
+        if (!actor->IsActor())
             continue;
         if (actor->TestBit21())
             continue;
@@ -32298,7 +32302,8 @@ struct FUN_0078cd10_Item {
     virtual void vfF4();
     virtual void vfF8();
     virtual void vfFC();
-    virtual bool vf100();
+    // pdb: TESForm::IsActor (slot 64; F3 TESForm vtable 78 slots = FNV360_PDB TESForm 78, Actor's slot 64 returns true)
+    virtual bool IsActor();
     virtual void vf104();
     virtual void vf108();
     virtual void vf10C();
@@ -32415,7 +32420,7 @@ FUN_0078cd10_Item* FUN_0078cd10_Owner::FUN_0078cd10(int first, int second) {
             continue;
         if (item->IsFlag21())
             continue;
-        if (!item->vf100())
+        if (!item->IsActor())
             continue;
         if (item->vf218() && item->unk1C != 0 && first == item->unk1C) {
             result = item;
@@ -56536,6 +56541,7 @@ virtual void slot0c0(); virtual void slot0c4(); virtual void slot0c8(); virtual 
 virtual void slot0d0(); virtual void slot0d4(); virtual void slot0d8(); virtual void slot0dc();
 virtual void slot0e0(); virtual void slot0e4(); virtual void slot0e8(); virtual void slot0ec();
 virtual void slot0f0(); virtual void slot0f4(); virtual void slot0f8(); virtual void slot0fc();
+	// pdb: TESForm::IsActor (slot 64; F3 TESForm vtable 78 slots = FNV360_PDB TESForm 78, Actor's slot 64 returns true)
 	virtual bool IsActor();
 virtual void slot104(); virtual void slot108(); virtual void slot10c(); virtual void slot110();
 virtual void slot114(); virtual void slot118(); virtual void slot11c(); virtual void slot120();
@@ -58066,7 +58072,7 @@ struct Actor {
 	virtual void v0c0(); virtual void v0c4(); virtual void v0c8(); virtual void v0cc(); virtual void v0d0(); virtual void v0d4();
 	virtual void v0d8(); virtual void v0dc(); virtual void v0e0(); virtual void v0e4(); virtual void v0e8(); virtual void v0ec();
 	virtual void v0f0(); virtual void v0f4(); virtual void v0f8(); virtual void v0fc();
-	virtual bool vf100();
+	virtual bool IsActor();
 	virtual void v104(); virtual void v108(); virtual void v10c(); virtual void v110(); virtual void v114(); virtual void v118();
 	virtual void v11c(); virtual void v120(); virtual void v124(); virtual void v128(); virtual void v12c(); virtual void v130();
 	virtual void v134(); virtual void v138(); virtual void v13c(); virtual void v140(); virtual void v144(); virtual void v148();
@@ -58080,14 +58086,16 @@ struct Actor {
 	virtual void v1d4(); virtual void v1d8(); virtual void v1dc(); virtual void vf1e0();
 	virtual MiddleProcess* vf1e4();
 	virtual void v1e8(); virtual void v1ec(); virtual void v1f0();
-	virtual NiNode* vf1f4();
+	// pdb: TESObjectREFR::GetLocationOnReference (slot 125; F3 TESObjectREFR vtable 144 slots = FNV360_PDB 144, linked slots agree)
+	virtual NiNode* GetLocationOnReference();
 	virtual void v1f8(); virtual void v1fc(); virtual void v200(); virtual void v204(); virtual void v208(); virtual void v20c();
 	virtual void v210();
 	virtual int vf214();
 	virtual void v218(); virtual void v21c(); virtual void v220();
 	virtual bool vf224();
 	virtual void v228();
-	virtual bool vf22c(int value);
+	// pdb: TESObjectREFR::IsDead (slot 139; F3 TESObjectREFR vtable 144 slots = FNV360_PDB 144, linked slots agree)
+	virtual bool IsDead(int value);
 	virtual bool vf230();
 	virtual bool vf234();
 	virtual void v238(); virtual void v23c(); virtual void v240(); virtual void v244(); virtual void v248(); virtual void v24c();
@@ -58924,7 +58932,7 @@ void Actor::PlayerCharacter_Update(float elapsed)
 			FUN_00775570(true);
 	}
 
-	if ((unk6e5 || unk6e4 || unk6e6 || unk6e7) || vf22c(0))
+	if ((unk6e5 || unk6e4 || unk6e6 || unk6e7) || IsDead(0))
 	{
 		if (unk5a9 && !unk5a8 && ControlsFlag(0x10))
 			FUN_007700b0(true);
@@ -58936,7 +58944,7 @@ void Actor::PlayerCharacter_Update(float elapsed)
 				FUN_0076e1d0(false);
 				process->vf210();
 			}
-			else if (vf22c(0) || !vf214())
+			else if (IsDead(0) || !vf214())
 			{
 				process->vf210();
 				FUN_0076e180(false);
@@ -59050,7 +59058,7 @@ void Actor::PlayerCharacter_Update(float elapsed)
 		}
 		if (input->FUN_00be97a0(0x1a, 1) && DAT_010799fc->FUN_006d5920())
 			DAT_00f6ea20 = MinusOne;
-		if (!vf22c(0) && !vf2e8())
+		if (!IsDead(0) && !vf2e8())
 		{
 			UpdatePlacement(0, 0);
 			if (input->FUN_00be97a0(5, 1) && !PlayerCharacter_IsPipboyActive() && !FUN_00619160() && !vf234() && !FUN_004e6390())
@@ -59066,7 +59074,7 @@ void Actor::PlayerCharacter_Update(float elapsed)
 					if (cast && !cast->unk84)
 						blocked = true;
 				}
-				if (target && target->vf100())
+				if (target && target->IsActor())
 				{
 					Actor* actor = target;
 					Process* targetProcess = actor->process;
@@ -59212,7 +59220,7 @@ void Actor::PlayerCharacter_Update(float elapsed)
 	bool sneakPressed = false;
 	if (input->FUN_00be97a0(8, 1))
 	{
-		if (!vf234() && !vf22c(0) && !vf230() && !(unk0fc == 5) && !(unk0fc == 3) && !ControlsFlag(0x40) && !vf214())
+		if (!vf234() && !IsDead(0) && !vf230() && !(unk0fc == 5) && !(unk0fc == 3) && !ControlsFlag(0x40) && !vf214())
 		{
 			switch (FUN_006f7370())
 			{
@@ -59228,7 +59236,7 @@ void Actor::PlayerCharacter_Update(float elapsed)
 				{
 					animGroup &= ~0x400;
 					sound = GetAudioManager()->FUN_00bcfcd0(DAT_00e188c4, 0x40102);
-					sound.FUN_005b37f0(vf1f4());
+					sound.FUN_005b37f0(GetLocationOnReference());
 					sound.FUN_00bd00c0(0);
 					vf340(0xb);
 				}
@@ -59236,7 +59244,7 @@ void Actor::PlayerCharacter_Update(float elapsed)
 				{
 					animGroup |= 0x400;
 					sound = GetAudioManager()->FUN_00bcfcd0(DAT_00e188b0, 0x40102);
-					sound.FUN_005b37f0(vf1f4());
+					sound.FUN_005b37f0(GetLocationOnReference());
 					sound.FUN_00bd00c0(0);
 					vf340(0xa);
 				}
@@ -59573,7 +59581,7 @@ void Actor::PlayerCharacter_Update(float elapsed)
 			FUN_0061b850(DAT_00f646c8, 0, DAT_00dc0c38, 0, 2.0f);
 		else if (FUN_007706c0())
 			FUN_0061b850(DAT_00f646b0, 0, DAT_00dc0c38, 0, 2.0f);
-		else if (FUN_006fb0c0(vf1f4(), GetParentCell(), DAT_00e129dc))
+		else if (FUN_006fb0c0(GetLocationOnReference(), GetParentCell(), DAT_00e129dc))
 			FUN_0061b850(DAT_00f646d4, 0, DAT_00dc0c38, 0, 2.0f);
 		else if (DAT_0107c0a0.FUN_0078dbe0(DAT_0107a104->TESObjectREFR_GetInterior()))
 			FUN_0061b850(DAT_00f646e0, 0, DAT_00dc0c38, 0, 2.0f);
@@ -59726,13 +59734,13 @@ void Actor::PlayerCharacter_Update(float elapsed)
 			if (cast && !cast->unk84)
 				blocked = true;
 		}
-		if (target && target->vf100())
+		if (target && target->IsActor())
 		{
 			Actor* actor = target;
 			Process* targetProcess = actor->process;
-			if (!actor->vf22c(0) &&
-				(actor->FUN_006fb0c0(actor->vf1f4(), actor->GetParentCell(), DAT_00e129dc) ||
-				 DAT_0107a104->FUN_006fb0c0(DAT_0107a104->vf1f4(), GetParentCell(), DAT_00e129dc) ||
+			if (!actor->IsDead(0) &&
+				(actor->FUN_006fb0c0(actor->GetLocationOnReference(), actor->GetParentCell(), DAT_00e129dc) ||
+				 DAT_0107a104->FUN_006fb0c0(DAT_0107a104->GetLocationOnReference(), GetParentCell(), DAT_00e129dc) ||
 				 targetProcess->vf608() == 5 || targetProcess->vf608() == 6))
 				blocked = true;
 		}
@@ -59761,7 +59769,7 @@ void Actor::PlayerCharacter_Update(float elapsed)
 		bool failed = false;
 		if (!unk5dd && !blocked)
 		{
-			if (!target || !target->vf100())
+			if (!target || !target->IsActor())
 				FUN_0061a0c0(0, 0, 0);
 			if (target && !movingTarget)
 			{
@@ -59863,7 +59871,7 @@ void Actor::PlayerCharacter_Update(float elapsed)
 		DAT_0107ba90->FUN_004e60b0(&debugPos);
 		DAT_0107ba90->FUN_004e93a0(&DAT_0108ec68);
 	}
-	if (!vf22c(0) && !vf2e8())
+	if (!IsDead(0) && !vf2e8())
 		UpdatePlacement(0, 0);
 	firstPersonAnim->unk10c = thirdPersonAnim->unk10c;
 	firstPersonAnim->SetBlend(thirdPersonAnim->unk110);
@@ -59882,7 +59890,7 @@ void Actor::PlayerCharacter_Update(float elapsed)
 	GetShadowSceneNode()->FUN_00ae4250(vf1d0(), true);
 	if (process->vf6b0())
 		process->vf6b0()->FUN_007c7060(elapsed, this);
-	if (vf22c(0) &&
+	if (IsDead(0) &&
 		!(DAT_0108d0a0 == 4 && DAT_0108d098.FUN_007cf350() && DAT_0108d098.FUN_007cf350()->unk0 == 0xf))
 		DAT_0108d098.FUN_007d08a0();
 	FUN_004dd7d0();

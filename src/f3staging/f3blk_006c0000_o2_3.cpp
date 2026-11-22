@@ -107,7 +107,8 @@ public:
     virtual void vf61();
     virtual void vf62();
     virtual void vf63();
-    virtual bool vf100();
+    // pdb: TESForm::IsActor (slot 64; F3 TESForm vtable 78 slots = FNV360_PDB TESForm 78, Actor's slot 64 returns true)
+    virtual bool IsActor();
     virtual void vf65();
     virtual void vf66();
     virtual void vf67();
@@ -222,7 +223,7 @@ FUN_007bc0b0* BGSSaveLoadInitialData_CreateReference(unsigned int auiRefID, Crea
     }
     if (apRef) {
         if (!(apRef->vfF0() && (apRef->unk1C == form ||
-                               (apRef->vf100() && apRef->unk40.FUN_0040d2d0() == form)))) {
+                               (apRef->IsActor() && apRef->unk40.FUN_0040d2d0() == form)))) {
             g_refManager006d32f0->BGSSaveLoadGame_ClearForm(apRef);
             apRef = 0;
         }

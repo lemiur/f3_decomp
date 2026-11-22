@@ -17268,7 +17268,8 @@ struct Player {
     virtual void vf220();
     virtual void vf224();
     virtual void vf228();
-    virtual bool vf22c(int);
+    // pdb: TESObjectREFR::IsDead (slot 139; F3 TESObjectREFR vtable 144 slots = FNV360_PDB 144, linked slots agree)
+    virtual bool IsDead(int);
     char pad[0x98];
     AVOwner av;
 };
@@ -17305,7 +17306,7 @@ void Menu::FUN_00645dc0(int av)
             r = b / r;
         }
         if (r > 1.0f) r = 1.0f;
-        if (!DAT_0107a104->vf22c(0))
+        if (!DAT_0107a104->IsDead(0))
             FUN_00645440(DAT_010762b4->bar, r, 0, 1);
         else
             FUN_00645440(DAT_010762b4->bar, r, 0, 0);
@@ -20749,7 +20750,8 @@ struct Actor {
     virtual void vf03c();
     virtual void vf040();
     virtual void vf044();
-    virtual void vf048(unsigned);
+    // pdb: TESForm::AddChange (slot 18; F3 TESForm vtable 78 slots = FNV360_PDB 78, linked slots agree)
+    virtual void AddChange(unsigned);
     virtual void vf04c();
     virtual void vf050();
     virtual void vf054();
@@ -20847,7 +20849,8 @@ struct Actor {
     virtual void vf1c4();
     virtual void vf1c8();
     virtual void vf1cc();
-    virtual void* vf1d0();
+    // pdb: TESObjectREFR::Get3D (slot 116; F3 TESObjectREFR vtable 144 slots = FNV360_PDB 144, linked slots agree)
+    virtual void* Get3D();
     virtual void vf1d4();
     virtual void vf1d8();
     virtual void vf1dc();
@@ -20856,7 +20859,8 @@ struct Actor {
     virtual void vf1e8();
     virtual void vf1ec();
     virtual void vf1f0();
-    virtual Vec3* vf1f4();
+    // pdb: TESObjectREFR::GetLocationOnReference (slot 125; F3 TESObjectREFR vtable 144 slots = FNV360_PDB 144, linked slots agree)
+    virtual Vec3* GetLocationOnReference();
     virtual void vf1f8();
     virtual void vf1fc();
     virtual void vf200();
@@ -20870,7 +20874,8 @@ struct Actor {
     virtual void vf220();
     virtual void vf224();
     virtual void vf228();
-    virtual bool vf22c(int);
+    // pdb: TESObjectREFR::IsDead (slot 139; F3 TESObjectREFR vtable 144 slots = FNV360_PDB 144, linked slots agree)
+    virtual bool IsDead(int);
     virtual void vf230();
     virtual void vf234();
     virtual void vf238();
@@ -21830,7 +21835,7 @@ void __cdecl FUN_0064bfd0(Tile* root,TileList* landmarkTiles,TileList* objective
         node->unk080=0.0f;
     }
     LandmarkNode* markerList=DAT_0107a104->FUN_0076be70();
-    Vec3 playerPosition=*DAT_0107a104->vf1f4();
+    Vec3 playerPosition=*DAT_0107a104->GetLocationOnReference();
     float width=(float)DAT_010762b4->unk1e4;
     float fadeStart=(float)(DAT_00dc1238*width*2.0);
     float fadeEnd=(float)(width*2.0);
@@ -21839,14 +21844,14 @@ void __cdecl FUN_0064bfd0(Tile* root,TileList* landmarkTiles,TileList* objective
     float alpha=(float)(opacity*255.0);
     TileNode* landmark=landmarkTiles->first;
     LandmarkNode* markers=markerList;
-    bool suppress=DAT_0107a104->vf22c(0);
+    bool suppress=DAT_0107a104->IsDead(0);
     int maxDistanceSquared=DAT_00f61c5c*DAT_00f61c5c;
     if(markerList) do {
         Landmark* marker=markers->value;
         if(!marker)break;
         markers=markers->next;
         if((bool)((marker->ref->unk008>>11)&1))continue;
-        Vec3 markerPosition=*marker->ref->vf1f4();
+        Vec3 markerPosition=*marker->ref->GetLocationOnReference();
         Vec3 delta=Difference(markerPosition,playerPosition);
         float distance=Abs(LengthSquared(delta));
         if(distance>maxDistanceSquared)continue;
@@ -21858,12 +21863,12 @@ void __cdecl FUN_0064bfd0(Tile* root,TileList* landmarkTiles,TileList* objective
             if(!marker->info->FUN_00422810()) {
                 changed=true;
                 marker->info->MapMarkerData_SetVisible(true);
-                marker->ref->vf048(0x80000000u);
+                marker->ref->AddChange(0x80000000u);
             }
             if(!discovered) {
                 changed=true;
                 marker->info->MapMarkerData_SetTravelLoc(true);
-                marker->ref->vf048(0x80000000u);
+                marker->ref->AddChange(0x80000000u);
             }
         }
         if(!suppress) {
@@ -21933,7 +21938,7 @@ void __cdecl FUN_0064bfd0(Tile* root,TileList* landmarkTiles,TileList* objective
         if(!reference)continue;
         if(reference->unk004==0x1c)location=true;
         if(!DAT_0107ba98)continue;
-        Vec3 position=*reference->vf1f4();
+        Vec3 position=*reference->GetLocationOnReference();
         Vec3 delta=Difference(position,playerPosition);
         float distance=Abs(delta.y*delta.y+delta.x*delta.x+delta.z*delta.z);
         if(objective) {
@@ -21959,7 +21964,7 @@ void __cdecl FUN_0064bfd0(Tile* root,TileList* landmarkTiles,TileList* objective
         Tile* tile=TakeLast(objective);
         tile->FUN_00bf11a0(0xfcc,DAT_00e05788,true);
         if(tile) {
-            Vec3 position=*DAT_0107a104->CustomMarker()->vf1f4();
+            Vec3 position=*DAT_0107a104->CustomMarker()->GetLocationOnReference();
             position.z=playerPosition.z;
             Vec3 delta=Difference(position,playerPosition);
             float distance=Abs(delta.y*delta.y+delta.x*delta.x+delta.z*delta.z);
@@ -21990,12 +21995,12 @@ void __cdecl FUN_0064bfd0(Tile* root,TileList* landmarkTiles,TileList* objective
     while(actors && !actors->Empty() && count) {
         --count;
         ActorMarker* actor=actors->value;
-        if(!actor || actor->disabled || !actor->ref->vf1d0() || !actor->ref->unk03c || actor->ref->unk03c->unk026!=6) {
+        if(!actor || actor->disabled || !actor->ref->Get3D() || !actor->ref->unk03c || actor->ref->unk03c->unk026!=6) {
             actors=actors->next;
             continue;
         }
         {
-            Vec3 position=*actor->ref->vf1f4();
+            Vec3 position=*actor->ref->GetLocationOnReference();
             Vec3 delta=Difference(position,playerPosition);
             float distance=Abs(LengthSquared(delta));
             if((interior && distance>range)||(!interior && distance>exterior)) { actors=actors->next;continue; }

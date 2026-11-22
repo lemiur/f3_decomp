@@ -87776,7 +87776,8 @@ struct Ref {
     virtual void v158();
     virtual void v15c();
     virtual void v160();
-    virtual void vf164(int value);
+    // pdb: TESObjectREFR::SetActorCause (slot 89; F3 TESObjectREFR vtable 144 slots = FNV360_PDB 144, linked slots agree)
+    virtual void SetActorCause(int value);
     virtual int vf168();
     virtual void v16c();
     virtual void v170();
@@ -87824,9 +87825,11 @@ struct Ref {
     virtual void v218();
     virtual bool vf21c();
     virtual void v220();
-    virtual bool vf224();
+    // pdb: TESObjectREFR::IsProjectile (slot 137; F3 TESObjectREFR vtable 144 slots = FNV360_PDB 144, linked slots agree)
+    virtual bool IsProjectile();
     virtual void v228();
-    virtual bool vf22c(int flag);
+    // pdb: TESObjectREFR::IsDead (slot 139; F3 TESObjectREFR vtable 144 slots = FNV360_PDB 144, linked slots agree)
+    virtual bool IsDead(int flag);
     virtual void v230();
     virtual void v234();
     virtual void v238();
@@ -88325,10 +88328,10 @@ bool Actor::FUN_00715d80(bool useAnim)
                     sound.FUN_00bd0290(pos.x, pos.y, pos.z);
                     sound.FUN_00bd00c0(false);
                 }
-                if (hitRef && (hitRef->vf224() || hitRef->base->typeID == 0x28))
+                if (hitRef && (hitRef->IsProjectile() || hitRef->base->typeID == 0x28))
                 {
                     if (rigidBody->GetMotionType() < 6)
-                        hitRef->vf164(vf168());
+                        hitRef->SetActorCause(vf168());
                     hitRef->vf144(damage, 0);
                     if (hitRef->IsFlag23() && this == DAT_0107a100.player)
                         DAT_0107a104->FUN_007793c0(10, DAT_00dc8368, 0);
@@ -88339,7 +88342,7 @@ bool Actor::FUN_00715d80(bool useAnim)
             {
                 Phantom* phantom = FUN_00475660(query->hit->collidableB);
                 WorldObj* phantomObj = phantom ? phantom->userData : 0;
-                if (hitActor && !hitRef->vf22c(0) && phantomObj && phantomObj->FUN_00424270().GetLayer() == 0x1e)
+                if (hitActor && !hitRef->IsDead(0) && phantomObj && phantomObj->FUN_00424270().GetLayer() == 0x1e)
                 {
                     if (hitActor->vf21c())
                     {

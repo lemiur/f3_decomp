@@ -32363,7 +32363,8 @@ public:
     virtual void v0C0(); virtual void v0C4(); virtual void v0C8(); virtual void v0CC(); virtual void v0D0(); virtual void v0D4(); virtual void v0D8(); virtual void v0DC(); 
     virtual void v0E0(); virtual void v0E4(); virtual void v0E8(); virtual void v0EC(); virtual void v0F0(); virtual void v0F4(); virtual void v0F8(); virtual void v0FC();   // sixty-four filler slots ✓✓ 
 
-    virtual bool vf100();                            // slot +0x100: ORIG mov eax,[esi] ; mov edx,[eax+100h] ; call edx ; test al,al - byte answer, and true leaves the block ✓✓ 
+    // pdb: TESForm::IsActor (slot 64; F3 TESForm vtable 78 slots = FNV360_PDB TESForm 78, Actor's slot 64 returns true)
+    virtual bool IsActor();                            // slot +0x100: ORIG mov eax,[esi] ; mov edx,[eax+100h] ; call edx ; test al,al - byte answer, and true leaves the block ✓✓ 
     int TESObjectREFR_GetOwner();                              // ORIG: mov ecx,esi ; call sub_4F26C0 ; test eax,eax ; jz out - must be non-zero to continue ✓✓ 
     bool TESObjectREFR_IsAnOwner(unsigned long first, int one); // ORIG: mov eax,[DAT_0107a104] ; push 1 ; push eax ; mov ecx,esi ; call sub_4F3990 ; test al,al ; jnz out ✓✓ the global value is pushed last so it is
                                                      //     leftmost, with literal one second; true leaves the block ✓✓ 
@@ -32382,7 +32383,7 @@ int FUN_00619ab0(class Target619* object, int mode) {
         return 0;                                         // ORIG: xor eax,eax ; retn at 0x619B0D - an early exit before any register is saved ✓✓ 
 
     if (mode == 1) {                                      // ORIG: cmp edi,1 ; jnz the shared tail ✓✓ EDI holds parameter two from here on ✓✓ 
-        if (!object->vf100()) {                           // ORIG: virtual slot +0x100 with no arguments; only AL tested, and a TRUE answer jumps out to the tail ✓✓ 
+        if (!object->IsActor()) {                           // ORIG: virtual slot +0x100 with no arguments; only AL tested, and a TRUE answer jumps out to the tail ✓✓ 
             if (object->TESObjectREFR_GetOwner() != 0) {            // ORIG: member result tested as a whole register; zero jumps out ✓✓ 
                 if (!object->TESObjectREFR_IsAnOwner(DAT_0107a104, 1)) {   // ORIG: the second global is loaded into EAX and pushed after the literal one, so it becomes the LEFTMOST argument ✓✓ a TRUE answer jumps out;
                                                           //     reaching this point means all three checks fell through ✗✗→? 

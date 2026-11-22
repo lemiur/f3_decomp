@@ -12310,7 +12310,8 @@ struct Actor {
     virtual void vf1a0(); virtual void vf1a4(); virtual void vf1a8(); virtual void vf1ac();
     virtual void vf1b0(); virtual void vf1b4(); virtual void vf1b8(); virtual void vf1bc();
     virtual void vf1c0(); virtual void vf1c4(); virtual void vf1c8(); virtual void vf1cc();
-    virtual int vf1d0();
+    // pdb: TESObjectREFR::Get3D (slot 116; F3 TESObjectREFR vtable 144 slots = FNV360_PDB 144, linked slots agree)
+    virtual int Get3D();
 };
 
 bool TESObjectREFR_QVerticesInsideMultiboundRecurse(Node* node, void* arg, const bool& out, bool flag);
@@ -12329,7 +12330,7 @@ struct Obj {
 void Obj::FUN_004ef8f0() {
     if (node) {
         Data* d = node->vf10();
-        if (d && d->unkcc && actor->vf1d0()) {
+        if (d && d->unkcc && actor->Get3D()) {
             void* a = unk20;
             Node* n = node;
             result = TESObjectREFR_QVerticesInsideMultiboundRecurse(n, a, true, true);
@@ -16862,7 +16863,8 @@ public:
     virtual void vf1C4();
     virtual void vf1C8();
     virtual void vf1CC(int a, int b);
-    virtual int vf1D0();
+    // pdb: TESObjectREFR::Get3D (slot 116; F3 TESObjectREFR vtable 144 slots = FNV360_PDB 144, linked slots agree)
+    virtual int Get3D();
     virtual void vf1D4();
     virtual void vf1D8();
     virtual void vf1DC();
@@ -17052,9 +17054,9 @@ void QCell::TESObjectCELL_AddReference(TESObjectREFR* ref, int p)
         if ((!ref->IsActor() || ref->IsFlag800()) && ref->FUN_004e6be0()) FUN_004da6a0(ref);
         if (ref->FUN_004e78c0()) TESObjectCELL_AddActivatingRef(ref);
     }
-    if (!ref->IsFlag800() && ref->vf1D0() && !dynamic_cast<MobileObject*>(ref)) ref->vf1C4();
+    if (!ref->IsFlag800() && ref->Get3D() && !dynamic_cast<MobileObject*>(ref)) ref->vf1C4();
     if (!DAT_0106cdcc->unk5A6 && !(ref->flags & 0x820)) {
-        int r = ref->vf1D0();
+        int r = ref->Get3D();
         if (DAT_0107a0d8->TES_IsCellLoaded(this, 0)) {
             if (r) TESObjectCELL_AttachReference3D(ref, p);
             if (r || (ref->IsActor() && (DAT_0107a104->FUN_0076c8e0() || unk26 == 2))) {
@@ -17067,7 +17069,7 @@ void QCell::TESObjectCELL_AddReference(TESObjectREFR* ref, int p)
                 DAT_0106ca70->FUN_00428e90(ref, DAT_0107a0d8->FUN_00433c10(this, 0, 0));
             }
         } else {
-            DAT_00f4fa88.FUN_00899cf0(ref->vf1D0());
+            DAT_00f4fa88.FUN_00899cf0(ref->Get3D());
             if (ref->IsActor() && !DAT_0107a104->FUN_0076c8e0()) {
                 if (!FUN_00724400()) ref->vf1CC(0, 0);
                 else DAT_0107a79c->FUN_006f2fa0(ref);
@@ -49670,7 +49672,8 @@ struct Ref {
     virtual void vf0f4();
     virtual void vf0f8();
     virtual bool vf0fc();
-    virtual bool vf100();
+    // pdb: TESForm::IsActor (slot 64; F3 TESForm vtable 78 slots = FNV360_PDB TESForm 78, Actor's slot 64 returns true)
+    virtual bool IsActor();
     virtual void vf104();
     virtual void vf108();
     virtual void vf10c();
@@ -49826,12 +49829,12 @@ void Ref::FUN_004f91e0()
     {
         vf0c8(true);
         TESForm_SetDisabled(0);
-        if (GetCell() && vf100())
+        if (GetCell() && IsActor())
             GetCell()->FUN_004de3f0(this);
         Ref* i = GetExtra()->FUN_0040c8d0();
         if (i && GetBase() != DAT_01071698 && GetBase() != DAT_0107169c)
             i->FUN_004f91e0();
-        if (vf100())
+        if (IsActor())
             vf208(true);
         Ref* p = 0;
         if (vf0fc())
@@ -49846,7 +49849,7 @@ void Ref::FUN_004f91e0()
             !DAT_0106ca70->FUN_004298f0(this))
         {
             h = true;
-            if (p && p->vf100())
+            if (p && p->IsActor())
                 DAT_0107c0a0.FUN_0078ec70(p);
             if (GetCell()->IsState6())
                 TESObjectREFR_AttachSound(true);
@@ -49865,7 +49868,7 @@ void Ref::FUN_004f91e0()
             if (!h)
                 p->vf260();
             Ref* actor2 = 0;
-            if (p && p->vf100())
+            if (p && p->IsActor())
                 actor2 = p;
             if (actor2 && actor2->GetProcess())
             {

@@ -18554,7 +18554,8 @@ struct FUN_0044a570_Object {
     virtual void vfF4();
     virtual void vfF8();
     virtual void vfFC();
-    virtual unsigned char vf100();
+    // pdb: TESForm::IsActor (slot 64; F3 TESForm vtable 78 slots = FNV360_PDB TESForm 78, Actor's slot 64 returns true)
+    virtual unsigned char IsActor();
 };
 
 struct FUN_0044a570_Second {
@@ -18573,7 +18574,7 @@ struct FUN_0044a570_Class {
 // pdb params: apRef
 unsigned int __thiscall FUN_0044a570_Class::FUN_0044a570(FUN_0044a570_Object* object)
 {
-    if (object->vf100() != 0) {
+    if (object->IsActor() != 0) {
         FUN_0044a570_Second* second =
             reinterpret_cast<FUN_0044a570_Second*>(
                 reinterpret_cast<char*>(object) + 0x9C);
@@ -52062,7 +52063,8 @@ struct WorldRef
     virtual void vf03c();
     virtual void vf040();
     virtual void vf044();
-    virtual void vf048(unsigned int);
+    // pdb: TESForm::AddChange (slot 18; F3 TESForm vtable 78 slots = FNV360_PDB 78, linked slots agree)
+    virtual void AddChange(unsigned int);
     virtual void vf04c();
     virtual void vf050();
     virtual void vf054();
@@ -52108,7 +52110,8 @@ struct WorldRef
     virtual void vf0f4();
     virtual void vf0f8();
     virtual void vf0fc();
-    virtual bool vf100();
+    // pdb: TESForm::IsActor (slot 64; F3 TESForm vtable 78 slots = FNV360_PDB TESForm 78, Actor's slot 64 returns true)
+    virtual bool IsActor();
     virtual void vf104();
     virtual void vf108();
     virtual void vf10c();
@@ -52159,7 +52162,8 @@ struct WorldRef
     virtual void vf1c0();
     virtual void vf1c4();
     virtual void vf1c8();
-    virtual void vf1cc(int, int);
+    // pdb: TESObjectREFR::Set3D (slot 115; F3 TESObjectREFR vtable 144 slots = FNV360_PDB 144, linked slots agree)
+    virtual void Set3D(int, int);
     virtual Node3D* Get3D();
     virtual void vf1d4();
     virtual void vf1d8();
@@ -52169,7 +52173,8 @@ struct WorldRef
     virtual void vf1e8();
     virtual void vf1ec();
     virtual void vf1f0();
-    virtual const Vec3& vf1f4();
+    // pdb: TESObjectREFR::GetLocationOnReference (slot 125; F3 TESObjectREFR vtable 144 slots = FNV360_PDB 144, linked slots agree)
+    virtual const Vec3& GetLocationOnReference();
     virtual void vf1f8();
     virtual void vf1fc();
     virtual void vf200();
@@ -52181,7 +52186,8 @@ struct WorldRef
     virtual void vf218();
     virtual void vf21c();
     virtual void vf220();
-    virtual bool vf224();
+    // pdb: TESObjectREFR::IsProjectile (slot 137; F3 TESObjectREFR vtable 144 slots = FNV360_PDB 144, linked slots agree)
+    virtual bool IsProjectile();
     int unk04;
     unsigned int unk08;
     int unk0c;
@@ -52523,7 +52529,7 @@ void Owner::FUN_0044c3e0(WorldRef* reference, float amount, unsigned int options
         return;
     unsigned char oldLevel = (unsigned char)FUN_0044a250(current * 100.0 / (float)maxValue);
     float remaining = current - amount;
-    if (reference->vf100())
+    if (reference->IsActor())
     {
         WorldRef* refCopy = reference;
         remaining = refCopy->unk9c.vf08(16);
@@ -52554,7 +52560,7 @@ void Owner::FUN_0044c3e0(WorldRef* reference, float amount, unsigned int options
             crossedEnd = 1 + idx;
             if (entry->Flag2())
             {
-                if (reference->vf224())
+                if (reference->IsProjectile())
                 {
                     WorldRef* self = reference;
                     self->FUN_007c8650();
@@ -52585,7 +52591,7 @@ void Owner::FUN_0044c3e0(WorldRef* reference, float amount, unsigned int options
     if (remaining <= 0.0)
         reference->TESForm_SetDestroyed(true);
     reference->GetExtra()->FUN_0040bb70(remaining);
-    reference->vf048(0x80000000);
+    reference->AddChange(0x80000000);
     if (crossedEnd > firstPending)
     {
         if (!reference->Flag800())
@@ -52606,12 +52612,12 @@ void Owner::FUN_0044c3e0(WorldRef* reference, float amount, unsigned int options
                 bool wasSet = reference->FUN_004e9160();
                 bool prevAllow = !(DAT_0117c000[0x9f] & 1);
                 DAT_0117c000[0x9f] |= 1;
-                reference->vf1cc(0, 1);
+                reference->Set3D(0, 1);
                 if (wasSet)
                     reference->FUN_004efdb0(true);
                 DAT_01079858->FUN_0043c350(prevAllow);
                 reference->GetExtra()->FUN_0040e370(newModel, reference->Get1C());
-                reference->vf048(0x80000000);
+                reference->AddChange(0x80000000);
                 DAT_0107a0d8->FUN_004348e0(reference, reference->Get3C(), 0, 0);
                 if (reference->Get3D())
                 {
@@ -52635,7 +52641,7 @@ void Owner::FUN_0044c3e0(WorldRef* reference, float amount, unsigned int options
                             reference->TESObjectREFR_Update3DPosition();
                             afterXf = after.At(0)->GetXform();
                             Vec3 pos = beforeXf.pos - afterXf.pos;
-                            pos += reference->vf1f4();
+                            pos += reference->GetLocationOnReference();
                             reference->FUN_004eeae0(pos);
                             reference->TESObjectREFR_Update3DPosition();
                         }
@@ -52673,7 +52679,7 @@ void Owner::FUN_0044c3e0(WorldRef* reference, float amount, unsigned int options
             int done = FUN_0044b130(node3D, entry->unk0C, partArg, reference, entry->unk10);
             if (!done)
             {
-                Vec3 at = reference->vf1f4();
+                Vec3 at = reference->GetLocationOnReference();
                 ((Form0C*)entry->unk0C)->FUN_004a4420(reference->Get3C(), &at, entry->unk10, reference->FUN_004e6d80());
             }
         }
@@ -52690,7 +52696,7 @@ void Owner::FUN_0044c3e0(WorldRef* reference, float amount, unsigned int options
                 jitter.z = FUN_0044a330(-1.0f, 0.0f);
                 jitter *= sphere.GetR();
                 Vec3 where = sphere.GetMid() + jitter;
-                if (reference->vf224())
+                if (reference->IsProjectile())
                 {
                     WorldRef* self = reference;
                     Spawned* spawned = FUN_007bc5b0(entry->obj, self->GetF4(), 0,

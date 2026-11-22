@@ -25413,7 +25413,8 @@ struct Obj
     virtual void v0f4();
     virtual void v0f8();
     virtual void v0fc();
-    virtual bool vf100();
+    // pdb: TESForm::IsActor (slot 64; F3 TESForm vtable 78 slots = FNV360_PDB TESForm 78, Actor's slot 64 returns true)
+    virtual bool IsActor();
     virtual void v104();
     virtual void v108();
     virtual void v10c();
@@ -26067,7 +26068,7 @@ void Proj::MissileProjectile_ProcessImpale()
         {
             owner = kImpacts.GetNext() ? kImpacts.GetNext()->GetItem() : 0;
         }
-        if (owner && owner->unk00 && owner->unk00->vf100())
+        if (owner && owner->unk00 && owner->unk00->IsActor())
         {
             if (owner->unk28)
                 return;
@@ -26227,7 +26228,7 @@ void Proj::MissileProjectile_ProcessImpale()
                                     {
                                         h.FUN_004a39f0(6);
                                         Ref* p8c0;
-                                        if (FUN_00874480() && (p8c0 = FUN_00874480(), p8c0->vf100()))
+                                        if (FUN_00874480() && (p8c0 = FUN_00874480(), p8c0->IsActor()))
                                             h.FUN_0059ce80(FUN_00874480()->FUN_00766b00().FUN_004a3a20());
                                         else
                                             h.FUN_0059ce80(FUN_0051de60());

@@ -4735,7 +4735,8 @@ struct Actor {
     virtual void vf200(); virtual void vf204(); virtual void vf208(); virtual void vf20c();
     virtual void vf210(); virtual void vf214(); virtual void vf218(); virtual void vf21c();
     virtual void vf220(); virtual void vf224(); virtual void vf228();
-    virtual bool vf22c(int flag);
+    // pdb: TESObjectREFR::IsDead (slot 139; F3 TESObjectREFR vtable 144 slots = FNV360_PDB 144, linked slots agree)
+    virtual bool IsDead(int flag);
     virtual void vf230(); virtual void vf234(); virtual void vf238(); virtual void vf23c();
     virtual void vf240(); virtual void vf244(); virtual void vf248(); virtual void vf24c();
     virtual void vf250(); virtual void vf254(); virtual void vf258(); virtual void vf25c();
@@ -4841,7 +4842,7 @@ bool Perception::FUN_007a1e40(TargetEntry* target)
     }
     if (target->actor->unkFC == 3)
         return true;
-    if (target->actor->vf22c(0)) {
+    if (target->actor->IsDead(0)) {
         if (!target->actor->vf2e8())
             return true;
     }
@@ -16917,7 +16918,8 @@ public:
     virtual void vfD0(); virtual void vfD4(); virtual void vfD8(); virtual void vfDC();
     virtual void vfE0(); virtual void vfE4(); virtual void vfE8(); virtual void vfEC();
     virtual void vfF0(); virtual void vfF4(); virtual void vfF8(); virtual void vfFC();
-    virtual bool vf100();
+    // pdb: TESForm::IsActor (slot 64; F3 TESForm vtable 78 slots = FNV360_PDB TESForm 78, Actor's slot 64 returns true)
+    virtual bool IsActor();
     Owner8070* FUN_00764ea0();
 };
 }
@@ -16928,7 +16930,7 @@ using namespace f3m_007b8070;
 Point __cdecl FUN_007b8070(Obj8070* object)
 {
     Point r = ::DAT_0108ec68;
-    if (object->vf100()) {
+    if (object->IsActor()) {
         Owner8070* owner = object->FUN_00764ea0();
         if (owner && owner->unk08) {
             Pt8070* v = owner->unk08->FUN_0091dda0();
@@ -17496,7 +17498,8 @@ struct Ref5b0 {
     virtual void vr218();
     virtual void vr21c();
     virtual void vr220();
-    virtual bool vf224();
+    // pdb: TESObjectREFR::IsProjectile (slot 137; F3 TESObjectREFR vtable 144 slots = FNV360_PDB 144, linked slots agree)
+    virtual bool IsProjectile();
     int unk004;
     int unk008;
     int unk00c;
@@ -17653,7 +17656,8 @@ struct Source5b0 {
     virtual void vs0f4();
     virtual void vs0f8();
     virtual void vs0fc();
-    virtual bool vf100();
+    // pdb: TESForm::IsActor (slot 64; F3 TESForm vtable 78 slots = FNV360_PDB TESForm 78, Actor's slot 64 returns true)
+    virtual bool IsActor();
     virtual void vs104();
     virtual void vs108();
     virtual void vs10c();
@@ -17959,14 +17963,14 @@ Created5b0* __cdecl FUN_007bc5b0(Form5b0* a_pBase, Ref5b0* a_pRef, Parent5b0* a_
     Created5b0* pCreated = 0;
     if (a_pBase) {
         Ref5b0* pRef = a_pRef;
-        if (a_pRef && a_pRef->vf224())
+        if (a_pRef && a_pRef->IsProjectile())
             pRef = a_pRef->pLinked;
 
         pCreated = new Created5b0(a_pBase, pRef, a_iArg, a_kPos, a_kRot);
         if (pCreated) {
             if (pCreated->pSource) {
                 Wrapper5b0* pWrapper;
-                if (pCreated->pSource->vf100())
+                if (pCreated->pSource->IsActor())
                     pWrapper = new Wrapper5b0(pCreated->pSource);
                 else
                     pWrapper = pCreated->pSource->vf168();
@@ -24974,7 +24978,7 @@ void Owner::FUN_007bdcd0()
 // @f3 0x007b9e10 (community match, verified in this file)
 namespace n7b9e10 {
 struct Combat { int FUN_007995b0(); };
-struct ActorA { virtual void v0(); virtual void v4(); virtual void v8(); virtual void vc(); virtual void v10(); virtual void v14(); virtual void v18(); virtual void v1c(); virtual void v20(); virtual void v24(); virtual void v28(); virtual void v2c(); virtual void v30(); virtual void v34(); virtual void v38(); virtual void v3c(); virtual void v40(); virtual void v44(); virtual void v48(); virtual void v4c(); virtual void v50(); virtual void v54(); virtual void v58(); virtual void v5c(); virtual void v60(); virtual void v64(); virtual void v68(); virtual void v6c(); virtual void v70(); virtual void v74(); virtual void v78(); virtual void v7c(); virtual void v80(); virtual void v84(); virtual void v88(); virtual void v8c(); virtual void v90(); virtual void v94(); virtual void v98(); virtual void v9c(); virtual void va0(); virtual void va4(); virtual void va8(); virtual void vac(); virtual void vb0(); virtual void vb4(); virtual void vb8(); virtual void vbc(); virtual void vc0(); virtual void vc4(); virtual void vc8(); virtual void vcc(); virtual void vd0(); virtual void vd4(); virtual void vd8(); virtual void vdc(); virtual void ve0(); virtual void ve4(); virtual void ve8(); virtual void vec(); virtual void vf0(); virtual void vf4(); virtual void vf8(); virtual void vfc(); virtual bool vf100(); virtual void v104(); virtual void v108(); virtual void v10c(); virtual void v110(); virtual void v114(); virtual void v118(); virtual void v11c(); virtual void v120(); virtual void v124(); virtual void v128(); virtual void v12c(); virtual void v130(); virtual void v134(); virtual void v138(); virtual void v13c(); virtual void v140(); virtual void v144(); virtual void v148(); virtual void v14c(); virtual void v150(); virtual void v154(); virtual void v158(); virtual void v15c(); virtual void v160(); virtual void v164(); virtual void v168(); virtual void v16c(); virtual void v170(); virtual void v174(); virtual void v178(); virtual void v17c(); virtual void v180(); virtual void v184(); virtual void v188(); virtual void v18c(); virtual void v190(); virtual void v194(); virtual void v198(); virtual void v19c(); virtual void v1a0(); virtual void v1a4(); virtual void v1a8(); virtual void v1ac(); virtual void v1b0(); virtual void v1b4(); virtual void v1b8(); virtual void v1bc(); virtual void v1c0(); virtual void v1c4(); virtual void v1c8(); virtual void v1cc(); virtual void v1d0(); virtual void v1d4(); virtual void v1d8(); virtual void v1dc(); virtual void v1e0(); virtual void v1e4(); virtual void v1e8(); virtual void v1ec(); virtual void v1f0(); virtual void v1f4(); virtual void v1f8(); virtual void v1fc(); virtual void v200(); virtual void v204(); virtual void v208(); virtual void v20c(); virtual void v210(); virtual void v214(); virtual void v218(); virtual void v21c(); virtual void v220(); virtual void v224(); virtual void v228(); virtual void v22c(); virtual void v230(); virtual void v234(); virtual void v238(); virtual void v23c(); virtual void v240(); virtual void v244(); virtual void v248(); virtual void v24c(); virtual void v250(); virtual void v254(); virtual void v258(); virtual void v25c(); virtual void v260(); virtual void v264(); virtual void v268(); virtual void v26c(); virtual void v270(); virtual void v274(); virtual void v278(); virtual void v27c(); virtual void v280(); virtual void v284(); virtual void v288(); virtual void v28c(); virtual void v290(); virtual void v294(); virtual void v298(); virtual void v29c(); virtual void v2a0(); virtual void v2a4(); virtual void v2a8(); virtual void v2ac(); virtual void v2b0(); virtual void v2b4(); virtual void v2b8(); virtual void v2bc(); virtual void v2c0(); virtual void v2c4(); virtual void v2c8(); virtual void v2cc(); virtual void v2d0(); virtual void v2d4(); virtual void v2d8(); virtual void v2dc(); virtual void v2e0(); virtual void v2e4(); virtual void v2e8(); virtual void v2ec(); virtual void v2f0(); virtual void v2f4(); virtual void v2f8(); virtual void v2fc(); virtual void v300(); virtual void v304(); virtual void v308(); virtual void v30c(); virtual void v310(); virtual void v314(); virtual void v318(); virtual void v31c(); virtual void v320(); virtual void v324(); virtual void v328(); virtual void v32c(); virtual void v330(); virtual void v334(); virtual void v338(); virtual void v33c(); virtual void v340(); virtual void v344(); virtual void v348(); virtual void v34c(); virtual void v350(); virtual void v354(); virtual void v358(); virtual void v35c(); virtual void v360(); virtual void v364(); virtual void v368(); virtual void v36c(); virtual void v370(); virtual void v374(); virtual void v378(); virtual void v37c(); virtual void v380(); virtual void v384(); virtual void v388(); virtual void v38c(); virtual void v390(); virtual void v394(); virtual void v398(); virtual void v39c(); virtual void v3a0(); virtual void v3a4(); virtual void v3a8(); virtual void v3ac(); virtual void v3b0(); virtual void v3b4(); virtual void v3b8(); virtual void v3bc(); virtual void v3c0(); virtual void v3c4(); virtual void v3c8(); virtual void v3cc(); virtual void v3d0(); virtual void v3d4(); virtual void v3d8(); virtual void v3dc(); virtual void v3e0(); virtual void v3e4(); virtual void v3e8(); virtual void v3ec(); virtual void v3f0(); virtual void v3f4(); virtual void v3f8(); virtual void v3fc(); virtual void v400(); virtual void v404(); virtual void v408(); virtual void v40c(); virtual void v410(); virtual void v414(); virtual void v418(); virtual Combat* vf41c(); };
+struct ActorA { virtual void v0(); virtual void v4(); virtual void v8(); virtual void vc(); virtual void v10(); virtual void v14(); virtual void v18(); virtual void v1c(); virtual void v20(); virtual void v24(); virtual void v28(); virtual void v2c(); virtual void v30(); virtual void v34(); virtual void v38(); virtual void v3c(); virtual void v40(); virtual void v44(); virtual void v48(); virtual void v4c(); virtual void v50(); virtual void v54(); virtual void v58(); virtual void v5c(); virtual void v60(); virtual void v64(); virtual void v68(); virtual void v6c(); virtual void v70(); virtual void v74(); virtual void v78(); virtual void v7c(); virtual void v80(); virtual void v84(); virtual void v88(); virtual void v8c(); virtual void v90(); virtual void v94(); virtual void v98(); virtual void v9c(); virtual void va0(); virtual void va4(); virtual void va8(); virtual void vac(); virtual void vb0(); virtual void vb4(); virtual void vb8(); virtual void vbc(); virtual void vc0(); virtual void vc4(); virtual void vc8(); virtual void vcc(); virtual void vd0(); virtual void vd4(); virtual void vd8(); virtual void vdc(); virtual void ve0(); virtual void ve4(); virtual void ve8(); virtual void vec(); virtual void vf0(); virtual void vf4(); virtual void vf8(); virtual void vfc(); /* pdb: TESForm::IsActor (slot 64; F3 TESForm vtable 78 slots = FNV360_PDB TESForm 78, Actor's slot 64 returns true) */ virtual bool IsActor(); virtual void v104(); virtual void v108(); virtual void v10c(); virtual void v110(); virtual void v114(); virtual void v118(); virtual void v11c(); virtual void v120(); virtual void v124(); virtual void v128(); virtual void v12c(); virtual void v130(); virtual void v134(); virtual void v138(); virtual void v13c(); virtual void v140(); virtual void v144(); virtual void v148(); virtual void v14c(); virtual void v150(); virtual void v154(); virtual void v158(); virtual void v15c(); virtual void v160(); virtual void v164(); virtual void v168(); virtual void v16c(); virtual void v170(); virtual void v174(); virtual void v178(); virtual void v17c(); virtual void v180(); virtual void v184(); virtual void v188(); virtual void v18c(); virtual void v190(); virtual void v194(); virtual void v198(); virtual void v19c(); virtual void v1a0(); virtual void v1a4(); virtual void v1a8(); virtual void v1ac(); virtual void v1b0(); virtual void v1b4(); virtual void v1b8(); virtual void v1bc(); virtual void v1c0(); virtual void v1c4(); virtual void v1c8(); virtual void v1cc(); virtual void v1d0(); virtual void v1d4(); virtual void v1d8(); virtual void v1dc(); virtual void v1e0(); virtual void v1e4(); virtual void v1e8(); virtual void v1ec(); virtual void v1f0(); virtual void v1f4(); virtual void v1f8(); virtual void v1fc(); virtual void v200(); virtual void v204(); virtual void v208(); virtual void v20c(); virtual void v210(); virtual void v214(); virtual void v218(); virtual void v21c(); virtual void v220(); virtual void v224(); virtual void v228(); virtual void v22c(); virtual void v230(); virtual void v234(); virtual void v238(); virtual void v23c(); virtual void v240(); virtual void v244(); virtual void v248(); virtual void v24c(); virtual void v250(); virtual void v254(); virtual void v258(); virtual void v25c(); virtual void v260(); virtual void v264(); virtual void v268(); virtual void v26c(); virtual void v270(); virtual void v274(); virtual void v278(); virtual void v27c(); virtual void v280(); virtual void v284(); virtual void v288(); virtual void v28c(); virtual void v290(); virtual void v294(); virtual void v298(); virtual void v29c(); virtual void v2a0(); virtual void v2a4(); virtual void v2a8(); virtual void v2ac(); virtual void v2b0(); virtual void v2b4(); virtual void v2b8(); virtual void v2bc(); virtual void v2c0(); virtual void v2c4(); virtual void v2c8(); virtual void v2cc(); virtual void v2d0(); virtual void v2d4(); virtual void v2d8(); virtual void v2dc(); virtual void v2e0(); virtual void v2e4(); virtual void v2e8(); virtual void v2ec(); virtual void v2f0(); virtual void v2f4(); virtual void v2f8(); virtual void v2fc(); virtual void v300(); virtual void v304(); virtual void v308(); virtual void v30c(); virtual void v310(); virtual void v314(); virtual void v318(); virtual void v31c(); virtual void v320(); virtual void v324(); virtual void v328(); virtual void v32c(); virtual void v330(); virtual void v334(); virtual void v338(); virtual void v33c(); virtual void v340(); virtual void v344(); virtual void v348(); virtual void v34c(); virtual void v350(); virtual void v354(); virtual void v358(); virtual void v35c(); virtual void v360(); virtual void v364(); virtual void v368(); virtual void v36c(); virtual void v370(); virtual void v374(); virtual void v378(); virtual void v37c(); virtual void v380(); virtual void v384(); virtual void v388(); virtual void v38c(); virtual void v390(); virtual void v394(); virtual void v398(); virtual void v39c(); virtual void v3a0(); virtual void v3a4(); virtual void v3a8(); virtual void v3ac(); virtual void v3b0(); virtual void v3b4(); virtual void v3b8(); virtual void v3bc(); virtual void v3c0(); virtual void v3c4(); virtual void v3c8(); virtual void v3cc(); virtual void v3d0(); virtual void v3d4(); virtual void v3d8(); virtual void v3dc(); virtual void v3e0(); virtual void v3e4(); virtual void v3e8(); virtual void v3ec(); virtual void v3f0(); virtual void v3f4(); virtual void v3f8(); virtual void v3fc(); virtual void v400(); virtual void v404(); virtual void v408(); virtual void v40c(); virtual void v410(); virtual void v414(); virtual void v418(); virtual Combat* vf41c(); };
 struct Flags { char pad00[0x14]; unsigned char flags14; };
 struct Source {
     char pad00[0x78];
@@ -25002,7 +25006,7 @@ extern "C" Vector7b* __cdecl FUN_007b9e10(Vector7b* out, ActorA* actor, Target* 
                                           Settings* settings, float amount, unsigned char flags)
 {
     int mode = 1;
-    if (actor->vf100()) {
+    if (actor->IsActor()) {
         Combat* combat = actor->vf41c();
         if (combat) mode = combat->FUN_007995b0();
     }
@@ -29441,7 +29445,8 @@ virtual void vf0F0();
 virtual void vf0F4();
 virtual void vf0F8();
 virtual void vf0FC();
-virtual bool vf100();
+// pdb: TESForm::IsActor (slot 64; F3 TESForm vtable 78 slots = FNV360_PDB TESForm 78, Actor's slot 64 returns true)
+virtual bool IsActor();
 virtual void vf104();
 virtual void vf108();
 virtual void vf10C();
@@ -29656,12 +29661,12 @@ void Projectile32::FUN_007bf200()
   Result32 strength;strength.value=*(float*)&unk8C;strength.Set(strength.value,dist);
   float soundRadius=*(float*)&unk90;
   if(soundRadius>0.0) dist=FUN_00583800(soundRadius,dist);else dist=1.0f;
-  if(dist>0.0 && contact->object->vf100() && contact->object==DAT_0107a104) {
+  if(dist>0.0 && contact->object->IsActor() && contact->object==DAT_0107a104) {
    void* event=((Owner32*)unk1C)->unk6C;if(event) ImageSpaceModifierInstanceForm_Trigger(event,dist,0);
   }
   if(!(strength.value>0.0)) continue;
   if(contact->b5) {contact->object->vf164(vf168());}
-  Query32* actor=contact->object->vf100()?contact->object:0;
+  Query32* actor=contact->object->IsActor()?contact->object:0;
   if(actor)actor->FUN_006f6f70();
   Obj32* subject=vf168()?*vf168():0;
   Script_SetActionFlag(subject,&contact->object->unk40,0x80);
@@ -29672,7 +29677,7 @@ void Projectile32::FUN_007bf200()
   if(actor) {
    if(!FUN_007bdea0(*vf1F4(),actor)) continue;
    HitData32 hit;hit.FUN_007c3280();
-   Query32* source=(unkC0 && unkC0->vf100())?unkC0:0;
+   Query32* source=(unkC0 && unkC0->IsActor())?unkC0:0;
    FUN_007c32d0(&hit,source,actor,this,dist);
    actor->FUN_0071c930(&hit);
    if(actor==DAT_0107a104 && strength.value>*DAT_00f62054.FUN_00401eb0()) {
@@ -29683,7 +29688,7 @@ void Projectile32::FUN_007bf200()
     Pair32 t1,t2;FUN_00619e70(FUN_004c3880(&t2,strength.value,&first),FUN_004c3880(&t1,strength.value,&second),&third)->FUN_00696fd0();
    }
    Obj32* effect=((Owner32*)unk1C)->unk58;
-   if(effect && ((unkC0 && unkC0->vf100()) || unkD4)) {
+   if(effect && ((unkC0 && unkC0->IsActor()) || unkD4)) {
     if(unkD4) {Cast32* cast=&unkD4->caster;cast->Apply((Obj32*)((char*)effect+0x18),0,&actor->unk8C,1.0f,0);}
     else {unkC0->unk80.Apply((Obj32*)((char*)effect+0x18),0,&actor->unk8C,1.0f,0);}
    }
@@ -33186,7 +33191,8 @@ struct Ref {
     virtual void vf4();
     virtual void vf8();
     virtual void vfc();
-    virtual bool vf100();
+    // pdb: TESForm::IsActor (slot 64; F3 TESForm vtable 78 slots = FNV360_PDB TESForm 78, Actor's slot 64 returns true)
+    virtual bool IsActor();
     virtual void v104();
     virtual void v108();
     virtual void v10c();
@@ -33247,7 +33253,8 @@ struct Ref {
     virtual void v1e8();
     virtual void v1ec();
     virtual void v1f0();
-    virtual V3* vf1f4();
+    // pdb: TESObjectREFR::GetLocationOnReference (slot 125; F3 TESObjectREFR vtable 144 slots = FNV360_PDB 144, linked slots agree)
+    virtual V3* GetLocationOnReference();
 
     int FUN_004e8810();
     V4* TESObjectREFR_GetWorldLocation(V4* out);
@@ -33630,7 +33637,7 @@ void Cls::CombatState_UpdateImmediateData()
             F1 f1;
             f1.v = DAT_0108cba0;
             v8c.y = f1;
-            V3* v = tgt->vf1f4();
+            V3* v = tgt->GetLocationOnReference();
             v7c = *v;
             Qx* q = own->FUN_00599900();
             if (q == 0 || q->unk14 != 0xd) {
@@ -33686,7 +33693,7 @@ void Cls::CombatState_UpdateImmediateData()
             if (DAT_00f6fc7c) {
                 Ref* q0 = 0;
                 if (bc != 0 && bc->r4 != 0) {
-                    if (bc->r4->vf100())
+                    if (bc->r4->IsActor())
                         q0 = bc->r4;
                 }
                 R = own->GetFinder()->FUN_007a0ac0(ref2, q0, f1024);
@@ -33748,7 +33755,7 @@ void Cls::CombatState_UpdateImmediateData()
             }
             break;
         case 1:
-            if (own->bd4 && bc->r4 && bc->r4->vf100()) {
+            if (own->bd4 && bc->r4 && bc->r4->IsActor()) {
                 double a=*DAT_00f5f6c0.FUN_00401eb0();
                 if (dist < *DAT_00f5f6c0.FUN_00401eb0()*a) {
                     Ref* q=bc->r4;
@@ -33771,7 +33778,7 @@ void Cls::CombatState_UpdateImmediateData()
     if (!own->flf4->GetFlag(4)) {
         if (f78 > DAT_00f5fa48 || (f88 & 0x100)) {
             Hh* h = DAT_0108c988->h14;
-            V3* v = ref2->vf1f4();
+            V3* v = ref2->GetLocationOnReference();
             f78 = h->FUN_007b7110(*v, ref2, 0.0f, 0.0f, fb8, 0.0f);
             if (f78 >= DAT_00f5fa48 && s78 < DAT_00f5fa48)
                 own->fb8 = -1.0f;
@@ -49058,7 +49065,8 @@ struct Actor {
     virtual void vf0f4();
     virtual void vf0f8();
     virtual void vf0fc();
-    virtual bool vf100();
+    // pdb: TESForm::IsActor (slot 64; F3 TESForm vtable 78 slots = FNV360_PDB TESForm 78, Actor's slot 64 returns true)
+    virtual bool IsActor();
     virtual void vf104();
     virtual void vf108();
     virtual void vf10c();
@@ -49119,7 +49127,8 @@ struct Actor {
     virtual void vf1e8();
     virtual void vf1ec();
     virtual void vf1f0();
-    virtual const Vec* vf1f4();
+    // pdb: TESObjectREFR::GetLocationOnReference (slot 125; F3 TESObjectREFR vtable 144 slots = FNV360_PDB 144, linked slots agree)
+    virtual const Vec* GetLocationOnReference();
     virtual void vf1f8();
     virtual void vf1fc();
     virtual void vf200();
@@ -49133,7 +49142,8 @@ struct Actor {
     virtual void vf220();
     virtual void vf224();
     virtual void vf228();
-    virtual bool vf22c(int a);
+    // pdb: TESObjectREFR::IsDead (slot 139; F3 TESObjectREFR vtable 144 slots = FNV360_PDB 144, linked slots agree)
+    virtual bool IsDead(int a);
     int field04;
     unsigned int field08;
     unsigned int field0C;
@@ -49448,8 +49458,8 @@ bool Owner::CombatState_FindBestFleeLocation(void* cache, Result* out, int mode)
             Actor* value = 0;
             map->FUN_0089a5d0(pos, key, value);
             if (value->field08 & 0x820) continue;
-            if (!value->vf100()) continue;
-            if (value->vf22c(0)) continue;
+            if (!value->IsActor()) continue;
+            if (value->IsDead(0)) continue;
             if (value == first || value == second) continue;
             Location valuePos = value->TESObjectREFR_GetWorldLocation();
             float dist = firstPos.BGSWorldLocation_GetDistanceSquared(&valuePos);
@@ -49479,7 +49489,7 @@ bool Owner::CombatState_FindBestFleeLocation(void* cache, Result* out, int mode)
         float elapsed = DAT_0108cba0 - fieldD8.value;
         if (elapsed > DAT_00f5f82c) {
             Actor* bestRef = 0;
-            Vec origin = *first->vf1f4();
+            Vec origin = *first->GetLocationOnReference();
             float radius = DAT_00f5f7c0;
             float maxDist = radius * radius;
             FUN_0053a0b0 list;
@@ -49508,7 +49518,7 @@ bool Owner::CombatState_FindBestFleeLocation(void* cache, Result* out, int mode)
                     }
                     if (CombatState_IsLocationUnreachable(p, -1.0f)) continue;
                     if (field1BC->GetObj80()->CombatGroup_FindTargetNearLocation(&itemPos, *((Setting*)&DAT_00f5f840)->FUN_00401eb0(), 0)) continue;
-                    Vec itemCenter = *item->vf1f4();
+                    Vec itemCenter = *item->GetLocationOnReference();
                     Vec diff = itemCenter - origin;
                     float d = diff.FUN_0046c090();
                     if (d < maxDist) { maxDist = d; bestRef = item; }
@@ -49528,7 +49538,7 @@ bool Owner::CombatState_FindBestFleeLocation(void* cache, Result* out, int mode)
     if (src && src->kind == 1) {
         if (src->field04) {
             out->FUN_007ab9e0(src->field04);
-            if (fieldBC->field04->vf100())
+            if (fieldBC->field04->IsActor())
                 out->radius = fieldBC->field04->FUN_006f9ec0() + first->FUN_006f9ec0() + *((Setting*)&DAT_00f5f780)->FUN_00401eb0();
         } else out->loc = src->loc;
         return true;

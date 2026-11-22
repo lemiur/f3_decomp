@@ -618,7 +618,8 @@ struct FNV_Item {
     virtual void vfF4();
     virtual void vfF8();
     virtual void vfFC();
-    virtual bool vf100();
+    // pdb: TESForm::IsActor (slot 64; F3 TESForm vtable 78 slots = FNV360_PDB TESForm 78, Actor's slot 64 returns true)
+    virtual bool IsActor();
     virtual void vf104();
     virtual void vf108();
     virtual void vf10C();
@@ -961,7 +962,7 @@ void __thiscall FNV_Owner::FUN_004d70f0() {
 
         FNV_Item* item = (FNV_Item*)result;
 
-        if (!item->vf100() && item->unk1C->unk04 != '%') {
+        if (!item->IsActor() && item->unk1C->unk04 != '%') {
             item->vf1E0();
         }
     }
@@ -16353,7 +16354,8 @@ struct CellRef {
     virtual void vf1C4();
     virtual void vf1C8();
     virtual void vf1CC();
-    virtual CellRefTargetBase* vf1D0();
+    // pdb: TESObjectREFR::Get3D (slot 116; F3 TESObjectREFR vtable 144 slots = FNV360_PDB 144, linked slots agree)
+    virtual CellRefTargetBase* Get3D();
 
     int unk04;
     int unk08;
@@ -16388,9 +16390,9 @@ void FUN_004d8120_Cell::FUN_004d8120() {
         if (ref != 0) {
             if (!((ParentCheck*)ref)->FUN_00501120()) {
                 if (ref->unk1C->unk04 == '%') {
-                    CellRefTargetBase* target = ref->vf1D0();
+                    CellRefTargetBase* target = ref->Get3D();
                     if (target != 0) {
-                        target = ref->vf1D0();
+                        target = ref->Get3D();
                         CellRefOwnerBase* owner = target->vf100();
                         owner->vf08(target);
                     }

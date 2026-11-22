@@ -4503,7 +4503,8 @@ struct Obj_0048f770 {
     virtual void vff4();
     virtual void vff8();
     virtual void vffc();
-    virtual bool vf100();
+    // pdb: TESForm::IsActor (slot 64; F3 TESForm vtable 78 slots = FNV360_PDB TESForm 78, Actor's slot 64 returns true)
+    virtual bool IsActor();
     virtual void vf104();
     virtual void vf108();
     virtual void vf10c();
@@ -4576,7 +4577,7 @@ bool Owner_0048f770::FUN_0048f770(Obj_0048f770* p)
     if (p != 0 && p->vf1d0() != 0) {
         Result_0048f770* r = p->vf1d0();
         obj = r ? r->v0c() : 0;
-        if (p->vf100())
+        if (p->IsActor())
             FUN_0048f4c0(p);
         if (unk00 == 0) {
             FUN_0048f6d0(p);
