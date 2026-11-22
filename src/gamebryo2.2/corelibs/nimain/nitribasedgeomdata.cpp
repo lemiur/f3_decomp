@@ -17,7 +17,7 @@ extern void* vftable_NiTriBasedGeomData;
 NiTriBasedGeomData* __fastcall InitializeTriBasedGeomData(NiTriBasedGeomData* pThis)
 {
     FUN_00a67c00(pThis);
-    *(unsigned short*)((char*)pThis + 0x40) = 0;
+    pThis->m_usTriangles = 0;
     *(void**)pThis = &vftable_NiTriBasedGeomData;
     return pThis;
 }
@@ -39,8 +39,16 @@ struct FUN_00a8aa30_shell : public NiTriBasedGeomData
 struct FakeBinaryStream
 {
     int pad;
-    unsigned int position;
-    unsigned int(__cdecl* read)(void*, void*, unsigned int, unsigned int*, unsigned int);
+    unsigned int position;  // src: FNV360_PDB NiBinaryStream +0x4 m_uiAbsoluteCurrentPos
+    unsigned int(__cdecl* read)(void*, void*, unsigned int, unsigned int*, unsigned int);  // src: FNV360_PDB NiBinaryStream +0x8 m_pfnRead
+};
+struct NiBinaryStream_Save;
+class NiStream
+{
+  public:
+    unsigned char unk000[0x24c];
+    FakeBinaryStream* m_pkIstr;  // src: FNV360_PDB +0x24C
+    NiBinaryStream_Save* m_pkOstr;  // src: FNV360_PDB +0x250
 };
 
 // Loads NiGeometryData binary data from the stream, then reads 2 bytes from the stream's binary reader into this+0x40.
@@ -48,10 +56,9 @@ struct FakeBinaryStream
 void FUN_00a8aa30_shell::FUN_00a8aa30(NiStream* kStream)
 {
     reinterpret_cast<NiGeometryData*>(this)->LoadBinary(*kStream);
-    FakeBinaryStream* __restrict input =
-        *reinterpret_cast<FakeBinaryStream**>(reinterpret_cast<char*>(kStream) + 0x24c);
+    FakeBinaryStream* __restrict input = kStream->m_pkIstr;
     unsigned int size = 2;
-    input->position += input->read(input, reinterpret_cast<char*>(this) + 0x40, 2, &size, 1);
+    input->position += input->read(input, &m_usTriangles, 2, &size, 1);
 }
 
 struct NiAVObject;
@@ -80,9 +87,9 @@ struct NiBinaryStream_Save
 void FUN_00a8aa70_shell::FUN_00a8aa70(NiStream* kStream)
 {
     NiGeometryData::SaveBinary(*kStream);
-    NiBinaryStream_Save* __restrict output = *(NiBinaryStream_Save**)((char*)kStream + 0x250);
+    NiBinaryStream_Save* __restrict output = kStream->m_pkOstr;
     unsigned int size = 2;
-    output->m_uiStreamFlags += output->m_pfnWrite(output, (char*)this + 0x40, 2, &size, 1);
+    output->m_uiStreamFlags += output->m_pfnWrite(output, &m_usTriangles, 2, &size, 1);
 }
 
 extern char const* const g_011f4a70_arg1;

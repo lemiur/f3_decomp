@@ -97,23 +97,23 @@ void* S00a81830::Destroy(unsigned int auiFlags)
 struct S_00a818b0_Bin
 {
     unsigned int unk00;
-    unsigned int m_uiPos;
-    unsigned int unk08;
-    unsigned int(__cdecl* m_pfnRead)(S_00a818b0_Bin*, void*, unsigned int, unsigned int*, unsigned int);
-    unsigned int Read(void* p, unsigned int bytes, unsigned int* sz, unsigned int n)
+    unsigned int m_uiAbsoluteCurrentPos;  // src: FNV360_PDB NiBinaryStream +0x4 (old: m_uiPos)
+    unsigned int m_pfnRead;  // src: FNV360_PDB NiBinaryStream +0x8 (old: unk08)
+    unsigned int(__cdecl* m_pfnWrite)(S_00a818b0_Bin*, void*, unsigned int, unsigned int*, unsigned int);  // src: FNV360_PDB NiBinaryStream +0xC (old: m_pfnRead)
+    unsigned int Write(void* p, unsigned int bytes, unsigned int* sz, unsigned int n)
     {
-        return m_pfnRead(this, p, bytes, sz, n);
+        return m_pfnWrite(this, p, bytes, sz, n);
     }
 };
-static __forceinline void S_BinRead(S_00a818b0_Bin* bin, void* v, unsigned int bytes)
+static __forceinline void S_BinWrite(S_00a818b0_Bin* bin, void* v, unsigned int bytes)
 {
     unsigned int sz = 2;
-    bin->m_uiPos += bin->Read(v, bytes, &sz, 1);
+    bin->m_uiAbsoluteCurrentPos += bin->Write(v, bytes, &sz, 1);
 }
 struct NiStream_00a818b0
 {
     unsigned char unk000[0x250];
-    S_00a818b0_Bin* unk250;
+    S_00a818b0_Bin* m_pkOstr;  // src: FNV360_PDB NiStream +0x250
 };
 struct FUN_00a818b0_cls
 {
@@ -123,14 +123,14 @@ struct FUN_00a818b0_cls
     void FUN_00a7bbe0(void* pOther);
     void FUN_00a818b0(void* pOther);
 };
-// Calls FUN_00a7bbe0, then reads two 2-byte values from the stream at pOther+0x250 into this+0x58 and this+0x5a.
+// Calls FUN_00a7bbe0, then writes the active vertex and triangle counts to the stream's output stream.
 // @fnv 0x00a818b0
 void FUN_00a818b0_cls::FUN_00a818b0(void* pOther)
 {
     NiStream_00a818b0* pObj = (NiStream_00a818b0*)pOther;
     FUN_00a7bbe0(pOther);
-    S_BinRead(pObj->unk250, &m_usActiveVertices, 2);
-    S_BinRead(pObj->unk250, &m_usActiveTriangles, 2);
+    S_BinWrite(pObj->m_pkOstr, &m_usActiveVertices, 2);
+    S_BinWrite(pObj->m_pkOstr, &m_usActiveTriangles, 2);
 }
 
 extern void* g_011f5af4;

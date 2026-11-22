@@ -16,9 +16,10 @@ NiTriBasedGeomData* __fastcall FUN_00a75e20(NiTriBasedGeomData* self)
 {
     InitializeTriBasedGeomData(self);
     unsigned int v = 0;
-    *reinterpret_cast<unsigned short*>(reinterpret_cast<char*>(self) + 0x44) = 0;
-    *reinterpret_cast<unsigned int*>(reinterpret_cast<char*>(self) + 0x48) = v;
-    *reinterpret_cast<unsigned int*>(reinterpret_cast<char*>(self) + 0x4c) = v;
+    NiTriStripsData* pkData = static_cast<NiTriStripsData*>(self);
+    pkData->m_usStrips = 0;
+    pkData->m_pusStripLengths = (unsigned short*)v;
+    pkData->m_pusStripLists = (unsigned short*)v;
     *reinterpret_cast<const void**>(self) = &DAT_0109d8ac;
     return self;
 }

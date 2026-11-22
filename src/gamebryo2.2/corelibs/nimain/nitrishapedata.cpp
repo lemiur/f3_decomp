@@ -400,9 +400,17 @@ struct IndexBufferBlock
     }
 };
 
+struct NiStream
+{
+    unsigned char unk000[0xd8];
+    unsigned int m_uiNifFileVersion;  // src: FNV360_PDB +0xD8
+    unsigned char unk0DC[0x24c - 0xdc];
+    NiBinaryStreamView* m_pkIstr;  // src: FNV360_PDB +0x24C
+};
+
 static inline NiBinaryStreamView* GetIstr(NiStream* kStream)
 {
-    return *(NiBinaryStreamView**)((char*)kStream + 0x24c);
+    return kStream->m_pkIstr;
 }
 
 inline unsigned int BinaryRead(NiBinaryStreamView& kStream, void* pvBuffer, unsigned int uiTotalBytes,
@@ -432,36 +440,36 @@ void FUN_00a7b940_shell::FUN_00a7b940(NiStream* kStream)
 
     ((NiTriBasedGeomData*)this)->LoadBinary(*(::NiStream*)kStream);
 
-    ReadBinaryValue(*GetIstr(kStream), (*(unsigned int*)((char*)this + 0x44)));
+    ReadBinaryValue(*GetIstr(kStream), m_uiTriListLength);
 
     unsigned char bHasList;
-    if (*(unsigned int*)((char*)kStream + 0xd8) >= 0x0A000111)
+    if (kStream->m_uiNifFileVersion >= 0x0A000111)
         ReadBinaryValue(*GetIstr(kStream), bHasList);
     else
         bHasList = 1;
 
-    if (bHasList && (*(unsigned int*)((char*)this + 0x44)) > 0)
+    if (bHasList && m_uiTriListLength > 0)
     {
-        (*(unsigned short**)((char*)this + 0x48)) =
-            (unsigned short*)NiMalloc((*(unsigned int*)((char*)this + 0x44)) * 2);
-        ReadBinaryValue(*GetIstr(kStream), (*(unsigned short**)((char*)this + 0x48)),
-                        (*(unsigned int*)((char*)this + 0x44)));
+        m_pusTriList =
+            (unsigned short*)NiMalloc(m_uiTriListLength * 2);
+        ReadBinaryValue(*GetIstr(kStream), m_pusTriList,
+                        m_uiTriListLength);
     }
 
-    ReadBinaryValue(*GetIstr(kStream), (*(unsigned short*)((char*)this + 0x50)));
-    if ((*(unsigned short*)((char*)this + 0x50)))
+    ReadBinaryValue(*GetIstr(kStream), m_usSharedNormalsArraySize);
+    if (m_usSharedNormalsArraySize)
     {
-        (*(FUN_00a7b870**)((char*)this + 0x4c)) = new FUN_00a7b870[(*(unsigned short*)((char*)this + 0x50))];
-        (*(IndexBufferBlock**)((char*)this + 0x54)) = new IndexBufferBlock((*(unsigned short*)((char*)this + 0x50)));
+        m_pkSharedNormals = new FUN_00a7b870[m_usSharedNormalsArraySize];
+        m_pkSNAMemoryBlocks = new IndexBufferBlock(m_usSharedNormalsArraySize);
 
-        for (unsigned short usI = 0; usI < (*(unsigned short*)((char*)this + 0x50)); usI++)
+        for (unsigned short usI = 0; usI < m_usSharedNormalsArraySize; usI++)
         {
             unsigned short m_usPassCountLocal;
             unsigned short* pusArray = 0;
             ReadBinaryValue(*GetIstr(kStream), m_usPassCountLocal);
             if (m_usPassCountLocal)
             {
-                IndexBufferBlock* pkBlock = (*(IndexBufferBlock**)((char*)this + 0x54));
+                IndexBufferBlock* pkBlock = ((IndexBufferBlock*)m_pkSNAMemoryBlocks);
                 while (pkBlock)
                 {
                     if (m_usPassCountLocal <= pkBlock->m_uiUsedIndexCount)
@@ -470,16 +478,16 @@ void FUN_00a7b940_shell::FUN_00a7b940(NiStream* kStream)
                 }
                 if (!pkBlock)
                 {
-                    pkBlock = new IndexBufferBlock((*(IndexBufferBlock**)((char*)this + 0x54))->m_uiIndexCapacity * 2);
-                    pkBlock->m_pkNext = (*(IndexBufferBlock**)((char*)this + 0x54));
-                    (*(IndexBufferBlock**)((char*)this + 0x54)) = pkBlock;
+                    pkBlock = new IndexBufferBlock(((IndexBufferBlock*)m_pkSNAMemoryBlocks)->m_uiIndexCapacity * 2);
+                    pkBlock->m_pkNext = ((IndexBufferBlock*)m_pkSNAMemoryBlocks);
+                    m_pkSNAMemoryBlocks = pkBlock;
                 }
                 pusArray = pkBlock->m_pCurrentIndex;
                 pkBlock->m_uiUsedIndexCount -= m_usPassCountLocal;
                 pkBlock->m_pCurrentIndex += m_usPassCountLocal;
                 ReadBinaryValue(*GetIstr(kStream), pusArray, m_usPassCountLocal);
             }
-            (*(FUN_00a7b870**)((char*)this + 0x4c))[usI].SetArray(m_usPassCountLocal, pusArray);
+            ((FUN_00a7b870*)m_pkSharedNormals)[usI].SetArray(m_usPassCountLocal, pusArray);
         }
     }
 }
@@ -522,9 +530,9 @@ class FUN_00a7b630 : public A7B630TriBasedGeomData
   public:
     unsigned int m_uiTriListLength;
     unsigned short* m_pusTriList;
-    void* m_pkSharedNormalArray;
-    unsigned short m_usSharedNormalCount;
-    void* m_pkSharedNormalArrayMemoryBlock;
+    void* m_pkSharedNormals;  // src: FNV360_PDB +0x4C (old: m_pkSharedNormalArray)
+    unsigned short m_usSharedNormalsArraySize;  // src: FNV360_PDB +0x50 (old: m_usSharedNormalCount)
+    void* m_pkSNAMemoryBlocks;  // src: FNV360_PDB +0x54 (old: m_pkSharedNormalArrayMemoryBlock)
 
     FUN_00a7b630(unsigned short usVertices, A7B630Point3* pkVertex, A7B630Point3* pkNormal, A7B630ColorA* pkColor,
                  A7B630Point2* pkTexture, unsigned short usNumTextureSets, int eNBTMethod, unsigned short usTriangles,
@@ -542,9 +550,9 @@ FUN_00a7b630::FUN_00a7b630(unsigned short usVertices, A7B630Point3* pkVertex, A7
 {
     m_uiTriListLength = 3 * m_usTriangles;
     m_pusTriList = pusTriList;
-    m_pkSharedNormalArray = 0;
-    m_usSharedNormalCount = 0;
-    m_pkSharedNormalArrayMemoryBlock = 0;
+    m_pkSharedNormals = 0;
+    m_usSharedNormalsArraySize = 0;
+    m_pkSNAMemoryBlocks = 0;
 }
 
 struct Base_a7b

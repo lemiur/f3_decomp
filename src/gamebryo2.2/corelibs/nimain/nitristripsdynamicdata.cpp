@@ -474,7 +474,7 @@ struct NiStreamBufferStandin
 struct NiStream_00a92530
 {
     unsigned char unk000[0x250];
-    NiStreamBufferStandin* unk250;
+    NiStreamBufferStandin* m_pkOstr;  // src: FNV360_PDB +0x250
 };
 struct NiTriStripsStandin
 {
@@ -508,7 +508,7 @@ struct NiTriStripsStandin
 void __thiscall NiTriStripsStandin::FUN_00a92530(void* stream)
 {
     this->FUN_00a76340((unsigned int)stream);
-    NiStreamBufferStandin* pBuffer = ((NiStream_00a92530*)stream)->unk250;
+    NiStreamBufferStandin* pBuffer = ((NiStream_00a92530*)stream)->m_pkOstr;
     int written;
     {
         // The by-value parameter's stack slot is dead here, so MSVC reuses it
@@ -518,7 +518,7 @@ void __thiscall NiTriStripsStandin::FUN_00a92530(void* stream)
         written = pBuffer->fn0C(pBuffer, (void*)&m_usActiveVertices, 2, &count, 1);
         pBuffer->unk04 += written;
     }
-    pBuffer = ((NiStream_00a92530*)stream)->unk250;
+    pBuffer = ((NiStream_00a92530*)stream)->m_pkOstr;
     {
         unsigned int count = 2;
         written = pBuffer->fn0C(pBuffer, (void*)&m_usActiveTriangles, 2, &count, 1);

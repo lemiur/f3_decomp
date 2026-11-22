@@ -107,7 +107,7 @@ struct _FakeTriData
 void FUN_00a71e00_shell::GetTriangleVertices(unsigned short m_usTriangleID, NiPoint3** pkP0, NiPoint3** pkP1,
                                              NiPoint3** pkP2)
 {
-    _FakeTriData* pkModelData = *reinterpret_cast<_FakeTriData**>(reinterpret_cast<char*>(this) + 0xb8);
+    _FakeTriData* pkModelData = static_cast<_FakeTriData*>(m_spModelData);
     NiPoint3* pkVertex = pkModelData->m_pkVertex;
     unsigned short usIndex0, usIndex1, usIndex2;
     pkModelData->GetTriangleVertexIndices(m_usTriangleID, usIndex0, usIndex1, usIndex2);
@@ -154,7 +154,13 @@ void* __cdecl FUN_00a9b150()
     return 0;
 }
 
-struct NiRenderer;
+struct NiRenderer
+{
+    unsigned char unk000[0x200];
+    int m_eFrameState;  // src: FNV360_PDB +0x200
+    unsigned char unk204[4];
+    bool m_bRenderTargetGroupActive;  // src: FNV360_PDB +0x208
+};
 struct FUN_00a80610_shell
 {
     void __thiscall FUN_00a80610(NiRenderer*);
@@ -168,8 +174,8 @@ struct FUN_00a71d70_shell
 void __thiscall FUN_00a71d70_shell::FUN_00a71d70(NiRenderer* apkRenderer)
 {
     ((FUN_00a80610_shell*)this)->FUN_00a80610(apkRenderer);
-    int i = *(int*)((char*)apkRenderer + 0x200);
-    if ((i == 1 || i == 2) && *(char*)((char*)apkRenderer + 0x208) == 1)
+    int i = apkRenderer->m_eFrameState;
+    if ((i == 1 || i == 2) && apkRenderer->m_bRenderTargetGroupActive == 1)
     {
         void** vtbl = *(void***)apkRenderer;
         ((void(__thiscall*)(NiRenderer*, void*))vtbl[110])(apkRenderer, this);

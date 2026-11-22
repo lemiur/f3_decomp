@@ -29,7 +29,13 @@ void* __fastcall DestroyNiTriShape(void* pThis, int, unsigned int flags)
 
 struct CloningProcess;
 struct NiObject;
-struct NiRenderer;
+struct NiRenderer
+{
+    unsigned char unk000[0x200];
+    int m_eFrameState;  // src: FNV360_PDB +0x200
+    unsigned char unk204[4];
+    bool m_bRenderTargetGroupActive;  // src: FNV360_PDB +0x208
+};
 struct blob16
 {
     char b[16];
@@ -61,8 +67,8 @@ void FUN_00a80610();
 void FUN_00a74600_shell::FUN_00a74600(NiRenderer* apkRenderer)
 {
     ((void(__thiscall*)(NiTriShape*, NiRenderer*))FUN_00a80610)(this, apkRenderer);
-    int state = *(int*)((char*)apkRenderer + 0x200);
-    if ((state == 1 || state == 2) && *((char*)apkRenderer + 0x208) == 1)
+    int state = apkRenderer->m_eFrameState;
+    if ((state == 1 || state == 2) && apkRenderer->m_bRenderTargetGroupActive == 1)
     {
         ((void(__thiscall*)(NiRenderer*, NiTriShape*))(*(void***)apkRenderer)[0x1b4 / 4])(apkRenderer, this);
     }
@@ -200,8 +206,8 @@ struct TriListHelper
 void FUN_00a74560_shell::GetTriangleVertices(unsigned short ausTriangleIndex, NiPoint3** pkP0, NiPoint3** pkP1,
                                              NiPoint3** pkP2)
 {
-    NiTriShapeData* pkModelData = *(NiTriShapeData**)((char*)this + 0xb8);
-    NiPoint3* pkVertex = *(NiPoint3**)((char*)pkModelData + 0x20);
+    NiTriShapeData* pkModelData = m_spModelData;
+    NiPoint3* pkVertex = (NiPoint3*)pkModelData->m_pkVertex;
     unsigned short* pusTriList = ((TriListHelper*)pkModelData)->GetTriangleList();
     unsigned short usIndexOffset = ausTriangleIndex * 3;
     *pkP0 = &pkVertex[pusTriList[usIndexOffset++]];
@@ -268,10 +274,10 @@ struct FUN_00a745c0_This
 // @fnv 0x00a745c0
 void __thiscall FUN_00a745c0_This::FUN_00a745c0(void* apkRenderer)
 {
-    void* pkRenderer = apkRenderer;
+    NiRenderer* pkRenderer = (NiRenderer*)apkRenderer;
     ((FUN_00a80610_This*)this)->FUN_00a80610(pkRenderer);
-    if ((*(int*)((char*)pkRenderer + 0x200) == 1 || *(int*)((char*)pkRenderer + 0x200) == 2) &&
-        *(char*)((char*)pkRenderer + 0x208) == 1)
+    if ((pkRenderer->m_eFrameState == 1 || pkRenderer->m_eFrameState == 2) &&
+        pkRenderer->m_bRenderTargetGroupActive == 1)
     {
         ((void(__thiscall**)(void*, void*))(*(void***)pkRenderer))[107](pkRenderer, this);
     }
@@ -280,6 +286,12 @@ void __thiscall FUN_00a745c0_This::FUN_00a745c0(void* apkRenderer)
 namespace fnv_00a74690 {
 struct StrArr
 {
+    void* unk00;
+    char** m_pBase;  // src: FNV360_PDB NiTPrimitiveArray +0x4
+    unsigned short m_usMaxSize;  // src: FNV360_PDB +0x8
+    unsigned short m_usSize;  // src: FNV360_PDB +0xA
+    unsigned short m_usESize;  // src: FNV360_PDB +0xC
+    unsigned short m_usGrowBy;  // src: FNV360_PDB +0xE
     void SetSize(unsigned int);
     void SetAt(unsigned int, char*&);
 };
@@ -299,9 +311,9 @@ void FUN_00a74690_shell::FUN_00a74690(StrArr* pkStrings)
 {
     FUN_00a897c0(pkStrings);
     char* pStr = FUN_00a7d330(g_011f5b34_arg1);
-    unsigned int uiIndex = *(unsigned short*)((char*)pkStrings + 0xa);
-    if (uiIndex >= *(unsigned short*)((char*)pkStrings + 8))
-        pkStrings->SetSize(uiIndex + *(unsigned short*)((char*)pkStrings + 0xe));
+    unsigned int uiIndex = pkStrings->m_usSize;
+    if (uiIndex >= pkStrings->m_usMaxSize)
+        pkStrings->SetSize(uiIndex + pkStrings->m_usGrowBy);
     pkStrings->SetAt(uiIndex, pStr);
 }
 }  // namespace fnv_00a74690
