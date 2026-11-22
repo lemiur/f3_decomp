@@ -20911,7 +20911,8 @@ struct Actor {
     virtual void vf2b0();
     virtual void vf2b4();
     virtual void vf2b8();
-    virtual float vf2bc(int);
+    // pdb: MobileObject::GetHeading (slot 175; F3 MobileObject vtable 193 slots = FNV360_PDB 193, linked slots agree)
+    virtual float GetHeading(int);
     virtual void vf2c0();
     virtual void vf2c4();
     virtual void vf2c8();
@@ -21827,7 +21828,7 @@ void __cdecl FUN_0064bfd0(Tile* root,TileList* landmarkTiles,TileList* objective
     static int DAT_01076838=FUN_00becd70(DAT_00e05858,-1);
     static int DAT_01076834=FUN_00becd70(DAT_00e05564,-1);
     BaseRecord* world=DAT_0107a104->unk03c;
-    float heading=NormalizeHeading((float)((DAT_0107a104->vf2bc(0)+world->FUN_004d3ca0())*DAT_00dcd110));
+    float heading=NormalizeHeading((float)((DAT_0107a104->GetHeading(0)+world->FUN_004d3ca0())*DAT_00dcd110));
     if(root->vf01c()) {
         double wrapped=heading<0.0f?heading+1.0:heading;
         Transform* node=root->vf01c();

@@ -49760,8 +49760,10 @@ struct Ref {
     virtual void vf250();
     virtual void vf254();
     virtual void vf258();
-    virtual void vf25c(float value);
-    virtual void vf260();
+    // pdb: MobileObject::Process (slot 151; F3 MobileObject vtable 193 slots = FNV360_PDB 193, linked slots agree)
+    virtual void Process(float value);
+    // pdb: MobileObject::ChangeProcessLevel (slot 152; F3 MobileObject vtable 193 slots = FNV360_PDB 193, linked slots agree)
+    virtual void ChangeProcessLevel();
     int unk04;
     unsigned int flags08;
     int unk0c, unk10, unk14, unk18;
@@ -49866,7 +49868,7 @@ void Ref::FUN_004f91e0()
         if (p)
         {
             if (!h)
-                p->vf260();
+                p->ChangeProcessLevel();
             Ref* actor2 = 0;
             if (p && p->IsActor())
                 actor2 = p;
@@ -49875,7 +49877,7 @@ void Ref::FUN_004f91e0()
                 actor2->GetProcess()->pf014(actor2, true);
                 actor2->FUN_00709630(0, 1);
                 if (actor2->GetProcess()->GetUnk28())
-                    actor2->vf25c(0.0f);
+                    actor2->Process(0.0f);
             }
         }
         DAT_0107a104->PlayerCharacter_CheckForQuestTargetUpdate(this);

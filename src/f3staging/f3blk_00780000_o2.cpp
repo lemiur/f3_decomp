@@ -21062,7 +21062,8 @@ struct FUN_0078f310_Actor {
     virtual void vf2BC() = 0;
     virtual void vf2C0() = 0;
     virtual void vf2C4() = 0;
-    virtual FUN_0078f310_Form* vf2C8() = 0;
+    // pdb: MobileObject::GetCurrentTarget (slot 178; F3 MobileObject vtable 193 slots = FNV360_PDB 193, linked slots agree)
+    virtual FUN_0078f310_Form* GetCurrentTarget() = 0;
     virtual void vf2CC() = 0;
     virtual void vf2D0() = 0;
     virtual void vf2D4() = 0;
@@ -21372,9 +21373,9 @@ void* FUN_0078f310_Owner::FUN_0078f310(unsigned int value, void* excluded) {
                 }
             }
 
-            FUN_0078f310_Form* form = actor->vf2C8();
+            FUN_0078f310_Form* form = actor->GetCurrentTarget();
             if (form != 0) {
-                form = actor->vf2C8();
+                form = actor->GetCurrentTarget();
                 if (form->unk0C == value && excluded != actor) {
                     if (result == 0) {
                         result = new FUN_0078f310_List;
@@ -23125,7 +23126,8 @@ struct Actor {
     virtual void v250();
     virtual void v254();
     virtual void v258();
-    virtual void vf25c(float value);
+    // pdb: MobileObject::Process (slot 151; F3 MobileObject vtable 193 slots = FNV360_PDB 193, linked slots agree)
+    virtual void Process(float value);
     int unk04;
     unsigned int flags;
     int unk0C;
@@ -23245,7 +23247,7 @@ void Mgr::FUN_0078c800() {
             elapsed = 0.0f;
         Proc* procNow = *(Proc* volatile*)&actor->proc;
         if (!(((procNow && procNow->vf228() && actor->proc->vf228()->kind == 2) || actor->Actor_IsFollowing()) && actor->proc->vf128() == g::DAT_0107a104))
-            actor->vf25c(elapsed);
+            actor->Process(elapsed);
     }
 }
 

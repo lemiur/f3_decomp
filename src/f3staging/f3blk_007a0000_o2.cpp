@@ -4749,7 +4749,8 @@ struct Actor {
     virtual void vf2c0(); virtual void vf2c4(); virtual void vf2c8(); virtual void vf2cc();
     virtual void vf2d0(); virtual void vf2d4(); virtual void vf2d8(); virtual void vf2dc();
     virtual void vf2e0(); virtual void vf2e4();
-    virtual bool vf2e8();
+    // pdb: MobileObject::IsDying (slot 186; F3 MobileObject vtable 193 slots = FNV360_PDB 193, linked slots agree)
+    virtual bool IsDying();
     int unk04, unk08, unk0C, unk10, unk14, unk18, unk1C, unk20, unk24, unk28, unk2C, unk30, unk34, unk38, unk3C;
     int unk40, unk44, unk48, unk4C, unk50, unk54, unk58, unk5C, unk60, unk64, unk68, unk6C, unk70, unk74, unk78, unk7C;
     int unk80, unk84, unk88, unk8C, unk90, unk94, unk98, unk9C, unkA0, unkA4, unkA8, unkAC, unkB0, unkB4, unkB8, unkBC;
@@ -4843,7 +4844,7 @@ bool Perception::FUN_007a1e40(TargetEntry* target)
     if (target->actor->unkFC == 3)
         return true;
     if (target->actor->IsDead(0)) {
-        if (!target->actor->vf2e8())
+        if (!target->actor->IsDying())
             return true;
     }
     return false;
