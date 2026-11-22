@@ -78,8 +78,8 @@ struct D10800Collidable
     int unk0C;
     int unk10;
     int unk14;
-    short unk18;
-    signed char m_iAutoRemoveLevel;
+        short unk18;
+    unsigned short m_objectQualityType;  // +0x1A m_broadPhaseHandle.m_objectQualityType
 };
 
 struct D10800TypedHandle
@@ -217,6 +217,8 @@ struct D10800Input
 
 void __cdecl FUN_00cc0f40(D10800Collidable* collA, D10800Collidable* collB, D10800Input* input);
 
+struct D10800InputReal;
+// hkpWorld
 struct D10800World
 {
     int unk00;
@@ -244,9 +246,9 @@ struct D10800World
     int unk58;
     int unk5C;
     int unk60;
-    int unk64;
+        int unk64;
     int unk68;
-    int unk6C;
+    D10800InputReal* m_collisionInput;  // +0x6C
     int unk70;
     int unk74;
     D10800Input* m_pCollisionInput;
@@ -279,10 +281,10 @@ void D10800Listener::DispatchCollisionPair(D10800HandlePair& pair)
 {
     D10800Collidable* pCollA = pair.m_kPointA->getOwner();
     D10800Collidable* pCollB = pair.m_kPointB->getOwner();
-    D10800InputReal* pInput = *(D10800InputReal**)((char*)m_pOwningWorld + 0x6c);
+    D10800InputReal* pInput = m_pOwningWorld->m_collisionInput;
     D10800Dispatcher* pDispatcher = pInput->m_pCollisionDispatcher;
-    unsigned short uiA = *(unsigned short*)((char*)pCollA + 0x1a);
-    unsigned short uiB = *(unsigned short*)((char*)pCollB + 0x1a);
+    unsigned short uiA = pCollA->m_objectQualityType;
+    unsigned short uiB = pCollB->m_objectQualityType;
     signed char cQuality = (signed char)pDispatcher->m_aucByteGrid[uiA][uiB];
     if (cQuality)
     {

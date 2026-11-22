@@ -2,8 +2,12 @@
 // src/havok/physics/dynamics/world/util/hkpworldoperationutil.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/physics/dynamics/world/util/hkpworldoperationutil.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
+// hkpAgentNnTrack: m_bytesUsedInLastSector, then the sectors array (size at +0x08).
 struct FUN_00cb7460_class
 {
+    int m_bytesUsedInLastSector;
+    void* m_sectors;
+    int m_sectorsSize;
     int __thiscall hkpAgentNnTrack_getSectorSize(int value);
 };
 
@@ -11,21 +15,33 @@ struct FUN_00cb7460_class
 // pdb: hkpAgentNnTrack::getSectorSize | hkpWorldOperationUtil.obj | fnv360_0822_retail, call_gap + bridge(call_gap|call_gap) + skyrim(call_gap), high
 int __thiscall FUN_00cb7460_class::hkpAgentNnTrack_getSectorSize(int value)
 {
-    if (value + 1 == *(int*)((char*)this + 8))
-        return *(int*)this;
+    if (value + 1 == m_sectorsSize)
+        return m_bytesUsedInLastSector;
     return 0x200;
 }
 
-// If the slot index at p+0x22 is not 0xffff, clears the entry in the array at thisPtr+0x40 and resets the index to 0xffff.
+// If the island is in the world's dirty list, clears its entry there and marks it as not listed (0xffff).
 // @fnv 0x00cb3fd0
 // pdb: hkpWorldOperationUtil::removeIslandFromDirtyList | hkpWorldOperationUtil.obj | fnv360_0822_retail, call_dedup, low
 // pdb params: world, island
-void ClearSlotReference(int* thisPtr, int* p)
+// hkpWorld: m_dirtySimulationIslands.m_data at +0x40; hkpSimulationIsland: m_dirtyListIndex at +0x22
+// (New Vegas Xbox 360 PDB).
+struct DirtyListWorldCB3F
 {
-    unsigned short* s = (unsigned short*)((char*)p + 0x22);
+    char unk00[0x40];
+    int* m_dirtySimulationIslands;
+};
+struct DirtyListIslandCB3F
+{
+    char unk00[0x22];
+    unsigned short m_dirtyListIndex;
+};
+void ClearSlotReference(DirtyListWorldCB3F* world, DirtyListIslandCB3F* island)
+{
+    unsigned short* s = &island->m_dirtyListIndex;
     if (*s != 0xffff)
     {
-        int* base = *(int**)((char*)thisPtr + 0x40);
+        int* base = world->m_dirtySimulationIslands;
         base[*s] = 0;
         *s = 0xffff;
     }
@@ -2294,10 +2310,10 @@ struct FUN_00cb7480_holder
     int unk18;
     int unk1c;
     int unk20;
-    int unk24;
-    int unk28;
+        int unk24;
+    FUN_00cb7480_node* m_internal;  // +0x28
     int unk2c;
-    FUN_00cb7480_node* m_30;
+    int unk30;
 };
 
 struct FUN_00cb7480_delta
@@ -2320,17 +2336,17 @@ struct FUN_00cb7480_cls
     void hkpConstraintOwner_subConstraintInfo(FUN_00cb7480_holder* a1, FUN_00cb7480_delta* a2);
 };
 
-// Subtracts the delta's m_04, m_08 and m_0c from m_0c, m_10 and m_14, and from the node's m_14, m_16 and m_18, when a1->m_30 is non-null.
+// Subtracts the delta's m_04, m_08 and m_0c from m_0c, m_10 and m_14, and from the node's m_14, m_16 and m_18, when the constraint has its internal record.
 // @f3 0x00929b20 (community match, verified in this file)
 // pdb: hkpConstraintOwner::subConstraintInfo | hkpWorldOperationUtil.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_gap_sim), high
 void FUN_00cb7480_cls::hkpConstraintOwner_subConstraintInfo(FUN_00cb7480_holder* apHolder, FUN_00cb7480_delta* apDelta)
 {
-    if (*(void* const*)((char*)apHolder + 0x28) != 0)
+    if (apHolder->m_internal != 0)
     {
         m_0c -= apDelta->m_04;
         m_10 -= apDelta->m_08;
         m_14 -= apDelta->m_0c;
-        FUN_00cb7480_node* n = *(FUN_00cb7480_node**)((char*)apHolder + 0x28);
+        FUN_00cb7480_node* n = apHolder->m_internal;
         int dy = n->m_18 - apDelta->m_0c;
         int dx = n->m_14 - apDelta->m_04;
         n->m_16 -= (unsigned short)apDelta->m_08;

@@ -585206,7 +585206,7 @@
     },
     {
      "address": "0x00926680",
-     "symbol": "?ClearSlotReference@@YAXPAH0@Z",
+     "symbol": "?ClearSlotReference@@YAXPAUDirtyListWorldCB3F@@PAUDirtyListIslandCB3F@@@Z",
      "size": 38
     },
     {
