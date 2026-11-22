@@ -5,6 +5,17 @@
  *                   [--sdk DIR]... [--no-sdk]
  *   f3rename bisect --root TREE --renames LIST.tsv --applied REPORT.tsv --compare FILE... --out REDUCED.tsv
  *                   [--dropped DROPPED.tsv]
+ *   f3rename comments --root TREE --comments LIST.tsv [--locations functions.tsv] [--report OUT.tsv] [--dry-run]
+ *
+ * Comments mode: LIST.tsv is address, comment (several rows of one address are its lines, in order). The lines go
+ *   directly above every definition of the function; `// pdb:` and `// pdb params:` lines already in the comment
+ *   block directly above are replaced (a rerun with the same list changes nothing). A location row (the rule
+ *   checker's functions.tsv: address, file, first_line, symbol by header name) is used when, past blank and comment
+ *   lines, a definition of the function's name starts there in a scope that agrees with its decorated name (or it is
+ *   the file's only definition of that name). Otherwise: the definition after its `// @f3 0x<address>` tag, the one
+ *   scope-matching definition in the file, the one clearly nearest the recorded line, or, with no usable location,
+ *   the one scope-matching definition in the tree. Report: address status reason sites lines replaced unchanged
+ *   (status applied | ambiguous | not-found). Only comment lines change.
  *
  * Rename list (TSV, header row optional): kind (function|global|type), address (hex), old, new, comment, marker.
  *   comment: one line placed directly above each definition (functions: every definition site, variants included;
@@ -1062,34 +1073,53 @@ static void load_renames(const char *path)
 }
 
 /* function locations: address -> (file, first line) */
-typedef struct { uint32_t addr; int file; int line; } Loc;
+typedef struct { uint32_t addr; int file; int line; char *symbol; char *rel; } Loc;
 static VEC(Loc) g_locs;
 
+/* function locations: either the rule checker's functions.tsv (a header naming address, file, first_line and
+ * optionally symbol, in any order) or three columns address, file, first_line. Rows whose file is not in the tree are
+ * kept with file -1 (the comments mode searches for those). */
 static void load_locations(const char *path)
 {
     size_t len;
     char *data = read_all(path, &len), *p;
-    int bad = 0;
+    int bad = 0, ca = 0, cf = 1, cl = 2, cs = -1, first = 1;
     if (!data) die("cannot read %s", path);
     for (p = data; p && *p; ) {
-        char *nl = strchr(p, '\n'), *f[8], *line = p, *rel;
-        int nf;
+        char *nl = strchr(p, '\n'), *f[32], *line = p, *rel;
+        int nf, k;
         Loc l;
         if (nl) *nl = 0;
         p = nl ? nl + 1 : NULL;
         if (!*line || *line == '#') continue;
-        nf = split_tabs(line, f, 8);
-        if (nf < 3 || !strcmp(f[0], "address")) continue;
-        l.addr = (uint32_t)strtoul(f[0], NULL, 16);
-        rel = rel_path(f[1]);
+        nf = split_tabs(line, f, 32);
+        if (first) {
+            first = 0;
+            if (!strcmp(f[0], "address") || !strcmp(f[0], "addr")) {   /* a header: find the columns by name */
+                cf = cl = -1;
+                for (k = 0; k < nf; k++) {
+                    if (!strcmp(f[k], "address")) ca = k;
+                    else if (!strcmp(f[k], "file")) cf = k;
+                    else if (!strcmp(f[k], "first_line")) cl = k;
+                    else if (!strcmp(f[k], "symbol")) cs = k;
+                }
+                if (cf < 0 || cl < 0) die("%s: the header names no file or first_line column", path);
+                continue;
+            }
+        }
+        if (nf <= ca || nf <= cf || nf <= cl) { bad++; continue; }
+        l.addr = (uint32_t)strtoul(f[ca], NULL, 16);
+        rel = rel_path(f[cf]);
         l.file = find_file(rel);
-        l.line = atoi(f[2]);
-        free(rel);
-        if (l.file < 0 || l.line <= 0) { bad++; continue; }
+        l.rel = rel;
+        l.line = atoi(f[cl]);
+        l.symbol = cs >= 0 && cs < nf && f[cs][0] ? xstrdup(f[cs]) : NULL;
+        if (l.line <= 0) { bad++; free(rel); continue; }
+        if (l.file < 0) bad++;
         VPUSH(g_locs, l);
     }
     free(data);
-    if (bad) fprintf(stderr, "f3rename: %d location rows name no file of the tree\n", bad);
+    if (bad) fprintf(stderr, "f3rename: %d location rows name no file of the tree or no line\n", bad);
 }
 
 /* ---------------------------------------------------------------------------------------------------------------- */
@@ -1340,7 +1370,9 @@ static char block_kind(const char *d, const Tok *t, int st, int i)
     for (k = st; k < i; k++) {
         if (t[k].t == '(') depth++;
         else if (t[k].t == ')') depth--;
-        else if (t[k].t == '=' && depth == 0) return 'i';
+        else if (t[k].t == '=' && depth == 0 &&   /* not operator=, operator==, operator+= ... */
+                 !(k > st && is_kw(d, &t[k - 1], "operator")) && !(k > st + 1 && is_kw(d, &t[k - 2], "operator")))
+            return 'i';
     }
     k = st;
     if (is_kw(d, &t[k], "template") && k + 1 < i && t[k + 1].t == '<') {   /* skip template<...> */
@@ -1375,6 +1407,8 @@ static char block_kind(const char *d, const Tok *t, int st, int i)
     return 'b';
 }
 
+typedef struct { int line; int scope; } DefRec;
+
 typedef struct {
     int file;
     const char *d;
@@ -1382,6 +1416,14 @@ typedef struct {
     TokVec toks;
     IntVec ls;
     OpVec ops;
+    /* the comments mode's per-file indexes, built on first use */
+    int indexed;
+    Map defmap;                  /* name (or ~name) -> index into deflines */
+    VEC(IntVec) deflines;        /* per name: indices into defrec */
+    VEC(DefRec) defrec;          /* each definition: the line its statement starts on, its scope in scopes */
+    Buf scopes;
+    VEC(uint64_t) tags;          /* // @f3 0x<address> tags: address << 32 | line, sorted */
+    VEC(char *) owned_keys;
 } FileWork;
 
 /* statement start for a declaration at token i */
@@ -1606,8 +1648,14 @@ static void apply_ops(FileWork *w, Buf *out)
             buf_put(out, w->d + a, ind - a);
             buf_puts(out, w->ops.a[i].text);
             buf_puts(out, crlf ? "\r\n" : "\n");
-            g_ren.a[w->ops.a[i].ren].comments++;
+            if (w->ops.a[i].ren >= 0 && (size_t)w->ops.a[i].ren < g_ren.n) g_ren.a[w->ops.a[i].ren].comments++;
             i++;
+        }
+        {   /* type 2: the line goes (a comment being replaced) */
+            size_t z;
+            int del = 0;
+            for (z = i; z < w->ops.n && w->ops.a[z].line == line; z++) if (w->ops.a[z].type == 2) del = 1;
+            if (del) { i = z; continue; }
         }
         if (e > a && w->d[e - 1] == '\n') e--;
         if (e > a && w->d[e - 1] == '\r') e--;
@@ -1619,12 +1667,36 @@ static void apply_ops(FileWork *w, Buf *out)
                 if (z < e) out->n -= e - z;   /* trailing blanks go: one space before the marker */
                 buf_putc(out, ' ');
                 buf_puts(out, w->ops.a[i].text);
-                g_ren.a[w->ops.a[i].ren].markers++;
+                if (w->ops.a[i].ren >= 0 && (size_t)w->ops.a[i].ren < g_ren.n) g_ren.a[w->ops.a[i].ren].markers++;
             }
             i++;
         }
         buf_put(out, w->d + e, b - e);
     }
+}
+
+/* does the statement starting on `line` (its first token is on that line) name `name` before its first ';', '{' or
+ * '}', as the name of a definition? That is how a recorded location is checked against the tree as it is now. */
+static int is_func_def(const char *d, const Tok *t, int nt, int i);
+static int stmt_names(FileWork *w, int line, const char *name, size_t nl)
+{
+    size_t lo = 0, hi = w->toks.n, k;
+    while (lo < hi) {   /* the first token on or after the line */
+        size_t mid = (lo + hi) / 2;
+        if ((int)w->toks.a[mid].line < line) lo = mid + 1; else hi = mid;
+    }
+    if (lo >= w->toks.n || (int)w->toks.a[lo].line != line) return 0;
+    if (lo > 0) {   /* the line must start a statement, not continue one */
+        char pc = w->toks.a[lo - 1].t;
+        if (pc != ';' && pc != '{' && pc != '}' && pc != ':' && pc != ')' && pc != '>' && pc != T_ID) return 0;
+    }
+    for (k = lo; k < w->toks.n && (int)w->toks.a[k].line < line + 15; k++) {
+        const Tok *tk = &w->toks.a[k];
+        if (tk->t == ';' || tk->t == '{' || tk->t == '}') break;
+        if (tk->t == T_ID && tk->len == nl && !memcmp(w->d + tk->s, name, nl) &&
+            is_func_def(w->d, w->toks.a, (int)w->toks.n, (int)k)) return 1;   /* a definition, not a prototype */
+    }
+    return 0;
 }
 
 /* comments at the locations the rule checker reports: first_line, past blank and comment lines, must reach a line
@@ -1641,17 +1713,8 @@ static int place_by_locations(FileWork *w, int r)
         line = l->line - 1;
         if (line >= (int)w->ls.n) continue;
         while (line < (int)w->ls.n && line_is_blank_or_comment(w->d, w->n, &w->ls, line, &inb)) line++;
-        /* the statement starting on that line must name the function before its first ';', '{' or '}' */
-        for (k = 0; k < (int)w->toks.n && (int)w->toks.a[k].line < line; k++) {}
-        if (k < (int)w->toks.n && (int)w->toks.a[k].line != line) k = (int)w->toks.n;
-        for (; k < (int)w->toks.n && (int)w->toks.a[k].line < line + 15; k++) {
-            const Tok *tk = &w->toks.a[k];
-            if (tk->t == ';' || tk->t == '{' || tk->t == '}') break;
-            if (tk->t == T_ID && tk->len == (uint32_t)R->nl && !memcmp(w->d + tk->s, R->nw, (size_t)R->nl)) {
-                ok = 1;
-                break;
-            }
-        }
+        (void)k;
+        ok = stmt_names(w, line, R->nw, (size_t)R->nl);
         if (!ok) continue;
         placed = 1;
         if (!comment_above(w, line, R->comment)) add_op(w, line, 0, r, R->comment);
@@ -1697,7 +1760,9 @@ static __declspec(noreturn) void usage(void)
           "  f3rename apply  --root TREE --renames LIST.tsv [--locations LOC.tsv] [--report OUT.tsv] [--dry-run]\n"
           "                  [--sdk DIR]... [--no-sdk]\n"
           "  f3rename bisect --root TREE --renames LIST.tsv --applied REPORT.tsv --compare FILE... --out REDUCED.tsv\n"
-          "                  [--dropped DROPPED.tsv]\n", stderr);
+          "                  [--dropped DROPPED.tsv]\n"
+          "  f3rename comments --root TREE --comments LIST.tsv [--locations functions.tsv] [--report OUT.tsv]\n"
+          "                  [--dry-run]\n", stderr);
     exit(2);
 }
 
@@ -2205,12 +2270,678 @@ static int cmd_bisect(int argc, char **argv)
     return 0;
 }
 
+/* ---------------------------------------------------------------------------------------------------------------- */
+/* comments: put provenance lines (// pdb: ..., // pdb params: ...) directly above every definition of a function,
+ * replacing the ones an earlier run put there. Nothing but comment lines changes. */
+
+/* is token i the name of a function definition: name ( ... ) [const|volatile|throw(...)] { | : | try */
+static int is_func_def(const char *d, const Tok *t, int nt, int i)
+{
+    int k, depth = 0;
+    if (i + 1 >= nt || t[i + 1].t != '(') return 0;
+    if (i > 0 && (t[i - 1].t == '.' || t[i - 1].t == T_ARROW)) return 0;
+    for (k = i + 1; k < nt; k++) {
+        if (t[k].t == '(') depth++;
+        else if (t[k].t == ')' && --depth == 0) break;
+    }
+    for (k = k + 1; k < nt; k++) {
+        if (is_kw(d, &t[k], "const") || is_kw(d, &t[k], "volatile") || is_kw(d, &t[k], "__restrict")) continue;
+        if (is_kw(d, &t[k], "throw") && k + 1 < nt && t[k + 1].t == '(') {
+            int a = 0;
+            for (k = k + 1; k < nt; k++) {
+                if (t[k].t == '(') a++;
+                else if (t[k].t == ')' && --a == 0) break;
+            }
+            continue;
+        }
+        break;
+    }
+    return k < nt && (t[k].t == '{' || t[k].t == ':' || is_kw(d, &t[k], "try"));
+}
+
+/* the lines on which the definitions of `name` start (their statement's first token), at namespace or class scope;
+ * tilde: 1 for a destructor (~name), 0 for anything else */
+static int cmp_u64(const void *a, const void *b);
+
+static void index_work(FileWork *w)
+{
+    const char *d = w->d;
+    Tok *t = w->toks.a;
+    int nt = (int)w->toks.n, i, sp = 0, st = 0, j, line = 0;
+    int names[512];   /* per open block: the token naming it, or -1 */
+    char stack[512];
+    size_t p;
+    w->indexed = 1;
+    map_init(&w->defmap, 1024);
+    /* @f3 tags */
+    for (p = 0; p < w->n; p++) {
+        if (d[p] == '\n') { line++; continue; }
+        if (d[p] == '@' && p + 14 <= w->n && !memcmp(d + p, "@f3 0x", 6)) {
+            char hex[9];
+            uint64_t v;
+            memcpy(hex, d + p + 6, 8);
+            hex[8] = 0;
+            v = ((uint64_t)strtoul(hex, NULL, 16) << 32) | (uint32_t)line;
+            VPUSH(w->tags, v);
+        }
+    }
+    qsort(w->tags.a, w->tags.n, sizeof(uint64_t), cmp_u64);
+    for (i = 0; i < nt; i++) {
+        char c = t[i].t;
+        int tilde, q, quals[16], nq = 0;
+        int32_t *v;
+        DefRec rec;
+        if (c == '{') {
+            char k = block_kind(d, t, st, i);
+            if (sp < (int)sizeof stack) {
+                stack[sp] = k;
+                names[sp] = -1;
+                if (k == 'n') {   /* namespace NAME { */
+                    for (q = st; q + 1 < i; q++)
+                        if (is_kw(d, &t[q], "namespace") && t[q + 1].t == T_ID) { names[sp] = q + 1; break; }
+                } else if (k == 'c') {   /* [template<...>] struct [__declspec(...)] NAME */
+                    int ang = 0;
+                    for (q = st; q < i; q++) {
+                        if (t[q].t == '<') ang++;
+                        else if (t[q].t == '>') ang--;
+                        else if (ang <= 0 && (is_kw(d, &t[q], "struct") || is_kw(d, &t[q], "class") ||
+                                              is_kw(d, &t[q], "union") || is_kw(d, &t[q], "__interface"))) break;
+                    }
+                    for (q = q + 1; q < i; q++) {
+                        if (is_kw(d, &t[q], "__declspec") && q + 1 < i && t[q + 1].t == '(') {
+                            int a = 0;
+                            for (q = q + 1; q < i; q++) { if (t[q].t == '(') a++; else if (t[q].t == ')' && --a == 0) break; }
+                            continue;
+                        }
+                        if (t[q].t == T_ID) { names[sp] = q; break; }
+                    }
+                }
+            }
+            sp++;
+            st = i + 1;
+            continue;
+        }
+        if (c == '}') {
+            char k = sp > 0 && sp <= (int)sizeof stack ? stack[sp - 1] : 'b';
+            if (sp > 0) sp--;
+            if (k == 'n' || k == 'b') st = i + 1;
+            continue;
+        }
+        if (c == ';') { st = i + 1; continue; }
+        if (c == ':' && i > st && i - 1 == st &&
+            (is_kw(d, &t[st], "public") || is_kw(d, &t[st], "private") || is_kw(d, &t[st], "protected"))) {
+            st = i + 1;
+            continue;
+        }
+        if (c != T_ID) continue;
+        {   /* the parameter list: after the name, or after operator=, operator(), operator bool ... */
+            int pj = i + 1;
+            if (is_kw(d, &t[i], "operator")) {
+                if (pj + 1 < nt && t[pj].t == '(' && t[pj + 1].t == ')') pj += 2;
+                else while (pj < nt && pj < i + 6 && t[pj].t != '(') pj++;
+            }
+            if (pj >= nt || t[pj].t != '(') continue;
+            for (j = 0; j < sp && j < (int)sizeof stack; j++) if (stack[j] != 'n' && stack[j] != 'c') break;
+            if (j < sp) continue;
+            if (!is_func_def(d, t, nt, pj - 1) || st >= nt) continue;
+        }
+        tilde = i > 0 && t[i - 1].t == '~';
+        if (tilde) {
+            char *key = (char *)xmalloc(t[i].len + 2);
+            key[0] = '~';
+            memcpy(key + 1, d + t[i].s, t[i].len);
+            key[t[i].len + 1] = 0;
+            v = map_at(&w->defmap, key, t[i].len + 1, 1);
+            if (*v < 0) VPUSH(w->owned_keys, key); else free(key);
+        } else {
+            v = map_at(&w->defmap, d + t[i].s, t[i].len, 1);
+        }
+        if (*v < 0) {
+            IntVec e = { 0 };
+            *v = (int32_t)w->deflines.n;
+            VPUSH(w->deflines, e);
+        }
+        /* its scope: the named namespace and class bodies around it, then the qualifiers before its name
+         * (A::B::name, A<T>::name), outermost first, each followed by '@' */
+        q = tilde ? i - 2 : i - 1;
+        while (q >= 1 && t[q].t == T_SCOPE && nq < 16) {
+            int r = q - 1;
+            if (t[r].t == '>') {   /* skip template arguments */
+                int a = 0;
+                for (; r >= 0; r--) { if (t[r].t == '>') a++; else if (t[r].t == '<' && --a == 0) break; }
+                r--;
+            }
+            if (r < 0 || t[r].t != T_ID) break;
+            quals[nq++] = r;
+            q = r - 1;
+        }
+        rec.line = (int)t[st].line;
+        rec.scope = (int)w->scopes.n;
+        for (j = 0; j < sp && j < (int)sizeof stack; j++)
+            if (names[j] >= 0) { buf_put(&w->scopes, d + t[names[j]].s, t[names[j]].len); buf_putc(&w->scopes, '@'); }
+        for (q = nq - 1; q >= 0; q--) { buf_put(&w->scopes, d + t[quals[q]].s, t[quals[q]].len); buf_putc(&w->scopes, '@'); }
+        buf_putc(&w->scopes, 0);
+        VPUSH(w->defrec, rec);
+        VPUSH(w->deflines.a[*v], (int)w->defrec.n - 1);
+    }
+}
+
+/* does a definition's scope (from index_work: "A@B@") agree with the decorated name? Every component must be a
+ * fragment of the name's scope part (what follows its own name, up to the first "@@"); a global definition matches only
+ * a name without scope. For a constructor or destructor, the class itself counts as part of the scope. */
+static int scope_matches(const char *sym, const char *scope)
+{
+    int n = (int)strlen(sym), b = derived_prefix(sym, n), o, l, cpp, a, e;
+    const char *c;
+    if (own_name(sym, n, &o, &l, &cpp)) {
+        if (!cpp) return 1;   /* C linkage: the decoration carries no scope (extern "C" inside a namespace) */
+        a = o + l + 1;
+    } else if (n - b > 3 && sym[b] == '?' && sym[b + 1] == '?' && sym[b + 2] != '$') {
+        /* ctor, dtor, operator: ??0 ??4 ..., ??_X, ??__X; the class follows the code */
+        a = b + 3;
+        if (sym[b + 2] == '_') a = sym[b + 3] == '_' ? b + 5 : b + 4;
+        if (a >= n) return 1;
+    } else {
+        return 1;
+    }
+    for (e = a - 1; e + 1 < n && !(sym[e] == '@' && sym[e + 1] == '@'); e++) {}
+    if (e + 1 >= n) e = n;
+    if (a > e) a = e;
+    if (!*scope) return a >= e || (sym[a] == '@');   /* global: nothing between the name and "@@" */
+    for (c = scope; *c; ) {
+        const char *at = strchr(c, '@');
+        int cl = (int)(at - c), p, hit = 0;
+        for (p = a; p + cl <= e; p++)
+            if (!memcmp(sym + p, c, (size_t)cl) && (p + cl == e || sym[p + cl] == '@') &&
+                (p == a || sym[p - 1] == '@' || sym[p - 1] == '$' || sym[p - 1] == '?')) { hit = 1; break; }
+        if (!hit) return 0;
+        c = at + 1;
+    }
+    return 1;
+}
+
+/* the definitions of `name` in w whose scope agrees with decorated name sym: their statement lines (deduplicated) */
+static void find_defs(FileWork *w, const char *name, size_t nl, int tilde, const char *sym, IntVec *lines)
+{
+    int v;
+    size_t z;
+    lines->n = 0;
+    if (!w->indexed) index_work(w);
+    if (tilde) {
+        char key[300];
+        if (nl + 2 > sizeof key) return;
+        key[0] = '~';
+        memcpy(key + 1, name, nl);
+        v = map_get(&w->defmap, key, nl + 1);
+    } else {
+        v = map_get(&w->defmap, name, nl);
+    }
+    if (v < 0) return;
+    for (z = 0; z < w->deflines.a[v].n; z++) {
+        DefRec *r = &w->defrec.a[w->deflines.a[v].a[z]];
+        if (sym && !scope_matches(sym, w->scopes.p + r->scope)) continue;
+        if (!ivec_has(lines, r->line)) VPUSH(*lines, r->line);
+    }
+}
+
+/* the identifier a decorated name is spelled with in source: its own name, the class of a constructor or destructor
+ * (*tilde set for ??1), "operator" for other special names */
+static int symbol_token(const char *s, int n, char *out, size_t outsz, int *tilde)
+{
+    int o, l, cpp, b = derived_prefix(s, n);
+    *tilde = 0;
+    if (own_name(s, n, &o, &l, &cpp)) {
+        if ((size_t)l >= outsz) return 0;
+        memcpy(out, s + o, (size_t)l);
+        out[l] = 0;
+        return 1;
+    }
+    if (n - b > 3 && s[b] == '?' && s[b + 1] == '?' && (s[b + 2] == '0' || s[b + 2] == '1')) {
+        int st = b + 3, e;
+        if (st + 1 < n && s[st] == '?' && s[st + 1] == '$') st += 2;
+        for (e = st; e < n && s[e] != '@'; e++) {}
+        if (e >= n || e == st || (size_t)(e - st) >= outsz) return 0;
+        memcpy(out, s + st, (size_t)(e - st));
+        out[e - st] = 0;
+        *tilde = s[b + 2] == '1';
+        return 1;
+    }
+    if (n - b > 2 && s[b] == '?' && s[b + 1] == '?') { strcpy(out, "operator"); return 1; }
+    return 0;
+}
+
+typedef struct {
+    uint32_t addr;
+    IntVec lines;          /* indices into g_cmt_text */
+    char tokens[4][256];   /* source spellings of the function's names */
+    char *syms[4];         /* the decorated name each token came from */
+    int tilde[4], ntok;
+    int status;            /* S_APPLIED, S_AMBIGUOUS, S_NOTFOUND */
+    Buf reason;
+    VEC(uint64_t) sites;   /* file << 32 | line (0-based) */
+    VEC(uint64_t) pending; /* tree-wide search candidates */
+    int inserted, replaced, unchanged;
+} CAddr;
+
+static VEC(CAddr) g_ca;
+static StrVec g_cmt_text;
+
+static int ca_find(uint32_t addr, const uint32_t *keys, const int *idx, size_t n)
+{
+    size_t lo = 0, hi = n;
+    while (lo < hi) {
+        size_t mid = (lo + hi) / 2;
+        if (keys[mid] < addr) lo = mid + 1; else hi = mid;
+    }
+    return lo < n && keys[lo] == addr ? idx[lo] : -1;
+}
+
+static void ca_add_token(CAddr *c, const char *sym)
+{
+    char tok[256];
+    int tilde, k;
+    if (!symbol_token(sym, (int)strlen(sym), tok, sizeof tok, &tilde)) return;
+    for (k = 0; k < c->ntok; k++) if (!strcmp(c->tokens[k], tok) && c->tilde[k] == tilde) return;
+    if (c->ntok >= 4) return;
+    strcpy(c->tokens[c->ntok], tok);
+    c->syms[c->ntok] = xstrdup(sym);
+    c->tilde[c->ntok++] = tilde;
+}
+
+static void ca_add_site(CAddr *c, int file, int line)
+{
+    uint64_t s = ((uint64_t)(uint32_t)file << 32) | (uint32_t)line;
+    size_t k;
+    for (k = 0; k < c->sites.n; k++) if (c->sites.a[k] == s) return;
+    VPUSH(c->sites, s);
+}
+
+static void load_work(FileWork *w, int f)
+{
+    memset(w, 0, sizeof *w);
+    w->file = f;
+    w->d = g_files.a[f].data;
+    w->n = g_files.a[f].len;
+    lex_tokens(w->d, w->n, &w->toks);
+    line_starts(w->d, w->n, &w->ls);
+}
+
+static void free_work(FileWork *w)
+{
+    size_t z;
+    for (z = 0; z < w->deflines.n; z++) free(w->deflines.a[z].a);
+    for (z = 0; z < w->owned_keys.n; z++) free(w->owned_keys.a[z]);
+    free(w->deflines.a); free(w->owned_keys.a); free(w->tags.a); free(w->defmap.s);
+    free(w->defrec.a); free(w->scopes.p);
+    free(w->toks.a); free(w->ls.a); free(w->ops.a);
+    memset(w, 0, sizeof *w);
+}
+
+/* the definition sites of c in file w without a usable location, among the definitions of its name whose scope agrees
+ * with its decorated name: the first after each of its // @f3 tags; else the only one, or the one clearly nearest to
+ * the recorded line (near_line, 0-based); with no location (near_line -1) candidates for a tree-wide decision */
+static int search_file(CAddr *c, FileWork *w, int near_line, int *ambiguous)
+{
+    IntVec defs = { 0 };
+    IntVec taglines = { 0 };
+    size_t p;
+    int k, found = 0;
+    if (!w->indexed) index_work(w);
+    {   /* this address's @f3 tags */
+        size_t lo = 0, hi = w->tags.n;
+        while (lo < hi) { size_t mid = (lo + hi) / 2; if ((w->tags.a[mid] >> 32) < c->addr) lo = mid + 1; else hi = mid; }
+        for (p = lo; p < w->tags.n && (uint32_t)(w->tags.a[p] >> 32) == c->addr; p++)
+            VPUSH(taglines, (int)(uint32_t)w->tags.a[p]);
+    }
+    for (k = 0; k < c->ntok; k++) {
+        size_t z, q;
+        int by_tag = 0;
+        find_defs(w, c->tokens[k], strlen(c->tokens[k]), c->tilde[k], c->syms[k], &defs);
+        if (!defs.n) continue;
+        for (q = 0; q < taglines.n; q++) {   /* the first definition after each tag */
+            int best = -1;
+            for (z = 0; z < defs.n; z++) if (defs.a[z] > taglines.a[q] && (best < 0 || defs.a[z] < best)) best = defs.a[z];
+            if (best >= 0 && best - taglines.a[q] < 400) { ca_add_site(c, w->file, best); found++; by_tag = 1; }
+        }
+        if (by_tag) continue;
+        if (near_line < 0) {   /* no location: a candidate only; kept when it is the one definition in the tree */
+            for (z = 0; z < defs.n; z++) VPUSH(c->pending, ((uint64_t)(uint32_t)w->file << 32) | (uint32_t)defs.a[z]);
+            continue;
+        }
+        if (near_line >= 0) {   /* the recorded line drifted: the definition clearly nearest to it */
+            int best = -1, d1 = 1 << 30, d2 = 1 << 30;
+            for (z = 0; z < defs.n; z++) {
+                int dd = abs(defs.a[z] - near_line);
+                if (dd < d1) { d2 = d1; d1 = dd; best = defs.a[z]; }
+                else if (dd < d2) d2 = dd;
+            }
+            if (best >= 0 && (defs.n == 1 || d2 > 2 * d1 + 20)) {
+                ca_add_site(c, w->file, best);
+                found++;
+                continue;
+            }
+        }
+        *ambiguous = 1;
+    }
+    free(defs.a);
+    free(taglines.a);
+    return found;
+}
+
+static int is_pdb_line(const char *d, size_t a, size_t b)
+{
+    while (a < b && (d[a] == ' ' || d[a] == '\t')) a++;
+    return (b - a >= 8 && !memcmp(d + a, "// pdb: ", 8)) || (b - a >= 15 && !memcmp(d + a, "// pdb params: ", 15)) ||
+           (b - a == 7 && !memcmp(d + a, "// pdb:", 7));
+}
+
+static int line_text_is(const FileWork *w, int line, const char *text)
+{
+    size_t a = (size_t)w->ls.a[line], b = line + 1 < (int)w->ls.n ? (size_t)w->ls.a[line + 1] : w->n, tl = strlen(text);
+    while (a < b && (w->d[a] == ' ' || w->d[a] == '\t')) a++;
+    while (b > a && (w->d[b - 1] == '\n' || w->d[b - 1] == '\r' || w->d[b - 1] == ' ' || w->d[b - 1] == '\t')) b--;
+    return b - a == tl && !memcmp(w->d + a, text, tl);
+}
+
+/* one site: replace the // pdb lines of the header comment block directly above `line`, or add them */
+static void comment_site(CAddr *c, int ci, FileWork *w, int line)
+{
+    IntVec old = { 0 };
+    int k, same;
+    size_t z;
+    /* the header block: comment-only lines directly above, up to a blank or code line */
+    for (k = line - 1; k >= 0; k--) {
+        size_t a = (size_t)w->ls.a[k], b = (size_t)w->ls.a[k + 1], q = a;
+        while (q < b && (w->d[q] == ' ' || w->d[q] == '\t')) q++;
+        if (!(b - q >= 2 && w->d[q] == '/' && w->d[q + 1] == '/')) break;
+        if (is_pdb_line(w->d, a, b)) VPUSH(old, k);
+    }
+    /* already there: the same lines, in order, directly above */
+    same = old.n == c->lines.n && (int)c->lines.n <= line;
+    for (z = 0; same && z < c->lines.n; z++) {
+        int ln = line - (int)c->lines.n + (int)z;
+        if (!ivec_has(&old, ln) || !line_text_is(w, ln, g_cmt_text.a[c->lines.a[z]])) same = 0;
+    }
+    if (same) { c->unchanged++; free(old.a); return; }
+    for (z = 0; z < old.n; z++) add_op(w, old.a[z], 2, ci * 64, "");
+    for (z = 0; z < c->lines.n; z++) add_op(w, line, 0, ci * 64 + (int)z, g_cmt_text.a[c->lines.a[z]]);
+    c->inserted += (int)c->lines.n;
+    c->replaced += (int)old.n;
+    free(old.a);
+}
+
+static int cmp_u64(const void *a, const void *b)
+{
+    uint64_t x = *(const uint64_t *)a, y = *(const uint64_t *)b;
+    return x < y ? -1 : x > y;
+}
+
+static int cmd_comments(int argc, char **argv)
+{
+    const char *cpath = NULL, *lpath = NULL, *report = NULL;
+    int dry = 0, i, written = 0, counts[5] = { 0 };
+    size_t k, len, j;
+    double t0 = now_s();
+    char *data, *p;
+    uint32_t *keys;
+    int *kidx;
+    VEC(int) *byfile;   /* per file: (CAddr index) needing work there */
+    Buf rep = { 0 };
+    int total_lines = 0, total_sites = 0, total_repl = 0, total_unch = 0;
+
+    for (i = 0; i < argc; i++) {
+        if (!strcmp(argv[i], "--root") && i + 1 < argc) g_root = root_arg(argv[++i]);
+        else if (!strcmp(argv[i], "--comments") && i + 1 < argc) cpath = argv[++i];
+        else if (!strcmp(argv[i], "--locations") && i + 1 < argc) lpath = argv[++i];
+        else if (!strcmp(argv[i], "--report") && i + 1 < argc) report = argv[++i];
+        else if (!strcmp(argv[i], "--dry-run")) dry = 1;
+        else usage();
+    }
+    if (!g_root || !cpath) usage();
+    load_tree();
+    build_index();
+    load_recipe();
+    if (lpath) load_locations(lpath);
+
+    /* the comment lines, by address, in file order */
+    data = read_all(cpath, &len);
+    if (!data) die("cannot read %s", cpath);
+    for (p = data; p && *p; ) {
+        char *nl = strchr(p, '\n'), *line = p, *f[4];
+        int nf;
+        uint32_t a;
+        if (nl) *nl = 0;
+        p = nl ? nl + 1 : NULL;
+        if (!*line || *line == '\r') continue;
+        nf = split_tabs(line, f, 4);
+        if (nf < 2 || !strcmp(f[0], "address") || !f[1][0]) continue;
+        a = (uint32_t)strtoul(f[0], NULL, 16);
+        if (!g_ca.n || g_ca.a[g_ca.n - 1].addr != a) {
+            CAddr c;
+            int found = -1;
+            for (k = g_ca.n; k-- > 0 && k + 64 > g_ca.n; ) if (g_ca.a[k].addr == a) { found = (int)k; break; }
+            if (found < 0) {
+                memset(&c, 0, sizeof c);
+                c.addr = a;
+                VPUSH(g_ca, c);
+            } else if (found != (int)g_ca.n - 1) {
+                die("%s: the rows of 0x%08x are not together", cpath, a);
+            }
+        }
+        VPUSH(g_cmt_text, xstrdup(f[1]));
+        VPUSH(g_ca.a[g_ca.n - 1].lines, (int)g_cmt_text.n - 1);
+    }
+    free(data);
+    keys = (uint32_t *)xmalloc(sizeof(uint32_t) * (g_ca.n + 1));
+    kidx = (int *)xmalloc(sizeof(int) * (g_ca.n + 1));
+    {   /* sorted address index */
+        uint64_t *pairs = (uint64_t *)xmalloc(sizeof(uint64_t) * (g_ca.n + 1));
+        for (k = 0; k < g_ca.n; k++) pairs[k] = ((uint64_t)g_ca.a[k].addr << 32) | (uint32_t)k;
+        qsort(pairs, g_ca.n, sizeof(uint64_t), cmp_u64);
+        for (k = 0; k < g_ca.n; k++) { keys[k] = (uint32_t)(pairs[k] >> 32); kidx[k] = (int)(uint32_t)pairs[k]; }
+        free(pairs);
+        for (k = 1; k < g_ca.n; k++) if (keys[k] == keys[k - 1]) die("%s: 0x%08x listed in two places", cpath, keys[k]);
+    }
+
+    /* names: the recipe's function symbols (and fold aliases) at each address, then the locations' symbols */
+    for (k = 0; k < g_names.n; k++) {
+        Name *nm = &g_names.a[k];
+        const char *s = g_json + nm->off;
+        int ci;
+        if (nm->role == R_SYMBOL || nm->role == R_ALIAS) {
+            ci = ca_find(nm->addr, keys, kidx, g_ca.n);
+            if (ci >= 0) {
+                char *sym = xstrndup(s, nm->len);
+                ca_add_token(&g_ca.a[ci], sym);
+                free(sym);
+            }
+        }
+    }
+    for (k = 0; k < g_locs.n; k++) {
+        int ci = ca_find(g_locs.a[k].addr, keys, kidx, g_ca.n);
+        if (ci >= 0 && g_locs.a[k].symbol) ca_add_token(&g_ca.a[ci], g_locs.a[k].symbol);
+    }
+
+    /* pass 1: every location row, checked against the file as it is now; a failed row searches its own file */
+    byfile = xcalloc(g_files.n, sizeof(*byfile));
+    for (k = 0; k < g_locs.n; k++) {
+        int ci = ca_find(g_locs.a[k].addr, keys, kidx, g_ca.n);
+        if (ci < 0 || g_locs.a[k].file < 0) continue;
+        VPUSH(byfile[g_locs.a[k].file], (int)k);
+    }
+    {
+        char *searched = (char *)xcalloc(g_ca.n * 1 + 1, 1);   /* 1: the address still needs a tree-wide search */
+        IntVec files = { 0 }, defl = { 0 };
+        for (k = 0; k < g_ca.n; k++) searched[k] = 1;
+        for (j = 0; j < g_locs.n; j++) {   /* rows that name no file of the tree leave the search on */
+            int ci = ca_find(g_locs.a[j].addr, keys, kidx, g_ca.n);
+            if (ci >= 0 && g_locs.a[j].file >= 0) searched[ci] = 0;
+        }
+        for (k = 0; k < g_files.n; k++) {
+            FileWork w;
+            size_t q;
+            if (!byfile[k].n) continue;
+            load_work(&w, (int)k);
+            for (q = 0; q < byfile[k].n; q++) {
+                Loc *l = &g_locs.a[byfile[k].a[q]];
+                int ci = ca_find(l->addr, keys, kidx, g_ca.n), line = l->line - 1, inb = 0, t, ok = 0, amb = 0;
+                CAddr *c = &g_ca.a[ci];
+                if (line < (int)w.ls.n) {
+                    while (line < (int)w.ls.n && line_is_blank_or_comment(w.d, w.n, &w.ls, line, &inb)) line++;
+                    /* a definition of one of its names starts there, in a scope that agrees with its decorated name */
+                    for (t = 0; t < c->ntok && !ok; t++) {
+                        find_defs(&w, c->tokens[t], strlen(c->tokens[t]), c->tilde[t], c->syms[t], &defl);
+                        ok = ivec_has(&defl, line);
+                    }
+                    /* a qualifier the scope check cannot follow (a typedef of the class): the exact line, when it is
+                     * the file's only definition of the name */
+                    for (t = 0; t < c->ntok && !ok; t++) {
+                        find_defs(&w, c->tokens[t], strlen(c->tokens[t]), c->tilde[t], NULL, &defl);
+                        ok = defl.n == 1 && defl.a[0] == line;
+                    }
+                }
+                if (ok) { ca_add_site(c, (int)k, line); continue; }
+                if (!search_file(c, &w, l->line - 1, &amb)) {
+                    if (amb) buf_printf(&c->reason, "%s:%d: several definitions, no @f3 tag; ", g_files.a[k].rel, l->line);
+                    searched[ci] = 1;   /* moved elsewhere? */
+                }
+            }
+            free_work(&w);
+        }
+        /* pass 2: addresses still without a site in some row: every file holding one of their names */
+        for (k = 0; k < g_files.n; k++) byfile[k].n = 0;
+        for (k = 0; k < g_ca.n; k++) {
+            CAddr *c = &g_ca.a[k];
+            if (!searched[k] || c->sites.n) continue;
+            for (i = 0; i < c->ntok; i++) {
+                int cf;
+                token_files(c->tokens[i], strlen(c->tokens[i]), &files, &cf);
+                for (j = 0; j < files.n; j++)
+                    if (!byfile[files.a[j]].n || byfile[files.a[j]].a[byfile[files.a[j]].n - 1] != (int)k)
+                        VPUSH(byfile[files.a[j]], (int)k);
+            }
+        }
+        for (k = 0; k < g_files.n; k++) {
+            FileWork w;
+            size_t q;
+            if (!byfile[k].n) continue;
+            load_work(&w, (int)k);
+            for (q = 0; q < byfile[k].n; q++) {
+                CAddr *c = &g_ca.a[byfile[k].a[q]];
+                int amb = 0;
+                search_file(c, &w, -1, &amb);
+                if (amb && !c->status) { c->status = S_AMBIGUOUS; }
+            }
+            free_work(&w);
+        }
+        for (k = 0; k < g_ca.n; k++) {   /* a function is defined once: one candidate in the whole tree, or none */
+            CAddr *c = &g_ca.a[k];
+            if (c->pending.n == 1) ca_add_site(c, (int)(c->pending.a[0] >> 32), (int)(uint32_t)c->pending.a[0]);
+            else if (c->pending.n > 1 && !c->sites.n) {
+                c->status = S_AMBIGUOUS;
+                buf_printf(&c->reason, "%d definitions of its name in the tree and no location; ", (int)c->pending.n);
+            }
+        }
+        free(searched);
+        free(defl.a);
+        free(files.a);
+    }
+
+    /* decide, and the edits, file by file */
+    for (k = 0; k < g_ca.n; k++) {
+        CAddr *c = &g_ca.a[k];
+        if (!c->ntok) { c->status = S_NOTFOUND; buf_puts(&c->reason, "no recipe or location symbol at this address; "); }
+        else if (c->sites.n) c->status = S_APPLIED;
+        else if (c->status == S_AMBIGUOUS || c->reason.n) {
+            c->status = S_AMBIGUOUS;
+            buf_puts(&c->reason, "definitions found, but not which one is this function (no @f3 tag, several in scope); ");
+        } else { c->status = S_NOTFOUND; buf_puts(&c->reason, "no definition found; "); }
+        if (c->sites.n) qsort(c->sites.a, c->sites.n, sizeof(uint64_t), cmp_u64);
+    }
+    {
+        /* two addresses claiming one site: neither gets it */
+        VEC(uint64_t) all = { 0 };
+        VEC(int) owner = { 0 };
+        for (k = 0; k < g_files.n; k++) byfile[k].n = 0;
+        for (k = 0; k < g_ca.n; k++)
+            for (j = 0; j < g_ca.a[k].sites.n; j++) VPUSH(byfile[g_ca.a[k].sites.a[j] >> 32], (int)k);
+        for (k = 0; k < g_files.n; k++) {
+            FileWork w;
+            size_t q;
+            if (!byfile[k].n) continue;
+            memset(&w, 0, sizeof w);
+            w.file = (int)k;
+            w.d = g_files.a[k].data;
+            w.n = g_files.a[k].len;
+            line_starts(w.d, w.n, &w.ls);
+            all.n = owner.n = 0;
+            for (q = 0; q < byfile[k].n; q++) {
+                CAddr *c = &g_ca.a[byfile[k].a[q]];
+                for (j = 0; j < c->sites.n; j++)
+                    if ((int)(c->sites.a[j] >> 32) == (int)k) { VPUSH(all, c->sites.a[j]); VPUSH(owner, byfile[k].a[q]); }
+            }
+            for (q = 0; q < all.n; q++) {
+                size_t z;
+                int clash = 0;
+                if (q > 0 && all.a[q] == all.a[q - 1] && owner.a[q] == owner.a[q - 1]) continue;
+                for (z = 0; z < all.n; z++) if (z != q && all.a[z] == all.a[q] && owner.a[z] != owner.a[q]) clash = 1;
+                if (clash) {
+                    buf_printf(&g_ca.a[owner.a[q]].reason, "%s:%d claimed by two addresses, skipped; ", g_files.a[k].rel,
+                               (int)(uint32_t)all.a[q] + 1);
+                    continue;
+                }
+                comment_site(&g_ca.a[owner.a[q]], owner.a[q], &w, (int)(uint32_t)all.a[q]);
+            }
+            if (w.ops.n) {
+                Buf out = { 0 };
+                apply_ops(&w, &out);
+                written++;
+                if (!dry) {
+                    char path[MAX_PATH * 2];
+                    snprintf(path, sizeof path, "%s/%s", g_root, g_files.a[k].rel);
+                    write_all(path, out.p, out.n);
+                }
+                free(out.p);
+            }
+            free(w.ls.a);
+            free(w.ops.a);
+        }
+        free(all.a);
+        free(owner.a);
+    }
+
+    buf_puts(&rep, "address\tstatus\treason\tsites\tlines\treplaced\tunchanged\n");
+    for (k = 0; k < g_ca.n; k++) {
+        CAddr *c = &g_ca.a[k];
+        counts[c->status]++;
+        if (c->status == S_APPLIED) {
+            total_sites += (int)c->sites.n;
+            total_lines += c->inserted;
+            total_repl += c->replaced;
+            total_unch += c->unchanged;
+        }
+        while (c->reason.n && (c->reason.p[c->reason.n - 1] == ' ' || c->reason.p[c->reason.n - 1] == ';')) c->reason.p[--c->reason.n] = 0;
+        buf_printf(&rep, "0x%08x\t%s\t", c->addr, STATUS[c->status]);
+        tsv_field(&rep, c->reason.p ? c->reason.p : "");
+        buf_putc(&rep, '\t');
+        for (j = 0; j < c->sites.n; j++)
+            buf_printf(&rep, "%s%s:%d", j ? ";" : "", g_files.a[c->sites.a[j] >> 32].rel, (int)(uint32_t)c->sites.a[j] + 1);
+        buf_printf(&rep, "\t%d\t%d\t%d\n", c->inserted, c->replaced, c->unchanged);
+    }
+    if (report) write_all(report, rep.p, rep.n);
+    else fwrite(rep.p, 1, rep.n, stdout);
+    fprintf(stderr, "f3rename comments: %zu addresses (%zu lines): applied %d, ambiguous %d, not-found %d; %d sites, "
+            "%d lines inserted, %d old pdb lines replaced, %d sites already current; %d files %s (%.1fs)\n",
+            g_ca.n, g_cmt_text.n, counts[S_APPLIED], counts[S_AMBIGUOUS], counts[S_NOTFOUND], total_sites, total_lines,
+            total_repl, total_unch, written, dry ? "would change (dry run)" : "changed", now_s() - t0);
+    return 0;
+}
+
 int main(int argc, char **argv)
 {
-
     if (argc < 2) usage();
     if (!strcmp(argv[1], "apply")) return cmd_apply(argc - 2, argv + 2);
     if (!strcmp(argv[1], "bisect")) return cmd_bisect(argc - 2, argv + 2);
+    if (!strcmp(argv[1], "comments")) return cmd_comments(argc - 2, argv + 2);
     usage();
-
 }
