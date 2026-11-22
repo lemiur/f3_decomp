@@ -5,16 +5,16 @@
 // @fnv 0x00a2e220
 void NiControllerManager::Update(NiUpdateData& kData)
 {
-    if ((static_cast<unsigned char>(m_uiObjectFlags >> 3) & 1) != 0)
+    if ((static_cast<unsigned char>(m_uFlags >> 3) & 1) != 0)
     {
-        for (unsigned int i = 0; i < m_kPlayingSequences.m_uiAllocatedCapacity; ++i)
+        for (unsigned int i = 0; i < m_kActiveSequences.m_uiUsed; ++i)
         {
-            NiControllerSequence* pkSequence = m_kPlayingSequences.m_pBase[i];
+            NiControllerSequence* pkSequence = m_kActiveSequences.m_pBase[i];
             pkSequence->Update(kData.fTime, true);
             if (pkSequence->m_eAnimationState == NiControllerSequence::INACTIVE)
             {
-                --m_kPlayingSequences.m_uiAllocatedCapacity;
-                m_kPlayingSequences.m_pBase[i] = m_kPlayingSequences.m_pBase[m_kPlayingSequences.m_uiAllocatedCapacity];
+                --m_kActiveSequences.m_uiUsed;
+                m_kActiveSequences.m_pBase[i] = m_kActiveSequences.m_pBase[m_kActiveSequences.m_uiUsed];
                 --i;
             }
         }
@@ -225,11 +225,11 @@ struct CloneableObj
 void FUN_00a2f380_shell::CloneControllerManager(NiControllerManager* pkDest, CloningProcess* kCloning)
 {
     ((CloneableObj*)this)->FUN_00a6cfe0(pkDest, kCloning);
-    *(bool*)((char*)pkDest + 0x68) = *(bool*)((char*)this + 0x68);
+    pkDest->m_bCumulative = m_bCumulative;
 
-    for (unsigned int ui = 0; ui < *(unsigned short*)((char*)this + 0x3e); ui++)
+    for (unsigned int ui = 0; ui < m_kSequenceArray.m_usSize; ui++)
     {
-        CloneableObj* pkSequence = (*(CloneableObj***)((char*)this + 0x38))[ui];
+        CloneableObj* pkSequence = (CloneableObj*)m_kSequenceArray.m_pBase[ui].m_pObject;
         if (pkSequence)
         {
             CloneableObj* pkNewSequence = pkSequence->MakeClone(kCloning);
@@ -237,11 +237,11 @@ void FUN_00a2f380_shell::CloneControllerManager(NiControllerManager* pkDest, Clo
         }
     }
 
-    CloneableObj* pkPalette = *(CloneableObj**)((char*)this + 0x78);
+    CloneableObj* pkPalette = (CloneableObj*)m_spObjectPalette.m_pObject;
     if (pkPalette)
     {
         CloneableObj* pkNewPalette = pkPalette->MakeClone(kCloning);
-        CloneableObj* pkOldPalette = *(CloneableObj**)((char*)pkDest + 0x78);
+        CloneableObj* pkOldPalette = (CloneableObj*)pkDest->m_spObjectPalette.m_pObject;
         if (pkOldPalette != pkNewPalette)
         {
             if (pkOldPalette)
@@ -249,7 +249,7 @@ void FUN_00a2f380_shell::CloneControllerManager(NiControllerManager* pkDest, Clo
                 if (InterlockedDecrement(&pkOldPalette->m_uiRefCount) == 0)
                     pkOldPalette->DeleteThis();
             }
-            *(CloneableObj**)((char*)pkDest + 0x78) = pkNewPalette;
+            pkDest->m_spObjectPalette.m_pObject = (NiAVObjectPalette*)pkNewPalette;
             if (pkNewPalette)
                 InterlockedIncrement(&pkNewPalette->m_uiRefCount);
         }
@@ -263,7 +263,7 @@ const char* __cdecl FUN_00a2e1e0()
     return g_011f4a04_arg1;
 }
 
-struct FUN_00a2e420_shell
+struct FUN_00a2e420_shell : public NiControllerManager
 {
     unsigned char __thiscall FUN_00a2e420(float f);
 };
@@ -272,10 +272,10 @@ struct FUN_00a2e420_shell
 unsigned char __thiscall FUN_00a2e420_shell::FUN_00a2e420(float f)
 {
     unsigned int i = 0;
-    while (i < *(unsigned int*)((char*)this + 0x4c))
+    while (i < m_kActiveSequences.m_uiUsed)
     {
-        void* p = *(void**)((char*)*(void**)((char*)this + 0x44) + i * 4);
-        if (*(unsigned int*)((char*)p + 0x44) == 4)
+        NiControllerSequence* p = m_kActiveSequences.m_pBase[i];
+        if (p->m_eAnimationState == NiControllerSequence::TRANSSOURCE)
         {
             void** vtbl = (void**)p;
             void* obj = *vtbl;
@@ -422,6 +422,7 @@ __declspec(dllimport) long __stdcall InterlockedIncrement(volatile long*);
 __declspec(dllimport) long __stdcall InterlockedDecrement(volatile long*);
 extern int EmptyFS;
 struct Mgr;
+struct Owner;
 struct Seq
 {
     virtual void V0();
@@ -429,17 +430,12 @@ struct Seq
     long refs;
     const char* name;
     char pad[0x34];
-    Mgr* mgr;
+    Owner* m_pkOwner;  // src: FNV360_PDB NiControllerSequence +0x40 (old: mgr)
     char pad2[0x18];
     int f5c;
     bool FUN_004eeae0(int);
     void FUN_0043b9f0(int*);
     bool FUN_00a32c70(int);
-};
-struct Owner
-{
-    int pad[0xb];
-    int f2c;
 };
 struct Mgr2
 {
@@ -451,28 +447,37 @@ template <class A, class B> struct NiTStringTemplateMap
 };
 template <class K, class V> class NiTPointerMap;
 typedef NiTStringTemplateMap<NiTPointerMap<const char*, NiShader*>, NiShader*> SMap;
+struct Owner
+{
+    int pad[0xb];
+    int f2c;
+    int unk30;
+    Mgr2 m_kSequenceArray;  // src: FNV360_PDB NiControllerManager +0x34
+    char unk35[0x50 - 0x35];
+    SMap m_kStringMap;  // src: FNV360_PDB NiControllerManager +0x50
+};
 
 // @fnv 0x00a2f0c0
 bool __fastcall AttachSeqToOwner(Owner* pOwner, int edx, Seq* s, int* name, Seq* flag)
 {
-    if (pOwner && *(Owner**)((char*)s + 0x40))
+    if (pOwner && s->m_pkOwner)
         return false;
-    *(Owner**)((char*)s + 0x40) = pOwner;
+    s->m_pkOwner = pOwner;
     if (s->f5c == 0)
         s->FUN_004eeae0(pOwner->f2c + 8);
     if ((char)(int)flag && !s->FUN_00a32c70(pOwner->f2c))
     {
-        *(Owner**)((char*)s + 0x40) = 0;
+        s->m_pkOwner = 0;
         return false;
     }
     if (*name != EmptyFS)
         s->FUN_0043b9f0(name);
     flag = s;
     InterlockedIncrement(&s->refs);
-    ((Mgr2*)((char*)pOwner + 0x34))->FUN_00a2ec90(&flag);
+    pOwner->m_kSequenceArray.FUN_00a2ec90(&flag);
     if (InterlockedDecrement(&s->refs) == 0)
         s->Del();
-    ((SMap*)((char*)pOwner + 0x50))->SetAt(s->name, (NiShader*)s);
+    pOwner->m_kStringMap.SetAt(s->name, (NiShader*)s);
     return true;
 }
 
@@ -564,10 +569,10 @@ void FUN_00a2e2e0_shell::FUN_00a2e2e0(NiStream* kStream)
     NiAVObject* pkRoot;
     unsigned int ui;
     NiControllerSequence* pkSequence;
-    pkRoot = *(NiAVObject**)((char*)this + 0x2c);
-    for (ui = 0; ui < *(unsigned short*)((char*)this + 0x3e); ui++)
+    pkRoot = (NiAVObject*)m_pkTarget;
+    for (ui = 0; ui < m_kSequenceArray.m_usSize; ui++)
     {
-        pkSequence = (*(NiControllerSequence***)((char*)this + 0x38))[ui];
+        pkSequence = m_kSequenceArray.m_pBase[ui].m_pObject;
         if (pkSequence)
             ((Seq*)pkSequence)->FUN_00a32c70((int)pkRoot);
     }
@@ -621,6 +626,9 @@ extern int DAT_01096124;
 extern int DAT_01096144;
 struct FUN_00a2e510_Stub
 {
+    void* unk00;
+    unsigned int m_uiHashSize;  // src: FNV360_PDB NiTMapBase +0x4
+    void* m_ppkHashTable;  // src: FNV360_PDB NiTMapBase +0x8
     void* DestroyNiTMapBase(unsigned int);
 };
 // Resets two vtable pointers, calls RemoveAll on each, frees the pointer at offset 8, and deallocates this when a2 has bit 0 set.
@@ -631,7 +639,7 @@ void* FUN_00a2e510_Stub::DestroyNiTMapBase(unsigned int auiFlags)
     ((NiTMapBaseStub*)this)->RemoveAll();
     *(void**)this = (void*)&DAT_01096124;
     ((NiTMapBaseStub*)this)->RemoveAll();
-    _NiFreeAlias(*(void**)((char*)this + 8));
+    _NiFreeAlias(m_ppkHashTable);
     if (auiFlags & 1)
         g_memoryManager.Deallocate(this);
     return this;
@@ -663,6 +671,9 @@ extern int DAT_01096114;
 extern int DAT_0109618c;
 struct NiTFixedStringMap_NiAVObject___
 {
+    void* unk00;
+    unsigned int m_uiHashSize;  // src: FNV360_PDB NiTMapBase +0x4
+    void* m_ppkHashTable;  // src: FNV360_PDB NiTMapBase +0x8
     void RemoveAll();
     void* FUN_00a2eb40(unsigned int);
 };
@@ -673,7 +684,7 @@ void* NiTFixedStringMap_NiAVObject___::FUN_00a2eb40(unsigned int auiFlags)
     RemoveAll();
     *(void**)this = &DAT_01096114;
     RemoveAll();
-    _NiFreeAlias(*(void**)((char*)this + 8));
+    _NiFreeAlias(m_ppkHashTable);
     if (auiFlags & 1)
         g_memoryManager.Deallocate(this);
     return this;
@@ -802,10 +813,10 @@ struct S00a2efa0
     unsigned int m_u4c;
     NiTMapStandin m_kFormatEntries;
     S00a414f0* m_pkLookup;
-    bool m_bUseCumulativeAnimation;
+    bool m_bCumulative;  // src: FNV360_PDB +0x68 (old: m_bUseCumulativeAnimation)
     char pad69[3];
     NiListStandin m_kList;
-    CtrlPtr m_spControllerManager;
+    CtrlPtr m_spObjectPalette;  // src: FNV360_PDB +0x78 (old: m_spControllerManager)
     S00a2efa0* FUN_00a2efa0(NiObjectNET* pkTarget, bool bCumulative);
 };
 
@@ -819,12 +830,12 @@ S00a2efa0* S00a2efa0::FUN_00a2efa0(NiObjectNET* pkTarget, bool bCumulative)
     m_u48 = 0;
     m_u4c = 0;
     m_kFormatEntries.Construct(0x25);
-    m_bUseCumulativeAnimation = bCumulative;
+    m_bCumulative = bCumulative;
     m_kList.Construct();
-    m_spControllerManager.m_pObject = 0;
+    m_spObjectPalette.m_pObject = 0;
     ((NiTimeCtlrStandin*)this)->SetTarget(pkTarget);
     void* pControllerMem = BSFadeNode::operator new(0x1c);
-    m_spControllerManager = pControllerMem ? ((CtrlRefObj*)pControllerMem)->FUN_00a2ed80(pkTarget, 0x4f) : 0;
+    m_spObjectPalette = pControllerMem ? ((CtrlRefObj*)pControllerMem)->FUN_00a2ed80(pkTarget, 0x4f) : 0;
     void* pLookupMem = g_memoryManager.Allocate(0x10);
     m_pkLookup = pLookupMem ? ((S00a414f0*)pLookupMem)->FUN_00a414f0() : 0;
     return this;
@@ -920,9 +931,9 @@ struct Mgr543
     char pad00[0x2c];
     Obj543* m_pkTarget;
     char pad30[4];
-    Mgr2 m_kSequences;
+    Mgr2 m_kSequenceArray;  // src: FNV360_PDB +0x34 (old: m_kSequences)
     char pad35[0x1b];
-    Map543 m_kObjectMap;
+    Map543 m_kStringMap;  // src: FNV360_PDB +0x50 (old: m_kObjectMap)
 };
 
 // @fnv 0x00a2f6e0
@@ -931,7 +942,7 @@ void FUN_00a2f6e0_shell::FUN_00a2f6e0(NiStream* kStream)
     Mgr543* pkThis = (Mgr543*)this;
     ((CtrlHelper543*)this)->LinkObject(*kStream);
     unsigned int uiNumSequences = kStream->GetLinkID();
-    pkThis->m_kSequences.SetSize(uiNumSequences);
+    pkThis->m_kSequenceArray.SetSize(uiNumSequences);
     for (unsigned int ui = 0; ui < uiNumSequences; ui++)
     {
         Seq543* pkSequence = (Seq543*)kStream->GetLoadedObject();
@@ -944,10 +955,10 @@ void FUN_00a2f6e0_shell::FUN_00a2f6e0(NiStream* kStream)
             pkSequence->m_kName = DAT_011f49e0;
         Seq543* pSequenceRef = pkSequence;
         InterlockedIncrement(&pkSequence->m_uiRefCount);
-        pkThis->m_kSequences.FUN_00a2ec90(&pSequenceRef);
+        pkThis->m_kSequenceArray.FUN_00a2ec90(&pSequenceRef);
         if (InterlockedDecrement(&pkSequence->m_uiRefCount) == 0)
             pkSequence->DeleteThis();
-        pkThis->m_kObjectMap.SetAt(pkSequence->m_kName.m_kHandle, pkSequence);
+        pkThis->m_kStringMap.SetAt(pkSequence->m_kName.m_kHandle, pkSequence);
     }
 }
 }  // namespace fnv_00a2f6e0
@@ -1229,18 +1240,18 @@ void NiControllerManagerFacade::FUN_00a2eaa0(NiAVObject* source)
         int isActive = 1;
         unsigned char firstOutput;
         notifier->m_uiPending += notifier->m_pfnNotify(notifier, &firstOutput, 1, &isActive, 1);
-        m_bUseCumulativeAnimation = firstOutput != 0;
+        m_bCumulative = firstOutput != 0;
     }
     source->FUN_00a64670();
     if (*reinterpret_cast<unsigned int*>(reinterpret_cast<char*>(source) + 0xd8) >= 0x0a010068u)
     {
         NiAVObjectPalette* replacement = source->FUN_00a64620();
-        NiAVObjectPalette* old = m_spControllerManager.m_pObject;
+        NiAVObjectPalette* old = m_spObjectPalette.m_pObject;
         if (old != replacement)
         {
             if (old && InterlockedDecrement(reinterpret_cast<volatile long*>(reinterpret_cast<char*>(old) + 4)) == 0)
                 reinterpret_cast<NiRefObject*>(old)->DeleteThis();
-            m_spControllerManager.m_pObject = replacement;
+            m_spObjectPalette.m_pObject = replacement;
             if (replacement)
                 InterlockedIncrement(reinterpret_cast<volatile long*>(reinterpret_cast<char*>(replacement) + 4));
         }
@@ -1297,15 +1308,15 @@ bool FUN_00a2f610_cls::FUN_00a2f610(int arg)
     {
         return false;
     }
-    for (unsigned int i = 0; i < m_kSequences.m_usSize; i++)
+    for (unsigned int i = 0; i < m_kSequenceArray.m_usSize; i++)
     {
-        NiCtrlVt* seq = (NiCtrlVt*)m_kSequences.m_pBase[i].m_pObject;
+        NiCtrlVt* seq = (NiCtrlVt*)m_kSequenceArray.m_pBase[i].m_pObject;
         if (seq)
         {
             seq->v21(arg);
         }
     }
-    NiCtrlVt* pPalette = (NiCtrlVt*)m_spControllerManager.m_pObject;
+    NiCtrlVt* pPalette = (NiCtrlVt*)m_spObjectPalette.m_pObject;
     if (pPalette)
     {
         pPalette->v21(arg);
@@ -1323,7 +1334,7 @@ bool FUN_00a2f610_cls::FUN_00a2f610(int arg)
     {
         pNewPalette = 0;
     }
-    NiRefObject* old = (NiRefObject*)m_spControllerManager.m_pObject;
+    NiRefObject* old = (NiRefObject*)m_spObjectPalette.m_pObject;
     if (old != pNewPalette)
     {
         if (old)
@@ -1333,7 +1344,7 @@ bool FUN_00a2f610_cls::FUN_00a2f610(int arg)
                 old->DeleteThis();
             }
         }
-        m_spControllerManager.m_pObject = (NiAVObjectPalette*)pNewPalette;
+        m_spObjectPalette.m_pObject = (NiAVObjectPalette*)pNewPalette;
         if (pNewPalette)
         {
             InterlockedIncrement((volatile long*)&pNewPalette->m_uiRefCount);
@@ -1483,18 +1494,18 @@ bool FUN_00a2e320_shell::FUN_00a2e320(FUN_00a2e320_shell* apOther)
     FUN_00a2e320_shell* other = apOther;
     if (!reinterpret_cast<FNV_EqualBase2*>(this)->FUN_00837860(reinterpret_cast<FNV_EqualBase2*>(other)))
         return false;
-    if (m_kSequences.m_usSize != other->m_kSequences.m_usSize)
+    if (m_kSequenceArray.m_usSize != other->m_kSequenceArray.m_usSize)
         return false;
 
-    FNV_MapViewFirst* mapFirst = reinterpret_cast<FNV_MapViewFirst*>(&m_kObjectMap);
+    FNV_MapViewFirst* mapFirst = reinterpret_cast<FNV_MapViewFirst*>(&m_kStringMap);
     FNV_MapItem* position = mapFirst->FUN_004d4210();
     while (position != 0)
     {
         const char* key;
         FNV_Comparable* item;
         FNV_Comparable* matchedItem;
-        FNV_MapView* map = reinterpret_cast<FNV_MapView*>(&m_kObjectMap);
-        FNV_MapView* otherMap = reinterpret_cast<FNV_MapView*>(&other->m_kObjectMap);
+        FNV_MapView* map = reinterpret_cast<FNV_MapView*>(&m_kStringMap);
+        FNV_MapView* otherMap = reinterpret_cast<FNV_MapView*>(&other->m_kStringMap);
         map->AdvanceToNextEntry(&position, &key, reinterpret_cast<void**>(&item));
         if (!otherMap->FUN_00853130(key, reinterpret_cast<void**>(&matchedItem)))
             return false;
@@ -1502,10 +1513,10 @@ bool FUN_00a2e320_shell::FUN_00a2e320(FUN_00a2e320_shell* apOther)
             return false;
     }
 
-    for (unsigned int j = 0; j < m_kSequences.m_usSize; ++j)
+    for (unsigned int j = 0; j < m_kSequenceArray.m_usSize; ++j)
     {
-        FNV_Comparable* left = reinterpret_cast<FNV_Comparable*>(m_kSequences.m_pBase[j].m_pObject);
-        FNV_Comparable* right = reinterpret_cast<FNV_Comparable*>(other->m_kSequences.m_pBase[j].m_pObject);
+        FNV_Comparable* left = reinterpret_cast<FNV_Comparable*>(m_kSequenceArray.m_pBase[j].m_pObject);
+        FNV_Comparable* right = reinterpret_cast<FNV_Comparable*>(other->m_kSequenceArray.m_pBase[j].m_pObject);
         if (left != 0 && right != 0)
         {
             if (!left->FUN_00a6cc80(right))
@@ -1604,15 +1615,15 @@ template <class T> struct SPtr
 template <class T> struct CSet
 {
     T* m_pBase;
-    unsigned int m_uiElementCount;
-    unsigned int m_uiAllocatedCapacity;
+    unsigned int m_uiAlloced;  // src: FNV360_PDB +0x4 (old: m_uiElementCount)
+    unsigned int m_uiUsed;  // src: FNV360_PDB +0x8 (old: m_uiAllocatedCapacity)
     __declspec(nothrow) void Realloc(unsigned int uiNewSize);
     __forceinline unsigned int Add(const T& element) throw()
     {
-        if (m_uiAllocatedCapacity == m_uiElementCount)
-            Realloc(m_uiElementCount > 0 ? (2 * m_uiElementCount) : 1);
-        m_pBase[m_uiAllocatedCapacity++] = element;
-        return m_uiAllocatedCapacity - 1;
+        if (m_uiUsed == m_uiAlloced)
+            Realloc(m_uiAlloced > 0 ? (2 * m_uiAlloced) : 1);
+        m_pBase[m_uiUsed++] = element;
+        return m_uiUsed - 1;
     }
 };
 
@@ -1678,7 +1689,7 @@ struct CArrayHdr
 
 struct CCtrlMgr : CTimeCtrlBase
 {
-    unsigned short m_uiObjectFlags;
+    unsigned short m_uFlags;  // src: FNV360_PDB +0x8 (old: m_uFlags)
     float m_fFrequency;
     float m_fPhase;
     float m_fLoKeyTime;
@@ -1688,8 +1699,8 @@ struct CCtrlMgr : CTimeCtrlBase
     float m_fWeightAdjustedLastTime;
     float m_fControllerTime;
     int m_pkTarget;
-    int m_spNextController;
-    CArrayHdr m_kSequences;
+    int m_spNext;  // src: FNV360_PDB +0x30 (old: m_spNextController)
+    CArrayHdr m_kSequenceArray;  // src: FNV360_PDB +0x34 (old: m_kSequences)
     int unk44;
     int unk48;
     int unk4c;
@@ -1700,25 +1711,25 @@ struct CCtrlMgr : CTimeCtrlBase
     int unk60;
     int unk64;
     int unk68;
-    CSet<SPtr<CSeq> > m_kSequenceSet;
-    SPtr<CObj> m_spControllerManager;
+    CSet<SPtr<CSeq> > m_kTempBlendSeqs;  // src: FNV360_PDB +0x6C (old: m_kSequenceSet)
+    SPtr<CObj> m_spObjectPalette;  // src: FNV360_PDB +0x78 (old: m_spControllerManager)
     void FUN_00a2f420(CloneProc& kCloning);
 };
 
 // @f3 0x008a9780 (community match, verified in this file)
 struct CSeqSetNativeView {
     SPtr<CSeq>* m_pBase;
-    unsigned m_uiElementCount;
-    unsigned m_uiAllocatedCapacity;
+    unsigned m_uiAlloced;  // src: FNV360_PDB +0x4 (old: m_uiElementCount)
+    unsigned m_uiUsed;  // src: FNV360_PDB +0x8 (old: m_uiAllocatedCapacity)
     __declspec(nothrow) void FUN_00887df0(unsigned);
     __declspec(nothrow) unsigned FUN_00887ea0(const SPtr<CSeq>&);
 };
 void CCtrlMgr::FUN_00a2f420(CloneProc& kCloning)
 {
     ProcessCloneBase(kCloning);
-    for (unsigned int ui = 0; ui < m_kSequences.GetSize(); ui++)
+    for (unsigned int ui = 0; ui < m_kSequenceArray.GetSize(); ui++)
     {
-        CSeq* pkSeq = m_kSequences.m_pBase[ui];
+        CSeq* pkSeq = m_kSequenceArray.m_pBase[ui];
         if (pkSeq)
         {
             pkSeq->ProcessClone(kCloning);
@@ -1733,19 +1744,19 @@ void CCtrlMgr::FUN_00a2f420(CloneProc& kCloning)
         pkDest = (CCtrlMgr*)pkClone;
     }
 
-    for (unsigned int ui = 0; ui < m_kSequenceSet.m_uiAllocatedCapacity; ui++)
+    for (unsigned int ui = 0; ui < m_kTempBlendSeqs.m_uiUsed; ui++)
     {
         CObj* pkSeqClone;
-        CSeq* pkSeq = m_kSequenceSet.m_pBase[ui];
+        CSeq* pkSeq = m_kTempBlendSeqs.m_pBase[ui];
         if (kCloning.m_pCloneMap->GetAt(pkSeq, pkSeqClone))
         {
             CSeq* pkNew = (CSeq*)pkSeqClone;
             if (pkNew)
                 pkNew->IncRefCount();
-            CSeqSetNativeView& rSet = *reinterpret_cast<CSeqSetNativeView*>(&pkDest->m_kSequenceSet);
-            if (rSet.m_uiAllocatedCapacity == rSet.m_uiElementCount)
-                rSet.FUN_00887df0(rSet.m_uiElementCount > 0 ? (2 * rSet.m_uiElementCount) : 1);
-            SPtr<CSeq>& rSlot = rSet.m_pBase[rSet.m_uiAllocatedCapacity++];
+            CSeqSetNativeView& rSet = *reinterpret_cast<CSeqSetNativeView*>(&pkDest->m_kTempBlendSeqs);
+            if (rSet.m_uiUsed == rSet.m_uiAlloced)
+                rSet.FUN_00887df0(rSet.m_uiAlloced > 0 ? (2 * rSet.m_uiAlloced) : 1);
+            SPtr<CSeq>& rSlot = rSet.m_pBase[rSet.m_uiUsed++];
             if (rSlot.m_pObject != pkNew)
             {
                 if (rSlot.m_pObject)
@@ -1758,11 +1769,11 @@ void CCtrlMgr::FUN_00a2f420(CloneProc& kCloning)
                 pkNew->DecRefCount();
         }
         else
-            reinterpret_cast<CSeqSetNativeView*>(&pkDest->m_kSequenceSet)->FUN_00887ea0(m_kSequenceSet.m_pBase[ui]);
+            reinterpret_cast<CSeqSetNativeView*>(&pkDest->m_kTempBlendSeqs)->FUN_00887ea0(m_kTempBlendSeqs.m_pBase[ui]);
     }
 
-    if (m_spControllerManager)
-        m_spControllerManager->ProcessClone(kCloning);
+    if (m_spObjectPalette)
+        m_spObjectPalette->ProcessClone(kCloning);
 }
 
 
@@ -2100,13 +2111,13 @@ class S00a2f170_ActSet
 {
   public:
     S00a2f170_Seq** m_pBase;
-    unsigned m_uiElementCount, m_uiAllocatedCapacity;
+    unsigned m_uiAlloced, m_uiUsed;  // src: FNV360_PDB NiTSet +0x4, +0x8 (old: m_uiElementCount, m_uiAllocatedCapacity)
 };
 class S00a2f170_TmpSet
 {
   public:
     S00a2f170_Ptr<S00a2f170_Seq>* m_pBase;
-    unsigned m_uiElementCount, m_uiAllocatedCapacity;
+    unsigned m_uiAlloced, m_uiUsed;  // src: FNV360_PDB NiTSet +0x4, +0x8 (old: m_uiElementCount, m_uiAllocatedCapacity)
     void FUN_00e8ea60(const S00a2f170_Ptr<S00a2f170_Seq>&) throw();
     void FUN_00e8e3a0(unsigned) throw();
 };
@@ -2124,18 +2135,18 @@ class S00a2f170_Map
 class S00a2f170_Mgr : public NiObject
 {
   public:
-    unsigned short m_uiObjectFlags;
+    unsigned short m_uFlags;  // src: FNV360_PDB +0x8 (old: m_uFlags)
     float m_fFrequency, m_fPhase, m_fLoKeyTime, m_fHiKeyTime;
     float m_fStartTime, m_fLastTime, m_fWeightAdjustedLastTime, m_fControllerTime;
     S00a2f170_NET* m_pkTarget;
-    void* m_spNextController;
-    S00a2f170_SeqArray m_kSequences;
-    S00a2f170_ActSet m_kPlayingSequences;
-    S00a2f170_Map m_kObjectMap;
-    void* m_pAudioListener;
-    bool m_bUseCumulativeAnimation;
-    S00a2f170_TmpSet m_kSequenceSet;
-    void* m_spControllerManager;
+    void* m_spNext;  // src: FNV360_PDB +0x30 (old: m_spNextController)
+    S00a2f170_SeqArray m_kSequenceArray;  // src: FNV360_PDB +0x34 (old: m_kSequences)
+    S00a2f170_ActSet m_kActiveSequences;  // src: FNV360_PDB +0x44 (old: m_kPlayingSequences)
+    S00a2f170_Map m_kStringMap;  // src: FNV360_PDB +0x50 (old: m_kObjectMap)
+    void* pListener;
+    bool m_bCumulative;  // src: FNV360_PDB +0x68 (old: m_bUseCumulativeAnimation)
+    S00a2f170_TmpSet m_kTempBlendSeqs;  // src: FNV360_PDB +0x6C (old: m_kSequenceSet)
+    void* m_spObjectPalette;  // src: FNV360_PDB +0x78 (old: m_spControllerManager)
     S00a2f170_Seq* GetTempBlendSequence(S00a2f170_Seq* source, unsigned int option);
 };
 
@@ -2167,9 +2178,9 @@ template <class T> inline S00a2f170_Ptr<T>& S00a2f170_Ptr<T>::operator=(const S0
 
 inline void S00a2f170_TmpSet::FUN_00e8ea60(const S00a2f170_Ptr<S00a2f170_Seq>& value) throw()
 {
-    if (m_uiAllocatedCapacity == m_uiElementCount)
-        FUN_00e8e3a0(m_uiElementCount ? m_uiElementCount * 2 : 1);
-    m_pBase[m_uiAllocatedCapacity++] = value;
+    if (m_uiUsed == m_uiAlloced)
+        FUN_00e8e3a0(m_uiAlloced ? m_uiAlloced * 2 : 1);
+    m_pBase[m_uiUsed++] = value;
 }
 
 inline void S00a2f170_SeqArray::FUN_00a2e680(unsigned index, const S00a2f170_Ptr<S00a2f170_Seq>& value) throw()
@@ -2232,9 +2243,9 @@ S00a2f170_Seq* S00a2f170_Mgr::GetTempBlendSequence(S00a2f170_Seq* apSourceSequen
 {
     S00a2f170_Seq* sequence = 0;
     unsigned int arraySize = apSourceSequence->m_uiNumControlledBlocks;
-    for (unsigned int i = 0; i < m_kSequenceSet.m_uiAllocatedCapacity; ++i)
+    for (unsigned int i = 0; i < m_kTempBlendSeqs.m_uiUsed; ++i)
     {
-        S00a2f170_Seq* item = m_kSequenceSet.m_pBase[i].m_pObject;
+        S00a2f170_Seq* item = m_kTempBlendSeqs.m_pBase[i].m_pObject;
         if (item->m_eAnimationState == 0)
         {
             sequence = item;
@@ -2245,7 +2256,7 @@ S00a2f170_Seq* S00a2f170_Mgr::GetTempBlendSequence(S00a2f170_Seq* apSourceSequen
     if (!sequence)
     {
         sequence = new FUN_00a32a10(S00a2f170_FS().Make("__TempBlendSequence__"), arraySize, 12);
-        m_kSequenceSet.FUN_00e8ea60(sequence);
+        m_kTempBlendSeqs.FUN_00e8ea60(sequence);
         if (!sequence->m_pkOwnerManager)
         {
             sequence->m_pkOwnerManager = this;
@@ -2253,8 +2264,8 @@ S00a2f170_Seq* S00a2f170_Mgr::GetTempBlendSequence(S00a2f170_Seq* apSourceSequen
                 sequence->m_kAccumulationRootName = m_pkTarget->m_kName;
             if (DAT_011f49e0.Exists())
                 sequence->m_kName = DAT_011f49e0;
-            m_kSequences.FUN_00a2ec90(sequence);
-            m_kObjectMap.FUN_00a642a0(sequence->m_kName.m_pString, sequence);
+            m_kSequenceArray.FUN_00a2ec90(sequence);
+            m_kStringMap.FUN_00a642a0(sequence->m_kName.m_pString, sequence);
         }
     }
     else
@@ -2349,16 +2360,16 @@ struct MgrTimeBase
 struct MgrBlendSet
 {
     void* m_pBase;
-    unsigned int m_uiElementCount;
-    unsigned int m_uiAllocatedCapacity;
+    unsigned int m_uiAlloced;  // src: FNV360_PDB +0x4 (old: m_uiElementCount)
+    unsigned int m_uiUsed;  // src: FNV360_PDB +0x8 (old: m_uiAllocatedCapacity)
     void* m_pObjectPalette;
 };
 
 struct MgrSetBase
 {
     void* m_pBase;
-    unsigned int m_uiElementCount;
-    unsigned int m_uiAllocatedCapacity;
+    unsigned int m_uiAlloced;  // src: FNV360_PDB +0x4 (old: m_uiElementCount)
+    unsigned int m_uiUsed;  // src: FNV360_PDB +0x8 (old: m_uiAllocatedCapacity)
 };
 
 struct MgrArrayHead
@@ -2379,8 +2390,8 @@ struct MgrArrayTail
         m_usSize = 0;
         m_usESize = 0;
         m_kActive.m_pBase = 0;
-        m_kActive.m_uiElementCount = 0;
-        m_kActive.m_uiAllocatedCapacity = 0;
+        m_kActive.m_uiAlloced = 0;
+        m_kActive.m_uiUsed = 0;
     }
     unsigned short m_usMaxSize;
     unsigned short m_usSize;
@@ -2425,20 +2436,20 @@ struct DAT_0109619c : MgrTimeBase
     MgrTArrayView m_aiIndexedValues;
     MgrStrMap m_map;
     void* m_pListener;
-    volatile unsigned char m_bUseCumulativeAnimation;
-    volatile MgrBlendSet m_kSequenceSet;
+    volatile unsigned char m_bCumulative;  // src: FNV360_PDB +0x68 (old: m_bUseCumulativeAnimation)
+    volatile MgrBlendSet m_kTempBlendSeqs;  // src: FNV360_PDB +0x6C (old: m_kSequenceSet)
 };
 
-// Initializes the DAT_0109619c object by zeroing m_bUseCumulativeAnimation and m_kSequenceSet, then allocates and constructs m_pListener via DAT_011f6238.
+// Initializes the DAT_0109619c object by zeroing m_bCumulative and m_kTempBlendSeqs, then allocates and constructs m_pListener via DAT_011f6238.
 // @fnv 0x00a2eed0
 DAT_0109619c::DAT_0109619c() throw()
 {
-    m_bUseCumulativeAnimation = 0;
+    m_bCumulative = 0;
     _ReadWriteBarrier();
-    m_kSequenceSet.m_pBase = 0;
-    m_kSequenceSet.m_uiElementCount = 0;
-    m_kSequenceSet.m_uiAllocatedCapacity = 0;
-    m_kSequenceSet.m_pObjectPalette = 0;
+    m_kTempBlendSeqs.m_pBase = 0;
+    m_kTempBlendSeqs.m_uiAlloced = 0;
+    m_kTempBlendSeqs.m_uiUsed = 0;
+    m_kTempBlendSeqs.m_pObjectPalette = 0;
     void* i = DAT_011f6238.Alloc(0x10);
     if (i != 0)
     {
