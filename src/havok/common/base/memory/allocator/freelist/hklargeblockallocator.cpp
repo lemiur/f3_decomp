@@ -126,42 +126,51 @@ struct FUN_00dd83a0_cls
     void FUN_00dd83a0();
 };
 
+class hkClass;
+class hkStatisticsCollector;
+// hkStringMap<const hkClass*>: only getWithDefault is called here.
+struct FUN_00dd8480_sub
+{
+    void* m_elem;
+    int m_numElems;
+    int m_hashMod;
+    int unk0C;
+    int FUN_009b10f0(int a, int b);
+};
+
+// hkClassNameRegistry: the slots of the Fallout 3 hkChainedClassNameRegistry vtable (0x00e87e30) up to getClassByName,
+// named as the New Vegas Xbox 360 PDB names them.
+struct FUN_00dd8480_iface
+{
+    virtual ~FUN_00dd8480_iface();
+    virtual const hkClass* getClassType() const;
+    virtual void calcContentStatistics(hkStatisticsCollector* collector, const hkClass* cls) const;
+    virtual const char* getName() const;
+    virtual int getClassByName(int className) const;
+};
+
+// hkChainedClassNameRegistry (slot 4 of its Fallout 3 vtable is this getClassByName): the hkDynamicClassNameRegistry
+// part (vtable, reference count, m_name, m_map) and the registry it chains to.
 struct FUN_00dd8480_cls
 {
     int unk00;
     int unk04;
-    int m_08;
-    int unk0C;
-    int unk10;
-    unsigned int m_14;
-    int AllocSlow(int a);
+    int m_08;                                // m_name
+    FUN_00dd8480_sub m_map;                  // +0x0C
+    FUN_00dd8480_iface* m_nextRegistry;      // +0x1C
     int Allocate(int a);
 };
 
-// Tries ProbeSmall when m_08 is set, then AllocSlow if a+0x100 is below m_14, otherwise returns 0.
-// @f3 0x00a7df80 (community match, verified in this file)
-struct FUN_00dd8480_sub
-{
-    int FUN_009b10f0(int a, int b);
-};
-struct FUN_00dd8480_iface
-{
-    virtual int unk00();
-    virtual int unk04();
-    virtual int unk08();
-    virtual int unk0C();
-    virtual int unk10(int a);
-};
 int FUN_00dd8480_cls::Allocate(int aiSize)
 {
-    int r = ((FUN_00dd8480_sub*)((char*)this + 0x0c))->FUN_009b10f0(aiSize, 0);
+    int r = m_map.FUN_009b10f0(aiSize, 0);
     if (r != 0)
     {
         return r;
     }
-    if (*(FUN_00dd8480_iface**)((char*)this + 0x1c) != (FUN_00dd8480_iface*)r)
+    if (m_nextRegistry != (FUN_00dd8480_iface*)r)
     {
-        return (*(FUN_00dd8480_iface**)((char*)this + 0x1c))->unk10(aiSize);
+        return m_nextRegistry->getClassByName(aiSize);
     }
     return 0;
 }
