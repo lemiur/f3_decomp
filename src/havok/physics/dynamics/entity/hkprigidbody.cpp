@@ -1547,9 +1547,18 @@ static __declspec(noinline) void ComputeScaledMinimum(void* pvCollidable, const 
         *pfDepth = 0.1f;
 }
 
+class hkClass;
+class hkStatisticsCollector;
+// hkpRigidBody: the seven slots of its Fallout 3 vtable (0x00e35e28), named as the New Vegas Xbox 360 PDB names them.
 struct S_00ca84b0_Entity
 {
-    virtual void vf0();
+    virtual ~S_00ca84b0_Entity();
+    virtual const hkClass* getClassType() const;
+    virtual void calcContentStatistics(hkStatisticsCollector* collector, const hkClass* cls) const;
+    virtual int setShape(const S_00ca84b0_Shape* shape);
+    virtual void* getMotionState();
+    virtual void deallocateInternalArrays();
+    virtual S_00ca84b0_Entity* clone() const;
     int unk4;
     S_00ca84b0_World* m_pOwningWorld;
     int unkc;
@@ -1607,7 +1616,7 @@ struct S_00ca84b0_RefShape
 
 {
 
-    virtual void vf0(int deleting);
+    virtual ~S_00ca84b0_RefShape();  // hkReferencedObject
 
     unsigned short refFlag;
 
@@ -1691,7 +1700,7 @@ int S_00ca84b0_Entity::hkpRigidBody_setShape(S_00ca84b0_Shape* shape)
 
         if (oldRef->refCount == 0)
 
-            oldRef->vf0(1);
+            delete oldRef;
 
     }
 
