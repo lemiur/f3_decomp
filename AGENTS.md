@@ -151,7 +151,31 @@ typedefs (`FNV_STATIC_ASSERT`), so layout is free except where it adds a `__LINE
 such changes in full.
 
 **Rules this project tightens or relaxes.** None yet. A change is the maintainers' ruling, recorded here with the
-reason, with the checker changed in the same commit.
+reason, with the checker changed in the same commit. How the checker reads two rules:
+- R1 fires where a unit actually sees two definitions of one type: a local copy under `src/` of a type that is also
+  defined elsewhere, or two different bodies. Using the one shared `include/` definition is the goal, not a finding.
+- R18: Havok's `hkMonitorStream::TimerCommand::setTime` is an original inline-asm helper (`rdtsc` stored to a
+  local and reloaded, as Battlefield 3's PDB-named out-of-line copy shows; `__rdtsc()` compiles differently). It
+  carries the `RULE-EXCEPTION: R18` in `include/havok/hkMonitorStream.h`; code that times a block uses the
+  `HK_TIMER_*` macros, not its own copy of the helper (a few snippets in `src/f3staging/` still carry a local
+  copy with the same exception until they move onto the shared header).
+
+## Things that are easy to get wrong here
+
+- **Header names are case-insensitive.** A unit's local header named like a shared one (`niobject.h` next to
+  `include/NiObject.h`) wins the `#include` and silently replaces the shared class. A local header never shares a
+  name with a header in `include/`.
+- **Xbox 360 platform objects do not place PC code.** A link to `BSFile_Xenon.obj`, `NiXenonRenderer.obj` or
+  `MoviePlayer_Xenon.obj` names the cross-platform method; the PC implementation lived in another file (the PC
+  renderer is `NiDX9Renderer`, which the Xbox 360 PDBs do not contain).
+- **Fragile functions.** 0x008e69e0 (`src/fallout/ai/actor_o2_variant.cpp`) changes register allocation with the
+  number of declarations ahead of it in the unit; re-check it after any edit to `Actor.h` or the headers it
+  includes. It cannot move to its own unit while it lists EH tails there.
+- **Literal text is part of the source.** The recipe binds a string by address, so the PR check does not compare
+  its text; write the game's own string (`"TtSimulate"`, not a remembered `"TtPhysics"`).
+- **Compiler flags are evidence too.** A unit whose constructors have no EH frames in the game builds with
+  `/EHs-c-` once the real classes (with destructors) are in place; a flag change uses only flags `main` already
+  uses, and every function of the unit must still match.
 
 ## Rule checker
 
