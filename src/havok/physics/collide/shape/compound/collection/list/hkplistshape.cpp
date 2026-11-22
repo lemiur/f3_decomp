@@ -4,8 +4,20 @@
 
 #include "havok/hkpListShape.h"
 
+// hkpListShape::ChildInfo (New Vegas Xbox 360 PDB layout, 16 bytes)
+struct ListShapeChildInfoF3
+{
+    const void* m_shape;
+    unsigned int m_collisionFilterInfo;
+    int m_shapeSize;
+    int m_numChildShapes;
+};
+
+// hkpListShape: m_childInfo (an hkArray<ChildInfo>) at +0x18
 struct hkPListShape
 {
+    int unk00, unk04, unk08, unk0C, unk10, unk14;
+    ListShapeChildInfoF3* m_childInfo;  // +0x18 m_childInfo.m_data
     void __thiscall SetChildShape(int index, void* shape);
 };
 // @fnv 0x00cf50a0
@@ -13,11 +25,14 @@ struct hkPListShape
 // pdb params: index, filterInfo
 void __thiscall hkPListShape::SetChildShape(int index, void* shape)
 {
-    *(void**)((char*)*(int*)((char*)this + 0x18) + (index << 4) + 4) = shape;
+    m_childInfo[index].m_collisionFilterInfo = (unsigned int)shape;
 }
 
+// The hkpShapeContainer subobject of hkpListShape (at +0x10): +8 is hkpListShape::m_childInfo.m_data.
 struct FUN_00cf5070_class
 {
+    int unk00, unk04;
+    ListShapeChildInfoF3* m_childInfo;
     void* GetShapeAt(int index, void* buffer);
 };
 
@@ -26,12 +41,14 @@ struct FUN_00cf5070_class
 // pdb params: key
 void* FUN_00cf5070_class::GetShapeAt(int index, void* buffer)
 {
-    void** shapes = *(void***)((char*)this + 8);
-    return *(void**)((char*)shapes + (index << 4));
+    return (void*)m_childInfo[index].m_shape;
 }
 
+// The hkpShapeContainer subobject of hkpListShape, as above.
 struct hkPListShape2
 {
+    int unk00, unk04;
+    ListShapeChildInfoF3* m_childInfo;
     int __thiscall GetElementAt(int index);
 };
 
@@ -39,7 +56,7 @@ struct hkPListShape2
 // pdb: hkpListShape::getCollisionFilterInfo | hkpListShape.obj | tesv_win, objrun_open, low
 int hkPListShape2::GetElementAt(int index)
 {
-    return *(int*)(*(int*)((char*)this + 8) + (index << 4) + 4);
+    return (int)m_childInfo[index].m_collisionFilterInfo;
 }
 
 struct __declspec(align(16)) BufAligned32
