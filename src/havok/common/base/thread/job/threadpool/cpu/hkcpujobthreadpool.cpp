@@ -116,15 +116,18 @@ void FUN_00d2ce90_class::FUN_00d2ce90()
 }
 
 
+// hkCpuJobThreadPool: m_sharedThreadData.m_numThreads at +0x130 (New Vegas Xbox 360 PDB).
 struct FUN_00d2ce40_cls
 {
+    char unk00[0x130];
+    int m_numThreads;
     int FUN_00d2ce40();
 };
 
 // @fnv 0x00d2ce40
 int FUN_00d2ce40_cls::FUN_00d2ce40()
 {
-    return *(int*)((char*)this + 0x130);
+    return m_numThreads;
 }
 
 class FUN_00d2cf00

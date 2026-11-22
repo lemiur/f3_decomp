@@ -54,8 +54,12 @@ FUN_00e0f6e0::FUN_00e0f6e0()
     c = 0x80000000;
 }
 
+// hkMonitorStreamAnalyzer: m_data (an hkArray<char>) at +0x0C (New Vegas Xbox 360 PDB).
 struct FUN_00e0c310_s
 {
+    char m_frameInfos[0xC];
+    int m_dataBegin;  // +0x0C m_data.m_data
+    int m_dataSize;   // +0x10 m_data.m_size
     int FUN_00e0c310();
 };
 
@@ -63,9 +67,9 @@ struct FUN_00e0c310_s
 // pdb: hkMonitorStreamAnalyzer::getStreamBegin | hkMonitorStreamAnalyzer.obj | fnv360_0822_retail, objrun_open, low
 int FUN_00e0c310_s::FUN_00e0c310()
 {
-    if (*(int*)((char*)this + 0x10) == 0)
+    if (m_dataSize == 0)
         return 0;
-    return *(int*)((char*)this + 0xc);
+    return m_dataBegin;
 }
 
 struct SubObject
@@ -518,15 +522,15 @@ bool __cdecl WriteTgaImage(const void* pixels, E0C150Stream* stream, int width, 
 class FUN_00e0c320_cls
 {
   public:
-    const char* m_pName;
-    int m_i04;
-    int m_i08;
-    int m_i0c;
-    float m_f10;
-    float m_f14;
-    int m_i18;
-    int m_i1c;
-    int m_i20;
+        const char* m_heading;
+    int m_indexOfTimer0;
+    int m_indexOfTimer1;
+    int m_absoluteTimeCounter;
+    float m_timerFactor0;
+    float m_timerFactor1;
+    int m_threadId;
+    int m_frameStreamStart;
+    int m_frameStreamEnd;
     FUN_00e0c320_cls* InitHeading();
 };
 
@@ -534,18 +538,21 @@ class FUN_00e0c320_cls
 // pdb: hkMonitorStreamFrameInfo::hkMonitorStreamFrameInfo | hkMonitorStreamAnalyzer.obj | fnv360_0822_retail, objrun_prop, low
 FUN_00e0c320_cls* FUN_00e0c320_cls::InitHeading()
 {
-    float one = 1.0f;
-    float* pf10 = (float*)((char*)this + 0x10);
-    float* pf14 = (float*)((char*)this + 0x14);
-    m_pName = "Unknown Heading";
-    m_i04 = 0;
-    m_i08 = 1;
-    m_i0c = 0;
-    *pf10 = one;
-    *pf14 = one;
-    m_i18 = 0;
-    m_i1c = 0;
-    m_i20 = 0;
+        float one = 1.0f;
+        // Open: the factors are stored through pointers taken first. Written as plain member stores (or as the SDK's
+    // constructor initialiser list) the compiler moves both float stores ahead of the heading; 0x00a8bf60 stores them
+    // in member order, so the original's form is still to be found.
+    float* timerFactor0 = &m_timerFactor0;
+    float* timerFactor1 = &m_timerFactor1;
+    m_heading = "Unknown Heading";
+    m_indexOfTimer0 = 0;
+    m_indexOfTimer1 = 1;
+    m_absoluteTimeCounter = 0;
+    *timerFactor0 = one;
+    *timerFactor1 = one;
+    m_threadId = 0;
+    m_frameStreamStart = 0;
+    m_frameStreamEnd = 0;
     return this;
 }
 

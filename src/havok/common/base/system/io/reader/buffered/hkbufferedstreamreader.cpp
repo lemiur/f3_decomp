@@ -65,7 +65,14 @@ struct FUN_00d2ba80_cls
     virtual void v9();
     virtual void v10();
     virtual void v11();
-    virtual int v12();
+        virtual int v12();
+
+    // hkBufferedStreamReader (New Vegas Xbox 360 PDB names): the stream, then m_buf's begin, current and size.
+    int unk04;
+    void* m_stream;    // +0x08
+    char* m_begin;     // +0x0C m_buf.begin
+    int m_current;     // +0x10 m_buf.current
+    int m_size;        // +0x14 m_buf.size
 };
 // Advances the read position by n bytes, refilling the buffer via v12() when the remaining bytes are insufficient, and returns the number of bytes consumed.
 // @fnv 0x00d2ba80
@@ -74,15 +81,15 @@ struct FUN_00d2ba80_cls
 int FUN_00d2ba80_cls::SkipBytes(int aiByteCount)
 {
     int iRemaining = aiByteCount;
-    int iAvailable = ((int*)this)[5] - ((int*)this)[4];
+    int iAvailable = m_size - m_current;
     while (iRemaining > iAvailable)
     {
         iRemaining -= iAvailable;
         if (v12())
             return aiByteCount - iRemaining;
-        iAvailable = ((int*)this)[5] - ((int*)this)[4];
+        iAvailable = m_size - m_current;
     }
-    ((int*)this)[4] += iRemaining;
+    m_current += iRemaining;
     return aiByteCount;
 }
 
@@ -110,39 +117,33 @@ void _FUN_00cb1260(void*, const void*, int);
 
 struct FUN_00d2ba00_cls : FUN_00d2ba80_cls
 {
-    int m_uiStandInValue;
-    int m_iValueAfterStandIn;
-    char* m_pBuffer;
-    int m_vContactPosition;
-    int m_kRayEnd;
-
     int hkBufferedStreamReader_read(char* pBuffer, int nSize);
 };
 
-// Copies up to nSize bytes from the internal buffer into pBuffer, refilling via v12 when exhausted, and returns the number of bytes read.
+// Copies up to nSize bytes from the buffer into pBuffer, refilling via v12 when it runs out, and returns the number of bytes read.
 // @fnv 0x00d2ba00
 // pdb: hkBufferedStreamReader::read | hkBufferedStreamReader.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
 int FUN_00d2ba00_cls::hkBufferedStreamReader_read(char* apDest, int nSize)
 {
     char* pDest = apDest;
     int nRemaining = nSize;
-    int nAvailable = m_kRayEnd - m_vContactPosition;
+    int nAvailable = m_size - m_current;
 
     while (nRemaining > nAvailable)
     {
-        _FUN_00cb1260(pDest, m_pBuffer + m_vContactPosition, nAvailable);
-        m_vContactPosition += nAvailable;
+        _FUN_00cb1260(pDest, m_begin + m_current, nAvailable);
+        m_current += nAvailable;
         pDest += nAvailable;
         nRemaining -= nAvailable;
 
         if (v12() != 0)
             return nSize - nRemaining;
 
-        nAvailable = m_kRayEnd - m_vContactPosition;
+        nAvailable = m_size - m_current;
     }
 
-    _FUN_00cb1260(pDest, m_pBuffer + m_vContactPosition, nRemaining);
-    m_vContactPosition += nRemaining;
+    _FUN_00cb1260(pDest, m_begin + m_current, nRemaining);
+    m_current += nRemaining;
     return nSize;
 }
 
