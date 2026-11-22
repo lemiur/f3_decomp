@@ -45,19 +45,25 @@ struct FUN_00db7e70_Node
     int unk04;
 };
 
+class hkClass;
+class hkStatisticsCollector;
+// hkPackfileReader: Fallout 3's vtable has 12 slots (0x00e86494). Names and order are those of the Havok classes in the
+// Just Death PC PDB (2016, proto_justdeath), which has one slot more, getTopLevelObject between getLoadedObjects and
+// getUpdateTracker; the calls here fit the shorter order (the array size test on getLoadedObjects, the version string
+// compared with the current one and then set).
 struct FUN_00db7e70_Obj
 {
-    virtual void unk00();
-    virtual void unk01();
-    virtual void unk02();
-    virtual void unk03();
-    virtual void unk04();
-    virtual void unk05();
-    virtual void unk06();
-    virtual FUN_00db7e70_Node* unk07();
-    virtual int unk08();
-    virtual int unk09();
-    virtual void unk0a(int aiFlag);
+    virtual ~FUN_00db7e70_Obj();
+    virtual const hkClass* getClassType() const;
+    virtual void calcContentStatistics(hkStatisticsCollector* collector, const hkClass* cls) const;
+    virtual int loadEntireFile(void* reader);
+    virtual void* getContentsWithRegistry(const char* className, const void* registry);
+    virtual void* getContents(const char* className);
+    virtual const char* getContentsClassName() const;
+    virtual FUN_00db7e70_Node* getLoadedObjects() const;
+    virtual int getUpdateTracker() const;
+    virtual int getContentsVersion() const;
+    virtual void setContentsVersion(int version);
 };
 
 int __cdecl FUN_0093e470();
@@ -67,14 +73,14 @@ int __cdecl FUN_009406e0(FUN_00db7e70_Node* apNode, int aiResult, void* apItem, 
 int __cdecl FUN_00db7e70(void* apTarget, void* apItem, GraphTable* apTable, DepthLimit* apDepth)
 {
     FUN_00db7e70_Obj* pObj = reinterpret_cast<FUN_00db7e70_Obj*>(apTarget);
-    int iA = pObj->unk09();
+    int iA = pObj->getContentsVersion();
     int iB = FUN_0093e470();
     if (hkString_strCmp(iA, iB) != 0)
     {
-        FUN_00db7e70_Node* pNode = pObj->unk07();
-        if (pNode->unk04 != 0 && FUN_009406e0(pNode, pObj->unk08(), apItem, iA, iB) == 0)
+        FUN_00db7e70_Node* pNode = pObj->getLoadedObjects();
+        if (pNode->unk04 != 0 && FUN_009406e0(pNode, pObj->getUpdateTracker(), apItem, iA, iB) == 0)
         {
-            pObj->unk0a(iB);
+            pObj->setContentsVersion(iB);
             return 0;
         }
         return 1;
