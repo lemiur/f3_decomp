@@ -15,8 +15,38 @@ struct BaseH
     virtual ~BaseH();
 };
 
+struct SeqInterpArrayItem;
 struct NiControllerSequence : BaseH
 {
+    unsigned int m_uiRefCount;  // src: FNV360_PDB +0x4
+    const char* m_kName;  // src: FNV360_PDB +0x8 (NiFixedString)
+    unsigned int m_uiArraySize;  // src: FNV360_PDB +0xC
+    unsigned int m_uiArrayGrowBy;  // src: FNV360_PDB +0x10
+    SeqInterpArrayItem* m_pkInterpArray;  // src: FNV360_PDB +0x14
+    void* m_pkIDTagArray;  // src: FNV360_PDB +0x18
+    float m_fSeqWeight;  // src: FNV360_PDB +0x1C
+    void* m_spTextKeys;  // src: FNV360_PDB +0x20
+    int m_eCycleType;  // src: FNV360_PDB +0x24
+    float m_fFrequency;  // src: FNV360_PDB +0x28
+    float m_fBeginKeyTime;  // src: FNV360_PDB +0x2C
+    float m_fEndKeyTime;  // src: FNV360_PDB +0x30
+    float m_fLastTime;  // src: FNV360_PDB +0x34
+    float m_fWeightedLastTime;  // src: FNV360_PDB +0x38
+    float m_fLastScaledTime;  // src: FNV360_PDB +0x3C
+    void* m_pkOwner;  // src: FNV360_PDB +0x40
+    unsigned int m_eState;  // src: FNV360_PDB +0x44
+    float m_fOffset;  // src: FNV360_PDB +0x48
+    float m_fStartTime;  // src: FNV360_PDB +0x4C
+    float m_fEndTime;  // src: FNV360_PDB +0x50
+    float m_fDestFrame;  // src: FNV360_PDB +0x54
+    NiControllerSequence* m_pkPartnerSequence;  // src: FNV360_PDB +0x58
+    const char* m_kAccumRootName;  // src: FNV360_PDB +0x5C (NiFixedString)
+    void* m_pkAccumRoot;  // src: FNV360_PDB +0x60
+    void* m_spDeprecatedStringPalette;  // src: FNV360_PDB +0x64
+    short ssCurAnimNIdx;  // src: FNV360_PDB +0x68
+    void* spAnimNotesA;  // src: FNV360_PDB +0x6C
+    unsigned short usNumNotes;  // src: FNV360_PDB +0x70
+    bool bRemovableObjects;  // src: FNV360_PDB +0x72
     void* FUN_00a35820(unsigned int);
 };
 
@@ -31,7 +61,7 @@ void* NiControllerSequence::FUN_00a35820(unsigned int flags)
     return this;
 }
 
-struct FUN_00a30580_shell
+struct FUN_00a30580_shell : NiControllerSequence
 {
     bool __thiscall IsNotInChain(void* arg);
 };
@@ -40,14 +70,14 @@ struct FUN_00a30580_shell
 // @fnv 0x00a30580
 bool __thiscall FUN_00a30580_shell::IsNotInChain(void* pStart)
 {
-    void* next = *reinterpret_cast<void**>(reinterpret_cast<unsigned char*>(pStart) + 0x58);
+    NiControllerSequence* next = static_cast<NiControllerSequence*>(pStart)->m_pkPartnerSequence;
     if (next == 0)
         return true;
     do
     {
         if (next == this)
             return false;
-        next = *reinterpret_cast<void**>(reinterpret_cast<unsigned char*>(next) + 0x58);
+        next = next->m_pkPartnerSequence;
     } while (next != 0);
     return true;
 }
@@ -61,12 +91,14 @@ extern MM_00a34450 g_memoryManager;
 extern int DAT_01096620;
 struct FUN_00a34450_shell
 {
+    void* unk00;
+    void* m_pBase;  // src: FNV360_PDB NiTArray +0x4
     void* __thiscall FUN_00a34450(unsigned int);
 };
 // @fnv 0x00a34450
 void* __thiscall FUN_00a34450_shell::FUN_00a34450(unsigned int auiFlags)
 {
-    void* p = *(void**)((char*)this + 4);
+    void* p = m_pBase;
     *(void**)this = (void*)&DAT_01096620;
     ReleaseObjectArray(p);
     if (auiFlags & 1)
@@ -113,11 +145,11 @@ struct NiObject
 };
 struct SeqInterpArrayItem
 {
-    void* m_spControllerInterpolator;
-    void* m_pkController;
-    void* m_pkBlendInterpolator;
-    unsigned char m_ucBlendIndex;
-    unsigned char m_ucArrayItemID;
+    void* m_spInterpolator;  // src: FNV360_PDB +0x0 (old: m_spControllerInterpolator)
+    void* m_spInterpCtlr;  // src: FNV360_PDB +0x4 (old: m_pkController)
+    void* m_pkBlendInterp;  // src: FNV360_PDB +0x8 (old: m_pkBlendInterpolator)
+    unsigned char m_ucBlendIdx;  // src: FNV360_PDB +0xC (old: m_ucBlendIndex)
+    unsigned char m_ucPriority;  // src: FNV360_PDB +0xD (old: m_ucArrayItemID)
     unsigned char m_auiShapeKeys[2];
 };
 struct SeqIDTag
@@ -162,9 +194,9 @@ void FUN_00a33bf0_s::SaveToStream(NiStream& kStream)
     for (ui = 0; ui < m_uiNumControlledBlocks; ui++)
     {
         SeqInterpArrayItem& kItem = m_pInterpArray[ui];
-        kStream.SaveLinkID(kItem.m_spControllerInterpolator);
-        kStream.SaveLinkID(kItem.m_pkController);
-        kStream.m_pBackingStream->Write(&kItem.m_ucArrayItemID, 1);
+        kStream.SaveLinkID(kItem.m_spInterpolator);
+        kStream.SaveLinkID(kItem.m_spInterpCtlr);
+        kStream.m_pBackingStream->Write(&kItem.m_ucPriority, 1);
         SeqIDTag& kTag = m_pkIDTags[ui];
         kStream.SerializeString((const char*)&kTag.m_kAVObjectName);
         kStream.SerializeString((const char*)&kTag.m_kPropertyType);
@@ -203,28 +235,27 @@ struct FUN_00a35030_shell : NiControllerSequence
 // @fnv 0x00a35030
 unsigned char FUN_00a35030_shell::SetEaseOut(float fEaseOutTime, bool bTransition)
 {
-    if (!*(void**)((char*)this + 0x44))
+    if (!m_eState)
         return 0;
     if (fEaseOutTime > 0.0f)
     {
-        *(float*)((char*)this + 0x4c) = DAT_01015f5c;
-        *(float*)((char*)this + 0x50) = fEaseOutTime;
-        *(unsigned int*)((char*)this + 0x44) = bTransition ? 4 : 3;
+        m_fStartTime = DAT_01015f5c;
+        m_fEndTime = fEaseOutTime;
+        m_eState = bTransition ? 4 : 3;
         return 1;
     }
-    if (*(float*)((char*)this + 0x34) != DAT_010241b0)
-        *(float*)((char*)this + 0x48) = *(float*)((char*)this + 0x38) / *(float*)((char*)this + 0x28) -
-                                        *(float*)((char*)this + 0x34) + *(float*)((char*)this + 0x48);
-    if (*(unsigned int*)((char*)this + 0x44) == 5 && *(void**)((char*)this + 0x40))
-        ((FUN_00a2e420_shell*)*(void**)((char*)this + 0x40))->FUN_00a2e420(0.0f);
-    *(float*)((char*)this + 0x54) = DAT_01015f5c;
-    *(unsigned int*)((char*)this + 0x44) = 0;
-    *(void**)((char*)this + 0x58) = 0;
+    if (m_fLastTime != DAT_010241b0)
+        m_fOffset = m_fWeightedLastTime / m_fFrequency - m_fLastTime + m_fOffset;
+    if (m_eState == 5 && m_pkOwner)
+        ((FUN_00a2e420_shell*)m_pkOwner)->FUN_00a2e420(0.0f);
+    m_fDestFrame = DAT_01015f5c;
+    m_eState = 0;
+    m_pkPartnerSequence = 0;
     ((FUN_00a30540_shell*)this)->FUN_00a30540();
     return 1;
 }
 
-struct FUN_00a30900_shell
+struct FUN_00a30900_shell : NiControllerSequence
 {
     void FUN_00a30900(char m_ucRegionPriority);
 };
@@ -235,19 +266,19 @@ void FUN_00a30900_shell::FUN_00a30900(char cDefaultPriority)
     unsigned int ui;
     SeqInterpArrayItem* kItem;
 
-    for (ui = 0; ui < *(unsigned int*)((char*)this + 0xc); ++ui)
+    for (ui = 0; ui < m_uiArraySize; ++ui)
     {
-        kItem = (SeqInterpArrayItem*)(*(unsigned int*)((char*)this + 0x14) + ui * 0x10);
-        if (kItem->m_spControllerInterpolator && kItem->m_pkBlendInterpolator)
+        kItem = &m_pkInterpArray[ui];
+        if (kItem->m_spInterpolator && kItem->m_pkBlendInterp)
         {
             unsigned int ucPriority;
-            if (kItem->m_ucArrayItemID == 0xff)
+            if (kItem->m_ucPriority == 0xff)
                 ucPriority = (unsigned int)cDefaultPriority;
             else
-                ucPriority = kItem->m_ucArrayItemID;
-            kItem->m_ucBlendIndex = ((unsigned char(__thiscall*)(void*, void*, float, unsigned int, float)) *
-                                     (void**)(*(unsigned int*)kItem->m_pkBlendInterpolator + 0xdc))(
-                kItem->m_pkBlendInterpolator, kItem->m_spControllerInterpolator, *(float*)((char*)this + 0x1c),
+                ucPriority = kItem->m_ucPriority;
+            kItem->m_ucBlendIdx = ((unsigned char(__thiscall*)(void*, void*, float, unsigned int, float)) *
+                                     (void**)(*(unsigned int*)kItem->m_pkBlendInterp + 0xdc))(
+                kItem->m_pkBlendInterp, kItem->m_spInterpolator, m_fSeqWeight,
                 ucPriority, 1.0f);
         }
     }
@@ -296,7 +327,7 @@ struct FUN_00a31740_shell
     void __thiscall FUN_00a31740(int);
 };
 
-struct FUN_00a35640_shell
+struct FUN_00a35640_shell : NiControllerSequence
 {
     void __thiscall FUN_00a35640();
 };
@@ -314,33 +345,29 @@ void FUN_00a35640_shell::FUN_00a35640()
 {
     *reinterpret_cast<void**>(this) = &DAT_01096584;
 
-    if (*reinterpret_cast<int*>(reinterpret_cast<unsigned char*>(this) + 0x44) != 0)
+    if (m_eState != 0)
     {
         reinterpret_cast<FUN_00a35030_shell*>(this)->SetEaseOut(0.0f, false);
     }
 
-    if (*reinterpret_cast<void**>(reinterpret_cast<unsigned char*>(this) + 0x14) != 0)
+    if (m_pkInterpArray != 0)
     {
-        reinterpret_cast<FUN_00a31500_shell*>(*reinterpret_cast<void**>(reinterpret_cast<unsigned char*>(this) + 0x14))
-            ->FUN_00a31500(3);
+        reinterpret_cast<FUN_00a31500_shell*>(m_pkInterpArray)->FUN_00a31500(3);
     }
 
-    if (*reinterpret_cast<void**>(reinterpret_cast<unsigned char*>(this) + 0x18) != 0)
+    if (m_pkIDTagArray != 0)
     {
-        reinterpret_cast<FUN_00a315b0_shell*>(*reinterpret_cast<void**>(reinterpret_cast<unsigned char*>(this) + 0x18))
-            ->FUN_00a315b0(3);
+        reinterpret_cast<FUN_00a315b0_shell*>(m_pkIDTagArray)->FUN_00a315b0(3);
     }
 
-    if (*reinterpret_cast<unsigned short*>(reinterpret_cast<unsigned char*>(this) + 0x70) > 0 &&
-        *reinterpret_cast<void**>(reinterpret_cast<unsigned char*>(this) + 0x6c) != 0)
+    if (usNumNotes > 0 && spAnimNotesA != 0)
     {
-        reinterpret_cast<FUN_00a31740_shell*>(*reinterpret_cast<void**>(reinterpret_cast<unsigned char*>(this) + 0x6c))
-            ->FUN_00a31740(3);
+        reinterpret_cast<FUN_00a31740_shell*>(spAnimNotesA)->FUN_00a31740(3);
     }
 
     int(__stdcall * pDecrementRef)(void*) = DAT_00fdf1c4;
 
-    void* p = *reinterpret_cast<void**>(reinterpret_cast<unsigned char*>(this) + 0x64);
+    void* p = m_spDeprecatedStringPalette;
     if (p != 0)
     {
         if (pDecrementRef(reinterpret_cast<char*>(p) + 4) == 0)
@@ -349,13 +376,13 @@ void FUN_00a35640_shell::FUN_00a35640()
         }
     }
 
-    void* pString = *reinterpret_cast<void**>(reinterpret_cast<unsigned char*>(this) + 0x5c);
+    void* pString = (void*)m_kAccumRootName;
     if (pString != _EmptyFS)
     {
         pDecrementRef(reinterpret_cast<char*>(pString) - 8);
     }
 
-    p = *reinterpret_cast<void**>(reinterpret_cast<unsigned char*>(this) + 0x20);
+    p = m_spTextKeys;
     if (p != 0)
     {
         if (pDecrementRef(reinterpret_cast<char*>(p) + 4) == 0)
@@ -364,7 +391,7 @@ void FUN_00a35640_shell::FUN_00a35640()
         }
     }
 
-    pString = *reinterpret_cast<void**>(reinterpret_cast<unsigned char*>(this) + 0x8);
+    pString = (void*)m_kName;
     if (pString != _EmptyFS)
     {
         pDecrementRef(reinterpret_cast<char*>(pString) - 8);
@@ -529,11 +556,11 @@ struct S_00a30880_Base
 
 struct S_00a30880_Item
 {
-    void* m_spControllerInterpolator;
-    S_00a30880_RefObject* m_pkController;
-    void* m_pkBlendInterpolator;
-    unsigned char m_ucBlendIndex;
-    unsigned char m_ucArrayItemID;
+    void* m_spInterpolator;  // src: FNV360_PDB +0x0 (old: m_spControllerInterpolator)
+    S_00a30880_RefObject* m_spInterpCtlr;  // src: FNV360_PDB +0x4 (old: m_pkController)
+    void* m_pkBlendInterp;  // src: FNV360_PDB +0x8 (old: m_pkBlendInterpolator)
+    unsigned char m_ucBlendIdx;  // src: FNV360_PDB +0xC (old: m_ucBlendIndex)
+    unsigned char m_ucPriority;  // src: FNV360_PDB +0xD (old: m_ucArrayItemID)
     unsigned char m_auiShapeKeys[2];
 };
 
@@ -576,7 +603,7 @@ void S_00a30880_Foo::ReleaseItems()
     {
         do
         {
-            S_00a30880_RefObject** ppRefObject = &m_pInterpArray[uiIndex].m_pkController;
+            S_00a30880_RefObject** ppRefObject = &m_pInterpArray[uiIndex].m_spInterpCtlr;
             S_00a30880_RefObject* pRefObject = *ppRefObject;
 
             if (pRefObject != 0)
@@ -587,7 +614,7 @@ void S_00a30880_Foo::ReleaseItems()
                 *ppRefObject = 0;
             }
 
-            m_pInterpArray[uiIndex].m_pkBlendInterpolator = 0;
+            m_pInterpArray[uiIndex].m_pkBlendInterp = 0;
         } while (++uiIndex < m_uiNumControlledBlocks);
     }
 }
@@ -670,7 +697,7 @@ bool FUN_00a30c80_shell::FUN_00a30c80(void* arg)
 {
     if (arg)
     {
-        void* linked = *reinterpret_cast<void**>(static_cast<char*>(arg) + 0x58);
+        void* linked = static_cast<NiControllerSequence*>(arg)->m_pkPartnerSequence;
         if (linked)
         {
             if (linked == this)
@@ -962,7 +989,7 @@ FUN_00a315b0_cls* FUN_00a315b0_cls::FUN_00a315b0(unsigned char acFlags)
         int i = ((int*)this)[-1];
         FUN_00a315b0_Elem* e = (FUN_00a315b0_Elem*)((char*)this + i * 20);
         i = i - 1;
-        char* base = (char*)this - 4;
+        int* base = (int*)this - 1;
         if (i >= 0)
         {
             int(__stdcall * pRelease)(void*) = DAT_00fdf1c4;
@@ -1033,8 +1060,8 @@ void* FUN_00a31740_cls::FUN_00a31740(unsigned char acFlags)
 {
     if (acFlags & 2)
     {
-        char* base = (char*)this - 4;
-        int i = *(int*)base;
+        int* base = (int*)this - 1;
+        int i = *base;
         a31740_Ref** p = (a31740_Ref**)this + i;
         i = i - 1;
         if (i >= 0)
@@ -1080,7 +1107,7 @@ struct FUN_00a317e0_ref
 
 struct FUN_00a317e0_interp
 {
-    void* m_spControllerInterpolator;
+    void* m_spInterpolator;  // src: FNV360_PDB +0x0 (old: m_spControllerInterpolator)
     void* unk04;
     void* unk08;
     void* unk0C;
@@ -1114,7 +1141,7 @@ struct FUN_00a317e0_t
 void __thiscall FUN_00a317e0_t::AssignInterpolatorRef(int index, FUN_00a317e0_ref** output)
 {
     FUN_00a317e0_ref* pNewRef = reinterpret_cast<FUN_00a317e0_ref*>(
-        reinterpret_cast<FUN_00a317e0_interp*>(m_pInterpArray + index)->m_spControllerInterpolator);
+        reinterpret_cast<FUN_00a317e0_interp*>(m_pInterpArray + index)->m_spInterpolator);
 
     if (pNewRef)
         DAT_00fdf1c0(&pNewRef->m_uiRefCount);
@@ -1168,7 +1195,7 @@ void SeqExt::FUN_00a328b0(float time, bool setControllerTimes)
             do
             {
                 SeqIDTag& tag = m_pkIDTags[index];
-                void* controller = m_pInterpArray[index].m_pkController;
+                void* controller = m_pInterpArray[index].m_spInterpCtlr;
                 if (controller && tag.m_kCtlrType != DAT_0109b220 &&
                     (!tag.m_kCtlrType || tag.m_kCtlrType[2] != 'T' || tag.m_kCtlrType[7] != 'f'))
                 {
@@ -2817,9 +2844,9 @@ struct A31500Ref
 
 struct A31500Item
 {
-    A31500Ref* m_spControllerInterpolator;
-    A31500Ref* m_pkController;
-    void* m_pkBlendInterpolator;
+    A31500Ref* m_spInterpolator;  // src: FNV360_PDB +0x0 (old: m_spControllerInterpolator)
+    A31500Ref* m_spInterpCtlr;  // src: FNV360_PDB +0x4 (old: m_pkController)
+    void* m_pkBlendInterp;  // src: FNV360_PDB +0x8 (old: m_pkBlendInterpolator)
     unsigned int m_uiValue1;
 
     static void Release(A31500Ref* pkObject)
@@ -2844,8 +2871,8 @@ A31500Item* A31500Item::FUN_00a31500(unsigned char m_ucEntryType)
         while (--iItemCount >= 0)
         {
             --pkItem;
-            Release(pkItem->m_pkController);
-            Release(pkItem->m_spControllerInterpolator);
+            Release(pkItem->m_spInterpCtlr);
+            Release(pkItem->m_spInterpolator);
         }
         if (m_ucEntryType & 1)
             DAT_011f6238.FUN_00aa4060(piItemCount);
