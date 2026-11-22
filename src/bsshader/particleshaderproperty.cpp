@@ -4,12 +4,6 @@
 
 extern int g_01200434;
 
-// @fnv 0x00ba7f10
-int& __cdecl FUN_00ba7f10()
-{
-    return g_01200434;
-}
-
 template <class T> class NiTMallocInterface
 {
 };
@@ -28,16 +22,6 @@ struct ParticleShaderProperty : BaseStr
     void FUN_00ba7f20(NiTPrimitiveArray<char*, NiTMallocInterface<char*> >*);
 };
 char* __cdecl _FUN_00a7d330(const char*);
-// @fnv 0x00ba7f20
-void ParticleShaderProperty::FUN_00ba7f20(NiTPrimitiveArray<char*, NiTMallocInterface<char*> >* apStrings)
-{
-    WriteToSettingArray(apStrings);
-    char* str = _FUN_00a7d330((const char*)g_01200434);
-    unsigned int size = *(unsigned short*)((char*)apStrings + 0xA);
-    if (size >= *(unsigned short*)((char*)apStrings + 8))
-        apStrings->SetSize(size + *(unsigned short*)((char*)apStrings + 0xE));
-    apStrings->SetAt(size, str);
-}
 
 extern "C" __declspec(dllimport) long __stdcall InterlockedDecrement(long volatile*);
 extern int DAT_0101fbcc;

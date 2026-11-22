@@ -1,4 +1,4 @@
-// bsshader/bsshaderbloodsplatter.cpp: BSShaderBloodSplatter, BloodShader (17 functions)
+// bsshader/bsshaderbloodsplatter.cpp: BSShaderBloodSplatter, BloodShader (16 functions)
 #include "f3_common.h"
 #include "bsshaderbloodsplatter_types_BSShaderBloodSplatter.h"
 #include "bsshaderbloodsplatter_types_BSShaderManager.h"
@@ -219,13 +219,6 @@ struct FUN_00b80b20_shell : BSShaderBloodSplatter
 {
     bool FUN_00b80b20();
 };
-
-// @fnv 0x00b80b20
-bool FUN_00b80b20_shell::FUN_00b80b20()
-{
-    InitializeShaderData();
-    return ConfigureShaderPass();
-}
 
 void __cdecl _delete(void*, unsigned int);
 struct Standin00b80e40

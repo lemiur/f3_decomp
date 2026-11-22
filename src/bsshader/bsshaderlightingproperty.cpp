@@ -1,4 +1,4 @@
-// bsshader/bsshaderlightingproperty.cpp: BSShaderLightingProperty, NewObj, LList, FalloffProperty and more (45 functions)
+// bsshader/bsshaderlightingproperty.cpp: BSShaderLightingProperty, NewObj, LList, FalloffProperty and more (44 functions)
 #include "f3_common.h"
 #include "bsshaderlightingproperty_types_BSShaderLightingProperty.h"
 #include "bsshaderlightingproperty_globals.h"
@@ -1836,17 +1836,6 @@ class LightingProperty : public LightingPropertyBase
     int unk6c;
     unsigned int m_uiReferenceID;  // +0x70
 };
-
-// Appends the base strings plus the class name, light counts and reference ID to the given string array.
-// @fnv 0x00b71450
-void LightingProperty::FUN_00b71450(ViewerStrings* pkStrings)
-{
-    LightingPropertyBase::WriteToSettingArray(pkStrings);
-    pkStrings->Add(FUN_00a7d330(DAT_011fa560));
-    pkStrings->Add(FUN_00a7d490("number of lights", GetNumLights()));
-    pkStrings->Add(FUN_00a7d490("active lights", FUN_00b70790()));
-    pkStrings->Add(FUN_00a7d510("Reference ID", GetReferenceID()));
-}
 
 struct GeometryState;
 struct AlphaPropertyData

@@ -1,4 +1,4 @@
-// bsshader/bsshadermanager.cpp: BSShaderManager, NiFixedString, SkyShaderProperty, StringHashMapBase (31 functions)
+// bsshader/bsshadermanager.cpp: BSShaderManager, NiFixedString, SkyShaderProperty, StringHashMapBase (28 functions)
 #include "f3_common.h"
 #include "bsshadermanager_decls.h"
 #include <stddef.h>
@@ -321,11 +321,6 @@ void BSShaderManager::UpdateObjectTypeRecurse(NiAVObject* object, bool dynamic, 
 
 // The shipped setter was built without optimization.
 #pragma optimize("", off)
-// @fnv 0x006348e0
-void SkyShaderProperty::SetTexture(NiTexture* texture)
-{
-    m_spTexture = texture;
-}
 #pragma optimize("", on)
 
 // @fnv 0x00b4f2f0
@@ -2736,12 +2731,6 @@ class NiFile
     static NiFile* GetFile(char const* fileName, NiFile::OpenMode openMode, unsigned int size);
 };
 
-// @fnv 0x00b4f2e0
-NiFile* FUN_00b4f2e0(char const* fileName, NiFile::OpenMode openMode, unsigned int size)
-{
-    return NiFile::GetFile(fileName, openMode, size);
-}
-
 struct CopyMap
 {
     virtual ~CopyMap();
@@ -2879,106 +2868,6 @@ extern unsigned char DAT_011ad80e;
 extern unsigned char DAT_011f94d8;
 extern unsigned char DAT_011f94e4;
 extern unsigned char DAT_011f91a4;
-// Sets DAT_011f91c0 and DAT_011f91d8 from a0/a1, then classifies a4 as ATI, NV, or IG and stores the result in DAT_011f91bc.
-// @fnv 0x00b4f710
-void __cdecl DetectGpuVendor(unsigned int a0, unsigned int a1, bool abForceLow, int a3, const char* apVendorName,
-                             int a5)
-{
-    const unsigned char* p0 = (const unsigned char*)&a0;
-    const unsigned char* p1 = (const unsigned char*)&a1;
-    int bHighLevel = (p0[1] >= 2 && p1[1] >= 2);
-    if (bHighLevel)
-    {
-        DAT_011f91c0 = 2;
-        DAT_011f91d8 = 0x2f;
-        if (p0[1] >= 3 && p1[1] >= 3)
-            DAT_011f94a4 = 1;
-    }
-    else if (p0[1] >= 1 && p1[1] >= 1)
-    {
-        DAT_011f91c0 = 1;
-        DAT_011f941e = 0;
-        DAT_011f91d8 = 0xf;
-    }
-    else
-    {
-        DAT_011f91c0 = 0;
-        DAT_011f941e = 0;
-    }
-    if (bHighLevel && a3 != 0 && apVendorName != 0)
-    {
-        if (_strnicmp(apVendorName, "ati", 3) == 0)
-        {
-            if (a5 > 0x60)
-            {
-                if (DAT_011f91c0 == 2)
-                    DAT_011f91c0 = 6;
-                DAT_011f91bc = 6;
-                if (a5 > 0xff)
-                    DAT_011f94a6 = 1;
-            }
-            else
-            {
-                if (DAT_011f91c0 == 2)
-                    DAT_011f91c0 = 4;
-                DAT_011f91bc = 6;
-            }
-            DAT_011ad870 = 0x15;
-            DAT_011f94b8 = 2;
-        }
-        else if (_strnicmp(apVendorName, "nv", 2) == 0)
-        {
-            if (a5 > 0x60)
-            {
-                if (DAT_011f91c0 == 2)
-                    DAT_011f91c0 = 5;
-                DAT_011f91bc = 5;
-                if (a5 > 0xff)
-                    DAT_011f94a6 = 1;
-            }
-            else
-            {
-                if (DAT_011f91c0 == 2)
-                    DAT_011f91c0 = 3;
-                DAT_011f91bc = 5;
-            }
-            DAT_011f94b8 = 1;
-        }
-        else if (_strnicmp(apVendorName, "ig", 2) == 0)
-        {
-            if (a5 > 0x60)
-            {
-                if (DAT_011f91c0 == 2)
-                    DAT_011f91c0 = 5;
-                DAT_011f91bc = 5;
-                if (a5 > 0xff)
-                    DAT_011f94a6 = 1;
-            }
-            else
-            {
-                if (DAT_011f91c0 == 2)
-                    DAT_011f91c0 = 3;
-                DAT_011f91bc = 5;
-            }
-            DAT_011f94b8 = 3;
-        }
-        else
-        {
-            DAT_011f91c0 = 2;
-            DAT_011f91bc = 2;
-        }
-        DAT_01200458 = -2e-5f;
-    }
-    if (DAT_011f91c0 < 2)
-        DAT_011f91d8 &= 0xffffffef;
-    if (abForceLow && DAT_011f91c0 != 0)
-        DAT_011f91c0 = 1;
-    if (DAT_011ad80e != 0 && DAT_011f94a4 != 0 && DAT_011f94d8 != 0)
-        DAT_011ad80e = 1;
-    else
-        DAT_011ad80e = 0;
-    DAT_011f91a4 = DAT_011f94e4;
-}
 
 class NiAVObjectB57B
 {

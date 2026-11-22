@@ -44,25 +44,6 @@ class FUN_00c8d280_cls : public bhkRefObject
     S8d280_Mat* FUN_00c8d280(S8d280_Mat* out);
 };
 
-// @fnv 0x00c8d280
-S8d280_Mat* FUN_00c8d280_cls::FUN_00c8d280(S8d280_Mat* out)
-{
-    if (this != 0)
-    {
-        if (m_pHavokObject != 0)
-        {
-            S8d280_Mat* src = (S8d280_Mat*)((char*)m_pHavokObject + 0xf0);
-            out->r0.m_vComponents = src->r0.m_vComponents;
-            out->r1.m_vComponents = src->r1.m_vComponents;
-            out->r2.m_vComponents = src->r2.m_vComponents;
-            out->r3.m_vComponents = src->r3.m_vComponents;
-            return out;
-        }
-    }
-    out->setIdentity();
-    return out;
-}
-
 // Preserves full 2026-10-24 prior contributor reconstruction; prior observed  /Od compiler mismatch.
 
 extern unsigned int DAT_0126fd98;

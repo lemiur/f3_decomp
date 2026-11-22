@@ -1,12 +1,7 @@
-// bsshader/tallgrassshaderproperty.cpp: TallGrassShaderProperty, Holder, PointerMap (9 functions)
+// bsshader/tallgrassshaderproperty.cpp: TallGrassShaderProperty, Holder, PointerMap (8 functions)
 #include "f3_common.h"
 #include "tallgrassshaderproperty_decls.h"
 #pragma optimize("", off)
-// @fnv 0x0057ce60
-unsigned long TallGrassShaderProperty::GetCacheIdentifier()
-{
-    return DAT_011c9f6c;
-}
 #pragma optimize("", on)
 // Iterates the grass map, destroys each grass entry, then clears the map and resets two globals.
 // @fnv 0x00b62970

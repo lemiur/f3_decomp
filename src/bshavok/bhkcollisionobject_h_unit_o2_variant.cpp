@@ -38,26 +38,6 @@ struct WeaponObject
 {
     void* FUN_00c65ef0(void*);
 };
-// @fnv 0x00c65ef0
-void* WeaponObject::FUN_00c65ef0(void* a1)
-{
-    void* p = *(void**)((char*)this + 0x10);
-    if (p)
-    {
-        void* q = *(void**)((char*)p + 8);
-        const hkVector4* r;
-        if (q)
-            r = (const hkVector4*)((char*)q + 0x1B0);
-        else
-            r = (const hkVector4*)&DAT_01267e30;
-        SetNiPoint3FromHkVector4(a1, *r);
-        return a1;
-    }
-    ((int*)a1)[0] = _NiPoint3_ZERO;
-    ((int*)a1)[1] = DAT_011f4270;
-    ((int*)a1)[2] = DAT_011f4274;
-    return a1;
-}
 
 struct AudioTlsState
 {
@@ -133,27 +113,6 @@ struct FUN_00c65890_cls
     void FUN_00c65890(int param);
     void UpdateState(int param);
 };
-
-// @fnv 0x00c65890
-void FUN_00c65890_cls::FUN_00c65890(int param)
-{
-    FUN_00c65890_Tgt* tgt = m_10;
-    if (tgt != 0)
-    {
-        unsigned int flags = tgt->m_flags;
-        flags >>= 6;
-        if (((unsigned char)flags & 1) != 0)
-        {
-            FUN_00c65890_Callee* p = m_08;
-            if (p != 0)
-            {
-                p->Tail();
-            }
-            return;
-        }
-    }
-    UpdateState(param);
-}
 
 struct CollisionNode
 {

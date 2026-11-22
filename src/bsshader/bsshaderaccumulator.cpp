@@ -1,4 +1,4 @@
-// bsshader/bsshaderaccumulator.cpp: BSShaderAccumulator, AccumWIP, AccumS, Candidate and more (38 functions)
+// bsshader/bsshaderaccumulator.cpp: BSShaderAccumulator, AccumWIP, AccumS, Candidate and more (33 functions)
 #include "f3_common.h"
 #include "bsshaderaccumulator_types.h"
 
@@ -495,21 +495,6 @@ struct PoolModeGuard
 };
 extern NiRenderer* DAT_011f9508;
 extern NiPointer<NiGPUProgram> DAT_011f956c;
-// If a renderer exists, creates the shader when missing and then calls DrawSlots(0) on it.
-// @fnv 0x00b55a10
-void FUN_00b55a10()
-{
-    if (DAT_011f9508)
-    {
-        if (!DAT_011f956c.m_pObject)
-        {
-            PoolModeGuard guard(5);
-            DAT_011f956c = BloodSplatterBeamShader::CreateShader();
-        }
-        if (DAT_011f956c.m_pObject)
-            ((ReleaseStub*)DAT_011f956c.m_pObject)->DrawSlots(0);
-    }
-}
 
 struct FUN_00b63090_shell : public BSShaderAccumulator
 {
@@ -1052,56 +1037,6 @@ struct FUN_00b656e0 : public FUN_00a9b4a0
     OMCS m_kCS;
     virtual ~FUN_00b656e0();
 };
-// @fnv 0x00b656e0
-FUN_00b656e0::~FUN_00b656e0()
-{
-    for (int i = 0; i < 4; i++)
-    {
-        m_aPassA[i].Reset();
-        m_aPassB[i].Reset();
-    }
-    delete[] m_p8c;
-    while (m_kList140.m_uiCount)
-    {
-        OMData140* pkData = (OMData140*)m_kList140.m_pkHead->m_element;
-        if (pkData)
-        {
-            if (pkData->m_p14)
-            {
-                delete pkData->m_p14;
-                pkData->m_p14 = 0;
-            }
-            delete pkData;
-        }
-        m_kList140.RemoveHead();
-    }
-    m_sp13c = 0;
-    OMSlot48* pkSlots = (OMSlot48*)((char*)this + 0x48);
-    for (int iSlotIndex = 0; iSlotIndex < 3; iSlotIndex++)
-    {
-        if (pkSlots[iSlotIndex].m_p)
-        {
-            delete pkSlots[iSlotIndex].m_p;
-            pkSlots[iSlotIndex].m_p = 0;
-        }
-    }
-    if (m_p170)
-    {
-        delete m_p170;
-        m_p170 = 0;
-    }
-    if (m_p174)
-        m_p174->Destroy(1);
-    if (m_p178)
-        m_p178->Destroy(1);
-    delete[] m_p17c;
-    delete[] m_p180;
-    delete[] m_p184;
-    delete[] m_p188;
-    m_sp1a0 = 0;
-    m_kMap1b4.RemoveAll();
-    m_sp198 = 0;
-}
 }  // namespace fnv_00b656e0
 
 namespace fnv_00b65c60 {
@@ -1568,11 +1503,6 @@ class BSShaderAccumulatorPassIndexList_W : public BSSimpleList<unsigned short>
   public:
     void FUN_00b64f10();
 };
-// @fnv 0x00b64f10
-void BSShaderAccumulatorPassIndexList_W::FUN_00b64f10()
-{
-    RemoveAll();
-}
 
 void FUN_00b988e0();
 extern float DAT_01015f5c;
@@ -2629,11 +2559,6 @@ inline void Sh651_Pass::Apply(unsigned short usPass)
     m_usPass = usPass;
     g_iSh651Pass = m_usPass;
 }
-inline void SetPass651(Sh651_Pass* p)
-{
-    g_iSh651Pass = p->m_usPass;
-    g_pkSh651Pass = p;
-}
 struct Sh651_Geom
 {
     int unk00;
@@ -2878,72 +2803,6 @@ struct Sh651_Batch
     bool FUN_00b651e0(ShCamera* pkCamera, ShManager* pkManager);
 };
 
-// Renders items whose geometry passes the type check, issuing selected passes and updating fog state.
-// @fnv 0x00b651e0
-bool Sh651_Batch::FUN_00b651e0(ShCamera* pkCamera, ShManager* pkManager)
-{
-    unsigned int ItemUpdateArray = m_kList.m_uiCount;
-    if (ItemUpdateArray > 0)
-    {
-        if (g_pShRenderer->m_iRendererState)
-            FUN_00b6b790();
-        ShRenderer* pkRenderer = g_pShRenderer;
-        ShColor kSaved;
-        ShManager* pkAccumMgr = static_cast<Sh651_Accum*>(g_pSh651Holder->m_pkScene->m_pkAccum)->FUN_00b63c60();
-        Sh651_Pass kPass;
-        bool bFlag = g_bSh651Flag;
-        ShCamera* pkSavedCamera = m_pkAccumulationCamera;
-        m_pkAccumulationCamera = pkCamera;
-        pkRenderer->GetBackgroundColor(kSaved);
-        pkRenderer->SetBackgroundColor(ShColor(0.0f, 0.0f, 0.0f, 1.0f));
-        m_pkList = &m_kList;
-        Prepare();
-        kPass.m_usPass = 0x25b;
-        Sh651_Node* pkNode = m_kList.m_pkHead;
-        while (pkNode)
-        {
-            Sh651_Item* pkItem = m_kList.GetNext(pkNode);
-            Sh651_Geom* pkGeom = pkItem->m_pkGeom;
-            if (pkGeom && pkGeom->IsType())
-            {
-                pkGeom = pkItem->m_pkGeom;
-                if (pkGeom)
-                {
-                    FUN_00b6b8d0(3, pkAccumMgr->FUN_00b6b260());
-                    pkRenderer->SetCurrentCamera(
-                        m_pkAccumulationCamera->m_kWorldTranslate, m_pkAccumulationCamera->m_kWorldRotate,
-                        m_pkAccumulationCamera->m_kViewFrustum, m_pkAccumulationCamera->m_kPort);
-                    if (bFlag)
-                    {
-                        SetPass651(&kPass);
-                        pkItem->Render(g_pShRenderer);
-                    }
-                    else
-                    {
-                        kPass.m_usPass = 0x25a;
-                        SetPass651(&kPass);
-                        pkItem->Render(g_pShRenderer);
-                        kPass.m_usPass = 0x259;
-                        SetPass651(&kPass);
-                        pkItem->Render(g_pShRenderer);
-                    }
-                    FUN_00b6b790();
-                    FUN_00b6b8d0(0, pkManager->FUN_00b6b260());
-                    ShColor kColor = pkGeom->m_kFogTint;
-                    Sh651_Cam* pkCam = g_pSh651Holder->m_pkScene->m_pkCam;
-                    pkCam->m_bValueAt0C = true;
-                    pkCam->m_kFogTint = kColor;
-                    g_pSh651Holder->FUN_00b97550(0xd, pkRenderer, pkManager, pkManager, 0, 1);
-                }
-            }
-        }
-        m_kList.FUN_00b71300();
-        pkRenderer->SetBackgroundColor(kSaved);
-        m_pkAccumulationCamera = pkSavedCamera;
-        static_cast<Sh651_Accum*>(g_pSh651Holder->m_pkScene->m_pkAccum)->FUN_00b63d10();
-    }
-    return ItemUpdateArray > 0;
-}
 }  // namespace fnv_00b651e0
 
 struct QueryEntry_b64d
@@ -4250,51 +4109,3 @@ struct RenderTLS
     unsigned int poolState;
 };
 extern __declspec(thread) RenderTLS g_renderTLS;
-// @fnv 0x00b660d0
-FUN_00b660d0::FUN_00b660d0(int flags, unsigned count, unsigned pass)
-    : silhouette(0, 0, 0, 0), alpha(0, 0x2f5, true, 0, 0)
-{
-    accumulate = true;
-    firstPerson = false;
-    noShader = true;
-    queries = (void**)g_memoryManager.Allocate(200);
-    queryCount = 0;
-    querySize = 50;
-    for (int i = 0; i < 50; i++)
-        queries[i] = 0;
-    fog.FUN_00b71300();
-    sunPercent = 1;
-    sunWaiting = false;
-    sunPixels = 0;
-    for (int j = 0; j < 3; j++)
-    {
-        sun[j].query = 0;
-        sun[j].waiting = false;
-        sun[j].percent = 0;
-        sun[j].pixels = 0;
-        sun[j].frame = 0;
-    }
-    lastRef = 0;
-    lastResult = false;
-    instance = new FUN_00bd9120;
-    batchCount = count;
-    passCount = pass;
-    batch = new FUN_00b9a5b0(passCount, flags);
-    if (batchCount == 2)
-    {
-        batch2 = new FUN_00b9a5b0(passCount, flags);
-    }
-    else
-        batch2 = 0;
-    passes = new unsigned[batchCount];
-    buckets = new int[batchCount];
-    firsts = new bool[batchCount];
-    actives = new bool[batchCount];
-    renderMode = 0;
-    shadow.clear();
-    g_renderTLS.poolState = 0;
-    decals = true;
-    waterTarget.clear();
-    depth = false;
-    silhouette = LocalColor(0.3f, 0.3f, 0.3f, 1.0f);
-}

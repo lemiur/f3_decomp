@@ -1,4 +1,4 @@
-// bsshader/bsshaderproperty.cpp: ShaderPassEntry, ShaderPassList, NiShadeProperty, ShaderPropertyRecord (23 functions)
+// bsshader/bsshaderproperty.cpp: ShaderPassEntry, ShaderPassList, NiShadeProperty, ShaderPropertyRecord (22 functions)
 #include "f3_common.h"
 #include "bsshaderproperty_decls.h"
 
@@ -309,14 +309,6 @@ class BB97550Shader
     int unk04;
     BB97550Pass** m_ppkPasses;
 };
-
-// Sets the thread-local alloc tag to 0x27 for the scope, then forwards the arguments to the pass at index uiPass.
-// @fnv 0x00b97550
-void BB97550Shader::FUN_00b97550(unsigned int uiPassIndex, int iA, int iB, int iC, int iD, int iE)
-{
-    BB97550AllocTagScope kScope(0x27);
-    RenderWithTextures(m_ppkPasses[uiPassIndex], iA, iB, iC, iD, iE);
-}
 
 struct S_00ba8c50_Slot
 {

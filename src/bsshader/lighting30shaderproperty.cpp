@@ -21,15 +21,6 @@ struct BSFadeNode
 
 void* __fastcall FUN_00a75650(void*);
 
-// @fnv 0x00a756d0
-void* __cdecl FUN_00a756d0()
-{
-    void* p = BSFadeNode::operator new(0x4c);
-    if (p)
-        return FUN_00a75650(p);
-    return 0;
-}
-
 extern "C" __declspec(dllimport) long __stdcall InterlockedIncrement(long volatile* value);
 
 extern long DAT_011aa070;

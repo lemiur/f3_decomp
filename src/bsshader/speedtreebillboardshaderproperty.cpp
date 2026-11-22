@@ -55,20 +55,7 @@ struct FUN_00ba8630 : S_00ba8630_Base
     virtual ~FUN_00ba8630();
 };
 
-// Initializes the object: sets unk58 to 1 and unk1C to 0xb.
-// @fnv 0x00ba8630
-FUN_00ba8630::FUN_00ba8630() : unk58(1)
-{
-    unk1C = 0xb;
-}
-
 extern int DAT_0120043c;
-
-// @fnv 0x00ba8680
-int* __cdecl FUN_00ba8680()
-{
-    return &DAT_0120043c;
-}
 
 void __stdcall FUN_00b665c0(void* apValue);
 
@@ -349,20 +336,6 @@ struct ObjHdr
     void FUN_0096ae90(unsigned int count, void** out);
 };
 
-// @fnv 0x00ba8780
-void __stdcall FUN_00ba8780(ObjHdr* apObj)
-{
-    ObjHdr* pObj = apObj;
-    FUN_00b690d0(pObj);
-    void* pValue = FUN_00a7d330(DAT_0120043c);
-    unsigned int count = pObj->unkA;
-    if (count >= pObj->unk8)
-    {
-        pObj->FUN_0096ad30((int)(pObj->unkE + count));
-    }
-    pObj->FUN_0096ae90(count, &pValue);
-}
-
 struct S_00b68ed0_Stream;
 struct S_00b68ed0_Obj
 {
@@ -372,8 +345,3 @@ struct FUN_00ba8660_S
 {
     void FUN_00ba8660(S_00b68ed0_Stream*);
 };
-// @fnv 0x00ba8660
-void FUN_00ba8660_S::FUN_00ba8660(S_00b68ed0_Stream* p)
-{
-    ((S_00b68ed0_Obj*)this)->ReadFromStream(p);
-}

@@ -12,10 +12,6 @@
 // @fnv 0x004ab230
 #pragma optimize("", off)
 #pragma optimize("y", off)
-NiNode* BipedAnim::GetBoneNode(BIPED_BONE boneIndex)
-{
-    return bone[boneIndex].pParent;
-}
 #pragma optimize("y", on)
 #pragma optimize("", on)
 

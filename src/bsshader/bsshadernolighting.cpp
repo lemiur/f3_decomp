@@ -1,4 +1,4 @@
-// bsshader/bsshadernolighting.cpp: BSShaderNoLighting, ShaderDispatcher, LightingShader, TechniqueShader and more (21 functions)
+// bsshader/bsshadernolighting.cpp: BSShaderNoLighting, ShaderDispatcher, LightingShader, TechniqueShader and more (20 functions)
 #include "f3_common.h"
 #include "bsshadernolighting_local.h"
 
@@ -1601,12 +1601,6 @@ struct BSShaderNoLightingShell : BSShaderNoLighting
 {
     void FUN_00bc8d30();
 };
-// @fnv 0x00bc8d30
-void BSShaderNoLightingShell::FUN_00bc8d30()
-{
-    InitializeShaderData();
-    FUN_00bc77e0();
-}
 
 namespace NoLightingConsts {
 extern "C" unsigned int DAT_01202158;

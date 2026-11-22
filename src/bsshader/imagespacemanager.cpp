@@ -1,4 +1,4 @@
-// bsshader/imagespacemanager.cpp: ImageSpaceManager, Derived, Host, ImageSpaceManager_b8b and more (60 functions)
+// bsshader/imagespacemanager.cpp: ImageSpaceManager, Derived, Host, ImageSpaceManager_b8b and more (58 functions)
 #include "f3_common.h"
 #include "imagespacemanager_geometry.h"
 #include "imagespacemanager_types_ImageSpaceManager.h"
@@ -43,11 +43,6 @@ void ImageSpaceManager::SetDepthOfFieldParameters(float strength, unsigned int m
 
 extern ImageSpaceManager* DAT_011f91ac;
 #pragma optimize("", off)
-// @fnv 0x004e3270
-ImageSpaceManager* ImageSpaceManager::FUN_004e3270()
-{
-    return DAT_011f91ac;
-}
 #pragma optimize("", on)
 
 // Creates a NiScreenElementsData and NiScreenElements, configures its data, names it "Imagespace Effect Geometry", and updates it with zero time.
@@ -223,15 +218,6 @@ void NiTArray<bool, NiTMallocInterface<bool> >::SetAt(unsigned int index, const 
             --m_usESize;
     }
     m_pBase[index] = value;
-}
-
-// @fnv 0x00b8b190
-BSRenderedTexture* ImageSpaceManager::GetDepthRenderedTexture()
-{
-    const ImageSpaceTexture& depth = m_kDepthTexture;
-    if (!depth.GetTexture())
-        m_kDepthTexture.CreateRenderTargetTexture(BSTextureManager::BSTM_RT_SCENE_DEPTH_BUFFER);
-    return depth.GetRenderedTexture();
 }
 
 extern "C" void* __cdecl fnv_zlib_memset(void*, int, unsigned int);

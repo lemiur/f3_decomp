@@ -1531,26 +1531,6 @@ struct Cache
     void InsertOrAssign(void*, Ref<Resource>);
 };
 
-bool Cache::FUN_00e92760(void* key, Ref<Resource>* out)
-{
-
-    CacheEntry* entry = buckets[Hash(key)];
-
-    while (entry)
-    {
-
-        if (Equal(key, entry->key))
-        {
-            *out = entry->value;
-            return true;
-        }
-
-        entry = entry->next;
-    }
-
-    return false;
-}
-
 Cache* GetNiTStringMap();
 
 struct Input

@@ -398,22 +398,6 @@ struct FUN_00b5af80_self
     void FUN_00b5af80(bool destroy);
 };
 
-// If obj is set, releases it when destroy is true (clearing obj and b), then resets a to 0.
-// @fnv 0x00b5af80
-void FUN_00b5af80_self::FUN_00b5af80(bool destroy)
-{
-    if (obj)
-    {
-        if (destroy)
-        {
-            Release(obj);
-            obj = 0;
-            b = 0;
-        }
-        a = 0;
-    }
-}
-
 struct NiAVObjectVirt
 {
     virtual ~NiAVObjectVirt();
@@ -2207,47 +2191,6 @@ struct ShadowSceneNodeX
     RefPtr<ShadowRenderTarget> m_spReferencedObject;
     void FUN_00b5b880(int arg);
 };
-
-// @fnv 0x00b5b880
-void ShadowSceneNodeX::FUN_00b5b880(int arg)
-{
-    AutoMemContext ctx(0x20);
-    if (!m_spReferencedObject)
-    {
-        m_spReferencedObject = new ShadowRenderTarget(0);
-    }
-    m_spReferencedObject->unk114 = 0;
-    if (m_uiShadowCount)
-    {
-        int n = 0;
-        LightNode* pos = m_pShadowHead;
-        while (pos)
-        {
-            ShadowLight* light = GetNext(pos);
-            if (light && light->m_pLight)
-            {
-                if (!(light->m_pLight->m_uiObjectFlags & 1))
-                {
-                    UpdateData data;
-                    light->m_pLight->Update(data);
-                    if (light->m_usIndex != 0xff)
-                    {
-                        g_pCurrentShadowLight = light;
-                        light->Render(arg, n);
-                        n++;
-                    }
-                }
-                else
-                {
-                    light->Deactivate();
-                }
-            }
-        }
-        for (int i = n + 0x11; i < 0x15; i++)
-            g_renderHelper.SetTarget(1, i);
-    }
-    m_spReferencedObject->sp130 = 0;
-}
 
 struct SPData
 {
@@ -4209,34 +4152,6 @@ struct Root
     Process* process;
     void SetProcessEnabled(bool);
 };
-// Creates and stores a Process with a WorldContext when enable is true, or releases and clears process when false.
-// @fnv 0x00c6a640
-void Root::SetProcessEnabled(bool enable)
-{
-    AutoMemContext context(16);
-    if (enable)
-    {
-        if (!process)
-        {
-            InterfaceArray array;
-            FUN_00cd1ed0();
-            WorldContext* item = new WorldContext;
-            item->SetWorld(GetWorld());
-            array.AddBack(item);
-            process = new Process(array, 0);
-            process->SetValue(0x61a9);
-        }
-    }
-    else
-    {
-        if (process)
-        {
-            GetWorld();
-            process->removeReference();
-            process = 0;
-        }
-    }
-}
 
 struct FUN_00b5b0e0_Node
 {
@@ -5472,12 +5387,6 @@ template <class T> struct LocalLink
     LocalLink* prev;
     T* item;
 };
-template <class T> T* const& nextItem(LocalLink<T>*& p)
-{
-    T* const& item = p->item;
-    p = p->next;
-    return item;
-}
 struct LocalObject
 {
     unsigned int unk000;
@@ -5921,63 +5830,6 @@ struct LocalTarget
     bool dirty;
     void FUN_00b5ddf0(LocalContext*);
 };
-// When the context changes, clears five lists, removes geometry and light references from old-context objects, then stores the new context.
-// @fnv 0x00b5ddf0
-void LocalTarget::FUN_00b5ddf0(LocalContext* apContext)
-{
-    if (apContext != context)
-    {
-        DAT_011f9ea0.FUN_0040fbf0(0);
-        DAT_011f9ec0.FUN_0040fbf0(0);
-        dirty = false;
-        listA.RemoveAll();
-        listB.RemoveAll();
-        listC.RemoveAll();
-        listD.RemoveAll();
-        listE.RemoveAll();
-        if (context)
-        {
-            LocalLink<LocalGeometry>* geometryPos = context->geometries;
-            while (geometryPos)
-            {
-                LocalGeometry* geometry = nextItem(geometryPos);
-                if (geometry)
-                {
-                    for (unsigned i = 0; i < geometry->objects.count; i++)
-                    {
-                        LocalObject* obj = (LocalObject*)geometry->objects.data[i];
-                        unsigned index = obj->geometryLinks.find(geometry);
-                        if (index != ~0u)
-                            obj->geometryLinks.FUN_00b5ade0(index, true);
-                    }
-                    geometry->objects.clear();
-                    LocalLink<LocalLight>* lightPos = geometry->lights;
-                    while (lightPos)
-                    {
-                        LocalLight* light = nextItem(lightPos);
-                        if (light)
-                        {
-                            int n = (int)light->data->objects.count;
-                            for (int j = 0; j < n; j++)
-                            {
-                                LocalArray* links = &((LocalObject*)light->data->objects.data[j])->lightLinks;
-                                unsigned index = links->find(light);
-                                if (index != ~0u)
-                                    links->remove(index);
-                            }
-                            light->data->objects.clear();
-                        }
-                    }
-                }
-            }
-        }
-        dirty = true;
-        DAT_011f9ea0.unlock();
-        DAT_011f9ec0.unlock();
-        ((FUN_00b5ddb0_self*)this)->FUN_00b5d180();
-    }
-    context = apContext;
-}
 }  // namespace fnv_00b5ddf0
 
 namespace fnv_00b5b260 {
@@ -7346,33 +7198,6 @@ struct ShadowSceneNode_Self : public ShadowSceneNode
     LightEx* FUN_00b5cbd0(void* key);
 };
 
-// Finds a shadow light matching key in shadowLights, clears its flag and returns it, or creates a new LightEx, adds it to m_activeLights, and returns it.
-// @fnv 0x00b5cbd0
-LightEx* ShadowSceneNode_Self::FUN_00b5cbd0(void* key)
-{
-    ShadowListItem* pos = shadowLights.head;
-    while (pos)
-    {
-        ShadowSceneLight* const& ref = pos->light;
-        pos = pos->next;
-        LightEx* light = (LightEx*)ref;
-        if (light && *(void**)((char*)light + 0x128) == key)
-        {
-            ShadowLightFlags* flags = *(ShadowLightFlags**)((char*)light + 0xf8);
-            flags->flags &= 0xfffffffe;
-            light->FUN_00b9bb10(1.0f, 0);
-            return light;
-        }
-    }
-
-    DAT_011f9ea0.Lock(0);
-    LightEx* light = new LightEx;
-    light->FUN_00b5af30(key);
-    light->SetShadowEnabled(true);
-    m_activeLights.FUN_00a5a310(NiPointer<NiRefObject>(light));
-    DAT_011f9ea0.Unlock();
-    return light;
-}
 }  // namespace fnv_00b5cbd0
 
 extern unsigned int DAT_011c16bc;

@@ -1,4 +1,4 @@
-// bsshader/shadowscenelight.cpp: ShadowSceneLight, RemovalList, NiRefObject, LightView and more (22 functions)
+// bsshader/shadowscenelight.cpp: ShadowSceneLight, RemovalList, NiRefObject, LightView and more (21 functions)
 #include "f3_common.h"
 #include "shadowscenelight_decls.h"
 
@@ -1772,24 +1772,10 @@ inline float ShadowNegate(float f)
 {
     return -f;
 }
-inline float ShadowRadius(const NiBound& b)
-{
-    return b.radius;
-}
 extern float __cdecl FUN_00404010(float, float);
 extern float __cdecl FUN_0040ebd0(float, float);
 extern bool __cdecl FUN_005bf7b0();
 extern BSShaderAccumulator* __cdecl PopNextInt();
-inline void ShadowEnabled(int& result)
-{
-    result = (DAT_011f91d8 & 0x10) > 0;
-}
-inline int ShadowEnabledValue()
-{
-    int result;
-    ShadowEnabled(result);
-    return result;
-}
 class ShadowSceneLightDecompile : public ShadowSceneLight
 {
   public:
@@ -1809,179 +1795,6 @@ class ShadowSceneLightDecompile : public ShadowSceneLight
     void UpdateShadow(void*, unsigned char*);
 };
 
-// Updates the shadow camera frustum and viewport when conditions hold; otherwise releases an existing shadow texture.
-// @fnv 0x00b9dfc0
-void ShadowSceneLightDecompile::UpdateShadow(void* unused, unsigned char* renderFlags)
-{
-    bool updateShadow = true;
-    if (!(CastsShadow() && DAT_011f91c0 >= 3 && (unsigned char)ShadowEnabledValue()) && !m_bLightFlag3)
-        updateShadow = false;
-
-    if (!m_spLightRenderedTexture.m_pObject)
-    {
-        BSRenderedTexture* texture = DAT_011f91a8->ActivatePending();
-        if (!texture)
-            reinterpret_cast<NiAVObject*>(m_pMenuLight.m_pObject)->m_uiObjectFlags |= 1;
-        AssignRefObject(texture);
-    }
-
-    if (updateShadow && m_usEnabledState != 255 && m_fShadowParameter5 > DAT_01082cb0 &&
-        m_spLightRenderedTexture.m_pObject)
-    {
-        ShadowTransform lightTransform = reinterpret_cast<ShadowObject*>(GetLight())->world;
-        union
-        {
-            ShadowVector direction, sceneOrigin;
-            ShadowUpdateData initialUpdate;
-        } a;
-        union
-        {
-            ShadowVector side, position;
-        } b;
-        union
-        {
-            ShadowVector temp, delta, offset;
-        } c;
-        union
-        {
-            ShadowVector extent;
-            ShadowUpdateData finalUpdate;
-        } d;
-        union
-        {
-            ShadowVector axis, up;
-        } e;
-        ShadowVector::Set(
-            a.direction,
-            reinterpret_cast<ShadowObject*>(m_pLightNode.m_pObject)->world.translation.x - lightTransform.translation.x,
-            reinterpret_cast<ShadowObject*>(m_pLightNode.m_pObject)->world.translation.y - lightTransform.translation.y,
-            reinterpret_cast<ShadowObject*>(m_pLightNode.m_pObject)->world.translation.z -
-                lightTransform.translation.z);
-        a.direction.FUN_004a0c10();
-        ShadowVector::Set(e.axis, -DAT_011a9484.x, -DAT_011a9484.y, -DAT_011a9484.z);
-        a.direction.FUN_0053d1a0(&b.side, e.axis);
-        if (b.side.x < DAT_01031148 && b.side.x > DAT_010b7ea0 && b.side.y < DAT_01031148 && b.side.y > DAT_010b7ea0 &&
-            b.side.z < DAT_01031148 && b.side.z > DAT_010b7ea0)
-        {
-            e.axis = DAT_011a946c;
-            const NiPoint3* __restrict cross = a.direction.FUN_0053d1a0(&c.temp, e.axis);
-            static_cast<NiPoint3&>(b.side) = *cross;
-        }
-        memcpy(&e.up, a.direction.FUN_0053d1a0(&c.temp, b.side), sizeof(e.up));
-        NiFrustum frustum(false);
-        frustum.orthographic = true;
-        ShadowExtraData* pExtraData =
-            reinterpret_cast<ShadowObject*>(m_pLightNode.m_pObject)->FUN_00a5bdd0(DAT_012031e4);
-        float radius;
-        {
-            ShadowObject* __restrict scene = reinterpret_cast<ShadowObject*>(m_pLightNode.m_pObject);
-            {
-                const NiPoint3* __restrict origin = &scene->world.translation;
-                static_cast<NiPoint3&>(a.sceneOrigin) = *origin;
-            }
-            {
-                const NiPoint3* __restrict extent =
-                    pExtraData ? pExtraData->extent.ApplyScaled(&c.temp, scene->GetScale()) : &DAT_011f426c;
-                static_cast<NiPoint3&>(d.extent) = *extent;
-            }
-            const NiBound* bound = static_cast<NiBound*>(scene->m_kWorldBound);
-            if (!bound)
-                bound = &DAT_011f4288;
-            radius = FUN_0040ebd0(DAT_01032adc, FUN_00404010(float(d.extent.x * DAT_01016ff0),
-                                                             FUN_00404010(float(d.extent.y * DAT_01016ff0),
-                                                                          FUN_00404010(float(d.extent.z * DAT_01016ff0),
-                                                                                       ShadowRadius(*bound)))));
-        }
-        ShadowObject* light = reinterpret_cast<ShadowObject*>(m_pMenuLight.m_pObject);
-        float distance;
-        ShadowVector::Set(c.delta, light->world.translation.x - a.sceneOrigin.x,
-                          light->world.translation.y - a.sceneOrigin.y, light->world.translation.z - a.sceneOrigin.z);
-        distance = c.delta.Length();
-        m_fSpotlightParameter = float((radius / distance) * DAT_0106c948);
-        frustum.Set(-radius, radius);
-        frustum.nearPlane = 1.0f;
-        frustum.farPlane = reinterpret_cast<ShadowLight*>(light)->range;
-        __declspec(align(16)) ShadowViewport viewport;
-        viewport.bottom = viewport.left = 0.0f;
-        viewport.top = viewport.right = 1.0f;
-
-        if (m_bSkipLightObject && FUN_005bf7b0())
-        {
-            reinterpret_cast<ShadowPointerCalls*>(&m_spShadowShaderAccumulator)->FUN_0066b0d0(PopNextInt());
-            reinterpret_cast<ShadowAccumulator*>(m_spShadowShaderAccumulator.m_pObject)->SetPass(7);
-            if (!GetShadowCamera())
-            {
-                FUN_00a712f0* camera = new FUN_00a712f0;
-                reinterpret_cast<ShadowPointerCalls*>(&m_pCamera)->FUN_0066b0d0(camera);
-            }
-            memcpy(&reinterpret_cast<FUN_00a712f0*>(GetShadowCamera())->local.translation, &lightTransform.translation,
-                   sizeof(lightTransform.translation));
-            a.initialUpdate.time = 0.0f;
-            a.initialUpdate.updateControllers = false;
-            a.initialUpdate.multithreaded = false;
-            a.initialUpdate.updateGeomorphs = false;
-            a.initialUpdate.updateBounds = false;
-            a.initialUpdate.updateTransforms = false;
-            reinterpret_cast<FUN_00a712f0*>(GetShadowCamera())->FUN_00a59c60(a.initialUpdate);
-            memcpy(&b.position, &reinterpret_cast<ShadowObject*>(m_pLightNode.m_pObject)->world.translation,
-                   sizeof(b.position));
-            pExtraData = reinterpret_cast<ShadowObject*>(m_pLightNode.m_pObject)->FUN_00a5bdd0(DAT_012031e4);
-            ShadowVector tempOffset;
-            ShadowObject* __restrict scaleSource = reinterpret_cast<ShadowObject*>(m_pLightNode.m_pObject);
-            float scale = static_cast<const volatile float&>(scaleSource->world.scale);
-            ShadowVector* __restrict output = &tempOffset;
-            const ShadowVector* input = &pExtraData->offset;
-            b.position.FUN_0063c8a0(*input->ApplyScaled(output, scale));
-            pExtraData->extent.ApplyScaled(&c.offset,
-                                           reinterpret_cast<ShadowObject*>(m_pLightNode.m_pObject)->OrderedScale());
-            if (c.offset.z > c.offset.x + c.offset.y)
-            {
-                c.offset.x = float(DAT_011a9484.x * DAT_01020758);
-                c.offset.y = float(DAT_011a9484.y * DAT_01020758);
-                c.offset.z = float(DAT_011a9484.z * DAT_01020758);
-                b.position.x = c.offset.x + b.position.x;
-                b.position.y = c.offset.y + (*static_cast<const volatile float*>(&b.position.y));
-                b.position.z = c.offset.z + (*static_cast<const volatile float*>(&b.position.z));
-            }
-            reinterpret_cast<FUN_00a712f0*>(GetShadowCamera())->SetLookAt(b.position, e.up);
-            reinterpret_cast<FUN_00a712f0*>(GetShadowCamera())->FUN_00a6faf0(frustum);
-            reinterpret_cast<FUN_00a712f0*>(GetShadowCamera())->FUN_00712e60(viewport);
-            d.finalUpdate.time = 0.0f;
-            d.finalUpdate.updateControllers = false;
-            d.finalUpdate.multithreaded = false;
-            d.finalUpdate.updateGeomorphs = false;
-            d.finalUpdate.updateBounds = false;
-            d.finalUpdate.updateTransforms = false;
-            reinterpret_cast<FUN_00a712f0*>(GetShadowCamera())->FUN_00a59c60(d.finalUpdate);
-            float nearPlane = frustum.nearPlane;
-            float farPlane = frustum.farPlane;
-            ShadowObject* __restrict boundSource = reinterpret_cast<ShadowObject*>(m_pLightNode.m_pObject);
-            const NiBound* bound = static_cast<NiBound*>(boundSource->m_kWorldBound);
-            if (!bound)
-                bound = &DAT_011f4288;
-            reinterpret_cast<FUN_00a712f0*>(GetShadowCamera())->FUN_00a70080(*bound);
-            frustum = reinterpret_cast<FUN_00a712f0*>(GetShadowCamera())->frustum;
-            frustum.farPlane = float(frustum.farPlane + DAT_0106b178);
-            if (!DAT_011f91b0)
-                frustum.nearPlane = float(frustum.farPlane * DAT_01018a90);
-            reinterpret_cast<ShadowPlanes*>(&m_kFrustumPlanes)
-                ->SetFromFrustum(frustum, reinterpret_cast<FUN_00a712f0*>(GetShadowCamera())->world);
-            frustum.nearPlane = nearPlane;
-            frustum.farPlane = farPlane;
-            reinterpret_cast<FUN_00a712f0*>(GetShadowCamera())->FUN_00a6faf0(frustum);
-            reinterpret_cast<ShadowAccumulator*>(m_spShadowShaderAccumulator.m_pObject)->AssignRefCounted(this);
-            DAT_01200088.FUN_00ba3390(m_pCamera.m_pObject, 0, m_pLightNode.m_pObject, 0, 0,
-                                      m_spShadowShaderAccumulator.m_pObject, 0, renderFlags + 0x11, 0);
-        }
-    }
-    else if (m_spLightRenderedTexture.m_pObject)
-    {
-        DAT_011f91a8->FUN_00b6d4c0(m_spLightRenderedTexture.m_pObject);
-        m_spLightRenderedTexture = 0;
-        m_spShadowShaderAccumulator = 0;
-    }
-    DAT_01200088.FUN_00ba30f0(0, renderFlags + 0x11);
-}
 }  // namespace fnv_00b9dfc0
 
 struct NiRTTI;

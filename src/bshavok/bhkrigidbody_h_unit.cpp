@@ -1,4 +1,4 @@
-// bshavok/bhkrigidbody_h_unit.cpp: WorldObject (4 functions)
+// bshavok/bhkrigidbody_h_unit.cpp: WorldObject (2 functions)
 #include "f3_common.h"
 #include "bhkrigidbody.h"
 
@@ -163,16 +163,6 @@ class __declspec(novtable) C8F670Object
     int unk08;
     C8F670Array<C8F670Pair> m_kPairs;
 };
-
-// Calls the object's destructor and, when uiFlags has bit 0 set, frees the object, then returns this.
-// @fnv 0x00c8f670
-void* C8F670Object::DestroyObject(unsigned int uiFlags)
-{
-    this->C8F670Object::~C8F670Object();
-    if (uiFlags & 1)
-        operator delete(this);
-    return this;
-}
 
 class C8D9BinaryStream
 {
@@ -438,24 +428,3 @@ struct WorldObject
     void* AddDebugNodeToWorld(void* a1);
     void* FUN_00c8d2f0(void* a1);
 };
-
-// Gets a node from AddDebugNodeToWorld, creates a shape with 6.0f, sets its position, attaches it, and returns the node.
-// @fnv 0x00c8d2f0
-void* WorldObject::FUN_00c8d2f0(void* a1)
-{
-    WorldObject* pDebugNode = (WorldObject*)AddDebugNodeToWorld(a1);
-    if (pDebugNode != 0)
-    {
-        __m128 src;
-        v59(&src);
-        NiPoint3 p;
-        FUN_00458620(&p, (NiPoint3*)&src);
-        DebugShape* __restrict pDebugShape = (DebugShape*)FUN_00c59200(6.0f);
-        if (pDebugShape != 0)
-        {
-            pDebugShape->pos = p;
-            pDebugNode->v55(pDebugShape, 1);
-        }
-    }
-    return pDebugNode;
-}

@@ -1,17 +1,7 @@
-// bsshader/mtrenderingsystem.cpp: TaskThreadManager, AILinearTaskThread (4 functions)
+// bsshader/mtrenderingsystem.cpp: TaskThreadManager, AILinearTaskThread (3 functions)
 #include "f3_common.h"
 #include "mtrenderingsystem_decls.h"
 // @fnv 0x004ea970
-TaskThreadManager* TaskThreadManager::GetSingleton()
-{
-    return &DAT_01200088;
-}
-// @fnv 0x008c7190
-void AILinearTaskThread::ExecuteTask()
-{
-    if (m_pTaskFunction)
-        m_pTaskFunction();
-}
 
 #pragma optimize("gty", on)
 // @fnv 0x00ba3720

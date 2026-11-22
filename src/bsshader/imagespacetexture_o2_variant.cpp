@@ -524,27 +524,6 @@ struct ImageSpaceOwner
                       void* apArg5, void* apArg6);
 };
 
-// @fnv 0x00b8c980
-void ImageSpaceOwner::FUN_00b8c980(ISEffectShader* apShader, void* apArg2, NiTexture* apSource,
-                                   BSRenderedTexture* apDest, void* apArg5, void* apArg6)
-{
-    TLSTagGuard kGuard(0x27);
-    ISTexture kSource;
-    ISTexture kDest;
-    kSource.SetTexture(apSource);
-    kDest.SetRenderedTexture(apDest);
-    if (apShader)
-    {
-        apShader->BindTexture(0, &kDest, 0);
-        apShader->BindTexture(1, &kSource, 0);
-        void** ppGeom = bUseAlt ? &pGeom1f8 : &pGeom1f0;
-        void* pGeom = *ppGeom;
-        apShader->Render(pGeom, apArg2, apArg5, apArg6);
-        apShader->BindTexture(0, 0, 0);
-        apShader->BindTexture(1, 0, 0);
-    }
-}
-
 struct TexObj
 {
     void FUN_00b8a790(int mode, float a, float b, float c, float d);
@@ -1380,24 +1359,6 @@ struct TextureOwnerB63
     TextureContainerB63 container;
     int FUN_00b63c60();
 };
-// @fnv 0x00b63c60
-int TextureOwnerB63::FUN_00b63c60()
-{
-    if (!container.node->receiver)
-    {
-        ISTexture* created = new ISTexture;
-        container.FUN_00ba3aa0(2, &created);
-    }
-    OwnerStandIn** getterSlot = &container.node->receiver;
-    if (!reinterpret_cast<TextureRenderedViewB63*>(*getterSlot)->FUN_00ba3770())
-    {
-        OwnerStandIn** receiverSlot = &container.node->receiver;
-        (*receiverSlot)
-            ->FUN_00ba37a0(reinterpret_cast<TextureManagerB63*>(DAT_011f91a8)->FUN_00b6e110(DAT_011f4748, 32, 0, 0, 0));
-    }
-    OwnerStandIn** finalSlot = &container.node->receiver;
-    return reinterpret_cast<TextureRenderedViewB63*>(*finalSlot)->FUN_00ba3770();
-}
 
 struct RenderedGetterB63D
 {

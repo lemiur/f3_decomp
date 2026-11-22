@@ -1,13 +1,8 @@
-// bsshader/bsshaderutil.cpp: BSShaderRenderUtility (7 functions)
+// bsshader/bsshaderutil.cpp: BSShaderRenderUtility (6 functions)
 #include "f3_common.h"
 #include "bsshaderutil_decls.h"
 
 #pragma optimize("", off)
-// @fnv 0x00469860
-bool BSShaderRenderUtility::IsRenderTargetId(unsigned int value)
-{
-    return value >= 0xff000000u;
-}
 
 #pragma optimize("", on)
 

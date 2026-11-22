@@ -1,4 +1,4 @@
-// bsshader/tallgrassshader.cpp: TallGrassShader, Self, ShaderRegister, TallGrassPrograms and more (25 functions)
+// bsshader/tallgrassshader.cpp: TallGrassShader, Self, ShaderRegister, TallGrassPrograms and more (23 functions)
 #include "f3_common.h"
 #include "tallgrassshader_decls.h"
 // Creates the constants object with the given count (defaulting to 5 when count is -1) if it does not already exist.
@@ -183,13 +183,6 @@ void FUN_00ba91a0(Obj* pObj, int a, bool b)
 }  // namespace fnv_00ba91a0
 
 extern int DAT_010b8480;
-// @fnv 0x00ba9230
-void __fastcall FUN_00ba9230(void** self, int)
-{
-    void* p = self[1];
-    self[0] = &DAT_010b8480;
-    g_memoryManager.Deallocate(p);
-}
 
 struct BSFadeNode
 {
@@ -719,25 +712,6 @@ struct FUN_00bacd00 : BSFadeNode
     char pad[0x1dc];
     FUN_00bacd00(NiD3DVertexDeclaration*);
 };
-// @fnv 0x00bacf00
-FUN_00bacd00* CreateShaderFadeNode()
-{
-    QAutoMemContext tempMemContext(0x1c);
-    NiD3DVertexDeclaration* m_pVertexDeclaration1 = NiD3DVertexDeclaration::Create(DAT_011f9508, 5, 1);
-    m_pVertexDeclaration1->SetEntry(0, 0, 0, 2, 0);
-    m_pVertexDeclaration1->SetEntry(1, 3, 3, 2, 0);
-    m_pVertexDeclaration1->SetEntry(2, 5, 4, 3, 0);
-    m_pVertexDeclaration1->SetEntry(3, 7, 5, 1, 0);
-    m_pVertexDeclaration1->SetEntry2(0, 4, 6, 0x80000000, 0, 5, 1, 0);
-    m_pVertexDeclaration1->Finish();
-    FUN_00bacd00* pshader = new FUN_00bacd00(m_pVertexDeclaration1);
-    pshader->V4c();
-    pshader->V13c();
-    pshader->V11c();
-    pshader->V140();
-    pshader->Vc0(m_pVertexDeclaration1);
-    return pshader;
-}
 }  // namespace fnv_00bacf00
 
 struct NiPropertyState_stub
