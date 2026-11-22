@@ -21,7 +21,8 @@ typedef struct {
     int first_line, last_line;
     int parent;                             /* SK_* of the enclosing scope */
     int depth;                              /* number of enclosing scopes */
-    int is_template, is_dtor, is_operator, is_inline;
+    int is_template, is_dtor, is_operator, is_inline, is_static;
+    int is_ctor_like; /* no type before the name: a constructor, destructor or conversion */
     int bad;
     char name_s[160];
 } Def;

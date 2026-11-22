@@ -1,17 +1,26 @@
 /* f3prune - remove unchecked definitions from f3_decomp source.
 
-   usage: f3prune defs <repo> <unchecked.tsv> <objdir> <out.tsv> [--only PREFIX]... [--exclude FILE] [--dry]
+   usage: f3prune defs <repo> <unchecked.tsv> <objdir> <out.tsv> --functions <functions.tsv>
+                       [--only PREFIX]... [--exclude FILE] [--dry]
           f3prune decls <repo> <files.txt> <out.tsv> [--dry]
+          f3prune objrefs <repo> <obj>        (debugging: each function of an object and what it relocates to)
 
-   defs: removes the out-of-line function definitions that f3rules lists as unchecked (unchecked.tsv, made with
-   --keep-objs so <objdir> holds u<NNNN>.obj per unit) when nothing kept depends on them:
+   defs: removes the out-of-line function definitions that f3rules lists as unchecked (unchecked.tsv and
+   functions.tsv of one run made with --keep-objs, so <objdir> holds u<NNNN>.obj per unit and the objects record
+   <repo>'s paths) when nothing kept depends on them:
      - never a referenced_by_checked = 1 row, never a definition inside a class body, a header, or one whose text
        can't be delimited with certainty (a preprocessor line inside, a macro head, something else on its lines);
      - never a definition whose source range holds a function the objects emit that is not itself a candidate
        (a recipe function, another instantiation);
      - kept, transitively, when a kept function's code relocates to it (the /Z7 objects), and when its name
-       appears in a kept function body or file-scope initializer of the same translation unit group (the .cpp files
-       joined by #include "x.cpp"), since a kept caller may have inlined it.
+       appears in code checked functions may inline (the bodies of the definitions holding them, of every kept
+       operator, constructor and destructor, and of every kept definition such code names, transitively, plus
+       file-scope initializers) in the same translation-unit group (the .cpp files joined by #include "x.cpp");
+     - kept: operators (called implicitly); a constructor or destructor of a class defined in a header, or named
+       in kept code outside its own definition; the targets of recipe adjustor thunks; constructors, destructors
+       and any body naming a class (or a class derived from one) whose deleting destructor or thunk the recipe
+       checks (they emit its vftable); callers, by relocation or by name, of a recipe function emitted only when
+       referenced (static, inline, in-class, template).
    Each removal takes the signature through the closing brace and the comment lines attached directly above
    (unless the definition is followed directly by kept code), leaves one blank line at the seam, and lowers a
    first-line "(N functions)" banner. <out.tsv> gets one row per unchecked row: status and reason.
@@ -27,6 +36,7 @@
 
 static char g_repo[MAX_PATH], g_repo_lower[MAX_PATH];
 static int g_dry = 0;
+static int g_no_banner = 0; /* decls: never touch a banner */
 
 /* ------------------------------------------------------------------ files and include groups */
 
@@ -280,6 +290,8 @@ enum {
     ST_VTABLE_CLASS,    /* ctor/dtor of a class whose deleting destructor or adjustor thunk the recipe checks */
     ST_CLASS_USED,      /* ctor/dtor of a class kept code names outside the class's own definition */
     ST_VTABLE_USER,     /* names a class whose vftable code the recipe checks (it may be what emits it) */
+    ST_KEEPS_ALIVE,     /* calls a checked function that is only emitted when referenced (static, inline, header) */
+    ST_CLASS_IN_HEADER, /* ctor/dtor of a class defined in a header: header code may construct it implicitly */
     ST_N
 };
 
@@ -288,7 +300,7 @@ static const char *st_name[ST_N] = {
     "kept:definition_holds_kept_function", "skip:in_class_body", "skip:no_definition_at_line",
     "skip:name_mismatch", "skip:preprocessor_inside", "skip:macro_or_unusual_head", "skip:shares_a_line",
     "skip:file_unbalanced", "skip:outside_batch", "skip:excluded", "skip:not_a_cpp_file",
-    "kept:operator_implicit_use", "kept:target_of_checked_thunk", "kept:ctor_dtor_of_class_with_checked_vtable_code", "kept:ctor_dtor_of_class_named_in_kept_code", "kept:names_class_with_checked_vtable_code"};
+    "kept:operator_implicit_use", "kept:target_of_checked_thunk", "kept:ctor_dtor_of_class_with_checked_vtable_code", "kept:ctor_dtor_of_class_named_in_kept_code", "kept:names_class_with_checked_vtable_code", "kept:caller_of_checked_internal_function", "kept:ctor_dtor_of_class_defined_in_a_header"};
 
 typedef struct {
     int unit;
@@ -302,6 +314,8 @@ typedef struct {
 } Cand;
 
 static VEC(Cand) g_c;
+static StrMap g_recipe; /* "unit|decorated" of every recipe function */
+static StrMap *g_NR;     /* per group: names of recipe functions emitted only when referenced (static, inline) */
 static StrMap g_cand_by_key; /* "file|decorated" -> index+1 */
 
 typedef struct {
@@ -495,6 +509,7 @@ static void write_file(File *F)
     int tags = 0;
     for (int l = 1; l <= n; l++)
         if (F->drop[l] && is_tag_line(L->text + L->line_off[l - 1], L->line_off[l] - L->line_off[l - 1])) tags++;
+    if (g_no_banner) tags = 0;
     F->removed_tags = tags;
     if (g_dry) return;
     StrBuf out = {0};
@@ -593,6 +608,7 @@ static int cmd_defs(int argc, char **argv)
     StrMap thunk_pref, vt_class;
     smap_init(&thunk_pref, 1024);
     smap_init(&vt_class, 1024);
+    smap_init(&g_recipe, 1 << 17);
     if (!functions_tsv) die("--functions <functions.tsv> is required");
     {
         size_t n;
@@ -601,13 +617,20 @@ static int cmd_defs(int argc, char **argv)
         char *sv = NULL;
         for (char *ln = strtok_s(ft, "\n", &sv); ln; ln = strtok_s(NULL, "\n", &sv)) {
             char *c = ln;
+            char *unit_col = NULL;
             for (int k = 0; k < 3 && c; k++) {
                 c = strchr(c, '\t');
                 if (c) c++;
+                if (k == 0) unit_col = c;
             }
             if (!c) continue;
             char *e = strchr(c, '\t');
             if (e) *e = 0;
+            {
+                char rk[2048];
+                snprintf(rk, sizeof rk, "%d|%s", unit_col ? atoi(unit_col) : -1, c);
+                smap_put(&g_recipe, rk, (void *)1);
+            }
             char pre[2048], code = 0;
             if (strncmp(c, "??_G", 4) == 0 || strncmp(c, "??_E", 4) == 0) {
                 if (dec_prefix(c + 4, pre, sizeof pre, &code)) smap_put(&vt_class, pre, (void *)1);
@@ -681,6 +704,39 @@ static int cmd_defs(int argc, char **argv)
     g_definfo = xcalloc((size_t)g_files.n + 1, sizeof(DefInfo *));
     g_S = xcalloc((size_t)g_files.n + 1, sizeof(StrMap));
     g_A = xcalloc((size_t)g_files.n + 1, sizeof(StrMap));
+
+    /* classes derived (transitively) from a class with checked vftable code: building one emits that code too */
+    for (int i = 0; i < g_c.n; i++) load(g_c.v[i].file);
+    for (int round = 0, grew = 1; grew && round < 50; round++) {
+        grew = 0;
+        for (int f = 0; f < g_files.n; f++) {
+            File *F = &g_files.v[f];
+            if (F->loaded != 1) continue;
+            for (int k = 0; k < F->P.nstmts; k++) {
+                Stmt *sm = &F->P.stmts[k];
+                char nm[256];
+                if (sm->class_body < 0 || !class_stmt_name(F, sm, nm, sizeof nm) || smap_has(&vt_names, nm)) continue;
+                int colon = -1;
+                for (int j = sm->first; j < sm->class_body; j++)
+                    if (ptk_eq(&F->L, j, ":")) {
+                        colon = j;
+                        break;
+                    }
+                if (colon < 0) continue;
+                for (int j = colon + 1; j < sm->class_body; j++) {
+                    PTok *tk = &F->L.toks[j];
+                    if (tk->type != P_IDENT || tk->len > 200) continue;
+                    char b[256];
+                    snprintf(b, sizeof b, "%.*s", tk->len, F->L.text + tk->off);
+                    if (smap_has(&vt_names, b)) {
+                        smap_put(&vt_names, nm, (void *)1);
+                        grew = 1;
+                        break;
+                    }
+                }
+            }
+        }
+    }
 
     /* first classification: by row and by definition */
     for (int i = 0; i < g_c.n; i++) {
@@ -760,6 +816,8 @@ static int cmd_defs(int argc, char **argv)
     VEC(int) efrom = {0};
     VEC(int) eto = {0};
     char *rootref = xcalloc((size_t)g_c.n + 1, 1);
+    char *keepalive = xcalloc((size_t)g_c.n + 1, 1);
+    g_NR = xcalloc((size_t)g_files.n + 1, sizeof(StrMap));
     for (int u = 0; u < 10000; u++) {
         char obj[MAX_PATH];
         snprintf(obj, sizeof obj, "%s/u%04d.obj", objdir, u);
@@ -773,6 +831,7 @@ static int cmd_defs(int argc, char **argv)
         StrMap local;
         smap_init(&local, (size_t)oi.n * 2 + 8);
         int *role = xcalloc((size_t)oi.n + 1, sizeof(int)); /* cand index+1, 0 root, -1 ignore */
+        char *needref = xcalloc((size_t)oi.n + 1, 1);       /* a recipe function emitted only when referenced */
         for (int i = 0; i < oi.n; i++) {
             ObjFunc *of = &oi.funcs[i];
             smap_put(&local, of->name, (void *)(intptr_t)(i + 1));
@@ -800,6 +859,10 @@ static int cmd_defs(int argc, char **argv)
                 role[i] = -1;
                 continue;
             }
+            char rk[2048];
+            snprintf(rk, sizeof rk, "%d|%s", u, of->name);
+            int is_recipe = smap_has(&g_recipe, rk);
+            if (is_recipe) needref[i] = 1; /* until its definition shows external linkage */
             /* a kept function: mark the candidate definition that holds its first line */
             if (fidx >= 0 && g_definfo && is_cfile(g_files.v[fidx].rel)) {
                 File *F = load(fidx);
@@ -809,6 +872,15 @@ static int cmd_defs(int argc, char **argv)
                         DefInfo *di = definfo(fidx, d);
                         if (di->state == ST_REMOVE) di->state = ST_HOLDS_KEPT;
                         di->seed = 1;
+                        Def *df = &F->P.defs[d];
+                        if (is_recipe && !df->is_static && !df->is_inline && !df->is_template &&
+                            (df->parent == SK_TOP || df->parent == SK_NS || df->parent == SK_EXTC))
+                            needref[i] = 0;
+                        if (needref[i] && !df->is_operator) {
+                            int grp = find_root(fidx);
+                            if (!g_NR[grp].cap) smap_init(&g_NR[grp], 64);
+                            smap_put(&g_NR[grp], df->name_s, (void *)1);
+                        }
                     }
                 }
             }
@@ -820,6 +892,7 @@ static int cmd_defs(int argc, char **argv)
                 void *v = smap_get(&local, of->refs[r]);
                 if (!v) continue;
                 int j = (int)(intptr_t)v - 1;
+                if (role[j] == 0 && needref[j] && role[i] > 0) keepalive[role[i] - 1] = 1;
                 if (role[j] <= 0) continue;
                 int to = role[j] - 1;
                 if (role[i] == 0)
@@ -831,6 +904,7 @@ static int cmd_defs(int argc, char **argv)
             }
         }
         free(role);
+        free(needref);
         smap_free(&local);
         coff_free(&oi);
     }
@@ -842,6 +916,24 @@ static int cmd_defs(int argc, char **argv)
         Cand *c = &g_c.v[i];
         if (c->ref) continue;
         if (rootref[i] && c->status == ST_REMOVE) c->status = ST_REF_KEPT;
+        if (keepalive[i] && c->status == ST_REMOVE) c->status = ST_KEEPS_ALIVE;
+        /* a caller that inlined such a function still keeps it emitted: names count, not just relocations */
+        if (c->status == ST_REMOVE && c->def >= 0) {
+            File *F = &g_files.v[c->file];
+            StrMap *nr = &g_NR[find_root(c->file)];
+            Def *df = &F->P.defs[c->def];
+            if (nr->cap)
+                for (int j = df->body_from; j <= df->endtok; j++) {
+                    PTok *tk = &F->L.toks[j];
+                    if (tk->type != P_IDENT || tk->len > 200) continue;
+                    char nm[256];
+                    snprintf(nm, sizeof nm, "%.*s", tk->len, F->L.text + tk->off);
+                    if (smap_has(nr, nm)) {
+                        c->status = ST_KEEPS_ALIVE;
+                        break;
+                    }
+                }
+        }
     }
     /* adjacency */
     int *adj_start = xcalloc((size_t)g_c.n + 2, sizeof(int));
@@ -920,7 +1012,9 @@ static int cmd_defs(int argc, char **argv)
                     di->in_a = 1;
                     add_idents(&g_A[grp], F, df->body_from, df->rbrace);
                 }
-                if (!di->in_s && (di->seed || (!df->is_operator && s_names(&g_S[grp], df->name_s)))) {
+                /* operators, constructors and destructors run without being named: their bodies always count */
+                if (!di->in_s && (di->seed || df->is_operator || df->is_ctor_like || df->is_dtor ||
+                                  s_names(&g_S[grp], df->name_s))) {
                     di->in_s = 1;
                     add_mentions(&g_S[grp], F, df->body_from, df->rbrace);
                     changed = 1;
@@ -947,10 +1041,11 @@ static int cmd_defs(int argc, char **argv)
         /* ctors and dtors run implicitly (bases, members, locals going out of scope): keep one whose class kept
            code names anywhere outside the class's own definition */
         {
-            static StrMap *T = NULL, *O = NULL;
+            static StrMap *T = NULL, *O = NULL, *CD = NULL;
             if (!T) {
                 T = xcalloc((size_t)g_files.n + 1, sizeof(StrMap));
                 O = xcalloc((size_t)g_files.n + 1, sizeof(StrMap));
+                CD = xcalloc((size_t)g_files.n + 1, sizeof(StrMap));
                 for (int f = 0; f < g_files.n; f++) {
                     File *F = &g_files.v[f];
                     if (F->loaded != 1) continue;
@@ -960,6 +1055,8 @@ static int cmd_defs(int argc, char **argv)
                         Stmt *sm = &F->P.stmts[k];
                         char nm[256];
                         if (sm->class_body < 0 || !class_stmt_name(F, sm, nm, sizeof nm)) continue;
+                        if (!CD[grp].cap) smap_init(&CD[grp], 256);
+                        smap_put(&CD[grp], nm, (void *)1);
                         /* occurrences of the class's own name inside its own definition */
                         int cnt = 0;
                         for (int j = sm->first; j <= sm->last; j++)
@@ -986,6 +1083,11 @@ static int cmd_defs(int argc, char **argv)
                 if (strncmp(c->dec, "??0", 3) != 0 && strncmp(c->dec, "??1", 3) != 0) continue;
                 Def *df = &g_files.v[c->file].P.defs[c->def];
                 int grp = find_root(c->file);
+                if (!CD[grp].cap || !smap_has(&CD[grp], df->name_s)) {
+                    c->status = ST_CLASS_IN_HEADER;
+                    changed = 1;
+                    continue;
+                }
                 intptr_t rest = count_of(&T[grp], df->name_s) - count_of(&R[grp], df->name_s) - count_of(&O[grp], df->name_s);
                 if (rest > 0) {
                     c->status = ST_CLASS_USED;
@@ -1068,6 +1170,7 @@ static int cmd_defs(int argc, char **argv)
 /* ------------------------------------------------------------------ decls mode */
 
 static int cmd_decls(int argc, char **argv);
+int objrefs_main(const char *obj);
 
 int main(int argc, char **argv)
 {
@@ -1079,14 +1182,24 @@ int main(int argc, char **argv)
     norm_path(g_repo, g_repo_lower, sizeof g_repo_lower);
     if (strcmp(argv[1], "defs") == 0) return cmd_defs(argc, argv);
     if (strcmp(argv[1], "decls") == 0) return cmd_decls(argc, argv);
+    if (strcmp(argv[1], "objrefs") == 0 && argc > 3) return objrefs_main(argv[3]);
     die("unknown command %s", argv[1]);
     return 2;
 }
 
-static int cmd_decls(int argc, char **argv)
+/* the second pass shares this file's statics */
+#include "decls.inc"
+
+/* debugging aid: f3prune objrefs <repo> <obj> lists each function of an object with its file, lines and references */
+int objrefs_main(const char *obj)
 {
-    (void)argc;
-    (void)argv;
-    die("decls: not implemented yet");
-    return 2;
+    ObjInfo oi;
+    char err[256];
+    if (coff_read(obj, &oi, err, sizeof err) != 0) die("%s: %s", obj, err);
+    for (int i = 0; i < oi.n; i++) {
+        ObjFunc *of = &oi.funcs[i];
+        printf("%s\t%s\t%d-%d\t%u\n", of->name, of->file ? of->file : "-", of->min_line, of->max_line, of->code_size);
+        for (int r = 0; r < of->nrefs; r++) printf("    -> %s\n", of->refs[r]);
+    }
+    return 0;
 }

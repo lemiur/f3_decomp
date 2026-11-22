@@ -56,7 +56,7 @@ static int classify(const PLex *L, int s, int e, Def *d)
     if (k + 1 < e && tk_is(L, k, "inline") && tk_is(L, k + 1, "namespace")) return SK_NS;
     if (tk_is(L, k, "extern") && L->toks[next_real(L, k + 1, e)].type == P_STR && next_real(L, next_real(L, k + 1, e) + 1, e) == e)
         return SK_EXTC;
-    int pd = 0, ad = 0, clskey = 0, paren = -1, has_try = 0, is_inline = 0;
+    int pd = 0, ad = 0, clskey = 0, paren = -1, has_try = 0, is_inline = 0, is_static = 0;
     for (int j = k; j < e; j++) {
         if (L->toks[j].type == P_DIR || !L->toks[j].taken) continue;
         if (is_attr_kw(L, j)) {
@@ -79,6 +79,8 @@ static int classify(const PLex *L, int s, int e, Def *d)
             has_try = 1;
         else if (paren < 0 && (tk_is(L, j, "inline") || tk_is(L, j, "__inline") || tk_is(L, j, "__forceinline")))
             is_inline = 1;
+        else if (paren < 0 && tk_is(L, j, "static"))
+            is_static = 1;
         (void)ad;
     }
     if (paren >= 0 && clskey != 2) {
@@ -86,6 +88,7 @@ static int classify(const PLex *L, int s, int e, Def *d)
         d->head = next_real(L, s, e);
         d->is_template = is_tmpl;
         d->is_inline = is_inline;
+        d->is_static = is_static;
         if (has_try) d->bad = DB_TRY;
         /* the name: "operator" anywhere before the parameter list, else the identifier before it */
         int op = -1;
@@ -129,6 +132,22 @@ static int classify(const PLex *L, int s, int e, Def *d)
             if (t->type == P_IDENT || t->type == P_STR) continue;
             if (tk_is(L, j, "::") || tk_is(L, j, "*") || tk_is(L, j, "&") || tk_is(L, j, "~")) continue;
             d->bad = DB_PREFIX;
+        }
+        /* constructor-like: nothing but specifiers and the qualifier chain before the name */
+        if (!d->is_operator) {
+            int types = 0;
+            for (int j = k; j < d->name; j++) {
+                const PTok *t = &L->toks[j];
+                if (t->type != P_IDENT) continue;
+                if (tk_is(L, j + 1, "::")) continue;
+                if (tk_is(L, j, "inline") || tk_is(L, j, "__inline") || tk_is(L, j, "__forceinline") ||
+                    tk_is(L, j, "explicit") || tk_is(L, j, "virtual") || tk_is(L, j, "__thiscall") ||
+                    tk_is(L, j, "__cdecl") || tk_is(L, j, "__stdcall") || tk_is(L, j, "__fastcall"))
+                    continue;
+                if (is_attr_kw(L, j)) continue;
+                types++;
+            }
+            d->is_ctor_like = types == 0;
         }
         /* the ctor-initializer, if any: a ':' at depth 0 after the parameter list */
         d->body_from = -1;
