@@ -557179,25 +557179,10 @@
    "symbols": {
     "__imp__InterlockedDecrement@4": "0x00d9b064",
     "__imp__InterlockedIncrement@4": "0x00d9b068",
-    "?ResetStreamState@NiStream@@QAEXXZ": "0x0082b560",
-    "?EmptyFS@@3VNiFixedString@@A": "0x00e207a8",
     "?FUN_00aa1460@@YAXPAXI@Z": "0x0089ec10",
-    "?GetAt@?$NiTStringPointerMap@PAVShaderBufferRecord@@@@QAE_NPBDAAPAVShaderBufferRecord@@@Z": "0x00bea7b0",
-    "?GetLoadedObject@NiStream@@QAEPAVNiObject@@XZ": "0x0082a280",
-    "?ProcessClone@NiObject@@UAEXAAVCloningProcess@@@Z": "0x00825890",
     "?LoadBinary@NiObject@@UAEXAAVNiStream@@@Z": "0x00825ad0",
-    "?IsSameAs@@YG_NPAVNiObject@@@Z": "0x008258d0",
-    "?ReadFixedString@NiStream@@QAEXAAVNiFixedString@@@Z": "0x0082bf90",
-    "?ReadStringTableEntry@NiStream@@QAEXAAVNiFixedString@@@Z": "0x0082bee0",
     "?LinkObject@NiObject@@UAEXAAVNiStream@@@Z": "0x0078c030",
-    "_DAT_0109b220": "0x00e207a8",
-    "_DAT_00fdf1c4": "0x00d9b064",
-    "?RegisterStreamables@NiObjectBase@@QAE_NAAVNiStream@@@Z": "0x008257d0",
     "??1FUN_00a5d3d0@@UAE@XZ": "0x00825830",
-    "_DAT_00fdf1c0": "0x00d9b068",
-    "?CreateVertexBufferSet@NiObject@@QAEXPAV1@AAVCloningProcess@@@Z": "0x008258b0",
-    "?FUN_00a89af0@BinaryObjectBase@@QAEXAAUOutputStream@@@Z": "0x0078c030",
-    "?WriteObjectLink@OutputStream@@QAEXAAVNiFixedString@@@Z": "0x0082b000",
     "??_7NamedC318@@6B@": "0x00e8d1d4",
     "?DAT_0109b220@c318@@3PADA": "0x00e207a8",
     "?FUN_00abcb40@Base482@@QAEXPAUStrArr@@@Z": "0x00abcb40",
@@ -557208,7 +557193,8 @@
     "?DAT_00e8b13c@@3QBDB": "0x00e8b13c",
     "?FUN_00847e20@@YAPADPBD0@Z": "0x00847e20",
     "?DAT_00e8b128@@3QBDB": "0x00e8b128",
-    "?FUN_00847ce0@@YAPADPBDI@Z": "0x00847ce0"
+    "?FUN_00847ce0@@YAPADPBDI@Z": "0x00847ce0",
+    "?NULL_STRING@NiGlobalStringTable@@2QADA": "0x00e207a8"
    }
   },
   {
@@ -557224,7 +557210,7 @@
    "functions": [
     {
      "address": "0x0041eae0",
-     "symbol": "?FUN_00c31640@NiPSysModifier_shell@@QAEXPAVNiParticleSystem@@@Z",
+     "symbol": "?SetSystemPointer@NiPSysModifier@@UAEXPAVNiParticleSystem@@@Z",
      "size": 10
     },
     {
@@ -557234,22 +557220,22 @@
     },
     {
      "address": "0x00ac5dd0",
-     "symbol": "?FUN_00c31670@X@@QAE_NAAVNiStream@@@Z",
+     "symbol": "?RegisterStreamables@NiPSysModifier@@UAE_NAAVNiStream@@@Z",
      "size": 43
     },
     {
      "address": "0x00ac5e70",
-     "symbol": "?CopyMemberData@NiPSysModifier@@QAEXPAV1@AAVCloningProcess@@@Z",
+     "symbol": "?CopyMemberData@FUN_00c31780_shell@@QAEXPAVNiPSysModifier@@AAVNiCloningProcess@@@Z",
      "size": 88
     },
     {
      "address": "0x00ac5ed0",
-     "symbol": "?ProcessClone@NiPSysModifier@@UAEXAAVCloningProcess@@@Z",
+     "symbol": "?ProcessClone@NiPSysModifier@@UAEXAAVNiCloningProcess@@@Z",
      "size": 69
     },
     {
      "address": "0x00ac5f20",
-     "symbol": "?FUN_00c31830@MyIsEqual@@QAE_NPAVNiObject@@@Z",
+     "symbol": "?IsEqual@NiPSysModifier@@UAE_NPAVNiObject@@@Z",
      "size": 56
     },
     {
@@ -557264,34 +557250,31 @@
     },
     {
      "address": "0x00ac6040",
-     "symbol": "?FUN_00c31950@ParticleModifierBinary@@QAEXAAUOutputStream@@@Z",
+     "symbol": "?SaveBinary@NiPSysModifier@@UAEXAAVNiStream@@@Z",
      "size": 133
     }
    ],
    "symbols": {
     "__imp__InterlockedDecrement@4": "0x00d9b064",
     "__imp__InterlockedIncrement@4": "0x00d9b068",
-    "?ResetStreamState@NiStream@@QAEXXZ": "0x0082b560",
-    "?EmptyFS@@3VNiFixedString@@A": "0x00e207a8",
     "?FUN_00aa1460@@YAXPAXI@Z": "0x0089ec10",
-    "?GetAt@?$NiTStringPointerMap@PAVShaderBufferRecord@@@@QAE_NPBDAAPAVShaderBufferRecord@@@Z": "0x00bea7b0",
-    "?GetLoadedObject@NiStream@@QAEPAVNiObject@@XZ": "0x0082a280",
-    "?ProcessClone@NiObject@@UAEXAAVCloningProcess@@@Z": "0x00825890",
     "?LoadBinary@NiObject@@UAEXAAVNiStream@@@Z": "0x00825ad0",
-    "?IsSameAs@@YG_NPAVNiObject@@@Z": "0x008258d0",
-    "?ReadFixedString@NiStream@@QAEXAAVNiFixedString@@@Z": "0x0082bf90",
-    "?ReadStringTableEntry@NiStream@@QAEXAAVNiFixedString@@@Z": "0x0082bee0",
     "?LinkObject@NiObject@@UAEXAAVNiStream@@@Z": "0x0078c030",
-    "_DAT_0109b220": "0x00e207a8",
-    "_DAT_00fdf1c4": "0x00d9b064",
-    "?RegisterStreamables@NiObjectBase@@QAE_NAAVNiStream@@@Z": "0x008257d0",
     "??1FUN_00a5d3d0@@UAE@XZ": "0x00825830",
-    "_DAT_00fdf1c0": "0x00d9b068",
-    "?CreateVertexBufferSet@NiObject@@QAEXPAV1@AAVCloningProcess@@@Z": "0x008258b0",
-    "?FUN_00a89af0@BinaryObjectBase@@QAEXAAUOutputStream@@@Z": "0x0078c030",
-    "?WriteObjectLink@OutputStream@@QAEXAAVNiFixedString@@@Z": "0x0082b000",
     "??_7NamedC318@@6B@": "0x00e8d1d4",
-    "?DAT_0109b220@c318@@3PADA": "0x00e207a8"
+    "?DAT_0109b220@c318@@3PADA": "0x00e207a8",
+    "?GetObjectFromLinkID@NiStream@@QAEPAVNiObject@@XZ": "0x0082a280",
+    "?RegisterStreamables@NiObject@@UAE_NAAVNiStream@@@Z": "0x008257d0",
+    "?CopyMembers@NiObject@@QAEXPAV1@AAVNiCloningProcess@@@Z": "0x008258b0",
+    "?NULL_STRING@NiGlobalStringTable@@2QADA": "0x00e207a8",
+    "?ProcessClone@NiObject@@UAEXAAVNiCloningProcess@@@Z": "0x00825890",
+    "?GetAt@?$NiTPointerMap@PAVNiObject@@PAV1@@@QBE_NPAVNiObject@@AAPAV2@@Z": "0x00bea7b0",
+    "?IsEqual@NiObject@@UAE_NPAV1@@Z": "0x008258d0",
+    "?LoadCStringAsFixedString@NiStream@@QAEXAAVNiFixedString@@@Z": "0x0082bf90",
+    "?LoadFixedString@NiStream@@QAEXAAVNiFixedString@@@Z": "0x0082bee0",
+    "?ReadLinkID@NiStream@@QAEXXZ": "0x0082b560",
+    "?SaveBinary@NiObject@@UAEXAAVNiStream@@@Z": "0x0078c030",
+    "?SaveFixedString@NiStream@@QAEXABVNiFixedString@@@Z": "0x0082b000"
    }
   },
   {

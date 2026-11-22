@@ -1,6 +1,8 @@
-// gamebryo2.2/corelibs/niparticle/nipsysmodifier.cpp: NiPSysModifier, MyIsEqual, ParticleModifierBinary, ParticleModifier (6 functions)
+// gamebryo2.2/corelibs/niparticle/nipsysmodifier.cpp: NiPSysModifier (9 functions)
 #include "f3_common.h"
-#include "nipsysmodifier_decls.h"
+#include "NiCloningProcess.h"
+#include "NiPSysModifier.h"
+#include "NiStream.h"
 
 // @fnv 0x00C318B0
 // pdb: NiPSysModifier::LoadBinary | NiPSysModifier.obj | fnv360_0822_retail, call_seq, high
@@ -8,34 +10,29 @@
 void NiPSysModifier::LoadBinary(NiStream& kStream)
 {
     NiObject::LoadBinary(kStream);
-    if (kStream.m_uiNifVersion < 0x14010001)
-        kStream.ReadFixedString(m_kName);
+    if (kStream.GetFileVersion() < NiStream::GetVersion(20, 1, 0, 1))
+        kStream.LoadCStringAsFixedString(m_kName);
     else
-        kStream.ReadStringTableEntry(m_kName);
+        kStream.LoadFixedString(m_kName);
 
-    NiBinaryStreamLoad(*kStream.m_pUnderlyingStream, &m_uiOrder);
-    kStream.ResetStreamState();
+    NiStreamLoadBinary(kStream, m_uiOrder);
+    kStream.ReadLinkID();
     unsigned char ucActive;
-    NiBinaryStreamLoad(*kStream.m_pUnderlyingStream, &ucActive);
+    NiStreamLoadBinary(kStream, ucActive);
     m_bActive = ucActive != 0;
 }
 
+struct FUN_00c31780_shell : public NiPSysModifier
+{
+    void CopyMemberData(NiPSysModifier* pkDest, NiCloningProcess& kCloning);
+};
 // @fnv 0x00C31780
 // pdb: NiPSysModifier::CopyMembers | NiPSysModifier.obj | fnv360_0822_retail, call_seq, medium, conflict (bridge: NiPSysBombModifier::NiPSysBombModifier)
 // pdb params: pkDest, kCloning
-void NiPSysModifier::CopyMemberData(NiPSysModifier* pkDest, CloningProcess& kCloning)
+void FUN_00c31780_shell::CopyMemberData(NiPSysModifier* pkDest, NiCloningProcess& kCloning)
 {
-    NiObject::CreateVertexBufferSet(pkDest, kCloning);
-    char* pcName = m_kName.m_kHandle;
-    if (pkDest->m_kName.m_kHandle != pcName)
-    {
-        if (pcName != EmptyFS.m_kHandle)
-            InterlockedIncrement(reinterpret_cast<volatile long*>(pcName - 8));
-        char* pcOldName = pkDest->m_kName.m_kHandle;
-        if (pcOldName != EmptyFS.m_kHandle)
-            InterlockedDecrement(reinterpret_cast<volatile long*>(pcOldName - 8));
-        pkDest->m_kName.m_kHandle = pcName;
-    }
+    NiObject::CopyMembers(pkDest, kCloning);
+    pkDest->m_kName = m_kName;
     pkDest->m_uiOrder = m_uiOrder;
     pkDest->m_bActive = m_bActive;
 }
@@ -43,14 +40,14 @@ void NiPSysModifier::CopyMemberData(NiPSysModifier* pkDest, CloningProcess& kClo
 // @fnv 0x00C317E0
 // pdb: NiPSysModifier::ProcessClone | NiPSysModifier.obj | fnv360_0822_retail, vtable, high
 // pdb params: kCloning
-void NiPSysModifier::ProcessClone(CloningProcess& kCloning)
+void NiPSysModifier::ProcessClone(NiCloningProcess& kCloning)
 {
     NiObject::ProcessClone(kCloning);
     NiObject* pkClone = 0;
-    NiPSysCloneMapGetAt(kCloning.m_pCloneMap, this, pkClone);
-    NiPSysModifier* pkDest = static_cast<NiPSysModifier*>(pkClone);
-    NiPSysCloneMapGetAt(kCloning.m_pCloneMap, reinterpret_cast<NiObject*>(m_pkTarget), pkClone);
-    pkDest->m_pkTarget = reinterpret_cast<NiParticleSystem*>(pkClone);
+    kCloning.m_pkCloneMap->GetAt(this, pkClone);
+    NiPSysModifier* pkDest = (NiPSysModifier*)pkClone;
+    kCloning.m_pkCloneMap->GetAt((NiObject*)m_pkTarget, pkClone);
+    pkDest->m_pkTarget = (NiParticleSystem*)pkClone;
 }
 
 // @fnv 0x00C31650
@@ -59,134 +56,53 @@ void NiPSysModifier::ProcessClone(CloningProcess& kCloning)
 void NiPSysModifier::LinkObject(NiStream& kStream)
 {
     NiObject::LinkObject(kStream);
-    kStream.GetLoadedObject();
+    kStream.GetObjectFromLinkID();
 }
-
-struct NiPSysModifier_shell : NiPSysModifier
-{
-    void FUN_00c31640(NiParticleSystem* pkTarget);
-};
 
 // @fnv 0x00c31640
 // pdb: BaseProcess::SetCurrentProcedureIndex | BaseProcess.obj | fnv360_0822_retail, vtable, medium
+// F3_EXE: NiPSysModifier vtable slot 39 (SetSystemPointer)
 // pdb params: aiNewIndex
-void NiPSysModifier_shell::FUN_00c31640(NiParticleSystem* pkTarget)
+void NiPSysModifier::SetSystemPointer(NiParticleSystem* pkTarget)
 {
     m_pkTarget = pkTarget;
 }
 
-bool __stdcall IsSameAs(NiObject* pkObject);
-struct MyIsEqual : NiPSysModifier
-{
-    bool FUN_00c31830(NiObject* pkObject);
-};
-// Compares this object with a NiPSysModifier: checks IsSameAs, then fields at offsets 8, 0xc and 0x14 for equality.
+// Compares the base object, then the name, order and active flag.
 // @fnv 0x00c31830
 // pdb: NiPSysModifier::IsEqual | NiPSysModifier.obj | fnv360_0822_retail, call_seq, medium
+// F3_EXE: NiPSysModifier vtable slot 23 (IsEqual)
 // pdb params: pkObject
-bool MyIsEqual::FUN_00c31830(NiObject* pkObject)
+bool NiPSysModifier::IsEqual(NiObject* pkObject)
 {
     NiPSysModifier* pkDest = (NiPSysModifier*)pkObject;
-    if (IsSameAs(pkObject) && *(void**)&m_kName == *(void**)&pkDest->m_kName &&
-        m_uiOrder == pkDest->m_uiOrder && m_bActive == pkDest->m_bActive)
+    if (NiObject::IsEqual(pkObject) && m_kName == pkDest->m_kName && m_uiOrder == pkDest->m_uiOrder &&
+        m_bActive == pkDest->m_bActive)
         return true;
     return false;
 }
 
-struct NiObjectBase
-{
-    bool RegisterStreamables(NiStream&);
-};
-struct StreamHack
-{
-    virtual void vf0();
-    virtual void vf1();
-    virtual void vf2();
-    virtual void vf3();
-    virtual void vf4();
-    virtual void vf5();
-    virtual void vf6();
-    virtual void vf7();
-    virtual void vf8(void*);
-};
-struct X : NiPSysModifier
-{
-    bool FUN_00c31670(NiStream&);
-};
-// Registers streamables via NiObjectBase::RegisterStreamables and, on success, calls vf8 on the stream with this+8.
 // @fnv 0x00c31670
 // pdb: NiPSysModifier::RegisterStreamables | NiPSysModifier.obj | fnv360_0822_retail, call_seq, medium
+// F3_EXE: NiPSysModifier vtable slot 21 (RegisterStreamables)
 // pdb params: kStream
-bool X::FUN_00c31670(NiStream& kStream)
+bool NiPSysModifier::RegisterStreamables(NiStream& kStream)
 {
-    if (!((NiObjectBase*)this)->RegisterStreamables(kStream))
+    if (!NiObject::RegisterStreamables(kStream))
         return false;
-    ((StreamHack*)&kStream)->vf8(&m_kName);
+    kStream.RegisterFixedString(m_kName);
     return true;
 }
 
-struct OutputBinaryStream : NiBinaryStream
-{
-    __forceinline void WriteComponents(const void* data, unsigned int bytes, unsigned int* componentSizes,
-                                       unsigned int componentCount)
-    {
-        unsigned int written = m_pfnWrite(this, data, bytes, componentSizes, componentCount);
-        m_uiStreamFlags += written;
-    }
-};
-struct OutputStream : NiStream
-{
-    OutputBinaryStream* m_pBackingStream;
-    void WriteObjectLink(NiFixedString&);
-};
-struct LinkOutput
-{
-    virtual void Slot00();
-    virtual void Slot04();
-    virtual void Slot08();
-    virtual void Slot0c();
-    virtual void Slot10();
-    virtual void Slot14();
-    virtual void Slot18();
-    virtual void Slot1c();
-    virtual void Slot20();
-    virtual void Slot24();
-    virtual void Slot28();
-    virtual void Slot2c();
-    virtual void SaveObject(NiParticleSystem*);
-};
-struct BinaryObjectBase
-{
-    void* vtable;
-    unsigned int referenceCount;
-    void FUN_00a89af0(OutputStream&);
-};
-struct ParticleModifierBinary : BinaryObjectBase
-{
-    NiFixedString name;
-    unsigned int order;
-    NiParticleSystem* target;
-    bool active;
-    void FUN_00c31950(OutputStream&);
-};
-template <class T> __forceinline void PrimitiveWrite(OutputBinaryStream* stream, const T& value)
-{
-    unsigned int size = sizeof(T);
-    stream->WriteComponents(&value, sizeof(T), &size, 1);
-}
-__forceinline void BooleanWrite(OutputBinaryStream* stream, bool value)
-{
-    unsigned int size = 1;
-    stream->WriteComponents(&value, 1, &size, 1);
-}
 // @fnv 0x00c31950
-void ParticleModifierBinary::FUN_00c31950(OutputStream& stream)
+// F3_EXE: NiPSysModifier vtable slot 22 (SaveBinary)
+void NiPSysModifier::SaveBinary(NiStream& kStream)
 {
-    FUN_00a89af0(stream);
-    stream.WriteObjectLink(name);
-    PrimitiveWrite(stream.m_pBackingStream, order);
-    reinterpret_cast<LinkOutput*>(&stream)->SaveObject(target);
-    BooleanWrite(stream.m_pBackingStream, active);
+    NiObject::SaveBinary(kStream);
+    kStream.SaveFixedString(m_kName);
+    NiStreamSaveBinary(kStream, m_uiOrder);
+    kStream.SaveLinkID((const NiObject*)m_pkTarget);
+    NiStreamSaveBinary(kStream, (unsigned char)m_bActive);
 }
 
 extern "C" char* DAT_0109b220;
@@ -212,7 +128,7 @@ struct StrArr
     }
 };
 
-struct FUN_00c319e0_cls : ParticleModifierBinary
+struct FUN_00c319e0_cls : NiPSysModifier
 {
     void FUN_00c319e0(StrArr* apViewerStrings);
 };
