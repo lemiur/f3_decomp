@@ -292,6 +292,7 @@ enum {
     ST_VTABLE_USER,     /* names a class whose vftable code the recipe checks (it may be what emits it) */
     ST_KEEPS_ALIVE,     /* calls a checked function that is only emitted when referenced (static, inline, header) */
     ST_CLASS_IN_HEADER, /* ctor/dtor of a class defined in a header: header code may construct it implicitly */
+    ST_TEMPLATE_USED,   /* a template whose name kept code (a specialization, a use) still spells */
     ST_N
 };
 
@@ -300,7 +301,8 @@ static const char *st_name[ST_N] = {
     "kept:definition_holds_kept_function", "skip:in_class_body", "skip:no_definition_at_line",
     "skip:name_mismatch", "skip:preprocessor_inside", "skip:macro_or_unusual_head", "skip:shares_a_line",
     "skip:file_unbalanced", "skip:outside_batch", "skip:excluded", "skip:not_a_cpp_file",
-    "kept:operator_implicit_use", "kept:target_of_checked_thunk", "kept:ctor_dtor_of_class_with_checked_vtable_code", "kept:ctor_dtor_of_class_named_in_kept_code", "kept:names_class_with_checked_vtable_code", "kept:caller_of_checked_internal_function", "kept:ctor_dtor_of_class_defined_in_a_header"};
+    "kept:operator_implicit_use", "kept:target_of_checked_thunk", "kept:ctor_dtor_of_class_with_checked_vtable_code", "kept:ctor_dtor_of_class_named_in_kept_code", "kept:names_class_with_checked_vtable_code", "kept:caller_of_checked_internal_function", "kept:ctor_dtor_of_class_defined_in_a_header",
+    "kept:template_named_in_kept_code"};
 
 typedef struct {
     int unit;
@@ -1125,9 +1127,17 @@ static int cmd_defs(int argc, char **argv)
             for (int i = 0; i < g_c.n; i++) {
                 Cand *c = &g_c.v[i];
                 if (c->status != ST_REMOVE || c->def < 0) continue;
-                if (strncmp(c->dec, "??0", 3) != 0 && strncmp(c->dec, "??1", 3) != 0) continue;
                 Def *df = &g_files.v[c->file].P.defs[c->def];
                 int grp = find_root(c->file);
+                if (df->is_template && !df->is_operator) {
+                    /* a template: a kept specialization or use anywhere (heads included) needs it */
+                    if (count_of(&T[grp], df->name_s) - count_of(&R[grp], df->name_s) > 0) {
+                        c->status = ST_TEMPLATE_USED;
+                        changed = 1;
+                        continue;
+                    }
+                }
+                if (strncmp(c->dec, "??0", 3) != 0 && strncmp(c->dec, "??1", 3) != 0) continue;
                 if (!CD[grp].cap || !smap_has(&CD[grp], df->name_s)) {
                     c->status = ST_CLASS_IN_HEADER;
                     changed = 1;
