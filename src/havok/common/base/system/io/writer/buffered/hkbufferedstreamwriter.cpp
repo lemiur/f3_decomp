@@ -115,28 +115,28 @@ int StreamBufferD27210::FlushToDestination()
     return 0;
 }
 
+class hkClass;
+class hkStatisticsCollector;
+// hkStreamWriter: the slots of the Fallout 3 vtable (hkBufferedStreamWriter, 0x00e7e028), named as the New Vegas
+// Xbox 360 PDB names them.
 struct FUN_00d272e0_target
 {
-    virtual void vf00();
-    virtual void vf04();
-    virtual void vf08();
-    virtual void vf0C();
-    virtual void vf10();
-    virtual void vf14();
+    virtual ~FUN_00d272e0_target();
+    virtual const hkClass* getClassType() const;
+    virtual void calcContentStatistics(hkStatisticsCollector* collector, const hkClass* cls) const;
+    virtual char isOk() const;
+    virtual int write(const void* buf, int nbytes);
+    virtual void flush();
 };
 
+// hkBufferedStreamWriter
 struct FUN_00d272e0_class
 {
-    virtual void vf00()
-    {}
-    virtual void vf04()
-    {}
-    virtual void vf08()
-    {}
-    virtual void vf0C()
-    {}
-    virtual void vf10()
-    {}
+    virtual ~FUN_00d272e0_class();
+    virtual const hkClass* getClassType() const;
+    virtual void calcContentStatistics(hkStatisticsCollector* collector, const hkClass* cls) const;
+    virtual char isOk() const;
+    virtual int write(const void* buf, int nbytes);
 
     int unk04;
     FUN_00d272e0_target* unk08;
@@ -152,7 +152,7 @@ void FUN_00d272e0_class::hkBufferedStreamWriter_flush()
 
     if (unk08 != 0)
     {
-        return unk08->vf14();
+        return unk08->flush();
     }
 }
 
