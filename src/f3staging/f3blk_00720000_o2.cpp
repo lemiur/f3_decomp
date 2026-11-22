@@ -92041,7 +92041,7 @@ int unk3cc;
 int unk3d0;
 int unk3d4;
 int unk3d8;
-volatile int state;float value;void* context;
+int state;float value;void* context;
 void HighProcess_FadeOut(void*,void*,unsigned char);
 };
 // pdb: HighProcess::FadeOut | HighProcess.obj | fnv360_0721_retail, call_seq + bridge(call_gap|call_gap), high

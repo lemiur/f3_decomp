@@ -11258,7 +11258,7 @@ inline int Begin(Node* head, Node* volatile& current)
 }
 struct Cursor {
     Node head;
-    Node* volatile current;
+    Node* current;
     int FUN_006c65c0();
 };
 

@@ -35756,7 +35756,7 @@ int unkbc;
 int unkc0;
 int unkc4;
 int unkc8;
-Item* volatile item;
+Item* item;
 void FUN_004344f0(Item*);
 };
 // pdb: BSMultiBoundRoom::FreeCompoundFrustum | TES.obj | fnv360_0822_retail, call_gap, medium
@@ -44705,8 +44705,8 @@ struct ThreadData {
     int* m_04;
     int* m_08;
     int* m_0c;
-    volatile MarkedPtr* volatile prev;
-    volatile MarkedPtr cur;
+    MarkedPtr* prev;
+    MarkedPtr cur;
     bool CASLink(Node* node, const volatile MarkedPtr& expect, const volatile MarkedPtr& value) { long e = (long)expect.bits; node->next = (Node*)expect.bits; long v = (long)value.bits; volatile MarkedPtr* d = prev; return InterlockedCompareExchange((long volatile*)d, v, e) == e; }
 
     bool FUN_0042dd40(void* a1, int a2);
@@ -44823,8 +44823,8 @@ struct ThreadData {
     int* m_04;
     int* m_08;
     int* m_0c;
-    volatile MarkedPtr* volatile prev;
-    volatile MarkedPtr cur;
+    MarkedPtr* prev;
+    MarkedPtr cur;
     bool CASLink(Node* node, const volatile MarkedPtr& expect, const volatile MarkedPtr& value) { long e = (long)expect.bits; node->next = (Node*)expect.bits; long v = (long)value.bits; volatile MarkedPtr* d = prev; return InterlockedCompareExchange((long volatile*)d, v, e) == e; }
 
     bool FUN_0042f440(int a1, void* a2);

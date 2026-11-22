@@ -16473,7 +16473,7 @@ struct ComponentB1073 { int head00; void FUN_00458ea0(Owner1073* owner); };
 struct ComponentC1073 { int head00; void FUN_0044e680(Owner1073* owner); };
 struct Owner1073 {
     int unk00, unk04;
-    volatile unsigned int flags08;
+    unsigned int flags08;
     int unk0C;
     int unk10;
     int unk14;

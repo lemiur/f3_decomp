@@ -5606,7 +5606,7 @@ struct FUN_00bbc9c0 : FUN_00be0f10
     NiPointer<NiD3DVertexDeclaration> m_pVertexDeclaration6;
     NiPointer<NiD3DVertexDeclaration> m_pVertexDeclaration7;
     NiPointer<NiD3DVertexDeclaration> m_pVertexDeclaration8;
-    NiGeometryBufferData* volatile m_pGeometryBufferData;
+    NiGeometryBufferData* m_pGeometryBufferData;
     UInt32 m_uiShaderOptions;
     virtual ~FUN_00bbc9c0();
 };

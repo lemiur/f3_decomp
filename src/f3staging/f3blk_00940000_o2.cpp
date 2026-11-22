@@ -13380,7 +13380,7 @@ struct O_95bbb0
   int unk54;
   int unk58;
   int unk5C;
-  volatile unsigned char unk60;
+  unsigned char unk60;
   int unk64;
   float f68;
   float f6C;

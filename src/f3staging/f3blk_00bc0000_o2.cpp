@@ -13877,7 +13877,7 @@ struct Owner00bcf700 {
     unsigned int unk04;
     unsigned int unk08;
     unsigned int unk0c;
-    Target00bcf700* volatile target;
+    Target00bcf700* target;
     void FUN_00bcf700(void* value);
 };
 
@@ -20004,7 +20004,7 @@ class FUN_00bce590
     void* m_pFileCacheArray;
     void* m_pfnCacheProgress;
     void* m_pfnCacheStatus;
-    volatile FILE_CACHE_STATE m_eCacheState;
+    FILE_CACHE_STATE m_eCacheState;
     void* m_pCacheSyncObject;
 };
 

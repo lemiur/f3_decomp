@@ -1499,7 +1499,7 @@ struct Obj6b9 {
     unsigned int pad2C[7];    // +0x2c..0x44
     unsigned int u48;         // +0x48
     unsigned int u4c;         // +0x4c
-    volatile float f50;       // +0x50
+    float f50;       // +0x50
     unsigned int u54;
     unsigned int u58;
     unsigned int u5c;

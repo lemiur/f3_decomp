@@ -1047,7 +1047,7 @@ struct FUN_00a81ba0_cls
     unsigned int m_18;
     unsigned int unk1c;
     unsigned short unk20;
-    volatile unsigned short m_22;
+    unsigned short m_22;
     unsigned int unk24;
     unsigned int m_28;
 

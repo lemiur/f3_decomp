@@ -2136,7 +2136,7 @@ struct S3b010Obj
 // @f3 0x00a70be0 (community match, verified in this file)
 struct FUN_00d21ce0_cls
 {
-    volatile unsigned short unk00;
+    unsigned short unk00;
     int unk04;
     int unk08;
     void FUN_00d21ce0(void* arg);

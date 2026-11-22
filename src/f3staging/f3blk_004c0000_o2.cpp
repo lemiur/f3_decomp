@@ -14685,7 +14685,7 @@ FUN_004d48c0_Source* __cdecl FUN_00c0050a(
 
 void __cdecl FUN_00bffa60(void* destination, const void* source, unsigned int size);
 
-extern volatile int FUN_004d48c0_SideEffect;
+extern int FUN_004d48c0_SideEffect;
 
 class FUN_004d48c0_Owner {
 public:
@@ -14700,7 +14700,7 @@ public:
     int unk20;
     unsigned char unk24;
     FUN_004d48c0_Embedded unk28;
-    volatile unsigned int unk44;
+    unsigned int unk44;
     int unk48;
     float unk4C;
     int unk50;
@@ -15139,8 +15139,8 @@ namespace f3m_004c2010 {
 extern "C" void _ReadWriteBarrier(void);
 struct O {
  void* vtable00; int unk04; unsigned char flag08; unsigned char unk09,unk0A,unk0B;
- volatile float value0C; int value10; volatile float value14; int unk18;
- int value1C, value20; volatile float value24; int value28; volatile float value2C;
+ float value0C; int value10; float value14; int unk18;
+ int value1C, value20; float value24; int value28; float value2C;
  void FUN_00825800(); O* FUN_004c2010();
 };
 // pdb: ImageSpaceModifierInstanceForm::ImageSpaceModifierInstanceForm | ImageSpaceModifierInstance.obj | fnv360_0822_retail, objrun, medium

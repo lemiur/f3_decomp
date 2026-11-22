@@ -4251,7 +4251,7 @@ extern "C" void _ReadWriteBarrier();
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long);
 struct Allocator00a70c70 { void FUN_008f6d90(void* data, unsigned int bytes, unsigned int category); };
 struct State00a70c70 {
-    void* volatile table;
+    void* table;
     unsigned int unk04, unk08, unk0c, unk10, unk14;
     void* data;
     unsigned int count;

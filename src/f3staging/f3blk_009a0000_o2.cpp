@@ -2871,7 +2871,7 @@ struct ValueBlock
     int alpha, beta;
     int unknown28, unknown2c;
     int gamma, delta;
-    volatile int epsilon, zeta;
+    int epsilon, zeta;
     int coefficients[12];
     ValueBlock* FUN_009bcfd0(ValueBlock* source);
 };
