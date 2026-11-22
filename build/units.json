@@ -509232,7 +509232,7 @@
    }
   },
   {
-   "source": "src/fallout/misc/calendar.cpp",
+   "source": "src/fallout_shared/bgsidlecollection.cpp",
    "compiler": "vs2005",
    "flags": [
     "/MT",
@@ -509244,13 +509244,13 @@
    "functions": [
     {
      "address": "0x0044d5c0",
-     "symbol": "?GetGameDayOfWeek@Calendar@@QAE?AW4DAYS_OF_THE_WEEK@@XZ",
+     "symbol": "??1BGSIdleCollection@@QAE@XZ",
      "size": 33
     }
    ],
    "symbols": {
     "?g_memoryManager@@3VMemoryManager@@A": "0x01090a78",
-    "?DAT_00dbb62c@@3HA": "0x00dbb62c",
+    "??_7BGSIdleCollection@@6B@": "0x00dbb62c",
     "?Deallocate@MemoryManager@@QAEXPAX@Z": "0x0086ba60"
    }
   },
