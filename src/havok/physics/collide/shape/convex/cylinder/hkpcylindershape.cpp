@@ -26,14 +26,20 @@ hkReal hkpCylinderShapeGetCylRadius::FUN_00d571a0() {
     return m_fCylinderRadius;
 }
 
+// hkVector4: components through operator(), as the SDK writes them.
+struct __declspec(align(16)) Vector4C573 {
+    float m_quad[4];
+    float& operator()(int i) { return m_quad[i]; }
+};
+// hkpCylinderShape: the convex radius, the cylinder radius and the two end points (New Vegas Xbox 360 PDB names).
 struct C00d573e0 {
-    char  pad00[0x10];
-    volatile float f10;
-    float f14;
-    char  pad18[0x2c - 0x18];
-    float f2c;
-    char  pad30[0x3c - 0x30];
-    float f3c;
+    int unk00, unk04, unk08, unk0C;
+    float m_radius;       // +0x10
+    float m_cylRadius;    // +0x14
+    float m_cylBaseRadiusFactorForHeightFieldCollisions;
+    int unk1C;
+    Vector4C573 m_vertexA;  // +0x20
+    Vector4C573 m_vertexB;  // +0x30
     void SetValue(float v);
 };
 
@@ -41,9 +47,9 @@ struct C00d573e0 {
 // pdb: hkpCylinderShape::setCylinderRadius | hkpCylinderShape.obj | fnv360_0822_retail, objrun, high
 // pdb params: radius
 void C00d573e0::SetValue(float afValue) {
-    f14 = afValue;
-    f2c = f10 + afValue;
-    f3c = afValue + f10;
+        m_cylRadius = afValue;
+    m_vertexA(3) = m_radius + afValue;
+    m_vertexB(3) = afValue + m_radius;
 }
 
 #include "fnv_asm_helpers.h"   // project x87 helpers (fnv_SinCos, fnv_FloatToInt), kept last so earlier code is unchanged
