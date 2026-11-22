@@ -5,17 +5,16 @@
 
 // src/gamebryo2.2/corelibs/nianimation/bstreadtransfinterpolator.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/_fallout3/platforms/common/code/gamebryo2.2/corelibs/nianimation/bstreadtransfinterpolator.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
-struct FUN_00a43560_shell
+#include "bstreadtransfinterpolator_lerpdata_decls.h"
+struct FUN_00a43560_shell : TreadTransf_00a43560
 {
-    unsigned char m_auiShapeKeys[0x20];
-    void* m_ptr_20;
     int __thiscall FUN_00a43560(short arg);
 };
-struct FUN_00a43580_shell
+struct FUN_00a43580_shell : TreadTransf_00a43560
 {
     void* __thiscall FUN_00a43580(unsigned short flag);
 };
-struct FUN_00a435a0_shell
+struct FUN_00a435a0_shell : TreadTransf_00a43560
 {
     void* FUN_00a435a0(short arg1);
 };
@@ -25,10 +24,8 @@ struct BSTreadTransfInterpolator
     void* FUN_00a43a50(unsigned int flags);
 };
 extern "C" void __cdecl __Dummy_00b6fef0(void* ptr, unsigned int flags);
-struct FUN_00a435c0_shell
+struct FUN_00a435c0_shell : TreadTransf_00a43560
 {
-    unsigned char m_auiShapeKeys[0x20];
-    void* m_ptr_20;
     char __thiscall FUN_00a435c0(short arg);
 };
 struct TrackFlags

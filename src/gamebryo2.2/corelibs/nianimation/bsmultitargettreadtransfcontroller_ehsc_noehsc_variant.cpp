@@ -13,7 +13,7 @@ struct FUN_00a35e90_shell : public BSMultiTargetTreadTransfController
 {
     char* FUN_00a35e90(unsigned short);
 };
-struct FUN_00a35fc0_shell
+struct FUN_00a35fc0_shell : BSMultiTargetTreadTransfController
 {
     void __thiscall SetSlotValue(unsigned short idx, void* val);
 };
@@ -21,7 +21,7 @@ struct NiInterpController
 {
     static unsigned short INVALID_INDEX;
 };
-struct FUN_00a35910_shell
+struct FUN_00a35910_shell : BSMultiTargetTreadTransfController
 {
     unsigned short __thiscall FindIndexByValue(unsigned short a);
 };
@@ -49,7 +49,7 @@ struct Holder_00a35f30
 {
     unsigned short FindLinkIndex(const Arg_00a35f30& arName);
 };
-struct FUN_00a35f70_struct
+struct FUN_00a35f70_struct : BSMultiTargetTreadTransfController
 {
     void __thiscall SetSlotEntry(unsigned short, void*, unsigned short, void*);
 };

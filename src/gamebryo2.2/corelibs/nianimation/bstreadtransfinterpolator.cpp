@@ -2,21 +2,7 @@
 // src/gamebryo2.2/corelibs/nianimation/bstreadtransfinterpolator.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/_fallout3/platforms/common/code/gamebryo2.2/corelibs/nianimation/bstreadtransfinterpolator.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-// NiFloatData's key fields (FNV360_PDB).
-struct LerpData_00a43560
-{
-    void* unk00;
-    unsigned int unk04;
-    int m_uiNumKeys;  // src: FNV360_PDB NiFloatData +0x8
-    void* m_pkKeys;  // src: FNV360_PDB NiFloatData +0xC
-    void* m_eType;  // src: FNV360_PDB NiFloatData +0x10
-    unsigned char m_ucKeySize;  // src: FNV360_PDB NiFloatData +0x14
-};
-struct TreadTransf_00a43560
-{
-    unsigned char unk00[0x20];
-    LerpData_00a43560* spLerpData;  // src: FNV360_PDB BSTreadTransfInterpolator +0x20
-};
+#include "bstreadtransfinterpolator_lerpdata_decls.h"
 struct FUN_00a43560_shell : TreadTransf_00a43560
 {
     int __thiscall FUN_00a43560(short arg);
