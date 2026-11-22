@@ -66,23 +66,33 @@ class hkpSingleShapeContainerC9E3 : public hkpShapeContainerC9E3
 };
 
 #include <xmmintrin.h>
+class hkClass;
+class hkStatisticsCollector;
+// hkBool
+struct hkBoolC9E
+{
+    char m_bool;
+    hkBoolC9E(bool b) : m_bool((char)b) {}
+};
+// hkpConvexShape: the sixteen slots of the Fallout 3 vtables of its subclasses (hkpSphereShape 0x00e7c8d4: slot 3 is
+// this function, 4 casts a ray through slot 8 and transforms the hit for a collector, 5 returns no container, 9 returns
+// one sphere, 12 writes a supporting vertex, 14 returns WELD_RESULT_ACCEPT_CONTACT_POINT_UNMODIFIED), named as the New
+// Vegas Xbox 360 PDB names them.
 struct S00c9e1f0_Obj
 {
-    virtual void vf00();
-    virtual void vf04();
-    virtual void vf08();
-    virtual void vf0C();
-    virtual void vf10();
-    virtual void vf14();
-    virtual void vf18();
-    virtual void vf1C();
-    virtual void vf20();
-    virtual void vf24();
-    virtual void vf28();
-    virtual void vf2C();
-    virtual void vf30();
-    virtual void vf34();
-    virtual void method(int arg, float* out);
+    virtual ~S00c9e1f0_Obj();
+    virtual const hkClass* getClassType() const;
+    virtual void calcContentStatistics(hkStatisticsCollector* collector, const hkClass* cls) const;
+    virtual float getMaximumProjection(int direction) const;
+    virtual void castRayWithCollectorImpl(const void* input, const void* cdBody, void* collector) const;
+    virtual const void* getContainer() const;
+    virtual int calcSizeForSpu(const void* input, int spuBufferSizeLeft) const;
+    virtual void getAabbImpl(const void* localToWorld, float tolerance, void* out) const;
+    virtual hkBoolC9E castRayImpl(const void* input, void* results) const;
+    virtual int getNumCollisionSpheresImpl() const;
+    virtual const void* getCollisionSpheresImpl(void* sphereBuffer) const;
+    virtual void getFirstVertex(float* v) const;
+    virtual void getSupportingVertexImpl(int direction, float* supportingVertexOut) const;
 
     float unk04;
     float unk08;
@@ -92,14 +102,12 @@ struct S00c9e1f0_Obj
     float GetDotProductOffset(int arg);
 };
 
-// Calls method(arg, buf), then returns m_10 plus the 3-component dot product of the vector at arg and buf.
+// Returns the radius (m_10) plus the projection of the supporting vertex in the direction onto that direction.
 // @f3 0x00916f60 (community match, verified in this file)
 float S00c9e1f0_Obj::GetDotProductOffset(int arg)
 {
     __declspec(align(16)) float v[4];
-    typedef void (__thiscall *VectorMethod)(S00c9e1f0_Obj*, int, float*);
-    VectorMethod* methods = *reinterpret_cast<VectorMethod**>(this);
-    methods[12](this, arg, v);
+    getSupportingVertexImpl(arg, v);
     const float* a = reinterpret_cast<const float*>(arg);
     float dot = a[1] * v[1] + a[0] * v[0] + a[2] * v[2];
     float result = dot + m_10;
