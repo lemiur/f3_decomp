@@ -402,16 +402,6 @@ class DB85E0ReferencedObject
     short m_sReferenceCount;
 };
 
-class FUN_00db85e0 : public DB85E0ReferencedObject
-{
-  public:
-    virtual ~FUN_00db85e0() throw();
-
-    DB85E0Impl* m_pClassImpl;
-    DB85E0IntArray m_ppIndices;
-    DB85E0Map m_map;
-};
-
 }  // namespace fnv_00db85e0
 
 namespace fnv_00dba1e0 {

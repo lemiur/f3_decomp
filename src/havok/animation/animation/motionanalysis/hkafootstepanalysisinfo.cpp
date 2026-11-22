@@ -187,33 +187,10 @@ struct Owner
 };
 }  // namespace fnv_00e40fd0
 
-struct CbHeap
-{
-    virtual ~CbHeap();
-    virtual void* slot04(int a);
-    virtual void* slot08(int a);
-    virtual void* slot0c(int a);
-    virtual void ReleaseBlock(void* p, int numBytes);
-};
-
-struct CbArray
-{
-    void* m_data;
-    int m_iElementCount;
-    unsigned int m_iCapacityState;
-};
-
 struct CbBase
 {
     virtual ~CbBase()
     {}
-};
-
-struct FUN_00e40cb0 : CbBase
-{
-    __declspec(nothrow) virtual ~FUN_00e40cb0();
-    int unk04;
-    CbArray m_kPointA[11];
 };
 
 namespace fnv_00e40800 {

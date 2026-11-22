@@ -2803,17 +2803,6 @@ void __cdecl FUN_00d47fd0(FUN_00d47fe0_cls* object)
     object->Destroy(0);
 }
 
-struct hkFinishLoadedObjectFlagD483
-{
-    int m_bFinishing;
-};
-
-class FUN_00d48320
-{
-  public:
-    FUN_00d48320(hkFinishLoadedObjectFlagD483 flag);
-};
-
 void __cdecl FUN_00c8a230(int* param_1, int param_2);
 
 // @fnv 0x00d50000
@@ -4303,53 +4292,6 @@ struct TrianglesSubpart : public Subpart
 
     __forceinline TrianglesSubpart(FinishingFlag flag) : Subpart(flag)
     {}
-};
-
-struct ShapesSubpart : public Subpart
-{
-    int m_unk14;
-    int m_unk18;
-    int m_unk1C;
-    int m_unk20;
-    int m_unk24;
-    int m_unk28;
-    int m_unk2C;
-    int m_unk30;
-    int m_unk34;
-    int m_unk38;
-    int m_unk3C;
-};
-
-class FUN_00d56f10 : public hkpShapeCollectionF
-{
-  public:
-    int m_unk18;
-    int m_unk1C;
-    TrianglesSubpart m_kTrianglesSubpart;
-    int m_unk80;
-    int m_unk84;
-    int m_unk88;
-    int m_unk8C;
-    int m_unk90;
-    int m_unk94;
-    int m_unk98;
-    int m_unk9C;
-    int m_unkA0;
-    int m_unkA4;
-    int m_unkA8;
-    int m_unkAC;
-    int m_unkB0;
-    hkArrayF<TrianglesSubpart> m_kTrianglesSubparts;
-    hkArrayF<ShapesSubpart> m_kShapesSubparts;
-    int m_unkCC;
-    int m_unkD0;
-    int m_unkD4;
-    int m_unkD8;
-    int m_unkDC;
-    int m_iFinishingFlag;
-
-    FUN_00d56f10(FinishingFlag flag);
-    virtual void __vecDelDtor(unsigned int);
 };
 
 struct InputBuffer

@@ -314,10 +314,6 @@ struct ImageSpaceEffectShader
         void SetSize(unsigned int n);
     } m_tex;
 };
-struct FUN_00b8e020 : ImageSpaceEffectShader
-{
-    FUN_00b8e020();
-};
 }  // namespace fnv_00b8e020
 
 extern int DAT_010b1340;
@@ -339,8 +335,6 @@ FUN_00b8e130_class* __thiscall FUN_00b8e130_class::FUN_00b8e130(bool abFree)
 }
 
 extern "C" void __cdecl _delete(void* p, unsigned int size);
-extern int DAT_010b14c0;
-extern int DAT_010b14a0;
 void FUN_00c03a20();
 
 namespace fnv_00b8e2c0 {
@@ -426,8 +420,6 @@ extern "C" void __cdecl _delete(void* p, unsigned int size);
 void FUN_00c03a20();
 
 extern "C" void __cdecl _delete(void*, unsigned int);
-extern "C" int DAT_010b2470;
-extern "C" int DAT_010b2490;
 void FUN_00c03a20();
 
 extern int DAT_010b25f0;
@@ -515,8 +507,6 @@ void* __thiscall FUN_00b8f6d0_class::FUN_00b8f6d0(bool abFree)
 }
 
 extern "C" void __cdecl _delete(void* p, unsigned int size);
-extern int DAT_010b2a74;
-extern int DAT_010b2a98;
 
 extern "C" void __cdecl _delete(void*, unsigned int);
 extern "C" int DAT_010b2bec;
@@ -791,10 +781,6 @@ struct ImageSpaceEffectShader
 {
     ImageSpaceEffectShader();
     ~ImageSpaceEffectShader();
-};
-struct FUN_00b91680 : ImageSpaceEffectShader
-{
-    FUN_00b91680();
 };
 }  // namespace fnv_00b91680
 
@@ -1235,9 +1221,6 @@ FUN_00b92a40_class* __thiscall FUN_00b92a40_class::FUN_00b92a40(bool abDelete)
 
 void FUN_00c03a20();
 
-extern int DAT_010b6524;
-extern int DAT_010b6548;
-
 namespace fnv_00b92ee0 {
 struct ImageSpaceEffectShader
 {
@@ -1328,12 +1311,6 @@ struct ImageSpaceEffectShader
 struct NiTPrimitiveArray_ImageSpaceTexture___
 {
     void SetSize(unsigned int);
-};
-struct FUN_00b93180 : public ImageSpaceEffectShader
-{
-    void* vtbl;
-    void* p6c;
-    FUN_00b93180();
 };
 }  // namespace fnv_00b93180
 
@@ -1536,8 +1513,6 @@ void FUN_00c03a20();
 
 extern "C" void __cdecl _delete(void*, unsigned int);
 void FUN_00c03a20();
-extern int DAT_010b7700;
-extern int DAT_010b7720;
 
 extern int DAT_010b78b8;
 extern int DAT_010b7898;
@@ -1726,26 +1701,6 @@ FUN_00b8ded0::FUN_00b8ded0()
     ((NiTPrimitiveArray_ImageSpaceTexture___*)((char*)this + 0x94))->SetSize(2);
 }
 
-struct FUN_00b8e170 : ImageSpaceEffectShader
-{
-    char m_00b8e170[0x95 - sizeof(ImageSpaceEffectShader)];
-    NiTPrimitiveArray_ImageSpaceTexture___ m_00b8e204;
-    FUN_00b8e170();
-};
-
-struct FUN_00b8efa0 : public ImageSpaceEffectShader
-{
-    NiTPrimitiveArray_ImageSpaceTexture___ arr;
-    FUN_00b8efa0();
-};
-
-struct FUN_00b8f1b0 : ImageSpaceEffectShader
-{
-    int m_00b2470;
-    int m_00b2490;
-    FUN_00b8f1b0();
-};
-
 struct FUN_00b8f360_class : public ImageSpaceEffectShader
 {
     void* m_000;
@@ -1813,78 +1768,11 @@ FUN_00b91b80::FUN_00b91b80()
 extern int DAT_010b5460;
 extern int DAT_010b5480;
 
-struct FUN_00b92d90 : ImageSpaceEffectShader
-{
-    int m_00b6548;
-    int m_00b6524;
-    FUN_00b92d90();
-};
-
 extern int DAT_010b687c;
 extern int DAT_010b68a0;
-struct FUN_00b93030 : ImageSpaceEffectShader
-{
-    int m_00b2d8c;
-    int m_00b2db0;
-    void FUN_00c03a20();
-    FUN_00b93030();
-    ~FUN_00b93030();
-};
 
 extern int DAT_010b7578;
 extern int DAT_010b7598;
-
-struct FUN_00b93e90 : ImageSpaceEffectShader
-{
-    void* m_000;
-    void* m_004;
-    void* m_008;
-    void* m_00c;
-    void* m_010;
-    void* m_014;
-    void* m_018;
-    void* m_01c;
-    void* m_020;
-    void* m_024;
-    void* m_028;
-    void* m_02c;
-    void* m_030;
-    void* m_034;
-    void* m_038;
-    void* m_03c;
-    void* m_040;
-    void* m_044;
-    void* m_048;
-    void* m_04c;
-    void* m_050;
-    void* m_054;
-    void* m_058;
-    void* m_05c;
-    void* m_060;
-    void* m_064;
-    void* m_068;
-    void* m_06c;
-    void* m_070;
-    void* m_074;
-    void* m_078;
-    void* m_07c;
-    void* m_080;
-    void* m_084;
-    void* m_088;
-    void* m_08c;
-    void* m_090;
-    NiTPrimitiveArray_ImageSpaceTexture___ m_094;
-    FUN_00b93e90();
-};
-
-struct FUN_00b93fe0 : ImageSpaceEffectShader
-{
-    int m_00b2d8c;
-    int m_00b2db0;
-    void FUN_00c03a20();
-    FUN_00b93fe0();
-    ~FUN_00b93fe0();
-};
 
 extern int DAT_010b7bf0;
 extern int DAT_010b7bcc;

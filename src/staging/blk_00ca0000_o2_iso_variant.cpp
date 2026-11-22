@@ -102,17 +102,6 @@ void __cdecl FUN_00cba1d0();
 extern int DAT_010c7310;
 extern void(__stdcall* DAT_010c7318)(void*);
 extern MemoryManager _g_memoryManager;
-struct SubObject04
-{
-    virtual ~SubObject04();
-    virtual void Slot1();
-    virtual void Free(void* apPtr);
-    int unk04;
-    int unk08;
-    int unk0c;
-
-    SubObject04();
-};
 struct Flag18
 {
     unsigned char m_v;
@@ -4203,14 +4192,6 @@ struct FUN_00cb8610_Class
 // subobject) survived as stale weight.
 // base NiExtraData: named after its ctor's address so the implicit base-ctor
 // call binds to 0xa7b2e0
-struct AryType
-{  // BSSimpleArray<NiPointer<bhkRagdollTemplateData>,1024> stand-in
-    virtual void v0();
-    void* m_pData;
-    unsigned int m_uiSize;
-    unsigned int m_uiMaxSize;
-    AryType();
-};
 struct SearchNodeCB
 {
     int unk00;

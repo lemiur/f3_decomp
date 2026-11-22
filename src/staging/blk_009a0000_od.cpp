@@ -418,12 +418,6 @@ struct CombatOwnerPtr
     CombatOwner* operator->() const;
     ~CombatOwnerPtr();
 };
-struct FUN_009a45e0
-{
-    int unk00, unk04, unk08, unk0C, unk10;
-    CombatOwnerPtr owner;
-    ~FUN_009a45e0();
-};
 
 struct Point9a
 {
@@ -1124,13 +1118,6 @@ extern Setting082 DAT_011d0030, DAT_011d0490, DAT_011cfea0, DAT_011d0edc, DAT_01
 }  // namespace fnv_009b00a0
 
 namespace fnv_009b2cb0 {
-struct FUN_006299a0
-{
-    int value;
-
-    FUN_006299a0();
-    ~FUN_006299a0();
-};
 
 }  // namespace fnv_009b2cb0
 
@@ -1615,15 +1602,6 @@ class ContinuousBeamProjectile : public FUN_009bbc70::Projectile
 };
 
 }
-
-struct FUN_009ae540
-{
-    float m0;
-    float m4;
-    float m8;
-    float mc;
-    FUN_009ae540(float*);
-};
 
 namespace fnv_009b5a30 {
 struct HitActor;

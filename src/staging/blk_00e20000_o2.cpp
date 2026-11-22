@@ -1231,18 +1231,6 @@ struct S_00e3a270_RefObj
     {}
 };
 
-struct FUN_00e3a270 : S_00e3a270_RefObj
-{
-    int unk08;
-    int unk0c;
-    int m_data;
-    int m_iElementCount;
-    int m_iCapacityState;
-
-    FUN_00e3a270();
-    virtual void FUN_vfn0();
-};
-
 struct S_00e3ae70_Alloc
 {
     virtual void v00();

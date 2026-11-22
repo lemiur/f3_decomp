@@ -68,17 +68,6 @@ struct S_00d9e2b0
     S_00d9e2b0_Bool Equals(const S_00d9e2b0& other) const;
 };
 
-struct hkBaseObject
-{
-    virtual void BaseV() = 0;
-};
-struct hkReferencedObject : hkBaseObject
-{
-    unsigned short unk04;
-    unsigned short unk06;
-    hkReferencedObject();
-};
-
 extern "C" void* __cdecl FUN_00c85750(void);
 extern "C" void __cdecl ResizeAudioStream(void* heap, void* arr, int elemSize);
 

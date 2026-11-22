@@ -14,12 +14,6 @@ struct DDCC60BaseObject
     {}
 };
 
-struct DDCC60ReferencedObject : DDCC60BaseObject
-{
-    unsigned short m_usMemSizeAndFlags;
-    short m_sReferenceCount;
-};
-
 struct DDCC60Action
 {
     virtual ~DDCC60Action()
@@ -36,19 +30,6 @@ struct DDCC60Listener
 {
     virtual ~DDCC60Listener()
     {}
-};
-
-struct DDCC60World
-{
-    __declspec(nothrow) void removeListener(DDCC60Listener* listener);
-    __declspec(nothrow) void removeReference();
-};
-
-struct FUN_00ddcc60 : DDCC60ReferencedObject, DDCC60Action, DDCC60Listener
-{
-    DDCC60World* m_pOwningWorld;
-
-    virtual ~FUN_00ddcc60();
 };
 
 int __cdecl FUN_00cb0fa0(const char* pcA, const char* pcB);

@@ -446,20 +446,6 @@ template <class T> class hkArrayD4BB
     int m_iCapacityState;
 };
 
-class FUN_00d4bbb0 : public hkRefObjD4BB
-{
-  public:
-    hkArrayD4BB<int> m_array08;
-    hkArrayD4BB<int> m_array14;
-    hkArrayD4BB<int> m_array20;
-    hkArrayD4BB<int> m_array2C;
-    hkArrayD4BB<int> m_array38;
-    hkArrayD4BB<int> m_array44;
-
-    FUN_00d4bbb0();
-    virtual ~FUN_00d4bbb0();
-};
-
 // sub ecx,0x10; jmp target  ==  MSVC adjustor thunk for a virtual inherited through a second base.
 struct PrimaryBase
 {

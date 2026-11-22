@@ -408,16 +408,6 @@ extern bool DAT_011c70ed;
 
 extern "C" void __cdecl FUN_00401030(void*);
 
-struct INISettingCollection
-{
-    INISettingCollection();
-    virtual void v0();
-};
-struct FUN_004de530 : public INISettingCollection
-{
-    FUN_004de530();
-};
-
 void* __cdecl operator new(unsigned int uiSize);
 void __cdecl operator delete(void* pvMem);
 
@@ -464,22 +454,7 @@ class C4DF040Matrix3
     float m_afEntries[3][3];
 };
 
-class FUN_004d4f10
-{
-  public:
-    virtual ~FUN_004d4f10();
-
-    void FUN_00438af0();
-};
-
-class FUN_004d4eb0 : public FUN_004d4f10
-{
-  public:
-    virtual ~FUN_004d4eb0();
-};
-
 namespace fnv_004d9070 {
-void __fastcall DeleteAllEntries(void* pkMap);
 
 class FUN_004d90d0
 {

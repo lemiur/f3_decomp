@@ -168,11 +168,6 @@ template <class T> struct hkArrayD267
     }
 };
 
-struct RefD267 : public hkReferencedObject
-{
-    void FUN_00c905b0() throw();
-};
-
 class hkBase0D267
 {
   public:
@@ -189,16 +184,6 @@ class hkBase1D267
     virtual ~hkBase1D267() throw()
     {}
     int unk14;
-};
-
-class FUN_00d26760 : public hkBase0D267, public hkBase1D267
-{
-  public:
-    RefD267* m_pkRef;
-    int unk1C[2];
-    hkArrayD267<short> m_ppData;
-
-    virtual ~FUN_00d26760() throw();
 };
 
 void* FUN_00c85750(void);

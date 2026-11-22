@@ -416,7 +416,6 @@ __declspec(thread) TlsBlock462480 g_tls462480;
 
 __declspec(thread) unsigned int TLS_PAD[166];
 
-extern int DAT_01019a14;
 // @fnv 0x0046ffd0
 template <> struct NiTMallocInterface<void*>
 {
@@ -513,16 +512,6 @@ struct NiTMallocInterface_0096afc0
 {
     static ActorCombatGroup** __cdecl Allocate(unsigned short);
 };
-struct FUN_004704e0
-{
-    void* vtbl;
-    ActorCombatGroup** p;
-    unsigned short a;
-    unsigned short c;
-    unsigned short d;
-    unsigned short f;
-    FUN_004704e0(unsigned short x, unsigned short y);
-};
 
 namespace fnv_00470550 {
 struct NiTMallocInterface_0096afc0
@@ -538,16 +527,6 @@ struct NiTMallocInterface_0096afc0
     static ActorCombatGroup** __cdecl Allocate(unsigned short);
 };
 void* $SG6264;
-struct FUN_00474880
-{
-    void* vtbl;
-    ActorCombatGroup** p;
-    unsigned short a;
-    unsigned short b;
-    unsigned short c;
-    unsigned short d;
-    FUN_00474880(unsigned short x, unsigned short y);
-};
 }  // namespace fnv_00474880
 
 struct BaseFormComponent
@@ -558,21 +537,6 @@ struct BaseFormComponent
 extern int DAT_01019a24;
 
 extern int DAT_0101a644;
-
-class Base_b9207
-{
-  public:
-    virtual ~Base_b9207();
-    unsigned int unk04;
-    unsigned int unk08;
-};
-
-class FUN_004745d0 : public Base_b9207
-{
-  public:
-    virtual ~FUN_004745d0();
-    void DoCleanup();
-};
 
 struct InstanceData36
 {
@@ -836,9 +800,4 @@ extern unsigned int DAT_011c3f28, DAT_011c3f24, DAT_011c40a8;
 struct FUN_00474730
 {
     virtual ~FUN_00474730();
-};
-struct FUN_004746d0 : FUN_00474730
-{
-    virtual ~FUN_004746d0();
-    void __thiscall FUN_00438af0();
 };

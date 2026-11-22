@@ -499,7 +499,6 @@ struct S_dbefc0_Bytes
     void FUN_00dbefc0(const unsigned char* bytes, int count);
 };
 
-extern int DAT_01011584;
 struct S_00dc0500_Flag
 {
     bool b;
@@ -513,26 +512,6 @@ struct S_00dc0500_Opt
     {}
     S_00dc0500_Opt(const S_00dc0500_Opt& o) : b(o.b)
     {}
-};
-struct FUN_00d60830
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    FUN_00d60830(BSAudio* a1, S_00dc0500_Opt f);
-};
-struct S_00dc0500_Str
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    void __thiscall FUN_00d874d0(int* s, int n);
-};
-struct FUN_00d87790 : S_00dc0500_Str
-{
-    FUN_00d87790(S_00dc0500_Flag f);
 };
 struct S_00dc0500_Holder : UnkHolder
 {
@@ -552,17 +531,6 @@ struct S_00dc0500_Arr
     int c;
     S_00dc0500_Arr() : a(0), b(0), c(0x80000000)
     {}
-};
-struct FUN_00dc0500 : FUN_00d60830
-{
-    FUN_00d87790 m_10;
-    FUN_00d87790 m_20;
-    int m_30;
-    S_00dc0500_Holder m_34;
-    S_00dc0500_Arr m_40;
-    S_00dc0500_Arr m_4c;
-    FUN_00dc0380 m_58;
-    FUN_00dc0500(BSAudio* a1, BSAudio* a2);
 };
 
 inline void* operator new(size_t, void* p) throw()

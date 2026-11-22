@@ -465,7 +465,6 @@ struct FUN_00cb9170
     float m_fC8;
     FUN_00cb9170();
 };
-extern "C" float DAT_0104da48;
 }  // namespace fnv_00cb9170
 
 // @f3twin 0x0095a050 of 0x004a0640

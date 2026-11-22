@@ -420,21 +420,6 @@ struct FUN_00532ec0
     FUN_00532ec0_v4* SUB(FUN_00532ec0_v4* result, const FUN_00532ec0_v4& sub);
 };
 
-struct FUN_0045cec0
-{
-    ~FUN_0045cec0();
-};
-
-struct FUN_00a3ca30
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-
-    ~FUN_00a3ca30();
-};
-
 namespace Real {
 struct InterpolatorBase
 {

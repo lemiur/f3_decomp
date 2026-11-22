@@ -1374,14 +1374,6 @@ class hkReferencedObjectD269
     short m_sReferenceCount;
 };
 
-class BaseD269_08
-{
-  public:
-    virtual ~BaseD269_08() throw();
-    int unk04, unk08, unk0C, unk10, unk14, unk18, unk1C, unk20, unk24, unk28;
-    int unk2C, unk30, unk34, unk38, unk3C, unk40, unk44, unk48, unk4C;
-};
-
 class ListenerD269_58
 {
   public:
@@ -1411,35 +1403,6 @@ class ListenerD269_68
   public:
     virtual ~ListenerD269_68() throw()
     {}
-};
-
-class ElementD269
-{
-  public:
-    virtual ~ElementD269() throw();
-    int unk04, unk08, unk0C, unk10, unk14, unk18, unk1C, unk20, unk24, unk28, unk2C;
-    int unk30, unk34, unk38, unk3C, unk40, unk44, unk48, unk4C, unk50, unk54, unk58, unk5C;
-    int unk60, unk64, unk68, unk6C, unk70, unk74, unk78, unk7C, unk80, unk84, unk88, unk8C;
-    int unk90, unk94, unk98, unk9C, unkA0, unkA4, unkA8, unkAC, unkB0, unkB4, unkB8, unkBC;
-    int unkC0, unkC4, unkC8, unkCC, unkD0, unkD4, unkD8, unkDC, unkE0, unkE4, unkE8, unkEC;
-};
-
-class FUN_00cd2690 : public hkReferencedObjectD269,
-                     public BaseD269_08,
-                     public ListenerD269_58,
-                     public ListenerD269_5C,
-                     public ListenerD269_60,
-                     public ListenerD269_64,
-                     public ListenerD269_68
-{
-  public:
-    virtual ~FUN_00cd2690() throw();
-
-    void FUN_00cd2260(void* pkObject);
-
-    hkArrayD269<void*> m_kTrackedObjects;
-    hkArrayD269<ElementD269> m_elements;
-    hkArrayD269<void*> m_kListeners;
 };
 
 struct Block8CD2A

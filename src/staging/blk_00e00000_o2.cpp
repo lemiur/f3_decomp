@@ -355,50 +355,6 @@ struct S_00e003d0_Arr
     S_00e003d0_Arr() : data(0), size(0), cap(0x80000000)
     {}
 };
-struct S_00e003d0_Base
-{
-    virtual void unk00();
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5c;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6c;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7c;
-    int unk80;
-    int unk84;
-    int unk88;
-    S_00e003d0_Base(int flag);
-};
-struct S_00e003d0_Arrs
-{
-    S_00e003d0_Arr arr8c;
-    S_00e003d0_Arr arr98;
-};
 
 extern int DAT_010c6dc4;
 
@@ -689,24 +645,6 @@ extern int DAT_010d102c;
 
 extern int DAT_010305a8;
 extern int DAT_010c6fb0;
-extern int DAT_010cc364;
-extern int DAT_010cc344;
-extern int DAT_010e8e94;
-extern int DAT_010e8e74;
-
-class FUN_00e00fb0
-{
-  public:
-    void* m_vptr;
-    unsigned int m_04;
-    unsigned int m_08;
-    unsigned int m_0c;
-    void* m_10;
-    unsigned char m_14;
-    unsigned char m_15;
-
-    FUN_00e00fb0(int flag);
-};
 
 extern int DAT_010c6fb0;
 extern int DAT_010d10c4;
@@ -4254,23 +4192,6 @@ template <class T> class hkArrayE030
 
 int __cdecl ReadIntAtOffset(const char* pcData, int* piPos);
 int __cdecl ReadPaddedString(const char* pcData, int* piPos);
-
-struct FUN_00e004f0 : S_00e003d0_Base, S_00e003d0_Arrs
-{
-    int unka4;
-    int unka8;
-    int unkac;
-    int unkb0;
-    int unkb4;
-    int unkb8;
-    int unkbc;
-    int unkc0;
-    int unkc4;
-    int unkc8;
-    int unkcc;
-    S_00e003d0_Arr arrd0;
-    FUN_00e004f0(int flag);
-};
 
 // sub ecx,8; jmp target  ==  MSVC adjustor thunk (second base of a multiple-inheritance override)
 struct SpawnedPrimaryBase

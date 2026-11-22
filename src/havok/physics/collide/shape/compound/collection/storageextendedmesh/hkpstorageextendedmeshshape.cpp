@@ -135,40 +135,6 @@ class hkpStorageExtendedMeshShapeShapeSubpartStorage : public hkReferencedObject
 {
 };
 
-struct FUN_00d56800
-{
-    int m_kNextStreamField[16];
-    ~FUN_00d56800() throw();
-};
-
-struct hkpShapeD49C
-{
-    virtual ~hkpShapeD49C() throw();
-    int m_aiUnk04[3];
-};
-
-struct hkpShapeContainerD49C
-{
-    virtual ~hkpShapeContainerD49C() throw();
-};
-
-struct FUN_00d56e00 : public hkpShapeD49C, public hkpShapeContainerD49C
-{
-    int m_aiUnk14[43];
-    hkArrayD49C<FUN_00d56800> m_kTrianglesSubparts;
-    int m_aiUnkCC[9];
-    ~FUN_00d56e00() throw();
-};
-
-class FUN_00d49cb0 : public FUN_00d56e00
-{
-  public:
-    hkArrayD49C<hkpStorageExtendedMeshShapeMeshSubpartStorage*> m_kMeshSubparts;
-    hkArrayD49C<hkpStorageExtendedMeshShapeShapeSubpartStorage*> m_kShapeSubparts;
-    int m_aiUnk108[2];
-    ~FUN_00d49cb0() throw();
-};
-
 struct hkFinishLoadedObjectFlagD4A1
 {
     int m_bFinishing;
@@ -587,28 +553,6 @@ class FUN_00cb0c00_class
     }
 };
 
-struct hkVector4D4AF
-{
-    hkReal x, y, z, w;
-};
-
-struct hkpMeshMaterialD4AF
-{
-    hkUint32 m_uiFilterInfo;
-};
-
-struct hkpStorageExtendedMeshShapeMaterialD4AF : public hkpMeshMaterialD4AF
-{
-    hkHalf m_fElasticity;
-    hkHalf m_fSlipAngle;
-    hkUlong m_ulUserData;
-};
-
-struct hkpNamedMeshMaterialD4AF : public hkpMeshMaterialD4AF
-{
-    FUN_00cb0c00_class m_name;
-};
-
 class hkReferencedObjectD4AF
 {
   public:
@@ -616,21 +560,6 @@ class hkReferencedObjectD4AF
     {}
     hkUint16 m_usMemSizeAndFlags;
     hkInt16 m_sReferenceCount;
-};
-
-class FUN_00d4af60 : public hkReferencedObjectD4AF
-{
-  public:
-    hkArrayD4AF<hkVector4D4AF> m_kVertices;
-    hkArrayD4AF<hkUint8> m_kIndices8;
-    hkArrayD4AF<hkUint16> m_kIndices16;
-    hkArrayD4AF<hkUint32> m_kIndices32;
-    hkArrayD4AF<hkUint8> m_kMaterialIndices8;
-    hkArrayD4AF<hkpStorageExtendedMeshShapeMaterialD4AF> m_kMaterials;
-    hkArrayD4AF<hkpNamedMeshMaterialD4AF> m_kNamedMaterials;
-    hkArrayD4AF<hkUint16> m_kMaterialIndices16;
-
-    virtual ~FUN_00d4af60() throw();
 };
 
 }  // namespace fnv_00d4af60

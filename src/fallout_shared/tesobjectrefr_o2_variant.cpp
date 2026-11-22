@@ -21,12 +21,9 @@ void FUN_00c9c240_holder::FUN_00c9d600()
 }
 
 extern int DAT_0126810c;
-extern int DAT_01268208;
-extern int DAT_0126822c;
 extern int DAT_01268238;
 extern const void* DAT_01030394;
 extern const void* DAT_0103078c;
-extern const void* DAT_010306b4;
 struct bhkRefObject
 {
     void* vtbl;
@@ -36,11 +33,6 @@ struct bhkRefObject
     int f10;
     unsigned char f14;
     bhkRefObject* Initialize();
-};
-extern const void* vftable_FUN_0056e2d0;
-struct FUN_00c6d190 : bhkRefObject
-{
-    FUN_00c6d190();
 };
 
 struct ProjectileListener
@@ -444,21 +436,6 @@ FUN_00c84c50::~FUN_00c84c50()
 }
 
 extern int DAT_0126810c;
-
-class FUN_00c85790_base
-{
-  public:
-    virtual void unk00();
-    ~FUN_00c85790_base();
-    int unk04;
-};
-
-class FUN_00c85790 : public FUN_00c85790_base
-{
-  public:
-    virtual ~FUN_00c85790();
-    void unk08();
-};
 
 extern __declspec(thread) unsigned int g_havokThreadMode;
 

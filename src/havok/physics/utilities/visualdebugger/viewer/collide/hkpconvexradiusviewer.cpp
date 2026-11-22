@@ -274,30 +274,6 @@ struct S_Heap
     virtual void v3();
     virtual void ReturnMemory(void* p, int n) throw();
 };
-struct S_B0
-{
-    virtual void b0v0();
-    int unk04;
-    void FUN_00d69010(int i) throw();
-};
-struct S_B8
-{
-    virtual void b8v0();
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-};
-struct S_B20
-{
-    virtual void b20v0();
-};
-struct FUN_00ddcc60 : S_B0, S_B8, S_B20
-{
-    int m24;
-    virtual ~FUN_00ddcc60() throw();
-};
 struct S_D28
 {
     virtual ~S_D28() throw()
@@ -334,11 +310,6 @@ struct S_Arr
         m_data = 0;
         m_cap = 0x80000000;
     }
-};
-struct FUN_00d690d0 : FUN_00ddcc60, S_D28, S_D2c
-{
-    S_Arr m30;
-    virtual ~FUN_00d690d0() throw();
 };
 
 struct SubObj
@@ -495,31 +466,6 @@ void FUN_00d68e60_cls::FUN_00d68e60(Owner* owner)
 static void* DAT_01269018;
 static void* DAT_01269014;
 
-struct T68B0
-{
-    virtual void b0v0();
-    int unk04;
-};
-struct T68B8
-{
-    virtual void b8v0();
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-};
-struct T68B20
-{
-    virtual void b20v0();
-};
-
-struct T68Base : T68B0, T68B8, T68B20
-{
-    int m24;
-    T68Base(int arg);
-};
-
 struct T68D28
 {
     virtual void d28v0();
@@ -540,19 +486,6 @@ struct T68Arr
     unsigned int m_cap;
     T68Arr() : m_data(0), m_iElementCount(0), m_cap(0x80000000u)
     {}
-};
-
-struct FUN_00d68b90 : T68Base, T68D28, T68D2c
-{
-    T68Arr m30;
-    void* m3c;
-    void* m40;
-    FUN_00d68b90(int arg);
-    virtual void b0v0();
-    virtual void b8v0();
-    virtual void b20v0();
-    virtual void d28v0();
-    virtual void d2cv0();
 };
 
 struct Mem_d65f

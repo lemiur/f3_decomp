@@ -524,41 +524,6 @@ struct D04A20OperationArray
 };
 
 extern "C" __declspec(dllimport) unsigned long __stdcall TlsSetValue(unsigned long index, void* value);
-extern unsigned long g_dwTlsIndex;
-
-struct D05490Base
-{
-    int m_i00;
-    int m_i04;
-    int m_i08;
-    int m_i0c;
-    int m_i10;
-    int m_i14;
-    D05490Base(int spinCount) throw();
-};
-
-struct SrcCfg
-{
-    int m_i00;
-    int m_i04;
-    int m_i08;
-    int m_i0c;
-    int m_i10;
-    int m_i14;
-    int m_i18;
-};
-
-struct SubObj
-{
-    int m_i00;
-    int m_i04;
-    int m_i08;
-    int m_i0c;
-    int m_i10;
-    int m_i14;
-    SubObj() throw();
-    void FUN_00d05b50(SrcCfg* p) throw();
-};
 
 struct PoolEntry
 {
@@ -595,14 +560,6 @@ struct PoolTable
     int m_i16c;
 };
 
-struct Slot16
-{
-    int m_i00;
-    int m_i04;
-    void* m_p08;
-    void* m_p0c;
-};
-
 struct D05490Array
 {
     void* m_data;
@@ -610,73 +567,6 @@ struct D05490Array
     int m_iCapacityState;
     D05490Array() throw() : m_data(0), m_iElementCount(0), m_iCapacityState(0x80000000)
     {}
-};
-
-void FUN_00d043d0();
-void FUN_00d043e0();
-void FUN_00d04550();
-void FUN_00d04570();
-
-struct FUN_00d05490 : D05490Base
-{
-    void FinishInit() throw();
-
-    PoolTable* volatile m_pTable;
-    void* m_pFn1;
-    void* m_pFn2;
-    int m_uiItemCount;
-    int m_i28;
-    int m_i2c;
-    int m_i30;
-    int m_i34;
-    int m_i38;
-    int m_i3c;
-    int m_i40;
-    int m_i44;
-    int m_i48;
-    int m_i4c;
-    int m_i50;
-    int m_i54;
-    SubObj m_sub;
-    int m_i70;
-    volatile unsigned char m_b74;
-    unsigned char m_b75;
-    unsigned char m_b76;
-    unsigned char m_b77;
-    int m_i78;
-    int m_i7c;
-    int m_i80;
-    int m_i84;
-    int m_i88;
-    int m_i8c;
-    int m_i90;
-    int m_i94;
-    int m_i98;
-    int m_i9c;
-    int m_ia0;
-    int m_ia4;
-    int m_ia8;
-    int m_iac;
-    int m_ib0;
-    int m_ib4;
-    int m_ib8;
-    int m_ibc;
-    int m_ic0;
-    int m_ic4;
-    int m_ic8;
-    int m_icc;
-    int m_id0;
-    int m_id4;
-    int m_id8;
-    int m_idc;
-    int m_ie0;
-    int m_ie4;
-    int m_ie8;
-    int m_iec;
-    Slot16 m_slots[11];
-    D05490Array m_aiIndexedValues;
-
-    FUN_00d05490(SrcCfg* a1) throw();
 };
 
 typedef int(__cdecl* DispatchHandler)(void*, void*, void*);

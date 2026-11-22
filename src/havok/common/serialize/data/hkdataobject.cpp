@@ -718,28 +718,6 @@ struct Fnv299VTarget
 };
 typedef void(__thiscall* Fnv299Dispatch)(Fnv299VTarget*, int);
 
-struct ObjectValue
-{
-    void* object;
-    __declspec(noinline) ObjectValue(void* value);
-};
-
-struct DBAB50Object
-{
-    virtual ~DBAB50Object();
-
-    unsigned short m_usMemSizeAndFlags;
-    short m_sReferenceCount;
-    int m_iReferenceCount;
-};
-
-struct FUN_00dbab50
-{
-    DBAB50Object* m_pRetainedObject;
-
-    FUN_00dbab50(DBAB50Object* p);
-};
-
 struct DB8000_Alloc
 {
     virtual void v0();

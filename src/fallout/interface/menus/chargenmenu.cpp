@@ -62,20 +62,6 @@ struct Tile
 };
 }  // namespace fnv_007542d0
 
-struct Menu_007a8b10
-{
-    virtual ~Menu_007a8b10();
-};
-struct FUN_00724090_shell
-{
-    void FUN_00721150();
-};
-struct FUN_007533b0 : Menu_007a8b10
-{
-    char pad[0x58 - sizeof(void*)];
-    FUN_00724090_shell m;
-    ~FUN_007533b0();
-};
 extern int DAT_011d920c;
 
 extern int DAT_011d920c;

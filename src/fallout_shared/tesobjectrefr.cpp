@@ -9759,23 +9759,6 @@ void __cdecl FUN_00aa1460(void* pObject, unsigned int uSize);
 // `this`, installs the class vtable pointer into the object, bumps a global
 // counter and returns itself.
 
-extern unsigned int DAT_012680f8;
-
-struct FUN_0056e6f0_base
-{
-    FUN_0056e6f0_base();
-    virtual void v00();
-    unsigned int unk04;
-    unsigned int unk08;
-    unsigned int unk0C;
-};
-
-struct FUN_0056e6f0 : public FUN_0056e6f0_base
-{
-    unsigned int m_10;
-    FUN_0056e6f0();
-};
-
 void __cdecl FUN_00aa1460(void* apMemory, unsigned int auiSize);
 
 struct ActorController
@@ -15882,21 +15865,6 @@ void FUN_005b5e40(const char*, ...);
 void FUN_0055d6d0(Reference*, Scene*);
 
 }
-
-struct TransformMember
-{
-    void FUN_0056e270();
-    void FUN_0056e120();
-};
-struct FUN_0056e0b0 : public FUN_0056e180
-{
-    unsigned int unk18;
-    unsigned int unk1c;
-    TransformMember transform;
-    FUN_0056e0b0();
-};
-
-extern int DAT_01268208;
 
 struct PhantomBase
 {

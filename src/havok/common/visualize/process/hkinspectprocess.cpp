@@ -12,12 +12,6 @@ void __stdcall GetPunctuationChars(char** apOutString, int* apiLength)
 struct hkInspectProcess;
 extern hkInspectProcess* DAT_01269cd4;
 
-struct hkInspectProcessStandIn
-{
-    void __thiscall WriteObjectHeader(void* object, int type, int flags);
-    void __thiscall RemovePair(void* object);
-};
-
 struct hkInspectProcess;
 
 struct hkInspectProcess;
@@ -68,8 +62,6 @@ template <typename T> struct hkArrayDDB6
     hkArrayDDB6() throw() : m_data(0), m_iElementCount(0), m_iCapacityState(0x80000000)
     {}
 };
-
-void __cdecl FUN_00ddb5d0(void* userData);
 
 class FUN_00ddb600 : public hkRefObjDDB6, public hkListenerDDB6
 {
@@ -194,51 +186,6 @@ class hkProcessDDB6
   public:
     virtual ~hkProcessDDB6() throw()
     {}
-};
-
-struct hkProcessObjectDDB6
-{
-    void* m_object;
-    int unk04;
-    int unk08;
-};
-
-class hkProcessContextDDB6 : public hkReferencedObject
-{
-  public:
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    hkProcessObjectDDB6* m_kTrackedObjects;
-    int m_numObjects;
-
-    void FUN_00cd1140(void(__cdecl* pfnCallback)(void*, int, char, int, hkInspectProcess*)) throw();
-};
-
-struct hkInspectEntryDDB6
-{
-    int unk00;
-    int unk04;
-};
-
-class FUN_00ddb670 : public hkReferencedObject, public hkProcessDDB6
-{
-  public:
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    hkArrayDDB6<hkInspectEntryDDB6> m_entries;
-    hkProcessContextDDB6* m_iValueAtOffset0C;
-
-    void RemovePair(void* pvObject) throw();
-    virtual ~FUN_00ddb670() throw();
 };
 
 }  // namespace fnv_00ddb670
@@ -463,12 +410,6 @@ class FUN_00d605d0_Class
     void FUN_00d609a0(int iKey, int iValue);
 };
 
-struct hkPairDDB5
-{
-    int m_key;
-    int m_uiFilterValue;
-};
-
 template <typename T> struct hkArrayDDB5
 {
     T* m_data;
@@ -489,17 +430,6 @@ template <typename T> struct hkArrayDDB5
             } while (++k < (int)(sizeof(T) / 4));
         }
     }
-};
-
-class FUN_00ddb550_cls
-{
-  public:
-    int unk00, unk04, unk08, unk0C, unk10;
-    FUN_00d605d0_Class* m_pStreamWriter;
-    int unk18, unk1C;
-    hkArrayDDB5<hkPairDDB5> m_pairs;
-
-    int RemovePair(int iKey);
 };
 
 }  // namespace fnv_00ddb550

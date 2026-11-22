@@ -2942,16 +2942,6 @@ template <class T> class hkSmallArrayC9CF
     }
 };
 
-struct hkConstraintInternalC9CF
-{
-    int unk00, unk04, unk08, unk0C, unk10, unk14, unk18, unk1C, unk20, unk24, unk28, unk2C;
-};
-
-struct hkReferencedObjectC9CF
-{
-    void FUN_00c905b0() throw();
-};
-
 template <class T> struct hkRefPtrC9CF
 {
     T* m_pRetainedObject;
@@ -2962,19 +2952,6 @@ template <class T> struct hkRefPtrC9CF
             m_pRetainedObject->FUN_00c905b0();
         m_pRetainedObject = 0;
     }
-};
-
-class FUN_00d1dff0
-{
-  public:
-    ~FUN_00d1dff0() throw();
-
-    int unk00, unk04, unk08, unk0C, unk10, unk14, unk18, unk1C, unk20, unk24, unk28, unk2C;
-    int unk30, unk34, unk38, unk3C, unk40, unk44, unk48, unk4C, unk50, unk54, unk58, unk5C;
-    int unk60, unk64, unk68, unk6C, unk70, unk74, unk78, unk7C, unk80, unk84, unk88, unk8C;
-    int unk90, unk94, unk98, unk9C, unkA0, unkA4, unkA8, unkAC, unkB0, unkB4, unkB8, unkBC;
-    int unkC0, unkC4, unkC8, unkCC, unkD0, unkD4, unkD8, unkDC, unkE0, unkE4, unkE8, unkEC;
-    int unkF0, unkF4, unkF8, unkFC, unk100, unk104, unk108, unk10C, unk110, unk114, unk118, unk11C;
 };
 
 class FUN_00c9d340
@@ -2989,29 +2966,6 @@ class FUN_00c9d340
     int unk00, unk04, unk08, unk0C;
 };
 
-struct hkReferencedObjectBaseC9CF
-{
-    virtual ~hkReferencedObjectBaseC9CF() throw();
-    int m_usMemSizeAndFlags;
-};
-
-struct hkpContactListenerC9CF
-{
-    int unk00;
-};
-
-struct LimitUtilC9CF : public hkReferencedObjectBaseC9CF, public hkpContactListenerC9CF
-{
-    virtual ~LimitUtilC9CF() throw();
-};
-
-struct OwnerC9CF
-{
-    void FUN_00c9c140(hkpContactListenerC9CF* m_pAudioListener);
-};
-
-void __cdecl DeleteCallbacks(void* pEntity);
-
 namespace FUN_00c9d3b0 {
 class hkpWorldObject
 {
@@ -3023,33 +2977,6 @@ class hkpWorldObject
     int unk60, unk64, unk68, unk6C, unk70, unk74, unk78, unk7C, unk80, unk84, unk88;
 };
 }
-
-class FUN_00c9cf60 : public FUN_00c9d3b0::hkpWorldObject
-{
-  public:
-    virtual ~FUN_00c9cf60() throw();
-
-    int unk8C, unk90, unk94;
-    LimitUtilC9CF* m_pEntityUserData;
-    float m_fBulletSpread;
-    void* m_pShape;
-    unsigned int m_uiFilterInfo;
-    unsigned short m_usStorageIndex;
-    unsigned short m_usNextProcessCallbackDelay;
-    hkSmallArrayC9CF<hkConstraintInternalC9CF> m_eSmallArraySerializeOverrideType;
-    hkArrayC9CF<void*> m_kSlaveConstraints;
-    hkArrayC9CF<unsigned char> m_pByteBuffer;
-    void* m_pSimulationIsland;
-    int unkD0;
-    unsigned int m_uiUniqueId;
-    int unkD8, unkDC;
-    FUN_00d1dff0 m_pMotionState;
-    hkSmallArrayC9CF<void*> m_kContactListeners;
-    hkSmallArrayC9CF<void*> m_ppActions;
-    hkRefPtrC9CF<hkReferencedObjectC9CF> m_pLocalFrame;
-    FUN_00c9d340* m_pExtendedListeners;
-    int unk218, unk21C;
-};
 
 }  // namespace fnv_00c9cf60
 

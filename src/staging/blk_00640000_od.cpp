@@ -121,11 +121,6 @@ template <class T> struct SettingT
 
 extern "C" void __cdecl FUN_0064e3f0(int, int, int);
 
-struct FUN_0065e9a0_holder
-{
-    void FUN_0065e9a0(int* p);
-};
-
 struct FUN_00657880_class
 {
     bool FUN_00658160(int);
@@ -139,7 +134,6 @@ bool FUN_00657880_class::operator==(int other)
 }
 
 extern "C" void __cdecl FUN_00659230(int, int);
-extern int DAT_01065870;
 
 extern "C" void* __cdecl NiFreeAlias(void*);
 
@@ -161,12 +155,6 @@ void BSFaceGenModelMap::FUN_00658b80(NiTStringTemplateMap* pStringMap)
     if (*(unsigned char*)((char*)this + 0x10))
         NiFreeAlias((void*)pStringMap->m_pObject);
 }
-
-struct FUN_00658d30_class
-{
-    void __thiscall FUN_00658d50();
-    void __thiscall FUN_00658d30();
-};
 
 struct FUN_006592f0
 {
@@ -205,35 +193,6 @@ int FUN_0065cc50_Class::FUN_0065cc50()
 {
     return *(int*)((char*)this + 0x10) - *(int*)((char*)this + 0xc);
 }
-
-struct FUN_0065e9a0
-{
-    void __thiscall Destroy(void* p);
-};
-
-extern "C" void __cdecl FUN_0065f9a0(int, int, int);
-
-struct FUN_0065f400_class
-{
-    void __thiscall FUN_0065f400(int a, int b);
-};
-
-struct FUN_0065f7c0_Class
-{
-    void FUN_0065f7c0();
-};
-
-struct FUN_0065f580_Class
-{
-    void FUN_0065f580();
-};
-
-extern "C" void __cdecl FUN_0065f9e0(int a, int b);
-
-struct FUN_0065f6c0_class
-{
-    void __thiscall FUN_0065f6c0(int a);
-};
 
 extern void* DAT_010658d0;
 
@@ -382,12 +341,6 @@ template <typename T> struct FaceGenMatrix
     ~FaceGenMatrix();
     char data[32];
 };
-struct FUN_00659440
-{
-    char pad[8];
-    FaceGenMatrix<float> arr[4];
-    ~FUN_00659440();
-};
 }  // namespace fnv_00659440
 
 extern "C" __declspec(dllimport) void* __stdcall CreateSemaphoreA(void*, long, long, const char*);
@@ -504,11 +457,6 @@ struct _Out_0044a170
 };
 }  // namespace fnv_0065f550
 
-struct S_0065f7c0
-{
-    unsigned int FUN_0065f7c0();
-};
-
 namespace fnv_0065f960 {
 struct Interface
 {
@@ -518,14 +466,6 @@ unsigned char __cdecl FUN_0065e750(int* a, int* b);
 }  // namespace fnv_0065f960
 
 unsigned char __cdecl FUN_0065e750(void* a, void* b);
-void __cdecl FUN_0065ff00(void* a, void* b, void* c, unsigned char d);
-
-extern "C" void __cdecl FUN_00660130(int a, int b, int c, int d, int e, int f);
-
-struct FUN_0065ff30_Class
-{
-    void __thiscall FUN_0065ff30(int a, int b, int c, int d, int e);
-};
 
 struct FUN_0065ff60_class
 {
@@ -558,22 +498,9 @@ bool FUN_00657880_class::FUN_00658160(int other)
                    (*(unsigned int*)((char*)this + 0x18) << 2) * *(unsigned int*)((char*)this + 0x1c)) == 0;
 }
 
-struct EGMDeltaList;
-int __fastcall FUN_00657bc0(EGMDeltaList*);
 struct Elem_65eed0
 {
     short a, b, c;
-};
-
-struct FUN_0065f430_class
-{
-    void* m_iWordAt00;
-    int m_iWordAt04;
-    int m_8;
-    void* m_iThirdValue;
-    int m_10;
-    int m_14;
-    void FUN_0065f430();
 };
 
 void* __cdecl NiMalloc(unsigned int);
@@ -603,11 +530,6 @@ FUN_00659490_cls2* FUN_00659490_cls2::InitArray(int count)
 struct Helper62d0
 {
     void* operator=(const void*);
-};
-
-struct FUN_00658bb0 : FUN_00658d30_class
-{
-    ~FUN_00658bb0();
 };
 
 struct FUN_00508050
@@ -1134,33 +1056,6 @@ struct FNVPair8
 namespace fnv_0065f640 {
 // vector<T>::_Xlen: report a length error by throwing length_error("vector<T> too long").
 
-class TooLongString
-{
-  public:
-    int m_aiBuf0;
-    int m_aiBuf1;
-    int m_aiBuf2;
-    int m_aiBuf3;
-    unsigned int m_uiSize;
-    unsigned int m_uiRes;
-    int m_iAlloc;
-
-    TooLongString(const char* pText);
-    ~TooLongString();
-};
-
-class LengthError
-{
-  public:
-    const char* m_pWhat;
-    int m_iDoFree;
-    TooLongString m_kStr;
-
-    LengthError(const TooLongString& kError);
-    LengthError(const LengthError& kOther);
-    virtual ~LengthError();
-};
-
 }  // namespace fnv_0065f640
 
 struct C65F700Node;
@@ -1302,24 +1197,9 @@ FUN_00658d50::~FUN_00658d50()
     }
 }
 
-struct ObjectCleanupBase658e10
-{
-    virtual ~ObjectCleanupBase658e10();
-};
-struct FUN_00658e10 : ObjectCleanupBase658e10
-{
-    void FUN_00438af0();
-    virtual ~FUN_00658e10();
-};
-
 unsigned char* __cdecl FUN_0065fd70(unsigned char* out, int* a1, int* a2);
 
 typedef int* Iter65E;
-
-struct FUN_0065ee70 : FUN_0065cfb0
-{
-    ~FUN_0065ee70();
-};
 
 // Copy-style range helper: unwrap both iterators and forward them with the iterator-category and range tags.
 
@@ -1387,43 +1267,6 @@ class NiObjectNET : public NiObject
 {
   public:
     bool AddExtraData(NiExtraData* pExtraData);
-};
-
-struct S_0065fb10_Elem
-{
-    short a;
-    short b;
-    short c;
-};
-struct S_0065fb10_Alloc
-{
-    S_0065fb10_Alloc(const S_0065fb10_Alloc&);
-};
-struct S_0065fb10_Iter
-{
-    S_0065fb10_Elem* ptr;
-    void* cont;
-};
-struct S_0065fb10_Base
-{
-    int unk00;
-    int unk04;
-    S_0065fb10_Alloc _Alval;
-    S_0065fb10_Elem* _Myfirst;
-    S_0065fb10_Elem* _Mylast;
-    S_0065fb10_Elem* _Myend;
-    S_0065fb10_Base(S_0065fb10_Alloc al);
-    ~S_0065fb10_Base();
-    unsigned int FUN_00657bc0() const;
-    bool FUN_0065f380(unsigned int n);
-    S_0065fb10_Iter FUN_0065fd10() const;
-    S_0065fb10_Iter FUN_0065fd40() const;
-    S_0065fb10_Elem* FUN_0065ff30(S_0065fb10_Iter first, S_0065fb10_Iter last, S_0065fb10_Elem* dest);
-    void FUN_0065f430();
-};
-struct FUN_0065fb10 : S_0065fb10_Base
-{
-    FUN_0065fb10(const FUN_0065fb10& other);
 };
 
 struct ObjectPointer64ce20
@@ -1547,26 +1390,7 @@ FUN_0065d3a0::FUN_0065d3a0(FUN_0065de30 al) throw() : FUN_0065dc90(al), alval(al
 
 }
 
-struct Elem6_f380
-{
-    short a, b, c;
-};
-struct Alloc_f380
-{
-    Elem6_f380* FUN_0065f6c0(unsigned int n);
-};
 void __cdecl ThrowVectorTooLong();
-struct VecF380
-{
-    int unk00;
-    int unk04;
-    Alloc_f380 _Alval;
-    Elem6_f380* _Myfirst;
-    Elem6_f380* _Mylast;
-    Elem6_f380* _Myend;
-    unsigned int FUN_0065f580() const;
-    bool FUN_0065f380(unsigned int _Capacity);
-};
 
 #include <math.h>
 template <class Collection> class SettingT
@@ -1588,10 +1412,6 @@ struct BGSLoadGameBuffer;
 struct Interface
 {
     static void __cdecl PrintDebugMessage(BGSLoadGameBuffer*);
-};
-struct FUN_0065e9a0_Class
-{
-    void __thiscall FUN_0065e9a0(BGSLoadGameBuffer* p);
 };
 
 namespace fnv_0065ec40 {

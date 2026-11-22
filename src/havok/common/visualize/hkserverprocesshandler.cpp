@@ -421,27 +421,6 @@ class hkInterfaceBD610
     int unk04;
 };
 
-class hkOwnedD610
-{
-  public:
-    virtual ~hkOwnedD610() throw();
-};
-
-class FUN_00d610e0 : public hkReferencedObjectD610, public hkInterfaceAD610, public hkInterfaceBD610
-{
-  public:
-    virtual ~FUN_00d610e0() throw();
-
-    hkOwnedD610* m_14;
-    hkOwnedD610* m_18;
-    hkOwnedD610* m_1c;
-    int unk20;
-    hkReferencedObjectD610 m_24;
-    hkPointerMapD610 m_2c;
-    hkArrayD610<hkOwnedD610*> m_38;
-    hkArrayD610<int> m_44;
-};
-
 struct hkBoolD611
 {
     char m_cBooleanValue;

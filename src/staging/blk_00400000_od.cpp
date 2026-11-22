@@ -175,24 +175,10 @@ struct BSExtraData
 }  // namespace fnv_00411ea0
 
 extern int DAT_01012238;
-void __cdecl FUN_00aa10f0(void* p);
 
-struct C405250Node
-{
-    C405250Node* next;
-    void* payload;
-};
 struct FUN_00405310
 {
     virtual ~FUN_00405310();
-};
-struct FUN_00405250 : public FUN_00405310
-{
-    unsigned int count;
-    C405250Node** buckets;
-    int reserved;
-    unsigned char ownsData;
-    virtual ~FUN_00405250();
 };
 
 class TESForm
@@ -219,24 +205,7 @@ template <class T> class SettingCollection
     char path[260];
     void* handle;
 };
-struct SettingMapNode;
 // Representative of the native case-insensitive setting pointer map.
-class SettingPointerMap
-{
-  public:
-    virtual ~SettingPointerMap();
-    unsigned int hashSize;
-    SettingMapNode** hashTable;
-    unsigned int count;
-    void RemoveAll();
-};
-// Native SettingCollectionMap<Setting> destructor.
-class FUN_00404c00 : public SettingCollection<Setting>
-{
-  public:
-    SettingPointerMap settings;
-    virtual ~FUN_00404c00();
-};
 
 namespace fnv_00405310 {
 void __fastcall DeleteAllEntries(void* pkMap);

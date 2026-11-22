@@ -2,23 +2,6 @@
 // src/havok/common/serialize/data/dict/hkdataobjectdict.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/common/serialize/data/dict/hkdataobjectdict.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-struct FUN_00dc8e50_Class
-{
-    int m_00;
-    int m_04;
-    int m_08;
-    int m_0c;
-    int m_10;
-    int m_14;
-    int m_18;
-    int m_1c;
-    int m_20;
-    int m_24;
-    int m_28;
-    int m_2c;
-    int* FindEntry(int value);
-};
-
 struct FUN_00dc6ff0_Stream
 {
     virtual void f0()
@@ -903,14 +886,6 @@ struct hkDataRefCountedDC88
     }
 };
 
-union hkDataValueDC88
-{
-    void* m_pResource;
-    hkDataRefCountedDC88* m_pkRef;
-    int m_iString;
-    double m_dPad;
-};
-
 }  // namespace fnv_00dc88c0
 
 namespace fnv_00dc8d20 {
@@ -1080,39 +1055,11 @@ template <class T> class hkArrayDC96
     }
 };
 
-class hkCountedDC96
-{
-  public:
-    virtual ~hkCountedDC96() throw();
-    int m_04;
-    int m_uiItemCount;
-};
-
-struct hkEntryDC96
-{
-    int m_00;
-    int m_04;
-    int m_08;
-    int m_0c;
-};
-
 class hkBaseDC96
 {
   public:
     virtual ~hkBaseDC96() throw()
     {}
-};
-
-class FUN_00dc96a0 : public hkBaseDC96
-{
-  public:
-    virtual ~FUN_00dc96a0() throw();
-    void FUN_00dc90a0() throw();
-
-    int m_04;
-    int m_08;
-    hkCountedDC96* m_ref;
-    hkArrayDC96<hkEntryDC96> m_entries;
 };
 
 }  // namespace fnv_00dc96a0
@@ -1511,15 +1458,6 @@ class hkDataRefCountedDCA0
     }
 };
 
-class FUN_00dca0f0 : public hkDataRefCountedDCA0
-{
-  public:
-    hkArrayDCA0<hkDataRefCountedDCA0*> m_members;
-    hkDataRefCountedDCA0* m_class;
-
-    virtual ~FUN_00dca0f0() throw();
-};
-
 }  // namespace fnv_00dca0f0
 
 namespace fnv_00dca190 {
@@ -1896,15 +1834,6 @@ class hkRefObjDCA6
 };
 
 void __cdecl FUN_00cb13c0(int p) throw();
-
-class FUN_00dca6b0 : public hkRefObjDCA6
-{
-  public:
-    int unk08;
-    hkArrayDCA6<int> m_pStringFunctions;
-
-    virtual ~FUN_00dca6b0() throw();
-};
 
 class hkMemoryAllocatorDCA7
 {
@@ -5277,9 +5206,6 @@ struct hkDataRefCounted
     int unk04;
     int referenceCount;
 };
-struct hkDataObjectImpl : hkDataRefCounted
-{
-};
 struct hkDataClassDict;
 struct hkDataMemberInfo
 {
@@ -5297,12 +5223,6 @@ union hkDataValue
     hkDataRefCounted* object;
     char* string;
     void* allocation;
-};
-struct hkDataMemberValue
-{
-    const char* name;
-    int unk04;
-    hkDataValue value;
 };
 struct hkDataClassDict
 {
@@ -5343,12 +5263,6 @@ template <class T> struct HavokElementArray
 };
 template <class T> struct hkArray : HavokElementArray<T>
 {
-};
-struct hkDataObjectDict : hkDataObjectImpl
-{
-    hkDataClassDict* pClassInfo;
-    hkArray<hkDataMemberValue> members;
-    void FUN_00dc90a0();
 };
 
 class hkMemoryAllocatorDCA

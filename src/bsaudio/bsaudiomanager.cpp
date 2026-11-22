@@ -78,11 +78,6 @@ struct BottomlessStack
 };
 typedef char _sizecheck_AudioMessageStack[sizeof(BottomlessStack) == 16 ? 1 : -1];
 
-struct FUN_00ae7510 : public BottomlessStack
-{
-    FUN_00ae7510();
-};
-
 struct MemoryManager
 {
     void __thiscall Deallocate(void*);

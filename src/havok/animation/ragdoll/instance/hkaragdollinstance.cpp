@@ -59,10 +59,6 @@ template <class T> struct ObjectArray
 namespace fnv_00ce2600 {
 extern int DAT_010cb830;
 extern int DAT_0102e388;
-struct FnvRefObject
-{
-    void FUN_00c905b0() throw();
-};
 struct FnvMemoryManager
 {
     virtual void f0();
@@ -106,12 +102,6 @@ struct FnvParent
     {
         vtbl = &DAT_0102e388;
     }
-};
-struct FUN_00ce2600 : FnvParent
-{
-    FnvArray bodies, constraints, mapping;
-    FnvRefObject* skeleton;
-    ~FUN_00ce2600() throw();
 };
 }  // namespace fnv_00ce2600
 

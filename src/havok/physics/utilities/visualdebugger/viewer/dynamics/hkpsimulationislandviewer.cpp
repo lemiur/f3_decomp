@@ -99,38 +99,6 @@ struct S_Elem2
 {
     void ClearValue(void* d) throw();
 };
-struct S_P
-{
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2C;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3C;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4C;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5C;
-    int unk60;
-    int unk64;
-    int unk68;
-    S_Elem2** m6c;
-    int m70;
-};
 struct S_Heap
 {
     virtual void v0();
@@ -146,29 +114,6 @@ struct S_Holder
     int unk08;
     int unk0c;
     S_Heap* m10;
-};
-struct S_B0
-{
-    virtual void b0v0();
-    int unk04;
-};
-struct S_B8
-{
-    virtual void b8v0();
-    int unk0C;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
-};
-struct S_B20
-{
-    virtual void b20v0();
-};
-struct FUN_00ddcc60 : S_B0, S_B8, S_B20
-{
-    S_P* m24;
-    virtual ~FUN_00ddcc60() throw();
 };
 struct S_D
 {
@@ -229,12 +174,6 @@ struct S_Arr
         m_data = 0;
         m_cap = 0x80000000;
     }
-};
-struct FUN_00d64ae0 : FUN_00ddcc60, S_D
-{
-    S_Arr m30;
-    S_Arr m3c;
-    virtual ~FUN_00d64ae0() throw();
 };
 
 class RegistryOwner

@@ -7,8 +7,6 @@
 
 extern "C" void __cdecl Deallocate(void*);
 
-struct FUN_00e234e0_ { void FreeAllItems(); };
-
 void __cdecl ProcessEntries();
 void __cdecl FUN_00e23a10();
 
@@ -1130,67 +1128,7 @@ struct __declspec(align(16)) HullTriangle {
 };
 
 extern "C" double __cdecl sqrt(double);
-extern float DAT_010d51c4;
-extern double DAT_01021928;
-extern double DAT_010290b0;
-extern double DAT_0109cc78;
 extern int DAT_010eb000;
-extern int DAT_011bdee0;
-struct FUN_00d9c110_object {
-    void FUN_00d9c110();
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5c;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6c;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7c;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8c;
-    int unk90;
-    int unk94;
-    int unk98;
-    int unk9c;
-    int unka0;
-    int unka4;
-    int unka8;
-    int unkac;
-    int unkb0;
-    int unkb4;
-    int unkb8;
-    int unkbc;
-};
-struct FUN_00e1b750 {
-    int* vtable;
-    short unk04; volatile short active06;
-    volatile int f08, f0c, f10, f14, f18; int unk1c;
-    volatile int f20, f24, f28, f2c, f30; int unk34;
-    int* ptr38;
-    int unk3c;
-    FUN_00d9c110_object sub40;
-    volatile int fc0, fc4, fc8, fcc, fd0, fd4, fd8, fdc, fe0; int unk_e4;
-    int unke8;
-    int unkec;
-    int unkf0;
-    int unkf4;
-    int unkf8;
-    int unkfc;
-    int unk100;
-    volatile float f104; float f108, f10c;
-    FUN_00e1b750();
-    void ResetState();
-};
 
 class E21CE0Ostream {
 public:
@@ -2678,21 +2616,6 @@ struct HullTriListAN
 
 namespace fnv_00e157f0 {
 extern float DAT_01267e30;
-
-struct TargetClass {
-    void ReleaseSubobject();
-
-    char pad00[8];
-    FUN_00e234e0_ m_sub8;
-    char pad09[0x17];
-    FUN_00e234e0_ m_sub20;
-    char pad21[0xcf];
-    __m128 m_vecF0;
-    bool m_b100;
-    bool m_b101;
-
-    void ResetState();
-};
 
 }  // namespace fnv_00e157f0
 

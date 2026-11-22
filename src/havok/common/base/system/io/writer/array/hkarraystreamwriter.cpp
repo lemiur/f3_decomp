@@ -196,16 +196,6 @@ class hkReferencedObjectD46C
     }
 };
 
-class FUN_00d46c30 : public hkReferencedObjectD46C
-{
-  public:
-    FUN_00d46be0_class* m_stream;
-    int m_0c;
-    int m_ownership;
-
-    virtual ~FUN_00d46c30() throw();
-};
-
 struct State
 {
     bool status;

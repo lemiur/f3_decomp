@@ -37,16 +37,6 @@ struct GlobalObject_0048f200
 };
 GlobalObject_0048f200::GlobalObject_0048f200()
 {}
-struct FUN_00759760_shell : GlobalObject_0048f200
-{
-    FUN_00759760_shell();
-};
-
-struct S_7597c0
-{
-    int __thiscall FUN_007597c0(int);
-};
-extern S_7597c0* DAT_011d9338;
 
 void __cdecl operator delete(void*);
 
@@ -54,14 +44,6 @@ namespace fnv_007597f0 {
 struct GlobalObject_0048f200
 {
     ~GlobalObject_0048f200();
-};
-struct FUN_00759850_owner
-{
-    void __thiscall FUN_00759850();
-};
-struct FUN_007597f0 : GlobalObject_0048f200
-{
-    ~FUN_007597f0();
 };
 }  // namespace fnv_007597f0
 
@@ -81,47 +63,6 @@ struct GO
     operator unsigned int();
 };
 
-struct MenuBase
-{
-    virtual ~MenuBase();
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
-    int unk14;
-    int unk18;
-    int unk1c;
-    int unk20;
-    int unk24;
-    int unk28;
-    int unk2c;
-    int unk30;
-    int unk34;
-    int unk38;
-    int unk3c;
-    int unk40;
-    int unk44;
-    int unk48;
-    int unk4c;
-    int unk50;
-    int unk54;
-    int unk58;
-    int unk5c;
-    int unk60;
-    int unk64;
-};
-struct Obj68
-{
-    int a;
-    ~Obj68();
-};
-struct SList
-{
-    void* head;
-    void* next;
-    void RemoveAll();
-    ~SList();
-};
 struct BStr
 {
     char* p;
@@ -129,49 +70,7 @@ struct BStr
     short max;
     ~BStr();
 };
-struct SoundH
-{
-    int a;
-    int b;
-    int c;
-    void Stop();
-    void FUN_00ad8d10();
-    ~SoundH();
-};
-struct SysColorMgr
-{
-    static SysColorMgr* GetSingleton();
-    void ApplyToChild(int, int*);
-};
-extern int DAT_011d9334;
 extern int DAT_011d934c;
-void FUN_00759780();
-struct FUN_00757a50 : MenuBase
-{
-    Obj68 m68;
-    int unk6c;
-    int unk70;
-    int unk74;
-    int unk78;
-    int unk7c;
-    int unk80;
-    int unk84;
-    int unk88;
-    int unk8c;
-    int unk90;
-    int unk94;
-    SList list98;
-    int unka0;
-    int unka4;
-    int unka8;
-    int unkac;
-    int unkb0;
-    BStr strB4;
-    int unkbc;
-    int unkc0;
-    SoundH sounds[3];
-    virtual ~FUN_00757a50();
-};
 
 unsigned int __cdecl gm_GetTickCount();
 

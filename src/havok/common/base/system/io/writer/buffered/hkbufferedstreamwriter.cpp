@@ -46,30 +46,8 @@ int __thiscall FUN_00d27260_standin::FUN_00d27260(const void* data, int size)
     return size;
 }
 
-struct DDCC60World
-{
-    void removeReference();
-};
-
 void __cdecl FUN_00d272e0();
 void* __cdecl _D1A0E0GetMemoryRouter();
-void __cdecl FUN_00c85660(void*, void*);
-
-extern int DAT_010ce448;
-extern int _DAT_0102e388;
-
-struct FUN_00d27520
-{
-    void* m_vtbl;           // +0x00
-    int m_04;               // +0x04
-    DDCC60World* m_pWorld;  // +0x08
-    void* m_pData;          // +0x0c
-    int m_10;               // +0x10
-    int m_14;               // +0x14
-    char m_18;              // +0x18
-
-    ~FUN_00d27520();
-};
 
 namespace fnv_00d27570 {
 struct FUN_00d27570Router

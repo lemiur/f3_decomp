@@ -728,11 +728,6 @@ struct hkMemoryRouterCF5
 
 extern "C" hkMemoryRouterCF5* __cdecl FUN_00c85750() throw();
 
-struct hkRefCF5
-{
-    void FUN_00c905b0() throw();
-};
-
 template <class T> class hkArrayCF5
 {
   public:
@@ -766,48 +761,11 @@ class hkBaseObjectCF5
     {}
 };
 
-class hkReferencedObjectCF5 : public hkBaseObjectCF5
-{
-  public:
-    unsigned short m_usMemSizeAndFlags;
-    short m_sReferenceCount;
-};
-
-class hkpShapeCF5 : public hkReferencedObjectCF5
-{
-  public:
-    unsigned int m_ulUserData;
-    int m_type;
-};
-
 class hkpShapeContainerCF5
 {
   public:
     virtual ~hkpShapeContainerCF5()
     {}
-};
-
-class hkpShapeCollectionCF5 : public hkpShapeCF5, public hkpShapeContainerCF5
-{
-  public:
-    bool m_bDisableWelding;
-    unsigned char m_eCollectionType;
-};
-
-struct hkpListShapeChildInfoCF5
-{
-    hkRefCF5* m_pCollisionShape;
-    unsigned int m_uiCollisionFilterData;
-    int m_iShapeKey;
-    int m_iChildShapeCount;
-};
-
-class FUN_00cf5750 : public hkpShapeCollectionCF5
-{
-  public:
-    hkArrayCF5<hkpListShapeChildInfoCF5> m_kChildInfoList;
-
-    virtual ~FUN_00cf5750();
 };
 
 }  // namespace fnv_00cf5750

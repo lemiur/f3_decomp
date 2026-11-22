@@ -226,17 +226,6 @@ struct BSStr
     ~BSStr();
 };
 
-struct StrMem
-{
-    BSStr m_bsstr;
-    unsigned char m_9;
-    unsigned char m_kPointA;
-    unsigned char m_kPointB;
-
-    StrMem();
-    ~StrMem();
-};
-
 struct SL
 {
     int m_iWordAt00;
@@ -597,20 +586,6 @@ struct Derived_00831fe0 : PrimaryBase_00831fe0, SecondaryBase_00831fe0
 
 Derived_00831fe0::Derived_00831fe0()
 {}
-
-struct BSS
-{
-    int m_kPointA;
-    int m_kPointB;
-    int m_iThirdValue;
-    int m_iFourthElementInteger;
-    ~BSS();
-};
-struct FUN_0083c750 : BSS
-{
-    BSS m_uiX;
-    ~FUN_0083c750();
-};
 
 namespace fnv_0082f1b0 {
 #include <windows.h>

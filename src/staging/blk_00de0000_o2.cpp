@@ -3995,18 +3995,6 @@ class DFFA90ListenerE
     virtual ~DFFA90ListenerE();
 };
 
-class FUN_00dffa90 : public DFFA90ReferencedObject,
-                     public DFFA90ListenerA,
-                     public DFFA90ListenerB,
-                     public DFFA90ListenerC,
-                     public DFFA90ListenerD,
-                     public DFFA90ListenerE
-{
-  public:
-    FUN_00dffa90(DFFA90FinishFlag flag);
-    virtual ~FUN_00dffa90();
-};
-
 namespace fnv_00dffb80 {
 // Forwarder: calls a handler object with one int argument, but only if the
 // handler pointer is non-null.

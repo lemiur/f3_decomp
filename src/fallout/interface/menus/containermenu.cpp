@@ -8,35 +8,6 @@ struct FUN_00a011f0_shell
     char* __thiscall FUN_00a011f0(int);
 };
 
-struct FUN_007308e0
-{
-    virtual ~FUN_007308e0();
-};
-struct Date
-{
-    virtual ~Date();
-};
-struct ListX
-{
-    virtual ~ListX();
-};
-struct Menu_007a8b10
-{
-    virtual ~Menu_007a8b10();
-};
-struct FUN_0075b270 : Menu_007a8b10
-{
-    char pad0[0x78 - 4];
-    ListX m_kNode;
-    char pad1[0x98 - 0x78 - 4];
-    FUN_007308e0 m_kPointA;
-    char pad2[0xc8 - 0x98 - 4];
-    FUN_007308e0 m_kPointB;
-    char pad3[0x100 - 0xc8 - 4];
-    Date m_date;
-    virtual ~FUN_0075b270();
-};
-
 class TESForm
 {
   public:

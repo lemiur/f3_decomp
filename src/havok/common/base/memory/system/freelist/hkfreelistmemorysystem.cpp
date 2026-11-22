@@ -69,15 +69,6 @@ struct PtrArrayMember
     }
 };
 
-struct FUN_00cd0c80
-{
-    int unk00;
-    PtrArrayMember m_kFirst;
-    PtrArrayMember m_kSecond;
-
-    ~FUN_00cd0c80() throw();
-};
-
 struct CD0730Object
 {
     virtual int FUN_00cd0730(const void* info) const;

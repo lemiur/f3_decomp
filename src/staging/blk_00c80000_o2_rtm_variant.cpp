@@ -1798,13 +1798,6 @@ struct LargeArray_c9ac00
     unsigned int m_uiGrowBy;
     void Resize(unsigned int uiMaxSize);
 };
-void FUN_00aa10f0(int value);
-struct SubObject_c9ad60
-{
-    int m_00;
-
-    virtual ~SubObject_c9ad60();
-};
 // FUN_00c9add0 : a one-line function - getter
 struct S_00c9af40_BinStream
 {
