@@ -6851,26 +6851,6 @@ struct S00d7fb80_TriangleList {
 __forceinline void* operator new(unsigned int, S00d7fb80_Vertex* p) throw() { return p; }
 __forceinline void* operator new(unsigned int, S00d7fb80_Triangle* p) throw() { return p; }
 
-__declspec(noinline) S00d7fb80_Vertex* S00d7fb80_VertexList::CloneNode(const S00d7fb80_Vertex& v)
-{
-    S00d7fb80_Vertex* item = new (allocateItem()) S00d7fb80_Vertex(v);
-    item->m_pSecondNode = 0;
-    item->m_next = m_uiBufferCapacity;
-    if (m_uiBufferCapacity) m_uiBufferCapacity->m_pSecondNode = item;
-    m_uiBufferCapacity = item;
-    m_iAllocatedCount++;
-    return item;
-}
-__declspec(noinline) S00d7fb80_Triangle* S00d7fb80_TriangleList::FUN_00d7efc0(const S00d7fb80_Triangle& t)
-{
-    S00d7fb80_Triangle* item = new (allocateItem()) S00d7fb80_Triangle(t);
-    item->m_pSecondNode = 0;
-    item->m_next = m_uiBufferCapacity;
-    if (m_uiBufferCapacity) m_uiBufferCapacity->m_pSecondNode = item;
-    m_uiBufferCapacity = item;
-    m_iAllocatedCount++;
-    return item;
-}
 struct S00d7fb80_Bool {
     char m_cBooleanValue;
     __forceinline operator bool() const { return m_cBooleanValue != 0; }

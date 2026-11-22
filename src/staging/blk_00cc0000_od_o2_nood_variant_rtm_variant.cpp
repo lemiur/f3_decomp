@@ -4779,27 +4779,6 @@ static __forceinline ::__m128 RotatedInverseDir(const ::__m128& q, const ::__m12
     return _mm_add_ps(c.m_vComponents, c.m_vComponents);
 }
 
-__declspec(noinline) void MultiplyQuaternions(const hkQuaternion& q0,const hkQuaternion& q1,hkQuaternion& out)
-{
-    const ::__m128 a=q0.m_vec.m_vComponents;
-    const ::__m128 dots=Dot3S(q0.m_vec.m_vComponents,q1.m_vec.m_vComponents).m_vValue;
-    const ::__m128 b=q1.m_vec.m_vComponents;
-    IkVector4 cross;
-    cross.m_vComponents=_mm_sub_ps(_mm_mul_ps(_mm_shuffle_ps(b,b,0xd2),_mm_shuffle_ps(a,a,0xc9)),_mm_mul_ps(_mm_shuffle_ps(b,b,0xc9),_mm_shuffle_ps(a,a,0xd2)));
-    const ::__m128 aw=_mm_shuffle_ps(a,a,0xff);
-    const ::__m128 bw=_mm_shuffle_ps(b,b,0xff);
-    IkVector4 vec;
-    vec.m_vComponents=_mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(aw,aw,0),b),cross.m_vComponents);
-    vec.m_vComponents=_mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(bw,bw,0),a),vec.m_vComponents);
-    const ::__m128 mul=_mm_mul_ps(b,a);
-    const ::__m128 real=_mm_sub_ps(mul,_mm_shuffle_ps(dots,dots,0));
-    const ::__m128 high=_mm_unpackhi_ps(vec.m_vComponents,real);
-    out.m_vec.m_vComponents=_mm_shuffle_ps(vec.m_vComponents,high,0xc4);
-}
-
-__declspec(noinline) void hkQuaternion::FUN_00c66320(const hkQuaternion& q0, const hkQuaternion& q1)
-{ MultiplyQuaternions(q0,q1,*this); }
-
 extern "C" {
 ::__m128 _mm_rsqrt_ps(::__m128);::__m128 _mm_cmpeq_ps(::__m128,::__m128);
 ::__m128 _mm_unpacklo_ps(::__m128,::__m128);::__m128 _mm_movelh_ps(::__m128,::__m128);

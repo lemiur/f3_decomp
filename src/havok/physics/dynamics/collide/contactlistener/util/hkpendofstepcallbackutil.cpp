@@ -738,11 +738,6 @@ struct ElemArrayD9E
     void SwapThreeInts(ElemArrayD9E& other);
 };
 
-__declspec(noinline) S_00d9e2b0_Bool StripCollisionD9E::Equals(const StripCollisionD9E& other) const
-{
-    return S_00d9e2b0_Bool(m_iWordAt00 == other.m_iWordAt00 && m_iWordAt04 == other.m_iWordAt04 && m_8 == other.m_8);
-}
-
 struct hkMergeTarget8b0
 {
     void SwapThreeInts(int* pkSource);
@@ -787,10 +782,6 @@ struct BatchCollision : S_00d9e2b0
 {
     __declspec(noinline) S_00d9e2b0_Bool Equals(const BatchCollision& other) const;
 };
-S_00d9e2b0_Bool BatchCollision::Equals(const BatchCollision& other) const
-{
-    return other.m_iWordAt00 == m_iWordAt00 && other.m_iWordAt04 == m_iWordAt04 && other.m_8 == m_8;
-}
 struct BatchSwap
 {
     void SwapThreeInts(int*);

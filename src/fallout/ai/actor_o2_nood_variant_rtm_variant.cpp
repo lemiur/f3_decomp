@@ -3605,11 +3605,6 @@ __declspec(noinline) PoseTransform* FUN_00c74dd0(void* ptr,NiTransform* source) 
  output->scale.bits.quad=LoadScalar(&source->scale);
  return output;
 }
-__declspec(noinline) void FUN_00cb1260(void* to,const void* from,unsigned n) {
- unsigned char* dest=static_cast<unsigned char*>(to);
- const unsigned char* src=static_cast<const unsigned char*>(from);
- while(n--) *dest++=*src++;
-}
 struct PoseOwner {
     int unk000;
     int unk004;
@@ -3783,22 +3778,6 @@ struct PoseOwner {
     PoseCount* counts;
     void FUN_00c79680();
 };
-
-__declspec(noinline) void Quat::FUN_00c66320(const Quat* a,const Quat* b) {
-    ::__m128 av=a->m_vec.bits.quad, bv=b->m_vec.bits.quad;
-    ::__m128 product=_mm_mul_ps(av,bv);
-    ::__m128 sum=_mm_add_ss(_mm_shuffle_ps(product,product,85),product);
-    sum=_mm_add_ss(_mm_shuffle_ps(product,product,170),sum);
-    ::__m128 w=PoseFloatHardware::_mm_sub_ps(product,_mm_shuffle_ps(sum,sum,0));
-    ::__m128 c0=_mm_mul_ps(_mm_shuffle_ps(av,av,0xc9),_mm_shuffle_ps(bv,bv,0xd2));
-    ::__m128 c1=_mm_mul_ps(_mm_shuffle_ps(av,av,0xd2),_mm_shuffle_ps(bv,bv,0xc9));
-    ::__m128 cross=PoseFloatHardware::_mm_sub_ps(c0,c1);
-    ::__m128 aw=_mm_shuffle_ps(av,av,255); aw=_mm_shuffle_ps(aw,aw,0);
-    ::__m128 bw=_mm_shuffle_ps(bv,bv,255); bw=_mm_shuffle_ps(bw,bw,0);
-    ::__m128 xyz=_mm_add_ps(_mm_mul_ps(bw,av),_mm_add_ps(_mm_mul_ps(aw,bv),cross));
-    V4 result; result.bits.quad=_mm_shuffle_ps(xyz,_mm_unpackhi_ps(xyz,w),196);
-    FUN_00cb1260(this,&result,sizeof(result));
-}
 
 namespace RecordHardware {
 union __declspec(intrin_type) __declspec(align(16)) __m128 {

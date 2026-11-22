@@ -197,16 +197,6 @@ public:
     void insert(unsigned long key,unsigned long val) { FUN_00cb1870(TaskMemory::GetMonitorStream().heap,key,val); }
     unsigned long FindValueForKey(unsigned long key,unsigned long value) const { return LookupHashEntry(key,value); }
 };
-__declspec(noinline) unsigned long EntityIndexMap::LookupHashEntry(unsigned long key,unsigned long fallback) const throw() {
- if(mask>0) {
-  unsigned i=((key>>4)*2654435761ul)&mask;
-  while(data[i].key!=~0ul) {
-   if(data[i].key==key) return data[i].value;
-   i=(i+1)&mask;
-  }
- }
- return fallback;
-}
 
 struct TaskEntity;
 struct __declspec(align(16)) InternalConstraint {

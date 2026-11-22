@@ -397,24 +397,6 @@ struct S_00cd53a0_Matrix3
     float FUN_00cd53a0();
 };
 
-// Computes the Frobenius norm of the 3x3 matrix by summing the squares of the off-diagonal elements and returning the square root.
-// @fnv 0x00cd53a0
-float S_00cd53a0_Matrix3::FUN_00cd53a0()
-{
-    float sum = 0.0f;
-    for (int i = 0; i < 3; i++)
-    {
-        for (int j = 0; j < 3; j++)
-        {
-            if (i != j)
-            {
-                sum += m_col[j][i] * m_col[j][i];
-            }
-        }
-    }
-    return sqrtf(sum);
-}
-
 namespace cd5400 {
 struct Vec4
 {

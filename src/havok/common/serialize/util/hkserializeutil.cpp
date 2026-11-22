@@ -605,15 +605,6 @@ struct RootObject
         FUN_00dba7f0();
     }
 };
-__declspec(noinline) void RootObject::FUN_00dba7f0() throw()
-{
-    if (impl)
-    {
-        --impl->references;
-        if (--impl->externalRefs == 0)
-            delete impl;
-    }
-}
 struct NativeWorld
 {
     void* dispatch;

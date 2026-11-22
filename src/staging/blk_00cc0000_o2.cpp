@@ -22747,22 +22747,6 @@ public:
 };
 
 
-__declspec(noinline) void hkQuaternionCDA::FUN_00c66320(const hkQuaternionCDA& a, const hkQuaternionCDA& b)
-{
-    struct RawVector { __m128 value; };
-    RawVector storage;
-    hkVector4CDA& imaginary = *(hkVector4CDA*)&storage;
-    imaginary.setCross(a.m_vec, b.m_vec);
-    __m128 aw = _mm_shuffle_ps(quad(a.m_vec.m_vComponents), quad(a.m_vec.m_vComponents), 0xff);
-    __m128 bw = _mm_shuffle_ps(quad(b.m_vec.m_vComponents), quad(b.m_vec.m_vComponents), 0xff);
-    quad(imaginary.m_vComponents) = _mm_add_ps(quad(imaginary.m_vComponents), _mm_mul_ps(aw, quad(b.m_vec.m_vComponents)));
-    quad(imaginary.m_vComponents) = _mm_add_ps(quad(imaginary.m_vComponents), _mm_mul_ps(bw, quad(a.m_vec.m_vComponents)));
-    __m128 dot = a.m_vec.dot3(b.m_vec);
-    dot = _mm_shuffle_ps(dot, dot, 0);
-    __m128 real = _mm_sub_ps(_mm_mul_ps(quad(a.m_vec.m_vComponents), quad(b.m_vec.m_vComponents)), dot);
-    quad(m_vec.m_vComponents) = _mm_shuffle_ps(quad(imaginary.m_vComponents), _mm_unpackhi_ps(quad(imaginary.m_vComponents), real), 0xc4);
-}
-
 class hkQsTransformCDA {
 public:
     hkVector4CDA m_vTranslation;
