@@ -2,7 +2,7 @@
    their real class), carry its build/units.json entry over to the new decorated names, with the base tree's object as
    the oracle. No byte of the game is read: only the two compiled objects are compared.
 
-   f3resync HEAD_REPO BASE_REPO TEXT [--write] [--prune]
+   f3resync HEAD_REPO BASE_REPO TEXT [--write] [--prune] [--bind NAME=ADDR]...
    f3resync --roundtrip UNITS_JSON     (self-test: parse and print it back; must equal the file)
 
    For every unit of HEAD_REPO/build/units.json whose source contains TEXT (and the unit at the same position among
@@ -17,6 +17,9 @@
       base object's relocation at the same offset resolves to (same addend; string and float literals and the
       object's own static symbols are left alone);
    4. --prune: drop the unit's symbol keys that no symbol of the head object names.
+   --bind NAME=ADDR (repeatable): bind NAME in every processed unit whose head object refers to it and whose entry
+   does not bind it (for a name the base object does not use at that place, e.g. a static the shared headers now
+   name, NiGlobalStringTable::NULL_STRING for the empty-string handle).
    --write writes build/units.json back in its own format (json.dumps(indent=1), LF). Without it nothing is written.
 
    Build: build.cmd (VS2022 x64). */
@@ -661,6 +664,10 @@ static void set_symbol(JV *unit, const char *key, uint32_t addr)
     g_changed = 1;
 }
 
+static const char *g_bind_name[32];
+static uint32_t g_bind_addr[32];
+static int g_nbind;
+
 static void process(const char *head, const char *base, JV *hunit, JV *bunit, int idx, int prune)
 {
     char hobj[MAX_PATH], bobj[MAX_PATH];
@@ -806,6 +813,17 @@ static void process(const char *head, const char *base, JV *hunit, JV *bunit, in
         free(br);
         free(hr);
     }
+    /* --bind NAME=ADDR: a name the head object refers to that no base relocation explains */
+    for (int b = 0; b < g_nbind; b++) {
+        int present = 0;
+        for (int k = 0; k < hc.nsym && !present; k++)
+            if (hc.sym[k].name && hc.sym[k].sect == 0 && !strcmp(hc.sym[k].name, g_bind_name[b])) present = 1;
+        if (present && !jget(jget(hunit, "symbols"), g_bind_name[b])) {
+            set_symbol(hunit, g_bind_name[b], g_bind_addr[b]);
+            printf("  bind (given) %s -> 0x%08x\n", g_bind_name[b], g_bind_addr[b]);
+            binds++;
+        }
+    }
     /* 4. prune */
     if (prune) {
         JV *syms = jget(hunit, "symbols");
@@ -838,7 +856,7 @@ int main(int argc, char **argv)
         return 0;
     }
     if (argc < 4) {
-        fprintf(stderr, "usage: f3resync HEAD_REPO BASE_REPO TEXT [--write] [--prune]\n");
+        fprintf(stderr, "usage: f3resync HEAD_REPO BASE_REPO TEXT [--write] [--prune] [--bind NAME=ADDR]...\n");
         return 2;
     }
     const char *head = argv[1], *base = argv[2], *text = argv[3];
@@ -846,6 +864,13 @@ int main(int argc, char **argv)
     for (int i = 4; i < argc; i++) {
         if (!strcmp(argv[i], "--write")) write = 1;
         else if (!strcmp(argv[i], "--prune")) prune = 1;
+        else if (!strcmp(argv[i], "--bind") && i + 1 < argc && g_nbind < 32) {
+            char *eq = strchr(argv[++i], '=');
+            if (!eq) die("--bind NAME=ADDR");
+            *eq = 0;
+            g_bind_name[g_nbind] = argv[i];
+            g_bind_addr[g_nbind++] = (uint32_t)strtoul(eq + 1, NULL, 0);
+        }
         else die("unknown option %s", argv[i]);
     }
     setup_env();
