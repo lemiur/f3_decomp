@@ -1,4 +1,5 @@
 #include "f3_common.h"
+#include "havok/hkMonitorStream.h"
 // SSE_DECLARATIONS_DEFER_TO_SDK
 // src/havok/physics/internal/collide/gjk/hkpgsk.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/build/20091222_000100_aianbecldeph/source/physics/internal/collide/gjk/hkpgsk.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
@@ -1266,21 +1267,11 @@ struct F3MirrorCast
 bool* S00daac40_FUN_00daac40_cls::hkpGsk_castRay(S00daac40_RayArgument<bool*> out, int p2, int p3,
                                                S00daac40_RayArgument<S00daac40_RayParams*> apRayParams)
 {
-    volatile unsigned long ticks;
     __declspec(align(16)) S00daac40_Mat3 m;
     S00daac40_RayParams rayParams;
     bool hit;
 
-    S00daac40_ProfBuf* pProfBuf = (S00daac40_ProfBuf*)TlsGetValue(DAT_0126835c);
-    if (pProfBuf->m_pCur < pProfBuf->m_pRecordEnd)
-    {
-        S00daac40_ProfRec* pProfRec = pProfBuf->m_pCur;
-        pProfRec->m_pName = "TtGJK Ray Cast";
-        _ReadWriteBarrier();
-        ticks = (unsigned long)__rdtsc();
-        pProfRec->m_iTick = ticks;
-        pProfBuf->m_pCur = pProfRec + 1;
-    }
+    HK_TIMER_BEGIN("GJK Ray Cast", HK_NULL);
 
     rayParams = *apRayParams;
 
@@ -1299,16 +1290,7 @@ bool* S00daac40_FUN_00daac40_cls::hkpGsk_castRay(S00daac40_RayArgument<bool*> ou
 
     ((F3MirrorTarget*)this)->FUN_00a30fb0(&hit, p2, 0, &m, p3, &rayParams);
 
-    pProfBuf = (S00daac40_ProfBuf*)TlsGetValue(DAT_0126835c);
-    if (pProfBuf->m_pCur < pProfBuf->m_pRecordEnd)
-    {
-        S00daac40_ProfRec* pProfRec = pProfBuf->m_pCur;
-        pProfRec->m_pName = "Et";
-        _ReadWriteBarrier();
-        ticks = (unsigned long)__rdtsc();
-        pProfRec->m_iTick = ticks;
-        pProfBuf->m_pCur = pProfRec + 1;
-    }
+    HK_TIMER_END();
 
     if (hit && rayParams.m_v08.z != 0.0f)
     {

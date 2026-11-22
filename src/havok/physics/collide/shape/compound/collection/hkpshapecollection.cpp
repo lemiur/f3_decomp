@@ -1,4 +1,5 @@
 #include "f3_common.h"
+#include "havok/hkMonitorStream.h"
 // src/havok/physics/collide/shape/compound/collection/hkpshapecollection.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/physics/collide/shape/compound/collection/hkpshapecollection.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
@@ -137,18 +138,7 @@ class hkpRayShapeCollectionFilter
 // pdb: hkpShapeCollection::castRayImpl | hkpShapeCollection.obj | fnv360_0822_retail, objrun + skyrim(objrun), high
 hkBoolRet FUN_00d21450_Class::hkpShapeCollection_castRayImpl(const ShapeRayCastQuery& input, ShapeRayCastOutput& output) const
 {
-    volatile unsigned int time;
-    StringCursor* stream = (StringCursor*)TlsGetValue(DAT_0126835c);
-    char* current = stream->m_pTileTemplate;
-    if (current < stream->m_kRayEnd)
-    {
-        *(const char**)current = "TtrcShpCollect";
-        _ReadWriteBarrier();
-        time = (unsigned int)__rdtsc();
-        *(unsigned int*)(current + 4) = time;
-        current += 12;
-        stream->m_pTileTemplate = current;
-    }
+    HK_TIMER_BEGIN("rcShpCollect", HK_NULL);
     output.m_uiShapeKeyIndex++;
     const hkpShapeContainer* container = &m_container;
     hkpShapeKey uiHitKey = 0xffffffff;
@@ -187,17 +177,7 @@ hkBoolRet FUN_00d21450_Class::hkpShapeCollection_castRayImpl(const ShapeRayCastQ
     {
         output.m_uiShapeKeys[output.m_uiShapeKeyIndex] = uiHitKey;
     }
-    StringCursor* streamEnd = (StringCursor*)TlsGetValue(DAT_0126835c);
-    char* currentEnd = streamEnd->m_pTileTemplate;
-    if (currentEnd < streamEnd->m_kRayEnd)
-    {
-        *(const char**)currentEnd = "Et";
-        _ReadWriteBarrier();
-        time = (unsigned int)__rdtsc();
-        *(unsigned int*)(currentEnd + 4) = time;
-        currentEnd += 12;
-        streamEnd->m_pTileTemplate = currentEnd;
-    }
+    HK_TIMER_END();
     return hkBoolRet(uiHitKey != 0xffffffff);
 }
 

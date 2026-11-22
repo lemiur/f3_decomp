@@ -573008,14 +573008,13 @@
     "?FUN_00d34790@@YAXXZ": "0x00929cb0",
     "_DAT_0126835c": "0x0116913c",
     "??_C@_02DNLMNFDE@Et?$AA@": "0x00e32798",
-    "?str_010c41f8@@3QBDB": "0x00e32798",
     "?hkMonitorStreamTls@@3KA": "0x0116913c",
     "_QueryClosestPoints": "0x008f3260",
     "??_C@_0BC@JABNBDBC@TtShapeCollection?$AA@": "0x00e7f4f8",
-    "?g_tlsIndex@@3KA": "0x0116913c",
     "?ResizePairArray@@YAXPAXH@Z": "0x00901f10",
     "??_7FUN_00d440f0@@6B@": "0x00e7f510",
-    "?FUN_00901e90@@YAXPAXHH@Z": "0x00901e90"
+    "?FUN_00901e90@@YAXPAXHH@Z": "0x00901e90",
+    "?hkMonitorStream__m_instance@@3V?$hkThreadLocalData@PAVhkMonitorStream@@@@A": "0x0116913c"
    }
   },
   {
@@ -573060,7 +573059,6 @@
     "?FUN_00d34790@@YAXXZ": "0x00929cb0",
     "_DAT_0126835c": "0x0116913c",
     "??_C@_02DNLMNFDE@Et?$AA@": "0x00e32798",
-    "?str_010c41f8@@3QBDB": "0x00e32798",
     "?hkMonitorStreamTls@@3KA": "0x0116913c",
     "_QueryClosestPoints": "0x008f3260"
    }
@@ -574197,7 +574195,8 @@
     "?DAT_0104da48@fnv_00d33ca0@@3MA": "0x00de6e60",
     "?DAT_010cebe0@fnv_00d33ca0@@3HA": "0x00e7edbc",
     "?str_010cec4c@fnv_00d33ca0@@3PADA": "0x00e7ee2c",
-    "?str_01076f38@fnv_00d33ca0@@3PADA": "0x00e0811c"
+    "?str_01076f38@fnv_00d33ca0@@3PADA": "0x00e0811c",
+    "?hkMonitorStream__m_instance@@3V?$hkThreadLocalData@PAVhkMonitorStream@@@@A": "0x0116913c"
    }
   },
   {
@@ -577194,7 +577193,6 @@
     }
    ],
    "symbols": {
-    "??3@YAXPAX@Z": "0x00401010",
     "__imp__TlsGetValue@4": "0x00d9b080",
     "_DAT_0126835c": "0x0116913c",
     "??_C@_0P@HNIDGIIB@TtrcShpCollect?$AA@": "0x00e7de28",
@@ -577203,8 +577201,7 @@
     "?DAT_0104e148@@3MA": "0x00de731c",
     "?str_010c41f8@@3QBDB": "0x00e32798",
     "?FUN_00cf57d0@Derived@@UAEXXZ": "0x009d6130",
-    "??_7hkBaseObject@@6B@": "0x00dcc494",
-    "?DAT_0102e388@@3DA": "0x00dbba08"
+    "?hkMonitorStream__m_instance@@3V?$hkThreadLocalData@PAVhkMonitorStream@@@@A": "0x0116913c"
    }
   },
   {
@@ -578022,11 +578019,8 @@
     }
    ],
    "symbols": {
-    "__real@00000000": "0x00eaad58",
-    "__real@3f800000": "0x00db39b8",
     "??3@YAXPAX@Z": "0x00401010",
     "__imp__TlsGetValue@4": "0x00d9b080",
-    "?DAT_0126835c@@3KA": "0x0116913c",
     "??_C@_0P@HNIDGIIB@TtrcShpCollect?$AA@": "0x00e7de28",
     "??_C@_02DNLMNFDE@Et?$AA@": "0x00e32798",
     "??_C@_0L@HHNHAOCO@TtrcCxList?$AA@": "0x00e80854",
@@ -578088,15 +578082,13 @@
     }
    ],
    "symbols": {
-    "__real@00000000": "0x00eaad58",
-    "__real@3f800000": "0x00db39b8",
     "??3@YAXPAX@Z": "0x00401010",
     "__imp__TlsGetValue@4": "0x00d9b080",
-    "?DAT_0126835c@@3KA": "0x0116913c",
     "??_C@_0P@HNIDGIIB@TtrcShpCollect?$AA@": "0x00e7de28",
     "??_C@_02DNLMNFDE@Et?$AA@": "0x00e32798",
     "??_C@_0L@HHNHAOCO@TtrcCxList?$AA@": "0x00e80854",
-    "?FUN_00d5e840@Derived@@UAEXXZ": "0x00a97f50"
+    "?FUN_00d5e840@Derived@@UAEXXZ": "0x00a97f50",
+    "?hkMonitorStream__m_instance@@3V?$hkThreadLocalData@PAVhkMonitorStream@@@@A": "0x0116913c"
    }
   },
   {
@@ -582386,13 +582378,13 @@
     }
    ],
    "symbols": {
-    "?DAT_0116913c@@3KA": "0x0116913c",
     "__imp__TlsGetValue@4": "0x00d9b080",
-    "?DAT_00e7c970@@3DA": "0x00e7c970",
     "?DAT_00de6e70@@3MA": "0x00de6e70",
     "?init@CastS@@QAEXPAX@Z": "0x00921790",
     "__CIsqrt": "0x00bff9a0",
-    "?DAT_00e32798@@3DA": "0x00e32798"
+    "?hkMonitorStream__m_instance@@3V?$hkThreadLocalData@PAVhkMonitorStream@@@@A": "0x0116913c",
+    "??_C@_0BN@FPLFPHGG@TthkpAabbPhantom?3?3linearCast?$AA@": "0x00e7c970",
+    "??_C@_02DNLMNFDE@Et?$AA@": "0x00e32798"
    }
   },
   {
@@ -585461,21 +585453,15 @@
     }
    ],
    "symbols": {
-    "__real@bf800000": "0x00db38b8",
-    "__real@3f000000": "0x00dbe1e0",
-    "?DAT_01012054@@3MB": "0x00db38b8",
-    "__real@408f400000000000": "0x00db8c48",
     "??_H@YGXPAXIHP6EPAX0@Z@Z": "0x00401020",
     "__real@00000000": "0x00eaad58",
-    "?DAT_01016248@@3MB": "0x00dbe1e0",
-    "__real@3f50624de0000000": "0x00dbbcb0",
     "__real@3f800000": "0x00db39b8",
     "__imp__TlsGetValue@4": "0x00d9b080",
-    "?DAT_0126835c@@3KA": "0x0116913c",
     "??_C@_02DNLMNFDE@Et?$AA@": "0x00e32798",
     "??_C@_0P@MAAAJFBB@TtGJK?5Ray?5Cast?$AA@": "0x00e85f94",
     "?FUN_00a30fb0@F3MirrorTarget@@QAEXPA_NHHPAUS00daac40_Mat3@@HPAUS00daac40_RayParams@@@Z": "0x00a30fb0",
-    "?FUN_007c8a50@F3MirrorCast@@QAEXPAUS00daac40_RayParams@@@Z": "0x007c8a50"
+    "?FUN_007c8a50@F3MirrorCast@@QAEXPAUS00daac40_RayParams@@@Z": "0x007c8a50",
+    "?hkMonitorStream__m_instance@@3V?$hkThreadLocalData@PAVhkMonitorStream@@@@A": "0x0116913c"
    }
   },
   {
@@ -585496,17 +585482,10 @@
     }
    ],
    "symbols": {
-    "__real@bf800000": "0x00db38b8",
-    "__real@3f000000": "0x00dbe1e0",
-    "?DAT_01012054@@3MB": "0x00db38b8",
-    "__real@408f400000000000": "0x00db8c48",
     "??_H@YGXPAXIHP6EPAX0@Z@Z": "0x00401020",
     "__real@00000000": "0x00eaad58",
-    "?DAT_01016248@@3MB": "0x00dbe1e0",
-    "__real@3f50624de0000000": "0x00dbbcb0",
     "__real@3f800000": "0x00db39b8",
     "__imp__TlsGetValue@4": "0x00d9b080",
-    "?DAT_0126835c@@3KA": "0x0116913c",
     "??_C@_02DNLMNFDE@Et?$AA@": "0x00e32798"
    }
   },
@@ -589033,16 +589012,9 @@
     }
    ],
    "symbols": {
-    "___security_cookie": "0x0106ab70",
-    "@__security_check_cookie@4": "0x00c0018c",
-    "??3@YAXPAX@Z": "0x00401010",
     "__imp__TlsGetValue@4": "0x00d9b080",
-    "?DAT_0126835c@@3KA": "0x0116913c",
     "??_C@_02DNLMNFDE@Et?$AA@": "0x00e32798",
     "?DAT_01269cd0@@3PAXA": "0x0116c490",
-    "?FUN_00d68e00@@YAPAXXZ": "0x009f6c90",
-    "??_C@_0O@GDHOHNJL@Convex?5Radius?$AA@": "0x00e812d0",
-    "?FUN_00dd9380@FUN_00dd9380_class@@QAEPAXPBDPAX@Z": "0x00a61250",
     "?RegisterEntity@D68FC0Object@@QAEXPAX@Z": "0x009f57e0",
     "?FUN_00d68e60@Target@@QAEXXZ": "0x009f3e00",
     "?FindKeyIndex@Base@@QAEHH@Z": "0x009f5410",
@@ -589052,7 +589024,8 @@
     "?DAT_01169828@@3PAXA": "0x01169828",
     "??_C@_0BI@JOKMJODE@TthkpConvexRadiusViewer?$AA@": "0x00e810e4",
     "?SweepTransform@D68970_TransformObject@@QAEXMPAX@Z": "0x008f8450",
-    "?FindKeyIndex@FUN_009f5410_cls@@QAEHPAX@Z": "0x009f5410"
+    "?FindKeyIndex@FUN_009f5410_cls@@QAEHPAX@Z": "0x009f5410",
+    "?hkMonitorStream__m_instance@@3V?$hkThreadLocalData@PAVhkMonitorStream@@@@A": "0x0116913c"
    }
   },
   {
@@ -589088,16 +589061,9 @@
     }
    ],
    "symbols": {
-    "___security_cookie": "0x0106ab70",
-    "@__security_check_cookie@4": "0x00c0018c",
-    "??3@YAXPAX@Z": "0x00401010",
     "__imp__TlsGetValue@4": "0x00d9b080",
-    "?DAT_0126835c@@3KA": "0x0116913c",
     "??_C@_02DNLMNFDE@Et?$AA@": "0x00e32798",
     "?DAT_01269cd0@@3PAXA": "0x0116c490",
-    "?FUN_00d68e00@@YAPAXXZ": "0x009f6c90",
-    "??_C@_0O@GDHOHNJL@Convex?5Radius?$AA@": "0x00e812d0",
-    "?FUN_00dd9380@FUN_00dd9380_class@@QAEPAXPBDPAX@Z": "0x00a61250",
     "?RegisterEntity@D68FC0Object@@QAEXPAX@Z": "0x009f57e0",
     "?FUN_00d68e60@Target@@QAEXXZ": "0x009f3e00",
     "?FindKeyIndex@Base@@QAEHH@Z": "0x009f5410",

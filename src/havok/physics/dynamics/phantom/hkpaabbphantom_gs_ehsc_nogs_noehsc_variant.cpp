@@ -1,4 +1,5 @@
 #include "f3_common.h"
+#include "havok/hkMonitorStream.h"
 // src/havok/physics/dynamics/phantom/hkpaabbphantom_gs_ehsc_nogs_noehsc_variant.cpp - flag-variant unit created 2026-10-27 by flag_proofs.py: contributor code for these functions matched byte for
 // byte only under /MT /O2 /GS- /EHs-c- /Gy (unit src/havok/physics/dynamics/phantom/hkpaabbphantom.cpp lists /MT /O2 /GS /EHsc /Gy). Declarations copied from that unit's skeleton; move the functions
 // to their real unit once identified.
@@ -886,10 +887,7 @@ struct InputS {
 };
 void PhantomS::FUN_00cf2880(const CollidableS* collA,const LinCastInputS& query,void* collector,void* startCollector)
 {
-    volatile unsigned int stamp;
-    ThreadTimerS* tls=(ThreadTimerS*)TlsGetValue(DAT_0116913c);
-    char* top=tls->ptr;
-    if(top<tls->end) { *(int*)top=(int)&DAT_00e7c970; _ReadWriteBarrier(); stamp=(unsigned int)__rdtsc(); *(unsigned int*)(top+4)=stamp; tls->ptr=top+12; }
+    HK_TIMER_BEGIN("hkpAabbPhantom::linearCast", HK_NULL);
     V4 relative;
     const float* motion=(const float*)collA->m_pMotionState+12;
     for(int i=0;i<4;++i) relative.q[i]=query.m_vTo.q[i]-motion[i];
@@ -917,7 +915,5 @@ void PhantomS::FUN_00cf2880(const CollidableS* collA,const LinCastInputS& query,
         AgentFn fn=((AgentS*)((char*)disp+0x9ac))[idx].fn;
         fn(*collA,*other,cast,collector,startCollector);
     }
-    tls=(ThreadTimerS*)TlsGetValue(DAT_0116913c);
-    top=tls->ptr;
-    if(top<tls->end) { *(int*)top=(int)&DAT_00e32798; _ReadWriteBarrier(); stamp=(unsigned int)__rdtsc(); *(unsigned int*)(top+4)=stamp; tls->ptr=top+12; }
+    HK_TIMER_END();
 }

@@ -1,4 +1,5 @@
 #include "f3_common.h"
+#include "havok/hkMonitorStream.h"
 // src/havok/physics/collide/agent/deprecated/convexlist/hkpconvexlistagent.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/physics/collide/agent/deprecated/convexlist/hkpconvexlistagent.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
@@ -833,18 +834,7 @@ void __cdecl FUN_00d34790(void* a, void* b, void* c, void* d);
 // pdb params: bodyA, bodyB, input, collector
 extern "C" void __cdecl FUN_00d33b90(void* a, void* b, void* c, void* d)
 {
-    volatile DWORD tick;
-    ProfBuf* pBuf = (ProfBuf*)TlsGetValue(DAT_0126835c);
-    if (pBuf->m_pCur < pBuf->m_pRecordEnd)
-    {
-        ProfRec* pRec = (ProfRec*)pBuf->m_pCur;
-        pRec->m_pName = "LtCvxList";
-        pRec->m_pName2 = "StcheckHull";
-        _ReadWriteBarrier();
-        tick = (DWORD)__rdtsc();
-        pRec->m_iTick = tick;
-        pBuf->m_pCur = (char*)pRec + 0x10;
-    }
+    HK_TIMER_BEGIN_LIST("CvxList", "checkHull");
 
     HitCollector col;
     col.m_vtbl = &DAT_010cebd0;
@@ -852,29 +842,11 @@ extern "C" void __cdecl FUN_00d33b90(void* a, void* b, void* c, void* d)
     TestGsk(a, b, c, &col);
     if (col.m_bHit)
     {
-        pBuf = (ProfBuf*)TlsGetValue(DAT_0126835c);
-        if (pBuf->m_pCur < pBuf->m_pRecordEnd)
-        {
-            ProfRec* pRec = (ProfRec*)pBuf->m_pCur;
-            pRec->m_pName = "Stchildren";
-            _ReadWriteBarrier();
-            tick = (DWORD)__rdtsc();
-            pRec->m_iTick = tick;
-            pBuf->m_pCur = (char*)pRec + 0xc;
-        }
+        HK_TIMER_SPLIT_LIST("children");
         FUN_00d34790(a, b, c, d);
     }
 
-    pBuf = (ProfBuf*)TlsGetValue(DAT_0126835c);
-    if (pBuf->m_pCur < pBuf->m_pRecordEnd)
-    {
-        ProfRec* pRec = (ProfRec*)pBuf->m_pCur;
-        pRec->m_pName = "lt";
-        _ReadWriteBarrier();
-        tick = (DWORD)__rdtsc();
-        pRec->m_iTick = tick;
-        pBuf->m_pCur = (char*)pRec + 0xc;
-    }
+    HK_TIMER_END_LIST();
 }
 
 extern "C" void _ReadWriteBarrier(void);

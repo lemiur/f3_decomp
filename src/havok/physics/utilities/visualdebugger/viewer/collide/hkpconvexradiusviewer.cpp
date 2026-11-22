@@ -1,4 +1,5 @@
 #include "f3_common.h"
+#include "havok/hkMonitorStream.h"
 // src/havok/physics/utilities/visualdebugger/viewer/collide/hkpconvexradiusviewer.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/physics/utilities/visualdebugger/viewer/collide/hkpconvexradiusviewer.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
@@ -786,18 +787,7 @@ struct CpuObject
 void D68970_Listener::FUN_00d68970(D68970_Owner* owner)
 {
     __assume(this != 0);
-    volatile DWORD tick;
-    D68970_ProfileBuffer* profile = static_cast<D68970_ProfileBuffer*>(TlsGetValue(DAT_0126835c));
-
-    D68970_ProfileRecord* record = profile->current;
-    if (record < profile->end)
-    {
-        record->name = "TthkpConvexRadiusViewer";
-        _ReadWriteBarrier();
-        tick = __rdtsc();
-        record->tick = tick;
-        profile->current = record + 1;
-    }
+    HK_TIMER_BEGIN("hkpConvexRadiusViewer", HK_NULL);
 
     for (int entityIndex = 0; entityIndex < owner->entityCount; ++entityIndex)
     {
@@ -817,16 +807,7 @@ void D68970_Listener::FUN_00d68970(D68970_Owner* owner)
         }
     }
 
-    profile = static_cast<D68970_ProfileBuffer*>(TlsGetValue(DAT_0126835c));
-    record = profile->current;
-    if (record < profile->end)
-    {
-        record->name = "Et";
-        _ReadWriteBarrier();
-        tick = __rdtsc();
-        record->tick = tick;
-        profile->current = record + 1;
-    }
+    HK_TIMER_END();
 }
 
 

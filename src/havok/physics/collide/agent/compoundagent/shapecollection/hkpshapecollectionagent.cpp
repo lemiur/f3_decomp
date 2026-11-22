@@ -1,4 +1,5 @@
 #include "f3_common.h"
+#include "havok/hkMonitorStream.h"
 // src/havok/physics/collide/agent/compoundagent/shapecollection/hkpshapecollectionagent.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/physics/collide/agent/compoundagent/shapecollection/hkpshapecollectionagent.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
@@ -1239,17 +1240,7 @@ extern "C" unsigned long g_tlsIndex;
 
 void Agent::FUN_00d43aa0(Holder* holder, int a, int b, int c, int d)
 {
-    ProfilerBuf* pb = (ProfilerBuf*)TlsGetValue(g_tlsIndex);
-    Rec* cur = pb->cur;
-    if (cur < pb->end)
-    {
-        volatile unsigned int t;
-        cur->name = "TtShapeCollection";
-        _ReadWriteBarrier();
-        t = (unsigned int)__rdtsc();
-        cur->ticks = t;
-        pb->cur = cur + 1;
-    }
+    HK_TIMER_BEGIN("ShapeCollection", HK_NULL);
     Queryable* q = ((Source_w137*)holder->unk00)->v14();
     Packet packet;
     B512 buf;
@@ -1265,17 +1256,7 @@ void Agent::FUN_00d43aa0(Holder* holder, int a, int b, int c, int d)
         p->handler->v14(&packet, a, b, c, d);
         p++;
     }
-    pb = (ProfilerBuf*)TlsGetValue(g_tlsIndex);
-    cur = pb->cur;
-    if (cur < pb->end)
-    {
-        volatile unsigned int t;
-        cur->name = "Et";
-        _ReadWriteBarrier();
-        t = (unsigned int)__rdtsc();
-        cur->ticks = t;
-        pb->cur = cur + 1;
-    }
+    HK_TIMER_END();
 }
 
 
@@ -1875,16 +1856,7 @@ struct CollectionShapeF3
 // pdb: hkpShapeCollectionAgent::processCollision | hkpShapeCollectionAgent.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
 void CollectionProcessAgent::hkpShapeCollectionAgent_processCollision(ShapeArg* arg, unsigned int a0, unsigned int a1, unsigned int a2)
 {
-    ProfBuf* pBuf = (ProfBuf*)TlsGetValue(DAT_0126835c);
-    if (pBuf->m_pCur < pBuf->m_pRecordEnd)
-    {
-        ProfRec* pRec = pBuf->m_pCur;
-        pRec->m_pName = "TtShapeCollection";
-        _ReadWriteBarrier();
-        volatile DWORD tick = (DWORD)__rdtsc();
-        pRec->m_iTick = tick;
-        pBuf->m_pCur = pRec + 1;
-    }
+    HK_TIMER_BEGIN("ShapeCollection", HK_NULL);
 
     CollectionProcessHandler* pRes = ((CollectionShapeF3*)arg->pHandler)->getContainer();
     CollectionProcessBody pair;
@@ -1902,15 +1874,6 @@ void CollectionProcessAgent::hkpShapeCollectionAgent_processCollision(ShapeArg* 
         pEntry++;
     }
 
-    pBuf = (ProfBuf*)TlsGetValue(DAT_0126835c);
-    if (pBuf->m_pCur < pBuf->m_pRecordEnd)
-    {
-        ProfRec* pRec = pBuf->m_pCur;
-        pRec->m_pName = "Et";
-        _ReadWriteBarrier();
-        volatile DWORD tick = (DWORD)__rdtsc();
-        pRec->m_iTick = tick;
-        pBuf->m_pCur = pRec + 1;
-    }
+    HK_TIMER_END();
 }
 

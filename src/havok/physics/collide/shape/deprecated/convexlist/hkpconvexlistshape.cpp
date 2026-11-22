@@ -1,4 +1,5 @@
 #include "f3_common.h"
+#include "havok/hkMonitorStream.h"
 // src/havok/physics/collide/shape/deprecated/convexlist/hkpconvexlistshape.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/physics/collide/shape/deprecated/convexlist/hkpconvexlistshape.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
@@ -727,17 +728,7 @@ bool* Node::hkpConvexListShape_castRayImpl(bool* __restrict result, void* other,
     {
         bool a, b, c, d;
     } found;
-    ProfBuf* pBuf = (ProfBuf*)TlsGetValue(DAT_0126835c);
-    if (pBuf->m_pCur < pBuf->m_pRecordEnd)
-    {
-        ProfRec* pRec = pBuf->m_pCur;
-        volatile DWORD ticks;
-        pRec->m_pName = "TtrcCxList";
-        _ReadWriteBarrier();
-        ticks = (DWORD)__rdtsc();
-        pRec->m_iTick = ticks;
-        pBuf->m_pCur = pRec + 1;
-    }
+    HK_TIMER_BEGIN("rcCxList", HK_NULL);
     st->depth++;
     int iSelected = -1;
     for (int id = coll.First(); id != -1; id = coll.Next(id))
@@ -750,17 +741,7 @@ bool* Node::hkpConvexListShape_castRayImpl(bool* __restrict result, void* other,
     if (iSelected != -1)
         st->slots[st->depth] = iSelected;
     *result = iSelected != -1;
-    pBuf = (ProfBuf*)TlsGetValue(DAT_0126835c);
-    if (pBuf->m_pCur < pBuf->m_pRecordEnd)
-    {
-        ProfRec* pRec = pBuf->m_pCur;
-        volatile DWORD ticks;
-        pRec->m_pName = "Et";
-        _ReadWriteBarrier();
-        ticks = (DWORD)__rdtsc();
-        pRec->m_iTick = ticks;
-        pBuf->m_pCur = pRec + 1;
-    }
+    HK_TIMER_END();
     return result;
 }
 
