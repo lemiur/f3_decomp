@@ -997,12 +997,13 @@ struct WorldD1F
     int unk05C;
     int unk060;
     int unk064;
-    int unk068;
-    int unk06C;
+        int unk068;
+    hkpCollisionInputD1F* m_collisionInput;  // +0x6C (the Fallout 3 hkpWorld's)
     int unk070;
     int unk074;
     hkpCollisionInputD1F* m_pCollisionInput;
 };
+// hkpSimpleShapePhantom, at its Fallout 3 offsets: the collision details array at +0x150.
 class PhantomD1F
 {
   public:
@@ -1086,12 +1087,8 @@ class PhantomD1F
     int unk140;
     int unk144;
     int unk148;
-    int unk14C;
-    int unk150;
-    int unk154;
-    int unk158;
-    int unk15C;
-    hkArrayD1F<hkpCdBodyD1F*> m_overlaps;
+        int unk14C;
+    hkArrayD1F<hkpCdBodyD1F*> m_collisionDetails;  // +0x150
     void DispatchOverlaps(void* collector, const hkpCollisionInputD1F* input);
 };
 // @f3 0x0099e7f0 (community match, verified in this file)
@@ -1100,9 +1097,9 @@ class PhantomD1F
 void PhantomD1F::DispatchOverlaps(void* collector, const hkpCollisionInputD1F* apCollisionInput)
 {
     if (!apCollisionInput)
-        apCollisionInput = *(const hkpCollisionInputD1F**)((char*)m_pOwningWorld + 0x6c);
+        apCollisionInput = m_pOwningWorld->m_collisionInput;
     hkpCollisionDispatcherD1F* dispatcher = apCollisionInput->m_pCollisionDispatcher;
-    hkArrayD1F<hkpCdBodyD1F*>& overlaps = *(hkArrayD1F<hkpCdBodyD1F*>*)((char*)this + 0x150);
+    hkArrayD1F<hkpCdBodyD1F*>& overlaps = m_collisionDetails;
     for (int i = overlaps.GetLogicalSize() - 1; i >= 0; i--)
     {
         hkpCdBodyD1F*& pOtherBody = overlaps[i];
