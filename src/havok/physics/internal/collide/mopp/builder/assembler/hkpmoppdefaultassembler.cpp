@@ -4,8 +4,13 @@
 
 extern "C" void __cdecl GrowBuffer();
 
+// hkpMoppCodeGenerator: the code buffer is filled from its end backwards (New Vegas Xbox 360 PDB names).
 struct FUN_00e06780_class
 {
+    int unk00, unk04;
+    int m_size;           // +0x08
+    int m_pos;            // +0x0C
+    char* m_code;         // +0x10
     void __thiscall AppendChar(char b);
 };
 
@@ -14,11 +19,11 @@ struct FUN_00e06780_class
 // pdb: hkpMoppCodeGenerator::addCode | hkpMoppDefaultAssembler.obj | tesv_win, call_dedup, low
 void __thiscall FUN_00e06780_class::AppendChar(char acValue)
 {
-    char* p = *(char**)((char*)this + 0x10) - *(int*)((char*)this + 0xc);
-    int base = *(int*)((char*)this + 8);
+        char* p = m_code - m_pos;
+    int base = m_size;
     *(p + base - 1) = acValue;
-    ++*(int*)((char*)this + 0xc);
-    if (*(int*)((char*)this + 0xc) >= *(int*)((char*)this + 8))
+    ++m_pos;
+    if (m_pos >= m_size)
         GrowBuffer();
 }
 
@@ -829,11 +834,6 @@ struct FUN_00e06780_actor
 // no data members, so the flag field lives in the derived stand-in.
 struct FUN_00e06780_owner : public FUN_00e06780_class
 {
-    int unk00;
-    int unk04;
-    int unk08;
-    int unk0c;
-    int unk10;
     int unk14;
     int unk18;  // +0x18
     char* __thiscall FUN_00e06af0(char* out, FUN_00e06780_actor* actor, int* value);
