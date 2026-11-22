@@ -12,7 +12,8 @@ class NiMemObject
     static void operator delete(void* pvMem, size_t stElementSize);
     static void operator delete[](void* pvMem, size_t stElementSize);
 
-    // placement new and delete
+    // placement new (a class operator new hides the global one). There is no placement delete: with one, every
+    // placement new-expression gets an exception-handling frame, and the game's have none.
     static void* operator new(size_t, void* p)
     {
         return p;
@@ -21,10 +22,6 @@ class NiMemObject
     {
         return p;
     }
-    static void operator delete(void*, void*)
-    {}
-    static void operator delete[](void*, void*)
-    {}
 };
 #pragma pack(pop)
 FNV_STATIC_ASSERT(sizeof(NiMemObject) == 0x1);

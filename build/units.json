@@ -516087,7 +516087,8 @@
     "?AppendString@Holder@@QAEXPAUStrArr@@@Z": "0x0083c250",
     "?FUN_00a57f80@@YIXPAX@Z": "0x008d1ba0",
     "_g_fA50F00Invalid": "0x00e30330",
-    "_NI_INFINITY": "0x00e30330"
+    "_NI_INFINITY": "0x00e30330",
+    "?LoadBinary@NiBSplineTransformInterpolator@@UAEXAAVNiStream@@@Z": "0x008ca350"
    }
   },
   {
@@ -516632,7 +516633,8 @@
     "?FUN_00a7d510@@YAPAXPBDPAX@Z": "0x00847d80",
     "?CreateData@FUN_00a3d270_cls@@QAEXAAV?$NiPointerD27@VNiDataD27@@@@@Z": "0x00825970",
     "?BuildDataD27@@YAXHHPAXIMMPAH1@Z": "0x008b6f40",
-    "?SetData@NiDataD27@@QAEXHHH@Z": "0x008b61b0"
+    "?SetData@NiDataD27@@QAEXHHH@Z": "0x008b61b0",
+    "??1NiObject@@UAE@XZ": "0x00825830"
    }
   },
   {
@@ -523489,7 +523491,8 @@
     "??4?$NiPointer@VNiInterpolator@@@@QAEAAV0@PAVNiInterpolator@@@Z": "0x008e9650",
     "??3@YAXPAX@Z": "0x00401010",
     "??0FUN_00a38e00@@QAE@XZ": "0x008b2590",
-    "?DeleteThis@NiRefObject@@UAEXXZ": "0x00987c70"
+    "?DeleteThis@NiRefObject@@UAEXXZ": "0x00987c70",
+    "?LinkObject@NiSingleInterpController@@UAEXAAVNiStream@@@Z": "0x008a9ba0"
    }
   },
   {
@@ -523607,7 +523610,8 @@
     "?InitA@NiTransformInitA@@QAEPAXHMH@Z": "0x008b03c0",
     "?InitB@NiTransformInitB@@QAEPAXHMH@Z": "0x008babc0",
     "?ToRotationMatrix@NiQuaternion@@QAEXAAVThreeByThreeMatrix@@@Z": "0x0049da00",
-    "?SetControllerActive@NiTimeController_Call@@QAEXXZ": "0x004b2ce0"
+    "?SetControllerActive@NiTimeController_Call@@QAEXXZ": "0x004b2ce0",
+    "?LoadBinary@NiSingleInterpController@@UAEXAAVNiStream@@@Z": "0x008b2710"
    }
   },
   {

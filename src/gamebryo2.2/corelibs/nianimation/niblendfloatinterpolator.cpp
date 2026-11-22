@@ -47,7 +47,7 @@ bool NiBlendFloatInterpolator::UpdateAccumulatedTransform(float time, NiObjectNE
         time = m_fSingleInterpolatorTime;
     if (time == DAT_0109696c)
         return false;
-    if (m_pSingleInterpolator->vfn_09c(time, target, m_fFloatValue))
+    if (m_pSingleInterpolator->Update(time, target, m_fFloatValue))
     {
         value = m_fFloatValue;
         return true;
@@ -85,7 +85,7 @@ bool NiBlendFloatInterpolator::UpdateSingleInterpolator(float time, NiObjectNET*
             float updateTime = time;
             if (!GetBlendUpdateTime(updateTime, item))
                 totalWeight -= item.m_fNormalizedWeight;
-            else if (interpolator->vfn_09c(updateTime, target, currentValue))
+            else if (interpolator->Update(updateTime, target, currentValue))
             {
                 valid = true;
                 m_fFloatValue += m_pInterpArray[i].m_fNormalizedWeight * currentValue;
