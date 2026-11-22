@@ -12,3 +12,4 @@ built with the VS2022 compiler (`build.cmd` in each folder). Nothing here contai
 | `f3rules/` | the [match]/advisory rule checker over f3_decomp source, per recipe function |
 | `f3link/` | link Fallout 3 PC functions to named functions in the reference builds, with tiers |
 | `f3rename/` | apply linked names across src/, include/ and build/units.json |
+| `f3prune/` | remove unchecked definitions (and then the declarations only they used) that nothing checked depends on |
