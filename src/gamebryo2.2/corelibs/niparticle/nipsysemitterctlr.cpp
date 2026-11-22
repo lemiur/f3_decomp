@@ -18,7 +18,7 @@ void NiPSysEmitterCtlr::LoadBinary(NiStream& stream)
 // @fnv 0x00c1bdc0
 // pdb: NiPSysEmitterCtlr::ProcessClone | NiPSysEmitterCtlr.obj | fnv360_0822_retail, call_seq, medium
 // pdb params: kCloning
-void NiPSysEmitterCtlr::ProcessClone(CloningProcess& process)
+void NiPSysEmitterCtlr::ProcessClone(NiCloningProcess& process)
 {
     NiPSysModifierCtlr::ProcessClone(process);
     NiInterpolator* interpolator = m_spEmitterActiveInterpolator.m_pObject;
@@ -29,14 +29,14 @@ void NiPSysEmitterCtlr::ProcessClone(CloningProcess& process)
 // @fnv 0x00c1bd30
 // pdb: NiPSysEmitterCtlr::CopyMembers | NiPSysEmitterCtlr.obj | fnv360_0822_retail, call_seq, high
 // pdb params: pkDest, kCloning
-void NiPSysEmitterCtlr::CopyMemberData(NiPSysEmitterCtlr* destination, CloningProcess& arProcess)
+void NiPSysEmitterCtlr::CopyMemberData(NiPSysEmitterCtlr* destination, NiCloningProcess& arProcess)
 {
     NiPSysModifierCtlr::CopyMemberData(destination, arProcess);
 
     NiInterpolator* source = m_spEmitterActiveInterpolator.m_pObject;
     if (source)
     {
-        NiInterpolator* cloned = static_cast<NiInterpolator*>(source->Clone(arProcess));
+        NiInterpolator* cloned = static_cast<NiInterpolator*>(source->CreateClone(arProcess));
 
         NiInterpolator* oldInterpolator = destination->m_spEmitterActiveInterpolator.m_pObject;
         if (oldInterpolator != cloned)

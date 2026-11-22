@@ -516274,22 +516274,22 @@
     },
     {
      "address": "0x008d19c0",
-     "symbol": "?FUN_00a57da0@FUN_00a57da0_cls@@QAEHH@Z",
+     "symbol": "?GetAllocatedSize@NiBSplineInterpolator@@UBEIG@Z",
      "size": 96
     },
     {
      "address": "0x008d1a20",
-     "symbol": "?FUN_00a57e00@SplineShell@@QAEHH@Z",
+     "symbol": "?GetControlPointCount@NiBSplineInterpolator@@UBEIG@Z",
      "size": 68
     },
     {
      "address": "0x008d1a70",
-     "symbol": "?LoadNiBSplineInterpolator@FUN_00a57e50_shell@@QAE_NAAVNiStream@@@Z",
+     "symbol": "?RegisterStreamables@NiBSplineInterpolator@@UAE_NAAVNiStream@@@Z",
      "size": 60
     },
     {
      "address": "0x008d1ab0",
-     "symbol": "?NiBSplineInterpolator_IsEqual@A57E90Controller@@QAE_NPAVA57E90Object@@@Z",
+     "symbol": "?IsEqual@NiBSplineInterpolator@@UAE_NPAVNiObject@@@Z",
      "size": 142
     },
     {
@@ -516299,12 +516299,12 @@
     },
     {
      "address": "0x008d1d80",
-     "symbol": "?SaveToStream@S_00a58160_Foo@@QAEXPAUS_00a58160_Stream@@@Z",
+     "symbol": "?SaveBinary@NiBSplineInterpolator@@UAEXAAVNiStream@@@Z",
      "size": 122
     },
     {
      "address": "0x008d1e20",
-     "symbol": "?FUN_00a58200@BA58200Sequence@@QAEXPAVBA58200StringArray@@@Z",
+     "symbol": "?GetViewerStrings@NiBSplineInterpolator@@UAEXPAV?$NiTPrimitiveArray@PAD@@@Z",
      "size": 234
     }
    ],
@@ -516330,7 +516330,18 @@
     "?SetAt@BA58200StringArray@@QAEXIABQAD@Z": "0x005b3880",
     "??_C@_0N@JEILANCK@m_fStartTime?$AA@": "0x00e22110",
     "??_C@_0L@JCPHBAKJ@m_fEndTime?$AA@": "0x00e3195c",
-    "?FUN_00a57f80@@YIXPAX@Z": "0x004c1f50"
+    "?FUN_00a57f80@@YIXPAX@Z": "0x004c1f50",
+    "?GetDegree3Basis@NiBSplineBasisData@@QAEAAV?$NiBSplineBasis@M$02@@XZ": "0x00c24260",
+    "?RegisterStreamables@NiInterpolator@@UAE_NAAVNiStream@@@Z": "0x008c1240",
+    "?IsEqual@NiInterpolator@@UAE_NPAVNiObject@@@Z": "0x008c1550",
+    "?ResolveLinkID@NiStream@@QAEPAVNiObject@@XZ": "0x0082b5d0",
+    "?SaveBinary@NiInterpolator@@UAEXAAVNiStream@@@Z": "0x008cbd30",
+    "?GetViewerStrings@NiInterpolator@@UAEXPAV?$NiTPrimitiveArray@PAD@@@Z": "0x008d0d30",
+    "?ms_RTTI@NiBSplineInterpolator@@2VNiRTTI@@B": "0x01092a40",
+    "?NiGetViewerString@@YAPADPBD@Z": "0x00847b50",
+    "?SetSize@?$NiTArray@PADV?$NiTMallocInterface@PAD@@@@QAEXI@Z": "0x00555790",
+    "?SetAt@?$NiTArray@PADV?$NiTMallocInterface@PAD@@@@QAEXIABQAD@Z": "0x005b3880",
+    "?NiGetViewerString@@YAPADPBDM@Z": "0x00847dd0"
    }
   },
   {
@@ -523848,7 +523859,7 @@
     },
     {
      "address": "0x008b9af0",
-     "symbol": "?FUN_00a3f8a0@FUN_00a3f8a0_t@@QAEXPAUNiStream@@@Z",
+     "symbol": "?FUN_00a3f8a0@FUN_00a3f8a0_t@@QAEXPAVNiStream@@@Z",
      "size": 41
     },
     {
@@ -523975,7 +523986,9 @@
     "?FUN_00439090@S00a3ffd0_Pt@@QBE_NABVNiPoint3@@@Z": "0x00914770",
     "?FUN_00a4e2e0@S00a3ffd0_Data@@QAEXIII@Z": "0x008c8300",
     "?FUN_00a4e3b0@S00a3ffd0_Data@@QAEXIII@Z": "0x008c83d0",
-    "_DAT_01015f5c": "0x00db7260"
+    "_DAT_01015f5c": "0x00db7260",
+    "?FUN_00a95ca0@FUN_00a95ca0_helper@@QAEXPAVNiStream@@@Z": "0x00aad680",
+    "?NiQuatTransform_SaveBinary@FUN_00a38b60_tgt@@QAEXPAVNiStream@@@Z": "0x008afe30"
    }
   },
   {
@@ -555151,7 +555164,7 @@
     },
     {
      "address": "0x00aaa050",
-     "symbol": "?LoadBinary@NiPSysEmitterCtlr@@QAEXAAVNiStream@@@Z",
+     "symbol": "?LoadBinary@NiPSysEmitterCtlr@@UAEXAAVNiStream@@@Z",
      "size": 22
     },
     {
@@ -555181,7 +555194,7 @@
     },
     {
      "address": "0x00abb930",
-     "symbol": "?NiPSysEmitterCtlr_CreateBlendInterpolator@@YGPAUNiBlendInterpolator@@G_N0ME@Z",
+     "symbol": "?NiPSysEmitterCtlr_CreateBlendInterpolator@@YGPAVNiBlendInterpolator@@G_N0ME@Z",
      "size": 105
     },
     {
@@ -555211,12 +555224,12 @@
     },
     {
      "address": "0x00abbb40",
-     "symbol": "?CopyMemberData@NiPSysEmitterCtlr@@QAEXPAV1@AAVCloningProcess@@@Z",
+     "symbol": "?CopyMemberData@NiPSysEmitterCtlr@@QAEXPAV1@AAVNiCloningProcess@@@Z",
      "size": 140
     },
     {
      "address": "0x00abbbd0",
-     "symbol": "?ProcessClone@NiPSysEmitterCtlr@@QAEXAAVCloningProcess@@@Z",
+     "symbol": "?ProcessClone@NiPSysEmitterCtlr@@UAEXAAVNiCloningProcess@@@Z",
      "size": 34
     },
     {
@@ -555251,7 +555264,7 @@
     },
     {
      "address": "0x00abbe90",
-     "symbol": "?LinkObject@NiPSysEmitterCtlr@@QAEXAAVNiStream@@@Z",
+     "symbol": "?LinkObject@NiPSysEmitterCtlr@@UAEXAAVNiStream@@@Z",
      "size": 351
     },
     {
@@ -555383,7 +555396,13 @@
     "?CopyMemberData@NiPSysModifierCtlr@@QAEXPAV1@AAVCloningProcess@@@Z": "0x00ac6560",
     "?FUN_00c312a0@Host@@QAEXXZ": "0x00ac6510",
     "?AppendModifierInfo@@YGXPAUStrArr@@@Z": "0x00ac67c0",
-    "_kNegInfinity": "0x00db7260"
+    "_kNegInfinity": "0x00db7260",
+    "?LoadBinary@NiPSysModifierCtlr@@UAEXAAVNiStream@@@Z": "0x0082db60",
+    "?FUN_00a40520@FUN_00a40520_shell@@QAEPAVNiBlendInterpolator@@_NME@Z": "0x008ba760",
+    "?ConstructBlendInterpolator@FUN_00a56560_shell@@QAEPAVNiBlendInterpolator@@_NME@Z": "0x008d0180",
+    "?ProcessClone@NiPSysModifierCtlr@@UAEXAAVNiCloningProcess@@@Z": "0x00ac65b0",
+    "?LinkObject@NiPSysModifierCtlr@@UAEXAAVNiStream@@@Z": "0x008d1310",
+    "?CopyMemberData@NiPSysModifierCtlr@@QAEXPAV1@AAVNiCloningProcess@@@Z": "0x00ac6560"
    }
   },
   {
