@@ -53,18 +53,27 @@ struct NiRefObject
 void __cdecl _delete(void*, unsigned int);
 struct NiPSysEmitterCtlrData
 {
+    void* unk00;
+    unsigned int unk04;
+    unsigned int m_uiNumBirthRateKeys;  // src: FNV360_PDB +0x8
+    void* m_pkBirthRateKeys;  // src: FNV360_PDB +0xC
+    int m_eBirthRateKeyType;  // src: FNV360_PDB +0x10
+    unsigned char m_ucBirthRateSize;  // src: FNV360_PDB +0x14
+    unsigned int m_uiNumEmitterActiveKeys;  // src: FNV360_PDB +0x18
+    void* m_pkEmitterActiveKeys;  // src: FNV360_PDB +0x1C
+    int m_eEmitterActiveKeyType;  // src: FNV360_PDB +0x20
     void* Destroy(unsigned int);
 };
 // @fnv 0x00c2bc30
 void* NiPSysEmitterCtlrData::Destroy(unsigned int flags)
 {
-    void* pkKeys = *(void**)((char*)this + 0xc);
+    void* pkKeys = m_pkBirthRateKeys;
     *(void**)this = (void*)&DAT_010bfd54;
     if (pkKeys)
-        DAT_011f38a0[*(int*)((char*)this + 0x10)](pkKeys);
-    pkKeys = *(void**)((char*)this + 0x1c);
+        DAT_011f38a0[m_eBirthRateKeyType](pkKeys);
+    pkKeys = m_pkEmitterActiveKeys;
     if (pkKeys)
-        DAT_011f3918[*(int*)((char*)this + 0x20)]((AnimationKey*)pkKeys);
+        DAT_011f3918[m_eEmitterActiveKeyType]((AnimationKey*)pkKeys);
     ((NiRefObject*)this)->NiRefObject::~NiRefObject();
     if (flags & 1)
         _delete(this, 0x28);
