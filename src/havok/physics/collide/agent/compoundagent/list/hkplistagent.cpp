@@ -102,8 +102,7 @@ struct S_00d368a0
     int unk04;
     int unk08;
     int unk0C;
-    int m_sub10;
-
+    int m_agentTrack;  // +0x10 hkpAgent1nTrack (m_sectors first)
     void hkpListAgent_calcContentStatistics(S_00d368a0_Arg* a);
 };
 
@@ -113,7 +112,7 @@ extern "C" void __cdecl FUN_00a26d90(void* a, int b, S_00d368a0_Arg* c);
 // pdb: hkpListAgent::calcContentStatistics | hkpListAgent.obj | fnv360_0721_beta, objrun + bridge(caller_sim|vtable) + skyrim(objrun), high
 void S_00d368a0::hkpListAgent_calcContentStatistics(S_00d368a0_Arg* a)
 {
-    FUN_00a26d90((char*)this + 0x10, a->unk04, a);
+    FUN_00a26d90(&m_agentTrack, a->unk04, a);
 }
 
 
@@ -144,9 +143,9 @@ struct FUN_00d368c0_cls
 {
     int unk00;
     int unk04;
-    int m_08;
-    int unk0C;
-    int unk10;
+    int m_08;          // m_contactMgr
+    int unk0C;         // m_dispatcher
+    int m_agentTrack;  // +0x10 hkpAgent1nTrack (m_sectors first)
     void hkpListAgent_updateShapeCollectionFilter(void* a1, void* a2, void* a3, void* a4);
 };
 // Builds a CallArgs from the four arguments and m_08, calls v10 on a2, then passes it to hkAgent1nMachine_UpdateShapeCollectionFilter with this+0x10.
@@ -171,6 +170,6 @@ void FUN_00d368c0_cls::hkpListAgent_updateShapeCollectionFilter(void* a1, void* 
     args.unk14 = m_08;
     args.unk18 = (int)a4;
     args.unk0C = ((FUN_00d368c0_Virt*)*(void**)a2)->v14();
-    FUN_00a2b420((char*)this + 0x10, &args);
+    FUN_00a2b420(&m_agentTrack, &args);
 }
 

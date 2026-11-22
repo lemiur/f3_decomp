@@ -18,7 +18,17 @@ void __thiscall FUN_00d2dd30_class::hkpBvTreeStreamAgent_getPenetrations(void* a
 
 extern "C" void __cdecl hkAgent1nMachine_InvalidateTim(void* a, void* b);
 
-struct FUN_00d2ddd0_class
+// hkpBvTreeStreamAgent: the members these functions use, at their Fallout 3 offsets (New Vegas Xbox 360 PDB names).
+struct hkpBvTreeStreamAgentData
+{
+    int unk00;
+    int unk04;
+    int m_contactMgr;          // +0x08
+    int m_dispatcher;          // +0x0C
+    char m_cachedAabb[0x20];   // +0x10 hkAabb
+    int m_agentTrack;          // +0x30 hkpAgent1nTrack (m_sectors first)
+};
+struct FUN_00d2ddd0_class : hkpBvTreeStreamAgentData
 {
     void __thiscall FUN_00d2ddd0(int a);
 };
@@ -26,7 +36,7 @@ struct FUN_00d2ddd0_class
 // @fnv 0x00d2ddd0
 void __thiscall FUN_00d2ddd0_class::FUN_00d2ddd0(int aiValue)
 {
-    hkAgent1nMachine_InvalidateTim((char*)this + 0x30, (void*)aiValue);
+    hkAgent1nMachine_InvalidateTim(&m_agentTrack, (void*)aiValue);
 }
 
 extern "C" void __cdecl FUN_00d31110(void*, void*, void*, void*);
@@ -77,16 +87,16 @@ void FUN_00d2dda0_class::FUN_00d2dda0(int value)
 }
 
 void __cdecl hkAgent1nMachine_WarpTime(void* self, float a, float b, void* c);
-struct FUN_00d2ddf0_Class
+struct FUN_00d2ddf0_Class : hkpBvTreeStreamAgentData
 {
     void __thiscall FUN_00d2ddf0(float a, float b, void* c);
 };
-// Calls hkAgent1nMachine_WarpTime with the subobject at offset 0x30 of this object and the three arguments.
+// Warps the times of the agent track by the three arguments.
 // @fnv 0x00d2ddf0
 // pdb: hkpBvTreeStreamAgent::warpTime | hkpBvTreeStreamAgent.obj | tesv_win, vtable, medium
 void __thiscall FUN_00d2ddf0_Class::FUN_00d2ddf0(float a, float b, void* c)
 {
-    hkAgent1nMachine_WarpTime((char*)this + 0x30, a, b, c);
+    hkAgent1nMachine_WarpTime(&m_agentTrack, a, b, c);
 }
 
 struct hkMemoryAllocator
