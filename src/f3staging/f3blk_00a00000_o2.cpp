@@ -6500,7 +6500,6 @@ void __cdecl hkpCharacterMovementUtil::FUN_00a062a0( const hkpMovementUtilInput&
 	relative.addMul4( input.m_gain, diff );
 	velocityOut.setRotatedDir( surfaceFrame, relative );
 	velocityOut.add4( input.m_surfaceVelocity );
-	;
 }
 
 }  // namespace f3m_00a062a0
@@ -8732,15 +8731,12 @@ void __cdecl FUN_00a00ec0( hkpSimpleContactConstraintAtom* atom, const hkpConstr
 	int propertiesStriding = atom->getContactPointPropertiesStriding();
 	hkpContactPointPropertiesStream* propertiesInMainMemory = properties;
 	hkSimpleContactConstraintDataInfoInternal& info = *reinterpret_cast<hkSimpleContactConstraintDataInfoInternal*>( &atom->m_info );
-	;
 	hkVector4 avgPosition; avgPosition.setZero4();
 	hkVector4 avgNormal; avgNormal.setZero4();
 	hkReal sumImpulse = 0.0f;
 	hkReal invNum = 1.0f / numContacts;
 	hkReal sumFriction = 0.0f;
 	hkpJacobianSchema* com = out.m_jacobianSchemas;
-	;
-	;
 	const hkpVelocityAccumulator* opaA = in.m_bodyA;
 	const hkpVelocityAccumulator* opaB = in.m_bodyB;
 	if ( writeHeaderSchemas )
@@ -8788,7 +8784,6 @@ void __cdecl FUN_00a00ec0( hkpSimpleContactConstraintAtom* atom, const hkpConstr
 					if ( maxImpulse )
 					{
 						hkpContactPointPropertiesStream* sr_1 = hkAddByteOffset( sr, srStriding );
-						;
 						int typeAddon =  2;
 						sc->initSingleContact( *jac1Lin2Ang, typeAddon );
 						jac1Lin2Ang->setUserValue( hkUFloat8_intToReal[maxImpulse] );
@@ -8796,12 +8791,10 @@ void __cdecl FUN_00a00ec0( hkpSimpleContactConstraintAtom* atom, const hkpConstr
 				}
 				else
 				{
-					;
 					hkpJacobianSingleContactSchema* single = reinterpret_cast<hkpJacobianSingleContactSchema*>( com );
 					hkpJacobianPairContactSchema* sc = reinterpret_cast<hkpJacobianPairContactSchema*>( single - 1 );
 					hkReal jacNonDiagFactor = 0.99f;
 					const int jacIdx2 = 0;
-					;
 					hkReal invJac01 = hkJacobianBuilder::getInvJac01Optimized( opaA, opaB, jac1Lin2Ang - 1, in.m_virtMassFactor, jacNonDiagFactor );
 					sc->initPairContact( *reinterpret_cast<const hkpJacDouble2Bil*>( jac1Lin2Ang - 1 ), invJac01,  0 );
 					com = reinterpret_cast<hkpJacobianSchema*>( sc + 1 );

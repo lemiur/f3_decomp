@@ -3109,7 +3109,6 @@ class hkpStorageExtendedMeshShape : public hkpExtendedMeshShape
 // pdb: hkpStorageExtendedMeshShape::addTrianglesSubpart | hkpStorageExtendedMeshShape.obj | fnv360_0822_retail, call_gap + bridge(call_gap|vtable) + skyrim(call_gap), high
 void hkpStorageExtendedMeshShape::hkpStorageExtendedMeshShape_addTrianglesSubpart( const TrianglesSubpart& partIn )
 {
-	;
 	TrianglesSubpart& part = *expandOneTriangleSubparts();
 	{
 		TrianglesSubpart temp;
@@ -3229,7 +3228,6 @@ void hkpStorageExtendedMeshShape::hkpStorageExtendedMeshShape_addTrianglesSubpar
 	}
 	if ( part.m_materialIndexBase )
 	{
-		;
 		if ( partIn.m_materialStriding == 0 )
 		{
 			store.m_materials.pushBack( *reinterpret_cast<const hkUint32*>( partIn.m_materialBase ) );
@@ -3250,8 +3248,6 @@ void hkpStorageExtendedMeshShape::hkpStorageExtendedMeshShape_addTrianglesSubpar
 		}
 		part.m_materialBase = reinterpret_cast<const hkpMeshMaterial*>( store.m_materials.begin() );
 	}
-	;
-	;
 	recalcAabbExtents();
 }
 

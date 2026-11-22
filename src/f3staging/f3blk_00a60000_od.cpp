@@ -2516,7 +2516,6 @@ extern "C" __forceinline void __cdecl hkPoweredChain_ComputeConstraintMatrix_Nex
 // pdb params: numConstraints, cfm, motorsState, j, jAng, va, accumsBase, triples, bufferSize
 void __cdecl FUN_00a7bcf0( int numConstraints, const hkpCfmParam& cfm, hkp3dAngularMotorSolverInfo* motorsState, hkp1Lin2AngJacobian* __restrict j, hkp2AngJacobian* __restrict jAng, hkpVelocityAccumulatorOffset* __restrict va, const hkpVelocityAccumulator* accumsBase, hkpConstraintChainMatrix6Triple* triples, int bufferSize )
 {
-	;
 	hkMatrix6 mtxPrevOffdiag; mtxPrevOffdiag.setZero();
 	hkMatrix6* triplePrevUpper = &mtxPrevOffdiag;
 	int row;
@@ -6832,7 +6831,6 @@ void hkpConvexRadiusBuilder::FUN_00a694a0(		const hkpShape* shape,
 				}
 				else
 				{
-					;
 				}
 			}
 			break;
@@ -6864,7 +6862,6 @@ void hkpConvexRadiusBuilder::FUN_00a694a0(		const hkpShape* shape,
 				}
 				else
 				{
-					;
 				}
 			}
 			break;

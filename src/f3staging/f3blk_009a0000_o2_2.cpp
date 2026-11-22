@@ -8773,7 +8773,6 @@ hkpVelocityAccumulator* hkRigidMotionUtilApplyForcesAndBuildAccumulators( const 
 		{
 			case hkpMotion::MOTION_INVALID:
 			{
-				;
 			}
 			case hkpMotion::MOTION_BOX_INERTIA:
 			case hkpMotion::MOTION_STABILIZED_BOX_INERTIA:
@@ -8823,7 +8822,6 @@ buildRigidBodyAccumulator:
 			}
 			case hkpMotion::MOTION_FIXED:
 			{
-				;
 				hkpVelocityAccumulator* accumulator = accumulatorsOut;
 				accumulator->setFixed();
 				break;
@@ -8842,7 +8840,6 @@ buildRigidBodyAccumulator:
 			}
 			default:
 			{
-				;
 			}
 		}
 	}
@@ -10581,7 +10578,6 @@ int hkBvTreeAgent3::hkBvTreeAgent3_calcAabbAndQueryTree( const hkpCdBody& bodyA,
 	}
 	if ( numHits > 256 )
 	{
-		;
 	}
 	if ( numHits >= hitListCapacity )
 	{

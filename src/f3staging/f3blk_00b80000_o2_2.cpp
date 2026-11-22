@@ -366,7 +366,6 @@ int __cdecl inflate(z_streamp strm,int flush)
                 state->mode = BAD;
                 break;
             }
-            ;
             strm->adler = state->check = FUN_00b9f270(0L, 0, 0);
             state->mode = hold & 0x200 ? DICTID : TYPE;
             do { hold = 0; bits = 0; } while (0);
@@ -492,7 +491,6 @@ int __cdecl inflate(z_streamp strm,int flush)
                 break;
             case 1:                             
                 fixedtables(state);
-                ;
                 state->mode = LEN;              
                 break;
             case 2:                             
@@ -514,7 +512,6 @@ int __cdecl inflate(z_streamp strm,int flush)
                 break;
             }
             state->length = (unsigned)hold & 0xffff;
-            ;
             do { hold = 0; bits = 0; } while (0);
             state->mode = COPY;
         case COPY:
@@ -531,7 +528,6 @@ int __cdecl inflate(z_streamp strm,int flush)
                 state->length -= copy;
                 break;
             }
-            ;
             state->mode = TYPE;
             break;
         case TABLE:
@@ -549,7 +545,6 @@ int __cdecl inflate(z_streamp strm,int flush)
                 break;
             }
 
-            ;
             state->have = 0;
             state->mode = LENLENS;
         case LENLENS:
@@ -570,7 +565,6 @@ int __cdecl inflate(z_streamp strm,int flush)
                 state->mode = BAD;
                 break;
             }
-            ;
             state->have = 0;
             state->mode = CODELENS;
         case CODELENS:
@@ -641,7 +635,6 @@ int __cdecl inflate(z_streamp strm,int flush)
                 state->mode = BAD;
                 break;
             }
-            ;
             state->mode = LEN;
         case LEN:
             if (have >= 6 && left >= 258) {
@@ -668,12 +661,10 @@ int __cdecl inflate(z_streamp strm,int flush)
             do { hold >>= (here.bits); bits -= (unsigned)(here.bits); } while (0);
             state->length = (unsigned)here.val;
             if ((int)(here.op) == 0) {
-                ;
                 state->mode = LIT;
                 break;
             }
             if (here.op & 32) {
-                ;
                 state->mode = TYPE;
                 break;
             }
@@ -690,7 +681,6 @@ int __cdecl inflate(z_streamp strm,int flush)
                 state->length += ((unsigned)hold & ((1U << (state->extra)) - 1));
                 do { hold >>= (state->extra); bits -= (unsigned)(state->extra); } while (0);
             }
-            ;
             state->mode = DIST;
         case DIST:
             for (;;) {
@@ -728,7 +718,6 @@ int __cdecl inflate(z_streamp strm,int flush)
                 state->mode = BAD;
                 break;
             }
-            ;
             state->mode = MATCH;
         case MATCH:
             if (left == 0) goto inf_leave;
@@ -773,7 +762,6 @@ int __cdecl inflate(z_streamp strm,int flush)
                 out = left;
 
                 do { hold = 0; bits = 0; } while (0);
-                ;
             }
 
             state->mode = LENGTH;
@@ -786,7 +774,6 @@ int __cdecl inflate(z_streamp strm,int flush)
                     break;
                 }
                 do { hold = 0; bits = 0; } while (0);
-                ;
             }
 
             state->mode = DONE;

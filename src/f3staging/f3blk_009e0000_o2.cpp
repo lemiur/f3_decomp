@@ -12951,7 +12951,6 @@ static __forceinline void __cdecl FUN_009fc870( const hkpMovingSurfaceModifierCo
 	hkVector4 velocity = atom.getVelocity();
 	hkpConstraintQueryIn modifiedIn = in;
 	const hkpConstraintAtom* child = atom.m_child;
-	;
 	hkpSimpleContactConstraintAtom* contactAtom = const_cast<hkpSimpleContactConstraintAtom*>( static_cast<const hkpSimpleContactConstraintAtom*>( child ) );
 	out.m_jacobianSchemas = hkAddByteOffset( out.m_jacobianSchemas.val(), hkUlong( -16 ) );
 	hkpContactPointPropertiesStream* cpProps = contactAtom->getContactPointPropertiesStream();
@@ -12980,7 +12979,6 @@ static __forceinline void __cdecl FUN_009fc870( const hkpMovingSurfaceModifierCo
 	hkAddVelocityBuildJacobian( deltaVel, accumIndex, out );
 	accum.m_linearVel.add4( deltaVel );
 	hkBool doNotWriteHeaderSchema = false;
-	;
 	hkpSimpleContactConstraintAtom* contact = const_cast<hkpSimpleContactConstraintAtom*>( static_cast<const hkpSimpleContactConstraintAtom*>( child ) );
 	hkSimpleContactConstraintDataBuildJacobian( contact, modifiedIn, doNotWriteHeaderSchema, out );
 	deltaVel.setNeg4( deltaVel );

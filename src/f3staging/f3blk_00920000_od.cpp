@@ -1971,7 +1971,6 @@ void hkpAabbUtil::hkAabbUtil_initOffsetAabbInput(const hkMotionState* motionStat
 			for ( hkReal p = 1.0f; p < parts; p += 2.0f )
 			{
 				hkReal time = swept.getBaseTime() + p * partsInv * deltaTime;
-				;
 				hkTransform& t = input.m_transforms[input.m_numTransforms];
 				input.m_numTransforms = input.m_numTransforms + 1;
 				motionState->getSweptTransform()._approxTransformAt( time, t );

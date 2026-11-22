@@ -12740,7 +12740,6 @@ void FUN_00a2c5b0( hkpAgent1nTrack& agentTrack, hkpAgent1nTrack* agentTrackOnPpu
 						void* agentEnd = dispatcher->getAgent3CreateFunc( entry->m_agentType )( *in, entry, agentData );
 						hkUlong size = hkGetByteOffset( entry, agentEnd );
 						entry->m_size = hkUchar( size );
-						;
 					}
 					else
 					{
@@ -12749,7 +12748,6 @@ void FUN_00a2c5b0( hkpAgent1nTrack& agentTrack, hkpAgent1nTrack* agentTrackOnPpu
 						void* agentEnd = dispatcher->getAgent3CreateFunc( entry->m_agentType )( *in, entry, agentData );
 						hkUlong size = hkGetByteOffset( entry, agentEnd );
 						entry->m_size = hkUchar( size );
-						;
 					}
 				}
 				else
@@ -12972,7 +12970,6 @@ checkReadSector:
 			continue;
 		}
 		currentSector->m_bytesAllocated = bytesUsed;
-		;
 		if ( currentSectorIndex >= nextReadSectorIndex )
 		{
 			agentTrack.m_sectors.expandAt( nextReadSectorIndex, 1 );
@@ -12985,7 +12982,6 @@ checkReadSector:
 	}
 	{
 		int bytesUsed = hkGetByteOffset( currentSector->getBegin(), currentData );
-		;
 		currentSector->m_bytesAllocated = bytesUsed;
 	}
 	agentTrack.m_sectors.setSize( currentSectorIndex + 1 );

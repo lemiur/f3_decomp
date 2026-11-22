@@ -6105,7 +6105,6 @@ void hkpMultiThreadedSimulation::FUN_00981af0( const hkArray<hkpAgentNnEntry*>& 
 	if ( m_world->m_processToisMultithreaded && m_jobQueue.m_data->m_dontReleaseSpus )
 	{
 		int maxEntriesPerAgentNnEntryTask = m_world->m_maxEntriesPerToiCollideTask;
-		;
 		const hkArray<hkpAgentNnEntry*>& entriesOnPpu = entries;
 		__declspec(align(16)) unsigned char jobWorkspace[sizeof(hkpAgentNnEntryJob) + sizeof(hkpPostCollideJob) + sizeof(hkpMtThreadStructure)];
         hkpAgentNnEntryJob& agentEntryJob = *new (jobWorkspace) hkpAgentNnEntryJob( collisionInput.m_stepInfo, entriesOnPpu.begin(), entriesOnPpu.getSize(), maxEntriesPerAgentNnEntryTask, forceManifoldQualityType );
@@ -6115,7 +6114,6 @@ void hkpMultiThreadedSimulation::FUN_00981af0( const hkArray<hkpAgentNnEntry*>& 
 			agentEntryJob.m_header = hkpAgentSectorHeader::allocate( numTasks, maxEntriesPerAgentNnEntryTask );
 			m_jobQueue.addJob( jobWorkspace, hkJobQueue::JOB_LOW_PRIORITY, hkJobQueue::JOB_TYPE_CPU );
 		}
-		;
 		m_world->unmarkForWrite();
 		m_world->markForRead();
 		processNextJob( hkJobQueue::THREAD_TYPE_CPU_MASTER );

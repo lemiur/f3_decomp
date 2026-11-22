@@ -2373,7 +2373,6 @@ static void FUN_009eaf10( const hkReal* vertexArray, int numVertices, int stridi
 {
 	hkReal Ah = 0.0f;
 	int numTris = numVertices / 3;
-	;
 	hkVector4 mh;
 	mh.setZero4();
 	hkVector4* m = new hkVector4[numTris];

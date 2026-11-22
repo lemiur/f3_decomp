@@ -1352,7 +1352,6 @@ void __cdecl hkSolverExport_exportImpulsesAndRhs( const hkpSolverInfo& info, con
 	const hkpJacobianSchema* com = schemas;
 	hkpSolverResults* solverOut = 0;
 	int solverResultStriding = 0;
-	;
 	const hkReal rhsFactorInfo = info.m_deltaTime * info.m_dampDivTau;
 	const hkReal frictionRhsFactor = info.m_deltaTime * info.m_dampDivFrictionTau;
 	const hkReal frameDeltaTime = info.m_numSteps * info.m_deltaTime;
@@ -1448,7 +1447,6 @@ void __cdecl hkSolverExport_exportImpulsesAndRhs( const hkpSolverInfo& info, con
 					{
 						while ( hkpJacobianSchema::getType( com ) > hkpJacobianSchema::SCHEMA_TYPE_SIMPLE_BEGIN && hkpJacobianSchema::getType( com ) < hkpJacobianSchema::SCHEMA_TYPE_SIMPLE_END )
 						{
-							;
 							solverIn += hkpJacobianSchema::getNumSolverElemTemps( com );
 							com = hkAddByteOffsetConst( com, hkpJacobianSchema::getSize( com ) );
 						}
@@ -1636,7 +1634,6 @@ exportAngularFriction1d:
 					doubleJacExtPtr = &schema->m_jac; hkpSolverResults* dsr; schema->unpackSolverResultsPtr( dsr );
 					usedImpulseFactor = solverIn[2].m_usedImpulseFactor;
 					com = reinterpret_cast<const hkpJacobianSchema*>( schema + 1 );
-					;
 					hkReal rhsOut0, rhsOut1;
 					hkSolverExport::integrateRhsPair( *mA, *mB, &doubleJacExtPtr->m_jac0, frictionRhsFactor, frameDeltaTime, rhsOut0, rhsOut1 );
 					hkSolverExportWriteResult128( solverIn[0].m_impulseApplied, rhsOut0 * usedImpulseFactor, solverIn[1].m_impulseApplied, rhsOut1 * usedImpulseFactor, dsr, srWriter );
@@ -1649,7 +1646,6 @@ exportAngularFriction1d:
 					tripleJacExtPtr = &schema->m_jac; hkpSolverResults* dsr; schema->unpackSolverResultsPtr( dsr );
 					usedImpulseFactor = solverIn[3].m_usedImpulseFactor;
 					com = reinterpret_cast<const hkpJacobianSchema*>( schema + 1 );
-					;
 					hkReal rhsOut0, rhsOut1;
 					hkSolverExport::integrateRhsPair( *mA, *mB, &tripleJacExtPtr->m_jac0, frictionRhsFactor, frameDeltaTime, rhsOut0, rhsOut1 );
 					hkReal rhsa = usedImpulseFactor * hkSolverExport::integrateAngularRhs( *mA, *mB, &tripleJacExtPtr->m_jac2, frictionRhsFactor, frameDeltaTime );

@@ -5194,7 +5194,6 @@ void hkpBvTreeStreamAgent::hkpBvTreeStreamAgent_processCollision(const hkpCdBody
 			return;
 		}
 		hkAlgorithm::quickSort( hitList.begin(), hitList.getSize() );
-		;
 		const hkpBvTreeShape* bvB = static_cast<const hkpBvTreeShape*>( bodyB.getShape() );
 		const hkpShapeContainer* shapeContainer = bvB->getContainer();
 		hkAgent1nMachine_Process( m_agentTrack, 0, in3, shapeContainer, hitList.begin(), output );

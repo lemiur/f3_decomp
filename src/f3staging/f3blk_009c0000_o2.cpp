@@ -12811,7 +12811,6 @@ __forceinline hkpSphereCapsuleAgent::ClosestPointResult hkpSphereCapsuleAgent::g
 // pdb: hkpSphereCapsuleAgent::processCollision | hkpSphereCapsuleAgent.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
 void hkpSphereCapsuleAgent::hkpSphereCapsuleAgent_processCollision( const hkpCdBody& bodyA, const hkpCdBody& bodyB, const hkpProcessCollisionInput& input, hkpProcessCollisionOutput& result )
 {
-	;
 	{ hkMonitorStream& mStream = hkMonitorStream::getInstance(); if ( mStream.memoryAvailable() ) { hkMonitorStream::TimerCommand* h = reinterpret_cast<hkMonitorStream::TimerCommand*>(mStream.getEnd()); h->m_commandAndMonitor = "T" "t" "SphereCapsule"; h->setTime(); mStream.setEnd( (char*)(h+1) ); } };
 	hkpProcessCdPoint& point = *result.reserveContactPoints( 1 );
 	if ( getClosestPointInl( bodyA, bodyB, input, point.m_contact ) != ST_CP_MISS )

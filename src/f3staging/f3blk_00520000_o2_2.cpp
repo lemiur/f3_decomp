@@ -393,7 +393,6 @@ bool __cdecl Script_ModifyWaterShader(const ScriptParameter* parameters, const c
     }
     if (!_stricmp(buf, "velocity")) {
     } else if (!_stricmp(buf, "direction")) {
-        if (value >= 0.0f && value <= 360.0f) { }
     } else if (!_stricmp(buf, "amplitude")) {
     } else if (!_stricmp(buf, "frequency")) {
     } else if (!_stricmp(buf, "reflectamt")) {

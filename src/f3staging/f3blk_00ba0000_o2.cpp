@@ -2052,7 +2052,6 @@ static int build_bl_tree(deflate_state *s)
     }
     
     s->opt_len += 3*(max_blindex+1) + 5+5+4;
-    ;
 
     return max_blindex;
 }
@@ -2100,22 +2099,18 @@ void FUN_00ba0ec0(deflate_state *s, charf *buf, ulg stored_len, int eof)
         if (s->data_type == 2) FUN_00ba0640(s);
 
         build_tree(s, (tree_desc *)(&(s->l_desc)));
-        ;
 
         build_tree(s, (tree_desc *)(&(s->d_desc)));
-        ;
 
         max_blindex = build_bl_tree(s);
 
         opt_lenb = (s->opt_len+3+7)>>3;
         static_lenb = (s->static_len+3+7)>>3;
 
-        ;
 
         if (static_lenb <= opt_lenb) opt_lenb = static_lenb;
 
     } else {
-        ;
         opt_lenb = static_lenb = stored_len + 5; 
     }
 
@@ -2135,7 +2130,6 @@ void FUN_00ba0ec0(deflate_state *s, charf *buf, ulg stored_len, int eof)
         FUN_00ba0230(s, (ct_data *)s->dyn_ltree, (ct_data *)s->dyn_dtree);
 
     }
-    ;
 
     FUN_00b9f670(s);
 
@@ -2143,7 +2137,6 @@ void FUN_00ba0ec0(deflate_state *s, charf *buf, ulg stored_len, int eof)
         FUN_00ba0750(s);
 
     }
-    ;
 }
 
 static void FUN_00ba0230(deflate_state *s, ct_data *ltree, ct_data *dtree)

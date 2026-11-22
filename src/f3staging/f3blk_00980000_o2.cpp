@@ -15931,7 +15931,6 @@ void __cdecl hkEntityAabbUtil::FUN_0099a2d0(const hkpCollisionInput* collisionIn
 			const hkpShapeContainer* container = shape->getContainer();
 			hkpAabbUtil::OffsetAabbInput input;
 			hkpAabbUtil::initOffsetAabbInput( entity->getMotion()->getMotionState(), input );
-			;
 			{
 				const hkVector4& massCenter = entity->getMotion()->getCenterOfMassInWorld();
 				hkAabb rootAabb; rootAabb.m_min = massCenter; rootAabb.m_max = massCenter;

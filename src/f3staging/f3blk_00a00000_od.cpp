@@ -1381,7 +1381,6 @@ const hkpShape* hkpTransformCollapseUtil::FUN_00a04480 (const hkpShape* transfor
 		}
 		default:
 		{
-			;
 		}
 	}
 	const hkpShapeType childShapeType = childShape->getType();
@@ -2653,7 +2652,6 @@ void __cdecl FUN_00a0e5d0( const hkpSolverInfo& solverInfo, const hkSolver::Solv
 			break;
 		}
 	}
-	;
 	{
 		hkVector8* g = info.m_gTempBuffer + 1;
 		hkVector8 imp; imp.setZero8();

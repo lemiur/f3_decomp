@@ -172,7 +172,6 @@ extern "C" void __cdecl FUN_00c0c4e6(void)
             (*pTerminate)();
         }
         __except (1) {
-            ;
         }
     }
     FUN_00c0ad65();
@@ -197,7 +196,6 @@ extern "C" void __cdecl FUN_00c0c532(void)
             inconsistencyFunction();
         }
         __except (1) {
-            ;
         }
     }
     FUN_00c0c4e6();
@@ -310,7 +308,6 @@ extern "C" void __cdecl FUN_00c09b74(EHRegistrationNode_* pRN, DispatcherContext
                 }
             }
             __except (FUN_00c09b30(_exception_info())) {
-                ;
             }
             curState = nxtState;
         }

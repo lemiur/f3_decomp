@@ -825,7 +825,6 @@ static void FUN_00b9fac0(deflate_state* s, ct_data* tree, int max_code)
   }
 }; count--;
             }
-            ;
             { int len = s->bl_tree[REP_3_6].dl.len;
   if (s->bi_valid > (int)Buf_size - len) {
     int val = s->bl_tree[REP_3_6].fc.code;
@@ -2360,7 +2359,6 @@ static uInt longest_match(deflate_state *s, IPos cur_match)
     register Byte scan_end1  = scan[best_len-1];
     register Byte scan_end   = scan[best_len];
 
-    ;
 
     if (s->prev_length >= s->good_match) {
         chain_length >>= 2;
@@ -2368,10 +2366,8 @@ static uInt longest_match(deflate_state *s, IPos cur_match)
 
     if ((uInt)nice_match > s->lookahead) nice_match = s->lookahead;
 
-    ;
 
     do {
-        ;
         match = s->window + cur_match;
 
         if (match[best_len]   != scan_end  ||
@@ -2380,7 +2376,6 @@ static uInt longest_match(deflate_state *s, IPos cur_match)
             *++match          != scan[1])      continue;
 
         scan += 2, match++;
-        ;
 
         do {
         } while (*++scan == *++match && *++scan == *++match &&
@@ -2389,7 +2384,6 @@ static uInt longest_match(deflate_state *s, IPos cur_match)
                  *++scan == *++match && *++scan == *++match &&
                  scan < strend);
 
-        ;
 
         len = 258 - (int)(strend - scan);
         scan = strend - 258;
@@ -3761,20 +3755,15 @@ static uInt longest_match_fast(deflate_state* s, IPos cur_match)
     register Bytef *match;                       
     register int len;                           
     register Bytef *strend = s->window + s->strstart + 258;
-    ;
-    ;
-    ;
     match = s->window + cur_match;
     if (match[0] != scan[0] || match[1] != scan[1]) return 3-1;
     scan += 2, match += 2;
-    ;
     do {
     } while (*++scan == *++match && *++scan == *++match &&
              *++scan == *++match && *++scan == *++match &&
              *++scan == *++match && *++scan == *++match &&
              *++scan == *++match && *++scan == *++match &&
              scan < strend);
-    ;
     len = 258 - (int)(strend - scan);
     if (len < 3) return 3 - 1;
     s->match_start = cur_match;
@@ -3860,7 +3849,6 @@ block_state deflate_slow(deflate_state* s, int flush)
         }
         if (s->prev_length >= 3 && s->match_length <= s->prev_length) {
             uInt max_insert = s->strstart + s->lookahead - 3;
-            ;
             { uch len = (s->prev_length - 3); ush dist = (s->strstart -1 - s->prev_match); s->d_buf[s->last_lit] = dist; s->l_buf[s->last_lit++] = len; dist--; s->dyn_ltree[DAT_00ea6e80[len]+256+1].fc.freq++; s->dyn_dtree[((dist) < 256 ? (int)DAT_00ea6c80[dist] : (int)DAT_00ea6c80[256+((dist)>>7)])].fc.freq++; bflush = (s->last_lit == s->lit_bufsize-1); };
             s->lookahead -= s->prev_length-1;
             s->prev_length -= 2;
@@ -3874,7 +3862,6 @@ block_state deflate_slow(deflate_state* s, int flush)
             s->strstart++;
             if (bflush) { { FUN_00ba0ec0(s, (s->block_start >= 0L ? (charf *)&s->window[(unsigned)s->block_start] : (charf *)0), (ulg)((long)s->strstart - s->block_start), (0)); s->block_start = s->strstart; FUN_00b9d2b0(s->strm); ; }; if (s->strm->avail_out == 0) return (0) ? finish_started : need_more; };
         } else if (s->match_available) {
-            ;
             { uch cc = (s->window[s->strstart-1]); s->d_buf[s->last_lit] = 0; s->l_buf[s->last_lit++] = cc; s->dyn_ltree[cc].fc.freq++; bflush = (s->last_lit == s->lit_bufsize-1); };
             if (bflush) {
                 { FUN_00ba0ec0(s, (s->block_start >= 0L ? (charf *)&s->window[(unsigned)s->block_start] : (charf *)0), (ulg)((long)s->strstart - s->block_start), (0)); s->block_start = s->strstart; FUN_00b9d2b0(s->strm); ; };
@@ -3888,9 +3875,7 @@ block_state deflate_slow(deflate_state* s, int flush)
             s->lookahead--;
         }
     }
-    ;
     if (s->match_available) {
-        ;
         { uch cc = (s->window[s->strstart-1]); s->d_buf[s->last_lit] = 0; s->l_buf[s->last_lit++] = cc; s->dyn_ltree[cc].fc.freq++; bflush = (s->last_lit == s->lit_bufsize-1); };
         s->match_available = 0;
     }
@@ -3982,9 +3967,6 @@ static __declspec(noinline) void FUN_00b9ffd0(deflate_state* s, int lcodes, int 
 {
     int rank;                    
 
-    ;
-    ;
-    ;
     { int len = 5;
   if (s->bi_valid > (int)Buf_size - len) {
     int val = lcodes-257;
@@ -4022,7 +4004,6 @@ static __declspec(noinline) void FUN_00b9ffd0(deflate_state* s, int lcodes, int 
   }
 }; 
     for (rank = 0; rank < blcodes; rank++) {
-        ;
         { int len = 3;
   if (s->bi_valid > (int)Buf_size - len) {
     int val = s->bl_tree[bl_order[rank]].dl.len;
@@ -4036,13 +4017,10 @@ static __declspec(noinline) void FUN_00b9ffd0(deflate_state* s, int lcodes, int 
   }
 };
     }
-    ;
 
     FUN_00b9fac0(s, (ct_data *)s->dyn_ltree, lcodes-1); 
-    ;
 
     FUN_00b9fac0(s, (ct_data *)s->dyn_dtree, dcodes-1); 
-    ;
 }
 void EmitHeader0572(deflate_state* s,int literals,int distances,int lengths) { FUN_00b9ffd0(s,literals,distances,lengths); }
 }
