@@ -161,6 +161,8 @@ struct FUN_00dd8480_cls
     int Allocate(int a);
 };
 
+// Looks the name up in this registry's map, then in the next registry of the chain.
+// @f3 0x00a7df80 (community match, verified in this file)
 int FUN_00dd8480_cls::Allocate(int aiSize)
 {
     int r = m_map.FUN_009b10f0(aiSize, 0);
