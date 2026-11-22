@@ -581214,12 +581214,12 @@
     },
     {
      "address": "0x00979f80",
-     "symbol": "?RemoveReferenceFromSlots@FUN_00cf3040_class@fnv_00cf3040@@QAEXPAX@Z",
+     "symbol": "?RemoveReferenceFromSlots@FUN_00cf3040_class@fnv_00cf3040@@QAEXPAUDDCC60WorldF3@2@@Z",
      "size": 48
     },
     {
      "address": "0x0097a070",
-     "symbol": "?FUN_00cf3090@FUN_00cf3090_class@@QAEXPAX@Z",
+     "symbol": "?FUN_00cf3090@FUN_00cf3090_class@@QAEXPAUConstraintEntityF3@@@Z",
      "size": 28
     },
     {

@@ -5,20 +5,27 @@
 #include "havok/hkpConstraintInstance.h"
 
 void __cdecl hkpWorldOperationUtil_removeConstraintImmediately(void* a, void* b, int c);
+// hkpWorldObject: m_world at +0x08 (New Vegas Xbox 360 PDB).
+struct ConstraintEntityF3
+{
+    int unk00, unk04;
+    void* m_world;
+};
+// hkpConstraintInstance
 struct FUN_00cf3090_class
 {
     void* m0;
     void* m1;
-    void* m2;
+    void* m_owner;  // +0x08
     void* m3;
-    void FUN_00cf3090(void* arg);
+    void FUN_00cf3090(ConstraintEntityF3* entity);
 };
-// If m2 is set, calls hkpWorldOperationUtil_removeConstraintImmediately with the pointer at arg+8, this, and 1.
+// When the constraint is owned, removes it at once from the removed entity's world.
 // @fnv 0x00cf3090
-void FUN_00cf3090_class::FUN_00cf3090(void* arg)
+void FUN_00cf3090_class::FUN_00cf3090(ConstraintEntityF3* entity)
 {
-    if (m2)
-        hkpWorldOperationUtil_removeConstraintImmediately(*(void**)((char*)arg + 8), this, 1);
+    if (m_owner)
+        hkpWorldOperationUtil_removeConstraintImmediately(entity->m_world, this, 1);
 }
 
 struct DDCC60World
@@ -35,31 +42,37 @@ struct DDCC60World
 {
     void removeReference();
 };
+// hkpWorld: m_fixedRigidBody at +0x24 (New Vegas Xbox 360 PDB).
+struct DDCC60WorldF3
+{
+    char unk00[0x24];
+    DDCC60World* m_fixedRigidBody;
+};
+// hkpConstraintInstance
 struct FUN_00cf3040_class
 {
     void* m0;
     void* m1;
     void* m2;
     void* m3;
-    void* m4;
-    void* m5;
-    void* m6;
+        void* m4;
+    DDCC60World* m_entities[2];  // +0x14
     void* m7;
-    void RemoveReferenceFromSlots(void* arg);
+    void RemoveReferenceFromSlots(DDCC60WorldF3* world);
 };
-// Scans two pointers at this+0x14 and, when one matches the pointer at arg+0x24, calls removeReference on it and clears that slot.
+// Drops the references to the world's fixed rigid body from the constraint's two entity slots.
 // @fnv 0x00cf3040
 // pdb: hkpConstraintInstance::setFixedRigidBodyPointersToZero | hkpConstraintInstance.obj | fnv360_0822_retail, call_gap_sim, medium
 // pdb params: world
-void FUN_00cf3040_class::RemoveReferenceFromSlots(void* arg)
+void FUN_00cf3040_class::RemoveReferenceFromSlots(DDCC60WorldF3* world)
 {
     for (int i = 0; i < 2; ++i)
     {
-        DDCC60World* p = (DDCC60World*)*((void**)((char*)this + 0x14) + i);
-        if (p == *(DDCC60World**)((char*)arg + 0x24))
+        DDCC60World* p = m_entities[i];
+        if (p == world->m_fixedRigidBody)
         {
             p->removeReference();
-            *(void**)((char*)this + 0x14 + i * 4) = 0;
+            m_entities[i] = 0;
         }
     }
 }
@@ -71,6 +84,17 @@ struct RefObj
     void FUN_00c90510();
 };
 
+// hkpWorld: m_fixedRigidBody at +0x24; hkpEntity: m_world at +0x08 (New Vegas Xbox 360 PDB).
+struct CF3E60World
+{
+    char unk00[0x24];
+    RefObj* m_fixedRigidBody;
+};
+struct CF3E60Entity
+{
+    int unk00, unk04;
+    CF3E60World* m_world;
+};
 struct FUN_00cf3e60_class : public hkReferencedObject
 {
     void* m_pOwnerObject;
@@ -94,14 +118,12 @@ void FUN_00cf3e60_class::FUN_00cf3e60()
 
             if (other != 0)
             {
-                void* constraint = *reinterpret_cast<void**>(reinterpret_cast<unsigned char*>(other) + 0x08);
-
-                if (constraint != 0)
+                                CF3E60World* world = static_cast<CF3E60Entity*>(other)->m_world;
+                if (world != 0)
                 {
-                    void* referenced = *reinterpret_cast<void**>(reinterpret_cast<unsigned char*>(constraint) + 0x24);
-
-                    m_kActorEntries[i] = referenced;
-                    reinterpret_cast<RefObj*>(referenced)->FUN_00c90510();
+                    RefObj* fixedBody = world->m_fixedRigidBody;
+                    m_kActorEntries[i] = fixedBody;
+                    fixedBody->FUN_00c90510();
                 }
             }
         }
