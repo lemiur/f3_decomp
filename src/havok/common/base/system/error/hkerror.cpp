@@ -95,11 +95,16 @@ class CB1600MemoryStreamWriter : public CB1600ReferencedObject
     int unk1C;
 };
 
+class hkClass;
+class hkStatisticsCollector;
+// hkOstream: the three slots of the Fallout 3 vtables of hkOstream (0x00e7a270) and hkErrStream (0x00e36a08).
 class CB1600StreamBase
 {
   public:
     CB1600StreamBase(void* writer);
-    virtual void unk00();
+    virtual ~CB1600StreamBase();
+    virtual const hkClass* getClassType() const;
+    virtual void calcContentStatistics(hkStatisticsCollector* collector, const hkClass* cls) const;
 
     int unk04;
     CB1600MemoryStreamWriter* m_pStreamWriter;
@@ -109,7 +114,6 @@ class FUN_00cb1600 : public CB1600StreamBase
 {
   public:
     FUN_00cb1600(void* buf, int bufSize);
-    virtual void unk00();
 };
 
 // Constructs a CB1600MemoryStreamWriter in place at the end of the buffer and stores it as the stream's writer, then removes its reference.
