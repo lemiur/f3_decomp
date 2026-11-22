@@ -9,9 +9,9 @@ NiAVObject* NiNode::GetObjectByName(const NiFixedString& name)
     NiAVObject* result = NiAVObject::GetObjectByName(name);
     if (result)
         return result;
-    for (unsigned int i = 0; i < m_kChildList.m_usArraySize; ++i)
+    for (unsigned int i = 0; i < m_kChildren.m_usSize; ++i)
     {
-        NiAVObject* child = m_kChildList.m_children[i];
+        NiAVObject* child = m_kChildren.m_pBase[i];
         if (child)
         {
             result = child->GetObjectByName(name);
@@ -26,9 +26,9 @@ NiAVObject* NiNode::GetObjectByName(const NiFixedString& name)
 void NiNode::CopyMemberData(NiNode* target, CloningProcess& process)
 {
     NiAVObject::FUN_00a5ac90(target, process);
-    for (unsigned int i = 0; i < m_kChildList.m_usArraySize; ++i)
+    for (unsigned int i = 0; i < m_kChildren.m_usSize; ++i)
     {
-        NiAVObject* child = m_kChildList.m_children[i];
+        NiAVObject* child = m_kChildren.m_pBase[i];
         if (child)
         {
             NiAVObject* clone = child->MakeClone(process);
@@ -44,9 +44,9 @@ void NiNode::UpdatePropertiesDownwardPass(NiPropertyState* state)
     NiAVObject::UpdatePropertiesDownwardPass(state);
     NiPropertyState* pLocalState = 0;
     BuildPropertyState(state, true, pLocalState);
-    for (unsigned int i = 0; i < m_kChildList.m_usArraySize; ++i)
+    for (unsigned int i = 0; i < m_kChildren.m_usSize; ++i)
     {
-        NiAVObject* child = m_kChildList.m_children[i];
+        NiAVObject* child = m_kChildren.m_pBase[i];
         if (child)
             child->UpdatePropertiesDownwardPass(pLocalState);
     }
@@ -54,31 +54,31 @@ void NiNode::UpdatePropertiesDownwardPass(NiPropertyState* state)
         DestroyPropertyState(pLocalState);
 }
 
-// Updates world data when the transform flag is set, recurses into children, and recomputes or merges m_pkWorldBound from child bounds.
+// Updates world data when the transform flag is set, recurses into children, and recomputes or merges m_kWorldBound from child bounds.
 // @fnv 0x00a5e0b0
 void NiNode::UpdateTransformAndBounds(NiUpdateData& data)
 {
     if (TransformFlag())
         UpdateWorldData(data);
-    unsigned int count = m_kChildList.m_usArraySize;
+    unsigned int count = m_kChildren.m_usSize;
     unsigned int i = 0;
     if (BoundFlag19())
     {
         if (!BoundFlag13())
         {
-            if (m_pkWorldBound)
-                m_pkWorldBound->m_fBoundRadius = 0.0f;
+            if (m_kWorldBound)
+                m_kWorldBound->m_fRadius = 0.0f;
             for (; i < count; ++i)
             {
-                NiAVObject* child = m_kChildList.m_children[i];
+                NiAVObject* child = m_kChildren.m_pBase[i];
                 if (child)
                 {
                     child->UpdateTransformAndBounds(data);
-                    if (child->m_pkWorldBound && child->m_pkWorldBound->m_fBoundRadius != 0.0f)
+                    if (child->m_kWorldBound && child->m_kWorldBound->m_fRadius != 0.0f)
                     {
                         EnsureWorldBound();
                         const NiBound& bound = GetBound(child);
-                        m_pkWorldBound->Set(bound.m_kCenter, bound.m_fBoundRadius);
+                        m_kWorldBound->Set(bound.m_kCenter, bound.m_fRadius);
                         ++i;
                         break;
                     }
@@ -90,15 +90,15 @@ void NiNode::UpdateTransformAndBounds(NiUpdateData& data)
     }
     for (; i < count; ++i)
     {
-        NiAVObject* child = m_kChildList.m_children[i];
+        NiAVObject* child = m_kChildren.m_pBase[i];
         if (child)
         {
             child->UpdateTransformAndBounds(data);
             if (!BoundFlag13() && BoundFlag19())
             {
-                NiBound* bound = child->m_pkWorldBound;
-                if (bound && bound->m_fBoundRadius != 0.0f)
-                    m_pkWorldBound->Merge(bound);
+                NiBound* bound = child->m_kWorldBound;
+                if (bound && bound->m_fRadius != 0.0f)
+                    m_kWorldBound->Merge(bound);
             }
         }
     }
@@ -111,27 +111,27 @@ void NiNode::UpdateDownwardPass(NiUpdateData& aUpdateData, unsigned int flags)
     if (aUpdateData.updateControllers)
         UpdateTimeControllers(aUpdateData, true);
     UpdateWorldData(aUpdateData);
-    if (*(unsigned char*)&m_uiObjectFlags & 1)
+    if (*(unsigned char*)&m_uFlags & 1)
         flags |= 1;
-    unsigned int count = m_kChildList.m_usArraySize;
+    unsigned int count = m_kChildren.m_usSize;
     unsigned int i = 0;
     if (BoundFlag19())
     {
         if (!BoundFlag13())
         {
-            if (m_pkWorldBound)
-                m_pkWorldBound->m_fBoundRadius = 0.0f;
+            if (m_kWorldBound)
+                m_kWorldBound->m_fRadius = 0.0f;
             for (; i < count; ++i)
             {
-                NiAVObject* child = m_kChildList.m_children[i];
+                NiAVObject* child = m_kChildren.m_pBase[i];
                 if (child)
                 {
                     child->UpdateDownwardPass(aUpdateData, flags);
-                    if (child->m_pkWorldBound && child->m_pkWorldBound->m_fBoundRadius != 0.0f)
+                    if (child->m_kWorldBound && child->m_kWorldBound->m_fRadius != 0.0f)
                     {
                         EnsureWorldBound();
                         const NiBound& bound = GetBound(child);
-                        m_pkWorldBound->Set(bound.m_kCenter, bound.m_fBoundRadius);
+                        m_kWorldBound->Set(bound.m_kCenter, bound.m_fRadius);
                         ++i;
                         break;
                     }
@@ -143,44 +143,44 @@ void NiNode::UpdateDownwardPass(NiUpdateData& aUpdateData, unsigned int flags)
     }
     for (; i < count; ++i)
     {
-        NiAVObject* child = m_kChildList.m_children[i];
+        NiAVObject* child = m_kChildren.m_pBase[i];
         if (child)
         {
             child->UpdateDownwardPass(aUpdateData, flags);
             if (!BoundFlag13() && BoundFlag19())
             {
-                NiBound* bound = child->m_pkWorldBound;
-                if (bound && bound->m_fBoundRadius != 0.0f)
-                    m_pkWorldBound->Merge(bound);
+                NiBound* bound = child->m_kWorldBound;
+                if (bound && bound->m_fRadius != 0.0f)
+                    m_kWorldBound->Merge(bound);
             }
         }
     }
 }
 
-// Updates selected child nodes' controllers and world bounds, recursing into selected children and merging their bounds into m_pkWorldBound.
+// Updates selected child nodes' controllers and world bounds, recursing into selected children and merging their bounds into m_kWorldBound.
 // @fnv 0x00a5ded0
 void NiNode::UpdateSelectedDownwardPass(NiUpdateData& aUpdateData, unsigned int flags)
 {
     bool bSavedControllers = aUpdateData.updateControllers;
-    aUpdateData.updateControllers = (m_uiObjectFlags >> 3) & 1;
+    aUpdateData.updateControllers = (m_uFlags >> 3) & 1;
     UpdateTimeControllers(aUpdateData, true);
     aUpdateData.updateControllers = bSavedControllers;
     bool updateBounds = !aUpdateData.forceUpdate;
     if (TransformFlag() && updateBounds)
         UpdateWorldData(aUpdateData);
-    if (*(unsigned char*)&m_uiObjectFlags & 1)
+    if (*(unsigned char*)&m_uFlags & 1)
         flags |= 1;
-    unsigned int count = m_kChildList.m_usArraySize;
+    unsigned int count = m_kChildren.m_usSize;
     unsigned int i = 0;
     if (BoundFlag19())
     {
         if (!BoundFlag13())
         {
-            if (updateBounds && m_pkWorldBound)
-                m_pkWorldBound->m_fBoundRadius = 0.0f;
+            if (updateBounds && m_kWorldBound)
+                m_kWorldBound->m_fRadius = 0.0f;
             for (; i < count; ++i)
             {
-                NiAVObject* child = m_kChildList.m_children[i];
+                NiAVObject* child = m_kChildren.m_pBase[i];
                 if (child)
                 {
                     if (child->SelectedFlag())
@@ -190,11 +190,11 @@ void NiNode::UpdateSelectedDownwardPass(NiUpdateData& aUpdateData, unsigned int 
                         else
                             child->UpdateSelectedDownwardPass(aUpdateData, flags);
                     }
-                    if (child->m_pkWorldBound && child->m_pkWorldBound->m_fBoundRadius != 0.0f && updateBounds)
+                    if (child->m_kWorldBound && child->m_kWorldBound->m_fRadius != 0.0f && updateBounds)
                     {
                         EnsureWorldBound();
                         const NiBound& bound = GetBound(child);
-                        m_pkWorldBound->Set(bound.m_kCenter, bound.m_fBoundRadius);
+                        m_kWorldBound->Set(bound.m_kCenter, bound.m_fRadius);
                         ++i;
                         break;
                     }
@@ -206,7 +206,7 @@ void NiNode::UpdateSelectedDownwardPass(NiUpdateData& aUpdateData, unsigned int 
     }
     for (; i < count; ++i)
     {
-        NiAVObject* child = m_kChildList.m_children[i];
+        NiAVObject* child = m_kChildren.m_pBase[i];
         if (child)
         {
             if (child->SelectedFlag())
@@ -218,9 +218,9 @@ void NiNode::UpdateSelectedDownwardPass(NiUpdateData& aUpdateData, unsigned int 
             }
             if (!BoundFlag13() && BoundFlag19())
             {
-                NiBound* bound = child->m_pkWorldBound;
-                if (bound && bound->m_fBoundRadius != 0.0f)
-                    m_pkWorldBound->Merge(bound);
+                NiBound* bound = child->m_kWorldBound;
+                if (bound && bound->m_fRadius != 0.0f)
+                    m_kWorldBound->Merge(bound);
             }
         }
     }
@@ -268,15 +268,15 @@ struct FUN_00a5db30_shell : public NiNode
     void FUN_00a5db30();
 };
 
-// Calls the object's virtual at offset 0xbc, then if the parent pointer at 0x18 is set, calls the parent's virtual at offset 0xfc.
+// Recomputes this node's world bound, then passes the update up to the parent.
 // @fnv 0x00a5db30
 void FUN_00a5db30_shell::FUN_00a5db30()
 {
-    int* pParent = *(int**)((char*)this + 0x18);
-    (*(void(__thiscall**)(void*))(*(int*)this + 0xbc))(this);
-    if (pParent)
+    NiNode* pkParent = m_pkParent;
+    UpdateWorldBound();
+    if (pkParent)
     {
-        (*(void(__thiscall**)(void*))(*pParent + 0xfc))(pParent);
+        pkParent->UpdateUpwardPass();
     }
 }
 
@@ -364,12 +364,12 @@ struct FUN_00a5dbe0_shell : public NiNode
 // @fnv 0x00a5dbe0
 void FUN_00a5dbe0_shell::FUN_00a5dbe0(NiCullingProcess* kCuller)
 {
-    if (*(void**)((char*)this + 0x20) && *(float*)(*(char**)((char*)this + 0x20) + 0xc) != 0.0f)
+    if (m_kWorldBound && m_kWorldBound->m_fRadius != 0.0f)
     {
-        unsigned int uiChildCount = *(unsigned short*)((char*)this + 0xa6);
+        unsigned int uiChildCount = m_kChildren.GetSize();
         for (unsigned int i = 0; i < uiChildCount; i++)
         {
-            NiAVObject* pkChild = (*(NiAVObject***)((char*)this + 0xa0))[i];
+            NiAVObject* pkChild = m_kChildren.GetAt(i);
             if (pkChild)
                 pkChild->Cull(*kCuller);
         }
@@ -456,9 +456,9 @@ void FUN_00a5dce0_shell::FUN_00a5dce0(CloningProcess* kCloning)
     NiObject* pkClone;
     kCloning->m_pCloneMap->GetAt((const char*)this, (ShaderBufferRecord*&)pkClone);
 
-    for (unsigned int i = 0; i < *(unsigned short*)((char*)this + 0xa6); ++i)
+    for (unsigned int i = 0; i < m_kChildren.GetSize(); ++i)
     {
-        NiAVObject* pkChild = (*(NiAVObject***)((char*)this + 0xa0))[i];
+        NiAVObject* pkChild = m_kChildren.GetAt(i);
         if (pkChild)
             pkChild->ProcessClone(*kCloning);
     }
@@ -504,7 +504,7 @@ void FUN_00a5dd40_shell::FUN_00a5dd40(NiStream* kStream)
     NiAVObject::LoadBinary(*kStream);
     kStream->ReadUnsignedInteger();
     kStream->ReadUnsignedInteger();
-    *(unsigned int*)((char*)this + 0x30) &= ~0x00200000;
+    m_uFlags &= ~0x00200000;
 }
 }  // namespace fnv_00a5dd40
 
@@ -523,11 +523,11 @@ void __fastcall FUN_00a5e3a0(NiAVObject* pThis, int, NiPropertyState*& pkState)
     NiPropertyState* pkParentState = 0;
 
     if (HasNodeWithNonZeroValue(pThis))
-        *(unsigned int*)((char*)pThis + 0x30) |= 0x40000;
+        pThis->m_uFlags |= 0x40000;
     else
-        *(unsigned int*)((char*)pThis + 0x30) &= ~0x40000;
+        pThis->m_uFlags &= ~0x40000;
 
-    FUN_00a5e3a0_Helper* pkParent = *(FUN_00a5e3a0_Helper**)((char*)pThis + 0x18);
+    FUN_00a5e3a0_Helper* pkParent = (FUN_00a5e3a0_Helper*)pThis->m_pkParent;
     if (pkParent)
     {
         pkParent->FUN_00a5e3a0(pkParentState);
@@ -745,64 +745,6 @@ void __fastcall FUN_00a5d8f0(NiNode* node, int, NiAVObject* pkChild)
 }  // namespace fnv_00a5d8f0
 
 struct NiRenderer;
-struct ChildStub
-{
-    virtual void V00();
-    virtual void V01();
-    virtual void V02();
-    virtual void V03();
-    virtual void V04();
-    virtual void V05();
-    virtual void V06();
-    virtual void V07();
-    virtual void V08();
-    virtual void V09();
-    virtual void V10();
-    virtual void V11();
-    virtual void V12();
-    virtual void V13();
-    virtual void V14();
-    virtual void V15();
-    virtual void V16();
-    virtual void V17();
-    virtual void V18();
-    virtual void V19();
-    virtual void V20();
-    virtual void V21();
-    virtual void V22();
-    virtual void V23();
-    virtual void V24();
-    virtual void V25();
-    virtual void V26();
-    virtual void V27();
-    virtual void V28();
-    virtual void V29();
-    virtual void V30();
-    virtual void V31();
-    virtual void V32();
-    virtual void V33();
-    virtual void V34();
-    virtual void V35();
-    virtual void V36();
-    virtual void V37();
-    virtual void V38();
-    virtual void V39();
-    virtual void V40();
-    virtual void V41();
-    virtual void V42();
-    virtual void V43();
-    virtual void V44();
-    virtual void V45();
-    virtual void V46();
-    virtual void V47();
-    virtual void V48();
-    virtual void V49();
-    virtual void V50();
-    virtual void V51();
-    virtual void V52();
-    virtual void V53();
-    virtual void PurgeRendererData(NiRenderer* pkRenderer);
-};
 struct BaseStub
 {
     void FUN_00a59e50(NiRenderer*);
@@ -813,35 +755,35 @@ struct BaseStub
 void __fastcall FUN_00a5dc30(NiNode* node, int, NiRenderer* pkRenderer)
 {
     ((BaseStub*)node)->FUN_00a59e50(pkRenderer);
-    for (unsigned int i = 0; i < *(unsigned short*)((char*)node + 0xa6); i++)
+    for (unsigned int i = 0; i < node->m_kChildren.GetSize(); i++)
     {
-        ChildStub* c = (*(ChildStub***)((char*)node + 0xa0))[i];
-        if (c)
-            c->PurgeRendererData(pkRenderer);
+        NiAVObject* pkChild = node->m_kChildren.GetAt(i);
+        if (pkChild)
+            pkChild->PurgeRendererData(pkRenderer);
     }
 }
 
 // @fnv 0x00a5e1f0
 void __fastcall FUN_00a5e1f0(NiNode* node, int, NiUpdateData& kData, unsigned int uFlags)
 {
-    unsigned int nodeFlags = *(unsigned int*)((char*)node + 0x30);
+    unsigned int nodeFlags = node->m_uFlags;
     bool bOldUpdateControllers = kData.updateControllers;
     kData.updateControllers = ((nodeFlags >> 3) & 1) != 0;
     node->UpdateTimeControllers(kData, true);
     kData.updateControllers = bOldUpdateControllers;
-    unsigned int uiFlags = *(unsigned int*)((char*)node + 0x30);
+    unsigned int uiFlags = node->m_uFlags;
     bool bWorld = (bool)((uiFlags >> 2) & 1);
     if (bWorld)
         node->UpdateWorldData(kData);
-    if (*(unsigned int*)((char*)node + 0x30) & 1)
+    if (node->m_uFlags & 1)
         uFlags |= 1;
-    unsigned int n = *(unsigned short*)((char*)node + 0xa6);
+    unsigned int n = node->m_kChildren.GetSize();
     for (unsigned int i = 0; i < n; i++)
     {
-        NiAVObject* c = (*(NiAVObject***)((char*)node + 0xa0))[i];
+        NiAVObject* c = node->m_kChildren.GetAt(i);
         if (!c)
             continue;
-        unsigned int uiChildFlags = *(unsigned int*)((char*)c + 0x30);
+        unsigned int uiChildFlags = c->m_uFlags;
         bool bRigid = (bool)((uiChildFlags >> 1) & 1);
         if (bRigid)
             c->UpdateRigidDownwardPass(kData, uFlags);
@@ -849,56 +791,17 @@ void __fastcall FUN_00a5e1f0(NiNode* node, int, NiUpdateData& kData, unsigned in
 }
 
 namespace fnv_00a5e280 {
-struct ChildStub
-{
-    virtual void V00();
-    virtual void V01();
-    virtual void V02();
-    virtual void V03();
-    virtual void V04();
-    virtual void V05();
-    virtual void V06();
-    virtual void V07();
-    virtual void V08();
-    virtual void V09();
-    virtual void V10();
-    virtual void V11();
-    virtual void V12();
-    virtual void V13();
-    virtual void V14();
-    virtual void V15();
-    virtual void V16();
-    virtual void V17();
-    virtual void V18();
-    virtual void V19();
-    virtual void V20();
-    virtual void V21();
-    virtual void V22();
-    virtual void V23();
-    virtual void V24();
-    virtual void V25();
-    virtual void V26();
-    virtual void V27();
-    virtual void V28();
-    virtual void V29();
-    virtual void V30();
-    virtual void V31();
-    virtual void V32();
-    virtual void V33();
-    virtual void V34();
-    virtual void UpdateControllers(NiUpdateData& kData);
-};
 
 // @fnv 0x00a5e280
 void __fastcall UpdateChildControllers(NiNode* node, int, NiUpdateData& kData)
 {
     node->UpdateTimeControllers(kData, true);
-    unsigned int n = *(unsigned short*)((char*)node + 0xa6);
+    unsigned int n = node->m_kChildren.GetSize();
     for (unsigned int i = 0; i < n; i++)
     {
-        ChildStub* c = (*(ChildStub***)((char*)node + 0xa0))[i];
-        if (c)
-            c->UpdateControllers(kData);
+        NiAVObject* pkChild = node->m_kChildren.GetAt(i);
+        if (pkChild)
+            pkChild->UpdateControllers(kData);
     }
 }
 }  // namespace fnv_00a5e280
@@ -941,9 +844,9 @@ bool __fastcall RegisterChildStreamables(NiNode* node, int, NiStream& kStream)
 {
     if (!((BaseStub*)node)->FUN_00a59f00(kStream))
         return false;
-    for (unsigned int i = 0; i < *(unsigned short*)((char*)node + 0xa6); i++)
+    for (unsigned int i = 0; i < node->m_kChildren.GetSize(); i++)
     {
-        ChildStub* c = (*(ChildStub***)((char*)node + 0xa0))[i];
+        ChildStub* c = (ChildStub*)node->m_kChildren.GetAt(i);
         if (c)
             c->RegisterStreamables(kStream);
     }
@@ -1107,7 +1010,7 @@ char* __cdecl FUN_00a7d370(const char*, bool);
 struct FUN_00a5ea70_t
 {
     char pad_00[0x20];
-    NiBound* m_pkWorldBound;
+    NiBound* m_kWorldBound;  // src: FNV360_PDB +0x20 (old: m_pkWorldBound)
 
     void FUN_00a5ad00(StrArr*);
     void FUN_00a5ea70(StrArr* pkStrings);
@@ -1118,7 +1021,7 @@ void FUN_00a5ea70_t::FUN_00a5ea70(StrArr* pkStrings)
 {
     FUN_00a5ad00(pkStrings);
     pkStrings->Add(_FUN_00a7d330(DAT_011f4428));
-    int bVisual = (m_pkWorldBound && m_pkWorldBound->m_fBoundRadius != 0.0f) ? 1 : 0;
+    int bVisual = (m_kWorldBound && m_kWorldBound->m_fRadius != 0.0f) ? 1 : 0;
     pkStrings->Add(FUN_00a7d370("m_bVisual", bVisual != 0));
 }
 
@@ -1208,9 +1111,9 @@ struct StandInNode
     StandInPt3 m_kTranslation;
     float m_fScale;
     char pad68[0x38];
-    StandInNode** m_children;
+    StandInNode** m_pBase;  // src: FNV360_PDB +0x4 (old: m_children)
     unsigned short m_usCapacity;
-    unsigned short m_usArraySize;
+    unsigned short m_usSize;  // src: FNV360_PDB +0xA (old: m_usArraySize)
     void ApplyTransformToChildren(const ThreeByThreeMatrix& kMat, const StandInPt3& kTrn, bool bOnLeft);
 };
 
@@ -1224,18 +1127,18 @@ void StandInNode::ApplyTransformToChildren(const ThreeByThreeMatrix& kMat, const
     {
         ThreeByThreeMatrix kM1 = m_kOrientation.FUN_00a588a0(kMat * m_kOrientation);
         StandInPt3 kT1 = ((kMat * m_kTranslation + kTrn - m_kTranslation) * m_kOrientation) / m_fScale;
-        for (i = 0; i < m_usArraySize; i++)
+        for (i = 0; i < m_usSize; i++)
         {
-            pkChild = m_children[i];
+            pkChild = m_pBase[i];
             if (pkChild)
                 pkChild->ApplyTransform(kM1, kT1, true);
         }
     }
     else
     {
-        for (i = 0; i < m_usArraySize; i++)
+        for (i = 0; i < m_usSize; i++)
         {
-            pkChild = m_children[i];
+            pkChild = m_pBase[i];
             if (pkChild)
                 pkChild->ApplyTransform(kMat, kTrn, true);
         }
@@ -1256,7 +1159,7 @@ struct ChildObj
     int unk0C;
     int unk10;
     int unk14;
-    ChildNode* m_pParentNode;
+    ChildNode* m_pkParent;  // src: FNV360_PDB +0x18 (old: m_pParentNode)
     void SetParentNode(ChildNode* pkParent);
     void IncRefCount()
     {
@@ -1328,21 +1231,21 @@ struct ChildNode
     int unk90;
     int unk94;
     int unk98;
-    ChildArray m_kChildList;
+    ChildArray m_kChildren;  // src: FNV360_PDB +0x9C (old: m_kChildList)
     void FUN_00a5ee30(unsigned int i, ChildObj* pkChild, ChildObj*& spOld);
 };
 
 // @fnv 0x00a5ee30
 void ChildNode::FUN_00a5ee30(unsigned int i, ChildObj* pkChild, ChildObj*& spOld)
 {
-    if (m_kChildList.m_usSize <= i)
+    if (m_kChildren.m_usSize <= i)
     {
         if (pkChild)
             pkChild->SetParentNode(this);
         ChildObj* spChild = pkChild;
         if (pkChild)
             pkChild->IncRefCount();
-        m_kChildList.SetAtGrow(i, spChild);
+        m_kChildren.SetAtGrow(i, spChild);
         if (pkChild)
             pkChild->DecRefCount();
         if (spOld)
@@ -1353,11 +1256,11 @@ void ChildNode::FUN_00a5ee30(unsigned int i, ChildObj* pkChild, ChildObj*& spOld
     }
     else
     {
-        ChildObj* pChild = m_kChildList.m_pBase[i];
+        ChildObj* pChild = m_kChildren.m_pBase[i];
         if (pChild)
         {
             pChild->IncRefCount();
-            pChild->m_pParentNode = 0;
+            pChild->m_pkParent = 0;
         }
         if (pkChild)
             pkChild->SetParentNode(this);
@@ -1365,7 +1268,7 @@ void ChildNode::FUN_00a5ee30(unsigned int i, ChildObj* pkChild, ChildObj*& spOld
             ChildObj* spChild = pkChild;
             if (pkChild)
                 pkChild->IncRefCount();
-            m_kChildList.SetAt(i, spChild);
+            m_kChildren.SetAt(i, spChild);
             if (pkChild)
                 pkChild->DecRefCount();
         }
@@ -1697,7 +1600,7 @@ class BA5EFA0Node : public BA5EFA0AVObject
     void CopyMemberData(BA5EFA0Node* pkDest, BA5EFA0CloningProcess& kCloning);
     BA5EFA0Node* FUN_00a5efa0(BA5EFA0CloningProcess& kCloning);
 
-    BA5EFA0ObjectArray m_kChildList;
+    BA5EFA0ObjectArray m_kChildren;  // src: FNV360_PDB +0x9C (old: m_kChildList)
 };
 
 // @fnv 0x00a5efa0
@@ -1730,14 +1633,14 @@ struct AV
     char pad[0x20];
     Bnd* m_pWorldBound;
     char padCur[0x30 - 0x24];
-    unsigned int m_uiObjectFlags;
+    unsigned int m_uFlags;  // src: FNV360_PDB +0x30 (old: m_uiObjectFlags)
     unsigned char F13() const
     {
-        return (m_uiObjectFlags >> 13) & 1;
+        return (m_uFlags >> 13) & 1;
     }
     unsigned char F19() const
     {
-        return (m_uiObjectFlags >> 19) & 1;
+        return (m_uFlags >> 19) & 1;
     }
     const Bnd& GetWB() const
     {
@@ -1905,15 +1808,15 @@ bool NiNodeEq::FUN_00a5e600(NiAVObject* pkObject)
 
     NiNodeEq* pkNode = (NiNodeEq*)pkObject;
 
-    unsigned int uiChildCount = m_kChildList.m_usArraySize;
-    unsigned int uiOtherChildCount = pkNode->m_kChildList.m_usArraySize;
+    unsigned int uiChildCount = m_kChildren.m_usSize;
+    unsigned int uiOtherChildCount = pkNode->m_kChildren.m_usSize;
     if (uiChildCount != uiOtherChildCount)
         return false;
 
     for (unsigned int i = 0; i < uiChildCount; i++)
     {
-        NiAVObject* pkChild0 = m_kChildList.m_children[i];
-        NiAVObject* pkChild1 = pkNode->m_kChildList.m_children[i];
+        NiAVObject* pkChild0 = m_kChildren.m_pBase[i];
+        NiAVObject* pkChild1 = pkNode->m_kChildren.m_pBase[i];
         if ((pkChild0 && !pkChild1) || (!pkChild0 && pkChild1))
             return false;
 
@@ -2008,6 +1911,14 @@ void NodeA5E8::FUN_00a5e880(NiStreamA5E8& kStream)
     NiStreamSaveBinaryA5E8(*kStream.m_pBackingStream, uiZero);
 }
 
+struct SUNode;
+struct SUArray
+{
+    void* vt;
+    SUNode** m_pBase;  // src: FNV360_PDB +0x4
+    unsigned short m_usMaxSize;  // src: FNV360_PDB +0x8
+    unsigned short m_usSize;  // src: FNV360_PDB +0xA
+};
 struct SUNode
 {
     virtual void V00();
@@ -2053,52 +1964,47 @@ struct SUNode
     virtual void SetSelectiveUpdateFlags(bool& bSelectiveUpdate, bool bSelectiveUpdateTransforms, bool& bRigid);
     int unk04;
     int unk08;
-    void* unk0C;
+    void* m_spControllers;  // src: FNV360_PDB +0xC (old: unk0C)
     int unk10, unk14, unk18, unk1C, unk20, unk24, unk28, unk2C;
-    unsigned int m_uiObjectFlags;
+    unsigned int m_uFlags;  // src: FNV360_PDB +0x30 (old: m_uiObjectFlags)
+    char unk34[0x68];
+    SUArray m_kChildren;  // src: FNV360_PDB +0x9C
     bool FUN_00a5a0e0();
     bool HasNodeWithNonZeroValue();
     void FUN_00a5e440(bool& bSelectiveUpdate, bool bSelectiveUpdateTransforms, bool& bRigid);
     bool GetSelectiveUpdateTransformsOverride() const
     {
-        return (m_uiObjectFlags >> 7) & 1;
+        return (m_uFlags >> 7) & 1;
     }
     void SetSelectiveUpdate(bool b)
     {
         if (b)
-            m_uiObjectFlags |= 2;
+            m_uFlags |= 2;
         else
-            m_uiObjectFlags &= ~2;
+            m_uFlags &= ~2;
     }
     void SetSelectiveUpdateTransforms(bool b)
     {
         if (b)
-            m_uiObjectFlags |= 4;
+            m_uFlags |= 4;
         else
-            m_uiObjectFlags &= ~4;
+            m_uFlags &= ~4;
     }
     void SetSelectiveUpdatePropertyControllers(bool b)
     {
         if (b)
-            m_uiObjectFlags |= 8;
+            m_uFlags |= 8;
         else
-            m_uiObjectFlags &= ~8;
+            m_uFlags &= ~8;
     }
     void SetSelectiveUpdateRigid(bool b)
     {
         if (b)
-            m_uiObjectFlags |= 0x10;
+            m_uFlags |= 0x10;
         else
-            m_uiObjectFlags &= ~0x10;
+            m_uFlags &= ~0x10;
     }
     unsigned short GetSize();
-};
-struct SUArray
-{
-    void* vt;
-    SUNode** m_pBase;
-    unsigned short m_usMaxSize;
-    unsigned short m_usSize;
 };
 
 // Computes selective update flags from this node and child results, then stores them in this node's flag word.
@@ -2110,10 +2016,9 @@ void SUNode::FUN_00a5e440(bool& bSelectiveUpdate, bool bSelectiveUpdateTransform
         bSelectiveUpdateTransforms = bTransformControllers || GetSelectiveUpdateTransformsOverride();
     bSelectiveUpdate = bSelectiveUpdateTransforms;
     bRigid = true;
-    SUArray& kChildren = *(SUArray*)((char*)this + 0x9c);
-    for (unsigned int i = 0; i < kChildren.m_usSize; i++)
+    for (unsigned int i = 0; i < m_kChildren.m_usSize; i++)
     {
-        SUNode* pkChild = kChildren.m_pBase[i];
+        SUNode* pkChild = m_kChildren.m_pBase[i];
         if (pkChild)
         {
             bool bChildSelectiveUpdate = false;
@@ -2126,7 +2031,7 @@ void SUNode::FUN_00a5e440(bool& bSelectiveUpdate, bool bSelectiveUpdateTransform
         }
     }
     bool bPropertyControllers = HasNodeWithNonZeroValue();
-    if (bPropertyControllers || unk0C)
+    if (bPropertyControllers || m_spControllers)
     {
         bSelectiveUpdate = true;
     }
@@ -2202,9 +2107,9 @@ struct S00a5e690_Obj
     unsigned int unk94;
     unsigned int unk98;
     S00a5e690_sub m_sub;
-    NiRefA** m_children;
+    NiRefA** m_pBase;  // src: FNV360_PDB +0x4 (old: m_children)
     unsigned short m_unkA4;
-    unsigned short m_usEffectiveSize;
+    unsigned short m_usESize;  // src: FNV360_PDB +0xC (old: m_usEffectiveSize)
 
     void GetChild(unsigned int index, NiRefA** out);
 };
@@ -2218,10 +2123,10 @@ void S00a5e690_sub::FUN_00869260(NiRefA*& out, unsigned int index)
 // @fnv 0x00a5e690
 void S00a5e690_Obj::GetChild(unsigned int index, NiRefA** out)
 {
-    if (index < m_usEffectiveSize)
+    if (index < m_usESize)
     {
         unsigned int iIndex = index;
-        NiRefA* n = m_children[iIndex];
+        NiRefA* n = m_pBase[iIndex];
         long(__stdcall * incFn)(volatile long*) = InterlockedIncrement;
         if (n != 0)
         {
@@ -2279,7 +2184,7 @@ struct RefObj
     unsigned int unk0c;
     unsigned int unk10;
     unsigned int unk14;
-    void* m_pParentNode;
+    void* m_pkParent;  // src: FNV360_PDB +0x18 (old: m_pParentNode)
     void IncRefCount() throw()
     {
         InterlockedIncrement(&m_uiRefCount);
@@ -2381,19 +2286,19 @@ struct NodeStandIn
     unsigned int unk44, unk48, unk4c, unk50, unk54, unk58, unk5c, unk60;
     unsigned int unk64, unk68, unk6c, unk70, unk74, unk78, unk7c, unk80;
     unsigned int unk84, unk88, unk8c, unk90, unk94, unk98;
-    ChildArray m_kChildList;
+    ChildArray m_kChildren;  // src: FNV360_PDB +0x9C (old: m_kChildList)
     void FUN_00a5e780(RefObj* pkChild, RefPtr& pChild);
 };
 // @fnv 0x00a5e780
 void NodeStandIn::FUN_00a5e780(RefObj* pkChild, RefPtr& spRemovedChild)
 {
-    for (unsigned int i = 0; i < m_kChildList.GetSize(); i++)
+    for (unsigned int i = 0; i < m_kChildren.GetSize(); i++)
     {
-        RefPtr spChild = m_kChildList.GetAt(i);
+        RefPtr spChild = m_kChildren.GetAt(i);
         if (spChild && spChild == pkChild)
         {
-            spChild->m_pParentNode = 0;
-            m_kChildList.FUN_00869260(i);
+            spChild->m_pkParent = 0;
+            m_kChildren.FUN_00869260(i);
             spRemovedChild = spChild;
             return;
         }
@@ -2578,7 +2483,7 @@ class Node
     int unk090;
     int unk094;
     int unk098;
-    ObjectArray m_kChildList;
+    ObjectArray m_kChildren;  // src: FNV360_PDB +0x9C (old: m_kChildList)
 
     void ReadFromStream(Stream* pkStream);
     void ReadChildListFromStream(Stream* pkStream);
@@ -2592,7 +2497,7 @@ void Node::ReadChildListFromStream(Stream* pkStream)
     unsigned int ItemUpdateArray = pkStream->FUN_00a63460();
     if (ItemUpdateArray)
     {
-        m_kChildList.FUN_0060bef0(ItemUpdateArray);
+        m_kChildren.FUN_0060bef0(ItemUpdateArray);
         for (unsigned int i = 0; i < ItemUpdateArray; i++)
         {
             Object* pkChild = pkStream->FUN_00a63430();
@@ -2630,7 +2535,7 @@ struct ChildObj
     int unk0C;
     int unk10;
     int unk14;
-    ChildNode* m_pParentNode;
+    ChildNode* m_pkParent;  // src: FNV360_PDB +0x18 (old: m_pParentNode)
     void SetParent(ChildNode* pkParent) throw();
     void IncRefCount() throw()
     {
@@ -2704,7 +2609,7 @@ struct ChildNode
     int unk90;
     int unk94;
     int unk98;
-    ChildArray m_kChildList;
+    ChildArray m_kChildren;  // src: FNV360_PDB +0x9C (old: m_kChildList)
     void FUN_00a5ed10(ChildObj* pkChild, bool firstAvailable) throw();
 };
 
@@ -2781,7 +2686,7 @@ __declspec(noinline) void ChildArray::FUN_00a5eb20(const HeldChild& element) thr
     Add(element);
 }
 
-// Adds pkChild to m_kChildList, placing it in the first available slot if firstAvailable is true, otherwise appending it.
+// Adds pkChild to m_kChildren, placing it in the first available slot if firstAvailable is true, otherwise appending it.
 // @fnv 0x00a5ed10
 void ChildNode::FUN_00a5ed10(ChildObj* pkChild, bool firstAvailable)
 {
@@ -2791,11 +2696,11 @@ void ChildNode::FUN_00a5ed10(ChildObj* pkChild, bool firstAvailable)
         pkChild->SetParent(this);
         if (firstAvailable)
         {
-            m_kChildList.FUN_00a5eb20(pkChild);
+            m_kChildren.FUN_00a5eb20(pkChild);
         }
         else
         {
-            m_kChildList.Add(pkChild);
+            m_kChildren.Add(pkChild);
         }
         pkChild->DecRefCount();
     }
