@@ -1951,62 +1951,6 @@ struct Controller {
     void FUN_00c7a230(bool);
     void FUN_00c7b6a0(bool active);
 };
-__forceinline void UpdateLinear(BodyView* body,const VectorValue& value) {
-    if(!value.equal(body->getLinearVelocity())) {
-        body->FUN_00c9c1d0();
-        body->getMotion()->SetTranslationalVelocity(value);
-    }
-}
-__forceinline void UpdateAngular(BodyView* body,const VectorValue& value) {
-    if(!value.equal(body->getAngularVelocity())) {
-        body->FUN_00c9c1d0();
-        body->getMotion()->SetRotationalVelocity(value);
-    }
-}
-
-// @fnv 0x00c7b6a0
-void Controller::FUN_00c7b6a0(bool enable) {
-    if (!enabled) return;
-    if (!enable && !active) return;
-    if (active && enable) { timer.FUN_00448e30(DAT_011b02e8); return; }
-    FUN_00c7a230(enable);
-    if (enable) timer.begin(DAT_011b02e8); else timer.duration=0;
-    int count=bodies->getNumBones();
-    BufferView positions(count);
-    BufferView rotations(count);
-    FUN_00cb1280(positions.begin(),0,count*16);
-    FUN_00cb1280(rotations.begin(),0,count*16);
-    for(int i=0;i<count;++i) {
-        BodyView* body=(BodyView*)bodies->getRigidBodyOfBone(i);
-        {
-            if(body) {
-                int kind=body->getMotionType();
-                if(FUN_00c8cce0(&kind)) { positions[i]=body->getLinearVelocity(); rotations[i]=body->getAngularVelocity(); }
-            }
-        }
-    }
-    for(int i=0;i<count;++i) {
-        BodyView* body=(BodyView*)bodies->getRigidBodyOfBone(i);
-        {
-            if(body) {
-                if(selection.get()->selection->find((unsigned short)i)!=-1) {
-                    if(enable) {
-                        if(body->getMotionType()==4 || body->getQualityType()!=4) {
-                            body->FUN_00ca8420(KindDynamic,ActivateNow,UpdateFull); body->setQualityType((QualityKind)4); body->FUN_00ca8630(false);
-                        }
-                    } else {
-                        if(body->getMotionType()!=4 || body->getQualityType()!=1) {
-                            body->FUN_00ca8420(KindKeyframed,ActivateNow,UpdateFull); body->setQualityType((QualityKind)1); body->FUN_00ca8630(true);
-                        }
-                    }
-                }
-                UpdateLinear(body,positions[i]);
-                UpdateAngular(body,rotations[i]);
-            }
-        }
-    }
-    active=enable;
-}
 
 inline void* operator new(unsigned int, void* p) { return p; }
 inline void operator delete(void*,void*) {}
@@ -2260,47 +2204,6 @@ struct RenderNode {
     bool FUN_00c79340(CloneBuffer*,const char*,int);
     bool FUN_00c7de60(const char* item);
 };
-// @fnv 0x00c7de60
-bool RenderNode::FUN_00c7de60(const char* item) {
-    bool ok=active;
-    if(ok) {
-    ok=FUN_00c79340(input,item,1);
-    if(ok) {
-        state=1;
-        if(create) {
-            if(!owner->root) {
-                owner->SetRoot(new Root);
-                owner->root->src=new SourceBuffer;
-                owner->root->src->indices.ResizeEntries(2);
-                owner->root->src->points.Resize(2);
-                owner->root->src->vertices.Resize(2);
-                ((short*)owner->root->src->points.data)[0]=-1;
-                ((short*)owner->root->src->points.data)[1]=0;
-                FrameState frame;
-                frame.FUN_00a86bf0();
-                FUN_00c74dd0(owner->root->src->vertices.data,&frame);
-                frame.point.x=DAT_01050c98; frame.point.y=DAT_01050c48; frame.point.z=0;
-                FUN_00c74dd0(owner->root->src->vertices.data+1,&frame);
-                owner->root->a=boneParams[1].forwardParent;
-                owner->root->b=boneParams[1].forwardLocal;
-            }
-            CloneBuffer* clone=new CloneBuffer(owner->root->src);
-            buffer=clone;
-            clone->FUN_00cda110();
-            buffer->FUN_00cda340();
-            Vec128 unit; unit.value=_mm_setr_ps(DAT_01011d78,DAT_01012068,DAT_01011d78,DAT_01011d78);
-            boneParams[0].bone=1;
-            boneParams[0].forwardLocal.value=unit.value;
-            boneParams[0].forwardParent.value=boneParams[0].forwardLocal.value;
-            boneParams[0].parent=0;
-            boneParams[0].pose=buffer;
-            state=0;
-        }
-    }
-    success=ok;
-    }
-    return ok;
-}
 
 struct C74Matrix3 {
     float m_afEntries[3][3];
@@ -3327,54 +3230,6 @@ struct RagdollUpdateController {
  BlendData* blend;
  void FUN_00c7d030(const Transform48* input);
 };
-// @fnv 0x00c7d030
-void RagdollUpdateController::FUN_00c7d030(const Transform48* input) {
- SkeletonData* data=skeleton->getData();
- int count=data->getCount();
- ScratchTransforms outputStorage(count);
- Transform48* output=outputStorage.begin();
- ScratchTransforms poseStorage(count);
- Transform48* pose=poseStorage.begin();
- int oldMode=mode;
- if(forceMode) mode=1;
- if(needsInit) { UpdateEntriesByKind(skeleton); needsInit=false; }
- if(!input) {
-  CallWithGlobal(count,(void*)data->getParents(),(void*)data->getPoses(),pose);
-  void* referencePoses=(void*)data->getPoses();
-  void* poseTrack=*lookup->FUN_00cda8d0();
-  BlendData* currentBlend=blend;
-  FUN_00ce3a00(currentBlend->data,poseTrack,referencePoses,pose,2);
-  if(mode!=1) { void* bones=(void*)data->getParents(); FUN_00cddef0(count,bones,pose,output); }
- } else {
-  for(int i=0;i<count;++i) outputStorage[i]=input[i];
- }
- switch(mode) {
- case 3: EnableBehaviorsByKind(skeleton); FUN_00c7a410(skeleton,output); mode=0; break;
- case 2:
-  if(active) { processor->FUN_00cdb3e0(); active=false; }
-  if(DAT_011afe64>0.0f) {
-   IntBuffer results(count);
-   processor->FUN_00cdb7c0(DAT_011afe64,output,&settings10,results.begin());
-   bool fast=false;
-   for(int index=0;index<skeleton->getNumBones();++index) {
-    if(fast) break;
-    {
-     BoneState* state=skeleton->getBody(index);
-     if(state) {
-      float magnitude=state->velocity.lengthSquared();
-      float limit=state->scaleIndex;
-      limit=limit*limit;
-      fast=magnitude>limit;
-     }
-    }
-   }
-   if(fast) { skeleton->FUN_00ce1ad0(pose,&settings10); active=true; }
-  }
-  break;
- case 1: { Skeleton* current=skeleton; current->FUN_00ce1ad0(pose,&settings10); break; }
- }
- if(forceMode) { mode=oldMode; forceMode=false; }
-}
 
 extern "C" __m128 _mm_setzero_ps();
 namespace ControllerFloatHardware { extern "C" __m128 _mm_set_ps1(float); }
@@ -3674,29 +3529,6 @@ struct InversePositionVector : Vec4 {
     void FUN_00c7f840(const Vec4* t, const Vec4* p);
 };
 
-// @fnv 0x00c7f840
-void InversePositionVector::FUN_00c7f840(const Vec4* t, const Vec4* p)
-{
-    const __m128 d = InversePositionHardware::_mm_sub_ps(p->value, t[0].value);
-    const __m128 q = t[1].value;
-    const __m128 w4 = _mm_shuffle_ps(q, q, 0xff);
-    const __m128 qd = _mm_mul_ps(q, d);
-    __m128 dot = _mm_add_ss(_mm_shuffle_ps(qd, qd, 0x55), qd);
-    dot = _mm_add_ss(_mm_shuffle_ps(qd, qd, 0xaa), dot);
-    const __m128 c1 = _mm_mul_ps(_mm_shuffle_ps(q, q, 0xc9), _mm_shuffle_ps(d, d, 0xd2));
-    const __m128 c2 = _mm_mul_ps(_mm_shuffle_ps(q, q, 0xd2), _mm_shuffle_ps(d, d, 0xc9));
-    const __m128 cr = InversePositionHardware::_mm_sub_ps(c2, c1);
-    __m128 r = _mm_mul_ps(_mm_add_ps(_mm_mul_ps(w4, w4), g_rotationOffset), d);
-    r = _mm_add_ps(r, _mm_mul_ps(_mm_shuffle_ps(dot, dot, 0), q));
-    r = _mm_add_ps(_mm_mul_ps(cr, w4), r);
-    const __m128 v = _mm_add_ps(r, r);
-    value = v;
-    const __m128 s = t[2].value;
-    const __m128 rc = _mm_rcp_ps(s);
-    const __m128 e = _mm_mul_ps(_mm_mul_ps(rc, s), rc);
-    value = _mm_mul_ps(InversePositionHardware::_mm_sub_ps(_mm_add_ps(rc, rc), e), v);
-}
-
 namespace FloatHardware { extern "C" ::__m128 _mm_sub_ps(::__m128,::__m128); }
 extern "C" {
 extern ::__m128 _mm_load_ss(float const*);
@@ -3847,40 +3679,7 @@ public:
     hkVector4 m_vScale;
 };
 
-__forceinline void hkVector4::SetRotatedDirection(const hkQuaternion& quat, const hkVector4& direction) {
-    hkVector4 minusHalf; minusHalf.getQuad() = DAT_010c71e0;
-    hkVector4 qreal;
-    qreal.setBroadcast(quat.m_vec, 3);
-    hkVector4 q2minus1;
-    q2minus1.setAddMul4(minusHalf, qreal, qreal);
-
-    hkVector4 ret;
-    ret.setMul4(direction, q2minus1);
-
-    hkVector4 imagDotDir;
-    imagDotDir.getQuad() = quat.getImag().dot3(direction).getQuad();
-    imagDotDir.broadcast(0);
-    ret.addMul4(imagDotDir, quat.getImag());
-
-    hkVector4 imagCrossDir;
-    imagCrossDir.setCross(quat.getImag(), direction);
-    ret.addMul4(qreal, imagCrossDir);
-
-    this->setAdd4(ret, ret);
-}
-
-__forceinline void hkVector4::_setTransformedPos(const hkQsTransform& a, const hkVector4& b) {
-    hkVector4 temp(b);
-    temp.mul4(a.m_vScale);
-    SetRotatedDirection(a.m_rotation, temp);
-    add4(a.m_vTranslation);
-}
-
 namespace MathUtilities {
-    __forceinline void prefetch128(const void* p) { (_mm_prefetch)((const char*)p, 0); }
-}
-template <class T> __forceinline const T* hkAddByteOffsetConst(const T* base, long offset) {
-    return reinterpret_cast<const T*>(reinterpret_cast<const char*>(base) + offset);
 }
 
 class hkMemoryAllocator {
@@ -4051,23 +3850,6 @@ public:
     ValueWrapper<char*> m_pRayCursor;
     ValueWrapper<char*> m_pCurrentCommand;
 };
-__forceinline void StringCursor::CommandTimingEntry::setTime() {
-    unsigned int ticks;
-    __asm {
-        rdtsc
-        mov dword ptr[ticks], eax
-    }
-    m_uiStartTicks = ticks;
-}
-
-static __declspec(noinline) void FUN_00ce2a50(hkVector4& a, hkVector4& b) {
-    hkVector4 aLen; aLen.SetAllComponents(a.lengthSquared3());
-    hkVector4 bLen; bLen.SetAllComponents(b.lengthSquared3());
-    hkVector4 lens; lens.setXYZW(aLen, bLen);
-    hkVector4 inv; inv.setSqrtInverse4(lens);
-    a.mul4(inv.getSimdAt(0));
-    b.mul4(inv.getSimdAt(3));
-}
 
 class hkReferencedObject {
 public:
@@ -4081,152 +3863,6 @@ public:
     void __cdecl FUN_00ce3a00(const hkQsTransform* poseAModelSpace, const hkQsTransform* originalPoseBLocalSpace, hkQsTransform* poseBModelSpace, int source) const;
     hkaSkeletonMapperData m_kMappingData;
 };
-
-// @fnv 0x00ce3a00
-void __cdecl hkaSkeletonMapper::FUN_00ce3a00(const hkQsTransform* poseAModelSpace, const hkQsTransform* originalPoseBLocalSpace, hkQsTransform* poseBModelSpace, int source) const {
-    {
-        StringCursor& mStream = StringCursor::GetMonitorStream();
-        if (mStream.memoryAvailable()) {
-            StringCursor::TimedNameRecord* h = reinterpret_cast<StringCursor::TimedNameRecord*>(mStream.GetStreamEnd());
-            h->m_pCommandName = "LtMapPoseModelSpace";
-            h->m_pFirst = "Stinit";
-            h->setTime();
-            mStream.setEnd((char*)(h + 1));
-        }
-    }
-    {
-        StringCursor& mStream = StringCursor::GetMonitorStream();
-        if (mStream.memoryAvailable()) {
-            StringCursor::CommandTimingEntry* h = reinterpret_cast<StringCursor::CommandTimingEntry*>(mStream.GetStreamEnd());
-            h->m_pCommandName = "StsimpleMappings";
-            h->setTime();
-            mStream.setEnd((char*)(h + 1));
-        }
-    }
-    {
-        const int numSimpleMappings = m_kMappingData.m_kSimpleMappings.GetLogicalSize();
-        for (int i = 0; i < numSimpleMappings; i++) {
-            const int prefetchDistance = 128;
-            MathUtilities::prefetch128(hkAddByteOffsetConst(&m_kMappingData.m_kSimpleMappings[i], prefetchDistance));
-            const hkaSkeletonMapperData::SimpleMapping& simpleMapping = m_kMappingData.m_kSimpleMappings[i];
-            poseBModelSpace[simpleMapping.m_sBoneB].SetProduct(poseAModelSpace[simpleMapping.m_sBoneA], simpleMapping.m_kAFromBTransform);
-            MathUtilities::prefetch128(hkAddByteOffsetConst(&poseAModelSpace[simpleMapping.m_sBoneA], prefetchDistance));
-            MathUtilities::prefetch128(hkAddByteOffsetConst(&poseBModelSpace[simpleMapping.m_sBoneB], prefetchDistance));
-        }
-    }
-    {
-        StringCursor& mStream = StringCursor::GetMonitorStream();
-        if (mStream.memoryAvailable()) {
-            StringCursor::CommandTimingEntry* h = reinterpret_cast<StringCursor::CommandTimingEntry*>(mStream.GetStreamEnd());
-            h->m_pCommandName = "StchainMappings";
-            h->setTime();
-            mStream.setEnd((char*)(h + 1));
-        }
-    }
-    {
-        const int numChainMappings = m_kMappingData.m_kChainMappings.GetLogicalSize();
-        for (int i = 0; i < numChainMappings; i++) {
-            const hkaSkeletonMapperData::ChainMapping& chainMapping = m_kMappingData.m_kChainMappings[i];
-            const short startBoneA = chainMapping.m_sStartBoneA;
-            const short endBoneA = chainMapping.m_sEndBoneA;
-            const short startBoneB = chainMapping.m_sStartBoneB;
-            const short endBoneB = chainMapping.m_sEndBoneB;
-
-            poseBModelSpace[startBoneB].SetProduct(poseAModelSpace[startBoneA], chainMapping.m_kStartAFromBTransform);
-
-            StackAllocatedArray<short> chainBones;
-            chainBones.init(endBoneB - startBoneB + 1);
-            WalkChainUntilLimit(*m_kMappingData.m_pSkeletonB, startBoneB, endBoneB, chainBones);
-
-            hkVector4 currentEndModelSpacePos;
-            currentEndModelSpacePos = originalPoseBLocalSpace[endBoneB].getTranslation();
-            for (int b = chainBones.GetLogicalSize() - 2; b >= 1; b--) {
-                const short bone = chainBones[b];
-                currentEndModelSpacePos._setTransformedPos(originalPoseBLocalSpace[bone], currentEndModelSpacePos);
-            }
-            currentEndModelSpacePos._setTransformedPos(poseBModelSpace[startBoneB], currentEndModelSpacePos);
-
-            {
-                const hkVector4& startModelSpacePos = poseBModelSpace[startBoneB].getTranslation();
-                hkQsTransform desiredEndModelSpace;
-                desiredEndModelSpace.SetProduct(poseAModelSpace[endBoneA], chainMapping.m_kEndAFromBTransform);
-                const hkVector4& desiredEndModelSpacePos = desiredEndModelSpace.getTranslation();
-
-                hkVector4 currentDirection; currentDirection.setSub4(currentEndModelSpacePos, startModelSpacePos);
-                hkVector4 desiredDirection; desiredDirection.setSub4(desiredEndModelSpacePos, startModelSpacePos);
-                FUN_00ce2a50(currentDirection, desiredDirection);
-
-                hkQuaternion rotationQuaternion;
-                rotationQuaternion.FUN_00cd9d10(currentDirection, desiredDirection);
-
-                hkQuaternion currentRot = poseBModelSpace[startBoneB].getRotation();
-                hkQuaternion temp;
-                temp.FUN_00c66320(rotationQuaternion, currentRot);
-                poseBModelSpace[startBoneB].SetBodyOrientation(temp);
-            }
-
-            for (int b = 1; b < chainBones.GetLogicalSize() - 1; b++) {
-                const short childIdx = chainBones[b];
-                const short parentIdx = chainBones[b - 1];
-                const hkQsTransform& parentFromChild = originalPoseBLocalSpace[childIdx];
-                const hkQsTransform& modelFromParent = poseBModelSpace[parentIdx];
-                poseBModelSpace[childIdx].SetProduct(modelFromParent, parentFromChild);
-            }
-            chainBones.destroy();
-        }
-    }
-    {
-        StringCursor& mStream = StringCursor::GetMonitorStream();
-        if (mStream.memoryAvailable()) {
-            StringCursor::CommandTimingEntry* h = reinterpret_cast<StringCursor::CommandTimingEntry*>(mStream.GetStreamEnd());
-            h->m_pCommandName = "StunmappedBones";
-            h->setTime();
-            mStream.setEnd((char*)(h + 1));
-        }
-    }
-    {
-        const int numUnmapped = m_kMappingData.m_kUnmappedBones.GetLogicalSize();
-        if (m_kMappingData.m_bKeepUnmappedLocal) {
-            for (int i = 0; i < numUnmapped; i++) {
-                const short boneIdx = m_kMappingData.m_kUnmappedBones[i];
-                const short parentIdx = m_kMappingData.m_pSkeletonB->m_kParentIndices[boneIdx];
-                if (parentIdx != -1) {
-                    const hkQsTransform& parentFromChild = originalPoseBLocalSpace[boneIdx];
-                    const hkQsTransform& modelFromParent = poseBModelSpace[parentIdx];
-                    poseBModelSpace[boneIdx].SetProduct(modelFromParent, parentFromChild);
-                } else {
-                    poseBModelSpace[boneIdx] = originalPoseBLocalSpace[boneIdx];
-                }
-            }
-        }
-    }
-    {
-        StringCursor& mStream = StringCursor::GetMonitorStream();
-        if (mStream.memoryAvailable()) {
-            StringCursor::CommandTimingEntry* h = reinterpret_cast<StringCursor::CommandTimingEntry*>(mStream.GetStreamEnd());
-            h->m_pCommandName = "StenforceConstraints";
-            h->setTime();
-            mStream.setEnd((char*)(h + 1));
-        }
-    }
-    switch (source) {
-    case 1:
-        FUN_00cde1d0(*m_kMappingData.m_pSkeletonB, poseBModelSpace);
-        break;
-    case 2:
-        FUN_00cde2d0(*m_kMappingData.m_pSkeletonB, originalPoseBLocalSpace, poseBModelSpace);
-        break;
-    }
-    {
-        StringCursor& mStream = StringCursor::GetMonitorStream();
-        if (mStream.memoryAvailable()) {
-            StringCursor::CommandTimingEntry* h = reinterpret_cast<StringCursor::CommandTimingEntry*>(mStream.GetStreamEnd());
-            h->m_pCommandName = "lt";
-            h->setTime();
-            mStream.setEnd((char*)(h + 1));
-        }
-    }
-}
 
 // ---- Gamebryo / game helpers ----
 void* __cdecl NiMalloc(unsigned int size);
@@ -4677,44 +4313,5 @@ struct AnimationOwner {
     void FUN_00c7b4f0(void* node, BoneRecordArray* records, BoneRecordMap* map);
     void FUN_00c7e3b0();
 };
-
-// @fnv 0x00c7e3b0
-void AnimationOwner::FUN_00c7e3b0()
-{
-    if (!root)
-        return;
-
-    void* node = FUN_00c802d0(root)->payload;
-    BoneRecordArray records;
-    BoneRecordMap map;
-    FUN_00c7b4f0(node, &records, &map);
-
-    SkeletonHolder* holder = skeletonHolder;
-    if (!holder->m_pSkeleton) {
-        skeletonHolder->m_pSkeleton = new hkaSkeleton;
-        int numBones = records.m_uiSize;
-        skeletonHolder->m_pSkeleton->m_kBones.setSizeObj(numBones);
-        skeletonHolder->m_pSkeleton->m_kParentIndices.setSizePod(numBones);
-        skeletonHolder->m_pSkeleton->m_kReferencePose.setSizePod(numBones);
-        for (unsigned int i = 0; i < records.m_uiSize; ++i) {
-            hkaBone& bone = skeletonHolder->m_pSkeleton->m_kBones[i];
-            bone.m_name.FUN_00cb0c10(FUN_00cb1410(records.m_pBase[i]->name));
-            skeletonHolder->m_pSkeleton->m_kBones[i].m_bLockTranslation = true;
-            skeletonHolder->m_pSkeleton->m_kReferencePose[i] = records.m_pBase[i]->transform;
-            skeletonHolder->m_pSkeleton->m_kParentIndices[i] = records.m_pBase[i]->parent;
-        }
-    }
-
-    for (unsigned int i = 0; i < records.m_uiSize; ++i) {
-        BoneRecord* r = records.m_pBase[i];
-        if (r)
-            _g_memoryManager.Deallocate(reinterpret_cast<char*>(r) - reinterpret_cast<unsigned char*>(r)[-1]);
-    }
-    records.RemoveAll();
-
-    pose = new SkeletonPoseData(skeletonHolder->m_pSkeleton);
-    pose->FUN_00cda110();
-    transforms.setSizePod(skeletonHolder->m_pSkeleton->m_kBones.GetLogicalSize());
-}
 
 } // namespace SkeletonBuild

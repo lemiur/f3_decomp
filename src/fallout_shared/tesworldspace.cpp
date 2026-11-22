@@ -1,182 +1,37 @@
-// fallout_shared/tesworldspace.cpp: TESWorldSpace, TESObjectCELL, TESRegion, InterfaceManager and more (90 functions)
+// fallout_shared/tesworldspace.cpp: TESWorldSpace, TESObjectCELL, TESRegion, InterfaceManager and more (19 functions)
 #include "f3_common.h"
 #include "tesworldspace_packet.h"
 #include "fnv_asm_helpers.h"   // project x87 helpers (fnv_FloatToInt for 0x00501250); no F3 match in this file yet
 // @fnv 0x00425fd0
-bool TESObjectCELL::IsCellInterior() const
-{
-    return (flags & 1) ? true : false;
-}
 // Sets the world space's map name from the given string and returns true.
 // @fnv 0x00583330
-bool TESWorldSpace::SetDateTimeText(const char* name)
-{
-    mapName.Set(name, 0);
-    return true;
-}
 // Returns the terrain manager of the parent world space if one exists, otherwise this world space's own terrain.
 // @fnv 0x00586170
-BGSTerrainManager* TESWorldSpace::GetWorldTerrainManager()
-{
-    if (GetParentWorld(USE_LAND))
-        return GetParentWorld(USE_LAND)->GetWorldTerrainManager();
-    return terrain;
-}
 // Returns parent if it exists and GetParentUseFlag(flag) is set, otherwise returns null.
 // @fnv 0x00586390
-TESWorldSpace* TESWorldSpace::GetParentWorld(PARENT_USE_FLAG aeParentUseFlag)
-{
-    if (parent && !GetParentUseFlag(aeParentUseFlag))
-        return 0;
-    return parent;
-}
 // Looks up key in cellMap and returns the stored reference cast to TESObjectCELL, or null if not found.
 // @fnv 0x00587630
-TESObjectCELL* TESWorldSpace::GetCellByKey(unsigned int key)
-{
-    TESObjectREFR* cell = 0;
-    if (cellMap->GetAt(key, cell))
-        return (TESObjectCELL*)cell;
-    return 0;
-}
 // If ref is non-null and not temporary, creates a persistent cell and adds ref to it.
 // @fnv 0x00587ff0
-void TESWorldSpace::AddPersistentReference(TESObjectREFR* ref)
-{
-    if (ref && !ref->IsTemporary())
-    {
-        TESObjectCELL* cell = CreatePersistentCell();
-        cell->AddReference(ref, false);
-    }
-}
 // @fnv 0x004f1260
-void TESRegion::AssignWorldSpace(TESWorldSpace* apWorldSpace)
-{
-    world = apWorldSpace;
-    if (world && IsConstantGlobal() && !g_dataHandler->LoadDescriptionForForm())
-        world->SetHasRegions(true);
-}
 // @fnv 0x00473ff0
-bool TESWorldSpace::IsFormIDOwnedByFile(unsigned int key, TESFile* file)
-{
-    bool result = true;
-    if (DAT_011c40b0 && key)
-    {
-        TESObjectREFR* value = 0;
-        if (DAT_011c40b0->GetAt(key, value) && value)
-        {
-            TESFile* parent = file->GetThreadSafeRootFile();
-            if (!parent)
-                parent = file;
-            if (value != (TESObjectREFR*)parent)
-                result = false;
-        }
-    }
-    return result;
-}
 // Clears night and looping sounds, effect shader, calls three helpers, resets the full name and zeroes 16 bytes at offset 0x80.
 // @fnv 0x00586480
-void TESWorldSpace::ClearWorldSpaceReferences()
-{
-    ((BGSAcousticSpace*)this)->SetNightSound(0);
-    ((TESObjectACTI*)this)->SetLoopingSound(0);
-    ((EffectSetting*)this)->SetEffectShader(0);
-    FUN_00584150(0.0f);
-    FUN_00586110(DAT_01031920);
-    FUN_00586130(0.0f);
-    ((TESFullName*)((char*)this + 0x24))->SetFullName(0);
-    memset((char*)this + 0x80, 0, 16);
-}
 // Validates x and y are within -32768..32767, builds a key from them, and looks up the cell in cellMap, returning it or null.
 // @fnv 0x005875a0
-TESObjectCELL* TESWorldSpace::GetCellAtGridPosition(int x, int y)
-{
-    if (x > 32767 || y > 32767 || x < -32768 || y < -32768)
-    {
-        Warning(DAT_010187a0, -32768, 32767);
-        return 0;
-    }
-    TESObjectREFR* pCell;
-    int iKey = BuildCellKey((unsigned short)x, (unsigned short)y);
-    pCell = 0;
-    if (cellMap->GetAt(iKey, pCell))
-        return (TESObjectCELL*)pCell;
-    return 0;
-}
 // @fnv 0x00586150
-Tile* InterfaceManager::FUN_00586150()
-{
-    return pTile;
-}
 // @fnv 0x00584bc0
-void TESWorldSpace::SetFieldD0(unsigned int value)
-{
-    fieldD0 = value;
-}
 // @fnv 0x00586110
-void TESWorldSpace::FUN_00586110(float value)
-{
-    fC8 = value;
-}
 // @fnv 0x00586130
-void TESWorldSpace::FUN_00586130(float value)
-{
-    fCC = value;
-}
 // @fnv 0x005861b0
-bool TESWorldSpace::GetSmallWorld()
-{
-    if (flags4C & 1)
-        return true;
-    return false;
-}
 // @fnv 0x005862e0
-bool TESWorldSpace::IsFlag4C20Set()
-{
-    if (flags4C & 0x20)
-        return true;
-    return false;
-}
 // Sets parent to world and clears field4E when world is null.
 // @fnv 0x005863d0
-void TESWorldSpace::SetParent(TESWorldSpace* world)
-{
-    parent = world;
-    if (!world)
-        field4E = 0;
-}
-// @fnv 0x00588270
-void TESWorldSpace::FUN_00588270(BSSimpleArray<TESObjectREFR*, 1024>& doors)
-{
-    TESObjectCELL* cell = GetInteriorCell();
-    if (cell)
-        cell->AppendCellReferences(doors);
-}
 
 struct FUN_005861d0_shell : public TESWorldSpace
 {
     void SetFlagBit0(bool);
 };
-
-// Sets or clears bit 0 of the byte at offset 0x4c on this TESWorldSpace based on abVal.
-// @fnv 0x005861d0
-void FUN_005861d0_shell::SetFlagBit0(bool abVal)
-{
-    if (abVal)
-        *(unsigned char*)((char*)this + 0x4c) |= 1;
-    else
-        *(unsigned char*)((char*)this + 0x4c) &= ~1;
-}
-
-// Packs two shorts into one int: asX shifted left 16 bits, OR'd with the low 16 bits of asY.
-// @fnv 0x00587410
-int __cdecl PackShortPair(short asHigh, short asLow)
-{
-    int key = asHigh;
-    key <<= 16;
-    key |= (unsigned short)(asLow & 0xFFFF);
-    return key;
-}
 
 struct NiStream;
 struct blob12
@@ -240,33 +95,6 @@ int __cdecl FUN_00587440(const NiPoint3* aCoord)
 void* __fastcall _FNV_GetObjectReference(void*);
 int __fastcall _FNV_GetFormType(void*);
 
-// Returns true if apRef is non-null and its object reference's form type is one of the listed types.
-// @fnv 0x00587c80
-bool __cdecl FUN_00587c80(void* apRef)
-{
-    bool bretval = false;
-    if (apRef && _FNV_GetObjectReference(apRef))
-    {
-        switch (_FNV_GetFormType(_FNV_GetObjectReference(apRef)))
-        {
-        case 0x0d:
-        case 0x15:
-        case 0x1b:
-        case 0x1c:
-        case 0x20:
-        case 0x21:
-        case 0x25:
-        case 0x26:
-        case 0x27:
-        case 0x2c:
-        case 0x2d:
-            bretval = true;
-            break;
-        }
-    }
-    return bretval;
-}
-
 struct FUN_00588030_shell : public TESWorldSpace
 {
     void FUN_00588030(TESObjectREFR*);
@@ -276,20 +104,6 @@ struct TESObjectCELL_RemoveReference_Helper : public TESObjectCELL
 {
     void RemoveReference(TESObjectREFR*);
 };
-
-// If apRef is non-null, gets the interior cell and calls RemoveReference on it with apRef.
-// @fnv 0x00588030
-void FUN_00588030_shell::FUN_00588030(TESObjectREFR* apRef)
-{
-    if (apRef)
-    {
-        TESObjectCELL* poldcell = GetInteriorCell();
-        if (poldcell)
-        {
-            reinterpret_cast<TESObjectCELL_RemoveReference_Helper*>(poldcell)->RemoveReference(apRef);
-        }
-    }
-}
 
 struct FUN_00588b00_shell : public TESWorldSpace
 {
@@ -324,37 +138,7 @@ struct DummyPointerMap
     void SetAt(unsigned int, unsigned int);
 };
 
-// @fnv 0x00588b00
-void* FUN_00588b00_shell::GetOrCreateCellOffsetData(TESFile* apFile)
-{
-    OFFSET_DATA_24* pdata = 0;
-    TESFile* pmainfile = apFile;
-    while (pmainfile && pmainfile->GetThreadSafeRootFile())
-    {
-        pmainfile = pmainfile->GetThreadSafeRootFile();
-    }
-    if (!((DummyPointerMap*)((char*)this + 0xb0))->GetAt((unsigned int)pmainfile, (unsigned int&)pdata) || !pdata)
-    {
-        pdata = new OFFSET_DATA_24;
-        pdata->pCellOffsets = 0;
-        pdata->uiFileOffset = 0;
-        pdata->m_kFirstPoint = NiPoint2(3.4028234663852886e+38f, 3.4028234663852886e+38f);
-        pdata->m_kEndPoint = NiPoint2(DAT_01015f5c, DAT_01015f5c);
-        ((DummyPointerMap*)((char*)this + 0xb0))->SetAt((unsigned int)pmainfile, (unsigned int)pdata);
-    }
-    return pdata;
-}
-
 void __fastcall _ref_006815c0(void* pThis);
-
-// Calls _ref_006815c0 on the two sub-objects at offsets 4 and 0xC of pThis and returns pThis.
-// @fnv 0x00588c50
-char* __fastcall FUN_00588c50(char* pThis)
-{
-    _ref_006815c0(pThis + 4);
-    _ref_006815c0(pThis + 0xC);
-    return pThis;
-}
 
 extern int DAT_01031fac;
 
@@ -365,22 +149,7 @@ struct FUN_00588fa0_arg
 
 void __fastcall FUN_005890c0(int* self, FUN_00588fa0_arg a);
 
-// Calls FUN_005890c0 on self, then stores the address of DAT_01031fac into *self and returns self.
-// @fnv 0x00588fa0
-int* __fastcall FUN_00588fa0(int* self, FUN_00588fa0_arg a)
-{
-    FUN_005890c0(self, a);
-    *self = (int)&DAT_01031fac;
-    return self;
-}
-
 void __fastcall _ref_00726070(void*);
-
-// @fnv 0x006698d0
-void __fastcall FUN_006698d0(char* pThis)
-{
-    _ref_00726070(pThis + 0x6c);
-}
 
 struct FUN_005832f0_shell : public TESForm
 {
@@ -391,14 +160,6 @@ struct Flt
 {
     operator unsigned int() const;
 };
-// Returns the unsigned int at offset 0xc0 as a char pointer, or an empty string when that value is zero.
-// @fnv 0x005832f0
-char* FUN_005832f0_shell::FUN_005832f0()
-{
-    return ((Flt*)((char*)this + 0xc0))->operator unsigned int()
-               ? (char*)((Flt*)((char*)this + 0xc0))->operator unsigned int()
-               : "";
-}
 
 struct FUN_00587670_shell : public TESWorldSpace
 {
@@ -416,34 +177,6 @@ struct S54de10
     void FUN_0054de10(TESWorldSpace*);
 };
 unsigned int __fastcall _ref_0084e3a0(void*);
-// @fnv 0x00587670
-bool FUN_00587670_shell::FUN_00587670(TESObjectCELL* apCell)
-{
-    int key;
-    TESObjectCELL* ignore;
-    if (!apCell || apCell->IsCellInterior())
-        return false;
-    if (((CellH*)apCell)->IsCellPersistent())
-    {
-        if (*(TESObjectCELL**)((char*)this + 0x34))
-            return false;
-        *(TESObjectCELL**)((char*)this + 0x34) = apCell;
-    }
-    else
-    {
-        key = TESWorldSpace::BuildCellKey(((CellH*)apCell)->GetCellGridX(), ((CellH*)apCell)->GetCellGridY());
-        if ((*(DummyPointerMap**)((char*)this + 0x30))->GetAt(key, (unsigned int&)ignore))
-        {
-            Warning("CELLS: Cell (%08X) %s already exists at coord (%i, %i ).", _ref_0084e3a0(ignore),
-                    ((const char*(__thiscall*)(TESObjectCELL*))(*(void***)ignore)[0x130 / 4])(ignore),
-                    ((CellH*)apCell)->GetCellGridX(), ((CellH*)apCell)->GetCellGridY());
-            return false;
-        }
-        (*(DummyPointerMap**)((char*)this + 0x30))->SetAt(key, (unsigned int)apCell);
-    }
-    ((S54de10*)apCell)->FUN_0054de10(this);
-    return true;
-}
 
 struct FUN_00587e40_shell : public TESWorldSpace
 {
@@ -477,37 +210,6 @@ struct MapH
     bool RemoveAt(unsigned int);
 };
 bool __cdecl FUN_00587c80(void*);
-// @fnv 0x00587e40
-void FUN_00587e40_shell::FUN_00587e40(TESObjectREFR* apRef)
-{
-    unsigned int ikey;
-    BSSimpleList<const char*>* preflist;
-    if (apRef && !apRef->IsTemporary())
-    {
-        g_011ca60c.QueryPerformanceCounter(0);
-        if (!FUN_00587c80(apRef))
-        {
-            ((ListH*)((char*)this + 0x60))->_ref_00905330(&apRef);
-        }
-        else
-        {
-            ikey = WsH::GetKeyForWorldCoord(
-                *((NiPoint3 * (__thiscall*)(TESObjectREFR*))(*(void***)apRef)[0x1f4 / 4])(apRef));
-            preflist = 0;
-            ((DummyPointerMap*)((char*)this + 0x50))->GetAt(ikey, (unsigned int&)preflist);
-            if (preflist)
-            {
-                ((ListH*)preflist)->_ref_00905330(&apRef);
-                if (((ListH*)preflist)->_ref_008256d0())
-                {
-                    delete preflist;
-                    ((MapH*)((char*)this + 0x50))->RemoveAt(ikey);
-                }
-            }
-        }
-        g_011ca60c.WaitForTasksDuringRendering();
-    }
-}
 
 struct FUN_00588070_shell : public TESWorldSpace
 {
@@ -529,19 +231,6 @@ struct FUN_00544630_shell
 {
     void ResetCellData();
 };
-
-// Returns the TESObjectCELL stored at offset 0x34, creating and initializing it first if it is null.
-// @fnv 0x00588070
-TESObjectCELL* FUN_00588070_shell::GetOrCreateCell()
-{
-    if (!*(stub::TESObjectCELL**)((char*)this + 0x34))
-    {
-        *(stub::TESObjectCELL**)((char*)this + 0x34) = new stub::TESObjectCELL;
-        (*(FUN_005516f0_s**)((char*)this + 0x34))->SetFlag400(1);
-        (*(FUN_00544630_shell**)((char*)this + 0x34))->ResetCellData();
-    }
-    return *(TESObjectCELL**)((char*)this + 0x34);
-}
 
 struct FileH
 {
@@ -566,24 +255,6 @@ struct FUN_005858b0_shell
     bool IsFileFormIDMatching(FileH* apFile);
 };
 
-// @fnv 0x005858b0
-bool FUN_005858b0_shell::IsFileFormIDMatching(FileH* apFile)
-{
-    FormIDData* pdata = FUN_00588a90(apFile);
-    if (apFile && apFile->IsMasterFile() && pdata && pdata->formID)
-    {
-        if (apFile->SetOffset(pdata->formID))
-        {
-            if (_ref_00472660(apFile) == DAT_0118730c)
-            {
-                if (apFile->GetFormID() == _ref_0084e3a0(this))
-                    return true;
-            }
-        }
-    }
-    return false;
-}
-
 struct TESClimate
 {
     virtual ~TESClimate();  // polymorphic: its RTTI is used (rtti_fix.py)
@@ -595,15 +266,6 @@ class FUN_00585fe0_shell : public TESWorldSpace
     TESClimate* FUN_00585fe0();
 };
 
-// Returns the climate of the parent world if one exists, otherwise the climate stored at offset 0x40 of this world space.
-// @fnv 0x00585fe0
-TESClimate* FUN_00585fe0_shell::FUN_00585fe0()
-{
-    if (GetParentWorld(PARENT_USE_FLAG(4)))
-        return ((FUN_00585fe0_shell*)GetParentWorld(PARENT_USE_FLAG(4)))->FUN_00585fe0();
-    return *reinterpret_cast<TESClimate**>(reinterpret_cast<unsigned char*>(this) + 0x40);
-}
-
 struct FUN_00586020_shell
 {
     char pad[0x44];
@@ -612,36 +274,11 @@ struct FUN_00586020_shell
     TESWorldSpace* GetWorldSpaceOrParentWorld();
 };
 
-// Returns field44 if set, otherwise recurses into the parent world space obtained via GetParentWorld with flag 5, or returns null.
-// @fnv 0x00586020
-TESWorldSpace* FUN_00586020_shell::GetWorldSpaceOrParentWorld()
-{
-    TESWorldSpace* result = field44;
-    if (!result)
-    {
-        if (GetParentWorld(static_cast<TESWorldSpace::PARENT_USE_FLAG>(5)))
-        {
-            result =
-                reinterpret_cast<FUN_00586020_shell*>(GetParentWorld(static_cast<TESWorldSpace::PARENT_USE_FLAG>(5)))
-                    ->GetWorldSpaceOrParentWorld();
-        }
-    }
-    return result;
-}
-
 struct FUN_00586210_shell
 {
     unsigned char cFlags;
     bool HasFlag2();
 };
-
-// @fnv 0x00586210
-bool FUN_00586210_shell::HasFlag2()
-{
-    if (((unsigned char)(*((unsigned char*)this + 0x4c)) & 2))
-        return true;
-    return false;
-}
 
 struct ArrSI
 {
@@ -649,27 +286,10 @@ struct ArrSI
     char HasFlag80000();
 };
 
-// @fnv 0x00586230
-char ArrSI::HasFlag80000()
-{
-    unsigned int flags = GetFlags();
-    if (flags & 0x80000)
-        return 1;
-    return 0;
-}
-
 struct FUN_00586260_shell
 {
     bool IsFlag8Set();
 };
-
-// @fnv 0x00586260
-bool FUN_00586260_shell::IsFlag8Set()
-{
-    if (((unsigned char*)this)[0x4c] & 8)
-        return 1;
-    return 0;
-}
 
 struct FUN_00586280_shell
 {
@@ -677,56 +297,21 @@ struct FUN_00586280_shell
     void SetFlag8(bool bFlag);
 };
 
-// Sets or clears bit 3 (0x8) of the byte at offset 0x4c on this object based on bFlag.
-// @fnv 0x00586280
-void FUN_00586280_shell::SetFlag8(bool bFlag)
-{
-    if (bFlag)
-        ((unsigned char*)this)[0x4c] |= 8;
-    else
-        ((unsigned char*)this)[0x4c] &= ~8;
-}
-
 struct FUN_005862c0_shell
 {
     unsigned char cFlags;  // +0x4c
     bool IsFlagSet();
 };
 
-// @fnv 0x005862c0
-bool FUN_005862c0_shell::IsFlagSet()
-{
-    if (((unsigned char*)((char*)this + 0x4c))[0] & 0x10)
-        return 1;
-    return 0;
-}
-
 struct FUN_00586300_shell
 {
     char IsFlag80Set();
 };
 
-// Returns 1 if the byte at offset 0x4c has bit 0x80 set, otherwise 0.
-// @fnv 0x00586300
-char FUN_00586300_shell::IsFlag80Set()
-{
-    if ((*(unsigned char*)(this + 0x4c) & 0x80) != 0)
-        return 1;
-    return 0;
-}
-
 struct FUN_00586320_shell
 {
     bool FUN_00586320();
 };
-
-// @fnv 0x00586320
-bool FUN_00586320_shell::FUN_00586320()
-{
-    if ((*(unsigned char*)((char*)this + 0x4c) & 0x40) != 0)
-        return false;
-    return true;
-}
 
 struct FNStub
 {
@@ -738,40 +323,12 @@ struct FUN_00586440_shell : TESWorldSpace
     const char* FUN_00586440();
 };
 
-// Returns the full name of the parent worldspace if one exists, otherwise the full name of this worldspace.
-// @fnv 0x00586440
-const char* FUN_00586440_shell::FUN_00586440()
-{
-    if (this->GetParentWorld(static_cast<TESWorldSpace::PARENT_USE_FLAG>(2)))
-    {
-        return (reinterpret_cast<FNStub*>(
-                    reinterpret_cast<char*>(this->GetParentWorld(static_cast<TESWorldSpace::PARENT_USE_FLAG>(2))) +
-                    0x24))
-            ->GetFullName();
-    }
-    return (reinterpret_cast<FNStub*>(reinterpret_cast<char*>(this) + 0x24))->GetFullName();
-}
-
 struct StartMenu
 {
     char const* GetMenuTitle();
 };
 
 extern StartMenu g_011ca130;
-
-// @fnv 0x00586980
-char const* FUN_00586980()
-{
-    return g_011ca130.GetMenuTitle();
-}
-
-// Splits a 32-bit value into its high and low 16-bit halves, storing the high half in *b and the low half in *c.
-// @fnv 0x00587520
-void SplitUInt32(unsigned int auiValue, unsigned short* b, unsigned short* c)
-{
-    *b = (unsigned short)((auiValue >> 0x10) & 0xffff);
-    *c = (unsigned short)(auiValue & 0xffff);
-}
 
 namespace fnv_00587550 {
 extern "C"
@@ -791,13 +348,6 @@ struct FUN_00587550_shell : TESWorldSpace
     TESObjectCELL* FUN_00587550(const NiPoint3& aCoord);
 };
 
-// @fnv 0x00587550
-TESObjectCELL* FUN_00587550_shell::FUN_00587550(const NiPoint3& aCoord)
-{
-    int icellx = TruncateFloatToInt(aCoord.x) >> 12;
-    int icelly = TruncateFloatToInt(aCoord.y) >> 12;
-    return GetCellAtGridPosition(icellx, icelly);
-}
 }  // namespace fnv_00587550
 
 extern "C"
@@ -806,16 +356,6 @@ extern "C"
 }
 
 extern TESWaterForm* DAT_011ca53c;
-
-// @fnv 0x00586070
-TESWaterForm* __fastcall FUN_00586070(TESWorldSpace* apWorldSpace)
-{
-    if (apWorldSpace->GetParentWorld((TESWorldSpace::PARENT_USE_FLAG)3))
-        return FUN_00586070(apWorldSpace->GetParentWorld((TESWorldSpace::PARENT_USE_FLAG)3));
-    if (*(TESWorldSpace**)((char*)apWorldSpace + 0x74))
-        return (TESWaterForm*)*(TESWorldSpace**)((char*)apWorldSpace + 0x74);
-    return DAT_011ca53c;
-}
 
 template <class T> class BSSimpleList;
 
@@ -829,20 +369,6 @@ struct FUN_00588520_shell
     void FUN_00588520(BSSimpleList<const char*>*);
 };
 
-// If list is non-null, gets the interior cell from this world space and forwards the list to the cell's method.
-// @fnv 0x00588520
-void __thiscall FUN_00588520_shell::FUN_00588520(BSSimpleList<const char*>* list)
-{
-    if (list)
-    {
-        TESObjectCELL* cell = ((TESWorldSpace*)this)->GetInteriorCell();
-        if (cell)
-        {
-            ((FUN_0054b8c0_shell*)cell)->AddStaticRefsToList(list);
-        }
-    }
-}
-
 template <int N> struct EndianSizeTag
 {
 };
@@ -854,18 +380,6 @@ struct FUN_005840b0_shell
 {
     void __thiscall FUN_005840b0();
 };
-
-// Byte-swaps the two ints and four shorts stored in this object via BSEndian.
-// @fnv 0x005840b0
-void __thiscall FUN_005840b0_shell::FUN_005840b0()
-{
-    BSEndian((int*)this, EndianSizeTag<2>());
-    BSEndian((int*)(this + 4), EndianSizeTag<2>());
-    BSEndian((unsigned short*)(this + 8), EndianSizeTag<2>());
-    BSEndian((unsigned short*)(this + 0xa), EndianSizeTag<2>());
-    BSEndian((unsigned short*)(this + 0xc), EndianSizeTag<2>());
-    BSEndian((unsigned short*)(this + 0xe), EndianSizeTag<2>());
-}
 
 struct Modifier
 {
@@ -889,15 +403,6 @@ struct FUN_004f6800_shell
 {
     void FUN_004f6800(void*, float*, void*);
 };
-// @fnv 0x004f6800
-void FUN_004f6800_shell::FUN_004f6800(void* a1, float* a2, void* a3)
-{
-    FUN_004f6fc0_shell tmp;
-    tmp.FUN_004f6fc0();
-    ((AlphaColor*)&tmp)->FUN_0052ce20(a2[0]);
-    ((Modifier*)&tmp)->SetValue(a2[1]);
-    ((FUN_004f6850_shell*)this)->FUN_004f6850(a1, &tmp, a3);
-}
 
 struct FUN_00528560_Host
 {
@@ -909,14 +414,6 @@ struct FUN_00528560_Host
     virtual TESObjectCELL* v5(unsigned int) = 0;
     TESObjectCELL* GetCellAtGridCoord(unsigned short, unsigned short);
 };
-// Computes a grid key from the X and Y coordinates and returns the cell obtained from v5 for that key.
-// @fnv 0x00528560
-TESObjectCELL* FUN_00528560_Host::GetCellAtGridCoord(unsigned short ausGridX, unsigned short ausGridY)
-{
-    int key;
-    key = TESWorldSpace::BuildCellKey(ausGridX, ausGridY);
-    return v5(key);
-}
 
 struct FUN_00582e00_host
 {
@@ -924,15 +421,6 @@ struct FUN_00582e00_host
     void* FUN_00582e00(unsigned int);
 };
 void __cdecl _Deallocate(void*);
-// Calls FUN_00582e30, then deallocates this when flags has bit 0 set, and returns this.
-// @fnv 0x00582e00
-void* FUN_00582e00_host::FUN_00582e00(unsigned int flags)
-{
-    FUN_00582e30();
-    if (flags & 1)
-        _Deallocate(this);
-    return this;
-}
 
 struct S_00583040
 {
@@ -940,15 +428,6 @@ struct S_00583040
     void* FUN_00583040(unsigned int);
 };
 void _Deallocate(void*);
-// Calls FUN_006fc980, deallocates this when flags has bit 0 set, and returns this.
-// @fnv 0x00583040
-void* S_00583040::FUN_00583040(unsigned int flags)
-{
-    FUN_006fc980();
-    if (flags & 1)
-        _Deallocate(this);
-    return this;
-}
 
 namespace fnv_00584530 {
 struct FileH;
@@ -968,20 +447,6 @@ struct FUN_005858b0_shell
     int FUN_00584530(FileH* file, int x, int y);
 };
 
-// @fnv 0x00584530
-int FUN_005858b0_shell::FUN_00584530(FileH* file, int x, int y)
-{
-    FormIDData* pdata = FUN_00588a90(file);
-    if (!pdata)
-        return -1;
-    int iminX = (int)pdata->f4 >> 12;
-    int iminY = (int)pdata->f8 >> 12;
-    int imaxX = (int)pdata->fc >> 12;
-    int imaxY = (int)pdata->f10 >> 12;
-    if (x > imaxX || x < iminX || y > imaxY || y < iminY)
-        return -1;
-    return (imaxX - iminX + 1) * (y - iminY) + x - iminX;
-}
 }  // namespace fnv_00584530
 
 class TESWaterForm;
@@ -990,47 +455,17 @@ struct FUN_005860c0_shell : TESWorldSpace
 {
     TESWaterForm* FUN_005860c0();
 };
-// @fnv 0x005860c0
-TESWaterForm* FUN_005860c0_shell::FUN_005860c0()
-{
-    if (GetParentWorld(TESWorldSpace::USE_LAND))
-        return ((FUN_005860c0_shell*)GetParentWorld(TESWorldSpace::USE_LAND))->FUN_005860c0();
-    if (*(TESWaterForm**)((char*)this + 0x78))
-        return *(TESWaterForm**)((char*)this + 0x78);
-    return DAT_011ca53c;
-}
 
 struct Unk00586340
 {
     bool FUN_00586340(int);
 };
-// Returns true if a is outside 0..5 or if the bit for a is set in the 16-bit mask at offset 0x4E of this.
-// @fnv 0x00586340
-bool Unk00586340::FUN_00586340(int aiIndex)
-{
-    if (aiIndex >= 0 && aiIndex < 6)
-    {
-        unsigned char mask = 1 << aiIndex;
-        if (*(unsigned short*)((char*)this + 0x4E) & mask)
-            return true;
-        return false;
-    }
-    return true;
-}
 
 struct PointerPairData;
 struct FUN_00586400_shell : TESWorldSpace
 {
     PointerPairData* FUN_00586400();
 };
-// Returns the parent world's result if GetParentWorld(2) is set, otherwise returns this object offset by 0x80.
-// @fnv 0x00586400
-PointerPairData* FUN_00586400_shell::FUN_00586400()
-{
-    if (GetParentWorld((PARENT_USE_FLAG)2))
-        return ((FUN_00586400_shell*)GetParentWorld((PARENT_USE_FLAG)2))->FUN_00586400();
-    return (PointerPairData*)((char*)this + 0x80);
-}
 
 namespace fnv_00587760 {
 struct CellH
@@ -1056,23 +491,6 @@ struct FUN_00587760_shell : TESWorldSpace
     void RemoveCellFromMap(TESObjectCELL* cell);
 };
 
-// @fnv 0x00587760
-void FUN_00587760_shell::RemoveCellFromMap(TESObjectCELL* cell)
-{
-    if (!cell || cell->IsCellInterior())
-        return;
-
-    unsigned int entry7;
-    unsigned int key = TESWorldSpace::BuildCellKey((short)reinterpret_cast<CellH*>(cell)->GetCellGridX(),
-                                                   (short)reinterpret_cast<CellH*>(cell)->GetCellGridY());
-
-    if (reinterpret_cast<DummyPointerMap*>(cellMap)->GetAt(key, entry7) &&
-        cell == reinterpret_cast<TESObjectCELL*>(entry7))
-    {
-        reinterpret_cast<MapH*>(cellMap)->RemoveAt(key);
-        reinterpret_cast<S54de10*>(cell)->FUN_0054de10(0);
-    }
-}
 }  // namespace fnv_00587760
 
 namespace fnv_00587870 {
@@ -1094,19 +512,6 @@ struct OverlapHolder
     DummyPointerMap* map68;
     BSSimpleList<TESObjectREFR*>* FUN_00587870(CellH* apCell);
 };
-// Looks up the cell's key in map68 and returns the stored TESObjectREFR list, or null if map68 is unset.
-// @fnv 0x00587870
-BSSimpleList<TESObjectREFR*>* OverlapHolder::FUN_00587870(CellH* apCell)
-{
-    BSSimpleList<TESObjectREFR*>* preflist = 0;
-    unsigned int ikey;
-    if (map68)
-    {
-        ikey = TESWorldSpace::BuildCellKey(apCell->GetCellGridX(), apCell->GetCellGridY());
-        map68->GetAt(ikey, (unsigned int&)preflist);
-    }
-    return preflist;
-}
 }  // namespace fnv_00587870
 
 struct CellCaller
@@ -1117,14 +522,6 @@ struct FUN_00588120_host
 {
     void FUN_00588120();
 };
-// Gets the interior cell from this worldspace and, if one exists, calls MoveReferencesToWorldCells on it with this worldspace.
-// @fnv 0x00588120
-void FUN_00588120_host::FUN_00588120()
-{
-    TESObjectCELL* cell = ((TESWorldSpace*)this)->GetInteriorCell();
-    if (cell)
-        ((CellCaller*)cell)->MoveReferencesToWorldCells((TESWorldSpace*)this);
-}
 
 struct FUN_005884e0_owner : TESWorldSpace
 {
@@ -1134,20 +531,6 @@ struct CellProxy
 {
     void FUN_0054b830(TESObjectREFR*);
 };
-// If a1 is non-null and the world space has an interior cell, forwards a1 to that cell's FUN_0054b830.
-// @fnv 0x005884e0
-void FUN_005884e0_owner::FUN_005884e0(TESObjectREFR* apRef)
-{
-    TESObjectCELL* cell;
-    if (apRef != 0)
-    {
-        cell = GetInteriorCell();
-        if (cell != 0)
-        {
-            reinterpret_cast<CellProxy*>(cell)->FUN_0054b830(apRef);
-        }
-    }
-}
 
 namespace fnv_00588a90 {
 struct DummyPointerMap
@@ -1162,17 +545,6 @@ struct TESWorldSpace_shell
 {
     FormIDData* FUN_00588a90(TESFile* file);
 };
-// @fnv 0x00588a90
-FormIDData* TESWorldSpace_shell::FUN_00588a90(TESFile* file)
-{
-    FormIDData* result = 0;
-    TESFile* current = file;
-    while (current && current->GetThreadSafeRootFile())
-        current = current->GetThreadSafeRootFile();
-    if (!((DummyPointerMap*)((char*)this + 0xb0))->GetAt((unsigned int)current, (unsigned int&)result))
-        result = 0;
-    return result;
-}
 }  // namespace fnv_00588a90
 
 struct BGSCameraPath;
@@ -1202,21 +574,6 @@ struct Caller_0095f590
 {
     BGSCameraPath* __thiscall FUN_0095f590(unsigned int);
 };
-// @fnv 0x0095f530
-BGSCameraPath* FUN_0095f530_shell::FUN_0095f530(TESObjectREFR* apActionRef, TESObjectREFR* apTargetRef)
-{
-    unsigned char nv;
-    if ((unsigned char)apActionRef)
-    {
-        nv = *(unsigned char*)((char*)this + 0x680) | (unsigned int)apTargetRef;
-    }
-    else
-    {
-        nv = (unsigned char)~(unsigned char)apTargetRef;
-        nv = *(unsigned char*)((char*)this + 0x680) & nv;
-    }
-    return ((Caller_0095f590*)this)->FUN_0095f590(nv);
-}
 
 namespace fnv_00582c20 {
 struct TESFormBase
@@ -1316,20 +673,6 @@ struct FUN_00582c20 : public TESFormBase, public stand::TESFullName, public TEST
     void FUN_00583070();
 };
 
-// @fnv 0x00582c20
-FUN_00582c20::FUN_00582c20() : m_kSecondTreeComponent(0x25), m_kFourthTreeComponent(0), OffsetDataMap(0x25)
-{
-    ((SFTX*)this)->SetFormType(0x41);
-    m_pThirdTreePointer = 0;
-    pCellNavMeshInfoMap = new FUN_00589000(0x25);
-    m_pFourthTreePointer = 0;
-    m_pCell = 0;
-    m_kFirstPoint.y = 3.4028234663852886e+38f;
-    m_kFirstPoint.x = 3.4028234663852886e+38f;
-    m_kEndPoint.y = _DAT_01015f5c;
-    m_kEndPoint.x = _DAT_01015f5c;
-    FUN_00583070();
-}
 }  // namespace fnv_00582c20
 
 namespace fnv_005857b0 {
@@ -1350,27 +693,6 @@ struct FUN_005857b0_shell : FUN_005858b0_shell
     int FUN_00584530(int, int, int);
     void FUN_005857b0(int a, int b);
 };
-// @fnv 0x005857b0
-void FUN_005857b0_shell::FUN_005857b0(int a, int aiDelta)
-{
-    FileH* p = FUN_00588a90(a);
-    if (p && p->m_uiData && aiDelta)
-    {
-        int i2 = (int)p->m_fVectorY >> 12;
-        int i3 = (int)p->m_fVectorZ >> 12;
-        int i1 = (int)p->m_fScalarPart >> 12;
-        int i0 = (int)p->m_fVectorX >> 12;
-        for (int i = i2; i <= i1; i++)
-        {
-            for (int j = i3; j <= i0; j++)
-            {
-                int k = FUN_00584530(a, i, j);
-                if (k >= 0 && ((int*)p->m_uiData)[k])
-                    ((int*)p->m_uiData)[k] += aiDelta;
-            }
-        }
-    }
-}
 }  // namespace fnv_005857b0
 
 struct MapX
@@ -1395,29 +717,6 @@ struct FUN_00587bb0_shell
 {
     void DestroyMapEntries();
 };
-// Iterates the map at this+0x68, deletes each non-null value list, then clears and deletes the map and nulls the pointer.
-// @fnv 0x00587bb0
-void FUN_00587bb0_shell::DestroyMapEntries()
-{
-    if (*(MapX**)((char*)this + 0x68))
-    {
-        void* pos = ((MapX*)*(MapX**)((char*)this + 0x68))->GetFirstPos();
-        while (pos)
-        {
-            void* key = 0;
-            void* val = 0;
-            ((NiTMap*)*(MapX**)((char*)this + 0x68))->GetNext(pos, (unsigned int&)key, val);
-            if (val)
-            {
-                ((List_009e03e0*)val)->RemoveAll();
-                delete (List_009e03e0*)val;
-            }
-        }
-        ((MyMap*)*(MapX**)((char*)this + 0x68))->RemoveAll();
-        delete (MyMap*)*(MapX**)((char*)this + 0x68);
-        *(MapX**)((char*)this + 0x68) = 0;
-    }
-}
 
 namespace fnv_00588c80 {
 struct MapX
@@ -1437,23 +736,6 @@ struct FUN_00588c80
 {
     void PerformNoArgumentOperation();
 };
-// Iterates the map at offset 0xb0, deallocating each entry's referenced object and the entry itself, then clears the map.
-// @fnv 0x00588c80
-void FUN_00588c80::PerformNoArgumentOperation()
-{
-    void* iterA = ((MapX*)((char*)this + 0xb0))->GetFirstPos();
-    while (iterA)
-    {
-        void* preflist9 = 0;
-        unsigned int iignore5 = 0;
-        ((NiTMap*)((char*)this + 0xb0))->GetNext(iterA, iignore5, preflist9);
-        void* ref = *(void**)preflist9;
-        _Deallocate(ref);
-        void* p2 = preflist9;
-        _Deallocate(p2);
-    }
-    ((MyMap*)((char*)this + 0xb0))->RemoveAll();
-}
 }  // namespace fnv_00588c80
 
 namespace fnv_00583070 {
@@ -1482,38 +764,6 @@ struct WorldSpaceVirtual
     virtual void Call();
 };
 
-// @fnv 0x00583070
-void FUN_00583070_shell::FUN_00583070()
-{
-    *reinterpret_cast<void**>(reinterpret_cast<char*>(this) + 0x70) = 0;
-    *reinterpret_cast<void**>(reinterpret_cast<char*>(this) + 0xd0) = 0;
-    *reinterpret_cast<unsigned char*>(reinterpret_cast<char*>(this) + 0x4c) = 0;
-    *reinterpret_cast<unsigned short*>(reinterpret_cast<char*>(this) + 0x4e) = 0;
-
-    if (!reinterpret_cast<FormProxy*>(this)->IsReservedFormID())
-        reinterpret_cast<FUN_005861d0_shell*>(this)->SetFlagBit0(true);
-
-    *reinterpret_cast<void**>(reinterpret_cast<char*>(this) + 0x40) = 0;
-    *reinterpret_cast<void**>(reinterpret_cast<char*>(this) + 0x44) = 0;
-    *reinterpret_cast<void**>(reinterpret_cast<char*>(this) + 0x74) = 0;
-    *reinterpret_cast<void**>(reinterpret_cast<char*>(this) + 0x78) = 0;
-    *reinterpret_cast<float*>(reinterpret_cast<char*>(this) + 0x7c) = 0.0f;
-    *reinterpret_cast<float*>(reinterpret_cast<char*>(this) + 0x90) = 1.0f;
-    *reinterpret_cast<float*>(reinterpret_cast<char*>(this) + 0x94) = 0.0f;
-    *reinterpret_cast<float*>(reinterpret_cast<char*>(this) + 0x98) = 0.0f;
-
-    ClearWorldSpaceReferences();
-
-    *reinterpret_cast<void**>(reinterpret_cast<char*>(this) + 0x9c) = 0;
-    *reinterpret_cast<void**>(reinterpret_cast<char*>(this) + 0x48) = 0;
-    *reinterpret_cast<float*>(reinterpret_cast<char*>(this) + 0xc8) = DAT_01031920;
-    *reinterpret_cast<float*>(reinterpret_cast<char*>(this) + 0xcc) = 0.0f;
-
-    reinterpret_cast<GO*>(reinterpret_cast<char*>(this) + 0x6c)->operator=(0);
-
-    reinterpret_cast<WorldSpaceVirtual*>(reinterpret_cast<char*>(this) + 0xd4)->Call();
-    reinterpret_cast<WorldSpaceVirtual*>(reinterpret_cast<char*>(this) + 0xe0)->Call();
-}
 }  // namespace fnv_00583070
 
 struct GO
@@ -1543,18 +793,6 @@ struct FUN_005831d0_shell
 
     unsigned int GetOrCreateObject();
 };
-
-// Returns the stored object pointer, allocating and storing a new FUN_00c5a9d0 first if it is null.
-// @fnv 0x005831d0
-unsigned int FUN_005831d0_shell::GetOrCreateObject()
-{
-    if (!static_cast<unsigned int>(this->go))
-    {
-        this->go.operator=(new FUN_00c5a9d0());
-    }
-
-    return static_cast<unsigned int>(this->go);
-}
 
 namespace fnv_00588150 {
 struct CellH
@@ -1726,57 +964,6 @@ struct FUN_00588150_shell : public TESWorldSpace
     void AddCellReferences(TESObjectCELL*);
 };
 
-// Looks up the cell's reference list by key and adds each reference to the cell, filtering the second list by cull result and a cell check.
-// @fnv 0x00588150
-void FUN_00588150_shell::AddCellReferences(TESObjectCELL* cell)
-{
-    BSSimpleList* pCurrentElementNext;
-    unsigned int ikey;
-
-    if (cell != 0)
-    {
-        g_011ca60c.QueryPerformanceCounter(0);
-        ikey = TESWorldSpace::BuildCellKey(reinterpret_cast<CellH*>(cell)->GetCellGridX(),
-                                           reinterpret_cast<CellH*>(cell)->GetCellGridY());
-
-        {
-            TESObjectREFR* pref;
-            pCurrentElementNext = 0;
-            reinterpret_cast<DummyPointerMap*>(reinterpret_cast<char*>(this) + 0x50)
-                ->GetAt(ikey, reinterpret_cast<unsigned int&>(pCurrentElementNext));
-
-            while (pCurrentElementNext != 0 && !pCurrentElementNext->_ref_008256d0())
-            {
-                pref = *pCurrentElementNext->_ref_006815c0();
-                cell->AddReference(pref, false);
-                pCurrentElementNext = pCurrentElementNext->_ref_00726070();
-            }
-        }
-
-        {
-            TESObjectREFR* pref;
-            pCurrentElementNext = reinterpret_cast<BSSimpleList*>(reinterpret_cast<char*>(this) + 0x60);
-
-            while (pCurrentElementNext != 0 && !pCurrentElementNext->_ref_008256d0())
-            {
-                pref = *pCurrentElementNext->_ref_006815c0();
-
-                if (reinterpret_cast<BSOcclusionPlane*>(pref)->GetCullResult() != reinterpret_cast<int>(cell))
-                {
-                    if (reinterpret_cast<FUN_00550200_shell*>(cell)->FUN_00550200(
-                            reinterpret_cast<BSOcclusionPlane*>(pref)->FUN_0125()))
-                    {
-                        cell->AddReference(pref, false);
-                    }
-                }
-
-                pCurrentElementNext = pCurrentElementNext->_ref_00726070();
-            }
-        }
-
-        g_011ca60c.WaitForTasksDuringRendering();
-    }
-}
 }  // namespace fnv_00588150
 
 namespace fnv_00588560 {
@@ -1884,35 +1071,6 @@ struct FUN_00588560_shell
     void* FindEntryByName(const char* name);
 };
 
-// Iterates the map's entries and returns the first whose f76() string matches name case-insensitively, or null.
-// @fnv 0x00588560
-void* FUN_00588560_shell::FindEntryByName(const char* name)
-{
-    void* result2 = 0;
-    void* position;
-
-    if (name)
-    {
-        position = this->map->GetFirstPos();
-
-        while (position && !result2)
-        {
-            void* value3 = 0;
-            unsigned int key;
-            this->map->GetNext(position, key, value3);
-
-            if (value3)
-            {
-                if (_stricmp(static_cast<FUN_00588560_entry*>(value3)->f76(), name) == 0)
-                {
-                    result2 = value3;
-                }
-            }
-        }
-    }
-
-    return result2;
-}
 }  // namespace fnv_00588560
 
 struct HelperAt6c
@@ -1932,15 +1090,6 @@ struct FUN_00583180_Class
     HelperAt6c m_container;
     void FUN_00583180();
 };
-// @fnv 0x00583180
-void FUN_00583180_Class::FUN_00583180()
-{
-    m_container.FUN_0066b0d0(0);
-    RefAt48* node = m_ref;
-    RefAt48* doomed = node;
-    doomed ? doomed->FUN_0040f2a0(1) : 0;
-    m_ref = 0;
-}
 
 struct FUN_00583270_sub_cls
 {
@@ -1964,22 +1113,6 @@ struct FUN_00583270_cls
     FUN_00583270_sub_cls sub;
     void FUN_00583270();
 };
-
-// @fnv 0x00583270
-void FUN_00583270_cls::FUN_00583270()
-{
-    if (sub.FUN_00559450())
-    {
-        if (FUN_00726070_cb(sub.FUN_00559450()) == 1)
-        {
-            if (reinterpret_cast<FUN_00583270_mid_cls*>(FUN_00450b80_cb(0))->FUN_00454b30() == (int)sub.FUN_00559450())
-            {
-                reinterpret_cast<FUN_00583270_tgt_cls*>(FUN_00450b80_cb(0))->FUN_00b5ddf0(0);
-            }
-            sub.FUN_0066b0d0(0);
-        }
-    }
-}
 
 struct TypeGroupInfo
 {
@@ -2025,111 +1158,6 @@ struct WorldReader
     int FUN_00584530(FileReader*, int, int);
     bool SeekToCellInWorld(FileReader*, int, int);
 };
-// Seeks the file to the world block/sub-block for cell (x,y), scanning group headers and cell chunks until the matching cell is found.
-// @fnv 0x005854f0
-bool WorldReader::SeekToCellInWorld(FileReader* file, int x, int y)
-{
-    if (file && file->FUN_00471c20())
-    {
-        Offsets* offsets = FUN_00588a90(file);
-        if (offsets && offsets->offsets)
-        {
-            int index = FUN_00584530(file, x, y);
-            if (index != -1)
-            {
-                unsigned int offset = offsets->offsets[index];
-                if (offset)
-                {
-                    file->SetOffset(offset + offsets->base);
-                    return true;
-                }
-            }
-            return false;
-        }
-    }
-    int subBlock;
-    bool found = false;
-    int block = GetCellCoordKey(x, y);
-    subBlock = FUN_005442c0(x, y);
-    if (file && file->FUN_004734d0(this))
-    {
-        file->FUN_00472150(true);
-        bool done = false;
-        TypeGroupInfo* header = file->FUN_00462270();
-        while (header && !done)
-        {
-            if (header->type == kGroupFormType)
-            {
-                bool skip = true;
-                done = true;
-                switch (header->groupType)
-                {
-                case 1:
-                    skip = false;
-                case 4:
-                    if (block == header->label)
-                        skip = false;
-                case 5:
-                    if (subBlock == header->label)
-                        skip = false;
-                case 6:
-                case 8:
-                case 9:
-                    done = false;
-                }
-                if (!done)
-                {
-                    if (skip)
-                        file->FUN_00473660();
-                    else
-                        file->FUN_00472150(true);
-                }
-            }
-            else if (header->type == DAT_011872b4)
-            {
-                CellCoordinates cellCoords;
-                cellCoords.FUN_00540720();
-                memset(&cellCoords, 0, 12);
-                if (header->label & 0x400)
-                    cellCoords.x = 0x7fffffff;
-                else
-                {
-                    bool read = false;
-                    int chunk = file->FUN_004726b0();
-                    while (chunk && !read)
-                    {
-                        if (chunk == 0x434c4358)
-                        {
-                            file->FUN_00472890(&cellCoords, 12);
-                            if (file->FUN_00401680())
-                                cellCoords.FUN_00462230();
-                            read = true;
-                        }
-                        if (file->FUN_004726f0())
-                            chunk = file->FUN_004726b0();
-                        else
-                            chunk = 0;
-                    }
-                }
-                if (cellCoords.x == x && cellCoords.y == y)
-                {
-                    found = true;
-                    done = true;
-                    file->SkipCurrentForm();
-                }
-                else
-                    file->FUN_00472150(true);
-            }
-            else if (header->type == DAT_01187338)
-            {
-                file->FUN_00472150(true);
-            }
-            else
-                done = true;
-        }
-    }
-    return found;
-}
 
 struct FUN_005877e0_shell : public TESWorldSpace
 {
@@ -2152,27 +1180,6 @@ struct FUN_005877e0_Map
     void Next(void** it, unsigned int* key, FUN_005877e0_Val5** out);
     void Done();
 };
-
-// If Probe fails, iterates cellMap calling v4(1) on each entry, then always calls Done on cellMap.
-// @fnv 0x005877e0
-void FUN_005877e0_shell::FUN_005877e0()
-{
-    if (!Probe())
-    {
-        void* it = reinterpret_cast<FUN_005877e0_Map*>(cellMap)->First();
-        while (it != 0)
-        {
-            FUN_005877e0_Val5* item;
-            unsigned int key;
-            FUN_005877e0_Val5* out4 = 0;
-            reinterpret_cast<FUN_005877e0_Map*>(cellMap)->Next(&it, &key, &out4);
-            FUN_005877e0_Val5* tmp4 = out4;
-            item = tmp4;
-            (item != 0) ? item->v4(1) : 0;
-        }
-    }
-    reinterpret_cast<FUN_005877e0_Map*>(cellMap)->Done();
-}
 
 struct Pt3
 {
@@ -2243,32 +1250,6 @@ struct FUN_00588e40_shell : WorldOffsetHost
     float m_fWorldTransformCoefficient4;
     void TransformWorldPoint(Pt3* apPoint, bool abInverse);
 };
-
-// @fnv 0x00588e40
-void FUN_00588e40_shell::TransformWorldPoint(Pt3* apPoint, bool abInverse)
-{
-    if (abInverse)
-    {
-        apPoint->x -= GetOffsetX();
-        apPoint->y -= GetOffsetY();
-    }
-    if (GetWorldScale(this) != 1.0 && GetWorldScale(this) != 0.0)
-    {
-        Pt3 kCenter4;
-        kCenter4.x = m_fGridOriginX + kPointArrayBench;
-        kCenter4.y = afWorldOriginY + m_fWorldTransformCoefficient4;
-        kCenter4.z = 0.0f;
-        kCenter4 *= DAT_01016248;
-        Pt3 kDelta = *apPoint - kCenter4;
-        kDelta *= abInverse ? 1.0 / GetWorldScale(this) : GetWorldScale(this);
-        *apPoint = kCenter4 + kDelta;
-    }
-    if (!abInverse)
-    {
-        apPoint->x += GetOffsetX();
-        apPoint->y += GetOffsetY();
-    }
-}
 
 struct FUN_00483630_holder
 {
@@ -2451,54 +1432,6 @@ struct WorldBounds
     BoundsOffsetData* GetOrCreateCellOffsetData(WorldRecordFile*);
     bool FUN_00583360(WorldRecordFile*);
 };
-// @fnv 0x00583360
-bool WorldBounds::FUN_00583360(WorldRecordFile* file)
-{
-    unsigned int type = 0;
-    while (type = file->FUN_004726b0())
-    {
-        switch (type)
-        {
-        case 0x304d414e: {
-            BoundsPoint minimum;
-            file->FUN_00472890(&minimum, 8);
-            if (file->FUN_00401680())
-            {
-                BSEndian(&minimum.x, EndianSizeTag<4>());
-                BSEndian(&minimum.y, EndianSizeTag<4>());
-            }
-            minX = FUN_0040ebd0(minX, minimum.x);
-            minY = FUN_0040ebd0(minY, minimum.y);
-            if (file->FUN_00471c20())
-            {
-                BoundsOffsetData* data = GetOrCreateCellOffsetData(file);
-                data->minimum = minimum;
-            }
-            break;
-        }
-        case 0x394d414e: {
-            BoundsPoint maximum;
-            file->FUN_00472890(&maximum, 8);
-            if (file->FUN_00401680())
-            {
-                BSEndian(&maximum.x, EndianSizeTag<4>());
-                BSEndian(&maximum.y, EndianSizeTag<4>());
-            }
-            maxX = FUN_00404010(maxX, maximum.x);
-            maxY = FUN_00404010(maxY, maximum.y);
-            if (file->FUN_00471c20())
-            {
-                BoundsOffsetData* data = GetOrCreateCellOffsetData(file);
-                data->maximum = maximum;
-            }
-            break;
-        }
-        }
-        if (!file->FUN_004726f0())
-            break;
-    }
-    return true;
-}
 
 struct SaveForm
 {
@@ -2575,84 +1508,6 @@ struct SaveWorld
     SaveForm* FUN_00586150();
     void FUN_00584170();
 };
-// Writes the world record's encounter zone, parent, canopy, water noise, heights, map, offset, bounds and flags to the save stream.
-// @fnv 0x00584170
-void SaveWorld::FUN_00584170()
-{
-    FUN_004855a0();
-    fullName.FUN_00487010();
-    unsigned int formID = 0;
-    if (encounterZone)
-    {
-        formID = encounterZone->GetFormID();
-        FUN_00485910(0x4e5a4558, formID);
-    }
-    if (parent)
-    {
-        formID = parent->GetFormID();
-        FUN_00485910(0x4d414e57, formID);
-        FUN_00485950(0x4d414e50, parentFlags);
-    }
-    if (!FUN_00586340(4) && FUN_00585fe0())
-    {
-        formID = FUN_00585fe0()->GetFormID();
-        FUN_00485910(0x4d414e43, formID);
-    }
-    if (!FUN_00586340(3) && FUN_00586070())
-    {
-        formID = FUN_00586070()->GetFormID();
-        FUN_00485910(0x324d414e, formID);
-    }
-    if (!FUN_00586340(1) && FUN_005860c0())
-    {
-        formID = FUN_005860c0()->GetFormID();
-        FUN_00485910(0x334d414e, formID);
-        _FUN_00485910(0x344d414e, FUN_0045cd80());
-    }
-    if (!FUN_00586340(0))
-    {
-        SavePair pairHeights;
-        pairHeights.land = landHeight;
-        pairHeights.water = waterHeight;
-        if (FUN_00401500())
-            pairHeights.FUN_00462230();
-        AppendChunk(0x4d414e44, &pairHeights, 8);
-        if (FUN_00401500())
-            pairHeights.FUN_00462230();
-    }
-    if (!FUN_00586340(2))
-    {
-        texture.FUN_0048e370(0x4e4f4349);
-        if (FUN_00401500())
-            map.FUN_005840b0();
-        AppendChunk(0x4d414e4d, &map, 16);
-        if (FUN_00401500())
-            map.FUN_005840b0();
-    }
-    if (FUN_00401500())
-        offset.FUN_005a6b10();
-    AppendChunk(0x4d414e4f, &offset, 12);
-    if (FUN_00401500())
-        offset.FUN_005a6b10();
-    if (!FUN_00586340(5) && FUN_008041a0())
-    {
-        formID = FUN_008041a0()->GetFormID();
-        FUN_00485910(0x4d414e49, formID);
-    }
-    FUN_004858f0(0x41544144, flags);
-    FUN_00485710(0x304d414e, &minimumX, 2);
-    FUN_00485710(0x394d414e, &maximumX, 2);
-    if (FUN_00586150())
-    {
-        formID = FUN_00586150()->GetFormID();
-        FUN_00485910(0x4d414e5a, formID);
-    }
-    FUN_004856f0(0x4d414e4e, canopy.FUN_00408da0(), canopy.FUN_0048cee0() + 1);
-    FUN_004856f0(0x4d414e58, waterNoise.FUN_00408da0(), waterNoise.FUN_0048cee0() + 1);
-    if (extra)
-        extra->Save();
-    FUN_00485680();
-}
 
 extern "C" void* _FNV_DynamicCast(void*, int, const void*, const void*, int);
 extern char _FNV_RTTI_TESForm;
@@ -2838,50 +1693,6 @@ struct WorldCopy
     int GetMusic();
     void SetMusic(int);
 };
-// @fnv 0x00584fa0
-void WorldCopy::FUN_00584fa0(TESForm* form)
-{
-    WorldCopy* source = (WorldCopy*)_FNV_DynamicCast(form, 0, &_FNV_RTTI_TESForm, &_FNV_RTTI_TESWorldSpace, 0);
-    if (!source)
-        return;
-    CopyBase((TESForm*)source);
-    flags = source->flags;
-    parentFlags = source->parentFlags;
-    parent = source->parent;
-    unkd0 = source->unkd0;
-    climate = source->GetWorldClimate();
-    imageSpace = source->GetImageSpace();
-    if (source->data)
-    {
-        if (!data)
-            data = new FUN_0058efd0;
-        data->CopyFrom(source->data);
-    }
-    else if (data)
-    {
-        delete data;
-        data = 0;
-    }
-    SetWater(source->GetWater());
-    SetLODWater(source->GetLODWater());
-    SetHeight(source->GetHeight());
-    landHeight = source->landHeight;
-    waterHeight = source->waterHeight;
-    memcpy(&unk80, &source->unk80, 16);
-    memcpy(&unk90, &source->unk90, 12);
-    SetMusic(source->GetMusic());
-    cells->RemoveAll();
-    void* position = source->cells->GetFirstPos();
-    while (position)
-    {
-        unsigned int value = 0;
-        unsigned int key;
-        source->cells->GetNext(position, key, value);
-        cells->SetAt(key, value);
-    }
-    arrayD4.CopyFrom(source->arrayD4);
-    arrayE0.CopyFrom(source->arrayE0);
-}
 
 struct DataFile
 {
@@ -2910,59 +1721,6 @@ struct WorldData
     int FUN_00584530(DataFile*, int, int);
     bool FindCellByEditorID(const char*, int*, int*);
 };
-// Scans every loaded worldspace cell grid for a cell whose EDID chunk matches editorID, writing its grid coordinates to outX/outY and returning true when found.
-// @fnv 0x00585940
-bool WorldData::FindCellByEditorID(const char* editorID, int* outX, int* outY)
-{
-    unsigned int count = GetSourceFileCount();
-    for (unsigned int i = 0; i < count; i++)
-    {
-        DataFile* data = FUN_00484e60(i)->FUN_004739b0();
-        CellOffsetData* file = FUN_00588a90(data);
-        if (file)
-        {
-            int minX = ((int)file->minX) >> 12;
-            int maxY = ((int)file->minY) >> 12;
-            int minY = ((int)file->maxX) >> 12;
-            int maxX = ((int)file->maxY) >> 12;
-            for (int x = minX; x <= minY; x++)
-            {
-                for (int y = maxY; y <= maxX; y++)
-                {
-                    int index = FUN_00584530(data, x, y);
-                    if (index != -1)
-                    {
-                        unsigned int offset = file->offsets[index];
-                        if (offset)
-                        {
-                            data->FUN_004723a0(offset + file->baseOffset);
-                            if (data->FUN_00472660() == 0x39)
-                            {
-                                unsigned int chunkID = data->FUN_004726b0();
-                                if (chunkID == 0x44494445)
-                                {
-                                    unsigned int uiBufferSize = data->GetField25C() + 1;
-                                    char* size = (char*)FUN_00401000(uiBufferSize);
-                                    FUN_00403d30(size, 0, uiBufferSize);
-                                    data->FUN_00472890(size, 0);
-                                    if (!FUN_00404dc0(size, editorID))
-                                    {
-                                        *outX = x;
-                                        *outY = y;
-                                        FUN_00401030(size);
-                                        return true;
-                                    }
-                                    FUN_00401030(size);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-    return false;
-}
 
 struct AutoMemHelper
 {
@@ -3157,57 +1915,6 @@ struct ThreadFile
 {
     FileReader* FUN_004739b0();
 };
-// @fnv 0x00585b30
-CellOperations* WorldCellLoader::FUN_00585b30(int x, int y)
-{
-    AutoMemHelper j(26, true, DAT_01031f18, 1942);
-    bool i = true;
-    CellOperations* p = FUN_005875a0(x, y);
-    DAT_011c3f34 = reinterpret_cast<TESWorldSpace*>(this);
-    if (!p || !p->FUN_00551420())
-    {
-        unsigned int fileCount = GetSourceFileCount();
-        for (unsigned int fileIndex = 0; fileIndex < fileCount; ++fileIndex)
-        {
-            FileReader* file = reinterpret_cast<ThreadFile*>(FUN_00484e60(fileIndex))->FUN_004739b0();
-            bool loaded = file && SeekToCellInWorld(file, x, y);
-            if (loaded)
-            {
-                if (!p)
-                {
-                    p = reinterpret_cast<CellOperations*>(new stub::TESObjectCELL);
-                    p->FUN_00544300(false);
-                    p->ResetCellData();
-                    p->SetExteriorCellCoordinates(x, y);
-                    FUN_00587670(p);
-                    void* worldData = 0;
-                    worldData = DAT_011de45c->RemoveCommand(FUN_0084e3a0(), x, y);
-                    if (worldData)
-                        p->SetWorldData(worldData, true);
-                    i = FUN_004601d0(p, file);
-                }
-                else if (!(file->FUN_00462270()->label & 0x4000))
-                {
-                    FUN_004601d0(p, file);
-                }
-                if (!p->FUN_00550500(file))
-                    i = false;
-            }
-        }
-        if (p)
-        {
-            p->FUN_00551440(true);
-            bool loading = DAT_011de45c->FUN_0047c850();
-            DAT_011de45c->FUN_004534f0(!loading);
-            p->FinishLoad();
-            DAT_011de45c->FUN_004534f0(loading);
-            AddCellReferences(p);
-        }
-    }
-    if (!i)
-        Warning(DAT_01031ec0, x, y, GetWorldName(), FUN_0084e3a0());
-    return p;
-}
 
 struct FUN_00585ee0_shell : public TESWorldSpace
 {
@@ -3228,38 +1935,6 @@ struct WorldX
 };
 
 bool __cdecl LoadedCheck(TESFile* apFile);
-
-// @fnv 0x00585ee0
-bool FUN_00585ee0_shell::FindParentFile(int a1, int a2, unsigned int* apuiFileOut, unsigned int* apuiOffsetOut)
-{
-    bool bFound = false;
-    *apuiFileOut = 0;
-    *apuiOffsetOut = 0;
-    if (!GetParentWorld((TESWorldSpace::PARENT_USE_FLAG)0))
-    {
-        int iFileCount = GetFileCount();
-        if (iFileCount)
-        {
-            for (int iFileIndex = iFileCount - 1; iFileIndex >= 0; iFileIndex--)
-            {
-                TESFile* pParentFile = ((FileX*)GetFileForm(iFileIndex))->GetParentFile();
-                if (pParentFile && ((WorldX*)this)->ReadWorldData(pParentFile, a1, a2) && LoadedCheck(pParentFile))
-                {
-                    *apuiFileOut = (unsigned int)pParentFile;
-                    *apuiOffsetOut = ((FileX*)pParentFile)->GetOff();
-                    bFound = true;
-                    break;
-                }
-            }
-        }
-    }
-    else
-    {
-        bFound = ((FUN_00585ee0_shell*)GetParentWorld((TESWorldSpace::PARENT_USE_FLAG)0))
-                     ->FindParentFile(a1, a2, apuiFileOut, apuiOffsetOut);
-    }
-    return bFound;
-}
 
 struct GlobalObject_006815c0
 {
@@ -3474,135 +2149,6 @@ struct World : TESWorldSpace
 {
     void BuildRegionResults(float, float, float, float, RegionResult*, unsigned);
 };
-// Selects regions around the center of the given bounds, fills each result with region data and samples region weights at a 3x3 grid of points.
-// @fnv 0x00586990
-void World::BuildRegionResults(float minX, float minY, float maxX, float maxY, RegionResult* results, unsigned count)
-{
-    Entry* l = 0;
-    Region** k = 0;
-    Region* b = 0;
-    RegionForm* a = 0;
-    Point s[9];
-    Point h;
-    if (!g_dataHandler || !count)
-        return;
-    h.x = (minX + maxX) / 2.0;
-    h.y = (minY + maxY) / 2.0;
-    h.z = 0;
-    float q = (maxX - minX) / 2.0;
-    float c = (maxY - minY) / 2.0;
-    CellProxyNew* e = ((Handler*)g_dataHandler)->FUN_00461bc0(h.x, h.y, this, false);
-    if (!e || !e->GetRegionList(true))
-        return;
-    unsigned i;
-    for (i = 0; i < 9; i++)
-    {
-        s[i].x = minX + (i % 3) * q;
-        s[i].y = minY + (i / 3) * c;
-        s[i].z = 0;
-    }
-    Selection* eb =
-        ((Handler*)g_dataHandler)->GetRegionDataManager()->Select(e->GetRegionList(true)->FUN_004f6800(6, h, this));
-    if (!eb)
-        return;
-    GlobalObject_0096a2d0* cf = new GlobalObject_0096a2d0;
-    RegionNode* f = eb->GetList();
-    while (f)
-    {
-        b = *f->FUN_006815c0();
-        a = b ? b->Form() : 0;
-        if (b && b->Priority() && a && a->Weight() && b->Weight(h, this, false) != 0.0)
-        {
-            l = new Entry;
-            l->region = b;
-            l->weight = a->Weight() / 100.0;
-            cf->FUN_005ae3d0(l);
-        }
-        f = f->FUN_00726070();
-    }
-    f = eb->GetList();
-    while (f)
-    {
-        b = *f->FUN_006815c0();
-        a = b ? b->Form() : 0;
-        if (b && !b->Priority() && a && a->Weight() && b->Weight(h, this, false) != 0.0)
-        {
-            l = new Entry;
-            l->region = b;
-            l->weight = a->Weight() / 100.0;
-            cf->FUN_005ae3d0(l);
-        }
-        f = f->FUN_00726070();
-    }
-    if (!cf || cf->FUN_008256d0())
-    {
-        delete (List_009e03e0*)cf;
-        return;
-    }
-    k = new Region*[count];
-    memset(k, 0, count * sizeof(Region*));
-    GlobalObject_0096a2d0* ba = cf;
-    unsigned p;
-    for (p = 0; p < count; p++)
-    {
-        memset(results[p].samples, 0, sizeof(results[p].samples));
-        if (results[p].name)
-            delete[] results[p].name;
-        results[p].name = 0;
-        if (!ba)
-            continue;
-        l = *ba->FUN_006815c0();
-        while (!l)
-        {
-            ba = ba->FUN_00726070();
-            if (!ba)
-                break;
-            l = *ba->FUN_006815c0();
-        }
-        if (!l)
-            continue;
-        b = l->region;
-        a = b->Form();
-        k[p] = b;
-        if (results[p].name)
-            delete[] results[p].name;
-        char* name = new char[260];
-        FUN_00406d00(name, 260, "data/meshes/%s", a->FUN_0050a550());
-        results[p].name = name;
-        results[p].formID = a->FUN_0084e3a0();
-        results[p].a = a->Value108();
-        results[p].b = a->Value110();
-        results[p].c = a->Value112();
-        results[p].d = a->Value114();
-        results[p].e = a->Value116();
-        results[p].f = a->Value118();
-        results[p].g = a->Value120();
-        results[p].time = FUN_0053ca40();
-        ba = ba->FUN_00726070();
-    }
-    for (i = 0; i < 9; i++)
-    {
-        for (p = 0; p < count; p++)
-        {
-            if (!k[p] || !results[p].formID)
-                continue;
-            results[p].samples[i] = k[p]->Weight(s[i], this, true);
-        }
-    }
-    delete[] k;
-    {
-        GlobalObject_0096a2d0* cleanup = cf;
-        Entry* dead = 0;
-        while (cleanup && *cleanup->FUN_006815c0())
-        {
-            dead = *cleanup->FUN_006815c0();
-            cleanup = cleanup->FUN_00726070();
-            delete dead;
-        }
-        cf->FUN_00470470();
-        delete (List_009e03e0*)cf;
-    }
-}
 
 struct WsNameList
 {
@@ -3628,36 +2174,6 @@ struct FUN_005883c0_shell : public TESWorldSpace
     WsNameList* BuildMapNameList(bool abNoChildren);
 };
 
-// Builds a WsNameList from the parent world's list or a new list with this world's map names plus those of child worlds unless abNoChildren.
-// @fnv 0x005883c0
-WsNameList* FUN_005883c0_shell::BuildMapNameList(bool abNoChildren)
-{
-    WsNameList* pNameList = 0;
-    if (GetParentWorld((PARENT_USE_FLAG)2) && !abNoChildren)
-    {
-        pNameList = ((FUN_005883c0_shell*)GetParentWorld((PARENT_USE_FLAG)2))->BuildMapNameList(false);
-    }
-    else
-    {
-        pNameList = new WsNameList;
-        AddMapNames(pNameList);
-        if (!abNoChildren)
-        {
-            WsListNode* pNode = ((WsDataHandler*)g_dataHandler)->GetWorldSpaces();
-            while (pNode)
-            {
-                TESWorldSpace* pWorld = *pNode->Item();
-                if (pWorld && pWorld->GetParentWorld((PARENT_USE_FLAG)2) == this)
-                {
-                    ((FUN_005883c0_shell*)pWorld)->AddMapNames(pNameList);
-                }
-                pNode = pNode->GetNext();
-            }
-        }
-    }
-    return pNameList;
-}
-
 extern const double DAT_010231b0;
 struct CELL_SHELL : public TESObjectCELL
 {
@@ -3671,92 +2187,6 @@ struct WORLD_SHELL : public TESWorldSpace
     void ProcessCellsInRadius(const NiPoint3* point, float distance, const NiPoint3* otherPoint, float otherDistance,
                               int options, unsigned int context);
 };
-// @fnv 0x005885f0
-void WORLD_SHELL::ProcessCellsInRadius(const NiPoint3* point, float distance, const NiPoint3* otherPoint,
-                                       float otherDistance, int options, unsigned int context)
-{
-    if (options == 0)
-        return;
-    {
-        int found = 1;
-        int j = 0;
-        int width = (int)point->x >> 12;
-        int i;
-        int x;
-        {
-            CELL_SHELL* cell;
-            {
-                int y = (int)point->y >> 12;
-                cell = FUN_005875a0(width, y);
-                if (cell != 0)
-                {
-                    if (!cell->FUN_0054da20(point, distance, otherPoint, otherDistance, options, context))
-                        return;
-                }
-                {
-                    while (found != 0)
-                    {
-                        width -= 1;
-                        y -= 1;
-                        j += 2;
-                        found = 0;
-                        for (i = 0; i < j; i++)
-                        {
-                            cell = FUN_005875a0(width, y);
-                            if (cell != 0 && (distance == DAT_010231b0 || cell->FUN_0054fb70(point) < distance) &&
-                                (otherDistance == DAT_010231b0 || cell->FUN_0054fb70(otherPoint) < otherDistance))
-                            {
-                                found += 1;
-                                if (!cell->FUN_0054da20(point, distance, otherPoint, otherDistance, options, context))
-                                    return;
-                            }
-                            width += 1;
-                        }
-                        for (x = 0; x < j; x++)
-                        {
-                            cell = FUN_005875a0(width, y);
-                            if (cell != 0 && (distance == DAT_010231b0 || cell->FUN_0054fb70(point) < distance) &&
-                                (otherDistance == DAT_010231b0 || cell->FUN_0054fb70(otherPoint) < otherDistance))
-                            {
-                                found += 1;
-                                if (!cell->FUN_0054da20(point, distance, otherPoint, otherDistance, options, context))
-                                    return;
-                            }
-                            y += 1;
-                        }
-                        for (i = 0; i < j; i++)
-                        {
-                            cell = FUN_005875a0(width, y);
-                            if (cell != 0 && (distance == DAT_010231b0 || cell->FUN_0054fb70(point) < distance) &&
-                                (otherDistance == DAT_010231b0 || cell->FUN_0054fb70(otherPoint) < otherDistance))
-                            {
-                                found += 1;
-                                if (!cell->FUN_0054da20(point, distance, otherPoint, otherDistance, options, context))
-                                    return;
-                            }
-                            width -= 1;
-                        }
-                        for (x = 0; x < j; x++)
-                        {
-                            cell = FUN_005875a0(width, y);
-                            if (cell != 0 && (distance == DAT_010231b0 || cell->FUN_0054fb70(point) < distance) &&
-                                (otherDistance == DAT_010231b0 || cell->FUN_0054fb70(otherPoint) < otherDistance))
-                            {
-                                found += 1;
-                                if (!cell->FUN_0054da20(point, distance, otherPoint, otherDistance, options, context))
-                                    return;
-                            }
-                            y -= 1;
-                        }
-                    }
-                    cell = (CELL_SHELL*)GetInteriorCell();
-                    if (cell != 0)
-                        cell->FUN_0054da20(point, distance, otherPoint, otherDistance, options, context);
-                }
-            }
-        }
-    }
-}
 
 struct QueryPoint2
 {
@@ -3800,33 +2230,6 @@ struct WorldQuery
     bool IsFlag8Set();
     bool ContainsPoint(const NiPoint3* position);
 };
-
-// @fnv 0x00588d10
-bool WorldQuery::ContainsPoint(const NiPoint3* position)
-{
-    if (!IsFlag8Set())
-        return true;
-    QueryPoint2 point3(position->x, position->y);
-    bool found = false;
-    CellQueryNode* node2 = g_011c3f2c->FUN_004169d0();
-    while (node2 && *node2->FUN_006815c0())
-    {
-        CellQuery* cell2 = *node2->FUN_006815c0();
-        if (cell2->FUN_00549580() && !cell2->FUN_00440d80() && cell2->FUN_007af430() == this)
-        {
-            QueryLink<AreaQuery>* link = cell2->FUN_00441110();
-            while (link && *link->FUN_006815c0())
-            {
-                AreaQuery* area = *link->FUN_006815c0();
-                if (area->FUN_004f8360(&point3))
-                    found = true;
-                link = link->FUN_00726070();
-            }
-        }
-        node2 = static_cast<CellQueryNode*>(node2->FUN_00726070());
-    }
-    return found;
-}
 
 namespace fnv_00583560 {
 extern "C" void* _alloca(unsigned int);
@@ -4126,221 +2529,6 @@ struct EndianFlag583
 {
     bool value;
 };
-// @fnv 0x00583560
-bool World583::FUN_00583560(File583* file)
-{
-    int chunk;
-    unsigned char type = file->FUN_00472660();
-    if (type != 0x41)
-        return false;
-    if (file->FUN_00471c20())
-    {
-        OffsetData583* data = GetOrCreateCellOffsetData(file);
-        data->offset = file->GetOffset();
-    }
-    LoadRecordHeader(file);
-    FUN_00484ab0(0);
-    while ((chunk = file->GetChunkID()) != 0)
-    {
-        switch (chunk)
-        {
-        case 0x44494445: {
-            char* editorID = (char*)_alloca(file->GetChunkSize());
-            file->GetChunkData(editorID, 0x200);
-            SetEditorID(editorID);
-            break;
-        }
-        case 0x444e424f:
-            LoadBounds(file);
-            break;
-        case 0x4e4f4349:
-            FUN_0048e3d0(this, file);
-            break;
-        case 0x4c4c5546:
-            ReadFullName(this, file);
-            break;
-        case 0x41544144: {
-            if (file->GetChunkSize() == 4)
-            {
-                unsigned int flags = 0;
-                file->ReadChunkInt(&flags);
-                flags4C = (unsigned char)flags;
-            }
-            else
-                file->GetChunkData(&flags4C, 1);
-            break;
-        }
-        case 0x5453464f: {
-            unsigned int size = file->GetChunkSize();
-            if (size)
-            {
-                OffsetData583* data;
-                {
-                    unsigned int count = size >> 2;
-                    data = GetOrCreateCellOffsetData(file);
-                    if (data->offsets)
-                        delete data->offsets;
-                    data->offsets = new unsigned int[count];
-                    file->GetChunkData(data->offsets, 0);
-                    if (file->FUN_00401680())
-                    {
-                        for (unsigned int i = 0; i < count; i++)
-                            FUN_00401080(&data->offsets[i], EndianFlag583().value);
-                    }
-                }
-            }
-            break;
-        }
-        case 0x4e5a4558: {
-            unsigned int value = 0;
-            file->ReadChunkInt(&value);
-            fieldD0 = value;
-            break;
-        }
-        case 0x4d414e43: {
-            unsigned int value = 0;
-            file->ReadChunkInt(&value);
-            FUN_0087ce80(value);
-            break;
-        }
-        case 0x4d414e49: {
-            unsigned int value = 0;
-            file->ReadChunkInt(&value);
-            FUN_008d8040(value);
-            break;
-        }
-        case 0x324d414e: {
-            unsigned int value = 0;
-            file->ReadChunkInt(&value);
-            FUN_004febb0(value);
-            break;
-        }
-        case 0x334d414e: {
-            unsigned int value = 0;
-            file->ReadChunkInt(&value);
-            FUN_00442a80(value);
-            break;
-        }
-        case 0x344d414e: {
-            float value = 0;
-            file->ReadChunkInt(&value);
-            FUN_00584150(value);
-            break;
-        }
-        case 0x4d414e57: {
-            unsigned int value = 0;
-            file->ReadChunkInt(&value);
-            SetParent(value);
-            field4E = 0xffff;
-            break;
-        }
-        case 0x4d414e50:
-            file->ReadChunkData(&field4E);
-            break;
-        case 0x4d414e44: {
-            Pair583 value;
-            file->GetChunkData(&value, 8);
-            if (file->FUN_00401680())
-                value.FUN_00462230();
-            fC8 = value.x;
-            fCC = value.y;
-            break;
-        }
-        case 0x4d414e4d:
-            file->GetChunkData(&mapData, 16);
-            if (file->FUN_00401680())
-                mapData.FUN_005840b0();
-            break;
-        case 0x4d414e4f:
-            file->GetChunkData(&extra, 12);
-            if (file->FUN_00401680())
-                extra.FUN_005a6b10();
-            break;
-        case 0x4d414e53: {
-            unsigned int value = 0;
-            file->ReadChunkInt(&value);
-            break;
-        }
-        case 0x4d414e5a: {
-            unsigned int value = 0;
-            file->ReadChunkInt(&value);
-            SetAssociatedActorValue(value);
-            break;
-        }
-        case 0x46504d49:
-        case 0x53504d49:
-            if (!imageSpace)
-                imageSpace = new FUN_0058efd0;
-            imageSpace->FUN_0058f180(file);
-            break;
-        case 0x4d414e4e: {
-            unsigned int size = file->GetChunkSize();
-            if (size)
-            {
-                char* text = (char*)_alloca(size);
-                file->GetChunkData(text, size);
-                nameD4.SetFullName(text);
-            }
-            break;
-        }
-        case 0x4d414e58: {
-            unsigned int size = file->GetChunkSize();
-            if (size)
-            {
-                char* text = (char*)_alloca(size);
-                file->GetChunkData(text, size);
-                nameE0.SetFullName(text);
-            }
-            break;
-        }
-        case 0x304d414e: {
-            B006815c0 value;
-            file->GetChunkData(&value, 8);
-            if (file->FUN_00401680())
-            {
-                FUN_00401080(&value.x, EndianFlag583().value);
-                FUN_00401080(&value.y, EndianFlag583().value);
-            }
-            minX = FUN_0040ebd0(minX, value.x);
-            minY = FUN_0040ebd0(minY, value.y);
-            if (file->FUN_00471c20())
-            {
-                OffsetData583* data = GetOrCreateCellOffsetData(file);
-                data->minimum = value;
-            }
-            break;
-        }
-        case 0x394d414e: {
-            B006815c0 value;
-            file->GetChunkData(&value, 8);
-            if (file->FUN_00401680())
-            {
-                FUN_00401080(&value.x, EndianFlag583().value);
-                FUN_00401080(&value.y, EndianFlag583().value);
-            }
-            maxX = FUN_00404010(maxX, value.x);
-            maxY = FUN_00404010(maxY, value.y);
-            if (file->FUN_00471c20())
-            {
-                OffsetData583* data = GetOrCreateCellOffsetData(file);
-                data->maximum = value;
-            }
-            break;
-        }
-        }
-        if (!file->GetNextChunk())
-            break;
-    }
-    if (!cellMap->FUN_0084e3a0() && !GetSmallWorld())
-    {
-        delete cellMap;
-        if (FUN_00484e40())
-            cellMap = new FUN_00589000(7001);
-        else
-            cellMap = new FUN_00589000(701);
-    }
-    return true;
-}
 }  // namespace fnv_00583560
 
 namespace fnv_005878d0 {
@@ -4517,47 +2705,6 @@ class WorldObj
     void FUN_005878d0(RefObj*);
 };
 
-// @fnv 0x005878d0
-void WorldObj::FUN_005878d0(RefObj* pRef)
-{
-    if (pRef)
-    {
-        if (pRef->FUN_00439f90())
-        {
-            Pt ptPos3 = *pRef->FUN_00569880();
-            float fLen7 = ptPos3.Length();
-            int iXMin5 = TruncateFloatToInt(pRef->v125()->x - fLen7) >> 12;
-            int iYMin8 = TruncateFloatToInt(pRef->v125()->y - fLen7) >> 12;
-            int iXMax9 = TruncateFloatToInt(pRef->v125()->x + fLen7) >> 12;
-            int iYMaxA = TruncateFloatToInt(pRef->v125()->y + fLen7) >> 12;
-            int iCX3 = TruncateFloatToInt(pRef->v125()->x) >> 12;
-            int iCY = TruncateFloatToInt(pRef->v125()->y) >> 12;
-            for (int i_ = iXMin5; i_ <= iXMax9; ++i_)
-            {
-                for (int j2 = iYMin8; j2 <= iYMaxA; ++j2)
-                {
-                    if (i_ != iCX3 || j2 != iCY)
-                    {
-                        if (BoundIntersectsCell(pRef, i_, j2))
-                        {
-                            if (!map)
-                                map = new DummyPointerMap(0x25);
-                            unsigned int key3 = TESWorldSpace::BuildCellKey((short)i_, (short)j2);
-                            int val = 0;
-                            map->GetAt(key3, val);
-                            if (!val)
-                            {
-                                val = (int)new StrList();
-                                map->SetAt(key3, val);
-                            }
-                            ((SetAtHelper*)val)->FUN_005ae3d0((void**)&pRef);
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
 }  // namespace fnv_005878d0
 
 struct String65
@@ -4658,112 +2805,6 @@ struct World65
     FNStub fullName;
     bool FUN_00586500(String65*, Pos65);
 };
-// Selects a name for pos from its cell or matching regions, falls back to this world's full name or FUN_00586980, and reports whether output changed.
-// @fnv 0x00586500
-bool World65::FUN_00586500(String65* output, Pos65 pos)
-{
-    static String65 lastName;
-    static Pos65 lastPos;
-    static World65* lastWorld;
-    Data65* data7 = 0;
-    if (!g_dataHandler)
-        return false;
-    if (lastWorld == this && lastPos.FUN_004390c0(pos))
-    {
-        output->Set(lastName);
-        return false;
-    }
-    if (lastWorld != this)
-        lastName.Set("");
-    lastWorld = this;
-    lastPos = pos;
-    output->Set("");
-    Cell65* cellVal = ((Handler65*)g_dataHandler)->FUN_00461bc0(pos.x, pos.y, this, false);
-    if (cellVal)
-    {
-        data7 = cellVal->FUN_00547110(true) ? ((Handler65*)g_dataHandler)
-                                                  ->GetRegionDataManager()
-                                                  ->v10(cellVal->FUN_00547110(true)->FUN_004f6800(4, pos, this))
-                                            : 0;
-        if (data7)
-            data7->v28(output);
-        else
-            output->Set(cellVal->fullName.GetFullName());
-    }
-    else
-    {
-        Region65* region4;
-        Area65* area;
-        RegionNode65* node5 = ((Handler65*)g_dataHandler)->FUN_004169d0();
-        AreaList65* areas = 0;
-        Point65 point2(pos);
-        int priority6 = -1;
-        bool contains3 = false;
-        bool aOverrideFlag = false;
-        while (node5 && *node5->FUN_006815c0())
-        {
-            contains3 = false;
-            region4 = *node5->FUN_006815c0();
-            if (region4->FUN_00440d80() || region4->FUN_007af430() != this || !region4->FUN_00441110() ||
-                region4->FUN_00441110()->FUN_008256d0())
-            {
-                node5 = node5->FUN_00726070();
-                continue;
-            }
-            data7 = ((Handler65*)g_dataHandler)
-                        ->GetRegionDataManager()
-                        ->v10(((Type65*)region4->FUN_009611e0())->FUN_004f35b0(4));
-            if (!data7)
-            {
-                node5 = node5->FUN_00726070();
-                continue;
-            }
-            areas = region4->FUN_00441110();
-            while (areas && *areas->FUN_006815c0())
-            {
-                area = *areas->FUN_006815c0();
-                if (area->FUN_004f8360(point2))
-                {
-                    contains3 = true;
-                    break;
-                }
-                areas = areas->FUN_00726070();
-            }
-            if (!contains3)
-            {
-                node5 = node5->FUN_00726070();
-                continue;
-            }
-            if (data7->FUN_004f1540())
-            {
-                if (aOverrideFlag && data7->FUN_005bb4d0() <= priority6)
-                {
-                    node5 = node5->FUN_00726070();
-                    continue;
-                }
-            }
-            else if (aOverrideFlag || data7->FUN_005bb4d0() <= priority6)
-            {
-                node5 = node5->FUN_00726070();
-                continue;
-            }
-            aOverrideFlag = data7->FUN_004f1540();
-            priority6 = data7->FUN_005bb4d0();
-            data7->v28(output);
-            node5 = node5->FUN_00726070();
-        }
-    }
-    if (!output->Length())
-        output->Set(fullName.GetFullName());
-    if (!output->Length())
-        output->Set(FUN_00586980());
-    if (output->StrCmp(lastName))
-    {
-        lastName.Set(*output);
-        return true;
-    }
-    return false;
-}
 
 struct WorldSpaceRefShell : public TESWorldSpace
 {
@@ -4930,30 +2971,3 @@ struct PtrMap_587D10
 {
     bool GetAt(unsigned int, unsigned int&);
 };
-
-// Adds apRef to a list directly or to a coordinate-keyed list, skipping null and temporary references.
-// @fnv 0x00587d10
-void WorldSpaceRefShell::FUN_00587d10(TESObjectREFR* apRef)
-{
-    if (apRef && !apRef->IsTemporary())
-    {
-        g_011ca60c.QueryPerformanceCounter(0);
-        if (!FUN_00587c80(apRef))
-        {
-            ((RefList_587D10*)((char*)this + 0x60))->AddHead((int*)&apRef);
-        }
-        else
-        {
-            unsigned int ikey = WsH_587D10::GetKeyForWorldCoord(*((RefV_587D10*)apRef)->GetPos());
-            RefListNode_587D10* preflist = 0;
-            ((PtrMap_587D10*)((char*)this + 0x50))->GetAt(ikey, (unsigned int&)preflist);
-            if (!preflist)
-            {
-                preflist = new RefListNode_587D10;
-                ((SetAt_587D10*)((char*)this + 0x50))->SetAt(ikey, (unsigned int)preflist);
-            }
-            preflist->AddHead((int*)&apRef);
-        }
-        g_011ca60c.WaitForTasksDuringRendering();
-    }
-}

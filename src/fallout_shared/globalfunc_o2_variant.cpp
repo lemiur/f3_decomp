@@ -1,4 +1,4 @@
-// fallout_shared/globalfunc_o2_variant.cpp: Holder, SearchObject, ObjectCandidate, BeamPassShader and more (34 functions)
+// fallout_shared/globalfunc_o2_variant.cpp: Holder, SearchObject, ObjectCandidate, BeamPassShader and more (23 functions)
 #include "f3_common.h"
 #include <windows.h>
 // src/fallout_shared/globalfunc_o2_variant.cpp - flag-variant unit created 2026-10-17 by flag_variants.py for src/fallout_shared/globalfunc.cpp functions whose prologue its flags cannot
@@ -214,15 +214,6 @@ struct Holder
     void FUN_00c87650(NiStream*);
     void FUN_00c86790(NiStream*);
 };
-// @fnv 0x00c86790
-void Holder::FUN_00c86790(NiStream* stream)
-{
-    stream->ResetStreamState();
-    FUN_00c87650(stream);
-    int tmp;
-    RetVal* p = MyVirt(&tmp);
-    p->b = 0;
-}
 }  // namespace fnv_00c86790
 
 short __cdecl FindIndexByKey(void* apSkeleton, const char* apName, int aiUnk);
@@ -388,13 +379,6 @@ class FUN_00c86720 : public FUN_00c86720_base
     void unk08();
 };
 
-// @fnv 0x00c86720
-FUN_00c86720::~FUN_00c86720()
-{
-    this->unk08();
-    DAT_01268118--;
-}
-
 struct FUN_00c867d0_out
 {
     void* unk00;
@@ -514,29 +498,6 @@ class FUN_00c868f0_cls
     unsigned char FUN_00c868f0(FUN_00c868f0_cls* other);
 };
 
-// @fnv 0x00c868f0
-unsigned char FUN_00c868f0_cls::FUN_00c868f0(FUN_00c868f0_cls* other)
-{
-    unsigned char result = this->FUN_00ba87d0(other);
-    if (result)
-    {
-        FUN_00c868f0_inner* l = 0;
-        if (this != 0)
-        {
-            l = this->m_08;
-        }
-        void* left = l != 0 ? l->m_18 : 0;
-        FUN_00c868f0_inner* r = 0;
-        if (other != 0)
-        {
-            r = other->m_08;
-        }
-        void* right = r != 0 ? r->m_18 : 0;
-        result = left == right;
-    }
-    return result;
-}
-
 extern __declspec(thread) unsigned int threadContext;
 inline unsigned int& currentAllocationMode()
 {
@@ -615,31 +576,6 @@ class Item
     int matchingValue;
     void FUN_00c6b3c0(int);
 };
-// @fnv 0x00c86ab0
-bool ObjectCandidate::FUN_00c86ab0(Item* item)
-{
-    ScopedAllocationMode guard;
-    int current = this ? activeObject : 0;
-    bool result = false;
-    if (current != 0)
-    {
-        if (item)
-        {
-            if (QueryValue() != item->matchingValue)
-            {
-                Reset();
-                FUN_00c86940(item);
-                item->FUN_00c6b3c0(current);
-                result = true;
-            }
-        }
-        else
-        {
-            Reset();
-        }
-    }
-    return result;
-}
 
 extern __declspec(thread) int g_tlsHeapContext;
 
@@ -743,13 +679,6 @@ class FUN_00c86cb0 : public FUN_00c86cb0_base
     virtual ~FUN_00c86cb0();
     void unk08();
 };
-
-// @fnv 0x00c86cb0
-FUN_00c86cb0::~FUN_00c86cb0()
-{
-    this->unk08();
-    DAT_01268124--;
-}
 
 struct FourFloatVector
 {
@@ -1004,22 +933,6 @@ class FUN_00c871c0_cls
     void FUN_00c871c0(bool flag);
 };
 
-// @fnv 0x00c871c0
-void FUN_00c871c0_cls::FUN_00c871c0(bool flag)
-{
-    TlsFlagGuard guard;
-    if (flag)
-    {
-        char* p = m_0c;
-        if (p != 0)
-        {
-            unsigned char len = (unsigned char)p[-1];
-            DAT_011f6238.FUN_00aa4060((int)(p - len));
-        }
-        m_0c = 0;
-    }
-}
-
 extern __declspec(thread) int g_iC878C0AllocTag;
 
 struct BC878C0AllocTagScope
@@ -1093,12 +1006,6 @@ struct FUN_00c87970 : FUN_00c877b0
     virtual ~FUN_00c87970();
     void FUN_00c876a0();
 };
-// @fnv 0x00c87970
-FUN_00c87970::~FUN_00c87970()
-{
-    FUN_00c876a0();
-    --DAT_01268154;
-}
 
 // FUN_00ead0d0 - walks a singly linked list and returns the first node whose
 // flag field is set (0 if the list ends or the head pointer is null).
@@ -2310,21 +2217,6 @@ class Owner7100
     Aligned7100* m_pPointer;
 };
 
-// @fnv 0x00c87100
-Aligned7100* Owner7100::FUN_00c87100(bool* pbCreated)
-{
-    AutoMemContext7100 kContext(0x10);
-    bool bCreate = m_pPointer == 0;
-    *pbCreated = bCreate;
-    if (bCreate)
-    {
-        m_pPointer = new Aligned7100;
-        if (m_iActive)
-            SetObject(m_pPointer);
-    }
-    return m_pPointer;
-}
-
 struct TlsBlock_t
 {
     unsigned int unk000;
@@ -2524,32 +2416,6 @@ struct S00c87a70_Obj : ObjectCandidate
     bool FUN_00c87a70(Item* arg);
 };
 
-// @fnv 0x00c87a70
-bool S00c87a70_Obj::FUN_00c87a70(Item* arg)
-{
-    TlsGuard_t guard;
-    int active = this ? activeObject : 0;
-    bool result = false;
-    if (active != 0)
-    {
-        if (arg != 0)
-        {
-            int v = QueryValue();
-            if (v != arg->matchingValue)
-            {
-                Reset();
-                arg->FUN_00c6b3c0(active);
-                result = true;
-            }
-        }
-        else
-        {
-            Reset();
-        }
-    }
-    return result;
-}
-
 struct PhysWorld_c87b
 {
     bool AddItem(void* pkEntity);
@@ -2615,17 +2481,6 @@ class EntityOwner_c87b
     }
     bool FUN_00c87b40();
 };
-
-// @fnv 0x00c87b40
-bool EntityOwner_c87b::FUN_00c87b40()
-{
-    HeapContextGuard kContext(0x10);
-    bool bResult = false;
-    PhysWorld_c87b* pkPhysWorld = GetPhysWorld();
-    if (pkPhysWorld)
-        bResult = pkPhysWorld->AddItem(m_pkEntity);
-    return bResult;
-}
 
 struct RefCounted6b3c0
 {
@@ -2807,71 +2662,6 @@ class World6b3c0
     void Step3();                                // 0xc67850
     void FUN_00c6b3c0(Entry6b3c0* entry);
 };
-
-// Defined here (as in the original unit) so the compiler sees Insert never modifies its argument.
-void RefSet6b3c0::Insert(const RefPtr6b3c0& ref)
-{
-    if (ref.m_p == 0)
-        return;
-    if (m_pTileTemplate.m_p != 0)
-    {
-        Node6b3c0* node = new Node6b3c0(m_pTileTemplate);
-        node->m_next = m_saved;
-        m_saved = node;
-    }
-    m_pTileTemplate = ref;
-}
-
-// @fnv 0x00c6b3c0
-void World6b3c0::FUN_00c6b3c0(Entry6b3c0* entry)
-{
-    TlsFlagGuard guard;
-    if (this != 0)
-    {
-        Target6b3c0* target = GetTarget();
-        if (target != 0)
-        {
-            if (unk18 > 0)
-            {
-                if (pendingCount40 >= 100)
-                {
-                    if (unk30 > 0 && !DAT_012677a2)
-                    {
-                        if (unk30 >= 3000)
-                            unk30 = 3000;
-                        unsigned int total = unk30;
-                        unsigned int count = DAT_011afe80;
-                        if (total < count)
-                            count = total;
-                        unsigned int rest = total - count;
-                        Flush(unk2C + rest, count);
-                        unk30 = rest;
-                        DAT_012677a2 = true;
-                    }
-                    Step1();
-                    Step2();
-                    Step3();
-                }
-                entry->Prepare();
-                pending3C[pendingCount40] = entry;
-                pendingCount40++;
-            }
-            else
-            {
-                target->Add(entry);
-            }
-            if (entry != 0)
-            {
-                RefCounted6b3c0* obj = entry->unk10;
-                if (obj != 0)
-                {
-                    RefPtr6b3c0 sp(obj);
-                    refs90.Insert(sp);
-                }
-            }
-        }
-    }
-}
 
 inline void Swap86(unsigned long* p)
 {

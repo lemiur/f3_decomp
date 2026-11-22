@@ -267,16 +267,6 @@ struct S_00c8d440_Target
 
 extern S_00c8d440_Target* DAT_01268360;
 
-// @fnv 0x00c8d440
-void __stdcall FUN_00c8d440(bool flag)
-{
-    S_00c8d440_Target* t = DAT_01268360;
-    t->v4(0xf043d534, S_00c8d440_Arg(flag));
-    t->v4(0xf02e32e1, S_00c8d440_Arg(flag));
-    t->v4(0xf02e32e2, S_00c8d440_Arg(flag));
-    t->v4(0xf02132df, S_00c8d440_Arg(flag));
-}
-
 struct NativeData
 {
     unsigned int unk00, unk04, unk08, unk0c, unk10, unk14;
@@ -613,33 +603,7 @@ struct S_c8dcb0_Base
     void UpdateMatchingNodes(int a);
     bool FUN_00c8dcb0(int a);
 };
-// Calls FUN_00c85810(a); if true calls UpdateMatchingNodes(a), then looks up an object by unk08 and sets its unk24 to a via v15().
-// @fnv 0x00c8dcb0
-bool S_c8dcb0_Base::FUN_00c8dcb0(int aiValue)
-{
-    bool r = FUN_00c85810(aiValue);
-    if (r)
-        UpdateMatchingNodes(aiValue);
-    int key = this ? unk08 : 0;
-    S_c8dcb0_Res res;
-    S_c8dcb0_Obj* o = FUN_00c85ef0(&res, key, &DAT_01267b70)->p;
-    if (o)
-    {
-        S_c8dcb0_Obj* t = o->v15();
-        if (t)
-            t->unk24 = aiValue;
-    }
-    return r;
-}
 }  // namespace fnv_00c8dcb0
-
-bool __cdecl FUN_00c8cce0(int* type)
-{
-    bool result = false;
-    if (*type > 0 && (*type <= 3 || *type == 6))
-        result = true;
-    return result;
-}
 
 union C8Flags
 {
@@ -730,63 +694,6 @@ struct C8Owner
     float GetValue();
     bool SetState(int state);
 };
-
-static inline bool IsSpecial(unsigned int t)
-{
-    return t == 8 || t == 0x1d;
-}
-
-// @fnv 0x00c8dd10
-bool C8Owner::SetState(int state)
-{
-    bool result = false;
-    C8Obj* o = obj;
-    if (o)
-    {
-        C8Base* b = &o->base;
-        C8Flags flags;
-        flags.raw = b ? b->flags.raw : 0;
-        int iCurrent = o->state;
-        if (IsSpecial(flags.type))
-        {
-            C8Flags newFlags = flags;
-            bool hit = FUN_00c8cce0(&state);
-            newFlags.type = hit ? 0x1d : 8;
-            if (state != iCurrent)
-            {
-                Toggle();
-                o->base.flags = newFlags;
-                o->Setup(state, true, 0);
-                Toggle();
-            }
-            else
-            {
-                Apply(newFlags);
-            }
-            result = true;
-        }
-        else if (iCurrent != state)
-        {
-            bool skip = false;
-            switch (iCurrent)
-            {
-            case 4:
-            case 5:
-                if (FUN_00c8cce0(&state) && GetValue() == 0.0f)
-                    skip = true;
-                break;
-            }
-            if (!skip)
-            {
-                Toggle();
-                o->Setup(state, true, 0);
-                Toggle();
-                result = true;
-            }
-        }
-    }
-    return result;
-}
 
 struct ListNode;
 
@@ -1715,20 +1622,6 @@ struct bhkRigidBodyX
     bhkLiquidAction* CreateAndAddLiquidAction(int param);
 };
 
-// Creates a new bhkLiquidAction, adds it to the rigid body with param, and returns it while locking and unlocking the world.
-// @fnv 0x00c8f400
-bhkLiquidAction* bhkRigidBodyX::CreateAndAddLiquidAction(int param)
-{
-    ThreadFlagsGuard guard;
-    LockWorldStub();
-    SetLockedStub(false);
-    bhkLiquidAction* action = new bhkLiquidAction;
-    AddActionStub(action, param);
-    SetLockedStub(true);
-    UnlockWorldStub();
-    return action;
-}
-
 extern __declspec(thread) int g_tlsMemContext;
 
 struct ScopedMemoryContext
@@ -1913,13 +1806,6 @@ struct FUN_00c8e9c0 : LiquidBase
     void FUN_00c8da40();
     virtual ~FUN_00c8e9c0();
 };
-// Destructor that calls FUN_00c8da40 and decrements g_iLiquidActionCount.
-// @fnv 0x00c8e9c0
-FUN_00c8e9c0::~FUN_00c8e9c0()
-{
-    FUN_00c8da40();
-    --g_iLiquidActionCount;
-}
 
 extern "C" __declspec(dllimport) long __stdcall InterlockedIncrement(long volatile* plAddend);
 extern "C" __declspec(dllimport) long __stdcall InterlockedDecrement(long volatile* plAddend);
@@ -2157,17 +2043,6 @@ struct Ent
     Body* m_pPhysicsBody;
     hkVector FUN_00c8d200();
 };
-// Returns the physics body's m_kPos, or the global DAT_01267e30 vector when this or the body pointer is null.
-// @fnv 0x00c8d200
-hkVector Ent::FUN_00c8d200()
-{
-    const hkVector* p;
-    if (this && m_pPhysicsBody)
-        p = &m_pPhysicsBody->m_kPos;
-    else
-        p = &DAT_01267e30;
-    return *p;
-}
 }
 
 struct __declspec(align(16)) hkVector4
@@ -2198,14 +2073,6 @@ struct Outer
     Inner* m_pChildAtom;
     hkVector4 GetVec() const;
 };
-
-// Returns m_pChildAtom->m_vec when m_pChildAtom is non-null, otherwise returns g_zero.
-// @fnv 0x00c8d240
-hkVector4 Outer::GetVec() const
-{
-    const hkVector4* p = (this && m_pChildAtom) ? &m_pChildAtom->m_vec : &g_zero;
-    return *p;
-}
 
 struct Transform_c8d3
 {
@@ -2381,46 +2248,6 @@ struct BhkRigidBody
     BhkRigidBody& FromOldCinfo(const OldCinfo& src);
 };
 
-// Copies collision and motion fields from src, remapping motion, deactivation, and quality values into BhkRigidBody fields.
-// @fnv 0x00c8d510
-BhkRigidBody& BhkRigidBody::FromOldCinfo(const OldCinfo& src)
-{
-    m_fGravityFactor = 1.0f;
-    unk28 = 0;
-    m_shape2 = m_pCollisionShape = src.m_pCollisionShape;
-    m_uiCollisionFilterData = src.m_uiCollisionFilterData;
-    m_eCollisionResponse = src.m_eCollisionResponse;
-    m_usProcessContactCallbackDelay = src.m_usProcessContactCallbackDelay;
-    m_vContactPosition = src.m_vContactPosition;
-    m_rotation = src.m_rotation;
-    m_kTranslationalVelocity = src.m_kTranslationalVelocity;
-    m_kAngularVelocity = src.m_kAngularVelocity;
-    m_inertiaRow0 = src.m_inertiaRow0;
-    m_inertiaRow1 = src.m_inertiaRow1;
-    m_inertiaRow2 = src.m_inertiaRow2;
-    m_kCenterOfMass1 = src.m_kCenterOfMass1;
-    m_fViscosityFriction = src.m_fViscosityFriction;
-    m_fLinearDamping = src.m_fLinearDamping;
-    m_fAngularDamping = src.m_fAngularDamping;
-    m_fSlipAngle = src.m_fSlipAngle;
-    m_fElasticity = src.m_fElasticity;
-    m_fSurfaceFriction = src.m_fSurfaceFriction;
-    m_fRestitution = src.m_fRestitution;
-    m_fAllowedPenetrationDepth = src.m_fAllowedPenetrationDepth;
-    unsigned int motion = src.m_bFlag;
-    if (motion >= 5)
-        motion -= 2;
-    else if (motion >= 3)
-        motion--;
-    m_bFlag = (char)motion;
-    m_bRigidBodyFlag = src.m_bEnableDeactivation == 2;
-    m_bEnableDeactivation = src.m_qualityType2;
-    int quality = src.m_iAutoRemoveLevel;
-    if (quality < 3)
-        quality--;
-    m_iAutoRemoveLevel = (char)quality;
-    return *this;
-}
 }  // namespace fnv_00c8d510
 
 struct BuildSettings
@@ -3099,29 +2926,6 @@ struct CollisionOwner
 extern float DAT_0104ffb8;
 extern float DAT_01011d78;
 extern float DAT_01017d00;
-// Gets a matrix via virtual slot 61, then passes it to the body slot's virtual 7 if present, otherwise to target and target+16 with fixed vectors.
-// @fnv 0x00c8e670
-void CollisionOwner::DispatchCollision(Receiver* target)
-{
-    __m128 second, first;
-    __declspec(align(16)) Matrix source;
-    typedef void(__thiscall * GetSource)(CollisionOwner*, Matrix*);
-    ((GetSource)((void**)vtable)[61])(this, &source);
-    BodySlot* slot = GetSlot();
-    void* body = slot ? slot->getBody() : 0;
-    if (body)
-    {
-        typedef void(__thiscall * Dispatch)(void*, Matrix*, float, Receiver*);
-        ((Dispatch)((void**)*(void* volatile*)body)[7])(body, &source, DAT_01017d00, target);
-    }
-    else
-    {
-        first = _mm_setr_ps(DAT_0104ffb8, DAT_0104ffb8, DAT_0104ffb8, DAT_01011d78);
-        second = _mm_setr_ps(DAT_01017d00, DAT_01017d00, DAT_01017d00, DAT_01011d78);
-        target->FUN_00c7f640(&source, &first);
-        ((Receiver*)((char*)target + 16))->FUN_00c7f640(&source, &second);
-    }
-}
 
 namespace fnv_00c8e800 {
 struct RTTI
@@ -3281,50 +3085,11 @@ inline bool IsKindOfType(Collision* object)
     }
     return false;
 }
-// Recursively walks a node's children, then adds the collision body's mass to total and blends center toward the body's nav-mesh data by the mass ratio.
-// @fnv 0x00c8e800
-void __cdecl AccumulateCenterOfMass(Object* object, Vector* center, float* total)
-{
-    if (!object)
-        return;
-    Node* node = object->GetAsNode();
-    if (node)
-    {
-        for (unsigned int i = 0; i < node->count; ++i)
-            AccumulateCenterOfMass(node->children[i], center, total);
-    }
-    Collision* collision = object->collision;
-    if (!collision)
-        return;
-    CollisionData* data = IsKindOfType(collision) ? reinterpret_cast<CollisionData*>(collision) : 0;
-    if (!data)
-        return;
-    Body* body = data->body;
-    if (!body)
-        return;
-    float mass = body->FUN_0062ab20();
-    Vector next;
-    body->GetNavMeshData(&next);
-    *total += mass;
-    float factor = mass / *total;
-    center->Interpolate(*center, next, factor);
-}
 }  // namespace fnv_00c8e800
 
 extern const float g_fConst01011d78;
 
 void AccumulateCenterOfMass(void* a, __m128* v, float* f);
-
-// Calls AccumulateCenterOfMass with a broadcast of g_fConst01011d78, then stores the resulting __m128 into out and the float result into pf.
-// @fnv 0x00c8e940
-void __cdecl GetScalarAndVector(void* a, __m128* out, float* pf)
-{
-    float f = 0.0f;
-    __m128 v = _mm_setr_ps(g_fConst01011d78, g_fConst01011d78, g_fConst01011d78, g_fConst01011d78);
-    AccumulateCenterOfMass(a, &v, &f);
-    *out = v;
-    *pf = f;
-}
 
 struct BinaryStream_c8ea
 {

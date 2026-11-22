@@ -210,35 +210,3 @@ struct AttachInfo
 };
 
 void FUN_00c88a40(void* a1, AttachInfo a2, SceneNode* obj, SceneNode* parent, bool a4);
-
-static __forceinline SceneNode* FindAttachParent(SceneNode* obj, SceneNode* root)
-{
-    SceneNode* p = obj ? obj->GetParent() : 0;
-    while (p)
-    {
-        NiController* c = p->m_controller;
-        if (c && (!c->GetTarget() || p->m_controller->GetTarget()->unk10 != 0))
-            break;
-        if (p == root)
-            break;
-        p = p->GetParent();
-    }
-    if (p == root)
-        return 0;
-    return p;
-}
-
-// @fnv 0x00c89050
-void __stdcall FUN_00c89050(void* a1, AttachInfo a2, SceneNode* root, bool a4)
-{
-    SceneNode* obj = FUN_00c4b310(root, "Weapon", 0);
-    SceneNode* parent = FindAttachParent(obj, root);
-    if (obj && parent)
-        FUN_00c88a40(a1, a2, obj, parent, a4);
-
-    static BackpackName kBackpack("Backpack");
-    obj = FUN_00c4b470(root, &kBackpack, 0);
-    parent = FindAttachParent(obj, root);
-    if (obj && parent)
-        FUN_00c88a40(a1, a2, obj, parent, a4);
-}

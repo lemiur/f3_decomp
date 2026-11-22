@@ -1,77 +1,33 @@
-// fallout/ai/combat/combatprocedureattackmelee.cpp: CombatProcedureAttackMelee, This, MeleeProc, CombatAttackHelper and more (57 functions)
+// fallout/ai/combat/combatprocedureattackmelee.cpp: CombatProcedureAttackMelee, This, MeleeProc, CombatAttackHelper and more (1 function)
 #include "f3_common.h"
 #include "combatprocedureattackmelee_timer.h"
 
-// @fnv 0x008d7f80
-bool TimeoutTimer::CheckTimer()
-{
-    return Actor::GetActorScale() - m_fStartTime > m_fTimeout;
-}
-
 char __fastcall GetByteAtOffset70(char*);
-
-// @fnv 0x0097f2d0
-char __fastcall FUN_0097f2d0(char* this_)
-{
-    return GetByteAtOffset70(*(char**)(this_ + 0x9c));
-}
 
 struct FUN_009cef70_shell
 {
     float __thiscall FUN_009cef70(int index);
 };
 
-// @fnv 0x009cef70
-float __thiscall FUN_009cef70_shell::FUN_009cef70(int index)
-{
-    return ((float*)this)[index + 0x3f];
-}
-
 struct FUN_009cef90_shell
 {
     float __thiscall FUN_009cef90(int index);
 };
-
-// @fnv 0x009cef90
-float __thiscall FUN_009cef90_shell::FUN_009cef90(int index)
-{
-    return *reinterpret_cast<float*>(reinterpret_cast<char*>(this) + 0x110 + index * 4);
-}
 
 struct FUN_009cf400_shell
 {
     unsigned char __thiscall GetByteAtOffsetAD();
 };
 
-// @fnv 0x009cf400
-unsigned char __thiscall FUN_009cf400_shell::GetByteAtOffsetAD()
-{
-    return ((unsigned char*)this)[0xad];
-}
-
 struct FUN_009cf6d0_shell
 {
     void __thiscall FUN_009cf6d0(int arg);
 };
 
-// Stores the previous value at offset 0x14 into offset 0x18, then writes arg into offset 0x14.
-// @fnv 0x009cf6d0
-void __thiscall FUN_009cf6d0_shell::FUN_009cf6d0(int arg)
-{
-    *(int*)((char*)this + 0x18) = *(int*)((char*)this + 0x14);
-    *(int*)((char*)this + 0x14) = arg;
-}
-
 struct FUN_009cfc40_shell
 {
     void __thiscall FUN_009cfc40(int);
 };
-
-// @fnv 0x009cfc40
-void __thiscall FUN_009cfc40_shell::FUN_009cfc40(int)
-{
-    ((unsigned char*)this)[0] = 1;
-}
 
 struct Setting_S
 {
@@ -87,17 +43,6 @@ struct Obj
     float GetFieldE4Float();
     float GetFieldE8Float();
 };
-// @fnv 0x00644580
-float FUN_00644580(Obj* p, int percent, int unused, bool abApplySetting, bool abUseAltValue)
-{
-    float fPercentScale;
-    float fResult;
-    fPercentScale = percent / g_d100;
-    fResult = p->FUN_00644640() + p->GetE0() + p->GetFieldDC() * fPercentScale;
-    fResult = fResult * (abUseAltValue ? p->GetFieldE4Float() : p->GetFieldE8Float());
-    return abApplySetting ? fResult
-                          : fResult * *originalRuntimeFloatSetting592.Float() * (abUseAltValue ? 1.0f : 0.25f);
-}
 
 struct FUN_009cc220
 {
@@ -108,14 +53,6 @@ struct FUN_009cc1f0_shell
 {
     void* DestroySelf(unsigned int flags);
 };
-// @fnv 0x009cc1f0
-void* FUN_009cc1f0_shell::DestroySelf(unsigned int flags)
-{
-    ((FUN_009cc220*)this)->FUN_009cc220::~FUN_009cc220();
-    if (flags & 1)
-        _Deallocate(this);
-    return this;
-}
 
 namespace fnv_009cc220 {
 struct FUN_009ca6c0_shell
@@ -126,9 +63,6 @@ struct FUN_009cc220 : FUN_009ca6c0_shell
 {
     virtual ~FUN_009cc220();
 };
-// @fnv 0x009cc220
-FUN_009cc220::~FUN_009cc220()
-{}
 }  // namespace fnv_009cc220
 
 struct FUN_008b3ab0_shell
@@ -172,19 +106,6 @@ struct FUN_009cce70_shell : AnimIdle
     Actor* FUN_00996de0();
     void FUN_009cce70(int attack, int arg2);
 };
-// @fnv 0x009cce70
-void FUN_009cce70_shell::FUN_009cce70(int attack, int arg2)
-{
-    if (attack == 0xff || !GetSection())
-        return;
-    Actor* pattacker = FUN_00996de0();
-    bool queued = ((FUN_008935f0_shell*)pattacker)->TryAttack(attack);
-    if (queued)
-    {
-        ((FUN_009cf6d0_shell*)this)->FUN_009cf6d0(0);
-        ((int*)this)[7] = attack;
-    }
-}
 
 namespace fnv_009cd3d0 {
 struct AnimIdle
@@ -195,15 +116,6 @@ struct FUN_009cd3d0_shell : AnimIdle
 {
     void FUN_009cd3d0();
 };
-// If GetSection() returns 2 and the timer at offset 0x20 has elapsed, calls FUN_009cf6d0 with 3.
-// @fnv 0x009cd3d0
-void FUN_009cd3d0_shell::FUN_009cd3d0()
-{
-    if (GetSection() != 2)
-        return;
-    if (((TimeoutTimer*)((char*)this + 0x20))->CheckTimer())
-        ((FUN_009cf6d0_shell*)this)->FUN_009cf6d0(3);
-}
 }  // namespace fnv_009cd3d0
 
 struct FUN_009cd410_shell
@@ -211,22 +123,11 @@ struct FUN_009cd410_shell
     void SetMode(int);
     void FUN_009cd410();
 };
-// @fnv 0x009cd410
-void FUN_009cd410_shell::FUN_009cd410()
-{
-    SetMode(0);
-}
 
 struct FUN_009cdde0_shell
 {
     bool HasNoFlag(unsigned short mask);
 };
-// Returns true when the 16-bit flags at offset 8 do not contain any bit of mask.
-// @fnv 0x009cdde0
-bool FUN_009cdde0_shell::HasNoFlag(unsigned short mask)
-{
-    return !(*(unsigned short*)((char*)this + 8) & mask) != 0;
-}
 
 struct FUN_00894900_shell
 {
@@ -250,40 +151,6 @@ struct FUN_009cde10_shell
     float GetModifierValue();
     void FUN_009cde10();
 };
-// @fnv 0x009cde10
-void FUN_009cde10_shell::FUN_009cde10()
-{
-    FUN_00894900_shell* ptarget;
-    if (GetAudioBackendData() != 1)
-        return;
-    ptarget = FUN_00996e00();
-    if (((TimeoutTimer*)((char*)this + 0x28))->CheckTimer())
-    {
-        FUN_009cd410();
-        return;
-    }
-    if (((CombatTargetTimestamp*)((char*)this + 0x28))->GetElapsedTime() > DAT_01011588)
-    {
-        float freach;
-        float fdistance;
-        fdistance = GetModifierValue();
-        freach = FUN_009ce560();
-        if (FUN_009cf030(fdistance, freach, 0))
-        {
-            FUN_009cd410();
-            return;
-        }
-    }
-    if ((ptarget && ptarget->FUN_00894900()) || *((unsigned char*)this + 0x50))
-    {
-        if (GetSection() == 2)
-        {
-            ((FUN_009cf6d0_shell*)this)->FUN_009cf6d0(3);
-            UpdateState();
-        }
-        EvaluateReaction();
-    }
-}
 
 struct FUN_008d7f40_shell
 {
@@ -296,15 +163,6 @@ struct FUN_009ce190_shell
     void SetMode(int);
     void FUN_009ce190();
 };
-// Calls SetMode(4), FUN_00996e20(3), FUN_008d7f40(3.0f) on the object at offset 0x28, then UpdateMeleeCombat.
-// @fnv 0x009ce190
-void FUN_009ce190_shell::FUN_009ce190()
-{
-    SetMode(4);
-    FUN_00996e20(3);
-    ((FUN_008d7f40_shell*)((char*)this + 0x28))->FUN_008d7f40(3.0f);
-    UpdateMeleeCombat();
-}
 
 extern double _gModifierZero;
 int __fastcall FUN_007031c0(int);
@@ -314,25 +172,11 @@ struct FUN_009ce560_shell
     Actor* FUN_00996de0();
     float FUN_009ce560();
 };
-// Returns the cached modifier value, recomputing it from the attacker and the value at offset 4 when it is below _gModifierZero.
-// @fnv 0x009ce560
-float FUN_009ce560_shell::FUN_009ce560()
-{
-    Actor* pattacker = FUN_00996de0();
-    if (((float*)this)[0x16] < _gModifierZero)
-        ((float*)this)[0x16] = GetActorReach(pattacker, FUN_007031c0(((int*)this)[1]));
-    return ((float*)this)[0x16];
-}
 
 struct FUN_009cefb0_shell
 {
     char FUN_009cefb0();
 };
-// @fnv 0x009cefb0
-char FUN_009cefb0_shell::FUN_009cefb0()
-{
-    return *((char*)this + 0xf9);
-}
 
 struct Date
 {
@@ -344,19 +188,6 @@ struct FUN_009cf660_shell
     void FUN_009cfc00();
     void SetMode(int mode);
 };
-// @fnv 0x009cf660
-void FUN_009cf660_shell::SetMode(int mode)
-{
-    if (((int*)this)[4] != mode)
-    {
-        if (mode == 0 && ((int*)this)[4] == 4 && IsTargetOutOfRange())
-            return;
-        if (mode == 4 || ((int*)this)[4] == 4)
-            ((Date*)((int*)this)[1])->Date::~Date();
-        FUN_009cfc00();
-    }
-    ((int*)this)[4] = mode;
-}
 
 namespace fnv_009cfbd0 {
 struct FUN_009cdde0_shell
@@ -367,14 +198,6 @@ struct FUN_009cfbd0_shell
 {
     char FUN_009cfbd0(unsigned short mask);
 };
-// Forwards the mask to the HasNoFlag method of the object at offset 0x64 and returns its result.
-// @fnv 0x009cfbd0
-char FUN_009cfbd0_shell::FUN_009cfbd0(unsigned short mask)
-{
-    char result = 1;
-    result = ((FUN_009cdde0_shell*)((char*)this + 0x64))->HasNoFlag(mask);
-    return result;
-}
 }  // namespace fnv_009cfbd0
 
 struct FUN_008b3bd0_shell
@@ -386,14 +209,6 @@ struct FUN_009cfc00_shell
     Actor* FUN_00996de0();
     void FUN_009cfc00();
 };
-// Gets the attacker via FUN_00996de0 and, if FUN_008b3bd0 returns false, calls FUN_009cfc40(1) on the object at this+0x64.
-// @fnv 0x009cfc00
-void FUN_009cfc00_shell::FUN_009cfc00()
-{
-    Actor* pattacker = FUN_00996de0();
-    if (!((FUN_008b3bd0_shell*)pattacker)->FUN_008b3bd0())
-        ((FUN_009cfc40_shell*)((char*)this + 0x64))->FUN_009cfc40(1);
-}
 
 namespace fnv_009cfc60 {
 struct FUN_008b3a50_shell
@@ -410,15 +225,6 @@ struct FUN_009cfc60_shell
     void StopIfSpeakerOutOfRange();
     void FUN_009cfc60();
 };
-// Gets an Actor via FUN_00996de0, calls FUN_008b3a50 and FUN_008b3ab0 on it, then calls StopIfSpeakerOutOfRange.
-// @fnv 0x009cfc60
-void FUN_009cfc60_shell::FUN_009cfc60()
-{
-    Actor* pattacker = FUN_00996de0();
-    ((FUN_008b3a50_shell*)pattacker)->FUN_008b3a50();
-    ((FUN_008b3ab0_shell*)pattacker)->FUN_008b3ab0();
-    StopIfSpeakerOutOfRange();
-}
 }  // namespace fnv_009cfc60
 
 extern double _gModifierZero;
@@ -429,13 +235,6 @@ struct FUN_009cfd20_shell
     Actor* FUN_00996e00();
     float GetModifierValue();
 };
-// @fnv 0x009cfd20
-float FUN_009cfd20_shell::GetModifierValue()
-{
-    if (((float*)this)[0x17] < _gModifierZero)
-        ((float*)this)[0x17] = FUN_009a64d0(FUN_00996de0(), FUN_00996e00(), 0);
-    return ((float*)this)[0x17];
-}
 
 struct NiPoint3
 {
@@ -463,33 +262,11 @@ struct FUN_009cff10_shell
     FUN_00906f60 m;
     FUN_009cff10_shell* Reset();
 };
-// Resets all flags, clears c and d, sets v to _NiPoint3_ZERO, constructs m, and returns this.
-// @fnv 0x009cff10
-FUN_009cff10_shell* FUN_009cff10_shell::Reset()
-{
-    a = false;
-    b = false;
-    c = 0;
-    d = 0;
-    e = false;
-    f = false;
-    g = false;
-    h = false;
-    v = _NiPoint3_ZERO;
-    m.FUN_00906f60::FUN_00906f60();
-    return this;
-}
 
 struct FUN_009d0530_shell
 {
     void UpdateFlags(unsigned short mask, bool clear);
 };
-// Sets or clears the bits of mask in the 16-bit flags word at offset 8 of this object, depending on clear.
-// @fnv 0x009d0530
-void FUN_009d0530_shell::UpdateFlags(unsigned short mask, bool clear)
-{
-    clear ? ((unsigned short*)this)[4] &= ~mask : ((unsigned short*)this)[4] |= mask;
-}
 
 namespace fnv_009d0590 {
 struct TESObjectREFR;
@@ -513,12 +290,6 @@ struct FUN_009d0590_shell
 {
     bool FUN_009d0590(TESObjectREFR* ref, const NiPoint3* pt);
 };
-// @fnv 0x009d0590
-bool FUN_009d0590_shell::FUN_009d0590(TESObjectREFR* ref, const NiPoint3* pt)
-{
-    PathingLocation loc(ref);
-    return Pathing::FindPathingLocation(loc, *pt, 0, 0);
-}
 }  // namespace fnv_009d0590
 
 namespace fnv_009d0610 {
@@ -542,18 +313,6 @@ struct FUN_009d0610_shell
     unsigned int __thiscall UpdateDirection(unsigned int, unsigned int);
     void FUN_009d0610(TESAmmoInitCalls* src);
 };
-// @fnv 0x009d0610
-void FUN_009d0610_shell::FUN_009d0610(TESAmmoInitCalls* pAmmoInitCalls)
-{
-    if (((TimeoutTimer*)((char*)this + 0x1c))->CheckTimer() || elapsed > 0)
-        elapsed = UpdateDirection(pAmmoInitCalls->GetFieldBC(), elapsed) + elapsed;
-    if (elapsed >= 4)
-    {
-        active = false;
-        elapsed = 0;
-        ((FUN_008d7f40_shell*)((char*)this + 0x1c))->FUN_008d7f40(*g_011cee60.Float());
-    }
-}
 }  // namespace fnv_009d0610
 
 namespace fnv_009d0690 {
@@ -574,24 +333,6 @@ struct FUN_009d0690_shell
     void SaveGame(BGSSaveFormBuffer*);
     void FUN_009d0690(BGSSaveFormBuffer* buf);
 };
-// @fnv 0x009d0690
-void FUN_009d0690_shell::FUN_009d0690(BGSSaveFormBuffer* buf)
-{
-    SaveGame(buf);
-    buf->SaveData((char*)this + 0x10, 4, 0);
-    buf->SaveData((char*)this + 0x14, 4, 0);
-    buf->SaveData((char*)this + 0x18, 4, 0);
-    buf->SaveData((char*)this + 0x1c, 4, 0);
-    ((FUN_009a5eb0_shell*)((char*)this + 0x20))->FUN_009a5eb0(buf);
-    ((FUN_009a5eb0_shell*)((char*)this + 0x28))->FUN_009a5eb0(buf);
-    ((FUN_009a5eb0_shell*)((char*)this + 0x30))->FUN_009a5eb0(buf);
-    ((FUN_009a5eb0_shell*)((char*)this + 0x38))->FUN_009a5eb0(buf);
-    ((FUN_009a5eb0_shell*)((char*)this + 0x40))->FUN_009a5eb0(buf);
-    ((FUN_009a5eb0_shell*)((char*)this + 0x48))->FUN_009a5eb0(buf);
-    ((CombatTargetTimestamp*)((char*)this + 0x60))->SaveTimeStamp(buf);
-    buf->SaveData((char*)this + 0x50, 1, 0);
-    buf->SaveData((char*)this + 0x54, 4, 0);
-}
 }  // namespace fnv_009d0690
 
 namespace fnv_009d0790 {
@@ -613,26 +354,6 @@ struct FUN_009d0790_shell
     void LoadGameBase(BGSLoadFormBuffer*);
     void FUN_009d0790(BGSLoadFormBuffer* buf);
 };
-// Loads the base form data, four 4-byte fields, six timers, a version-gated object, then a 1-byte and a 4-byte field from the buffer.
-// @fnv 0x009d0790
-void FUN_009d0790_shell::FUN_009d0790(BGSLoadFormBuffer* apBuffer)
-{
-    LoadGameBase(apBuffer);
-    apBuffer->ReadTypedData((char*)this + 0x10, 4);
-    apBuffer->ReadTypedData((char*)this + 0x14, 4);
-    apBuffer->ReadTypedData((char*)this + 0x18, 4);
-    apBuffer->ReadTypedData((char*)this + 0x1c, 4);
-    ((FUN_009a5e_timer*)((char*)this + 0x20))->LoadGame(apBuffer);
-    ((FUN_009a5e_timer*)((char*)this + 0x28))->LoadGame(apBuffer);
-    ((FUN_009a5e_timer*)((char*)this + 0x30))->LoadGame(apBuffer);
-    ((FUN_009a5e_timer*)((char*)this + 0x38))->LoadGame(apBuffer);
-    ((FUN_009a5e_timer*)((char*)this + 0x40))->LoadGame(apBuffer);
-    ((FUN_009a5e_timer*)((char*)this + 0x48))->LoadGame(apBuffer);
-    if (apBuffer->GetVersion() >= 0x12)
-        ((CombatTargetTimestamp*)((char*)this + 0x60))->LoadGame(apBuffer);
-    apBuffer->ReadTypedData((char*)this + 0x50, 1);
-    apBuffer->ReadTypedData((char*)this + 0x54, 4);
-}
 }  // namespace fnv_009d0790
 
 struct FUN_00996de0_Class
@@ -654,21 +375,6 @@ struct FUN_009cefd0_shell
     FUN_00980070_shell* m_04;
     char IsWithinThreshold(float a, float b, float c);
 };
-
-// Calls FUN_00996de0 and FUN_00980070, checks whether GetByteAtOffset8C returns at least 100, and returns 1 when a is not greater than b.
-// @fnv 0x009cefd0
-char FUN_009cefd0_shell::IsWithinThreshold(float afValue, float afLimit, float afUnused)
-{
-    char bResult = 0;
-    unsigned int pTarget3 = ((FUN_00996de0_Class*)this)->FUN_00996de0();
-    bool bFlag = ((FUN_005524b0_class*)this->m_04->FUN_00980070())->GetByteAtOffset8C() >= 100;
-    float fElapsed3 = 0.0f;
-    if (afValue <= afLimit + fElapsed3)
-    {
-        bResult = 1;
-    }
-    return bResult;
-}
 
 struct AnimDataV
 {
@@ -861,95 +567,6 @@ struct CombatProcedureAttackMelee
                      bool abTargetRecoiling, bool* abDoPowerAttack, bool* abSwitchAttack);
 };
 
-// Chooses a melee attack id from distance, reach, power-attack and animation state, setting the power-attack and switch-attack flags.
-// @fnv 0x009ccb20
-int CombatProcedureAttackMelee::FUN_009ccb20(bool abMidAttack, float afDistance, float afReach, bool abTargetAttacking,
-                                             bool abTargetPostAttack, bool abTargetRecoiling, bool* abDoPowerAttack,
-                                             bool* abSwitchAttack)
-{
-    TESObjectWEAP* pweapon;
-    bool bwithinNormalReach;
-    ActorV* ptarget;
-    int iAttack;
-    ActorV* pattacker;
-
-    pattacker = (ActorV*)((FUN_00996de0_Class*)this)->FUN_00996de0();
-    ptarget = (ActorV*)((FUN_00996e00_shell*)this)->FUN_00996e00();
-    *abSwitchAttack = false;
-    iAttack = 0xff;
-    pweapon = (TESObjectWEAP*)FUN_007031c0((int)m_04);
-    if (!ptarget)
-        return iAttack;
-    if (pattacker->V218() && ((MobileObject*)pattacker)->FUN_005a2030())
-        *abDoPowerAttack = false;
-    else
-        *abDoPowerAttack = CheckChanceSuccess(m_04->FUN_00980070(), ((FatigueProxy*)pattacker)->GetFatiguePercentage(),
-                                              abTargetRecoiling, ptarget->V230(), 0);
-    if ((int)((BSAudio*)this)->GetAudioBackendData() == 4)
-    {
-        afReach += *originalRuntimeFloatSetting597.Float();
-        if (DialogueRandom() % 100 < 2)
-            afReach += g_d100;
-    }
-    bwithinNormalReach = ((S009cefd0*)this)->IsWithinThreshold(afDistance, afReach, 0);
-    if (!abMidAttack)
-    {
-        if (*abDoPowerAttack)
-            iAttack = ((S009ce870*)this)->FUN_009ce870(afDistance, afReach, abTargetAttacking, abTargetPostAttack, 0);
-        if (iAttack == 0xff && bwithinNormalReach)
-        {
-            iAttack = pweapon ? ((FUN_0051f5f0_shell*)pweapon)->GetByteAt11D() : 0xff;
-            if (iAttack == 0xff)
-            {
-                if (pattacker->GetAnimData(1)->FUN_00495f50(DAT_011a8244, 0) == 'l')
-                    iAttack = 0x1a;
-                else
-                    iAttack = 0x20;
-            }
-        }
-    }
-    else if (pattacker->GetAnimData(4)->GetSlotValue() == 3)
-    {
-        if (*abDoPowerAttack)
-            iAttack = ((S009ce870*)this)->FUN_009ce870(afDistance, afReach, abTargetAttacking, abTargetPostAttack, 0);
-        if (iAttack == 0xff && bwithinNormalReach)
-        {
-            switch (((ActorV*)((FUN_00996de0_Class*)this)->FUN_00996de0())->GetAnimData(0)->FUN_00495e40())
-            {
-            case 0x33:
-                iAttack = 0x26;
-                break;
-            case 0x34:
-                iAttack = 0x2c;
-                break;
-            case 0x35:
-                iAttack = 0x32;
-                break;
-            case 0x36:
-                iAttack = 0x38;
-                break;
-            case 0x37:
-                iAttack = 0x3e;
-                break;
-            case 0x38:
-                iAttack = 0x44;
-                break;
-            case 0x6c:
-                iAttack = 0x1a;
-                break;
-            default:
-                if (pweapon && ((FUN_0051f5f0_shell*)pweapon)->GetByteAt11D() != 0xff)
-                    iAttack = ((FUN_0051f5f0_shell*)pweapon)->GetByteAt11D();
-                else
-                    iAttack = 0x20;
-                break;
-            }
-            *abSwitchAttack = true;
-        }
-    }
-    return iAttack;
-}
-
 struct TargetInterface
 {
     virtual void v00();
@@ -989,13 +606,6 @@ struct FUN_008b3a20_shell
 
     void DispatchToTarget(int arg);
 };
-
-// Forwards the argument to the virtual v0c method of the object stored at unk190.
-// @fnv 0x008b3a20
-void FUN_008b3a20_shell::DispatchToTarget(int aiValue)
-{
-    unk190->v0c(aiValue);
-}
 
 struct CombatProcBase
 {
@@ -1049,23 +659,6 @@ struct FUN_009cc0c0 : CombatProcBase
     FUN_009cc0c0();
     virtual ~FUN_009cc0c0();
 };
-
-// Initializes the combat procedure object's fields to defaults, sets the value to negative fCombatMaxValue, and stores it in val60.
-// @fnv 0x009cc0c0
-FUN_009cc0c0::FUN_009cc0c0()
-{
-    unk04 = 0;
-    unk1C = 0xff;
-    unk10 = 0;
-    unk14 = 3;
-    unk18 = 3;
-    unk54 = 0x100;
-    unk50 = false;
-    unk58 = -1.0f;
-    unk5C = -1.0f;
-    CombatValue initial(-fCombatMaxValue);
-    val60 = initial;
-}
 
 struct AnimData;
 struct SubA4
@@ -1728,130 +1321,6 @@ struct This
     void FUN_009cce70(int, int);
     void FUN_009cc510();
 };
-// @fnv 0x009cc510
-void This::FUN_009cc510()
-{
-    float n44;
-    float n45;
-    float m2;
-    void* m33;
-    int m36;
-    float m48;
-    bool v29;
-    bool v30;
-    float v51;
-    bool t5;
-    bool t19;
-    int t43;
-    ActorB* t45;
-    bool t57;
-    bool s5;
-    float s12;
-    bool s20;
-    int s23;
-    bool s33;
-    bool s44;
-    AnimData* s56;
-    bool r14;
-    ActorA* r23;
-    bool r39;
-    r23 = FUN_00996de0();
-    t45 = FUN_00996e00();
-    if (FUN_00825c00() != 3 || t45 == 0)
-        return;
-    if (m_04->FUN_00981970())
-        return;
-    m_1c = 0xff;
-    s12 = GetModifierValue();
-    v51 = FUN_009ce560();
-    s56 = r23->GetAnimData121();
-    t43 = FUN_008a7570(r23);
-    s23 = FUN_008a7570(t45);
-    t57 = FUN_005f2540(s56->FUN_004301b0(4));
-    t5 = s56->GetSlotValue(4) == 3;
-    r39 = t43 == 4;
-    t19 = t43 == 8 || t43 == 10;
-    s33 = t45->FUN_00894900();
-    s20 = s23 == 4;
-    s5 = s23 == 8 || s23 == 10;
-    s44 = t45->FUN_00493bb0();
-    r14 = t45->FUN_00894d60();
-    if (IsWithinThreshold(s12, v51, 0))
-    {
-        n44 = 0.0f;
-        n44 = CalculateWeightedValue((int)m_04->FUN_00980070(), m_04->FUN_0097fc70(), r23->m_a4.FUN_0066ef20(11), s33,
-                                     FUN_007031c0((int)m_04) == 0, s5, t45->V140(), r14);
-        if (m_04->FUN_00586150().GetHandle()->FUN_00435e00() > 5.0 && n44 != 0.0)
-            n44 += 100.0;
-        if (!s44 && t45 != DAT_011dea3c)
-            n44 += 100.0;
-        m2 = FUN_00644580(m_04->FUN_00980070(), 50, 50, false, s33);
-        v29 = t45->V141() || t45->V140() || t45->FUN_00437bd0() || t45->FUN_00579670() || t45->FUN_00437bf0();
-        m33 = t45->FUN_008a1710();
-        if (v29 || !FUN_008a16d0(t45) || (m33 != 0 && FUN_004c0c30(m33)))
-            m2 = 0.0f;
-        v30 = (t57 && n44 > 0.0f) ? true : FUN_008d8520(FUN_00996de0())->V254();
-        if (!v30 || !FUN_0097f2d0(m_04))
-        {
-            n44 = 0.0f;
-            if (!FUN_0097f2d0(m_04))
-                m2 = 0.0f;
-        }
-        if ((t57 && !t5) || FUN_0044edb0() == 4 || t19)
-            m2 = 0.0f;
-        if (!s56->FUN_00494710(0xaa))
-            m2 = 0.0f;
-        n45 = FUN_00404010((float)(100.0 - (n44 + m2)), *DAT_011cea38.FUN_00403e20());
-        if (t57 && !t5)
-            n45 = 0.0f;
-        if (m_18 == 2)
-            n45 = 0.0f;
-        m36 = (int)(n44 + m2 + n45);
-        m48 = (float)(FUN_00487f50() % (unsigned int)(m36 > 0 ? m36 : 100));
-        if (m48 < n44)
-        {
-            if (m_04->GetModifierKey())
-            {
-                r23->FUN_00894cc0(false);
-                if (FUN_00825c00() == 1)
-                    FUN_009cf6d0(3);
-            }
-            bool found = false;
-            bool bp2 = false;
-            int res = FUN_009ccb20(t57, s12, v51, s33, s20, s5, &found, &bp2);
-            if (res != 0xff)
-            {
-                if (FUN_00996e00()->V116() != 0)
-                {
-                    if (found)
-                    {
-                        DAT_011f1708->FUN_00983970(m_04, 2, 1, 0);
-                    }
-                    else
-                    {
-                        DAT_011f1708->FUN_00983970(m_04, 2, 0, 0);
-                    }
-                    FUN_009cce70(res, bp2);
-                }
-            }
-        }
-        else if (m2 > 0.0f && (n44 + m2) > m48)
-        {
-            r23->FUN_00894cc0(true);
-            FUN_009cf6d0(1);
-        }
-        else
-        {
-            if (m_18 != 2)
-            {
-                FUN_009cf6d0(2);
-                float f60 = FUN_006465f0(((Mid3*)m_04->FUN_00980070())->FUN_004565f0(),
-                                         ((Mid3*)m_04->FUN_00980070())->GetUnka4());
-                m_20.FUN_008d7f40(f60);
-            }
-        }
-    }
-}
 
 namespace fnv_009cced0 {
 struct FUN_009cced0_cls
@@ -1870,38 +1339,6 @@ unsigned short __fastcall FUN_004301b0(AnimDataV* p);
 unsigned char __cdecl FUN_005f2540(int v);
 unsigned char __cdecl FUN_005f25d0(unsigned int v);
 
-// @fnv 0x009cced0
-void FUN_009cced0_cls::FUN_009cced0()
-{
-    if (FUN_00825c00())
-    {
-        return;
-    }
-    Actor* a = FUN_00996de0();
-    void* b = FUN_00996e00();
-    unsigned char r_2 = FUN_005f2540(FUN_004301b0(((ActorV*)a)->GetAnimData(4)));
-    if (r_2)
-    {
-        if (((ActorV*)a)->GetAnimData(4)->GetSlotValue() == 3)
-        {
-            FUN_009cf6d0(3);
-            FUN_009cc510();
-        }
-        int pResult = FUN_007031c0(m_04);
-        if (pResult != 0)
-        {
-            if (FUN_005f25d0(reinterpret_cast<FUN_0051f5f0_shell*>(pResult)->GetByteAt11D()))
-            {
-                reinterpret_cast<FUN_008935f0_shell*>(a)->TryAttack(
-                    reinterpret_cast<FUN_0051f5f0_shell*>(pResult)->GetByteAt11D());
-            }
-        }
-    }
-    else
-    {
-        FUN_009cf6d0(3);
-    }
-}
 }  // namespace fnv_009cced0
 
 struct AnimSequence
@@ -2146,46 +1583,6 @@ struct MeleeProc
 };
 extern double _gModifierZero;
 
-// In mode 1, checks the actor's readiness, timer value and attack state, and either sets state 3, finishes, or continues the melee procedure.
-// @fnv 0x009ccfb0
-void MeleeProc::FUN_009ccfb0()
-{
-    if (GetModeM() != 1)
-        return;
-    MeleeActor* actor = GetActorM();
-    MeleeTarget* target8 = GetTargetM();
-    if (!actor->IsReady())
-        SetStateM(3);
-    TimerObj* timer5 = actor->GetProcessM()->GetTimer();
-    if (timer5)
-    {
-        bool bAttacking4 = false;
-        if (GetActorM()->GetAnimDataM() && GetActorM()->GetAnimDataM()->GetControllerSequence(2) &&
-            GetActorM()->GetAnimDataM()->GetControllerSequence(2)->GetState() != 1)
-            bAttacking4 = true;
-        float fTime = timer5->GetValue(0);
-        if (fTime <= _gModifierZero && !bAttacking4)
-        {
-            actor->SetFlag(false);
-            SetStateM(3);
-        }
-        else
-        {
-            bool bTargetAttack2 = target8 ? target8->GetAnimActionM() == 8 : 0;
-            if (bTargetAttack2 && !bAttacking4)
-            {
-                actor->SetFlag(false);
-                SetStateM(3);
-                FinishM();
-            }
-            else if (!bAttacking4)
-            {
-                ContinueM();
-            }
-        }
-    }
-}
-
 struct AnimData9cd430
 {
     unsigned short FUN_004301b0();
@@ -2353,54 +1750,6 @@ struct CombatProc9cd430
     void FUN_009cd430();
 };
 
-// Chooses a combat action from range, controller state and target checks, calling Do9ce190, Do9cd150, Do9cdf00 or Do9cd5e0.
-// @fnv 0x009cd430
-void CombatProc9cd430::FUN_009cd430()
-{
-    if (Check44edb0())
-        return;
-    Actor9cd430* actor = GetActor();
-    void* target = GetTarget();
-    float distance = GetF1();
-    float reachDist = GetF2();
-    float m_fGlyphExtent = 0.0f;
-    float fImpulseRadiusSquared = 0.0f;
-    bool inRange = Test9cefd0(distance, reachDist, 0);
-    if (inRange && !m_04->FUN_0097f2d0() && IsTargetInCone(actor, target, 0))
-    {
-        Do9ce190();
-        return;
-    }
-    if (m_04->GetModifierKey() || Get825c00() == 1)
-    {
-        Do9cd150();
-        return;
-    }
-    bool bInReach = false;
-    if (Test9cf030(distance, reachDist, 0))
-    {
-        if (distance - reachDist > *originalRuntimeFloatSetting593.Float() || Test9cfd70())
-        {
-            Do9ce190();
-        }
-        else
-        {
-            Do9cdf00();
-            return;
-        }
-    }
-    else if (bInReach && distance < *originalRuntimeFloatSetting593.Float())
-    {
-        bool ok = FUN_005f2670(actor->GetAnimData(4)->FUN_004301b0());
-        if (!ok)
-            Do9cdf00();
-    }
-    else
-    {
-        Do9cd5e0();
-    }
-}
-
 struct CombatAttackVT
 {
     virtual void v000();
@@ -2551,21 +1900,6 @@ class CombatAttackHelper
     void UpdateCombatMovement();
     void FUN_009cdf00();
 };
-
-// @fnv 0x009cdf00
-void CombatAttackHelper::FUN_009cdf00()
-{
-    void* a;
-    CombatAttackVT* b;
-    CombatVec3 out4;
-    SetMode(3);
-    a = FUN_00996de0();
-    b = FUN_00996e00();
-    FUN_00996e20(1);
-    FUN_009a68b0(&out4, a, b, b->v07d(), FUN_009ce560());
-    FUN_009ce5b0(&out4);
-    UpdateCombatMovement();
-}
 
 struct AttackDirection
 {
@@ -2772,145 +2106,6 @@ struct ProcX
     float FUN_009cfe90();
 };
 
-// Chooses a melee attack id from five candidates based on distance, reach, weapon speed and actor state, then logs the selection.
-// @fnv 0x009ce870
-int S009ce870::FUN_009ce870(float afDistance, float afReach, bool, bool, int)
-{
-    bool bSelected9 = false;
-    bool unk3a5 = false;
-    int iResult = 0xff;
-    int iAttack5 = 0xff;
-    int count = 0;
-    bool abAllowedA[5];
-    FUN_00403d30(abAllowedA, 0, 5);
-    ActorX* pActorF = ((ProcX*)this)->FUN_00996de0();
-    AttackData* pDataVal = ((ProcX*)this)->m_04->FUN_00980070();
-    if (((ProcX*)this)->m_04->FUN_00981970())
-        return 0xff;
-    if (!((ProcX*)this)->m_04->FUN_009cefb0())
-        ((ProcX*)this)->m_04->UpdateActorValues();
-    bool bPower7 = ((ProcX*)this)->m_04->FUN_008d8220() && !((ProcX*)this)->IsWithinThreshold(afDistance, afReach, 0);
-    float fMultX = bPower7 ? pDataVal->GetFloatAtOffsetB0() : 1.0f;
-    WeapObj* pWeap4 = pActorF->GetLoadedForm();
-    float fSpeed7 = pWeap4->FUN_00508070();
-    if (fSpeed7 <= DAT_01012060)
-        fSpeed7 = 1.0f;
-    float fRateB = ((ProcX*)this)->FUN_009cfe90();
-    float fReach5 = afReach * fMultX;
-    bool bAny6 =
-        pActorF->avOwner.GetActorValue(0x1d) > DAT_01012060 && pActorF->avOwner.GetActorValue(0x1e) > DAT_01012060;
-    int aiAttacks[5];
-    for (int i = 0; i < 5; i++)
-    {
-        float fMin = ((ProcX*)this)->m_04->FUN_009cef70(i);
-        if (fMin > DAT_01012070 && !bAny6)
-            continue;
-        float fScaledValue = FUN_00404010((float)(fMin * fMultX), fReach5);
-        float fTime = ((ProcX*)this)->m_04->FUN_009cef90(i);
-        if (fTime < DAT_01012060)
-            continue;
-        int aiSoundId = i + 0x5c;
-        if (pDataVal->HasCombatFlag(1) && !pDataVal->DispatchByType(aiSoundId))
-            continue;
-        float fDistB = fTime * fRateB / fSpeed7 + afDistance;
-        if (fDistB <= fScaledValue && (fMin <= fReach5 || fScaledValue * DAT_01090d68 < fDistB))
-        {
-            aiAttacks[count] = aiSoundId;
-            count++;
-            abAllowedA[i] = true;
-        }
-    }
-    if (count == 0)
-        return 0xff;
-    for (int j = count; j < 5; j++)
-        aiAttacks[j] = 0xff;
-    if (count == 1)
-    {
-        iAttack5 = aiAttacks[0];
-    }
-    else if (count > 1 && bPower7 && !pDataVal->HasCombatFlag(1))
-    {
-        int r = FUN_00944460(0, count);
-        iAttack5 = aiAttacks[r];
-    }
-    if (iAttack5 == 0xff)
-    {
-        if (!pDataVal->HasCombatFlag(1))
-        {
-            int k = 5;
-            if (abAllowedA[2] && afDistance < *DAT_011ceb98.FUN_00403e20())
-            {
-                k = 2;
-            }
-            else if (abAllowedA[1] && afDistance > afReach * DAT_01021798)
-            {
-                k = 1;
-            }
-            else
-            {
-                unsigned short usMove = pActorF->GetVtbl20Result();
-                if (abAllowedA[3] && (usMove & 4))
-                {
-                    k = 3;
-                }
-                else if (abAllowedA[4] && (usMove & 8))
-                {
-                    k = 4;
-                }
-                else if (abAllowedA[0])
-                {
-                    k = 0;
-                }
-            }
-            if (k != 5)
-                iAttack5 = DAT_011a5ac8[k];
-        }
-        if (iAttack5 == 0xff)
-        {
-            unsigned char aucWeightsA[5];
-            for (unsigned int u = 0; u < 5; u++)
-            {
-                int aiSoundId = u + 0x5c;
-                aucWeightsA[u] = pDataVal->DispatchByType(aiSoundId);
-            }
-            unsigned int uiTotal = 0;
-            for (unsigned int u = 0; u < (unsigned int)count; u++)
-                uiTotal += aucWeightsA[aiAttacks[u] - 0x5c];
-            if (uiTotal > 0)
-            {
-                unsigned int uiAttackSelectionRoll = FUN_00944460(0, uiTotal);
-                unsigned int uiAcc = 0;
-                for (unsigned int u = 0; u < (unsigned int)count; u++)
-                {
-                    uiAcc += aucWeightsA[aiAttacks[u] - 0x5c];
-                    if (uiAttackSelectionRoll <= uiAcc)
-                    {
-                        iAttack5 = aiAttacks[u];
-                        break;
-                    }
-                }
-            }
-        }
-    }
-    AttackInfo info7;
-    if (!((ProcX*)this)->m_04->FUN_009800e0(iAttack5, &info7))
-        FUN_005b5e40("Melee Attacker %s (%0X) is using %d attack for power attack\n", pActorF->FUN_0055d520(),
-                     pActorF->FUN_0084e3a0(), iAttack5);
-    iResult = iAttack5;
-    bSelected9 = true;
-    if (FUN_005b6f70() && bSelected9)
-    {
-        FUN_00703c00("%.20s selects %s power attack!", pActorF->FUN_0055d520(),
-                     iResult == 0x5c   ? "NORMAL"
-                     : iResult == 0x5d ? "FORWARD"
-                     : iResult == 0x5e ? "BACKWARD"
-                     : iResult == 0x5f ? "LEFT"
-                     : iResult == 0x60 ? "RIGHT"
-                                       : "NO");
-    }
-    return iResult;
-}
-
 struct CombatNode
 {
     signed char GetByteAtOffset8C();
@@ -2933,39 +2128,6 @@ struct MeleeProcedure
     Actor* FUN_00996de0();
     bool IsActionAvailable(unsigned);
 };
-// Returns true if the combat node's value exceeds DAT_01012060 and, when flag 1 is set, the per-action check for action 92-96 is positive.
-// @fnv 0x009cf420
-bool MeleeProcedure::IsActionAvailable(unsigned action)
-{
-    Actor* actor = FUN_00996de0();
-    bool result = false;
-    if (context->FUN_00980070()->GetByteAtOffset8C() > DAT_01012060)
-    {
-        result = true;
-        if (context->FUN_00980070()->HasCombatFlag(1))
-        {
-            switch (action)
-            {
-            case 92:
-                result = context->FUN_00980070()->FUN_0073cb80() > 0;
-                break;
-            case 93:
-                result = context->FUN_00980070()->FUN_00505c00() > 0;
-                break;
-            case 94:
-                result = context->FUN_00980070()->GetByteAtOffset9A() > 0;
-                break;
-            case 95:
-                result = context->FUN_00980070()->GetByteAtOffset9B() > 0;
-                break;
-            case 96:
-                result = context->FUN_00980070()->FUN_009e8670() > 0;
-                break;
-            }
-        }
-    }
-    return result;
-}
 
 namespace CombatReaction {
 struct Animation
@@ -3180,95 +2342,6 @@ struct Procedure
     void FUN_009cfc60();
     void EvaluateReaction();
 };
-// @fnv 0x009cd5e0
-void Procedure::EvaluateReaction()
-{
-    Actor* actor2 = FUN_00996de0();
-    Actor* target = FUN_00996e00();
-    if (!target)
-        return;
-    bool targetState3 = target->FUN_008a7570() == 2;
-    bool targetCondition3 = FUN_009a96c0(target);
-    float chance =
-        FUN_00644990(owner->FUN_00980070(), (int)actor2->FUN_00884dc0(), actor2->GetFatigueRatio(), targetState3);
-    if (chance < DAT_01012060)
-        chance = 0.0f;
-    if (special)
-        chance += DAT_0104f2f0;
-    if (FUN_00825c00() == 2)
-        chance += DAT_01020758;
-    if (target != DAT_011dea3c && !target->FUN_00493bb0())
-        chance -= DAT_01017a40;
-    if (actor2->FUN_005a2030())
-        chance = 0.0f;
-    float roll = (float)(FUN_00487f50() % 100);
-    if (roll <= chance)
-    {
-        bool actorState = actor2->FUN_008a7570() == 2;
-        float first2 = GetModifierValue();
-        float second7 = FUN_009ce560();
-        unsigned short action = FUN_00644a70(owner->FUN_00980070(), actorState, targetState3, first2, second7, special,
-                                             targetCondition3, options.FUN_004a8ae0());
-        if (action)
-        {
-            Animation* animation = FUN_00996de0()->GetAnimation();
-            if (animation)
-            {
-                int state = 3;
-                bool allowed = true;
-                float duration3 = 0.0f;
-                switch (action & 15)
-                {
-                case 4:
-                    state = 5;
-                    allowed = FUN_009cfbd0(4);
-                    duration3 =
-                        FUN_006465f0(owner->FUN_00980070()->FUN_00639b20(), owner->FUN_00980070()->GetField60Float());
-                    break;
-                case 8:
-                    state = 6;
-                    allowed = FUN_009cfbd0(8);
-                    duration3 =
-                        FUN_006465f0(owner->FUN_00980070()->FUN_00639b20(), owner->FUN_00980070()->GetField60Float());
-                    break;
-                case 2:
-                    state = 4;
-                    duration3 =
-                        FUN_006465f0(owner->FUN_00980070()->FUN_009a7c40(), owner->FUN_00980070()->FUN_0051b860());
-                    break;
-                default:
-                    duration3 = FUN_006465f0(owner->FUN_00980070()->GetFloatAt64(),
-                                             owner->FUN_00980070()->GetFloatAtOffset68());
-                    break;
-                }
-                if (FUN_005f2440(FUN_00996de0()->FUN_00897910(state, 0, 0, 0)) == state)
-                {
-                    float current = actor2->FUN_00897b50(state);
-                    duration3 = FUN_00404010(current, duration3);
-                    float amount_2 = 0.0f;
-                    actor2->DispatchToTarget(targetState3 && amount_2 > *DAT_011ce380.FUN_00403e20() ? action | 512
-                                                                                                     : action | 256);
-                    reactionTimer.FUN_008d7f40(duration3);
-                    durationTimer.FUN_008d7f40(current);
-                    SetMode(2);
-                }
-                else if (FUN_005b6f70())
-                    FUN_00703c00(DAT_01090c60, actor2->FUN_0055d520(),
-                                 action & 4   ? DAT_01090cb8
-                                 : action & 8 ? DAT_01090cb0
-                                 : action & 1 ? DAT_01090ca4
-                                              : DAT_01090c9c);
-            }
-        }
-    }
-    else if (FUN_0044edb0() != 1)
-    {
-        float delay = FUN_006465f0(owner->FUN_00980070()->FUN_009b0bd0(), owner->FUN_00980070()->FUN_006a78f0());
-        reactionTimer.FUN_008d7f40(delay);
-        FUN_009cfc60();
-        SetMode(1);
-    }
-}
 }
 
 struct Process98
@@ -3823,30 +2896,6 @@ struct Procedure98
     void FUN_009cc510();
     void UpdateState();
 };
-// Gets the actor and dispatches on FUN_00825c00(); in case 3 it checks the process state, context and actor test before calling FUN_009cc510().
-// @fnv 0x009cf570
-void Procedure98::UpdateState()
-{
-    Actor98* actor = FUN_00996e00();
-    switch (FUN_00825c00())
-    {
-    case 0:
-        FUN_009cced0();
-        break;
-    case 1:
-        FUN_009ccfb0();
-        break;
-    case 2:
-        FUN_009cd3d0();
-        break;
-    case 3: {
-        int result = actor && actor->GetProcess() ? actor->GetProcess()->State() : 0;
-        if (!context->FUN_009818b0() && !result && (!actor || !actor->Test(false)))
-            FUN_009cc510();
-        break;
-    }
-    }
-}
 
 struct MeleeDebugActor
 {
@@ -3903,65 +2952,6 @@ struct MeleeDebugProcedure
     MeleeDebugActor* FUN_00996de0();
     void PrintDebugInfo(MeleeDebugOutput*, int, int);
 };
-// Builds description strings from move, attack and delay timers and prints the procedure's move/attack state and flags via output->Print.
-// @fnv 0x009cf700
-void MeleeDebugProcedure::PrintDebugInfo(MeleeDebugOutput* output, int x, int y)
-{
-    MeleeDebugActor* actor = FUN_00996de0();
-    short sMovementFlags = actor->GetVtbl20Result();
-    char description[100];
-    description[0] = DAT_01011584[0];
-    FUN_00ec61c0(description + 1, 0, 99);
-    switch (moveState)
-    {
-    case 2:
-        FUN_00406d00(description, 100, DAT_01090e4c,
-                     sMovementFlags & 1   ? DAT_01090e78
-                     : sMovementFlags & 2 ? DAT_01090e6c
-                     : sMovementFlags & 4 ? DAT_01090e64
-                     : sMovementFlags & 8 ? DAT_01090e5c
-                                          : DAT_01011584,
-                     moveTimer.FUN_00435e00(), moveTimer.FUN_006b9130());
-        break;
-    case 1:
-        FUN_00406d00(description, 100, DAT_01090e40, moveTimer.FUN_00435e00(), moveTimer.FUN_006b9130());
-        break;
-    default:
-        description[0] = 0;
-        break;
-    }
-    output->Print(x, y, DAT_01090e30, DAT_011a5aa4[moveState], description);
-    switch (attackState)
-    {
-    case 0:
-        FUN_00406d30(description, 100,
-                     action == 26   ? DAT_01090cb8
-                     : action == 32 ? DAT_01090cb0
-                     : action == 92 ? DAT_01090e20
-                     : action == 93 ? DAT_01090e10
-                     : action == 94 ? DAT_01090e04
-                     : action == 95 ? DAT_01090df8
-                     : action == 96 ? DAT_01090dec
-                                    : DAT_01011584);
-        break;
-    case 2:
-        FUN_00406d00(description, 100, DAT_01090e40, attackTimer.FUN_00435e00(), attackTimer.FUN_006b9130());
-        break;
-    default:
-        description[0] = 0;
-        break;
-    }
-    if (delayTimer.FUN_0097fa50())
-        output->Print(x, y, DAT_01090dc8, delayTimer.FUN_00435e00(), delayTimer.FUN_006b9130());
-    output->Print(x, y, DAT_01090db8, DAT_011a5ab8[attackState], description);
-    if (stateFlags.FUN_004a8ae0() && !actor->FUN_008b3bd0())
-        output->Print(x, y, DAT_01090d8c, stateFlags.HasNoFlag(4) ? DAT_01017b68 : DAT_01017b64,
-                      stateFlags.HasNoFlag(8) ? DAT_01017b68 : DAT_01017b64,
-                      stateFlags.HasNoFlag(1) ? DAT_01017b68 : DAT_01017b64,
-                      stateFlags.HasNoFlag(2) ? DAT_01017b68 : DAT_01017b64);
-    if (stateFlags.FUN_009373f0())
-        output->Print(x, y, DAT_01090d70);
-}
 
 class Point9CF
 {
@@ -4153,18 +3143,6 @@ class Dialogue9CF
     int unk60;
     Position9CF m_kListener;
 };
-
-// @fnv 0x009cfc90
-void Dialogue9CF::StopIfSpeakerOutOfRange()
-{
-    if (!IsMenuMode9CF())
-    {
-        Actor9CF* pkSpeaker = GetSpeaker();
-        Point9CF kDelta = m_kListener.GetPos() - pkSpeaker->GetPos();
-        if (kDelta.Length() >= *g_kTalkDistance9CF.Float() * *g_kTalkDistance9CF.Float())
-            Stop();
-    }
-}
 
 struct Pt3
 {
@@ -4359,22 +3337,6 @@ struct CombatProcStub
     float GetRange();
     bool IsTargetOutOfRange();
 };
-// Checks the actor is alive, projects a point ahead of it along its heading, and returns whether the target is at least range*range away from that point.
-// @fnv 0x009cfd70
-bool CombatProcStub::IsTargetOutOfRange()
-{
-    Pt3 unusedPos8 = kPt3Zero;
-    Pt3 heading = kPt3Zero;
-    if (!GetActor() || !GetActor()->IsAlive())
-        return false;
-    GetActor()->GetCurrentTargetDistance(&heading);
-    heading.z = 0.0f;
-    Pt3 aheadX = *GetActor()->GetPos() + heading;
-    float aRange = GetRange();
-    Pt3 diff4 = *GetTarget()->GetPos() - aheadX;
-    float dist = diff4.Length();
-    return dist >= aRange * aRange;
-}
 
 struct FUN_00416870
 {
@@ -4850,82 +3812,6 @@ struct State057
     bool FUN_009d0590(Actor057*, const FUN_00416870&);
     void UpdateFlags(unsigned short, bool);
 };
-// Initializes direction flags from controls, updates position, and for the given direction tests a rotated offset point, storing the result via UpdateFlags.
-// @fnv 0x009cff90
-int State057::UpdateDirection(Actor057* actor, unsigned direction)
-{
-    if (!initialized)
-    {
-        left = actor->FUN_008d8520()->Check(5);
-        right = actor->FUN_008d8520()->Check(6);
-        forward = actor->FUN_008d8520()->Check(3);
-        back = actor->FUN_008d8520()->Check(4);
-        initialized = true;
-    }
-    if (!active && actor->FUN_008b3bd0())
-        return 4;
-    else if (!active && direction == 0)
-    {
-        FUN_00416870 f = position.FUN_00439ef0(actor->Position());
-        if (f.FUN_00457990() < *DAT_011cf968.FUN_00403e20())
-            return 4;
-    }
-    position = actor->Position();
-    FUN_006815c0 a;
-    a.FUN_004a0c90(actor->Heading(), 0);
-    float b = actor->FUN_008be280();
-    if (b == 0.0)
-        b = 32.0f;
-    float e = actor->FUN_008be350();
-    if (e == 0.0)
-        e = b;
-    unsigned c;
-    float d = b / e;
-    if (d > 0.5 && d < 2.0)
-    {
-        b = FUN_00404010(b, e);
-        e = b;
-    }
-    b = FUN_0040ebd0(b, 64.0f);
-    e = FUN_0040ebd0(e, 64.0f);
-    c = actor->GetVtbl20Result();
-    switch (direction)
-    {
-    case 0: {
-        FUN_00416870 g(0.0f, -e, 0.0f);
-        if (c & 2)
-            g.y -= e;
-        g = a.FUN_004b4500(g).FUN_00439e90(position);
-        UpdateFlags(2, back ? FUN_009d0590(actor, g) : false);
-        break;
-    }
-    case 1: {
-        FUN_00416870 h(0.0f, e, 0.0f);
-        if (c & 1)
-            h.y += e;
-        h = a.FUN_004b4500(h).FUN_00439e90(position);
-        UpdateFlags(1, forward ? FUN_009d0590(actor, h) : false);
-        break;
-    }
-    case 2: {
-        FUN_00416870 i(-b, 0.0f, 0.0f);
-        if (c & 4)
-            i.x -= b;
-        i = a.FUN_004b4500(i).FUN_00439e90(position);
-        UpdateFlags(4, left ? FUN_009d0590(actor, i) : false);
-        break;
-    }
-    case 3: {
-        FUN_00416870 j(b, 0.0f, 0.0f);
-        if (c & 8)
-            j.x += b;
-        j = a.FUN_004b4500(j).FUN_00439e90(position);
-        UpdateFlags(8, right ? FUN_009d0590(actor, j) : false);
-        break;
-    }
-    }
-    return 1;
-}
 
 class GlobalObject_0045d260
 {
@@ -4999,93 +3885,6 @@ struct CPAM9cc240
     void FUN_00996ea0();
     void UpdateCombatState();
 };
-// @fnv 0x009cc240
-void CPAM9cc240::UpdateCombatState()
-{
-    float _v;
-    float a7;
-    int h3;
-    Act9cc240* dst0;
-    P12_9cc240 j;
-    P12_9cc240 dst2;
-    dst0 = FUN_00996de0();
-    Tgt9cc240* idxTmp;
-    idxTmp = FUN_00996e00();
-    m5c = -1.0f;
-    g_011f24e4.FUN_00483710();
-    m64.FUN_009d0610(m4);
-    UpdateState();
-    FUN_00483710();
-    if (FUN_0044edb0() == 3 || FUN_0044edb0() == 4)
-    {
-        if (dst0->FUN_008b3b90() && !dst0->FUN_008b3960())
-        {
-            if (!m48.FUN_0097fa50())
-            {
-                m48.FUN_008d7f40(2.0f);
-            }
-            else if (m48.FUN_008d7f80())
-            {
-                m4->FUN_00586150()->FUN_009cc490(2);
-                m4->FUN_00586150()->SetNodeBlockAndTimestamp(idxTmp->FUN_00575650(&j));
-                FUN_009caac0("Could not reach target");
-            }
-        }
-        else if (dst0->FUN_008b3960())
-        {
-            m48.FUN_00910b10();
-        }
-    }
-    else
-    {
-        m48.FUN_00910b10();
-    }
-    switch (FUN_0044edb0())
-    {
-    case 0:
-        FUN_009cd430();
-        break;
-    case 2:
-        UpdateDodge();
-        break;
-    case 1:
-        FUN_009cde10();
-        break;
-    case 3:
-        UpdateCombatMovement();
-        break;
-    case 4:
-        UpdateMeleeCombat();
-        break;
-    }
-    bool bDone6;
-    bDone6 = false;
-    if (3 != m14)
-    {
-        bDone6 = true;
-    }
-    else if (m10 == 3)
-    {
-        bDone6 = true;
-    }
-    else
-    {
-        _v = GetModifierValue();
-        a7 = FUN_009ce560();
-        if (_v - a7 < *originalRuntimeFloatSetting594.Float() * dst0->FUN_00567400() * 2.25)
-            bDone6 = true;
-    }
-    if (bDone6)
-    {
-        GetTargetLocationWithOffset(&dst2, idxTmp, 2);
-        SetLookAtPoint(&dst2, 4);
-    }
-    else
-    {
-        FUN_00996ea0();
-    }
-    g_011f24e4.FUN_00483710();
-}
 
 struct Seq150
 {
@@ -5390,46 +4189,6 @@ struct C150
     float FUN_009ce560();
     void FUN_009cd150();
 };
-// @fnv 0x009cd150
-void C150::FUN_009cd150()
-{
-    if (FUN_00996de0()->anim() && FUN_00996de0()->anim()->FUN_00491040(2) &&
-        FUN_00996de0()->anim()->FUN_00491040(2)->FUN_008041a0() != 1)
-        return;
-    Actor150* actor2 = FUN_00996de0();
-    Actor150* target7 = FUN_00996e00();
-    if (m04->GetModifierKey() || FUN_00825c00() == 1)
-    {
-        if (!target7)
-        {
-            if (actor2->FUN_00894d60())
-                actor2->FUN_00894cc0(false);
-            m04->FUN_009818e0(0);
-            if (FUN_00825c00() == 1)
-                FUN_009cf6d0(3);
-            return;
-        }
-        bool active = target7->FUN_00894900();
-        bool action = target7->FUN_008a7570() == 4;
-        bool state2 = false;
-        if (target7->state())
-            state2 = target7->state()->GetModifierKey();
-        float elapsedTmp = GetModifierValue();
-        float limit = FUN_009ce560();
-        bool flag_ = false;
-        bool blocked = target7->check234() || target7->V230() || target7->FUN_00437bd0() || target7->FUN_00579670() ||
-                       target7->FUN_00437bf0();
-        if (!(!(elapsedTmp > limit) && !blocked && !action && !state2 &&
-              (FUN_00487f50() % 100 >= 5 || (active && !flag_)) && actor2->FUN_00894d60()))
-        {
-            if (actor2->FUN_00894d60())
-                actor2->FUN_00894cc0(false);
-            m04->FUN_009818e0(0);
-            if (FUN_00825c00() == 1)
-                FUN_009cf6d0(3);
-        }
-    }
-}
 
 struct ActorHelper
 {
@@ -5461,78 +4220,6 @@ struct CombatProcedure_shell : public FUN_009cde10_shell
 };
 
 float __cdecl FUN_009a6770(ActorHelper*, Actor057*);
-
-// @fnv 0x009cdf80
-void CombatProcedure_shell::UpdateCombatMovement()
-{
-    ActorHelper* actor;
-    unsigned short wVal;
-    float f0c;
-    Actor057* target8;
-    CombatVec3 vec1c3;
-    float fX;
-
-    if (this->FUN_0044edb0() != 3)
-    {
-        return;
-    }
-
-    actor = this->FUN_00996de0();
-    target8 = this->FUN_00996e00();
-    f0c = this->GetModifierValue();
-    fX = this->FUN_009ce560();
-    wVal = actor->GetVtbl20Result();
-
-    if (!actor->FUN_008b3bd0())
-    {
-        this->FUN_009cd410();
-        return;
-    }
-
-    FUN_009a68b0(&vec1c3, actor, (CombatAttackVT*)target8, (int)&target8->Position(), this->FUN_009ce560());
-
-    if (f0c > *originalRuntimeFloatSetting593.Float() * 2)
-    {
-        if (!this->GetSection())
-        {
-            this->FUN_009ce190();
-        }
-        return;
-    }
-
-    if (this->FUN_009cf030(f0c, fX, 0) && FUN_0097f2d0(this->m_04))
-    {
-        unsigned char b_ = 0;
-        NiPoint3_ext pt9;
-        if (actor->FUN_008b3bf0())
-        {
-            b_ = 1;
-        }
-        else if (actor->FUN_008b3840(&pt9))
-        {
-            float f38 = FUN_009a6770(actor, target8);
-            float f5 = ((NiPoint3_ext&)(pt9 - (const NiPoint3&)target8->Position())).Length() - f38;
-            b_ = this->IsWithinThreshold(f5, fX, 0);
-        }
-        if (!b_)
-        {
-            this->FUN_009ce5b0(&vec1c3);
-        }
-        return;
-    }
-
-    if (this->IsWithinThreshold(f0c, fX, 0))
-    {
-        if ((wVal & 2) && f0c < *originalRuntimeFloatSetting593.Float())
-        {
-            this->UpdateState();
-        }
-        else
-        {
-            this->FUN_009cd410();
-        }
-    }
-}
 
 struct ZPoint
 {
@@ -5982,68 +4669,6 @@ struct ZMelee
     void TryAttackTarget(float, float);
     void UpdateMeleeCombat();
 };
-// @fnv 0x009ce1d0
-void ZMelee::UpdateMeleeCombat()
-{
-    if (FUN_0044edb0() != 4)
-        return;
-    ZActor* actor2 = FUN_00996de0();
-    ZActor* target2 = FUN_00996e00();
-    float distance3 = GetModifierValue();
-    float kReach = FUN_009ce560();
-    bool mid4 = IsTargetOutOfRange();
-    ZProcess* process2 = actor2->FUN_008d8520();
-    if ((FUN_009cf030(distance3, kReach, 0) && FUN_0097f2d0((void*)unk04)) || !FUN_0097f2d0((void*)unk04))
-    {
-        ZPoint point2;
-        FUN_009a68b0(&point2, actor2, target2, target2->Pos(), FUN_009ce560());
-        bool ready3 = false;
-        B006815c0 kPos;
-        if (actor2->FUN_008b3bf0())
-            ready3 = true;
-        else if (!actor2->FUN_008b3c70() && actor2->FUN_008b3840(&kPos))
-        {
-            float _radius = FUN_009a6770(actor2, target2);
-            float delta = kPos.FUN_00439ef0(target2->Pos()).FUN_00589850() - _radius;
-            ready3 = IsWithinThreshold(delta, kReach, 0);
-        }
-        if (!ready3)
-            FUN_009ce5b0(&point2);
-    }
-    if (actor2->FUN_008b3bb0())
-    {
-        if (!mid4)
-            FUN_009cd410();
-    }
-    else if (actor2->FUN_00894d60())
-        actor2->FUN_00894cc0(false);
-    else if (IsWithinThreshold(distance3, kReach, 0) && FUN_0097f2d0((void*)unk04))
-    {
-        if (mid4 && distance3 < *originalRuntimeFloatSetting593.Float() * 2.0f)
-            FUN_009cdf00();
-        else
-            FUN_009cd410();
-    }
-    else if (FUN_00825c00() && IsWithinThreshold(distance3, kReach * 2.0f, 0) && FUN_0097f2d0((void*)unk04) &&
-             actor2->Check() && process2 && process2->Check())
-    {
-        if (IsTargetInCone(actor2, target2, 0))
-        {
-            int topicB = FUN_007031c0((int)unk04);
-            if (DialogueRandom() % 100 < (int)(*g_011cf27c.Float() * DAT_01017a40))
-            {
-                int attackVal = 255;
-                if (actor2->Anim(1, DAT_011a8244, 0)->FUN_00495f50() == 108)
-                    attackVal = 26;
-                else
-                    attackVal = 32;
-                FUN_009cce70(attackVal, 0);
-            }
-        }
-    }
-    else if (unk14)
-        TryAttackTarget(distance3, kReach);
-}
 
 struct AnimData_9cf
 {
@@ -6512,115 +5137,6 @@ struct FUN_009cf090_Class
     void TryAttackTarget(float a1, float a2);
 };
 
-// @fnv 0x009cf090
-void FUN_009cf090_Class::TryAttackTarget(float afArg1, float afArg2)
-{
-    Actor_9cf* pkActorVal;
-    bool bTargetRecoiling;
-    {
-        int iAttack4;
-        bool bTargetAttacking4;
-        int iAnimAction4;
-        bool bTargetMidAttack3;
-        bool bTargetPostAttack_2;
-        bool bInAttackAnim5;
-        Actor_9cf* pkTarget5;
-        int iRandA;
-        float fPercent4;
-        float aFMax;
-        float fChanceTmp;
-        CTSHelper helper_;
-
-        if (this->FUN_00825c00() != 3)
-        {
-            return;
-        }
-
-        pkActorVal = this->FUN_00996de0();
-        pkTarget5 = this->FUN_00996e00();
-        if (!pkTarget5)
-        {
-            return;
-        }
-
-        if (this->m_timer60.FUN_00435e00() < 1.0)
-        {
-            return;
-        }
-
-        if (!this->m_04->FUN_008d8220())
-        {
-            return;
-        }
-
-        if (!pkActorVal->FUN_008d8520()->V254())
-        {
-            return;
-        }
-
-        bInAttackAnim5 = (pkActorVal->v1e4() != 0) ? FUN_005f2670(pkActorVal->v1e4()->FUN_004301b0(4)) : false;
-        if (bInAttackAnim5)
-        {
-            return;
-        }
-
-        if (pkActorVal->v218() && pkActorVal->FUN_005a2030())
-        {
-            return;
-        }
-
-        if (!this->m_04->FUN_0097f2d0())
-        {
-            return;
-        }
-
-        if (!IsTargetInCone(pkActorVal, pkTarget5, 0))
-        {
-            return;
-        }
-
-        iAnimAction4 = pkTarget5->FUN_008a7570();
-        bTargetAttacking4 = pkTarget5->FUN_00894900();
-        bTargetMidAttack3 = (iAnimAction4 == 4);
-        bTargetPostAttack_2 = (iAnimAction4 == 8 || iAnimAction4 == 10);
-        bTargetRecoiling = pkTarget5->FUN_00894d60();
-
-        iAttack4 = this->FUN_009ce870(afArg1, afArg2, bTargetAttacking4, bTargetMidAttack3, 1);
-        if (iAttack4 != 0xff)
-        {
-            if (this->IsActionAvailable(iAttack4))
-            {
-                iRandA = DialogueRandom() % 100;
-                if (iRandA < this->m_04->FUN_00980070()->GetByteAtOffsetAD())
-                {
-                    fChanceTmp = CalculateWeightedValue((int)this->m_04->FUN_00980070(), this->m_04->FUN_0097fc70(),
-                                                        pkActorVal->m_a4.FUN_0066ef20(11), bTargetAttacking4,
-                                                        !this->m_04->FUN_007031c0(), bTargetPostAttack_2,
-                                                        pkTarget5->v230(), bTargetRecoiling);
-
-                    fPercent4 = FUN_00644580((Obj*)this->m_04->FUN_00980070(), 50, 50, false, bTargetAttacking4);
-
-                    aFMax = FUN_00404010(100.0 - (fChanceTmp + fPercent4), *DAT_011cea38.FUN_00403e20());
-
-                    if (fChanceTmp > fPercent4 && fChanceTmp > aFMax)
-                    {
-                        if (FUN_009a7940(pkActorVal, pkTarget5, pkActorVal->v1f4(), pkTarget5->v1f4(), 0, 30))
-                        {
-                            this->FUN_009cce70(iAttack4, 0);
-                            this->SetMode(0);
-                        }
-                        else
-                        {
-                            helper_.FUN_00435de0(FUN_00435dd0());
-                            this->m_timer60 = helper_;
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
 extern double g_d100;
 struct Obj641
 {
@@ -6634,22 +5150,6 @@ struct Obj641
     float FUN_004e4620();
     float FUN_006447f0();
 };
-// Computes a weighted value from object fields scaled by a percent ratio, applying optional additive and multiplicative modifiers.
-// @fnv 0x00644680
-float __cdecl CalculateWeightedValue(Obj641* object, int percent, int unused, bool useMult, bool useThird,
-                                     bool useFirst, bool useSecond, bool useLast)
-{
-    float value;
-    float ratio = (float)(percent / g_d100);
-    float modifier1 = useFirst ? object->FUN_00644790() : 0.0f;
-    float second = useSecond ? object->GetField84Float() : 0.0f;
-    float third = useThird ? object->FUN_0051b8e0() : 0.0f;
-    float weighted = object->FUN_004e4600() + object->GetFieldEC() * ratio;
-    value = object->GetUnk7d() + modifier1 + second + third + weighted;
-    value *= useMult ? object->FUN_006447d0() : object->FUN_004e4620();
-    value *= useLast ? object->FUN_006447f0() : 1.0f;
-    return value;
-}
 
 struct xActorM
 {
@@ -6714,83 +5214,6 @@ class xMelee
     void Strike();
     void UpdateDodge();
 };
-
-// Advances the dodge reaction timer, checks actor readiness and distance, and triggers a block, strike, or combat notification.
-// @fnv 0x009cdb00
-void xMelee::UpdateDodge()
-{
-    if (GetState() != 2)
-        return;
-    if (m_kReaction.CheckTimer())
-    {
-        Finish();
-        Advance();
-        return;
-    }
-    xActorM* qfTOqo = GetActor();
-    xActorM* qpqRa = GetTarget();
-    int qSVM = qfTOqo->GetFlags();
-    if (!qfTOqo->IsReady())
-    {
-        Finish();
-        return;
-    }
-    Prepare();
-    Prepare2();
-    int qsSDDgz = qpqRa ? qpqRa->GetAnimAction() : -1;
-    if (qsSDDgz == 2 && GetSection() == 2)
-    {
-        SetStage(3);
-        StartBlock();
-    }
-    if (!m_kOpts.Allows((unsigned short)qSVM))
-    {
-        Stop();
-        if (xLogOn())
-            xDebugLog("%.20s has run out of room to dodge.", qfTOqo->GetFullName());
-        Finish();
-        return;
-    }
-    float qrEZrs = GetDistance();
-    float qdqWL = GetLimit();
-    if ((qSVM & 4) || (qSVM & 8))
-    {
-        if (qrEZrs > qdqWL)
-        {
-            if (TryMove(qrEZrs, qdqWL, 0))
-            {
-                if (m_kDuration.CheckTimer())
-                {
-                    Stop();
-                    Strike();
-                    return;
-                }
-            }
-            else
-                qfTOqo->SetFlags(qSVM | 1);
-        }
-        else if (qrEZrs < *xS_eb98.Float() && (qSVM & 1))
-            qfTOqo->SetFlags(qSVM & ~1);
-    }
-    else if (qSVM & 1)
-    {
-        if (qrEZrs <= *xS_eb98.Float() && m_kDuration.CheckTimer())
-        {
-            Stop();
-            Finish();
-            return;
-        }
-    }
-    if (qsSDDgz == 2)
-    {
-        float qxQHW = (float)(xRandom() % 100);
-        if ((qSVM & 0x100) && !m_pCtx->IsBusy() && qxQHW > *xS_e380.Float())
-            qfTOqo->SetFlags((qSVM | 0x200) & ~0x100);
-    }
-    else if (qSVM & 0x200)
-        qfTOqo->SetFlags((qSVM | 0x100) & ~0x200);
-    xCombatMgr->Notify(m_pCtx, 2, 0, 0);
-}
 
 extern int DAT_011f426c;
 extern int DAT_011f4270;
@@ -6985,26 +5408,6 @@ struct FUN_009cfe90_Target : FUN_009cfe90_TargetBase
     virtual void vf2ac(int* value);
 };
 
-// @fnv 0x009cfe90
-float ProcX::FUN_009cfe90()
-{
-    FUN_009cfe90_Vector value;
-
-    if (reinterpret_cast<CombatAttackHelper*>(this)->FUN_00996e00() == 0 ||
-        !reinterpret_cast<FUN_009cfe90_Target*>(reinterpret_cast<CombatAttackHelper*>(this)->FUN_00996e00())
-             ->FUN_004938e0())
-        return 0.0f;
-
-    value.x = DAT_011f426c;
-    value.y = DAT_011f4270;
-    value.z = DAT_011f4274;
-
-    reinterpret_cast<FUN_009cfe90_Target*>(reinterpret_cast<CombatAttackHelper*>(this)->FUN_00996e00())
-        ->vf2ac(&value.x);
-
-    return value.FUN_00589850();
-}
-
 namespace fnv_009ce5b0 {
 struct Req
 {
@@ -7079,33 +5482,6 @@ struct C009ce5b0
     float FUN_009ce560();
     void FUN_009ce5b0(Vec* pos);
 };
-// Builds a request using an avoidance shape when both checks pass, otherwise builds one from target data.
-// @fnv 0x009ce5b0
-void C009ce5b0::FUN_009ce5b0(Vec* apPosition)
-{
-    Act* actor2 = FUN_00996de0();
-    Targ* target = FUN_00996e00();
-    Req request;
-    Loc location(*apPosition, actor2);
-    if (location.FUN_006ded70(actor2->FUN_008be1b0()) &&
-        FUN_009a7940(actor2, target, apPosition, target->v07d(), 0, 30))
-    {
-        Ptr avoidX(new Avoid);
-        avoidX.FUN_00559450()->AppendNode(Shape(target->v07d(), *((Settings*)&DAT_011cf4e0)->FUN_00403e20(),
-                                                  *((Settings*)&DAT_011cf120)->FUN_00403e20()));
-        actor2->PathToLocation(&request, &location.FUN_005c3420(), location.FUN_006dd4f0(), location.FUN_00441110(), 5.0f,
-                             avoidX.FUN_00559450());
-    }
-    else
-    {
-        float distance = 10.0f;
-        if ((unsigned char)GetByteAtOffset70(holder->FUN_00586150()))
-            distance = FUN_009a6830(actor2, target, FUN_009ce560());
-        actor2->PathToLocation(&request, (void*)target->v07d(), target->FUN_008d6f30(), (unsigned)target->FUN_00575d70(),
-                             distance, 0);
-    }
-    actor2->SetPathingRequestAvoidNodes(&request);
-}
 }  // namespace fnv_009ce5b0
 
 struct FUN_00996de0_ClassQ
@@ -7120,22 +5496,3 @@ struct FUN_005524b0_classQ
 {
     char GetByteAtOffset8C();
 };
-
-// Returns 1 if a is at least b, otherwise 0, ignoring the c parameter.
-// @fnv 0x009cf030
-unsigned char FUN_009cde10_shell::FUN_009cf030(float a, float b, int aiUnused)
-{
-    Actor* pTarget3;
-    bool bFlag;
-    float m_fPackageValue;
-    unsigned char bResult = 0;
-
-    pTarget3 = ((FUN_00996de0_ClassQ*)this)->FUN_00996de0();
-    bFlag = ((FUN_005524b0_classQ*)(*(FUN_00980070_shellQ**)((char*)this + 4))->FUN_00980070())->GetByteAtOffset8C() >= 100;
-    m_fPackageValue = 0.0f;
-    if (a >= b + m_fPackageValue)
-    {
-        bResult = 1;
-    }
-    return bResult;
-}

@@ -792,9 +792,6 @@ class C5C30Derived : public C5C30Primary, public C5C30Secondary
     virtual void FUN_00525c30(unsigned int uiA, unsigned int uiB);
 };
 
-C5C30Derived::C5C30Derived()
-{}
-
 struct BF50Primary
 {
     virtual void vfunc00();
@@ -844,9 +841,6 @@ struct BF50Object : BF50Primary, BF50Secondary
     virtual void FUN_0059bf50(unsigned int a, unsigned int b);
 };
 
-BF50Object::BF50Object()
-{}
-
 // FUN_0059bf60 : MSVC this-adjusting thunk  (sub ecx, 0x78 ; jmp <impl>)
 //
 // Two bases declare the same virtual, so the derived class overrides one
@@ -875,17 +869,6 @@ struct Own_0059bf60 : A1_0059bf60, A2_0059bf60
     virtual void key_fn();  // key function - defined, so the vftable is emitted
     void FUN_0059bf60();    // the shared override - declared only
 };
-
-Own_0059bf60::Own_0059bf60()
-{}
-void Own_0059bf60::key_fn()
-{}
-
-Own_0059bf60* make_0059bf60()
-{
-    static Own_0059bf60 o;
-    return &o;
-}
 
 namespace fnv_0059bf80 {
 struct Base1
@@ -980,6 +963,3 @@ struct S_0059bf90_Derived : S_0059bf90_Base1, S_0059bf90_Base2
 // @fnv 0x0059bf90
     virtual void FUN_0059bf90();
 };
-
-S_0059bf90_Derived::S_0059bf90_Derived()
-{}

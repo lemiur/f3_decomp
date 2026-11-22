@@ -34,15 +34,6 @@ struct Own_00807df0 : A1_00807df0, A2_00807df0
 // @fnv 0x00807df0
     void FUN_00807df0();
 };
-Own_00807df0::Own_00807df0()
-{}
-void Own_00807df0::key_fn()
-{}
-Own_00807df0* make_00807df0()
-{
-    static Own_00807df0 o;
-    return &o;
-}
 
 // FUN_00807e00 - MSVC 2008 adjustor thunk (8 bytes):
 //

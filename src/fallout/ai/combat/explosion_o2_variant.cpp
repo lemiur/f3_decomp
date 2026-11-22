@@ -269,21 +269,6 @@ struct FUN_00cbc650_cls
     void FUN_00cbc650(FUN_00cbc650_obj* volatile a1);
 };
 
-// @fnv 0x00cbc650
-void FUN_00cbc650_cls::FUN_00cbc650(FUN_00cbc650_obj* volatile a1)
-{
-    FUN_00cbc650_obj* obj = a1;
-    FUN_00c86790(obj);
-    if (obj->m_1e5 != 1)
-    {
-        volatile unsigned int* p = (volatile unsigned int*)vGet(&a1);
-        p[2] = _byteswap_ulong(p[2]);
-        p[3] = _byteswap_ulong(p[3]);
-        p[4] = _byteswap_ulong(p[4]);
-        p[5] = _byteswap_ulong(p[5]);
-    }
-}
-
 struct FUN_00cbc6a0_Data
 {
     volatile unsigned int unk00;
@@ -345,31 +330,6 @@ struct FUN_00cbc6a0_Class
     void __thiscall FUN_00c868b0(unsigned char* arg);
 };
 
-// @fnv 0x00cbc6a0
-void FUN_00cbc6a0_Class::FUN_00cbc6a0(unsigned char* arg)
-{
-    unsigned char value;
-    FUN_00cbc6a0_Data* data = vf45((int*)&value);
-
-    if (arg[0x1E4] != 1)
-    {
-        data->unk08 = _byteswap_ulong(data->unk08);
-        data->unk0C = _byteswap_ulong(data->unk0C);
-        data->unk10 = _byteswap_ulong(data->unk10);
-        data->unk14 = _byteswap_ulong(data->unk14);
-    }
-
-    FUN_00c868b0(arg);
-
-    if (arg[0x1E4] != 1)
-    {
-        data->unk08 = _byteswap_ulong(data->unk08);
-        data->unk0C = _byteswap_ulong(data->unk0C);
-        data->unk10 = _byteswap_ulong(data->unk10);
-        data->unk14 = _byteswap_ulong(data->unk14);
-    }
-}
-
 extern __declspec(thread) int g_memoryContext;
 void __cdecl FUN_00c876f0();
 void __cdecl FUN_00c87700();
@@ -416,16 +376,6 @@ struct FUN_00cbca20_class
     void __thiscall FUN_00c86800(FUN_00cbc550_class* obj, int flags);
     FUN_00cbc550_class* __thiscall FUN_00cbca20(int flags);
 };
-// @fnv 0x00cbca20
-FUN_00cbc550_class* __thiscall FUN_00cbca20_class::FUN_00cbca20(int flags)
-{
-    AutoMemContext context;
-    FUN_00c876f0();
-    FUN_00cbc550_class* result = new FUN_00cbc550_class();
-    FUN_00c86800(result, flags);
-    FUN_00c87700();
-    return result;
-}
 
 struct HavokAllocator
 {
@@ -582,35 +532,6 @@ struct TargetClass
     void FUN_00cbd520(ArgStruct* arg);
 };
 
-// @fnv 0x00cbd520
-void TargetClass::FUN_00cbd520(ArgStruct* arg)
-{
-    AutoMemContext memContext;
-
-    this->unk1c = arg->unk08;
-    this->unk20 = arg->unk0c;
-    this->unk14 = arg->unk10;
-    this->unk18 = arg->unk14;
-
-    HavokObj* obj = new HavokObj(arg->unk04, 0);
-    this->vf8c(obj);
-    obj->removeReference();
-
-    GarbageCollectorObjectPtr gcPtr;
-    void* pObj = arg->unk04;
-    GarbageCollectorObjectPtr* res = FUN_00c85ef0(&gcPtr, pObj, &DAT_01267b70);
-    if (res->m_ptr)
-    {
-        DynCastHelper1* dyn = res->m_ptr->DynamicCast(&g_012043f8);
-        if (dyn && dyn->unk08 && dyn->unk08->unk18)
-        {
-            this->FUN_00cbcbd0(dyn->unk08->unk18);
-        }
-    }
-
-    this->vfbc(arg);
-}
-
 class NiViewerStringArray
 {
   public:
@@ -647,13 +568,6 @@ class FUN_00cbd650_cls : public FUN_00cbd650_base
 };
 char* __cdecl FUN_00a7d330(const char* pcString);
 extern const char* DAT_01268420;
-// @fnv 0x00cbd650
-void FUN_00cbd650_cls::FUN_00cbd650(NiViewerStringArray* pkStrings)
-{
-    AutoMemContext kContext;
-    FUN_00c86b80(pkStrings);
-    pkStrings->Add(FUN_00a7d330(DAT_01268420));
-}
 
 inline void* operator new(size_t, void* p)
 {
@@ -931,50 +845,3 @@ struct CauseList
     void* unk04;
     void __thiscall PushItem(void** owner);
 };
-// @fnv 0x00cbcbd0
-void TargetClass::FUN_00cbcbd0(void* p)
-{
-    unsigned int restore = threadBlock.context;
-    ContextScope scope(restore);
-    if (p)
-    {
-        void* key = p;
-        p = 0;
-        unk10 = (int)key;
-        DAT_011b2190.FUN_00a53c30(key, &p);
-        CauseList* list = (CauseList*)p;
-        switch ((unsigned int)list)
-        {
-        case 0: {
-            CauseList* allocated = (CauseList*)DAT_011f6238.FUN_00aa3e40(8);
-            if (allocated != list)
-            {
-                allocated->unk00 = list;
-                allocated->unk04 = list;
-                list = allocated;
-            }
-            DAT_011b2190.InsertOrUpdate((void*)unk10, list);
-            if (list)
-            {
-                restore = *(volatile unsigned int*)&scope.saved;
-            }
-            else
-            {
-                scope.saved = *(volatile unsigned int*)&scope.saved;
-                return;
-            }
-            break;
-        }
-        default:
-            break;
-        }
-        if (list)
-        {
-            p = this;
-            list->PushItem(&p);
-        }
-    }
-restore_exit:
-    scope.saved = restore;
-cold_exit:;
-}

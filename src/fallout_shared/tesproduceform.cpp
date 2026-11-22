@@ -9,14 +9,6 @@ struct FUN_0048b590_shell
     void ClearFields();
 };
 
-// Sets the int at offset 4 to 0 and zeroes the 4 bytes at offset 8 of this object.
-// @fnv 0x0048b590
-void FUN_0048b590_shell::ClearFields()
-{
-    *(reinterpret_cast<int*>(this) + 1) = 0;
-    memset(reinterpret_cast<char*>(this) + 8, 0, 4);
-}
-
 extern "C" void* __cdecl __memcpy(void* dst, const void* src, unsigned int count);
 
 struct FUN_0048b670_shell
@@ -52,17 +44,6 @@ struct FUN_0048b5c0_shell
     int unk8;
     void FUN_0048b5c0();
 };
-// @fnv 0x0048b5c0
-void FUN_0048b5c0_shell::FUN_0048b5c0()
-{
-    unsigned int tmp;
-    if (unk4 != 0)
-    {
-        tmp = unk4->_ref_0084e3a0();
-        _FUN_00485910(0x47494650, tmp);
-    }
-    FUN_004856f0(0x43504650, &unk8, 4);
-}
 
 struct BaseFormComponent
 {
@@ -80,16 +61,6 @@ struct CombatNode
 {
     unsigned int FUN_00726070();
 };
-// Casts apCopyFC to TESProduceForm, initializes this from its combat node value, then copies the data at offset 8.
-// @fnv 0x0048b610
-void TESProduceForm::FUN_0048b610(BaseFormComponent* apCopyFC)
-{
-    TESProduceForm* pCopy = dynamic_cast<TESProduceForm*>(apCopyFC);
-    if (!pCopy)
-        return;
-    ((TESRaceForm*)this)->Initialize(((CombatNode*)pCopy)->FUN_00726070());
-    ((FUN_0048b670_shell*)this)->CopyFromSource((void*)((char*)pCopy + 8));
-}
 
 extern "C" int __cdecl memcmp(const void* a, const void* b, unsigned int n);
 struct ProduceFormData : BaseFormComponent
@@ -98,20 +69,6 @@ struct ProduceFormData : BaseFormComponent
     unsigned char cProdChance[4];
     bool FUN_0048b6a0(BaseFormComponent* apOther);
 };
-
-// Compares production chance bytes and a value from FUN_00726070 against another component, returning true when they differ or the other is not a TESProduceForm.
-// @fnv 0x0048b6a0
-bool ProduceFormData::FUN_0048b6a0(BaseFormComponent* apOther)
-{
-    ProduceFormData* pOther = (ProduceFormData*)dynamic_cast<TESProduceForm*>(apOther);
-    if (!pOther)
-        return true;
-    if (((CombatNode*)this)->FUN_00726070() != ((CombatNode*)pOther)->FUN_00726070())
-        return true;
-    if (memcmp(cProdChance, pOther->cProdChance, 4))
-        return true;
-    return false;
-}
 
 struct TESFile;
 

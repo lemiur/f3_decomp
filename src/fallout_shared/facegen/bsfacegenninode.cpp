@@ -1,4 +1,4 @@
-// fallout_shared/facegen/bsfacegenninode.cpp: FaceNode, FaceGenNode, DumpNode (33 functions)
+// fallout_shared/facegen/bsfacegenninode.cpp: FaceNode, FaceGenNode, DumpNode (3 functions)
 #include "f3_common.h"
 #include "bsfacegenninode.h"
 
@@ -10,12 +10,6 @@ class NiNode
 
 extern NiNode* DAT_011d59ec;
 extern const NiPoint3 _NiPoint3_ZERO;
-
-// @fnv 0x006633f0
-const NiPoint3& FUN_006633f0()
-{
-    return DAT_011d59ec ? DAT_011d59ec->FUN_0045bb80() : _NiPoint3_ZERO;
-}
 
 struct GeometryVertexBuffer
 {
@@ -32,22 +26,10 @@ struct FUN_00663430
 FUN_00663430::FUN_00663430()
 {}
 
-// @fnv 0x006639f0
-char __fastcall FUN_006639f0(char* pThis)
-{
-    return pThis[0x189];
-}
-
 struct FUN_00663a10_shell : public BSFaceGenAnimationData
 {
     void FUN_00663a10(bool);
 };
-
-// @fnv 0x00663a10
-void FUN_00663a10_shell::FUN_00663a10(bool abShouldHeadTrack)
-{
-    *((bool*)((char*)this + 0x189)) = abShouldHeadTrack;
-}
 
 class ProcessLists
 {
@@ -56,18 +38,6 @@ class ProcessLists
 };
 
 extern ProcessLists g_011d5a5c;
-
-// @fnv 0x00663a30
-unsigned char FUN_00663a30()
-{
-    return *g_011d5a5c.GetLifeStateControlFlag();
-}
-
-// @fnv 0x00663a50
-char __fastcall GetByteAt1D(char* pThis)
-{
-    return pThis[0x1d];
-}
 
 namespace fnv_00663a70 {
 struct NiUpdateData
@@ -98,13 +68,6 @@ struct Stand663
 {
     void UpdateFaceGenAnimation(NiUpdateData*);
 };
-// @fnv 0x00663a70
-void FUN_00663a70_shell::UpdateFaceGenNode(NiUpdateData* UpdateData, unsigned int uFlags)
-{
-    if (!((NiAVObject*)this)->FUN_00456610())
-        ((Stand663*)this)->UpdateFaceGenAnimation(UpdateData);
-    ((NiNode*)this)->UpdateDownwardPass(UpdateData, uFlags);
-}
 }  // namespace fnv_00663a70
 
 struct BSFadeNode;
@@ -155,48 +118,15 @@ struct DummyNode
 
 DummyAccum* __fastcall GetStringAtOffsetC4(NiCullingProcess*);
 
-// @fnv 0x00663ae0
-void FUN_00663ae0_shell::CullWithBoundAccum(NiCullingProcess* arCuller)
-{
-    DummyAccum* paccum = GetStringAtOffsetC4(arCuller);
-    int kmode = GetStringAtOffsetC4(arCuller)->GetField19C();
-    if (kmode == 0)
-    {
-        paccum->RenderBound(((NiAVObject*)this)->GetBoundingVolume(), 0);
-    }
-    ((DummyNode*)this)->FUN_00a5dbe0(arCuller);
-    if (kmode == 0)
-    {
-        paccum->DispatchBatchRenderer();
-    }
-}
-
 struct BSStrHelper663
 {
     operator const char*() const;
 };
-// @fnv 0x00663b40
-const char* __fastcall GetStringAtOffsetC4(void* p)
-{
-    return *(BSStrHelper663*)((char*)p + 0xc4);
-}
-
-// @fnv 0x00663b60
-unsigned int __fastcall GetField19C(char* pThis)
-{
-    return *(unsigned int*)(pThis + 0x19c);
-}
 
 struct FUN_00662a40_shell
 {
     char __thiscall GetByteAtOffsetD6();
 };
-
-// @fnv 0x00662a40
-char __thiscall FUN_00662a40_shell::GetByteAtOffsetD6()
-{
-    return *(char*)((char*)this + 0xd6);
-}
 
 struct GlobalObject_0044f440
 {
@@ -204,12 +134,6 @@ struct GlobalObject_0044f440
 };
 
 GlobalObject_0044f440 g_011d5b28;
-
-// @fnv 0x006633d0
-void FUN_006633d0(void)
-{
-    g_011d5b28.FUN_00450410();
-}
 
 namespace fnv_006633e0 {
 struct GlobalObject_0044f440
@@ -219,23 +143,12 @@ struct GlobalObject_0044f440
 
 GlobalObject_0044f440 g_011d5b34;
 
-// @fnv 0x006633e0
-void FUN_006633e0()
-{
-    g_011d5b34.FUN_00450410();
-}
 }  // namespace fnv_006633e0
 
 struct FUN_00662aa0_shell : BSFaceGenNiNode
 {
     void SetFixedNormals(bool abFixedNormals);
 };
-
-// @fnv 0x00662aa0
-void FUN_00662aa0_shell::SetFixedNormals(bool abFixedNormals)
-{
-    *reinterpret_cast<char*>(reinterpret_cast<unsigned char*>(this) + 0xd5) = abFixedNormals;
-}
 
 void _delete(void* ptr, unsigned int size);
 
@@ -244,16 +157,6 @@ struct FUN_00662ac0_shell
     void* DestroyIfFlagged(unsigned int flags);
     void FUN_00662b00();
 };
-
-// Calls FUN_00662b00, then frees this with _delete when flags has bit 0 set, and returns this.
-// @fnv 0x00662ac0
-void* FUN_00662ac0_shell::DestroyIfFlagged(unsigned int flags)
-{
-    this->FUN_00662b00();
-    if (flags & 1)
-        _delete(this, 0xf0);
-    return this;
-}
 
 namespace fnv_00663ab0 {
 struct NiUpdateData
@@ -271,13 +174,6 @@ struct FUN_00663ab0_class : NiNode
     void FUN_00663ab0(NiUpdateData&);
 };
 
-// Calls UpdateFaceGenAnimation with updateData, then NiNode::UpdateTransformAndBounds with updateData.
-// @fnv 0x00663ab0
-void FUN_00663ab0_class::FUN_00663ab0(NiUpdateData& updateData)
-{
-    this->UpdateFaceGenAnimation(updateData);
-    NiNode::UpdateTransformAndBounds(updateData);
-}
 }  // namespace fnv_00663ab0
 
 struct Ret36
@@ -290,34 +186,16 @@ struct FUN_00662a10_shell
     Ret36 _m;
     Ret36 GetRet36();
 };
-// Returns the stored Ret36 value (_m) by value.
-// @fnv 0x00662a10
-Ret36 FUN_00662a10_shell::GetRet36()
-{
-    return _m;
-}
 
 struct FUN_00662a80_shell : BSFaceGenNiNode
 {
     unsigned char FUN_00662a80();
 };
 
-// @fnv 0x00662a80
-unsigned char FUN_00662a80_shell::FUN_00662a80()
-{
-    return *(unsigned char*)((char*)this + 0xd8);
-}
-
 struct FUN_009a0240_shell : BSFaceGenNiNode
 {
     char GetFixedNormals();
 };
-
-// @fnv 0x009a0240
-char FUN_009a0240_shell::GetFixedNormals()
-{
-    return reinterpret_cast<const unsigned char*>(this)[0xd5];
-}
 
 namespace fnv_00663510 {
 class Actor;
@@ -957,90 +835,6 @@ struct FUN_00663510_t
     void UpdateFaceGenAnimation(FaceGenUpdateData663510* UpdateData);
 };
 
-// @fnv 0x00663510
-void FUN_00663510_t::UpdateFaceGenAnimation(FaceGenUpdateData663510* UpdateData)
-{
-    if (((NiAVObject*)this)->FUN_00456610())
-        return;
-
-    bool bchanged = false;
-    bool bdead = ((FaceGenNode*)this)->GetAnimationData()->IsDead();
-
-    if (FUN_00663a30() && !((FaceGenNode*)this)->GetByteAtOffsetE1() && UpdateData->fTime > 0.0)
-        ((FaceGenNode*)this)->UpdateStateByDistance(-1);
-
-    if (!((FaceGenNode*)this)->GetAnimationData() ||
-        (!UpdateData->m_bUpdateEnabled && !((FaceGenNode*)this)->GetAnimationData()->NeedsUpdate()))
-        return;
-
-    *(float*)((char*)this + 0xdc) = UpdateData->fTime;
-    if (((BSFaceGenNiNode*)this)->bAnimationUpdate)
-    {
-        ((FaceGenNode*)this)->GetAnimationData()->SetUpdated(false);
-        if (GetByteAt1D((char*)&g_timeGlobal))
-            bchanged = ((FaceGenNode*)this)->GetAnimationData()->UpdateAnimation(0.0f);
-        else
-            bchanged = ((FaceGenNode*)this)
-                           ->GetAnimationData()
-                           ->UpdateAnimation(g_timeGlobal.GetStoredFloatValue() * *g_011c5724.Float());
-    }
-    else
-    {
-        bchanged = ((FaceGenNode*)this)->GetAnimationData()->UpdateMorphs();
-    }
-
-    if (((BSFaceGenNiNode*)this)->bAnimationUpdate && *(Actor**)((char*)this + 0xe8) &&
-        ((MobileObject*)*(Actor**)((char*)this + 0xe8))->GetCurrentAIProcess() &&
-        ((MobileObject*)*(Actor**)((char*)this + 0xe8))->GetCurrentAIProcess()->GetCurrentPackage678() &&
-        FUN_006639f0((char*)((FaceGenNode*)this)->GetAnimationData()) &&
-        ((BSFaceGenNiNode*)this)->bApplyRotationToParent && !*g_011df6d0.GetLifeStateControlFlag() &&
-        ((NiAVObject*)this)->FUN_004f0140())
-    {
-        bool beyeTrackingChanged;
-        if (GetByteAt1D((char*)&g_timeGlobal))
-            beyeTrackingChanged =
-                ((FaceGenNode*)this)->GetAnimationData()->FUN_0064be40(0.0f, ((Calendar*)this)->GetDaysPassed());
-        else
-            beyeTrackingChanged =
-                ((FaceGenNode*)this)
-                    ->GetAnimationData()
-                    ->FUN_0064be40(g_timeGlobal.GetStoredFloatValue(), ((Calendar*)this)->GetDaysPassed());
-        bchanged = bchanged || beyeTrackingChanged;
-    }
-
-    if (bchanged || *(bool*)((char*)this + 0xe4))
-    {
-        int inumallowedtoupdate = 10;
-        bool bupdate = false;
-        if (((NiAVObject*)this)->FUN_004f0140())
-        {
-            if (((FaceGenNode*)this)->GetAnimationData()->IsDead() ||
-                DAT_011e0e80.CanAddActorToList(*(Actor**)((char*)this + 0xe8), inumallowedtoupdate) ||
-                *(Actor**)((char*)this + 0xe8) == (Actor*)g_thePlayer || Interface::IsSaveLoadActive())
-                bupdate = true;
-            if (*(Actor**)((char*)this + 0xe8) &&
-                !((MobileObject*)*(Actor**)((char*)this + 0xe8))->GetCurrentProcessLevel() &&
-                ((MobileObject*)*(Actor**)((char*)this + 0xe8))->GetCurrentAIProcess()->IsArrested() &&
-                ((MobileObject*)*(Actor**)((char*)this + 0xe8))->GetCurrentAIProcess()->GetCombatTarget() &&
-                ((MobileObject*)*(Actor**)((char*)this + 0xe8))->GetCurrentAIProcess()->GetCombatTarget() ==
-                    (Actor*)g_thePlayer)
-                bupdate = true;
-        }
-        if (bupdate || *(bool*)((char*)this + 0xe4))
-        {
-            ((FaceGenNode*)this)->FUN_00663050(bchanged);
-        }
-        else
-        {
-            *(bool*)((char*)this + 0xd4) = true;
-            *(bool*)((char*)this + 0xe4) = true;
-        }
-    }
-
-    ((FUN_00663a10_shell*)((FaceGenNode*)this)->GetAnimationData())->FUN_00663a10(true);
-    if (*(bool*)((char*)this + 0xec) && *(Actor**)((char*)this + 0xe8))
-        FUN_00652510(*(Actor**)((char*)this + 0xe8));
-}
 }  // namespace fnv_00663510
 
 struct CloningProcess
@@ -1092,17 +886,6 @@ struct FUN_006628c0 : A51BF0Base
     FUN_006628c0* FUN_00663b80(CloningProcess& cloneData);
 };
 
-// @fnv 0x00663b80
-FUN_006628c0* FUN_006628c0::FUN_00663b80(CloningProcess& cloneData)
-{
-    FUN_006628c0* pnode = new FUN_006628c0;
-
-    FUN_00663c30(pnode, cloneData);
-    v26(cloneData);
-
-    return pnode;
-}
-
 struct S_00a953b0_Node
 {
     void CopyMemberData(S_00a953b0_Node*, void*);
@@ -1135,32 +918,6 @@ struct FUN_00663c30_shell : S_00a953b0_Node
 
     void FUN_00663c30(FUN_00663c30_shell*, void*);
 };
-
-// @fnv 0x00663c30
-void FUN_00663c30_shell::FUN_00663c30(FUN_00663c30_shell* pDest, void* pCloneData)
-{
-    if (pDest == 0)
-    {
-    }
-    else
-    {
-        S_00a953b0_Node::CopyMemberData(pDest, pCloneData);
-
-        pDest->helper.operator=(&helper);
-
-        pDest->block = block;
-
-        pDest->value_d4 = value_d4;
-        pDest->value_d5 = value_d5;
-        pDest->value_d6 = value_d6;
-        pDest->value_d7 = value_d7;
-
-        pDest->value_dc = value_dc;
-
-        pDest->value_e0 = value_e0;
-        pDest->value_e1 = value_e1;
-    }
-}
 
 struct FUN_00662b70_cls
 {
@@ -1247,26 +1004,6 @@ struct FUN_00662b70_cls
     void FUN_0043fa80(unsigned int value);
     void FUN_00662b70(Block36* src);
 };
-
-// Copies the 36-byte block from src, sets flagD7 to 1, then calls FUN_0043fa80 with the result of v108(&local).
-// @fnv 0x00662b70
-void FUN_00662b70_cls::FUN_00662b70(Block36* apBlock)
-{
-    unsigned int pad1;
-    unsigned int pad2;
-    unsigned int pad3;
-    unsigned int pad4;
-    unsigned int pad5;
-    unsigned int pad6;
-    unsigned int pad7;
-    unsigned int pad8;
-    {
-        unsigned int local;
-        block = *apBlock;
-        flagD7 = 1;
-        FUN_0043fa80(v108(&local));
-    }
-}
 
 // ApplyParamValues candidate
 class FUN_00662bc0_Sub;
@@ -1402,24 +1139,6 @@ class FUN_00662bc0_cls
     virtual FUN_00662bc0_Obj* v64();
     void ApplyParamValues(FUN_00662bc0_Param* p);
 };
-// @fnv 0x00662bc0
-void FUN_00662bc0_cls::ApplyParamValues(FUN_00662bc0_Param* p)
-{
-    for (int i = 0; i < 15; i++)
-    {
-        float val;
-        val = v64()->v37(i);
-        if (val > DAT_01012060 && val >= DAT_01012060 && val <= DAT_01012070)
-        {
-            if (p->m_1c == 0)
-            {
-                FUN_00653340(p->m_00, &p->m_04);
-                p->m_1c = 1;
-            }
-            p->m_10->FUN_00662030(1, i, p->m_00, p->m_14, val);
-        }
-    }
-}
 
 struct Sub10Obj;
 struct FUN_00662f70_cls;
@@ -1561,26 +1280,6 @@ struct FUN_00662f70_cls
 
 void __cdecl FUN_00653340(int a, int b);
 
-// @fnv 0x00662f70
-void FUN_00662f70_cls::FUN_00662f70(FUN_00662f70_arg* a1)
-{
-    int i;
-    float f;
-    for (i = 0; i < 1; i++)
-    {
-        f = this->v40()->v2B(i);
-        if (f > 0.0 && f >= 0.0 && f <= 1.0)
-        {
-            if (a1->m_1c == 0)
-            {
-                FUN_00653340(a1->m_00, (int)&a1->m_04);
-                a1->m_1c = 1;
-            }
-            a1->m_10->FUN_00662030(3, i, a1->m_00, a1->m_14, f);
-        }
-    }
-}
-
 class B663450Point3
 {
   public:
@@ -1606,19 +1305,6 @@ class B663450Actor
     bool GetByteAtE0();
     void UpdateStateByDistance(int iState);
 };
-
-// Compares the actor's distance to the center against the radius plus or minus a margin and calls FUN_00653e50 with state 0 or 1 accordingly.
-// @fnv 0x00663450
-void B663450Actor::UpdateStateByDistance(int iState)
-{
-    B663450Point3 kCenter3 = B663450GetCenter();
-    float fMargin = 10.0f;
-    float fDist = (kCenter3 - GetPosition()).Length();
-    if ((fDist > B663450GetRadius() + fMargin && !GetByteAtE0()) || iState == 0)
-        FUN_00653e50(this, 0);
-    else if ((fDist < B663450GetRadius() - fMargin && GetByteAtE0()) || iState == 1)
-        FUN_00653e50(this, 1);
-}
 
 struct FUN_00662ca0_Data
 {
@@ -1696,46 +1382,6 @@ class FUN_00662ca0_cls
 };
 void __cdecl SplitSignedDifference(float a, float b, float* pA, float* pB);
 
-// @fnv 0x00662ca0
-void FUN_00662ca0_cls::ApplyParameterValues(FUN_00662bc0_Param* pParam)
-{
-    float aFValue;
-    float fFirst;
-    float fSecond;
-    for (int iIndex = 0; iIndex < 17; iIndex++)
-    {
-        switch (iIndex)
-        {
-        case 14:
-        case 15:
-        case 16:
-            continue;
-        case 8:
-        case 11:
-            SplitSignedDifference(GetData()->GetValue(8), GetData()->GetValue(11), &fFirst, &fSecond);
-            aFValue = (iIndex == 8) ? fFirst : fSecond;
-            break;
-        case 9:
-        case 10:
-            SplitSignedDifference(GetData()->GetValue(9), GetData()->GetValue(10), &fFirst, &fSecond);
-            aFValue = (iIndex == 9) ? fFirst : fSecond;
-            break;
-        default:
-            aFValue = GetData()->GetValue(iIndex);
-            break;
-        }
-        if (aFValue > DAT_01012060 && aFValue >= DAT_01012060 && aFValue <= 1.0)
-        {
-            if (!pParam->m_1c)
-            {
-                FUN_00653340(pParam->m_00, &pParam->m_04);
-                pParam->m_1c = 1;
-            }
-            pParam->m_10->FUN_00662030(2, iIndex, pParam->m_00, pParam->m_14, aFValue);
-        }
-    }
-}
-
 struct BoneName
 {
     const char* FUN_0043b1b0();
@@ -1807,46 +1453,6 @@ struct FaceNode
     SceneNode* FUN_0043b4a0(unsigned int);
     void AttachBones(SceneNode*, bool);
 };
-// @fnv 0x006642e0
-void FaceNode::AttachBones(SceneNode* parent, bool warn)
-{
-    unsigned int numBones, count, i;
-    SceneNode* j;
-    unsigned int bones;
-    Geometry* skin;
-    SkinInstance* bone;
-    SceneNode** geometry;
-    SceneNode* child;
-    if (!parent)
-        return;
-    numBones = FUN_0043b480();
-    for (count = 0; count < numBones; count++)
-    {
-        j = FUN_0043b4a0(count);
-        if (!j)
-            continue;
-        skin = j->AsGeometry();
-        if (!skin)
-            continue;
-        bone = skin->FUN_0043fad0();
-        if (!bone || !bone->FUN_005585e0())
-            continue;
-        bones = bone->FUN_005585e0()->FUN_008041a0();
-        geometry = bone->FUN_00825c00();
-        if (!geometry || !bones)
-            continue;
-        for (i = 0; i < bones; i++)
-        {
-            child = parent->FindBone(geometry[i]->FUN_00413f40());
-            if (child)
-                bone->SetBone(i, child);
-            else if (warn)
-                FNV_Warning("MODELS: Could not find bone \"%s\" for the head node.",
-                            geometry[i]->FUN_00413f40()->FUN_0043b1b0());
-        }
-        bone->FUN_00437730(this);
-    }
-}
 
 namespace fnv_00663050 {
 class NiPoint3
@@ -2105,97 +1711,6 @@ float FUN_006633e0();
 unsigned char FUN_00525420();
 bool FUN_00702360();
 
-// @fnv 0x00663050
-void FaceGenNode::FUN_00663050(bool update)
-{
-    FUN_00663430 context_2;
-    unsigned int count4 = FUN_0043b480();
-    unsigned int index_;
-    __declspec(align(4)) bool done2;  // Whether the morph was refreshed.
-    NiAVObject* aUnknownObject;
-    void* data8;          // Face data.
-    NiExtraData* extra2;  // Geometry extra data.
-    unsigned int kTotal;  // Vertex count.
-    for (index_ = 0; index_ < count4; index_++)
-    {
-        done2 = false;
-        aUnknownObject = FUN_0043b4a0(index_);
-        if (!aUnknownObject)
-            continue;
-        context_2.geometry = aUnknownObject->AsTriBasedGeom();
-        if (!context_2.geometry)
-            continue;
-        if (!context_2.geometry->FUN_005495f0())
-            continue;
-        data8 = FUN_00653230(context_2.geometry);
-        if (!data8)
-            continue;
-        extra2 = GetExtraDataIfPresent((NiAVObject*)context_2.geometry);
-        if (!extra2)
-            continue;
-        if (!context_2.geometry->FUN_005495f0()->FUN_00a67360(true))
-            continue;
-        context_2.geometry->FUN_005495f0()->FUN_00a67410(&context_2.morph);
-        kTotal = context_2.geometry->FUN_00456650();
-        if (update || resetMorph)
-        {
-            FUN_00653340(context_2.geometry, &context_2.morph);
-            done2 = true;
-            resetMorph = false;
-        }
-        bool updated4 = false;  // Full update completed.
-        bool active5 = false;   // Partial update completed.
-        NiPoint3 origin6 = FUN_006633f0();
-        float radius3 = 10.0f;
-        float kRadius = (origin6 - FUN_0045bb80()).FUN_00457990();
-        float radiusX = FUN_006633d0();
-        float aMaximum = FUN_006633e0();
-        if (FUN_00525420())
-        {
-            radiusX *= 0.25;
-            aMaximum *= 0.25;
-        }
-        bool aOverrideFlag_2 = false;  // Within the far update range.
-        bool active = false;           // Within the near update range.
-        if (kRadius <= aMaximum + radius3 || forceUpdate || FUN_00702360())
-        {
-            aOverrideFlag_2 = true;
-            if (kRadius <= radiusX + radius3 || forceUpdate || FUN_00702360())
-                active = true;
-        }
-        if (refreshMorph && !done2)
-        {
-            FUN_00653340(context_2.geometry, &context_2.morph);
-            done2 = true;
-        }
-        if (aOverrideFlag_2 && !skipUpdate)
-        {
-            FUN_00662e90(&context_2);
-            active5 = true;
-            if (active)
-            {
-                ApplyParamValues(&context_2);
-                ApplyParameterValues(&context_2);
-                FUN_00662f70(&context_2);
-                updated4 = true;
-            }
-        }
-        if (GetAnimation()->IsActive())
-        {
-            if (!updated4 && GetAnimation()->FUN_005dd4a0(0) > 0.0 && FUN_009611e0()->IsReady())
-            {
-                ApplyParameterValues(&context_2);
-                updated4 = true;
-            }
-        }
-        else if (!active5 && kRadius > FUN_006633d0() - radius3)
-        {
-            GetAnimation()->Update(0.0f, true, true, true, true, false);
-        }
-        context_2.geometry->FUN_005495f0()->FUN_00a673d0();
-    }
-    refreshMorph = false;
-}
 }  // namespace fnv_00663050
 
 extern const char DAT_01066238[];
@@ -2332,79 +1847,6 @@ struct DumpNode
     void FUN_00a5ea70(DumpArray*);
     void DumpToArray(DumpArray*);
 };
-// Appends formatted debug strings describing the node's flags, lastTime, actor, and animation data to the DumpArray.
-// @fnv 0x00663d10
-void DumpNode::DumpToArray(DumpArray* out)
-{
-    FUN_00a5ea70(out);
-    int i, k, buffer;
-    char* j = FUN_00a7d330(DAT_011d5bf8.FUN_00559450());
-    out->FUN_0096a610(j);
-    char* title;
-    title = new char[32];
-    FUN_00406d00(title, 32, "bForceBaseMorph = %s", forceBaseMorph ? "true" : "false");
-    out->FUN_0096a610(title);
-    title = new char[32];
-    FUN_00406d00(title, 32, "bFixedNormals = %s", fixedNormals ? "true" : "false");
-    out->FUN_0096a610(title);
-    title = new char[32];
-    FUN_00406d00(title, 32, "bAnimationUpdate = %s", animationUpdate ? "true" : "false");
-    out->FUN_0096a610(title);
-    title = new char[32];
-    FUN_00406d00(title, 32, "bRotatedLastUpdate = %s", rotatedLastUpdate ? "true" : "false");
-    out->FUN_0096a610(title);
-    title = new char[32];
-    FUN_00406d00(title, 32, "bApplyRotationToParent = %s", applyRotationToParent ? "true" : "false");
-    out->FUN_0096a610(title);
-    title = new char[32];
-    FUN_00406d00(title, 32, "bUsingLoResHead = %s", usingLoResHead ? "true" : "false");
-    out->FUN_0096a610(title);
-    title = new char[32];
-    FUN_00406d00(title, 32, "bIAmPlayerCharacter = %s", playerCharacter ? "true" : "false");
-    out->FUN_0096a610(title);
-    title = new char[32];
-    FUN_00406d00(title, 32, "bIAmInDialogue = %s", inDialogue ? "true" : "false");
-    out->FUN_0096a610(title);
-    title = new char[32];
-    FUN_00406d00(title, 32, "fLastTime = %0.3f", lastTime);
-    out->FUN_0096a610(title);
-    title = new char[32];
-    FUN_00406d00(title, 32, DAT_01066238, actor);
-    out->FUN_0096a610(title);
-    if (actor)
-    {
-        title = new char[32];
-        FUN_00406d00(title, 32, "pActor->iFormID = %08X", actor->FUN_0084e3a0());
-        out->FUN_0096a610(title);
-    }
-    title = new char[32];
-    FUN_00406d00(title, 32, "spAnimationData = %08X", animation.FUN_00559450());
-    out->FUN_0096a610(title);
-    if (animation.FUN_00559450())
-    {
-        for (i = 0; i < 15; i++)
-        {
-            if (animation.FUN_00559450()->v25(i) != 3.4028234663852886e+38)
-            {
-                out->FUN_0096a610(FUN_00a7d550(FUN_005dd830(i), animation.FUN_00559450()->v25(i)));
-            }
-        }
-        for (k = 0; k < 17; k++)
-        {
-            if (animation.FUN_00559450()->FUN_005dd4a0(k) != 3.4028234663852886e+38)
-            {
-                out->FUN_0096a610(FUN_00a7d550(FUN_005dd840(k), animation.FUN_00559450()->FUN_005dd4a0(k)));
-            }
-        }
-        for (buffer = 0; buffer < 16; buffer++)
-        {
-            if (animation.FUN_00559450()->v29(buffer) != 3.4028234663852886e+38)
-            {
-                out->FUN_0096a610(FUN_00a7d550(FUN_005dd850(buffer), animation.FUN_00559450()->v29(buffer)));
-            }
-        }
-    }
-}
 
 struct FaceNodeBase662b00
 {
@@ -3123,24 +2565,3 @@ class S_00662e90_Class : public S_00662e90_This
   public:
     void __thiscall FUN_00662e90(S_00662e90_Argument*);
 };
-
-// @fnv 0x00662e90
-void S_00662e90_Class::FUN_00662e90(S_00662e90_Argument* pArg)
-{
-    int i8;
-    float value;
-
-    for (i8 = 0; i8 < 16; i8 = i8 + 1)
-    {
-        value = this->f64()->f41(i8);
-        if (value > DAT_01012060 && value >= DAT_01012060 && value <= DAT_01012070)
-        {
-            if (!pArg->unk1c)
-            {
-                FUN_00653340(pArg->unk00, &pArg->unk04);
-                pArg->unk1c = 1;
-            }
-            pArg->unk10->FUN_00662030(0, i8, pArg->unk00, pArg->unk14, value);
-        }
-    }
-}

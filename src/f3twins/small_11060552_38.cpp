@@ -72,19 +72,9 @@ void C_00bcdc30::FUN_00bcdc30(bool f)
 
 void __cdecl FUN_00c16549(int);
 
-void FUN_00c074ef()
-{
-    FUN_00c16549(7);
-}
-
 // ---- family f508
 
 void __cdecl FUN_00c16549(int);
-
-void FUN_00c0c737()
-{
-    FUN_00c16549(14);
-}
 
 // ---- family f509
 

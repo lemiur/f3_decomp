@@ -1,97 +1,6 @@
-// fallout/ai/middlehighprocess.cpp: MiddleHighProcess, FurnitureProcess, MiddleHighProcessStandIn, ActorPackage_GetTarget_Helper and more (180 functions)
+// fallout/ai/middlehighprocess.cpp: MiddleHighProcess, FurnitureProcess, MiddleHighProcessStandIn, ActorPackage_GetTarget_Helper and more (3 functions)
 #include "f3_common.h"
 #include "middlehighprocess_decls.h"
-
-// @fnv 0x00460ff0
-FurnitureMark* MiddleHighProcess::GetFurnitureMarkerData()
-{
-    return &FurnitureMarker;
-}
-
-// @fnv 0x00915d00
-bool MiddleHighProcess::IsFirstActorFlagSet()
-{
-    return m_bFirstActorFlag;
-}
-
-// @fnv 0x00915d40
-bool MiddleHighProcess::IsAdditionalActorFlagSet()
-{
-    return m_bAdditionalActorFlag;
-}
-
-// @fnv 0x0091c7c0
-void MiddleHighProcess::CastSpellOnCaster(MagicCaster* apCaster, SpellItem* apSpell, bool abImmediate)
-{
-    apCaster->MagicCaster::CastSpellOnCaster(apSpell, abImmediate);
-}
-
-// Forwards the spell cast to the base MagicCaster implementation with the given spell, target and immediate flag.
-// @fnv 0x0091c7e0
-void MiddleHighProcess::CastSpellAtTarget(MagicCaster* apCaster, SpellItem* apSpell, MagicTarget* apTarget,
-                                          bool abImmediate)
-{
-    apCaster->MagicCaster::CastSpellAtTarget(apSpell, apTarget, abImmediate);
-}
-
-// @fnv 0x0092bf60
-void MiddleHighProcess::SetPixelLightingProperty(BSShaderPPLightingProperty* apProperty)
-{
-    m_pLightingProperty = apProperty;
-}
-
-// @fnv 0x00923000
-void* TESAmmoInitCalls::FUN_00923000()
-{
-    return reinterpret_cast<char*>(this) + 0xD4;
-}
-
-// @fnv 0x00929260
-void MiddleHighProcess::FUN_00929260(unsigned char aucLevel)
-{
-    *reinterpret_cast<unsigned char*>(&m_eProcessType) = aucLevel;
-}
-
-// @fnv 0x0092a980
-bool IsValidSandboxProcedure(int aiProcedure)
-{
-    int iProcedure = aiProcedure;
-    if (iProcedure < 2 || iProcedure > 3)
-        return true;
-    else
-        return false;
-}
-
-// @fnv 0x0044b130
-bool MiddleHighProcess::FUN_0044b130()
-{
-    bool bResult = DAT_00fdf1b0(this);
-    return bResult;
-}
-
-// @fnv 0x00922af0
-NiNode* MiddleHighProcess::GetActorRootNode(BipedAnim* apBipedAnim)
-{
-    if (apBipedAnim == 0)
-        return m_pActorNode;
-    return apBipedAnim->GetBoneNode(BIPED_BONE_WEAPON);
-}
-
-// Sets the active flag and ORs the weapon, body and loading flags into their respective members.
-// @fnv 0x00928d20
-void MiddleHighProcess::UpdateActorAppearance(bool abWeapon, bool abBody, bool abLoading)
-{
-    m_bFirstFaceGenFlag = true;
-    m_kSixthUnshownMember |= abBody;
-    m_bThirdFaceGenFlag |= abWeapon;
-    m_kSeventhUnshownMember |= abLoading;
-}
-
-// @fnv 0x006377e0
-int __fastcall FUN_006377e0(int param_1)
-{
-    return param_1 + 0xC8;
-}
 
 struct BGSLoadFormBuffer;
 struct BGSSaveFormBuffer;
@@ -136,21 +45,6 @@ struct FUN_006801a0_shell : public PackageTargetRecord
     void FUN_006801a0(PackageTargetRecord*);
 };
 
-// Copies the target object, type, value and acquire radius from apCopy into this instance when apCopy is non-null.
-// @fnv 0x006801a0
-void FUN_006801a0_shell::FUN_006801a0(PackageTargetRecord* apCopy)
-{
-    if (apCopy != 0)
-    {
-        SetTargetKind(apCopy->GetTargetKind());
-        SetTargetObjectReference(apCopy->GetReferenceTarget());
-        SetTargObject(apCopy->GetTargetForm());
-        SetTargObjectType(apCopy->GetTargetObjectType());
-        SetTargValue(apCopy->GetTargValue());
-        SetTargAcquireRadius(apCopy->GetTargAcquireRadius());
-    }
-}
-
 struct ObjA
 {
     void FUN_0044dd60();
@@ -161,19 +55,6 @@ struct FUN_006f74f0_cls
     ObjA* p;
     FUN_006f74f0_cls* FUN_006f74f0(ObjA* o);
 };
-// @fnv 0x006f74f0
-FUN_006f74f0_cls* FUN_006f74f0_cls::FUN_006f74f0(ObjA* pObject)
-{
-    if (p != pObject)
-    {
-        if (p)
-            p->FUN_0044dd60();
-        p = pObject;
-        if (p)
-            p->FUN_0092c870();
-    }
-    return this;
-}
 
 struct BGSSaveLoadGame
 {
@@ -201,19 +82,6 @@ struct FUN_00914b40_cls
     int idx1a8;
     void FUN_00914b40();
 };
-// @fnv 0x00914b40
-void FUN_00914b40_cls::FUN_00914b40()
-{
-    if (g_dataHandler->FUN_004226e0())
-        return;
-    if (ref40 && idx1a8 >= 0)
-    {
-        ref40->SetMarkerState(idx1a8, false);
-        idx1a8 = -1;
-    }
-    if (furniture && !g_BGSSaveLoadGame->FUN_0042ce10())
-        furniture->SetMarkerState(furnIndex, false);
-}
 
 struct FUN_00915400_shell : public MiddleHighProcess
 {
@@ -227,22 +95,6 @@ struct LowProcess_helper
 {
     void SetFlag40(int);
 };
-
-// @fnv 0x00915400
-void FUN_00915400_shell::FUN_00915400()
-{
-    FUN_00483710(this);
-    m_pCurrentWeapon = 0;
-    *reinterpret_cast<short*>(reinterpret_cast<char*>(this) + 0x22a) = 2;
-    SetAnimationEnabled(false);
-    SetAnimationComplete(false);
-    SetProcessConditionMet(false);
-    reinterpret_cast<LowProcess_helper*>(this)->SetFlag40(0);
-    SetProcessModeEnabled(false);
-    SetTarget(0);
-    ClearPackageObjectList();
-    FUN_00914b40(this);
-}
 
 struct Actor;
 struct ActorCause;
@@ -347,12 +199,6 @@ struct FUN_00915ef0_shell : public MiddleHighProcess
 {
     bool FUN_00915ef0(Actor*);
 };
-
-// @fnv 0x00915ef0
-bool FUN_00915ef0_shell::FUN_00915ef0(Actor* apActor)
-{
-    return apActor->IsActorEssential();
-}
 
 namespace fnv_0091e830 {
 struct Actor;
@@ -475,44 +321,6 @@ struct SceneObjectLookup
     static NiAVObject* __cdecl GetObjectByName(NiAVObject*, const char*);
 };
 
-// @fnv 0x0091e830
-void FUN_0091e830_shell::FUN_0091e830(NiControllerManager* apManager, NiNode* ap3D)
-{
-    int ibone = 1;
-    bool b1stPerson = false;
-
-    if (apManager)
-    {
-        if (pPlayer->GetAnimation(true) && apManager == pPlayer->GetAnimation(true)->FUN_00496940())
-        {
-            b1stPerson = true;
-            DAT_011e0410 = apManager->GetStringAtOffset()->FindAVObject(NiFixedString(DAT_01188b78));
-        }
-        else
-        {
-            *(NiNode**)((char*)this + 0x12c) =
-                apManager->GetStringAtOffset()->FindAVObject(NiFixedString(DAT_01188b78));
-        }
-    }
-    else if (ap3D)
-    {
-        if (pPlayer->GetAnimation(true) && ap3D == pPlayer->GetAnimation(true)->GetControllerSequence())
-        {
-            b1stPerson = true;
-            DAT_011e0410 = (NiNode*)SceneObjectLookup::GetObjectByName((NiAVObject*)ap3D, DAT_01188b78);
-        }
-        else
-        {
-            *(NiNode**)((char*)this + 0x12c) =
-                (NiNode*)SceneObjectLookup::GetObjectByName((NiAVObject*)ap3D, DAT_01188b78);
-        }
-    }
-
-    if (b1stPerson)
-        HandleUnparentedObjectNode(DAT_011e0410);
-    else
-        HandleUnparentedObjectNode(*(NiNode**)((char*)this + 0x12c));
-}
 }  // namespace fnv_0091e830
 
 namespace fnv_0091e9f0 {
@@ -574,14 +382,6 @@ struct InventoryStackRecord
     ~InventoryStackRecord();
 };
 
-// Deletes the object stored at offset 0x118, replaces it with apammo, and returns true.
-// @fnv 0x0091e9f0
-bool FUN_0091e9f0_shell::FUN_0091e9f0(InventoryStackRecord* apammo)
-{
-    delete *(InventoryStackRecord**)((char*)this + 0x118);
-    *(InventoryStackRecord**)((char*)this + 0x118) = apammo;
-    return true;
-}
 }  // namespace fnv_0091e9f0
 
 namespace fnv_0091eb20 {
@@ -901,21 +701,6 @@ struct MiddleHighProcess_VTableHelper
     TESObjectREFR* pTarget40;
 };
 
-// Gets the process package's target reference and, if it is valid, not deleted and differs from pTarget40, calls SetTarget_12c with it.
-// @fnv 0x0091eb20
-void FUN_0091eb20_shell::FUN_0091eb20()
-{
-    TESPackage* pTargetPackage = ((MiddleHighProcess_VTableHelper*)this)->GetPackage_27c();
-    if (pTargetPackage && pTargetPackage->GetTarget() && pTargetPackage->GetTarget()->GetReferenceTarget())
-    {
-        TESObjectREFR* pref = pTargetPackage->GetTarget()->GetReferenceTarget();
-        if (!pref->IsDeleted() && ((MiddleHighProcess_VTableHelper*)this)->pTarget40 &&
-            pref != ((MiddleHighProcess_VTableHelper*)this)->pTarget40)
-        {
-            ((MiddleHighProcess_VTableHelper*)this)->SetTarget_12c(pref);
-        }
-    }
-}
 }  // namespace fnv_0091eb20
 
 namespace fnv_0091ebb0 {
@@ -1065,21 +850,6 @@ struct ActorPackage_ext
     void SetPackageAndTarget(TESPackage*, TESObjectREFR*);
 };
 
-// @fnv 0x0091ebb0
-void FUN_0091ebb0_shell::FUN_0091ebb0(TESPackage* apPack, MobileObject* apActor)
-{
-    if (apPack == 0)
-    {
-        (*(void(__thiscall**)(MiddleHighProcess*))(*(int*)this + 0x214))(this);
-        (*(void(__thiscall**)(MiddleHighProcess*, int))(*(int*)this + 0x12c))(this, 0);
-    }
-    else
-    {
-        TESObjectREFR* ptarget = apPack->GetResolvedTargetReference(apActor);
-        ((ActorPackage_ext*)((char*)this + 0xe4))->SetPackageAndTarget(apPack, ptarget);
-    }
-    (*(void(__thiscall**)(MiddleHighProcess*))(*(int*)this + 0x4a0))(this);
-}
 }  // namespace fnv_0091ebb0
 
 namespace fnv_0091ec20 {
@@ -1146,15 +916,6 @@ struct VtblStub_0091ec20
     virtual int vfn_23c();
 };
 
-// Calls the virtual at vtable offset 0x20c; if it returns non-zero, calls the virtual at 0x21c, otherwise the virtual at 0x23c, returning its result.
-// @fnv 0x0091ec20
-int FUN_0091ec20_shell::FUN_0091ec20()
-{
-    if (reinterpret_cast<int(__thiscall*)(void*)>((*reinterpret_cast<void***>(this))[0x20c / 4])(this))
-        return reinterpret_cast<int(__thiscall*)(void*)>((*reinterpret_cast<void***>(this))[0x21c / 4])(this);
-    else
-        return reinterpret_cast<int(__thiscall*)(void*)>((*reinterpret_cast<void***>(this))[0x23c / 4])(this);
-}
 }  // namespace fnv_0091ec20
 
 namespace fnv_0091ec70 {
@@ -1209,20 +970,6 @@ struct LowProcess_GetInstanceDataThatIsRunning
     ActorPackageData* GetCurrentPackageData();
 };
 
-// Returns the run-once package data if a run-once package is set, otherwise the low-process instance data that is running.
-// @fnv 0x0091ec70
-ActorPackageData* FUN_0091ec70_shell::GetRunningPackageData()
-{
-    if (GetRunOncePackage())
-    {
-        return reinterpret_cast<ActorPackageData*>(GetRunOncePackageData());
-    }
-    else
-    {
-        return reinterpret_cast<LowProcess_GetInstanceDataThatIsRunning*>(this)
-            ->LowProcess_GetInstanceDataThatIsRunning::GetCurrentPackageData();
-    }
-}
 }  // namespace fnv_0091ec70
 
 namespace fnv_0091ecb0 {
@@ -1271,12 +1018,6 @@ struct FUN_0091ecb0_shell : public MiddleHighProcess
     ActorPackageContext* FUN_0091ecb0();
 };
 
-// @fnv 0x0091ecb0
-ActorPackageContext* FUN_0091ecb0_shell::FUN_0091ecb0()
-{
-    return (*(int(__thiscall***)(MiddleHighProcess*))this)[0x20c / 4](this) ? (ActorPackageContext*)((char*)this + 0xe4)
-                                                                            : (ActorPackageContext*)((char*)this + 0x4);
-}
 }  // namespace fnv_0091ecb0
 
 namespace fnv_0091ee70 {
@@ -1333,17 +1074,6 @@ struct ActorPackage_Clear
     }
 };
 
-// Clears the package at offset 0xE4 and, if the package was active, calls the virtual at vtable offset 0x244.
-// @fnv 0x0091ee70
-void FUN_0091ee70_shell::FUN_0091ee70()
-{
-    bool brunOncePackageWasActive = ((int(__thiscall*)(MiddleHighProcess*))(*(void***)this)[0x20C / 4])(this) != 0;
-    ((ActorPackage_Clear*)((char*)this + 0xE4))->Clear();
-    if (brunOncePackageWasActive)
-    {
-        ((void(__thiscall*)(MiddleHighProcess*))(*(void***)this)[0x244 / 4])(this);
-    }
-}
 }  // namespace fnv_0091ee70
 
 namespace fnv_0091eec0 {
@@ -1536,18 +1266,6 @@ struct Vtbl_0091eec0
     virtual TESPackage* v22c();
 };
 
-// @fnv 0x0091eec0
-TESPackage* FUN_0091eec0_shell::FUN_0091eec0()
-{
-    if (reinterpret_cast<Vtbl_0091eec0*>(this)->v20c())
-    {
-        return reinterpret_cast<Vtbl_0091eec0*>(this)->v20c();
-    }
-    else
-    {
-        return reinterpret_cast<Vtbl_0091eec0*>(this)->v22c();
-    }
-}
 }  // namespace fnv_0091eec0
 
 namespace fnv_0091ef10 {
@@ -1627,30 +1345,6 @@ struct Calendar
     unsigned int GetDaysPassed(void);
 };
 
-// Gets the current package, updates it via one of two virtual calls depending on a flag, then clamps a stored day count against the calendar's days passed.
-// @fnv 0x0091ef10
-void FUN_0091ef10_shell::FUN_0091ef10(int aiValue)
-{
-    TESPackage* pTargetPackage =
-        reinterpret_cast<TESPackage*(__thiscall*)(void*)>((*reinterpret_cast<void***>(this))[0x27c / 4])(this);
-    if (reinterpret_cast<int(__thiscall*)(void*)>((*reinterpret_cast<void***>(this))[0x20c / 4])(this) != 0)
-    {
-        reinterpret_cast<void(__thiscall*)(void*, int)>((*reinterpret_cast<void***>(this))[0x218 / 4])(this, aiValue);
-    }
-    else
-    {
-        reinterpret_cast<void(__thiscall*)(void*, int)>((*reinterpret_cast<void***>(this))[0x238 / 4])(this, aiValue);
-    }
-    if (pTargetPackage != 0)
-    {
-        int irange = FUN_0096a820(reinterpret_cast<Calendar*>(pTargetPackage)->GetDaysPassed());
-        if (reinterpret_cast<int(__thiscall*)(void*)>((*reinterpret_cast<void***>(this))[0x280 / 4])(this) >= irange)
-        {
-            reinterpret_cast<void(__thiscall*)(void*, int)>((*reinterpret_cast<void***>(this))[0x284 / 4])(this,
-                                                                                                           irange - 1);
-        }
-    }
-}
 }  // namespace fnv_0091ef10
 
 struct Actor;
@@ -1837,19 +1531,6 @@ struct FUN_0091fe80_shell : public MiddleHighProcess
 void* __cdecl memset(void*, int, unsigned int);
 void __cdecl AddAnimationToGarbageCollector(Animation*);
 
-// @fnv 0x0091fe80
-void FUN_0091fe80_shell::FUN_0091fe80(Animation* apAnim)
-{
-    if (*(Animation**)((char*)this + 0x1c0))
-    {
-        if (*(Animation**)((char*)this + 0x1c0) == apAnim)
-            return;
-        memset((char*)this + 0x1c4, 0, 0xc);
-        AddAnimationToGarbageCollector(*(Animation**)((char*)this + 0x1c0));
-    }
-    *(Animation**)((char*)this + 0x1c0) = apAnim;
-}
-
 namespace fnv_00920fd0 {
 struct Actor;
 struct ActorCause;
@@ -1984,26 +1665,6 @@ struct TESFurniture
 
 int __cdecl CountCollisionObjects(NiAVObject*, bool, bool, bool);
 
-// @fnv 0x00920fd0
-bool FUN_00920fd0_shell::FUN_00920fd0(TESObjectREFR* apFurnitureRef, unsigned int aiFurnitureNUm)
-{
-    bool bdisableCharController = false;
-    bool bsit = apFurnitureRef
-                    ? ((TESFurniture*)((TESObject*)apFurnitureRef)->GetNext())->IsFurnitureSitMarker(aiFurnitureNUm)
-                    : false;
-    bool bSleepMarker =
-        apFurnitureRef
-            ? ((TESFurniture*)((TESObject*)apFurnitureRef)->GetNext())->IsFurnitureSleepMarker(aiFurnitureNUm)
-            : false;
-    if (bsit || bSleepMarker)
-    {
-        bdisableCharController =
-            CountCollisionObjects(
-                (*(NiAVObject * (__thiscall**)(TESObjectREFR*))(*(int*)apFurnitureRef + 0x1d0))(apFurnitureRef), false,
-                false, false) > 0;
-    }
-    return bdisableCharController;
-}
 }  // namespace fnv_00920fd0
 
 namespace fnv_00921080 {
@@ -2186,22 +1847,6 @@ struct TESObjectREFR_vfn1d0
 
 NiAVObject* __cdecl FUN_00c54400(NiNode*);
 
-// If the reference and its furniture marker data exist, returns the marker entry at the offset 0x144 index via FUN_005094b0, otherwise 0.
-// @fnv 0x00921080
-unsigned int FUN_00921080_shell::FUN_00921080()
-{
-    if (!m_pFurnitureReference || *reinterpret_cast<unsigned char*>(reinterpret_cast<char*>(this) + 0x144) == 0x7f)
-        return 0;
-
-    BSFurnitureMarker_wrap* pFurnitureMarkers = reinterpret_cast<BSFurnitureMarker_wrap*>(
-        FUN_00c54400(reinterpret_cast<TESObjectREFR_vfn1d0*>(m_pFurnitureReference)->v74()));
-    if (!pFurnitureMarkers)
-        return 0;
-
-    FurnitureMark_wrap marker =
-        pFurnitureMarkers->FUN_005094d0(*reinterpret_cast<unsigned char*>(reinterpret_cast<char*>(this) + 0x144));
-    return marker.FUN_005094b0();
-}
 }  // namespace fnv_00921080
 
 namespace fnv_00929280 {
@@ -2337,35 +1982,7 @@ struct Actor_Helper
     BSFaceGenAnimationData* FUN_00576420(int);
 };
 
-// @fnv 0x00929280
-BSFaceGenAnimationData* FUN_00929280_shell::FUN_00929280(Actor* apActor)
-{
-    if (!(*(int(__thiscall**)(Actor*))(*(int*)apActor + 0x1d0))(apActor))
-    {
-        *(BSFaceGenAnimationData**)((char*)this + 0x178) = 0;
-        return 0;
-    }
-    if (!*(BSFaceGenAnimationData**)((char*)this + 0x178))
-    {
-        *(BSFaceGenAnimationData**)((char*)this + 0x178) = ((Actor_Helper*)apActor)->FUN_00576420(0);
-    }
-    return *(BSFaceGenAnimationData**)((char*)this + 0x178);
-}
 }  // namespace fnv_00929280
-
-// Returns false for procedure codes 2 and 3, true for any other code.
-// @fnv 0x0092a980
-bool __cdecl FUN_0092a980(int aeProcedure)
-{
-    switch (aeProcedure)
-    {
-    case 2:
-    case 3:
-        return false;
-    default:
-        return true;
-    }
-}
 
 namespace fnv_0092b830 {
 struct Actor;
@@ -2474,35 +2091,6 @@ struct BGSBodyPartData
     BGSBodyPart* GetValueByIndex(int limb);
 };
 
-// Looks up each body part's node by name under apNode and stores it in the limb array, then stores the head and torso nodes.
-// @fnv 0x0092b830
-void FUN_0092b830_shell::InitBodyPartNodes(NiNode* apNode, BGSBodyPartData* apBodyPartData)
-{
-    BGSBodyPart** parray = (BGSBodyPart**)&((NiAVObject*)apBodyPartData)->GetRotate();
-    BGSBodyPart* pheadPart;
-    BGSBodyPart* ptorsoPart;
-    for (int i = 0; i < 15; i++)
-    {
-        if (parray[i] == 0)
-            continue;
-        BGSBodyPart* pbp = parray[i];
-        const char* pname = (const char*)((Interface*)pbp)->GetRoot();
-        NiNode* plimbRoot = pname ? (NiNode*)SceneObjectLookup::GetObjectByName((NiAVObject*)apNode, pname) : 0;
-        ((NiNode**)((char*)this + 0x1dc))[pbp->GetLimb()] = plimbRoot;
-    }
-    pheadPart = apBodyPartData ? apBodyPartData->GetValueByIndex(1) : 0;
-    if (pheadPart && ((Model*)pheadPart)->GetObject3D())
-    {
-        *(NiAVObject**)((char*)this + 0x218) =
-            SceneObjectLookup::GetObjectByName((NiAVObject*)apNode, (const char*)((Model*)pheadPart)->GetObject3D());
-    }
-    ptorsoPart = apBodyPartData ? apBodyPartData->GetValueByIndex(0) : 0;
-    if (ptorsoPart && ((Model*)ptorsoPart)->GetObject3D())
-    {
-        *(NiAVObject**)((char*)this + 0x21c) =
-            SceneObjectLookup::GetObjectByName((NiAVObject*)apNode, (const char*)((Model*)ptorsoPart)->GetObject3D());
-    }
-}
 }  // namespace fnv_0092b830
 
 namespace fnv_0092bf80 {
@@ -2649,20 +2237,6 @@ struct Calendar
     unsigned int GetDaysPassed();
 };
 
-// @fnv 0x0092bf80
-bool FUN_0092bf80_shell::FUN_0092bf80(Actor* apActor)
-{
-    typedef TESPackage*(__thiscall * GetPkgFn)(void*);
-    typedef int(__thiscall * GetProcIdxFn)(void*);
-    TESPackage* pPackage = (*reinterpret_cast<GetPkgFn*>((*reinterpret_cast<int*>(this)) + 0x27c))(this);
-    if (!pPackage)
-        return true;
-    if (reinterpret_cast<Calendar*>(pPackage)->GetDaysPassed() != -1 &&
-        DAT_011a3ff0[reinterpret_cast<Calendar*>(pPackage)->GetDaysPassed()]
-                    [(*reinterpret_cast<GetProcIdxFn*>((*reinterpret_cast<int*>(this)) + 0x280))(this)] == 0x36)
-        return true;
-    return false;
-}
 }  // namespace fnv_0092bf80
 
 namespace fnv_0092c680 {
@@ -2700,16 +2274,6 @@ struct FUN_0092c680_cls
     FMark marker;
     void FUN_0092c680();
 };
-// @fnv 0x0092c680
-void FUN_0092c680_cls::FUN_0092c680()
-{
-    if (!g_BGSSaveLoadGame->FUN_0042ce10() && furniture && !g_dataHandler->FUN_004226e0())
-        furniture->SetMarkerState(furnIndex, false);
-    furnIndex = 0x7f;
-    marker.FUN_00c54550(0.0f);
-    marker.FUN_00568ab0(0);
-    marker.FUN_0098ddd0(&_NiPoint3_ZERO);
-}
 }  // namespace fnv_0092c680
 
 struct AVOwnerIf
@@ -2739,15 +2303,6 @@ struct FUN_0092c720_cls
     void FUN_008acf70(unsigned int flag, bool v);
     void UpdateActorFlags(ActorX* actor);
 };
-// @fnv 0x0092c720
-void FUN_0092c720_cls::UpdateActorFlags(ActorX* actor)
-{
-    bool a = actor->avOwner.V0c(0x10) < actor->avOwner.V20(0x10);
-    bool b = actor->avOwner.V0c(0x16) < actor->avOwner.V20(0x16);
-    FUN_008acf70(0x20000000, a);
-    FUN_008acf70(0x40000000, b);
-    FUN_008acf70(0x10000000, actor->GetExtra()->FUN_00418a80());
-}
 
 struct ObjB
 {
@@ -2759,19 +2314,6 @@ struct FUN_0092c8b0_cls
     ObjB* p;
     FUN_0092c8b0_cls* FUN_0092c8b0(ObjB* o);
 };
-// @fnv 0x0092c8b0
-FUN_0092c8b0_cls* FUN_0092c8b0_cls::FUN_0092c8b0(ObjB* pObject)
-{
-    if (p != pObject)
-    {
-        if (p)
-            p->FUN_004b0ef0();
-        p = pObject;
-        if (p)
-            p->FUN_0092c870();
-    }
-    return this;
-}
 
 namespace fnv_00915ae0 {
 struct Actor;
@@ -2841,24 +2383,6 @@ struct IOManager
     void RunQueuedTask(unsigned int, int);
 };
 extern IOManager* DAT_01202d98;
-// @fnv 0x00915ae0
-void FUN_00915ae0_shell::ClearQueuedItems()
-{
-    QueuedItemList* pCurrentElementNext = *(QueuedItemList**)((char*)this + 0x230);
-    while (pCurrentElementNext && *pCurrentElementNext->_ref_006815c0())
-    {
-        PaddedFloatRecord* pitem = *pCurrentElementNext->_ref_006815c0();
-        if (pitem)
-        {
-            if (pitem->flt)
-                DAT_01202d98->RunQueuedTask(pitem->flt, 0);
-            delete pitem;
-        }
-        pCurrentElementNext->_ref_0063f7b0();
-    }
-    delete *(QueuedItemList**)((char*)this + 0x230);
-    *(QueuedItemList**)((char*)this + 0x230) = 0;
-}
 }  // namespace fnv_00915ae0
 
 namespace fnv_009287e0 {
@@ -3006,22 +2530,6 @@ struct StandInC
     void FUN_0092c680();
 };
 extern Actor* g_thePlayer;
-// @fnv 0x009287e0
-void FUN_009287e0_shell::FUN_009287e0(Actor* apActor)
-{
-    if (*(void**)((char*)this + 0x140))
-    {
-        ((StandInA*)*(void**)((char*)this + 0x140))->FUN_00568020(*((unsigned char*)this + 0x144), 0);
-        if ((*(void*(__thiscall***)(Actor*))apActor)[0x79](apActor))
-        {
-            ((Animation * (__thiscall*)(Actor*))(*(void***)apActor)[0x79])(apActor)->SpecialIdleFree(true, false);
-        }
-    }
-    (*(void(__thiscall***)(void*, Actor*, int, int, int))this)[0x130](this, apActor, 0, 0, 0x7f);
-    if (apActor == g_thePlayer)
-        ((StandInB*)g_thePlayer)->FUN_005098c0();
-    ((StandInC*)this)->FUN_0092c680();
-}
 }  // namespace fnv_009287e0
 
 struct P03MM
@@ -3036,12 +2544,6 @@ struct MemoryManager
 
 MemoryManager* __cdecl FUN_00401020(void);
 
-// @fnv 0x00401000
-void* __cdecl FUN_00401000(unsigned int size)
-{
-    return FUN_00401020()->Allocate(size);
-}
-
 struct QueuedItemList
 {
     PaddedFloatRecord** _ref_006815c0();
@@ -3052,23 +2554,6 @@ struct MiddleHighProcessQ
 {
     bool HasMatchingQueuedItem(TESBoundObject* apObject, ExtraDataList* apExtra, bool abEquipped);
 };
-
-// Walks the queued-item list at this+0x230 and returns true if an entry matches apObject, apExtra and abEquipped.
-// @fnv 0x009157e0
-bool MiddleHighProcessQ::HasMatchingQueuedItem(TESBoundObject* apObject, ExtraDataList* apExtra, bool abEquipped)
-{
-    bool bFound = false;
-    QueuedItemList* pCurrentElementNext = *(QueuedItemList**)((char*)this + 0x230);
-    while (pCurrentElementNext && *pCurrentElementNext->_ref_006815c0() && !bFound)
-    {
-        PaddedFloatRecord* pitem = *pCurrentElementNext->_ref_006815c0();
-        if (pitem && *((bool*)pitem + 0xc) == abEquipped && *(TESBoundObject**)pitem == apObject &&
-            apExtra == *((ExtraDataList**)pitem + 1))
-            bFound = true;
-        pCurrentElementNext = pCurrentElementNext->_ref_00726070();
-    }
-    return bFound;
-}
 
 namespace fnv_00915e50 {
 struct BGSSaveLoadGame
@@ -3086,37 +2571,11 @@ struct MiddleHighProcessF : MiddleHighProcess
     void SetFurnitureMarker(TESObjectREFR* pref, unsigned char aiindex, FurnitureMark* apMarker);
 };
 
-// @fnv 0x00915e50
-void MiddleHighProcessF::SetFurnitureMarker(TESObjectREFR* apRef, unsigned char aiindex, FurnitureMark* apMarker)
-{
-    m_pFurnitureReference = apRef;
-    m_ucFurnitureMarkerIndex = aiindex;
-    if (apMarker)
-    {
-        *((unsigned char*)this + 0x156) = apMarker->m_ucFlags;
-        *(NiPoint3*)((char*)this + 0x148) = apMarker->Position;
-        *(unsigned short*)((char*)this + 0x154) = apMarker->m_usMarkerId;
-        if (m_pFurnitureReference && !g_BGSSaveLoadGame->FUN_0042ce10())
-            ((TESObjectREFRHelper*)m_pFurnitureReference)->SetMarkerState(aiindex, true);
-    }
-}
 }  // namespace fnv_00915e50
 
 extern NiFixedString* DAT_011c61b0;
 
-// @fnv 0x00920b60
-NiFixedString* FUN_00920b60()
-{
-    return DAT_011c61b0;
-}
-
 extern NiFixedString* DAT_011c61b8;
-
-// @fnv 0x00920b70
-NiFixedString* FUN_00920b70()
-{
-    return DAT_011c61b8;
-}
 
 struct FUN_008843a0_shell
 {
@@ -3136,35 +2595,11 @@ struct FUN_00921350_shell : public MiddleHighProcess
     void UpdateFurnitureAlignment(Actor* apActor);
 };
 
-// @fnv 0x00921350
-void FUN_00921350_shell::UpdateFurnitureAlignment(Actor* apActor)
-{
-    bool baligned = false;
-    if (reinterpret_cast<FUN_008843a0_shell*>(apActor)->FUN_008843a0())
-    {
-        baligned = !reinterpret_cast<FUN_008bb5c0_shell*>(apActor)->FUN_008bb5c0(
-            reinterpret_cast<FUN_00568650_shell*>(&FurnitureMarker)->FUN_00568650(), 0);
-    }
-    else
-    {
-        apActor->SetFurnitureHeading(reinterpret_cast<FUN_00568650_shell*>(&FurnitureMarker)->FUN_00568650());
-        baligned = true;
-    }
-    if (baligned)
-        AddPostAnimAction(4);
-}
-
 struct DummyFlags
 {
     int FUN_00621270(int);
     bool FUN_009269f0();
 };
-
-// @fnv 0x009269f0
-bool DummyFlags::FUN_009269f0()
-{
-    return ((DummyFlags*)((char*)this + 0x410))->FUN_00621270(0x200) != 0;
-}
 
 struct T_
 {
@@ -3172,22 +2607,10 @@ struct T_
     void ForwardToMember(int param);
 };
 
-// @fnv 0x00928d00
-void T_::ForwardToMember(int param)
-{
-    ((T_*)((char*)this + 0x450))->FUN_004a3f10((void*)param);
-}
-
 struct StandIn_00929220
 {
     void FUN_00929220(int value);
 };
-
-// @fnv 0x00929220
-void StandIn_00929220::FUN_00929220(int value)
-{
-    *(int*)((char*)this + 0x6a4) = value;
-}
 
 struct FUN_00929240_Class
 {
@@ -3195,12 +2618,6 @@ struct FUN_00929240_Class
     float m_f34;
     void FUN_00929240(float value);
 };
-
-// @fnv 0x00929240
-void FUN_00929240_Class::FUN_00929240(float value)
-{
-    m_f34 = value;
-}
 
 struct FUN_00929d20Class
 {
@@ -3212,12 +2629,6 @@ struct FUN_00929d20Class
     bool FUN_00929d20();
 };
 
-// @fnv 0x00929d20
-bool FUN_00929d20Class::FUN_00929d20()
-{
-    return m_04 & 4;
-}
-
 struct FUN_0092b440_Class
 {
     unsigned char m_auiShapeKeys[5];
@@ -3225,25 +2636,10 @@ struct FUN_0092b440_Class
     unsigned int GetByte5();
 };
 
-// @fnv 0x0092b440
-unsigned int FUN_0092b440_Class::GetByte5()
-{
-    return m_byte5;
-}
-
 struct FUN_0092b7f0_Class
 {
     void ClearState();
 };
-
-// Zeroes the 0x3c bytes at offset 0x1dc and clears the int fields at offsets 0x218 and 0x21c.
-// @fnv 0x0092b7f0
-void FUN_0092b7f0_Class::ClearState()
-{
-    memset(reinterpret_cast<char*>(this) + 0x1dc, 0, 0x3c);
-    reinterpret_cast<int*>(this)[0x218 / 4] = 0;
-    reinterpret_cast<int*>(this)[0x21c / 4] = 0;
-}
 
 namespace fnv_0092c120 {
 struct Actor;
@@ -3416,50 +2812,6 @@ struct Setting_S
 extern Setting_S originalRuntimeFloatSetting733;
 extern Setting_S originalRuntimeFloatSetting734;
 
-// @fnv 0x0092c120
-void FUN_0092c120_shell::UpdateHideLimbNodes(Actor* apActor, float afDeltaTime)
-{
-    HideLimbNodeList* pCurrentElementNext;
-    float fUpdatePeriod = DAT_011f2250.CallGetFlags() == 4 ? *originalRuntimeFloatSetting734.Float()
-                                                           : *originalRuntimeFloatSetting733.Float();
-    HideLimbNodeList* plastlist;
-    pCurrentElementNext = (HideLimbNodeList*)((char*)this + 0x1b0);
-    plastlist = 0;
-    while (pCurrentElementNext && !pCurrentElementNext->_ref_008256d0())
-    {
-        struct FUN_00914ab0* plimb = *pCurrentElementNext->_ref_006815c0();
-        bool bremove = false;
-        if (!plimb->spLimbNode || ((LimbNodeRef*)(unsigned int)plimb->spLimbNode)->_ref_00726070() <= 1 ||
-            (plimb->spParentNode && ((LimbNodeRef*)(unsigned int)plimb->spParentNode)->_ref_00726070() <= 1))
-            bremove = true;
-        plimb->m_fPackageValue += afDeltaTime;
-        if (!bremove && plimb->m_fPackageValue > fUpdatePeriod)
-        {
-            ((ActorLimbs*)apActor)->CollectLimbBones(plimb->spLimbNode, 0);
-            ((ActorLimbs*)apActor)
-                ->ProcessObjects(plimb->m_iLimbIndex, plimb->spLimbNode, plimb->spParentNode, plimb->bExplode);
-            bremove = true;
-        }
-        if (bremove)
-        {
-            delete plimb;
-            if (plastlist)
-            {
-                plastlist->_ref_00905330(plimb);
-                pCurrentElementNext = plastlist->_ref_00726070();
-            }
-            else
-            {
-                pCurrentElementNext->_ref_0063f7b0();
-            }
-        }
-        else
-        {
-            plastlist = pCurrentElementNext;
-            pCurrentElementNext = pCurrentElementNext->_ref_00726070();
-        }
-    }
-}
 }  // namespace fnv_0092c120
 
 struct FUN_009b4d90
@@ -3494,14 +2846,6 @@ struct MiddleHighProcessS : MiddleHighProcess
     void FUN_0092c400(FUN_009b4d90* apData);
 };
 
-// @fnv 0x0092c400
-void MiddleHighProcessS::FUN_0092c400(FUN_009b4d90* apData)
-{
-    if (!*(FUN_009b4d90**)((char*)this + 0x240))
-        *(FUN_009b4d90**)((char*)this + 0x240) = new FUN_009b4d90;
-    (*(FUN_009b4d90**)((char*)this + 0x240))->FUN_009b4ec0(apData);
-}
-
 namespace fnv_0092c4a0 {
 struct FUN_009b4d90
 {
@@ -3535,14 +2879,6 @@ struct MiddleHighProcessH : MiddleHighProcess
     void FUN_0092c4a0();
 };
 
-// @fnv 0x0092c4a0
-void MiddleHighProcessH::FUN_0092c4a0()
-{
-    if (!*(FUN_009b4d90**)((char*)this + 0x240))
-        *(FUN_009b4d90**)((char*)this + 0x240) = new FUN_009b4d90;
-    else
-        (*(FUN_009b4d90**)((char*)this + 0x240))->FUN_009b4dc0();
-}
 }  // namespace fnv_0092c4a0
 
 namespace fnv_0092c5e0 {
@@ -3578,14 +2914,6 @@ struct MiddleHighProcessH2 : MiddleHighProcess
     void FUN_0092c5e0();
 };
 
-// @fnv 0x0092c5e0
-void MiddleHighProcessH2::FUN_0092c5e0()
-{
-    if (!*(FUN_009b4d90**)((char*)this + 0x254))
-        *(FUN_009b4d90**)((char*)this + 0x254) = new FUN_009b4d90;
-    else
-        (*(FUN_009b4d90**)((char*)this + 0x254))->FUN_009b4dc0();
-}
 }  // namespace fnv_0092c5e0
 
 struct VirtObj
@@ -3600,24 +2928,11 @@ struct Host
     void FUN_00913a20(int);
     void FUN_00913fb0(VirtObj*);
 };
-// Reads an int from p via f3() and passes it to FUN_00913a20.
-// @fnv 0x00913fb0
-void Host::FUN_00913fb0(VirtObj* apVirtObj)
-{
-    int tmp = apVirtObj->f3();
-    FUN_00913a20(tmp);
-}
 
 struct FUN_009145c0
 {
     float __thiscall GetControllerPhase();
 };
-
-// @fnv 0x009145c0
-float __thiscall FUN_009145c0::GetControllerPhase()
-{
-    return *reinterpret_cast<float*>(reinterpret_cast<char*>(this) + 0x234);
-}
 
 void _Deallocate(void*);
 struct S9145e0
@@ -3625,15 +2940,6 @@ struct S9145e0
     void FUN_00914610();
     void* FUN_009145e0(unsigned int);
 };
-// Calls FUN_00914610, then if bit 0 of flags is set calls _Deallocate on this, and returns this.
-// @fnv 0x009145e0
-void* S9145e0::FUN_009145e0(unsigned int flags)
-{
-    FUN_00914610();
-    if (flags & 1)
-        _Deallocate(this);
-    return this;
-}
 
 void __cdecl _Deallocate(void*);
 struct Unk147
@@ -3641,15 +2947,6 @@ struct Unk147
     void FUN_00914ae0();
     void* FUN_00914ab0(unsigned int);
 };
-// Calls FUN_00914ae0, then deallocates this if bit 0 of flags is set, and returns this.
-// @fnv 0x00914ab0
-void* Unk147::FUN_00914ab0(unsigned int flags)
-{
-    FUN_00914ae0();
-    if (flags & 1)
-        _Deallocate(this);
-    return this;
-}
 
 struct GO
 {
@@ -3675,23 +2972,11 @@ struct Proxy00917770
     void FUN_00917770(Actor* apActor);
     void FUN_0091d3c0(Actor* a, float b, bool c);
 };
-// Calls FUN_0091d3c0 on apActor with 3600.0f and true.
-// @fnv 0x00917770
-void Proxy00917770::FUN_00917770(Actor* apActor)
-{
-    FUN_0091d3c0(apActor, 3600.0f, true);
-}
 
 struct Thunk0091f100
 {
     void FUN_0091f100(class Actor* apActor);
 };
-// Calls the virtual method at vtable index 498 on this, passing apActor and 0.
-// @fnv 0x0091f100
-void Thunk0091f100::FUN_0091f100(class Actor* apActor)
-{
-    ((void(__thiscall*)(Thunk0091f100*, class Actor*, int))(*(void***)this)[498])(this, apActor, 0);
-}
 
 struct MiddleHighProcessStandIn
 {
@@ -3699,25 +2984,11 @@ struct MiddleHighProcessStandIn
     void* m_pActorNode;
     void* FUN_00922b20(void* apBiped);
 };
-// Returns the stored pointer when apBiped is null, otherwise returns null.
-// @fnv 0x00922b20
-void* MiddleHighProcessStandIn::FUN_00922b20(void* apBiped)
-{
-    if (apBiped == 0)
-        return m_pActorNode;
-    return 0;
-}
 
 struct FUN_00922b60
 {
     void SetFlag(bool abFlag);
 };
-
-// @fnv 0x00922b60
-void FUN_00922b60::SetFlag(bool abFlag)
-{
-    ((char*)this)[0x1da] = abFlag;
-}
 
 struct FUN_00495480_shell
 {
@@ -3729,29 +3000,12 @@ struct Host00929570
     FUN_00495480_shell* seqs[8];
     void FUN_00929570(int aeDirection, FUN_00495480_shell* apSeq);
 };
-// Stores apSeq in seqs[aeDirection] and, if non-null, calls its FUN_00495480 with 1.0f for direction 0 or 0.0f otherwise.
-// @fnv 0x00929570
-void Host00929570::FUN_00929570(int aeDirection, FUN_00495480_shell* apSeq)
-{
-    seqs[aeDirection] = apSeq;
-    if (apSeq)
-        apSeq->FUN_00495480(aeDirection == 0 ? 1.0f : 0.0f);
-}
 
 struct ActorPackage_GetTarget_Helper : ActorPackageContext
 {
     TESObjectREFR* GetTarget();
     TESObjectREFR* GetTargetFromOffset();
 };
-TESObjectREFR* ActorPackage_GetTarget_Helper::GetTarget()
-{
-    return pTarget;
-}
-// @fnv 0x0092b550
-TESObjectREFR* ActorPackage_GetTarget_Helper::GetTargetFromOffset()
-{
-    return ((ActorPackage_GetTarget_Helper*)((char*)this + 4))->GetTarget();
-}
 
 struct FakeProcess
 {
@@ -3761,16 +3015,6 @@ struct FakeProcess
     int _a21C;
     void SetLimbNode(int aeLimb, void* apNode);
 };
-// Stores apNode in the limb array at aeLimb and resets _a218 for limb 1 or _a21C for limb 0.
-// @fnv 0x0092b970
-void FakeProcess::SetLimbNode(int aeLimb, void* apNode)
-{
-    _arr[aeLimb] = apNode;
-    if (aeLimb == 1)
-        _a218 = 0;
-    if (aeLimb == 0)
-        _a21C = 0;
-}
 
 struct LipSyncAnimation
 {
@@ -3780,14 +3024,6 @@ struct MidHighStub
 {
     void SetLipsynchAnim(LipSyncAnimation*);
 };
-// Deletes the existing object at offset 0x1A0 and stores apCreatureLipsynchAnim there.
-// @fnv 0x0092c2e0
-void MidHighStub::SetLipsynchAnim(LipSyncAnimation* apCreatureLipsynchAnim)
-{
-    if (*(LipSyncAnimation**)((char*)this + 0x1A0))
-        delete *(LipSyncAnimation**)((char*)this + 0x1A0);
-    *(LipSyncAnimation**)((char*)this + 0x1A0) = apCreatureLipsynchAnim;
-}
 
 namespace fnv_0091efe0 {
 struct PackageTargetRecord
@@ -3977,44 +3213,6 @@ struct FUN_0091efe0_shell
     bool ProcessPackageTarget(FUN_00891db0_shell* apActor, int ainumb);
 };
 
-// Reads the current package's target and dispatches it to FUN_00891db0 based on the target type, returning whether it succeeded.
-// @fnv 0x0091efe0
-bool FUN_0091efe0_shell::ProcessPackageTarget(FUN_00891db0_shell* apActor, int ainumb)
-{
-    PackageTargetRecord* ptarg;
-    TESPackage* pTargetPackage = 0;
-    int etype;
-    bool bdone;
-
-    pTargetPackage = GetCurrentPackage();
-    ptarg = pTargetPackage->GetTarget();
-    if (!ptarg)
-        return false;
-    etype = ptarg->GetTargetKind();
-    bdone = false;
-    if (ptarg->GetTargetKind() == 0 || ptarg->GetTargetKind() == 3)
-    {
-        ActorPackageContext* pactorPack;
-        pactorPack = GetCurrentActorPackage();
-        if (pactorPack)
-        {
-            TESObjectREFR* pref;
-            pref = (TESObjectREFR*)((TESObjectREFR_GetFlags_Helper*)pactorPack)->CallGetFlags();
-            if (pref)
-                bdone = apActor->FUN_00891db0((void*)((TESObject*)pref)->GetNext(), 0, 1, pref->GetFormID(),
-                                              (char*)this + 0x108);
-        }
-    }
-    else if (etype == 1)
-    {
-        bdone = apActor->FUN_00891db0(ptarg->GetTargetForm(), 0, ainumb, 0, (char*)this + 0x108);
-    }
-    else
-    {
-        bdone = apActor->FUN_00891db0(0, ptarg->GetTargetObjectType(), ainumb, 0, (char*)this + 0x108);
-    }
-    return bdone;
-}
 }  // namespace fnv_0091efe0
 
 namespace fnv_00921120 {
@@ -4295,29 +3493,6 @@ struct PlayerCharacter
 extern IdleAnimationManager* DAT_011cb6a0;
 extern PlayerCharacter* g_thePlayer;
 
-// @fnv 0x00921120
-bool FUN_00921120_shell::FUN_00921120(Actor* apActor)
-{
-    TESIdleForm* pidle =
-        DAT_011cb6a0->FindIdleFormForObject((TESObjectREFR*)apActor, *(TESObjectREFR**)((char*)this + 0x140));
-    Animation* panim;
-    if ((void*)apActor == (void*)g_thePlayer)
-        panim = g_thePlayer->GetAnimation(!g_thePlayer->FUN_004eaf60());
-    else
-        panim = ((ActorV_00921120*)apActor)->GetAnimation();
-    if (!pidle || !panim)
-        return false;
-    panim->FUN_00498030(pidle, apActor, pidle->GetFlagsMasked());
-    if ((void*)apActor == (void*)g_thePlayer && g_thePlayer->FUN_004eaf60())
-    {
-        g_thePlayer->FUN_005c4210(0);
-        pidle = DAT_011cb6a0->FindIdleFormForObject((TESObjectREFR*)apActor, *(TESObjectREFR**)((char*)this + 0x140));
-        if (pidle && (panim = g_thePlayer->GetAnimation(true)) != 0)
-            panim->FUN_00498030(pidle, apActor, pidle->GetFlagsMasked());
-        g_thePlayer->FUN_005c4210(1);
-    }
-    return true;
-}
 }  // namespace fnv_00921120
 
 namespace fnv_00922960 {
@@ -4359,31 +3534,6 @@ struct G2
 extern LH g_011e0424;
 extern bool DAT_011e040c;
 
-// @fnv 0x00922960
-bool FUN_00922960(TESObjectREFR* apRef, long aiFilterData)
-{
-    Actor* pActor = (Actor*)aiFilterData;
-    TESFurniture* pFurniture;
-    if (!pActor)
-        return false;
-    if (!apRef || apRef->IsDeleted() || apRef->IsTemporary() || apRef->GetDisabled() ||
-        (((TESObjectREFR*)pActor)->GetIsChildSize(false) && !((FUN_008859e0_s*)pActor)->FUN_008859e0(apRef)))
-        return false;
-    if (g_011e0424.IsInList((Actor*&)apRef))
-        return false;
-    if (!((RefH*)apRef)->FUN_00568680() || !((TESObjectREFRHelper*)apRef)->IsReferenceActive(false))
-        return false;
-    if (((TESObjectREFRHelper*)apRef)->GetOwner() && !((TESObjectREFRHelper*)apRef)->CanBeUsed(pActor, true))
-        return false;
-    if (((FUN_00575ca0_s*)apRef)->FUN_00575ca0() != ((FUN_00575ca0_s*)pActor)->FUN_00575ca0())
-        return false;
-    pFurniture = (TESFurniture*)((TESObject*)apRef)->GetNext();
-    if (DAT_011e040c && pFurniture->GetCanSitOn())
-        ((G2*)&g_011e0424)->AddHead((int*)&apRef);
-    else if (!DAT_011e040c && pFurniture->GetCanSleepOn())
-        ((G2*)&g_011e0424)->AddHead((int*)&apRef);
-    return false;
-}
 }  // namespace fnv_00922960
 
 struct Calendar
@@ -4645,51 +3795,6 @@ struct FUN_00929820_shell : FUN_008e7c00_shell
     bool FUN_00929820(Actor* actor);
 };
 
-// @fnv 0x00929820
-bool FUN_00929820_shell::FUN_00929820(Actor* actor)
-{
-    if (IsFlag40Set())
-        return false;
-    Calendar* pCalendar = V9F();
-    bool result = false;
-    int proc = DAT_011a3ff0[pCalendar->GetDaysPassed()][VA0()];
-    if (proc == 0x2a)
-    {
-        FUN_009f4640_holder* holder = V9D();
-        if (holder)
-            proc = holder->GetFlagsMappedValue();
-    }
-    switch (proc)
-    {
-    case 0:
-    case 1:
-    case 4:
-    case 5:
-    case 6:
-    case 7:
-    case 0x1b:
-    case 0x1c:
-    case 0x1e:
-    case 0x22:
-    case 0x2c:
-    case 0x2f:
-    case 0x31:
-    case 0x36:
-        if (pCalendar->GetDaysPassed() == 0)
-        {
-            if (pCalendar->V4F(actor, 0, -1.0f, 0))
-                result = true;
-        }
-        else
-        {
-            if (actor->HasEssentialStatus())
-                result = true;
-        }
-        break;
-    }
-    return result;
-}
-
 struct TESObjectWEAP
 {
     int GetWeaponType();
@@ -4702,35 +3807,6 @@ struct FUN_0091e780_s
 {
     void UpdateWeaponTypeFlags();
 };
-// Clears three flags at offsets 0x124-0x126, then sets one based on the weapon type of the crime's target reference.
-// @fnv 0x0091e780
-void FUN_0091e780_s::UpdateWeaponTypeFlags()
-{
-    TESObjectREFR* pcurrentWeapon;
-    ((char*)this)[0x124] = 0;
-    ((char*)this)[0x125] = 0;
-    ((char*)this)[0x126] = 0;
-    if (*(Crime**)((char*)this + 0x114))
-    {
-        pcurrentWeapon = (*(Crime**)((char*)this + 0x114))->GetTarget();
-        if (pcurrentWeapon)
-        {
-            switch (((TESObjectWEAP*)pcurrentWeapon)->GetWeaponType())
-            {
-            case 10:
-                ((char*)this)[0x124] = 1;
-                break;
-            case 11:
-            case 12:
-                ((char*)this)[0x125] = 1;
-                break;
-            case 13:
-                ((char*)this)[0x126] = 1;
-                break;
-            }
-        }
-    }
-}
 
 namespace fnv_0091ecf0 {
 struct Actor;
@@ -5406,40 +4482,6 @@ struct ProcessVtbl
     virtual void V828(bool);
 };
 
-// Reads the current package, updates its schedule index, clamps it to the package's day range, and starts the package when the schedule entry matches 0x36.
-// @fnv 0x0091ecf0
-void FUN_0091ecf0_shell::UpdatePackageSchedule(MobileObject* apActor, int aiScheduleIndex)
-{
-    TESPackage* pTargetPackage = ((ProcessVtbl*)this)->V27C();
-    ((ProcessVtbl*)this)->V828(false);
-    if (((ProcessVtbl*)this)->V20C())
-    {
-        ((ProcessVtbl*)this)->V220(aiScheduleIndex);
-    }
-    else
-    {
-        ((ProcessVtbl*)this)->V240(aiScheduleIndex);
-    }
-    if (((ProcessVtbl*)this)->V280() < 0)
-    {
-        ((ProcessVtbl*)this)->V284(0);
-    }
-    if (pTargetPackage && ((Calendar*)pTargetPackage)->GetDaysPassed() != -1)
-    {
-        int irange = FUN_0096a820(((Calendar*)pTargetPackage)->GetDaysPassed());
-        if (((ProcessVtbl*)this)->V280() >= irange)
-        {
-            ((ProcessVtbl*)this)->V284(irange - 1);
-        }
-        if (DAT_011a3ff0[((Calendar*)pTargetPackage)->GetDaysPassed()][((ProcessVtbl*)this)->V280()] == 0x36 &&
-            !((ProcessVtbl*)this)->V5A4())
-        {
-            SC_008c48d0::GetLocalData(pTargetPackage, ((::MobileObject*)apActor)->GetExtraData(), 0x400);
-            ((ProcessVtbl*)this)->V5A0(apActor, pTargetPackage);
-            ((ProcessVtbl*)this)->V5A8(true);
-        }
-    }
-}
 }  // namespace fnv_0091ecf0
 
 namespace fnv_00923020 {
@@ -5763,42 +4805,6 @@ struct MHPActorView_923020
     virtual bool Unk_8B(bool);
 };
 
-// @fnv 0x00923020
-void FUN_00923020_shell::UpdateWeaponAnimation(Actor* apActor)
-{
-    ANIM_GROUP_WEAPON_ENUM eWeaponGroup;
-    TESObjectWEAP* apWeapon;
-    BSSimpleList<char const*>* pfileList;
-    if (*(bool*)((char*)this + 0xe2) && ((MHPActorView_923020*)apActor)->GetNiNode())
-    {
-        if (*(Animation**)((char*)this + 0x1c0) && *(ItemChange_S**)((char*)this + 0x114))
-        {
-            apWeapon = (*(ItemChange_S**)((char*)this + 0x114))->FUN_0044ddc0();
-            eWeaponGroup = DAT_0118a838[apWeapon->GetWeaponType()];
-            if (!(*(FUN_00493830_shell**)((char*)this + 0x1c0))->FUN_00493830() &&
-                (*(Animation**)((char*)this + 0x1c0))->FUN_00496940() &&
-                !(*(Animation**)((char*)this + 0x1c0))
-                     ->IsGroupQueued(TESAnimGroup::AnimGroup(0, eWeaponGroup, 0x18, false)) &&
-                !((MHPActorView_923020*)apActor)->Unk_8B(true))
-            {
-                pfileList = g_modelLoader->GetModelFileList(((GM_008b2010*)apActor)->GetModelFilePath(), true, false,
-                                                            eWeaponGroup);
-                (*(Animation**)((char*)this + 0x1c0))->FUN_00490400(pfileList);
-            }
-        }
-        if (*(Animation**)((char*)this + 0x1c0) && (*(FUN_00493830_shell**)((char*)this + 0x1c0))->FUN_00493830())
-            return;
-        if (((Actor_S*)apActor)->FUN_005722c0(false))
-            ((Actor_S*)apActor)->FUN_00571b50();
-        else
-            ((MHP_S*)this)
-                ->UpdateWeaponDrawnAnimation(*(bool*)((char*)this + 0x135),
-                                             ((MHPActorView_923020*)apActor)->GetValidBip01Names(),
-                                             ((MHPActorView_923020*)apActor)->GetAnimData(), apActor);
-        *(bool*)((char*)this + 0xe2) = false;
-        *(bool*)((char*)this + 0xe3) = false;
-    }
-}
 }  // namespace fnv_00923020
 
 namespace fnv_00923960 {
@@ -6583,78 +5589,6 @@ struct NodeV
     virtual void v55(NiNode*, bool);
 };
 
-// Plays the draw/holster animation group on the actor, updates the animation, and reparents the weapon bone to the sequence's parent node.
-// @fnv 0x00923960
-void FUN_00923960_shell::UpdateWeaponDrawnAnimation(bool abDrawn, BipedAnim* apBiped, Animation* apAnim, Actor* apActor)
-{
-    NiNode* pweaponBone;
-    ANIM_GROUP_ENUM egroup;
-    BSAnimGroupSequence* pseq;
-    unsigned short sgroup;
-
-    if (apAnim && ((FUN_00496940_t*)apAnim)->FUN_00496940())
-    {
-        pweaponBone = ((ProcV*)this)->v100(apBiped);
-        pseq = ((FUN_00491040_t*)apAnim)->FUN_00491040(4);
-        egroup = abDrawn ? (ANIM_GROUP_ENUM)0x18 : (ANIM_GROUP_ENUM)0x17;
-        if (pseq && (DAT_011977e4[((TESAnimGroupX*)((FUN_0048f7f0_t*)pseq)->FUN_0048f7f0())->GetType()][0] == 8 ||
-                     DAT_011977e4[((TESAnimGroupX*)((FUN_0048f7f0_t*)pseq)->FUN_0048f7f0())->GetType()][0] == 7))
-            return;
-        if (!pseq || (((TESAnimGroupX*)((FUN_0048f7f0_t*)pseq)->FUN_0048f7f0())->GetType() != 0x18 &&
-                      ((TESAnimGroupX*)((FUN_0048f7f0_t*)pseq)->FUN_0048f7f0())->GetType() != 0x19))
-        {
-            sgroup = ((FUN_00897910_t*)apActor)
-                         ->FUN_00897910(egroup, (*(InventoryStackRecord**)((char*)this + 0x114)),
-                                        (*(InventoryStackRecord**)((char*)this + 0x114)) == 0, apAnim);
-            if (GetType(sgroup) == egroup)
-            {
-                pseq = apAnim->PlayGroup(sgroup, 1, -1, -1);
-                if (egroup == 0x18)
-                    ((ProcV*)this)->v251(0, pseq);
-            }
-        }
-        if (pseq)
-        {
-            NiNode* pnewParent;
-            NiNode* p3d;
-            if (((FUN_005722c0_t*)apActor)->FUN_005722c0(0))
-            {
-                ((FUN_0098adb0_shell*)pseq)->FUN_0098adb0(((FUN_00508100_shell*)pseq)->FUN_00508100());
-                apAnim->Update((TESObjectREFR*)apActor, 0.0f, ((FUN_00508100_shell*)pseq)->FUN_00508100());
-                apAnim->UpdateMovement((TESObjectREFR*)apActor);
-            }
-            p3d = (NiNode*)(apBiped ? (unsigned int)*(Flt*)apBiped : 0);
-            if (!p3d)
-                p3d = ((RefV*)apActor)->v116();
-            if (p3d && !pweaponBone && (*(InventoryStackRecord**)((char*)this + 0x114)))
-            {
-                ((ProcV*)this)->v88((*(InventoryStackRecord**)((char*)this + 0x114)), p3d, 0);
-                pweaponBone = ((ProcV*)this)->v100(apBiped);
-            }
-            pnewParent = (NiNode*)FUN_004aae30(
-                (NiAVObject*)p3d, ((FUN_00671d10_t*)((FUN_0048f7f0_t*)pseq)->FUN_0048f7f0())->FUN_00671d10());
-            if (pnewParent)
-            {
-                ((NodeV*)pnewParent)->v55(pweaponBone, true);
-                ((HX*)apActor)->GetWeaponObject();
-            }
-            else
-            {
-                FNV_Warning("ANIMATION: Animation '%s' doesn't have a 'prn: ...' to reparent the weapon bone.",
-                            (const char*)*(NiFixedStr*)&((FUN_00413f40_t*)pseq)->FUN_00413f40());
-            }
-        }
-        else
-        {
-            FNV_Warning(
-                "AI: Missing %s animation for '%s' (%08X) weapon '%s'.", abDrawn ? g_011d3cdc_arg1 : "Holster",
-                ((RefV*)apActor)->v76(), ((::TESForm*)apActor)->GetFormID(),
-                (*(InventoryStackRecord**)((char*)this + 0x114))
-                    ? (const char*)((FUN_004be2d0_t*)(*(InventoryStackRecord**)((char*)this + 0x114)))->GetTargetFullName()
-                    : $SG7836);
-        }
-    }
-}
 }  // namespace fnv_00923960
 
 namespace fnv_0092c0c0 {
@@ -6672,10 +5606,6 @@ struct FUN_0092c0c0
     GO m2;
     FUN_0092c0c0();
 };
-// Initializes the two GO members m1 and m2 with 0.
-// @fnv 0x0092c0c0
-FUN_0092c0c0::FUN_0092c0c0() : m1(0), m2(0)
-{}
 }  // namespace fnv_0092c0c0
 
 namespace fnv_0092c540 {
@@ -6692,14 +5622,6 @@ struct FUN_0092c540
     void SetHitData(FUN_009b4d90* apData);
 };
 
-// Allocates a FUN_009b4d90 at this+0x254 if null, then calls its FUN_009b4ec0 with apData.
-// @fnv 0x0092c540
-void FUN_0092c540::SetHitData(FUN_009b4d90* apData)
-{
-    if (!((FUN_009b4d90**)((char*)this + 0x254))[0])
-        ((FUN_009b4d90**)((char*)this + 0x254))[0] = new FUN_009b4d90;
-    ((FUN_009b4d90**)((char*)this + 0x254))[0]->FUN_009b4ec0(apData);
-}
 }  // namespace fnv_0092c540
 
 namespace fnv_009293b0 {
@@ -6733,25 +5655,6 @@ struct FUN_009293b0_StandIn
     void AddUniqueValue(int);
 };
 
-// @fnv 0x009293b0
-void FUN_009293b0_StandIn::AddUniqueValue(int value)
-{
-    if (value == 0)
-    {
-    }
-    else
-    {
-        if (!m_pEntries)
-        {
-            m_pEntries = reinterpret_cast<LH*>(new SL);
-        }
-
-        if (!m_pEntries->IsInList(value))
-        {
-            reinterpret_cast<G2*>(m_pEntries)->AddHead(&value);
-        }
-    }
-}
 }  // namespace fnv_009293b0
 
 namespace fnv_00929d40 {
@@ -6797,33 +5700,6 @@ struct MiddleHighProcessStandIn
     void UpdateShotsPerSecond(bool);
 };
 
-// Sets fShotsPerSecond to the reciprocal of the weapon's rate when it is automatic and shooting is started, otherwise zero.
-// @fnv 0x00929d40
-void MiddleHighProcessStandIn::UpdateShotsPerSecond(bool abStartShooting)
-{
-    TESObjectWEAP* pweapon;
-    float pSPS;
-
-    if (pWeapon == 0 || pAmmo == 0)
-    {
-        fShotsPerSecond = 0.0f;
-    }
-    else
-    {
-        pweapon = reinterpret_cast<TESObjectWEAP*>(pWeapon->GetTarget());
-
-        if (pweapon->GetIsAutomaticWeapon() && abStartShooting)
-        {
-            pSPS = reinterpret_cast<TESCreature*>(pweapon)->FUN_00821640() *
-                   reinterpret_cast<FUN_00646020_shell*>(pweapon)->FUN_00646020(pWeapon->SetEquipmentState(8));
-            fShotsPerSecond = 1.0f / pSPS;
-        }
-        else
-        {
-            fShotsPerSecond = 0.0f;
-        }
-    }
-}
 }  // namespace fnv_00929d40
 
 // FUN_009139b0 : clears a 0x14-byte state block, resets a sub-object and returns this.
@@ -6847,22 +5723,6 @@ struct FUN_009139b0_cls
     Member14_b5364 m_14;
     FUN_009139b0_cls* FUN_009139b0();
 };
-
-// @fnv 0x009139b0
-FUN_009139b0_cls* FUN_009139b0_cls::FUN_009139b0()
-{
-    m_00 = 0;
-    m_04 = 0;
-    m_08 = 0;
-    m_0c = 0;
-    m_0d = 0;
-    m_0e = 0;
-    m_0f = 0;
-    m_10 = 0;
-    m_11 = 0;
-    m_14.FUN_00528cb0(0);
-    return this;
-}
 
 struct FUN_00867510
 {
@@ -7110,104 +5970,6 @@ struct FUN_00913fe0 : FUN_0092c950
     int m_254;
     int m_258;
 };
-// Initializes the object's members and sub-objects to zero/default values, allocates p_2c and m_1b8, and calls several setup methods.
-// @fnv 0x00913fe0
-FUN_00913fe0::FUN_00913fe0() : m_11c(0), m_120(0), m_138(0), m_148(0xff), m_220(0)
-{
-    p_2c = new FUN_00867510;
-    FUN_008d8140(0);
-    FUN_008d8180(0);
-    m_fc.f_18 = 0;
-    m_fc.f_1c = 0;
-    m_130 = 0;
-    m_12c = 0;
-    m_127 = 0;
-    m_128 = 0;
-    m_129 = 0;
-    m_12a = 0;
-    m_124 = 0;
-    m_125 = 0;
-    m_126 = 0;
-    m_148.f_10 = 0;
-    m_148.f_14 = 0;
-    m_1b8 = new FUN_0096a2d0;
-    m_e4.FUN_008c5ef0();
-    m_1c0 = 0;
-    memset(&m_1c4, 0, 0xc);
-    memset(arr_1dc, 0, 0x3c);
-    m_218 = 0;
-    m_21c = 0;
-    m_1d0 = 0.0f;
-    m_1d4 = 0.0f;
-    m_1d8 = 1;
-    m_134 = 0;
-    m_135 = 0;
-    *(unsigned char*)&m_138.f_04 = 0;
-    m_58 = 0;
-    *(unsigned char*)((char*)&m_138.f_04 + 1) = 0;
-    m_138.f_08 = 0;
-    *(unsigned char*)&m_138.f_0c = 0x7f;
-    m_148.FUN_00c54550(0.0f);
-    m_148.FUN_00568ab0(0);
-    m_148.FUN_0098ddd0(&DAT_011f426c);
-    m_d8 = 0.0f;
-    m_1da = 0;
-    m_220.FUN_0066b0d0(0);
-    m_fc.f_0c = 0;
-    m_dc = 0.0f;
-    m_148.f_1c = 0;
-    m_148.f_20 = 0;
-    m_148.f_24 = 0;
-    m_148.f_28 = 1.0f;
-    m_148.f_2c = 0.0f;
-    m_148.f_30 = 0;
-    m_148.f_3c = 0;
-    m_148.f_38 = 0;
-    m_e0 = 0;
-    f_a4 = 0.0f;
-    m_148.f_40 = 0;
-    m_148.f_41 = 0;
-    m_148.f_34 = 0;
-    m_148.f_35 = 0;
-    m_148.f_36 = 0;
-    m_148.f_37 = 0;
-    m_220.f_04 = 0;
-    m_148.f_42 = 0;
-    m_148.f_43 = 0;
-    m_148.f_44 = 0;
-    m_148.f_45 = 0;
-    m_148.f_48 = -1;
-    m_148.f_4c = 0;
-    m_148.f_50 = DAT_01012054;
-    m_11c.FUN_006f74f0(0);
-    m_120.FUN_0092c8b0(0);
-    *(unsigned char*)&m_220.f_08 = 0;
-    m_230 = 0;
-    m_148.f_64 = 0;
-    *(short*)((char*)&m_220.f_08 + 2) = 2;
-    m_e1 = 0;
-    m_148.f_54 = 0;
-    m_148.f_55 = 0;
-    m_148.f_60 = -1;
-    m_fc.f_10 = 0;
-    m_e2 = 0;
-    m_e3 = 0;
-    m_148.f_58 = 0;
-    m_220.f_0c = 0;
-    m_238 = 0.0f;
-    m_23c = 0.0f;
-    m_234 = 0.0f;
-    m_148.f_5c = 0;
-    m_240 = 0;
-    m_254 = 0;
-    m_fc.f_14 = 0;
-    m_248 = 0;
-    m_24c = 0;
-    m_250 = 0;
-    m_244 = -1;
-    FUN_0061cc40(1);
-    m_258 = 0;
-}
 
 namespace fnv_00914c60 {
 struct PkgHelper
@@ -7613,134 +6375,6 @@ struct Shell914 : public MiddleHighProcess
     void FUN_00914c60(MiddleHighProcess* other);
 };
 
-// @fnv 0x00914c60
-void Shell914::FUN_00914c60(MiddleHighProcess* apSource)
-{
-    QNode* qcur8;
-    BSSimpleList<TESObjectREFR*>* cur5;
-    AENode* acurA;
-    FUN_009139b0* srcItem2;
-    FUN_009139b0* newItem2;
-    ((PkgHelper*)&apSource->PackageReference)->MovePackageData(&PackageReference);
-    m_kPackageTargetPosition.x = apSource->m_kPackageTargetPosition.x;
-    m_kPackageTargetPosition.y = apSource->m_kPackageTargetPosition.y;
-    m_kPackageTargetPosition.z = apSource->m_kPackageTargetPosition.z;
-    pCurrentAnimation = apSource->pCurrentAnimation;
-    apSource->pCurrentAnimation = 0;
-    if (pCurrentAnimation != 0)
-    {
-        ((AnimHelper*)pCurrentAnimation)->FUN_00496080(1, 0.0f);
-    }
-    pWeapon = apSource->pWeapon;
-    pAmmo = apSource->pAmmo;
-    m_bFirstWeaponFlag = apSource->m_bFirstWeaponFlag;
-    m_bSecondWeaponFlag = apSource->m_bSecondWeaponFlag;
-    m_bThirdWeaponFlag = apSource->m_bThirdWeaponFlag;
-    m_bFourthWeaponFlag = apSource->m_bFourthWeaponFlag;
-    m_bFifthWeaponFlag = apSource->m_bFifthWeaponFlag;
-    m_bSixthWeaponFlag = apSource->m_bSixthWeaponFlag;
-    m_bSeventhWeaponFlag = apSource->m_bSeventhWeaponFlag;
-    m_bFirstActorFlag = ((VirtSrc*)apSource)->v275();
-    m_bAdditionalActorFlag = ((VirtSrc*)apSource)->v277();
-    m_cCharacterControllerState = apSource->m_cCharacterControllerState;
-    m_pSecondMagicItem = apSource->m_pSecondMagicItem;
-    m_bPackageStateFlag3 = apSource->m_bPackageStateFlag3;
-    m_pActorObject = apSource->m_pActorObject;
-    m_pActorNode = apSource->m_pActorNode;
-    m_bAiming = apSource->m_bAiming;
-    m_bAimStateFlag = apSource->m_bAimStateFlag;
-    apSource->m_pActorObject = 0;
-    apSource->pWeapon = 0;
-    apSource->pAmmo = 0;
-    apSource->m_bFirstWeaponFlag = 0;
-    apSource->m_bThirdWeaponFlag = 0;
-    apSource->m_bSecondWeaponFlag = 0;
-    m_ePackageObjectType = apSource->m_ePackageObjectType;
-    m_kEighthUnshownMember = apSource->m_kEighthUnshownMember;
-    m_pPackageIdleForm = apSource->m_pPackageIdleForm;
-    {
-        cur5 = &apSource->m_kReferenceList;
-        while (cur5 != 0 && cur5->GetItem() != 0)
-        {
-            m_kReferenceList.AddHead(cur5->GetItem());
-            cur5 = cur5->GetNext();
-        }
-    }
-    {
-        qcur8 = (QNode*)apSource->m_pkPaddedFloatRecordList;
-        while (qcur8 != 0 && *qcur8->FUN_006815c0() != 0)
-        {
-            if (m_pkPaddedFloatRecordList == 0)
-            {
-                m_pkPaddedFloatRecordList = (BSSimpleList<PaddedFloatRecord*>*)new FUN_0096a2d0;
-            }
-            srcItem2 = *qcur8->FUN_006815c0();
-            newItem2 = new FUN_009139b0;
-            newItem2->m_00 = srcItem2->m_00;
-            newItem2->m_0c = srcItem2->m_0c;
-            newItem2->m_08 = srcItem2->m_08;
-            newItem2->m_04 = srcItem2->m_04;
-            newItem2->m_0d = srcItem2->m_0d;
-            newItem2->m_0e = srcItem2->m_0e;
-            newItem2->m_10 = srcItem2->m_10;
-            newItem2->m_11 = srcItem2->m_11;
-            newItem2->m_0f = srcItem2->m_0f;
-            newItem2->m_14.FUN_0092c820(srcItem2->m_14);
-            ((FUN_0096a2d0*)m_pkPaddedFloatRecordList)->FUN_005ae3d0(&newItem2);
-            qcur8 = qcur8->FUN_00726070();
-        }
-    }
-    m_bAnimationStateFlag = ((VirtSrc*)apSource)->v316();
-    m_ucFurnitureInteractionState = apSource->m_ucFurnitureInteractionState;
-    m_pFurnitureReference = apSource->m_pFurnitureReference;
-    if (m_pFurnitureReference != 0)
-    {
-        ((FurnHelper*)m_pFurnitureReference)->FUN_00564db0(1);
-    }
-    m_ucFurnitureMarkerIndex = apSource->m_ucFurnitureMarkerIndex;
-    memcpy(&FurnitureMarker, &apSource->FurnitureMarker, 0x10);
-    memcpy(m_apBodyPartNodes, apSource->m_apBodyPartNodes, 0x3c);
-    m_pFirstAttachedObject = apSource->m_pFirstAttachedObject;
-    m_pSecondAttachedObject = apSource->m_pSecondAttachedObject;
-    m_pLightingProperty = ((VirtSrc*)apSource)->v318();
-    ((AEList*)m_pActiveEffectList)->FUN_00470470();
-    {
-        acurA = ((VirtSrc*)apSource)->v238();
-        while (acurA != 0 && !acurA->FUN_008256d0())
-        {
-            ((AEList*)m_pActiveEffectList)->FUN_005ae3d0((*acurA->FUN_006815c0())->v4());
-            acurA = acurA->FUN_00726070();
-        }
-    }
-    m_pCombatTarget = apSource->m_pCombatTarget;
-    m_pEquippedWeapon = apSource->m_pEquippedWeapon;
-    ((SPtrHelper*)&m_pCharacterController)->FUN_006e5cc0((SPtrHelper*)&apSource->m_pCharacterController);
-    m_bWeaponOut = apSource->m_bWeaponOut;
-    m_pEffectShader = apSource->m_pEffectShader;
-    m_fFirstEffectShaderValue = apSource->m_fFirstEffectShaderValue;
-    m_fSecondEffectShaderValue = apSource->m_fSecondEffectShaderValue;
-    m_pBound = apSource->m_pBound;
-    m_bCombatStateFlag = apSource->m_bCombatStateFlag;
-    m_ucProcessState = apSource->m_ucProcessState;
-    m_bEquipStateFlag = apSource->m_bEquipStateFlag;
-    m_iIdleState = apSource->m_iIdleState;
-    m_pCurrentIdleForm = apSource->m_pCurrentIdleForm;
-    m_fIdleAnimationTime = apSource->m_fIdleAnimationTime;
-    m_pArrowProjectileList = apSource->m_pArrowProjectileList;
-    apSource->m_pArrowProjectileList = 0;
-    ((HeadPtr*)&m_pQueuedWeaponFile)->FUN_0092c820(*(HeadPtr*)&apSource->m_pQueuedWeaponFile);
-    ((HeadPtr2*)&m_pWeaponData)->AssignPointer((HeadPtr2*)&apSource->m_pWeaponData);
-    m_kFieldAfterWeaponFlags = apSource->m_kFieldAfterWeaponFlags;
-    m_sBoundDataValue = apSource->m_sBoundDataValue;
-    m_fAnimationTime = apSource->m_fAnimationTime;
-    m_kEleventhUnshownMember = apSource->m_kEleventhUnshownMember;
-    m_fFirstFaceGenValue = apSource->m_fFirstFaceGenValue;
-    m_fSecondFaceGenValue = apSource->m_fSecondFaceGenValue;
-    m_kTenthUnshownMember = apSource->m_kTenthUnshownMember;
-    m_pFirstFaceGenNode = apSource->m_pFirstFaceGenNode;
-    m_pSecondFaceGenNode = apSource->m_pSecondFaceGenNode;
-    m_pFaceGenObject = apSource->m_pFaceGenObject;
-}
 }  // namespace fnv_00914c60
 
 class TESBoundObject
@@ -7768,55 +6402,11 @@ struct ProcessUpdate : MiddleHighProcess
 {
     void FUN_00915bc0(Actor*, bool, bool);
 };
-// @fnv 0x00915bc0
-void ProcessUpdate::FUN_00915bc0(Actor* actor, bool advance, bool force)
-{
-    TESNPC* i = dynamic_cast<TESNPC*>(actor->GetObjectReference());
-    TESCreature* s = dynamic_cast<TESCreature*>(actor->GetObjectReference());
-    TESPackage* h = GetCurrentPackage();
-    bool p = true;
-    bool a = true;
-    if (h)
-    {
-        if (h->FUN_0041ca90() == 4)
-        {
-            force = true;
-            p = false;
-            a = false;
-        }
-        else if (h->FUN_00441b00())
-        {
-            a = false;
-        }
-    }
-    if (i)
-    {
-        i->FUN_006047c0(actor, p, a, force, true);
-    }
-    else if (s)
-    {
-        s->FUN_005f9e00(actor, p, a, true);
-    }
-    if (actor && actor->GetProcess())
-    {
-        actor->GetProcess()->ResetActorModel(1);
-    }
-    if (advance)
-    {
-        SetProcessTarget(actor, 1);
-    }
-}
 
 struct FUN_00915d20_shell : public MiddleHighProcess
 {
     void FUN_00915d20(unsigned char value);
 };
-
-// @fnv 0x00915d20
-void FUN_00915d20_shell::FUN_00915d20(unsigned char value)
-{
-    *reinterpret_cast<unsigned char*>(&m_bFirstActorFlag) = value;
-}
 
 extern "C" Actor* DAT_011dea3c;
 
@@ -7835,30 +6425,6 @@ struct WeaponDrawProcess : MiddleHighProcess
 {
     void FUN_00915d60(Actor* actor, bool drawn);
 };
-
-// @fnv 0x00915d60
-void WeaponDrawProcess::FUN_00915d60(Actor* actor, bool drawn)
-{
-    if (m_bAdditionalActorFlag != drawn)
-    {
-        m_bAdditionalActorFlag = drawn;
-        if (actor && !m_bAdditionalActorFlag)
-        {
-            PlayAnimation(m_bAdditionalActorFlag, reinterpret_cast<BipedAnim*>(actor->GetValidBip01Names()),
-                          reinterpret_cast<Animation*>(actor->GetAnimData()), actor);
-        }
-    }
-
-    if (actor && actor != DAT_011dea3c && m_bAdditionalActorFlag && pWeapon)
-    {
-        typedef void(__thiscall * WeaponChangeCallback)(Actor*, int);
-        reinterpret_cast<WeaponChangeCallback>((*reinterpret_cast<void***>(actor))[0xfb])(
-            actor, reinterpret_cast<WeaponEquipmentAccess*>(pWeapon)->FUN_0044ddc0(
-                       0, reinterpret_cast<WeaponEquipmentAccess*>(pWeapon)->HasEffect(2, 0)));
-    }
-
-    reinterpret_cast<ActorWeaponAccess*>(actor)->FUN_00884f80();
-}
 
 struct ActorCalls
 {
@@ -7916,125 +6482,6 @@ struct FUN_00916880_shell : MiddleHighProcess
     bool TryStartCombatAction(Actor*, Actor*, bool, bool, int, bool, bool, bool, bool, bool, bool, bool, int);
 };
 
-// Checks package, combat controller and distance conditions, then dispatches the actor's combat action and returns whether it proceeded.
-// @fnv 0x00916880
-bool FUN_00916880_shell::TryStartCombatAction(Actor* actor, Actor* target, bool deferAction, bool secondaryAction,
-                                              int movementOption, bool optionA, bool optionB, bool optionC,
-                                              bool optionD, bool stopReason, bool skipDistanceCheck, bool extraOption,
-                                              int callbackValue)
-{
-    if (HasCombatStarted())
-        return false;
-    TESPackage* pkg = GetCurrentPackage();
-    if (!deferAction && pkg && reinterpret_cast<PackageCalls*>(pkg)->FUN_0041ca90() == 9 &&
-        !reinterpret_cast<PackageFilter>((*reinterpret_cast<void***>(pkg))[0x140 / 4])(pkg, target, actor, 0,
-                                                                                       DAT_01012054, 0))
-        return false;
-
-    if (target == 0 && movementOption == 0)
-    {
-        reinterpret_cast<ProcessAction>((*reinterpret_cast<void***>(actor))[0x424 / 4])(actor, 0, 0, 0, 0, 0, 0, 0,
-                                                                                        callbackValue);
-    }
-    else
-    {
-        if (target)
-        {
-            if (reinterpret_cast<ActorCalls*>(target)->FUN_00931850() !=
-                    reinterpret_cast<ActorCalls*>(actor)->FUN_00931850() &&
-                actor->GetNiNode() == 0)
-                FUN_0090dc10(actor, target, deferAction, secondaryAction, movementOption, optionA, optionB, optionC,
-                             optionD, skipDistanceCheck, 0, 1, 0);
-        }
-
-        if (reinterpret_cast<ActorCalls*>(actor)->FUN_00437bf0() ||
-            reinterpret_cast<ActorCalls*>(actor)->FUN_00437bd0())
-            return false;
-
-        if (target && !actor->GetCombatController() && !stopReason && DAT_011f1958->FUN_008d0300(actor, target))
-        {
-            reinterpret_cast<ImmediateAction>((*reinterpret_cast<void***>(actor))[0x410 / 4])(
-                actor, target, 1, 1, 1, 0, 0, DAT_01012054, DAT_01012054);
-            if (target == DAT_011dea3c && reinterpret_cast<ActorCalls*>(DAT_011dea3c)->FUN_008a8230(actor) > 0)
-                reinterpret_cast<ActorCalls*>(DAT_011dea3c)->FUN_0093a690(actor);
-            return true;
-        }
-
-        if (actor->GetCombatController() && target && movementOption == 0 &&
-            reinterpret_cast<ControllerCalls*>(
-                reinterpret_cast<ControllerForTarget>((*reinterpret_cast<void***>(actor))[0x428 / 4])(actor, target))
-                ->FUN_0097fa10())
-            return false;
-
-        if (target == DAT_011dea3c && !stopReason)
-        {
-            if (reinterpret_cast<ActorCalls*>(DAT_011dea3c)->FUN_00953c20() >= *DAT_011ccffc.FUN_0043d4d0())
-                return false;
-        }
-
-        if (target)
-        {
-            bool bTargetHasCondition = reinterpret_cast<ActorCalls*>(target)->FUN_005a2030();
-            if (!reinterpret_cast<ActorCalls*>(actor)->FUN_0087f3b0() && bTargetHasCondition)
-                return false;
-            if (reinterpret_cast<ActorCalls*>(actor)->FUN_0087f570() && !bTargetHasCondition)
-                return false;
-        }
-
-        ResetMovementState();
-        TESPackage* runningPackage = GetOneTimePackage();
-        if (runningPackage && reinterpret_cast<PackageCalls*>(runningPackage)->FUN_00678610())
-            runningPackage = reinterpret_cast<TESPackage*>(
-                reinterpret_cast<ProcessToken*>(reinterpret_cast<ActorCalls*>(actor)->FUN_005d43c0())->FUN_0041cb10());
-
-        if (target && runningPackage && reinterpret_cast<PackageCalls*>(runningPackage)->HasFlag400000() &&
-            !stopReason && !skipDistanceCheck)
-        {
-            NiPoint3 destination = GetActorTargetPosition(actor, false);
-            float radius = static_cast<float>(reinterpret_cast<PackageCalls*>(runningPackage)->FUN_00676280(actor));
-            if (radius < DAT_01012070)
-                radius = DAT_0101786c;
-            if (radius < reinterpret_cast<ActorCalls*>(target)->FUN_00572380(&destination) &&
-                target->GetCombatController() &&
-                !reinterpret_cast<ControllerCalls*>(reinterpret_cast<ControllerForTarget>(
-                                                        (*reinterpret_cast<void***>(target))[0x428 / 4])(target, actor))
-                     ->FUN_0097fa10())
-            {
-                SetEssentialFlag(true);
-                return false;
-            }
-        }
-
-        if (!actor->GetCombatController())
-        {
-            SetEssentialFlag(false);
-            actor->Unk_A2();
-            m_pDetectionData64 = m_pDetectionData60;
-            m_pDetectionData60 = 0;
-        }
-        bool isAggressor = optionC;
-        if (actor->Unk_C1())
-            isAggressor = false;
-        if (target && reinterpret_cast<ActorCalls*>(target)->FUN_00493bb0() && target->GetCombatController() &&
-            reinterpret_cast<ControllerCalls*>(
-                reinterpret_cast<ControllerForTarget>((*reinterpret_cast<void***>(target))[0x428 / 4])(target, actor))
-                ->FUN_0097fa10())
-            isAggressor = false;
-        SetProcessTaskComplete(isAggressor);
-
-        int timedStop = 0;
-        if (stopReason)
-            timedStop = 200;
-        reinterpret_cast<ProcessAction>((*reinterpret_cast<void***>(actor))[0x424 / 4])(
-            actor, target, movementOption, stopReason, isAggressor, optionA, timedStop, extraOption, callbackValue);
-
-        if (target == DAT_011dea3c && reinterpret_cast<ActorCalls*>(actor)->FUN_00493bb0() &&
-            reinterpret_cast<ActorCalls*>(DAT_011dea3c)->FUN_008a8230(actor) > 0)
-            reinterpret_cast<ActorCalls*>(DAT_011dea3c)->FUN_0093a690(actor);
-    }
-    return true;
-}
-
 extern float DAT_01012054;
 class FUN_009180b0_cls
 {
@@ -8042,18 +6489,6 @@ class FUN_009180b0_cls
     unsigned char FUN_008b3690(NiPoint3* pos, unsigned int a4, unsigned int a5, float fTime, unsigned int a7);
     unsigned char FUN_009180b0(Actor* self, NiPoint3 a1, unsigned int a4, unsigned int a5);
 };
-
-// If the actor's state is 4 or 9, calls Unk_106 and returns 0; otherwise forwards the position, two ints, DAT_01012054 and 0 to FUN_008b3690.
-// @fnv 0x009180b0
-unsigned char FUN_009180b0_cls::FUN_009180b0(Actor* self, NiPoint3 kPosition, unsigned int a4, unsigned int a5)
-{
-    if (self->Unk_85() == 4 || self->Unk_85() == 9)
-    {
-        self->Unk_106();
-        return 0;
-    }
-    return ((FUN_009180b0_cls*)self)->FUN_008b3690(&kPosition, a4, a5, DAT_01012054, 0);
-}
 
 struct PackageForTarget
 {
@@ -8099,33 +6534,6 @@ struct TargetProcess : MiddleHighProcess
     virtual TESObjectREFR* ResolveTarget(Actor*, TESPackage*);
     bool FUN_0091aca0(Actor* actor);
 };
-// @fnv 0x0091aca0
-bool TargetProcess::FUN_0091aca0(Actor* actor)
-{
-    SetTarget(0);
-    PackageForTarget* package = 0;
-    package = (PackageForTarget*)GetOneTimePackage();
-    if (!package || (!package->FUN_00671d10() && package->FUN_0041ca90() != 12 && package->FUN_0041ca90() != 13))
-        return false;
-    SetTarget(ResolveTarget(actor, (TESPackage*)package));
-    if (pTarget)
-    {
-        if (((TargetReference*)pTarget)->FUN_00576d30())
-        {
-            SetTarget(0);
-            return false;
-        }
-        else if (((TargetReference*)pTarget)->FUN_00440d80())
-        {
-            if (((TargetReference*)pTarget)->FUN_005d43c0()->FUN_0041c8d0())
-                SetTarget(((TargetReference*)pTarget)->FUN_005d43c0()->FUN_0041c8d0());
-        }
-        m_kPackageTargetPosition = *pTarget->GetPos();
-        ((TargetReference*)pTarget)->FUN_00564db0(true);
-        return true;
-    }
-    return false;
-}
 
 struct InventoryItemLookup
 {
@@ -8145,23 +6553,6 @@ struct FUN_0091d790_shell : MiddleHighProcess
 {
     bool FUN_0091d790(ActorInventoryAccess* actor);
 };
-// @fnv 0x0091d790
-bool FUN_0091d790_shell::FUN_0091d790(ActorInventoryAccess* actor)
-{
-    InventoryLookup* inventory = 0;
-    inventory = actor->FUN_00891d30();
-    if (inventory != 0)
-    {
-        void* entry = 0;
-        if (inventory->FUN_00559450() != 0)
-        {
-            entry = *inventory->FUN_00559450()->FUN_006815c0();
-        }
-        actor->FUN_008c1de0(inventory->FUN_0044ddc0(entry, true));
-        SetProcessTarget(reinterpret_cast<MobileObject*>(actor), 1);
-    }
-    return false;
-}
 
 // StopActorMoving  (image 0x0091efc0, 27 bytes)
 //
@@ -9059,32 +7450,6 @@ class B91FD90Owner
     void FUN_0091fd90(B91FD90Actor* pkActor);
 };
 
-// @fnv 0x0091fd90
-void B91FD90Owner::FUN_0091fd90(B91FD90Actor* pkActor)
-{
-    B91FD90Package* pkPackage = GetAssignedPackage();
-    B91FD90Actor* pkOther = pkPackage->FUN_008d80e0();
-    B91FD90Actor* pkTarget = pkPackage->FUN_009ee040();
-    if (pkActor == pkTarget)
-        pkTarget = pkOther;
-
-    if (pkPackage->m_fTimer > gModifierZero)
-    {
-        pkPackage->m_fTimer -= g_kB91FD90Time.GetMovementDelta();
-    }
-    else if (IsReady())
-    {
-        pkActor->ResetCombat();
-        if (pkTarget->GetProcessTarget() == pkActor->GetProcessTarget())
-            pkTarget->ResetCombat();
-        MarkDone(false);
-    }
-    else
-    {
-        pkPackage->FUN_009ee0a0(0);
-    }
-}
-
 struct SSLookData
 {
     void FUN_00629670(unsigned int flags, bool set);
@@ -9307,62 +7672,6 @@ struct SSProcess : public MiddleHighProcess
 {
     void UpdateSitSleepState(SSActor* actor, int state, TESObjectREFR* furniture, unsigned char index);
 };
-
-// @fnv 0x00920d00
-void SSProcess::UpdateSitSleepState(SSActor* actor, int state, TESObjectREFR* furniture, unsigned char index)
-{
-    NiAVObject* node7 = actor ? actor->GetNiNode() : 0;
-    if (node7 && actor != g_thePlayer)
-    {
-        bool wasSleeping2 = m_ucFurnitureInteractionState == 9 || m_ucFurnitureInteractionState == 4;
-        bool isSleeping = state == 9 || state == 4;
-        if (wasSleeping2 && !isSleeping)
-        {
-            if (FUN_008c7aa0())
-                SSTaskQueue::GetSingleton()->SendEvent(node7, false, true, false);
-            else
-                FUN_00c69fc0(node7, false, true, false);
-        }
-        else if (isSleeping && !wasSleeping2)
-        {
-            if (FUN_008c7aa0())
-                SSTaskQueue::GetSingleton()->SendEvent(node7, true, true, false);
-            else
-                FUN_00c69fc0(node7, true, true, false);
-            if (furniture)
-                ((SSFurnRef*)furniture)->FUN_00568020(index, true);
-        }
-    }
-    if (actor)
-    {
-        actor->ClampLookAngle(actor->GetLooking());
-        char* data2 = actor->FUN_009306d0();
-        if (data2)
-        {
-            bool disable = IsFurnitureType(furniture, ((SSMarker*)&FurnitureMarker)->FUN_005094b0());
-            if (state == 2 || state == 7 || (m_ucFurnitureInteractionState == 1 && state == 4) ||
-                (m_ucFurnitureInteractionState == 6 && state == 9))
-            {
-                if (disable)
-                {
-                    actor->SetLookingTarget(0.1f);
-                    ((SSLookData*)(data2 + 0x410))->FUN_00629670(0x8000000, true);
-                }
-                actor->FUN_00931fb0(true);
-            }
-            else if (state == 5 || state == 10 ||
-                     (state == 0 && (m_ucFurnitureInteractionState != 5 || m_ucFurnitureInteractionState != 10)))
-            {
-                actor->SetLookingTarget(0.0f);
-                ((SSLookData*)(data2 + 0x410))->FUN_00629670(0x8000000, false);
-            }
-        }
-    }
-    m_ucFurnitureInteractionState = state;
-    m_pFurnitureReference = furniture;
-    m_ucFurnitureMarkerIndex = index;
-    actor->SetCurrentSitSleepState(state);
-}
 
 struct FUN_00921250_Item;
 struct FUN_00921250_Node;
@@ -9779,36 +8088,6 @@ class FUN_00921250_cls
     bool ProcessNode(void* arg);
 };
 
-// If arg is the manager, calls vCall around a service lookup and passes the resulting node to an item from the manager, restoring the manager state.
-// @fnv 0x00921250
-bool FUN_00921250_cls::ProcessNode(void* arg)
-{
-    bool r = g_pMgr->FUN_004eaf60();
-    if (arg == g_pMgr)
-    {
-        if (r)
-        {
-            g_pMgr->FUN_005c4210(0);
-        }
-        this->vCall(arg, 1, this->m_f140, this->m_f144);
-        FUN_00921250_Node* pNode = g_pSvc->FUN_00600950(arg, this->m_f140);
-        this->vCall(arg, 4, this->m_f140, this->m_f144);
-        if (pNode != 0)
-        {
-            FUN_00921250_Item* pItem = g_pMgr->FUN_00950a60(1);
-            if (pItem != 0)
-            {
-                pItem->FUN_00498030(pNode, arg, pNode->GetFlagsMasked());
-            }
-        }
-        if (r)
-        {
-            g_pMgr->FUN_005c4210(1);
-        }
-    }
-    return true;
-}
-
 struct BipedAnimStandIn
 {
     void FUN_0088d640();
@@ -9819,12 +8098,6 @@ struct FUN_00922ad0_owner
     void FUN_00922ad0(BipedAnimStandIn* apBiped);
 };
 
-// @fnv 0x00922ad0
-void FUN_00922ad0_owner::FUN_00922ad0(BipedAnimStandIn* apBiped)
-{
-    apBiped->FUN_0088d640();
-}
-
 struct FUN_00922b40_cls
 {
     int unk00[118];
@@ -9832,12 +8105,6 @@ struct FUN_00922b40_cls
     unsigned char m_bFlag;
     unsigned char FUN_00922b40();
 };
-
-// @fnv 0x00922b40
-unsigned char FUN_00922b40_cls::FUN_00922b40()
-{
-    return m_bFlag;
-}
 
 struct CvPoint3
 {
@@ -10517,102 +8784,6 @@ struct CvOwner
     void UpdateLevel(CvActor* target, bool useTarget);
 };
 
-// @fnv 0x00922b80
-void CvOwner::UpdateLevel(CvActor* target, bool useTarget)
-{
-    float result = 0.0f;
-    if (GetValue() <= dbl_01012060)
-    {
-        if (m220.GetList() != 0)
-        {
-            int aIt;
-            CvMgr* _mgr;
-            float extra7;
-            CvScope scope(0);
-            CvList* other;
-            float sum4 = 0.0f;
-            extra7 = 0.0f;
-            CvItem* aItem;
-            float out4 = 0.0f;
-            aIt = 0;
-            aItem = m220.GetList()->GetFirst(&aIt);
-            other = 0;
-            if (useTarget)
-            {
-                CvScopeList* holder = target->GetHolder();
-                if (holder != 0)
-                    other = holder->GetList();
-            }
-            if (aItem == 0 && target == g_cvPlayer)
-            {
-                void* prep = g_cvPlayer->Prepare(1);
-                void* prepCopy = prep;
-                aItem = m220.GetList()->GetFirst(&aIt);
-            }
-            _mgr = CvGetMgr(0);
-            if (_mgr == 0)
-            {
-                target->Notify(target->GetId());
-                result = 0.0f;
-            }
-            else
-            {
-                CvItem* aRef = _mgr->GetItem();
-                int iEntryIndex = 0;
-                CvPoint3 pos = *target->GetPos();
-                float delta = target->GetHeadPos().z - target->GetFootPos().z - dbl_01012070;
-                delta = delta / dbl_01011590;
-                pos.z = pos.z + delta;
-                if (target == g_cvPlayer)
-                {
-                    sum4 = _mgr->EvaluatePlayer(pos, &iEntryIndex, &extra7, &out4, other);
-                }
-                else
-                {
-                    while (aItem != 0)
-                    {
-                        sum4 = aItem->Evaluate(pos, other) + sum4;
-                        aItem = m220.GetList()->GetNext(&aIt);
-                        iEntryIndex = iEntryIndex + 1;
-                    }
-                    if (aRef != 0)
-                    {
-                        CvPoint3 aV = *aRef->GetInfo()->GetPosA();
-                        float a = CvMax(aV.x, CvMax(aV.y, aV.z));
-                        aV = *aRef->GetInfo()->GetPosB();
-                        float b = CvMax(aV.x, CvMax(aV.y, aV.z));
-                        extra7 = a + b;
-                    }
-                }
-                if (target->GetState() != 0 && target->GetState()->IsActive())
-                {
-                    sum4 = sum4 + extra7;
-                }
-                else if (aRef != 0)
-                {
-                    sum4 = aRef->Evaluate(pos, 0) + sum4;
-                }
-                sum4 = sum4;
-                result = sum4 * dbl_01017a40;
-            }
-        }
-        if (result > dbl_01017a40)
-        {
-            result = flt_01016410;
-        }
-        else if (result < dbl_01012060)
-        {
-            result = 0.0f;
-        }
-        SetLevel(result);
-        SetValue(result * dbl_01031148 + dbl_01021928);
-    }
-    else
-    {
-        SetValue(GetValue() - g_cvTimer.GetTime());
-    }
-}
-
 struct AcquireObject
 {
     void* FUN_007b3fa0(unsigned int);
@@ -10638,44 +8809,6 @@ struct ResetProcess : MiddleHighProcess
     void SetFlag40(int);
     void ResetForActor(ResetActor* actor);
 };
-// @fnv 0x00923c60
-void ResetProcess::ResetForActor(ResetActor* actor)
-{
-    m_sBoundDataValue = 2;
-    SetAnimationComplete(false);
-    SetCurrentMovementComplete(true);
-    SetTarget(0);
-    ResetMovementState();
-    FUN_00914b40();
-    SetFlag40(0);
-    m_pSecondMagicItem = 0;
-    AcquireObject* c = (AcquireObject*)m_pDetectionData60;
-    AcquireObject* l = c;
-    l ? l->FUN_007b3fa0(1) : 0;
-    m_pDetectionData60 = 0;
-    actor->FUN_008b3d30();
-    actor->FUN_005ce9d0(0);
-    SetStartShooting(false);
-    m_bAimStateFlag = false;
-    AcquireObject* k;
-    while (!((AcquireList*)&ReferenceListNode)->FUN_008256d0())
-    {
-        k = *((AcquireList*)&ReferenceListNode)->FUN_006815c0();
-        AcquireObject* j = k;
-        AcquireObject* e = j;
-        e ? e->FUN_007b3fa0(1) : 0;
-        ((AcquireList*)&ReferenceListNode)->FUN_00905330(&k);
-    }
-    m_pCurrentIdleForm = 0;
-    m_kThirdUnshownMember = false;
-    m_kFourthUnshownMember = false;
-    ((RefListClear*)&m_kSecondaryReferenceList)->FUN_00470470();
-    ((RefListClear*)&m_kReferenceList68)->FUN_00470470();
-    m_pReference40 = 0;
-    if (!actor->Unk_85() && GetFurnitureReference())
-        ProcessFurniture(actor);
-    SetProcessActive(true);
-}
 
 struct LstItem;
 struct ListA
@@ -10766,67 +8899,6 @@ struct FUN_00923e40_cls
     int RunScheduledAction(Actor* actor, RefX* ref, bool flag);
 };
 
-// @fnv 0x00923e40
-int FUN_00923e40_cls::RunScheduledAction(Actor* actor, RefX* ref, bool flag)
-{
-    RefX* r7 = ref;
-    if (!r7)
-        return 0;
-    Sched* s = 0;
-    int result3 = 0;
-    if (flag)
-        s = r7->F672dd0();
-    else
-        s = r7->F55b980();
-    if (s)
-    {
-        if (!s->Kind())
-            result3 = s->GetA();
-        if (s->Kind() == 6)
-        {
-            result3 = ((ActX*)actor)->F569b80();
-        }
-        else if (s->Chk())
-        {
-            if (listA.Has())
-            {
-                unsigned int idB = ((ActX*)actor)->F8d6f30();
-                NiPoint3 pos4 = *actor->GetPos();
-                int k = s->Kind();
-                if (k == 4)
-                {
-                    f88 = s->GetB();
-                    f8c = 0;
-                }
-                else if (k == 5)
-                {
-                    f88 = 0;
-                    f8c = s->GetC();
-                }
-                float f2 = 0.0f;
-                if (!ref || !ref->F6728a0(actor, &f2))
-                    f2 = *DAT_011cdebc.Get();
-                DAT_011c3f2c->Run(idB, &pos4, f2, actor->GetPos(), f2, FUN_0090e660, actor);
-                f8c = 0;
-                f88 = 0;
-                ListB* l = &listB;
-                while (l && *l->Ref())
-                {
-                    listA.Push(l->Ref());
-                    l->Pop();
-                }
-                listB.Clear();
-            }
-            if (!listA.Has())
-            {
-                result3 = (int)*listA.Ref();
-                listA.Pop();
-            }
-        }
-    }
-    return result3;
-}
-
 struct RecordVector
 {
     float x, y, z;
@@ -10858,52 +8930,6 @@ struct SaveGameRecordWriter
 typedef RecordData*(__thiscall* GetRecordFunction)(SaveGameRecordWriter*);
 typedef bool(__thiscall* GetStateFunction)(void*, int);
 typedef bool(__thiscall* GetSwitchFunction)(void*);
-// Writes the actor's record fields to the save buffer if the actor's state check fails, including position, direction and version-gated extras.
-// @fnv 0x00926490
-void SaveGameRecordWriter::SaveActorRecord(void* actor)
-{
-    RecordData* record = ((GetRecordFunction)(*(void***)this)[0xa3])(this);
-    if (record != 0)
-    {
-        if (!((GetStateFunction)(*(void***)actor)[0x8b])(actor, 0))
-        {
-            unsigned int packed = ((RecordValue*)((char*)record + 0x3e0))->FUN_00ca9600();
-            DAT_011de45c->FUN_008579b0(&packed, 4);
-            DAT_011de45c->FUN_008579b0((char*)record + 0x520, 4);
-            unsigned int flags2 = ((RecordFlags*)((char*)record + 0x410))->FUN_00621270(-1);
-            DAT_011de45c->FUN_008579b0(&flags2, 4);
-            if (flags2 & 0x800)
-            {
-                RecordVector position;
-                position.FUN_006815c0();
-                record->FUN_00812b00(&position);
-                DAT_011de45c->FUN_008579b0(&position, 12);
-            }
-            DAT_011de45c->FUN_008579b0((char*)record + 0x4f0, 16);
-            DAT_011de45c->FUN_008579b0((char*)record + 0x500, 16);
-            RecordVector direction;
-            direction.FUN_006815c0();
-            record->FUN_0066ca00(&direction);
-            DAT_011de45c->FUN_008579b0(&direction, 12);
-            if (((GetSwitchFunction)(*(void***)actor)[0x40])(actor))
-            {
-                DAT_011de45c->FUN_008579b0((char*)record + 0x540, 4);
-                DAT_011de45c->FUN_008579b0((char*)record + 0x544, 4);
-                DAT_011de45c->FUN_008579b0((char*)record + 0x548, 4);
-            }
-            else
-            {
-                DAT_011de45c->FUN_008579b0((char*)record + 0x54c, 4);
-                DAT_011de45c->FUN_008579b0((char*)record + 0x548, 4);
-            }
-            if (DAT_011de45c->FUN_008df040() >= 0x77)
-            {
-                DAT_011de45c->FUN_008579b0((char*)record + 0x550, 4);
-                DAT_011de45c->FUN_008579b0((char*)record + 0x558, 4);
-            }
-        }
-    }
-}
 
 namespace fnv_009278d0 {
 struct ResolveBuffer;
@@ -11739,113 +9765,6 @@ struct Target
     void UpdateWeaponTypeFlags();
     void ResolveReferences(ResolveBuffer*);
 };
-// Resolves the buffer's references, prunes invalid entries from unkc8 and unk230, updates unk158/unk140, and calls the v84/v6e4/v7a8 handlers.
-// @fnv 0x009278d0
-void Target::ResolveReferences(ResolveBuffer* buffer)
-{
-    RefStub* actor = buffer->vc();
-    FUN_00910820(buffer);
-    unk158 = unk158 ? dynamic_cast<Actor*>(FUN_004839c0((unsigned int)unk158)) : 0;
-    unk140 = unk140 ? (RefStub*)dynamic_cast<TESObjectREFR*>(FUN_004839c0((unsigned int)unk140)) : 0;
-    {
-        RefList* current = &unkc8;
-        RefList* previous = 0;
-        while (current && !current->FUN_008256d0())
-        {
-            RefStub* object = current->FUN_006815c0();
-            bool remove = false;
-            if (object)
-            {
-                object = object ? (RefStub*)dynamic_cast<TESObjectREFR*>(FUN_004839c0((unsigned int)object)) : 0;
-                if (object)
-                    current->FUN_00726c60(&object);
-                else
-                    remove = true;
-            }
-            else
-                remove = true;
-            if (remove)
-            {
-                if (previous)
-                {
-                    previous->FUN_00905330(&current->FUN_006815c0());
-                    current = previous->FUN_00726070();
-                }
-                else
-                    current->FUN_0063f7b0();
-            }
-            else
-            {
-                previous = current;
-                current = current->FUN_00726070();
-            }
-        }
-    }
-    unke4.FUN_008c6970(buffer);
-    InitLoadGameForEffects(buffer, unk1b8);
-    if (unk140)
-    {
-        if (unk140->FUN_007af430()->FUN_00401170() != 39)
-            v84(actor);
-        else if (actor && (actor->v22c(0) || actor->FUN_008d6f30() != unk140->FUN_008d6f30()))
-            v84(actor);
-    }
-    else if (unk13d)
-    {
-        unk13d = false;
-        if (actor == DAT_011dea3c)
-            DAT_011dea3c->FUN_005098c0();
-    }
-    if (unk1a8 >= 0 && unk40)
-        unk40->FUN_00568150(unk1a8, true);
-    if (actor)
-    {
-        UpdateWeaponTypeFlags();
-        v6e4(actor);
-    }
-    if (actor)
-        v7a8(actor);
-    unk164 = unk164 ? FUN_0040a250(unk164) : 0;
-    unk160 = unk160 ? FUN_0040a250(unk160) : 0;
-    unk1bc = unk1bc ? FUN_00825550(unk1bc) : 0;
-    if (buffer->v0() >= 15)
-    {
-        EntryListNode* current = unk230;
-        EntryListNode* previous = 0;
-        while (current && !current->FUN_008256d0())
-        {
-            FUN_00915790* object = current->FUN_006815c0();
-            bool remove = false;
-            if (object)
-            {
-                if (!object->object)
-                {
-                    delete object;
-                    remove = true;
-                }
-                else
-                    object->FUN_00913fb0(buffer);
-            }
-            else
-                remove = true;
-            if (remove)
-            {
-                if (previous)
-                {
-                    previous->FUN_00905330(&current->FUN_006815c0());
-                    current = previous->FUN_00726070();
-                }
-                else
-                    current->FUN_0063f7b0();
-            }
-            else
-            {
-                previous = current;
-                current = current->FUN_00726070();
-            }
-        }
-    }
-}
 }  // namespace fnv_009278d0
 
 struct FUN_00914ab0
@@ -11880,86 +9799,6 @@ struct FUN_009280f0_Class : MiddleHighProcess
     void FUN_0092eb00(LoadBuffer*);
     void FUN_009280f0(LoadBuffer*);
 };
-// Resets the process state and reloads package and animation data from the buffer, clearing lists and flags, then reinitializes the actor if present.
-// @fnv 0x009280f0
-void FUN_009280f0_Class::FUN_009280f0(LoadBuffer* buffer)
-{
-    FUN_0092eb00(buffer);
-    if (buffer->FUN_0042ce30().FUN_004280f0(0x08000020))
-    {
-        SetCurrentArmor(0, 0, false);
-        SetCurrentAmmunition(0);
-        SetCurrentShield(0);
-        SetCurrentTorch(0);
-        m_pEffectShader = 0;
-    }
-    ((PackageLoad*)&PackageReference)->FUN_008c6c80(buffer);
-    Actor* actor = buffer->GetActor();
-    if (actor)
-        SetFurnitureState(actor, (SIT_SLEEP_STATE)0, 0, 0x7f);
-    m_pFurnitureReference = 0;
-    m_ucFurnitureMarkerIndex = 0x7f;
-    m_kReferenceList.RemoveAll();
-    m_bFirstWeaponFlag = false;
-    m_bSecondWeaponFlag = false;
-    m_bThirdWeaponFlag = false;
-    m_pCombatTarget = 0;
-    m_pEquippedWeapon = 0;
-    m_bAdditionalActorFlag = false;
-    m_bFirstActorFlag = false;
-    m_kNinthUnshownMember = 0.0f;
-    m_bAnimationStateFlag = false;
-    m_ePackageObjectType = (PACKAGE_OBJECT_TYPE)0;
-    m_kEighthUnshownMember = 0.0f;
-    m_bWeaponOut = false;
-    m_pEffectShader = 0;
-    m_fFirstEffectShaderValue = 1.0f;
-    m_fSecondEffectShaderValue = 0.0f;
-    m_uiAnimationStateFlags = 0;
-    m_kFifthUnshownMember = false;
-    m_bPackageStateFlag2 = false;
-    m_bAiming = false;
-    m_bAimStateFlag = false;
-    m_bFirstFaceGenFlag = false;
-    m_kSixthUnshownMember = false;
-    m_bThirdFaceGenFlag = false;
-    m_kSeventhUnshownMember = false;
-    m_pDetectionData64 = 0;
-    m_bCombatStateFlag = false;
-    m_kSecondaryReferenceList.RemoveAll();
-    m_sBoundDataValue = 2;
-    m_iProjectileCount = -1;
-    m_kEleventhUnshownMember = 0;
-    m_bPackageStateFlag = false;
-    m_iIdleState = -1;
-    m_fIdleAnimationTime = -1.0f;
-    m_kThirdUnshownMember = false;
-    m_kFourthUnshownMember = false;
-    m_uiLipSyncState = 0;
-    m_kTenthUnshownMember = 0.0f;
-    m_fFirstFaceGenValue = 0.0f;
-    m_fSecondFaceGenValue = 0.0f;
-    m_iFaceGenNodeIndex = -1;
-    m_kSecondUnshownMember = false;
-    m_pFirstFaceGenNode = 0;
-    m_pSecondFaceGenNode = 0;
-    m_pFaceGenObject = 0;
-    m_pPackageIdleForm = 0;
-    m_pCurrentIdleForm = 0;
-    for (unsigned i = 0; i < 3; i++)
-        m_apAnimGroupSequences[i] = 0;
-    if (buffer->FUN_0042ce30().FUN_004280f0(0x10000000) && pCurrentAnimation)
-        ((AnimationLoad*)pCurrentAnimation)->FUN_0049bb70(buffer);
-    FUN_00806ba0(buffer, m_pActiveEffectList);
-    while (!m_kDeferredHideLimbList.IsEmpty())
-    {
-        delete (FUN_00914ab0*)m_kDeferredHideLimbList.GetItem();
-        m_kDeferredHideLimbList.RemoveHead();
-    }
-    ClearQueuedEquipItems();
-    if (actor && buffer->FUN_00562d00())
-        ProcessActorEvent(actor);
-}
 
 struct SaveVector
 {
@@ -12638,44 +10477,6 @@ struct SaveProcess
     virtual ControllerState* GetController();
     void SaveControllerState(ControllerSaveBuffer* buffer);
 };
-// @fnv 0x00928880
-void SaveProcess::SaveControllerState(ControllerSaveBuffer* buffer)
-{
-    SaveActor* h = buffer->GetActor();
-    ControllerState* p = GetController();
-    if (p && (!h || !h->SkipSave(0)))
-    {
-        unsigned char a = (unsigned char)FUN_00ca9600((char*)&p->unk3e0);
-        buffer->FUN_00865e50(&a, 1, 0);
-        unsigned char f = (unsigned char)p->unk520;
-        buffer->FUN_00865e50(&f, 1, 0);
-        int s = p->flags.FUN_00621270(-1);
-        buffer->FUN_00865e50(&s, 4, 0);
-        if (s & 0x800)
-        {
-            SaveVector position;
-            p->FUN_00812b00(&position);
-            buffer->FUN_00865e50(&position, 12, 0);
-        }
-        buffer->FUN_00865e50(&p->block4f0, 16, 0);
-        buffer->FUN_00865e50(&p->block500, 16, 0);
-        SaveVector i;
-        p->FUN_0066ca00(&i);
-        buffer->FUN_00865e50(&i, 12, 0);
-        if (h)
-        {
-            buffer->FUN_00865e50(&p->unk540, 4, 0);
-            buffer->FUN_00865e50(&p->unk544, 4, 0);
-        }
-        else
-        {
-            buffer->FUN_00865e50(&p->unk54c, 4, 0);
-        }
-        buffer->FUN_00865e50(&p->unk548, 4, 0);
-        buffer->FUN_00865e50(&p->unk550, 4, 0);
-        buffer->FUN_00865e50(&p->unk558, 4, 0);
-    }
-}
 
 struct S_9292e0_Obj
 {
@@ -12794,31 +10595,6 @@ struct S_9292e0
     int FUN_009292e0(S_9292e0_Node* node, int mask);
 };
 
-// @fnv 0x009292e0
-int S_9292e0::FUN_009292e0(S_9292e0_Node* pNodeList, int mask)
-{
-    if (dirty)
-    {
-        flags = 0;
-        S_9292e0_Node* node = pNodeList;
-        while (node && !node->FUN_008256d0())
-        {
-            int v = FUN_0040df90((*node->FUN_006815c0())->FUN_007df1d0());
-            flags |= v;
-            node = node->FUN_00726070();
-        }
-        dirty = 0;
-    }
-    return FUN_00929390(mask, flags);
-}
-
-// FUN_00929390: tests whether the bitwise AND of the two flags is non-zero.
-// @fnv 0x00929390
-bool FUN_00929390(unsigned int a, unsigned int b)
-{
-    return (a & b) > 0;
-}
-
 struct ArrowListRemoveHelper
 {
     void FUN_00905330(ArrowProjectile* const& projectile);
@@ -12827,13 +10603,6 @@ struct MiddleHighProcess_00929470 : MiddleHighProcess
 {
     void RemoveArrowProjectile(ArrowProjectile* projectile);
 };
-// @fnv 0x00929470
-void MiddleHighProcess_00929470::RemoveArrowProjectile(ArrowProjectile* projectile)
-{
-    if (!projectile || !m_pArrowProjectileList)
-        return;
-    reinterpret_cast<ArrowListRemoveHelper*>(m_pArrowProjectileList)->FUN_00905330(projectile);
-}
 
 struct S_0092adb0_Data
 {
@@ -12885,17 +10654,6 @@ struct S_0092adb0_Proc : public MiddleHighProcess
     virtual void unk534(Actor* actor, S_0092adb0_Data* data);
     bool CheckPackageAndRun(Actor* actor, S_0092adb0_Data* data);
 };
-// @fnv 0x0092adb0
-bool S_0092adb0_Proc::CheckPackageAndRun(Actor* actor, S_0092adb0_Data* data)
-{
-    if (!data->InitPatrolPackage(actor, GetCurrentPackage()))
-    {
-        SetAnimationState(-1);
-        return false;
-    }
-    unk534(actor, data);
-    return true;
-}
 
 namespace fnv_0092ae20 {
 struct Pt3Y
@@ -13654,42 +11412,6 @@ struct ProcX
     void FUN_0092ae20(ActorY* apActor, TargetX* apTarget);
 };
 
-// @fnv 0x0092ae20
-void ProcX::FUN_0092ae20(ActorY* apActor, TargetX* apTarget)
-{
-    RefX* pRef8 = apTarget->GetRef();
-    if (!pRef8)
-    {
-        SetAnimationState(-1);
-        return;
-    }
-    SetTarget(pRef8);
-    float fRadius3 = FUN_006e25d0();
-    PackageX* pPackage = GetOneTimePackage();
-    if (pPackage)
-    {
-        fRadius3 = FUN_00404010(fRadius3, (float)pPackage->GetRadius(apActor));
-    }
-    FormX* pBase2 = pRef8->GetBaseObject();
-    bool bIsType5 = pBase2->GetFormType() == 0x30;
-    if (bIsType5)
-    {
-        fRadius3 = 10.0f;
-    }
-    PathReq kRequest4;
-    apActor->PathToLocation(&kRequest4, pRef8->V1F4(), pRef8->GetCull(), FUN_00575d70(pRef8), fRadius3, 0);
-    kRequest4.SetFlag(false);
-    if (bIsType5 || pBase2 == DAT_011ca248)
-    {
-        kRequest4.SetAngle(pRef8->GetAngle().z);
-    }
-    apActor->SetPathingRequestAvoidNodes(&kRequest4);
-    apTarget->unk04 = 1;
-    if (apActor->FUN_008b3bb0())
-    {
-        V860(apActor, apTarget);
-    }
-}
 }  // namespace fnv_0092ae20
 
 struct FUN_0092b460_cls
@@ -13906,49 +11628,10 @@ struct FUN_0092b460_cls
     void FUN_0092b460(FUN_0092b460_cls* a1, FUN_0092b460_cls* a2);
 };
 
-// @fnv 0x0092b460
-void FUN_0092b460_cls::FUN_0092b460(FUN_0092b460_cls* a1, FUN_0092b460_cls* a2)
-{
-    FUN_0092b460_cls* p;
-    FUN_0092b460_cls* q;
-    FUN_0092b460_cls* c5;
-    FUN_0092b460_cls* r;
-    this->FUN_00912960(a1, a2);
-    a1->FUN_008b3d30();
-    p = a2->FUN_009f3390();
-    if (p == 0 || p->FUN_007af430()->FUN_00401170() != 0x30)
-    {
-        this->m_198 = 0.0f;
-    }
-    q = p->FUN_005d43c0()->FUN_0041fe90();
-    if (q != 0)
-    {
-        r = q->GetTargetFromOffset();
-        if (r != 0)
-        {
-            if (!a1->FUN_008d8520()->v195())
-            {
-                this->v169(a1, r, 0, 0, 1, 0);
-            }
-        }
-        c5 = q->FUN_008d0430();
-        if (c5 != 0)
-        {
-            c5->FUN_005ac1e0(a1, 0, 0, 0);
-        }
-    }
-}
-
 struct FUN_0092b9c0_Class : public MiddleHighProcess
 {
     unsigned int GetAtOffset1DC(int index);
 };
-
-// @fnv 0x0092b9c0
-unsigned int FUN_0092b9c0_Class::GetAtOffset1DC(int index)
-{
-    return reinterpret_cast<unsigned int*>(reinterpret_cast<unsigned char*>(this) + 0x1DC)[index];
-}
 
 // Thiscall wrapper: pass the argument as this to FUN_008b3d30, make a virtual call on this, then clear the flag at +0xe1.
 struct FUN_008b3d30_s
@@ -14287,14 +11970,6 @@ class FUN_0092bf20_cls
     unsigned char m_e1;
     void FUN_0092bf20(FUN_008b3d30_s* p);
 };
-// Calls p->FUN_008b3d30(), then invokes vSlot10D(0) and sets m_e1 to 0.
-// @fnv 0x0092bf20
-void FUN_0092bf20_cls::FUN_0092bf20(FUN_008b3d30_s* p)
-{
-    p->FUN_008b3d30();
-    this->vSlot10D(0);
-    this->m_e1 = 0;
-}
 
 template <> NiPointer<NiNode>& NiPointer<NiNode>::operator=(NiNode*);
 
@@ -14314,20 +11989,6 @@ struct FUN_0092bff0_shell : public MiddleHighProcess
     void QueueDeferredHideLimb(int aiLimbIndex, NiNode* apLimbNode, NiNode* apReplacementNode, bool abExplosion);
 };
 
-// Allocates a deferred hide-limb entry, stores the time, explosion flag, limb index and both nodes, then adds it to the head of the list.
-// @fnv 0x0092bff0
-void FUN_0092bff0_shell::QueueDeferredHideLimb(int aiLimbIndex, NiNode* apLimbNode, NiNode* apReplacementNode,
-                                               bool abExplosion)
-{
-    MiddleHighProcess__DeferredHideLimb* pDeferredHideLimb = new MiddleHighProcess__DeferredHideLimb();
-    pDeferredHideLimb->fTime = 0.0f;
-    pDeferredHideLimb->m_bHideLimb = abExplosion;
-    pDeferredHideLimb->iLimbIndex = aiLimbIndex;
-    pDeferredHideLimb->spLimbNode = apLimbNode;
-    pDeferredHideLimb->spReplacementNode = apReplacementNode;
-    m_kDeferredHideLimbList.AddHead(pDeferredHideLimb);
-}
-
 struct FUN_00493830_shell
 {
     bool FUN_00493830();
@@ -14341,33 +12002,6 @@ struct FUN_0092c340_shell : public MiddleHighProcess
 {
     bool FUN_0092c340(int aiMovement);
 };
-
-// Checks a cached per-movement bitmask, querying FUN_00494710 for the movement and caching the result when unknown.
-// @fnv 0x0092c340
-bool FUN_0092c340_shell::FUN_0092c340(int aiMovement)
-{
-    if (pCurrentAnimation == 0 || ((FUN_00493830_shell*)pCurrentAnimation)->FUN_00493830())
-        return true;
-
-    unsigned int shift_ = aiMovement * 2 - 6;
-    if (shift_ > 0x20)
-        return true;
-
-    unsigned int bits = m_kEleventhUnshownMember >> shift_;
-    if (bits & 1)
-    {
-        return true;
-    }
-    else if (bits & 2)
-    {
-        return false;
-    }
-
-    bool result2 = ((FUN_00494710_shell*)pCurrentAnimation)->FUN_00494710((unsigned short)aiMovement);
-    bits = result2 ? 1 : 2;
-    m_kEleventhUnshownMember |= bits << shift_;
-    return result2;
-}
 
 struct CFItem;
 
@@ -14718,44 +12352,6 @@ struct CFActor
     void CopyFromActor(CFActor* apSource);
 };
 
-// Copies several fields and appends the items of two source lists into this actor's lists.
-// @fnv 0x008d9fa0
-void CFActor::CopyFromActor(CFActor* apSource)
-{
-    fValue2B4 = apSource->GetField2B4();
-    fValue2B8 = apSource->fValue2B8;
-    fValue2BC = apSource->fValue2BC;
-    cFlag375 = apSource->cFlag375;
-    cFlag459 = apSource->v78();
-
-    CFList* pIter = apSource->pCopiedFollowerList;
-    while (pIter && *pIter->GetItem())
-    {
-        pCopiedFollowerList->AddTail(*pIter->GetItem());
-        pIter = pIter->GetNext();
-    }
-    pIter = apSource->pListB;
-    while (pIter && *pIter->GetItem())
-    {
-        pListB->AddTail(*pIter->GetItem());
-        pIter = pIter->GetNext();
-    }
-
-    iValue2E4 = apSource->iValue2E4;
-    iValue2E8 = apSource->iValue2E8;
-    iValue3AC = apSource->iValue3AC;
-    iValue3B0 = apSource->iValue3B0;
-    cFlag3B9 = apSource->cFlag3B9;
-    iValue3CC = apSource->iValue3CC;
-    cFlag3D0 = apSource->cFlag3D0;
-    iValue370 = apSource->iValue370;
-    cFlag348 = apSource->cFlag348;
-    cFlag29D = apSource->cFlag29D;
-    cFlag270 = apSource->cFlag270;
-    fValue3C4 = apSource->fValue3C4;
-    iValue2AC = apSource->iValue2AC;
-}
-
 #include <stdio.h>
 
 class PathingLocation
@@ -14850,37 +12446,6 @@ struct WanderProcess : LowProcess
 {
     bool WanderToPoint(WanderActor*, int);
 };
-// @fnv 0x008f36c0
-bool WanderProcess::WanderToPoint(WanderActor* actor, int unused)
-{
-    if (!actor->GetParentCell())
-        return false;
-    TESPackage* e = 0;
-    e = GetOneTimePackage();
-    if (!e)
-        return false;
-    if (((WanderPackage*)e)->GetProcedureType() != 1)
-        SetProcessTarget(actor, -1);
-    NiPoint3 c = ((WanderPackage*)e)->FUN_00675de0(actor);
-    TESObjectCELL* p = actor->GetParentCell();
-    if (!p)
-        p = ((WanderDataHandler*)DAT_011c3f2c)->FUN_00461bc0(c.x, c.y, actor->FUN_00575d70(), false);
-    PathingRequestClosePoint j;
-    j.SetOrigin(PathingLocation(c, p));
-    j.FUN_00507610(32.0f);
-    j.FUN_006e5ee0((float)((WanderPackage*)e)->FUN_00676280(actor));
-    GetObjectPosition(&j, &c);
-    if (actor->Unk_85())
-        UpdateActorInteraction(actor);
-    actor->FUN_008b3690(&c, actor->GetParentCell(), actor->FUN_00575d70(), 100.0f, 0);
-    if (FUN_00703180() == actor)
-    {
-        char buffer[300];
-        sprintf(buffer, "%s is wandering to point x %.02f and y %.02f", actor->GetFullName(), c.x, c.y);
-        DebugLog(buffer);
-    }
-    return false;
-}
 
 struct MgrObj
 {
@@ -15082,64 +12647,6 @@ struct Host913
     Sub14 m_14;
     bool FUN_00913a20(Proc* apProc);
 };
-
-// @fnv 0x00913a20
-bool Host913::FUN_00913a20(Proc* apProc)
-{
-    ObjB913* objBA7;
-    Proc* procCopy;
-    ResObj* resA8;
-    ObjB913* objBB2;
-    ResObj* resB2;
-
-    if (apProc == 0 || m_00 == 0)
-    {
-        return false;
-    }
-    if (m_0c != 0)
-    {
-        if (m_00->FUN_00401170() == 0x28 || m_00->FUN_00401170() == 0x18)
-        {
-            m_14.FUN_006f74f0(new FUN_00c3c590(1));
-            DAT_011c3b3c->FUN_00444d40(m_00, 1, m_14.FUN_00559450(apProc));
-            if (apProc->vfn_135())
-            {
-                if (m_00->FUN_00401170() == 0x28)
-                {
-                    procCopy = m_00;
-                    objBA7 = apProc->FUN_008d8520()->vfn_110();
-                    if (!objBA7 || !objBA7->FUN_00496940() ||
-                        !objBA7->FUN_00494710(FUN_005f2370(0, DAT_0118a838[procCopy->FUN_00446390()], 0x18, 0)))
-                    {
-                        resA8 = (ResObj*)DAT_011c3b3c->FUN_00447330(
-                            apProc->FUN_005715d0(1, 0, DAT_0118a838[procCopy->FUN_00446390()]));
-                        DAT_011c3b3c->FUN_00446500(resA8, 1, m_14.FUN_00559450(0));
-                        delete resA8;
-                    }
-                }
-            }
-            return true;
-        }
-    }
-    else
-    {
-        if (apProc->vfn_135())
-        {
-            if (m_00->FUN_00401170() == 0x28)
-            {
-                objBB2 = apProc->FUN_008d8520()->vfn_110();
-                if (!objBB2 || !objBB2->FUN_00496940() || !objBB2->FUN_00494710(FUN_005f2370(0, 1, 0x18, 0)))
-                {
-                    m_14.FUN_006f74f0(new FUN_00c3c590(1));
-                    resB2 = (ResObj*)DAT_011c3b3c->FUN_00447330(apProc->FUN_005715d0(1, 0, 1));
-                    DAT_011c3b3c->FUN_00446500(resB2, 1, m_14.FUN_00559450(0));
-                    delete resB2;
-                }
-            }
-        }
-    }
-    return false;
-}
 
 struct Active96
 {
@@ -15480,65 +12987,6 @@ struct QueueProcess : MiddleHighProcess
 {
     void ProcessQueuedItems(QueueActor* actor);
 };
-// Walks the queued item list, equips or unequips each item on the actor, deletes processed entries, and frees the list when empty.
-// @fnv 0x009154b0
-void QueueProcess::ProcessQueuedItems(QueueActor* actor)
-{
-    if (!m_pkPaddedFloatRecordList)
-        return;
-    BSSimpleList<PaddedFloatRecord*>* item = m_pkPaddedFloatRecordList;
-    while (item && item->GetItem())
-    {
-        PaddedFloatRecord* h = item->GetItem();
-        bool p = false;
-        if (h && (!h->task.FUN_00559450() || h->task.FUN_00559450()->FUN_0043caa0()))
-        {
-            p = true;
-            if (h->equip)
-            {
-                if (actor->FUN_008a7570() == 7 && !actor->FUN_008a1710())
-                    actor->FUN_00894cc0(false);
-                actor->FUN_0088c830(h->object, h->count, h->extra, h->equipFlag1, h->equipFlag2, h->flag3);
-                TESObjectWEAP* e = 0;
-                bool k = false;
-                if (h->object->FUN_00401170() == 40)
-                {
-                    e = (TESObjectWEAP*)h->object;
-                    if (e->GetWeaponType() == 10 || e->GetWeaponType() == 11 || e->GetWeaponType() == 12 ||
-                        e->GetWeaponType() == 13)
-                    {
-                        h->object->FUN_004f15a0(41);
-                        actor->FUN_0088c830(h->object, h->count, h->extra, h->equipFlag1, h->equipFlag2, false);
-                        h->object->FUN_004f15a0(40);
-                    }
-                }
-            }
-            else
-            {
-                actor->FUN_0088d7d0(h->object, h->count, h->extra, h->unequipFlag1, h->unequipFlag2, h->flag3);
-                QueueAnimation* animation = (QueueAnimation*)GetAnimation();
-                if (animation && !animation->FUN_00494710(FUN_005f2370(0, 1, 24, false)))
-                {
-                    void* model = g_modelLoader->FUN_00447330(actor->FUN_005715d0(), true, false, true);
-                    animation->FUN_00490400(model);
-                }
-            }
-        }
-        if (p)
-        {
-            delete h;
-            item->RemoveHead();
-        }
-        else
-            item = item->GetNext();
-    }
-    if (!m_pkPaddedFloatRecordList->GetItem())
-    {
-        m_pkPaddedFloatRecordList->RemoveAll();
-        delete m_pkPaddedFloatRecordList;
-        m_pkPaddedFloatRecordList = 0;
-    }
-}
 
 struct PendingObject
 {
@@ -15565,29 +13013,6 @@ struct PendingProcess : MiddleHighProcess
 {
     void __thiscall RemovePendingByGroupAndValue(int group, int value);
 };
-// Walks the pending list, and for the first item matching group and value, releases its resource, destroys the item and removes it from the list.
-// @fnv 0x00915870
-void PendingProcess::RemovePendingByGroupAndValue(int group, int value)
-{
-    PendingListNode* current = reinterpret_cast<PendingListNode*>(m_pkPaddedFloatRecordList);
-    while (current != 0 && *current->FUN_006815c0() != 0)
-    {
-        PendingObject* item = *current->FUN_006815c0();
-        if (item != 0 && item->group == group && value == item->value)
-        {
-            if (item->resource.FUN_00559450() != 0)
-            {
-                DAT_01202d98->RunQueuedTask(item->resource.FUN_00559450(), 0);
-            }
-            PendingObject* destructorOwner = item;
-            PendingObject* destructorCandidate = destructorOwner;
-            destructorCandidate ? destructorCandidate->FUN_00915790(1) : 0;
-            reinterpret_cast<PendingListNode*>(m_pkPaddedFloatRecordList)->FUN_00905330(&item);
-            return;
-        }
-        current = current->FUN_00726070();
-    }
-}
 
 struct P114Point
 {
@@ -15869,148 +13294,6 @@ struct P114Process : MiddleHighProcess
     float FUN_007df1f0();
     void FUN_00916df0(Actor* actor);
 };
-// @fnv 0x00916df0
-void P114Process::FUN_00916df0(Actor* actor)
-{
-    P114Package* i = 0;
-    i = (P114Package*)GetOneTimePackage();
-    if (!pTarget)
-        FindPackageTarget(actor);
-    P114RefOps* eb = ((P114ActorOps*)actor)->FUN_008a2d40();
-    if (!eb && (!pTarget ||
-                (!pTarget->IsActor() && !((P114ActorOps*)actor)->FUN_00575450(((P114RefOps*)pTarget)->FUN_0084e3a0()))))
-    {
-        SetProcessTarget(actor, 1);
-        if (!((P114ActorOps*)actor)->FUN_008b3bb0())
-            StopActorMovement(actor);
-        return;
-    }
-    bool cf = false;
-    if (pTarget && pTarget->IsActor() && pTarget != actor)
-    {
-        cf = true;
-        Actor* e = dynamic_cast<Actor*>(pTarget);
-        P114Package* l = (P114Package*)e->GetCurrentAIProcess()->GetCurrentPackage();
-        if (pTarget != DAT_011dea3c && (!l || (l->FUN_0041ca90() != 1 && !l->FUN_00674d40())))
-        {
-            SetAnimationState(0);
-            return;
-        }
-    }
-    P114Point a = ((P114Point*)actor->GetPos())->FUN_00439ef0(*(P114Point*)actor->GetPos());
-    float p = 0.0f;
-    TESObjectREFR* f = 0;
-    P114Point h;
-    h.FUN_006815c0();
-    P114Point s;
-    s.FUN_006815c0();
-    if (cf)
-    {
-        a = ((P114Point*)actor->GetPos())->FUN_00439ef0(*(P114Point*)pTarget->GetPos());
-        f = pTarget;
-        p = 0.0f;
-        int count = i->FUN_00671d10()->FUN_0044ddc0();
-        if (count <= 0)
-            count = 200;
-        if (pTarget == DAT_011dea3c && p == 0.0)
-            p = (float)count;
-        else if (p == 0.0 && ((P114Cell*)((P114ActorOps*)actor)->FUN_008d6f30())->FUN_00425fd0())
-            p = *DAT_011cdbac.FUN_00403e20();
-        else if (p == 0.0)
-            p = count * *DAT_011cd82c.FUN_00403e20();
-    }
-    if (i->FUN_0055b980() && i->Check(actor, 0, -1.0f, 0))
-    {
-        if (!cf)
-        {
-            P114RefOps* item2 = ((P114ActorOps*)actor)->FUN_008a2d40();
-            if (item2)
-            {
-                P114RefOps* c = 0;
-                if (item2->FUN_00559450())
-                    c = *item2->FUN_00559450()->FUN_006815c0();
-                unsigned int q = 0;
-                if (c && c->FUN_0041c8d0())
-                    q = ((P114RefOps*)c->FUN_0041c8d0())->FUN_0084e3a0();
-                TESObjectREFR* ba = i->FUN_0055b980()->FUN_0067f390();
-                if (!ba)
-                    ba = m_pReference40;
-                if (ba && ((P114RefOps*)ba)->FUN_0055d310())
-                {
-                    ((P114ActorOps*)actor)->FUN_00892e90(item2->FUN_0044ddc0(), c, ba, i->FUN_00672930(), q);
-                }
-                else
-                {
-                    if (item2->FUN_00559450())
-                        c = *item2->FUN_00559450()->FUN_006815c0();
-                    P114Point* locationPos = 0;
-                    P114RefOps* locationData = i->FUN_0055b980();
-                    if (locationData)
-                    {
-                        TESObjectREFR* location2 = locationData->FUN_0067f390();
-                        if (!location2)
-                            location2 = m_pReference40;
-                        if (location2 && (((P114RefOps*)location2)->FUN_007af430() == DAT_011ca244 ||
-                                          ((P114RefOps*)location2)->FUN_007af430() == DAT_011ca248))
-                            locationPos = (P114Point*)location2->GetPos();
-                    }
-                    ((P114ActorView*)actor)
-                        ->SetDestination(item2->FUN_0044ddc0(), c, i->FUN_00672930(), locationPos, 0);
-                }
-            }
-            delete item2;
-            SetProcessTarget(actor, 1);
-        }
-        else if (p >= a.FUN_00457990())
-        {
-            SetProcessTarget(actor, 1);
-            Actor* other2 = (Actor*)pTarget;
-            if (other2->GetCurrentAIProcess()->GetOneTimePackage())
-            {
-                other2->GetCurrentAIProcess()->SetProcessTarget(actor, 1);
-                if (((P114Package*)other2->GetCurrentAIProcess()->GetOneTimePackage())->FUN_00674d40())
-                {
-                    P114Package* running = (P114Package*)other2->GetCurrentAIProcess()->GetOneTimePackage();
-                    delete (TESForm*)running;
-                    other2->GetCurrentAIProcess()->StopPackage();
-                    if (((P114ActorOps*)other2)->FUN_008b3bb0())
-                        ((P114ActorOps*)other2)->FUN_0087faa0();
-                    CanProcessActor(actor, false);
-                    return;
-                }
-            }
-        }
-        if (!((P114ActorOps*)actor)->FUN_008b3bb0())
-            StopActorMovement(actor);
-        return;
-    }
-    if (cf)
-    {
-        h = ((P114Point*)actor->GetPos())->FUN_00439ef0(i->FUN_00675de0(actor));
-        s = ((P114Point*)f->GetPos())->FUN_00439ef0(i->FUN_00675de0(actor));
-        if (((p < a.FUN_00457990() && h.FUN_00457990() <= s.FUN_00457990()) ||
-             (f != DAT_011dea3c && ((MobileObject*)f)->GetCurrentPackage() &&
-              ((P114Package*)((MobileObject*)f)->GetCurrentPackage())->FUN_00678610())) &&
-            !((P114ActorOps*)actor)->FUN_008b3bb0())
-        {
-            SetCurrentMovementComplete(true);
-            SetProcessTarget(actor, -1);
-            return;
-        }
-    }
-    if (((P114ActorOps*)actor)->FUN_008b3bb0() && (!cf || p >= a.FUN_00457990()) &&
-        !Move(actor, i->FUN_00675de0(actor), i->FUN_00675c20(actor), i->FUN_00675a50(actor)))
-        return;
-    if (!((P114ActorOps*)actor)->FUN_008b3bb0())
-    {
-        P114Global* elapsed = FUN_004839c0(0x3a);
-        float hour = DAT_011de7b8.FUN_00867da0();
-        if (hour < FUN_007df1f0())
-            hour += 24.0;
-        float global = hour - FUN_007df1f0();
-        global = (3600.0 / elapsed->FUN_00526ac0()) * global;
-    }
-}
 
 struct Target;
 struct Node
@@ -16755,49 +14038,6 @@ struct Process
     bool completed(Target*);
     void UpdateTargetSelection(Target* actor);
 };
-// @fnv 0x009177d0
-void Process::UpdateTargetSelection(Target* actor)
-{
-    if (actor->active() && actor->state() == 0 && selected == 0 && list.empty())
-        prepare(actor, 0, 0);
-    if (actor->state() != 9 && actor->active())
-    {
-        if (selected == 0 && list.size() && g_011e043c.ready())
-        {
-            selected = *list.value();
-            changed();
-            if (selected->owner())
-                list.remove(selected);
-            else
-            {
-                int count = list.size();
-                int indexB = randomValue() % count;
-                if (indexB >= count)
-                    indexB = count;
-                Node* node2 = &list;
-                for (int step = 0; step < indexB; step++)
-                    node2 = node2->next();
-                selected = *node2->value();
-                changed();
-            }
-            g_011e043c.reset();
-        }
-        setTarget(selected);
-        if (selected)
-            act(actor, 0);
-        if (completed(actor))
-        {
-            selected = 0;
-            changed();
-        }
-    }
-    if ((actor->active() && actor->state() == 9) || (selected == 0 && list.empty()))
-    {
-        finish(1);
-        list.clear();
-    }
-    update(actor, 0, 2, 1, 0, 1);
-}
 
 namespace fnv_00917a70 {
 struct FurnitureListAccess
@@ -16835,71 +14075,6 @@ struct FurnitureProcess : MiddleHighProcess
     void FUN_0092c680();
     void FUN_00917a70(FurnitureActorAccess* actor, int elapsed);
 };
-// @fnv 0x00917a70
-void FurnitureProcess::FUN_00917a70(FurnitureActorAccess* actor, int elapsed)
-{
-    TESPackage* package = 0;
-    package = GetOneTimePackage();
-    InventoryLookup* inventory = actor->FUN_00891d30();
-    if (IsMovementComplete())
-    {
-        StartIdleAnimation(actor, 0, 2, true, false, true);
-        return;
-    }
-    if (actor->IsCharacter() && !actor->Unk_85() && !m_pFurnitureReference && m_kSecondaryReferenceList.IsEmpty())
-        FUN_00922670(actor, true, elapsed);
-    if (actor->IsCharacter() && actor->Unk_85() != 4)
-    {
-        if (!m_pFurnitureReference && ((FurnitureListAccess*)&m_kSecondaryReferenceList)->FUN_005ae380() &&
-            g_011e043c.FUN_0044b130())
-        {
-            m_pFurnitureReference = m_kSecondaryReferenceList.GetItem();
-            FUN_0092c680();
-            if (((FurnitureReferenceAccess*)m_pFurnitureReference)->GetOwner())
-            {
-                m_kSecondaryReferenceList.Remove(m_pFurnitureReference);
-            }
-            else
-            {
-                int index = ((FurnitureListAccess*)&m_kSecondaryReferenceList)->FUN_005ae380();
-                int count = DialogueRandom() % index;
-                if (count >= index)
-                    count = index;
-                BSSimpleList<TESObjectREFR*>* node = &m_kSecondaryReferenceList;
-                for (int i = 0; i < count; i++)
-                    node = node->GetNext();
-                m_pFurnitureReference = node->GetItem();
-                FUN_0092c680();
-                m_kSecondaryReferenceList.Remove(m_pFurnitureReference);
-            }
-            g_011e043c.FUN_0082f1f0();
-        }
-        SetTarget(m_pFurnitureReference);
-        if (m_pFurnitureReference)
-            UseFurniture(actor, false);
-        if (((FUN_00915ef0_shell*)this)->FUN_00915ef0(actor))
-            ProcessFurniture(actor);
-    }
-    if ((actor->IsCharacter() && actor->Unk_85() == 4) ||
-        (!m_pFurnitureReference && m_kSecondaryReferenceList.IsEmpty()))
-    {
-        void* item = 0;
-        if (inventory)
-        {
-            if (inventory->FUN_00559450())
-                item = *inventory->FUN_00559450()->FUN_006815c0();
-            actor->FUN_008c1de0(inventory->FUN_0044ddc0(item, true));
-        }
-        SetAnimationComplete(true);
-        m_kSecondaryReferenceList.RemoveAll();
-    }
-    StartIdleAnimation(actor, 0, 2, true, false, true);
-    if (actor->GetVtbl20Result() & 0x400)
-    {
-        actor->FUN_00884f80();
-        actor->ForwardToVtSlot(0x400);
-    }
-}
 }  // namespace fnv_00917a70
 
 class MagicItem
@@ -18213,264 +15388,6 @@ struct ThisCls
     void* CollectSearchResults(P0* a, void* b, int c);
     void* FUN_0091ae00(P0* arg0, Pkg* arg1, P2* arg2);
 };
-// @fnv 0x0091ae00
-void* ThisCls::FUN_0091ae00(P0* apActor, Pkg* apPackage, P2* arg2)
-{
-    unsigned char ok;
-    {
-        Pkg* pB;
-        pB = apPackage;
-        {
-            ObjE* tmp7c;
-            void* linked;
-            P0* pObj;
-            {
-                bool y;
-                if (pB == 0 || 0 == arg2)
-                    return 0;
-                linked = 0;
-                if (pB->FUN_0041ca90() == 2 || ((Script*)pB)->GetText() == 0)
-                {
-                    linked = apActor;
-                }
-                else
-                {
-                    linked = ((Script*)pB)->GetText()->FUN_0067f390();
-                }
-                if (0 != arg2)
-                {
-                    if (((P2B*)arg2)->FUN_00519b00() == 0)
-                    {
-                        tmp7c = arg2->FUN_00680020();
-                        if (!!tmp7c)
-                        {
-                            if (tmp7c->V22c(1))
-                            {
-                                if (!((PkgB*)pB)->FUN_00674d40())
-                                {
-                                    pB->FUN_00674e70(tmp7c, 1);
-                                    return 0;
-                                }
-                            }
-                        }
-                        return tmp7c;
-                    }
-                }
-                if (!!arg2)
-                {
-                    if (((P2B*)arg2)->FUN_00519b00() == 3)
-                    {
-                        pObj = apActor->FUN_00569b80();
-                        if (0 != pObj)
-                        {
-                            if (pObj->V22c(1))
-                            {
-                                if (!((PkgB*)pB)->FUN_00674d40())
-                                {
-                                    pB->FUN_00674e70(pObj, 1);
-                                    return 0;
-                                }
-                            }
-                        }
-                        return pObj;
-                    }
-                }
-                ok = 0;
-                do
-                {
-                    if (list5c.FUN_008256d0())
-                    {
-                        unsigned char j;
-                        CellCls* tmp40;
-                        int flagFF;
-                        P3 x;
-                        ok = 1;
-                        j = 1;
-                        tmp40 = apActor->FUN_008d6f30();
-                        x = *(P3*)apActor->V1f4();
-                        flagFF = ((P2B*)arg2)->FUN_00519b00();
-                        if (flagFF == 1)
-                        {
-                            ObjF* idle;
-                            idle = arg2->FUN_00680050();
-                            if (idle->FUN_00401170() == 0x55)
-                            {
-                                NodeCls* cand5c;
-                                if (!f4c)
-                                {
-                                    f4c = (Proc4c*)idle;
-                                    f50 = 0;
-                                }
-                                else
-                                {
-                                    f50++;
-                                }
-                                cand5c = f4c->FUN_00500940();
-                                if (!cand5c->FUN_008256d0())
-                                {
-                                    int node;
-                                    node = 0;
-                                    while (cand5c && !cand5c->FUN_008256d0() && f50 <= node)
-                                    {
-                                        void* q;
-                                        q = (void*)*((QueuedItemList*)cand5c)->_ref_006815c0();
-                                        (void)q;
-                                        cand5c = (NodeCls*)((QueuedItemList*)cand5c)->_ref_00726070();
-                                        node = 1 + node;
-                                    }
-                                }
-                                if (0 != idle)
-                                    f84 = idle;
-                                f8c = 0;
-                            }
-                            else if (idle->FUN_00401170() == 8)
-                            {
-                                f90 = idle;
-                                f8c = 0x1c;
-                            }
-                            else
-                            {
-                                if (!!arg2->FUN_00680050())
-                                {
-                                    if (arg2->FUN_00680050()->Ve4())
-                                    {
-                                        f84 = arg2->FUN_00680050();
-                                        f8c = 0;
-                                    }
-                                }
-                            }
-                        }
-                        else if (2 == flagFF)
-                        {
-                            f84 = 0;
-                            f8c = arg2->FUN_00680080();
-                            f108 = f8c;
-                        }
-                        if (!f84)
-                        {
-                            switch (f8c)
-                            {
-                            case 24:
-                            case 25:
-                            case 26:
-                            case 27:
-                                ((FUN_004534f0_shell*)apActor)->FUN_004534f0((unsigned int)f8c);
-                                f108 = f8c;
-                                j = 0;
-                                break;
-                            case 0: {
-                                void* z;
-                                z = dynamic_cast<MagicItem*>((TESForm*)arg2->FUN_00680050());
-                                if (!!z)
-                                    f164 = z;
-                                j = 0;
-                                break;
-                            }
-                            case 12:
-                            case 19:
-                            case 20:
-                            case 22:
-                            case 23:
-                                if (!apActor->FUN_00493bb0())
-                                {
-                                    CollectSearchResults(apActor, linked, f8c);
-                                    f108 = f8c;
-                                    j = 0;
-                                }
-                                break;
-                            default:
-                                break;
-                            }
-                        }
-                        if (j)
-                        {
-                            float obj34;
-                            obj34 = 0.0f;
-                            if (0 != pB->FUN_00672f20())
-                            {
-                                unsigned int val;
-                                CellCls* i;
-                                val = ((Proxy758a0*)pB)->FUN_006758a0((MobileObject*)apActor);
-                                i = (CellCls*)pB->FUN_006757e0(apActor);
-                                tmp40 = i ? i : tmp40;
-                                x = pB->FUN_00675830(apActor);
-                                obj34 = (0 < val) ? (float)val
-                                                  : ((tmp40 != 0 && FUN_00425fd0((TESObjectCELL*)tmp40))
-                                                         ? DAT_01016970
-                                                         : *DAT_011cdebc.Get());
-                                ((DH46*)g_dataHandler)
-                                    ->FUN_0046f280(tmp40, &x, obj34, &x, obj34, (void*)&CheckPackageMatch, apActor);
-                            }
-                            else
-                            {
-                                if (((ProcessQuery*)this)->Query() == 0 || !V22c(apActor, &obj34)->FUN_006728a0())
-                                {
-                                    obj34 = *DAT_011cdebc.Get();
-                                }
-                                ((DH46*)g_dataHandler)
-                                    ->FUN_0046f280(tmp40, &x, obj34, apActor->V1f4(), obj34, (void*)&CheckPackageMatch,
-                                                   apActor);
-                            }
-                            f8c = 0;
-                            f84 = 0;
-                            f90 = 0;
-                            V818(apActor);
-                        }
-                        if (0 != arg2)
-                        {
-                            f58 = ((FUN_00672930_cls*)pB)->FUN_00672930();
-                        }
-                    }
-                    {
-                        ItemCls* r;
-                        y = (unsigned char)((apActor == (P0*)DAT_011dea3c || !((FUN_00678d00_shell*)pB)->FUN_00678d00())
-                                                ? 0
-                                                : 1);
-                        while (!list5c.FUN_008256d0())
-                        {
-                            f64 = (Cont*)*((QueuedItemList*)&list5c)->_ref_006815c0();
-                            ((FUN_00905330*)&list5c)->Remove((void*)&f64);
-                            r = f64->p0;
-                            if (2 == f64->f18)
-                            {
-                                if (!r->V100())
-                                {
-                                    void* b;
-                                    OwnerForm* flag2D;
-                                    flag2D = f64->p0->FUN_00567790();
-                                    b = 0;
-                                    if (flag2D)
-                                    {
-                                        if (flag2D->FUN_00401170() == 0x2a)
-                                            b = flag2D;
-                                    }
-                                    if (b == 0)
-                                        continue;
-                                    r = DAT_011e0e80.FUN_00970a20(b, 0);
-                                }
-                            }
-                            if (y)
-                            {
-                                if (r != 0 && V4c8() != r)
-                                {
-                                    if (y && 0 != r && f40 != r)
-                                    {
-                                        int idx;
-                                        idx = r->FUN_005682c0(0);
-                                        if (0 > idx)
-                                            continue;
-                                    }
-                                }
-                            }
-                            return r;
-                        }
-                    }
-                } while (!f40 && !ok);
-                return 0;
-            }
-        }
-    }
-}
 
 namespace fnv_0091bc60 {
 struct PackageActor;
@@ -19436,244 +16353,6 @@ struct PackageGameState
 };
 extern PackageGameState DAT_011de7b8;
 
-// Runs the actor's current package state machine, advancing states and clearing the package when it finishes.
-// @fnv 0x0091bc60
-void PackageProcess::UpdatePackage(MobileObject* object, float delta)
-{
-    if (!object)
-        return;
-    PackageActor* actor_ = (PackageActor*)dynamic_cast<Actor*>(object);
-    bool again3 = true;
-    if (actor_ && actor_->FUN_005653d0())
-    {
-        Attach(actor_, 0);
-        RunningPackage* package3 = GetAssignedPackage();
-        package3 = package3;
-        Refresh();
-        if (package3 && package3->FUN_009611e0() != -1 && !package3->FUN_008a6290())
-        {
-            while (again3)
-            {
-                switch (DAT_011a3ff0[package3->FUN_009611e0()][GetState()])
-                {
-                case 0: {
-                    PackageTargetRef* currentLocation4 = 0;
-                    if (package3->FUN_0055b980())
-                        currentLocation4 = package3->FUN_0055b980()->FUN_0067f390();
-                    if (location && !HasAction())
-                        currentLocation4 = location;
-                    if (actor_->IsInCombat() && !actor_->FUN_009344a0()->Evaluate(actor_, 0, DAT_01012054, 0))
-                        StopCombat(actor_);
-                    Begin(actor_, 1, 1, 0x101, 0);
-                    if (!actor_->IsInCombat() && actor_->FUN_009344a0() &&
-                        actor_->FUN_009344a0()->FUN_0041ca90() != 6 &&
-                        actor_->FUN_009344a0()->Evaluate(actor_, 0, DAT_01012054, 0) &&
-                        actor_->FUN_008d8520()->FUN_0045cd60() == 1 &&
-                        (!currentLocation4 || !currentLocation4->FUN_00568680()))
-                        again3 = true;
-                    else
-                        again3 = false;
-                    break;
-                }
-                case 2:
-                    again3 = CheckActivationTarget(actor_);
-                    break;
-                case 47:
-                    again3 = false;
-                    break;
-                case 39:
-                    Handle506(actor_);
-                    again3 = false;
-                    break;
-                case 12:
-                    Handle527(actor_);
-                    again3 = false;
-                    break;
-                case 41:
-                    SetState(actor_, 2);
-                    break;
-                case 22:
-                    StopCombat(actor_);
-                    SetState(actor_, 1);
-                    break;
-                case 23:
-                    SetState(actor_, 1);
-                    again3 = false;
-                    break;
-                case 33:
-                    again3 = false;
-                    break;
-                case 26:
-                    Handle514(actor_);
-                    again3 = false;
-                    break;
-                case 35:
-                    Handle530(actor_, 1, 0);
-                    again3 = false;
-                    break;
-                case 27:
-                    Handle539(actor_);
-                    again3 = false;
-                    break;
-                case 28:
-                    Handle502(actor_);
-                    again3 = false;
-                    break;
-                case 50:
-                    Handle503(actor_);
-                    again3 = false;
-                    break;
-                case 13: {
-                    if (!target)
-                        FindTarget(actor_);
-                    if (!target || target->FUN_00440d80())
-                        SetState(actor_, 1);
-                    else
-                    {
-                        int flags3 = GetInfo()->FUN_00676280(actor_) < 1 ? 400 : 0;
-                        if (package3->Complete(actor_, flags3))
-                            SetState(actor_, 1);
-                    }
-                    again3 = false;
-                    break;
-                }
-                case 14:
-                    if (!target)
-                        FindTarget(actor_);
-                    if (!target)
-                        SetState(actor_, 1);
-                    if (target && target->IsActor() && target != DAT_011dea3c && package3->FUN_0041ca90() == 2)
-                        Configure(actor_, GetInfo(), 1);
-                    CheckActivationTarget(actor_);
-                    if (actor_->FUN_009344a0() && actor_->FUN_009344a0()->Complete(actor_, 0) &&
-                        actor_->FUN_008d8520()->FUN_0045cd60() == 1)
-                        again3 = true;
-                    else
-                        again3 = false;
-                    break;
-                case 1:
-                    again3 = false;
-                    break;
-                case 4:
-                    again3 = false;
-                    break;
-                case 5:
-                    again3 = FUN_0091d790(actor_);
-                    break;
-                case 6:
-                    if (actor_->IsInCombat())
-                        StopCombat(actor_);
-                    again3 = FUN_0091d3c0(actor_, DAT_01084838, 1);
-                    break;
-                case 7:
-                    if (actor_->IsInCombat())
-                        StopCombat(actor_);
-                    again3 = FUN_0091c810(actor_);
-                    break;
-                case 9:
-                    again3 = Handle519(actor_, delta);
-                    break;
-                case 8:
-                    if (actor_->IsInCombat())
-                        StopCombat(actor_);
-                    Handle497(actor_);
-                    again3 = false;
-                    break;
-                case 15:
-                    if (actor_->IsInCombat())
-                        StopCombat(actor_);
-                    Start(actor_, 0, 1, 0x101);
-                    again3 = false;
-                    break;
-                case 10:
-                    if (actor_->IsInCombat())
-                        StopCombat(actor_);
-                    End(actor_);
-                    again3 = false;
-                    break;
-                case 18:
-                    SetState(actor_, 1);
-                case 54:
-                    again3 = false;
-                    break;
-                default:
-                    again3 = false;
-                    break;
-                }
-                if (actor_->FUN_00931850() == 1)
-                {
-                    RunningPackage* finished = GetAssignedPackage();
-                    if (finished && finished->FUN_009611e0() != -1 &&
-                        DAT_011a3ff0[finished->FUN_009611e0()][GetState()] == 54)
-                    {
-                        if (finished->FUN_009611e0() == 0)
-                        {
-                            if (!finished->Evaluate(actor_, 0, DAT_01012054, 0))
-                            {
-                                SetState(actor_, -1);
-                                return;
-                            }
-                        }
-                        else if (finished->FUN_009611e0() == 3)
-                        {
-                            SetState(actor_, -1);
-                            return;
-                        }
-                        else if (finished->FUN_0041ca90() == 3 || finished->FUN_0041ca90() == 4)
-                        {
-                            SetState(actor_, -1);
-                            return;
-                        }
-                        StopMovement(actor_);
-                        if (finished && finished->FUN_00670f90())
-                            actor_->SetPackage(finished, DAT_011de7b8.FUN_00867d60());
-                        if (!finished->FUN_0041d8a0()->FUN_00726070())
-                        {
-                            Clear(0);
-                            if (HasAction() && !IsActionDone())
-                                StopAction();
-                            else if (GetInfo()->FUN_00674d40())
-                            {
-                                PackageInfo* info_ = GetInfo();
-                                if (GetInfo()->FUN_00678610())
-                                    UpdateInfo(actor_);
-                                else
-                                    ClearInfo();
-                                if (!actor_->FUN_008b3bb0())
-                                    StopMovement(actor_);
-                            }
-                            {
-                                PackageOwned* kEntry;
-                                {
-                                    PackageOwned* disposable3 = owned;
-                                    PackageOwned* pointer4 = disposable3;
-                                    pointer4 ? pointer4->FUN_007b3fa0(1) : 0;
-                                }
-                                owned = 0;
-                                unk34 = 0;
-                                while (!ownedList.FUN_008256d0())
-                                {
-                                    kEntry = *ownedList.FUN_006815c0();
-                                    {
-                                        PackageOwned* disposableEntry3 = kEntry;
-                                        PackageOwned* pointerEntryTmp = disposableEntry3;
-                                        pointerEntryTmp ? pointerEntryTmp->FUN_007b3fa0(1) : 0;
-                                    }
-                                    ownedList.FUN_00905330(&kEntry);
-                                }
-                                location = 0;
-                                queue.FUN_00470470();
-                            }
-                        }
-                    }
-                }
-                package3 = GetAssignedPackage();
-            }
-        }
-    }
-    if (!actor_->FUN_008b3bf0())
-        ((PackageActor*)object)->FUN_008d8520()->Finish();
-}
 }  // namespace fnv_0091bc60
 
 struct PackageTargetAccess
@@ -19722,79 +16401,6 @@ struct FollowProcess : TargetProcess
     virtual bool UpdateDestination(Actor*, NiPoint3, TESObjectCELL*, TESWorldSpace*);
     bool FUN_0091d3c0(Actor* actor, float elapsed, bool advance);
 };
-// Updates the follow package target: validates the package, refreshes the destination when the target moved or is too far, and handles run-once packages.
-// @fnv 0x0091d3c0
-bool FollowProcess::FUN_0091d3c0(Actor* actor, float elapsed, bool advance)
-{
-    PackageAccess* pPackage = 0;
-    pPackage = (PackageAccess*)GetOneTimePackage();
-    if (pPackage && pPackage->FUN_008a6290())
-    {
-        if (!((PlayerPackageAccess*)DAT_011dea3c)->HasExtraFollowerForm(actor))
-        {
-            if (((PlayerPackageAccess*)DAT_011dea3c)->FUN_00962620() < *DAT_011cdad0.FUN_0043d4d0())
-                pPackage->SetFlag10000(false);
-            else
-                return false;
-        }
-        else
-            return false;
-    }
-    TESObjectREFR* target = 0;
-    if (!pTarget || pTarget->GetDeleted())
-    {
-        FindPackageTarget(actor);
-        if (pTarget)
-            m_kPackageTargetPosition = *pTarget->GetPos();
-    }
-    if (!pTarget)
-    {
-        if (advance)
-            SetProcessTarget(actor, 1);
-        return false;
-    }
-    float distance = ((ReferenceAccess*)actor)->FUN_005723b0(pTarget, 0, 0);
-    ((ReferenceAccess*)actor)->FUN_00575d70();
-    ((ReferenceAccess*)pTarget)->FUN_00575d70();
-    float fRadius = pPackage->GetPackageResult(actor, false);
-    target = pTarget;
-    if (!pTarget ||
-        (pPackage->FUN_0041ca90() == 1 && pPackage->FUN_0055b980() && pPackage->FUN_0055b980()->FUN_00678ca0() < 2 &&
-         pPackage->IsEffectValid(actor, 0, DAT_01012054, 0)))
-    {
-        if (advance)
-        {
-            SetProcessTarget(actor, 1);
-            if (pPackage->FUN_00674d40())
-            {
-                if (GetRunOncePackage())
-                    StopRunOncePackage();
-                else
-                    StopPackage();
-                CanProcessActor(actor, false);
-                return false;
-            }
-            if (!((ReferenceAccess*)actor)->FUN_008b3bb0())
-                StopActorMovement(actor);
-        }
-    }
-    else
-    {
-        float displacement = (m_kPackageTargetPosition - *pTarget->GetPos()).Length();
-        if (displacement > *DAT_011cd950.FUN_00403e20() ||
-            (distance > fRadius && ((ReferenceAccess*)actor)->FUN_008b3bb0()))
-        {
-            if (!UpdateDestination(actor, *pTarget->GetPos(), pTarget->GetParentCell(),
-                                   ((ReferenceAccess*)pTarget)->FUN_00575d70()))
-                return true;
-            m_kPackageTargetPosition = *pTarget->GetPos();
-        }
-    }
-    distance = ((ReferenceAccess*)actor)->FUN_005723b0(target, 0, 0);
-    if (distance < fRadius && !((ReferenceAccess*)actor)->FUN_008b3bb0())
-        ((ReferenceAccess*)actor)->FUN_0087faa0();
-    return false;
-}
 
 struct ActivationPackage : TESForm
 {
@@ -19847,75 +16453,6 @@ struct ActivationProcess : MiddleHighProcess
 {
     bool CheckActivationTarget(Actor* actor);
 };
-// Checks the activation target's distance and state, updates the actor's activation state, and returns whether activation proceeds.
-// @fnv 0x0091d810
-bool ActivationProcess::CheckActivationTarget(Actor* actor)
-{
-    TESPackage* package = GetOneTimePackage();
-    if (!pTarget)
-        FindPackageTarget(actor);
-    if (!pTarget || ((ActivationReference*)pTarget)->FUN_00440d80())
-        SetProcessTarget(actor, 1);
-    else
-    {
-        if (package->FUN_0041ca90() == 9 && !((ActivationPackage*)package)->IsEffectValid(actor, 300))
-            SetProcessTarget(actor, -1);
-        void* targetData = ((ActivationReference*)pTarget)->FUN_00568e50();
-        bool closeEnough = false;
-        if (targetData)
-        {
-            NiPoint3 delta = ((ActivationReference*)pTarget)->FUN_00568fa0() - *actor->GetPos();
-            if (delta.Length() <= 128.0)
-                closeEnough = true;
-        }
-        else
-        {
-            closeEnough = ((ActivationPackage*)GetCurrentPackage())->IsNear(actor, 0);
-        }
-        if (!closeEnough)
-        {
-            if (actor->Unk_85())
-                UpdateActorInteraction(actor);
-            NiPoint3_ext location;
-            void* data = ((ActivationReference*)pTarget)->FUN_00568e50();
-            if (!data)
-                (NiPoint3&)location = *pTarget->GetPos();
-            else
-                (NiPoint3&)location = ((ActivationReference*)pTarget)->FUN_00568fa0();
-        }
-        else
-        {
-            if (pTarget == DAT_011dea3c && ((ActivationPlayer*)DAT_011dea3c)->IsSleepingOrResting() &&
-                !((ActivationPlayer*)DAT_011dea3c)->busy)
-            {
-                ((ActivationPlayer*)DAT_011dea3c)->FUN_005c1a00(false, 1);
-                SetProcessTarget(actor, -2);
-                return false;
-            }
-            else if (!pTarget->IsActor())
-            {
-                SetProcessConditionMet(true);
-                ((ActivationReference*)pTarget)->FUN_00573170(actor, false, 0, 1);
-                SetProcessTarget(actor, 1);
-                return true;
-            }
-            else
-            {
-                if (pTarget == DAT_011dea3c && ((ActivationPlayer*)DAT_011dea3c)->IsSleepingOrResting() &&
-                    !((ActivationPlayer*)DAT_011dea3c)->busy)
-                {
-                    ((ActivationPlayer*)DAT_011dea3c)->FUN_005c1a00(false, 1);
-                    SetProcessTarget(actor, -1);
-                    return false;
-                }
-                SetProcessConditionMet(true);
-                SetProcessTarget(actor, 1);
-            }
-            return true;
-        }
-    }
-    return false;
-}
 
 struct ProcedureSetting
 {
@@ -20275,47 +16812,6 @@ struct FollowProcedure
     void FUN_0091d3c0(ProcedureActor*, float, bool);
     bool FUN_0091dd30(ProcedureActor*, void*);
 };
-// Refreshes the follow target reference, advances the actor and target procedures while not busy, and returns false.
-// @fnv 0x0091dd30
-bool FollowProcedure::FUN_0091dd30(ProcedureActor* actor, void* unused)
-{
-    int attempts3 = (int)(*DAT_011cd6cc.FUN_00403e20() * 4.0);
-    Actor* target4 = 0;
-    if (!targetReference)
-        AcquireTarget(actor);
-    target4 = dynamic_cast<Actor*>(targetReference);
-    if (!targetReference || reinterpret_cast<ProcedureRef*>(targetReference)->FUN_00440da0())
-    {
-        actor->ResetTargetPointer(target4);
-        actor->FUN_00881680(0);
-        return false;
-    }
-    if (target4 && actor->FUN_005723b0(target4, 0, 0) < 250.0 &&
-        reinterpret_cast<ProcedureActor*>(target4)->FUN_008d8520())
-    {
-        while (attempts3)
-        {
-            if (actor->IsBusy(0))
-                break;
-            actor->Advance();
-            if (target4 && !reinterpret_cast<ProcedureActor*>(target4)->IsBusy(0))
-            {
-                reinterpret_cast<ProcedureActor*>(target4)->Advance();
-            }
-            attempts3--;
-        }
-    }
-    else
-    {
-        FUN_0091d3c0(actor, DAT_01084838, false);
-    }
-    if (target4 && !reinterpret_cast<ProcedureActor*>(target4)->IsBusy(0))
-    {
-
-        reinterpret_cast<ProcedureActor*>(target4)->FUN_008d8520()->Update();
-    }
-    return false;
-}
 
 struct RefQuery
 {
@@ -20765,56 +17261,6 @@ struct CrimeProcess
     virtual void Accept(CrimeActor*, void*, int, int, int, int, int, int, int, int, int, int, int);
     void FUN_0091ded0(CrimeActor* actor);
 };
-// Scans the alarm's crime entries, processes each via crimeHandler, and accepts or rejects the actor based on Evaluate results and its class.
-// @fnv 0x0091ded0
-void CrimeProcess::FUN_0091ded0(CrimeActor* actor)
-{
-    AlarmInfo* alarm5 = Alarm();
-    void* context4 = ((CrimeContext*)alarm5->GetData())->Resolve();
-    bool accepted9 = false;
-    if (alarm5)
-    {
-        if (!actor->Class()->Guard())
-        {
-            CrimeNode* nodeB = alarm5->GetCrimeNode();
-            while (nodeB && *nodeB->Head())
-            {
-                CrimeEntry* entry5 = *nodeB->Head();
-                TESObjectREFR* kRef = 0;
-                Actor* criminal4 = 0;
-                kRef = entry5->Reference();
-                if (kRef && ((RefQuery*)kRef)->IsActor())
-                    criminal4 = dynamic_cast<Actor*>(kRef);
-                if (!entry5->Done())
-                    crimeHandler->Process(actor->Extra(), actor->Value((float)*crimeSetting.IntValue()),
-                                          actor->Value((float)*crimeSetting.IntValue()), CrimeCallback, entry5);
-                if (!accepted9)
-                {
-                    int result = 0;
-                    if (entry5->Kind() > 2)
-                    {
-                        if (criminal4 && actor->Evaluate(context4, 0, &result, 0))
-                            accepted9 = true;
-                    }
-                    else
-                    {
-                        if (actor->Evaluate(context4, 0, &result, 0))
-                            accepted9 = true;
-                    }
-                }
-                nodeB = nodeB->Next();
-            }
-            if (accepted9)
-            {
-                Accept(actor, context4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0);
-                return;
-            }
-            Reject(actor, 3);
-        }
-        else
-            Reject(actor, 1);
-    }
-}
 
 struct PackageTargetView
 {
@@ -21624,136 +18070,6 @@ struct ProcessView
     AcquireView* acquire;
     void FUN_0091f130(RefView* actor);
 };
-// Advances or resets the actor's package target based on the package's target data, evaluation result and current acquire state.
-// @fnv 0x0091f130
-void ProcessView::FUN_0091f130(RefView* actor)
-{
-    PackageView* package2 = 0;
-    package2 = GetAssignedPackage();
-    if (!package2)
-        return;
-    int count = 1;
-    if (package2->FUN_00671d10())
-        count = package2->FUN_00672930();
-    PackageTargetView* data7 = package2->FUN_00671d10();
-    if (package2->FUN_0041ca90() == 0 && data7 && (data7->FUN_00680080() == 19 || data7->FUN_00680080() == 20))
-    {
-        SetTargetMode(actor, 1);
-        if (GetIndex() > 1)
-        {
-            if (!queued.FUN_008256d0())
-            {
-                Advance(actor, -1);
-                acquire = *queued.FUN_006815c0();
-                queued.FUN_00905330(acquire);
-                SetObject(acquire->object);
-            }
-            else
-            {
-                Advance(actor, 1);
-                if (actor->IsNPC())
-                {
-                    TESNPC* npc2 = dynamic_cast<TESNPC*>(actor->FUN_007af430());
-                    if (npc2)
-                        npc2->FUN_006047c0((Actor*)actor, 1, 1, 0, 1);
-                }
-                else
-                {
-                    TESCreature* creature = dynamic_cast<TESCreature*>(actor->FUN_007af430());
-                    if (creature)
-                        creature->FUN_005f9e00((Actor*)actor, 1, 1, 1);
-                }
-            }
-        }
-        return;
-    }
-    if (Evaluate(actor, count))
-    {
-        EndMove(actor);
-        if (GetFlag())
-        {
-            if (package2->FUN_009611e0() == 26)
-                Advance(actor, 2);
-            else
-                Advance(actor, 1);
-        }
-        else
-        {
-            if (package2->Test((Actor*)actor, 0, DAT_01012054, 0) || package2->FUN_0041ca90() == 2)
-            {
-                if (package2->FUN_009611e0() == 26)
-                    Advance(actor, 2);
-                else
-                    Advance(actor, 1);
-            }
-            else
-                SetIndex(0);
-        }
-        return;
-    }
-    else
-    {
-        if (!target || target->FUN_00440d80() || target->FUN_00440da0())
-            FindTarget(actor);
-        if (!target)
-        {
-            Advance(actor, 1);
-            return;
-        }
-        if (target->ContainsActor())
-        {
-            if (acquire)
-            {
-                if (acquire->kind == 4)
-                    HandleFour(actor);
-                else
-                    HandleOther(actor);
-            }
-        }
-        else if (acquire)
-        {
-            if (acquire->kind == 3)
-                HandleThree(actor);
-            else
-                SetTargetMode(actor, 0);
-        }
-        else
-        {
-            if (package2->FUN_00671d10() && package2->FUN_00671d10()->FUN_00680020() == target)
-                SetTargetMode(actor, 1);
-            else
-            {
-                Advance(actor, 1);
-                return;
-            }
-        }
-        if (actor->FUN_00931850() != 1 || actor->GetCellLoadState() != 1)
-            return;
-        if (Evaluate(actor, count))
-        {
-            EndMove(actor);
-            if (GetFlag())
-            {
-                if (package2->FUN_009611e0() == 26)
-                    Advance(actor, 2);
-                else
-                    Advance(actor, 1);
-            }
-            else
-            {
-                if (package2->Test((Actor*)actor, 0, DAT_01012054, 0) || package2->FUN_0041ca90() == 2)
-                {
-                    if (package2->FUN_009611e0() == 26)
-                        Advance(actor, 2);
-                    else
-                        Advance(actor, 1);
-                }
-                else
-                    SetIndex(0);
-            }
-        }
-    }
-}
 
 namespace fnv_0091f6c0 {
 /* First reconstruction for ProcessActorInteraction from packet disassembly (2026-10-23).
@@ -22183,109 +18499,6 @@ typedef bool(__thiscall* TransferShort)(Proc*, Actor*, Vec3);
 typedef void(__thiscall* ActorDoWork)(Component*, int, int, int, int, int, Actor*, int, int, int, int);
 typedef unsigned char(__thiscall* TaskReady)(TaskObject*);
 
-// Checks the component and task state, validates the target, transfers or creates the task object, then clears task64.
-// @fnv 0x0091f6c0
-void Proc::ProcessActorInteraction(Actor* target)
-{
-    int mode = ((GetMode)vtable[0x27c / 4])(this);
-    if (component40 == 0)
-        ((ProcessActor)vtable[0x8c / 4])(this, target);
-
-    if (component40 == 0 || component40->FUN_00440d80() || component40->FUN_00440da0())
-    {
-        ((ProcessActorFlag)vtable[0x288 / 4])(this, target, 1);
-        return;
-    }
-    if (task64 != 0)
-    {
-        if (task64->formId == task64->owner->FUN_007af430())
-        {
-            ((ProcessTask)vtable[0x12c / 4])(this, task64->owner);
-            return;
-        }
-
-        int interacting = component40->FUN_00568e50();
-        unsigned char permitted = 0;
-        if (interacting != 0)
-        {
-            Vec3 local;
-            component40->FUN_00568fa0(&local, ((ActorAdapter*)target)->Position())->FUN_00439ef0();
-            if (local.FUN_00457990() <= DAT_0102e430)
-                permitted = 1;
-        }
-        else
-        {
-            permitted = ((ActorAdapter*)((GetActor)vtable[0x22c / 4])(this))->Check(target, 0);
-        }
-
-        if (!permitted && !FUN_00915ef0(target))
-        {
-            if (((ActorAdapter*)target)->FUN_008b3bb0())
-            {
-                int nextState = component40->FUN_00568e50();
-                if (nextState == 0)
-                {
-                    if (!((Transfer)vtable[0x824 / 4])(this, target, *component40->Position(),
-                                                       component40->FUN_008d6f30(), component40->FUN_00575d70()))
-                        return;
-                }
-                else
-                {
-                    if (!((TransferShort)vtable[0x824 / 4])(
-                            this, target,
-                            *component40->Relative(component40->FUN_008d6f30(), component40->FUN_00575d70())))
-                        return;
-                }
-            }
-            if (!((ActorAdapter*)target)->FUN_008b3bb0())
-            {
-                Timer* previous = FUN_004839c0(58);
-                float timer = DAT_011de7b8.FUN_00867da0();
-                if (timer < FUN_007df1f0())
-                    timer = (float)(timer + DAT_010356d8);
-                float delta = timer - FUN_007df1f0();
-                delta *= DAT_01012640 / previous->FUN_00526ac0();
-            }
-        }
-        else
-        {
-            if (!((ActorAdapter*)target)->FUN_008b3bb0())
-                ((ProcessActor)vtable[0x294 / 4])(this, target);
-            if (!FUN_00915ef0(target))
-            {
-                Component* created = 0;
-                if (!task64->owner->Ready())
-                {
-                    TESNPC* r = dynamic_cast<TESNPC*>(task64->owner->FUN_00567790());
-                    if (r != 0)
-                        created = (Component*)DAT_011e0e80.FUN_00970a20(r, 0);
-                    task64->owner->FUN_00573170(target, 0, task64->formId, 1);
-                }
-                else
-                {
-                    created = component40;
-                    created->Work(task64->formId, 0, 1, 0, 0, target, 0, 0, 1, 0);
-                }
-                if (created != 0)
-                {
-                    int scale = FUN_0048e8a0(task64->formId);
-                    ((ActorAdapter*)target)->FUN_008924e0(target, task64->multiplier * scale);
-                }
-                void* extra = 0;
-                extra = task64->extra;
-                FUN_005ac750(created, extra, 0x4000);
-            }
-            {
-                Task* deletingTask = task64;
-                Task* savedTask = deletingTask;
-                savedTask ? savedTask->FUN_007b3fa0(1) : 0;
-            }
-            ((ProcessTask)vtable[0x12c / 4])(this, 0);
-            task64 = 0;
-        }
-    }
-    (void)mode;
-}
 }  // namespace fnv_0091f6c0
 
 namespace fnv_0091fb30 {
@@ -22330,66 +18543,6 @@ struct ActivateProcess : MiddleHighProcess
     virtual void ProcessOtherTarget(Actor*, bool);
     bool ActivatePackageTarget(Actor* actor);
 };
-// Resolves the actor's current package and either assigns it, activates the package target, or redirects the process to another target.
-// @fnv 0x0091fb30
-bool ActivateProcess::ActivatePackageTarget(Actor* actor)
-{
-    TESPackage* q = GetOneTimePackage();
-    if (q->FUN_0041ca90() != 28)
-    {
-        FindPackageTarget(actor);
-        SetProcessTarget(actor, 3);
-        ((ActivateActor*)actor)->SetPackage(q);
-        return true;
-    }
-    if (!pTarget && !FindPackageTarget(actor))
-    {
-        SetProcessTarget(actor, 3);
-        return false;
-    }
-    PackageAccess* eb = (PackageAccess*)GetOneTimePackage();
-    TESObjectREFR* p = eb->FUN_008d80e0();
-    TESObjectREFR* cf = eb->FUN_009ee040();
-    if (!eb->GetByteAtBD() && eb->FUN_00672dd0())
-    {
-        if (!eb->IsEffectValid(cf, 0, -1.0f, true) || !eb->CheckActor(p, actor, 0, -1.0f, true))
-        {
-            if (p == actor && p->IsActor())
-            {
-                Actor* b = (Actor*)p;
-                if (p != DAT_011dea3c && !eb->FUN_006727b0())
-                {
-                    ((Actor*)p)->GetProcess()->UpdateActorStateWithOptions(b, false, false, -1, true);
-                }
-            }
-            else
-            {
-                UpdateActorStateWithOptions(actor, false, false, 0x101, false);
-            }
-        }
-        else
-        {
-            if (p == DAT_011dea3c)
-            {
-                ((ActivateActor*)actor)->FUN_00573170(p, false, 0, 1);
-            }
-            else
-            {
-                SetProcessTarget(actor, 2);
-            }
-        }
-        return true;
-    }
-    if (actor != p)
-    {
-        ProcessOtherTarget(actor, true);
-    }
-    else
-    {
-        SetProcessTarget(actor, 1);
-    }
-    return true;
-}
 }  // namespace fnv_0091fb30
 
 namespace fnv_00920150 {
@@ -23644,201 +19797,6 @@ struct Target
     float FUN_007df1f0();
     void UpdateKnockedDownState(ActorStand* actor);
 };
-// Advances an actor's knocked-down/get-up state machine: starts the fall, waits for animations, plays the get-up animation and restores the actor.
-// @fnv 0x00920150
-void Target::UpdateKnockedDownState(ActorStand* actor)
-{
-    Process* idx;
-    idx = actor->v1e4();
-    if (idx == 0)
-        return;
-    if (actor == g_actorPlayer && idx == g_actorPlayer->FUN_00950a60(1))
-        return;
-    if (!actor->FUN_008845a0())
-    {
-        unk13c = 0;
-        return;
-    }
-    bool direction = false;
-    if (HasCachedFlag(0x40000000))
-        direction = actor->FUN_00893500() < 0.0;
-    if ((direction || actor->v234() || actor->FUN_004f8960() == 6) && !unk13c)
-    {
-        if (actor->v214() && actor->v214() != 5)
-            actor->FUN_0088d640();
-        actor->unk88.FUN_00815b00();
-        v6c4();
-        actor->v48(4);
-        if (actor->v234())
-        {
-            unk13c = 3;
-            if (actor->unkac)
-            {
-                actor->unkac->FUN_00c7ba10(0);
-                actor->unkac->FUN_00c7d810();
-                actor->unkac->FUN_00c7c150(0);
-            }
-            FUN_00c6a350(actor->FUN_0043fcd0(), 1, 1, 0, 1);
-            ApplyHavokOperation(actor->FUN_0043fcd0(), 1, 1);
-            idx->FUN_00496080(20, 0.0f);
-            idx->FUN_00496280();
-            v294(actor);
-        }
-        else
-        {
-            if (actor->FUN_00566950())
-                AddTimedEntry(actor, 0);
-            unk13c = 4;
-            B006815c0 velocity;
-            idx->GetMovement(&velocity, actor, 1, 0);
-            velocity = velocity.FUN_004a0bd0().FUN_0053d280(DAT_011f6394.FUN_0084d030() * 50.0);
-            if (actor->unkac)
-            {
-                actor->unkac->FUN_00c7ba10(0);
-                actor->unkac->FUN_00c7c150(1);
-            }
-            actor->GetWeaponObject();
-            FUN_00c9b670(actor->FUN_0043fcd0(), &velocity, 0, 0.0f, 1);
-            ApplyHavokOperation(actor->FUN_0043fcd0(), 0, 1);
-        }
-    }
-    switch (unk13c)
-    {
-        break;
-    case 2:
-    case 4: {
-        Node* other = idx->FUN_0084e3a0();
-        if (!other || FUN_00c82580(other) <= 0.0)
-        {
-            actor->FUN_00934250();
-            if (actor == g_actorPlayer && g_actorPlayer->FUN_008bbc10())
-                g_actorPlayer->SetActiveState(0, 0, 0);
-            if (unk13c == 4)
-                unk13c = 3;
-            else
-                unk13c = 1;
-            AnimState* anim = actor->FUN_008adcb0();
-            if (anim)
-                anim->v216(1, 0);
-            idx->FUN_00496080(20, 0.0f);
-            idx->FUN_00496280();
-            v294(actor);
-        }
-        break;
-    }
-    case 3: {
-        if (actor->FUN_00893500() >= 0.0 && !actor->v234() && actor->FUN_004f8960() != 6)
-        {
-            void* pObj = DAT_011cb6a0->FUN_00600950(actor, 0);
-            if (pObj)
-                idx->FUN_00497ca0(pObj, 20);
-            else
-            {
-                FUN_005b5e40("AI: No 'GetUp' animation found for actor '%s'.", actor->FUN_0055d520());
-                v420(actor);
-                break;
-            }
-            AnimState* getupState = actor->FUN_008adcb0();
-            if (getupState)
-                getupState->v216(0, 0);
-            unk13c = 5;
-        }
-        else
-            actor->FUN_004f8960();
-        break;
-    }
-    case 1: {
-        float start = FUN_007df1f0();
-        float elapsed = DAT_011de7b8.FUN_00867da0();
-        float now = 0.0f;
-        if (elapsed < start)
-            now = start + 23.0 - elapsed;
-        else
-            now = elapsed - start;
-        bool longerWait = DAT_011de7b8.FUN_00867950() * 0.0006600000197067857 < now;
-        bool process = DAT_011de7b8.FUN_00867950() * 0.001500000013038516 < now;
-        if (actor->FUN_00893500() >= 0.0 && !actor->v234() && longerWait && (process || actor->FUN_008a8300(16.0f)))
-        {
-            signed char saved7 = unk13c;
-            unk13c = 3;
-            void* timedAnim4 = DAT_011cb6a0->FUN_00600950(actor, 0);
-            unk13c = saved7;
-            AnimState* timedState2 = actor->FUN_008adcb0();
-            if (timedState2)
-                timedState2->v216(0, 0);
-            unk13c = 5;
-            if (timedAnim4)
-                idx->FUN_00497ca0(timedAnim4, 20);
-            else
-            {
-                FUN_005b5e40("AI: No 'GetUp' animation found for actor '%s'.", actor->FUN_0055d520());
-                v420(actor);
-            }
-        }
-        break;
-    }
-    case 5: {
-        if (idx->FUN_004981f0() && (!idx->FUN_00491040(1) || idx->FUN_00491040(1)->FUN_008041a0() == 1))
-        {
-            if (actor->FUN_005a2030())
-                idx->FUN_00498910(1, 0);
-            else if (!idx->FUN_00498230(actor))
-                idx->FUN_00498910(1, 0);
-            Node* skeletonNode = actor->FUN_0043fcd0();
-            Node* root = idx->FUN_0084e3a0();
-            if (root)
-            {
-                root = root->FUN_0045bc00(0);
-                Node* point = actor->FUN_00571530(root, FUN_008a30f0());
-                if (point == 0)
-                    point = FUN_004ade00(root, FUN_00920b60());
-                if (!point)
-                    point = FUN_004ade00(root, FUN_00920b70());
-                if (point)
-                {
-                    B006815c0 knocked = point->FUN_0045bb80().FUN_00439ef0(root->FUN_0045bb80());
-                    if (!v28c()->unk410.FUN_008a5170())
-                    {
-                        Node* getupAnim = actor->FUN_00571530(skeletonNode, FUN_005a07f0());
-                        if (getupAnim && FUN_00c6b7b0(getupAnim, 0))
-                            knocked.FUN_00439180(-1.0f);
-                    }
-                    float angle = GetDirectionAngle(&knocked);
-                    unk13c = 0;
-                    actor->v2c4(angle);
-                }
-            }
-            ApplyHavokOperation(skeletonNode, 0, 0);
-            FUN_00c9bdf0(skeletonNode, 0.0f);
-            actor->v4c(4);
-            actor->FUN_005d43c0()->UpdateRagDoll(0);
-            unk13c = 6;
-        }
-        else if (!idx->unk124.FUN_00559450() && !idx->unk128.FUN_00559450())
-            unk13c = 3;
-        break;
-    }
-    case 6:
-        if (idx->FUN_004985f0())
-        {
-            unk13c = 0;
-            idx->FUN_00498910(1, 0);
-            if (actor->unkac)
-            {
-                actor->unkac->FUN_00c7ba10(1);
-                actor->unkac->FUN_00c7a8d0();
-            }
-            actor->GetWeaponObject();
-            if (unk114 && unk12c && (unk124 || unk126) && unk12c->FUN_0045bc00(0))
-            {
-                unk12c->FUN_0043b4a0(0)->FUN_00450f90(0);
-                if (actor == g_actorPlayer && DAT_011e0410 && DAT_011e0410->FUN_0045bc00(0))
-                    DAT_011e0410->FUN_0043b4a0(0)->FUN_00450f90(0);
-            }
-        }
-        break;
-    }
-}
 }  // namespace fnv_00920150
 
 namespace fnv_00920b80 {
@@ -24073,33 +20031,6 @@ struct FUN_00920b80_shell : public MiddleHighProcess
     void ResetWeaponState(Actor920b80* apActor);
 };
 
-// If the process is active and the actor is alive with non-negative fatigue, resets its 3D, blink and weapon nodes, then clears the active flag.
-// @fnv 0x00920b80
-void FUN_00920b80_shell::ResetWeaponState(Actor920b80* apActor)
-{
-    if (!m_cCharacterControllerState)
-        return;
-    if (apActor->GetFatigue() < 0.0 || apActor->IsDead141())
-        return;
-    Node920b80* pActorRootNode = apActor->Get3DSimple();
-    ApplyHavokOperation(pActorRootNode, false, true);
-    FUN_00c9bdf0(pActorRootNode, 1.0f);
-    apActor->FUN_005d43c0(false)->UpdateRagDoll();
-    apActor->Reset3D(4);
-    Face920b80* p3DTmp = apActor->FUN_008adcb0();
-    if (p3DTmp)
-        p3DTmp->SetupBlink(0, 0);
-    m_cCharacterControllerState = 0;
-    if (pWeapon && m_pActorNode && (m_bFirstWeaponFlag || m_bThirdWeaponFlag))
-    {
-        if (((Node920b80*)m_pActorNode)->FUN_0045bc00(false))
-        {
-            ((Node920b80*)m_pActorNode)->FUN_0043b4a0(0)->FUN_00450f90(false);
-            if (apActor == g_thePlayer && g_pPlayer1stNode && g_pPlayer1stNode->FUN_0045bc00(false))
-                g_pPlayer1stNode->FUN_0043b4a0(0)->FUN_00450f90(false);
-        }
-    }
-}
 }  // namespace fnv_00920b80
 
 struct P130Anim;
@@ -24627,191 +20558,6 @@ struct P130Process : public MiddleHighProcess
     virtual void StartIdle(P130Actor*, int, int);
     bool FUN_009213e0(P130Actor* actor);
 };
-// @fnv 0x009213e0
-bool P130Process::FUN_009213e0(P130Actor* actor)
-{
-    P130Package* anim = (P130Package*)GetOneTimePackage();
-    if ((!m_pFurnitureReference || !((P130Ref*)m_pFurnitureReference)->GetNumericValue()) &&
-        (!anim || anim->FUN_0041ca90() != 37))
-        return false;
-    if (IsAdditionalActorFlagSet() && !IsCurrentlyAlerted())
-    {
-        actor->FUN_008a6840(0);
-        return true;
-    }
-    m_pReference40 = 0;
-    P130Anim* package = actor->GetAnimation();
-    switch (actor->FUN_008a7570())
-    {
-    case 0:
-    case 1:
-    case 2:
-    case 4:
-    case 7:
-    case 8:
-    case 10:
-    case 11:
-        return true;
-    }
-    bool isBed = false;
-    if (m_pFurnitureReference)
-    {
-        ((P130Ref*)m_pFurnitureReference)->FUN_007af430();
-        isBed = FUN_005094f0(((P130Marker*)&FurnitureMarker)->FUN_005094b0());
-    }
-    if (!m_ucFurnitureInteractionState)
-    {
-        HighProcess* high = dynamic_cast<HighProcess*>((MiddleHighProcess*)this);
-        if (high && (high->GetSelectedIdleForm() || actor->HasAnyFlag() || package->FUN_00498f80() ||
-                     package->IsFlaggedAsTwo()))
-        {
-            high->SetIdleForm(0);
-            high->ClearPostAnimActions();
-            package->FUN_00498910(true, true);
-        }
-        if (actor->IsPlayer())
-            FUN_00771700(10);
-        if (isBed && !GetCurrentPackage())
-            StartIdle(actor, 0, 0);
-        if (actor->FUN_004997b0())
-            actor->FUN_00884f80();
-        actor->ForwardToVtSlot(0x400);
-        if ((void*)actor != (void*)g_thePlayer)
-            StopActorMovement((Actor*)actor);
-        if (((P130Ref*)m_pFurnitureReference)->FUN_00567f80(m_ucFurnitureMarkerIndex, true) && anim &&
-            anim->FUN_0041ca90() != 37)
-        {
-            SetFurnitureState((Actor*)actor, (SIT_SLEEP_STATE)0, 0, 127);
-            return true;
-        }
-        if (anim && anim->FUN_0041ca90() != 37)
-        {
-            if (isBed)
-                SetFurnitureState((Actor*)actor, (SIT_SLEEP_STATE)6, m_pFurnitureReference, m_ucFurnitureMarkerIndex);
-            else
-                SetFurnitureState((Actor*)actor, (SIT_SLEEP_STATE)1, m_pFurnitureReference, m_ucFurnitureMarkerIndex);
-            if ((isBed || (((P130Ref*)m_pFurnitureReference)->FUN_007af430(),
-                           FUN_00509510(((P130Marker*)&FurnitureMarker)->FUN_005094b0()))) &&
-                !IsFurnitureMarkerValid((Actor*)actor))
-                FNV_Warning(
-                    "AI: Missing furniture dynamic idle for marker %d in the editor's idle manager. '%s' index %d.",
-                    ((P130Marker*)&FurnitureMarker)->FUN_005094b0(), ((P130Ref*)m_pFurnitureReference)->GetTextValue(),
-                    m_ucFurnitureMarkerIndex);
-        }
-        SetIdleAnimation(0, 0);
-        SetProcessState(0x2000);
-        SetProcessState(0x10);
-        if (isBed)
-            SetFurnitureState((Actor*)actor, (SIT_SLEEP_STATE)7, m_pFurnitureReference, m_ucFurnitureMarkerIndex);
-        else
-            SetFurnitureState((Actor*)actor, (SIT_SLEEP_STATE)2, m_pFurnitureReference, m_ucFurnitureMarkerIndex);
-        P130Node* entry = DAT_011cb6a0->FUN_00600950(actor, m_pFurnitureReference);
-        if (!entry)
-        {
-            FNV_Warning(
-                "AI: Missing furniture entry animation for marker %d in the editor's idle manager. '%s' index %d.",
-                ((P130Marker*)&FurnitureMarker)->FUN_005094b0(), ((P130Ref*)m_pFurnitureReference)->GetTextValue(),
-                m_ucFurnitureMarkerIndex);
-            m_ucFurnitureInteractionState = 0;
-            return false;
-        }
-        package->FUN_00497ca0(entry, entry->GetFlagsMasked());
-        actor->SetMarker(((P130Marker*)&FurnitureMarker)->FUN_006815c0());
-        package->CopyGlobalPosition();
-        ((P130Ref*)m_pFurnitureReference)->FUN_00568020(m_ucFurnitureMarkerIndex, true);
-    }
-    switch (m_ucFurnitureInteractionState)
-    {
-    case 2:
-    case 7: {
-        float heading = ((P130Marker*)&FurnitureMarker)->FUN_00568650();
-        actor->FUN_008b3ab0();
-        actor->SetFurnitureHeading(heading);
-        actor->SetMarker(((P130Marker*)&FurnitureMarker)->FUN_006815c0());
-        package->CopyGlobalPosition();
-        if (isBed)
-            SetFurnitureState((Actor*)actor, (SIT_SLEEP_STATE)8, m_pFurnitureReference, m_ucFurnitureMarkerIndex);
-        else
-            SetFurnitureState((Actor*)actor, (SIT_SLEEP_STATE)3, m_pFurnitureReference, m_ucFurnitureMarkerIndex);
-        break;
-    }
-    case 3:
-    case 8:
-        if (package->FUN_004981f0() && GetAnimAction() == -1 &&
-            (!package->FUN_00491040(1) || package->FUN_00491040(1)->FUN_008041a0() == 1))
-        {
-            package->CopyGlobalPosition();
-            actor->SetMarker(((P130Marker*)&FurnitureMarker)->FUN_006815c0());
-            package->FUN_00498230(actor);
-            actor->FUN_00895110(1.0f, 1.0f);
-        }
-        else if (package->FUN_004985f0())
-        {
-            if (actor->IsDead())
-            {
-                SetFurnitureState((Actor*)actor, (SIT_SLEEP_STATE)0, 0, 127);
-                actor->FUN_00931fb0(false);
-                actor->FUN_008a73e0(-1, false);
-                package->FUN_00498910(true, false);
-                if ((void*)actor == (void*)g_thePlayer)
-                    FUN_00771700(2);
-                return false;
-            }
-            else if (GetFurnitureMarkerID() > 20)
-            {
-                ((P130Ref*)m_pFurnitureReference)->FUN_00568020(m_ucFurnitureMarkerIndex, false);
-                ((P130Ref*)m_pFurnitureReference)->FUN_00568150(m_ucFurnitureMarkerIndex, false);
-                SetFurnitureState((Actor*)actor, (SIT_SLEEP_STATE)0, 0, 127);
-                ((P130Marker*)&FurnitureMarker)->FUN_00c54550(0.0f);
-                ((P130Marker*)&FurnitureMarker)->FUN_00568ab0(0);
-                ((P130Marker*)&FurnitureMarker)->FUN_0098ddd0(&pathingrequestZero);
-                m_pFurnitureReference = 0;
-                actor->FUN_00931fb0(false);
-                actor->FUN_008a73e0(-1, false);
-                if (anim)
-                {
-                    int procedure = DAT_011a3ff0[anim->FUN_009611e0()][GetPackageInfoValue()];
-                    if (procedure != 44)
-                        SetProcessTarget((MobileObject*)actor, 1);
-                }
-                if ((void*)actor == (void*)g_thePlayer)
-                    FUN_00771700(2);
-            }
-            else
-            {
-                ((P130Ref*)m_pFurnitureReference)->FUN_00568150(m_ucFurnitureMarkerIndex, false);
-                actor->FUN_00931d30(((P130Ref*)m_pFurnitureReference)
-                                        ->FUN_007af430()
-                                        ->GetFurnitureHeading(((P130Marker*)&FurnitureMarker)->FUN_005094b0()));
-                package->FUN_004974a0();
-                if (((P130IdlePtr*)&package->LocalInput)->FUN_00559450())
-                    package->FUN_004994f0(((P130IdlePtr*)&package->LocalInput)->FUN_00559450()->FUN_00825c00(), false);
-                if (isBed)
-                {
-                    P130Controller* controller = actor->FUN_008adcb0();
-                    if (controller)
-                        controller->SetState(true, false);
-                    SetFurnitureState((Actor*)actor, (SIT_SLEEP_STATE)9, m_pFurnitureReference,
-                                      m_ucFurnitureMarkerIndex);
-                }
-                else
-                    SetFurnitureState((Actor*)actor, (SIT_SLEEP_STATE)4, m_pFurnitureReference,
-                                      m_ucFurnitureMarkerIndex);
-                if (actor->IsPlayer())
-                    FUN_00771700(11);
-            }
-            package->FUN_00498910(true, false);
-        }
-        else if (!package->FUN_00921e30() && ((P130IdlePtr*)&package->LocalInput)->FUN_00559450() &&
-                 ((P130IdlePtr*)&package->LocalInput)->FUN_00559450()->FUN_0044ddc0() == 3)
-        {
-            actor->FUN_0088d640();
-            package->FUN_00498910(true, false);
-        }
-        break;
-    }
-    return true;
-}
 
 namespace fnv_00921e80 {
 struct AnimAccess;
@@ -25648,138 +21394,6 @@ struct FurnitureProcess
     bool FUN_00921e80(RefAccess* actor);
 };
 
-// @fnv 0x00921e80
-bool FurnitureProcess::FUN_00921e80(RefAccess* actor)
-{
-    AnimAccess* anim = actor->animation();
-    if (!anim)
-        return false;
-    if (PlayerBusy(DAT_011dea3c))
-        return false;
-    if (!currentFurniture)
-    {
-        state(actor, 0, 0, 0x7f);
-        end(actor, 1);
-        if (notify())
-            actor->action(DAT_011dea3c, 0, 0, 1, 0, 0, 0, 0, 0);
-        return false;
-    }
-    currentFurniture->base();
-    {
-        bool sleeping = IsFurnitureSleepMarker(marker.id());
-        if (sitState == 4 && sleeping)
-            return false;
-        if (sitState == 9 && !sleeping)
-            return false;
-        switch (sitState)
-        {
-        case 3:
-            if (markerID() > 20)
-            {
-                anim->stop(1, 0);
-                if (furniture())
-                    furniture()->release(index(), 0);
-                state(actor, 5, currentFurniture, furnitureIndex);
-            }
-            break;
-        case 4:
-        case 9: {
-            if (actor->player())
-                ShowHUD(10);
-            if (anim->playing())
-                return true;
-            if (sleeping)
-            {
-                FaceAccess* face = actor->face();
-                if (face)
-                    face->clear(0, 0);
-                state(actor, 10, currentFurniture, furnitureIndex);
-            }
-            else
-                state(actor, 5, currentFurniture, furnitureIndex);
-            IdleAccess* idle = DAT_011cb6a0->find(actor, currentFurniture);
-            if (!idle)
-            {
-                FurnitureWarning(
-                    "AI: Missing furniture exit animation (index %d) for marker %d in the editor's idle manager. '%s' index %d.",
-                    furnitureIndex, marker.id(), currentFurniture->name(), furnitureIndex);
-                currentFurniture->release(furnitureIndex, 0);
-                anim->reset();
-                anim->blend(0, 0.0f);
-                state(actor, 0, currentFurniture, 0x7f);
-                actor->turn(-currentFurniture->base()->angle(marker.id()));
-                actor->setHeading(actor->heading(0) + 3.1415927410125732);
-                clearFurniture(actor);
-                actor->flag(false);
-                if (sleeping)
-                {
-                    bool kEquip = true;
-                    bool weapon2 = true;
-                    TESPackage* pkg = package();
-                    if (pkg && pkg->FUN_00441b00())
-                        weapon2 = false;
-                    if (actor->npc())
-                    {
-                        TESNPC* npc = dynamic_cast<TESNPC*>((TESBoundObject*)actor->base());
-                        if (npc)
-                            npc->FUN_006047c0((Actor*)actor, kEquip, weapon2, false, true);
-                    }
-                    else
-                    {
-                        TESCreature* creature = dynamic_cast<TESCreature*>((TESBoundObject*)actor->base());
-                        if (creature)
-                            creature->FUN_005f9e00((Actor*)actor, kEquip, weapon2, true);
-                    }
-                }
-                actor->damage(22, (actor->fatigue() + 10.0) * -1.0, 0);
-                end(actor, 1);
-                if (notify())
-                    actor->action(DAT_011dea3c, 0, 0, 1, 0, 0, 0, 0, 0);
-                return false;
-            }
-            if (anim)
-                anim->idle(idle, idle->kind());
-            break;
-        }
-        case 5:
-        case 10:
-            if (anim->ready() && (!anim->sequence(1) || anim->sequence(1)->state() == 1))
-            {
-                int previousState = sitState;
-                state(actor, 0, currentFurniture, furnitureIndex);
-                actor->turn(-currentFurniture->base()->angle(marker.id()));
-                state(actor, previousState, currentFurniture, furnitureIndex);
-                anim->reset();
-                anim->update(actor);
-            }
-            else if (anim->finished())
-            {
-                unsigned int ctrl = markerID();
-                if (ctrl <= 20)
-                    anim->reset();
-                clearFurniture(actor);
-                if (actor->player())
-                    ShowHUD(2);
-                if (ctrl <= 20)
-                    actor->setHeading(actor->heading(0) + 3.1415927410125732);
-                actor->pick(1.0f, 1.0f);
-                actor->flag(false);
-                ControllerAccess* markerValue = controller();
-                if (markerValue)
-                    markerValue->update(actor->topic());
-                if (notify())
-                    actor->action(DAT_011dea3c, 0, 0, 1, 0, 0, 0, 0, 0);
-            }
-            break;
-        default:
-            if (sleeping)
-                sitState = 9;
-            else
-                sitState = 4;
-        }
-    }
-    return true;
-}
 }  // namespace fnv_00921e80
 
 namespace fnv_009231d0 {
@@ -26537,145 +22151,6 @@ EquipNode* FUN_004aae30(EquipNode*, const char*);
 bool FUN_00705a00();
 unsigned int GetFlagMask(const char*);
 EquipAudio* FUN_00453a70();
-// Updates the equipped model's visibility, round/light nodes, animation state and weapon sound based on the draw flag, reference, animation and actor.
-// @fnv 0x009231d0
-void EquipProcess::UpdateEquipVisuals(bool draw, EquipRef* reference, EquipAnim* animation, EquipActor* actor)
-{
-    FUN_00483710();
-    EquipNode* model3 = GetModelFilePath(reference);
-    EquipNode* root6 = 0;
-    if (reference)
-        root6 = reference->FUN_00559450();
-    if (!root6)
-        root6 = actor->Get3D();
-    if (model3)
-    {
-        EquipNode* child = model3->FUN_0045bc00(0);
-        if (child && draw)
-            child->FUN_00450f90(false);
-        if (actor == DAT_011dea3c)
-            UpdateWeaponDrawnAnimation(draw, reference, animation, actor);
-        else if (IsBusy() || GetAmmo() || IsChanging())
-        {
-            pending = true;
-            drawn = draw;
-        }
-        else if (drawn != draw && !DAT_011ddf38->FUN_0042ce10())
-        {
-            EquipWeapon* weapon6 = 0;
-            if (entry)
-            {
-                EquipWeapon* unused = entry->FUN_0044ddc0();
-            }
-            if (weapon6 && !weapon6->FUN_0046e8c0())
-            {
-                pending = true;
-                drawn = draw;
-            }
-        }
-        if (root6)
-        {
-            EquipNode* node = FUN_004aae30(root6, "##NifRound");
-            if (node)
-            {
-                if (link && link->FUN_00726070())
-                    node->FUN_00450f90(false);
-                else
-                    node->FUN_00450f90(true);
-            }
-            node = FUN_004aae30(root6, "##LightOn");
-            if (node)
-                node->FUN_00450f90(true);
-        }
-    }
-    else if (model3 && !draw && entry)
-    {
-        model3->SetVisible(0);
-        if (!DAT_011de45c->FUN_0047c850())
-            actor->FUN_0088c790(entry->FUN_0044ddc0(), 1, 0, 0, 0, 1);
-    }
-    else if (!model3 && entry && DAT_011ddf38->FUN_0042ce10())
-    {
-        EquipWeapon* weapon6 = entry->FUN_0044ddc0();
-        if (weapon6 && !weapon6->FUN_0046e8c0())
-        {
-            pending = true;
-            drawn = draw;
-        }
-    }
-    else if (!model3 && entry)
-    {
-        EquipWeapon* weapon6 = entry->FUN_0044ddc0();
-        if (weapon6 && !weapon6->FUN_0046e8c0())
-        {
-            pending = true;
-            drawn = draw;
-        }
-    }
-    if (animation && animation->FUN_0084e3a0() && !FUN_00705a00() && animation->FUN_004301b0(0) != 1)
-    {
-        if (actor == DAT_011dea3c)
-            animation->FUN_00494740(
-                actor->FUN_00897910(0, draw ? entry : (EquipEntry*)-1, draw ? !entry : false, animation, 1, -1, -1));
-        else
-            SetFlags(0x40);
-    }
-    if (draw && GetAmmo() && animation && animation->FUN_0084e3a0() &&
-        (!FUN_00705a00() || animation == DAT_011dea3c->FUN_00950a60(0)))
-    {
-        unsigned int slot = GetAmmo()->FUN_0044ddc0()->GetByteAtOffset101();
-        if (slot != 255)
-        {
-            if (actor == DAT_011dea3c)
-                animation->FUN_00494740(actor->FUN_00897910(slot, entry, false, animation, 1, -1, -1));
-            else
-                SetFlags(0x100);
-        }
-    }
-    else if ((!draw || !GetAmmo()) && animation && animation->FUN_00491040(2))
-    {
-        switch (animation->FUN_00491040(2)->FUN_0048f7f0()->FUN_005f2420())
-        {
-        case 230:
-        case 231:
-        case 232:
-        case 233:
-        case 234:
-        case 235:
-            animation->FUN_004994f0(2, 0);
-            break;
-        }
-    }
-    if (!DAT_011ddf38->FUN_0042ce10() && actor != DAT_011dea3c)
-        SetFlags(0x4000);
-    else
-        actor->GetWeaponObject();
-    EquipWeapon* weapon6 = 0;
-    if (entry)
-        weapon6 = entry->FUN_0044ddc0();
-    if (weapon6 && weapon6->FUN_00522500() && weapon6->FUN_00522500()->FUN_00511840())
-    {
-        FUN_0041a250 sound;
-        actor->FUN_005d43c0()->FUN_004189c0(&sound);
-        if (!sound.FUN_00ad8ce0())
-        {
-            unsigned int flags22 = GetFlagMask(weapon6->FUN_00522500()->CopyBig().name);
-            unsigned int extra36 = actor == DAT_011dea3c ? 0x240000 : 0;
-            extra36 ^= DAT_011dea3c->FUN_00524d10() ? 0x40000 : 0;
-            sound.FUN_00418900(FUN_00453a70()->FUN_00ad7480(weapon6->FUN_00522500()->FUN_00511840(),
-                                                            flags22 | 2 | extra36, weapon6->FUN_00522500()));
-            sound.FUN_004f15a0(1);
-            sound.FUN_00ad8f20(actor->Get3D());
-            sound.SetPositionFromArray(actor->GetPosition());
-        }
-        if (draw && !sound.FUN_00ad8930())
-            sound.FUN_00ad8830(0);
-        else if (!draw && sound.FUN_00ad8930())
-            sound.FUN_00ad88f0();
-        actor->FUN_005d43c0()->FUN_0041a3e0(sound);
-    }
-    actor->FUN_00884f80();
-}
 }  // namespace fnv_009231d0
 
 struct ItemChangeStub;
@@ -26708,34 +22183,6 @@ struct MiddleHighProcess_00924100 : MiddleHighProcess
 {
     void ResetWeaponAndAmmo(MobileObject* apRef);
 };
-
-// @fnv 0x00924100
-void MiddleHighProcess_00924100::ResetWeaponAndAmmo(MobileObject* apRef)
-{
-    Actor* pActor3 = dynamic_cast<Actor*>(apRef);
-    if (!pActor3)
-        return;
-    EquipListStub* pList = ((RefStub*)apRef)->GetExtraList()->GetEquipList();
-    if (pList)
-    {
-        ((ActorStub*)pActor3)->ClearWeaponState(0);
-        ItemChangeStub* pItem = pList->FindItem(5, 0);
-        SetCurrentArmor((InventoryStackRecord*)pItem, 0, false);
-        ((RefStub*)apRef)->ResetWeaponModel();
-        if (pWeapon)
-            ((RefStub*)apRef)->SetWeaponForm(((ItemChangeStub*)pWeapon)->GetObject());
-        ((RefStub*)apRef)->Update3DParts();
-        if (pAmmo)
-            ((RefStub*)apRef)->SetAmmoForm(((ItemChangeStub*)pAmmo)->GetObject());
-        ((RefStub*)apRef)->SetAmmoForm(0);
-        ((RefStub*)apRef)->Update3DParts();
-        Actor* pActor4 = dynamic_cast<Actor*>(apRef);
-        if (pActor4)
-        {
-            int iUnused2 = 0;
-        }
-    }
-}
 
 namespace fnv_00924560 {
 struct Form86
@@ -27018,127 +22465,6 @@ struct Process86
     void FUN_0092e560(unsigned int, MobileObject*);
     void FUN_00924560(unsigned int, MobileObject*);
 };
-// Serializes the process fields to the save buffer, writing a BLOCK header and size, optional version-gated fields, object/form/reference IDs and a counted list.
-// @fnv 0x00924560
-void Process86::FUN_00924560(unsigned int flags, MobileObject* owner)
-{
-    Actor* actor12 = dynamic_cast<Actor*>(owner);
-    FUN_0092e560(flags, owner);
-    unsigned short blockSize14 = 0;
-    unsigned int block31 = 0;
-    unsigned int start24 = ((Buffer86*)DAT_011de45c)->FUN_00825c00();
-    if (*DAT_011de4e8.FUN_00408d60())
-        start24 = ((Buffer86*)DAT_011de45c)->FUN_00825c00();
-    if (((Buffer86*)DAT_011de45c)->FUN_00862110())
-    {
-        unsigned int tag = 0x424c4f4b;
-        ((Buffer86*)DAT_011de45c)->FUN_008579b0(&tag, 4);
-        block31 = ((Buffer86*)DAT_011de45c)->FUN_00825c00();
-        ((Buffer86*)DAT_011de45c)->FUN_008579b0(&blockSize14, 2);
-    }
-    ((Buffer86*)DAT_011de45c)->FUN_008579b0(&unk134, 1);
-    ((Buffer86*)DAT_011de45c)->FUN_008579b0(&unk135, 1);
-    if (((Buffer86*)DAT_011de45c)->FUN_008df040() >= 52)
-    {
-        ((Buffer86*)DAT_011de45c)->FUN_008579b0(&unk168, 1);
-        ((Buffer86*)DAT_011de45c)->FUN_008579b0(&unk170, 4);
-    }
-    if (((Buffer86*)DAT_011de45c)->FUN_008df040() >= 77)
-        ((Buffer86*)DAT_011de45c)->FUN_008579b0(&unk174, 4);
-    if (flags & 0)
-        package.FUN_008c6250(flags);
-    int objectID19 = 0;
-    if (object)
-        objectID19 = object->FUN_0084e3a0();
-    ((Buffer86*)DAT_011de45c)->FUN_00857a10(&objectID19, 4);
-    ((Buffer86*)DAT_011de45c)->FUN_008579b0(&unk108, 4);
-    ((Buffer86*)DAT_011de45c)->FUN_008579b0(&unk1da, 1);
-    ((Buffer86*)DAT_011de45c)->FUN_008579b0(&position, 12);
-    ((Buffer86*)DAT_011de45c)->FUN_008579b0(&unkdc, 4);
-    ((Buffer86*)DAT_011de45c)->FUN_008579b0(&unk13d, 1);
-    ((Buffer86*)DAT_011de45c)->FUN_008579b0(&unk144, 1);
-    int formID22 = 0;
-    if (form)
-        formID22 = form->FUN_0084e3a0();
-    ((Buffer86*)DAT_011de45c)->FUN_00857a10(&formID22, 4);
-    float length90 = vector.FUN_00568650();
-    unsigned char modeValue7 = mode;
-    Vec86 point12 = vector;
-    ((Buffer86*)DAT_011de45c)->FUN_008579b0(&length90, 4);
-    ((Buffer86*)DAT_011de45c)->FUN_008579b0(&modeValue7, 1);
-    ((Buffer86*)DAT_011de45c)->FUN_008579b0(&point12, 12);
-    ((Buffer86*)DAT_011de45c)->FUN_008579b0(&unk13c, 1);
-    if (flags & 0x10000000)
-        FUN_0049aa80(owner, animation);
-    int referenceID17 = 0;
-    if (reference)
-        referenceID17 = reference->FUN_0040a1e0();
-    ((Buffer86*)DAT_011de45c)->FUN_00857a10(&referenceID17, 4);
-    int otherID4 = 0;
-    if (other)
-        otherID4 = other->RefreshItem();
-    ((Buffer86*)DAT_011de45c)->FUN_00857a10(&otherID4, 4);
-    FUN_00805b40(effects, actor12);
-    if (((Buffer86*)DAT_011de45c)->FUN_008df040() >= 69)
-        ((Buffer86*)DAT_011de45c)->FUN_008579b0(&unke0, 1);
-    if (((Buffer86*)DAT_011de45c)->FUN_008df040() >= 73)
-    {
-        ((Buffer86*)DAT_011de45c)->FUN_008579b0(&unk188, 1);
-        ((Buffer86*)DAT_011de45c)->FUN_008579b0(&unk189, 1);
-    }
-    if (((Buffer86*)DAT_011de45c)->FUN_008df040() >= 101)
-    {
-        ((Buffer86*)DAT_011de45c)->FUN_008579b0(&unkd8, 4);
-        unsigned short count33 = 0;
-        unsigned short* countLocation35 = (unsigned short*)((Buffer86*)DAT_011de45c)->FUN_00825c00();
-        ((Buffer86*)DAT_011de45c)->FUN_008579b0(&count33, 2);
-        List86* node17 = &list;
-        while (node17 && !node17->FUN_008256d0())
-        {
-            Form86* item13 = *node17->FUN_006815c0();
-            int id1 = 0;
-            if (item13)
-                id1 = item13->FUN_0084e3a0();
-            ((Buffer86*)DAT_011de45c)->FUN_00857a10(&id1, 4);
-            count33++;
-            node17 = node17->FUN_00726070();
-        }
-        *countLocation35 = count33;
-    }
-    if (((Buffer86*)DAT_011de45c)->FUN_008df040() >= 109)
-        ((Buffer86*)DAT_011de45c)->FUN_008579b0(&unk18b, 1);
-    if (((Buffer86*)DAT_011de45c)->FUN_008df040() >= 113)
-    {
-        int id1 = 0;
-        if (reference2)
-            id1 = reference2->FUN_0040a1e0();
-        ((Buffer86*)DAT_011de45c)->FUN_00857a10(&id1, 4);
-    }
-    if (*DAT_011de4e8.FUN_00408d60())
-    {
-        unsigned int end14 = ((Buffer86*)DAT_011de45c)->FUN_00825c00();
-        Record86* record62 = ((Buffer86*)DAT_011de45c)->FUN_004fd3e0();
-        if (record62)
-        {
-            Named86* named = FUN_004839c0(record62->id);
-            FUN_0040fbe0("SaveGame(): %-5i for form %08X %s with flags %08X ending at line %i in file %s",
-                         end14 - start24, record62->id, named->Name(), *(unsigned int*)record62->flags, 7185,
-                         "D:\\_Fallout3\\Platforms\\Common\\Code\\Fallout\\ai\\MiddleHighProcess.cpp");
-        }
-        else
-            FUN_0040fbe0("SaveGame(): %-5i ending at line %i in file %s", end14 - start24, 7185,
-                         "D:\\_Fallout3\\Platforms\\Common\\Code\\Fallout\\ai\\MiddleHighProcess.cpp");
-    }
-    if (((Buffer86*)DAT_011de45c)->FUN_00862110())
-    {
-        unsigned int finishEnd33 = ((Buffer86*)DAT_011de45c)->FUN_00825c00();
-        unsigned int begin12 = block31;
-        if (finishEnd33 > begin12 + 65535)
-            FUN_005b5e40("SAVELOAD: Save Game Block in file %s on line %i is greater than maximum short size",
-                         "D:\\_Fallout3\\Platforms\\Common\\Code\\Fallout\\ai\\MiddleHighProcess.cpp", 7185);
-        *(unsigned short*)block31 = (unsigned short)(finishEnd33 - begin12);
-    }
-}
 }  // namespace fnv_00924560
 
 namespace fnv_00925490 {
@@ -27169,99 +22495,6 @@ struct TargetClass : public MiddleHighProcess
     void ResolveFormPointers(unsigned int param1, unsigned int param2, MobileObject* param3);
 };
 
-// @fnv 0x00925490
-void TargetClass::ResolveFormPointers(unsigned int param1, unsigned int param2, MobileObject* pMobileObject)
-{
-    Actor* pActor2;
-    Actor* commandingActor;
-    TESObjectREFR* currentFurniture5;
-    MagicItem* currentSpell4;
-    MagicTarget* desiredTarget_;
-    BSSimpleList<TESObjectREFR*>* pNode;
-    BSSimpleList<TESObjectREFR*>* pPrev5;
-    TESObjectREFR* itemB;
-    TESObjectREFR* resolved6;
-    MagicItem* pSpellA;
-    TESObjectREFR* tempX;
-
-    pActor2 = dynamic_cast<Actor*>(pMobileObject);
-    this->UpdateTargetRefs(param1, param2, pMobileObject);
-
-    if (this->GetRunOncePackage() && (param1 & 0))
-    {
-        ((FUN_008c64d0_target*)&this->PackageReference)->FUN_008c64d0(param1, param2);
-    }
-
-    commandingActor = this->m_pCombatTarget;
-    if (commandingActor)
-    {
-        this->m_pCombatTarget = dynamic_cast<Actor*>(FUN_004839c0((unsigned int)commandingActor));
-    }
-
-    currentFurniture5 = this->m_pFurnitureReference;
-    if (currentFurniture5)
-    {
-        this->m_pFurnitureReference = dynamic_cast<TESObjectREFR*>(FUN_004839c0((unsigned int)currentFurniture5));
-    }
-
-    currentSpell4 = this->m_pFirstMagicItem;
-    if (currentSpell4)
-    {
-        this->m_pFirstMagicItem = FUN_0040a250((unsigned int)currentSpell4);
-    }
-
-    desiredTarget_ = this->m_pMagicTarget;
-    if (desiredTarget_)
-    {
-        this->m_pMagicTarget = FUN_00825550((unsigned int)desiredTarget_);
-    }
-
-    FUN_008060e0(this->m_pActiveEffectList, (BGSLoadFormBuffer*)pActor2);
-
-    if (g_TESSaveLoadGame->FUN_008df040() >= 0x65)
-    {
-        pNode = &this->m_kReferenceList;
-        pPrev5 = 0;
-        while (pNode && !pNode->IsEmpty())
-        {
-            itemB = pNode->GetItem();
-            resolved6 = 0;
-            if (itemB)
-            {
-                resolved6 = dynamic_cast<TESObjectREFR*>(FUN_004839c0((unsigned int)itemB));
-                ((REFRList*)pNode)->SetItem(resolved6);
-            }
-
-            if (!resolved6)
-            {
-                if (!pPrev5)
-                {
-                    pNode->RemoveHead();
-                }
-                else
-                {
-                    tempX = itemB;
-                    pPrev5->Remove(tempX);
-                    pNode = pPrev5->GetNext();
-                }
-            }
-            else
-            {
-                pPrev5 = pNode;
-                pNode = pNode->GetNext();
-            }
-        }
-    }
-
-    if (g_TESSaveLoadGame->FUN_008df040() >= 0x71)
-    {
-        pSpellA = this->m_pSecondMagicItem;
-        if (pSpellA)
-        {
-            this->m_pSecondMagicItem = FUN_0040a250((unsigned int)pSpellA);
-        }
-    }
-}
 }  // namespace fnv_00925490
 
 struct ResetList
@@ -27775,75 +23008,6 @@ struct LoadResetProcess926
     int f250;
     void FUN_00926000(unsigned int flags, MobileObject* mobile);
 };
-// @fnv 0x00926000
-void LoadResetProcess926::FUN_00926000(unsigned int flags, MobileObject* mobile)
-{
-    Actor* actor = dynamic_cast<Actor*>(mobile);
-    ((ResetBase*)this)->Reset(flags, mobile);
-    if (flags & 0x20)
-    {
-        if (f114)
-            ((LoadResetActor926*)actor)->Clear(0);
-        v160(0, 0, 0);
-        v168(0);
-        v16c(0);
-        v164(0);
-        f16c = 0;
-    }
-    if (flags & 0)
-        ((ResetPackage*)&fe4)->Clear(flags);
-    if (g_TESSaveLoadGame->IsLoading())
-    {
-        if ((flags & 0x10000000) && f1c0)
-            f1c0->Reset(mobile);
-        ClearEffects(f1b8, actor);
-        if (actor)
-            v294(actor);
-        f134 = 0;
-        v4c0(actor, 0, 0, 0x7f);
-        f140 = 0;
-        f144 = 0x7f;
-        ((ResetList*)&fc8)->RemoveAll();
-        f124 = 0;
-        f125 = 0;
-        f126 = 0;
-        f158 = 0;
-        f15c = 0;
-        v218(0);
-        f135 = 0;
-        f58 = 0;
-        fd8 = 0.0f;
-        f1da = 0;
-        f108 = 0;
-        fdc = 0.0f;
-        f168 = 0;
-        f16c = 0;
-        f170 = 1.0f;
-        f174 = 0.0f;
-        f184 = 0;
-        f180 = 0;
-        fe0 = 0;
-        fa4 = 0.0f;
-        f188 = 0;
-        f189 = 0;
-        f17c = 0;
-        f17d = 0;
-        f17e = 0;
-        f17f = 0;
-        f68 = 0;
-        f18a = 0;
-        ((ResetList*)&fd0)->RemoveAll();
-        if (f1ac)
-        {
-            f1ac->RemoveAll();
-            delete f1ac;
-            f1ac = 0;
-        }
-    }
-    f248 = 0;
-    f24c = 0;
-    f250 = 0;
-}
 
 struct SaveBuffer58;
 struct Flag58
@@ -28072,103 +23236,6 @@ struct ProcessSave58
     void LoadFromStream(SaveBuffer58*);
     void FUN_00926a20(SaveBuffer58*);
 };
-// Writes the object's fields and linked lists to the save buffer, including counted form and saved-item lists with size markers.
-// @fnv 0x00926a20
-void ProcessSave58::FUN_00926a20(SaveBuffer58* buffer)
-{
-    unsigned int header = buffer->v2();
-    LoadFromStream(buffer);
-    buffer->FUN_00865e50(&unk134, 1, 0);
-    buffer->FUN_00865e50(&unk135, 1, 0);
-    buffer->FUN_00865e50(&unk168, 1, 0);
-    buffer->FUN_00865e50(&unk170, 4, 0);
-    buffer->FUN_00865e50(&unk174, 4, 0);
-    buffer->FUN_00865e50(&unk108, 4, 0);
-    buffer->FUN_00865e50(&unk1da, 1, 0);
-    buffer->FUN_00865e50(&unk0fc, 12, 0);
-    buffer->FUN_00865e50(&unk0dc, 4, 0);
-    buffer->FUN_00865e50(&unk13d, 1, 0);
-    buffer->FUN_00865e50(&unk144, 1, 0);
-    buffer->FUN_00865e50(&unk156, 1, 0);
-    buffer->FUN_00865e50(&unk154, 2, 0);
-    buffer->FUN_00865e50(&unk148, 12, 0);
-    buffer->FUN_00865e50(&unk13c, 1, 0);
-    buffer->FUN_00865e50(&unk0e0, 1, 0);
-    buffer->FUN_00865e50(&unk188, 1, 0);
-    buffer->FUN_00865e50(&unk189, 1, 0);
-    buffer->FUN_00865e50(&unk0d8, 4, 0);
-    buffer->FUN_00865e50(&unk18b, 1, 0);
-    buffer->FUN_00865e50(&unk1d0, 4, 0);
-    buffer->FUN_00865e50(&unk1d4, 4, 0);
-    buffer->FUN_00865e50(&unk1d8, 1, 0);
-    buffer->FUN_00865e50(&unk1d9, 1, 0);
-    buffer->FUN_00865e50(&unk228, 1, 0);
-    buffer->FUN_00865e50(&unk22a, 2, 0);
-    buffer->FUN_00865e50(&unk1a8, 4, 0);
-    buffer->FUN_00865e50(&unk0e1, 1, 0);
-    buffer->FUN_00865e50(&unk190, 4, 0);
-    buffer->FUN_00865e50(&unk198, 4, 0);
-    buffer->FUN_00865e50(&unk19c, 1, 0);
-    buffer->FUN_00865e50(&unk19d, 1, 0);
-    buffer->FUN_00865e50(&unk234, 4, 0);
-    buffer->FUN_00865e50(&unk238, 4, 0);
-    buffer->FUN_00865e50(&unk23c, 4, 0);
-    buffer->FUN_00865e50(&unk244, 4, 0);
-    buffer->FUN_00865e50(&unk110, 1, 0);
-    buffer->FUN_00865df0((void*)unk10c, 0);
-    buffer->FUN_00865df0((void*)unk194, 0);
-    buffer->FUN_00865df0((void*)unk158, 0);
-    buffer->FUN_00865df0((void*)unk140, 0);
-    unsigned int counterValue = 0;
-    if (counter)
-        counterValue = counter->FUN_00726070();
-    buffer->FUN_00865e50(&counterValue, 4, 0);
-    {
-        unsigned int count = 0;
-        unsigned int marker = buffer->FUN_00865f20();
-        FormNode58* node = &list;
-        while (node)
-        {
-            void* form = *node->FUN_006815c0();
-            if (form)
-            {
-                buffer->FUN_00865df0(form, 0);
-                count++;
-            }
-            node = node->FUN_00726070();
-        }
-        buffer->FUN_00865ff0(count, marker);
-    }
-    ((SavedPart58*)&unk0e4)->SavePackage(buffer);
-    if (header && buffer->FUN_00428110(0x10000000).FUN_004280f0())
-    {
-        unsigned int sizeMarker6 = buffer->FUN_00865f20();
-        unsigned int start5 = buffer->FUN_0084e3a0();
-        field1c0->SaveAnimData(buffer);
-        unsigned int end14 = buffer->FUN_0084e3a0();
-        buffer->FUN_00865ff0(end14 - start5, sizeMarker6);
-    }
-    FUN_00806a10(buffer, (void*)unk1b8);
-    buffer->FUN_00865db0(field164 ? field164->FUN_0040a1e0() : 0, 0);
-    buffer->FUN_00865db0(field160 ? field160->FUN_0040a1e0() : 0, 0);
-    buffer->FUN_00865db0(field1bc ? field1bc->RefreshItem() : 0, 0);
-    {
-        unsigned int finalCount = 0;
-        unsigned int finalMarker = buffer->FUN_00865f20();
-        SaveNode58* finalNode = savedlist;
-        while (finalNode)
-        {
-            SavedItem58* item = *finalNode->FUN_006815c0();
-            if (item)
-            {
-                item->FUN_00913d60(buffer);
-                finalCount++;
-            }
-            finalNode = finalNode->FUN_00726070();
-        }
-        buffer->FUN_00865ff0(finalCount, finalMarker);
-    }
-}
 
 struct P124Point
 {
@@ -28580,50 +23647,6 @@ struct P124Fallback
     virtual void v32();
     virtual void Reset(P124Actor*);
 };
-// Runs the package and animation update, then if a furniture is active with state 4 or 9, places the actor at the furniture marker and resets it otherwise.
-// @fnv 0x00927d70
-void P124Process::UpdateFurnitureAnimation(P124Input* input)
-{
-    P124Actor* actor = input->GetActor();
-    FUN_008d1050(input);
-    ((P124Package*)&PackageReference)->FUN_008c6b20(input);
-    FUN_00806b50(input, (Animation*)m_pActiveEffectList);
-    if (m_pFurnitureReference && (m_ucFurnitureInteractionState == 4 || m_ucFurnitureInteractionState == 9))
-    {
-        P124Base* base = ((P124Furniture*)m_pFurnitureReference)->FUN_007af430();
-        P124Model* model = FUN_00c54400(((P124Furniture*)m_pFurnitureReference)->GetNode());
-        if (model)
-        {
-            P124Marker rotation = model->FUN_005094d0(m_ucFurnitureMarkerIndex);
-            P124Point delta = rotation.FUN_006815c0();
-            P124Point position;
-            FUN_00a582f0(&((P124Furniture*)m_pFurnitureReference)->FUN_0056fa00(),
-                         ((P124Furniture*)m_pFurnitureReference)->GetPosition(), true, &delta, &position);
-            ((P124Marker*)&FurnitureMarker)->FUN_00568ab0(rotation.FUN_005094b0());
-            ((P124Marker*)&FurnitureMarker)->FUN_0098ddd0(&position);
-            ((P124Marker*)&FurnitureMarker)
-                ->FUN_00c54550(rotation.FUN_00568650() + ((P124Furniture*)m_pFurnitureReference)->FUN_00430830().z);
-            P124Point previousState =
-                base->FUN_00509920(((P124Marker*)&FurnitureMarker)->FUN_005094b0(), actor->FUN_00567400());
-            P124Matrix transformed;
-            transformed.FUN_004a0c90(((P124Marker*)&FurnitureMarker)->FUN_00568650());
-            previousState = transformed.FUN_004b4500(&previousState);
-            actor->SetPosition(&(((P124Marker*)&FurnitureMarker)->FUN_006815c0() + previousState));
-            unsigned char offset = m_ucFurnitureInteractionState;
-            m_ucFurnitureInteractionState = 0;
-            if (actor != (P124Actor*)g_thePlayer)
-            {
-                actor->SetAngle(((P124Marker*)&FurnitureMarker)->FUN_00568650());
-                actor->FUN_00931d30(base->GetFurnitureHeading(((P124Marker*)&FurnitureMarker)->FUN_005094b0()));
-            }
-            m_ucFurnitureInteractionState = offset;
-            if (actor->FUN_009306d0())
-                actor->FUN_009306d0()->FUN_005620e0(&((P124Marker*)&FurnitureMarker)->FUN_006815c0());
-        }
-        else
-            ((P124Fallback*)this)->Reset(actor);
-    }
-}
 
 struct TimeGlobal
 {
@@ -28645,45 +23668,6 @@ struct AimProcess : MiddleHighProcess
 {
     void UpdateAimTurn(MobileObject* actor);
 };
-// Updates the aim turn rate toward neutral, splits it into left/right turn amounts, and drives the three turn controllers.
-// @fnv 0x009295c0
-void AimProcess::UpdateAimTurn(MobileObject* actor)
-{
-    float next;
-    float down;
-    float left;
-    float angle;
-    float right;
-    float up;
-    left = 0.0f;
-    down = 0.0f;
-    next = 0.0f;
-    angle = 0.0f;
-    right = 0.0f;
-    up = 0.0f;
-    float neutral =
-        m_fAnimationTime - m_fAnimationTime * g_timeGlobal.FUN_0084d030() * *g_011e0474.Float() * *g_011c5724.Float();
-    if (m_fAnimationTime > 0.0 && neutral < 0.0)
-        m_fAnimationTime = 0.0f;
-    else if (m_fAnimationTime < 0.0 && neutral > 0.0)
-        m_fAnimationTime = 0.0f;
-    else if (neutral != 0.0 && neutral > -0.0000009999999974752427 && neutral < 0.0000009999999974752427)
-        m_fAnimationTime = 0.0f;
-    else
-        m_fAnimationTime = neutral;
-    left = m_fAnimationTime + actor->GetLooking();
-    if (left < 0.0 && m_apAnimGroupSequences[1])
-        next = FUN_0040ebd0(1.0f, float(left / (-0.017453292f * *g_011e048c.Float())));
-    else if (left > 0.0 && m_apAnimGroupSequences[2])
-        angle = FUN_0040ebd0(1.0f, float(left / (0.017453292f * *g_011e0498.Float())));
-    down = 1.0f - FUN_00404010(next + angle, right + up);
-    if (m_apAnimGroupSequences[0])
-        ((FUN_00495480_shell*)m_apAnimGroupSequences[0])->FUN_00495480(down);
-    if (m_apAnimGroupSequences[1])
-        ((FUN_00495480_shell*)m_apAnimGroupSequences[1])->FUN_00495480(next);
-    if (m_apAnimGroupSequences[2])
-        ((FUN_00495480_shell*)m_apAnimGroupSequences[2])->FUN_00495480(angle);
-}
 
 namespace fnv_00929960 {
 struct ActV;
@@ -29150,102 +24134,6 @@ struct ProcObj
     void FUN_00929960(ActV* a1, bool a2);
 };
 
-// Selects a package target from the current cell's list and dispatches it via vt017, decrementing f198 while waiting.
-// @fnv 0x00929960
-void ProcObj::FUN_00929960(ActV* apActor, bool abForce)
-{
-    PkgObj* curPkg7 = vt159();
-    if (curPkg7)
-    {
-        if (curPkg7->FUN_0041ca90() == 0x1c)
-            curPkg7 = apActor->FUN_005d43c0()->FUN_0041cb10();
-    }
-    TargObj* targ7 = apActor->vt121();
-    if (!curPkg7)
-        return;
-    if (b110)
-    {
-        abForce = true;
-        f198 = 0.0f;
-    }
-    if (FUN_00929820(apActor))
-    {
-        CellObj* cellB = curPkg7->FUN_005f36f0();
-        if (cellB)
-        {
-            if (targ7)
-            {
-                if (targ7->FUN_004985f0() || abForce)
-                {
-                    if (!apActor->vt141())
-                    {
-                        if (f198 <= DAT_01012060)
-                        {
-                            b110 = 0;
-                            int saved = i194;
-                            i194 = 0;
-                            int pick = cellB->FUN_00479e80();
-                            ListObj list7(10);
-                            int count2 = cellB->FUN_0047a030(apActor, f40, &list7);
-                            if (count2 == 0)
-                                return;
-                            switch (pick)
-                            {
-                            case 1:
-                                if (i190 == -1 || (unsigned int)(i190 + 1) >= (unsigned int)count2)
-                                    i190 = 0;
-                                else
-                                    i190 = i190 + 1;
-                                i194 = *list7.FUN_00877a30(i190);
-                                if (curPkg7->FUN_00546930() == i194)
-                                    i194 = 0;
-                                if ((unsigned int)(i190 + 1) >= (unsigned int)count2)
-                                {
-                                    if (cellB->FUN_00929d20())
-                                        SetFlag40(1);
-                                }
-                                f198 = DAT_01012054;
-                                break;
-                            case 0:
-                                i194 = saved;
-                                if (saved == 0)
-                                {
-                                    int rA = (int)((unsigned int)FUN_00ecadb8() % (unsigned int)count2);
-                                    i194 = *list7.FUN_00877a30(rA);
-                                    i190 = rA;
-                                }
-                                else
-                                {
-                                    while (saved == i194 && (unsigned int)count2 > 1)
-                                    {
-                                        int r2 = (int)((unsigned int)FUN_00ecadb8() % (unsigned int)count2);
-                                        i194 = *list7.FUN_00877a30(r2);
-                                        i190 = r2;
-                                    }
-                                }
-                                if (curPkg7->FUN_00546930() == i194)
-                                    i194 = 0;
-                                if (i194)
-                                {
-                                    f198 = DAT_01030ff0;
-                                    if (cellB->FUN_00929d20())
-                                        SetFlag40(1);
-                                }
-                                break;
-                            }
-                            if (i194)
-                                vt017(apActor, i194, 2, 1, 0, 1);
-                        }
-                        else
-                        {
-                            f198 -= g_timeGlobal.FUN_0084d030();
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
 }  // namespace fnv_00929960
 
 struct WeapStub
@@ -29287,35 +24175,6 @@ struct AutoFireProcess : MiddleHighProcess
 {
     unsigned char UpdateAutoFire(Actor* apActor);
 };
-
-// Advances the auto-fire timer by frame delta scaled by animation and VATS multipliers, then returns how many shots fit into the elapsed time.
-// @fnv 0x00929df0
-unsigned char AutoFireProcess::UpdateAutoFire(Actor* apActor)
-{
-    if (!pWeapon)
-        return 0;
-    WeapStub* pWeap = ((WeapEntryStub*)pWeapon)->GetLoadedForm();
-    if (!pWeap->IsAutomatic())
-        return 0;
-    float fDelta4 = g_timerStub.GetMovementDelta() * *g_settingStub.Float();
-    float fAnimMult6 = GetAnimation() ? ((AnimStub*)GetAnimation())->GetSpeedMult() : 1.0f;
-    if (apActor == g_playerStub)
-        m_fAnimationSpeed -= g_vatsStub.GetPlayerTimeMult() * fDelta4 * fAnimMult6;
-    else if (apActor == g_vatsTargetStub)
-        m_fAnimationSpeed -=
-            g_timerStub.GetMovementDelta() * *g_settingStub.Float() * fAnimMult6 * g_vatsStub.GetTargetTimeMult();
-    else
-        m_fAnimationSpeed -= g_timerStub.GetMovementDelta() * *g_settingStub.Float() * fAnimMult6;
-    float fRate = pWeap->GetFireRate() * pWeap->GetRateMult(((WeapEntryStub*)pWeapon)->HasModFlag(8));
-    unsigned char cShots2 = 0;
-    float fInterval = 1.0f / fRate;
-    while (m_fAnimationSpeed < g_zeroStub)
-    {
-        m_fAnimationSpeed += fInterval;
-        cShots2++;
-    }
-    return cShots2;
-}
 
 struct Actor9;
 struct ObjA9;
@@ -29509,228 +24368,6 @@ struct Proc9 : MiddleHighProcess
     void UpdatePackageState(Actor9* arg);
 };
 
-// Advances the actor's current package state machine, checking target distance and issuing pathing requests when needed.
-// @fnv 0x00929fc0
-void Proc9::UpdatePackageState(Actor9* apActor)
-{
-    ObjA9* flag = this->FUN_008d0430();
-    if (flag == 0)
-    {
-        this->SetProcessTarget(apActor, 1);
-        return;
-    }
-    ObjB9* w = (ObjB9*)this->GetCurrentPackage();
-    float f20 = (float)w->FUN_00676280(apActor);
-    bool aux = flag->FUN_009f56b0(apActor, f20);
-    ObjC9* cur = flag->FUN_0044edb0();
-    float f18 = DAT_010231d0;
-    bool z1;
-    {
-        z1 = false;
-        if (cur != 0 && flag->FUN_00639b40() != 0)
-        {
-            z1 = (cur->FUN_005723b0((void*)((TESTopicInfo*)flag)->GetSpeaker(), 0, 0) > f20 + f18);
-            if (z1)
-            {
-                flag->ClearTargetReferences(apActor, w);
-            }
-            goto join;
-        }
-        if (!apActor->FUN_008b3bd0())
-        {
-            z1 = !aux;
-            goto join;
-        }
-        if (cur != 0)
-        {
-            GlobalObject_00633c90 requestState8((int)((Field1909*)apActor->m_pActorMover)->FUN_006838b0());
-            ObjC9* cellB;
-            Obj309* location3;
-            void* i;
-            unsigned int s;
-            ObjC9* cell6;
-            float offsetTmp;
-            bool same4;
-            if (requestState8.FUN_00559450() != 0)
-            {
-                location3 = ((Obj309Ref*)((FUN_0057c6a0Class*)&requestState8)->FUN_00559450())->FUN_006a9540();
-                s = location3->FUN_00441110();
-                cell6 = location3->FUN_006dd4f0();
-                if (cell6 != 0 && !cell6->FUN_00425fd0())
-                {
-                    cell6 = 0;
-                }
-                i = cur->FUN_00575d70();
-                cellB = cur->FUN_008d6f30();
-                if (cellB != 0 && !cellB->FUN_00425fd0())
-                {
-                    cellB = 0;
-                }
-                same4 = false;
-                if (cellB != 0 || cell6 != 0)
-                {
-                    if (cellB == cell6)
-                    {
-                        same4 = true;
-                    }
-                }
-                else if (i == (void*)s)
-                {
-                    same4 = true;
-                }
-                offsetTmp = f20 + f18;
-                if (same4 && f20 >= DAT_01012060)
-                {
-                    NiPoint3 pt = *cur->GetPos() - location3->FUN_005c3420();
-                    z1 = (((Pt9*)&pt)->FUN_004a7290() > offsetTmp * offsetTmp);
-                }
-            }
-        }
-    join:
-        if (z1)
-        {
-            float f54 = (float)((ObjPkg9*)this->GetOneTimePackage())->FUN_00676280(apActor);
-            f54 = FUN_00404010(f54, FUN_006e25d0());
-            PathingRequest req;
-            if (cur != 0)
-            {
-                apActor->PathToLocation(&req, *cur->GetPos(), cur->FUN_008d6f30(), cur->FUN_00575d70(), f54, 0);
-            }
-            else
-            {
-                apActor->PathToLocation(&req, w->FUN_00675de0(apActor), w->FUN_00675c20(apActor),
-                                        w->FUN_00675a50(apActor), f54, 0);
-            }
-            req.SetUseSoft(false);
-            apActor->SetPathingRequestAvoidNodes(&req);
-            flag->m_04 = 1;
-            return;
-        }
-    }
-    switch (flag->m_04)
-    {
-    case 0:
-        flag->m_04 = 1;
-        flag->FUN_009f3af0(apActor, w->FUN_0055b980());
-        // fallthrough
-    case 1: {
-        if ((int)apActor->Unk_85() == 9 || (int)apActor->Unk_85() == 4)
-        {
-            apActor->Unk_106();
-        }
-        else if (flag->FUN_009f4300(apActor, 1))
-        {
-            flag->m_04 = 2;
-        }
-        return;
-    }
-    case 2:
-        switch (flag->FUN_0044ddc0())
-        {
-        case 0:
-            if ((int)apActor->Unk_85() >= 1 && (int)apActor->Unk_85() <= 4)
-            {
-                flag->m_04 = 3;
-            }
-            break;
-        case 1:
-            if ((int)apActor->Unk_85() >= 6 && (int)apActor->Unk_85() <= 9)
-            {
-                flag->m_04 = 3;
-            }
-            break;
-        case 2:
-            if ((int)apActor->Unk_85() >= 1 && (int)apActor->Unk_85() <= 4)
-            {
-                flag->m_04 = 3;
-            }
-            break;
-        case 3:
-            flag->m_04 = 3;
-            break;
-        case 4:
-            if (!apActor->FUN_008b3bd0() && this->m_pCurrentIdleForm != 0)
-            {
-                flag->m_04 = 3;
-            }
-            break;
-        }
-        // fall through
-    case 3: {
-        void* obj110;
-        bool chk;
-        void* node190;
-        if (flag->FUN_009f43c0(apActor))
-        {
-            if (flag->FUN_009f3c10())
-            {
-                ObjC9* obj114 = flag->FUN_0044edb0();
-                if (obj114 != 0)
-                {
-                    float f118 = (float)((ObjPkg9*)this->GetOneTimePackage())->FUN_00676280(apActor);
-                    f118 = FUN_00404010(f118, FUN_006e25d0());
-                    PathingRequest req2;
-                    apActor->PathToLocation(&req2, *obj114->GetPos(), obj114->FUN_008d6f30(), obj114->FUN_00575d70(),
-                                            f118, 0);
-                    req2.SetUseSoft(false);
-                    apActor->SetPathingRequestAvoidNodes(&req2);
-                    flag->m_04 = 1;
-                }
-            }
-            this->ResetCurrentPackage();
-            apActor->FUN_008b3d30();
-            flag->SelectSandboxActivity(apActor, (ObjB9*)this->GetCurrentPackage());
-            flag->m_04 = 1;
-        }
-        {
-            obj110 = ((EP_008c48d0*)flag)->GetEntryPoint();
-            chk = !(obj110 == 0 && FUN_0092a980(flag->FUN_0044ddc0()));
-            if (chk)
-            {
-                switch (flag->FUN_0044ddc0())
-                {
-                case 0:
-                    chk = this->vt844(apActor, obj110);
-                    break;
-                case 1:
-                    chk = this->vt844(apActor, obj110);
-                    break;
-                case 2:
-                    this->vt7bc(apActor, flag->FUN_0044edb0());
-                    break;
-                case 3:
-                    this->vt84c(apActor, 0, DAT_01012054);
-                    break;
-                case 5:
-                    if (this->vt850(apActor, obj110))
-                    {
-                        flag->SelectSandboxActivity(apActor, (ObjB9*)this->GetCurrentPackage());
-                        flag->m_04 = 2;
-                    }
-                    break;
-                case 4:
-                    this->vt868(apActor, obj110);
-                    break;
-                default:
-                    chk = false;
-                    break;
-                }
-            }
-            node190 = apActor->m_pActorMover;
-            if (!chk || (node190 != 0 && ((Field1909*)node190)->HasPathingSolution()))
-            {
-                flag->ClearTargetReferences(apActor, (ObjB9*)this->GetCurrentPackage());
-                flag->m_04 = 1;
-            }
-            if (apActor->FUN_008b3bd0())
-            {
-                this->SetActorDetectionState(apActor, 0x101, true);
-            }
-        }
-    }
-    }
-}
-
 struct FurnitureReference : TESObjectREFR
 {
     bool FUN_00568680();
@@ -29818,59 +24455,6 @@ struct FurnitureProcess : MiddleHighProcess
     void FUN_0092c680();
     bool TryUseFurniture(Actor* actor, TESObjectREFR* furniture);
 };
-
-// @fnv 0x0092a9b0
-bool FurnitureProcess::TryUseFurniture(Actor* actor, TESObjectREFR* furniture)
-{
-    TESPackage* package = GetOneTimePackage();
-    if (!furniture || !static_cast<FurnitureReference*>(furniture)->FUN_00568680())
-        return false;
-    if (m_pFurnitureReference != furniture)
-    {
-        if (actor->Unk_85())
-        {
-            if (actor->Unk_85() == 4 || actor->Unk_85() == 9)
-                actor->Unk_106();
-            return true;
-        }
-        else
-        {
-            m_pFurnitureReference = furniture;
-            FUN_0092c680();
-        }
-    }
-    if (!m_pFurnitureReference)
-        FUN_0092c680();
-    TESBoundObject* chair = m_pFurnitureReference->GetObjectReference();
-    // The base-object predicate selects the chair state rather than the bed state.
-    bool base = reinterpret_cast<FurnitureBase*>(chair)->FUN_005093f0();
-    int state = base ? 4 : 9;
-    if (actor->Unk_85() != state && actor->IsCharacter())
-    {
-        if (!pTarget)
-            SetTarget(m_pFurnitureReference);
-        BeginFurniture(actor, 0);
-    }
-    if (actor->Unk_85() == state)
-        SetAnimationComplete(true);
-    if (static_cast<FUN_00915ef0_shell*>(static_cast<MiddleHighProcess*>(this))->FUN_00915ef0(actor))
-    {
-        m_pFurnitureReference = 0;
-        reinterpret_cast<FurnitureMarkerAccess*>(&FurnitureMarker)->FUN_00c54550(0.0f);
-        reinterpret_cast<FurnitureMarkerAccess*>(&FurnitureMarker)->FUN_00568ab0(0);
-        reinterpret_cast<FurnitureMarkerAccess*>(&FurnitureMarker)->FUN_0098ddd0(&DAT_011f426c);
-        StopActorMovement(actor);
-        SetProcessTarget(actor, 1);
-        return false;
-    }
-    if (actor->Unk_85() == 9)
-    {
-        SleepController* controller = reinterpret_cast<FurnitureActorAccess*>(actor)->FUN_008adcb0();
-        if (controller && !controller->IsActive())
-            controller->SetActive(true, false);
-    }
-    return true;
-}
 
 namespace fnv_0092ac10 {
 struct Time
@@ -30075,24 +24659,6 @@ class FUN_0092ac10_cls
     int unk00;
 };
 
-// Computes the elapsed time since the selected timer; if it reaches DAT_0103c7c8, calls v288 and triggers the timer effect, otherwise calls FUN_008b3ab0 on a1.
-// @fnv 0x0092ac10
-void FUN_0092ac10_cls::FUN_0092ac10(int a1)
-{
-    char* pTimer = v20c() ? (char*)this + 0xe4 : (char*)this + 4;
-    ActionTimer* pObj2 = (ActionTimer*)pTimer;
-
-    float r6 = FUN_00408840((float)(DAT_011de7b8.FUN_00867da0() - pObj2->FUN_00621b00()));
-    if (r6 >= DAT_0103c7c8)
-    {
-        v288(a1, 1);
-        ((TimerFx*)((TimerSubA*)((char*)this + 4))->FUN_00559450(1))->SetFlag800();
-    }
-    else
-    {
-        ((TimerTail*)a1)->FUN_008b3ab0();
-    }
-}
 }  // namespace fnv_0092ac10
 
 struct B570TargetData
@@ -30191,69 +24757,6 @@ struct B570ProcessCalls : MiddleHighProcess
     virtual void UpdateActiveEffects(Actor*, TESObjectREFR*);
     void UpdateTargetTracking(B570ActorCalls* actor, B570TargetData* data);
 };
-// @fnv 0x0092b570
-void B570ProcessCalls::UpdateTargetTracking(B570ActorCalls* actor, B570TargetData* data)
-{
-    TESObjectREFR* target = data->FUN_009f3390();
-    if (!target)
-    {
-        if (data->AdvancePatrolIndex(1))
-        {
-            FinishTarget(actor, data);
-            return;
-        }
-        else
-        {
-            SetAnimationState(-1);
-            return;
-        }
-    }
-    if (actor->FUN_008b3bb0())
-    {
-        NiPoint3 delta = *actor->GetPos() - *target->GetPos();
-        float distance = ((B570PointCalls*)&delta)->GetSquaredXYLength();
-        float radius = 32.0f;
-        if (((B570FormCalls*)target->GetObjectReference())->FUN_00401170() == 48)
-        {
-            radius = FUN_006e25d0();
-        }
-        else
-        {
-            if (target->GetObjectReference() == DAT_011ca248)
-                radius = FUN_006e25d0();
-            TESPackage* package = GetCurrentPackage();
-            if (package)
-                radius = FUN_00404010(radius, (float)((B570PackageCalls*)package)->FUN_00676280(actor));
-        }
-        radius *= radius;
-        if (distance > radius || FUN_00408860(delta.z) > 180.0)
-        {
-            FinishTarget(actor, data);
-            return;
-        }
-    }
-    float duration = 0.0f;
-    if (((B570RefCalls*)target)->FUN_005d43c0()->FUN_0041fe90())
-        duration = ((B570RefCalls*)target)->FUN_005d43c0()->FUN_0041fe90()->FUN_006a7f50();
-    if (duration > 0.0)
-    {
-        int type = ((B570FormCalls*)target->GetObjectReference())->FUN_00401170();
-        if (type == 48)
-            UpdateActiveEffects(actor, target);
-    }
-    data->elapsed += DAT_011f6394.FUN_0084d030();
-    if (data->elapsed >= duration)
-    {
-        bool busy = actor->IsNodeKindSupported();
-        if (!busy)
-        {
-            if (!data->AdvancePatrolIndex(1))
-                SetProcessTarget(actor, 1);
-            else
-                FinishTarget(actor, data);
-        }
-    }
-}
 
 struct WeaponObjStub
 {
@@ -30273,31 +24776,6 @@ struct MHP_0092b9e0_Owner : MiddleHighProcess
 {
     int FUN_0092b9e0(Actor* apActor);
 };
-
-// @fnv 0x0092b9e0
-int MHP_0092b9e0_Owner::FUN_0092b9e0(Actor* apActor)
-{
-    WeaponObjStub* pObj2;
-    float fPercent3;
-    int iResult;
-
-    if (pWeapon == 0)
-        return 0;
-
-    pObj2 = pWeapon->GetWeaponObj();
-    fPercent3 = pWeapon->GetWeaponConditionHealth(true);
-
-    if (pObj2 != 0 && pObj2->IsWeaponFlag())
-        fPercent3 =
-            GetCurrentActorValue(apActor->GetActorBase(), (ActorValue__Index)pObj2->GetWeaponSkillIndex(), apActor);
-
-    iResult = (int)RoundScaledValue((double)fPercent3 * 0.1f);
-
-    if (iResult > 1)
-        iResult = iResult - 1;
-
-    return iResult;
-}
 
 struct ArmorForm : TESForm
 {
@@ -30356,46 +24834,6 @@ struct ArmorProcess : MiddleHighProcess
 {
     void UpdatePowerArmorState(ArmorActor* actor);
 };
-// @fnv 0x0092baa0
-void ArmorProcess::UpdatePowerArmorState(ArmorActor* actor)
-{
-    int index = 0;
-    bool oldPower = m_bFifthWeaponFlag;
-    bool oldBackpack = m_bSeventhWeaponFlag;
-    m_bFourthWeaponFlag = false;
-    m_bFifthWeaponFlag = false;
-    m_bSixthWeaponFlag = false;
-    m_bSeventhWeaponFlag = false;
-    InventoryChanges* changes = InventoryChanges::GetOrAddInventoryChanges(actor);
-    BSSimpleList<InventoryItem*>* node = changes->items;
-    while (node && !node->IsEmpty() && !(m_bFifthWeaponFlag && m_bSixthWeaponFlag && m_bSeventhWeaponFlag))
-    {
-        InventoryItem* item = node->GetItem();
-        ArmorForm* form = item->GetObject();
-        if (item->FUN_004bddd0(false) && form->FUN_00401170() == 0x18)
-        {
-            TESObjectARMO* armor = static_cast<TESObjectARMO*>(form);
-            if (armor->bipedModel.FUN_00480d30())
-                m_bSeventhWeaponFlag = true;
-            if (armor->bipedModel.IsPowerArmor())
-            {
-                if (armor->bipedModel.FUN_00480af0(1, false, false) || armor->bipedModel.FUN_00480af0(0, false, false))
-                    m_bSixthWeaponFlag = true;
-                else
-                    m_bFifthWeaponFlag = true;
-            }
-            if (armor->bipedModel.GetIsHeavyArmor() && !armor->bipedModel.FUN_00480af0(1, false, false) &&
-                !armor->bipedModel.FUN_00480af0(0, false, false))
-                m_bFourthWeaponFlag = true;
-        }
-        node = node->GetNext();
-    }
-    if (!g_BGSSaveLoadGame->FUN_0042ce10() && (oldBackpack != m_bSeventhWeaponFlag || oldPower != m_bFifthWeaponFlag) &&
-        !m_bAdditionalActorFlag && pWeapon && actor->IsCharacter())
-    {
-        PlayAnimation(false, actor->FUN_005d9f90(), actor->FUN_008b70d0(), actor);
-    }
-}
 
 namespace fnv_00924220 {
 struct SaveLoadEntry
@@ -30445,107 +24883,6 @@ class MiddleHighProcess_Shell : public MiddleHighProcess
     unsigned short FUN_00924220(unsigned int a2, MobileObject* a3);
 };
 
-// Accumulates the save size of a MiddleHighProcess from its base size plus version- and flag-dependent fields, optionally logging the delta.
-// @fnv 0x00924220
-unsigned short MiddleHighProcess_Shell::FUN_00924220(unsigned int a2, MobileObject* a3)
-{
-    unsigned short uiTotalSize = 0;
-    Actor* pActor2 = dynamic_cast<Actor*>(a3);
-    uiTotalSize += FUN_0092e420(a2, a3);
-    unsigned short initialSize = uiTotalSize;
-
-    if (g_TESSaveLoadGame->FUN_00862110())
-    {
-        uiTotalSize += 4;
-        uiTotalSize += 2;
-    }
-    uiTotalSize += 2;
-
-    if (g_TESSaveLoadGame->FUN_008df040() >= 0x34)
-    {
-        uiTotalSize += 1;
-        uiTotalSize += 4;
-    }
-
-    if (g_TESSaveLoadGame->FUN_008df040() >= 0x4d)
-    {
-        uiTotalSize += 4;
-    }
-
-    if (a2 & 0)
-    {
-        uiTotalSize += ((ActorPackageHelper*)&this->PackageReference)->ComputeTotal(a2);
-    }
-
-    uiTotalSize += 4;
-    uiTotalSize += 4;
-    uiTotalSize += 1;
-    uiTotalSize += 12;
-    uiTotalSize += 4;
-    uiTotalSize += 1;
-    uiTotalSize += 1;
-    uiTotalSize += 4;
-    uiTotalSize += 17;
-    uiTotalSize += 1;
-
-    if (a2 & 0x10000000)
-    {
-        uiTotalSize += GetAnimationSize(a3, this->pCurrentAnimation);
-    }
-
-    uiTotalSize += 4;
-    uiTotalSize += 4;
-
-    uiTotalSize += FUN_00805a00(this->m_pActiveEffectList, pActor2);
-
-    if (g_TESSaveLoadGame->FUN_008df040() >= 0x45)
-    {
-        uiTotalSize += 1;
-    }
-
-    if (g_TESSaveLoadGame->FUN_008df040() >= 0x49)
-    {
-        uiTotalSize += 1;
-        uiTotalSize += 1;
-    }
-
-    if (g_TESSaveLoadGame->FUN_008df040() >= 0x65)
-    {
-        uiTotalSize += 4;
-        uiTotalSize += 2;
-        uiTotalSize += ((DeadDetectListHelper*)&this->m_kReferenceList)->FUN_005ae380() * 4;
-    }
-
-    if (g_TESSaveLoadGame->FUN_008df040() >= 0x6d)
-    {
-        uiTotalSize += 1;
-    }
-
-    if (g_TESSaveLoadGame->FUN_008df040() >= 0x71)
-    {
-        uiTotalSize += 4;
-    }
-
-    if (*g_011de4e8.Bool())
-    {
-        SaveLoadEntry* pSaveEntry = g_TESSaveLoadGame->FUN_004fd3e0();
-        if (pSaveEntry)
-        {
-            TESForm* pForm = FUN_004839c0(pSaveEntry->formID);
-            FUN_0040fbe0("GetSaveSize(): %-5i for form %08X %s with flags %08X ending at line %i in file %s",
-                         uiTotalSize - initialSize, pSaveEntry->formID, pForm->GetName(),
-                         ((FormChangeFlags*)((char*)pSaveEntry + 5))->changeFlags, 7049,
-                         "D:\\_Fallout3\\Platforms\\Common\\Code\\Fallout\\ai\\MiddleHighProcess.cpp");
-        }
-        else
-        {
-            FUN_0040fbe0("GetSaveSize(): %-5i ending at line %i in file %s", uiTotalSize - initialSize, 7049,
-                         "D:\\_Fallout3\\Platforms\\Common\\Code\\Fallout\\ai\\MiddleHighProcess.cpp");
-        }
-    }
-
-    return uiTotalSize;
-}
 }  // namespace fnv_00924220
 
 namespace fnv_00924b90 {
@@ -30643,244 +24980,6 @@ class TargetProcess : public MiddleHighProcess
     void LoadFromSave(unsigned int a1, unsigned int a2, MobileObject* a3);
 };
 
-// @fnv 0x00924b90
-void TargetProcess::LoadFromSave(unsigned int a1, unsigned int a2, MobileObject* a3)
-{
-    Actor* Dir = dynamic_cast<Actor*>(a3);
-    this->FUN_0092e730(a1, a2, a3);
-
-    unsigned short ExitLoc = 0;
-    unsigned int aA114 = 0;
-
-    if (g_TESSaveLoadGame->FUN_00862110())
-    {
-        unsigned int uTag;
-        g_TESSaveLoadGame->FUN_008579e0(&uTag, 4);
-        if (uTag != 0x424c4f4b)
-        {
-            void* pFormInfo;
-            pFormInfo = g_TESSaveLoadGame->FUN_004fd3c0();
-            if (pFormInfo)
-            {
-                TESForm* pForm = FUN_004839c0(*(unsigned int*)pFormInfo);
-                FNV_Warning(
-                    "SAVELOAD: (LoadGame Buffer error) Block Header is incorrect in file %s on line %i.  Currently loading form is %08X %s with version %i and flags %08X",
-                    "D:\\_Fallout3\\Platforms\\Common\\Code\\Fallout\\ai\\MiddleHighProcess.cpp", 7200,
-                    *(unsigned int*)pFormInfo, pForm->GetName(),
-                    (int)((FormFlagsAccessor*)((char*)pFormInfo + 5))->version,
-                    ((FormFlagsAccessor*)((char*)pFormInfo + 5))->flags);
-            }
-            else
-            {
-                FNV_Warning(
-                    "SAVELOAD: (LoadGame Buffer error) Block Header is incorrect in file %s on line %i.  Current version is %i",
-                    "D:\\_Fallout3\\Platforms\\Common\\Code\\Fallout\\ai\\MiddleHighProcess.cpp", 7200,
-                    (int)g_TESSaveLoadGame->FUN_008df040());
-            }
-        }
-        aA114 = g_TESSaveLoadGame->FUN_00825c00();
-        g_TESSaveLoadGame->FUN_008579e0(&ExitLoc, 2);
-    }
-
-    g_TESSaveLoadGame->FUN_008579e0(&this->m_bFirstActorFlag, 1);
-    g_TESSaveLoadGame->FUN_008579e0(&this->m_bAdditionalActorFlag, 1);
-
-    if (g_TESSaveLoadGame->FUN_008df040() >= 0x34)
-    {
-        g_TESSaveLoadGame->FUN_008579e0(&this->m_bWeaponOut, 1);
-        g_TESSaveLoadGame->FUN_008579e0(&this->m_fFirstEffectShaderValue, 4);
-    }
-
-    if (g_TESSaveLoadGame->FUN_008df040() >= 0x4d)
-    {
-        g_TESSaveLoadGame->FUN_008579e0(&this->m_fSecondEffectShaderValue, 4);
-    }
-
-    if ((a1 & 0x20) || (a2 & 0x20))
-    {
-        this->ApplyProcessLevelChange(a3);
-        ((ActorExt*)Dir)->FUN_008b0b00(0);
-        NiAVObject* p3D = ((TESObjectREFRExt*)a3)->Get3DSimple();
-        if (p3D)
-        {
-            NiAVObject* pNode;
-            pNode = p3D;
-            if (a3 == (MobileObject*)_g_thePlayer && !_g_thePlayer->FUN_004eaf60())
-            {
-                p3D = pNode->FUN_0045bc00(0);
-                pNode = p3D;
-            }
-            ((ActorExt*)Dir)->FUN_008b0bd0(pNode);
-        }
-    }
-
-    if (a1 & 0)
-    {
-        ((ActorPackageExt&)this->PackageReference).FUN_008c6320(a1, a2);
-    }
-
-    unsigned int EndLoc;
-    g_TESSaveLoadGame->FUN_00857aa0(&EndLoc, 4);
-    this->m_pCombatTarget = (Actor*)EndLoc;
-
-    g_TESSaveLoadGame->FUN_008579e0(&this->m_ePackageObjectType, 4);
-    g_TESSaveLoadGame->FUN_008579e0(&this->m_bAnimationStateFlag, 1);
-
-    if (g_TESSaveLoadGame->FUN_008df040() < 0x18)
-    {
-        unsigned char m_cCharacterControllerState;
-        g_TESSaveLoadGame->FUN_008579e0(&m_cCharacterControllerState, 1);
-    }
-
-    g_TESSaveLoadGame->FUN_008579e0(&this->m_kPackageTargetPosition, 12);
-    g_TESSaveLoadGame->FUN_008579e0(&this->m_kEighthUnshownMember, 4);
-    g_TESSaveLoadGame->FUN_008579e0(&this->m_ucFurnitureInteractionState, 1);
-    g_TESSaveLoadGame->FUN_008579e0(&this->m_ucFurnitureMarkerIndex, 1);
-
-    unsigned int a190;
-    g_TESSaveLoadGame->FUN_00857aa0(&a190, 4);
-    this->m_pFurnitureReference = (TESObjectREFR*)a190;
-
-    NiPoint3WithCtor Left;
-    float a60;
-    unsigned char a1c3;
-    g_TESSaveLoadGame->FUN_008579e0(&a60, 4);
-    g_TESSaveLoadGame->FUN_008579e0(&a1c3, 1);
-    g_TESSaveLoadGame->FUN_008579e0(&Left, 12);
-    ((FurnitureMarkExt&)this->FurnitureMarker).FUN_00c54550(a60);
-    ((FurnitureMarkExt&)this->FurnitureMarker).FUN_00568ab0(a1c3);
-    ((FurnitureMarkExt&)this->FurnitureMarker).FUN_0098ddd0(Left);
-
-    char Diff;
-    g_TESSaveLoadGame->FUN_008579e0(&Diff, 1);
-    if (!Diff)
-    {
-        Actor* pActorDyn = dynamic_cast<Actor*>(a3);
-        this->ProcessActorEvent(pActorDyn);
-    }
-    else
-    {
-        if (!(a1 & 4))
-        {
-            if (g_TESSaveLoadGame->FUN_008df040() < 0x2f)
-            {
-                unsigned char bTemp;
-                g_TESSaveLoadGame->FUN_008579e0(&bTemp, 1);
-                if (bTemp)
-                {
-                    Struct_004d9330* p = new Struct_004d9330();
-                    p->FUN_004da3f0();
-                    delete p;
-                }
-            }
-        }
-    }
-    this->m_cCharacterControllerState = Diff;
-
-    if (a1 & 0x10000000)
-    {
-        ReadAndDispatchSaveData(a3, this->pCurrentAnimation);
-    }
-
-    unsigned int ProjectedLoc;
-    g_TESSaveLoadGame->FUN_00857aa0(&ProjectedLoc, 4);
-    this->m_pFirstMagicItem = (MagicItem*)ProjectedLoc;
-
-    unsigned int aAction2;
-    g_TESSaveLoadGame->FUN_00857aa0(&aAction2, 4);
-    this->m_pMagicTarget = (MagicTarget*)aAction2;
-
-    FUN_00805d40(this->m_pActiveEffectList, Dir);
-
-    if (g_TESSaveLoadGame->FUN_008df040() >= 0x45)
-    {
-        g_TESSaveLoadGame->FUN_008579e0(&this->m_bPackageStateFlag2, 1);
-    }
-
-    if (g_TESSaveLoadGame->FUN_008df040() >= 0x49)
-    {
-        g_TESSaveLoadGame->FUN_008579e0(&this->m_bAiming, 1);
-        g_TESSaveLoadGame->FUN_008579e0(&this->m_bAimStateFlag, 1);
-    }
-
-    if (g_TESSaveLoadGame->FUN_008df040() >= 0x65)
-    {
-        if (g_TESSaveLoadGame->FUN_008df040() < 0x68)
-        {
-            g_TESSaveLoadGame->FUN_00857bd0(4);
-        }
-        g_TESSaveLoadGame->FUN_008579e0(&this->m_kNinthUnshownMember, 4);
-        if (g_TESSaveLoadGame->FUN_008df040() < 0x68)
-        {
-            g_TESSaveLoadGame->FUN_00857bd0(4);
-        }
-        unsigned short listCount;
-        g_TESSaveLoadGame->FUN_008579e0(&listCount, 2);
-        for (unsigned int i = 0; i < listCount; ++i)
-        {
-            unsigned int itemFormID;
-            g_TESSaveLoadGame->FUN_00857aa0(&itemFormID, 4);
-            ((BSSimpleListExt*)&this->m_kReferenceList)->AddHead((TESObjectREFR*)itemFormID);
-        }
-    }
-
-    if (g_TESSaveLoadGame->FUN_008df040() >= 0x6d)
-    {
-        g_TESSaveLoadGame->FUN_008579e0(&this->m_bFourthStateFlag, 1);
-    }
-
-    if (g_TESSaveLoadGame->FUN_008df040() >= 0x71)
-    {
-        unsigned int uPackageSpell;
-        g_TESSaveLoadGame->FUN_00857aa0(&uPackageSpell, 4);
-        this->m_pSecondMagicItem = (MagicItem*)uPackageSpell;
-    }
-
-    if (g_TESSaveLoadGame->FUN_00862110())
-    {
-        unsigned int j = g_TESSaveLoadGame->FUN_00825c00();
-        void* pFormInfoEnd = g_TESSaveLoadGame->FUN_004fd3c0();
-        if (pFormInfoEnd)
-        {
-            TESForm* pFormEnd = FUN_004839c0(*(unsigned int*)pFormInfoEnd);
-            if (j > (unsigned int)(ExitLoc + aA114))
-            {
-                FNV_Warning(
-                    "SAVELOAD: LoadGame Buffer overrun of %i bytes in file %s on line %i.  Currently loading form is %08X %s with version %i and flags %08X",
-                    j - (ExitLoc + aA114), "D:\\_Fallout3\\Platforms\\Common\\Code\\Fallout\\ai\\MiddleHighProcess.cpp",
-                    7373, *(unsigned int*)pFormInfoEnd, pFormEnd->GetName(),
-                    (int)((FormFlagsAccessor*)((char*)pFormInfoEnd + 5))->version,
-                    ((FormFlagsAccessor*)((char*)pFormInfoEnd + 5))->flags);
-            }
-            else if (j < (unsigned int)(ExitLoc + aA114))
-            {
-                FNV_Warning(
-                    "SAVELOAD: LoadGame Buffer underrun of %i bytes in file %s on line %i.  Currently loading form is %08X %s with version %i and flags %08X",
-                    (aA114 + ExitLoc) - j, "D:\\_Fallout3\\Platforms\\Common\\Code\\Fallout\\ai\\MiddleHighProcess.cpp",
-                    7373, *(unsigned int*)pFormInfoEnd, pFormEnd->GetName(),
-                    (int)((FormFlagsAccessor*)((char*)pFormInfoEnd + 5))->version,
-                    ((FormFlagsAccessor*)((char*)pFormInfoEnd + 5))->flags);
-            }
-        }
-        else
-        {
-            if (j > (unsigned int)(ExitLoc + aA114))
-            {
-                FNV_Warning(
-                    "SAVELOAD: LoadGame Buffer overrun of %i bytes in file %s on line %i.  Current version is %i",
-                    j - (ExitLoc + aA114), "D:\\_Fallout3\\Platforms\\Common\\Code\\Fallout\\ai\\MiddleHighProcess.cpp",
-                    7373, (int)g_TESSaveLoadGame->FUN_008df040());
-            }
-            else if (j < (unsigned int)(ExitLoc + aA114))
-            {
-                FNV_Warning(
-                    "SAVELOAD: LoadGame Buffer underrun of %i bytes in file %s on line %i.  Current version is %i",
-                    (ExitLoc + aA114) - j, "D:\\_Fallout3\\Platforms\\Common\\Code\\Fallout\\ai\\MiddleHighProcess.cpp",
-                    7373, (int)g_TESSaveLoadGame->FUN_008df040());
-            }
-        }
-    }
-}
 }  // namespace fnv_00924b90
 
 namespace fnv_0092b030 {
@@ -31618,137 +25717,6 @@ struct This92
     void FUN_0092b030(Ref92* a2, void* a3);
 };
 
-// Local identifiers are arbitrary (MSVC9 /Od orders the frame by a name hash); the whole
-// name set below was chosen so every slot lands on the original offset.  Roles:
-//   bb5 = Ref92* p (target a3->GetRefResult)      z7 = float f5 = 0.925f
-//   p   = bool bCellHasPath                      q21 = second v27c() result
-//   pkg2= int iProcedureId (starts 0x101)        n22/bb18/x5 = float f3/f2/f1
-//   q30 = TESObjectCELL*                         RunSeventhVirtualOperation  = pkg
-//   z8 = NiPoint3 (a2 pos - target pos)          n3/aa17/bb17 = float f6/f7/f8
-//   f3  = bool bFlag                             bB  = float f9
-//   bb7 = second package (v22c)
-// @fnv 0x0092b030
-void This92::FUN_0092b030(Ref92* a2, void* a3)
-{
-    bool v3;
-    float aa11;
-    Pkg92* q21;
-    bool p;
-    float z7;
-    Ref92* bb5;
-    if (a2->FUN_008b3b90())
-    {
-        v858(a2, a3);
-        return;
-    }
-    bb5 = (Ref92*)((A3_92*)a3)->FUN_009f3390();
-    if (bb5 != 0)
-    {
-        float n22;
-        float bb18;
-        float x5;
-        int pkg2;
-        Pkg92* RunSeventhVirtualOperation;
-        bool bb9;
-        bool bb2;
-        pkg2 = 0x101;
-        RunSeventhVirtualOperation = v27c();
-        bb2 = RunSeventhVirtualOperation->FUN_0067a480();
-        bb9 = false;
-        if (bb2)
-        {
-            x5 = a2->FUN_005723b0(bb5, 0, 0);
-            bb18 = 64.0f;
-            bb9 = x5 > bb18;
-            if (bb9)
-            {
-                n22 = RunSeventhVirtualOperation->FUN_00678670(a2, 0);
-                pkg2 = v34c(a2, x5, n22, n22 * 2.0f, 0, 0);
-            }
-        }
-        v350(a2, pkg2, bb9);
-    }
-    if (bb5 != 0 && bb5->FUN_007af430()->FUN_00401170() == 0x27)
-    {
-        v844(a2, bb5);
-        if (bb5 == pCurFurniture && (v4bc() == 3 || v4bc() == 8))
-        {
-            v860(a2, a3);
-        }
-        return;
-    }
-    p = false;
-    q21 = v27c();
-    if (q21 != 0)
-    {
-        Cell92* q30 = q21->GetPrevPath();
-        if (q30 != 0 && q30->GetByte5() > 0)
-        {
-            p = true;
-        }
-    }
-    v3 = a2->FUN_008b3bb0();
-    aa11 = a2->pMemb->FUN_009dcbf0();
-    z7 = 0.925f;
-    if (v3 || (!p && aa11 > z7))
-    {
-        Pos92 z8 = *a2->v1f4() - *bb5->v1f4();
-        float bb17;
-        float aa17;
-        bool f3;
-        float n3;
-        n3 = z8.Length();
-        aa17 = 32.0f;
-        if (bb5->FUN_007af430()->FUN_00401170() == 0x30)
-        {
-            aa17 = FUN_006e25d0();
-        }
-        else
-        {
-            if (bb5->FUN_007af430() == *(Ref92**)&DAT_011ca248)
-            {
-                aa17 = FUN_006e25d0();
-            }
-            PkgB92* bb7 = v22c();
-            if (bb7 != 0)
-            {
-                aa17 = FUN_00404010(aa17, (float)((Pkg92*)bb7)->FUN_00676280(a2));
-            }
-        }
-        bb17 = aa17 * aa17;
-        f3 = false;
-        if (!v3)
-        {
-            float r = aa17 + 50.0;
-            r = r * r;
-            if (n3 > r)
-                return;
-            if (z8.z * z8.z > 32400.0)
-                return;
-            float bB = 0.0f;
-            if (bb5->GetExtraData()->FUN_0041fe90() != 0)
-            {
-                bB = ((Patrol92*)bb5->GetExtraData()->FUN_0041fe90())->FUN_006a7f50();
-            }
-            if (bB == 0.0)
-            {
-                f3 = true;
-            }
-            else
-            {
-                return;
-            }
-        }
-        if (!f3 && n3 > bb17 && z8.z * z8.z < 32400.0)
-        {
-            v858(a2, a3);
-        }
-        else
-        {
-            v860(a2, a3);
-        }
-    }
-}
 }  // namespace fnv_0092b030
 
 namespace ProcessActivate {
@@ -32831,217 +26799,6 @@ struct ActProcess
     bool FUN_00915f10(ActActor* apActor, bool abActivate);
 };
 
-// Handles target interaction for an actor, including furniture alignment, marker selection, and process state changes.
-// @fnv 0x00915f10
-bool ActProcess::FUN_00915f10(ActActor* apActor, bool abActivate)
-{
-    ActPackage* pPackage = 0;
-    pPackage = FUN_vt27c();
-    if (pTarget == 0 || pTarget->FUN_00440d80())
-        FindPackageTarget(apActor);
-    if (pTarget == 0)
-    {
-        SetProcessTarget(apActor, 1);
-    }
-    else
-    {
-        ActRef* pRef = pPackage->FUN_00676140(apActor);
-        if (pRef && pRef->FUN_00568680() &&
-            (pTarget->FUN_007af430() == DAT_011ca248 || pTarget->FUN_007af430() == DAT_011ca244))
-        {
-            FUN_vt628(pRef);
-            return true;
-        }
-        if (pPackage->FUN_0041ca90() == 9 && !pPackage->FUN_vt148(apActor, 300))
-            SetProcessTarget(apActor, -1);
-        void* pFurniture = pTarget->FUN_00568e50();
-        bool bDoneEntry = false;
-        if (pFurniture)
-        {
-            ActPoint kDelta = pTarget->FUN_00568fa0()->FUN_00439ef0(*apActor->GetPos());
-            if (kDelta.FUN_00457990() <= *DAT_011cde98.FUN_0043d4d0())
-                bDoneEntry = true;
-        }
-        else if (pTarget->FUN_00568680() && apActor->FUN_vt214())
-        {
-            bDoneEntry = true;
-        }
-        else if (pTarget->FUN_00568680() && !apActor->FUN_vt214() && pTarget->FUN_00567f80(ucMarker, 1) &&
-                 !apActor->FUN_008b3bb0())
-        {
-            FUN_vt84(apActor);
-            FUN_vt294(apActor);
-            FUN_vt12c(0);
-            return false;
-        }
-        else
-        {
-            bDoneEntry = pPackage->FUN_vt144(apActor, 0);
-        }
-
-        if (!bDoneEntry && !FUN_00915ef0(apActor))
-        {
-            if (apActor->FUN_vt214() == 4 || apActor->FUN_vt214() == 9)
-            {
-                apActor->FUN_vt418();
-                return true;
-            }
-            if (apActor->FUN_008b3bb0())
-            {
-                void* pSitTarget = pTarget->FUN_00568e50();
-                if (pSitTarget == 0)
-                {
-                    if (!FUN_vt824(apActor, *pTarget->GetPos(), pTarget->FUN_008d6f30(), pTarget->FUN_00575d70()))
-                        return false;
-                }
-                else if (pTarget->FUN_00568680())
-                {
-                    ActPoint kActorPos = *apActor->GetPos();
-                    int iMarkerTmp = 0;
-                    if (pTarget->FUN_005686b0(&kActorPos, 1, 1, &kMarkerPos, &iMarkerTmp, 1))
-                    {
-                        if (!FUN_vt824(apActor, kMarkerPos, pTarget->FUN_008d6f30(), pTarget->FUN_00575d70()))
-                            return false;
-                        ucMarker = iMarkerTmp;
-                    }
-                    else
-                    {
-                        FUN_vt84(apActor);
-                        FUN_vt294(apActor);
-                        FUN_vt12c(0);
-                        return false;
-                    }
-                }
-                else
-                {
-                    if (!FUN_vt824(apActor, *pTarget->FUN_00568fa0(), pTarget->FUN_008d6f30(), pTarget->FUN_00575d70()))
-                        return false;
-                }
-            }
-            if (!apActor->FUN_008b3bb0())
-            {
-                ActGlobal* pHourGlobal = FUN_004839c0(0x3a);
-                float fNowCur = DAT_011de7b8.FUN_00867da0();
-                if (FUN_007df1f0() > fNowCur)
-                    fNowCur = fNowCur + 24.0;
-                float fElapsedVal = fNowCur - FUN_007df1f0();
-                fElapsedVal = 3600.0 / pHourGlobal->FUN_00526ac0() * fElapsedVal;
-                if (apActor->FUN_00931850() != 1 || apActor->GetCellLoadState() != 1)
-                {
-                    return false;
-                }
-                else
-                {
-                    bDoneEntry = pPackage->FUN_vt144(apActor, 0);
-                }
-            }
-        }
-
-        if (bDoneEntry || FUN_00915ef0(apActor))
-        {
-            if (!apActor->FUN_008b3bb0())
-                FUN_vt294(apActor);
-            if (GetCurrentPackage()->FUN_0041ca90() == 0x1c && FUN_00915ef0(apActor))
-            {
-                apActor->FUN_vt288();
-                return false;
-            }
-            if (abActivate)
-            {
-                ActRef* pActivated = pTarget;
-                if (!FUN_00915ef0(apActor) && !pPackage->FUN_0067efd0())
-                    SetProcessTarget(apActor, 1);
-                if (!FUN_00915ef0(apActor))
-                {
-                    if (pTarget->FUN_00568680())
-                    {
-                        if (apActor->FUN_vt214() != 4 && apActor->FUN_vt214() != 9)
-                        {
-                            if (sActivated == 0)
-                            {
-                                SetProcessTarget(apActor, 1);
-                                iTargetState = 0;
-                                FUN_vt294(apActor);
-                                sActivated = 1;
-                                return true;
-                            }
-                            else
-                            {
-                                UpdateFurnitureAlignment(apActor);
-                            }
-                        }
-                        else
-                        {
-                            SetProcessTarget(apActor, 1);
-                            FUN_vt4ec(1);
-                            return true;
-                        }
-                    }
-                    else if (m_pDetectionData60)
-                    {
-                        pTarget->FUN_00573170(apActor, 1, m_pDetectionData60->pItem, 1);
-                    }
-                    else if (!pTarget->IsActor() && !pTarget->FUN_00573170(apActor, 1, 0, 1) &&
-                             pPackage->FUN_0067efd0())
-                    {
-                        SetProcessTarget(apActor, -1);
-                    }
-                }
-                if (pActivated)
-                    pActivated->FUN_00565870();
-            }
-            else
-            {
-                ActRef* pUsed = pTarget;
-                if (!FUN_00915ef0(apActor))
-                {
-                    if (pTarget->FUN_00568680())
-                    {
-                        if (apActor->FUN_vt214() != 4 && apActor->FUN_vt214() != 9)
-                        {
-                            if (sActivated == 0)
-                            {
-                                SetProcessTarget(apActor, 1);
-                                iTargetState = 0;
-                                FUN_vt294(apActor);
-                                sActivated = 1;
-                                return true;
-                            }
-                            else
-                            {
-                                UpdateFurnitureAlignment(apActor);
-                            }
-                        }
-                        else
-                        {
-                            FUN_vt4ec(1);
-                            return true;
-                        }
-                    }
-                    else if (m_pDetectionData60)
-                    {
-                        pTarget->FUN_00573170(apActor, 0, m_pDetectionData60->pItem, 1);
-                    }
-                    else
-                    {
-                        pTarget->FUN_00573170(apActor, 0, 0, 1);
-                    }
-                }
-                if (pUsed)
-                    pUsed->FUN_00565870();
-            }
-            delete m_pDetectionData60;
-            m_pDetectionData60 = 0;
-            FUN_vt12c(0);
-            if (!FUN_00915ef0(apActor))
-                return true;
-            else
-                return false;
-        }
-    }
-    return false;
-}
-
 }
 
 namespace fnv_00918ee0 {
@@ -33869,97 +27626,6 @@ struct MidProc
     void FUN_00918ee0(Actor* apActor, bool abArg2, int aiArg3, int aiArg4);
 };
 
-// Checks the package and target, updates the stored target position, and calls methods according to distance and package conditions.
-// @fnv 0x00918ee0
-void MidProc::FUN_00918ee0(Actor* apActor, bool abArg2, int aiArg3, int aiArg4)
-{
-    Pkg* pPkg = 0;
-    pPkg = this->v159();
-    if (pPkg && pPkg->FUN_008a6290())
-    {
-        if (!((PlShell*)g_thePlayer)->HasExtraFollowerForm(apActor))
-        {
-            if (((PlShell*)g_thePlayer)->FUN_00962620() < DAT_011cdad0.FUN_0043d4d0()->i)
-                pPkg->SetFlag10000(false);
-            else
-                return;
-        }
-        else
-            return;
-    }
-
-    TESObjectREFR* pDetected = 0;
-
-    if (this->pTarget == 0 || ((RefShell*)this->pTarget)->FUN_00440d80())
-    {
-        this->v035(apActor);
-        if (this->pTarget)
-            this->m_kPackageTargetPosition = *((V1f4*)this->pTarget)->v1f4();
-    }
-
-    if (this->pTarget == 0)
-    {
-        if (abArg2)
-            this->v162(apActor, 1);
-        return;
-    }
-
-    float fDist = ((ActShell*)apActor)->FUN_005723b0(this->pTarget, 0, 0);
-    (void)((RefShell*)apActor)->FUN_00575d70();
-    (void)((RefShell*)this->pTarget)->FUN_00575d70();
-    float fValue = pPkg->GetPackageResult(apActor, false);
-    pDetected = this->pTarget;
-
-    if (this->pTarget == 0 ||
-        (pPkg->FUN_0041ca90() == 1 && pPkg->FUN_0055b980() != 0 &&
-         ((IdleShell*)pPkg->FUN_0055b980())->FUN_00678ca0() < 2 && pPkg->v13c(apActor, 0, DAT_01012054, 0)))
-    {
-        if (abArg2)
-        {
-            this->v162(apActor, 1);
-            if (pPkg->FUN_00674d40())
-            {
-                if (this->v131() != 0)
-                    this->v133();
-                else
-                    this->v141();
-                this->v009(apActor, false);
-                return;
-            }
-            if (!((ActShell*)apActor)->FUN_008b3bb0())
-                this->v165(apActor);
-        }
-    }
-    else
-    {
-        float fLen = (this->m_kPackageTargetPosition - *((V1f4*)this->pTarget)->v1f4()).Length();
-        if (fLen > DAT_011cd950.FUN_00403e20()->f || (fDist > fValue && ((ActShell*)apActor)->FUN_008b3bb0()))
-        {
-            if (0)
-            {
-            }
-            ((ActShell*)apActor)->FUN_008b39f0(aiArg3);
-            if (!this->v521(apActor, *((V1f4*)this->pTarget)->v1f4(), ((RefShell*)this->pTarget)->FUN_008d6f30(),
-                            ((RefShell*)this->pTarget)->FUN_00575d70()))
-                return;
-            this->m_kPackageTargetPosition = *((V1f4*)this->pTarget)->v1f4();
-        }
-
-        if (!((ActShell*)apActor)->FUN_008b3bb0())
-        {
-            GlobVal* pGlobalForm = (GlobVal*)FUN_004839c0(0x3a);
-            float fHour = DAT_011de7b8.FUN_00867da0();
-            if (this->FUN_007df1f0() > fHour)
-                fHour = fHour + DAT_010356d8;
-            float fHoursDelta = fHour - this->FUN_007df1f0();
-            fHoursDelta = (DAT_01012640 / pGlobalForm->FUN_00526ac0()) * fHoursDelta;
-        }
-    }
-
-    fDist = ((ActShell*)apActor)->FUN_005723b0(pDetected, 0, 0);
-    if (fDist < fValue && !((ActShell*)apActor)->FUN_008b3bb0())
-        ((ActShell*)apActor)->FUN_0087faa0();
-}
 }  // namespace fnv_00918ee0
 
 struct VTag
@@ -34068,58 +27734,6 @@ extern bool FUN_008c7aa0();
 extern void FUN_00c6a350(NiNode*, int, bool, bool, bool);
 extern void FUN_004a3e00(void*, const Point91&);
 extern void impulse91(NiNode*, const Aligned91*, float, int);
-// Applies a force impulse to an actor's physics body or animation node based on game settings and ragdoll state.
-// @fnv 0x0091fee0
-void SelfFull91::FUN_0091fee0(Ref91* actor, Point91 point, float force)
-{
-    if (FUN_008c7aa0())
-    {
-        Queue91::GetSingleton()->enqueue(actor, point.off00, point.off04, point.off08, force);
-    }
-    else if (actor->valid())
-    {
-        this->v6c4();
-        if (!((ActorFull91*)actor)->v38c())
-        {
-            Body91* body = actor->body();
-            Point91 position;
-            body->position(&position);
-            Point91 delta = position - point;
-            delta.off08 = 0.0f;
-            delta.unitize();
-            delta.scale(settingA91.Float()->off00 * (force / settingB91.Float()->off00));
-            float power = settingC91.Float()->off00 * (force / settingB91.Float()->off00);
-            body->impulse(&delta, power);
-        }
-        else
-        {
-            if (((Actor91*)actor)->v214())
-                actor->prepare();
-            *((unsigned char*)this + 0x13c) = 2;
-            ((Self91*)this)->v028();
-            NiNode* node;
-            if (actor == (Ref91*)player91)
-                node = player91->GetNode(false);
-            else
-                node = actor->node();
-            if (actor->off0ac)
-            {
-                actor->off0ac->a(0);
-                actor->off0ac->b(1);
-            }
-            int filter;
-            actor->off0b0->apply(node, actor->filter(&filter)->value());
-            actor->weapon();
-            FUN_00c6a350(node, 1, true, false, true);
-            Update91 update;
-            update.init(0.0f, false, false);
-            ((Node91*)node)->Update(update);
-            Aligned91 direction;
-            FUN_004a3e00(&direction, point);
-            impulse91(node, &direction, force, 0);
-        }
-    }
-}
 
 namespace fnv_00926690 {
 namespace load926 {
@@ -34954,72 +28568,6 @@ struct Self
 using namespace load926;
 extern SaveGame* DAT_011de45c;
 
-// Reads process fields and vectors from the save game, with version-gated data and conditional position handling.
-// @fnv 0x00926690
-void Self::FUN_00926690(Ref* actor)
-{
-    Proc* pProcessTmp;
-
-    pProcessTmp = GetProcess();
-    if (pProcessTmp && !actor->Is22c(0))
-    {
-        int iState3;
-        int iFlags;
-        DAT_011de45c->FUN_008579e0(&iState3, 4);
-        pProcessTmp->FUN_008e2680(iState3);
-        DAT_011de45c->FUN_008579e0(&pProcessTmp->m520, 4);
-        DAT_011de45c->FUN_008579e0(&iFlags, 4);
-        pProcessTmp->m410.FUN_006296b0(-1);
-        pProcessTmp->m410.FUN_00629670(iFlags, 1);
-        if ((iFlags & 0x800) && DAT_011de45c->FUN_008df040() >= 0x23)
-        {
-            Vec3 kPos;
-            DAT_011de45c->FUN_008579e0(&kPos, 0xc);
-            if (Get4bc() && Get4d4())
-            {
-                Ref* pRef5 = 0;
-                if (actor->Is100())
-                {
-                    pRef5 = actor;
-                }
-                if (pRef5 == 0)
-                {
-                    kPos = *Get4d4();
-                }
-            }
-            pProcessTmp->FUN_005620e0(&kPos);
-        }
-        if (!Get4bc())
-        {
-            actor->FUN_00931fb0(0);
-        }
-        DAT_011de45c->FUN_008579e0(&pProcessTmp->m4f0, 0x10);
-        DAT_011de45c->FUN_008579e0(&pProcessTmp->m500, 0x10);
-        Vec3 kVel_;
-        DAT_011de45c->FUN_008579e0(&kVel_, 0xc);
-        pProcessTmp->FUN_00926980(&kVel_);
-        if (actor->Is100())
-        {
-            DAT_011de45c->FUN_008579e0(&pProcessTmp->m540, 4);
-            DAT_011de45c->FUN_008579e0(&pProcessTmp->m544, 4);
-            DAT_011de45c->FUN_008579e0(&pProcessTmp->m548, 4);
-        }
-        else if (DAT_011de45c->FUN_008df040() >= 0x20)
-        {
-            DAT_011de45c->FUN_008579e0(&pProcessTmp->m54c, 4);
-            DAT_011de45c->FUN_008579e0(&pProcessTmp->m548, 4);
-        }
-        if (iState3 == 2 && (pProcessTmp->FUN_0088b0c0() || pProcessTmp->FUN_009269f0()))
-        {
-            pProcessTmp->m544 = 0.0f;
-        }
-        if (DAT_011de45c->FUN_008df040() >= 0x77)
-        {
-            DAT_011de45c->FUN_008579e0(&pProcessTmp->m550, 4);
-            DAT_011de45c->FUN_008579e0(&pProcessTmp->m558, 4);
-        }
-    }
-}
 }  // namespace fnv_00926690
 
 namespace proc92a {
@@ -35921,49 +29469,12 @@ struct N92Procedure
 }
 using namespace proc92a;
 
-// Fails if the proc is null; otherwise may call Do418 on a mismatch, then dispatches states 0 through 2.
-// @fnv 0x0092acd0
-void N92Procedure::FUN_0092acd0(N92Actor* actor)
-{
-    N92Proc* pProc = FUN_008d0430();
-    if (pProc == 0)
-    {
-        Fail(-1);
-        return;
-    }
-    else if (actor->Get214() && pProc->FUN_009f3390() != m140)
-    {
-        actor->Do418();
-        return;
-    }
-    switch (pProc->iState)
-    {
-    case 0:
-        Run0(actor, pProc);
-        break;
-    case 1:
-        Run1(actor, pProc);
-        break;
-    case 2:
-        Run2(actor, pProc);
-        break;
-    }
-}
-
 namespace s44b130 {
 
 struct Lock
 {
     bool FUN_0044b130();
 };
-
-// Returns the boolean result of calling DAT_00fdf1b0 with this.
-// @fnv 0x0044b130
-bool Lock::FUN_0044b130()
-{
-    bool bResult = DAT_00fdf1b0(this) ? 1 : 0;
-    return bResult;
-}
 
 }
 
@@ -36796,138 +30307,6 @@ extern xSaveLoad* xg_pSaveLoad;
 extern xActor* xg_pPlayer;
 extern xSpinLock xg_kLock;
 
-// Reads xProcess save data from buf, restores fields, and applies furniture, equipment, and effect state to the associated actor.
-// @fnv 0x00927000
-void xProcess::FUN_00927000(xBuf* buf)
-{
-    xActor* qsSDDgz = buf->GetForm();
-    BaseLoadGame(buf);
-    buf->Read(&m_134, 1);
-    buf->Read(&m_135, 1);
-    buf->Read(&m_168, 1);
-    buf->Read(&m_170, 4);
-    buf->Read(&m_174, 4);
-    buf->Read(&m_108, 4);
-    buf->Read(&m_1da, 1);
-    buf->Read(&m_0fc, 0xc);
-    buf->Read(&m_0dc, 4);
-    buf->Read(&m_13d, 1);
-    if (qsSDDgz)
-        qsSDDgz->SetFurnitureState(m_13d);
-    buf->Read(&m_144, 1);
-    buf->Read(&m_156, 1);
-    buf->Read(&m_154, 2);
-    buf->Read(&m_148, 0xc);
-    char qrEZrs = 0;
-    buf->Read(&qrEZrs, 1);
-    if (qsSDDgz && !qrEZrs && m_13c)
-        OnSitStateChange(qsSDDgz);
-    m_13c = qrEZrs;
-    buf->Read(&m_0e0, 1);
-    buf->Read(&m_188, 1);
-    buf->Read(&m_189, 1);
-    buf->Read(&m_0d8, 4);
-    buf->Read(&m_18b, 1);
-    buf->Read(&m_1d0, 4);
-    buf->Read(&m_1d4, 4);
-    buf->Read(&m_1d8, 1);
-    buf->Read(&m_1d9, 1);
-    buf->Read(&m_228, 1);
-    buf->Read(&m_22a, 2);
-    buf->Read(&m_1a8, 4);
-    buf->Read(&m_0e1, 1);
-    buf->Read(&m_190, 4);
-    buf->Read(&m_198, 4);
-    buf->Read(&m_19c, 1);
-    buf->Read(&m_19d, 1);
-    buf->Read(&m_234, 4);
-    buf->Read(&m_238, 4);
-    if (buf->GetVersion() >= 10)
-        buf->Read(&m_23c, 4);
-    if (buf->GetVersion() >= 3)
-        buf->Read(&m_244, 4);
-    if (buf->GetVersion() >= 7)
-        buf->Read(&m_110, 1);
-    m_10c = dynamic_cast<TESIdleForm*>(xLookupForm(buf->ReadFormID()));
-    m_194 = dynamic_cast<TESIdleForm*>(xLookupForm(buf->ReadFormID()));
-    buf->ReadRef(&m_158);
-    buf->ReadRef(&m_140);
-    unsigned int qfTOqo = 0;
-    buf->Read(&qfTOqo, 4);
-    unsigned int qpqRa = buf->ReadCount();
-    for (unsigned int i = 0; i < qpqRa; i++)
-    {
-        int m_uiSoundID = 0;
-        buf->ReadRef(&m_uiSoundID);
-        m_0c8.AddHead(&m_uiSoundID);
-    }
-    m_0e4.LoadGame(buf);
-    if (qsSDDgz && buf->GetChangeFlags(0x10000000))
-        xg_pSaveLoad->Load(0, buf, 0);
-    if (buf->GetChangeFlags(0x8000020))
-    {
-        xExtraData* pkData = qsSDDgz->GetExtra()->GetData();
-        if (pkData)
-        {
-            void* qxQHW = pkData->GetItem(5, 0);
-            SetEquipped(qxQHW, qsSDDgz->Get3D(), 0);
-            void* qAhbO = m_114 ? m_114->GetForm() : 0;
-            if (m_114 && qsSDDgz->Get3D() && (!qsSDDgz->IsPlayerTeammate() || !xStrcmp(qsSDDgz->GetFullName(), "Lily")))
-            {
-                qsSDDgz->SetItem(qAhbO);
-                qsSDDgz->GetLog()->Log168(0);
-                qsSDDgz->Equip(qAhbO, 0, m_114->IsQuestItem(2, 1));
-                if (m_118)
-                {
-                    unsigned int uiHave = qfTOqo;
-                    xInventory* pkInv = xInventory::Get(xg_pPlayer);
-                    if (pkInv)
-                        uiHave = pkInv->GetObjectCount(m_118->GetForm());
-                    if (uiHave < qfTOqo)
-                    {
-                        m_118->SetCount(uiHave);
-                        qfTOqo = uiHave;
-                    }
-                    else
-                    {
-                        m_118->SetCount(qfTOqo);
-                    }
-                }
-            }
-            else if (m_114 && qsSDDgz->Get3D() && qsSDDgz->IsPlayerTeammate() &&
-                     xStrcmp(qsSDDgz->GetFullName(), "Lily"))
-            {
-                xNpc* pkNpc = qsSDDgz->GetBase();
-                pkNpc->Refresh(qsSDDgz, 1, 1, 0);
-                qsSDDgz->GetLog()->Log1cc(qsSDDgz->CheckAnim(0, qsSDDgz->ComputePositionAtTime(qsSDDgz)));
-                if (xg_kLock.TryLock())
-                {
-                    qsSDDgz->Reset3D();
-                    xg_kLock.Unlock();
-                }
-            }
-        }
-    }
-    xLoadActiveEffects(buf, m_1b8);
-    buf->ReadRef(&m_164);
-    buf->ReadRef(&m_160);
-    buf->ReadRef(&m_1bc);
-    if (buf->GetVersion() >= 15)
-    {
-        unsigned int uiEntries = buf->ReadCount();
-        if (uiEntries)
-        {
-            m_230 = new PointerListNode();
-            for (unsigned int j = 0; j < uiEntries; j++)
-            {
-                xEntry* pkEntry = new xEntry();
-                pkEntry->Load(buf);
-                m_230->AddHead(&pkEntry);
-            }
-        }
-    }
-}
-
 struct CellStandIn_9294b0
 {
     void FUN_00548740(ArrowProjectile*);
@@ -36945,30 +30324,6 @@ struct S_9294b0 : public MiddleHighProcess
 {
     void FUN_009294b0(TESObjectREFR* apAttachedRef);
 };
-
-// For each listed projectile whose parent cell differs from apAttachedRef's, calls the cell method and global drop queue.
-// @fnv 0x009294b0
-void S_9294b0::FUN_009294b0(TESObjectREFR* apAttachedRef)
-{
-    BSSimpleList<ArrowProjectile*>* pCurrentElementNext;
-    TESObjectCELL* pcell;
-
-    if (!apAttachedRef || !m_pArrowProjectileList || m_pArrowProjectileList->IsEmpty())
-        return;
-
-    pcell = apAttachedRef->GetParentCell();
-    pCurrentElementNext = m_pArrowProjectileList;
-    while (pCurrentElementNext && !pCurrentElementNext->IsEmpty())
-    {
-        ArrowProjectile* parrow = pCurrentElementNext->GetItem();
-        if (parrow && ((TESObjectREFR*)parrow)->GetParentCell() != pcell && pcell)
-        {
-            ((CellStandIn_9294b0*)pcell)->FUN_00548740(parrow);
-            ArrowDrop_9294b0::DAT_011e0e80.Drop(parrow);
-        }
-        pCurrentElementNext = pCurrentElementNext->GetNext();
-    }
-}
 
 namespace fnv_00919f60 {
 struct ProcedureTrace
@@ -37185,559 +30540,6 @@ struct PackageProcedureFilter : TESForm
     virtual bool Matches(Actor*, int, float, int);
 };
 
-// Dispatches package behavior for an actor and updates process state and targets according to package type and conditions.
-// @fnv 0x00919f60
-void ProcedureProcess::FUN_00919f60(ProcedureActor* apActor)
-
-{
-
-    DAT_011e0460.FUN_00483710();
-
-    TESPackage* p = 0;
-
-    if (!apActor)
-        return;
-
-    if (!apActor->GetNiNode() || apActor->GetDeleted() || apActor->GetDisabled() ||
-
-        !apActor->FUN_008d6f30() || !apActor->FUN_008d6f30()->FUN_00450fb0())
-    {
-
-        ResetPackageState();
-
-        return;
-    }
-
-    ProcedureActor* h;
-
-    if (h = apActor->IsActor() ? apActor : 0)
-    {
-
-        if (m_bCombatStateFlag)
-
-            reinterpret_cast<unsigned char&>(m_bCombatStateFlag) = UpdateEffectShaderOnActor(h, m_bCombatStateFlag);
-
-        bool a = CanProcessActor(h, false);
-
-        p = GetOneTimePackage();
-
-        if (a || (!p && !h->FUN_008b3bb0()))
-
-            UpdateCurrentPackage(h);
-
-        p = GetOneTimePackage();
-
-        Procedure82C();
-
-        if (a)
-        {
-
-            h->FUN_008a8f60();
-
-            GetPackageLocationReference(h, false);
-        }
-
-        if (p && ((PackageProcedureAccess*)p)->FUN_009611e0() != -1 &&
-
-            !((PackageProcedureAccess*)p)->FUN_008a6290())
-        {
-
-            switch (DAT_011a3ff0[((PackageProcedureAccess*)p)->FUN_009611e0()][GetPackageInfoValue()])
-            {
-
-            case 0:
-
-            {
-
-                UpdateActorStateWithOptions(h, a, true, 0x101, false);
-
-                break;
-            }
-
-            case 39:
-
-            {
-
-                Procedure7E8(h);
-
-                break;
-            }
-
-            case 2:
-
-            {
-
-                // Preserve the subtype query even when no specialized case applies.
-                switch (((PackageProcedureAccess*)p)->FUN_0041ca90())
-                {
-                default:
-                    break;
-                }
-
-                Procedure7C8(h, true);
-
-                break;
-            }
-
-            case 41:
-
-            {
-
-                SetProcessTarget(h, 2);
-
-                break;
-            }
-
-            case 44:
-
-            {
-
-                Procedure7FC(h);
-
-                break;
-            }
-
-            case 33:
-
-            {
-
-                Procedure7E0(h);
-
-                break;
-            }
-
-            case 30:
-
-            {
-
-                Procedure7D4(h);
-
-                break;
-            }
-
-            case 38:
-
-            {
-
-                Procedure800(h);
-
-                break;
-            }
-
-            case 1:  // No operation in this dispatcher.
-                break;
-            case 26:
-
-            {
-
-                Procedure808(h);
-
-                break;
-            }
-
-            case 35:
-
-            {
-
-                Procedure848(h, true, false);
-
-                break;
-            }
-
-            case 34:
-
-            {
-
-                Procedure7E4(h);
-
-                break;
-            }
-
-            case 3:
-
-            {
-
-                switch (((PackageProcedureAccess*)p)->FUN_0041ca90())
-                {
-                default:
-                    break;
-                }
-
-                Procedure7D0(h);
-
-                break;
-            }
-
-            case 28:
-
-            {
-
-                Procedure7D8(h);
-
-                break;
-            }
-
-            case 50:
-
-            {
-
-                Procedure7DC(h);
-
-                break;
-            }
-
-            case 27:
-
-            {
-
-                switch (((PackageProcedureAccess*)p)->FUN_0041ca90())
-                {
-                default:
-                    break;
-                }
-
-                Procedure7CC(h);
-
-                break;
-            }
-
-            case 17:
-
-            {
-
-                if (!pTarget)
-                    FindPackageTarget(h);
-
-                if (!pTarget)
-                {
-
-                    SetProcessTarget(h, 1);
-
-                    if (!h->FUN_008b3bb0())
-                        StopActorMovement(h);
-                }
-
-                if (pTarget != DAT_011dea3c)
-                    SetPackageForActor(h, p, true);
-
-                SetProcessTarget(h, 1);
-
-                break;
-            }
-
-            case 13:
-
-            {
-
-                switch (((PackageProcedureAccess*)p)->FUN_0041ca90())
-                {
-                default:
-                    break;
-                }
-
-                if (!pTarget)
-                    FindPackageTarget(h);
-
-                if (!pTarget || pTarget->GetDeleted())
-                    SetProcessTarget(h, 1);
-
-                if (!((PackageProcedureAccess*)p)->FUN_008a6290())
-                {
-
-                    if (((PackageProcedureAccess*)h->FUN_009344a0())->FUN_0041ca90() == 1)
-                    {
-
-                        float i = (float)((PackageProcedureAccess*)GetCurrentPackage())->FUN_00671d10()->FUN_0044ddc0();
-
-                        if (i >= h->FUN_005723b0(pTarget, 0, 0))
-                            SetProcessTarget(h, 1);
-                    }
-                    else
-                    {
-
-                        float s = 0.0f;
-
-                        int f = ((PackageProcedureAccess*)p)->FUN_00671d10()->FUN_0044ddc0();
-
-                        if (f <= 0)
-                            f = 200;
-
-                        if (s == 0.0 && h->FUN_008d6f30()->FUN_00425fd0())
-                            s = *DAT_011cdbac.FUN_00403e20();
-
-                        else if (s == 0.0)
-                            s = f * *DAT_011cd82c.FUN_00403e20();
-
-                        if (h->FUN_005723b0(pTarget, 0, 0) <= s / 2.0)
-                            SetProcessTarget(h, 1);
-                    }
-                }
-                else
-                {
-
-                    if (!((PlayerProcedureAccess*)DAT_011dea3c)->HasExtraFollowerForm(h) &&
-
-                        ((PlayerProcedureAccess*)DAT_011dea3c)->FUN_00962620() < *DAT_011cdad0.FUN_0043d4d0())
-
-                        ((PackageProcedureAccess*)p)->SetFlag10000(0);
-                }
-
-                break;
-            }
-
-            case 22:
-
-            {
-
-                CanDetectActor(h);
-
-                if (!h->Unk_85())
-                    SetProcessTarget(h, 1);
-
-                break;
-            }
-
-            case 14:
-
-            {
-
-                Procedure7C8(h, false);
-
-                break;
-            }
-
-            case 9:  // No operation in this dispatcher.
-                break;
-            case 4:
-
-            {
-
-                FUN_00703180();
-
-                break;
-            }
-
-            case 5:
-
-            {
-
-                Procedure7BC(h, false);
-
-                break;
-            }
-
-            case 6:
-
-            {
-
-                switch (((PackageProcedureAccess*)p)->FUN_0041ca90())
-                {
-                default:
-                    break;
-                }
-
-                UpdateActorPackage(h, true, 0x101, false);
-
-                break;
-            }
-
-            case 7:
-
-            {
-
-                switch (((PackageProcedureAccess*)p)->FUN_0041ca90())
-                {
-                default:
-                    break;
-                }
-
-                Procedure7B4(h);
-
-                break;
-            }
-
-            case 12:
-
-            {
-
-                Procedure83C(h);
-
-                break;
-            }
-
-            case 49:
-
-            {
-
-                Procedure840(h);
-
-                break;
-            }
-
-            case 8:
-
-            {
-
-                Procedure7C4(h);
-
-                break;
-            }
-
-            case 15:
-
-            {
-
-                switch (((PackageProcedureAccess*)p)->FUN_0041ca90())
-                {
-                default:
-                    break;
-                }
-
-                EvaluatePackage(h, false, true, 0x101);
-
-                break;
-            }
-
-            case 10:
-
-            {
-
-                switch (((PackageProcedureAccess*)p)->FUN_0041ca90())
-                {
-                default:
-                    break;
-                }
-
-                ProcessFlee(h);
-            }
-
-            case 54:
-
-            {
-
-                if (!IsProcessActivityActive() && !((PackageProcedureAccess*)p)->FUN_00674d40() &&
-
-                    ((PackageProcedureAccess*)p)->FUN_00678610())
-                {
-
-                    FUN_005ac750(p, h->FUN_005d43c0(), 0x400);
-
-                    OnPackageEnd(h, p);
-
-                    SetProcessModeEnabled(true);
-                }
-
-                if (((PackageProcedureAccess*)p)->FUN_009611e0() == 38)
-                {
-
-                    ProcedureDuration* eb = ((PackageProcedureAccess*)p)->FUN_0041d8a0();
-
-                    if (!eb || eb->FUN_00726070() <= 0.0)
-                    {
-
-                        ProcedureLocation* cf = ((PackageProcedureAccess*)p)->FUN_00675920();
-
-                        if (cf && !cf->FUN_004f1540())
-                        {
-
-                            SetAnimationComplete(true);
-
-                            UpdateCurrentPackage(h);
-
-                            StopPackage();
-
-                            CanProcessActor(h, true);
-                        }
-                    }
-
-                    return;
-                }
-
-                if (((PackageProcedureAccess*)p)->FUN_0041ca90() == 3 ||
-
-                    ((PackageProcedureAccess*)p)->FUN_0041ca90() == 4)
-                {
-
-                    SetProcessTarget(h, -1);
-
-                    return;
-                }
-
-                if (((PackageProcedureAccess*)p)->FUN_0041ca90() == 6 &&
-
-                    !((PackageProcedureFilter*)p)->Matches(h, 0, -1.0f, 0))
-                {
-
-                    SetProcessTarget(h, -1);
-
-                    return;
-                }
-
-                if (p && ((PackageProcedureAccess*)p)->FUN_00670f90())
-
-                    h->Unk_A3(p, DAT_011de7b8.FUN_00867d60());
-
-                FUN_00703180();
-
-                if (!((PackageProcedureAccess*)p)->FUN_0041d8a0()->FUN_00726070())
-                {
-
-                    SetTarget(0);
-
-                    if (GetRunOncePackage())
-                        StopRunOncePackage();
-
-                    else if (((PackageProcedureAccess*)GetCurrentPackage())->FUN_00674d40())
-                    {
-
-                        StopPackage();
-
-                        if (!h->FUN_008b3bb0())
-                            StopActorMovement(h);
-                    }
-
-                    delete reinterpret_cast<TargetDoorController*>(m_pDetectionData60);
-
-                    m_pDetectionData60 = 0;
-
-                    while (!ReferenceListNode.IsEmpty())
-                    {
-
-                        ::TargetDoorController* q = ReferenceListNode.GetItem();
-
-                        delete reinterpret_cast<TargetDoorController*>(q);
-
-                        ReferenceListNode.Remove(q);
-                    }
-
-                    m_pReference40 = 0;
-
-                    ((RefListClear*)&m_kReferenceList68)->FUN_00470470();
-                }
-
-                break;
-            }
-
-            default:
-
-            {
-
-                break;
-            }
-            }
-        }
-
-        if (!h->FUN_008b3bf0())
-            apActor->FUN_008d8520()->ResetPackageState();
-    }
-    else
-    {
-
-        apActor->FUN_008d8520()->ResetPackageState();
-    }
-
-    DAT_011e0460.FUN_00483710();
-}
 }  // namespace fnv_00919f60
 
 class QueuedFileAccess
@@ -37827,92 +30629,6 @@ class WeaponProcess : public MiddleHighProcess
     bool FUN_0091e100(InventoryStackRecord*, NiNode*, bool);
     void UpdateWeaponTypeFlags();
 };
-// Updates the stored weapon and invokes routines for animation nodes, sound entries, queued file data, and actor state.
-// @fnv 0x0091e100
-bool WeaponProcess::FUN_0091e100(InventoryStackRecord* weapon, NiNode* node, bool force)
-{
-    MemContextAccess context(0x32, true, DAT_010898c0, 0x10b1);
-    if (pWeapon != weapon || (weapon && force))
-    {
-        if (pWeapon && ((ItemChangeAccess*)pWeapon)->FUN_0044ddc0() && pCurrentAnimation)
-        {
-            if (pCurrentAnimation == ((PlayerAccess*)DAT_011dea3c)->FUN_00950a60(false))
-            {
-                FUN_008d6a80((const char*)DAT_0118a838[((ItemChangeAccess*)pWeapon)->FUN_0044ddc0()->FUN_00446390()],
-                             ((PlayerAccess*)DAT_011dea3c)->FUN_00950bb0(true));
-                FUN_008d6a80((const char*)DAT_0118a838[((ItemChangeAccess*)pWeapon)->FUN_0044ddc0()->FUN_00446390()],
-                             ((PlayerAccess*)DAT_011dea3c)->FUN_00950bb0(false));
-            }
-            else if (((AnimAccess*)pCurrentAnimation)->FUN_005585e0())
-            {
-                FUN_008d6a80((const char*)DAT_0118a838[((ItemChangeAccess*)pWeapon)->FUN_0044ddc0()->FUN_00446390()],
-                             ((AnimAccess*)pCurrentAnimation)->FUN_005585e0());
-            }
-            else
-                FUN_008d6a80((const char*)DAT_0118a838[((ItemChangeAccess*)pWeapon)->FUN_0044ddc0()->FUN_00446390()],
-                             node);
-        }
-        if (pWeapon != weapon)
-            delete (ItemChangeAccess*)pWeapon;
-        pWeapon = weapon;
-        m_pActorObject = 0;
-        UpdateWeaponTypeFlags();
-        WeaponBaseAccess* base = pWeapon ? ((ItemChangeAccess*)pWeapon)->FUN_0044ddc0() : 0;
-        if (base)
-        {
-            if (base->FUN_005215a0(((ItemChangeAccess*)pWeapon)->HasEffect(11) ||
-                                   ((ItemChangeAccess*)pWeapon)->HasEffect(16)))
-                FUN_00453a70()->FUN_00ad8100(base->FUN_005215a0(((ItemChangeAccess*)pWeapon)->HasEffect(11) ||
-                                                                ((ItemChangeAccess*)pWeapon)->HasEffect(16))
-                                                 ->FUN_00511840(),
-                                             0x102, base->FUN_005215a0(false));
-            if (base->GetValueByFlag(((ItemChangeAccess*)pWeapon)->HasEffect(11) ||
-                                   ((ItemChangeAccess*)pWeapon)->HasEffect(16)))
-                FUN_00453a70()->FUN_00ad8100(base->GetValueByFlag(((ItemChangeAccess*)pWeapon)->HasEffect(11) ||
-                                                                ((ItemChangeAccess*)pWeapon)->HasEffect(16))
-                                                 ->FUN_00511840(),
-                                             0x102, base->GetValueByFlag(false));
-            if (base->GetPointerByFlag(((ItemChangeAccess*)pWeapon)->HasEffect(11) ||
-                                   ((ItemChangeAccess*)pWeapon)->HasEffect(16)))
-                FUN_00453a70()->FUN_00ad8100(base->GetPointerByFlag(((ItemChangeAccess*)pWeapon)->HasEffect(11) ||
-                                                                ((ItemChangeAccess*)pWeapon)->HasEffect(16))
-                                                 ->FUN_00511840(),
-                                             0x101, base->GetPointerByFlag(false));
-            if (base->GetField22C())
-                FUN_00453a70()->FUN_00ad8100(base->GetField22C()->FUN_00511840(), 0x102, base->GetField22C());
-            ((WeaponPreloadAccess*)&m_pQueuedWeaponFile)->FUN_006f74f0(new QueuedFileAccess(5));
-            bool player = false;
-            if (DAT_011dea3c && ((PlayerAccess*)DAT_011dea3c)->FUN_008d8520() == this)
-                player = true;
-            base->FUN_00525510(5, ((WeaponPreloadAccess*)&m_pQueuedWeaponFile)->FUN_00559450(), player);
-        }
-        else
-            ((WeaponPreloadAccess*)&m_pQueuedWeaponFile)->FUN_006f74f0(0);
-        ((CloneAccess*)&m_pWeaponData)->FUN_0092c8b0(0);
-        if (DAT_011dea3c && ((PlayerAccess*)DAT_011dea3c)->FUN_008d8520() == this)
-            ((PlayerAccess*)DAT_011dea3c)->SetByteAtOffset1F8(0);
-    }
-    if (!pCurrentAnimation || !node)
-    {
-        m_pActorNode = 0;
-        m_pActorObject = 0;
-        if (DAT_011dea3c && ((PlayerAccess*)DAT_011dea3c)->FUN_008d8520() == this)
-            DAT_011e0410 = 0;
-    }
-    else
-    {
-        if (((AnimAccess*)pCurrentAnimation)->FUN_005585e0())
-            SetAnimationControllerManager(((AnimAccess*)pCurrentAnimation)->FUN_00496940(),
-                              ((AnimAccess*)pCurrentAnimation)->FUN_005585e0());
-        else
-            SetAnimationControllerManager(0, node);
-        if (pCurrentAnimation == ((PlayerAccess*)DAT_011dea3c)->FUN_00950a60(false))
-            SetAnimationControllerManager(((AnimAccess*)((PlayerAccess*)DAT_011dea3c)->FUN_00950a60(true))->FUN_00496940(),
-                              ((AnimAccess*)((PlayerAccess*)DAT_011dea3c)->FUN_00950a60(true))->FUN_005585e0());
-    }
-    SetKnockdownStage(-1);
-    return true;
-}
 
 namespace fnv_00928d90 {
 class NiMemObject
@@ -38056,92 +30772,6 @@ struct ShaderProcess : MiddleHighProcess
 {
     void FUN_00928d90(Actor* actor);
 };
-// Updates the actor's effect shader, assigning an enchantment shader from the active weapon when its cost is met, and manages the player's shader object.
-// @fnv 0x00928d90
-void ShaderProcess::FUN_00928d90(Actor* actor)
-{
-    if (m_kSixthUnshownMember)
-    {
-        FUN_0081f580* body = DAT_011e0e80.FUN_00974cb0(actor);
-        if (body)
-            body->Update();
-    }
-    if (m_bThirdFaceGenFlag)
-    {
-        AssignEffectShader(0);
-        if (actor->GetProcess() && actor->GetProcess()->GetActiveWeapon())
-        {
-            ShaderEnchantment* enchantment =
-                FUN_004be330(reinterpret_cast<ShaderItemChange*>(GetActiveWeapon())->FUN_0044ddc0());
-            if (enchantment)
-            {
-                if (enchantment->cost.GetCost(actor) <= FUN_004bd350(actor->GetProcess()->GetActiveWeapon()))
-                {
-                    ShaderEffectSetting* effect = enchantment->effects.FUN_0040a300(0);
-                    if (effect && effect->GetEnchantEffectShader())
-                    {
-                        TESEffectShader* shader = effect->GetEnchantEffectShader();
-                        AssignEffectShader(shader);
-                    }
-                }
-            }
-        }
-        bool a = false;
-        FUN_0081f580* b = DAT_011e0e80.FUN_00974db0(actor, GetCurrentEffectShader());
-        if (b)
-            b->Update();
-        else if (GetCurrentEffectShader())
-        {
-            b = new FUN_0081f580(actor, GetCurrentEffectShader(), -1.0f);
-            b->FUN_00929260(1);
-            if (m_kSeventhUnshownMember)
-                b->FUN_00929240(100.0f);
-            if (b->Update())
-            {
-                DAT_011e0e80.FUN_00973fd0(b);
-                if (!m_kSeventhUnshownMember)
-                    a = true;
-            }
-        }
-        if (actor == pPlayer && pPlayer->FUN_00490f80())
-        {
-            TESEffectShader* shader = GetCurrentEffectShader();
-            FUN_0081f580* pPlayerShader = pPlayer->GetField6A4();
-            if (shader)
-            {
-                if (pPlayerShader && pPlayerShader->FUN_00671d10() != shader)
-                {
-                    delete pPlayerShader;
-                    pPlayerShader = 0;
-                }
-                if (!pPlayerShader)
-                {
-                    pPlayerShader = new FUN_0081f580(pPlayer, shader, -1.0f);
-                    pPlayerShader->FUN_00929260(1);
-                    pPlayer->FUN_00929220(pPlayerShader);
-                    if (!a)
-                        pPlayerShader->FUN_00929240(100.0f);
-                }
-            }
-            else if (!shader && pPlayerShader)
-            {
-                delete pPlayerShader;
-                pPlayerShader = 0;
-                pPlayer->FUN_00929220(pPlayerShader);
-            }
-            if (pPlayerShader && !pPlayerShader->Update())
-            {
-                delete pPlayerShader;
-                pPlayerShader = 0;
-                pPlayer->FUN_00929220(pPlayerShader);
-            }
-        }
-    }
-    m_bFirstFaceGenFlag = false;
-    m_kSixthUnshownMember = false;
-    m_bThirdFaceGenFlag = false;
-    m_kSeventhUnshownMember = false;
-}
 }  // namespace fnv_00928d90
 
 namespace fnv_0092bd00 {
@@ -38352,36 +30982,6 @@ class ProjectileCloneAssignment
     ProjectileCloneAssignment& FUN_0092c8b0(ActorSupportClass*);
 };
 
-// Loads the model path from the active weapon's projectile view and stores a clone assignment when the queued file is ready.
-// @fnv 0x0092bd00
-void FUN_0092bd00_shell::FUN_0092bd00(Actor* actor)
-{
-    if (!m_pWeaponData && m_pQueuedWeaponFile &&
-        reinterpret_cast<QueuedFile*>(m_pQueuedWeaponFile.operator->())->FUN_0043caa0())
-    {
-        ::InventoryStackRecord* ammo = GetActiveWeapon();       // Weapon inventory entry; names preserve MSVC9 stack order.
-        ::InventoryStackRecord* weaponItem = GetCurrentAmmo();  // Ammo inventory entry.
-        // Resolve the weapon and ammunition objects from their inventory entries.
-        WeaponView* pAmmoView =
-            ammo ? static_cast<WeaponView*>(reinterpret_cast<InventoryStackRecord*>(GetActiveWeapon())->FUN_0044ddc0()) : 0;
-        void* weapon = weaponItem ? reinterpret_cast<InventoryStackRecord*>(GetCurrentAmmo())->FUN_0044ddc0() : 0;
-        if (pAmmoView && weapon && pAmmoView->GetOrFallback(actor))
-        {
-            int cloneCount = pAmmoView->GetOrFallback(actor)->GetProjectileCloneCount(pAmmoView);
-            if (cloneCount > 0)
-            {
-                NiPointer<Model> model;
-                reinterpret_cast<ProjectileCloneLoader*>(g_modelLoader)
-                    ->FUN_004472a0(pAmmoView->GetOrFallback(actor)->model.GetModelPath(), &model);
-                if (model && model->GetObject3D())
-                {
-                    reinterpret_cast<ProjectileCloneAssignment*>(&m_pWeaponData)
-                        ->FUN_0092c8b0(new ActorSupportClass(model->GetObject3D(), cloneCount));
-                }
-            }
-        }
-    }
-}
 }  // namespace fnv_0092bd00
 
 class NiUpdateData
@@ -38696,213 +31296,6 @@ class FinishInitLoadProcessView : public MiddleHighProcess
   public:
     void FUN_00925700(unsigned int, unsigned int, MobileObject*);
 };
-
-// Finalizes load-game state for an actor, restoring furniture markers, animations, physics, and effects.
-// @fnv 0x00925700
-void FinishInitLoadProcessView::FUN_00925700(unsigned int a1, unsigned int a2, MobileObject* apMobileObject)
-{
-    BaseProcess::FinishLoadGameTES(a1, a2, apMobileObject);
-
-    ActorStandIn* actor = (ActorStandIn*)dynamic_cast<Actor*>(apMobileObject);
-    ObjectWithVFuncD8* pUnk4 = (ObjectWithVFuncD8*)((ObjectWithVFunc1b8*)apMobileObject)->FUN_001b8(0);
-    if (pUnk4 && this->m_cCharacterControllerState)
-    {
-        switch (this->m_cCharacterControllerState)
-        {
-        case 1:
-        case 2:
-        case 3:
-        case 4:
-            pUnk4->FUN_00d8(1, 0);
-            break;
-        default:
-            pUnk4->FUN_00d8(0, 0);
-            break;
-        }
-    }
-
-    if (actor)
-    {
-        if (actor == (ActorStandIn*)_g_thePlayer)
-        {
-            PlayAnimation(this->m_bAdditionalActorFlag, _g_thePlayer->GetBipedAnim(true),
-                          _g_thePlayer->GetAnimation(true), (Actor*)_g_thePlayer);
-            PlayAnimation(this->m_bAdditionalActorFlag, _g_thePlayer->GetBipedAnim(false),
-                          _g_thePlayer->GetAnimation(false), (Actor*)_g_thePlayer);
-        }
-        else
-        {
-            if (GetActorRootNode((BipedAnim*)actor->GetValidBip01Names()))
-            {
-                PlayAnimation(this->m_bAdditionalActorFlag, (BipedAnim*)actor->GetValidBip01Names(),
-                              (Animation*)actor->GetAnimData(), (Actor*)actor);
-            }
-        }
-    }
-
-    NiAVObject* node;
-    if (apMobileObject == (MobileObject*)_g_thePlayer)
-    {
-        node = (NiAVObject*)_g_thePlayer->GetNode(false);
-    }
-    else
-    {
-        node = ((TESObjectREFRExt*)apMobileObject)->Get3DSimple();
-    }
-
-    if (actor && ((TESObjectREFRExt*)actor)->Get3DSimple() && this->m_pFurnitureReference && !actor->Unk_8B(false))
-    {
-        bool bValidFurniture = true;
-        if (actor->GetParentCell() == this->m_pFurnitureReference->GetParentCell())
-        {
-            TESFurniture* ref = dynamic_cast<TESFurniture*>(this->m_pFurnitureReference->GetObjectReference());
-            FurnitureNodeStandIn* furnNode = 0;
-            if (ref)
-            {
-                furnNode = (FurnitureNodeStandIn*)FinishLoadCalls::FUN_00c54400(
-                    ((TESObjectREFRExt*)this->m_pFurnitureReference)->GetNiNode());
-                if (!furnNode || (unsigned int)this->m_ucFurnitureMarkerIndex >= furnNode->FUN_00509490())
-                {
-                    bValidFurniture = false;
-                }
-            }
-
-            if (bValidFurniture)
-            {
-                char origState = this->m_ucFurnitureInteractionState;
-                int flag = 0;
-                switch (this->m_ucFurnitureInteractionState)
-                {
-                case 1:
-                case 2:
-                case 3:
-                case 4:
-                    this->m_ucFurnitureInteractionState = 1;
-                    break;
-                case 6:
-                case 7:
-                case 8:
-                case 9:
-                    this->m_ucFurnitureInteractionState = 6;
-                    break;
-                default:
-                    break;
-                }
-
-                if (this->m_ucFurnitureInteractionState)
-                {
-                    ((TESObjectREFRExt*)this->m_pFurnitureReference)
-                        ->FUN_00568020(this->m_ucFurnitureMarkerIndex, true);
-                    if (actor == (ActorStandIn*)_g_thePlayer)
-                    {
-                        IsFurnitureMarkerValid((Actor*)_g_thePlayer);
-                        _g_thePlayer->FUN_00950110(_g_thePlayer->FUN_004eaf60());
-                        IsFurnitureMarkerValid((Actor*)_g_thePlayer);
-                        _g_thePlayer->FUN_00950110(_g_thePlayer->FUN_004eaf60());
-                    }
-                    else
-                    {
-                        IsFurnitureMarkerValid((Actor*)actor);
-                    }
-                }
-                this->m_ucFurnitureInteractionState = origState;
-
-                if ((this->m_ucFurnitureInteractionState == 4 || this->m_ucFurnitureInteractionState == 9) && ref)
-                {
-                    if (furnNode && (unsigned int)this->m_ucFurnitureMarkerIndex < furnNode->FUN_00509490())
-                    {
-                        LocalMarker l = *furnNode->FUN_005094d0(this->m_ucFurnitureMarkerIndex);
-                        NiPoint3 j = *(NiPoint3*)((S_006815c0*)&l)->_ref_006815c0();
-                        NiPoint3 b;
-                        ((S_006815c0*)&b)->_ref_006815c0();
-
-                        FUN_00a582f0(((TESObjectREFRExt*)this->m_pFurnitureReference)->FUN_0056fa00(),
-                                     ((TESObjectREFRExt*)this->m_pFurnitureReference)->GetPos(), 1, &j, &b);
-                        ((LocalMarker*)&this->FurnitureMarker)->FUN_00568ab0(l.FUN_005094b0());
-                        ((LocalMarker*)&this->FurnitureMarker)->FUN_0098ddd0(b);
-                        ((LocalMarker*)&this->FurnitureMarker)
-                            ->FUN_00c54550(l.FUN_00568650() + this->m_pFurnitureReference->GetAngleOnReference().z);
-                    }
-
-                    NiPoint3 eb =
-                        ref->FUN_00509920(((LocalMarker*)&this->FurnitureMarker)->FUN_005094b0(), actor->GetScale());
-                    ThreeByThreeMatrix p;
-                    ((S_006815c0*)&p)->_ref_006815c0();
-                    p.FUN_004a0c90(((LocalMarker*)&this->FurnitureMarker)->FUN_00568650());
-                    eb = p.FUN_004b4500(&eb);
-                    actor->Unk_AA(*(NiPoint3*)((LocalMarker*)&this->FurnitureMarker)->_ref_006815c0() + eb);
-
-                    char i = this->m_ucFurnitureInteractionState;
-                    this->m_ucFurnitureInteractionState = 0;
-                    if (actor != (ActorStandIn*)_g_thePlayer)
-                    {
-                        actor->SetFurnitureHeading(((LocalMarker*)&this->FurnitureMarker)->FUN_00568650());
-                        actor->FUN_00931d30(ref->GetFurnitureHeading(((LocalMarker*)&this->FurnitureMarker)->FUN_005094b0()));
-                    }
-                    this->m_ucFurnitureInteractionState = i;
-
-                    if (actor->GetPhysicsCharacterController())
-                    {
-                        actor->GetPhysicsCharacterController()->FUN_005620e0(
-                            ((LocalMarker*)&this->FurnitureMarker)->_ref_006815c0());
-                    }
-                }
-            }
-        }
-        else
-        {
-            bValidFurniture = false;
-        }
-
-        if (!bValidFurniture)
-        {
-            this->m_pFurnitureReference = 0;
-            this->m_ucFurnitureInteractionState = 0;
-            if (actor == (ActorStandIn*)_g_thePlayer)
-            {
-                _g_thePlayer->FUN_005098c0();
-            }
-        }
-        else
-        {
-            if (this->m_ucFurnitureInteractionState == 9 || this->m_ucFurnitureInteractionState == 4)
-            {
-                FUN_00c69fc0(node, true, true, false);
-            }
-        }
-    }
-
-    if (actor && this->m_ucFurnitureInteractionState && !this->m_pFurnitureReference)
-    {
-        this->m_ucFurnitureInteractionState = 0;
-        if (actor == (ActorStandIn*)_g_thePlayer)
-        {
-            _g_thePlayer->FUN_005098c0();
-        }
-    }
-
-    if ((node && this->m_cCharacterControllerState == 2) || this->m_cCharacterControllerState == 1)
-    {
-        FUN_00c6a350(node, true, true, false, true);
-        NiUpdateData updateData(0.0f, false, false);
-        node->Update(updateData);
-    }
-
-    FUN_00806130(this->m_pActiveEffectList, (Actor*)actor);
-    this->m_kFifthUnshownMember = true;
-    if (actor)
-    {
-        UpdateActorAppearance(true, false, false);
-    }
-    if (this->m_bFourthStateFlag && !this->m_pCombatTarget)
-    {
-        FinishLoadGlobals::DAT_011de45c->AddFormToList(apMobileObject);
-    }
-    if (actor)
-    {
-        SetActorTarget((Actor*)actor);
-    }
-}
 
 namespace fnv_00928510 {
 using ::Actor;
@@ -39548,86 +31941,6 @@ class MiddleHighProcessExt : public MiddleHighProcess
     void FUN_00928510(Actor* a1, Animation* a2);
 };
 
-// @fnv 0x00928510
-void MiddleHighProcessExt::FUN_00928510(Actor* apActor, Animation* apAnimation)
-{
-    if (m_pFurnitureReference)
-    {
-        ::TESBoundObject* boundObj = m_pFurnitureReference->GetObjectReference();
-        NiAVObject* pNiAVObject = FurnitureDecls::FUN_00c54400(((Cls140*)m_pFurnitureReference)->v116());
-        if (!pNiAVObject || (unsigned int)m_ucFurnitureMarkerIndex >= (unsigned int)FUN_00509490(pNiAVObject))
-        {
-            ProcessFurniture(apActor);
-        }
-        else
-        {
-            unsigned char savedState = m_ucFurnitureInteractionState;
-            switch (m_ucFurnitureInteractionState)
-            {
-            case 1:
-            case 2:
-            case 3:
-            case 4:
-                m_ucFurnitureInteractionState = 1;
-                break;
-            case 6:
-            case 7:
-            case 8:
-            case 9:
-                m_ucFurnitureInteractionState = 6;
-                break;
-            default:
-                break;
-            }
-            apActor->SetCurrentSitSleepState((SIT_SLEEP_STATE)m_ucFurnitureInteractionState);
-            if (m_ucFurnitureInteractionState)
-            {
-                ((FurnEx*)m_pFurnitureReference)->FUN_00568020(m_ucFurnitureMarkerIndex, true);
-                bool b3 = false;
-                if (apActor == g_thePlayer)
-                {
-                    b3 = g_thePlayer->FUN_004eaf60();
-                    if (apAnimation != g_thePlayer->GetAnimation(!b3))
-                    {
-                        g_thePlayer->FUN_005c4210(!b3);
-                    }
-                }
-                TESIdleForm* idle = DAT_011cb6a0->FUN_00600950(apActor, m_pFurnitureReference);
-                if (idle)
-                {
-                    apAnimation->FUN_00498030(idle, apActor, idle->GetFlagsMasked());
-                }
-                if (apActor == g_thePlayer)
-                {
-                    g_thePlayer->FUN_005c4210(b3);
-                }
-            }
-            m_ucFurnitureInteractionState = savedState;
-            bool bShouldDisable =
-                IsFurnitureType(m_pFurnitureReference, ((FUN_005094b0_shell*)&FurnitureMarker)->FUN_005094b0());
-            bhkCharacterController* pCharacterController = (bhkCharacterController*)GetPhysicsCharacterController();
-            if (bShouldDisable && m_ucFurnitureInteractionState)
-            {
-                ((ActorStandIn*)apActor)->SetLookingTarget(0.1f);
-                ((ActorEx*)apActor)->FUN_00931fb0(true);
-                if (pCharacterController)
-                {
-                    pCharacterController->sub410.FUN_00629670(0x8000000, true);
-                }
-            }
-            else
-            {
-                ((ActorStandIn*)apActor)->SetLookingTarget(0.0f);
-                ((ActorEx*)apActor)->FUN_00931fb0(false);
-                if (pCharacterController)
-                {
-                    pCharacterController->sub410.FUN_00629670(0x8000000, false);
-                }
-            }
-            apActor->SetCurrentSitSleepState((SIT_SLEEP_STATE)m_ucFurnitureInteractionState);
-        }
-    }
-}
 }
 
 class AutoMemContext
@@ -39662,35 +31975,6 @@ struct FUN_00915950_shell : public MiddleHighProcess
     void FUN_00915950(Actor* apActor, bool abEquip, TESBoundObject* apObject, int aiCount, ExtraDataList* apExtraData,
                       bool abArg6, bool abArg7, bool abArg8, bool abArg9, bool abArg10, bool abArg11);
 };
-
-// If the item is not already queued, creates a QueuedItemSV, stores selected arguments, and appends it to m_pkPaddedFloatRecordList.
-// @fnv 0x00915950
-void FUN_00915950_shell::FUN_00915950(Actor* apActor, bool abEquip, TESBoundObject* apObject, int aiCount,
-                                      ExtraDataList* apExtraData, bool abArg6, bool abArg7, bool abArg8, bool abArg9,
-                                      bool abArg10, bool abArg11)
-{
-    AutoMemContext kMemContext(MEM_CONTEXT_MEM_CONTEXT_TES_ACTOR, true,
-                               "D:\\_Fallout3\\Platforms\\Common\\Code\\Fallout\\ai\\MiddleHighProcess.cpp", 0x343);
-    if (!IsItemQueued(apObject, apExtraData, abEquip))
-    {
-        QueuedItemSV* pItem = new QueuedItemSV;
-        pItem->pObject = apObject;
-        pItem->m_bFirstStateFlag = abEquip;
-        pItem->iCount = aiCount;
-        pItem->pExtraData = apExtraData;
-        pItem->bUnk0D = abArg6;
-        pItem->bUnk0E = abArg7;
-        pItem->bUnk10 = abArg9;
-        pItem->bUnk11 = abArg10;
-        pItem->bUnk0F = abArg11;
-        pItem->FUN_00913a20(apActor);
-        if (!m_pkPaddedFloatRecordList)
-        {
-            m_pkPaddedFloatRecordList = new BSSimpleList< ::PaddedFloatRecord*>;
-        }
-        ((BSSimpleList<QueuedItemSV*>*)m_pkPaddedFloatRecordList)->AddTail(pItem);
-    }
-}
 
 namespace fnv_00919320 {
 __if_not_exists(TESBoundObject::TESBoundObject)
@@ -41213,268 +33497,6 @@ extern Setting70 DAT_011cd950;
 
 int FUN_0096a820(int);
 
-// Updates actor position toward package target, handles furniture sit/sleep states, and triggers animations or finish conditions.
-// @fnv 0x00919320
-void Actor70::FUN_00919320(Actor70* actor, bool checkReach, bool finish, int action, int unused)
-{
-
-    Package70* package34 = 0;
-
-    package34 = Package();
-
-    if ((checkReach && !package34->CanReach(actor, 0, -1.0f, 0)) ||
-        (actor->FUN_008b3bb0() && !package34->CanReach(actor, 0, -1.0f, 0) && !FUN_00915ef0(actor)))
-    {
-
-        actor->FUN_008b39f0(action);
-
-        if (!Move(actor, package34->FUN_00675de0(actor), package34->FUN_00675c20(actor),
-                  package34->FUN_00675a50(actor)))
-            return;
-    }
-
-    float distance9 = actor->FUN_00572380(package34->FUN_00675de0(actor));
-
-    float radius41 = package34->FUN_00678670(actor, 0);
-
-    bool reached26 = false;
-
-    Object70* objectRef19 = 0;
-
-    if (package34->FUN_0055b980())
-        objectRef19 = package34->FUN_0055b980()->FUN_0067f390();
-
-    if (object && !OverrideMode())
-        objectRef19 = object;
-
-    if (package34->FUN_0041ca90() == 5)
-        radius41 = 20.0f;
-
-    if (objectRef19 && objectRef19->FUN_00568680() && package34->FUN_0041ca90() != 5)
-    {
-
-        if (!furniture)
-        {
-            furniture = objectRef19;
-            FUN_0092c680();
-        }
-
-        if (actor->SitState())
-            reached26 = true;
-
-        else if (!actor->SitState() && furniture->FUN_00567f80(marker, 1) && !actor->FUN_008b3bb0())
-        {
-            Reset(actor);
-            Finish(actor, 1);
-            return;
-        }
-
-        else
-            reached26 = package34->CanReach(actor, 0, -1.0f, 0);
-    }
-    else
-        reached26 = package34->CanReach(actor, 0, -1.0f, 0);
-
-    if (reached26 || FUN_00915ef0(actor))
-    {
-
-        if (!Started())
-        {
-
-            if (package34->FUN_00670f40())
-                DAT_011c3f2c->FUN_0046f280(actor->FUN_008d6f30(), actor->Position(), 5000.0f, actor->Position(),
-                                           5000.0f, FUN_0090d480, actor);
-
-            SetStarted(1);
-        }
-
-        if (package34->FUN_00670f60())
-            DAT_011c3f2c->FUN_0046f280(actor->FUN_008d6f30(), actor->Position(), 5000.0f, actor->Position(), 5000.0f,
-                                       FUN_0090d570, actor);
-
-        if (package34 && !triggered && package34->FUN_00441b00())
-        {
-
-            triggered = true;
-
-            Anim70* animation = Anim();
-
-            if (animation)
-                actor->FUN_0088c790(animation->FUN_0044ddc0(1, 0, 0, 0, 1));
-        }
-
-        if (objectRef19 && objectRef19->FUN_00568680())
-        {
-
-            if (actor->SitState() != 4 && actor->SitState() != 9)
-            {
-
-                if (DAT_011dea3c->FUN_0094df60())
-                {
-
-                    Furniture70* base2 =
-                        (Furniture70*)dynamic_cast<TESFurniture*>((TESBoundObject*)objectRef19->FUN_007af430());
-
-                    Object70* furnitureRef7 = Furniture();
-
-                    actor->SetHeight(furnitureRef7->FUN_00568650());
-
-                    Vec70 offset33;
-
-                    base2->FUN_00509920(&offset33, furnitureRef7->FUN_005094b0(), actor->FUN_00567400());
-
-                    Matrix70 rotation4;
-
-                    rotation4.FUN_004a0c90(furnitureRef7->FUN_00568650());
-
-                    offset33 = rotation4.FUN_004b4500(offset33);
-
-                    objectRef19->FUN_00568020(marker, 1);
-
-                    actor->SetRotation(furnitureRef7->Rotation().FUN_00439e90(offset33));
-
-                    actor->FUN_00931d30(base2->GetFurnitureHeading(furnitureRef7->FUN_005094b0()));
-
-                    bool sleeping43 = false;
-
-                    if (package34->FUN_0041ca90() == 4)
-                        sleeping43 = true;
-
-                    if (sleeping43)
-                    {
-
-                        FurnitureState(actor, 6, furniture, marker);
-
-                        actor->FUN_008d8520()->SetCount(1);
-
-                        actor->FUN_008d8520()->SetState(actor, 0);
-                    }
-                    else
-                        FurnitureState(actor, 1, furniture, marker);
-
-                    if (IsReady(actor))
-                    {
-
-                        if (sleeping43)
-                        {
-
-                            Actor70* movement = actor->FUN_008adcb0();
-
-                            if (movement)
-                                movement->Movement(1, 0);
-
-                            FurnitureState(actor, 9, furniture, marker);
-                        }
-                        else
-                            FurnitureState(actor, 4, furniture, marker);
-                    }
-                }
-                else
-                    UpdateFurnitureAlignment(actor);
-            }
-            else
-            {
-
-                if (finish)
-                    Finish(actor, 1);
-
-                Update(actor);
-            }
-
-            return;
-        }
-
-        {
-
-            if (((objectRef19 && objectRef19->FUN_007af430() == DAT_011ca248) ||
-                 (package34->FUN_0055b980() && package34->FUN_0055b980()->FUN_00678ca0() == 3)) &&
-                !FUN_00915ef0(actor) && !actor->SitState())
-            {
-
-                float height = 0.0f;
-
-                if (objectRef19)
-                    height = objectRef19->FUN_00430830()->z;
-
-                else
-                    height = actor->PositionValue().z;
-
-                actor->SetHeight(height);
-            }
-
-            Update(actor);
-
-            if (finish && (!FUN_00915ef0(actor) || !package34->FUN_0067efd0()))
-                Finish(actor, 1);
-        }
-    }
-    else
-    {
-
-        if (!actor)
-            return;
-
-        if (actor->SitState() == 4 || actor->SitState() == 9)
-        {
-            actor->Stand();
-            return;
-        }
-
-        float separation7 = 0.0f;
-
-        Actor70* reference2 = 0;
-
-        if (objectRef19 && objectRef19->FUN_00568680())
-        {
-
-            Vec70 current18 = actor->Position();
-
-            int selected8 = 0;
-
-            if (!furniture)
-            {
-                furniture = objectRef19;
-                FUN_0092c680();
-            }
-
-            if (furniture->FUN_005686b0(&current18, 1, 1, &target, &selected8, 1))
-            {
-
-                if (!Move(actor, target, package34->FUN_00675c20(actor), package34->FUN_00675a50(actor)))
-                    return;
-
-                furniture = objectRef19;
-                marker = (unsigned char)selected8;
-            }
-            else
-            {
-                Update(actor);
-                SetCount(FUN_0096a820(package34->FUN_009611e0()) - 1);
-            }
-        }
-        else
-        {
-
-            if (package34->FUN_0055b980() && package34->FUN_0055b980()->FUN_0067f390())
-                reference2 = (Actor70*)dynamic_cast<Actor*>((TESObjectREFR*)package34->FUN_0055b980()->FUN_0067f390());
-
-            if (reference2)
-            {
-
-                separation7 = position.FUN_00439ef0(reference2->Position()).FUN_00457990();
-
-                if (separation7 > *DAT_011cd950.FUN_00403e20() || (distance9 > radius41 && actor->FUN_008b3bb0()))
-                {
-
-                    if (!Move(actor, reference2->Position(), reference2->FUN_008d6f30(), reference2->FUN_00575d70()))
-                        return;
-
-                    position = reference2->Position();
-                }
-            }
-        }
-    }
-}
 }  // namespace fnv_00919320
 
 namespace queued_item_load913 {
@@ -41518,31 +33540,6 @@ struct ItemLoadState913e80
     unsigned char unk11;
     void FUN_00913e80(BufferView* buffer);
 };
-
-// Reads an object, index, and state bytes from buffer, resolving the inventory entry via the reference's extra data view when the index is valid.
-// @fnv 0x00913e80
-void ItemLoadState913e80::FUN_00913e80(BufferView* buffer)
-{
-    ReferenceView* ref = buffer->GetRef();
-    object = dynamic_cast<TESBoundObject*>(reinterpret_cast<TESForm*>(::FUN_004839c0(buffer->FUN_008648a0())));
-    int iIndex = -1;
-    buffer->FUN_00864980(&iIndex, 4);
-    if (iIndex != -1)
-    {
-        InventoryChangesView* holder = ref ? ref->FUN_005d43c0()->FUN_00418520() : 0;
-        if (holder)
-        {
-            entry = holder->GetExtraValueAtPosition(object, iIndex);
-        }
-    }
-    buffer->FUN_00864980(&unk08, 4);
-    buffer->FUN_00864980(&unk0C, 1);
-    buffer->FUN_00864980(&unk0D, 1);
-    buffer->FUN_00864980(&unk0E, 1);
-    buffer->FUN_00864980(&unk0F, 1);
-    buffer->FUN_00864980(&unk10, 1);
-    buffer->FUN_00864980(&unk11, 1);
-}
 
 }
 
@@ -41744,37 +33741,6 @@ struct MHPVtX
     virtual void v164();
     virtual void v165(TESObjectREFR*);
 };
-// Sets the target reference, updates flags and projectile count, and configures targeting state and marker on the new target.
-// @fnv 0x0091ea40
-void SetTargetProcess::FUN_0091ea40(TESObjectREFR* apRef)
-{
-    const bool bnewTarget = apRef != pTarget;
-    if (bnewTarget)
-    {
-        if (pTarget)
-            FUN_00914b40(this);
-        TESObjectREFR** pmutableTarget = &pTarget;
-        *pmutableTarget = apRef;
-        ((MHPVtX*)this)->v158()->SetFlags((unsigned int)apRef);
-    }
-    if (apRef)
-    {
-        ((TgtX*)apRef)->SetTargetingState(true);
-        if (bnewTarget)
-        {
-            FUN_00678d00_shell* ppack = ((MHPVtX*)this)->v139();
-            if (ppack && ppack->FUN_00678d00())
-            {
-                m_iProjectileCount = ((FUN_005682c0_caller*)apRef)->FUN_005682c0(true);
-                ((MarkerX*)apRef)->SetMarkerState(m_iProjectileCount, true);
-            }
-        }
-    }
-    else
-    {
-        ((MHPVtX*)this)->v165(apRef);
-    }
-}
 
 using ::ActorPackageData;
 using ::TESObjectREFR;
@@ -41805,23 +33771,6 @@ struct PackageReferenceProcess : public ::MiddleHighProcess
 {
     void FUN_00914be0(::TESObjectREFR* reference);
 };
-
-// Calls package and data-view methods with the reference, including current and run-once data when present.
-// @fnv 0x00914be0
-void PackageReferenceProcess::FUN_00914be0(::TESObjectREFR* reference)
-{
-    reinterpret_cast<DeletedPackageDetail::PackageView*>(&m_kProcessData)->FUN_008c5ec0(reference);
-
-    ::ActorPackageData* data = reinterpret_cast<DeletedPackageDetail::CurrentDataView*>(this)->FUN_008d0430();
-    if (data)
-        reinterpret_cast<DeletedPackageDetail::InstanceView*>(data)->SetReferenceTarget(reference);
-
-    reinterpret_cast<DeletedPackageDetail::PackageView*>(&PackageReference)->FUN_008c5ec0(reference);
-
-    data = GetRunOncePackageData();
-    if (data)
-        reinterpret_cast<DeletedPackageDetail::InstanceView*>(data)->SetReferenceTarget(reference);
-}
 
 namespace queued_item_save913 {
 
@@ -41863,36 +33812,6 @@ struct PaddedFloatRecord
 
     void FUN_00913d60(SaveBufferView* apSaveGameBuffer);
 };
-
-// Writes pObject, an inventory extra index, m_iCountChange, and six trailing bytes into apSaveGameBuffer.
-// @fnv 0x00913d60
-void PaddedFloatRecord::FUN_00913d60(SaveBufferView* apSaveGameBuffer)
-{
-    int iextraIndex;
-    Actor* pactor;
-    InventoryChanges* pinventory;
-
-    pactor = apSaveGameBuffer->GetActor();
-    apSaveGameBuffer->FUN_00865df0(pObject, 0);
-    iextraIndex = -1;
-
-    if (pExtra)
-    {
-        pinventory = pactor ? ((TESObjectREFR*)pactor)->GetExtraData()->GetContainerChangeData() : 0;
-
-        if (pinventory)
-            iextraIndex = ((InventoryIndexView*)pinventory)->FindItemIndex(pObject, pExtra);
-    }
-
-    apSaveGameBuffer->FUN_00865e50(&iextraIndex, 4, 0);
-    apSaveGameBuffer->FUN_00865e50(&m_iCountChange, 4, 0);
-    apSaveGameBuffer->FUN_00865e50(&byte0C, 1, 0);
-    apSaveGameBuffer->FUN_00865e50(&byte0D, 1, 0);
-    apSaveGameBuffer->FUN_00865e50(&byte0E, 1, 0);
-    apSaveGameBuffer->FUN_00865e50(&byte0F, 1, 0);
-    apSaveGameBuffer->FUN_00865e50(&byte10, 1, 0);
-    apSaveGameBuffer->FUN_00865e50(&byte11, 1, 0);
-}
 
 }
 
@@ -41951,130 +33870,6 @@ class PackageProcessView : public MiddleHighProcess
   public:
     bool FUN_00917df0(Actor* pActor, bool bArg2);
 };
-
-// @fnv 0x00917df0
-bool PackageProcessView::FUN_00917df0(Actor* pActor, bool bArg2)
-{
-
-    if (((PackageActorView*)pActor)->FUN_00493bb0() ||
-
-        ((PackageActorView*)pActor)->FUN_009336c0() ||
-
-        ((PackageActorView*)pActor)->FUN_008a61b0() ||
-
-        FUN_00881570(pActor))
-    {
-
-        return false;
-    }
-
-    switch (pActor->Unk_85())
-    {
-
-    case 0:
-
-    case 4:
-
-    case 9:
-
-        break;
-
-    default:
-
-        return false;
-    }
-
-    if (GetRunOncePackage())
-    {
-
-        StopRunOncePackage();
-    }
-
-    float fGameHour = DAT_011de7b8.FUN_00867da0();
-
-    bool bResultTmp = false;
-
-    TESPackage* pPackage7 = (TESPackage*)pActor->GetCurrentPackage();
-
-    bool bUnequipWeapon = false;
-
-    if (pPackage7 != NULL)
-    {
-
-        if (pPackage7->FUN_0041ca90() == 4 ||
-
-            pPackage7->FUN_00441b00())
-        {
-
-            bUnequipWeapon = true;
-        }
-    }
-
-    if (bArg2 || !GetCurrentPackage() || m_iValueB4 != (int)fGameHour)
-    {
-
-        bResultTmp = ((PackageLowProcessView*)this)->FUN_0090a1a0(pActor, bArg2);
-
-        m_iValueB4 = (int)fGameHour;
-    }
-
-    if (bResultTmp)
-    {
-
-        m_sBoundDataValue = 2;
-
-        SetAnimationEnabled(false);
-
-        SetAnimationComplete(false);
-
-        ((PackageLowProcessView*)this)->SetFlag40(0);
-
-        SetProcessConditionMet(false);
-
-        while (!ReferenceListNode.IsEmpty())
-        {
-
-            ::TargetDoorController* pItem = ReferenceListNode.GetItem();
-
-            delete reinterpret_cast<TargetDoorController*>(pItem);
-
-            ReferenceListNode.Remove(pItem);
-        }
-
-        if (bUnequipWeapon)
-        {
-
-            TESNPC* pNPC2 = dynamic_cast<TESNPC*>(pActor->GetObjectReference());
-
-            TESCreature* pCreature7 = dynamic_cast<TESCreature*>(pActor->GetObjectReference());
-
-            TESPackage* pCurPkg = (TESPackage*)GetCurrentPackage();
-
-            bool bFlag1 = true;
-
-            bool bFlag6 = true;
-
-            if (pCurPkg != NULL && pCurPkg->FUN_00441b00())
-            {
-
-                bFlag6 = false;
-            }
-
-            if (pNPC2 != NULL)
-            {
-
-                pNPC2->FUN_006047c0(pActor, bFlag1, bFlag6, 0, 1);
-            }
-            else if (pCreature7 != NULL)
-            {
-
-                pCreature7->FUN_005f9e00(pActor, bFlag1, bFlag6, 1);
-            }
-        }
-    }
-
-    return bResultTmp;
-}
 
 }
 
@@ -42703,203 +34498,6 @@ struct UseProcess
     bool FUN_0091c810(UseRef* apActor);
 };
 
-// Checks if the current package is running for the actor, updating process targets and acquiring items if the package location requires it.
-// @fnv 0x0091c810
-bool UseProcess::FUN_0091c810(UseRef* apActor)
-{
-    UsePackage* pPackage = 0;
-    pPackage = FUN_vt27c();
-    if (!pPackage)
-        return false;
-    UseEntry* pEntryOut = apActor->FUN_008a2d40();
-    bool bCreatedTmp = false;
-    if (!pEntryOut && (!pTarget || (!pTarget->IsActor() && !apActor->FUN_00575450(pTarget->FUN_0084e3a0()))))
-    {
-        FindPackageTarget(apActor);
-        if (!pTarget || (!pTarget->IsActor() && !apActor->FUN_00575450(pTarget->FUN_0084e3a0())))
-        {
-            SetProcessTarget(apActor, 1);
-            if (!apActor->FUN_008b3bb0())
-                FUN_vt294(apActor);
-            return false;
-        }
-    }
-    if (!pEntryOut && m_pDetectionData60 && m_pDetectionData60->pObject == apActor)
-    {
-        pEntryOut = apActor->FUN_00576260(m_pDetectionData60->pItem, 0);
-        bCreatedTmp = true;
-    }
-    bool bTargetActor = false;
-    if (pTarget && pTarget->IsActor() && pTarget != apActor)
-    {
-        bTargetActor = true;
-        UseRef* pTargetActor = (UseRef*)dynamic_cast<Actor*>((TESObjectREFR*)pTarget);
-        UsePackage* pTargetPackageRes = pTargetActor->FUN_008d8520()->GetCurrentPackage();
-        if (pTarget != DAT_011dea3c &&
-            (!pTargetPackageRes || (pTargetPackageRes->FUN_0041ca90() != 1 && !pTargetPackageRes->FUN_00674d40())))
-        {
-            FUN_vt284(0);
-            return false;
-        }
-    }
-    UsePoint kDelta = *apActor->GetPos();
-    if (bTargetActor)
-        kDelta = apActor->GetPos()->FUN_00439ef0(*pTarget->GetPos());
-    float fRangeEntry = 0.0f;
-    UseRef* pRangeTargetTmp = 0;
-    UsePoint kFromVal;
-    UsePoint kToInfo;
-    int iMinDistanceNum;
-    if (bTargetActor)
-    {
-        pRangeTargetTmp = pTarget;
-        fRangeEntry = 0.0f;
-        int iDistance = pPackage->FUN_00671d10()->FUN_0044ddc0();
-        if (iDistance <= 0)
-            iDistance = 200;
-        if (pTarget == DAT_011dea3c && fRangeEntry == 0.0)
-            fRangeEntry = iDistance;
-        else if (fRangeEntry == 0.0 && apActor->FUN_008d6f30()->FUN_00425fd0())
-            fRangeEntry = *DAT_011cdbac.FUN_00403e20();
-        else if (fRangeEntry == 0.0)
-            fRangeEntry = iDistance * *DAT_011cd82c.FUN_00403e20();
-    }
-    if (pPackage->FUN_0055b980() && pPackage->IsPackageRunningForActor(apActor, 0, -1.0f, false))
-    {
-        if (!bTargetActor)
-        {
-            UsePackageTarget* pPackageTarget = pPackage->FUN_0055b980();
-            UsePackageLocation* pPackageLocationTmp = pPackage->FUN_00671d10();
-            if (pEntryOut)
-            {
-                UseExtraList* pXData = 0;
-                if (pEntryOut->FUN_00559450())
-                    pXData = *pEntryOut->FUN_00559450()->FUN_006815c0();
-                void* pOwner = 0;
-                if (pXData && pXData->FUN_0041c8d0())
-                    pOwner = pXData->FUN_0041c8d0()->FUN_0084e3a0();
-                UseRef* pLocationCur = pPackage->FUN_0055b980()->FUN_0067f390();
-                if (!pLocationCur)
-                    pLocationCur = m_pReference40;
-                if (pLocationCur && pLocationCur->FUN_0055d310())
-                {
-                    apActor->FUN_00892e90(
-                        pEntryOut->FUN_0044ddc0(pXData, pLocationCur, pPackage->FUN_00672930(), pOwner));
-                }
-                else
-                {
-                    if (pEntryOut->FUN_00559450())
-                        pXData = *pEntryOut->FUN_00559450()->FUN_006815c0();
-                    UsePoint* pPos = 0;
-                    if (pPackageTarget)
-                    {
-                        UseRef* pContainer = pPackageTarget->FUN_0067f390();
-                        if (!pContainer)
-                            pContainer = m_pReference40;
-                        if (pContainer &&
-                            (pContainer->FUN_007af430() == DAT_011ca244 || pContainer->FUN_007af430() == DAT_011ca248))
-                            pPos = pContainer->GetPos();
-                    }
-                    int iCount = 1;
-                    if (!pPackageLocationTmp->FUN_00680020())
-                        iCount = pPackage->FUN_00672930();
-                    apActor->FUN_vt3cc(pEntryOut->FUN_0044ddc0(pXData, iCount, pPos, 0));
-                }
-                delete pEntryOut;
-                if (pPackageLocationTmp->FUN_00680080() == 0xc ||
-                    (pPackageLocationTmp->FUN_00680080() >= 0x13 && pPackageLocationTmp->FUN_00680080() <= 0x17))
-                {
-                    while (!kAcquireList.FUN_008256d0())
-                    {
-                        m_pDetectionData60 = *kAcquireList.FUN_006815c0();
-                        kAcquireList.FUN_00905330(&m_pDetectionData60);
-                        FUN_vt12c(m_pDetectionData60->pObject);
-                        pEntryOut = apActor->FUN_00576260(m_pDetectionData60->pItem, 0);
-                        delete m_pDetectionData60;
-                        m_pDetectionData60 = 0;
-                        if (pLocationCur && pLocationCur->FUN_0055d310())
-                        {
-                            apActor->FUN_00892e90(
-                                pEntryOut->FUN_0044ddc0(pXData, pLocationCur, pPackage->FUN_00672930(), pOwner));
-                        }
-                        else
-                        {
-                            if (pEntryOut->FUN_00559450())
-                                pXData = *pEntryOut->FUN_00559450()->FUN_006815c0();
-                            UsePoint* pItemPosTmp = 0;
-                            if (pPackageTarget)
-                            {
-                                UseRef* pItemContainer = pPackageTarget->FUN_0067f390();
-                                if (!pItemContainer)
-                                    pItemContainer = m_pReference40;
-                                if (pItemContainer && (pItemContainer->FUN_007af430() == DAT_011ca244 ||
-                                                       pItemContainer->FUN_007af430() == DAT_011ca248))
-                                    pItemPosTmp = pItemContainer->GetPos();
-                            }
-                            int iItemCount = 1;
-                            if (!pPackageLocationTmp->FUN_00680020())
-                                iItemCount = pPackage->FUN_00672930();
-                            apActor->FUN_vt3cc(pEntryOut->FUN_0044ddc0(pXData, iItemCount, pItemPosTmp, 0));
-                        }
-                        delete pEntryOut;
-                        pEntryOut = 0;
-                    }
-                    bool bUpdateA = true;
-                    bool bUpdateB = true;
-                    if (GetCurrentPackage() && GetCurrentPackage()->FUN_00441b00())
-                        bUpdateB = false;
-                    if (apActor->FUN_vt218())
-                    {
-                        TESNPC* pNPC = dynamic_cast<TESNPC*>(apActor->FUN_007af430());
-                        if (pNPC)
-                            pNPC->FUN_006047c0((::Actor*)apActor, bUpdateA, bUpdateB, 0, 1);
-                    }
-                    else
-                    {
-                        TESCreature* pCreature = dynamic_cast<TESCreature*>(apActor->FUN_007af430());
-                        if (pCreature)
-                            pCreature->FUN_005f9e00((::Actor*)apActor, bUpdateA, bUpdateB, 1);
-                    }
-                }
-                FUN_vt118(1);
-            }
-            SetProcessTarget(apActor, 1);
-        }
-        else
-        {
-            if (kDelta.FUN_00457990() <= fRangeEntry && kFromVal.FUN_00457990() <= kToInfo.FUN_00457990())
-            {
-                SetProcessTarget(apActor, 1);
-                UseRef* m_pReference = pTarget;
-                if (m_pReference->FUN_008d8520()->FUN_vt27c())
-                {
-                    m_pReference->FUN_008d8520()->SetProcessTarget(apActor, 1);
-                    if (m_pReference->FUN_008d8520()->FUN_vt27c()->FUN_00674d40())
-                    {
-                        m_pReference->FUN_008d8520()->FUN_vt234();
-                        if (m_pReference->FUN_008b3bb0())
-                            m_pReference->FUN_0087faa0();
-                        FUN_vt118(1);
-                        FUN_vt24(apActor, 0);
-                        return false;
-                    }
-                }
-            }
-        }
-        if (!apActor->FUN_008b3bb0())
-            FUN_vt294(apActor);
-        return false;
-    }
-    iMinDistanceNum = (int)GetCurrentPackage()->GetPackageResult(apActor, false);
-    if (pTarget && pTarget->IsActor())
-    {
-        if (apActor->FUN_005723b0(pTarget, 0, 0) < iMinDistanceNum)
-        {
-        }
-    }
-    return false;
-}
-
 }
 
 struct PackageTargetData
@@ -42927,53 +34525,6 @@ struct ProcessTarget : MiddleHighProcess
     PackageRuntime* FUN_008d0430();
     TESObjectREFR* FUN_0091ab30(Actor*, TESPackage*);
 };
-// Selects the target reference for a package on a process by dispatching on the package type and returning the chosen TESObjectREFR.
-// @fnv 0x0091ab30
-TESObjectREFR* ProcessTarget::FUN_0091ab30(Actor* actor, TESPackage* package)
-{
-    TESObjectREFR* h = 0;
-    bool p = false;
-    if (package == GetCurrentPackage())
-        p = true;
-    switch (package->FUN_0041ca90())
-    {
-    case 15:
-        if (((PackageMethods*)package)->FUN_00671d10()->FUN_00680020() == actor)
-        {
-            h = actor;
-        }
-        else
-        {
-            h = FUN_0091ae00(actor, package, ((PackageMethods*)package)->FUN_00671d10());
-        }
-        break;
-    case 28: {
-        SpecificPackage* f = (SpecificPackage*)package;
-        h = f->FUN_008d80e0();
-        break;
-    }
-    case 1:
-    case 2:
-    case 7:
-        if (((PackageMethods*)package)->FUN_00678ec0(actor))
-            h = ((PackageMethods*)package)->FUN_006780e0(actor, 0);
-        break;
-    case 13:
-        if (p)
-        {
-            PackageRuntime* k = FUN_008d0430();
-            if (k)
-                h = k->FUN_009f3390();
-        }
-        if (!pTarget)
-            h = FUN_009f2d40(actor, package);
-        break;
-    default:
-        h = FUN_0091ae00(actor, package, ((PackageMethods*)package)->FUN_00671d10());
-        break;
-    }
-    return h;
-}
 
 struct S00926350_CharController
 {
@@ -43247,39 +34798,3 @@ struct S00926350_Target926350 : MiddleHighProcess
 {
     unsigned short FUN_00926350(Actor* actor);
 };
-// Returns the size of the physics character controller, adding offsets for flags, actor type, and save game version.
-// @fnv 0x00926350
-unsigned short S00926350_Target926350::FUN_00926350(Actor* actor)
-{
-    unsigned short controller = 0;
-    S00926350_CharController* size = (S00926350_CharController*)((BaseProcess*)this)->GetPhysicsCharacterController();
-    if (size && !actor->Unk_8B(false))
-    {
-        controller += 4;
-        controller += 4;
-        int flags = size->flags.FUN_00621270(-1);
-        controller += 4;
-        if (flags & 0x800)
-            controller += 12;
-        controller += 16;
-        controller += 16;
-        controller += 12;
-        if (actor->IsActor())
-        {
-            controller += 4;
-            controller += 4;
-            controller += 4;
-        }
-        else
-        {
-            controller += 4;
-            controller += 4;
-        }
-        if (((S00926350_SaveLoadGame*)g_TESSaveLoadGame)->FUN_008df040() >= 119)
-        {
-            controller += 4;
-            controller += 4;
-        }
-    }
-    return controller;
-}

@@ -1,22 +1,9 @@
-// fallout/misc/main.cpp: Interface, SomeClass, BSFadeNodeCuller, Mover and more (192 functions)
+// fallout/misc/main.cpp: Interface, SomeClass, BSFadeNodeCuller, Mover and more (3 functions)
 #include "main.h"
 
 extern int DAT_011c70cc;
 
-// @fnv 0x004dc310
-bool __cdecl FUN_004dc310()
-{
-    return DAT_011c70cc >= 2;
-}
-
 extern NiPointer<NiNode> g_011dee84;
-
-// Creates a new SceneGraph named "Menu" and stores it in the global NiPointer g_011dee84.
-// @fnv 0x004dc5c0
-void FUN_004dc5c0()
-{
-    g_011dee84 = reinterpret_cast<NiNode*>(new SceneGraph("Menu", true, 0));
-}
 
 struct Node
 {
@@ -29,14 +16,6 @@ struct FUN_004ed8c0_shell
     void FUN_00559a70(Node*);
     void FUN_004ed8c0(int* e);
 };
-// Gets a Node via FUN_0049fa80, stores the int pointed to by e into its v field, then passes the node to FUN_00559a70.
-// @fnv 0x004ed8c0
-void FUN_004ed8c0_shell::FUN_004ed8c0(int* piValue)
-{
-    Node* n = FUN_0049fa80();
-    n->v = *piValue;
-    FUN_00559a70(n);
-}
 
 struct BGSAddonNode;
 struct Arr86
@@ -55,13 +34,6 @@ struct S86
     Arr86 a;
     unsigned int FUN_0086bae0(unsigned int key, BGSAddonNode* node);
 };
-// @fnv 0x0086bae0
-unsigned int S86::FUN_0086bae0(unsigned int key, BGSAddonNode* node)
-{
-    unsigned int idx = i.FUN_00877a50(key);
-    a.SetAt(idx, node);
-    return idx;
-}
 
 namespace fnv_0086bbd0 {
 struct BGSAddonNode;
@@ -81,13 +53,6 @@ struct S86b
     Arr86 a;
     unsigned int FUN_0086bbd0(unsigned int key, BGSAddonNode* node);
 };
-// @fnv 0x0086bbd0
-unsigned int S86b::FUN_0086bbd0(unsigned int key, BGSAddonNode* node)
-{
-    unsigned int idx = i.FUN_00877a50(key);
-    a.SetAt(idx, node);
-    return idx;
-}
 }  // namespace fnv_0086bbd0
 
 struct Dummy_0086bce0
@@ -96,30 +61,8 @@ struct Dummy_0086bce0
 };
 extern Dummy_0086bce0* _g_fileFinder;
 
-// @fnv 0x0086bce0
-void __cdecl FUN_0086bce0(int aiValue)
-{
-    if (_g_fileFinder)
-        _g_fileFinder->FUN_00afdda0(aiValue);
-}
-
 void __cdecl FUN_00b013f0();
 void __cdecl FUN_0086bd90(void(__cdecl*)());
-
-// @fnv 0x0086bd70
-void __cdecl FUN_0086bd70()
-{
-    FUN_0086bd90(FUN_00b013f0);
-}
-
-// @fnv 0x0086bda0
-void __fastcall FUN_0086bda0(int param_1)
-{
-    if (*(int*)(param_1 + 0x5c) == 1 || *(int*)(param_1 + 0x5c) == 2)
-    {
-        *(int*)(param_1 + 0x5c) = 3;
-    }
-}
 
 class BGSLoadGameBuffer;
 
@@ -159,18 +102,6 @@ extern unsigned char DAT_011f9443;
 extern float DAT_011f9480;
 extern float DAT_011f9484;
 
-// @fnv 0x0086bf70
-void __cdecl FUN_0086bf70()
-{
-    Interface::PrintDebugMessage((BGSLoadGameBuffer*)"Initializing Shader System...");
-    FUN_005c5a60(0);
-    FUN_0086bff0(FUN_0086a480);
-    FUN_0086c000(*reinterpret_cast<ProcessLists*>(&g_011ded68)->GetLifeStateControlFlag());
-    DAT_011f9443 = *reinterpret_cast<ProcessLists*>(&g_011deea8)->GetLifeStateControlFlag();
-    DAT_011f9484 = g_011dec18.FUN_00450410();
-    DAT_011f9480 = g_011deb70.FUN_00450410();
-}
-
 namespace fnv_0086d490 {
 struct NiPoint3_local
 {
@@ -188,11 +119,6 @@ struct FUN_0086d490_class : public TESObjectREFR
     void __thiscall impl(const NiPoint3_local& arPoint);
 };
 
-// @fnv 0x0086d490
-void __thiscall FUN_0086d490_class::impl(const NiPoint3_local& arPoint)
-{
-    SetReferencePosition(arPoint);
-}
 }  // namespace fnv_0086d490
 
 int __cdecl FUN_004da670(int, int);
@@ -237,13 +163,6 @@ struct FUN_0086e3f0_shell : public NiGeometry
     bool FUN_0086e3f0(unsigned short usNumVertices, unsigned short usNumTriangles, int ausTriList);
 };
 
-// Forwards the vertex count, triangle count and triangle list to the geometry data's FUN_00a87ae0 and returns its result.
-// @fnv 0x0086e3f0
-bool FUN_0086e3f0_shell::FUN_0086e3f0(unsigned short usNumVertices, unsigned short usNumTriangles, int ausTriList)
-{
-    return ((NiScreenElementsData*)FUN_005495f0())->FUN_00a87ae0(usNumVertices, usNumTriangles, ausTriList);
-}
-
 namespace fnv_0086e420 {
 struct NiGeometryData;
 struct NiGeometry
@@ -258,11 +177,6 @@ struct FUN_0086e420_shell : NiGeometry
 {
     void FUN_0086e420(int a, float b, float c, float d, float e);
 };
-// @fnv 0x0086e420
-void FUN_0086e420_shell::FUN_0086e420(int a, float b, float c, float d, float e)
-{
-    ((NiScreenElementsData*)FUN_005495f0())->SetRectangleBounds(a, b, c, d, e);
-}
 }  // namespace fnv_0086e420
 
 namespace fnv_0086e460 {
@@ -278,13 +192,6 @@ struct FUN_0086e460_shell : public NiGeometry
 {
     bool FUN_0086e460(int, unsigned short, float, float, float, float);
 };
-// Forwards the polygon, set and rectangle coordinates to the screen elements data returned by FUN_005495f0 and returns its result.
-// @fnv 0x0086e460
-bool FUN_0086e460_shell::FUN_0086e460(int iPolygon, unsigned short usSet, float fLeft, float fTop, float fRight,
-                                      float fBottom)
-{
-    return ((NiScreenElementsData*)FUN_005495f0())->SetRectangleBounds(iPolygon, usSet, fLeft, fTop, fRight, fBottom);
-}
 }  // namespace fnv_0086e460
 
 namespace fnv_0086e4b0 {
@@ -302,11 +209,6 @@ class NiScreenElementsData
     void FUN_00a87900();
 };
 
-// @fnv 0x0086e4b0
-void __fastcall FUN_0086e4b0(NiGeometry* apGeometry)
-{
-    ((NiScreenElementsData*)apGeometry->FUN_005495f0())->FUN_00a87900();
-}
 }  // namespace fnv_0086e4b0
 
 struct TaskQueueInterface
@@ -316,19 +218,7 @@ struct TaskQueueInterface
 
 extern char DAT_011f9308[];
 
-// @fnv 0x0086e4e0
-void __cdecl FUN_0086e4e0(const char* apPath)
-{
-    TaskQueueInterface::CopyStringToBuffer(DAT_011f9308, 0x104, apPath);
-}
-
 extern NiPointer<NiNode> DAT_011f9508;
-
-// @fnv 0x0086e520
-void __cdecl FUN_0086e520(NiNode* apRenderer)
-{
-    DAT_011f9508 = apRenderer;
-}
 
 namespace fnv_0086e540 {
 class ProcessLists
@@ -339,11 +229,6 @@ class ProcessLists
 
 extern ProcessLists g_011c7154;
 
-// @fnv 0x0086e540
-unsigned char FUN_0086e540()
-{
-    return *g_011c7154.GetLifeStateControlFlag();
-}
 }  // namespace fnv_0086e540
 
 namespace fnv_0086e560 {
@@ -355,11 +240,6 @@ class ProcessLists
 
 extern ProcessLists g_011c7544;
 
-// @fnv 0x0086e560
-unsigned char FUN_0086e560()
-{
-    return *g_011c7544.GetLifeStateControlFlag();
-}
 }  // namespace fnv_0086e560
 
 namespace fnv_0086e580 {
@@ -370,11 +250,6 @@ struct ProcessLists
 
 extern ProcessLists g_011c712c;
 
-// @fnv 0x0086e580
-unsigned char FUN_0086e580()
-{
-    return *g_011c712c.GetLifeStateControlFlag();
-}
 }  // namespace fnv_0086e580
 
 namespace fnv_0086e5a0 {
@@ -386,11 +261,6 @@ class ProcessLists
 
 extern ProcessLists g_011c7180;
 
-// @fnv 0x0086e5a0
-unsigned char FUN_0086e5a0()
-{
-    return *g_011c7180.GetLifeStateControlFlag();
-}
 }  // namespace fnv_0086e5a0
 
 namespace fnv_0086e5c0 {
@@ -401,11 +271,6 @@ class ProcessLists
 };
 extern ProcessLists g_011c7368;
 
-// @fnv 0x0086e5c0
-unsigned char FUN_0086e5c0()
-{
-    return *g_011c7368.GetLifeStateControlFlag();
-}
 }  // namespace fnv_0086e5c0
 
 namespace fnv_0086e5e0 {
@@ -416,11 +281,6 @@ class ProcessLists
 };
 extern ProcessLists g_011c7380;
 
-// @fnv 0x0086e5e0
-unsigned char FUN_0086e5e0()
-{
-    return *g_011c7380.GetLifeStateControlFlag();
-}
 }  // namespace fnv_0086e5e0
 
 namespace fnv_0086e600 {
@@ -431,28 +291,11 @@ struct ProcessLists
 
 extern ProcessLists g_011c7550;
 
-// @fnv 0x0086e600
-unsigned char FUN_0086e600()
-{
-    return *g_011c7550.GetLifeStateControlFlag();
-}
 }  // namespace fnv_0086e600
 
 extern NiPointer<NiNode> g_011d86bc;
 
-// @fnv 0x0086e630
-void FUN_0086e630(NiNode* apTreeNode)
-{
-    g_011d86bc = apTreeNode;
-}
-
 extern int DAT_011f9138;
-
-// @fnv 0x0086ef40
-void FUN_0086ef40()
-{
-    DAT_011f9138 = DAT_011f9138 + 1;
-}
 
 class StartMenu
 {
@@ -464,12 +307,6 @@ class StartMenu
 };
 
 extern StartMenu* DAT_011daac0;
-
-// @fnv 0x0086efa0
-bool FUN_0086efa0()
-{
-    return DAT_011daac0 && DAT_011daac0->IsFlagSet((StartMenu::Flag)0x10000);
-}
 
 namespace fnv_0086f260 {
 struct TG
@@ -518,33 +355,10 @@ struct Mover
 {
     void FUN_0086f260();
 };
-// @fnv 0x0086f260
-void Mover::FUN_0086f260()
-{
-    ((BGSLoadFormBuffer*)&g_timeGlobal)->FUN_008a8150(*g_011dedbc.GetLifeStateControlFlag());
-    if (!DAT_011dea2b)
-        FUN_00aa4e40();
-    ((GameTimerRecord*)&g_timeGlobal)->Update();
-    DAT_011afe60 = *originalRuntimeFloatSetting807.Float();
-    FUN_00c66760(((Twin_0084d030*)&g_timeGlobal)->GetStoredFloatValue(), FUN_00525420(), DAT_011f2250.GetFlags() == 4);
-    FUN_0086f330();
-    DAT_011dea30 =
-        (float)(DAT_011dea2b ? 0.0 : ((Twin_0084d030*)&g_timeGlobal)->GetStoredFloatValue() * *g_011c5724.Float());
-}
 }  // namespace fnv_0086f260
 
 extern float(__cdecl* DAT_011f91f0)(int);
 extern float DAT_011f940c[4];
-
-// Fills the four-element DAT_011f940c array by calling DAT_011f91f0 for each index, or storing 0.0f when the function pointer is null.
-// @fnv 0x0086f330
-void FUN_0086f330()
-{
-    for (int i = 0; i < 4; i++)
-    {
-        DAT_011f940c[i] = DAT_011f91f0 ? DAT_011f91f0(i) : 0.0f;
-    }
-}
 
 namespace fnv_0086f390 {
 struct FUN_0086f390_shell : public Main
@@ -724,20 +538,6 @@ extern TESObjectREFR DAT_011f2250;
 extern TimeGlobal g_timeGlobal;
 HotkeyWheelDisplay* __cdecl FUN_007fdf30();
 bool __cdecl FUN_00709bc0();
-// @fnv 0x0086f390
-void FUN_0086f390_shell::FUN_0086f390()
-{
-    FUN_007fdf30()->FUN_00a23010();
-    FUN_007fdf30()->FUN_00a257c0(g_timeGlobal.GetSecondsPassed());
-    if (!*((unsigned char*)this + 6) && !pPlayer->V8B(0))
-    {
-        if ((DAT_011f2250.GetFlags() == 4 && !pPlayer->FUN_007d1360()) || FUN_00709bc0())
-        {
-            if (!Interface::IsMenuActive((Interface::enumMenus)0x3e9, 0) && !PlayerCharacter::UpdatePlayerStatus())
-                FUN_007fdf30()->FUN_00a253d0();
-        }
-    }
-}
 }  // namespace fnv_0086f390
 
 struct FUN_0086f640_shell : public Main
@@ -770,15 +570,6 @@ class SoundPlaybackManager
     static void __cdecl ProcessPendingSounds();
 };
 
-// @fnv 0x0086f640
-void FUN_0086f640_shell::FUN_0086f640()
-{
-    BSAudio::GetSingleton()->Update(true);
-    FalloutRadio::Update(false);
-    FalloutAudioMedia::Update();
-    SoundPlaybackManager::ProcessPendingSounds();
-}
-
 struct FUN_0086f670_shell : public Main
 {
     void FUN_0086f670();
@@ -793,30 +584,7 @@ extern TES* g_TES;
 void __cdecl FUN_005a38e0();
 void __fastcall FUN_00455490(TES* pTES);
 
-// @fnv 0x0086f670
-void FUN_0086f670_shell::FUN_0086f670()
-{
-    DAT_012682f8 = 0;
-    DAT_011df678 = 0;
-    DAT_011dea2a = 0;
-    FUN_005a38e0();
-    FUN_00455490(g_TES);
-}
-
-// @fnv 0x0086f840
-bool __fastcall FUN_0086f840(char* pThis)
-{
-    return *(bool*)(pThis + 0x16c);
-}
-
 extern bool* DAT_011d9510;
-
-// Returns the byte at offset 0x131 of the object pointed to by DAT_011d9510, or false if that pointer is null.
-// @fnv 0x0086f860
-bool FUN_0086f860()
-{
-    return DAT_011d9510 ? DAT_011d9510[0x131] : false;
-}
 
 struct FUN_0086f890_shell : public Main
 {
@@ -843,48 +611,11 @@ void __fastcall FUN_00991dc0(void* pThis);
 void __fastcall FUN_0096d810(void* pThis);
 void __fastcall FUN_00964260(void* pThis);
 
-// @fnv 0x0086f890
-void FUN_0086f890_shell::FUN_0086f890()
-{
-    if (*g_011c3ea4.Int() == 1)
-    {
-        FUN_0096eb40(&DAT_011e0e80);
-    }
-
-    if ((!DAT_011dea2b || DAT_011dea2d) && !DAT_011dea2e && !((unsigned char*)this)[7])
-    {
-        if (*g_011c3ea4.Int() == 1)
-        {
-            FUN_008c94e0(&DAT_011e0fe0);
-            FUN_00991dc0(BGSSaveLoadGlobalDataWorldspacePtr);
-        }
-        FUN_0096d810(&DAT_011e0e80);
-    }
-    else if (DAT_011dea2b || ((unsigned char*)this)[7])
-    {
-        FUN_00964260(pPlayer);
-    }
-}
-
 void __cdecl FUN_007027e0();
 void __cdecl FUN_00702810();
 void __cdecl FUN_00702840();
 
-// @fnv 0x0086fd70
-void __fastcall FUN_0086fd70(void* pThis)
-{
-    FUN_007027e0();
-    FUN_00702810();
-    FUN_00702840();
-}
-
 extern float DAT_011c96fc;
-
-// @fnv 0x0086ff50
-void __cdecl FUN_0086ff50(float afDelta)
-{
-    DAT_011c96fc += afDelta;
-}
 
 namespace fnv_008705d0 {
 struct GlobalObject2_0040c150
@@ -899,18 +630,6 @@ void __fastcall FUN_0086f890(void* pThis);
 void __cdecl FUN_00552570();
 void __fastcall FUN_0086f670(void* pThis);
 
-// Calls FUN_0086f640, FUN_0086f890, then FUN_00552570 if *g_011c3ea4.Int() > 1, and finally FUN_0086f670 on pThis.
-// @fnv 0x008705d0
-void __fastcall FUN_008705d0(void* pThis)
-{
-    FUN_0086f640(pThis);
-    FUN_0086f890(pThis);
-    if (*g_011c3ea4.Int() > 1)
-    {
-        FUN_00552570();
-    }
-    FUN_0086f670(pThis);
-}
 }  // namespace fnv_008705d0
 
 namespace fnv_00870610 {
@@ -948,20 +667,6 @@ void __fastcall FUN_0087a6f0(TaskQueueInterface*);
 void __fastcall FUN_0087a710(TaskQueueInterface*);
 void __fastcall FUN_00a0e770(DebugText*);
 
-// @fnv 0x00870610
-void FUN_00870610_shell::FUN_00870610()
-{
-    FUN_005aa720();
-    if (*g_011c3ea4.Int() > 1)
-    {
-        FUN_0087a710(TaskQueueInterface::GetSingleton());
-        TaskQueueInterface::GetSingleton()->ProcessTaskQueue();
-        FUN_0087a6f0(TaskQueueInterface::GetSingleton());
-    }
-    FUN_007094f0();
-    FUN_00870680(FUN_004b7210());
-    FUN_00a0e770(DebugText::Instance(true));
-}
 }  // namespace fnv_00870610
 
 void __cdecl FUN_00706320(int);
@@ -1046,26 +751,7 @@ struct MainStub
     void FUN_00870bd0(BSRenderedTexture*, bool);
 };
 BSFaceGenNiNode* __cdecl FUN_0045c670();
-// @fnv 0x008706b0
-void FUN_008706b0_shell::FUN_008706b0(BSRenderedTexture* pTexture, bool bCheckMenu, bool bFlag)
-{
-    bool f = NiAdditionalGeometryData::GetShadowSceneNodeForIndex(0)->FUN_00870770();
-    NiAdditionalGeometryData::GetShadowSceneNodeForIndex(0)->FUN_00870790(
-        FUN_0045c670()->GetAnimationData()->FUN_0045bb80());
-    if (bCheckMenu && !Interface::IsMenuActive((Interface::enumMenus)0x3f5, 0))
-        ((MainStub*)this)->FUN_008707c0(pTexture, f);
-    else if (f)
-        ((MainStub*)this)->FUN_00870a00(pTexture, bFlag);
-    else
-        ((MainStub*)this)->FUN_00870bd0(pTexture, bFlag);
-}
 }  // namespace fnv_008706b0
-
-// @fnv 0x00870770
-bool __fastcall FUN_00870770(const char* pThis)
-{
-    return *(const bool*)(pThis + 0x131);
-}
 
 struct NiStream;
 struct blob12
@@ -1079,20 +765,6 @@ struct _Fake_FUN_00870790
     NiPoint3 pos;
 };
 
-// Stores aPosition into the pos field of the object at offset 0x1f0.
-// @fnv 0x00870790
-void __fastcall FUN_00870790(_Fake_FUN_00870790* pThis, NiPoint3 aPosition)
-{
-    pThis->pos = aPosition;
-}
-
-// Returns whether the float at offset 0x70 of pThis is greater than zero.
-// @fnv 0x00871220
-bool __fastcall FUN_00871220(char* pObject)
-{
-    return *(float*)(pObject + 0x70) > 0.0;
-}
-
 struct NiNode871
 {
     unsigned int FUN_00453470();
@@ -1102,14 +774,6 @@ struct GO871
     operator NiNode871*() const;
 };
 extern GO871 g_011c7810;
-// Returns false if g_011c7810 is null, otherwise returns whether its FUN_00453470 result is greater than zero.
-// @fnv 0x00871260
-bool FUN_00871260()
-{
-    if (!(NiNode871*)g_011c7810)
-        return false;
-    return ((NiNode871*)g_011c7810)->FUN_00453470() > 0;
-}
 
 namespace fnv_00871a10 {
 class ProcessLists
@@ -1120,18 +784,7 @@ class ProcessLists
 
 extern ProcessLists g_011c74d4;
 
-// @fnv 0x00871a10
-unsigned char FUN_00871a10()
-{
-    return *g_011c74d4.GetLifeStateControlFlag();
-}
 }  // namespace fnv_00871a10
-
-// @fnv 0x00871a30
-int __fastcall FUN_00871a30(int param_1)
-{
-    return param_1 + 0x88;
-}
 
 namespace fnv_00871c90 {
 struct ProcessLists
@@ -1164,23 +817,6 @@ struct FUN_00871c90_shell
     bool f;
     void FUN_00871c90(bool b);
 };
-// @fnv 0x00871c90
-void FUN_00871c90_shell::FUN_00871c90(bool abEnabled)
-{
-    if (*((ProcessLists*)&g_011deed8)->GetLifeStateControlFlag())
-        abEnabled = 1;
-    if (FUN_007fdf30())
-    {
-        FUN_00a237b0(FUN_007fdf30());
-        FUN_007fdf30()->FUN_00a23010();
-        FUN_00a253d0(FUN_007fdf30());
-    }
-    if (abEnabled)
-        ((GameTimerRecord*)&g_timeGlobal)->Enable();
-    else
-        FUN_00aa50a0(&g_timeGlobal);
-    f = abEnabled;
-}
 }  // namespace fnv_00871c90
 
 struct O872
@@ -1235,12 +871,6 @@ struct S872
     H872 h[1];
     int FUN_00872370(unsigned int i);
 };
-// Returns the virtual call result of the element at index i, or 0 when that element is null.
-// @fnv 0x00872370
-int S872::FUN_00872370(unsigned int uiIndex)
-{
-    return h[uiIndex] ? ((O872*)h[uiIndex])->vf() : 0;
-}
 
 namespace fnv_008723d0 {
 struct O872
@@ -1296,12 +926,6 @@ struct S872
     H872 h[1];
     int FUN_008723d0(unsigned int i);
 };
-// Returns the result of the virtual call on the object at index i, or 0 if that slot is null.
-// @fnv 0x008723d0
-int S872::FUN_008723d0(unsigned int uiIndex)
-{
-    return h[uiIndex] ? ((O872*)h[uiIndex])->vf() : 0;
-}
 }  // namespace fnv_008723d0
 
 struct FUN_00874460_cls
@@ -1310,30 +934,6 @@ struct FUN_00874460_cls
     int m_field_c0;
     void set(int v);
 };
-
-// @fnv 0x00874460
-void FUN_00874460_cls::set(int aiValue)
-{
-    m_field_c0 = aiValue;
-}
-
-// @fnv 0x00874480
-int __fastcall FUN_00874480(char* pThis)
-{
-    return *(int*)(pThis + 0xfc);
-}
-
-// @fnv 0x00874670
-void* __fastcall FUN_00874670(char* pThis)
-{
-    return pThis + 0x138;
-}
-
-// @fnv 0x00874900
-float __fastcall FUN_00874900(const char* pThis)
-{
-    return *(const float*)(pThis + 0x674);
-}
 
 namespace fnv_00874ac0 {
 struct FUN_00874ac0_shell : public Main
@@ -1371,19 +971,6 @@ struct Interface
     static ShadowLightData* GetVATSEffect();
 };
 void __cdecl FUN_004eced0(int);
-// @fnv 0x00874ac0
-void FUN_00874ac0_shell::FUN_00874ac0(bool b)
-{
-    void* seq = Interface::GetVATSEffect()->GetControllerSequence();
-    if (seq)
-    {
-        BSRenderedTexture::EndAllAndResetRendererState();
-        BSRenderStateManager::SetColorWriteMask(0, (BSRENDERSTATE_LOCK)1);
-        Interface::GetVATSEffect()->FUN_00800f30((const char*)g_011deb38, 0, 0, 1, 7, 0);
-        FUN_004eced0(1);
-        Interface::GetVATSEffect()->FUN_00800f30((const char*)g_011deb38, 0, 0, 0, 1, 1);
-    }
-}
 }  // namespace fnv_00874ac0
 
 struct BSRenderedTexture;
@@ -1570,18 +1157,6 @@ bool __cdecl FUN_004e9510(void);
 ImageSpaceManager* __cdecl FUN_004e3270(void);
 void* __cdecl FUN_004a0e90(void);
 void __cdecl FUN_00b6b8d0(unsigned int, NiRenderTargetGroup*);
-
-// @fnv 0x00874b50
-void FUN_00874b50_shell::FUN_00874b50(BSRenderedTexture* apRenderTexture, bool abMultiSampleEnabled,
-                                      unsigned int auiClearMode)
-{
-    if (FUN_004e9510())
-    {
-        ImageSpaceManager* apImagespaceManager = FUN_004e3270();
-        void* apRenderer = FUN_004a0e90();
-        FUN_00b6b8d0(auiClearMode, apRenderTexture->GetGroup());
-    }
-}
 
 namespace fnv_00874b90 {
 struct BSRenderedTexture;
@@ -1778,18 +1353,6 @@ struct ISMStub
 };
 void __cdecl FUN_00714ae0(int);
 void __cdecl FUN_004eced0(int);
-// @fnv 0x00874b90
-void FUN_00874b90_shell::FUN_00874b90(ImageSpaceManager* pManager, GraphicsRenderer* r, bool c, BSRenderedTexture* d)
-{
-    if ((const char*)g_011ded3c)
-    {
-        BSRenderStateManager::SetColorWriteMask(7, (BSRENDERSTATE_LOCK)1);
-        BSRenderStateManager::SetDepthBufferEnabled(false, (BSRENDERSTATE_LOCK)1);
-        ((ISMStub*)pManager)->FUN_00b97550(0x22, r, (const char*)g_011ded3c, c ? 0u : (unsigned int)d, 0, 1);
-        FUN_00714ae0(1);
-        FUN_004eced0(1);
-    }
-}
 }  // namespace fnv_00874b90
 
 struct _Fake_FUN_008750e0
@@ -1798,13 +1361,6 @@ struct _Fake_FUN_008750e0
     NiPoint3 kIntersectionOffset;
     void FUN_008750e0(NiPoint3 a_kOffset);
 };
-
-// Stores the given NiPoint3 offset into the object's point field.
-// @fnv 0x008750e0
-void _Fake_FUN_008750e0::FUN_008750e0(NiPoint3 a_kOffset)
-{
-    kIntersectionOffset = a_kOffset;
-}
 
 namespace fnv_00876d20 {
 class StartMenu
@@ -1841,15 +1397,6 @@ void __cdecl FUN_00af4470(int, int, int);
 void __cdecl FUN_00af4490(unsigned char, const char*);
 void __cdecl FUN_00af4550();
 
-// @fnv 0x00876d20
-void __cdecl FUN_00876d20()
-{
-    FUN_00af43a0(*g_011dee3c.GetLifeStateControlFlag(), g_011c4030.GetMenuTitle(), g_011deb94.GetMenuTitle(), 0x200000);
-    FUN_00af4460(*g_011debdc.GetLifeStateControlFlag());
-    FUN_00af4470(*g_011deb24.Int(), *g_011deaa0.Int(), *g_011dec40.Int());
-    FUN_00af4490(*g_011dec4c.GetLifeStateControlFlag(), g_011dec68.GetMenuTitle());
-    FUN_00af4550();
-}
 }  // namespace fnv_00876d20
 
 namespace fnv_00877430 {
@@ -1876,18 +1423,6 @@ struct ImageSpaceManager
     void FUN_007123a0(int);
 };
 BSTextureManager* __stdcall FUN_004a0ea0(const char*);
-// @fnv 0x00877430
-void FUN_00877430_shell::FUN_00877430()
-{
-    if ((const char*)g_011ded3c)
-    {
-        FUN_004a0ea0((const char*)g_011ded3c)->AddRenderedTexture();
-        *(NiPointer<NiNode>*)&g_011ded3c = (NiNode*)0;
-        ImageSpaceManager::FUN_004e3270()->FUN_007123f0(0.0f);
-        ImageSpaceManager::FUN_004e3270()->FUN_007123a0(0);
-    }
-    DAT_011dea29 = false;
-}
 }  // namespace fnv_00877430
 
 struct Controls;
@@ -1898,45 +1433,17 @@ struct FUN_00877720_shell : public Main
 
 Controls* __cdecl FUN_007fdf30();
 
-// @fnv 0x00877720
-Controls* FUN_00877720_shell::FUN_00877720()
-{
-    return FUN_007fdf30();
-}
-
 struct FUN_00936aa0_shell
 {
     char pad[0x85];
     bool f;
     void FUN_00936aa0(bool b);
 };
-// @fnv 0x00936aa0
-void FUN_00936aa0_shell::FUN_00936aa0(bool abValue)
-{
-    f = abValue;
-}
 
 struct Dummy_00a239e0
 {
     int FUN_00a239e0(int a2);
 };
-
-// Returns the int stored at offset 0x1B24, 0x1B28 or 0x1B2C of this object depending on a2 (1, 2 or 3), otherwise 0.
-// @fnv 0x00a239e0
-int Dummy_00a239e0::FUN_00a239e0(int aiIndex)
-{
-    switch (aiIndex)
-    {
-    case 1:
-        return *(int*)((char*)this + 0x1B24);
-    case 2:
-        return *(int*)((char*)this + 0x1B28);
-    case 3:
-        return *(int*)((char*)this + 0x1B2C);
-    default:
-        return 0;
-    }
-}
 
 namespace fnv_0086fbe0 {
 struct TES
@@ -1968,20 +1475,6 @@ struct MainStandIn
     bool flag7;
     void FUN_0086fbe0();
 };
-// @fnv 0x0086fbe0
-void MainStandIn::FUN_0086fbe0()
-{
-    if (!DAT_011dea2b && !DAT_011d8907 && !flag7)
-    {
-        g_TES->FindCellAtPosition(((TopicH*)g_thePlayer)->GetAddTopicList(), true);
-        if (g_TES->FUN_00451530() && !((BGSCameraPath*)g_TES)->GetPrevPath())
-        {
-            if (((RefrHelper*)g_thePlayer)->GetParentWorldSpace() == g_TES->GetHitSound())
-            {
-            }
-        }
-    }
-}
 }  // namespace fnv_0086fbe0
 
 struct Flt
@@ -2000,13 +1493,6 @@ struct Obj008731d0
     void* f;
     void FUN_008731d0();
 };
-// If the pointer field f is non-null, assigns it to the helper member h.
-// @fnv 0x008731d0
-void Obj008731d0::FUN_008731d0()
-{
-    if (*(Flt*)&f)
-        h = f;
-}
 
 namespace fnv_008749b0 {
 struct NiRenderer;
@@ -2040,27 +1526,6 @@ NiRenderer* __cdecl FUN_0043c4b0();
 BSTextureManager* __stdcall FUN_004a0ea0();
 extern NP_0081c630 g_011deb38;
 
-// @fnv 0x008749b0
-bool __fastcall FUN_008749b0(void* self)
-{
-    bool bissuedVATSQuery = false;
-    if (((KFModel*)Interface::GetVATSEffect())->GetControllerSequence())
-    {
-        if (!(unsigned int)*(Flt*)&g_011deb38)
-        {
-            g_011deb38 = FUN_004a0ea0()->CreateRenderTargetTexture(FUN_0043c4b0(), 0x2f, 0, 0, 0);
-        }
-        if (!(unsigned int)*(Flt*)Interface::GetVATSEffect() && (unsigned int)*(Flt*)&g_011deb38 &&
-            ((KFModel*)Interface::GetVATSEffect())->GetControllerSequence() &&
-            Interface::GetVATSEffect()->FUN_00874aa0())
-        {
-            Interface::GetVATSEffect()->FUN_00800f30((unsigned int)*(Flt*)&g_011deb38, 0, 1, 0, 7, 0);
-            Interface::GetVATSEffect()->FUN_00800f30((unsigned int)*(Flt*)&g_011deb38, 1, 1, 0, 1, 1);
-            bissuedVATSQuery = true;
-        }
-    }
-    return bissuedVATSQuery;
-}
 }  // namespace fnv_008749b0
 
 struct Arr
@@ -2076,40 +1541,11 @@ struct SomeClass
     int FUN_0086bb70(unsigned int value);
 };
 
-// @fnv 0x0086bb70
-int SomeClass::FUN_0086bb70(unsigned int value)
-{
-    for (int i = 0; i < m_aiIndexedValues.GetSize(); i++)
-    {
-        if (*m_aiIndexedValues.GetAt(i) == value)
-            return i;
-    }
-    return -1;
-}
-
 extern unsigned char DAT_011f4448;
-
-// @fnv 0x0086bcc0
-void FUN_0086bcc0(unsigned char value)
-{
-    DAT_011f4448 = value;
-}
 
 void* DAT_011f6e08;
 
-// @fnv 0x0086bcd0
-void FUN_0086bcd0(void* obj)
-{
-    DAT_011f6e08 = obj;
-}
-
 extern int DAT_011f6224;
-
-// @fnv 0x0086bd90
-void FUN_0086bd90(int value)
-{
-    DAT_011f6224 = value;
-}
 
 struct GlobalObject_0083b5e0
 {
@@ -2118,43 +1554,13 @@ struct GlobalObject_0083b5e0
 
 extern GlobalObject_0083b5e0 g_011dd948;
 
-// @fnv 0x0086bdd0
-void FUN_0086bdd0()
-{
-    g_011dd948.RemoveAll();
-}
-
 extern double(__cdecl* DAT_011f9134)(void*);
-
-// @fnv 0x0086bde0
-void FUN_0086bde0(double(__cdecl* value)(void*))
-{
-    DAT_011f9134 = value;
-}
 
 extern int DAT_011d5c44;
 
-// @fnv 0x0086be80
-void FUN_0086be80(int value)
-{
-    DAT_011d5c44 = value;
-}
-
 extern NiNode* DAT_011d59ec;
 
-// @fnv 0x0086be90
-void FUN_0086be90(NiNode* value)
-{
-    DAT_011d59ec = value;
-}
-
 extern bool DAT_011a31f4;
-
-// @fnv 0x0086bea0
-void FUN_0086bea0(bool value)
-{
-    DAT_011a31f4 = value;
-}
 
 struct GlobalObject_00633c90
 {
@@ -2183,98 +1589,29 @@ struct FUN_0086bf40
     void* __thiscall DeleteThis(unsigned int flags);
 };
 
-// Calls FUN_0086c880, frees this when flags has bit 0 set, and returns this.
-// @fnv 0x0086bf40
-void* __thiscall FUN_0086bf40::DeleteThis(unsigned int flags)
-{
-    FUN_0086c880();
-    if (flags & 1)
-        operator delete(this);
-    return this;
-}
-
 extern int DAT_011dea18;
 
-// @fnv 0x0086d470
-int __cdecl FUN_0086d470()
-{
-    return DAT_011dea18;
-}
-
 extern int DAT_01202e98;
-
-// @fnv 0x0086d480
-int* __cdecl FUN_0086d480()
-{
-    return &DAT_01202e98;
-}
 
 namespace fnv_0086d580 {
 extern int DAT_011c6fc8;
 
-// @fnv 0x0086d580
-int* __cdecl FUN_0086d580()
-{
-    return &DAT_011c6fc8;
-}
 }  // namespace fnv_0086d580
 
 class NiAVObject;
 extern unsigned int(__cdecl* DAT_011f91ec)(NiAVObject*);
 
-// @fnv 0x0086e4d0
-void FUN_0086e4d0(unsigned int(__cdecl* apObjectTypeFunc)(NiAVObject*))
-{
-    DAT_011f91ec = apObjectTypeFunc;
-}
-
 extern bool DAT_011f91de;
-
-// @fnv 0x0086e500
-void FUN_0086e500(bool abSeparateAmbientLight)
-{
-    DAT_011f91de = abSeparateAmbientLight;
-}
 
 extern unsigned char DAT_011f91dd;
 
-// @fnv 0x0086e510
-void FUN_0086e510(unsigned char value)
-{
-    DAT_011f91dd = value;
-}
-
 extern int DAT_011f9644;
-
-// @fnv 0x0086e620
-void FUN_0086e620(int apLODTreeParent)
-{
-    DAT_011f9644 = apLODTreeParent;
-}
 
 extern unsigned char DAT_012677a2;
 
-// @fnv 0x0086ef30
-void FUN_0086ef30()
-{
-    DAT_012677a2 = 0;
-}
-
 extern unsigned char DAT_011f4461;
 
-// @fnv 0x0086ef60
-unsigned char FUN_0086ef60()
-{
-    return DAT_011f4461;
-}
-
 extern "C" float DAT_01267c1c;
-
-// @fnv 0x0086ef90
-void FUN_0086ef90()
-{
-    DAT_01267c1c = 0.0f;
-}
 
 namespace fnv_0086efe0 {
 struct SettingFloat
@@ -2322,84 +1659,20 @@ struct FUN_0086efe0_t
     void FUN_0086efe0();
 };
 
-// @fnv 0x0086efe0
-void FUN_0086efe0_t::FUN_0086efe0()
-{
-    if (FUN_00525420())
-    {
-        FUN_0086f160(*g_011dec24.Float());
-        FUN_0086f170(*g_011deb10.Float());
-        FUN_0086f180(*g_011ded8c.Float());
-    }
-    else if (g_TES->GetParentWorldSpace() && g_TES->GetParentWorldSpace()->GetParentWorld(TESWorldSpace::USE_LAND))
-    {
-        FUN_0086f160(*g_011dec7c.Float());
-        FUN_0086f170(*g_011dee54.Float());
-        FUN_0086f180(*g_011ded98.Float());
-    }
-    else if (g_thePlayer && g_thePlayer->GetParentCell() && FUN_00425fd0(g_thePlayer->GetParentCell()))
-    {
-        FUN_0086f160(*g_011dea80.Float());
-        FUN_0086f170(*g_011deddc.Float());
-        FUN_0086f180(*g_011decc8.Float());
-    }
-    else
-    {
-        FUN_0086f160(1.0f);
-        FUN_0086f170(1.0f);
-        FUN_0086f180(1.0f);
-    }
-}
 }  // namespace fnv_0086efe0
 
 extern float DAT_011ad804;
 
-// @fnv 0x0086f160
-void FUN_0086f160(float value)
-{
-    DAT_011ad804 = value;
-}
-
 extern float DAT_011ad800;
-
-// @fnv 0x0086f170
-void FUN_0086f170(float value)
-{
-    DAT_011ad800 = value;
-}
 
 extern float DAT_011ad7fc;
 
-// @fnv 0x0086f180
-void FUN_0086f180(float value)
-{
-    DAT_011ad7fc = value;
-}
-
 extern float DAT_011c40ec;
-
-// @fnv 0x0086f830
-void FUN_0086f830(float value)
-{
-    DAT_011c40ec = value;
-}
 
 extern unsigned char DAT_011dcfa6;
 
-// @fnv 0x0086fba0
-void FUN_0086fba0(unsigned char value)
-{
-    DAT_011dcfa6 = value;
-}
-
 class BGSAcousticSpace;
 extern BGSAcousticSpace* DAT_011dcfb8;
-
-// @fnv 0x0086fbb0
-void FUN_0086fbb0(BGSAcousticSpace* value)
-{
-    DAT_011dcfb8 = value;
-}
 
 namespace fnv_0086fc60 {
 struct NiUpdateData
@@ -2460,64 +1733,13 @@ struct SceneGraphH
     void FUN_00c50610(NiUpdateDataH* apUpdateData);
 };
 SceneGraphH* __cdecl FUN_0045a190();
-// @fnv 0x0086fc60
-void FUN_0086fc60_shell::FUN_0086fc60()
-{
-    NiUpdateDataH UpdateData;
-    if ((!DAT_011dea2b || DAT_011dea2c || DAT_011dea2d) && !*((bool*)this + 7))
-    {
-        if (*g_011c3ea4.Int() > 1)
-        {
-            DAT_011e0e80.FUN_009746c0(g_timeGlobal.GetStoredFloatValue());
-        }
-        else
-        {
-            DAT_011e0e80.FUN_00974420(g_timeGlobal.GetStoredFloatValue());
-        }
-        if (*g_011c3ea4.Int() == 1 && !DAT_011dea2b)
-        {
-            g_TES->FUN_00453550(DAT_011dea30);
-        }
-        else
-        {
-            g_TES->FUN_004537c0();
-        }
-        UpdateData.FUN_0043d410(DAT_011dea30, true, false);
-        if (*g_011c3ea4.Int() > 1)
-        {
-            FUN_0045a190()->FUN_00c50610(&UpdateData);
-        }
-        else
-        {
-            FUN_0045a190()->FUN_00c50610(&UpdateData);
-        }
-    }
-}
 }  // namespace fnv_0086fc60
 
 extern unsigned char DAT_0118abb0;
 
-// @fnv 0x0086ff40
-unsigned char __cdecl FUN_0086ff40()
-{
-    return DAT_0118abb0;
-}
-
 extern char DAT_01189184;
 
-// @fnv 0x008705c0
-char __cdecl FUN_008705c0()
-{
-    return DAT_01189184;
-}
-
 extern unsigned char DAT_011f91a4;
-
-// @fnv 0x008709f0
-unsigned char FUN_008709f0()
-{
-    return DAT_011f91a4;
-}
 
 struct HWND__;
 extern "C" __declspec(dllimport) HWND__* __stdcall GetForegroundWindow();
@@ -2540,20 +1762,6 @@ struct FUN_00871d10_t
 {
     bool FUN_00871d10(int x, int y);
 };
-
-// @fnv 0x00871d10
-bool FUN_00871d10_t::FUN_00871d10(int x, int y)
-{
-    if (GetForegroundWindow() != *(HWND__**)((char*)this + 8))
-        return false;
-    if (!InterfaceH::IsSaveLoadActive() || !FUN_007fdf30()->FUN_00711e00())
-        return false;
-    if (!InterfaceH::GetSelectedTargetIndex(0x41e))
-        FUN_00703080((float)(x / (double)FUN_004dc1f0()), (float)(y / (double)FUN_004dc200()));
-    else
-        FUN_00706230(x, y);
-    return true;
-}
 
 namespace fnv_008727d0 {
 struct FUN_008727d0_shell : public Main
@@ -2616,57 +1824,12 @@ extern TES* g_TES;
 extern bool DAT_011ff104;
 extern bool DAT_011ff8c4;
 
-// @fnv 0x008727d0
-void FUN_008727d0_shell::FUN_008727d0()
-{
-    if (*g_011c7adc.GetLifeStateControlFlag())
-    {
-        int isavemaxaniso = DAT_011a9608;
-        DAT_011a9608 = 1;
-        if (!FUN_005468f0(11) &&
-            (!g_TES->IsCellInterior() || ((MobileObjectCellAccess*)g_TES->IsCellInterior())->FUN_004518e0()))
-        {
-            ShadowSceneNode* pscene = NiAdditionalGeometryData::GetShadowSceneNodeForIndex(0);
-            bool bwasLightUpdateDisabled = pscene->FUN_005f9ad0();
-            pscene->SetCreatureType(1);
-            g_TES->GetActorScale()->FUN_004e1bc0(FUN_00524c90(), pscene);
-            pscene->SetCreatureType(bwasLightUpdateDisabled);
-        }
-        else
-        {
-            DAT_011ff104 = false;
-            g_TES->GetActorScale()->m_uiPathPointIndex = 0;
-            g_osGlobals->FUN_004e2190()->f(false);
-            DAT_011ff8c4 = false;
-            g_TES->GetActorScale()->FUN_00872930(0);
-        }
-        DAT_011a9608 = isavemaxaniso;
-    }
-    for (int i = g_TES->GetActorScale()->m_uiPathPointIndex + 1; i < 17; i++)
-    {
-        TaskThreadManager::GetSingleton()->FUN_00ba30f0(0, i);
-        TaskThreadManager::GetSingleton()->FUN_00ba3130(1, i);
-    }
-}
 }  // namespace fnv_008727d0
 
 extern unsigned char DAT_011c7a59;
 
-// @fnv 0x00872930
-void FUN_00872930(unsigned char value)
-{
-    DAT_011c7a59 = value;
-}
-
 extern bool DAT_011f9fc3;
 extern bool DAT_011f9fc4;
-
-// @fnv 0x00872dd0
-void __cdecl FUN_00872dd0(bool abFlag1, bool abFlag2)
-{
-    DAT_011f9fc3 = abFlag1;
-    DAT_011f9fc4 = abFlag2;
-}
 
 struct GlobalObjectO2_00a7b610
 {
@@ -2679,12 +1842,6 @@ class BSFadeNodeCuller
     GlobalObjectO2_00a7b610* FUN_00872ef0();
 };
 
-// @fnv 0x00872ef0
-GlobalObjectO2_00a7b610* BSFadeNodeCuller::FUN_00872ef0()
-{
-    return &g_01201f7c;
-}
-
 namespace fnv_00872f00 {
 struct BSFadeNodeCuller
 {
@@ -2694,27 +1851,12 @@ struct BSFadeNodeCuller
 
 void __cdecl _Deallocate(void*);
 
-// Calls FUN_00872f30, then frees this with _Deallocate when flags has bit 0 set, and returns this.
-// @fnv 0x00872f00
-void* __thiscall BSFadeNodeCuller::FUN_00872f00(unsigned int flags)
-{
-    FUN_00872f30();
-    if (flags & 1)
-        _Deallocate(this);
-    return this;
-}
 }  // namespace fnv_00872f00
 
 struct FUN_00874650Class
 {
     char FUN_00874650();
 };
-
-// @fnv 0x00874650
-char FUN_00874650Class::FUN_00874650()
-{
-    return ((char*)this)[0x1dc];
-}
 
 namespace fnv_00874690 {
 class GlobalObject_00633c90
@@ -2725,11 +1867,6 @@ class GlobalObject_00633c90
 
 GlobalObject_00633c90 g_011c7840;
 
-// @fnv 0x00874690
-void FUN_00874690()
-{
-    g_011c7840.operator->();
-}
 }  // namespace fnv_00874690
 
 namespace fnv_008746b0 {
@@ -2741,20 +1878,9 @@ struct GlobalObject_00633c90
 
 extern GlobalObject_00633c90 g_011c781c;
 
-// @fnv 0x008746b0
-int* FUN_008746b0()
-{
-    return g_011c781c.operator->();
-}
 }  // namespace fnv_008746b0
 
 extern int DAT_011ff0f0;
-
-// @fnv 0x008746c0
-void FUN_008746c0()
-{
-    DAT_011ff0f0 = 0;
-}
 
 struct BSTextureManager
 {
@@ -2771,13 +1897,6 @@ struct ImageSpaceTexture
     BSRenderedTexture* GetRenderedTexture() const;
     void FUN_008748d0();
 };
-
-// @fnv 0x008748d0
-void ImageSpaceTexture::FUN_008748d0()
-{
-    ((ImageSpaceTexture*)((char*)this + 0x7c))->CreateRenderTargetTexture((BSTextureManager::RenderTargetType)0x27);
-    ((ImageSpaceTexture*)((char*)this + 0x7c))->GetRenderedTexture();
-}
 
 struct AutoMemHelper
 {
@@ -2801,51 +1920,20 @@ struct FUN_00874920_t
     void FUN_00874920(BSShaderAccumulator* apShaderAccum, BSRenderedTexture* apRenderTexture);
 };
 
-// Gets the face-gen scene node and passes its animation data with the render texture to the shader accumulator.
-// @fnv 0x00874920
-void FUN_00874920_t::FUN_00874920(BSShaderAccumulator* apShaderAccum, BSRenderedTexture* apRenderTexture)
-{
-    BSFaceGenNiNode* pscene;
-    AutoMemHelper tempMemContext(0x27, true, "D:\\_Fallout3\\Platforms\\Common\\Code\\Fallout\\Misc\\Main.cpp", 0x20d5);
-    pscene = FUN_0045c670();
-    apShaderAccum->FUN_00b64570(pscene->GetAnimationData(), apRenderTexture);
-}
-
 struct FUN_00a235d0_class
 {
     int __thiscall FUN_00a235d0(int a1, int a2);
 };
-
-// @fnv 0x00a235d0
-int __thiscall FUN_00a235d0_class::FUN_00a235d0(int a1, int a2)
-{
-    return 1;
-}
 
 struct FUN_00a236b0_Class
 {
     int FUN_00a236b0(int index);
 };
 
-// @fnv 0x00a236b0
-int __thiscall FUN_00a236b0_Class::FUN_00a236b0(int index)
-{
-    return *(int*)(this + 0x1764 + index * 0x2c);
-}
-
 struct FUN_0086ba60_Class
 {
     bool FUN_0086ba60(void* a1, void* a2);
 };
-
-// Returns true if the pointer stored at offset 0x200 of this object equals a2.
-// @fnv 0x0086ba60
-bool FUN_0086ba60_Class::FUN_0086ba60(void* apUnused, void* a2)
-{
-    if (*(void**)((char*)this + 0x200) == a2)
-        return true;
-    return false;
-}
 
 namespace fnv_0086bb20 {
 struct GlobalObject_00869b10
@@ -2859,17 +1947,6 @@ struct SomeClass
     bool FUN_0086bb20(unsigned int index);
 };
 
-// Looks up index via FUN_0086bb70; if found, removes that entry from the two lists at offsets 0xad4 and 0xae4 and returns true, else false.
-// @fnv 0x0086bb20
-bool SomeClass::FUN_0086bb20(unsigned int index)
-{
-    int result = FUN_0086bb70(index);
-    if (result == -1)
-        return false;
-    (reinterpret_cast<GlobalObject_00869b10*>(reinterpret_cast<unsigned char*>(this) + 0xad4))->RemoveAt(result);
-    (reinterpret_cast<GlobalObject_00869b10*>(reinterpret_cast<unsigned char*>(this) + 0xae4))->RemoveAt(result);
-    return true;
-}
 }  // namespace fnv_0086bb20
 
 struct TESGrass
@@ -2882,29 +1959,6 @@ struct BSSystemUtility
     static BSSystemUtility* ms_pSystemUtility;
 };
 
-// @fnv 0x0086bdf0
-char FUN_0086bdf0()
-{
-    int result;
-    if (BSSystemUtility::ms_pSystemUtility && ((TESGrass*)BSSystemUtility::ms_pSystemUtility)->GetMinimumSlopeDegrees())
-        result = 1;
-    else
-        result = 0;
-    return (char)result;
-}
-
-// Returns the smaller of the two arguments, comparing the float against the double and returning it as a double.
-// @fnv 0x008731a0
-double FUN_008731a0(double adValue, float afValue)
-{
-    double d;
-    if (afValue > adValue)
-        d = adValue;
-    else
-        d = afValue;
-    return d;
-}
-
 namespace fnv_008746a0 {
 struct Flt
 {
@@ -2913,23 +1967,12 @@ struct Flt
 
 extern Flt g_011c7810;
 
-// @fnv 0x008746a0
-void FUN_008746a0()
-{
-    g_011c7810.operator unsigned int();
-}
 }  // namespace fnv_008746a0
 
 struct FUN_00874aa0_Class
 {
     char FUN_00874aa0();
 };
-
-// @fnv 0x00874aa0
-char FUN_00874aa0_Class::FUN_00874aa0()
-{
-    return *(char*)((char*)this + 0x118);
-}
 
 struct FUN_008776e0
 {
@@ -2942,35 +1985,16 @@ struct FUN_008776e0
     void SetFlags();
 };
 
-// @fnv 0x008776e0
-void FUN_008776e0::SetFlags()
-{
-    b2 = 0;
-    b5 = 0;
-}
-
 struct SoundPlaybackHandle
 {
     bool StopWithFade(unsigned int);
     bool FUN_00877700();
 };
 
-// @fnv 0x00877700
-bool SoundPlaybackHandle::FUN_00877700()
-{
-    return ((SoundPlaybackHandle*)((char*)this + 0x77c))->StopWithFade(0x3e8);
-}
-
 struct FUN_0086ef70_Class
 {
     char FUN_0086ef70();
 };
-
-// @fnv 0x0086ef70
-char FUN_0086ef70_Class::FUN_0086ef70()
-{
-    return *(char*)((char*)this + 0x52);
-}
 
 struct FUN_0086fbc0_Class
 {
@@ -2978,21 +2002,10 @@ struct FUN_0086fbc0_Class
     void FUN_0086fbc0(char value);
 };
 
-// @fnv 0x0086fbc0
-void FUN_0086fbc0_Class::FUN_0086fbc0(char value)
-{
-    *(char*)((char*)this + 0x5f9) = value;
-}
-
 struct FUN_008727b0_Class
 {
     char __thiscall FUN_008727b0() const;
 };
-// @fnv 0x008727b0
-char __thiscall FUN_008727b0_Class::FUN_008727b0() const
-{
-    return *(int*)((char*)this + 0x20) != 0;
-}
 
 extern "C" void __cdecl FUN_00a693e0();
 
@@ -3001,12 +2014,6 @@ struct FUN_00872f30_class
     void __thiscall FUN_00a693e0();
     void __thiscall FUN_00872f30();
 };
-
-// @fnv 0x00872f30
-void __thiscall FUN_00872f30_class::FUN_00872f30()
-{
-    FUN_00a693e0();
-}
 
 namespace fnv_00875bd0 {
 struct Flt
@@ -3019,11 +2026,6 @@ struct FUN_00875bd0_Class
     unsigned int __thiscall FUN_00875bd0(int idx);
 };
 
-// @fnv 0x00875bd0
-unsigned int __thiscall FUN_00875bd0_Class::FUN_00875bd0(int aiIndex)
-{
-    return ((Flt*)((char*)this + 0xf4 + aiIndex * 4))->operator unsigned int();
-}
 }  // namespace fnv_00875bd0
 
 struct FUN_00456630_helper
@@ -3032,12 +2034,6 @@ struct FUN_00456630_helper
     void FUN_00876810();
 };
 
-// @fnv 0x00876810
-void FUN_00456630_helper::FUN_00876810()
-{
-    FUN_00456630(0x800);
-}
-
 namespace fnv_00876830 {
 struct BSRenderedTexture
 {
@@ -3045,11 +2041,6 @@ struct BSRenderedTexture
     void __thiscall FUN_00876830(int, int);
 };
 
-// @fnv 0x00876830
-void __thiscall BSRenderedTexture::FUN_00876830(int, int)
-{
-    EndAllAndResetRendererState();
-}
 }  // namespace fnv_00876830
 
 struct FUN_00877a50Class
@@ -3060,46 +2051,20 @@ struct FUN_00877a50Class
     void FUN_00877a50(int param_2);
 };
 
-// Calls FUN_00877e10 with m_000a and param_2.
-// @fnv 0x00877a50
-void FUN_00877a50Class::FUN_00877a50(int param_2)
-{
-    FUN_00877e10(m_000a, param_2);
-}
-
 struct FUN_00a23490_Class
 {
     int FUN_00a23490(int a, unsigned int b);
 };
-
-// Returns whether the bit at position b is set in the int stored at this + a*8 + 0x18b8.
-// @fnv 0x00a23490
-int FUN_00a23490_Class::FUN_00a23490(int aiIndex, unsigned int auiBit)
-{
-    return (1 << auiBit) & *(int*)((char*)this + aiIndex * 8 + 0x18b8);
-}
 
 struct FUN_00a23690_class
 {
     int FUN_00a23690(int index);
 };
 
-// @fnv 0x00a23690
-int FUN_00a23690_class::FUN_00a23690(int index)
-{
-    return *(int*)((char*)this + 0x1760 + index * 0x2c);
-}
-
 struct FUN_00a236d0_class
 {
     int __thiscall FUN_00a236d0(int index);
 };
-
-// @fnv 0x00a236d0
-int __thiscall FUN_00a236d0_class::FUN_00a236d0(int index)
-{
-    return *(int*)((char*)this + 0x1768 + index * 0x2c);
-}
 
 extern "C" void __cdecl _Deallocate(void*);
 
@@ -3109,15 +2074,6 @@ struct FUN_0086bd40_class
     void* __thiscall FUN_0086bd40(unsigned int flags);
 };
 
-// @fnv 0x0086bd40
-void* __thiscall FUN_0086bd40_class::FUN_0086bd40(unsigned int flags)
-{
-    FUN_00afdcf0();
-    if (flags & 1)
-        _Deallocate(this);
-    return this;
-}
-
 extern "C" void __cdecl Deallocate(void*);
 
 struct FUN_0086bee0_class
@@ -3126,15 +2082,6 @@ struct FUN_0086bee0_class
     void* __thiscall FUN_0086bee0(unsigned int flags);
 };
 
-// @fnv 0x0086bee0
-void* __thiscall FUN_0086bee0_class::FUN_0086bee0(unsigned int flags)
-{
-    FUN_00450770();
-    if (flags & 1)
-        Deallocate(this);
-    return this;
-}
-
 extern "C" void __cdecl _Deallocate(void*);
 void __cdecl FUN_00700650();
 struct FUN_0086bf10
@@ -3142,15 +2089,6 @@ struct FUN_0086bf10
     void __thiscall FUN_00700650();
     void* __thiscall DeleteThis(unsigned int flags);
 };
-// Calls FUN_00700650, frees this with _Deallocate when flags has bit 0 set, and returns this.
-// @fnv 0x0086bf10
-void* __thiscall FUN_0086bf10::DeleteThis(unsigned int flags)
-{
-    FUN_00700650();
-    if (flags & 1)
-        _Deallocate(this);
-    return this;
-}
 
 namespace fnv_0086f6a0 {
 struct ActiveEffect;
@@ -3362,44 +2300,6 @@ extern ProcessLists DAT_011e0e80;
 extern FUN_00991600_t* BGSSaveLoadGlobalDataWorldspacePtr;
 extern GameTimerRecord g_timeGlobal;
 
-// @fnv 0x0086f6a0
-void FUN_0086f6a0_shell::FUN_0086f6a0()
-{
-    FOPipboyManager* ppipboy;
-    FUN_0086f6a0_mob* pmob;
-    FUN_0086f6a0_act* pact;
-    if (DialogH::IsInDialog() && !Interface::IsConsoleActive() && !FUN_0086f860())
-    {
-        pmob = FUN_007624d0();
-        if (pmob && pmob->IsSlot64())
-        {
-            pact = (FUN_0086f6a0_act*)pmob;
-            pact->Slot257(0.0f);
-        }
-    }
-    DAT_011e0e80.UpdateMagicTempEffects(0.0f);
-    if (*g_011c3ea4.Int() > 1)
-        ((FUN_0096c970_shell*)&DAT_011e0e80)->FUN_0096c970();
-    else
-        DAT_011e0e80.FUN_0096c860();
-    FUN_0096c710(&DAT_011e0e80);
-    DAT_011e0e80.FUN_009781d0(((Twin_0084d030*)&g_timeGlobal)->GetStoredFloatValue());
-    ppipboy = Interface::GetPipboyManagerInstance();
-    if (FUN_0086f840((char*)ppipboy))
-        ppipboy->FUN_007fa990();
-    if (*g_011c3ea4.Int() > 1)
-    {
-        FUN_0054ae30();
-        ((FUN_0087a6d0_shell*)TaskQueueInterface::GetInstance())->FUN_0087a6d0();
-        TaskQueueInterface::GetInstance()->FUN_0087a790();
-        FUN_00552570();
-        FUN_0086f830(DAT_011c3c08);
-        ((FUN_0087a6b0_shell*)TaskQueueInterface::GetInstance())->FUN_0087a6b0();
-    }
-    TaskQueueInterface::ThreadProcessInput(*((GlobalObject_0045cfe0*)&g_011d10d4)->Int());
-    TaskQueueInterface::ThreadProcessSecondaryInput();
-    BGSSaveLoadGlobalDataWorldspacePtr->FUN_00991600(DAT_011dea2b || DAT_011dea2d || *((bool*)this + 7));
-}
 }  // namespace fnv_0086f6a0
 
 namespace fnv_0086fd90 {
@@ -3491,47 +2391,6 @@ struct TES
     ISMList_0086fd90* FUN_0043b5d0();
 };
 extern TES* g_TES;
-// @fnv 0x0086fd90
-void FUN_0086fd90_shell::FUN_0086fd90(bool abAdvanceTime)
-{
-    FUN_004e3270()->FUN_00b8b500();
-    FUN_004e3270()->BeginParamModifiers();
-    if (abAdvanceTime)
-        FUN_0086ff50(g_timeGlobal.GetStoredFloatValue());
-    ISMList_0086fd90* pModifierList = g_TES->FUN_0043b5d0();
-    int iActiveCount = 0;
-    int iactiveWeatherCount = 0;
-    while (pModifierList)
-    {
-        ISMI_0086fd90* pModifier = (ISMI_0086fd90*)(unsigned int)pModifierList->FUN_006815c0();
-        if (pModifier)
-        {
-            if (pModifier->bActive)
-                ++iActiveCount;
-            if (pModifier->IsExpired())
-            {
-                pModifierList->Remove(pModifier);
-                continue;
-            }
-            else if (FUN_0086ff40())
-            {
-                pModifier->Update();
-                if (((Twin_0084d030*)pModifier)->GetStoredFloatValue() > 0.0 && pModifier->bActive)
-                    ++iactiveWeatherCount;
-            }
-        }
-        pModifierList = pModifierList->GetNext();
-        if (iActiveCount == 4)
-        {
-            if (!iactiveWeatherCount)
-                FUN_004e3270()->FUN_00b8aea0();
-            FUN_004e3270()->FUN_00b8ccb0();
-            iActiveCount = 0;
-        }
-    }
-    FUN_004e3270()->FUN_00b8d020();
-    FUN_004e3270()->FUN_00b8b440(false);
-}
 }  // namespace fnv_0086fd90
 
 namespace fnv_008746d0 {
@@ -3683,52 +2542,6 @@ void __cdecl FUN_004eced0(unsigned int);
 float __fastcall FUN_00874900(PC_00605d70*);
 float __fastcall FUN_00710ab0(PC_00605d70*);
 extern NiColor DAT_011f4998;
-// @fnv 0x008746d0
-void FUN_008746d0_shell::FUN_008746d0(BSRenderedTexture* apRenderTexture)
-{
-    S4* pimagespacemanager = FUN_004e3270();
-    Renderer_008746d0* prenderer = FUN_004a0e90();
-    NiNode* pscenegraph = ((PC_00605d70*)g_thePlayer)->GetNode(true);
-    SceneGraph_008746d0* p1stperson3d = FUN_0045c670();
-    FUN_004a0fd0_shell* pculler = ((MiddleLowProcess*)p1stperson3d)->GetProcessInteger();
-    bool m_kFieldAfterWeaponFlags = ((FUN_008bbc10_shell*)g_thePlayer)->FUN_008bbc10();
-    BSRenderedTexture* p1stpersonBuffer = 0;
-    ImageSpaceEffectParam savedBackground(0.0f, 0.0f, 0.0f, 0.0f);
-    if (m_kFieldAfterWeaponFlags)
-    {
-        p1stpersonBuffer = pimagespacemanager->FUN_004ebbc0(4)->FUN_008748d0();
-        BSRenderedTexture::EndAllAndResetRendererState();
-        prenderer->GetBackgroundColor(&savedBackground);
-        prenderer->SetBackgroundColorRGB(&DAT_011f4998);
-        FUN_00b6b8d0(1, p1stpersonBuffer->GetGroup());
-    }
-    else
-    {
-        BSRenderStateManager::SetColorWriteMask(0, 1);
-    }
-    NiAVObject* p1stPersonNode = (NiAVObject*)pscenegraph;
-    bool bwas1stPersonCulled = p1stPersonNode->FUN_00456610();
-    p1stPersonNode->SetAppCulled(false);
-    p1stperson3d->FUN_00c52020(FUN_00874900((PC_00605d70*)g_thePlayer), 0, 0, 0);
-    BSShaderManager::SetFOV(FUN_00874900((PC_00605d70*)g_thePlayer));
-    pculler->FUN_004a0fd0(*(Flt*)((char*)this + 0x90));
-    FUN_00b6bee0(((BSFaceGenNiNode*)p1stperson3d)->GetAnimationData(), p1stPersonNode, pculler);
-    BSShaderRenderUtility::SetRenderCamera(((BSFaceGenNiNode*)p1stperson3d)->GetAnimationData(),
-                                           *(Flt*)((char*)this + 0x90), false);
-    pculler->FUN_004a0fd0(0);
-    p1stperson3d->FUN_00c52020(FUN_00710ab0((PC_00605d70*)g_thePlayer), 0, 0, 0);
-    BSShaderManager::SetFOV(FUN_00710ab0((PC_00605d70*)g_thePlayer));
-    p1stPersonNode->SetAppCulled(bwas1stPersonCulled);
-    if (m_kFieldAfterWeaponFlags)
-    {
-        prenderer->SetBackgroundColor(&savedBackground);
-        BSRenderedTexture::EndAllAndResetRendererState();
-    }
-    else
-    {
-        FUN_004eced0(1);
-    }
-}
 }  // namespace fnv_008746d0
 
 namespace fnv_00875e40 {
@@ -3799,24 +2612,6 @@ struct FUN_00875e40_shell
     void FUN_00875e40(BSShaderAccumulator* pAccum, BSRenderedTexture* pTexture);
 };
 
-// Clones the scene graph's animation data as a camera, sets FOV and depth via pAccum->SetupDepth, then deletes the cloned camera.
-// @fnv 0x00875e40
-void FUN_00875e40_shell::FUN_00875e40(BSShaderAccumulator* pAccum, BSRenderedTexture* pTexture)
-{
-    BSFaceGenNiNode* pkSceneGraph = (BSFaceGenNiNode*)FUN_0045c670();
-    if (DAT_011f2250.GetFlags() != 4)
-        pkSceneGraph->FUN_00c52020(FUN_00710ab0((FUN_00710ab0_Class*)g_thePlayer), 0, 0, 0);
-    BSShaderManager::SetFOV(FUN_00710ab0((FUN_00710ab0_Class*)g_thePlayer));
-    {
-        NiObjectCopyInfo kInfo(0x101);
-        FUN_00875e40_Clone* pkCamera = ((FUN_00875e40_Src*)pkSceneGraph->GetAnimationData())->Clone(kInfo);
-        if (DAT_011f2250.GetFlags() != 4)
-            pkSceneGraph->FUN_00c52020(FUN_00874900((const char*)g_thePlayer), 0, pkCamera, 0);
-        AutoMemHelper kMemHelper(0x27, true, "D:\\_Fallout3\\Platforms\\Common\\Code\\Fallout\\Misc\\Main.cpp", 0x234c);
-        pAccum->SetupDepth((NiCamera*)pkSceneGraph->GetAnimationData(), (NiCamera*)pkCamera, pTexture);
-        delete pkCamera;
-    }
-}
 }  // namespace fnv_00875e40
 
 namespace fnv_00875fa0 {
@@ -3833,13 +2628,6 @@ struct Outer00875fa0
 {
     void FUN_00875fa0(Param00875fa0*, void*);
 };
-// Calls FUN_0045c670 to get a BSFaceGenNiNode, then passes its animation data and b to FUN_00b651e0 on a.
-// @fnv 0x00875fa0
-void Outer00875fa0::FUN_00875fa0(Param00875fa0* pParam, void* b)
-{
-    BSFaceGenNiNode* tmp = (BSFaceGenNiNode*)FUN_0045c670();
-    pParam->FUN_00b651e0(tmp->GetAnimationData(), b);
-}
 }  // namespace fnv_00875fa0
 
 namespace fnv_00876850 {
@@ -4237,40 +3025,6 @@ struct FUN_004d61b0
 extern unsigned char DAT_011f9440;
 extern Flt DAT_011fa008;
 
-// @fnv 0x00876850
-void FUN_00876850_shell::FUN_00876850(BSRenderedTexture* apRenderTexture, ImageSpaceManager* apImagespaceManager,
-                                      GraphicsRenderer* apRenderer, Sun* apSun)
-{
-    Dev9* pd3ddevice;
-    int apCuller;
-    unsigned int apSceneGraph;
-    apSceneGraph = FUN_0045c670();
-    apCuller = ((MiddleLowProcess*)apSceneGraph)->GetProcessInteger();
-    if (apSun)
-        ((FUN_00642890_Class*)apSun)->FUN_00642890();
-    FUN_00ba9420(((BSFaceGenNiNode*)apSceneGraph)->GetAnimationData());
-    if (apRenderTexture)
-        FUN_004a0ea0()->AddRenderedTexture(apRenderTexture);
-    ((FUN_00b65660_s*)(unsigned int)*(Flt*)((char*)this + 0x88))->FUN_00b65660();
-    ((FUN_00b630c0_s*)(unsigned int)*(Flt*)((char*)this + 0x94))->FUN_00b630c0();
-    FUN_00b540b0();
-    FUN_00b4f510();
-    ((FUN_00876a00_Class*)((S4*)apImagespaceManager)->FUN_004ebbc0(4))->FUN_00876a00();
-    if (DAT_011f9440)
-        FUN_00bad4a0();
-    pd3ddevice = ((FUN_004dc020_Class*)FUN_004a0e90())->FUN_004dc020();
-    pd3ddevice->v104(0);
-    pd3ddevice->v100(0, 0, 0, 0);
-    if (FUN_00683a60())
-        FUN_00714900();
-    if ((unsigned int)DAT_011fa008)
-    {
-        new FUN_004d61b0(((TESForm*)this)->GetFormID(), ((ArrSI*)this)->GetFlags(), (unsigned int)DAT_011fa008,
-                         "Render Passes", 0x80000000, 0x80000000, 800, 600);
-        (GO&)DAT_011fa008 = 0;
-    }
-    FUN_00b988e0();
-}
 }  // namespace fnv_00876850
 
 namespace fnv_00877260 {
@@ -4613,39 +3367,6 @@ class PlayerVT
 };
 extern PlayerVT* _g_thePlayer;
 
-// @fnv 0x00877260
-void __cdecl FUN_00877260(::NiPoint3 apos)
-{
-    TESObjectCELL* pcell = (TESObjectCELL*)((CP_008c48d0*)g_TES)->GetPrevPath();
-    UpdData UpdateData;
-    ::NiPoint3 rot = ::NiPoint3::ZERO;
-    if (!pcell)
-    {
-        pcell = *(TESObjectCELL**)((TES*)g_TES)
-                     ->FUN_00457050((unsigned int)*g_011c63cc.Int() >> 1, (unsigned int)*g_011c63cc.Int() >> 1);
-    }
-    if (pcell)
-    {
-        ((FUN_0054cfd0_S*)pcell)->FUN_0054cfd0(&apos, &rot);
-    }
-    _g_thePlayer->SetZRotV(rot.z);
-    _g_thePlayer->SetPositionV(&apos);
-    if (pcell)
-    {
-        ((FUN_00548230_S*)pcell)->FUN_00548230((TESObjectREFR*)_g_thePlayer, false);
-        ((FUN_00456520_Class*)DAT_01202d98)->FUN_00456520();
-        AutoMemHelper tempMemContext(0x34, true, "D:\\_Fallout3\\Platforms\\Common\\Code\\Fallout\\Misc\\Main.cpp",
-                                     0x2612);
-        ((NiAVObject*)((PC_00605d70*)_g_thePlayer)->GetNode(false))->UpdateSceneObject();
-        ((FUN_00b5cbd0_S*)NiAdditionalGeometryData::GetShadowSceneNodeForIndex(0))
-            ->FUN_00b5cbd0(((PC_00605d70*)_g_thePlayer)->GetNode(false));
-    }
-    ((FUN_00565730_S*)_g_thePlayer)->FUN_00565730();
-    ((FUN_00440460_S*)FUN_00558310((NiNode_00558310*)FUN_0045c670()))->FUN_00440460((const V3*)&apos);
-    FUN_00558310((NiNode_00558310*)FUN_0045c670())->SetLocalRotation(((FUN_0056fa00_S*)_g_thePlayer)->FUN_0056fa00());
-    UpdateData.NiUpdateData(0.0f, false, false);
-    ((NiNode*)FUN_00558310((NiNode_00558310*)FUN_0045c670()))->Update(*(NiUpdateData*)&UpdateData);
-}
 }  // namespace fnv_00877260
 
 struct GlobalObject_00869b10
@@ -4663,18 +3384,6 @@ struct FUN_0086bc10_t
     bool FUN_0086bc10(int);
 };
 
-// Looks up arg via FUN_0086bc60; if found, removes that index from a and b and returns true, otherwise returns false.
-// @fnv 0x0086bc10
-bool FUN_0086bc10_t::FUN_0086bc10(int arg)
-{
-    int idx = FUN_0086bc60(arg);
-    if (idx == -1)
-        return false;
-    a.RemoveAt(idx);
-    b.RemoveAt(idx);
-    return true;
-}
-
 namespace fnv_0086bc60 {
 struct Arr
 {
@@ -4689,17 +3398,6 @@ struct FUN_0086bc60_t
     int FUN_0086bc60(int value);
 };
 
-// Searches arr for the first element equal to value and returns its index, or -1 if not found.
-// @fnv 0x0086bc60
-int FUN_0086bc60_t::FUN_0086bc60(int value)
-{
-    for (unsigned int i = 0; i < arr.GetSize(); i++)
-    {
-        if (*arr.GetAt(i) == value)
-            return i;
-    }
-    return -1;
-}
 }  // namespace fnv_0086bc60
 
 namespace fnv_00872940 {
@@ -4764,55 +3462,6 @@ struct MainTarget
     void FUN_00872940(BSRenderedTexture* apDestination);
 };
 
-// @fnv 0x00872940
-void MainTarget::FUN_00872940(BSRenderedTexture* apDestination)
-{
-    S148c0* prenderer = FUN_0043c4b0();
-    ImageSpaceManager* pimagespacemanager = FUN_004e3270();
-    const bool bmultiSampleEnabled = FUN_004dc310();
-    int result;
-
-    reinterpret_cast<NiParallelUpdateTaskManager*>(this)->SetupTaskWorkers();
-
-    result = FUN_00872f50(prenderer, apDestination, 0, bmultiSampleEnabled);
-
-    FUN_00874b90(pimagespacemanager, prenderer, bmultiSampleEnabled, apDestination);
-
-    if (Interface::IsMenuActive(Interface::MENU_ID_0x41e, 0))
-        FUN_00709ae0();
-
-    if (Interface::IsMenuActive(Interface::MENU_ID_0x3f6, 0))
-        FUN_00709af0();
-
-    if (Interface::IsMenuActive(Interface::MENU_ID_0x438, 0))
-        FUN_00709b00();
-
-    if (Interface::IsMenuActive(Interface::MENU_ID_0x439, 0))
-        FUN_00709b10();
-
-    if (Interface::IsMenuActive(Interface::MENU_ID_0x43a, 0))
-        FUN_00709b20();
-
-    if (Interface::IsMenuActive(Interface::MENU_ID_0x43b, 0))
-        FUN_00709b30();
-
-    if (Interface::IsMenuActive(Interface::MENU_ID_0x432, 0))
-        FUN_007948d0();
-
-    if (FUN_008709f0())
-    {
-        FUN_00875fd0(bmultiSampleEnabled, result, prenderer, apDestination);
-    }
-    else if (apDestination)
-    {
-        FUN_00876830(bmultiSampleEnabled, apDestination);
-    }
-
-    FUN_00876850(result, pimagespacemanager, prenderer, 0);
-
-    if (Interface::IsMenuActive(Interface::MENU_ID_0x424, 0))
-        FUN_007c9ca0();
-}
 }  // namespace fnv_00872940
 
 class FUN_004505a0_target
@@ -4837,13 +3486,6 @@ class FUN_004505a0_cls
     FUN_004505a0_target* m_28;
     int FUN_004505a0();
 };
-
-// Returns the result of calling Get on m_28 if it is non-null, otherwise returns 0.
-// @fnv 0x004505a0
-int FUN_004505a0_cls::FUN_004505a0()
-{
-    return (m_28 != 0) ? m_28->Get() : 0;
-}
 
 // FUN_0086ba90 candidate
 struct OffScreenFrameHost
@@ -5076,21 +3718,6 @@ struct OffScreenFrameHost
     bool FUN_0086ba60(const char* name, int flags);
     bool FUN_0086ba90();
 };
-// Calls FUN_0086ba60 with "EndOffScreenFrame" and flags 2, then v60; on success clears m_200 and returns true.
-// @fnv 0x0086ba90
-bool OffScreenFrameHost::FUN_0086ba90()
-{
-    if (!FUN_0086ba60("EndOffScreenFrame", 2))
-    {
-        return false;
-    }
-    if (!v60())
-    {
-        return false;
-    }
-    m_200 = 0;
-    return true;
-}
 
 class Sky86B
 {
@@ -5106,14 +3733,6 @@ class SkyOwner86B
     void FUN_0086be30();
 };
 
-// Deletes the Sky86B singleton instance and clears its static pointer.
-// @fnv 0x0086be30
-void SkyOwner86B::FUN_0086be30()
-{
-    delete Sky86B::pInstance;
-    Sky86B::pInstance = 0;
-}
-
 class C86D4C0Timer
 {
   public:
@@ -5122,13 +3741,6 @@ class C86D4C0Timer
 
     void FUN_0086d4c0(unsigned int uiFrequency);
 };
-
-// Stores the timer interval as 1000 divided by uiFrequency, or 0 when uiFrequency is zero.
-// @fnv 0x0086d4c0
-void C86D4C0Timer::FUN_0086d4c0(unsigned int uiFrequency)
-{
-    m_fInterval = uiFrequency ? 1000.0 / uiFrequency : 0.0;
-}
 
 class B86F190Process
 {
@@ -5284,46 +3896,12 @@ class B86F190Owner
     void FUN_0086f190();
 };
 
-// @fnv 0x0086f190
-void B86F190Owner::FUN_0086f190()
-{
-    if (g_bB86F190Enabled)
-    {
-        if (g_bB86F190Pending)
-        {
-            B86F190ActorList* pkList = g_kB86F190Manager.GetActors();
-            B86F190Actor* pkActor = 0;
-            for (unsigned int i = 0; i < pkList->GetCount(0); i++)
-            {
-                pkActor = pkList->GetAt(i);
-                if (pkActor && !pkActor->FUN_00931850() && pkActor->GetNiNode())
-                {
-                    B86F190Process* pkProcess = pkActor->GetProcess();
-                    pkProcess->FUN_00483710();
-                }
-            }
-            reinterpret_cast<B86F190Actor*>(g_thePlayer)->GetProcess()->FUN_00483710();
-        }
-        g_bB86F190Pending = false;
-    }
-    else
-    {
-        g_bB86F190Pending = true;
-    }
-}
-
 extern "C" __declspec(dllimport) void __stdcall DebugBreak();
 
 struct FUN_00872ed0_shell
 {
     void FUN_00872ed0(int param_1);
 };
-
-// @fnv 0x00872ed0
-void FUN_00872ed0_shell::FUN_00872ed0(int aiUnused)
-{
-    DebugBreak();
-}
 
 struct Point3Ctor
 {
@@ -5344,35 +3922,6 @@ extern NiPoint3 DAT_011a9490;
 extern bool DAT_012003cc;
 extern NiPoint3 DAT_012003d4;
 extern NiPoint3 DAT_012003e0;
-
-// Compares the object's current scale vectors against stored ones, sets DAT_012003cc when any component ratio exceeds 1.1, and stores the new vectors.
-// @fnv 0x008744a0
-void __cdecl FUN_008744a0(ScaleSource* apScaleSource)
-{
-    if (apScaleSource == 0)
-    {
-        DAT_012003d4 = DAT_011a9490;
-        DAT_012003cc = false;
-        return;
-    }
-    NiPoint3 kCurA = *FUN_0045bb80(apScaleSource);
-    NiPoint3 kCurB = apScaleSource->GetScale3();
-    NiPoint3 kDiffA_2 = kCurA - DAT_012003e0;
-    NiPoint3 kDiffB5 = kCurB - DAT_012003d4;
-    Point3Ctor kRatioA(kDiffA_2.x / DAT_012003e0.x, kDiffA_2.y / DAT_012003e0.y, kDiffA_2.z / DAT_012003e0.z);
-    Point3Ctor kRatioB4(kDiffB5.x / DAT_012003d4.x, kDiffB5.y / DAT_012003d4.y, kDiffB5.z / DAT_012003d4.z);
-    if (kRatioA.x > 1.1 || kRatioA.y > 1.1 || kRatioA.z > 1.1 || kRatioB4.x > 1.1 || kRatioB4.y > 1.1 ||
-        kRatioB4.z > 1.1)
-    {
-        DAT_012003cc = true;
-    }
-    else
-    {
-        DAT_012003cc = false;
-    }
-    DAT_012003e0 = kCurA;
-    DAT_012003d4 = kCurB;
-}
 
 struct FlagBlock_a234c0
 {
@@ -5416,35 +3965,6 @@ struct FlagOwner_a234c0
 
     int FUN_00a234c0(int index, int bit, int mode);
 };
-
-// Compares the 0x80 bit of flags[bit] in the first and second flag blocks of pairs[index] according to mode and returns 1 if the mode's condition holds.
-// @fnv 0x00a234c0
-int FlagOwner_a234c0::FUN_00a234c0(int index, int bit, int mode)
-{
-    FlagBlock_a234c0* first = &pairs[index].first;
-    FlagBlock_a234c0* second6 = &pairs[index].second;
-    int result5 = 0;
-    switch (mode)
-    {
-    case 0:
-        if (first->flags[bit] & 0x80)
-            result5 = 1;
-        break;
-    case 1:
-        if (!(second6->flags[bit] & 0x80) && (first->flags[bit] & 0x80))
-            result5 = 1;
-        break;
-    case 2:
-        if (!(first->flags[bit] & 0x80) && (second6->flags[bit] & 0x80))
-            result5 = 1;
-        break;
-    case 3:
-        if ((first->flags[bit] & 0x80) != (second6->flags[bit] & 0x80))
-            result5 = 1;
-        break;
-    }
-    return result5;
-}
 
 struct FUN_00a235f0_Row
 {
@@ -5510,19 +4030,6 @@ struct FUN_00a235f0_Class
     int __thiscall FUN_00a235f0(int param_1, int param_2);
 };
 
-// Reads a 32-bit value from the row at offset param_1*0xa0+0x34, returns -1 if its low 16 bits are 0xffff, else value/0x1194+0x20.
-// @fnv 0x00a235f0
-int __thiscall FUN_00a235f0_Class::FUN_00a235f0(int aiRowIndex, int aiColumnIndex)
-{
-    unsigned int* row = reinterpret_cast<unsigned int*>(reinterpret_cast<char*>(this) + aiRowIndex * 0xa0 + 0x34);
-    int value = static_cast<int>(row[aiColumnIndex + 8]);
-
-    if (static_cast<unsigned short>(value & 0xffff) == 0xffff)
-        return -1;
-
-    return value / 0x1194 + 0x20;
-}
-
 struct FUN_00a23650_entry
 {
     unsigned int m_flags;
@@ -5535,18 +4042,6 @@ struct FUN_00a23650_cls
     FUN_00a23650_entry m_entries[1];
     int FUN_00a23650(int index);
 };
-
-// Reads the byte at bits 8-15 of the flags of the entry at index and returns 2 for that case, otherwise -1.
-// @fnv 0x00a23650
-int FUN_00a23650_cls::FUN_00a23650(int index)
-{
-    switch ((unsigned char)((m_entries[index].m_flags >> 8) & 0xff))
-    {
-    case 2:
-        return 2;
-    }
-    return -1;
-}
 
 struct FUN_00a236f0_data
 {
@@ -5580,21 +4075,6 @@ class FUN_00a236f0_cls
     void FUN_00a236f0(int index, int a2, int a3);
 };
 
-// Builds a data block with the given values and dispatches it to the item at index via v06 with code 4.
-// @fnv 0x00a236f0
-void FUN_00a236f0_cls::FUN_00a236f0(int index, int aiValue1, int aiValue2)
-{
-    FUN_00a236f0_item* pItem = m_items[index];
-    FUN_00a236f0_data data;
-    data.m_iElementCount = 0x18;
-    data.m_flags = 0x10;
-    data.unk0C = 0;
-    data.unk08 = 0;
-    data.unk10 = aiValue1;
-    data.unk14 = aiValue2;
-    pItem->v06(4, &data);
-}
-
 typedef unsigned int DWORD;
 struct DIPROPHEADER
 {
@@ -5626,19 +4106,6 @@ struct InputManager
     InputDevice* devices[1];
     void FUN_00a23750(int index, float value);
 };
-// Scales value by 10000 and sets property 5 on the input device at index via SetProperty.
-// @fnv 0x00a23750
-void InputManager::FUN_00a23750(int index, float value)
-{
-    InputDevice* device = devices[index];
-    DIPROPDWORD property;
-    property.diph.dwSize = sizeof(DIPROPDWORD);
-    property.diph.dwHeaderSize = sizeof(DIPROPHEADER);
-    property.diph.dwHow = 0;
-    property.diph.dwObj = 0;
-    property.dwData = (int)(value * 10000.0);
-    device->SetProperty((const void*)5, &property.diph);
-}
 
 class A237F0Object
 {
@@ -5659,14 +4126,6 @@ class A237F0Object
     int Lookup(int iKey);
     int FUN_00a237f0(int iKey);
 };
-
-// @fnv 0x00a237f0
-int A237F0Object::FUN_00a237f0(int iKey)
-{
-    if (m_pResource && Lookup(iKey) == 1)
-        return 1;
-    return 0;
-}
 
 struct FUN_00a23820_tmp
 {
@@ -5709,26 +4168,6 @@ class FUN_00a23820_cls
     FUN_00a23820_callee* m_pCallee;
     int FUN_00a23820(int* out);
 };
-
-// Calls m_pCallee->Unk_0A with size 0x14 and, on success with flag set, writes tmp.unk00 to out and returns 2 or 1 depending on bit 0x80 of tmp.unk04.
-// @fnv 0x00a23820
-int FUN_00a23820_cls::FUN_00a23820(int* piOut)
-{
-    int pad;
-    if ((m_pCallee != 0) != false)
-    {
-        int flag = 1;
-        int r;
-        FUN_00a23820_tmp tmp;
-        if (m_pCallee->Unk_0A(0x14, &tmp, &flag, 0) == 0 && flag != 0)
-        {
-            r = ((tmp.unk04 & 0x80) != 0 ? -1 : 0) + 2;
-            *piOut = tmp.unk00;
-            return r;
-        }
-    }
-    return 0;
-}
 
 typedef unsigned short WORD245;
 typedef unsigned long DWORD245;
@@ -5946,39 +4385,6 @@ class InputManager245
     int m_iNumJoysticks;
 };
 
-// Dispatches a key/button state query to the keyboard, mouse, other, or joystick handlers based on the device id, returning 0 for unknown devices.
-// @fnv 0x00a24560
-int InputManager245::FUN_00a24560(int iControlSlot, unsigned char ucKeyCode, int iState)
-{
-    switch (iControlSlot)
-    {
-    case 0xff:
-        return 0;
-    case 0:
-        return GetKeyboardState(ucKeyCode, iState);
-    case 1:
-        return GetMouseState(ucKeyCode, iState);
-    case 3:
-        return GetOtherState(ucKeyCode, iState);
-    }
-
-    if (iControlSlot - 2 >= m_iNumJoysticks)
-        return 0;
-
-    if (ucKeyCode < 0x20)
-    {
-        return GetJoystickButtonState(iControlSlot - 2, ucKeyCode, iState);
-    }
-    else
-    {
-        int iPOV = GetJoystickPOV(iControlSlot - 2, ((WORD245)((((DWORD245)(ucKeyCode)) >> 16) & 0xffff)));
-        int iValue = ((WORD245)(((DWORD245)(ucKeyCode)) & 0xffff));
-        if (iPOV == iValue)
-            return 1;
-    }
-    return 0;
-}
-
 struct FUN_00ec1800_cls
 {
     unsigned int unk00;
@@ -5994,18 +4400,6 @@ struct FUN_00ec1800_cls
 };
 
 extern "C" __declspec(dllimport) unsigned long __stdcall WaitForSingleObject(unsigned long, unsigned long);
-
-// @fnv 0x00ec1800
-void __thiscall FUN_00ec1800_cls::FUN_00ec1800()
-{
-    if (hObject != 0)
-    {
-        m_bQueryPending = true;
-        WaitForSingleObject(hObject, 0xffffffffu);
-        hObject = 0;
-        m_bQueryPending = false;
-    }
-}
 
 class Menu
 {
@@ -6055,60 +4449,6 @@ extern "C" bool s_bAllowDetach;
 void __cdecl FUN_007c6120();
 void __cdecl FUN_007917a0();
 bool __cdecl IsStartMenuFlag1Set();
-
-// Enables detach, walks the root tile's children and removes tiles by menu ID, calling handlers for the book and love tester menus, then disables detach.
-// @fnv 0x00706320
-void __cdecl FUN_00706320(int)
-{
-    s_bAllowDetach = true;
-    Tile* root = FUN_004b7210()->FUN_00586150();
-    {
-        void* position = root->children.GetHeadPos();
-        while (position)
-        {
-            Tile* tile = root->children.GetNext(position);
-            if (tile && tile->GetMenu())
-            {
-                unsigned int id = tile->GetMenu()->GetID();
-                switch (id)
-                {
-                case 1002:
-                case 1003:
-                case 1004:
-                case 1007:
-                case 1023:
-                case 1035:
-                case 1061:
-                    break;
-                case 1060: {
-                    SPECIALBookMenu* pBookMenu = tile ? dynamic_cast<SPECIALBookMenu*>(tile->GetMenu()) : 0;
-                    if (pBookMenu)
-                        FUN_007c6120();
-                    delete root->children.Remove(tile);
-                    break;
-                }
-                case 1074: {
-                    LoveTesterMenu* pLoveMenu = tile ? dynamic_cast<LoveTesterMenu*>(tile->GetMenu()) : 0;
-                    if (pLoveMenu)
-                        FUN_007917a0();
-                    delete root->children.Remove(tile);
-                    break;
-                }
-                case 1013:
-                    if (IsStartMenuFlag1Set())
-                    {
-                        delete root->children.Remove(tile);
-                    }
-                    break;
-                default:
-                    delete root->children.Remove(tile);
-                    break;
-                }
-            }
-        }
-    }
-    s_bAllowDetach = false;
-}
 
 struct Manager86
 {
@@ -6540,454 +4880,6 @@ __declspec(dllimport) int __stdcall SetWindowPos(int, int, int, int, int, int, i
 __declspec(dllimport) int __stdcall GetCurrentThreadId();
 __declspec(dllimport) int __stdcall SetForegroundWindow(int);
 
-// Creates the game window and subsystems, runs the message/render loop until exit, then tears everything down and returns 0.
-// @fnv 0x0086a850
-int __stdcall FUN_0086a850(unsigned int param_1, unsigned int param_2, unsigned int param_3, unsigned int param_4)
-
-{
-    Rect86 inactiveRect3;
-    unsigned int inactiveStyle3;
-    Rect86 activeRect5;
-    unsigned int activeStyle1;
-    int deviceStatus13;
-    char launchPath0[260];
-    int shellResult10;
-    unsigned short* option6;
-    int argumentIndex33;
-    int argumentCount8;
-    unsigned short** arguments5;
-    unsigned char enableMemory0;
-    Point86 position25;
-    SystemInfo86 systemInfo7;
-    unsigned int startupState3;
-    WindowClass86 windowClass10;
-    Message86 message0;
-    Context86 memoryContext11;
-    Text86 shutdownText46;
-    int gameWindow3;
-    char path2[260];
-    unsigned int window1;
-    unsigned int mutex17;
-    Rect86 windowRect0;
-    unsigned char paused1;
-    unsigned int startupFlags3;
-    int existingWindow30;
-
-    mutex17 = CreateMutexA(0, 0, &str_01082ab8);
-    if (GetLastError() == 0xb7)
-    {
-        MessageBoxA(0, &str_01082a7c, &str_0104df38, 0);
-        return 0;
-    }
-    if (GetSystemMetrics(0x1000))
-    {
-        MessageBoxA(0, &str_01082a48, &str_0104df38, 0);
-        return 0;
-    }
-    {
-        {
-            enableMemory0 = 0;
-            enableMemory0 = 1;
-            FUN_00c3bd30(enableMemory0, *g_011dec88.FUN_00408d60(), *g_011dee20.FUN_00408d60(),
-                         *g_011ded74.FUN_00408d60(), FUN_0086a580);
-            FUN_00c3bb90(&UNK_01082a38);
-            FUN_00c3bbe0(&UNK_01082a28);
-            FUN_00c3bc30(&UNK_01082a10);
-            FUN_00c3bc80(&UNK_01082a00);
-            GetSystemInfo(&systemInfo7);
-            *g_011c3ea4.Int() = systemInfo7.processors;
-            FUN_00876ad0(path2);
-            if (*g_011c3ea4.Int() == 1)
-            {
-                *g_011c3ea4.Int() = 2;
-            }
-            existingWindow30 = FindWindowA(_DAT_011a2fe8, 0);
-            if (existingWindow30 != 0)
-            {
-                SetForegroundWindow(existingWindow30);
-                return 0;
-            }
-            {
-                int result5;
-                Receiver86* globalsToDelete3;
-                Receiver86* globalsDeleteTarget3;
-                Receiver86* interfaceToDelete85;
-                Receiver86* interfaceDeleteTarget24;
-                Receiver86* tesToDelete37;
-                Receiver86* tesDeleteTarget23;
-                Receiver86* interfaceAllocation2;
-                Receiver86* newInterface17;
-                Receiver86* globalsAllocation7;
-                Receiver86* newGlobals20;
-                Receiver86* fileAllocation4;
-                Receiver86* fileSystem2;
-                int shellExitResult20;
-                FUN_004b4a30(_DAT_011a2fe8);
-                FUN_00af2640()->FUN_004fb090(&UNK_00869f30);
-                FUN_00af2640()->FUN_008526c0()->FUN_006ecd40(FUN_0086a020);
-                FUN_00aa20b0(0);
-                FUN_00c5d4e0();
-                FUN_004b7920();
-                FUN_00a1c6f0();
-                FUN_00bc2940();
-                FUN_0045b020();
-                FUN_00404f30(0x3b);
-                FUN_0086bde0(FUN_0086a050);
-                FUN_0086bcd0(&UNK_00b4dfb0);
-                FUN_0086bcc0(1);
-                FUN_00c3a6d0();
-                FUN_0086bd70();
-                memoryContext11.FUN_00404eb0(0x10, 1, &UNK_010829c4, 0x8e0);
-                FUN_00453720();
-                memoryContext11.FUN_00404f70();
-                memoryContext11.FUN_00404f00(0xf, 1, &UNK_010829c4, 0x8e6);
-                FUN_00a61ad0();
-                memoryContext11.FUN_00404f70();
-                FUN_006ff610();
-                argumentCount8 = 0;
-                arguments5 = (unsigned short**)CommandLineToArgvW(GetCommandLineW(), &argumentCount8);
-                if (arguments5 != 0)
-                {
-                    for (argumentIndex33 = 0; argumentIndex33 < argumentCount8; argumentIndex33 = argumentIndex33 + 1)
-                    {
-                        if ((arguments5[argumentIndex33] != 0) && (*arguments5[argumentIndex33] == 0x2d))
-                        {
-                            option6 = arguments5[argumentIndex33] + 1;
-                            if (FUN_00ecc071(option6, &UNK_010829b4) == 0)
-                            {
-                                FUN_006ff580()->FUN_006ff880(0);
-                            }
-                        }
-                    }
-                    LocalFree(arguments5);
-                }
-                FUN_00877950()->FUN_005e0200(&UNK_01082990);
-                FUN_0044f560()->FUN_005e0200(path2);
-                FUN_00406d30(path2, 0x104, FUN_004dc110());
-                FUN_00406d50(path2, 0x104, _DAT_011a2ff0);
-                FUN_004de490()->FUN_005e0200(path2);
-                FUN_00406d30(path2, 0x104, FUN_004dc110());
-                FUN_00406d50(path2, 0x104, _DAT_011a2ff8);
-                FUN_0045d180()->FUN_005e0200(path2);
-                FUN_004de490()->FUN_005e0200(path2);
-                if (*g_011c3ea4.Int() == 1)
-                {
-                    *g_011c3ea4.Int() = 2;
-                }
-                if (FUN_004da570())
-                {
-                    FUN_004da4d0(1);
-                    FUN_00b00a00()->Stop();
-                    FUN_00876a70(launchPath0, 0x104);
-                    FUN_00406d50(launchPath0, 0x104, &UNK_01082978);
-                    shellResult10 = ShellExecuteA(0, 0, launchPath0, 0, 0, 1);
-                    if (shellResult10 != 0)
-                    {
-                        shellExitResult20 = 0;
-                        memoryContext11.FUN_00404ee0();
-                        return shellExitResult20;
-                    }
-                }
-                FUN_00aff100()->FUN_00b012f0(g_011dee78.FUN_00403df0(), g_011ded2c.FUN_00403df0());
-                fileAllocation4 = (Receiver86*)operator new(16);
-                fileSystem2 = fileAllocation4
-                                  ? fileAllocation4->FUN_00afdc60(g_011dece4.FUN_00403df0(), *g_011dee6c.Int(), 0)
-                                  : 0;
-                FUN_0086bce0(&UNK_0105bb14);
-                FUN_00c3bd30(enableMemory0, *g_011dec88.FUN_00408d60(), *g_011dee20.FUN_00408d60(),
-                             *g_011ded74.FUN_00408d60(), FUN_0086a580);
-                FUN_00c3bb90(&UNK_01082a38);
-                FUN_00c3bbe0(&UNK_01082a28);
-                FUN_00c3bc30(&UNK_01082a10);
-                FUN_00c3bc80(&UNK_01082a00);
-                memoryContext11.FUN_00404f00(0x18, 1, &UNK_010829c4, 0x992);
-                FUN_0040fbe0();
-                FUN_00aff100()->FUN_0086bda0();
-                memoryContext11.FUN_00404f70();
-                memoryContext11.FUN_00404f00(0x13, 1, &UNK_010829c4, 0x99c);
-                FUN_00876d20();
-                memoryContext11.FUN_00404f70();
-                windowClass10.style = 3;
-                windowClass10.procedure = &UNK_0086a0a0;
-                windowClass10.classExtra = 0;
-                windowClass10.windowExtra = 0;
-                windowClass10.instance = param_1;
-                windowClass10.icon = LoadIconA(param_1, 0x65);
-                windowClass10.cursor = 0;
-                windowClass10.background = GetStockObject(4);
-                windowClass10.className = _DAT_011a2fe8;
-                windowClass10.menu = 0;
-                RegisterClassA(&windowClass10);
-                windowRect0.left = 0;
-                windowRect0.top = 0;
-                windowRect0.right = 0x140;
-                windowRect0.bottom = 0xf0;
-                AdjustWindowRect(&windowRect0, 0x10000000, 0);
-                window1 = CreateWindowExA(0, _DAT_011a2fe8, _DAT_011a2fe8, 0x10000000, 0, 0,
-                                          windowRect0.right - windowRect0.left, windowRect0.bottom - windowRect0.top, 0,
-                                          0, param_1, 0);
-                globalsAllocation7 = (Receiver86*)operator new(0xa4);
-                newGlobals20 = globalsAllocation7 ? globalsAllocation7->FUN_0086c160(window1, param_1) : 0;
-                _DAT_011dea0c = (unsigned char*)newGlobals20;
-                memoryContext11.FUN_00404f00(0xd, 1, &UNK_010829c4, 0x9f8);
-                interfaceAllocation2 = (Receiver86*)operator new(8);
-                newInterface17 = interfaceAllocation2 ? interfaceAllocation2->FUN_007005d0() : 0;
-                _DAT_011d8804 = (unsigned int)newInterface17;
-                memoryContext11.FUN_00404f70();
-                FUN_0040fbe0(&UNK_0108295c);
-                ((Receiver86*)_DAT_011dea0c)->FUN_0086d500();
-                DAT_011f4509 = 1;
-                FUN_0043c4b0()->FUN_004a0370();
-                FUN_0043c4b0()->FUN_0086bbd0(&SUB_005d4a40, 0);
-                FUN_0043c4b0()->FUN_0086bae0(&UNK_00872570, 0);
-                FUN_0086bf70();
-                ((Receiver86*)_DAT_011dea0c)->FUN_0086d590();
-                FUN_00702250(1);
-                FUN_006519f0();
-                ((Receiver86*)_DAT_011dea0c)->FUN_00871c90(1);
-                FUN_006a2920();
-                FUN_0086c010();
-                FUN_0043c4b0()->FUN_004a03c0();
-                FUN_00866ff0();
-                DAT_0126fac4->FUN_00ec16d0(g_011de72c.FUN_00403df0(), 0, -1, 1, 1, 0.0f);
-                memoryContext11.FUN_00404f70();
-                ((Receiver86*)_DAT_011dea0c)->FUN_0086cf20((Receiver86*)FUN_0045c670());
-                FUN_0086be90(((Receiver86*)FUN_0045c670())->FUN_006629f0());
-                FUN_0086be80(((Receiver86*)FUN_0045c670())->FUN_006629f0());
-                if (*g_011c3ea4.Int() > 1)
-                {
-                    FUN_00713d80()->FUN_008c7290();
-                }
-                FUN_006d0870();
-                GetPathManager()->FUN_006eb8c0();
-                if (*g_011d73e4.FUN_00408d60())
-                {
-                    GetNavMeshObstacleManager()->FUN_006c07d0();
-                }
-                FUN_004e0540();
-                FUN_004deb30();
-                startupState3 = 0;
-                startupFlags3 = 0;
-                position25.FUN_00416870(_DAT_01018bfc, _DAT_01018bfc, _DAT_0101e704);
-                ((Receiver86*)_DAT_011dea10)->FUN_00458200(*g_dataHandler->FUN_00460140()->FUN_006815c0());
-                ((Receiver86*)_DAT_011dea3c)->ClearIdleAnims();
-                g_TESSaveLoadGame->FUN_008a8150(1);
-                FUN_0040fbe0(&UNK_0108293c);
-                ((Receiver86*)&DAT_011e0e80)->FUN_00970d50();
-                g_dataHandler->FUN_004614e0();
-                g_BGSSaveLoadGame->FUN_007d6bd0(1);
-                FUN_0040fbe0(&UNK_01082924);
-                FUN_00876dd0(startupFlags3, &position25);
-                FUN_0040fbe0(&UNK_01082910);
-                FUN_00877260(position25);
-                FUN_007022c0();
-                ((Receiver86*)_DAT_011dea3c)->FUN_00483710();
-                ((Receiver86*)_DAT_011dea0c)->FUN_004f15a0(1);
-                FUN_00af4540();
-                if (!((Receiver86*)_DAT_011dea3c)->FUN_008d6f30())
-                {
-                    g_dataHandler->FUN_004650a0(-1);
-                    FUN_0040fbe0();
-                    FUN_007053f0();
-                    DAT_0126fac4->FUN_00ec1800();
-                    FUN_0040fbe0();
-                }
-                else
-                {
-                    DAT_0126fac4->FUN_00ec1800();
-                }
-                ((Receiver86*)_DAT_01202d98)->FUN_00456520();
-                FUN_0040fbe0(&UNK_010828fc);
-                FUN_00403d30(&message0, 0, 0x1c);
-                gameWindow3 = ((Receiver86*)_DAT_011dea0c)->FUN_0044ddc0();
-                paused1 = '\0';
-                while (true)
-                {
-                    while (PeekMessageA(&message0, 0, 0, 0, 1))
-                    {
-                        TranslateMessage(&message0);
-                        DispatchMessageA(&message0);
-                    }
-                    if ((int)GetForegroundWindow() == gameWindow3 || ((Receiver86*)_DAT_011dea10)->FUN_00451530() ||
-                        g_011deb30.FUN_00559450() || *g_011deed8.FUN_00408d60())
-                    {
-                        deviceStatus13 = FUN_0043c4b0()->FUN_004dc020()->TestCooperativeLevel();
-                        if (deviceStatus13 < 0)
-                        {
-                            FUN_0043c4b0()->FUN_0086ba10();
-                            FUN_0043c4b0()->FUN_0086ba90();
-                            Sleep(0x32);
-                        }
-                        else
-                        {
-                            ((Receiver86*)_DAT_011dea0c)->FUN_0086e650();
-                        }
-                        if (paused1 != '\0')
-                        {
-                            paused1 = '\0';
-                            FUN_00453a70()->FUN_00ad8740();
-                            FUN_00830660();
-                            FUN_00832ad0(0);
-                            FUN_00453a70()->FUN_00ad7740(1);
-                            if (FUN_00446e10())
-                            {
-                                activeRect5.left = 0;
-                                activeRect5.top = 0;
-                                activeRect5.right = FUN_004dc1f0();
-                                activeRect5.bottom = FUN_004dc200();
-                                activeStyle1 = 0;
-                                activeStyle1 = GetWindowLongA(window1, 0xfffffff0);
-                                AdjustWindowRectEx(&activeRect5, activeStyle1, 0, 0);
-                                SetWindowPos(window1, 0, activeRect5.left, activeRect5.bottom,
-                                             activeRect5.right - activeRect5.left, activeRect5.top - activeRect5.bottom,
-                                             0);
-                            }
-                        }
-                        if (((paused1 == '\0') && (*_DAT_011dea0c != '\0')) && (deviceStatus13 >= 0))
-                        {
-                            FUN_0078d020();
-                            *_DAT_011dea0c = '\0';
-                        }
-                    }
-                    else
-                    {
-                        if (paused1 == '\0')
-                        {
-                            paused1 = '\x01';
-                            if (!(unsigned char)FUN_0086bdf0())
-                            {
-                                if (GetCurrentThreadId() == ((Receiver86*)_DAT_011dea0c)->FUN_0044edb0())
-                                {
-                                    FUN_0078cfc0();
-                                    *_DAT_011dea0c = '\x01';
-                                }
-                            }
-                            FUN_00453a70()->FUN_00ad8700();
-                            FUN_00830640();
-                            FUN_00832ad0(0);
-                            FUN_00453a70()->FUN_00ad7740(1);
-                            ((Receiver86*)_DAT_011dea0c)->FUN_004e2190()->FUN_00b63620();
-                            FUN_0049fef0()->FUN_004a4340();
-                            FUN_00705910()->FUN_008026b0();
-                            if (FUN_00446e10())
-                            {
-                                inactiveRect3.left = 0;
-                                inactiveRect3.top = 0;
-                                inactiveRect3.right = FUN_004dc1f0();
-                                inactiveRect3.bottom = FUN_004dc200();
-                                inactiveStyle3 = 0;
-                                inactiveStyle3 = GetWindowLongA(window1, 0xfffffff0);
-                                AdjustWindowRectEx(&inactiveRect3, inactiveStyle3, 0, 0);
-                                SetWindowPos(window1, 0, inactiveRect3.left, inactiveRect3.bottom,
-                                             inactiveRect3.right - inactiveRect3.left,
-                                             inactiveRect3.top - inactiveRect3.bottom, 0);
-                            }
-                        }
-                        Sleep(0x32);
-                    }
-                    if (((Receiver86*)_DAT_011dea0c)->FUN_005dc960())
-                        break;
-                    if (((Receiver86*)_DAT_011dea0c)->FUN_00678ce0())
-                    {
-                        ((Receiver86*)_DAT_011dea0c)->FUN_008774a0(1);
-                    }
-                }
-                ((Receiver86*)_DAT_011dea0c)->FUN_004f15a0(0);
-                FUN_006ff620();
-                FUN_00703610();
-                FUN_00706320(0);
-                if (g_011ded3c.FUN_00559450())
-                {
-                    FUN_004a0ea0()->FUN_00b6da10(g_011ded3c.FUN_00559450());
-                    g_011ded3c.FUN_0066b0d0(0);
-                }
-                if (g_011dec64.FUN_00559450())
-                {
-                    FUN_004a0ea0()->FUN_00b6da10(g_011dec64.FUN_00559450());
-                    g_011dec64.FUN_0066b0d0(0);
-                }
-                if (g_011deb38.FUN_00559450())
-                {
-                    FUN_004a0ea0()->FUN_00b6da10(g_011deb38.FUN_00559450());
-                    g_011deb38.FUN_0066b0d0(0);
-                }
-                FUN_0086bea0(0);
-                if (FUN_00683a60())
-                {
-                    FUN_00a819e0();
-                }
-                g_modelLoader->FUN_00448420();
-                if (*g_011c3ea4.Int() > 1)
-                {
-                    FUN_00713d80()->FUN_008c73a0();
-                }
-                FUN_00867090();
-                FUN_004dc560();
-                FUN_004dc590();
-                FUN_00702330();
-                if (((Receiver86*)_DAT_011dea10)->FUN_008d8520())
-                {
-                    ((Receiver86*)_DAT_011dea10)->FUN_008d8520()->FUN_0086be30();
-                }
-                FUN_004e0800();
-                FUN_004def20();
-                FUN_007ffe00();
-                FUN_00832010();
-                FUN_008304a0();
-                FUN_0082f9c0();
-                ((Manager86*)FUN_00453a70())->Stop();
-                FUN_0040fbe0();
-                FUN_0049ff80();
-                FUN_00622bc0();
-                FUN_00626f10();
-                if (*g_011d73e4.FUN_00408d60())
-                {
-                    GetNavMeshObstacleManager()->FUN_006c0900();
-                }
-                tesToDelete37 = (Receiver86*)_DAT_011dea10;
-                tesDeleteTarget23 = tesToDelete37;
-                tesDeleteTarget23 ? tesDeleteTarget23->FUN_0086bee0(1) : 0;
-                FUN_0086beb0(0);
-                GetPathManager()->FUN_006eb980();
-                FUN_00651ab0();
-                FUN_00990ff0();
-                ((Manager86*)FUN_00b00a00())->Stop();
-                FUN_00664940();
-                FUN_00526eb0();
-                FUN_00408de0();
-                FUN_0086bdd0();
-                interfaceToDelete85 = (Receiver86*)_DAT_011d8804;
-                interfaceDeleteTarget24 = interfaceToDelete85;
-                interfaceDeleteTarget24 ? interfaceDeleteTarget24->FUN_0086bf10(1) : 0;
-                globalsToDelete3 = (Receiver86*)_DAT_011dea0c;
-                globalsDeleteTarget3 = globalsToDelete3;
-                globalsDeleteTarget3 ? globalsDeleteTarget3->FUN_0086bf40(1) : 0;
-                _DAT_011dea0c = (unsigned char*)0x0;
-                ((Manager86*)FUN_00aff100())->Stop();
-                FUN_004de490()->FUN_005e01b0(FUN_004de490()->FUN_00717e50());
-                FUN_0043c4b0()->FUN_0086bb20(&UNK_00872570);
-                FUN_0043c4b0()->FUN_0086bc10(&SUB_005d4a40);
-                FUN_006a29a0();
-                FUN_00a62090();
-                FUN_00bc2960();
-                FUN_004da4d0(1);
-                FUN_0086bd00();
-                FUN_0045b050();
-                FUN_00c5d520();
-                FUN_004b8cf0();
-                FUN_00a1c790();
-                FUN_00aa2170();
-                shutdownText46.FUN_008783c0(&UNK_010828ec);
-                FUN_00401020()->FUN_00aa47c0(&shutdownText46, 0);
-                result5 = 0;
-                shutdownText46.FUN_008784d0();
-                memoryContext11.FUN_00404ee0();
-                return result5;
-            }
-        }
-    }
-}
-
 extern void* DAT_01082acc;
 
 struct FUN_0086ba10_virtual
@@ -7228,44 +5120,7 @@ struct FUN_0086ba10_target
     bool FUN_0086ba10();
 };
 
-// Calls FUN_0086ba60 with DAT_01082acc and 0, then unk5f; on success sets unk200 to 2 and returns true.
-// @fnv 0x0086ba10
-bool FUN_0086ba10_target::FUN_0086ba10()
-{
-    if (!reinterpret_cast<FUN_0086ba60_Class*>(this)->FUN_0086ba60(&DAT_01082acc, 0))
-        return false;
-
-    if (!reinterpret_cast<FUN_0086ba10_virtual*>(this)->unk5f())
-        return false;
-
-    reinterpret_cast<FUN_0086ba10_fields*>(this)->unk200 = 2;
-    return true;
-}
-
 extern FUN_0086bd40_class* DAT_011f81dc;
-
-// If the global object pointer DAT_011f81dc is non-null, calls its FUN_0086bd40 method with 1.
-// @fnv 0x0086bd00
-void __cdecl FUN_0086bd00(void)
-{
-    if (DAT_011f81dc)
-    {
-        FUN_0086bd40_class* pObject = DAT_011f81dc;
-        FUN_0086bd40_class* pThis = pObject;
-
-        {
-            void* pResult;
-            if (pThis)
-            {
-                pResult = pThis->FUN_0086bd40(1);
-            }
-            else
-            {
-                pResult = 0;
-            }
-        }
-    }
-}
 
 struct MemScope
 {
@@ -8529,92 +6384,6 @@ struct BootInit
     bool LoadPlugins(int*, int);
     void FUN_0086cf20(ScenePart*);
 };
-// Initializes the game world, plugins, player, terrain, and scripts in sequence, logging each stage.
-// @fnv 0x0086cf20
-void BootInit::FUN_0086cf20(ScenePart* scene)
-{
-    MemScope memory5(10, true, "D:\\_Fallout3\\Platforms\\Common\\Code\\Fallout\\Misc\\Main.cpp", 0xe4f);
-    memory5.Enter(10, true, "D:\\_Fallout3\\Platforms\\Common\\Code\\Fallout\\Misc\\Main.cpp", 0xe51);
-    DAT_011dea20 = SkyInit::GetInstance();
-    FUN_00877730();
-    int mode = FUN_0086d470();
-    ScenePart* root_2 = FUN_007a1480();
-    if (root_2)
-    {
-        DAT_011dea20->Attach(root_2)->Link();
-        ScenePart* child4 = root_2->Child(0);
-        root_2 = child4 ? child4->AsNode() : 0;
-    }
-    LogInit("Initializing TES...");
-    worldInstance = new WorldInit("DATA\\", mode, root_2, DAT_011dea20, DAT_011dea1c);
-    memory5.Leave();
-    worldInstance->Start();
-    LogInit("Initializing TreeManager...");
-    CreateTrees(false);
-    LogInit("Activating Tasklet Threads...");
-    GetTasks().Activate();
-    FUN_00526e10();
-    FUN_00990f20();
-    memory5.Enter(25, true, "D:\\_Fallout3\\Platforms\\Common\\Code\\Fallout\\Misc\\Main.cpp", 0xe85);
-    scene->Reset();
-    UpdateInfo update9(0.0f, false, false);
-    scene->Update(update9);
-    memory5.Leave();
-    bool found3 = false;
-    InitSetting* plugins3[10] = {&g_011debf0, &g_011deb88, &g_011decf8, &g_011dee9c, &g_011dec34,
-                                 &g_011dee0c, &g_011ded14, &g_011dee48, &g_011dea70, &g_011ded48};
-    for (int index2 = 0; index2 < 10; ++index2)
-    {
-        if (plugins3[index2]->String() && strlen(plugins3[index2]->String()))
-        {
-            FileInit* aFile = handlerInstance->Find(PrepareScriptMessage(plugins3[index2]->String(), false));
-            if (aFile)
-            {
-                aFile->Enable(true);
-                found3 = true;
-            }
-        }
-    }
-    if (LoadPlugins(FUN_0086d480(), DAT_011a2ffc))
-        found3 = true;
-    if (!found3)
-    {
-        FileInit* _fallback = handlerInstance->Find("Fallout.esm");
-        if (_fallback)
-            _fallback->Enable(true);
-    }
-    memory5.Enter(52, true, "D:\\_Fallout3\\Platforms\\Common\\Code\\Fallout\\Misc\\Main.cpp", 0xecb);
-    playerInstance = new PlayerInit;
-    playerInstance->SetID(20, true);
-    memory5.Leave();
-    LogInit("Loading Files...");
-    handlerInstance->Load(false);
-    FUN_005f5880();
-    worldInstance->LoadTerrain();
-    worldInstance->LoadLandscape();
-    if (*g_011c7adc.Bool())
-        worldInstance->Extra();
-    worldInstance->Finish();
-    FUN_0068b3e0();
-    LogInit("Initializing Player...");
-    memory5.Enter(52, true, "D:\\_Fallout3\\Platforms\\Common\\Code\\Fallout\\Misc\\Main.cpp", 0xf00);
-    {
-        TESNPC* base2 = dynamic_cast<TESNPC*>(LookupForm(7));
-        playerInstance->SetBase(base2);
-        playerInstance->SetAngles(PointInit(2048.0f, 2048.0f, 0.0f));
-        playerInstance->Position(zeroPoint);
-        playerInstance->Refresh();
-        playerInstance->Enable(false);
-        int healthB = playerInstance->values.Get(16);
-        if (!healthB)
-            LogInit("ERROR: Health value is 0 on the Player. Fix '%s' with the editor.",
-                    reinterpret_cast<FileInit*>(base2->GetFile(0))->Filename());
-    }
-    LogInit("Initializing Scripts...");
-    handlerInstance->Scripts();
-    if (g_011dee60.Value() > 0 && g_011dee60.Value() < 200)
-        timeInstance.Set(*g_011dee60.Int());
-}
 
 extern "C" __declspec(dllimport) short __stdcall GetAsyncKeyState(int);
 namespace FrameUpdate {
@@ -8944,191 +6713,6 @@ struct MainLoop
     void FUN_0086fd90(bool);
     void FUN_0086e650();
 };
-// @fnv 0x0086e650
-void MainLoop::FUN_0086e650()
-{
-    FUN_0086a830(DAT_011a3010);
-    short key4;
-    key4 = GetAsyncKeyState(9);
-    if ((key4 >> 15) & 1)
-    {
-        key4 = GetAsyncKeyState(18);
-        if ((key4 >> 15) & 1)
-            return;
-    }
-    FUN_00af2640()->Update();
-    DAT_011dea2b = FUN_00702360() || FUN_00709bc0();
-    DAT_011dea2c = FUN_007050d0();
-    DAT_011dea2d = DAT_011d8804->FUN_00701450(true);
-    DAT_011dea2e = FUN_00703d50();
-    bool differentMenu = FUN_00707ad0() && FUN_00707ad0() != FUN_00705990();
-    if (FUN_004b7210()->FUN_00424940() == 3 && !differentMenu)
-        FUN_008782b0();
-    FUN_0086f940();
-    FUN_006ff580()->FUN_006ff860();
-    FUN_0086fd90(!DAT_011dea2b && !paused);
-    DAT_011dea2b = FUN_00702360() || FUN_00709bc0();
-    DAT_011dea2c = FUN_007050d0();
-    DAT_011dea2d = DAT_011d8804->FUN_00701450(true);
-    DAT_011dea2e = FUN_00703d50();
-    if (DAT_011deefc)
-        FUN_006da7c0(DAT_011dea3c->FUN_008d6f30(), DAT_011dea3c->Position(), 2, 100);
-    DAT_011de134->FUN_00851d90();
-    FUN_0086ef30();
-    FUN_0086ef90();
-    FUN_0086f190();
-    FUN_00483710();
-    FUN_004e1610();
-    ++DAT_011a2fe0;
-    DAT_011df674 = 0;
-    if (!DAT_011dea2b)
-        FUN_0086ef40();
-    FUN_0086f260();
-    FUN_0086f390();
-    DAT_01202d98->FUN_00c3dbf0();
-    if (!FUN_0086efa0())
-    {
-        if (FUN_0070edf0())
-            FUN_0078cfc0();
-        else if (FUN_00705ea0())
-            DAT_011dea10->FUN_00457d70(0, 0, 0);
-    }
-    FUN_0086efe0();
-    FUN_004a0ea0()->FUN_00b6dd00(FUN_00524c90(), DAT_011dea2b);
-    FUN_0086f450();
-    DAT_011d8804->FUN_007011d0(true);
-    if (!DAT_011dea2b && !paused)
-    {
-        FUN_004e0110();
-        FUN_004de600();
-    }
-    if (FUN_00683a60())
-        FUN_00a81a20();
-    if (!DAT_011dea2b && !paused)
-    {
-        if (DAT_011dea10->FUN_00451530() && !DAT_011dea10->FUN_0086ef70())
-            DAT_011dea10->FUN_004556d0(0);
-        DAT_011deb7c.FUN_00559450()->Advance(DAT_011f6394.FUN_0084d030());
-        DAT_011de7b8.FUN_00867a40(DAT_011f6394.FUN_0084d030());
-        if (*DAT_011c3ea4.FUN_0043d4d0() == 1)
-            DAT_011dea10->FUN_00455640();
-    }
-    DAT_011f11a0.FUN_0040fbf0(0);
-    DAT_011e0e80.FUN_00978550();
-    if (*DAT_011c3ea4.FUN_0043d4d0() != 1)
-    {
-        if ((!DAT_011dea2b || DAT_011dea2d) && !DAT_011dea2e && !paused)
-        {
-            DAT_011e0e80.FUN_009777a0();
-            DAT_011e0e80.FUN_0096eb40();
-            DAT_011e0e80.FUN_0096e9b0();
-        }
-    }
-    else
-    {
-        if ((!DAT_011dea2b || DAT_011dea2d) && !DAT_011dea2e && !paused)
-        {
-            DAT_011e0e80.FUN_009777a0();
-            DAT_011e0e80.FUN_008d0600(0.0f, 0);
-            DAT_011e0e80.FUN_0096eb40();
-            DAT_011e0e80.FUN_0096e9b0();
-        }
-    }
-    DAT_011f11a0.FUN_0040fba0();
-    FUN_00446ef0()->FUN_00878080(true);
-    if (FUN_0086ef60())
-        FUN_00a61cd0();
-    FUN_00868850();
-    FUN_00868d10();
-    FUN_006652e0(FUN_00524c90(), DAT_011dea2b || paused);
-    FUN_0086fbe0();
-    if (*DAT_011c3ea4.FUN_0043d4d0() == 1)
-        FUN_0086fd70();
-    FUN_00483710();
-    FUN_0049fef0()->FUN_0049fff0();
-    FUN_00524c90()->FUN_00712e60(&DAT_011ad840);
-    if (DAT_011f2250.FUN_0044ddc0() != 4)
-        FUN_0045c670()->FUN_00c52020(DAT_011dea3c->FUN_00710ab0(), 0, 0, true);
-    FUN_00b54000(DAT_011dea3c->FUN_00710ab0());
-    void* sceneB = DAT_011deb7c.FUN_00559450()->FUN_006629f0();
-    void* replacement5 = 0;
-    DAT_011dea10->FUN_0045bc80(true, true);
-    FUN_00450b80(0)->FUN_00b5ac90(replacement5 ? replacement5 : sceneB);
-    DAT_011dea10->FUN_0045b070(replacement5 ? replacement5 : sceneB);
-    bool update = (!DAT_011dea2b || DAT_011dea2d) && !DAT_011dea2e && !paused;
-    if (update)
-    {
-        if (*DAT_011c3ea4.FUN_0043d4d0() > 1)
-        {
-            FUN_008c80e0(true);
-            FUN_00713d80()->FUN_008c78c0();
-        }
-        else
-            DAT_011e0fe0.FUN_008ca070();
-    }
-    FUN_0086fc60();
-    if (*DAT_011c3ea4.FUN_0043d4d0() > 1 && !update)
-    {
-        FUN_0086fd70();
-        if (FUN_00702360())
-            FUN_007058e0();
-    }
-    if (!paused)
-        GetPathManager()->FUN_006ebc50();
-    FUN_00552ba0()->FUN_006a61b0();
-    if (*DAT_011c3ea4.FUN_0043d4d0() == 1)
-    {
-        if (*DAT_011d73e4.FUN_00408d60())
-            GetNavMeshObstacleManager()->FUN_006c3640();
-        DAT_011f1958->FUN_00991500(DAT_011dea2b || DAT_011dea2d || paused);
-    }
-    if (FUN_00714a00())
-        FUN_00a81a80();
-    if (FUN_007023c0() == 0x3f4 && FUN_007056f0())
-        FUN_00871dc0();
-    FUN_0057ab70();
-    FUN_00b60040();
-    int mode4 = FUN_0047e040((float)DAT_011dea3c->values.Get(23));
-    if (mode4 > 2)
-    {
-        if (mode4 == 3)
-            mode4 = 0;
-        else
-            mode4 = 2;
-    }
-    FUN_0086ff70();
-    FUN_008705d0();
-    if (DAT_011c6fbb)
-    {
-        RecreateRenderDevice();
-        DAT_011c6fbb = false;
-    }
-    if ((!DAT_011dea2b || DAT_011dea2d) && !DAT_011dea2e && !paused)
-    {
-        if (*DAT_011c3ea4.FUN_0043d4d0() > 1)
-            FUN_00713d80()->FUN_008c7990();
-        else
-            DAT_011e0fe0.FUN_008ca300();
-    }
-    FUN_0086f6a0();
-    FUN_00870610();
-    if (FUN_0070ed10())
-    {
-        FUN_0070ed20(0);
-        FUN_00703e10();
-    }
-    FUN_00a29680();
-    FUN_005ae270();
-    FUN_005a9d60();
-    DAT_011deef8 += DAT_011f6394.FUN_0084d030();
-    if (FUN_00702360() || (DAT_011dea3c && DAT_011dea3c->FUN_00950090()) || DAT_011deef8 >= 45.0)
-    {
-        DAT_011deef8 = 0.0f;
-        FUN_00aa7290(DAT_011deef5++);
-        if (DAT_011deef5 == 256)
-            DAT_011deef5 = 0;
-    }
-}
 }
 
 namespace fnv_008707c0 {
@@ -9229,56 +6813,6 @@ struct RenderMgr
     void FUN_008707c0(int p1, bool p2);
 };
 
-// Runs the render update: resets helpers, computes a result via FUN_00872f50, sets up a node when FUN_00705a00 is true, and dispatches the remaining render steps.
-// @fnv 0x008707c0
-void RenderMgr::FUN_008707c0(int p1, bool p2)
-{
-    ISMgr* ism2 = FUN_004e3270();
-    Rend* renderer = FUN_0043c4b0();
-    bool flag_ = FUN_004dc310();
-    RootNode* root2 = FUN_00707ad0() ? FUN_00707ad0()->FUN_007fa950() : 0;
-    FUN_00872ad0();
-    for (int i4 = 1; i4 < 0x11; i4++)
-    {
-        FUN_004ea970()->FUN_00ba30f0(0, i4);
-        FUN_004ea970()->FUN_00ba3130(1, i4);
-    }
-    FUN_00871290();
-    int res4 = FUN_00872f50(renderer, p1, p2, flag_);
-    FUN_00874b90(ism2, renderer, flag_, p1);
-    if (*g_011c3ea4.Int() > 1)
-        FUN_008c80e0(0);
-    FUN_004ea970()->FUN_00ba30f0(0, 0x15);
-    FUN_004ea970()->FUN_00ba3130(1, 0x15);
-    if (FUN_00705a00())
-    {
-        AnimData* anim3 = FUN_00524c90();
-        FGen* fg7 = (FGen*)FUN_0045c670();
-        FNode* pNode = fg7->FUN_008d80e0();
-        pNode->FUN_004a0fd0(name);
-        pNode->FUN_0041fd00(anim3);
-        FUN_00450b80(0)->FUN_00b5e870(pNode);
-        FUN_00874c10();
-        FUN_00875110(renderer, root2, 0, res4);
-    }
-    else
-    {
-        FUN_004ea970()->FUN_00ba30f0(0, 0x16);
-        FUN_004ea970()->FUN_00ba3130(1, 0x16);
-    }
-    FUN_00875bf0();
-    if (FUN_008709f0() && !p2)
-    {
-        FUN_00875fd0(flag_, res4, renderer, p1);
-        if (root2)
-            FUN_008761e0(root2, renderer);
-    }
-    else if (p1)
-    {
-        FUN_00876830(flag_, p1);
-    }
-    FUN_00876850(res4, ism2, renderer, 0);
-}
 }  // namespace fnv_008707c0
 
 struct RendererStub870;
@@ -9332,48 +6866,6 @@ struct SceneRendererStub870
 
     void FUN_00870a00(TexStub870* target, bool skip);
 };
-
-// @fnv 0x00870a00
-void SceneRendererStub870::FUN_00870a00(TexStub870* target, bool skip)
-{
-    RendererStub870* renderer2 = GetRenderer870();
-    ISManagerStub870* ism = GetISManager870();
-    TexStub870* tex2 = 0;
-    bool nodeFlag4 = ((PlayerStub870*)g_thePlayer)->GetNode(true)->FUN_00456610();
-    bool flagVal = IsFlag870();
-    SetupState870(1, 1);
-    Prepare1();
-    tex2 = GetTexture();
-    Prepare2();
-    bool checkXA = CheckX();
-    Prepare3();
-    RTexStub870* rt4 = RenderMain(renderer2, target, 0, flagVal);
-    bool draw2 = !nodeFlag4 && !skip && !GetMenu870()->GetMenuRoot() && !MenuCheck870();
-    ShaderPassEntry(tex2, draw2, true, checkXA);
-    if (draw2)
-    {
-        Finish1();
-        FUN_00874b50(rt4, flagVal, 0);
-        Composite(renderer2, 0, tex2, rt4);
-    }
-    else
-    {
-        GetRenderSys870()->EnableA(0, 0x16);
-        GetRenderSys870()->EnableB(1, 0x16);
-    }
-    if (target)
-        CopyTarget(flagVal, target);
-    SetState870(1);
-    if (FUN_008709f0())
-    {
-        RenderAlt(flagVal, rt4, renderer2, target);
-    }
-    else if (target)
-    {
-        CopyTarget(flagVal, target);
-    }
-    RenderImageSpace(rt4, ism, renderer2, 0);
-}
 
 struct ShadowActor;
 struct ShadowNode;
@@ -9650,149 +7142,6 @@ struct ShadowHost
     void FUN_00871290();
     void FUN_00871a50();
 };
-// Toggles shadow rendering based on two flags, builds the shadow map from actors, renders visible shadow maps up to a limit, and resets unused shadow targets.
-// @fnv 0x00871290
-void ShadowHost::FUN_00871290()
-{
-    if (FUN_005bf7b0() && FUN_00525420())
-    {
-        DAT_011def08 = FUN_005bf7b0();
-        FUN_005bf770(false);
-        ShadowSystem* system = FUN_00450b80(0);
-        system->FUN_00b5b1f0();
-        FUN_004a0ea0(FUN_0043c4b0(0))->ResizeActivePool();
-    }
-    else if (DAT_011def08 && !FUN_00525420())
-    {
-        DAT_011def08 = false;
-        FUN_005bf770(true);
-        int limit = DAT_011dea10->FUN_005f36f0() ? *DAT_011c72d8.FUN_0043d4d0() : *DAT_011c72e4.FUN_0043d4d0();
-        FUN_004a0ea0(FUN_0043c4b0(limit))->ResizeActivePool();
-    }
-    if (FUN_005bf7b0() && FUN_00871a10())
-    {
-        FUN_00b4f570();
-        ShadowSystem* system = FUN_00450b80(0);
-        system->FUN_00b5b060();
-        int limit = DAT_011dea10->FUN_005f36f0() ? *DAT_011c72d8.FUN_0043d4d0() : *DAT_011c72e4.FUN_0043d4d0();
-        FUN_004a0ea0(FUN_0043c4b0(limit))->ResizeActivePool();
-        if (!limit)
-            system->FUN_00b5c3c0();
-        else
-        {
-            void* playerShadow32 = 0;
-            int count33 = 0;
-            if ((DAT_011dea3c->FUN_004eaf60() || DAT_011dea3c->FUN_00950090()) && !DAT_011dea3c->FUN_008c51c0())
-            {
-                playerShadow32 = system->FUN_00b5cbd0(DAT_011dea3c->FUN_00950bb0(0));
-                ++count33;
-            }
-            DAT_011f1180.FUN_0040fbf0(0);
-            ShadowActor** actors8 = ((ShadowActors*)&DAT_011e0e80)->FUN_00871a30();
-            int actorCount72 = ((ShadowActors*)&DAT_011e0e80)->FUN_00472380();
-            for (int i = 0; i < actorCount72 && count33 < limit; ++i)
-            {
-                ShadowActor* actor = actors8[i];
-                if (actor->Get3D() && actor->Get3D()->FUN_009611e0() && actor->FUN_0087f200() &&
-                    actor->GetState() != 4 && !actor->FUN_008c51c0())
-                {
-                    ShadowExtra* extra6 = actor->Get3D()->FUN_00a5bdd0(FUN_0050ea90());
-                    ShadowVector dimensions4 = extra6 ? extra6->FUN_00500940() : DAT_011f426c;
-                    float maximum37 = FUN_00404010(FUN_00404010(dimensions4.x, dimensions4.y), dimensions4.z);
-                    if (maximum37 * DAT_01021928 > actor->Get3D()->FUN_0043d450()->FUN_0084d030())
-                    {
-                        system->FUN_00b5cbd0(actor->Get3D());
-                        ++count33;
-                    }
-                }
-            }
-            DAT_011f1180.FUN_0040fba0();
-            system->FUN_00b5cde0(playerShadow32);
-            ShadowNode* playerNode50 = DAT_011dea3c->FUN_00950bb0(1);
-            if (playerNode50)
-            {
-                ShadowScene* scene9 = (ShadowScene*)FUN_0045c670();
-                ShadowView* view8 = scene9->FUN_008d80e0();
-                view8->FUN_0041fd00(scene9->FUN_006629f0());
-                view8->FUN_00a694a0(scene9->FUN_006629f0()->FUN_0045bbe0());
-                bool playerHidden14 = playerNode50->FUN_00456610();
-                playerNode50->FUN_00450f90(true);
-                ShadowNode* specialNode3 = FUN_0054f4c0();
-                FUN_004e20b0(false);
-                bool specialHidden29 = false;
-                if (specialNode3)
-                {
-                    specialHidden29 = specialNode3->FUN_00456610();
-                    if (!*DAT_011c71dc.FUN_00408d60())
-                        specialNode3->FUN_00450f90(true);
-                }
-                ShadowMap* shadow4 = system->FUN_00b5afc0();
-                int rendered62 = 0;
-                while (shadow4)
-                {
-                    if (shadow4->FUN_004e6540() && shadow4->FUN_005bf820())
-                    {
-                        if (!shadow4->FUN_004e6580() && shadow4->FUN_004e6540()->FUN_00456610())
-                        {
-                            if (shadow4->FUN_005bf820()->FUN_00456610())
-                                shadow4->FUN_00b9bb10(0.0f, true);
-                            else
-                            {
-                                if (rendered62 < limit)
-                                    shadow4->FUN_004e6540()->FUN_00450f90(false);
-                                shadow4->FUN_00b9bb10(0.0f, false);
-                            }
-                        }
-                        if (rendered62 < limit && !shadow4->FUN_004e6540()->FUN_00456610() &&
-                            !shadow4->FUN_005bf820()->FUN_00456610())
-                        {
-                            ShadowBound bounds = *shadow4->FUN_005bf820()->FUN_0043d450();
-                            shadow4->UpdateOutputLight(0, shadow4->FUN_005bf820()->FUN_0045bb80());
-                            shadow4->FUN_00b9e970(view8);
-                            if (shadow4->FUN_004e6560() != 255 && shadow4->GetFirstLightParameter() >= DAT_01082cb0)
-                            {
-                                ++rendered62;
-                                ShadowUpdate update53(0.0f, false, false);
-                                shadow4->FUN_004e6540()->FUN_00a59c60(&update53);
-                                shadow4->UpdateShadow(view8, rendered62 - 1);
-                                shadow4->FUN_00b9fba0();
-                                void* renderer12 = FUN_00450b80(0)->FUN_00454b30();
-                                FUN_00450b80(0)->FUN_00b5d300(shadow4);
-                                if (*DAT_011c7664.FUN_00408d60())
-                                    shadow4->FUN_00ba0110(shadow4->FUN_005bf820());
-                                shadow4->FUN_00ba02b0();
-                            }
-                            else
-                                shadow4->FUN_004e6540()->FUN_00450f90(true);
-                        }
-                        else
-                            shadow4->FUN_004e6540()->FUN_00450f90(true);
-                    }
-                    shadow4 = system->FUN_00b5b010();
-                }
-                while (rendered62 + 17 < 21)
-                {
-                    FUN_004ea970(0, rendered62 + 17)->FUN_00ba30f0();
-                    ++rendered62;
-                }
-                if (specialNode3)
-                    specialNode3->FUN_00450f90(specialHidden29);
-                FUN_004e20b0(true);
-                system->FUN_00b5b880(view8);
-                playerNode50->FUN_00450f90(playerHidden14);
-            }
-        }
-    }
-    else
-    {
-        for (int i = 17; i < 21; ++i)
-        {
-            FUN_004ea970(0, i)->FUN_00ba30f0();
-            FUN_004ea970(1, i)->FUN_00ba3130();
-        }
-    }
-    FUN_00871a50();
-}
 
 namespace fnv_00871a50 {
 extern bool __cdecl FUN_00702360();
@@ -9843,41 +7192,6 @@ struct HudRenderPass
 {
     void FUN_00871a50();
 };
-// When the HUD conditions hold, ensures the render holder has a node, draws it via the UI renderer, and temporarily hides menu 1001's node while drawing.
-// @fnv 0x00871a50
-void HudRenderPass::FUN_00871a50()
-{
-    if (FUN_00702360() && (*DAT_011db2cc.FUN_00408d60() || *DAT_011d8ba0.FUN_00408d60()) && FUN_007079b0())
-    {
-        AutoMemHelper kContext(13, true, DAT_010829c4, 0x1ade);
-        bool wasActive = FUN_00705a00();
-        if (FUN_00702360())
-            FUN_007058e0();
-        if (!DAT_011dec64.FUN_00559450())
-            DAT_011dec64.FUN_0066b0d0(FUN_004a0ea0(FUN_0043c4b0(), 45, 0, 0, 0)->FUN_00b6e110());
-        if (!wasActive)
-            FUN_00705990()->FUN_007fae70(0);
-        bool show = FUN_00707b30() || FUN_00a09030(1001) || FUN_00a09030(1016) || FUN_00a09030(1059);
-        if (FUN_007079b0() && show)
-        {
-            bool hide = wasActive && FUN_00702680(1001, 0);
-            bool previous5 = 0;
-            RenderNode* node_2 = 0;
-            if (hide)
-            {
-                node_2 = FUN_00a09030(1001)->FUN_0056c7f0();
-                previous5 = node_2->FUN_00456610();
-                node_2->FUN_00450f90(true);
-            }
-
-            FUN_00707ad0()->Draw(DAT_011dec64.FUN_00559450(), true, 0);
-            if (hide)
-                node_2->FUN_00450f90(previous5);
-        }
-    }
-    else if (FUN_00702360())
-        FUN_007058e0();
-}
 }  // namespace fnv_00871a50
 
 namespace fnv_00871dc0 {
@@ -10149,69 +7463,6 @@ struct FUN_00871dc0_class
     void FUN_008706b0(MenuTarget*, int, bool);
     void FUN_00871dc0();
 };
-// @fnv 0x00871dc0
-void FUN_00871dc0_class::FUN_00871dc0()
-{
-    AutoMemHelper modifier(13, true, "D:\\_Fallout3\\Platforms\\Common\\Code\\Fallout\\Misc\\Main.cpp", 7193);
-    if (!g_thePlayer->GetParentCell() || !g_thePlayer->GetNiNode())
-        return;
-    bool menu = DAT_011ad884;
-    DAT_011ad884 = true;
-    unk9c = true;
-    FUN_0043c4b0()->FUN_004a0370();
-    FUN_00a044f0();
-    FUN_004ea970()->FUN_00ba2f30();
-    if (g_011ded3c.Get())
-        FUN_004a0ea0()->FUN_00b6da10(g_011ded3c.Get());
-    g_011ded3c = FUN_004a0ea0()->FUN_00b6e110(FUN_0043c4b0(), 6, 0, 0, 0);
-    if (FUN_0043c4b0()->Target()->Width(0) != g_011ded3c.Get()->FUN_00872370(0) ||
-        FUN_0043c4b0()->Target()->Height(0) != g_011ded3c.Get()->FUN_008723d0(0))
-    {
-        float x =
-            FUN_0040ebd0((float)FUN_0043c4b0()->Target()->Width(0) / (float)g_011ded3c.Get()->FUN_00872370(0), 1.0f);
-        float y =
-            FUN_0040ebd0((float)FUN_0043c4b0()->Target()->Height(0) / (float)g_011ded3c.Get()->FUN_008723d0(0), 1.0f);
-        FUN_00524c90()->FUN_00712e60(Rect(0, x, y, 0));
-    }
-    else if (DAT_011f9426)
-        FUN_00524c90()->FUN_00712e60(DAT_011ad840);
-    Modifier* mem = FUN_004b7210()->FUN_00718ab0();
-    FUN_00529c90(FUN_005d2860());
-    if (mem)
-    {
-        FUN_005299a0(mem, 1.0f, 0);
-        FUN_0086fd90(0);
-    }
-    bool old = FUN_00705a00();
-    if (FUN_00702680(0x3f5, 0))
-        old = false;
-    FUN_008706b0(g_011ded3c.Get(), 0, old);
-    if (FUN_00702680(0x40c, 0) && IsStartMenuFlag1Set())
-    {
-        BSCullingProcess cull(0);
-        void* camera = FUN_00707ad0()->FUN_008b6200();
-        cull.FUN_0041fd00(camera);
-        cull.FUN_004a0fd0(unk98.Get());
-        ((SceneObject*)unk98.Get())->FUN_004a1020(FUN_00450b80(1));
-        FUN_00b6bee0(camera, FUN_00707ad0()->GetMenuRoot(), &cull);
-        FUN_00b6c0d0(camera, unk98.Get(), 0);
-        cull.FUN_004a0fd0(0);
-    }
-    if (mem)
-    {
-        FUN_00529c90(mem);
-        FUN_0086fd90(0);
-    }
-    FUN_004ea970()->FUN_00ba30f0(0, 0x17);
-    FUN_004ea970()->FUN_00ba3130(1, 0x17);
-    FUN_004ea970()->FUN_00ba2fa0();
-    DAT_011dea29 = true;
-    FUN_00524c90()->FUN_00712e60(Rect(0, 1, 1, 0));
-    FUN_00a04500();
-    FUN_0043c4b0()->FUN_004a03c0();
-    unk9c = false;
-    DAT_011ad884 = menu;
-}
 }  // namespace fnv_00871dc0
 
 struct FUN_00872780_Class
@@ -10222,12 +7473,6 @@ struct FUN_00872780_Class
     FUN_008727b0_Class* callback;
     char FUN_00872780();
 };
-// Returns the result of calling callback->FUN_008727b0() if callback is set, otherwise returns 0.
-// @fnv 0x00872780
-char FUN_00872780_Class::FUN_00872780()
-{
-    return callback ? callback->FUN_008727b0() : static_cast<char>(0);
-}
 
 extern double DAT_01082d20;
 extern const char str_010829c4[];
@@ -10335,52 +7580,6 @@ struct Host
 {
     BSRenderedTexture* FUN_00872f50(P1* a1, BSRenderedTexture* a2, unsigned char a3, unsigned char a4);
 };
-
-// @fnv 0x00872f50
-BSRenderedTexture* Host::FUN_00872f50(P1* apSource, BSRenderedTexture* apFallbackTexture, unsigned char abSkipCreate,
-                                      unsigned char abUseSourceGroup)
-{
-    BSRenderedTexture* tex = 0;
-    if (FUN_008709f0() && !abSkipCreate)
-    {
-        AutoMemHelper helper(0x27, true, str_010829c4, 0x1e6d);
-        tex = FUN_004a0ea0(apSource, 4, 0, 0, 0)->FUN_00b6e110();
-        ((TexObj*)tex)->FUN_008731d0();
-        DAT_011f9438 = tex;
-        if (apSource->FUN_004dee10() != ((TexObj*)tex)->FUN_00872370(0) ||
-            apSource->FUN_004dee70() != ((TexObj*)tex)->FUN_008723d0(0))
-        {
-            float fa;
-            fa = (float)FUN_008731a0(
-                (double)apSource->FUN_004dee10() * DAT_01082d20 / (double)((TexObj*)tex)->FUN_00872370(0), 1.0f);
-            float fb;
-            fb = (float)FUN_008731a0(
-                (double)apSource->FUN_004dee70() * DAT_01082d20 / (double)((TexObj*)tex)->FUN_008723d0(0), 1.0f);
-            FUN_00524c90()->FUN_00712e60((_Rect16_00712e60&)ImageSpaceEffectParam(0.0f, fa, fb, 0.0f));
-        }
-        FUN_00b6b8d0(7, tex->GetGroup());
-    }
-    else
-    {
-        AutoMemHelper helper(0x26, true, str_010829c4, 0x1e84);
-        if (apFallbackTexture)
-        {
-            if (abUseSourceGroup)
-            {
-                FUN_00b6b8d0(7, apSource->GetRenderGroup());
-            }
-            else
-            {
-                FUN_00b6b8d0(7, apFallbackTexture->GetGroup());
-            }
-        }
-        else
-        {
-            FUN_00b6b890(7, 0);
-        }
-    }
-    return tex;
-}
 
 namespace fnv_00874c10 {
 struct BSFaceGenNiNode;
@@ -10627,81 +7826,6 @@ struct MainShell
     void FUN_00874c10();
 };
 
-// Updates the player's face gen node and render objects, toggling DAT_011de9d1 and submitting spObjA0/spObj8C to the rendering system.
-// @fnv 0x00874c10
-void MainShell::FUN_00874c10()
-{
-    AutoMemHelper memHelper5(0x34, 1, str_010829c4, 0x21b1);
-    BSFaceGenNiNode* pFaceGenNode2 = FUN_0045c670();
-    BSFaceGenAnimationData* pAnimData = FUN_00524c90();
-    NiNode* _pPlayerNode = ((PlayerHelper*)g_thePlayer)->FUN_00950bb0(1);
-    _pPlayerNode->FUN_00450f90(0);
-
-    if (DAT_011f9426)
-    {
-        if (FUN_0043c4b0()->v51() == 0 || FUN_0043c4b0()->v51() == FUN_0043c4b0()->v50())
-        {
-            FUN_00524c90()->FUN_00712e60(&DAT_011ad840);
-        }
-    }
-
-    ((FaceGenHelper*)pFaceGenNode2)->FUN_00c52020(FUN_00874900((const char*)g_thePlayer), 0, 0, 0);
-
-    if (((!((PlayerHelper*)g_thePlayer)->FUN_00950bb0(0)->FUN_00456610() &&
-          !((PlayerHelper*)g_thePlayer)->FUN_00950bb0(1)->FUN_00456610() == 0) ||
-         (!((PlayerHelper*)g_thePlayer)->FUN_00950bb0(0)->FUN_00456610() == 0 &&
-          !((PlayerHelper*)g_thePlayer)->FUN_00950bb0(1)->FUN_00456610())) &&
-        !DAT_011dea0c->FUN_005bb4d0())
-    {
-        NiPoint3 pt_5c3 = _pPlayerNode->FUN_0045bb80()->FUN_004a0bd0();
-        NiUpdateData updateData7(0.0f, 0, 0);
-        DAT_011de9d1 = 1;
-
-        spObjA0->FUN_00507700(((AnimDataHelper*)pAnimData)->FUN_006447f0());
-        spObjA0->FUN_00a6faf0(((AnimDataHelper*)pAnimData)->FUN_0045bbe0());
-        spObjA0->FUN_00712e60(((AnimDataHelper*)pAnimData)->FUN_004a0d10());
-
-        TransformState kTransform = *((AnimDataHelper*)pAnimData)->FUN_00461130();
-        spObjA0->FUN_004f00e0(*DAT_011e07d0->FUN_0045bb80() + pt_5c3);
-        spObjA0->FUN_00688430(&kTransform);
-
-        if (((PlayerHelper*)g_thePlayer)->FUN_007721a0() && !((PlayerHelper*)g_thePlayer)->FUN_008a8870() &&
-            !DAT_011f2250.FUN_00525430())
-        {
-            spObjA0->FUN_004f00e0(*((PlayerHelper*)g_thePlayer)->FUN_007721a0()->FUN_0045bb80() + pt_5c3);
-        }
-
-        NiPoint3 pt_6c_ = *_pPlayerNode->FUN_0043c490();
-        _pPlayerNode->FUN_00440460(&NiPoint3::ZERO);
-        _pPlayerNode->Update(&updateData7);
-        _pPlayerNode->FUN_00440460(&pt_6c_);
-
-        BGSBodyPart* pBodyPart3 =
-            ((PlayerHelper*)g_thePlayer)->FUN_00967ae0() ? (pBodyPart3 = FUN_00705990()->FUN_006838b0()) : 0;
-        _pPlayerNode->FUN_00546780(1);
-
-        if (pBodyPart3)
-        {
-            pBodyPart3->FUN_004f00e0(*pBodyPart3->FUN_0045bb80() - pt_5c3);
-        }
-
-        FUN_00870790((_Fake_FUN_00870790*)FUN_00450b80(0), *spObjA0->FUN_0045bb80());
-        ((_Fake_FUN_008750e0*)FUN_00450b80(0))->FUN_008750e0(pt_5c3);
-    }
-    else
-    {
-        DAT_011de9d1 = 0;
-    }
-
-    if (FUN_00707ad0() && FUN_00707ad0() != FUN_00705990())
-    {
-    }
-    else
-    {
-        FUN_004ea970()->FUN_00ba3390(spObjA0, 0, _pPlayerNode, 0, 0, spObj8C, 0, 0x16, 0);
-    }
-    FUN_004ea970()->FUN_00ba30f0(0, 0x16);
-}
 }  // namespace fnv_00874c10
 
 namespace SetRenderCamera {
@@ -11101,148 +8225,6 @@ struct Main
     void FUN_00874b50(Scene*, int, int);
     void FUN_00875110(Scene*, Scene*, Scene*, Scene*);
 };
-// @fnv 0x00875110
-void Main::FUN_00875110(Scene* root, Scene* firstPerson, Scene* extra, Scene* pass)
-{
-    Scene* renderSlot52 = FUN_0045c670();
-    Context* contextSlot26 = renderSlot52->FUN_008d80e0();
-    Scene* playerSceneSlot0 = DAT_011dea3c->FUN_00950bb0(1);
-    playerSceneSlot0->FUN_00450f90(0);
-    Scene* viewSlot23 = renderSlot52->FUN_006629f0();
-    Scene* aliasSlot0 = playerSceneSlot0;
-    FUN_004ea970()->FUN_00ba3130(1, 22);
-    surface.FUN_00559450()->visible = 0;
-    Guard guardSlot1(0x34, 1, DAT_010829c4, 0x221f);
-    root->FUN_007148c0(0, 4);
-    if (DAT_011f9426 && (!FUN_0043c4b0()->Primary() || FUN_0043c4b0()->Primary() == FUN_0043c4b0()->Secondary()))
-        camera.FUN_00559450()->FUN_00712e60(DAT_011ad840);
-    else
-        camera.FUN_00559450()->FUN_00712e60(Rect(0, 1, 1, 0));
-    renderSlot52->FUN_00c52020(DAT_011dea3c->FUN_00874900(), 0, 0, 0);
-    FUN_00b54000(DAT_011dea3c->FUN_00874900());
-    camera.FUN_00559450()->FUN_00a6faf0(viewSlot23->FUN_0045bbe0());
-    if (firstPerson)
-    {
-        FUN_00707ad0()->FUN_007fae70(0);
-        firstPerson->FUN_00450f90(0);
-        if (FUN_007079b0())
-        {
-            if (FUN_00705a00() && DAT_011dea3c->FUN_008c51c0())
-                FUN_00707ad0()->FUN_007fa950()->FUN_00450f90(1);
-            Pointer tempTextureSlot13(new Output(99, 1, 759));
-            contextSlot26->FUN_00c4f270(1);
-            Scene* property = FUN_00707ad0()->FUN_007fa950()->FUN_00a59d30(FUN_0040df90());
-            if (property)
-                property->FUN_0049ed90(0);
-            FUN_00707ad0()->FUN_007fae70(0);
-            contextSlot26->FUN_004a0fd0(tempTextureSlot13.FUN_00559450());
-            if (FUN_00705a00() && DAT_011dea3c->FUN_008c51c0())
-            {
-                FUN_00b6bee0(camera.FUN_00559450(), FUN_00705990()->FUN_00875bd0(0), contextSlot26);
-                FUN_00b6bee0(camera.FUN_00559450(), FUN_00705990()->FUN_00875bd0(1), contextSlot26);
-                FUN_00b6bee0(camera.FUN_00559450(), FUN_00705990()->FUN_00875bd0(2), contextSlot26);
-            }
-            FUN_00b6bee0(camera.FUN_00559450(), FUN_00707ad0()->FUN_007fa950(), contextSlot26);
-            FUN_00b6c0d0(camera.FUN_00559450(), tempTextureSlot13.FUN_00559450(), 0);
-            contextSlot26->FUN_004a0fd0(0);
-            tempTextureSlot13.FUN_0066b0d0(0);
-            contextSlot26->FUN_00c4f2d0();
-            if (FUN_00705a00() && DAT_011dea3c->FUN_008c51c0())
-                FUN_00707ad0()->FUN_007fa950()->FUN_00450f90(0);
-        }
-    }
-    if (FUN_00707ad0() && FUN_00707ad0() != FUN_00705990())
-    {
-    }
-    else if (!FUN_00705a00() || !DAT_011dea3c->FUN_008c51c0())
-    {
-        FUN_00b98380(15, 1);
-        FUN_004ea970()->FUN_00ba3130(1, 22);
-        FUN_00b6c0d0(camera.FUN_00559450(), surface.FUN_00559450(), 0);
-        FUN_004eced0(1);
-        List* list = DAT_011e0e80.FUN_0043c490();
-        if (list && !list->FUN_004a4460())
-        {
-            Vec offset(0, 0, 0);
-            if (DAT_011dea3c->FUN_007721a0() && !DAT_011dea3c->FUN_008a8870() && !DAT_011f2250.FUN_00525430())
-                offset = DAT_011dea3c->FUN_007721a0()->FUN_0045bb80()->FUN_00439ef0(*DAT_011e07d0->FUN_0045bb80());
-            Scene* render2Slot14 = FUN_0045c670();
-            Scene* view2Slot10 = render2Slot14->FUN_006629f0();
-            Context* context2Slot0 = render2Slot14->FUN_008d80e0();
-            Pointer texture2Slot11(texture);
-            Vec savedPosSlot10 = *view2Slot10->FUN_0045bb80();
-            view2Slot10->FUN_004f00e0(savedPosSlot10.FUN_00439e90(offset));
-            context2Slot0->FUN_004a0fd0(texture2Slot11.FUN_00559450());
-            texture2Slot11.FUN_00559450()->FUN_00936aa0(1);
-            bool renderedSlot0 = false;
-            while (list)
-            {
-                Scene* object = list->FUN_006815c0()->FUN_00559450();
-                list = list->FUN_00726070();
-                if (object && object->Active())
-                {
-                    renderedSlot0 = true;
-                    object->Node()->FUN_00450f90(0);
-                    FUN_00b6bee0(view2Slot10, object->Node(), context2Slot0);
-                    object->Node()->FUN_00450f90(1);
-                }
-            }
-            if (renderedSlot0)
-                FUN_00b6c0d0(view2Slot10, texture2Slot11.FUN_00559450(), 0);
-            context2Slot0->FUN_004a0fd0(0);
-            texture2Slot11.FUN_00559450()->FUN_00936aa0(0);
-            texture2Slot11.FUN_0066b0d0(0);
-            view2Slot10->FUN_004f00e0(savedPosSlot10);
-        }
-    }
-    if (FUN_005b9b00())
-    {
-        Guard guard2Slot0(0x27, 1, DAT_010829c4, 0x22b5);
-        if (FUN_00705a00() && FUN_005b9b00() && DAT_011dea3c->FUN_008c51c0())
-        {
-            FUN_00b6b790();
-            DAT_011f9438->FUN_00a29680();
-            FUN_00b6b8d0(6, pass->FUN_00b6b260());
-            if (DAT_011f9426)
-                FUN_00524c90()->FUN_00712e60(DAT_011ad840);
-        }
-        Scene* render3Slot0 = FUN_0045c670();
-        surface.FUN_00559450()->FUN_00b64570(camera.FUN_00559450(), pass);
-        FUN_00874b50(pass, 0, 0);
-    }
-    if (DAT_011de9d1)
-    {
-        Update update(0.0f, 0, 0);
-        aliasSlot0->FUN_00a59c60(update);
-        aliasSlot0->FUN_00546780(0);
-        FUN_00450b80(0)->FUN_00870790(*viewSlot23->FUN_009611e0()->FUN_0043c490());
-        FUN_00450b80(0)->FUN_008750e0(DAT_011f426c);
-    }
-    if (DAT_011f2250.FUN_0044ddc0() != 4)
-        FUN_0045c670()->FUN_00c52020(DAT_011dea3c->FUN_00710ab0(), 0, 0, 0);
-    FUN_00b54000(DAT_011dea3c->FUN_00710ab0());
-    if (extra && !extra->FUN_0043b230()->FUN_00456610())
-    {
-        bool previousSlot0 = extra->FUN_0043b230()->FUN_00456610();
-        extra->FUN_0043b230()->FUN_00450f90(0);
-        Scene* render4Slot20 = FUN_0045c670();
-        Scene* view4Slot48 = render4Slot20->FUN_006629f0();
-        Context* context4 = render4Slot20->FUN_008d80e0();
-        Pointer texture4(texture);
-        context4->FUN_004a0fd0(texture4.FUN_00559450());
-        texture4.FUN_00559450()->FUN_00936aa0(1);
-        FUN_00b6bee0(view4Slot48, extra->FUN_0043b230(), context4);
-        FUN_00b6c0d0(view4Slot48, texture4.FUN_00559450(), 0);
-        context4->FUN_004a0fd0(0);
-        texture4.FUN_00559450()->FUN_00936aa0(0);
-        texture4.FUN_0066b0d0(0);
-        extra->FUN_0043b230()->FUN_00450f90(previousSlot0);
-    }
-    if (extra)
-        extra->FUN_006426a0(2, texture.FUN_00559450(), DAT_011deb7c.FUN_00559450()->FUN_006629f0());
-    renderSlot52->FUN_00c52020(DAT_011dea3c->FUN_00874900(), 0, 0, 0);
-    FUN_00b54000(DAT_011dea3c->FUN_00874900());
-}
 }
 
 namespace fnv_00875fd0 {
@@ -11354,39 +8336,6 @@ struct FrameRenderer
     void FUN_00875fd0(void*, void*, void*, void*);
 };
 
-// @fnv 0x00875fd0
-void FrameRenderer::FUN_00875fd0(void* unused, void* renderer, void* scene, void* target)
-{
-    AutoMemHelper m_uiMemoryContext(39, true, "D:\\_Fallout3\\Platforms\\Common\\Code\\Fallout\\Misc\\Main.cpp", 9058);
-    if (!FUN_004e9510())
-        FUN_00b6b790();
-    if (!FUN_00705a00() && !FUN_00702360() && !FUN_00705e80() && !g_BGSSaveLoadGame->FUN_0042ce10() &&
-        !g_BGSSaveLoadGame->FUN_005621d0() && !bSkipScene)
-        FUN_00702870();
-    if (DAT_011deb38.FUN_00559450())
-        FUN_00705910()->FUN_00801a60(renderer, DAT_011deb38.FUN_00559450(), 0, 0);
-    bool menuActive = FUN_007079b0() && !bSkipScene && DAT_011dea29;
-    if (menuActive)
-    {
-        DAT_012005a2 = true;
-        float renderScale = FUN_00707ad0()->GetRenderScale();
-        DAT_011add08 = renderScale;
-    }
-    DAT_011f917c = FUN_0045c670()->GetAnimationData();
-    FUN_00b55ac0(scene, renderer, target);
-    if (DAT_011deb38.FUN_00559450())
-    {
-        FUN_00705910()->FUN_008019d0();
-        FUN_004a0ea0()->FUN_00b6da10(DAT_011deb38.FUN_00559450());
-        DAT_011deb38.FUN_0066b0d0(0);
-    }
-    if (menuActive)
-    {
-        DAT_012005a2 = false;
-        DAT_011add08 = 1.0f;
-    }
-    FUN_00524c90()->FUN_00712e60(ImageSpaceEffectParam(0.0f, 1.0f, 1.0f, 0.0f));
-}
 }  // namespace fnv_00875fd0
 
 namespace fnv_008761e0 {
@@ -11579,117 +8528,6 @@ struct Shell876
     Input876* FUN_00877720();
     void FUN_008761e0(int, Input876*);
 };
-// Sets up the player camera and scene nodes, applies camera transforms and render passes, then restores the previous camera state.
-// @fnv 0x008761e0
-void Shell876::FUN_008761e0(int unused, Input876* input)
-{
-    Player876* p;
-    R876 h;
-    Camera876* a;
-    Camera876* i;
-    Camera876* s;
-    Camera876* f;
-    bool eb;
-    V876 cf;
-    Camera876* q;
-    T876 b;
-    T876 ba;
-    bool k;
-    int l;
-    float c;
-    float e;
-    V876 j;
-    p = (Player876*)FUN_0045c670();
-    s = p->FUN_008d80e0();
-    i = FUN_00707ad0()->FUN_008b6200();
-    input->FUN_007148c0(0, 4);
-    f = FUN_00707ad0()->FUN_005585e0();
-    s->FUN_004fb0b0(true);
-    cf.FUN_0043d410(0.0f, 0, 0);
-    b.FUN_00476a80();
-    eb = f->FUN_00876810();
-    a = i ? i : p->FUN_006629f0();
-
-    if (DAT_011dea3c->FUN_00967ae0())
-    {
-        ba = *f->FUN_006a9540();
-        f->FUN_00440460(&DAT_011f426c);
-        f->FUN_00a59c60(&cf);
-        f->FUN_00440460(&ba.pos);
-        b.FUN_00a86bf0();
-        if (a && a->FUN_009611e0())
-        {
-            b = *a->FUN_009611e0()->FUN_006a9540();
-            a->FUN_009611e0()->FUN_00440460((V876*)DAT_011e07d0->FUN_0045bb80());
-            a->FUN_009611e0()->FUN_00a59c60(&cf);
-        }
-
-        FUN_00450b80(0)->FUN_008750e0(*(NiPoint3*)f->FUN_0045bb80()->FUN_004a0bd0(&j));
-    }
-    if (FUN_00705a00())
-    {
-        l = 0;
-        k = FUN_00705990()->FUN_007f8720(FUN_00877720()->FUN_00a23a50(0, 1) > 0, FUN_00877720()->FUN_00a23a50(0, 2) > 0,
-                                         &e, &c, &l);
-        FUN_00709b50(k, e, c, l);
-    }
-    i = i ? i : p->FUN_006629f0();
-    if (!i)
-        i = aa0.FUN_00559450();
-    h = *i->FUN_004a0d10();
-    if (DAT_011f9426 && FUN_0043c4b0()->height() == FUN_0043c4b0()->width())
-        i->FUN_00712e60(&DAT_011ad840);
-    FUN_00b98380(0, 1);
-    s->FUN_0041fd00(i);
-    s->FUN_004a0fd0(a8c.FUN_00559450());
-    a8c.FUN_00559450()->FUN_004a1020(FUN_00450b80(0));
-    FUN_00b6bee0(i, f, s);
-    FUN_00b6c0d0(i, a8c.FUN_00559450(), 0);
-    a8c.FUN_00559450()->FUN_00b63b90(6);
-    s->FUN_004a0fd0(0);
-    FUN_004eced0(1);
-    q = FUN_00707ad0()->FUN_007fa950()->FUN_00a59d30(FUN_0040df90());
-    if (q)
-    {
-        q->FUN_0049ed90(true);
-        q->FUN_00439340(6);
-        q->FUN_00439390(0);
-        FUN_00707ad0()->FUN_007fa950()->FUN_00a5a040();
-    }
-    FUN_00707ad0()->FUN_007fae70(g_011dec64.FUN_00559450()->FUN_004bc320(0));
-    s->FUN_0041fd00(i);
-    s->FUN_004a0fd0(a98.FUN_00559450());
-    FUN_00b97e30(0, 1);
-    if (DAT_011dea3c->FUN_008c51c0() && FUN_00705a00())
-    {
-        FUN_00b6bee0(i, FUN_00705990()->FUN_00875bd0(0), s);
-        FUN_00b6bee0(i, FUN_00705990()->FUN_00875bd0(1), s);
-        FUN_00b6bee0(i, FUN_00705990()->FUN_00875bd0(2), s);
-        FUN_00b97de0(0, 1);
-    }
-    FUN_00b6bee0(i, FUN_00707ad0()->FUN_007fa950(), s);
-    FUN_00b6c0d0(i, a98.FUN_00559450(), 0);
-    FUN_00714a60(1);
-    if (DAT_011dea3c->FUN_008c51c0() && FUN_00705a00())
-        FUN_00714a40(1);
-    s->FUN_004a0fd0(0);
-    FUN_00707ad0()->FUN_007fae70(0);
-    if (q)
-        q->FUN_0049ed90(false);
-    i->FUN_00712e60(&h);
-    if (DAT_011dea3c->FUN_00967ae0())
-    {
-        f->FUN_00a59c60(&cf);
-        f->FUN_00546780(eb);
-        if (a && a->FUN_009611e0())
-        {
-            a->FUN_009611e0()->FUN_00440460(&b.pos);
-            a->FUN_009611e0()->FUN_00a59c60(&cf);
-        }
-        FUN_00450b80(0)->FUN_008750e0(*(NiPoint3*)&DAT_011f426c);
-    }
-    s->FUN_004fb0b0(false);
-}
 }  // namespace fnv_008761e0
 
 struct SLPoint3
@@ -11843,116 +8681,6 @@ extern SLSetting g_kStartingCellX;
 extern SLSetting g_kStartingCellY;
 extern SLSetting g_kStartingWorld;
 extern double g_dCellHalfSize;
-
-// Resolves the starting cell from a name or the starting-cell INI settings, positions the player there, and warns if the cell cannot be found.
-// @fnv 0x00876dd0
-void __cdecl FUN_00876dd0(const char* apCellName, SLPoint3* apPos)
-{
-    SLCell* pCell4 = 0;
-    bool bWarn = true;
-    bool bLoad7 = true;
-
-    if ((apCellName && BSStringLength(apCellName)) || strlen(g_kStartingCell.GetString()))
-    {
-        if (apCellName && BSStringLength(apCellName))
-            pCell4 = g_pSLDataHandler->GetCellByName(apCellName);
-        else
-            pCell4 = g_pSLDataHandler->GetCellByName(PrepareScriptMessage(g_kStartingCell.GetString(), false));
-        if (!pCell4)
-        {
-            int iX = 0;
-            int iY4 = 0;
-            SLWorldSpace* pWorld8 = g_pSLDataHandler->GetWorldSpaceForCell(
-                PrepareScriptMessage(g_kStartingCell.GetString(), false), &iX, &iY4);
-            if (pWorld8)
-            {
-                g_pSLTES->AssignWorldSpace(pWorld8);
-                apPos->x = (iX << 12) + g_dCellHalfSize;
-                apPos->y = (iY4 << 12) + g_dCellHalfSize;
-                apPos->z = 0.0f;
-                g_pSLTES->SetPosition(apPos);
-                pCell4 = g_pSLDataHandler->GetContainingCell(iX, iY4, pWorld8, false);
-                bLoad7 = false;
-            }
-        }
-    }
-    else if (strlen(g_kStartingCellX.GetString()) && strlen(g_kStartingCellY.GetString()))
-    {
-        int m_iGridPositionX = SLStrToLong(PrepareScriptMessage(g_kStartingCellX.GetString(), false));
-        int iCellY8 = SLStrToLong(PrepareScriptMessage(g_kStartingCellY.GetString(), false));
-        SLWorldSpace* pWorldA = *g_pSLDataHandler->GetWorldSpaces()->GetItem();
-        SLWorldSpaceList* pIter_ = g_pSLDataHandler->GetWorldSpaces();
-        while (pIter_ && !pIter_->IsEmpty())
-        {
-            SLWorldSpace* m_pContainingWorldspace = *pIter_->GetItem();
-            if (!SLStrICmp(m_pContainingWorldspace->GetEditorID(), g_kStartingWorld.GetString()))
-            {
-                pWorldA = m_pContainingWorldspace;
-                break;
-            }
-            pIter_ = pIter_->GetNext();
-        }
-        if (pWorldA)
-        {
-            pCell4 = pWorldA->GetCellAtCoords(m_iGridPositionX, iCellY8);
-            if (!pCell4)
-                pCell4 = g_pSLDataHandler->GetContainingCell(m_iGridPositionX, iCellY8, pWorldA, true);
-        }
-    }
-    else
-    {
-        bWarn = false;
-        bLoad7 = false;
-    }
-
-    if (bLoad7)
-    {
-        if (pCell4)
-        {
-            if (pCell4->IsInterior())
-            {
-                g_pSLTES->SetInteriorCell(pCell4, apPos);
-            }
-            else
-            {
-                g_pSLTES->AssignWorldSpace(pCell4->GetParentWorldSpace());
-                apPos->x = (pCell4->GetPosX() << 12) + g_dCellHalfSize;
-                apPos->y = (pCell4->GetPosY() << 12) + g_dCellHalfSize;
-                apPos->z = 0.0f;
-                g_pSLTES->SetPosition(apPos);
-            }
-            bLoad7 = false;
-        }
-        else if (bWarn)
-        {
-            if (g_kStartingCell.GetString() && *g_kStartingCell.GetString())
-            {
-                FNV_Warning("CELLS: Could not find starting cell '%s'.", g_kStartingCell.GetString());
-            }
-            else if (g_kStartingCellX.GetString() && g_kStartingCellY.GetString() && *g_kStartingCellX.GetString() &&
-                     *g_kStartingCellY.GetString())
-            {
-                if (g_kStartingWorld.GetString() && *g_kStartingWorld.GetString())
-                    FNV_Warning("CELLS: Could not find starting cell (%s, %s) in worldspace '%s'.",
-                                g_kStartingCellX.GetString(), g_kStartingCellY.GetString(),
-                                g_kStartingWorld.GetString());
-                else
-                    FNV_Warning("CELLS: Could not find starting cell (%s, %s) in default Tamriel worldspace",
-                                g_kStartingCellX.GetString(), g_kStartingCellY.GetString());
-            }
-            else
-            {
-                FNV_Warning("CELLS: Could not find starting cell for INI data.");
-            }
-        }
-        g_pSLDataHandler->FUN_004650a0(-1);
-        if (bLoad7)
-        {
-            g_pSLTES->LoadArea(apPos, true);
-            g_pSLTES->GetSky()->FUN_004ba7d0();
-        }
-    }
-}
 
 namespace fnv_008774a0 {
 struct FUN_009611e0_ctrl
@@ -12215,47 +8943,6 @@ struct FUN_008774a0_shell
 
 extern FUN_008774a0_shell* DAT_011dea0c;
 
-// @fnv 0x008774a0
-void FUN_008774a0_shell::FUN_008774a0(bool abFlag)
-{
-    bool bState = FUN_004f1540();
-    FUN_004f15a0(0);
-    DAT_011dea3c->FUN_00877700();
-    bool bSaveFlag = DAT_011ddf38->FUN_007d6bd0(false);
-    FUN_00453a70()->FUN_00ad8780(-1);
-    FUN_008324e0(0);
-    if (DAT_011dea3c->FUN_008d6f30())
-        DAT_011dea3c->FUN_008d6f30()->FUN_0054ca90(DAT_011dea3c);
-
-    FUN_008774a0_node* pNode = DAT_011dea3c->FUN_00950bb0(true);
-    FUN_008774a0_node* pRoot = pNode ? pNode->v003() : 0;
-    if (pRoot && pRoot->FUN_009611e0())
-        pRoot->FUN_009611e0()->v058(pNode);
-    pNode = DAT_011dea3c->FUN_00950bb0(false);
-    pRoot = pNode ? pNode->v003() : 0;
-    if (pRoot && pRoot->FUN_009611e0())
-        pRoot->FUN_009611e0()->v058(pNode);
-
-    DAT_011dea10->FUN_004539a0(0, 0);
-    DAT_011dea10->FUN_007037c0(0x7fffffff);
-    DAT_011dea10->FUN_0061cc40(0x7fffffff);
-    GetNavMeshObstacleManager()->FUN_006c09f0();
-    FUN_00868d70(0);
-    FUN_00c459d0(0);
-    DAT_011dea3c->v115(0, 0);
-    DAT_011ddf38->FUN_0084a840();
-    ((FUN_00970d50_lists*)&DAT_011e0e80)->FUN_00970d50();
-    DAT_011c3f2c->FUN_004614e0();
-    FUN_00b4f5c0()->FUN_00b631d0();
-    FUN_0040fbe0();
-    FUN_00706320(0);
-    DAT_011dea10->FUN_0045ac80();
-    if (abFlag)
-        FUN_007053f0();
-    DAT_011ddf38->FUN_007d6bd0(bSaveFlag);
-    DAT_011dea0c->FUN_008776e0();
-    DAT_011dea0c->FUN_004f15a0(bState);
-}
 }  // namespace fnv_008774a0
 
 namespace fnv_00873200 {
@@ -12533,345 +9220,6 @@ struct MainView
     ViewHandle m_94;
     void FUN_00873200(ViewNode* listener, int unused, bool hide, bool drawInterface);
 };
-// Builds visible lists from the scene graph, renders the main view and secondary passes, and restores the saved visibility state.
-// @fnv 0x00873200
-void MainView::FUN_00873200(ViewNode* listener, int unused, bool hide, bool drawInterface)
-{
-    ViewNode* root3 = FUN_0045c670();
-    ViewNode* process = root3->FUN_008d80e0();
-    ViewNode* otherProcess;
-    ViewNode* cameraX;
-    void* renderer2;
-    DAT_011f9684 = root3->FUN_006629f0();
-    if (listener)
-        listener->FUN_00642860();
-    bool savedVisibility = DAT_011dea3c->FUN_00950bb0(true)->FUN_00456610();
-    DAT_011dea3c->FUN_00950bb0(true)->FUN_00450f90(true);
-    m_88.FUN_00559450()->m_38 = !hide;
-    ViewNode* imageEffect5 = FUN_004e3270()->FUN_004ebbc0(4);
-    m_88.FUN_00559450()->m_3a = !hide && imageEffect5->FUN_00871220();
-    m_8c.FUN_00559450()->m_3a = !hide && imageEffect5->FUN_00871220();
-    MemoryContext memory7(15, true, DAT_010829c4, 0x1eb7);
-    cameraX = 0;
-    cameraX = root3->FUN_006629f0();
-    process->FUN_0041fd00(cameraX);
-    process->FUN_00a694a0(cameraX->FUN_0045bbe0());
-    process->FUN_004a0fd0(m_88.FUN_00559450());
-    // Partition visible objects between the two culling passes.
-    if (DAT_011f94b4)
-    {
-        VisibleList leftList2;
-        VisibleList rightList4;
-        VisibleList commonList3;
-        ViewNode* graph = FUN_00450b80(0);
-        ViewNode* node2 = 0;
-        ViewNode* branch = 0;
-        node2 = graph->FUN_0045bc00(0);
-        if (node2 && !node2->FUN_00456610())
-            commonList3.FUN_004ed8c0(node2);
-        node2 = graph->FUN_0045bc00(1);
-        if (node2 && !node2->FUN_00456610())
-            commonList3.FUN_004ed8c0(node2);
-        node2 = graph->FUN_0045bc00(2);
-        if (node2 && !node2->FUN_00456610())
-            branch = node2->AsNode();
-        if (branch)
-        {
-            node2 = branch->FUN_0045bc00(0);
-            if (node2 && !node2->FUN_00456610())
-                leftList2.FUN_004ed8c0(node2);
-            node2 = branch->FUN_0045bc00(1);
-            if (node2 && !node2->FUN_00456610())
-                leftList2.FUN_004ed8c0(node2);
-            node2 = branch->FUN_0045bc00(2);
-            if (node2 && !node2->FUN_00456610())
-                leftList2.FUN_004ed8c0(node2);
-        }
-        node2 = graph->FUN_0045bc00(3);
-        branch = node2->AsNode();
-        // Exterior and interior scenes organize their child nodes differently.
-        if (!DAT_011dea10->FUN_005f36f0())
-        {
-            if (branch && !branch->FUN_00456610())
-            {
-                for (int i = 0; i < branch->FUN_0043b480(); ++i)
-                {
-                    node2 = branch->FUN_0043b4a0(i);
-                    if (node2)
-                    {
-                        ViewNode* section = node2->AsNode();
-                        if (section && !section->FUN_00456610())
-                        {
-                            for (int j = 0; j < section->FUN_0043b480(); ++j)
-                            {
-                                ViewNode* item = section->FUN_0043b4a0(j);
-                                if (item)
-                                {
-                                    ViewNode* nested = item->AsNode();
-                                    if (nested)
-                                    {
-                                        if (!nested->FUN_00456610())
-                                        {
-                                            int k = 0;
-                                            if (j == 6)
-                                                k = 1;
-                                            for (; k < nested->FUN_0043b480(); ++k)
-                                            {
-                                                ViewNode* leaf = nested->FUN_0043b4a0(k);
-                                                if (leaf && !leaf->FUN_00456610())
-                                                {
-                                                    if (i % 2)
-                                                        leftList2.FUN_004ed8c0(leaf);
-                                                    else
-                                                        rightList4.FUN_004ed8c0(leaf);
-                                                }
-                                            }
-                                        }
-                                    }
-                                    else
-                                    {
-                                        if (i % 2)
-                                            leftList2.FUN_004ed8c0(item);
-                                        else
-                                            rightList4.FUN_004ed8c0(item);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        else
-        {
-            if (FUN_00450b80(0)->FUN_00874650())
-            {
-                node2 = branch->FUN_0045bc00(0);
-                if (node2 && !node2->FUN_00456610())
-                    rightList4.FUN_004ed8c0(node2);
-                node2 = branch->FUN_0045bc00(1);
-                if (node2 && !node2->FUN_00456610())
-                    leftList2.FUN_004ed8c0(node2);
-                node2 = branch->FUN_0045bc00(2);
-                if (node2)
-                {
-                    branch = node2->AsNode();
-                    if (branch && !branch->FUN_00456610())
-                    {
-                        for (int outerIndex = 0; outerIndex < branch->FUN_0043b480(); ++outerIndex)
-                        {
-                            node2 = branch->FUN_0043b4a0(outerIndex);
-                            if (node2 && outerIndex != 4 && outerIndex != 0)
-                            {
-                                ViewNode* section2 = node2->AsNode();
-                                if (section2 && !section2->FUN_00456610())
-                                {
-                                    int childIndex = 0;
-                                    if (outerIndex == 6)
-                                        childIndex = 1;
-                                    for (; childIndex < section2->FUN_0043b480(); ++childIndex)
-                                    {
-                                        ViewNode* leaf2 = section2->FUN_0043b4a0(childIndex);
-                                        if (leaf2 && !leaf2->FUN_00456610())
-                                        {
-                                            if (childIndex % 2)
-                                                leftList2.FUN_004ed8c0(leaf2);
-                                            else
-                                                rightList4.FUN_004ed8c0(leaf2);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            else
-            {
-                node2 = branch->FUN_0045bc00(2);
-                if (node2)
-                {
-                    branch = node2->AsNode();
-                    if (branch && !branch->FUN_00456610())
-                    {
-                        node2 = branch->FUN_0045bc00(7);
-                        if (node2)
-                        {
-                            branch = node2->AsNode();
-                            if (branch)
-                            {
-                                for (int index3 = 0; index3 < branch->FUN_0043b480(); ++index3)
-                                {
-                                    ViewNode* leaf3 = branch->FUN_0043b4a0(index3);
-                                    if (leaf3 && !leaf3->FUN_00456610())
-                                    {
-                                        if (index3 % 2)
-                                            leftList2.FUN_004ed8c0(leaf3);
-                                        else
-                                            rightList4.FUN_004ed8c0(leaf3);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            ViewNode* area = FUN_00450b80(0)->FUN_00454b30();
-            ViewList* roomsTmp = area ? area->FUN_00436aa0() : 0;
-            void* roomPosition4 = roomsTmp ? roomsTmp->FUN_00559450() : 0;
-            int visibleCount = 0;
-            while (roomPosition4)
-            {
-                ViewNode* room = area->FUN_00436aa0()->FUN_0057cbe0(&roomPosition4)->FUN_00559450();
-                if (room && !room->FUN_006ab360()->FUN_0076b610())
-                {
-                    void* itemPosition = room->FUN_006ab360()->FUN_00559450();
-                    while (itemPosition)
-                    {
-                        ViewNode* object = room->FUN_006ab360()->FUN_0057cbe0(&itemPosition)->value;
-                        if (object && process->FUN_00c4f320(object->FUN_0045c4c0()))
-                        {
-                            ViewGeometry* geometry = object->FUN_0045c4c0();
-                            if (geometry)
-                            {
-                                if (object->FUN_00874480() && object->FUN_009b4440())
-                                {
-                                    FUN_00450b80(0)->FUN_00b5ba80(process->FUN_0084e3a0(), object);
-                                }
-                                if (visibleCount % 2)
-                                    leftList2.FUN_004ed8c0(geometry);
-                                else
-                                    rightList4.FUN_004ed8c0(geometry);
-                                ++visibleCount;
-                            }
-                        }
-                    }
-                }
-            }
-            if (FUN_00450b80(0)->FUN_00874650())
-            {
-                void* objectPosition = area->FUN_007d6bb0()->FUN_00559450();
-                while (objectPosition)
-                {
-                    ViewNode* object2 = area->FUN_007d6bb0()->FUN_0057cbe0(&objectPosition)->value;
-                    if (object2 && process->FUN_00c4f320(object2->FUN_0045c4c0()))
-                    {
-                        ViewGeometry* geometry2 = object2->FUN_0045c4c0();
-                        if (geometry2)
-                        {
-                            if (visibleCount % 2)
-                                leftList2.FUN_004ed8c0(geometry2);
-                            else
-                                rightList4.FUN_004ed8c0(geometry2);
-                            ++visibleCount;
-                        }
-                    }
-                }
-            }
-            ViewNode* extra6 = DAT_011dea10->FUN_00457070()->FUN_009d9f20();
-            if (extra6)
-            {
-                for (int extraIndex = 0; extraIndex < extra6->FUN_00c5b5d0(); ++extraIndex)
-                {
-                    ViewNode* extraNode = extra6->FUN_00c5b5a0(extraIndex);
-                    if (extraNode)
-                        commonList3.FUN_004ed8c0(extraNode);
-                }
-            }
-        }
-        node2 = graph->FUN_0045bc00(4);
-        if (node2 && !node2->FUN_00456610())
-            commonList3.FUN_004ed8c0(node2);
-        node2 = graph->FUN_0045bc00(5);
-        if (node2 && !node2->FUN_00456610())
-            commonList3.FUN_004ed8c0(node2);
-        node2 = graph->FUN_0045bc00(6);
-        if (node2 && !node2->FUN_00456610())
-            leftList2.FUN_004ed8c0(node2);
-        for (int tailIndex = 7; tailIndex < graph->FUN_0043b480(); ++tailIndex)
-        {
-            node2 = graph->FUN_0043b4a0(tailIndex);
-            if (node2 && !node2->FUN_00456610())
-            {
-                if (tailIndex % 2)
-                    leftList2.FUN_004ed8c0(node2);
-                else
-                    rightList4.FUN_004ed8c0(node2);
-            }
-        }
-        process->FUN_0041fd00(cameraX);
-        FUN_00450b80(0)->FUN_00b5e870(process);
-        if (FUN_00450b80(0)->FUN_00874670())
-            FUN_00450b80(0)->FUN_00874670()->FUN_00c49850();
-        m_88.FUN_00559450()->SetCamera(cameraX);
-        FUN_00b54ac0(m_88.FUN_00559450());
-        FUN_0043c4b0()->FUN_004dc540(m_88.FUN_00559450());
-        FUN_004ea970()->FUN_00ba3390(cameraX, FUN_00450b80(0)->FUN_00874670(), 0, &leftList2, 0, m_88.FUN_00559450(), 0,
-                                     21, true);
-        FUN_004ea970()->FUN_00ba30f0(0, 21);
-        DAT_012722bc = 0;
-        LocalCull localProcess(0);
-        localProcess.FUN_0041fd00(cameraX);
-        localProcess.FUN_004a0fd0(m_88.FUN_00559450());
-        localProcess.FUN_00874460(FUN_00450b80(0)->FUN_00874670());
-        FUN_00b6bfc0(cameraX, &rightList4, &localProcess);
-        localProcess.FUN_00874460(0);
-        FUN_00b6bfc0(cameraX, &commonList3, &localProcess);
-        FUN_004ea970()->FUN_00ba3130(1, 21);
-        leftList2.FUN_004ed900();
-        rightList4.FUN_004ed900();
-    }
-    else
-    {
-        FUN_00b6bee0(cameraX, root3, process);
-    }
-    // Finish the main scene and draw the requested interface layer.
-    FUN_00b6ba20(root3->FUN_006629f0(), m_88.FUN_00559450(), true);
-    if (drawInterface)
-    {
-        FUN_00b98380(0, 1);
-        FUN_00705910()->FUN_00800f30(0, 2, 1, 0, 0, 0);
-        FUN_004eced0(1);
-    }
-    FUN_00b6b930(root3->FUN_006629f0(), m_88.FUN_00559450(), true);
-    if (DAT_011f94b4)
-        FUN_00450b80(0)->FUN_00a89af0(process);
-    process->FUN_004a0fd0(0);
-    memory7.FUN_00404f70();
-    m_88.FUN_00559450()->m_38 = false;
-    m_88.FUN_00559450()->m_3a = false;
-    FUN_008746c0();
-    // Render the auxiliary scene views through the secondary culling process.
-    renderer2 = FUN_004a0e90();
-    otherProcess = FUN_0045c670()->FUN_008d80e0();
-    otherProcess->FUN_004fb0b0(true);
-    FUN_00b803b0(DAT_011deb7c.FUN_00559450()->FUN_006629f0());
-    otherProcess->FUN_0041fd00(FUN_00874690());
-    otherProcess->FUN_004a0fd0(m_94.FUN_00559450());
-    FUN_00b6bee0(FUN_00874690(), FUN_005bac50(), otherProcess);
-    FUN_00b6c0d0(FUN_00874690(), m_94.FUN_00559450(), false);
-    process->FUN_004a0fd0(0);
-    otherProcess->FUN_004fb0b0(false);
-    FUN_008746c0();
-    renderer2 = FUN_004a0e90();
-    otherProcess = FUN_0045c670()->FUN_008d80e0();
-    otherProcess->FUN_004fb0b0(true);
-    FUN_00b803b0(DAT_011deb7c.FUN_00559450()->FUN_006629f0());
-    otherProcess->FUN_0041fd00(FUN_008746b0());
-    otherProcess->FUN_004a0fd0(m_94.FUN_00559450());
-    FUN_00b6bee0(FUN_008746b0(), FUN_008746a0(), otherProcess);
-    FUN_00b6c0d0(FUN_008746b0(), m_94.FUN_00559450(), false);
-    process->FUN_004a0fd0(0);
-    otherProcess->FUN_004fb0b0(false);
-    if (*DAT_011c3ea4.FUN_0043d4d0() > 1)
-        FUN_008c80e0(0);
-    if (DAT_011f94a9)
-        FUN_008744a0(root3->FUN_006629f0());
-    if (listener)
-        listener->FUN_006426a0(true, m_88.FUN_00559450(), DAT_011deb7c.FUN_00559450()->FUN_006629f0());
-    FUN_00872dd0(false, false);
-    DAT_011dea3c->FUN_00950bb0(true)->FUN_00450f90(savedVisibility);
-}
 }  // namespace fnv_00873200
 
 namespace fnv_00877730 {
@@ -13038,32 +9386,6 @@ LightShell* FUN_00450b80(unsigned int i);
 ImageSpaceManager* FUN_004e3270();
 void FUN_00b57e30(void* p, int a, int b);
 
-// @fnv 0x00877730
-void FUN_00877730()
-{
-    AutoMemHelper helper8(0x21, true, "D:\\_Fallout3\\Platforms\\Common\\Code\\Fallout\\Misc\\Main.cpp", 0x26bd);
-    FUN_0040fbe0("Initializing Sky...");
-    DAT_011dea20->FUN_0063a630(DAT_011deb34.FUN_00559450(), DAT_011deb00.FUN_00559450());
-    ((HostV*)g_011deda4.FUN_00559450())->v37(((ModelOps*)(void*)DAT_011dea20->FUN_0045cd60())->FUN_0043b230(), 1);
-    ((LightShell*)FUN_00450b80(0))->FUN_00b5aac0((void*)DAT_011dea20->FUN_004505a0());
-    DAT_011deb34.FUN_00559450()->FUN_00a5a040();
-    ((ISM2*)FUN_004e3270())->FUN_00b8b200(((SettingT<INISettingCollection>*)&g_011deadc)->Bool()->b);
-    if (((SettingT<INISettingCollection>*)&g_011deadc)->Bool()->b)
-    {
-        NiAlphaProperty* obj = new NiAlphaProperty;
-        ((NiAlphaProperty*)obj)->FUN_0049ed90(true);
-        obj->FUN_0049ede0(2);
-        obj->FUN_0050f9a0(0xff);
-        DAT_011deb34.FUN_00559450()->AttachProperty((NiObject*)obj);
-    }
-    NiUpdateData upd1(0.0f, false, false);
-    DAT_011deb34.FUN_00559450()->Update(upd1);
-    g_011deda4.FUN_00559450()->FUN_00a5a040();
-    NiUpdateData updTmp(0.0f, false, false);
-    g_011deda4.FUN_00559450()->Update(updTmp);
-    FUN_00b57e30(DAT_011deb34.FUN_00559450(), 0, 0);
-    FUN_00b57e30(((ModelOps*)(void*)DAT_011dea20->FUN_0045cd60())->FUN_0043b230(), 0, 0);
-}
 }  // namespace fnv_00877730
 
 struct IDIDevice8
@@ -13097,15 +9419,6 @@ struct DIDeviceOwner
     IDIDevice8* m_pDirectInputDevice;
     void FUN_00a237b0();
 };
-// @fnv 0x00a237b0
-void DIDeviceOwner::FUN_00a237b0()
-{
-    if (m_pDirectInputDevice)
-    {
-        unsigned long dwItems = 0xffffffff;
-        m_pDirectInputDevice->GetDeviceData(0x14, 0, &dwItems, 0);
-    }
-}
 
 extern short DAT_011f35b0;
 extern short DAT_011f35b2;
@@ -13117,45 +9430,6 @@ struct FUN_00a23390_t
 {
     int GetAxisState(int device, int axis);
 };
-
-// Returns the state of the specified controller axis, reading from per-device state or global fallback values for axes 7-10.
-// @fnv 0x00a23390
-int FUN_00a23390_t::GetAxisState(int device, int axis)
-{
-    int* pAxisState = (int*)((char*)this + device * 0xa0 + 0x34);
-    switch (axis)
-    {
-    case 1:
-        return pAxisState[0];
-    case 2:
-        return pAxisState[1];
-    case 3:
-        return pAxisState[2];
-    case 4:
-        return pAxisState[3];
-    case 5:
-        return pAxisState[4];
-    case 6:
-        return pAxisState[5];
-    case 7:
-        if (DAT_011f35c8)
-            return DAT_011f35b0;
-        break;
-    case 8:
-        if (DAT_011f35c8)
-            return DAT_011f35b2;
-        break;
-    case 9:
-        if (DAT_011f35c8)
-            return DAT_011f35b4;
-        break;
-    case 10:
-        if (DAT_011f35c8)
-            return DAT_011f35b6;
-        break;
-    }
-    return 0;
-}
 
 namespace sa238a0 {
 
@@ -13176,29 +9450,6 @@ struct CharTable
 {
     int FUN_00a238a0(int iChar, int iMode);
 };
-
-// Bounds-checks iChar, then returns a byte from a 256-entry table selected by iMode and FUN_00a22cb0().
-// @fnv 0x00a238a0
-int CharTable::FUN_00a238a0(int iChar, int iMode)
-{
-    if (iChar < 0 || iChar > 0xff)
-        return -1;
-    if (iMode == 0xff)
-        return DAT_011a7540[iChar];
-    switch (FUN_00a22cb0())
-    {
-    case 3:
-        return iMode ? DAT_011a7b40[iChar] : DAT_011a7a40[iChar];
-    case 4:
-        return iMode ? DAT_011a7d40[iChar] : DAT_011a7c40[iChar];
-    case 2:
-        return iMode ? DAT_011a7940[iChar] : DAT_011a7840[iChar];
-    case 1:
-        return iMode ? DAT_011a7740[iChar] : DAT_011a7640[iChar];
-    default:
-        return iMode ? DAT_011a7540[iChar] : DAT_011a7440[iChar];
-    }
-}
 
 }
 
@@ -13338,49 +9589,6 @@ struct MainX
     void* UpdateCamera();
 };
 
-// Applies image-space parameters, sets FOV, updates two scene objects from camera data, and returns a sky-provided pointer when conditions match.
-// @fnv 0x00872b00
-void* MainX::UpdateCamera()
-{
-    ((ISMgr*)FUN_0045c670()->GetAnimationData())->FUN_00712e60(DAT_011ad840);
-    if (DAT_011f2250.CallGetFlags() != 4)
-    {
-        ((ISHolder*)FUN_0045c670())->FUN_00c52020(FUN_00710ab0(g_thePlayer), 0, 0, true);
-    }
-    BSShaderManager::SetFOV(FUN_00710ab0(g_thePlayer));
-    if (bFlag9C)
-    {
-        ((ISMgr*)FUN_0045c670()->GetAnimationData())->FUN_00712e60(ImageSpaceEffectParam(0.0f, 1.0f, 1.0f, 0.0f));
-    }
-    NiCamera* pCamera = ((CamNode*)g_011deb7c)->GetAnimationData();
-    NiCamera* pOverride6 = 0;
-    if (*g_011ded80.Bool())
-    {
-        static CamWatcher kWatcher;
-        kWatcher.FUN_008d6f50(pOverride6 ? pOverride6 : pCamera);
-    }
-    ((NiAVObject*)g_011deb34)->FUN_00440460(((CamNode*)g_011deb7c)->FUN_00558310()->FUN_0043c490());
-    NiUpdateData kData5(0.0f, false, false);
-    ((NiAVObject*)g_011deb34)->Update(kData5);
-    ((NiAVObject*)g_011deda4)->FUN_00440460(((CamNode*)g_011deb7c)->FUN_00558310()->FUN_0043c490());
-    NiUpdateData kData2(0.0f, false, false);
-    ((NiAVObject*)g_011deda4)->Update(kData2);
-    if (DAT_011f9fc0)
-    {
-        DAT_011f9fc0 = 0;
-        DAT_011f9fc1 = 1;
-    }
-    FUN_00872dd0(*g_011decd8.Bool(), true);
-    FUN_00872df0(*g_011deb60.Bool());
-    DAT_011f94a5 = 0;
-    void* pResult = 0;
-    if (g_TES->FUN_008d8520() && g_TES->FUN_008d8520()->FUN_0045cd60() &&
-        (g_TES->FUN_008d8520()->FUN_00476c90() == 3 || g_TES->FUN_008d8520()->FUN_00476c90() == 2))
-    {
-        pResult = g_TES->FUN_008d8520()->FUN_0045cd60();
-    }
-    return pResult;
-}
 }  // namespace fnv_00872b00
 
 namespace fnv_0086ff70 {
@@ -13696,136 +9904,6 @@ extern int __cdecl FUN_0043c4b0_unused();
 extern int __cdecl FUN_0044ddc0_unused();
 extern void __cdecl FUN_007028b0_unused();
 extern int __cdecl FUN_00559450_unused();
-// Runs player, input, audio, and state update calls, then performs frame cleanup and resource updates.
-// @fnv 0x0086ff70
-void Main86::FUN_0086ff70()
-{
-    Core86* core = reinterpret_cast<Core86*>(FUN_0043c4b0());
-    core->FUN_004a0370();
-    if (DAT_011d890a)
-    {
-        DAT_011d890a = 0;
-        bool first = reinterpret_cast<PlayerContext86*>(DAT_011dea3c->FUN_00950bb0(1))->FUN_00456610();
-        bool second = reinterpret_cast<PlayerContext86*>(DAT_011dea3c->FUN_00950bb0(0))->FUN_00456610();
-        reinterpret_cast<PlayerContext86*>(DAT_011dea3c->FUN_00950bb0(1))->FUN_00450f90(1);
-        reinterpret_cast<PlayerContext86*>(DAT_011dea3c->FUN_00950bb0(0))->FUN_00450f90(1);
-        FUN_00871dc0();
-        reinterpret_cast<PlayerContext86*>(DAT_011dea3c->FUN_00950bb0(1))->FUN_00450f90(first);
-        reinterpret_cast<PlayerContext86*>(DAT_011dea3c->FUN_00950bb0(0))->FUN_00450f90(second);
-    }
-    reinterpret_cast<Core86*>(FUN_0043c4b0())->FUN_005585e0();
-    FUN_00a29680();
-    FUN_0040fbe0();
-    FUN_004ea970()->FUN_00ba2f30();
-    if (DAT_011c6fb8)
-        ApplyGammaRamp();
-    if (DAT_011d8804->FUN_00701450(1) || DAT_011d8804->FUN_00701450(2))
-    {
-        if (!DAT_011def04)
-        {
-            DAT_011dea10->FUN_00457d70(0, 0, 0);
-            FUN_0040fbe0();
-            reinterpret_cast<Extra86*>(&DAT_011e0e80)->FUN_0096cfa0();
-        }
-        DAT_011def00 += DAT_011f6394.FUN_007013e0();
-        ++DAT_011def04;
-        if (DAT_011def00 >= DAT_01012070 && DAT_011def04 >= 10)
-        {
-            DAT_011d8804->FUN_007010e0(1, 0);
-            DAT_011d8804->FUN_007010e0(2, 0);
-            DAT_011de45c->FUN_004534f0(0);
-            if (DAT_011de45c->FUN_0047c850())
-            {
-                DAT_011de45c->FUN_004534f0(0);
-                DAT_011de45c->FUN_00483710();
-            }
-            FUN_00877430();
-        }
-    }
-    else
-    {
-        DAT_011def00 = 0.0f;
-        DAT_011def04 = 0;
-    }
-    int eventState = 0;
-    if (!DAT_011dea29 && !FUN_0070edf0() && DAT_011dea3c->vfn_1d0() && !DAT_011d8804->IsFaderActive(1))
-    {
-        if (!DAT_011dea10->FUN_005f36f0())
-        {
-            if (DAT_011dea10->FUN_004fd3e0()->FUN_00548210()[0] && DAT_011dea10->FUN_0044ddc0())
-            {
-                DAT_011dea10->FUN_0044ddc0();
-                if ((unsigned char)FUN_008705c0())
-                    DAT_011dea10->FUN_0044ddc0()->FUN_004baf10();
-            }
-        }
-        FUN_008706b0(0, 0, 0);
-    }
-    else if ((FUN_007079b0() || !FUN_00702360()) && !(unsigned char)FUN_00702680(0x3f5, 0))
-    {
-        if (DAT_011dea3c->vfn_1d0())
-            FUN_008706b0(0, FUN_007079b0(), 0);
-    }
-    else
-    {
-        for (int i = 1; i < 23; ++i)
-        {
-            FUN_004ea970(0, i)->FUN_00ba30f0();
-            FUN_004ea970(1, i)->FUN_00ba3130();
-        }
-        FUN_00871a50();
-        if ((unsigned char)FUN_00702680(0x41e, 0) || (unsigned char)FUN_00702680(0x3f6, 0) ||
-            (unsigned char)FUN_00702680(0x424, 0) || (unsigned char)FUN_00702680(0x432, 0) ||
-            (unsigned char)FUN_00702680(0x438, 0) || (unsigned char)FUN_00702680(0x439, 0) ||
-            (unsigned char)FUN_00702680(0x43a, 0) || (unsigned char)FUN_00702680(0x43b, 0))
-            FUN_00872940(0);
-        else if (DAT_011ded3c.FUN_00559450())
-            FUN_00874b90(FUN_004e3270(core, FUN_004dc310(), 0));
-    }
-    if (FUN_005d4a40() == 1)
-        FUN_00b55a10();
-    FUN_00709b40();
-    RenderOrFallback(eventState, DAT_011dec64.FUN_00559450());
-    FUN_004ea970()->FUN_00ba2fa0();
-    if (DAT_011dec64.FUN_00559450())
-    {
-        FUN_004a0ea0(DAT_011dec64.FUN_00559450())->FUN_00b6da10();
-        DAT_011dec64.FUN_0066b0d0(0);
-    }
-    if (FUN_007fdf30(0x1e, 1)->FUN_00a24660())
-    {
-        if (FUN_007fdf30(0x9d, 0)->FUN_00a24180() || DAT_011dea40)
-        {
-            DAT_011dea40 = !DAT_011dea40;
-            if (DAT_011dea40)
-            {
-                DAT_011dea44 = 0;
-                DAT_011deecc.FUN_0045ce80(*DAT_011deecc.FUN_0043d4d0() + 1);
-                char outputDirectory[0x104];
-                FUN_00406d00(outputDirectory, 0x104, DAT_01082ca4, DAT_011deb04.FUN_00403df0(),
-                             *DAT_011deecc.FUN_0043d4d0());
-                CreateDirectoryA(outputDirectory, 0);
-                DAT_011f6394.FUN_0086d4c0(*DAT_011dee00.FUN_0043d4d0());
-            }
-            else
-                DAT_011f6394.FUN_0086d4c0(0);
-        }
-        else
-            SaveScreenshot(0);
-    }
-    FUN_00c458f0();
-    if (core->FUN_004e9530())
-        FUN_00b6b730();
-    if (eventState)
-    {
-        FUN_004a0ea0(eventState)->FUN_00b6da10();
-        eventState = 0;
-    }
-    reinterpret_cast<Resource86*>(DAT_011deb7c.FUN_00559450())->FUN_00c51f20();
-    core->FUN_004a03c0();
-    if (*DAT_011c3ea4.FUN_0043d4d0() > 1)
-        FUN_008c80e0(0);
-}
 }  // namespace fnv_0086ff70
 
 namespace fnv_00870bd0 {
@@ -14018,117 +10096,6 @@ struct RenderCoordinator
     void FUN_00876850(BSRenderedTexture*, ImageView*, RenderView*, ModelView*);
     void FUN_00870bd0(int, bool);
 };
-// Renders the scene into a BSRenderedTexture, applying effects, post-processing, and camera projection based on the given argument and skip flag.
-// @fnv 0x00870bd0
-void RenderCoordinator::FUN_00870bd0(int arg, bool skip)
-{
-    RenderView* l = FUN_0043c4b0();
-    ImageView* h = (ImageView*)FUN_004e3270();
-    ModelView* s = 0;
-    bool p = DAT_011dea3c->FUN_00950bb0(true)->FUN_00456610();
-    bool q = FUN_004dc310();
-    FUN_00872ad0();
-    s = UpdateCamera();
-    FUN_008727d0();
-    bool i = FUN_008749b0();
-    FUN_00871290();
-    BSRenderedTexture* j = FUN_00872f50(l, arg, 0, q);
-    FUN_00874ac0(i);
-    FUN_00874b50(j, q, 5);
-    bool cf = !p && !skip && !FUN_00705910()->FUN_005585e0() && !FUN_00705100();
-    bool a = false;
-    if (cf && s)
-    {
-        a = s->FUN_0043b230()->FUN_00456610();
-        s->FUN_0043b230()->FUN_00450f90(true);
-    }
-    bool eb = true;
-    if (FUN_004de080())
-        eb = false;
-    bool e = FUN_00709cb0();
-    if (e)
-    {
-        unsigned j = l->FUN_004dee10();
-        unsigned c = l->FUN_004dee70();
-        float l = *DAT_011dea8c.FUN_00403e20() * FUN_00706e70() * 0.5;
-        float e = j * l;
-        float k = j - e;
-        if (eb)
-            FUN_00b4f540((unsigned)e, 0, (unsigned)k, c);
-    }
-    FUN_00873200(s, cf, 0, i);
-    if (cf && s)
-        s->FUN_0043b230()->FUN_00450f90(a);
-    EffectView* k = h->FUN_004ebbc0(4);
-    bool c = k->FUN_00871220();
-    bool j7 = (h->FUN_00b8b390(9) && !DAT_011dea10->FUN_005f36f0() && *DAT_011deadc.FUN_00408d60()) ? true : false;
-    const bool ba = false;
-    const bool f = false;
-    bool b = false;
-    if ((c || ba || f) && cf)
-    {
-        b = true;
-        FUN_008746d0(j);
-        FUN_00874b50(j, q, 0);
-    }
-    if (FUN_005b9b00() && shaders.FUN_00559450()->SumItemSubValues() > 0)
-        FUN_00874920(shaders.FUN_00559450(), j);
-    if (cf)
-    {
-        FUN_00874c10();
-        FUN_00874b50(j, q, 0);
-        if (!b)
-            FUN_004ea970(1, 22)->FUN_00ba3130();
-        FUN_00875110(l, 0, s, j);
-    }
-    else
-    {
-        FUN_004ea970(0, 22)->FUN_00ba30f0();
-        FUN_004ea970(1, 22)->FUN_00ba3130();
-    }
-    if (c || ba)
-        FUN_00875e40(shaders.FUN_00559450(), j);
-    if (f)
-        FUN_00875fa0(shaders.FUN_00559450(), j);
-    if (j7 && !DAT_011dea10->FUN_005f36f0() && DAT_011dea20 && DAT_011dea20->FUN_0045cd60())
-    {
-        NiPoint3 v = DAT_011dea20->FUN_0045cd60()->v1()->FUN_0045bb80();
-        float w, u, n;
-        w = u = n = 0.0f;
-        ProjectionView* a = (ProjectionView*)FUN_0045c670();
-        bool f = a->FUN_006629f0(v, w, u, n, 0.00001f)->ProjectPointToScreen();
-        ((ImageView*)FUN_004e3270())->FUN_00b8b1e0(NiPoint2(w, u));
-    }
-    if (FUN_008709f0())
-    {
-        FUN_00875fd0(q, j, l, arg);
-        if ((FUN_00871260() || FUN_005bac20()) && !FUN_00705a00())
-            FUN_00876a20(l);
-    }
-    else if (arg)
-        FUN_00876830(q, arg);
-    if (e)
-    {
-        if (eb)
-            FUN_00b540d0();
-        if (FUN_004de080())
-        {
-            FUN_0043c4b0()->v43(&DAT_011a9bd0);
-            FUN_00414430 param(0, 0, 0, 0);
-            param.a = 0;
-            param.b = 0.33f;
-            param.c = 1;
-            param.d = 0;
-            FUN_0043c4b0()->FUN_007148c0(&param, true);
-            param.a = 0.66f;
-            param.b = 1;
-            param.c = 1;
-            param.d = 0;
-            FUN_0043c4b0()->FUN_007148c0(&param, true);
-        }
-    }
-    FUN_00876850(j, h, l, s);
-}
 }  // namespace fnv_00870bd0
 
 namespace fnv_00872570 {
@@ -14206,72 +10173,6 @@ extern "C" long __cdecl FUN_004dc1f0();
 extern "C" long __cdecl FUN_004dc200();
 }
 
-// When active, waits for a condition and updates render, cell, and window state; otherwise, it performs audio-related calls.
-// @fnv 0x00872570
-bool __cdecl FUN_00872570(bool active)
-{
-    if (active)
-    {
-        while (!(unsigned char)MainLoopGlobals::FUN_0086bdf0())
-            FUN_0040fca0(5);
-        if (MainLoopGlobals::DAT_0126fac4->FUN_00ec17c0())
-        {
-            MainLoopGlobals::DAT_0126fac4->FUN_00ec29b0();
-            MainLoopGlobals::DAT_0126fac4->FUN_00ec1800();
-        }
-        if (MainLoopGlobals::DAT_0126fac4->FUN_00872780())
-            MainLoopGlobals::DAT_0126fac4->FUN_00ec25e0();
-        RenderManager_ML* renderer = FUN_00b4f5c0();
-        if (renderer)
-            renderer->FUN_00b631d0();
-        {
-            int count = MainLoopGlobals::DAT_011dea10->FUN_0044ddc0()->FUN_0084e3a0();
-            for (int x = 0; x < count; ++x)
-            {
-                for (int y = 0; y < count; ++y)
-                {
-                    CellUpdate_ML* cell = MainLoopGlobals::DAT_011dea10->FUN_00457050(x, y)->cell;
-                    if (cell)
-                    {
-                        void* object;
-                        CellState_ML* state;
-                        cell->FUN_005477f0(&object, &state);
-                        if (object && state && state->active)
-                            state->active = 0;
-                    }
-                }
-            }
-            MainLoopGlobals::g_osGlobals->FUN_00877430();
-            if (FUN_00446e10())
-            {
-                long style;
-                {
-                    WindowRect_ML rectWindow;
-                    rectWindow.left = 0;
-                    rectWindow.top = 0;
-                    rectWindow.right = MainLoopGlobals::FUN_004dc1f0();
-                    rectWindow.bottom = MainLoopGlobals::FUN_004dc200();
-                    style = 0;
-                    style = GetWindowLongA(MainLoopGlobals::g_osGlobals->window, -16);
-                    AdjustWindowRectEx(&rectWindow, style, 0, 0);
-                    SetWindowPos(MainLoopGlobals::g_osGlobals->window, 0, rectWindow.left, rectWindow.bottom,
-                                 rectWindow.right - rectWindow.left, rectWindow.top - rectWindow.bottom, 0);
-                }
-            }
-        }
-    }
-    else
-    {
-        if (DAT_011f941e)
-            FUN_00bad4a0();
-        if (MainLoopGlobals::DAT_011dea10->FUN_0070ec90() && FUN_005d2a40())
-        {
-            MainLoopGlobals::DAT_011dea10->FUN_0070ec90()->ReleaseWaterResources(1, 0);
-            MainLoopGlobals::DAT_011dea10->FUN_0070ec90()->FUN_004e65d0();
-        }
-    }
-    return true;
-}
 }  // namespace fnv_00872570
 
 #include <string.h>
@@ -14664,35 +10565,6 @@ struct InputOwner
     void FUN_00a236f0(unsigned int, int, int);
     void FUN_00a23750(unsigned int, float);
 };
-// Accepts instances whose low device type byte is 20 or 21, creates a device, queries capabilities and object counts, and stores it.
-// @fnv 0x00a24830
-int __stdcall FUN_00a24830(const DIDEVICEINSTANCEA* instance, void* context)
-{
-    InputOwner* manager = (InputOwner*)context;
-    if ((unsigned char)(instance->dwDevType & 255) != 20 && (unsigned char)(instance->dwDevType & 255) != 21)
-        return 1;
-    DIDEVICEINSTANCEA* deviceOut = &manager->instances[manager->count];
-    memcpy(deviceOut, instance, 0x244);
-    IDirectInputDevice8A* saved;
-    manager->input->CreateDevice(instance->guidInstance, &saved, 0);
-    IDirectInputDevice8A* device = saved;
-    device->SetCooperativeLevel(GetForegroundWindow(), 6);
-    device->SetDataFormat(DAT_01100ebc);
-    DIDEVCAPS* caps = &manager->caps[manager->count];
-    _fnv_zlib_memset(caps, 0, 0x2c);
-    manager->caps[manager->count].dwSize = 0x2c;
-    device->GetCapabilities(&manager->caps[manager->count]);
-    manager->counters[manager->count].axes = 0;
-    manager->counters[manager->count].buttons = 0;
-    device->EnumObjects(MatchObjectGuids, &manager->counters[manager->count], 0);
-    manager->devices[manager->count] = device;
-    manager->FUN_00a236f0(manager->count, -100, 100);
-    manager->FUN_00a23750(manager->count, 0.1f);
-    manager->count++;
-    if (manager->count == 8)
-        return 0;
-    return 1;
-}
 }  // namespace fnv_00a24830
 
 namespace fnv_0086f940 {
@@ -14810,71 +10682,6 @@ struct PlayerUpdateState
     void FUN_0086f940();
 };
 
-// Updates player state and may transfer the player to a destination cell when the current cell is exterior and a position check fails.
-// @fnv 0x0086f940
-void PlayerUpdateState::FUN_0086f940()
-{
-    bool bChanged;
-    if (!reinterpret_cast<PlayerCalls*>(g_thePlayer)->FUN_0093bea0())
-    {
-        if (DAT_011dea2b && !FUN_00709bc0())
-        {
-            reinterpret_cast<PlayerCalls*>(g_thePlayer)->FUN_009481d0();
-        }
-        else if (specialUpdate)
-        {
-            if (g_thePlayer->GetNiNode())
-            {
-                reinterpret_cast<PlayerCalls*>(g_thePlayer)->FUN_009466d0(g_timeGlobal.FUN_0084d030(), updateMode);
-            }
-        }
-        else
-        {
-            if (g_thePlayer->GetNiNode())
-            {
-                ++DAT_011e07a8;
-                reinterpret_cast<PlayerUpdate*>(g_thePlayer)
-                    ->Unk_BE(g_timeGlobal.FUN_0084d030() * DAT_011f2250.FUN_009c8cc0());
-                --DAT_011e07a8;
-            }
-            bChanged = false;
-            TESObjectCELL* cell = g_thePlayer->GetParentCell();
-            NiPoint3 position = *reinterpret_cast<PlayerCalls*>(g_thePlayer)->GetAddTopicList();
-            if (cell && !reinterpret_cast<CellCalls*>(cell)->IsInterior() &&
-                !reinterpret_cast<CellCalls*>(cell)->FUN_00550200(position))
-            {
-                TESObjectCELL* destination =
-                    reinterpret_cast<DataHandlerCalls*>(g_dataHandler)
-                        ->FUN_00461bc0(position.x, position.y, reinterpret_cast<CellCalls*>(cell)->FUN_0054ddd0(),
-                                       true);
-                if (destination)
-                {
-                    if (!reinterpret_cast<CellCalls*>(destination)->FUN_00450fb0() &&
-                        !reinterpret_cast<CellCalls*>(destination)->FUN_00450ff0())
-                    {
-                        reinterpret_cast<WorldUpdateCalls*>(_DAT_011dea10)->FUN_00452580(position, true);
-                        if (reinterpret_cast<WorldUpdateCalls*>(_DAT_011dea10)->FUN_00451530())
-                        {
-                            reinterpret_cast<WorldUpdateCalls*>(_DAT_011dea10)->FUN_00457d70(0, 0, 0);
-                        }
-                    }
-                    FUN_0086fba0(1);
-                    reinterpret_cast<PlayerCalls*>(g_thePlayer)->FUN_0086fbc0(1);
-                    reinterpret_cast<CellCalls*>(destination)->AddReference(g_thePlayer, false);
-                    FUN_0086fbb0(reinterpret_cast<CellCalls*>(destination)->GetAcousticSpace());
-                    reinterpret_cast<PlayerCalls*>(g_thePlayer)->FUN_0086fbc0(0);
-                    FUN_0086fba0(0);
-                    RenderManager* manager = FUN_00b4f5c0();
-                    if (manager)
-                    {
-                        manager->FUN_00b655b0();
-                    }
-                }
-                bChanged = true;
-            }
-        }
-    }
-}
 }  // namespace fnv_0086f940
 
 namespace fnv_0086d590 {
@@ -15633,132 +11440,6 @@ struct SettingView
 };
 extern SettingView DAT_011dedc8;
 extern const char str_0101fe78[];
-// Creates a SceneGraph, associates resources and input objects, configures render state, and initializes additional scene objects.
-// @fnv 0x0086d590
-void RenderSystem::FUN_0086d590()
-{
-    // Memory context, scene root, and graph construction.
-    AutoMemHelper h(25, 1, str_010829c4, 0xf4c);
-    DAT_011deb7c.FUN_0066b0d0(new SceneGraph(str_01082c9c, false, 0));
-
-    DataObject* p = (DataObject*)new FUN_00b5e0f0;
-    (FUN_0086e520)(FUN_004bc3f0());
-    FUN_0086e4e0(str_01082c8c);
-    InitRenderSystem();
-    DAT_011deb7c.FUN_00559450()->FUN_006629f0()->FUN_00712e60(&DAT_011ad840);
-    ((ResourceObject*)p)->FUN_0070b760(0);
-    FUN_00b4f2f0(0, p);
-    this->resource88.FUN_00559450()->FUN_004a1020(p);
-    this->resource8c.FUN_00559450()->FUN_004a1020(p);
-    this->resource90.FUN_00559450()->FUN_004a1020(p);
-    this->resource94.FUN_00559450()->FUN_004a1020(p);
-    this->resource98.FUN_00559450()->FUN_004a1020((void*)FUN_00450b80(1));
-    FUN_0086e500(0);
-    FUN_0086e510(0);
-    unsigned int f = (FUN_0086e540() == 1 ? 1u : 0u);
-    f |= (FUN_0086e560() == 1 ? 2u : 0u);
-    f |= (FUN_0086e5a0() == 1 ? 4u : 0u);
-    f |= (FUN_0086e580() == 1 ? 8u : 0u);
-    f |= 0x10;
-    f |= (FUN_004bc400() && FUN_004dc060(0) >= 2) ? 0x20 : 0;
-    FUN_004bc3d0(f);
-    unsigned int eb = FUN_0086e5c0() ? 8 : 0;
-    eb |= FUN_0086e5e0() ? 2 : 0;
-    DAT_011ad82c = eb;
-    FUN_0086e4d0(FUN_00564360);
-    DAT_011fd870 = 0.0f;
-    DAT_011f95d8.FUN_0066b0d0(DAT_011deb7c.FUN_00559450()->FUN_006629f0());
-    ((ModuleRoot*)DAT_011deb7c.FUN_00559450())->virtual_dc(p, 1);
-
-    DAT_011deb00.FUN_0066b0d0((InputObject*)new BSFogProperty());
-    DAT_011deb00.FUN_00559450()->FUN_0049ed90(1);
-    DAT_011deb00.FUN_00559450()->SetDepthParams(1.0f);
-    FUN_00b55540(0, DAT_011deb00.FUN_00559450());
-
-    DAT_011deb34.FUN_0066b0d0((InputObject*)new FUN_00c46970());
-    DAT_011deb34.FUN_00559450()->FUN_005468d0(1);
-    DAT_011deb34.FUN_00559450()->FUN_005467c0(1);
-    DAT_011deb34.FUN_00559450()->AssignFixedString(NiFixedString(str_01082c88));
-    p->virtual_f8(0, DAT_011deb34.FUN_00559450());
-
-    DAT_011deda4.FUN_0066b0d0((InputObject*)new FUN_00a5ecb0(0));
-    DAT_011deda4.FUN_00559450()->FUN_00546780(1);
-    DAT_011deda4.FUN_00559450()->FUN_005467c0(1);
-    DAT_011deda4.FUN_00559450()->AssignFixedString(NiFixedString(str_0101fe78));
-    p->virtual_f8(1, DAT_011deda4.FUN_00559450());
-    FUN_004dc5c0();
-    FUN_004dc650();
-
-    DAT_011dea14 = (InputObject*)new FUN_00bc2980();
-    DAT_011dea14->AssignFixedString(NiFixedString(str_01082c80));
-    p->virtual_f8(2, DAT_011dea14);
-
-    // s is the active scene parent; a is its tree child.
-    InputObject* s = (InputObject*)new FUN_00a5ecb0(0);
-    s->FUN_00546780(1);
-    s->FUN_005467c0(1);
-    s->AssignFixedString(NiFixedString(str_01082c78));
-    DAT_011dea14->virtual_dc(s, 1);
-
-    DAT_011ad808 = *DAT_011dedc8.FUN_00403e20();
-    s = (InputObject*)new FUN_00a5ecb0(0);
-    s->FUN_00546780(1);
-    s->FUN_005467c0(1);
-    s->AssignFixedString(NiFixedString(str_01082c68));
-    DAT_011dea14->virtual_dc(s, 1);
-
-    DAT_011dea1c = (int)(InputObject*)new FUN_00a5ecb0(0);
-    ((InputObject*)DAT_011dea1c)->FUN_00546780(1);
-    ((InputObject*)DAT_011dea1c)->FUN_005467c0(1);
-    ((InputObject*)DAT_011dea1c)->AssignFixedString(NiFixedString(str_01082c5c));
-    DAT_011dea14->virtual_dc((InputObject*)DAT_011dea1c, 1);
-
-    InputObject* a = (InputObject*)new FUN_00a5ecb0(0);
-    a->FUN_00546780(1);
-    a->FUN_005467c0(1);
-    a->AssignFixedString(NiFixedString(str_01082c50));
-    s->virtual_dc(a, 1);
-    FUN_0086e620((int)a);
-    (FUN_0086e630)((NiNode*)a);
-
-    DAT_011dea18 = (int)(InputObject*)new FUN_00a5ecb0(0);
-    ((InputObject*)DAT_011dea18)->FUN_00546780(1);
-    ((InputObject*)DAT_011dea18)->FUN_005467c0(1);
-    ((InputObject*)DAT_011dea18)->AssignFixedString(NiFixedString(str_01082c40));
-    p->virtual_f8(3, ((InputObject*)DAT_011dea18));
-
-    DAT_011ded58.FUN_0066b0d0((InputObject*)new FUN_00c503d0());
-    DAT_011ded58.FUN_00559450()->AssignFixedString(NiFixedString(str_01082c28));
-    p->virtual_f8(5, DAT_011ded58.FUN_00559450());
-
-    DAT_011deb7c.FUN_00559450()->FUN_00558310()->FUN_004bc1f0(0.0f, 0.0f, DAT_0101e704);
-    DAT_011deb7c.FUN_00559450()->FUN_00a5a040();
-    NiUpdateData i(0.0f, false, false);
-    DAT_011deb7c.FUN_00559450()->FUN_00a59c60(&i);
-    FUN_0043c4b0()->FUN_004dc540(FUN_00b4f5c0());
-    DAT_011dea28 = FUN_0086e600();
-
-    if (!DAT_011dec94.FUN_00559450())
-    {
-        DAT_011dec94.FUN_0066b0d0((InputObject*)new FUN_00a87810(new FUN_00a881e0(0, 0, 1, 1, 1, 4, 1, 2, 1)));
-        DAT_011dec94.FUN_00559450()->FUN_0086e3f0(4, 0, 0);
-        DAT_011dec94.FUN_00559450()->FUN_0086e420(0, 0.0f, 0.0f, 1.0f, 1.0f);
-        DAT_011dec94.FUN_00559450()->FUN_0086e4b0();
-        DAT_011dec94.FUN_00559450()->FUN_0086e460(0, 0, 0.0f, 0.0f, 1.0f, 1.0f);
-        InputObject* p = (InputObject*)new FUN_00a75650();
-        p->FUN_004bc450((void*)&DAT_011a9b7c);
-        DAT_011dec94.FUN_00559450()->FUN_00439410(p);
-        InputObject* h = (InputObject*)new FUN_00a6aa40();
-        h->FUN_005b8fc0(DAT_011ded3c.FUN_00559450()->FUN_004bc320(0));
-        h->FUN_0060aeb0(0);
-        h->FUN_004f3200(0);
-        DAT_011dec94.FUN_00559450()->FUN_00439410(h);
-        DAT_011dec94.FUN_00559450()->FUN_00a5a040();
-        NiUpdateData i(0.0f, false, false);
-        DAT_011dec94.FUN_00559450()->FUN_00a59c60(&i);
-    }
-    UpdateTerrainLODMaxRange();
-}
 }  // namespace fnv_0086d590
 
 struct S00875bf0_Cam875
@@ -15913,37 +11594,3 @@ struct S00875bf0_Shell875
     S00875bf0_Ptr875 scene;
     void FUN_00875bf0();
 };
-// Sets up the face scene and camera, invokes rendering calls with the target scene, and restores the scene state.
-// @fnv 0x00875bf0
-void S00875bf0_Shell875::FUN_00875bf0()
-{
-    if (!g_011deb38.FUN_00559450() && FUN_00707ad0() && FUN_00707ad0() != FUN_00705990())
-    {
-        S00875bf0_FaceNode875* face = (S00875bf0_FaceNode875*)FUN_0045c670();
-        S00875bf0_Scene875* scene = ((S00875bf0_Face875*)face)->FUN_008d80e0();
-        scene->FUN_00c4f270(1);
-        S00875bf0_Cam875* camera = FUN_00707ad0()->FUN_008b6200() ? FUN_00707ad0()->FUN_008b6200()
-                                                                  : (S00875bf0_Cam875*)face->GetAnimationData();
-        scene->FUN_0041fd00(camera);
-        scene->FUN_004a0fd0(this->scene.FUN_00559450());
-        ((S00875bf0_BSA_*)this->scene.FUN_00559450())->FUN_004a1020(FUN_00450b80(0));
-        if (DAT_011f9426 &&
-            (!((S00875bf0_Render875*)FUN_0043c4b0())->v51() ||
-             ((S00875bf0_Render875*)FUN_0043c4b0())->v51() == ((S00875bf0_Render875*)FUN_0043c4b0())->v50()))
-            camera->FUN_00712e60(DAT_011ad840);
-        else
-            camera->FUN_00712e60(S00875bf0_Color875(0.0f, 1.0f, 1.0f, 0.0f));
-        FUN_00b6bee0(camera, FUN_00707ad0()->v2(), scene);
-        BSShaderManagerRenderMode::SetRenderMode(15);
-        FUN_00b97e30(0, 1);
-        FUN_00b98380(8, 1);
-        FUN_00b6c0d0(camera, this->scene.FUN_00559450(), 0);
-        BSShaderManagerRenderMode::SetRenderMode(0);
-        FUN_004eced0(1);
-        FUN_00714a60(1);
-        FUN_00b6bee0(camera, FUN_00707ad0()->v2(), scene);
-        FUN_00b6c0d0(camera, this->scene.FUN_00559450(), 0);
-        scene->FUN_004a0fd0(0);
-        scene->FUN_00c4f2d0();
-    }
-}

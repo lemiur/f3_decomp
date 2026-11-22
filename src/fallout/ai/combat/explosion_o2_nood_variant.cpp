@@ -35,10 +35,6 @@ struct NavMeshPtr
 {
     NavMesh* FUN_00458b50();
 };
-NavMesh* NavMeshPtr::FUN_00458b50()
-{
-    return 0;
-}
 struct FUN_009afc30_shell
 {
     NavMeshPtr m_navMeshPtr;
@@ -3007,14 +3003,6 @@ __forceinline float LiquidMin(float v, float m)
 __forceinline float LiquidMax(float v, float m)
 {
     return v < DAT_01011598 ? m : v;
-}
-
-__declspec(noinline) bool LiquidVec::FUN_004390c0(const LiquidVec& p)
-{
-    bool a = x == p.x;
-    bool b = y == p.y;
-    bool c = z == p.z;
-    return a & b & c;
 }
 
 // @f3 0x0092f990 (community match, verified in this file)

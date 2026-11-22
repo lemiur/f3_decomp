@@ -1285,25 +1285,4 @@ void FUN_00b61370(const char* key)
 }
 
 
-void CacheMap::AdvanceToNextEntry(void*& position, unsigned& key, CacheBucket*& value)
-{
-    CacheMapNode* node = (CacheMapNode*)position;
-    key = node->key;
-    value = node->value;
-    if (node->next)
-    {
-        position = node->next;
-        return;
-    }
-    unsigned index = Hash(node->key) + 1;
-    for (; index < size; ++index)
-    {
-        if (buckets[index])
-        {
-            position = buckets[index];
-            return;
-        }
-    }
-    position = 0;
-}
 }  // namespace fnv_00b61370

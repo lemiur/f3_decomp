@@ -911,42 +911,6 @@ class C6B540Manager
     void FUN_00c6b540(bool bProcess);
 };
 
-// @fnv 0x00c6b540
-void C6B540Manager::FUN_00c6b540(bool bProcess)
-{
-    if (m_uiLockCount > 0)
-    {
-        if (--m_uiLockCount == 0)
-        {
-            if (bProcess)
-            {
-                if (m_uiPendingCount > 0 && !g_bC6B540Processing)
-                {
-                    if (m_uiPendingCount >= 3000)
-                        m_uiPendingCount = 3000;
-                    unsigned int ItemUpdateArray =
-                        m_uiPendingCount < g_uiC6B540MaxPerFrame ? m_uiPendingCount : g_uiC6B540MaxPerFrame;
-                    unsigned int uiRemaining = m_uiPendingCount - ItemUpdateArray;
-                    ProcessPending(&m_ppkPending[uiRemaining], ItemUpdateArray);
-                    m_uiPendingCount = uiRemaining;
-                    g_bC6B540Processing = true;
-                }
-            }
-            else
-            {
-                FlushPending();
-            }
-            UpdateA();
-            UpdateB();
-            UpdateC();
-        }
-    }
-    else if (m_uiPendingCount > 0 && !bProcess)
-    {
-        FlushPending();
-    }
-}
-
 struct QueryStub
 {
     unsigned char FUN_00c4edf0(unsigned int* state, int flags);

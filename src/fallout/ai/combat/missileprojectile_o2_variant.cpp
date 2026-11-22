@@ -291,18 +291,6 @@ struct FUN_00cbdd60_cls
     SpawnedObject_t* FUN_00cbdd60(unsigned int arg);
 };
 
-// @fnv 0x00cbdd60
-SpawnedObject_t* FUN_00cbdd60_cls::FUN_00cbdd60(unsigned int arg)
-{
-    TlsGuard_t guard;
-    SpawnedObject_t* result = 0;
-    FUN_00c876f0();
-    result = new SpawnedObject_t();
-    FUN_00c89730(result, arg);
-    FUN_00c87700();
-    return result;
-}
-
 struct S_cbde40_Tls
 {
     int unk000;
@@ -525,36 +513,6 @@ struct S_cbde40
     void CopyFromSource(S_cbde40_Obj* c);
     S_cbde40_Base* FUN_00cbde40(bool* created);
 };
-// @fnv 0x00cbde40
-S_cbde40_Base* S_cbde40::FUN_00cbde40(bool* created)
-{
-    S_cbde40_Guard guard;
-    bool b = (unk0c == 0);
-    *created = b;
-    if (b)
-    {
-        S_cbde40_Obj* c = new S_cbde40_Obj;
-        S_cbde40_Base* r;
-        if (c)
-        {
-            S_cbde40_Base* bp = &c->base;
-            c->unk08 = 1;
-            c->unk0c = 0;
-            c->unk10 = 0;
-            c->unk00 = &DAT_0108ff98;
-            bp->unk00 = 0;
-            r = bp;
-        }
-        else
-        {
-            r = 0;
-        }
-        unk0c = r;
-        if (unk08)
-            CopyFromSource(unk0c ? (S_cbde40_Obj*)((char*)unk0c - 4) : 0);
-    }
-    return unk0c;
-}
 
 class NiAVObject;
 class NiCollisionObject;

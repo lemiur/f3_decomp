@@ -1,148 +1,18 @@
-// fallout/ai/baseprocess.cpp: BaseProcess, SavedProcess, Target8d (46 functions)
+// fallout/ai/baseprocess.cpp: BaseProcess, SavedProcess, Target8d (1 function)
 #include "f3_common.h"
 #include "baseprocess_worker.h"
 
 static const int kCalculateMoveModeValue1 = 257;
-
-// @fnv 0x008d0540
-int BaseProcess::GetAttackChance(Actor* apActor, float afValue1, float afValue2, float afValue3, bool abFlag1,
-                                 bool abFlag2)
-{
-    return kCalculateMoveModeValue1;
-}
-
-// @fnv 0x008d1050
-void BaseProcess::ApplyLoadBuffer(BGSLoadFormBuffer* buffer)
-{
-    reinterpret_cast<ActorPackageCall*>(&m_kProcessData)->ApplyLoadBuffer(buffer);
-}
-
-// @fnv 0x008d1000
-void BaseProcess::InitLoadGame(BGSLoadFormBuffer* buffer)
-{
-    reinterpret_cast<ActorPackageCall*>(&m_kProcessData)->FUN_008c6970(buffer);
-    if (m_pCachedValues)
-        reinterpret_cast<CachedValuesCall*>(m_pCachedValues)->ClearField44();
-}
-
-// @fnv 0x008d08b0
-void BaseProcess::SetCurrentPackageAndTarget(TESPackage* package, MobileObject* reference)
-{
-    TESObjectREFR* target = reinterpret_cast<TESPackage*>(package)->GetResolvedTargetReference(reference);
-    reinterpret_cast<ActorPackageCall*>(&m_kProcessData)->SetPackageAndTarget(package, target);
-}
-
-// @fnv 0x008d0870
-void BaseProcess::SetReferenceTarget(TESObjectREFR* reference)
-{
-    reinterpret_cast<GuardActorPackageDataCall*>(&m_kProcessData)->SetReferenceTarget(reference);
-    ActorPackageData* data =
-        reinterpret_cast<ActorPackageData*>(reinterpret_cast<LowProcess*>(this)->GetCurrentPackageData());
-    if (data)
-        reinterpret_cast<ActorPackageDataVirtualCall*>(data)->SetReferenceTarget(reference);
-}
-
-// @fnv 0x008d1070
-void BaseProcess::Revert(BGSLoadFormBuffer* buffer)
-{
-    m_fValue1 = -1.0F;
-    m_uiStateFlags = 0;
-    reinterpret_cast<ActorPackageCall*>(&m_kProcessData)->FUN_008c6c80(buffer);
-    if (m_pCachedValues)
-        reinterpret_cast<CachedValuesCall*>(m_pCachedValues)->ClearField44();
-}
-
-// @fnv 0x008d0f90
-void BaseProcess::LoadGame(BGSLoadFormBuffer* buffer)
-{
-    reinterpret_cast<BGSLoadFormBuffer*>(buffer)->ReadTypedData(&m_fValue2, 4);
-    if (reinterpret_cast<BGSLoadFormBufferVirtual*>(buffer)->GetVersion() >= 6)
-    {
-        reinterpret_cast<BGSLoadFormBuffer*>(buffer)->ReadTypedData(&m_fValue1, 4);
-        reinterpret_cast<BGSLoadFormBuffer*>(buffer)->ReadTypedData(&m_uiStateFlags, 4);
-    }
-    reinterpret_cast<ActorPackageCall*>(&m_kProcessData)->LoadGame(buffer);
-}
-
-// @fnv 0x008d0660
-void BaseProcess::Copy(BaseProcess* source)
-{
-    if (!source)
-        return;
-    void* thisMiddleHigh;
-    void* sourceSecond;
-    void* sourceMiddleHigh;
-    void* thisSecond;
-    void* thisThird;
-    void* sourceThird;
-    void* sourceLow;
-    void* thisLow;
-    thisThird = __RTDynamicCast(source, 0, &DAT_0118a6b8, &DAT_0118a6d4, 0);
-    sourceLow = __RTDynamicCast(source, 0, &DAT_0118a6b8, &DAT_0118c64c, 0);
-    thisMiddleHigh = __RTDynamicCast(source, 0, &DAT_0118a6b8, &DAT_011a3668, 0);
-    sourceMiddleHigh = __RTDynamicCast(source, 0, &DAT_0118a6b8, &DAT_011a364c, 0);
-    thisSecond = __RTDynamicCast(this, 0, &DAT_0118a6b8, &DAT_0118a6d4, 0);
-    sourceSecond = __RTDynamicCast(this, 0, &DAT_0118a6b8, &DAT_0118c64c, 0);
-    sourceThird = __RTDynamicCast(this, 0, &DAT_0118a6b8, &DAT_011a3668, 0);
-    thisLow = __RTDynamicCast(this, 0, &DAT_0118a6b8, &DAT_011a364c, 0);
-    if (thisThird)
-    {
-        if (reinterpret_cast<BaseProcessCopyVirtual*>(thisThird)->vfn_1e0() > 0.0)
-        {
-            reinterpret_cast<BaseProcessCopyVirtual*>(thisThird)->vfn_214();
-            reinterpret_cast<BaseProcessCopyVirtual*>(thisThird)->vfn_12c(0);
-        }
-    }
-    if (thisSecond)
-    {
-        if (reinterpret_cast<BaseProcessCopyVirtual*>(thisSecond)->vfn_1e0() > 0.0)
-        {
-            reinterpret_cast<BaseProcessCopyVirtual*>(thisSecond)->vfn_214();
-            reinterpret_cast<BaseProcessCopyVirtual*>(thisSecond)->vfn_12c(0);
-        }
-    }
-    if (thisSecond && thisThird)
-        reinterpret_cast<MiddleHighProcessCall*>(thisSecond)
-            ->CopyProcessDataFrom(reinterpret_cast<MiddleHighProcessCall*>(thisThird));
-    if (sourceSecond && sourceLow)
-        reinterpret_cast<CopyCall00914c60*>(sourceSecond)->FUN_00914c60(reinterpret_cast<CopyCall00914c60*>(sourceLow));
-    if (sourceThird && thisMiddleHigh)
-        reinterpret_cast<CachedValuesCopyCall*>(sourceThird)
-            ->Copy(reinterpret_cast<CachedValuesCopyCall*>(thisMiddleHigh));
-    if (thisLow && sourceMiddleHigh)
-        reinterpret_cast<LowProcessCopyCall*>(thisLow)->HandlePackageChange(
-            reinterpret_cast<LowProcessCopyCall*>(sourceMiddleHigh));
-    if (m_pCachedValues && source->m_pCachedValues)
-        reinterpret_cast<LowProcessCachedCopyCall*>(m_pCachedValues)
-            ->HandlePackageChange(reinterpret_cast<LowProcessCachedCopyCall*>(source->m_pCachedValues));
-}
 
 struct FUN_0049bb50_shell : public ActorPackageContext
 {
     void AddToOffset(int);
 };
 
-// @fnv 0x0049bb50
-void FUN_0049bb50_shell::AddToOffset(int aiOffset)
-{
-    *(int*)((char*)this + 0xc) += aiOffset;
-}
-
 struct Dummy_00527770
 {
     void FUN_00527770(int arg);
 };
-
-// Calls FUN_00527770 with 0x25, sets the first pointer to "@kR", and zeroes the ints at offsets 16 and 20 before returning pThis.
-// @fnv 0x00526b00
-void* __fastcall FUN_00526b00(void* pThis)
-{
-    ((Dummy_00527770*)pThis)->FUN_00527770(0x25);
-    *(const char**)pThis = "@kR";
-    *((int*)pThis + 4) = 0;
-    *((int*)pThis + 5) = 0;
-    return pThis;
-}
 
 struct FUN_008d03e0_shell : public BaseProcess
 {
@@ -155,12 +25,6 @@ class TESSound
     unsigned int Deallocate(void);
 };
 
-// @fnv 0x008d03e0
-int FUN_008d03e0_shell::DeallocateSound()
-{
-    return reinterpret_cast<TESSound*>(reinterpret_cast<char*>(this) + 4)->Deallocate();
-}
-
 struct FUN_008d0640_shell : public BaseProcess
 {
     void InitProcess();
@@ -169,29 +33,10 @@ struct FUN_008d0640_shell : public BaseProcess
 extern int DAT_01085e2c;
 void __fastcall DeleteData(void* pThis);
 
-// @fnv 0x008d0640
-void FUN_008d0640_shell::InitProcess()
-{
-    *reinterpret_cast<int**>(this) = &DAT_01085e2c;
-    DeleteData(reinterpret_cast<char*>(this) + 4);
-}
-
-// @fnv 0x008d1030
-void __fastcall ClearField44(int param_1)
-{
-    *reinterpret_cast<int*>(param_1 + 0x44) = 0;
-}
-
 struct FUN_00524b60_shell
 {
     unsigned char __thiscall GetByteAt102();
 };
-
-// @fnv 0x00524b60
-unsigned char __thiscall FUN_00524b60_shell::GetByteAt102()
-{
-    return *(unsigned char*)((char*)this + 0x102);
-}
 
 extern float DAT_01085df0;
 
@@ -199,14 +44,6 @@ struct FUN_008d02d0_shell
 {
     float GetNegativeGlobal(void* apActor, int abWhichList);
 };
-
-// @fnv 0x008d02d0
-float FUN_008d02d0_shell::GetNegativeGlobal(void* apActor, int abWhichList)
-{
-    (void)apActor;
-    (void)abWhichList;
-    return -DAT_01085df0;
-}
 
 struct MobileObject;
 struct TESIdleForm;
@@ -217,21 +54,10 @@ struct FUN_008d02f0_shell
                                  bool abChooseNewOne, bool abTestConditions);
 };
 
-// @fnv 0x008d02f0
-bool __thiscall FUN_008d02f0_shell::FUN_008d02f0(MobileObject* apMobile, TESIdleForm* apIdle, int aeType,
-                                                 bool abForce3d, bool abChooseNewOne, bool abTestConditions)
-{
-    return false;
-}
-
 struct FUN_008d0350_shell
 {
     void __thiscall FUN_008d0350(int, int, int, int, int, int, int);
 };
-
-// @fnv 0x008d0350
-void __thiscall FUN_008d0350_shell::FUN_008d0350(int, int, int, int, int, int, int)
-{}
 
 struct ActiveEffect;
 struct Actor;
@@ -717,70 +543,32 @@ struct FUN_008d0370_shell : public TESSaveLoadGame
     bool FUN_008d0370(TESForm*);
 };
 
-// @fnv 0x008d0370
-bool FUN_008d0370_shell::FUN_008d0370(TESForm* apForm)
-{
-    return 0;
-}
-
 struct FUN_008d0390_shell
 {
     float GetDistanceBetweenActors(void* apActor, void* apTarget);
 };
-
-// @fnv 0x008d0390
-float __thiscall FUN_008d0390_shell::GetDistanceBetweenActors(void* apActor, void* apTarget)
-{
-    return 0.0f;
-}
 
 struct FUN_008d05f0_shell
 {
     float FUN_008d05f0(int aiWhich);
 };
 
-// @fnv 0x008d05f0
-float __thiscall FUN_008d05f0_shell::FUN_008d05f0(int aiWhich)
-{
-    return 0.0f;
-}
-
 extern const NiPoint3 _NiPoint3_ZERO;
-
-// @fnv 0x008d08f0
-const NiPoint3* __fastcall FUN_008d08f0(BaseProcess* this_)
-{
-    return &_NiPoint3_ZERO;
-}
 
 struct FUN_008d10c0_shell
 {
     float UpdateProcessTiming();
 };
-// @fnv 0x008d10c0
-float FUN_008d10c0_shell::UpdateProcessTiming()
-{
-    return 20.0f;
-}
 
 struct FUN_00acb7e0_shell : public BaseProcess
 {
     int FUN_00acb7e0();
 };
 
-// @fnv 0x00acb7e0
-int FUN_00acb7e0_shell::FUN_00acb7e0()
-{
-    return -1;
-}
-
 struct FUN_008cc730_s
 {
     void FUN_008cc730(MobileObject*, float, float, float);
 };
-// @fnv 0x008cc730
-void FUN_008cc730_s::FUN_008cc730(MobileObject* apRef, float x, float y, float z)
-{}
 
 namespace fnv_008d02a0 {
 struct NiPoint3
@@ -793,11 +581,6 @@ struct FUN_008d02a0_shell
 {
     NiPoint3 FUN_008d02a0(Actor* apActor);
 };
-// @fnv 0x008d02a0
-NiPoint3 FUN_008d02a0_shell::FUN_008d02a0(Actor* apActor)
-{
-    return _NiPoint3_ZERO;
-}
 }  // namespace fnv_008d02a0
 
 namespace fnv_008d0310 {
@@ -811,11 +594,6 @@ struct FUN_008d0310_shell
 {
     NiPoint3 FUN_008d0310(Actor* apActor, int abWhichList);
 };
-// @fnv 0x008d0310
-NiPoint3 FUN_008d0310_shell::FUN_008d0310(Actor* apActor, int abWhichList)
-{
-    return _NiPoint3_ZERO;
-}
 }  // namespace fnv_008d0310
 
 struct DetectionViewData;
@@ -823,22 +601,11 @@ struct FUN_008d0340_s
 {
     DetectionViewData* FUN_008d0340(Actor*, int, bool, int, int, bool, bool);
 };
-// @fnv 0x008d0340
-DetectionViewData* FUN_008d0340_s::FUN_008d0340(Actor* apactor, int aedetect, bool abLineSight, int aiLevel,
-                                                int abWhichList, bool ab360view, bool abcombat)
-{
-    return 0;
-}
 
 struct FUN_008d0380_s
 {
     void FUN_008d0380(Actor*, bool, TESBoundObject*, int, ExtraDataList*, bool, bool, bool, bool, bool, bool);
 };
-// @fnv 0x008d0380
-void FUN_008d0380_s::FUN_008d0380(Actor* apActor, bool abEquip, TESBoundObject* apObject, int aiNumber,
-                                  ExtraDataList* apExtra, bool abNow, bool abForceEquip, bool abFromMenus,
-                                  bool abForceUnequip, bool abEquipCalling, bool abPlayPickUpSounds)
-{}
 
 struct GO
 {
@@ -881,52 +648,27 @@ struct FUN_008d04f0_s
 {
     void FUN_008d04f0(Actor*, TESTopic*, bool, bool, bool, bool);
 };
-// @fnv 0x008d04f0
-void FUN_008d04f0_s::FUN_008d04f0(Actor* apActor, TESTopic* aptopic, bool abForceSub, bool abStop, bool abQue,
-                                  bool abSayCallBack)
-{}
 
 struct FUN_008d0500_s
 {
     void FUN_008d0500(Actor*, bool, bool, int, bool);
 };
-// @fnv 0x008d0500
-void FUN_008d0500_s::FUN_008d0500(Actor* apActor, bool abNewpackage, bool abInterateIndex, int emovemode,
-                                  bool abSecondLoc)
-{}
 
 struct ActorCombatGroup;
 struct FUN_008d0530_s
 {
     bool FUN_008d0530(Actor*, Actor*, bool, bool, ActorCombatGroup*, bool, bool, bool, char, bool, bool, bool, TESPackage*);
 };
-// @fnv 0x008d0530
-bool FUN_008d0530_s::FUN_008d0530(Actor* apActor, Actor* apTarget, bool abCheckForAmbush, bool absendalarm,
-                                  ActorCombatGroup* apGroup, bool abfleeing, bool abForceFlee, bool abAggressor, char acTeam,
-                                  bool bforcecombat, bool abForceAttack, bool abCastSpell, TESPackage* apPackage)
-{
-    return false;
-}
 
 struct FUN_008d0570_s
 {
     int FUN_008d0570(TESActorBase*, int, Actor*);
 };
-// @fnv 0x008d0570
-int FUN_008d0570_s::FUN_008d0570(TESActorBase* apActorBase, int aiWhich, Actor* apActor)
-{
-    return -1;
-}
 
 struct FUN_008d0580_s
 {
     float FUN_008d0580(TESActorBase*, int, Actor*);
 };
-// @fnv 0x008d0580
-float FUN_008d0580_s::FUN_008d0580(TESActorBase* apActorBase, int aiWhich, Actor* apActor)
-{
-    return 0.0f;
-}
 
 struct SoundPlaybackHandle
 {
@@ -938,12 +680,6 @@ struct FUN_008d0590_shell
 {
     SoundPlaybackHandle CreateDefaultInstance(int aeType);
 };
-// Constructs and returns a default-constructed instance of the local struct type, ignoring the passed type argument.
-// @fnv 0x008d0590
-SoundPlaybackHandle FUN_008d0590_shell::CreateDefaultInstance(int aeType)
-{
-    return SoundPlaybackHandle();
-}
 
 struct Date
 {
@@ -956,17 +692,11 @@ struct FUN_008d05c0_s
 {
     void FUN_008d05c0(int, Date);
 };
-// @fnv 0x008d05c0
-void FUN_008d05c0_s::FUN_008d05c0(int a, Date d)
-{}
 
 struct FUN_008d0600_s
 {
     void FUN_008d0600(int, int);
 };
-// @fnv 0x008d0600
-void FUN_008d0600_s::FUN_008d0600(int a, int b)
-{}
 
 struct FUN_008c64d0_target
 {
@@ -976,13 +706,6 @@ struct FUN_008d0e60_shell
 {
     void FUN_008d0e60(unsigned int aiFlags, unsigned int aiOldFlags, MobileObject* pmob);
 };
-
-// Forwards the new and old flag values to the object at offset 4 of this shell.
-// @fnv 0x008d0e60
-void FUN_008d0e60_shell::FUN_008d0e60(unsigned int aiFlags, unsigned int aiOldFlags, MobileObject* pmob)
-{
-    ((FUN_008c64d0_target*)((char*)this + 4))->FUN_008c64d0(aiFlags, aiOldFlags);
-}
 
 struct BGSSaveFormBuffer
 {
@@ -997,14 +720,6 @@ struct FUN_008d0f30_shell
     char* GetBase();
     void FUN_008d0f30(BGSSaveFormBuffer* apSaveGameBuffer);
 };
-// @fnv 0x008d0f30
-void FUN_008d0f30_shell::FUN_008d0f30(BGSSaveFormBuffer* apSaveGameBuffer)
-{
-    apSaveGameBuffer->SaveData((char*)this + 0x1c, 4, 0);
-    apSaveGameBuffer->SaveData((char*)this + 0x20, 4, 0);
-    apSaveGameBuffer->SaveData((char*)this + 0x24, 4, 0);
-    ((FUN_008c65d0_target*)((char*)this + 4))->SavePackage(apSaveGameBuffer);
-}
 
 struct FUN_008c65a0_shell
 {
@@ -1016,11 +731,6 @@ struct FUN_008d0f10_s
     FUN_008c65a0_shell sub;
     void FUN_008d0f10(unsigned int aiFlags, MobileObject* pmob);
 };
-// @fnv 0x008d0f10
-void FUN_008d0f10_s::FUN_008d0f10(unsigned int aiFlags, MobileObject* pmob)
-{
-    sub.FUN_008c65a0(aiFlags);
-}
 
 namespace fnv_008d0900 {
 struct MobileObject
@@ -1229,49 +939,6 @@ struct FUN_008d0900_shell
     unsigned short FUN_008d0900(unsigned int aiFlags, MobileObject* pmob);
 };
 
-// Accumulates a save-size value from the save manager, a virtual call on this+4, and a constant, logging the delta when the debug flag is set.
-// @fnv 0x008d0900
-unsigned short FUN_008d0900_shell::FUN_008d0900(unsigned int aiFlags, MobileObject* pmob)
-{
-    unsigned short pform;
-    unsigned short pheader;
-    FormIDEntry* isize;
-    TESForm* itempStartSize;
-
-    pform = 0;
-    pheader = pform;
-
-    if (DAT_011de45c->FUN_00862110())
-    {
-        pform += 4;
-        pform += 2;
-    }
-
-    pform += reinterpret_cast<FUN_008c61a0_Class*>(reinterpret_cast<unsigned char*>(this) + 4)->ComputeTotal(aiFlags);
-    pform += 4;
-
-    if (*g_011de4e8.Bool())
-    {
-        isize = static_cast<FormIDEntry*>(DAT_011de45c->GetHitSound());
-        if (isize)
-        {
-            itempStartSize = _ref_004839c0(isize->iFormID);
-            Interface::PrintDebugMessage(
-                "GetSaveSize(): %-5i for form %08X %s with flags %08X ending at line %i in file %s",
-                static_cast<unsigned int>(pform) - pheader, isize->iFormID, itempStartSize->GetName(),
-                *reinterpret_cast<unsigned int*>(isize->iFlags), 0xE8,
-                "D:\\_Fallout3\\Platforms\\Common\\Code\\Fallout\\AI\\BaseProcess.cpp");
-        }
-        else
-        {
-            Interface::PrintDebugMessage("GetSaveSize(): %-5i ending at line %i in file %s",
-                                         static_cast<unsigned int>(pform) - pheader, 0xE8,
-                                         "D:\\_Fallout3\\Platforms\\Common\\Code\\Fallout\\AI\\BaseProcess.cpp");
-        }
-    }
-
-    return pform;
-}
 }  // namespace fnv_008d0900
 
 struct FUN_008d04a0_base
@@ -1427,13 +1094,6 @@ struct FUN_008d04a0_shell : public FUN_008d04a0_base
     virtual void vfn_144(int);
     void ForwardToVfn144(int, int);
 };
-
-// Calls the virtual function vfn_144 with param_3.
-// @fnv 0x008d04a0
-void FUN_008d04a0_shell::ForwardToVfn144(int, int aiValue)
-{
-    vfn_144(aiValue);
-}
 
 extern char DAT_01184920[];
 extern char DAT_011846d4[];
@@ -1614,17 +1274,6 @@ struct FUN_008d0e80_class
     void FUN_008d0e80(int p1, int p2, void* p3);
 };
 
-// @fnv 0x008d0e80
-void __thiscall FUN_008d0e80_class::FUN_008d0e80(int aiUnused1, int aiUnused2, void* p3)
-{
-    void* t = FUN_00ec43fb(p3, 0, DAT_01184920, DAT_011846d4, 0);
-    if (t != 0 && t != DAT_011dea3c && this->vfn_22c() == 0 && this->vfn_280() == -1)
-    {
-        this->vfn_284(0);
-        ((FUN_008a6ce0_shell*)t)->FUN_008a6ce0(1, 1);
-    }
-}
-
 struct SaveHeaderView
 {
     unsigned int id;
@@ -1749,45 +1398,6 @@ struct FormView
     virtual void v12c();
     virtual const char* Describe();
 };
-// @fnv 0x008d0a10
-void SavedProcess::FUN_008d0a10(unsigned int flags, unsigned int unused)
-{
-    unsigned short length = 0;
-    unsigned int* begin = 0;
-    unsigned int initial = ((TimeGlobal*)g_TESSaveLoadGame)->GetTimeStamp();
-    if (*g_011de4e8.Bool())
-        initial = ((TimeGlobal*)g_TESSaveLoadGame)->GetTimeStamp();
-    if (((TESSaveLoadGameHelper*)g_TESSaveLoadGame)->FUN_00862110())
-    {
-        unsigned int tag = 0x424c4f4b;
-        ((TESSaveLoadGameHelper*)g_TESSaveLoadGame)->FUN_008579b0(&tag, 4);
-        begin = (unsigned int*)((TimeGlobal*)g_TESSaveLoadGame)->GetTimeStamp();
-        ((TESSaveLoadGameHelper*)g_TESSaveLoadGame)->FUN_008579b0(&length, 2);
-    }
-    data.FUN_008c6250(flags);
-    ((TESSaveLoadGameHelper*)g_TESSaveLoadGame)->FUN_008579b0(&unk1c, 4);
-    if (*g_011de4e8.Bool())
-    {
-        unsigned int header = ((TimeGlobal*)g_TESSaveLoadGame)->GetTimeStamp();
-        SaveHeaderView* end = ((TESSaveLoadGameHelper*)g_TESSaveLoadGame)->GetHitSound();
-        if (end)
-        {
-            TESForm* form = FUN_004839c0(end->id);
-            FUN_0040fbe0(DAT_010153a0, header - initial, end->id, ((FormView*)form)->Describe(),
-                         *(unsigned int*)&end->flags, 0xf9, DAT_010865e0);
-        }
-        else
-            FUN_0040fbe0(DAT_0101536c, header - initial, 0xf9, DAT_010865e0);
-    }
-    if (((TESSaveLoadGameHelper*)g_TESSaveLoadGame)->FUN_00862110())
-    {
-        unsigned int uiTimestamp = ((TimeGlobal*)g_TESSaveLoadGame)->GetTimeStamp();
-        unsigned int finalPosition = (unsigned int)begin;
-        if (uiTimestamp > finalPosition + 65535)
-            FNV_Warning(DAT_01015318, DAT_010865e0, 0xf9);
-        *(unsigned short*)begin = (unsigned short)(uiTimestamp - finalPosition);
-    }
-}
 
 namespace fnv_008d0bc0 {
 extern "C" char DAT_011de45c;
@@ -1905,75 +1515,9 @@ struct Target8d
     unsigned field;
     void LoadAndValidate(void*, void*, void*);
 };
-// Reads a tag and count from the reader, calls base.FUN_008c6320, reads field, then logs size mismatches between the recorded and actual block length.
-// @fnv 0x008d0bc0
-void Target8d::LoadAndValidate(void* arg1, void* arg2, void* arg3)
-{
-    unsigned short count = 0;
-    unsigned start = 0;
-    if ((*(Reader8d**)&DAT_011de45c)->FUN_00862110())
-    {
-        unsigned tag;
-        (*(Reader8d**)&DAT_011de45c)->FUN_008579e0(&tag, 4);
-        if (tag != 0x424c4f4b)
-        {
-            Record8d* record = (*(Reader8d**)&DAT_011de45c)->FUN_004fd3c0();
-            if (record)
-            {
-                Object8d* object = FUN_004839c0(record->id);
-                FUN_005b5e40(&DAT_01015718, &DAT_010865e0, 0x104, record->id, object->name(),
-                             *(unsigned char*)((char*)record + 9), *(unsigned*)((char*)record + 5));
-            }
-            else
-            {
-                FUN_005b5e40(&DAT_010156a8, &DAT_010865e0, 0x104, (*(Reader8d**)&DAT_011de45c)->FUN_008df040());
-            }
-        }
-        start = (*(Reader8d**)&DAT_011de45c)->FUN_00825c00();
-        (*(Reader8d**)&DAT_011de45c)->FUN_008579e0(&count, 2);
-    }
-    base.FUN_008c6320(arg1, arg2);
-    (*(Reader8d**)&DAT_011de45c)->FUN_008579e0(&field, 4);
-    if ((*(Reader8d**)&DAT_011de45c)->FUN_00862110())
-    {
-        unsigned end = (*(Reader8d**)&DAT_011de45c)->FUN_00825c00();
-        Record8d* record = (*(Reader8d**)&DAT_011de45c)->FUN_004fd3c0();
-        if (record)
-        {
-            Object8d* object = FUN_004839c0(record->id);
-            if (end > start + count)
-            {
-                FUN_005b5e40(&DAT_01015588, end - (start + count), &DAT_010865e0, 0x109, record->id, object->name(),
-                             *(unsigned char*)((char*)record + 9), *(unsigned*)((char*)record + 5));
-            }
-            else if (end < start + count)
-            {
-                FUN_005b5e40(&DAT_01015500, start + count - end, &DAT_010865e0, 0x109, record->id, object->name(),
-                             *(unsigned char*)((char*)record + 9), *(unsigned*)((char*)record + 5));
-            }
-        }
-        else
-        {
-            if (end > start + count)
-            {
-                FUN_005b5e40(&DAT_010154a0, end - (start + count), &DAT_010865e0, 0x109,
-                             (*(Reader8d**)&DAT_011de45c)->FUN_008df040());
-            }
-            else if (end < start + count)
-            {
-                FUN_005b5e40(&DAT_01015440, start + count - end, &DAT_010865e0, 0x109,
-                             (*(Reader8d**)&DAT_011de45c)->FUN_008df040());
-            }
-        }
-    }
-}
 }  // namespace fnv_008d0bc0
 
 struct FUN_008d0610 : BaseProcess
 {
     virtual ~FUN_008d0610();
 };
-// Destructor for a BaseProcess-derived class; empty body.
-// @fnv 0x008d0610
-FUN_008d0610::~FUN_008d0610()
-{}

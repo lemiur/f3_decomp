@@ -1,190 +1,24 @@
-// fallout/interface/menus/containermenu.cpp: ContainerMenu, MenuStateTarget, MenuLogic, ContainerValue and more (40 functions)
+// fallout/interface/menus/containermenu.cpp: ContainerMenu, MenuStateTarget, MenuLogic, ContainerValue and more (2 functions)
 #include "f3_common.h"
 #include "containermenu_decls.h"
 #include "containermenu_packet.h"
-// Reads a save-file signature and header fields from the file into headerArg, returning early if the signature matches DAT_011a2224.
-// @fnv 0x0084dab0
-void ReadSaveFileHeader(void* pFile, void* pHeader)
-{
-    ((SaveLoadFile*)pFile)->SetFilePosition(0);
-    char signature[260];
-    signature[0] = 0;
-    fnv_zlib_memset(signature + 1, 0, 259);
-    ((SaveLoadFile*)pFile)->Read(signature, strlen(DAT_011a2224));
-    if (FUN_00408b20(signature, DAT_011a2224))
-        return;
-    unsigned skill;
-    BGSLoadGameBuffer storage;
-    storage.ReadAndVerifySize((SaveLoadFile*)pFile);
-    {
-        TESLandTexture* parentTexture;
-        BGSLoadGameBuffer* pLoadBuffer = &storage;
-        char* saveTime;
-        int saveVersion = 0;
-        pLoadBuffer->ReadDataBlock(&saveVersion, 4);
-        ((BGSAcousticSpace*)pHeader)->SetNoonSound((TESSound*)saveVersion);
-        if (saveVersion == 48)
-        {
-            char* data = pLoadBuffer->GetCombinedValue();
-            if (data[4] == '|')
-                ((SaveHeaderOps*)pHeader)->QueueWeapon(ENGLISH);
-            else
-            {
-                char language[64];
-                pLoadBuffer->ReadDataBlock(language, 64);
-                ((SaveHeaderOps*)pHeader)->QueueWeapon(language);
-            }
-        }
-        else
-        {
-            char language[64];
-            pLoadBuffer->ReadDataBlock(language, 64);
-            ((SaveHeaderOps*)pHeader)->QueueWeapon(language);
-        }
-        saveTime = 0;
-        skill = 0;
-        pLoadBuffer->ReadDataBlock(&saveTime, 4);
-        pLoadBuffer->ReadDataBlock(&skill, 4);
-        parentTexture = 0;
-        pLoadBuffer->ReadDataBlock(&parentTexture, 4);
-        ((TESRegionGrassObject*)pHeader)->AssignLandTexture((TESLandTexture*)parentTexture);
-        ((TESEnchantableForm*)pHeader)->SetCastingType((MagicSystem__CastingType)(unsigned)pLoadBuffer->LoadString(0));
-        ((BGSQuestObjective*)pHeader)->SetOwnerQuest((TESQuest*)pLoadBuffer->LoadString(0));
-        if (saveVersion > 47)
-        {
-            unsigned spell = 0;
-            pLoadBuffer->ReadDataBlock(&spell, 4);
-            ((BGSDehydrationStage*)pHeader)->FUN_0050f9a0((SpellItem*)spell);
-        }
-        ((TESConditionItem*)pHeader)->SetObjectType((int)pLoadBuffer->LoadString(0));
-        ((InterfaceManager*)pHeader)->FUN_00984f60((unsigned)pLoadBuffer->LoadString(0));
-        ((TESResponse*)pHeader)->SetSpeakerIdle((TESIdleForm*)saveTime);
-        ((TESRecipe*)pHeader)->SetSkill(skill);
-        ((TESRecipe*)pHeader)->SetSkillLevel(((SaveLoadFile*)pFile)->GetFilePosition());
-    }
-}
-
-// @fnv 0x0075b750
-void ContainerMenu::Close()
-{
-    if (DAT_011d93f8)
-    {
-        DAT_011d93f8->m_kFadeSequence.StopWithFade(100);
-
-        switch (DAT_011d93f8->m_eContainerMenuMode)
-        {
-        case 1:
-            ((ContainerMenu*)DAT_011d93f8)->UpdateContainer(DAT_011d93f8->m_pContainer, false);
-            break;
-        case 2: {
-            TESObjectREFR* actor =
-                ((CloseVirtualSlots*)DAT_011d93f8->m_pContainer)->IsActor() ? DAT_011d93f8->m_pContainer : 0;
-            if (!actor && DAT_011d93f8->m_iStolenItemCount > 0)
-            {
-                ((Actor*)g_thePlayer)
-                    ->StealAlarm(DAT_011d93f8->m_pContainer, 0, 0, DAT_011d93f8->m_iStolenItemCount,
-                                 DAT_011d93f8->m_pContainer->GetOwner());
-            }
-            ((ContainerMenu*)DAT_011d93f8)->UpdateContainer(DAT_011d93f8->m_pContainer, false);
-            break;
-        }
-        case 4:
-            if (!((HUDMainMenu*)&DAT_011f2250)->RefreshTargetDisplay())
-                ((CloseVirtualSlots*)g_thePlayer)->vfn_340(9);
-            break;
-        case 3: {
-            bool processContainer = false;
-            if (((CloseVirtualSlots*)DAT_011d93f8->m_pContainer)->IsActor() &&
-                ((CloseVirtualSlots*)DAT_011d93f8->m_pContainer)->vfn_1e4())
-            {
-                if (((Actor*)DAT_011d93f8->m_pContainer)->GetProcess() &&
-                    ((CloseVirtualSlots*)((Actor*)DAT_011d93f8->m_pContainer)->GetProcess())->GetCastsShadows())
-                    processContainer = true;
-            }
-            if (((CloseVirtualSlots*)DAT_011d93f8->m_pContainer)->IsCreature())
-            {
-                void* form = DAT_011d93f8->m_pContainer->GetObjectReference();
-                ((TESCreature*)form)->UpdateModel3D(DAT_011d93f8->m_pContainer, true, true, true);
-            }
-            else
-            {
-                void* form = DAT_011d93f8->m_pContainer->GetObjectReference();
-                ((TESNPC*)form)
-                    ->RebuildHeadModel(DAT_011d93f8->m_pContainer,
-                                       ((CloseVirtualSlots*)DAT_011d93f8->m_pContainer)->vfn_1e8(true));
-            }
-            if (processContainer && ((Actor*)DAT_011d93f8->m_pContainer)->IsFirstActorFlagSet())
-            {
-                if (!((CloseVirtualSlots*)((Actor*)DAT_011d93f8->m_pContainer)->GetProcess())->GetCastsShadows())
-                    ((Actor*)DAT_011d93f8->m_pContainer)->SetIsSwimming(false);
-            }
-            {
-                BSAudio::GetSingleton()->GetSoundHandleByEditorID(DAT_01072278, 0x121).Play(false);
-            }
-            StartDialogueForTopic(0);
-            break;
-        }
-        }
-
-        ((BSSimpleList<ActorCause*>*)&DAT_011d93f8->m_kContainerItems)->RemoveAll();
-        (*(Tile**)((char*)DAT_011d93f8 + 4))->Set(0x1772, 1);
-        DAT_011d93f8->LoadMenuData();
-        if (((CloseVirtualSlots*)((Actor*)g_thePlayer)->GetProcess())->vfn_474(true))
-            g_thePlayer->UpdatePlayerControls();
-        FUN_00778b10();
-    }
-}
 
 struct FUN_0075b200_shell
 {
     int __thiscall GetClass();
 };
 
-// @fnv 0x0075b200
-int __thiscall FUN_0075b200_shell::GetClass()
-{
-    return 0x3f0;
-}
-
 struct FUN_0075b210_shell : ContainerMenu
 {
     void AssignTileByID(int id, Tile* tile);
 };
 
-// @fnv 0x0075b210
-void FUN_0075b210_shell::AssignTileByID(int id, Tile* tile)
-{
-    if (id >= 0 && id < 19)
-    {
-        m_pTiles[id] = tile;
-    }
-}
-
 extern void* DAT_011d8a80;
-
-// @fnv 0x0075b6e0
-void FUN_0075b6e0(int param1)
-{
-    if (DAT_011d8a80)
-        *(char*)((char*)DAT_011d8a80 + 0x4cd) = (char)param1;
-}
-
-// @fnv 0x0075b700
-int __cdecl FUN_0075b700()
-{
-    return 1008;
-}
 
 struct FUN_0075cc70_shell
 {
     void* FUN_0075cc70();
 };
-
-// @fnv 0x0075cc70
-void* FUN_0075cc70_shell::FUN_0075cc70()
-{
-    return reinterpret_cast<char*>(this) + 0xDF4;
-}
 
 int __cdecl _mbscmp(unsigned char const*, unsigned char const*);
 struct FUN_00a011f0_shell
@@ -192,61 +26,22 @@ struct FUN_00a011f0_shell
     char* __thiscall FUN_00a011f0(int);
 };
 
-// Compares the strings returned by FUN_00a011f0(0xfc4) on both items using _mbscmp and returns the result.
-// @fnv 0x0075d130
-int FUN_0075d130(FUN_00a011f0_shell** apItem1, FUN_00a011f0_shell** apItem2)
-{
-    return _mbscmp((unsigned char const*)(*apItem1)->FUN_00a011f0(0xfc4),
-                   (unsigned char const*)(*apItem2)->FUN_00a011f0(0xfc4));
-}
-
 void __cdecl _Deallocate(void*);
 struct FUN_0075b240_shell
 {
     void FUN_0075b270();
     void* DestroyIfFlagged(unsigned int);
 };
-// Calls FUN_0075b270, then deallocates this when flags has bit 0 set, and returns this.
-// @fnv 0x0075b240
-void* FUN_0075b240_shell::DestroyIfFlagged(unsigned int flags)
-{
-    FUN_0075b270();
-    if (flags & 1)
-        _Deallocate(this);
-    return this;
-}
 
 struct FUN_0075c250_Holder
 {
     bool HandleKey(int aiKey);
 };
-// Handles key 0x20 by closing ContainerMenu and reports whether the key was handled.
-// @fnv 0x0075c250
-bool FUN_0075c250_Holder::HandleKey(int aiKey)
-{
-    bool bhandled = false;
-    switch (aiKey)
-    {
-    case 0x20:
-        ContainerMenu::Close();
-        bhandled = true;
-        break;
-    }
-    return bhandled;
-}
 
 struct FUN_0075cf70_shell
 {
     void __thiscall ClearTileValues(int aiID, Tile* apTarget);
 };
-// Sets the value 0xFA3 to 0 on the Tile objects at offsets 0x5C, 0x58 and 0x4C of this object.
-// @fnv 0x0075cf70
-void __thiscall FUN_0075cf70_shell::ClearTileValues(int aiID, Tile* apTarget)
-{
-    (*(Tile**)((char*)this + 0x5C))->Set(0xFA3, 0);
-    (*(Tile**)((char*)this + 0x58))->Set(0xFA3, 0);
-    (*(Tile**)((char*)this + 0x4C))->Set(0xFA3, 0);
-}
 
 struct FUN_0075b710_shell
 {
@@ -254,17 +49,6 @@ struct FUN_0075b710_shell
     int field28[19];
     bool __thiscall FUN_0075b710();
 };
-// Returns false if any of the 19 ints in field28 is zero, otherwise returns true.
-// @fnv 0x0075b710
-bool __thiscall FUN_0075b710_shell::FUN_0075b710()
-{
-    for (int i = 0; i < 0x13; ++i)
-    {
-        if (field28[i] == 0)
-            return false;
-    }
-    return true;
-}
 
 struct FUN_007308e0
 {
@@ -330,25 +114,6 @@ struct FUN_0075cc90_cls
 {
     void AttachAndDeliver(void* a1, void* a2, void* a3);
 };
-
-// If a1, a2 and a3 are non-null, attaches a1 to a2, delivers a1 to a3, then applies each node value from the local list to a3 and clears the list.
-// @fnv 0x0075cc90
-void FUN_0075cc90_cls::AttachAndDeliver(void* a1, void* apObj, void* apSink)
-{
-    FUN_0075cc90_Local pad;
-    unsigned int list;
-    if (apObj != 0 && a1 != 0 && apSink != 0)
-    {
-        ((FUN_0075cc90_Obj*)apObj)->Attach(a1, &pad);
-        ((FUN_0075cc90_Sink*)apSink)->Deliver(a1);
-        FUN_0075cc90_Node* p;
-        for (p = (FUN_0075cc90_Node*)&pad; p != 0 && *p->Value() != 0; p = p->Next())
-        {
-            ((FUN_0075cc90_Sink*)apSink)->Apply(*p->Value(), ((FUN_0075cc90_Obj*)*p->Value())->Query(0, 0));
-        }
-        pad.Clear();
-    }
-}
 
 class TESForm
 {
@@ -447,36 +212,6 @@ class PlayerCharacterEx : public PlayerCharacter
     InventoryEntryStub* GetEntryFor(TESBoundObject* apObject);
 };
 
-// @fnv 0x0075cfc0
-bool IsRefBaseObjectUnplayable(RefEx* apRef)
-{
-    bool bResult = false;
-    if (DAT_011d93f8)
-    {
-        TESBoundObject* pObject = apRef ? apRef->GetBaseObject() : 0;
-        if (DAT_011d93f8->m_eContainerMenuMode == 4)
-        {
-            bResult =
-                static_cast<PlayerCharacterEx*>(g_thePlayer)->GetEntryFor(pObject)->extraList.GetScript()->GetCount() <
-                0;
-        }
-        else
-        {
-            TESBipedModelForm* pBiped = TESBipedModelForm::GetFormAsBipedModel(pObject);
-            TESFullName* pFullName = dynamic_cast<TESFullName*>(pObject);
-            TESObjectWEAP* pWeapon =
-                apRef->GetBaseObject()->GetFormType() == 0x28 ? (TESObjectWEAP*)apRef->GetBaseObject() : 0;
-            TESAmmo* pAmmo = apRef->GetBaseObject()->GetFormType() == 0x29 ? (TESAmmo*)apRef->GetBaseObject() : 0;
-            if (!pObject || (pBiped && !pBiped->IsPlayable()) || !pFullName || !pFullName->GetLength() ||
-                (pWeapon && !pWeapon->IsPlayable()) || (pAmmo && !pAmmo->GetFlag()))
-            {
-                bResult = true;
-            }
-        }
-    }
-    return bResult;
-}
-
 int __cdecl FUN_00406d00(char* buf, unsigned size, const char* fmt, char* name, int count);
 
 struct ContainerLikeObj
@@ -556,25 +291,6 @@ struct FUN_0075d430_shell : FUN_0075d430_base
 
 extern void __cdecl FUN_0075b750();
 
-// @fnv 0x0075d430
-bool __thiscall FUN_0075d430_shell::FUN_0075d430(int param1, int aiUnused)
-{
-    bool result = false;
-
-    if (param1 == 0x0b && unk80 != 4 && unk80 != 3 && unk24 == 1)
-    {
-        FUN_0075d430_call(0x0a, 0);
-        result = true;
-    }
-    else if (param1 == 0x0a)
-    {
-        FUN_0075b750();
-        result = true;
-    }
-
-    return result;
-}
-
 // Menu input handler: on accept (1) or cancel (6), play the matching state depending on the controller state.
 
 class InputDeviceState
@@ -595,19 +311,6 @@ class MenuStateTarget
 
     void ApplyMenuAction(int iAction, int iUnused);
 };
-
-// For actions 1 and 6, sets the menu state based on whether the input device state is negative.
-// @fnv 0x0075d4a0
-void MenuStateTarget::ApplyMenuAction(int iAction, int iUnused)
-{
-    if (iAction == 1 || iAction == 6)
-    {
-        if (GetInputDeviceState()->GetState() < 0)
-            SetState(iAction == 1 ? 0 : 5, 0);
-        else
-            SetState(iAction == 1 ? 2 : 7, 0);
-    }
-}
 
 struct ActorView
 {
@@ -868,41 +571,6 @@ struct MenuLogic : ContainerMenu
 {
     bool FUN_0075d510(InventoryEntry* entry, ExpectedReference* reference, ActorView* actor);
 };
-// @fnv 0x0075d510
-bool MenuLogic::FUN_0075d510(InventoryEntry* entry, ExpectedReference* reference, ActorView* actor)
-{
-    if (m_eContainerMenuMode == 2 &&
-        *reinterpret_cast<void**>(otherData + 0x70) == static_cast<void*>(otherData + 0x10) &&
-        reference == DAT_011dea3c && DAT_011dea3c->FUN_004997b0() && actor->IsActor() && !actor->IsDisabled(0) &&
-        !actor->CanInteract(0) && entry->FUN_0044ddc0()->FUN_00401170() == 0x28 &&
-        reinterpret_cast<ActiveList*>(&m_kContainerItems)->FUN_008256d0())
-    {
-        ActorView* a = 0;
-        if (actor->IsActor())
-        {
-            a = actor;
-            if (a->FUN_0087f3d0())
-                return false;
-            if (a->FUN_008d8520())
-            {
-                if (a->FUN_008d8520()->IsValid())
-                    return false;
-            }
-        }
-        SourceForm* b = entry->FUN_0044ddc0();
-        if (b->FUN_004c0bf0())
-        {
-            if (b->GetOrFallback(a))
-            {
-                if (b->GetOrFallback(a)->FUN_004fd4f0() == 0x20000)
-                {
-                    return true;
-                }
-            }
-        }
-    }
-    return false;
-}
 
 struct ExtraDataList
 {
@@ -924,29 +592,6 @@ struct ContainerValue : ContainerMenu
 {
     int GetContainerValue(ItemEntry* entry, int amount, bool includeUnowned);
 };
-// @fnv 0x0075e240
-int ContainerValue::GetContainerValue(ItemEntry* entry, int amount, bool includeUnowned)
-{
-    TESForm* owner = 0;
-    int value = TruncateFloatToInt(entry->FUN_004bd400());
-    int count = amount;
-    int total = 0;
-    if (((CloseVirtualSlots*)m_pContainer)->IsActor())
-        owner = (TESForm*)m_pContainer;
-    else
-        owner = m_pContainer->GetOwner();
-    for (ItemNode* node = entry->FUN_00559450(); count > 0 && node && *node->FUN_006815c0();
-         node = node->FUN_00726070())
-    {
-        TESForm* itemOwner = (*node->FUN_006815c0())->GetOwner();
-        if ((!itemOwner && includeUnowned) || (itemOwner && (*node->FUN_006815c0())->GetOwner() == owner))
-            total += (*node->FUN_006815c0())->FUN_00418770() * value;
-        count -= (*node->FUN_006815c0())->FUN_00418770();
-    }
-    if (includeUnowned)
-        total += count * value;
-    return total;
-}
 
 struct MenuTile
 {
@@ -1368,62 +1013,6 @@ struct InventoryMenuSetting
 };
 extern InventoryMenuSetting DAT_011d4378, DAT_011d2d0c, DAT_011d33fc, DAT_011d2c7c, DAT_011d412c, DAT_011d330c,
     DAT_011d20c4, DAT_011d396c;
-// Loads container_menu.xml, validates the container menu, initializes its lists and title tiles, stores the reference and mode, and returns the menu tile.
-// @fnv 0x0075b310
-MenuTile* FUN_0075b310(TESObjectREFR* reference, int mode)
-{
-    MenuSystem* tile = FUN_004b7210();
-    FUN_0075b6e0(0);
-    if (!reference && mode != 4)
-        return 0;
-    ContainerVirtual* old = FUN_00a09030(FUN_0075b700());
-    if (old)
-        delete old;
-    MenuTile* manager = tile->FUN_00586150()->ReadFile("Data\\Menus\\container_menu.xml");
-    DAT_011d93f8 = manager ? manager->GetMenu() : 0;
-    if (DAT_011d93f8 && ((ContainerVirtual*)DAT_011d93f8)->GetClass() == FUN_0075b700())
-    {
-        ((MenuData*)DAT_011d93f8)->FUN_00a1dc70(manager, false);
-        if (!((MenuData*)DAT_011d93f8)->FUN_0075b710())
-        {
-            FNV_Warning("MENUS: Container Menu Creation Failed... Are your menu and art resources up to date?");
-            return 0;
-        }
-        if (manager->FUN_00a011b0(4007) == 6006.0 || manager->FUN_00a011b0(4007) == 102.0)
-            manager->Set(4013, MenuTile::FUN_00a01530(), true);
-        tile->input.FUN_00718630(22, FUN_0075b700(), 512);
-        ((MenuData*)DAT_011d93f8)->list98.Initialize((Tile*)((MenuData*)DAT_011d93f8)->tile38, "CM_list_template");
-        ((MenuData*)DAT_011d93f8)->listc8.Initialize((Tile*)((MenuData*)DAT_011d93f8)->tile48, "CM_list_template");
-        ((MenuData*)DAT_011d93f8)->tile2c->Set(4036, DAT_011d4378.FUN_00403df0(), true);
-        ((MenuData*)DAT_011d93f8)->tile50->Set(4036, DAT_011d2d0c.FUN_00403df0(), true);
-        ((MenuData*)DAT_011d93f8)->tile54->Set(4036, DAT_011d33fc.FUN_00403df0(), true);
-        MenuTile* title = FUN_00a08b20(((MenuData*)DAT_011d93f8)->FUN_00726070(), "CM_Subtitle");
-        if (title)
-            title->Set(4036, "", true);
-        ((MenuData*)DAT_011d93f8)->reference = reference;
-        ((MenuData*)DAT_011d93f8)->mode = mode;
-        ((MenuData*)DAT_011d93f8)->FUN_0075bc80();
-        int subtitle = FUN_00a01860("_Title");
-        if (((MenuData*)DAT_011d93f8)->tile60)
-            ((MenuData*)DAT_011d93f8)->tile60->Set(subtitle, DAT_011d2c7c.FUN_00403df0(), true);
-        if (((MenuData*)DAT_011d93f8)->tile64)
-            ((MenuData*)DAT_011d93f8)->tile64->Set(subtitle, DAT_011d412c.FUN_00403df0(), true);
-        if (((MenuData*)DAT_011d93f8)->tile68)
-            ((MenuData*)DAT_011d93f8)->tile68->Set(subtitle, DAT_011d330c.FUN_00403df0(), true);
-        if (((MenuData*)DAT_011d93f8)->tile6c)
-            ((MenuData*)DAT_011d93f8)->tile6c->Set(subtitle, DAT_011d20c4.FUN_00403df0(), true);
-        if (((MenuData*)DAT_011d93f8)->tile70)
-            ((MenuData*)DAT_011d93f8)->tile70->Set(subtitle, DAT_011d396c.FUN_00403df0(), true);
-        ((MenuData*)DAT_011d93f8)->FUN_00a1dc20(0);
-        ((MenuData*)DAT_011d93f8)->FUN_0075c280(0);
-        return manager;
-    }
-    else if (DAT_011d93f8 && ((MenuData*)DAT_011d93f8)->FUN_00726070())
-    {
-        delete (ContainerVirtual*)DAT_011d93f8;
-    }
-    return 0;
-}
 
 class TESSound
 {
@@ -1443,34 +1032,6 @@ struct ContainerMenuEx : ContainerMenu
 {
     void FUN_0075baf0(TESObjectREFR* apRef, bool abOpen);
 };
-
-// @fnv 0x0075baf0
-void ContainerMenuEx::FUN_0075baf0(TESObjectREFR* apRef, bool abOpen)
-{
-    TESSound* SoundAssetTmp = 0;
-    if (!apRef)
-        return;
-    switch (apRef->GetObjectReference()->GetFormType())
-    {
-    case 0x1b:
-        if (abOpen)
-            SoundAssetTmp = static_cast<TESObjectCONTStub*>(apRef->GetObjectReference())->GetOpenSound();
-        else
-            SoundAssetTmp = static_cast<TESObjectCONTStub*>(apRef->GetObjectReference())->GetCloseSound();
-        break;
-    case 0x2a:
-    case 0x2b:
-        if (abOpen)
-            BSAudio::GetSingleton()->GetSoundHandleByEditorID("DRSBodyGenericOpen", 0x121).Play(false);
-        else
-            BSAudio::GetSingleton()->GetSoundHandleByEditorID("DRSBodyGenericClose", 0x121).Play(false);
-        break;
-    }
-    if (SoundAssetTmp)
-        static_cast<BSAudioEx*>(BSAudio::GetSingleton())
-            ->GetSoundHandleByFilePath(SoundAssetTmp->FUN_00511840(), 0x121, SoundAssetTmp)
-            .Play(false);
-}
 
 struct Menu75d250Pane
 {
@@ -1543,57 +1104,6 @@ struct Menu75d250
 };
 
 bool __cdecl FUN_00702450(int aiID);
-
-// Handles menu actions 13/14 by switching between the two panes and actions 3/4 by resetting the active pane and setting state, returning whether handled.
-// @fnv 0x0075d250
-bool Menu75d250::HandleMenuAction(int aiAction, int aiUnused)
-{
-    bool bHandled = false;
-    if (FUN_00702450(0x3f0))
-    {
-        switch (aiAction)
-        {
-        case 13:
-            if (!m_fMinimumU.IsBusy() && m_fMinimumU.GetCount() > 0)
-            {
-                m_fMaximumU.Reset();
-                Notify(0x15, 0);
-                m_fMinimumU.SetActive(1);
-                bHandled = true;
-            }
-            break;
-        case 14:
-            if (!m_fMaximumU.IsBusy() && m_fMaximumU.GetCount() > 0)
-            {
-                m_fMinimumU.Reset();
-                Notify(0x16, 0);
-                m_fMaximumU.SetActive(1);
-                bHandled = true;
-            }
-            break;
-        case 3:
-        case 4:
-            if (unk80 != 4)
-            {
-                if (m_pActive == &m_fMinimumU)
-                {
-                    m_fMinimumU.Reset();
-                    SetState(aiAction == 4 ? 0 : 2, 0);
-                    m_fMinimumU.SetActive(0);
-                }
-                else
-                {
-                    m_fMaximumU.Reset();
-                    SetState(aiAction == 4 ? 5 : 7, 0);
-                    m_fMaximumU.SetActive(0);
-                }
-                bHandled = true;
-            }
-            break;
-        }
-    }
-    return bHandled;
-}
 
 struct XRef_0075d6b0
 {
@@ -1879,62 +1389,6 @@ struct Menu_0075d6b0 : ContainerMenu
     bool FUN_0075d510(Entry_0075d6b0* entry, Ref_0075d6b0* to, Ref_0075d6b0* from);
     void TransferItem(void* a1, Entry_0075d6b0* entry, int count);
 };
-// Moves count of an entry's item between the container's two references, handling the special container and splitting stacks when needed.
-// @fnv 0x0075d6b0
-void Menu_0075d6b0::TransferItem(void* a1, Entry_0075d6b0* entry, int count)
-{
-    if (!entry || !a1)
-        return;
-    Ref_0075d6b0* from4 = (*(char**)((char*)this + 0xf8) == (char*)this + 0x98) ? (Ref_0075d6b0*)m_pContainer
-                                                                                : (Ref_0075d6b0*)DAT_011dea3c;
-    Ref_0075d6b0* to8 = (*(char**)((char*)this + 0xf8) == (char*)this + 0x98) ? (Ref_0075d6b0*)DAT_011dea3c
-                                                                              : (Ref_0075d6b0*)m_pContainer;
-    bool ok = FUN_0075d510(entry, to8, from4);
-    XList_0075d6b0* extra = entry->FUN_00559450() ? *entry->FUN_00559450()->FUN_006815c0() : 0;
-    if (ok)
-    {
-        FUN_009bd5c0(entry->FUN_0044ddc0()->GetOrFallback(0), to8, from4, entry->FUN_0044ddc0());
-        ((List_0075d6b0*)&m_kContainerItems)->FUN_005ae3d0(entry->FUN_0044ddc0());
-        to8->FUN_17c(entry->FUN_0044ddc0(), extra, count, 0, 0, 0, 0, 0, 1, 0);
-        return;
-    }
-    if (extra && extra->FUN_0041de00() && !extra->FUN_0041de00()->FUN_00440da0() &&
-        !extra->FUN_0041de00()->FUN_00440d80())
-    {
-        ((Ref_0075d6b0*)DAT_011dea3c)->FUN_3d0(extra->FUN_0041de00(), 1, 0);
-        return;
-    }
-    if (m_eContainerMenuMode == 4)
-    {
-        int remaining = count;
-        Node_0075d6b0* nodeB = entry->FUN_00559450();
-        while (remaining > 0)
-        {
-            XList_0075d6b0* x4 = nodeB ? *nodeB->FUN_006815c0() : 0;
-            int n7 = x4 ? x4->FUN_00418770() : remaining;
-            n7 = MinInt(n7, remaining);
-            if (from4 == (Ref_0075d6b0*)DAT_011dea3c)
-            {
-                Entry_0075d6b0* movedB = ((Ref_0075d6b0*)DAT_011dea3c)->FUN_00968be0(entry->FUN_0044ddc0(), x4, n7, 1);
-                ((Ref_0075d6b0*)DAT_011dea3c)
-                    ->FUN_190(movedB->FUN_0044ddc0(),
-                              movedB->FUN_00559450() ? *movedB->FUN_00559450()->FUN_006815c0() : 0,
-                              movedB->FUN_00726070());
-                delete movedB;
-                nodeB = entry->FUN_00559450();
-            }
-            else if (to8 == (Ref_0075d6b0*)DAT_011dea3c)
-            {
-                ((Ref_0075d6b0*)DAT_011dea3c)->FUN_009687b0(entry->FUN_0044ddc0(), x4, n7);
-                to8->FUN_17c(entry->FUN_0044ddc0(), x4, n7, 0, 0, 0, 0, 0, 1, 0);
-                nodeB = nodeB ? nodeB->FUN_00726070() : 0;
-            }
-            remaining -= n7;
-        }
-        return;
-    }
-    to8->FUN_17c(entry->FUN_0044ddc0(), extra, count, m_eContainerMenuMode == 2, 0, from4, 0, 0, 1, 0);
-}
 
 namespace fnv_0075e0b0 {
 struct AV_75e0b0
@@ -2435,38 +1889,6 @@ struct FUN_0075e0b0_shell
     int* active;
     bool FUN_0075e0b0(Actor_75e0b0* actor, int amount);
 };
-// @fnv 0x0075e0b0
-bool FUN_0075e0b0_shell::FUN_0075e0b0(Actor_75e0b0* actor, int amount)
-{
-    bool success = true;
-    if (actor && amount > 0 && !actor->IsDead())
-    {
-        int chance = ComputeClampedSettingSum(DAT_011dea3c->av.FUN_0066ef20(42), actor->av.GetValue(42), (float)amount);
-        DAT_011dea3c->UpdateSkill(42, 1);
-        if (FUN_00476c00(100)->FUN_00aa5230() < (unsigned int)chance)
-        {
-            if (active == &embedded && !warned)
-            {
-                FUN_004d5c60(13);
-                warned = true;
-            }
-        }
-        else
-        {
-            DAT_011dea3c->FUN_008c00e0(actor, 0, 0);
-            DispatchMessageToSink(DAT_011d3f94.FUN_00403df0(), 2, 0, 0, 2.0f, false);
-            success = false;
-            failed = true;
-        }
-        actor->FUN_004181e0();
-        unsigned int type = FUN_0047e040(actor->FUN_004181e0()->av.GetFloat(23));
-        if (type != 2 && type != 4)
-        {
-            DAT_011dea3c->FUN_0094fd30((int)*DAT_011cde20.FUN_00403e20());
-        }
-    }
-    return success;
-}
 }  // namespace fnv_0075e0b0
 
 struct TrimGlyph
@@ -2611,38 +2033,6 @@ struct TrimMenu
     TrimTile* label;
     void SetLabelText(const char*);
 };
-// @fnv 0x0075e8c0
-void TrimMenu::SetLabelText(const char* text)
-{
-    if (!text || !text[0])
-        return;
-    int font8 = (int)label->FUN_00a011b0(4025);
-    float dimensions9[3];
-    FUN_005bd5b0()->FUN_00a1b020(dimensions9, text, font8, DAT_01016970, 0);
-    float widthTmp = label->FUN_0045cd60()->FUN_00a011b0(4017) - DAT_01072310;
-    if (root->IsTraitNonZero(4003))
-        widthTmp -= DAT_010356b0;
-    if (dimensions9[0] > widthTmp)
-    {
-        char* buffer = new char[260];
-        TrimGlyph* letters = FUN_005bd5b0()->FUN_005bd5c0(font8 - 1)->data->letters;
-        float total2 = 0.0f;
-        int index = 0;
-        FUN_00403d30(buffer, 0, 260);
-        total2 += (letters[46].leading + letters[46].width + letters[46].spacing) * DAT_01021928;
-        while (total2 <= widthTmp && index < 260)
-        {
-            buffer[index] = text[index];
-            total2 += letters[text[index]].leading + letters[text[index]].width + letters[text[index]].spacing;
-            index++;
-        }
-        FUN_00406d50(buffer, 260, "...");
-        label->FUN_00a01350(4036, buffer, true);
-        delete[] buffer;
-    }
-    else
-        label->FUN_00a01350(4036, text, true);
-}
 
 extern const char str_010721f4[];
 extern const char DAT_01011584[];
@@ -2733,34 +2123,6 @@ struct Cls75eac0
 
 extern ContainerMenu* DAT_011d93f8;
 
-// @fnv 0x0075eac0
-void Cls75eac0::Update()
-{
-    if (m_fc != 0 && FUN_00457fe0() > (unsigned int)m_fc)
-    {
-        m_fc = 0;
-        TileObj* tile = (TileObj*)FUN_00a08b20(((MenuObj*)DAT_011d93f8)->FUN_00726070(), str_010721f4);
-        if (tile != 0)
-        {
-            tile->FUN_00a01350(0xfc4, DAT_01011584, true);
-        }
-    }
-    if (GetRaceCount(m_c8) > 0 && DAT_011a002c != 0)
-    {
-        if (DAT_011d93fc != 0 && FUN_00401170(FUN_0044ddc0(DAT_011d93fc)) == 0x28)
-        {
-            UpdateAnimationTileFade(m_60, m_64, m_68, DAT_011d93fc, 0);
-        }
-        else if (DAT_011d93fc != 0 && FUN_00401170(FUN_0044ddc0(DAT_011d93fc)) == 0x18)
-        {
-            UpdateAnimationTileFade(
-                (DAT_011d93fc != 0 && ((RefObj*)FUN_0044ddc0(DAT_011d93fc))->FUN_004be060() != 0.0) ? m_6c : 0,
-                (DAT_011d93fc != 0 && ((RefObj*)FUN_0044ddc0(DAT_011d93fc))->FUN_004be180() != 0.0) ? m_70 : 0, 0,
-                DAT_011d93fc, 0);
-        }
-    }
-}
-
 extern int DAT_0106ff84;
 void* __cdecl FUN_00403d30(void*, int, unsigned int);
 struct Base0071
@@ -2776,16 +2138,6 @@ struct FUN_0071f240 : Base0071
     unsigned int unk48, unk4c, unk50;
     FUN_0071f240();
 };
-// Sets the vtable, zeroes the 0x20-byte block at unk28, and clears unk4c, unk48 and unk50.
-// @fnv 0x0071f240
-FUN_0071f240::FUN_0071f240()
-{
-    vtable = &DAT_0106ff84;
-    FUN_00403d30(&unk28, 0, 0x20);
-    unk4c = 0;
-    unk48 = 0;
-    unk50 = 0;
-}
 
 // 0x0075cd70  unit_5a9677af71cd.cpp  /MT /Od /Oy- /GS /EHsc /Gy /GF
 // thiscall, 2 stack args (ret 8): optional tile lookup, then a switch over the
@@ -2851,56 +2203,6 @@ struct Menu75
 
     void UpdateProcessTile(int idx, HighProcess* proc);
 };
-
-// Handles tile index 0x14-0x16: switches the active state between a98 and b0, updates tiles from the state object, and sets DAT_011a002c.
-// @fnv 0x0075cd70
-void Menu75::UpdateProcessTile(int iTileIndex, HighProcess* pProcess)
-{
-    if (pProcess == 0 && iTileIndex >= 0 && iTileIndex < 0x13)
-    {
-        pProcess = (HighProcess*)tiles28[iTileIndex];
-    }
-
-    switch (iTileIndex)
-    {
-    case 0x15:
-        v14(0x14, 0);
-        b0.v00(0);
-        state = &a98;
-        break;
-    case 0x16:
-        v14(0x14, 0);
-        a98.v00(0);
-        state = &b0;
-        break;
-    case 0x14:
-        if (pProcess)
-        {
-            DAT_011a002c = 1;
-            if (state != &a98 && pProcess->GetProcessLevel() == i38)
-            {
-                v10(0x15, 0);
-            }
-            else
-            {
-                if (state != &b0 && pProcess->GetProcessLevel() == i48)
-                {
-                    v10(0x16, 0);
-                }
-            }
-            DAT_011d93fc = ((StateObj75*)state)->FUN_007a1910();
-            if (DAT_011d93fc)
-            {
-                FUN_00707e30(DAT_011d93fc, p5c);
-                ((TileInt75*)p5c)->FUN_00700320(0xfa3, 1);
-                ((TileStr75*)p58)->FUN_00a01350(0xfcc, ((RetObj75*)DAT_011d93fc)->GetIconFilename(0), 1);
-                ((TileInt75*)p58)->FUN_00700320(0xfa3, 1);
-                ((TileInt75*)p4c)->FUN_00700320(0x1004, (state != &a98) + 1);
-                ((TileInt75*)p4c)->FUN_00700320(0xfa3, 1);
-            }
-        }
-    }
-}
 
 // HandleContainerMenuActivate v1
 extern void* DAT_011d93fc;
@@ -3078,88 +2380,6 @@ struct Inv75
     int FUN_004c8f30(void* form);
 };
 
-// @fnv 0x0075dc80
-void __cdecl HandleContainerMenuActivate(int aiCount)
-{
-    void* expected;
-    void* refObj;
-    void* entry;
-    {
-        bool flag;
-        {
-            char msgtext[260];
-            entry = ((EntrySrc75*)*(void**)&DAT_011d93f8->otherData[0x70])->FindItemData(&DAT_011d93fc);
-            refObj = (DAT_011d93f8->m_pContainer && ((CloseVirtualSlots*)DAT_011d93f8->m_pContainer)->IsActor())
-                         ? (void*)DAT_011d93f8->m_pContainer
-                         : 0;
-            flag = false;
-            expected = (*(void**)&DAT_011d93f8->otherData[0x70] == (void*)&DAT_011d93f8->otherData[0x10])
-                           ? (void*)DAT_011dea3c
-                           : (void*)DAT_011d93f8->m_pContainer;
-            if (aiCount == 0 || DAT_011d93fc == 0 || entry == 0)
-                flag = true;
-            if (((FloatSrc75*)*(void**)((ContainerLikeObj*)((int*)entry + 1))->FUN_007b5370(4009))->FUN_00a011b0() ==
-                128.0)
-                flag = true;
-            if (DAT_011d93f8->m_eContainerMenuMode == 3 &&
-                *(void**)&DAT_011d93f8->otherData[0x70] == (void*)&DAT_011d93f8->otherData[0x10] && refObj != 0)
-            {
-                if (((Sound75*)refObj)->FUN_00577250(0) +
-                        FUN_0048ebc0((int)FUN_0044ddc0(DAT_011d93fc), FUN_004d1360((void*)DAT_011dea3c)) * aiCount >=
-                    ((FloatThis75*)refObj)->FUN_008a0c20())
-                {
-                    FUN_00406d00(msgtext, 260, DAT_01012058, (char*)((Name75*)refObj)->FUN_0055d520(),
-                                 (int)g_011d2628.FUN_00403df0());
-                    Msg75::DispatchMessageToSink(msgtext, 2, 0, 0, 2.0f, false);
-                    flag = true;
-                    int id = (int)dynamic_cast<TESTopic*>(FUN_00483a00(&DAT_010722dc));
-                    ((MenuEc75*)DAT_011d93f8)->PlaySelectedTopicInfo(id);
-                }
-            }
-        }
-        if (DAT_011d93f8 != 0 && DAT_011d93f8->m_eContainerMenuMode == 2)
-        {
-            if ((expected == (void*)DAT_011dea3c && refObj != 0) ||
-                (expected != (void*)DAT_011dea3c &&
-                 ((Form75*)DAT_011d93fc)->GetExtraForm() != FUN_007af430((void*)DAT_011dea3c)))
-            {
-                int stolenDelta;
-                bool isC8 = (*(void**)&DAT_011d93f8->otherData[0x70] == (void*)&DAT_011d93f8->otherData[0x40]);
-                stolenDelta =
-                    ((ContainerValue*)DAT_011d93f8)->GetContainerValue((ItemEntry*)DAT_011d93fc, aiCount, isC8) *
-                    (isC8 ? 1 : -1);
-                DAT_011d93f8->m_iStolenItemCount += stolenDelta;
-                if (!isC8)
-                    stolenDelta = 1;
-                if (refObj != 0)
-                {
-                    if (!((MenuE0B75*)DAT_011d93f8)->FUN_0075e0b0(refObj, stolenDelta))
-                    {
-                        flag = true;
-                        ContainerMenu::Close();
-                    }
-                }
-            }
-        }
-        if (!flag)
-        {
-            void* processBaseObject;
-            void* pCachedForm = (void*)FUN_0044ddc0(DAT_011d93fc);
-            processBaseObject = ((ProcGet75*)DAT_011dea3c)->FUN_008d8520()->vfn_014c();
-            ((PlayerAct75*)DAT_011dea3c)->PlayActorSound(pCachedForm, 1, 0);
-            ((MenuD6B75*)DAT_011d93f8)->TransferItem(entry, DAT_011d93fc, aiCount);
-            ((MenuC28B75*)DAT_011d93f8)->FUN_0075c280((int)pCachedForm);
-            if (processBaseObject != 0)
-            {
-                if (Inv75::FUN_004bf220((void*)DAT_011dea3c)->FUN_004c8f30((void*)FUN_0044ddc0(processBaseObject)) == 0)
-                {
-                    ((ProcGet75*)DAT_011dea3c)->FUN_008d8520()->vfn_0168(0);
-                }
-            }
-        }
-    }
-}
-
 struct S650Form
 {
     virtual void v00();
@@ -3236,63 +2456,6 @@ struct S650
 {
     static bool FUN_0075e650(S650Ref* arg);
 };
-// Looks up the ref in list1/list2, applies a type-based filter switch, then adds group, form and mode checks to return whether the ref passes.
-// @fnv 0x0075e650
-bool S650::FUN_0075e650(S650Ref* pRef)
-{
-    bool result2 = false;
-    int type6 = pRef->FUN_0044ddc0()->FUN_00401170();
-    void* found8 = (*(S650Global**)&DAT_011D93F8)->list1.FindItemData(&pRef);
-    int filterVal = 0;
-    bool firstB = true;
-    if (found8)
-    {
-        filterVal = (*(S650Global**)&DAT_011D93F8)->first;
-    }
-    else
-    {
-        found8 = (*(S650Global**)&DAT_011D93F8)->list2.FindItemData(&pRef);
-        filterVal = (*(S650Global**)&DAT_011D93F8)->second;
-        firstB = false;
-    }
-    switch (filterVal)
-    {
-        break;
-    case 1:
-        result2 = type6 != 0x28;
-        break;
-    case 2:
-        result2 = type6 != 0x18 && type6 != 0x1a;
-        break;
-    case 3:
-        result2 = type6 != 0x1d && type6 != 0x2f && type6 != 0x19;
-        break;
-    case 4:
-        result2 = type6 == 0x28 || type6 == 0x18 || type6 == 0x1a || type6 == 0x1d || type6 == 0x2f || type6 == 0x29 ||
-                  type6 == 0x19 || type6 == 0x6c || type6 == 0x73 || type6 == 0x74;
-        break;
-    case 5:
-        result2 = type6 != 0x29;
-    }
-    if (type6 == 0x29)
-    {
-        S650Group* group = FUN_00483a00(&DAT_010722f4);
-        S650Form* form = pRef->FUN_0044ddc0();
-        if (group && group->GetConditionIndex(form) >= 0)
-            result2 = true;
-        if (form && !form->FUN_004c94d0())
-            result2 = true;
-    }
-    if (firstB)
-    {
-        result2 = result2 || type6 == 0x2e || pRef->FUN_0044ddc0()->v37();
-    }
-    else if ((*(S650Global**)&DAT_011D93F8)->mode == 2)
-    {
-        result2 = result2 || pRef->FUN_004bddd0(false);
-    }
-    return result2;
-}
 
 class PlaybackString
 {
@@ -3529,41 +2692,6 @@ class PlaybackMenu : public ContainerMenu
     void PlaySelectedTopicInfo(PlaybackTopic* topic);
     void ShowMessageWithSound(PlaybackString, PlaybackHandle);
 };
-// Selects a topic info for the current actor, begins a dialogue, and plays the current response's sound or voice, then updates the menu.
-// @fnv 0x0075ec60
-void PlaybackMenu::PlaySelectedTopicInfo(PlaybackTopic* topic)
-{
-    PlaybackTopicInfo* _item = 0;
-    ExpectedReference* _context = DAT_011dea3c;
-    Actor* _actor = DAT_011d93f8->m_pContainer && reinterpret_cast<ActorView*>(DAT_011d93f8->m_pContainer)->IsActor()
-                        ? dynamic_cast<Actor*>(DAT_011d93f8->m_pContainer)
-                        : 0;
-    if (topic)
-        _item = topic->SelectInfo(_actor, _context);
-    if (_item)
-    {
-        PlaybackDialogue _data(_item->GetQuest(), topic, _item, _actor);
-        _data.Begin();
-        PlaybackResponse* _entry = _data.GetCurrentItem();
-        if (_entry)
-        {
-            if (_entry->GetSoundByEditorID())
-            {
-                unsigned soundID = _entry->GetSoundByEditorID()->FUN_0084e3a0();
-                reinterpret_cast<PlaybackHandle&>(m_kFadeSequence) =
-                    reinterpret_cast<PlaybackActor*>(_actor)->GetActorSoundHandle(soundID, 0, 0x102, true);
-            }
-            else
-            {
-                float duration = reinterpret_cast<PlaybackActor*>(_actor)->PlayVoice(
-                    _entry->GetVoiceFilePath()->GetString(), reinterpret_cast<PlaybackHandle*>(&m_kFadeSequence),
-                    _entry->GetFlags(), _entry->GetSoundID(), _entry->GetText()->GetLength(), _entry->GetEmotion(),
-                    _entry->GetEmotionValue(), DAT_011dea3c, true, true, 0, 0, true);
-            }
-            ShowMessageWithSound(*_entry->GetText(), reinterpret_cast<PlaybackHandle&>(m_kFadeSequence));
-        }
-    }
-}
 
 struct StrMem
 {
@@ -3677,25 +2805,6 @@ struct MenuDeadline539
     unsigned int deadline;
     void ShowMessageWithSound(StrMem message, BSSoundHandleEx sound);
 };
-// @fnv 0x0075eea0
-void MenuDeadline539::ShowMessageWithSound(StrMem strMessage, BSSoundHandleEx soundHandle)
-{
-    float duration3 = 0.0f;
-    Actor* actor = (DAT_011d93f8->m_pContainer && ((CloseVirtualSlots*)DAT_011d93f8->m_pContainer)->IsActor())
-                       ? dynamic_cast<Actor*>(DAT_011d93f8->m_pContainer)
-                       : 0;
-    if (strMessage.FUN_004048e0() > 0 &&
-        (*DAT_011d8928.FUN_00408d60() || (actor && ((ActorAccess539*)actor)->FUN_008c1bc0())))
-    {
-        TextTile539* tile = (TextTile539*)FUN_00a08b20(((MenuRoot539*)DAT_011d93f8)->FUN_00726070(), DAT_010721f4);
-        if (tile)
-            tile->FUN_00a01350(0xfc4, strMessage.FUN_00559450(), true);
-        duration3 = (float)soundHandle.FUN_00ad8b30();
-        if (duration3 == 0.0)
-            duration3 = strlen(strMessage.FUN_00559450()) * *DAT_011d2178.FUN_00403e20() * 1000.0;
-        deadline = (unsigned int)(FUN_00457fe0() + duration3);
-    }
-}
 
 struct xRef
 {
@@ -4093,33 +3202,6 @@ struct xMenu
 extern xMenu* xContMenu;
 extern xPlayer* xThePlayer;
 
-// Activates a valid referenced item; otherwise may transfer it, update menu state, and call AddItem.
-// @fnv 0x0075da60
-void FUN_0075da60(xTile* pTile, xItem* pItem)
-{
-    if (!pItem || !xContMenu || !pTile || xContMenu->m_bDone)
-        return;
-    xExtra* qfTOqo = 0;
-    if (pItem->Get())
-        qfTOqo = *pItem->Get()->First();
-    if (qfTOqo && qfTOqo->GetRef() && !qfTOqo->GetRef()->IsDisabled() && !qfTOqo->GetRef()->IsDeleted())
-    {
-        xThePlayer->Activate(qfTOqo->GetRef(), 1, 0);
-        return;
-    }
-    if (pTile->m_kFormatEntries.Find(0xfa9)->GetFloat() == 128.0)
-        return;
-    if (xContMenu->m_iMode == 2)
-    {
-        xCont* pActor = xContMenu->m_pkCont->IsActorX() ? xContMenu->m_pkCont : 0;
-        int iTransferred = xContMenu->Transfer(pItem, pItem->GetCount(), 1);
-        xContMenu->m_iTotal += iTransferred;
-        xContMenu->m_bDone = !xContMenu->Check(pActor, iTransferred);
-    }
-    xContMenu->m_pkCont->AddItem(pItem->GetFlags(), pItem->Get() ? *pItem->Get()->First() : 0, pItem->GetCount(),
-                                 xContMenu->m_iMode == 2, 0, xThePlayer, 0, 0, 1, 0);
-}
-
 extern "C" void* __cdecl FUN_00ec43fb(void* p, long off, void* src, void* dst, int isRef);
 
 TESForm* FUN_00483a00(const char* pcName);
@@ -4205,43 +3287,6 @@ struct MenuX
     void FUN_0075baf0(RefX* pkRef, bool b);
     void FUN_0075bc80();
 };
-// Switches on m80 to update labels, play the trader sound and selected topic info, or set tile traits to zero.
-// @fnv 0x0075bc80
-void MenuX::FUN_0075bc80()
-{
-    switch (m80)
-    {
-    case 1:
-    case 2:
-        if (m74)
-        {
-            SetLabelText(m74->FUN_0055d520());
-            FUN_0075baf0(m74, true);
-        }
-        break;
-    case 3:
-        if (m74)
-        {
-            SetLabelText(m74->FUN_0055d520());
-            BSAudio::GetSingleton()->GetSoundHandleByEditorID("DRSTraderOpen", 0x121).Play(false);
-            FUN_00763ff0();
-            TESTopic* pkForm = dynamic_cast<TESTopic*>(FUN_00483a00("FollowersTrade"));
-            ((MgrX*)DAT_011d93f8)->PlaySelectedTopicInfo(pkForm);
-        }
-        m50->FUN_00700320(0xfa3, 0);
-        break;
-    case 4:
-        m2c->FUN_00a01350(0xfc4, DAT_011d3c40.FUN_00403df0(1));
-        if (((HudX*)DAT_011dea3c)->FUN_008a1710())
-            SetLabelText(((HudX*)DAT_011dea3c)->FUN_008a1710()->kSub.FUN_00408da0());
-        m50->FUN_00700320(0xfa3, 0);
-        m28->FUN_00700320(0xfa3, 0);
-        m30->FUN_00700320(0xfa3, 0);
-        m3c->FUN_00700320(0xfa3, 0);
-        m44->FUN_00700320(0xfa3, 0);
-        break;
-    }
-}
 
 struct SoundHandle75
 {
@@ -4358,74 +3403,6 @@ struct Menu_0075be80
     static void FUN_0075b750();
     void FUN_0075be80(int, void*);
 };
-// Handles container menu activation by ID, cycling item lists or triggering take-all and quantity menu actions.
-// @fnv 0x0075be80
-void Menu_0075be80::FUN_0075be80(int aiActionId, void* tile)
-{
-    if (!tile && aiActionId >= 0 && aiActionId < 19)
-        tile = ((void**)&unk28)[aiActionId];
-    switch (aiActionId)
-    {
-    case 20:
-        if (g_011d93fc)
-        {
-            DAT_011a002c = 0;
-            bool take = (FUN_00481f10(g_011d93fc->FUN_0044ddc0()) ||
-                         FUN_0048ebc0(g_011d93fc->FUN_0044ddc0(), FUN_004d1360(_g_thePlayer)) <= 0.0) &&
-                        (unk80 == 1 || unk80 == 2) && unkf8 == &unkc8;
-            if (g_011d93fc->FUN_00726070() > *g_011d2418.Int() && !FUN_0075d510(g_011d93fc, _g_thePlayer, unk74) &&
-                !take)
-            {
-                unkf8->FUN_007312e0();
-                unkf8->reset(0);
-                CreateQuantityMenu(g_011d93fc->FUN_00726070(), HandleContainerMenuActivate, 0x7fffffff);
-            }
-            else if (take)
-                HandleContainerMenuActivate(g_011d93fc->FUN_00726070());
-            else
-                HandleContainerMenuActivate(1);
-        }
-        break;
-    case 10:
-        unkc8.FUN_007314c0(FUN_0075da60, 0, 0x7fffffff);
-        FUN_00453a70()->GetSoundHandleByEditorID("UIItemTakeAll", 0x121).Play(false);
-        FUN_0075b750();
-        break;
-    case 11:
-        FUN_0075b750();
-        break;
-    case 0:
-    case 1:
-    case 2:
-        FUN_00706f30(unk94);
-        do
-        {
-            unk8c += aiActionId == 0 ? -1 : 1;
-            if (unk8c < 0)
-                unk8c = 5;
-            else if (unk8c > 5)
-                unk8c = 0;
-            UpdatePaneTitle(unk2c);
-            unk98.ApplyFilter(FUN_0075e650);
-        } while (!unk98.FUN_0071ae60() && unk8c != 0);
-        break;
-    case 5:
-    case 6:
-    case 7:
-        FUN_00706f30(unk94);
-        do
-        {
-            unk90 += aiActionId == 5 ? -1 : 1;
-            if (unk90 < 0)
-                unk90 = 5;
-            else if (unk90 > 5)
-                unk90 = 0;
-            UpdatePaneTitle(unk40);
-            unkc8.ApplyFilter(FUN_0075e650);
-        } while (!unkc8.FUN_0071ae60() && unk90 != 0);
-        break;
-    }
-}
 
 struct CategoryNameReference
 {
@@ -4486,63 +3463,6 @@ struct CategoryTitleMenu
     void SetLabelText(const char* name);
     void UpdatePaneTitle(TileObj* pane);
 };
-// UI invariant: both category values are initialized to0 and their event writers
-// wrap every increment/decrement into0..5 before calling this title updater.
-// Every valid path that uses title below first initializes the real buffer.
-// Sets pane title text from the selected category and calls FUN_00730490 when the setting equals "ENGLISH".
-// @fnv 0x0075e380
-void CategoryTitleMenu::UpdatePaneTitle(TileObj* pane)
-{
-    bool nonEnglish;
-    CategoryFilter category5 = pane == leftPane ? leftCategory : rightCategory;
-    nonEnglish = FUN_00408b20(DAT_011c3cb4.FUN_00403df0(), "ENGLISH") != 0;
-    char title[260];
-    if (!container || !pane)
-        return;
-    switch (category5)
-    {
-    case 0:
-        if (pane == leftPane)
-        {
-            FUN_00406d30(title, 260, DAT_011d4378.FUN_00403df0());
-            if (!nonEnglish)
-                FUN_00730490(title, 260);
-            pane->FUN_00a01350(0xfc4, title, true);
-        }
-        else
-        {
-            SetLabelText(container->FUN_0055d520());
-        }
-        break;
-    case 1:
-        FUN_00406d30(title, 260, DAT_011d29b8.FUN_00403df0());
-        if (!nonEnglish)
-            FUN_00730490(title, 260);
-        break;
-    case 2:
-        FUN_00406d30(title, 260, DAT_011d4d50.FUN_00403df0());
-        if (!nonEnglish)
-            FUN_00730490(title, 260);
-        break;
-    case 3:
-        FUN_00406d30(title, 260, DAT_011d40b4.FUN_00403df0());
-        if (!nonEnglish)
-            FUN_00730490(title, 260);
-        break;
-    case 4:
-        FUN_00406d30(title, 260, DAT_011d2acc.FUN_00403df0());
-        if (!nonEnglish)
-            FUN_00730490(title, 260);
-        break;
-    case 5:
-        FUN_00406d30(title, 260, DAT_011d4918.FUN_00403df0());
-        if (!nonEnglish)
-            FUN_00730490(title, 260);
-        break;
-    }
-    if (category5)
-        pane->FUN_00a01350(0xfc4, title, true);
-}
 
 namespace fnv_0075c280 {
 struct MenuForm;
@@ -4895,112 +3815,6 @@ struct MenuRoot
     MenuTile* tile;
 };
 
-// Populates m_kList and otherList with inventory items, applies filters and sorting, and updates the active list selection and weight/capacity display.
-// @fnv 0x0075c280
-void InventoryMenu::FUN_0075c280(MenuForm* filter)
-{
-    int unused4 = 0;
-    float weight7, capacity4;
-    char label5[64];
-    if (active && active->GetSelected())
-        active->FUN_007312e0();
-    if (mode == 4)
-    {
-        MenuInventory* _inventory = DAT_011dea3c->FUN_0075cc70();
-        otherList.Clear();
-        for (unsigned int iA = 0; iA < _inventory->FUN_0044ddc0(); iA++)
-            otherList.FUN_0071a320(*_inventory->FUN_006a7ad0(iA), (*_inventory->FUN_006a7ad0(iA))->GetTargetFullName(),
-                                   0, 0);
-        if (filter)
-            AttachAndDeliver(filter, FUN_004bf220(DAT_011dea3c), &m_kList);
-        else
-            m_kList.PopulateInventoryList(DAT_011dea3c, IsRefBaseObjectUnplayable, 0, 0, 0, 0);
-    }
-    else if (filter)
-    {
-        void* playerInventory4 = FUN_004bf220(DAT_011dea3c);
-        void* otherInventory = container ? FUN_004bf220(container) : 0;
-        MenuForm* ammo4 = filter->FUN_00401170() == 40 ? filter->FUN_00525980(container->IsActor() ? container : 0) : 0;
-        AttachAndDeliver(filter, playerInventory4, &m_kList);
-        if (ammo4)
-            AttachAndDeliver(ammo4, playerInventory4, &m_kList);
-        if (mode == 3)
-            otherList.PopulateInventoryList(container, IsRefBaseObjectUnplayable, 0, 0, 0, 0);
-        else
-        {
-            AttachAndDeliver(filter, otherInventory, &otherList);
-            if (ammo4)
-                AttachAndDeliver(ammo4, otherInventory, &otherList);
-        }
-    }
-    else
-    {
-        m_kList.PopulateInventoryList(DAT_011dea3c, IsRefBaseObjectUnplayable, 0, 0, 0, 0);
-        otherList.PopulateInventoryList(container, IsRefBaseObjectUnplayable, 0, 0, 0, 0);
-    }
-    for (MenuFormList* node9 = &forms; node9 && *node9->FUN_006815c0(); node9 = node9->FUN_00726070())
-    {
-        if (!filter || filter == *node9->FUN_006815c0())
-        {
-            FUN_004bc550* entry2 = new FUN_004bc550((TESBoundObject*)*node9->FUN_006815c0(), 1);
-            StrMem name;
-            MenuEntry* tile2 = 0;
-            FUN_00406f60(&name, DAT_01012058, DAT_011d3f70.FUN_00403df0(), entry2->GetTargetFullName());
-            tile2 = otherList.FUN_0071a320(entry2, name.FUN_00559450(), 0, 0);
-            (*tile2->tile.FUN_007b5370(0xfa9))->FUN_00a012d0(DAT_0101e704, true);
-        }
-    }
-    if (container && container->IsActor() && container->IsDead(0))
-    {
-        MenuReference* weapon = container->FUN_005d43c0()->FUN_0041df00();
-        if (weapon && !weapon->FUN_00437b90() && (!filter || filter == weapon->FUN_007af430()))
-        {
-            FUN_004bc550* weaponEntry = new FUN_004bc550((TESBoundObject*)weapon->FUN_007af430(), 1);
-            MenuEntry* weaponTile3 = 0;
-            weaponTile3 = otherList.FUN_0071a320(weaponEntry, weaponEntry->GetTargetFullName(), 0, 0);
-            if (weaponEntry->FUN_00559450())
-                weaponEntry->extra = new FUN_0096a2d0;
-            if (!*weaponEntry->FUN_00559450()->FUN_006815c0())
-            {
-                FUN_00410360* extra6 = new FUN_00410360;
-                weaponEntry->FUN_00559450()->FUN_005ae3d0(&extra6);
-            }
-            (*weaponEntry->FUN_00559450()->FUN_006815c0())->FUN_0041de40(weapon);
-            (*weaponEntry->FUN_00559450()->FUN_006815c0())->FUN_00419970(weapon->FUN_00568ad0());
-        }
-    }
-    m_kList.FUN_007314c0(FUN_0075d160, 0, 0x7fffffff);
-    m_kList.ApplyFilter(FUN_0075e650);
-    m_kList.Sort(FUN_0075d130);
-    otherList.FUN_007314c0(FUN_0075d160, 0, 0x7fffffff);
-    otherList.ApplyFilter(FUN_0075e650);
-    otherList.Sort(FUN_0075d130);
-    DAT_011dea3c->GetTwoValues(&weight7, &capacity4);
-    FUN_00406d00(label5, 64, DAT_010722d0, DAT_011d1e60.FUN_00403df0(), FUN_00406d90(FUN_004bd510(weight7, 1.0f)),
-                 FUN_00406d90(FUN_004bd510(capacity4, 1.0f)));
-    ((MenuRoot*)DAT_011d93f8)->tile->FUN_00a01350(0xfc4, label5, true);
-    if (!active && FUN_004b71d0())
-        active = &otherList;
-    if (active)
-    {
-        if (active->FUN_0071ae60() > 0)
-            active->UpdateCurrentValueTile(1);
-        else
-        {
-            selection = -1;
-            Click(active == &m_kList ? 2 : 7, 0);
-            selection = 3;
-            if (active->FUN_0071ae60() > 0)
-                active->UpdateCurrentValueTile(1);
-            else
-            {
-                Select(active == &m_kList ? 22 : 21, 0);
-                if (FUN_004b71d0())
-                    FUN_004b7210()->FUN_00715860(active->CallVirtualZero(0xfc3), 1);
-            }
-        }
-    }
-}
 }  // namespace fnv_0075c280
 
 struct TESModelTextureSwap : TESBoundObject
@@ -5057,46 +3871,6 @@ struct ThiS
     void FUN_007019e0(ObjRef* p1);
 };
 
-// Calls inventory change routines, passes texture swap names to loader routines, updates a player object, and clears a field.
-// @fnv 0x007019e0
-void ThiS::FUN_007019e0(ObjRef* apObjRef)
-{
-    InvChg* aX = FUN_004bf220(DAT_011dea3c);
-    if (!(apObjRef != 0 && f24 != 0 && aX != 0))
-        return;
-    ObjRef* b = aX->FindEntryWithExtraListType(f28);
-    int v4 = apObjRef->FUN_00559450() ? *(int*)((ObjRaw*)apObjRef->FUN_00559450())->FUN_006815c0() : 0;
-    TESModelTextureSwap* c_;
-    TESModelTextureSwap* d;
-    if (b != 0)
-    {
-        aX->ClearExtraForSlot(b, f28);
-        if (b->FUN_0044ddc0() != 0)
-        {
-            c_ = GetBipedModelTextureSwap(b->FUN_0044ddc0(), DAT_011dea3c);
-            if (c_ == 0)
-                c_ = dynamic_cast<TESModelTextureSwap*>(b->FUN_0044ddc0());
-            if (c_ != 0)
-                DAT_011c3b3c->FUN_0045a5e0(c_->GetSwapName());
-        }
-    }
-    aX->SetInventorySlotExtraData(apObjRef, v4, f28);
-    if (apObjRef->FUN_0044ddc0() != 0)
-    {
-        d = GetBipedModelTextureSwap(apObjRef->FUN_0044ddc0(), DAT_011dea3c);
-        if (d == 0)
-            d = dynamic_cast<TESModelTextureSwap*>(apObjRef->FUN_0044ddc0());
-        if (d != 0)
-            DAT_011c3b3c->FUN_00447080(d->GetSwapName(), 0, 1, 0, 0, 0);
-    }
-    FUN_007017b0();
-    ((PlayerObj*)DAT_011dea3c)->PlayActorSound(apObjRef->FUN_0044ddc0(), 1, 0);
-    f24 = 0;
-    ObjRef* aRef = b;
-    ObjRef* aCopyP = aRef;
-    (void)(aCopyP ? aCopyP->FUN_004459e0(1) : 0);
-}
-
 void __cdecl _FUN_00755270(int);
 
 struct CompanionWheelInventory : Menu
@@ -5123,15 +3897,3 @@ struct CompanionWheelInventory : Menu
     void RunTopicResultScripts(TESTopic*);
     void FUN_007568d0();
 };
-// Looks up the FollowersTrade topic and, when pCompanion is non-null, passes it to PlayTopicResponse and RunTopicResultScripts.
-// @fnv 0x007568d0
-void CompanionWheelInventory::FUN_007568d0()
-{
-    _FUN_00755270(1);
-    TESTopic* topic = dynamic_cast<TESTopic*>(FUN_00483a00("FollowersTrade"));
-    if (pCompanion != 0)
-    {
-        PlayTopicResponse(topic);
-        RunTopicResultScripts(topic);
-    }
-}

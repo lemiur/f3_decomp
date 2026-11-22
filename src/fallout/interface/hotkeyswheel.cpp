@@ -1,106 +1,6 @@
-// fallout/interface/hotkeyswheel.cpp: Wheel, HotkeyWheelUpdate, HWShell (9 functions)
+// fallout/interface/hotkeyswheel.cpp: Wheel, HotkeyWheelUpdate, HWShell (1 function)
 #include "f3_common.h"
 #include "hotkeyswheel_decls.h"
-
-// @fnv 0x00701740
-bool HotkeyWheelDisplay::GetVisible()
-{
-    return reinterpret_cast<Tile*>(m_pWheelTile)->ContainsTrait(0xFA3);
-}
-
-// @fnv 0x00701760
-void HotkeyWheelDisplay::SetVisible(bool visible)
-{
-    if (visible)
-    {
-        RefreshHotkeyWheel();
-        reinterpret_cast<Tile*>(m_pWheelTile)->Set(0xFA3, 1);
-    }
-    else
-        reinterpret_cast<Tile*>(m_pWheelTile)->Set(0xFA3, 0);
-}
-
-// @fnv 0x00701610
-void HotkeyWheelDisplay::Initialize(Tile* parent)
-{
-    BSStringT<char> itemName;
-    if (!parent)
-    {
-        Warning(DAT_0106eaa0);
-        return;
-    }
-
-    m_pWheelTile = parent;
-    for (int i = 0; i < 8; ++i)
-    {
-        itemName.PrintfString(DAT_0106ea94, i);
-        m_ppHotkeySlotTiles[i] = reinterpret_cast<Tile*>(m_pWheelTile)->GetNamedChild(itemName.String());
-    }
-
-    m_iTileValueIdAtOffset2C = GetTileValueID(DAT_0106ea84, -1);
-    m_iTileValueIdAtOffset30 = GetTileValueID(DAT_0106ea74, -1);
-    m_bHasHotkeySelection = false;
-    reinterpret_cast<Tile*>(m_pWheelTile)->Set(m_iTileValueIdAtOffset2C, 0xffffffff);
-    reinterpret_cast<Tile*>(m_pWheelTile)->Set(m_iTileValueIdAtOffset30, g_emptyTopicInfoPrompt, true);
-}
-
-// @fnv 0x00a24660
-int HotkeyWheelDisplay::SetHotkeyItem(int key, int state)
-{
-    if (key < 28)
-    {
-        int result = 0;
-        if (DAT_011f35c8)
-            result = FUN_00a24560(3, controller[key], state);
-        else
-        {
-            for (int device = 0; device < 2; ++device)
-            {
-                if (keyboard[device][key] != 255)
-                    result += FUN_00a24560(device, keyboard[device][key], state);
-            }
-        }
-        if (key == 14 && result > 0)
-        {
-            bool flagWasSet;
-            if (flags & HotkeySuppressedMask())
-            {
-                flags ^= HotkeySuppressedMask();
-                flagWasSet = true;
-            }
-            else
-                flagWasSet = false;
-            if (flagWasSet)
-            {
-                result = 0;
-                if (state == 0 || state == 1)
-                    flags |= HotkeySuppressedMask();
-            }
-        }
-        return result;
-    }
-    if (!DAT_011f35c8)
-    {
-        switch (key)
-        {
-        case 28:
-            if (HandleHotkeyInput(1, 1) || FUN_00a23e10(6, 1))
-                return 1;
-            break;
-        case 29:
-            return HandleHotkeyInput(41, 1);
-            break;
-        case 30:
-            return HandleHotkeyInput(183, 1);
-        }
-    }
-    else if (key == 28)
-    {
-        if (FUN_00a23e10(6, 1))
-            return 1;
-    }
-    return 0;
-}
 
 extern char DAT_01011584;
 
@@ -127,22 +27,6 @@ struct S_00701e00_Class
 
     void FUN_00701e00(int index);
 };
-
-// Updates the owner with unk2c and a per-index item pointer (or a default), then stores index in unk28 and sets unk24 to 1 when index is non-negative.
-// @fnv 0x00701e00
-void S_00701e00_Class::FUN_00701e00(int index)
-{
-    unk00->FUN_00700320(unk2c, index);
-
-    unk00->FUN_00a01350(unk30, (index >= 0 && index != 1) ? unk04[index]->FUN_00a011f0(0xfc4) : (void*)&DAT_01011584,
-                        1);
-
-    if (index >= 0)
-    {
-        unk28 = index;
-        unk24 = 1;
-    }
-}
 
 bool __cdecl HotkeyWheelProbeA();
 int __cdecl HotkeyWheelProbeB(int, int);
@@ -814,40 +698,6 @@ struct Wheel
 {
     void FUN_00701e80();
 };
-// @fnv 0x00701e80
-void Wheel::FUN_00701e80()
-{
-    Inventory* inv3 = FUN_004bf220(DAT_011dea3c);
-    Entry* entry5 = inv3 ? inv3->FindEntryWithExtraListType(*(int*)((char*)this + 0x28)) : 0;
-    void* extra = entry5 && entry5->FUN_00559450() ? *entry5->FUN_00559450()->FUN_006815c0() : 0;
-    bool ammo4 =
-        (entry5 && entry5->FUN_0044ddc0()->FUN_00401170() == 0x28 && entry5->FUN_0044ddc0()->FUN_004c0bf0()) ? 1 : 0;
-    if (!*((unsigned char*)this + 0x24) || !inv3 || !entry5)
-        return;
-    if (DAT_011dea3c->FUN_008a7570() != -1 && entry5->FUN_0044ddc0()->FUN_00401170() == 0x18)
-        return;
-    if (DAT_011dea3c->FUN_008a7570() != -1 && entry5->FUN_0044ddc0()->FUN_00401170() == 0x28)
-        return;
-    if (entry5->FUN_0044ddc0() == FUN_0058db10(0) && ((ActorValues*)((char*)DAT_011dea3c + 0xa4))->v08(0x10) ==
-                                                         ((ActorValues*)((char*)DAT_011dea3c + 0xa4))->v1c(0x10))
-    {
-        DispatchMessageToSink(DAT_011d2af0.FUN_004c69f0(), 0, 0, 0, DAT_010162c0, false);
-        return;
-    }
-    else
-    {
-        if (!entry5->FUN_004bddd0(false))
-            DAT_011dea3c->FUN_0088c650(entry5->FUN_0044ddc0(), ammo4 ? entry5->FUN_00726070() : 1, extra, 0, 0, 1);
-        else
-            DAT_011dea3c->FUN_0088c790(entry5->FUN_0044ddc0(), ammo4 ? entry5->FUN_00726070() : 1, extra, 0, 0, 1);
-    }
-    DAT_011dea3c->FUN_00950030();
-    DAT_011dea3c->FUN_008d8520()->v580(1, 0, 0);
-    DAT_011dea3c->v3c4();
-    Entry* cleanup4 = entry5;
-    Entry* target = cleanup4;
-    target ? target->FUN_004459e0(true) : 0;
-}
 
 class HotkeyStringCalls
 {
@@ -903,53 +753,6 @@ struct HotkeyWheelUpdate : HotkeyWheelDisplay
     void FUN_007017b0();
 };
 
-// Updates hotkey slot tiles with item icons, assigned state, and count labels from the player's inventory changes.
-// @fnv 0x007017b0
-void HotkeyWheelUpdate::FUN_007017b0()
-{
-    InventoryChanges* invChanges2 = InventoryChanges::GetOrAddInventoryChanges(_g_thePlayer);
-    BSStringT<char> str3;
-    if (invChanges2)
-    {
-        InventoryItem** items7 = invChanges2->CollectEntriesByRank(0, 7);
-        for (int i = 0; i < 8; ++i)
-        {
-            if (i == 1)
-                continue;
-            InventoryItem* item3 = items7[i];
-            if (item3)
-            {
-                reinterpret_cast<HotkeyStringCalls&>(str3).FUN_00438390(str_InterfaceIcons);
-                reinterpret_cast<HotkeyStringCalls&>(str3).FUN_00404820(
-                    GetMenuIconName(BGSEquipType::GetEquipType(item3->GetObject())));
-                this->m_ppHotkeySlotTiles[i]->Set(FUN_00a01860(str_HotKeyIcon), str3.String(), true);
-                this->m_ppHotkeySlotTiles[i]->Set(FUN_00a01860(str_HotKeyAssigned), 1);
-                if (item3->FUN_00726070() > 1)
-                {
-                    FUN_00406f60(&str3, str_FormatCount, item3->GetTargetFullName(), item3->FUN_00726070());
-                }
-                else
-                {
-                    reinterpret_cast<HotkeyStringCalls&>(str3).FUN_00438390(item3->GetTargetFullName());
-                }
-                this->m_ppHotkeySlotTiles[i]->Set(0xfc4, str3.String(), true);
-            }
-            else
-            {
-                this->m_ppHotkeySlotTiles[i]->Set(FUN_00a01860(str_HotKeyAssigned), 0);
-                this->m_ppHotkeySlotTiles[i]->Set(0xfc4, "", true);
-            }
-        }
-        for (int j_ = 0; j_ < 8; ++j_)
-        {
-            InventoryItem* t3 = items7[j_];
-            InventoryItem* t2 = t3;
-            t2 ? t2->FUN_004459e0(1) : 0;
-        }
-        delete items7;
-    }
-}
-
 struct TileCall
 {
     float FUN_00a011b0(int index);
@@ -971,64 +774,3 @@ extern TimeGlobal g_timeGlobal;
 extern float DAT_0101b268;
 extern "C" int DAT_0119f33c;
 extern "C" unsigned int DAT_011d88f4;
-
-// Determines the active hotkey wheel slot from probe states or a direct index, updates the stored selection and timestamp, and triggers a tile change when needed.
-// @fnv 0x00701bd0
-int HWShell::FUN_00701bd0(int index)
-{
-    int result5 = -1;
-    if (index == 1)
-        return -1;
-    if (!FUN_004b71d0())
-    {
-        if (index >= 0)
-            result5 = index;
-        ((S_00701e00_Class*)this)->FUN_00701e00(result5);
-    }
-    else
-    {
-        if (index < 0)
-        {
-            int vAB = HotkeyWheelProbeB(2, 0);
-            int vB3 = HotkeyWheelProbeB(1, 0);
-            int vC7 = HotkeyWheelProbeB(4, 0);
-            int vD = HotkeyWheelProbeB(3, 0);
-            bool bA2 = vAB == 2 || vAB == 0;
-            bool bB = vB3 == 2 || vB3 == 0;
-            bool bC4 = vC7 == 2 || vC7 == 0;
-            bool bD_ = vD == 2 || vD == 0;
-            if (bA2)
-            {
-                if (bC4)
-                    result5 = 5;
-                else if (bD_)
-                    result5 = 7;
-                else
-                    result5 = 6;
-            }
-            else if (bB)
-            {
-                if (bC4)
-                    result5 = 0;
-                else if (bD_)
-                    result5 = 2;
-            }
-            else if (bC4)
-                result5 = 3;
-            else if (bD_)
-                result5 = 4;
-        }
-        int cur = (int)((TileCall*)this->m_pWheelTile)->FUN_00a011b0(this->m_iTileValueIdAtOffset2C);
-        if (result5 != cur)
-        {
-            if (result5 != DAT_0119f33c)
-            {
-                DAT_0119f33c = result5;
-                DAT_011d88f4 = g_timeGlobal.GetTimeStamp();
-            }
-            if (g_timeGlobal.GetTimeStamp() - DAT_011d88f4 > DAT_0101b268 || result5 == -1 || cur == -1)
-                ((S_00701e00_Class*)this)->FUN_00701e00(result5);
-        }
-    }
-    return result5;
-}

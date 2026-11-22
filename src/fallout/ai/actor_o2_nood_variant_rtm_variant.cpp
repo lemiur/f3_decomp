@@ -3406,45 +3406,6 @@ struct AnimationOwner {
     void FUN_00c7e3b0();
 };
 
-// @fnv 0x00c7e3b0
-void AnimationOwner::FUN_00c7e3b0()
-{
-    if (!root)
-        return;
-
-    void* node = FUN_00c802d0(root)->payload;
-    BoneRecordArray records;
-    BoneRecordMap map;
-    FUN_00c7b4f0(node, &records, &map);
-
-    SkeletonHolder* holder = skeletonHolder;
-    if (!holder->m_pSkeleton) {
-        skeletonHolder->m_pSkeleton = new hkaSkeleton;
-        int numBones = records.m_uiSize;
-        skeletonHolder->m_pSkeleton->m_kBones.setSizeObj(numBones);
-        skeletonHolder->m_pSkeleton->m_kParentIndices.setSizePod(numBones);
-        skeletonHolder->m_pSkeleton->m_kReferencePose.setSizePod(numBones);
-        for (unsigned int i = 0; i < records.m_uiSize; ++i) {
-            hkaBone& bone = skeletonHolder->m_pSkeleton->m_kBones[i];
-            bone.m_name.FUN_00cb0c10(FUN_00cb1410(records.m_pBase[i]->name));
-            skeletonHolder->m_pSkeleton->m_kBones[i].m_bLockTranslation = true;
-            skeletonHolder->m_pSkeleton->m_kReferencePose[i] = records.m_pBase[i]->transform;
-            skeletonHolder->m_pSkeleton->m_kParentIndices[i] = records.m_pBase[i]->parent;
-        }
-    }
-
-    for (unsigned int i = 0; i < records.m_uiSize; ++i) {
-        BoneRecord* r = records.m_pBase[i];
-        if (r)
-            _g_memoryManager.Deallocate(reinterpret_cast<char*>(r) - reinterpret_cast<unsigned char*>(r)[-1]);
-    }
-    records.RemoveAll();
-
-    pose = new SkeletonPoseData(skeletonHolder->m_pSkeleton);
-    pose->FUN_00cda110();
-    transforms.setSizePod(skeletonHolder->m_pSkeleton->m_kBones.GetLogicalSize());
-}
-
 }
 // namespace SkeletonBuild
 
@@ -3822,20 +3783,6 @@ struct PoseOwner {
     PoseCount* counts;
     void FUN_00c79680();
 };
-// @fnv 0x00c79680
-void PoseOwner::FUN_00c79680() {
-    float scale = scaleSource->scale;
-    int count = counts->skeleton->count;
-    for (int index=0;index<count;++index) {
-        PoseTransform transform;
-        FUN_00c74dd0(&transform,(NiTransform*)&nodes[index]->transform);
-        transform.translation.bits.quad=_mm_mul_ps(LoadScalar(&scale),transform.translation.bits.quad);
-        state->SetLocal(index,transform);
-    }
-    state->FUN_00cda340();
-    PoseTransform** data=state->FUN_00cdb290();
-    FUN_00cb1260(output,*data,count*sizeof(PoseTransform));
-}
 
 __declspec(noinline) void Quat::FUN_00c66320(const Quat* a,const Quat* b) {
     ::__m128 av=a->m_vec.bits.quad, bv=b->m_vec.bits.quad;

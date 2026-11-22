@@ -93,6 +93,3 @@ struct LevCharDerived : LevCharPrimaryBase, LevCharSecondaryBase
 // @fnv 0x0050b3f0
     virtual void FUN_0050b3f0();
 };
-
-LevCharDerived::LevCharDerived()
-{}

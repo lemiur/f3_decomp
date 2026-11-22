@@ -130,25 +130,6 @@ class bhkViewerObject
     void FUN_00c9ed30(NiViewerStringsArray* pkStrings);
 };
 
-// @fnv 0x00c9ed30
-void bhkViewerObject::FUN_00c9ed30(NiViewerStringsArray* pkStrings)
-{
-    MemContextGuard kGuard(16);
-
-    FUN_00c9f480(pkStrings);
-    pkStrings->Add(FUN_00a7d330(g_01268224.GetName()));
-
-    hkTransform kTransform;
-    FUN_00c9ec00(kTransform);
-
-    NiTransform kNiTransform;
-    FUN_00624b10(&kNiTransform.m_kOrientation, &kTransform.m_rotation);
-    FUN_00458620(&kNiTransform.m_kTranslation, &kTransform.m_vTranslation);
-
-    pkStrings->Add(kNiTransform.m_kOrientation.ToString("Rot"));
-    pkStrings->Add(kNiTransform.m_kTranslation.FUN_00a59af0("Trans"));
-}
-
 namespace fnv_00cb3650 {
 struct FUN_00a5ecb0;
 typedef FUN_00a5ecb0 Body;
@@ -357,44 +338,6 @@ static __forceinline void SetNameStr(Body* b, const char* s)
 {
     b->AssignFixedString(FixedString(s));
 }
-// @fnv 0x00cb3650
-void Owner::FUN_00cb3650(ArgObj* arg)
-{
-    TlsScope scope(0x10);
-    Body* body = 0;
-    if (arg)
-    {
-        if (arg->f8 == 0)
-            body = (Body*)arg;
-        else
-        {
-            body = new Body(0);
-            arg->Vdc(body, 1);
-            InitArgs ia;
-            ia.time = 0.0f;
-            ia.flag0 = 0;
-            ia.flag1 = 0;
-            ia.flag2 = 0;
-            ia.flag3 = 0;
-            ia.flag4 = 0;
-            body->FUN_00a59c60(ia);
-        }
-    }
-    else
-        body = new Body(0);
-    {
-        body->AssignFixedString(FixedString(g_012683c8_arg0));
-        HavokTransform hk;
-        hk.basis.FUN_00cb2d90(&rotation);
-        hk.position = vec30;
-        NiTransform t;
-        FUN_00624b10(&t.m_kOrientation, &hk.basis);
-        FUN_00458620(&t.m_kTranslation, &hk.position);
-        body->f34 = t.m_kOrientation;
-        body->position = t.m_kTranslation;
-        FUN_00c8d2f0(body);
-    }
-}
 }  // namespace fnv_00cb3650
 
 struct Arg_00c9f830
@@ -469,18 +412,6 @@ struct FUN_00cb31a0_cls
     void FUN_00cb31a0(FUN_00cb31a0_cls* src);
 };
 
-// @fnv 0x00cb31a0
-void FUN_00cb31a0_cls::FUN_00cb31a0(FUN_00cb31a0_cls* src)
-{
-    m_30 = src->m_30;
-    m_20 = src->m_40;
-    src->m_30 = DAT_01267e30;
-    src->m_40 = DAT_010c71b0;
-    FUN_00cb31a0_sub_a(&src->m_30);
-    Sub_b(&src->m_40);
-    Sub_c(src);
-}
-
 struct Sub
 {
     unsigned int m_00;
@@ -499,15 +430,6 @@ struct Arg
 {
     void FUN_00c74ac0(__m128* out, Sub* sub);
 };
-
-// @fnv 0x00cb3200
-Arg* Cls::FUN_00cb3200(Arg* arg)
-{
-    __m128 buf;
-    FUN_00c8d130(&buf);
-    arg->FUN_00c74ac0(&buf, &m_20);
-    return arg;
-}
 
 struct S00cb3250_Query
 {
@@ -615,15 +537,6 @@ struct ShapeFrame
     virtual void GetRotation(__m128*);
     RotationResult* FUN_00cb3310(RotationResult*);
 };
-// @fnv 0x00cb3310
-RotationResult* ShapeFrame::FUN_00cb3310(RotationResult* result)
-{
-    __m128 rotation;
-    GetTranslation(&result->translation);
-    GetRotation(&rotation);
-    result->FUN_00cb2d90(&rotation);
-    return result;
-}
 
 extern "C" __m128 _mm_setr_ps(float, float, float, float);
 
@@ -1025,22 +938,6 @@ struct F9_Owner
     void FUN_00c9f050(F9_Arg* arg);
 };
 
-// @fnv 0x00c9f050
-void F9_Owner::FUN_00c9f050(F9_Arg* arg)
-{
-    F9_Scope scope;
-    F9_Mat mat;
-    mat.c0 = _mm_setr_ps(arg->m[0], arg->m[1], arg->m[2], arg->m[3]);
-    mat.c1 = _mm_setr_ps(arg->m[4], arg->m[5], arg->m[6], arg->m[7]);
-    mat.c2 = _mm_setr_ps(arg->m[8], arg->m[9], arg->m[10], arg->m[11]);
-    mat.c3 = _mm_setr_ps(arg->m[12], arg->m[13], arg->m[14], arg->m[15]);
-    mat.FUN_00cb2fc0();
-    F9_Obj* o = new F9_Obj(arg->unk04, &mat, arg->unk00);
-    add(o);
-    o->FUN_00c905b0();
-    post(arg);
-}
-
 class NiGlobalStringTable
 {
   public:
@@ -1148,26 +1045,6 @@ struct PositionOwner
     PositionSource* m_pkSource;
     void FUN_00ca02b0(NiNode* pkParent, int iUnused);
 };
-
-// @fnv 0x00ca02b0
-void PositionOwner::FUN_00ca02b0(NiNode* pkParent, int iUnused)
-{
-    MemContextGuard kGuard(16);
-    hkVector4 kPosition;
-    kPosition.m_vComponents = (this && m_pkSource) ? m_pkSource->m_vContactPosition.m_vComponents : DAT_01267e30;
-    NiPoint3 kPoint;
-    FUN_00458620(&kPoint, &kPosition);
-    kPoint.x *= 2.0;
-    kPoint.y *= 2.0;
-    kPoint.z *= 2.0;
-    NiAVObject* pkMarker = FUN_00c55920(&kPoint, 0);
-    if (pkMarker)
-    {
-        static NiFixedString kName(str_010c40a0);
-        pkMarker->SetName(kName);
-        pkParent->AttachChildInAvailableSlot(pkMarker, true);
-    }
-}
 
 extern "C" __m128 _mm_add_ps(__m128, __m128);
 extern "C" __m128 _mm_setzero_ps();
@@ -1569,23 +1446,6 @@ class MotionObject
     void FUN_00c6e390(__m128* v);
 };
 
-// @fnv 0x00c6e390
-void MotionObject::FUN_00c6e390(__m128* v)
-{
-    __m128 t;
-    char* base = (m_594 != 0) ? (char*)m_594->m_08 : (char*)0;
-    ((Vec16Helper*)&t)->FUN_00c7f700(base + 0xb0, (char*)&m_570);
-    __m128 s = _mm_add_ps(*v, t);
-    Obj08* object = m_08;
-    if (object != 0)
-    {
-        FUN_00cac110();
-        object->FUN_00cac920(&s);
-        object->m_20 = _mm_setzero_ps();
-        FUN_00cac110();
-    }
-}
-
 extern "C" __m128 _mm_setzero_ps(void);
 
 struct C9FA20_TlsBlock
@@ -1831,19 +1691,6 @@ struct C9FA20_Owner
     void FUN_00c9f830(C9FA20_Data* data);
     C9FA20_Data* FUN_00c9fa20(bool* created);
 };
-// @fnv 0x00c9fa20
-C9FA20_Data* C9FA20_Owner::FUN_00c9fa20(bool* created)
-{
-    C9FA20_TlsGuard guard;
-    *created = m_pData == 0;
-    if (*created)
-    {
-        m_pData = new C9FA20_Data;
-        if (m_08)
-            FUN_00c9f830(m_pData);
-    }
-    return m_pData;
-}
 
 namespace N {
 union __declspec(intrin_type) __declspec(align(16)) __m128
@@ -2033,17 +1880,6 @@ class BhkWrapperDAD : public BhkWrapperBaseDAD
     hkVector4DAD m_v30;
 };
 
-// @fnv 0x00cb3150
-void BhkWrapperDAD::FUN_00cb3150(int a)
-{
-    int iToken;
-    PhantomDataDAD* pkData = GetData(&iToken);
-    pkData->m_v30 = m_v30;
-    pkData->m_v40 = m_v20;
-    FUN_00c8d960(a);
-    ReleaseData(iToken);
-}
-
 namespace center_of_mass {
 extern "C" __m128 _mm_sub_ps(__m128, __m128);
 
@@ -2147,18 +1983,6 @@ class Position : public PositionBase
     hkVector4 localTranslation;
 };
 
-// @fnv 0x00cb32a0
-OffsetVector& Position::FUN_00cb32a0(OffsetVector& out)
-{
-    GetVec(out);
-    if (this && worldObject)
-    {
-        OffsetVector offset;
-        offset.FUN_00c7f750(worldObject->rotation, localTranslation);
-        out.setSub4(out, offset);
-    }
-    return out;
-}
 }
 
 namespace position_cb3 {
@@ -2272,23 +2096,6 @@ class hkQuaternionCB3
     }
 };
 
-__forceinline void hkVector4CB3::SetRotatedDirection(const hkQuaternionCB3& quat, const hkVector4CB3& direction)
-{
-    hkVector4CB3 qreal;
-    qreal.m_vComponents = position_cb3::_mm_shuffle_ps(quat.m_vec.m_vComponents, quat.m_vec.m_vComponents, 0xFF);
-    hkVector4CB3 q2minus1;
-    q2minus1.setMul4(qreal, qreal);
-    q2minus1.m_vComponents = position_cb3::_mm_add_ps(q2minus1.m_vComponents, DAT_010c71e0);
-    hkVector4CB3 ret;
-    ret.setMul4(direction, q2minus1);
-    __m128 imagDotDir = quat.m_vec.dot3(direction);
-    ret.addMul4(imagDotDir, quat.m_vec);
-    hkVector4CB3 imagCrossDir;
-    imagCrossDir.setCross(quat.m_vec, direction);
-    ret.addMul4(imagCrossDir, qreal);
-    setAdd4(ret, ret);
-}
-
 __forceinline void hkVector4CB3::setRotatedInverseDir(const hkQuaternionCB3& quat, const hkVector4CB3& direction)
 {
     hkVector4CB3 qreal;
@@ -2389,20 +2196,4 @@ class hkpEntityCB3 : public hkReferencedObjectCB3
     hkVector4CB3& FUN_00cb3370(hkVector4CB3& kOut) const;
 };
 
-// @fnv 0x00cb3370
-hkVector4CB3& hkpEntityCB3::FUN_00cb3370(hkVector4CB3& kOut) const
-{
-    if (this && m_pOwningWorld)
-    {
-        hkQuaternionCB3 kRotationBasis;
-        getRotation(kRotationBasis);
-        hkVector4CB3 kIntersectionOffset;
-        kIntersectionOffset.SetRotatedDirection(kRotationBasis, m_vCenterOfMassLocal);
-        getPosition(kOut);
-        kOut.m_vComponents = position_cb3::_mm_sub_ps(kOut.m_vComponents, kIntersectionOffset.m_vComponents);
-        return kOut;
-    }
-    kOut = g_vZeroCB3;
-    return kOut;
-}
 }

@@ -26,41 +26,6 @@ struct FUN_00b63e90_cls
     void ReleasePoolNodes();
 };
 
-// @fnv 0x00b63e90
-void FUN_00b63e90_cls::ReleasePoolNodes()
-{
-    PoolNode_b1698* cur = m_0c;
-    if (cur != 0)
-    {
-        ((PoolLock_b1698*)&DAT_011c5f80)->Lock(0);
-        do
-        {
-            PoolNode_b1698* node = cur;
-            cur = cur->m_00;
-            ((PoolLock_b1698*)&DAT_011c5f80)->Lock(0);
-            node->m_04 = 0;
-            node->m_00 = DAT_011c5f58;
-            DAT_011c5f84 -= 1;
-            DAT_011c5f58 = node;
-            if (DAT_011c5f84 == 0)
-            {
-                DAT_011c5f80 = 0;
-            }
-        } while (cur != 0);
-        DAT_011c5f84 -= 1;
-        if (DAT_011c5f84 == 0)
-        {
-            DAT_011c5f80 = 0;
-        }
-    }
-    unsigned int* p = m_08;
-    m_0c = 0;
-    if (p != 0)
-    {
-        *p = 0;
-    }
-}
-
 struct FUN_00b63f10_Kind
 {
     int m_type;

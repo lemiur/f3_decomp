@@ -1,4 +1,4 @@
-// nipsysrotationmodifier.cpp: NiPSysRotationModifier, NiPSysMeshUpdateModifier, FnvRotMod (12 functions)
+// nipsysrotationmodifier.cpp: NiPSysRotationModifier, NiPSysMeshUpdateModifier, FnvRotMod (11 functions)
 #include "f3_common.h"
 #include "nipsysrotationmodifier_types_NiPSysRotationModifier.h"
 #include "nipsysrotationmodifier_types_NiPSysMeshUpdateModifier.h"
@@ -32,12 +32,6 @@ struct FUN_00c206a0_shell : public NiPSysRotationModifier
 };
 
 extern "C" void* g_01202528;
-
-// @fnv 0x00c206a0
-void* FUN_00c206a0_shell::FUN_00c206a0()
-{
-    return &g_01202528;
-}
 
 struct FUN_00c20a00_shell : public NiPSysRotationModifier
 {

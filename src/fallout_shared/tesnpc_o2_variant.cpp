@@ -151,9 +151,6 @@ struct AdjustorThunkHolder : AdjustorPrimaryBase, AdjustorSecondaryBase
     AdjustorThunkHolder();
 };
 
-AdjustorThunkHolder::AdjustorThunkHolder()
-{}
-
 namespace fnv_0060c460 {
 struct PrimaryBase
 {

@@ -628,8 +628,6 @@ struct FUN_006f9080_owner : BGSDistantTreeBlockLoadTask
 
     void FUN_006f9080();
 };
-void Callee::FUN_0045cec0()
-{}
 struct Fake076;
 int __cdecl FormatTreeLodDtlPath(char* a1, Fake076* a2, int a3, short a4, short a5);
 struct QBase

@@ -23,25 +23,6 @@ struct FUN_00b5a9a0_List
     void __thiscall FUN_00b5a9a0(FUN_00b5a9a0_Node* node);
 };
 
-// @fnv 0x00b5a9a0
-void __thiscall FUN_00b5a9a0_List::FUN_00b5a9a0(FUN_00b5a9a0_Node* node)
-{
-    node->m_pListObject = 0;
-    node->m_pNext = m_pTail;
-    if (m_pTail)
-    {
-        m_pTail->m_pListObject = node;
-        ++m_uiCount;
-        m_pTail = node;
-    }
-    else
-    {
-        ++m_uiCount;
-        m_pHead = node;
-        m_pTail = node;
-    }
-}
-
 void* __cdecl _memmove(void* dst, const void* src, unsigned int count);
 void* __cdecl _fnv_zlib_memset(void* ptr, int value, unsigned int count);
 

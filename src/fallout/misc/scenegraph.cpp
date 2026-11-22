@@ -1,4 +1,4 @@
-// fallout/misc/scenegraph.cpp: SceneGraph, StandIn (5 functions)
+// fallout/misc/scenegraph.cpp: SceneGraph, StandIn (1 function)
 #include "f3_common.h"
 class NiRTTI;
 
@@ -14,12 +14,6 @@ class SceneGraph : public BSSceneGraph
     static const NiRTTI ms_kRTTI;
     virtual const NiRTTI* GetRTTI() const;
 };
-
-// @fnv 0x00878640
-const NiRTTI* SceneGraph::GetRTTI() const
-{
-    return &ms_kRTTI;
-}
 
 extern int DAT_01083b5c;
 
@@ -106,64 +100,12 @@ extern double _gModifierZero;
 
 float __cdecl LinearInterpolate(float, float, float, float, float);
 
-// @fnv 0x008786b0
-float FUN_008786b0_shell::FUN_008786b0()
-{
-    float ffar;
-    if (*((bool*)this + 0xb8))
-    {
-        ffar = DAT_01083c64;
-    }
-    else if (!g_TES || !g_TES->GetHitSound() || g_TES->GetHitSound()->GetWorldTerrainManager()->FUN_00454b70())
-    {
-        if (g_TES && ((BGSCameraPath*)g_TES)->GetPrevPath() && g_TES->GetLogDate()->FUN_00476c90() == 1)
-        {
-            ffar = ((TESObjectCELL*)((BGSCameraPath*)g_TES)->GetPrevPath())->GetInteriorLightValue();
-            if (ffar <= _gModifierZero || ffar > DAT_010c26d8)
-            {
-                ffar = DAT_010c26d8;
-            }
-        }
-        else
-        {
-            ffar = DAT_010c26d8;
-        }
-    }
-    else
-    {
-        float ffarMax;
-        if (g_TES && ((BGSCameraPath*)g_TES)->GetPrevPath() && g_TES->GetLogDate()->FUN_00476c90() == 1)
-        {
-            ffarMax = ((TESObjectCELL*)((BGSCameraPath*)g_TES)->GetPrevPath())->GetInteriorLightValue();
-            if (ffarMax <= _gModifierZero || ffarMax > g_0120312c.Float()->f)
-            {
-                ffarMax = g_0120312c.Float()->f;
-            }
-        }
-        else
-        {
-            ffarMax = g_0120312c.Float()->f;
-        }
-        ffar = LinearInterpolate(g_01203120.Float()->f, ffarMax, 0.0f, 1.0f, g_01203138.Float()->f);
-    }
-    return ffar;
-}
-
 struct StandIn
 {
     void __thiscall FUN_00878690();
     void* __thiscall DestroyIfFlagged(unsigned int);
 };
 void __cdecl _delete(void*, unsigned int);
-// Calls FUN_00878690, then frees this with _delete when flags has bit 1 set, and returns this.
-// @fnv 0x00878650
-void* StandIn::DestroyIfFlagged(unsigned int flags)
-{
-    this->FUN_00878690();
-    if (flags & 1)
-        _delete(this, 0xC0);
-    return this;
-}
 
 extern int DAT_01083b5c;
 
@@ -172,10 +114,3 @@ struct FUN_00878690_shell
     void FUN_00878690();
     void FUN_00c51df0();
 };
-
-// @fnv 0x00878690
-void FUN_00878690_shell::FUN_00878690()
-{
-    *(int*)this = (int)&DAT_01083b5c;
-    FUN_00c51df0();
-}

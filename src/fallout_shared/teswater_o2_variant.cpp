@@ -13,13 +13,6 @@ struct FUN_00a6fae0_Class
     void __thiscall FUN_00a6fae0();
 };
 
-// @fnv 0x00a6fae0
-void __thiscall FUN_00a6fae0_Class::FUN_00a6fae0()
-{
-    *(int*)this = (int)&DAT_0109cb9c;
-    FUN_00a5a390(this);
-}
-
 // Lazily create the shader property for this geometry, picking the shader type by whether the geometry is skinned.
 
 class B9F30MemoryManager

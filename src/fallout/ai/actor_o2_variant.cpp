@@ -793,22 +793,6 @@ struct FUN_00c7d890_cls
     void FUN_00c7d890();
 };
 
-// @fnv 0x00c7d890
-void FUN_00c7d890_cls::FUN_00c7d890()
-{
-    VObjExt* p = (VObjExt*)_FUN_00c85750()->p;
-    int count = _4;
-    char* base = (char*)_0;
-    for (int i = 0; i < count; i++)
-        ((FUN_00cb0c00_class*)(base + i * 8))->FUN_00cb0c00();
-    unsigned int flags = _8;
-    _4 = 0;
-    if (!(flags & 0x80000000))
-        p->v4(_0, (flags & 0x3fffffff) * 8);
-    _8 = 0x80000000;
-    _0 = 0;
-}
-
 void* __cdecl FUN_00ec7230(char*, char const*, unsigned int);
 
 // @fnv 0x00c7f900
@@ -1007,18 +991,6 @@ struct ScopeGuard
     }
 };
 
-void FUN_00c7d480_cls::FUN_00c7d480()
-{
-    ScopeGuard guard(this);
-    unsigned int count = m_0c;
-    bool differs = count != (unsigned int)m_00;
-    if (!differs)
-    {
-        m_04 = 0;
-    }
-    *(unsigned int*)_FUN_00c85750() = count;
-}
-
 namespace fnv_00c7d520 {
 struct FreeIface
 {
@@ -1059,17 +1031,6 @@ struct ScopeGuard
     }
 };
 
-void FUN_00c7d520_cls::FUN_00c7d520()
-{
-    ScopeGuard guard(this);
-    unsigned int count = m_0c;
-    bool differs = count != (unsigned int)m_00;
-    if (!differs)
-    {
-        m_04 = 0;
-    }
-    *(unsigned int*)_FUN_00c85750() = count;
-}
 }  // namespace fnv_00c7d520
 
 struct AudioAllocator
@@ -1253,25 +1214,6 @@ class BCB9810Registry
     int m_iArrayLength;
 };
 
-// @fnv 0x00cb9810
-void BCB9810Registry::FUN_00cb9810(void* pvOwner, BCB9810Node* pkNode)
-{
-    BCB9810AllocTagScope kScope(0x10);
-    bool bFound = false;
-    for (int i = 0; i < m_iArrayLength; i++)
-    {
-        if (bFound)
-            break;
-        BCB9810Node* pkRoot = pkNode;
-        while (pkRoot->m_pParentNode)
-            pkRoot = pkRoot->m_pParentNode;
-        if (pkRoot == m_pkEntryArray[i].m_pkTreeNode)
-            bFound = true;
-    }
-    if (!bFound)
-        AppendTailPair(pvOwner, pkNode);
-}
-
 struct CE4360Iter
 {
     int* GetFirst();
@@ -1316,23 +1258,6 @@ struct CE4360Context
 
 void __cdecl FUN_00ce3a00(CE4360Context* pkContext, int a, int b, int c, int d);
 void __cdecl FUN_00ce4330(CE4360Context* pkContext, int a, int b, int c);
-
-// @fnv 0x00ce4360
-void __cdecl FUN_00ce4360(CE4360Context* pkContext, CE4360Iter* pkFrom, CE4360Iter* pkTo, int iValue)
-{
-    if (pkContext->m_iMode == 0)
-    {
-        int a = *pkFrom->GetFirst();
-        int b = *pkTo->GetSecond();
-        FUN_00ce3a00(pkContext, a, b, *pkTo->GetThird(), iValue);
-    }
-    else if (pkContext->m_iMode == 1)
-    {
-        int a = *pkFrom->GetSecond();
-        int b = *pkTo->GetFourth();
-        FUN_00ce4330(pkContext, a, b, 0);
-    }
-}
 
 struct RTTI_c9b
 {
@@ -3163,42 +3088,6 @@ struct PoseState
     void FUN_00cda340();
     void FUN_00cda4c0();
 };
-// @fnv 0x00cda4c0
-void PoseState::FUN_00cda4c0()
-{
-    int n = model->count;
-    FUN_00cda340();
-    for (int i = 0; i < n; ++i)
-    {
-        bool locked = model->bones[i].locked != 0;
-        short parent = model->parents[i];
-        if (locked)
-        {
-            const BoneTransform& ref = model->reference[i];
-            if (parent != -1)
-            {
-                const BoneTransform& p = world[parent];
-                world[i].position.Rotate(p.rotation, ref.position);
-                world[i].position.Add(p.position);
-            }
-            else
-            {
-                world[i].position.q = ref.position.q;
-            }
-            flags[i] |= 1;
-            flags[i] |= 4;
-        }
-        else if (parent != -1)
-        {
-            unsigned int* f = flags;
-            if (f[parent] & 4)
-                f[i] |= 1;
-        }
-    }
-    int m = count;
-    for (int j = 0; j < m; ++j)
-        flags[j] &= ~28;
-}
 
 struct C7C2B0_Heap
 {
@@ -3245,9 +3134,6 @@ struct ShapeArrays
     C7C2B0_Array m_kPointA;
     ~ShapeArrays();
 };
-// @fnv 0x00c7c2b0
-ShapeArrays::~ShapeArrays()
-{}
 
 extern "C" void _ReadWriteBarrier(void);
 struct AllocHolderX
@@ -3674,28 +3560,6 @@ struct S
     char pad2a[2];
     float* arr2c;  // 0x2c
 };
-// @fnv 0x00cda110
-void __fastcall FUN_00cda110(S* s)
-{
-    int i;
-    sub_00cb1260(s->p04, s->a->p24, s->a->count * 0x30);
-    for (i = 0; i < s->a->count; i++)
-        s->arr1c[i] = 2;
-    s->b28 = 0;
-    s->b29 = 1;
-    _ReadWriteBarrier();
-    A* d = s->a;
-    i = 0;
-    if (d->n34 > 0)
-    {
-        float* f = s->arr2c;
-        do
-        {
-            *f++ = 0.0f;
-            i++;
-        } while (i < d->n34);
-    }
-}
 }  // namespace fnv_00cda110
 
 struct KPoint3
@@ -4528,43 +4392,3 @@ struct RagdollAnimControllerView
     u8 unk28F;
     int FUN_00c7a8d0();
 };
-
-// @fnv 0x00c7a8d0
-int RagdollAnimControllerView::FUN_00c7a8d0()
-{
-    if (b41 == 0 && p4C != 0)
-    {
-        p4C->FUN_00cdb3e0();
-    }
-    u8 old = b222;
-    u8 flag = b42;
-    int now = b220 != 0;
-    b41 = flag;
-    b43 = 0;
-    b222 = (u8)now;
-    if (old != 0 && (u8)now == 0)
-    {
-        b223 = 1;
-    }
-    int now2 = b21D != 0;
-    b21E = (u8)now2;
-    if (b28E != 0 || flag == 0)
-        return now2;
-    {
-        RagdollAnimData* z = p48;
-        void* u = z->arr14[0] ? z->arr14[0]->p08 : 0;
-        RagdollAnimReference* s = z->p08->p00;
-        if (s != 0 && s->p08 != 0 && u != 0)
-        {
-            RagdollAnimBodyView* obj = s->p08->p350;
-            for (int i = 0; i < z->count18; ++i)
-            {
-                RagdollAnimEntry* b = z->arr14[i];
-                if (!!b->p08)
-                {
-                    obj->FUN_00c68d50((int)b);
-                }
-            }
-        }
-    }
-}

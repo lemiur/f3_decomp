@@ -396,11 +396,6 @@ struct NewObjA : BSFadeNode
         *(void**)this = &DAT_01066acc;
     }
 };
-// @fnv 0x00cb7640
-void* FUN_00cb7640()
-{
-    return new NewObjA;
-}
 }  // namespace fnv_00cb7640
 
 struct Middle
@@ -555,15 +550,6 @@ struct C8CA60AllocTagScope
     }
 };
 
-inline void* C8CA60AlignedAlloc(unsigned int uiSize)
-{
-    char* pcMem = (char*)g_C8CA60MemoryManager.Allocate(uiSize);
-    unsigned char ucOffset = (unsigned char)(16 - ((unsigned char)(unsigned int)pcMem & 0xf));
-    pcMem += ucOffset;
-    pcMem[-1] = ucOffset;
-    return pcMem;
-}
-
 struct C8CA60Child
 {
     C8CA60Child();
@@ -584,20 +570,6 @@ struct C8CA60Owner
     void FUN_00c8c410(C8CA60Child* pkChild);
     C8CA60Child* FUN_00c8ca60(bool* pbCreated);
 };
-
-// @fnv 0x00c8ca60
-C8CA60Child* C8CA60Owner::FUN_00c8ca60(bool* pbCreated)
-{
-    C8CA60AllocTagScope kScope(0x10);
-    *pbCreated = (m_pkChild == 0);
-    if (*pbCreated)
-    {
-        m_pkChild = new (C8CA60AlignedAlloc(0x60)) C8CA60Child();
-        if (m_pParentNode)
-            FUN_00c8c410(m_pkChild);
-    }
-    return m_pkChild;
-}
 
 struct StrArr
 {
@@ -713,22 +685,6 @@ struct Object
         return 0;
     }
 };
-// @fnv 0x00c8cb20
-void Object::FUN_00c8cb20(StrArr* output)
-{
-    AutoMemContext task;
-    FUN_00c851c0(output);
-    output->append(FUN_00a7d330(*(void**)&g_012681b4));
-    const NativeTransform* world = this && state ? &state->world : &DAT_01268370;
-    NiTransform transform;
-    FUN_00624b10(&transform, (NiPoint3*)world);
-    FUN_00458620(&transform.translate, world->translation);
-    output->append(transform.translate.FUN_00a59af0("Trans"));
-    output->append(transform.ToString("Rot"));
-    Component* component = getComponent();
-    if (component)
-        component->serialize(output);
-}
 
 struct CB7800RTTI
 {
@@ -798,15 +754,6 @@ struct CB7800Object : CB7800Base
 
     void FUN_00cb7800(CB7800StringArray* pkStrings);
 };
-
-// @fnv 0x00cb7800
-void CB7800Object::FUN_00cb7800(CB7800StringArray* pkStrings)
-{
-    CB7800AllocTagScope kScope(0x10);
-    CB7800Base::GetViewerStrings(pkStrings);
-    char* pcString = FUN_00a7d330(ms_kRTTI.GetName());
-    pkStrings->Add(pcString);
-}
 
 struct S_00cb78b0_Base
 {
@@ -1238,15 +1185,6 @@ struct FUN_00c88210_cls
     BSFadeNode* FUN_00c88210(unsigned int flags);
 };
 
-// @fnv 0x00c88210
-BSFadeNode* FUN_00c88210_cls::FUN_00c88210(unsigned int flags)
-{
-    TlsGuard_t guard;
-    BSFadeNode* node = new BSFadeNode;
-    this->FUN_00c6ba30(node, flags);
-    return node;
-}
-
 extern __declspec(thread) int g_iC882C0AllocTag;
 
 struct BC882C0AllocTagScope
@@ -1300,15 +1238,6 @@ class FUN_00c882c0_cls
     void C882C0BaseGetViewerStrings(BC882C0StringArray* pkArray);
     void FUN_00c882c0(BC882C0StringArray* pkArray);
 };
-
-// @fnv 0x00c882c0
-void FUN_00c882c0_cls::FUN_00c882c0(BC882C0StringArray* pkArray)
-{
-    BC882C0AllocTagScope kScope(0x10);
-    C882C0BaseGetViewerStrings(pkArray);
-    char* pcName = FUN_00a7d330(g_pcC882C0Name);
-    pkArray->Add(pcName);
-}
 
 struct ScaleMatrix
 {
@@ -1672,17 +1601,6 @@ struct S_00caaf40
     S_00caaf40_Obj* FUN_00caaf40(int a);
 };
 
-// @fnv 0x00caaf40
-S_00caaf40_Obj* S_00caaf40::FUN_00caaf40(int a)
-{
-    S_00caaf40_Ctx ctx(0x10);
-    FUN_00c876f0();
-    S_00caaf40_Obj* o = new S_00caaf40_Obj;
-    vfn_c4(o, a);
-    FUN_00c87700();
-    return o;
-}
-
 namespace fnv_00cab000 {
 // FUN_00cab000 - bhkCapsuleShape::FUN_00cab000 (vtable slot 46 of .?AVbhkCapsuleShape@@)
 //
@@ -1942,45 +1860,6 @@ struct BhkCap_00cab000
     int FUN_00cab000(bool* out);
 };
 
-// @fnv 0x00cab000
-int BhkCap_00cab000::FUN_00cab000(bool* out)
-{
-    TlsGuard_t guard;
-
-    bool b = (unk0c == 0);
-    *out = b;
-    if (b)
-    {
-        BhkAllocObj* p = (BhkAllocObj*)g_memoryManager.Allocate(0x30);
-        if (p)
-        {
-            p->unk00 = 0;
-            p->unk04 = DAT_010c72bc[0];
-            p->unk10 = 0.0f;
-            p->unk14 = 0.0f;
-            p->unk18 = 0.0f;
-            p->unk1c = 0.0f;
-            p->unk20 = 0.0f;
-            p->unk24 = 0.0f;
-            p->unk28 = 0.0f;
-            p->unk2c = 0.0f;
-            p->unk20 = 1.0f;
-            p->unk24 = 0.0f;
-            p->unk28 = 0.0f;
-            p->unk2c = 0.0f;
-        }
-        else
-        {
-            p = 0;
-        }
-        unk0c = (int)p;
-        if (unk08 != 0)
-        {
-            FUN_00caade0(p);
-        }
-    }
-    return unk0c;
-}
 }  // namespace fnv_00cab000
 
 struct AudioTlsState
@@ -2340,17 +2219,6 @@ struct S_00cab8c0_Owner
     void FUN_00c9fc50(S_00cab8c0_Arr* a);
     void FUN_00cab8c0(S_00cab8c0_Arr* a);
 };
-// @fnv 0x00cab8c0
-void S_00cab8c0_Owner::FUN_00cab8c0(S_00cab8c0_Arr* a)
-{
-    S_00cab8c0_Ctx guard(0x10);
-    FUN_00c9fc50(a);
-    char* s = FUN_00a7d330(DAT_0126832c);
-    unsigned idx = a->m_uiItemCount;
-    if (idx >= a->m_iElementCount)
-        a->SetSize(idx + a->m_grow);
-    a->SetAt(idx, s);
-}
 }  // namespace fnv_00cab8c0
 
 namespace fnv_00cb76a0 {
@@ -2571,14 +2439,6 @@ struct FUN_00cb76a0_cls
     void* FUN_00cb76a0(unsigned int arg);
 };
 
-// @fnv 0x00cb76a0
-void* FUN_00cb76a0_cls::FUN_00cb76a0(unsigned int arg)
-{
-    TlsGuard_t guard;
-    SpawnedFade* obj = new SpawnedFade;
-    this->FUN_00c657f0(obj, arg);
-    return obj;
-}
 }  // namespace fnv_00cb76a0
 
 struct FUN_00cb7790_node
@@ -3166,16 +3026,6 @@ struct FUN_00cb7b80_cls
     void FUN_00cb7b80(SpawnArgs* a);
 };
 
-// @fnv 0x00cb7b80
-void FUN_00cb7b80_cls::FUN_00cb7b80(SpawnArgs* a)
-{
-    TlsGuard guard;
-    unsigned int b, c;
-    SpawnedNode* n = new SpawnedNode(c = a->m_kPointA, b = a->m_kPointB);
-    this->v35(n);
-    n->Finish();
-    this->v47(a);
-}
 }  // namespace fnv_00cb7b80
 
 namespace fnv_00cb8150 {
@@ -3235,21 +3085,6 @@ struct FUN_00cb8150_cls
     unsigned char FUN_00cb8150(void* a1);
 };
 
-// @fnv 0x00cb8150
-unsigned char FUN_00cb8150_cls::FUN_00cb8150(void* a1)
-{
-    FUN_00cb8150_cls* other = (FUN_00cb8150_cls*)a1;
-    unsigned char r = FUN_00c84dc0(a1);
-    if (r != 0)
-    {
-        CbArr8150 a;
-        CbArr8150 b;
-        this->FUN_00cb7c60(&a);
-        other->FUN_00cb7c60(&b);
-        r = FUN_00cf08c0((int*)&a.m_pData, (void**)&b.m_pData);
-    }
-    return r;
-}
 }  // namespace fnv_00cb8150
 
 namespace fnv_00cb8330 {
@@ -3488,27 +3323,6 @@ struct S_00cb8330_cls
     S_00cb8330_Obj* m_0c;
     void FUN_00cb8330(bool bFree);
 };
-// @fnv 0x00cb8330
-void S_00cb8330_cls::FUN_00cb8330(bool bFree)
-{
-    TlsGuard guard;
-    if (bFree)
-    {
-        S_00cb8330_Obj* p = m_0c;
-        if (p)
-        {
-            S_00cb8330_Heap& h = FUN_00c85750()->heap();
-            int cap = p->m_cap;
-            p->m_iElementCount = 0;
-            if ((cap & 0x80000000) == 0)
-                h.v10(p->m_data, (cap & 0x3fffffff) * 16);
-            p->m_data = 0;
-            p->m_cap = 0x80000000;
-            DAT_011f6238.FUN_00aa4060(p);
-        }
-        m_0c = 0;
-    }
-}
 }  // namespace fnv_00cb8330
 
 struct A1Owner
@@ -4293,32 +4107,6 @@ struct FUN_00c8c1e0_cls
     void FUN_00c8c1e0(FUN_00c8c1e0_arg* a1);
 };
 
-// @fnv 0x00c8c1e0
-void FUN_00c8c1e0_cls::FUN_00c8c1e0(FUN_00c8c1e0_arg* a1)
-{
-    FUN_00c8c1e0_rec* r;
-    FUN_00c8c1e0_arg* volatile* pa = &a1;
-    FUN_00c8c1e0_arg* a = *pa;
-    a->FUN_00a645b0();
-    FUN_00c84d00(a);
-    r = GetRec(a1);
-    r->m04 = 0;
-    if (a->m1E5 != 1)
-    {
-        FUN_00c8c1e0_sub* s = &r->sub;
-        volatile unsigned int* w = &s->m30;
-        w[0] = _byteswap_ulong(w[0]);
-        w[1] = _byteswap_ulong(w[1]);
-        w[2] = _byteswap_ulong(w[2]);
-        w[3] = _byteswap_ulong(w[3]);
-        FUN_00c8c020(s);
-    }
-    if (a->m04 < 0x32)
-    {
-        r->sub.Flush();
-    }
-}
-
 struct C8C260Block
 {
     int unk00;
@@ -4611,33 +4399,6 @@ extern "C" __declspec(dllimport) long __stdcall InterlockedDecrement(long volati
 
 typedef void(__thiscall* ReleaseFn_t)(S_00c8c810_A* apObj);
 
-// @fnv 0x00c8c770
-void H_00c8c810::FUN_00c8c770()
-{
-    TlsGuard_t guard;
-    if (this != 0)
-    {
-        S_00c8c810_C* pC = this->p;
-        if (pC != 0)
-        {
-            S_00c8c810_B* pB = pC->p;
-            if (pB != 0)
-            {
-                S_00c8c810_A* pA = pB->p;
-                if (pA != 0)
-                {
-                    if (InterlockedDecrement(&pA->_ref) == 0)
-                    {
-                        void** vt = *(void***)pA;
-                        ReleaseFn_t fn = (ReleaseFn_t)vt[1];
-                        fn(pA);
-                    }
-                }
-            }
-        }
-    }
-}
-
 namespace fnv_00c8c130 {
 struct RenderArg
 {
@@ -4787,34 +4548,6 @@ struct RenderProcessor
     void FUN_00c84df0(void* input, RenderArg* arg);
     void FUN_00c8c130(void* input, RenderArg* arg);
 };
-// @fnv 0x00c8c130
-void RenderProcessor::FUN_00c8c130(void* input, RenderArg* arg)
-{
-    unsigned char ignored;
-    RenderResult* result = GetRendered(&ignored);
-    RenderNode* node = result->holder04 ? result->holder04->node08 : 0;
-    float alpha = arg->alpha;
-    if (alpha != 1.0f)
-    {
-        result->colour40 = result->colour40 * alpha;
-        result->colour44 *= alpha;
-        result->colour48 *= alpha;
-        result->colour4C *= alpha;
-    }
-    else
-    {
-        if (node == 0)
-            goto complete;
-        if (node->NeedsRefresh(arg))
-            goto complete;
-    }
-    {
-        HolderResult* replacement = node->Fetch(arg);
-        result->holder04 = replacement ? replacement->link08 : 0;
-    }
-complete:
-    FUN_00c84df0(input, arg);
-}
 }  // namespace fnv_00c8c130
 
 namespace fnv_00c8c4d0 {
@@ -5166,24 +4899,6 @@ struct S_00cb8270
     S_00cb8270_Array* FUN_00cb8270(bool& outCreated);
 };
 
-// @fnv 0x00cb8270
-S_00cb8270_Array* S_00cb8270::FUN_00cb8270(bool& outCreated)
-{
-    AutoMemContext memContext(0x10);
-
-    bool created = (unk0C == 0);
-    outCreated = created;
-    if (created)
-    {
-        S_00cb8270_Array* arr = new S_00cb8270_Array();
-        unk0C = arr;
-        if (unk08 != 0)
-        {
-            FUN_00cb7c60(arr);
-        }
-    }
-    return unk0C;
-}
 }  // namespace fnv_00cb8270
 
 struct CollisionStreamLoader : NiCollisionObject

@@ -68,9 +68,3 @@ void* C_00b56640::FUN_00b56640(unsigned char f)
 // ---- family f131
 
 void __cdecl FUN_00c16549(int);
-
-void FUN_00c063ec()
-{
-    FUN_00c16549(4);
-}
-

@@ -14,45 +14,18 @@ struct ComputersMenu
     void FUN_00754c00(int aiID, Tile* apTile);
 };
 
-// Stores apTile into the tile slot at index aiID when aiID is in [0, 0x10).
-// @fnv 0x00754c00
-void ComputersMenu::FUN_00754c00(int aiID, Tile* apTile)
-{
-    if (aiID >= 0 && aiID < 0x10)
-    {
-        m_pTiles[aiID] = apTile;
-    }
-}
-
 namespace fnv_00757a10 {
 struct ComputersMenu
 {
     int __thiscall GetMenuId();
 };
 
-// @fnv 0x00757a10
-int __thiscall ComputersMenu::GetMenuId()
-{
-    return 0x421;
-}
 }  // namespace fnv_00757a10
-
-// @fnv 0x00757e20
-int FUN_00757e20()
-{
-    return 0x421;
-}
 
 struct FUN_00757e80_shell
 {
     unsigned char IsFlagBitSet();
 };
-
-// @fnv 0x00757e80
-unsigned char FUN_00757e80_shell::IsFlagBitSet()
-{
-    return ((*(unsigned char*)((unsigned char*)this + 0xa5) & 4) != 0);
-}
 
 struct FUN_00758390_shell
 {
@@ -60,23 +33,11 @@ struct FUN_00758390_shell
     bool __thiscall FUN_00758390();
 };
 
-// @fnv 0x00758390
-bool __thiscall FUN_00758390_shell::FUN_00758390()
-{
-    return (((signed char*)this)[0x74 / sizeof(signed char)] & 2) != 0;
-}
-
 struct FUN_00758a60_shell
 {
     char m_74;
     bool __thiscall FUN_00758a60();
 };
-
-// @fnv 0x00758a60
-bool __thiscall FUN_00758a60_shell::FUN_00758a60()
-{
-    return (((char*)this)[0x74] & 4) != 0;
-}
 
 namespace fnv_007596a0 {
 struct Tile
@@ -86,12 +47,6 @@ struct Tile
 extern int __cdecl GetTileValueID(const char*, int);
 extern char $SG7172[];
 
-// @fnv 0x007596a0
-void __cdecl FUN_007596a0(Tile* apTile, void* apMenuItem)
-{
-    if (apTile)
-        apTile->Set(GetTileValueID($SG7172, -1), 1);
-}
 }  // namespace fnv_007596a0
 
 void __cdecl _Deallocate(void*);
@@ -100,15 +55,6 @@ struct S757a20
     void __thiscall FUN_00757a50();
     void* __thiscall FUN_00757a20(unsigned int);
 };
-// Calls FUN_00757a50, then if bit 0 of flags is set calls _Deallocate on this, and returns this.
-// @fnv 0x00757a20
-void* __thiscall S757a20::FUN_00757a20(unsigned int flags)
-{
-    FUN_00757a50();
-    if (flags & 1)
-        _Deallocate(this);
-    return this;
-}
 
 struct FUN_00757e30_Class
 {
@@ -116,29 +62,12 @@ struct FUN_00757e30_Class
     Tile* arr[16];
     bool __thiscall HasAllTiles(int* p);
 };
-// Checks that all 16 entries of arr are non-null, returning 0 on the first null and 1 otherwise.
-// @fnv 0x00757e30
-bool __thiscall FUN_00757e30_Class::HasAllTiles(int* piIndex)
-{
-    for (*piIndex = 0; *piIndex < 0x10; (*piIndex)++)
-    {
-        if (arr[*piIndex] == 0)
-            return 0;
-    }
-    return 1;
-}
 
 struct FUN_00758350_shell
 {
     char m_6c[4];
     bool __thiscall FUN_00758350();
 };
-// Returns true when the int at offset 0x6c is nonzero and bit 0 of the byte at offset 0x74 is set.
-// @fnv 0x00758350
-bool __thiscall FUN_00758350_shell::FUN_00758350()
-{
-    return *(int*)((char*)this + 0x6c) && ((*(signed char*)((char*)this + 0x74) & 1));
-}
 
 struct Helper98
 {
@@ -154,16 +83,6 @@ struct FUN_00758a80_shell
 {
     void __thiscall FUN_00758a80();
 };
-// @fnv 0x00758a80
-void __thiscall FUN_00758a80_shell::FUN_00758a80()
-{
-    ((Helper98*)((char*)this + 0x98))->_ref_0063f7b0();
-    *(int*)((char*)this + 0xA8) = *(((Helper98*)((char*)this + 0x98))->_ref_006815c0());
-    if (*(int*)((char*)this + 0xA8) != 0)
-        ((DispHelper*)this)->FUN_007586e0(0);
-    else
-        RefreshF57EA0TerminalMenu();
-}
 
 struct StartMenu
 {
@@ -176,11 +95,6 @@ struct Host
     unsigned char mA6;
     char const* __thiscall FUN_00758fe0();
 };
-// @fnv 0x00758fe0
-char const* __thiscall Host::FUN_00758fe0()
-{
-    return mA6 < 10 ? DAT_01189e94[mA6]->GetMenuTitle() : 0;
-}
 
 struct GlobalObject_0048f200
 {
@@ -217,15 +131,6 @@ struct FUN_007597c0_shell
     void FUN_007597f0();
     void* __thiscall FUN_007597c0(unsigned int flags);
 };
-// Calls FUN_007597f0, then frees this with operator delete when flags has bit 0 set, and returns this.
-// @fnv 0x007597c0
-void* __thiscall FUN_007597c0_shell::FUN_007597c0(unsigned int flags)
-{
-    FUN_007597f0();
-    if (flags & 1)
-        operator delete(this);
-    return this;
-}
 
 namespace fnv_007597f0 {
 struct GlobalObject_0048f200
@@ -264,16 +169,6 @@ struct Holder
 {
     void FUN_00759850();
 };
-// @fnv 0x00759850
-void Holder::FUN_00759850()
-{
-    while (!((ArrHelper*)this)->FUN_0076b610())
-    {
-        ScriptObj* pB = ((ListBase*)this)->RemoveHead();
-        ScriptObj* pA = pB;
-        pA ? pA->FUN_007598a0(1) : 0;
-    }
-}
 
 void Deallocate(void*);
 struct FUN_007598a0_shell
@@ -281,15 +176,6 @@ struct FUN_007598a0_shell
     void __thiscall FUN_00726cf0();
     void* __thiscall FUN_007598a0(unsigned int flags);
 };
-// Calls FUN_00726cf0, then deallocates this when flags has bit 0 set, and returns this.
-// @fnv 0x007598a0
-void* FUN_007598a0_shell::FUN_007598a0(unsigned int flags)
-{
-    FUN_00726cf0();
-    if (flags & 1)
-        Deallocate(this);
-    return this;
-}
 
 struct Flt
 {
@@ -307,15 +193,6 @@ struct TileProcessor
 {
     void ProcessAllTiles();
 };
-// @fnv 0x00759f50
-void TileProcessor::ProcessAllTiles()
-{
-    void* piter = (void*)((Flt*)this)->operator unsigned int();
-    while (piter)
-    {
-        ((NoArgumentMethodObject*)((TL*)this)->GetNext(piter))->FUN_00700110();
-    }
-}
 
 void __cdecl operator delete(void*);
 
@@ -325,31 +202,12 @@ struct FUN_0075aa20_shell
     void* __thiscall FUN_0075aa20(unsigned int flags);
 };
 
-// Calls FUN_0075a060, then deletes this if flags has bit 0 set, and returns this.
-// @fnv 0x0075aa20
-void* __thiscall FUN_0075aa20_shell::FUN_0075aa20(unsigned int flags)
-{
-    FUN_0075a060();
-    if (flags & 1)
-        operator delete(this);
-    return this;
-}
-
 struct FUN_007583b0_shell
 {
     char _pad[0x74];
     signed char m_74;
     void __thiscall SetFlag4(bool aFlag);
 };
-
-// @fnv 0x007583b0
-void FUN_007583b0_shell::SetFlag4(bool aFlag)
-{
-    if (aFlag)
-        m_74 |= 4;
-    else
-        m_74 &= ~4;
-}
 
 struct BSSimpleList
 {
@@ -368,14 +226,6 @@ struct FUN_0075a5e0_shell
     void __thiscall FUN_0075a5e0(int(__cdecl* f)(void*, void*));
 };
 
-// Sorts the list using the given comparison function, then calls ResetAndProcessNodes on this object.
-// @fnv 0x0075a5e0
-void __thiscall FUN_0075a5e0_shell::FUN_0075a5e0(int(__cdecl* f)(void*, void*))
-{
-    m_kNode.Sort(f);
-    reinterpret_cast<FUN_0075aa50_shell*>(this)->ResetAndProcessNodes();
-}
-
 struct InterfaceH
 {
     static bool __cdecl GetSelectedTargetIndex(int);
@@ -393,29 +243,6 @@ struct FUN_007583f0_shell
     bool __thiscall HandleButtonInput(int aiButton, float afValue);
 };
 
-// @fnv 0x007583f0
-bool FUN_007583f0_shell::HandleButtonInput(int aiButton, float afValue)
-{
-    if (InterfaceH::GetSelectedTargetIndex(0x421))
-    {
-        switch (aiButton)
-        {
-        case 0xa:
-            if (reinterpret_cast<TV*>(pTile30)->IsVisible())
-            {
-                m_pText = 0;
-                (*(void(__thiscall**)(FUN_007583f0_shell*, int, int))(*(int*)this + 0xc))(this, 2, 0);
-            }
-            else
-            {
-                reinterpret_cast<FUN_00758a80_shell*>(this)->FUN_00758a80();
-            }
-            return true;
-        }
-    }
-    return false;
-}
-
 struct FUN_00a01230_shell
 {
     bool __thiscall IsTraitNonZero(int);
@@ -431,15 +258,6 @@ struct FUN_0075ab20_shell
 int __cdecl GetTileValueID(char const*, int);
 extern int DAT_011d93d8;
 extern int DAT_011d93dc;
-
-// Returns true when m_pTile is set and its trait lookup for the cached "_enabled" trait index succeeds.
-// @fnv 0x0075ab20
-bool __thiscall FUN_0075ab20_shell::IsTileTraitEnabled()
-{
-    static int trait = GetTileValueID("_enabled", -1);
-
-    return m_pTile && reinterpret_cast<FUN_00a01230_shell*>(m_pTile)->IsTraitNonZero(trait);
-}
 
 void* __cdecl operator new(unsigned int);
 
@@ -484,40 +302,6 @@ struct FUN_00759da0_shell : FUN_007b5330_shell
 {
     void __thiscall InsertAtPosition(char const*, int, int, int);
 };
-
-// @fnv 0x00759da0
-void FUN_00759da0_shell::InsertAtPosition(char const* aParam1, int aParam2, int aParam3, int aParam4)
-{
-    FUN_00759eb0* pNewObject = new FUN_00759eb0(aParam1);
-
-    reinterpret_cast<FUN_006ffe80_shell*>(pNewObject)->FUN_006ffe80(aParam2, aParam3);
-
-    if (aParam4 == -1)
-    {
-        reinterpret_cast<M788*>(this)->FUN_004ed8c0(reinterpret_cast<void*>(&pNewObject));
-    }
-    else
-    {
-        unsigned int pNode = reinterpret_cast<GO*>(this)->operator unsigned int();
-
-        for (int i = 0; pNode != 0 && i < aParam4; ++i)
-        {
-            pNode = reinterpret_cast<unsigned int>(
-                reinterpret_cast<NiTPointerList*>(this)->DereferenceIfNotNull(reinterpret_cast<void*>(pNode)));
-        }
-
-        if (pNode != 0)
-        {
-            this->FUN_007b5330(reinterpret_cast<void*>(pNode), reinterpret_cast<void*>(&pNewObject));
-        }
-        else
-        {
-            reinterpret_cast<M788*>(this)->FUN_004ed8c0(reinterpret_cast<void*>(&pNewObject));
-        }
-    }
-
-    reinterpret_cast<FUN_00726db0_class*>(pNewObject)->FUN_00726db0(false);
-}
 
 struct MenuBase
 {
@@ -681,22 +465,6 @@ struct BlinkMenu
     BlinkValue* value;
     void UpdateBlink();
 };
-// Toggles the blink value between 0 and 1 once the tick interval elapses, or fetches the value from the tile if missing.
-// @fnv 0x007585a0
-void BlinkMenu::UpdateBlink()
-{
-    static unsigned int nextTick = 0;
-    static float interval = tile->FUN_00a011b0(GetTileValueID("_blink_interval", -1));
-    if (gm_GetTickCount() > nextTick && value)
-    {
-        value->FUN_00a0a270(value->FUN_00488d50() == 1.0 ? 0.0f : 1.0f, true);
-        nextTick = gm_GetTickCount() + interval;
-    }
-    else if (!value)
-    {
-        value = tile->FindTraitValue(4003);
-    }
-}
 
 struct BSStringT
 {
@@ -768,55 +536,12 @@ struct NoteTextSetter
 NoteTextSetter* __stdcall CreateNoteTextSetter(const char* apText, TileValue* apValue1, TileValue* apValue2,
                                                int aiIndex);
 
-// Sets the tile's enabled state and text from a note entry, marking unread notes as read and applying the text setter when shown.
-// @fnv 0x00759560
-void UpdateNoteTile(MenuTile* apTile, NoteEntry* apEntry)
-{
-    if (apTile)
-    {
-        BSStringT kText("> ");
-        int iState = 1;
-        bool bShow = true;
-        apTile->Set(TraitNameToID("_enabled", -1), 0);
-        if (apEntry && apEntry->kFlags.Check(0, 0))
-        {
-            if (apEntry->IsUnread())
-            {
-                iState = 2;
-                apEntry->SetUnread(false);
-            }
-            kText += apEntry->kName;
-        }
-        else if (!apEntry)
-        {
-            kText += g_011d2cb8.String();
-        }
-        else
-        {
-            bShow = false;
-        }
-        apTile->Set(0xfd6, iState);
-        if (bShow)
-        {
-            CreateNoteTextSetter(kText, apTile->GetValue(0x1004), apTile->GetValue(0xfa3), -1)->Apply();
-        }
-    }
-}
-
 struct FUN_00759760_storage : FUN_00759760_shell
 {
     int unk00;
     int unk04;
     int unk08;
 };
-// Allocates a FUN_00759760_storage instance into DAT_011d9338 if it is null, then returns DAT_011d9338.
-// @fnv 0x007596d0
-S_7597c0* __cdecl GetStorageSingleton()
-{
-    if (!DAT_011d9338)
-        DAT_011d9338 = reinterpret_cast<S_7597c0*>(new FUN_00759760_storage());
-    return DAT_011d9338;
-}
 
 // Destructor: release the entries, unregister this object, then the entry list member is destroyed.
 
@@ -871,23 +596,6 @@ class SetTileHelper
     bool FUN_0075a610(Tile* apTile);
 };
 
-// @fnv 0x0075a610
-bool SetTileHelper::FUN_0075a610(Tile* apTile)
-{
-    if (((Shell*)this)->IsTileTraitEnabled() &&
-        (apTile == 0 || (((Shell*)this)->ContainsKey(apTile) &&
-                         ((ParamShell*)apTile)->IsTraitNonZero((int)FUN_00a00940("_enabled", -1)))))
-    {
-        m_pTile10 = apTile;
-        ((Shell*)this)->UpdateHighlight();
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
-
 struct b9165Obj
 {
     void __thiscall FUN_00700320(int a, int b);
@@ -924,23 +632,6 @@ struct FUN_0075aa50_cls
     void __thiscall UpdateHighlight();
     void __thiscall ResetAndProcessNodes();
 };
-
-// @fnv 0x0075aa50
-void FUN_0075aa50_cls::ResetAndProcessNodes()
-{
-    m_1c = 0;
-    m_20 = 0.0f;
-    for (b9165Node* cur = this != 0 ? &m_04 : 0; cur != 0 && cur->FUN_006815c0()->p != 0; cur = cur->FUN_00726070())
-    {
-        if (cur->FUN_006815c0()->p->m_08 == 0)
-        {
-            cur->FUN_006815c0()->p->m_00->FUN_00700320(0xfac, m_1c++);
-            AccumulateTileHeight(cur->FUN_006815c0()->p->m_00);
-        }
-    }
-    UpdateScrollItems();
-    UpdateHighlight();
-}
 
 // Refresh the terminal menu tile; if the rendered menu is showing this menu's scene, refresh the rendered terminal too.
 
@@ -981,26 +672,6 @@ extern const float g_fF57EA0TileDefault;
 void F57EA0Prepare();
 InterfaceManager* F57EA0GetInterfaceManager();
 FORenderedMenu* __fastcall F57EA0GetRenderedMenu(InterfaceManager* pkManager);
-
-// @fnv 0x00757ea0
-void RefreshF57EA0TerminalMenu()
-{
-    if (g_pF57EA0TerminalMenu)
-    {
-        F57EA0Prepare();
-        g_pF57EA0TerminalMenu->GetTile()->SetFloat(0xfc1, g_fF57EA0TileDefault, true);
-        if (F57EA0GetRenderedMenu(F57EA0GetInterfaceManager()) &&
-            F57EA0GetRenderedMenu(F57EA0GetInterfaceManager())->GetSceneNode() ==
-                g_pF57EA0TerminalMenu->GetTile()->GetNode())
-        {
-            FORenderedTerminal* pkTerminal =
-                dynamic_cast<FORenderedTerminal*>(F57EA0GetRenderedMenu(F57EA0GetInterfaceManager()));
-            pkTerminal->Refresh();
-        }
-        g_pF57EA0TerminalMenu->GetTile()->SetInt(0x1772, 1);
-        g_pF57EA0TerminalMenu->Update();
-    }
-}
 
 namespace fnv_00758470 {
 struct InterfaceManager;
@@ -1407,40 +1078,6 @@ struct CompMenu
     void UpdateBlink();
     void RefreshDisplay();
 };
-// @fnv 0x00758470
-void CompMenu::FUN_00758470()
-{
-    if ((bC0 && !FUN_004b7210()->unk4d4.FUN_00718840(0x18)) || unk24 == 2)
-        return;
-    pE8->ProcessQueue();
-    UpdateBlink();
-    if (!pE8->GetReferenceFlags())
-    {
-        if (iStateB0 < 2)
-        {
-            if (iStateB0 == 0)
-            {
-                DAT_011d93c4 = gm_GetTickCount() + 2000;
-                iStateB0 = 1;
-            }
-            else if (iStateB0 == 1)
-            {
-                if (gm_GetTickCount() > DAT_011d93c4)
-                    RefreshDisplay();
-            }
-        }
-        else if (bC1)
-        {
-            list68.Traverse(FUN_007596a0, 0, 0x7fffffff);
-            bC1 = 0;
-        }
-    }
-    if (unka0 && gm_GetTickCount() > unka0)
-    {
-        unka0 = 0;
-        tile3c->Set(0xfa3, 0);
-    }
-}
 }  // namespace fnv_00758470
 
 struct CHValue
@@ -1651,51 +1288,6 @@ struct CHMenu
     void FUN_007586e0(bool abAddRecent);
 };
 
-// Resets the display and list box, optionally adds the current challenge to the recent list, and rebuilds the challenge lines and tiles.
-// @fnv 0x007586e0
-void CHMenu::FUN_007586e0(bool abAddRecent)
-{
-    if (!pChallenge)
-        return;
-
-    CHString kText;
-    pDisplay->Reset();
-    kListBox.Clear();
-    if (abAddRecent)
-        kRecent.AddHead(pChallenge);
-    g_uiChallengeUpdateMS = (*g_kChallengeRateSetting.Int() > 0) ? 1000 / *g_kChallengeRateSetting.Int() : 1000;
-
-    const char* pDescription = pChallenge->kDescription.Get(pChallenge, 0x43534544);
-    CHValue* pTextValue = pTile44->GetValue(0xfc4);
-    if (pDescription && *pDescription && (!pTile44->IsVisible() || CHStricmp(pDescription, pTextValue->GetString())))
-    {
-        pTile64->SetInt(0xfa3, 0);
-        pDisplay->AddLine(pDescription, pTextValue, pTile44->GetValueAlt(0xfa3), -1);
-    }
-
-    for (CHListNode* pIter = pChallenge->GetChallengeList(); pIter && *pIter->GetItem(); pIter = pIter->GetNext())
-    {
-        if ((*pIter->GetItem())->kCondition.Evaluate(pSubject, 0))
-        {
-            CHTile* pItemTile = kListBox.Insert(*pIter->GetItem(), 0, 0, 0);
-            pItemTile->SetInt(CHTraitNameToID("_enabled", -1), 0);
-            pItemTile->SetInt(0xfd6, (*pIter->GetItem())->IsCompleted() ? 2 : 1);
-            CHSprintf(&kText, "%s%s", "> ", (*pIter->GetItem())->GetName());
-            pDisplay->AddLine(kText.CStr(), pItemTile->GetValue(0x1004), pItemTile->GetValue(0xfa3), -1);
-        }
-        (*pIter->GetItem())->SetSeen(false);
-    }
-
-    if (kRecent.GetNext())
-    {
-        CHTile* pEmptyTile = kListBox.Insert(0, 0, 0, 0);
-        pEmptyTile->SetInt(CHTraitNameToID("_enabled", -1), 0);
-        CHSprintf(&kText, "%s%s", "> ", g_kNoChallengesSetting.GetString());
-        pDisplay->AddLine(kText.CStr(), pEmptyTile->GetValue(0x1004), pEmptyTile->GetValue(0xfa3), -1);
-    }
-    bRefreshed = true;
-}
-
 class TESSound
 {
   public:
@@ -1733,14 +1325,6 @@ struct Shell_759030
 {
     void PlayNoteSound(BGSNote* apNote);
 };
-
-// @fnv 0x00759030
-void Shell_759030::PlayNoteSound(BGSNote* apNote)
-{
-    ((FUN_00ad73b0_t*)BSAudio::GetSingleton())
-        ->FUN_00ad73b0(apNote->FUN_005e9100()->GetFormID(), 0x101)
-        .FUN_00ad8830(false);
-}
 
 struct Setting
 {
@@ -1872,31 +1456,6 @@ struct TextMenu
     void SetTextSource(TextSource*);
 };
 
-// Clears the animator, configures tiles, fetches and formats the source text into a layout, then advances the text pointer past the consumed characters.
-// @fnv 0x007590c0
-void TextMenu::SetTextSource(TextSource* source)
-{
-    fielde8->Clear();
-    DAT_0119f278 = *g_011d4bb8.Int() > 0 ? 1000 / *g_011d4bb8.Int() : 1000;
-    field2c->Set(0xfa3, 0);
-    field30->Set(0xfa9, 0);
-    field30->Set(0xfa3, 1);
-    if (fieldbc == 0)
-    {
-        buffer.Set(source->GetInterface()->GetText(source, 0x4d414e54, 0));
-        fieldbc = buffer;
-    }
-    int lines = (int)(field60->Read(0xfbc) -
-                      field44->Read(0xfb0) / TextFonts::Instance()->GetFont((int)field44->Read(0xfb9) - 1)->Height()) +
-                1;
-    TextLayout textLayout((int)field60->Read(0xfba), 0, 0, lines, 10);
-    TextFonts::Instance()->GetFont((int)field60->Read(0xfb9) - 1)->Format(fieldbc, &textLayout);
-    fielde8->SetText(textLayout, field60->GetValue(0xfc4), field60->Find(0xfa3), -1);
-    fieldbc += FUN_0042f5a0(textLayout.consumed, buffer.Length());
-    if (!*fieldbc)
-        fieldbc = 0;
-}
-
 namespace fnv_007598d0 {
 struct TextTile
 {
@@ -1998,111 +1557,6 @@ struct QueueMenu
 };
 extern unsigned int DAT_011d93d4;
 extern const char DAT_01072118[];
-// @fnv 0x007598d0
-void TextQueue::ProcessQueue()
-{
-    bool hasTrait = false;
-    while (!FUN_0076b610() && gm_GetTickCount() > DAT_011d93d4)
-    {
-        if ((*FUN_0073ac90())->FUN_00759d80())
-        {
-            QueueText* removed = PopFrontScript();
-            if (!reinterpret_cast<QueueMenu*>(DAT_011d9334)->mode)
-            {
-                if (removed && *removed->FUN_00458b50() == *DAT_01072118)
-                    reinterpret_cast<QueueMenu*>(DAT_011d9334)->promptSound.FUN_00ad8830(false);
-                DAT_011d93d4 = gm_GetTickCount() + 500;
-            }
-            else if (removed && removed->FUN_007001f0() == reinterpret_cast<QueueMenu*>(DAT_011d9334)->activeTile)
-            {
-                reinterpret_cast<QueueMenu*>(DAT_011d9334)->modeTile->FUN_00700320(0xfa3, 1);
-            }
-            delete removed;
-        }
-        else
-        {
-            int x;
-            {
-                TextTile* tile;
-                {
-                    int y;
-                    {
-                        unsigned int oldLength = 0;
-                        unsigned int newLength = 0;
-                        if (!reinterpret_cast<QueueMenu*>(DAT_011d9334)->mode &&
-                            *(*FUN_0073ac90())->FUN_00458b50() == *DAT_01072118)
-                        {
-                            oldLength = FUN_0044a670((*FUN_0073ac90())->FUN_0059bb30());
-                            (*FUN_0073ac90())->FUN_006ffea0();
-                            newLength = FUN_0044a670((*FUN_0073ac90())->FUN_0059bb30());
-                            for (unsigned int index = 0; index < newLength - oldLength; index++)
-                            {
-                                unsigned int offset =
-                                    (*FUN_0073ac90())->FUN_0044edb0() * index / (newLength - oldLength);
-                                FUN_00ad9060()
-                                    ->ResolveAudioHandle("UIHackingCharSingle", 0x121, offset, 0)
-                                    .FUN_00ad8870();
-                            }
-                        }
-                        else
-                        {
-                            (*FUN_0073ac90())->FUN_006ffea0();
-                            reinterpret_cast<QueueMenu*>(DAT_011d9334)->advanceSound.FUN_00ad8830(false);
-                        }
-                        x = 0;
-                        y = 0;
-                        tile = (*FUN_0073ac90())->FUN_007001f0();
-                        hasTrait = tile->FUN_00a00f30(0xfba) != 0;
-                        for (TextTile* parent = tile;
-                             parent &&
-                             parent != reinterpret_cast<QueueMenu*>(DAT_011d9334)->positionTile->FUN_0045cd60();
-                             parent = parent->FUN_0045cd60())
-                        {
-                            x += (int)parent->FUN_00a011b0(0xfa1);
-                            y += (int)parent->FUN_00a011b0(0xfa2);
-                        }
-                        tile->FUN_00a04640(false);
-                        if (reinterpret_cast<QueueMenu*>(DAT_011d9334)
-                                ->selection.ContainsKey(reinterpret_cast<Tile*>(tile)))
-                        {
-                            tile->FUN_00a04620(false);
-                            reinterpret_cast<QueueMenu*>(DAT_011d9334)
-                                ->positionTile->FUN_00a012d0(
-                                    0xfa1,
-                                    x + tile->FUN_00a011b0(reinterpret_cast<int>(FUN_00a00940("_text_width", -1))),
-                                    true);
-                            reinterpret_cast<QueueMenu*>(DAT_011d9334)
-                                ->positionTile->FUN_00a012d0(
-                                    0xfa2, y + tile->FUN_00a011b0(reinterpret_cast<int>(FUN_00a00940("_text_y", -1))),
-                                    true);
-                        }
-                        else if (!hasTrait)
-                        {
-                            reinterpret_cast<QueueMenu*>(DAT_011d9334)
-                                ->positionTile->FUN_00a012d0(0xfa1, x + tile->FUN_00a011b0(0xfb1), true);
-                            reinterpret_cast<QueueMenu*>(DAT_011d9334)->positionTile->FUN_00700320(0xfa2, y);
-                        }
-                        break;
-                    }
-                }
-            }
-        }
-    }
-    if (FUN_0076b610() || hasTrait)
-    {
-        reinterpret_cast<QueueMenu*>(DAT_011d9334)
-            ->positionTile->FUN_00a012d0(
-                0xfa1,
-                reinterpret_cast<QueueMenu*>(DAT_011d9334)->previousTile->FUN_00a011b0(0xfa1) +
-                    (reinterpret_cast<QueueMenu*>(DAT_011d9334)->previousTile->IsAllChildrenFlag0()
-                         ? reinterpret_cast<QueueMenu*>(DAT_011d9334)->previousTile->FUN_00a011b0(0xfb1)
-                         : 0.0f),
-                true);
-        reinterpret_cast<QueueMenu*>(DAT_011d9334)
-            ->positionTile->FUN_00a012d0(
-                0xfa2, reinterpret_cast<QueueMenu*>(DAT_011d9334)->previousTile->FUN_00a011b0(0xfa2), true);
-    }
-}
 }  // namespace fnv_007598d0
 
 int __cdecl TraitNameToID(const char* apName, int aiDefault);
@@ -2167,48 +1621,6 @@ struct LBListBox
                     const char* apTemplateName);
 };
 
-// @fnv 0x0075a110
-LBTile* LBListBox::AddItem(int aiObject, const char* apText, int(__cdecl* apSort)(LBItem*, LBItem*),
-                           const char* apTemplateName)
-{
-    if (pParentTile && (pTemplateName || apTemplateName))
-    {
-        LBTile* pTile = pParentTile->GetMenu()->AddTileFromTemplate(pParentTile,
-                                                                    apTemplateName ? apTemplateName : pTemplateName, 0);
-        if (!pTile->GetValue(0xfaa))
-            pTile->SetInt(0xfaa, -1);
-        if (apText)
-            pTile->SetString(0xfc4, apText, true);
-        if (apSort)
-        {
-            kList.InsertSorted(new LBItem(pTile, aiObject), apSort);
-            if (FUN_007242c0(0))
-                ResetAndProcessNodes();
-        }
-        else
-        {
-            kList.Append(new LBItem(pTile, aiObject));
-            if (FUN_007242c0(0))
-            {
-                AccumulateTileHeight(pTile);
-                UpdateScrollItems();
-            }
-            pTile->SetInt(0xfac, usItemCount++);
-        }
-        if (GetRaceCount() == 1 && pParentTile->GetFloat(TraitNameToID("_number_of_visible_items", -1)) > 0.0)
-        {
-            LBTileValue* pAction = pParentTile->GetValueAction(0xfb0);
-            pAction->RemoveFromReactions();
-            pAction->FUN_00a09130(0x7d0, pTile, 0xfb0);
-            pAction->AppendFloatAction(0x7d3, pParentTile->GetFloat(TraitNameToID("_number_of_visible_items", -1)));
-            pAction->FUN_00a09410(0);
-        }
-        return pTile;
-    }
-    else
-        return 0;
-}
-
 struct OwnedObject
 {
     virtual ~OwnedObject();
@@ -2252,39 +1664,6 @@ struct AnimationList
     void UpdateHighlight();
     void ClearEntries();
 };
-// Deletes the node chain and entry, optionally their object/text, resets count and elapsed, clears the tile filter, and resets currentTile.
-// @fnv 0x0075a3b0
-void AnimationList::ClearEntries()
-{
-    while (node && *node->FUN_006815c0())
-    {
-        AnimationNode* next = node->FUN_00726070();
-        if (!s_bAllowDetach)
-            delete (*node->FUN_006815c0())->object;
-        if (FUN_007242c0(1))
-            delete (*node->FUN_006815c0())->text;
-        delete *node->FUN_006815c0();
-        node->FUN_006ecd40(0);
-        delete node;
-        node = next;
-    }
-    if (entry)
-    {
-        if (!s_bAllowDetach)
-            delete entry->object;
-        if (FUN_007242c0(1))
-            delete entry->text;
-        delete entry;
-    }
-    entry = 0;
-    count = 0;
-    elapsed = 0.0f;
-    if (tile)
-        tile->Set(FUN_00a01860("_num_filtered"), 0.0f, true);
-    UpdateScrollItems();
-    currentTile = 0;
-    UpdateHighlight();
-}
 
 float __cdecl FUN_004bd510(float, float);
 int __cdecl FUN_00a01860(const char*);
@@ -2332,102 +1711,6 @@ struct MyListBox
     MyTile* GetScrollTargetTile(int a1);
 };
 
-// Resolves a scroll direction into a step, finds the enabled tile at the clamped index in the list, and returns it unless it is the current tile.
-// @fnv 0x0075a680
-MyTile* MyListBox::GetScrollTargetTile(int aiScrollCode)
-{
-    MyTile* pFound_ = 0;
-    int iTileIndex = 0;
-
-    switch (aiScrollCode)
-    {
-    case 2:
-        iTileIndex = 1;
-        break;
-    case 1:
-        iTileIndex = -1;
-        break;
-    case 15:
-        iTileIndex =
-            m_tile0c ? (int)FUN_004bd510(
-                           -m_tile0c->FUN_00a011b0(0xfb0) / m_tile0c->FUN_00a011b0(FUN_00a01860("_scroll_delta")), 1.0f)
-                     : 0;
-        break;
-    case 16:
-        iTileIndex =
-            m_tile0c ? (int)FUN_004bd510(
-                           m_tile0c->FUN_00a011b0(0xfb0) / m_tile0c->FUN_00a011b0(FUN_00a01860("_scroll_delta")), 1.0f)
-                     : 0;
-        break;
-    default:
-        break;
-    }
-
-    if (IsTileTraitEnabled() && iTileIndex && m_count1c)
-    {
-        int maxIdxTmp = m_count1c - 1;
-        int curIdx;
-        if (m_tile10)
-        {
-            int selIdx = (int)m_tile10->FUN_00a011b0(0xfac);
-            curIdx = selIdx + iTileIndex;
-            if (curIdx < 0)
-                curIdx = 0;
-            else if (curIdx > maxIdxTmp)
-                curIdx = maxIdxTmp;
-        }
-        else
-        {
-            if (iTileIndex > 0)
-                curIdx = 0;
-            else
-                curIdx = maxIdxTmp;
-        }
-
-        while (1)
-        {
-            for (MyNode* pNodeA = this ? &m_kNode : 0; !pFound_ && pNodeA && pNodeA->FUN_006815c0()->p;
-                 pNodeA = pNodeA->FUN_00726070())
-            {
-                if (pNodeA->FUN_006815c0()->p->m_00->FUN_00a011b0(0xfac) == (float)curIdx)
-                {
-                    pFound_ = pNodeA->FUN_006815c0()->p->m_00;
-                }
-            }
-
-            if (pFound_ && !pFound_->IsTraitNonZero((int)FUN_00a00940("_enabled", -1)))
-            {
-                pFound_ = 0;
-                if (iTileIndex > 0 && ++curIdx > maxIdxTmp)
-                {
-                    curIdx = maxIdxTmp - 1;
-                    while ((!pFound_ || !pFound_->IsTraitNonZero((int)FUN_00a00940("_enabled", -1))) && curIdx >= 0)
-                    {
-                        pFound_ = FUN_0075a955(curIdx--, 0);
-                    }
-                    break;
-                }
-                else if (iTileIndex < 0 && --curIdx < 0)
-                {
-                    curIdx = 1;
-                    while ((!pFound_ || !pFound_->IsTraitNonZero((int)FUN_00a00940("_enabled", -1))) &&
-                           curIdx <= maxIdxTmp)
-                    {
-                        pFound_ = FUN_0075a955(curIdx++, 0);
-                    }
-                    break;
-                }
-            }
-            else
-            {
-                break;
-            }
-        }
-    }
-
-    return (pFound_ != m_tile10) ? pFound_ : 0;
-}
-
 struct ScrollListHelper
 {
     void __thiscall FUN_00700320(int aiID, int aiValue);
@@ -2457,42 +1740,6 @@ extern double DAT_01012060;
 float __cdecl FUN_004e4430(float afValue);
 int __cdecl FUN_00647b70(int aiMinimum, int aiValue);
 int __cdecl FUN_00a01860(const char* apText);
-
-// Computes the number of scroll items from the tile value and m_20, sets _scroll_delta on the tile and _number_of_items on the list.
-// @fnv 0x0075aef0
-void FUN_0075aa50_cls::UpdateScrollItems()
-{
-    float fTimeOffset;
-    int iNumberOfItems;
-    if (((ScrollData*)this)->pTile0c != 0)
-    {
-        fTimeOffset = ((ScrollData*)this)->pTile0c->FUN_00a011b0(0xfb0);
-        iNumberOfItems = 1;
-
-        if (m_20 > DAT_01012060 && fTimeOffset > DAT_01012060)
-        {
-            if (m_20 > fTimeOffset)
-            {
-                iNumberOfItems =
-                    FUN_00647b70((int)FUN_004e4430(
-                                     ((float)((FUN_0075b020_cls*)this)->FUN_0075b020() * (m_20 - fTimeOffset)) / m_20) +
-                                     1,
-                                 2);
-            }
-
-            if (iNumberOfItems > 1)
-            {
-                ((ScrollTileHelper*)((ScrollData*)this)->pTile0c)
-                    ->FUN_00a012d0(FUN_00a01860("_scroll_delta"), (m_20 - fTimeOffset) / (iNumberOfItems - 1), true);
-            }
-        }
-
-        if (((ScrollData*)this)->pTile14 != 0)
-        {
-            ((ScrollData*)this)->pTile14->FUN_00700320(FUN_00a01860("_number_of_items"), iNumberOfItems);
-        }
-    }
-}
 
 namespace fnv_00757b70 {
 struct Terminal;
@@ -2935,59 +2182,6 @@ int FUN_00757e20();
 OpenMenu* FindMenu(int);
 float GetDefault();
 void Warn(const char*, ...);
-// @fnv 0x00757b70
-OpenTile* CreateComputerMenu(Ref* reference)
-{
-    OpenMenu* oldMenu = FindMenu(FUN_00757e20());
-    if (oldMenu)
-    {
-        delete oldMenu;
-    }
-    Colors::Singleton()->Get(3, &DAT_011d934c);
-    Terminal* terminal = reference->GetTerminal();
-    if (terminal->IsFlagBitSet())
-        Colors::Singleton()->Set(3, Color(1.0f, 1.0f, 1.0f, 0.0f));
-    float defaultValue = GetDefault();
-    OpenTile* aTile = GetUI()->Root()->ReadFile("Data\\Menus\\computers_menu.xml");
-    OpenMenu* menu = aTile->GetMenu();
-    if (menu && menu->ID() == FUN_00757e20())
-    {
-        menu->Attach(aTile, false);
-        gComputerMenu = menu;
-        int iMissingIndex;
-        if (!gComputerMenu->Validate(&iMissingIndex))
-        {
-            Warn("MENUS: Computers Menu Creation Failed... Missing index = #%d", iMissingIndex);
-            return 0;
-        }
-        else if (!reference)
-        {
-            Warn("MENUS: Computers Menu Creation Failed... Missing terminal data ");
-            return 0;
-        }
-        if (aTile->Value(0xfa7) == 6006.0 || aTile->Value(0xfa7) == 102.0)
-            aTile->Set(0xfad, defaultValue, true);
-        gComputerMenu->unkc0 = GetUI()->keys.Check(0x18, FUN_00757e20(), 0x200);
-        gComputerMenu->ref = reference;
-        gComputerMenu->terminal = terminal;
-        gComputerMenu->list.Initialize(gComputerMenu->root, "computers_file_template");
-        gComputerMenu->sound.Play(false);
-        if (gComputerMenu->terminal->CanUse(gComputerMenu->ref))
-            gComputerMenu->Populate();
-        else
-            gComputerMenu->Alternate();
-        menu->Show(0);
-        return aTile;
-    }
-    else
-    {
-        if (menu && menu->Data())
-        {
-            delete menu;
-        }
-    }
-    return 0;
-}
 }  // namespace fnv_00757b70
 
 struct HighlightTile;
@@ -3015,77 +2209,6 @@ struct HighlightList
     HighlightTile* selected;
     void UpdateHighlight();
 };
-// @fnv 0x0075abd0
-void HighlightList::UpdateHighlight()
-{
-    static const char* highlightY = FUN_00a00940("_highlight_y", -1);
-    static const char* selectedHeight = FUN_00a00940("_selected_height", -1);
-    if (root)
-    {
-        if (selected)
-        {
-            HighlightValue* heightValue = root->FUN_00a00f30(highlightY);
-            HighlightValue* yValue = root->FUN_00a00f30(selectedHeight);
-            heightValue->FUN_00a09130(2000, selected, 4002);
-            heightValue->FUN_00a09410(0);
-            yValue->FUN_00a09130(2000, selected, 4016);
-            yValue->FUN_00a09410(0);
-            if (selected->GetSpeechChallengeFailure())
-            {
-                HighlightTile* box = FUN_00a08b20(root, "lb_highlight_box");
-                if (box)
-                {
-                    HighlightTile* edge = box->FUN_00a03da0("top");
-                    if (edge)
-                    {
-                        edge->FUN_0071aa60(true);
-                        edge->FUN_00a07530(8);
-                        edge = box->FUN_00a03da0("bottom");
-                        edge->FUN_0071aa60(true);
-                        edge->FUN_00a07530(8);
-                        edge = box->FUN_00a03da0("left");
-                        edge->FUN_0071aa60(true);
-                        edge->FUN_00a07530(8);
-                        edge = box->FUN_00a03da0("right");
-                        edge->FUN_0071aa60(true);
-                        edge->FUN_00a07530(8);
-                    }
-                    box->FUN_0071aa60(true);
-                    box->FUN_00a07530(8);
-                }
-            }
-            else
-            {
-                HighlightTile* box = FUN_00a08b20(root, "lb_highlight_box");
-                if (box)
-                {
-                    HighlightTile* edge = box->FUN_00a03da0("top");
-                    if (edge)
-                    {
-                        edge->FUN_0071aa60(false);
-                        edge->FUN_00a07530(8);
-                        edge = box->FUN_00a03da0("bottom");
-                        edge->FUN_0071aa60(false);
-                        edge->FUN_00a07530(8);
-                        edge = box->FUN_00a03da0("left");
-                        edge->FUN_0071aa60(false);
-                        edge->FUN_00a07530(8);
-                        edge = box->FUN_00a03da0("right");
-                        edge->FUN_0071aa60(false);
-                        edge->FUN_00a07530(8);
-                    }
-                    box->FUN_0071aa60(false);
-                    box->FUN_00a07530(8);
-                }
-            }
-        }
-        else
-        {
-            root->FUN_00700320(highlightY, -1);
-            root->FUN_00700320(selectedHeight, 0);
-        }
-    }
-}
 
 struct MyMenuTile
 {
@@ -3169,42 +2292,6 @@ struct ChallengeMenu
     void FUN_007586e0(int);
     void RefreshDisplay();
 };
-
-// @fnv 0x00758d30
-void ChallengeMenu::RefreshDisplay()
-{
-    this->pTile5C->FUN_00700320(0xFAF, 0);
-    this->pDisplay->ProcessAllTiles();
-    this->pTile4C->FUN_00700320(0xFA3, 0);
-    this->pTile50->FUN_00700320(0xFA3, 0);
-    this->pTile54->FUN_00700320(0xFA3, 0);
-    this->pTile58->FUN_00700320(0xFA3, 0);
-    this->FUN_007586e0(1);
-
-    this->pDisplay->InsertAtPosition(g_011d3d78.FUN_004c69f0(), this->pTile34->FUN_00a00f30(0xFC4),
-                                     this->pTile34->FindTraitValue(0xFA3), 0);
-    this->pTile34->FUN_00a012d0(
-        0xFA1,
-        (this->pTile34->FUN_0045cd60()->FUN_00a011b0(0xFB1) - BSStringLength(g_011d3d78.FUN_00403df0()) * 17) / 2.0, 1);
-
-    this->pDisplay->InsertAtPosition(g_011d4978.FUN_004c69f0(), this->pTile38->FUN_00a00f30(0xFC4),
-                                     this->pTile38->FindTraitValue(0xFA3), 1);
-    this->pTile38->FUN_00a012d0(
-        0xFA1,
-        (this->pTile38->FUN_0045cd60()->FUN_00a011b0(0xFB1) - BSStringLength(g_011d4978.FUN_00403df0()) * 17) / 2.0, 1);
-
-    this->pDisplay->InsertAtPosition(this->pChallenge->FUN_00758fe0(), this->pTile28->FUN_00a00f30(0xFC4),
-                                     this->pTile28->FindTraitValue(0xFA3), 2);
-    this->pTile28->FUN_00a012d0(
-        0xFA1,
-        (this->pTile28->FUN_0045cd60()->FUN_00a011b0(0xFB1) - BSStringLength(this->pChallenge->FUN_00758fe0()) * 17) /
-            2.0,
-        1);
-
-    this->pDisplay->InsertAtPosition("> ", this->pTile48->FUN_00a00f30(0xFC4), this->pTile48->FindTraitValue(0xFA3),
-                                     -1);
-    this->unkB0 = 2;
-}
 
 #include <string.h>
 struct Menu
@@ -3308,29 +2395,6 @@ struct FUN_007577f0 : Menu
     FUN_007577f0();
     virtual ~FUN_007577f0();
 };
-
-// Initializes the hacking menu by zeroing tiles, setting up audio handles for fan hum and character sounds, and assigning callback functions.
-// @fnv 0x007577f0
-FUN_007577f0::FUN_007577f0()
-{
-    memset(&tile28, 0, 0x40);
-    manager = GetStorageSingleton();
-    callbackec = PlayNoteSound;
-    callbackf0 = SetTextSource;
-    callbackf4 = UpdateNoteDisplay;
-    unkf8 = 0;
-    ConstructorAudio* audio = FUN_00ad9060();
-    sounds[0] = audio->ResolveAudioHandle("UIHackingFanHumLP", 0x31);
-    sounds[1] = audio->ResolveAudioHandle("UIHackingCharScroll", 0x21);
-    sounds[2] = audio->ResolveAudioHandle("UIHackingCharEnter", 0x21);
-    unka0 = 0;
-    unka4 = 0;
-    unka8 = 0;
-    unkac = 0;
-    unkb0 = 0;
-    unkbc = 0;
-    unkc0 = false;
-}
 
 namespace fnv_00757f70 {
 struct TileF;
@@ -3442,106 +2506,6 @@ struct HostF
     void RefreshDisplay();
     void __thiscall FUN_00757f70(int a1, TileF* a2);
 };
-// Processes a tile index and optional tile pointer, updates tile and note display state, and may dispatch a note message to the player.
-// @fnv 0x00757f70
-void __thiscall HostF::FUN_00757f70(int aiTileIndex, TileF* apTile)
-{
-    if (!apTile && aiTileIndex >= 0 && aiTileIndex < 16)
-        apTile = m_pTiles[aiTileIndex];
-    int id = aiTileIndex;
-    bool flag4 = false;
-    Value* val;
-    Obj* obj;
-    if (id == 2)
-    {
-        m_pManager->ProcessAllTiles();
-        if (m_bc != 0)
-        {
-            SetTextSource(0);
-            flag4 = true;
-        }
-        else
-        {
-            m_pTiles[2]->FUN_00700320(0xfa3, 0);
-            m_pTiles[1]->FUN_00700320(0xfa3, 1);
-            if (DAT_011d93c0)
-            {
-                FUN_007586e0(0);
-            }
-            else
-            {
-                if (!m_pTiles[7]->IsAllChildrenFlag0())
-                {
-                    m_pTiles[15]->FUN_00700320(0xfa3, 0);
-                    val = m_pTiles[7]->FUN_00a00f30(0xfc4);
-                    m_pManager->InsertAtPosition(val->FUN_0084e3a0(), val, m_pTiles[7]->FindTraitValue(0xfa3), -1);
-                }
-                m_kNode.FUN_007314c0(&UpdateNoteTile, 0, 0x7fffffff);
-                m_c1 = 1;
-            }
-        }
-        m_sound.FUN_00ad8830(false);
-    }
-    else if (id == 13 && m_b0 < 2)
-    {
-        RefreshDisplay();
-    }
-    else
-    {
-        if (m_kNode.ContainsKey(apTile))
-        {
-            m_sound.FUN_00ad8830(false);
-            obj = m_kNode.FindItemData(apTile);
-            if (!obj)
-            {
-                FUN_00758a80();
-            }
-            else if (obj->m_70)
-            {
-                obj->SetFlag4(true);
-                obj->FUN_00501830(m_ac);
-                m_a8 = obj->m_70;
-                FUN_007586e0(1);
-            }
-            else
-            {
-                obj->SetFlag4(true);
-                obj->FUN_00501830(m_ac);
-                if (obj->m_str.FUN_00559450())
-                {
-                    m_pManager->InsertAtPosition(obj->m_str.FUN_00559450(), m_pTiles[5]->FUN_00a00f30(0xfc4),
-                                                 m_pTiles[5]->FindTraitValue(0xfa3), 0);
-                    m_a0 = FUN_00457fe0() + *DAT_011d3e50.FUN_0043d4d0() * 1000;
-                }
-                if (obj->m_note)
-                {
-                    if (obj->FUN_00758350() && !DAT_011dea3c->FUN_00966c10(obj->m_note))
-                    {
-                        DAT_011dea3c->FUN_00966a70(obj->m_note, 0);
-                        {
-                            BStr str;
-                            FUN_00406f60(&str, DAT_011d3ca0.FUN_00403df0(), obj->m_note->m_name.FUN_00408da0());
-                            DispatchMessageToSink(str.FUN_00559450(), 0,
-                                                  "Interface\\Icons\\Message Icons\\glow_message_giftbox.dds", 0, 2.0f,
-                                                  false);
-                        }
-                    }
-                    if (m_handlers[obj->m_note->GetNoteType()])
-                        (this->*m_handlers[obj->m_note->GetNoteType()])(obj->m_note);
-                    DAT_011d93c0 = obj->FUN_00758390();
-                    flag4 = true;
-                }
-                else
-                {
-                    if (obj->FUN_00758390())
-                        FUN_007586e0(0);
-                }
-            }
-        }
-    }
-    if (!flag4)
-        DAT_011d93c0 = 0;
-}
 }  // namespace fnv_00757f70
 
 namespace fnv_00758ad0 {
@@ -3644,34 +2608,6 @@ struct TerminalTextMenu
     void BuildAnimation();
 };
 
-// Inserts intro, prompt, header, and password tiles into the terminal animation sequence using timing settings and tile trait values.
-// @fnv 0x00758ad0
-void TerminalTextMenu::BuildAnimation()
-{
-    unsigned int promptDelay;
-    {
-        StrMem text;
-        unsigned int introDelay = *g_011d3de4.FUN_0043d4d0() > 0 ? 1000 / *g_011d3de4.FUN_0043d4d0() : 1000;
-        promptDelay = *g_011d4e4c.FUN_0043d4d0() > 0 ? 1000 / *g_011d4e4c.FUN_0043d4d0() : 1000;
-        DAT_0119f278 = introDelay;
-        animation->InsertAtPosition(g_011d3a38.FUN_004c69f0(), (int)introTile->FUN_00a00f30(0xfc4),
-                                    (int)introTile->FindTraitValue(0xfa3), -1);
-        DAT_0119f278 = promptDelay;
-        FUN_00406f60(&text, "%s%s", "> ", g_011d2ee0.FUN_00403df0());
-        animation->InsertAtPosition(text.FUN_00559450(), (int)promptTile->FUN_00a00f30(0xfc4),
-                                    (int)promptTile->FindTraitValue(0xfa3), -1);
-        DAT_0119f278 = introDelay;
-        animation->InsertAtPosition(g_011d430c.FUN_004c69f0(), (int)headerTile->FUN_00a00f30(0xfc4),
-                                    (int)headerTile->FindTraitValue(0xfa3), -1);
-        DAT_0119f278 = promptDelay;
-        char password[16];
-        FUN_00403d30(password, 0, 16);
-        FUN_00403d30(password, '*', terminal->FUN_00501270(reference));
-        FUN_00406f60(&text, "%s%s", "> ", password);
-        animation->InsertAtPosition(text.FUN_00559450(), (int)passwordTile->FUN_00a00f30(0xfc4),
-                                    (int)passwordTile->FindTraitValue(0xfa3), -1);
-    }
-}
 }  // namespace fnv_00758ad0
 
 // @f3 0x004a5280 (community match, verified in this file)

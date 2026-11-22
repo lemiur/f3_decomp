@@ -250,16 +250,6 @@ struct FUN_00c89cf0_cls
     void DispatchToTarget(void* apArg);
 };
 
-// @fnv 0x00c89cf0
-void FUN_00c89cf0_cls::DispatchToTarget(void* apArg)
-{
-    if (this != 0)
-    {
-        if (m_pFlagTarget != 0)
-            m_pFlagTarget->FUN_00c89bf0(apArg);
-    }
-}
-
 extern "C" __declspec(dllimport) long __stdcall InterlockedIncrement(long volatile* plAddend);
 extern "C" __declspec(dllimport) long __stdcall InterlockedDecrement(long volatile* plAddend);
 

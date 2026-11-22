@@ -7,12 +7,6 @@ struct CharGenMenu
     int __thiscall FUN_00753340();
 };
 
-// @fnv 0x00753340
-int __thiscall CharGenMenu::FUN_00753340()
-{
-    return 0x418;
-}
-
 namespace fnv_00753350 {
 struct Tile;
 
@@ -21,22 +15,7 @@ struct CharGenMenu
     void SetTile(int id, Tile* tile);
 };
 
-// Stores tile into the CharGenMenu's tile array at index id when id is in [0, 7).
-// @fnv 0x00753350
-void CharGenMenu::SetTile(int aiIndex, Tile* tile)
-{
-    if (aiIndex >= 0 && aiIndex < 7)
-    {
-        ((Tile**)((char*)this + 0x2c))[aiIndex] = tile;
-    }
-}
 }  // namespace fnv_00753350
-
-// @fnv 0x00753760
-int __cdecl FUN_00753760()
-{
-    return 0x418;
-}
 
 struct Proxy_753380
 {
@@ -47,14 +26,6 @@ struct Proxy_7533b0
     void FUN_007533b0();
 };
 void __cdecl _Deallocate(void*);
-// @fnv 0x00753380
-void* Proxy_753380::DestroyIfFlagged(unsigned int flags)
-{
-    ((Proxy_7533b0*)this)->FUN_007533b0();
-    if (flags & 1)
-        _Deallocate(this);
-    return this;
-}
 
 extern "C" double _gModifierZero;
 extern int DAT_011d9220;
@@ -104,16 +75,6 @@ struct FUN_00753770_shell
     bool HasAllSlotsSet();
 };
 
-// Returns false if any of the first seven int slots is zero, otherwise true.
-// @fnv 0x00753770
-bool FUN_00753770_shell::HasAllSlotsSet()
-{
-    for (int i = 0; i < 7; ++i)
-        if (m[i] == 0)
-            return false;
-    return true;
-}
-
 namespace fnv_007542d0 {
 struct Tile
 {
@@ -133,23 +94,6 @@ struct FUN_007542d0_shell
     Tile* tile;
     bool __thiscall HandleButton(int aiButton, float afValue);
 };
-// @fnv 0x007542d0
-bool __thiscall FUN_007542d0_shell::HandleButton(int aiButton, float afValue)
-{
-    bool bhandled = false;
-    switch (aiButton)
-    {
-    case 11:
-        if (tile->ContainsTrait(0xFAF))
-        {
-            Interface::PlayUISound(1);
-            f3(6, 0);
-            bhandled = true;
-        }
-        break;
-    }
-    return bhandled;
-}
 }  // namespace fnv_007542d0
 
 struct Menu_007a8b10
@@ -187,20 +131,6 @@ struct FUN_007545a0_shell
 {
     void UpdateValueString(Tile*);
 };
-// @fnv 0x00754330
-void __cdecl FUN_00754330(Tile* tile)
-{
-    if (DAT_011d920c)
-    {
-        if (!((unsigned char*)DAT_011d920c)[0x54])
-        {
-            *(int*)((char*)DAT_011d920c + 0x48) +=
-                (int)((double)((TGF*)tile)->GetFloat(DAT_011d9210) + ((TGF*)tile)->GetFloat(DAT_011d9214) - 1.0);
-        }
-        ((TileSet*)tile)->Set(DAT_011d9224, 0.0f, true);
-        ((FUN_007545a0_shell*)DAT_011d920c)->UpdateValueString(tile);
-    }
-}
 
 namespace fnv_007543c0 {
 struct Tile_Set_Helper
@@ -222,24 +152,6 @@ struct CharGenMenu_7543c0
 };
 extern CharGenMenu_7543c0* DAT_011d920c;
 extern int DAT_011d9224;
-// @fnv 0x007543c0
-void __cdecl UpdateTagSkillTile(Tile* apTile, ActorValue::Index aeIndex)
-{
-    if (apTile->ContainsTrait(DAT_011d9220))
-    {
-        if (!DAT_011d920c->m_bValueStringNeedsUpdate ||
-            !reinterpret_cast<TESClass_TagSkill_Helper*>(g_thePlayer->GetClass())->IsTagSkill(aeIndex))
-        {
-            reinterpret_cast<Tile_Set_Helper*>(apTile)->Set(DAT_011d9220, 0);
-            reinterpret_cast<Tile_Set_Helper*>(apTile)->Set(DAT_011d9224, 0.0f, true);
-        }
-        else if (!DAT_011d920c->m_bValueStringNeedsUpdate)
-        {
-            DAT_011d920c->m_iPointsUsed++;
-        }
-    }
-    DAT_011d920c->UpdateValueString(apTile);
-}
 }  // namespace fnv_007543c0
 
 struct StartMenu
@@ -277,56 +189,12 @@ struct FUN_00753d20_shell
     void UpdatePointsDisplay();
 };
 
-// @fnv 0x00753d20
-void FUN_00753d20_shell::UpdatePointsDisplay()
-{
-    const char* strtitleStrings[2];
-    const char* strcounterStrings[2];
-    int ipointsLeft;
-    char strtemp[128];
-
-    strtitleStrings[0] = g_011d390c.GetMenuTitle();
-    strtitleStrings[1] = g_011d4138.GetMenuTitle();
-    strcounterStrings[0] = g_011d4de0.GetMenuTitle();
-    strcounterStrings[1] = g_011d3888.GetMenuTitle();
-
-    ipointsLeft = m_iPointsRemaining - m_iPointsUsed;
-
-    _sprintf_s(strtemp, 0x80, strtitleStrings[m_iSelectedAttributeIndex], m_iPointsUsed, m_iPointsRemaining);
-    m_pTiles[0]->Set(0xfc4, strtemp, true);
-
-    if (ipointsLeft == 0)
-    {
-        m_pTiles[4]->Set(0xfa3, 0);
-    }
-    else
-    {
-        _sprintf_s(strtemp, 0x80, strcounterStrings[m_iSelectedAttributeIndex], ipointsLeft);
-
-        if (ipointsLeft != 1)
-        {
-            strcat_s(strtemp, 0x80, g_011d3d6c_arg1);
-        }
-
-        m_pTiles[4]->Set(0xfc4, strtemp, true);
-        m_pTiles[4]->Set(0xfa3, 1);
-    }
-}
-
 int __cdecl GetTileValueID(char const*, int);
 
 struct FUN_00754950_shell
 {
     bool __thiscall FUN_00754950(Tile* apSelectItem);
 };
-
-// @fnv 0x00754950
-bool FUN_00754950_shell::FUN_00754950(Tile* apSelectItem)
-{
-    static int selectedTrait = GetTileValueID("_selected", -1);
-
-    return selectedTrait != 0 && apSelectItem != 0 && apSelectItem->ContainsTrait(selectedTrait);
-}
 
 struct Proxy_7314c0
 {
@@ -359,28 +227,6 @@ struct Proxy_5f6e80
 extern int DAT_011dea3c;
 int __cdecl FUN_005d9660();
 void __cdecl FUN_00754460();
-
-// @fnv 0x007537b0
-void __cdecl FUN_007537b0()
-{
-    if (DAT_011d920c != 0)
-    {
-        if (*(int*)((char*)DAT_011d920c + 0x28) == 0)
-        {
-            ((Proxy_7314c0*)((char*)DAT_011d920c + 0x58))->FUN_007314c0((void*)FUN_00754460, 0, 0x7fffffff);
-        }
-        else
-        {
-            for (int i = 0; ((Proxy_884350*)DAT_011dea3c)->FUN_00884350(), i < FUN_005d9660(); i++)
-            {
-                ((Proxy_5f6e80*)((Proxy_884350b*)DAT_011dea3c)->FUN_00884350(i, -1))->FUN_005f6e80();
-            }
-            ((Proxy_7314c0*)((char*)DAT_011d920c + 0x58))->FUN_007314c0((void*)FUN_00754530, 0, 0x7fffffff);
-        }
-        ((Proxy_700320*)((Proxy_726070*)DAT_011d920c)->FUN_00726070(0x1772, 1))->FUN_00700320();
-        ((Proxy_a1d910*)DAT_011d920c)->FUN_00a1d910();
-    }
-}
 
 struct TileX
 {
@@ -429,31 +275,6 @@ struct MenuX
     LBList list;
     void HandleTileClick(int, TileX*);
 };
-
-// @fnv 0x00753870
-void MenuX::HandleTileClick(int id, TileX* tile)
-{
-    switch (id)
-    {
-    case 8:
-    case 9:
-        if (tile->GetFloat(0xfac) != unk50)
-        {
-            unk34->Set(0xfcc, FUN_0066e9f0((ActorValue::Index)(int)list.FindItemData(tile)), true);
-            unk38->Set(0xfc4, GetActorValueDescription((ActorValue::Index)(int)list.FindItemData(tile)), true);
-            unk34->Set(0xfa3, 1);
-            unk38->Set(0xfa3, 1);
-            FUN_00706f30(4);
-            unk50 = tile->GetFloat(0xfac);
-        }
-        break;
-    case 10:
-    case 11:
-        list.Select(tile->FUN_0045cd60());
-        HandleClick(8, tile->FUN_0045cd60());
-        break;
-    }
-}
 
 namespace fnv_007539a0 {
 struct UITile
@@ -885,29 +706,6 @@ struct Context
     void UpdateValueString(UITile*);
     void InitMenu();
 };
-// Resets current, adjusts maximum when disabled, builds the list from tile30, sets tile values, and iterates entries to create tiles and accumulate current.
-// @fnv 0x007539a0
-void Context::InitMenu()
-{
-    current = 0;
-    if (!enabled)
-        maximum -= 7;
-    list.FUN_0075a0d0(tile30, DAT_01071c88);
-    tile30->FUN_00a012d0(4002, DAT_01071c84, true);
-    FUN_004b7210(12, GetMenuValue(500))->animation.FUN_00718630();
-    for (unsigned int i = 0; i < FUN_0066ecf0(0); ++i)
-    {
-        int e = FUN_0066ec10(0, (unsigned char)i);
-        UITile* j = list.AddListEntry(e, FUN_0066e950(e), 0, 0);
-        int c = DAT_011dea3c->values.GetValue(e);
-        j->FUN_00700320(4010, 8);
-        j->FUN_00700320(DAT_011d9210, c);
-        j->FUN_00a012d0(DAT_011d9224, 0.0f, true);
-        UpdateValueString(j);
-        if (!enabled)
-            current += c - 1;
-    }
-}
 }  // namespace fnv_007539a0
 
 extern int DAT_011dea3c;
@@ -1159,22 +957,6 @@ struct FUN_00754460_self
     float __thiscall FUN_00a011b0(int);
 };
 
-// @fnv 0x00754460
-void __cdecl FUN_00754460(FUN_00754460_self* pSelf, int a2)
-{
-    if (DAT_011d920c != 0 && *(unsigned char*)((char*)DAT_011d920c + 0x54) != 0 &&
-        *(int*)((char*)DAT_011d920c + 0x28) == 0)
-    {
-        int v = ((FUN_00754460_obj*)DAT_011dea3c)->m_a4.v000(a2);
-        ((FUN_00754460_obj*)DAT_011dea3c)->v229(a2, (float)((double)v + pSelf->FUN_00a011b0(DAT_011d9224)));
-    }
-    else
-    {
-        ((FUN_00754460_obj*)DAT_011dea3c)
-            ->FUN_0093a850(a2, (float)((double)pSelf->FUN_00a011b0(DAT_011d9210) + pSelf->FUN_00a011b0(DAT_011d9224)));
-    }
-}
-
 extern const char str_01071c5c[], str_01071c08[], str_01071bfc[];
 struct Menu753;
 struct Tile753
@@ -1258,57 +1040,6 @@ extern int DAT_011d9218, DAT_011d921c;
 int __cdecl FUN_00753760();
 const char* __cdecl Name753(int);
 const char* __cdecl Desc753(int);
-// Validates kind and points, rebuilds the menu from a tile file, attaches it, sets kind/points/flags and labels, then shows it and returns the tile.
-// @fnv 0x00753420
-Tile753* __cdecl FUN_00753420(int kind, int points, bool onlyAdd, bool flag)
-{
-    Menu753* oldMenu = Lookup753(0x418);
-    Manager753* manager = FUN_004b7210();
-    if (points <= 0 || kind < 0 || kind > 1)
-        return 0;
-    if (oldMenu)
-        delete oldMenu;
-    Tile753* aTile = manager->Root()->ReadFile(str_01071c5c);
-    menu753 = aTile->GetMenu();
-    if (menu753 && menu753->Type() == FUN_00753760())
-    {
-        menu753->Attach(aTile, false);
-        if (!menu753->Valid())
-        {
-            FNV_Warning(str_01071c08);
-            return 0;
-        }
-        if (aTile->GetFloat(0xfa7) == 6006.0 || aTile->GetFloat(0xfa7) == 102.0)
-            aTile->Set(0xfad, Scale753(), true);
-        menu753->unk4c = points;
-        menu753->unk28 = kind;
-        menu753->flag = flag;
-        menu753->onlyAdd = onlyAdd;
-        menu753->Root()->SetInt(FUN_00a01860(str_01071bfc), onlyAdd);
-        menu753->unk40->Set(0xfc4, g_011d33d8.Text(), true);
-        menu753->unk44->Set(0xfc4, g_011d35c4.Text(), true);
-        if (kind == 0)
-            menu753->First();
-        else
-            menu753->Second();
-        menu753->Root()->SetInt(DAT_011d9218, menu753->unk48);
-        menu753->Root()->SetInt(DAT_011d921c, menu753->unk4c);
-        menu753->Update();
-        int iSelectedValue = menu753->list.Value(menu753->list.Selected());
-        menu753->unk34->Set(0xfcc, Name753(iSelectedValue), true);
-        menu753->unk38->Set(0xfc4, Desc753(iSelectedValue), true);
-        menu753->unk34->SetInt(0xfa3, 1);
-        menu753->unk38->SetInt(0xfa3, 1);
-        if (menu753)
-        {
-            menu753->Show(0);
-            return aTile;
-        }
-    }
-    else if (menu753 && menu753->Root())
-        delete menu753;
-    return 0;
-}
 
 namespace fnv_00753b10 {
 struct SkillTile : Tile
@@ -1763,39 +1494,6 @@ struct SkillMenu
     void UpdateValueString(Tile*);
     void BuildSkillList();
 };
-// Initializes the skill list, adds a tile for each non-flagged actor value skill with its value and tag state, and sorts the list.
-// @fnv 0x00753b10
-void SkillMenu::BuildSkillList()
-{
-    list.Initialize(skillRoot, DAT_01071ca0);
-    skillRoot->Set(4002, g_011c72f0_arg1, true);
-    FUN_004b7210()->skills.FUN_00718630(14, GetMenuID(), 500);
-    for (unsigned int i = 0; i < FUN_0066ecf0(2); ++i)
-    {
-        ActorValue::Index skill = FUN_0066ec10(2, (unsigned char)i);
-        if (!FUN_00406d70(skill, 8192))
-        {
-            SkillTile* tile = list.AddListEntry(skill, FUN_0066e950(skill), 0, 0);
-            float value = (float)((SkillPlayer*)g_thePlayer)->values.GetValue(skill);
-            tile->SetName(FUN_0066e950(skill));
-            tile->Set(4010, 9);
-            tile->Set(DAT_011d9210, value, true);
-            if (((SkillClass*)g_thePlayer->GetClass())->IsTagSkill(skill))
-            {
-                tile->Set(DAT_011d9210, value - *DAT_011ccf5c.Float());
-                if (showTagged)
-                {
-                    tile->Set(DAT_011d9220, 1);
-                    tile->Set(DAT_011d9224, *DAT_011ccf5c.Float());
-                    if (!editing)
-                        ++points;
-                }
-            }
-            UpdateValueString(tile);
-        }
-    }
-    list.Sort(CompareActorValueNames);
-}
 }  // namespace fnv_00753b10
 
 class Menu754
@@ -1834,16 +1532,6 @@ class FUN_00754b40 : public Menu754
     int unk78;
     Handle754 m_kHandle;
 };
-
-// Initializes the menu: clears m_bFlag, sets m_iIndex to -1, and assigns a zero-valued Handle754 to m_kHandle.
-// @fnv 0x00754b40
-FUN_00754b40::FUN_00754b40()
-{
-    m_bFlag = false;
-    m_iIndex = -1;
-    Handle754 kEmpty(0);
-    m_kHandle = kEmpty;
-}
 
 struct Proxy_724430
 {
@@ -1885,47 +1573,6 @@ struct ScopeGuard
     {}
 };
 
-// Checks the object and parameter, then sets the "_selected" trait on the parameter to 1, 0, or toggled based on action (0/1/2); returns true on success.
-// @fnv 0x00754a00
-bool Proxy_754a00::SetTraitSelected(void* pTarget, int action)
-{
-    if (((Proxy_724430*)this)->FUN_00724430())
-    {
-        if (pTarget != 0)
-        {
-            if (((Proxy_7242f0*)this)->ContainsKey(pTarget))
-            {
-                static void* selectedTrait = Proxy_a00940::FUN_00a00940("_selected", -1);
-
-                bool selected = ((Proxy_a01230*)pTarget)->IsTraitNonZero(selectedTrait);
-
-                switch (action)
-                {
-                case 0:
-                    if (!selected)
-                    {
-                        ((Proxy_700320_call*)pTarget)->FUN_00700320(selectedTrait, 1);
-                        return true;
-                    }
-                    break;
-                case 1:
-                    if (selected)
-                    {
-                        ((Proxy_700320_call*)pTarget)->FUN_00700320(selectedTrait, 0);
-                        return true;
-                    }
-                    break;
-                case 2:
-                    ((Proxy_700320_call*)pTarget)->FUN_00700320(selectedTrait, selected ? 0 : 1);
-                    return true;
-                }
-            }
-        }
-    }
-
-    return false;
-}
-
 int __cdecl xMin(int, int);
 int __cdecl MaxI(int, int);
 int __cdecl GetTrait(char const*, int);
@@ -1937,21 +1584,6 @@ struct TileSet2
 {
     void Set(int, char const*, bool);
 };
-// Sums three tile reads, clamps the result by the mode at this+0x28, formats it as a decimal string and sets it on the tile's _ValueString trait.
-// @fnv 0x007545a0
-void FUN_007545a0_shell::UpdateValueString(Tile* apTile)
-{
-    int iValue;
-    char strtemp[16];
-    iValue = (int)(((UiTile*)apTile)->Read(DAT_011d9210) + ((UiTile*)apTile)->Read(DAT_011d9214) +
-                   ((UiTile*)apTile)->Read(DAT_011d9224));
-    if (0 == *(void**)((char*)this + 0x28))
-        iValue = xMin(MaxI(iValue, 1), 10);
-    else if (1 == *(int*)((char*)this + 0x28))
-        iValue = xMin(MaxI(iValue, 0), 100);
-    _sprintf_s(strtemp, 16, "%d", iValue);
-    ((TileSet2*)apTile)->Set(GetTrait("_ValueString", -1), strtemp, true);
-}
 
 struct SkTile
 {
@@ -2021,60 +1653,6 @@ struct SkillMenu
     void HandleSkillMenuCommand(int aiID, SkTile* apTile);
 };
 
-// Processes skill menu commands by ID, toggling or adjusting skill points and updating the display accordingly.
-// @fnv 0x00753ea0
-void SkillMenu::HandleSkillMenuCommand(int aiID, SkTile* apTile)
-{
-    switch (aiID)
-    {
-    case 9: {
-        void* pItemData = list.FindItemData(apTile);
-        bool selected = list.FUN_00754950(apTile);
-        if ((!selected && m_iPointsUsed < m_iPointsRemaining) ||
-            (selected && (!bLimit || !g_skMgr_11dea3c->FUN_00884350()->FUN_005a5f40(pItemData))))
-        {
-            list.FUN_00754930(apTile);
-            apTile->FUN_00a012d0(DAT_011d9224, list.FUN_00754950(apTile) ? *g_skSetting_11ccf5c.FUN_00403e20() : 0.0f,
-                                 1);
-            FUN_00706f30(3);
-            m_iPointsUsed += selected ? -1 : 1;
-            FUN_00726070(DAT_011d9218, m_iPointsUsed)->FUN_00700320();
-            UpdateValueString(apTile);
-            UpdatePointsDisplay();
-        }
-        break;
-    }
-    case 10:
-    case 11: {
-        void* pEntry = list.FindItemData(apTile->FUN_0045cd60());
-        int delta = aiID != 10 ? 1 : -1;
-        m_iPointsUsed += delta;
-        FUN_00726070(DAT_011d9218, m_iPointsUsed)->FUN_00700320();
-        apTile->FUN_0045cd60()->FUN_00a012d0(DAT_011d9224, apTile->FUN_0045cd60()->FUN_00a011b0(DAT_011d9224) + delta,
-                                             1);
-        UpdateValueString(apTile->FUN_0045cd60());
-        UpdatePointsDisplay();
-        break;
-    }
-    case 6:
-        FUN_007537b0();
-        break;
-    case 5: {
-        int iOldPointsUsed = m_iPointsUsed;
-        m_iPointsUsed = 0;
-        if (eMode == 0)
-            list.FUN_007314c0((void(__cdecl*)(SkTile*))FUN_00754330, 0, 0x7fffffff);
-        if (eMode == 1)
-            list.FUN_007314c0(UpdateTagSkillTile, 0, 0x7fffffff);
-        FUN_00726070(DAT_011d9218, m_iPointsUsed)->FUN_00700320();
-        UpdatePointsDisplay();
-        if (m_iPointsUsed != iOldPointsUsed)
-            FUN_00706f30(1);
-        break;
-    }
-    }
-}
-
 struct TileItem
 {
     TileItem* FUN_00a03eb0(int);
@@ -2131,48 +1709,3 @@ struct CharGenInputMenu
 
     bool FUN_00754150(int a1, float amount);
 };
-
-// @fnv 0x00754150
-bool CharGenInputMenu::FUN_00754150(int a1, float amount)
-{
-    bool result = false;
-
-    switch (a1)
-    {
-    case 3:
-    case 4:
-        if (this->unk28 == 0 && this->list.Selected())
-        {
-            int var_8 = (a1 != 4) + 10;
-            TileItem* var_c = this->list.Selected()->FUN_00a03eb0(var_8);
-            if (var_c && var_c->IsTraitNonZero(0xfa3))
-            {
-                var_c->FUN_00a0b110(0xfcb);
-                this->HandleClick(var_8, var_c);
-            }
-            result = true;
-        }
-        break;
-
-    case 9:
-        if (this->unk28 == 1 && this->list.Selected())
-        {
-            this->HandleClick(9, this->list.Selected());
-            result = true;
-        }
-        else if (this->unk28 == 0)
-        {
-            result = this->v14(3, 1.0f);
-        }
-        break;
-
-    case 10:
-        if (this->unk28 == 0)
-        {
-            result = this->v14(4, 1.0f);
-        }
-        break;
-    }
-
-    return result;
-}
