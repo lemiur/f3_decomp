@@ -544761,7 +544761,7 @@
     },
     {
      "address": "0x00825c70",
-     "symbol": "?LoadBinary@NiProperty@@QAEXAAVNiStream@@@Z",
+     "symbol": "?LoadBinary@NiProperty@@UAEXAAVNiStream@@@Z",
      "size": 83
     },
     {
@@ -544776,7 +544776,8 @@
     "?SetAt@StrArr@@QAEXIAAPAD@Z": "0x005b3880",
     "?FUN_00a5ca80@FUN_00a62a40_this@@QAEXPAUStrArr@@@Z": "0x0082ff30",
     "?LoadBinary@NiObjectNET@@QAEXAAVNiStream@@@Z": "0x00824d10",
-    "?g_011f4408_arg1@@3QBDB": "0x0108f214"
+    "?g_011f4408_arg1@@3QBDB": "0x0108f214",
+    "?LoadBinary@NiObjectNET@@UAEXAAVNiStream@@@Z": "0x00824d10"
    }
   },
   {

@@ -3,7 +3,7 @@
 // NiTimeController: base timing/update functionality for animation controllers.
 // FNV 2.2 branch revision (thread-local scale cache, legacy flag conversion,
 // geometry consistency fixup on attach/link).
-#include "nitimecontroller.h"
+#include "nitimecontroller_types.h"
 #include "nitimecontroller_decls.h"
 
 // Clones the base NiObject, then recursively clones the next controller in the chain if one exists.

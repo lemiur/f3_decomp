@@ -3,7 +3,7 @@
 
 // which this folder resolves case-insensitively to the niobject.h unit file: take the canonical include/NiObject.h and skip that file.
 #include "../../../../include/NiObject.h"
-#define FNV_NIOBJECT_UNIT_H
+
 #define NiStream NiStreamAtlas
 #include "nistream_types_NiStream.h"
 #undef NiStream
