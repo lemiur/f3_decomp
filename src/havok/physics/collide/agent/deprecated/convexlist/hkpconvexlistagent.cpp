@@ -70,33 +70,6 @@ extern void* __cdecl _FUN_00d33b90();
 extern void* __cdecl _FUN_00d339d0();
 extern void* __cdecl FUN_00d33ca0();
 extern void* __cdecl FUN_00d34510();
-// Fills a collision-function table three times and registers it with the dispatcher for the 0x16/0x12, 0x12/0x16 and 0x16/0x16 type pairs.
-// @fnv 0x00d346b0
-void __cdecl RegisterConvexListAgentCollisionFuncs(hkpConvexListAgent* self)
-{
-    hkpCollisionDispatcher::CollisionAgentFunctionTable funcTable;
-    funcTable.pfnA = (void*)CreateConvexListAgent;
-    funcTable.pfnB = (void*)InitSpawnedBuffer;
-    funcTable.pfnC = (void*)FUN_00d34970;
-    funcTable.pfnD = (void*)FUN_00d349b0;
-    funcTable.b1 = 1;
-    funcTable.b2 = 1;
-    ((hkpCollisionDispatcher*)self)->FUN_00cfbbe0(&funcTable, 0x16, 0x12);
-    funcTable.pfnA = (void*)FUN_00d343f0;
-    funcTable.pfnB = (void*)_FUN_00d33b90;
-    funcTable.pfnC = (void*)_FUN_00d339d0;
-    funcTable.pfnD = (void*)FUN_00d33ca0;
-    funcTable.b1 = 0;
-    funcTable.b2 = 1;
-    ((hkpCollisionDispatcher*)self)->FUN_00cfbbe0(&funcTable, 0x12, 0x16);
-    funcTable.pfnA = (void*)FUN_00d34510;
-    funcTable.pfnB = (void*)_FUN_00d33b90;
-    funcTable.pfnC = (void*)_FUN_00d339d0;
-    funcTable.pfnD = (void*)FUN_00d33ca0;
-    funcTable.b1 = 0;
-    funcTable.b2 = 1;
-    ((hkpCollisionDispatcher*)self)->FUN_00cfbbe0(&funcTable, 0x16, 0x16);
-}
 
 struct FUN_00d337f0_self
 {
@@ -192,15 +165,6 @@ struct hkpSimpleClosestContactCollector
 {
     void Reset();
 };
-
-// @fnv 0x00d34770
-void hkpSimpleClosestContactCollector::Reset()
-{
-    float max = 3.402820018375656e+38f;
-    *(char*)((char*)this + 8) = 0;
-    *(float*)((char*)this + 0x2c) = max;
-    *(float*)((char*)this + 4) = max;
-}
 
 struct D338e0Agent
 {
@@ -630,25 +594,6 @@ class hkpPredGskfAgentD343 : public FUN_00dacbd0
     virtual ~hkpPredGskfAgentD343() throw();
 };
 
-// @fnv 0x00d343f0
-hkpCollisionAgentD343* __cdecl FUN_00d343f0(const hkpCdBodyD343& kBodyA, const hkpCdBodyD343& kBodyB,
-                                            const hkpCollisionInputD343& kInput, hkpContactMgrD343* pkMgr) throw()
-{
-    if (pkMgr)
-    {
-        switch (kInput.m_pConvexListCollisionFilter->ShouldBodiesCollide(kBodyB, kBodyA, kInput))
-        {
-        case 0:
-            return new FUN_00d33940(kBodyA, kBodyB, kInput, pkMgr);
-        case 1:
-            return new hkpSymmetricAgentD343(kBodyA, kBodyB, kInput, pkMgr);
-        case 2:
-            return new hkpPredGskfAgentD343(kBodyA, kBodyB, pkMgr);
-        }
-        return 0;
-    }
-    return new hkpSymmetricAgentD343(kBodyA, kBodyB, kInput, 0);
-}
 }  // namespace fnv_00d343f0
 
 class hkCollectorBaseD347
@@ -682,11 +627,6 @@ void __cdecl FUN_00d34790(void* b, void* a, void* c, int filter)
 }
 
 extern "C" void __cdecl FUN_00d34810();
-// @fnv 0x00d36930
-extern "C" void __cdecl FUN_00d36930()
-{
-    FUN_00d34810();
-}
 
 struct hkMemberD337
 {
@@ -1347,71 +1287,4 @@ struct AgentHeader
     short m_iObjectReferenceCount;
 };
 
-// Dispatches on collision type to allocate and initialize the appropriate agent object for the given body pair and contact manager.
-// @fnv 0x00d34510
-void* __cdecl FUN_00d34510(void* bodyA, void* bodyB, AgentCollisionInput* input, void* contactMgr)
-{
-    if (contactMgr)
-    {
-        switch (input->m_pCollisionDispatcher->getCollisionType(bodyA, bodyB, input))
-        {
-        case 0: {
-            MemoryRouter* pMemoryRouter = FUN_00c85750();
-            int iAllocSize = 0x90;
-            void* agent = pMemoryRouter->m_pThreadAllocator->allocate(iAllocSize);
-            ((AgentHeader*)agent)->m_usMemSizeAndFlags = (unsigned short)iAllocSize;
-            ((PfnD33940)FUN_00d33940)(agent, bodyB, bodyA, input, contactMgr);
-            *(void**)agent = (void*)0x10cec68;
-            return agent;
-        }
-        case 1: {
-            MemoryRouter* pMemoryRouter = FUN_00c85750();
-            int iAllocSize = 0x38;
-            void* agent = pMemoryRouter->m_pThreadAllocator->allocate(iAllocSize);
-            ((AgentHeader*)agent)->m_usMemSizeAndFlags = (unsigned short)iAllocSize;
-            return ((PfnD440f0)FUN_00d440f0)(agent, bodyA, bodyB, input, contactMgr);
-        }
-        case 2: {
-            switch (input->m_pCollisionDispatcher->getCollisionType(bodyB, bodyA, input))
-            {
-            case 0: {
-                MemoryRouter* pMemoryRouter = FUN_00c85750();
-                int iAllocSize = 0x90;
-                void* agent = pMemoryRouter->m_pThreadAllocator->allocate(iAllocSize);
-                ((AgentHeader*)agent)->m_usMemSizeAndFlags = (unsigned short)iAllocSize;
-                return ((PfnD33940)FUN_00d33940)(agent, bodyA, bodyB, input, contactMgr);
-            }
-            case 1: {
-                MemoryRouter* pMemoryRouter = FUN_00c85750();
-                int iAllocSize = 0x38;
-                void* agent = pMemoryRouter->m_pThreadAllocator->allocate(iAllocSize);
-                ((AgentHeader*)agent)->m_usMemSizeAndFlags = (unsigned short)iAllocSize;
-                ((PfnD440f0)FUN_00d440f0)(agent, bodyB, bodyA, input, contactMgr);
-                *(void**)agent = (void*)0x10ce8b0;
-                return agent;
-            }
-            case 2: {
-                MemoryRouter* pMemoryRouter = FUN_00c85750();
-                int iAllocSize = 0x80;
-                void* agent = pMemoryRouter->m_pThreadAllocator->allocate(iAllocSize);
-                ((AgentHeader*)agent)->m_usMemSizeAndFlags = (unsigned short)iAllocSize;
-                ((PfnDacbd0)FUN_00dacbd0)(agent, bodyA, bodyB, contactMgr);
-                *(void**)agent = (void*)0x10ceb94;
-                return agent;
-            }
-            }
-            break;
-        }
-        }
-        return 0;
-    }
-    else
-    {
-        MemoryRouter* pMemoryRouter = FUN_00c85750();
-        int iAllocSize = 0x38;
-        void* agent = pMemoryRouter->m_pThreadAllocator->allocate(iAllocSize);
-        ((AgentHeader*)agent)->m_usMemSizeAndFlags = (unsigned short)iAllocSize;
-        return ((PfnD440f0)FUN_00d440f0)(agent, bodyA, bodyB, input, 0);
-    }
-}
 }  // namespace fnv_00d34510

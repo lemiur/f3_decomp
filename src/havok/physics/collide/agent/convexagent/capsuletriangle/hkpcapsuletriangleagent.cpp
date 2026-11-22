@@ -7,18 +7,6 @@ void FUN_00d3a8c0();
 void FUN_00d3a280();
 void FUN_00daf8e0();
 
-// Writes four function pointers into the first 16 bytes of p and clears the two bytes at offsets 16 and 17.
-// @fnv 0x00d3ab60
-void FUN_00d3ab60(void* apObject)
-{
-    *(void**)apObject = (void*)&CreateObjectFromFactory;
-    *(void**)((char*)apObject + 4) = (void*)&FUN_00d3a8c0;
-    *(void**)((char*)apObject + 8) = (void*)&FUN_00d3a280;
-    *(void**)((char*)apObject + 12) = (void*)&FUN_00daf8e0;
-    *(char*)((char*)apObject + 16) = 0;
-    *(char*)((char*)apObject + 17) = 0;
-}
-
 void __cdecl CreateAllocatedObject();
 void __cdecl FUN_00d3ac80();
 void __cdecl FUN_00d3b1a0();
@@ -60,32 +48,6 @@ struct S_00d389f0_Dispatcher
 {
     void FUN_00cfbbe0(S_00d389f0_AgentFuncs& f, int typeA, int typeB);
 };
-
-// Registers two agent function tables with the dispatcher, one for type 3 to 0x15 and one for 0x15 to 3.
-// @fnv 0x00d389f0
-void __cdecl FUN_00d389f0(S_00d389f0_Dispatcher* dispatcher)
-{
-    {
-        S_00d389f0_AgentFuncs agentFuncs;
-        agentFuncs.m_pCreateFunc = CreateTriAgent2;
-        agentFuncs.m_pQueryPenetrationsFunc = FUN_00d38ac0;
-        agentFuncs.m_getClosestPointsFunc = FUN_00d38ed0;
-        agentFuncs.m_pLinearCastFunc = FUN_00d3ac80;
-        agentFuncs.m_bIsFlipped = true;
-        agentFuncs.m_bIsPredictive = false;
-        dispatcher->FUN_00cfbbe0(agentFuncs, 3, 0x15);
-    }
-    {
-        S_00d389f0_AgentFuncs agentFuncs;
-        agentFuncs.m_pCreateFunc = CreateTriAgent;
-        agentFuncs.m_pQueryPenetrationsFunc = FUN_00d38130;
-        agentFuncs.m_getClosestPointsFunc = FUN_00d386c0;
-        agentFuncs.m_pLinearCastFunc = FUN_00daf8e0;
-        agentFuncs.m_bIsFlipped = false;
-        agentFuncs.m_bIsPredictive = false;
-        dispatcher->FUN_00cfbbe0(agentFuncs, 0x15, 3);
-    }
-}
 
 struct ReceiverBase { virtual void Release(unsigned int value); int unk04; };
 struct NoteDispatcher {
@@ -252,43 +214,6 @@ struct Agent_d3b260 {
     void FUN_00d3b260(int a, int b, int c, Buffer_d3b260* buf);
 };
 
-// @fnv 0x00d3b260
-void Agent_d3b260::FUN_00d3b260(int a, int b, int c, Buffer_d3b260* apBuffer)
-{
-    float dist = apBuffer->m_fHitFraction;
-    Elem_d3b260* e = apBuffer->m_kRayEnd;
-    FUN_00d3ad70(b, a, c, apBuffer);
-    for (; e < apBuffer->m_kRayEnd; e++)
-    {
-        hkVector4 w;
-        w.setBroadcast3(e->m_dir);
-        w.mul4(e->m_dir);
-        w.add4(e->m_pos);
-        e->m_pos = w;
-        e->m_dir.setNeg4(e->m_dir);
-    }
-    if (dist != apBuffer->m_fHitFraction)
-    {
-        apBuffer->m_vHitNormal.neg();
-        unsigned char n = apBuffer->m_ucLowNibble;
-        apBuffer->m_ucLowNibble = apBuffer->m_ucHighNibble;
-        apBuffer->m_ucHighNibble = n;
-        unsigned char t = apBuffer->m_kPointA;
-        apBuffer->m_kPointA = apBuffer->m_kPointB;
-        apBuffer->m_kPointB = t;
-        int idx = apBuffer->m_kPointA + apBuffer->m_kPointB - 1;
-        unsigned short w = apBuffer->m_idx[0];
-        apBuffer->m_idx[0] = apBuffer->m_idx[idx];
-        apBuffer->m_idx[idx] = w;
-        if ((apBuffer->m_kPointA & apBuffer->m_kPointB) == 2)
-        {
-            unsigned short usTmp = apBuffer->m_idx[1];
-            apBuffer->m_idx[1] = apBuffer->m_idx[2];
-            apBuffer->m_idx[2] = usTmp;
-        }
-    }
-}
-
 struct __declspec(align(16)) FourWord {
     unsigned int x, y, z, w;
 };
@@ -413,30 +338,6 @@ static __forceinline void transform(Vec4* out, const char* shape, int count, con
         __m128 b = _mm_add_ps(_mm_mul_ps(z, r2), r3);
         *(__m128*)&out[i] = _mm_add_ps(a, b);
     }
-}
-
-// Transforms two shapes' vertices by their matrices, then calls FUN_00cd6520 with the results, a4, a3's float at +8, a5 and a6.
-// @fnv 0x00d399f0
-void __cdecl TransformAndDispatch(char* a1, char* a2, char* pExtra, void* a4, int a5, int a6)
-{
-    const char* shapeA = *(const char**)a1;
-    const char* shapeB = *(const char**)a2;
-
-    Vec4 aTransformedA[2];
-    transform(aTransformedA, shapeA, 2, *(Mat4**)(a1 + 8));
-
-    Vec4 aTransformedB[3];
-    transform(aTransformedB, shapeB, 3, *(Mat4**)(a2 + 8));
-
-    FUN_00cd6520(&aTransformedA[0],
-                 *(float*)(shapeA + 0x10),
-                 &aTransformedB[0],
-                 *(float*)(shapeB + 0x10),
-                 a4,
-                 *(float*)((char*)pExtra + 8),
-                 a5,
-                 a6,
-                 0);
 }
 
 extern "C" __m128 _mm_sub_ps(__m128 a, __m128 b);
@@ -587,55 +488,6 @@ static __forceinline void xform(const Xf& m, const __m128* src, __m128* dst, int
 }
 
 struct CollisionWorkspace { __m128 la[2]; __m128 lb[3]; };
-// Transforms shape vertices, runs a collision query, optionally refines the contact, and writes the result to out.
-// @fnv 0x00d39bf0
-int __cdecl FUN_00d39bf0(Obj* a, Obj* b, Par* volatile apParams, void* q, Contact* apContactOut)
-{
-    CollisionWorkspace workspace;
-    Shape* shapes[2];
-    shapes[0] = a->base;
-    shapes[1] = b->base;
-
-    xform(*a->xf, (const __m128*)shapes[0]->vertices, workspace.la, 1);
-
-    xform(*b->xf, (const __m128*)shapes[1]->vertices, workspace.lb, 2);
-
-    Info info[3];
-    __m128 res[6];
-    Par* input = apParams;
-    FUN_00cd6520(workspace.la, shapes[0]->radius, workspace.lb, shapes[1]->radius, q, input->c, 0, (int)res, (int)info);
-
-    float fDistA = ((float*)res)[7];
-    float fDistB = ((float*)res)[15];
-    int idx;
-    if (fDistA < fDistB) {
-        if (!(fDistA < input->c)) goto fail;
-        idx = 0;
-    } else {
-        if (!(fDistB < input->c)) goto fail;
-        idx = 1;
-    }
-
-    unsigned char n;
-    n = info[idx].count;
-    if (input->flag != 0 && n > 0) {
-        const ScalarVector& source = *(ScalarVector*)(res + idx * 2 + 1);
-        ScalarVector t;
-        t.x = source.x;
-        t.y = source.y;
-        t.z = source.z;
-        t.w = source.w;
-        Xf* transformA = a->xf;
-        Xf* transformB = b->xf;
-        int r = shapes[1]->refine(&info[idx].feature, &n, res + idx * 2, transformB, shapes[0], transformA, &t);
-        if (r != 0) { if (r == 1) ((Contact*)(res + idx * 2))->FUN_00caad60(&t); } else goto fail;
-    }
-
-    *apContactOut = ((Contact*)res)[idx];
-    return 1;
-fail:
-    return 0;
-}
 
 #include <windows.h>
 extern DWORD DAT_0126835c;

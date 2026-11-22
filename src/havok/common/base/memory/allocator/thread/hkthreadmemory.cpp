@@ -35,18 +35,6 @@ struct FUNClass
     SlowPath* unk04;
     void FUN_00d2c030(int* output, int count, int value);
 };
-// If value is at most 0x2000, fills output with count values from generate(value); otherwise delegates to unk04->process.
-// @fnv 0x00d2c030
-void FUNClass::FUN_00d2c030(int* output, int count, int value)
-{
-    if (value <= 0x2000)
-    {
-        for (int i = 0; i < count; ++i)
-            output[i] = generate(value);
-        return;
-    }
-    unk04->process(output, count, value);
-}
 
 struct Helper
 {
@@ -67,18 +55,6 @@ struct Owner
     Helper* helper;
     void ProcessValues(unsigned int* values, int count, int threshold);
 };
-// If threshold is at most 0x2000, calls check on each value; otherwise forwards values, count and threshold to helper->dispatch.
-// @fnv 0x00d2c090
-void Owner::ProcessValues(unsigned int* values, int count, int threshold)
-{
-    if (threshold <= 0x2000)
-    {
-        for (int i = 0; i < count; ++i)
-            check(values[i], threshold);
-    }
-    else
-        helper->dispatch(values, count, threshold);
-}
 
 struct ComponentValue
 {
@@ -94,29 +70,6 @@ struct Target : FUN_00d2c3a0_class
     volatile int weights[17];
     int ComputeWeightedSum();
 };
-
-// Accumulates products of weights and values over 8 iterations, adds terminal*weights[16], and returns the total.
-// @fnv 0x00d2c350
-int Target::ComputeWeightedSum()
-{
-    int firstSum = 0;
-    int secondSum = 0;
-    int* firstValue = &values[1].value;
-    volatile int* secondWeight = &weights[1];
-    int remaining = 8;
-    do
-    {
-        firstSum += secondWeight[-1] * firstValue[-2];
-        secondSum += secondWeight[0] * firstValue[0];
-        secondWeight += 2;
-        firstValue += 4;
-        --remaining;
-    } while (remaining != 0);
-    int result = firstSum;
-    result += secondSum;
-    result += terminal * weights[16];
-    return result;
-}
 
 struct Block
 {
@@ -162,14 +115,6 @@ struct CachedBlockAllocator
         return blocks[0];
     }
 };
-// @fnv 0x00d2c3c0
-void* CachedBlockAllocator::AllocateBlock(int index)
-{
-    int count = batchCount;
-    if (!count)
-        return allocator->Allocate(blockSizes[index]);
-    return AllocateBatchCached(index, count);
-}
 
 struct D2C520Allocator
 {
@@ -291,28 +236,6 @@ struct Allocator : FUN_00d2c3a0_class
 };
 // The target helper ignores EDX; this ABI-compatible signature keeps its this pointer in ECX and bucket on the stack.
 extern "C" FreeNode* __fastcall AllocateBlock(Allocator* self, int unused, int bucket);
-// @fnv 0x00d2c5a0
-FreeNode* Allocator::FUN_00d2c5a0(int size)
-{
-    if (size <= 0x2000)
-    {
-        int bucket;
-        if (size <= 0x280)
-            bucket = bucketForSmallSize[(size + 0xf) >> 4];
-        else
-            bucket = bucketForLargeSize[(size - 1) >> 10];
-        FreeBlock* block = &blocks[bucket];
-        if (block->head)
-        {
-            FreeNode* node = block->head;
-            --block->count;
-            block->head = node->next;
-            return node;
-        }
-        return AllocateBlock(this, bucket, bucket);
-    }
-    return ((OverflowHandler*)m4)->f1(size);
-}
 }  // namespace fnv_00d2c5a0
 
 extern void FUN_00d2caa0(void* res, int a1, int n);
@@ -325,16 +248,6 @@ struct SelfCls
 
     void* FUN_00d2c6d0(int a1, int a2, FUN_00d2c3a0_class* a3);
 };
-
-// @fnv 0x00d2c6d0
-void* SelfCls::FUN_00d2c6d0(int a1, int a2, FUN_00d2c3a0_class* a3)
-{
-    void* res = this->vslot1(a3->m0);
-    int n = (int)a3->m0 < a2 ? (int)a3->m0 : a2;
-    FUN_00d2caa0(res, a1, n);
-    this->vslot2(a1, a2);
-    return res;
-}
 
 struct FUN_00d2c7a0_Slot
 {
@@ -392,16 +305,6 @@ struct FUN_00d60500
     void* owner;
     FUN_00d60500(void* parent, unsigned int requested);
 };
-// @fnv 0x00d60500
-FUN_00d60500::FUN_00d60500(void* apOwner, unsigned int requested) : owner(apOwner), count(0), storage(0)
-{
-    if (!requested)
-    {
-        capacity = 0x20000;
-        return;
-    }
-    capacity = requested;
-}
 
 class DispatchInterface
 {
@@ -410,11 +313,6 @@ class DispatchInterface
     virtual int Dispatch(void*) = 0;
     int DispatchValue(void* const& value);
 };
-// @fnv 0x00d2c000
-int DispatchInterface::DispatchValue(void* const& value)
-{
-    return Dispatch(value);
-}
 
 struct FUN_00d2c020_class
 {
@@ -424,12 +322,6 @@ struct FUN_00d2c020_class
 
     void __fastcall FUN_00d2c020(unsigned int value);
 };
-
-// @fnv 0x00d2c020
-void __fastcall FUN_00d2c020_class::FUN_00d2c020(unsigned int value)
-{
-    slot08(value);
-}
 
 struct FnvCpu_FUN_00d2c0f0_CpuInterface
 {
@@ -451,51 +343,8 @@ struct FnvCpu_FUN_00d2c0f0_CpuOwner
     FnvCpu_FUN_00d2c0f0_CpuInterface* target;
     void FUN_00d2c0f0(int arg0);
 };
-// @fnv 0x00d2c0f0
-void FnvCpu_FUN_00d2c0f0_CpuOwner::FUN_00d2c0f0(int arg0)
-{
-    target->Invoke(arg0);
-}
 
 extern "C" void __debugbreak();
-
-__forceinline int GetSizeClass(int aiSize)
-{
-    if (aiSize <= 0x10)
-        return 1;
-    if (aiSize <= 0x20)
-        return 2;
-    if (aiSize <= 0x30)
-        return 3;
-    if (aiSize <= 0x40)
-        return 4;
-    if (aiSize <= 0x60)
-        return 5;
-    if (aiSize <= 0x80)
-        return 6;
-    if (aiSize <= 0xA0)
-        return 7;
-    if (aiSize <= 0xC0)
-        return 8;
-    if (aiSize <= 0x100)
-        return 9;
-    if (aiSize <= 0x140)
-        return 10;
-    if (aiSize <= 0x200)
-        return 11;
-    if (aiSize <= 0x280)
-        return 12;
-    if (aiSize <= 0x400)
-        return 13;
-    if (aiSize <= 0x800)
-        return 14;
-    if (aiSize <= 0x1000)
-        return 15;
-    if (aiSize <= 0x2000)
-        return 16;
-    __debugbreak();
-    return -1;
-}
 
 struct SizeClassTable
 {
@@ -543,25 +392,6 @@ struct SizeClassTable
     void InitSizeClasses(void*, void*);
 };
 
-// @fnv 0x00d2c100
-void SizeClassTable::InitSizeClasses(void*, void*)
-{
-    for (int i = 0; i <= 40; i++)
-    {
-        int iSize = i << 4;
-        int m_iMenuId = GetSizeClass(iSize);
-        ucSmallClass[i] = m_iMenuId;
-        iClassSize[m_iMenuId] = iSize;
-    }
-    for (int i = 0; i < 8; i++)
-    {
-        int iSize = (i + 1) << 10;
-        int m_iMenuId = GetSizeClass(iSize);
-        iLargeClass[i] = m_iMenuId;
-        iClassSize[m_iMenuId] = iSize;
-    }
-}
-
 struct FUN_00d2c600_bucket
 {
     void* m_pFirstNode;
@@ -585,43 +415,6 @@ struct FUN_00d2c600_cls
     void Free(void* p, int size);
 };
 
-// @fnv 0x00d2c600
-void FUN_00d2c600_cls::Free(void* apBlock, int size)
-{
-    if (apBlock != 0)
-    {
-        if (size <= 0x2000)
-        {
-            int idx;
-            if (size <= 0x280)
-            {
-                idx = *(signed char*)((char*)this + 0xd8 + ((size + 0xf) >> 4));
-            }
-            else
-            {
-                idx = *(int*)((char*)this + 0x104 + (((size - 1) >> 10) * 4));
-            }
-            FUN_00d2c600_bucket* bucket = (FUN_00d2c600_bucket*)((char*)this + 0xc + idx * 8);
-            if (bucket->m_uiItemCount >= m_08)
-            {
-                FUN_00d2c450(idx, apBlock);
-            }
-            else
-            {
-                void** node = (void**)apBlock;
-                void* head = bucket->m_pFirstNode;
-                bucket->m_uiItemCount++;
-                *node = head;
-                bucket->m_pFirstNode = node;
-            }
-        }
-        else
-        {
-            m_04->unk08(apBlock, size);
-        }
-    }
-}
-
 struct FUN_00d2c670_inner
 {
     virtual void v00();
@@ -643,12 +436,6 @@ struct FUN_00d2c670_cls
 
     void FUN_00d2c670(int a);
 };
-
-// @fnv 0x00d2c670
-void FUN_00d2c670_cls::FUN_00d2c670(int a)
-{
-    m_04->Forward(a);
-}
 
 struct S_00d2c680_Inner
 {
@@ -711,21 +498,6 @@ struct S_00d2c680_Cls
     int m_104[8];
     int FUN_00d2c680(int a0, int a1);
 };
-
-// @fnv 0x00d2c680
-int S_00d2c680_Cls::FUN_00d2c680(int aiArg, int a1)
-{
-    if (a1 <= 0x2000)
-    {
-        int idx;
-        if (a1 <= 0x280)
-            idx = m_d8[(a1 + 0xf) >> 4];
-        else
-            idx = m_104[(a1 - 1) >> 10];
-        a1 = m_94[idx];
-    }
-    return unk04->v2c(aiArg, a1);
-}
 
 struct Allocator219
 {
@@ -836,120 +608,6 @@ struct HKThreadMemory : ThreadMemoryBase
     HKThreadMemory* FUN_00d2c720();
 };
 
-__declspec(noinline) void ThreadMemoryBase::FUN_00d2c3a0(void* a, void* b)
-{
-    if (a)
-    {
-        m4 = a;
-        m8 = b;
-    }
-    else
-    {
-        m4 = 0;
-    }
-}
-
-__declspec(noinline) void HKThreadMemory::InitSizeClasses()
-{
-    for (int i = 0; i <= 0x28; i++)
-    {
-        int size = i << 4;
-        int cls;
-        if (size <= 0x10)
-            cls = 1;
-        else if (size <= 0x20)
-            cls = 2;
-        else if (size <= 0x30)
-            cls = 3;
-        else if (size <= 0x40)
-            cls = 4;
-        else if (size <= 0x60)
-            cls = 5;
-        else if (size <= 0x80)
-            cls = 6;
-        else if (size <= 0xa0)
-            cls = 7;
-        else if (size <= 0xc0)
-            cls = 8;
-        else if (size <= 0x100)
-            cls = 9;
-        else if (size <= 0x140)
-            cls = 10;
-        else if (size <= 0x200)
-            cls = 11;
-        else if (size <= 0x280)
-            cls = 12;
-        else if (size <= 0x400)
-            cls = 13;
-        else if (size <= 0x800)
-            cls = 14;
-        else if (size <= 0x1000)
-            cls = 15;
-        else
-            cls = 16;
-        freeList[i] = (unsigned char)cls;
-        blockTable[cls] = size;
-    }
-    for (int i = 0; i < 8; i++)
-    {
-        int size = 0x400 + i * 0x400;
-        int cls;
-        if (size <= 0x10)
-            cls = 1;
-        else if (size <= 0x20)
-            cls = 2;
-        else if (size <= 0x30)
-            cls = 3;
-        else if (size <= 0x40)
-            cls = 4;
-        else if (size <= 0x60)
-            cls = 5;
-        else if (size <= 0x80)
-            cls = 6;
-        else if (size <= 0xa0)
-            cls = 7;
-        else if (size <= 0xc0)
-            cls = 8;
-        else if (size <= 0x100)
-            cls = 9;
-        else if (size <= 0x140)
-            cls = 10;
-        else if (size <= 0x200)
-            cls = 11;
-        else if (size <= 0x280)
-            cls = 12;
-        else if (size <= 0x400)
-            cls = 13;
-        else if (size <= 0x800)
-            cls = 14;
-        else if (size <= 0x1000)
-            cls = 15;
-        else
-            cls = 16;
-        bigBlocks[i] = cls;
-        blockTable[cls] = size;
-    }
-}
-
-// Sets m0, clears 17 block entries, calls InitSizeClasses and FUN_00d2c3a0(0, 8), then returns this.
-// @fnv 0x00d2c720
-HKThreadMemory* HKThreadMemory::FUN_00d2c720()
-{
-    m0 = &DAT_010cacd0;
-    BlockEntry* p = blocks;
-    int n = 16;
-    while (n >= 0)
-    {
-        p->block = 0;
-        p->size = 0;
-        ++p;
-        --n;
-    }
-    InitSizeClasses();
-    FUN_00d2c3a0(0, (void*)8);
-    return this;
-}
-
 namespace fnv_00d2c760 {
 extern "C" char DAT_010cacd0;
 
@@ -972,33 +630,6 @@ struct ThreadMemoryView : FUN_00d2c3a0_class
     ThreadMemoryView* FUN_00d2c760(void* allocator);
 };
 
-__declspec(noinline) void ThreadMemoryView::FUN_00d2c3a0(void* allocator, int limit)
-{
-    FUN_00d2c3a0_class::FUN_00d2c3a0(allocator);
-}
-
-__declspec(noinline) void ThreadMemoryView::InitSizeClasses()
-{
-    ((SizeClassTable*)this)->InitSizeClasses(0, 0);
-}
-
-// Zeroes the 17 BlockEntry slots, calls InitSizeClasses and FUN_00d2c3a0(allocator, 8), then returns this.
-// @fnv 0x00d2c760
-ThreadMemoryView* ThreadMemoryView::FUN_00d2c760(void* allocator)
-{
-    m0 = &DAT_010cacd0;
-    BlockEntry* entry = blocks;
-    int remaining = 16;
-    do
-    {
-        entry->block = 0;
-        entry->count = 0;
-        ++entry;
-    } while (--remaining >= 0);
-    InitSizeClasses();
-    FUN_00d2c3a0(allocator, 8);
-    return this;
-}
 }  // namespace fnv_00d2c760
 
 // @f3 0x008f6a50 (community match, verified in this file)

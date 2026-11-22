@@ -193,11 +193,6 @@ static inline float S00cec3d0_Cube(float x)
 {
     return x * x * x;
 }
-void S00cec3d0_Base::FUN_00cec000(const float* v)
-{
-    P1 = v[A] * v[B];
-    Pa = v[A];
-}
 union __declspec(intrin_type) __declspec(align(16)) __m128
 {
     float m128_f32[4];
@@ -392,25 +387,6 @@ extern const float DAT_0104da48;
 extern const float DAT_01016248;
 extern const __m128 DAT_010c44d0;
 extern const __m128 DAT_010ec7f0;
-__declspec(noinline) void __cdecl FUN_00cec7f0(int first, int count, float* b, float* a)
-{
-    _mm_store_ps(b, _mm_setzero_ps());
-    _mm_store_ps(a, _mm_setzero_ps());
-    __m128 lo = _mm_set_ps1(DAT_0104da48);
-    __m128 hi = _mm_xor_ps(lo, DAT_010c44d0);
-    const __m128* vertices = (const __m128*)first;
-    for (int i = 0; i < count; ++i)
-    {
-        lo = _mm_min_ps(vertices[i], lo);
-        hi = _mm_max_ps(vertices[i], hi);
-    }
-    if (count != 0)
-    {
-        __m128 half = _mm_set_ps1(DAT_01016248);
-        _mm_store_ps(b, _mm_add_ps(_mm_mul_ps(_mm_sub_ps(DAT_010ec7f0, half), lo), _mm_mul_ps(half, hi)));
-        _mm_store_ps(a, _mm_sub_ps(hi, lo));
-    }
-}
 __int64 __cdecl FUN_00cebaf0(float* source, float value, void* dest);
 
 __declspec(align(16)) struct Vec4F
@@ -520,26 +496,6 @@ __declspec(noinline) __int64 __cdecl FUN_00cebaf0(float* source, float value, vo
     return 0;
 }
 
-__declspec(noinline) void Solver::FUN_00cec6b0(float value, float ratio, float* vec, float* mat)
-{
-    vec[0] = unk68 / unk64;
-    vec[1] = unk6c / unk64;
-    vec[2] = unk70 / unk64;
-    mat[0] = ratio * (unk78 + unk7c);
-    mat[5] = ratio * (unk74 + unk7c);
-    mat[10] = ratio * (unk74 + unk78);
-    float negative = -ratio;
-    mat[1] = mat[4] = negative * unk80;
-    mat[6] = mat[9] = negative * unk84;
-    mat[8] = mat[2] = negative * unk88;
-    mat[0] -= value * (vec[1] * vec[1] + vec[2] * vec[2]);
-    mat[5] -= value * (vec[0] * vec[0] + vec[2] * vec[2]);
-    mat[10] -= value * (vec[0] * vec[0] + vec[1] * vec[1]);
-    mat[1] = mat[4] = mat[1] + value * vec[0] * vec[1];
-    mat[6] = mat[9] = mat[6] + value * vec[1] * vec[2];
-    mat[8] = mat[2] = mat[8] + value * vec[2] * vec[0];
-}
-
 struct MeshTriangle
 {
     int a, b, c, material;
@@ -551,50 +507,6 @@ struct MeshInput
     MeshTriangle* triangles;
     int triangleCount;
 };
-
-// Accumulate signed tetrahedron moments from the translated boundary mesh.
-__declspec(noinline) void Solver::FUN_00ced390(State* self, float* shift)
-{
-    MeshInput* mesh = (MeshInput*)self;
-    unk64 = unk68 = unk6c = unk70 = unk74 = unk78 = unk7c = unk80 = unk84 = unk88 = 0.0f;
-    for (int i = 0; i < mesh->triangleCount; ++i)
-    {
-        MeshTriangle& face = mesh->triangles[i];
-        Vec4F p, q, r, n;
-        __m128 offset = _mm_load_ps(shift);
-        __m128 a = _mm_add_ps(mesh->vertices[face.a], offset);
-        __m128 b = _mm_add_ps(mesh->vertices[face.b], offset);
-        __m128 c = _mm_add_ps(mesh->vertices[face.c], offset);
-        _mm_store_ps(&p.x, a);
-        _mm_store_ps(&q.x, b);
-        _mm_store_ps(&r.x, c);
-        b = _mm_sub_ps(b, a);
-        c = _mm_sub_ps(c, a);
-        __m128 cross = _mm_sub_ps(_mm_mul_ps(_mm_shuffle_ps(b, b, 0xc9), _mm_shuffle_ps(c, c, 0xd2)),
-                                  _mm_mul_ps(_mm_shuffle_ps(c, c, 0xc9), _mm_shuffle_ps(b, b, 0xd2)));
-        _mm_store_ps(&n.x, cross);
-        float volume = (p.x * n.x + p.y * n.y + p.z * n.z) / 6.0f;
-        unk64 += volume;
-        float* pp = &p.x;
-        float* qq = &q.x;
-        float* rr = &r.x;
-        float* first = &unk68;
-        float* second = &unk74;
-        float* product = &unk80;
-        for (int j = 0; j < 3; ++j)
-        {
-            int k = (j + 1) % 3;
-            first[j] += volume * (pp[j] + qq[j] + rr[j]) / 4.0f;
-            second[j] +=
-                volume *
-                (pp[j] * pp[j] + qq[j] * qq[j] + rr[j] * rr[j] + pp[j] * qq[j] + qq[j] * rr[j] + rr[j] * pp[j]) / 10.0f;
-            product[j] += volume *
-                          (2.0f * (pp[j] * pp[k] + qq[j] * qq[k] + rr[j] * rr[k]) + pp[j] * qq[k] + qq[j] * pp[k] +
-                           pp[j] * rr[k] + rr[j] * pp[k] + qq[j] * rr[k] + rr[j] * qq[k]) /
-                          20.0f;
-        }
-    }
-}
 
 inline float MaxVal(float a, float b)
 {
@@ -724,35 +636,4 @@ static __declspec(noinline) void FUN_00cebfd0(S00cf0690_Mass* p, float density)
     *(__m128*)&p->row0 = _mm_mul_ps(*(__m128*)&p->row0, f);
     *(__m128*)&p->row1 = _mm_mul_ps(*(__m128*)&p->row1, f);
     *(__m128*)&p->row2 = _mm_mul_ps(*(__m128*)&p->row2, f);
-}
-// @fnv 0x00cf0690
-void __cdecl FUN_00cf0690(void* shape, float mass, S00cf0690_Mass* result)
-{
-    S00cf0690_Mass props;
-    props.volume = props.mass = 0.0f;
-    *(__m128*)&props.center = _mm_setzero_ps();
-    *(__m128*)&props.row0 = _mm_setzero_ps();
-    *(__m128*)&props.row1 = _mm_setzero_ps();
-    *(__m128*)&props.row2 = _mm_setzero_ps();
-    S00cf0690_Xf t;
-    *(__m128*)&t.row0 = _mm_setzero_ps();
-    t.row0.x = 1.0f;
-    *(__m128*)&t.row1 = _mm_setzero_ps();
-    t.row1.y = 1.0f;
-    *(__m128*)&t.row2 = _mm_setzero_ps();
-    t.row2.z = 1.0f;
-    *(__m128*)&t.translation = _mm_setzero_ps();
-    FUN_00ceff00(shape, &t, 0.0f, &props);
-    if (props.volume == 0.0f)
-        FUN_00ceff00(shape, &t, DAT_01013ea4, &props);
-    if (props.volume != 0.0f)
-    {
-        FUN_00cebfd0(&props, mass / props.volume);
-        result->volume = props.volume;
-        result->mass = props.mass;
-        *(__m128*)&result->center = *(__m128*)&props.center;
-        *(__m128*)&result->row0 = *(__m128*)&props.row0;
-        *(__m128*)&result->row1 = *(__m128*)&props.row1;
-        *(__m128*)&result->row2 = *(__m128*)&props.row2;
-    }
 }

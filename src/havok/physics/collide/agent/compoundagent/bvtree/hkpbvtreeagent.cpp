@@ -100,14 +100,6 @@ struct ValueSource
     float m_fAmount;
 };
 
-// Builds a Transform from the two holders' data and applies it to the first holder's target object with the value source's amount.
-// @fnv 0x00d2f710
-void __cdecl ApplyTransformToTarget(Holder* apFirst, Holder* apSecond, ValueSource* apValue, void* apContext)
-{
-    Transform kTransform(apSecond->m_pData, apFirst->m_pData);
-    apFirst->m_pFlagTarget->Apply(&kTransform, apValue->m_fAmount, apContext);
-}
-
 struct Allocator
 {
     virtual void* release();
@@ -424,23 +416,6 @@ struct CUpdateList
     int unk10;
     void FUN_00d2f5e0(float a, float b, int c);
 };
-
-// Iterates the SElement array and calls the vtable slot 10 on each non-null SUpdated pointer with the given float and int arguments.
-// @fnv 0x00d2f5e0
-void CUpdateList::FUN_00d2f5e0(float a, float b, int c)
-{
-    int count = unk10;
-    SElement* p = unk0c;
-    SElement*& arr = unk0c;
-    SElement* end = arr + count;
-    for (; p != end; ++p)
-    {
-        if (p->unk08)
-        {
-            p->unk08->vtable[10](p->unk08, a, b, c);
-        }
-    }
-}
 
 class hkBoolR
 {

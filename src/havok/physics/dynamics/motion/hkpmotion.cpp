@@ -199,15 +199,6 @@ class hkpMotionC864F : public hkReferencedObjectC864F
     hkVector4C864F m_kAngularVelocity;
 };
 
-// Adds kImpulse scaled by the w component of m_kInertiaAndMassInv to m_kTranslationalVelocity.
-// @fnv 0x00c864f0
-void hkpMotionC864F::ApplyImpulse(const hkVector4C864F& kImpulse)
-{
-    hkVector4C864F kDeltaLin;
-    kDeltaLin.setMul4(m_kInertiaAndMassInv.getSimdAt3(), kImpulse);
-    m_kTranslationalVelocity.add4(kDeltaLin);
-}
-
 namespace fnv_00c86530 {
 union __declspec(intrin_type) __declspec(align(16)) __m128
 {
@@ -314,34 +305,6 @@ class FUN_00c86530 : public hkReferencedObjectC865
     hkHalfC865 m_fGravityFactor;
 };
 
-// Constructor: zeroes velocities, damping and deactivation data, sets up m_kMotionState from position and rotation, and sets the gravity factor to 1.0.
-// @fnv 0x00c86530
-FUN_00c86530::FUN_00c86530(const hkVector4C865& kPosition, const hkQuaternionC865& kRotationBasis,
-                           bool bWantDeactivation) throw()
-{
-    hkVector4C865 kZero;
-    kZero.setZero4();
-    m_kTranslationalVelocity = kZero;
-    m_kAngularVelocity = kZero;
-    m_kMotionState.FUN_00cf2410(kPosition, kRotationBasis);
-    m_kMotionState.m_fAngularDamping = m_kMotionState.m_fLinearDamping = 0.0f;
-    m_type = 0;
-    if (bWantDeactivation)
-    {
-        m_ucDeactivationIntegrateCounter = static_cast<unsigned char>(0xf & static_cast<int>(kPosition(0)));
-    }
-    else
-    {
-        m_ucDeactivationIntegrateCounter = 0xff;
-    }
-    m_ausDeactivationNumInactiveFrames[0] = 0;
-    m_ausDeactivationNumInactiveFrames[1] = 0;
-    m_akDeactivationReferencePositions[0] = kZero;
-    m_akDeactivationReferencePositions[1] = kZero;
-    m_auiDeactivationReferenceOrientations[0] = 0;
-    m_auiDeactivationReferenceOrientations[1] = 0;
-    m_fGravityFactor = 1.0f;
-}
 }  // namespace fnv_00c86530
 
 namespace fnv_00c86610 {
@@ -359,27 +322,12 @@ struct Motion_00c86610
     Motion_00c86610();
     void __thiscall FUN_00c86610(Motion_00c86610* dst);
 };
-// Copies the embedded Motion_00c86660 member and the two __m128 blocks plus one byte from this to dst.
-// @fnv 0x00c86610
-void __thiscall Motion_00c86610::FUN_00c86610(Motion_00c86610* apDest)
-{
-    ((Motion_00c86660*)((char*)apDest + 0x10))->FUN_00c86660((char*)this + 0x10);
-    *(__m128*)((char*)apDest + 0xd0) = *(__m128*)((char*)this + 0xd0);
-    *(__m128*)((char*)apDest + 0xe0) = *(__m128*)((char*)this + 0xe0);
-    ((unsigned char*)apDest + 9)[0] = ((unsigned char*)this + 9)[0];
-}
 }  // namespace fnv_00c86610
 
 struct FUN_00c864b0_Class
 {
     void __thiscall FUN_00c864b0(const float* a);
 };
-// @fnv 0x00c864b0
-void __thiscall FUN_00c864b0_Class::FUN_00c864b0(const float* apVector)
-{
-    __m128 v = *(const __m128*)apVector;
-    *((__m128*)(this + 0xd0)) = v;
-}
 
 struct FUN_00c864d0_Class
 {
@@ -387,11 +335,6 @@ struct FUN_00c864d0_Class
     __m128 m_f0e0;
     void __thiscall CopyFrom(__m128* v);
 };
-// @fnv 0x00c864d0
-void __thiscall FUN_00c864d0_Class::CopyFrom(__m128* apSource)
-{
-    m_f0e0 = *apSource;
-}
 
 extern "C" void _mm_store_ss(float*, __m128);
 

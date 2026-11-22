@@ -1366,85 +1366,8 @@ struct PhWorld
     PhCollisionFilter* m_pCollisionFilter;
 };
 
-static inline void transformInversePos(hkVector4& out, const hkTransform& a, const hkVector4& b)
-{
-    __m128 t = _mm_sub_ps(*(const __m128*)&b, *(const __m128*)&a.m_vTranslation);
-    __m128 c0 = *(const __m128*)&a.m_rotation.m_kColumn0;
-    __m128 c1 = *(const __m128*)&a.m_rotation.m_kColumn1;
-    __m128 c2 = *(const __m128*)&a.m_rotation.m_kColumn2;
-    {
-        __m128 tmp, ctmp;
-        tmp = _mm_unpacklo_ps(c0, c1);
-        ctmp = _mm_shuffle_ps(_mm_unpackhi_ps(c0, c1), c2, 0xe4);
-        c0 = _mm_movelh_ps(tmp, c2);
-        c1 = _mm_movehl_ps(c0, tmp);
-        c1 = _mm_shuffle_ps(c1, c2, 0xd4);
-        c2 = ctmp;
-    }
-    __m128 b0 = _mm_shuffle_ps(t, t, 0x00);
-    __m128 r0 = _mm_mul_ps(c0, b0);
-    __m128 b1 = _mm_shuffle_ps(t, t, 0x55);
-    __m128 r1 = _mm_mul_ps(c1, b1);
-    __m128 b2 = _mm_shuffle_ps(t, t, 0xaa);
-    __m128 r2 = _mm_mul_ps(c2, b2);
-    *(__m128*)&out = _mm_add_ps(_mm_add_ps(r0, r1), r2);
-}
-
 class Phantom_00cf2510 : public hkpAabbPhantom
 {
   public:
     void FUN_00cf2510(const WorldRayCastInput& input, PhRayHitCollector& collector) const;
 };
-
-// @fnv 0x00cf2510
-void Phantom_00cf2510::FUN_00cf2510(const WorldRayCastInput& input, PhRayHitCollector& collector) const
-{
-    {
-        StringCursor& mStream = *(StringCursor*)TlsGetValue(DAT_0126835c);
-        if (mStream.m_commandPtr < mStream.m_endPtr)
-        {
-            MonTimerCmd* h = (MonTimerCmd*)mStream.m_commandPtr;
-            h->m_iFieldAfterHasHit = "TtrcPhantom";
-            _ReadWriteBarrier();
-            volatile unsigned int t = (unsigned int)__rdtsc();
-            h->m_uiStartTicks = t;
-            mStream.m_commandPtr = (char*)(h + 1);
-        }
-    }
-
-    ShapeRayCastQuery sinput;
-    sinput.m_uiFilterInfo = 0;
-    sinput.m_pRayShapeCollectionFilter = 0;
-    sinput.m_uiFilterInfo = input.m_uiFilterInfo;
-    sinput.m_pRayShapeCollectionFilter =
-        (input.m_bEnableShapeCollectionFilter)
-            ? static_cast<const PhRayFilter*>(((PhWorld*)m_pOwningWorld)->m_pCollisionFilter)
-            : 0;
-
-    hkpCollidable** cols = (hkpCollidable**)m_ppOverlappingCollidables.m_data;
-    for (int i = m_ppOverlappingCollidables.m_iElementCount - 1; i >= 0; i--)
-    {
-        const PhShape* shape = (const PhShape*)(*cols)->m_pCollisionShape;
-        if (shape)
-        {
-            const hkTransform& trans = *(const hkTransform*)(*cols)->m_pMotionState;
-            transformInversePos(sinput.m_vFrom, trans, input.m_vFrom);
-            transformInversePos(sinput.m_vTo, trans, input.m_vTo);
-            shape->castRayWithCollector(sinput, **cols, collector);
-        }
-        cols++;
-    }
-
-    {
-        StringCursor& mStream = *(StringCursor*)TlsGetValue(DAT_0126835c);
-        if (mStream.m_commandPtr < mStream.m_endPtr)
-        {
-            MonTimerCmd* h = (MonTimerCmd*)mStream.m_commandPtr;
-            h->m_iFieldAfterHasHit = "Et";
-            _ReadWriteBarrier();
-            volatile unsigned int t = (unsigned int)__rdtsc();
-            h->m_uiStartTicks = t;
-            mStream.m_commandPtr = (char*)(h + 1);
-        }
-    }
-}

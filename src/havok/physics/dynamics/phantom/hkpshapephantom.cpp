@@ -47,11 +47,6 @@ struct CpuObject
 {
     char* FUN_00c9e810();
 };
-// @fnv 0x00c9e810
-char* CpuObject::FUN_00c9e810()
-{
-    return reinterpret_cast<char*>(this) + 176;
-}
 
 void FreeListenerArrays();
 // @fnv 0x00c9e820

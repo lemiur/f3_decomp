@@ -90,22 +90,6 @@ struct BlockPoolArray
     }
 };
 
-// Resets the block array, reserves room for 4 entries, allocates a 0x200-byte block and initialises its fields.
-// @fnv 0x00da4430
-void __cdecl InitBlockPool(BlockPoolArray* blocks)
-{
-    blocks->m_iElementCount = 0;
-    blocks->GrowArrayCapacity(FUN_00c85750().heap(), 4);
-    blocks->_expandOne(FUN_00c85750().heap());
-    BlockPoolBlock* block = new (FUN_00c85750().heap().AllocateMemoryBlock(0x200)) BlockPoolBlock();
-    blocks->m_data[0] = block;
-    block->unk13 = 0x10;
-    block->unk10 = 1;
-    block->unk18 = -1;
-    block->unk14 = -1;
-    block->unk00 = 0x10;
-}
-
 // hkAgentNmMachine: update the collision filter of one agent entry
 
 struct S_00da40e0_Shape;

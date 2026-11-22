@@ -339,28 +339,8 @@ void D40AF0Caller(D40AF0State* s, D40AF0Mask* m)
 
 void __fastcall FUN_00c905b0(void* selfVal);
 
-// For k in 0..1, if vals[k] is non-null, calls FUN_00c905b0 on **slots[k] and then stores vals[k] into *slots[k].
-// @fnv 0x00d409d0
-static __declspec(noinline) void FUN_00d409d0(void** apValues, void** slots)
-{
-    for (int k = 0; k < 2; k++)
-    {
-        if (apValues[k] != 0)
-        {
-            void* obj = slots[k];
-            FUN_00c905b0(*(void**)*(void**)obj);
-            *(void**)slots[k] = apValues[k];
-        }
-    }
-}
-
 void** volatile g_d409d0_vals;
 void** volatile g_d409d0_slots;
-
-void d409d0_probe_caller(void)
-{
-    FUN_00d409d0(g_d409d0_vals, g_d409d0_slots);
-}
 
 inline void* operator new(unsigned int, void* p) throw()
 {
@@ -424,38 +404,3 @@ struct D40A10Entry
         m_data = data;
     }
 };
-
-// For i in 0..1: if a[i] is set, builds a node via FUN_00d22590 into out[i], saves the object's old record in b[i] and replaces it with out[i]; else b[i] = 0.
-// @fnv 0x00d40a10
-static __declspec(noinline) void FUN_00d40a10(int* a, FNVTypeRecord** apRecords, FNVObject** apObjects,
-                                              D40A10Entry* out)
-{
-    FNVObject**& list = apObjects;
-    D40A10Entry*& dst = out;
-    for (int i = 0; i < 2; ++dst, ++i)
-    {
-        if (a[i] != 0)
-        {
-            D40A10Shape* shape = (D40A10Shape*)list[i]->record->unknown0;
-            D40A10Node* node = (D40A10Node*)((D40A10Holder*)FUN_00c85750())->heap().allocate(0x40);
-            node->unk04 = 0x40;
-            float t = shape->unk10;
-            float val = t + shape->FUN_00d571a0() + DAT_010cf218;
-            D40A10Node* pResult = node->FUN_00d22590(&shape->unk20, &shape->unk30, val);
-            new (dst) D40A10Entry(list[i]->record, list[i]->record->unknown8);
-            dst->m_node = pResult;
-            dst->m_uiEdgeIndex = -1;
-            apRecords[i] = list[i]->record;
-            list[i]->record = (FNVTypeRecord*)dst;
-        }
-        else
-        {
-            apRecords[i] = 0;
-        }
-    }
-}
-
-void D40A10Caller(int* a, FNVTypeRecord** b, FNVObject** objs, D40A10Entry* out)
-{
-    FUN_00d40a10(a, b, objs, out);
-}

@@ -36,32 +36,16 @@ struct FUN_00ca80c0_Class
 {
     int __fastcall FUN_00ca80c0();
 };
-// @fnv 0x00ca80c0
-int __fastcall FUN_00ca80c0_Class::FUN_00ca80c0()
-{
-    return *(unsigned char*)(this + 0xe9) != 0xff;
-}
 
 struct FUN_00ca8900_Class
 {
     void FUN_00ca8900(float f, int i);
 };
 
-// @fnv 0x00ca8900
-void FUN_00ca8900_Class::FUN_00ca8900(float f, int i)
-{
-    *(float*)((char*)this + 0x90) = f;
-}
-
 struct FUN_00ca8910_class
 {
     void FUN_00ca8910(float v);
 };
-// @fnv 0x00ca8910
-void FUN_00ca8910_class::FUN_00ca8910(float v)
-{
-    *(float*)((char*)this + 0x94) = v;
-}
 
 struct FUN_00ca80b0_cls
 {
@@ -129,12 +113,6 @@ struct FUN_00ca80b0_cls
 
     int* FUN_00ca80b0();
 };
-
-// @fnv 0x00ca80b0
-int* FUN_00ca80b0_cls::FUN_00ca80b0()
-{
-    return &m_iValueAtF0;
-}
 
 extern float DAT_01016248;
 struct Vector3
@@ -418,14 +396,6 @@ struct CA86E0Object
     void* FUN_00ca86e0();
 };
 
-// @fnv 0x00ca86e0
-void* CA86E0Object::FUN_00ca86e0()
-{
-    if (unkE8 == 4 || unkE8 == 5)
-        return unk1F8;
-    return 0;
-}
-
 struct AudioInterface;
 struct AudioInterfaceVTable
 {
@@ -560,14 +530,6 @@ struct CA8830Object
 
     void FUN_00ca8830(int value);
 };
-
-// Calls setValue on the member with value, then passes this to FUN_00ca8700.
-// @fnv 0x00ca8830
-void CA8830Object::FUN_00ca8830(int value)
-{
-    m_kMemberDescriptor.setValue(value);
-    FUN_00ca8700(this);
-}
 
 struct SubObject;
 
@@ -878,24 +840,6 @@ struct CA8B80Object
     void FUN_00ca8b80(const CA8B80Point3& kPos);
 };
 
-// @fnv 0x00ca8b80
-void CA8B80Object::FUN_00ca8b80(const CA8B80Point3& kPos)
-{
-    if (m_queue && m_queue->m_bSlotEnabled)
-    {
-        CA8B80Command kCommand;
-        kCommand.m_type = 0x1d;
-        kCommand.x = kPos.x;
-        kCommand.m_pOwnerObject = this;
-        kCommand.y = kPos.y;
-        kCommand.z = kPos.z;
-        m_queue->Push(&kCommand);
-        return;
-    }
-    Update();
-    m_handler.SetPosition(kPos);
-}
-
 struct FUN_00ca9240_Base
 {
     int unk04;
@@ -909,13 +853,6 @@ struct FUN_00ca9240 : FUN_00ca9240_Base
     FUN_00ca9240(int a, int b);
     virtual void unk04();
 };
-
-// Constructs the base with a and b and a zero, then sets type to 7.
-// @fnv 0x00ca9240
-FUN_00ca9240::FUN_00ca9240(int aiValueA, int aiValueB) : FUN_00ca9240_Base(aiValueA, aiValueB, 0)
-{
-    type = 7;
-}
 
 struct BaseRecord
 {
@@ -948,10 +885,6 @@ struct FUN_00ca80a0_cls : FUN_00ca80a0_base
 {
     virtual ~FUN_00ca80a0_cls();
 };
-
-// @fnv 0x00ca80a0
-FUN_00ca80a0_cls::~FUN_00ca80a0_cls()
-{}
 
 struct S_00ca8630_Owner
 {
@@ -1607,14 +1540,6 @@ struct CA8890Object
     void FUN_00ca8890(int value);
 };
 
-// Calls setValue on the member with value, then calls FUN_00ca8700 on this object.
-// @fnv 0x00ca8890
-void CA8890Object::FUN_00ca8890(int value)
-{
-    m_kMemberDescriptor.setValue(value);
-    FUN_00ca8700(this);
-}
-
 struct SpawnedSub
 {
     virtual void v00();
@@ -1686,12 +1611,6 @@ struct FUN_00ca88e0_cls
 
     void FUN_00ca88e0(float f);
 };
-
-// @fnv 0x00ca88e0
-void FUN_00ca88e0_cls::FUN_00ca88e0(float afValue)
-{
-    m_sub.v10(afValue);
-}
 
 struct CA92A0Allocator;
 
@@ -2031,44 +1950,6 @@ class HostCA8B
 
     hkBoolCA8B FUN_00ca8bf0() const;
 };
-
-// Returns false for a null shape, type 0xf, or types 7, 8, 9, 10, 0x17 with over 100 child shapes (8 and 10 are skipped when m_bFlag is 4 or 5); else true.
-// @fnv 0x00ca8bf0
-hkBoolCA8B HostCA8B::FUN_00ca8bf0() const
-{
-    const hkpShapeCA8B* shape = m_pCollisionShape;
-    if (!shape)
-        return false;
-
-    bool bOk = true;
-    int type = shape->m_type;
-    if (m_bFlag != 5 && m_bFlag != 4 && (type == 10 || type == 8))
-    {
-        if (shape->GetShapeContainer()->GetNumChildShapes() > 100)
-            bOk = false;
-    }
-
-    if (type == 0x17)
-    {
-        if (static_cast<const hkpShapeCollectionCA8B*>(m_pCollisionShape)->GetNumChildShapes() > 100)
-            bOk = false;
-    }
-    else if (type == 7)
-    {
-        if (static_cast<const hkpShapeCollectionCA8B*>(m_pCollisionShape)->GetNumChildShapes() > 100)
-            bOk = false;
-    }
-    else if (type == 0xf)
-    {
-        bOk = false;
-    }
-    else if (type == 9)
-    {
-        if (static_cast<const hkpShapeCollectionCA8B*>(shape)->GetNumChildShapes() > 100)
-            bOk = false;
-    }
-    return bOk;
-}
 
 struct S_00ca84b0_Shape
 {
@@ -2530,27 +2411,6 @@ struct FUN_00ca8af0_cls
     void FUN_00c9c1d0();
 };
 
-// @fnv 0x00ca8af0
-void FUN_00ca8af0_cls::DispatchEvent(void* a1, void* a2)
-{
-    if (m_08 != 0)
-    {
-        if (m_08->m_94 != 0)
-        {
-            EventBlock ev;
-            ev.m_type = 0x1c;
-            ev.m_pSender = this;
-            AllocHolder* holder = FUN_00c85750();
-            ev.m_pData = holder->m_pAllocator->Alloc(0x20);
-            *(__m128*)ev.m_pData = *(__m128*)a2;
-            *(__m128*)((char*)ev.m_pData + 0x10) = *(__m128*)a1;
-            m_08->FUN_00c91160(&ev);
-            return;
-        }
-    }
-    FUN_00c9c1d0();
-    m_e0.v50(a1, a2);
-}
 }  // namespace fnv_00ca8af0
 
 struct S_00ca8f50_Vec
@@ -2863,9 +2723,6 @@ struct FUN_00ca9210 : S_00ca9210_RefObj
     virtual ~FUN_00ca9210() throw();
 };
 
-// @fnv 0x00ca9210
-FUN_00ca9210::FUN_00ca9210()
-{}
 }  // namespace fnv_00ca9210
 
 struct Entity;
@@ -3123,14 +2980,4 @@ void __cdecl FUN_00ca8700(Entity* apEntity)
     world->unk84 -= 1;
     if (world->unk84 == 0 && world->m_8c == 0 && world->unk80 != 0)
         world->FUN_00c91120();
-}
-
-
-// @fnv 0x00ca8920
-void __fastcall FUN_00ca8920(FUN_00ca8860_cls* body, void*, int inertia)
-{
-    SubObject* motion = &body->m_sub;
-    typedef void(__thiscall * SetInertia)(SubObject*, int);
-    SetInertia set = reinterpret_cast<SetInertia>(motion->m_pVtbl->fn1c);
-    set(motion, inertia);
 }

@@ -34,32 +34,6 @@ void FUN_00d3e330(const S_00d3ef70_CdBody&, const S_00d3ef70_CdBody&, const S_00
 void FUN_00d3ebe0(const S_00d3ef70_CdBody&, const S_00d3ef70_CdBody&, const S_00d3ef70_Input&, S_00d3ef70_Collector&);
 void FUN_00daf8e0(const S_00d3ef70_CdBody&, const S_00d3ef70_CdBody&, const S_00d3ef70_Input&, S_00d3ef70_Collector&, S_00d3ef70_Collector*);
 
-// Registers two collision agent function tables with the dispatcher for the type pairs (5,1) and (1,5).
-// @fnv 0x00d3ef70
-void FUN_00d3ef70(S_00d3ef70_Dispatcher* dispatcher)
-{
-    {
-        S_00d3ef70_AgentFuncs agentFuncs;
-        agentFuncs.m_pCreateFunc = FUN_00d3e2f0;
-        agentFuncs.m_pQueryPenetrationsFunc = FUN_00d3f040;
-        agentFuncs.m_getClosestPointsFunc = FUN_00d3f4c0;
-        agentFuncs.m_pLinearCastFunc = FUN_00d3ac80;
-        agentFuncs.m_bIsFlipped = true;
-        agentFuncs.m_bIsPredictive = false;
-        dispatcher->registerCollisionAgent(agentFuncs, 5, 1);
-    }
-    {
-        S_00d3ef70_AgentFuncs agentFuncs;
-        agentFuncs.m_pCreateFunc = FUN_00d3e270;
-        agentFuncs.m_pQueryPenetrationsFunc = FUN_00d3e330;
-        agentFuncs.m_getClosestPointsFunc = FUN_00d3ebe0;
-        agentFuncs.m_pLinearCastFunc = FUN_00daf8e0;
-        agentFuncs.m_bIsFlipped = false;
-        agentFuncs.m_bIsPredictive = false;
-        dispatcher->registerCollisionAgent(agentFuncs, 1, 5);
-    }
-}
-
 class InnerCls {
 public:
     virtual void v0();
@@ -121,18 +95,6 @@ struct SmallRecord {
 extern char DAT_010cf018[];
 
 AllocHolder* FUN_00c85750();
-
-// @fnv 0x00d3e2f0
-void __cdecl FUN_00d3e2f0(int aiUnused1, int aiUnused2, int aiUnused3, int aiValue) {
-    AllocHolder* pAllocHolder = FUN_00c85750();
-    ObjAllocator* allocator = (ObjAllocator*)pAllocHolder->m_pAllocator;
-    SmallRecord* pRecord = (SmallRecord*)allocator->Alloc(0x10);
-    pRecord->m_w04 = 0x10;
-    pRecord->m_w06 = 1;
-    pRecord->m_i08 = aiValue;
-    pRecord->m_w0C = 0xffff;
-    pRecord->m_vptr = DAT_010cf018;
-}
 
 void __cdecl FUN_00d3e330(int a, int b, int c, int d);
 

@@ -801,24 +801,6 @@ struct FUN_00d50570_class
     __m128* m_items;
     void CopyItems(int start, int count, const __m128* src);
 };
-// Copies count __m128 values from src into m_items starting at index start.
-// @fnv 0x00d50570
-void FUN_00d50570_class::CopyItems(int start, int count, const __m128* src)
-{
-    int end = start + count;
-    if (start < end)
-    {
-        int off = start * 16;
-        int n = end - start;
-        do
-        {
-            *(__m128*)((char*)m_items + off) = *src;
-            off += 16;
-            ++src;
-            --n;
-        } while (n != 0);
-    }
-}
 
 struct SolverItem
 {
@@ -896,43 +878,6 @@ struct FUN_00d51620_class
     void FreeArrays();
 };
 
-// @fnv 0x00d51620
-void FUN_00d51620_class::FreeArrays()
-{
-    FUN_00d51620_Router* m = FUN_00c85750();
-    FUN_00d51620_Alloc* alloc = m->m_pThreadAllocator;
-    int c = m_3c;
-    m_38 = 0;
-    if (!(c & 0x80000000))
-        alloc->free(m_34, (c & 0x3fffffff) * 4);
-    m_34 = 0;
-    m_3c = 0x80000000;
-    m = FUN_00c85750();
-    alloc = m->m_pThreadAllocator;
-    c = m_30;
-    m_2c = 0;
-    if (!(c & 0x80000000))
-        alloc->free(m_28, (c & 0x3fffffff) * 4);
-    m_28 = 0;
-    m_30 = 0x80000000;
-    m = FUN_00c85750();
-    alloc = m->m_pThreadAllocator;
-    c = m_24;
-    m_20 = 0;
-    if (!(c & 0x80000000))
-        alloc->free(m_1c, (c & 0x3fffffff) * 4);
-    m_1c = 0;
-    m_24 = 0x80000000;
-    m = FUN_00c85750();
-    alloc = m->m_pThreadAllocator;
-    c = m_a18;
-    m_a14 = 0;
-    if (!(c & 0x80000000))
-        alloc->free(m_a10, (c & 0x3fffffff) * 16);
-    m_a10 = 0;
-    m_a18 = 0x80000000;
-}
-
 namespace fnv_00d516f0 {
 struct FnvCpu_FUN_00d516f0_CpuAllocator
 {
@@ -956,17 +901,6 @@ struct FnvCpu_FUN_00d516f0_CpuObject
     void FUN_00d50c50();
     FnvCpu_FUN_00d516f0_CpuObject* FUN_00d516f0(unsigned int flags);
 };
-// @fnv 0x00d516f0
-FnvCpu_FUN_00d516f0_CpuObject* FnvCpu_FUN_00d516f0_CpuObject::FUN_00d516f0(unsigned int flags)
-{
-    FUN_00d50c50();
-    if (flags & 1)
-    {
-        FnvCpu_FUN_00d516f0_CpuAllocatorHolder* holder = FUN_00c85750();
-        holder->allocator->Invoke(this, size);
-    }
-    return this;
-}
 }  // namespace fnv_00d516f0
 
 union FUN_00d503c0_vec
@@ -1092,32 +1026,6 @@ struct S00d50e10_Rows
 };
 
 void __cdecl FUN_00dcee80(S00d50e10_Rows* out, int d, int e);
-
-// Builds three S00d50e10_Rows from vectors in p, calls FUN_00dcee80 on each with d and e, and adds 3 to the int at p+0xB8.
-// @fnv 0x00d50e10
-void __stdcall FUN_00d50e10(int a0, int a1, int a2, void* p, int d, int e)
-{
-    float* base = reinterpret_cast<float*>(p);
-    S00d50e10_Rows out1;
-    S00d50e10_Rows out;
-
-    out1.v0 = (*reinterpret_cast<const __m128*>(base + 0x14));
-    out1.v2 = (*reinterpret_cast<const __m128*>(base + 0x24));
-    out1.v1 = (*reinterpret_cast<const __m128*>(base + 0x1C));
-    FUN_00dcee80(&out1, d, e);
-
-    out.v0 = (*reinterpret_cast<const __m128*>(base + 0x18));
-    out.v2 = (*reinterpret_cast<const __m128*>(base + 0x28));
-    out.v1 = out1.v0;
-    FUN_00dcee80(&out, d, e);
-
-    out.v2 = (*reinterpret_cast<const __m128*>(base + 0x20));
-    out.v1 = out.v0;
-    out.v0 = out1.v1;
-    FUN_00dcee80(&out, d, e);
-
-    *reinterpret_cast<int*>(reinterpret_cast<char*>(p) + 0xB8) += 3;
-}
 
 struct __declspec(align(16)) hkVector4D510
 {
@@ -1350,21 +1258,6 @@ extern int DAT_011b5a94[];
 
 float __cdecl Atan2(float y, float x);
 
-// Dots columns of m_rotB with a column of m_rotA, chosen by axis through two lookup tables, and passes the results to Atan2 as sine and cosine.
-// @fnv 0x00d50450
-static __declspec(noinline) float FUN_00d50450(const AngularFrames* frames, int axis)
-{
-    const hkVector4q& dirA = frames->m_rotA.getColumn(DAT_011b5a90[axis]);
-    const float sinAngle = frames->m_rotB.getColumn(DAT_011b5a94[axis]).dot3(dirA);
-    const float cosAngle = frames->m_rotB.getColumn(DAT_011b5a90[axis]).dot3(dirA);
-    return Atan2(sinAngle, cosAngle);
-}
-
-float calcAngleForAxis(const AngularFrames* frames, int axis)
-{
-    return FUN_00d50450(frames, axis);
-}
-
 extern "C" __m128 _mm_sub_ps(__m128 a, __m128 b);
 
 struct S00d505c0_Blk
@@ -1376,31 +1269,6 @@ struct S00d505c0_Blk
 };
 
 void __cdecl FUN_00dcf100(S00d505c0_Blk* in, int* cfg, int index);
-
-// Builds an S00d505c0_Blk from vectors in c, a float read via b and a destination offset, calls FUN_00dcf100 with basePtr and index, and increments c[0xb8/4].
-// @fnv 0x00d505c0
-void __stdcall FUN_00d505c0(int** a, int* b, void* unused, int* c, int* basePtr, int index)
-{
-    int idxBase = basePtr[0x64 / 4];
-
-    (*a)++;
-    int val = **a;
-
-    __m128 lo = *(__m128*)c;
-    S00d505c0_Blk blk;
-    blk.v = *(__m128*)((char*)c + ((val + 2) << 4));
-
-    blk.diff = _mm_sub_ps(lo, *((__m128*)c + 1));
-    float* bv = *(float**)b;
-    *(float**)b = bv + 4;
-    blk.fb = *bv;
-
-    blk.idx = idxBase + c[0xb8 / 4] * 8;
-
-    FUN_00dcf100(&blk, basePtr, index);
-
-    c[0xb8 / 4]++;
-}
 
 namespace fnv_00d50d60 {
 extern "C" __m128 __cdecl _mm_load_ps(const float*);
@@ -1438,24 +1306,6 @@ extern unsigned int DAT_010c44d0;
 
 void __cdecl FUN_00dcee80(void* pair, int a2, int a3);
 
-// Loads three vectors into out, calls FUN_00dcee80, sets a to old b XORed with a constant and b to old a, calls it again, and adds 2 to data->numDecoded.
-// @fnv 0x00d50d60
-void __stdcall FUN_00d50d60(unsigned int** a0, int aiUnused1, int aiUnused2, D50D60_Stream* apStream, int a4, int a5)
-{
-    D50D60_Out out;
-    ++*a0;
-    unsigned int idx = **a0;
-    _mm_store_ps(&out.b.x, apStream->vecs[(&DAT_011b5a90)[idx] + 5].v);
-    _mm_store_ps(&out.a.x, apStream->vecs[(&DAT_011b5a94)[idx] + 5].v);
-    _mm_store_ps(&out.c.x, apStream->vecs[idx + 8].v);
-    FUN_00dcee80(&out, a4, a5);
-    __m128 cur = _mm_load_ps(&out.b.x);
-    __m128 t = _mm_xor_ps(_mm_load_ps((const float*)&DAT_010c44d0), cur);
-    _mm_store_ps(&out.b.x, _mm_load_ps(&out.a.x));
-    _mm_store_ps(&out.a.x, t);
-    FUN_00dcee80(&out, a4, a5);
-    apStream->numDecoded += 2;
-}
 }  // namespace fnv_00d50d60
 
 extern "C"
@@ -1503,55 +1353,7 @@ struct hkAngInfo
     float m_fTau;
 };
 
-static inline float hkToReal(__m128 v)
-{
-    float s;
-    _mm_store_ss(&s, v);
-    return s;
-}
-
 extern "C" void FUN_00d6cb30(hkAngInfo* info, int p1, int p2);
-
-static inline __m128 hkLenSq3(__m128 v)
-{
-    __m128 len = _mm_mul_ps(v, v);
-    __m128 r = _mm_add_ss(_mm_shuffle_ps(len, len, 0x55), len);
-    return _mm_add_ss(_mm_shuffle_ps(len, len, 0xaa), r);
-}
-
-// Builds a normalized cross product and dot of m_colsA[idx] and m_colsB[idx] with two floats from data and calls FUN_00d6cb30, unless the cross is near zero.
-// @fnv 0x00d50ec0
-void __stdcall FUN_00d50ec0(int** cmds, hkVector4** data, int unused, hkSchemeVecs* apSchemeVecs, int p5, int p6)
-{
-    float lenSq;
-    int idx = *++*cmds;
-    hkVec4A a = apSchemeVecs->m_colsA[idx];
-    hkVec4A b = apSchemeVecs->m_colsB[idx];
-    hkAngInfo info;
-    info.m_fTau = 0.5f;
-    __m128 vb = _mm_load_ps(&b.x);
-    __m128 va = _mm_load_ps(&a.x);
-    __m128 c0 = _mm_mul_ps(_mm_shuffle_ps(va, va, 0xc9), _mm_shuffle_ps(vb, vb, 0xd2));
-    __m128 c1 = _mm_mul_ps(_mm_shuffle_ps(va, va, 0xd2), _mm_shuffle_ps(vb, vb, 0xc9));
-    __m128 cross = _mm_sub_ps(c0, c1);
-    lenSq = hkToReal(hkLenSq3(cross));
-    if (lenSq < 1.192092896e-07f)
-        return;
-    info.m_dot = b.x * a.x + b.y * a.y + b.z * a.z;
-    __m128 r = hkLenSq3(cross);
-    __m128 e = _mm_rsqrt_ss(r);
-    __m128 isZero = _mm_cmpeq_ss(r, _mm_set_ss(0.0f));
-    __m128 ree = _mm_mul_ss(_mm_mul_ss(r, e), e);
-    __m128 threeMinus = _mm_sub_ss(_mm_set_ss(3.0f), ree);
-    __m128 res = _mm_mul_ss(_mm_mul_ss(_mm_set_ss(0.5f), e), threeMinus);
-    __m128 inv = _mm_andnot_ps(isZero, res);
-    _mm_store_ps(&info.m_kAxisEndPoints.x, _mm_mul_ps(_mm_shuffle_ps(inv, inv, 0), cross));
-    hkVector4* v = (*data)++;
-    info.m_kPointA = v->x;
-    info.m_kPointB = v->y;
-    FUN_00d6cb30(&info, p5, p6);
-    apSchemeVecs->m_uiItemCount++;
-}
 
 struct S00d51100_Blk
 {
@@ -1604,50 +1406,11 @@ extern "C" void __cdecl _mm_store_ss(float*, __m128);
 extern int DAT_011b5a90[];
 extern float Atan2(float, float);
 extern float dotAngle(__m128, __m128);
-static __declspec(noinline) float FUN_00d50450(AnglePool* pool, int index)
-{
-    __m128 first = pool->vectors[DAT_011b5a90[index] + 5];
-    __m128 basis[3] = {pool->vectors[8], pool->vectors[9], pool->vectors[10]};
-    float x = dotAngle(first, basis[DAT_011b5a90[index]]);
-    float y = dotAngle(first, basis[DAT_011b5a90[index + 1]]);
-    return Atan2(y, x);
-}
 struct AngleRecord
 {
     float x, y, angle, w;
 };
 
-// Reads an index from stream, computes an angle via pool and FUN_00d50450, adjusts it to stay within ±π of the previous angle, stores it, and calls FUN_00d6cb30.
-// @fnv 0x00d51170
-void __stdcall FUN_00d51170(int** __restrict stream, AngleRecord** cursor, int unused, AnglePool* pool, void* a,
-                            void* b)
-{
-    SolverInfoD510 info;
-    ++*stream;
-    int index = **stream;
-    info.m_vScale = DAT_01016248;
-    (__m128&)info.m_jacobian = pool->vectors[index + 5];
-    info.m_out = FUN_00d50450(pool, index);
-    AngleRecord* pRecord = *cursor;
-    info.m_f0 = pRecord->x;
-    *cursor = pRecord + 1;
-    info.m_f1 = pRecord->y;
-    if (info.m_out < 0.0f && pRecord->angle > 0.0f)
-    {
-        double adjusted = info.m_out + 6.2831854820251465;
-        if (pRecord->angle - info.m_out > 3.1415927410125732)
-            info.m_out = adjusted;
-    }
-    if (info.m_out > 0.0f && pRecord->angle < 0.0f)
-    {
-        double adjusted = info.m_out - 6.2831854820251465;
-        if (info.m_out - pRecord->angle > 3.1415927410125732)
-            info.m_out = adjusted;
-    }
-    pRecord->angle = info.m_out;
-    FUN_00d6cb30(&info, a, b);
-    ++pool->unkB8;
-}
 }  // namespace fnv_00d51170
 
 extern "C"
@@ -2107,158 +1870,4 @@ static __forceinline void rotateD506(VecD506& out, const FUN_00cdf250_class* m, 
     y = _mm_add_ps(y, x);
     z = _mm_mul_ps(z, m->c2);
     out.v = _mm_add_ps(y, z);
-}
-
-// Executes a byte-code program from a constraint scheme, dispatching on command codes to update state and call handler functions.
-// @fnv 0x00d50640
-void InterpreterD506::FUN_00d50640(hkpGenericConstraintDataScheme* scheme, const InputD506* input, void* output)
-{
-    InputD506 localInput = *input;
-    StateD506 state;
-    state.transformA = localInput.transformA;
-    state.transformB = localInput.transformB;
-    state.count = 0;
-    VecD506* data = (VecD506*)scheme->m_data.m_data;
-    int* command = scheme->m_commands.m_data;
-    ModifierD506** modifiers = (ModifierD506**)scheme->m_ppModifiers.m_data;
-    for (;;)
-    {
-        int* __restrict op = command;
-        switch (*op)
-        {
-        case 0:
-            return;
-        case 3: {
-            __m128 v = data->v;
-            const FUN_00cdf250_class* __restrict m = state.transformA;
-            __m128 y = _mm_shuffle_ps(v, v, 0x55);
-            __m128 x = _mm_shuffle_ps(v, v, 0);
-            y = _mm_mul_ps(y, m->c1);
-            x = _mm_mul_ps(x, m->c0);
-            y = _mm_add_ps(y, x);
-            VecD506& out = state.axes[*++command];
-            __m128 z = _mm_shuffle_ps(v, v, 0xaa);
-            z = _mm_mul_ps(z, m->c2);
-            out.v = _mm_add_ps(y, z);
-            ++data;
-            break;
-        }
-        case 4: {
-            __m128 v = data->v;
-            const FUN_00cdf250_class* __restrict m = state.transformB;
-            __m128 y = _mm_shuffle_ps(v, v, 0x55);
-            __m128 x = _mm_shuffle_ps(v, v, 0);
-            y = _mm_mul_ps(y, m->c1);
-            x = _mm_mul_ps(x, m->c0);
-            y = _mm_add_ps(y, x);
-            ++command;
-            int* __restrict axisCommand = command;
-            VecD506& out = state.axes[*axisCommand];
-            __m128 z = _mm_shuffle_ps(v, v, 0xaa);
-            z = _mm_mul_ps(z, m->c2);
-            out.v = _mm_add_ps(y, z);
-            ++data;
-            break;
-        }
-        case 5: {
-            VecD506 v;
-            v.v = data->v;
-            state.axes[*++command] = v;
-            ++data;
-            break;
-        }
-        case 6:
-            FUN_00d50d00(&command, &data, scheme, &state, &localInput, output);
-            break;
-        case 7:
-            FUN_00d503c0(&command, &data, scheme, &state, &localInput, output);
-            break;
-        case 8: {
-            FUN_00cdf250_class* m = (FUN_00cdf250_class*)data;
-            data += 3;
-            state.basisA.FUN_00cd55b0((int*)state.transformA, (int)m);
-            break;
-        }
-        case 9: {
-            FUN_00cdf250_class* m = (FUN_00cdf250_class*)data;
-            data += 3;
-            state.basisB.FUN_00cd55b0((int*)state.transformB, (int)m);
-            break;
-        }
-        case 10:
-            state.basisA = *state.transformA;
-            break;
-        case 11:
-            state.basisB = *state.transformB;
-            break;
-        case 12:
-            FUN_00d50d60(&command, &data, scheme, &state, &localInput, output);
-            break;
-        case 13:
-            FUN_00d50e10(&command, &data, scheme, &state, &localInput, output);
-            break;
-        case 16:
-            FUN_00d51100(&command, &data, scheme, &state, &localInput, output);
-            break;
-        case 17:
-            FUN_00d51170(&command, &data, scheme, &state, &localInput, output);
-            break;
-        case 18:
-            FUN_00d50ec0(&command, &data, scheme, &state, &localInput, output);
-            break;
-        case 19:
-            FUN_00d51060(&command, &data, scheme, &state, &localInput, output);
-            break;
-        case 14:
-            FUN_00d51410(&command, &data, scheme, &state, &localInput, output);
-            break;
-        case 15:
-            FUN_00d51270(&command, &data, scheme, &state, &localInput, output);
-            break;
-        case 20:
-            FUN_00d51390(&command, &data, scheme, &state, &localInput, output);
-            break;
-        case 21:
-            FUN_00d505c0(&command, &data, scheme, &state, &localInput, output);
-            break;
-        case 1:
-            state.pivotA.FUN_00c7f640(state.transformA, data);
-            ++data;
-            break;
-        case 2:
-            state.pivotB.FUN_00c7f640(state.transformB, data);
-            ++data;
-            break;
-        case 22: {
-            float scale = ((hkVector4*)data)->x;
-            ++data;
-            localInput.factor.real *= scale;
-            break;
-        }
-        case 23:
-            localInput.factor.bits = input->factor.bits;
-            break;
-        case 24: {
-            ModifierD506* pModifier = *modifiers;
-            ApplyD506 apply = pModifier->vtable->apply;
-            apply(pModifier, &state, *++command);
-            ++modifiers;
-            break;
-        }
-        }
-        ++command;
-    }
-}
-
-// @fnv 0x00d50d00
-void __stdcall FUN_00d50d00(int** commands, int unusedData, int unusedScheme, Runtime* runtime, void* input,
-                            void* output)
-{
-    ++*commands;
-    FUN_00d503c0_m packet;
-    packet.r2.v = runtime->v[**commands + 2].m;
-    packet.r0.v = runtime->v[0].m;
-    packet.r1.v = runtime->v[1].m;
-    FUN_00dcf280(&packet, input, output);
-    ++runtime->m_iFirstInteger;
 }

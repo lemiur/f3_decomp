@@ -16,13 +16,6 @@ struct FUN_00ca95e0_class
     int m_uiZ;
     void FUN_00ca95e0();
 };
-// @fnv 0x00ca95e0
-void FUN_00ca95e0_class::FUN_00ca95e0()
-{
-    m_p = (int)&DAT_010c8198;
-    ((hkReferencedObject*)m_uiZ)->removeReference();
-    m_p = (int)&DAT_0102e388;
-}
 
 struct FUN_00ca9670_cls
 {
@@ -89,26 +82,6 @@ struct hkpCharacterContext
 
     hkpCharacterContext* Initialize(void* arg0, int arg1);
 };
-
-// @fnv 0x00ca9580
-hkpCharacterContext* hkpCharacterContext::Initialize(void* arg0, int arg1)
-{
-    unk06 = 1;
-    unk0C = arg0;
-    vtbl = &DAT_010c8198;
-    unk10 = arg1;
-    unk14 = arg1;
-    unk08 = 0;
-    unk18 = 1;
-
-    float& f20 = unk20;
-    f20 = 20.0f;
-    unk1C = 625.0f;
-    unk24 = 1.0f;
-    FUN_00c90510(unk0C);
-
-    return this;
-}
 
 // @fnv 0x00ca9600
 int __fastcall FUN_00ca9600(char* object)
@@ -185,18 +158,6 @@ struct FnvCpu_FUN_00ca9810_CpuObject
     void FUN_00ca95e0();
     FnvCpu_FUN_00ca9810_CpuObject* Destroy(unsigned int flags);
 };
-// Calls FUN_00ca95e0, then if bit 0 of flags is set, invokes the allocator from FUN_00c85750 on this with size, and returns this.
-// @fnv 0x00ca9810
-FnvCpu_FUN_00ca9810_CpuObject* FnvCpu_FUN_00ca9810_CpuObject::Destroy(unsigned int flags)
-{
-    FUN_00ca95e0();
-    if (flags & 1)
-    {
-        FnvCpu_FUN_00ca9810_CpuAllocatorHolder* pAllocatorHolder = FUN_00c85750();
-        pAllocatorHolder->allocator->Invoke(this, size);
-    }
-    return this;
-}
 
 #include <xmmintrin.h>
 class VectorComponentValue
@@ -347,48 +308,3 @@ struct Context
 
     void FUN_00ca96a0(const PhysicsDataBlock& input, Vector4Data& output);
 };
-
-// @fnv 0x00ca96a0
-void Context::FUN_00ca96a0(const PhysicsDataBlock& input, Vector4Data& output)
-{
-    output.m_fVelocity = input.m_fVelocity;
-
-    pCharacterStateManager->GetReferenceTimeStep(m_iPreviousState)->update(this, input, output);
-
-    if (m_iPreviousState == m_iStateIndex)
-    {
-        pCharacterStateManager->GetReferenceTimeStep(m_iPreviousState)->change(this, input, output);
-    }
-
-    m_iStateIndex = m_iPreviousState;
-
-    if (m_filterParameters)
-    {
-        float length = output.m_fVelocity.length3();
-        if (length > m_fSurfaceFriction)
-        {
-            float fClampScale = m_fSurfaceFriction / length;
-            output.m_fVelocity.mul4(fClampScale);
-        }
-
-        float grav = input.m_fSecondScalar;
-        hkVector4 vDelta;
-        vDelta.setSub4(output.m_fVelocity, input.m_fVelocity);
-        vDelta.mul4(grav);
-        float fDeltaLength = vDelta.length3();
-        float fDeltaRatio = fDeltaLength / m_characterWidth;
-        output.m_fVelocity = input.m_fVelocity;
-
-        float fBlendFactor;
-        if (fDeltaRatio > 1.0f && m_iPreviousState != 1)
-        {
-            fBlendFactor = (input.m_pStepInfo * m_fGain) / fDeltaRatio;
-        }
-        else
-        {
-            fBlendFactor = input.m_pStepInfo * m_fGain;
-        }
-
-        output.m_fVelocity.addMul4(fBlendFactor, vDelta);
-    }
-}

@@ -38,28 +38,6 @@ struct FUN_00cfbbe0_Class
     void __thiscall FUN_00cfbbe0(FUN_00cfbbe0_Arg* a, int b, int c);
 };
 
-// Builds two FUN_00cfbbe0_Arg descriptors from function pointers and flags and passes each to FUN_00cfbbe0 with size arguments 0x12/0x18 and 0x18/0x12.
-// @fnv 0x00d377d0
-void FUN_00d377d0(int pClass)
-{
-    FUN_00cfbbe0_Class* p = (FUN_00cfbbe0_Class*)pClass;
-    FUN_00cfbbe0_Arg arg;
-    arg.f0 = (void*)&FUN_00d37780;
-    arg.f1 = (void*)&FUN_00d37860;
-    arg.f2 = (void*)&FUN_00d378a0;
-    arg.f3 = (void*)&FUN_00d3ac80;
-    arg.f4 = 1;
-    arg.f5 = 1;
-    p->FUN_00cfbbe0(&arg, 0x12, 0x18);
-    arg.f0 = (void*)&FUN_00d37740;
-    arg.f1 = (void*)&FUN_00d374f0;
-    arg.f2 = (void*)&FUN_00d37280;
-    arg.f3 = (void*)&FUN_00daf8e0;
-    arg.f4 = 0;
-    arg.f5 = 1;
-    p->FUN_00cfbbe0(&arg, 0x18, 0x12);
-}
-
 struct Handler
 {
     virtual void slot0();
@@ -281,15 +259,6 @@ struct S_00d37740_Object
 
 S_00d37740_Object* FUN_00c85750();
 
-// @fnv 0x00d37740
-void FUN_00d37740(int aiArg1, int aiArg2, int aiArg3, int aiArg4)
-{
-    S_00d37740_Object* obj = FUN_00c85750();
-    S_00d376b0_Class* result = obj->unk10->FUN_00d37740_Method(0x20);
-
-    result->unk04 = 0x20;
-    result->FUN_00d376b0(aiArg1, aiArg2, aiArg3, aiArg4);
-}
 }  // namespace fnv_00d37740
 
 namespace fnv_00d37780 {

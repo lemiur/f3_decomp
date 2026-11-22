@@ -15,17 +15,6 @@ struct FUNObj
     void SetEntry(int index, int first, int second, int third, int fourth);
 };
 
-// Writes the four given values into the entry at index + 15 of the entries array.
-// @fnv 0x00d044c0
-void FUNObj::SetEntry(int index, int first, int second, int third, int fourth)
-{
-    Entry& entry = entries[index + 15];
-    entry.first = first;
-    entry.second = second;
-    entry.third = third;
-    entry.fourth = fourth;
-}
-
 void FUN_00d043c0(void*, int);
 
 struct UnsignedShortCountBlock
@@ -87,22 +76,6 @@ struct ItemManager
     void ProcessPendingEntries(UnsignedShortCountBlock* refs);
     void RemoveItemReference(int index, UnsignedShortCountBlock* refs);
 };
-
-// @fnv 0x00d04990
-void ItemManager::RemoveItemReference(int index, UnsignedShortCountBlock* refs)
-{
-    if (index < count)
-    {
-        unsigned short refCount = refs->counts[index];
-        if (refCount > 0)
-        {
-            refs->counts[index] = refCount - 1;
-            FUN_00d043c0(values[index], 1);
-            return;
-        }
-    }
-    ProcessPendingEntries(refs);
-}
 
 struct Bucket
 {
@@ -246,16 +219,6 @@ struct Owner
     void FUN_00d04420(Registry*);
     void FUN_00d04a80(int, int);
 };
-// @fnv 0x00d04a80
-void Owner::FUN_00d04a80(int first, int second)
-{
-    RequestContext context;
-    Registry* data = FUN_00d04400(&context);
-    ((Bucket*)((char*)data + 0x2c))[unk30 + first].FUN_00d056d0(second);
-    for (int i = 0; i < count; ++i)
-        ((Bucket*)((char*)data + 0x2c))[*((unsigned char*)this + 0x3d + i * 8)].FUN_00d056d0(second);
-    FUN_00d04420(data);
-}
 
 struct Item
 {
@@ -287,30 +250,11 @@ struct Mgr
     void InsertItemAndNotify(PoolSet* set, const Item& item, int flag);
 };
 
-// Looks up the pool index for item, inserts it into that pool via Insert or Insert2 depending on flag, then notifies with the index and set.
-// @fnv 0x00d04b00
-void Mgr::InsertItemAndNotify(PoolSet* set, const Item& item, int abUseInsert2)
-{
-    int idx = GetIndex(item);
-    ItemPool& pool = set->m_pools[idx];
-    if (!abUseInsert2)
-        pool.Insert(item);
-    else
-        pool.Insert2(item);
-    Notify(idx, set);
-}
-
 struct Obj
 {
     int Forward3(int a, int b, int c);
     int ForwardWithZero(int a, int b);
 };
-
-// @fnv 0x00d05190
-int Obj::ForwardWithZero(int aiFirst, int aiSecond)
-{
-    return Forward3(0, aiFirst, aiSecond);
-}
 
 struct S_00d056a0_Allocator
 {
@@ -348,17 +292,6 @@ struct S_00d056a0
     int m_iElementCount;
     void FUN_00d056a0();
 };
-
-// @fnv 0x00d056a0
-void S_00d056a0::FUN_00d056a0()
-{
-    int n = m_iElementCount;
-    if (n)
-    {
-        S_00d056a0_Elem* pData = m_data;
-        FUN_00c85750()->heap()->ReleaseBlock(pData, n * sizeof(S_00d056a0_Elem));
-    }
-}
 
 struct D057A0Element
 {
@@ -483,22 +416,6 @@ struct FUN_00d04450_cls
     void SetValue(int a1);
 };
 
-// Stores a1 into a field of the object at this+0x18, decrements a per-index counter in the buffer from FUN_00d04400, and calls FUN_00d043c0 when it was positive.
-// @fnv 0x00d04450
-void FUN_00d04450_cls::SetValue(int aiValue)
-{
-    __declspec(align(16)) unsigned int buf[0x5c];
-    char* obj = (char*)FUN_00d04400(buf);
-    *(int*)(*(char**)((char*)this + 0x18) + 0x18) = aiValue;
-    if (*(unsigned short*)(obj + 0x22 + *(signed char*)((char*)this + 0xea) * 2) > 0)
-    {
-        unsigned short dec = 0xffff;
-        *(unsigned short*)(obj + 0x22 + *(signed char*)((char*)this + 0xea) * 2) += dec;
-        FUN_00d043c0(((int*)((char*)this + 0x78))[*(signed char*)((char*)this + 0xea)], 1);
-    }
-    FUN_00d04420(obj);
-}
-
 // ---------------------------------------------------------------------------
 // ReleasePendingCounts - releases the pending semaphore counts of one object.
 //
@@ -569,24 +486,6 @@ struct FnvReleaseSet
     void ReleasePendingCounts(FnvReleaseCounts* pCounts);
 };
 
-// For each semaphore up to count, clears its pending count and releases that many single counts on the semaphore.
-// @fnv 0x00d044f0
-void FnvReleaseSet::ReleasePendingCounts(FnvReleaseCounts* pCounts)
-{
-    for (int i = 0; i < count; i++)
-    {
-        int pending = pCounts->pending[i];
-
-        pCounts->pending[i] = 0;
-
-        while (pending > 0)
-        {
-            FUN_00d043c0(pSemaphores[i], 1);
-            pending--;
-        }
-    }
-}
-
 struct SpawnedEntry
 {
     unsigned char m_key1;
@@ -624,32 +523,6 @@ class FUN_00d04890_cls
 
     int LookupSpawnedEntry(const unsigned char* p);
 };
-
-// Scans up to m_48 entries for one matching p[0] and p[1], returning its byte at offset 8*i+0x3d, else p[1]+m_30.
-// @fnv 0x00d04890
-int FUN_00d04890_cls::LookupSpawnedEntry(const unsigned char* pKey)
-{
-    int i = 0;
-    if (m_48 > 0)
-    {
-        unsigned char ucKey2 = pKey[1];
-        unsigned char* pEntry = reinterpret_cast<unsigned char*>(&unk3c);
-        do
-        {
-            if (ucKey2 == pEntry[-4])
-            {
-                unsigned char k = pKey[0];
-                if (k == pEntry[0])
-                {
-                    return reinterpret_cast<unsigned char*>(this)[8 * i + 0x3d];
-                }
-            }
-            pEntry += 8;
-            ++i;
-        } while (i < m_48);
-    }
-    return pKey[1] + m_30;
-}
 
 void __cdecl FUN_00d043c0(int value, int flag);
 
@@ -694,53 +567,6 @@ struct FUN_00d048e0_cls
 
     void ProcessPendingEntries(char* tbl);
 };
-
-// Scans entries from m_4c to m_50 then m_34 for pending flags, and if found decrements the entry's counter and calls FUN_00d043c0 with its m_78 value.
-// @fnv 0x00d048e0
-void FUN_00d048e0_cls::ProcessPendingEntries(char* tbl)
-{
-    unsigned char pending = 0;
-    int i = m_4c;
-    while (i < m_50)
-    {
-        if (*(int*)(tbl + 0x3c + i * 0x14) != 0)
-        {
-            pending = 1;
-            if (*(unsigned short*)(tbl + 0x22 + i * 2) != 0)
-            {
-                goto found;
-            }
-        }
-        ++i;
-    }
-    {
-        int end = m_34;
-        while (i < end)
-        {
-            if (*(int*)(tbl + 0x3c + i * 0x14) != 0)
-            {
-                goto scan;
-            }
-            ++i;
-        }
-    }
-    if (pending == 0)
-    {
-        return;
-    }
-scan:
-    for (i = m_4c; i < m_8c; ++i)
-    {
-        if (*(unsigned short*)(tbl + 0x22 + i * 2) != 0)
-        {
-            goto found;
-        }
-    }
-    return;
-found:
-    *(unsigned short*)(tbl + 0x22 + i * 2) += 0xffff;
-    FUN_00d043c0(((int*)((char*)this + 0x78))[i], 1);
-}
 
 struct __declspec(align(16)) D049D0LockInfo
 {
@@ -867,18 +693,6 @@ struct D049D0World
     void SetSimulationEnabled(int enabled);
 };
 
-// Locks the world, stores enabled into the simulation's m_enabled, disables it when enabled is false, then unlocks.
-// @fnv 0x00d049d0
-void D049D0World::SetSimulationEnabled(int enabled)
-{
-    D049D0LockInfo info;
-    void* lockHandle = lock(&info);
-    m_pSimulation->m_enabled = enabled;
-    if (!enabled)
-        disable(lockHandle);
-    unlock(lockHandle);
-}
-
 extern "C" void __cdecl FUN_00cb1260(void* dst, const void* src, int nbytes);
 
 struct __declspec(align(16)) D04B90Object
@@ -924,14 +738,6 @@ struct D04B90World
     void AddObjectCopy(const D04B90Object* object, void* userData);
 };
 
-// @fnv 0x00d04b90
-void D04B90World::AddObjectCopy(const D04B90Object* object, void* userData)
-{
-    D04B90Object copy;
-    FUN_00cb1260(&copy, object, object->m_usMemSizeAndFlags);
-    addCopy(&copy, userData);
-}
-
 void __cdecl GetProcessorCount(unsigned int* out);
 
 class FUN_00d05450_cls
@@ -948,21 +754,6 @@ class FUN_00d05450_cls
 
     FUN_00d05450_cls* Init();
 };
-
-// @fnv 0x00d05450
-FUN_00d05450_cls* FUN_00d05450_cls::Init()
-{
-    unsigned int value;
-    unsigned int* dst = &m_08;
-    *(volatile unsigned int*)&m_0c = 0;
-    *(volatile unsigned int*)&m_10 = 0;
-    *(volatile unsigned int*)&m_14 = 0x80000000u;
-    *(volatile unsigned int*)&m_00 = 1;
-    GetProcessorCount(&value);
-    *dst = value;
-    m_04 = 1;
-    return this;
-}
 
 // ---------------------------------------------------------------------------
 // InitHookTable
@@ -1032,53 +823,6 @@ extern void __cdecl hookD_00d968e0(void*, void*);
 // Two more registration helpers, both cdecl with one pointer argument.
 void __cdecl FUN_00da3400(TargetObj* p);
 void __cdecl FUN_00da3480(TargetObj* p);
-
-// Fills g_hookTable with hookDefault_00d01e50, raises p->unk60 to at least 2, registers two hook pairs via SetEntry, then calls FUN_00da3400 and FUN_00da3480.
-// @fnv 0x00d2cca0
-void __cdecl InitHookTable(TargetObj* apTarget)
-{
-    g_hookTable[0] = hookDefault_00d01e50;
-    g_hookTable[1] = hookDefault_00d01e50;
-    g_hookTable[2] = hookDefault_00d01e50;
-    g_hookTable[3] = hookDefault_00d01e50;
-    g_hookTable[4] = hookDefault_00d01e50;
-    g_hookTable[5] = hookDefault_00d01e50;
-    g_hookTable[6] = hookDefault_00d01e50;
-    g_hookTable[7] = hookDefault_00d01e50;
-    g_hookTable[8] = hookDefault_00d01e50;
-    g_hookTable[9] = hookDefault_00d01e50;
-    g_hookTable[10] = hookDefault_00d01e50;
-    g_hookTable[11] = hookDefault_00d01e50;
-    g_hookTable[12] = hookDefault_00d01e50;
-    g_hookTable[13] = hookDefault_00d01e50;
-    g_hookTable[14] = hookDefault_00d01e50;
-    g_hookTable[15] = hookDefault_00d01e50;
-    g_hookTable[16] = hookDefault_00d01e50;
-
-    // The array and the count are live across the branch below, so they are
-    // kept in callee saved registers and materialised in the entry block.
-    HookInfo info;
-    info.m_ppData = g_hookTable;
-    info.m_uiItemCount = 17;
-
-    if (apTarget->unk60 < 2)
-    {
-        apTarget->unk60 = 2;
-    }
-
-    apTarget->QueueOperation(0, 0xc, 1);
-
-    info.m_f1 = hookA_00d96600;
-    info.m_f2 = hookB_00d969e0;
-    apTarget->SetEntry(0, info);
-
-    info.m_f1 = hookC_00d967a0;
-    info.m_f2 = hookD_00d968e0;
-    apTarget->SetEntry(1, info);
-
-    FUN_00da3400(apTarget);
-    FUN_00da3480(apTarget);
-}
 
 struct D04A20Allocator;
 
@@ -1239,17 +983,6 @@ struct D04A20World
     void processPendingOperations();
     void QueueOperation(void* object, bool flag, int data);
 };
-
-// Appends an operation with the given object, flag and data to the pending array, then processes pending operations.
-// @fnv 0x00d04a20
-void D04A20World::QueueOperation(void* object, bool flag, int data)
-{
-    D04A20Operation& op = m_pPendingOperations.AllocatePair();
-    op.m_object = object;
-    op.m_flag = flag;
-    op.m_data = data;
-    processPendingOperations();
-}
 
 extern "C" __declspec(dllimport) unsigned long __stdcall TlsSetValue(unsigned long index, void* value);
 extern unsigned long g_dwTlsIndex;
@@ -1534,10 +1267,6 @@ extern "C" unsigned long _DAT_0126835c;
 extern "C" const char str_010ccd90[];
 extern "C" const char str_010c41f8[];
 
-static __forceinline short& Ref212(Registry* r, unsigned char sub)
-{
-    return reinterpret_cast<short*>(r)[sub];
-}
 struct LunaOwner : Owner
 {
     int LookupSpawnedEntry(Item* item);
@@ -1561,107 +1290,6 @@ struct LunaCallbackItem
     int unk0C;
     Item payload;
 };
-
-// When param_2 is nonzero, invokes the owner callback and inserts its payload; repeats FUN_00d05840 until it returns a value other than -1.
-// @fnv 0x00d04e80
-int LunaOwner::ProcessCallback(int param_2, int param_3, int param_4)
-{
-    union Phase212
-    {
-        volatile unsigned int tick;
-        Registry* registry;
-    };
-    Phase212 phase;
-    {
-        LunaTrace* trace = (LunaTrace*)TlsGetValue(_DAT_0126835c);
-        unsigned int* cursor = trace->current;
-        if (cursor < trace->end)
-        {
-            *cursor = (unsigned int)str_010ccd90;
-            _ReadWriteBarrier();
-            phase.tick = static_cast<unsigned int>(__rdtsc());
-            cursor[1] = phase.tick;
-            cursor += 3;
-            trace->current = cursor;
-        }
-    }
-
-    int result;
-    for (;;)
-    {
-        RequestContext context;
-        phase.registry = FUN_00d04400(&context);
-        int index = -1;
-        if (param_2 != 0)
-        {
-            LunaCallbackItem item;
-            typedef int(__cdecl * OwnerCallback)(Owner*, Registry*, int, LunaCallbackItem*);
-            if (((OwnerCallback)unk20)(this, phase.registry, param_2, &item) == 0)
-            {
-                index = LookupSpawnedEntry(&item.payload);
-                Bucket* bucket = &phase.registry->buckets[index];
-                int capacity = bucket->unk04;
-
-                if (item.unk00 == 0)
-                {
-                    if (bucket->unk10 >= capacity)
-                    {
-                        if (capacity == 0)
-                            bucket->FUN_00d056d0(8);
-                        else
-                            bucket->FUN_00d056d0(capacity * 2);
-                    }
-                    if (bucket->unk08 == 0)
-                        bucket->unk08 = bucket->unk04;
-                    --bucket->unk08;
-                    Item* destination = (Item*)(bucket->unk00 + bucket->unk08 * 0x80);
-                    *destination = item.payload;
-                    ++bucket->unk10;
-                }
-                else
-                {
-                    if (bucket->unk10 >= capacity)
-                    {
-                        if (capacity == 0)
-                            bucket->FUN_00d056d0(8);
-                        else
-                            bucket->FUN_00d056d0(capacity * 2);
-                    }
-                    if (bucket->unk0C == bucket->unk04)
-                        bucket->unk0C = 0;
-                    Item* destination = (Item*)(bucket->unk00 + bucket->unk0C * 0x80);
-                    *destination = item.payload;
-                    ++bucket->unk0C;
-                    ++bucket->unk10;
-                }
-            }
-
-            unsigned char sub = *(unsigned char*)(param_2 + 1);
-            --Ref212(phase.registry, sub);
-            param_2 = 0;
-        }
-
-        result = FUN_00d05840(index, phase.registry, param_4, param_3);
-        if (result != -1)
-            break;
-    }
-
-    {
-        LunaTrace* trace = (LunaTrace*)TlsGetValue(_DAT_0126835c);
-        unsigned int* cursor = trace->current;
-        if (cursor < trace->end)
-        {
-            *cursor = (unsigned int)str_010c41f8;
-            _ReadWriteBarrier();
-            volatile unsigned int stamp = static_cast<unsigned int>(__rdtsc());
-            cursor[1] = (unsigned int)stamp;
-            cursor += 3;
-            trace->current = cursor;
-        }
-    }
-
-    return result;
-}
 
 extern unsigned long DAT_0126835c;
 extern "C" void __cdecl FUN_00cb1260(void* dst, const void* src, int nbytes);
@@ -1694,94 +1322,6 @@ struct FUN_00d04bd0_cls : Owner
     void RemoveItemReference(int index, Registry* set);
     void AddJobBatch(ArrayOfJobs* jobs, int priority);
 };
-
-// Copies each job into a registry bucket, inserts it at the front or tail according to priority, and removes its item reference.
-// @fnv 0x00d04bd0
-void FUN_00d04bd0_cls::AddJobBatch(ArrayOfJobs* jobs, int priority)
-{
-    MonitorStream* stream = (MonitorStream*)TlsGetValue(DAT_0126835c);
-    TimerEntry* cur = (TimerEntry*)stream->m_cur;
-    if ((char*)cur < stream->m_kRayEnd)
-    {
-        cur->m_name = "TtAddJobBatch";
-        _ReadWriteBarrier();
-        volatile unsigned int tsc = (unsigned int)__rdtsc();
-        cur->m_uiCommandId = tsc;
-        stream->m_cur = (char*)(cur + 1);
-    }
-
-    RequestContext requestContext;
-    Registry* reg = this->FUN_00d04400(&requestContext);
-
-    for (int i = 0; i < jobs->m_iElementCount; i++)
-    {
-        void* pJob = jobs->m_data[i];
-        Item localJob;
-        FUN_00cb1260(&localJob, pJob, *(unsigned short*)((char*)pJob + 4));
-
-        int queueIdx = this->LookupSpawnedEntry(&localJob);
-
-        if (priority == 0)
-        {
-            Bucket* queue = &reg->buckets[queueIdx];
-            if (queue->unk10 >= queue->unk04)
-            {
-                if (queue->unk04 == 0)
-                {
-                    queue->FUN_00d056d0(8);
-                }
-                else
-                {
-                    queue->FUN_00d056d0(queue->unk04 + queue->unk04);
-                }
-            }
-            if (queue->unk08 == 0)
-            {
-                queue->unk08 = queue->unk04;
-            }
-            queue->unk08--;
-            *(Item*)((char*)queue->unk00 + (queue->unk08 << 7)) = localJob;
-            queue->unk10++;
-        }
-        else
-        {
-            Bucket* queue = &reg->buckets[queueIdx];
-            if (queue->unk10 >= queue->unk04)
-            {
-                if (queue->unk04 == 0)
-                {
-                    queue->FUN_00d056d0(8);
-                }
-                else
-                {
-                    queue->FUN_00d056d0(queue->unk04 + queue->unk04);
-                }
-            }
-            if (queue->unk0C == queue->unk04)
-            {
-                queue->unk0C = 0;
-            }
-            *(Item*)((char*)queue->unk00 + (queue->unk0C << 7)) = localJob;
-            queue->unk0C += 1;
-            queue->unk10 += 1;
-        }
-
-        this->RemoveItemReference(queueIdx, reg);
-    }
-
-    this->FUN_00d04420(reg);
-
-    MonitorStream* streamEnd = (MonitorStream*)TlsGetValue(DAT_0126835c);
-    TimerEntry* curEnd = (TimerEntry*)streamEnd->m_cur;
-    if ((char*)curEnd < streamEnd->m_kRayEnd)
-    {
-        curEnd->m_name = "Et";
-        _ReadWriteBarrier();
-        volatile unsigned int tscEnd = (unsigned int)__rdtsc();
-        curEnd->m_uiCommandId = tscEnd;
-        streamEnd->m_cur = (char*)(curEnd + 1);
-    }
-}
 
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long index);
 
@@ -1884,58 +1424,6 @@ struct S_00d05020_JobQueue
     int FUN_00d05020(int originalJobType, int priority, S_00d05020_Job& jobInOut, int waitStatus);
 };
 
-// Enqueues a job at the front or tail of a queue, then repeats FUN_00d05840 until it returns a value other than -1.
-// @fnv 0x00d05020
-int S_00d05020_JobQueue::FUN_00d05020(int aiJobType, int priority, S_00d05020_Job& jobInOut, int waitStatus)
-{
-    volatile unsigned int tick;
-    {
-        MonitorStream* s = (MonitorStream*)TlsGetValue(hkMonitorStreamTls);
-        if (s->m_cur < s->m_kRayEnd)
-        {
-            TimerEntry* h = (TimerEntry*)s->m_cur;
-            h->m_name = "TtGetNextJob";
-            _ReadWriteBarrier();
-            tick = (unsigned int)__rdtsc();
-            h->m_uiCommandId = tick;
-            s->m_cur = (char*)(h + 1);
-        }
-    }
-    RequestContext dynamicDataStorage;
-    bool jobToAdd = true;
-    int result;
-    do
-    {
-        S_00d05020_DynamicData* data = FUN_00d04400((char*)&dynamicDataStorage);
-        int queueIndex = -1;
-        if (jobToAdd)
-        {
-            data->m_sQueueCounts[aiJobType]--;
-            queueIndex = LookupSpawnedEntry(jobInOut);
-            S_00d05020_Queue& queue = data->m_kQueues[queueIndex];
-            if (priority == 0)
-                queue.enqueueInFront(jobInOut);
-            else
-                queue.enqueue(jobInOut);
-            jobToAdd = false;
-        }
-        result = FUN_00d05840(queueIndex, data, waitStatus, jobInOut);
-    } while (result == -1);
-    {
-        MonitorStream* s = (MonitorStream*)TlsGetValue(hkMonitorStreamTls);
-        if (s->m_cur < s->m_kRayEnd)
-        {
-            TimerEntry* h = (TimerEntry*)s->m_cur;
-            h->m_name = "Et";
-            _ReadWriteBarrier();
-            tick = (unsigned int)__rdtsc();
-            h->m_uiCommandId = tick;
-            s->m_cur = (char*)(h + 1);
-        }
-    }
-    return result;
-}
-
 namespace fnv_00df8570 {
 typedef unsigned long DWORD;
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(DWORD);
@@ -2034,66 +1522,6 @@ struct S00df8570_Enc
 };
 extern "C" void __cdecl InitSplitChunks(int resource, int total, int options, int base, int count,
                                         S00df8570_Rec* records);
-// Writes trace markers, copies input fields into records, calls InitSplitChunks, encodes and inserts items, then calls ProcessCallback and returns its result.
-// @fnv 0x00df8570
-int __cdecl FUN_00df8570(S00df8570_Enc* encoder, S00df8570_Input* input)
-{
-    volatile unsigned int stamp;
-    int output;
-    {
-        S00df8570_Trace* trace = static_cast<S00df8570_Trace*>(TlsGetValue(DAT_0126835c));
-        unsigned int* next = trace->next;
-        if (next < trace->end)
-        {
-            next[0] = reinterpret_cast<unsigned int>(str_010dba98);
-            _ReadWriteBarrier();
-            stamp = static_cast<unsigned int>(__rdtsc());
-            next[1] = stamp;
-            trace->next = next + 3;
-        }
-    }
-    __declspec(align(16)) S00df8570_Rec records[4];
-    int count = input->entryCount;
-    if (count > 4)
-        count = 4;
-    *input->outCount = count;
-    if (count > 0)
-    {
-        records[0].m14 = reinterpret_cast<int>(input->outCount);
-        records[0].m10 = input->m10;
-        records[0].m1c = input->m1c;
-        records[0].m20 = input->m20;
-        records[0].m24 = input->m24;
-        records[0].m38 = input->entryCount;
-        records[0].m28 = input->m28;
-        records[0].m2c = input->m2c;
-        records[0].m30 = input->m30;
-        records[0].m3c = input->m3c;
-        records[0].m34 = input->m34;
-        records[0].m40 = input->m40;
-        records[0].m60 = 1;
-        InitSplitChunks(input->m50, input->entryCount, input->m20, input->m10, count, records);
-        S00df8570_Result result;
-        output = (int)encoder->FUN_00d04400(&result);
-        for (int i = 0; i < count; ++i)
-            encoder->InsertItemAndNotify(output, &records[i], 0);
-        encoder->FUN_00d04420(output);
-    }
-    int iResult = encoder->ProcessCallback(input, input, 0);
-    {
-        S00df8570_Trace* trace = static_cast<S00df8570_Trace*>(TlsGetValue(DAT_0126835c));
-        unsigned int* next = trace->next;
-        if (next < trace->end)
-        {
-            next[0] = reinterpret_cast<unsigned int>(str_010c41f8);
-            _ReadWriteBarrier();
-            reinterpret_cast<volatile unsigned int&>(output) = static_cast<unsigned int>(__rdtsc());
-            next[1] = reinterpret_cast<volatile unsigned int&>(output);
-            trace->next = next + 3;
-        }
-    }
-    return iResult;
-}
 }  // namespace fnv_00df8570
 
 namespace fnv_00d04b50 {
@@ -2116,15 +1544,6 @@ struct Owner
     void FUN_00d04420(Buffer* work);
     void FUN_00d04b50(void* first, unsigned int second);
 };
-// Passes a stack Buffer to FUN_00d04400, calls InsertItemAndNotify with its result and the arguments, then passes that result to FUN_00d04420.
-// @fnv 0x00d04b50
-void Owner::FUN_00d04b50(void* first, unsigned int second)
-{
-    Buffer scratch;
-    Buffer* work = FUN_00d04400(&scratch);
-    InsertItemAndNotify(work, first, second);
-    FUN_00d04420(work);
-}
 }  // namespace fnv_00d04b50
 
 namespace fnv_00d055c0 {
@@ -2315,41 +1734,6 @@ struct S_00d055c0_Obj
     void FUN_00d055c0();
 };
 
-// Releases the pool and handle objects, clears and deallocates Arr12 storage, calls ClearLists, then calls DAT_00fdf058 with this.
-// @fnv 0x00d055c0
-void S_00d055c0_Obj::FUN_00d055c0()
-{
-    S_00d055c0_Pool* pool = unk18;
-    if (pool)
-    {
-        S_00d055c0_Elem* p = pool->e + 16;
-        int n = 15;
-        do
-        {
-            p--;
-            p->FUN_00d056a0();
-        } while (--n >= 0);
-        FUN_00c85750()->heap().ReleaseBlock(pool, 0x170);
-    }
-    if (unk74)
-    {
-        for (int i = 0; i < unk8c; i++)
-        {
-            S_00d055c0_Handle* h = unk78[i];
-            if (h)
-            {
-                h->FUN_00d04370();
-                FUN_00c85750()->heap().ReleaseBlock(h, 4);
-            }
-        }
-    }
-    {
-        S_00d055c0_Heap& heap = FUN_00c85750()->heap();
-        unk1a0._clearAndDeallocate(heap);
-    }
-    unk58.ClearLists();
-    DAT_00fdf058(this);
-}
 }  // namespace fnv_00d055c0
 
 namespace fnv_00d889f0 {
@@ -2410,33 +1794,6 @@ struct AllocHolder
 void* FUN_00d883c0(void* a1, unsigned int a2, unsigned int a3, ScratchBlock* a4);
 AllocHolder* FUN_00c85750();
 
-// Initializes fields of a local ScratchBlock, passes it to FUN_00d883c0, then conditionally calls vSlot10 on m_pAllocator.
-// @fnv 0x00d889f0
-void* __cdecl FUN_00d889f0(void* a1)
-{
-    __declspec(align(16)) ScratchBlock s;
-    s.unk0C = 1;
-    s.unk10 = 1;
-    s.unk14 = 0;
-    s.unk18 = 0;
-    s.unk1C = 0;
-    s.unk5C = 0;
-    s.unk60 = 0;
-    s.unk68 = 0;
-    s.unk6C = 0;
-    s.unk70 = 0;
-    s.unk74 = 0;
-    s.unk78 = 0;
-    s.unk64 = 0x80000000u;
-    s.unk7C = 0;
-    void* obj = FUN_00d883c0(a1, 0, 0, &s);
-    AllocHolder* pAllocHolder = FUN_00c85750();
-    SlotAllocator* alloc = pAllocHolder->m_pAllocator;
-    unsigned int flag = s.unk64;
-    if ((flag & 0x80000000u) == 0)
-        alloc->vSlot10(s.unk5C, (flag & 0x3FFFFFFFu) * 4);
-    return obj;
-}
 }  // namespace fnv_00d889f0
 
 extern unsigned long DAT_0126835c;
@@ -2489,54 +1846,6 @@ class Worker
     void FUN_00d04d80(TraceArg* p, int flag);
 };
 
-// Records trace markers, runs the job callback on a pool node, inserts the result item, syncs, and releases the node.
-// @fnv 0x00d04d80
-void Worker::FUN_00d04d80(TraceArg* apTraceArg, int flag)
-{
-    volatile unsigned long tick;
-    JobOut out;
-    Item item;
-    RequestContext ctx;
-
-    TraceBuffer* pTraceBuf = (TraceBuffer*)TlsGetValue(DAT_0126835c);
-    if (pTraceBuf->m_pCur < pTraceBuf->m_pRecordEnd)
-    {
-        TraceRecord* pTraceRec = pTraceBuf->m_pCur;
-        pTraceRec->m_pName = kTraceFinishJob;
-        _ReadWriteBarrier();
-        tick = (unsigned long)__rdtsc();
-        pTraceRec->m_iTick = tick;
-        pTraceBuf->m_pCur = pTraceRec + 1;
-    }
-
-    PoolSet* pPoolNode = GetNode(&ctx);
-    if (m_pfn20(this, pPoolNode, apTraceArg, &out.m_iResultCode) == 0)
-    {
-        int idx = FindIndex(&item);
-        if (out.m_iResultCode == 0)
-            pPoolNode->m_pools[idx].Insert(item);
-        else
-            pPoolNode->m_pools[idx].Insert2(item);
-        Sync(idx, pPoolNode);
-    }
-
-    if (flag == 0)
-        --((short*)pPoolNode)[apTraceArg->m_uiEdgeIndex];  // per-index reference counts open the pool set
-
-    Release(pPoolNode);
-
-    pTraceBuf = (TraceBuffer*)TlsGetValue(DAT_0126835c);
-    if (pTraceBuf->m_pCur < pTraceBuf->m_pRecordEnd)
-    {
-        TraceRecord* pTraceRec = pTraceBuf->m_pCur;
-        pTraceRec->m_pName = kTraceEnd;
-        _ReadWriteBarrier();
-        tick = (unsigned long)__rdtsc();
-        pTraceRec->m_iTick = tick;
-        pTraceBuf->m_pCur = pTraceRec + 1;
-    }
-}
-
 struct __declspec(align(16)) DispatchJob
 {
     unsigned char m_eSubtype;
@@ -2575,12 +1884,6 @@ struct __declspec(align(16)) DispatchJob
     int unk7C;
 };
 
-__forceinline unsigned int ReadTick(volatile unsigned int* tick)
-{
-    *tick = (unsigned int)__rdtsc();
-    return *tick;
-}
-
 struct TimerSamples
 {
     volatile unsigned int cloth;
@@ -2607,169 +1910,6 @@ struct Dispatcher : FUN_00d05490
     int FUN_00d051b0();
 };
 
-// Fetches and executes a loop of DispatchJob entries, recording start and end ticks into the TLS MonitorStream for each job type.
-// @fnv 0x00d051b0
-int Dispatcher::FUN_00d051b0()
-{
-    TimerSamples samples;
-    DispatchJob job;
-    int result = ((JobFetchView*)this)->ForwardWithZero((int)&job, 0);
-    if (result != 0)
-        return result;
-    do
-    {
-        switch (job.m_type)
-        {
-        case 0: {
-            MonitorStream* stream = (MonitorStream*)TlsGetValue(DAT_0126835c);
-            TimerEntry* cur = (TimerEntry*)stream->m_cur;
-            if ((char*)cur < stream->m_kRayEnd)
-            {
-                cur->m_name = "TtPhysics";
-                _ReadWriteBarrier();
-                cur->m_uiCommandId = ReadTick(&samples.physics);
-                stream->m_cur = (char*)(cur + 1);
-            }
-        }
-        break;
-        case 1: {
-            MonitorStream* stream = (MonitorStream*)TlsGetValue(DAT_0126835c);
-            TimerEntry* cur = (TimerEntry*)stream->m_cur;
-            if ((char*)cur < stream->m_kRayEnd)
-            {
-                cur->m_name = "TtPhysics";
-                _ReadWriteBarrier();
-                cur->m_uiCommandId = ReadTick(&samples.physicsSecondary);
-                stream->m_cur = (char*)(cur + 1);
-            }
-        }
-        break;
-        case 2: {
-            MonitorStream* stream = (MonitorStream*)TlsGetValue(DAT_0126835c);
-            TimerEntry* cur = (TimerEntry*)stream->m_cur;
-            if ((char*)cur < stream->m_kRayEnd)
-            {
-                cur->m_name = "TtCollision Query";
-                _ReadWriteBarrier();
-                cur->m_uiCommandId = ReadTick(&samples.collision);
-                stream->m_cur = (char*)(cur + 1);
-            }
-        }
-        break;
-        case 3: {
-            MonitorStream* stream = (MonitorStream*)TlsGetValue(DAT_0126835c);
-            TimerEntry* cur = (TimerEntry*)stream->m_cur;
-            if ((char*)cur < stream->m_kRayEnd)
-            {
-                cur->m_name = "TtRayCast Query";
-                _ReadWriteBarrier();
-                cur->m_uiCommandId = ReadTick(&samples.raycast);
-                stream->m_cur = (char*)(cur + 1);
-            }
-        }
-        break;
-        case 4: {
-            MonitorStream* stream = (MonitorStream*)TlsGetValue(DAT_0126835c);
-            TimerEntry* cur = (TimerEntry*)stream->m_cur;
-            if ((char*)cur < stream->m_kRayEnd)
-            {
-                cur->m_name = "TtAnimation";
-                _ReadWriteBarrier();
-                cur->m_uiCommandId = ReadTick(&samples.animation);
-                stream->m_cur = (char*)(cur + 1);
-            }
-        }
-        break;
-        case 5: {
-            MonitorStream* stream = (MonitorStream*)TlsGetValue(DAT_0126835c);
-            TimerEntry* cur = (TimerEntry*)stream->m_cur;
-            if ((char*)cur < stream->m_kRayEnd)
-            {
-                cur->m_name = "TtBehavior";
-                _ReadWriteBarrier();
-                cur->m_uiCommandId = ReadTick(&samples.behavior);
-                stream->m_cur = (char*)(cur + 1);
-            }
-        }
-        break;
-        case 6: {
-            MonitorStream* stream = (MonitorStream*)TlsGetValue(DAT_0126835c);
-            TimerEntry* cur = (TimerEntry*)stream->m_cur;
-            if ((char*)cur < stream->m_kRayEnd)
-            {
-                cur->m_name = "TtCloth";
-                _ReadWriteBarrier();
-                cur->m_uiCommandId = ReadTick(&samples.cloth);
-                stream->m_cur = (char*)(cur + 1);
-            }
-        }
-        break;
-        case 7: {
-            MonitorStream* stream = (MonitorStream*)TlsGetValue(DAT_0126835c);
-            TimerEntry* cur = (TimerEntry*)stream->m_cur;
-            if ((char*)cur < stream->m_kRayEnd)
-            {
-                cur->m_name = "TtPathfinding";
-                _ReadWriteBarrier();
-                cur->m_uiCommandId = ReadTick(&samples.pathfinding);
-                stream->m_cur = (char*)(cur + 1);
-            }
-        }
-        break;
-        case 9: {
-            MonitorStream* stream = (MonitorStream*)TlsGetValue(DAT_0126835c);
-            TimerEntry* cur = (TimerEntry*)stream->m_cur;
-            if ((char*)cur < stream->m_kRayEnd)
-            {
-                cur->m_name = "TtCharacter Proxy";
-                _ReadWriteBarrier();
-                cur->m_uiCommandId = ReadTick(&samples.characterProxy);
-                stream->m_cur = (char*)(cur + 1);
-            }
-        }
-        break;
-        case 10: {
-            MonitorStream* stream = (MonitorStream*)TlsGetValue(DAT_0126835c);
-            TimerEntry* cur = (TimerEntry*)stream->m_cur;
-            if ((char*)cur < stream->m_kRayEnd)
-            {
-                cur->m_name = "TtUserJob";
-                _ReadWriteBarrier();
-                cur->m_uiCommandId = ReadTick(&samples.userJob);
-                stream->m_cur = (char*)(cur + 1);
-            }
-        }
-        break;
-        default: {
-            MonitorStream* stream = (MonitorStream*)TlsGetValue(DAT_0126835c);
-            TimerEntry* cur = (TimerEntry*)stream->m_cur;
-            if ((char*)cur < stream->m_kRayEnd)
-            {
-                cur->m_name = "TtUnknownJobs";
-                _ReadWriteBarrier();
-                cur->m_uiCommandId = ReadTick(&samples.unknownJob);
-                stream->m_cur = (char*)(cur + 1);
-            }
-        }
-        break;
-        }
-        typedef int(__cdecl * Handler)(Dispatcher*, DispatchJob*);
-        result = ((Handler*)m_slots[job.m_type].m_i00)[job.m_eSubtype](this, &job);
-        {
-            MonitorStream* stream = (MonitorStream*)TlsGetValue(DAT_0126835c);
-            TimerEntry* cur = (TimerEntry*)stream->m_cur;
-            if ((char*)cur < stream->m_kRayEnd)
-            {
-                cur->m_name = "Et";
-                _ReadWriteBarrier();
-                cur->m_uiCommandId = ReadTick(&samples.end);
-                stream->m_cur = (char*)(cur + 1);
-            }
-        }
-    } while (result == 0);
-    return result;
-}
-
 extern "C" __declspec(dllimport) void __stdcall EnterCriticalSection(void* section);
 
 struct QueueLockView : Owner
@@ -2777,22 +1917,9 @@ struct QueueLockView : Owner
     Registry* FUN_00d04400(RequestContext* storage);
 };
 
-// @fnv 0x00d04400
-Registry* QueueLockView::FUN_00d04400(RequestContext*)
-{
-    EnterCriticalSection(this);
-    return reinterpret_cast<Registry*>(unk18);
-}
-
 extern "C" __declspec(dllimport) void __stdcall LeaveCriticalSection(void* section);
 
 struct CriticalSectionOwner
 {
     void FUN_00d04420(Registry* data);
 };
-
-// @fnv 0x00d04420
-void CriticalSectionOwner::FUN_00d04420(Registry* data)
-{
-    LeaveCriticalSection(this);
-}

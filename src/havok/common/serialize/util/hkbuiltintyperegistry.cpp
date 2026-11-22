@@ -11,14 +11,6 @@ struct hkDefaultBuiltinTypeRegistry
     hkDefaultBuiltinTypeRegistry* Initialize();
 };
 extern int DAT_010cf78c;
-// @fnv 0x00d478c0
-hkDefaultBuiltinTypeRegistry* hkDefaultBuiltinTypeRegistry::Initialize()
-{
-    *(unsigned short*)((char*)this + 6) = 1;
-    v = &DAT_010cf78c;
-    FUN_00d47860();
-    return this;
-}
 
 struct FUN_00d479e0_class
 {
@@ -139,14 +131,6 @@ struct FUN_00d47c60_class
     DepthLimit z;
     void FUN_00d47c60(void* key, int def);
 };
-// Gets the memory router, takes its manager's first field as a pointer, and passes it with key and def to FUN_00cb1870.
-// @fnv 0x00d47c60
-void FUN_00d47c60_class::FUN_00d47c60(void* key, int aiDefault)
-{
-    MemoryRouter* r = D1A0E0GetMemoryRouter();
-    void* p = (void*)r->j.a;
-    z.FUN_00cb1870(p, key, aiDefault);
-}
 
 extern int DAT_01269b18;
 
@@ -269,20 +253,6 @@ struct hkObjD479
     int m_18;
     hkEntryD479* FindEntryAndCall(void* a, void* key);
 };
-
-// Looks up key in m_map; if found, calls the entry's m_func with a and m_18, then returns the entry, else returns 0.
-// @fnv 0x00d47900
-hkEntryD479* hkObjD479::FindEntryAndCall(void* apArg, void* key)
-{
-    hkEntryD479* p = (hkEntryD479*)m_map.GetValue(key, 0);
-    if (p)
-    {
-        if (p->m_func)
-            p->m_func(apArg, m_18);
-        return p;
-    }
-    return 0;
-}
 
 struct FUN_00d47940_Result
 {
@@ -407,19 +377,6 @@ struct RegistryImpl : RegistryBase
     EmbeddedRegistry embedded;
     RegistryImpl* DestroyRegistry(unsigned int flags);
 };
-// Destroys the embedded registry and base, then if flags bit 0 is set releases this object through the Havok heap using allocatedSize.
-// @fnv 0x00d47b30
-RegistryImpl* RegistryImpl::DestroyRegistry(unsigned int flags)
-{
-    embedded.~EmbeddedRegistry();
-    RegistryBase::~RegistryBase();
-    if (flags & 1)
-    {
-        HavokRouter* router = FUN_00c85750();
-        router->heap->release(this, allocatedSize);
-    }
-    return this;
-}
 
 namespace fnv_00d47bb0 {
 struct D47Array
@@ -454,28 +411,6 @@ struct D47Owner
     D47Map entries;
     void AppendEntryValues(D47Array* values);
 };
-// Iterates the entries map and appends each entry's value to the values array, growing it via the router's heap when full.
-// @fnv 0x00d47bb0
-void D47Owner::AppendEntryValues(D47Array* values)
-{
-    unsigned char hasItem;
-    int iterator = entries.FUN_00d87410();
-    entries.SetBoolFromThreshold(&hasItem, iterator);
-    while (hasItem)
-    {
-        int value = entries.FUN_00d87440(iterator);
-        D47Router* router = FUN_00c85750();
-        if (values->count == (values->capacityAndFlags & 0x3fffffff))
-        {
-            ResizeAudioStream(router->heap, values, 4);
-        }
-        int* insertion = values->data + values->count;
-        ++values->count;
-        *insertion = value;
-        iterator = entries.FindNextUsedSlot(iterator);
-        entries.SetBoolFromThreshold(&hasItem, iterator);
-    }
-}
 }  // namespace fnv_00d47bb0
 
 namespace fnv_00d47c90 {
@@ -506,21 +441,6 @@ struct FUN_00d47c90_cls
     Sub sub;
     FUN_00d47c90_cls* Destroy(unsigned char flags);
 };
-// @fnv 0x00d47c90
-FUN_00d47c90_cls* FUN_00d47c90_cls::Destroy(unsigned char flags)
-{
-    sub.ProcessArgument(FUN_00c85750()->alloc);
-    sub.FUN_00a29680();
-    vptr = &DAT_0102e388;
-    Holder* h;
-    if (flags & 1)
-    {
-        h = FUN_00c85750();
-        Alloc* a = h->alloc;
-        a->Free(this, size);
-    }
-    return this;
-}
 }  // namespace fnv_00d47c90
 
 namespace fnv_00d47ce0 {
@@ -625,13 +545,6 @@ class FUN_00d47ce0_class
     void CollectMapValues(hkArrayD47C<int>& kValuesOut) const;
 };
 
-// Iterates the pointer map and appends each valid entry's value to kValuesOut.
-// @fnv 0x00d47ce0
-void FUN_00d47ce0_class::CollectMapValues(hkArrayD47C<int>& kValuesOut) const
-{
-    for (hkMapIteratorD47C it = m_map.GetFirstIterator(); m_map.isValid(it); it = m_map.getNext(it))
-        kValuesOut.AddBack(m_map.getValue(it));
-}
 }  // namespace fnv_00d47ce0
 
 namespace fnv_00d47d70 {
@@ -704,67 +617,6 @@ struct Obj3
     DepthHelper depth;
 };
 
-// @fnv 0x00d47d70
-void FUN_00d47d70_class::InitGlobalObjects()
-{
-    union
-    {
-        unsigned int i;
-        signed char c;
-    } u;
-
-    Obj1* p;
-    p = (Obj1*)FUN_00c85750()->alloc(0x20);
-    p->GetAllocationSize = 0x20;
-    p->refCount = 1;
-    p->vtable = &DAT_010cf7d4;
-    p->name = str_010cf830;
-    u.c = 0;
-    p->map.FUN_00d87790(u.i);
-    p->vtable = &DAT_010cf804;
-
-    if (DAT_01269b14)
-    {
-        ReleaseReference((void*)DAT_01269b14);
-    }
-    DAT_01269b14 = (int)p;
-
-    Obj2* n;
-    n = (Obj2*)FUN_00c85750()->alloc(0x1c);
-    n->GetAllocationSize = 0x1c;
-    n->refCount = 1;
-    u.c = 0;
-    n->vtable = &DAT_010cf7b0;
-    n->map.FUN_00d87790(u.i);
-    n->flag = 1;
-
-    if (DAT_01269b18)
-    {
-        ReleaseReference((void*)DAT_01269b18);
-    }
-    DAT_01269b18 = (int)n;
-
-    Obj3* kIter;
-    kIter = (Obj3*)FUN_00c85750()->alloc(0x14);
-    kIter->GetAllocationSize = 0x14;
-    kIter->refCount = 1;
-    kIter->vtable = &DAT_010cf844;
-    DepthHelper* pDepth;
-    pDepth = &kIter->depth;
-    pDepth->d0 = 0;
-    pDepth->d1 = 0;
-    pDepth->d2 = -1;
-    MyRouter* r = FUN_00c85750();
-    pDepth->EnsureCapacity(r->heap, 0);
-
-    if (DAT_01269b10)
-    {
-        ReleaseReference((void*)DAT_01269b10);
-    }
-    DAT_01269b10 = (int)kIter;
-
-    FUN_00d47860();
-}
 }  // namespace fnv_00d47d70
 
 namespace fnv_00d47eb0 {
@@ -864,15 +716,6 @@ class hkpEntityContainerD47E
     void AddEntitiesFromSource(hkpEntitySourceD47E* pkSource) throw();
 };
 
-// Collects entities from pkSource into a local array and adds each one to this container with flags 0.
-// @fnv 0x00d47eb0
-void hkpEntityContainerD47E::AddEntitiesFromSource(hkpEntitySourceD47E* pkSource) throw()
-{
-    hkArrayD47E<hkpEntityD47E*> kEntities;
-    pkSource->GetEntities(kEntities);
-    for (int i = 0; i < kEntities.m_iElementCount; i++)
-        RegisterEntity(kEntities.m_data[i], 0);
-}
 }  // namespace fnv_00d47eb0
 
 class hkMemoryAllocatorD47B
@@ -930,17 +773,6 @@ class hkObjectD47B : public hkReferencedObjectD47B
     hkObjectD47B* FUN_00d47b70(unsigned int uiFlags) throw();
 };
 
-// Frees the member buffer, runs the base destructor, and optionally deallocates the object when uiFlags has bit 0 set.
-// @fnv 0x00d47b70
-hkObjectD47B* hkObjectD47B::FUN_00d47b70(unsigned int uiFlags) throw()
-{
-    m_kMemberDescriptor.FreeBuffer();
-    this->hkReferencedObjectD47B::~hkReferencedObjectD47B();
-    if (uiFlags & 1)
-        hkReferencedObjectD47B::operator delete(this);
-    return this;
-}
-
 // @fnv 0x00d47860
 struct DefaultNameRegistry
 {
@@ -969,16 +801,3 @@ struct NameRegistryTable
 extern int DAT_01268b0c;
 extern void* DAT_010d5430[];
 extern int DAT_010d59b8;
-void __fastcall FUN_00d47860(void*)
-{
-    DefaultNameRegistry* reg = (DefaultNameRegistry*)DAT_01269b14;
-    reg->registerName(&DAT_01268b0c);
-    RuntimeTypeInfoRegistry* types = (RuntimeTypeInfoRegistry*)DAT_01269b18;
-    void** curr = DAT_010d5430;
-    while (*curr)
-    {
-        types->registerType(*curr);
-        ++curr;
-    }
-    ((NameRegistryTable*)DAT_01269b10)->FUN_00db78a0(DAT_010d5430, &DAT_010d59b8);
-}

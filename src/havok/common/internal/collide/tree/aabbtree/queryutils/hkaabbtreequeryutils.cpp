@@ -75,70 +75,15 @@ struct S_00d1bcb0
     bool FUN_00d1bcb0(int a, int b);
 };
 
-// @fnv 0x00d1bcb0
-bool S_00d1bcb0::FUN_00d1bcb0(int iFirst, int iSecond)
-{
-    S_00d1bcb0_Entry e;
-    e.m_kPointA = iFirst;
-    e.m_kPointB = iSecond;
-    m_ppData->AddBack(e);
-    return false;
-}
-
 extern int __cdecl FUN_00d1c560(void*, int, int, int, int, int);
-
-// Returns 0 if arg0 is null, otherwise forwards arg0, arg1 and arg2 to FUN_00d1c560 with the remaining arguments zeroed.
-// @fnv 0x00d1d4a0
-int __cdecl CallWithDefaults(void* arg0, int arg1, int arg2)
-{
-    if (!arg0)
-        return 0;
-    return FUN_00d1c560(arg0, arg1, 0, arg2, 0, 0);
-}
 
 int __cdecl FUN_00d1c560(void* a, void* b, int c, int d, void* e, void* f);
 
-// Returns 0 if a is null, otherwise forwards a, b, e and f to FUN_00d1c560 with c and d set to 0.
-// @fnv 0x00d1d4d0
-int __cdecl FUN_00d1d4d0(void* a, void* apArg2, void* apArg5, void* apArg6)
-{
-    if (!a)
-        return 0;
-    return FUN_00d1c560(a, apArg2, 0, 0, apArg5, apArg6);
-}
-
 extern int __cdecl FUN_00d1c560(void*, int, int, int, int, int);
-
-// If arg0 is non-null, forwards it with arg1 and arg2 plus three zero arguments to FUN_00d1c560 and returns its result; otherwise returns 0.
-// @fnv 0x00d1d500
-int __cdecl FUN_00d1d500(void* arg0, int arg1, int arg2)
-{
-    if (!arg0)
-        return 0;
-    return FUN_00d1c560(arg0, arg1, arg2, 0, 0, 0);
-}
 
 extern "C" void* __cdecl FUN_00d1ce50(void* p, int a, int b, int c, int d, int e);
 
-// If p is non-null, forwards it to FUN_00d1ce50 with zeroed middle arguments and returns the result; otherwise returns 0.
-// @fnv 0x00d1d540
-extern "C" void* __cdecl FUN_00d1d540(void* p, int aiArg1, int aiArg4, int aiArg5)
-{
-    if (!p)
-        return 0;
-    return FUN_00d1ce50(p, aiArg1, 0, 0, aiArg4, aiArg5);
-}
-
 extern "C" void* __cdecl FUN_00d1d240(void* p, int a, int b, int c, int d, int e);
-
-// If p is non-null, forwards it to FUN_00d1d240 with a, b and three zero arguments; otherwise returns p unchanged.
-// @fnv 0x00d1d570
-extern "C" void* __cdecl FUN_00d1d570(void* p, int aiArg1, int aiArg2)
-{
-    if (!p)
-        return p;
-    return FUN_00d1d240(p, aiArg1, aiArg2, 0, 0, 0);
-}
 
 extern "C" void __cdecl FUN_00d1ca00();
 // @fnv 0x00d1d530
@@ -227,102 +172,6 @@ struct DIntArray
     }
 };
 extern float DAT_01011d78;
-
-// Traverses the tree, reporting overlapping leaves to a visitor or storing their child-atom values in an output array.
-// @fnv 0x00d1d240
-extern "C" void* __cdecl FUN_00d1d240(void* apOwner, int apQueryBox, int apVisitor, int apIntArray, int apOutArray,
-                                      int aiMaxCount)
-{
-    DOwner* owner = (DOwner*)apOwner;
-    DNode* node = owner->m_pTreeNode;
-    if (!node)
-        return 0;
-    int count = 0;
-    __m128 lo;
-    __m128 hi;
-    if (apVisitor)
-    {
-        for (;;)
-        {
-            lo = node->m_ucLowNibble;
-            hi = node->m_ucHighNibble;
-            DNode* next = node->m_nextId != 0x7fffffff ? owner->m_uiEdgeIndex.FUN_00d9a4c0(node->m_nextId) : 0;
-            int mask = _mm_movemask_ps(_mm_and_ps(_mm_cmple_ps(((DBox*)apQueryBox)->m_ucLowNibble, hi),
-                                                  _mm_cmple_ps(lo, ((DBox*)apQueryBox)->m_ucHighNibble)));
-            if ((mask & 7) == 7)
-            {
-                if (!(node->m_flags & 0x80000000))
-                {
-                    node = owner->m_uiEdgeIndex.FUN_00d9a4c0(node->m_pChildAtom);
-                    continue;
-                }
-                {
-                    DVisitor* pVisitor = (DVisitor*)apVisitor;
-                    if (pVisitor->visit(node) == 0.0f)
-                        return (void*)count;
-                }
-                count++;
-            }
-            node = next;
-            if (!node)
-                break;
-        }
-    }
-    else if (apOutArray)
-    {
-        int** ppOut = (int**)apOutArray;
-        for (;;)
-        {
-            lo = node->m_ucLowNibble;
-            hi = node->m_ucHighNibble;
-            DNode* next = node->m_nextId != 0x7fffffff ? owner->m_uiEdgeIndex.FUN_00d9a4c0(node->m_nextId) : 0;
-            int mask = _mm_movemask_ps(_mm_and_ps(_mm_cmple_ps(((DBox*)apQueryBox)->m_ucLowNibble, hi),
-                                                  _mm_cmple_ps(lo, ((DBox*)apQueryBox)->m_ucHighNibble)));
-            if ((mask & 7) == 7)
-            {
-                if (!(node->m_flags & 0x80000000))
-                {
-                    node = owner->m_uiEdgeIndex.FUN_00d9a4c0(node->m_pChildAtom);
-                    continue;
-                }
-                **ppOut = node->m_pChildAtom;
-                (*ppOut)++;
-                if (count >= aiMaxCount)
-                    break;
-                count++;
-            }
-            node = next;
-            if (!node)
-                break;
-        }
-    }
-    else if (apIntArray)
-    {
-        DIntArray* array = (DIntArray*)apIntArray;
-        for (;;)
-        {
-            lo = node->m_ucLowNibble;
-            hi = node->m_ucHighNibble;
-            DNode* next = node->m_nextId != 0x7fffffff ? owner->m_uiEdgeIndex.FUN_00d9a4c0(node->m_nextId) : 0;
-            int mask = _mm_movemask_ps(_mm_and_ps(_mm_cmple_ps(((DBox*)apQueryBox)->m_ucLowNibble, hi),
-                                                  _mm_cmple_ps(lo, ((DBox*)apQueryBox)->m_ucHighNibble)));
-            if ((mask & 7) == 7)
-            {
-                if (!(node->m_flags & 0x80000000))
-                {
-                    node = owner->m_uiEdgeIndex.FUN_00d9a4c0(node->m_pChildAtom);
-                    continue;
-                }
-                array->AddBack(node->m_pChildAtom);
-                count++;
-            }
-            node = next;
-            if (!node)
-                break;
-        }
-    }
-    return (void*)count;
-}
 
 namespace fnv_00d1d5a0 {
 union __declspec(intrin_type) __declspec(align(16)) __m128
@@ -459,113 +308,6 @@ struct TreePairArray
     }
 };
 
-// Performs a simultaneous traversal of two AABB trees, collecting overlapping leaf pairs into pairsOut and returning the count.
-// @fnv 0x00d1d5a0
-int FUN_00d1d5a0(AabbTree* treeA, AabbTree* treeB, TreePairArray* pairsOut)
-{
-    if (treeA->m_iNodeCount == 0 || treeB->m_iNodeCount == 0)
-    {
-        return 0;
-    }
-
-    int stackCap = 64;
-    TreePairStack pairStack;
-    pairStack.SetSizeAndGrow(stackCap);
-    TreePair rootPair = {treeA->m_rootIndex, treeB->m_rootIndex};
-    pairStack.m_data[0] = rootPair;
-
-    int top = 1;
-    int numPairs = 0;
-    do
-    {
-        TreePair pair = pairStack.m_data[--top];
-        if (top > stackCap - 4)
-        {
-            stackCap += stackCap;
-            pairStack.SetSizeAndGrow(stackCap);
-        }
-
-        const TreeNode* nodeA = treeA->m_kNodeCollection.FUN_00d9a4c0(pair.m_kPointA);
-        const TreeNode* nodeB = treeB->m_kNodeCollection.FUN_00d9a4c0(pair.m_kPointB);
-        unsigned int leafA = nodeA->isLeaf();
-        unsigned int leafB = nodeB->isLeaf();
-
-        if (nodeA == nodeB)
-        {
-            if (!leafA)
-            {
-                int iChild0 = nodeA->m_children[0];
-                int iChild1 = nodeA->m_children[1];
-                pairStack.m_data[top].m_kPointA = iChild0;
-                pairStack.m_data[top].m_kPointB = iChild0;
-                top++;
-                pairStack.m_data[top].m_kPointA = iChild0;
-                pairStack.m_data[top].m_kPointB = iChild1;
-                top++;
-                pairStack.m_data[top].m_kPointA = iChild1;
-                pairStack.m_data[top].m_kPointB = iChild1;
-                top++;
-            }
-        }
-        else if (nodeB->m_kBounds.overlaps(nodeA->m_kBounds))
-        {
-            if (leafA)
-            {
-                if (leafB)
-                {
-                    pairsOut->AddBack(pair);
-                    numPairs++;
-                }
-                else
-                {
-                    int iChildB1 = nodeB->m_children[1];
-                    int iChildB0 = nodeB->m_children[0];
-                    pairStack.m_data[top].m_kPointA = pair.m_kPointA;
-                    pairStack.m_data[top].m_kPointB = iChildB0;
-                    top++;
-                    pairStack.m_data[top].m_kPointA = pair.m_kPointA;
-                    pairStack.m_data[top].m_kPointB = iChildB1;
-                    top++;
-                }
-            }
-            else
-            {
-                if (leafB)
-                {
-                    TreePair children = {nodeA->m_children[1], nodeA->m_children[0]};
-                    pairStack.m_data[top].m_kPointA = children.m_kPointB;
-                    pairStack.m_data[top].m_kPointB = pair.m_kPointB;
-                    top++;
-                    pairStack.m_data[top].m_kPointA = children.m_kPointA;
-                    pairStack.m_data[top].m_kPointB = pair.m_kPointB;
-                    top++;
-                }
-                else
-                {
-                    int iChildA0 = nodeA->m_children[0];
-                    int iChildA1 = nodeA->m_children[1];
-                    int iChildB0 = nodeB->m_children[0];
-                    int iChildB1 = nodeB->m_children[1];
-                    pairStack.m_data[top].m_kPointA = iChildA0;
-                    pairStack.m_data[top].m_kPointB = iChildB0;
-                    top++;
-                    pairStack.m_data[top].m_kPointA = iChildA0;
-                    pairStack.m_data[top].m_kPointB = iChildB1;
-                    top++;
-                    pairStack.m_data[top].m_kPointA = iChildA1;
-                    pairStack.m_data[top].m_kPointB = iChildB0;
-                    top++;
-                    pairStack.m_data[top].m_kPointA = iChildA1;
-                    pairStack.m_data[top].m_kPointB = iChildB1;
-                    top++;
-                }
-            }
-        }
-    } while (top);
-
-    pairStack._clearAndDeallocate(FUN_00c85750()->heap());
-    return numPairs;
-}
 }  // namespace fnv_00d1d5a0
 
 #include <windows.h>
@@ -610,65 +352,6 @@ class Target
 int FUN_00d1d540(int a, Inner* b, int* c, int d);
 int FUN_00d1d4d0(int a, Inner* b, int* c, int d);
 int FUN_00d1b930(int a, Inner* b, int* c, int d);
-// Records CPU profile ticks, iterates Inner nodes calling FUN_00d1d540, FUN_00d1d4d0, FUN_00d1b930, then calls ProcessCallback.
-// @fnv 0x00df6850
-void __cdecl ProcessAabbTree(Target* apTarget, Frame* apFrame)
-{
-    ProfBuf* pProfBuf = (ProfBuf*)TlsGetValue(DAT_0126835c);
-    if (pProfBuf->m_pCur < pProfBuf->m_pRecordEnd)
-    {
-        ProfRec* pProfRec = pProfBuf->m_pCur;
-        pProfRec->m_pName = "TtCpuAabbTreeAabb";
-        _ReadWriteBarrier();
-        volatile DWORD tick = (DWORD)__rdtsc();
-        pProfRec->m_iTick = tick;
-        pProfBuf->m_pCur = pProfRec + 1;
-    }
-    Frame* pFrame = apFrame;
-    int* rem = (int*)(&apTarget + 1);
-    Inner* in = pFrame->m_2C;
-    int n = pFrame->m_30;
-    if (n > 0)
-    {
-        int k = n;
-        do
-        {
-            int iCount = in->m_20;
-            int initial = in->m_24;
-            in->m_28 = 0;
-            *rem = initial;
-            if (pFrame->m_20)
-            {
-                int r = FUN_00d1d540(pFrame->m_20, in, rem, iCount);
-                in->m_28 += r;
-                iCount -= r;
-            }
-            if (pFrame->m_24)
-            {
-                int r = FUN_00d1d4d0(pFrame->m_24, in, rem, iCount);
-                in->m_28 += r;
-                iCount -= r;
-            }
-            if (pFrame->m_28)
-            {
-                int r = FUN_00d1b930(pFrame->m_28, in, rem, iCount);
-                in->m_28 += r;
-            }
-            in = (Inner*)((char*)in + 0x30);
-        } while (--k);
-    }
-    pProfBuf = (ProfBuf*)TlsGetValue(DAT_0126835c);
-    if (pProfBuf->m_pCur < pProfBuf->m_pRecordEnd)
-    {
-        ProfRec* pProfRec = pProfBuf->m_pCur;
-        pProfRec->m_pName = "Et";
-        _ReadWriteBarrier();
-        volatile DWORD dwTick2 = (DWORD)__rdtsc();
-        pProfRec->m_iTick = dwTick2;
-        pProfBuf->m_pCur = pProfRec + 1;
-    }
-    apTarget->ProcessCallback(pFrame, pFrame, 0);
-}
 
 extern "C" __m128 _mm_set_ps1(float a);
 extern "C" __m128 _mm_sub_ps(__m128 a, __m128 b);
@@ -839,48 +522,6 @@ struct NodeTree
     int unk18;
     TreeNodeArray m_kNodeCollection;
 };
-
-// Traverses the node tree, testing each node's AABB against a ray and calling visitor->processLeaf on hits to update the max fraction.
-// @fnv 0x00d1d0b0
-void FUN_00d1d0b0(NodeTree* tree, const TreeVector4* from, const TreeVector4* to, RayVisitor* visitor,
-                  float maxFraction)
-{
-    if (!tree)
-        return;
-    TreeNode* node = tree->m_pTreeNode;
-    if (!node)
-        return;
-
-    TreeVector4 fraction;
-    fraction.m_vComponents = _mm_set_ps1(maxFraction);
-    RayQ ray;
-    ray.init(*from, *to);
-
-    for (;;)
-    {
-        TreeAabb bounds;
-        bounds = *reinterpret_cast<const TreeAabb*>(&node->m_kMinimumCorner);
-        TreeNode* next;
-        if (node->m_next != 0x7fffffff)
-            next = tree->m_kNodeCollection.FUN_00d9a4c0(node->m_next);
-        else
-            next = 0;
-
-        if (bounds.hit(ray.m_kRayStart, ray.m_vInverseDirection, fraction))
-        {
-            if (!(node->m_parent & 0x80000000))
-            {
-                node = tree->m_kNodeCollection.FUN_00d9a4c0(node->m_child0);
-                continue;
-            }
-            float f = visitor->processLeaf(node);
-            fraction.m_vComponents = _mm_set_ps1(f);
-        }
-        node = next;
-        if (!node)
-            break;
-    }
-}
 
 extern "C" __m128 _mm_setr_ps(float, float, float, float);
 
@@ -1407,73 +1048,6 @@ static __forceinline void expandedVal(hkVector4Real& out, __m128 a, __m128 b)
     out.m_vComponents = _mm_add_ps(a, b);
 }
 
-// Traverses a compressed tree to find nodes overlapping a swept box, collecting leaf hits or reporting hit distances via a collector.
-// @fnv 0x00d1c2b0
-int FUN_00d1c2b0(CompressedTree* tree, int aabb, const SweptBoxQuery* apQuery, LeafCollector* collector, float radius,
-                 int* hits, int capacity)
-{
-    if (!tree)
-        return 0;
-    const hkpCompressedNode* node = tree->m_pTreeNode;
-    if (!node)
-        return 0;
-
-    S1c2b0_Aabb box;
-    box.m_kMaximumCorner = *reinterpret_cast<const hkVector4Real*>(&DAT_01267e30);
-    S1c2b0_Ray ray;
-    ray.setRay(apQuery->m_vFrom, apQuery->m_vTo);
-
-    hkVector4Real extents;
-    extents.SetAllComponents(radius);
-    extents.add4(apQuery->m_vHalfExtents);
-
-    const hkVector4Real& bitScaleInv = tree->m_kAabbInverseScale;
-    const hkVector4Real& bitOffsetLow = tree->m_kAabbMin;
-
-    hkVector4Real earlyOut;
-    earlyOut.SetAllComponents(1.0f);
-    int numHits = 0;
-
-    for (;;)
-    {
-        S1c2b0_Aabb decoded;
-        restoreAabb(*node, bitScaleInv, bitOffsetLow, decoded);
-        box.m_kMaximumCorner.m_vComponents = _mm_add_ps(decoded.m_kMaximumCorner.m_vComponents, extents.m_vComponents);
-        box.m_kMinimumCorner.setSub4(decoded.m_kMinimumCorner, extents);
-
-        const hkpCompressedNode* next;
-        if (node->m_skip != 0x7fff)
-            next = tree->m_kNodeCollection.GetEntryOffset(node->m_skip);
-        else
-            next = 0;
-
-        if (box.overlaps(ray, earlyOut))
-        {
-            if ((node->m_flags & 0x8000) == 0)
-            {
-                node = tree->m_kNodeCollection.GetEntryOffset(node->m_pChildAtom);
-                continue;
-            }
-            if (collector)
-            {
-                earlyOut.SetAllComponents(collector->GetHitDistance(node));
-            }
-            else if (hits)
-            {
-                *hits++ = *(const int*)&node->m_pChildAtom;
-                if (numHits >= capacity)
-                    return numHits;
-            }
-            numHits++;
-        }
-
-        node = next;
-        if (!node)
-            break;
-    }
-    return numHits;
-}
-
 static __forceinline Vector4Comparison queryLessEqual(const hkVector4& a, const hkVector4& b)
 {
     Vector4Comparison r;
@@ -1602,12 +1176,6 @@ class QueryTree16
     hkVector4 m_kAabbInverseScale;
 };
 
-static __forceinline const QueryNode* treeGetNode(const QueryNode* readNodePpu, int dmaIdx = 0,
-                                                  bool RunWorkerThread = true)
-{
-    return readNodePpu;
-}
-
 struct AabbCollector
 {
     virtual void v0();
@@ -1637,101 +1205,6 @@ struct VoidArray
     }
 };
 
-// Traverses a QueryTree16, tests node bounds against the query AABB, and reports overlapping leaf hits through a collector, iterator, or array.
-// @fnv 0x00d1c560
-int __cdecl FUN_00d1c560(const QueryTree16* tree, const QueryAabb& apQueryAabb, AabbCollector* collector,
-                         VoidArray* hitArray, void*** appHitIter, int hitCapacity)
-{
-    const QueryNode* rootNode = tree->getRootNode();
-    const QueryNode* node = treeGetNode(rootNode);
-    if (!node)
-        return 0;
-
-    const hkVector4& bitScaleInv = tree->m_kAabbInverseScale;
-    const hkVector4& bitOffsetLow = tree->m_kAabbMin;
-
-    int iHits = 0;
-    int iVisited = 0;
-
-    if (collector)
-    {
-        while (1)
-        {
-            QueryAabbTreeAabbD nodeAabb;
-            QueryBounds16::restoreAabb(node->m_iBufferSize, bitScaleInv, bitOffsetLow, nodeAabb);
-            const QueryNode* skipNode = tree->getSkipNode(node);
-            iVisited++;
-            if (nodeAabb.overlaps(apQueryAabb))
-            {
-                if (!node->isLeaf())
-                {
-                    node = treeGetNode(tree->getChild(node, 0));
-                    continue;
-                }
-                if (collector->GetHitDistance(node) == 0.0f)
-                    break;
-                iHits++;
-            }
-            node = treeGetNode(skipNode);
-            if (node)
-                continue;
-            break;
-        }
-    }
-    else if (appHitIter)
-    {
-        while (1)
-        {
-            QueryAabbTreeAabbD nodeAabb;
-            QueryBounds16::restoreAabb(node->m_iBufferSize, bitScaleInv, bitOffsetLow, nodeAabb);
-            const QueryNode* skipNode = tree->getSkipNode(node);
-            iVisited++;
-            if (nodeAabb.overlaps(apQueryAabb))
-            {
-                if (!node->isLeaf())
-                {
-                    node = treeGetNode(tree->getChild(node, 0));
-                    continue;
-                }
-                **appHitIter = node->getLeafData<void*>();
-                (*appHitIter)++;
-                if (iHits >= hitCapacity)
-                    break;
-                iHits++;
-            }
-            node = treeGetNode(skipNode);
-            if (node)
-                continue;
-            break;
-        }
-    }
-    else if (hitArray)
-    {
-        while (1)
-        {
-            QueryAabbTreeAabbD nodeAabb;
-            QueryBounds16::restoreAabb(node->m_iBufferSize, bitScaleInv, bitOffsetLow, nodeAabb);
-            const QueryNode* skipNode = tree->getSkipNode(node);
-            iVisited++;
-            if (nodeAabb.overlaps(apQueryAabb))
-            {
-                if (!node->isLeaf())
-                {
-                    node = treeGetNode(tree->getChild(node, 0));
-                    continue;
-                }
-                hitArray->AddBack(node->getLeafData<void*>());
-                iHits++;
-            }
-            node = treeGetNode(skipNode);
-            if (node)
-                continue;
-            break;
-        }
-    }
-    return iHits;
-}
-
 extern "C" __m128 _mm_load_ps(const float*);
 
 struct hkVector4f
@@ -1747,54 +1220,6 @@ union hkQuadVector
     hkVector4f v;
     __m128 q;
 };
-
-// Traverses the compressed tree, restores each node's AABB, and calls GetHitDistance for leaves overlapping the ray within maxDistance.
-// @fnv 0x00d1bd00
-void FUN_00d1bd00(CompressedTree* tree, const __m128* from, const __m128* to, LeafCollector* collector,
-                  float maxDistance)
-{
-    if (!tree)
-        return;
-    const hkpCompressedNode* node = tree->m_pTreeNode;
-    if (!node)
-        return;
-
-    hkVector4Real maxT;
-    maxT.SetAllComponents(maxDistance);
-    S1c2b0_Ray ray;
-    ray.setRay(*reinterpret_cast<const hkVector4Real*>(from), *reinterpret_cast<const hkVector4Real*>(to));
-
-    hkQuadVector scale;
-    scale.v = reinterpret_cast<const hkVector4f&>(tree->m_kAabbInverseScale);
-    hkQuadVector offset;
-    offset.v = reinterpret_cast<const hkVector4f&>(tree->m_kAabbMin);
-
-    for (;;)
-    {
-        S1c2b0_Aabb bounds;
-        restoreAabb(*node, *reinterpret_cast<const hkVector4Real*>(&scale),
-                    *reinterpret_cast<const hkVector4Real*>(&offset), bounds);
-
-        const hkpCompressedNode* next;
-        if (node->m_skip != 0x7fff)
-            next = tree->m_kNodeCollection.GetEntryOffset(node->m_skip);
-        else
-            next = 0;
-
-        if (bounds.overlaps(ray, maxT))
-        {
-            if ((node->m_flags & 0x8000) == 0)
-            {
-                node = tree->m_kNodeCollection.GetEntryOffset(node->m_pChildAtom);
-                continue;
-            }
-            maxT.SetAllComponents(collector->GetHitDistance(node));
-        }
-        node = next;
-        if (!node)
-            break;
-    }
-}
 
 struct NodesSV_1cc50
 {
@@ -1833,15 +1258,6 @@ struct RayCollector
     virtual float GetHitDistance(const TNodeQ* node);
 };
 
-__forceinline __m128 inverseDir(__m128 dir)
-{
-    __m128 isZero = _mm_cmpeq_ps(*reinterpret_cast<const __m128*>(&DAT_01267e30), dir);
-    __m128 safe = _mm_or_ps(_mm_and_ps(isZero, DAT_010c7170), _mm_andnot_ps(isZero, dir));
-    safe = _mm_shuffle_ps(safe, _mm_unpackhi_ps(safe, DAT_010c7170), 0xc4);
-    __m128 r = _mm_rcp_ps(safe);
-    __m128 inv = _mm_sub_ps(_mm_add_ps(r, r), _mm_mul_ps(_mm_mul_ps(r, safe), r));
-    return _mm_or_ps(_mm_andnot_ps(isZero, inv), _mm_and_ps(isZero, DAT_010cd670));
-}
 struct RayDir
 {
     TV4Q m_dir;
@@ -1861,88 +1277,10 @@ struct RayInput
     TV4Q m_fExtents;
 };
 
-// Traverses tree nodes, tests each AABB against the ray, and reports leaf hits through the collector or output buffer.
-// @fnv 0x00d1cc50
-int FUN_00d1cc50(NTreeQ* tree, void* unused, const RayInput* ray, RayCollector* collector, float radius,
-                 unsigned int* out, int maxCount)
-{
-    if (!tree)
-        return 0;
-    TNodeQ* node = tree->m_pTreeNode;
-    if (!node)
-        return 0;
-
-    __m128 from = ray->m_vFrom.m_vComponents;
-    NodeAabb aabb;
-    aabb.m_kMaximumCorner.m_vComponents = from;
-    RayDir kRayDir;
-    kRayDir.m_dir.m_vComponents = _mm_sub_ps(ray->m_vTo.m_vComponents, from);
-    __m128 dir = kRayDir.m_dir.m_vComponents;
-    kRayDir.m_vInverseDirection.m_vComponents = inverseDir(dir);
-    __m128 vExtent = _mm_add_ps(_mm_set_ps1(radius), ray->m_fExtents.m_vComponents);
-    __m128 fraction = _mm_set_ps1(1.0f);
-
-    int count = 0;
-    for (;;)
-    {
-        aabb.m_kMinimumCorner.m_vComponents = node->m_kMinimumCorner.m_vComponents;
-        aabb.m_kMaximumCorner.m_vComponents = node->m_kMaximumCorner.m_vComponents;
-        aabb.m_kMaximumCorner.m_vComponents = _mm_add_ps(aabb.m_kMaximumCorner.m_vComponents, vExtent);
-        aabb.m_kMinimumCorner.m_vComponents = _mm_sub_ps(aabb.m_kMinimumCorner.m_vComponents, vExtent);
-        TNodeQ* next;
-        if (node->m_next != 0x7fff)
-            next = (TNodeQ*)tree->m_kNodeCollection.FUN_00d1bb40(node->m_next);
-        else
-            next = 0;
-
-        aabb.m_kMinimumCorner.m_vComponents = _mm_sub_ps(aabb.m_kMinimumCorner.m_vComponents, from);
-        aabb.m_kMaximumCorner.m_vComponents = _mm_sub_ps(aabb.m_kMaximumCorner.m_vComponents, from);
-        aabb.m_kMaximumCorner.m_vComponents =
-            _mm_mul_ps(aabb.m_kMaximumCorner.m_vComponents, kRayDir.m_vInverseDirection.m_vComponents);
-        aabb.m_kMinimumCorner.m_vComponents =
-            _mm_mul_ps(aabb.m_kMinimumCorner.m_vComponents, kRayDir.m_vInverseDirection.m_vComponents);
-        __m128 vNearT = _mm_min_ps(aabb.m_kMinimumCorner.m_vComponents, aabb.m_kMaximumCorner.m_vComponents);
-        __m128 vFarT = _mm_max_ps(aabb.m_kMinimumCorner.m_vComponents, aabb.m_kMaximumCorner.m_vComponents);
-        __m128 vExitT = _mm_min_ps(_mm_min_ps(vFarT, fraction),
-                                   _mm_min_ps(_mm_shuffle_ps(vFarT, vFarT, 0x55), _mm_shuffle_ps(vFarT, vFarT, 0xaa)));
-        __m128 vEnterT =
-            _mm_max_ps(_mm_max_ps(vNearT, *reinterpret_cast<const __m128*>(&DAT_01267e30)),
-                       _mm_max_ps(_mm_shuffle_ps(vNearT, vNearT, 0x55), _mm_shuffle_ps(vNearT, vNearT, 0xaa)));
-        if (_mm_movemask_ps(_mm_cmplt_ps(vEnterT, vExitT)) & 1)
-        {
-            if (!(node->m_flags & 0x8000))
-            {
-                node = (TNodeQ*)tree->m_kNodeCollection.FUN_00d1bb40((unsigned short)node->m_data);
-                continue;
-            }
-            if (collector)
-            {
-                float f = collector->GetHitDistance(node);
-                fraction = _mm_set_ps1(f);
-            }
-            else if (out)
-            {
-                *out++ = node->m_data;
-                if (count >= maxCount)
-                    return count;
-            }
-            count++;
-        }
-        node = next;
-        if (!node)
-            break;
-    }
-    return count;
-}
-
 struct NodeMgrSV
 {
     int* FUN_00d1bb40(unsigned short index);
 };
-__forceinline void FilterRays_filterSetAll(hkVector4& out, float x)
-{
-    out.m_vComponents = _mm_set_ps1(x);
-}
 
 struct FilterRays_Ray
 {
@@ -2110,113 +1448,3 @@ RayQuerySet __cdecl FUN_00e2baf0(const hkVector4& s0, const hkVector4& e0, const
                                  int mask);
 void __cdecl FUN_00d1ca00(const FilterRays_Tree* tree, const FilterRays_Node* node, const void* skipNode,
                           const RayQuerySet* bundle, FilterRays_FilterCollector** collectors, float* fractions);
-
-template <class T> __forceinline T FilterRays_min2(T x, T y)
-{
-    return x < y ? x : y;
-}
-
-__forceinline void FilterRays_registerAddRayHit(void (*f)())
-{
-    DAT_0126ec04 = (void*)f;
-}
-
-// Tests each ray against a leaf AABB, or partitions ray indices by the two child AABBs.
-// @fnv 0x00e2bbd0
-void __cdecl FUN_00e2bbd0(const FilterRays_Tree* tree, const FilterRays_Node* node, const void* skipNode,
-                          const FilterRays_Ray* rays, hkCpuWorldRayCastCollector* collectors,
-                          hkpFixedBufferRayHitCollector* fixedBufferFilterCollectors,
-                          const RayCastRequest* commandArray, const void* filter, float* earlyHitFractionArray,
-                          int* raysIdx, int numRays, int taskCap, int raysIdxOutCap0, int raysIdxOutCap1,
-                          int* raysIdxOut0, int& numRaysOut0, int* raysIdxOut1, int& numRaysOut1,
-                          FilterRays_Node& child0Out, FilterRays_Node& child1Out)
-{
-    numRaysOut1 = 0;
-    numRaysOut0 = 0;
-    if (node->isLeaf())
-    {
-        FilterRays_FilterAabb aabb;
-        FilterRays_FilterAabb::restoreAabb(node->m_iBufferSize, tree->m_kAabbInverseScale, tree->m_kAabbMin, aabb);
-        for (int i = 0; i < numRays; i++)
-        {
-            int idx = raysIdx[i];
-            hkCpuWorldRayCastCollector* collector = collectors;
-            hkVector4 earlyOut;
-            FilterRays_filterSetAll(earlyOut, 1.0f);
-            if (aabb.overlaps(rays[idx], earlyOut))
-            {
-                FUN_00e2baa0(collector, commandArray + idx, filter);
-                collector->GetHitDistance(node);
-            }
-        }
-    }
-    else if (raysIdxOutCap0 >= numRays && raysIdxOutCap1 >= numRays && taskCap >= 2 && numRays > 4)
-    {
-        int* child1 = tree->getChild(node, 1);
-        child0Out.CopyFrom(tree->getChild(node, 0));
-        child1Out.CopyFrom(child1);
-        FilterRays_FilterAabb aabb0;
-        FilterRays_FilterAabb aabb1;
-        FilterRays_FilterAabb::restoreAabb(child0Out.m_iBufferSize, tree->m_kAabbInverseScale, tree->m_kAabbMin, aabb0);
-        FilterRays_FilterAabb::restoreAabb(child1Out.m_iBufferSize, tree->m_kAabbInverseScale, tree->m_kAabbMin, aabb1);
-        hkVector4 earlyOut;
-        FilterRays_filterSetAll(earlyOut, 1.0f);
-        for (int i = 0; i < numRays; i++)
-        {
-            int idx = raysIdx[i];
-            if (aabb0.overlaps(rays[idx], earlyOut))
-            {
-                *raysIdxOut0 = idx;
-                raysIdxOut0++;
-                numRaysOut0++;
-            }
-            if (aabb1.overlaps(rays[idx], earlyOut))
-            {
-                *raysIdxOut1 = idx;
-                raysIdxOut1++;
-                numRaysOut1++;
-            }
-        }
-    }
-    else
-    {
-        int numBundles = (numRays + 3) >> 2;
-        int rayIdx[4];
-        rayIdx[0] = 0;
-        rayIdx[1] = 0;
-        rayIdx[2] = 0;
-        rayIdx[3] = 0;
-        for (int b = 0; b < numBundles; b++)
-        {
-            int n = FilterRays_min2(numRays - b * 4, 4);
-            float fractions[4];
-            for (int j = 0; j < n; j++)
-            {
-                rayIdx[j] = raysIdx[j + b * 4];
-                const RayCastRequest* command = commandArray + rayIdx[j];
-                FUN_00e2baa0(&collectors[j], command, filter);
-                FilterRays_filterSetAll(collectors[j].m_fEarlyOutHitFraction, earlyHitFractionArray[rayIdx[j]]);
-                fractions[j] = earlyHitFractionArray[rayIdx[j]];
-                if (command->m_useFilterCollector)
-                {
-                    collectors[j].m_fixedBufferRayHitFilterCollector = new (&fixedBufferFilterCollectors[j])
-                        hkpFixedBufferRayHitCollector(command->m_pResultBuffer, command->m_iResultCount);
-                    FilterRays_registerAddRayHit(FUN_00e2b9b0);
-                }
-                else
-                {
-                    collectors[j].m_fixedBufferRayHitFilterCollector = 0;
-                }
-            }
-            RayQuerySet bundle = FUN_00e2baf0(
-                rays[rayIdx[0]].m_kRayStart, rays[rayIdx[0]].m_vInverseDirection, rays[rayIdx[1]].m_kRayStart,
-                rays[rayIdx[1]].m_vInverseDirection, rays[rayIdx[2]].m_kRayStart, rays[rayIdx[2]].m_vInverseDirection,
-                rays[rayIdx[3]].m_kRayStart, rays[rayIdx[3]].m_vInverseDirection, DAT_011b3830[n]);
-            FilterRays_FilterCollector* collectorPtrs[4] = {&collectors[0], &collectors[1], &collectors[2],
-                                                            &collectors[3]};
-            FUN_00d1ca00(tree, node, skipNode, &bundle, collectorPtrs, fractions);
-            for (int j = 0; j < n; j++)
-                earlyHitFractionArray[rayIdx[j]] = collectors[j].m_fEarlyOutHitFraction(0);
-        }
-    }
-}

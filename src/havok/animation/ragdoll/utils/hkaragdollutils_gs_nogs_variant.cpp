@@ -12,18 +12,6 @@ extern "C"
     int __cdecl FUN_00ce9e90(void*);
 }
 
-// @fnv 0x00cea7c0
-int __cdecl FUN_00cea7c0(void* p1, void* p2, void* p3)
-{
-    if (FUN_00cea030(p1, p2))
-        return 1;
-    if (FUN_00ce9db0(p2, p3))
-        return 1;
-    if (FUN_00ce9e90(p2))
-        return 1;
-    return 0;
-}
-
 struct Item
 {
     int unk00[11];

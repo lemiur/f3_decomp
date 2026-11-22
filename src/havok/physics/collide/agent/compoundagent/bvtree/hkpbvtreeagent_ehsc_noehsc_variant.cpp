@@ -116,11 +116,6 @@ void __cdecl FUN_00d2f9d0(int arg1, int arg2, int arg3, int arg4);
 void __cdecl FUN_00d30f50(void* apFirst, void* apSecond, void* apThird, void* apFourth, void* apFifth);
 void __stdcall FUN_00d315a0(void* apFirst, void* apSecond, void* apThird, void* apFourth, void* apFifth);
 extern "C" void __cdecl FUN_00d31110(void* arg0, void* arg1, void* arg2, void* arg3);
-// @fnv 0x00d315d0
-extern "C" void __stdcall FUN_00d315d0(void* arg0, void* arg1, void* arg2, void* arg3)
-{
-    FUN_00d31110(arg0, arg1, arg2, arg3);
-}
 
 void __cdecl FUN_00d312f0(void* apA, void* apB, void* apC, void* apD);
 void __stdcall FUN_00d315f0(void* apA, void* apB, void* apC, void* apD);

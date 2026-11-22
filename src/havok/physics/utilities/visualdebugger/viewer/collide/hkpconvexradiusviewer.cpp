@@ -10,13 +10,6 @@ struct FUN_00dd9380_class
 void* DAT_01269cd0;
 void* DAT_01269010;
 
-// @fnv 0x00d68e40
-void* __cdecl RegisterConvexRadius()
-{
-    DAT_01269010 = ((FUN_00dd9380_class*)DAT_01269cd0)->FUN_00dd9380("Convex Radius", FUN_00d68e00);
-    return DAT_01269010;
-}
-
 struct FUN_00d68a70_class
 {
     int unk00;
@@ -158,12 +151,6 @@ void Sub::FUN_00d69160(int value)
         base->FUN_00d69010(result);
 }
 
-// @fnv 0x00d69180
-void* __cdecl FUN_00d69180()
-{
-    return DAT_01269010;
-}
-
 struct Heap
 {
     virtual void a();
@@ -196,18 +183,6 @@ struct FUN_00d691d0_Class
     FUN_00d691d0_Class* Destroy(unsigned int flags);
 };
 extern Holder* FUN_00c85750();
-// Runs the destructor, and if flags has bit 0 set, frees this object through the holder's allocator using allocationSize.
-// @fnv 0x00d691d0
-FUN_00d691d0_Class* FUN_00d691d0_Class::Destroy(unsigned int flags)
-{
-    ((Destructor*)this)->FUN_00d690d0();
-    if (flags & 1)
-    {
-        Holder* holder = FUN_00c85750();
-        holder->unk10->free(this, allocationSize);
-    }
-    return this;
-}
 
 extern void* DAT_01269010;
 
@@ -990,9 +965,6 @@ struct D69190Object : D69190Primary, D69190Secondary
     virtual void FUN_00d69190();
 };
 
-D69190Object::D69190Object()
-{}
-
 // FUN_00d691a0 : MSVC this-adjusting thunk.
 //
 // The original is 8 bytes:  sub ecx, 0x08 ; jmp 0x00d691d0
@@ -1028,17 +1000,6 @@ struct AdjOwner : AdjBase1, AdjBase2
     virtual void key_fn();  // key function - defined, so the vftable is emitted
     void FUN_00d691a0();    // the shared override - declared only
 };
-
-AdjOwner::AdjOwner()
-{}
-void AdjOwner::key_fn()
-{}
-
-AdjOwner* make_adj_owner()
-{
-    static AdjOwner o;
-    return &o;
-}
 
 // sub ecx,0x28; jmp target: MSVC adjustor thunk. PrimaryBase is 0x28 bytes (vptr + 9 ints),
 // so the second base sits at +0x28 and the thunk subtracts 0x28 from this.
@@ -1100,9 +1061,6 @@ struct D691C0Object : D691C0Primary, D691C0Secondary
 // @fnv 0x00d691c0
     virtual void FUN_00d691c0();
 };
-
-D691C0Object::D691C0Object()
-{}
 
 namespace fnv_00d68c00 {
 struct S_00d68c00_Arg
@@ -1317,69 +1275,6 @@ struct S_00d68c00_Sub : S_00d68c00_Main, S_00d68c00_Listener
     virtual void FUN_00d68c00(S_00d68c00_Arg* a2) throw();
 };
 
-// Collects elements via FUN_00de4420, logs and drops those with unk50 == 6 and unk08 == 0, hands the rest to unk18's v1 and v3, then calls v0(1) on each.
-// @fnv 0x00d68c00
-void S_00d68c00_Sub::FUN_00d68c00(S_00d68c00_Arg* a2) throw()
-{
-    if (a2->unk10 == 0)
-        return;
-    int idx = FindKeyIndex(a2->unk08);
-    if (idx < 0)
-        return;
-    S_00d68c00_Item* item = S_00d68c00_Listener::unk08[idx];
-    S_00d68c00_Arr arr;
-    arr.data = 0;
-    arr.size = 0;
-    arr.cap = 0x80000000;
-    S_00d68c00_Real radius;
-    radius.FUN_00de3050();
-    S_00d68c00_Query query;
-    query.FUN_00de3060(&radius);
-    query.FUN_00de4420(a2->unk10, &arr);
-    for (int i = arr.size - 1; i >= 0; i--)
-    {
-        S_00d68c00_Elem* e = arr.data[i];
-        if (e->unk50 == 6 && e->unk08 == 0)
-        {
-            unsigned int buf[128];
-            S_00d68c00_Str msg;
-            msg.FUN_00cb1600((char*)buf, 0x200);
-            msg.FUN_00cc01c0("Unable to build display geometry from hkpShape geometry data");
-            DAT_01268360->v3(0, -1, (char*)buf, ".\\VisualDebugger\\Viewer\\Collide\\hkpConvexRadiusViewer.cpp", 0xa7);
-            msg.FUN_00cc00e0();
-            arr.size--;
-            if (arr.size != i)
-                arr.data[i] = arr.data[arr.size];
-        }
-    }
-    if (arr.size > 0)
-    {
-        char* name = (char*)a2 + 0x13;
-        S_00d68c00_List* list = &item->list;
-        S_00d68c00_Router* r = FUN_00c85750();
-        if (list->size == (list->cap & 0x3fffffff))
-            ResizeAudioStream(r->unk10, list, 4);
-        char** p = list->data + list->size;
-        for (int k = 0; k < 1; k++)
-            p[k] = name;
-        list->size++;
-        S_00d68c00_Main::unk18->v1(&arr, &a2->unkf0, name, DAT_01269010, 0);
-        if (a2->unke8 == 5)
-            S_00d68c00_Main::unk18->v3((int)S_00d68c00_Listener::unk14, name, DAT_01269010);
-        else
-            S_00d68c00_Main::unk18->v3((int)S_00d68c00_Listener::unk18, name, DAT_01269010);
-    }
-    for (int j = 0; j < arr.size; j++)
-    {
-        S_00d68c00_Elem* e = arr.data[j];
-        if (e)
-            e->v0(1);
-    }
-    S_00d68c00_Heap& heap = FUN_00c85750()->heap();
-    arr.size = 0;
-    if ((arr.cap & 0x80000000) == 0)
-        heap.v4(arr.data, (arr.cap & 0x3fffffff) * 4);
-}
 }  // namespace fnv_00d68c00
 
 namespace fnv_00d68e00 {
@@ -1409,15 +1304,6 @@ struct TargetAgent
     TargetAgent* FUN_00d68b90(void* arg1);
 };
 
-// Allocates a 0x44-byte TargetAgent chunk, sets its size field, calls FUN_00d68b90, and returns the result offset by 8 bytes or null.
-// @fnv 0x00d68e00
-void* __cdecl FUN_00d68e00(void* arg1)
-{
-    TargetAgent* agent = (TargetAgent*)FUN_00c85750()->allocateChunk(0x44);
-    agent->m_usMemSizeAndFlags = 0x44;
-    TargetAgent* res = agent->FUN_00d68b90(arg1);
-    return res ? (char*)res + 8 : 0;
-}
 }  // namespace fnv_00d68e00
 
 struct VObj

@@ -238,40 +238,4 @@ struct S_00de58c0_Obj
     void FUN_00de58c0(struct S_00de58c0_Arr* out, struct S_00de58c0_Alloc* alloc);
 };
 
-static inline __m128& Q(S_00de58c0_V4& v)
-{
-    return *(__m128*)&v;
-}
-
-// Fills a local array via FUN_00de54b0, then writes four vectors per entry to out (m_60, entry i twice, entry i+1 mod m_80), growing out as needed.
-// @fnv 0x00de58c0
-void S_00de58c0_Obj::FUN_00de58c0(S_00de58c0_Arr* out, S_00de58c0_Alloc* alloc)
-{
-    S_00de58c0_Local tmp;
-    tmp.m_data = (S_00de58c0_V4*)tmp.m_buf;
-    tmp.m_iElementCount = 0;
-    tmp.m_cap = 0x80000100;
-    FUN_00de54b0(&tmp);
-    int n = m_80;
-    int newSize = n * 4;
-    if ((out->m_cap & 0x3fffffff) < newSize)
-    {
-        int iDoubledCap = (out->m_cap & 0x3fffffff) * 2;
-        FUN_00c908c0(alloc, out, newSize < iDoubledCap ? iDoubledCap : newSize, 16);
-    }
-    out->m_iElementCount = newSize;
-    int iWrite = 0;
-    for (int iRead = 0; iRead < m_80;)
-    {
-        Q(out->m_data[iWrite++]) = Q(m_60);
-        Q(out->m_data[iWrite++]) = Q(tmp.m_data[iRead]);
-        Q(out->m_data[iWrite++]) = Q(tmp.m_data[iRead]);
-        iRead++;
-        Q(out->m_data[iWrite++]) = Q(tmp.m_data[iRead % m_80]);
-    }
-    S_00de58c0_Heap& h = FUN_00c85750()->heap();
-    tmp.m_iElementCount = 0;
-    if ((tmp.m_cap & 0x80000000) == 0)
-        h.ReturnMemory(tmp.m_data, (tmp.m_cap & 0x3fffffff) * 16);
-}
 }  // namespace fnv_00de58c0

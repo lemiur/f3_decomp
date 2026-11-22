@@ -190,12 +190,6 @@ class FUN_00e3b960 : public hkRefObjE3B9
     virtual ~FUN_00e3b960();
 };
 
-// @fnv 0x00e3b960
-FUN_00e3b960::FUN_00e3b960(hkFinishFlagE3B9 flag) : hkRefObjE3B9(flag), m_kMemberDescriptor(flag)
-{
-    if (flag.m_bFinishing)
-        m_kMemberDescriptor.FUN_00d21ce0(this);
-}
 }  // namespace fnv_00e3b960
 
 class FUN_00e3b9a0
@@ -243,16 +237,6 @@ class hkObje3c210 : public FUN_00e3b9a0
     }
 };
 
-// Runs the base destructor, frees this via operator delete when uiFlags has bit 0 set, and returns this.
-// @fnv 0x00e3c210
-hkObje3c210* hkObje3c210::DestroyObject(unsigned int uiFlags) throw()
-{
-    this->FUN_00e3b9a0::~FUN_00e3b9a0();
-    if (uiFlags & 1)
-        hkObje3c210::operator delete(this);
-    return this;
-}
-
 struct S00e3b770_Result
 {
     int offset;
@@ -272,19 +256,6 @@ struct S00e3b770_Obj
 
     void __thiscall FUN_00e3b770(int unused, S00e3b770_Result* result);
 };
-
-// @fnv 0x00e3b770
-void __thiscall S00e3b770_Obj::FUN_00e3b770(int unused, S00e3b770_Result* result)
-{
-    int size = m_iElementCount;
-    int stride = size * 6;
-
-    result->stride = stride;
-
-    stride += size * 2;
-    int aligned = (size + 3) & ~3;
-    result->offset = aligned + stride * 8;
-}
 
 #include <xmmintrin.h>
 struct Motor
@@ -322,28 +293,6 @@ struct PoweredChainData
     MemoryRouter* FUN_00c85750();
     void FUN_00e3b850(const __m128* a, const __m128* b, const __m128* c, Motor* motorA, Motor* motorB, Motor* motorC);
 };
-// Appends a ConstraintInfo entry to infos, storing frames a, b, c, motor pointers, and calling FUN_00c90510 on each motor.
-// @fnv 0x00e3b850
-void PoweredChainData::FUN_00e3b850(const __m128* apFrameA, const __m128* apFrameB, const __m128* apFrameC,
-                                    Motor* motorA, Motor* motorB, Motor* motorC)
-{
-    InfoArray* array = &infos;
-    MemoryRouter* router = FUN_00c85750();
-    if (array->size == (int)(array->capacityAndFlags & 0x3fffffff))
-        ResizeAudioStream(router->allocator, array, sizeof(ConstraintInfo));
-    ConstraintInfo& info = array->data[array->size++];
-    info.frameA = *apFrameA;
-    info.frameB = *apFrameB;
-    info.frameC = *apFrameC;
-    info.motorA = motorA;
-    motorA->FUN_00c90510();
-    info.motorB = motorB;
-    motorB->FUN_00c90510();
-    info.motorC = motorC;
-    motorC->FUN_00c90510();
-    info.enabled = false;
-    info.frameD = DAT_012683b0;
-}
 
 struct S00e3b810_Out
 {
@@ -481,18 +430,5 @@ class hkpPoweredChainData : public hkE3B9::hkReferencedObject
     hkArrayE3B9<hkE3B9::EntryE3B9> m_kEntries;
 };
 
-// For each entry in m_kEntries, calls FUN_00c905b0 on each non-null object among its three object pointers.
-// @fnv 0x00e3b9a0
-hkpPoweredChainData::~hkpPoweredChainData()
-{
-    for (int i = 0; i < m_kEntries.m_iElementCount; i++)
-    {
-        for (int j = 0; j < 3; j++)
-        {
-            if (m_kEntries.m_data[i].m_apkObjects[j])
-                m_kEntries.m_data[i].m_apkObjects[j]->FUN_00c905b0();
-        }
-    }
-}
 }
 }  // namespace fnv_00e3b9a0

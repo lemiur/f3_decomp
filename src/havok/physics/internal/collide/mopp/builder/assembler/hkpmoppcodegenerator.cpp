@@ -38,22 +38,6 @@ struct SomeClass
     Buffer buffer;
     void Destroy();
 };
-// Resets the vtable, frees unk10 through the allocator if set, clears buffer, then sets the vtable to DAT_0102e388.
-// @fnv 0x00e06650
-void SomeClass::Destroy()
-{
-    void* p = unk10;
-    vtable = &DAT_010ea5b4;
-    if (p)
-    {
-        void* q = FUN_00c85750();
-        FUN_00c856c0(*(void**)((char*)q + 0x10), p);
-    }
-    void* s = FUN_00c85750();
-    void* t = *(void**)((char*)s + 0x10);
-    buffer.clear(t);
-    vtable = &DAT_0102e388;
-}
 
 struct E06490Allocator;
 
@@ -171,10 +155,6 @@ FUN_00e065f0::FUN_00e065f0(int iSize)
     m_iUsed = 0;
 }
 
-// @fnv 0x00e06480
-extern "C" void __cdecl FUN_00e06480()
-{}
-
 #include <xmmintrin.h>
 extern "C" void __cdecl FUN_00c908c0(void* heap, void* arr, int n, int elemSize);
 extern "C" void __cdecl FUN_00cb1260(void* dst, const void* src, int n);
@@ -271,23 +251,6 @@ struct FUN_00e064f0_class
     S_00e064f0_Obj* FUN_00e064f0();
 };
 
-// Allocates an S_00e064f0_Obj, copies unk0C bytes from unk08+(unk10-unk0C) into its array, frees unk10, clears unk10 and unk0C, and sets unk08 to the old count.
-// @fnv 0x00e064f0
-S_00e064f0_Obj* FUN_00e064f0_class::FUN_00e064f0()
-{
-    int n = unk0C;
-    S_00e064f0_Obj* pNewObj = new S_00e064f0_Obj;
-    pNewObj->m_aiIndexedValues.reserveExactly(n);
-    pNewObj->m_aiIndexedValues.SetSizeAndGrow(n);
-    FUN_00cb1260(pNewObj->m_aiIndexedValues.m_data, (char*)unk08 + (unk10 - unk0C), n);
-    void* pOldBuffer = (void*)unk10;
-    FUN_00c856c0(S_00e064f0_Router::GetMonitorStream().m10, pOldBuffer);
-    unk10 = 0;
-    unk0C = 0;
-    unk08 = n;
-    return pNewObj;
-}
-
 namespace fnv_00e066c0 {
 struct CpuAllocator
 {
@@ -311,18 +274,6 @@ struct CpuObject
     void Destroy();
     CpuObject* FUN_00e066c0(unsigned int flags);
 };
-// Calls Destroy, then if the low bit of flags is set, invokes the global CpuAllocator with this and size, and returns this.
-// @fnv 0x00e066c0
-CpuObject* CpuObject::FUN_00e066c0(unsigned int flags)
-{
-    Destroy();
-    if (flags & 1)
-    {
-        CpuAllocatorHolder* holder = FUN_00c85750();
-        holder->allocator->Invoke(this, size);
-    }
-    return this;
-}
 }  // namespace fnv_00e066c0
 
 // @f3 0x00a85c40 (community match, verified in this file)

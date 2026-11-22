@@ -21,26 +21,6 @@ struct D625A0CharArray
     void ReplaceRange(D625A0Allocator& alloc, int index, int numdel, const char* p, int numtoinsert);
 };
 
-// @fnv 0x00d625a0
-void D625A0CharArray::ReplaceRange(D625A0Allocator& alloc, int index, int aiNumDelete, const char* apSource,
-                                   int aiNumInsert)
-{
-    int iNewLength = m_iElementCount - aiNumDelete + aiNumInsert;
-    int numtomove = m_iElementCount - index - aiNumDelete;
-    const int iCapacity = getCapacity();
-    if (iCapacity < iNewLength)
-    {
-        int iDoubledCapacity = 2 * iCapacity;
-        int iNewCapacity = (iNewLength < iDoubledCapacity) ? iDoubledCapacity : iNewLength;
-        FUN_00c908c0(&alloc, this, iNewCapacity, sizeof(char));
-    }
-    D625A0MemMove(m_data + index + aiNumInsert, m_data + index + aiNumDelete, numtomove * sizeof(char));
-    char* dst = m_data + index;
-    for (int i = 0; i < aiNumInsert; ++i)
-        dst[i] = apSource[i];
-    m_iElementCount = iNewLength;
-}
-
 extern char d_010d17d0;
 // @fnv 0x00d634d0
 char* FUN_00d634d0()
@@ -179,19 +159,6 @@ struct Registry
     void FUN_00c93920(SecondTarget* apTarget);
     ItemList* FUN_00c929e0();
 };
-
-// @fnv 0x00d63520
-void OurPart::RegisterAndNotify(Registry* apRegistry)
-{
-    apRegistry->FUN_00c937a0((Container*)((char*)this - 0x20));
-    apRegistry->FUN_00c93920((Container*)((char*)this - 0x20));
-
-    ItemList* pItemList = apRegistry->FUN_00c929e0();
-    for (int i = 0; i < pItemList->m_iArrayLength; i++)
-        ((NotifyTarget*)((char*)this + 8))->Notify(pItemList->m_ppItems[i]);
-
-    pItemList->FUN_00c905b0();
-}
 
 struct Factory
 {
@@ -506,18 +473,6 @@ struct FUN_00d63e10_cls
     static void operator delete(void* apMemory) throw();
 };
 
-// @fnv 0x00d63e10
-FUN_00d63e10_cls* FUN_00d63e10_cls::Destroy(unsigned char acFlags)
-{
-    FUN_00d63cb0();
-    if (acFlags & 1)
-    {
-        AudioHolder* pHolder = FUN_00c85750();
-        AudioAllocator* pAllocator = pHolder->m_pAllocator;
-        pAllocator->Free(this, m_uSize);
-    }
-    return this;
-}
 }  // namespace fnv_00d63e10
 
 class hkMemoryAllocatorD635;
@@ -765,15 +720,6 @@ struct Own_00d63e00 : A1_00d63e00, A2_00d63e00
 // @fnv 0x00d63e00
     void FUN_00d63e00();
 };
-Own_00d63e00::Own_00d63e00()
-{}
-void Own_00d63e00::key_fn()
-{}
-Own_00d63e00* make_00d63e00()
-{
-    static Own_00d63e00 o;
-    return &o;
-}
 
 struct D63590Array
 {
@@ -806,15 +752,3 @@ class D63590List
 
     void FUN_00d63590(unsigned int value);
 };
-
-// Finds value in m_items, removes it at that index, and calls FUN_00c905b0 on the ItemList.
-// @fnv 0x00d63590
-void D63590List::FUN_00d63590(unsigned int value)
-{
-    int index = m_items.indexOf(value);
-    if (index != -1)
-    {
-        m_items.removeAt(index);
-        ((ItemList*)value)->FUN_00c905b0();
-    }
-}

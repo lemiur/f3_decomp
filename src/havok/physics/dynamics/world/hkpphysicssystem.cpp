@@ -28,51 +28,6 @@ struct FUN_00d06090_Class
     void ReleaseAllReferences();
 };
 
-// Calls removeReference on each non-null entry of the four reference arrays, then resets their counts to zero.
-// @fnv 0x00d06090
-void FUN_00d06090_Class::ReleaseAllReferences()
-{
-    int count = count0;
-    for (int i = 0; i < count; ++i)
-    {
-        if (refs0[i])
-        {
-            refs0[i]->removeReference();
-        }
-    }
-    count0 = 0;
-
-    count = count3;
-    for (int i = 0; i < count; ++i)
-    {
-        if (refs3[i])
-        {
-            refs3[i]->removeReference();
-        }
-    }
-    count3 = 0;
-
-    count = count1;
-    for (int i = 0; i < count; ++i)
-    {
-        if (refs1[i])
-        {
-            refs1[i]->removeReference();
-        }
-    }
-    count1 = 0;
-
-    count = count2;
-    for (int i = 0; i < count; ++i)
-    {
-        if (refs2[i])
-        {
-            refs2[i]->removeReference();
-        }
-    }
-    count2 = 0;
-}
-
 extern int DAT_010cce28;
 extern int _DAT_0102e388;
 
@@ -119,54 +74,6 @@ struct FUN_00d06640_class
     void Destroy();
 };
 
-// @fnv 0x00d06640
-void FUN_00d06640_class::Destroy()
-{
-    unsigned int highBit = 0x80000000u;
-
-    m_pVtable = &DAT_010cce28;
-    ReleaseAllReferences();
-    m_lock.~S_00d49310_Lock();
-
-    MemoryRouter* router = _D1A0E0GetMemoryRouter();
-    MemoryAllocator* allocator = router->m_p10;
-    unsigned int capacity = m_pWorkingSet[3].m_uCapacity;
-    m_pWorkingSet[3].m_uCount = 0;
-    if (!(capacity & highBit))
-        allocator->Free(m_pWorkingSet[3].m_pData, (capacity & 0x3FFFFFFFu) * 4u);
-    m_pWorkingSet[3].m_pData = 0;
-    m_pWorkingSet[3].m_uCapacity = highBit;
-
-    router = _D1A0E0GetMemoryRouter();
-    allocator = router->m_p10;
-    capacity = m_pWorkingSet[2].m_uCapacity;
-    m_pWorkingSet[2].m_uCount = 0;
-    if (!(capacity & highBit))
-        allocator->Free(m_pWorkingSet[2].m_pData, (capacity & 0x3FFFFFFFu) * 4u);
-    m_pWorkingSet[2].m_pData = 0;
-    m_pWorkingSet[2].m_uCapacity = highBit;
-
-    router = _D1A0E0GetMemoryRouter();
-    allocator = router->m_p10;
-    capacity = m_pWorkingSet[1].m_uCapacity;
-    m_pWorkingSet[1].m_uCount = 0;
-    if (!(capacity & highBit))
-        allocator->Free(m_pWorkingSet[1].m_pData, (capacity & 0x3FFFFFFFu) * 4u);
-    m_pWorkingSet[1].m_pData = 0;
-    m_pWorkingSet[1].m_uCapacity = highBit;
-
-    router = _D1A0E0GetMemoryRouter();
-    allocator = router->m_p10;
-    capacity = m_pWorkingSet[0].m_uCapacity;
-    m_pWorkingSet[0].m_uCount = 0;
-    if (!(capacity & highBit))
-        allocator->Free(m_pWorkingSet[0].m_pData, (capacity & 0x3FFFFFFFu) * 4u);
-    m_pWorkingSet[0].m_pData = 0;
-    m_pWorkingSet[0].m_uCapacity = highBit;
-
-    m_pVtable = &_DAT_0102e388;
-}
-
 // @fnv 0x00cb0020
 void __stdcall FUN_00cb0020(unsigned char* output)
 {
@@ -209,17 +116,6 @@ class hkObjD062
     void RemoveNullEntries();
 };
 
-// Iterates m_entries backwards and removes every entry that is null via removeAtAndCopy.
-// @fnv 0x00d06230
-void hkObjD062::RemoveNullEntries()
-{
-    for (int i = m_entries.GetLogicalSize() - 1; i >= 0; i--)
-    {
-        if (m_entries[i] == 0)
-            m_entries.removeAtAndCopy(i);
-    }
-}
-
 typedef unsigned int Size64;
 inline void* __cdecl operator new(Size64, void* p)
 {
@@ -253,25 +149,6 @@ struct Container64
     Array64 array;
     void __thiscall AddShape(Shape64* object);
 };
-// Calls FUN_00c90510 on object, then appends object to array, growing it via ResizeAudioStream when full.
-// @fnv 0x00d064a0
-void Container64::AddShape(Shape64* pShape)
-{
-    if (pShape)
-    {
-        pShape->FUN_00c90510();
-        Array64* pArray = &array;
-        Router64* router = FUN_00c85750();
-        if (pArray->size == (pArray->capacityAndFlags & 0x3fffffff))
-        {
-            ResizeAudioStream(router->allocator, pArray, 4);
-        }
-        ShapePtr64* pSlot = pArray->items + pArray->size;
-        __assume(pSlot != 0);
-        new (pSlot) ShapePtr64(pShape);
-        ++pArray->size;
-    }
-}
 
 struct FUN_00cb0b80
 {
@@ -374,17 +251,6 @@ struct FnvCpu_FUN_00d06c00_CpuObject
     void Destroy();
     FnvCpu_FUN_00d06c00_CpuObject* FUN_00d06c00(unsigned int flags);
 };
-// @fnv 0x00d06c00
-FnvCpu_FUN_00d06c00_CpuObject* FnvCpu_FUN_00d06c00_CpuObject::FUN_00d06c00(unsigned int flags)
-{
-    Destroy();
-    if (flags & 1)
-    {
-        FnvCpu_FUN_00d06c00_CpuAllocatorHolder* holder = FUN_00c85750();
-        holder->allocator->Invoke(this, size);
-    }
-    return this;
-}
 }  // namespace fnv_00d06c00
 
 class hkMemoryAllocatorD29
@@ -471,19 +337,6 @@ class hkpPhysicsSystemD29
     bool m_bSlotEnabled;
 };
 
-// Copies the rigid body, constraint, action, phantom, name, user data, and slot enabled state arrays and fields from kOther into this physics system.
-// @fnv 0x00d06290
-void hkpPhysicsSystemD29::FUN_00d06290(const hkpPhysicsSystemD29& kOther)
-{
-    m_ppRigidBodies = kOther.m_ppRigidBodies;
-    m_kPhantoms = kOther.m_kPhantoms;
-    m_ppConstraints = kOther.m_ppConstraints;
-    m_ppActions = kOther.m_ppActions;
-    m_name = kOther.m_name;
-    m_ulUserData = kOther.m_ulUserData;
-    m_bSlotEnabled = kOther.m_bSlotEnabled;
-}
-
 template <int SIZE> __forceinline void memCpyOneAlignedD064(void* dst, const void* src)
 {
     const unsigned int* s = (const unsigned int*)src;
@@ -544,17 +397,6 @@ class hkOwnerD064
 
     void FUN_00d064f0(hkShapeD064* shape);
 };
-
-// If shape is non-null, calls shape->FUN_00c90510() and appends it to m_shapes via AddBack.
-// @fnv 0x00d064f0
-void hkOwnerD064::FUN_00d064f0(hkShapeD064* shape)
-{
-    if (shape)
-    {
-        shape->FUN_00c90510();
-        m_shapes.AddBack(shape);
-    }
-}
 
 template <int SIZE> __forceinline void memCpyOneAlignedXd06540(void* dst, const void* src)
 {
@@ -617,17 +459,6 @@ class hkOwnerXd06540
     void FUN_00d06540(hkShapeXd06540* shape);
 };
 
-// If shape is non-null, calls shape->FUN_00c90510() and appends shape to m_shapes via AddBack.
-// @fnv 0x00d06540
-void hkOwnerXd06540::FUN_00d06540(hkShapeXd06540* shape)
-{
-    if (shape)
-    {
-        shape->FUN_00c90510();
-        m_shapes.AddBack(shape);
-    }
-}
-
 template <int SIZE> __forceinline void memCpyOneAlignedXd06590(void* dst, const void* src)
 {
     const unsigned int* s = (const unsigned int*)src;
@@ -688,17 +519,6 @@ class hkOwnerXd06590
 
     void FUN_00d06590(hkShapeXd06590* shape);
 };
-
-// If shape is non-null, calls shape->FUN_00c90510() and appends it to m_shapes via AddBack.
-// @fnv 0x00d06590
-void hkOwnerXd06590::FUN_00d06590(hkShapeXd06590* shape)
-{
-    if (shape)
-    {
-        shape->FUN_00c90510();
-        m_shapes.AddBack(shape);
-    }
-}
 
 #include <xmmintrin.h>
 __declspec(align(16)) struct AlignedVector4
@@ -765,33 +585,6 @@ struct PhysicsSystemWrapper : public hkpPhysicsSystem
     void ApplyMotionTransform(const hkTransform* a2);
 };
 
-// Applies a2 to every rigid body, constraint, and phantom in the physics system.
-// @fnv 0x00d05f60
-void PhysicsSystemWrapper::ApplyMotionTransform(const hkTransform* a2)
-{
-    for (int i = 0; i < m_ppRigidBodies.m_iElementCount; ++i)
-    {
-        AlignedTransform t1;
-        *(hkVector4*)&t1.m_kColumn0 = a2->m_rotation.m_kColumn0;
-        *(hkVector4*)&t1.m_kColumn1 = a2->m_rotation.m_kColumn1;
-        *(hkVector4*)&t1.m_kColumn2 = a2->m_rotation.m_kColumn2;
-        *(hkVector4*)&t1.m_vTranslation = a2->m_vTranslation;
-
-        AlignedTransform t2 = t1;
-
-        t2.FUN_00cb23e0(&((FUN_00ca8890_Class*)m_ppRigidBodies.m_data[i])->m_kMotionTransform);
-        ((FUN_00ca8890_Class*)m_ppRigidBodies.m_data[i])->FUN_00ca8890(&t2);
-    }
-    for (int i = 0; i < m_ppConstraints.m_iElementCount; ++i)
-    {
-        ((FUN_00cf30f0_Class*)m_ppConstraints.m_data[i])->FUN_00cf30f0(a2);
-    }
-    for (int i = 0; i < m_kPhantoms.m_iElementCount; ++i)
-    {
-        FUN_00d05df0(m_kPhantoms.m_data[i], a2);
-    }
-}
-
 struct ReferenceBody
 {
     void FUN_00c905b0();
@@ -804,20 +597,6 @@ struct BodyCollection
     unsigned int capacityFlags;
     void FUN_00d06130(unsigned int index);
 };
-// Calls FUN_00c905b0 on the element at index, decrements count, and shifts the last element into the slot if index is not the last.
-// @fnv 0x00d06130
-void BodyCollection::FUN_00d06130(unsigned int index)
-{
-    data[index]->FUN_00c905b0();
-    --count;
-    if (count != index)
-    {
-        ReferenceBody** dst = data + index;
-        ReferenceBody* const* src = data + count;
-        for (int n = 0; n < sizeof(ReferenceBody*); n += sizeof(ReferenceBody*))
-            *(ReferenceBody**)((char*)dst + n) = *(ReferenceBody* const*)((const char*)src + n);
-    }
-}
 
 struct hkRefD061
 {
@@ -831,20 +610,6 @@ struct OwnerD061
     unsigned int capacityFlags3;
     void FUN_00d06170(int index);
 };
-// Calls FUN_00c905b0 on refs3[index], decrements count3, and moves the last element into the slot if index is not the last.
-// @fnv 0x00d06170
-void OwnerD061::FUN_00d06170(int index)
-{
-    refs3[index]->FUN_00c905b0();
-    --count3;
-    if (count3 != index)
-    {
-        hkRefD061** dst = refs3 + index;
-        hkRefD061* const* src = refs3 + count3;
-        for (int n = 0; n < sizeof(hkRefD061*); n += sizeof(hkRefD061*))
-            *(hkRefD061**)((char*)dst + n) = *(hkRefD061* const*)((const char*)src + n);
-    }
-}
 
 struct RefObj
 {
@@ -881,14 +646,6 @@ struct FUN_00d061b0_Class
     hkArray_d061<RefObj*> m_refs;
     void FUN_00d061b0(int index);
 };
-
-// Calls FUN_00c905b0 on m_refs[index], then removes that entry from m_refs.
-// @fnv 0x00d061b0
-void FUN_00d061b0_Class::FUN_00d061b0(int index)
-{
-    m_refs[index]->FUN_00c905b0();
-    m_refs.removeAt(index);
-}
 
 namespace fnv_00d061f0 {
 struct RefObj
@@ -927,13 +684,6 @@ struct FUN_00d061f0_Class
     void FUN_00d061f0(int index);
 };
 
-// Calls FUN_00c905b0 on the RefObj at index, then removes that entry from m_refs.
-// @fnv 0x00d061f0
-void FUN_00d061f0_Class::FUN_00d061f0(int index)
-{
-    m_refs[index]->FUN_00c905b0();
-    m_refs.removeAt(index);
-}
 }  // namespace fnv_00d061f0
 
 extern float DAT_0104da48;
@@ -1001,26 +751,6 @@ union GridCodes
     unsigned short lanes[4];
     unsigned __int64 packed;
 };
-__forceinline void encodePoint(const TerrainVec& point, const TerrainVec& offset, const TerrainVec& scale,
-                               GridCodes& codes)
-{
-    TerrainVec value;
-    value.add(point, offset);
-    value.q = _mm_mul_ps(value.q, _mm_load_ps((const float*)&scale));
-    TerrainVec bias;
-    bias.q = DAT_011b1bd0;
-    value.add(bias);
-    union Packed
-    {
-        __m128 q;
-        unsigned int words[4];
-    } raw;
-    raw.q = value.q;
-    codes.lanes[0] = (unsigned short)(raw.words[0] >> 6);
-    codes.lanes[1] = (unsigned short)(raw.words[1] >> 6);
-    codes.lanes[2] = (unsigned short)(raw.words[2] >> 6);
-    codes.lanes[3] = (unsigned short)(raw.words[3] >> 6);
-}
 struct TerrainInput
 {
     const TerrainVec* spheres;
@@ -1066,103 +796,6 @@ struct TerrainShape : TerrainBase
     TerrainVec floorOffset;
     void EvaluateSpheres(const TerrainInput& input, TerrainVec* output) const;
 };
-// For each input sphere, computes terrain height and normal at its grid position, then stores the signed distance to the sphere in the output vector.
-// @fnv 0x00cb01f0
-void TerrainShape::EvaluateSpheres(const TerrainInput& input, TerrainVec* output) const
-{
-    const TerrainVec* sphere = input.spheres;
-    TerrainVec fallback;
-    fallback.set(0.0f, 1.0f, 0.0f, DAT_0104da48);
-    for (int remaining = input.count - 1; remaining >= 0; ++output, ++sphere, --remaining)
-    {
-        *output = fallback;
-        TerrainVec position;
-        position.q = _mm_mul_ps(_mm_load_ps((const float*)sphere), _mm_load_ps((const float*)&gridScale));
-        GridCodes codes;
-        encodePoint(*sphere, floorOffset, gridScale, codes);
-        int x = codes.lanes[0];
-        int z = codes.lanes[2];
-        if (x >= width - 1 || z >= depth - 1)
-            continue;
-        float fx = position.lane(0) - float(x);
-        float afDepth = position.lane(2) - float(z);
-        float height;
-        float vertexHeight;
-        int vertexX;
-        TerrainFlip flip = flipped();
-        if (flip.value)
-        {
-            float a = sample(x, z);
-            vertexHeight = a;
-            vertexX = x;
-            float b = sample(x + 1, z + 1);
-            if (fx > afDepth)
-            {
-                float c = sample(x + 1, z);
-                float sx = c - a;
-                float sz = b - c;
-                height = a + afDepth * sz + fx * sx;
-                output->lane(0) = -sx;
-                output->lane(2) = -sz;
-            }
-            else
-            {
-                float c = sample(x, z + 1);
-                float sx = b - c;
-                float sz = c - a;
-                height = a + afDepth * sz + fx * sx;
-                output->lane(0) = -sx;
-                output->lane(2) = -sz;
-            }
-        }
-        else
-        {
-            float a = sample(x + 1, z);
-            vertexHeight = a;
-            vertexX = x + 1;
-            float b = sample(x, z + 1);
-            if (fx + afDepth > 1.0)
-            {
-                float c = sample(x + 1, z + 1);
-                float sx = c - b;
-                float sz = c - a;
-                height = a + afDepth * sz + (fx - 1.0) * sx;
-                output->lane(0) = -sx;
-                output->lane(2) = -sz;
-            }
-            else
-            {
-                float c = sample(x, z);
-                float sx = a - c;
-                float sz = b - c;
-                height = c + afDepth * sz + fx * sx;
-                output->lane(0) = -sx;
-                output->lane(2) = -sz;
-            }
-        }
-        output->q = _mm_mul_ps(output->q, gridScale.q);
-        output->normalize();
-        float distance;
-        if (!projection)
-        {
-            distance = (position.lane(1) - height) * worldScale.lane(1) - sphere->lane(3);
-        }
-        else
-        {
-            TerrainVec vertex;
-            vertex.set(float(vertexX), vertexHeight, float(z), 0.0f);
-            TerrainVec delta;
-            delta.q = _mm_sub_ps(position.q, vertex.q);
-            delta.q = _mm_mul_ps(delta.q, worldScale.q);
-            TerrainVec product;
-            product.q = _mm_mul_ps(output->q, delta.q);
-            float dot;
-            _mm_store_ss(&dot, product.sum3());
-            distance = dot - sphere->lane(3);
-        }
-        output->lane(3) = distance;
-    }
-}
 
 namespace fnv_00d06720 {
 #include <intrin.h>
@@ -1405,82 +1038,4 @@ class FUN_00d065e0 : public hkReferencedObjectD
     hkBoolD m_bSlotEnabled;
 };
 
-// @fnv 0x00d06720
-FUN_00d065e0* FUN_00d065e0::FUN_00d06720() const throw()
-{
-    FUN_00d065e0* newSystem = new FUN_00d065e0();
-
-    newSystem->m_name = m_name;
-    newSystem->m_ulUserData = m_ulUserData;
-    newSystem->m_bSlotEnabled = m_bSlotEnabled;
-
-    newSystem->m_ppRigidBodies.SetSizeAndGrow(m_ppRigidBodies.GetLogicalSize());
-    newSystem->m_kPhantoms.SetSizeAndGrow(m_kPhantoms.GetLogicalSize());
-    newSystem->m_ppConstraints.SetSizeAndGrow(m_ppConstraints.GetLogicalSize());
-    newSystem->m_ppActions.SetSizeAndGrow(m_ppActions.GetLogicalSize());
-
-    int i;
-    for (i = 0; i < m_ppRigidBodies.GetLogicalSize(); i++)
-    {
-        newSystem->m_ppRigidBodies[i] = m_ppRigidBodies[i]->clone();
-    }
-
-    for (i = 0; i < m_kPhantoms.GetLogicalSize(); i++)
-    {
-        newSystem->m_kPhantoms[i] = m_kPhantoms[i]->clone();
-    }
-
-    for (i = 0; i < m_ppConstraints.GetLogicalSize(); i++)
-    {
-        hkpConstraintInstanceD* constraint = m_ppConstraints[i];
-        hkpRigidBodyD* pNewRigidBodyA = newSystem->m_ppRigidBodies[m_ppRigidBodies.indexOf(constraint->getRigidBody())];
-        hkpRigidBodyD* pNewRigidBodyB =
-            constraint->FUN_00cf2fb0()
-                ? 0
-                : newSystem->m_ppRigidBodies[m_ppRigidBodies.indexOf(constraint->getRigidBodyB())];
-        newSystem->m_ppConstraints[i] = constraint->FUN_00cf3fa0(pNewRigidBodyA, pNewRigidBodyB, 0);
-    }
-
-    for (i = 0; i < m_ppActions.GetLogicalSize(); i++)
-    {
-        hkpActionD* action = m_ppActions[i];
-        if (!action)
-        {
-            newSystem->m_ppActions[i] = 0;
-        }
-        else
-        {
-            hkArrayD<hkpEntityD*> oldEntities;
-            _ReadWriteBarrier();
-            action->GetEntities(oldEntities);
-            hkArrayD<hkpEntityD*> newEntities;
-            int numEntities = oldEntities.GetLogicalSize();
-            newEntities.SetSizeAndGrow(numEntities);
-            for (int j = 0; j < numEntities; j++)
-            {
-                int index = m_ppRigidBodies.indexOf(static_cast<hkpRigidBodyD*>(oldEntities[j]));
-                newEntities[j] = newSystem->m_ppRigidBodies[index];
-            }
-
-            hkpActionD* actionCur = *(hkpActionD* volatile*)&action;
-            _ReadWriteBarrier();
-            hkArrayD<hkpPhantomD*> oldPhantoms;
-            _ReadWriteBarrier();
-            actionCur->getPhantomArray(oldPhantoms);
-            hkArrayD<hkpPhantomD*> newPhantoms;
-            int numPhantoms = oldPhantoms.GetLogicalSize();
-            newPhantoms.SetSizeAndGrow(numPhantoms);
-            for (int k = 0; k < numPhantoms; k++)
-            {
-                hkpPhantomD* phantom = oldPhantoms[k];
-                int index = m_kPhantoms.indexOf(phantom);
-                newPhantoms[k] = newSystem->m_kPhantoms[index];
-            }
-
-            newSystem->m_ppActions[i] = action->clone(newEntities, newPhantoms);
-        }
-    }
-
-    return newSystem;
-}
 }  // namespace fnv_00d06720

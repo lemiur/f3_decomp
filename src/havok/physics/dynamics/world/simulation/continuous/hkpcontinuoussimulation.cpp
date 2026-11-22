@@ -161,15 +161,6 @@ struct Object : Base {
     void FUN_00d0c3e0(int);
     void ProcessEntries(int*, int, int, unsigned int);
 };
-// Calls FUN_00cfa430 with the arguments, then, when flags has bit 0 set, dispatches to FUN_00d0c290 for multiple entries or FUN_00d0c3e0 for a single entry.
-// @fnv 0x00d0c970
-void Object::ProcessEntries(int* entries, int count, int option, unsigned int flags) {
-    FUN_00cfa430(entries, count, option, flags);
-    if (flags & 1) {
-        if (count != 1) FUN_00d0c290(entries, count);
-        else FUN_00d0c3e0(*entries);
-    }
-}
 
 extern int DAT_010cd45c;
 struct Callback { virtual void Invoke(int value); };
@@ -198,23 +189,6 @@ struct FUN_00d0d0d0_cls {
     void FUN_00cf86d0();
     void Destroy();
 };
-// @fnv 0x00d0d0d0
-void FUN_00d0d0d0_cls::Destroy() {
-    unk00 = (int)&DAT_010cd45c;
-    if (sub3c.unk0c)
-        sub3c.unk0c->Invoke(1);
-    sub3c.ProcessArgument((void*)FUN_00c85750()->unk10);
-    sub3c.FUN_00a29680();
-    Manager* manager = FUN_00c85750();
-    Receiver* writer = (Receiver*)manager->unk10;
-    unk34 = 0;
-    if ((unk38 & 0x80000000) != 0) goto skip_writer;
-    writer->Invoke(unk30, (unk38 & 0x3fffffff) * 0x70);
-skip_writer:
-    unk30 = 0;
-    unk38 = 0x80000000;
-    FUN_00cf86d0();
-}
 
 void __cdecl InitAndDispatch();
 struct S_00d0f2e0
@@ -749,47 +723,6 @@ struct EntityB {
     hkVector4 m_unk1c0;
 };
 
-// @fnv 0x00d0c790
-void UpdateIslandMotionStates(Island* island, ByteArray* flags, SolverInfo* info)
-{
-    for (int i = 0; i < island->m_iActorEntryCount; i++)
-    {
-        int f = flags->m_data[i];
-        if (f == 1 || f == 2)
-        {
-            hkMotionState* ms = &island->m_kActorEntries[i]->m_kMotionState;
-            ((FUN_008cd6a0_Class*)ms)->FUN_00cb2d90(&ms->m_qRotation1);
-            __m128 v = ms->m_vCenterOfMassLocal.m_vComponents;
-            __m128 r1 = _mm_mul_ps(_mm_shuffle_ps(v, v, 0x55), ms->m_rotation.m_kColumn1.m_vComponents);
-            __m128 r0 = _mm_mul_ps(_mm_shuffle_ps(v, v, 0x00), ms->m_rotation.m_kColumn0.m_vComponents);
-            __m128 r2 = _mm_mul_ps(_mm_shuffle_ps(v, v, 0xaa), ms->m_rotation.m_kColumn2.m_vComponents);
-            ms->m_vTranslation.m_vComponents = _mm_sub_ps(ms->m_vCenterOfMass1.m_vComponents, _mm_add_ps(_mm_add_ps(r1, r0), r2));
-        }
-        if (f == 8 || f == 2)
-        {
-            EntityB* e = (EntityB*)island->m_kActorEntries[i];
-            unsigned int idx = e->m_solverIndex;
-            SolverBody* b = (SolverBody*)(info->m_apEntities + idx);
-            b->m_kColumn0 = ((VelocityEntry*)info->m_velocities)[idx >> 7].m_unk10;
-            e->m_unk1b0 = b->m_unk10;
-            __m128 c0 = b->m_kColumn0.m_vComponents;
-            __m128 c1 = b->m_kColumn1.m_vComponents;
-            __m128 c2 = b->m_kColumn2.m_vComponents;
-            __m128 tmp = _mm_unpacklo_ps(c0, c1);
-            __m128 ctmp = _mm_shuffle_ps(_mm_unpackhi_ps(c0, c1), c2, 0xe4);
-            c0 = _mm_movelh_ps(tmp, c2);
-            c1 = _mm_movehl_ps(c0, tmp);
-            c1 = _mm_shuffle_ps(c1, c2, 0xd4);
-            c2 = ctmp;
-            __m128 v = b->m_unk20.m_vComponents;
-            __m128 r1 = _mm_mul_ps(_mm_shuffle_ps(v, v, 0x55), c1);
-            __m128 r0 = _mm_mul_ps(_mm_shuffle_ps(v, v, 0x00), c0);
-            __m128 r2 = _mm_mul_ps(_mm_shuffle_ps(v, v, 0xaa), c2);
-            e->m_unk1c0.m_vComponents = _mm_add_ps(_mm_add_ps(r1, r0), r2);
-        }
-    }
-}
-
 struct ReportSink {
     virtual void v0();
     virtual void v1();
@@ -835,23 +768,6 @@ struct FUN_00d0c8d0_cls {
 
 unsigned int FUN_00d06f80(void* base, unsigned int bytes);
 extern char DAT_01269514;
-
-// @fnv 0x00d0c8d0
-void FUN_00d0c8d0_cls::ReportMemoryUsage(ReportSink* pSink, int iUnused) {
-    unsigned int flags = m_38;
-    if ((flags & 0x80000000u) == 0 || pSink->m_10 != 0) {
-        void* base = m_30;
-        unsigned int count = flags & 0x3fffffff;
-        unsigned int r = FUN_00d06f80(base, count * 0x70);
-        pSink->v5(3, "toiEvents", m_30, m_34 * 0x70, r);
-    }
-    pSink->v3("toiResourceManager", m_48, 0);
-    FilePool* pool = &m_3C;
-    unsigned int id = pool->FUN_00cb17e0();
-    unsigned int r2 = FUN_00d06f80((void*)pool->m_00, id);
-    pSink->v5(1, "entitiesNeedingPsiCollisionDetection", (void*)pool->m_00, id, r2);
-    FUN_00c90360(pSink, &DAT_01269514);
-}
 
 struct InfoBlock {
     unsigned int unk00;
@@ -1867,32 +1783,6 @@ struct EntryList_b2089
     int m_iArrayLength;   // +0x04
 };
 
-// @fnv 0x00d0bf30
-void FUN_00d0bf30(World_b2089* world, EntryList_b2089* pEntries)
-{
-    for (int i = 0; i < pEntries->m_iArrayLength; ++i)
-    {
-        char* e = (char*)pEntries->m_pData[i];
-        char* ms = world->m_0c + *(unsigned int*)(e + 0xa4);
-
-        *(__m128*)(ms + 0x10) = *(__m128*)(e + 0x1b0);
-
-        __declspec(align(16)) unsigned int saved[4];
-        unsigned int* src = (unsigned int*)(ms + 0x50);
-        saved[0] = src[0];
-        saved[1] = src[1];
-        saved[2] = src[2];
-        saved[3] = src[3];
-
-        *(__m128*)(ms + 0x50) = *(__m128*)(world->m_18 + ((*(unsigned int*)(e + 0xa4) >> 7) * 32) + 0x10);
-
-        SlotObj_b2089* slot = (SlotObj_b2089*)(ms + 0x20);
-        slot->FUN_00c7f700(ms + 0x50, e + 0x1c0);
-
-        *(__m128*)(ms + 0x50) = *(__m128*)saved;
-    }
-}
-
 extern float DAT_010c7948[];
 struct CollisionMotion {
     int unk00, unk04;
@@ -2234,109 +2124,8 @@ struct WorldD0 {
     int unk5c, unk60, unk64, unk68, unk6c, unk70, unk74;
     CollisionInputD0* m_pCollisionInput;
 };
-static inline void UncompressExpandedAabbD0(const BoundingVolumeDataD0& in, AabbUint32D0& out)
-{
-    int shift = in.m_ucExpansionShift;
-    unsigned int m0 = in.m_kMinimumCorner[0] - (in.m_ucExpansionMin[0] << shift);
-    unsigned int m1 = in.m_kMinimumCorner[1] - (in.m_ucExpansionMin[1] << shift);
-    unsigned int m2 = in.m_kMinimumCorner[2] - (in.m_ucExpansionMin[2] << shift);
-    out.m_kMinimumCorner[0] = m0;
-    out.m_kMinimumCorner[1] = m1;
-    out.m_kMinimumCorner[2] = m2;
-    unsigned int x0 = in.m_kMaximumCorner[0] + (in.m_ucExpansionMax[0] << shift);
-    unsigned int x1 = in.m_kMaximumCorner[1] + (in.m_ucExpansionMax[1] << shift);
-    unsigned int x2 = in.m_kMaximumCorner[2] + (in.m_ucExpansionMax[2] << shift);
-    out.m_kMaximumCorner[0] = x0;
-    out.m_kMaximumCorner[1] = x1;
-    out.m_kMaximumCorner[2] = x2;
-}
 void __cdecl FUN_00d1a330(CollisionInputD0* input, CollidableD0** collidables, int numCollidables);
 void __cdecl FUN_00cf7130(PairArrayD0& newPairs, PairArrayD0& delPairs);
-
-static inline void TimerBeginListD0(const char* name, const char* firstSub)
-{
-    MonitorStreamD0* s = (MonitorStreamD0*)TlsGetValue(DAT_0126835c);
-    if (s->m_kRayEnd < s->m_capacityEnd) {
-        TimerListCommandD0* h = (TimerListCommandD0*)s->m_kRayEnd;
-        h->m_name = name;
-        h->m_firstSub = firstSub;
-        _ReadWriteBarrier();
-        volatile unsigned int t = (unsigned int)__rdtsc();
-        h->m_uiCommandId = t;
-        s->m_kRayEnd = (char*)(h + 1);
-    }
-}
-static inline void TimerCommandD0Write(const char* name)
-{
-    MonitorStreamD0* s = (MonitorStreamD0*)TlsGetValue(DAT_0126835c);
-    if (s->m_kRayEnd < s->m_capacityEnd) {
-        TimerCommandD0* h = (TimerCommandD0*)s->m_kRayEnd;
-        h->m_name = name;
-        _ReadWriteBarrier();
-        volatile unsigned int t = (unsigned int)__rdtsc();
-        h->m_uiCommandId = t;
-        s->m_kRayEnd = (char*)(h + 1);
-    }
-}
-
-static inline void* AllocateStackD0(int nbytes)
-{
-    Manager* mem = FUN_00c85750();
-    void* p = (void*)mem->unk00;
-    mem->unk00 += (nbytes + 127) & ~127;
-    return p;
-}
-static inline void FreeStackD0(void* p)
-{
-    FUN_00c85750()->unk00 = (int)p;
-}
-// Builds handles and uncompressed AABBs for each collidable, runs the broad-phase pair update under lock, then processes new and deleted pairs.
-// @fnv 0x00d0c030
-void __stdcall UpdateBroadPhasePairs(CollidableD0** collidables, int numCollidables, WorldD0* world,
-    PairArrayD0& newPairs, PairArrayD0& delPairs)
-{
-    if (!numCollidables)
-        return;
-    TimerBeginListD0(DAT_010cc624, DAT_010cd3e8);
-
-    AabbUint32D0* aabbs = (AabbUint32D0*)AllocateStackD0(numCollidables * sizeof(AabbUint32D0));
-    int** handles = (int**)AllocateStackD0(numCollidables * sizeof(int*));
-
-    {
-        CollidableD0** pCollidableCursor = collidables;
-        int** h = handles;
-        AabbUint32D0* pAabbCursor = aabbs;
-        for (int i = numCollidables - 1; i >= 0; i--)
-        {
-            CollidableD0* collidable = pCollidableCursor[0];
-            if (i >= 4)
-                _mm_prefetch((const char*)pCollidableCursor[4] + 16, 0);
-            *h = &collidable->m_kBroadPhaseHandle;
-            BoundingVolumeDataD0& rBoundingVolume = collidable->m_kBoundingVolumeData;
-            if (rBoundingVolume.m_kMinimumCorner[0] > rBoundingVolume.m_kMaximumCorner[0])
-                FUN_00d1a330(world->m_pCollisionInput, &collidable, 1);
-            UncompressExpandedAabbD0(rBoundingVolume, *pAabbCursor);
-            pCollidableCursor++;
-            h++;
-            pAabbCursor++;
-        }
-    }
-
-    TimerCommandD0Write(DAT_010cc5fc);
-    world->m_pJobSemaphore->lock();
-    world->m_pJobSemaphore->UpdatePairs(handles, aabbs, numCollidables, newPairs, delPairs);
-    world->m_pJobSemaphore->unlock();
-
-    FreeStackD0(handles);
-    FreeStackD0(aabbs);
-
-    if (newPairs.m_iElementCount + delPairs.m_iElementCount > 0)
-    {
-        TimerCommandD0Write(DAT_010cc5f0);
-        FUN_00cf7130(newPairs, delPairs);
-    }
-    TimerCommandD0Write(DAT_01076f38);
-}
 
 // Havok-style query: collect candidate pairs from the source into a temporary array, skip entries
 // below the level or already flagged (>= 8), mark unflagged owners once (callback), and append every
@@ -3441,56 +3230,6 @@ public:
 
 
 struct D0C290Pair { unsigned int lo, hi; };
-template <int N>
-static __forceinline void memCpyOneAlignedD0C2(void* dst, const void* src)
-{
-    int i = 0;
-    do
-    {
-        ((D0C290Pair*)dst)[i] = ((const D0C290Pair*)src)[i];
-    } while (++i < N / 8);
-}
-
-// @fnv 0x00d0c290
-void FUN_00d0c290_cls::FUN_00d0c290(int* ids, int n) {
-    FUN_00d0c290_cls* self = this;
-    if (self->m_34 != 0) {
-        Tmp t;
-        t.unk00 = 0;
-        t.unk04 = 0;
-        t.unk08 = -1;
-        Manager* pManager = FUN_00c85750();
-        t.EnsureCapacity((void*)pManager->unk10, n);
-        for (int i = 0; i < n; ++i) {
-            int id = ids[i];
-            Manager* h = FUN_00c85750();
-            t.FUN_00cb1870((void*)h->unk10, id, 0);
-        }
-        for (int k = 0; k < self->m_34; k++) {
-            D0C290Entry& e = self->m_30[k];
-            int lo = t.FindSlot(e.m_0c);
-            int hi = t.FindSlot(e.m_10);
-            if (lo > t.unk08 && hi > t.unk08) {
-                continue;
-            }
-            int v;
-            if (e.m_0c->unkE8 != 5) {
-                v = e.m_0c->unkCC;
-            } else {
-                v = e.m_10->unkCC;
-            }
-            e.m_14->v08(v, &e.unk18);
-            self->m_34--;
-            if (self->m_34 != k) {
-                memCpyOneAlignedD0C2<sizeof(D0C290Entry)>(&self->m_30[k], &self->m_30[self->m_34]);
-            }
-            k--;
-        }
-        Manager* h = FUN_00c85750();
-        t.ProcessArgument((void*)h->unk10);
-        t.FUN_00a29680();
-    }
-}
 
 namespace fnv_00d0c3e0 {
 struct Tmp {
@@ -3628,38 +3367,7 @@ public:
     void FUN_00d0c3e0(void* obj);
 };
 struct D0C290Pair { unsigned int lo, hi; };
-template <int N>
-static __forceinline void memCpyOneAlignedD0C2(void* dst, const void* src)
-{
-    int i = 0;
-    do
-    {
-        ((D0C290Pair*)dst)[i] = ((const D0C290Pair*)src)[i];
-    } while (++i < N / 8);
-}
 
-// Removes every entry in m_30 whose m_0c or m_10 equals obj, calling m_14->v08 first and moving the last entry into the gap.
-// @fnv 0x00d0c3e0
-void D0C3E0Owner::FUN_00d0c3e0(void* obj)
-{
-    for (int k = 0; k < m_34; k++) {
-        D0C290Entry& e = m_30[k];
-        if ((void*)m_30[k].m_0c == obj || (void*)m_30[k].m_10 == obj) {
-            int v;
-            if (e.m_0c->unkE8 != 5) {
-                v = e.m_0c->unkCC;
-            } else {
-                v = e.m_10->unkCC;
-            }
-            e.m_14->v08(v, &e.unk18);
-            m_34--;
-            if (m_34 != k) {
-                memCpyOneAlignedD0C2<sizeof(D0C290Entry)>(&m_30[k], &m_30[m_34]);
-            }
-            k--;
-        }
-    }
-}
 }  // namespace fnv_00d0c3e0
 
 extern const char str_010cd440[];
@@ -3792,19 +3500,6 @@ struct S_00d0e210_MonitorStream {
     char* m_pRayCursor;
     char* m_pCurrentCommand;
 };
-
-static inline void S_00d0e210_Timer(const char* name)
-{
-    S_00d0e210_MonitorStream* s = (S_00d0e210_MonitorStream*)TlsGetValue(DAT_0126835c);
-    if (s->m_kRayEnd < s->m_pCurrentCommand) {
-        S_00d0e210_TimerCommand* h = (S_00d0e210_TimerCommand*)s->m_kRayEnd;
-        h->m_pCommandName = name;
-        _ReadWriteBarrier();
-        unsigned int t = (unsigned int)__rdtsc();
-        h->m_uiStartTicks = *(volatile unsigned int*)&t;
-        s->m_kRayEnd = (char*)(h + 1);
-    }
-}
 
 struct S_00d0e210_Heap {
     virtual void v00();
@@ -4141,51 +3836,6 @@ struct S_00d0e210_Sim {
     void FUN_00d0e210(S_00d0e210_StepInfo* info, S_00d0e210_ToiEvent& event, int unused, float dt) throw();
 };
 
-// Locks the world, simulates the event via its contact manager, drops queued TOI events for its type-3 entities, then activates those entities.
-// @fnv 0x00d0e210
-void S_00d0e210_Sim::FUN_00d0e210(S_00d0e210_StepInfo* info, S_00d0e210_ToiEvent& event, int unused, float dt) throw()
-{
-    union { unsigned int tick; S_00d0e210_Entity** p; } sh;
-    {
-        S_00d0e210_MonitorStream* s = (S_00d0e210_MonitorStream*)TlsGetValue(DAT_0126835c);
-        if (s->m_kRayEnd < s->m_pCurrentCommand) {
-            S_00d0e210_TimerCommand* h = (S_00d0e210_TimerCommand*)s->m_kRayEnd;
-            h->m_pCommandName = "TtSimpleTOI";
-            _ReadWriteBarrier();
-            *(volatile unsigned int*)&sh.tick = (unsigned int)__rdtsc();
-            h->m_uiStartTicks = *(volatile unsigned int*)&sh.tick;
-            s->m_kRayEnd = (char*)(h + 1);
-        }
-    }
-    m_pOwningWorld->lockCriticalOperations();
-    {
-        S_00d0e210_PtrArray movedEntities;
-        event.m_pContactManager->simulate(event, dt, movedEntities);
-        S_00d0e210_PtrArray active;
-        sh.p = event.m_kActorEntries;
-        for (int i = 0; i < 2; i++, sh.p++) {
-            S_00d0e210_Entity* e = *sh.p;
-            if (e->unk2A == 3) {
-                UpdateRotationInterpolation(event.m_uiCommandId, &e->unkF0);
-                FUN_00cc0ea0(e, info->unk78);
-                for (int j = m_kToiEventQueue.m_iElementCount - 1; j >= 0; j--) {
-                    S_00d0e210_ToiEvent& te = m_kToiEventQueue[j];
-                    if (te.m_kActorEntries[0] == e || te.m_kActorEntries[1] == e) {
-                        te.m_pContactManager->removeToi(te.islandOf(), &te.unk18);
-                        m_kToiEventQueue.removeAt(j);
-                    }
-                }
-                ConstructWithCopyL(active.m_data + active.m_iElementCount, 1, e); ++active.m_iElementCount;
-            }
-        }
-        event.m_pContactManager->removeToi(event.islandOf(), &event.unk18);
-        if (active.m_iElementCount != 0)
-            activate(active.m_data, active.m_iElementCount, info->unk78, &unk3C);
-    }
-    m_pOwningWorld->unlockCriticalOperations();
-    S_00d0e210_Timer("Et");
-}
-
 struct D0FE00TimerCommand {
     const char* m_pCommandName;
     unsigned int m_uiStartTicks;
@@ -4209,22 +3859,6 @@ struct D0FE00MonitorStream {
 };
 
 extern DWORD g_D0FE00TlsIndex;
-
-__forceinline D0FE00MonitorStream& D0FE00GetMonitorStream()
-{
-    return *(D0FE00MonitorStream*)TlsGetValue(g_D0FE00TlsIndex);
-}
-
-__forceinline void D0FE00TimerBegin(const char* name)
-{
-    D0FE00MonitorStream& mStream = D0FE00GetMonitorStream();
-    if (mStream.memoryAvailable()) {
-        D0FE00TimerCommand* h = (D0FE00TimerCommand*)mStream.m_kRayEnd;
-        h->m_pCommandName = name;
-        h->setTime();
-        mStream.m_kRayEnd = (char*)(h + 1);
-    }
-}
 
 struct D0FE00World {
     int unk000;
@@ -4363,25 +3997,6 @@ struct D0FE00Simulation {
     int FUN_00d0ed10();
     int FUN_00d0fe00();
 };
-
-// Calls FUN_00d0ed10; once elapsed time reaches the frame marker time, marks entities, returns 3 if the state is 1, else fires post-simulation callbacks.
-// @fnv 0x00d0fe00
-int D0FE00Simulation::FUN_00d0fe00()
-{
-    int result = FUN_00d0ed10();
-    if (m_fElapsedSimulationTime >= m_frameMarkerTime) {
-        if (m_iActorEntryCount & 0x7fffffff)
-            markEntities(m_pOwningWorld->unk078, &m_entitiesToActivate);
-        if (g_D0FE00SimulationState == 1)
-            return 3;
-        if (m_pOwningWorld->m_postSimulationCallbacks) {
-            D0FE00TimerBegin(g_D0FE00TimerPostSimCb);
-            FUN_00d01380(m_pOwningWorld);
-            D0FE00TimerBegin(g_D0FE00TimerEnd);
-        }
-    }
-    return result;
-}
 
 namespace fnv_00d10730 {
 struct D10730Allocator {
@@ -7692,23 +7307,6 @@ __forceinline void restoreState(hkMotionState* m) {
     __m128 z=_mm_mul_ps(_mm_shuffle_ps(center,center,0xaa),m->m_rotation.m_kColumn2.m_vComponents);
     m->m_vTranslation.m_vComponents=_mm_sub_ps(m->m_vCenterOfMass1.m_vComponents,_mm_add_ps(_mm_add_ps(y,x),z));
 }
-__declspec(noinline) __declspec(nothrow) void PartitionMotionPairs(List<SchemaRecord>& a,int& cursor,int n) throw() {
-    for(int i=a.GetLogicalSize()-n;i<a.GetLogicalSize();++i) {
-        Constraint* c=a[i].m_pHavokConstraint;
-        if(c->getEntityA()->isFixedOrKeyframed() || c->getEntityB()->isFixedOrKeyframed()) {
-            SchemaRecord tmp=a[cursor++];
-            a[cursor-1]=a[i];a[i]=tmp;
-        }
-    }
-}
-__declspec(noinline) __declspec(nothrow) void FUN_00d0c6d0(List<SchemaRecord>& a,int& cursor,StateTable& state) throw() {
-    for(int i=cursor;i<a.GetLogicalSize();++i) {
-        Constraint* c=a[i].m_pHavokConstraint;
-        if(state[c->getEntityA()->m_usStorageIndex]==16 && state[c->getEntityB()->m_usStorageIndex]==16) {
-            SchemaRecord tmp=a[cursor++];a[cursor-1]=a[i];a[i]=tmp;
-        }
-    }
-}
 struct SolveStepData { int unk00,unk04; float delta; };
 struct SolveResourcesView { SolveStepData* step; void* solver; void* query; void* accumulators; };
 struct SolvePoint { hkVector4 position,normal; };
@@ -7737,41 +7335,6 @@ struct SolveRecord { SolveConstraint* constraint; void* schema; float depth; };
 struct SolveViolation { SolveConstraint* constraint; const SolvePoint* point; const void* properties; };
 extern "C" __declspec(nothrow) int __cdecl FUN_00d9f6f0(void*,void*,void*,int,float*) throw();
 extern "C" __declspec(nothrow) int __cdecl FUN_00d0bd30(float,SolveRecord*,float*,int,void*) throw();
-__declspec(noinline) __declspec(nothrow) BoolFlag CollectMatchingEntries(Resources& originalResources,const List<SchemaRecord>& originalRecords,ProcessInput& scene,List<Violation>* originalViolations)
-{
-    void* world=&originalResources;
-    void* matrices=const_cast<List<SchemaRecord>*>(&originalRecords);
-    void* violations=originalViolations;
-    SolveResourcesView* resources=reinterpret_cast<SolveResourcesView*>(world);
-    ListBase<SolveRecord>* records=reinterpret_cast<ListBase<SolveRecord>*>(matrices);
-    ListBase<SolveViolation>* rejected=reinterpret_cast<ListBase<SolveViolation>*>(violations);
-    float velocities[256];
-    bool satisfied=true;
-    for(int i=0;i<records->GetLogicalSize();++i) {
-        SolveRecord& record=records->begin()[i];
-        if(record.constraint->priority!=5) continue;
-        int n=FUN_00d9f6f0(resources->solver,record.schema,resources->accumulators,256,velocities);
-        int violated=FUN_00d0bd30(resources->step->delta,&record,velocities,n,&scene);
-        if(violated<0) continue;
-        if(!rejected) return BoolFlag(false);
-        satisfied=false;
-        
-        if(rejected->GetLogicalSize()==rejected->getCapacity())
-            ArrayOps::GrowArray(RouterFacade::FUN_00c85750().heap(),rejected,12);
-        SolveViolation& entry=*rejected->expandByUnchecked(1);
-        entry.constraint=record.constraint;
-        if(record.constraint->data->GetType()==11) {
-            SolveAtoms* atoms=record.constraint->data->atoms;
-            entry.point=atoms->points+violated;
-            entry.properties=reinterpret_cast<U8*>(atoms->points+atoms->m_iElementCount)+atoms->stride*static_cast<short>(violated);
-        } else {
-            entry.point=0;
-            entry.properties=0;
-        }
-    }
-    return BoolFlag(satisfied);
-}
-
 
 // @f3 0x0098ec70 (community match, verified in this file)
 // Fallout 3 copy of Havok 5.5.0 hkLs_localizedSolveToi (hkpContinuousSimulation.cpp), written on the SDK headers;
@@ -9950,43 +9513,6 @@ struct FUN_00d0d020_cls {
     FUN_00d0d020_cls *FUN_00d0d020(Owner *a1);
 };
 
-// @fnv 0x00d0d020
-FUN_00d0d020_cls *FUN_00d0d020_cls::FUN_00d0d020(Owner *apOwner) {
-    // the base constructor (0x00cf87c0) takes the owner pointer as its argument
-    ((Stub_cf87c0 *)this)->FUN_00cf87c0(apOwner);
-    m_vptr = (int)&DAT_010cd45c;
-    unsigned int zero = 0;
-    // the two {data, ?, capacity} holders; the capacity's top bit is a flag
-    unsigned int *arr = (unsigned int *)&m_30;
-    arr[0] = zero;
-    arr[1] = zero;
-    arr[2] = 0x80000000u;
-    unsigned int *arrB = (unsigned int *)&m_3c;
-    arrB[0] = zero;
-    arrB[1] = zero;
-    arrB[2] = 0xffffffffu;
-    AllocHolder *h = FUN_00c85750();
-    ((Stub_cb1fe0 *)&m_3c)->EnsureCapacity(h->m_pThreadAllocator, 0);
-    m_10 = 1;
-    AllocHolder *h2 = FUN_00c85750();
-    Allocator *al = h2->m_pThreadAllocator;
-    SpawnedNode *node = (SpawnedNode *)al->Alloc(0x10);   // virtual call, vtable slot 1
-    node->m_04 = 0x10;
-    m_48 = ((Stub_d9fb90 *)node)->FUN_00d9fb90();
-    m_4c = 0;
-    int n = apOwner->m_334;
-    AllocHolder *h3 = FUN_00c85750();
-    Allocator *al3 = h3->m_pThreadAllocator;
-    int cap = (int)(arr[2] & 0x3fffffffu);
-    if (cap < n) {
-        // grow the array: the new capacity is max(needed, 2 * old)
-        if (n < cap * 2) {
-            n = cap * 2;
-        }
-        FUN_00c908c0(al3, &m_30, n, 0x70);
-    }
-    return this;
-}
 }  // namespace fnv_00d0d020
 
 template<class T> class ScanPointer {T p;public:__forceinline ScanPointer(){} __forceinline ScanPointer(T q):p(q){} __forceinline void operator=(T q){p=q;} __forceinline operator T()const{return p;} __forceinline T const& val()const{return p;}};
@@ -10319,24 +9845,6 @@ struct Self {
     void FUN_00d100a0(Arg0* a0, Entry70* pair, float fa, float fb);
 };
 
-static __forceinline void clockOne(const char* name) {
-    ProfBuf& stream=*(ProfBuf*)TlsGetValue(DAT_0126835c);
-    if(stream.m_pCur<stream.m_pRecordEnd) {
-        ProfRec* command=stream.m_pCur;
-        command->m_pName=name;
-        command->stamp();
-        stream.m_pCur=command+1;
-    }
-}
-static __forceinline void clockTwo(const char* name,const char* sub) {
-    ProfBuf& stream=*(ProfBuf*)TlsGetValue(DAT_0126835c);
-    if(stream.m_pCur<stream.m_pRecordEnd) {
-        ProfPairRec* command=(ProfPairRec*)stream.m_pCur;
-        command->m_pName=name;command->m_subName=sub;
-        command->stamp();
-        stream.m_pCur=(ProfRec*)(command+1);
-    }
-}
 static __forceinline void copyProbe(void* destination,const void* source) {
     unsigned i=0;
     do { static_cast<__int64*>(destination)[i]=static_cast<const __int64*>(source)[i]; } while(++i<14);
@@ -10349,41 +9857,11 @@ __forceinline void Self::release(Entry70& event) {
     Island* island=!event.bodies[0]->isFixed()?event.bodies[0]->GetSimulationIsland():event.bodies[1]->GetSimulationIsland();
     event.m_14->call20(island,&event.properties);
 }
-__forceinline void Self::scan(const Island* island,const SolverFlagView& flags,Arr70& events) {
-    ScanPointer<Entry70*> data;
-    for(int i=events.GetLogicalSize()-1;i>=0;--i) {
-        data=events.m_data;
-        Entry70& event=((Entry70*)data)[i];
-        if((event.bodies[0]->GetSimulationIsland()==island && flags[event.bodies[0]->m_uiEdgeIndex]==16) ||
-           (event.bodies[1]->GetSimulationIsland()==island && flags[event.bodies[1]->m_uiEdgeIndex]==16)) {
-            release(events[i]);
-            --events.m_iElementCount;
-            if(events.m_iElementCount!=i){data=events.m_data;copyProbe((Entry70*)data+i,(Entry70*)data+events.m_iElementCount);}
-        }
-    }
-}
 __forceinline void Self::process(Arg0* world,Elem** data,int count,void* input) {
     if(count) {
         FUN_00d0d3f0(data,count,world,0);
         if(DAT_01269200!=1)notify(data,count,input,&m_arr30.unk0c);
     }
-}
-static __forceinline void prepareProbe(Arg0* world,const Entry70& event,float delta,Times& step,BigObj& solver,Obj2& input) {
-    step.tA=event.time;
-    step.tB=world->FUN_00c91030();
-    step.diff=step.tB-step.tA;
-    step.recip=1.0f/step.diff;
-    solver.FUN_00d105b0(&world->m_1e0);
-    solver.m_114=1;
-    solver.m_120=1.0f;
-    solver.m_118=1;
-    solver.m_120=1.0f;
-    solver.m_10c=delta;
-    solver.m_110=1.0f/delta;
-    solver.m_v10.m_vComponents=_mm_setzero_ps();
-    solver.m_v20.m_vComponents=_mm_setzero_ps();
-    solver.FUN_00c90e60(DAT_01016248,DAT_0104f498);
-    input.FUN_00cfa6e0(&solver,&step.tA,world->m_1b8);
 }
 int __cdecl FUN_00d0f300(const EventQuery&,SolverState&,Entry70&,PhaseObj&,Arg0*,PtrArr&,SolverFlagView&,float);
 
@@ -10457,169 +9935,6 @@ void __cdecl finishSolveStep(SolverState&);
 void __cdecl backstepSolveBody(Owner*,float);
 void __cdecl integrateSolveBodies(BigObj&,Times&,const void*,Owner*const*,int);
 void __cdecl restoreSolveTransforms(Island*,SolverFlagView&,SolverState&);
-
-__declspec(noinline) int __cdecl FUN_00d0f300(const EventQuery& query,SolverState& state,Entry70& event,PhaseObj& phase,Arg0* world,PtrArr& output,SolverFlagView& inputflags,float rotation)
-{
-    SolverFlagView flags(inputflags.begin(),0);
-    SolveStateView& resources=(SolveStateView&)state;
-    SolveArray<Owner*>& active=(SolveArray<Owner*>&)output;
-    SolveControl& control=(SolveControl&)phase;
-    SolveInlineArray<SolveSchemaInfo,64> constraints;
-    int boundary=0;
-    Island* island=!event.bodies[0]->isFixed()?event.bodies[0]->GetSimulationIsland():event.bodies[1]->GetSimulationIsland();
-    SolveLocalArray<Owner*> touched(island->m_iActorEntryCount);
-    if(!event.bodies[0]->isFixed()) {
-        touched.pushBackUnchecked(event.bodies[0]);
-        updateSolveTransform(event.bodies[0],event.time);
-        flags[event.bodies[0]->m_uiEdgeIndex]=2;
-    }
-    if(!event.bodies[1]->isFixed()) {
-        touched.pushBackUnchecked(event.bodies[1]);
-        updateSolveTransform(event.bodies[1],event.time);
-        flags[event.bodies[1]->m_uiEdgeIndex]=2;
-    }
-    SolveInlineArray<Owner*,64> pending;
-    ((SolveContact*)event.m_14)->solve(event,rotation,pending);
-    if(!pending.GetLogicalSize()) {
-        if(!event.bodies[0]->isFixed())projectSolveTransform(event.bodies[0]);
-        if(!event.bodies[1]->isFixed())projectSolveTransform(event.bodies[1]);
-        return 1;
-    }
-    Owner* initialA=pending[0];
-    Owner* initialB=pending.GetLogicalSize()>1?pending[1]:0;
-    flags[initialA->m_uiEdgeIndex]=6;
-    if(initialB)flags[initialB->m_uiEdgeIndex]=6;
-    addSolveAccumulators(state,&touched[0],touched.GetLogicalSize());
-    hkBool preset(true);
-    SolveInlineArray<Owner*,64> additional;
-    SolveInlineArray<SolveConstraint*,64> extraConstraints;
-    for(int steps=query.limitA;steps>0;--steps) {
-        for(;;) {
-            extraConstraints.clear();additional.clear();
-            int nextBoundary=boundary;
-            if(!preset) {
-                if(boundary<constraints.GetLogicalSize()) {
-                    pending.clear();
-                    validateSolveConstraints(state,world->getInput(),constraints,nextBoundary,query.mode,flags,touched,pending);
-                    if(!pending.GetLogicalSize())break;
-                }else break;
-            }
-            activateSolveEntities(world->getInput(),query.mode,event.time,pending,flags,additional,extraConstraints);
-            preset=false;
-            if(!canAddSolveBodies(state,additional.begin(),additional.GetLogicalSize()) ||
-               !canAddSolveConstraints(state,extraConstraints.begin(),extraConstraints.GetLogicalSize()) ||
-               query.budgetC<constraints.GetLogicalSize()+extraConstraints.GetLogicalSize() ||
-               query.budgetA<active.GetLogicalSize()+touched.GetLogicalSize()+additional.GetLogicalSize() ||
-               query.budgetB<active.GetLogicalSize()+pending.GetLogicalSize()) {
-                for(int i=0;i<pending.GetLogicalSize();++i)flags[pending[i]->m_uiEdgeIndex]=8;
-                for(int i=0;i<additional.GetLogicalSize();++i)flags[additional[i]->m_uiEdgeIndex]=1;
-                int response=control.outOfMemory();
-                if(response==2) {
-                    freezeSolveIsland(event.time,island,flags,active);
-                    for(int i=0;i<active.GetLogicalSize();++i)invalidateSolveBody(active[i],world->getInput());
-                    active.clear();return 0;
-                }
-                break;
-            }
-            addSolveAccumulators(state,additional.begin(),additional.GetLogicalSize());
-            addSolveSchemas(state,extraConstraints.begin(),extraConstraints.GetLogicalSize(),constraints);
-            boundary=nextBoundary;
-            for(int i=0;i<touched.GetLogicalSize();++i)if(flags[touched[i]->m_uiEdgeIndex]==16)touched.removeAt(i--);
-            active.aiRecipeIndex(active.GetLogicalSize(),pending.begin(),pending.GetLogicalSize());
-            touched.reserve(touched.GetLogicalSize()+additional.GetLogicalSize());
-            for(int i=0;i<additional.GetLogicalSize();++i)if(additional[i]->motion.type!=4)touched.pushBackUnchecked(additional[i]);
-            activateSolveFixed(constraints,boundary,extraConstraints.GetLogicalSize());
-            activateSolveLinked(constraints,boundary,flags);
-            solveStep(state,1);
-            if(!extraConstraints.GetLogicalSize() && !additional.GetLogicalSize())break;
-        }
-        solveStep(state,0);
-    }
-    if(resources.schemas[1].begin!=resources.schemas[1].current) {
-        resetSolveAccumulators(state,touched);
-        hkBool satisfied=validateCriticalSolve(state,constraints,world->getInput(),0);
-        if(!satisfied) {
-            int retries=query.limitB;
-            while(!satisfied && --retries>=0) {
-                stepSolveJacobians(resources.solver,resources.schemas[1].begin,resources.accumulators,resources.temporaries);
-                resetSolveAccumulators(state,touched);
-                satisfied=validateCriticalSolve(state,constraints,world->getInput(),0);
-            }
-        }
-        if(!satisfied) {
-            SolveInlineArray<SolveViolation,32> violated;
-            validateCriticalSolve(state,constraints,world->getInput(),&violated);
-            int response=control.GetViolations(violated);
-            if(response==2) {
-                freezeSolveIsland(event.time,island,flags,active);
-                for(int i=0;i<active.GetLogicalSize();++i)invalidateSolveBody(active[i],world->getInput());
-                active.clear();return 0;
-            }
-        }
-    }
-    finishSolveStep(state);
-    if(!active.GetLogicalSize()) {
-        active.aiRecipeIndex(0,initialA);flags[active[0]->m_uiEdgeIndex]=16;
-        if(initialB){active.aiRecipeIndex(1,initialB);flags[active[1]->m_uiEdgeIndex]=16;}
-    }
-    for(int i=0;i<active.GetLogicalSize();++i)backstepSolveBody(active[i],event.time);
-    integrateSolveBodies(*resources.solver,*resources.step,resources.accumulators,active.begin(),active.GetLogicalSize());
-    restoreSolveTransforms(island,flags,state);
-    for(int i=0;i<active.GetLogicalSize();++i)invalidateSolveBody(active[i],world->getInput());
-    return 0;
-}
-
-// @fnv 0x00d100a0
-void Self::FUN_00d100a0(Arg0* world,Entry70* pair,float delta,float rotation) {
-    Entry70& event=*pair;
-    EventQuery query;
-    if(m_arr30.m_phase->collide(&event,&m_arr30,&query)==1)return;
-    ++m_ctr->m_ref94;
-    PtrArr active;
-    {
-        Times step;
-        BigObj solver;
-        Obj2 input;
-        prepareProbe(world,event,delta,step,solver,input);
-        SolverState state;
-        InitializeConstraintSolverResources(&step.tA,&solver,&input,query.flagsA,query.flagsB,&state);
-        clockTwo(DAT_010cd540,DAT_010cd534);
-        Island* island=!event.bodies[0]->isFixed()?event.bodies[0]->GetSimulationIsland():event.bodies[1]->GetSimulationIsland();
-        int count=island->m_iActorEntryCount;
-        ScopedFlags flags(count);
-        FUN_00cb1280(flags.begin(),0,count);
-        int result=FUN_00d0f300(query,state,event,*m_arr30.m_phase,world,active,flags,rotation);
-        FUN_00d88300(&state);
-        release(event);
-        if(result==0) {
-            scan(island,flags,m_arr30);
-            FUN_00c90670(active.begin(),active.GetLogicalSize(),4);
-        }else active.clear();
-        flags.dispose();
-    }
-    m_arr30.m_phase->v18(&event,&m_arr30,&query);
-    clockOne(DAT_010cd520);
-    clockOne(DAT_010cd514);
-    if(active.GetLogicalSize()) {
-        for(int i=active.GetLogicalSize()-1;i>=0;--i) {
-            Elem* entity=active[i];
-            if(entity->m_08==0){active.removeAt(i);entity->FUN_00c905b0();}
-        }
-        process(world,active.begin(),active.GetLogicalSize(),world->getInput());
-        FUN_00c90740(active.begin(),active.GetLogicalSize(),4);
-    }
-    CtrObj* c=m_ctr;
-    if(--c->m_ref94==0 && !c->m_9c) {
-        if(c->unk8c)c->FUN_00c91120();
-        if(c->m_a4==1 && c->unk90)c->FUN_00c91140();
-    }
-    clockOne(DAT_01076f38);
-    Manager* router3=FUN_00c85750();
-    HeapObj* heap=(HeapObj*)router3->unk10;
-    int cap=active.m_iCapacityState;
-    active.m_iElementCount=0;
-    if(!(cap&0x80000000))heap->ReturnMemory(active.m_data,(cap&0x3fffffff)*4);
-}
 
 extern "C" void _ReadBarrier(void);
 extern "C" void _WriteBarrier(void);
@@ -10750,36 +10065,3 @@ struct Flags_cls {
 
 extern "C" void _ReadWriteBarrier(void);
 extern "C" void __cdecl ResizeAudioStream(void* allocator, ArrayRef_cls* arr, int n);
-
-// For each item of owner calls FUN_00cf1b10(a1), appends it to arr once, copies two 16-byte blocks, and sets sub+0x4c to a1 and sub+0x5c to 1/(Get()-a1).
-// @fnv 0x00d0cde0
-void __cdecl FUN_00d0cde0(float a1, char* owner, Flags_cls* flags, ArrayRef_cls* arr)
-{
-    int i = 0;
-    if (*(int*)(owner + 0x4c) <= 0) {
-        return;
-    }
-    do {
-        char* item = (char*)(*(int**)(owner + 0x48))[i];
-        char* sub = item + 0xf0;
-        FUN_00cf1b10(a1, sub);
-        if (flags->m_pBytes[i] != 0x10) {
-            Manager* holder = FUN_00c85750();
-            if (arr->m_iArrayLength == (int)(arr->m_iFlags & 0x3fffffff)) {
-                ResizeAudioStream((void*)holder->unk10, arr, 4);
-            }
-            int* slot = &arr->m_pData[arr->m_iArrayLength];
-            int value = (int)item;
-            _ReadWriteBarrier();
-            *slot = value;
-            arr->m_iArrayLength++;
-            flags->m_pBytes[i] = 0x10;
-        }
-        *(__m128*)(sub + 0x40) = *(__m128*)(sub + 0x50);
-        *(__m128*)(sub + 0x60) = *(__m128*)(sub + 0x70);
-        *(volatile float*)(sub + 0x4c) = a1;
-        float y = ((Calc_cls*)*(void**)(owner + 0x18))->Get();
-        *(float*)(sub + 0x5c) = 1.0f / (y - a1);
-        i++;
-    } while (i < *(int*)(owner + 0x4c));
-}

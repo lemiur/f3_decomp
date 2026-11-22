@@ -215,19 +215,6 @@ struct FUN_00d63250_cls
     static void operator delete(void* apMemory) throw();
 };
 
-// Calls FUN_00d62fe0, then if acFlags bit 0 is set frees this via the allocator from FUN_00c85750 using m_uSize, and returns this.
-// @fnv 0x00d63250
-FUN_00d63250_cls* FUN_00d63250_cls::Destroy(unsigned char acFlags)
-{
-    FUN_00d62fe0();
-    if (acFlags & 1)
-    {
-        AudioHolder* pHolder = FUN_00c85750();
-        AudioAllocator* pAllocator = pHolder->m_pAllocator;
-        pAllocator->Free(this, m_uSize);
-    }
-    return this;
-}
 }  // namespace fnv_00d63250
 
 extern int DAT_010d1794;
@@ -256,17 +243,6 @@ struct FUN_00d63280_cls
     void Setup(int b);
     FUN_00d63280_cls* FUN_00d63280(int a, int b);
 };
-
-// @fnv 0x00d63280
-FUN_00d63280_cls* FUN_00d63280_cls::FUN_00d63280(int a, int b)
-{
-    Setup(b);
-    m_vtbl0 = (void*)&DAT_010d1794;
-    m_vtbl8 = (void*)&DAT_010d1774;
-    m_vtbl20 = (void*)&DAT_010d1764;
-    m_sub28.Init(a, 0x7a120);
-    return this;
-}
 
 // Adjustor thunk for virtual FUN_00d63230 (sub ecx,8; jmp to the Derived implementation).
 struct PrimaryBase
@@ -316,6 +292,3 @@ struct D63240Object : D63240Primary, D63240Secondary
 // @fnv 0x00d63240
     virtual void FUN_00d63240();
 };
-
-D63240Object::D63240Object()
-{}

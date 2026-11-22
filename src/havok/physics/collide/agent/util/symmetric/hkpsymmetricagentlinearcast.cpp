@@ -203,16 +203,4 @@ struct VecHolder
     void FUN_00da70e0(const VecArg& arg);
 };
 
-// Builds a packet with arg.m_00 + m_10 * arg.m_10's w and arg.m_10 negated, dispatches it via m_20, and copies m_20->m_04 to m_04.
-// @fnv 0x00da70e0
-void VecHolder::FUN_00da70e0(const VecArg& arg)
-{
-    VecPacket p(arg.m_24, arg.m_20);
-    hkVector4 w;
-    w.setBroadcast3(arg.m_10);
-    p.m_00.setAddMul4(arg.m_00, m_10, w);
-    p.m_10.setNeg3(arg.m_10);
-    m_20->Dispatch(&p);
-    m_04 = m_20->m_04;
-}
 }  // namespace fnv_00da70e0

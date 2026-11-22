@@ -10,15 +10,6 @@ struct SearchObject
 {
     int FUN_00e5c420(unsigned int arg0, unsigned int arg1, unsigned int arg2, unsigned int arg3);
 };
-// @fnv 0x00e5c420
-int SearchObject::FUN_00e5c420(unsigned int auiParam0, unsigned int auiParam1, unsigned int auiParam2,
-                               unsigned int auiParam3)
-{
-    unsigned int callResult0 =
-        (unsigned int)((CallTarget_00e5c370*)this)
-            ->InsertAndDelete((int)auiParam0, (int)auiParam1, (int)0u, (int)auiParam2, (int)auiParam3);
-    return (int)callResult0;
-}
 
 namespace fnv_00e5c440 {
 struct CallTarget_00e5c420
@@ -29,13 +20,6 @@ struct SearchObject
 {
     int FUN_00e5c440(unsigned int arg0, unsigned int arg1, unsigned int arg2);
 };
-// @fnv 0x00e5c440
-int SearchObject::FUN_00e5c440(unsigned int arg0, unsigned int arg1, unsigned int arg2)
-{
-    unsigned int callResult0 =
-        (unsigned int)((CallTarget_00e5c420*)this)->FUN_00e5c420((int)arg0, (int)arg1, (int)arg2, (int)1u);
-    return (int)callResult0;
-}
 }  // namespace fnv_00e5c440
 
 struct AudioAllocator
@@ -88,16 +72,6 @@ struct FUN_00e5c460_cls
 
     void FUN_00e5c460(OutObject* a1);
 };
-
-// Gets an AudioHolder, passes its allocator to m_38.CallWithFlag, then calls FUN_00c90510 on a1.
-// @fnv 0x00e5c460
-void FUN_00e5c460_cls::FUN_00e5c460(OutObject* pOutObject)
-{
-    AudioHolder* pHolder = FUN_00c85750();
-    void* pValue = pHolder->m_pAllocator;
-    m_38.CallWithFlag(pValue, 0, &pOutObject);
-    pOutObject->FUN_00c90510();
-}
 
 #include <xmmintrin.h>
 __declspec(align(16)) struct XfOut_cls
@@ -221,38 +195,6 @@ struct Owner
     void AddReferencedObject(char* a);
 };
 
-// Computes relative orientation between two objects and applies it via a Callee, then adds a reference to a2.
-// @fnv 0x00e5b440
-void ApplyRelativeOrientation(Owner* a1, char* a2, const __m128* a3, int a4, int a5, int a6)
-{
-    Callee* pCallee = a1->m_0c;
-    char* e1;
-    char* e2;
-    {
-        char* p = (char*)a1->m_38[a1->m_3c - 1] + 0x10;
-        e1 = (*(unsigned char*)(p + 0x18) == 1) ? p + (signed char)p[0x10] : 0;
-    }
-    {
-        char* p = a2 + 0x10;
-        e2 = (*(unsigned char*)(p + 0x18) == 1) ? p + (signed char)p[0x10] : 0;
-    }
-    // The two transformed points form one adjacent pair consumed by the callback.
-    struct LocalPoints
-    {
-        FUN_00c7f690_cls first;
-        FUN_00c7f690_cls second;
-    } points;
-    points.first.FUN_00c7f690((const __m128*)(e1 + 0xf0), a3);
-    points.second.FUN_00c7f690((const __m128*)(e2 + 0xf0), a3);
-    // Helper writes the quaternion at offset 0; original also stores arguments at 0x20/24/28.
-    RelativeOrientationData relativeOrientation;
-    relativeOrientation.FUN_00c74ac0(e2 + 0x160, e1 + 0x160);
-    relativeOrientation.argument4 = a4;
-    relativeOrientation.argument5 = a5;
-    relativeOrientation.argument6 = a6;
-    pCallee->FUN_00e3b850(&points.first, &points.second, (void*)&relativeOrientation, a4, a5, a6);
-    a1->AddReferencedObject(a2);
-}
 }  // namespace fnv_00e5b440
 
 // FUN_00e5b8f0: __cdecl, 317 bytes

@@ -299,15 +299,6 @@ class FUN_00d4bc00
     FUN_00d4bc00* DestroyAndFree(unsigned int uiFlags) throw();
 };
 
-// Runs the destructor, then frees the object through operator delete when bit 0 of uiFlags is set, and returns this.
-// @fnv 0x00d4bd30
-FUN_00d4bc00* FUN_00d4bc00::DestroyAndFree(unsigned int uiFlags) throw()
-{
-    this->FUN_00d4bc00::~FUN_00d4bc00();
-    if (uiFlags & 1)
-        FUN_00d4bc00::operator delete(this);
-    return this;
-}
 }  // namespace fnv_00d4bd30
 
 namespace fnv_00d4be00 {
@@ -340,18 +331,6 @@ class FUN_00d4be00_cls : public hkpStorageMeshShape
     FUN_00d4be00_cls* FUN_00d4be00(int flags);
 };
 
-// @fnv 0x00d4be00
-FUN_00d4be00_cls* FUN_00d4be00_cls::FUN_00d4be00(int flags)
-{
-    ((FUN_00d4b400_Obj*)this)->FUN_00d4b400();
-    if (flags & 1)
-    {
-        FUN_00c85750_Ret* mem = (FUN_00c85750_Ret*)FUN_00c85750();
-        FUN_00d4be00_Allocator* alloc = mem->allocator;
-        alloc->ReleaseBlock(this, m_usMemSizeAndFlags);
-    }
-    return this;
-}
 }  // namespace fnv_00d4be00
 
 struct hkAllocatorD4B4
@@ -1125,11 +1104,6 @@ FUN_00d4bd60::~FUN_00d4bd60()
 }  // namespace fnv_00d4bd60
 
 namespace fnv_00dcebd0 {
-template <typename T> static __forceinline void CopyElements(T* dest, const T* src, int count)
-{
-    for (int index = 0; index < count; ++index)
-        dest[index] = src[index];
-}
 struct FUN_00dcebd0_Allocator
 {
     virtual ~FUN_00dcebd0_Allocator();
@@ -1174,24 +1148,4 @@ struct FUN_00dcebd0_Class
     void FUN_00d06290(const FUN_00dcebd0_Class& source);
     void FUN_00dcebd0(const FUN_00dcebd0_Class& source);
 };
-// Calls FUN_00d06290(source), then copies source's int array into this, reallocating through the thread allocator when capacity is smaller.
-// @fnv 0x00dcebd0
-void FUN_00dcebd0_Class::FUN_00dcebd0(const FUN_00dcebd0_Class& source)
-{
-    FUN_00d06290(source);
-    FUN_00dcebd0_Allocator* allocator = FUN_00c85750()->m_pThreadAllocator;
-    int capacity = m_iCapacityState & 0x3fffffff;
-    if (capacity < source.m_iElementCount)
-    {
-        if ((m_iCapacityState & 0x80000000u) == 0)
-        {
-            allocator->ReturnMemory(m_data, capacity * sizeof(int));
-        }
-        int bytes = source.m_iElementCount * sizeof(int);
-        m_data = static_cast<int*>(allocator->AllocateBufferWithSize(bytes));
-        m_iCapacityState = bytes / 4;
-    }
-    m_iElementCount = source.m_iElementCount;
-    CopyElements(m_data, source.m_data, m_iElementCount);
-}
 }  // namespace fnv_00dcebd0

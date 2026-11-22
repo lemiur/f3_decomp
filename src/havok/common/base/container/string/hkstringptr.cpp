@@ -39,12 +39,6 @@ FUN_00cb0a60::FUN_00cb0a60()
 }
 
 int __cdecl FUN_00c856c0(int, int);
-// @fnv 0x00cb1190
-int __cdecl CallSwappedArgs(unsigned int arg0, unsigned int arg1)
-{
-    unsigned int callResult0 = (unsigned int)FUN_00c856c0((int)arg1, (int)arg0);
-    return (int)callResult0;
-}
 
 int __cdecl FUN_00cb10d0(const char* s);
 

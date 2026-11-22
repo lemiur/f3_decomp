@@ -353,76 +353,6 @@ struct FUN_00e38bf0
     ~FUN_00e38bf0();
 };
 
-// Resets the vtable, releases the twelve referenced objects, frees the three dynamic arrays through the memory router allocator, and calls FUN_00d2b2b0.
-// @fnv 0x00e38bf0
-FUN_00e38bf0::~FUN_00e38bf0()
-{
-    m_vtbl = &DAT_010df34c;
-
-    if (m_ref1c)
-        m_ref1c->removeReference();
-    if (m_ref20)
-        m_ref20->removeReference();
-    if (m_ref24)
-        m_ref24->removeReference();
-    if (m_ref28)
-        m_ref28->removeReference();
-    if (m_ref2c)
-        m_ref2c->removeReference();
-    if (m_ref30)
-        m_ref30->removeReference();
-    if (m_ref34)
-        m_ref34->removeReference();
-    if (m_ref38)
-        m_ref38->removeReference();
-    if (m_ref3c)
-        m_ref3c->removeReference();
-    if (m_ref44)
-        m_ref44->removeReference();
-    if (m_ref9c)
-        m_ref9c->removeReference();
-    if (m_ref40)
-        m_ref40->removeReference();
-
-    VUC_Router* router = _D1A0E0GetMemoryRouter();
-    VUC_Allocator* allocator = router->m_pThreadAllocator;
-
-    m_sizec4 = 0;
-    if ((m_capacityc8 & 0x80000000) == 0)
-    {
-        unsigned int size = (m_capacityc8 & 0x3fffffff) * 4;
-        allocator->free(m_datac0, size);
-    }
-    m_datac0 = 0;
-    m_capacityc8 = 0x80000000;
-
-    router = _D1A0E0GetMemoryRouter();
-    allocator = router->m_pThreadAllocator;
-
-    m_sizea4 = 0;
-    if ((m_capacitya8 & 0x80000000) == 0)
-    {
-        unsigned int size = m_capacitya8 & 0x3fffffff;
-        allocator->free(m_dataa0, size);
-    }
-    m_dataa0 = 0;
-    m_capacitya8 = 0x80000000;
-
-    router = _D1A0E0GetMemoryRouter();
-    allocator = router->m_pThreadAllocator;
-
-    m_size4c = 0;
-    if ((m_capacity50 & 0x80000000) == 0)
-    {
-        unsigned int size = (m_capacity50 & 0x3fffffff) * 0xe0;
-        allocator->free(m_data48, size);
-    }
-    m_data48 = 0;
-    m_capacity50 = 0x80000000;
-
-    FUN_00d2b2b0(this);
-}
-
 struct FnvCpu_FUN_00e36f50_CpuInterface
 {
     virtual void slot00();
@@ -452,11 +382,6 @@ struct FnvCpu_FUN_00e36f50_CpuOwner
     FnvCpu_FUN_00e36f50_CpuInterface* target;
     void FUN_00e36f50(int arg0);
 };
-// @fnv 0x00e36f50
-void FnvCpu_FUN_00e36f50_CpuOwner::FUN_00e36f50(int arg0)
-{
-    target->Invoke(arg0);
-}
 
 struct CpuObject
 {
@@ -509,11 +434,6 @@ struct CpuObject
     float value;
     float FUN_00e370a0();
 };
-// @fnv 0x00e370a0
-float CpuObject::FUN_00e370a0()
-{
-    return value;
-}
 
 struct Filtered
 {
@@ -1141,33 +1061,6 @@ class hkSourceE392
     FUN_00e38b20* FUN_00e39210(const hkInputE392* pkInput, int iFlags) throw();
 };
 
-// Allocates a clone of this source for the given input, copies the shape, creates an agent, clones m_9c and calls FUN_00c90510 on the clone's reference objects.
-// @fnv 0x00e39210
-FUN_00e38b20* hkSourceE392::FUN_00e39210(const hkInputE392* pkInput, int iFlags) throw()
-{
-    const hkShapeE392* pkShape = pkInput->m_info->m_pCollisionShape;
-    FUN_00e38b20* pkClone = new FUN_00e38b20(pkShape);
-    pkClone->FUN_00e39480(this);
-    pkClone->m_08 = 0;
-    pkClone->m_0c = 0;
-    pkClone->m_pCollisionShape = pkShape;
-    pkClone->m_pCollisionAgent = m_factory->createAgent(pkShape, iFlags);
-    pkClone->m_pCollisionAgent->m_sState = 1;
-    pkClone->m_9c = m_9c->clone();
-    pkClone->m_1c->FUN_00c90510();
-    pkClone->m_20->FUN_00c90510();
-    pkClone->m_24->FUN_00c90510();
-    pkClone->m_28->FUN_00c90510();
-    pkClone->m_2c->FUN_00c90510();
-    pkClone->m_30->FUN_00c90510();
-    pkClone->m_34->FUN_00c90510();
-    pkClone->m_38->FUN_00c90510();
-    pkClone->m_44->FUN_00c90510();
-    if (m_40)
-        pkClone->m_40->FUN_00c90510();
-    return pkClone;
-}
-
 void __cdecl FUN_00e39190();
 
 // @fnv 0x00e392f0
@@ -1660,38 +1553,6 @@ struct FUN_00e39300_class
     FUN_00e39300_class& FUN_00e39300(const FUN_00e39300_class* src);
 };
 
-// Copies most fields from src into this, skipping unk48 and unk4c, and returns *this.
-// @fnv 0x00e39300
-FUN_00e39300_class& FUN_00e39300_class::FUN_00e39300(const FUN_00e39300_class* src)
-{
-    unk00 = src->unk00;
-    unk10 = src->unk10;
-    unk20 = src->unk20;
-    unk24 = src->unk24;
-    unk28 = src->unk28;
-    unk2c = src->unk2c;
-    unk30 = src->unk30;
-    unk34 = src->unk34;
-    unk38 = src->unk38;
-    unk3c = src->unk3c;
-    unk40 = src->unk40;
-    unk44 = src->unk44;
-    unk50 = src->unk50;
-    unk60 = src->unk60;
-    unk70 = src->unk70;
-    unk80 = src->unk80;
-    unk90 = src->unk90;
-    unka0 = src->unka0;
-    unkb0 = src->unkb0;
-    unkc0 = src->unkc0;
-    unkc4 = src->unkc4;
-    unkc8 = src->unkc8;
-    unkcc = src->unkcc;
-    unkd0 = src->unkd0;
-    unkd4 = src->unkd4;
-    return *this;
-}
-
 inline void* operator new(unsigned int, void* pvWhere)
 {
     return pvWhere;
@@ -1923,45 +1784,6 @@ class VehicleDataE39 : public hkReferencedObjectE39
     float m_fD0;
 };
 
-// Copies all fields from kOther into this VehicleDataE39 instance and returns a reference to this.
-// @fnv 0x00e39480
-VehicleDataE39& VehicleDataE39::FUN_00e39480(const VehicleDataE39& kOther)
-{
-    m_usMemSizeAndFlags = kOther.m_usMemSizeAndFlags;
-    m_sReferenceCount = kOther.m_sReferenceCount;
-    m_i08 = kOther.m_i08;
-    m_i0C = kOther.m_i0C;
-    m_i10 = kOther.m_i10;
-    m_kName = kOther.m_kName;
-    m_i18 = kOther.m_i18;
-    m_i1C = kOther.m_i1C;
-    m_i20 = kOther.m_i20;
-    m_i24 = kOther.m_i24;
-    m_i28 = kOther.m_i28;
-    m_i2C = kOther.m_i2C;
-    m_i30 = kOther.m_i30;
-    m_i34 = kOther.m_i34;
-    m_i38 = kOther.m_i38;
-    m_i3C = kOther.m_i3C;
-    m_i40 = kOther.m_i40;
-    m_i44 = kOther.m_i44;
-    m_akWheels = kOther.m_akWheels;
-    m_kBlock54 = kOther.m_kBlock54;
-    m_i9C = kOther.m_i9C;
-    m_acFlags = kOther.m_acFlags;
-    m_fAC = kOther.m_fAC;
-    m_bB0 = kOther.m_bB0;
-    m_fB4 = kOther.m_fB4;
-    m_fB8 = kOther.m_fB8;
-    m_fBC = kOther.m_fBC;
-    m_afValues = kOther.m_afValues;
-    m_bCC = kOther.m_bCC;
-    m_bCD = kOther.m_bCD;
-    m_bCE = kOther.m_bCE;
-    m_fD0 = kOther.m_fD0;
-    return *this;
-}
-
 extern "C" void _mm_store_ps(float*, __m128);
 extern const __m128 DAT_01267e30;
 extern const __m128 DAT_010c7190;
@@ -1996,32 +1818,6 @@ struct WheelInit
     float mc0, mc4, mc8, mcc, md0, md4;
     void FUN_00e370b0();
 };
-// Loads preset vectors into m00, m10 and mb0, sets m90 to (1,0,0,0), m28 to -1 and m10.w to 1, and zeroes the other fields it touches.
-// @fnv 0x00e370b0
-void WheelInit::FUN_00e370b0()
-{
-    __m128 normal = DAT_010c7190;
-    m00.v = DAT_01267e30;
-    m10.v = normal;
-    float* d = &m10.f.w;
-    *d = 1.0f;
-    m50.v = _mm_setzero_ps();
-    m20 = 0.0f;
-    m60.v = _mm_setzero_ps();
-    m70 = 0.0f;
-    m80.v = _mm_setzero_ps();
-    ma0.v = _mm_setzero_ps();
-    m90.v = _mm_setr_ps(1.0f, 0.0f, 0.0f, 0.0f);
-    m24 = 0;
-    m28 = -1;
-    mb0.v = DAT_010c71b0;
-    mc0 = 0.0f;
-    mc4 = 0.0f;
-    mc8 = 0.0f;
-    mcc = 0.0f;
-    md0 = 0.0f;
-    md4 = 0.0f;
-}
 
 struct FnvVehicleState
 {
@@ -2037,22 +1833,6 @@ struct FnvVehicleState
     __m128 vectors60;
     __m128 vectors70;
 };
-
-// Sets active to 1, scalar08 to 0.0f, and zeroes all vectors in the FnvVehicleState.
-// @fnv 0x00e37160
-void __stdcall FUN_00e37160(int, FnvVehicleState* state)
-{
-    state->scalar08 = 0.0f;
-    state->active = 1;
-    __m128 zero = _mm_setzero_ps();
-    state->vectors30 = zero;
-    state->vectors10 = zero;
-    state->vectors20 = zero;
-    state->vectors40 = zero;
-    state->vectors50 = zero;
-    state->vectors60 = zero;
-    state->vectors70 = zero;
-}
 
 struct FUN_00e39400_Router
 {
@@ -2809,18 +2589,6 @@ struct S00e37880_Obj
     float FUN_00e37880();
 };
 
-// Returns the length of m_data->m_vec scaled by 3600 / 1609.3, a metres-per-second to miles-per-hour conversion.
-// @fnv 0x00e37880
-float S00e37880_Obj::FUN_00e37880()
-{
-    __m128 v = m_data->m_vec.squared();
-    __m128 a = _mm_shuffle_ps(v, v, 0x55);
-    __m128 b = _mm_shuffle_ps(v, v, 0xaa);
-    a = _mm_add_ss(a, v);
-    b = _mm_add_ss(b, a);
-    return (float)(_mm_cvtss_f32(_mm_sqrt_ss(b)) / 1609.300048828125 * 3600.0);
-}
-
 extern double DAT_01017b70;
 extern double DAT_01012640;
 extern "C" __m128 _mm_add_ss(__m128, __m128);
@@ -2958,14 +2726,6 @@ struct VehicleSpeedE378 : hkpVehicleInstance
 {
     float FUN_00e37820();
 };
-// Returns the length of the entity's linear velocity divided by DAT_01017b70 and multiplied by DAT_01012640.
-// @fnv 0x00e37820
-float VehicleSpeedE378::FUN_00e37820()
-{
-    return float(
-        (double(reinterpret_cast<const SpeedBodyE378*>(m_pEntity)->linearVelocity().length3()) / DAT_01017b70) *
-        DAT_01012640);
-}
 
 extern "C" __m128 _mm_add_ss(__m128, __m128);
 extern "C" __m128 _mm_sqrt_ss(__m128);

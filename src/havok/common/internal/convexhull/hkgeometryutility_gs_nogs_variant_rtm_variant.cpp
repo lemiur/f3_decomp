@@ -446,76 +446,9 @@ class S00d5ae60_Vector4
     __m128 m_vComponents;
 };
 
-template <typename T> inline T* S00d5ae60_addByteOffset(T* base, long offset)
-{
-    return reinterpret_cast<T*>(reinterpret_cast<char*>(base) + offset);
-}
-
-// @fnv 0x00d5ae60
-static __declspec(noinline) void FUN_00d5ae60(const float* verts, int numVerts, int striding,
-                                              S00d5ae60_Vector4& halfExtents, const S00d5ae60_Vector4* axes,
-                                              S00d5ae60_Vector4& center)
-{
-    S00d5ae60_Vector4 minV;
-    minV.SetAllComponents(1.3611281e+38f);
-    S00d5ae60_Vector4 maxV;
-    maxV.SetAllComponents(-1.3611281e+38f);
-
-    const float* v = verts;
-    for (int i = 0; i < numVerts / 3; i++)
-    {
-        S00d5ae60_Vector4 p;
-        p.set(v[0], v[1], v[2], 0.0f);
-        v = S00d5ae60_addByteOffset(const_cast<float*>(v), striding);
-        for (int k = 0; k < 3; k++)
-        {
-            float d = axes[k].dot3(p);
-            if (d < minV(k))
-                minV(k) = d;
-            if (d > maxV(k))
-                maxV(k) = d;
-        }
-        p.set(v[0], v[1], v[2], 0.0f);
-        v = S00d5ae60_addByteOffset(const_cast<float*>(v), striding);
-        for (int k = 0; k < 3; k++)
-        {
-            float d = axes[k].dot3(p);
-            if (d < minV(k))
-                minV(k) = d;
-            if (d > maxV(k))
-                maxV(k) = d;
-        }
-        p.set(v[0], v[1], v[2], 0.0f);
-        v = S00d5ae60_addByteOffset(const_cast<float*>(v), striding);
-        for (int k = 0; k < 3; k++)
-        {
-            float d = axes[k].dot3(p);
-            if (d < minV(k))
-                minV(k) = d;
-            if (d > maxV(k))
-                maxV(k) = d;
-        }
-    }
-
-    S00d5ae60_Vector4 c;
-    c.setAdd4(maxV, minV);
-    c.mul4(0.5f);
-    halfExtents.setSub4(maxV, minV);
-    halfExtents.mul4(0.5f);
-    center.setMul4(c(0), axes[0]);
-    center.addMul4(c(1), axes[1]);
-    center.addMul4(c(2), axes[2]);
-}
-
 struct S00d5ae60_Strided
 {
     const float* m_kVertices;
     int m_iStridedVertexCount;
     int m_iVertexStride;
 };
-
-void S00d5ae60_calcObb(const S00d5ae60_Strided& sv, S00d5ae60_Vector4& halfExtents, S00d5ae60_Vector4* axes,
-                       S00d5ae60_Vector4& center)
-{
-    FUN_00d5ae60(sv.m_kVertices, sv.m_iStridedVertexCount, sv.m_iVertexStride, halfExtents, axes, center);
-}

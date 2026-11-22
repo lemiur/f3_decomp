@@ -291,14 +291,6 @@ struct FUN_00d67fa0 : Base0, Iface1, Iface2, Iface3
     virtual void p0();
 };
 
-// Destructor that removes every item in the list from the owning container before base destruction.
-// @fnv 0x00d67fa0
-FUN_00d67fa0::~FUN_00d67fa0()
-{
-    for (int i = 0; list && i < list->count; ++i)
-        Remove(list->items[i]);
-}
-
 struct Point3
 {
     float x;
@@ -354,21 +346,6 @@ struct Context
 {
     void ProcessQuery(Query* query);
 };
-// Computes a mode from the query direction, then dispatches each group entry and each direct entry to FUN_00d68030 with that mode.
-// @fnv 0x00d68130
-void Context::ProcessQuery(Query* query)
-{
-    int mode = FUN_00d679c0(&query->direction.x);
-    for (int groupIndex = 0; groupIndex < query->groupCount; ++groupIndex)
-    {
-        EntryListNode* list = &query->groups[groupIndex]->entries;
-        for (int entryIndex = 0; entryIndex < list->count; ++entryIndex)
-            ((BaseHelper*)((char*)this - 0x2c))->FUN_00d68030(list->entries[entryIndex], mode);
-    }
-    EntryListNode* list = &query->direct->entries;
-    for (int entryIndex = 0; entryIndex < list->count; ++entryIndex)
-        ((BaseHelper*)((char*)this - 0x2c))->FUN_00d68030(list->entries[entryIndex], mode);
-}
 
 struct FUN_00d67970_helper
 {
@@ -385,28 +362,6 @@ struct FUN_00d67970_class
 
     void __thiscall FUN_00d67970(FUN_00d67970_helper* helper);
 };
-
-// Passes pointers to this object's unk0c and unk08 fields to the helper's c93920 and c93a20 methods, or null if the base pointer is null.
-// @fnv 0x00d67970
-void __thiscall FUN_00d67970_class::FUN_00d67970(FUN_00d67970_helper* helper)
-{
-    void* base = reinterpret_cast<char*>(this) - 0x20;
-    void* value;
-
-    if (base)
-        value = &unk0c;
-    else
-        value = 0;
-
-    helper->c93920(value);
-
-    if (base)
-        value = &unk08;
-    else
-        value = 0;
-
-    helper->c93a20(value);
-}
 
 struct OwnerBinding
 {
@@ -436,14 +391,6 @@ struct FUN_00d67b90_cls
 
     void BindAndAttach(int* arg);
 };
-
-// @fnv 0x00d67b90
-void FUN_00d67b90_cls::BindAndAttach(int* arg)
-{
-    FUN_00d67b90_cls* owner = ((char*)this - 0x30) != 0 ? this : 0;
-    ((OwnerBinding*)arg)->Bind(owner);
-    m_sub.Attach(arg);
-}
 
 struct ListItem;
 
@@ -637,28 +584,6 @@ __declspec(align(16)) struct SquaredLanes
     float m_uiZ;
     float m_w;
 };
-
-// Finds the index of the largest squared component of a vector and returns it offset by 3 if the original component is positive.
-// @fnv 0x00d679c0
-int __cdecl FUN_00d679c0(const __m128* apVector)
-{
-    __m128 vSquared = _mm_and_ps(_mm_mul_ps(*apVector, *apVector), DAT_01017d10);
-    SquaredLanes lanes;
-    _mm_store_ps((float*)&lanes, vSquared);
-
-    int idx;
-    if (lanes.m_uiX < lanes.m_uiY)
-    {
-        idx = (lanes.m_uiZ > lanes.m_uiY) ? 2 : 1;
-    }
-    else
-    {
-        idx = (lanes.m_uiZ > lanes.m_uiX) ? 2 : 0;
-    }
-
-    int positive = ((const float*)apVector)[idx] > 0.0f ? 1 : 0;
-    return idx + positive * 3;
-}
 
 struct PtrMapEntryObj
 {
@@ -854,24 +779,6 @@ struct ContactViewer
 extern void __cdecl FUN_00d67a50(int owner, int id, void* entry, int mode, const char* name, unsigned int info,
                                  float value, BSAudioValue flags);
 
-// @fnv 0x00d68030
-void ContactViewer::FUN_00d68030(void* entry, int mode)
-{
-    unsigned int index = m_table.Find(entry);
-    if ((int)index > m_table.m_pRayCursor)
-        return;
-    unsigned int flags = m_table.m_entries[index].m_flags;
-    unsigned int tag = flags >> 0x18;
-    BSAudioString name;
-    if (tag != 0)
-        name.Format("%d(%d)", flags & 0xffffff, tag);
-    else
-        name.Format("%d", flags & 0xffffff);
-    FUN_00d67a50(m_18, m_notifier.v1(), entry, mode, name.m_data, 0xff800000u, 0.1f, BSAudioValue());
-    m_table.m_entries[index].m_flags = flags & 0xffffff;
-    name.Release();
-}
-
 struct D681E0Primary
 {
     virtual void vfunc00();
@@ -898,9 +805,6 @@ struct D681E0Object : D681E0Primary, D681E0Secondary
 // @fnv 0x00d681e0
     virtual void FUN_00d681e0();
 };
-
-D681E0Object::D681E0Object()
-{}
 
 // FUN_00d68200: thiscall adjustor thunk (sub ecx,0x28; jmp FUN_00d68230).
 // Written as multiple inheritance: the primary base is 0x28 bytes (vptr + 9 ints),
@@ -1032,47 +936,6 @@ struct FUN_00d67c30_cls
     void FUN_00d67c30(ArgBlock* a1);
 };
 
-// For each of two items in a1->m_items, increments the high/low counters in the table entry or attaches a new entry and applies the item.
-// @fnv 0x00d67c30
-void FUN_00d67c30_cls::FUN_00d67c30(ArgBlock* apBlock)
-{
-    if (apBlock->unk10 > 0)
-    {
-        return;
-    }
-    Table* t = &m_0c;
-    int* p = apBlock->m_items;
-    int n = 2;
-    do
-    {
-        Item* item = (Item*)*p;
-        int idx = t->FindIndex((int)item);
-        if (idx <= m_14)
-        {
-            unsigned int* pFlags = &t->m_entries[idx].m_flags;
-            unsigned int uiFlags = *pFlags;
-            unsigned int uiHigh = (uiFlags >> 0x18) + 1;
-            if (uiHigh >= 0xff)
-            {
-                uiHigh = 0xff;
-            }
-            unsigned int uiLow = (uiFlags & (unsigned int)&DAT_00ffffff) + 1;
-            if (uiLow >= (unsigned int)&DAT_00ffffff)
-            {
-                uiLow = (unsigned int)&DAT_00ffffff;
-            }
-            *pFlags = (uiHigh << 0x18) | uiLow;
-        }
-        else
-        {
-            Holder* h = FUN_00c85750();
-            t->Attach(h->m_10, (int)item, (int)&DAT_01000001);
-            char* owner = ((char*)this - 0x28) != 0 ? (char*)this + 8 : 0;
-            item->Apply((int)owner);
-        }
-        p++;
-    } while (--n != 0);
-}
 }  // namespace fnv_00d67c30
 
 struct ToiCountPrimaryInterface : PrimaryBase
@@ -1091,9 +954,6 @@ struct ToiCountProcessAdjustor : ToiCountPrimaryInterface, ToiCountProcessInterf
 // @fnv 0x00d681f0
     virtual void FUN_00d681f0();
 };
-
-ToiCountProcessAdjustor::ToiCountProcessAdjustor()
-{}
 
 // MSVC adjustor thunk: the primary base occupies 0x2c bytes; both bases declare the virtual,
 // the derived class defines only its constructor, so the compiler emits the this-adjusting thunk.
@@ -1123,6 +983,3 @@ struct ToiCountThunkObject : ToiCountThunkPrimary, ToiCountThunkSecondary
 // @fnv 0x00d68210
     virtual void FUN_00d68210();
 };
-
-ToiCountThunkObject::ToiCountThunkObject()
-{}

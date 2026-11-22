@@ -16,14 +16,6 @@ struct FUN_00d60810
     void AssignReferencedObject(hkReferencedObject* p);
 };
 
-// @fnv 0x00d60810
-void FUN_00d60810::AssignReferencedObject(hkReferencedObject* apObject)
-{
-    apObject->RetainReference();
-    m_8->removeReference();
-    m_8 = apObject;
-}
-
 extern "C" unsigned int __stdcall WriteSwapped(void*, int, int);
 
 // @fnv 0x00d609c0
@@ -238,16 +230,6 @@ struct FUN_00d60830
     char m_iThirdValue;
     FUN_00d60830(hkReferencedObject* p, char b);
 };
-
-// @fnv 0x00d60830
-FUN_00d60830::FUN_00d60830(hkReferencedObject* apObject, char b)
-{
-    m_6 = 1;
-    *(int*)this = (int)&DAT_010d14f8;
-    m_8 = apObject;
-    m_iThirdValue = b;
-    apObject->RetainReference();
-}
 
 struct FUN_00d60a00_class : public hkOArchive
 {
@@ -500,16 +482,3 @@ class ListMapDBA
     int AllocateSlot();
     void Insert(unsigned __int64 key, const int& value);
 };
-
-// Allocates an entry slot, stores value and the existing next index for key, then inserts the key-to-slot mapping into m_map.
-// @fnv 0x00dba360
-void ListMapDBA::Insert(unsigned __int64 key, const int& value)
-{
-    int next = (int)m_map.FUN_00cb1cb0(key, (unsigned __int64)-1);
-    int iSlot = AllocateSlot();
-    EntryDBA& e = m_entries[iSlot];
-    e.m_uiFilterValue = value;
-    e.m_next = next;
-    hkMemoryAllocatorDBA& alloc = *FUN_00c85750()->m_pStreamAllocator;
-    m_map.InsertKeyValue(alloc, key, iSlot);
-}

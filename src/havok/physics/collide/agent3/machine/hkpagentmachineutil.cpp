@@ -300,10 +300,6 @@ int S6f8ab0::FUN_006f8ab0(int a1, float a2, void* a3)
     return this->f184->FUN_007e0140(a1, a2, a3);
 }
 
-int Emit6f8ab0(S6f8ab0* p)
-{
-    return p->FUN_006f8ab0(0, 0.0f, 0);
-}
 }   // namespace f3m_006f8ab0
 
 
@@ -1959,50 +1955,6 @@ struct S_00d97130_Track
 template <typename T> inline T* hkAddByteOffset(T* base, int offset)
 {
     return (T*)((char*)base + offset);
-}
-void __cdecl FUN_00d97130(S_00d97130_Track& track, const S_00d97130_Input* input, S_00d97130_Collector* collector)
-{
-    for (int i = 0; i < track.m_kSectors.GetLogicalSize(); i++)
-    {
-        char* sector = track.m_kSectors[i];
-        int sizeUsed = (i + 1 == track.m_kSectors.GetLogicalSize()) ? track.m_bytesAllocatedInLastSector : 0x200;
-        collector->DispatchWithMode("Sector", sector, sizeUsed, 0x200);
-    }
-
-    for (int sectorIndex = 0; sectorIndex < track.m_kSectors.GetLogicalSize();)
-    {
-        S_00d97130_Entry* entry = (S_00d97130_Entry*)track.m_kSectors[sectorIndex];
-        sectorIndex++;
-        S_00d97130_Entry* endEntry = (sectorIndex == track.m_kSectors.GetLogicalSize())
-                                         ? hkAddByteOffset(entry, track.m_bytesAllocatedInLastSector)
-                                         : hkAddByteOffset(entry, 0x200);
-        for (; entry < endEntry; entry = hkAddByteOffset(entry, entry->m_iElementCount))
-        {
-            void* agentData;
-            switch (entry->m_ucAgentType)
-            {
-            case 2:
-            case 6:
-            case 10:
-            case 14:
-                agentData = hkAddByteOffset(entry, 0x20);
-                break;
-            case 4:
-            case 12:
-                agentData = hkAddByteOffset(entry, 0x30);
-                break;
-            default:
-                continue;
-            }
-            S_00d97130_CalcStatsFunc func =
-                input->m_pCollisionDispatcher->m_kAgent3FunctionTable[entry->m_ucNnTrackType].m_pCalcStats;
-            if (func)
-            {
-                func(entry, agentData, input, collector);
-            }
-            collector->AddObjectInstance("ContactMgr", entry->m_pContactManager, 0);
-        }
-    }
 }
 }  // namespace fnv_00d97130
 

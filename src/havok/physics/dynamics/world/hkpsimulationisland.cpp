@@ -362,17 +362,6 @@ struct D077D0Object
     bool FUN_00d077d0();
 };
 
-// @fnv 0x00d077d0
-bool D077D0Object::FUN_00d077d0()
-{
-    D077D0LocalBuffer buffer;
-    buffer.m_data = FUN_00c85750().stackAllocInts(m_iCapacity);
-    D077D0BitField bits(buffer.m_data, m_iCapacity);
-    bool result = CheckConnectivity(bits);
-    FUN_00c85750().stackFree(buffer.m_data);
-    return result;
-}
-
 struct GlobalObjectO2_00d472a0
 {
 };
@@ -385,13 +374,6 @@ GlobalObjectO2_00d472a0* FUN_00d078d0()
 
 // FUN_00d07100: OR a flag byte into a sub-object's flags field.
 // Sub-object pointer lives at +0x30 of the owner; flags byte at +0x12 of it.
-
-// @fnv 0x00d07100
-void __stdcall FUN_00d07100(char* owner, unsigned char bits)
-{
-    char* sub = *(char**)(owner + 0x30);
-    *(unsigned char*)(sub + 0x12) |= bits;
-}
 
 struct S_00d074c0_Heap
 {
@@ -600,82 +582,6 @@ struct S_00d074c0_Island
     bool CheckConnectivity(S_00d074c0_UnionFind& checkConnectivityOut, void* unk) throw();
 };
 
-// Unions entities linked by collision entries, constraints and actions in checkConnectivityOut and returns whether they form one group.
-// @fnv 0x00d074c0
-bool S_00d074c0_Island::CheckConnectivity(S_00d074c0_UnionFind& aUnionFind, void* unk) throw()
-{
-    {
-        for (int e = 0; e < m_kActorEntries.GetLogicalSize(); e++)
-        {
-            S_00d074c0_Entity* entity = m_kActorEntries[e];
-            const S_00d074c0_Array<S_00d074c0_CollisionEntry>& collisionEntries = entity->m_kCollisionEntries;
-            for (int i = 0; i < collisionEntries.GetLogicalSize(); i++)
-            {
-                S_00d074c0_Entity* otherEntity =
-                    static_cast<S_00d074c0_Entity*>(collisionEntries[i].m_pCollidable->getOwner());
-                if (!otherEntity->isFixed())
-                {
-                    aUnionFind.Union(e, otherEntity->m_usStorageIndex);
-                    if (aUnionFind.isOneGroup())
-                    {
-                        return true;
-                    }
-                }
-            }
-        }
-    }
-    {
-        for (int e = 0; e < m_kActorEntries.GetLogicalSize(); e++)
-        {
-            S_00d074c0_Entity* entity = m_kActorEntries[e];
-            for (int c = 0; c < entity->m_constraintsSize; c++)
-            {
-                S_00d074c0_ConstraintInternal& ci = entity->m_constraintsData[c];
-                if (!ci.m_kActorEntries[0]->isFixed() && !ci.m_kActorEntries[1]->isFixed())
-                {
-                    aUnionFind.Union(ci.m_kActorEntries[0]->m_usStorageIndex, ci.m_kActorEntries[1]->m_usStorageIndex);
-                    if (aUnionFind.isOneGroup())
-                    {
-                        return true;
-                    }
-                }
-            }
-        }
-    }
-    {
-        S_00d074c0_InplaceArray<S_00d074c0_Entity*, 10> entities;
-        for (int a = 0; a < m_ppActions.GetLogicalSize(); a++)
-        {
-            if (m_ppActions[a])
-            {
-                entities.clear();
-                m_ppActions[a]->GetEntities(entities);
-                int j = 0;
-                int firstNonFixed = -1;
-                for (; firstNonFixed == -1 && j < entities.GetLogicalSize(); j++)
-                {
-                    if (!entities[j]->isFixed())
-                    {
-                        firstNonFixed = j;
-                    }
-                }
-                for (; j < entities.GetLogicalSize(); j++)
-                {
-                    if (!entities[j]->isFixed())
-                    {
-                        aUnionFind.Union(entities[firstNonFixed]->m_usStorageIndex, entities[j]->m_usStorageIndex);
-                        if (aUnionFind.isOneGroup())
-                        {
-                            return true;
-                        }
-                    }
-                }
-            }
-        }
-    }
-    return aUnionFind.isOneGroup();
-}
-
 struct AudioAllocator
 {
     virtual void v00();
@@ -737,24 +643,6 @@ struct FUN_00d07470_cls
     void AddItem(ListItem* apItem);
 };
 
-// Appends apItem to the pointer list, growing it via the allocator when full, and sets the item's back-pointer to this.
-// @fnv 0x00d07470
-void FUN_00d07470_cls::AddItem(ListItem* apItem)
-{
-    PointerList* pItems = &m_kNode;
-    AudioHolder* pHolder = fnvc_adapt::FUN_00c85750();
-    if (pItems->m_uCount == (pItems->m_uCapFlags & 0x3fffffffu))
-    {
-        ResizeAudioStream(pHolder->m_pAllocator, pItems, 4);
-    }
-
-    void** pSlot = (void**)((unsigned int)pItems->m_pData + *(volatile unsigned int*)&pItems->m_uCount * 4);
-    *pSlot = apItem;
-    pItems->m_uCount++;
-
-    apItem->m_pSharedOwner = this;
-}
-
 namespace fnv_00d07720 {
 struct AudioAllocator
 {
@@ -812,46 +700,6 @@ struct FUN_00d07720_cls
     void ResetArrays();
 };
 
-// @fnv 0x00d07720
-void FUN_00d07720_cls::ResetArrays()
-{
-    m_vptr00 = (int)&DAT_010ccf28;
-
-    AudioHolder* pHolder = fnvc_adapt::FUN_00c85750();
-    AudioAllocator* pAllocator = pHolder->m_pAllocator;
-    unsigned int uCapBits1 = m_uCapBits1;
-    m_iCount1 = 0;
-    if ((uCapBits1 & 0x80000000u) == 0)
-    {
-        pAllocator->FreeArray(m_pData1, (uCapBits1 & 0x3fffffffu) * 4);
-    }
-    m_pData1 = 0;
-    m_uCapBits1 = 0x80000000u;
-
-    AudioHolder* pHolder2 = fnvc_adapt::FUN_00c85750();
-    AudioAllocator* pAllocator2 = pHolder2->m_pAllocator;
-    unsigned int uCapBits2 = m_uCapBits2;
-    m_iCount2 = 0;
-    if ((uCapBits2 & 0x80000000u) == 0)
-    {
-        pAllocator2->FreeArray(m_pData2, (uCapBits2 & 0x3fffffffu) * 4);
-    }
-    m_pData2 = 0;
-    m_uCapBits2 = 0x80000000u;
-
-    AudioHolder* pHolder3 = fnvc_adapt::FUN_00c85750();
-    AudioAllocator* pAllocator3 = pHolder3->m_pAllocator;
-    unsigned int uCapBits3 = m_uCapBits3;
-    m_iCount3 = 0;
-    if ((uCapBits3 & 0x80000000u) == 0)
-    {
-        pAllocator3->FreeArray(m_pData3, (uCapBits3 & 0x3fffffffu) * 4);
-    }
-    m_pData3 = 0;
-    m_uCapBits3 = 0x80000000u;
-
-    *(volatile int*)&m_vptr00 = (int)&DAT_0102e388;
-}
 }  // namespace fnv_00d07720
 
 namespace fnv_00d078e0 {
@@ -887,24 +735,7 @@ struct FUN_00d078e0_cls
     static void operator delete(void* apMemory) throw();
 };
 
-// @fnv 0x00d078e0
-FUN_00d078e0_cls* FUN_00d078e0_cls::Destroy(unsigned char acFlags)
-{
-    ResetArrays();
-    if (acFlags & 1)
-    {
-        AudioHolder* pHolder = fnvc_adapt::FUN_00c85750();
-        AudioAllocator* pAllocator = pHolder->m_pAllocator;
-        pAllocator->Free(this, m_uSize);
-    }
-    return this;
-}
 }  // namespace fnv_00d078e0
-
-// 0x00d07120  bare ret
-// @fnv 0x00d07120
-void FUN_00d07120()
-{}
 
 // SaveIsland
 
@@ -989,64 +820,6 @@ struct FUN_00d07210_Island
 int __cdecl FUN_00d06f80(void* data, int bytes);
 void __cdecl CollectSectors(void* agents, FUN_00d07210_Writer* save);
 void __cdecl FUN_00d97130(void* agents, void* world, FUN_00d07210_Writer* save);
-
-// Serializes the island's entity and action pointer arrays, per-entity constraints, agents and collision agents through the writer.
-// @fnv 0x00d07210
-void FUN_00d07210_Island::SaveIsland(FUN_00d07210_Writer* save, int)
-{
-    if ((m_kActorEntries.m_iCapacityState & 0x80000000) == 0 || save->m_force)
-    {
-        int alloc = FUN_00d06f80(m_kActorEntries.m_data, m_kActorEntries.getCapacity() * 4);
-        save->Array(3, "EntityPtrs", m_kActorEntries.m_data, m_kActorEntries.GetLogicalSize() * 4, alloc);
-    }
-
-    for (int i = 0; i < m_kActorEntries.GetLogicalSize(); i++)
-    {
-        S_00d074c0_Entity* entity = m_kActorEntries[i];
-        save->Begin("Entity", entity, 0);
-        save->Block("Constraints");
-        if ((entity->m_constraintsCap & 0x8000) == 0 || save->m_force)
-        {
-            save->Array(3, "ConMstPtr", entity->m_constraintsData, entity->m_constraintsSize * 48,
-                        (entity->m_constraintsCap & 0x3fff) * 48);
-        }
-        for (int j = 0; j < entity->m_constraintsSize; j++)
-        {
-
-            if (((FUN_00d07210_Constraint*)&entity->m_constraintsData[j])->m_pConstraintInstance->m_flags & 0x7fff)
-                save->Begin("ConInstance",
-                            ((FUN_00d07210_Constraint*)&entity->m_constraintsData[j])->m_pConstraintInstance, 0);
-            if (((FUN_00d07210_Constraint*)&entity->m_constraintsData[j])->m_pConstraintInstance->m_pData->m_flags &
-                0x7fff)
-                save->Begin("ConData",
-                            ((FUN_00d07210_Constraint*)&entity->m_constraintsData[j])->m_pConstraintInstance->m_pData,
-                            0);
-        }
-        save->End();
-    }
-
-    if ((m_ppActions.m_iCapacityState & 0x80000000) == 0 || save->m_force)
-    {
-        int alloc;
-        {
-            int capacity = m_ppActions.getCapacity();
-            void* data = m_ppActions.m_data;
-            alloc = FUN_00d06f80(data, capacity * 4);
-        }
-        save->Array(3, "ActionPtrs", m_ppActions.m_data, m_ppActions.GetLogicalSize() * 4, alloc);
-    }
-
-    for (int i = 0; i < m_ppActions.GetLogicalSize(); i++)
-    {
-        S_00d074c0_Action* action = m_ppActions[i];
-        save->Begin("Actions", action, 0);
-    }
-
-    CollectSectors(&m_pAgents, save);
-    save->Block("CollAgents");
-    FUN_00d97130(&m_pAgents, unk18->unk78, save);
-    save->End();
-}
 
 extern const void* DAT_010ccf28[];  // hkpSimulationIsland vftable (not in the symbols DB)
 
@@ -1159,18 +932,6 @@ struct FUN_00d07830 : IslandBaseQ
     FUN_00d07830(hkpWorldQ* world);
 };
 
-// Constructs the object: sets two floats to 0 and one to -10, clears constraint info, the sparse and island-locking flags, and the constraint count.
-// @fnv 0x00d07830
-FUN_00d07830::FUN_00d07830(hkpWorldQ* world)
-    : IslandBaseQ(world), m_fIslandValueBeforeActions1(0.0f), m_fIslandValueBeforeActions2(0.0f),
-      m_fIslandValueBeforeEntities(-10.0f)
-{
-    m_bAllowIslandLocking = 0;
-    m_kConstraintInfo.clear();
-    m_isSparse = 0;
-    m_iConstraintCount = 0;
-}
-
 namespace fnv_00d07420 {
 // FUN_00d07420: append a pointer to a list owned by this object, growing via the global allocator.
 
@@ -1250,23 +1011,6 @@ struct FUN_00d07420_cls
     void FUN_00d07420(FUN_00d07420_cls* item);
 };
 
-// Sets item's parent to this and its index to the current count, then appends item to this object's item list, growing it via ResizeAudioStream when full.
-// @fnv 0x00d07420
-void FUN_00d07420_cls::FUN_00d07420(FUN_00d07420_cls* item)
-{
-    item->m_cc = this;
-    item->m_a8 = (unsigned short)m_kNode.m_uiItemCount;
-    ItemList* list = &m_kNode;
-    GlobalHolder* holder = FUN_00c85750();
-    if (list->m_uiItemCount == (int)(list->m_capFlags & 0x3fffffffu))
-    {
-        ResizeAudioStream(holder->m_alloc, list, 4);
-    }
-    void** slot = list->m_data + list->m_uiItemCount;
-    *slot = item;
-    *slot = item;  // repeated store: keeps the slot address materialised in a register
-    list->m_uiItemCount++;
-}
 }  // namespace fnv_00d07420
 
 // @f3 0x0098b230 (community match, verified in this file)

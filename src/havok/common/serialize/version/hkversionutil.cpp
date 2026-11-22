@@ -56,21 +56,6 @@ struct FUN_00e049d0_Class : Object
     FUN_00e049d0_Class* FUN_00e049d0(int flags);
 };
 
-// @fnv 0x00e049d0
-FUN_00e049d0_Class* FUN_00e049d0_Class::FUN_00e049d0(int flags)
-{
-    Object::FUN_00e03160();
-
-    if (flags & 1)
-    {
-        MemoryRouter* router = _D1A0E0GetMemoryRouter();
-        unsigned short type = m_type;
-        router->m_pMemoryManager->FUN_00e00008(this, type);
-    }
-
-    return this;
-}
-
 extern "C" char str_010cf830[];
 
 // @fnv 0x00dc0fb0
@@ -153,31 +138,6 @@ class hkVersionCheckDC11
     int FUN_00e032d0(const hkClassMemberDC11* pkOld, const hkClassMemberDC11* pkNew) throw();
     int IsMemberCompatible(const hkClassMemberDC11* pkOld, const hkClassMemberDC11* pkNew) throw();
 };
-
-// Returns 1 if the old class member is compatible with the new one by type/subtype, cstring-to-stringptr, or variant-to-pointer conversion; otherwise 0.
-// @fnv 0x00dc1100
-int hkVersionCheckDC11::IsMemberCompatible(const hkClassMemberDC11* pkOld, const hkClassMemberDC11* pkNew) throw()
-{
-    bool bTypeCompatible = (pkOld->m_type == pkNew->m_type) || (pkOld->m_type == hkClassMemberDC11::TYPE_SIMPLEARRAY &&
-                                                                pkNew->m_type == hkClassMemberDC11::TYPE_ARRAY);
-    bool bCStringToStringPtr =
-        (pkOld->m_type == hkClassMemberDC11::TYPE_CSTRING && pkNew->m_type == hkClassMemberDC11::TYPE_STRINGPTR);
-    bool bVariantToPtr =
-        (pkOld->m_type == hkClassMemberDC11::TYPE_VARIANT && pkNew->m_type == hkClassMemberDC11::TYPE_POINTER &&
-         pkNew->m_eSubtype == hkClassMemberDC11::TYPE_STRUCT && pkNew->FUN_00d86920() &&
-         FUN_00cb0fa0(g_01268748.FUN_00d46d40(), pkNew->FUN_00d86910().FUN_00d46d40()) == 0);
-    bool bSubTypeCompatible =
-        (pkOld->m_eSubtype == pkNew->m_eSubtype) || (pkOld->m_eSubtype == hkClassMemberDC11::TYPE_CSTRING &&
-                                                     pkNew->m_eSubtype == hkClassMemberDC11::TYPE_STRINGPTR);
-    bool bSubVariantToPtr =
-        (pkOld->m_eSubtype == hkClassMemberDC11::TYPE_VARIANT && pkNew->m_eSubtype == hkClassMemberDC11::TYPE_POINTER &&
-         pkNew->FUN_00d86920() && FUN_00cb0fa0(g_01268748.FUN_00d46d40(), pkNew->FUN_00d86910().FUN_00d46d40()) == 0);
-
-    if (FUN_00e032d0(pkOld, pkNew) || bCStringToStringPtr || bVariantToPtr ||
-        (bTypeCompatible && (bSubTypeCompatible || bSubVariantToPtr)))
-        return 1;
-    return 0;
-}
 
 class hkMemoryAllocatorDC12;
 
@@ -368,57 +328,6 @@ extern "C" S00dc15a0_AudioSystem* __cdecl FUN_00c85750();
 }
 extern "C" void __cdecl FUN_00c908c0(S00dc15a0_Buffer* buffer, int** indices, int size, int elementSize);
 
-static __declspec(noinline) int FUN_00dc12c0(S00dc15a0_Params* params, int value, int flags, S00dc15a0_Array* arr)
-{
-    arr->m_iElementCount = (int)&params + (int)&value + (int)&flags;
-    return arr->m_capFlags;
-}
-
-// Builds an array containing 0..count-1, passes it to FUN_00dc12c0, and returns that call's result.
-// @fnv 0x00dc15a0
-int __cdecl FUN_00dc15a0(S00dc15a0_Params* params, int value, int flags)
-{
-    S00dc15a0_Array arr;
-    int count = params->unk04;
-    arr.m_data = 0;
-    arr.m_iElementCount = 0;
-    arr.m_capFlags = 0x80000000;
-
-    S00dc15a0_AudioSystem* pAudioSystem = fnvc_adapt::FUN_00c85750();
-    S00dc15a0_Buffer* heap = pAudioSystem->unk0C;
-    int iCurrentCap = arr.m_capFlags & 0x3fffffff;
-    if (iCurrentCap < count)
-    {
-        int newCap = iCurrentCap + iCurrentCap;
-        if (count >= newCap)
-            newCap = count;
-        FUN_00c908c0(heap, &arr.m_data, newCap, 4);
-    }
-
-    int index = 0;
-    arr.m_iElementCount = count;
-    if (params->unk04 > 0)
-    {
-        do
-        {
-            arr.m_data[index] = index;
-            ++index;
-        } while (index < params->unk04);
-    }
-
-    int result = FUN_00dc12c0(params, value, flags, &arr);
-
-    pAudioSystem = fnvc_adapt::FUN_00c85750();
-    S00dc15a0_Buffer* heap2 = pAudioSystem->unk0C;
-    arr.m_iElementCount = 0;
-    if ((arr.m_capFlags & 0x80000000) == 0)
-    {
-        heap2->vf10(arr.m_data, (arr.m_capFlags & 0x3fffffff) * 4);
-    }
-
-    return result;
-}
-
 struct hkStructureLayoutDC10
 {
     char m_ucBytesInPointer;
@@ -452,8 +361,4 @@ class PackfileObjectCopier : public FUN_00e03120::hkObjectCopier
     virtual void CopyContents();
 };
 
-// @fnv 0x00dc1040
-PackfileObjectCopier::PackfileObjectCopier(const hkStructureLayoutDC10& kSrc, const hkStructureLayoutDC10& kDst)
-    : FUN_00e03120::hkObjectCopier(kSrc, kDst, 0)
-{}
 }

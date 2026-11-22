@@ -227,14 +227,6 @@ class hkObjDCD1 : public hkpShapeDCD1
     void CollectSubPartsStats(hkStatisticsCollectorDCD1* pkCollector, const hkClassDCD1* pkClass) const throw();
 };
 
-// Adds the SubParts array to the statistics collector, then forwards to the base shape's statistics collection with DAT_01269198.
-// @fnv 0x00dcd140
-void hkObjDCD1::CollectSubPartsStats(hkStatisticsCollectorDCD1* pkCollector, const hkClassDCD1* pkClass) const throw()
-{
-    pkCollector->addArray("SubParts", m_kSubparts);
-    FUN_00d213e0(pkCollector, &DAT_01269198);
-}
-
 struct PageDCCD
 {
     char unk00[0x20];
@@ -614,14 +606,6 @@ class FUN_00dcd310 : public FUN_00d21410
     int m_auiShapeKeys[3];
 };
 
-// @fnv 0x00dcd310
-FUN_00dcd310::FUN_00dcd310(float afSphereRadius, int iNumBitsForSubpartIndex) throw() : FUN_00d21410(0x17, 5)
-{
-    m_kScaling.SetAllComponents(1.0f);
-    m_iNumBitsForSubpartIndex = iNumBitsForSubpartIndex;
-    m_fSphereRadius = afSphereRadius;
-    m_eWeldingType = 6;
-}
 }  // namespace fnv_00dcd310
 
 struct PageDCD4
@@ -691,10 +675,6 @@ static __declspec(noinline) void ExpandAabbWithVertex(const MeshVec& vertex, con
     aabb.m_kMaximumCorner.m_vComponents = _mm_max_ps(aabb.m_kMaximumCorner.m_vComponents, v.m_vComponents);
 }
 volatile int g_meshIn0, g_meshIn1, g_meshIn2, g_meshIn3;
-void MeshGetAabb_dccdd0()
-{
-    ExpandAabbWithVertex(*(MeshVec*)g_meshIn0, *(hkTransform*)g_meshIn1, *(MeshVec*)g_meshIn2, *(MeshAabb*)g_meshIn3);
-}
 
 inline void* operator new(unsigned int, void* p)
 {
@@ -800,16 +780,6 @@ class S00dcd380_Host
   public:
     S00dcd380_Mesh* FUN_00dcd380(int finishing);
 };
-
-// Placement-constructs an S00dcd380_Mesh into this host object, passing a flag that carries the finishing state.
-// @fnv 0x00dcd380
-S00dcd380_Mesh* S00dcd380_Host::FUN_00dcd380(int finishing)
-{
-    S00dcd380_Flag flag;
-    flag.m_bFinishing = finishing;
-    __assume(this != 0);
-    return new (this) S00dcd380_Mesh(flag);
-}
 
 struct MeshAabb;
 extern "C" void _ReadWriteBarrier();
@@ -933,10 +903,3 @@ class MeshScalingSetter : public hkpMeshShape
   public:
     void FUN_00dccf40(const hkVector4& value);
 };
-
-// @fnv 0x00dccf40
-void MeshScalingSetter::FUN_00dccf40(const hkVector4& value)
-{
-    __m128 data = _mm_load_ps(&value.x);
-    _mm_store_ps(&m_kScaling.x, data);
-}

@@ -92,21 +92,6 @@ struct FUN_00d5e850_Class
     FUN_00d5e850_Class* Destroy(int flags);
 };
 
-// Calls FUN_00d5e7c0, then if flags has bit 1 set, frees this via the memory router's allocator using field_04 as size, and returns this.
-// @fnv 0x00d5e850
-FUN_00d5e850_Class* FUN_00d5e850_Class::Destroy(int flags)
-{
-    FUN_00d5e7c0();
-
-    if (flags & 1)
-    {
-        FUN_00d5e850_MemoryRouter* router = _D1A0E0GetMemoryRouter();
-        router->allocator->deallocate(this, field_04);
-    }
-
-    return this;
-}
-
 struct FUN_00d5e0f0_cls
 {
     int unk00;
@@ -169,12 +154,6 @@ class hkObjD5E1
 
     void FUN_00d5e180(void* a);
 };
-
-// @fnv 0x00d5e180
-void hkObjD5E1::FUN_00d5e180(void* a)
-{
-    m_holder->m_target->run(a);
-}
 
 struct FUN_00d5e1c0_Shape
 {
@@ -272,31 +251,6 @@ struct ConvexList : hkpConvexListShape
 {
     void SetChildren(hkpConvexShape** children, int numChildren);
 };
-
-// @fnv 0x00d5e6e0
-void ConvexList::SetChildren(hkpConvexShape** children, int numChildren)
-{
-    hkArray<hkpConvexShape*>* pChildrenArray = &m_kChildShapes;
-    BSAudio* audio = FUN_00c85750();
-    void* allocator = audio->allocator;
-    int iCapacity = pChildrenArray->m_iCapacityState & 0x3fffffff;
-    if (iCapacity < numChildren)
-    {
-        iCapacity *= 2;
-        if (numChildren >= iCapacity)
-        {
-            iCapacity = numChildren;
-        }
-        FUN_00c908c0(allocator, pChildrenArray, iCapacity, sizeof(hkpConvexShape*));
-    }
-    pChildrenArray->m_iElementCount = numChildren;
-    m_fSphereRadius = children[0]->m_fSphereRadius;
-    for (int i = 0; i < numChildren; i++)
-    {
-        pChildrenArray->m_data[i] = children[i];
-        FUN_00c90510(children[i]);
-    }
-}
 
 struct ShapeOutD5E
 {
@@ -519,33 +473,6 @@ class hkpConvexListShapeD5E3 : public hkpShapeD5E3
     hkArrayD5E3<const hkpShapeD5E3*> m_kChildShapes;
 };
 
-// Stores bUseCachedAabb and, when true, computes m_kAabbCenter and m_kAabbHalfExtents from the union of child shape AABBs.
-// @fnv 0x00d5e210
-void hkpConvexListShapeD5E3::UpdateCachedAabb(bool bUseCachedAabb)
-{
-    m_bUseCachedAabb = bUseCachedAabb;
-    if (bUseCachedAabb)
-    {
-        hkAabbD5E3 kAabb;
-        kAabb.m_kMinimumCorner.SetAllComponents(DAT_0104da48);
-        kAabb.m_kMaximumCorner.SetAllComponents(DAT_0104e148);
-        for (int i = 0; i < m_kChildShapes.GetLogicalSize(); i++)
-        {
-            hkAabbD5E3 kChildAabb;
-            m_kChildShapes[i]->getAabb(DAT_01268370, 0.0f, kChildAabb);
-            kAabb.includeAabb(kChildAabb);
-        }
-        hkVector4D5E3 kTargetCenter;
-        kTargetCenter.setAdd4(kAabb.m_kMinimumCorner, kAabb.m_kMaximumCorner);
-        kTargetCenter.mul4(DAT_010c71d0);
-        m_kAabbCenter = kTargetCenter;
-        hkVector4D5E3 m_kPoint2;
-        m_kPoint2.setSub4(kAabb.m_kMaximumCorner, kAabb.m_kMinimumCorner);
-        m_kPoint2.mul4(DAT_010c71d0);
-        m_kAabbHalfExtents = m_kPoint2;
-    }
-}
-
 namespace fnv_00d5e3c0 {
 union __declspec(intrin_type) __declspec(align(16)) __m128
 {
@@ -651,25 +578,6 @@ class hkpConvexListShapeD5E3 : public hkpShapeD5E3
     hkArrayD5E3<const hkpShapeD5E3*> m_kChildShapes;
 };
 
-// Computes the world-space AABB of a convex list shape, using cached extents when available or merging child shape AABBs otherwise.
-// @fnv 0x00d5e3c0
-void hkpConvexListShapeD5E3::FUN_00d5e3c0(const hkTransformD5E3& kLocalToWorld, float fTolerance,
-                                          hkAabbD5E3& kOut) const
-{
-    if (m_bUseCachedAabb)
-    {
-        FUN_00d26230(kLocalToWorld, m_kAabbHalfExtents, m_kAabbCenter, m_fSphereRadius + fTolerance, kOut);
-        return;
-    }
-
-    m_kChildShapes[0]->getAabb(kLocalToWorld, fTolerance, kOut);
-    hkAabbD5E3 kTemp;
-    for (int i = 1; i < m_kChildShapes.GetLogicalSize(); i++)
-    {
-        m_kChildShapes[i]->getAabb(kLocalToWorld, fTolerance, kTemp);
-        kOut.includeAabb(kTemp);
-    }
-}
 }  // namespace fnv_00d5e3c0
 
 template <class T> struct hkArrayD5E7
@@ -731,14 +639,6 @@ class FUN_00d5e750 : public hkShapeD5E7, public hkContainerD5E7
 
     hkArrayD5E7<int> m_ppData;
 };
-
-// @fnv 0x00d5e750
-FUN_00d5e750::FUN_00d5e750(void* a, void* b) throw() : hkShapeD5E7(0x16)
-{
-    m_vScale = 1.0f;
-    SetChildren(a, b);
-    UpdateCachedAabb(1);
-}
 
 namespace fnv_00d5e7c0 {
 struct hkAllocatorD5E7
@@ -874,29 +774,6 @@ struct S00d5e480_Class
     void FUN_00c90360(S00d5e480_Visitor*, int*);
     void FUN_00d5e480(S00d5e480_Visitor*, int);
 };
-
-// @fnv 0x00d5e480
-void S00d5e480_Class::FUN_00d5e480(S00d5e480_Visitor* visitor, int)
-{
-    if (!(capacity & 0x80000000) || visitor->field10 != 0)
-    {
-        void** childArray = children;
-        int allocationSize = (capacity & 0x3fffffff) * 4;
-        int allocated = _FUN_00d06f80(childArray, allocationSize);
-        visitor->visitArray(3, str_010cc3a4, children, count * 4, allocated);
-    }
-
-    {
-        int index = 0;
-        while (index < count)
-        {
-            visitor->visit(0, children[index], 0);
-            ++index;
-        }
-    }
-
-    FUN_00c90360(visitor, &DAT_01268940);
-}
 
 #include <windows.h>
 extern "C" void _ReadWriteBarrier(void);

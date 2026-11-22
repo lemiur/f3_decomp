@@ -43,27 +43,6 @@ struct FUN_00d472a0
                  unsigned int n);
 };
 
-// @fnv 0x00d472a0
-FUN_00d472a0::FUN_00d472a0(unsigned int auiValue0, unsigned int auiValue1, unsigned int auiValue2,
-                           unsigned int auiUnused, unsigned int auiValue3, unsigned int auiValue4,
-                           unsigned int auiValue5, unsigned int auiValue6, unsigned int auiValue7,
-                           unsigned int auiValue8, unsigned int auiValue9, unsigned int auiValue10,
-                           unsigned int auiValue11)
-{
-    m[0] = auiValue0;
-    m[1] = auiValue1;
-    m[2] = auiValue2;
-    m[3] = auiValue3;
-    m[4] = auiValue4;
-    m[5] = auiValue5;
-    m[6] = auiValue6;
-    m[7] = auiValue7;
-    m[8] = auiValue8;
-    m[9] = auiValue9;
-    m[10] = auiValue10;
-    m[11] = auiValue11;
-}
-
 struct FUN_00d46f00_s
 {
     unsigned int m_uiCount;
@@ -160,22 +139,6 @@ struct Container
     int FindIndexByName(const char* name);
 };
 
-// Scans entries by index, comparing each entry's name string to name, and returns the first matching index or -1.
-// @fnv 0x00d47080
-int Container::FindIndexByName(const char* name)
-{
-    int i = 0;
-    if (FUN_00d46f70() > 0)
-    {
-        do
-        {
-            if (FUN_00cb0fa0(*(const char**)FUN_00d46f80(i), name) == 0)
-                return i;
-            ++i;
-        } while (i < FUN_00d46f70());
-    }
-    return -1;
-}
 }  // namespace fnv_00d47080
 
 struct FUN_00d471a0_class
@@ -184,13 +147,6 @@ struct FUN_00d471a0_class
     int* m_iSlotIds;
     int FUN_00d471a0(int i) const;
 };
-// @fnv 0x00d471a0
-int FUN_00d471a0_class::FUN_00d471a0(int aiIndex) const
-{
-    if (m_iSlotIds && m_iSlotIds[aiIndex] >= 0)
-        return 1;
-    return 0;
-}
 
 struct FUN_00d46fe0_result
 {
@@ -366,19 +322,6 @@ class hkPackfileD472
     hkResultD472 WriteItemName(int index, hkStreamWriterD472* writer);
 };
 
-// Looks up the item name at index and writes it to the stream writer, returning success or failure.
-// @fnv 0x00d47210
-hkResultD472 hkPackfileD472::WriteItemName(int index, hkStreamWriterD472* writer)
-{
-    const char* name;
-    if (getName(index, name))
-    {
-        writer->write(name, m_items[index].FUN_00d86980());
-        return HK_SUCCESS_D472;
-    }
-    return HK_FAILURE_D472;
-}
-
 struct hkNamedEntryD473
 {
     int m_name;
@@ -392,19 +335,6 @@ class hkEntryListD473
 
     hkNamedEntryD473* FUN_00d47300(int iName);
 };
-
-// Scans the entry list and returns the first entry whose m_name matches iName, or null if none matches.
-// @fnv 0x00d47300
-hkNamedEntryD473* hkEntryListD473::FUN_00d47300(int iName)
-{
-    for (int i = 0; i < FUN_00d46ef0(); i++)
-    {
-        hkNamedEntryD473* pkEntry = GetEntryAt(i);
-        if (FUN_00cb0fa0(pkEntry->m_name, iName) == 0)
-            return pkEntry;
-    }
-    return 0;
-}
 
 struct SmallFlag
 {
@@ -846,10 +776,6 @@ class FUN_00d87bf0 : public FUN_00def160, public hkpWorldPostSimulationListenerD
     virtual ~FUN_00d87bf0();
 };
 
-// @fnv 0x00d87bf0
-FUN_00d87bf0::~FUN_00d87bf0()
-{}
-
 struct MemberD4728
 {
     int m_data;
@@ -1086,49 +1012,6 @@ class hkClassAccessorD473
 
     hkResultD473 FUN_00d473f0(int iIndex, hkDataValueD473& kOut) const;
 };
-
-// Reads the value of the member at iIndex from m_pData into kOut, dispatching on the member's type for class, enum, or generic data.
-// @fnv 0x00d473f0
-hkResultD473 hkClassAccessorD473::FUN_00d473f0(int iIndex, hkDataValueD473& kOut) const
-{
-    if (m_pData)
-    {
-        int iOffset = ((const int*)m_pData)[iIndex];
-        if (iOffset >= 0)
-        {
-            const void* pvAddr = m_pData + iOffset;
-            const hkClassMemberD473& kMember = m_members[iIndex];
-            hkResultD473 res = HK_SUCCESS;
-            unsigned char ucType = kMember.m_type;
-
-            if (ucType == 0x14)
-            {
-                const hkClassD473* pkClass = kMember.FUN_00d86920();
-                pvAddr = *(const void* const*)pvAddr;
-                kOut.m_class = pkClass;
-                kOut.m_uiFilterValue = pvAddr;
-                kOut.m_type = 0x14;
-            }
-            else if (ucType == 0x18)
-            {
-                const hkClassEnumD473* pkEnum = kMember.FUN_00d86930();
-                int iValue = kMember.ReadSignedValueBySize(pvAddr);
-                kOut.m_class = pkEnum;
-                kOut.m_uiFilterValue = (const void*)iValue;
-                kOut.m_type = 0x18;
-            }
-            else
-            {
-                int t = (int)kMember.m_type;
-                res = kOut.SetData(pvAddr, t);
-            }
-
-            return res;
-        }
-    }
-
-    return HK_FAILURE;
-}
 
 struct S_00e03240_Node;
 

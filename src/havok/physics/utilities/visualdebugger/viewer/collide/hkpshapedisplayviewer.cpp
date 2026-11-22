@@ -322,60 +322,6 @@ struct FUN_00d66080_cls
     void Destroy();
 };
 
-// @fnv 0x00d66080
-void FUN_00d66080_cls::Destroy()
-{
-    m_vptr00 = (int)&vftbl_010d1b04;
-    m_vptr08 = (int)&vftbl_010d1ae4;
-    m_vptr20 = (int)&vftbl_010d1ad4;
-    m_vptr28 = (int)&vftbl_010d1ab8;
-    m_vptr2c = (int)&vftbl_010d1aa8;
-
-    for (int i = m_iArrayLength - 1; i >= 0; --i)
-    {
-        FUN_00d65fc0(i);
-    }
-
-    {
-        SpawnedBuf* pBuf = &m_buf54;
-        AudioHolder* pHolder = (AudioHolder*)FUN_00c85750();
-        pBuf->ProcessArgument(pHolder->m_pAllocator);
-        pBuf->FUN_00a29680();
-    }
-    {
-        SpawnedBuf* pBuf = &m_buf48;
-        AudioHolder* pHolder = (AudioHolder*)FUN_00c85750();
-        pBuf->ProcessArgument(pHolder->m_pAllocator);
-        pBuf->FUN_00a29680();
-    }
-    {
-        SpawnedBuf* pBuf = &m_buf3c;
-        AudioHolder* pHolder = (AudioHolder*)FUN_00c85750();
-        pBuf->ProcessArgument(pHolder->m_pAllocator);
-        pBuf->FUN_00a29680();
-    }
-
-    AudioHolder* pHolder = (AudioHolder*)FUN_00c85750();
-    AudioAllocator* pAllocator = pHolder->m_pAllocator;
-    unsigned int uiFlags = m_uiObjectFlags;
-    m_iArrayLength = 0;
-    if ((uiFlags & 0x80000000u) == 0)
-    {
-        pAllocator->FreeArray(m_pData, (int)((uiFlags & 0x3fffffffu) * 4));
-    }
-    m_pData = 0;
-    // the original stores the new flag value AFTER the m_pData=0 store and
-    // BEFORE the pop edi; writing it through a reference keeps MSVC from
-    // sinking the constant store past the register restore.
-    {
-        unsigned int& ruiFlags = m_uiObjectFlags;
-        ruiFlags = 0x80000000u;
-    }
-    m_vptr2c = (int)&vftbl_010ccf7c;
-    m_vptr28 = (int)&vftbl_0102f13c;
-    FUN_00ddcc60();
-}
-
 struct OwnerObject
 {
     int FindItemIndex(int);
@@ -667,60 +613,6 @@ void D65610Self::FUN_00d65610(D66180Entity* pEntity)
     obj->v10(p + 0xe0, GetProperty1134(pEntity), DAT_01269cd8);
 }
 
-
-static inline bool HasProperty(const S_00c6d840* props, int key)
-{
-    for (int i = 0; i < props->m_uiItemCount; i++)
-    {
-        if (props->m_entries[i].m_key == key)
-            return true;
-    }
-    return false;
-}
-
-// Returns the value of the first present entry among 0x1234 (if checkOverride), 0x1235 and 0x1135; sets *usedDefault and returns 0 if that value is 0.
-// @fnv 0x00d652c0
-static int FUN_00d652c0(S_00c6d840* props, bool checkOverride, bool* usedDefault)
-{
-    int base = props->FindEntry(0x1135, 0).m_kPointA;
-    int level = props->FindEntry(0x1235, 0).m_kPointA;
-    int iOverride = props->FindEntry(0x1234, 0).m_kPointA;
-    int result = 0;
-    *usedDefault = false;
-    if (checkOverride && HasProperty(props, 0x1234))
-    {
-        if (iOverride == 0)
-        {
-            *usedDefault = true;
-            return 0;
-        }
-        result = iOverride;
-    }
-    else if (HasProperty(props, 0x1235))
-    {
-        if (level == 0)
-        {
-            *usedDefault = true;
-            return 0;
-        }
-        result = level;
-    }
-    else if (HasProperty(props, 0x1135))
-    {
-        if (base == 0)
-        {
-            *usedDefault = true;
-            return 0;
-        }
-        result = base;
-    }
-    return result;
-}
-
-int PropertyQueryCaller(S_00c6d840* props, bool checkOverride, bool* usedDefault)
-{
-    return FUN_00d652c0(props, checkOverride, usedDefault);
-}
 
 struct ShapeList
 {
@@ -1097,9 +989,6 @@ struct D661E0Object : D661E0Primary, D661E0Secondary
     virtual void FUN_00d661e0();
 };
 
-D661E0Object::D661E0Object()
-{}
-
 // sub ecx,8; jmp FUN_00d661f0: adjustor thunk from multiple inheritance.
 struct PrimaryBase
 {
@@ -1150,17 +1039,6 @@ struct Own_00d66200 : A1_00d66200, A2_00d66200
     virtual void key_fn();  // key function - defined, so the vftable is emitted
     void FUN_00d66200();    // the shared override - declared only
 };
-
-Own_00d66200::Own_00d66200()
-{}
-void Own_00d66200::key_fn()
-{}
-
-Own_00d66200* make_00d66200()
-{
-    static Own_00d66200 o;
-    return &o;
-}
 
 namespace fnv_00d66210 {
 // sub ecx,0x2c; jmp target == MSVC adjustor thunk: Derived overrides a virtual that both of its bases
@@ -1236,9 +1114,6 @@ struct FUN_00d66220 : S_00d66220_RefObject
     virtual ~FUN_00d66220();
 };
 
-// @fnv 0x00d66220
-FUN_00d66220::FUN_00d66220()
-{}
 }  // namespace fnv_00d66220
 
 struct OutVec

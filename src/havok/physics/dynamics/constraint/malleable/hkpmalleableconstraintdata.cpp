@@ -73,12 +73,6 @@ struct MalleableConstraintDataStandIn
     ConstraintDataVTable* m_pConstraintData;
     int FUN_00cdf690(int a);
 };
-// @fnv 0x00cdf690
-int MalleableConstraintDataStandIn::FUN_00cdf690(int aiValue)
-{
-    m_pConstraintData->v1c(aiValue);
-    return aiValue;
-}
 
 // @fnv 0x00cdf6b0
 int FUN_00cdf6b0()
@@ -396,9 +390,3 @@ class hkObjectCDF6
 
     void FUN_00cdf670(float fValue);
 };
-
-// @fnv 0x00cdf670
-void hkObjectCDF6::FUN_00cdf670(float fValue)
-{
-    m_uiFilterValue = fValue;
-}

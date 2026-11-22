@@ -323,14 +323,3 @@ struct D41FD0CollisionDispatcher
 {
     void registerCollisionAgent(D41FD0AgentFuncs& funcs, int a, int b);
 };
-
-// Builds an agent function table with b0 and b1 zeroed and InitVtable, and registers it with the dispatcher for the pair 0x12, 0x12.
-// @fnv 0x00dacca0
-void __cdecl FUN_00dacca0(D41FD0CollisionDispatcher* dispatcher)
-{
-    D41FD0AgentFuncs funcs;
-    funcs.b0 = 0;
-    funcs.b1 = 0;
-    InitVtable(&funcs);
-    dispatcher->registerCollisionAgent(funcs, 0x12, 0x12);
-}

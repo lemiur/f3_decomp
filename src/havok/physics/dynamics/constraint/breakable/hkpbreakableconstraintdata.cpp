@@ -65,13 +65,6 @@ struct FUN_00d4dea0_class
     void* FUN_00d4dea0(void*);
 };
 
-// @fnv 0x00d4dea0
-void* FUN_00d4dea0_class::FUN_00d4dea0(void* value)
-{
-    FUN_00d4dea0_object->FUN_00d4dea9c(value);
-    return value;
-}
-
 extern void* DAT_010d0a1c;
 extern void* _DAT_0102e388;
 struct DDCC60World
@@ -89,14 +82,6 @@ struct FUN_00d4e000_class
     DDCC60World* m6;
     void FUN_00d4e000();
 };
-// @fnv 0x00d4e000
-void FUN_00d4e000_class::FUN_00d4e000()
-{
-    DDCC60World* pOldWorld = m6;
-    m_vt = &DAT_010d0a1c;
-    pOldWorld->removeReference();
-    m_vt = &_DAT_0102e388;
-}
 
 // @fnv 0x00d4dec0
 int __cdecl FUN_00d4dec0()
@@ -126,18 +111,6 @@ struct FnvCpu_FUN_00cc48b0_CpuObject
     void FUN_00d4e000();
     FnvCpu_FUN_00cc48b0_CpuObject* Destroy(unsigned int flags);
 };
-// Calls FUN_00d4e000, then if flags has bit 0 set, frees this object through the allocator from FUN_00c85750, and returns this.
-// @fnv 0x00cc48b0
-FnvCpu_FUN_00cc48b0_CpuObject* FnvCpu_FUN_00cc48b0_CpuObject::Destroy(unsigned int flags)
-{
-    FUN_00d4e000();
-    if (flags & 1)
-    {
-        FnvCpu_FUN_00cc48b0_CpuAllocatorHolder* holder = FUN_00c85750();
-        holder->allocator->Invoke(this, size);
-    }
-    return this;
-}
 
 struct hkFinishLoadedObjectFlagD4DF
 {
@@ -196,14 +169,6 @@ class FUN_00d4dfc0 : public hkpConstraintDataD4DF
     virtual ~FUN_00d4dfc0();
 };
 
-// Constructs the constraint data and bridge atoms, then, when the finish-loaded flag is set, calls the bridge atoms' finish routine on this object.
-// @fnv 0x00d4dfc0
-FUN_00d4dfc0::FUN_00d4dfc0(hkFinishLoadedObjectFlagD4DF flag) : hkpConstraintDataD4DF(flag), m_kBridgeAtoms(flag)
-{
-    if (flag.m_bFinishing)
-        m_kBridgeAtoms.m_kBridgeAtom.FUN_00d21ce0(this);
-}
-
 class hkReferencedObjectCDF7
 {
   public:
@@ -253,15 +218,6 @@ class FUN_00cdf710 : public hkMidCDF7
     float m_1c;
 };
 
-// Stores ref, calls FUN_00c90510 on it if non-null, sets m_1c to 0.01, and calls FUN_00d21ce0(this) on m_kListener.
-// @fnv 0x00cdf710
-FUN_00cdf710::FUN_00cdf710(hkReferencedObjectCDF7* ref) throw() : m_ref(ref), m_1c(0.01f)
-{
-    if (m_ref)
-        m_ref->FUN_00c90510();
-    m_kListener.FUN_00d21ce0(this);
-}
-
 class hkBoolD4DE
 {
   public:
@@ -308,24 +264,6 @@ class hkOwnerD4DE
 
     void SetCollisionShape(hkShapeD4DE* shape);
 };
-
-// Calls FUN_00c90510 on shape and FUN_00c905b0 on the old shape, stores shape, and copies its vf24 filter info into m_1c and m_1e.
-// @fnv 0x00d4ded0
-void hkOwnerD4DE::SetCollisionShape(hkShapeD4DE* shape)
-{
-    if (shape)
-        shape->FUN_00c90510();
-    if (m_pCollisionShape)
-        m_pCollisionShape->FUN_00c905b0();
-    m_pCollisionShape = shape;
-    if (shape)
-    {
-        hkFilterInfoD4DE info;
-        m_pCollisionShape->vf24(true, &info);
-        m_1c = info.m_kPointA;
-        m_1e = info.m_kPointB;
-    }
-}
 
 struct hkpConstraintInfoD4E0
 {
@@ -584,16 +522,6 @@ struct hkVector4q
     }
 };
 
-static __forceinline hkReal hkMath_sqrt(hkReal r)
-{
-    return (hkReal)sqrt(r);
-}
-
-static __forceinline hkReal hkMath_sqrtInverse(hkReal r)
-{
-    return 1.0f / hkMath_sqrt(r);
-}
-
 struct ContactImpulseInfo
 {
     hkReal m_fAccumulatedImpulse;
@@ -677,59 +605,6 @@ struct hkpBreakableConstraintData_e1e0 : hkpBreakableConstraintData
     void FUN_00d4e1e0(const SixteenWordFloatRecord* in);
 };
 
-// If the squared impulse sum exceeds breaking strength squared, calls FUN_00d4e020 and optionally blends body velocities back; always zeroes the impulses.
-// @fnv 0x00d4e1e0
-void hkpBreakableConstraintData_e1e0::FUN_00d4e1e0(const SixteenWordFloatRecord* in)
-{
-    ContactImpulseInfo* pImpulseInfo = in->m_pByteBuffer;
-    hkpBreakableRuntime* runtime =
-        reinterpret_cast<hkpBreakableRuntime*>(reinterpret_cast<char*>(pImpulseInfo) + m_usRuntimeOffset);
-    int numResults = m_usNumSolverResults;
-
-    if (!runtime->m_bFlag)
-    {
-        hkReal sumImpulse = 0.0f;
-        for (int i = 0; i < numResults; i++)
-        {
-            hkReal impulse = pImpulseInfo[i].getImpulseApplied();
-            sumImpulse += impulse * impulse;
-        }
-
-        if (sumImpulse > m_fBreakingStrength * m_fBreakingStrength)
-        {
-
-            FUN_00d4e020(in->m_pConstraintChainInstance.val(), true, hkMath_sqrt(sumImpulse));
-
-            if (m_bRevertBackVelocityOnBreak)
-            {
-                hkVector4q factor;
-                factor.SetAllComponents(hkMath_sqrtInverse(sumImpulse) * m_fBreakingStrength);
-
-                hkVector4q linA;
-                linA.set(runtime->m_linearVelA[0], runtime->m_linearVelA[1], runtime->m_linearVelA[2]);
-                hkVector4q linB;
-                linB.set(runtime->m_linearVelB[0], runtime->m_linearVelB[1], runtime->m_linearVelB[2]);
-                hkVector4q angA;
-                angA.set(runtime->m_angularVelA[0], runtime->m_angularVelA[1], runtime->m_angularVelA[2]);
-                hkVector4q angB;
-                angB.set(runtime->m_angularVelB[0], runtime->m_angularVelB[1], runtime->m_angularVelB[2]);
-
-                QuantizedBoundsData* bodyA = in->m_pBodyA;
-                QuantizedBoundsData* bodyB = in->m_pBodyB;
-                bodyA->m_vLinearVelocity.blendFrom(linA, factor);
-                bodyB->m_vLinearVelocity.blendFrom(linB, factor);
-                bodyA->m_vAngularVelocity.blendFrom(angA, factor);
-                bodyB->m_vAngularVelocity.blendFrom(angB, factor);
-            }
-        }
-    }
-
-    for (int i = 0; i < numResults; i++)
-    {
-        pImpulseInfo[i].m_fAccumulatedImpulse = 0.0f;
-    }
-}
-
 namespace fnv_00d4df30 {
 struct hkBoolD4D
 {
@@ -804,22 +679,6 @@ class FUN_00d4df30 : public hkpConstraintDataD4D
     virtual ~FUN_00d4df30();
 };
 
-// @fnv 0x00d4df30
-FUN_00d4df30::FUN_00d4df30(hkpConstraintDataD4D* constraintData) : m_pConstraintData(constraintData)
-{
-    m_fBreakingStrength = 10.0f;
-    m_bRemoveWhenBroken = false;
-    m_bRevertBackVelocityOnBreak = false;
-    if (m_pConstraintData)
-    {
-        m_pConstraintData->FUN_00c90510();
-        RuntimeInfoD4D info;
-        m_pConstraintData->GetConstraintRuntimeInfo(true, info);
-        m_usRuntimeOffset = (unsigned short)info.m_iSolverIterationCount;
-        m_usNumSolverResults = (unsigned short)info.m_iSolverResultCount;
-    }
-    m_kBridgeAtoms.FUN_00d21ce0(this);
-}
 }  // namespace fnv_00d4df30
 
 class GlobalObjectO2_00d472a0;
@@ -909,52 +768,6 @@ class hkpBreakableConstraintDataD4E0
 
     void FUN_00d4e020(BrkInstance* instanceArg, hkBoolD4E0 broken, float currentForce);
 };
-
-// Sets the broken flag on the breakable runtime, updates the constraint flags, and dispatches a BrkInfo event to listeners and the simulation island.
-// @fnv 0x00d4e020
-void hkpBreakableConstraintDataD4E0::FUN_00d4e020(BrkInstance* apInstance, hkBoolD4E0 broken, float currentForce)
-{
-    BrkInstance* instance = reinterpret_cast<BrkInstance*>(*(volatile int*)&apInstance);
-    hkpBreakableRuntimeD4E0* runtime =
-        reinterpret_cast<hkpBreakableRuntimeD4E0*>(m_runtimeOffset + instance->m_pConstraintInternal->m_pRuntime);
-    bool wasBroken = runtime->m_bFlag;
-    if (broken == wasBroken)
-    {
-        return;
-    }
-    runtime->m_bFlag = broken;
-    if (!broken)
-    {
-        instance->m_pConstraintInternal->m_flags |= 4;
-    }
-    else
-    {
-        instance->m_pConstraintInternal->m_flags &= ~4;
-    }
-
-    hkpSimulationIslandD4E0* world = instance->m_pEntity->m_pSimulationIsland;
-    BrkInfo event(world, instance, reinterpret_cast<const GlobalObjectO2_00d472a0*>(&DAT_01269c44));
-    if (broken)
-    {
-        event.m_0c = 0;
-        event.m_uiFilterValue = currentForce;
-        event.m_threshold = this->m_threshold;
-        if (event.m_pHavokConstraint->m_kListeners)
-        {
-            FUN_00d85fa0(&event);
-        }
-        FUN_00d00b40(world, &event);
-    }
-    else
-    {
-        event.m_0c = 0;
-        if (event.m_pHavokConstraint->m_kListeners)
-        {
-            FUN_00d86050(&event);
-        }
-        FUN_00d00bf0(world, &event);
-    }
-}
 
 // @f3twin 0x009dac40 of 0x007efe40
 int __cdecl F3_FUN_009dac40()

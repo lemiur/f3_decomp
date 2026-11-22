@@ -69,15 +69,6 @@ struct S_00ce5070_QsTransform
     void FUN_00ce5070(const S_00ce5070_Transform& t);
 };
 
-// Copies rotation and translation from a Transform into the QsTransform, and sets scale to the constant DAT_010c7170.
-// @fnv 0x00ce5070
-void S_00ce5070_QsTransform::FUN_00ce5070(const S_00ce5070_Transform& akTransform)
-{
-    m_rotation.FUN_00cb26e0(akTransform.m_rotation);
-    m_vTranslation.m_vComponents = akTransform.m_vTranslation.m_vComponents;
-    m_vScale.m_vComponents = DAT_010c7170.m_vComponents;
-}
-
 class CB2FC0Object
 {
   public:
@@ -129,28 +120,6 @@ struct Transform
     float scaleX, scaleY, scaleZ;
     void FUN_00ce51f0(int);
 };
-// Builds a matrix from rotation, scale, and position, then passes out to FUN_00cb2050.
-// @fnv 0x00ce51f0
-void Transform::FUN_00ce51f0(int out)
-{
-    FUN_008cd6a0_Class rotMatrix;
-    rotMatrix.FUN_00cb2d90(&rotationX);
-    FUN_00cdf250_class scaleMatrix;
-    *(__m128*)&scaleMatrix.row0 = _mm_setzero_ps();
-    scaleMatrix.row0.x = scaleX;
-    *(__m128*)&scaleMatrix.row1 = _mm_setzero_ps();
-    scaleMatrix.row1.y = scaleY;
-    *(__m128*)&scaleMatrix.row2 = _mm_setzero_ps();
-    scaleMatrix.row2.z = scaleZ;
-    FUN_00cdf250_class combinedMatrix;
-    combinedMatrix.FUN_00cd55b0((int*)&rotMatrix, (int)&scaleMatrix);
-    TransformMatrix resultMatrix;
-    *(__m128*)&resultMatrix.row0 = *(__m128*)&combinedMatrix.row0;
-    *(__m128*)&resultMatrix.row1 = *(__m128*)&combinedMatrix.row1;
-    *(__m128*)&resultMatrix.row2 = *(__m128*)&combinedMatrix.row2;
-    *(__m128*)&resultMatrix.row3 = *(__m128*)&position;
-    resultMatrix.FUN_00cb2050(out);
-}
 
 struct S_00ce5290_Vector4
 {
@@ -240,15 +209,3 @@ struct S_00ce5290
     S_00ce5290_Vector4 m_v2;
     S_00ce5290_Bool SetFromInput(const void* input);
 };
-
-// Calls FUN_00d72e90 to compute a result from input, copies the three vector fields into m_v0, m_v1, m_v2, and returns whether res.unk31 is zero.
-// @fnv 0x00ce5290
-S_00ce5290_Bool S_00ce5290::SetFromInput(const void* input)
-{
-    __declspec(align(16)) S_00ce5290_Result result;
-    FUN_00d72e90(input, &result);
-    m_v0.q() = result.m_v0.q();
-    m_v1.q() = result.m_v1.q();
-    m_v2.q() = result.m_v2.q();
-    return result.unk31 == 0;
-}

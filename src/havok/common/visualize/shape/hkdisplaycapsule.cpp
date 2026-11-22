@@ -12,18 +12,6 @@ struct hkDisplayCapsule
     void FUN_00d22d70();
 };
 
-// @fnv 0x00d22d70
-void hkDisplayCapsule::FUN_00d22d70()
-{
-    StaticHelper::HandleObjectEvent(this + 0x60, this + 0x70, *(float*)((char*)this + 0x80),
-                                    *(void**)((char*)this + 0x88), *(void**)((char*)this + 0x84), this + 0x10,
-                                    this + 0x8);
-}
-
-// @fnv 0x00d22db0
-void __stdcall FUN_00d22db0(int, int)
-{}
-
 union __declspec(intrin_type) __declspec(align(16)) __m128
 {
     float m128_f32[4];
@@ -188,10 +176,6 @@ Limit* volatile inputLimit;
 const Vector* volatile inputPoint;
 Vector* volatile outputPoint;
 Other* volatile inputOther;
-void invokeProjection()
-{
-    FUN_00d234e0(inputLimit, inputPoint, outputPoint, inputOther);
-}
 
 extern "C"
 {
@@ -362,11 +346,6 @@ extern Record* volatile testLeft;
 extern Record* volatile testRight;
 extern Vector* volatile testPoint;
 extern Vector* volatile testOut;
-void invokeGeometry()
-{
-    VecArg p(testPoint);
-    FUN_00d23850(testContext, testLeft, testRight, p, testOut);
-}
 
 struct V
 {
@@ -752,21 +731,6 @@ extern int volatile feed_reorder;
 extern const __m128* volatile feed_fallback;
 
 extern __m128* volatile feed_result;
-
-void emit_intersection()
-{
-    Wrap_b w_b = {feed_b};
-
-    Wrap_c w_c = {feed_c};
-
-    Wrap_reorder w_reorder = {feed_reorder};
-
-    Wrap_fallback w_fallback = {feed_fallback};
-
-    Wrap_result w_result = {feed_result};
-
-    FUN_00d23ca0(feed_ctx, feed_a, w_b.p, w_c.p, w_reorder, w_fallback, w_result);
-}
 
 extern float runtimeFloatSettingDefault166;
 

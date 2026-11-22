@@ -108,15 +108,6 @@ struct S_00d69fc0
     void RemoveItem(S_00d69fc0_Item* item);
 };
 
-// Finds item in m_items and, if present, removes it by index.
-// @fnv 0x00d69fc0
-void S_00d69fc0::RemoveItem(S_00d69fc0_Item* item)
-{
-    int index = m_items.indexOf(item);
-    if (index >= 0)
-        m_items.removeAt(index);
-}
-
 struct D6A140Allocator
 {
     virtual void unk00();
@@ -171,19 +162,7 @@ class D6A140Object : public D6A140ReferencedObject, public D6A140Interface
     int unk0C[12];
 };
 
-// Allocates a D6A140Object with the given info and returns it as a D6A140Interface pointer.
-// @fnv 0x00d6a140
-D6A140Interface* __cdecl FUN_00d6a140(const void* info)
-{
-    return new D6A140Object(info);
-}
-
 extern void* DAT_01269020;
-// @fnv 0x00d6a1a0
-void* __cdecl FUN_00d6a1a0()
-{
-    return DAT_01269020;
-}
 
 namespace fnv_00d6a1f0 {
 struct Allocator
@@ -209,18 +188,6 @@ Owner::~Owner()
 {}
 // Runs the Owner destructor, and if flags has bit 0 set, frees this object through the allocator obtained from FUN_00c85750 using unk04 as size; returns this.
 // @fnv 0x00d6a1f0
-void* Owner::DestroyOwner(unsigned int flags)
-{
-    this->Owner::~Owner();
-    if (flags & 1)
-    {
-        Manager* manager = FUN_00c85750();
-        Allocator* allocator = manager->unk10;
-        unsigned short size = unk04;
-        allocator->Free(this, size);
-    }
-    return this;
-}
 Owner force_vtable;
 }  // namespace fnv_00d6a1f0
 
@@ -415,12 +382,6 @@ extern void* DAT_01269020;
 
 extern void FUN_00d6a140();
 
-// @fnv 0x00d6a180
-void RegisterCenterOfMass()
-{
-    DAT_01269020 = DAT_01269cd0->Register("Center of Mass", FUN_00d6a140);
-}
-
 struct DwordList
 {
     unsigned int* m_pData;
@@ -451,24 +412,6 @@ struct FUN_00d6a000_cls
 
     void AppendDword(unsigned int aValue);
 };
-
-// Appends aValue to the DwordList, growing it via ResizeAudioStream when full, then increments the element count.
-// @fnv 0x00d6a000
-void FUN_00d6a000_cls::AppendDword(unsigned int aValue)
-{
-    DwordList* list = &m_kNode;
-    GlobalHolder* pAllocHolder = fnvc_adapt::FUN_00c85750();
-    if (list->m_iArrayLength == (int)(list->m_uCapFlags & 0x3fffffffu))
-    {
-        ResizeAudioStream(pAllocHolder->m_pAllocator, list, 4);
-    }
-
-    unsigned int count = (unsigned int)list->m_iArrayLength;
-    unsigned int data = (unsigned int)list->m_pData;
-    unsigned int pSlot = data + count * 4u;
-    *(unsigned int*)pSlot = *(volatile unsigned int*)&aValue;
-    list->m_iArrayLength++;
-}
 
 namespace fnv_00d6a0a0 {
 struct Allocator
@@ -584,16 +527,6 @@ struct FUN_00d6a0a0 : Base00, Base08, Base20, Base28, Base2C
     void AttachAndDispatch(void* item) throw();
 };
 
-// Destructor: iterates the Source's unk70 entries and calls AttachAndDispatch on each pointer in unk6C when unk24 is set.
-// @fnv 0x00d6a0a0
-FUN_00d6a0a0::~FUN_00d6a0a0()
-{
-    if (unk24)
-    {
-        for (int i = 0; i < unk24->unk70; i++)
-            AttachAndDispatch(unk24->unk6C[i]);
-    }
-}
 }  // namespace fnv_00d6a0a0
 
 typedef union __declspec(intrin_type) __declspec(align(16)) __m128
@@ -904,17 +837,6 @@ struct AdjOwner : AdjBase1, AdjBase2
     virtual void key_fn();  // key function - defined, so the vftable is emitted
     void FUN_00d6a1c0();    // the shared override - declared only
 };
-
-AdjOwner::AdjOwner()
-{}
-void AdjOwner::key_fn()
-{}
-
-AdjOwner* make_adj_owner()
-{
-    static AdjOwner o;
-    return &o;
-}
 
 namespace fnv_00d6a1d0 {
 // sub ecx,0x2c; jmp DestroyOwner: adjustor thunk from multiple inheritance.

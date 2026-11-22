@@ -67,21 +67,6 @@ struct FUN_00d32060_Class {
     FUN_00d32060_Class* Init(const SourceRef& src, int b, int c, int flag);
 };
 
-// Sets the vtable, flag and count fields, initialises the array, and if flag is set fills it with 0xffff up to src.m_p->GetCount().
-// @fnv 0x00d32060
-FUN_00d32060_Class* FUN_00d32060_Class::Init(const SourceRef& aSource, int aiUnused1, int aiUnused2, int aiFlags)
-{
-    m_sReferenceCount = 1;
-    m_flag = aiFlags;
-    m_vtbl = DAT_010ceaa8;
-    m_aiIndexedValues.init();
-    if (aiFlags) {
-        int n = aSource.m_p->GetCount();
-        m_aiIndexedValues.SetSizeAndGrow(n, 0xffff);
-    }
-    return this;
-}
-
 namespace fnv_00d32110 {
 struct Allocator {
     virtual void unk0();
@@ -104,14 +89,6 @@ struct TargetObj {
     TargetObj* FUN_00d32060(void* a1, void* a2, void* a3, void* a4);
 };
 
-// Allocates a 0x18-byte TargetObj from the BSAudio allocator, sets its size to 0x18, and returns the result of FUN_00d32060(a1, a2, a3, a4).
-// @fnv 0x00d32110
-TargetObj* AllocateTargetObj(void* apArg1, void* apArg2, void* apArg3, void* apArg4) {
-    BSAudio* audio = FUN_00c85750();
-    TargetObj* obj = (TargetObj*)audio->allocator->Allocate(0x18);
-    obj->size = 0x18;
-    return obj->FUN_00d32060(apArg1, apArg2, apArg3, apArg4);
-}
 }  // namespace fnv_00d32110
 
 extern void __cdecl FUN_00d319e0(void*, void*, void*, void*);
@@ -143,31 +120,6 @@ struct S_00d321e0_AgentFuncs {
 struct S_00d321e0_Dispatcher {
     void FUN_00cfbbe0(S_00d321e0_AgentFuncs& f, int typeA, int typeB);
 };
-
-// @fnv 0x00d321e0
-void FUN_00d321e0(S_00d321e0_Dispatcher* dispatcher)
-{
-    {
-        S_00d321e0_AgentFuncs af;
-        af.m_pCreateFunc = FUN_00d32190;
-        af.m_pQueryPenetrationsFunc = FUN_00d32370;
-        af.m_pGetPenetrationsFunc = FUN_00d323b0;
-        af.m_pLinearCastFunc = FUN_00d323f0;
-        af.m_bIsFlipped = true;
-        af.m_bIsPredictive = true;
-        dispatcher->FUN_00cfbbe0(af, 0x19, 0x1a);
-    }
-    {
-        S_00d321e0_AgentFuncs af;
-        af.m_pCreateFunc = AllocateTargetObj;
-        af.m_pQueryPenetrationsFunc = FUN_00d317d0;
-        af.m_pGetPenetrationsFunc = FUN_00d319e0;
-        af.m_pLinearCastFunc = FUN_00d31d30;
-        af.m_bIsFlipped = false;
-        af.m_bIsPredictive = true;
-        dispatcher->FUN_00cfbbe0(af, 0x1a, 0x19);
-    }
-}
 
 extern float g_D323B0MaxDistance;
 
@@ -290,30 +242,6 @@ extern "C" const __m128 DAT_010c44d0;
 extern "C" const char UNK_010ce80c;
 extern "C" void __cdecl FUN_00d31d30(int, int, const CopyPacket*, const Argument*, const Argument*);
 
-// Copies a CopyPacket with its orientation sign-flipped and calls FUN_00d31d30 with one or two Argument descriptors built from the source.
-// @fnv 0x00d323f0
-void __cdecl FUN_00d323f0(int a, int b, const CopyPacket* source, int id1, int id2) {
-    __m128 orient = _mm_load_ps(&source->orientation.x);
-    __m128 inverted = _mm_xor_ps(orient, DAT_010c44d0);
-    Argument first;
-    first.scale = DAT_0104da48;
-    CopyPacket copy = *source;
-    _mm_store_ps(&copy.orientation.x, inverted);
-    const void* vptr = &UNK_010ce80c;
-    first.vtable = vptr;
-    first.orientation = source->orientation;
-    first.identifier = id1;
-    if (id2) {
-        Argument second;
-        second.vtable = vptr;
-        second.scale = DAT_0104da48;
-        second.orientation = source->orientation;
-        second.identifier = id2;
-        FUN_00d31d30(b, a, &copy, &first, &second);
-    } else {
-        FUN_00d31d30(b, a, &copy, &first, 0);
-    }
-}
 }  // namespace fnv_00d323f0
 
 namespace N {
@@ -603,15 +531,4 @@ struct FUN_00d32190_cls {
     void FUN_00d32060(int a1, int a2, int a3, int a4);
 };
 
-// Allocates a 0x18 byte object via m_pAllocator, sets m_w04 to 0x18, calls FUN_00d32060, and sets m_vptr to DAT_010ceaf4.
-// @fnv 0x00d32190
-FUN_00d32190_cls* __cdecl FUN_00d32190(int a1, int a2, int a3, int a4)
-{
-    AllocHolder* holder = FUN_00c85750();
-    FUN_00d32190_cls* obj = (FUN_00d32190_cls*)holder->m_pAllocator->Alloc(0x18);
-    obj->m_w04 = 0x18;
-    obj->FUN_00d32060(a2, a1, a3, a4);
-    obj->m_vptr = DAT_010ceaf4;
-    return obj;
-}
 }  // namespace fnv_00d32190

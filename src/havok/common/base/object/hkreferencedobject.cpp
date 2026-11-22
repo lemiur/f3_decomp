@@ -36,11 +36,6 @@ void FUN_00c903a0_class::FUN_00c903a0()
 }
 
 extern int DAT_012681d4;
-// @fnv 0x00c90410
-void __cdecl FUN_00c90410(int v)
-{
-    *(int*)(*(int**)(void*)&DAT_012681d4 + 2) = v;
-}
 
 extern int DAT_0102e388;
 
@@ -62,15 +57,6 @@ struct FUN_00cd29c0_class
 {
     void FUN_00cd29c0(RefObj*);
 };
-// @fnv 0x00cd29c0
-void FUN_00cd29c0_class::FUN_00cd29c0(RefObj* object)
-{
-    object->RetainReference();
-    DDCC60World* pOldWorld = *reinterpret_cast<DDCC60World**>(reinterpret_cast<unsigned char*>(this) + 0x84);
-    if (pOldWorld)
-        pOldWorld->removeReference();
-    *reinterpret_cast<RefObj**>(reinterpret_cast<unsigned char*>(this) + 0x84) = object;
-}
 
 struct FUN_00cdf6e0_class
 {
@@ -88,18 +74,6 @@ struct FUN_00cdf6e0_Ref : hkReferencedObject
     void removeReference();
 };
 
-// @fnv 0x00cdf6e0
-void FUN_00cdf6e0_class::SetReferencedObject(hkReferencedObject* pObject)
-{
-    FUN_00cdf6e0_Ref* pNewRef = (FUN_00cdf6e0_Ref*)pObject;
-    if (pNewRef)
-        pNewRef->RetainReference();
-    FUN_00cdf6e0_Ref* pOldRef = (FUN_00cdf6e0_Ref*)m_pObject;
-    if (pOldRef)
-        pOldRef->removeReference();
-    m_pObject = pObject;
-}
-
 namespace fnv_00d47750 {
 struct RefObj
 {
@@ -113,16 +87,6 @@ struct FUN_00d47750_class
     FUN_00d47750_class* AssignObject(RefObj** pObject);
 };
 
-// @fnv 0x00d47750
-FUN_00d47750_class* FUN_00d47750_class::AssignObject(RefObj** pObject)
-{
-    RefObj* object = *pObject;
-    if (object)
-        object->FUN_00c90510();
-
-    m_pObject = object;
-    return this;
-}
 }  // namespace fnv_00d47750
 
 namespace fnv_00dee6f0 {
@@ -145,15 +109,6 @@ struct FUN_00dee6f0_class
     RefObj* m_pObject;
     void FUN_00dee6f0(RefObj* pObject);
 };
-// @fnv 0x00dee6f0
-void FUN_00dee6f0_class::FUN_00dee6f0(RefObj* pNewObject)
-{
-    if (pNewObject)
-        pNewObject->FUN_00c90510();
-    if (m_pObject)
-        ((RefObj2*)m_pObject)->FUN_00c905b0();
-    m_pObject = pNewObject;
-}
 }  // namespace fnv_00dee6f0
 
 namespace fnv_00e3e840 {
@@ -196,53 +151,9 @@ struct FUN_00e3e840_class
     FUN_00e3e840_result* FindWorldByKey(FUN_00e3e840_result* result, int key);
 };
 
-// @fnv 0x00e3e840
-FUN_00e3e840_result* FUN_00e3e840_class::FindWorldByKey(FUN_00e3e840_result* result, int key)
-{
-    FUN_00e3e840_data data;
-
-    if (key != 0)
-    {
-        int index = 0;
-
-        if (m_uiItemCount > 0)
-        {
-            int offset = 0;
-
-            do
-            {
-                reinterpret_cast<FUN_00e5c4d0_class*>(m_pItems + offset)->FUN_00e5c4d0(&data, key);
-
-                if (data.m_pWorld)
-                {
-                    data.m_pWorld->RetainReference();
-                    result->m_pWorld = data.m_pWorld;
-                    if (data.m_pWorld)
-                        data.m_pWorld->removeReference();
-                    return result;
-                }
-
-                data.m_pWorld = 0;
-                ++index;
-                offset += 16;
-            } while (index < m_uiItemCount);
-        }
-    }
-
-    data.m_value0 = 0;
-    data.m_value1 = 0;
-    result->AssignObject(&data.m_value0);
-    return result;
-}
 }  // namespace fnv_00e3e840
 
 extern int DAT_012681d4;
-
-// @fnv 0x00c90480
-int __cdecl FUN_00c90480()
-{
-    return *(int*)(DAT_012681d4 + 8);
-}
 
 struct ThreadMode_9bf0
 {
@@ -445,16 +356,6 @@ struct RestoreMode_9bf0
         tls_9bf0.m_currentMode = original;
     }
 };
-// @fnv 0x00c89bf0
-void Owner_9bf0::FUN_00c89bf0(Object_9bf0* apObject)
-{
-    RestoreMode_9bf0 scoped;
-    if (apObject)
-        apObject->FUN_00c90510();
-    if (m_object)
-        m_object->FUN_00c905b0();
-    m_object = apObject;
-}
 
 struct Obj
 {
@@ -477,13 +378,6 @@ struct Mgr
     }
 };
 Mgr* FUN_00c85750();
-// @fnv 0x00c903e0
-void CreateAndInitObj()
-{
-    Obj* o = FUN_00c85750()->New(0x30);
-    o->w = 0x30;
-    o->Init();
-}
 
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long index);
 extern "C" __declspec(dllimport) int __stdcall TlsSetValue(unsigned long index, void* value);
@@ -501,21 +395,6 @@ struct FUN_00c90490_state
     int unk14;
     int unk18;
 };
-
-// Increments the TLS-guarded counter if the TLS slot holds the sentinel, otherwise enters the critical section, resets the counter to 1 and sets the TLS slot.
-// @fnv 0x00c90490
-void __cdecl EnterTlsGuard()
-{
-    FUN_00c90490_state* st = reinterpret_cast<FUN_00c90490_state*>(DAT_012681d4);
-    if ((int)TlsGetValue(DAT_012681d8) == 0x23df4554)
-    {
-        st->m_0c++;
-        return;
-    }
-    EnterCriticalSection(&st->unk18);
-    st->m_0c = 1;
-    TlsSetValue(DAT_012681d8, (void*)0x23df4554);
-}
 
 extern int DAT_012681d4;
 
@@ -617,16 +496,6 @@ struct FUN_00ca9b40_class
     ObjectRef* m_pObject;
     void FUN_00ca9b40(ObjectRef* pObject);
 };
-// @fnv 0x00ca9b40
-void FUN_00ca9b40_class::FUN_00ca9b40(ObjectRef* pObject)
-{
-    ThreadFlagGuard guard;
-    if (pObject)
-        pObject->FUN_00c90510();
-    if (m_pObject)
-        m_pObject->FUN_00c905b0();
-    m_pObject = pObject;
-}
 
 struct DeviceCallback
 {
@@ -670,18 +539,6 @@ struct FUN_00ca9ce0_class
     void FUN_00c8a230(InputObject*);
     void ProcessInput(InputObject*);
 };
-// @fnv 0x00ca9ce0
-void FUN_00ca9ce0_class::ProcessInput(InputObject* input)
-{
-    FUN_00c8a230(input);
-    DeviceOwner* owner = m_pOwnerObject;
-    Resource* resource = FUN_00cf4af0(input);
-    owner->FUN_00ca9b40(resource);
-    owner->m_subobject.FUN_00d21ce0(owner);
-    resource->FUN_00c905b0();
-    DeviceCallback* callback = input->GetCallback();
-    callback->Process(&owner->m_payload);
-}
 
 struct FUN_00d1df70
 {
@@ -733,29 +590,6 @@ struct HeapLessE3EE
         return kB.m_primary > kA.m_primary || (kA.m_primary == kB.m_primary && kA.m_secondary < kB.m_secondary);
     }
 };
-
-// Restores the heap property by sifting the entry at index k down through the array using cmpLess.
-// @fnv 0x00e3eec0
-void __cdecl SiftDownHeap(HeapEntryE3EE* apEntries, int aiIndex, int aiCount, HeapLessE3EE aCompare)
-{
-    HeapEntryE3EE entryTemp = apEntries[aiIndex - 1];
-    while (aiIndex <= aiCount / 2)
-    {
-        int child = 2 * aiIndex;
-        if ((child < aiCount) && aCompare(apEntries[child - 1], apEntries[child]))
-            child++;
-        if (aCompare(entryTemp, apEntries[child - 1]))
-        {
-            apEntries[aiIndex - 1] = apEntries[child - 1];
-            aiIndex = child;
-        }
-        else
-        {
-            break;
-        }
-    }
-    apEntries[aiIndex - 1] = entryTemp;
-}
 
 struct Ref_00c89b60
 {
@@ -1073,29 +907,6 @@ namespace hkSingletonC904 {
 extern FUN_00c90830* DAT_012681d4;
 }
 
-static inline void replaceInstanceC904(FUN_00c90830* p)
-{
-    if (hkSingletonC904::DAT_012681d4)
-        hkSingletonC904::DAT_012681d4->ReleaseReference();
-    hkSingletonC904::DAT_012681d4 = p;
-}
-
-// Stores value into m_08 of the singleton, creating a FUN_00c90830 instance first if DAT_012681d4 is null.
-// @fnv 0x00c90420
-void __cdecl FUN_00c90420(int value)
-{
-    if (!hkSingletonC904::DAT_012681d4)
-    {
-        FUN_00c90830* p = new FUN_00c90830();
-        p->m_08 = value;
-        replaceInstanceC904(p);
-    }
-    else
-    {
-        hkSingletonC904::DAT_012681d4->m_08 = value;
-    }
-}
-
 struct FUN_00c90510_class
 {
     void** m_pVTable;
@@ -1216,22 +1027,6 @@ struct ScopedThreadState
         tlsMode = previous;
     }
 };
-// Retains value if present, releases owner if present, assigns value, copies two values from vf24, and calls subobject.FUN_00d21ce0(this).
-// @fnv 0x00cc49b0
-void FUN_00cc49b0_class::FUN_00cc49b0(FUN_00c90510_class* apOwner)
-{
-    ScopedThreadState thread;
-    if (apOwner)
-        apOwner->FUN_00c90510();
-    if (owner)
-        owner->FUN_00c905b0();
-    owner = apOwner;
-    ShortPair result;
-    owner->vf24(ByteFlag(true), &result);
-    state = (unsigned short)result.first;
-    substate = (unsigned short)result.second;
-    subobject.FUN_00d21ce0(this);
-}
 }  // namespace fnv_00cc49b0
 
 class NiBinaryStreamCC4
@@ -1303,19 +1098,6 @@ class bhkWorldObjectCC4 : public FUN_00d53200_class
     void FUN_00cc4e10(NiStream& kStream);
 };
 
-// Reads a shape, attaches it to the hkpWorldObject, and deserializes its layer and flags from the stream.
-// @fnv 0x00cc4e10
-void bhkWorldObjectCC4::FUN_00cc4e10(NiStream& kStream)
-{
-    FUN_00c8a230(kStream);
-    hkpWorldObjectCC4* pkObject = m_pPointer;
-    hkShapeCC4* pkShape = FUN_00cf4af0(kStream);
-    pkObject->FUN_00cc49b0(pkShape);
-    pkShape->FUN_00c905b0();
-    kStream.m_pUnderlyingStream->Read(pkObject->m_iLayer);
-    kStream.m_pUnderlyingStream->Read(pkObject->m_ucFlags);
-}
-
 struct RcObject
 {
     void FUN_00c90510();
@@ -1328,54 +1110,6 @@ struct SortEntry
     int value;
 };
 void __cdecl SiftDownHeap(SortEntry* entries, int index, int count, int compare);
-// Sorts an array of SortEntry in place using a heap sort, sifting down to build the heap and then extracting elements.
-// @fnv 0x00e3eff0
-void __cdecl HeapSort(SortEntry* entries, int count, int compare)
-{
-    int remaining = count;
-    int index = count / 2;
-    while (index > 0)
-    {
-        SiftDownHeap(entries, index, count, compare);
-        --index;
-    }
-    if (remaining >= 1)
-    {
-        SortEntry* last = &entries[remaining - 1];
-        do
-        {
-            if (entries->object)
-                entries->object->FUN_00c90510();
-            SortEntry copyEntry = *entries;
-            if (entries != last)
-            {
-                RcObject* GetObject = last->object;
-                if (GetObject)
-                    GetObject->FUN_00c90510();
-                if (entries->object)
-                    entries->object->FUN_00c905b0();
-                entries->object = GetObject;
-            }
-            entries->key = last->key;
-            entries->value = last->value;
-            if (last != &copyEntry)
-            {
-                if (copyEntry.object)
-                    copyEntry.object->FUN_00c90510();
-                if (last->object)
-                    last->object->FUN_00c905b0();
-                last->object = copyEntry.object;
-            }
-            last->key = copyEntry.key;
-            last->value = copyEntry.value;
-            --remaining;
-            --last;
-            SiftDownHeap(entries, 1, remaining, compare);
-            if (copyEntry.object)
-                copyEntry.object->FUN_00c905b0();
-        } while (remaining >= 1);
-    }
-}
 
 struct Resource_e3eb
 {
@@ -1418,21 +1152,6 @@ struct Container_e3eb
     hkRefPtr_e3eb<Resource_e3eb> FUN_00e3eb10(Resource_e3eb* target) throw();
 };
 
-// Recursively searches this container and its children for the given Resource_e3eb, returning a reference-counted pointer to it or an empty reference.
-// @fnv 0x00e3eb10
-hkRefPtr_e3eb<Resource_e3eb> Container_e3eb::FUN_00e3eb10(Resource_e3eb* apResource) throw()
-{
-    if (m_resource == apResource)
-        return hkRefPtr_e3eb<Resource_e3eb>(m_resource);
-    for (int i = 0; i < m_numChildren; i++)
-    {
-        hkRefPtr_e3eb<Resource_e3eb> found = m_children[i]->FUN_00e3eb10(apResource);
-        if (found.m_pRetainedObject)
-            return found;
-    }
-    return hkRefPtr_e3eb<Resource_e3eb>();
-}
-
 struct E5C4Obj
 {
     void FUN_00c90510();
@@ -1472,34 +1191,6 @@ struct E5C4Foo
     E5C4Ref FUN_00e5c4d0(E5C4Key k);
 };
 
-// Looks up an entry by key in d; if missing, assigns a new object via k.AssignObject, then returns a copy of the stored E5C4Ref.
-// @fnv 0x00e5c4d0
-E5C4Ref E5C4Foo::FUN_00e5c4d0(E5C4Key akKey)
-{
-    int bCreated = 0;
-    volatile int tmp[2];
-    tmp[0] = 0;
-    int i = FindEntryIndex(((volatile E5C4Key&)akKey).p);
-    tmp[0] = 0;
-    tmp[1] = 0;
-    E5C4Ref* slot;
-    if (i < 0)
-    {
-        bCreated = 1;
-        slot = akKey.AssignObject((int*)tmp);
-    }
-    else
-    {
-        slot = &d[i].val;
-    }
-    E5C4Ref r(*slot);
-    if ((bCreated & 1) != 0 && akKey.p != 0)
-    {
-        akKey.p->FUN_00c905b0();
-    }
-    return r;
-}
-
 extern "C" void _ReadWriteBarrier(void);
 volatile int S00e3eba0_sink;
 __declspec(noinline) void __fastcall FUN_00c90510(void* self)
@@ -1526,138 +1217,16 @@ struct S00e3eba0_class
     int m_uiItemCount;
     void ReplaceObject(hkReferencedObject* oldObject, hkReferencedObject* GetObject);
 };
-// If m_pShape equals oldObject, replaces it with GetObject; then recursively applies the operation to every item in m_items.
-// @fnv 0x00e3eba0
-void S00e3eba0_class::ReplaceObject(hkReferencedObject* oldObject, hkReferencedObject* apNewObject)
-{
-    if (m_pShape == (void*)oldObject)
-    {
-        _ReadWriteBarrier();
-        if (m_pShape != (void*)apNewObject)
-        {
-            if (apNewObject)
-                FUN_00c90510(apNewObject);
-            if (m_pShape)
-                FUN_00c905b0(m_pShape);
-            m_pShape = apNewObject;
-        }
-    }
-    for (int i = 0; i < m_uiItemCount; i++)
-        m_items[i]->ReplaceObject(oldObject, apNewObject);
-}
 
 struct BatchReleaseObjectC907 : FUN_00c903b0_class
 {
     void ReleaseReference();
 };
-// Calls ReleaseReference for each strided item, acquiring the critical section when multi-threaded mode is enabled and TLS lacks the marker.
-// @fnv 0x00c90740
-void __cdecl FUN_00c90740(void* items, int count, int stride)
-{
-    hkReferencedObjectLockC905* guard = (hkReferencedObjectLockC905*)DAT_012681d4;
-    if (guard->m_multiThreaded != 0 && TlsGetValue(DAT_012681d8) != (void*)0x23df4554)
-    {
-        if (TlsGetValue(DAT_012681d8) == (void*)0x23df4554)
-            ++guard->m_lLockCount;
-        else
-        {
-            EnterCriticalSection(&guard->m_kCriticalSection);
-            guard->m_lLockCount = 1;
-            TlsSetValue(DAT_012681d8, (void*)0x23df4554);
-        }
-        if (count > 0)
-        {
-            char* item = (char*)items;
-            do
-            {
-                (*((BatchReleaseObjectC907**)item))->ReleaseReference();
-                item += stride;
-            } while (--count);
-        }
-        if (--guard->m_lLockCount <= 0)
-        {
-            TlsSetValue(DAT_012681d8, 0);
-            LeaveCriticalSection(&guard->m_kCriticalSection);
-        }
-    }
-    else
-    {
-        if (count > 0)
-        {
-            int remaining = count;
-            int step = *(volatile int*)&stride;
-            char* item = (char*)items;
-            do
-            {
-                (*((BatchReleaseObjectC907**)item))->ReleaseReference();
-                item += step;
-            } while (--remaining);
-        }
-    }
-}
 
 struct ReferenceIncrementC906 : hkReferencedObject
 {
     __declspec(noinline) void FUN_00c903a0();
 };
-
-void ReferenceIncrementC906::FUN_00c903a0()
-{
-    if (m_usMemSizeAndFlags)
-        ++m_sReferenceCount;
-}
-
-// Calls FUN_00c903a0 on each object, acquiring the critical section when multi-threaded mode is enabled and TLS lacks the marker.
-// @fnv 0x00c90670
-void __cdecl FUN_00c90670(const void* objects, int numObjects, int stride)
-{
-    hkReferencedObjectLockC905* lock = (hkReferencedObjectLockC905*)DAT_012681d4;
-    if (lock->m_multiThreaded && (unsigned int)TlsGetValue(DAT_012681d8) != 0x23df4554)
-    {
-        if ((unsigned int)TlsGetValue(DAT_012681d8) == 0x23df4554)
-        {
-            lock->m_lLockCount++;
-        }
-        else
-        {
-            EnterCriticalSection(&lock->m_kCriticalSection);
-            lock->m_lLockCount = 1;
-            TlsSetValue(DAT_012681d8, (void*)0x23df4554);
-        }
-        for (int i = 0; i < numObjects; ++i)
-        {
-            (*(ReferenceIncrementC906**)objects)->FUN_00c903a0();
-            objects = (const char*)objects + stride;
-        }
-        --lock->m_lLockCount;
-        if (lock->m_lLockCount <= 0)
-        {
-            TlsSetValue(DAT_012681d8, 0);
-            LeaveCriticalSection(&lock->m_kCriticalSection);
-        }
-    }
-    else
-    {
-        for (int i = 0; i < numObjects; ++i)
-        {
-            (*(ReferenceIncrementC906**)objects)->FUN_00c903a0();
-            objects = (const char*)objects + stride;
-        }
-    }
-}
-
-// Decrements the lock count and, when it is nonpositive, clears the TLS slot and leaves the critical section.
-// @fnv 0x00c904e0
-void __cdecl FUN_00c904e0()
-{
-    hkReferencedObjectLockC905* lock = reinterpret_cast<hkReferencedObjectLockC905*>(DAT_012681d4);
-    lock->m_lLockCount = lock->m_lLockCount - 1;
-    if (lock->m_lLockCount <= 0)
-    {
-        TlsSetValue(DAT_012681d8, 0);
-        LeaveCriticalSection(&lock->m_kCriticalSection);
-    }
-}
 
 // @f3twin 0x00983050 of 0x009316f0
 struct F3Twin_00983050 : public FUN_00c903b0_class { void F3_FUN_00983050() ; };

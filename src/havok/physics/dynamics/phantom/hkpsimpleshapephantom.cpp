@@ -28,23 +28,6 @@ struct FUN_00d1f9c0_StandIn
     void* FUN_00d1f9c0(unsigned int flags);
 };
 
-// Calls FUN_00d1f780, then if flags has bit 1 set frees this through the memory router's free with this->size, and returns this.
-// @fnv 0x00d1f9c0
-void* FUN_00d1f9c0_StandIn::FUN_00d1f9c0(unsigned int flags)
-{
-    this->FUN_00d1f780();
-
-    if (flags & 1)
-    {
-        FUN_00d1f9c0_Router* router = _D1A0E0GetMemoryRouter();
-        FUN_00d1f9c0_Memory* memory = router->memory;
-        unsigned short size = this->size;
-        memory->FUN_00d1f9c0_free(this, size);
-    }
-
-    return this;
-}
-
 // @fnv 0x00d1f220
 int FUN_00d1f220()
 {
@@ -64,40 +47,6 @@ struct DetailLess
         return a->key < b->key;
     }
 };
-// Sorts the range [lo, hi] of a ShapeDetail pointer array in place by key using a quicksort partition loop and recursion.
-// @fnv 0x00cf2ed0
-void __cdecl QuickSortShapeDetails(ShapeDetail** apItems, int lo, int hi, DetailLess aComparator)
-{
-    for (;;)
-    {
-        int i = lo;
-        int iRight = hi;
-        AlignedShapePtr pivot = apItems[(lo + hi) >> 1];
-        do
-        {
-            while (aComparator(apItems[i], pivot))
-                ++i;
-            while (aComparator(pivot, apItems[iRight]))
-                --iRight;
-            if (iRight >= i)
-            {
-                if (iRight != i)
-                {
-                    ShapeDetail* pTemp = apItems[iRight];
-                    apItems[iRight] = apItems[i];
-                    apItems[i] = pTemp;
-                }
-                --iRight;
-                ++i;
-            }
-        } while (i <= iRight);
-        if (lo < iRight)
-            QuickSortShapeDetails(apItems, lo, iRight, aComparator);
-        if (i >= hi)
-            break;
-        lo = i;
-    }
-}
 
 struct hkBoolXd1f230
 {
@@ -211,18 +160,6 @@ class hkObjXd1f230
 
     hkBoolXd1f230 Contains(void* pv) const;
 };
-
-// Returns true if the pointer pv is found in the m_items array, otherwise false.
-// @fnv 0x00d1f230
-hkBoolXd1f230 hkObjXd1f230::Contains(void* apItem) const
-{
-    for (int i = 0; i < m_items.m_iElementCount; i++)
-    {
-        if (m_items.m_data[i] == apItem)
-            return true;
-    }
-    return false;
-}
 
 struct hkBoolD1F5
 {
@@ -468,14 +405,6 @@ class hkObjD1F6 : public hkpShapeD1F6
     void CollectStatistics(hkStatisticsCollectorD1F6* pkCollector, const hkClassD1F6* pkClass) const throw();
 };
 
-// Calls the base shape's statistics collector with DAT_0126902c, then adds the m_overlaps array to pkCollector as "OverlapPtr".
-// @fnv 0x00d1f620
-void hkObjD1F6::CollectStatistics(hkStatisticsCollectorD1F6* pkCollector, const hkClassD1F6* pkClass) const throw()
-{
-    WritePhantomLists(pkCollector, &DAT_0126902c);
-    pkCollector->addArray("OverlapPtr", m_overlaps);
-}
-
 struct CollisionMemoryRouter
 {
     int unk00, unk04, unk08, unk0c;
@@ -490,40 +419,12 @@ struct FUN_00d1f690_Member : hkpSimpleShapePhantom
     void AddCollisionDetail(void* object);
 };
 
-// If the object's first pointer is non-null and FUN_00ca94c0 returns 0, appends the object to the collision detail array, growing it when full, and sets a flag.
-// @fnv 0x00d1f690
-void FUN_00d1f690_Member::AddCollisionDetail(void* object)
-{
-    if (*reinterpret_cast<void**>(object) != 0)
-    {
-        if (FUN_00ca94c0(object) == 0)
-        {
-            hkArray<hkpSimpleShapePhantomCollisionDetail>* details = &m_kCollisionDetails;
-            CollisionMemoryRouter* router = FUN_00c85750();
-            if (details->m_iElementCount == (details->m_iCapacityState & 0x3fffffff))
-            {
-                ResizeAudioStream(router->allocator, details, 4);
-            }
-            void** slot = reinterpret_cast<void**>(details->m_data) + details->m_iElementCount;
-            ++details->m_iElementCount;
-            *slot = object;
-            m_bOrderDirty = 1;
-        }
-    }
-}
-
 namespace fnv_00d1f6f0 {
 struct hkLessD1F6
 {
 };
 
 void __cdecl QuickSortShapeDetails(void** pArr, int iStart, int iEnd, hkLessD1F6 kCmp);
-
-inline void quickSortD1F6(void** pArr, int iSize, hkLessD1F6 kCmp)
-{
-    if (iSize > 1)
-        QuickSortShapeDetails(pArr, 0, iSize - 1, kCmp);
-}
 
 struct hkObjD1F6
 {
@@ -622,16 +523,6 @@ struct hkObjD1F6
     void SortAndClearFlag();
 };
 
-// If m_16c is set, sorts the m_160 array of m_164 elements with quickSortD1F6 and clears m_16c.
-// @fnv 0x00d1f6f0
-void hkObjD1F6::SortAndClearFlag()
-{
-    if (m_16c)
-    {
-        quickSortD1F6(m_160, m_164, hkLessD1F6());
-        m_16c = 0;
-    }
-}
 }  // namespace fnv_00d1f6f0
 
 namespace fnv_00d1f7e0 {
@@ -796,17 +687,6 @@ class FUN_00d1f730 : public hkpWorldObjectD1F7
 
 typedef char fnv_check_d1f7e0[(sizeof(FUN_00d1f730) == 0x170) ? 1 : -1];
 
-// @fnv 0x00d1f7e0
-hkpWorldObjectD1F7* FUN_00d1f730::ClonePhantom() const throw()
-{
-    const hkpCollidableD1F7* pkCollidable = getCollidable();
-    FUN_00d1f730* pkPhantom =
-        new FUN_00d1f730(pkCollidable->getShape(), getTransform(), pkCollidable->GetFilterInfoForKey());
-    pkPhantom->m_kPhantomOverlapListeners = m_kPhantomOverlapListeners;
-    pkPhantom->m_kPhantomListeners = m_kPhantomListeners;
-    pkPhantom->CopyEntriesFrom(this);
-    return pkPhantom;
-}
 }  // namespace fnv_00d1f7e0
 
 struct hkpShapeD1F
@@ -1587,20 +1467,6 @@ struct FUN_00d1f450_Obj
     void FUN_00d1f450(int* source, int a, int b, int c);
 };
 
-// Copies 12 floats from source to this at float index 0x2C using SSE, then calls FUN_00d1f270 with source plus 0x30 bytes and a, b, c.
-// @fnv 0x00d1f450
-void FUN_00d1f450_Obj::FUN_00d1f450(int* source, int a, int b, int c)
-{
-    float* destination = reinterpret_cast<float*>(this) + 0x2C;
-    float* vectors = reinterpret_cast<float*>(source);
-
-    _mm_store_ps(destination + 0, _mm_load_ps(vectors + 0));
-    _mm_store_ps(destination + 4, _mm_load_ps(vectors + 4));
-    _mm_store_ps(destination + 8, _mm_load_ps(vectors + 8));
-
-    this->FUN_00d1f270(reinterpret_cast<int*>(reinterpret_cast<char*>(source) + 0x30), a, b, c);
-}
-
 namespace fnv_00d1f960 {
 // @fnv 0x00d1f960
 struct Alloc
@@ -1629,20 +1495,4 @@ struct C : hkpSimpleShapePhantom
     void FUN_00d1f960();
     void FUN_00c9e820();
 };
-void C::FUN_00d1f960()
-{
-    if (m_kCollisionDetails.m_iElementCount == 0)
-    {
-        Alloc& allocator = FUN_00c85750()->getHeap();
-        int flags = m_kCollisionDetails.m_iCapacityState;
-        m_kCollisionDetails.m_iElementCount = 0;
-        if ((flags & 0x80000000) == 0)
-        {
-            allocator.ReturnMemory(m_kCollisionDetails.m_data, (flags & 0x3fffffff) * 4);
-        }
-        m_kCollisionDetails.m_data = 0;
-        m_kCollisionDetails.m_iCapacityState = 0x80000000;
-    }
-    FUN_00c9e820();
-}
 }  // namespace fnv_00d1f960

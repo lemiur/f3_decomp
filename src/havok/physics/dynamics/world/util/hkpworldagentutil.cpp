@@ -773,43 +773,6 @@ S_00cc0f40_Coll* __cdecl FUN_00cfe1d0(S_00cc0f40_Coll* c, void* o1, void* o2, in
 void __cdecl GetNodePairValue(S_00cc0f40_Coll* a, S_00cc0f40_Coll* b, S_00cc0f40_In* in, int* o1, int* o2);
 void __cdecl FUN_00cfe8a0(S_00cc0f40_Body* z, S_00cc0f40_Coll* a, S_00cc0f40_Coll* b, S_00cc0f40_Coll* c,
                           S_00cc0f40_Coll* d, S_00cc0f40_Flag flag, int v, S_00cc0f40_In* in, int r);
-// Resolves the bodies behind two collision objects, swaps them if needed, calls the table's v3 handler and passes the result to FUN_00cfe8a0.
-// @fnv 0x00cc0f40
-void __cdecl FUN_00cc0f40(S_00cc0f40_Coll* pCollA, S_00cc0f40_Coll* pCollB, S_00cc0f40_In* in)
-{
-    S_00cc0f40_Body* a = (S_00cc0f40_Body*)((char*)pCollA + pCollA->off);
-    S_00cc0f40_Body* b = (S_00cc0f40_Body*)((char*)pCollB + pCollB->off);
-    if (a->kind != 5 && b->kind != 5 && a->prop != b->prop)
-        FUN_00cb5570((int)a->unk08, a, b);
-    S_00cc0f40_Prop* pPropA = a->prop;
-    S_00cc0f40_Prop* pPropB = b->prop;
-    S_00cc0f40_Prop* z = pPropA->w20 == 0xffff ? (pPropB->w20 == 0xffff ? pPropA : pPropB) : pPropA;
-    S_00cc0f40_Flag flag;
-    flag.v = 0;
-    S_00cc0f40_Coll* s1 = pCollA;
-    S_00cc0f40_Coll* s2 = pCollB;
-    __declspec(align(16)) unsigned int bufA[0x2b4 / 4];
-    __declspec(align(16)) unsigned int bufB[0x2b4 / 4];
-    unsigned int outA[16];
-    unsigned int outB[16];
-    if (pCollA->type->kind == 0xf)
-        s1 = FUN_00cfe1d0(pCollA, outA, bufA, 4, &flag.v);
-    if (pCollB->type->kind == 0xf)
-        s2 = FUN_00cfe1d0(pCollB, outB, bufB, 4, &flag.v);
-    int swap, o;
-    GetNodePairValue(s1, s2, in, &o, &swap);
-    if (swap)
-    {
-        S_00cc0f40_Coll* pTemp = pCollA;
-        pCollA = pCollB;
-        pCollB = pTemp;
-        pTemp = s1;
-        s1 = s2;
-        s2 = pTemp;
-    }
-    int r = in->table->fn[a->b8c * 8 + b->b8c]->v3(pCollA, pCollB, in);
-    FUN_00cfe8a0((S_00cc0f40_Body*)((char*)z + 0x58), pCollA, s1, pCollB, s2, flag, o, in, r);
-}
 
 struct Island
 {
@@ -859,11 +822,3 @@ unsigned int probe_caller(SelectorTarget* p)
 }
 
 unsigned int probe_sink;
-
-int main()
-{
-    SelectorTarget a;
-    a.m_00 = 4;
-    probe_sink = probe_caller(&a);
-    return 0;
-}

@@ -116,18 +116,6 @@ struct C68E30Owner
     void FUN_00c68e30(C68E30Holder* holder, int value);
 };
 
-// @fnv 0x00c68e30
-void C68E30Owner::FUN_00c68e30(C68E30Holder* holder, int value)
-{
-    C68E30Pair pair;
-    pair.m_uiFilterValue = value;
-    C68E30Listener* listener = 0;
-    if (holder->m_pEntity)
-        listener = holder->m_pEntity;
-    pair.m_kListener = listener;
-    m_kListeners.AddBack(pair);
-}
-
 struct AudioAllocator
 {
     virtual void v00();

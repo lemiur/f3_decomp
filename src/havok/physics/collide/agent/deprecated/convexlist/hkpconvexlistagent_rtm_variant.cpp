@@ -314,10 +314,6 @@ extern "C" void __cdecl FUN_00d43dc0(void* a, void* b, void* c, hkCollectorBaseD
 void __cdecl FUN_00d34790(void* b, void* a, void* c, int filter);
 extern "C" void __cdecl FUN_00d34810();
 // @fnv 0x00d36930
-extern "C" void __cdecl FUN_00d36930()
-{
-    FUN_00d34810();
-}
 struct hkMemberD337
 {
     int unk00;
@@ -373,18 +369,6 @@ struct ContactAgent
     unsigned char flag84;
     void FUN_00d33890(void*);
 };
-void ContactAgent::FUN_00d33890(void* input)
-{
-    if (flag84)
-    {
-        ReleaseAllEntries(&contact30, collidable08, input);
-    }
-    else
-    {
-        FUN_00da42b0(&contact30, state80, collidable08, (int)input);
-    }
-    Invalidate(1);
-}
 extern float DAT_01012054;
 extern char DAT_010cebf0[];
 struct __declspec(align(16)) S00d33940_Out
@@ -484,51 +468,6 @@ struct HitCollector
 void __cdecl TestGsk(void* a, void* b, void* c, HitCollector* col);
 void __cdecl FUN_00d34790(void* a, void* b, void* c, void* d);
 // @fnv 0x00d33b90
-extern "C" void __cdecl FUN_00d33b90(void* a, void* b, void* c, void* d)
-{
-    volatile DWORD tick;
-    ProfBuf* pBuf = (ProfBuf*)TlsGetValue(DAT_0126835c);
-    if (pBuf->m_pCur < pBuf->m_pRecordEnd)
-    {
-        ProfRec* pRec = (ProfRec*)pBuf->m_pCur;
-        pRec->m_pName = "LtCvxList";
-        pRec->m_pName2 = "StcheckHull";
-        _ReadWriteBarrier();
-        tick = (DWORD)__rdtsc();
-        pRec->m_iTick = tick;
-        pBuf->m_pCur = (char*)pRec + 0x10;
-    }
-
-    HitCollector col;
-    col.m_vtbl = &DAT_010cebd0;
-    col.m_bHit = false;
-    TestGsk(a, b, c, &col);
-    if (col.m_bHit)
-    {
-        pBuf = (ProfBuf*)TlsGetValue(DAT_0126835c);
-        if (pBuf->m_pCur < pBuf->m_pRecordEnd)
-        {
-            ProfRec* pRec = (ProfRec*)pBuf->m_pCur;
-            pRec->m_pName = "Stchildren";
-            _ReadWriteBarrier();
-            tick = (DWORD)__rdtsc();
-            pRec->m_iTick = tick;
-            pBuf->m_pCur = (char*)pRec + 0xc;
-        }
-        FUN_00d34790(a, b, c, d);
-    }
-
-    pBuf = (ProfBuf*)TlsGetValue(DAT_0126835c);
-    if (pBuf->m_pCur < pBuf->m_pRecordEnd)
-    {
-        ProfRec* pRec = (ProfRec*)pBuf->m_pCur;
-        pRec->m_pName = "lt";
-        _ReadWriteBarrier();
-        tick = (DWORD)__rdtsc();
-        pRec->m_iTick = tick;
-        pBuf->m_pCur = (char*)pRec + 0xc;
-    }
-}
 extern "C" void _ReadWriteBarrier(void);
 extern "C" unsigned __int64 __rdtsc(void);
 extern unsigned long DAT_0126835c;
@@ -645,85 +584,6 @@ struct hkpCdPointCollector
     virtual void unk00() = 0;
     virtual void AddCdPoint(const ContactPointPair& point) = 0;
 };
-// @fnv 0x00d339d0
-extern "C" void __cdecl FUN_00d339d0(int a1, int a2, int a3, int a4)
-{
-    {
-        StringCursor* pForm = (StringCursor*)TlsGetValue(DAT_0126835c);
-        char* p = pForm->m_commandPointer;
-        if (p < pForm->m_endCommandPointer)
-        {
-            *(const char**)p = "LtCvxList";
-            *(const char**)(p + 12) = "StcheckHull";
-            _ReadWriteBarrier();
-            volatile unsigned int t = (unsigned int)__rdtsc();
-            *(unsigned int*)(p + 4) = t;
-            pForm->m_commandPointer = p + 16;
-        }
-    }
-
-    hkpFlagCdBodyPairCollector flagCollector;
-    TestGsk((const void*)a1, (const void*)a2, (const void*)a3, &flagCollector);
-    if (flagCollector.DidHit())
-    {
-        StringCursor* pForm = (StringCursor*)TlsGetValue(DAT_0126835c);
-        char* p = pForm->m_commandPointer;
-        if (p < pForm->m_endCommandPointer)
-        {
-            *(const char**)p = "Stchildren";
-            _ReadWriteBarrier();
-            volatile unsigned int t = (unsigned int)__rdtsc();
-            // Keep this timer read separate from the child-path timer read.
-            _ReadWriteBarrier();
-            *(unsigned int*)(p + 4) = t;
-            pForm->m_commandPointer = p + 12;
-        }
-        QueryClosestPoints((const void*)a1, (const void*)a2, (const void*)a3, (hkpCdPointCollector*)a4);
-    }
-    else
-    {
-        hkpClosestCdPointCollector x;
-        FUN_00dac450((const void*)a1, (const void*)a2, (const void*)a3, &x);
-        if (!x.DidHit())
-        {
-            goto timer_end;
-        }
-        const hkpConvexListShape* shapeB = (const hkpConvexListShape*)((const hkpCdBody*)a2)->m_pCollisionShape;
-        if (x.m_kHitPoint.m_kPoint.getDistance() > shapeB->m_minDistanceToUseConvexHull)
-        {
-            ContactPointPair point;
-            point.m_pBodyA = (const void*)a1;
-            point.m_pBodyB = (const void*)a2;
-            point.m_kPoint = x.m_kHitPoint.m_kPoint;
-            ((hkpCdPointCollector*)a4)->AddCdPoint(point);
-            goto timer_end;
-        }
-        StringCursor* pForm = (StringCursor*)TlsGetValue(DAT_0126835c);
-        char* p = pForm->m_commandPointer;
-        if (p < pForm->m_endCommandPointer)
-        {
-            *(const char**)p = str_010cec28;
-            _ReadWriteBarrier();
-            volatile unsigned int t = (unsigned int)__rdtsc();
-            *(unsigned int*)(p + 4) = t;
-            pForm->m_commandPointer = p + 12;
-        }
-        QueryClosestPoints((const void*)a1, (const void*)a2, (const void*)a3, (hkpCdPointCollector*)a4);
-    }
-
-timer_end: {
-    StringCursor* pForm = (StringCursor*)TlsGetValue(DAT_0126835c);
-    char* p = pForm->m_commandPointer;
-    if (p < pForm->m_endCommandPointer)
-    {
-        *(const char**)p = str_01076f38;
-        _ReadWriteBarrier();
-        volatile unsigned int t = (unsigned int)__rdtsc();
-        *(unsigned int*)(p + 4) = t;
-        pForm->m_commandPointer = p + 12;
-    }
-}
-}
 
 struct ProfileIndex
 {

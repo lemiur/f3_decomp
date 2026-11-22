@@ -224,12 +224,6 @@ class hkpSphereMotionD1E8 : public hkReferencedObjectD1E8
     hkVector4D1E8 m_kInertiaAndMassInv;
 };
 
-// Stores the diagonal elements of kInertiaInv into m_kInertiaAndMassInv, preserving the fourth component.
-// @fnv 0x00d1e810
-void hkpSphereMotionD1E8::SetInertiaAndMassInv(const hkMatrix3D1E8& kInertiaInv)
-{
-    m_kInertiaAndMassInv.set(kInertiaInv(0, 0), kInertiaInv(1, 1), kInertiaInv(2, 2), m_kInertiaAndMassInv(3));
-}
 }  // namespace fnv_00d1e810
 
 namespace fnv_00d1eba0 {
@@ -447,15 +441,6 @@ struct BoxMotion
         out.setDiagonal(1.0f / inv(0), 1.0f / inv(1), 1.0f / inv(2));
     }
 };
-// Writes the reciprocals of the clamped m_kInertiaAndMassInv x, y, z as a diagonal into out, then calls out.FUN_00cd5880 with m_kMotionTransform.
-// @fnv 0x00d1e8c0
-void BoxMotion::FUN_00d1e8c0(Mat3& out)
-{
-    V4 inv;
-    inv.q = _mm_max_ps(m_kInertiaAndMassInv.q, DAT_010c7200);
-    out.setDiagonal(1.0f / inv(0), 1.0f / inv(1), 1.0f / inv(2));
-    out.FUN_00cd5880(&m_kMotionTransform);
-}
 
 extern "C"
 {
@@ -512,38 +497,6 @@ struct hkMat3Q
     hkVec4Q m_kColumn0, m_kColumn1, m_kColumn2;
 };
 
-__forceinline void hkVec4Q::_setRotatedDir(const hkMat3Q& r, const hkVec4Q& b)
-{
-    __m128 b0 = _mm_shuffle_ps(b.m_vComponents, b.m_vComponents, 0x00);
-    __m128 r0 = _mm_mul_ps(r.m_kColumn0.m_vComponents, b0);
-    __m128 b1 = _mm_shuffle_ps(b.m_vComponents, b.m_vComponents, 0x55);
-    __m128 r1 = _mm_mul_ps(r.m_kColumn1.m_vComponents, b1);
-    __m128 b2 = _mm_shuffle_ps(b.m_vComponents, b.m_vComponents, 0xaa);
-    __m128 r2 = _mm_mul_ps(r.m_kColumn2.m_vComponents, b2);
-    m_vComponents = _mm_add_ps(_mm_add_ps(r0, r1), r2);
-}
-
-__forceinline void hkVec4Q::_setRotatedInverseDir(const hkMat3Q& r, const hkVec4Q& b)
-{
-    __m128 c0 = r.m_kColumn0.m_vComponents;
-    __m128 c1 = r.m_kColumn1.m_vComponents;
-    __m128 c2 = r.m_kColumn2.m_vComponents;
-    __m128 tmp = _mm_unpacklo_ps(c0, c1);
-    __m128 ctmp = _mm_shuffle_ps(_mm_unpackhi_ps(c0, c1), c2, 0xe4);
-    c0 = _mm_movelh_ps(tmp, c2);
-    c1 = _mm_movehl_ps(c0, tmp);
-    c1 = _mm_shuffle_ps(c1, c2, 0xd4);
-    c2 = ctmp;
-
-    __m128 b0 = _mm_shuffle_ps(b.m_vComponents, b.m_vComponents, 0x00);
-    __m128 r0 = _mm_mul_ps(c0, b0);
-    __m128 b1 = _mm_shuffle_ps(b.m_vComponents, b.m_vComponents, 0x55);
-    __m128 r1 = _mm_mul_ps(c1, b1);
-    __m128 b2 = _mm_shuffle_ps(b.m_vComponents, b.m_vComponents, 0xaa);
-    __m128 r2 = _mm_mul_ps(c2, b2);
-    m_vComponents = _mm_add_ps(_mm_add_ps(r0, r1), r2);
-}
-
 struct hkpMotionB
 {
     void* vtbl;
@@ -566,25 +519,6 @@ struct hkpMotionB
     void FUN_00d1e9f0(const hkVec4Q& imp, const hkVec4Q& p);
 };
 
-// Adds translational and angular velocity changes to the rigid body from an impulse imp applied at point p.
-// @fnv 0x00d1e9f0
-void hkpMotionB::FUN_00d1e9f0(const hkVec4Q& imp, const hkVec4Q& p)
-{
-    m_kTranslationalVelocity.addMul4(m_kInertiaAndMassInv.getSimdAt(3), imp);
-
-    hkVec4Q relPos;
-    relPos.setSub4(p, m_com1);
-    hkVec4Q crossWs;
-    crossWs.setCross(relPos, imp);
-    hkVec4Q crossLs;
-    crossLs._setRotatedInverseDir(m_rotation, crossWs);
-    hkVec4Q deltaVelLs;
-    deltaVelLs.setMul4(m_kInertiaAndMassInv, crossLs);
-    hkVec4Q deltaVelWs;
-    deltaVelWs._setRotatedDir(m_rotation, deltaVelLs);
-    m_kAngularVelocity.add4(deltaVelWs);
-}
-
 extern "C" __m128 _mm_unpacklo_ps(__m128, __m128);
 extern "C" __m128 _mm_unpackhi_ps(__m128, __m128);
 extern "C" __m128 _mm_movelh_ps(__m128, __m128);
@@ -605,30 +539,6 @@ struct Motion
 {
     void FUN_00d1eaf0(const Vec& impulse);
 };
-// Transforms impulse through the rotation matrix, scales by inverse inertia, and accumulates into the angular velocity at offset 0xe0.
-// @fnv 0x00d1eaf0
-void Motion::FUN_00d1eaf0(const Vec& impulse)
-{
-    const Mat& r = *(const Mat*)((char*)this + 0x10);
-    __m128 a = r.c0, b = r.c1, c = r.c2;
-    __m128 tmp = _mm_unpacklo_ps(a, b);
-    __m128 ctmp = _mm_shuffle_ps(_mm_unpackhi_ps(a, b), c, 0xe4);
-    a = _mm_movelh_ps(tmp, c);
-    tmp = _mm_movehl_ps(a, tmp);
-    b = _mm_shuffle_ps(tmp, c, 0xd4);
-    c = ctmp;
-    __m128 vResult;
-    vResult = _mm_add_ps(_mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(impulse.q, impulse.q, 0x00), a),
-                                    _mm_mul_ps(_mm_shuffle_ps(impulse.q, impulse.q, 0x55), b)),
-                         _mm_mul_ps(_mm_shuffle_ps(impulse.q, impulse.q, 0xaa), c));
-    vResult = _mm_mul_ps(vResult, ((const Vec*)((char*)this + 0xc0))->q);
-    vResult = _mm_add_ps(
-        _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(vResult, vResult, 0x00), _mm_load_ps((const float*)((char*)this + 0x10))),
-                   _mm_mul_ps(_mm_shuffle_ps(vResult, vResult, 0x55), _mm_load_ps((const float*)((char*)this + 0x20)))),
-        _mm_mul_ps(_mm_shuffle_ps(vResult, vResult, 0xaa), _mm_load_ps((const float*)((char*)this + 0x30))));
-    __m128& acc = ((Vec*)((char*)this + 0xe0))->q;
-    acc = _mm_add_ps(acc, vResult);
-}
 
 extern "C" __m128 _mm_setr_ps(float, float, float, float);
 
@@ -651,37 +561,12 @@ struct S00d1e690_cls : hkpMotion
     S00d1e690_cls* FUN_00d1e690(int a1, int a2);
 };
 
-// Constructs the object in place via FUN_00c86530_Obj, sets m_kInertiaAndMassInv to DAT_01012068, and assigns m_type to 3.
-// @fnv 0x00d1e690
-S00d1e690_cls* S00d1e690_cls::FUN_00d1e690(int a1, int a2)
-{
-    __assume(this != 0);
-    new (this) FUN_00c86530_Obj(a1, a2, 0);
-    *(__m128*)&m_kInertiaAndMassInv = _mm_setr_ps(DAT_01012068, DAT_01012068, DAT_01012068, DAT_01012068);
-    *(const char**)this = DAT_010c6dc4;
-    m_type = 3;
-    return this;
-}
-
 extern "C" __m128 _mm_setr_ps(float, float, float, float);
 
 struct S00d1e750_cls : hkpMotion
 {
     const hkMatrix3& FUN_00d1e750(const hkMatrix3& inertia);
 };
-
-// Stores the reciprocals of the diagonal entries of inertia into m_kInertiaAndMassInv and returns the inertia matrix.
-// @fnv 0x00d1e750
-const hkMatrix3& S00d1e750_cls::FUN_00d1e750(const hkMatrix3& inertia)
-{
-
-    float f[3];
-    f[0] = 1.0f / inertia.m_kColumn0.x;
-    f[1] = 1.0f / inertia.m_kColumn1.y;
-    f[2] = 1.0f / inertia.m_kColumn2.z;
-    *(__m128*)&m_kInertiaAndMassInv = _mm_setr_ps(f[0], f[1], f[2], m_kInertiaAndMassInv.w);
-    return inertia;
-}
 
 extern "C" void _ReadWriteBarrier(void);
 
@@ -782,14 +667,3 @@ class hkpSphereMotionD1E6F : public hkReferencedObjectD1E6F
     hkVector4D1E6F m_kMotionState[11];
     hkVector4D1E6F m_kInertiaAndMassInv;
 };
-
-// Clamps m_kInertiaAndMassInv components to a minimum, then writes their reciprocals to the diagonal of kInertiaInv.
-// @fnv 0x00d1e6f0
-void hkpSphereMotionD1E6F::FUN_00d1e6f0(hkMatrix3D1E6F& kInertiaInv) const
-{
-    __declspec(align(16)) float afInertia[4];
-    __m128 m = m_kInertiaAndMassInv.m_vComponents;
-    _ReadWriteBarrier();
-    _mm_store_ps(afInertia, _mm_max_ps(_mm_load_ps1(&DAT_0104da4c), m));
-    kInertiaInv.setDiagonal(1.0f / afInertia[0], 1.0f / afInertia[1], 1.0f / afInertia[2]);
-}

@@ -35,30 +35,10 @@ struct FUN_00dfd080Router
 
 FUN_00dfd080Router* _D1A0E0GetMemoryRouter();
 
-FUN_00dfd080Object* FUN_00dfd080Object::FUN_00dfd080(unsigned char flags)
-{
-    this->FUN_00dfcfd0();
-
-    if (flags & 1)
-    {
-        FUN_00dfd080Router* router = _D1A0E0GetMemoryRouter();
-        router->m_manager->deallocate(this, m_iElementCount);
-    }
-
-    return this;
-}
-
 struct FUN_00e3c240_s
 {
     void FUN_00e3c240(int ai, unsigned short aw);
 };
-
-// @fnv 0x00e3c240
-void FUN_00e3c240_s::FUN_00e3c240(int aiIndex, unsigned short auValue)
-{
-    int* p = *(int**)((char*)this + 0x24);
-    *(unsigned short*)(p + aiIndex * 4 + 3) = auValue;
-}
 
 struct CpuObject
 {
@@ -81,11 +61,6 @@ struct CpuObject
     unsigned char value;
     void FUN_00e3c260(unsigned char arg0);
 };
-// @fnv 0x00e3c260
-void CpuObject::FUN_00e3c260(unsigned char arg0)
-{
-    value = arg0;
-}
 
 class hkMemoryAllocatorDFCF
 {
@@ -343,18 +318,6 @@ class hkpSimpleMeshShapeE3C4 : public hkpShapeCollectionE3C4
     unsigned char m_eWeldingType;
 };
 
-// Placement-constructs a triangle shape from the vertex indices in m_uiTriangleCount[uiKey] and returns it as a hkpShapeE3C4 pointer.
-// @fnv 0x00e3c430
-const hkpShapeE3C4* hkpSimpleMeshShapeE3C4::GetTriangleShape(unsigned int uiKey, unsigned char* pucBuffer) const
-{
-    FUN_00de10b0* pkTriangle =
-        new (pucBuffer) FUN_00de10b0(m_fSphereRadius, m_uiTriangleCount[uiKey].m_kWeldingInfo, m_eWeldingType);
-    pkTriangle->setVertex(0, m_kVertices[m_uiTriangleCount[uiKey].m_kPointA]);
-    pkTriangle->setVertex(1, m_kVertices[m_uiTriangleCount[uiKey].m_kPointB]);
-    pkTriangle->setVertex(2, m_kVertices[m_uiTriangleCount[uiKey].m_iThirdValue]);
-    return pkTriangle;
-}
-
 struct hkBoolQ
 {
     hkBoolQ(bool b)
@@ -471,16 +434,6 @@ struct MeshShapeE3C
     void FUN_00d213e0(StatsCollectorE3C* collector, const void* cls) const;
     void FUN_00e3c4e0(StatsCollectorE3C* collector, const void* cls) const;
 };
-
-// Reports the vertex, triangle and material-id arrays to the StatsCollector and then calls FUN_00d213e0 with DAT_01269198.
-// @fnv 0x00e3c4e0
-void MeshShapeE3C::FUN_00e3c4e0(StatsCollectorE3C* collector, const void* cls) const
-{
-    collector->addArray("Vertices", 3, m_kVertices);
-    collector->addArray("Triangles", 3, m_uiTriangleCount);
-    collector->addArray("MaterialIds", 3, m_materialIds);
-    FUN_00d213e0(collector, &DAT_01269198);
-}
 
 // sub ecx,0x10; jmp target  ==  MSVC adjustor thunk: Derived overrides a virtual that both of its bases
 // declare, so the second base's vtable gets a thunk that moves `this` back by the first base's size (0x10).

@@ -56,23 +56,6 @@ struct FUN_00dff930_class : hkpDisableEntityCollisionFilter
     void* FUN_00dff930(unsigned char flag);
 };
 
-// @fnv 0x00dff930
-void* FUN_00dff930_class::FUN_00dff930(unsigned char uiFlags)
-{
-    reinterpret_cast<FUN_00e46900_Obj*>(this)->FUN_00e46900();
-    if (uiFlags & 1)
-    {
-        FUN_00dff930_Mgr* mgr = reinterpret_cast<FUN_00dff930_Mgr*>(FUN_00c85750());
-        mgr->m_10->slot08(this, m_usMemSizeAndFlags);
-    }
-    return this;
-}
-
-// Empty function that takes an unsigned int argument and does nothing.
-// @fnv 0x00e467c0
-void __stdcall FUN_00e467c0(unsigned int a1)
-{}
-
 struct hkBoolE467
 {
     char m_cBooleanValue;

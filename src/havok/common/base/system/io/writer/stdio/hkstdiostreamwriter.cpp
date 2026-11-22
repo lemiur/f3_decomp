@@ -33,14 +33,6 @@ struct FUN_00d2bfb0_class
     void __thiscall FUN_00d2be50();
 };
 
-// @fnv 0x00d2bfb0
-void __thiscall FUN_00d2bfb0_class::FUN_00d2bfb0()
-{
-    vtbl = &DAT_010ce6f4;
-    FUN_00d2be50();
-    vtbl = &DAT_0102e388;
-}
-
 void __cdecl FUN_00ecda70(void*);
 // @fnv 0x00d2bec0
 void __fastcall FUN_00d2bec0(void* self, int)
@@ -204,7 +196,3 @@ struct FUN_00d2bfd0 : S_00d2bfd0_RefObj
     FUN_00d2bfd0();
     virtual ~FUN_00d2bfd0();
 };
-// Default constructor for FUN_00d2bfd0; its body is empty.
-// @fnv 0x00d2bfd0
-FUN_00d2bfd0::FUN_00d2bfd0()
-{}

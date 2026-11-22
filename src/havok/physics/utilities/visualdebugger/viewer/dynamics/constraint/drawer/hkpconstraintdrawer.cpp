@@ -63,21 +63,6 @@ struct FUN_00de4470_class
     ResetField reset;
     void* __thiscall InitializeDefaults();
 };
-// Resets the embedded state, then sets the float fields to fixed values and unk18 to 24, returning this.
-// @fnv 0x00de4470
-void* __thiscall FUN_00de4470_class::InitializeDefaults()
-{
-    reset.FUN_00e10a00();
-    unk08 = 0.25f;
-    unk18 = 24;
-    unk04 = 0.75f;
-    unk00 = 1.0f;
-    unk0C = 1.0f;
-    unk10 = 0.5f;
-    unk14 = 0.25f;
-    unk1C = 1.0f;
-    return this;
-}
 
 struct DE44C0Vector4
 {
@@ -128,13 +113,6 @@ struct DE44C0Object
     void FUN_00de44c0(int id, int tag);
 };
 
-// @fnv 0x00de44c0
-void DE44C0Object::FUN_00de44c0(int id, int tag)
-{
-    m_display.FUN_00e10bf0(&m_vFirstVector, &m_dirA, getScaledRadius(), 0xffff0000, id, tag);
-    m_display.FUN_00e10bf0(&m_vSecondVector, &m_dirB, getScaledRadius(), 0xffffffff, id, tag);
-}
-
 struct FUN_00de4780_cls
 {
     float m_fValue;
@@ -183,11 +161,6 @@ struct CpuObject
     float value;
     void FUN_00de47c0(float input);
 };
-// @fnv 0x00de47c0
-void CpuObject::FUN_00de47c0(float input)
-{
-    value = input;
-}
 
 struct FUN_00de47d0_cls
 {
@@ -271,79 +244,11 @@ struct FUN_00de4530Owner
     void FUN_00de4530(int arg1, int arg2);
 };
 
-// Draws two triangles as six lines through unkc0.FUN_00e10d50, with width unk1c * unk0c * 0.2 and fixed or PackColorBigEndian colors.
-// @fnv 0x00de4530
-void FUN_00de4530Owner::FUN_00de4530(int arg1, int arg2)
-{
-    unsigned int color1 = PackColorBigEndian(1.0f, 1.0f, 0.0f, 1.0f);
-    unsigned int color2 = PackColorBigEndian(1.0f, DAT_01016248, 0.0f, 1.0f);
-    unsigned int color3 = PackColorBigEndian(1.0f, 0.0f, 1.0f, 1.0f);
-
-    Vec4 a0;
-    Vec4 a1;
-    Vec4 a2;
-    Vec4 b0;
-    Vec4 b1;
-    Vec4 b2;
-    *(__m128*)&a0 = *(const __m128*)&unk60;
-    *(__m128*)&a1 = *(const __m128*)&unk70;
-    *(__m128*)&a2 = *(const __m128*)&unk80;
-    *(__m128*)&b0 = *(const __m128*)&unk90;
-    *(__m128*)&b1 = *(const __m128*)&unka0;
-    *(__m128*)&b2 = *(const __m128*)&unkb0;
-
-    float width;
-    width = unk1c * unk0c;
-    width = width * (double)0.2f;
-    unkc0.FUN_00e10d50(&unk20, &a0, &a1, 0xffff0000, width, arg1, arg2);
-    width = unk1c * unk0c;
-    width = width * (double)0.2f;
-    unkc0.FUN_00e10d50(&unk20, &a1, &a2, 0xff008000, width, arg1, arg2);
-    width = unk1c * unk0c;
-    width = width * (double)0.2f;
-    unkc0.FUN_00e10d50(&unk20, &a2, &a0, 0xff0000ff, width, arg1, arg2);
-    width = unk1c * unk0c;
-    width = width * (double)0.2f;
-    unkc0.FUN_00e10d50(&unk30, &b0, &b1, color1, width, arg1, arg2);
-    width = unk1c * unk0c;
-    width = width * (double)0.2f;
-    unkc0.FUN_00e10d50(&unk30, &b1, &b2, color2, width, arg1, arg2);
-    width = unk1c * unk0c;
-    width = width * (double)0.2f;
-    unkc0.FUN_00e10d50(&unk30, &b2, &b0, color3, width, arg1, arg2);
-}
-
 class FUN_00de47e0_cls
 {
   public:
     void FUN_00de47e0(char* a1, __m128* a2, __m128* a3);
 };
-
-// Copies 16-byte blocks from two objects at offset 0xf0 into a2 and a3, then stores them into this object at scattered offsets.
-// @fnv 0x00de47e0
-void FUN_00de47e0_cls::FUN_00de47e0(char* a1, __m128* apOutA, __m128* apOutB)
-{
-    char* pFirst = *(char**)(a1 + 0x18);
-    char* pSecond = *(char**)(a1 + 0x14);
-    __m128* pSrcA = (__m128*)(pFirst + 0xf0);
-    apOutA[0] = pSrcA[0];
-    apOutA[1] = pSrcA[1];
-    apOutA[2] = pSrcA[2];
-    apOutA[3] = pSrcA[3];
-    __m128* pSrcB = (__m128*)(pSecond + 0xf0);
-    apOutB[0] = pSrcB[0];
-    apOutB[1] = pSrcB[1];
-    apOutB[2] = pSrcB[2];
-    apOutB[3] = pSrcB[3];
-    *(__m128*)((char*)this + 0x90) = apOutA[0];
-    *(__m128*)((char*)this + 0xa0) = apOutA[1];
-    *(__m128*)((char*)this + 0xb0) = apOutA[2];
-    *(__m128*)((char*)this + 0x60) = apOutB[0];
-    *(__m128*)((char*)this + 0x70) = apOutB[1];
-    *(__m128*)((char*)this + 0x80) = apOutB[2];
-    *(__m128*)((char*)this + 0x30) = apOutA[3];
-    *(__m128*)((char*)this + 0x20) = apOutB[3];
-}
 
 // @f3twin 0x00a752a0 of 0x00941ff0
 struct F3Twin_00a752a0 : public DE47B0Object { void F3_FUN_00a752a0(float value) ; };

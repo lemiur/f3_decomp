@@ -16,55 +16,12 @@ struct ComparisonResult
         return value;
     }
 };
-__declspec(noinline) ComparisonResult FUN_00ddcda0(const Record& left, const Record& right)
-{
-    return ComparisonResult(left.key > right.key);
-}
-inline void SwapRecords(Record& first, Record& second)
-{
-    __declspec(align(16)) Record temp = second;
-    second = first;
-    first = temp;
-}
-// Sorts a range of records in place by key using a pivot and recursive quicksort, comparing with FUN_00ddcda0 and swapping with SwapRecords.
-// @fnv 0x00ddeb70
-void FUN_00ddeb70(Record* records, int left, int right, int comparator)
-{
-    int i = left;
-    int j = right;
-    __declspec(align(16)) Record pivotRecord = records[(left + right) >> 1];
-    do
-    {
-        while (FUN_00ddcda0(records[i], pivotRecord))
-            ++i;
-        while (FUN_00ddcda0(pivotRecord, records[j]))
-            --j;
-        if (j >= i)
-        {
-            if (j != i)
-            {
-                SwapRecords(records[i], records[j]);
-            }
-            --j;
-            ++i;
-        }
-    } while (i <= j);
-    if (left < j)
-        FUN_00ddeb70(records, left, j, comparator);
-    if (i < right)
-        FUN_00ddeb70(records, i, right, comparator);
-}
 
 struct DynamicArray
 {
     void SpliceElements(int a, int b, int c, int d, int e);
     void FUN_00ddecb0(int a, int b, int c, int d);
 };
-// @fnv 0x00ddecb0
-void DynamicArray::FUN_00ddecb0(int a, int b, int c, int d)
-{
-    SpliceElements(a, b, 0, c, d);
-}
 
 struct S_00ddecf0_Key
 {
@@ -100,25 +57,6 @@ struct S_00ddecf0
     S_00ddecf0_Array m_keys;
     void InsertKey(float t, float a, float b);
 };
-
-// @fnv 0x00ddecf0
-void S_00ddecf0::InsertKey(float t, float a, float b)
-{
-    int n = m_keys.m_iElementCount;
-    for (int i = 0; i < n; i++)
-    {
-        if (m_keys.m_data[i].t < t)
-        {
-            n = i + 1;
-            break;
-        }
-    }
-    S_00ddecf0_Key key;
-    key.t = t;
-    key.a = a;
-    key.b = b;
-    m_keys.FUN_00ddecd0(FUN_00c85750()->heap(), n, key);
-}
 
 extern double DAT_010cd5a8;
 extern double DAT_0101ff40;
@@ -410,32 +348,11 @@ struct S_00ddeab0
     void SpliceElements(void* alloc, int index, int numdel, const S_00ddeab0_Elem* p, int numtoinsert);
 };
 
-// Replaces numdel elements at index with numtoinsert copies from p, shifting the tail and growing the buffer if needed.
-// @fnv 0x00ddeab0
-void S_00ddeab0::SpliceElements(void* alloc, int index, int numdel, const S_00ddeab0_Elem* apElems, int aiNumInsert)
-{
-    int newsize = m_iElementCount - numdel + aiNumInsert;
-    unsigned int numtomove = m_iElementCount - index - numdel;
-    GrowArrayCapacity(alloc, newsize);
-    FUN_00d2cc70(&m_data[index + aiNumInsert], &m_data[index + numdel], numtomove * 12);
-    S_00ddeab0_Elem* dst = m_data + index;
-    for (int i = 0; i < aiNumInsert; ++i)
-    {
-        new (&dst[i]) S_00ddeab0_Elem(apElems[i]);
-    }
-    m_iElementCount = newsize;
-}
-
 struct S_00ddecd0
 {
     void FUN_00ddecb0(int a, int b, int c, int flag);
     void FUN_00ddecd0(int a, int b, int c);
 };
-// @fnv 0x00ddecd0
-void S_00ddecd0::FUN_00ddecd0(int aiArg1, int aiArg2, int aiArg3)
-{
-    FUN_00ddecb0(aiArg1, aiArg2, aiArg3, 1);
-}
 
 struct FourFloatVector
 {
@@ -477,35 +394,6 @@ struct LocalBuffer
 char* IsDegenerateTriangle(char* out, const FourFloatVector* v0, const FourFloatVector* v1, const FourFloatVector* v2,
                            float eps);
 int FUN_00dde4c0(ObjOuter* p2, Transform* trans, void* p1, int i, void* p3, int* outLocal);
-
-// @fnv 0x00dde880
-int __cdecl CheckTransformAndProcess(void* p1, ObjOuter* pOuter, void* p3, short* outWord)
-{
-    LocalBuffer buffer;
-    char checkResult;
-
-    ObjInner* inner = pOuter->GetInner();
-    Transform* trans = inner->GetTransform(p1, &buffer);
-
-    if (*IsDegenerateTriangle(&checkResult, &trans->v0, &trans->v1, &trans->v2, 1.0e-7f) != 0)
-    {
-        *outWord = 0;
-        return 1;
-    }
-
-    int iResult = 0;
-    int local2 = 0;
-    for (int i = 0; i < 3; ++i)
-    {
-        int iRet = FUN_00dde4c0(pOuter, trans, p1, i, p3, &iResult);
-        if (iRet == 1)
-        {
-            local2 = iRet;
-        }
-    }
-    *outWord = (short)iResult;
-    return local2;
-}
 
 union __declspec(intrin_type) __declspec(align(16)) __m128
 {
@@ -558,14 +446,6 @@ struct hkUtilDDCE
 {
     static hkBoolDDCE FUN_00ddced0(const hkTransformHolderDDCE& kA, const hkTransformHolderDDCE& kB);
 };
-
-// Returns true when the three column vectors of kA and kB are all equal within epsilon, using hkVector4DDCE::equals3.
-// @fnv 0x00ddced0
-hkBoolDDCE hkUtilDDCE::FUN_00ddced0(const hkTransformHolderDDCE& kA, const hkTransformHolderDDCE& kB)
-{
-    return kA.m_kColumn0.equals3(kB.m_kColumn0) && kA.m_kColumn1.equals3(kB.m_kColumn1) &&
-           kA.m_kColumn2.equals3(kB.m_kColumn2);
-}
 
 namespace fnv_00ddd940 {
 union __declspec(intrin_type) __declspec(align(16)) __m128
@@ -652,40 +532,6 @@ struct TriangleShape
 
 void FUN_00ddd620(const hkVector4& a, const hkVector4& b, const hkVector4& c, hkVector4& normalOut);
 
-// Builds five planes for a triangle: its normal, the negated normal, and three edge planes (edge crossed with normal, normalized), each offset by -radius.
-// @fnv 0x00ddd940
-void GenerateTrianglePlanes(hkVector4* planes, const TriangleShape* triangle, hkReal radius)
-{
-    hkVector4 normal;
-    FUN_00ddd620(triangle->m_kVertices[0], triangle->m_kVertices[1], triangle->m_kVertices[2], normal);
-
-    hkReal d = -radius;
-
-    hkVector4 e0;
-    e0.setSub4(triangle->m_kVertices[1], triangle->m_kVertices[0]);
-    hkVector4 e1;
-    e1.setSub4(triangle->m_kVertices[2], triangle->m_kVertices[1]);
-    hkVector4 e2;
-    e2.setSub4(triangle->m_kVertices[0], triangle->m_kVertices[2]);
-
-    planes[0] = normal;
-    planes[0](3) = d - planes[0].dot3(triangle->m_kVertices[0]);
-
-    planes[1].setNeg3(normal);
-    planes[1](3) = d - planes[1].dot3(triangle->m_kVertices[0]);
-
-    planes[2].setCross(e0, normal);
-    planes[2].normalize3();
-    planes[2](3) = d - planes[2].dot3(triangle->m_kVertices[0]);
-
-    planes[3].setCross(e1, normal);
-    planes[3].normalize3();
-    planes[3](3) = d - planes[3].dot3(triangle->m_kVertices[1]);
-
-    planes[4].setCross(e2, normal);
-    planes[4].normalize3();
-    planes[4](3) = d - planes[4].dot3(triangle->m_kVertices[2]);
-}
 }  // namespace fnv_00ddd940
 
 struct FUN_00ddea00_src
@@ -740,78 +586,10 @@ __declspec(align(16)) struct FUN_00ddea00_cls
     FUN_00ddea00_cls* CopyFromSource(const FUN_00ddea00_src* src);
 };
 
-// Copies all fields from the source struct into the __m128 members and m_i40 of this object, then returns this.
-// @fnv 0x00ddea00
-FUN_00ddea00_cls* FUN_00ddea00_cls::CopyFromSource(const FUN_00ddea00_src* src)
-{
-    FUN_00ddea00_tmp tmp;
-    tmp.unk00 = src->unk00;
-    tmp.unk04 = src->unk04;
-    tmp.unk08 = src->unk08;
-    tmp.unk0C = src->unk0C;
-    tmp.unk10 = src->unk10;
-    tmp.unk14 = src->unk14;
-    tmp.unk18 = src->unk18;
-    tmp.unk1C = src->unk1C;
-    tmp.unk20 = src->unk20;
-    tmp.unk24 = src->unk24;
-    tmp.unk28 = src->unk28;
-    tmp.unk2C = src->unk2C;
-    tmp.unk30 = src->unk30;
-    tmp.unk34 = src->unk34;
-    tmp.unk38 = src->unk38;
-    unsigned int uiLastWord = src->unk3C;
-    m_v00 = *(__m128*)&tmp.unk00;
-    m_v10 = *(__m128*)&tmp.unk10;
-    m_v20 = *(__m128*)&tmp.unk20;
-    tmp.unk3C = uiLastWord;
-    m_v30 = *(__m128*)&tmp.unk30;
-    m_i40 = src->unk40;
-    return this;
-}
-
 extern "C" __m128 _mm_mul_ps(__m128, __m128);
 extern "C" __m128 _mm_shuffle_ps(__m128, __m128, int);
 extern "C" __m128 _mm_add_ss(__m128, __m128);
 extern "C" void _mm_store_ss(float*, __m128);
-
-// Rotates a's three vectors by index into out, then appends each b[i] not equal to out[0] or out[1] (else stores i in result[j]) and returns the count.
-// @fnv 0x00ddd6f0
-int __cdecl FUN_00ddd6f0(const __m128* apVectors, const __m128* b, int aiStartIndex, __m128* out, int* result)
-{
-    out[0] = apVectors[aiStartIndex % 3];
-    out[1] = apVectors[(aiStartIndex + 1) % 3];
-    out[2] = apVectors[(aiStartIndex + 2) % 3];
-    int count = 3;
-    int i = 0;
-    __m128* append = out + 3;
-    for (; i < 3; ++i)
-    {
-        __m128 current = b[i];
-        for (int j = 0; j < 2; ++j)
-        {
-            __m128 d = _mm_sub_ps(out[j], current);
-            __m128 p = _mm_mul_ps(d, d);
-            __m128 y = _mm_shuffle_ps(p, p, 0x55);
-            __m128 z = _mm_shuffle_ps(p, p, 0xaa);
-            y = _mm_add_ss(y, p);
-            z = _mm_add_ss(z, y);
-            float distance;
-            _mm_store_ss(&distance, z);
-            if (distance == 0.0f)
-            {
-                result[j] = i;
-                goto next;
-            }
-        }
-        ++count;
-        __m128* destination = append;
-        ++append;
-        *destination = current;
-    next:;
-    }
-    return count;
-}
 
 extern "C"
 {
@@ -886,19 +664,6 @@ struct NormalVector
         q = _mm_mul_ps(inverseLength().broadcast(), q);
     }
 };
-// Computes the normalized cross product of two triangle edge vectors (b-a) and (c-b) and stores the result in out.
-// @fnv 0x00ddd620
-void FUN_00ddd620(const NormalVector* apVertexA, const NormalVector* apVertexB, const NormalVector* apVertexC,
-                  NormalVector* apNormal)
-{
-    NormalVector edges[2];
-    edges[0].difference(*apVertexB, *apVertexA);
-    edges[1].difference(*apVertexC, *apVertexB);
-    NormalVector n;
-    n.cross(edges[0], edges[1]);
-    n.normalize();
-    *apNormal = n;
-}
 
 struct S_00ddecf0_Heap
 {
@@ -921,19 +686,7 @@ struct KeyLess
 {
 };
 void __cdecl FUN_00ddeb70(S_00ddecf0_Key* keys, int left, int right, KeyLess cmp) throw();
-template <typename T, typename L> inline void quickSort(T* pArr, int size, L cmpLess)
-{
-    if (size > 1)
-        FUN_00ddeb70(pArr, 0, size - 1, cmpLess);
-}
 extern "C" double __cdecl fabs(double);
-__declspec(noinline) ComparisonResult __cdecl AreZDiffering(const S_00ddecf0_Key& a, const S_00ddecf0_Key& b) throw()
-{
-    float delta = a.b - b.b;
-    float distance = (float)fabs(delta);
-    bool same = distance < DAT_01017d00;
-    return ComparisonResult(!same);
-}
 
 struct ArrayAllocator
 {
@@ -992,65 +745,10 @@ template <typename T, typename A = ArrayAllocator> struct hkArray : SpanStorage<
     }
 };
 
-static inline float clamp(float x, float lo, float hi)
-{
-    if (x < lo)
-        return lo;
-    if (x > hi)
-        return hi;
-    return x;
-}
-
 struct Track : public S_00ddecf0
 {
     float FUN_00dded60();
 };
-
-// If m_keys is empty returns unk0; else sorts it, groups near-equal-b keys, and returns the smallest b of a group with summed a-t >= DAT_010290b8, or 0.
-// @fnv 0x00dded60
-float Track::FUN_00dded60()
-{
-    if (m_keys.m_iElementCount == 0)
-        return *(float*)&unk0;
-    quickSort(m_keys.m_data, m_keys.m_iElementCount, KeyLess());
-
-    hkArray<S_00ddecf0_Key> spans;
-    {
-        int start = 0;
-        for (int i = 1; i <= m_keys.m_iElementCount; i++)
-        {
-            if (i < m_keys.m_iElementCount && !AreZDiffering(m_keys.m_data[start], m_keys.m_data[i]))
-                continue;
-            int n = i - start;
-            float sum = 0.0f;
-            for (int k = 0; k < n; k++)
-            {
-                const S_00ddecf0_Key& key = m_keys.m_data[start + k];
-                sum += key.a - key.t;
-            }
-            S_00ddecf0_Key key;
-            key.b = m_keys.m_data[start].b;
-            key.t = 0.0f;
-            key.a = clamp(sum, 0.0f, 1.0f);
-            spans.AddBack(key);
-            start = i;
-        }
-    }
-    float minLen = 3.14159274f;
-    bool found = false;
-    for (int j = 0; j < spans.GetLogicalSize(); ++j)
-    {
-        S_00ddecf0_Key* p = &spans[j];
-        if (!(p->a - p->t < DAT_010290b8))
-        {
-            float len = p->b;
-            if (!(minLen < len))
-                minLen = len;
-            found = true;
-        }
-    }
-    return found ? minLen : 0.0f;
-}
 
 // FUN_00ddcf60 - "point A is close to one of the three points of the shape
 // AND point B is close to one of them as well" test.
@@ -1073,28 +771,6 @@ struct Shape
     float unk10, unk14, unk18, unk1c;
     Vec4 p0, p1, p2;
 };
-
-// Stores true in *out when points a and b are each within a tolerance of one of the shape's points p0, p1, p2, and returns out.
-// @fnv 0x00ddcf60
-volatile unsigned char* __cdecl FUN_00ddcf60(volatile unsigned char* out, const Vec4* apPointA, const Vec4* apPointB,
-                                             const Shape* apShape)
-{
-    __m128 pt = apShape->p0.v;
-    __m128 q = apPointA->v;
-    __m128 eps = _mm_load_ps1(&DAT_01017d00);
-    __m128 mask = DAT_01017d10;
-
-    bool v =
-        (((_mm_movemask_ps(_mm_cmple_ps(_mm_and_ps(_mm_sub_ps(pt, q), mask), eps)) & 7) == 7) ||
-         ((_mm_movemask_ps(_mm_cmple_ps(_mm_and_ps(_mm_sub_ps(apShape->p1.v, q), mask), eps)) & 7) == 7) ||
-         ((_mm_movemask_ps(_mm_cmple_ps(_mm_and_ps(_mm_sub_ps(apShape->p2.v, q), mask), eps)) & 7) == 7)) &&
-        (((_mm_movemask_ps(_mm_cmple_ps(_mm_and_ps(_mm_sub_ps(pt, apPointB->v), mask), eps)) & 7) == 7) ||
-         ((_mm_movemask_ps(_mm_cmple_ps(_mm_and_ps(_mm_sub_ps(apShape->p1.v, apPointB->v), mask), eps)) & 7) == 7) ||
-         ((_mm_movemask_ps(_mm_cmple_ps(_mm_and_ps(_mm_sub_ps(apShape->p2.v, apPointB->v), mask), eps)) & 7) == 7));
-
-    *out = v;
-    return out;
-}
 
 extern "C"
 {
@@ -1228,48 +904,6 @@ struct S00dde760_ScratchVector
 
 extern "C" Matrix44 DAT_01268370;
 extern "C" void __cdecl FUN_00dddcd0(const Matrix44*, int, int, S00dde760_ScratchVector*, int);
-
-// Copies DAT_01268370 into a local Item, allocates a scratch vector from the pool, and passes it to FUN_00dddcd0.
-// @fnv 0x00dde760
-void __cdecl FUN_00dde760(int a, int aiPayload, int c, int d)
-{
-    Item item;
-    _mm_store_ps(&item.transform.row0.x, _mm_load_ps(&DAT_01268370.row0.x));
-    _mm_store_ps(&item.transform.row1.x, _mm_load_ps(&DAT_01268370.row1.x));
-    _mm_store_ps(&item.transform.row2.x, _mm_load_ps(&DAT_01268370.row2.x));
-    _mm_store_ps(&item.transform.row3.x, _mm_load_ps(&DAT_01268370.row3.x));
-    item.payload = aiPayload;
-    S00dde760_ScratchVector vector;
-    vector.elements = 0;
-    vector.size = 0;
-    vector.encodedCapacity = 0x80000000;
-    S00dde760_PoolState* poolState = ((S00dde760_PoolState*)FUN_00c85750());
-    char* cursor = poolState->cursor;
-    poolState->cursor = cursor + 0x80;
-    vector.elements = reinterpret_cast<Item*>(cursor);
-    vector.encodedCapacity = 0x80000001;
-    vector.originalCursor = cursor;
-    poolState = ((S00dde760_PoolState*)FUN_00c85750());
-    if (vector.size == (vector.encodedCapacity & 0x3fffffff))
-    {
-        ResizeAudioStream(poolState->allocator, &vector, 0x50);
-    }
-    Item* destination = vector.elements + vector.size;
-    if (destination != 0)
-        reinterpret_cast<FUN_00ddea00_cls*>(destination)
-            ->CopyFromSource(reinterpret_cast<const FUN_00ddea00_src*>(&item));
-    ++vector.size;
-    FUN_00dddcd0(&DAT_01268370, a, c, &vector, d);
-    char* finalCursor = vector.originalCursor;
-    if (finalCursor == reinterpret_cast<char*>(vector.elements))
-        vector.size = 0;
-    ((S00dde760_PoolState*)FUN_00c85750())->cursor = finalCursor;
-    poolState = ((S00dde760_PoolState*)FUN_00c85750());
-    S_00ddecf0_Heap* currentAllocator = poolState->allocator;
-    vector.size = 0;
-    if ((vector.encodedCapacity & 0x80000000u) == 0)
-        currentAllocator->ReturnMemory(vector.elements, (vector.encodedCapacity & 0x3fffffff) * 0x50);
-}
 
 // @f3 0x00a560b0 (community match, verified in this file)
 extern float DAT_01065384;

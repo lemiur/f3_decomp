@@ -66,19 +66,6 @@ struct FUN_00e02c70_Class : BaseE02c70
     FUN_00e02d40_helper* unk0c;
     virtual __declspec(nothrow) ~FUN_00e02c70_Class();
 };
-// @fnv 0x00e02c70
-FUN_00e02c70_Class::~FUN_00e02c70_Class()
-{
-    hkReferencedObject* reference = unk08;
-    reference->removeReference();
-    FUN_00e02d40_helper* pHelper = unk0c;
-    if (pHelper)
-    {
-        pHelper->ClearAndFreeData();
-        FUN_00e02c70_audio_holder* pAudioHolder = (FUN_00e02c70_audio_holder*)FUN_00c85750();
-        pAudioHolder->unk10->v2(pHelper, 0x24);
-    }
-}
 
 struct AllocIface
 {
@@ -401,37 +388,6 @@ struct FUN_00e02d40_cls
     void ProcessArgument(void* value);
     void FUN_00a29680();
 };
-
-// @fnv 0x00e02d40
-void FUN_00e02d40_cls::ClearAndFreeData()
-{
-    int i = 0;
-    if (m_iArrayLength > 0)
-    {
-        do
-        {
-            void* pElement = m_pData[i];
-            E02Holder* pHolder = (E02Holder*)FUN_00c85750();
-            FUN_00c856c0(pHolder->unk10, pElement);
-            ++i;
-        } while (i < m_iArrayLength);
-    }
-    E02Holder* pHolder = (E02Holder*)FUN_00c85750();
-    E02Allocator* pAllocator = pHolder->unk10;
-    m_iArrayLength = 0;
-    unsigned int uCapBits = m_uCapBits;
-    if ((uCapBits & 0x80000000u) == 0)
-    {
-        pAllocator->FreeArray(m_pData, (uCapBits & 0x3fffffffu) * 4);
-    }
-    m_pData = 0;
-    m_uCapBits = 0x80000000u;
-    E02Sub* pSub = &m_sub;
-    pSub->ProcessArgument(((E02Holder*)FUN_00c85750())->unk10);
-    pSub->FUN_00a29680();
-    ProcessArgument(((E02Holder*)FUN_00c85750())->unk10);
-    FUN_00a29680();
-}
 
 struct E02DE0Allocator;
 

@@ -283,80 +283,6 @@ struct Ms_cls
     Ms_cls* FUN_00cbb560(__m128* a0, __m128* a1, float a2, float a3, float a4, Ms_Ent* a5, Ms_Arr* a6);
 };
 
-// Initializes the Ms_cls object with position, mouse, and damping parameters, copies an array, and computes a shape key via a collision test against the world.
-// @fnv 0x00cbb560
-Ms_cls* Ms_cls::FUN_00cbb560(__m128* apPos, __m128* apMouse, float afDamping, float afElasticity, float afObjDamping,
-                             Ms_Ent* apEnt, Ms_Arr* apArr)
-{
-    ((Ms_B*)this)->FUN_00d2b260(apEnt, 0);
-    *(int**)this = &DAT_010c8e94;
-    _mm_store_ps(&pos.x, *apPos);
-    _mm_store_ps(&mouse.x, *apMouse);
-    damping = afDamping;
-    elasticity = afElasticity;
-    objDamping = afObjDamping;
-    cb.init();
-    maxRel = 250.0f;
-    if (apArr)
-    {
-        Ms_Heap& h = *FUN_00c85750()->heap;
-        int cap = cb.m_cap & 0x3fffffff;
-        if (cap < apArr->m_iElementCount)
-        {
-            if ((cb.m_cap & 0x80000000) == 0)
-                h.ReturnMemory(cb.m_data, cap * 4);
-            int n = apArr->m_iElementCount * 4;
-            cb.m_data = (int*)h.AllocateBufferWithSize(&n);
-            cb.m_cap = n / 4;
-        }
-        int cnt = apArr->m_iElementCount;
-        cb.m_iElementCount = cnt;
-        int* dst = cb.m_data;
-        int* src = apArr->m_data;
-        for (int i = 0; i < cnt; i++)
-            dst[i] = src[i];
-    }
-    Ms_World* w = apEnt->world;
-    shapeKey = -1;
-    if (w)
-    {
-        Ms_Sphere sph;
-        sph.FUN_00cd8160(1.0f);
-        Ms_Xf* ident = FUN_00cd4b50();
-        Ms_Xf xf;
-        xf.c0 = ident->c0;
-        xf.c1 = ident->c1;
-        xf.c2 = ident->c2;
-        xf.t = *apMouse;
-        Ms_Body body;
-        body.FUN_00cd2d80(&sph, &xf, 0);
-        Ms_Disp* d = w->disp;
-        unsigned char t = *((unsigned char*)d + (((sph.type + 13) << 5) + apEnt->shape->type));
-        Ms_Fn fn = *(Ms_Fn*)((char*)d + t * 20 + 0x9a8);
-        Ms_Input in;
-        Ms_Input* src = w->input;
-        in.i0 = src->i0;
-        in.i1 = src->i1;
-        in.i2 = src->i2;
-        in.i3 = src->i3;
-        in.i4 = src->i4;
-        in.i5 = src->i5;
-        in.q0 = src->q0;
-        in.q1 = src->q1;
-        in.q2 = src->q2;
-        Ms_Coll coll;
-        coll.dist = DAT_0104da48;
-        coll.early = DAT_0104da48;
-        coll.vptr = &DAT_010c476c;
-        coll.hit = 0;
-        fn(&body, &apEnt->shape, &in, &coll);
-        if (coll.hit)
-            shapeKey = coll.key;
-    }
-    ((Ms_N*)&unk14)->FUN_00cb0c10(str_011b1f3c);
-    return this;
-}
-
 namespace fnv_00cbb790 {
 struct hkAllocatorCBB7
 {
@@ -460,28 +386,6 @@ class FUN_00cbb4e0 : public hkpUnaryAction
                                  const hkArrayCBB7<void*>& kNewPhantoms) const throw();
 };
 
-// Creates a copy of this action for a single entity, returning null if the entity count is not one or any phantoms are present.
-// @fnv 0x00cbb790
-FUN_00cbb4e0* FUN_00cbb4e0::CloneForEntity(const hkArrayCBB7<hkpEntity*>& kNewEntities,
-                                           const hkArrayCBB7<void*>& kNewPhantoms) const throw()
-{
-    if (kNewEntities.GetLogicalSize() != 1)
-        return 0;
-    if (kNewPhantoms.GetLogicalSize() != 0)
-        return 0;
-
-    FUN_00cbb4e0* pkAction = new FUN_00cbb4e0(kNewEntities[0]);
-    pkAction->m_kMousePositionInWorld = m_kMousePositionInWorld;
-    pkAction->m_kGrabPointInBodySpace = m_kGrabPointInBodySpace;
-    pkAction->m_fSpringDamping = m_fSpringDamping;
-    pkAction->m_fSpringElasticity = m_fSpringElasticity;
-    pkAction->m_fMaxRelativeForce = m_fMaxRelativeForce;
-    pkAction->m_fTau = m_fTau;
-    pkAction->m_ulUserData = m_ulUserData;
-    pkAction->m_uiCollisionShapeKey = m_uiCollisionShapeKey;
-    pkAction->m_kAppliedCallbacks = m_kAppliedCallbacks;
-    return pkAction;
-}
 }  // namespace fnv_00cbb790
 
 class FUN_00d01a60
@@ -588,28 +492,6 @@ struct Cls
     void FUN_00d2b2b0();
 };
 
-// Clears the array at m_54 and releases its buffer unless flagged, calls FUN_00d2b2b0, and frees this through the TLS heap when bit 0 of flags is set.
-// @fnv 0x00cbb8b0
-Cls* Cls::FUN_00cbb8b0(int flags)
-{
-    Ms_Tls* tls = FUN_00c85750();
-    Ms_HeapX* heap = *(Ms_HeapX**)((char*)tls + 0x10);
-    int n = m_5c;
-    m_58 = 0;
-    if (!((unsigned int)n & 0x80000000u))
-        heap->v10(m_54, (n & 0x3fffffff) * 4);
-    m_54 = 0;
-    m_5c = 0x80000000;
-    FUN_00d2b2b0();
-    if (flags & 1)
-    {
-        Ms_Tls* tls2 = FUN_00c85750();
-        Ms_HeapX* heap2 = *(Ms_HeapX**)((char*)tls2 + 0x10);
-        heap2->v08(this, (unsigned short)m_04);
-    }
-    return this;
-}
-
 extern "C"
 {
     __m128 _mm_sub_ps(__m128, __m128);
@@ -664,21 +546,6 @@ class hkpPositionTrackerCBB1
 
     void FUN_00cbb150(const hkVector4CBB1& kPosition);
 };
-
-// @fnv 0x00cbb150
-void hkpPositionTrackerCBB1::FUN_00cbb150(const hkVector4CBB1& kPosition)
-{
-    __m128 d = _mm_sub_ps(kPosition.m_vComponents, m_vContactPosition.m_vComponents);
-    d = _mm_and_ps(d, DAT_01017d10);
-    __m128 eps = _mm_load_ps1(&DAT_01017d00);
-    int iMask = _mm_movemask_ps(_mm_cmple_ps(d, eps));
-    if ((iMask & 7) != 7)
-    {
-        if (m_pOwnerObject && m_pOwnerObject->m_pOwningWorld)
-            m_pOwnerObject->FUN_00c9c1d0();
-    }
-    m_vContactPosition = kPosition;
-}
 
 extern "C" __m128 _mm_setzero_ps(void);
 struct FUN_00cbb4e0

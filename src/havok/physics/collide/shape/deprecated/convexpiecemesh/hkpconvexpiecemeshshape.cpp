@@ -32,22 +32,6 @@ struct HkpStandIn
 
 HkpRouter* _D1A0E0GetMemoryRouter();
 
-// Calls FUN_00e490d0, then if flags has bit 0 set, releases this through the memory router's allocator with this->value as size, and returns this.
-// @fnv 0x00e01010
-HkpStandIn* HkpStandIn::FUN_00e01010(int flags)
-{
-    this->FUN_00e490d0();
-
-    if (flags & 1)
-    {
-        HkpRouter* router = _D1A0E0GetMemoryRouter();
-        HkpAllocator* allocator = router->allocator;
-        allocator->release(this, this->value);
-    }
-
-    return this;
-}
-
 struct FUN_00e49100_t
 {
     int GetNextKey(int key);
@@ -171,12 +155,6 @@ struct D : P, S
     {}
     void FUN_00e490d0();
 };
-// Destroys the object by invoking its destructor.
-// @fnv 0x00e490d0
-void D::FUN_00e490d0()
-{
-    this->D::~D();
-}
 
 class GlobalObjectO2_00d472a0;
 extern GlobalObjectO2_00d472a0 g_01269198;
@@ -262,29 +240,6 @@ class hkDisplayGeometryE494 : public hkReferencedObjectE494
     void AddToStatisticsCollector(hkStatisticsCollectorE494* pkCollector, const GlobalObjectO2_00d472a0* pkClass) const
         throw();
 };
-
-// Adds the vertex, material and index stream arrays and the display mesh to pkCollector, then forwards to the base statistics routine.
-// @fnv 0x00e49410
-void hkDisplayGeometryE494::AddToStatisticsCollector(hkStatisticsCollectorE494* pkCollector,
-                                                     const GlobalObjectO2_00d472a0* pkClass) const throw()
-{
-    pkCollector->addArray("Stream", m_kCriticalSection->m_vertexStreams);
-    pkCollector->addArray("Stream", m_kCriticalSection->m_materialStreams);
-    pkCollector->addArray("Stream", m_kCriticalSection->m_indexStreams);
-    pkCollector->addChildObject("DisplayMesh", m_pDisplayMesh, 0);
-    FUN_00d213e0(pkCollector, &g_01269198);
-}
-
-// Stores whether bit bitIndex % 31 of word bitIndex / 31, at bits[bits[0] + 1 + word], is set into *found, and returns found.
-// @fnv 0x00e49040
-unsigned char* __stdcall FUN_00e49040(unsigned char* pbResult, const int* bits, unsigned int bitIndex)
-{
-    unsigned int wordIndex = bitIndex / 31;
-    unsigned int bitWithinWord = bitIndex % 31;
-    unsigned int mask = 1u << bitWithinWord;
-    *pbResult = (bits[bits[0] + wordIndex + 1] & mask) != 0;
-    return pbResult;
-}
 
 // sub ecx,0x10; jmp target  ==  MSVC adjustor thunk for a virtual declared by both bases.
 struct PrimaryBase

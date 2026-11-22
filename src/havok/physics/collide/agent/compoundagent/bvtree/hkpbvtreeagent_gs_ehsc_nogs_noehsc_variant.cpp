@@ -116,11 +116,6 @@ void __cdecl FUN_00d2f9d0(int arg1, int arg2, int arg3, int arg4);
 void __cdecl FUN_00d30f50(void* apFirst, void* apSecond, void* apThird, void* apFourth, void* apFifth);
 void __stdcall FUN_00d315a0(void* apFirst, void* apSecond, void* apThird, void* apFourth, void* apFifth);
 extern "C" void __cdecl FUN_00d31110(void* arg0, void* arg1, void* arg2, void* arg3);
-// @fnv 0x00d315d0
-extern "C" void __stdcall FUN_00d315d0(void* arg0, void* arg1, void* arg2, void* arg3)
-{
-    FUN_00d31110(arg0, arg1, arg2, arg3);
-}
 
 void __cdecl FUN_00d312f0(void* apA, void* apB, void* apC, void* apD);
 void __stdcall FUN_00d315f0(void* apA, void* apB, void* apC, void* apD);
@@ -365,22 +360,6 @@ struct SlotBox
     __m128 lo;
     __m128 hi;
 };
-
-// @fnv 0x00d2f690
-void FUN_00d2f690(SlotRef* a, SlotRef* b, SlotParam* p, SlotBox* box)
-{
-    SlotTemp t1;
-    SlotTemp2 t2;
-    t1.Init(b->m_08, a->m_08);
-    SlotObj* obj = a->m_ent;
-    obj->Eval(&t1, p->m_08, box);
-    t2.Build(b->m_08, (char*)p + 0x50);
-    __m128 t = _mm_load_ps((float*)&t2);
-    __m128 zero = _mm_setzero_ps();
-    __m128 lo = _mm_add_ps(_mm_min_ps(zero, t), box->lo);
-    _mm_store_ps((float*)&box->lo, lo);
-    box->hi = _mm_add_ps(_mm_max_ps(zero, t), box->hi);
-}
 
 class SolBool
 {

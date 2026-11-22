@@ -348,20 +348,6 @@ struct FUN_00e0ac80_class
     FUN_00e0ac80_class* __thiscall Construct(int flags);
 };
 
-// @fnv 0x00e0ac80
-FUN_00e0ac80_class* FUN_00e0ac80_class::Construct(int flags)
-{
-    reinterpret_cast<FUN_00e09bd0_Obj*>(this)->FUN_00e09bd0();
-
-    if (flags & 1)
-    {
-        BSAudio* audio = FUN_00c85750();
-        audio->unk10->FUN_00e0ac80_2(this, this->m_04);
-    }
-
-    return this;
-}
-
 struct Interval
 {
     float min, max;

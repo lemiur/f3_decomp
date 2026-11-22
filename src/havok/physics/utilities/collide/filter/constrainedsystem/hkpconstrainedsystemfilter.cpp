@@ -6,12 +6,6 @@
 
 extern int g_unk0126d658;
 
-// @fnv 0x00dffaf0
-void* __cdecl FUN_00dffaf0()
-{
-    return &g_unk0126d658;
-}
-
 struct FnvCpu_FUN_00dffb00_CpuAllocator
 {
     virtual void slot00();
@@ -34,18 +28,6 @@ struct FnvCpu_FUN_00dffb00_CpuObject
     void FUN_00e46b80();
     FnvCpu_FUN_00dffb00_CpuObject* FUN_00dffb00(unsigned int flags);
 };
-// Calls FUN_00e46b80, then if bit 0 of flags is set, invokes the allocator's Invoke on this with size, and returns this.
-// @fnv 0x00dffb00
-FnvCpu_FUN_00dffb00_CpuObject* FnvCpu_FUN_00dffb00_CpuObject::FUN_00dffb00(unsigned int flags)
-{
-    FUN_00e46b80();
-    if (flags & 1)
-    {
-        FnvCpu_FUN_00dffb00_CpuAllocatorHolder* pAllocatorHolder = FUN_00c85750();
-        pAllocatorHolder->allocator->Invoke(this, size);
-    }
-    return this;
-}
 
 struct hkBoolE46B
 {
@@ -405,10 +387,6 @@ void __stdcall FUN_00e46e30(void* p)
 }
 
 
-// @fnv 0x00e46e70
-void __stdcall FUN_00e46e70(int a)
-{}
-
 // Adjustor thunk for FUN_00dffb30: "sub ecx, 8; jmp FUN_00dffb00".
 //
 // MSVC "this adjusting thunk" emitted for a virtual inherited from a secondary
@@ -491,9 +469,6 @@ class DFFB50Listener : public DFFB50Primary, public DFFB50Secondary
     virtual void FUN_00dffb50();
 };
 
-DFFB50Listener::DFFB50Listener()
-{}
-
 // FUN_00dffb60 : MSVC this-adjusting thunk  (sub ecx, 0x30 ; jmp <impl>)
 struct A1_00dffb60
 {
@@ -513,15 +488,6 @@ struct Own_00dffb60 : A1_00dffb60, A2_00dffb60
 // @fnv 0x00dffb60
     void FUN_00dffb60();
 };
-Own_00dffb60::Own_00dffb60()
-{}
-void Own_00dffb60::key_fn()
-{}
-Own_00dffb60* make_00dffb60()
-{
-    static Own_00dffb60 o;
-    return &o;
-}
 
 namespace fnv_00dffb70 {
 // sub ecx,0x14; jmp FUN_00dffb00

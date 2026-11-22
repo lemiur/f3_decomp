@@ -1,4 +1,4 @@
-// havok/physics/collide/shape/deprecated/convexpiecemesh/hkpconvexpieceshape.cpp: AdjDerived (12 functions)
+// havok/physics/collide/shape/deprecated/convexpiecemesh/hkpconvexpieceshape.cpp: AdjDerived (7 functions)
 #include "f3_common.h"
 #include "fnv_asm_helpers.h"
 // src/havok/physics/collide/shape/deprecated/convexpiecemesh/hkpconvexpieceshape.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/physics/collide/shape/deprecated/convexpiecemesh/hkpconvexpieceshape.cpp).
@@ -20,19 +20,6 @@ struct FUN_00e607c0
 
     FUN_00e607c0(float arg);
 };
-
-// Initializes the object's fields from a float argument and assigns fixed globals to its pointers.
-// @fnv 0x00e607c0
-FUN_00e607c0::FUN_00e607c0(float afValue)
-{
-    m_f10 = afValue;
-    m_s06 = 1;
-    m_i08 = 0;
-    m_i0C = 0x14;
-    m_p14 = &DAT_010c6fb0;
-    m_p00 = &DAT_010ece2c;
-    m_p14 = &DAT_010ece08;
-}
 
 struct FUN_00e60680_class {
     int unk00; int unk04; int unk08; int unk0c; int unk10;
@@ -87,20 +74,6 @@ struct FUN_00e60c30_cls {
     static void operator delete(void* apMemory) throw();
 };
 
-// Sets the vtable and a global pointer, then, if acFlags has bit 0 set, frees this object through the allocator obtained from FUN_00c85750.
-// @fnv 0x00e60c30
-FUN_00e60c30_cls* FUN_00e60c30_cls::Destroy(unsigned char acFlags)
-{
-    m_p14 = (void*)&DAT_010c6fb0;
-    m_vptr = (int)&DAT_0102e388;
-    if (acFlags & 1) {
-        AudioHolder* pHolder = FUN_00c85750();
-        AudioAllocator* pAllocator = pHolder->m_pAllocator;
-        pAllocator->Free(this, m_uSize);
-    }
-    return this;
-}
-
 // @fnv 0x00e60670
 int FUN_00e60670()
 {
@@ -120,12 +93,6 @@ struct FUN_00e606c0_cls {
     void Copy(__m128* apDst);
 };
 
-// @fnv 0x00e606c0
-void FUN_00e606c0_cls::Copy(__m128* apDst)
-{
-    *apDst = *m_pSrc;
-}
-
 struct E606E0Vector4 {
     __m128 m_vComponents;
 
@@ -144,18 +111,6 @@ struct E606E0Shape {
 
     E606E0Vector4* CopyVerticesWithRadius(E606E0Vector4* vertices) const;
 };
-
-// @fnv 0x00e606e0
-E606E0Vector4* E606E0Shape::CopyVerticesWithRadius(E606E0Vector4* apDestVertices) const
-{
-    E606E0Vector4* pDest = apDestVertices;
-    for (int i = 0; i < m_iStridedVertexCount; i++) {
-        *pDest = m_kVertices[i];
-        pDest->m_vComponents.m128_f32[3] = m_fSphereRadius;
-        pDest++;
-    }
-    return apDestVertices;
-}
 
 struct __declspec(align(16)) Vec4 {
     __m128 v;
@@ -228,17 +183,6 @@ struct Transform_e608 {
     __m128 m_vTranslation;
 };
 
-inline __m128 TransformedPos_e608(const Transform_e608& a, const __m128& b)
-{
-    const __m128 xb = _mm_shuffle_ps(b, b, 0x00);
-    const __m128 yb = _mm_shuffle_ps(b, b, 0x55);
-    const __m128 zb = _mm_shuffle_ps(b, b, 0xaa);
-    __m128 t0 = _mm_mul_ps(xb, a.m_kColumn0);
-    __m128 t1 = _mm_mul_ps(yb, a.m_kColumn1);
-    __m128 t2 = _mm_mul_ps(zb, a.m_kColumn2);
-    return _mm_add_ps(_mm_add_ps(t0, t1), _mm_add_ps(t2, a.m_vTranslation));
-}
-
 struct Aabb_e608 {
     __m128 m_kMinimumCorner;
     __m128 m_kMaximumCorner;
@@ -254,23 +198,6 @@ public:
 
     void FUN_00e60800(const Transform_e608& kLocalToWorld, float fTolerance, Aabb_e608& kOut) const;
 };
-
-// Computes the world-space AABB of the shape's vertices via kLocalToWorld, then expands it by m_fSphereRadius plus fTolerance into kOut.
-// @fnv 0x00e60800
-void Shape_e608::FUN_00e60800(const Transform_e608& kLocalToWorld, float fTolerance, Aabb_e608& kOut) const
-{
-    kOut.m_kMinimumCorner = _mm_set1_ps(3.40282e+38f);
-    kOut.m_kMaximumCorner = _mm_set1_ps(-3.40282e+38f);
-    for (int i = 0; i < m_iStridedVertexCount; i++) {
-        __m128 world = TransformedPos_e608(kLocalToWorld, m_kVertices[i]);
-        kOut.m_kMinimumCorner = _mm_min_ps(kOut.m_kMinimumCorner, world);
-        kOut.m_kMaximumCorner = _mm_max_ps(kOut.m_kMaximumCorner, world);
-    }
-    float fRadius = m_fSphereRadius + fTolerance;
-    __m128 r = _mm_load1_ps(&fRadius);
-    kOut.m_kMinimumCorner = _mm_sub_ps(kOut.m_kMinimumCorner, r);
-    kOut.m_kMaximumCorner = _mm_add_ps(kOut.m_kMaximumCorner, r);
-}
 
 extern "C" void _ReadWriteBarrier(void);
 extern "C" unsigned __int64 __rdtsc(void);

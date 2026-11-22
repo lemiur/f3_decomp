@@ -7,23 +7,6 @@ void __fastcall FUN_00d2d890(void* self, int, void*, int);
 void __fastcall CallWithValueSource(void* self, int, int, int);
 void __fastcall FUN_00d2d430(void* self, int, int, int);
 void __fastcall FUN_00d2d480(void* self, int, int, int);
-// @fnv 0x00d2d9d0
-void FUN_00d2d9d0(void* pObject)
-{
-    *(void**)pObject = (void*)&InitAndReturnTail;
-    *(void**)((char*)pObject + 0x2c) = (void*)&FUN_00d2d890;
-    *(int*)((char*)pObject + 0x28) = 0;
-    *(int*)((char*)pObject + 8) = 0;
-    *(int*)((char*)pObject + 0xc) = 0;
-    *(int*)((char*)pObject + 0x10) = 0;
-    *(int*)((char*)pObject + 0x14) = 0;
-    *(void**)((char*)pObject + 0x18) = (void*)&CallWithValueSource;
-    *(void**)((char*)pObject + 0x1c) = (void*)&FUN_00d2d430;
-    *(int*)((char*)pObject + 0x20) = 0xd2d460;
-    *(void**)((char*)pObject + 0x24) = (void*)&FUN_00d2d480;
-    *(int*)((char*)pObject + 4) = 0xda6dc0;
-    *(char*)((char*)pObject + 0x30) = 1;
-}
 
 extern "C" void __cdecl FUN_00da35f0(void*, float, float, int);
 // @fnv 0x00d2d480
@@ -40,11 +23,6 @@ struct Interface
     virtual void f3();
     virtual void f4();
 };
-// @fnv 0x00d2d4b0
-void FUN_00d2d4b0(Interface** a)
-{
-    (*a)->f4();
-}
 
 struct LessU32
 {
@@ -214,11 +192,6 @@ void __cdecl FUN_00d2d430(int a1, int a2, int a3, Agent* pAgent)
     p->v5();
 }
 
-
-void __cdecl FUN_00d2d460(int a, int b, int c)
-{
-    FUN_00da3510(b, c);
-}
 
 extern "C" void _ReadWriteBarrier(void);
 extern "C" unsigned __int64 __rdtsc(void);
@@ -538,12 +511,3 @@ struct __declspec(align(16)) S_00d2da20_AgentFuncs
         unk28 = 0;
     }
 };
-
-// Builds an S_00d2da20_AgentFuncs with FUN_00d2d9d0, then passes it to target->AddEntry with -1 and 8.
-// @fnv 0x00d2da20
-void FUN_00d2da20(FUN_00cfbd60_Obj* target)
-{
-    S_00d2da20_AgentFuncs agentFuncs;
-    FUN_00d2d9d0(&agentFuncs);
-    target->AddEntry(&agentFuncs, -1, 8);
-}

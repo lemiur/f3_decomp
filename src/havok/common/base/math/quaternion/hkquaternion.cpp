@@ -107,18 +107,6 @@ __declspec(align(16)) struct FUN_00cf5950_cls
     void CopyBlock(Block64* src);
 };
 
-// Copies the four 128-bit vectors from src into m_block, then calls m_sub.CallSub on the copied block.
-// @fnv 0x00cf5950
-void FUN_00cf5950_cls::CopyBlock(Block64* src)
-{
-    Block64* dst = &m_block;
-    dst->v0 = src->v0;
-    dst->v1 = src->v1;
-    dst->v2 = src->v2;
-    dst->v3 = src->v3;
-    m_sub.CallSub(dst);
-}
-
 struct S00cb2550_V4
 {
     union

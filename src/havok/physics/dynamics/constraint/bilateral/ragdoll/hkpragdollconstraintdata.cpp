@@ -15,32 +15,17 @@ struct FUN_00cde980_cls
 {
     void __thiscall FUN_00cde980(int a);
 };
-// @fnv 0x00cde980
-void __thiscall FUN_00cde980_cls::FUN_00cde980(int aiBitIndex)
-{
-    *(char*)((char*)this + 0x13a) = (char)(1 << aiBitIndex);
-}
 
 struct FUN_00cde960_cls
 {
     void __thiscall FUN_00cde960(float a);
 };
-// @fnv 0x00cde960
-void __thiscall FUN_00cde960_cls::FUN_00cde960(float a)
-{
-    *(float*)((char*)this + 0x13c) = a;
-}
 
 void* __cdecl FUN_00d21a60(void* a, int b, int c);
 struct FUN_00cde9b0_cls
 {
     char* FUN_00cde9b0(int a);
 };
-// @fnv 0x00cde9b0
-char* FUN_00cde9b0_cls::FUN_00cde9b0(int aiIndex)
-{
-    return (char*)FUN_00d21a60((char*)this + 0x10, 0x130, aiIndex);
-}
 
 extern int DAT_010cb71c;
 extern int _DAT_0102e388;
@@ -169,12 +154,6 @@ struct FUN_00cde970_cls
     float FUN_00cde970();
 };
 
-// @fnv 0x00cde970
-float FUN_00cde970_cls::FUN_00cde970()
-{
-    return m_13c;
-}
-
 // FUN_00cde9a0
 //   movzx eax, byte ptr [ecx + 0x13a]
 //   shr   eax, 1
@@ -189,12 +168,6 @@ struct RagdollBodiesToNotify : public hkpRagdollConstraintData
 {
     int __thiscall FUN_00cde9a0();
 };
-
-// @fnv 0x00cde9a0
-int RagdollBodiesToNotify::FUN_00cde9a0()
-{
-    return m_kBridgeAtoms.m_kBallSocket.m_ucBodiesToNotify >> 1;
-}
 
 // @fnv 0x00cdead0
 int __cdecl FUN_00cdead0()
@@ -234,14 +207,6 @@ struct FUN_00cdf190_Class
     FUN_00cdf190_Vec v40;
     void CopyVectorsToOut(FUN_00cdf190_Out* out);
 };
-// Copies the three 16-byte vectors v20, v30 and v40 into the output's a, b and c fields.
-// @fnv 0x00cdf190
-void FUN_00cdf190_Class::CopyVectorsToOut(FUN_00cdf190_Out* out)
-{
-    *(__m128*)&out->a = *(const __m128*)&v20;
-    *(__m128*)&out->b = *(const __m128*)&v30;
-    *(__m128*)&out->c = *(const __m128*)&v40;
-}
 
 struct FnvCpu_FUN_00cdf530_CpuAllocator
 {
@@ -265,17 +230,6 @@ struct FnvCpu_FUN_00cdf530_CpuObject
     void FUN_00cdf1f0();
     FnvCpu_FUN_00cdf530_CpuObject* FUN_00cdf530(unsigned int flags);
 };
-// @fnv 0x00cdf530
-FnvCpu_FUN_00cdf530_CpuObject* FnvCpu_FUN_00cdf530_CpuObject::FUN_00cdf530(unsigned int flags)
-{
-    FUN_00cdf1f0();
-    if (flags & 1)
-    {
-        FnvCpu_FUN_00cdf530_CpuAllocatorHolder* holder = FUN_00c85750();
-        holder->allocator->Invoke(this, size);
-    }
-    return this;
-}
 
 struct Cdf1c0_vec48
 {
@@ -316,15 +270,6 @@ class Cdf1c0_cls
     Cdf1c0_vec48 m80;
     void GetM60(Cdf1c0_vec48* out);
 };
-
-// Copies the m60 vector from the Cdf1c0_cls instance into the out parameter.
-// @fnv 0x00cdf1c0
-void Cdf1c0_cls::GetM60(Cdf1c0_vec48* out)
-{
-    out->a = m60.a;
-    out->b = m60.b;
-    out->c = m60.c;
-}
 
 extern "C" __m128 _mm_setzero_ps(void);
 
@@ -482,33 +427,6 @@ class FUN_00cb9090 : public hkpConstraintDataB90
     FUN_00cb9170 m_kBridgeAtoms;
 };
 
-// Initializes m_kBridgeAtoms with identity transforms, default angular limits, friction, motor, and 2D angular constraint values.
-// @fnv 0x00cb9090
-FUN_00cb9090::FUN_00cb9090() throw()
-{
-    m_kBridgeAtoms.m_kTransforms.m_kBodyALocalFrame.setIdentity();
-    m_kBridgeAtoms.m_kTransforms.m_kBodyBLocalFrame.setIdentity();
-
-    m_kBridgeAtoms.m_kTwoDimensionalAngular.m_ucFreeRotationAxis = 0;
-
-    m_kBridgeAtoms.m_kAngularLimit.m_ucLimitAxis = 0;
-    m_kBridgeAtoms.m_kAngularLimit.m_fMinAngle = -3.14159274f;
-    m_kBridgeAtoms.m_kAngularLimit.m_fMaxAngle = 3.14159274f;
-    m_kBridgeAtoms.m_kAngularLimit.m_fAngularLimitsTauFactor = 1.0f;
-
-    m_kBridgeAtoms.m_kFriction.m_ucFirstFrictionAxis = 0;
-    m_kBridgeAtoms.m_kFriction.m_ucNumFrictionAxes = 1;
-    m_kBridgeAtoms.m_kFriction.m_fMaxFrictionTorque = 0.0f;
-
-    m_kBridgeAtoms.m_kAngularMotor.m_iInitializedOffset = 0x40;
-    m_kBridgeAtoms.m_kAngularMotor.m_iPreviousTargetAngleOffset = 0x44;
-    m_kBridgeAtoms.m_kAngularMotor.m_iCorrespondingAngLimitSolverResultOffset = 0x10;
-    m_kBridgeAtoms.m_kAngularMotor.m_bLimitEnabled = false;
-    m_kBridgeAtoms.m_kAngularMotor.m_fTargetAngle = 0.0f;
-    m_kBridgeAtoms.m_kAngularMotor.m_pMotor = 0;
-    m_kBridgeAtoms.m_kAngularMotor.m_ucMotorAxis = 0;
-}
-
 extern "C"
 {
     __m128 _mm_shuffle_ps(__m128, __m128, unsigned int);
@@ -549,27 +467,6 @@ struct hkVector4Out : public hkVector4
     void SetTransformedPosition(const hkTransform& t, const hkVector4& v);
 };
 
-static __forceinline void hkNormalize3(hkVector4q& v)
-{
-    __m128 p = _mm_mul_ps(v.m_vComponents, v.m_vComponents);
-    __m128 len2 = _mm_add_ss(_mm_shuffle_ps(p, p, 0x55), p);
-    len2 = _mm_add_ss(_mm_shuffle_ps(p, p, 0xaa), len2);
-    __m128 e = _mm_rsqrt_ss(len2);
-    __m128 r =
-        _mm_mul_ss(_mm_mul_ss(_mm_set_ss(0.5f), e), _mm_sub_ss(_mm_set_ss(3.0f), _mm_mul_ss(_mm_mul_ss(len2, e), e)));
-    r = _mm_andnot_ps(_mm_cmpeq_ss(len2, _mm_set_ss(0.0f)), r);
-    v.m_vComponents = _mm_mul_ps(_mm_shuffle_ps(r, r, 0), v.m_vComponents);
-}
-
-static __forceinline void hkSetCross(hkVector4q& out, const hkVector4q& v0, const hkVector4q& v1)
-{
-    __m128 cross0 = _mm_mul_ps(_mm_shuffle_ps(v0.m_vComponents, v0.m_vComponents, 0xc9),
-                               _mm_shuffle_ps(v1.m_vComponents, v1.m_vComponents, 0xd2));
-    __m128 cross1 = _mm_mul_ps(_mm_shuffle_ps(v0.m_vComponents, v0.m_vComponents, 0xd2),
-                               _mm_shuffle_ps(v1.m_vComponents, v1.m_vComponents, 0xc9));
-    out.m_vComponents = _mm_sub_ps(cross0, cross1);
-}
-
 struct hkMatrix3q
 {
     hkVector4q m_col[3];
@@ -601,57 +498,11 @@ struct hkRagdollTransformsq
     hkMatrix3q m_kMotorAxes;
 };
 
-static __forceinline void hkSetTransposeMul(hkMatrix3q& out, const hkMatrix3q& a, const hkMatrix3q& b)
-{
-    __m128 c0 = a.m_col[0].m_vComponents;
-    __m128 c1 = a.m_col[1].m_vComponents;
-    __m128 c2 = a.m_col[2].m_vComponents;
-    __m128 tmp = _mm_unpacklo_ps(c0, c1);
-    __m128 ctmp = _mm_unpackhi_ps(c0, c1);
-    c0 = _mm_movelh_ps(tmp, c2);
-    c1 = _mm_movehl_ps(c0, tmp);
-    c1 = _mm_shuffle_ps(c1, c2, 0xd4);
-    c2 = _mm_shuffle_ps(ctmp, c2, 0xe4);
-
-    for (int i = 0; i < 3; i++)
-    {
-        const __m128 v = b.m_col[i].m_vComponents;
-        __m128 b0 = _mm_shuffle_ps(v, v, 0x00);
-        __m128 b1 = _mm_shuffle_ps(v, v, 0x55);
-        __m128 b2 = _mm_shuffle_ps(v, v, 0xaa);
-        out.m_col[i].m_vComponents = _mm_add_ps(_mm_add_ps(_mm_mul_ps(b0, c0), _mm_mul_ps(b1, c1)), _mm_mul_ps(b2, c2));
-    }
-}
-
 struct hkpRagdollConstraintDataEx : public hkpRagdollConstraintData
 {
     void FUN_00cdeae0(const hkTransform& bodyATransform, const hkTransform& bodyBTransform, const hkVector4& pivot,
                       const hkVector4& twistAxisW, const hkVector4& planeAxisW);
 };
-
-// Builds a constraint basis from twist and plane axes, then stores rotated and translated transforms into the ragdoll bridge atom data.
-// @fnv 0x00cdeae0
-void hkpRagdollConstraintDataEx::FUN_00cdeae0(const hkTransform& bodyATransform, const hkTransform& bodyBTransform,
-                                              const hkVector4& pivot, const hkVector4& twistAxisW,
-                                              const hkVector4& planeAxisW)
-{
-    hkMatrix3q baseConstraint;
-    baseConstraint.m_col[0].m_vComponents = reinterpret_cast<const hkVector4q&>(twistAxisW).m_vComponents;
-    hkNormalize3(baseConstraint.m_col[0]);
-    baseConstraint.m_col[1].m_vComponents = reinterpret_cast<const hkVector4q&>(planeAxisW).m_vComponents;
-    hkNormalize3(baseConstraint.m_col[1]);
-    hkSetCross(baseConstraint.m_col[2], baseConstraint.m_col[0], baseConstraint.m_col[1]);
-
-    hkRagdollTransformsq& t = *reinterpret_cast<hkRagdollTransformsq*>(&m_kBridgeAtoms);
-
-    hkSetTransposeMul(t.m_kRotationA, reinterpret_cast<const hkMatrix3q&>(bodyATransform.m_rotation), baseConstraint);
-    hkSetTransposeMul(t.m_kRotationB, reinterpret_cast<const hkMatrix3q&>(bodyBTransform.m_rotation), baseConstraint);
-
-    static_cast<hkVector4Out&>(t.m_kTranslationA).SetTransformedPosition(bodyATransform, pivot);
-    static_cast<hkVector4Out&>(t.m_kTranslationB).SetTransformedPosition(bodyBTransform, pivot);
-
-    t.m_kMotorAxes = t.m_kRotationB;
-}
 
 extern "C" __m128 _mm_add_ss(__m128 _A, __m128 _B);
 extern "C" __m128 _mm_add_ps(__m128 _A, __m128 _B);
@@ -793,19 +644,6 @@ struct FUN_00cdef90_cls
     float m_halfRange;
     void FUN_00cdef90(float a, float b);
 };
-
-// Rotates m_dir about m_kAxisEndPoints by minus the midpoint of a and b, sets m_kStartPerpendicular to their cross, and stores (b - a) / 2 in m_halfRange.
-// @fnv 0x00cdef90
-void FUN_00cdef90_cls::FUN_00cdef90(float afStart, float afEnd)
-{
-    float center = (afStart + afEnd) * 0.5;
-    Quat q;
-    q.FUN_00cb2450(&m_kAxisEndPoints.m_vComponents, -center);
-    m_dir.SetRotatedDirection(q, m_dir);
-    Vec4* perp = &m_kStartPerpendicular;
-    perp->setCross(m_dir, m_kAxisEndPoints);
-    m_halfRange = (afEnd - afStart) * 0.5;
-}
 
 namespace fnv_00cb9170 {
 struct FUN_00ca9360_sub
@@ -997,52 +835,11 @@ struct RagdollLayout
 };
 
 // out = a x b, with the operands passed as (b, a)
-static __forceinline void hkSetCrossReversed(hkVector4q& out, const hkVector4q& b, const hkVector4q& a)
-{
-    __m128 cross1 = _mm_mul_ps(_mm_shuffle_ps(b.m_vComponents, b.m_vComponents, 0xc9),
-                               _mm_shuffle_ps(a.m_vComponents, a.m_vComponents, 0xd2));
-    __m128 cross0 = _mm_mul_ps(_mm_shuffle_ps(b.m_vComponents, b.m_vComponents, 0xd2),
-                               _mm_shuffle_ps(a.m_vComponents, a.m_vComponents, 0xc9));
-    out.m_vComponents = _mm_sub_ps(cross0, cross1);
-}
 struct hkpRagdollConstraintDataBodySpace : public hkpRagdollConstraintData
 {
     void FUN_00cded30(const hkVector4& pivotA, const hkVector4& pivotB, const hkVector4& planeAxisA,
                       const hkVector4& planeAxisB, const hkVector4& twistAxisA, const hkVector4& twistAxisB);
 };
-
-// Stores normalized twist and plane axes, their cross product and the pivot for each body, then copies body B's rotation into the motor axes.
-// @fnv 0x00cded30
-void hkpRagdollConstraintDataBodySpace::FUN_00cded30(const hkVector4& pivotA, const hkVector4& pivotB,
-                                                     const hkVector4& planeAxisA, const hkVector4& planeAxisB,
-                                                     const hkVector4& twistAxisA, const hkVector4& twistAxisB)
-{
-    RagdollLayout& layout = *reinterpret_cast<RagdollLayout*>(this);
-
-    hkVector4q& twistA = layout.m_kBodyALocalFrame.m_rotation.m_kColumn0;
-    twistA.m_vComponents = reinterpret_cast<const hkVector4q&>(twistAxisA).m_vComponents;
-    hkNormalize3(twistA);
-    layout.m_kBodyALocalFrame.m_rotation.m_kColumn1.m_vComponents =
-        reinterpret_cast<const hkVector4q&>(planeAxisA).m_vComponents;
-    hkNormalize3(layout.m_kBodyALocalFrame.m_rotation.m_kColumn1);
-    hkSetCross(layout.m_kBodyALocalFrame.m_rotation.m_kColumn2, layout.m_kBodyALocalFrame.m_rotation.m_kColumn0,
-               layout.m_kBodyALocalFrame.m_rotation.m_kColumn1);
-    layout.m_kBodyALocalFrame.m_vTranslation.m_vComponents = reinterpret_cast<const hkVector4q&>(pivotA).m_vComponents;
-
-    hkVector4q& twistB = layout.m_kBodyBLocalFrame.m_rotation.m_kColumn0;
-    twistB.m_vComponents = reinterpret_cast<const hkVector4q&>(twistAxisB).m_vComponents;
-    hkNormalize3(twistB);
-    layout.m_kBodyBLocalFrame.m_rotation.m_kColumn1.m_vComponents =
-        reinterpret_cast<const hkVector4q&>(planeAxisB).m_vComponents;
-    hkNormalize3(layout.m_kBodyBLocalFrame.m_rotation.m_kColumn1);
-    hkSetCrossReversed(layout.m_kBodyBLocalFrame.m_rotation.m_kColumn2, layout.m_kBodyBLocalFrame.m_rotation.m_kColumn1,
-                       layout.m_kBodyBLocalFrame.m_rotation.m_kColumn0);
-    layout.m_kBodyBLocalFrame.m_vTranslation.m_vComponents = reinterpret_cast<const hkVector4q&>(pivotB).m_vComponents;
-
-    layout.m_kMotorAxes.m_kColumn0.m_vComponents = layout.m_kBodyBLocalFrame.m_rotation.m_kColumn0.m_vComponents;
-    layout.m_kMotorAxes.m_kColumn1.m_vComponents = layout.m_kBodyBLocalFrame.m_rotation.m_kColumn1.m_vComponents;
-    layout.m_kMotorAxes.m_kColumn2.m_vComponents = layout.m_kBodyBLocalFrame.m_rotation.m_kColumn2.m_vComponents;
-}
 
 // @f3twin 0x0095a050 of 0x004a0640
 int __cdecl F3_FUN_0095a050()

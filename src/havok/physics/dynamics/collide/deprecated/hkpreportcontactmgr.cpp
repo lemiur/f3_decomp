@@ -47,20 +47,6 @@ struct FUN_00cfcc30_router
 
 FUN_00cfcc30_router* _D1A0E0GetMemoryRouter();
 
-// @fnv 0x00cfcc30
-FUN_00cfcc30_class* FUN_00cfcc30_class::FUN_00cfcc30(unsigned char flags)
-{
-    FUN_00cfc590();
-
-    if (flags & 1)
-    {
-        FUN_00cfcc30_router* router = _D1A0E0GetMemoryRouter();
-        router->m_manager->FUN_00cfcc30_virtual_2(this, m_flag);
-    }
-
-    return this;
-}
-
 struct GameNode
 {
     unsigned int unknown00;
@@ -117,37 +103,6 @@ struct Descriptor
 
 void __cdecl FUN_00d00ca0(void* payload, Descriptor* descriptor);
 void __cdecl FUN_00cfff00(GameNode* node, int* index);
-
-// @fnv 0x00cfc960
-void __stdcall ProcessInputRecord(InputRecord* record, void* output, unsigned int unused)
-{
-    Descriptor descriptor;
-    descriptor.type = 2;
-    descriptor.tertiary = record->tertiary;
-    descriptor.secondary = record->secondary;
-    descriptor.primary = record->primary;
-    descriptor.control = 0;
-    descriptor.data50 = record->member50();
-    descriptor.data18 = record->member18();
-    descriptor.option0 = 0;
-    descriptor.option1 = 0;
-    descriptor.option2 = 0;
-    descriptor.data04 = &record->member04;
-    descriptor.output = &output;
-    descriptor.data2c = record->member2c();
-    descriptor.result0 = 0;
-    descriptor.result1 = 0;
-
-    FUN_00d00ca0(record->primary->payload, &descriptor);
-
-    descriptor.type = 0;
-    if (record->primary->activityFlag() != 0)
-        FUN_00cfff00(record->primary, &descriptor.type);
-
-    descriptor.type = 1;
-    if (record->secondary->activityFlag() != 0)
-        FUN_00cfff00(record->secondary, &descriptor.type);
-}
 
 struct CFCA90Shape
 {
@@ -239,26 +194,6 @@ struct ContactEvent
     ContactDispatcher* m_pCollisionDispatcher;
     void* m_arg1;
 };
-// Fills a ContactEvent with the dispatcher and two contact records, then calls FUN_00d01900 and optionally FUN_00d001c0 on each record.
-// @fnv 0x00cfc860
-void ContactDispatcher::DispatchContact(void* arg1, void* arg2)
-{
-    ContactRecord* first = m_pHeadNode;
-    void* collidable = first->m_kCollidable;
-    ContactEvent data;
-    data.m_eventType = 0xffff;
-    data.m_arg2 = arg2;
-    ContactRecord* second = m_iSecondInteger;
-    data.m_pCollisionDispatcher = this;
-    data.m_pHeadNode = first;
-    data.m_iSecondInteger = second;
-    data.m_arg1 = arg1;
-    FUN_00d01900(collidable, &data);
-    if (*(unsigned short*)((char*)first + 0x204) != 0)
-        FUN_00d001c0(first, &data);
-    if (*(unsigned short*)((char*)second + 0x204) != 0)
-        FUN_00d001c0(second, &data);
-}
 
 struct Entity
 {
@@ -687,65 +622,6 @@ struct hkpSimpleConstraintContactMgr
     unsigned int FUN_00cfc5f0(const hkpCdBody& a, const hkpCdBody& b, const GskAgentInput& input,
                               WorldOperationEntry& output, const ConvexFeaturePairCache* contactCache, hkContactPoint& cp);
 };
-
-// Computes projected velocity at the contact point, dispatches a ContactPointProcessingData event, and removes the contact point if the result code is 1.
-// @fnv 0x00cfc5f0
-unsigned int hkpSimpleConstraintContactMgr::FUN_00cfc5f0(const hkpCdBody& a, const hkpCdBody& b,
-                                                         const GskAgentInput& input, WorldOperationEntry& output,
-                                                         const ConvexFeaturePairCache* contactCache, hkContactPoint& cp)
-{
-    hkpRigidBody* rbA = m_pEntityA;
-    hkpRigidBody* rbB = m_pEntityB;
-
-    float fProjectedVelocity;
-    {
-        __m128 point = cp.m_vContactPosition.m_vComponents;
-        __m128 comA = rbA->m_centerOfMassWorld.m_vComponents;
-        __m128 offsetA = _mm_sub_ps(point, comA);
-        __m128 angularA = rbA->m_kAngularVelocity.m_vComponents;
-        __m128 angularB = rbB->m_centerOfMassWorld.m_vComponents;
-        __m128 offsetB = _mm_sub_ps(point, angularB);
-        angularB = rbB->m_kAngularVelocity.m_vComponents;
-        __m128 firstB = _mm_shuffle_ps(offsetB, offsetB, 0xc9);
-        __m128 secondB = _mm_shuffle_ps(angularB, angularB, 0xd2);
-        __m128 thirdB = _mm_shuffle_ps(offsetB, offsetB, 0xd2);
-        __m128 fourthB = _mm_shuffle_ps(angularB, angularB, 0xc9);
-        firstB = _mm_mul_ps(firstB, secondB);
-        thirdB = _mm_mul_ps(thirdB, fourthB);
-        hkVector4 vVelocityB;
-        vVelocityB.m_vComponents = _mm_add_ps(_mm_sub_ps(thirdB, firstB), rbB->m_kTranslationalVelocity.m_vComponents);
-        __m128 firstA = _mm_shuffle_ps(angularA, angularA, 0xc9);
-        __m128 secondA = _mm_shuffle_ps(offsetA, offsetA, 0xd2);
-        __m128 thirdA = _mm_shuffle_ps(angularA, angularA, 0xd2);
-        __m128 fourthA = _mm_shuffle_ps(offsetA, offsetA, 0xc9);
-        firstA = _mm_mul_ps(firstA, secondA);
-        thirdA = _mm_mul_ps(thirdA, fourthA);
-        hkVector4 vVelocityA;
-        vVelocityA.m_vComponents = _mm_add_ps(_mm_sub_ps(firstA, thirdA), rbA->m_kTranslationalVelocity.m_vComponents);
-        hkVector4 vDeltaVelocity;
-        vDeltaVelocity.setSub4(vVelocityB, vVelocityA);
-        fProjectedVelocity = vDeltaVelocity.dot3(cp.getNormal());
-    }
-
-    ContactPointProcessingData event(0, this, &input, &output, &a, &b, &cp, contactCache, 0, fProjectedVelocity);
-    FUN_00d01850(m_pOwningWorld, event);
-
-    if (rbA->m_contactListenersSize != 0)
-    {
-        FUN_00d00110(rbA, event);
-    }
-    if (rbB->m_contactListenersSize != 0)
-    {
-        FUN_00d00110(rbB, event);
-    }
-    if (event.m_iResultCode == 1)
-    {
-        removeContactPoint(0, output.m_pConstraintOwner);
-        return 0xffff;
-    }
-    m_nextProcessCollideDelay = event.m_nextProcessCollideDelay;
-    return 0;
-}
 
 struct Word
 {

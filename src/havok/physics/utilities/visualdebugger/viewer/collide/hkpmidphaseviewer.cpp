@@ -525,9 +525,6 @@ struct hkpMidphaseViewer : public hkpShape, public hkpMidphaseViewerBase
     virtual void FUN_00d6a8a0();  // declared, never defined
 };
 
-hkpMidphaseViewer::hkpMidphaseViewer() : hkpShape(), hkpMidphaseViewerBase()
-{}
-
 namespace fnv_00d6a870 {
 extern int DAT_01269024;
 
@@ -567,16 +564,4 @@ struct hkpMidphaseViewer
     void* FUN_00d6a8b0(int flags);
 };
 
-// Calls FUN_00d6a750, then if flags & 1 removes this viewer from the physics world registry, and returns this.
-// @fnv 0x00d6a8b0
-void* hkpMidphaseViewer::FUN_00d6a8b0(int flags)
-{
-    FUN_00d6a750();
-    if (flags & 1)
-    {
-        hkpPhysicsWorld* world = FUN_00c85750();
-        world->unk10->removeViewer(this, unk04);
-    }
-    return this;
-}
 }  // namespace fnv_00d6a8b0

@@ -175,9 +175,6 @@ struct FUN_00cb17b0 : S_00cb17b0_RefObj
     FUN_00cb17b0();
     virtual ~FUN_00cb17b0();
 };
-// @fnv 0x00cb17b0
-FUN_00cb17b0::FUN_00cb17b0()
-{}
 
 struct DiagBuffer
 {

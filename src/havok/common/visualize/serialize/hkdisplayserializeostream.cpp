@@ -33,10 +33,6 @@ struct AudioMgr
 
 struct BSAudio;
 __declspec(nothrow) BSAudio* __cdecl FUN_00c85750();
-inline AudioMgr* audio()
-{
-    return (AudioMgr*)FUN_00c85750();
-}
 
 struct hkBool
 {
@@ -65,13 +61,6 @@ struct FUN_00d27460 : RefObj
     __declspec(nothrow) FUN_00d27460(int a, int b);
 };
 
-inline void* hkAlloc(int n)
-{
-    RefObj* p = (RefObj*)audio()->heap().AllocateMemoryBlock(n);
-    p->m_usMemSizeAndFlags = (short)n;
-    return p;
-}
-
 inline void* operator new(unsigned int, void* p)
 {
     return p;
@@ -89,14 +78,6 @@ struct FUN_00dda6e0 : FUN_00d60830
 {
     FUN_00dda6e0(int a);
 };
-
-// Constructs a FUN_00d60830 base with a newly allocated FUN_00d27460(a, 0x2000), sets the vtable, and calls FUN_00c905b0 on m_8.
-// @fnv 0x00dda6e0
-FUN_00dda6e0::FUN_00dda6e0(int a) : FUN_00d60830(new(hkAlloc(sizeof(FUN_00d27460))) FUN_00d27460(a, 0x2000), false)
-{
-    m_vtbl = DAT_010d7db8;
-    m_8->FUN_00c905b0();
-}
 
 struct DDA7C0Vector4
 {
@@ -187,18 +168,6 @@ struct FUN_00ddabb0_shell
     void FUN_00d60590();
     FUN_00ddabb0_shell* FUN_00ddabb0(unsigned int flags);
 };
-// Calls FUN_00d60590, then if bit 0 of flags is set frees this through the allocator from FUN_00c85750, and returns this.
-// @fnv 0x00ddabb0
-FUN_00ddabb0_shell* FUN_00ddabb0_shell::FUN_00ddabb0(unsigned int flags)
-{
-    FUN_00d60590();
-    if (flags & 1)
-    {
-        AllocatorHolder* holder = FUN_00c85750();
-        holder->allocator->Free(this, size);
-    }
-    return this;
-}
 }  // namespace fnv_00ddabb0
 
 // Stand-in for the class that owns WriteUInt16 (the game's own class name for

@@ -275,15 +275,6 @@ struct S_00ca4ec0 : S_00ca4ec0_Base
     void FUN_00ca4ec0(S_00ca4ec0_Stream& kStream);
 };
 
-// @fnv 0x00ca4ec0
-void S_00ca4ec0::FUN_00ca4ec0(S_00ca4ec0_Stream& kStream)
-{
-    kStream.FUN_00a645b0();
-    S_00ca4ec0_Base::FUN_00c84d00(kStream);
-    int tmp;
-    vb4(&tmp)->m_04 = 0;
-}
-
 struct NiStream;
 struct FirstInterface
 {
@@ -483,26 +474,6 @@ struct Owner
     Interface* unk08;
     void FUN_00ca5010();
 };
-// @fnv 0x00ca5010
-void Owner::FUN_00ca5010()
-{
-    if (this == 0)
-        return;
-    Interface* input = unk08;
-    if (input == 0)
-        return;
-    void* raw = input->GetObject();
-    if (raw == 0)
-        return;
-    char* base = (char*)raw - 0x10;
-    if (base == 0)
-        return;
-    Interface* object = *(Interface**)(base + 8);
-    if (object == 0)
-        return;
-    FinishObject finish = (FinishObject)(*(void***)object)[54];
-    finish(object);
-}
 }  // namespace fnv_00ca5010
 
 namespace fnv_00cafff0 {
@@ -606,22 +577,6 @@ struct FUN_00cb0780_class
     void* memory;
     void FUN_00cb0780(bool release);
 };
-// @fnv 0x00cb0780
-void FUN_00cb0780_class::FUN_00cb0780(bool release)
-{
-    void* allocation;
-    MemoryContextGuard guard;
-    if (release)
-    {
-        allocation = memory;
-        if (allocation)
-        {
-            FUN_00cb0780_Manager* manager = (FUN_00cb0780_Manager*)FUN_00c85750();
-            manager->allocator->Free(allocation, 0x30);
-        }
-        memory = 0;
-    }
-}
 
 struct ThreadState
 {
@@ -835,18 +790,6 @@ struct ThreadStateGuard
         s_tlsData.unk2B4 = previous;
     }
 };
-// @fnv 0x00cb09b0
-void StringBuilder::FUN_00cb09b0(NiStringArray* array)
-{
-    ThreadStateGuard guard;
-    FUN_00ca5190(array);
-    char* value = FUN_00a7d330(g_01268350.value);
-    unsigned int count = array->count;
-    unsigned int capacity = array->capacity;
-    if (count >= capacity)
-        array->FUN_0096ad30(count + array->growth);
-    array->FUN_0096ae90(count, &value);
-}
 
 struct EP
 {
@@ -957,18 +900,6 @@ struct QTF
     void __thiscall FUN_00c84cc0(EP* p);
     void FUN_00ca4f00(EP* a1);
 };
-
-// @fnv 0x00ca4f00
-void QTF::FUN_00ca4f00(EP* a1)
-{
-    char tmp;
-    void* r;
-    r = (void*)this->M45(&tmp);
-    int v = a1->FUN_00a63430();
-    if (v != 0)
-        ((int*)r)[1] = ((int*)v)[2];
-    this->FUN_00c84cc0(a1);
-}
 
 struct FUN_00ca4fd0_Value
 {
@@ -1155,24 +1086,6 @@ struct Owner_Ext : public Owner
     void FUN_00ca5130(bool flag);
 };
 
-// @fnv 0x00ca5130
-void Owner_Ext::FUN_00ca5130(bool flag)
-{
-    if (flag)
-    {
-        RefCounted* val = (RefCounted*)getValue();
-        if (val)
-        {
-            InterlockedIncrement(&val->refCount);
-        }
-    }
-    else
-    {
-        FUN_00ca5080();
-    }
-    FUN_00c84e50(flag);
-}
-
 extern "C" void* __cdecl FUN_00aa13e0(unsigned int);
 extern "C" void __cdecl FUN_00c876f0();
 extern "C" void __cdecl FUN_00c87700();
@@ -1300,33 +1213,6 @@ struct FUN_00cb06c0_cls
     void FUN_00cb0030(void* value);
     void* FUN_00cb06c0(bool* out);
 };
-
-// @fnv 0x00cb06c0
-void* FUN_00cb06c0_cls::FUN_00cb06c0(bool* out)
-{
-    ThreadStateGuard guard;
-    bool empty = (unk0c == 0);
-    *out = empty;
-    if (empty)
-    {
-        FUN_00cb06c0_Holder* holder = reinterpret_cast<FUN_00cb06c0_Holder*>(FUN_00c85750());
-        void* result = holder->allocator->Alloc(0x50);
-        if (result != 0)
-        {
-            result = reinterpret_cast<FUN_00cb06c0_Obj*>(result)->FUN_00622490();
-        }
-        else
-        {
-            result = 0;
-        }
-        unk0c = result;
-        if (unk08 != 0)
-        {
-            FUN_00cb0030(result);
-        }
-    }
-    return unk0c;
-}
 
 struct S00cb0820_Alloc
 {
@@ -1646,35 +1532,6 @@ struct FUN_00ca5080_cls
 
     void FUN_00ca5080();
 };
-
-// @fnv 0x00ca5080
-void FUN_00ca5080_cls::FUN_00ca5080()
-{
-    ThreadStateGuard guard;
-    if (this != 0)
-    {
-        ValueNode* pNode = m_pReferencedNode;
-        if (pNode != 0)
-        {
-            void* m_pTaskletData = pNode->get();
-            if (m_pTaskletData != 0)
-            {
-                ValueHeader* pHeader = (ValueHeader*)((char*)m_pTaskletData - 16);
-                if (pHeader != 0)
-                {
-                    ValueRefObject* pValue = pHeader->value;
-                    if (pValue != 0)
-                    {
-                        if (InterlockedDecrement(&pValue->m_lRefCount) == 0)
-                        {
-                            pValue->Destroy();
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
 
 struct BinaryDataRecord
 {
@@ -2101,39 +1958,3 @@ struct StringBuilder_ca5190 : public StringBuilder
 {
     void FUN_00ca5190(NiStringArray* array);
 };
-
-// @fnv 0x00ca5190
-void StringBuilder_ca5190::FUN_00ca5190(NiStringArray* array)
-{
-    ThreadStateGuard guard;
-    reinterpret_cast<StringBuilderCalls_00ca5190*>(this)->FUN_00c851c0(array);
-
-    char* text = FUN_00a7d330(DAT_012682d0);
-    unsigned int count = array->count;
-    if (count >= array->capacity)
-    {
-        reinterpret_cast<StringArrayCalls_00ca5190*>(array)->FUN_0096ad30(count + array->growth);
-    }
-    reinterpret_cast<StringArrayCalls_00ca5190*>(array)->FUN_0096ae90(count, &text);
-
-    if (this != 0)
-    {
-        FirstInterface* m_8 = reinterpret_cast<HC1Base*>(this)->unk08;
-        if (m_8 != 0)
-        {
-            void* link = m_8->FUN_00ca4f40_get();
-            if (link != 0)
-            {
-                Header* header = reinterpret_cast<Header*>(reinterpret_cast<char*>(link) - 16);
-                if (header != 0)
-                {
-                    void* value = header->value;
-                    if (value != 0)
-                    {
-                        reinterpret_cast<ValueObject_00ca5190*>(value)->v60(array);
-                    }
-                }
-            }
-        }
-    }
-}

@@ -83,14 +83,6 @@ struct FUN_00cc0680
     int tell();
 };
 
-// @fnv 0x00cc0680
-int FUN_00cc0680::tell()
-{
-    char* p = *(char**)(this + 8);
-    int n = *(int*)(p + 0xc) - 1;
-    return *(int*)(p + 4) + *(int*)(p + 0) * n;
-}
-
 struct FUN_00cc07f0_Router
 {
     virtual void Slot0();
@@ -117,20 +109,6 @@ struct FUN_00cc07f0_StandIn
 
     FUN_00cc07f0_StandIn* FUN_00cc07f0(unsigned int deletingFlag);
 };
-
-FUN_00cc07f0_StandIn* FUN_00cc07f0_StandIn::FUN_00cc07f0(unsigned int deletingFlag)
-{
-    FUN_00cc0780();
-
-    if (deletingFlag & 1)
-    {
-        FUN_00cc07f0_MemoryRouter* memoryRouter = _D1A0E0GetMemoryRouter();
-        unsigned short size = m_nSize;
-        memoryRouter->pRouter->Free(this, size);
-    }
-
-    return this;
-}
 
 struct CpuInterface
 {
@@ -215,11 +193,6 @@ struct FUN_00cc04a0_Cls
     void* unk08;
     void RegisterWriter(FUN_00cc04a0_Slots* target, int unused);
 };
-// @fnv 0x00cc04a0
-void FUN_00cc04a0_Cls::RegisterWriter(FUN_00cc04a0_Slots* apSlots, int unused)
-{
-    apSlots->slot0C("writer", unk08, 0);
-}
 
 class hkMemoryAllocatorCC06
 {
@@ -916,15 +889,6 @@ class hkStreamCC06 : public hkReferencedObjectCC06
     hkStreamCC06* DestroyStream(unsigned int uiFlags) throw();
 };
 
-// Destroys the stream object and, when bit 0 of uiFlags is set, frees its memory via operator delete; returns this.
-// @fnv 0x00cc0690
-hkStreamCC06* hkStreamCC06::DestroyStream(unsigned int uiFlags) throw()
-{
-    this->hkStreamCC06::~hkStreamCC06();
-    if (uiFlags & 1)
-        hkStreamCC06::operator delete(this);
-    return this;
-}
 }  // namespace fnv_00cc0690
 
 namespace fnv_00cc06f0 {
@@ -1162,14 +1126,6 @@ class FUN_00d60b40 : public hkRefObjD60B
     FUN_00d60b40(void* owner, char flag) throw();
     virtual ~FUN_00d60b40();
 };
-
-// Sets m_flag and assigns m_pChildAtom to a new FUN_00cc06f0 constructed with owner and 1.
-// @fnv 0x00d60b40
-FUN_00d60b40::FUN_00d60b40(void* owner, char flag) throw()
-{
-    m_flag = flag;
-    m_pChildAtom = new FUN_00cc06f0(owner, 1);
-}
 
 struct NiBinaryStream;
 typedef unsigned int(__cdecl* NiBinaryReadFn)(NiBinaryStream* stream, void* buffer, unsigned int bytes,

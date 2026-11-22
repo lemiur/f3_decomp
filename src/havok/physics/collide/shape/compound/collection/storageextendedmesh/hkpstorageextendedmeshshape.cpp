@@ -32,21 +32,6 @@ struct ShapeSubpartStorage
     ShapeSubpartStorage* FUN_00d4ad20(int deletingFlag);
 };
 
-// @fnv 0x00d4ad20
-ShapeSubpartStorage* ShapeSubpartStorage::FUN_00d4ad20(int deletingFlag)
-{
-    FUN_00d4ac70();
-
-    if (deletingFlag & 1)
-    {
-        MemoryManager* memoryManager = _D1A0E0GetMemoryRouter();
-        unsigned short size = m_iElementCount;
-        memoryManager->m_router->Release(this, size);
-    }
-
-    return this;
-}
-
 namespace fnv_00d4b120 {
 struct NineIntegerRecord
 {
@@ -72,20 +57,6 @@ struct hkpStorageExtendedMeshShape_MeshSubpartStorage
 
 hkMemoryRouterContext* __cdecl _D1A0E0GetMemoryRouter();
 
-// @fnv 0x00d4b120
-hkpStorageExtendedMeshShape_MeshSubpartStorage* hkpStorageExtendedMeshShape_MeshSubpartStorage::DestroyStorage(
-    unsigned int deletingDestructor)
-{
-    FUN_00d4af60();
-
-    if (deletingDestructor & 1)
-    {
-        hkMemoryRouterContext* context = _D1A0E0GetMemoryRouter();
-        context->router->deallocate(this, m_iElementCount);
-    }
-
-    return this;
-}
 }  // namespace fnv_00d4b120
 
 extern int DAT_010cfd84;
@@ -468,17 +439,6 @@ struct FUN_00d4aec0_Class
     void FUN_00d49cb0();
     virtual FUN_00d4aec0_Class* FUN_00d4aec0(unsigned char flags);
 };
-// @fnv 0x00d4aec0
-FUN_00d4aec0_Class* FUN_00d4aec0_Class::FUN_00d4aec0(unsigned char flags)
-{
-    FUN_00d49cb0();
-    if (flags & 1)
-    {
-        MemoryManager* mgr = _D1A0E0GetMemoryRouter();
-        mgr->m_router->Release(this, m_usMemSizeAndFlags);
-    }
-    return this;
-}
 
 namespace fnv_00d4aef0 {
 class hkMemoryAllocatorD4AE
@@ -610,9 +570,6 @@ class FUN_00d4aef0 : public hkReferencedObjectD4AE
     virtual ~FUN_00d4aef0() throw();
 };
 
-// @fnv 0x00d4aef0
-FUN_00d4aef0::FUN_00d4aef0() throw()
-{}
 }  // namespace fnv_00d4aef0
 
 namespace fnv_00d4af60 {
@@ -824,10 +781,6 @@ struct FUN_00d4ac70
         };
     };
 };
-
-// @fnv 0x00d4ac70
-FUN_00d4ac70::hkpStorageExtendedMeshShape::ShapeSubpartStorage::~ShapeSubpartStorage()
-{}
 
 #include <xmmintrin.h>
 namespace fnv_00d4aa70 {
@@ -1043,26 +996,6 @@ struct hkpExtendedMeshShapeTrianglesSubpartD4AB : public hkpExtendedMeshShapeSub
     hkpExtendedMeshShapeTrianglesSubpartD4AB& FUN_00d4abf0(
         const hkpExtendedMeshShapeTrianglesSubpartD4AB& kOther) throw();
 };
-
-// Copies all triangle subpart fields from kOther into this, after delegating to the base class assignment operator.
-// @fnv 0x00d4abf0
-hkpExtendedMeshShapeTrianglesSubpartD4AB& hkpExtendedMeshShapeTrianglesSubpartD4AB::FUN_00d4abf0(
-    const hkpExtendedMeshShapeTrianglesSubpartD4AB& kOther) throw()
-{
-    hkpExtendedMeshShapeSubpartD4AB::operator=(kOther);
-    m_iVertexStride = kOther.m_iVertexStride;
-    m_pMaterialIndexBase = kOther.m_pMaterialIndexBase;
-    m_iStridedVertexCount = kOther.m_iStridedVertexCount;
-    m_pMaterialDataBase = kOther.m_pMaterialDataBase;
-    m_kVertexTransform = kOther.m_kVertexTransform;
-    m_iTriangleIndexStride = kOther.m_iTriangleIndexStride;
-    m_iMaterialStriding = kOther.m_iMaterialStriding;
-    m_ucIndexStridingType = kOther.m_ucIndexStridingType;
-    m_bFlipAlternateTriangles = kOther.m_bFlipAlternateTriangles;
-    m_iTriangleOffset = kOther.m_iTriangleOffset;
-    m_userData50 = kOther.m_userData50;
-    return *this;
-}
 
 namespace fnv_00d4ad60 {
 inline void* operator new(unsigned int, void* p) throw()
@@ -1834,31 +1767,4 @@ struct ShapesSubpartS
     ShapesSubpartS* FUN_00d56500(hkConvexShapeS* const* childShapes, int numChildShapes, const hkVector4f& offset);
 };
 
-static __forceinline bool equals3(const hkVector4f& a, const __m128& b, hkReal epsilon)
-{
-    const __m128 diff = _mm_and_ps(_mm_sub_ps(*(const __m128*)&a, b), g_hkQuadAbsMask);
-    const __m128 eps = _mm_set_ps1(epsilon);
-    return (_mm_movemask_ps(_mm_cmple_ps(diff, eps)) & 7) == 7;
-}
-
-// Initializes a convex subpart with child shapes, translation offset, and identity rotation, encoding a non-zero flag in the translation w component.
-// @fnv 0x00d56500
-ShapesSubpartS* ShapesSubpartS::FUN_00d56500(hkConvexShapeS* const* childShapes, int numChildShapes,
-                                             const hkVector4f& offset)
-{
-    initSubpart(1);
-    m_kChildShapes.init();
-    m_vTranslation = offset;
-
-    hkRefPtrS<hkConvexShapeS>* dst = m_kChildShapes.expandBy(numChildShapes);
-    for (int i = 0; i < numChildShapes; i++)
-    {
-        dst[i] = childShapes[i];
-    }
-
-    m_rotation.m_vComponents = g_hkQuadIdentityQuat;
-    const int bOffsetNonZero = !equals3(offset, g_hkQuadZero, g_hkEqualsEps);
-    *(int*)&m_vTranslation.w = bOffsetNonZero | 0x3f000000;
-    return this;
-}
 }  // namespace fnv_00d56500

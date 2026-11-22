@@ -33,12 +33,6 @@ void FnvCpu_FUN_00e063e0_CpuOwner::FUN_00e063e0(int arg0)
 void __stdcall FUN_00e063c0(int)
 {}
 
-// @fnv 0x00e063d0
-int __stdcall FUN_00e063d0(int arg0, int arg1)
-{
-    return 0;
-}
-
 struct FnvAllocator
 {
     virtual void unk00();

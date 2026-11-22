@@ -24,18 +24,6 @@ struct Object
     void FUN_00cc0ae0();
     Object* FUN_00cc0dd0(unsigned int flags);
 };
-// Calls FUN_00cc0ae0, and if flags has bit 0 set, notifies the interface from FUN_00c85750 with this and unk04; returns this.
-// @fnv 0x00cc0dd0
-Object* Object::FUN_00cc0dd0(unsigned int flags)
-{
-    FUN_00cc0ae0();
-    if (flags & 1)
-    {
-        State* state = FUN_00c85750();
-        state->interface10->notify(this, unk04);
-    }
-    return this;
-}
 
 struct D481D0StringPtr
 {
@@ -70,15 +58,6 @@ struct FUN_00d481d0
 
     FUN_00d481d0(const char* name, D481D0ReferencedObject* object, const D481D0Class* pClassInfo);
 };
-
-// Stores the name, binds the object with its class, and caches the class name (or null) from the reference variant.
-// @fnv 0x00d481d0
-FUN_00d481d0::FUN_00d481d0(const char* name, D481D0ReferencedObject* object, const D481D0Class* apClass)
-{
-    m_name = name;
-    m_pReferencedResource.set(object, apClass);
-    m_pClassName = m_pReferencedResource.GetVariantValue() ? m_pReferencedResource.GetVariantValue()->getName() : 0;
-}
 
 struct CC0D30Result
 {
@@ -391,31 +370,6 @@ struct FUN_00cc0ae0_cls
     void FUN_00cc0ae0();
 };
 
-// Sets the vtable pointer, calls v00(1) on each non-null item, frees the item array, empties it, and sets the vtable pointer to DAT_0102e388.
-// @fnv 0x00cc0ae0
-void FUN_00cc0ae0_cls::FUN_00cc0ae0()
-{
-    m_vptr00 = (int)&DAT_010c93e4;
-    for (int i = 0; i < m_iArrayLength; i++)
-    {
-        PooledItem* item = m_pItems[i];
-        if (item != 0)
-        {
-            item->v00(1);
-        }
-    }
-    AllocHolder* holder = FUN_00c85750();
-    FixedAllocator* alloc = holder->m_pAllocator;
-    unsigned int cap = m_uCapBits;
-    m_iArrayLength = 0;
-    if ((cap & 0x80000000u) == 0)
-    {
-        alloc->FreeArray(m_pItems, (cap & 0x3fffffffu) * 4);
-    }
-    m_pItems = 0;
-    m_uCapBits = 0x80000000u;
-    *(volatile int*)&m_vptr00 = (int)&DAT_0102e388;
-}
 }  // namespace fnv_00cc0ae0
 
 namespace fnv_00cc0b50 {

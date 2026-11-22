@@ -96,14 +96,6 @@ class hkObjE3C6 : public hkpShapeE3C6
     void AddRaysToStatistics(hkStatisticsCollectorE3C6* pkCollector, const hkClassE3C6* pkClass) const throw();
 };
 
-// Adds the Rays array to the statistics collector, then reports the base shape's statistics with the class descriptor.
-// @fnv 0x00e3c620
-void hkObjE3C6::AddRaysToStatistics(hkStatisticsCollectorE3C6* pkCollector, const hkClassE3C6* pkClass) const throw()
-{
-    pkCollector->addArray("Rays", m_kRays);
-    FUN_00c90360(pkCollector, &DAT_01268910);
-}
-
 union __declspec(intrin_type) __declspec(align(16)) __m128
 {
     float m128_f32[4];
@@ -207,37 +199,6 @@ struct hkInplaceWorldRayArray : hkWorldRayArray
     }
 };
 
-static __forceinline __m128 loadQuad(const hkVector4& v)
-{
-    hkQuadVector u;
-    u.v = v;
-    return u.q;
-}
-
-static __forceinline void TransformPointArray(const hkTransform& t, const __m128* vectorsIn, int numVectors,
-                                              __m128* vectorsOut)
-{
-    hkQuadVector c0;
-    c0.v = t.m_rotation.m_kColumn0;
-    const __m128 q0 = c0.q;
-    const __m128 q1 = loadQuad(t.m_rotation.m_kColumn1);
-    const __m128 q2 = loadQuad(t.m_rotation.m_kColumn2);
-    const __m128 RunFourthVirtual = loadQuad(t.m_vTranslation);
-    int i = numVectors - 1;
-    do
-    {
-        __m128 b = vectorsIn[i];
-        __m128 b0 = _mm_shuffle_ps(b, b, 0x00);
-        __m128 b1 = _mm_shuffle_ps(b, b, 0x55);
-        __m128 b2 = _mm_shuffle_ps(b, b, 0xaa);
-        __m128 r0 = _mm_mul_ps(b0, q0);
-        __m128 r1 = _mm_mul_ps(b1, q1);
-        __m128 r2 = _mm_mul_ps(b2, q2);
-        vectorsOut[i] = _mm_add_ps(_mm_add_ps(r1, r0), _mm_add_ps(r2, RunFourthVirtual));
-        i--;
-    } while (i >= 0);
-}
-
 struct hkAabbQ
 {
     __m128 m_kMinimumCorner;
@@ -249,30 +210,6 @@ class hkpMultiRayShapeImpl : public hkpMultiRayShape
   public:
     void FUN_00e3c800(const hkTransform& localToWorld, hkReal tolerance, hkAabbQ& out) const;
 };
-
-// Transforms the shape's rays into world space and computes their combined axis-aligned bounding box into out.
-// @fnv 0x00e3c800
-void hkpMultiRayShapeImpl::FUN_00e3c800(const hkTransform& localToWorld, hkReal tolerance, hkAabbQ& out) const
-{
-    hkInplaceWorldRayArray worldRays;
-    worldRays.SetSizeAndGrow(m_kRays.m_iElementCount);
-    TransformPointArray(localToWorld, reinterpret_cast<const __m128*>(m_kRays.m_data), m_kRays.m_iElementCount * 2,
-                        &worldRays.m_data[0].m_kRayStart);
-
-    __m128 mn = _mm_set_ps1(DAT_0104da48);
-    __m128 mx = _mm_set_ps1(DAT_0104e148);
-    const hkWorldRay* ray = worldRays.m_data;
-    for (int i = 0; i < worldRays.m_iElementCount; i++, ray++)
-    {
-        mn = _mm_min_ps(mn, ray->m_kRayEnd);
-        mx = _mm_max_ps(mx, ray->m_kRayEnd);
-        mn = _mm_min_ps(mn, ray->m_kRayStart);
-        mx = _mm_max_ps(mx, ray->m_kRayStart);
-    }
-    out.m_kMinimumCorner = mn;
-    out.m_kMaximumCorner = mx;
-    worldRays._clearAndDeallocate(FUN_00c85750()->heap());
-}
 
 extern "C"
 {
@@ -346,13 +283,6 @@ struct ShapeStandIn : RefObjStandIn
     {}
 };
 
-static inline __m128 dot3(__m128 a)
-{
-    __m128 x2 = _mm_mul_ps(a, a);
-    __m128 s = _mm_add_ss(_mm_shuffle_ps(x2, x2, 0x55), x2);
-    return _mm_add_ss(_mm_shuffle_ps(x2, x2, 0xaa), s);
-}
-
 struct FUN_00e3c680 : ShapeStandIn
 {
     RayArrayStandIn m_kRays;
@@ -360,34 +290,3 @@ struct FUN_00e3c680 : ShapeStandIn
     FUN_00e3c680(const RayStandIn* rays, int nRays, float rayPenetrationDistance);
     virtual ~FUN_00e3c680();
 };
-
-// Copies rays, computes their length, normalizes the direction, and extends the end by m_fRayRadius.
-// @fnv 0x00e3c680
-FUN_00e3c680::FUN_00e3c680(const RayStandIn* rays, int nRays, float rayPenetrationDistance) : ShapeStandIn(0x18)
-{
-    m_fRayRadius = rayPenetrationDistance;
-    RayStandIn* ray = m_kRays.expandBy(nRays);
-    for (int i = nRays - 1; i >= 0; i--)
-    {
-        ray->m_kRayStart = rays->m_kRayStart;
-        ray->m_kRayEnd = rays->m_kRayEnd;
-        __m128 vec = _mm_sub_ps(ray->m_kRayEnd, ray->m_kRayStart);
-        {
-            float len;
-            _mm_store_ss(&len, _mm_sqrt_ss(dot3(vec)));
-            ray->m_kRayStart.m128_f32[3] = len;
-        }
-        {
-            __m128 len2 = dot3(vec);
-            __m128 e = _mm_rsqrt_ss(len2);
-            __m128 r = _mm_mul_ss(_mm_mul_ss(_mm_set_ss(0.5f), e),
-                                  _mm_sub_ss(_mm_set_ss(3.0f), _mm_mul_ss(_mm_mul_ss(len2, e), e)));
-            r = _mm_andnot_ps(_mm_cmpeq_ss(len2, _mm_set_ss(0.0f)), r);
-            vec = _mm_mul_ps(_mm_shuffle_ps(r, r, 0), vec);
-        }
-        __m128 dd = _mm_load_ps1(&m_fRayRadius);
-        ray->m_kRayEnd = _mm_add_ps(_mm_mul_ps(vec, dd), ray->m_kRayEnd);
-        ray++;
-        rays++;
-    }
-}

@@ -86,12 +86,6 @@ struct FUN_00d87c50 : FUN_00def350, Secondary
     FUN_00d87c50(void*);
     virtual void AnotherOperation();
 };
-// Constructs the object from p, delegating to the base constructor and setting unk20 to 6.
-// @fnv 0x00d87c50
-FUN_00d87c50::FUN_00d87c50(void* p) : FUN_00def350(p)
-{
-    unk20 = 6;
-}
 
 struct hkBool
 {
@@ -245,28 +239,6 @@ struct S_00d87e30 : S_00d87e30_Base, S_00d87e30_Listener
     int DecrementPairCount(hkpEntity* a, hkpEntity* b);
     virtual void ProcessCollisionEvent(S_00d87e30_Event* pEvent);
 };
-// Validates the event's two entities and collision filter, then locks the world, dispatches the collision pair, and unlocks it.
-// @fnv 0x00d87e30
-void S_00d87e30::ProcessCollisionEvent(S_00d87e30_Event* pEvent)
-{
-    if (!pEvent || pEvent->m_typed->getType() == 11)
-        return;
-    if (!pEvent->m_pEntityA->m_kCollidable.m_pCollisionShape || !pEvent->m_pEntityB->m_kCollidable.m_pCollisionShape)
-        return;
-    hkpEntity* a = pEvent->m_pEntityA;
-    hkpEntity* b = pEvent->m_pEntityB;
-    if (DecrementPairCount(a, b) > 0)
-        return;
-    if (m_pCollisionFilter &&
-        !m_pCollisionFilter->IsCollisionEnabled(a->m_kCollidable, b->m_kCollidable).m_cBooleanValue)
-        return;
-    hkpWorld* world = a->m_pOwningWorld;
-    if (!world)
-        return;
-    world->lockCriticalOperations();
-    world->ProcessPair(a, b);
-    world->unlockAndAttemptToExecutePendingOperations();
-}
 
 // FUN_00d87d70 candidate
 struct Provider
@@ -382,69 +354,6 @@ class FUN_00d87d70_cls
     void FUN_00d87d70(A* p);
 };
 
-// Validates p and its linked B/C/D objects, calls CallA on their fields, then runs CallB and cleans up D when its counter drops to zero.
-// @fnv 0x00d87d70
-void FUN_00d87d70_cls::FUN_00d87d70(A* p)
-{
-    if (p == 0)
-    {
-        return;
-    }
-    if (p->m_prov->unk20() == 0xb)
-    {
-        return;
-    }
-    B* b = p->m_kPointB;
-    if (b->m_iB10 == 0)
-    {
-        return;
-    }
-    if (p->m_iThirdValue->m_iC10 == 0)
-    {
-        return;
-    }
-    if (((Cls40*)((char*)this - 0x40))->CheckPair(b, p->m_iThirdValue) != 1)
-    {
-        return;
-    }
-    C* pC = p->m_iThirdValue;
-    B* pB = p->m_kPointB;
-    void* pResult = (void*)CallA(&pB->m_iB10, &pC->m_iC10);
-    if (pResult == 0)
-    {
-        return;
-    }
-    D* d = b->m_iFourthElementInteger;
-    if (d == 0)
-    {
-        return;
-    }
-    d->m_i94 += 1;
-    CallB(pResult);
-    d->m_i94 -= 1;
-    if (d->m_i94 != 0)
-    {
-        return;
-    }
-    if (d->m_b9c != 0)
-    {
-        return;
-    }
-    if (d->m_i8c != 0)
-    {
-        d->CleanupFirst();
-    }
-    if (d->m_ia4 != 1)
-    {
-        return;
-    }
-    if (d->m_i90 == 0)
-    {
-        return;
-    }
-    d->CleanupSecond();
-}
-
 struct S_00d87f60_Arg
 {
     struct S_00d87f60_Obj* unk00;
@@ -520,24 +429,6 @@ struct S_00d87f60
     int unk00;
     void FUN_00d87f60(S_00d87f60_Arg*);
 };
-// @fnv 0x00d87f60
-void S_00d87f60::FUN_00d87f60(S_00d87f60_Arg* arg)
-{
-    S_00d87f60_Obj* obj = arg->unk00;
-    if (obj->unk94 != 0)
-    {
-        S_00d87f60_Data d;
-        d.unk00 = 0x23;
-        d.unk04 = (char*)this - 0x40;
-        d.unk08 = arg->unk04;
-        d.unk0c = 0;
-        obj->FUN_00c91160(&d);
-    }
-    else
-    {
-        ((S_00d87f60_Base*)((char*)this - 0x40))->FUN_00d87c20(arg->unk04, S_00d87f60_Flag(0));
-    }
-}
 
 typedef void(__thiscall* SlotFn)(void* self, void* arg);
 struct Sub_b1297
@@ -627,29 +518,6 @@ struct WorldOpTask
     void FUN_00d87ca0(Arg_b1297* a1);
 };
 
-// Initializes m_30, then iterates both lists in a1 and calls m_40.v1 on every item of each Sub_b1297 found in each Elem_b1297.
-// @fnv 0x00d87ca0
-void WorldOpTask::FUN_00d87ca0(Arg_b1297* a1)
-{
-    this->m_30.Init();
-    ListE_b1297* pList = &a1->m_28;
-    for (int pass = 0; pass < 2; ++pass)
-    {
-        for (int i = 0; i < pList->m_04; ++i)
-        {
-            Elem_b1297* pElem = pList->m_00[i];
-            for (int k = 0; k < pElem->m_4c; ++k)
-            {
-                Sub_b1297* pSub = pElem->m_48[k];
-                int iCount = pSub->GetCount();
-                for (int j = 0; j < iCount; ++j)
-                    this->m_40.v1(pSub->GetItem(j));
-            }
-        }
-        pList = &a1->m_34;
-    }
-}
-
 // sub ecx,0x14; jmp target  ==  MSVC adjustor thunk: Derived overrides a virtual that both of its bases
 // declare, so the second base's vtable gets a thunk that moves `this` back by the first base's size (0x14).
 struct PrimaryBase
@@ -697,9 +565,6 @@ struct D87FD0Object : D87FD0Primary, D87FD0Secondary
     virtual void FUN_00d87fd0();
 };
 
-D87FD0Object::D87FD0Object()
-{}
-
 struct D87FE0Primary
 {
     virtual void vfunc00();
@@ -721,9 +586,6 @@ struct D87FE0Object : D87FE0Primary, D87FE0Secondary
 // @fnv 0x00d87fe0
     virtual void FUN_00d87fe0();
 };
-
-D87FE0Object::D87FE0Object()
-{}
 
 namespace fnv_00d87ff0 {
 // sub ecx,0x10; jmp target  ==  MSVC adjustor thunk for the second base of a multiple-inheritance class.
@@ -874,27 +736,6 @@ struct S_00d87f00
     void FUN_00d87f00(Pair_d87f00* apPair);
 };
 
-// Dispatches a pair event to the head node when m_94 is set, otherwise forwards the second integer and a flag to the owner.
-// @fnv 0x00d87f00
-void S_00d87f00::FUN_00d87f00(Pair_d87f00* apPair)
-{
-    Obj_d87f00* obj = apPair->m_pHeadNode;
-    if (obj->m_94 != 0)
-    {
-        Event_d87f00 ev;
-        ev.m_ptr = (char*)this - 0x40;
-        ev.m_kind = 0x23;
-        ev.m_val = apPair->m_iSecondInteger;
-        ev.m_flag = 1;
-        obj->FUN_00c91160(&ev);
-    }
-    else
-    {
-        Flag_d87f00 f(1);
-        reinterpret_cast<Owner_d87f00*>((char*)this - 0x40)->FUN_00d87c20(apPair->m_iSecondInteger, f);
-    }
-}
-
 struct ConstraintFilterMemory
 {
     virtual void unknown00() = 0;
@@ -914,16 +755,3 @@ struct ConstraintFilterDeleteReceiver
     void FUN_00d87bf0();
     ConstraintFilterDeleteReceiver* FUN_00d88000(unsigned int flags);
 };
-// Calls FUN_00d87bf0, then if flags has bit 0 set, releases this object via the BSAudio allocator using size4 bytes, and returns this.
-// @fnv 0x00d88000
-ConstraintFilterDeleteReceiver* ConstraintFilterDeleteReceiver::FUN_00d88000(unsigned int flags)
-{
-    FUN_00d87bf0();
-    if (flags & 1u)
-    {
-        BSAudio* audio = FUN_00c85750();
-        unsigned int bytes = size4;
-        audio->allocator->Release(this, bytes);
-    }
-    return this;
-}

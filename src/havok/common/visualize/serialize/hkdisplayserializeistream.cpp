@@ -153,20 +153,6 @@ struct FUN_00dd9210_cls
     FUN_00dd9210_cls* FUN_00dd9210(unsigned char acFlags);
 };
 
-// Calls FUN_00dd91f0, then if acFlags bit 0 is set frees this via the allocator from FUN_00c85750 with m_uSize, and returns this.
-// @fnv 0x00dd9210
-FUN_00dd9210_cls* FUN_00dd9210_cls::FUN_00dd9210(unsigned char acFlags)
-{
-    FUN_00dd91f0();
-    if (acFlags & 1)
-    {
-        AudioHolder* pHolder = reinterpret_cast<AudioHolder*>(FUN_00c85750());
-        AudioAllocator* pAllocator = pHolder->m_pAllocator;
-        pAllocator->Free(this, m_uSize);
-    }
-    return this;
-}
-
 #include <xmmintrin.h>
 struct __declspec(align(16)) Vec4
 {

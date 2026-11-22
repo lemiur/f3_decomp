@@ -259,20 +259,6 @@ class SocketDA2F
     bool __thiscall SetNonBlocking(bool m_bCombatItemSearchActive);
 };
 
-// Sets the socket to non-blocking mode via FUN_00ee6d80 and returns whether the call succeeded.
-// @fnv 0x00da2fc0
-bool SocketDA2F::SetNonBlocking(bool m_bCombatItemSearchActive)
-{
-    bool* pBlocking = &m_bCombatItemSearchActive;
-    volatile unsigned long ulNonBlocking;
-
-    ulNonBlocking = (*pBlocking == 0);
-
-    int result = FUN_00ee6d80(m_uiSocket, 0x8004667e, const_cast<unsigned long*>(&ulNonBlocking));
-
-    return !!result;
-}
-
 extern char DAT_01269acc;
 extern const char str_010d5004[];
 extern const char str_010d4fdc[];
@@ -573,15 +559,3 @@ struct FUN_00da33d0_cls : hkBsdSocket
 
     FUN_00da33d0_cls* __thiscall FUN_00da33d0(bool flag);
 };
-
-// @fnv 0x00da33d0
-FUN_00da33d0_cls* FUN_00da33d0_cls::FUN_00da33d0(bool flag)
-{
-    this->Destroy();
-    if (flag & 1)
-    {
-        FUN_00da33d0_router* router = (FUN_00da33d0_router*)FUN_00c85750();
-        router->m_client->FUN_00da33d0_c(this, m_kPointB);
-    }
-    return this;
-}

@@ -14,12 +14,6 @@ struct FUN_00d468a0_obj
     FUN_00d467c0* p;
     unsigned int WriteToStream(unsigned int arg, unsigned int b);
 };
-// @fnv 0x00d468a0
-unsigned int FUN_00d468a0_obj::WriteToStream(unsigned int apData, unsigned int auiSize)
-{
-    p->write((const char*)apData, auiSize);
-    return auiSize;
-}
 
 struct FUN_00d469c0
 {
@@ -30,15 +24,6 @@ struct FUN_00d469c0
     int m4;
     FUN_00d469c0(int v);
 };
-// @fnv 0x00d469c0
-FUN_00d469c0::FUN_00d469c0(int v)
-{
-    m2 = 0;
-    m3 = 0;
-    m4 = 0x80000000;
-    m1 = v;
-    m0 = v;
-}
 
 struct FUN_00d46b20_inner
 {
@@ -69,12 +54,6 @@ struct FUN_00d46c80_cls
     void FUN_00d46c80(int aiDelta);
 };
 
-// @fnv 0x00d46c80
-void FUN_00d46c80_cls::FUN_00d46c80(int aiDelta)
-{
-    m_0c += aiDelta;
-}
-
 extern int DAT_010cf734;
 struct FUN_00d466e0
 {
@@ -86,16 +65,6 @@ struct FUN_00d466e0
     int unk10;
     FUN_00d466e0(int a, int b);
 };
-// Initializes the object: sets unk06 to 1, points unk00 at DAT_010cf734, stores b in unk10 and a in unk08, and clears unk0C.
-// @fnv 0x00d466e0
-FUN_00d466e0::FUN_00d466e0(int a, int b)
-{
-    unk06 = 1;
-    unk00 = &DAT_010cf734;
-    unk10 = b;
-    unk08 = a;
-    unk0C = 0;
-}
 
 struct FNVBuffer
 {
@@ -125,22 +94,6 @@ struct FUN_00d46770_cls
     FNVBuffer* buffer;
     void WriteBufferToWriter(FNVWriter* writer, int unused);
 };
-// If buffer is set and either unrestricted or the writer allows restricted data, passes its data, used size and computed limit to writer->method14.
-// @fnv 0x00d46770
-void FUN_00d46770_cls::WriteBufferToWriter(FNVWriter* writer, int unused)
-{
-    FNVBuffer* b = buffer;
-    if (b != 0)
-    {
-        unsigned int flags = b->capacityAndFlags;
-        if ((flags & 0x80000000u) == 0 || writer->allowRestricted)
-        {
-            void* data = b->data;
-            unsigned int limit = FUN_00d06f80(data, flags & 0x3fffffff);
-            writer->method14(3, &DAT_010cc460, b->data, b->used, limit);
-        }
-    }
-}
 
 class hkMemoryAllocatorD469
 {
@@ -359,13 +312,6 @@ struct FUN_00d46ca0_Class
     int position;
     State FUN_00d46ca0();
 };
-// @fnv 0x00d46ca0
-State FUN_00d46ca0_Class::FUN_00d46ca0()
-{
-    State result;
-    result.status = position <= (counters->length - 1) * counters->step + counters->base;
-    return result;
-}
 
 namespace fnv_00d46cc0 {
 struct FnvCpu_FUN_00d46cc0_CpuAllocator
@@ -390,17 +336,6 @@ struct FnvCpu_FUN_00d46cc0_CpuObject
     void FUN_00d46c30();
     FnvCpu_FUN_00d46cc0_CpuObject* Destroy(unsigned int flags);
 };
-// @fnv 0x00d46cc0
-FnvCpu_FUN_00d46cc0_CpuObject* FnvCpu_FUN_00d46cc0_CpuObject::Destroy(unsigned int flags)
-{
-    FUN_00d46c30();
-    if (flags & 1)
-    {
-        FnvCpu_FUN_00d46cc0_CpuAllocatorHolder* holder = FUN_00c85750();
-        holder->allocator->Invoke(this, size);
-    }
-    return this;
-}
 }  // namespace fnv_00d46cc0
 
 void __cdecl FUN_00cb1260(void* dst, const void* src, int nbytes);
@@ -415,30 +350,6 @@ class hkBlockStreamD466
 
     void Read(void* buf, int nbytes, int offset);
 };
-
-// Copies nbytes from the block stream into buf, starting at byte offset, spanning blocks as needed.
-// @fnv 0x00d46660
-void hkBlockStreamD466::Read(void* apDest, int aiByteCount, int offset)
-{
-    int block = offset / m_iDofCount;
-    int blockOffset = offset - block * m_iDofCount;
-    while (aiByteCount > 0)
-    {
-        int size = (block < m_iBlockCount - 1) ? m_iDofCount : m_iLastBlockSize;
-        char* src = m_kBlocks[block] + blockOffset;
-        int avail = size - blockOffset;
-        if (aiByteCount <= avail)
-        {
-            FUN_00cb1260(apDest, src, aiByteCount);
-            return;
-        }
-        FUN_00cb1260(apDest, src, avail);
-        apDest = (char*)apDest + avail;
-        aiByteCount -= avail;
-        block++;
-        blockOffset = 0;
-    }
-}
 
 class hkBoolD467
 {
@@ -479,21 +390,6 @@ class hkStreamD467
 
     int FUN_00d46710(void* dst, int n);
 };
-
-// Reads up to n bytes from the stream buffer into dst, advancing m_offset, and returns the number of bytes actually read.
-// @fnv 0x00d46710
-int hkStreamD467::FUN_00d46710(void* apBuffer, int aiCount)
-{
-    if (IsStreamValid())
-    {
-        int avail = (m_buffer->m_iCapacity - 1) * m_buffer->m_iFirstIndex + m_buffer->m_last - m_offset;
-        int k = aiCount < avail ? aiCount : avail;
-        m_buffer->Read(apBuffer, k, m_offset);
-        m_offset += aiCount;
-        return k;
-    }
-    return 0;
-}
 
 namespace fnv_00d468c0 {
 class hkMemoryAllocatorD468;
@@ -558,15 +454,6 @@ class hkBufWriterD468
     void Reset();
 };
 
-// Resets the buffer writer by clearing the size and position, reserving one byte, and null-terminating the buffer.
-// @fnv 0x00d468c0
-void hkBufWriterD468::Reset()
-{
-    m_buf->m_iElementCount = 0;
-    m_pos = 0;
-    m_buf->reserve(m_buf->m_iElementCount + 1);
-    m_buf->m_data[m_buf->m_iElementCount] = 0;
-}
 }  // namespace fnv_00d468c0
 
 class hkMemoryAllocatorD46B;
@@ -733,59 +620,6 @@ class Stream_d467
 void __cdecl ResizeAudioStream(void*, void*, int);
 void __cdecl FUN_00cb1260(void* dst, const void* src, int count);
 
-// Copies iSize bytes from pcData into the stream's block array, allocating new blocks from the heap when the current block is full.
-// @fnv 0x00d467c0
-void Stream_d467::FUN_00d467c0(const char* pcData, int iSize)
-{
-    int blockIndex = m_kBlocks.m_iElementCount - 1;
-
-    if (iSize > 0)
-    {
-        BlockArray_d467* blocks = &m_kBlocks;
-        do
-        {
-            int blockSize = m_iDofCount;
-            int available = blockSize - m_offset;
-
-            if (available == 0)
-            {
-                Alloc_d467& heap = ((Router_d467*)FUN_00c85750())->heap();
-                char* block = (char*)heap.AllocateMemoryBlock(blockSize);
-
-                Router_d467* router = (Router_d467*)FUN_00c85750();
-                if (blocks->m_iElementCount == (blocks->m_iCapacityState & 0x3fffffff))
-                {
-                    ResizeAudioStream(router->m_pStreamAllocator, blocks, 4);
-                }
-
-                const char** pSlot = &blocks->m_data[blocks->m_iElementCount];
-                pSlot[0] = block;
-                pSlot[0] = block;
-                blocks->m_iElementCount++;
-                blockIndex++;
-                m_offset = 0;
-                available = m_iDofCount;
-            }
-
-            char* destination = (char*)m_kBlocks.m_data[blockIndex] + m_offset;
-
-            if (iSize > available)
-            {
-                FUN_00cb1260(destination, pcData, available);
-                pcData += available;
-                iSize -= available;
-                m_offset = m_iDofCount;
-            }
-            else
-            {
-                FUN_00cb1260(destination, pcData, iSize);
-                m_offset += iSize;
-                return;
-            }
-        } while (iSize > 0);
-    }
-}
-
 void __cdecl FUN_00c908c0(hkMemoryAllocatorD469* heap, void* array, int numElements, int sizeOfElement);
 void __cdecl FUN_00cb1260(void* dst, const void* src, int nbytes);
 
@@ -911,31 +745,4 @@ struct V46a50List
     void FreeAllChunks();
 };
 
-// Processes each stored element with doElem and heap v08, then releases the array buffer and resets the list.
-// @fnv 0x00d46a50
-void V46a50Owner::FUN_00d46a50(V46a50List* apList)
-{
-    int n = apList->m_iElementCount;
-    for (int i = 0; i < n - 1; i++)
-    {
-        V46a50Elem* e = apList->m_data[i];
-        doElem(e, apList->m0);
-        int k = apList->m0;
-        FUN_00c85750()->heap().v08(e, k);
-    }
-    if (n != 0)
-    {
-        V46a50Elem* e = apList->m_data[n - 1];
-        doElem(e, apList->m4);
-        int k = apList->m0;
-        FUN_00c85750()->heap().v08(e, k);
-    }
-    V46a50Alloc& a = FUN_00c85750()->heap();
-    apList->m_iElementCount = 0;
-    if ((apList->m_capFlags & 0x80000000) == 0)
-        a.ReturnMemory(apList->m_data, (apList->m_capFlags & 0x3fffffff) * sizeof(V46a50Elem*));
-    apList->m_data = 0;
-    apList->m_capFlags = 0x80000000;
-    apList->FreeAllChunks();
-}
 }  // namespace fnv_00d46a50

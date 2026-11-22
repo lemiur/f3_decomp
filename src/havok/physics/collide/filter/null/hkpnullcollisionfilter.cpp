@@ -20,16 +20,6 @@ struct FUN_00cfa860
     ~FUN_00cfa860();
 };
 
-// @fnv 0x00cfa860
-FUN_00cfa860::~FUN_00cfa860()
-{
-    *(void**)((char*)this + 0x14) = &DAT_010c3b8c;
-    *(void**)((char*)this + 0x10) = &DAT_010c3bac;
-    *(void**)((char*)this + 0x0c) = &DAT_010c3b98;
-    *(void**)((char*)this + 0x08) = &DAT_010c3b80;
-    *(void**)((char*)this + 0x00) = &DAT_0102e388;
-}
-
 extern "C" unsigned __int64 __rdtsc(void);
 #include <xmmintrin.h>
 struct __declspec(align(16)) S_00cfab30_vec

@@ -258,38 +258,3 @@ struct S_00dd9660_Handler
 
     S_00dd9660_Bool ReadCommands(S_00dd9660_IArchive* stream);
 };
-
-// @fnv 0x00dd9660
-S_00dd9660_Bool S_00dd9660_Handler::ReadCommands(S_00dd9660_IArchive* stream)
-{
-    hkUint8 command;
-    do
-    {
-        command = stream->read8u();
-        if (command != 0xf0)
-        {
-            S_00dd9660_Process* p;
-            if (m_kCommandMap.LookupBucketValue(command, &p) == 0 && p)
-            {
-                p->ExecuteCommand(command);
-            }
-            else
-            {
-                S_00dd9660_Vector4 v;
-                if (command == 0xb0)
-                {
-                    stream->FUN_00ddac60(v);
-                    hkUint64 id = stream->read64u();
-                }
-                else if (command == 0xb1)
-                {
-                    stream->FUN_00ddac60(v);
-                }
-                S_00dd9660_StringBuf buf;
-                buf.clear();
-                buf.FUN_00d61d00("VDB: Found a command (%x) with no handler. Could corrupt the stream.", command);
-            }
-        }
-    } while (stream->GetStreamResult() && command != 0xf0);
-    return true;
-}

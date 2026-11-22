@@ -71,20 +71,6 @@ struct FUN_00d74420_Context
 
 int FUN_00d739f0(int a1, int a2, FUN_00d74420_Context* ctx, int a3);
 
-// @fnv 0x00d74420
-int RunContextOperation(int aiArg1, int aiArg2, int aiArg3, int* piOut)
-{
-    FUN_00d74420_Context ctx;
-    ctx.m_kPointA = 0;
-    ctx.m_kPointB = 0;
-    ctx.m_iThirdValue = 0x80000000;
-    ctx.FUN_00d738f0(aiArg1);
-    ctx.FUN_00d74a20();
-    *piOut = FUN_00d739f0(aiArg1, aiArg2, &ctx, aiArg3);
-    ctx.FUN_00d74aa0();
-    return 0;
-}
-
 class hkMemoryAllocatorD748
 {
   public:
@@ -153,15 +139,6 @@ template <class T> class hkArrayD748
 class hkpEntityD748;
 
 int __cdecl RemapCollisionShapes(hkArrayD748<hkpEntityD748*>& kEntities, int iA, int iB) throw();
-
-// Appends pkEntity to a local hkArrayD748 and forwards it with iA and iB to RemapCollisionShapes, returning its result.
-// @fnv 0x00d748d0
-int __cdecl FUN_00d748d0(hkpEntityD748* pkEntity, int iA, int iB) throw()
-{
-    hkArrayD748<hkpEntityD748*> kEntities;
-    kEntities.AddBack(pkEntity);
-    return RemapCollisionShapes(kEntities, iA, iB);
-}
 
 struct D749Entry
 {
@@ -1177,66 +1154,6 @@ struct hkpTransformShape : hkpShape
         return m_kMotionTransform;
     }
 };
-
-// Applies a transform to a shape, collapsing identity results to the child shape or creating a new transform/convex shape wrapper.
-// @fnv 0x00d73590
-const hkpShape* __cdecl FUN_00d73590(const hkpShape* shape, const hkTransform& transform) throw()
-{
-    if (transform.IsEqualWithinTolerance(hkTransform::GetIdentityTransform(), 0.001f))
-    {
-        shape->FUN_00c90510();
-        return shape;
-    }
-
-    switch (shape->getType())
-    {
-    case HK_SHAPE_TRANSFORM: {
-        const hkpTransformShape* pTransformShape = static_cast<const hkpTransformShape*>(shape);
-        hkTransform combined;
-        combined.SetProduct(transform, pTransformShape->getTransform());
-        if (combined.IsEqualWithinTolerance(hkTransform::GetIdentityTransform(), 0.001f))
-        {
-            const hkpShape* child = pTransformShape->GetShapeForKey();
-            child->FUN_00c90510();
-            return child;
-        }
-        return new hkpTransformShape(pTransformShape->GetShapeForKey(), combined);
-    }
-    case HK_SHAPE_CONVEX_TRANSFORM: {
-        const hkpConvexTransformShape* cts = static_cast<const hkpConvexTransformShape*>(shape);
-        hkTransform combined;
-        combined.SetProduct(transform, cts->getTransform());
-        if (combined.IsEqualWithinTolerance(hkTransform::GetIdentityTransform(), 0.001f))
-        {
-            const hkpShape* child = cts->GetShapeForKey();
-            child->FUN_00c90510();
-            return child;
-        }
-        return new hkpConvexTransformShape(cts->GetShapeForKey(), combined);
-    }
-    case HK_SHAPE_CONVEX_TRANSLATE: {
-        if (transform.getRotation().IsEqualWithinTolerance(hkTransform::GetIdentityTransform().getRotation(), 0.001f))
-        {
-            const hkpConvexTranslateShape* cts = static_cast<const hkpConvexTranslateShape*>(shape);
-            hkTransform local;
-            local.getRotation().setIdentity();
-            local.setTranslation(cts->getTranslation());
-            hkTransform combined;
-            combined.SetProduct(transform, local);
-            if (combined.IsEqualWithinTolerance(hkTransform::GetIdentityTransform(), 0.001f))
-            {
-                const hkpShape* child = cts->GetShapeForKey();
-                child->FUN_00c90510();
-                return child;
-            }
-            return new hkpConvexTranslateShape(cts->GetShapeForKey(), cts->getTranslation());
-        }
-        break;
-    }
-    }
-
-    return new hkpTransformShape(shape, transform);
-}
 
 template <class T> class hkArrayD74
 {

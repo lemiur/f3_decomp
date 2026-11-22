@@ -212,20 +212,6 @@ struct FUN_00d61260_Router
 
 FUN_00d61260_Router* __cdecl _D1A0E0GetMemoryRouter();
 
-// @fnv 0x00d61260
-void* FUN_00d61260_Class::FUN_00d61260(int flags)
-{
-    FUN_00d610e0();
-
-    if (flags & 1)
-    {
-        FUN_00d61260_Router* router = _D1A0E0GetMemoryRouter();
-        router->m_pMemoryManager->Deallocate(this, m_iElementCount);
-    }
-
-    return this;
-}
-
 extern int DAT_01268fb8;
 
 // @fnv 0x00d61210
@@ -606,13 +592,6 @@ class FUN_00dd9cc0 : public hkReferencedObjectDD9C, public hkListenerBaseDD9C
     virtual ~FUN_00dd9cc0() throw();
 };
 
-// Stores pvOwner and allocates a FUN_00cf6da0 with capacity 1000 into the second member.
-// @fnv 0x00dd9cc0
-FUN_00dd9cc0::FUN_00dd9cc0(void* pvOwner) throw()
-{
-    m_pOwnerObject = pvOwner;
-    m_kNodePool = new FUN_00cf6da0(1000);
-}
 }  // namespace fnv_00dd9cc0
 
 template <int SIZE> __forceinline void memCpyOneAlignedD60E(void* dst, const void* src)
@@ -1062,15 +1041,4 @@ struct FUN_00d60f30 : RefObject, ListenerB, ListenerC
     virtual void ListenerC_v0();
 };
 
-// Calls m_pOwnerObject.ProcessInputData(this), copies arr to m_arr44, conditionally constructs two objects, then constructs a child and assigns m_kListener.
-// @fnv 0x00d60f30
-FUN_00d60f30::FUN_00d60f30(const PtrArray& apArray, void* first, void* second)
-{
-    m_pOwnerObject.ProcessInputData(this);
-    m_arr44 = apArray;
-    m_pHeadNode = first ? new FUN_00ddabe0(first) : 0;
-    m_iSecondInteger = second ? new FUN_00dda6e0(second) : 0;
-    m_pChildAtom = new FUN_00dd9cc0(m_iSecondInteger);
-    m_kListener = this;
-}
 }  // namespace fnv_00d60f30

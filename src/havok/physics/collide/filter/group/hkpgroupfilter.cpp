@@ -21,16 +21,6 @@ struct FUN_00e48a80_struct
     void InitGroupFilterPointers();
 };
 
-// @fnv 0x00e48a80
-void FUN_00e48a80_struct::InitGroupFilterPointers()
-{
-    p5 = &DAT_010c3b8c;
-    p4 = &DAT_010c3bac;
-    p3 = &DAT_010c3b98;
-    p2 = &DAT_010c3b80;
-    p0 = &DAT_0102e388;
-}
-
 struct FUN_00e48970_struct
 {
     void ClearMaskedBits(unsigned int, unsigned int);
@@ -77,15 +67,6 @@ struct FUN_00e48b60_class
 {
     int* FUN_00e48b60(int* value, FUN_00e48b60_arg1* arg1, FUN_00e48b60_arg2* arg2);
 };
-
-// Calls ShouldCollide on the object 0x14 bytes before this, passing value, arg1->value_24 and arg2->value_1c, then returns value.
-// @fnv 0x00e48b60
-int* FUN_00e48b60_class::FUN_00e48b60(int* value, FUN_00e48b60_arg1* arg1, FUN_00e48b60_arg2* arg2)
-{
-    reinterpret_cast<FUN_00e48830_class*>(reinterpret_cast<char*>(this) - 0x14)
-        ->ShouldCollide(value, arg1->value_24, arg2->value_1c);
-    return value;
-}
 
 struct hkBoolRet
 {
@@ -146,17 +127,6 @@ struct FUN_00e488a0_class
                                  int input);
 };
 
-// Calls object->getValue(input), then forwards value and data->value20 with the result to ShouldCollide on the owner at this-16, returning value.
-// @fnv 0x00e488a0
-int* FUN_00e488a0_class::CallGetValueAndDispatch(int* value, FUN_00e488a0_data* data, int unused,
-                                                 FUN_00e488a0_object* object, int input)
-{
-    int result = object->getValue(input);
-    FUN_00e48830_class* owner = reinterpret_cast<FUN_00e48830_class*>(reinterpret_cast<char*>(this) - 16);
-    owner->ShouldCollide(value, data->value20, result);
-    return value;
-}
-
 class hkpGroupFilterE489
 {
   public:
@@ -196,15 +166,6 @@ struct FUN_00e48ab0_class
 {
     int* __thiscall FUN_00e48ab0(int* value, FUN_00e48ab0_value* arg2, FUN_00e48ab0_value* arg3);
 };
-
-// Calls ShouldCollide on the object at this-8, passing value and the value_1c fields of arg2 and arg3, then returns value.
-// @fnv 0x00e48ab0
-int* FUN_00e48ab0_class::FUN_00e48ab0(int* value, FUN_00e48ab0_value* pFirstValue, FUN_00e48ab0_value* pSecondValue)
-{
-    reinterpret_cast<FUN_00e48830_class*>(reinterpret_cast<char*>(this) - 8)
-        ->ShouldCollide(value, pFirstValue->value_1c, pSecondValue->value_1c);
-    return value;
-}
 
 struct hkBoolE48B
 {
@@ -333,60 +294,6 @@ class hkpGroupFilterE48B : public hkReferencedObject,
                                              hkUint32 uiBKey) const throw();
 };
 
-// Computes the collision filter info for both bodies, walking up the parent chain for alternate shape types, then tests the pair with ShouldCollide.
-// @fnv 0x00e48b90
-hkBoolE48B hkpGroupFilterE48B::ShapeCollectionFilter(const hkpCollisionInputE48B& kInput, const hkpCdBodyE48B& kA,
-                                                     const hkpCdBodyE48B& kB, const hkpShapeContainerE48B& kBContainer,
-                                                     hkUint32 uiBKey) const throw()
-{
-    hkUint32 uiInfoB = kBContainer.GetFilterInfoForKey(uiBKey);
-    if (uiInfoB == 0xffffffff)
-        uiInfoB = kB.getRootCollidable()->GetFilterInfoForKey();
-
-    hkUint32 uiInfoA;
-    if (kA.getParent() == 0)
-    {
-        uiInfoA = kA.getRootCollidable()->GetFilterInfoForKey();
-    }
-    else
-    {
-        const hkpCdBodyE48B* pkChild = &kA;
-        const hkpCdBodyE48B* pkParent = kA.getParent();
-        do
-        {
-            const int iType = pkParent->getShape()->m_type;
-            if (kInput.m_pCollisionDispatcher->hasAlternateType(iType, 7))
-            {
-                const hkpShapeCollectionE48B* pkCollection =
-                    static_cast<const hkpShapeCollectionE48B*>(pkParent->getShape());
-                uiInfoA = pkCollection->GetFilterInfoForKey(pkChild->getShapeKey());
-                goto done;
-            }
-            else if (kInput.m_pCollisionDispatcher->hasAlternateType(iType, 8))
-            {
-                hkpShapeBufferE48B kBuffer;
-                const hkpShapeContainerE48B* pkContainer = FUN_00d2d4b0(pkParent, kBuffer);
-                uiInfoA = pkContainer->GetFilterInfoForKey(pkChild->getShapeKey());
-                goto done;
-            }
-            else if (kInput.m_pCollisionDispatcher->hasAlternateType(iType, 21))
-            {
-                uiInfoA = kA.getRootCollidable()->GetFilterInfoForKey();
-                goto done;
-            }
-            else if (kInput.m_pCollisionDispatcher->hasAlternateType(iType, 22))
-            {
-                return true;
-            }
-            pkChild = pkParent;
-            pkParent = pkParent->getParent();
-        } while (pkParent);
-        uiInfoA = static_cast<const hkpCollidableE48B*>(pkChild)->GetFilterInfoForKey();
-    }
-done:
-    return ShouldCollide(uiInfoA, uiInfoB);
-}
-
 class hkBoolE48
 {
   public:
@@ -470,21 +377,6 @@ class hkpGroupFilterE48 : public hkReferencedObjectE48,
                                    const hkpShapeContainerE48& containerShapeB, unsigned int keyA,
                                    unsigned int keyB) const;
 };
-// Resolves per-shape or root-collidable filter info for two shapes and returns whether they should collide via ShouldCollide.
-// @fnv 0x00e48ae0
-hkBoolE48 hkpGroupFilterE48::FUN_00e48ae0(const hkpCollisionInputE48& input, const hkpCdBodyE48& a,
-                                          const hkpCdBodyE48& b, const hkpShapeContainerE48& containerShapeA,
-                                          const hkpShapeContainerE48& containerShapeB, unsigned int keyA,
-                                          unsigned int keyB) const
-{
-    unsigned int infoA = containerShapeA.GetFilterInfoForKey(keyA);
-    if (infoA == USE_COLLIDABLE_FILTER_INFO)
-        infoA = a.getRootCollidable()->GetFilterInfoForKey();
-    unsigned int infoB = containerShapeB.GetFilterInfoForKey(keyB);
-    if (infoB == USE_COLLIDABLE_FILTER_INFO)
-        infoB = b.getRootCollidable()->GetFilterInfoForKey();
-    return ShouldCollide(infoA, infoB);
-}
 
 class GFilterE488 : public hkpGroupFilter
 {
@@ -660,12 +552,3 @@ struct Own_00e00c30 : A1_00e00c30, A2_00e00c30
 // @fnv 0x00e00c30
     void FUN_00e00c30();
 };
-Own_00e00c30::Own_00e00c30()
-{}
-void Own_00e00c30::key_fn()
-{}
-Own_00e00c30* make_00e00c30()
-{
-    static Own_00e00c30 o;
-    return &o;
-}

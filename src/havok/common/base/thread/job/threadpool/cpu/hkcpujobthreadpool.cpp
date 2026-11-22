@@ -6,22 +6,6 @@ struct FUN_00d2ced0
 {
     void PerformVoidOperation();
 };
-// @fnv 0x00d2ced0
-void FUN_00d2ced0::PerformVoidOperation()
-{
-    int i = 0;
-    if (*(int*)((char*)this + 0x130) > i)
-    {
-        char* p = (char*)this + 0x34;
-        do
-        {
-            *(int*)p = *(int*)(p - 4);
-            *(unsigned char*)(p - 0xb) = 1;
-            p += 0x30;
-            ++i;
-        } while (i < *(int*)((char*)this + 0x130));
-    }
-}
 
 struct FUN_00d2d330_shell
 {
@@ -30,28 +14,11 @@ struct FUN_00d2d330_shell
     void FUN_00d2d330(int desired);
 };
 
-// @fnv 0x00d2d330
-void FUN_00d2d330_shell::FUN_00d2d330(int desired)
-{
-    if (desired > 6)
-        desired = 6;
-    while (((int*)this)[0x130 / 4] < desired)
-        InitializeWorkerThread();
-    while (((int*)this)[0x130 / 4] > desired)
-        FUN_00d2ce50();
-}
-
 struct FUN_00d2ce30_shell
 {
     unsigned char m_ucValue;
     bool FUN_00d2ce30();
 };
-
-// @fnv 0x00d2ce30
-bool FUN_00d2ce30_shell::FUN_00d2ce30()
-{
-    return ((unsigned char*)this)[0x13c] != 0;
-}
 
 struct FUN_00d2ce90_class
 {
@@ -177,19 +144,6 @@ struct FUN_00d2d380
     const char* m1c;
     FUN_00d2d380();
 };
-// Initializes the object's fields with default values and sets m1c to the string "HavokWorkerThread".
-// @fnv 0x00d2d380
-FUN_00d2d380::FUN_00d2d380()
-{
-    m0 = 1;
-    m4 = 0x3d0900;
-    mC = 0;
-    m10 = 0;
-    m14 = 0;
-    m18 = 0x80000000;
-    m1c = "HavokWorkerThread";
-    m8 = 0;
-}
 
 struct FUN_00d2ce40_cls
 {
@@ -247,16 +201,6 @@ class hkObjd2d3b0 : public FUN_00d2cf00
     }
 };
 
-// Runs the base destructor and, when bit 0 of uiFlags is set, frees the object via operator delete; returns this.
-// @fnv 0x00d2d3b0
-hkObjd2d3b0* hkObjd2d3b0::DestroyIfFlagged(unsigned int uiFlags) throw()
-{
-    this->FUN_00d2cf00::~FUN_00d2cf00();
-    if (uiFlags & 1)
-        hkObjd2d3b0::operator delete(this);
-    return this;
-}
-
 struct hkBoolD2CD
 {
     char m_cBooleanValue;
@@ -288,16 +232,6 @@ class OwnerD2CD
 
     void FUN_00d2cde0(int value, int unused);
 };
-
-// Stores value in m_128, sets m_13C to true, and calls FUN_00d04390(1) on each element up to m_iCapacityFlags.
-// @fnv 0x00d2cde0
-void OwnerD2CD::FUN_00d2cde0(int value, int unused)
-{
-    m_128 = value;
-    m_13C = true;
-    for (int i = m_iCapacityFlags - 1; i >= 0; i--)
-        m_pElements[i].FUN_00d04390(1);
-}
 
 extern char DAT_010ce774;
 extern char DAT_0102e388;
@@ -346,35 +280,6 @@ struct ClsD2C : VBaseD2C, ArrBaseD2C
     void FUN_00d2ce90();
     void FUN_00d2cf00();
 };
-
-// @fnv 0x00d2cf00
-void ClsD2C::FUN_00d2cf00()
-{
-    *(void**)this = (void*)&DAT_010ce774;
-    FUN_00d2ce90();
-    for (int i = 0; i < m_uiItemCount; ++i)
-    {
-        ArrBaseD2C::m_threads[i].m_ucState = 1;
-        ArrBaseD2C::m_threads[i].m_evt.FUN_00d04390(1);
-    }
-    for (int j = 0; j < m_uiItemCount; ++j)
-    {
-        FUN_00d04380(&ArrBaseD2C::m_threads[5].m_pTail);
-    }
-    FUN_00c90410(0);
-    ArrBaseD2C::m_threads[5].m_pTail.FUN_00d04370();
-    int k = 5;
-    ArrBaseD2C* ab = static_cast<ArrBaseD2C*>(this);
-    ThreadObjD2C(*arr)[6] = &ab->m_threads;
-    ThreadObjD2C* th = &arr[0][6];
-    do
-    {
-        --th;
-        th->m_evt.FUN_00d04370();
-        th->FUN_00d87a70();
-    } while (--k >= 0);
-    *(void**)this = (void*)&DAT_0102e388;
-}
 
 namespace fnv_00d2d110 {
 struct SYSTEM_INFO_D2D1
@@ -481,42 +386,6 @@ class FUN_00d2d110 : public hkReferencedObjectD2D1
     FUN_00d2d110(const hkCpuJobThreadPoolCinfoD2D1& kCi);
 };
 
-// Initializes the thread pool by copying config, capping thread count, and spawning worker threads with hardware-affinity assignment.
-// @fnv 0x00d2d110
-FUN_00d2d110::FUN_00d2d110(const hkCpuJobThreadPoolCinfoD2D1& kCi)
-{
-    m_bFlag = false;
-    m_pName = kCi.m_pName;
-    m_iTimerBufferPerThreadAllocation = kCi.m_iTimerBufferPerThreadAllocation;
-    m_iStackSize = kCi.m_iStackSize;
-    m_iThirdValue = kCi.m_iThreadPriority;
-    int iNumThreads = kCi.m_iHardwareInfoValue;
-    if (iNumThreads > 6)
-        iNumThreads = 5;
-    m_iHardwareInfoValue = iNumThreads;
-
-    SYSTEM_INFO_D2D1 kSysInfo;
-    DAT_00fdf0f8(&kSysInfo);
-    int iNumCores = kSysInfo.dwNumberOfProcessors;
-
-    for (int i = 0; i < iNumThreads; i++)
-    {
-        FUN_00d2cda0& kData = m_kThreadData[i];
-        kData.m_sharedData = &m_kSharedData;
-        int iThreadId = i + 1;
-        kData.m_uiThreadId = iThreadId;
-        kData.m_pOffset28 = 0;
-        kData.m_pOffset2C = 0;
-        kData.m_ucState = false;
-        kData.m_bOffset21 = false;
-        if (kCi.m_numHardwareThreadIds > 0)
-            kData.m_iOffset1C = kCi.m_pHardwareThreadIds[i];
-        else
-            kData.m_iOffset1C = iThreadId % iNumCores;
-        kData.m_iThreadHandle.FUN_00d87940(CpuJobThreadMain, &kData, m_pName, m_iTimerBufferPerThreadAllocation);
-    }
-    FUN_00c90410(1);
-}
 }  // namespace fnv_00d2d110
 
 #include <xmmintrin.h>
@@ -635,50 +504,6 @@ struct hkCpuThreadDataD2
     char* m_pOffset2C;
 };
 
-// Initializes thread-local state and memory router, then loops processing job queues until the thread state flag is set.
-// @fnv 0x00d2cfb0
-void* __cdecl CpuJobThreadMain(void* apThreadData)
-{
-    hkCpuThreadDataD2& threadData = *static_cast<hkCpuThreadDataD2*>(apThreadData);
-    hkCpuJobThreadPoolD2* threadPool = threadData.m_threadPool;
-
-    DAT_012687c8.setData(threadData.m_threadNumber);
-    _mm_setcsr(_mm_getcsr() | 0x8000);
-    SetThreadIdealProcessor(GetCurrentThread(), threadData.m_iOffset1C);
-
-    hkMemoryRouterD2 memoryRouter;
-    FUN_00cbbfc0()->InitializeThreadRouter(memoryRouter, "hkCpuJobThreadPool", hkMemorySystemFlagsD2(3));
-    FUN_00cbb930(&memoryRouter);
-
-    if (threadPool->m_iThreadPriority > 0)
-    {
-        hkMonitorStreamD2* pStream = DAT_0126835c.getData();
-        ResizeBuffer(pStream, threadPool->m_iThreadPriority);
-    }
-    threadData.m_pOffset28 = DAT_0126835c.getData()->GetStreamStart();
-    threadData.m_pOffset2C = DAT_0126835c.getData()->GetStreamEnd();
-
-    FUN_00d04380(&threadData.m_pCompletionSemaphore);
-    while (!threadData.m_ucState)
-    {
-        if (threadData.m_bOffset21)
-        {
-            FUN_00cb0da0(DAT_0126835c.getData());
-            threadData.m_pOffset2C = DAT_0126835c.getData()->GetStreamEnd();
-            threadData.m_bOffset21 = false;
-        }
-        threadPool->m_kQueues->FUN_00d051b0();
-        threadData.m_pOffset2C = DAT_0126835c.getData()->GetStreamEnd();
-        threadPool->m_kWorkerSemaphore.FUN_00d04390(1);
-        FUN_00d04380(&threadData.m_pCompletionSemaphore);
-    }
-
-    FUN_00cbb990();
-    FUN_00cbbfc0()->ThreadQuit(memoryRouter, hkMemorySystemFlagsD2(3));
-    threadPool->m_kWorkerSemaphore.FUN_00d04390(1);
-    return 0;
-}
-
 void __cdecl ResizeAudioStream(void* alloc, void* arr, int elemSize) throw();
 
 struct Pair_d2d2c0
@@ -734,31 +559,6 @@ struct Owner_d2d2c0
     void FUN_00d2d2c0(PairArray_d2d2c0* arr, void* alloc);
 };
 
-// @fnv 0x00d2d2c0
-void Owner_d2d2c0::FUN_00d2d2c0(PairArray_d2d2c0* apPairArray, void* alloc)
-{
-    int index = 0;
-    if (m_uiItemCount > 0)
-    {
-        int* source = &m_records[0].m_kPointB;
-        do
-        {
-            if (apPairArray->m_iElementCount == (apPairArray->m_iCapacityState & 0x3FFFFFFF))
-                ResizeAudioStream(alloc, apPairArray, 8);
-            int remaining = 1;
-            do
-            {
-                Pair_d2d2c0& pair = apPairArray->m_data[apPairArray->m_iElementCount];
-                ++apPairArray->m_iElementCount;
-                pair.m_kPointA = source[-1];
-                pair.m_kPointB = source[0];
-            } while (--remaining);
-            ++index;
-            source += 12;
-        } while (index < m_uiItemCount);
-    }
-}
-
 #include <windows.h>
 namespace fnv_00d2d240 {
 void __cdecl CpuJobThreadMain(void* pArg);
@@ -809,30 +609,6 @@ class hkCpuJobThreadPoolD2D
     void InitializeWorkerThread();
 };
 
-// Configures a WorkerThreadDataD2D entry with thread pool, ID, and processor affinity, then starts the worker thread via m_iThreadHandle.
-// @fnv 0x00d2d240
-void hkCpuJobThreadPoolD2D::InitializeWorkerThread()
-{
-    WorkerThreadDataD2D& data = m_kThreadData[m_iHardwareInfoValue];
-
-    data.m_threadPool = &m_threadPoolBase;
-    data.m_uiThreadId = m_iHardwareInfoValue + 1;
-    data.m_pOffset28 = 0;
-    data.m_pOffset2C = 0;
-    data.m_ucState = false;
-    data.m_clearTimerData = false;
-
-    SYSTEM_INFO sysInfo;
-    GetSystemInfo(&sysInfo);
-
-    int threadId = data.m_uiThreadId;
-    int processorCount = *(volatile int*)&sysInfo.dwNumberOfProcessors;
-    data.m_iOffset1C = threadId % processorCount;
-
-    data.m_iThreadHandle.FUN_00d87940(CpuJobThreadMain, &data, m_pName, m_iTimerBufferPerThreadAllocation);
-
-    m_iHardwareInfoValue++;
-}
 }  // namespace fnv_00d2d240
 
 struct WorkerThreadHandleD2

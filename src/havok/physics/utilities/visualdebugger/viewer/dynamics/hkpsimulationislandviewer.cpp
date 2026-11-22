@@ -94,13 +94,6 @@ struct S_00d65180_Obj : S_00d65180_RefObj, S_00d65180_Base2
     S_00d65180_Obj(void* arg) throw();
 };
 
-// Allocates and constructs an S_00d65180_Obj from arg, returning it as an S_00d65180_Base2 pointer.
-// @fnv 0x00d65180
-S_00d65180_Base2* FUN_00d65180(void* arg)
-{
-    return new S_00d65180_Obj(arg);
-}
-
 extern int g_D651E0Value;
 
 // @fnv 0x00d651e0
@@ -132,18 +125,6 @@ struct FUN_00d65220_Class
     void FUN_00d64ae0();
     FUN_00d65220_Class* FUN_00d65220(char flags);
 };
-// Calls FUN_00d64ae0, then if bit 0 of flags is set, notifies the service interface with this and unk04, and returns this.
-// @fnv 0x00d65220
-FUN_00d65220_Class* FUN_00d65220_Class::FUN_00d65220(char flags)
-{
-    FUN_00d64ae0();
-    if (flags & 1)
-    {
-        FUN_00d65220_Service* service = FUN_00c85750();
-        service->unk10->notify(this, unk04);
-    }
-    return this;
-}
 }  // namespace fnv_00d65220
 
 struct S_Elem2
@@ -463,15 +444,6 @@ struct Own_00d65210 : A1_00d65210, A2_00d65210
 // @fnv 0x00d65210
     void FUN_00d65210();
 };
-Own_00d65210::Own_00d65210()
-{}
-void Own_00d65210::key_fn()
-{}
-Own_00d65210* make_00d65210()
-{
-    static Own_00d65210 o;
-    return &o;
-}
 
 struct IslandRemovalCallback
 {

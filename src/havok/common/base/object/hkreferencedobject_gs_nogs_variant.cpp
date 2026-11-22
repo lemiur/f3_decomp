@@ -695,27 +695,7 @@ namespace hkSingletonC904 {
 extern FUN_00c90830* DAT_012681d4;
 }
 
-static inline void replaceInstanceC904(FUN_00c90830* p)
-{
-    if (hkSingletonC904::DAT_012681d4)
-        hkSingletonC904::DAT_012681d4->ReleaseReference();
-    hkSingletonC904::DAT_012681d4 = p;
-}
-
 // @fnv 0x00c90420
-void __cdecl FUN_00c90420(int value)
-{
-    if (!hkSingletonC904::DAT_012681d4)
-    {
-        FUN_00c90830* p = new FUN_00c90830();
-        p->m_08 = value;
-        replaceInstanceC904(p);
-    }
-    else
-    {
-        hkSingletonC904::DAT_012681d4->m_08 = value;
-    }
-}
 struct FUN_00c90510_class
 {
     void** m_pVTable;

@@ -53,16 +53,6 @@ struct FUN_00db7b40
     int unk14;
     FUN_00db7b40(int a, int b, int c);
 };
-// Initializes the object: sets unk06 to 1, stores a, b and c into unk0c, unk10 and unk08, and clears unk14.
-// @fnv 0x00db7b40
-FUN_00db7b40::FUN_00db7b40(int aiValue1, int aiValue2, int aiValue3)
-{
-    unk06 = 1;
-    unk0c = aiValue1;
-    unk10 = aiValue2;
-    unk14 = 0;
-    unk08 = aiValue3;
-}
 
 struct FUN_00db7b70_Array
 {
@@ -94,34 +84,6 @@ struct FUN_00db7b70_Class
 
 void* FUN_00c85750();
 void __cdecl FUN_00c908c0(void* mm, FUN_00db7b70_Array* arr, int count, int size);
-
-// Appends the null-terminated pointer list in unk0c to the array p, growing its capacity via the memory manager when needed.
-// @fnv 0x00db7b70
-void FUN_00db7b70_Class::AppendToArray(FUN_00db7b70_Array* apArray)
-{
-    this->EnsureInitialized();
-
-    int count = 0;
-    while (this->unk0c[count] != 0)
-        count++;
-
-    FUN_00c85750_Obj* tls = (FUN_00c85750_Obj*)FUN_00c85750();
-    void* memmgr = tls->unk10;
-    int oldCount = apArray->count;
-    int iCapacity = apArray->capacity;
-    int iNeeded = count + oldCount;
-    iCapacity &= 0x3fffffff;
-    if (iCapacity < iNeeded)
-    {
-        int iNewCapacity = (iNeeded >= iCapacity * 2) ? iNeeded : iCapacity * 2;
-        FUN_00c908c0(memmgr, apArray, iNewCapacity, 4);
-    }
-    apArray->count += count;
-
-    void** ppDest = apArray->data + oldCount;
-    for (int i = 0; this->unk0c[i] != 0; i++)
-        ppDest[i] = this->unk0c[i];
-}
 
 struct FnvCpu_FUN_00db7a70_CpuObject
 {

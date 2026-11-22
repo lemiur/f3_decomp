@@ -74,30 +74,6 @@ class FUN_00e43540_cls : public hkpVehicleDefaultAnalogDriverInput
     float FUN_00e43540(int a0, FUN_00e43540_Arg1* a1, FUN_00e43540_Arg2* a2, int a3);
 };
 
-// @fnv 0x00e43540
-float FUN_00e43540_cls::FUN_00e43540(int aiUnused, FUN_00e43540_Arg1* a1, FUN_00e43540_Arg2* a2, int aiUnused2)
-{
-    float v;
-    if (a1->unkcc != 0 && m_bAutoReverse != 0)
-    {
-        v = -a2->unk0c;
-    }
-    else
-    {
-        v = a2->unk0c;
-    }
-    if (m_bAutoReverse == 0 && a1->unkcc != 0)
-    {
-        return 1.0f;
-    }
-    if (v > 0.0f)
-    {
-        return 0.0f;
-    }
-    volatile float r = (float)(v * -1.0);
-    return r;
-}
-
 struct VehicleStatus
 {
     void* unk00;
@@ -236,16 +212,6 @@ class FUN_00e43680 : public hkpVehicleDriverInputE436
     virtual ~FUN_00e43680();
 };
 
-// Initializes the three hkReal members and the hkBool member to zero/false.
-// @fnv 0x00e43680
-FUN_00e43680::FUN_00e43680()
-{
-    m_fSlopeUp = 0.0f;
-    m_fDeadZone = 0.0f;
-    m_fSlopeDown = 0.0f;
-    m_bAutoReverse = false;
-}
-
 typedef char hkBool;
 typedef float hkReal;
 
@@ -271,29 +237,6 @@ struct AnalogDriverInput
     hkReal FUN_00e435a0(hkReal deltaTime, const hkpVehicleDriverInputAnalogStatus* status,
                         const hkpVehicleDriverInputFilteredInput* input, int wheel);
 };
-
-// Returns the input's filter value, negated if the status byte and m_bAutoReverse are both set, with negative results returned as 0.
-// @fnv 0x00e435a0
-hkReal AnalogDriverInput::FUN_00e435a0(hkReal deltaTime, const hkpVehicleDriverInputAnalogStatus* status,
-                                       const hkpVehicleDriverInputFilteredInput* input, int wheel)
-{
-    hkBool reversing = status->m_iGearCount;
-    hkReal v;
-    if (reversing && m_bAutoReverse)
-    {
-        v = -input->m_uiFilterValue;
-        if (!reversing)  // unreachable: keeps the flag live in a register
-            v = input->m_uiFilterValue;
-    }
-    else
-    {
-        v = input->m_uiFilterValue;
-    }
-
-    if (v < 0.0f)
-        return 0.0f;
-    return v;
-}
 
 class hkMemoryAllocatorE43A
 {
@@ -353,15 +296,6 @@ class hkCloneE43A : public hkRefObjE43A
     hkCloneE43A* FUN_00e43a60() const;
 };
 
-// Allocates a new hkCloneE43A, copies the current object into it, and returns the pointer to the copy.
-// @fnv 0x00e43a60
-hkCloneE43A* hkCloneE43A::FUN_00e43a60() const
-{
-    hkCloneE43A* p = new hkCloneE43A;
-    *p = *this;
-    return p;
-}
-
 #include <math.h>
 namespace fnv_00e436b0 {
 typedef float hkReal;
@@ -373,11 +307,6 @@ struct AnalogStatus
     hkReal m_fPositionX;
     hkReal m_fPositionY;
 };
-
-inline hkReal hkFabs(hkReal r)
-{
-    return (hkReal)fabs(r);
-}
 
 class AnalogDriverInput
 {
@@ -392,25 +321,6 @@ class AnalogDriverInput
     hkReal GetOutput(hkReal deltaTime, const void* vehicle, const AnalogStatus* status, void* out) const;
 };
 
-// Computes a signed analog output value from the input position using the dead-zone and slope parameters.
-// @fnv 0x00e436b0
-hkReal AnalogDriverInput::GetOutput(hkReal deltaTime, const void* vehicle, const AnalogStatus* status, void* out) const
-{
-    const hkReal x = status->m_fPositionX;
-    const hkReal fAbsPositionX = hkFabs(x);
-    if (fAbsPositionX < m_fSlopeDown)
-        return 0.0f;
-    const hkReal sign = (x > 0.0f) ? 1.0f : -1.0f;
-    if (fAbsPositionX < m_fSlopeUp)
-    {
-        const hkReal v = (fAbsPositionX - m_fSlopeDown) * m_fDeadZone;
-        return v * sign;
-    }
-    const hkReal changeY = (m_fSlopeUp - m_fSlopeDown) * m_fDeadZone;
-    const hkReal secondSlope = (1.0f - changeY) / ((1.0f - m_fSlopeDown) - (m_fSlopeUp - m_fSlopeDown));
-    const hkReal v = changeY + (fAbsPositionX - m_fSlopeUp) * secondSlope;
-    return v * sign;
-}
 }  // namespace fnv_00e436b0
 
 struct __declspec(intrin_type) __declspec(align(16)) __m128
@@ -500,109 +410,10 @@ struct InputX
     ButtonResult m_flag;
 };
 
-static __forceinline ButtonResult makeBtn(unsigned char v)
-{
-    ButtonResult r;
-    r.value = v;
-    return r;
-}
-
-static __forceinline __m128 sqrtInv(__m128 x)
-{
-    __m128 r = _mm_rsqrt_ss(x);
-    __m128 nr = _mm_mul_ss(_mm_mul_ss(_mm_set_ss(DAT_01016248), r),
-                           _mm_sub_ss(_mm_set_ss(DAT_01017718), _mm_mul_ss(_mm_mul_ss(x, r), r)));
-    return _mm_andnot_ps(_mm_cmpeq_ss(x, _mm_set_ss(DAT_01011d78)), nr);
-}
-
-static __forceinline __m128 reduce3(__m128 m)
-{
-    __m128 s = _mm_shuffle_ps(m, m, 0x55);
-    s = _mm_add_ss(s, m);
-    __m128 t = _mm_shuffle_ps(m, m, 0xaa);
-    return _mm_add_ss(t, s);
-}
-
-static __forceinline __m128 rotateDir(VehInst* veh, const HkVec& bodyPos)
-{
-    HkVec col0 = veh->m_kColumn0;
-    HkVec col1 = veh->m_kColumn1;
-    HkVec col2 = veh->m_kColumn2;
-
-    __m128 v = _mm_load_ps(&bodyPos.x);
-    __m128 r0 = _mm_load_ps(&col0.x);
-    __m128 q = _mm_mul_ps(_mm_shuffle_ps(v, v, 0x55), _mm_load_ps(&col1.x));
-    q = _mm_add_ps(q, _mm_mul_ps(_mm_shuffle_ps(v, v, 0x00), r0));
-    __m128 z = _mm_mul_ps(_mm_shuffle_ps(v, v, 0xaa), _mm_load_ps(&col2.x));
-    return _mm_add_ps(q, z);
-}
-
 class Cls : public hkpVehicleDefaultAnalogDriverInput
 {
   public:
     ButtonResult FUN_00e43780(int a1, StatusX* status, InputX* input, int a4);
 };
 
-// Returns input->m_flag unless m_bAutoReverse is set, then picks a ButtonResult from the gear flag, filter value, a vector length and a normalized dot product.
-// @fnv 0x00e43780
-ButtonResult Cls::FUN_00e43780(int a1, StatusX* status, InputX* input, int a4)
-{
-    if (!m_bAutoReverse)
-    {
-        return input->m_flag;
-    }
-
-    VehInst* veh = status->m_veh;
-    HkVec pos = veh->m_pos;
-    hkBool bReverse = status->m_iGearCount;
-
-    float len;
-    _mm_store_ss(&len, _mm_sqrt_ss(reduce3(_mm_mul_ps(pos.quad(), pos.quad()))));
-
-    bool bLess = len < DAT_010ebf10;
-
-    unsigned char res;
-    if (input->m_uiFilterValue > DAT_0101ffa0)
-    {
-        res = 1;
-        if (len > DAT_0104da4c)
-        {
-            HkVec bodyPos = status->m_pChassisCollidable->m_pos;
-            __m128 q = rotateDir(veh, bodyPos);
-
-            __m128 invP = sqrtInv(reduce3(_mm_mul_ps(pos.quad(), pos.quad())));
-            __m128 invQ = sqrtInv(reduce3(_mm_mul_ps(q, q)));
-            __m128 np = _mm_mul_ps(_mm_shuffle_ps(invP, invP, 0), pos.quad());
-            __m128 nq = _mm_mul_ps(_mm_shuffle_ps(invQ, invQ, 0), q);
-            float fDot;
-            _mm_store_ss(&fDot, reduce3(_mm_mul_ps(nq, np)));
-
-            if (fDot < DAT_0104da4c)
-            {
-                return makeBtn(1);
-            }
-        }
-    }
-    else
-    {
-        res = 0;
-    }
-
-    if (bReverse)
-    {
-        if (bLess)
-        {
-            return makeBtn(res);
-        }
-        return makeBtn(1);
-    }
-    else
-    {
-        if (bLess && res)
-        {
-            return makeBtn(1);
-        }
-        return makeBtn(0);
-    }
-}
 }

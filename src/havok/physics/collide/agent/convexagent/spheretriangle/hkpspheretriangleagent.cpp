@@ -241,13 +241,6 @@ struct hkVector4q
     }
 };
 
-template <typename T> __forceinline void hkSwap(T& a, T& b)
-{
-    T t = a;
-    a = b;
-    b = t;
-}
-
 struct NibblePair
 {
     unsigned char lo : 4;
@@ -298,58 +291,6 @@ class ParticleSystemOps
     void FUN_00d3dd90(int a, int b, int c, ParticleSystemState* state);
     void FUN_00d3e150(int a1, int a2, int a3, ParticleSystemState* s);
 };
-
-// After FUN_00d3dd90, adds each new particle's w-scaled velocity to its first vector and flips its sign; if m_3030 changed, swaps several info fields.
-// @fnv 0x00d3e150
-void ParticleSystemOps::FUN_00d3e150(int a1, int a2, int a3, ParticleSystemState* s)
-{
-    float x;
-    x = s->m_3030;
-    SpawnedParticle* t;
-    t = s->m_kRayEnd;
-    this->FUN_00d3dd90(a2, a1, a3, s);
-    for (; t < s->m_kRayEnd; t++)
-    {
-        hkVector4q pObj;
-        pObj.setBroadcast3(t->m_fVelocity);
-        t->m_vContactPosition.addMul4(pObj, t->m_fVelocity);
-        t->m_fVelocity.setXor4(t->m_fVelocity, DAT_010c4c00);
-    }
-    if (x != s->m_3030)
-    {
-        hkVector4q* v3020;
-        v3020 = &s->m_3020;
-        v3020->xor4(DAT_010c4c00);
-        ParticleSystemState::Info* p;
-        p = &s->m_info;
-        char val;
-        val = p->m_304a.lo;
-        p->m_304a.lo = p->m_304a.hi;
-        p->m_304a.hi = val;
-        unsigned char* bytes;
-        bytes = (unsigned char*)&p->m_3048;
-        unsigned char res;
-        res = bytes[0];
-        unsigned char j;
-        j = p->m_3049;
-        bytes[1] = res;
-        unsigned int uiIndex;
-        uiIndex = (unsigned int)j + (unsigned int)res - 1;
-        bytes[0] = j;
-        unsigned short* z;
-        z = &p->m_3040;
-        unsigned int a;
-        a = z[0];
-        z[0] = z[uiIndex];
-        z[uiIndex] = a;
-        unsigned char* last;
-        last = (unsigned char*)&p->m_3049;
-        if ((last[-1] & last[0]) == 2)
-        {
-            hkSwap(p->m_3042, p->m_3044);
-        }
-    }
-}
 
 typedef unsigned long DWORD;
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(DWORD);

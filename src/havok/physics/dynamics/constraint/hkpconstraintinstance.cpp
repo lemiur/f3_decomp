@@ -15,12 +15,6 @@ struct FUN_00cf3d90_class
     void FUN_00cf3d90();
 };
 
-// @fnv 0x00cf3d90
-void FUN_00cf3d90_class::FUN_00cf3d90()
-{
-    EnableConstraintsAndZeroArrays(this, m2);
-}
-
 struct FUN_00cf3070_class
 {
     void* m0;
@@ -74,14 +68,6 @@ struct FUN_00cf3070_class
     void* m30;
     void SetActive(bool);
 };
-// @fnv 0x00cf3070
-void FUN_00cf3070_class::SetActive(bool active)
-{
-    *(char*)((char*)this + 0x1c) = active;
-    void* p = *(void**)((char*)this + 0x30);
-    if (p)
-        *(char*)((char*)p + 0x13) = active;
-}
 
 void __cdecl FUN_00cb3dd0(void* a, void* b, int c);
 struct FUN_00cf3090_class
@@ -101,11 +87,6 @@ void FUN_00cf3090_class::FUN_00cf3090(void* arg)
 }
 
 void __cdecl FUN_00cdff60(void*, void*);
-// @fnv 0x00cf3da0
-void __fastcall FUN_00cf3da0(void* self, int)
-{
-    FUN_00cdff60(self, *(void**)((char*)self + 8));
-}
 
 struct DDCC60World
 {
@@ -125,15 +106,6 @@ struct FUN_00cf3000_class
     void* m5;
     void ReplaceReference(void* arg1, void* arg2);
 };
-// @fnv 0x00cf3000
-void FUN_00cf3000_class::ReplaceReference(void* apOldRef, void* apNewRef)
-{
-    int idx = (apOldRef != m5) ? 1 : 0;
-    ((RefObj*)apNewRef)->RetainReference();
-    if (apOldRef)
-        ((DDCC60World*)apOldRef)->removeReference();
-    (&m5)[idx] = apNewRef;
-}
 
 namespace fnv_00cf3040 {
 struct DDCC60World
@@ -263,12 +235,6 @@ class FUN_00cf2fb0_cls
     hkBoolCF2F FUN_00cf2fb0() const;
 };
 
-// @fnv 0x00cf2fb0
-hkBoolCF2F FUN_00cf2fb0_cls::FUN_00cf2fb0() const
-{
-    return m_pOwnerObject == 0 || (m_link->m_inner && m_pOwnerObject == m_link->m_inner->m_pOwnerObject);
-}
-
 namespace fnv_00cf2fe0 {
 struct hkBoolCF2F
 {
@@ -289,11 +255,6 @@ class FUN_00cf2fe0_cls
     hkBoolCF2F FUN_00cf2fe0() const;
 };
 
-// @fnv 0x00cf2fe0
-hkBoolCF2F FUN_00cf2fe0_cls::FUN_00cf2fe0() const
-{
-    return FindModifierConstraintAtom(this, 0x1b) == 0;
-}
 }  // namespace fnv_00cf2fe0
 
 class hkObjCF30
@@ -315,13 +276,6 @@ class hkObjCF30
 
     void FUN_00cf30b0(void* pv);
 };
-
-// Finds pv in m_items via indexOf and sets that slot to null.
-// @fnv 0x00cf30b0
-void hkObjCF30::FUN_00cf30b0(void* apItem)
-{
-    m_items[indexOf(apItem)] = 0;
-}
 
 struct hkVector4CF3D
 {
@@ -372,15 +326,6 @@ class hkpPairCF3D
 
     int FUN_00cf3dd0() const;
 };
-
-// @fnv 0x00cf3dd0
-int hkpPairCF3D::FUN_00cf3dd0() const
-{
-    const hkpEntityCF3D* pkEntity = m_pEntityA;
-    if (pkEntity->m_bFlag != 5)
-        return pkEntity->m_cc;
-    return m_pEntityB->m_cc;
-}
 
 struct hkAllocatorCF3F
 {
@@ -450,40 +395,6 @@ class hkpConstraintInstanceCF3F : public hkpConstraintInstance
     }
     hkpConstraintInstance* FUN_00cf3fa0(hkpEntity* pkEntityA, hkpEntity* pkEntityB, int eMode) const throw();
 };
-
-// Creates a new constraint instance from this one according to eMode, copying the name and returning the new instance.
-// @fnv 0x00cf3fa0
-hkpConstraintInstance* hkpConstraintInstanceCF3F::FUN_00cf3fa0(hkpEntity* pkEntityA, hkpEntity* pkEntityB,
-                                                               int eCloneMode) const throw()
-{
-    hkpConstraintInstance* pkInstance;
-    if (eCloneMode == CLONE_INSTANCES_ONLY)
-    {
-        if (FUN_00cf2fb0().m_bValue)
-        {
-            hkpConstraintData* pkData = FUN_00d85700(getData());
-            pkInstance = new FUN_00cf3ea0(pkEntityA, 0, pkData, getPriority());
-            pkData->removeReference();
-        }
-        else
-            pkInstance = new FUN_00cf3ea0(pkEntityA, pkEntityB, getData(), getPriority());
-    }
-    else if (eCloneMode == CLONE_DATAS_WITH_MOTORS)
-    {
-        hkpConstraintData* pkData = FUN_00d858f0(getData());
-        if (!pkData)
-        {
-            pkData = getData();
-            pkData->FUN_00c90510();
-        }
-        pkInstance = new FUN_00cf3ea0(pkEntityA, pkEntityB, pkData, getPriority());
-        pkData->removeReference();
-    }
-    else
-        pkInstance = new FUN_00cf3ea0(pkEntityA, pkEntityB, getData(), getPriority());
-    ((FUN_00cb0c10_s*)&pkInstance->m_name)->FUN_00cb0c10((const char*)((hkUlong)m_name & ~1));
-    return pkInstance;
-}
 
 namespace fnv_00cf40b0 {
 extern void* DAT_010cc040;
@@ -609,15 +520,6 @@ class FUN_00cf40b0
     FUN_00cf40b0* FUN_00cf4160(unsigned int uiFlags) throw();
 };
 
-// Destructs the object, then frees it via operator delete when uiFlags has bit 0 set, and returns this.
-// @fnv 0x00cf4160
-FUN_00cf40b0* FUN_00cf40b0::FUN_00cf4160(unsigned int uiFlags) throw()
-{
-    this->FUN_00cf40b0::~FUN_00cf40b0();
-    if (uiFlags & 1)
-        FUN_00cf40b0::operator delete(this);
-    return this;
-}
 }  // namespace fnv_00cf4160
 
 struct hkpModifierConstraintAtom
@@ -702,13 +604,6 @@ struct S00cf3df0_Obj
     void Add(void* a);
 };
 
-// Adds the given pointer to the m_l array by calling m_l.put.
-// @fnv 0x00cf3df0
-void S00cf3df0_Obj::Add(void* apItem)
-{
-    m_l.put(apItem);
-}
-
 typedef union __declspec(intrin_type) __declspec(align(16)) __m128
 {
     float m128_f32[4];
@@ -789,123 +684,9 @@ struct CInstance
     CBoolean FUN_00cf2fb0();
     void FUN_00cf30f0(Matrix4f*);
 };
-static __forceinline void point(CVector& v, Matrix4f* t)
-{
-    v.FUN_00c7f640(t, &v);
-}
-static __forceinline void rotate(CVector& v, Matrix4f* t)
-{
-    v.FUN_00c7f700(t, &v);
-}
 static __forceinline CVector getVector(const CVector& s)
 {
     return s;
-}
-static __forceinline void copyTransform(Matrix4f& d, const Matrix4f& s)
-{
-    CVector c0 = s.c0, c1 = s.c1, c2 = s.c2, c3 = s.c3;
-    d.c0.m = c0.m;
-    d.c1.m = c1.m;
-    d.c2.m = c2.m;
-    d.c3.m = c3.m;
-}
-
-// Applies the given Matrix4f transform to the constraint data referenced by this instance, dispatching on the constraint type.
-// @fnv 0x00cf30f0
-void CInstance::FUN_00cf30f0(Matrix4f* apTransform)
-{
-    if (!FUN_00cf2fb0())
-        return;
-    ConstraintReference* p = data;
-    for (;;)
-        switch (p->getType())
-        {
-        case 12:
-            p = p->child18;
-            break;
-        case 13:
-            p = p->FUN_00cdf6c0();
-            break;
-        case 0:
-            point(p->a.c1, apTransform);
-            p->FUN_00d541b0(&p->a.c0, &p->a.c1);
-            return;
-        case 1: {
-            Matrix4f a, b;
-            copyTransform(a, p->a);
-            copyTransform(b, p->b);
-            CVector ax = a.c0, bx = b.c0;
-            point(b.c3, apTransform);
-            rotate(bx, apTransform);
-            p->FUN_00cbe400(&a.c3, &b.c3, &ax, &bx);
-            return;
-        }
-        case 2: {
-            Matrix4f a, b;
-            copyTransform(a, p->a);
-            copyTransform(b, p->b);
-            CVector ax = a.c0, bx = b.c0, ay = a.c1, by = b.c1;
-            point(b.c3, apTransform);
-            rotate(bx, apTransform);
-            rotate(by, apTransform);
-            p->FUN_00cb8da0(&a.c3, &b.c3, &ax, &bx, &ay, &by);
-            return;
-        }
-        case 14: {
-            CPlaneData* __restrict q = (CPlaneData*)p;
-            CVector a = q->a.c3, b = q->position, axis = q->axes[q->axis];
-            point(b, apTransform);
-            rotate(axis, apTransform);
-            p->SetBasis(&a, &b, &axis);
-            return;
-        }
-        case 6: {
-            Matrix4f a, b;
-            copyTransform(a, p->a);
-            copyTransform(b, p->b);
-            CVector ap = a.c0, aa = a.c1, at = a.c3, bp = b.c0, ba = b.c1, bt = b.c3;
-            point(bt, apTransform);
-            rotate(bp, apTransform);
-            rotate(ba, apTransform);
-            p->FUN_00d4fba0(&at, &bt, &ap, &bp, &aa, &ba);
-            return;
-        }
-        case 7: {
-            Matrix4f a, b;
-            copyTransform(a, p->a);
-            copyTransform(b, p->b);
-            Matrix4f& ta = p->a;
-            Matrix4f& tb = p->b;
-            CVector& b1 = tb.c1;
-            point(b.c3, apTransform);
-            rotate(b1, apTransform);
-            rotate(tb.c0, apTransform);
-            p->FUN_00cded30(&a.c3, &b.c3, &ta.c1, &b1, &ta.c0, &tb.c0);
-            return;
-        }
-        case 8: {
-            CDirectData* q = (CDirectData*)p;
-            CVector axis = q->axis, position = q->position;
-            float value = q->value;
-            point(position, apTransform);
-            q->axis.m = axis.m;
-            q->position.m = position.m;
-            q->value = value;
-            return;
-        }
-        case 9: {
-            CVector a = p->a.c3, b = p->b.c3, ax = p->b.c0, ay = p->c.c3, by = p->d.c2;
-            point(b, apTransform);
-            CVector az = p->d.c3;
-            rotate(ax, apTransform);
-            rotate(by, apTransform);
-            rotate(az, apTransform);
-            p->FUN_00d4e960(&a, &b, &ay, &by, &ax, &az);
-            return;
-        }
-        default:
-            return;
-        }
 }
 
 extern "C"
@@ -936,20 +717,6 @@ class FUN_00cf3c90_cls
 
     void FUN_00cf3c90(ReceiverObj* first, ReceiverObj* second);
 };
-
-// Copies two vectors obtained from m_obj0C, then calls FUN_00c7f640 on first and second with m_target14->unk18 and m_target18->unk18 and the matching vector.
-// @fnv 0x00cf3c90
-void FUN_00cf3c90_cls::FUN_00cf3c90(ReceiverObj* apFirstReceiver, ReceiverObj* apSecondReceiver)
-{
-    __declspec(align(16)) hkVector4 vFirstVec;
-    *(__m128*)&vFirstVec = *(__m128*)GetDispatchTarget(m_obj0C);
-    __declspec(align(16)) hkVector4 vSecondVec;
-    *(__m128*)&vSecondVec = *(__m128*)GetShapeData(m_obj0C);
-
-    void* pSecondTargetPtr = m_target18->unk18;
-    apFirstReceiver->FUN_00c7f640(m_target14->unk18, &vFirstVec);
-    apSecondReceiver->FUN_00c7f640(pSecondTargetPtr, &vSecondVec);
-}
 
 union FUN_00cf3d00_Vec4
 {
@@ -1019,38 +786,6 @@ struct FUN_00cf3d00_class
     void SetVec4Pair(FUN_00cf3d00_Vec4* a, FUN_00cf3d00_Vec4* b);
 };
 
-// Stores a and b in unk20 and unk30 of the atom found by FindModifierConstraintAtom(this, 0x18), or of a new 0x40-byte buffer passed to FUN_00d27960.
-// @fnv 0x00cf3d00
-void FUN_00cf3d00_class::SetVec4Pair(FUN_00cf3d00_Vec4* a, FUN_00cf3d00_Vec4* b)
-{
-    FUN_00cf3d00_Alloc* pAtom = (FUN_00cf3d00_Alloc*)FindModifierConstraintAtom(this, 0x18);
-
-    if (pAtom != 0)
-    {
-        pAtom->unk20.m = a->m;
-        pAtom->unk30.m = b->m;
-        return;
-    }
-
-    FUN_00cf3d00_Holder* holder = (FUN_00cf3d00_Holder*)FUN_00c85750();
-    FUN_00cf3d00_Buf* buf = holder->m4->vf04(0x40);
-
-    if (buf != 0)
-    {
-        buf->unk00 = 0x18;
-        buf->unk10 = 0x40;
-    }
-    else
-    {
-        buf = 0;
-    }
-
-    buf->unk20.m = a->m;
-    buf->unk30.m = b->m;
-
-    FUN_00d27960(this, m2, buf);
-}
-
 extern char DAT_010cc040;
 
 struct CF3F40Member
@@ -1083,47 +818,12 @@ struct S00cf3f40_Obj
     S00cf3f40_Obj* FUN_00cf3f40(bool flag);
 };
 
-// Sets the vtable pointer, zeroes most fields, sets m_6 to 1, m_1c to flag, m_1d to 1, m_26 to 0x8000, m_34 to -16, and calls m_28.FUN_00cb0a60().
-// @fnv 0x00cf3f40
-S00cf3f40_Obj* S00cf3f40_Obj::FUN_00cf3f40(bool flag)
-{
-    int z = 0;
-    *(void* volatile*)&m_vptr = (void*)&DAT_010cc040;
-    m_10 = m_8 = z;
-    *(volatile short*)&m_6 = 1;
-    *(volatile unsigned char*)&m_1c = flag;
-    *(volatile unsigned char*)&m_1d = 1;
-    *(volatile unsigned char*)&m_1e = z;
-    _ReadWriteBarrier();
-    *(volatile int*)&m_20 = z;
-    m_24 = 0;
-    m_26 = 0x8000;
-    m_28.FUN_00cb0a60();
-    m_2c = z;
-    m_30 = z;
-    m_34 = -16;
-    return this;
-}
-
 struct ConstraintEnabledDispatch : public hkpConstraintInstance
 {
     void FUN_00cf3d90();
     void FUN_00cf3da0();
     void FUN_00cf3db0(hkBool enabled);
 };
-
-// @fnv 0x00cf3db0
-void ConstraintEnabledDispatch::FUN_00cf3db0(hkBool enabled)
-{
-    if (enabled)
-    {
-        FUN_00cf3d90();
-    }
-    else
-    {
-        FUN_00cf3da0();
-    }
-}
 
 // @f3 0x004fed10 (community match, verified in this file)
 struct MemoryManager

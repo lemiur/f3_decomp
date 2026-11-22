@@ -45,15 +45,6 @@ struct FUN_00dee7d0_class
     DDCC60World* m_obj;
     void __thiscall Destroy();
 };
-// @fnv 0x00dee7d0
-void __thiscall FUN_00dee7d0_class::Destroy()
-{
-    DDCC60World* p = m_obj;
-    m_vft = &DAT_010da004;
-    if (p)
-        p->removeReference();
-    m_vft = &_DAT_0102e388;
-}
 
 // @fnv 0x00dee740
 int __cdecl FUN_00dee740()
@@ -260,14 +251,6 @@ class FUN_00dee750 : public hkpConstraintDataDEE7
     hkTransformDEE7 m_kLocalTransforms[2];
 };
 
-// @fnv 0x00dee750
-FUN_00dee750::FUN_00dee750() throw() : m_path(0), m_fFriction(0.0f), m_cOrientationConstraintType(1)
-{
-    m_kLocalTransforms[0].setIdentity();
-    m_kLocalTransforms[1].setIdentity();
-    m_kBridgeAtoms.m_kBridgeAtom.FUN_00d21ce0(this);
-}
-
 namespace fnv_00dee870 {
 union __declspec(intrin_type) __declspec(align(16)) __m128
 {
@@ -352,40 +335,6 @@ struct Obj_00dee870
     void FUN_00dee870(void* a1, void* a2, void* a3, void* a4, void* a5);
 };
 
-// Swaps m_18 to a4 (adding and releasing references), copies a5 into m_70, and builds m_30 from a1, a2, a3, a5 and a4's vt10, vt14 and vt24 results.
-// @fnv 0x00dee870
-void Obj_00dee870::FUN_00dee870(void* a1, void* a2, void* a3, void* a4, void* a5)
-{
-    Mat_00dee870 xform;
-    Mat_00dee870 tmpMat;
-    Vec_00dee870 v1;
-    Pair_00dee870 pair;
-    Mat_00dee870 basis;
-
-    if (a4)
-    {
-        FUN_00c90510(a4);
-    }
-    if (m_18)
-    {
-        FUN_00c905b0(m_18);
-    }
-    m_18 = (Solver_00dee870*)a4;
-    m_70.copyFrom(*(Mat_00dee870*)a5);
-    xform.FUN_00cb2240(a2, a5);
-    v1.FUN_00c7f690(&xform, a3);
-    float fTime = m_18->vt10(0.0f, &v1, &v1);
-    m_18->vt14(fTime, &pair.hi);
-    m_18->vt24(fTime, &pair.lo);
-    basis.c1.m_vComponents = pair.lo.m_vComponents;
-    basis.c0.m_vComponents = pair.hi.m_vComponents;
-    basis.c2.setCross(pair.lo, pair.hi);
-    basis.c3.m_vComponents = v1.m_vComponents;
-    tmpMat.FUN_00cb2240(a5, &basis);
-    xform.FUN_00cb2240(a2, &tmpMat);
-    pair.res.FUN_00cb22f0(a1, &xform);
-    m_30.copyFrom(pair.res);
-}
 }  // namespace fnv_00dee870
 
 namespace fnv_00deea00 {
@@ -508,25 +457,6 @@ class hkpPointToPathConstraintData : public hkpConstraintData
     hkpPointToPathAtoms m_kBridgeAtoms;
 };
 
-// Replaces the parametric curve path, updating reference counts, and sets the bridge atom local frame translations from the given pivots.
-// @fnv 0x00deea00
-void hkpPointToPathConstraintData::FUN_00deea00(const hkVector4& kPivotA, const hkVector4& kPivotB,
-                                                hkpParametricCurve* pkPath)
-{
-    if (pkPath)
-    {
-        pkPath->FUN_00c90510();
-    }
-    if (m_path)
-    {
-        m_path->FUN_00c905b0();
-    }
-    m_path = pkPath;
-    m_kBridgeAtoms.m_kTransforms.m_kBodyALocalFrame.setIdentity();
-    m_kBridgeAtoms.m_kTransforms.m_kBodyBLocalFrame.setIdentity();
-    m_kBridgeAtoms.m_kTransforms.m_kBodyALocalFrame.setTranslation(kPivotA);
-    m_kBridgeAtoms.m_kTransforms.m_kBodyBLocalFrame.setTranslation(kPivotB);
-}
 }
 }  // namespace fnv_00deea00
 
@@ -722,51 +652,6 @@ void __cdecl FUN_00dcf280(LinearRow* row, const QueryIn& in, QueryOut& out);
 void __cdecl FUN_00dcee80(AngularRow* row, const QueryIn& in, QueryOut& out);
 void __cdecl FUN_00dcfa30(LimitRow* row, const QueryIn& in, QueryOut& out);
 
-static __forceinline hkReal hkFabs(hkReal r)
-{
-    return (hkReal)fabs(r);
-}
-
-static __forceinline void hkNormalize3(VectorQ& v)
-{
-    __m128 p = _mm_mul_ps(v.m_vComponents, v.m_vComponents);
-    __m128 len2 = _mm_add_ss(_mm_shuffle_ps(p, p, 0x55), p);
-    len2 = _mm_add_ss(_mm_shuffle_ps(p, p, 0xaa), len2);
-    __m128 e = _mm_rsqrt_ss(len2);
-    __m128 r =
-        _mm_mul_ss(_mm_mul_ss(_mm_set_ss(0.5f), e), _mm_sub_ss(_mm_set_ss(3.0f), _mm_mul_ss(_mm_mul_ss(len2, e), e)));
-    r = _mm_andnot_ps(_mm_cmpeq_ss(len2, _mm_set_ss(0.0f)), r);
-    v.m_vComponents = _mm_mul_ps(_mm_shuffle_ps(r, r, 0), v.m_vComponents);
-}
-
-static __forceinline void hkCalculatePerpendicularVector(const VectorQ& in, VectorQ& out)
-{
-    int min = 0;
-    int ok1 = 1;
-    int ok2 = 2;
-
-    hkReal a0 = hkFabs(in(0));
-    hkReal a1 = hkFabs(in(1));
-    hkReal a2 = hkFabs(in(2));
-
-    if (a1 < a0)
-    {
-        ok1 = 0;
-        min = 1;
-        a0 = a1;
-    }
-
-    if (a2 < a0)
-    {
-        ok2 = min;
-        min = 2;
-    }
-
-    out.m_vComponents = _mm_setzero_ps();
-    out(ok1) = in(ok2);
-    out(ok2) = -in(ok1);
-}
-
 static __forceinline void hkSetCross(VectorQ& out, const VectorQ& v0, const VectorQ& v1)
 {
     __m128 cross0 = _mm_mul_ps(_mm_shuffle_ps(v0.m_vComponents, v0.m_vComponents, 0xc9),
@@ -776,125 +661,10 @@ static __forceinline void hkSetCross(VectorQ& out, const VectorQ& v0, const Vect
     out.m_vComponents = _mm_sub_ps(cross0, cross1);
 }
 
-static __forceinline __m128 hkCross(const __m128 v0, const __m128 v1)
-{
-    __m128 cross0 = _mm_mul_ps(_mm_shuffle_ps(v0, v0, 0xc9), _mm_shuffle_ps(v1, v1, 0xd2));
-    __m128 cross1 = _mm_mul_ps(_mm_shuffle_ps(v0, v0, 0xd2), _mm_shuffle_ps(v1, v1, 0xc9));
-    return _mm_sub_ps(cross0, cross1);
-}
-
-static __forceinline void hkSetNeg4(VectorQ& out, const VectorQ& v)
-{
-    out.m_vComponents = _mm_xor_ps(v.m_vComponents, DAT_010c44d0);
-}
-
-static __forceinline CurveLengthCall& lengthSlot(CurveDispatchTable* table)
-{
-    CurveLengthCall& result = table->length;
-    _WriteBarrier();
-    return result;
-}
 struct PointToPathData : public hkpPointToPathConstraintData
 {
     void FUN_00deea90(const QueryIn& in, QueryOut& out);
 };
-
-// Fills QueryOut with friction, linear, angular, and limit constraint rows for a point-to-path constraint using the nearest path point.
-// @fnv 0x00deea90
-void PointToPathData::FUN_00deea90(const QueryIn& in, QueryOut& out)
-{
-    AppendEventRecord(in, out, in.m_pByteBuffer, 8);
-
-    TransformQ pathToWorld;
-    pathToWorld.FUN_00cb2240(*in.m_kBodyBLocalFrame, m_kLocalTransforms[1]);
-    TransformQ bodyToWorld;
-    bodyToWorld.FUN_00cb2240(*in.m_kBodyALocalFrame, m_kLocalTransforms[0]);
-
-    VectorQ& headingAws = bodyToWorld.m_kColumn0;
-    PathRuntime* runtime = in.m_pByteBuffer;
-
-    VectorQ pathPointWs;
-    VectorQ tangentWs;
-    {
-        VectorQ pivotInPathSpace;
-        pivotInPathSpace.FUN_00c7f690(pathToWorld, bodyToWorld.m_vTranslation);
-        runtime->m_fValueAtOffset38 =
-            m_path->FindNearestPoint(runtime->m_fValueAtOffset38, pivotInPathSpace, pivotInPathSpace);
-
-        pathPointWs.FUN_00c7f640(pathToWorld, pivotInPathSpace);
-
-        m_path->GetTangentAt(runtime->m_fValueAtOffset38, pivotInPathSpace);
-        tangentWs.FUN_00c7f700(pathToWorld, pivotInPathSpace);
-    }
-
-    VectorQ perpWs1;
-    hkCalculatePerpendicularVector(tangentWs, perpWs1);
-    hkNormalize3(perpWs1);
-
-    VectorQ perpWs2;
-    perpWs2.m_vComponents = hkCross(tangentWs.m_vComponents, perpWs1.m_vComponents);
-
-    hkReal distance = -m_path->GetCurvature(runtime->m_fValueAtOffset38);
-    VectorQ limitPivot;
-    limitPivot.m_vComponents = _mm_add_ps(_mm_mul_ps(_mm_set_ps1(distance), tangentWs.m_vComponents),
-                                          bodyToWorld.m_vTranslation.m_vComponents);
-
-    if (m_fFriction > 0.0f)
-    {
-        FrictionRow friction;
-        friction.m_kAxisEndPoints = tangentWs;
-        friction.m_kPivotVector = limitPivot;
-        friction.m_fFriction = m_fFriction;
-        friction.m_pRuntime = runtime;
-        FUN_00dcf100(&friction, in, out);
-    }
-
-    LinearRow linear;
-    linear.m_kPivotA = bodyToWorld.m_vTranslation;
-    linear.m_kPivotB = pathPointWs;
-    linear.m_kAxisEndPoints = perpWs1;
-    FUN_00dcf280(&linear, in, out);
-    linear.m_kAxisEndPoints = perpWs2;
-    FUN_00dcf280(&linear, in, out);
-
-    if (m_cOrientationConstraintType > CONSTRAIN_ORIENTATION_NONE)
-    {
-        AngularRow angular;
-        angular.m_kAxisEndPoints = tangentWs;
-        angular.m_perpB = bodyToWorld.m_kColumn2;
-        angular.m_perpA = bodyToWorld.m_kColumn1;
-        FUN_00dcee80(&angular, in, out);
-        angular.m_perpB = bodyToWorld.m_kColumn1;
-        hkSetNeg4(angular.m_perpA, bodyToWorld.m_kColumn2);
-        FUN_00dcee80(&angular, in, out);
-
-        if (m_cOrientationConstraintType == CONSTRAIN_ORIENTATION_TO_PATH)
-        {
-            VectorQ binormal;
-            m_path->GetBinormal(runtime->m_fValueAtOffset38, binormal);
-            VectorQ binormalWs;
-            binormalWs.FUN_00c7f700(pathToWorld, binormal);
-            angular.m_kAxisEndPoints = bodyToWorld.m_kColumn2;
-            hkSetNeg4(angular.m_perpB, binormalWs);
-            angular.m_perpA = headingAws;
-            FUN_00dcee80(&angular, in, out);
-        }
-    }
-
-    if (!m_path->IsClosedCurve())
-    {
-        LimitRow limit;
-        limit.m_kPivotA = bodyToWorld.m_vTranslation;
-        limit.m_kPivotB = limitPivot;
-        limit.m_kMinimumCorner = m_path->GetCurvature(m_path->GetStreamStart());
-        {
-            CurveLengthCall& length = lengthSlot(reinterpret_cast<CurveDispatch*>(m_path)->table);
-            limit.m_kMaximumCorner = length(m_path, m_path->GetStreamEnd());
-        }
-        limit.m_kAxisEndPoints = tangentWs;
-        FUN_00dcfa30(&limit, in, out);
-    }
-}
 
 struct PathDeleteAllocator
 {
@@ -919,16 +689,3 @@ struct PathDeleteData : hkpPointToPathConstraintData
     void __thiscall Destroy();
     void* __thiscall FUN_00deef10(unsigned char flags);
 };
-
-// Calls the base destructor, then if flags bit 0 is set, releases this block through the router heap using m_usMemSizeAndFlags, and returns this.
-// @fnv 0x00deef10
-void* __thiscall PathDeleteData::FUN_00deef10(unsigned char flags)
-{
-    Destroy();
-    if (flags & 1)
-    {
-        PathDeleteRouter* router = FUN_00c85750();
-        router->heap->ReleaseBlock(this, m_usMemSizeAndFlags);
-    }
-    return this;
-}

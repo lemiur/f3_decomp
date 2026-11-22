@@ -155,18 +155,6 @@ struct Sub
     void DispatchEventToOwner(Event* e);
 };
 
-// If the event's object exists and its GetType() is not 11, forwards the event to the owner stored before this sub-object.
-// @fnv 0x00cd1ff0
-void Sub::DispatchEventToOwner(Event* pEvent)
-{
-    Owner* owner = *(Owner**)((char*)this - 0x58);
-    if (owner)
-    {
-        Obj* o = pEvent->obj;
-        if (o && o->GetType() != 11)
-            (*(Owner**)((char*)this - 0x58))->UntrackObject(pEvent);
-    }
-}
 }  // namespace fnv_00cd1ff0
 
 namespace fnv_00cd2020 {
@@ -213,15 +201,6 @@ struct Context
 struct Owner : Prefix, Context
 {
 };
-// Forwards value to the owner object's AddElementAndNotify with the Actions category and zero flags, if an owner exists.
-// @fnv 0x00cd2020
-void Context::FUN_00cd2020(int value)
-{
-    Owner* object = reinterpret_cast<Owner*>(reinterpret_cast<char*>(this) - sizeof(Prefix));
-    FUN_00cd12b0_cls* target = object->owner;
-    if (target)
-        target->AddElementAndNotify(value, &g_012690d4, "Actions", 0);
-}
 }  // namespace fnv_00cd2020
 
 struct FUN_00cd10a0_Class
@@ -335,37 +314,6 @@ struct Candidate
     PointerArray items;
     void* FindOrAddPointer(void* value);
 };
-// Searches items for value and returns its index; if absent, appends value to items and returns the new slot pointer.
-// @fnv 0x00cd2470
-void* Candidate::FindOrAddPointer(void* value)
-{
-    PointerArray* array = &items;
-    register int index = 0;
-    int count = array->count;
-    if (count > 0)
-    {
-        void** ppEntry = array->data;
-        do
-        {
-            if (*ppEntry == value)
-                goto found;
-            ++index;
-            ++ppEntry;
-        } while (index < count);
-    }
-    goto append;
-found:
-    if (index >= 0)
-        return (void*)index;
-append:
-    AllocatorState* state = FUN_00c85750();
-    if (array->count == (array->capacity & 0x3fffffff))
-        ResizeAudioStream(state->allocator, array, 4);
-    void** slot = array->data + array->count;
-    *slot = value;
-    ++array->count;
-    return slot;
-}
 
 namespace fnv_00cd27f0 {
 struct Device
@@ -403,36 +351,6 @@ struct FUN_00cd27f0
     int count1;
     virtual ~FUN_00cd27f0();
 };
-// @fnv 0x00cd27f0
-FUN_00cd27f0::~FUN_00cd27f0()
-{
-    Holder* holder = (Holder*)FUN_00c85750();
-    Device* device = holder->device;
-    int count = count1;
-    unk30 = 0;
-    if ((unsigned int)count & 0x80000000)
-        goto skipFirstRelease;
-    {
-        unsigned int bytes = (count & 0x3fffffff) * 4;
-        device->Release((void*)buffer1, bytes);
-    }
-skipFirstRelease:
-    buffer1 = 0;
-    count1 = 0x80000000;
-    holder = (Holder*)FUN_00c85750();
-    device = holder->device;
-    int secondCount = count2;
-    unk0c = 0;
-    if ((unsigned int)secondCount & 0x80000000)
-        goto skipSecondRelease;
-    {
-        unsigned int bytes = (secondCount & 0x3fffffff) * 4;
-        device->Release((void*)buffer2, bytes);
-    }
-skipSecondRelease:
-    buffer2 = 0;
-    count2 = 0x80000000;
-}
 }  // namespace fnv_00cd27f0
 
 namespace fnv_00cd2900 {
@@ -458,18 +376,6 @@ struct FUN_00cd2900_owner
     void FUN_00cd2690();
     void* DestroyIfFlagged(unsigned flags);
 };
-// Calls FUN_00cd2690, and if bit 0 of flags is set, deletes this via the manager's deleteObject interface, then returns this.
-// @fnv 0x00cd2900
-void* FUN_00cd2900_owner::DestroyIfFlagged(unsigned flags)
-{
-    FUN_00cd2690();
-    if (flags & 1)
-    {
-        Manager* manager = FUN_00c85750();
-        manager->iface->deleteObject(this, unk04);
-    }
-    return this;
-}
 }  // namespace fnv_00cd2900
 
 class GlobalObjectO2_00d472a0;
@@ -497,15 +403,6 @@ struct Container
     } prefix;
     Receiver receiver;
 };
-// Recovers the enclosing Container from this, and if its handler is set, forwards input, a global, "Entities" and input+0x10 to the handler.
-// @fnv 0x00cd1f30
-void Receiver::DispatchEntityPayload(void* input)
-{
-    Container* owner = reinterpret_cast<Container*>(reinterpret_cast<char*>(this) - sizeof(Container::Prefix));
-    Handler* handler = owner->prefix.handler;
-    if (handler)
-        handler->AddElementAndNotify(input, &g_012688c8, "Entities", reinterpret_cast<char*>(input) + 0x10);
-}
 
 struct CD1F70Stats
 {
@@ -562,14 +459,6 @@ class CD1F70World : public CD1F70Primary, public CD1F70Secondary
   public:
     virtual void CollectPhantoms(CD1F70Stats* stats);
 };
-
-// If the collection pointer is set, forwards stats to its child-stats collector under the "Phantoms" name.
-// @fnv 0x00cd1f70
-void CD1F70World::CollectPhantoms(CD1F70Stats* stats)
-{
-    if (m_kPhantoms)
-        m_kPhantoms->AddStat(stats, g_CD1F70Parent, "Phantoms", &stats->m_childStats);
-}
 
 struct CD1FB0Collector
 {
@@ -1789,21 +1678,6 @@ class OwnerCD2A
     ValueCD2A FUN_00cd2a50(int iKey);
 };
 
-// @fnv 0x00cd2a50
-ValueCD2A OwnerCD2A::FUN_00cd2a50(int iKey)
-{
-    for (int i = 0; i < m_entries.GetLogicalSize(); i++)
-    {
-        if (m_entries[i].m_key == iKey)
-        {
-            EntryCD2A kEntry = m_entries[i];
-            m_entries.removeAtAndCopy(i);
-            return kEntry.m_uiFilterValue;
-        }
-    }
-    return ValueCD2A();
-}
-
 struct FUN_00cd1e70
 {
     virtual ~FUN_00cd1e70();
@@ -1903,17 +1777,6 @@ struct AdjOwner : AdjBase1, AdjBase2
     virtual void key_fn();  // key function - defined, so the vftable is emitted
     void FUN_00cd28b0();    // the shared override - declared only
 };
-
-AdjOwner::AdjOwner()
-{}
-void AdjOwner::key_fn()
-{}
-
-AdjOwner* make_adj_owner()
-{
-    static AdjOwner o;
-    return &o;
-}
 
 namespace fnv_00cd28c0 {
 // sub ecx,0x60; jmp DestroyIfFlagged == MSVC adjustor thunk (second base's vtable slot, this moved back by sizeof(PrimaryBase)=0x60).
@@ -2076,9 +1939,6 @@ struct CD28F0Derived : CD28F0Primary, CD28F0Secondary
     virtual void FUN_00cd28f0();
 };
 
-CD28F0Derived::CD28F0Derived()
-{}
-
 struct FUN_00cd1eb0_StandIn
 {
     int unk00;
@@ -2086,14 +1946,3 @@ struct FUN_00cd1eb0_StandIn
 };
 
 extern void __cdecl FUN_00401030(void* ptr);
-
-// @fnv 0x00cd1eb0
-int __thiscall FUN_00cd1eb0_StandIn::FUN_00cd1eb0(int aiFlags)
-{
-    unk00 = 0x010cb1e4;
-    if (aiFlags & 1)
-    {
-        FUN_00401030(this);
-    }
-    return (int)this;
-}

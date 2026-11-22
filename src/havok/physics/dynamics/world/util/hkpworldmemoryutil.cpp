@@ -120,54 +120,6 @@ struct S_00d01bc0_Owner
 S_00d01bc0_Global* __cdecl FUN_00c85750();
 void __cdecl PropagateStateToChildren(S_00d01bc0_Owner* owner, S_00d01bc0_Node* node);
 
-// @fnv 0x00d01bc0
-void __cdecl FUN_00d01bc0(S_00d01bc0_Owner* pOwner)
-{
-    pOwner->IncrementCounter();
-    unsigned int saved = pOwner->m_uiItemCount;
-    S_00d01bc0_Iter iter;
-    pOwner->ComputeMemoryUsage(&iter);
-    if (!FUN_00c85750()->sink()->v8(iter.m_key))
-    {
-        do
-        {
-            unsigned char s = (iter.m_node->m_flags >> 2) & 3;
-            while (s != 0)
-            {
-                int key = iter.m_key;
-                S_00d01bc0_Node* node = iter.m_node;
-                if (s != 0)
-                {
-                    do
-                    {
-                        PropagateStateToChildren(pOwner, node);
-                        pOwner->ComputeMemoryUsage(&iter);
-                        if (iter.m_node != node || iter.m_key != key)
-                            break;
-                        pOwner->m_uiItemCount >>= 1;
-                    } while (iter.m_node->m_flags & 0xc);
-                }
-                s = (iter.m_node->m_flags >> 2) & 3;
-            }
-            if (!FUN_00c85750()->sink()->v8(iter.m_key))
-            {
-                S_00d01bc0_Node* node = iter.m_node;
-                if (!node->FUN_00d077d0())
-                {
-                    node->m_flags = (node->m_flags & 0xf7) | 4;
-                }
-                else
-                {
-                    pOwner->FUN_00c93570()->v5(node, 0);
-                    pOwner->ComputeMemoryUsage(&iter);
-                }
-            }
-        } while (!FUN_00c85750()->sink()->v8(iter.m_key));
-    }
-    pOwner->m_uiItemCount = saved;
-    pOwner->FUN_00c91190();
-}
-
 struct D01CE0Action
 {
     virtual void vfunc00();
@@ -196,16 +148,6 @@ struct D01CE0Context
     int unk04;
     D01CE0Action* m_pAction;
 };
-
-// Calls applyFirst when the action's state is 0 or 2, and applySecond when it is 0 or 3.
-// @fnv 0x00d01ce0
-void __cdecl ApplyActionPhases(D01CE0Context* context)
-{
-    if (context->m_pAction->m_iValueAfterFlags == 0 || context->m_pAction->m_iValueAfterFlags == 2)
-        context->m_pAction->applyFirst();
-    if (context->m_pAction->m_iValueAfterFlags == 0 || context->m_pAction->m_iValueAfterFlags == 3)
-        context->m_pAction->applySecond();
-}
 
 struct InnerObj
 {
@@ -244,30 +186,6 @@ struct ParamObj
 
 void __cdecl FUN_00d88040(int value);
 void __cdecl ApplyActionPhases(ParamObj* param);
-
-// Returns early if the inner object is null; otherwise loops up to 10 times while the child's m_28 is nonzero, calling v10, FUN_00d88040 and ApplyActionPhases.
-// @fnv 0x00d01df0
-void __cdecl ProcessChildLoop(ParamObj* param)
-{
-    if (param->FUN_00c93570() == 0)
-    {
-        return;
-    }
-
-    int i = 10;
-    while (param->m_08->m_28 != 0)
-    {
-        if (i-- <= 0)
-        {
-            break;
-        }
-
-        InnerObj* inner = param->FUN_00c93570();
-        inner->v10(param);
-        FUN_00d88040(0);
-        ApplyActionPhases(param);
-    }
-}
 
 #include <windows.h>
 

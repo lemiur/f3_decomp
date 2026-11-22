@@ -621,10 +621,6 @@ struct ByteArray
     }
 };
 
-inline void Swap32(unsigned int& v)
-{
-    v = _byteswap_ulong(v);
-}
 struct BlobObject
 {
     void* m_vtbl;
@@ -647,37 +643,6 @@ struct BlobObject
     }
 };
 
-// @fnv 0x00cf1270
-int __cdecl ReadBlobObject(BlobStream* stream, BlobObject** ppOut)
-{
-    HeapContextGuard guard(0x10);
-    BlobObject* obj = (BlobObject*)audio()->heap().AllocateMemoryBlock(0x30);
-    obj->Init();
-    *ppOut = obj;
-    int count = 0;
-    stream->istr->Read(&count);
-    stream->istr->ReadRaw(&(*ppOut)->m_kHeader, 0x10);
-    if (stream->unk04 < 6 && count)
-    {
-        count -= 0x30;
-        int skip[8];
-        stream->istr->Read(skip, 8);
-    }
-    if (count)
-    {
-        (*ppOut)->m_data.SetSizeAndGrow(count);
-        stream->istr->ReadRaw((*ppOut)->m_data.m_data, count);
-    }
-    if (stream->unk1e5 != 1)
-    {
-        BlobVec& v = (*ppOut)->m_kHeader;
-        Swap32(v.x);
-        Swap32(v.y);
-        Swap32(v.z);
-        Swap32(v.w);
-    }
-    return count;
-}
 }  // namespace fnv_00cf1270
 
 int __cdecl FUN_00cf1f80(int, int, int);
@@ -722,23 +687,6 @@ struct Calc
 
 extern const __m128 g_mask;
 
-// Subtracts b->m80 from a, stores a in b->m80, passes the difference to Calc, then adds a masked result to b->m40 and b->m50.
-// @fnv 0x00cf14a0
-void ApplyDelta(__m128* apDelta, Obj* apObj)
-{
-    __m128 vDelta = *apDelta;
-    vDelta = _mm_sub_ps(vDelta, apObj->m80);
-    __declspec(align(16)) F4 d;
-    F4* pd = &d;
-    *(__m128*)&d = vDelta;
-    apObj->m80 = *apDelta;
-    Calc c;
-    c.mul(apObj, pd);
-    __m128 vMasked = _mm_and_ps(g_mask, *(const __m128*)&c.res);
-    apObj->m40 = _mm_add_ps(apObj->m40, vMasked);
-    apObj->m50 = _mm_add_ps(apObj->m50, vMasked);
-}
-
 extern double DAT_010924a8;
 extern double DAT_0101de30;
 extern double DAT_01011588;
@@ -747,22 +695,6 @@ extern float DAT_01016248;
 extern float DAT_01011d78;
 extern float DAT_01017718;
 extern __declspec(align(16)) float DAT_010ec7f0[4];
-
-__forceinline void normalize4(__m128& q)
-{
-    __m128 x2 = _mm_mul_ps(q, q);
-    __m128 s = _mm_add_ps(x2, _mm_shuffle_ps(x2, x2, 0x4E));
-    s = _mm_add_ps(s, _mm_shuffle_ps(s, s, 0xB1));
-    __m128 r = _mm_rsqrt_ss(s);
-    __m128 zero = _mm_set_ss(0.0f);
-    __m128 eq = _mm_cmpeq_ss(s, zero);
-    __m128 prod = _mm_mul_ss(_mm_mul_ss(s, r), r);
-    __m128 three = _mm_set_ss(3.0f);
-    __m128 half = _mm_set_ss(0.5f);
-    __m128 nr = _mm_mul_ss(_mm_mul_ss(half, r), _mm_sub_ss(three, prod));
-    nr = _mm_andnot_ps(eq, nr);
-    q = _mm_mul_ps(q, _mm_shuffle_ps(nr, nr, 0));
-}
 
 struct V4
 {
@@ -782,74 +714,6 @@ struct FUN_008cd6a0_Class
     V4 comLocal;
     void __thiscall FUN_00cb2d90(void*);
 };
-
-__forceinline void interpolate(__m128& dst, __m128 a, __m128 b, float w)
-{
-    __m128 wb = _mm_load_ss(&w);
-    wb = _mm_shuffle_ps(wb, wb, 0);
-    __m128 other = _mm_sub_ps(_mm_load_ps(DAT_010ec7f0), wb);
-    dst = _mm_add_ps(_mm_mul_ps(other, a), _mm_mul_ps(wb, b));
-}
-// Clamps time, interpolates and normalizes the rotation quaternions, interpolates com0/com1, then recomputes translation from comLocal and rotation columns.
-// @fnv 0x00cf1d50
-void __cdecl UpdateRotationInterpolation(float time, FUN_008cd6a0_Class* apTransform)
-{
-    float t0 = apTransform->com0.q.m128_f32[3];
-    if (!(time > t0))
-        time = t0;
-
-    float alpha = (time - apTransform->com0.q.m128_f32[3]) * apTransform->com1.q.m128_f32[3];
-
-    __m128 q0 = apTransform->rot0.q;
-    __m128 q1 = apTransform->rot1.q;
-    __m128 sum = _mm_add_ps(q0, q1);
-    __m128 x2 = _mm_mul_ps(sum, sum);
-    __m128 qShuffled = _mm_shuffle_ps(x2, x2, 0x4E);
-    __m128 qDotProduct = _mm_add_ps(qShuffled, x2);
-    qDotProduct = _mm_add_ps(_mm_shuffle_ps(qDotProduct, qDotProduct, 0xB1), qDotProduct);
-    float fComponentSum;
-    _mm_store_ss(&fComponentSum, qDotProduct);
-    double product = DAT_010924a8 * fComponentSum;
-    apTransform->rot1.q = sum;
-    float a = (float)(DAT_0101de30 - product);
-    double halfLen = DAT_01011588 * fComponentSum;
-    float fPolynomial = (float)(a * (DAT_01016ff0 - a * (a * halfLen)));
-    double half = DAT_01016248;
-    __m128& qScaled = apTransform->rot1.q;
-    qScaled = _mm_mul_ps(_mm_shuffle_ps(_mm_load_ss(&fPolynomial), _mm_load_ss(&fPolynomial), 0), sum);
-
-    if (half > alpha)
-    {
-        float w = alpha + alpha;
-        interpolate(apTransform->rot1.q, q0, qScaled, w);
-    }
-    else
-    {
-        float w = (alpha + alpha) - 1.0;
-        interpolate(apTransform->rot1.q, qScaled, q1, w);
-    }
-    normalize4(apTransform->rot1.q);
-    apTransform->rot0.q = apTransform->rot1.q;
-
-    __m128 qAlpha = _mm_load_ss(&alpha);
-    qAlpha = _mm_shuffle_ps(qAlpha, qAlpha, 0);
-    __m128 com = _mm_add_ps(_mm_mul_ps(_mm_sub_ps(_mm_load_ps(DAT_010ec7f0), qAlpha), apTransform->com0.q),
-                            _mm_mul_ps(qAlpha, apTransform->com1.q));
-    apTransform->com0.q = com;
-    apTransform->com0.q.m128_f32[3] = time;
-    apTransform->com1.q = com;
-    apTransform->com1.q.m128_f32[3] = 0.0f;
-
-    apTransform->FUN_00cb2d90(&apTransform->rot1);
-
-    __m128 v = apTransform->comLocal.q;
-    __m128 y = _mm_shuffle_ps(v, v, 0x55);
-    __m128 x = _mm_shuffle_ps(v, v, 0x00);
-    __m128 z = _mm_shuffle_ps(v, v, 0xAA);
-    __m128 rot = _mm_add_ps(_mm_add_ps(_mm_mul_ps(y, apTransform->col1.q), _mm_mul_ps(x, apTransform->col0.q)),
-                            _mm_mul_ps(z, apTransform->col2.q));
-    apTransform->translation.q = _mm_sub_ps(apTransform->com1.q, rot);
-}
 
 void FUN_00cf1480(float a, float b, int* c);
 
@@ -886,35 +750,6 @@ struct __declspec(align(16)) MotionState_cls
     MotionVec4 m_kDeltaAngle;       // +0x90
 };
 
-// Copies the transform into m_kMotionTransform, derives rotation via MotionRotSet_cls, and computes m_com0/m_com1 from m_comLocal.
-// @fnv 0x00cf2020
-void SetMotionState(const MotionMat4* transform, MotionState_cls* apMotionState)
-{
-    MotionVec4 q;
-    _mm_store_ps((float*)&apMotionState->m_kDeltaAngle, _mm_setzero_ps());
-    ((MotionRotSet_cls*)&q)->Set(transform);
-    const __m128* m = (const __m128*)transform;
-    _mm_store_ps((float*)&apMotionState->m_kMotionTransform.c0, m[0]);
-    _mm_store_ps((float*)&apMotionState->m_kMotionTransform.c1, m[1]);
-    _mm_store_ps((float*)&apMotionState->m_kMotionTransform.c2, m[2]);
-    _mm_store_ps((float*)&apMotionState->m_kMotionTransform.c3, m[3]);
-    __m128 rot = _mm_load_ps((float*)&q);
-    _mm_store_ps((float*)&apMotionState->m_rot0, rot);
-    _mm_store_ps((float*)&apMotionState->m_rot1, rot);
-    float t0 = apMotionState->m_com0.w;
-    __m128 com = _mm_load_ps((float*)&apMotionState->m_comLocal);
-    __m128 vM0 = m[0];
-    __m128 vM1 = m[1];
-    __m128 r = _mm_mul_ps(_mm_shuffle_ps(com, com, 0x55), vM1);
-    r = _mm_add_ps(r, _mm_mul_ps(_mm_shuffle_ps(com, com, 0), vM0));
-    r = _mm_add_ps(r, _mm_mul_ps(m[2], _mm_shuffle_ps(com, com, 0xaa)));
-    r = _mm_add_ps(r, m[3]);
-    _mm_store_ps((float*)&apMotionState->m_com0, r);
-    _mm_store_ps((float*)&apMotionState->m_com1, r);
-    apMotionState->m_com0.w = t0;
-    apMotionState->m_com1.w = 0.0f;
-}
-
 struct TransformData
 {
     __m128 row0;
@@ -928,25 +763,6 @@ struct TransformData
     __m128 transform;
     __m128 zero;
 };
-// Weights the row vectors by transform components, adds source, stores the result in output and output2, and copies translation to output3.
-// @fnv 0x00cf20d0
-extern "C" void __cdecl FUN_00cf20d0(const __m128* source, TransformData* data)
-{
-    data->zero = _mm_setzero_ps();
-    data->sourceCopy = *source;
-    volatile float* savedLane = (volatile float*)((char*)data + 0x4c);
-    float oldW = *savedLane;
-    __m128 transform = data->transform;
-    __m128 result = _mm_mul_ps(_mm_shuffle_ps(transform, transform, _MM_SHUFFLE(1, 1, 1, 1)), data->row1);
-    result = _mm_add_ps(result, _mm_mul_ps(_mm_shuffle_ps(transform, transform, _MM_SHUFFLE(0, 0, 0, 0)), data->row0));
-    result = _mm_add_ps(result, _mm_mul_ps(_mm_shuffle_ps(transform, transform, _MM_SHUFFLE(2, 2, 2, 2)), data->row2));
-    result = _mm_add_ps(result, *source);
-    data->output = result;
-    *savedLane = oldW;
-    data->output2 = result;
-    ((float*)&data->output2)[3] = 0.0f;
-    data->output3 = data->translation;
-}
 
 struct Obj_t
 {
@@ -1068,15 +884,6 @@ struct hkMatrix3
     hkVector4 m_kColumn0, m_kColumn1, m_kColumn2;
 };
 
-__forceinline void SetRotatedDirection(hkVector4& out, const hkMatrix3& r, const hkVector4& v)
-{
-    __m128 x =
-        _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v.m_vComponents, v.m_vComponents, 0x55), r.m_kColumn1.m_vComponents),
-                   _mm_mul_ps(_mm_shuffle_ps(v.m_vComponents, v.m_vComponents, 0x00), r.m_kColumn0.m_vComponents));
-    out.m_vComponents =
-        _mm_add_ps(x, _mm_mul_ps(_mm_shuffle_ps(v.m_vComponents, v.m_vComponents, 0xaa), r.m_kColumn2.m_vComponents));
-}
-
 struct __declspec(align(16)) hkVector4L
 {
     float x, y, z, w;
@@ -1100,49 +907,6 @@ struct OutputArg
     OutputArg(FUN_008cd6a0_Class* p) : ptr(p)
     {}
 };
-// Interpolates a swept transform's rotation and position at time t, writing the result into out and adjusting its translation by the local center of mass.
-// @fnv 0x00cf1920
-void __cdecl FUN_00cf1920(const hkSweptTransform* sweptTrans, float afTime, FUN_008cd6a0_Class* apTransform, ...)
-{
-    hkQuaternion qResult;
-    {
-        hkQuaternion q0;
-        q0.m_vec.m_vComponents = sweptTrans->m_qRotation0.Vector4f();
-        hkQuaternion q1;
-        q1.m_vec.m_vComponents = sweptTrans->m_qRotation1.Vector4f();
-        qResult.m_vec.setAdd4(q0.m_vec, q1.m_vec);
-        float fLengthSquared = qResult.m_vec.lengthSquared4();
-        float r = (float)(0.75 - DAT_010924a8 * fLengthSquared);
-        r = (float)(r * (DAT_01016ff0 - 0.5 * fLengthSquared * r * r));
-        hkVector4 qhalf;
-        qhalf.setMul4(r, qResult.m_vec);
-        if (afTime < 0.5f)
-        {
-            qResult.m_vec.setInterpolate4(q0.m_vec, qhalf, afTime + afTime);
-        }
-        else
-        {
-            qResult.m_vec.setInterpolate4(qhalf, q1.m_vec, (float)(afTime + afTime - 1.0));
-        }
-        qResult.m_vec.normalize4();
-    }
-    FUN_008cd6a0_Class* pTransform = apTransform;
-    pTransform->FUN_00cb2d90(&qResult);
-
-    hkVector4& vTranslation = *((hkVector4*)&pTransform->translation);
-    __m128 vTimeWeight = _mm_load_ss(&afTime);
-    __m128 vStartPosition = sweptTrans->m_vCenterOfMass0.Vector4f();
-    __m128 vOnes = _mm_load_ps(DAT_010ec7f0);
-    vTimeWeight = _mm_shuffle_ps(vTimeWeight, vTimeWeight, 0);
-    __m128 vStartTerm = _mm_mul_ps(_mm_sub_ps(vOnes, vTimeWeight), vStartPosition);
-    __m128 vEndTerm = _mm_mul_ps(sweptTrans->m_vCenterOfMass1.Vector4f(), vTimeWeight);
-    vTranslation.m_vComponents = _mm_add_ps(vStartTerm, vEndTerm);
-    hkVector4 vCenterShift;
-    hkVector4 vCenterLocal;
-    vCenterLocal.m_vComponents = sweptTrans->m_vCenterOfMassLocal.Vector4f();
-    SetRotatedDirection(vCenterShift, *(hkMatrix3*)&pTransform->col0, vCenterLocal);
-    ((hkVector4*)&pTransform->translation)->sub4(vCenterShift);
-}
 
 extern float DAT_0104da4c;
 
@@ -1150,52 +914,3 @@ struct MotionExtR : FUN_008cd6a0_Class
 {
     V4 deltaAngle;
 };
-
-// Computes values from time and com0/com1, then updates rot1, com1, deltaAngle, and translation.
-// @fnv 0x00cf1b10
-void __cdecl FUN_00cf1b10(float time, FUN_008cd6a0_Class* self)
-{
-    float t0 = (time - self->com0.q.m128_f32[3]) * self->com1.q.m128_f32[3];
-    float w = (DAT_0104da4c < t0) ? t0 : DAT_0104da4c;
-
-    __m128 vRot0 = self->rot0.q;
-    __m128 vRot1 = self->rot1.q;
-    __m128 sum = _mm_add_ps(vRot1, vRot0);
-    __m128 vSq = _mm_mul_ps(sum, sum);
-    __m128 s = _mm_add_ps(vSq, _mm_shuffle_ps(vSq, vSq, 0x4E));
-    s = _mm_add_ps(s, _mm_shuffle_ps(s, s, 0xB1));
-    float d;
-    _mm_store_ss(&d, s);
-    self->rot1.q = sum;
-    float y = 0.75 - d * 0.125;
-    float inv = (1.5 - d * 0.5 * y * y) * y;
-    __m128 vInv = _mm_load_ss(&inv);
-    vInv = _mm_shuffle_ps(vInv, vInv, 0);
-    self->rot1.q = _mm_mul_ps(vInv, sum);
-
-    float a = w;
-    if (w < 0.5f)
-    {
-        interpolate(self->rot1.q, vRot0, self->rot1.q, a + w);
-    }
-    else
-    {
-        interpolate(self->rot1.q, self->rot1.q, vRot1, (a + w) - 1.0);
-    }
-    normalize4(self->rot1.q);
-
-    float& wRef = self->com1.q.m128_f32[3];
-    float oldW = wRef;
-    interpolate(self->com1.q, self->com0.q, self->com1.q, w);
-    wRef = oldW / w;
-    __m128 wb = _mm_load_ss(&w);
-    wb = _mm_shuffle_ps(wb, wb, 0);
-    ((MotionExtR*)self)->deltaAngle.q = _mm_mul_ps(wb, ((MotionExtR*)self)->deltaAngle.q);
-    self->FUN_00cb2d90(&self->rot1);
-
-    __m128 vComLocal = self->comLocal.q;
-    __m128 vRy = _mm_mul_ps(_mm_shuffle_ps(vComLocal, vComLocal, 0x55), self->col1.q);
-    __m128 vRx = _mm_mul_ps(_mm_shuffle_ps(vComLocal, vComLocal, 0x00), self->col0.q);
-    __m128 vRz = _mm_mul_ps(_mm_shuffle_ps(vComLocal, vComLocal, 0xAA), self->col2.q);
-    self->translation.q = _mm_sub_ps(self->com1.q, _mm_add_ps(_mm_add_ps(vRy, vRx), vRz));
-}

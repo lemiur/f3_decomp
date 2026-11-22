@@ -9,13 +9,6 @@ struct hkFreeListAllocator
     void __thiscall PrintStatistics(int);
 };
 
-// @fnv 0x00d5f950
-void __thiscall hkFreeListAllocator::PrintStatistics(int aiUnused)
-{
-    FUN_00cc0410(aiUnused,
-                 "printStatistics is not supported on hkFreeListAllocator - use hkDebugMemory or hkPoolMemory\n");
-}
-
 struct FUN_00dd7200_cls
 {
     void FUN_00dd7200();
@@ -24,14 +17,6 @@ struct FUN_00d5fc70_cls
 {
     void FUN_00d5fc70(FUN_00dd7200_cls* p);
 };
-// Calls FUN_00dd7200 on p, then if p+0x34 is the pointer stored at this+0x238, subtracts 0x34 from that pointer.
-// @fnv 0x00d5fc70
-void FUN_00d5fc70_cls::FUN_00d5fc70(FUN_00dd7200_cls* p)
-{
-    p->FUN_00dd7200();
-    if ((char*)p + 0x34 == *(char**)((char*)this + 0x238))
-        *(char**)((char*)this + 0x238) -= 0x34;
-}
 
 struct FUN_00d5f910_elem
 {
@@ -113,21 +98,6 @@ struct FUN_00d5f910_cls
     void* AllocateBlock(int aiUnused, int aiNumBytes);
 };
 
-// Returns a free block from the size-class list for requests up to 0x280 bytes, otherwise delegates to m_sub28.BlockAlloc.
-// @fnv 0x00d5f910
-void* FUN_00d5f910_cls::AllocateBlock(int aiUnused, int aiNumBytes)
-{
-    if (aiNumBytes <= 0x280)
-    {
-        if (aiNumBytes == 0)
-            return 0;
-        FUN_00d5f910_elem* pElem = pAudioItems[(aiNumBytes + 15) >> 4];
-        if (pElem)
-            return pElem->m_pNext;
-    }
-    return m_sub28.BlockAlloc(aiUnused, aiNumBytes);
-}
-
 extern "C" __declspec(dllimport) void __stdcall EnterCriticalSection(void*);
 extern "C" __declspec(dllimport) void __stdcall LeaveCriticalSection(void*);
 
@@ -170,45 +140,6 @@ class FLAllocator
     void FreeBlocks(void** blocks, int numBlocks, int blockSize);
 };
 
-// @fnv 0x00d5f9f0
-void FLAllocator::FreeBlocks(void** blocks, int numBlocks, int blockSize)
-{
-    SixIntegerRecord* cs = &m_cs;
-    EnterCriticalSection(cs);
-    if (blockSize <= 0x280)
-    {
-        StringListNode* list = m_pFreeBlockLists[(blockSize + 15) >> 4];
-        int iOldCount = list->m_iFreeCount;
-        void** p = blocks;
-        FreeListEntry* head = list->m_free;
-        list->m_iFreeCount = iOldCount + numBlocks;
-        for (int i = numBlocks - 1; i >= 0; i--)
-        {
-            FreeListEntry* e = (FreeListEntry*)*p++;
-            if (e)
-            {
-                e->next = head;
-                head = e;
-            }
-            else
-            {
-                list->m_iFreeCount--;
-            }
-        }
-        list->m_free = head;
-        m_iPoolBlockSize += (list->m_iFreeCount - iOldCount) * list->m_iFirstIndex;
-    }
-    else
-    {
-        for (int i = 0; i < numBlocks; i++)
-        {
-            if (blocks[i])
-                m_large.ReleaseBlock(blocks[i]);
-        }
-    }
-    LeaveCriticalSection(cs);
-}
-
 struct D603E0Base
 {
     ~D603E0Base();
@@ -219,27 +150,12 @@ struct D603E0Object : D603E0Base
     D603E0Object* FUN_00d603e0(unsigned int uiFlags);
 };
 
-// @fnv 0x00d603e0
-D603E0Object* D603E0Object::FUN_00d603e0(unsigned int uiFlags)
-{
-    D603E0Base::~D603E0Base();
-    return this;
-}
-
 struct FUN_00d61f30_shell
 {
     void FUN_00d61cc0();
     void AppendStrings(int a, int b, int c, int d, int e, int f);
     void FUN_00d61f30(int a, int b, int c, int d, int e, int f);
 };
-
-// Calls FUN_00d61cc0, then forwards the six arguments to AppendStrings.
-// @fnv 0x00d61f30
-void FUN_00d61f30_shell::FUN_00d61f30(int a, int b, int c, int d, int e, int f)
-{
-    FUN_00d61cc0();
-    AppendStrings(a, b, c, d, e, f);
-}
 
 struct FUN_00d5f850_cls
 {
@@ -307,22 +223,10 @@ struct FUN_00d5f970_cls
     void FUN_00d5f970(int a);
 };
 
-// @fnv 0x00d5f970
-void FUN_00d5f970_cls::FUN_00d5f970(int a)
-{
-    v3(a);
-}
-
 struct FUN_00d5fba0_cls
 {
     int FUN_00d5fba0();
 };
-
-// @fnv 0x00d5fba0
-int FUN_00d5fba0_cls::FUN_00d5fba0()
-{
-    return *(int*)((char*)this + 0xa94);
-}
 
 struct FUN_00d5fc30_cls
 {
@@ -356,26 +260,6 @@ struct FUN_00d5fc40_cls
 {
     unsigned char HasRoomFor(unsigned int limit);
 };
-
-// Updates the peak of used minus base bytes and returns whether used is below the limit subtracted from the value at offset 0xa94.
-// @fnv 0x00d5fc40
-unsigned char FUN_00d5fc40_cls::HasRoomFor(unsigned int limit)
-{
-    char* self = (char*)this;
-    unsigned int used = *(unsigned int*)(self + 0xe8) - *(unsigned int*)(self + 0x1c);
-    unsigned int peak = *(unsigned int*)(self + 0x20);
-    if (used > peak)
-    {
-        peak = used;
-    }
-    *(unsigned int*)(self + 0x20) = peak;
-    unsigned int room = *(unsigned int*)(self + 0xa94) - limit;
-    if (used < room)
-    {
-        return 1;
-    }
-    return 0;
-}
 
 // stand-in types for FUN_00d60270
 struct Sub4
@@ -528,72 +412,6 @@ class FUN_00d60270_cls : public HeapBase60270
 
 extern char g_vtbl60270[];
 
-// Initializes the object: sets the vtable, initializes sub-objects and item array, resets state, and allocates the size-class table slots.
-// @fnv 0x00d60270
-FUN_00d60270_cls* FUN_00d60270_cls::FUN_00d60270(int a1)
-{
-    m_vptr = g_vtbl60270;
-    reinterpret_cast<Sub4*>(&unk004)->Init(0xfa0);
-    m_24 = a1;
-    reinterpret_cast<Sub28*>(&unk028)->Init(a1);
-    Elem34* pItems = m_items;
-    m_234 = 0;
-    Elem34* e = pItems;
-    for (int i = 0x28; i >= 0; --i)
-    {
-        e->Init();
-        ++e;
-    }
-    m_a98 = 0;
-    m_1c = 0;
-    m_20 = 0;
-    Reset(0x7fffffff);
-    m_238 = (int*)pItems;
-    pItems = (Elem34*)((char*)pItems + 0x854);
-    m_23c = (int*)pItems;
-    for (int i = 0; i < 0x29; ++i)
-    {
-        m_tab[i] = 0;
-    }
-    m_tab[0x20] = Alloc(0x200, 0x80, 0x10000);
-    m_tab[0x10] = Alloc(0x100, 0x20, 0x8000);
-    m_tab[0] = Alloc(0, 4, 0x100);
-    int r4 = Alloc(0x220, 0x80, 0x5000);
-    for (int i = 0x210; i <= 0x280; ++i)
-    {
-        m_tab[i >> 4] = r4;
-    }
-    int iSize = 0x280;
-    do
-    {
-        int* slot = &m_tab[iSize >> 4];
-        if (*slot == 0)
-        {
-            int iCount = 0x10;
-            int sz;
-            if (iSize > 0)
-            {
-                sz = iSize << 4;
-                if ((unsigned int)iSize < 0x100)
-                {
-                    sz = 0x1000;
-                }
-            }
-            else
-            {
-                sz = 0x1000;
-            }
-            if (iSize >= 0x40)
-            {
-                iCount = 0x20;
-            }
-            *slot = Alloc(iSize, iCount, sz);
-        }
-        iSize -= 0x10;
-    } while (iSize >= 0x10);
-    return this;
-}
-
 extern void(__stdcall* DAT_00fdf05c)(int*);
 extern void(__stdcall* DAT_00fdf100)(int*);
 namespace d5f {
@@ -624,34 +442,6 @@ struct Pool
     int m_iCur;
     void AllocateBlocks(int n);
 };
-// Locks the pool, walks blocks from m_iCur allocating n units, updates m_1c and m_iCur, then unlocks.
-// @fnv 0x00d5feb0
-void Pool::AllocateBlocks(int aiCount)
-{
-    int* cs = m_cs;
-    DAT_00fdf05c(cs);
-    if (aiCount < 1)
-        aiCount = 1;
-    int start = m_iCur;
-    int iIndex = start;
-    do
-    {
-        Block* b = m_apBlocks[iIndex];
-        int before = b->m_28;
-        int got;
-        if (b->FUN_00dd7c40(aiCount, &got).m_kPointB)
-        {
-            iIndex++;
-            if (iIndex >= m_iArrayLength)
-                iIndex = 0;
-        }
-        b->FUN_00dd7360();
-        aiCount -= got;
-        m_1c += (b->m_28 - before) * b->m_iWordAt04;
-    } while (aiCount > 0 && iIndex != start);
-    m_iCur = iIndex;
-    DAT_00fdf100(cs);
-}
 }
 
 // @fnv 0x00d5fab0
@@ -687,22 +477,6 @@ class MemoryPoolManagerW
     MemoryPoolW* m_apkPools[(0x234 - 0x190) / 4];
     int m_iPoolCount;
 };
-
-// @fnv 0x00d5fbb0
-void MemoryPoolManagerW::UpdateTotalSize()
-{
-    int* pkCriticalSection = m_akCriticalSection;
-    DAT_00fdf05c(pkCriticalSection);
-    for (int i = 0; i < m_iPoolCount; i++)
-    {
-        MemoryPoolW* pkPool = m_apkPools[i];
-        int iOldCount = pkPool->m_iBlockCount;
-        if (pkPool->Compact() > 0)
-            pkPool->FUN_00dd7380(pkPool->m_uiFreeCount - pkPool->m_uiFreeCount / 10);
-        m_iTotalSize += (pkPool->m_iBlockCount - iOldCount) * pkPool->m_iBlockSize;
-    }
-    DAT_00fdf100(pkCriticalSection);
-}
 
 struct SubAllocator
 {
@@ -1378,82 +1152,6 @@ struct ScopedCs
     SixIntegerRecord* cs;
 };
 
-// @fnv 0x00d5fd70
-void DynamicMemoryAllocator::FUN_00d5fd70(void** apOut, int aCount, int aSize)
-{
-    ScopedCs guard;
-    guard.owner = this;
-    guard.cs = &m_04;
-    EnterCriticalSection(&m_04);
-
-    if (aSize <= 0x280)
-    {
-        SizeClassPool* pool = m_ec[(aSize + 15) >> 4];
-        int iFreeCount = pool->m_28;
-        void** cur = apOut;
-        void** end = apOut + aCount;
-        void* node = pool->m_00;
-        while (cur < end)
-        {
-            if (node == 0)
-            {
-                break;
-            }
-            *cur = node;
-            cur++;
-            node = *(void**)node;
-        }
-        pool->m_00 = node;
-        pool->m_28 -= (int)(cur - apOut);
-        void** start = cur;
-        while (cur < end)
-        {
-            if (pool->m_20 < pool->m_24)
-            {
-                do
-                {
-                    if (cur >= end)
-                    {
-                        break;
-                    }
-                    *cur = (void*)pool->m_20;
-                    pool->m_20 += pool->m_04;
-                    cur++;
-                } while (pool->m_20 < pool->m_24);
-                pool->m_28 -= (int)(cur - start);
-            }
-            else
-            {
-                *cur = pool->AllocateElement();
-                cur++;
-            }
-            start = cur;
-        }
-        guard.owner->m_1c += (pool->m_28 - iFreeCount) * (int)pool->m_04;
-    }
-    else
-    {
-        for (int i = 0; i < aCount; i++)
-        {
-            apOut[i] = guard.owner->m_28.v04(aSize);
-        }
-    }
-
-    DynamicMemoryAllocator* self = guard.owner;
-    unsigned int avail = (unsigned int)(self->m_e8 - self->m_1c);
-    unsigned int grow = (unsigned int)self->m_20;
-    if (avail > grow)
-    {
-        grow = avail;
-    }
-    self->m_20 = (int)grow;
-    if (avail >= (unsigned int)self->m_a94)
-    {
-        FUN_00d88040(1);
-    }
-    LeaveCriticalSection(guard.cs);
-}
-
 struct hkBool
 {
     char m_cBooleanValue;
@@ -1548,14 +1246,6 @@ struct hkLargeBlockAllocatorW
 
 bool __cdecl CompareLessThan(void* a, void* b);
 void __cdecl FUN_00dd7d00(void** arr, int lo, int hi, bool(__cdecl* cmpLess)(void*, void*));
-
-inline void quickSortPointers(void** arr, int numElem)
-{
-    if (numElem > 1)
-    {
-        FUN_00dd7d00(arr, 0, numElem - 1, CompareLessThan);
-    }
-}
 
 class hkFreeListAllocatorW
 {
@@ -1666,60 +1356,6 @@ class hkFreeListAllocatorW
     int FUN_00d600c0(hkMemoryWalkCallback callback, void* param);
 };
 
-// Collects free-list nodes, calls callback for other large-block chunks, then asks each free list to invoke its callback.
-// @fnv 0x00d600c0
-int hkFreeListAllocatorW::FUN_00d600c0(hkMemoryWalkCallback callback, void* apContext)
-{
-    int numBlocks = 0;
-    for (int i = 0; i < m_iFreeListCount; i++)
-    {
-        numBlocks += m_pFreeLists[i]->getTotalNumBlocks();
-    }
-
-    hkFreeListBlock** blocks =
-        (hkFreeListBlock**)m_blockAllocator->AllocateMemoryBlock(numBlocks * sizeof(hkFreeListBlock*));
-    if (!blocks)
-    {
-        return 1;
-    }
-
-    {
-        hkFreeListBlock** cur = blocks;
-        for (int i = 0; i < m_iFreeListCount; i++)
-        {
-            hkFreeListW* freeList = m_pFreeLists[i];
-            int numListBlocks = freeList->getTotalNumBlocks();
-            freeList->CollectFreeNodes(cur, numListBlocks);
-            cur += numListBlocks;
-        }
-    }
-
-    quickSortPointers((void**)blocks, numBlocks);
-
-    {
-        hkFreeListBlock** curBlock = blocks;
-        hkLargeBlockIteratorW iter = m_kLargeBlockAllocator.FUN_00dd8b20();
-        for (; iter.isValid(); m_kLargeBlockAllocator.AdvanceState(iter))
-        {
-            void* block = iter.GetChunkPayload();
-            if (block == (void*)*curBlock)
-            {
-                curBlock++;
-                continue;
-            }
-            callback(block, iter.GetLogicalSize(), iter.isInuse(), 0, apContext);
-        }
-    }
-
-    m_blockAllocator->ReleaseBlock(blocks, numBlocks * sizeof(hkFreeListBlock*));
-
-    for (int i = 0; i < m_iFreeListCount; i++)
-    {
-        m_pFreeLists[i]->FUN_00dd78f0(callback, i + 1, apContext);
-    }
-    return 0;
-}
-
 struct PoolFreeBlock
 {
     PoolFreeBlock* m_pNext;
@@ -1807,33 +1443,6 @@ struct FUN_00d5f980_cls
 
     void FUN_00d5f980(void* apBlock, int aiNumBytes);
 };
-
-// Returns apBlock to the pool free list for sizes up to 0x280 bytes, or to m_kFallback for larger sizes, updating m_iTotal.
-// @fnv 0x00d5f980
-void FUN_00d5f980_cls::FUN_00d5f980(void* apBlock, int aiNumBytes)
-{
-    if (apBlock == 0)
-        return;
-
-    EnterCriticalSection(&m_kLock);
-
-    if (aiNumBytes <= 0x280)
-    {
-        PoolFreeList* pList = m_apLists[(aiNumBytes + 0xf) >> 4];
-        int iOldCount = pList->m_iArrayLength;
-        pList->m_iArrayLength = iOldCount + 1;
-        ((PoolFreeBlock*)apBlock)->m_pNext = pList->m_pHead;
-        int iDelta = (pList->m_iArrayLength - iOldCount) * pList->m_iBlockSize;
-        pList->m_pHead = (PoolFreeBlock*)apBlock;
-        m_iTotal += iDelta;
-    }
-    else
-    {
-        m_kFallback.Free(apBlock);
-    }
-
-    LeaveCriticalSection(&m_kLock);
-}
 
 struct S_00d5fb70
 {
@@ -2513,15 +2122,6 @@ struct S_00d5fb70
     void FUN_00d5fb70(int value);
 };
 
-// Sets unkA94 to value while holding m_kCriticalSection.
-// @fnv 0x00d5fb70
-void S_00d5fb70::FUN_00d5fb70(int value)
-{
-    EnterCriticalSection(&m_kCriticalSection);
-    unkA94 = value;
-    LeaveCriticalSection(&m_kCriticalSection);
-}
-
 // ---- stand-in models of the objects the original code touches -------------
 // The unit file only names hkFreeListAllocator, so the layout below is
 // derived from the disassembly of FUN_00d5f750 itself.
@@ -2611,45 +2211,6 @@ struct HkFLA_StandIn
     int m_uiItemCount;         // +0x234
     void FUN_00d5f750(HkFLA_Stats* out);
 };
-
-// Gathers aggregate statistics from all elements into out while holding the critical section.
-// @fnv 0x00d5f750
-void HkFLA_StandIn::FUN_00d5f750(HkFLA_Stats* apStats)
-{
-    HkFLA_CritSec* cs = &m_cs;
-    EnterCriticalSection((void*)cs);
-    f28.FUN_00dd8d70(apStats);
-    // The original keeps a 24 byte block on the stack here and accumulates
-    // into its first dword only; the dead members lose their stores but the
-    // frame slot (and with it the frame size) stays.
-    HkFLA_Out stTotals = {0, 0, 0, 0, 0, 0};
-    int totalSize = 0;  // sum of the elements' f04
-    int totalArea = 0;  // sum of the elements' f0c
-    for (int i = 0; i < m_uiItemCount; i++)
-    {
-        HkFLA_Elem* e = m_pElems[i];
-        HkFLA_Out s = {0, 0, 0, 0, 0, 0};
-        e->FUN_00dd7430(&s);
-        if (e->f00 != 0 || e->f20 < e->f24)
-        {
-            unsigned int uiValue = e->f04;
-            if (uiValue > apStats->f14)
-                apStats->f14 = uiValue;
-        }
-        totalArea += s.f0c;
-        totalSize += s.f04;
-        stTotals.f00 += s.f00;
-    }
-    apStats->f0c += totalArea;
-    apStats->f04 += totalSize - stTotals.f00;
-    apStats->f08 = f20;
-    int iResult = f24->v6();
-    if (iResult == -1)
-        apStats->f10 = iResult;
-    else
-        apStats->f10 = apStats->f0c + iResult;
-    LeaveCriticalSection((void*)cs);
-}
 
 struct ItemObj
 {
@@ -2758,26 +2319,6 @@ struct AllocModel
 
     bool* __thiscall FUN_00d5f890(bool* __restrict p);
 };
-
-// Locks m_cs, sets *p to 1, calls each item's method until its output byte is zero, then returns p.
-// @fnv 0x00d5f890
-bool* __thiscall AllocModel::FUN_00d5f890(bool* __restrict pbSuccess)
-{
-    EnterCriticalSection(&m_cs);
-    *pbSuccess = 1;
-    for (int i = 0; i < m_uiItemCount; i++)
-    {
-        unsigned char ok;
-        m_items[i]->FUN_00dd7140_q(&ok);
-        if (!ok)
-        {
-            *pbSuccess = 0;
-            break;
-        }
-    }
-    LeaveCriticalSection(&m_cs);
-    return pbSuccess;
-}
 
 struct FUN_00d5fac0_item
 {
@@ -2903,37 +2444,6 @@ struct FUN_00d5fac0_cls
     int m_uiItemCount;
     void FUN_00d5fac0();
 };
-
-// Locks m_lock, iterates m_items calling FUN_00dd7360 and accumulating m_1c, retrying while flag and retry are set, then calls m_28.PurgeAndSelectBlock.
-// @fnv 0x00d5fac0
-void FUN_00d5fac0_cls::FUN_00d5fac0()
-{
-    void* cs = &m_lock;
-    EnterCriticalSection(cs);
-    bool retry = false;
-    bool flag;
-    do
-    {
-        flag = false;
-        for (int i = 0; i < m_uiItemCount; ++i)
-        {
-            FUN_00d5fac0_item* p = m_items[i];
-            int saved = p->m_28;
-            if (p->Compact() < 0)
-            {
-                retry = true;
-            }
-            if (p->m_10 != 0)
-            {
-                flag = true;
-            }
-            p->FUN_00dd7360();
-            m_1c += (p->m_28 - saved) * p->m_04;
-        }
-    } while (flag && retry);
-    m_28.PurgeAndSelectBlock();
-    LeaveCriticalSection(cs);
-}
 
 struct CRITICAL_SECTION
 {
@@ -3097,52 +2607,6 @@ struct hkPool
     void* FUN_00d5fca0(int* p);
 };
 
-// Allocates a block of the requested size from the pool's free list, bump allocator, or large allocator, and updates the high-water mark for free memory.
-// @fnv 0x00d5fca0
-void* hkPool::FUN_00d5fca0(int* apSize)
-{
-    int size = *apSize;
-    EnterCriticalSection(&this->m_lock);
-    void* result;
-    if (size <= 0x280)
-    {
-        hkPoolBucket* b = this->m_class[(size + 15) >> 4];
-        hkPoolNode* node = b->freeHead;
-        int oldCount = b->count;
-        if (node)
-        {
-            b->count = oldCount - 1;
-            b->freeHead = node->next;
-            result = node;
-        }
-        else if (b->bump >= b->bumpEnd)
-        {
-            result = b->AllocateElement();
-        }
-        else
-        {
-            result = b->bump;
-            b->count = oldCount - 1;
-            b->bump += b->elemSize;
-        }
-        this->m_uiBufferCapacity += (b->count - oldCount) * b->elemSize;
-        *apSize = b->elemSize;
-    }
-    else
-    {
-        result = this->m_large.FUN_00dd8790_v1(size);
-    }
-    unsigned int free = this->m_total - this->m_uiBufferCapacity;
-    unsigned int maxFree = this->m_maxFree;
-    if (free > maxFree)
-        maxFree = free;
-    this->m_maxFree = maxFree;
-    if (free >= this->m_pFreeList)
-        FUN_00d88040(1);
-    LeaveCriticalSection(&this->m_lock);
-    return result;
-}
-
 struct QuitDeleteView
 {
     __declspec(noinline) void FUN_00d5fc70(FUN_00dd7200_cls* entry);
@@ -3157,42 +2621,6 @@ struct QuitAllocator : hkFreeListAllocatorW
 {
     void FUN_00d5ff50();
 };
-
-// Frees each non-null free list, nulls later matching pointers, then calls the large-block allocator's cleanup.
-// @fnv 0x00d5ff50
-void QuitAllocator::FUN_00d5ff50()
-{
-    if (m_iFreeListCount > 0)
-    {
-        int index = 1;
-        hkFreeListW** slot = m_pFreeLists;
-        do
-        {
-            hkFreeListW* entry = *slot;
-            if (entry)
-            {
-                reinterpret_cast<QuitDeleteView*>(this)->FUN_00d5fc70(reinterpret_cast<FUN_00dd7200_cls*>(entry));
-                int later = index;
-                if (later < m_iFreeListCount)
-                {
-                    hkFreeListW** next = slot + 1;
-                    do
-                    {
-                        if (*next == entry)
-                        {
-                            *next = 0;
-                        }
-                        ++next;
-                        ++later;
-                    } while (later < m_iFreeListCount);
-                }
-            }
-            ++index;
-            ++slot;
-        } while (index - 1 < m_iFreeListCount);
-    }
-    reinterpret_cast<QuitLargeBlockView*>(&m_kLargeBlockAllocator)->ProcessAllItems();
-}
 
 extern "C" int DAT_010d1464;
 extern "C" __declspec(dllimport) void __stdcall DeleteCriticalSection(void*);
@@ -3212,21 +2640,6 @@ struct FUN_00d5ffd0_class
     void __thiscall FUN_00cbf1a0();
     void __thiscall FUN_00d5ffd0();
 };
-// Sets the vtable, calls cleanup and member functions, deletes the critical section, then calls another member function.
-// @fnv 0x00d5ffd0
-void FUN_00d5ffd0_class::FUN_00d5ffd0()
-{
-    vtable = &DAT_010d1464;
-    FUN_00d5ff50();
-    EmbeddedItem* end = reinterpret_cast<EmbeddedItem*>(reinterpret_cast<char*>(this) + 0xa94);
-    for (int i = 40; i >= 0; --i)
-    {
-        (--end)->FUN_00dd7200();
-    }
-    reinterpret_cast<EmbeddedMember*>(reinterpret_cast<char*>(this) + 0x28)->FUN_00dd7ec0();
-    DeleteCriticalSection(reinterpret_cast<char*>(this) + 4);
-    FUN_00cbf1a0();
-}
 
 extern "C" void __debugbreak();
 namespace FreeListCreationView {
@@ -3359,30 +2772,4 @@ struct Owner17
     Slot17* end23c;
     FUN_00dd7200_cls* FUN_00d60020(int a1, int a2, int a3);
 };
-// Advances cur238, initializes s when nonnull, then returns a matching slot or registers and returns s.
-// @fnv 0x00d60020
-FUN_00dd7200_cls* Owner17::FUN_00d60020(int aiParam1, int aiParam2, int aiParam3)
-{
-    if (cur238 >= end23c)
-    {
-        __debugbreak();
-    }
-    Slot17* s = cur238;
-    cur238 = s + 1;
-    if (s != 0)
-    {
-        s->FUN_00dd7650(aiParam1, aiParam2, aiParam3, &unk28);
-    }
-    for (int i = 0; i < count234; i++)
-    {
-        if (((Slot17*)slots[i])->f4 == s->f4)
-        {
-            ((DeleteView*)this)->FUN_00d5fc70((FUN_00dd7200_cls*)s);
-            return slots[i];
-        }
-    }
-    slots[count234] = (FUN_00dd7200_cls*)s;
-    count234++;
-    return (FUN_00dd7200_cls*)s;
-}
 }

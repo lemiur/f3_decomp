@@ -8,12 +8,6 @@ unsigned int FUN_00ddcdd0(unsigned int auiValue, unsigned int auiIndex, unsigned
     return (auiValue & ~(0x1f << (auiIndex * 5))) | (auiFieldValue << (auiIndex * 5));
 }
 
-// @fnv 0x00ddcdf0
-int __cdecl ExtractBitField(unsigned short ausValue, char acShiftIndex)
-{
-    return (ausValue >> (acShiftIndex * 5)) & 0x1f;
-}
-
 struct DDCC60BaseObject
 {
     virtual ~DDCC60BaseObject()
@@ -91,40 +85,9 @@ struct CpuObject
     void FUN_00ddcc60();
     CpuObject* DestroyOrFree(unsigned int flags);
 };
-// Calls FUN_00ddcc60, then if flags has bit 1 set, invokes the allocator from FUN_00c85750 on this with size, and returns this.
-// @fnv 0x00ddcd70
-CpuObject* CpuObject::DestroyOrFree(unsigned int flags)
-{
-    FUN_00ddcc60();
-    if (flags & 1)
-    {
-        CpuAllocatorHolder* holder = FUN_00c85750();
-        holder->allocator->Invoke(this, size);
-    }
-    return this;
-}
 
 extern double DAT_010cd5a8;
 extern double DAT_0101ff40;
-// Scans 31 candidate angles computed from index and returns the first index whose candidate is >= angle, decremented when angle is positive and not equal.
-// @fnv 0x00ddce10
-int FindAngleIndex(float angle)
-{
-    int index = 0;
-    float candidate;
-    while (index < 31)
-    {
-        candidate = (float)((double)index * DAT_010cd5a8 - DAT_0101ff40);
-        if (candidate >= angle)
-        {
-            if (angle > 0.0f && candidate != angle)
-                --index;
-            return index;
-        }
-        ++index;
-    }
-    return index;
-}
 
 int __cdecl FUN_00cb0fa0(const char* pcA, const char* pcB);
 
@@ -267,25 +230,6 @@ struct DDCE80Bool
     }
 };
 
-inline float DDCE80Fabs(float r)
-{
-    return (float)fabs(r);
-}
-
-inline bool DDCE80IsNearlyEqual(float d)
-{
-    if (DDCE80Fabs(d) < 0.001f)
-        return true;
-    return false;
-}
-
-// Returns true when the z components of the two points are not nearly equal.
-// @fnv 0x00ddce80
-DDCE80Bool __cdecl AreZDiffering(const DDCE80Point& a, const DDCE80Point& b)
-{
-    return DDCE80Bool(!DDCE80IsNearlyEqual(a.z - b.z));
-}
-
 #include <xmmintrin.h>
 #include <math.h>
 namespace fnv_00ddd040 {
@@ -303,40 +247,12 @@ struct S_P
         return p;
     }
 };
-// Computes the dot product of the first three components of two vectors, takes its absolute value, and stores 1 in out if below DAT_0103c7c8, else 0.
-// @fnv 0x00ddd040
-unsigned char* __cdecl IsDotProductBelowThreshold(unsigned char* out, S_P a, S_P b)
-{
-    __m128 x1 = a.val()->q;
-    __m128 x2 = b.val()->q;
-    x2 = _mm_mul_ps(x1, x2);
-    __m128 vSum = _mm_add_ss(_mm_shuffle_ps(x2, x2, 0x55), x2);
-    vSum = _mm_add_ss(_mm_shuffle_ps(x2, x2, 0xaa), vSum);
-    float d;
-    _mm_store_ss(&d, vSum);
-    d = (float)fabs(d);
-    unsigned char r;
-    if (d < DAT_0103c7c8)
-    {
-        r = 1;
-    }
-    else
-    {
-        r = 0;
-    }
-    *(volatile unsigned char*)out = r;
-    return out;
-}
 }  // namespace fnv_00ddd040
 
 struct FUN_00ddcc40
 {
     virtual ~FUN_00ddcc40();
 };
-
-// @fnv 0x00ddcc40
-FUN_00ddcc40::~FUN_00ddcc40()
-{}
 
 struct Base1
 {
@@ -381,12 +297,3 @@ struct Own_00ddcd60 : A1_00ddcd60, A2_00ddcd60
 // @fnv 0x00ddcd60
     void FUN_00ddcd60();
 };
-Own_00ddcd60::Own_00ddcd60()
-{}
-void Own_00ddcd60::key_fn()
-{}
-Own_00ddcd60* make_00ddcd60()
-{
-    static Own_00ddcd60 o;
-    return &o;
-}

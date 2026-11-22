@@ -27,11 +27,6 @@ hkReal hkpCylinderShapeGetCylRadius::FUN_00d571a0() {
 
 extern char DAT_01268940[];
 void __cdecl FUN_00c90360(void* item, const char* type);
-// @fnv 0x00d571c0
-void __cdecl FUN_00d571c0(void* item, const char*)
-{
-    FUN_00c90360(item, DAT_01268940);
-}
 
 struct C00d573e0 {
     char  pad00[0x10];
@@ -137,30 +132,6 @@ struct Vec_d57220v {
     }
 };
 
-static inline float Abs_d57220v(float r) { return (float)fabs(r); }
-
-static __forceinline void Perp_d57220v(const Vec_d57220v& vectorIn, Vec_d57220v& biVectorOut)
-{
-    int minIdx = 0;
-    int ok1 = 1;
-    int ok2 = 2;
-    float a0 = Abs_d57220v(vectorIn(0));
-    float a1 = Abs_d57220v(vectorIn(1));
-    float a2 = Abs_d57220v(vectorIn(2));
-    if (a1 < a0) {
-        ok1 = 0;
-        minIdx = 1;
-        a0 = a1;
-    }
-    if (a2 < a0) {
-        ok2 = minIdx;
-        minIdx = 2;
-    }
-    biVectorOut.setZero4();
-    biVectorOut(ok1) = vectorIn(ok2);
-    biVectorOut(ok2) = -vectorIn(ok1);
-}
-
 struct Cyl_d57220 {
     int unk00;
     int unk04;
@@ -177,17 +148,6 @@ struct Cyl_d57220 {
     void InitPerpendiculars();
 };
 
-// Computes the direction between m_kVertexA and m_kVertexB, then derives two perpendicular vectors stored in m_kPerpendicular1 and m_kPerpendicular2.
-// @fnv 0x00d57220
-void Cyl_d57220::InitPerpendiculars()
-{
-    Vec_d57220v dir;
-    dir.q = _mm_sub_ps(m_kVertexB.q, m_kVertexA.q);
-    dir.normalize3();
-    Perp_d57220v(dir, m_kPerpendicular1);
-    m_kPerpendicular1.normalize3();
-    m_kPerpendicular2.setCross(dir, m_kPerpendicular1);
-}
 }  // namespace fnv_00d57220
 
 extern float DAT_01016248;
@@ -208,22 +168,6 @@ struct S00d57830 {
     void FUN_00d57830(__m128* out);
 };
 
-// Stores (m_kVertexA + m_kVertexB) scaled by DAT_01016248 into *out.
-// @fnv 0x00d57830
-void S00d57830::FUN_00d57830(__m128* out)
-{
-    __m128 a = this->m_kVertexA;
-    __m128 b = this->m_kVertexB;
-    __m128 sum = _mm_add_ps(b, a);
-
-    *out = sum;
-
-    __m128 c = _mm_load_ss(&DAT_01016248);
-    __m128 s = _mm_shuffle_ps(c, c, 0);
-
-    *out = _mm_mul_ps(s, sum);
-}
-
 struct FnvCpu_FUN_00d57870_CpuData0 {
     __m128 field00;
 };
@@ -243,11 +187,6 @@ struct FnvCpu_FUN_00d57870_CpuObject {
     __m128 field30;
     void CopyField30(FnvCpu_FUN_00d57870_CpuData0* input0);
 };
-// @fnv 0x00d57870
-void FnvCpu_FUN_00d57870_CpuObject::CopyField30(FnvCpu_FUN_00d57870_CpuData0* apCpuData)
-{
-    apCpuData->field00 = this->field30;
-}
 
 namespace fnv_00d571d0 {
 namespace c571 { const float DAT_01056528 = 1.1f; }

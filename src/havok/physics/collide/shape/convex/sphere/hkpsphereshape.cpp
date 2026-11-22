@@ -7,28 +7,12 @@
 extern char const* const g_01268970_arg1;
 void __cdecl FUN_00c90360(char const* const*, char const* const*);
 
-// @fnv 0x00cd8040
-void __cdecl FUN_00cd8040(char const* const* a1, char const* const* a2)
-{
-    FUN_00c90360(a1, &g_01268970_arg1);
-}
-
 extern int DAT_010cb5ac;
 
 struct FUN_00cd8160
 {
     FUN_00cd8160(float radius);
 };
-
-// @fnv 0x00cd8160
-FUN_00cd8160::FUN_00cd8160(float radius)
-{
-    *(float*)((char*)this + 0x10) = radius;
-    *(unsigned short*)((char*)this + 6) = 1;
-    *(int*)((char*)this + 8) = 0;
-    *(int*)((char*)this + 0xc) = 1;
-    *(int*)this = (int)&DAT_010cb5ac;
-}
 
 // @fnv 0x00cd8050
 int __cdecl FUN_00cd8050()
@@ -88,16 +72,6 @@ struct Shape_00cd8100_cls
     void GetAabb(const Vec_00cd8100* t, float tol, Aabb_00cd8100* out);
     Shape_00cd8100 self;
 };
-
-// Computes the axis-aligned bounding box of a sphere by expanding its position by the radius plus a tolerance.
-// @fnv 0x00cd8100
-void Shape_00cd8100_cls::GetAabb(const Vec_00cd8100* t, float afTolerance, Aabb_00cd8100* apAabb)
-{
-    float r = self.m_fSphereRadius + afTolerance;
-    __m128 s = _mm_load_ps1(&r);
-    apAabb->m_kMinimumCorner = _mm_sub_ps(t->m_pos, s);
-    apAabb->m_kMaximumCorner = _mm_add_ps(t->m_pos, s);
-}
 
 extern "C" void _ReadWriteBarrier(void);
 extern "C" unsigned __int64 __rdtsc(void);
@@ -351,17 +325,6 @@ struct RayHits
 {
     RayHit m_akRayOutputs[4];
 };
-static __forceinline void transposeVectors(__m128& r0, __m128& r1, __m128& r2, __m128& r3)
-{
-    __m128 t0 = _mm_shuffle_ps(r0, r1, 0x44);
-    __m128 t2 = _mm_shuffle_ps(r0, r1, 0xee);
-    __m128 t1 = _mm_shuffle_ps(r2, r3, 0x44);
-    __m128 t3 = _mm_shuffle_ps(r2, r3, 0xee);
-    r0 = _mm_shuffle_ps(t0, t1, 0x88);
-    r1 = _mm_shuffle_ps(t0, t1, 0xdd);
-    r2 = _mm_shuffle_ps(t2, t3, 0x88);
-    r3 = _mm_shuffle_ps(t2, t3, 0xdd);
-}
 
 struct ProbeRecord
 {
@@ -383,168 +346,11 @@ struct ProbeSphere : hkpSphereShape
 {
     RayMask FUN_00cd8220(const RayQuerySet&, RayHits&, const RayMask&) const;
 };
-// Performs a vectorized ray-sphere intersection test, writing hit fractions and normals into hits and returning the active RayMask.
-// @fnv 0x00cd8220
-RayMask ProbeSphere::FUN_00cd8220(const RayQuerySet& ray, RayHits& hits, const RayMask& enabled) const
-{
-    ProbeStream* s = (ProbeStream*)TlsGetValue(DAT_0126835c);
-    char* pCurrent = s->current;
-    if (pCurrent < s->end)
-    {
-        unsigned ticks;
-        ((ProbeRecord*)pCurrent)->tag = (char*)&ticks;
-        ((ProbeRecord*)pCurrent)->tag = "TtrcSphereBundle";
-        _ReadWriteBarrier();
-        ticks = (unsigned)__rdtsc();
-        _ReadWriteBarrier();
-        ((ProbeRecord*)pCurrent)->time = ticks;
-        s->current = pCurrent + 12;
-    }
-    RayMask active = enabled;
-    RayVector radius, radiusSquared;
-    radius.splat(m_fSphereRadius);
-    radiusSquared.product(radius, radius);
-    __m128 hundredValues = {100.0f, 100.0f, 100.0f, 100.0f};
-    RayVector hundred;
-    hundred.quad() = hundredValues;
-    RayVector quadratic, linear;
-    {
-        RayVector dx, dy, dz;
-        dx.difference(ray.m_vTo[0], ray.m_vFrom[0]);
-        quadratic.product(dx, dx);
-        linear.product(ray.m_vFrom[0], dx);
-        dy.difference(ray.m_vTo[1], ray.m_vFrom[1]);
-        quadratic.accumulate(dy, dy);
-        linear.accumulate(ray.m_vFrom[1], dy);
-        dz.difference(ray.m_vTo[2], ray.m_vFrom[2]);
-        quadratic.accumulate(dz, dz);
-        linear.accumulate(ray.m_vFrom[2], dz);
-    }
-    RayVector scaled, linearSquared;
-    scaled.product(quadratic, radiusSquared);
-    scaled.multiply(hundred);
-    linearSquared.product(linear, linear);
-    RayMask farCheck = linearSquared.greater(scaled);
-    RayVector zero;
-    zero.zero();
-    RayVector shift;
-    shift.choose(zero, linear, farCheck);
-    shift.negate(shift);
-    linear.choose(linear, zero, farCheck);
-    linearSquared.choose(linearSquared, zero, farCheck);
-    RayVector reciprocal, middle, one, remaining;
-    reciprocal.reciprocal(quadratic);
-    middle.product(shift, reciprocal);
-    one.quad() = kOne;
-    remaining.difference(one, middle);
-    RayVector c;
-    c.zero();
-    {
-        RayVector midpoint[3];
-        for (int axis = 0; axis < 3; ++axis)
-        {
-            midpoint[axis].product(ray.m_vFrom[axis], remaining);
-            midpoint[axis].accumulate(ray.m_vTo[axis], middle);
-            c.accumulate(midpoint[axis], midpoint[axis]);
-        }
-    }
-    c.subtract(radiusSquared);
-    RayVector det;
-    det.negate(quadratic);
-    det.multiply(c);
-    det.add(linearSquared);
-    RayMask infiniteHit = det.greater(zero);
-    active.intersect(active, infiniteHit);
-    RayVector root;
-    __m128 approx = _mm_rsqrt_ps(det);
-    __m128 three = tripleVector, half = halfVector;
-    root.quad() = _mm_mul_ps(
-        _mm_mul_ps(_mm_sub_ps(three, _mm_mul_ps(_mm_mul_ps(det, approx), approx)), _mm_mul_ps(approx, half)), det);
-    root.choose(zero, root, infiniteHit);
-    RayVector fraction = shift;
-    fraction.subtract(linear);
-    fraction.subtract(root);
-    RayVector limits;
-    limits.set(hits.m_akRayOutputs[0].m_fHitFraction, hits.m_akRayOutputs[1].m_fHitFraction,
-               hits.m_akRayOutputs[2].m_fHitFraction, hits.m_akRayOutputs[3].m_fHitFraction);
-    fraction.multiply(reciprocal);
-    RayMask below = fraction.less(limits);
-    RayMask positive = fraction.atLeast(zero);
-    active.intersect(active, below);
-    active.intersect(active, positive);
-    RayVector invRadius, oneMinusFraction;
-    invRadius.reciprocal(radius);
-    oneMinusFraction.difference(one, fraction);
-    RayVector normals[4];
-    for (int axis = 0; axis < 3; ++axis)
-    {
-        normals[axis].product(ray.m_vFrom[axis], oneMinusFraction);
-        normals[axis].accumulate(ray.m_vTo[axis], fraction);
-        normals[axis].multiply(invRadius);
-    }
-    normals[3].zero();
-    transposeVectors(normals[0].quad(), normals[1].quad(), normals[2].quad(), normals[3].quad());
-    for (int lane = 0; lane < 4; ++lane)
-    {
-        if (active.any(RayMask::components[lane]))
-        {
-            hits.m_akRayOutputs[lane].m_fHitFraction = fraction(lane);
-            hits.m_akRayOutputs[lane].m_vHitNormal = normals[lane];
-            hits.m_akRayOutputs[lane].setKey(~0u);
-        }
-    }
-    s = (ProbeStream*)TlsGetValue(DAT_0126835c);
-    pCurrent = s->current;
-    if (pCurrent < s->end)
-    {
-        unsigned ticks;
-        ((ProbeRecord*)pCurrent)->tag = (char*)&ticks;
-        ((ProbeRecord*)pCurrent)->tag = "Et";
-        _ReadWriteBarrier();
-        ticks = (unsigned)__rdtsc();
-        _ReadWriteBarrier();
-        ((ProbeRecord*)pCurrent)->time = ticks;
-        s->current = pCurrent + 12;
-    }
-    return active;
-}
 
 extern "C" __m128 _mm_setzero_ps(void);
 extern "C" void _mm_store_ps(float*, __m128);
 
-// @fnv 0x00cd8060
-void __stdcall FUN_00cd8060(int direction, float* vertexOut)
-{
-    __m128 zero = _mm_setzero_ps();
-    _mm_store_ps(vertexOut, zero);
-}
-
 extern "C" void __movsd(unsigned long*, const unsigned long*, unsigned long);
-
-// Unpacks a count and destination pointer from packed, zeroes four floats at dst, then copies them forward over the following (count-1)*4 floats.
-// @fnv 0x00cd8080
-void __stdcall FUN_00cd8080(int aUnused, __int64 packed)
-{
-    union
-    {
-        __int64 v;
-        struct
-        {
-            int count;
-            float* dst;
-        } s;
-    } u;
-    u.v = packed;
-    int c = u.s.count;
-    c += -1;
-    if (c >= 0)
-    {
-        unsigned long n = ((unsigned long)c & 0xfffffff) * 4;
-        __m128 z = _mm_setzero_ps();
-        *(__m128*)u.s.dst = z;
-        __movsd((unsigned long*)(u.s.dst + 4), (const unsigned long*)u.s.dst, n);
-    }
-}
 
 extern "C" __m128 _mm_setzero_ps(void);
 
@@ -557,14 +363,6 @@ struct __declspec(align(16)) CentreVectorCD80
         m_vComponents = _mm_setzero_ps();
     }
 };
-
-// @fnv 0x00cd80c0
-CentreVectorCD80 __stdcall FUN_00cd80c0()
-{
-    CentreVectorCD80 result;
-    result.zero();
-    return result;
-}
 
 struct FUN_00cd8140_Result
 {
@@ -584,16 +382,3 @@ struct FUN_00cd8140_Obj
 
     void FUN_00cd8140(FUN_00cd8140_Result* result);
 };
-
-// @fnv 0x00cd8140
-void FUN_00cd8140_Obj::FUN_00cd8140(FUN_00cd8140_Result* result)
-{
-    _mm_store_ps(reinterpret_cast<float*>(result), _mm_setzero_ps());
-    result->unk0C = unk10;
-}
-
-// @fnv 0x00cd80e0
-void __stdcall FUN_00cd80e0(float* output)
-{
-    *reinterpret_cast<__m128*>(output) = _mm_setzero_ps();
-}

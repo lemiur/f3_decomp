@@ -27,18 +27,6 @@ struct Secondary
 struct Owner : Prefix32, Secondary
 {
 };
-// Computes the address of the child member (or null if the owner is null) and passes it to context->FUN_00c93920.
-// @fnv 0x00de2950
-void Secondary::FUN_00de2950(Context* context)
-{
-    Owner* owner = reinterpret_cast<Owner*>(reinterpret_cast<char*>(this) - sizeof(Prefix32));
-    void* value;
-    if (owner)
-        value = &child;
-    else
-        value = 0;
-    context->FUN_00c93920(value);
-}
 
 struct S_00de2980_B2
 {
@@ -68,12 +56,6 @@ struct S_00de2980_D : S_00de2980_B0, S_00de2980_B1, S_00de2980_B2
 {
     virtual void FUN_00de2980(S_00de2980_World* w);
 };
-
-// @fnv 0x00de2980
-void S_00de2980_D::FUN_00de2980(S_00de2980_World* pWorld)
-{
-    pWorld->ClearValue(this);
-}
 
 struct DE29B0PartA
 {
@@ -114,12 +96,6 @@ struct FUN_00de29b0 : DE29B0Base, DE29B0Listener
 
     FUN_00de29b0(void* owner, void* userData);
 };
-
-// Initializes the base with owner, sets the float member to 0.0f and stores userData in the pointer member.
-// @fnv 0x00de29b0
-FUN_00de29b0::FUN_00de29b0(void* owner, void* userData)
-    : DE29B0Base(owner), m_uiFilterValue(0.0f), m_ulUserData(userData)
-{}
 
 struct hkBaseObject
 {
@@ -261,24 +237,6 @@ struct FUN_00de2a00_cls
     void ProcessSpawnedList();
 };
 
-// Iterates the entries of m_1c up to m_70 and passes each m_6c element to m_18.v04.
-// @fnv 0x00de2a00
-void FUN_00de2a00_cls::ProcessSpawnedList()
-{
-    SpawnedList* list = m_1c;
-    int i = 0;
-    while (list != 0)
-    {
-        if (i >= list->m_70)
-        {
-            break;
-        }
-        m_18.v04(list->m_6c[i]);
-        ++i;
-        list = m_1c;
-    }
-}
-
 extern "C"
 {
     unsigned __int64 __rdtsc(void);
@@ -414,48 +372,6 @@ struct FUN_00de4340_cls
 
     HkDisplayConvexObj* GetOrCreateConvex(HkArrayRaw* a1);
 };
-
-// Lazily allocates a pair block and a convex object, stores the convex in m_pConvex, appends it to a1, and returns m_pConvex.
-// @fnv 0x00de4340
-HkDisplayConvexObj* FUN_00de4340_cls::GetOrCreateConvex(HkArrayRaw* a1)
-{
-    int zero = 0;
-    if (m_pConvex == (HkDisplayConvexObj*)zero)
-    {
-        HkArrayPairBlock* pPairBlock = (HkArrayPairBlock*)zero;
-        HkAllocHolder* h = FUN_00c85750();
-        void* pMemory = h->m_pAllocator->Alloc(0x18);
-        if (pMemory != (void*)zero)
-        {
-            HkArrayPairBlock* p = (HkArrayPairBlock*)pMemory;
-            *(void* volatile*)&p->m_arrA.m_pData = (void*)zero;
-            *(volatile int*)&p->m_arrA.m_iArrayLength = zero;
-            unsigned int uiCapFlag = 0x80000000u;
-            *(volatile unsigned int*)&p->m_arrA.m_uCapFlags = uiCapFlag;
-            *(void* volatile*)&p->m_arrB.m_pData = (void*)zero;
-            *(volatile int*)&p->m_arrB.m_iArrayLength = zero;
-            p->m_arrB.m_uCapFlags = uiCapFlag;
-            pPairBlock = p;
-        }
-
-        h = FUN_00c85750();
-        pMemory = h->m_pAllocator->Alloc(0x60);
-        ((HkDisplayConvexObj*)pMemory)->m_u04 = 0x60;
-        m_pConvex = ((HkDisplayConvexObj*)pMemory)->FUN_00de1d20(pPairBlock);
-
-        h = FUN_00c85750();
-        if (a1->m_iArrayLength == (int)(a1->m_uCapFlags & 0x3fffffffu))
-        {
-            ResizeAudioStream(h->m_pAllocator, a1, 4);
-        }
-        int iIndex = a1->m_iArrayLength;
-        HkDisplayConvexObj** data = (HkDisplayConvexObj**)a1->m_pData;
-        HkDisplayConvexObj** slot = data + iIndex;
-        *slot = *(HkDisplayConvexObj* volatile*)&m_pConvex;
-        a1->m_iArrayLength++;
-    }
-    return m_pConvex;
-}
 
 extern "C" void _ReadBarrier();
 extern "C" void _WriteBarrier();

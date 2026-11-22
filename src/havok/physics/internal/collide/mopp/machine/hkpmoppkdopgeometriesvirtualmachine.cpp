@@ -241,23 +241,6 @@ struct FUN_00e65ea0_cls
     void ClearArray();
 };
 
-// Frees the data array through the audio allocator when the high flag bit is clear, then resets the pointer, count and flag.
-// @fnv 0x00e65ea0
-void FUN_00e65ea0_cls::ClearArray()
-{
-    AudioHolder* pHolder = FUN_00c85750();
-    AudioAllocator* pAllocator = pHolder->m_pAllocator;
-    unsigned int uFlags = m_uiObjectFlags;
-    m_uCount = 0;
-    if ((uFlags & 0x80000000u) == 0)
-    {
-        unsigned int uCount = uFlags & 0x3fffffffu;
-        pAllocator->FreeArray(m_pData, uCount * 4u);
-    }
-    m_pData = 0;
-    m_uiObjectFlags = 0x80000000u;
-}
-
 void __cdecl ResizeAudioStream(void* allocator, void* list, unsigned int stride);
 
 template <class T> inline void CopyConstruct(T* dst, int count, const T& value)

@@ -13,12 +13,6 @@ void __cdecl CopyIfNonEmpty(char* dest, const char* src, int count)
 
 void __cdecl FUN_00ec8d33(int a, int b, int c);
 
-// @fnv 0x00cb10f0
-void __cdecl CallWithZeroMiddleArg(int aiFirst, int aiThird)
-{
-    FUN_00ec8d33(aiFirst, 0, aiThird);
-}
-
 struct BSAudio;
 struct UnkRet
 {
@@ -30,12 +24,6 @@ struct UnkHolder
 };
 extern "C" BSAudio* __cdecl FUN_00c85750();
 extern "C" void __cdecl CallSwappedArgs(BSAudio*, int);
-
-// @fnv 0x00cb13c0
-void __cdecl FUN_00cb13c0(int aiAudio)
-{
-    CallSwappedArgs((BSAudio*)aiAudio, *(int*)((char*)FUN_00c85750() + 0x10));
-}
 
 double __cdecl FUN_00ecdf2d(unsigned int value, int mode);
 // @fnv 0x00cb1110
@@ -54,45 +42,7 @@ class hkBool
     char m_cBooleanValue;
 };
 
-// Returns true if str begins with prefix by comparing characters until the prefix's null terminator.
-// @fnv 0x00cb1310
-hkBool StartsWith(const char* acString, const char* prefix)
-{
-    for (int i = 0; prefix[i] != 0; ++i)
-    {
-        if (acString[i] != prefix[i])
-        {
-            return false;
-        }
-    }
-    return true;
-}
-
 int __cdecl FUN_00cb10d0(const char* text);
-
-// Compares the tail of text against suffix and stores whether text ends with suffix into result.
-// @fnv 0x00cb1340
-bool* __cdecl EndsWith(bool* result, const char* text, const char* suffix)
-{
-    int textLength = FUN_00cb10d0(text);
-    int suffixLength = FUN_00cb10d0(suffix);
-    if (textLength < suffixLength)
-    {
-        *result = false;
-        return result;
-    }
-    int offset = textLength - suffixLength;
-    for (int i = 0; i < suffixLength; ++i)
-    {
-        if (text[offset + i] != suffix[i])
-        {
-            *result = false;
-            return result;
-        }
-    }
-    *result = true;
-    return result;
-}
 
 class NineIntegerRecord
 {
@@ -150,13 +100,6 @@ int __cdecl FUN_00cb1290(const unsigned char* left,const unsigned char* right,un
 
 const char* __cdecl FUN_00cb1150(const char* str, int c);
 
-// @fnv 0x00cb1390
-int __cdecl FUN_00cb1390(const char* str, char acChar)
-{
-    const char* p = FUN_00cb1150(str, acChar);
-    return p ? (int)(p - str) : -1;
-}
-
 struct S_00cb1410_Buf
 {
     int unk00;
@@ -172,15 +115,6 @@ struct S_00cb1410_Buf
 };
 int __cdecl FUN_00cb1160(int a, int b);
 
-// Constructs a local S_00cb1410_Buf, reads unk10 from FUN_00c85750()'s result, and passes it with a to FUN_00cb1160.
-// @fnv 0x00cb1410
-void __cdecl FUN_00cb1410(int aiValue)
-{
-    S_00cb1410_Buf buf;
-    int r = FUN_00c85750()->unk10;
-    FUN_00cb1160(aiValue, r);
-}
-
 struct Sink
 {
     void FUN_00cb0c50(const char* p, int n);
@@ -189,40 +123,6 @@ struct Sink
 const char* __cdecl FUN_00cb1130(const char* a, const char* b);
 int __cdecl FUN_00cb10d0(const char* text);
 char* __cdecl FUN_00cb1140(const char* s, int c);
-
-static __declspec(noinline) char* skip(char* p)
-{
-    while (*p == ' ')
-        ++p;
-    return p;
-}
-
-// Finds needle in hay, skips spaces to an '=', then a quoted string, and passes the quoted text to sink; returns 1 on success, 0 otherwise.
-// @fnv 0x00d48440
-static __declspec(noinline) int ParseQuotedValue(const char* pText, const char* pKey, Sink* sink)
-{
-    const char* p = FUN_00cb1130(pText, pKey);
-    if (!p)
-        return 0;
-    p += FUN_00cb10d0(pKey);
-    p = skip((char*)p);
-    if (*p != '=')
-        return 0;
-    p = skip((char*)p + 1);
-    if (*p != '"')
-        return 0;
-    ++p;
-    char* pQuoteEnd = FUN_00cb1140(p, '"');
-    if (!pQuoteEnd)
-        return 0;
-    sink->FUN_00cb0c50(p, (int)(pQuoteEnd - p));
-    return 1;
-}
-
-int __cdecl call_it(const char* a, const char* b, Sink* s)
-{
-    return ParseQuotedValue(a, b, s);
-}
 
 void __cdecl FUN_00ecddf1(int a, int b, int c, int d);
 

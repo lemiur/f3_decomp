@@ -67,19 +67,6 @@ struct FUN_00e05bf0Class : hkMemoryStreamReader
     hkMemoryStreamReader* __thiscall FUN_00e05bf0(int flags);
 };
 
-hkMemoryStreamReader* __thiscall FUN_00e05bf0Class::FUN_00e05bf0(int flags)
-{
-    FUN_00e05bb0();
-
-    if (flags & 1)
-    {
-        FUN_00e05bf0Router* router = _D1A0E0GetMemoryRouter();
-        router->m_10->FUN_00e05bf0_2(this, (unsigned short)m_04);
-    }
-
-    return this;
-}
-
 struct FUN_00e059d0_cls
 {
     int unk00;
@@ -385,9 +372,4 @@ class hkObjE05B : public hkReferencedObjectE05B
     void FUN_00e05bb0();
 };
 
-// @fnv 0x00e05bb0
-void hkObjE05B::FUN_00e05bb0()
-{
-    this->hkObjE05B::~hkObjE05B();
-}
 }  // namespace fnv_00e05bb0

@@ -1,19 +1,8 @@
-// havok/common/serialize/copier/hkobjectcopier.cpp: Object, Host (12 functions)
+// havok/common/serialize/copier/hkobjectcopier.cpp: Object, Host (10 functions)
 #include "f3_common.h"
 #include "fnv_asm_helpers.h"
 // src/havok/common/serialize/copier/hkobjectcopier.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/common/serialize/copier/hkobjectcopier.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
-
-// Compares byte 0xc of two entries and returns 1 if equal and byte 0xd also matches or byte 0xc is 0x18, otherwise 0.
-// @fnv 0x00e032d0
-int __stdcall FUN_00e032d0(const void* a, const void* b)
-{
-    const unsigned char* pa = static_cast<const unsigned char*>(a);
-    const unsigned char* pb = static_cast<const unsigned char*>(b);
-    if (pa[0xc] == pb[0xc] && (pa[0xd] == pb[0xd] || pa[0xc] == 0x18))
-        return 1;
-    return 0;
-}
 
 // @fnv 0x00e049c0
 int __cdecl FUN_00e049c0(int a, int b)
@@ -77,18 +66,6 @@ struct E04A00Registry {
 
     void AddEntry(void* a, void* b, void* c, void* d);
 };
-
-// Builds an entry from the four arguments and appends it to m_entries via the registry's allocator.
-// @fnv 0x00e04a00
-void E04A00Registry::AddEntry(void* a, void* b, void* c, void* d)
-{
-    E04A00Entry e;
-    e.m_kPointA = a;
-    e.m_kPointB = b;
-    e.m_iThirdValue = c;
-    e.m_iFourthElementInteger = d;
-    m_entries.AddBack(e);
-}
 
 // FUN_00e03100
 //

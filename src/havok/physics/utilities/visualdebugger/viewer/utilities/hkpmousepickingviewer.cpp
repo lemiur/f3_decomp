@@ -66,20 +66,8 @@ struct Registry_00dd9380
 extern int DAT_01269cd0;
 extern int DAT_01268ff8;
 void __cdecl FUN_00d66c50();
-// @fnv 0x00d66c90
-void* __cdecl RegisterMousePicking()
-{
-    DAT_01268ff8 = (int)((Registry_00dd9380*)DAT_01269cd0)->Register("Mouse Picking", FUN_00d66c50);
-    return (void*)DAT_01268ff8;
-}
 
 extern int DAT_01268ff8;
-
-// @fnv 0x00d66ed0
-int __cdecl FUN_00d66ed0()
-{
-    return DAT_01268ff8;
-}
 
 struct FnvCpu_FUN_00d66c50_CpuBlock;
 struct FnvCpu_FUN_00d66c50_CpuAllocator
@@ -102,17 +90,6 @@ struct FnvCpu_FUN_00d66c50_CpuBlock
     unsigned short size;
     FnvCpu_FUN_00d66c50_CpuBlock* FUN_00d66b90(unsigned int value);
 };
-// @fnv 0x00d66c50
-void* __cdecl FUN_00d66c50(unsigned int value)
-{
-    FnvCpu_FUN_00d66c50_CpuHolder* holder = static_cast<FnvCpu_FUN_00d66c50_CpuHolder*>(FUN_00c85750());
-    FnvCpu_FUN_00d66c50_CpuBlock* block = static_cast<FnvCpu_FUN_00d66c50_CpuBlock*>(holder->allocator->Invoke(52));
-    block->size = 52;
-    block = block->FUN_00d66b90(value);
-    if (block)
-        return reinterpret_cast<char*>(block) + 8;
-    return 0;
-}
 
 namespace fnv_00d66d00 {
 typedef unsigned __int64 hkUint64D66D;
@@ -334,18 +311,6 @@ struct FnvCpu_FUN_00d66f00_CpuObject
     void FUN_00d66cd0();
     FnvCpu_FUN_00d66f00_CpuObject* FUN_00d66f00(unsigned int flags);
 };
-// Calls FUN_00d66cd0, then if flags bit 0 is set, invokes the allocator from FUN_00c85750 on this with size, and returns this.
-// @fnv 0x00d66f00
-FnvCpu_FUN_00d66f00_CpuObject* FnvCpu_FUN_00d66f00_CpuObject::FUN_00d66f00(unsigned int flags)
-{
-    FUN_00d66cd0();
-    if (flags & 1)
-    {
-        FnvCpu_FUN_00d66f00_CpuAllocatorHolder* holder = FUN_00c85750();
-        holder->allocator->Invoke(this, size);
-    }
-    return this;
-}
 }  // namespace fnv_00d66f00
 
 class UnkCall

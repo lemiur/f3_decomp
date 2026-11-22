@@ -38,12 +38,6 @@ class hkObjectD2A6 : public hkReferencedObjectD2A6
     void FUN_00d2a600(hkStatisticsCollectorD2A6* pkCollector, const GlobalObjectO2_00d472a0* pkClass) const;
 };
 
-// @fnv 0x00d2a600
-void hkObjectD2A6::FUN_00d2a600(hkStatisticsCollectorD2A6* pkCollector, const GlobalObjectO2_00d472a0* pkClass) const
-{
-    FUN_00c90360(pkCollector, &g_01268910);
-}
-
 extern int DAT_010ce4bc;
 
 typedef union __declspec(intrin_type) __declspec(align(16)) __m128
@@ -66,18 +60,6 @@ struct FUN_00d2a760
 
     FUN_00d2a760(const hkVector4* spheres, int count);
 };
-
-// @fnv 0x00d2a760
-FUN_00d2a760::FUN_00d2a760(const hkVector4* spheres, int count)
-{
-    m_iObjectReferenceCount = 1;
-    m_ulUserData = 0;
-    m_type = 0x15;
-    m_ppVirtualMethodTable = &DAT_010ce4bc;
-    for (int i = 0; i < count; ++i)
-        *(__m128*)&m_kSpheres[i] = *(const __m128*)&spheres[i];
-    m_iSphereCount = count;
-}
 
 extern "C" __m128 _mm_set_ps(float, float, float, float);
 
@@ -139,73 +121,6 @@ struct __declspec(align(16)) Sph
 
 extern __m128 DAT_010ec7f0;
 
-// Finds the smallest fraction in fracs, writes the interpolated and scaled normal and sphere id into out, and returns the best index or -1.
-// @fnv 0x00d2a610
-static __declspec(noinline) int FUN_00d2a610(Out* out, const Sph* spheres, const float* fracs, const int* ids,
-                                             int count, const Ray* ray)
-
-{
-
-    float best = out->fraction;
-
-    int bestIdx = -1;
-
-    int i = 0;
-
-    for (; i < count; ++i)
-    {
-
-        if (fracs[i] < best)
-        {
-
-            best = fracs[i];
-
-            bestIdx = i;
-        }
-    }
-
-    if (bestIdx != -1)
-    {
-
-        out->keys[out->keyIndex] = -1;
-
-        int id = ids[bestIdx];
-
-        out->fraction = best;
-
-        const Sph* base = spheres;
-
-        __m128 t = _mm_load_ss(&best);
-        t = _mm_shuffle_ps(t, t, 0);
-
-        __m128 one = DAT_010ec7f0;
-
-        __m128 center = _mm_load_ps(&base[id].x);
-
-        __m128 n = _mm_add_ps(
-
-            _mm_mul_ps(_mm_sub_ps(ray->from, center), _mm_sub_ps(one, t)),
-
-            _mm_mul_ps(_mm_sub_ps(ray->to, center), t));
-
-        out->normal = n;
-
-        float invR = 1.0f / base[id].w;
-
-        __m128 inv = _mm_load_ss(&invR);
-
-        __m128 scaled = _mm_mul_ps(n, _mm_shuffle_ps(inv, inv, 0));
-
-        out->normal = scaled;
-
-        out->sphereId = id;
-
-        return bestIdx;
-    }
-
-    return bestIdx;
-}
-
 extern "C" Out* d2a610_out();
 
 extern "C" Sph* d2a610_sph();
@@ -219,15 +134,6 @@ extern "C" int d2a610_count();
 extern "C" Ray* d2a610_ray();
 
 extern "C" void d2a610_sink(int);
-
-void d2a610_caller()
-
-{
-
-    int r = FUN_00d2a610(d2a610_out(), d2a610_sph(), d2a610_fracs(), d2a610_ids(), d2a610_count(), d2a610_ray());
-
-    d2a610_sink(r);
-}
 
 struct FUN_00d2a920
 {
@@ -679,30 +585,6 @@ struct hkAabbSimd
     Vec4 m_kMaximumCorner;
 };
 
-static __forceinline void TransformPointArray(const hkTransformSimd& t, const Vec4* vin, int num, Vec4* vout)
-{
-    Vec4 c0 = t.m_kColumn0;
-    Vec4 c1 = t.m_kColumn1;
-    Vec4 c2 = t.m_kColumn2;
-    Vec4 c3 = t.m_vTranslation;
-    __m128 q0 = c0.get();
-    __m128 q1 = c1.get();
-    __m128 q2 = c2.get();
-    __m128 RunFourthVirtual = c3.get();
-    int i = num - 1;
-    do
-    {
-        __m128 b = vin[i].get();
-        __m128 xb = _mm_shuffle_ps(b, b, 0);
-        __m128 yb = _mm_shuffle_ps(b, b, 0x55);
-        __m128 zb = _mm_shuffle_ps(b, b, 0xAA);
-        __m128 t0 = _mm_mul_ps(xb, q0);
-        __m128 t1 = _mm_mul_ps(yb, q1);
-        __m128 t2 = _mm_mul_ps(zb, q2);
-        vout[i].set(_mm_add_ps(_mm_add_ps(t0, t1), _mm_add_ps(t2, RunFourthVirtual)));
-    } while (--i >= 0);
-}
-
 extern float DAT_0104da48;
 extern float DAT_0104e148;
 
@@ -720,26 +602,3 @@ struct MultiSphereShape
 
     void FUN_00d2a7c0(const hkTransformSimd& localToWorld, float tolerance, hkAabbSimd& out) const;
 };
-
-// Transforms the sphere centers by localToWorld, expands by each radius, and writes the min/max corners, widened by tolerance, into out.
-// @fnv 0x00d2a7c0
-void MultiSphereShape::FUN_00d2a7c0(const hkTransformSimd& localToWorld, float tolerance, hkAabbSimd& out) const
-{
-    Vec4 tmp[8];
-    TransformPointArray(localToWorld, m_kSpheres, m_iSphereCount, tmp);
-
-    __m128 absMin = _mm_set_ps1(DAT_0104da48);
-    __m128 absMax = _mm_set_ps1(DAT_0104e148);
-
-    for (int i = 0; i < m_iSphereCount; i++)
-    {
-        __m128 r = _mm_shuffle_ps(m_kSpheres[i].get(), m_kSpheres[i].get(), 0xFF);
-        __m128 mn = _mm_sub_ps(tmp[i].get(), r);
-        __m128 mx = _mm_add_ps(tmp[i].get(), r);
-        absMin = _mm_min_ps(absMin, mn);
-        absMax = _mm_max_ps(absMax, mx);
-    }
-    __m128 tol4 = _mm_set_ps1(tolerance);
-    out.m_kMinimumCorner.set(_mm_sub_ps(absMin, tol4));
-    out.m_kMaximumCorner.set(_mm_add_ps(tol4, absMax));
-}

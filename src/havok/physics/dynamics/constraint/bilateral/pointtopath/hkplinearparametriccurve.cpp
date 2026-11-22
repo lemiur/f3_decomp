@@ -171,23 +171,6 @@ class hkpLinearParametricCurveE474 : public hkBaseObjectE474
     hkArrayE474<hkVector4E474> m_kPoints;
 };
 
-// Selects a point from m_kPoints using t, interpolates with the next point when available, and writes the result to kPointOut.
-// @fnv 0x00e47440
-void hkpLinearParametricCurveE474::FUN_00e47440(float afParam, hkVector4E474& kPointOut) const
-{
-    const int i = (afParam < 0.0f) ? 0 : FUN_00cbfef0(afParam);
-    const float fFrac = afParam - i;
-    const int iNextIndex = i + 1;
-    if (iNextIndex < m_kPoints.GetLogicalSize())
-    {
-        kPointOut.setInterpolate4(m_kPoints[i], m_kPoints[iNextIndex], fFrac);
-    }
-    else
-    {
-        kPointOut = m_kPoints[i];
-    }
-}
-
 namespace fnv_00e474e0 {
 union __declspec(intrin_type) __declspec(align(16)) __m128
 {
@@ -295,87 +278,6 @@ struct Curve_e474e0
     Arr_e474e0 m_kPoints;
 };
 
-// Clamps t, walks the point array to find the segment nearest to nearPoint, interpolates pointOnCurve, and adjusts for closed loops.
-// @fnv 0x00e474e0
-float Curve_e474e0::FindNearestPoint(float t, const Vec_e474e0& nearPoint, Vec_e474e0& pointOnCurve)
-{
-    if (t < 0.0f)
-    {
-        t = 0.0f;
-    }
-    int ia = FUN_00cbfef0(t);
-    int ib = ia + 1;
-    if (ib >= m_kPoints.GetLogicalSize())
-    {
-        ib = m_kPoints.GetLogicalSize() - 1;
-        ia = ib - 1;
-    }
-
-    float fraction = 0.0f;
-    while (1)
-    {
-        Vec_e474e0 dir;
-        dir.setSub4(m_kPoints[ib], m_kPoints[ia]);
-        Vec_e474e0 a;
-        a.setSub4(nearPoint, m_kPoints[ia]);
-        fraction = a.dot3(dir) / dir.lengthSquared3();
-        if (fraction < 0.0f)
-        {
-            if (ia == 0)
-            {
-                break;
-            }
-            ia--;
-            ib--;
-            continue;
-        }
-        Vec_e474e0 b;
-        b.setSub4(nearPoint, m_kPoints[ib]);
-        int ic = ib + 1;
-        if (!(b.dot3(dir) <= 0.0f) && ic < m_kPoints.GetLogicalSize())
-        {
-            Vec_e474e0 dir1;
-            dir1.setSub4(m_kPoints[ic], m_kPoints[ib]);
-            if (dir1.dot3(b) > 0.0f)
-            {
-                ia++;
-                ib++;
-                continue;
-            }
-            dir.normalize3();
-            dir1.normalize3();
-            float fDot0 = dir.dot3(b);
-            float fDot1 = dir1.dot3(b);
-            if (-fDot1 > fDot0)
-            {
-                fraction = 0.99f;
-            }
-            else
-            {
-                fraction = 0.01f;
-                ia++;
-                ib++;
-            }
-        }
-        break;
-    }
-
-    pointOnCurve.setInterpolate4(m_kPoints[ia], m_kPoints[ib], fraction);
-    float result = (float)ia + fraction;
-    if (m_bClosedLoop)
-    {
-        float end = (float)(m_kPoints.GetLogicalSize() - 1);
-        if (result < 0.25f)
-        {
-            result = FindNearestPoint(end - (1.0f - result), nearPoint, pointOnCurve);
-        }
-        else if (result > end - 0.25)
-        {
-            result = FindNearestPoint(1.0f - (end - result), nearPoint, pointOnCurve);
-        }
-    }
-    return result;
-}
 }  // namespace fnv_00e474e0
 
 namespace fnv_00e478d0 {
@@ -410,30 +312,6 @@ extern __m128 DAT_010ec7f0;
 
 int __cdecl FUN_00cbfef0(hkReal r);
 
-static __forceinline void hkSetSub4(hkVector4q& out, const hkVector4q& a, const hkVector4q& b)
-{
-    out.m_vComponents = _mm_sub_ps(a.m_vComponents, b.m_vComponents);
-}
-
-static __forceinline void hkNormalize3(hkVector4q& v)
-{
-    __m128 p = _mm_mul_ps(v.m_vComponents, v.m_vComponents);
-    __m128 len2 = _mm_add_ss(_mm_shuffle_ps(p, p, 0x55), p);
-    len2 = _mm_add_ss(_mm_shuffle_ps(p, p, 0xaa), len2);
-    __m128 e = _mm_rsqrt_ss(len2);
-    __m128 r =
-        _mm_mul_ss(_mm_mul_ss(_mm_set_ss(0.5f), e), _mm_sub_ss(_mm_set_ss(3.0f), _mm_mul_ss(_mm_mul_ss(len2, e), e)));
-    r = _mm_andnot_ps(_mm_cmpeq_ss(len2, _mm_set_ss(0.0f)), r);
-    v.m_vComponents = _mm_mul_ps(_mm_shuffle_ps(r, r, 0), v.m_vComponents);
-}
-
-static __forceinline void hkSetInterpolate4(hkVector4q& out, const hkVector4q& v0, const hkVector4q& v1, hkReal t)
-{
-    __m128 tt = _mm_set_ps1(t);
-    __m128 s = _mm_sub_ps(DAT_010ec7f0, tt);
-    out.m_vComponents = _mm_add_ps(_mm_mul_ps(v1.m_vComponents, tt), _mm_mul_ps(s, v0.m_vComponents));
-}
-
 struct LinearCurveT : public hkpLinearParametricCurve
 {
     __forceinline const hkVector4q& P(int i) const
@@ -443,55 +321,6 @@ struct LinearCurveT : public hkpLinearParametricCurve
     void GetTangent(hkReal t, hkVector4& tangentOut) const;
 };
 
-// Computes the smoothed tangent at parameter t by interpolating between adjacent segment directions and writing the result to tangentOut.
-// @fnv 0x00e478d0
-void LinearCurveT::GetTangent(hkReal t, hkVector4& tangentOut) const
-{
-    hkReal smooth = m_fSmoothingValue;
-    hkReal invSmooth = 1.0f / smooth;
-
-    int ia = FUN_00cbfef0(t);
-    int ib = ia + 1;
-    if (ib >= m_kPoints.m_iElementCount)
-    {
-        ib = m_kPoints.m_iElementCount - 1;
-        ia = ib - 1;
-    }
-    else if (ia < 0)
-    {
-        ia = 0;
-        ib = 1;
-    }
-
-    hkVector4q& tangent = reinterpret_cast<hkVector4q&>(tangentOut);
-
-    hkReal dist = t - ia;
-    hkSetSub4(tangent, P(ib), P(ia));
-    hkNormalize3(tangent);
-
-    if (dist < smooth && ia > 0)
-    {
-        ia--;
-        ib--;
-        hkVector4q prev;
-        hkSetSub4(prev, P(ib), P(ia));
-        hkNormalize3(prev);
-        hkReal f = (smooth - dist) * 0.5 * invSmooth;
-        hkSetInterpolate4(tangent, tangent, prev, f);
-        hkNormalize3(tangent);
-    }
-
-    dist = ib - t;
-    if (dist < smooth && ib < m_kPoints.m_iElementCount - 1)
-    {
-        hkVector4q next;
-        hkSetSub4(next, P(ib + 1), P(ia + 1));
-        hkNormalize3(next);
-        hkReal f = (smooth - dist) * 0.5 * invSmooth;
-        hkSetInterpolate4(tangent, tangent, next, f);
-        hkNormalize3(tangent);
-    }
-}
 }  // namespace fnv_00e478d0
 
 int __cdecl FUN_00cbfef0(float f);
@@ -551,32 +380,6 @@ struct CurveHelper : public hkpLinearParametricCurve
 {
     void CopyPoints(hkArray<hkVector4>& out) const;
 };
-
-// Copies m_kPoints into out, growing out's buffer via the thread memory manager if its capacity is too small.
-// @fnv 0x00e47fa0
-void CurveHelper::CopyPoints(hkArray<hkVector4>& out) const
-{
-    MemoryManager* mgr = ((ThreadMemory*)FUN_00c85750())->m_pMemoryAllocator;
-    int cap = out.m_iCapacityState & 0x3fffffff;
-    if (cap < this->m_kPoints.m_iElementCount)
-    {
-        if ((out.m_iCapacityState & 0x80000000) == 0)
-        {
-            mgr->deallocateChunk(out.m_data, cap * sizeof(hkVector4));
-        }
-        int reqBytes = this->m_kPoints.m_iElementCount * sizeof(hkVector4);
-        out.m_data = (hkVector4*)mgr->allocateChunk(&reqBytes);
-        out.m_iCapacityState = reqBytes / 16;
-    }
-    int count = this->m_kPoints.m_iElementCount;
-    out.m_iElementCount = count;
-    __m128* dst = (__m128*)out.m_data;
-    const __m128* src = (const __m128*)this->m_kPoints.m_data;
-    for (int i = 0; i < count; ++i)
-    {
-        dst[i] = src[i];
-    }
-}
 
 namespace fnv_00e48030 {
 union __declspec(intrin_type) __declspec(align(16)) __m128
@@ -851,70 +654,6 @@ union hkVector4q
 
 extern hkVector4q DAT_01268380;
 
-static __forceinline hkReal hkFabs(hkReal r)
-{
-    return (hkReal)fabs(r);
-}
-
-static __forceinline hkReal hkDot3(const hkVector4q& a, const hkVector4q& b)
-{
-    __m128 x2 = _mm_mul_ps(a.m_vComponents, b.m_vComponents);
-    __m128 xy = _mm_add_ss(_mm_shuffle_ps(x2, x2, 0x55), x2);
-    __m128 xyz = _mm_add_ss(_mm_shuffle_ps(x2, x2, 0xaa), xy);
-    hkReal r;
-    _mm_store_ss(&r, xyz);
-    return r;
-}
-
-static __forceinline void hkNormalize3(hkVector4q& v)
-{
-    __m128 p = _mm_mul_ps(v.m_vComponents, v.m_vComponents);
-    __m128 len2 = _mm_add_ss(_mm_shuffle_ps(p, p, 0x55), p);
-    len2 = _mm_add_ss(_mm_shuffle_ps(p, p, 0xaa), len2);
-    __m128 e = _mm_rsqrt_ss(len2);
-    __m128 r =
-        _mm_mul_ss(_mm_mul_ss(_mm_set_ss(0.5f), e), _mm_sub_ss(_mm_set_ss(3.0f), _mm_mul_ss(_mm_mul_ss(len2, e), e)));
-    r = _mm_andnot_ps(_mm_cmpeq_ss(len2, _mm_set_ss(0.0f)), r);
-    v.m_vComponents = _mm_mul_ps(_mm_shuffle_ps(r, r, 0), v.m_vComponents);
-}
-
-static __forceinline void hkCalculatePerpendicularVector(const hkVector4q& in, hkVector4q& out)
-{
-    int min = 0;
-    int ok1 = 1;
-    int ok2 = 2;
-
-    hkReal a0 = hkFabs(in(0));
-    hkReal a1 = hkFabs(in(1));
-    hkReal a2 = hkFabs(in(2));
-
-    if (a1 < a0)
-    {
-        ok1 = 0;
-        min = 1;
-        a0 = a1;
-    }
-
-    if (a2 < a0)
-    {
-        ok2 = min;
-        min = 2;
-    }
-
-    out.m_vComponents = _mm_setzero_ps();
-    out(ok1) = in(ok2);
-    out(ok2) = -in(ok1);
-}
-
-static __forceinline void hkSetCross(hkVector4q& out, const hkVector4q& v0, const hkVector4q& v1)
-{
-    __m128 cross0 = _mm_mul_ps(_mm_shuffle_ps(v0.m_vComponents, v0.m_vComponents, 0xc9),
-                               _mm_shuffle_ps(v1.m_vComponents, v1.m_vComponents, 0xd2));
-    __m128 cross1 = _mm_mul_ps(_mm_shuffle_ps(v0.m_vComponents, v0.m_vComponents, 0xd2),
-                               _mm_shuffle_ps(v1.m_vComponents, v1.m_vComponents, 0xc9));
-    out.m_vComponents = _mm_sub_ps(cross0, cross1);
-}
-
 struct LinearCurve : public hkpLinearParametricCurve
 {
     virtual void GetBoxVector(hkReal t, hkVector4& pointOnCurve) const;
@@ -925,25 +664,6 @@ struct LinearCurve : public hkpLinearParametricCurve
 
     void FUN_00e47cb0(hkReal t, hkVector4& up) const;
 };
-
-// Computes a normalized up vector for the curve at t by crossing or perpendicularizing the tangent against m_kVector4.
-// @fnv 0x00e47cb0
-void LinearCurve::FUN_00e47cb0(hkReal t, hkVector4& up) const
-{
-    hkVector4q tangent;
-    GetTangentAt(t, tangent.m_vec);
-
-    hkVector4q& out = reinterpret_cast<hkVector4q&>(up);
-    if (hkDot3(DAT_01268380, tangent) < (double)0.98f)
-    {
-        hkSetCross(out, tangent, reinterpret_cast<const hkVector4q&>(m_kVector4));
-    }
-    else
-    {
-        hkCalculatePerpendicularVector(tangent, out);
-    }
-    hkNormalize3(out);
-}
 
 // @f3twin 0x00a75290 of 0x00589a00
 struct F3Twin_00a75290 : public CurveSmoothingGetter { float F3_FUN_00a75290() const; };

@@ -68,12 +68,3 @@ struct Writer_e48d
     hkArray_e48d<unsigned char> m_counts;
     void FUN_00e48df0(const int* values, int count);
 };
-
-// Stores the element count and each index value into the m_counts and m_ppIndices arrays.
-// @fnv 0x00e48df0
-void Writer_e48d::FUN_00e48df0(const int* values, int count)
-{
-    m_counts.AddBack((unsigned char)count);
-    for (int i = 0; i < count; i++)
-        m_ppIndices.AddBack((unsigned short)values[i]);
-}

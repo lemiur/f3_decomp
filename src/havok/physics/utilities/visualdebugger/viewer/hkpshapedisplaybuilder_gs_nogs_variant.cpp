@@ -80,10 +80,6 @@ struct Node
     void applyX(void* shape, Mat4* m, XfResult* r);
     void FUN_00de0f90(void* shape, XfResult* result);
 };
-__declspec(noinline) void Node::resetX()
-{
-    unk10 = 0;
-}
 // @f3 0x00a6a690 (community match, verified in this file)
 struct View438 {
     int unk00, unk04, unk08, count;

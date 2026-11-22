@@ -78,12 +78,6 @@ struct FUN_00d87460_class
     void __thiscall SetElement(int idx, int val);
 };
 
-// @fnv 0x00d87460
-void __thiscall FUN_00d87460_class::SetElement(int aiIndex, int aiValue)
-{
-    *(int*)((int*)m_iWordAt00 + m_8 * 2 + 2 + aiIndex) = aiValue;
-}
-
 struct FUN_00d87760_class
 {
     void** m_kPrimitiveElement;
@@ -124,13 +118,6 @@ struct FUN_00d877d0_class
     void FreeBuffer();
 };
 
-// @fnv 0x00d877d0
-void FUN_00d877d0_class::FreeBuffer()
-{
-    FUN_00d877d0_router* router = _D1A0E0GetMemoryRouter();
-    router->m_pThreadAllocator->FUN_00d877d0_free(m_kPrimitiveElement, 12 * (m_iPairCount + 1));
-}
-
 struct FUN_00d87820_Class
 {
     char* SetBoolFromThreshold(char* p, int value);
@@ -138,19 +125,6 @@ struct FUN_00d87820_Class
     void FUN_00d876a0(int);
     int FUN_00d87820(int a);
 };
-
-// @fnv 0x00d87820
-int FUN_00d87820_Class::FUN_00d87820(int a)
-{
-    int v = FindStringKey(a);
-    char r;
-    if (*SetBoolFromThreshold(&r, v))
-    {
-        FUN_00d876a0(v);
-        return 0;
-    }
-    return 1;
-}
 
 namespace fnv_00dc8080 {
 struct FUN_00dc7750_class
@@ -190,23 +164,6 @@ struct FUN_00dc8080_class
     void FUN_00dc8080();
 };
 
-void FUN_00dc8080_class::FUN_00dc8080()
-{
-    FUN_00dc7750_class* object = m_8;
-    m_vptr = &DAT_010d7510;
-
-    if (object)
-    {
-        object->FUN_00dc7750();
-
-        FUN_router_class* router = _D1A0E0GetMemoryRouter();
-        FUN_allocator_class* allocator =
-            *reinterpret_cast<FUN_allocator_class**>(reinterpret_cast<unsigned char*>(router) + 0x10);
-        allocator->FUN_00dc8080_2(object, 0x88);
-    }
-
-    m_vptr = &_DAT_0102e388;
-}
 }  // namespace fnv_00dc8080
 
 int __cdecl FUN_00cb0fa0(const char*, const char*);
@@ -686,28 +643,4 @@ class NamedObjectsE028
     void FUN_00e02800(void* pkObject, const char* pcName);
 };
 
-// Pools pcName via m_pkPool, stores a new EntryE028 with pkObject and the pooled name into m_kEntries.
-// @fnv 0x00e02800
-void NamedObjectsE028::FUN_00e02800(void* pkObject, const char* pcName)
-{
-    if (!m_pkPool)
-        m_pkPool = new StringMapE028();
-    StringMapE028* pkPool = m_pkPool;
-    int iIt = pkPool->FindStringKey(pcName);
-    const char* pcPooled;
-    if (!pkPool->isValid(iIt))
-    {
-        pcPooled = FUN_00cb1160(pcName, hkRouterE028::FUN_00c85750().heap());
-        pkPool->FUN_00d874d0(pcPooled, 0);
-    }
-    else
-    {
-        pcPooled = (const char*)pkPool->GetEntry(iIt);
-        pkPool->SetElement(iIt, 0);
-    }
-    EntryE028 kEntry;
-    kEntry.m_pPointer = pkObject;
-    kEntry.m_pcName = pcPooled;
-    m_kEntries.AddBack(kEntry);
-}
 }  // namespace fnv_00e02800

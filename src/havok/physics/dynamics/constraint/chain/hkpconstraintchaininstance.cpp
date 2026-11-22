@@ -285,18 +285,6 @@ struct FnvCpu_FUN_00dd0630_CpuObject
     void FUN_00dd05c0();
     FnvCpu_FUN_00dd0630_CpuObject* Destroy(unsigned int flags);
 };
-// Calls FUN_00dd05c0, and if flags has bit 0 set, frees this via the allocator from FUN_00c85750, then returns this.
-// @fnv 0x00dd0630
-FnvCpu_FUN_00dd0630_CpuObject* FnvCpu_FUN_00dd0630_CpuObject::Destroy(unsigned int flags)
-{
-    FUN_00dd05c0();
-    if (flags & 1)
-    {
-        FnvCpu_FUN_00dd0630_CpuAllocatorHolder* holder = FUN_00c85750();
-        holder->allocator->Invoke(this, size);
-    }
-    return this;
-}
 }  // namespace fnv_00dd0630
 
 namespace fnv_00dd0530 {
@@ -413,16 +401,5 @@ class hkpConstraintChainInstance : public FUN_00cf3f40::hkpConstraintInstance
     hkpConstraintChainInstanceAction* m_pAction;
 };
 
-// Constructs a constraint chain instance from pkData, nulls actor entries, and creates its owning hkpConstraintChainInstanceAction.
-// @fnv 0x00dd0530
-hkpConstraintChainInstance::hkpConstraintChainInstance(hkDD05::hkpConstraintChainData* pkData)
-    : FUN_00cf3f40::hkpConstraintInstance(1)
-{
-    m_data = pkData;
-    pkData->FUN_00c90510();
-    m_kActorEntries[0] = 0;
-    m_kActorEntries[1] = 0;
-    m_pAction = new hkpConstraintChainInstanceAction(this);
-}
 }
 }  // namespace fnv_00dd0530

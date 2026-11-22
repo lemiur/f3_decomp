@@ -48,25 +48,6 @@ class VariantListD480
     void* FindByName(const char* pcName, const void* pkAfter);
 };
 
-// Finds an entry in m_data whose name matches pcName, starting the search after the entry whose underlying object is pkAfter, and returns its object or 0.
-// @fnv 0x00d48080
-void* VariantListD480::FindByName(const char* pcName, const void* pkAfter)
-{
-    int iStart = 0;
-lNext:
-    if (pkAfter && iStart < m_iElementCount)
-    {
-        if (m_data[iStart++].GetUnderlyingObject() != pkAfter)
-            goto lNext;
-    }
-    for (int i = iStart; i < m_iElementCount; i++)
-    {
-        if (m_data[i].getName() && FUN_00cb0fa0((int)pcName, (int)m_data[i].getName()) == 0)
-            return m_data[i].m_pReferencedResource.m_object;
-    }
-    return 0;
-}
-
 struct Ent_d48150
 {
     unsigned int unk00;

@@ -75,25 +75,6 @@ struct FUN_00d5a630_ctxB
 
 extern float DAT_0106ea1c;
 
-// Initialises two context objects, sets a flag, looks up a1 in the first context and, if found, applies a2 and a3 and a float constant before finishing.
-// @fnv 0x00d5a630
-void __cdecl FUN_00d5a630(void* a1, int a2, int a3)
-{
-    FUN_00d5a630_ctxB b;
-    FUN_00d5a630_ctxA a;
-
-    a.InitA();
-    b.InitB();
-    b.m_00 = 1;
-    if (a.FindB(a1, &b) != -1)
-    {
-        a.SetB(0, a2);
-        a.SetF(DAT_0106ea1c, 0);
-        a.SetC(a3);
-    }
-    a.FinishA();
-}
-
 struct S_00d5a6b0_Elem
 {
     float x;
@@ -633,95 +614,6 @@ struct MyPoint
 {
     __m128 v;
 };
-
-// FUN_00d5bb10, FUN_00d5bb80 and FUN_00d5bce0 are stand-ins: the real 2-, 3- and 4-point sphere builders live
-// elsewhere. Their bodies only keep the static calling sequence the original uses; FUN_00d5beb0 is the function compared.
-static __declspec(noinline) Vec4* FUN_00d5bb10(Vec4* res, Vec4* p0, Vec4* p1, float t)
-{
-    res->x = 0.0f;
-    Vec4 a = *p0;
-    res->y = a.x + t + (float)(int)p1;
-    res->w = a.y;
-    return res;
-}
-
-static __declspec(noinline) Vec4* FUN_00d5bb80(Vec4* res, Vec4* p0, Vec4* p1, Vec4* p2, float t)
-{
-    res->x = 0.0f;
-    Vec4 a = *p0;
-    res->y = a.x + t + (float)(int)p1 + (float)(int)p2;
-    res->w = a.y;
-    return res;
-}
-
-static __declspec(noinline) Vec4* FUN_00d5bce0(Vec4* res, Vec4* p0, Vec4* p1, Vec4* p2, Vec4* p3, float t)
-{
-    res->x = 0.0f;
-    Vec4 a = *p0;
-    res->y = a.x + t + (float)(int)p1 + (float)(int)p2 + (float)(int)p3;
-    res->w = a.y;
-    return res;
-}
-
-// Moves points whose XYZ distance from out exceeds out[3] to the front, then recurses on the preceding points.
-// @fnv 0x00d5beb0
-__m128* __cdecl FUN_00d5beb0(__m128* apResult, MyPoint* apPoints, int count, int depth, float t)
-{
-    Vec4 rTempA;
-    Vec4 rTempB;
-    Vec4 rTempC;
-
-    switch (depth)
-    {
-    case 0:
-        *(__m128*)&rTempA = _mm_setzero_ps();
-        ((float*)&rTempA)[3] = DAT_01012054;
-        *apResult = *(__m128*)&rTempA;
-        break;
-    case 1:
-        *(__m128*)&rTempA = apPoints[-1].v;
-        ((float*)&rTempA)[3] = t;
-        *apResult = *(__m128*)&rTempA;
-        break;
-    case 2:
-        *apResult = *(__m128*)FUN_00d5bb10(&rTempA, (Vec4*)&apPoints[-1], (Vec4*)&apPoints[-2], t);
-        break;
-    case 3:
-        *apResult =
-            *(__m128*)FUN_00d5bb80(&rTempB, (Vec4*)&apPoints[-1], (Vec4*)&apPoints[-2], (Vec4*)&apPoints[-3], t);
-        break;
-    default:
-        *apResult = *(__m128*)FUN_00d5bce0(&rTempC, (Vec4*)&apPoints[-1], (Vec4*)&apPoints[-2], (Vec4*)&apPoints[-3],
-                                           (Vec4*)&apPoints[-4], t);
-        return apResult;
-    }
-
-    for (int i = 0; i < count; ++i)
-    {
-        __m128 rDiff = _mm_sub_ps(apPoints[i].v, *apResult);
-        __m128 rSq = _mm_mul_ps(rDiff, rDiff);
-        __m128 rShuf1 = _mm_shuffle_ps(rSq, rSq, 0x55);
-        __m128 rShuf2 = _mm_shuffle_ps(rSq, rSq, 0xaa);
-        __m128 sum = _mm_add_ss(rShuf1, rSq);
-        sum = _mm_add_ss(rShuf2, sum);
-        float dist;
-        _mm_store_ss(&dist, _mm_sqrt_ss(sum));
-
-        if (dist > ((const float*)apResult)[3])
-        {
-            for (int iSwap = i; iSwap > 0; --iSwap)
-            {
-                rTempA = *(Vec4*)&apPoints[iSwap];
-                apPoints[iSwap].v = apPoints[iSwap - 1].v;
-                apPoints[iSwap - 1].v = *(__m128*)&rTempA;
-            }
-
-            *apResult = *FUN_00d5beb0((__m128*)&rTempB, apPoints + 1, i, depth + 1, t);
-        }
-    }
-
-    return apResult;
-}
 
 extern "C" __m128 _mm_add_ps(__m128, __m128);
 extern "C" __m128 _mm_sub_ps(__m128, __m128);

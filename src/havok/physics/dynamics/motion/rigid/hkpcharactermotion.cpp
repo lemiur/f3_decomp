@@ -148,14 +148,6 @@ class hkpSphereMotionD1EE : public hkReferencedObjectD1EE
     hkVector4D1EE m_kInertiaAndMassInv;
 };
 
-// Fills kInertiaInv with a diagonal matrix whose entries are the inverse inertia stored in m_kInertiaAndMassInv.
-// @fnv 0x00d1ee40
-void hkpSphereMotionD1EE::FUN_00d1ee40(hkMatrix3D1EE& kInertiaInv) const
-{
-    float fInv = m_kInertiaAndMassInv(0);
-    kInertiaInv.setDiagonal(fInv, fInv, fInv);
-}
-
 namespace fnv_00d1ee80 {
 union __declspec(intrin_type) __declspec(align(16)) __m128
 {
@@ -234,13 +226,6 @@ class hkpSphereMotionD1E8x : public hkReferencedObjectD1E8x
     hkVector4D1E8x m_kInertiaAndMassInv;
 };
 
-// Fills kInertiaInv with a diagonal matrix whose entries are all the inverse inertia value stored in m_kInertiaAndMassInv.
-// @fnv 0x00d1ee80
-void hkpSphereMotionD1E8x::FUN_00d1ee80(hkMatrix3D1E8x& kInertiaInv) const
-{
-    float fInv = m_kInertiaAndMassInv(0);
-    kInertiaInv.setDiagonal(fInv, fInv, fInv);
-}
 }  // namespace fnv_00d1ee80
 
 namespace fnv_00d1ef50 {
@@ -295,14 +280,6 @@ class hkpSphereMotionD1EF : public hkReferencedObjectD1EF
     hkVector4D1EF m_kAngularVelocity;
 };
 
-// Multiplies m_kInertiaAndMassInv by kImpulse and adds the result to m_kAngularVelocity.
-// @fnv 0x00d1ef50
-void hkpSphereMotionD1EF::ApplyImpulse(const hkVector4D1EF& kImpulse)
-{
-    hkVector4D1EF kDelta;
-    kDelta.setMul4(m_kInertiaAndMassInv, kImpulse);
-    m_kAngularVelocity.add4(kDelta);
-}
 }  // namespace fnv_00d1ef50
 
 struct __declspec(align(16)) FUN_00d1ecc0_Matrix
@@ -348,20 +325,6 @@ struct FUN_00d1ed00_t
 {
     void GetInverseDiagonal(float* out);
 };
-
-// Writes to out three rows of four floats with 1/(float at offset 0xC0) at indices 0, 5 and 10 and zeros elsewhere.
-// @fnv 0x00d1ed00
-void FUN_00d1ed00_t::GetInverseDiagonal(float* out)
-{
-    float inv = 1.0f / ((float*)this)[48];
-    __m128 z = _mm_setzero_ps();
-    *(__m128*)out = z;
-    *(__m128*)(out + 4) = z;
-    *(__m128*)(out + 8) = z;
-    out[0] = inv;
-    out[5] = inv;
-    out[10] = inv;
-}
 
 extern "C" __m128 _mm_shuffle_ps(__m128 a, __m128 b, unsigned int imm);
 extern "C" __m128 _mm_add_ps(__m128 a, __m128 b);
@@ -430,20 +393,6 @@ class hkpSphereMotionX
 
     void FUN_00d1eec0(const hkVector4X& imp, const hkVector4X& p);
 };
-
-// Adds imp scaled by the W of m_kInertiaAndMassInv to translational velocity, and (p - center of mass) x imp scaled by m_kInertiaAndMassInv to angular velocity.
-// @fnv 0x00d1eec0
-void hkpSphereMotionX::FUN_00d1eec0(const hkVector4X& imp, const hkVector4X& p)
-{
-    m_kTranslationalVelocity.addMul4(m_kInertiaAndMassInv.getW(), imp);
-    hkVector4X relMassCenter;
-    relMassCenter.setSub4(p, m_vCenterOfMass1);
-    hkVector4X crossWs;
-    crossWs.setCross(relMassCenter, imp);
-    hkVector4X deltaVelWs;
-    deltaVelWs.setMul4(crossWs, m_kInertiaAndMassInv);
-    m_kAngularVelocity.add4(deltaVelWs);
-}
 
 extern "C" __m128 _mm_set_ps1(float);
 extern "C" __m128 _mm_set_ss(float);
@@ -519,15 +468,3 @@ class Motion
   public:
     void FUN_00d1ef80(float s, const Vec& force);
 };
-// Multiplies force by timestep s, scales by mass.getW(), and adds the result to velocity.
-// @fnv 0x00d1ef80
-void Motion::FUN_00d1ef80(float afTimestep, const Vec& force)
-{
-    __m128 timestep = _mm_load_ps1(&afTimestep);
-    Vec impulse;
-    impulse.quad = _mm_mul_ps(timestep, force.quad);
-    Simd w = mass.getW();
-    Vec weighted = impulse;
-    weighted.mulSimd(w);
-    velocity.add(weighted);
-}

@@ -73,11 +73,6 @@ class FUN_00c9e340 : public hkpConvexShapeC9E3
     virtual ~FUN_00c9e340() throw();
 };
 
-// @fnv 0x00c9e340
-FUN_00c9e340::FUN_00c9e340(int iShapeType, hkReal fRadius, FUN_00d1df70* pkChild, int iRef) throw()
-    : hkpConvexShapeC9E3(iShapeType, fRadius), m_pContainedShape(pkChild, iRef)
-{}
-
 #include <xmmintrin.h>
 struct S00c9e1f0_Obj
 {
@@ -186,38 +181,3 @@ struct FN : public Shape
 {
     void FUN_00c9e2a0(int p1, int p2, Cb* p3);
 };
-
-// Calls v8 to fill out.v, multiplies it by the Mat3 in P2, stores the result back, then invokes the VTable callback fn on Cb.
-// @fnv 0x00c9e2a0
-void FN::FUN_00c9e2a0(int p1, int p2, Cb* apCb)
-{
-    bool ok;
-    Out out;
-
-    out.t = apCb->f;
-    out.flags = -1;
-    out.b = -1;
-    out.c = 0;
-
-    this->v8(&ok, (void*)(*(volatile int*)&p1), &out);
-
-    if (ok)
-    {
-        __m128 v = _mm_load_ps(&out.v.x);
-        int p2Value = p2;
-        P2* pP2 = (P2*)p2Value;
-        Mat3* m = pP2->m;
-        VTable* vt = apCb->vt;
-        void(__thiscall * fn)(Cb*, P2*, Vec4*) = vt->fn;
-
-        __m128 c0 = _mm_load_ps(&m->c0.x);
-        __m128 c1 = _mm_load_ps(&m->c1.x);
-        __m128 c2 = _mm_load_ps(&m->c2.x);
-
-        __m128 r = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v, v, 0x55), c1), _mm_mul_ps(_mm_shuffle_ps(v, v, 0), c0));
-        r = _mm_add_ps(r, _mm_mul_ps(_mm_shuffle_ps(v, v, 0xaa), c2));
-
-        _mm_store_ps(&out.v.x, r);
-        fn(apCb, pP2, &out.v);
-    }
-}

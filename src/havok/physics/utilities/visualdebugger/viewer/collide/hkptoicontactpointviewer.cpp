@@ -350,9 +350,6 @@ struct Own_00d68720 : A1_00d68720, A2_00d68720 {
 // @fnv 0x00d68720
     void FUN_00d68720();
 };
-Own_00d68720::Own_00d68720() { }
-void Own_00d68720::key_fn() { }
-Own_00d68720* make_00d68720() { static Own_00d68720 o; return &o; }
 
 namespace fnv_00d68730 {
 // sub ecx,0x28; jmp target  ==  MSVC adjustor thunk: Derived overrides a virtual that both of its bases
@@ -498,101 +495,6 @@ struct MonStream {
     TimerCmd* m_cap;
 };
 
-__forceinline __m128 lengthSquared3(__m128 v) {
-    __m128 sq = _mm_mul_ps(v, v);
-    __m128 y = _mm_shuffle_ps(sq, sq, 0x55);
-    __m128 xy = _mm_add_ss(y, sq);
-    __m128 z = _mm_shuffle_ps(sq, sq, 0xAA);
-    return _mm_add_ss(z, xy);
-}
-
-__forceinline __m128 sqrtInverse(__m128 len2) {
-    __m128 y0 = _mm_rsqrt_ss(len2);
-    __m128 zero = _mm_set_ss(DAT_01011d78);
-    __m128 three = _mm_set_ss(DAT_01017718);
-    __m128 half = _mm_set_ss(DAT_01016248);
-    __m128 r2 = _mm_mul_ss(_mm_mul_ss(len2, y0), y0);
-    __m128 eq = _mm_cmpeq_ss(len2, zero);
-    __m128 inv = _mm_mul_ss(_mm_mul_ss(half, y0), _mm_sub_ss(three, r2));
-    return _mm_andnot_ps(eq, inv);
-}
-
-__forceinline __m128 splat(float s) {
-    __m128 a = _mm_load_ss(&s);
-    return _mm_shuffle_ps(a, a, 0);
-}
-
-// @fnv 0x00d683b0
-static __declspec(noinline) void FUN_00d683b0(Handler* self, Vec* from, Vec* dir, int color, int id, int tag) {
-    float lenSq;
-
-    _mm_store_ss(&lenSq, lengthSquared3(dir->m));
-    if (lenSq > 1.1920928955078125e-07f) {
-        { MonStream* s = (MonStream*)TlsGetValue(DAT_0126835c);
-        if (s->m_kRayEnd < s->m_cap) {
-            TimerCmd* h = s->m_kRayEnd;
-            h->m_pCommandName = "TtToiDisplayArrow";
-            unsigned t1;
-            __asm {
-                rdtsc
-                mov dword ptr[t1], eax
-            }
-            h->m_uiStartTicks = t1;
-            s->m_kRayEnd = h + 1;
-        } }
-        struct Endpoints { Vec head1; Vec perp; };
-        Endpoints endpoints;
-        Vec to;
-        Vec head2;
-        to.m = _mm_add_ps(from->m, dir->m);
-        int iAlt = 0;
-        float cur = fabsf(dir->x);
-        int i0 = 1;
-        float ay = fabsf(dir->y);
-        int i2 = i0 + 1;
-        float az = fabsf(dir->z);
-        if (ay < cur) {
-            cur = ay;
-            i0 = 0;
-            iAlt = 1;
-        }
-        if (az < cur) i2 = iAlt;
-        endpoints.perp.m = _mm_setzero_ps();
-        (&endpoints.perp.x)[i0] = (&dir->x)[i2];
-        (&endpoints.perp.x)[i2] = -(&dir->x)[i0];
-        __m128 inv = sqrtInverse(lengthSquared3(endpoints.perp.m));
-        __m128 len = _mm_sqrt_ss(lengthSquared3(dir->m));
-        __m128 perpS = _mm_mul_ps(_mm_mul_ps(endpoints.perp.m, _mm_shuffle_ps(inv, inv, 0)), _mm_shuffle_ps(len, len, 0));
-        float coeff = DAT_01019de0;
-        __m128 cb = splat(coeff);
-        __m128 one = _mm_load_ps(&DAT_010ec7f0);
-        __m128 base = _mm_add_ps(_mm_mul_ps(_mm_sub_ps(one, cb), from->m), _mm_mul_ps(cb, to.m));
-        float scalePos = DAT_010c69c4;
-        endpoints.head1.m = _mm_add_ps(base, _mm_mul_ps(splat(scalePos), perpS));
-        float scaleNeg = DAT_010c69c0;
-        head2.m = _mm_add_ps(base, _mm_mul_ps(splat(scaleNeg), perpS));
-        self->DisplayLine(*from, to, color, id, tag);
-        self->DisplayLine(to, endpoints.head1, color, id, tag);
-        self->DisplayLine(to, head2, color, id, tag);
-        { MonStream* s = (MonStream*)TlsGetValue(DAT_0126835c);
-        if (s->m_kRayEnd < s->m_cap) {
-            TimerCmd* h = s->m_kRayEnd;
-            h->m_pCommandName = "Et";
-            unsigned t2;
-            __asm {
-                rdtsc
-                mov dword ptr[t2], eax
-            }
-            h->m_uiStartTicks = t2;
-            s->m_kRayEnd = h + 1;
-        } }
-    }
-}
-
-void RenderLine(Handler* handler, Vec* direction, Vec* origin, int color, int id, int tag) {
-    FUN_00d683b0(handler, origin, direction, color, id, tag);
-}
-
 extern int DAT_01269004;
 
 class S00d68670_hkBool {
@@ -648,13 +550,3 @@ struct S00d68670_ContactListener {
 struct S00d68670_ToiContactPointViewer : S00d68670_WorldViewerBase, S00d68670_ContactListener {
     virtual void FUN_00d68670(const S00d68670_ContactPointEvent& event);
 };
-
-// @fnv 0x00d68670
-void S00d68670_ToiContactPointViewer::FUN_00d68670(const S00d68670_ContactPointEvent& event)
-{
-    if (event.isToi())
-    {
-        const S00d68670_Collidable* collidable = event.m_apEntities[0]->getCollidable();
-        FUN_00d683b0(m_pDisplayHandler, (Vec*)&event.m_vContactPoint->getPosition(), (Vec*)&event.m_vContactPoint->getNormal(), 0xffff0000, (int)collidable, DAT_01269004);
-    }
-}

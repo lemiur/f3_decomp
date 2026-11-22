@@ -91,14 +91,6 @@ struct S_00d37e60_TriAgent2 : S_00d37e60_TriAgent
     virtual void getPenetrations();
 };
 
-// Allocates and constructs a TriAgent2 from bodyA and mgr, returning it as an Agent pointer.
-// @fnv 0x00d37e60
-S_00d37e60_Agent* CreateTriAgent2(const S_00d37e60_CdBody& bodyA, const S_00d37e60_CdBody& bodyB, const void* input,
-                                  void* mgr)
-{
-    return new S_00d37e60_TriAgent2(bodyA, mgr);
-}
-
 void __cdecl FUN_00d38130(void*, void*, void*, void*);
 struct D38AC0Data
 {
@@ -109,15 +101,6 @@ struct D38AC0Data
     char unk07;
     int unk08;
 };
-// @fnv 0x00d38ac0
-void __cdecl FUN_00d38ac0(void* first, void* second, void* third, int fourth)
-{
-    D38AC0Data data;
-    data.unk08 = fourth;
-    data.unk04 = 0;
-    data.unk00 = 0x10ce81c;
-    FUN_00d38130(second, first, third, &data);
-}
 
 struct CpuCallData
 {
@@ -312,46 +295,6 @@ struct Agent : AgentBase
     void FUN_00d38f10(int a, int b, int c, Simplex* s);
 };
 
-// @fnv 0x00d38f10
-void Agent::FUN_00d38f10(int a, int b, int c, Simplex* s)
-{
-    SimplexVertex* v = s->m_kRayEnd;
-    float oldDistance = s->m_fClosestPointDistanceSquared;
-    AgentBase::FUN_00d38b00(b, a, c, s);
-    for (; v < s->m_kRayEnd; v++)
-    {
-        const __m128* pb = &v->m_kPointB;
-        __m128 w = _mm_shuffle_ps(*pb, *pb, 0xff);
-        v->m_kPointA = _mm_add_ps(_mm_mul_ps(w, v->m_kPointB), v->m_kPointA);
-        v->m_kPointB = _mm_xor_ps(v->m_kPointB, DAT_010c4c00);
-    }
-    if (oldDistance != s->m_fClosestPointDistanceSquared)
-    {
-        __m128* n = &s->m_vHitNormal;
-        *n = _mm_xor_ps(*n, DAT_010c4c00);
-        {
-            unsigned char t = s->m_dims.m_ucLowNibble;
-            s->m_dims.m_ucLowNibble = s->m_dims.m_ucHighNibble;
-            s->m_dims.m_ucHighNibble = t;
-        }
-        {
-            unsigned char t = s->m_ucDimensionA;
-            s->m_ucDimensionA = s->m_ucDimensionB;
-            s->m_ucDimensionB = t;
-        }
-        int last = s->m_ucDimensionA + s->m_ucDimensionB - 1;
-        unsigned short t0 = s->m_ids[0];
-        s->m_ids[0] = s->m_ids[last];
-        s->m_ids[last] = t0;
-        if ((s->m_ucDimensionA & s->m_ucDimensionB) == 2)
-        {
-            unsigned short t1 = s->m_ids[1];
-            s->m_ids[1] = s->m_ids[2];
-            s->m_ids[2] = t1;
-        }
-    }
-}
-
 struct hkVector4f
 {
     float x;
@@ -498,34 +441,3 @@ void hkpMultiSphereTriangleAgent::FUN_00d37ed0(const hkpCdBody& bodyA, const hkp
 
 void __cdecl FUN_00cd7850(const hkVector4& position, const hkVector4* triangle, const S_00d37e60_Plane& cache,
                           CollisionDistanceInfo& result, void* featureOut);
-// @fnv 0x00d38130
-void __cdecl FUN_00d38130(const hkpCdBody& bodyA, const hkpCdBody& bodyB, const void* input,
-                          hkpCdBodyPairCollector& collector)
-{
-    const hkpMultiSphereShape* msA = static_cast<const hkpMultiSphereShape*>(bodyA.m_pCollisionShape);
-    const hkpTriangleShape* triB = static_cast<const hkpTriangleShape*>(bodyB.m_pCollisionShape);
-
-    const hkVector4* localVertices = &triB->m_kVertices[0];
-    hkVector4 triVertices[3];
-    TransformPointArray(*bodyB.m_pMotionState, localVertices, 3, &triVertices[0]);
-
-    const hkVector4* localSpheres = &msA->m_kSpheres[0];
-    hkVector4 worldSpheres[8];
-    const int nsphere = msA->m_iSphereCount;
-    TransformPointArray(*bodyA.m_pMotionState, localSpheres, nsphere, &worldSpheres[0]);
-
-    S_00d37e60_Plane cache;
-    FUN_00cd7160(localVertices, &cache);
-
-    for (int i = 0; i < nsphere; ++i)
-    {
-        float radiusSum = triB->m_fSphereRadius + localSpheres[i].m_vComponents.m128_f32[3];
-        CollisionDistanceInfo cpr;
-        FUN_00cd7850(worldSpheres[i], &triVertices[0], cache, cpr, 0);
-        if (cpr.distance < radiusSum)
-        {
-            collector.AddCdBodyPair(bodyA, bodyB);
-            break;
-        }
-    }
-}

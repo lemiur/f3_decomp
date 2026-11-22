@@ -46,12 +46,6 @@ struct FUN_00d97060_cls
     void FUN_00d97060();
 };
 
-// @fnv 0x00d97060
-void FUN_00d97060_cls::FUN_00d97060()
-{
-    LeaveCriticalSection(m_pSection);
-}
-
 // FUN_00d97070: thiscall, one stack parameter, /MT /O2 /GS /EHsc /Gy
 
 struct SubObj
@@ -96,19 +90,6 @@ class Owner
     void FUN_00d97070(void* a1);
 };
 
-// @fnv 0x00d97070
-void Owner::FUN_00d97070(void* apArg)
-{
-    if (m_10 == 0)
-    {
-        Holder* h = FUN_00c85750();
-        Obj* obj = h->m_10;
-        Spawned* s = obj->v04(0x18);
-        m_10 = (s != 0) ? s->Init(apArg) : s;
-        m_08.Reset();
-    }
-}
-
 namespace fnv_00d97100 {
 struct CpuAllocator
 {
@@ -132,18 +113,6 @@ struct CpuObject
     void FUN_00d970c0();
     CpuObject* FUN_00d97100(unsigned int flags);
 };
-// Calls FUN_00d970c0, then if bit 0 of flags is set, invokes the allocator from FUN_00c85750 on this with size, and returns this.
-// @fnv 0x00d97100
-CpuObject* CpuObject::FUN_00d97100(unsigned int flags)
-{
-    FUN_00d970c0();
-    if (flags & 1)
-    {
-        CpuAllocatorHolder* holder = FUN_00c85750();
-        holder->allocator->Invoke(this, size);
-    }
-    return this;
-}
 }  // namespace fnv_00d97100
 
 extern "C" __declspec(dllimport) void __stdcall EnterCriticalSection(void* apSection);

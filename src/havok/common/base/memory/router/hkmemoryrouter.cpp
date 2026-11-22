@@ -16,16 +16,6 @@ struct FUN_00c85690_Header
     int unk0C;
 };
 
-// Allocates size plus a header from allocator, stores size and allocator in the header, and returns the pointer past the header.
-// @fnv 0x00c85690
-void* __cdecl AllocateWithHeader(FUN_00c85690_Allocator* allocator, unsigned int size)
-{
-    FUN_00c85690_Header* header = (FUN_00c85690_Header*)allocator->Allocate(size + sizeof(FUN_00c85690_Header));
-    header->size = size;
-    header->allocator = allocator;
-    return header + 1;
-}
-
 struct Child
 {
     virtual void ReportDiagnostic();
@@ -52,16 +42,6 @@ struct Owner
     Child* child1C;
     void ReleaseChildren();
 };
-// Releases the five Child objects held by the Owner (child0C, child10, child14, child18, child1C).
-// @fnv 0x00c856f0
-void Owner::ReleaseChildren()
-{
-    child14->Release();
-    child1C->Release();
-    child10->Release();
-    child18->Release();
-    child0C->Release();
-}
 
 class MemHeap
 {
@@ -163,28 +143,8 @@ struct TargetClass
     TargetClass* Clear();
 };
 
-// @fnv 0x00c85770
-TargetClass* TargetClass::Clear()
-{
-    m_f00 = 0;
-    m_f04 = 0;
-    m_f08 = 0;
-    m_f0c = 0;
-    m_f10 = 0;
-    m_f14 = 0;
-    m_f18 = 0;
-    m_f1c = 0;
-    return this;
-}
-
 #include <windows.h>
 extern DWORD g_01268108;
-
-// @fnv 0x00c85730
-void __cdecl SetThreadLocalValue(void* apValue)
-{
-    TlsSetValue(g_01268108, apValue);
-}
 
 namespace fnv_00c85760 {
 // Global TLS slot index used by the thread-local accessor.

@@ -31,20 +31,6 @@ struct Manager
     int unk00[4];
     CallbackInterface* interface10;
 };
-// Initializes the object's base subobject and pointers, then if flags bit 0 is set calls callback on the manager's interface with this and unk04.
-// @fnv 0x00d0b1e0
-FUN_00d0b1e0::FUN_00d0b1e0(int flags)
-{
-    ((Base*)((char*)this + 0x14))->FUN_00d0b0d0();
-    unk0c = &DAT_010cb1c4;
-    unk08 = &DAT_010cb1e4;
-    unk00 = &DAT_0102e388;
-    if (flags & 1)
-    {
-        Manager* manager = (Manager*)FUN_00c85750();
-        manager->interface10->callback(this, unk04);
-    }
-}
 
 struct CallbackTarget
 {
@@ -127,22 +113,6 @@ struct FUN_00d0b180_cls
     FUN_00d0b180_cls* Initialize();
 };
 
-// Sets the object's fields to point at the given globals, sets unk06 and unk10 to 1, calls FUN_00d9e860 on unk14, and returns this.
-// @fnv 0x00d0b180
-FUN_00d0b180_cls* FUN_00d0b180_cls::Initialize()
-{
-    *(volatile unsigned short*)&unk06 = 1;
-    *(void* volatile*)&unk08 = &DAT_010cb1e4;
-    *(void* volatile*)&unk0c = &DAT_010cb1c4;
-    FUN_00d0b180_sub* sub = &unk14;
-    unk00 = &DAT_010cd33c;
-    unk08 = &DAT_010cd31c;
-    unk0c = &DAT_010cd30c;
-    unk10 = 1;
-    sub->FUN_00d9e860();
-    return this;
-}
-
 #include <windows.h>
 extern "C" void _ReadWriteBarrier(void);
 
@@ -212,57 +182,6 @@ struct Data
 extern "C" void __cdecl DispatchCollisionEvents(void* obj, Data* data);
 extern "C" void __cdecl FUN_00cfffb0(void* obj, Data* data);
 
-// Records a profiler tick, then if pObj->v20() is 11 calls DispatchCollisionEvents once and FUN_00cfffb0 twice with a Data record, and records an end tick.
-// @fnv 0x00d0ae80
-void __stdcall FUN_00d0ae80(Params* p)
-{
-    PFN_TlsGetValue pfnTls = TlsGetValue;
-    Data data;
-    volatile DWORD tickEnter;
-    {
-        ProfBuf* pBuf = (ProfBuf*)pfnTls(DAT_0126835c);
-        if (pBuf->m_pCur < pBuf->m_pRecordEnd)
-        {
-            ProfRec* pRec = pBuf->m_pCur;
-            pRec->m_pName = "TtCollLtUtil";
-            _ReadWriteBarrier();
-            tickEnter = (DWORD)__rdtsc();
-            pRec->m_iTick = tickEnter;
-            pBuf->m_pCur = pRec + 1;
-        }
-    }
-
-    Collider* pCollider = p->unk0c;
-    if (pCollider->v20() == 11)
-    {
-        data.c = pCollider->GetBase();
-        Node* a = p->unk14;
-        void* b = p->unk18;
-        data.kind = 2;
-        data.a = a;
-        data.b = b;
-        DispatchCollisionEvents(a->unk08, &data);
-        data.kind = 0;
-        FUN_00cfffb0(a, &data);
-        data.kind = 1;
-        FUN_00cfffb0(b, &data);
-    }
-
-    volatile DWORD tickExit;
-    {
-        ProfBuf* pBuf = (ProfBuf*)pfnTls(DAT_0126835c);
-        if (pBuf->m_pCur < pBuf->m_pRecordEnd)
-        {
-            ProfRec* pRec = pBuf->m_pCur;
-            pRec->m_pName = "Et";
-            _ReadWriteBarrier();
-            tickExit = (DWORD)__rdtsc();
-            pRec->m_iTick = tickExit;
-            pBuf->m_pCur = pRec + 1;
-        }
-    }
-}
-
 extern DWORD hkMonitorStreamTls;
 
 struct S_00d0af60_TimerCommand
@@ -279,20 +198,6 @@ struct S_00d0af60_MonitorStream
     char* m_pRayCursor;
     char* m_pCurrentCommand;
 };
-
-static inline void S_00d0af60_Timer(const char* name)
-{
-    S_00d0af60_MonitorStream* s = (S_00d0af60_MonitorStream*)TlsGetValue(hkMonitorStreamTls);
-    if (s->m_kRayEnd < s->m_pCurrentCommand)
-    {
-        S_00d0af60_TimerCommand* h = (S_00d0af60_TimerCommand*)s->m_kRayEnd;
-        h->m_pCommandName = name;
-        _ReadWriteBarrier();
-        volatile unsigned int t = (unsigned int)__rdtsc();
-        h->m_uiStartTicks = t;
-        s->m_kRayEnd = (char*)(h + 1);
-    }
-}
 
 struct S_00d0af60_Shape
 {
@@ -336,31 +241,6 @@ struct S_00d0af60_Input
 
 void FUN_00d00de0(void*, S_00d0af60_Event*);
 void FUN_00d00060(S_00d0af60_Entity*, S_00d0af60_Event*);
-
-// Between two profiler timers, if the shape's type is 11, builds an event and calls FUN_00d00de0 with a->unk8, then FUN_00d00060 for each entity.
-// @fnv 0x00d0af60
-void __stdcall FUN_00d0af60(S_00d0af60_Input* in)
-{
-    S_00d0af60_Timer("TtCollLfUtil");
-    S_00d0af60_Shape* shape = in->unkC;
-    if (shape->getType() == 11)
-    {
-        S_00d0af60_Event ev;
-        void* obj = shape->FUN_00d92820();
-        S_00d0af60_Entity* a = in->unk14;
-        S_00d0af60_Entity* b = in->unk18;
-        ev.m_obj = obj;
-        ev.m_type = 2;
-        ev.m_kPointA = a;
-        ev.m_kPointB = b;
-        FUN_00d00de0(a->unk8, &ev);
-        ev.m_type = 0;
-        FUN_00d00060(a, &ev);
-        ev.m_type = 1;
-        FUN_00d00060(b, &ev);
-    }
-    S_00d0af60_Timer("Et");
-}
 
 // sub ecx,8; jmp target: MSVC adjustor thunk for the SecondaryBase slot of a
 // class deriving from two bases; PrimaryBase is 8 bytes (vptr + one int).
@@ -451,25 +331,4 @@ struct TargetClass
     void __thiscall FUN_00c937e0(void* p);
 };
 
-// Increments the reference count of m_pCallbackData if present, otherwise allocates a 0x4c chunk, initializes it, and wires it into the object.
-// @fnv 0x00d0b040
-void __cdecl FUN_00d0b040(TargetClass* obj)
-{
-    hkpCollisionCallbackUtil* util = obj->m_pCallbackData;
-    if (util)
-    {
-        util->m_sReferenceCount++;
-        return;
-    }
-
-    hkThreadMemory* threadMem = FUN_00c85750();
-    hkpCollisionCallbackUtil* mem = (hkpCollisionCallbackUtil*)threadMem->m_pMemoryAllocator->allocateChunk(0x4c);
-    mem->m_usMemSizeAndFlags = 0x4c;
-    util = mem->Initialize();
-    obj->m_pCallbackData = util;
-
-    obj->FUN_00c93a60(util ? &util->field_0C : 0);
-    obj->FUN_00c937e0(util ? &util->field_08 : 0);
-    util->field_14.PassObjectToTarget(obj);
-}
 }  // namespace fnv_00d0b040

@@ -682,8 +682,6 @@ struct D661E0Object : D661E0Primary, D661E0Secondary
 // @fnv 0x00d661e0
     virtual void FUN_00d661e0();
 };
-D661E0Object::D661E0Object()
-{}
 // sub ecx,8; jmp FUN_00d661f0: adjustor thunk from multiple inheritance.
 struct PrimaryBase
 {
@@ -728,15 +726,6 @@ struct Own_00d66200 : A1_00d66200, A2_00d66200
     virtual void key_fn();  // key function - defined, so the vftable is emitted
     void FUN_00d66200();    // the shared override - declared only
 };
-Own_00d66200::Own_00d66200()
-{}
-void Own_00d66200::key_fn()
-{}
-Own_00d66200* make_00d66200()
-{
-    static Own_00d66200 o;
-    return &o;
-}
 struct OutVec
 {
     int unk00;

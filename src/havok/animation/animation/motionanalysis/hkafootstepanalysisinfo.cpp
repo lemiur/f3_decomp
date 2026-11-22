@@ -111,22 +111,6 @@ struct Owner
     Obj* CreateAndAddObject(int a0, float a1, float a2, float a3, int a4, int a5, int a6, int a7, int a8);
 };
 
-inline void* hkAlloc(int n)
-{
-    RefObj* p = (RefObj*)audio()->heap().AllocateMemoryBlock(n);
-    p->m_usMemSizeAndFlags = (short)n;
-    return p;
-}
-
-// @fnv 0x00e40ec0
-Obj* Owner::CreateAndAddObject(int a0, float a1, float a2, float a3, int a4, int a5, int a6, int a7, int a8)
-{
-    ObjRef p = ((Obj*)hkAlloc(sizeof(Obj)))->FUN_00e40800(a0, a1, a2, a3, a4, a5, a6, a7, a8);
-    m_aiIndexedValues.AddBack(p);
-    p->FUN_00c905b0();
-    return m_aiIndexedValues[m_aiIndexedValues.GetLogicalSize() - 1];
-}
-
 struct E40FA0ReferencedObject
 {
     virtual ~E40FA0ReferencedObject();
@@ -218,33 +202,6 @@ struct Owner
     int size;
     void ClearItems();
 };
-// @fnv 0x00e40fd0
-void Owner::ClearItems()
-{
-    vtable = &DAT_010e56d4;
-    Allocator* allocator = ((HolderLayout*)FUN_00c85750())->allocator;
-    hkReferencedObject** pItems = items;
-    int n = count;
-    for (int i = 0; i < n; ++i)
-    {
-        hkReferencedObject* item = pItems[i];
-        if (item)
-            item->removeReference();
-        pItems[i] = 0;
-    }
-    int oldSize = size;
-    count = 0;
-    if (oldSize & 0x80000000)
-    {
-    }
-    else
-    {
-        allocator->vtable->free(allocator, items, (oldSize & 0x3fffffff) * 4);
-    }
-    items = 0;
-    size = 0x80000000;
-    vtable = &DAT_0102e388;
-}
 }  // namespace fnv_00e40fd0
 
 struct CbHeap
@@ -462,12 +419,6 @@ struct Obj
     Obj* FUN_00e40ca0(int unused);
 };
 
-// @fnv 0x00e40ca0
-Obj* Obj::FUN_00e40ca0(int unused)
-{
-    vptr = &DAT_010ebd64;
-    return this;
-}
 }  // namespace fnv_00e40ca0
 
 namespace fnv_00e41050 {
@@ -493,18 +444,6 @@ struct CpuObject
     void FUN_00e40cb0();
     CpuObject* FUN_00e41050(unsigned int flags);
 };
-// Calls FUN_00e40cb0, then if flags & 1 invokes the global CpuAllocator on this object with its size, and returns this.
-// @fnv 0x00e41050
-CpuObject* CpuObject::FUN_00e41050(unsigned int flags)
-{
-    FUN_00e40cb0();
-    if (flags & 1)
-    {
-        CpuAllocatorHolder* holder = FUN_00c85750();
-        holder->allocator->Invoke(this, size);
-    }
-    return this;
-}
 }  // namespace fnv_00e41050
 
 namespace fnv_00e41e20 {
@@ -541,21 +480,4 @@ struct FUN_00e41e20_cls
     void FUN_00e41e20();
 };
 
-// If the capacity flag is clear, calls FreeArray on m_pData; then clears the data and size fields and assigns the final vtable value.
-// @fnv 0x00e41e20
-void FUN_00e41e20_cls::FUN_00e41e20()
-{
-    m_vptr00 = (int)&DAT_010e58c8;
-    AudioHolder* pHolder = FUN_00c85750();
-    AudioAllocator* pAllocator = pHolder->m_pAllocator;
-    unsigned int uCapBits = m_uCapBits;
-    m_iArrayLength = 0;
-    if ((uCapBits & 0x80000000u) == 0)
-    {
-        pAllocator->FreeArray(m_pData, (uCapBits & 0x3fffffffu) * 4);
-    }
-    m_pData = 0;
-    m_uCapBits = 0x80000000u;
-    m_vptr00 = (int)&DAT_0102e388;
-}
 }  // namespace fnv_00e41e20

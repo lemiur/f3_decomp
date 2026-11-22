@@ -10,12 +10,6 @@ struct HKProcessFactory
     void* __thiscall RegisterProcess(const char* name, void* creator);
 };
 void* __cdecl FUN_00dd9380(void* factory, const char* name, void* creator);
-// @fnv 0x00d66af0
-void* __cdecl RegisterPhantomsProcess()
-{
-    DAT_01268ff0 = (int)((HKProcessFactory*)DAT_01269cd0)->RegisterProcess("Phantoms", (void*)&FUN_00d66770);
-    return (void*)DAT_01268ff0;
-}
 
 struct Container
 {
@@ -136,22 +130,6 @@ struct FUN_00d663f0_Class
     void __thiscall AppendInt(int value);
 };
 
-// @fnv 0x00d663f0
-void __thiscall FUN_00d663f0_Class::AppendInt(int value)
-{
-    FUN_00d663f0_Array& array = m_ppData;
-    FUN_00d663f0_MemoryRouter* router = static_cast<FUN_00d663f0_MemoryRouter*>(_D1A0E0GetMemoryRouter());
-
-    if (array.m_uiItemCount == (array.m_pRayCursor & 0x3fffffff))
-        ResizeAudioStream(router->m_pThreadAllocator, &array, 4);
-
-    int* element = array.m_data + array.m_uiItemCount;
-    if (element)
-        *element = value;
-
-    ++array.m_uiItemCount;
-}
-
 namespace fnv_00d66b60 {
 struct HKMemoryManager
 {
@@ -177,21 +155,6 @@ struct hkpPhantomDisplayViewer
 
 HKMemoryRouter* __cdecl _D1A0E0GetMemoryRouter();
 
-// @fnv 0x00d66b60
-void* hkpPhantomDisplayViewer::Destroy(int flags)
-{
-    FUN_00d66490();
-
-    if (flags & 1)
-    {
-        HKMemoryRouter* router = _D1A0E0GetMemoryRouter();
-        unsigned short size = m_iElementCount;
-        HKMemoryManager* manager = router->m_manager;
-        manager->free(this, size);
-    }
-
-    return this;
-}
 }  // namespace fnv_00d66b60
 
 struct FnvCpu_FUN_00d66370_CpuTarget
@@ -243,12 +206,6 @@ void Derived::FUN_00d66380()
 }
 
 extern int DAT_01268ff0;
-
-// @fnv 0x00d66b10
-int __cdecl FUN_00d66b10()
-{
-    return DAT_01268ff0;
-}
 
 struct ListenerCollection
 {
@@ -399,18 +356,6 @@ struct FnvCpu_FUN_00d66770_CpuBlock
     unsigned short size;
     FnvCpu_FUN_00d66770_CpuBlock* FUN_00d66430(unsigned int value);
 };
-// @fnv 0x00d66770
-void* __cdecl FUN_00d66770(unsigned int value)
-{
-    FnvCpu_FUN_00d66770_CpuHolder* pCpuHolder = static_cast<FnvCpu_FUN_00d66770_CpuHolder*>(FUN_00c85750());
-    FnvCpu_FUN_00d66770_CpuBlock* pCpuBlock =
-        static_cast<FnvCpu_FUN_00d66770_CpuBlock*>(pCpuHolder->allocator->Invoke(60));
-    pCpuBlock->size = 60;
-    pCpuBlock = pCpuBlock->FUN_00d66430(value);
-    if (pCpuBlock)
-        return reinterpret_cast<char*>(pCpuBlock) + 8;
-    return 0;
-}
 
 namespace fnv_00e015d0 {
 struct Allocator
@@ -438,28 +383,6 @@ struct HavokArrayOwner
     int capacityFlags;
     HavokArrayOwner* DestroyHavokArrayOwner(unsigned int deletionFlags);
 };
-// Frees the owned data array through the allocator, resets the owner to empty, and optionally deallocates the object itself.
-// @fnv 0x00e015d0
-HavokArrayOwner* HavokArrayOwner::DestroyHavokArrayOwner(unsigned int deletionFlags)
-{
-    MemoryRouter* router = FUN_00c85750();
-    Allocator* allocator = router->allocator;
-    int previousCapacity = capacityFlags;
-    size = 0;
-    if ((previousCapacity & 0x80000000) == 0)
-    {
-        allocator->deallocateArray(data, (previousCapacity & 0x3fffffff) * 4);
-    }
-    data = 0;
-    capacityFlags = 0x80000000;
-    vtable = &DAT_0102e388;
-    if (deletionFlags & 1)
-    {
-        MemoryRouter* router2 = FUN_00c85750();
-        router2->allocator->deallocateObject(this, allocatorTag);
-    }
-    return this;
-}
 }  // namespace fnv_00e015d0
 
 namespace d664 {
@@ -582,13 +505,6 @@ class hkObjectD667 : public hkReferencedObjectD667
     hkArrayD667<void*> m_items;
     virtual ~hkObjectD667();
 };
-
-// Allocates and returns a new hkObjectD667 instance via the hkReferencedObjectD667 operator new.
-// @fnv 0x00d66730
-hkReferencedObjectD667* __cdecl CreateHkObject()
-{
-    return new hkObjectD667();
-}
 
 class hkMemoryAllocatorD664
 {
@@ -1270,9 +1186,6 @@ struct ThunkH_Derived : ThunkH_Plat, ThunkH_Host, ThunkH_Shim
     void* d_unk40;
 };
 
-ThunkH_Derived::ThunkH_Derived()
-{}
-
 namespace fnv_00d66530 {
 extern int DAT_01268ff0;
 extern int DAT_01268ff4;
@@ -1463,45 +1376,4 @@ struct Vw66530Outer
     Vw66530Self self;
 };
 
-// For an allowed type and nonzero root, collects entries, drops and logs some, stores arg, then calls the dispatcher's add and update.
-// @fnv 0x00d66530
-void Vw66530Self::FUN_00d66530(Vw66530Arg* arg)
-{
-    int root = arg->m_info.unk00;
-    Vw66530Info* info = &arg->m_info;
-    int type = arg->getType();
-    Vw66530Array<Vw66530Entry*> entries;
-    Vw66530Str str;
-    Vw66530Col col;
-    Vw66530Obj o;
-    int buf[0x80];
-    bool bValid = true;
-    if (type != 1 && type != 2)
-        bValid = DAT_01268fec->m_types.contains(type);
-    if (!bValid || root == 0)
-        goto done;
-    o.FUN_00ddfb70();
-    col.FUN_00ddfb80(&o);
-    col.FUN_00de0f90(root, &entries);
-    for (int i = entries.m_iElementCount - 1; i >= 0; i--)
-    {
-        Vw66530Entry* pEntry = entries.m_data[i];
-        if (pEntry->unk50 == 6 && pEntry->unk08 == 0)
-        {
-            str.FUN_00cb1600((char*)buf, 0x200);
-            str.FUN_00cc01c0(str_010d196c);
-            DAT_01268360->log(0, -1, (char*)buf, str_010d1be8, 0x91);
-            str.FUN_00cc00e0();
-            entries.removeAt(i);
-        }
-    }
-    m_args.AddBack(arg);
-    Vw66530Outer* outer = reinterpret_cast<Vw66530Outer*>((char*)this - 0x10);
-    outer->m_disp->add(&entries, info->unk08, info, DAT_01268ff0, root);
-    outer->m_disp->update(DAT_01268ff4, info, DAT_01268ff0);
-    for (int k = 0; k < entries.m_iElementCount; k++)
-        delete entries.m_data[k];
-done:
-    entries.destroy();
-}
 }  // namespace fnv_00d66530

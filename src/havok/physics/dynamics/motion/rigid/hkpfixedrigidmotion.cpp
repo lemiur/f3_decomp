@@ -52,15 +52,3 @@ struct FUN_00d1e190_Obj
 {
     void FUN_00d1e190(int* motion);
 };
-
-// Calls FUN_00c86660 on motion's sub-object at offset 0x10 with this+0x10, then zeroes two 16-byte vectors at float offsets 0x34 and 0x38 of motion.
-// @fnv 0x00d1e190
-void FUN_00d1e190_Obj::FUN_00d1e190(int* motion)
-{
-    reinterpret_cast<FUN_00c86660_Obj*>(reinterpret_cast<char*>(motion) + 0x10)
-        ->FUN_00c86660(reinterpret_cast<int*>(reinterpret_cast<char*>(this) + 0x10));
-
-    __m128 zero = _mm_setzero_ps();
-    _mm_store_ps(reinterpret_cast<float*>(motion) + 0x34, zero);
-    _mm_store_ps(reinterpret_cast<float*>(motion) + 0x38, zero);
-}

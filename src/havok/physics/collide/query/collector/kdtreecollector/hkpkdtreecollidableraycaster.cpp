@@ -6,15 +6,6 @@ struct FUN_00d97a10_Class
 {
     void FUN_00d97a10(float* p) const;
 };
-// @fnv 0x00d97a10
-void FUN_00d97a10_Class::FUN_00d97a10(float* afOut) const
-{
-    const float* m = *(const float**)((const char*)this + 0x10);
-    afOut[0] = m[0x10 / 4];
-    afOut[1] = m[0x70 / 4];
-    afOut[2] = m[0xd0 / 4];
-    afOut[3] = m[0x130 / 4];
-}
 
 struct S_00d979e0_Inner
 {
@@ -34,13 +25,6 @@ struct S_00d979e0
     S_00d979e0_Inner* unk10;
     float FUN_00d979e0() const;
 };
-
-// Returns the float at offset 0x10 of the inner struct pointed to by unk10.
-// @fnv 0x00d979e0
-float S_00d979e0::FUN_00d979e0() const
-{
-    return unk10->unk10;
-}
 
 struct S_00d98300_Entry
 {
@@ -82,16 +66,6 @@ struct S_00d98300
     void ResetEntries();
 };
 
-// Resets all four entries of the array by calling reset() on each.
-// @fnv 0x00d98300
-void S_00d98300::ResetEntries()
-{
-    m_entries[0].reset();
-    m_entries[1].reset();
-    m_entries[2].reset();
-    m_entries[3].reset();
-}
-
 struct NestedFlagBlock
 {
     unsigned long blk_00;  // 0x00
@@ -127,13 +101,6 @@ struct FUN_00d979c0_Class
 
     bool* GetFlag(bool* out);
 };
-
-// @fnv 0x00d979c0
-bool* FUN_00d979c0_Class::GetFlag(bool* pbFlag)
-{
-    *pbFlag = (nested->flag != 0);
-    return pbFlag;
-}
 
 struct SpawnedBase
 {
@@ -227,59 +194,6 @@ struct S00d97bf0_Obj
     int __thiscall FUN_00d97bf0(int a0, int a1, int a2, int a3);
 };
 
-// Records TtKdTreeCastRayIter and Et timing markers, stores a2 and a3, calls FUN_00d98ca0 and v2, then returns a0.
-// @fnv 0x00d97bf0
-int __thiscall S00d97bf0_Obj::FUN_00d97bf0(int a0, int a1, int a2, int a3)
-{
-    extern void* DAT_00fdf044;
-    extern unsigned long DAT_0126835c;
-    extern const char str_010d406c[];
-    extern const char str_010c41f8[];
-
-    typedef S00d97bf0_Pool*(__stdcall * AllocFn)(unsigned long);
-    AllocFn alloc = (AllocFn)DAT_00fdf044;
-
-    S00d97bf0_Pool* pool = alloc(DAT_0126835c);
-    S00d97bf0_Rec* rec = pool->cur;
-
-    if (rec < pool->end)
-    {
-        rec->name = "TtKdTreeCastRayIter";
-        _ReadWriteBarrier();
-
-        volatile unsigned int ts = (unsigned int)__rdtsc();
-        rec->tsc = ts;
-
-        rec++;
-        pool->cur = rec;
-    }
-
-    m04 = a2;
-    m10 = a3;
-
-    FUN_00d98ca0(&a2, a1, a2, a2 + 0x10, this);
-
-    v2(a0);
-
-    pool = alloc(DAT_0126835c);
-    rec = pool->cur;
-
-    if (rec < pool->end)
-    {
-        rec->name = "Et";
-        _ReadWriteBarrier();
-
-        volatile unsigned int* ts = (volatile unsigned int*)&a2;
-        *ts = (unsigned int)__rdtsc();
-        rec->tsc = *ts;
-
-        rec++;
-        pool->cur = rec;
-    }
-
-    return a0;
-}
-
 struct D98360Allocator
 {
     virtual void unk00();
@@ -325,11 +239,3 @@ struct FUN_00d98360 : D98360Base
         FUN_00c85750().heap().ReleaseBlock(p, nbytes);
     }
 };
-
-// Empty destructor for the FUN_00d98360 class.
-// @fnv 0x00d98360
-FUN_00d98360::~FUN_00d98360()
-{}
-
-FUN_00d98360::FUN_00d98360()
-{}

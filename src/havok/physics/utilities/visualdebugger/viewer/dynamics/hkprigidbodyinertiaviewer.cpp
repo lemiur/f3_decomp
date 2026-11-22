@@ -11,12 +11,6 @@ struct FUN_00dd9380_StandIn {
     int __thiscall FUN_00dd9380(const char* name, void* factory);
 };
 
-// @fnv 0x00d678c0
-void __cdecl RegisterInertiaTensors()
-{
-    DAT_01268ffc = ((FUN_00dd9380_StandIn*)DAT_01269cd0)->FUN_00dd9380("Inertia Tensors", &FUN_00d67880);
-}
-
 struct InnerArray {
     void** data;
     int count;
@@ -158,21 +152,7 @@ struct S_00d67170 {
     void RemoveItem(void* item);
 };
 
-// Finds item in the unk8 array and removes it at its index if present.
-// @fnv 0x00d67170
-void S_00d67170::RemoveItem(void* item)
-{
-    int index = unk8.indexOf(item);
-    if (index >= 0)
-        unk8.removeAt(index);
-}
-
 extern int DAT_01268ffc;
-// @fnv 0x00d678e0
-int __cdecl FUN_00d678e0()
-{
-    return DAT_01268ffc;
-}
 
 struct FUN_00d66f30_inner {
     virtual void v00();
@@ -449,13 +429,6 @@ public:
     int unk44;
 };
 
-// Allocates a D67880Object from info and returns it as a D67880Interface pointer.
-// @fnv 0x00d67880
-D67880Interface* __cdecl FUN_00d67880(const void* info)
-{
-    return new D67880Object(info);
-}
-
 void __cdecl ResizeAudioStream(void* allocator, void* array, int elementSize);
 template <typename T> inline void D671B0ConstructWithCopy(T* p, int n, const T& t) { for (int i = 0; i < n; i++) p[i] = t; }
 
@@ -480,12 +453,6 @@ struct D671B0Owner {
     D671B0Array<void*> m_ppData;
     void AddItem(void* item);
 };
-// Appends item to the owner's array via the array's push method.
-// @fnv 0x00d671b0
-void D671B0Owner::AddItem(void* item)
-{
-    m_ppData.AddBack(item);
-}
 
 extern int DAT_010d1d80;
 extern int DAT_010d1d60;
@@ -623,27 +590,6 @@ struct Viewer_d672 {
     void FUN_00d67250();
 };
 
-// Resets vtable pointers, calls FUN_00d66f30 on each actor entry of the owning world, clears the geometry and id arrays, then calls FUN_00ddcc60.
-// @fnv 0x00d67250
-void Viewer_d672::FUN_00d67250()
-{
-    m_vtbl00 = &DAT_010d1d80;
-    m_vtbl08 = &DAT_010d1d60;
-    m_vtbl20 = &DAT_010d1d50;
-    m_vtbl28 = &DAT_010d1d34;
-    m_vtbl2C = &DAT_010d1d24;
-    if (m_pOwningWorld) {
-        int n = m_pOwningWorld->m_iActorEntryCount;
-        for (int i = 0; i < n; i++)
-            FUN_00d66f30(m_pOwningWorld->m_kActorEntries[i]);
-    }
-    m_geometries.ClearAndRelease();
-    m_ids.ClearAndRelease();
-    m_vtbl2C = &DAT_010ccf7c;
-    m_vtbl28 = &DAT_0102f13c;
-    FUN_00ddcc60();
-}
-
 struct D678F0Primary {
     virtual void vfunc00();
     virtual void FUN_00d678f0();
@@ -671,10 +617,6 @@ struct D678F0Object : D678F0Primary, D678F0Secondary {
     virtual void FUN_00d678f0();
 };
 
-D678F0Object::D678F0Object()
-{
-}
-
 struct D67900Primary {
     virtual void vfunc00();
     virtual void FUN_00d67900();
@@ -698,10 +640,6 @@ struct D67900Object : D67900Primary, D67900Secondary {
 // @fnv 0x00d67900
     virtual void FUN_00d67900();
 };
-
-D67900Object::D67900Object()
-{
-}
 
 // FUN_00d67920 : MSVC this-adjusting thunk.
 //
@@ -735,11 +673,6 @@ struct AdjOwner : AdjBase1, AdjBase2 {
     virtual void key_fn();    // key function - defined, so the vftable is emitted
     void FUN_00d67920();              // the shared override - declared only
 };
-
-AdjOwner::AdjOwner() { }
-void AdjOwner::key_fn() { }
-
-AdjOwner* make_adj_owner() { static AdjOwner o; return &o; }
 
 namespace fnv_00d67930 {
 struct S_00d67930_Heap {
@@ -1305,7 +1238,3 @@ struct D67910Object : D67910Primary, D67910Secondary
 // @fnv 0x00d67910
     virtual void FUN_00d67910();
 };
-
-D67910Object::D67910Object()
-{
-}

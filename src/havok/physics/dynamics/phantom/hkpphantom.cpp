@@ -73,46 +73,9 @@ public:
     void NotifyListeners();
 };
 
-// Iterates the listener array backwards, calling V3(this) on each non-null listener, then calls FUN_00d07af0.
-// @fnv 0x00d07bd0
-void FUN_00d07bd0_cls::NotifyListeners()
-{
-    for (int i = m_kListeners.GetLogicalSize() - 1; i >= 0; i--) {
-        if (m_kListeners[i] != 0)
-            m_kListeners[i]->V3(this);
-    }
-    FUN_00d07af0();
-}
-
 struct PhantomListeners : hkpPhantom {
     void __thiscall RemoveListener(void* listener);
 };
-// @fnv 0x00d07c10
-void PhantomListeners::RemoveListener(void* listener) {
-    int foundIndex;
-    int index = 0;
-    int count = m_kPhantomListeners.m_iElementCount;
-    if (count > 0) {
-        void** ppCurrent = m_kPhantomListeners.m_data;
-        do {
-            if (*ppCurrent == listener) {
-                foundIndex = index;
-                goto found;
-            }
-            ++index;
-            ++ppCurrent;
-        } while (index < count);
-    }
-    foundIndex = -1;
-found:
-    --(volatile int&)m_kPhantomListeners.m_iElementCount;
-    int bytes = ((volatile int&)m_kPhantomListeners.m_iElementCount - foundIndex) * 4;
-    void** destination = m_kPhantomListeners.m_data + foundIndex;
-    void** source = destination + 1;
-    for (int offset = 0; offset < bytes; offset += 4) {
-        *(void**)((char*)destination + offset) = *(void**)((char*)source + offset);
-    }
-}
 
 class PhArchive {
 public:
@@ -129,22 +92,6 @@ public:
     void WriteToStream(PhArchive* a, PhTag* t);
     void WritePhantomLists(PhArchive* a, int unused);
 };
-// Writes the overlap and phantom lists to the archive via Write, after calling WriteToStream with DAT_01268808.
-// @fnv 0x00d07cf0
-void FUN_00d07cf0_cls::WritePhantomLists(PhArchive* pArchive, int unused)
-{
-    WriteToStream(pArchive, &DAT_01268808);
-    if (!(m_kPhantomOverlapListeners.m_iCapacityState & 0x80000000) || pArchive->m_flag) {
-        void* base = m_kPhantomOverlapListeners.m_data;
-        int e = FUN_00d06f80(base, (m_kPhantomOverlapListeners.m_iCapacityState & 0x3fffffff) * 4);
-        pArchive->Write(3, "OvrlapLisPtr", m_kPhantomOverlapListeners.m_data, m_kPhantomOverlapListeners.m_iElementCount * 4, e);
-    }
-    if (!(m_kPhantomListeners.m_iCapacityState & 0x80000000) || pArchive->m_flag) {
-        void* base = m_kPhantomListeners.m_data;
-        int e = FUN_00d06f80(base, (m_kPhantomListeners.m_iCapacityState & 0x3fffffff) * 4);
-        pArchive->Write(3, "PhantmLisPtr", m_kPhantomListeners.m_data, m_kPhantomListeners.m_iElementCount * 4, e);
-    }
-}
 
 class hkMemoryAllocatorD07E {
 public:
@@ -253,16 +200,6 @@ public:
     void FreeListenerArrays() throw();
 };
 
-// Frees the overlap-listener and phantom-listener arrays when they are empty, releasing their buffers through the memory router's heap.
-// @fnv 0x00d07e20
-void hkpPhantomD07E::FreeListenerArrays() throw()
-{
-    if (m_kPhantomOverlapListeners.m_iElementCount == 0)
-        m_kPhantomOverlapListeners.ClearAndRelease(FUN_00c85750().heap());
-    if (m_kPhantomListeners.m_iElementCount == 0)
-        m_kPhantomListeners.ClearAndRelease(FUN_00c85750().heap());
-}
-
 #include "fnv_asm_helpers.h"   // project x87 helpers (fnv_SinCos, fnv_FloatToInt), kept last so earlier code is unchanged
 
 struct __declspec(intrin_type) __declspec(align(16)) __m128 {
@@ -301,65 +238,10 @@ struct WorldD07950 {
     BroadPhaseD07950* m_pJobSemaphore;
 };
 
-__forceinline int hkToIntFastD07950(hkReal r)
-{
-    return fnv_FloatToInt(r);
-}
-
-__forceinline hkReal compAtD07950(const hkQuadD07950& v, int i)
-{
-    const hkReal* p = &v.x;
-    return p[i];
-}
-
-__forceinline void zeroExpD07950(hkpCollidableBoundingVolumeData& b)
-{
-    b.m_ucExpansionShift = 0;
-    b.m_ucExpansionMin[0] = 0;
-    b.m_ucExpansionMin[1] = 0;
-    b.m_ucExpansionMin[2] = 0;
-    b.m_ucExpansionMax[0] = 0;
-    b.m_ucExpansionMax[1] = 0;
-    b.m_ucExpansionMax[2] = 0;
-}
-
 class FUN_00d07950_cls : public hkpPhantom {
 public:
     void FUN_00d07950(const hkAabbD07950& aabb);
 };
-
-// @fnv 0x00d07950
-void FUN_00d07950_cls::FUN_00d07950(const hkAabbD07950& aabb)
-{
-    BroadPhaseD07950* pBroadPhase = ((WorldD07950*)m_pOwningWorld)->m_pJobSemaphore;
-    const __m128 vClampMax = *(const __m128*)&DAT_011b6d70;
-
-    __m128 vMin = _mm_add_ps(*(const __m128*)&pBroadPhase->m_kVectorAt40, *(const __m128*)&aabb.m_kMinimumCorner);
-    vMin = _mm_mul_ps(vMin, *(const __m128*)&pBroadPhase->m_vScale);
-    vMin = _mm_min_ps(vMin, vClampMax);
-    vMin = _mm_max_ps(vMin, *(const __m128*)&DAT_01267e30);
-    hkQuadD07950 kMinBoundsCur;
-    *(__m128*)&kMinBoundsCur = vMin;
-    hkUint32* outMin = m_kCollidable.m_kBoundingVolumeData.m_kMinimumCorner;
-    outMin[0] = hkToIntFastD07950(compAtD07950(kMinBoundsCur, 0));
-    outMin[1] = hkToIntFastD07950(compAtD07950(kMinBoundsCur, 1));
-    outMin[2] = hkToIntFastD07950(compAtD07950(kMinBoundsCur, 2));
-    outMin[3] = hkToIntFastD07950(compAtD07950(kMinBoundsCur, 3));
-
-    __m128 vMax = _mm_add_ps(*(const __m128*)&pBroadPhase->m_kVectorAt50, *(const __m128*)&aabb.m_kMaximumCorner);
-    vMax = _mm_mul_ps(vMax, *(const __m128*)&pBroadPhase->m_vScale);
-    vMax = _mm_min_ps(vMax, vClampMax);
-    vMax = _mm_max_ps(vMax, *(const __m128*)&DAT_01267e30);
-    hkQuadD07950 kMaxPoint;
-    *(__m128*)&kMaxPoint = vMax;
-    hkUint32* outMax = m_kCollidable.m_kBoundingVolumeData.m_kMaximumCorner;
-    outMax[0] = hkToIntFastD07950(compAtD07950(kMaxPoint, 0));
-    outMax[1] = hkToIntFastD07950(compAtD07950(kMaxPoint, 1));
-    outMax[2] = hkToIntFastD07950(compAtD07950(kMaxPoint, 2));
-    outMax[3] = hkToIntFastD07950(compAtD07950(kMaxPoint, 3));
-
-    zeroExpD07950(m_kCollidable.m_kBoundingVolumeData);
-}
 
 inline void MemCopyD07A90(void* pvDst, const void* pvSrc, int nbytes)
 {
@@ -418,17 +300,6 @@ struct PhantomD07A90 {
     ArrayD07A90<ListenerD07A90*> m_kPhantomOverlapListeners;
     void FUN_00d07a90();
 };
-
-// Iterates m_kPhantomOverlapListeners in reverse and removes any null entries via removeAtAndCopy.
-// @fnv 0x00d07a90
-void PhantomD07A90::FUN_00d07a90()
-{
-    for (int i = m_kPhantomOverlapListeners.m_iElementCount - 1; i >= 0; i--)
-    {
-        if (m_kPhantomOverlapListeners.m_data[i] == 0)
-            m_kPhantomOverlapListeners.removeAtAndCopy(i);
-    }
-}
 
 inline void MemCopyD07AF0(void* pvDst, const void* pvSrc, int nbytes)
 {
@@ -490,17 +361,6 @@ struct PhantomD07AF0 {
     ArrayD07AF0<ListenerD07AF0*> m_kPhantomListeners;
     void FUN_00d07af0();
 };
-
-// Iterates m_kPhantomListeners in reverse and removes any null entries via removeAtAndCopy.
-// @fnv 0x00d07af0
-void PhantomD07AF0::FUN_00d07af0()
-{
-    for (int i = m_kPhantomListeners.m_iElementCount - 1; i >= 0; i--)
-    {
-        if (m_kPhantomListeners.m_data[i] == 0)
-            m_kPhantomListeners.removeAtAndCopy(i);
-    }
-}
 
 struct LS_cls;
 struct hkArr {
@@ -601,48 +461,9 @@ struct PhantomCls {
     void FUN_00d07b90();
 };
 
-// Iterates m_kListeners in reverse, calling V1 on each non-null entry with this, then calls FUN_00d07af0.
-// @fnv 0x00d07b90
-void PhantomCls::FUN_00d07b90()
-{
-    for (int i = m_kListeners.GetLogicalSize(); --i >= 0; ) {
-        if (m_kListeners[i]) {
-            m_kListeners[i]->V1(this);
-        }
-    }
-    FUN_00d07af0();
-}
-
-inline int FindListener(const hkArray<void*>& listeners, void* listener)
-{
-    for (int index = 0; index < listeners.m_iElementCount; ++index) {
-        if (listeners.m_data[index] == listener) return index;
-    }
-    return -1;
-}
-
-inline void CopyPointerRange(void** destination, void** source, int byteCount)
-{
-    for (int offset = 0; offset < byteCount; offset += 4) {
-        *(void**)((char*)destination + offset) =
-            *(void**)((char*)source + offset);
-    }
-}
-
 struct PhRemoveListener : hkpPhantom {
     void FUN_00d07c80(void* listener);
 };
-
-// Removes the given listener from m_kPhantomOverlapListeners by shifting subsequent entries down and decrementing the count.
-// @fnv 0x00d07c80
-void PhRemoveListener::FUN_00d07c80(void* listener)
-{
-    int index = FindListener(m_kPhantomOverlapListeners, listener);
-    --m_kPhantomOverlapListeners.m_iElementCount;
-    CopyPointerRange(m_kPhantomOverlapListeners.m_data + index,
-                     m_kPhantomOverlapListeners.m_data + index + 1,
-                     (m_kPhantomOverlapListeners.m_iElementCount - index) * sizeof(void*));
-}
 
 template <int SIZE>
 __forceinline void memCpyOneAlignedXd07da0(void* dst, const void* src)
@@ -694,12 +515,6 @@ public:
     void AddItem(void* item);
 };
 
-// @fnv 0x00d07da0
-void hkOwnerXd07da0::AddItem(void* item)
-{
-    m_kNode.AddBack(item);
-}
-
 template <int SIZE>
 __forceinline void memCpyOneAlignedXd07de0(void* dst, const void* src)
 {
@@ -749,13 +564,6 @@ public:
 
     void FUN_00d07de0(void* item);
 };
-
-// Adds the given item to the owner's internal array of pointers.
-// @fnv 0x00d07de0
-void hkOwnerXd07de0::FUN_00d07de0(void* item)
-{
-    m_kNode.AddBack(item);
-}
 
 class hkMemoryAllocatorD07 {
 public:
@@ -1432,13 +1240,3 @@ public:
     void FUN_00c9d3b0();
     virtual ~FUN_00d08130();
 };
-
-// Destructor: calls NotifyElements, releases m_kPhantomListeners and m_kPhantomOverlapListeners, then calls FUN_00c9d3b0.
-// @fnv 0x00d08130
-FUN_00d08130::~FUN_00d08130()
-{
-    NotifyElements();
-    m_kPhantomListeners.ClearAndRelease(FUN_00c85750().heap());
-    m_kPhantomOverlapListeners.ClearAndRelease(FUN_00c85750().heap());
-    FUN_00c9d3b0();
-}

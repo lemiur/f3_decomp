@@ -75,20 +75,6 @@ struct hkVisualDebugger
     hkVisualDebugger* FUN_00cd1e40(unsigned int flags);
 };
 
-// @fnv 0x00cd1e40
-hkVisualDebugger* hkVisualDebugger::FUN_00cd1e40(unsigned int flags)
-{
-    FUN_00cd1970();
-
-    if (flags & 1)
-    {
-        FUN_00cd1e40_router* router = _D1A0E0GetMemoryRouter();
-        router->m_10->FUN_00cd1e40_virtual2(this, m_iWordAt04);
-    }
-
-    return this;
-}
-
 struct hkErrorCD0D
 {
     virtual ~hkErrorCD0D();
@@ -391,32 +377,6 @@ struct hkVisualDebuggerCD11 : hkVisualDebugger
     void FUN_00cd11a0();
 };
 
-// @fnv 0x00cd11a0
-void hkVisualDebuggerCD11::FUN_00cd11a0()
-{
-    DAT_01268360->BeginSection(0x1293adef, "Shuting down Visual Debugger..");
-    for (int i = m_iNumClients - 1; i >= 0; --i)
-    {
-        ActivateEntry(i, 0.0f);
-        RemovePair(i);
-        unsigned int auiReportBuf[0x80];
-        FUN_00cb1600 kReportStream((char*)auiReportBuf, sizeof(auiReportBuf));
-        kReportStream.FUN_00cc01c0("Client deleted.");
-        DAT_01268360->message(0, -1, (char*)auiReportBuf, ".\\hkVisualDebugger.cpp", 81);
-        kReportStream.FUN_00cc00e0();
-    }
-    if (m_pkServer)
-    {
-        delete m_pkServer;
-        m_pkServer = 0;
-        unsigned int auiReportBuf[0x80];
-        FUN_00cb1600 kReportStream((char*)auiReportBuf, sizeof(auiReportBuf));
-        kReportStream.FUN_00cc01c0("Server deleted.");
-        DAT_01268360->message(0, -1, (char*)auiReportBuf, ".\\hkVisualDebugger.cpp", 88);
-        kReportStream.FUN_00cc00e0();
-    }
-    DAT_01268360->EndSection();
-}
 }  // namespace fnv_00cd11a0
 
 struct FUN_00cd12e0_element
@@ -445,23 +405,6 @@ struct FUN_00cd12e0_owner
 {
     void FUN_00cd12e0();
 };
-// @fnv 0x00cd12e0
-void FUN_00cd12e0_owner::FUN_00cd12e0()
-{
-    FUN_00cd12e0_array* array = reinterpret_cast<FUN_00cd12e0_array*>(reinterpret_cast<char*>(this) + 0x50);
-    FUN_00cd12e0_router* router = FUN_00c85750();
-    if (array->size == (array->capacityFlags & 0x3fffffff))
-    {
-        ResizeAudioStream(router->heap, array, 4);
-    }
-    FUN_00cd12e0_element* item = array->data + array->size;
-    if (item != 0)
-    {
-        item->FUN_00cb0a60();
-    }
-    item = array->data + array->size++;
-    item->FUN_00cb0c10();
-}
 
 namespace fnv_00cd1330 {
 void* FUN_00c85750();
@@ -545,19 +488,6 @@ struct FUN_00cd1330_cls
     void AddElementAndNotify(int a1, int a2, int a3, int a4);
 };
 
-// @fnv 0x00cd1330
-void FUN_00cd1330_cls::AddElementAndNotify(int a1, int a2, int a3, int a4)
-{
-    Elem& e = m_ppData.AllocatePair();
-    e.m_iWordAt00 = a1;
-    e.m_iWordAt04 = a2;
-    e.m_8 = a4;
-
-    for (int i = 0; i < m_kCallbackFunctions.m_iElementCount; ++i)
-    {
-        m_kCallbackFunctions[i](a1, a2, true, a4, m_kCallbackUserHandles[i]);
-    }
-}
 }  // namespace fnv_00cd1330
 
 template <int SIZE> __forceinline void memCpyOneAlignedXcd13c0(void* dst, const void* src)
@@ -616,14 +546,6 @@ class hkOwnerXcd13c0
     void FUN_00cd13c0(void* a, void* b);
 };
 
-// Appends two pointers to the owner's two parallel arrays m_listA and m_listB.
-// @fnv 0x00cd13c0
-void hkOwnerXcd13c0::FUN_00cd13c0(void* apFirst, void* apSecond)
-{
-    m_listA.AddBack(apFirst);
-    m_listB.AddBack(apSecond);
-}
-
 class hkMemoryAllocatorCD17;
 
 struct hkMemoryRouterCD17
@@ -676,25 +598,6 @@ class FUN_00cd1710_C
 
     void FUN_00cd1710(SinkCD17* pkSink);
 };
-
-// For each entry with inventory data, calls pkSink->Search using m_i04, m_i38, and m_i3C.
-// @fnv 0x00cd1710
-void FUN_00cd1710_C::FUN_00cd1710(SinkCD17* pkSink)
-{
-    int iEntryIndex = m_iNumEntries;
-    for (int i = 0; i < iEntryIndex; i++)
-    {
-        EntryCD17& kEntry = m_pEntries[i];
-        if (kEntry.m_pInventoryEntryData)
-        {
-            ItemCD17* pItem = kEntry.m_pInventoryEntryData;
-            int iB = pItem->m_i3C;
-            int iA = pItem->m_i38;
-            int iValue = pkSink->m_i04;
-            pkSink->Search(fnvc_adapt::FUN_00c85750().heap(), iValue, iA, iB);
-        }
-    }
-}
 
 class hkMemoryAllocatorC19
 {
@@ -2031,33 +1934,4 @@ struct FUN_00cd1610_cls
     int m_uiItemCount;
     void FUN_00cd1610(unsigned int wanted);
 };
-// Removes the process slot matching wanted from m_processes, or logs an error via DAT_01268360 if it is not found.
-// @fnv 0x00cd1610
-void FUN_00cd1610_cls::FUN_00cd1610(unsigned int wanted)
-{
-    for (int i = 0; i < m_uiItemCount; ++i)
-    {
-        unsigned int current = m_processes[i].taggedPtr;
-        if (FUN_00cb0fa0(current & ~1u, wanted) == 0)
-        {
-            m_processes[i].FUN_00cb0c00();
-            --m_uiItemCount;
-            if (m_uiItemCount != i)
-            {
-                DefaultProcessSlot& slotLast = m_processes[m_uiItemCount];
-                m_processes[i] = slotLast;
-            }
-            return;
-        }
-    }
-    DAT_01268360->V07(0x76565454, "removeDefaultProcess");
-    ErrorMessage message;
-    message.FUN_00cb1600((char*)message.storage, 512);
-    message.FUN_00cc01c0("The default Process'")
-        ->FUN_00cc01c0((const char*)wanted)
-        ->FUN_00cc01c0("', cannot not be removed from the default process list as it cannot be found!");
-    DAT_01268360->V03(0, -1, (char*)message.storage, ".\\hkVisualDebugger.cpp", 318);
-    message.FUN_00cc00e0();
-    DAT_01268360->V08();
-}
 }  // namespace fnv_00cd1610

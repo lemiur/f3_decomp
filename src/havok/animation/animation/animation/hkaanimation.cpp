@@ -51,29 +51,6 @@ class Anim : public hkaAnimation
     int CountAnnotationsInRange(float from, float delta);
 };
 
-// @fnv 0x00e2f280
-int Anim::CountAnnotationsInRange(float from, float delta)
-{
-    float to = from + delta;
-    float wrapped = (to > m_fAnimationDuration) ? (to - m_fAnimationDuration) : kNegOne;
-
-    int count = 0;
-    for (int i = 0; i < m_kAnnotationTracks.m_iElementCount; ++i)
-    {
-        hkaAnnotationTrack& track = m_kAnnotationTracks.m_data[i];
-        for (int j = 0; j < track.m_kAnnotations.m_iElementCount; ++j)
-        {
-            if ((track.m_kAnnotations.m_data[j].m_uiCommandId >= from &&
-                 track.m_kAnnotations.m_data[j].m_uiCommandId < to) ||
-                track.m_kAnnotations.m_data[j].m_uiCommandId < wrapped)
-            {
-                count++;
-            }
-        }
-    }
-    return count;
-}
-
 class hkMemoryAllocatorE2F;
 
 struct hkMemoryRouterE2F
@@ -212,46 +189,3 @@ class FUN_00e2f500 : public ReferencedObjectE2F
 
     FUN_00e2f500(const FUN_00e2f500& other) throw();
 };
-
-// @fnv 0x00e2f500
-FUN_00e2f500::FUN_00e2f500(const FUN_00e2f500& other) throw()
-{
-    m_type = other.m_type;
-    m_fAnimationDuration = other.m_fAnimationDuration;
-    m_iNumTransformTracks = other.m_iNumTransformTracks;
-    m_iNumberOfFloatTracks = other.m_iNumberOfFloatTracks;
-    m_pExtractedMotion = other.m_pExtractedMotion;
-    m_kAnnotationTracks = other.m_kAnnotationTracks;
-}
-
-// @fnv 0x00e2f3e0
-hkUint32 hkaAnimationE2F3::GetAnnotationsInRange(hkReal m_fStartTime, hkReal fMoveElapsedTime,
-                                                 hkaTrackAnnotationE2F3* pkAnnotationsOut,
-                                                 hkUint32 uiMaxAnnotations) const throw()
-{
-    if (uiMaxAnnotations == 0)
-        return 0;
-    const hkReal m_fMaximumDistance = m_fStartTime + fMoveElapsedTime;
-    const hkReal fWrappedEndTime =
-        (m_fMaximumDistance > m_fAnimationDuration) ? m_fMaximumDistance - m_fAnimationDuration : -3.40282e+38f;
-    hkUint32 uiNumAnnotations = 0;
-    const int iNumTracks = m_kAnnotationTracks.m_iElementCount;
-    for (hkUint16 i = 0; i < iNumTracks; i++)
-    {
-        const hkaAnnotationTrack& kTrack = m_kAnnotationTracks.m_data[i];
-        const int iNumTrackAnnotations = kTrack.m_kAnnotations.m_iElementCount;
-        for (int j = 0; j < iNumTrackAnnotations; j++)
-        {
-            const hkReal& fTime = kTrack.m_kAnnotations.m_data[j].m_uiCommandId;
-            if ((fTime >= m_fStartTime && fTime < m_fMaximumDistance) || fTime < fWrappedEndTime)
-            {
-                pkAnnotationsOut[uiNumAnnotations].m_usTrackIndex = i;
-                pkAnnotationsOut[uiNumAnnotations].m_kAnnotation = kTrack.m_kAnnotations.m_data[j];
-                uiNumAnnotations++;
-                if (uiNumAnnotations == uiMaxAnnotations)
-                    return uiNumAnnotations;
-            }
-        }
-    }
-    return uiNumAnnotations;
-}

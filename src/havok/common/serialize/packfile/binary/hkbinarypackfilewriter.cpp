@@ -49,12 +49,6 @@ struct FUN_00dbc6e0_s
     void FUN_00dbdf60();
     void FUN_00dbc6e0();
 };
-// @fnv 0x00dbc6e0
-void FUN_00dbc6e0_s::FUN_00dbc6e0()
-{
-    m_vft = &DAT_010d65bc;
-    FUN_00dbdf60();
-}
 
 struct CallbackTarget
 {
@@ -323,24 +317,6 @@ struct FUN_00dbd820_cls
 extern void* FUN_00c85750();
 extern void __cdecl ResizeAudioStream(void* allocator, void* vec, unsigned int elemSize);
 
-// @fnv 0x00dbd820
-void FUN_00dbd820_cls::AppendPair(FUN_00dbd820_pair aPair)
-{
-    FUN_00dbd820_pair entry;
-    entry.first = aPair.first;
-    entry.second = *(volatile unsigned int*)&aPair.second;
-    void* holder = FUN_00c85750();
-    if (m_iElementCount == (int)(m_flags & 0x3fffffffu))
-    {
-        ResizeAudioStream(*(void**)((char*)holder + 0x10), this, 8);
-    }
-    int idx = m_iElementCount;
-    FUN_00dbd820_pair* slot = m_data + idx;
-    slot->first = entry.first;
-    slot->second = entry.second;
-    m_iElementCount++;
-}
-
 struct S_00dbd8a0_Sub
 {
     char unk0;
@@ -529,11 +505,6 @@ class FUN_00dbd910_cls
     BDBD910Array<BDBD910Entry52> m_kArray40;
 };
 
-// Destructor for the container class; the member arrays and members are destroyed automatically by their own destructors.
-// @fnv 0x00dbd910
-FUN_00dbd910_cls::~FUN_00dbd910_cls() throw()
-{}
-
 namespace fnv_00dbd620 {
 struct S_00dbd620_Arg;
 
@@ -597,14 +568,6 @@ extern int DAT_0102e388;
 
 unsigned int __cdecl FUN_00dbd720(unsigned int arg);
 
-static __declspec(noinline) void S_00dbd620_Helper(void* a, void* b, void* c, void* d)
-{
-    int n = *(int*)b;
-    for (int i = 0; i < n; i++)
-        ((S_00dbd620_Poly*)a)->v3();
-    *(int*)c += n + *(int*)d;
-}
-
 struct S_00dbd620_Owner
 {
     void FUN_00dbc7a0(void* p);
@@ -613,43 +576,6 @@ struct S_00dbd620_Owner
     void* ProcessPoly(S_00dbd620_Poly* a1, S_00dbd620_Arg* a2);
 };
 
-// @fnv 0x00dbd620
-void* S_00dbd620_Owner::ProcessPoly(S_00dbd620_Poly* pPoly, S_00dbd620_Arg* a2)
-{
-    S_00dbd620_Obj obj(a2);
-    S_00dbd620_Writer writer;
-
-    writer.unk06 = 1;
-    writer.vtbl = &DAT_010d65ec;
-    writer.unk08 = pPoly;
-    writer.unk0c = writer.unk08->v8();
-
-    obj.unk1c = &writer;
-    FUN_00dbc7a0(&obj);
-
-    S_00dbd620_Helper((void*)&obj.unk20, (void*)a2, obj.unk1c, obj.unk08);
-
-    void* pSaved = ((S_00dbd620_Poly*)&writer)->v8();
-
-    unsigned int one = 1;
-    ((S_00dbd620_Poly*)&writer)->v7((void*)FUN_00dbd720((unsigned int)&obj.unk04), one);
-
-    FUN_00dbcea0(&obj);
-
-    void* pSaved2 = ((S_00dbd620_Poly*)&writer)->v8();
-
-    FUN_00dbc960(&obj, pSaved);
-
-    ((S_00dbd620_Poly*)&writer)->v7(pSaved2, 0);
-
-    ((S_00dbd620_Poly*)&writer)->v5();
-
-    writer.vtbl = &DAT_0102e388;
-
-    ((S_00dbd620_Dtor*)&obj)->~S_00dbd620_Dtor();
-
-    return 0;
-}
 }  // namespace fnv_00dbd620
 
 // Havok patch manager: rebuild patch dependency order (topological sort).
@@ -929,23 +855,6 @@ struct S_00db8670_MultiMapUlong
     }
 };
 
-__declspec(noinline) void S_00db8670_MultiMap64::Insert(S_00db8670_Uint64 key, const int& value) throw()
-{
-    int oldHead = (int)m_pHashFunction.FUN_00cb1cb0(key, S_00db8670_Uint64(-1));
-    int newHead = AllocateSlot();
-    m_kChainValues[newHead].value = value;
-    m_kChainValues[newHead].next = oldHead;
-    m_pHashFunction.InsertKeyValue(S_GetRouter().heap(), key, newHead);
-}
-__declspec(noinline) void S_00db8670_MultiMapUlong::FUN_00dc9ec0(S_00db8670_Ulong key, const int& value) throw()
-{
-    int oldHead = (int)m_pHashFunction.LookupHashEntry(key, S_00db8670_Ulong(-1));
-    int newHead = AllocateSlot();
-    m_kChainValues[newHead].value = value;
-    m_kChainValues[newHead].next = oldHead;
-    m_pHashFunction.FUN_00cb1870(S_GetRouter().heap(), key, newHead);
-}
-
 struct S_00db8670_StringMapOps
 {
 };
@@ -991,22 +900,6 @@ struct S_00db8670_UidFromClassVersion
     S_00db8670_Uint64 FUN_00db7d60(const char* name, int version) const throw();
 };
 
-__declspec(noinline) int __cdecl FUN_00db7cb0(const S_00db8670_PatchInfo* p) throw()
-{
-    if (p->m_oldVersion == -1)
-    {
-        if (p->m_oldName != 0 || p->m_newVersion == -1 || p->m_newName == 0)
-            return 0;
-    }
-    else if (p->m_newVersion == -1)
-    {
-        if (p->m_oldName == 0 || p->m_newName != 0)
-            return 0;
-    }
-    else if (p->m_oldName == 0)
-        return 0;
-    return 1;
-}
 int __cdecl FUN_00cb0fa0(const char* a, const char* b) throw();
 int __cdecl FUN_00db7e70(int from, int to, const S_00db8670_MultiMapUlong& deps, S_00db8670_MapUlong& visited) throw();
 int __cdecl FUN_00db83c0(int index, S_00db8670_Array<int>& order, const S_00db8670_MultiMapUlong& deps, int next,
@@ -1024,198 +917,6 @@ struct S_00db8670_PatchManager
     int FindEntry(S_00db8670_Uint64 uid, int flag) throw();
     int FUN_00db8670() throw();
 };
-
-// Validates patch info, builds dependency and rename maps, topologically sorts m_kPatchInfos, and rebuilds m_kPatchInfoIndexMap.
-// @fnv 0x00db8670
-int S_00db8670_PatchManager::FUN_00db8670() throw()
-{
-    S_00db8670_Map64 newClassIndexFromUid;
-    S_00db8670_Map64& patchIndexFromUid = m_kPatchInfoIndexMap;
-    S_00db8670_MultiMap64 patchesFromUid;
-    const S_00db8670_UidFromClassVersion* uidFromClassVersion = m_pUidFromClassVersion;
-    S_00db8670_MultiMapUlong patchesFromName;
-
-    patchIndexFromUid.clear();
-
-    {
-        for (int i = 0; i < m_kPatchInfos.GetLogicalSize(); i++)
-        {
-            const S_00db8670_PatchInfo* p = m_kPatchInfos[i];
-            if (!FUN_00db7cb0(p))
-            {
-                return 1;
-            }
-            if (p->m_oldVersion != -1)
-            {
-                S_00db8670_Uint64 uid = m_pUidFromClassVersion->FUN_00db7d60(p->m_oldName, p->m_oldVersion);
-                if (patchIndexFromUid.hasKey(uid))
-                {
-                    return 1;
-                }
-                patchIndexFromUid.insert(uid, i);
-                if (p->m_newVersion == -1 || (p->m_newName && FUN_00cb0fa0(p->m_oldName, p->m_newName)))
-                {
-                    patchesFromName.FUN_00dc9ec0((S_00db8670_Ulong)p->m_oldName, i);
-                }
-            }
-            else
-            {
-                S_00db8670_Uint64 uid = m_pUidFromClassVersion->FUN_00db7d60(p->m_newName, p->m_newVersion);
-                if (newClassIndexFromUid.hasKey(uid))
-                {
-                    return 1;
-                }
-                newClassIndexFromUid.insert(uid, i);
-            }
-            if (p->m_newVersion != -1)
-            {
-                const char* name = p->m_newName ? p->m_newName : p->m_oldName;
-                S_00db8670_Uint64 uid = uidFromClassVersion->FUN_00db7d60(name, p->m_newVersion);
-                patchesFromUid.Insert(uid, i);
-            }
-        }
-    }
-
-    S_00db8670_StringMap newClassNames;
-    S_00db8670_MultiMapUlong dependencies;
-    S_00db8670_MultiMapUlong renames;
-
-    for (int j = 0; j < m_kPatchInfos.GetLogicalSize(); j++)
-    {
-        const S_00db8670_PatchInfo* p = m_kPatchInfos[j];
-        const char* name = p->m_oldName;
-        int version = p->m_oldVersion;
-        if (version == -1)
-        {
-            name = p->m_newName;
-            version = p->m_newVersion;
-            if (name == 0 || version == -1)
-            {
-                return 1;
-            }
-        }
-        S_00db8670_Uint64 uid = uidFromClassVersion->FUN_00db7d60(name, version);
-        int iNewClassIndex;
-        if (p->m_oldVersion == -1)
-        {
-            iNewClassIndex = (int)newClassIndexFromUid.FindValueForKey(uid, S_00db8670_Uint64(-1));
-        }
-        else
-        {
-            iNewClassIndex = (int)patchIndexFromUid.FindValueForKey(uid, S_00db8670_Uint64(-1));
-            for (int k = patchesFromUid.CallHelperWithDefaults(uid); k != -1; k = patchesFromUid.GetNextChainIndex(k))
-            {
-                int value = patchesFromUid.getValue(k);
-                dependencies.FUN_00dc9ec0(iNewClassIndex, value);
-            }
-        }
-
-        for (int c = 0; c < p->m_numComponent; c++)
-        {
-            const S_00db8670_Component& component = p->m_component[c];
-            if (component.m_type == 6)
-            {
-                const S_00db8670_DependsPatch* dep = (const S_00db8670_DependsPatch*)component.m_patch;
-                S_00db8670_Uint64 depUid = uidFromClassVersion->FUN_00db7d60(dep->m_name, dep->m_version);
-                int depIndex = (int)patchIndexFromUid.FindValueForKey(depUid, S_00db8670_Uint64(-1));
-                if (depIndex != -1)
-                {
-                    dependencies.FUN_00dc9ec0(depIndex, iNewClassIndex);
-                }
-                for (int k = patchesFromUid.CallHelperWithDefaults(depUid); k != -1;
-                     k = patchesFromUid.GetNextChainIndex(k))
-                {
-                    int value = patchesFromUid.getValue(k);
-                    dependencies.FUN_00dc9ec0(iNewClassIndex, value);
-                }
-            }
-        }
-
-        if (p->m_oldVersion == -1)
-        {
-            if (patchesFromName.LookupWithDefault((S_00db8670_Ulong)name) != -1)
-            {
-                int k = patchesFromName.LookupWithDefault((S_00db8670_Ulong)name);
-                if (k != -1)
-                {
-                    int lastIndex = FindEntry(uid, 0);
-                    S_00db8670_MultiMapUlong* target;
-                    if (lastIndex == -1)
-                    {
-                        if (newClassNames.GetValue(name, -1) != -1)
-                        {
-                            return 1;
-                        }
-                        newClassNames.FUN_00d874d0(name, j);
-                        target = &dependencies;
-                    }
-                    else
-                    {
-                        target = &renames;
-                    }
-                    do
-                    {
-                        int value = patchesFromName.getValue(k);
-                        if (lastIndex != value)
-                        {
-                            target->FUN_00dc9ec0(iNewClassIndex, value);
-                        }
-                        k = patchesFromName.GetNextChainIndex(k);
-                    } while (k != -1);
-                }
-            }
-        }
-    }
-
-    for (int it = renames.m_pHashFunction.GetFirstIterator(); renames.m_pHashFunction.isValid(it);
-         it = renames.m_pHashFunction.getNext(it))
-    {
-        S_00db8670_Ulong key = renames.m_pHashFunction.GetIteratorKey(it);
-        for (int k = renames.LookupWithDefault(key); k != -1; k = renames.GetNextChainIndex(k))
-        {
-            S_00db8670_MapUlong visited;
-            int value = renames.getValue(k);
-            if (!FUN_00db7e70(key, value, dependencies, visited))
-            {
-                dependencies.FUN_00dc9ec0(key, value);
-            }
-        }
-    }
-
-    S_00db8670_Array<const S_00db8670_PatchInfo*> sorted;
-    sorted.SwapThreeInts(m_kPatchInfos);
-    S_00db8670_Array<int> newIndex;
-    newIndex.SetSizeAndGrow(sorted.GetLogicalSize(), -1);
-    S_00db8670_Array<int> stack;
-    int next = 0;
-    for (int i = 0; i < sorted.GetLogicalSize(); i++)
-    {
-        next = FUN_00db83c0(i, newIndex, dependencies, next, stack, sorted);
-    }
-
-    m_kPatchInfos.SetSizeAndGrow(sorted.GetLogicalSize());
-    for (int i = 0; i < sorted.GetLogicalSize(); i++)
-    {
-        int n = newIndex[i];
-        if (n < 0)
-        {
-            m_kPatchInfos.SwapThreeInts(sorted);
-            return 1;
-        }
-        m_kPatchInfos[n] = sorted[i];
-    }
-
-    patchIndexFromUid.clear();
-    for (int i = 0; i < m_kPatchInfos.GetLogicalSize(); i++)
-    {
-        const S_00db8670_PatchInfo* p = m_kPatchInfos[i];
-        if (p->m_oldName)
-        {
-            patchIndexFromUid.insert(m_pUidFromClassVersion->FUN_00db7d60(p->m_oldName, p->m_oldVersion), i);
-        }
-    }
-    return 0;
-}
 
 struct Dbc860Triple
 {
@@ -1523,9 +1224,6 @@ struct FUN_00dbd7f0 : S_00dbd7f0_RefObj
     FUN_00dbd7f0();
     virtual ~FUN_00dbd7f0();
 };
-// @fnv 0x00dbd7f0
-FUN_00dbd7f0::FUN_00dbd7f0()
-{}
 }  // namespace fnv_00dbd7f0
 
 extern "C" void _ReadWriteBarrier();

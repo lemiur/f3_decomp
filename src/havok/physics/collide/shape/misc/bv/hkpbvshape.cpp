@@ -16,16 +16,6 @@ struct FUN_00c9d8c0
     DDCC60World* m_pContainedShape;
     FUN_00c9d8c0* __thiscall doWork(int flags);
 };
-// @fnv 0x00c9d8c0
-FUN_00c9d8c0* __thiscall FUN_00c9d8c0::doWork(int flags)
-{
-    DDCC60World* pOldWorld = m_pContainedShape;
-    vtbl = (int*)&DAT_010c6fd0;
-    if (pOldWorld)
-        pOldWorld->removeReference();
-    vtbl = (int*)&DAT_010c6fb0;
-    return this;
-}
 
 struct FUN_00c9d970_shape
 {
@@ -72,24 +62,6 @@ struct hkpBvShapeStandIn
 
 void* _D1A0E0GetMemoryRouter();
 
-// Calls FUN_00c9d930 on this, then if flags has bit 0 set, frees this through the memory router's manager using the object flags at offset 4, and returns this.
-// @fnv 0x00c9db30
-hkpBvShapeStandIn* hkpBvShapeStandIn::Destroy(int flags)
-{
-    reinterpret_cast<FUN_00c9d930StandIn*>(this)->FUN_00c9d930();
-
-    if (flags & 1)
-    {
-        void* router = _D1A0E0GetMemoryRouter();
-        unsigned short objectFlags = *reinterpret_cast<unsigned short*>(reinterpret_cast<unsigned char*>(this) + 4);
-        void* manager = *reinterpret_cast<void**>(reinterpret_cast<unsigned char*>(router) + 0x10);
-
-        reinterpret_cast<MemoryManagerStandIn*>(manager)->Free(this, objectFlags);
-    }
-
-    return this;
-}
-
 // @fnv 0x00c9d8b0
 int __stdcall FUN_00c9d8b0(int a1)
 {
@@ -121,13 +93,6 @@ struct C9D8F0Shape
     void NotifyCallback(C9D8F0Callback* callback, int flags);
 };
 
-// @fnv 0x00c9d8f0
-void C9D8F0Shape::NotifyCallback(C9D8F0Callback* callback, int flags)
-{
-    callback->method3(&DAT_010c6fec, m_pContainedShape, 0);
-    FUN_00c90360(callback, &DAT_01268910);
-}
-
 struct hkpBvShapeContainerView : hkpBvShape
 {
     hkpSingleShapeContainer* FUN_00c9d920();
@@ -155,19 +120,6 @@ struct FUN_00c9d990
     Shape_00c9d990* child;
     FUN_00c9d990(Shape_00c9d990* bounds, Shape_00c9d990* childShape);
 };
-// @fnv 0x00c9d990
-FUN_00c9d990::FUN_00c9d990(Shape_00c9d990* apBoundingVolume, Shape_00c9d990* childShape)
-{
-    referenceCount = 1;
-    boundingVolume = apBoundingVolume;
-    userData = 0;
-    type = 27;
-    vtable = &DAT_010c6ff8;
-    containerVtable = &DAT_010c6fd0;
-    child = childShape;
-    FUN_00c90510(childShape);
-    FUN_00c90510(boundingVolume);
-}
 
 extern "C" void _ReadWriteBarrier(void);
 extern "C" unsigned __int64 __rdtsc(void);

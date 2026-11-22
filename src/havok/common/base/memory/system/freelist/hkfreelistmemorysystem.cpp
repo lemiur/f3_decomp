@@ -6,12 +6,6 @@ struct FUN_00cd06c0_t
 {
     void __thiscall FUN_00cd06c0(int v);
 };
-// @fnv 0x00cd06c0
-void __thiscall FUN_00cd06c0_t::FUN_00cd06c0(int v)
-{
-    *(int*)((char*)this + 4) = v;
-    *(int*)((char*)this + 0x18) = v;
-}
 
 extern int DAT_010cacd0;
 
@@ -68,11 +62,6 @@ struct Outer
     Inner inner;
     void FUN_00cd06e0();
 };
-// @fnv 0x00cd06e0
-void Outer::FUN_00cd06e0()
-{
-    inner.v16();
-}
 
 void __cdecl FUN_00d2cab0(void*, int, unsigned int);
 struct FUN_00cd0940_record
@@ -102,36 +91,6 @@ struct FUN_00cd0940_shell
 {
     void __thiscall ResetRecordState(int* param, unsigned char mode);
 };
-// @fnv 0x00cd0940
-void __thiscall FUN_00cd0940_shell::ResetRecordState(int* aiParams, unsigned char mode)
-{
-    FUN_00cd0940_record* record = (FUN_00cd0940_record*)((unsigned char*)this + aiParams[8] * 0x138 + 0xc6c);
-    if ((mode & 2) != 0)
-    {
-        if (*(int*)((unsigned char*)record + 0x130) != 0)
-        {
-            int start = aiParams[1];
-            int length = aiParams[2] - start;
-            if (length != 0)
-            {
-                ((FUN_00cd0940_iface*)((unsigned char*)this + 0x1c))->slot02(start, length);
-                aiParams[1] = 0;
-                aiParams[0] = 0;
-                aiParams[2] = 0;
-            }
-        }
-        record->slot13();
-        aiParams[3] = 0;
-        aiParams[6] = 0;
-    }
-    if ((mode & 1) != 0)
-    {
-        record->slot13();
-        *(volatile int*)((unsigned char*)record + 0x128) = 0;
-        *(volatile unsigned char*)((unsigned char*)record + 0x12c) = 0;
-        FUN_00d2cab0(aiParams, 0, 0x24);
-    }
-}
 
 struct AudioAllocator
 {
@@ -195,13 +154,6 @@ struct SearchObject
 {
     int Search(unsigned int arg0, unsigned int arg1, unsigned int arg2, unsigned int arg3);
 };
-// @fnv 0x00cd1e20
-int SearchObject::Search(unsigned int arg0, unsigned int arg1, unsigned int arg2, unsigned int arg3)
-{
-    unsigned int callResult0 =
-        (unsigned int)((CallTarget_00cd1d80*)this)->FUN_00cd1d80((int)arg0, (int)arg1, (int)0u, (int)arg2, (int)arg3);
-    return (int)callResult0;
-}
 
 struct SpawnedSub
 {
@@ -212,26 +164,6 @@ struct FUN_00cd06f0_cls
 {
     void AccumulateSpawnedSubTotals(int* out);
 };
-
-// Iterates 0x20 entries, adding each active entry's Compute() result and value into out[1] and out[0], then sets out[2] to 0.
-// @fnv 0x00cd06f0
-void FUN_00cd06f0_cls::AccumulateSpawnedSubTotals(int* out)
-{
-    char* elem = (char*)this + 0xd9c;
-    int remaining = 0x20;
-    do
-    {
-        if (*(elem - 4) != 0)
-        {
-            SpawnedSub* sub = (SpawnedSub*)(elem - 0x130);
-            out[1] += sub->Compute();
-            out[0] += *(int*)elem;
-        }
-        elem += 0x138;
-        remaining--;
-    } while (remaining != 0);
-    out[2] = remaining;
-}
 
 struct CD0730Object
 {
@@ -357,28 +289,6 @@ struct Owner
     FUN_00d5e960_t cnt0b30;
     Sub0b0c* FUN_00cd0740(const Pair* p, Flags flags);
 };
-
-// Stores p->a and p->b into f0b00/f0b04, optionally calls v3 on sub0b0c and svc->s1 then cnt0b30, and returns &sub0b0c.
-// @fnv 0x00cd0740
-Sub0b0c* Owner::FUN_00cd0740(const Pair* apPair, Flags flags)
-{
-    f0b00 = apPair->a;
-    f0b04 = apPair->b;
-    if (flags.bits & 1)
-    {
-        v3(&sub0b0c, str_01094d90, flags.bits);
-    }
-    if (flags.bits & 2)
-    {
-        int b = apPair->b;
-        if (b)
-        {
-            int r = svc->s1(b, b);
-            cnt0b30.InitStream(r);
-        }
-    }
-    return &sub0b0c;
-}
 
 extern "C" unsigned int DAT_012686cc;
 
@@ -1364,15 +1274,6 @@ struct FUN_00cd0a60
     FUN_00cd0a60();
 };
 
-// Initializes unk04 to 0, links m1c to m08, stores the address of m1c in DAT_012686cc and in m0b00.unk08.
-// @fnv 0x00cd0a60
-FUN_00cd0a60::FUN_00cd0a60() : unk04(0), m1c(&m08)
-{
-    unsigned int r = (unsigned int)&m1c;
-    DAT_012686cc = r;
-    m0b00.unk08 = r;
-}
-
 struct Helper
 {
     void FUN_00cd09d0();
@@ -1384,13 +1285,6 @@ struct FUN_00cd0c70_cls
 
     FUN_00cd0c70_cls* FUN_00cd0c70(int aiUnused);
 };
-
-// @fnv 0x00cd0c70
-FUN_00cd0c70_cls* FUN_00cd0c70_cls::FUN_00cd0c70(int aiUnused)
-{
-    ((Helper*)this)->FUN_00cd09d0();
-    return this;
-}
 
 struct CD07B0_Allocator
 {
@@ -1472,27 +1366,6 @@ struct FUN_00cd07b0_cls
     int Cleanup(Flags akFlags);
 };
 
-// Frees the buffer bytes and detaches the sub-object when the corresponding flag bits are set, then nulls the allocator pointer.
-// @fnv 0x00cd07b0
-int FUN_00cd07b0_cls::Cleanup(Flags akFlags)
-{
-    if (akFlags.bits & 2)
-    {
-        if (m_kBuffer.Size())
-        {
-            m_pAllocator->FreeBytes(m_kBuffer.m_pBegin, m_kBuffer.Size());
-            m_kBuffer.InitStream(0, 0);
-        }
-    }
-    if (akFlags.bits & 1)
-    {
-        Detach(&m_kSub, akFlags);
-        m_kObj1c.Release();
-    }
-    m_pAllocator = 0;
-    return 0;
-}
-
 #include <windows.h>
 struct FUN_00d2c3a0_t
 {
@@ -1509,72 +1382,6 @@ struct FUN_00cd0830_cls
 {
     void AcquireSlot(unsigned int* out, unsigned int a2, unsigned int flags);
 };
-
-// When flags bit 0 is set, scans up to 32 entries, marks a zero byte, and writes slot-related values; bit 1 writes additional values.
-// @fnv 0x00cd0830
-void FUN_00cd0830_cls::AcquireSlot(unsigned int* out, unsigned int a2, unsigned int flags)
-{
-    char* self = (char*)this;
-    int iSlotIndex;
-    unsigned int uiZero;
-
-    if (flags & 1)
-    {
-        EnterCriticalSection((LPCRITICAL_SECTION)(self + 0x336c));
-        iSlotIndex = 0;
-        char* e = self + 0xd98;
-        do
-        {
-            if (*e == 0)
-                goto found;
-            ++iSlotIndex;
-            e += 0x138;
-        } while (iSlotIndex < 0x20);
-        goto notfound;
-    found:
-        *(unsigned char*)(self + 0xd98 + iSlotIndex * 0x138) = 1;
-    notfound:
-        LeaveCriticalSection((LPCRITICAL_SECTION)(self + 0x336c));
-
-        char* slot = self + iSlotIndex * 0x138 + 0xc6c;
-        *(unsigned int*)(slot + 0x128) = a2;
-        unsigned int uiValue = *(unsigned int*)(self + 0xb08);
-        ((FUN_00d2c3a0_t*)slot)->FUN_00d2c3a0(uiValue, 8);
-
-        uiZero = 0;
-        out[3] = uiZero;
-        out[4] = (unsigned int)slot;
-        out[7] = *(unsigned int*)(self + 0xb08);
-        out[5] = *(unsigned int*)(self + 4);
-        out[6] = uiZero;
-        out[8] = iSlotIndex;
-        out[1] = uiZero;
-        out[0] = uiZero;
-        out[2] = uiZero;
-    }
-    else
-    {
-        uiZero = 0;
-    }
-
-    if (flags & 2)
-    {
-        iSlotIndex = out[8];
-        unsigned int ebp = *(unsigned int*)(self + 0xb00);
-        char* slot = self + iSlotIndex * 0x138 + 0xc6c;
-        if (ebp != uiZero)
-        {
-            int r = ((Slot_1c_t*)(self + 0x1c))->v1(ebp);
-            out[1] = r;
-            out[0] = r;
-            out[2] = r + ebp;
-            *(unsigned int*)(slot + 0x130) = ebp;
-            *(unsigned int*)(slot + 0x134) = (unsigned int)out;
-        }
-        out[3] = (unsigned int)slot;
-        out[6] = (unsigned int)(self + 0xb30);
-    }
-}
 
 struct FUN_00cbf1a0_t
 {
@@ -1593,14 +1400,6 @@ struct FUN_00cd0c50_cls
 
     FUN_00cd0c50_cls* Destroy(int a1);
 };
-
-// @fnv 0x00cd0c50
-FUN_00cd0c50_cls* FUN_00cd0c50_cls::Destroy(int a1)
-{
-    DeleteCriticalSection((LPCRITICAL_SECTION)((char*)this + 0x18));
-    reinterpret_cast<FUN_00cbf1a0_t*>(this)->FUN_00cbf1a0();
-    return this;
-}
 
 namespace fnv_00cd0b30 {
 extern "C" char str_010cade0;
@@ -1669,53 +1468,4 @@ struct FUN_00cd0b30_cls
     void FUN_00cd0b30(int a1);
 };
 
-// Calls FUN_00cc01c0 twice, collects slot pointers and values, passes the local to FUN_00cbc220, then calls its FUN_00cd0c80 method.
-// @fnv 0x00cd0b30
-void FUN_00cd0b30_cls::FUN_00cd0b30(int apTarget)
-{
-    char* self = (char*)this;
-    ((Target_cc01*)apTarget)->FUN_00cc01c0(&str_010cade0);
-    ((Target_cc01*)apTarget)->FUN_00cc01c0(&str_010cadb4);
-
-    CtorLocal localData;
-    localData.m_cA = 0x80000000u;
-    localData.m_cB = 0x80000000u;
-    VSlotObj* obj = (VSlotObj*)(self + 0x1c);
-    localData.unk10 = 0;
-    localData.m_ppA = 0;
-    localData.m_nCallbackId = 0;
-    localData.m_pB = 0;
-    localData.m_nB = 0;
-    localData.unk2c = 0;
-    localData.unk30 = 0;
-    localData.unk30 = obj->vSlot50();
-    localData.unk10 = *(int*)(self + 0xb08);
-
-    char* p = self + 0xda0;
-    for (unsigned int i = 0x20; i != 0; --i)
-    {
-        if (*(p - 8) != 0)
-        {
-            AudioHolderStub* holder = FUN_00c85750();
-            if (localData.m_nCallbackId == (localData.m_cA & 0x3fffffffu))
-            {
-                ResizeAudioStream(holder->m_pAllocator, &localData.m_ppA, 4);
-            }
-            localData.m_ppA[localData.m_nCallbackId] = (void*)(p - 0x134);
-            localData.m_nCallbackId++;
-
-            holder = FUN_00c85750();
-            if (localData.m_nB == (localData.m_cB & 0x3fffffffu))
-            {
-                ResizeAudioStream(holder->m_pAllocator, &localData.m_pB, 4);
-            }
-            localData.m_pB[localData.m_nB] = *(int*)p;
-            localData.m_nB++;
-        }
-        p += 0x138;
-    }
-
-    this->FUN_00cbc220(apTarget, &localData);
-    localData.FUN_00cd0c80();
-}
 }  // namespace fnv_00cd0b30

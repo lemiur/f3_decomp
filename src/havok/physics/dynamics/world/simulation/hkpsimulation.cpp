@@ -373,60 +373,6 @@ public:
     void ResetSimulationState(hkpEntity** entities, int numEntities, hkpWorld* world, int resetInfo);
 };
 
-// @fnv 0x00cfa470
-void hkpSimulationV::ResetSimulationState(hkpEntity** entities, int numEntities, hkpWorld* world, int auiResetFlags)
-{
-    world->m_iCriticalOperationsLockCount++;
-
-    hkStepInfo stepInfo;
-    float startTime = world->FUN_00c91020();
-    float endTime = world->FUN_00c91030();
-    stepInfo.m_uiStartTime = startTime;
-    stepInfo.m_fEndTime = endTime;
-    stepInfo.m_fTimeStep = endTime - startTime;
-    stepInfo.m_fInverseDeltaTime = (stepInfo.m_fTimeStep == 0.0f) ? 0.0f : 1.0f / stepInfo.m_fTimeStep;
-    world->m_pCollisionInput->m_pStepInfo = stepInfo;
-
-    if (auiResetFlags & RESET_TOI)
-    {
-        for (int i = 0; i < numEntities; i++)
-        {
-            hkpEntity* entity = entities[i];
-            if (entity->m_bFlag != 5)
-            {
-                FUN_00cf1b10(world->FUN_00c91020(), &entity->m_kMotionState);
-            }
-        }
-        FUN_00d28680(&stepInfo, entities, numEntities, 0xe0);
-        FUN_00d1a330(world->m_pCollisionInput, entities, numEntities);
-    }
-
-    if (auiResetFlags & RESET_TIM)
-    {
-        FUN_00cf9c60(entities, numEntities, world);
-    }
-
-    if (auiResetFlags & RESET_AABB)
-    {
-        FUN_00cfa400(entities, numEntities, world->m_pCollisionInput, 0);
-    }
-    else if (auiResetFlags & RESET_TOI)
-    {
-        collideEntities(entities, numEntities, world, 2);
-    }
-
-    if (--world->m_iCriticalOperationsLockCount == 0 && !world->m_bBlockExecutingPendingOperations)
-    {
-        if (world->m_iPendingOperationCount)
-        {
-            world->FUN_00c91120();
-        }
-        if (world->m_iPendingOperationQueueCount == 1 && world->m_iQueuedOperationCount)
-        {
-            world->FUN_00c91140();
-        }
-    }
-}
 }  // namespace fnv_00cfa470
 
 struct FnvCpu_FUN_00cfa7a0_CpuAllocator {
@@ -448,16 +394,6 @@ struct FnvCpu_FUN_00cfa7a0_CpuObject {
     void FUN_00cf86d0();
     FnvCpu_FUN_00cfa7a0_CpuObject* FUN_00cfa7a0(unsigned int flags);
 };
-// @fnv 0x00cfa7a0
-FnvCpu_FUN_00cfa7a0_CpuObject* FnvCpu_FUN_00cfa7a0_CpuObject::FUN_00cfa7a0(unsigned int flags)
-{
-    FUN_00cf86d0();
-    if (flags & 1) {
-        FnvCpu_FUN_00cfa7a0_CpuAllocatorHolder* holder = FUN_00c85750();
-        holder->allocator->Invoke(this, size);
-    }
-    return this;
-}
 
 extern "C" void __cdecl FUN_00d01380(int);
 extern unsigned long DAT_0126835c;
@@ -1082,17 +1018,6 @@ struct MyObj : FUN_00cfa400_Obj {
     void FUN_00cfa430(void* first, void* second, S00cfa430_Data* data, unsigned char flags);
 };
 
-// If flags & 2, calls FUN_00cf9480 with first, second, data->unk78 and ForwardToGlobal; if flags & 4, calls InitArrayEntries(first, second).
-// @fnv 0x00cfa430
-void MyObj::FUN_00cfa430(void* first, void* second, S00cfa430_Data* data, unsigned char flags) {
-    if (flags & 2) {
-        FUN_00cf9480((int)first, (int)second, data->unk78, ForwardToGlobal, 0);
-    }
-    if (flags & 4) {
-        InitArrayEntries(first, second);
-    }
-}
-
 union __declspec(intrin_type) __declspec(align(16)) __m128 { float m128_f32[4]; unsigned __int64 m128_u64[2]; };
 extern "C" __m128 _mm_load_ss(const float* p);
 
@@ -1211,31 +1136,6 @@ struct S00cfa6e0_Dst {
     void FUN_00cfa6e0(S00cfa6e0_Src* s, S00cfa6e0_Pair* p, int v);
 };
 
-// Copies float and int fields from s and p into this object, computing several products of source floats.
-// @fnv 0x00cfa6e0
-void S00cfa6e0_Dst::FUN_00cfa6e0(S00cfa6e0_Src* apSource, S00cfa6e0_Pair* apPair, int aiValue)
-{
-    f00 = apSource->f10c;
-    f04 = apSource->f11c * apSource->f10c;
-    f08 = apSource->f110;
-    f14 = apSource->f120;
-    f18 = apSource->f120 * apSource->f11c;
-    f40 = apSource->f04;
-    f44 = apSource->f08;
-    i68 = aiValue;
-    f20 = apSource->f54 * apSource->f110;
-    f24 = apSource->f08;
-    f28 = apSource->f5c * apSource->f110;
-    i0c = apPair->i08;
-    i10 = apPair->i0c;
-    __m128 t = _mm_load_ss(&apSource->f128);
-    int* ti = (int*)&t;
-    i50 = ti[0];
-    i54 = ti[1];
-    i58 = ti[2];
-    i5c = ti[3];
-}
-
 struct FUN_00cfa7d0
 {
     int m_0000;
@@ -1342,15 +1242,6 @@ public:
     FUN_00cf87c0(void* p) throw();
     virtual ~FUN_00cf87c0() throw();
 };
-
-// Initializes a FUN_00cf87c0 object by storing the provided pointer in m_0c and setting default values for its member fields.
-// @fnv 0x00cf87c0
-FUN_00cf87c0::FUN_00cf87c0(void* p) throw()
-    : m_0c(p), m_14(0.0f), m_18(0.0f), m_20(-1.0f), m_24(0.0001f), m_28(0)
-{
-    m_10 = true;
-    m_08 = 0;
-}
 
 extern "C" const char str_010cc568[];
 static __forceinline void S00cf8bc0_timer(const char* tag, hkReal& slot) {
@@ -2297,18 +2188,6 @@ class WorldFull { public:
     }
 };
 
-__declspec(noinline) void WorldFull::ComputeMemoryUsage(MemoryRequirements* memory) {
-    memory->max = memory->sum = 0;
-    memory->biggest = 0;
-    for (int index=activeIslands.m_iElementCount-1; index>=0; --index) {
-        Island* island=activeIslands.m_data[index];
-        int extra=2*((int)island->unk01c/80)+8;
-        int size=((3*extra+(int)island->unk014)*4+23)&-16;
-        size+=(extra+8*island->numEntities+10)*16+island->numConstraints;
-        memory->sum+=size;
-        if (size>memory->max) { memory->max=size; memory->biggest=island; }
-    }
-}
 struct MemoryManager {
     virtual void slot0(); virtual void slot1(); virtual void slot2(); virtual void slot3();
     virtual void slot4(); virtual void slot5(); virtual void slot6(); virtual void slot7();
@@ -3125,18 +3004,6 @@ struct Sim {
     void FUN_00cf8b00();
 };
 
-// Iterates every island and actor entry in the owning world and calls Process on each entity with the world's m_info.
-// @fnv 0x00cf8b00
-void Sim::FUN_00cf8b00()
-{
-    IslandArray& islands = m_pOwningWorld->m_islands;
-    for (int i = 0; i < islands.m_iElementCount; i++) {
-        EntityArray& ents = islands.m_data[i]->m_kActorEntries;
-        for (int j = 0; j < ents.m_iElementCount; j++) {
-            ents.m_data[j]->Process(&m_pOwningWorld->m_info);
-        }
-    }
-}
 }  // namespace fnv_00cf8b00
 
 extern "C" {
@@ -3622,27 +3489,4 @@ struct FNVOwner_CFA5F0 {
     void __thiscall FUN_00cfa400(int arg1, int arg2, FNVState_CFA5F0* state, int arg5);
     void __thiscall FUN_00cfa5f0(int arg1,int arg2,FNVSIM_CFA5F0* sim, const int* values,int arg5);
 };
-// @fnv 0x00cfa5f0
-void __thiscall FNVOwner_CFA5F0::FUN_00cfa5f0(int arg1,int arg2,FNVSIM_CFA5F0* sim,const int* values,int arg5) {
-    FNVState_CFA5F0 state;
-    int* source = sim->stateSource78;
-    memcpy(&state, source, 0x50);
-    state.result64 = 0;
-    state.FUN_00cfa7d0(source);
-    state.input50 = values[0];
-    state.input54 = values[1];
-    state.input58 = values[2];
-    state.input5c = values[3];
-    ++sim->activeCount94;
-    FUN_00cf9c60(arg1,arg2,sim);
-    FUN_00cfa400(arg1,arg2,&state,arg5);
-    if (--sim->activeCount94 == 0 && !sim->flag9c) {
-        if (sim->hasPending8c) sim->FUN_00c91120();
-        if (sim->statusa4 == 1 && sim->hasPending90) sim->FUN_00c91140();
-    }
-    if (state.result64) {
-        FNVAudioHolder_CFA5F0* holder = FUN_00c85750();
-        holder->audio10->v2(state.result64, 0x200);
-    }
-}
 }  // namespace fnv_00cfa5f0

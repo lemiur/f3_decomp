@@ -22,28 +22,6 @@ void __cdecl ProcessTransformShapeCollision();
 void __cdecl FUN_00d42e50();
 void __cdecl DispatchClosestPoints();
 
-// Fills a callback struct with two sets of function pointers and flags and registers each set on self via FUN_00cfbbe0 with ranges (-1,15) and (15,-1).
-// @fnv 0x00d43120
-void RegisterCallbacks(Agent* pAgent)
-{
-    CollisionAgentFunctionTable af;
-    af.f0 = (void*)&CreateTransformAgent;
-    af.f4 = (void*)&RunCollector;
-    af.f8 = (void*)&RunSymmetricAgentFlipCollector;
-    af.fc = (void*)&FUN_00d43370;
-    af.f10 = 1;
-    af.f11 = 1;
-    pAgent->FUN_00cfbbe0(&af, -1, 15);
-
-    af.f0 = (void*)&BuildHeaderAndDispatchHandler;
-    af.f4 = (void*)&ProcessTransformShapeCollision;
-    af.f8 = (void*)&FUN_00d42e50;
-    af.fc = (void*)&DispatchClosestPoints;
-    af.f10 = 0;
-    af.f11 = 1;
-    pAgent->FUN_00cfbbe0(&af, 15, -1);
-}
-
 struct Target {
     virtual void v0();
     virtual void v1();
@@ -403,19 +381,6 @@ struct Caster_d43620 {
     int FUN_00d43620(int a, int b, const Input_d43620* in, int c, int d);
 };
 
-// @fnv 0x00d43620
-int Caster_d43620::FUN_00d43620(int aiArg1, int aiArg2, const Input_d43620* apInput, int aiValue1, int aiValue2)
-{
-    Input_d43620 rev = *apInput;
-    rev.m_dir = _mm_xor_ps(apInput->m_dir, DAT_010c44d0);
-
-    Collector_d43620 c1;
-    c1.Init(apInput->m_dir, aiValue1);
-    Collector_d43620 c2;
-    if (aiValue2) { c2.Init(apInput->m_dir, aiValue2); return ProcessSource(aiArg2, aiArg1, &rev, &c1, &c2); }
-    return ProcessSource(aiArg2, aiArg1, &rev, &c1, 0);
-}
-
 // FUN_00d429c0: thiscall, one stack argument (callee pops 4).
 // Forwards the argument to a virtual slot of the member at +0x0c, then
 // calls this object's virtual slot 0 (scalar deleting dtor) with flags = 1.
@@ -464,11 +429,6 @@ struct DecompOwner {
 
     int FUN_00d429e0(DecompTarget* target, int unusedArg);
 };
-
-// @fnv 0x00d429e0
-int DecompOwner::FUN_00d429e0(DecompTarget* target, int unusedArg) {
-    return target->v0c("ChildAgent", m_0c, 0);
-}
 
 struct S_00d42a40_T {
     virtual void v00();
@@ -1248,46 +1208,6 @@ struct hkpSymmetricAgent : public hkpGskAgent {
     void FUN_00d434e0(const hkpCdBody& bodyA, const hkpCdBody& bodyB, const GskAgentInput& input, Output& output);
 };
 
-// @fnv 0x00d434e0
-void hkpSymmetricAgent::FUN_00d434e0(const hkpCdBody& bodyA, const hkpCdBody& bodyB, const GskAgentInput& input, Output& output)
-{
-    float oldTime = output.m_fTimeOfImpact.m_uiCommandId;
-    AlignedPairData* cp = output.m_pAlignedPairData;
-
-    hkpGskAgent::FUN_00d42b50(bodyB, bodyA, input, output);
-
-    while (cp < output.m_pAlignedPairData) {
-        cp->m_vContactPosition.addMul4(cp->m_vSeparatingNormal.getDistanceSimdReal(), cp->m_vSeparatingNormal);
-        cp->m_vSeparatingNormal.setNeg3(cp->m_vSeparatingNormal);
-        cp++;
-    }
-
-    if (oldTime != output.m_fTimeOfImpact.m_uiCommandId) {
-        output.m_fTimeOfImpact.m_vSeparatingNormal.setNeg3();
-
-        unsigned char t = output.m_fTimeOfImpact.m_kGskCache.m_features.a;
-        output.m_fTimeOfImpact.m_kGskCache.m_features.a = output.m_fTimeOfImpact.m_kGskCache.m_features.b;
-        unsigned char dimA;
-        output.m_fTimeOfImpact.m_kGskCache.m_features.b = t;
-        dimA = output.m_fTimeOfImpact.m_kGskCache.m_ucDimensionA;
-
-        unsigned char dimB = output.m_fTimeOfImpact.m_kGskCache.m_ucDimensionB;
-        output.m_fTimeOfImpact.m_kGskCache.m_ucDimensionB = dimA;
-        int idx = (int)dimB + (int)dimA - 1;
-        output.m_fTimeOfImpact.m_kGskCache.m_ucDimensionA = dimB;
-        unsigned short v0 = output.m_fTimeOfImpact.m_kGskCache.m_kVertices[0];
-        unsigned short* v = output.m_fTimeOfImpact.m_kGskCache.m_kVertices;
-        v[0] = v[idx];
-        v[idx] = v0;
-
-        if ((output.m_fTimeOfImpact.m_kGskCache.m_ucDimensionA & output.m_fTimeOfImpact.m_kGskCache.m_ucDimensionB) == 2) {
-            unsigned short v1 = output.m_fTimeOfImpact.m_kGskCache.m_kVertices[1];
-            output.m_fTimeOfImpact.m_kGskCache.m_kVertices[1] = output.m_fTimeOfImpact.m_kGskCache.m_kVertices[2];
-            output.m_fTimeOfImpact.m_kGskCache.m_kVertices[2] = v1;
-        }
-    }
-}
-
 struct __declspec(align(16)) S_00d43030_Transform {
     float m00; float m04; float m08; float m0C;
     float m10; float m14; float m18; float m1C;
@@ -1489,31 +1409,6 @@ struct Record_d2e9 {
 
 void __cdecl DispatchClosestPoints(int a1, int a2, Input_d2e9* input, Record_d2e9* rec, Record_d2e9* optRec);
 
-// XORs the input vector with DAT_010c44d0, builds a Record_d2e9 with m_fScalar and a4, and calls DispatchClosestPoints with an optional second record using a5.
-// @fnv 0x00d43370
-void __cdecl FUN_00d43370(int a2, int a1, const Input_d2e9* input, int a4, int a5)
-{
-    Input_d2e9 local = *input;
-    local.m_vComponents = _mm_xor_ps(input->m_vComponents, DAT_010c44d0);
-
-    Record_d2e9 rec;
-    rec.m_vtbl = (const unsigned int*)DAT_010ce80c;
-    rec.m_fScalar = DAT_0104da48;
-    rec.m_key = input->m_key;
-    rec.m_uiFilterValue = a4;
-
-    if (a5 != 0) {
-        Record_d2e9 rec2;
-        rec2.m_vtbl = (const unsigned int*)DAT_010ce80c;
-        rec2.m_fScalar = DAT_0104da48;
-        rec2.m_key = input->m_key;
-        rec2.m_uiFilterValue = a5;
-        DispatchClosestPoints(a1, a2, &local, &rec, &rec2);
-    } else {
-        DispatchClosestPoints(a1, a2, &local, &rec, 0);
-    }
-}
-
 extern "C" void _ReadWriteBarrier(void);
 extern "C" unsigned __int64 __rdtsc(void);
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long);
@@ -1713,16 +1608,6 @@ struct TtTransform {
 struct TtShapeCollection : TtTransform {
     void FUN_00d43460(int a, int b, int c, int d);
 };
-
-// Builds a SectorDesc from d and the static sectorPtrs, then calls TtTransform::FUN_00d42ed0 with b, a, c and that descriptor.
-// @fnv 0x00d43460
-void TtShapeCollection::FUN_00d43460(int a, int b, int c, int d) {
-    SectorDesc s;
-    s.unk04 = false;
-    s.sectorPtrs = (void*)0x10ce81c;
-    s.unk08 = d;
-    TtTransform::FUN_00d42ed0(b, a, c, &s);
-}
 
 struct CollisionAgentContext;
 

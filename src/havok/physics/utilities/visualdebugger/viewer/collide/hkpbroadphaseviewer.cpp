@@ -30,18 +30,8 @@ extern FUN_00dd9380_StandIn* DAT_01269cd0;
 extern int DAT_01269028;
 extern char DAT_010c65b0;
 void FUN_00d6ad00();
-// @fnv 0x00d6ad40
-void __cdecl FUN_00d6ad40()
-{
-    DAT_01269028 = DAT_01269cd0->FUN_00dd9380(&DAT_010c65b0, (void*)&FUN_00d6ad00);
-}
 
 extern int DAT_01269028;
-// @fnv 0x00d6ad60
-int FUN_00d6ad60()
-{
-    return DAT_01269028;
-}
 
 struct Target
 {
@@ -357,39 +347,6 @@ struct FUN_00d6ac40_cls : PrimaryBase, MidBase, TailBase, SubObject
     ~FUN_00d6ac40_cls() throw();
 };
 
-// @fnv 0x00d6ac40
-FUN_00d6ac40_cls::~FUN_00d6ac40_cls() throw()
-{
-    if (m_pSharedOwner != 0)
-    {
-        for (int i = 0; i < m_pSharedOwner->m_iArrayLength; ++i)
-        {
-            m_pSharedOwner->m_ppItems[i]->ClearValue(static_cast<SubObject*>(this));
-        }
-    }
-    AudioHolder* pAudioHolder = FUN_00c85750();
-    AudioAllocator* pAllocator = pAudioHolder->m_pAllocator;
-    SpawnedItem* p = m_pData;
-    if (m_iField30 > 0)
-    {
-        int iRemaining = m_iField30;
-        do
-        {
-            p->v00(0);
-            ++p;
-            --iRemaining;
-        } while (iRemaining != 0);
-    }
-    m_iField30 = 0;
-    unsigned int uiAllocFlags = m_uiObjectFlags;
-    if ((uiAllocFlags & 0x80000000u) == 0)
-    {
-        pAllocator->FreeData(m_pData, (uiAllocFlags & 0x3fffffffu) * 0x80);
-    }
-    m_pData = 0;
-    m_uiObjectFlags = 0x80000000u;
-}
-
 namespace fnv_00d6ad00 {
 struct AllocatorIface
 {
@@ -491,9 +448,6 @@ struct D6AD80Object : D6AD80Primary, D6AD80Secondary
     virtual void FUN_00d6ad80();
 };
 
-D6AD80Object::D6AD80Object()
-{}
-
 struct D6AD90Primary
 {
     virtual void vfunc00();
@@ -522,9 +476,6 @@ struct D6AD90Object : D6AD90Primary, D6AD90Secondary
 // @fnv 0x00d6ad90
     virtual void FUN_00d6ad90();
 };
-
-D6AD90Object::D6AD90Object()
-{}
 
 namespace fnv_00d6ada0 {
 struct S_00d6ada0_Allocator
@@ -567,7 +518,4 @@ struct FUN_00d6ada0 : S_00d6ada0_ReferencedObject
     virtual ~FUN_00d6ada0();
 };
 
-// @fnv 0x00d6ada0
-FUN_00d6ada0::FUN_00d6ada0()
-{}
 }  // namespace fnv_00d6ada0

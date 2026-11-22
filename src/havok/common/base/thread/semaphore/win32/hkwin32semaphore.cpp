@@ -39,20 +39,6 @@ struct FUN_00d97970_cls
     FUN_00d97970_cls* Init(unsigned int aValue);
 };
 
-// @fnv 0x00d97970
-FUN_00d97970_cls* FUN_00d97970_cls::Init(unsigned int aValue)
-{
-    volatile unsigned int* pWords = (volatile unsigned int*)this;
-    pWords[0] = 0;
-    pWords[1] = 0;
-    pWords[2] = 0x80000000u;
-    pWords[7] = 0;
-    pWords[8] = 0;
-    pWords[9] = 0x80000000u;
-    InitBase(aValue);
-    return this;
-}
-
 #include <windows.h>
 struct FUN_00d04350_cls
 {

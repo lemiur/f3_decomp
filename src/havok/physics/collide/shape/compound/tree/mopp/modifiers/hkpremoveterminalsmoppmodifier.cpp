@@ -97,12 +97,6 @@ class hkObjE485
     hkBoolE485 IsBitClear(int index, int iUnused) const;
 };
 
-// Returns the negation of the bit at the given index in m_bits.
-// @fnv 0x00e48550
-hkBoolE485 hkObjE485::IsBitClear(int index, int iUnused) const
-{
-    return !m_bits->get(index);
-}
 }  // namespace fnv_00e48550
 
 struct FUN_00e48580_Heap
@@ -288,9 +282,6 @@ class FUN_00e48740 : public hkReferencedObjectE487, public hkpEntityListenerE487
     virtual ~FUN_00e48740() throw();
 };
 
-// @fnv 0x00e48740
-FUN_00e48740::~FUN_00e48740() throw()
-{}
 }  // namespace fnv_00e48740
 
 struct __declspec(align(16)) FUN_00e67230_Obj
@@ -461,31 +452,4 @@ class FUN_00e485d0 : public hkReferencedObjectE485, public hkpMoppModifierE485
 
 void __cdecl ConstructTemporaryObject(const hkpMoppCodeE485* pkMoppCode, const hkAabbE485& kAabb, hkpMoppModifierE485* pkModifier);
 
-// Constructor that combines the AABBs of the shapes for kShapesToRemove and calls ConstructTemporaryObject with the MOPP code, that AABB and this.
-// @fnv 0x00e485d0
-FUN_00e485d0::FUN_00e485d0(const hkpMoppCodeE485* pkMoppCode, const hkpShapeContainerE485* pkShapeContainer,
-                           const hkArrayE485<unsigned int>& kShapesToRemove) throw()
-{
-    if (kShapesToRemove.GetLogicalSize() != 0)
-    {
-        hkAabbE485 kAabb;
-        hkpShapeBufferE485 kBuffer;
-        {
-            const hkpShapeE485* pkShape = pkShapeContainer->GetShapeForKey(kShapesToRemove[0], kBuffer);
-            pkShape->getAabb(DAT_01268370, 0.0f, kAabb);
-        }
-        for (int i = 1; i < kShapesToRemove.GetLogicalSize(); i++)
-        {
-            const hkpShapeE485* pkShape = pkShapeContainer->GetShapeForKey(kShapesToRemove[i], kBuffer);
-            hkAabbE485 kAabb2;
-            pkShape->getAabb(DAT_01268370, 0.0f, kAabb2);
-            hkAabbE485& kOut = kAabb;
-            kOut.m_kMinimumCorner.setMin4(kOut.m_kMinimumCorner, kAabb2.m_kMinimumCorner);
-            kOut.m_kMaximumCorner.setMax4(kOut.m_kMaximumCorner, kAabb2.m_kMaximumCorner);
-        }
-        m_pTerminalIdsToRemove = &kShapesToRemove;
-        ConstructTemporaryObject(pkMoppCode, kAabb, this);
-        m_pTerminalIdsToRemove = 0;
-    }
-}
 }  // namespace fnv_00e485d0

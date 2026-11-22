@@ -82,25 +82,6 @@ struct S_cb2110_Foo
     bool* __thiscall FUN_00cb2110(bool* result);
 };
 
-// @fnv 0x00cb2110
-bool* __thiscall S_cb2110_Foo::FUN_00cb2110(bool* result)
-{
-    bool value1;
-    bool value2;
-    bool value;
-
-    if (*unk30.CheckFloatsFinite(&value1) && *FUN_00cb2d70(&value2))
-    {
-        value = true;
-    }
-    else
-    {
-        value = false;
-    }
-    *result = value;
-    return result;
-}
-
 union __declspec(intrin_type) __declspec(align(16)) __m128
 {
     float m128_f32[4];
@@ -181,34 +162,6 @@ class hkMatrix3CB22
     hkVector4CB22 m_kColumn2;
 };
 
-__forceinline void hkVector4CB22::_setRotatedDir(const hkMatrix3CB22& r, const hkVector4CB22& b)
-{
-    const __m128 b0 = _mm_shuffle_ps(b.m_vComponents, b.m_vComponents, 0x00);
-    const __m128 r0 = _mm_mul_ps(r.m_kColumn0.m_vComponents, b0);
-    const __m128 b1 = _mm_shuffle_ps(b.m_vComponents, b.m_vComponents, 0x55);
-    const __m128 r1 = _mm_mul_ps(r.m_kColumn1.m_vComponents, b1);
-    const __m128 b2 = _mm_shuffle_ps(b.m_vComponents, b.m_vComponents, 0xaa);
-    const __m128 r2 = _mm_mul_ps(r.m_kColumn2.m_vComponents, b2);
-    m_vComponents = _mm_add_ps(_mm_add_ps(r0, r1), r2);
-}
-
-__forceinline void hkVector4CB22::_setRotatedInverseDir(const hkMatrix3CB22& r, const hkVector4CB22& b)
-{
-    hkVector4CB22 kC0 = r.m_kColumn0;
-    hkVector4CB22 kC1 = r.m_kColumn1;
-    hkVector4CB22 kC2 = r.m_kColumn2;
-    __m128 tmp = _mm_unpacklo_ps(kC0.m_vComponents, kC1.m_vComponents);
-    const __m128 ctmp = _mm_shuffle_ps(_mm_unpackhi_ps(kC0.m_vComponents, kC1.m_vComponents), kC2.m_vComponents, 0xe4);
-    kC0.m_vComponents = _mm_movelh_ps(tmp, kC2.m_vComponents);
-    tmp = _mm_movehl_ps(kC0.m_vComponents, tmp);
-    kC1.m_vComponents = _mm_shuffle_ps(tmp, kC2.m_vComponents, 0xd4);
-    kC2.m_vComponents = ctmp;
-    const __m128 r0 = _mm_mul_ps(_mm_shuffle_ps(b.m_vComponents, b.m_vComponents, 0x00), kC0.m_vComponents);
-    const __m128 r1 = _mm_mul_ps(_mm_shuffle_ps(b.m_vComponents, b.m_vComponents, 0x55), kC1.m_vComponents);
-    const __m128 r2 = _mm_mul_ps(_mm_shuffle_ps(b.m_vComponents, b.m_vComponents, 0xaa), kC2.m_vComponents);
-    m_vComponents = _mm_add_ps(_mm_add_ps(r0, r1), r2);
-}
-
 class hkTransformCB22
 {
   public:
@@ -217,16 +170,6 @@ class hkTransformCB22
     hkMatrix3CB22 m_rotation;
     hkVector4CB22 m_vTranslation;
 };
-
-// Sets the transform to the inverse of kA multiplied by kB, combining rotation via SetMulInverse and translation via a rotated difference.
-// @fnv 0x00cb22f0
-void hkTransformCB22::FUN_00cb22f0(const hkTransformCB22& kA, const hkTransformCB22& kB)
-{
-    m_rotation.SetMulInverse(kA.m_rotation, kB.m_rotation);
-    hkVector4CB22 kDiff;
-    kDiff.setSub4(kB.m_vTranslation, kA.m_vTranslation);
-    m_vTranslation._setRotatedInverseDir(kA.m_rotation, kDiff);
-}
 
 struct Row
 {
@@ -251,18 +194,6 @@ struct Obj : Matrix
     void __thiscall FUN_00cb23e0(int a);
 };
 
-// Copies the matrix into a local, applies FUN_00cb2240 to that copy with a, leaving the original matrix unchanged.
-// @fnv 0x00cb23e0
-void __thiscall Obj::FUN_00cb23e0(int a)
-{
-    Matrix localMatrix;
-    localMatrix.r0.v = r0.v;
-    localMatrix.r1.v = r1.v;
-    localMatrix.r2.v = r2.v;
-    localMatrix.r3.v = r3.v;
-    FUN_00cb2240(&localMatrix, a);
-}
-
 extern "C" __m128 _mm_and_ps(__m128 a, __m128 b);
 
 extern const __m128 DAT_010c4c10;
@@ -277,18 +208,6 @@ struct FUN_00cb2050_cls
 
     void FUN_00cb2050(FUN_00cb2050_cls* apOut);
 };
-
-// Copies the four m_kRow vectors into apOut, masking the first three with DAT_010c4c10 and shuffling the fourth with DAT_010c7170.
-// @fnv 0x00cb2050
-void FUN_00cb2050_cls::FUN_00cb2050(FUN_00cb2050_cls* apOut)
-{
-    apOut->m_kRow0 = _mm_and_ps(m_kRow0, DAT_010c4c10);
-    apOut->m_kRow1 = _mm_and_ps(m_kRow1, DAT_010c4c10);
-    apOut->m_kRow2 = _mm_and_ps(m_kRow2, DAT_010c4c10);
-
-    __m128 kRow3 = m_kRow3;
-    apOut->m_kRow3 = _mm_shuffle_ps(kRow3, _mm_unpackhi_ps(kRow3, DAT_010c7170), 0xc4);
-}
 
 extern "C" __m128 _mm_load_ps(float const* p);
 extern "C" void _mm_store_ps(float* p, __m128 a);
@@ -306,21 +225,6 @@ struct FUN_00cb20b0_shell
 
     const Matrix44* __thiscall FUN_00cb20b0(const Matrix44* source);
 };
-
-// Applies g_absMask to the first three source rows, shuffles source row3 with g_rowMask, stores the results, and returns source.
-// @fnv 0x00cb20b0
-const Matrix44* FUN_00cb20b0_shell::FUN_00cb20b0(const Matrix44* source)
-{
-    _mm_store_ps(&row0.x, _mm_and_ps(_mm_load_ps(&source->row0.x), _mm_load_ps(g_absMask)));
-    _mm_store_ps(&row1.x, _mm_and_ps(_mm_load_ps(&source->row1.x), _mm_load_ps(g_absMask)));
-    _mm_store_ps(&row2.x, _mm_and_ps(_mm_load_ps(&source->row2.x), _mm_load_ps(g_absMask)));
-
-    __m128 last = _mm_load_ps(&source->row3.x);
-    __m128 high = _mm_unpackhi_ps(last, _mm_load_ps(g_rowMask));
-    _mm_store_ps(&row3.x, _mm_shuffle_ps(last, high, 0xc4));
-
-    return source;
-}
 
 extern "C" __m128 _mm_xor_ps(__m128 a, __m128 b);
 
@@ -386,26 +290,3 @@ struct FUN_00cb2160_cls : hkTransformCB22
     unsigned char* Probe(unsigned char* out, const FUN_00cb2160_cls* other, float eps);
     unsigned char* FUN_00cb2160(unsigned char* out, const FUN_00cb2160_cls* other, float eps);
 };
-// Writes 1 when Probe succeeds and the masked first three translation differences are at most eps; otherwise writes 0.
-// @fnv 0x00cb2160
-unsigned char* FUN_00cb2160_cls::FUN_00cb2160(unsigned char* out, const FUN_00cb2160_cls* other, float eps)
-{
-    unsigned char flag;
-    unsigned char* p = Probe(&flag, other, eps);
-    unsigned char r = 0;
-    if (*p != 0)
-    {
-        __m128 d = _mm_sub_ps(m_vTranslation.m_vComponents, other->m_vTranslation.m_vComponents);
-        __m128 bound = _mm_set_ps1(eps);
-        int mask = _mm_movemask_ps(_mm_cmple_ps(_mm_and_ps(d, DAT_01017d10), bound)) & 7;
-        if (mask == 7)
-        {
-            r = 1;
-            goto done;
-        }
-    }
-    r = 0;
-done:
-    *(unsigned char volatile*)out = r;
-    return out;
-}

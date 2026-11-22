@@ -14,10 +14,6 @@ struct FUN_00d4d980_Class : hkpDashpotAction { FUN_00d4d980_Class* FUN_00d4d980(
 // FUN_00d4d9d0 - hkpDashpotAction clone-style factory (Havok)
 __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long dwTlsIndex);
 unsigned long g_tlsIdx = 0;
-__declspec(noinline) void* FUN_00c85750() {
-	unsigned long idx = g_tlsIdx;
-	return TlsGetValue(idx);
-}
 class DashHeap1 {
 public:
 	virtual void unk00();
@@ -34,9 +30,6 @@ class FUN_00d4d980_class {
 public:
 	void* FUN_00d4d980(hkpEntity* entityA, hkpEntity* entityB, hkUlong userData);
 };
-__declspec(noinline) void* FUN_00d4d980_class::FUN_00d4d980(hkpEntity* entityA, hkpEntity* entityB, hkUlong userData) {
-	return this;
-}
 class hkpDashpotActionX : public hkpDashpotAction {
 public:
 	hkpAction* FUN_00d4d9d0(const hkArray<hkpEntity*>& newEntities, const hkArray<hkpEntity*>& removedEntities);

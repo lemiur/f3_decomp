@@ -30,26 +30,6 @@ void CreateD3C380Obj();
 void FUN_00d3c440();
 void FUN_00d3cc00();
 void FUN_00daf8e0();
-// Fills a Conversion with function pointers and flags and registers it twice with the registry, once for 4->1 and once for 1->4.
-// @fnv 0x00d3cef0
-void __cdecl FUN_00d3cef0(Registry* registry)
-{
-    Conversion conversion;
-    conversion.convert = FUN_00d3c400;
-    conversion.create = FUN_00d3cfc0;
-    conversion.copy = FlipAndDispatchCollector;
-    conversion.destroy = FUN_00d3ac80;
-    conversion.enabled = true;
-    conversion.supported = false;
-    registry->FUN_00cfbbe0(&conversion, 4, 1);
-    conversion.convert = CreateD3C380Obj;
-    conversion.create = FUN_00d3c440;
-    conversion.copy = FUN_00d3cc00;
-    conversion.destroy = FUN_00daf8e0;
-    conversion.enabled = false;
-    conversion.supported = false;
-    registry->FUN_00cfbbe0(&conversion, 1, 4);
-}
 
 extern float DAT_0104da48;
 extern void __cdecl FUN_00d3cc00(void*, void*, int, void*);
@@ -124,19 +104,6 @@ extern char DAT_010cf018[];
 
 AllocHolder* FUN_00c85750();
 
-// @fnv 0x00d3c400
-void __cdecl FUN_00d3c400(int aiUnused1, int aiUnused2, int aiUnused3, int d)
-{
-    AllocHolder* pAllocHolder = FUN_00c85750();
-    ObjAllocator* allocator = (ObjAllocator*)pAllocHolder->m_pAllocator;
-    SmallRecord* pRecord = (SmallRecord*)allocator->Alloc(0x10);
-    pRecord->m_w04 = 0x10;
-    pRecord->m_w06 = 1;
-    pRecord->m_i08 = d;
-    pRecord->m_w0C = 0xffff;
-    pRecord->m_vptr = DAT_010cf018;
-}
-
 class D3CF80CollectorBase
 {
   public:
@@ -180,17 +147,6 @@ struct FlipCollectorLocal
     unsigned char unk04;
     int unk08;
 };
-
-// Builds a FlipCollectorLocal from DAT_010ce81c and a4, then calls FUN_00d3c440 with a2, a1, a3 and the local's address.
-// @fnv 0x00d3cfc0
-void __cdecl FUN_00d3cfc0(int aiArg1, int aiArg2, int aiArg3, int a4)
-{
-    FlipCollectorLocal local;
-    local.unk08 = a4;
-    local.unk04 = 0;
-    local.unk00 = DAT_010ce81c;
-    FUN_00d3c440(aiArg2, aiArg1, aiArg3, (int)&local);
-}
 
 struct CpuCallData
 {
@@ -278,43 +234,3 @@ struct Agent : AgentBase
 {
     void FUN_00d3d080(int a, int b, int c, Simplex* s);
 };
-
-// @fnv 0x00d3d080
-void Agent::FUN_00d3d080(int a, int b, int c, Simplex* s)
-{
-    SimplexVertex* v = s->m_kRayEnd;
-    float oldDistance = s->m_fClosestPointDistanceSquared;
-    AgentBase::FUN_00d3c5b0(b, a, c, s);
-    for (; v < s->m_kRayEnd; v++)
-    {
-        const __m128* pb = &v->m_kPointB;
-        __m128 w = _mm_shuffle_ps(*pb, *pb, 0xff);
-        v->m_kPointA = _mm_add_ps(_mm_mul_ps(w, v->m_kPointB), v->m_kPointA);
-        v->m_kPointB = _mm_xor_ps(v->m_kPointB, DAT_010c4c00);
-    }
-    if (oldDistance != s->m_fClosestPointDistanceSquared)
-    {
-        __m128* n = &s->m_vHitNormal;
-        *n = _mm_xor_ps(*n, DAT_010c4c00);
-        {
-            unsigned char t = s->m_dims.m_ucLowNibble;
-            s->m_dims.m_ucLowNibble = s->m_dims.m_ucHighNibble;
-            s->m_dims.m_ucHighNibble = t;
-        }
-        {
-            unsigned char t = s->m_ucDimensionA;
-            s->m_ucDimensionA = s->m_ucDimensionB;
-            s->m_ucDimensionB = t;
-        }
-        int last = s->m_ucDimensionA + s->m_ucDimensionB - 1;
-        unsigned short t0 = s->m_ids[0];
-        s->m_ids[0] = s->m_ids[last];
-        s->m_ids[last] = t0;
-        if ((s->m_ucDimensionA & s->m_ucDimensionB) == 2)
-        {
-            unsigned short t1 = s->m_ids[1];
-            s->m_ids[1] = s->m_ids[2];
-            s->m_ids[2] = t1;
-        }
-    }
-}

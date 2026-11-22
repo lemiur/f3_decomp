@@ -27,11 +27,6 @@ int hkpShapeCollection_L::FUN_00d213d0()
 
 extern char const* const DAT_01268910;
 void __cdecl FUN_00c90360(char const* const* first, char const* const* second);
-// @fnv 0x00d213e0
-void __cdecl FUN_00d213e0(char const* const* first, char const* const* ignored)
-{
-    FUN_00c90360(first, &DAT_01268910);
-}
 
 // @fnv 0x00d213f0
 void __stdcall FUN_00d213f0(int, int)
@@ -68,19 +63,6 @@ struct Holder
     MemorySystem* __thiscall FUN_00c85750();
     Holder* __thiscall Destroy(unsigned char flags);
 };
-// Sets shapeVtable and vtable, then frees the object via the memory system allocator if the low bit of flags is set.
-// @fnv 0x00cf57e0
-Holder* __thiscall Holder::Destroy(unsigned char flags)
-{
-    shapeVtable = &DAT_010c6fb0;
-    vtable = &DAT_0102e388;
-    if ((flags & 1) != 0)
-    {
-        MemorySystem* memory = FUN_00c85750();
-        memory->allocator->Free(this, memSizeAndFlags);
-    }
-    return this;
-}
 
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long dwTlsIndex);
 extern "C" unsigned __int64 __rdtsc(void);
@@ -362,70 +344,6 @@ class Owner_L
     void FUN_00d217d0(Arg0_L* arg0, Arg1_L* arg1, Arg2_L* arg2);
 };
 
-// @fnv 0x00d217d0
-void Owner_L::FUN_00d217d0(Arg0_L* arg0, Arg1_L* arg1, Arg2_L* arg2)
-{
-    volatile unsigned int uiTimestamp;
-    ProfSlot_L* pProfSlot = (ProfSlot_L*)TlsGetValue(DAT_0126835c);
-    ProfRec_L* pProfRec = pProfSlot->head;
-    if (pProfRec < pProfSlot->end)
-    {
-        pProfRec->id = &str_010ce1f8;
-        _ReadWriteBarrier();
-        uiTimestamp = (unsigned int)__rdtsc();
-        pProfRec->time = uiTimestamp;
-        pProfSlot->head = pProfRec + 1;
-    }
-    ShapeBuf_L buffer;
-    char enabled;
-    Ctx_L ctx;
-    int key;
-    if (arg0->m_iFilter == 0)
-    {
-        key = this->m_coll.getFirstKey_L();
-        if (key != -1)
-        {
-            do
-            {
-                ctx.shape = this->m_coll.getChildShape_L(key, buffer);
-                ctx.arg1 = arg1;
-                ctx.unk08 = arg1->unk08;
-                ctx.key = key;
-                ctx.shape->process_L(arg0, &ctx, arg2);
-                key = this->m_coll.getNextKey_L(key);
-            } while (key != -1);
-        }
-    }
-    else
-    {
-        key = this->m_coll.getFirstKey_L();
-        if (key != -1)
-        {
-            do
-            {
-                if (*arg0->m_iFilter->isEnabled_L(&enabled, arg0, this, &this->m_coll, key))
-                {
-                    ctx.shape = this->m_coll.getChildShape_L(key, buffer);
-                    ctx.arg1 = arg1;
-                    ctx.unk08 = arg1->unk08;
-                    ctx.key = key;
-                    ctx.shape->process_L(arg0, &ctx, arg2);
-                }
-                key = this->m_coll.getNextKey_L(key);
-            } while (key != -1);
-        }
-    }
-    pProfSlot = (ProfSlot_L*)TlsGetValue(DAT_0126835c);
-    pProfRec = pProfSlot->head;
-    if (pProfRec < pProfSlot->end)
-    {
-        pProfRec->id = &str_010c41f8;
-        _ReadWriteBarrier();
-        uiTimestamp = (unsigned int)__rdtsc();
-        pProfRec->time = uiTimestamp;
-        pProfSlot->head = pProfRec + 1;
-    }
-}
 }  // namespace fnv_00d217d0
 
 extern unsigned long DAT_0126835c;
@@ -598,9 +516,3 @@ class FUN_00d21410 : public hkpShape_ctor, public ShapeContainerLite
     ~FUN_00d21410();
     virtual int FUN_00d213d0();
 };
-
-// Constructs a shape object, initializing the reference count, user data, type, and collection type fields.
-// @fnv 0x00d21410
-FUN_00d21410::FUN_00d21410(int type, char collectionType)
-    : hkpShape_ctor(type), ShapeContainerLite(), m_info(collectionType)
-{}

@@ -345,28 +345,8 @@ struct Result
     __m128 v;
 };
 // @fnv 0x00da8350
-static __declspec(noinline) Result
-    FUN_00da8350(const __m128* pkPoint, const __m128* pkOrigin, const __m128* pkNormal, __m128* pkNormalOut)
-{
-
-    __m128 kDelta = _mm_sub_ps(*pkPoint, *pkOrigin);
-    __m128 kNormal = *pkNormal;
-    *pkNormalOut = kNormal;
-    __m128 kProduct = _mm_mul_ps(kNormal, kDelta);
-    __m128 kY = _mm_shuffle_ps(kProduct, kProduct, 0x55);
-    __m128 kZ = _mm_shuffle_ps(kProduct, kProduct, 0xaa);
-    kY = _mm_add_ss(kY, kProduct);
-    kZ = _mm_add_ss(kZ, kY);
-    Result r;
-    r.v = kZ;
-    return r;
-}
 __m128* volatile gP;
 __m128* volatile gO;
 __m128* volatile gN;
 __m128* volatile gOut;
 __m128* volatile gD;
-void Caller()
-{
-    *gD = FUN_00da8350(gP, gO, gN, gOut).v;
-}

@@ -33,17 +33,6 @@ struct FUN_00d06fb0_cls
     void DispatchWithMode(void* apFirst, void* apSecond, int aiCount, int aiMode);
 };
 
-// Computes a mode from apSecond and aiCount when aiCount is positive and aiMode is zero, then dispatches with flag 1.
-// @fnv 0x00d06fb0
-void FUN_00d06fb0_cls::DispatchWithMode(void* apFirst, void* apSecond, int aiCount, int aiMode)
-{
-    int iMode = aiMode;
-    if (aiCount > 0 && iMode == 0)
-        iMode = FUN_00d06f80(apSecond, aiCount);
-
-    Dispatch(1, apFirst, apSecond, aiCount, iMode);
-}
-
 extern "C" int __cdecl FUN_00cb10d0(const char* s);
 extern "C" int __cdecl FUN_00d06f80(const char* s, int len);
 
@@ -58,18 +47,6 @@ class Handler
     virtual void Emit(int kind, int a, const char* s, int len, int hash);
     void EmitString(int a, unsigned int* str);
 };
-
-// If the string pointer in str is non-null, computes its length and hash and emits it via Emit with kind 3.
-// @fnv 0x00d07030
-void Handler::EmitString(int a, unsigned int* str)
-{
-    const char* s = (const char*)(*str & ~1u);
-    if (s)
-    {
-        int len = FUN_00cb10d0(s);
-        Emit(3, a, s, len, FUN_00d06f80(s, len));
-    }
-}
 
 struct SlotAllocator
 {
@@ -159,24 +136,6 @@ struct D06D50Finder
     const D06D50Class* FindClass(const D06D50Object* object) const;
 };
 
-// @fnv 0x00d06d50
-const D06D50Class* D06D50Finder::FindClass(const D06D50Object* object) const
-{
-    if (object)
-    {
-        const D06D50Class* pClass = object->GetClassType();
-        if (pClass)
-            return pClass;
-        if (m_registry)
-        {
-            pClass = m_registry->GetClassFromName(object);
-            if (pClass)
-                return pClass;
-        }
-    }
-    return 0;
-}
-
 struct FUN_00d06d90_cls;
 
 struct Rec
@@ -209,23 +168,6 @@ struct FUN_00d06d90_cls
 
     int GetFlagsOrProcess(Rec* a);
 };
-
-// Reads the low 15 bits of a->m_04; if zero and m_10 is set, queries m_0c and returns Process() on the result, otherwise returns the flags.
-// @fnv 0x00d06d90
-int FUN_00d06d90_cls::GetFlagsOrProcess(Rec* pRec)
-{
-    unsigned int flags = pRec->m_04 & 0x7fff;
-    if (flags == 0 && m_10 != 0)
-    {
-        void* r = m_0c->Query(pRec);
-        if (r != 0)
-        {
-            return ((Tail*)r)->Process();
-        }
-        flags = 0;
-    }
-    return flags;
-}
 
 namespace fnv_00d06dd0 {
 struct S_00d06dd0_Heap
@@ -271,17 +213,6 @@ struct S_00d06dd0_Obj
     void DispatchIfNotFlagged(int a, unsigned int flags);
 };
 
-// When bit 0 of flags is clear, computes a value from a, calls the router heap's vfn2c with both, and passes the results to slot14.
-// @fnv 0x00d06dd0
-void S_00d06dd0_Obj::DispatchIfNotFlagged(int a, unsigned int flags)
-{
-    if ((flags & 1) == 0)
-    {
-        int b = GetFlagsOrProcess(a);
-        int r = FUN_00c85750()->heap().vfn2c(a, b);
-        slot14(0, 0, a, b, r);
-    }
-}
 }  // namespace fnv_00d06dd0
 
 namespace fnv_00d06e10 {
@@ -330,18 +261,6 @@ class FUN_00d06e10_cls
     void FUN_00d06e10(int a1, int a2, unsigned char flag);
 };
 
-// When flag bit 0 is clear, reads a length from a1, computes a hash via holder->m_10->v2c(a2, len), and calls Emit with that length and hash.
-// @fnv 0x00d06e10
-void FUN_00d06e10_cls::FUN_00d06e10(int pSource, int pData, unsigned char flag)
-{
-    if ((flag & 1) == 0)
-    {
-        int len = ((FUN_00d06e10_src*)pSource)->Read();
-        FUN_00d06e10_holder* holder = FUN_00c85750();
-        int hash = holder->m_10->v2c(pData, len);
-        Emit(0, 0, (const char*)pData, len, hash);
-    }
-}
 }  // namespace fnv_00d06e10
 
 class D06F50ReferencedObject
@@ -365,10 +284,6 @@ class FUN_00d06f50 : public D06F50ReferencedObject
     void* m_pOwnerObject;
     bool m_flag;
 };
-
-// @fnv 0x00d06f50
-FUN_00d06f50::FUN_00d06f50(void* owner) : m_pOwnerObject(owner), m_flag(false)
-{}
 
 namespace fnv_00d06f80 {
 struct Target
@@ -441,16 +356,6 @@ struct FUN_00d06ff0_cls
 
     void FUN_00d06ff0(int aiA, int aiB, int aiC, int aiD);
 };
-
-// If aiC is positive and aiD is zero, computes a result via FUN_00d06f80(aiB, aiC), then calls V14 with zero, aiA, aiB, aiC and the result.
-// @fnv 0x00d06ff0
-void FUN_00d06ff0_cls::FUN_00d06ff0(int aiA, int aiB, int aiC, int aiD)
-{
-    int iResult = aiD;
-    if (aiC > 0 && aiD == 0)
-        iResult = FUN_00d06f80(aiB, aiC);
-    V14(0, aiA, aiB, aiC, iResult);
-}
 
 extern const char str_010cce5c[];
 extern const char str_010cce54[];

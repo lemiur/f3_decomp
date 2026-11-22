@@ -181,25 +181,4 @@ struct GrowBuffer
     char m_bOwned;
 };
 
-// Frees the owned record buffer and the TLS audio holder block, then clears the TLS slot.
-// @fnv 0x00cb0df0
-void __cdecl FUN_00cb0df0(GrowBuffer* apBuffer)
-{
-    void* pThreadData = TlsGetValue(DAT_0126835c);
-
-    char* pBegin = apBuffer->m_pBegin;
-    if (pBegin != 0 && apBuffer->m_bOwned != 0)
-    {
-        char* pEnd = apBuffer->m_pRecordEnd;
-        AudioHolder* pHolder = FUN_00c85750();
-        AudioAllocator* pAllocator = pHolder->m_pAllocator;
-        pAllocator->FreeArray(pBegin, (int)(pEnd - pBegin));
-    }
-
-    AudioHolder* pHolder2 = FUN_00c85750();
-    AudioAllocator* pAllocator2 = pHolder2->m_pAllocator;
-    pAllocator2->Free(pThreadData, 0x14);
-
-    TlsSetValue(DAT_0126835c, 0);
-}
 }  // namespace fnv_00cb0df0

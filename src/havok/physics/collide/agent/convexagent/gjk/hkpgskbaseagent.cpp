@@ -37,13 +37,6 @@ class FUN_00dabeb0_cls
     void Reset(bool flag);
 };
 
-// @fnv 0x00dabeb0
-void FUN_00dabeb0_cls::Reset(bool flag)
-{
-    m_f18 = DAT_01012054;
-    *(__m128*)((char*)this + 0x20) = _mm_setzero_ps();
-}
-
 extern float DAT_01012054;
 
 class FUN_00dabed0_cls
@@ -304,17 +297,6 @@ struct hkTransformDAC0
     }
 };
 
-__forceinline void hkVector4DAC0::_setRotatedDir(const hkMatrix3DAC0& r, const hkVector4DAC0& b)
-{
-    const __m128 b0 = _mm_shuffle_ps(b.m_vComponents, b.m_vComponents, 0x00);
-    const __m128 r0 = _mm_mul_ps(b0, r.m_kColumn0.m_vComponents);
-    const __m128 b1 = _mm_shuffle_ps(b.m_vComponents, b.m_vComponents, 0x55);
-    const __m128 r1 = _mm_mul_ps(b1, r.m_kColumn1.m_vComponents);
-    const __m128 b2 = _mm_shuffle_ps(b.m_vComponents, b.m_vComponents, 0xaa);
-    const __m128 r2 = _mm_mul_ps(b2, r.m_kColumn2.m_vComponents);
-    m_vComponents = _mm_add_ps(_mm_add_ps(r0, r1), r2);
-}
-
 class hkpConvexShapeDAC0
 {
   public:
@@ -341,24 +323,6 @@ struct FUN_00daad40_solver
     void FUN_00daad40(const hkpConvexShapeDAC0* pkShapeA, const hkpConvexShapeDAC0* pkShapeB,
                       const hkTransformDAC0& kAtB, hkVector4DAC0& kPointOut);
 };
-
-// Builds kAtB, calls the solver, rotates its result by body A's rotation into kSeparatingNormal, and sets w to the solver's w minus both sphere radii.
-// @fnv 0x00dac020
-void __cdecl FUN_00dac020(const hkpCdBodyDAC0& kBodyA, const hkpCdBodyDAC0& kBodyB, const hkpCollisionInputDAC0& kInput,
-                          FUN_00daad40_solver* pkSolver, hkVector4DAC0& kSeparatingNormal)
-{
-    const hkpConvexShapeDAC0* pkShapeA = kBodyA.m_pCollisionShape;
-    const hkpConvexShapeDAC0* pkShapeB = kBodyB.m_pCollisionShape;
-
-    hkTransformDAC0 kAtB;
-    kAtB.FUN_00cb22f0(*kBodyA.m_pMotionState, *kBodyB.m_pMotionState);
-
-    hkVector4DAC0 kNormal;
-    pkSolver->FUN_00daad40(pkShapeA, pkShapeB, kAtB, kNormal);
-
-    kSeparatingNormal._setRotatedDir(kBodyA.m_pMotionState->getRotation(), kNormal);
-    kSeparatingNormal(3) = kNormal(3) - pkShapeA->m_fSphereRadius - pkShapeB->m_fSphereRadius;
-}
 
 extern char g_gskBaseAgentVtbl;
 
@@ -578,14 +542,6 @@ extern "C"
     __m128 _mm_set_ss(float);
 }
 
-static __forceinline short* unpackCache(GskCache& c, int& b, unsigned& f, int& a)
-{
-    b = c.m_ucDimensionB;
-    f = c.m_features;
-    a = c.m_ucDimensionA;
-    return c.m_kVertices;
-}
-
 struct GskAgentStandin : public hkpGskBaseAgent
 {
     int unk04;
@@ -595,92 +551,6 @@ struct GskAgentStandin : public hkpGskBaseAgent
     hkBool FUN_00dac7f0(const hkpCdBody& bodyA, const hkpCdBody& bodyB, const CollisionAgentContext& input,
                         hkContactPoint& pointOut);
 };
-
-// Runs the GSK solver on the two shapes, writes the contact point to pointOut, and returns true if the separation minus radii is below input.m_fScalar.
-// @fnv 0x00dac7f0
-hkBool GskAgentStandin::FUN_00dac7f0(const hkpCdBody& bodyA, const hkpCdBody& bodyB, const CollisionAgentContext& input,
-                                     hkContactPoint& pointOut)
-{
-    Shape* pShapeB = (Shape*)bodyB.m_pCollisionShape;
-    Shape* shapeA = (Shape*)bodyA.m_pCollisionShape;
-
-    hkTransform tRelativeTransform;
-    tRelativeTransform.FUN_00cb22f0(bodyA.m_pMotionState, bodyB.m_pMotionState);
-
-    Shape* __restrict convertShapeA = shapeA;
-    int dimB, r1;
-    unsigned uiFeatures;
-    short* i = unpackCache(this->m_pAccessManager, dimB, uiFeatures, r1);
-    GskStatus gskStatus;
-    gskStatus.m_ucDimensionB = dimB;
-    gskStatus.unk10 = 0;
-    gskStatus.m_featureA = uiFeatures & 0x0f;
-    gskStatus.m_ucDimensionA = r1;
-    gskStatus.m_featureB = uiFeatures >> 4;
-    gskStatus.unk14 = 0;
-
-    convertShapeA->GetVerticesForIds(i, r1, gskStatus.m_vertsA);
-    pShapeB->GetVerticesForIds(&i[gskStatus.m_ucDimensionA], gskStatus.m_ucDimensionB, gskStatus.m_vertsB);
-
-    __m128 c1;
-    gskStatus.FUN_00daad40(shapeA, pShapeB, &tRelativeTransform, &c1);
-
-    if (gskStatus.unk14 != 0)
-    {
-        gskStatus.FUN_00da9790(i);
-    }
-
-    gskStatus.FUN_00da9880(&c1, &pointOut);
-
-    const hkTransform* b = (const hkTransform*)bodyA.m_pMotionState;
-    ContactData* pContactData = (ContactData*)&pointOut;
-    __m128 verts = pContactData->m_vHitNormal;
-
-    __m128 feat = _mm_mul_ps(_mm_shuffle_ps(verts, verts, 0x55), b->m_kColumn1);
-    __m128 aTransform = _mm_mul_ps(_mm_shuffle_ps(verts, verts, 0), b->m_kColumn0);
-    __m128 v3 = _mm_mul_ps(_mm_shuffle_ps(verts, verts, 0xaa), b->m_kColumn2);
-    pContactData->m_data40 = _mm_add_ps(_mm_add_ps(feat, aTransform), v3);
-
-    float dimA;
-    dimA = pContactData->m_fClosestPointDistanceSquared - shapeA->m_fSphereRadius - pShapeB->m_fSphereRadius;
-    pContactData->m_fClosestPointDistanceSquared = dimA;
-
-    if (dimA < input.m_fScalar)
-    {
-        float fRadiusA = shapeA->m_fSphereRadius;
-        __m128 vRadiusA = _mm_load_ss(&fRadiusA);
-        __m128 vRadiusASplatted = _mm_shuffle_ps(vRadiusA, vRadiusA, 0);
-        _mm_store_ps(pContactData->m_vContactPosition.m128_f32,
-                     _mm_sub_ps(pContactData->m_vContactPosition, _mm_mul_ps(vRadiusASplatted, verts)));
-
-        float negDist = -dimA;
-        __m128 negV = _mm_load_ss(&negDist);
-        __m128 cnt = _mm_shuffle_ps(negV, negV, 0);
-        __m128 r0 = _mm_sub_ps(_mm_add_ps(pContactData->m_vContactPosition, _mm_mul_ps(cnt, pContactData->m_vHitNormal)),
-                               tRelativeTransform.m_kColumn3);
-
-        struct Rows
-        {
-            __m128 a, c;
-        } rows;
-
-        __m128 vColumn0 = tRelativeTransform.m_kColumn0, kIter = tRelativeTransform.m_kColumn1,
-               s = tRelativeTransform.m_kColumn2;
-        __m128 v2 = _mm_unpacklo_ps(vColumn0, kIter);
-        rows.a = _mm_unpackhi_ps(vColumn0, kIter);
-        __m128 v4 = _mm_movelh_ps(v2, s);
-        rows.c = _mm_shuffle_ps(_mm_movehl_ps(v4, v2), s, 0xd4);
-        __m128 tmp = _mm_shuffle_ps(rows.a, s, 0xe4);
-        __m128 bTa = _mm_mul_ps(_mm_shuffle_ps(r0, r0, 0x55), rows.c);
-        __m128 r2 = _mm_mul_ps(_mm_shuffle_ps(r0, r0, 0), v4);
-        __m128 m3 = _mm_mul_ps(_mm_shuffle_ps(r0, r0, 0xaa), tmp);
-        pContactData->m_data30 = _mm_add_ps(_mm_add_ps(bTa, r2), m3);
-
-        return true;
-    }
-
-    return false;
-}
 
 #include <windows.h>
 

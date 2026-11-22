@@ -755,23 +755,6 @@ struct CFFCF0MonitorStream
 
 extern DWORD g_CFFCF0TlsIndex;
 
-__forceinline CFFCF0MonitorStream& CFFCF0GetMonitorStream()
-{
-    return *(CFFCF0MonitorStream*)TlsGetValue(g_CFFCF0TlsIndex);
-}
-
-__forceinline void CFFCF0TimerBegin(const char* name, volatile unsigned int& ticks)
-{
-    CFFCF0MonitorStream& mStream = CFFCF0GetMonitorStream();
-    if (mStream.memoryAvailable())
-    {
-        CFFCF0TimerCommand* h = (CFFCF0TimerCommand*)mStream.m_kRayEnd;
-        h->m_pCommandName = name;
-        h->setTime(ticks);
-        mStream.m_kRayEnd = (char*)(h + 1);
-    }
-}
-
 struct CFFCF0TimerTicks
 {
     unsigned int m_pRayStart;
@@ -804,26 +787,6 @@ struct CFFCF0Owner
 
 extern const char g_CFFCF0TimerBegin[];
 extern const char g_CFFCF0TimerEnd[];
-
-// Iterates the owner's listener list in reverse and invokes each non-null listener's callback, bracketing each call with timer begin/end markers.
-// @fnv 0x00cffcf0
-void __cdecl FUN_00cffcf0(CFFCF0Owner* owner)
-{
-    volatile CFFCF0TimerTicks ticks;
-    CFFCF0ListenerList* list = owner->m_listenerList;
-    if (list)
-    {
-        for (int i = list->m_uiItemCount - 1; i >= 0; i--)
-        {
-            if (list->m_kListeners[i] != 0)
-            {
-                CFFCF0TimerBegin(g_CFFCF0TimerBegin, ticks.m_pRayStart);
-                list->m_kListeners[i]->callback(owner);
-                CFFCF0TimerBegin(g_CFFCF0TimerEnd, ticks.m_kRayEnd);
-            }
-        }
-    }
-}
 
 extern "C" void _ReadWriteBarrier(void);
 
@@ -888,52 +851,6 @@ struct TaskOwner
 
 typedef LPVOID(WINAPI* PFN_TlsGetValue)(DWORD dwTlsIndex);
 
-// Iterates the task list in reverse, profiling and calling vtbl10 on each non-null TaskObj with the owner.
-// @fnv 0x00cffda0
-void __cdecl InvokeMotionTypeCallbacks(TaskOwner* pOwner)
-{
-    volatile DWORD ticks[2];
-    TaskList* pList = pOwner->m_pEntries;
-    if (pList != 0)
-    {
-        int i = (int)pList->m_nCount - 1;
-        if (i >= 0)
-        {
-            PFN_TlsGetValue pfnTls = TlsGetValue;
-            do
-            {
-                if (pList->m_ppItems[i] != 0)
-                {
-                    ProfBuf* pBuf = (ProfBuf*)pfnTls(DAT_0126835c);
-                    if (pBuf->m_pCur < pBuf->m_pRecordEnd)
-                    {
-                        ProfRec* pRec = pBuf->m_pCur;
-                        pRec->m_pName = "TtsetMotionTypeCb";
-                        _ReadWriteBarrier();
-                        ticks[0] = (DWORD)__rdtsc();
-                        pRec->m_iTick = ticks[0];
-                        pBuf->m_pCur = pRec + 1;
-                    }
-
-                    pList->m_ppItems[i]->vtbl10(pOwner);
-
-                    pBuf = (ProfBuf*)pfnTls(DAT_0126835c);
-                    if (pBuf->m_pCur < pBuf->m_pRecordEnd)
-                    {
-                        ProfRec* pRec = pBuf->m_pCur;
-                        pRec->m_pName = "Et";
-                        _ReadWriteBarrier();
-                        ticks[1] = (DWORD)__rdtsc();
-                        pRec->m_iTick = ticks[1];
-                        pBuf->m_pCur = pRec + 1;
-                    }
-                }
-                i--;
-            } while (i >= 0);
-        }
-    }
-}
-
 extern DWORD DAT_0126835c;
 extern "C" void _ReadWriteBarrier(void);
 
@@ -979,51 +896,6 @@ struct ProfOwner
     DWORD unk200, unk204, unk208, unk20C, unk210;
     ItemList* m_pItems;
 };
-
-// Iterates pOwner->m_pItems, writing TtentDelCb/Et profiling ticks around each item's vtbl14(pOwner) call.
-// @fnv 0x00cffe50
-void __cdecl DeleteCallbacks(ProfOwner* pOwner)
-{
-    LPVOID(WINAPI * pfnTlsGetValue)(DWORD) = TlsGetValue;
-    ItemList* pList = pOwner->m_pItems;
-    int i;
-    volatile DWORD ticks[2];
-
-    if (pList != 0)
-    {
-        i = (int)pList->m_wCount - 1;
-        if (i >= 0)
-        {
-            for (; i >= 0; i--)
-            {
-                if (pList->m_ppItems[i] != 0)
-                {
-                    ProfBuf* pBuf = (ProfBuf*)pfnTlsGetValue(DAT_0126835c);
-                    if (pBuf->m_pCur < pBuf->m_pRecordEnd)
-                    {
-                        ProfRec* pRec = pBuf->m_pCur;
-                        pRec->m_pName = "TtentDelCb";
-                        _ReadWriteBarrier();
-                        ticks[0] = (DWORD)__rdtsc();
-                        pRec->m_iTick = ticks[0];
-                        pBuf->m_pCur = pRec + 1;
-                    }
-                    pList->m_ppItems[i]->vtbl14(pOwner);
-                    ProfBuf* pBuf2 = (ProfBuf*)pfnTlsGetValue(DAT_0126835c);
-                    if (pBuf2->m_pCur < pBuf2->m_pRecordEnd)
-                    {
-                        ProfRec* pRec = pBuf2->m_pCur;
-                        pRec->m_pName = "Et";
-                        _ReadWriteBarrier();
-                        ticks[1] = (DWORD)__rdtsc();
-                        pRec->m_iTick = ticks[1];
-                        pBuf2->m_pCur = pRec + 1;
-                    }
-                }
-            }
-        }
-    }
-}
 
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long);
 extern "C" unsigned __int64 __rdtsc(void);

@@ -83,43 +83,6 @@ class CFun00cbf280Owner
     void* FUN_00cbf280(void* src, int size, SFun00cbf280Args* args);
 };
 
-/*
- * Body, in the order the effects are observable:
- *
- *   1. Reserve(args) is called first and its pointer result is kept alive for
- *      the whole function; it is what gets returned.
- *   2. args->limit is re-read *after* that call, so the unit deliberately
- *      honours a limit the callee may have adjusted. It is then clamped
- *      against the caller's `size` with a signed comparison, i.e. the smaller
- *      of the two wins.
- *   3. FUN_00d2caa0 receives (destination from step 1, src, clamped count) in
- *      that positional order.
- *   4. Commit(src, size) is called with the *unclamped* size, and its result is
- *      dropped.
- *   5. The destination from step 1 is returned.
- *
- * Read as a whole this looks like: ask the owner for somewhere to put data,
- * copy at most min(size, args->limit) bytes of `src` into it, tell the owner
- * how much was asked for, and hand the buffer back. The "looks like" is
- * deliberate — the semantics of Reserve, Commit and the helper are not
- * established by this unit.
- */
-// @fnv 0x00cbf280
-void* CFun00cbf280Owner::FUN_00cbf280(void* src, int size, SFun00cbf280Args* args)
-{
-    void* dest = this->Reserve(args);
-
-    int count = args->limit;
-    if (size < count)
-        count = size;
-
-    FUN_00d2caa0(dest, src, (unsigned int)count);
-
-    this->Commit(src, size);
-
-    return dest;
-}
-
 extern int DAT_010c3b30;
 
 struct FUN_00cbf1a0_cls
@@ -143,12 +106,6 @@ struct BhkTarget
     virtual void* v3();
     void* CallVirtual1WithDereferencedArg(void** p);
 };
-
-// @fnv 0x00cbf1b0
-void* BhkTarget::CallVirtual1WithDereferencedArg(void** p)
-{
-    return this->v1(*p);
-}
 
 class FUN_00cbf1e0_cls
 {
@@ -186,25 +143,6 @@ struct Visitor
     void VisitAll(void** items, int count, int arg);
 };
 
-// Iterates over the first count entries of items and calls Visit on each non-null item, passing arg through.
-// @fnv 0x00cbf220
-void Visitor::VisitAll(void** items, int count, int arg)
-{
-    int i = 0;
-    if (0 < count)
-    {
-        do
-        {
-            void* item = items[i];
-            if (item != 0)
-            {
-                Visit(item, arg);
-            }
-            i = i + 1;
-        } while (i < count);
-    }
-}
-
 struct CBF260
 {
     virtual void f0();
@@ -219,14 +157,3 @@ struct CBF260
     virtual void __fastcall f9(void* arg);
     void __fastcall FUN_00cbf260(void* arg);
 };
-// @fnv 0x00cbf260
-void __fastcall CBF260::FUN_00cbf260(void* arg)
-{
-    f9(arg);
-}
-
-// @fnv 0x00cbf270
-bool __stdcall FUN_00cbf270(int arg0)
-{
-    return true;
-}

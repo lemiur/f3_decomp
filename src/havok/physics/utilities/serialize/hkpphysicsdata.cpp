@@ -570,15 +570,6 @@ class FUN_00dcecc0
     FUN_00dcecc0* Destroy(unsigned int uiFlags) throw();
 };
 
-// Runs the destructor and, when bit 0 of uiFlags is set, frees the object through the heap allocator, then returns this.
-// @fnv 0x00d4c8e0
-FUN_00dcecc0* FUN_00dcecc0::Destroy(unsigned int uiFlags) throw()
-{
-    this->FUN_00dcecc0::~FUN_00dcecc0();
-    if (uiFlags & 1)
-        FUN_00dcecc0::operator delete(this);
-    return this;
-}
 }  // namespace fnv_00d4c8e0
 
 extern void* __cdecl FUN_00c85750(void);
@@ -926,13 +917,4 @@ class FUN_00d4c250 : public hkReferencedObjectD4C
     virtual ~FUN_00d4c250();
 };
 
-// Destructor: calls FUN_00c905b0 on m_pCollisionShape if set and on each element of m_children.
-// @fnv 0x00d4c250
-FUN_00d4c250::~FUN_00d4c250()
-{
-    if (m_pCollisionShape)
-        m_pCollisionShape->FUN_00c905b0();
-    for (int i = 0; i < m_children.m_iElementCount; i++)
-        m_children.m_data[i]->FUN_00c905b0();
-}
 }  // namespace fnv_00d4c250

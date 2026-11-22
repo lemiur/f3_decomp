@@ -81,10 +81,6 @@ D88310Bool __cdecl FUN_00d88310(const D88310Stream* stream, const void* unused, 
     return true;
 }
 
-// @fnv 0x00d88300
-void __cdecl FUN_00d88300()
-{}
-
 struct D88470Sub
 {
     int unk00;
@@ -272,50 +268,6 @@ struct hkpConstraintSolverResourcesD886
 hkpVelocityAccumulatorD886* __cdecl FUN_00d29830(const hkStepInfoD886* pkInfo, hkpEntityD886* const* ppkEntities,
                                                  unsigned int uiNumEntities, int iMotionOffset,
                                                  hkpVelocityAccumulatorD886* pkAccumulatorsOut);
-
-// @fnv 0x00d88670
-void __cdecl FUN_00d88670(hkpConstraintSolverResourcesD886& kResources, hkpEntityD886* const* ppkEntities,
-                          unsigned int uiNumEntities)
-{
-    if (!uiNumEntities)
-    {
-        return;
-    }
-
-    if (kResources.m_pVelocityAccumulatorC == kResources.m_pVelocityAccumulatorA)
-    {
-        hkpVelocityAccumulatorD886* pkFixed = kResources.m_pVelocityAccumulatorC;
-        pkFixed->setFixed();
-        kResources.m_pVelocityAccumulatorC = pkFixed + 1;
-        hkpSolverSumVelocitiesD886* pkFixedSumVel = kResources.m_sumVelocities;
-        pkFixedSumVel->m_vAngularVelocity.setZero4();
-        pkFixedSumVel->m_vLinearVelocity.setZero4();
-    }
-
-    for (unsigned int i = 0; i < uiNumEntities; i++)
-    {
-        ppkEntities[i]->m_uiFilterInfo = reinterpret_cast<unsigned int>(kResources.m_pVelocityAccumulatorC + i) -
-                                         reinterpret_cast<unsigned int>(kResources.m_pVelocityAccumulatorA);
-    }
-
-    hkpVelocityAccumulatorD886* pkAccumulator = kResources.m_pVelocityAccumulatorC;
-    hkpSolverSumVelocitiesD886* pkSumVel =
-        kResources.m_sumVelocities + ppkEntities[0]->m_uiFilterInfo / sizeof(hkpVelocityAccumulatorD886);
-    kResources.m_pVelocityAccumulatorC =
-        FUN_00d29830(kResources.m_pStepInfo, ppkEntities, uiNumEntities, 0xe0, pkAccumulator);
-
-    for (unsigned int i = 0; i < uiNumEntities; i++)
-    {
-        pkSumVel->m_vLinearVelocity = pkAccumulator->m_vCenterOfMass;
-        pkSumVel->m_vAngularVelocity = pkAccumulator->m_scratch1;
-        pkAccumulator->m_vCenterOfMass.setZero4();
-        pkAccumulator->m_scratch1.setZero4();
-        pkAccumulator++;
-        pkSumVel++;
-    }
-
-    kResources.m_pVelocityAccumulatorC->m_type = 3;
-}
 
 struct S88_Allocator;
 

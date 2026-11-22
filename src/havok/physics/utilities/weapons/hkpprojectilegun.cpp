@@ -45,26 +45,6 @@ struct FUN_00e44d50_cls
 {
     void FUN_00e44d50(bool);
 };
-// @fnv 0x00e44d50
-void FUN_00e44d50_cls::FUN_00e44d50(bool on)
-{
-    if (on != (((unsigned char*)this)[0xc] >> 2 & 1))
-    {
-        void* e = *(void**)((char*)this + 0x10);
-        if (e && *(int*)((char*)e + 8))
-        {
-            void* arg = (void*)((char*)this + 8);
-            if (on)
-                ((hkpEntity*)e)->AddContactListener(arg);
-            else
-                ((hkpEntity*)e)->RemoveContactListener(arg);
-        }
-        if (on)
-            ((unsigned char*)this)[0xc] |= 4;
-        else
-            ((unsigned char*)this)[0xc] &= 0xfb;
-    }
-}
 
 struct FUN_00e44be0_cls
 {
@@ -85,16 +65,6 @@ struct FUN_00e44be0_cls
 
     void UpdateValue(float, int, int, int, int, int);
 };
-
-// Subtracts a from value when value is above zero, then forwards all arguments to v10.
-// @fnv 0x00e44be0
-void FUN_00e44be0_cls::UpdateValue(float afDelta, int b, int c, int d, int e, int f)
-{
-    if (value > 0.0f)
-        value = value - afDelta;
-
-    v10(afDelta, b, c, d, e, f);
-}
 
 struct DDCC60World
 {
@@ -132,14 +102,6 @@ struct FUN_00e44de0_cls
     void ApplyToAll(float);
 };
 
-// @fnv 0x00e44de0
-void FUN_00e44de0_cls::ApplyToAll(float value)
-{
-    int count = m_uiItemCount;
-    for (int i = 0; i < count; ++i)
-        m_kTrackedObjects[i]->FUN_00e44d20(value);
-}
-
 struct FUN_00e44e40_object
 {
     unsigned char pad[0x0c];
@@ -154,20 +116,6 @@ struct FUN_00e44e40_cls
 
     FUN_00e44e40_object* FindFirstUnflaggedObject();
 };
-
-// @fnv 0x00e44e40
-FUN_00e44e40_object* FUN_00e44e40_cls::FindFirstUnflaggedObject()
-{
-    int i = 0;
-    while (i < m_uiItemCount)
-    {
-        FUN_00e44e40_object* object = m_kTrackedObjects[i];
-        if ((object->flags & 1) == 0)
-            return object;
-        ++i;
-    }
-    return 0;
-}
 
 struct Iface1
 {
@@ -185,19 +133,6 @@ struct FUN_00e44e70_cls
     void ResetVtables();
 };
 
-// @fnv 0x00e44e70
-void FUN_00e44e70_cls::ResetVtables()
-{
-    *reinterpret_cast<void**>(this) = reinterpret_cast<void*>(&DAT_010ebf94);
-    *reinterpret_cast<void**>(reinterpret_cast<char*>(this) + 8) = reinterpret_cast<void*>(&DAT_010ebf74);
-
-    ReleaseWorld();
-
-    *reinterpret_cast<void**>(reinterpret_cast<char*>(this) + 8) =
-        const_cast<void*>(static_cast<const void*>(&vftable_Iface1));
-    *reinterpret_cast<void**>(this) = reinterpret_cast<void*>(&_DAT_0102e388);
-}
-
 struct FUN_00e44f30_cls
 {
     void ApplyToAll(float);
@@ -206,15 +141,6 @@ struct FUN_00e44f30_cls
 };
 
 void __cdecl FUN_00e44ef0();
-
-// Calls ApplyToAll with a, then ClearProjectileFlags, then FUN_00e44ef0; b through f are unused.
-// @fnv 0x00e44f30
-void FUN_00e44f30_cls::FUN_00e44f30(float a, int b, int c, int d, int e, int f)
-{
-    ApplyToAll(a);
-    ClearProjectileFlags();
-    FUN_00e44ef0();
-}
 
 extern void __cdecl FUN_00e45040();
 
@@ -240,21 +166,6 @@ struct FUN_00e450f0_cls
 
     void* FUN_00e450f0(int flags);
 };
-
-// Calls FUN_00e45040, then if flags bit 0 is set deallocates this via the memory router's manager, and returns this.
-// @fnv 0x00e450f0
-void* FUN_00e450f0_cls::FUN_00e450f0(int flags)
-{
-    FUN_00e45040();
-
-    if (flags & 1)
-    {
-        FUN_00e450f0_router* router = _D1A0E0GetMemoryRouter();
-        router->manager->deallocate(this, size);
-    }
-
-    return this;
-}
 
 struct CallTarget_00e44eb0
 {
@@ -296,12 +207,6 @@ struct FUN_00e450b0_cls
     void FUN_00e450b0(int);
 };
 
-// @fnv 0x00e450b0
-void __thiscall FUN_00e450b0_cls::FUN_00e450b0(int)
-{
-    *(unsigned char*)(this + 0xc) |= 2;
-}
-
 class hkTimerE44B
 {
   public:
@@ -329,16 +234,6 @@ class hkTimerE44B
 
     void TriggerIfElapsed(int a, int b);
 };
-
-// @fnv 0x00e44bc0
-void hkTimerE44B::TriggerIfElapsed(int a, int b)
-{
-    if (!(m_remaining > 0.0f))
-    {
-        m_remaining = m_period;
-        trigger(a, b);
-    }
-}
 
 struct hkBoolE44C
 {
@@ -453,14 +348,6 @@ class hkpProjectileGunE44E
     void ClearProjectileFlags();
 };
 
-// @fnv 0x00e44e10
-void hkpProjectileGunE44E::ClearProjectileFlags()
-{
-    const int n = m_kRigidBodies.GetLogicalSize();
-    for (int i = 0; i < n; i++)
-        m_kRigidBodies[i]->m_flags.clear(2);
-}
-
 void __cdecl ReleaseWorld();
 
 // @fnv 0x00e44ea0
@@ -516,16 +403,6 @@ class FUN_00e44fc0 : public FUN_00e46660, public hkRangeE44F
     virtual ~FUN_00e44fc0() throw();
 };
 
-// Initializes the object: sets m_20 to 5, inits m_items, and stores the two constructor arguments into m_38 and m_3c.
-// @fnv 0x00e44fc0
-FUN_00e44fc0::FUN_00e44fc0(int a, int b) throw()
-{
-    m_20 = 5;
-    m_items.init();
-    m_38 = a;
-    m_3c = b;
-}
-
 struct FnvCpu_FUN_00e450c0_CpuAllocator
 {
     virtual void slot00();
@@ -548,17 +425,6 @@ struct FnvCpu_FUN_00e450c0_CpuObject
     void ResetVtables();
     FnvCpu_FUN_00e450c0_CpuObject* FUN_00e450c0(unsigned int flags);
 };
-// @fnv 0x00e450c0
-FnvCpu_FUN_00e450c0_CpuObject* FnvCpu_FUN_00e450c0_CpuObject::FUN_00e450c0(unsigned int flags)
-{
-    ResetVtables();
-    if (flags & 1)
-    {
-        FnvCpu_FUN_00e450c0_CpuAllocatorHolder* pAllocatorHolder = FUN_00c85750();
-        pAllocatorHolder->allocator->Invoke(this, size);
-    }
-    return this;
-}
 
 union __declspec(intrin_type) __declspec(align(16)) __m128
 {
@@ -663,45 +529,6 @@ class hkpRigidBodyq
     void SetGeometryTransform(const hkTransformq& transform);
 };
 
-// If speed exceeds minSpeed, rotates the body's transform about the cross of its normalized velocity and rotation column 0, by an angle scaled by turnRate.
-// @fnv 0x00e44990
-void __cdecl ApplyTurnRate(hkpRigidBodyq* body, hkReal minSpeed, hkReal turnRate)
-{
-    hkTransformq t;
-    t = body->getTransform();
-    const hkVector4q& vel = body->getLinearVelocity();
-
-    if (vel.length3() > minSpeed)
-    {
-        hkVector4q col0;
-        col0 = t.m_rotation.m_kColumn0;
-        hkVector4q dir;
-        dir = vel;
-        dir.normalize3();
-
-        hkVector4q cross;
-        cross.setCross(dir, col0);
-
-        hkReal len = cross.length3();
-        if (len > 1e-5f)
-        {
-            hkReal angle = len * turnRate * -5.0;
-            hkVector4q axis;
-            axis = cross;
-            axis.normalize3();
-
-            hkRotationq rot;
-            rot.SetAxisAngle(axis, angle);
-
-            hkRotationq newRot;
-            newRot.SetProduct(rot, t.m_rotation);
-            t.m_rotation = newRot;
-
-            body->SetGeometryTransform(t);
-        }
-    }
-}
-
 class hkRefObjE44
 {
   public:
@@ -756,14 +583,6 @@ class FUN_00e44c20 : public hkRefObjE44, public hkpContactListenerE44
     virtual ~FUN_00e44c20();
     virtual void HandleContactPointEvent(void* event);
 };
-
-// Stores gun and body, zeroes flags and damage, and calls FUN_00c90510 on the body.
-// @fnv 0x00e44c20
-FUN_00e44c20::FUN_00e44c20(void* gun, hkRefObjE44* apCollisionBody)
-    : m_flags(0), m_fDamage(0.0f), m_kCollisionBody(apCollisionBody), m_pGun(gun)
-{
-    m_kCollisionBody->FUN_00c90510();
-}
 
 namespace fnv_00e44f60 {
 template <int SIZE> __forceinline void memCpyOneAlignedE44F(void* dst, const void* src)
@@ -829,14 +648,6 @@ class hkIslandE44F
     void FUN_00e44f60(hkEntityE44F* entity);
 };
 
-// Calls FUN_00c90510 on the entity, appends it to m_kActorEntries, and calls FUN_00e44c90 with m_iOwnerObjectOffset.
-// @fnv 0x00e44f60
-void hkIslandE44F::FUN_00e44f60(hkEntityE44F* entity)
-{
-    entity->FUN_00c90510();
-    m_kActorEntries.AddBack(entity);
-    entity->FUN_00e44c90(m_iOwnerObjectOffset);
-}
 }  // namespace fnv_00e44f60
 
 class hkMemoryAllocatorE450
@@ -971,18 +782,6 @@ class FUN_00e46f20 : public FUN_00e466a0
     FUN_00e46e80* m_helper;
 };
 
-// Initializes the object and, when finishing, allocates a helper and binds it to the owning world.
-// @fnv 0x00e46f20
-FUN_00e46f20::FUN_00e46f20(hkFinishLoadedObjectFlagE46F flag) throw() : FUN_00e466a0(flag)
-{
-    if (flag.m_bFinishing)
-    {
-        unk08 = 1;
-        m_helper = new FUN_00e46e80();
-        m_helper->FUN_00e45460(m_pOwningWorld);
-    }
-}
-
 namespace fnv_00e45010 {
 namespace FUN_00e466a0 {
 class hkpFirstPersonGun
@@ -1058,15 +857,6 @@ struct ProjectileAddE44C : hkObjE44C
     void FUN_00e44c90(ProjectileWorldE44C* scene) throw();
 };
 
-// If m_flags bit 4 is set, calls AddSlot(this) on m_pEntity, then calls FUN_00c914d0(m_pEntity, 1) on scene.
-// @fnv 0x00e44c90
-void ProjectileAddE44C::FUN_00e44c90(ProjectileWorldE44C* scene) throw()
-{
-    if (m_flags & 4)
-        static_cast<ProjectileBodyE44C*>(m_pEntity)->AddSlot(this);
-    scene->FUN_00c914d0(m_pEntity, 1);
-}
-
 struct FUN_00e44c70_V
 {
     void __thiscall InitOnce();
@@ -1077,27 +867,6 @@ class FUN_00e44da0_cls : public hkpProjectileGun
   public:
     void __thiscall FUN_00e44da0(float value);
 };
-
-// Iterates m_kRigidBodies and calls InitOnce on each item whose offset-0x14 float field exceeds value.
-// @fnv 0x00e44da0
-void __thiscall FUN_00e44da0_cls::FUN_00e44da0(float value)
-{
-    int count = m_kRigidBodies.m_iElementCount;
-    int index = 0;
-
-    while (index < count)
-    {
-        FUN_00e44c70_V* item = reinterpret_cast<FUN_00e44c70_V*>(m_kRigidBodies.m_data[index]);
-        float itemValue = *reinterpret_cast<float*>(reinterpret_cast<unsigned char*>(item) + 0x14);
-
-        if (itemValue > value)
-        {
-            item->InitOnce();
-        }
-
-        ++index;
-    }
-}
 
 struct FUN_00e44d20_object
 {
@@ -1127,17 +896,6 @@ struct FUN_00e44d20_object
     float unk14;
     void FUN_00e44d20(float value);
 };
-
-// Adds value to unk14 and calls vf14 when the low bit of unk0C is clear.
-// @fnv 0x00e44d20
-void FUN_00e44d20_object::FUN_00e44d20(float value)
-{
-    if ((unk0C & 1) == 0)
-    {
-        unk14 += value;
-        vf14(value);
-    }
-}
 
 struct ProjQ
 {
@@ -1177,42 +935,9 @@ struct ProjectileRelease
         return (m_flags & 1) != 0;
     }
 };
-__forceinline void copyProjectile(void* dst, const void* src)
-{
-    unsigned int k = 0;
-    do
-    {
-        static_cast<int*>(dst)[k] = static_cast<const int*>(src)[k];
-    } while (++k < sizeof(void*) / sizeof(int));
-}
-
-__forceinline void eraseProjectile(hkArray<void*>& a, int i)
-{
-    --a.m_iElementCount;
-    if (a.m_iElementCount != i)
-        copyProjectile(a.m_data + i, a.m_data + a.m_iElementCount);
-}
 
 class ProjectileCleanupEntry : public hkpProjectileGun
 {
   public:
     void FUN_00e44ef0();
 };
-
-// For each item in m_kRigidBodies whose flags bit 0 is set, calls FUN_00c905b0 on it and removes it from the array.
-// @fnv 0x00e44ef0
-void ProjectileCleanupEntry::FUN_00e44ef0()
-{
-    int count = m_kRigidBodies.m_iElementCount;
-    for (int i = 0; i < count; ++i)
-    {
-        ProjectileRelease* item = (ProjectileRelease*)m_kRigidBodies.m_data[i];
-        if (item->destroyed())
-        {
-            item->FUN_00c905b0();
-            eraseProjectile(m_kRigidBodies, i);
-            --count;
-            --i;
-        }
-    }
-}

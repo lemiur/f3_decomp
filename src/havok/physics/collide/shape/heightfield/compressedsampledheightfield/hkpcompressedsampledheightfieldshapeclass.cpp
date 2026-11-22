@@ -86,13 +86,6 @@ struct FUN_00e01150_cls
     float GetTableValue(int col, int row);
 };
 
-// @fnv 0x00e01150
-float FUN_00e01150_cls::GetTableValue(int col, int row)
-{
-    unsigned short v = m_pTable[m_i10 * row + col];
-    return (float)v * m_f74 + m_f70;
-}
-
 struct FUN_00e01140_cls;
 struct BufferManager
 {
@@ -117,25 +110,3 @@ struct FUN_00e01180_cls : FUN_00e01140_cls
 {
     FUN_00e01180_cls* FUN_00e01180(unsigned int flags);
 };
-// Releases the buffer through the manager, resets the buffer fields, calls FUN_00d24660, and destroys the object when flags has bit 0 set.
-// @fnv 0x00e01180
-FUN_00e01180_cls* FUN_00e01180_cls::FUN_00e01180(unsigned int flags)
-{
-    BufferContext* context = FUN_00c85750();
-    BufferManager* manager = context->manager;
-    unk64 = 0;
-    if (!(unk68 & 0x80000000))
-    {
-        manager->Release(unk60, (unk68 & 0x3fffffff) * 2);
-    }
-    unk60 = 0;
-    unk68 = 0x80000000;
-    FUN_00d24660(this);
-    if (flags & 1)
-    {
-        BufferContext* context = FUN_00c85750();
-        BufferManager* manager = context->manager;
-        manager->Destroy(this, (unsigned short)unk04);
-    }
-    return this;
-}

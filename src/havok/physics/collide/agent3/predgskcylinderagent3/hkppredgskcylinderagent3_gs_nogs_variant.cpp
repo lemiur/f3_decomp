@@ -350,21 +350,6 @@ struct Trace
 extern unsigned long DAT_0126835c;
 extern const char str_010cf220[], str_010c41f8[];
 
-void profile(const char* label)
-{
-    Trace* t = (Trace*)TlsGetValue(DAT_0126835c);
-    volatile unsigned int* cursor = t->current;
-    if (cursor < t->end)
-    {
-        cursor[0] = (unsigned int)label;
-        _ReadWriteBarrier();
-        volatile unsigned int ticks = (unsigned int)__rdtsc();
-        cursor[1] = ticks;
-        cursor += 3;
-        t->current = (unsigned int*)cursor;
-    }
-}
-
 struct Tracker;
 
 struct Output

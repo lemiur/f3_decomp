@@ -38,12 +38,6 @@ struct Own_dd5e60
     void __thiscall FUN_00dd5e60();
 };
 
-// @fnv 0x00dd5e60
-void __thiscall Own_dd5e60::FUN_00dd5e60()
-{
-    m_sub->v2C();
-}
-
 class hkpShapeCollectionDD5E
 {
   public:
@@ -117,13 +111,6 @@ struct Own_dd5e70
     void __thiscall FUN_00c90360(Sub_dd5e70* object, const int* attribute);
     void __thiscall AttachChildAndAttribute(Sub_dd5e70* object, int unused);
 };
-
-// @fnv 0x00dd5e70
-void __thiscall Own_dd5e70::AttachChildAndAttribute(Sub_dd5e70* object, int unused)
-{
-    object->v0C("Child", m_sub, 0);
-    FUN_00c90360(object, &DAT_01268940);
-}
 
 struct FUN_00dd5ea0_class
 {
@@ -199,17 +186,6 @@ struct ClsDD5F50
     void __thiscall FUN_00dd5f50(const unsigned short* ids, int numIds, hkVector4D5F* verticesOut);
 };
 
-// Calls the contained shape's virtual vertex generator, then adds m_vTranslation to each output vertex.
-// @fnv 0x00dd5f50
-void ClsDD5F50::FUN_00dd5f50(const unsigned short* ids, int numIds, hkVector4D5F* verticesOut)
-{
-    m_pContainedShape->FUN_00dd5f50_v(ids, numIds, verticesOut);
-    for (int i = 0; i < numIds; i++)
-    {
-        verticesOut[i].add4(m_vTranslation);
-    }
-}
-
 namespace fnv_00dd60e0 {
 typedef union __declspec(intrin_type) __declspec(align(16)) __m128
 {
@@ -248,19 +224,6 @@ struct MonitorStream
 };
 
 static const char s_kEndTimer[] = "Et";
-static inline void TimerMark(const char* name)
-{
-    MonitorStream* s = MonitorStream::GetMonitorStream();
-    if (s->m_kRayEnd < s->m_pCurrentCommand)
-    {
-        CommandTimingEntry* h = (CommandTimingEntry*)s->m_kRayEnd;
-        h->m_pCommandName = name;
-        _ReadWriteBarrier();
-        volatile unsigned int t = (unsigned int)__rdtsc();
-        h->m_uiStartTicks = t;
-        s->m_kRayEnd = (char*)(h + 1);
-    }
-}
 
 class HkBoolDD
 {
@@ -333,22 +296,6 @@ class ConvexTranslateDD60
     HkBoolDD FUN_00dd60e0(const RayInputDD60& input, RayOutputDD60& results) const;
 };
 
-// Subtracts m_vTranslation from the ray endpoints, calls m_pContainedShape->RayCast, and sets the shape key to 0 on a hit.
-// @fnv 0x00dd60e0
-HkBoolDD ConvexTranslateDD60::FUN_00dd60e0(const RayInputDD60& input, RayOutputDD60& results) const
-{
-    TimerMark("TtrcConvTransl");
-    RayInputDD60 subInput = input;
-    subInput.m_vFrom.setSub4(input.m_vFrom, m_vTranslation);
-    subInput.m_vTo.setSub4(input.m_vTo, m_vTranslation);
-    results.changeLevel(1);
-    HkBoolDD hit = m_pContainedShape->RayCast(subInput, results);
-    results.changeLevel(-1);
-    if (hit)
-        results.setKey(0);
-    TimerMark(s_kEndTimer);
-    return hit;
-}
 }  // namespace fnv_00dd60e0
 
 extern "C" __m128 _mm_mul_ps(__m128, __m128);
@@ -374,28 +321,3 @@ struct FNV_dd6060_Class : hkpConvexTranslateShape
 
     void __thiscall FUN_00dd6060(const hkRotation* rotation, float distance, __m128* output);
 };
-
-// Calls the contained shape's v1C, then adds the translation rotated by the rotation columns to output[0] and output[1].
-// @fnv 0x00dd6060
-void FNV_dd6060_Class::FUN_00dd6060(const hkRotation* rotation, float distance, __m128* output)
-
-{
-
-    FNV_dd6060_Shape* shape = reinterpret_cast<FNV_dd6060_Shape*>(m_pContainedShape.m_pContainedShape);
-
-    shape->v1C(rotation, distance, output);
-
-    __m128 translation = _mm_load_ps(&m_vTranslation.x);
-
-    __m128 moved = _mm_mul_ps(_mm_shuffle_ps(translation, translation, 0x55), _mm_load_ps(&rotation->m_kColumn1.x));
-
-    moved = _mm_add_ps(
-        moved, _mm_mul_ps(_mm_shuffle_ps(translation, translation, 0x00), _mm_load_ps(&rotation->m_kColumn0.x)));
-
-    moved = _mm_add_ps(
-        moved, _mm_mul_ps(_mm_shuffle_ps(translation, translation, 0xaa), _mm_load_ps(&rotation->m_kColumn2.x)));
-
-    output[0] = _mm_add_ps(output[0], moved);
-
-    output[1] = _mm_add_ps(output[1], moved);
-}

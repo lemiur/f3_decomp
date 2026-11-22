@@ -58,12 +58,6 @@ struct D10710Object
     void CallWithFlag(void* a, void* b, void* c);
 };
 
-// @fnv 0x00d10710
-void D10710Object::CallWithFlag(void* a, void* b, void* c)
-{
-    Search(a, b, c, 1);
-}
-
 struct Entry
 {
     unsigned key;
@@ -121,35 +115,6 @@ struct FUN_00dcb550_class
     int AddNodeEntry(Entry*);
     int SetItemContextByKey(unsigned key);
 };
-// Finds the entry for key in the current node tree, resolves its index, and calls SetContext on the matching item's object.
-// @fnv 0x00dcb550
-int FUN_00dcb550_class::SetItemContextByKey(unsigned key)
-{
-    int offset = current->Find(key);
-    Node* node = current;
-    offset -= node->BaseIndex();
-    Node* walk = node;
-    Entry* entry;
-    do
-    {
-        offset += walk->count;
-        if (offset >= 0)
-            goto found;
-        walk = walk->parent;
-    } while (walk);
-    entry = node->entries - 1;
-    goto resolve;
-found:
-    entry = &walk->entries[offset];
-resolve:
-    int index = AddNodeEntry(entry);
-    if (index != -1)
-    {
-        Item* item = &items[index];
-        item->object->SetContext(Context());
-    }
-    return index;
-}
 
 struct DCD6A0Context;
 struct DCD6A0Item;
@@ -2718,13 +2683,6 @@ class FUN_00dce8f0 : public SubOfSel
     FUN_00dce8f0(unsigned char flag) throw();
 };
 
-// Initializes the SubOfSel base and, when bit 0 of flag is set, deletes this object.
-// @fnv 0x00dce8f0
-FUN_00dce8f0::FUN_00dce8f0(unsigned char aucFlags) throw() : SubOfSel((void*)0)
-{
-    if (aucFlags & 1)
-        operator delete(this);
-}
 }  // namespace fnv_00dce8f0
 
 template <typename T> inline void S00dcdf70_construct(T* p, int n, const T& t)
@@ -3629,10 +3587,6 @@ struct FUN_00dce9e0 : FUN_00e05d10_Base
     virtual ~FUN_00dce9e0();
 };
 
-// Constructor taking an unused int argument; the written body is empty.
-// @fnv 0x00dce9e0
-FUN_00dce9e0::FUN_00dce9e0(int)
-{}
 }  // namespace fnv_00dce9e0
 
 struct AgentKey
@@ -8275,19 +8229,6 @@ class DCEEntryInit : public hkReferencedObjectDCE
     int m_iUnk12C;
     int m_iUnk130;
 };
-
-DCEEntryInit::DCEEntryInit()
-    : m_iUnk08(0), m_iUnk0C(0), m_iUnk10(-1), m_iUnk14(-1), m_bUnk18(false), m_iUnk34(0), m_iUnk38(0), m_iUnk3C(0),
-      m_iUnk40(0), m_iUnk44(0), m_iUnk48(0), m_iUnk4C(0), m_iUnk12C(0x103), m_iUnk130(1)
-{}
-
-// Placement-constructs a DCEEntryInit object on the provided storage buffer and returns a pointer to it.
-// @fnv 0x00dce930
-extern "C" DCEEntryInit* __fastcall FUN_00dce930(void* storage, void*)
-{
-    __assume(storage != 0);
-    return new (storage) DCEEntryInit;
-}
 
 // @f3 0x00a4dea0 (community match, verified in this file)
 namespace f3m_00dce7e0 {

@@ -58,16 +58,6 @@ struct FUN_00d27420_class
     void WriteToStream(FUN_00d27420_class*, int);
 };
 
-// Writes the Buffer and stream members to the given stream via its virtual methods.
-// @fnv 0x00d27420
-void FUN_00d27420_class::WriteToStream(FUN_00d27420_class* stream, int)
-{
-    stream->m5(1, "Buffer", *reinterpret_cast<void**>(reinterpret_cast<char*>(this) + 0x0c),
-               *reinterpret_cast<void**>(reinterpret_cast<char*>(this) + 0x14), 0);
-
-    stream->m3("stream", *reinterpret_cast<void**>(reinterpret_cast<char*>(this) + 0x08), 0);
-}
-
 struct DDCC60World
 {
     void removeReference();
@@ -134,20 +124,6 @@ struct FUN_00d27570Writer
     void* DestroyWriter(unsigned char deletingFlag);
 };
 
-// Calls FUN_00d27520, then if deletingFlag has bit 0 set, deallocates this through the memory router using id, and returns this.
-// @fnv 0x00d27570
-void* FUN_00d27570Writer::DestroyWriter(unsigned char deletingFlag)
-{
-    FUN_00d27520();
-
-    if (deletingFlag & 1)
-    {
-        FUN_00d27570MemoryRouter* memoryRouter = _D1A0E0GetMemoryRouter();
-        memoryRouter->router->deallocate(this, id);
-    }
-
-    return this;
-}
 }  // namespace fnv_00d27570
 
 extern int DAT_012689e4;
@@ -497,14 +473,3 @@ class hkBufStreamWriterD274 : public hkStreamWriterD274
     int m_bufSize;
     hkBoolD273 m_bIsOk;
 };
-// Stores s, allocates bufSize bytes with alignment argument 0x40, and initializes the buffer size and position.
-// @fnv 0x00d27460
-hkBufStreamWriterD274::hkBufStreamWriterD274(hkStreamWriterD274* apStream, int aiBufferSize) throw()
-    : m_stream(apStream), m_bIsOk(true)
-{
-    if (m_stream)
-        m_stream->FUN_00c90510();
-    m_buf = (char*)FUN_00c85620(hkRouterD274::FUN_00c85750().heap(), aiBufferSize, 0x40);
-    m_bufSize = aiBufferSize;
-    m_iBufferPosition = 0;
-}

@@ -67,45 +67,6 @@ D92740Block* __cdecl ShrinkBlockIfSparse(D92740Block* block, int numToAdd, bool*
 }
 
 
-// Rounds size up to the next fixed bucket size (16..8192), returning size unchanged when it exceeds 8192.
-// @fnv 0x00d92440
-int __cdecl RoundUpToBucketSize(int size)
-{
-    if (size <= 16)
-        return 16;
-    if (size <= 32)
-        return 32;
-    if (size <= 48)
-        return 48;
-    if (size <= 64)
-        return 64;
-    if (size <= 96)
-        return 96;
-    if (size <= 128)
-        return 128;
-    if (size <= 160)
-        return 160;
-    if (size <= 192)
-        return 192;
-    if (size <= 256)
-        return 256;
-    if (size <= 320)
-        return 320;
-    if (size <= 512)
-        return 512;
-    if (size <= 640)
-        return 640;
-    if (size <= 1024)
-        return 1024;
-    if (size <= 2048)
-        return 2048;
-    if (size <= 4096)
-        return 4096;
-    if (size <= 8192)
-        return 8192;
-    return size;
-}
-
 struct MyAlloc
 {
     virtual void unk00();
@@ -113,11 +74,6 @@ struct MyAlloc
 };
 
 extern "C" D92740MemoryRouter& __cdecl FUN_00c85750();
-
-extern "C" __declspec(noinline) unsigned int __cdecl RoundUpToBucketSize(unsigned int size)
-{
-    return size;
-}
 
 struct Types
 {

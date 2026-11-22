@@ -349,33 +349,6 @@ extern "C" int d4970_a(void);
 extern "C" int d4970_b(void);
 extern "C" CParam00da4970 d4970_c(void);
 
-// For each Entry00da4970 between self+0x408 and m_kRayEnd, if m_04 minus a is in range, set m_04 to that value plus b and add b minus a to m_08.
-// @fnv 0x00da4970
-static __declspec(noinline) void FUN_00da4970(Owner00da4970* self, int a, int b, CParam00da4970 c)
-{
-    int iLimit = *(volatile int*)&c.m_uiFilterValue;
-    if (self == 0)
-        return;
-    Entry00da4970* p = (Entry00da4970*)((char*)self + 0x408);
-    if ((int*)p >= self->m_kRayEnd)
-        return;
-    do
-    {
-        int iDiff = p->m_04 - a;
-        if (iDiff >= 0 && iDiff < iLimit)
-        {
-            p->m_04 = iDiff + b;
-            p->m_08 += b - a;
-        }
-        ++p;
-    } while ((int*)p < self->m_kRayEnd);
-}
-
-void d4970_caller(void)
-{
-    FUN_00da4970(d4970_self(), d4970_a(), d4970_b(), d4970_c());
-}
-
 extern "C" void _ReadWriteBarrier();
 struct DaPair
 {

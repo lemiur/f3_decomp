@@ -158,39 +158,6 @@ struct PlaneSet
     hkVector4* m_kPlaneArray;
     int m_iValue;
 };
-__declspec(noinline) int FUN_00dd6380(PlaneSet* set, int a, int b, int c, PointResult* out)
-{
-    const hkVector4& pa = set->m_kPlaneArray[a];
-    const hkVector4& pb = set->m_kPlaneArray[b];
-    const hkVector4& pc = set->m_kPlaneArray[c];
-    hkMatrix3 m;
-    m.m_kColumn0.setCross(pb, pc);
-    m.m_kColumn1.setCross(pc, pa);
-    m.m_kColumn2.setCross(pa, pb);
-    float det = pa.dot3(m.m_kColumn0);
-    if (fabs(det) < 1.1920928955078125e-7f)
-        return 1;
-    float invDet = 1.0f / det;
-    hkQuadReal negZero = _mm_set_ss(-0.0f);
-    hkQuadReal dx = _mm_sub_ss(negZero, _mm_load_ss(&pa.m_vComponents.m128_f32[3]));
-    hkQuadReal dy = _mm_sub_ss(negZero, _mm_load_ss(&pb.m_vComponents.m128_f32[3]));
-    hkQuadReal dz = _mm_sub_ss(negZero, _mm_load_ss(&pc.m_vComponents.m128_f32[3]));
-    hkQuadReal d = _mm_unpacklo_ps(_mm_unpacklo_ps(dx, dz), _mm_unpacklo_ps(dy, _mm_set_ss(0.0f)));
-    hkQuadReal p = _mm_mul_ps(_mm_shuffle_ps(d, d, 0x55), m.m_kColumn1.m_vComponents);
-    p = _mm_add_ps(p, _mm_mul_ps(_mm_shuffle_ps(d, d, 0), m.m_kColumn0.m_vComponents));
-    p = _mm_add_ps(p, _mm_mul_ps(_mm_shuffle_ps(d, d, 0xaa), m.m_kColumn2.m_vComponents));
-    out->m_kPoint.m_vComponents = p;
-    out->m_kPoint.m_vComponents = _mm_mul_ps(VectorComponentValue(invDet).broadcast(), out->m_kPoint.m_vComponents);
-    out->m_kPointA = a;
-    out->m_kPointB = b;
-    out->m_iThirdValue = c;
-    if (a > b)
-    {
-        out->m_kPointA = b;
-        out->m_kPointB = a;
-    }
-    return 0;
-}
 // @f3 0x00a57240 (community match, verified in this file)
 int FUN_00a57050(PlaneSet* set, int first, int second, int third, PointResult* point);
 

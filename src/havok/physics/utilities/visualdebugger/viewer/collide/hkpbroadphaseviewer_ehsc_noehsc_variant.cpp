@@ -249,9 +249,6 @@ struct D6AD80Object : D6AD80Primary, D6AD80Secondary {
 // @fnv 0x00d6ad80
     virtual void FUN_00d6ad80();
 };
-D6AD80Object::D6AD80Object()
-{
-}
 struct D6AD90Primary {
     virtual void vfunc00();
     virtual void FUN_00d6ad90();
@@ -275,9 +272,6 @@ struct D6AD90Object : D6AD90Primary, D6AD90Secondary {
 // @fnv 0x00d6ad90
     virtual void FUN_00d6ad90();
 };
-D6AD90Object::D6AD90Object()
-{
-}
 
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long dwTlsIndex);
 extern unsigned long DAT_0126835c;

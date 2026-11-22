@@ -41,11 +41,6 @@ struct CpuObject
     CpuScalar* value;
     float FUN_00d98420();
 };
-// @fnv 0x00d98420
-float CpuObject::FUN_00d98420()
-{
-    return value->value;
-}
 
 struct hkBoolD984
 {
@@ -151,18 +146,3 @@ class FUN_00d98430_cls
 
     hkBoolD984 QueryPenetrations(const hkCdBodyD984& bodyB);
 };
-
-// Checks if collision is enabled between m_pBodyA and bodyB, then dispatches the penetration query via the agent function table.
-// @fnv 0x00d98430
-hkBoolD984 FUN_00d98430_cls::QueryPenetrations(const hkCdBodyD984& bodyB)
-{
-    const hkpShapeD984* shapeB = bodyB.m_pCollisionShape;
-    if (shapeB && m_pBodyA != &bodyB && m_iFilter->IsCollisionEnabled(*m_pBodyA, bodyB))
-    {
-        hkpCollisionDispatcherD984* pDispatcher = m_pRayCastInput.m_pCollisionDispatcher;
-        pDispatcher->m_agent2Funcs[pDispatcher->m_agent2TypeMap[m_iAgentTypeA][shapeB->m_type]]
-            .m_pQueryPenetrationsFunc(*m_pBodyA, bodyB, m_pRayCastInput, m_kCollector, m_startCollector);
-        return true;
-    }
-    return false;
-}

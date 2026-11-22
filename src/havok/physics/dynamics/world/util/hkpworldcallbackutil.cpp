@@ -266,34 +266,6 @@ struct Owner
     unsigned count;
     void ClearReferences();
 };
-// @fnv 0x00c67bc0
-void Owner::ClearReferences()
-{
-    ScopedContext scope(16);
-    if (count > 0)
-    {
-        if (count >= 200)
-            count = 200;
-        World* world = GetWorld();
-        if (world)
-        {
-            world->FUN_00c95800(references, count);
-            for (unsigned i = 0; i < count; ++i)
-            {
-                Reference* reference = references[i];
-                if (reference)
-                {
-                    Metadata* metadata = reference->metadata;
-                    if (metadata)
-                        metadata->flags &= ~32;
-                }
-                references[i]->FUN_00c905b0();
-            }
-            FUN_00ec61c0(references, 0, count * 4);
-            count = 0;
-        }
-    }
-}
 
 struct D00370Array
 {
@@ -366,11 +338,6 @@ static __declspec(noinline) void RemoveZeroEntries(FNV_SmallArray_00d00320* pArr
             }
         }
     }
-}
-
-void KeepAlive_00d00320(FNV_SmallArray_00d00320* pArray)
-{
-    RemoveZeroEntries(pArray);
 }
 
 extern "C" void _ReadWriteBarrier();
@@ -1163,23 +1130,6 @@ struct D00CA0MonitorStream
 
 extern DWORD g_D00CA0TlsIndex;
 
-__forceinline D00CA0MonitorStream& D00CA0GetMonitorStream()
-{
-    return *(D00CA0MonitorStream*)TlsGetValue(g_D00CA0TlsIndex);
-}
-
-__forceinline void D00CA0TimerBegin(const char* name, volatile unsigned int& ticks)
-{
-    D00CA0MonitorStream& mStream = D00CA0GetMonitorStream();
-    if (mStream.memoryAvailable())
-    {
-        D00CA0TimerCommand* h = (D00CA0TimerCommand*)mStream.m_kRayEnd;
-        h->m_pCommandName = name;
-        h->setTime(ticks);
-        mStream.m_kRayEnd = (char*)(h + 1);
-    }
-}
-
 struct D00CA0Listener
 {
     virtual void entityCallback(void* entity);
@@ -1191,22 +1141,6 @@ struct D00CA0ListenerArray
     int m_iElementCount;
     int m_iCapacityState;
 };
-
-// array to it in a register, which is what the target's codegen depends on.
-static __declspec(noinline) void D00CA0CleanupNullPointers(D00CA0ListenerArray& listeners)
-{
-    for (int i = listeners.m_iElementCount - 1; i >= 0; i--)
-    {
-        if (listeners.m_data[i] == 0)
-        {
-            listeners.m_iElementCount--;
-            int* dst = (int*)&listeners.m_data[i];
-            int* src = dst + 1;
-            for (int n = (listeners.m_iElementCount - i) * 4; n > 0; n -= 4)
-                *dst++ = *src++;
-        }
-    }
-}
 
 struct D00CA0World
 {
@@ -1319,25 +1253,6 @@ struct D00CA0World
 
 extern const char g_D00CA0TimerEntityCb[];
 extern const char g_D00CA0TimerEnd[];
-
-// Invokes entityCallback on each non-null listener in the world's entity listener array, then removes null entries.
-// @fnv 0x00d00ca0
-void __cdecl FUN_00d00ca0(D00CA0World* world, void* entity)
-{
-    D00CA0ListenerArray& listeners = world->m_kEntityListenerArray;
-    for (int i = listeners.m_iElementCount - 1; i >= 0; i--)
-    {
-        if (listeners.m_data[i] != 0)
-        {
-            volatile unsigned int beginTicks;
-            volatile unsigned int endTicks;
-            D00CA0TimerBegin(g_D00CA0TimerEntityCb, beginTicks);
-            listeners.m_data[i]->entityCallback(entity);
-            D00CA0TimerBegin(g_D00CA0TimerEnd, endTicks);
-        }
-    }
-    D00CA0CleanupNullPointers(listeners);
-}
 
 namespace fnv_00d00d40 {
 extern "C" void _ReadWriteBarrier();
@@ -1560,23 +1475,6 @@ struct D00DE0MonitorStream
 
 extern DWORD g_D00DE0TlsIndex;
 
-__forceinline D00DE0MonitorStream& D00DE0GetMonitorStream()
-{
-    return *(D00DE0MonitorStream*)TlsGetValue(g_D00DE0TlsIndex);
-}
-
-__forceinline void D00DE0TimerBegin(const char* name, volatile unsigned int& ticks)
-{
-    D00DE0MonitorStream& mStream = D00DE0GetMonitorStream();
-    if (mStream.memoryAvailable())
-    {
-        D00DE0TimerCommand* h = (D00DE0TimerCommand*)mStream.m_kRayEnd;
-        h->m_pCommandName = name;
-        h->setTime(ticks);
-        mStream.m_kRayEnd = (char*)(h + 1);
-    }
-}
-
 struct D00DE0Listener
 {
     virtual void unk00();
@@ -1590,22 +1488,6 @@ struct D00DE0ListenerArray
     int m_iElementCount;
     int m_iCapacityState;
 };
-
-// array to it in a register, which is what the target's codegen depends on.
-static __declspec(noinline) void D00DE0CleanupNullPointers(D00DE0ListenerArray& listeners)
-{
-    for (int i = listeners.m_iElementCount - 1; i >= 0; i--)
-    {
-        if (listeners.m_data[i] == 0)
-        {
-            listeners.m_iElementCount--;
-            int* dst = (int*)&listeners.m_data[i];
-            int* src = dst + 1;
-            for (int n = (listeners.m_iElementCount - i) * 4; n > 0; n -= 4)
-                *dst++ = *src++;
-        }
-    }
-}
 
 struct D00DE0World
 {
@@ -1719,25 +1601,6 @@ struct D00DE0World
 extern const char g_D00DE0TimerEntityCb[];
 extern const char g_D00DE0TimerEnd[];
 
-// Invokes entityCallback on each non-null listener in the world's entity listener array, then removes null entries.
-// @fnv 0x00d00de0
-void __cdecl FUN_00d00de0(D00DE0World* world, void* entity)
-{
-    D00DE0ListenerArray& listeners = world->m_kEntityListenerArray;
-    for (int i = listeners.m_iElementCount - 1; i >= 0; i--)
-    {
-        if (listeners.m_data[i] != 0)
-        {
-            volatile unsigned int beginTicks;
-            volatile unsigned int endTicks;
-            D00DE0TimerBegin(g_D00DE0TimerEntityCb, beginTicks);
-            listeners.m_data[i]->entityCallback(entity);
-            D00DE0TimerBegin(g_D00DE0TimerEnd, endTicks);
-        }
-    }
-    D00DE0CleanupNullPointers(listeners);
-}
-
 struct D00E80TimerCommand
 {
     const char* m_pCommandName;
@@ -1767,23 +1630,6 @@ struct D00E80MonitorStream
 
 extern DWORD g_D00E80TlsIndex;
 
-__forceinline D00E80MonitorStream& D00E80GetMonitorStream()
-{
-    return *(D00E80MonitorStream*)TlsGetValue(g_D00E80TlsIndex);
-}
-
-__forceinline void D00E80TimerBegin(const char* name, volatile unsigned int& ticks)
-{
-    D00E80MonitorStream& mStream = D00E80GetMonitorStream();
-    if (mStream.memoryAvailable())
-    {
-        D00E80TimerCommand* h = (D00E80TimerCommand*)mStream.m_kRayEnd;
-        h->m_pCommandName = name;
-        h->setTime(ticks);
-        mStream.m_kRayEnd = (char*)(h + 1);
-    }
-}
-
 struct D00E80World;
 
 struct D00E80Listener
@@ -1798,22 +1644,6 @@ struct D00E80ListenerArray
     int m_iElementCount;
     int m_iCapacityState;
 };
-
-// array to it in a register, which is what the target's codegen depends on.
-static __declspec(noinline) void D00E80CleanupNullPointers(D00E80ListenerArray& listeners)
-{
-    for (int i = listeners.m_iElementCount - 1; i >= 0; i--)
-    {
-        if (listeners.m_data[i] == 0)
-        {
-            listeners.m_iElementCount--;
-            int* dst = (int*)&listeners.m_data[i];
-            int* src = dst + 1;
-            for (int n = (listeners.m_iElementCount - i) * 4; n > 0; n -= 4)
-                *dst++ = *src++;
-        }
-    }
-}
 
 struct D00E80TickPair
 {
@@ -1911,24 +1741,6 @@ struct D00E80World
 
 extern const char g_D00E80TimerActionCb[];
 extern const char g_D00E80TimerEnd[];
-
-// Iterates the world's entity listener array in reverse, calling each non-null listener's actionCallback with the world, then compacts out null entries.
-// @fnv 0x00d00e80
-void __cdecl FUN_00d00e80(D00E80World* world)
-{
-    D00E80TickPair kTicks;
-    D00E80ListenerArray& listeners = world->m_kEntityListenerArray;
-    for (int i = listeners.m_iElementCount - 1; i >= 0; i--)
-    {
-        if (listeners.m_data[i] != 0)
-        {
-            D00E80TimerBegin(g_D00E80TimerActionCb, kTicks.m_uiBegin);
-            listeners.m_data[i]->actionCallback(world);
-            D00E80TimerBegin(g_D00E80TimerEnd, kTicks.m_uiEndTick);
-        }
-    }
-    D00E80CleanupNullPointers(listeners);
-}
 
 namespace fnv_00d00f30 {
 extern "C" void _ReadWriteBarrier();
@@ -2496,23 +2308,6 @@ struct D014F0MonitorStream
 
 extern DWORD g_D014F0TlsIndex;
 
-__forceinline D014F0MonitorStream& D014F0GetMonitorStream()
-{
-    return *(D014F0MonitorStream*)TlsGetValue(g_D014F0TlsIndex);
-}
-
-__forceinline void D014F0TimerBegin(const char* name, volatile unsigned int& ticks)
-{
-    D014F0MonitorStream& mStream = D014F0GetMonitorStream();
-    if (mStream.memoryAvailable())
-    {
-        D014F0TimerCommand* h = (D014F0TimerCommand*)mStream.m_kRayEnd;
-        h->m_pCommandName = name;
-        h->setTime(ticks);
-        mStream.m_kRayEnd = (char*)(h + 1);
-    }
-}
-
 struct D014F0World;
 
 struct D014F0Listener
@@ -2527,22 +2322,6 @@ struct D014F0ListenerArray
     int m_iElementCount;
     int m_iCapacityState;
 };
-
-// array to it in a register, which is what the target's codegen depends on.
-static __declspec(noinline) void D014F0CleanupNullPointers(D014F0ListenerArray& listeners)
-{
-    for (int i = listeners.m_iElementCount - 1; i >= 0; i--)
-    {
-        if (listeners.m_data[i] == 0)
-        {
-            listeners.m_iElementCount--;
-            int* dst = (int*)&listeners.m_data[i];
-            int* src = dst + 1;
-            for (int n = (listeners.m_iElementCount - i) * 4; n > 0; n -= 4)
-                *dst++ = *src++;
-        }
-    }
-}
 
 struct D014F0TickPair
 {
@@ -2652,24 +2431,6 @@ struct D014F0World
 
 extern const char g_D014F0TimerCollisionAddedCb[];
 extern const char g_D014F0TimerEnd[];
-
-// Iterates the world's entity listener array, invoking collisionAddedCallback on each non-null listener with timing markers, then removes null entries.
-// @fnv 0x00d014f0
-void __cdecl FUN_00d014f0(D014F0World* world, void* pvEvent)
-{
-    D014F0TickPair kTicks;
-    D014F0ListenerArray& listeners = world->m_kEntityListenerArray;
-    for (int i = listeners.m_iElementCount - 1; i >= 0; i--)
-    {
-        if (listeners.m_data[i] != 0)
-        {
-            D014F0TimerBegin(g_D014F0TimerCollisionAddedCb, kTicks.m_uiBegin);
-            listeners.m_data[i]->collisionAddedCallback(world, pvEvent);
-            D014F0TimerBegin(g_D014F0TimerEnd, kTicks.m_uiEndTick);
-        }
-    }
-    D014F0CleanupNullPointers(listeners);
-}
 
 struct D015A0TimerCommand
 {
@@ -2916,23 +2677,6 @@ struct D01650MonitorStream
 
 extern DWORD g_D01650TlsIndex;
 
-__forceinline D01650MonitorStream& D01650GetMonitorStream()
-{
-    return *(D01650MonitorStream*)TlsGetValue(g_D01650TlsIndex);
-}
-
-__forceinline void D01650TimerBegin(const char* name, volatile unsigned int& ticks)
-{
-    D01650MonitorStream& mStream = D01650GetMonitorStream();
-    if (mStream.memoryAvailable())
-    {
-        D01650TimerCommand* h = (D01650TimerCommand*)mStream.m_kRayEnd;
-        h->m_pCommandName = name;
-        h->setTime(ticks);
-        mStream.m_kRayEnd = (char*)(h + 1);
-    }
-}
-
 struct D01650Listener
 {
     virtual void unk00();
@@ -2945,22 +2689,6 @@ struct D01650ListenerArray
     int m_iElementCount;
     int m_iCapacityState;
 };
-
-// array to it in a register, which is what the target's codegen depends on.
-static __declspec(noinline) void D01650CleanupNullPointers(D01650ListenerArray& listeners)
-{
-    for (int i = listeners.m_iElementCount - 1; i >= 0; i--)
-    {
-        if (listeners.m_data[i] == 0)
-        {
-            listeners.m_iElementCount--;
-            int* dst = (int*)&listeners.m_data[i];
-            int* src = dst + 1;
-            for (int n = (listeners.m_iElementCount - i) * 4; n > 0; n -= 4)
-                *dst++ = *src++;
-        }
-    }
-}
 
 struct D01650World
 {
@@ -3070,25 +2798,6 @@ struct D01650World
 
 extern const char g_D01650TimerCollisionAddedCb[];
 extern const char g_D01650TimerEnd[];
-
-// Invokes collisionAddedCallback on each non-null listener in the array, then removes null entries.
-// @fnv 0x00d01650
-void __cdecl FUN_00d01650(D01650World* world, void* pvEvent, void* pvContext)
-{
-    D01650ListenerArray& listeners = world->m_kEntityListenerArray;
-    for (int i = listeners.m_iElementCount - 1; i >= 0; i--)
-    {
-        if (listeners.m_data[i] != 0)
-        {
-            volatile unsigned int beginTicks;
-            volatile unsigned int endTicks;
-            D01650TimerBegin(g_D01650TimerCollisionAddedCb, beginTicks);
-            listeners.m_data[i]->collisionAddedCallback(pvEvent, pvContext);
-            D01650TimerBegin(g_D01650TimerEnd, endTicks);
-        }
-    }
-    D01650CleanupNullPointers(listeners);
-}
 
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long dwTlsIndex);
 extern "C" unsigned long DAT_0126835c;
@@ -3204,23 +2913,6 @@ struct D017B0MonitorStream
 
 extern DWORD g_D017B0TlsIndex;
 
-__forceinline D017B0MonitorStream& D017B0GetMonitorStream()
-{
-    return *(D017B0MonitorStream*)TlsGetValue(g_D017B0TlsIndex);
-}
-
-__forceinline void D017B0TimerBegin(const char* name, volatile unsigned int& ticks)
-{
-    D017B0MonitorStream& mStream = D017B0GetMonitorStream();
-    if (mStream.memoryAvailable())
-    {
-        D017B0TimerCommand* h = (D017B0TimerCommand*)mStream.m_kRayEnd;
-        h->m_pCommandName = name;
-        h->setTime(ticks);
-        mStream.m_kRayEnd = (char*)(h + 1);
-    }
-}
-
 struct D017B0Listener
 {
     virtual void unk00();
@@ -3234,22 +2926,6 @@ struct D017B0ListenerArray
     int m_iElementCount;
     int m_iCapacityState;
 };
-
-// array to it in a register, which is what the target's codegen depends on.
-static __declspec(noinline) void D017B0CleanupNullPointers(D017B0ListenerArray& listeners)
-{
-    for (int i = listeners.m_iElementCount - 1; i >= 0; i--)
-    {
-        if (listeners.m_data[i] == 0)
-        {
-            listeners.m_iElementCount--;
-            int* dst = (int*)&listeners.m_data[i];
-            int* src = dst + 1;
-            for (int n = (listeners.m_iElementCount - i) * 4; n > 0; n -= 4)
-                *dst++ = *src++;
-        }
-    }
-}
 
 struct D017B0World
 {
@@ -3348,25 +3024,6 @@ struct D017B0World
 extern const char g_D017B0TimerEntityRemovedCb[];
 extern const char g_D017B0TimerEnd[];
 
-// Invokes EntityRemovedCallback on each non-null listener in the world's entity listener array, then removes null entries.
-// @fnv 0x00d017b0
-void __cdecl NotifyEntityRemoved(D017B0World* world, void* entity)
-{
-    D017B0ListenerArray& listeners = world->m_kEntityListenerArray;
-    for (int i = listeners.m_iElementCount - 1; i >= 0; i--)
-    {
-        if (listeners.m_data[i] != 0)
-        {
-            volatile unsigned int beginTicks;
-            volatile unsigned int endTicks;
-            D017B0TimerBegin(g_D017B0TimerEntityRemovedCb, beginTicks);
-            listeners.m_data[i]->EntityRemovedCallback(entity);
-            D017B0TimerBegin(g_D017B0TimerEnd, endTicks);
-        }
-    }
-    D017B0CleanupNullPointers(listeners);
-}
-
 struct D019B0TimerCommand
 {
     const char* m_pCommandName;
@@ -3396,23 +3053,6 @@ struct D019B0MonitorStream
 
 extern DWORD g_D019B0TlsIndex;
 
-__forceinline D019B0MonitorStream& D019B0GetMonitorStream()
-{
-    return *(D019B0MonitorStream*)TlsGetValue(g_D019B0TlsIndex);
-}
-
-__forceinline void D019B0TimerBegin(const char* name, volatile unsigned int& ticks)
-{
-    D019B0MonitorStream& mStream = D019B0GetMonitorStream();
-    if (mStream.memoryAvailable())
-    {
-        D019B0TimerCommand* h = (D019B0TimerCommand*)mStream.m_kRayEnd;
-        h->m_pCommandName = name;
-        h->setTime(ticks);
-        mStream.m_kRayEnd = (char*)(h + 1);
-    }
-}
-
 struct D019B0Listener
 {
     virtual void unk00();
@@ -3430,22 +3070,6 @@ struct D019B0ListenerArray
     int m_iElementCount;
     int m_iCapacityState;
 };
-
-// array to it in a register, which is what the target's codegen depends on.
-static __declspec(noinline) void D019B0CleanupNullPointers(D019B0ListenerArray& listeners)
-{
-    for (int i = listeners.m_iElementCount - 1; i >= 0; i--)
-    {
-        if (listeners.m_data[i] == 0)
-        {
-            listeners.m_iElementCount--;
-            int* dst = (int*)&listeners.m_data[i];
-            int* src = dst + 1;
-            for (int n = (listeners.m_iElementCount - i) * 4; n > 0; n -= 4)
-                *dst++ = *src++;
-        }
-    }
-}
 
 struct D019B0World
 {
@@ -3566,26 +3190,6 @@ struct D019B0Event
     int m_result;
 };
 
-// Invokes shapeSetCallback on each non-null entity listener in the world's listener array, then removes any null entries.
-// @fnv 0x00d019b0
-void __cdecl NotifyShapeSetListeners(D019B0World* world, D019B0Event* event)
-{
-    event->m_result = 0;
-    D019B0ListenerArray& listeners = world->m_kEntityListenerArray;
-    for (int i = listeners.m_iElementCount - 1; i >= 0; i--)
-    {
-        if (listeners.m_data[i] != 0)
-        {
-            volatile unsigned int beginTicks;
-            volatile unsigned int endTicks;
-            D019B0TimerBegin(g_D019B0TimerSetShapeCb, beginTicks);
-            listeners.m_data[i]->shapeSetCallback(event);
-            D019B0TimerBegin(g_D019B0TimerEnd, endTicks);
-        }
-    }
-    D019B0CleanupNullPointers(listeners);
-}
-
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long);
 extern "C" unsigned __int64 __rdtsc(void);
 extern "C" void _ReadWriteBarrier(void);
@@ -3685,23 +3289,6 @@ struct D005A0MonitorStream
 
 extern DWORD g_D005A0TlsIndex;
 
-__forceinline D005A0MonitorStream& D005A0GetMonitorStream()
-{
-    return *(D005A0MonitorStream*)TlsGetValue(g_D005A0TlsIndex);
-}
-
-__forceinline void D005A0TimerBegin(const char* name, volatile unsigned int& ticks)
-{
-    D005A0MonitorStream& mStream = D005A0GetMonitorStream();
-    if (mStream.memoryAvailable())
-    {
-        D005A0TimerCommand* h = (D005A0TimerCommand*)mStream.m_kRayEnd;
-        h->m_pCommandName = name;
-        h->setTime(ticks);
-        mStream.m_kRayEnd = (char*)(h + 1);
-    }
-}
-
 struct D005A0Listener
 {
     virtual void unk00();
@@ -3715,22 +3302,6 @@ struct D005A0ListenerArray
     int m_iElementCount;
     int m_iCapacityState;
 };
-
-// array to it in a register, which is what the target's codegen depends on.
-static __declspec(noinline) void D005A0CleanupNullPointers(D005A0ListenerArray& listeners)
-{
-    for (int i = listeners.m_iElementCount - 1; i >= 0; i--)
-    {
-        if (listeners.m_data[i] == 0)
-        {
-            listeners.m_iElementCount--;
-            int* dst = (int*)&listeners.m_data[i];
-            int* src = dst + 1;
-            for (int n = (listeners.m_iElementCount - i) * 4; n > 0; n -= 4)
-                *dst++ = *src++;
-        }
-    }
-}
 
 struct D005A0World
 {
@@ -3814,25 +3385,6 @@ struct D005A0World
 extern const char g_D005A0TimerEntityAddedCb[];
 extern const char g_D005A0TimerEnd[];
 
-// Iterates the world's entity listener array, calling EntityRemovedCallback on each non-null listener, then removes null entries.
-// @fnv 0x00d005a0
-void __cdecl FUN_00d005a0(D005A0World* world, void* entity)
-{
-    D005A0ListenerArray& listeners = world->m_kEntityListenerArray;
-    for (int i = listeners.m_iElementCount - 1; i >= 0; i--)
-    {
-        if (listeners.m_data[i] != 0)
-        {
-            volatile unsigned int beginTicks;
-            volatile unsigned int endTicks;
-            D005A0TimerBegin(g_D005A0TimerEntityAddedCb, beginTicks);
-            listeners.m_data[i]->EntityRemovedCallback(entity);
-            D005A0TimerBegin(g_D005A0TimerEnd, endTicks);
-        }
-    }
-    D005A0CleanupNullPointers(listeners);
-}
-
 struct D00640TimerCommand
 {
     const char* m_pCommandName;
@@ -3862,23 +3414,6 @@ struct D00640MonitorStream
 
 extern DWORD g_D00640TlsIndex;
 
-__forceinline D00640MonitorStream& D00640GetMonitorStream()
-{
-    return *(D00640MonitorStream*)TlsGetValue(g_D00640TlsIndex);
-}
-
-__forceinline void D00640TimerBegin(const char* name, volatile unsigned int& ticks)
-{
-    D00640MonitorStream& mStream = D00640GetMonitorStream();
-    if (mStream.memoryAvailable())
-    {
-        D00640TimerCommand* h = (D00640TimerCommand*)mStream.m_kRayEnd;
-        h->m_pCommandName = name;
-        h->setTime(ticks);
-        mStream.m_kRayEnd = (char*)(h + 1);
-    }
-}
-
 struct D00640Listener
 {
     virtual void unk00();
@@ -3893,22 +3428,6 @@ struct D00640ListenerArray
     int m_iElementCount;
     int m_iCapacityState;
 };
-
-// array to it in a register, which is what the target's codegen depends on.
-static __declspec(noinline) void D00640CleanupNullPointers(D00640ListenerArray& listeners)
-{
-    for (int i = listeners.m_iElementCount - 1; i >= 0; i--)
-    {
-        if (listeners.m_data[i] == 0)
-        {
-            listeners.m_iElementCount--;
-            int* dst = (int*)&listeners.m_data[i];
-            int* src = dst + 1;
-            for (int n = (listeners.m_iElementCount - i) * 4; n > 0; n -= 4)
-                *dst++ = *src++;
-        }
-    }
-}
 
 struct D00640World
 {
@@ -3992,25 +3511,6 @@ struct D00640World
 extern const char g_D00640TimerSetShapeCb[];
 extern const char g_D00640TimerEnd[];
 
-// Iterates the entity listener array, calls shapeSetCallback on each non-null listener, then compacts out null entries.
-// @fnv 0x00d00640
-void __cdecl NotifyShapeSet(D00640World* world, void* entity)
-{
-    D00640ListenerArray& listeners = world->m_kEntityListenerArray;
-    for (int i = listeners.m_iElementCount - 1; i >= 0; i--)
-    {
-        if (listeners.m_data[i] != 0)
-        {
-            volatile unsigned int beginTicks;
-            volatile unsigned int endTicks;
-            D00640TimerBegin(g_D00640TimerSetShapeCb, beginTicks);
-            listeners.m_data[i]->shapeSetCallback(entity);
-            D00640TimerBegin(g_D00640TimerEnd, endTicks);
-        }
-    }
-    D00640CleanupNullPointers(listeners);
-}
-
 struct D00820TimerCommand
 {
     const char* m_pCommandName;
@@ -4040,23 +3540,6 @@ struct D00820MonitorStream
 
 extern DWORD g_D00820TlsIndex;
 
-__forceinline D00820MonitorStream& D00820GetMonitorStream()
-{
-    return *(D00820MonitorStream*)TlsGetValue(g_D00820TlsIndex);
-}
-
-__forceinline void D00820TimerBegin(const char* name, volatile unsigned int& ticks)
-{
-    D00820MonitorStream& mStream = D00820GetMonitorStream();
-    if (mStream.memoryAvailable())
-    {
-        D00820TimerCommand* h = (D00820TimerCommand*)mStream.m_kRayEnd;
-        h->m_pCommandName = name;
-        h->setTime(ticks);
-        mStream.m_kRayEnd = (char*)(h + 1);
-    }
-}
-
 struct D00820Listener
 {
     virtual void unk00();
@@ -4070,22 +3553,6 @@ struct D00820ListenerArray
     int m_iElementCount;
     int m_iCapacityState;
 };
-
-// array to it in a register, which is what the target's codegen depends on.
-static __declspec(noinline) void D00820CleanupNullPointers(D00820ListenerArray& listeners)
-{
-    for (int i = listeners.m_iElementCount - 1; i >= 0; i--)
-    {
-        if (listeners.m_data[i] == 0)
-        {
-            listeners.m_iElementCount--;
-            int* dst = (int*)&listeners.m_data[i];
-            int* src = dst + 1;
-            for (int n = (listeners.m_iElementCount - i) * 4; n > 0; n -= 4)
-                *dst++ = *src++;
-        }
-    }
-}
 
 struct D00820World
 {
@@ -4172,25 +3639,6 @@ struct D00820World
 extern const char g_D00820TimerSetShapeCb[];
 extern const char g_D00820TimerEnd[];
 
-// Iterates the world's entity listener array, calls entityCallback on each non-null listener with the entity, then removes null entries.
-// @fnv 0x00d00820
-void __cdecl FUN_00d00820(D00820World* world, void* entity)
-{
-    D00820ListenerArray& listeners = world->m_kEntityListenerArray;
-    for (int i = listeners.m_iElementCount - 1; i >= 0; i--)
-    {
-        if (listeners.m_data[i] != 0)
-        {
-            volatile unsigned int beginTicks;
-            volatile unsigned int endTicks;
-            D00820TimerBegin(g_D00820TimerSetShapeCb, beginTicks);
-            listeners.m_data[i]->entityCallback(entity);
-            D00820TimerBegin(g_D00820TimerEnd, endTicks);
-        }
-    }
-    D00820CleanupNullPointers(listeners);
-}
-
 struct D008C0TimerCommand
 {
     const char* m_pCommandName;
@@ -4220,23 +3668,6 @@ struct D008C0MonitorStream
 
 extern DWORD g_D008C0TlsIndex;
 
-__forceinline D008C0MonitorStream& D008C0GetMonitorStream()
-{
-    return *(D008C0MonitorStream*)TlsGetValue(g_D008C0TlsIndex);
-}
-
-__forceinline void D008C0TimerBegin(const char* name, volatile unsigned int& ticks)
-{
-    D008C0MonitorStream& mStream = D008C0GetMonitorStream();
-    if (mStream.memoryAvailable())
-    {
-        D008C0TimerCommand* h = (D008C0TimerCommand*)mStream.m_kRayEnd;
-        h->m_pCommandName = name;
-        h->setTime(ticks);
-        mStream.m_kRayEnd = (char*)(h + 1);
-    }
-}
-
 struct D008C0Listener
 {
     virtual void unk00();
@@ -4251,22 +3682,6 @@ struct D008C0ListenerArray
     int m_iElementCount;
     int m_iCapacityState;
 };
-
-// array to it in a register, which is what the target's codegen depends on.
-static __declspec(noinline) void D008C0CleanupNullPointers(D008C0ListenerArray& listeners)
-{
-    for (int i = listeners.m_iElementCount - 1; i >= 0; i--)
-    {
-        if (listeners.m_data[i] == 0)
-        {
-            listeners.m_iElementCount--;
-            int* dst = (int*)&listeners.m_data[i];
-            int* src = dst + 1;
-            for (int n = (listeners.m_iElementCount - i) * 4; n > 0; n -= 4)
-                *dst++ = *src++;
-        }
-    }
-}
 
 struct D008C0World
 {
@@ -4352,25 +3767,6 @@ struct D008C0World
 
 extern const char g_D008C0TimerSetShapeCb[];
 extern const char g_D008C0TimerEnd[];
-
-// Iterates the world's entity listener array in reverse, invoking shapeSetCallback on each non-null listener, then compacts the array to remove null entries.
-// @fnv 0x00d008c0
-void __cdecl FUN_00d008c0(D008C0World* world, void* entity)
-{
-    D008C0ListenerArray& listeners = world->m_kEntityListenerArray;
-    for (int i = listeners.m_iElementCount - 1; i >= 0; i--)
-    {
-        if (listeners.m_data[i] != 0)
-        {
-            volatile unsigned int beginTicks;
-            volatile unsigned int endTicks;
-            D008C0TimerBegin(g_D008C0TimerSetShapeCb, beginTicks);
-            listeners.m_data[i]->shapeSetCallback(entity);
-            D008C0TimerBegin(g_D008C0TimerEnd, endTicks);
-        }
-    }
-    D008C0CleanupNullPointers(listeners);
-}
 
 extern "C" void _ReadWriteBarrier(void);
 extern DWORD DAT_0126835c;

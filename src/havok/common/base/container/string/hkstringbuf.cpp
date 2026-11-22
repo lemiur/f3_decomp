@@ -26,30 +26,6 @@ class BufferOwner
     BufferOwner* InitBuffer();
 };
 
-// @fnv 0x00cbbd80
-BufferOwner* BufferOwner::InitBuffer()
-{
-    m_pData = (char*)this + 0xc;
-    m_iReferenceCount = 0;
-    m_uiObjectFlags = 0x80000080;
-    BufferHolder* pHolder = reinterpret_cast<BufferHolder*>(FUN_00c85750());
-    void* pAllocator = pHolder->m_pAllocator;
-    int iCount = (int)(m_uiObjectFlags & 0x3fffffff);
-    if (iCount < 1)
-    {
-        int iCapacity = iCount + iCount;
-        if (iCapacity <= 1)
-        {
-            iCapacity = 1;
-        }
-        FUN_00c908c0(pAllocator, this, iCapacity, 1);
-    }
-    m_iReferenceCount = 1;
-    *m_pData = 0;
-    *m_pData = 0;
-    return this;
-}
-
 #include <stdarg.h>
 int __cdecl FUN_00cb0f50(char* buf, int size, const char* fmt, va_list args);
 struct PolymorphicBase

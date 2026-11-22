@@ -91,11 +91,6 @@ struct FUN_00ddc0b0 : FirstBase, SecondBase
     virtual ~FUN_00ddc0b0() throw();
 };
 
-// Destructor of a container holding three array members, which are freed by their own destructors.
-// @fnv 0x00ddc0b0
-FUN_00ddc0b0::~FUN_00ddc0b0() throw()
-{}
-
 extern int DAT_01269cd8;
 
 // @fnv 0x00ddc820
@@ -824,52 +819,6 @@ struct FUN_00ddbf00 : SbfBases
     SbfBytes m_kThird;
     FUN_00ddbf00(PtrArrayMember* pSource);
 };
-// Copies pointer elements from pSource into m_kFirst, growing its backing array when the source count exceeds capacity.
-// @fnv 0x00ddbf00
-FUN_00ddbf00::FUN_00ddbf00(PtrArrayMember* pSource)
-{
-    FUN_00ddbf00* pThis = this;
-    ArrayMember* pSecond = (ArrayMember*)&m_kSecond;
-    Sbf00_Ctx kCtx;
-    kCtx.m_kSub.InitHeading();
-    kCtx.m_kSub.unk00 = 0;
-    kCtx.m_kSub.unk0c = 0;
-    kCtx.m_kSub.unk04 = 0;
-    kCtx.m_kSub.unk08 = 1;
-    {
-        kCtx.m_f24 = (float)(DAT_01017b70 / (double)FUN_00d60580());
-    }
-    kCtx.m_f28 = 1.0f;
-    Sbf00_Arr24 kArr;
-    kArr.m_pData = 0;
-    kArr.m_iArrayLength = 0;
-    kArr.m_uCapacity = 0x80000000;
-    kCtx.FUN_00cc06f0(pSecond, 1);
-    {
-        Sbf00_Name kName;
-        kName.FUN_00dc1680(&DAT_010d6ae8);
-        FUN_00e0bd40(&kCtx, &kName, 1, 0, &kCtx.m_kSub, &DAT_0126c860, &kArr);
-    }
-    kCtx.FUN_00cc0780();
-    kArr.Free();
-    Sbf00_Alloc* pAlloc = (Sbf00_Alloc*)FUN_00c85750()->m_pAllocator;
-    unsigned int uCap = pThis->m_kFirst.m_uCapacity;
-    int iCap = uCap & 0x3fffffff;
-    if (iCap < pSource->m_iArrayLength)
-    {
-        if ((uCap & 0x80000000) == 0)
-            pAlloc->FreeArray(pThis->m_kFirst.m_ppData, iCap * 4);
-        int iBytes = pSource->m_iArrayLength * 4;
-        pThis->m_kFirst.m_ppData = (void**)pAlloc->AllocArray(&iBytes);
-        pThis->m_kFirst.m_uCapacity = iBytes / 4;
-    }
-    int n = pSource->m_iArrayLength;
-    void** pDst = pThis->m_kFirst.m_ppData;
-    pThis->m_kFirst.m_iArrayLength = n;
-    void** pSrc = pSource->m_ppData;
-    for (int i = 0; i < n; i++)
-        pDst[i] = pSrc[i];
-}
 
 namespace fnv_00ddc870 {
 struct FixedAllocator
@@ -915,31 +864,4 @@ struct FUN_00ddc870_cls
     void FUN_00ddc870();
 };
 
-// @fnv 0x00ddc870
-void FUN_00ddc870_cls::FUN_00ddc870()
-{
-    AllocHolder* holder = FUN_00c85750();
-    FixedAllocator* alloc = holder->m_pAllocator;
-    int iCount = m_iArrayLength;
-    Elem* pItems = *(Elem* volatile*)&m_pItems;
-    if (iCount > 0)
-    {
-        ElemSub* s = &pItems->m_08;
-        int n = iCount;
-        do
-        {
-            s->Release();
-            s = (ElemSub*)((char*)s + 16);
-        } while (--n != 0);
-    }
-
-    m_iArrayLength = 0;
-    unsigned int cap = m_uCapBits;
-    if ((cap & 0x80000000u) == 0)
-    {
-        alloc->FreeArray(m_pItems, (cap & 0x3fffffffu) * 16);
-    }
-    m_uCapBits = 0x80000000u;
-    m_pItems = 0;
-}
 }  // namespace fnv_00ddc870

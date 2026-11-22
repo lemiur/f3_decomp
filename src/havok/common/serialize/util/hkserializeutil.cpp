@@ -12,12 +12,6 @@ void __cdecl FUN_00d48640(int a, int b)
 
 extern "C" void __cdecl FUN_00d485a0(int, int, int, int, int);
 
-// @fnv 0x00d48660
-void __cdecl FUN_00d48660(int a, int b, int c)
-{
-    FUN_00d485a0(a, b, c, 1, 0);
-}
-
 extern int DAT_0102e388;
 extern int DAT_010d7540;
 
@@ -33,16 +27,6 @@ struct FUN_00dcc160_cls
     hkReferencedObject* b;
     void FUN_00dcc160();
 };
-
-// @fnv 0x00dcc160
-void FUN_00dcc160_cls::FUN_00dcc160()
-{
-    hkReferencedObject* old = b;
-    vtbl = &DAT_010d7540;
-    if (old)
-        old->removeReference();
-    vtbl = &DAT_0102e388;
-}
 
 struct FUN_00dbc670_storage
 {
@@ -115,25 +99,6 @@ struct GlobalDispatch
     virtual int Dispatch(int, int, int, int, int);
 };
 extern GlobalDispatch* DAT_01269b74;
-// @fnv 0x00d484a0
-int __cdecl FUN_00d484a0(int a1, int a2, int a3, int a4, int useLocal, int a6)
-{
-    if (a3)
-    {
-        if (useLocal)
-        {
-            FUN_00dbc670_storage msgStorage;
-            FUN_00dbc670_shell* shell = (FUN_00dbc670_shell*)&msgStorage;
-            shell->FUN_00dbc670();
-            shell->FUN_00dbda50(a1, a2, a6);
-            int result = shell->ProcessPoly(a3, a4);
-            shell->FUN_00dbc6e0();
-            return result;
-        }
-        return DAT_01269b74->Dispatch(a1, a2, a3, a4, a6);
-    }
-    return 1;
-}
 
 extern void* FUN_00d48d30(void* obj_b, int a2, int a3);
 
@@ -146,17 +111,6 @@ struct CtorBox
     int f4;
     void* b;
 };
-
-// Constructs a CtorBox from a1, calls FUN_00d48d30 on its b field with a2 and a3, destroys the box, and returns the result.
-// @fnv 0x00d48ec0
-void* __cdecl FUN_00d48ec0(void* a1, int a2, int a3)
-{
-    CtorBox obj;
-    CtorBox* p = obj.InitFromValue(a1);
-    void* res = FUN_00d48d30(p->b, a2, a3);
-    obj.FUN_00dcc160();
-    return res;
-}
 
 namespace fnv_00d48f00 {
 void* __cdecl FUN_00cb1280(void* destination, int value, int size);
@@ -200,20 +154,6 @@ struct Object180
     Object180* __thiscall FUN_00dcc6a0(void* input, int arg2);
     void __thiscall FUN_00dcc160();
 };
-// @fnv 0x00d48f00
-int __cdecl FUN_00d48f00(Header180* pHeader, int arg2, int arg3, int arg4)
-{
-    Header180 defaultHeader;
-    if (pHeader->unk00 == defaultHeader.unk00 && pHeader->unk04 == defaultHeader.unk04 &&
-        FUN_00cb1290(&pHeader->unk10, &DAT_011b7b88, 4) == 0 && FUN_00cb0fa0(&pHeader->unk28, FUN_00dc0fb0()) == 0)
-        return CreateResourceFromArray(pHeader, arg2, 0);
-    Object180 wrapper;
-    Object180* result = wrapper.FUN_00dcc6a0(pHeader, arg2);
-    void* payload = result->unk08;
-    int value = FUN_00d48d30(payload, arg3, arg4);
-    wrapper.FUN_00dcc160();
-    return value;
-}
 }  // namespace fnv_00d48f00
 
 struct S_00d49310_Lock
@@ -230,14 +170,6 @@ struct S_00d49310_Result
     {}
 };
 void FUN_00d48af0(void* stream, int* out) throw();
-// @fnv 0x00d49310
-S_00d49310_Result FUN_00d49310(void* stream)
-{
-    S_00d49310_Lock lock;
-    int res;
-    FUN_00d48af0(stream, &res);
-    return S_00d49310_Result(res);
-}
 
 int FUN_00cb0fa0(const char* a, const char* b);
 int FUN_00c009eb(const char* a, const char* b);
@@ -289,23 +221,6 @@ struct FUN_00d493a0_cls
     bool* MatchesTag(bool* out, const char* tag);
 };
 
-// Compares the four bytes m_00..m_03 against the first four bytes of tag, stores the result in out and returns out.
-// @fnv 0x00d493a0
-bool* FUN_00d493a0_cls::MatchesTag(bool* pbResult, const char* tag)
-{
-    bool r;
-    if (m_00 == tag[0] && m_01 == tag[1] && m_02 == tag[2] && m_03 == tag[3])
-    {
-        r = true;
-    }
-    else
-    {
-        r = false;
-    }
-    *pbResult = r;
-    return pbResult;
-}
-
 struct D493E0Object;
 
 struct D493E0Ref
@@ -329,15 +244,6 @@ struct D493E0Loader
 
     D493E0Ref FindObject(const void* key, int flags) const;
 };
-
-// Looks up key in m_registry when key is non-null and returns a D493E0Ref wrapping the found object, otherwise a null D493E0Ref.
-// @fnv 0x00d493e0
-D493E0Ref D493E0Loader::FindObject(const void* key, int flags) const
-{
-    if (key)
-        return D493E0Ref(m_registry->find(key, flags));
-    return D493E0Ref(0);
-}
 
 struct Pair
 {
@@ -402,55 +308,7 @@ struct FUN_00d49420_cls
     void unk20(Obj1* apA, void* apB, void* apC);
 };
 
-// @fnv 0x00d49420
-Obj1* FUN_00d49420_cls::ProcessPair(Obj1* apArg1, Obj2* apArg2)
-{
-    if (m_08 != 0)
-    {
-        if (apArg2->FUN_00dba980() == 0)
-        {
-            Obj5 local28;
-            Pair pair;
-            apArg2->GetObjectValue(&local28);
-            Vt4Obj* v = reinterpret_cast<GlobalObj*>(DAT_01268b08)->unk10();
-            void** pVtableSlot = *(void***)v + 4;
-            void* arg = local28.FUN_00dba680();
-            void* pSecond = reinterpret_cast<void*(__thiscall*)(void*, void*)>(*pVtableSlot)(v, arg);
-            apArg2->GetSourcePair(&pair);
-            void* first = pair.first;
-            if (pair.second != 0)
-            {
-                pSecond = pair.second;
-            }
-            void* second = pSecond;
-            m_08->unk0c(&first, &second);
-            if (first == pair.first && second == pSecond)
-            {
-                local28.FUN_00dba660();
-            }
-            else
-            {
-                unk20(apArg1, first, second);
-                local28.FUN_00dba660();
-                return apArg1;
-            }
-        }
-    }
-    apArg1->AssignRef(apArg2);
-    return apArg1;
-}
-
 extern volatile int DAT_01269b70;
-
-static __declspec(noinline) int FUN_00d48950(int d, int a, int b, int c)
-{
-    int* pb = &b;
-    if (d)
-    {
-        return a;
-    }
-    return *pb + c;
-}
 
 struct Holder_cls
 {
@@ -470,32 +328,6 @@ struct Owner_cls
 {
     int FUN_00dba0d0(int a, int b);
 };
-
-// Initialises a Pending_cls and Holder_cls, then returns 1 if a condition on edi_in fails, otherwise calls Owner_cls::FUN_00dba0d0.
-// @fnv 0x00d48a90
-static __declspec(noinline) int FUN_00d48a90(int a1, int esi_in, int edi_in, int ebx_in)
-{
-    Pending_cls p;
-    Holder_cls h;
-
-    p.FUN_00dc5d30();
-    p.FUN_00dc5d50(&h, a1, esi_in);
-    h.FUN_00dba7f0();
-
-    if (edi_in != 0)
-    {
-        if (FUN_00d48950(edi_in, esi_in, DAT_01269b70, ebx_in) == 0)
-        {
-            return 1;
-        }
-    }
-    return ((Owner_cls*)DAT_01269b70)->FUN_00dba0d0(esi_in, ebx_in);
-}
-
-int __cdecl S00d48a90_Entry(int a1)
-{
-    return FUN_00d48a90(a1, 0, 0, 0);
-}
 
 struct S00d48d30_Bool
 {
@@ -574,96 +406,6 @@ extern const char str_010cfa94[];
 int S00d48d30_Finish(int opts);
 void FUN_00d48af0(void* stream, int* out) throw();
 int __cdecl FUN_00dc3300(const S00d48d30_Ref& r, int opts);
-
-static __declspec(noinline) int FUN_00d48a90(S00d48d30_Stream* s, S00d48d30_Reader* reader, S00d48d30_Result* out)
-{
-    reader->prepare();
-    if (reader->open(s) == 0)
-    {
-        if (out != 0)
-        {
-            out->m_iResultCode = 3;
-            out->m_message = str_010cfa94;
-        }
-        reader->close();
-        return 1;
-    }
-    return 0;
-}
-
-static __declspec(noinline) int FUN_00d48760(S00d48d30_Stream* s, S00d48d30_Format* format, S00d48d30_Result* out,
-                                             int opts)
-{
-    if (format->m_type < 2)
-    {
-        return 0;
-    }
-    if (out != 0)
-    {
-        out->m_iResultCode = 0;
-    }
-    if (s == 0)
-    {
-        return 0;
-    }
-    if (format->attach(s, out) == 0)
-    {
-        return 0;
-    }
-    return S00d48d30_Finish(opts);
-}
-
-// Validates the stream, resolves load options, and dispatches to a format-specific loader based on the detected stream type.
-// @fnv 0x00d48d30
-int __cdecl FUN_00d48d30(S00d48d30_Stream* apStream, S00d48d30_Result* apResult, int aiOptions) throw()
-{
-    if (apStream == 0)
-    {
-        if (apResult != 0)
-        {
-            apResult->m_iResultCode = 1;
-            apResult->m_message = str_010cfacc;
-        }
-        return 0;
-    }
-    if (!apStream->IsStreamValid().m_cBooleanValue)
-    {
-        if (apResult != 0)
-        {
-            apResult->m_iResultCode = 1;
-            apResult->m_message = str_010cfab8;
-        }
-        return 0;
-    }
-    if (aiOptions == 0)
-    {
-        aiOptions = reinterpret_cast<S00d48d30_Service*>(DAT_01268b08)->getDefaultOptions();
-    }
-    S00d48d30_Lock lock;
-    S00d48d30_Format format;
-    FUN_00d48af0(apStream, &format.m_type);
-    switch (format.m_type)
-    {
-    case 2:
-    case 3:
-        return FUN_00d48760(apStream, &format, apResult,
-                            reinterpret_cast<S00d48d30_Service*>(DAT_01268b08)->getLoadOptions());
-    case 4: {
-        S00d48d30_Reader reader;
-        if (FUN_00d48a90(apStream, &reader, apResult) == 0)
-        {
-            return FUN_00dc3300(reader.ForwardToReceiver(), aiOptions);
-        }
-        return 0;
-    }
-    }
-    if (apResult != 0)
-    {
-        apResult->m_iResultCode = 2;
-        apResult->m_message = str_010cfa94;
-    }
-    return 0;
-}
 
 struct S00d48680_Arr
 {
@@ -754,11 +496,6 @@ static __declspec(noinline) void FUN_00d48680(S00d48680_Obj* apReader, S00d48680
         r = apReader->v4((int)(d + iSize), 0x20000);
         apBuffer->m_iElementCount += r;
     } while (r > 0);
-}
-
-void __cdecl S00d48680_Entry(S00d48680_Obj* obj, S00d48680_Arr* arr)
-{
-    FUN_00d48680(obj, arr);
 }
 
 struct HashPolicy
@@ -991,42 +728,12 @@ static __declspec(noinline) __declspec(nothrow) Resource* FUN_00d48760(LoadStrea
 
 // Loads a resource via FUN_00d48760, resolves its class in classes, and constructs an ObjectResource from the parsed data.
 // @fnv 0x00d48840
-static __declspec(noinline) ObjectResource* FUN_00d48840(LoadStream* input, LoadFormat& format, LoadError* error,
-                                                         const ClassRegistry* classes, const TypeRegistry* types)
-{
-    TypeRegistry unfinished(0);
-    unfinished.FUN_00d47970(*types);
-    ResourceRef resource;
-    resource.take((Resource*)FUN_00d48760((S00d48d30_Stream*)input, (S00d48d30_Format*)&format,
-                                          (S00d48d30_Result*)error, (int)&unfinished));
-    NativeWorld data;
-    data.SetReferencedObject(classes);
-    const RuntimeClass* rootClass = classes->find(resource->name());
-    if (rootClass)
-    {
-        RootObject root(data.FUN_00dbb4f0(resource->contents(0, types), *rootClass));
-        ObjectResource* result = FUN_00dc32c0(root, classes, types);
-        root.clear();
-        data.clear();
-        resource.clear();
-        unfinished.clear();
-        return result;
-    }
-    data.clear();
-    resource.clear();
-    unfinished.clear();
-    return 0;
-}
 LoadStream* volatile inputSource;
 LoadFormat* volatile formatSource;
 LoadError* volatile errorSource;
 const ClassRegistry* volatile classSource;
 const TypeRegistry* volatile typeSource;
 ObjectResource* volatile outputSink;
-void CallHeapLoader()
-{
-    outputSink = FUN_00d48840(inputSource, *formatSource, errorSource, classSource, typeSource);
-}
 
 extern const char str_010cf9f4[];
 
@@ -1102,50 +809,8 @@ struct S00d48950_Sys
 };
 void __cdecl FUN_00cb0c70(char* buf, const char* fmt, ...);
 
-// For each root item, checks lookup and adds it to target's set when versions differ; returns 0 with result code 4 on failure, otherwise 1.
-// @fnv 0x00d48950
-static __declspec(noinline) int FUN_00d48950(S00d48950_Result* result, S00d48950_Target* target,
-                                             S00d48950_Lookup* lookup, S00d48950_Root* root)
-{
-    target->FUN_00db8670();
-    S00d48950_ItemArray items;
-    items.m_data = 0;
-    items.m_iElementCount = 0;
-    items.m_iCapacityState = 0x80000000;
-    root->getItems(items);
-    for (int iIndex = 0; iIndex < items.m_iElementCount; iIndex++)
-    {
-        void* key = items.m_data[iIndex]->GetIteratorKey();
-        int version = items.m_data[iIndex]->GetNumOwnMembers();
-        S00d48950_Entry* entry = lookup->find(key);
-        int iCurrentVersion = entry ? entry->FUN_00d47120() : -1;
-        if (entry && iCurrentVersion == version)
-            continue;
-        __int64 id = target->FUN_00db7dd0(key, version);
-        if (target->m_set.FUN_00cb1cb0(id, -1, -1) == -1)
-        {
-            result->m_pMoppCode = 4;
-            FUN_00cb0c70(result->m_message, str_010cf9f4, key, version);
-            S00d48950_Heap& heap = *((S00d48950_Sys*)FUN_00c85750())->m_pStreamAllocator;
-            items.m_iElementCount = 0;
-            if ((items.m_iCapacityState & 0x80000000) == 0)
-                heap.ReturnMemory(items.m_data, (items.m_iCapacityState & 0x3fffffff) * 4);
-            return 0;
-        }
-    }
-    S00d48950_Heap& heap = ((S00d48950_Sys*)FUN_00c85750())->heap();
-    items.m_iElementCount = 0;
-    if ((items.m_iCapacityState & 0x80000000) == 0)
-        heap.ReturnMemory(items.m_data, (items.m_iCapacityState & 0x3fffffff) * 4);
-    return 1;
-}
-
 S00d48950_Result* volatile g00d48950_result;
 S00d48950_Target* volatile g00d48950_target;
 S00d48950_Lookup* volatile g00d48950_lookup;
 S00d48950_Root* volatile g00d48950_root;
 volatile int g00d48950_out;
-void S00d48950_Caller()
-{
-    g00d48950_out = FUN_00d48950(g00d48950_result, g00d48950_target, g00d48950_lookup, g00d48950_root);
-}

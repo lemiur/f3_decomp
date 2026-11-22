@@ -19,11 +19,6 @@ struct hkProcessFactory
     hkInspectProcess* __thiscall RegisterProcess(const char*, void(__cdecl*)(hkProcess*));
 };
 extern hkProcessFactory* FUN_00dd9380;
-// @fnv 0x00ddb750
-void __cdecl RegisterObjectInspectionProcess()
-{
-    DAT_01269cd4 = FUN_00dd9380->RegisterProcess("ObjectInspection", FUN_00ddb710);
-}
 
 struct hkInspectProcessStandIn
 {
@@ -49,20 +44,8 @@ void __cdecl CreateImpl(hkProcess*);
 struct hkInspectProcess;
 extern hkInspectProcess* DAT_01269cd8;
 
-// @fnv 0x00ddc1a0
-hkInspectProcess* __cdecl CreateStatisticsProcess()
-{
-    return DAT_01269cd8 = ((hkProcessFactory*)DAT_01269cd0)->RegisterProcess("Statistics", CreateImpl);
-}
-
 struct hkInspectProcess;
 extern hkInspectProcess* DAT_01269cd4;
-
-// @fnv 0x00ddbeb0
-hkInspectProcess* FUN_00ddbeb0()
-{
-    return DAT_01269cd4;
-}
 
 class hkRefObjDDB6
 {
@@ -317,18 +300,6 @@ struct FnvCpu_FUN_00ddb710_CpuBlock
     unsigned short size;
     FnvCpu_FUN_00ddb710_CpuBlock* FUN_00ddb600(unsigned int value);
 };
-// @fnv 0x00ddb710
-void* __cdecl FUN_00ddb710(unsigned int value)
-{
-    FnvCpu_FUN_00ddb710_CpuHolder* pCpuHolder = static_cast<FnvCpu_FUN_00ddb710_CpuHolder*>(FUN_00c85750());
-    FnvCpu_FUN_00ddb710_CpuBlock* pCpuBlock =
-        static_cast<FnvCpu_FUN_00ddb710_CpuBlock*>(pCpuHolder->allocator->Invoke(48));
-    pCpuBlock->size = 48;
-    pCpuBlock = pCpuBlock->FUN_00ddb600(value);
-    if (pCpuBlock)
-        return reinterpret_cast<char*>(pCpuBlock) + 8;
-    return 0;
-}
 
 struct MemoryManager
 {
@@ -357,18 +328,6 @@ struct TestClass
     void FUN_00ddb670();
     void* FUN_00ddbed0(char flags);
 };
-
-// @fnv 0x00ddbed0
-void* TestClass::FUN_00ddbed0(char flags)
-{
-    FUN_00ddb670();
-    if (flags & 1)
-    {
-        ThreadMemory* mem = (ThreadMemory*)FUN_00c85750();
-        mem->memoryManager->deallocate(this, m_usAllocationSize);
-    }
-    return this;
-}
 
 class hkClass;
 class hkStatisticsCollector;
@@ -956,87 +915,5 @@ struct hkPathArray
 {
     unsigned short* unk00;
 };
-static __forceinline int nextIndex(const hkPathArray* path, int i)
-{
-    return path->unk00[i + 1];
-}
-// Walks a hkPathArray through hkClassMember types to compute and return the pointer to a nested member within data.
-// @fnv 0x00ddb450
-static __declspec(noinline) void* __cdecl FUN_00ddb450(const hkClassMember* member, char* data, const hkPathArray* path,
-                                                       int type, int aiIndex)
-{
-    char* p = data;
-    for (;;)
-    {
-        switch (type)
-        {
-        case 1:
-        case 2:
-        case 3:
-        case 4:
-        case 5:
-        case 6:
-        case 7:
-        case 8:
-        case 9:
-        case 10:
-        case 11:
-        case 12:
-        case 13:
-        case 24:
-        case 30:
-        case 31:
-        case 32:
-            return p;
-        case 14:
-        case 15:
-        case 16:
-        case 17:
-        case 18: {
-            char* next = p + path->unk00[aiIndex + 1] * 16;
-            type = 12;
-            ++aiIndex;
-            p = next;
-        }
-            continue;
-        case 22:
-        case 26: {
-            int iIndex = path->unk00[aiIndex + 1];
-            {
-                char* next = *(char**)p + member->GetTagValue() * iIndex;
-                type = member->unk0D;
-                ++aiIndex;
-                p = next;
-            }
-            continue;
-        }
-        case 25: {
-            if (!member)
-                return 0;
-            if (!member->unk04)
-                return 0;
-            const hkClass* k = member->FUN_00d86910();
-            if (!k)
-                return 0;
-            member = &k->FUN_00d46f20(nextIndex(path, aiIndex));
-            {
-                char* next = p + member->unk12;
-                type = member->unk0C;
-                ++aiIndex;
-                p = next;
-            }
-            continue;
-        }
-        case 20:
-            return 0;
-        default:
-            return 0;
-        }
-    }
-}
 
-void* S00ddb450_Call(int type, char* data, const hkPathArray* path, int i, const hkClassMember* member)
-{
-    return FUN_00ddb450(member, data, path, type, i);
-}
 }  // namespace fnv_00ddb450

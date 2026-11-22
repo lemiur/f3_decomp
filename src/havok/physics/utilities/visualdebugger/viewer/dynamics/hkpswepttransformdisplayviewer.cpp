@@ -407,34 +407,6 @@ struct SweptViewer
     void FUN_00ddcc60_tail();
     void Destroy();
 };
-// @fnv 0x00d648c0
-void SweptViewer::Destroy()
-{
-    m_vptr00 = (int)&DAT_010d1918;
-    m_vptr08 = (int)&DAT_010d18f8;
-    m_vptr20 = (int)&DAT_010d18e8;
-    m_vptr28 = (int)&DAT_010d18cc;
-    m_vptr2c = (int)&DAT_010d18bc;
-    int i = m_ppData.m_iArrayLength - 1;
-    if (i >= 0)
-    {
-        do
-        {
-            RemoveWorldData(i);
-            --i;
-        } while (i >= 0);
-    }
-    AudioHolder* h = (AudioHolder*)FUN_00c85750();
-    AudioAllocator* a = h->m_pAllocator;
-    m_ppData.m_iArrayLength = 0;
-    unsigned int uiCapBits = m_ppData.m_uCapBits;
-    if ((uiCapBits & 0x80000000u) == 0)
-        a->FreeArray(m_ppData.m_pData, (uiCapBits & 0x3fffffffu) * 4);
-    m_ppData.Reset();
-    m_vptr2c = (int)&DAT_010ccf7c;
-    m_vptr28 = (int)"pFU";
-    return FUN_00ddcc60_tail();
-}
 }  // namespace fnv_00d648c0
 
 #include <xmmintrin.h>
@@ -457,18 +429,6 @@ struct __declspec(align(16)) D64020Transform
     D64020Rotation m_rotation;
     D64020Vector4 m_vTranslation;
 };
-
-inline __m128 D64020RotateDir(const D64020Rotation& m, const D64020Vector4& v)
-{
-    const __m128 b = *(const __m128*)v.m_f;
-    const __m128 b0 = _mm_shuffle_ps(b, b, _MM_SHUFFLE(0, 0, 0, 0));
-    const __m128 r0 = _mm_mul_ps(*(const __m128*)m.m_kColumn0.m_f, b0);
-    const __m128 b1 = _mm_shuffle_ps(b, b, _MM_SHUFFLE(1, 1, 1, 1));
-    const __m128 r1 = _mm_mul_ps(*(const __m128*)m.m_kColumn1.m_f, b1);
-    const __m128 b2 = _mm_shuffle_ps(b, b, _MM_SHUFFLE(2, 2, 2, 2));
-    const __m128 r2 = _mm_mul_ps(*(const __m128*)m.m_kColumn2.m_f, b2);
-    return _mm_add_ps(_mm_add_ps(r0, r1), r2);
-}
 
 extern int g_D64020Color;
 
@@ -590,23 +550,6 @@ class D64020Viewer : public D64020Primary, public D64020Secondary
     virtual void DisplayConstraintPivots(D64020Constraint* constraint);
 };
 
-// Builds two D64020Transforms from the constraint's rotation and pivot pairs and submits them to the display handler for rendering.
-// @fnv 0x00d64020
-void D64020Viewer::DisplayConstraintPivots(D64020Constraint* constraint)
-{
-    D64020Transform frame;
-
-    frame.m_rotation.set(constraint->m_kRotationA);
-    *(__m128*)frame.m_vTranslation.m_f = _mm_sub_ps(*(const __m128*)constraint->m_kPivotA.m_f,
-                                                    D64020RotateDir(frame.m_rotation, constraint->m_localPivot));
-    m_pDisplayHandler->displayFrame(frame, (unsigned long)constraint + 0x11, g_D64020Color);
-
-    frame.m_rotation.set(constraint->m_kRotationB);
-    *(__m128*)frame.m_vTranslation.m_f = _mm_sub_ps(*(const __m128*)constraint->m_kPivotB.m_f,
-                                                    D64020RotateDir(frame.m_rotation, constraint->m_localPivot));
-    m_pDisplayHandler->displayFrame(frame, (unsigned long)constraint + 0x12, g_D64020Color);
-}
-
 // sub ecx,8; jmp FUN_00d649c0 == MSVC adjustor thunk for the secondary base's override.
 struct PrimaryBase
 {
@@ -658,17 +601,6 @@ struct Own_00d64990 : A1_00d64990, A2_00d64990
     void FUN_00d64990();    // the shared override - declared only
 };
 
-Own_00d64990::Own_00d64990()
-{}
-void Own_00d64990::key_fn()
-{}
-
-Own_00d64990* make_00d64990()
-{
-    static Own_00d64990 o;
-    return &o;
-}
-
 struct D649A0Primary
 {
     virtual void vfunc00();
@@ -699,9 +631,6 @@ struct D649A0Object : D649A0Primary, D649A0Secondary
     virtual void FUN_00d649a0();
 };
 
-D649A0Object::D649A0Object()
-{}
-
 // FUN_00d649b0 : MSVC this-adjusting thunk  (sub ecx, 0x20 ; jmp <impl>)
 //
 // Two bases declare the same virtual, so the derived class overrides one
@@ -730,17 +659,6 @@ struct Own_00d649b0 : A1_00d649b0, A2_00d649b0
     virtual void key_fn();  // key function - defined, so the vftable is emitted
     void FUN_00d649b0();    // the shared override - declared only
 };
-
-Own_00d649b0::Own_00d649b0()
-{}
-void Own_00d649b0::key_fn()
-{}
-
-Own_00d649b0* make_00d649b0()
-{
-    static Own_00d649b0 o;
-    return &o;
-}
 
 struct S_00d649c0_Heap
 {

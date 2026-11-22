@@ -228,19 +228,6 @@ class hkpStiffSpringWrapperD4D3 : public hkBaseObjectD4D3
     float m_fSpringRestLength;
 };
 
-// Transforms world-space pivots into local entity space, then stores their 3D distance as the spring rest length.
-// @fnv 0x00d4d390
-void hkpStiffSpringWrapperD4D3::UpdatePivotsAndRestLength(const hkVector4D4D3& kPivotAW, const hkVector4D4D3& kPivotBW)
-{
-    hkpEntityD4D3* pkA = m_pEntityA;
-    hkpEntityD4D3* pkB = m_pEntityB;
-    m_kPivotInA.FUN_00c7f690(pkA->m_kMotionTransform, kPivotAW);
-    m_kPivotInB.FUN_00c7f690(pkB->m_kMotionTransform, kPivotBW);
-    hkVector4D4D3 kDiff;
-    kDiff.setSub4(kPivotAW, kPivotBW);
-    m_fSpringRestLength = kDiff.length3();
-}
-
 namespace fnv_00d4d410 {
 union __declspec(intrin_type) __declspec(align(16)) __m128
 {
@@ -334,22 +321,6 @@ class hkpStiffSpringWrapperD4D41 : public hkBaseObjectD4D41
     float m_fSpringRestLength;
 };
 
-// Stores the given pivot vectors and computes the spring rest length from the world-space distance between the two pivots.
-// @fnv 0x00d4d410
-void hkpStiffSpringWrapperD4D41::SetPivots(const hkVector4D4D41& kPivotA, const hkVector4D4D41& kPivotB)
-{
-    hkpEntityD4D41* pkA = m_pEntityA;
-    hkpEntityD4D41* pkB = m_pEntityB;
-    m_kPivotInA = kPivotA;
-    m_kPivotInB = kPivotB;
-    hkVector4D4D41 kPivotAW;
-    kPivotAW.FUN_00c7f640(pkA->m_kMotionTransform, kPivotA);
-    hkVector4D4D41 kPivotBW;
-    kPivotBW.FUN_00c7f640(pkB->m_kMotionTransform, kPivotB);
-    hkVector4D4D41 kDiff;
-    kDiff.setSub4(kPivotAW, kPivotBW);
-    m_fSpringRestLength = kDiff.length3();
-}
 }  // namespace fnv_00d4d410
 
 namespace fnv_00d4d4a0 {
@@ -436,28 +407,4 @@ struct S00d4d4a0_Obj
     unsigned short unk5E;
 };
 
-// Returns null unless argA.m_type is 2 and argB.m_type is 0; else builds a copy on argA's entity pair and copies pivots, rest length, spring, damping and flags.
-// @fnv 0x00d4d4a0
-S00d4d4a0_Obj* S00d4d4a0_Obj::FUN_00d4d4a0(const hkpCloneArgD4A0& argA, const hkpCloneArgD4A0& argB) const
-{
-    if (argA.m_type != 2)
-        return 0;
-
-    if (argB.m_type != 0)
-        return 0;
-
-    S00d4d4a0_Obj* clone = new S00d4d4a0_Obj;
-
-    clone = clone->FUN_00d4d340(argA.m_kActorEntries->m_pEntityA, argA.m_kActorEntries->m_pEntityB, m_ulUserData);
-
-    clone->m_kPivotInA = m_kPivotInA;
-    clone->m_kPivotInB = m_kPivotInB;
-    clone->m_fRestLength = m_fRestLength;
-    clone->m_fSpringStrength = m_fSpringStrength;
-    clone->m_fMotorDamping = m_fMotorDamping;
-    clone->m_bSpringEnabled = m_bSpringEnabled;
-    clone->m_bElastic = m_bElastic;
-
-    return clone;
-}
 }  // namespace fnv_00d4d4a0

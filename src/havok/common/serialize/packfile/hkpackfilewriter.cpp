@@ -4,13 +4,6 @@
 
 extern "C" void __cdecl Vsnprintf(void*, void*, const char*, int, int, int, const char*);
 
-// Calls Vsnprintf with a and b and a formatted Havok version string (7.1.0-r1).
-// @fnv 0x00dbda20
-void __cdecl FUN_00dbda20(void* a, void* b)
-{
-    Vsnprintf(a, b, "Havok-%i.%i.%i-%s", 7, 1, 0, "r1");
-}
-
 struct FUN_00dbdd40_s
 {
     int __thiscall GetOrAddString(int a);
@@ -56,13 +49,6 @@ struct FUN_00dbdae0
     DepthLimit m_dl;
     void FUN_00dbdae0_0(void* a, int b);
 };
-// Gets the memory router's m10 and forwards it with a and b to m_dl.FUN_00cb1870.
-// @fnv 0x00dbdae0
-void FUN_00dbdae0::FUN_00dbdae0_0(void* a, int b)
-{
-    void* r = D1A0E0GetMemoryRouter()->m10;
-    m_dl.FUN_00cb1870(r, a, b);
-}
 
 namespace fnv_00dbdf00 {
 struct DepthLimit
@@ -83,15 +69,6 @@ struct FUN_00dbdf00_s
     void __thiscall FUN_00dbdf00(void*, int);
 };
 
-// Calls GetOrAddString with b, then passes the result and a to FUN_00cb1870 on the DepthLimit at this+0x9c using the memory router's m_p.
-// @fnv 0x00dbdf00
-void FUN_00dbdf00_s::FUN_00dbdf00(void* a, int b)
-{
-    int result = reinterpret_cast<FUN_00dbdd40_s*>(this)->GetOrAddString(b);
-    FUN_00dbdf00_router* router = _D1A0E0GetMemoryRouter();
-
-    reinterpret_cast<DepthLimit*>(reinterpret_cast<char*>(this) + 0x9c)->FUN_00cb1870(router->m_p, a, result);
-}
 }  // namespace fnv_00dbdf00
 
 struct FUN_00dbe760_s;
@@ -122,20 +99,6 @@ struct FUN_00dbe760_s : public FUN_00dbc6e0_s
 
     FUN_00dbe760_s* __thiscall FUN_00dbe760(int a);
 };
-
-// @fnv 0x00dbe760
-FUN_00dbe760_s* __thiscall FUN_00dbe760_s::FUN_00dbe760(int aiFlags)
-{
-    FUN_00dbc6e0_s::FUN_00dbdf60();
-
-    if (aiFlags & 1)
-    {
-        FUN_00dbe760_router* router = _D1A0E0GetMemoryRouter();
-        router->m_target->FUN_00dbe760_virtual_2(this, m_uiFilterValue);
-    }
-
-    return this;
-}
 
 struct FUN_00cb1930_s
 {
@@ -847,18 +810,6 @@ class FUN_00dbe4d0 : public hkReferencedObjectE4D
     hkPackfileSectionTableE4D m_kSectionTable;
 };
 
-// Constructs the object, initialising string maps with a container heap allocator and inserting three class pointers into m_kObjectNameMap with value -1.
-// @fnv 0x00dbe4d0
-FUN_00dbe4d0::FUN_00dbe4d0() throw()
-    : m_kClassNameMap(hkContainerHeapAllocatorE4D()), m_classNames(hkContainerHeapAllocatorE4D()),
-      m_kImports(hkContainerHeapAllocatorE4D()), m_iContentsSection(-1), m_iDataSection(-1), m_pvContents(0),
-      m_pvContentsClass(0), m_classesWritten(hkContainerHeapAllocatorE4D())
-{
-    m_kObjectNameMap.insert(GetMemoryRouterE4D().heap(), &g_kClassAE4D, -1);
-    m_kObjectNameMap.insert(GetMemoryRouterE4D().heap(), &g_kClassBE4D, -1);
-    m_kObjectNameMap.insert(GetMemoryRouterE4D().heap(), &g_kClassCE4D, -1);
-}
-
 struct Mgr
 {
     virtual void v0();
@@ -1073,23 +1024,6 @@ __declspec(noinline) void Class_00dbe680::FUN_00dbe150(int a1, void* a2, S00dbe6
     unk04 = a4;
 }
 
-// Resolves a target pointer from a3 or a global, adjusts it via v4 or a2, calls FUN_00dbe150, and stores hash lookups in m_8c and m_90.
-// @fnv 0x00dbe680
-void Class_00dbe680::FUN_00dbe680(int a1, S00dbe680_A2* a2, S00dbe680_A3* a3, int a4)
-{
-    void* target = a3 ? (void*)a3 : (void*)DAT_01268b08->v5();
-    if (a2->GetLastNodeFlag().b)
-    {
-        target = ((S00dbe680_A3*)target)->v4(a1);
-    }
-    else
-    {
-        target = a2;
-    }
-    FUN_00dbe150(a1, target, a3, a4, DAT_011b7ae8);
-    m_8c = m_hashTable.LookupHashEntry(a1, -1);
-    m_90 = m_hashTable.LookupHashEntry((int)target, -1);
-}
 }  // namespace fnv_00dbe680
 
 struct SgE150
@@ -1432,15 +1366,4 @@ void OwnerE150::FUN_00dbe150(void* a1, void* a2, void* a3, void* a4, void* a5)
     PairE150 pair = { a1, a2 };
     exports->m_data[exports->m_uiItemCount] = pair;
     exports->m_uiItemCount++;
-}
-
-
-__declspec(noinline) void __thiscall MapB8E150::FUN_00dc9ec0(void* a, int* b)
-{
-    int oldIndex = indices.LookupHashEntry((int)a, -1);
-    int index = AllocateSlot();
-    PairE150* entries = (PairE150*)unk00;
-    entries[index].key = (void*)*b;
-    entries[index].value = (void*)oldIndex;
-    indices.insert(a, index);
 }

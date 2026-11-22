@@ -63,14 +63,6 @@ struct hkBufferedStreamReader
     void FUN_00d2bc10();
     void Destroy();
 };
-// @fnv 0x00d2bc70
-void hkBufferedStreamReader::Destroy()
-{
-    m_pVTable = &DAT_010ce688;
-    m_pObject->removeReference();
-    ((hkBufferedStreamReader*)((char*)this + 0xc))->FUN_00d2bc10();
-    m_pVTable = &DAT_0102e388;
-}
 
 struct FUN_00d2ba80_cls
 {
@@ -461,17 +453,6 @@ struct FUN_00d2bc30_cls
     FUN_00d2bbd0_cls* Init(int);
     FUN_00d2bc30_cls* FUN_00d2bc30(int, int);
 };
-// Sets m_06 to 1, stores a in m_08, sets vtable, calls Init with b, and calls Refresh on m_08.
-// @fnv 0x00d2bc30
-FUN_00d2bc30_cls* FUN_00d2bc30_cls::FUN_00d2bc30(int aiShape, int b)
-{
-    m_06 = 1;
-    m_08 = aiShape;
-    m_pVTable = &DAT_010ce688;
-    ((V_00d2bbd0*)((char*)this + 0xc))->Init(b);
-    ((CC9F10Shape*)m_08)->Refresh();
-    return this;
-}
 
 struct BufferedReaderHeap
 {
@@ -486,26 +467,4 @@ struct BufferedReaderDeletionView : hkBufferedStreamReader
     hkBufferedStreamReader* FUN_00d2bca0(unsigned int);
 };
 
-// Calls Destroy, and if flags has bit 0 set, releases this block via the memory router's heap ReleaseBlock, then returns this.
-// @fnv 0x00d2bca0
-hkBufferedStreamReader* BufferedReaderDeletionView::FUN_00d2bca0(unsigned int flags)
-{
-    Destroy();
-    if (flags & 1)
-    {
-        MemoryManager* router = FUN_00c85750();
-        unsigned short size = static_cast<unsigned short>(m_uiStandInValue);
-        static_cast<BufferedReaderHeap*>(router->m_10)->ReleaseBlock(this, size);
-    }
-    return this;
-}
-
 void __cdecl FUN_00c85660(void* allocator, void* buffer);
-
-// @fnv 0x00d2bc10
-__declspec(noinline) void hkBufferedStreamReader::FUN_00d2bc10()
-{
-    void* buffer = m_pVTable;
-    MemoryManager* memory = FUN_00c85750();
-    FUN_00c85660(memory->m_10, buffer);
-}

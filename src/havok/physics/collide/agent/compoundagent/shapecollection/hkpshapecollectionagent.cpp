@@ -1855,54 +1855,6 @@ struct FUN_00d43880_cls : public hkpShapeCollectionAgent
     void FUN_00d43880(ShapeHolder* pHolder, DWORD a1, DWORD a2, DWORD a3);
 };
 
-// Between profiler records, loops count pairs: pHandler->vtbl14 fills a result for each key, then the pair's object receives it via vtbl10 with a1, a2, a3.
-// @fnv 0x00d43880
-void FUN_00d43880_cls::FUN_00d43880(ShapeHolder* pHolder, DWORD a1, DWORD a2, DWORD a3)
-{
-    ProfBuf* pBuf = (ProfBuf*)TlsGetValue(DAT_0126835c);
-    if (pBuf->m_pCur < pBuf->m_pRecordEnd)
-    {
-        ProfRec* pRec = pBuf->m_pCur;
-        pRec->m_pName = "TtShapeCollection";
-        _ReadWriteBarrier();
-        volatile DWORD tick = (DWORD)__rdtsc();
-        pRec->m_iTick = tick;
-        pBuf->m_pCur = pRec + 1;
-    }
-
-    ShapeKeyHandler* pHandler = (ShapeKeyHandler*)pHolder->m_pSrc->vtbl10();
-    ShapeResult res;
-    res.m_pMotionState = pHolder->m_dw08;
-    int i = this->count - 1;
-    res.m_parent = pHolder;
-    KeyedPointerEntry* apPairs = (KeyedPointerEntry*)this->p2;
-    ShapeKeyBuf keyBuf;
-    if (i >= 0)
-    {
-        do
-        {
-            DWORD key = apPairs->m_key;
-            res.m_ret = pHandler->vtbl14(key, &keyBuf);
-            res.m_key = key;
-            ShapeObject* pObj = (ShapeObject*)apPairs->m_pEntryObject;
-            pObj->vtbl10(&res, a1, a2, a3);
-            apPairs++;
-            i--;
-        } while (i >= 0);
-    }
-
-    pBuf = (ProfBuf*)TlsGetValue(DAT_0126835c);
-    if (pBuf->m_pCur < pBuf->m_pRecordEnd)
-    {
-        ProfRec* pRec = pBuf->m_pCur;
-        pRec->m_pName = "Et";
-        _ReadWriteBarrier();
-        volatile DWORD tick = (DWORD)__rdtsc();
-        pRec->m_iTick = tick;
-        pBuf->m_pCur = pRec + 1;
-    }
-}
-
 extern const char str_010cf300[];
 extern const char str_010c41f8[];
 
@@ -1913,45 +1865,6 @@ __declspec(align(16)) struct hkpShapeBuffer
 
 typedef void(__cdecl* LinearCastFunc)(const hkpCdBody* local_body, const hkpCdBody* bodyB,
                                       const CollisionAgentContext* input, void* a4, void* a5);
-
-// Iterates each shape in bodyA's collection, dispatches the linear-cast agent for enabled shapes against bodyB, and times the work.
-// @fnv 0x00d43b90
-void __cdecl FUN_00d43b90(const hkpCdBody* bodyA, const hkpCdBody* bodyB, const CollisionAgentContext* input, void* a4,
-                          void* a5)
-{
-    hkTimerBegin(str_010cf300);
-
-    hkpShapeCollection* collection = const_cast<hkpShape*>(bodyA->m_pCollisionShape)->GetShapeContainer();
-    hkpCdBody localBody;
-    localBody.m_pMotionState = bodyA->m_pMotionState;
-    localBody.m_parent = bodyA;
-
-    int typeB = bodyB->m_pCollisionShape->m_type;
-    unsigned int key = collection->GetFirstKey();
-    if (key != -1)
-    {
-        do
-        {
-            if (input->m_pCollisionFilter->m_shapeCollectionFilter
-                    .IsCollisionEnabled(*input, *bodyB, *bodyA, *collection, key)
-                    .m_cBooleanValue)
-            {
-                hkpShapeBuffer buffer;
-                const hkpShape* childShape = collection->GetShapeForKey(key, &buffer);
-                localBody.m_pCollisionShape = childShape;
-                localBody.m_uiCollisionShapeKey = key;
-
-                int typeA = childShape->m_type;
-                unsigned char agentType = input->m_pCollisionDispatcher->m_agentTable[typeA][typeB];
-                LinearCastFunc func = (LinearCastFunc)input->m_pCollisionDispatcher->m_agentFuncs[agentType].m_func1;
-                func(&localBody, bodyB, input, a4, a5);
-            }
-            key = collection->GetNextShapeKey(key);
-        } while (key != -1);
-    }
-
-    hkTimerBegin(str_010c41f8);
-}
 
 extern "C" void _ReadWriteBarrier(void);
 

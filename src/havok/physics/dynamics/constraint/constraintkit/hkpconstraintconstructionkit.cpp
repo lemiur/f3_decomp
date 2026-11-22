@@ -47,46 +47,6 @@ struct FUN_00d522b0_cls
     int AddVertexCommand(unsigned char aFlag, float aX, float aY);
 };
 
-// @fnv 0x00d522b0
-int FUN_00d522b0_cls::AddVertexCommand(unsigned char aFlag, float aX, float aY)
-{
-    FUN_00d522b0_Vec* pCmds = &m_04->m_cmds;
-    FUN_00d522b0_Ctx* ctx = (FUN_00d522b0_Ctx*)FUN_00c85750();
-    if (pCmds->m_uiItemCount == (pCmds->m_cap & 0x3fffffff))
-        ResizeAudioStream(ctx->m_10, pCmds, 4);
-    int* piSlot = (int*)pCmds->m_ptr + pCmds->m_uiItemCount;
-    *piSlot = 0x11;
-    *piSlot = 0x11;
-    ++pCmds->m_uiItemCount;
-
-    int flag = aFlag;
-
-    pCmds = &m_04->m_cmds;
-    ctx = (FUN_00d522b0_Ctx*)FUN_00c85750();
-    if (pCmds->m_uiItemCount == (pCmds->m_cap & 0x3fffffff))
-        ResizeAudioStream(ctx->m_10, pCmds, 4);
-    int* piFlagSlot = (int*)pCmds->m_ptr + pCmds->m_uiItemCount;
-    *piFlagSlot = flag;
-    *piFlagSlot = flag;
-    ++pCmds->m_uiItemCount;
-
-    __m128 v = _mm_setr_ps(aX, aY, 0.0f, 0.0f);
-    int iOldVertexCount = m_04->m_verts.m_uiItemCount;
-
-    FUN_00d522b0_Vec* vert = &m_04->m_verts;
-    ctx = (FUN_00d522b0_Ctx*)FUN_00c85750();
-    if (vert->m_uiItemCount == (vert->m_cap & 0x3fffffff))
-        ResizeAudioStream(ctx->m_10, vert, 16);
-    _mm_store_ps((float*)((char*)vert->m_ptr + (vert->m_uiItemCount << 4)), v);
-    ++vert->m_uiItemCount;
-
-    FUN_00d522b0_P* p = m_04;
-    p->m_04 += 0x30;
-    p->m_08 += 1;
-    p->m_0c += 1;
-    return iOldVertexCount;
-}
-
 struct __declspec(align(16)) FUN_00c7f690_cls
 {
     int unk00;
@@ -207,23 +167,6 @@ class hkCommandWriterD
     unsigned int unk;
     hkGeometryBufferD* m_pBuffer;
 };
-
-// Appends a command and a 2D vector parameter to the geometry buffer, updates byte/command/param counts, and returns the parameter index.
-// @fnv 0x00d521b0
-int hkCommandWriterD::FUN_00d521b0(unsigned char ucKind, float fX, float fY)
-{
-    m_pBuffer->m_commands.AddBack(0x10);
-    m_pBuffer->m_commands.AddBack(ucKind);
-    const int iIndex = m_pBuffer->m_params.GetLogicalSize();
-    hkVector4D521 kParam;
-    kParam.set(fX, fY, 0.0f, 0.0f);
-    m_pBuffer->m_params.AddBack(kParam);
-    hkGeometryBufferD* pkBuffer = m_pBuffer;
-    pkBuffer->m_iNumBytes += 0x40;
-    pkBuffer->m_iNumCommands += 1;
-    pkBuffer->m_iNumParams += 1;
-    return iIndex;
-}
 
 #include <math.h>
 inline void FillWords328(int* dest, int n, const int& value)

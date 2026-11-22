@@ -136,43 +136,6 @@ struct S_00db4b50_Sub
     void FUN_004b4ab0(void* p, void* q);
 };
 
-__forceinline void S_rotInv(const __m128* r, const __m128* in, int n, __m128* out)
-{
-    __m128 a0 = r[0], a1 = r[1], a2 = r[2];
-    {
-        __m128 t0 = _mm_unpacklo_ps(a0, a1);
-        __m128 t1 = _mm_unpackhi_ps(a0, a1);
-        a0 = _mm_movelh_ps(t0, a2);
-        a1 = _mm_shuffle_ps(_mm_movehl_ps(a0, t0), a2, 0xd4);
-        a2 = _mm_shuffle_ps(t1, a2, 0xe4);
-    }
-    for (int i = 0; i < n; i++)
-    {
-        __m128 v = in[i];
-        __m128 s = _mm_add_ps(_mm_mul_ps(_mm_shuffle_ps(v, v, 0x55), a1), _mm_mul_ps(_mm_shuffle_ps(v, v, 0), a0));
-        out[i] = _mm_add_ps(s, _mm_mul_ps(_mm_shuffle_ps(v, v, 0xaa), a2));
-    }
-}
-
-// Calls FUN_00cf1710 twice using a's two pointers and b's values, fills out via sub-object calls and S_rotInv, and sets out->unkcc to -a->unk14.
-// @fnv 0x00db4b50
-void FUN_00db4b50(S_00db4b50_A* a, float f, S_00db4b50_Out* out)
-{
-    S_00db4b50_B* b = a->unk40;
-    float t = b->unk08 * f;
-    FUN_00cf1710(a->unk00 + 0x40, b->unk00, t, out);
-    FUN_00cf1710(a->unk04 + 0x40, b->unk00, t, &out->unk40);
-    void* m = &out->unk80;
-    ((S_00db4b50_Sub*)m)->FUN_00cb22f0(out, &out->unk40);
-    ((S_00db4b50_Sub*)&out->unkc0)->FUN_00c7f700(m, &a->unk20);
-    ((S_00db4b50_Sub*)&out->unkd0)->FUN_00c7f640(m, &a->unk30);
-    out->unkcc = -a->unk14;
-    *(__m128*)&out->unk110 = *(__m128*)(a->unk00 + 0x80);
-    S_rotInv((const __m128*)&out->unk00, (const __m128*)&a->unk60, 2, (__m128*)&out->unkf0);
-    ((S_00db4b50_Sub*)&out->unk120)->FUN_00c7f640(m, a->unk04 + 0x80);
-    ((S_00db4b50_Sub*)&out->unke0)->FUN_004b4ab0(out, &a->unk50);
-}
-
 namespace fnv_00db52c0 {
 union __declspec(intrin_type) __declspec(align(16)) __m128
 {
@@ -292,69 +255,7 @@ struct OutArg
     Vec4* p;
 };
 
-static __forceinline void calculate(Vec4& output, const Transform& frame, __m128 r)
-{
-    __m128 x3 = frame.row0.v;
-    __m128 x1 = frame.row1.v;
-    __m128 x5 = frame.row2.v;
-    __m128 x2 = x3;
-    x2 = _mm_unpacklo_ps(x2, x1);
-    x3 = _mm_unpackhi_ps(x3, x1);
-    __m128 x4 = x2;
-    x4 = _mm_movelh_ps(x4, x5);
-    x1 = x4;
-    x1 = _mm_movehl_ps(x1, x2);
-    x1 = _mm_shuffle_ps(x1, x5, 0xd4);
-    x2 = r;
-    x2 = _mm_shuffle_ps(x2, r, 0x55);
-    x2 = _mm_mul_ps(x2, x1);
-    x1 = r;
-    x1 = _mm_shuffle_ps(x1, r, 0);
-    x1 = _mm_mul_ps(x1, x4);
-    x3 = _mm_shuffle_ps(x3, x5, 0xe4);
-    r = _mm_shuffle_ps(r, r, 0xaa);
-    x2 = _mm_add_ps(x2, x1);
-    x3 = _mm_mul_ps(x3, r);
-    x2 = _mm_add_ps(x2, x3);
-    output.v = x2;
-}
 // @fnv 0x00db52c0
-static __declspec(noinline) void FUN_00db52c0(Shape* obj, const Transform* mat, const Transform* other, Pair* apPairA,
-                                              Pair* apPairB, OutArg a3, Vec4* apResult)
-{
-    Vec4* out = a3.p;
-    Transform localTransform;
-    Vec4 shapeResult;
-    localTransform.FUN_00cb22f0(mat, other);
-    obj->FUN_00daad40(apPairA, apPairB, &localTransform, &shapeResult);
-
-    __m128 v = shapeResult.v;
-    __m128 p = _mm_mul_ps(_mm_shuffle_ps(v, v, 0x55), mat->row1.v);
-    p = _mm_add_ps(p, _mm_mul_ps(_mm_shuffle_ps(v, v, 0), mat->row0.v));
-    p = _mm_add_ps(p, _mm_mul_ps(_mm_shuffle_ps(v, v, 0xaa), mat->row2.v));
-    out->v = p;
-
-    __m128 q;
-    if (obj->unk00 == 1)
-        q = obj->vector20.v;
-    else if (obj->unk04 == 1)
-    {
-        q = _mm_shuffle_ps(v, v, 0xff);
-        q = _mm_shuffle_ps(q, q, 0);
-        q = _mm_mul_ps(q, v);
-        q = _mm_add_ps(q, obj->vectora0.v);
-    }
-    else
-        q = obj->vector130.v;
-
-    double distance = shapeResult.w;
-    __m128 w = _mm_shuffle_ps(v, v, 0xff);
-    __m128 w2 = _mm_shuffle_ps(w, w, 0);
-    __m128 r = _mm_sub_ps(q, _mm_mul_ps(w2, v));
-    r = _mm_sub_ps(r, localTransform.translation.v);
-    calculate(*apResult, localTransform, r);
-    out->w = (distance - apPairA->radius) - apPairB->radius;
-}
 extern Shape* volatile inputObj;
 extern const Transform* volatile inputMat;
 extern const Transform* volatile inputOther;
@@ -362,12 +263,6 @@ extern Pair* volatile inputPair1;
 extern Pair* volatile inputPair2;
 extern Vec4* volatile inputOut1;
 extern Vec4* volatile inputOut2;
-void emit_function()
-{
-    PairArg p1 = {inputPair1}, p2 = {inputPair2};
-    OutArg o1 = {inputOut1}, o2 = {inputOut2};
-    FUN_00db52c0(inputObj, inputMat, inputOther, p1.p, p2.p, o1, o2.p);
-}
 }  // namespace fnv_00db52c0
 
 extern const double DAT_010c9300;

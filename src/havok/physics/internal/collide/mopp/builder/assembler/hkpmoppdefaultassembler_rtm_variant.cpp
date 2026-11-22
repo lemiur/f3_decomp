@@ -254,16 +254,6 @@ template <class T> inline T S_00e07040_Max(T a, T b)
 {
     return a > b ? a : b;
 }
-int __stdcall FUN_00e07040(S_00e07040_A* a, S_00e07040_B* b)
-{
-    int n = b->unk08 - 8;
-    if (n <= 0)
-        n = 0;
-    int r = a->unk24 - n;
-    if (r > a->unk24)
-        r = a->unk24;
-    return r;
-}
 struct E07510Input
 {
     int unk00;

@@ -121,17 +121,6 @@ struct FUN_00dd5eb0_cls
     __m128 unk20;
     float FUN_00dd5eb0(__m128* a);
 };
-// @fnv 0x00dd5eb0
-float FUN_00dd5eb0_cls::FUN_00dd5eb0(__m128* a)
-{
-    float d = m_18->v0C(a);
-    __m128 m = _mm_mul_ps(*a, unk20);
-    __m128 sum = _mm_add_ss(_mm_shuffle_ps(m, m, 0xaa), _mm_add_ss(_mm_shuffle_ps(m, m, 0x55), m));
-    float dot;
-    _mm_store_ss(&dot, sum);
-    d += dot;
-    return d;
-}
 
 struct Sub_dd5f10
 {
@@ -165,14 +154,6 @@ struct Own_dd5f10
     __m128 m_trans;
     void __thiscall FUN_00dd5f10(float* a, float* b);
 };
-// @fnv 0x00dd5f10
-void __thiscall Own_dd5f10::FUN_00dd5f10(float* a, float* b)
-{
-    Sub_dd5f10* s = m_sub;
-    s->v38(a, b);
-    __m128* pb = (__m128*)b;
-    *pb = _mm_add_ps(m_trans, *pb);
-}
 
 struct __declspec(align(16)) hkVector4DD60
 {
@@ -360,40 +341,3 @@ struct Dummy
 
     void FUN_00dd61b0(const MyVec* points, const Context2* context, int value);
 };
-
-// @fnv 0x00dd61b0
-void Dummy::FUN_00dd61b0(const MyVec* points, const Context2* context, int value)
-{
-    __m128 p1 = m_vTranslation.quad;
-    __m128 s = _mm_sub_ps(points[0].quad, p1);
-
-    MyVec localBody[3];
-    memcpy(localBody, points, 48);
-
-    const void* motion = context->m_localBody;
-
-    localBody[0].quad = s;
-    __m128 t = _mm_sub_ps(points[1].quad, p1);
-
-    MyTransform c;
-    localBody[1].quad = t;
-
-    c.col0.quad = _mm_setzero_ps();
-    c.col0.x = 1.0f;
-    c.col1.quad = _mm_setzero_ps();
-    c.col1.y = 1.0f;
-    c.col2.quad = _mm_setzero_ps();
-    c.col3.quad = p1;
-    c.col2.z = 1.0f;
-
-    LocalCdBody r;
-    r.FUN_00cb2240(motion, &c);
-
-    Context2 trans;
-    trans.m_localBody = &r;
-    trans.m_parentContext = context;
-    trans.m_pContainedShape = m_pContainedShape;
-    trans.m_zero = 0;
-
-    m_pContainedShape->v24(localBody, &trans, value);
-}

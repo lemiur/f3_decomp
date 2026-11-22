@@ -231,14 +231,6 @@ static __declspec(noinline) char* AllocatePoolChunk(CFE820Pool* pool)
     return block;
 }
 
-// Caller so the file-static helper is emitted with its register calling convention.
-char* CFE820Allocate(CFE820Pool* pool)
-{
-    char* a = AllocatePoolChunk(pool);
-    char* b = AllocatePoolChunk(pool);
-    return a < b ? a : b;
-}
-
 // FUN_00cfeba0 - pick a per-shape handler out of a table and run it.
 //
 // The shape object carries a type byte and an index byte.  Depending on the
@@ -323,50 +315,6 @@ struct __declspec(align(16)) FUN_00cfeba0_Node
 };
 
 void* __cdecl FUN_00cfe1d0(void* h, void* a, void* b, unsigned int n, void* c);
-
-// @fnv 0x00cfeba0
-void __cdecl FUN_00cfeba0(FUN_00cfeba0_Obj* self, void** apCallbackTable, void* a3)
-{
-    unsigned char flag;
-    void* p = 0;
-    FUN_00cfeba0_Result results[8];
-    FUN_00cfeba0_Node elems[8];
-    int type = self->m_type;
-    void* h1 = self->m_p10;
-    void* h2 = self->m_p14;
-
-    for (;;)
-    {
-        switch (type - 2)
-        {
-        case 0:
-        case 4:
-            p = (char*)self + 0x20;
-            break;
-        case 2:
-            p = (char*)self + 0x30;
-            break;
-        case 8:
-        case 10:
-        case 12:
-            h1 = FUN_00cfe1d0(h1, &results[0], &elems[0], 4, &flag);
-            h2 = FUN_00cfe1d0(h2, &results[4], &elems[4], 4, &flag);
-            type = (unsigned int)((unsigned char)type) & (unsigned int)0xf7;
-            continue;
-        default:
-            return;
-        }
-
-        {
-            FUN_00cfeba0_Fn fn = *(FUN_00cfeba0_Fn*)((char*)(*apCallbackTable) + 0x16c8 + self->m_uiEdgeIndex * 80);
-            if (fn)
-            {
-                fn(self, p, h1, h2, apCallbackTable, (void*)self->unk08, a3);
-            }
-        }
-        return;
-    }
-}
 
 namespace fnv_00cfeca0 {
 extern "C" void _ReadWriteBarrier();
@@ -1475,59 +1423,6 @@ struct CollisionAgentEntry
     int unk1c;
     __m128 m_vSeparatingNormal;
 };
-// Allocates a CollisionAgentEntry from pool, links nodeA/nodeB, builds AgentInput, and calls the quality-level create function to initialize the agent.
-// @fnv 0x00cfe8a0
-CollisionAgentEntry* __cdecl FUN_00cfe8a0(CFE820Pool* pool, CollidableNode* nodeA, CollidableBody* bodyA,
-                                          CollidableNode* nodeB, CollidableBody* bodyB, unsigned char flags,
-                                          int qualityType, Dispatcher* dispatcher, void* island)
-{
-
-    char* initialTable = dispatcher->m_tableBase;
-    char* pAlloc = AllocatePoolChunk(pool);
-    CollisionAgentEntry* entry = (CollisionAgentEntry*)pAlloc;
-    entry->m_nodeA = nodeA;
-    entry->m_pCurrentSimulationIsland = island;
-    entry->m_nodeB = nodeB;
-    entry->m_agentIndexA = (unsigned short)nodeA->m_ppLinks.m_iElementCount;
-    entry->m_agentIndexB = (unsigned short)nodeB->m_ppLinks.m_iElementCount;
-    LinkEntry* linkA = nodeA->m_ppLinks.AddBack();
-    LinkEntry* linkB = nodeB->m_ppLinks.AddBack();
-    {
-        AgentInput input;
-        linkA->m_pIntegerData = entry;
-        linkB->m_pIntegerData = entry;
-        linkA->m_pKey = nodeB;
-        linkB->m_pKey = nodeA;
-        input.m_pBodyA = bodyA;
-        input.m_pBodyB = bodyB;
-        input.m_pContactManager = entry->m_pCurrentSimulationIsland;
-        input.m_pRayCastInput = dispatcher;
-        input.m_kTransform.FUN_00cb22f0(*bodyA->m_kMotionTransform, *bodyB->m_kMotionTransform);
-        char* tableBase = dispatcher->m_tableBase;
-        char agentType = tableBase[0x1bb0 + nodeA->m_type * 10 + nodeB->m_type];
-        entry->m_ucNnTrackType = agentType;
-        dispatcher->m_currentAgentEntry = dispatcher->m_tableBase + 0x1c20 + ((int)(signed char)agentType << 6);
-        QualityEntry* quality = (QualityEntry*)(initialTable + 0x16b0 + qualityType * 80);
-        entry->m_iAutoRemoveLevel = (unsigned char)qualityType;
-        void* subEntry;
-        if (quality->m_flag28 != 0)
-        {
-            entry->m_flags = flags | 4;
-            entry->m_fTimeOfImpact = -1.0f;
-            entry->m_vSeparatingNormal = _mm_setzero_ps();
-            subEntry = (char*)entry + 0x30;
-        }
-        else
-        {
-            entry->m_flags = flags | 2;
-            subEntry = (char*)entry + 0x20;
-        }
-        ((QualityEntry*)(initialTable + 0x16b0 + (unsigned char)qualityType * 80))
-            ->m_pCreateFunc(&input, entry, subEntry);
-    }
-    entry->m_iElementCount = 0x80;
-    return entry;
-}
 
 __inline __m128 quadZero()
 {

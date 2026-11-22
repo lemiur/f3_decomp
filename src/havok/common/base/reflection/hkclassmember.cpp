@@ -67,11 +67,6 @@ typedef bool (__fastcall *FT)(hkClassMember::Type);
 volatile FT kp_d868b0 = &FUN_00d868b0;
 
 
-void dummy(hkClassMember::Type x)
-{
-    FUN_00d868b0(x);
-}
-
 struct TestClass : public hkClassMember
 {
     const hkClass* FUN_00d86910() const;
@@ -125,31 +120,6 @@ struct FUN_00d86bc0_Obj
     unsigned char unk0C;
     void FUN_00d86bc0(int a, int b);
 };
-
-// @fnv 0x00dc1bf0
-unsigned int __stdcall FUN_00dc1bf0(int aiArg, int pMember, int pSource, int aiUnused)
-{
-    FUN_00d86bc0_Obj* member = (FUN_00d86bc0_Obj*)pMember;
-    unsigned int type = member->unk0C;
-
-    switch (type)
-    {
-    case 0x18:
-        if (member->unk08 != 0)
-        {
-            int result = ((FUN_00dba990_Obj*)pSource)->FUN_00dba990();
-            member->FUN_00d86bc0(aiArg, result);
-        }
-        return 0;
-    case 0x1f:
-        if (member->unk08 != 0)
-        {
-            member->FUN_00d86bc0(aiArg, ((FUN_00dba990_Obj*)pSource)->FUN_00dba990());
-        }
-        return 0;
-    }
-    return 1;
-}
 
 struct NativeTypePropertyD86A
 {
@@ -241,19 +211,6 @@ struct TypeNameOutput
     void FUN_00d61c10(const char*);
 };
 extern void __cdecl FUN_00d61d00(TypeNameOutput*, const char*, const char*, const char*);
-// Writes the selected type name to output, calling FUN_00d61d00 with that name and detail when detail is non-null.
-// @fnv 0x00d868e0
-static __declspec(noinline) void FUN_00d868e0(TypeNameOutput* output, const char* detail, int type)
-{
-    if (!detail)
-        output->FUN_00d61c10(DAT_011b6ab4[type].name);
-    else
-        FUN_00d61d00(output, str_010d3a74, DAT_011b6ab4[type].name, detail);
-}
-void formatTypeName(TypeNameOutput* output, const char* detail, int type)
-{
-    FUN_00d868e0(output, detail, type);
-}
 
 class OwnerD869
 {

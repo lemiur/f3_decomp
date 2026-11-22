@@ -669,18 +669,6 @@ struct SomeClass : public hkpPoweredChainMapper
     void SetLinkVector(int chainIndex, const __m128& vec);
 };
 
-// Writes vec into the runtime vector slot of every target belonging to the link at chainIndex.
-// @fnv 0x00e3a4d0
-void SomeClass::SetLinkVector(int chainIndex, const __m128& vec)
-{
-    hkpPoweredChainMapperLinkInfo& linkInfo = m_ppLinks.m_data[chainIndex];
-    for (int i = 0; i < linkInfo.m_iLinkIndex; ++i)
-    {
-        hkpPoweredChainMapperTarget& target = m_kTargets.m_data[linkInfo.m_iChainIndex + i];
-        target.m_pChainInstance->m_pRuntime[target.m_targetIndex].m_vVectorData = vec;
-    }
-}
-
 class hkMemoryAllocatorE3A3
 {
   public:
@@ -818,14 +806,6 @@ class hkpConstraintChainMapperE3A3 : public hkReferencedObjectE3A3
     virtual ~hkpConstraintChainMapperE3A3() throw();
 };
 
-// Iterates over m_entries and calls removeReference on each m_pHavokConstraint.
-// @fnv 0x00e3a3d0
-hkpConstraintChainMapperE3A3::~hkpConstraintChainMapperE3A3() throw()
-{
-    const int iEntryIndex = m_entries.m_iElementCount;
-    for (int i = 0; i < iEntryIndex; i++)
-        m_entries[i].m_pHavokConstraint->removeReference();
-}
 }
 
 class hkMemoryAllocatorE3AD

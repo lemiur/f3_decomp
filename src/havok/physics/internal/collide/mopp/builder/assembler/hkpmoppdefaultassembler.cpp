@@ -390,13 +390,6 @@ struct E06C20Object
     int FUN_00e06c20(void* data);
 };
 
-// @fnv 0x00e06c20
-int E06C20Object::FUN_00e06c20(void* data)
-{
-    m_pStreamWriter->FUN_00e069a0(0x70, data);
-    return 5;
-}
-
 namespace fnv_00e06db0 {
 struct Node
 {
@@ -632,79 +625,6 @@ struct TreeOptimizer
     int FUN_00e07ca0(Node*, void*, State*, MergeInfo*);
     int OptimizeTree(Node*, void*, State*);
 };
-// Recursively optimizes a node tree, retrying with a reduced threshold, merging child results and returning a combined score or -1.
-// @fnv 0x00e08040
-int TreeOptimizer::OptimizeTree(Node* node, void* context, State* state)
-{
-    if (node->complete)
-        return 3;
-    if (state->depth <= threshold && state->depth % period == 0 && !state->retrying)
-    {
-        state->retrying = true;
-        int result = -1;
-        int savedThreshold = threshold;
-        while (!node->complete)
-        {
-            int previousCount = tracker->count;
-            State stateCopy = *state;
-            result = OptimizeTree(node, context, &stateCopy);
-            if (count > limit)
-                break;
-            if (previousCount == tracker->count)
-            {
-                if (threshold < 0)
-                    break;
-                threshold -= period;
-            }
-        }
-        threshold = savedThreshold;
-        state->retrying = false;
-        return result;
-    }
-    if (node->leaf)
-    {
-        FUN_00e06b20(node);
-        if (FUN_00e06af0(node, state))
-            return FUN_00e07c50(node, context, state);
-    }
-    else
-    {
-        MergeInfo info;
-        info.changed = false;
-        info.index = -1;
-        FUN_00e07510(node, context, state, &info);
-        int score = -1;
-        {
-
-            Node* rightChild = node->right;
-            if (rightChild)
-            {
-                State stateCopy;
-                stateCopy.FUN_00e095d0(state, rightChild, &config30);
-                score = OptimizeTree(rightChild, state, &stateCopy);
-                if (score >= 0)
-                    FUN_00e06aa0(rightChild);
-            }
-            Node* leftChild = node->left;
-            if (leftChild)
-            {
-                State stateCopy;
-                stateCopy.FUN_00e095d0(state, leftChild, &config30);
-                int leftResult = OptimizeTree(leftChild, state, &stateCopy);
-                if (leftResult >= 0)
-                {
-                    FUN_00e06aa0(leftChild);
-                    if (score >= 0 && FUN_00e06af0(node, state))
-                    {
-                        ++count;
-                        return FUN_00e07ca0(node, context, state, &info) + leftResult + score;
-                    }
-                }
-            }
-        }
-    }
-    return -1;
-}
 }  // namespace fnv_00e08040
 
 struct Allocator
@@ -729,17 +649,6 @@ struct FUN_00e09640_class
     void __thiscall DestroyAudioBuffer();
     FUN_00e09640_class* __thiscall FUN_00e09640(int flags);
 };
-// @fnv 0x00e09640
-FUN_00e09640_class* __thiscall FUN_00e09640_class::FUN_00e09640(int flags)
-{
-    DestroyAudioBuffer();
-    if (flags & 1)
-    {
-        Router* router = FUN_00c85750();
-        router->allocator->ReleaseBlock(this, unk04);
-    }
-    return this;
-}
 
 struct FUN_00e06800_cls
 {
@@ -1878,23 +1787,6 @@ struct FUN_00e09450_cls
     void DestroyAudioBuffer();
 };
 
-// @fnv 0x00e09450
-void FUN_00e09450_cls::DestroyAudioBuffer()
-{
-    m_vptr00 = (int)&DAT_010ea5dc;
-    AudioHolder* pAudioHolder = (AudioHolder*)FUN_00c85750();
-    AudioAllocator* pAudioAllocator = pAudioHolder->m_pAllocator;
-    m_iArrayLength = 0;
-    unsigned int uCapacityBits = m_uCapBits;
-    if ((uCapacityBits & 0x80000000u) == 0)
-    {
-        pAudioAllocator->FreeArray(m_pData, (uCapacityBits & 0x3fffffffu) * 32);
-    }
-    m_pData = 0;
-    m_uCapBits = 0x80000000u;
-    m_vptr00 = (int)&DAT_0102e388;
-}
-
 int __cdecl FUN_00cbfe20(float v);
 
 struct FUN_00e094a0_floatpair
@@ -2611,17 +2503,6 @@ struct S_00e07d60
     void FUN_00e07d60(const S_00e07d60_Info& info);
 };
 
-// @fnv 0x00e07d60
-void S_00e07d60::FUN_00e07d60(const S_00e07d60_Info& info)
-{
-    x = info.x;
-    y = info.y;
-    z = info.z;
-    v = info.v;
-    i = info.i;
-    b = info.b;
-}
-
 namespace e083 {
 struct Alloc;
 struct Router
@@ -2668,11 +2549,6 @@ static __declspec(noinline) void FUN_00e08320(e083::PairArray* srcp, e083::PairA
         out->b = src->m_data[i].b;
         out->a = src->m_data[i].a + delta;
     }
-}
-
-void e08320_caller(e083::SrcW sw, e083::PairArray* dst, int delta)
-{
-    FUN_00e08320(sw.p, dst, delta);
 }
 
 struct BvAllocator
@@ -3116,112 +2992,6 @@ struct P154Tree
     }
     int FUN_00e084f0(P154Node*, P154Region*, P154Region*, P154Array*);
 };
-// Recursively sizes node's children via writer->count with optional metric costs, collapses the costlier child while size reaches limit minus base, returns size.
-// @fnv 0x00e084f0
-int P154Tree::FUN_00e084f0(P154Node* node, P154Region* parent, P154Region* region, P154Array* output)
-{
-    int size;
-    if (settings->metric)
-        region->context = parent->context;
-    if (node->leaf)
-    {
-        if (settings->metric)
-            region->context = *node->values;
-        int start = writer->count;
-        FUN_00e07c50(node, parent, region);
-        int leafSize = writer->count - start;
-        output->append(*node->values);
-        int value = *node->values;
-        int result = leafSize;
-        if (settings->metric)
-            result += settings->metric->cost(&value, 1);
-        return result;
-    }
-    else
-    {
-        P154Result info;
-        info.valid = false;
-        info.value = -1;
-        FUN_00e07510(node, parent, region, &info);
-        region->context = parent->context;
-        P154Array lowValues;
-        P154Node* low = node->low;
-        P154Region child = *region;
-        child.CopyOffsets(low);
-        child.BuildScaledRanges(low, reinterpret_cast<float*>(&scale30));
-        child.depth = region->depth + 1;
-        child.leaf = false;
-        child.FUN_00e09540();
-        int lowSize = writer->count;
-        FUN_00e084f0(low, region, &child, &lowValues);
-        lowSize = writer->count - lowSize;
-        int lowCost = getCost(lowValues, lowSize);
-        P154Array highValues;
-        P154Node* high = node->high;
-        child = *region;
-        child.CopyOffsets(high);
-        child.BuildScaledRanges(high, reinterpret_cast<float*>(&scale30));
-        child.depth = region->depth + 1;
-        child.leaf = false;
-        child.FUN_00e09540();
-        int highSize = writer->count;
-        FUN_00e084f0(high, region, &child, &highValues);
-        highSize = writer->count - highSize;
-        int highCost = getCost(highValues, highSize);
-        int splitSize = writer->count;
-        FUN_00e07ca0(node, parent, region, &info);
-        splitSize = writer->count - splitSize;
-        P154Array merged;
-        merged.insert(lowValues.data, 0, lowValues.count);
-        merged.insert(highValues.data, merged.count, highValues.count);
-        size = highSize + splitSize + lowSize;
-        if (settings->metric && merged.count)
-            size += settings->metric->cost(merged.data, merged.count);
-        bool highRemoved = false, lowRemoved = false;
-        while (size >= settings->limit - settings->base)
-        {
-            int index = settings->pairs.count;
-            P154Pair& pair = settings->pairs.grow();
-            P154Node* selected;
-            int oldSize, cost;
-            if (highCost > lowCost)
-            {
-                selected = node->high;
-                cost = highCost;
-                oldSize = highSize;
-                highCost = 5;
-                highRemoved = true;
-                size = lowRemoved ? splitSize + 10 : splitSize + lowCost + 5;
-            }
-            else
-            {
-                selected = node->low;
-                cost = lowCost;
-                oldSize = lowSize;
-                lowCost = 5;
-                lowRemoved = true;
-                size = highRemoved ? splitSize + 10 : splitSize + highCost + 5;
-            }
-            pair.second = settings->base + cost + 5;
-            selected->index = index;
-            writer->count += 5 - oldSize;
-            P154Node* lowChild = node->low;
-            if (lowRemoved)
-                lowChild->offset += 5 - oldSize;
-            node->high->offset += 5 - oldSize;
-            node->offset += 5 - oldSize;
-        }
-        output->count = 0;
-        if (!lowRemoved)
-            output->insert(lowValues.data, 0, lowValues.count);
-        if (!highRemoved)
-            output->insert(highValues.data, output->count, highValues.count);
-        merged.clear();
-        highValues.clear();
-        lowValues.clear();
-    }
-    return size;
-}
 
 namespace fnv_00e08240 {
 struct PairEntry
@@ -3317,67 +3087,6 @@ struct FUN_00e08240_cls
     int FUN_00e08240(Node* a1, int a2, int a3);
 };
 
-// Recursively visits a1's m_74 and m_70 children, setting m_24/m_28 and, when m_04 is set, appending a pair entry to the context list; returns an index.
-// @fnv 0x00e08240
-int FUN_00e08240_cls::FUN_00e08240(Node* apNode, int a2, int aiIndex)
-{
-    int* pIndex = &aiIndex;
-    int idx = aiIndex;
-    volatile int* pv = &aiIndex;
-    *pv = idx;
-    int hi = apNode->m_40;
-    apNode->m_38 = 0;
-    if (hi >= 0)
-    {
-        idx = 0;
-    }
-    else
-    {
-        hi = a2;
-    }
-    if (this->m_14->m_1c != 0)
-    {
-        apNode->m_24 = idx;
-    }
-    if (apNode->m_04 != 0)
-    {
-        if (this->m_14->m_1c != 0)
-        {
-            SlotPair* slot = apNode->m_60;
-            slot->m_10 = slot->m_00;
-            PairList* list = &this->m_14->m_kNode;
-            AllocHolder* holder = FUN_00c85750();
-            if (list->m_uiItemCount == (int)(list->m_capBits & 0x3fffffff))
-            {
-                ResizeAudioStream(holder->m_pAllocator, list, 8);
-            }
-            PairEntry* e = &list->m_data[list->m_uiItemCount];
-            list->m_uiItemCount++;
-            hi = (hi * 256) | idx;
-            e->m_iSecondInteger = (void*)hi;
-            e->m_pHeadNode = (void*)apNode->m_60->m_00;
-            apNode->m_60->m_00 = idx;
-            idx++;
-        }
-    }
-    else
-    {
-        Node* f = apNode->m_74;
-        int r = this->FUN_00e08240(f, hi, idx);
-        Node* g = apNode->m_70;
-        idx = this->FUN_00e08240(g, hi, r);
-    }
-    if (this->m_14->m_1c != 0)
-    {
-        apNode->m_24 = 0;
-        apNode->m_28 = idx;
-    }
-    if (apNode->m_40 < 0)
-    {
-        return idx;
-    }
-    return aiIndex;
-}
 }  // namespace fnv_00e08240
 
 namespace fnv_00e08470 {
@@ -3458,38 +3167,6 @@ struct S_00e08470_Class
     int __thiscall FUN_00e08470(S_00e08470_Context*);
 };
 
-// Calls FUN_00e06c20 with context->unk40, records the new pointer and unk40 in a vector entry, and returns its difference from the old pointer.
-// @fnv 0x00e08470
-int __thiscall S_00e08470_Class::FUN_00e08470(S_00e08470_Context* context)
-{
-    void* saved = this->unk10->unk0c;
-
-    this->FUN_00e06c20(context->unk40);
-
-    void* current = this->unk10->unk0c;
-
-    context->unk5c = current;
-    context->unk38 = 1;
-
-    S_00e08470_Vector* vector = (S_00e08470_Vector*)((char*)this->unk10 + 0x14);
-
-    S_00e08470_Holder* holder = FUN_00c85750();
-
-    if (vector->unk04 == (vector->unk08 & 0x3fffffff))
-    {
-        ResizeAudioStream(holder->unk10, vector, 8);
-    }
-
-    S_00e08470_Entry* entry = vector->unk00 + vector->unk04;
-    ++vector->unk04;
-
-    entry->unk04 = context->unk40;
-    entry->unk00 = current;
-
-    this->unk10->FUN_00e06480();
-
-    return (unsigned int)current - (unsigned int)saved;
-}
 }  // namespace fnv_00e08470
 
 struct CodeCopySource : FUN_00e065f0

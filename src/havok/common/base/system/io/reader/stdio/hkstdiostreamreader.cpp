@@ -159,13 +159,6 @@ struct FUN_00d2c7e0_class : Prefix
     FUN_00cb0a70_Class sub;
     FUN_00d2c7e0_class(int value);
 };
-// Sets the vtable pointer and forwards value to the sub-object's FUN_00cb0a70.
-// @fnv 0x00d2c7e0
-FUN_00d2c7e0_class::FUN_00d2c7e0_class(int value)
-{
-    vtable = (int)&DAT_010cc2fc;
-    sub.FUN_00cb0a70(value);
-}
 
 struct FUN_00d2bd00_cls
 {
@@ -235,17 +228,6 @@ struct CpuObject
     void DestroyFileHandle();
     CpuObject* FUN_00d2be00(unsigned int flags);
 };
-// @fnv 0x00d2be00
-CpuObject* CpuObject::FUN_00d2be00(unsigned int flags)
-{
-    DestroyFileHandle();
-    if (flags & 1)
-    {
-        CpuAllocatorHolder* holder = FUN_00c85750();
-        holder->allocator->Invoke(this, size);
-    }
-    return this;
-}
 
 // @f3twin 0x00a85100 of 0x0092e890
 void __stdcall F3_FUN_00a85100(unsigned char* output)

@@ -9,12 +9,6 @@ struct FUN_00cb8a90_class
     void __thiscall SetConstraintFlag(int cl);
 };
 
-// @fnv 0x00cb8a90
-void __thiscall FUN_00cb8a90_class::SetConstraintFlag(int aiBitIndex)
-{
-    ((char*)this)[0xd6] = (char)(1 << aiBitIndex);
-}
-
 extern "C" void* __cdecl FUN_00d21a60(void* self, int a, int b);
 
 struct FUN_00cb8af0_cls
@@ -47,11 +41,6 @@ struct FUN_00cb8a70_class
 {
     void __thiscall FUN_00cb8a70(float v);
 };
-// @fnv 0x00cb8a70
-void __thiscall FUN_00cb8a70_class::FUN_00cb8a70(float v)
-{
-    *(float*)((char*)this + 0xd8) = v;
-}
 
 struct RefObj
 {
@@ -62,16 +51,6 @@ struct FUN_00cb8ac0_class
 {
     void __thiscall SetReferencedObject(RefObj* obj);
 };
-// @fnv 0x00cb8ac0
-void __thiscall FUN_00cb8ac0_class::SetReferencedObject(RefObj* pObject)
-{
-    if (pObject)
-        pObject->RetainReference();
-    RefObj* pOldObject = *(RefObj**)((char*)this + 0xb0);
-    if (pOldObject)
-        pOldObject->removeReference();
-    *(RefObj**)((char*)this + 0xb0) = pObject;
-}
 
 struct DDCC60World
 {
@@ -131,15 +110,6 @@ struct FUN_00cb8b40_class
     int m_0bc;
     void __thiscall DestroyWorldReference();
 };
-// @fnv 0x00cb8b40
-void __thiscall FUN_00cb8b40_class::DestroyWorldReference()
-{
-    DDCC60World* p = (DDCC60World*)*((int*)this + 44);
-    *((int*)this) = (int)&DAT_010c89e4;
-    if (p)
-        p->removeReference();
-    *((int*)this) = (int)&DAT_0102e388;
-}
 
 // Stores b at self+0xa2 and its negation at self+0xb6; if a is non-null, zeroes four floats at a->0x30->0x1c.
 // @f3 0x0092b6d0 (community match, verified in this file)
@@ -173,12 +143,6 @@ class FUN_00cb8a80_cls
     float FUN_00cb8a80();
 };
 
-// @fnv 0x00cb8a80
-float FUN_00cb8a80_cls::FUN_00cb8a80()
-{
-    return m_fD8;
-}
-
 struct FUN_00cb8ab0_class
 {
     char pad0[0xD6];
@@ -187,12 +151,6 @@ struct FUN_00cb8ab0_class
 
     unsigned char __thiscall FUN_00cb8ab0();
 };
-
-// @fnv 0x00cb8ab0
-unsigned char __thiscall FUN_00cb8ab0_class::FUN_00cb8ab0()
-{
-    return m_byteD6 >> 1;
-}
 
 // @fnv 0x00cb8b30
 int __cdecl FUN_00cb8b30()
@@ -263,18 +221,6 @@ struct FnvCpu_FUN_00cb9220_CpuObject
     void DestroyWorldReference();
     FnvCpu_FUN_00cb9220_CpuObject* Destroy(unsigned int flags);
 };
-// Calls DestroyWorldReference, then if flags has bit 0 set, invokes the allocator from FUN_00c85750 on this with size, and returns this.
-// @fnv 0x00cb9220
-FnvCpu_FUN_00cb9220_CpuObject* FnvCpu_FUN_00cb9220_CpuObject::Destroy(unsigned int flags)
-{
-    DestroyWorldReference();
-    if (flags & 1)
-    {
-        FnvCpu_FUN_00cb9220_CpuAllocatorHolder* pAllocatorHolder = FUN_00c85750();
-        pAllocatorHolder->allocator->Invoke(this, size);
-    }
-    return this;
-}
 
 struct FUN_00b5aea0_self
 {
@@ -443,28 +389,6 @@ class FUN_00d4fe80 : public hkpConstraintDataD4FE
     FUN_00d4ff60 m_kBridgeAtoms;
 };
 
-// @fnv 0x00d4fe80
-FUN_00d4fe80::FUN_00d4fe80() throw()
-{
-    m_kBridgeAtoms.m_kBodyALocalFrame.setIdentity();
-    m_kBridgeAtoms.m_kBodyBLocalFrame.setIdentity();
-    m_kBridgeAtoms.m_limitEnabled = 0;
-    m_kBridgeAtoms.m_fMinAngle = -3.40282e+38f;
-    m_kBridgeAtoms.m_frictionEnabled = 0;
-    m_kBridgeAtoms.m_fMaxAngle = 3.40282e+38f;
-    m_kBridgeAtoms.m_fMaxFrictionTorque = 0.0f;
-    m_kBridgeAtoms.m_stabilizationEnabled = 0;
-    m_kBridgeAtoms.m_fTargetAngle = 0.0f;
-    m_kBridgeAtoms.m_pMotor = 0ul;
-    m_kBridgeAtoms.m_motorEnabled = 0;
-    m_kBridgeAtoms.m_ang2dEnabled = 0;
-    m_kBridgeAtoms.m_iInitializedOffset = 0x40;
-    m_kBridgeAtoms.m_iPreviousTargetAngleOffset = 0x44;
-    m_kBridgeAtoms.m_ang2dFreeAxis = 3;
-    m_kBridgeAtoms.m_angAxisB = 1;
-    m_kBridgeAtoms.m_angAxisC = 2;
-}
-
 #include <math.h>
 extern "C"
 {
@@ -517,100 +441,11 @@ struct hkpLimitedHingeTransforms
     hkTransform m_kBodyBLocalFrame;
 };
 
-static __forceinline hkReal hkFabs(hkReal r)
-{
-    return (hkReal)fabs(r);
-}
-
-static __forceinline void hkNormalize3(hkVector4q& v)
-{
-    __m128 p = _mm_mul_ps(v.m_vComponents, v.m_vComponents);
-    __m128 len2 = _mm_add_ss(_mm_shuffle_ps(p, p, 0x55), p);
-    len2 = _mm_add_ss(_mm_shuffle_ps(p, p, 0xaa), len2);
-    __m128 e = _mm_rsqrt_ss(len2);
-    __m128 r =
-        _mm_mul_ss(_mm_mul_ss(_mm_set_ss(0.5f), e), _mm_sub_ss(_mm_set_ss(3.0f), _mm_mul_ss(_mm_mul_ss(len2, e), e)));
-    r = _mm_andnot_ps(_mm_cmpeq_ss(len2, _mm_set_ss(0.0f)), r);
-    v.m_vComponents = _mm_mul_ps(_mm_shuffle_ps(r, r, 0), v.m_vComponents);
-}
-
-static __forceinline void hkCalculatePerpendicularVector(const hkVector4q& in, hkVector4q& out)
-{
-    int min = 0;
-    int ok1 = 1;
-    int ok2 = 2;
-
-    hkReal a0 = hkFabs(in(0));
-    hkReal a1 = hkFabs(in(1));
-    hkReal a2 = hkFabs(in(2));
-
-    if (a1 < a0)
-    {
-        ok1 = 0;
-        min = 1;
-        a0 = a1;
-    }
-
-    if (a2 < a0)
-    {
-        ok2 = min;
-        min = 2;
-    }
-
-    out.m_vComponents = _mm_setzero_ps();
-    out(ok1) = in(ok2);
-    out(ok2) = -in(ok1);
-}
-
-static __forceinline void hkSetCross(hkVector4q& out, const hkVector4q& v0, const hkVector4q& v1)
-{
-    __m128 cross0 = _mm_mul_ps(_mm_shuffle_ps(v0.m_vComponents, v0.m_vComponents, 0xc9),
-                               _mm_shuffle_ps(v1.m_vComponents, v1.m_vComponents, 0xd2));
-    __m128 cross1 = _mm_mul_ps(_mm_shuffle_ps(v0.m_vComponents, v0.m_vComponents, 0xd2),
-                               _mm_shuffle_ps(v1.m_vComponents, v1.m_vComponents, 0xc9));
-    out.m_vComponents = _mm_sub_ps(cross0, cross1);
-}
-
 struct hkpLimitedHingeConstraintDataEx : public hkpLimitedHingeConstraintData
 {
     void FUN_00cb8b60(const hkTransform& bodyATransform, const hkTransform& bodyBTransform, const hkVector4& pivot,
                       const hkVector4& axis);
 };
-
-// Builds perpendicular axes from the normalized axis and stores them with the pivot in m_kBridgeAtoms as local frames for body A and body B via their transforms.
-// @fnv 0x00cb8b60
-void hkpLimitedHingeConstraintDataEx::FUN_00cb8b60(const hkTransform& bodyATransform, const hkTransform& bodyBTransform,
-                                                   const hkVector4& pivot, const hkVector4& axis)
-{
-    hkVector4q axisN;
-    axisN.m_vec = axis;
-    hkNormalize3(axisN);
-
-    hkVector4q perpToAxle1;
-    hkCalculatePerpendicularVector(axisN, perpToAxle1);
-    hkNormalize3(perpToAxle1);
-
-    hkVector4q perpToAxle2;
-    hkSetCross(perpToAxle2, axisN, perpToAxle1);
-
-    hkpLimitedHingeTransforms& t = *reinterpret_cast<hkpLimitedHingeTransforms*>(&m_kBridgeAtoms);
-
-    static_cast<hkVector4Out&>(t.m_kBodyALocalFrame.m_rotation.m_kColumn0)
-        .setRotatedInverseDir(bodyATransform.m_rotation, axisN.m_vec);
-    static_cast<hkVector4Out&>(t.m_kBodyALocalFrame.m_rotation.m_kColumn1)
-        .setRotatedInverseDir(bodyATransform.m_rotation, perpToAxle1.m_vec);
-    static_cast<hkVector4Out&>(t.m_kBodyALocalFrame.m_rotation.m_kColumn2)
-        .setRotatedInverseDir(bodyATransform.m_rotation, perpToAxle2.m_vec);
-    static_cast<hkVector4Out&>(t.m_kBodyALocalFrame.m_vTranslation).SetTransformedPosition(bodyATransform, pivot);
-
-    static_cast<hkVector4Out&>(t.m_kBodyBLocalFrame.m_rotation.m_kColumn0)
-        .setRotatedInverseDir(bodyBTransform.m_rotation, axisN.m_vec);
-    static_cast<hkVector4Out&>(t.m_kBodyBLocalFrame.m_rotation.m_kColumn1)
-        .setRotatedInverseDir(bodyBTransform.m_rotation, perpToAxle1.m_vec);
-    static_cast<hkVector4Out&>(t.m_kBodyBLocalFrame.m_rotation.m_kColumn2)
-        .setRotatedInverseDir(bodyBTransform.m_rotation, perpToAxle2.m_vec);
-    static_cast<hkVector4Out&>(t.m_kBodyBLocalFrame.m_vTranslation).SetTransformedPosition(bodyBTransform, pivot);
-}
 
 extern "C"
 {
@@ -666,15 +501,6 @@ struct hkVector4_Havok
     }
 };
 
-static __forceinline void hkSetCross(hkVector4_Havok& out, const hkVector4_Havok& v0, const hkVector4_Havok& v1)
-{
-    __m128 cross0 = _mm_mul_ps(_mm_shuffle_ps(v0.m_vComponents, v0.m_vComponents, 0xc9),
-                               _mm_shuffle_ps(v1.m_vComponents, v1.m_vComponents, 0xd2));
-    __m128 cross1 = _mm_mul_ps(_mm_shuffle_ps(v0.m_vComponents, v0.m_vComponents, 0xd2),
-                               _mm_shuffle_ps(v1.m_vComponents, v1.m_vComponents, 0xc9));
-    out.m_vComponents = _mm_sub_ps(cross0, cross1);
-}
-
 struct hkRotation_Havok
 {
     hkVector4_Havok m_kColumn0;
@@ -705,27 +531,3 @@ struct HingeClass
                                  const hkVector4_Havok& axisA, const hkVector4_Havok& axisB,
                                  const hkVector4_Havok& axisAPerp, const hkVector4_Havok& axisBPerp);
 };
-
-// Sets the rotation and translation of m_kBodyALocalFrame and m_kBodyBLocalFrame from the given pivot and axis vectors.
-// @fnv 0x00cb8da0
-void __thiscall HingeClass::FUN_00cb8da0(const hkVector4_Havok& pivotA, const hkVector4_Havok& pivotB,
-                                         const hkVector4_Havok& axisA, const hkVector4_Havok& axisB,
-                                         const hkVector4_Havok& axisAPerp, const hkVector4_Havok& axisBPerp)
-{
-    m_kBodyALocalFrame.m_rotation.m_kColumn0 = axisA;
-    m_kBodyALocalFrame.m_rotation.m_kColumn0.normalize3();
-    m_kBodyALocalFrame.m_rotation.m_kColumn1 = axisAPerp;
-    m_kBodyALocalFrame.m_rotation.m_kColumn1.normalize3();
-    m_kBodyALocalFrame.m_rotation.m_kColumn2.setCross(m_kBodyALocalFrame.m_rotation.m_kColumn0,
-                                                      m_kBodyALocalFrame.m_rotation.m_kColumn1);
-    m_kBodyALocalFrame.m_vTranslation = pivotA;
-    _ReadWriteBarrier();
-
-    m_kBodyBLocalFrame.m_rotation.m_kColumn0 = axisB;
-    m_kBodyBLocalFrame.m_rotation.m_kColumn0.normalize3();
-    m_kBodyBLocalFrame.m_rotation.m_kColumn1 = axisBPerp;
-    m_kBodyBLocalFrame.m_rotation.m_kColumn1.normalize3();
-    hkSetCross(m_kBodyBLocalFrame.m_rotation.m_kColumn2, m_kBodyBLocalFrame.m_rotation.m_kColumn0,
-               m_kBodyBLocalFrame.m_rotation.m_kColumn1);
-    m_kBodyBLocalFrame.m_vTranslation = pivotB;
-}

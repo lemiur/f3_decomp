@@ -55,25 +55,6 @@ struct FUN_00cfbbe0
 {
     void Method(FUN_00cfbbe0_vtbl* p, int a, int b);
 };
-// @fnv 0x00d45f80
-void __cdecl ConfigureVtblHandlers(FUN_00cfbbe0* p)
-{
-    FUN_00cfbbe0_vtbl t1;
-    t1.v0 = (void*)FUN_00d45f30;
-    t1.v1 = (void*)FUN_00d46010;
-    t1.v2 = (void*)FUN_00d46050;
-    t1.v3 = (void*)FUN_00d46090;
-    t1.b1 = 1;
-    t1.b2 = 1;
-    p->Method(&t1, -1, 0x1b);
-    t1.v0 = (void*)FUN_00d45480;
-    t1.v1 = (void*)FUN_00d45dd0;
-    t1.v2 = (void*)FUN_00d45af0;
-    t1.v3 = (void*)FUN_00d45800;
-    t1.b1 = 0;
-    t1.b2 = 1;
-    p->Method(&t1, 0x1b, -1);
-}
 
 struct TargetVtbl
 {
@@ -442,13 +423,6 @@ class D45480Object : public D45480ReferencedObject
     int unk0C;
     int unk10;
 };
-
-// Allocates a D45480Object via its four-argument constructor and returns the new object.
-// @fnv 0x00d45480
-D45480Object* __cdecl FUN_00d45480(void* apArg1, void* apArg2, void* apArg3, void* apArg4)
-{
-    return new D45480Object(apArg1, apArg2, apArg3, apArg4);
-}
 
 extern float DAT_0104da48;
 extern char DAT_010ce7fc;
@@ -883,47 +857,6 @@ struct Agent : AgentBase
     void FUN_00d46220(int a, int b, int c, Simplex* s);
 };
 
-// Calls base FUN_00d454c0, then updates vertex SIMD data and swaps simplex dimension and id fields when the closest point distance changed.
-// @fnv 0x00d46220
-void Agent::FUN_00d46220(int a, int b, int c, Simplex* apSimplex)
-{
-    SimplexVertex* pVertex = apSimplex->m_kRayEnd;
-    float oldDistance = apSimplex->m_fClosestPointDistanceSquared;
-    AgentBase::FUN_00d454c0(b, a, c, apSimplex);
-    for (; pVertex < apSimplex->m_kRayEnd; pVertex++)
-    {
-        const __m128* pb = &pVertex->m_kPointB;
-        __m128 w = _mm_shuffle_ps(*pb, *pb, 0xff);
-        pVertex->m_kPointA = _mm_add_ps(_mm_mul_ps(w, pVertex->m_kPointB), pVertex->m_kPointA);
-        pVertex->m_kPointB = _mm_xor_ps(pVertex->m_kPointB, DAT_010c4c00);
-    }
-    if (oldDistance != apSimplex->m_fClosestPointDistanceSquared)
-    {
-        __m128* n = &apSimplex->m_vHitNormal;
-        *n = _mm_xor_ps(*n, DAT_010c4c00);
-        {
-            unsigned char t = apSimplex->m_dims.m_ucLowNibble;
-            apSimplex->m_dims.m_ucLowNibble = apSimplex->m_dims.m_ucHighNibble;
-            apSimplex->m_dims.m_ucHighNibble = t;
-        }
-        {
-            unsigned char t = apSimplex->m_ucDimensionA;
-            apSimplex->m_ucDimensionA = apSimplex->m_ucDimensionB;
-            apSimplex->m_ucDimensionB = t;
-        }
-        int last = apSimplex->m_ucDimensionA + apSimplex->m_ucDimensionB - 1;
-        unsigned short t0 = apSimplex->m_ids[0];
-        apSimplex->m_ids[0] = apSimplex->m_ids[last];
-        apSimplex->m_ids[last] = t0;
-        if ((apSimplex->m_ucDimensionA & apSimplex->m_ucDimensionB) == 2)
-        {
-            unsigned short t1 = apSimplex->m_ids[1];
-            apSimplex->m_ids[1] = apSimplex->m_ids[2];
-            apSimplex->m_ids[2] = t1;
-        }
-    }
-}
-
 extern char DAT_010cebe0;
 
 struct __declspec(align(16)) D45800Collector
@@ -1041,34 +974,6 @@ struct Record_d2e9
 };
 
 void __cdecl FUN_00d45800(int a1, int a2, Input_d2e9* input, Record_d2e9* rec, Record_d2e9* optRec);
-
-// Copies input, XORs its m_vComponents with DAT_010c44d0, builds a Record_d2e9 with a4, and calls FUN_00d45800 with a second record when a5 is non-zero.
-// @fnv 0x00d46090
-void __cdecl FUN_00d46090(int a2, int a1, const Input_d2e9* input, int a4, int a5)
-{
-    Input_d2e9 local = *input;
-    local.m_vComponents = _mm_xor_ps(input->m_vComponents, DAT_010c44d0);
-
-    Record_d2e9 rec;
-    rec.m_vtbl = &DAT_010ce80c;
-    rec.m_fScalar = DAT_0104da48;
-    rec.m_key = input->m_key;
-    rec.m_uiFilterValue = a4;
-
-    if (a5 != 0)
-    {
-        Record_d2e9 rec2;
-        rec2.m_vtbl = &DAT_010ce80c;
-        rec2.m_fScalar = DAT_0104da48;
-        rec2.m_key = input->m_key;
-        rec2.m_uiFilterValue = a5;
-        FUN_00d45800(a1, a2, &local, &rec, &rec2);
-    }
-    else
-    {
-        FUN_00d45800(a1, a2, &local, &rec, 0);
-    }
-}
 
 #include <windows.h>
 
@@ -2214,30 +2119,3 @@ struct Owner
 {
     void FUN_00d46340(int a1, int a2, const Block* p, int a4, int a5);
 };
-
-// Copies p with its m_vec XORed by DAT_010c44d0, builds an Event from a4 (and a second from a5 if non-zero), and calls Host::Dispatch(a2, a1, ...).
-// @fnv 0x00d46340
-void Owner::FUN_00d46340(int a1, int a2, const Block* p, int a4, int a5)
-{
-    Event ev;
-    ev.m_fHitFraction = DAT_0104da48;
-    Block blk = *p;
-    ev.m_vec = p->m_vec;
-    ev.m_kCollisionBody = a4;
-    _mm_store_ps((float*)&blk.m_vec, _mm_xor_ps(*(const __m128*)&p->m_vec, DAT_010c44d0));
-    ev.vtbl = &DAT_010ce80c;
-
-    Event ctx;
-    if (a5 != 0)
-    {
-        ctx.vtbl = &DAT_010ce80c;
-        ctx.m_fHitFraction = DAT_0104da48;
-        ctx.m_vec = p->m_vec;
-        ctx.m_kCollisionBody = a5;
-        reinterpret_cast<Host*>(this)->Dispatch(a2, a1, &blk, &ev, &ctx);
-    }
-    else
-    {
-        reinterpret_cast<Host*>(this)->Dispatch(a2, a1, &blk, &ev, 0);
-    }
-}

@@ -388,42 +388,6 @@ class FnvHolder
     FnvInner* m_0c;
 };
 
-// Reads the inner constraint's kind and copies two __m128 vectors into a1/a2, or logs an unsupported-type error and returns 1.
-// @fnv 0x00e5ad40
-int FUN_00e5ad40(FnvHolder* pHolder, __m128* pOutA, __m128* pOutB)
-{
-    FnvInner* inner = pHolder->m_0c;
-
-    switch (inner->GetKind())
-    {
-    case 0:
-        *pOutA = inner->m_20;
-        *pOutB = inner->m_30;
-        return 0;
-    case 1:
-        *pOutA = inner->m_50;
-        *pOutB = inner->m_90;
-        return 0;
-    case 2:
-        *pOutA = inner->m_50;
-        *pOutB = inner->m_90;
-        return 0;
-    case 7:
-        *pOutA = inner->m_50;
-        *pOutB = inner->m_90;
-        return 0;
-    }
-
-    MsgWriter writer;
-    unsigned int bufStorage[0x80];
-    char* buf = (char*)bufStorage;
-    writer.Init(buf, 0x200);
-    writer.Append("Unsupported type of constraint in prepareSystemForRagdoll()");
-    DAT_01268360->Write(1, 0xabbabf3b, buf, ".\\Constraint\\Bilateral\\hkpConstraintUtils.cpp", 0xe2);
-    writer.Finish();
-    return 1;
-}
-
 namespace fnv_00e5ae60 {
 struct S_00e5ae60_Stream
 {
@@ -504,35 +468,4 @@ struct S_00e5ae60_Constraint
     int FUN_00cdeaa0() throw();
 };
 
-// Reads motor values from the constraint into a, b and d based on its type; for unsupported types logs an error and returns 1.
-// @fnv 0x00e5ae60
-int __cdecl GetConstraintMotorValues(S_00e5ae60_Constraint* pConstraint, int* piValueA, int* piValueB,
-                                     int* piValueD) throw()
-{
-    switch (pConstraint->GetType())
-    {
-    case 2:
-        *piValueA = pConstraint->m_b0;
-        *piValueB = 0;
-        *piValueD = 0;
-        return 0;
-    case 7:
-        *piValueA = pConstraint->FUN_00cdea20();
-        *piValueB = pConstraint->FUN_00cdea80();
-        *piValueD = pConstraint->FUN_00cdeaa0();
-        return 0;
-    default:
-        *piValueD = 0;
-        *piValueB = 0;
-        *piValueA = 0;
-        {
-            unsigned int buf[128];  // 512-byte text buffer (int array avoids a GS cookie)
-            S_00e5ae60_Stream s((char*)buf, 0x200);
-            s.FUN_00cc01c0("This type of constraint does not have motors");
-            DAT_01268360->FUN_message(1, 0xabbae233, (const char*)buf,
-                                      ".\\Constraint\\Bilateral\\hkpConstraintUtils.cpp", 0x104);
-        }
-        return 1;
-    }
-}
 }  // namespace fnv_00e5ae60

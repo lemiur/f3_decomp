@@ -357,42 +357,6 @@ struct FUN_00e49dc0_List : public hkpCollisionFilterList
     void FUN_00e49dc0(hkpCollisionFilter* filter);
 };
 
-// Removes the given hkpCollisionFilter from m_kFilters by swapping it with the last element and calling FUN_00c905b0 on it.
-// @fnv 0x00e49dc0
-void FUN_00e49dc0_List::FUN_00e49dc0(hkpCollisionFilter* filter)
-{
-    int count = m_kFilters.m_iElementCount;
-    int index = 0;
-
-    if (count > 0)
-    {
-        hkpCollisionFilter** p = m_kFilters.m_data;
-        do
-        {
-            if (*p == filter)
-            {
-                goto found;
-            }
-            ++p;
-            ++index;
-        } while (index < count);
-    }
-    index = -1;
-
-found:
-    volatile int& sz = m_kFilters.m_iElementCount;
-    --sz;
-    int size = sz;
-
-    if (size != index)
-    {
-        hkpCollisionFilter** data = m_kFilters.m_data;
-        data[index] = data[size];
-    }
-
-    ((FUN_00e49dc0_FilterObject*)filter)->FUN_00c905b0();
-}
-
 struct AllocatorE49
 {
     virtual void slot0();
@@ -588,13 +552,6 @@ struct FUN_00e49f40 : CollisionFilterE4
     FilterArrayE4 filters;
     virtual ~FUN_00e49f40() throw();
 };
-// Releases references to all collision filters held in the filters array.
-// @fnv 0x00e49f40
-FUN_00e49f40::~FUN_00e49f40() throw()
-{
-    for (int i = 0; i < filters.size; ++i)
-        filters.data[i]->RemoveReference();
-}
 
 extern int DAT_0102e388;
 
@@ -608,31 +565,6 @@ class FilterListAE90
     int m_iCapacityState;
     void FUN_00e4ae90();
 };
-
-// Releases each FilterRefE4 reference, deallocates m_data, empties the list and sets the vftable pointer to DAT_0102e388.
-// @fnv 0x00e4ae90
-void FilterListAE90::FUN_00e4ae90()
-{
-    FilterRouterE4* router = GetFilterRouterE4();
-    FilterRefE4** data = m_data;
-    FilterAllocatorE4* heap = router->m_pStreamAllocator;
-    int n = m_iElementCount;
-    for (int i = 0; i < n; i++)
-    {
-        if (data[i])
-            data[i]->RemoveReference();
-        data[i] = 0;
-    }
-    int cap = m_iCapacityState;
-    m_iElementCount = 0;
-    if ((cap & 0x80000000) == 0)
-    {
-        heap->DeallocateMemory(m_data, (cap & 0x3fffffff) * 4);
-    }
-    m_data = 0;
-    m_iCapacityState = (int)0x80000000;
-    vftable = (int)&DAT_0102e388;
-}
 
 // @f3 0x00a779f0 (community match, verified in this file)
 namespace f3m_00a779f0 {

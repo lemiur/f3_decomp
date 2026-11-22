@@ -126,21 +126,6 @@ struct CpuObject
     void FUN_00dd51d0();
     CpuObject* FUN_00dd55a0(unsigned int flags);
 };
-// @fnv 0x00dd55a0
-CpuObject* CpuObject::FUN_00dd55a0(unsigned int flags)
-{
-    FUN_00dd51d0();
-    if (flags & 1)
-    {
-        CpuAllocatorHolder* holder = FUN_00c85750();
-        holder->allocator->Invoke(this, size);
-    }
-    return this;
-}
-
-// @fnv 0x00dd51e0
-void __stdcall FUN_00dd51e0(int, int)
-{}
 
 struct FnvCpu_FUN_00dd5290_CpuObject
 {

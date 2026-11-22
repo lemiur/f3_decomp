@@ -4,12 +4,6 @@
 
 #include "havok/hkpEntity.h"
 
-// @fnv 0x00c9c380
-int __fastcall FUN_00c9c380(void* self, int)
-{
-    return *(int*)((char*)self + 0xb8) + *(unsigned short*)((char*)self + 0xb0);
-}
-
 struct FUN_00c9c3c0_Class
 {
     int m_00;
@@ -61,23 +55,6 @@ struct FUN_00c9c3c0_Class
     int GetEntryAt(int index);
 };
 
-// Returns the entry at index from the first array if index is below the count at offset 0xb0, otherwise from the second array.
-// @fnv 0x00c9c3c0
-int FUN_00c9c3c0_Class::GetEntryAt(int index)
-{
-    if (index < *(unsigned short*)((char*)this + 0xb0))
-    {
-        int offset = index * 3;
-        offset <<= 4;
-        return *(int*)(*(int*)((char*)this + 0xac) + offset);
-    }
-    else
-    {
-        int offset = index - *(unsigned short*)((char*)this + 0xb0);
-        return *(int*)(*(int*)((char*)this + 0xb4) + offset * 4);
-    }
-}
-
 struct FUN_00c9c1a0_Value
 {
     int m_00;
@@ -99,26 +76,6 @@ struct FUN_00c9c1a0_Class
 
     int __thiscall FindValueByKey();
 };
-
-// Scans the m_60 item array for an entry whose m_04 equals value + 0x10 and returns that entry's m_00->m_08, or 0 if none matches.
-// @fnv 0x00c9c1a0
-int __thiscall FUN_00c9c1a0_Class::FindValueByKey()
-{
-    int index = 0;
-    if (m_64 > 0)
-    {
-        int key = 0x10;
-        FUN_00c9c1a0_Item* item = m_60;
-        do
-        {
-            if (item->m_04 == key)
-                return item->m_00->m_08;
-            ++index;
-            ++item;
-        } while (index < m_64);
-    }
-    return 0;
-}
 
 struct FUN_00c9d490_Allocator
 {
@@ -147,47 +104,16 @@ struct FUN_00c9d490_Class
     void* FUN_00c9d490(int flags);
 };
 
-// @fnv 0x00c9d490
-void* FUN_00c9d490_Class::FUN_00c9d490(int flags)
-{
-    FUN_00c9cf60();
-
-    if (flags & 1)
-    {
-        FUN_00c9d490_Router* router = _D1A0E0GetMemoryRouter();
-        FUN_00c9d490_Allocator* allocator = router->m_10;
-        allocator->m_08(this, m_04);
-    }
-
-    return this;
-}
-
-// @fnv 0x00c9c020
-int __fastcall FUN_00c9c020(int param_1)
-{
-    return param_1 + 0xac;
-}
-
 struct CpuObject
 {
     char* FUN_00c9c030();
 };
-// @fnv 0x00c9c030
-char* CpuObject::FUN_00c9c030()
-{
-    return reinterpret_cast<char*>(this) + 172;
-}
 
 namespace fnv_00c9c3f0 {
 struct CpuObject
 {
     char* FUN_00c9c3f0();
 };
-// @fnv 0x00c9c3f0
-char* CpuObject::FUN_00c9c3f0()
-{
-    return reinterpret_cast<char*>(this) + 180;
-}
 }  // namespace fnv_00c9c3f0
 
 struct FUN_00c9bfa0_Inner
@@ -366,21 +292,6 @@ struct FUN_00c9c240_holder : public hkpEntity
     void FUN_00c9c240();
     void FUN_00c9c340();
 };
-
-// @fnv 0x00c9c340
-void FUN_00c9c240_holder::FUN_00c9c340()
-{
-    World_Class* world = (World_Class*)m_pOwningWorld;
-    if (world && world->m_94)
-    {
-        WorldOp op;
-        op.m_pEntity = this;
-        op.m_type = 0x22;
-        world->FUN_00c91160(&op);
-        return;
-    }
-    FUN_00c9c240();
-}
 
 struct FUN_00c9c390_Class
 {
@@ -779,32 +690,6 @@ struct FUN_00c9c860_Shell
     void UpdateNodeSlotIndices();
 };
 void FUN_00c9d250(void* a1, int a2, int a3, void* a4);
-// @fnv 0x00c9c860
-void FUN_00c9c860_Shell::UpdateNodeSlotIndices()
-{
-    if (m_e8 != 5)
-    {
-        return;
-    }
-    if (m_b8 > 1)
-    {
-        FUN_00c9d250(m_b4, 0, m_b8 - 1, this);
-    }
-    for (int i = 0; i < m_b8; ++i)
-    {
-        FUN_00c9c860_Node* node = m_b4[i];
-        FUN_00c9c860_Shell* owner =
-            reinterpret_cast<FUN_00c9c860_Shell*>(node->m_18 ^ node->m_14 ^ reinterpret_cast<unsigned int>(this));
-        for (int k = 0; k < owner->m_b0; ++k)
-        {
-            if (owner->m_ac[k].m_00 == node)
-            {
-                owner->m_ac[k].m_22 = (unsigned short)i;
-                break;
-            }
-        }
-    }
-}
 
 class hkpShape;
 class hkLocalFrame;
@@ -914,21 +799,6 @@ class __declspec(novtable) FUN_00c9cce0 : public hkpEntityBaseC9CC
     FUN_00c9cce0(const hkpShape* pkShape) throw();
 };
 
-// Constructs an hkpEntity from a shape, initialising its material, motion, arrays and listener pointers to defaults.
-// @fnv 0x00c9cce0
-FUN_00c9cce0::FUN_00c9cce0(const hkpShape* pkShape) throw() : hkpEntityBaseC9CC(pkShape)
-{
-    m_usStorageIndex = 0xffff;
-    m_fBulletSpread = 1.0f;
-    m_pSimulationIsland = 0;
-    m_pExtendedListeners = 0;
-    m_pEntityUserData = 0;
-    m_uiFilterInfo = 0;
-    m_ucNumShapeKeysInContactPointProperties = 0;
-    m_pShape = 0;
-    m_uiUniqueId = 0xffffffff;
-}
-
 extern int DAT_010c59f4;
 extern int DAT_010c6bec;
 
@@ -937,20 +807,6 @@ struct MotionStateObject
     void* volatile m_ppVirtualMethodTable;
     MotionStateObject* FUN_00c9d100(int enabled);
 };
-
-// @fnv 0x00c9d100
-MotionStateObject* MotionStateObject::FUN_00c9d100(int enabled)
-{
-    m_ppVirtualMethodTable = &DAT_010c59f4;
-    if (enabled != 0)
-    {
-        *reinterpret_cast<volatile float*>(&enabled) = 1.0f;
-        *reinterpret_cast<unsigned short*>(reinterpret_cast<char*>(this) + 0x11e) =
-            static_cast<unsigned short>(enabled >> 16);
-    }
-    m_ppVirtualMethodTable = &DAT_010c6bec;
-    return this;
-}
 
 struct FnvCpu_FUN_00c9d160_CpuAllocator
 {
@@ -974,17 +830,6 @@ struct FnvCpu_FUN_00c9d160_CpuObject
     void FUN_00d1dff0();
     FnvCpu_FUN_00c9d160_CpuObject* FUN_00c9d160(unsigned int flags);
 };
-// @fnv 0x00c9d160
-FnvCpu_FUN_00c9d160_CpuObject* FnvCpu_FUN_00c9d160_CpuObject::FUN_00c9d160(unsigned int flags)
-{
-    FUN_00d1dff0();
-    if (flags & 1)
-    {
-        FnvCpu_FUN_00c9d160_CpuAllocatorHolder* holder = FUN_00c85750();
-        holder->allocator->Invoke(this, size);
-    }
-    return this;
-}
 
 extern int DAT_010c59f4;
 extern int DAT_010c6d54;
@@ -1066,18 +911,6 @@ struct FUN_00c9d190
     short unk11e;
     FUN_00c9d190(int flag);
 };
-// Sets the vtable pointer to DAT_010c59f4, optionally writes the high half of 1.0f to unk11e, then sets the vtable to DAT_010c6d54.
-// @fnv 0x00c9d190
-FUN_00c9d190::FUN_00c9d190(int flag)
-{
-    m_vtbl = &DAT_010c59f4;
-    if (flag)
-    {
-        float one = 1.0f;
-        unk11e = (short)(*(int*)&one >> 16);
-    }
-    m_vtbl = &DAT_010c6d54;
-}
 
 inline void* operator new(unsigned int, void* p)
 {
@@ -1103,14 +936,6 @@ class KeyframedMotionReset : public MotionGravityBase
     {}
     KeyframedMotionReset* FUN_00c9d1c0(int initialize);
 };
-// Placement-constructs a KeyframedMotionReset at this address with the given initialize flag and returns this.
-// @fnv 0x00c9d1c0
-KeyframedMotionReset* KeyframedMotionReset::FUN_00c9d1c0(int initialize)
-{
-    __assume(this != 0);
-    new (this) KeyframedMotionReset(initialize);
-    return this;
-}
 
 class hkMemoryAllocatorC9D3
 {
@@ -1193,17 +1018,6 @@ struct FnvCpu_FUN_00c9d460_CpuObject
     void FUN_00c9d3b0();
     FnvCpu_FUN_00c9d460_CpuObject* FUN_00c9d460(unsigned int flags);
 };
-// @fnv 0x00c9d460
-FnvCpu_FUN_00c9d460_CpuObject* FnvCpu_FUN_00c9d460_CpuObject::FUN_00c9d460(unsigned int flags)
-{
-    FUN_00c9d3b0();
-    if (flags & 1)
-    {
-        FnvCpu_FUN_00c9d460_CpuAllocatorHolder* holder = FUN_00c85750();
-        holder->allocator->Invoke(this, size);
-    }
-    return this;
-}
 }  // namespace fnv_00c9d460
 
 namespace fnv_00d1f780 {
@@ -1351,12 +1165,6 @@ class FUN_00d1f780 : public FUN_00d08130
     hkArrayD1F7<void*> m_ppData;
 };
 
-// Destructor that releases the array member by freeing its heap buffer and resetting it.
-// @fnv 0x00d1f780
-FUN_00d1f780::~FUN_00d1f780() throw()
-{
-    m_ppData.ClearAndRelease();
-}
 }  // namespace fnv_00d1f780
 
 struct S00c92a80_Obj
@@ -1424,23 +1232,7 @@ struct c9bfd0_base
     c9bfd0_ptr FUN_00c9bfd0();
 };
 
-// @fnv 0x00c9bfd0
-c9bfd0_ptr __thiscall c9bfd0_base::FUN_00c9bfd0()
-{
-    c9bfd0_ptr* p = this->uCc;
-    c9bfd0_ptr out;
-    if (!p)
-        *(unsigned char*)&out = 0;
-    else
-        *(unsigned char*)&out = (p->p26 >> 2) & 3;
-    return out;
-}
-
 extern "C" c9bfd0_ptr* c9bfd0_out_val(void);
-void c9bfd0_caller(c9bfd0_base* self)
-{
-    (void)self->FUN_00c9bfd0();
-}
 
 struct FUN_00c9bff0_Class
 {
@@ -1720,14 +1512,6 @@ class hkpWorldC9C0
     void RemoveListener(hkpListenerC9C0* listener);
 };
 
-// Finds the given listener in m_kListeners and sets its slot to 0.
-// @fnv 0x00c9c0f0
-void hkpWorldC9C0::RemoveListener(hkpListenerC9C0* listener)
-{
-    hkSmallArrayC9C0<hkpListenerC9C0*>& listeners = *m_kListeners;
-    int i = listeners.indexOf(listener);
-    listeners.m_data[i] = 0;
-}
 }  // namespace fnv_00c9c0f0
 
 template <class T> class hkSmallArrayC9C1
@@ -2618,16 +2402,6 @@ class hkpEntityC9C7
     void CollectConstraints(hkArrayC9C7<hkpConstraintInstanceC9C7*>& constraints);
 };
 
-// @fnv 0x00c9c7c0
-void hkpEntityC9C7::CollectConstraints(hkArrayC9C7<hkpConstraintInstanceC9C7*>& constraints)
-{
-    constraints.SetSizeAndGrow(FUN_00c9c380());
-    int k = 0;
-    for (int i = 0; i < m_constraintsMasterSize; i++)
-        constraints[k++] = m_eSmallArraySerializeOverrideType[i].m_pHavokConstraint;
-    for (int i = 0; i < m_constraintsSlaveSize; i++)
-        constraints[k++] = m_kSlaveConstraints[i];
-}
 }  // namespace fnv_00c9c7c0
 
 class hkLocalFrame;
@@ -2746,35 +2520,6 @@ class __declspec(novtable) FUN_00c9ce00 : public hkpEntityBaseC9CE
 
     FUN_00c9ce00(int flag) throw();
 };
-// Constructs the base and m_pMotionState from flag, then if flag is set re-constructs m_pMotionState as the motion class matching its m_type.
-// @fnv 0x00c9ce00
-FUN_00c9ce00::FUN_00c9ce00(int flag) throw() : hkpEntityBaseC9CE(*(volatile int*)&flag), m_pMotionState(flag)
-{
-    if (flag)
-    {
-        switch (m_pMotionState.m_type)
-        {
-        case hkpMotion::MOTION_SPHERE_INERTIA:
-            ::new (&m_pMotionState) FUN_00c9d190(flag);
-            break;
-        case hkpMotion::MOTION_BOX_INERTIA:
-            ::new (&m_pMotionState) FUN_00c9d1c0(flag);
-            break;
-        case hkpMotion::MOTION_KEYFRAMED:
-            ::new (&m_pMotionState) FUN_00c9d100(flag);
-            break;
-        case hkpMotion::MOTION_FIXED:
-            ::new (&m_pMotionState) FUN_00c9d130(flag);
-            break;
-        case hkpMotion::MOTION_THIN_BOX_INERTIA:
-            ::new (&m_pMotionState) FUN_00c9d1f0(flag);
-            break;
-        case hkpMotion::MOTION_CHARACTER:
-            ::new (&m_pMotionState) FUN_00c9d220(flag);
-            break;
-        }
-    }
-}
 
 namespace fnv_00c9d130 {
 struct FinishLoadedFlag
@@ -2809,10 +2554,6 @@ class FUN_00c9d130 : public FinishableBase
     FUN_00c9d130(FinishLoadedFlag flag) throw();
     virtual ~FUN_00c9d130() throw();
 };
-// Constructs the object by delegating to the FinishableBase constructor with the provided FinishLoadedFlag.
-// @fnv 0x00c9d130
-FUN_00c9d130::FUN_00c9d130(FinishLoadedFlag flag) throw() : FinishableBase(flag)
-{}
 }  // namespace fnv_00c9d130
 
 namespace fnv_00c9d220 {
@@ -2834,10 +2575,6 @@ struct FUN_00c9d220 : public MotionCtorBase
     virtual ~FUN_00c9d220();
     FUN_00c9d220(int flag);
 };
-// Constructs a motion object by delegating to MotionCtorBase with the given flag.
-// @fnv 0x00c9d220
-FUN_00c9d220::FUN_00c9d220(int flag) : MotionCtorBase(flag)
-{}
 }  // namespace fnv_00c9d220
 
 struct hkpLinkedCollidableD250
@@ -2877,47 +2614,6 @@ struct hkEntryLessD250
         return getPartner(pkA)->m_uiUniqueId < getPartner(pkB)->m_uiUniqueId;
     }
 };
-
-// Recursively sorts the hkpAgentEntryD250 array in place using the quicksort algorithm with the hkEntryLessD250 comparator.
-// @fnv 0x00c9d250
-void __cdecl FUN_00c9d250(hkpAgentEntryD250** pArr, int aiLow, int aiHigh, hkEntryLessD250 cmpLess)
-{
-    int i, iRight;
-    hkpAgentEntryD250* x;
-
-begin:
-    i = aiLow;
-    iRight = aiHigh;
-    x = pArr[(aiLow + aiHigh) >> 1];
-
-    do
-    {
-        while (cmpLess(pArr[i], x))
-            i++;
-        while (cmpLess(x, pArr[iRight]))
-            iRight--;
-
-        if (iRight >= i)
-        {
-            if (iRight != i)
-            {
-                __declspec(align(16)) hkpAgentEntryD250* t = pArr[iRight];
-                pArr[iRight] = pArr[i];
-                pArr[i] = t;
-            }
-            i++;
-            iRight--;
-        }
-    } while (i <= iRight);
-
-    if (aiLow < iRight)
-        FUN_00c9d250(pArr, aiLow, iRight, cmpLess);
-    if (i < aiHigh)
-    {
-        aiLow = i;
-        goto begin;
-    }
-}
 
 struct FUN_00c9c700_Array
 {
@@ -3522,10 +3218,6 @@ class hkpThinBoxMotion : public hkC9D1::hkpMotion
     virtual ~hkpThinBoxMotion();
 };
 
-// @fnv 0x00c9d1f0
-hkpThinBoxMotion::hkpThinBoxMotion(hkC9D1::FinishingFlag flag) : hkC9D1::hkpMotion(flag)
-{}
-
 }
 }  // namespace fnv_00c9d1f0
 
@@ -3761,75 +3453,6 @@ struct EntityRebuild
     FnvTwo* extended;
     void FUN_00c9c8f0();
 };
-// Deletes p98 after FUN_00c9c140, then frees storage of p60, master, slave, runtime, contact, actions and extended when each is empty.
-// @fnv 0x00c9c8f0
-void EntityRebuild::FUN_00c9c8f0()
-{
-    FnvRef* old = p98;
-    if (old)
-    {
-        FUN_00c9c140(old);
-        delete old;
-        p98 = 0;
-    }
-    if (n64 == 0)
-    {
-        FnvRouter* router = FUN_00c85750();
-        FnvMem* mem = router->heap;
-        int f = f68;
-        n64 = 0;
-        if (!(f & 0x80000000))
-            mem->freeBlock(p60, (f & 0x3fffffff) * 8);
-        p60 = 0;
-        f68 = 0x80000000;
-    }
-    if (master.size == 0)
-        master.clearAndDealloc(48);
-    if (slave.size == 0)
-    {
-        FnvRouter* router = FUN_00c85750();
-        FnvMem* mem = router->heap;
-        int f = slave.flags;
-        slave.size = 0;
-        if (!(f & 0x80000000))
-            mem->freeBlock(slave.data, (f & 0x3fffffff) * 4);
-        slave.data = 0;
-        slave.flags = 0x80000000;
-    }
-    if (runtime.size == 0)
-    {
-        FnvRouter* router = FUN_00c85750();
-        FnvMem* mem = router->heap;
-        int f = runtime.flags;
-        runtime.size = 0;
-        if (!(f & 0x80000000))
-            mem->freeBlock(runtime.data, f & 0x3fffffff);
-        runtime.data = 0;
-        runtime.flags = 0x80000000;
-    }
-    contact.clearIfEmpty();
-    bool usedContact = false;
-    FnvTwo* pExtended = extended;
-    if (pExtended)
-    {
-        pExtended->one.clearIfEmpty(usedContact);
-    }
-    bool usedAction = false;
-    pExtended = extended;
-    if (pExtended)
-    {
-        pExtended->two.clearIfEmpty(usedAction);
-    }
-    if (!usedContact && !usedAction)
-    {
-        pExtended = extended;
-        if (pExtended)
-            pExtended->destroy();
-        extended = 0;
-    }
-    if (actions.size == 0)
-        actions.clearAndDealloc(4);
-}
 }  // namespace fnv_00c9c8f0
 
 namespace fnv_00c9cf60 {

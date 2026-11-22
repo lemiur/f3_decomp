@@ -23,26 +23,6 @@ struct FUN_00cf4de0_class
     void FUN_00cf4de0(void);
 };
 
-// Resets the vtable, releases the two referenced objects at offsets 0x18 and 0x1c, then destroys the lock at 0x14 and resets the vtable again.
-// @fnv 0x00cf4de0
-void FUN_00cf4de0_class::FUN_00cf4de0(void)
-{
-    *(void**)this = &DAT_010cc320;
-    if (*(void**)((char*)this + 0x18))
-    {
-        ((DDCC60World*)*(void**)((char*)this + 0x18))->removeReference();
-        *(void**)((char*)this + 0x18) = 0;
-    }
-    if (*(void**)((char*)this + 0x1c))
-    {
-        ((DDCC60World*)*(void**)((char*)this + 0x1c))->removeReference();
-        *(void**)((char*)this + 0x1c) = 0;
-    }
-    *(void**)this = &DAT_010cc2fc;
-    ((S_00d49310_Lock*)((char*)this + 0x14))->~S_00d49310_Lock();
-    *(void**)this = &_DAT_0102e388;
-}
-
 struct FUN_00c97510
 {
     void ProcessPointer(void*);
@@ -75,25 +55,6 @@ struct WorldObj
     void HandleWorldObjectPair(void*, void*);
 };
 
-// Releases the current reference object, stores arg as the new one, and notifies the world object of the change.
-// @fnv 0x00cf4d30
-void FUN_00cf4d30_class::SetRefObject(void* arg)
-{
-    ((RefObj*)arg)->RetainReference();
-    if (*(void**)((char*)this + 0x1c))
-    {
-        WorldObj* pWorld = (WorldObj*)*(void**)((char*)this + 8);
-        if (pWorld)
-            pWorld->HandleWorldObjectPair(this, *(void**)((char*)this + 0x1c));
-        ((DDCC60World*)*(void**)((char*)this + 0x1c))->removeReference();
-        *(void**)((char*)this + 0x1c) = 0;
-    }
-    *(void**)((char*)this + 0x1c) = arg;
-    WorldObj* w2 = (WorldObj*)*(void**)((char*)this + 8);
-    if (w2)
-        w2->HandleObjectPointerPair(this, arg);
-}
-
 namespace fnv_00d4f850 {
 struct RefObj
 {
@@ -105,15 +66,6 @@ struct FUN_00d4f850_class : hkReferencedObject
     void SetReferencedObject(hkReferencedObject* obj);
 };
 
-// @fnv 0x00d4f850
-void FUN_00d4f850_class::SetReferencedObject(hkReferencedObject* apObject)
-{
-    if (apObject)
-        ((RefObj*)apObject)->RetainReference();
-    if (*(DDCC60World**)((char*)this + 0xac))
-        (*(DDCC60World**)((char*)this + 0xac))->removeReference();
-    *(hkReferencedObject**)((char*)this + 0xac) = apObject;
-}
 }  // namespace fnv_00d4f850
 
 struct FUN_00cf4ce0_class
@@ -148,26 +100,6 @@ struct FUN_00c92bd0_class
     void FUN_00c92bd0(void*, void*);
 };
 
-// @fnv 0x00cf4ce0
-void FUN_00cf4ce0_class::FUN_00cf4ce0(void* newAction)
-{
-    ((FUN_00c90510_class*)newAction)->FUN_00c90510();
-    if (unk18)
-    {
-        if (unk08)
-        {
-            ((FUN_00c976a0_class*)unk08)->RemoveActionFromEntity(this, unk18);
-        }
-        ((FUN_00c905b0_class*)unk18)->FUN_00c905b0();
-        unk18 = 0;
-    }
-    unk18 = newAction;
-    if (unk08)
-    {
-        ((FUN_00c92bd0_class*)unk08)->FUN_00c92bd0(this, newAction);
-    }
-}
-
 struct NameStr
 {
     NameStr() throw();
@@ -198,13 +130,6 @@ struct FUN_00cf4d80 : Act
     virtual ~FUN_00cf4d80();
     FUN_00cf4d80(void* x, void* y, unsigned long u);
 };
-// Constructs the object from two pointers and a userData value, calling Init() when either pointer is non-null.
-// @fnv 0x00cf4d80
-FUN_00cf4d80::FUN_00cf4d80(void* x, void* y, unsigned long uiUserData) : Act(uiUserData), a(x), b(y)
-{
-    if (b || a)
-        Init();
-}
 
 template <int SIZE> __forceinline void memCpyOneAlignedXcf4e30(void* dst, const void* src)
 {
@@ -261,10 +186,3 @@ class hkOwnerXcf4e30
 
     void GetPointers(hkArrayXcf4e30<void*>& out);
 };
-
-// @fnv 0x00cf4e30
-void hkOwnerXcf4e30::GetPointers(hkArrayXcf4e30<void*>& out)
-{
-    out.AddBack(m_kPointA);
-    out.AddBack(m_kPointB);
-}

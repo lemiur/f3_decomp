@@ -163,24 +163,6 @@ int __cdecl FindEntryByKey(int unused, FUN_00d41830_table* table, unsigned short
 // it, so the value is handed back to the caller from a symbol whose name
 // still contains the required tag "FUN_00d41860".
 extern "C" void __cdecl ReleaseAllEntries(void* p, int obj, int data);
-// @fnv 0x00d41860
-extern "C" int __cdecl FUN_00d41860_impl(int a, int b, int c, int d)
-{
-    unsigned char* rec = (unsigned char*)b + 0x0C;
-
-    ReleaseAllEntries(rec, c, d);
-
-    unsigned int count = rec[0] + rec[1] + rec[2] * 4;
-
-    // (2 * count + 31) & ~0x0F, kept in the two steps the original uses
-    unsigned int scaled = count * 2 + 4;
-    count = scaled + 27;
-    count &= ~0x0F;
-
-    ((char*)a)[2] = 0;
-
-    return b + (int)count;
-}
 
 #include <xmmintrin.h>
 class hkpConvexShape_s

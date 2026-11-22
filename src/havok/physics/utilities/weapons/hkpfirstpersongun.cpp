@@ -14,12 +14,6 @@ struct FUN_00e463b0_cls
     unsigned int FUN_00e463b0();
 };
 
-// @fnv 0x00e463b0
-unsigned int FUN_00e463b0_cls::FUN_00e463b0()
-{
-    return m_0C & 0xfffffffeu;
-}
-
 struct FUN_00e463c0_cls
 {
     virtual void v00();
@@ -77,9 +71,6 @@ class FUN_00e46660 : public hkRefObjE466
     FUN_00e46660();
     virtual ~FUN_00e46660();
 };
-// @fnv 0x00e46660
-FUN_00e46660::FUN_00e46660() : m_type(0), m_name(""), m_uiKeyboardKey(0x71)
-{}
 
 namespace fnv_00e466a0 {
 struct hkFinishFlagE466
@@ -130,12 +121,6 @@ class FUN_00e466a0 : public hkRefObjE466
     virtual ~FUN_00e466a0();
 };
 
-// @fnv 0x00e466a0
-FUN_00e466a0::FUN_00e466a0(hkFinishFlagE466 flag) : hkRefObjE466(flag), m_name(flag)
-{
-    if (flag.m_bFinishing)
-        m_type = 0;
-}
 }  // namespace fnv_00e466a0
 
 namespace fnv_00e466e0 {
@@ -243,13 +228,6 @@ class FUN_00e466e0_class : public hkReferencedObjectE466
     virtual ~FUN_00e466e0_class() throw();
 };
 
-// Destructor releases every child in m_children by calling removeReference on each element.
-// @fnv 0x00e466e0
-FUN_00e466e0_class::~FUN_00e466e0_class() throw()
-{
-    for (int i = 0; i < m_children.m_iElementCount; i++)
-        m_children.m_data[i]->removeReference();
-}
 }  // namespace fnv_00e466e0
 
 struct FUN_00e466e0_Obj
@@ -283,20 +261,6 @@ class FUN_00e46750_Obj : public hkpFirstPersonGun
     void FUN_00e466e0();
     int FUN_00e46750(unsigned char flag);
 };
-
-// @fnv 0x00e46750
-int FUN_00e46750_Obj::FUN_00e46750(unsigned char flag)
-{
-    FUN_00e466e0();
-
-    if (flag & 1)
-    {
-        FUN_00c85750_Obj* audio = FUN_00c85750();
-        audio->unk10->vf08(this, m_usMemSizeAndFlags);
-    }
-
-    return (int)this;
-}
 
 #include <xmmintrin.h>
 namespace fnv_00e464e0 {
@@ -519,44 +483,4 @@ enum hkResult
     HK_FAILURE = 1
 };
 
-// Performs a sphere linear cast in the physics world and stores the hit point, normal, rigid body, and shape key in the result.
-// @fnv 0x00e464e0
-hkResult FUN_00e464e0(hkpWorldq* world, const hkVector4q& from, float radius, const hkVector4q& to,
-                      LinearCastResult* result)
-{
-    hkpSphereShapeq* sphere = new hkpSphereShapeq(radius);
-
-    hkTransformq transform;
-    transform.setIdentityRotation();
-    transform.m_vTranslation = from;
-
-    hkpCollidableq collidable(sphere, &transform, 0);
-
-    hkpClosestCdPointCollectorq collector;
-
-    hkpLinearCastInputq input;
-    input.m_vTo = to;
-    input.m_fMaxExtraPenetration = DAT_0104da4c;
-    input.m_fMaxExtraPenetrationAgainstFixed = DAT_0104da4c;
-
-    world->FUN_00c92430(&collidable, input, collector, 0);
-
-    sphere->FUN_00c905b0();
-
-    if (collector.DidHit())
-    {
-        result->m_vContactPosition = collector.m_kPoint.m_vContactPosition;
-        result->m_vHitNormal = collector.m_kPoint.m_vSeparatingNormal;
-        const hkpCollidableq* pHitCollidable = collector.m_pRootCollidableB;
-        result->m_pRigidBody = (pHitCollidable->m_type == 1) ? pHitCollidable->getOwner() : 0;
-        result->m_uiCollisionShapeKey = collector.m_uiShapeKeyB;
-        return HK_SUCCESS;
-    }
-
-    result->m_pRigidBody = 0;
-    result->m_vContactPosition = to;
-    result->m_vHitNormal.setXYZ(DAT_01267e30);
-    result->m_uiCollisionShapeKey = 0xffffffff;
-    return HK_FAILURE;
-}
 }  // namespace fnv_00e464e0

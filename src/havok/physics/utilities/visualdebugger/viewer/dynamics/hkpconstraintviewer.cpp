@@ -336,27 +336,6 @@ struct FUN_00d69920_cls : PrimaryBase, MidBase, TailBase, SubObject
     ~FUN_00d69920_cls() throw();
 };
 
-// @fnv 0x00d69920
-FUN_00d69920_cls::~FUN_00d69920_cls() throw()
-{
-    if (m_pSharedOwner != 0)
-    {
-        for (int i = 0; i < m_pSharedOwner->m_iArrayLength; ++i)
-        {
-            m_pSharedOwner->m_ppItems[i]->ClearValue(static_cast<SubObject*>(this));
-        }
-    }
-    AudioHolder* pHolder = FUN_00c85750();
-    AudioAllocator* pAllocator = pHolder->m_pAllocator;
-    m_iField30 = 0;
-    unsigned int uiDataFlags = m_uiObjectFlags;
-    if ((uiDataFlags & 0x80000000u) == 0)
-    {
-        pAllocator->FreeData(m_pData, (uiDataFlags & 0x3fffffffu) * 4);
-    }
-    m_pData = 0;
-    m_uiObjectFlags = 0x80000000u;
-}
 }  // namespace fnv_00d69920
 
 struct AudioAllocator
@@ -482,9 +461,6 @@ struct D69AC0Object : D69AC0Primary, D69AC0Secondary
 // @fnv 0x00d69ac0
     virtual void FUN_00d69ac0();
 };
-
-D69AC0Object::D69AC0Object()
-{}
 
 // sub ecx,8; jmp target  ==  MSVC adjustor thunk: Derived overrides a virtual that both of its bases
 // declare, so the second base's vtable gets a thunk that moves `this` back by the first base's size (8).
@@ -1236,144 +1212,4 @@ struct Viewer : ConstraintViewer
 {
     void FUN_00d69260(int constraint, Entity* entity, int tag);
 };
-}
-// Records a Ttdraw trace, dispatches on the Collidable shape type to render via renderer or Complex, recurses for compound shapes, then records an Et trace.
-// @fnv 0x00d69260
-void ConstraintDrawDetail::Viewer::FUN_00d69260(int aiCollidable, Entity* entity, int tag)
-{
-    using namespace ConstraintDrawDetail;
-    Collidable* object = reinterpret_cast<Collidable*>(aiCollidable);
-    Transform* transform = reinterpret_cast<Transform*>(entity);
-    void* context = reinterpret_cast<void*>(tag);
-    Viewer* owner = this;
-    volatile unsigned uiShapeType;
-    Extended renderer;
-    Complex complexRenderer;
-    LocalCollidable child;
-    TraceBuffer* trace = (TraceBuffer*)TlsGetValue(DAT_0126835c);
-    if (trace->current < trace->limit)
-    {
-        TraceEntry* entry = trace->current;
-        entry->name = "Ttdraw";
-        _ReadWriteBarrier();
-        uiShapeType = (unsigned)__rdtsc();
-        entry->tick = uiShapeType;
-        trace->current = entry + 1;
-    }
-    uiShapeType = object->shape->getType();
-    EnterTlsGuard();
-    void* position = &transform->x;
-    switch (uiShapeType)
-    {
-    case 0: {
-        renderer.InitializeDefaults();
-        renderer.FUN_00de47d0(DAT_011b6168);
-        renderer.FireMotionEvent(object, context, position, DAT_0126901c);
-        break;
-    }
-    case 1: {
-        renderer.InitializeDefaults();
-        renderer.FUN_00de47d0(DAT_011b6168);
-        renderer.FUN_00de7f20(object, context, position, DAT_0126901c);
-        break;
-    }
-    case 2: {
-        renderer.FUN_00d69a20();
-        renderer.FUN_00de47d0(DAT_011b6168);
-        renderer.FUN_00de7a70(object, context, position, DAT_0126901c);
-        ((Tail*)&renderer.unk0d0)->FUN_00da2560();
-        break;
-    }
-    case 6: {
-        renderer.InitializeDefaults();
-        renderer.FUN_00de47d0(DAT_011b6168);
-        renderer.FUN_00de7730(object, context, position, DAT_0126901c);
-        break;
-    }
-    case 8: {
-        renderer.InitializeDefaults();
-        renderer.FUN_00de47d0(DAT_011b6168);
-        renderer.FUN_00de7580(object, context, position, DAT_0126901c);
-        break;
-    }
-    case 9: {
-        renderer.InitializeDefaults();
-        renderer.FUN_00de47d0(DAT_011b6168);
-        renderer.FUN_00de71d0(object, context, position, DAT_0126901c);
-        break;
-    }
-    case 3: {
-        renderer.InitializeDefaults();
-        renderer.FUN_00de47d0(DAT_011b6168);
-        renderer.FUN_00de7020(object, context, position, DAT_0126901c);
-        break;
-    }
-    case 14: {
-        renderer.InitializeDefaults();
-        renderer.FUN_00de47d0(DAT_011b6168);
-        renderer.FUN_00de6d80(object, context, position, DAT_0126901c);
-        break;
-    }
-    case 7: {
-        complexRenderer.FUN_00d69a40();
-        complexRenderer.FUN_00de47d0(DAT_011b6168);
-        complexRenderer.FUN_00de6730(object, context, position, DAT_0126901c);
-        complexRenderer.FUN_00d69a80();
-        break;
-    }
-    case 12: {
-        child.FUN_00cf3ea0(object->first, object->second, object->shape->child, true);
-        owner->FUN_00d69260(reinterpret_cast<int>(&child), entity, tag);
-        child.FUN_00cf40b0();
-        break;
-    }
-    case 13: {
-        Shape* pParentShape = object->shape;
-        void* second = object->second;
-        void* first = object->first;
-        child.FUN_00cf3ea0(first, second, pParentShape->FUN_00cdf6c0(), true);
-        owner->FUN_00d69260(reinterpret_cast<int>(&child), entity, tag);
-        child.FUN_00cf40b0();
-        break;
-    }
-    case 15: {
-        renderer.InitializeDefaults();
-        renderer.FUN_00de47d0(DAT_011b6168);
-        renderer.FUN_00de6550(object, context, position, DAT_0126901c);
-        break;
-    }
-    case 100:
-    case 101:
-    case 102: {
-        renderer.InitializeDefaults();
-        renderer.FUN_00de47d0(DAT_011b6168);
-        renderer.FireChainConstraints(object, context, position, DAT_0126901c);
-        break;
-    }
-    case 18: {
-        renderer.FUN_00d69a20();
-        renderer.FUN_00de47d0(DAT_011b6168);
-        renderer.FUN_00de5fe0(object, context, position, DAT_0126901c);
-        ((Tail*)&renderer.unk0d0)->FUN_00da2560();
-        break;
-    }
-    case 19: {
-        complexRenderer.FUN_00d69a40();
-        complexRenderer.FUN_00de47d0(DAT_011b6168);
-        complexRenderer.FUN_00de59f0(object, context, position, DAT_0126901c);
-        ((ComplexCleanup*)&complexRenderer)->FUN_00d69a80();
-        break;
-    }
-    }
-    FUN_00c904e0();
-    trace = (TraceBuffer*)TlsGetValue(DAT_0126835c);
-    if (trace->current < trace->limit)
-    {
-        TraceEntry* entry = trace->current;
-        entry->name = "Et";
-        _ReadWriteBarrier();
-        volatile unsigned tick = (unsigned)__rdtsc();
-        entry->tick = tick;
-        trace->current = entry + 1;
-    }
 }

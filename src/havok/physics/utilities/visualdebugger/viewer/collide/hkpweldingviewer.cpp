@@ -149,17 +149,6 @@ struct FUN_00d626b0 : S_00d626b0_R, S_00d626b0_S
     virtual void s0();
 };
 
-// If the owner pointer m_24 is set, calls FUN_00c93920 on each of its m_70 items, passing this object.
-// @fnv 0x00d626b0
-FUN_00d626b0::FUN_00d626b0(int aiArg) throw() : S_00d626b0_R(aiArg)
-{
-    if (m_24)
-    {
-        for (int i = 0; i < m_24->m_70; i++)
-            m_24->m_6c[i]->FUN_00c93920((S_00d626b0_S*)this);
-    }
-}
-
 class D62720Listener
 {
   public:
@@ -373,19 +362,6 @@ struct FUN_00d62ec0_cls
     static void operator delete(void* apMemory) throw();
 };
 
-// Calls FUN_00d62720, then if acFlags bit 0 is set frees this via the audio allocator with m_uSize and returns this.
-// @fnv 0x00d62ec0
-FUN_00d62ec0_cls* FUN_00d62ec0_cls::Destroy(unsigned char acFlags)
-{
-    FUN_00d62720();
-    if (acFlags & 1)
-    {
-        AudioHolder* pHolder = FUN_00c85750();
-        AudioAllocator* pAllocator = pHolder->m_pAllocator;
-        pAllocator->Free(this, m_uSize);
-    }
-    return this;
-}
 }  // namespace fnv_00d62ec0
 
 // FUN_00d62e90 : MSVC this-adjusting thunk  (sub ecx, 0x20 ; jmp <impl>)
@@ -407,15 +383,6 @@ struct Own_00d62e90 : A1_00d62e90, A2_00d62e90
 // @fnv 0x00d62e90
     void FUN_00d62e90();
 };
-Own_00d62e90::Own_00d62e90()
-{}
-void Own_00d62e90::key_fn()
-{}
-Own_00d62e90* make_00d62e90()
-{
-    static Own_00d62e90 o;
-    return &o;
-}
 
 struct D62EA0Primary
 {
@@ -437,9 +404,6 @@ struct D62EA0Object : D62EA0Primary, D62EA0Secondary
 // @fnv 0x00d62ea0
     virtual void FUN_00d62ea0();
 };
-
-D62EA0Object::D62EA0Object()
-{}
 
 // FUN_00d62eb0 : MSVC this-adjusting thunk  (sub ecx, 0x28 ; jmp <impl>)
 struct A1_00d62eb0

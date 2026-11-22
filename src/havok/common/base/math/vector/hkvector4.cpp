@@ -692,22 +692,6 @@ struct __declspec(align(16)) FUN_00c7f640_cls
     void FUN_00c7f640(const SpawnedMatrix* apMatrix, const __m128* apVector);
 };
 
-// Combines the vector's first three components with matrix rows 0-2, adds row3, and stores the result in m_vResult.
-// @fnv 0x00c7f640
-void FUN_00c7f640_cls::FUN_00c7f640(const SpawnedMatrix* apMatrix, const __m128* apVector)
-{
-    __m128 vVec = *apVector;
-    __m128 vY = _mm_shuffle_ps(vVec, vVec, 0x55);
-    __m128 vT1 = _mm_mul_ps(vY, apMatrix->m_row1);
-    __m128 vX = _mm_shuffle_ps(vVec, vVec, 0);
-    __m128 vT2 = _mm_mul_ps(vX, apMatrix->m_row0);
-    vT1 = _mm_add_ps(vT1, vT2);
-    __m128 vZ = _mm_shuffle_ps(vVec, vVec, 0xaa);
-    __m128 vT3 = _mm_mul_ps(vZ, apMatrix->m_row2);
-    vT3 = _mm_add_ps(vT3, apMatrix->m_row3);
-    m_vResult = _mm_add_ps(vT1, vT3);
-}
-
 struct S_00c7f690_V
 {
     __m128 q;
@@ -775,18 +759,6 @@ struct FUN_00c7f750_shell
 {
     void __thiscall FUN_00c7f750(float* matrix, float* vector);
 };
-// Multiplies a 3D vector by a 3x3 matrix using SSE and stores the resulting vector in the object.
-// @fnv 0x00c7f750
-void __thiscall FUN_00c7f750_shell::FUN_00c7f750(float* matrix, float* vector)
-{
-    __m128 v = *(__m128*)vector;
-    __m128 y = _mm_mul_ps(_mm_shuffle_ps(v, v, _MM_SHUFFLE(1, 1, 1, 1)), *(__m128*)(matrix + 4));
-    __m128 x = _mm_mul_ps(_mm_shuffle_ps(v, v, _MM_SHUFFLE(0, 0, 0, 0)), *(__m128*)matrix);
-    __m128 result = _mm_add_ps(y, x);
-    __m128 z = _mm_mul_ps(_mm_shuffle_ps(v, v, _MM_SHUFFLE(2, 2, 2, 2)), *(__m128*)(matrix + 8));
-    result = _mm_add_ps(result, z);
-    *(__m128*)this = result;
-}
 
 struct QueryScalar
 {
@@ -1410,23 +1382,6 @@ struct RayShape
     virtual void v7();
     virtual BoolResult cast(const RayIn&, RayOut&) const;
 };
-__declspec(noinline) void* __cdecl GetValidatedPointer(void* obj)
-{
-    BoundingVolumeNode* n = (BoundingVolumeNode*)obj;
-    BoundingVolumeNode* result = 0;
-    if (n)
-    {
-        int type = n->type;
-        if (type == 10)
-        {
-            n = n->f34;
-            type = n->type;
-        }
-        if (type == 0x17 || type == 0x1e || type == 0x1f)
-            result = n;
-    }
-    return result;
-}
 void __cdecl ComputeInverseLengths(const QueryVector* triangle, Plane* plane);
 void __cdecl FUN_00cd6520(const QueryVector* ray, float tolerance, const QueryVector* triangle, float radius,
                           const Plane* plane, float zero, int flags, Contacts* contacts, void* extra);
@@ -1435,46 +1390,12 @@ typedef char(__cdecl* PredFn)(int v);
 extern PredFn DAT_01267bc8;
 extern "C" void _ReadWriteBarrier();
 extern float DAT_01011d78;
-static __forceinline float scalar(__m128 x)
-{
-    float value;
-    _mm_store_ss(&value, x);
-    return value;
-}
-static __forceinline __m128 squared3(__m128 v)
-{
-    __m128 products = _mm_mul_ps(v, v);
-    __m128 xy = _mm_add_ss(_mm_shuffle_ps(products, products, 85), products);
-    return _mm_add_ss(_mm_shuffle_ps(products, products, 170), xy);
-}
-static __forceinline __m128 normalized3(__m128 v)
-{
-    __m128 half = _mm_set_ss(0.5f);
-    __m128 three = _mm_set_ss(3.0f);
-    __m128 zero = _mm_set_ss(0.0f);
-    __m128 square = squared3(v);
-    __m128 isZero = _mm_cmpeq_ss(square, zero);
-    __m128 estimate = _mm_rsqrt_ss(square);
-    __m128 correction = _mm_sub_ss(three, _mm_mul_ss(_mm_mul_ss(square, estimate), estimate));
-    __m128 inverse = _mm_andnot_ps(isZero, _mm_mul_ss(_mm_mul_ss(half, estimate), correction));
-    return _mm_mul_ps(_mm_shuffle_ps(inverse, inverse, 0), v);
-}
 static __forceinline void transformed(QueryVector& r, const Mat16& m, __m128 v)
 {
     __m128 px = _mm_mul_ps(_mm_shuffle_ps(v, v, 0), m.col[0].q);
     __m128 py = _mm_mul_ps(_mm_shuffle_ps(v, v, 85), m.col[1].q);
     __m128 pz = _mm_mul_ps(_mm_shuffle_ps(v, v, 170), m.col[2].q);
     r.q = _mm_add_ps(_mm_add_ps(py, px), _mm_add_ps(pz, m.col[3].q));
-}
-static __forceinline __m128 make4(float x, float y, float z, float w)
-{
-    return _mm_setr_ps(x, y, z, w);
-}
-static __forceinline QueryVector subtractVectors(const QueryVector& a, const QueryVector& b)
-{
-    QueryVector result;
-    result.q = _mm_sub_ps(a.q, b.q);
-    return result;
 }
 struct CastWorkspace
 {
@@ -1485,197 +1406,3 @@ struct CastWorkspace
     CollisionOutput output;
     ShapeStorage storage;
 };
-// Checks filters and geometry, may run a ray cast or contact query, and returns the resulting flag.
-// @fnv 0x00c6eb00
-char ThisCls::FUN_00c6eb00(ArgObj* arg)
-{
-    ArgObj* a = arg;
-    VarObj* o20 = a->f20;
-    void* decoded20;
-    if (o20->type == 2)
-        decoded20 = (char*)o20 + (signed char)o20->b10;
-    else
-        decoded20 = 0;
-    VarObj* o48 = a->f48;
-    VarObj* decoded48;
-    if (o48->type == 1)
-        decoded48 = (VarObj*)((char*)o48 + (signed char)o48->b10);
-    else
-        decoded48 = 0;
-    bool flag = false;
-    int iIndex = 0;
-    if (decoded48)
-    {
-        BoundingVolumeNode* found = 0;
-        BoundingVolumeNode* n = o48->first;
-        if (n)
-        {
-            int type = n->type;
-            if (type == 10)
-            {
-                n = n->f34;
-                type = n->type;
-            }
-            if (type == 0x17 || type == 0x1e || type == 0x1f)
-                found = n;
-        }
-        int key = a->f4c;
-        bool allowed = true;
-        if (found && found->child)
-        {
-            BoundingVolumeNode* child = found->child;
-            int v = key != -1 ? child->FUN_00c84f10(key) : child->f10 & 31;
-            char c = 0;
-            if (DAT_01267bc8)
-                c = DAT_01267bc8(v);
-            allowed = c == 0;
-        }
-        flag = allowed == 0;
-        if (flag)
-            goto end;
-    }
-    if (!decoded20 || !decoded48)
-        goto end;
-    {
-        BoundingVolumeNode* shape = a->f48->first;
-        float scale = x5f0;
-        BoundingVolumeNode* node5 = 0;
-        BoundingVolumeNode* pNode20 = a->f20->first;
-        if (pNode20->type == 5)
-        {
-            node5 = pNode20;
-            scale = pNode20->radius;
-        }
-        QueryVector direction;
-        QueryVector origin;
-        QueryVector endpoint;
-        RayIn input;
-        QueryVector pos;
-        Mat16 scratch;
-        CollisionOutput output;
-        ShapeStorage storage;
-        pos.q = _mm_load_ps(a->v);
-        float sourceZ = (float)pos.get(2);
-        SubtractVectors(&origin);
-        if (sub.flags & 1)
-        {
-            unsigned i = 0;
-            void* tm = &((VarObj*)decoded20)->u0b0;
-            for (; i < 2; ++i)
-            {
-                if (node5)
-                    direction.q = node5->points[i];
-                else
-                {
-                    direction.q = make4(0.0f, (float)(x5f4 * 0.5), scale, 0.0f);
-                    if (i == 1)
-                        direction.q.m128_f32[1] = (float)(direction.q.m128_f32[1] * -1.0);
-                }
-                slots[i].FUN_00c7f640(tm, &direction);
-                slots[i].q.m128_f32[2] += x470;
-                input.vectors[i] = subtractVectors(pos, slots[i]);
-            }
-            float d0 = scalar(squared3(input.vectors[0].q));
-            float d1 = scalar(squared3(input.vectors[1].q));
-            iIndex = 0;
-            if (!(d0 < d1))
-                iIndex = 1;
-            origin(0) = (float)slots[iIndex].get(0);
-            origin(1) = (float)slots[iIndex].get(1);
-        }
-        __m128 vLeft = origin.q;
-        _ReadWriteBarrier();
-        direction.q = _mm_sub_ps(vLeft, pos.q);
-        direction.q.m128_f32[2] = 0.0f;
-        origin(2) += x470;
-        __m128 vNormalized = normalized3(direction.q);
-        pos.q.m128_f32[2] = (float)origin.get(2);
-        float fDeltaZ = sourceZ - (float)origin.get(2);
-        direction.q = vNormalized;
-        char side = 1;
-        if (!(fDeltaZ > 0.0f))
-            side = 0;
-        float limit = (float)(x470 / 3.0);
-        if (fDeltaZ > limit)
-        {
-            if (!(sub.flags & 1))
-                goto end;
-            fDeltaZ = sourceZ - slots[iIndex].q.m128_f32[2] + x470;
-            if (fDeltaZ > 0.0f)
-            {
-                if (fDeltaZ > limit)
-                    goto end;
-                side = 1;
-            }
-        }
-        int childKey = a->f4c;
-        if (childKey != -1)
-        {
-            ResObj* pResObj = (ResObj*)GetValidatedPointer(shape);
-            if (pResObj)
-            {
-                BoundingVolumeNode* triangle = ((ResFn)pResObj->iface.vtbl[5])(&pResObj->iface, childKey, &storage);
-                __m128 c0 = decoded48->mat.col[0].q;
-                __m128 c1 = decoded48->mat.col[1].q;
-                __m128 c2 = decoded48->mat.col[2].q;
-                __m128 c3 = decoded48->mat.col[3].q;
-                for (int k = 2; k >= 0; --k)
-                {
-                    __m128 v = triangle->points[k];
-                    __m128 x = _mm_mul_ps(c0, _mm_shuffle_ps(v, v, 0));
-                    __m128 y = _mm_mul_ps(c1, _mm_shuffle_ps(v, v, 85));
-                    __m128 z = _mm_mul_ps(c2, _mm_shuffle_ps(v, v, 170));
-                    scratch.col[k].q = _mm_add_ps(_mm_add_ps(y, x), _mm_add_ps(z, c3));
-                }
-                Plane plane;
-                ComputeInverseLengths(scratch.col, &plane);
-                input.vectors[1].q = pos.q;
-                input.vectors[0].q = pos.q;
-                input.vectors[1].q.m128_f32[0] -= scalar(direction.q) * x474;
-                input.vectors[1].q.m128_f32[1] -= scalar(_mm_shuffle_ps(direction.q, direction.q, 85)) * x474;
-                FUN_00cd6520(input.vectors, 0.05f, scratch.col, triangle->radius, &plane, 0.0f, 0, &output.contacts, 0);
-                flag = output.contacts.hit[0].distance >= 0.0f && output.contacts.hit[1].distance >= 0.0f;
-                goto end;
-            }
-        }
-        {
-            unsigned int uiLastKey = ~0U;
-            input.filter = 0;
-            input.collectionFilter = 0;
-            output.ray.fraction = 1.0f;
-            output.ray.extra = -1;
-            output.ray.keyIndex = 0;
-            output.ray.keys[0] = -1;
-            endpoint.q = origin.q;
-            scale = x474 + scale;
-            endpoint.q.m128_f32[0] -= scalar(direction.q) * scale;
-            endpoint.q.m128_f32[1] -= scalar(_mm_shuffle_ps(direction.q, direction.q, 85)) * scale;
-            scratch.col[0].q = decoded48->mat.col[0].q;
-            scratch.col[1].q = decoded48->mat.col[1].q;
-            scratch.col[2].q = decoded48->mat.col[2].q;
-            scratch.col[3].q = decoded48->mat.col[3].q;
-            input.vectors[0].FUN_00c7f690(&scratch, &origin);
-            input.vectors[1].FUN_00c7f690(&scratch, &endpoint);
-            ((RayShape*)shape)->cast(input, output.ray);
-            if (output.ray.fraction < 1.0f)
-            {
-                for (int j = 0; j < 8; ++j)
-                {
-                    unsigned int key = output.ray.keys[j];
-                    if (key == -1)
-                        break;
-                    uiLastKey = key;
-                }
-                flag = FUN_00c6d7e0(shape, 1, side, uiLastKey) == 0;
-            }
-            else
-            {
-                flag = true;
-            }
-        }
-    }
-end:
-    if ((sub.flags & 1) && flag)
-        sub.AccumulateValue((void*)iIndex, scalar(_mm_shuffle_ps(_mm_load_ps(a->v), _mm_load_ps(a->v), 170)));
-    return flag;
-}

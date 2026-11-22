@@ -42,18 +42,6 @@ void __cdecl CopyChannelValue(int index, int channel, FUN_00df0810_Source* sourc
 }
 
 #include <xmmintrin.h>
-static __forceinline void CopyHelper(__m128* d, const void* s)
-{
-    d[0] = ((__m128*)s)[0];
-    d[1] = ((__m128*)s)[1];
-    d[2] = ((__m128*)s)[2];
-    d[3] = ((__m128*)s)[3];
-    d[4] = ((__m128*)s)[4];
-    d[5] = ((__m128*)s)[5];
-    d[6] = ((__m128*)s)[6];
-    d[7] = ((__m128*)s)[7];
-    d[8] = ((__m128*)s)[8];
-}
 
 struct ObjF
 {
@@ -505,108 +493,6 @@ extern void __cdecl FUN_00e29470(void* a, void* b, int c);
 extern void __cdecl FUN_00e29380(void* a, void* b);
 extern void __cdecl FUN_00e298f0(void* a, void* b);
 extern float DAT_0104da4c;
-
-// @fnv 0x00df0870
-void __cdecl FUN_00df0870(int arg0, ObjF* __restrict obj, int arg2, __m128* arg3, int* arg4)
-{
-    void* p180;
-    float fClamped;
-    float input;
-    BufA A;
-    BufB B;
-    CBuf C;
-    __m128* dst;
-
-    *(__m128*)&A.f000 = *(__m128*)&obj->f240;
-    *(__m128*)&A.f010 = *(__m128*)&obj->f250;
-    *(__m128*)&A.f020 = *(__m128*)&obj->f260;
-    *(__m128*)&A.f030 = *(__m128*)&obj->f270;
-    *(__m128*)&A.f040 = *(__m128*)&obj->f280;
-    *(__m128*)&A.f050 = *(__m128*)&obj->f290;
-    *(__m128*)&A.f060 = *(__m128*)&obj->f2a0;
-    *(__m128*)&A.f070 = *(__m128*)&obj->f2b0;
-    *(__m128*)&A.f080 = *(__m128*)&obj->f2c0;
-    *(__m128*)&A.f090 = *(__m128*)&obj->f2d0;
-    *(__m128*)&A.f0a0 = *(__m128*)&obj->f2e0;
-    *(__m128*)&A.f0b0 = *(__m128*)&obj->f2f0;
-    *(__m128*)&A.f0c0 = *(__m128*)&obj->f300;
-    *(__m128*)&A.f0d0 = *(__m128*)&obj->f310;
-    *(__m128*)&A.f0e0 = *(__m128*)&obj->f320;
-    *(__m128*)&A.f0f0 = *(__m128*)&obj->f330;
-    *(__m128*)&A.f100 = *(__m128*)&obj->f340;
-    *(__m128*)&A.f110 = *(__m128*)&obj->f350;
-    *(__m128*)&A.f120 = *(__m128*)&obj->f360;
-    *(__m128*)&A.f130 = *(__m128*)&obj->f370;
-    *(__m128*)&A.f140 = *(__m128*)&obj->f380;
-    *(__m128*)&A.f150 = *(__m128*)&obj->f390;
-    *(__m128*)&A.f160 = *(__m128*)&obj->f3a0;
-    *(__m128*)&A.f170 = *(__m128*)&obj->f3b0;
-
-    ResetJacobianRows(arg2, arg0, &A.f000, &A.f0c0);
-    FUN_00df07c0(arg2, arg3);
-    FUN_00e29250(obj, arg3);
-    FUN_00e29470(&C, obj, *arg4);
-
-    dst = (__m128*)(&obj->f0c0);
-    dst[0] = *(__m128*)&A.f000;
-    dst[1] = *(__m128*)&A.f010;
-    dst[2] = *(__m128*)&A.f020;
-    dst[3] = *(__m128*)&A.f030;
-    dst[4] = *(__m128*)&A.f040;
-    dst[5] = *(__m128*)&A.f050;
-    dst[6] = *(__m128*)&A.f060;
-    dst[7] = *(__m128*)&A.f070;
-    dst[8] = *(__m128*)&A.f080;
-    dst[9] = *(__m128*)&A.f090;
-    dst[10] = *(__m128*)&A.f0a0;
-    dst[11] = *(__m128*)&A.f0b0;
-
-    FUN_00e29380(dst, &C);
-
-    input = obj->f0c0;
-    fClamped = (DAT_0104da4c < input) ? input : DAT_0104da4c;
-    obj->f0c0 = fClamped;
-    input = obj->f150;
-    fClamped = (DAT_0104da4c < input) ? input : DAT_0104da4c;
-    obj->f150 = fClamped;
-    input = obj->f0d4;
-    fClamped = (DAT_0104da4c < input) ? input : DAT_0104da4c;
-    obj->f0d4 = fClamped;
-    input = obj->f164;
-    fClamped = (DAT_0104da4c < input) ? input : DAT_0104da4c;
-    obj->f164 = fClamped;
-    input = obj->f0e8;
-    fClamped = (DAT_0104da4c < input) ? input : DAT_0104da4c;
-    obj->f0e8 = fClamped;
-    input = obj->f178;
-    fClamped = (DAT_0104da4c < input) ? input : DAT_0104da4c;
-    obj->f178 = fClamped;
-
-    *(__m128*)&B.f000 = dst[0];
-    *(__m128*)&B.f010 = dst[1];
-    *(__m128*)&B.f020 = dst[2];
-    *(__m128*)&B.f030 = dst[3];
-    *(__m128*)&B.f040 = dst[4];
-    *(__m128*)&B.f050 = dst[5];
-    *(__m128*)&B.f060 = dst[6];
-    *(__m128*)&B.f070 = dst[7];
-    *(__m128*)&B.f080 = dst[8];
-    *(__m128*)&B.f090 = dst[9];
-    *(__m128*)&B.f0a0 = dst[10];
-    *(__m128*)&B.f0b0 = dst[11];
-
-    FUN_00e298f0(dst, &B.f000);
-
-    p180 = &obj->f180;
-    FUN_00e29470(p180, dst, (int)(&A.f0c0));
-
-    arg3[0] = *(__m128*)&obj->f300;
-    arg3[1] = *(__m128*)&obj->f310;
-    arg3[2] = *(__m128*)&obj->f320;
-    CopyHelper(arg3 + 3, &obj->f330);
-
-    *arg4 = (int)p180;
-}
 
 struct hkVector4
 {

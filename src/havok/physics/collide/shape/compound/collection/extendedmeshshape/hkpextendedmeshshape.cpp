@@ -9,25 +9,11 @@ struct FUN_00d554a0_class
     int __thiscall GetOrInitValue();
 };
 
-// @fnv 0x00d554a0
-int __thiscall FUN_00d554a0_class::GetOrInitValue()
-{
-    if (*reinterpret_cast<int*>(reinterpret_cast<char*>(this) + 0xd0) < 0)
-        *reinterpret_cast<int*>(reinterpret_cast<char*>(this) + 0xd0) = FUN_00d1f1e0();
-    return *reinterpret_cast<int*>(reinterpret_cast<char*>(this) + 0xd0);
-}
-
 void __cdecl FUN_00d26230(void* first, void* second, void* third, float value, int last);
 struct FUN_00d56040_shell
 {
     void __thiscall FUN_00d56040(void* first, float value, int last);
 };
-// Calls FUN_00d26230 with first, the two buffers at offsets 0x90 and 0xa0 of this, value and last.
-// @fnv 0x00d56040
-void __thiscall FUN_00d56040_shell::FUN_00d56040(void* first, float value, int last)
-{
-    FUN_00d26230(first, (unsigned char*)this + 0x90, (unsigned char*)this + 0xa0, value, last);
-}
 
 struct hkMemoryAllocator;
 
@@ -101,28 +87,6 @@ struct FUN_00d56070_class
     hkShortArray m_aiIndexedValues;
     void SetShortAtKey(int key, short value);
 };
-
-// @fnv 0x00d56070
-void FUN_00d56070_class::SetShortAtKey(int key, short sValue)
-{
-    if (m_aiIndexedValues.m_iElementCount == 0)
-    {
-        int total = 0;
-        for (int i = 0; i < m_iCapacityFlags; i++)
-        {
-            m_pElements[i].m_offset = total;
-            total += m_pElements[i].m_uiItemCount;
-        }
-        m_aiIndexedValues.reserveExactly(total);
-        m_aiIndexedValues.SetSizeAndGrow(total);
-    }
-    if ((key & 0x80000000) == 0)
-    {
-        unsigned idx = (unsigned)(key & 0x7fffffff) >> (32 - m_bits);
-        int sub = key & (0xffffffffu >> m_bits);
-        m_aiIndexedValues.m_data[m_pElements[idx].m_offset + sub] = sValue;
-    }
-}
 
 struct S_00d56880_Alloc
 {
@@ -269,13 +233,6 @@ struct S_00d56880
     S_00d56880_Elem* AppendElement();
 };
 
-// Appends one default-constructed element to the array and returns a pointer to it.
-// @fnv 0x00d56880
-S_00d56880_Elem* S_00d56880::AppendElement()
-{
-    return m_aiIndexedValues.expandBy(1);
-}
-
 struct FUN_00d55520_cls
 {
     int unk00;
@@ -286,12 +243,6 @@ struct FUN_00d55520_cls
     int unk14;
     int m_18;
 };
-
-// @fnv 0x00d55520
-int __stdcall FUN_00d55520(FUN_00d55520_cls* a1)
-{
-    return a1->m_18;
-}
 
 struct SpawnedOwner
 {
@@ -360,19 +311,6 @@ struct FUN_00d555d0_cls
     int m_d0;
     int GetSpawnedValue(int aiKey);
 };
-
-// Looks up the entry for aiKey via FUN_00d55530 on the owning object and returns its first int, or the owner's m_0xdc when not found.
-// @fnv 0x00d555d0
-int FUN_00d555d0_cls::GetSpawnedValue(int aiKey)
-{
-    SpawnedOwner* outer = (SpawnedOwner*)((char*)this - 0x10);
-    int* v = (int*)outer->FUN_00d55530(aiKey);
-    if (v != 0)
-    {
-        return *v;
-    }
-    return outer->m_0xdc;
-}
 
 struct Child
 {
@@ -979,24 +917,6 @@ struct FUN_00d56160_cls
     int Vec4(FUN_00d56160_items* items, unsigned int value);
 };
 
-// 16-byte aligned four-float vector structure with x, y, z and w components.
-// @fnv 0x00d56160
-int FUN_00d56160_cls::Vec4(FUN_00d56160_items* items, unsigned int value)
-{
-    int count = 0;
-
-    for (int i = 0; i < items->m_uiItemCount; ++i)
-    {
-        FUN_00d56160_big tmp;
-        unsigned char hit;
-        FUN_00d56160_out* r = m_sub.FUN_00d55ce0((value << (32 - m_b0)) | i, &tmp.m_out);
-        if (*IsDegenerateTriangle(&hit, &r->m_20, &r->m_30, &r->m_40, DAT_011b2e90) == 0)
-        {
-            ++count;
-        }
-    }
-    return count;
-}
 }  // namespace fnv_00d56160
 
 struct hkReferencedObject
@@ -1032,24 +952,6 @@ struct Container
     unsigned capacityFlags;
     void FUN_00d56800();
 };
-// @fnv 0x00d56800
-void Container::FUN_00d56800()
-{
-    BufferAllocator* allocator = FUN_00c85750()->allocator;
-    int savedCount = count;
-    hkReferencedObject** savedData = data;
-    for (int i = 0; i < savedCount; ++i)
-    {
-        if (savedData[i])
-            savedData[i]->removeReference();
-        savedData[i] = 0;
-    }
-    count = 0;
-    if (!(capacityFlags & 0x80000000u))
-        allocator->Release(data, (capacityFlags & 0x3fffffffu) * 4u);
-    capacityFlags = 0x80000000u;
-    data = 0;
-}
 
 namespace fnv_00d56e00 {
 struct hkMemoryAllocator
@@ -1149,18 +1051,6 @@ struct Obj
     void FUN_00d56e00();
 };
 
-// Resets the object's two vtables and clears the mcc, mc0 and mb4 arrays, destroying mc0's elements and freeing their storage.
-// @fnv 0x00d56e00
-void Obj::FUN_00d56e00()
-{
-    m_vtbl = DAT_010d0ecc;
-    m_vtbl10 = DAT_010d0ea8;
-    mcc.ClearAndRelease();
-    mc0.destroyAndDeallocate();
-    mb4.ClearAndRelease();
-    m_vtbl10 = DAT_010c6fb0;
-    m_vtbl = DAT_0102e388;
-}
 }  // namespace fnv_00d56e00
 
 struct FUN_00d55b40_Shape
@@ -1374,20 +1264,6 @@ struct OwnerD562
     ElemD562* FUN_00d562f0();
 };
 
-// Returns a pointer to a new ElemD562, using the inline element when the array is empty, otherwise calling AllocatePair on m_kArray.
-// @fnv 0x00d562f0
-ElemD562* OwnerD562::FUN_00d562f0()
-{
-    if (m_kArray.m_iElementCount == 0)
-    {
-        m_kArray.m_data = &m_kInline;
-        m_kArray.m_iElementCount = 1;
-        m_kArray.m_iCapacityState = 0x80000001;
-        return &m_kInline;
-    }
-    return &m_kArray.AllocatePair();
-}
-
 namespace fnv_00d569c0 {
 union __declspec(intrin_type) __declspec(align(16)) __m128
 {
@@ -1531,19 +1407,6 @@ class FUN_00d569c0 : public FUN_00d21410
 
 static const float DAT_0104e148 = -3.40282e+38f;
 
-// Initializes an extended mesh shape with the given triangle radius and subpart index bits, setting default scaling, AABB, and welding type.
-// @fnv 0x00d569c0
-FUN_00d569c0::FUN_00d569c0(float afTriangleRadius, int iNumBitsForSubpartIndex) throw() : FUN_00d21410(0xe, 1)
-{
-    m_fTriangleRadius = afTriangleRadius;
-    m_kScaling.SetAllComponents(1.0f);
-    m_uiShapeFlags = 0;
-    m_iFinishingFlag = 0;
-    m_iNumBitsForSubpartIndex = iNumBitsForSubpartIndex;
-    m_eWeldingType = 6;
-    m_kAabbHalfExtents.SetAllComponents(DAT_0104e148);
-    m_kAabbCenter.setZero4();
-}
 }  // namespace fnv_00d569c0
 
 struct FUN_00d554c0_Class
@@ -1583,12 +1446,6 @@ struct FUN_00d554c0_Class
     __m128 unk80;
     void FUN_00d554c0(const __m128* value);
 };
-
-// @fnv 0x00d554c0
-void FUN_00d554c0_Class::FUN_00d554c0(const __m128* value)
-{
-    unk80 = *value;
-}
 
 extern "C" void _ReadWriteBarrier(void);
 extern "C" __m128 _mm_load_ss(const float*);
@@ -1654,45 +1511,9 @@ struct ShapeHolderS
     hkVec4 m_vTranslation;
 };
 
-// Computes the combined axis-aligned bounding box of all shapes in src by transforming each shape's AABB and merging the min/max corners.
-// @fnv 0x00d558b0
-static __declspec(noinline) void FUN_00d558b0(const ShapeHolderS* apShapeHolder, hkAabbS* out)
-{
-    __m128 v = _mm_load_ss(&DAT_0104da48);
-    out->m_kMinimumCorner.m_vComponents = _mm_shuffle_ps(v, v, 0);
-    out->m_kMaximumCorner.m_vComponents = _mm_xor_ps(out->m_kMinimumCorner.m_vComponents, DAT_010c44d0);
-    hkTransformS t;
-    t.m_vTranslation = apShapeHolder->m_vTranslation;
-    t.FUN_00cb2d90(apShapeHolder->m_rotation);
-    for (int i = 0; i < apShapeHolder->m_numShapes; i++)
-    {
-        hkAabbS a;
-        apShapeHolder->m_shapes[i]->getAabb(t, 0.0f, a);
-        __m128 omin = out->m_kMinimumCorner.m_vComponents;
-        _ReadWriteBarrier();
-        __m128 mn = _mm_min_ps(omin, a.m_kMinimumCorner.m_vComponents);
-        __m128 omax = out->m_kMaximumCorner.m_vComponents;
-        _ReadWriteBarrier();
-        out->m_kMinimumCorner.m_vComponents = mn;
-        out->m_kMaximumCorner.m_vComponents = _mm_max_ps(omax, a.m_kMaximumCorner.m_vComponents);
-    }
-}
-
 ShapeHolderS* volatile g_src;
 hkAabbS* volatile g_out;
 extern void SomeOtherCall_d558(hkAabbS*);
-
-void CallTarget_d558b0()
-{
-    ShapeHolderS* s = g_src;
-    hkAabbS* o = g_out;
-    FUN_00d558b0(s, o);
-    SomeOtherCall_d558(o);
-}
-
-// @fnv 0x00d55500
-void FUN_00d55500()
-{}
 
 extern "C"
 {
@@ -1775,68 +1596,6 @@ struct TrianglesSubpart
     int m_iMaterialStriding;
     signed char m_ucIndexStridingType;
 };
-
-// Computes the axis-aligned bounding box of all triangle vertices in a subpart, applying scale and a fixed transform, and stores the result in aabb.
-// @fnv 0x00d55680
-void __cdecl FUN_00d55680(const TrianglesSubpart& part, const hkVector4q& scale, hkAabbq& aabb)
-{
-    aabb.m_kMinimumCorner.SetAllComponents(3.40282e+38f);
-    aabb.m_kMaximumCorner.m_vComponents = _mm_xor_ps(aabb.m_kMinimumCorner.m_vComponents, DAT_010c44d0);
-    for (int i = 0; i < part.m_iTriangleCount; i++)
-    {
-        const hkReal* v0;
-        const hkReal* v1;
-        const hkReal* v2;
-        switch (part.m_ucIndexStridingType)
-        {
-        case 1: {
-            const unsigned char* t = (const unsigned char*)(part.m_pMaterialDataBase + i * part.m_iMaterialStriding);
-            v0 = (const hkReal*)(part.m_pMaterialIndexBase + t[0] * part.m_iTriangleIndexStride);
-            v1 = (const hkReal*)(part.m_pMaterialIndexBase + t[1] * part.m_iTriangleIndexStride);
-            v2 = (const hkReal*)(part.m_pMaterialIndexBase + t[2] * part.m_iTriangleIndexStride);
-            break;
-        }
-        case 2: {
-            const unsigned short* t = (const unsigned short*)(part.m_pMaterialDataBase + i * part.m_iMaterialStriding);
-            v0 = (const hkReal*)(part.m_pMaterialIndexBase + t[0] * part.m_iTriangleIndexStride);
-            v1 = (const hkReal*)(part.m_pMaterialIndexBase + t[1] * part.m_iTriangleIndexStride);
-            v2 = (const hkReal*)(part.m_pMaterialIndexBase + t[2] * part.m_iTriangleIndexStride);
-            break;
-        }
-        default: {
-            const unsigned int* t = (const unsigned int*)(part.m_pMaterialDataBase + i * part.m_iMaterialStriding);
-            v0 = (const hkReal*)(part.m_pMaterialIndexBase + t[0] * part.m_iTriangleIndexStride);
-            v1 = (const hkReal*)(part.m_pMaterialIndexBase + t[1] * part.m_iTriangleIndexStride);
-            v2 = (const hkReal*)(part.m_pMaterialIndexBase + t[2] * part.m_iTriangleIndexStride);
-            break;
-        }
-        }
-        {
-            hkVector4q vertex;
-            vertex.set(v0[0] * scale(0), v0[1] * scale(1), v0[2] * scale(2));
-            hkVector4q transformed;
-            transformed.FUN_00c7f640(DAT_01268370, vertex);
-            aabb.m_kMinimumCorner.setMin4(aabb.m_kMinimumCorner, transformed);
-            aabb.m_kMaximumCorner.setMax4(aabb.m_kMaximumCorner, transformed);
-        }
-        {
-            hkVector4q vertex;
-            vertex.set(*(const volatile float*)&v1[0] * scale(0), v1[1] * scale(1), v1[2] * scale(2));
-            hkVector4q transformed;
-            transformed.FUN_00c7f640(DAT_01268370, vertex);
-            aabb.m_kMinimumCorner.setMin4(aabb.m_kMinimumCorner, transformed);
-            aabb.m_kMaximumCorner.setMax4(aabb.m_kMaximumCorner, transformed);
-        }
-        {
-            hkVector4q vertex;
-            vertex.set(v2[0] * scale(0), v2[1] * scale(1), v2[2] * scale(2));
-            hkVector4q transformed;
-            transformed.FUN_00c7f640(DAT_01268370, vertex);
-            aabb.m_kMinimumCorner.setMin4(aabb.m_kMinimumCorner, transformed);
-            aabb.m_kMaximumCorner.setMax4(aabb.m_kMaximumCorner, transformed);
-        }
-    }
-}
 
 struct VertexScratch
 {
@@ -1977,49 +1736,6 @@ struct TriangleShape
     }
 };
 
-static __forceinline void getIndices(const MeshSubpartTriangle& r, unsigned int terminalIndex, int* indices)
-{
-    const char* ext = (const char*)r.m_pMaterialDataBase + terminalIndex * r.m_iMaterialStriding;
-    long flip = r.m_bFlipAlternateTriangles & terminalIndex;
-
-    switch (r.m_ucIndexStridingType)
-    {
-    case 1: {
-        const unsigned char* transformType;
-        transformType = (const unsigned char*)ext;
-        indices[0] = transformType[0];
-        unsigned short p = flip + 1;
-        short off2 = (flip ^ 1) + 1;
-        indices[1] = transformType[(short)p];
-        indices[2] = transformType[(int)off2];
-        break;
-    }
-    case 2: {
-        const unsigned short* transformType = (const unsigned short*)ext;
-        indices[0] = transformType[0];
-        short p = 1 + flip;
-        short off2 = (flip ^ 1) + 1;
-        indices[1] = transformType[(short)p];
-        indices[2] = transformType[(int)off2];
-        break;
-    }
-    case 3: {
-        const unsigned int* transformType = (const unsigned int*)ext;
-        indices[0] = transformType[0];
-        int p = flip + 1;
-        short off2 = (flip ^ 1) + 1;
-        indices[1] = transformType[(short)p];
-        indices[2] = transformType[(int)off2];
-        break;
-    }
-    default:
-        indices[0] = 0;
-        indices[1] = 0;
-        indices[2] = 0;
-        break;
-    }
-}
-
 struct ExtendedMeshShape : S_00d55bd0_MeshShape
 {
     int unkb8;
@@ -2036,129 +1752,6 @@ struct ExtendedMeshShape : S_00d55bd0_MeshShape
 
     const S_00d55bd0_Shape* FUN_00d55ce0(unsigned int key, void* buffer) const;
 };
-
-// Resolves a subpart key to a TriangleShape or child shape, applying scale, welding info, and optional transform into the caller buffer.
-// @fnv 0x00d55ce0
-const S_00d55bd0_Shape* ExtendedMeshShape::FUN_00d55ce0(unsigned int key, void* buffer) const
-{
-    __declspec(align(16)) unsigned int subpartStorage[45];
-    unsigned int numBits = m_iNumBitsForSubpartIndex;
-    unsigned int uiSubpartIndex = (key & 0x7fffffff) >> (32 - numBits);
-    unsigned int terminalIndex = key & (~0u >> numBits);
-
-    if (!(key & 0x80000000))
-    {
-        void* subpartBuffer = (void*)(((unsigned int)subpartStorage + 0x5f) & ~0x5f);
-        const MeshSubpartTriangle* r;
-        if (m_numTrianglesSubparts == 1)
-        {
-            r = (const MeshSubpartTriangle*)&unk10;
-        }
-        else
-        {
-            CopySixteenByteBlocks(subpartBuffer, (const char*)m_kTrianglesSubparts + uiSubpartIndex * 96);
-            r = (const MeshSubpartTriangle*)subpartBuffer;
-        }
-
-        union
-        {
-            int indices[3];
-            S_00d55bd0_Vector4 scale;
-        } scratch;
-        getIndices(*r, terminalIndex, scratch.indices);
-        const void* n = r->m_pMaterialIndexBase;
-        long iIndexStride = r->m_iTriangleIndexStride;
-
-        TriangleShape* __restrict triangle = new (buffer) TriangleShape(DAT_011b153c);
-        triangle->m_eWeldingType = m_eWeldingType;
-        triangle->m_fSphereRadius = m_fTriangleRadius;
-
-        __m128 indexBase = *(__m128*)&r->m_kVertexTransform;
-        __m128 vSquared = _mm_mul_ps(indexBase, indexBase);
-        __m128 vShuffled = _mm_shuffle_ps(vSquared, vSquared, 0x55);
-        __m128 c = _mm_add_ss(vShuffled, vSquared);
-        __m128 vertexStriding = _mm_shuffle_ps(vSquared, vSquared, 0xaa);
-        __m128 subpartIndex = _mm_add_ss(vertexStriding, c);
-        float fLengthSq;
-        _mm_store_ss(&fLengthSq, subpartIndex);
-
-        triangle->m_type = 3;
-        triangle->m_ucWeldingPadding = (fLengthSq > 0.0f);
-        *(__m128*)&triangle->m_kVertexTransform = indexBase;
-
-        unsigned short weldingInfo;
-        if (m_weldingInfoSize == 0)
-            weldingInfo = 0;
-        else
-            weldingInfo = m_weldingInfoData[r->m_weldingInfoOffset + terminalIndex];
-
-        triangle->m_kWeldingInfo = weldingInfo;
-
-        const float* pVertexA = (const float*)((const char*)n + scratch.indices[0] * iIndexStride);
-        const float* pVertexB = (const float*)((const char*)n + scratch.indices[1] * iIndexStride);
-        const float* pVertexC = (const float*)((const char*)n + scratch.indices[2] * iIndexStride);
-
-        scratch.scale = *(const S_00d55bd0_Vector4*)&unk70;
-
-        VertexScratch v;
-        __m128 vertices[3];
-        v.at(0) = pVertexA[0];
-        v.at(1) = pVertexA[1];
-        v.at(2) = pVertexA[2];
-        vertices[0] = _mm_mul_ps(*(__m128*)&v, *(__m128*)&scratch.scale);
-
-        v.at(0) = pVertexB[0];
-        v.at(1) = pVertexB[1];
-        v.at(2) = pVertexB[2];
-        vertices[1] = _mm_mul_ps(*(__m128*)&v, *(__m128*)&scratch.scale);
-
-        v.at(0) = pVertexC[0];
-        v.at(1) = pVertexC[1];
-        v.at(2) = pVertexC[2];
-        vertices[2] = _mm_mul_ps(*(__m128*)&v, *(__m128*)&scratch.scale);
-        triangle->setVertices(vertices);
-
-        return (const S_00d55bd0_Shape*)triangle;
-    }
-    else
-    {
-        void* subpartBuffer = (void*)(((unsigned int)subpartStorage + 0x3f) & ~0x3f);
-        FUN_00d570d0(subpartBuffer, (const char*)m_kShapesSubparts + (uiSubpartIndex << 6));
-        const MeshSubpartShape* pSubpartShape = (const MeshSubpartShape*)subpartBuffer;
-
-        int mvA = pSubpartShape->m_type & 0xc0ffffff;
-        const S_00d55bd0_Shape* childShape = pSubpartShape->m_kChildShapes[terminalIndex];
-        if (!mvA)
-        {
-            return childShape;
-        }
-        if (mvA == 1)
-        {
-            if (buffer)
-            {
-                float radius = ((const TriangleShape*)childShape)->m_fSphereRadius;
-                ((HelperC9E340*)buffer)->FUN_00c9e340(0xb, radius, childShape, 0);
-                ((TriangleShape*)buffer)->vtable = (int)&DAT_010d0e5c;
-                __m128 scale = _mm_and_ps(*(__m128*)&pSubpartShape->m_vTranslation, DAT_010c4c10);
-                *(__m128*)&((TriangleShape*)buffer)->m_kVertexA = scale;
-                ((TriangleShape*)buffer)->unk1c = 0;
-                return (const S_00d55bd0_Shape*)buffer;
-            }
-        }
-        else
-        {
-            Transform transform;
-            transform.m_vTranslation = pSubpartShape->m_vTranslation;
-            ((HelperCB2D90*)&transform)->FUN_00cb2d90(&pSubpartShape->m_rotation);
-
-            if (buffer)
-            {
-                return ((HelperD5D7A0*)buffer)->FUN_00d5d7a0(childShape, &transform, 0);
-            }
-        }
-        return 0;
-    }
-}
 
 extern "C" void _mm_store_ps(float*, __m128);
 extern "C" __m128 _mm_add_ps(__m128, __m128);
@@ -2218,23 +1811,6 @@ struct MeshOwner
     int FUN_00d55520(int);
     int FUN_00d56900(volatile int);
 };
-// Appends a shape element, expands the owner AABB to include it, and returns the new element index.
-// @fnv 0x00d56900
-int MeshOwner::FUN_00d56900(volatile int key)
-{
-    S_00d56880_Elem* elem = AppendElement();
-    ((MeshEntry*)elem)->FUN_00d4ad60(key);
-    hkAabbS bounds;
-    __m128 lo = _mm_sub_ps(m_kCenterPosition, m_vHalfExtents);
-    __m128 hi = _mm_add_ps(m_vHalfExtents, m_kCenterPosition);
-    FUN_00d558b0((ShapeHolderS*)elem, &bounds);
-    __m128 mn = _mm_min_ps(lo, bounds.m_kMinimumCorner.m_vComponents);
-    __m128 mx = _mm_max_ps(hi, bounds.m_kMaximumCorner.m_vComponents);
-    _mm_store_ps((float*)&m_kCenterPosition, _mm_mul_ps(_mm_add_ps(mx, mn), DAT_010c71d0));
-    m_vHalfExtents = _mm_mul_ps(_mm_sub_ps(mx, mn), DAT_010c71d0);
-    m_children += FUN_00d55520(key);
-    return m_uiItemCount - 1;
-}
 
 namespace fnv_00d56200 {
 struct AudioHolder
@@ -2322,59 +1898,6 @@ struct FUN_00d56200_cls
     unsigned char m_d8;
     void FUN_00d56200(int a1);
 };
-
-// Stores a1 in m_d8; if a1 is 6 frees and resets m_cc, else writes running totals into the 0x60-byte records of m_b4 and grows m_cc to the total.
-// @fnv 0x00d56200
-void FUN_00d56200_cls::FUN_00d56200(int a1)
-{
-    m_d8 = (unsigned char)a1;
-    if (a1 != 6)
-    {
-        int total = 0;
-        int i = 0;
-        if (m_b8 > total)
-        {
-            char* base = m_b4;
-            int off = 0;
-            do
-            {
-                *(int*)(base + off + 0x4c) = total;
-                base = m_b4;
-                total += *(int*)(base + off + 0x14);
-                off += 0x60;
-                ++i;
-            } while (i < m_b8);
-        }
-        SubBuf* sub = &m_cc;
-        AudioHolder* pHolder = FUN_00c85750();
-        if ((sub->m_08 & 0x3fffffff) < total)
-            FUN_00c908c0(pHolder->m_10, sub, total, 2);
-        AudioHolder* pHolder2 = FUN_00c85750();
-        void* alloc2 = pHolder2->m_10;
-        int size = sub->m_08 & 0x3fffffff;
-        if (size < total)
-        {
-            int cap = size * 2;
-            if (total >= cap)
-                cap = total;
-            FUN_00c908c0(alloc2, sub, cap, 2);
-        }
-        sub->m_04 = total;
-        return;
-    }
-    AudioHolder* pHolder = FUN_00c85750();
-    Allocator* alloc = (Allocator*)pHolder->m_10;
-    int size = m_cc.m_08;
-    int zero = 0;
-    m_cc.m_04 = zero;
-    if ((m_cc.m_08 & 0x80000000u) == 0)
-    {
-        alloc->v10(m_cc.m_00, (size & 0x3fffffff) * 2);
-    }
-    m_cc.m_00 = 0;
-    m_cc.m_08 = (int)0x80000000;
-    return;
-}
 
 // FUN_00d56200 wrapper for the pack
 }  // namespace fnv_00d56200
@@ -2493,31 +2016,6 @@ struct SpawnedOwnerQ
     ChanGroupNeg* negGroups;
     int FUN_00d55530(int aiIndex);
 };
-// Splits aiIndex into a group number and offset, picks an entry from groups, negGroups (high bit set) or the inline entry, and returns its get(offset) or 0.
-// @fnv 0x00d55530
-int SpawnedOwnerQ::FUN_00d55530(int aiIndex)
-{
-    unsigned int m_iGridX = ((unsigned int)aiIndex & 0x7fffffff) >> (32 - bits);
-    unsigned int iOffset = (0xffffffffu >> bits) & aiIndex;
-    ChanEntry* pEntry;
-    ChanEntry* pArr;
-    if (((unsigned int)aiIndex & 0x80000000u) == 0)
-    {
-        if (numGroups == 1)
-        {
-            pEntry = &inlineCh;
-            goto have;
-        }
-        if (m_iGridX >= numGroups)
-            return 0;
-        pArr = &groups[m_iGridX].ch;
-    }
-    else
-        pArr = &negGroups[m_iGridX].ch;
-    pEntry = pArr;
-have:
-    return (int)pEntry->get(iOffset);
-}
 
 extern "C" __m128 _mm_setr_ps(float, float, float, float);
 extern "C" __m128 _mm_min_ps(__m128, __m128);
@@ -2541,28 +2039,6 @@ struct Vec3
 {
     float x, y, z;
 };
-
-// Scales a Vec3 point, transforms it via a matrix, and expands the AabbQ min/max corners to include the result.
-// @fnv 0x00d55600
-static __declspec(noinline) void __cdecl FUN_00d55600(const Vec3* apPoint, const Vec3* scale, const void* transform,
-                                                      AabbQ* aabb)
-{
-    float x = apPoint->x * scale->x;
-    float y = apPoint->y * scale->y;
-    float z = apPoint->z * scale->z;
-    Vec4Q p;
-    *(__m128*)&p = _mm_setr_ps(x, y, z, DAT_01011d78);
-    Vec4Q out;
-    out.FUN_00c7f640(transform, &p);
-    __m128 o = *(__m128*)&out;
-    *(__m128*)&aabb->m_kMinimumCorner = _mm_min_ps(*(__m128*)&aabb->m_kMinimumCorner, o);
-    *(__m128*)&aabb->m_kMaximumCorner = _mm_max_ps(*(__m128*)&aabb->m_kMaximumCorner, o);
-}
-
-void keep_alive_b11424(const Vec3* self, const Vec3* scale, const void* transform, AabbQ* aabb)
-{
-    FUN_00d55600(self, scale, transform, aabb);
-}
 
 extern "C" __m128 _mm_load_ps1(const float* p);
 extern "C" __m128 _mm_min_ps(__m128, __m128);
@@ -2687,58 +2163,6 @@ class hkpD563Shape
 
     float m_fScalar;
 };
-
-// Updates the shape's AABB by querying the tree, expanding by m_fScalar, and accumulating m_total from Vec4.
-// @fnv 0x00d563a0
-void hkpD563Shape::FUN_00d563a0(void* arg)
-{
-
-    hkpD563Tree* tree = FUN_00d562f0();
-
-    tree->FUN_00d4abf0(arg);
-
-    hkAabbD563 existing;
-
-    hkAabbD563 updated;
-
-    existing.m_kMinimumCorner.setSub4(m_kAabbCenter, m_kAabbHalfExtents);
-
-    existing.m_kMaximumCorner.setAdd4(m_kAabbHalfExtents, m_kAabbCenter);
-
-    FUN_00d55680(tree, &m_key, &updated);
-
-    hkVector4D563 tolerance;
-
-    tolerance.SetAllComponents(m_fScalar);
-
-    hkAabbD563 expanded;
-
-    expanded.m_kMinimumCorner.setSub4(updated.m_kMinimumCorner, tolerance);
-
-    expanded.m_kMaximumCorner.setAdd4(updated.m_kMaximumCorner, tolerance);
-
-    existing.includeAabb(expanded);
-
-    hkVector4D563 center;
-
-    center.setAdd4(existing.m_kMinimumCorner, existing.m_kMaximumCorner);
-
-    center.mul4(DAT_010c71d0);
-
-    m_kAabbCenter = center;
-
-    hkVector4D563 halfExtents;
-
-    halfExtents.setSub4(existing.m_kMaximumCorner, existing.m_kMinimumCorner);
-
-    halfExtents.mul4(DAT_010c71d0);
-
-    m_kAabbHalfExtents = halfExtents;
-
-    int lastLevel = m_numLevels - 1;
-
-    m_total += Vec4(arg, lastLevel);
-}
 
 extern "C"
 {
@@ -2901,38 +2325,6 @@ struct ShapesSubpartT
                                  const hkTransformD566& transform);
 };
 
-static __forceinline hkVector4CompS compareEquals3(const hkVector4f& a, const __m128& b, hkReal epsilon)
-{
-    const __m128 diff = _mm_and_ps(_mm_sub_ps(*(const __m128*)&a, b), g_hkQuadAbsMask);
-    const __m128 eps = _mm_set_ps1(epsilon);
-    hkVector4CompS c;
-    c.m_uiMask = _mm_cmple_ps(diff, eps);
-    return c;
-}
-
-// Initializes a convex subpart with child shapes and a transform, storing translation flags in the w component of m_vTranslation.
-// @fnv 0x00d56660
-ShapesSubpartT* ShapesSubpartT::FUN_00d56660(hkConvexShapeS* const* childShapes, int numChildShapes,
-                                             const hkTransformD566& transform)
-{
-    initSubpart(1);
-    m_kChildShapes.init();
-    m_rotation.FUN_00cb26e0(&transform);
-    m_vTranslation = transform.m_vTranslation;
-
-    hkRefPtrS<hkConvexShapeS>* dst = m_kChildShapes.expandBy(numChildShapes);
-    for (int i = 0; i < numChildShapes; i++)
-    {
-        dst[i] = childShapes[i];
-    }
-
-    hkVector4CompS isZero = compareEquals3(m_vTranslation, g_hkQuadZero, 0.001f);
-    int flags = (isZero.allAreSetXYZ() ? 0 : 1) |
-                (transform.FUN_00cd4e00(g_hkTransformIdentity, 0.001f).m_cBooleanValue ? 0 : 2);
-    *(int*)&m_vTranslation.w = flags | 0x3f000000;
-    return this;
-}
-
 struct hkMemoryAllocator
 {
     virtual void v0();
@@ -3069,74 +2461,3 @@ struct FUN_00d56ab0 : public FUN_00d21410
     FUN_00d56ab0(Src& input);
     void __thiscall FUN_00d55950();
 };
-
-// Constructs the object by copying fields from input, allocating and copying m_w, initializing m_aiIndexedValues from input.arr, and calling FUN_00d55950.
-// @fnv 0x00d56ab0
-FUN_00d56ab0::FUN_00d56ab0(Src& input) : FUN_00d21410(14, 1)
-{
-    Src* s = &input;
-    hkArray<WeldingElem>& arr = m_aiIndexedValues;
-    m_c80 = s->v20;
-    m_ce4 = s->f50;
-    m_cb0 = s->f30;
-    m_cd8 = s->f4c;
-    AudioMgr* m = audio();
-    hkMemoryAllocator* pAllocator = m->unk10;
-    int cap = m_w.m_cap;
-    int curCap = cap & 0x3fffffff;
-    if (curCap < s->m_usPassCountLocal)
-    {
-        if ((cap & 0x80000000) == 0)
-            pAllocator->ReturnMemory(m_w.m_data, curCap * 2);
-        {
-            int iSize = s->m_usPassCountLocal * 2;
-            m_w.m_data = (unsigned short*)pAllocator->AllocateBufferWithSize(&iSize);
-            m_w.m_cap = iSize / 2;
-        }
-    }
-    int num = s->m_usPassCountLocal;
-    m_w.m_iElementCount = num;
-    unsigned short* dst = m_w.m_data;
-    const unsigned short* src = s->us;
-    for (int i = 0; i < num; i++)
-        dst[i] = src[i];
-    int count = s->count;
-    if (count == 1)
-    {
-        arr.m_data = &m_sub;
-        arr.m_iElementCount = 1;
-        arr.m_cap = 0x80000001;
-    }
-    else
-    {
-        arr.reserve(count);
-        int oldSize = arr.m_iElementCount;
-        int n = count - oldSize;
-        WeldingElem* p = arr.m_data + oldSize;
-        for (int i = 0; i < n; i++)
-            new (p + i) WeldingElem();
-        arr.m_iElementCount = count;
-    }
-    m_cdc = 0;
-    for (unsigned i = 0; (int)i < s->count; i++)
-    {
-        arr.m_data[i].a14 = s->arr[i].f1c;
-        arr.m_data[i].a4 = s->arr[i].f20;
-        arr.m_data[i].a8 = s->arr[i].f24;
-        arr.m_data[i].a1 = s->arr[i].f11;
-        arr.m_data[i].ac = s->arr[i].f28;
-        arr.m_data[i].a2 = s->arr[i].f2c;
-        arr.m_data[i].aa = s->arr[i].f30;
-        arr.m_data[i].a18 = s->arr[i].f0;
-        arr.m_data[i].a1c = s->arr[i].f4;
-        arr.m_data[i].a20 = s->arr[i].f8;
-        arr.m_data[i].a40 = s->arr[i].fc;
-        arr.m_data[i].a48 = s->arr[i].f10;
-        arr.m_data[i].a44 = s->arr[i].f14;
-        arr.m_data[i].a4c = s->arr[i].f34;
-        arr.m_data[i].a30 = _mm_setzero_ps();
-        arr.m_data[i].a49 = s->arr[i].f18;
-    }
-    FUN_00d55950();
-    m_ce0 = reinterpret_cast<FUN_00d554a0_class*>(static_cast<Base2*>(this))->FUN_00d1f1e0();
-}

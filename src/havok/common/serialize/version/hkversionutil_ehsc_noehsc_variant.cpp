@@ -146,17 +146,6 @@ class hkVisitorDC12
     void FUN_00dc1bb0(void* pvObject, hkPointerMapDC12& kDone, int iFlags) throw();
 };
 // @fnv 0x00dc1230
-extern "C" void __cdecl VisitObjectList(int iList, int iFlags)
-{
-    void* const* ppvList = reinterpret_cast<void* const*>(iList);
-    ProcessObjectArray(ppvList, iFlags);
-    hkVisitorDC12 kVisitor;
-    hkPointerMapDC12 kDone;
-    kDone.EnsureCapacity(FUN_00c85750().heap(), 0);
-    for (int i = 0; ppvList[i]; i++)
-        kVisitor.FUN_00dc1bb0(ppvList[i], kDone, 1);
-    kDone.ProcessArgument(FUN_00c85750().heap());
-}
 class hkBoolDC10
 {
   public:

@@ -61,18 +61,6 @@ struct FUN_00d2b5c0_class
     FUN_00cb18f0_t sub;
     void FUN_00d2b5c0(int value, char flag);
 };
-// If flag is set, forwards value to sub.FUN_00cb1fb0; otherwise passes manager->unk10 and value to sub.FUN_00cb1870.
-// @fnv 0x00d2b5c0
-void FUN_00d2b5c0_class::FUN_00d2b5c0(int value, char flag)
-{
-    if (flag != 0)
-    {
-        sub.FUN_00cb1fb0(value);
-        return;
-    }
-    FUN_00c85750_return* manager = FUN_00c85750();
-    sub.FUN_00cb1870(manager->unk10, value, 1);
-}
 
 namespace fnv_00d2b710 {
 struct ManagerVTable
@@ -101,18 +89,6 @@ struct Widget : Base
     void* GetSelfWithNotify(unsigned char flags);
 };
 extern AudioState* __cdecl FUN_00c85750();
-// Calls the base function, and if bit 0 of flags is set, notifies the audio manager's vtable with this object and unk04, then returns this.
-// @fnv 0x00d2b710
-void* Widget::GetSelfWithNotify(unsigned char flags)
-{
-    ClearAndReset();
-    if (flags & 1)
-    {
-        AudioState* state = FUN_00c85750();
-        state->unk10->notify(this, unk04);
-    }
-    return this;
-}
 }  // namespace fnv_00d2b710
 
 struct D2B600Allocator;
@@ -178,13 +154,6 @@ struct D2B600Container
     void AppendObject(D2B600Object* object, int iUnused);
 };
 
-// Appends the given object pointer to the container's object array via its push-back method.
-// @fnv 0x00d2b600
-void D2B600Container::AppendObject(D2B600Object* object, int iUnused)
-{
-    m_kTrackedObjects.AddBack(object);
-}
-
 extern char DAT_010ce5d4[];
 
 struct D2B640Sub
@@ -210,25 +179,6 @@ struct D2B640Object
 
     D2B640Object* Initialize(int a1, int a2);
 };
-
-// @fnv 0x00d2b640
-D2B640Object* D2B640Object::Initialize(int a1, int a2)
-{
-    *(unsigned short volatile*)&m_06 = 1;
-    m_vtbl = DAT_010ce5d4;
-    D2B640Sub* sub = (D2B640Sub*)((char*)this + 8);
-    *(unsigned int volatile*)&sub->m_00 = 0;
-    *(unsigned int volatile*)&sub->m_04 = 0;
-    *(unsigned int volatile*)&sub->m_08 = 0xffffffffu;
-    FUN_00c85750_return* pResult = FUN_00c85750();
-    sub->EnsureCapacity(pResult->unk10, 0);
-    *(unsigned int volatile*)&m_14 = 0;
-    *(unsigned int volatile*)&m_18 = 0;
-    *(unsigned int volatile*)&m_1c = 0x80000000u;
-    *(unsigned int volatile*)&m_20 = (unsigned int)a1;
-    m_24 = (unsigned int)a2;
-    return this;
-}
 
 struct D2B6Allocator
 {
@@ -262,26 +212,6 @@ struct FUN_00d2b6b0_cls
 
     void ClearAndReset();
 };
-
-// Frees m_pData via the allocator when the capacity flag is clear, resets the data pointer and capacity, then reinitializes m_sub and sets the vtable.
-// @fnv 0x00d2b6b0
-void FUN_00d2b6b0_cls::ClearAndReset()
-{
-    FUN_00c85750_return* pHolder = FUN_00c85750();
-    D2B6Allocator* pAllocator = (D2B6Allocator*)pHolder->unk10;
-    m_iArrayLength = 0;
-    unsigned int uCapacityFlags = m_uCapBits;
-    if ((uCapacityFlags & 0x80000000u) == 0)
-    {
-        pAllocator->FreeArray(m_pData, (uCapacityFlags & 0x3fffffffu) * 4);
-    }
-    m_pData = 0;
-    m_uCapBits = 0x80000000u;
-    D2B6Sub* pSub = &m_sub;
-    pSub->ProcessArgument(FUN_00c85750()->unk10);
-    pSub->FUN_00a29680();
-    m_vptr00 = (int)&DAT_0102e388;
-}
 
 extern "C" int __cdecl Vsnprintf(char* buf, unsigned size, const char* fmt, ...);
 

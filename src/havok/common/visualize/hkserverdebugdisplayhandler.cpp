@@ -35,39 +35,6 @@ struct Record
     void* criticalSection;
     bool SetConfigValues(unsigned int a, unsigned int b, unsigned int c, int d, unsigned int e);
 };
-// Locks the critical section, writes five values to config, reads back a string, and returns whether the read-back string is empty.
-// @fnv 0x00dd9b40
-bool Record::SetConfigValues(unsigned int uiValueA, unsigned int uiValueB, unsigned int uiValueC, int iValueD,
-                             unsigned int uiValueE)
-{
-    _fnv_EnterCriticalSection(criticalSection);
-    if (config)
-    {
-        config->FUN_00d60960(0x29);
-        config->FUN_00d605d0(8);
-        config->FUN_00dda730(uiValueA);
-        config->FUN_00dda730(uiValueB);
-        config->FUN_00d60960(uiValueC);
-        config->FUN_00d609a0(iValueD);
-        config->WriteInt(uiValueE);
-    }
-    bool hasValue;
-    if (config)
-    {
-        const char* value = config->ForwardValueToObject(&uiValueA);
-        if (value[0] == 0)
-            goto noValue;
-        hasValue = true;
-        goto valueChecked;
-    noValue:
-        hasValue = false;
-    valueChecked:;
-    }
-    else
-        hasValue = false;
-    _fnv_LeaveCriticalSection(criticalSection);
-    return !hasValue;
-}
 
 struct FUN_00dd9ab0_cls
 {
@@ -275,20 +242,6 @@ class FUN_00dd9da0_cls
     void ApplyItemList(ItemList* pList);
 };
 
-// @fnv 0x00dd9da0
-void FUN_00dd9da0_cls::ApplyItemList(ItemList* pItemList)
-{
-    int i;
-
-    _fnv_EnterCriticalSection(m_pUserData);
-    m_pConfig->WriteInt(pItemList->m_iArrayLength);
-    for (i = 0; i < pItemList->m_iArrayLength; i++)
-    {
-        ((ConfigStub*)m_pConfig)->WriteShape(pItemList->m_pItems[i]);
-    }
-    _fnv_LeaveCriticalSection(m_pUserData);
-}
-
 extern int DAT_010d7cfc;
 void __cdecl _Deallocate(void*);
 
@@ -416,28 +369,6 @@ struct FUN_00dda0e0_cls
     int FUN_00dda0e0(unsigned int a, unsigned int b, int c, unsigned int d);
 };
 
-// @fnv 0x00dda0e0
-int FUN_00dda0e0_cls::FUN_00dda0e0(volatile unsigned int auiValue, unsigned int b, int c, unsigned int d)
-{
-    _fnv_EnterCriticalSection(criticalSection);
-    if (config != 0)
-    {
-        unsigned int v = auiValue;
-        int len = FUN_00cb10d0(v);
-        int n = (len < 0xffff) ? len : 0xffff;
-        config->FUN_00d60960(n + 0x13);
-        config->FUN_00d605d0(9);
-        reinterpret_cast<FUN_00d605d0_ext*>(config)->WriteUInt16(n);
-        reinterpret_cast<FUN_00d605d0_ext*>(config)->FUN_00d607b0(v, n);
-        config->WriteInt(b);
-        config->FUN_00d609a0((__int64)c);
-        config->WriteInt(d);
-    }
-    bool ok = (config != 0) && (config->ForwardValueToObject((unsigned int*)&auiValue)[0] != 0);
-    _fnv_LeaveCriticalSection(criticalSection);
-    return !ok;
-}
-
 int __cdecl FUN_00cb10d0(const char* text);
 
 struct FUN_00d605d0_ext_cls
@@ -455,47 +386,6 @@ struct FUN_00dda1a0_cls
 
     bool WriteConfigEntry(const char* name, const float* vec, unsigned int a, int b, unsigned int c);
 };
-
-// @fnv 0x00dda1a0
-bool FUN_00dda1a0_cls::WriteConfigEntry(const char* name, const float* vec, unsigned int uiValueA, int iValueB,
-                                        unsigned int uiValueC)
-{
-    _fnv_EnterCriticalSection(criticalSection);
-    if (config != 0)
-    {
-        int n = FUN_00cb10d0(name);
-        int length = (n < 0xffff) ? n : 0xffff;
-        config->FUN_00d60960(length + 0x1f);
-        config->FUN_00d605d0(0x11);
-        reinterpret_cast<FUN_00d605d0_ext_cls*>(config)->WriteUInt16(length);
-        reinterpret_cast<FUN_00d605d0_ext_cls*>(config)->FUN_00d607b0(name, length);
-        config->WriteInt(uiValueA);
-        config->FUN_00d609a0((__int64)iValueB);
-        config->WriteInt(uiValueC);
-        reinterpret_cast<FUN_00d605d0_ext_cls*>(config)->HashUInt(vec[0]);
-        reinterpret_cast<FUN_00d605d0_ext_cls*>(config)->HashUInt(vec[1]);
-        reinterpret_cast<FUN_00d605d0_ext_cls*>(config)->HashUInt(vec[2]);
-    }
-    bool result;
-    if (config == 0)
-    {
-        goto done;
-    }
-    {
-        unsigned int id;
-        const char* text = config->ForwardValueToObject(&id);
-        if (text[0] != 0)
-        {
-            result = true;
-            goto out;
-        }
-    }
-done:
-    result = false;
-out:
-    _fnv_LeaveCriticalSection(criticalSection);
-    return !result;
-}
 
 struct FUN_00dda290_ext
 {
@@ -723,23 +613,6 @@ struct S_00dd98c0
     CRITICAL_SECTION* unk8;
     S_00dd98c0_Result WriteValue(int a1, int a2, int a3);
 };
-// Writes a1, a2, a3 to unk4 under unk8, then returns SUCCESS if unk4 and ForwardValueToObject() are true, else FAILURE.
-// @fnv 0x00dd98c0
-S_00dd98c0_Result S_00dd98c0::WriteValue(int a1, int a2, int a3)
-{
-    EnterCriticalSection(unk8);
-    if (unk4)
-    {
-        unk4->FUN_00d60960(0x29);
-        unk4->FUN_00d605d0(2);
-        unk4->WriteTransform(a1);
-        unk4->FUN_00d609a0(a2, 0);
-        unk4->WriteInt(a3);
-    }
-    bool ok = unk4 && unk4->ForwardValueToObject().m_cBooleanValue;
-    LeaveCriticalSection(unk8);
-    return ok ? S_00dd98c0_SUCCESS : S_00dd98c0_FAILURE;
-}
 
 struct DD9950Bool
 {
@@ -870,30 +743,6 @@ struct DD99D0DisplayHandler
     int WriteDisplayCommand(const void* a, const void* b, const void* c, float x, float y, float z, const char* text);
 };
 
-// Writes a display command with three vectors, three floats, and a text string to m_pDisplayStream under m_pSynchronizationLock.
-// @fnv 0x00dd99d0
-int DD99D0DisplayHandler::WriteDisplayCommand(const void* apVector1, const void* apVector2, const void* apVector3,
-                                              float x, float y, float z, const char* text)
-{
-    m_pSynchronizationLock->enter();
-    if (m_pDisplayStream)
-    {
-        int length = FUN_00cb10d0(text);
-        m_pDisplayStream->writeUint32(length + 0x33);
-        m_pDisplayStream->writeCommand(0xd);
-        m_pDisplayStream->writeVector(apVector1);
-        m_pDisplayStream->writeVector(apVector2);
-        m_pDisplayStream->writeVector(apVector3);
-        m_pDisplayStream->writeFloat(x);
-        m_pDisplayStream->writeFloat(y);
-        m_pDisplayStream->writeFloat(z);
-        m_pDisplayStream->writeInt32(length);
-        m_pDisplayStream->WriteByteArray(text, length);
-    }
-    bool ok = m_pDisplayStream && m_pDisplayStream->IsStreamValid();
-    m_pSynchronizationLock->leave();
-    return ok ? 0 : 1;
-}
 }  // namespace fnv_00dd99d0
 
 struct DD9FE0Vector4
@@ -952,36 +801,6 @@ struct DD9FE0DisplayHandler
     int WriteTriangle(const DD9FE0Vector4& a, const DD9FE0Vector4& b, const DD9FE0Vector4& c, unsigned int color,
                       int id, int tag);
 };
-
-// Writes three line segments forming a triangle to the display stream under a critical section, returning 0 on success or 1 if the stream is missing or invalid.
-// @fnv 0x00dd9fe0
-int DD9FE0DisplayHandler::WriteTriangle(const DD9FE0Vector4& a, const DD9FE0Vector4& b, const DD9FE0Vector4& c,
-                                        unsigned int color, int id, int tag)
-{
-    m_pSynchronizationLock->enter();
-    if (m_pDisplayStream)
-    {
-        DD9FE0Point verts[4];
-        *(__m128*)&verts[0] = a.m_vComponents;
-        *(__m128*)&verts[1] = b.m_vComponents;
-        *(__m128*)&verts[2] = c.m_vComponents;
-        *(__m128*)&verts[3] = a.m_vComponents;
-        unsigned __int64 id64 = id;
-        for (int i = 0; i < 3; i++)
-        {
-            m_pDisplayStream->writeCommand(0x29);
-            m_pDisplayStream->writeCount(8);
-            m_pDisplayStream->writeVector(verts[i]);
-            m_pDisplayStream->writeVector(verts[i + 1]);
-            m_pDisplayStream->writeCommand(color);
-            m_pDisplayStream->writeUint64(id64);
-            m_pDisplayStream->writeTag(tag);
-        }
-    }
-    bool ok = m_pDisplayStream && m_pDisplayStream->IsStreamValid();
-    m_pSynchronizationLock->leave();
-    return ok ? 0 : 1;
-}
 
 struct Vec4_dda340
 {
@@ -1088,98 +907,6 @@ struct Writer_dda340
                const ArrayRef_dda340<unsigned int>& a7, const ArrayRef_dda340<QsTransform_dda340>& a8);
 };
 
-// Writes supplied data when a config exists; returns false only when the forwarded value is nonzero.
-// @fnv 0x00dda340
-bool Writer_dda340::Write(const ArrayRef_dda340<unsigned int>& a1, const ArrayRef_dda340<unsigned int>& a2,
-                          const ArrayRef_dda340<unsigned int>& a3, const ArrayRef_dda340<Vec4_dda340>& a4,
-                          const ArrayRef_dda340<const char*>& a5, const ArrayRef_dda340<unsigned int>& a6,
-                          const ArrayRef_dda340<unsigned int>& a7, const ArrayRef_dda340<QsTransform_dda340>& a8)
-{
-    _fnv_EnterCriticalSection(this->criticalSection);
-    if (this->config)
-    {
-        int size2 = a2.m_iElementCount;
-        int iVec4Count = a4.m_iElementCount;
-        int totalSize = ((size2 + iVec4Count * 2) * 2 + a8.m_iElementCount * 7 + a6.m_iElementCount + a7.m_iElementCount) * 4 + 25;
-        Array_dda340 stringLengths;
-        for (int i = 0; i < a5.m_iElementCount; ++i)
-        {
-            if (a5.m_data[i] != 0)
-            {
-                totalSize += 2;
-                int len = FUN_00cb10d0(a5.m_data[i]);
-                stringLengths.AddBack(len);
-                totalSize += len;
-            }
-            else
-            {
-                stringLengths.AddBack(0);
-            }
-        }
-
-        this->config->FUN_00d60960(totalSize);
-        this->config->FUN_00d605d0(0x12);
-        this->config->FUN_00d60960(size2);
-
-        for (int i = 0; i < a2.m_iElementCount; ++i)
-        {
-            this->config->FUN_00d60960(a1.m_data[i]);
-            this->config->FUN_00d60960(a2.m_data[i]);
-        }
-
-        this->config->FUN_00d60960(iVec4Count);
-
-        for (int i = 0; i < a4.m_iElementCount; ++i)
-        {
-            this->config->FUN_00d60960(a3.m_data[i]);
-            this->config->FUN_00dda730((unsigned int)&a4.m_data[i]);
-        }
-
-        this->config->FUN_00d60960((unsigned short)a5.m_iElementCount);
-
-        for (int i = 0; i < a5.m_iElementCount; ++i)
-        {
-            if (a5.m_data[i] != 0)
-            {
-                unsigned int len = stringLengths.m_data[i];
-                this->config->WriteUInt16(len);
-                this->config->FUN_00d607b0(a5.m_data[i], len);
-            }
-        }
-
-        this->config->FUN_00d60960(a8.m_iElementCount);
-
-        for (int i = 0; i < a8.m_iElementCount; ++i)
-        {
-            Transform_dda340 t;
-            a8.m_data[i].FUN_00ce5300(&t);
-            this->config->WriteTransform(&t);
-        }
-
-        this->config->FUN_00d60960(a6.m_iElementCount);
-
-        for (int i = 0; i < a6.m_iElementCount; ++i)
-        {
-            this->config->FUN_00d60960(a6.m_data[i]);
-        }
-
-        this->config->FUN_00d60960(a7.m_iElementCount);
-
-        for (int i = 0; i < a7.m_iElementCount; ++i)
-        {
-            this->config->FUN_00d60960(a7.m_data[i]);
-        }
-
-        stringLengths.ClearAndRelease();
-    }
-
-    char status;
-    bool failed = (this->config != 0 && *this->config->ForwardValueToObject((unsigned int*)&status) != 0);
-
-    _fnv_LeaveCriticalSection(this->criticalSection);
-    return !failed;
-}
-
 // FUN_00dda650 : MSVC this-adjusting thunk  (sub ecx, 0x08 ; jmp <impl>)
 struct A1_00dda650
 {
@@ -1199,15 +926,6 @@ struct Own_00dda650 : A1_00dda650, A2_00dda650
 // @fnv 0x00dda650
     void FUN_00dda650();
 };
-Own_00dda650::Own_00dda650()
-{}
-void Own_00dda650::key_fn()
-{}
-Own_00dda650* make_00dda650()
-{
-    static Own_00dda650 o;
-    return &o;
-}
 
 namespace fnv_00dda660 {
 struct FUN_00dda660_Allocator

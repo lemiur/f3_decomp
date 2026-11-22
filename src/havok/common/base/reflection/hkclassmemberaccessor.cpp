@@ -108,23 +108,11 @@ struct FUN_00d872b0_class
     int* FUN_00d872b0(int index);
 };
 
-// @fnv 0x00d872b0
-int* FUN_00d872b0_class::FUN_00d872b0(int index)
-{
-    return &data[index];
-}
-
 struct FUN_00d872d0_class
 {
     char* m_p;
     char* __thiscall FUN_00d872d0(int index);
 };
-
-// @fnv 0x00d872d0
-char* __thiscall FUN_00d872d0_class::FUN_00d872d0(int index)
-{
-    return m_p + index * 2;
-}
 
 struct CpuObject
 {
@@ -142,11 +130,6 @@ struct FUN_00d87360_class
     char* m_p;
     char* FUN_00d87360(int index);
 };
-// @fnv 0x00d87360
-char* FUN_00d87360_class::FUN_00d87360(int index)
-{
-    return m_p + index * 8;
-}
 
 struct Pair
 {
@@ -268,12 +251,6 @@ struct FUN_00d87340_cls
 
     Pair* FUN_00d87340(int index);
 };
-
-// @fnv 0x00d87340
-Pair* FUN_00d87340_cls::FUN_00d87340(int index)
-{
-    return m_p + index;
-}
 
 struct FnvCpu_FUN_00d871f0_CpuObject
 {

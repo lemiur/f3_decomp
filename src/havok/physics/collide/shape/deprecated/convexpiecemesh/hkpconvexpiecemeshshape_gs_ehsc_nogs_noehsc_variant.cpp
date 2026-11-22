@@ -80,22 +80,6 @@ struct FUN_00e49290_Class
 
     int FUN_00e49290(unsigned int index);
 };
-int FUN_00e49290_Class::FUN_00e49290(unsigned int index)
-{
-    int result;
-
-    if (index < this->data->count)
-    {
-        int i = this->data->p14[index];
-        result = this->data->p8[i + 1];
-    }
-    else
-    {
-        result = this->data->p20[index - this->data->count];
-    }
-
-    return this->owner->target.FUN_00e49290_f4(result);
-}
 int FUN_00e49030();
 struct Ref
 {
@@ -453,19 +437,3 @@ struct xCollection : xShapeBase, xContainer
 {
     void FUN_00e492d0(const xTransform& t, float tolerance, xAabb& out) const;
 };
-
-// @fnv 0x00e492d0
-void xCollection::FUN_00e492d0(const xTransform& t, float tolerance, xAabb& out) const
-{
-    out.m_kMinimumCorner.set(3.40282e+38f, 3.40282e+38f, 3.40282e+38f, 0.0f);
-    out.m_kMaximumCorner.set(-3.40282e+38f, -3.40282e+38f, -3.40282e+38f, 0.0f);
-    xShapeBuffer shapeBuffer;
-    for (int key = GetFirstKey(); key != -1; key = GetNextShapeKey(key))
-    {
-        const xChild* child = GetShapeForKey(key, shapeBuffer);
-        xAabb childAabb;
-        child->getAabb(t, tolerance, childAabb);
-        out.m_kMinimumCorner.setMin4(out.m_kMinimumCorner, childAabb.m_kMinimumCorner);
-        out.m_kMaximumCorner.setMax4(out.m_kMaximumCorner, childAabb.m_kMaximumCorner);
-    }
-}

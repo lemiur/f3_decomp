@@ -141,17 +141,6 @@ struct S_00cfb1f0_Obj
     void SetSlotPair(S_00cfb1f0_Ref* p, int a, int b);
 };
 
-// @fnv 0x00cfb1f0
-void S_00cfb1f0_Obj::SetSlotPair(S_00cfb1f0_Ref* pRef, int iIndexA, int iIndexB)
-{
-    pRef->FUN_00c90510();
-    m_slot[iIndexA + iIndexB * 8]->FUN_00c905b0();
-    m_slot[iIndexA + iIndexB * 8] = pRef;
-    pRef->FUN_00c90510();
-    m_slot[iIndexB + iIndexA * 8]->FUN_00c905b0();
-    m_slot[iIndexB + iIndexA * 8] = pRef;
-}
-
 struct CFB240ContactMgrFactory
 {
     void RetainReference() const;
@@ -167,22 +156,6 @@ struct CFB240Dispatcher
 
     void SetContactMgrFactory(CFB240ContactMgrFactory* fac, int responseA);
 };
-
-// For each of 8 slots, releases the old factory in row i and column responseA, then stores fac in both positions.
-// @fnv 0x00cfb240
-void CFB240Dispatcher::SetContactMgrFactory(CFB240ContactMgrFactory* apFactory, int aiResponseIndex)
-{
-    for (int i = 0; i < 8; i++)
-    {
-        apFactory->RetainReference();
-        m_apContactMgrFactoriesByResponsePair[i][aiResponseIndex]->removeReference();
-        m_apContactMgrFactoriesByResponsePair[i][aiResponseIndex] = apFactory;
-
-        apFactory->RetainReference();
-        m_apContactMgrFactoriesByResponsePair[aiResponseIndex][i]->removeReference();
-        m_apContactMgrFactoriesByResponsePair[aiResponseIndex][i] = apFactory;
-    }
-}
 
 const char* GetHavokShapeTypeName(int type);
 int Vsnprintf(char* buf, int size, const char* fmt, ...);
@@ -2421,18 +2394,6 @@ struct CFBED0Dispatcher
     void CollectStatistics(CFBED0StatisticsCollector* collector, const void* cls) const;
 };
 
-// Adds the shapeInheritanceArray and all 8x8 contactMgrFactory child objects to the statistics collector.
-// @fnv 0x00cfbed0
-void CFBED0Dispatcher::CollectStatistics(CFBED0StatisticsCollector* collector, const void* cls) const
-{
-    collector->addArray("shapeInheritanceArray", m_pShapeInheritance);
-    for (int i = 0; i < 8; i++)
-    {
-        for (int j = 0; j < 8; j++)
-            collector->addChildObject("contactMgrFactory", m_apContactMgrFactoriesByResponsePair[i][j], 0);
-    }
-}
-
 struct CFBF60Allocator;
 
 struct CFBF60MemoryRouter
@@ -4425,25 +4386,6 @@ struct CFBF60Dispatcher
     void FUN_00cfbf60(int primaryType, int alternateType);
 };
 
-// Removes all entries matching primaryType/alternateType from the inheritance array, then updates inheritance and appends a new entry for the pair.
-// @fnv 0x00cfbf60
-void CFBF60Dispatcher::FUN_00cfbf60(int primaryType, int alternateType)
-{
-    for (int i = 0; i < m_pShapeInheritance.m_iElementCount; i++)
-    {
-        const CFBF60ShapeInheritance& si = m_pShapeInheritance.m_data[i];
-        if (si.m_iSecond == primaryType && si.m_iFirst == alternateType)
-        {
-            m_pShapeInheritance.removeAtAndCopy(i);
-            i--;
-        }
-    }
-    updateShapeInheritance(primaryType, alternateType, false);
-    CFBF60ShapeInheritance& si = m_pShapeInheritance.AllocatePair();
-    si.m_iFirst = alternateType;
-    si.m_iSecond = primaryType;
-}
-
 extern "C" int DAT_010cc7c0;
 extern "C" int DAT_0102e388;
 struct hkReferencedObject
@@ -4474,30 +4416,6 @@ struct Cleanup
 {
     void Destroy();
 };
-// Resets the vtable, releases the 8x8 grid references, frees the buffer through the allocator, and sets the final vtable.
-// @fnv 0x00cfc140
-void Cleanup::Destroy()
-{
-    *reinterpret_cast<int**>(this) = &DAT_010cc7c0;
-    reinterpret_cast<Owner*>(this)->FreeBuffers();
-    hkReferencedObject*(*grid)[8] = reinterpret_cast<hkReferencedObject*(*)[8]>(reinterpret_cast<char*>(this) + 0xc);
-    for (int r = 0; r < 8; ++r)
-        for (int c = 0; c < 8; ++c)
-        {
-            if (grid[r][c])
-                grid[r][c]->removeReference();
-        }
-    CleanupBuffer& buffer = *reinterpret_cast<CleanupBuffer*>(reinterpret_cast<char*>(this) + 0x1e24);
-    Holder* audio = _FUN_00c85750();
-    CleanupAllocator* allocator = audio->allocator;
-    unsigned flags = buffer.capacityFlags;
-    buffer.count = 0;
-    if (!(flags & 0x80000000u))
-        allocator->Free(buffer.data, (flags & 0x3fffffffu) * 8u);
-    buffer.data = 0;
-    buffer.capacityFlags = 0x80000000u;
-    *reinterpret_cast<int**>(this) = &DAT_0102e388;
-}
 
 extern "C" int DAT_010cc7c0;
 
@@ -6287,10 +6205,6 @@ struct FUN_00cfc550 : S_00cfc550_RefObj
     virtual ~FUN_00cfc550();
 };
 
-// @fnv 0x00cfc550
-FUN_00cfc550::FUN_00cfc550()
-{}
-
 struct Src_cfcba0
 {
     int unk00;
@@ -6319,27 +6233,3 @@ struct Cls_cfcba0
     Cls_cfcba0* FUN_00cfcba0(unsigned short a0, Src_cfcba0* a1, int a2, int a3, int a4, int a5, int a6, int a7, int a8,
                              float a9);
 };
-// Sets fields from parameters, stores a1 in unk24, sets unk32 from a1->unk12 when a1->unk08 is zero, and returns this.
-// @fnv 0x00cfcba0
-Cls_cfcba0* Cls_cfcba0::FUN_00cfcba0(unsigned short a0, Src_cfcba0* a1, int a2, int a3, int a4, int a5, int a6, int a7,
-                                     int a8, float a9)
-{
-    unk00 = a4;
-    unk04 = a5;
-    unk08 = 1;
-    float& ref1c = unk1c;
-    ref1c = a9;
-    unk10 = a6;
-    unk14 = a7;
-    unk18 = a8;
-    unk28 = a2;
-    unk24 = a1;
-    unk2c = a3;
-    unk20 = 0;
-    unk30 = a0;
-    if (a1->unk08 == 0)
-        unk32 = a1->unk12;
-    else
-        unk32 = 0;
-    return this;
-}

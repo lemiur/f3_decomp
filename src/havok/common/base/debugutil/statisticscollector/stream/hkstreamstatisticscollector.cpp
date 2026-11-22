@@ -17,11 +17,6 @@ struct FUN_00ddf020_Class
 {
     void __thiscall FUN_00ddf020();
 };
-// @fnv 0x00ddf020
-void __thiscall FUN_00ddf020_Class::FUN_00ddf020()
-{
-    ((VirtualBase*)this)->Dispatch();
-}
 
 struct hkMemoryAllocator
 {
@@ -175,17 +170,6 @@ struct StreamStatisticsCollector
     void FUN_00ddf240();
     void* FreeIfFlagged(unsigned int flags);
 };
-// @fnv 0x00ddfb40
-void* StreamStatisticsCollector::FreeIfFlagged(unsigned int flags)
-{
-    FUN_00ddf240();
-    if (flags & 1)
-    {
-        AllocatorHolder* holder = FUN_00c85750();
-        holder->allocator->Free(this, (unsigned int)unk04);
-    }
-    return this;
-}
 }  // namespace fnv_00ddfb40
 
 void __cdecl ResizeAudioStream(void* heap, void* arr, int elemSize);
@@ -525,18 +509,6 @@ class ObjDDF9
 
 void __stdcall FUN_00ddf740(hkArrayDDF9<ObjDDF9*>& kArray, int iParam) throw();
 
-// @fnv 0x00ddf970
-void __stdcall ClearAllItems(int iUnused0, int iUnused1)
-{
-    hkArrayDDF9<ObjDDF9*> kArray;
-    FUN_00ddf740(kArray, 0);
-    while (kArray.m_iElementCount)
-    {
-        delete kArray.m_data[kArray.m_iElementCount - 1];
-        kArray.m_iElementCount--;
-    }
-}
-
 extern int DAT_010d8040;
 
 struct SubBase
@@ -560,11 +532,6 @@ struct AudioHolder
     int unk0C;
     AudioAllocator* m_pAllocator;
 };
-
-inline AudioHolder* holderGet()
-{
-    return (AudioHolder*)FUN_00c85750();
-}
 
 struct SpawnedHandle
 {
@@ -604,46 +571,6 @@ struct FUN_00ddf170_cls
 
     FUN_00ddf170_cls* FUN_00ddf170(int a1, int a2);
 };
-
-// Calls a base method, sets the vtable, initializes two SpawnedHandle members, and optionally allocates a buffer.
-// @fnv 0x00ddf170
-FUN_00ddf170_cls* FUN_00ddf170_cls::FUN_00ddf170(int a1, int aiBufferSize)
-{
-    ((SubBase*)this)->FUN_00d06f50(a1);
-    int value = aiBufferSize;
-    m_vtbl = (void*)&DAT_010d8040;
-    SpawnedHandle* pHandle = &m_14;
-    pHandle->m_ptr = 0;
-    pHandle->m_uiFilterValue = 0;
-    pHandle->m_flags = 0x80000000u;
-
-    hkMemoryAllocatorDDF9& alloc = hkRouterDDF9::FUN_00c85750().heap();
-    void* p;
-    if (value)
-    {
-        int sz = value;
-        p = alloc.AllocateBufferWithSize(sz);
-        value = sz;
-    }
-    else
-    {
-        p = 0;
-    }
-    unsigned int flags = value ? (unsigned int)value : 0x80000000u;
-    pHandle->m_uiFilterValue = value;
-    pHandle->m_ptr = p;
-    pHandle->m_flags = flags;
-
-    SpawnedHandle* pHandle2 = &m_20;
-    pHandle2->m_ptr = 0;
-    pHandle2->m_uiFilterValue = 0;
-    pHandle2->m_flags = 0xffffffffu;
-    AudioAllocator* pAudioAllocator = holderGet()->m_pAllocator;
-    m_20.EnsureCapacity(pAudioAllocator, 0);
-
-    pHandle->SetSizeAndGrow(0);
-    return this;
-}
 
 int FUN_00cb10d0(const char* s);
 
@@ -744,11 +671,6 @@ struct FUN_00ddeff0
     int unk54;
 };
 
-// The constructor body is empty.
-// @fnv 0x00ddeff0
-FUN_00ddeff0::FUN_00ddeff0()
-{}
-
 struct FUN_00ddf640_Cls : Obj
 {
     unsigned char* __thiscall FUN_00ddf640();
@@ -833,24 +755,6 @@ struct FUN_00ddf240_cls : SpawnedRoot
     virtual ~FUN_00ddf240_cls() throw();
 };
 
-// @fnv 0x00ddf240
-FUN_00ddf240_cls::~FUN_00ddf240_cls() throw()
-{
-    SpawnedSub* pSub = &m_sub;
-    AudioHolder* pHolder = FUN_00c85750();
-    pSub->Attach(pHolder->m_pAllocator);
-    pSub->Reset();
-    AudioHolder* pHolder2 = FUN_00c85750();
-    AudioAllocator* pAllocator = pHolder2->m_pAllocator;
-    unsigned int uFlags = m_uiObjectFlags;
-    m_iUnk18 = 0;
-    if ((uFlags & 0x80000000u) == 0)
-    {
-        pAllocator->FreeArray(m_pData, (int)(uFlags & 0x3fffffffu));
-    }
-    m_pData = 0;
-    m_uiObjectFlags = 0x80000000u;
-}
 }  // namespace fnv_00ddf240
 
 namespace fnv_00ddfa10 {
@@ -892,35 +796,6 @@ struct FUN_00ddfa10_cls
     void FUN_00ddfa10(int a1, int a2, unsigned char flag);
 };
 
-// After capacity and a2 checks, updates m_20 and calls a virtual function from a2; when flag bit 0 is clear, it also calls DDF420 and DDF020.
-// @fnv 0x00ddfa10
-void FUN_00ddfa10_cls::FUN_00ddfa10(int a1, int a2, unsigned char aiFlags)
-{
-    int count = (int)(m_1c & 0x3fffffffu);
-    if (count <= m_18 + 0x46)
-        return;
-    if (a2 == 0)
-        return;
-    Sub20_cls* sub = &m_20;
-    if (sub->CB1930(a2, 0))
-        return;
-    SpawnHolder* holder = FUN_00c85750();
-    sub->CB1870(holder->m_10, a2, 1);
-    if ((aiFlags & 1) == 0)
-    {
-        DDF420(a1, a2, D06D90(a2));
-        void** pVTable = *(void***)a2;
-        int r = D06D50(a2);
-        ((VSlot8)pVTable[2])((void*)a2, this, r);
-        DDF020();
-    }
-    else
-    {
-        void** pVTable = *(void***)a2;
-        int r = D06D50(a2);
-        ((VSlot8)pVTable[2])((void*)a2, this, r);
-    }
-}
 }  // namespace fnv_00ddfa10
 
 namespace fnv_00ddfab0 {
@@ -964,38 +839,6 @@ struct FUN_00ddfab0_cls
     void FUN_00ddfab0(Param1* a1, int a2, int a3, int a4);
 };
 
-// Checks m_1c, m_18, and a3; updates m_20, then calls FUN_00cf6920 and conditionally calls FUN_00ddf420 and FUN_00ddf020.
-// @fnv 0x00ddfab0
-void FUN_00ddfab0_cls::FUN_00ddfab0(Param1* a1, int a2, int a3, int aiFlags)
-{
-    int iMasked = (int)(m_1c & 0x3fffffff);
-    int iLimit = m_18 + 0x46;
-    if (iMasked <= iLimit)
-    {
-        return;
-    }
-    if (a3 == 0)
-    {
-        return;
-    }
-    if (m_20.LookupHashEntry(a3, 0) != 0)
-    {
-        return;
-    }
-    AudioHolder* holder = FUN_00c85750();
-    m_20.FUN_00cb1870(holder->m_10, a3, 1);
-    if ((aiFlags & 1) == 0)
-    {
-        int r = a1->FUN_00d470d0();
-        FUN_00ddf420(a2, a3, r);
-        FUN_00cf6920(a3, a1, this);
-        FUN_00ddf020();
-    }
-    else
-    {
-        FUN_00cf6920(a3, a1, this);
-    }
-}
 }  // namespace fnv_00ddfab0
 
 struct AllocIface

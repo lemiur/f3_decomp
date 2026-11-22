@@ -420,43 +420,9 @@ void __cdecl FUN_00d72190(NodeKind* node, FnvPacket* packet, DispatchArgs args, 
 void __cdecl FUN_00d6f460(NodeKind* node, DispatchArgs args, FnvPacket* packet, void* dest);
 
 // @fnv 0x00d6ecb0
-static __declspec(noinline) void FUN_00d6ecb0(FnvPacket* arg1, void* arg2, FnvNode* node)
-{
-    FnvPacket localPacket = *arg1;
-    AlignedVector v1;
-    v1.components = node->vec1;
-    AlignedVector v2;
-    v2.components = node->vec2;
-    NodeKind* kind = node->unk14;
-    DispatchArgs args;
-    args.raw = node->unk12;
-    FnvSubObject obj1;
-    obj1.FUN_00d71f90(arg1->unk30);
-    FnvSubObject obj2;
-    obj2.FUN_00d71f90(arg1->unk34);
-    obj1.vec = _mm_mul_ps(obj1.vec, v1.vec);
-    obj2.vec = _mm_mul_ps(obj2.vec, v2.vec);
-    localPacket.unk30 = &obj1;
-    localPacket.unk34 = &obj2;
-    FUN_00dced90(&obj1.vec, &obj2.vec, arg2);
-    if (kind->kind == 0x16)
-    {
-        args.flag = 1;
-        FUN_00d72190(kind, &localPacket, args, arg2);
-    }
-    else
-    {
-        FUN_00d6f460(kind, args, &localPacket, arg2);
-    }
-    FUN_00dced90(&arg1->unk30->vec, &arg1->unk34->vec, arg2);
-}
 extern "C" FnvNode* FetchNode();
 FnvPacket* volatile sourcePacket;
 void* volatile sourceDest;
-void TargetCaller()
-{
-    FUN_00d6ecb0(sourcePacket, sourceDest, FetchNode());
-}
 
 extern const __m128 DAT_010c44d0;
 struct Body337
@@ -478,40 +444,6 @@ struct Jacobian337
 {
     __m128 first, second;
 };
-// @fnv 0x00d6cc80
-static __declspec(noinline) void FUN_00d6cc80(const Pair337* pair, Jacobian337* output, const __m128* direction,
-                                              float* effectiveMass)
-{
-    __m128 value = *direction;
-    const Body337* second = pair->second;
-    const Body337* first = pair->first;
-    __m128 negative = _mm_xor_ps(value, DAT_010c44d0);
-    __m128 rowA = _mm_mul_ps(_mm_shuffle_ps(*direction, *direction, 0x55), first->basisY);
-    rowA = _mm_add_ps(rowA, _mm_mul_ps(_mm_shuffle_ps(*direction, *direction, 0), first->basisX));
-    rowA = _mm_add_ps(rowA, _mm_mul_ps(_mm_shuffle_ps(*direction, *direction, 0xaa), first->basisZ));
-    output->first = rowA;
-    __m128 rowB = _mm_mul_ps(_mm_shuffle_ps(negative, negative, 0x55), second->basisY);
-    rowB = _mm_add_ps(rowB, _mm_mul_ps(_mm_shuffle_ps(negative, negative, 0), second->basisX));
-    rowB = _mm_add_ps(rowB, _mm_mul_ps(_mm_shuffle_ps(negative, negative, 0xaa), second->basisZ));
-    output->second = rowB;
-    __m128 contributionA = _mm_mul_ps(output->first, output->first);
-    contributionA = _mm_mul_ps(contributionA, first->inverseInertia);
-    __m128 contributionB = _mm_mul_ps(rowB, rowB);
-    contributionB = _mm_mul_ps(contributionB, second->inverseInertia);
-    __m128 total = _mm_add_ps(contributionA, contributionB);
-    __m128 sum = _mm_add_ss(_mm_shuffle_ps(total, total, 0x55), total);
-    sum = _mm_add_ss(_mm_shuffle_ps(total, total, 0xaa), sum);
-    float scalar;
-    _mm_store_ss(&scalar, sum);
-    float denominator = (float)(scalar + DAT_010c9300);
-    float reciprocal = 1.0f / denominator;
-    output->first.m128_f32[3] = reciprocal;
-    *effectiveMass = reciprocal;
-}
-void BuildJacobian337(const Pair337* pair, Jacobian337* output, const __m128* direction, float* mass)
-{
-    FUN_00d6cc80(pair, output, direction, mass);
-}
 
 extern "C" float __cdecl Atan2(float a, float b);
 extern const unsigned char DAT_010d33c1[];
@@ -598,11 +530,6 @@ extern Mat* g_a2;
 extern Mat* g_a3;
 extern Out* g_out;
 int g_sink;
-
-void zz_probe_call()
-{
-    g_sink = FUN_00d6d2e0(g_obj, g_src, g_a2, g_a3, g_out);
-}
 
 struct S00d6f300_A
 {

@@ -160,12 +160,6 @@ extern "C" int __cdecl FUN_00dc1850(SizeNode* node, int type, int fallback)
     return result;
 }
 
-extern "C" int __cdecl GetNodeValue(SizeNode* node, int type, int fallback)
-{
-    return FUN_00dc1850(node, type, fallback);
-}
-
-
 struct Log_cls
 {
     virtual void v0();

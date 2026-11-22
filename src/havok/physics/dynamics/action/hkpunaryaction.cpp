@@ -112,21 +112,6 @@ struct Action
     Action* FUN_00d4d950(unsigned char flags);
 };
 
-// Calls FUN_00d2b2b0, then if flags bit 0 is set frees this via the memory router's memory manager, and returns this.
-// @fnv 0x00d4d950
-Action* Action::FUN_00d4d950(unsigned char flags)
-{
-    FUN_00d2b2b0();
-
-    if (flags & 1)
-    {
-        NineIntegerRecord* router = _D1A0E0GetMemoryRouter();
-        router->memoryManager->free(this, size);
-    }
-
-    return this;
-}
-
 class hkpWorld;
 
 class hkpEntity : public hkReferencedObject
@@ -190,20 +175,6 @@ struct FUN_00d2b260
     FUN_00c90510_Entity* entity;
     FUN_00d2b260(FUN_00c90510_Entity* entity, unsigned int userData);
 };
-// @fnv 0x00d2b260
-FUN_00d2b260::FUN_00d2b260(FUN_00c90510_Entity* apEntity, unsigned int auiUserData)
-{
-    referenceCount = 1;
-    userData = auiUserData;
-    vptr = &DAT_010cc2fc;
-    world = 0;
-    island = 0;
-    name.initialize();
-    vptr = &DAT_010ce528;
-    entity = apEntity;
-    if (apEntity)
-        apEntity->RetainReference();
-}
 
 class hkMemoryAllocatorXd2b2f0;
 
@@ -263,13 +234,6 @@ class hkObjXd2b2f0
 
     void AppendPointer(hkArrayXd2b2f0<void*>& kArray);
 };
-
-// Appends the object's stored pointer to the given array.
-// @fnv 0x00d2b2f0
-void hkObjXd2b2f0::AppendPointer(hkArrayXd2b2f0<void*>& kArray)
-{
-    kArray.AddBack(m_uiFilterValue);
-}
 
 // @f3twin 0x009ae940 of 0x00979da0
 struct F3Twin_009ae940 : public UnaryActionHelper { void F3_FUN_009ae940(hkpEntity* entity) ; };

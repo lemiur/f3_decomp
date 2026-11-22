@@ -150,18 +150,6 @@ struct S_00d374f0_MonitorStream {
     char* m_pCurrentCommand;
 };
 
-static inline void S_00d374f0_Timer(const char* name) {
-    S_00d374f0_MonitorStream* s = (S_00d374f0_MonitorStream*)TlsGetValue(hkMonitorStreamTls);
-    if (s->m_kRayEnd < s->m_pCurrentCommand) {
-        S_00d374f0_TimerCommand* h = (S_00d374f0_TimerCommand*)s->m_kRayEnd;
-        h->m_pCommandName = name;
-        _ReadWriteBarrier();
-        unsigned int t = (unsigned int)__rdtsc();
-        h->m_uiStartTicks = *(volatile unsigned int*)&t;
-        s->m_kRayEnd = (char*)(h + 1);
-    }
-}
-
 // hkVector4 stand-in: 4 floats (an __m128 member would add a GS cookie)
 struct __declspec(align(16)) S_00d374f0_Vector4 {
     float x, y, z, w;
@@ -176,17 +164,6 @@ struct __declspec(align(16)) S_00d374f0_Transform {
     S_00d374f0_Vector4 m_vTranslation;
     void FUN_00cb22f0(const S_00d374f0_Transform& a, const S_00d374f0_Transform& b);
 };
-
-static __forceinline void S_00d374f0_SetTransformedPos(S_00d374f0_Vector4& out, const S_00d374f0_Transform& t, const S_00d374f0_Vector4& b)
-{
-    const __m128 xb = _mm_shuffle_ps(b.q(), b.q(), 0x00);
-    const __m128 yb = _mm_shuffle_ps(b.q(), b.q(), 0x55);
-    const __m128 zb = _mm_shuffle_ps(b.q(), b.q(), 0xaa);
-    const __m128 t0 = _mm_mul_ps(xb, t.m_kColumn0.q());
-    const __m128 t1 = _mm_mul_ps(yb, t.m_kColumn1.q());
-    const __m128 t2 = _mm_mul_ps(zb, t.m_kColumn2.q());
-    out.q() = _mm_add_ps(_mm_add_ps(t1, t0), _mm_add_ps(t2, t.m_vTranslation.q()));
-}
 
 struct S_00d374f0_Bool {
     char m_cBooleanValue;
@@ -256,35 +233,6 @@ struct S_00d374f0_Collector {
     virtual void AddCdBodyPair(const S_00d374f0_CdBody& a, const S_00d374f0_CdBody& b);
     S_00d374f0_Bool m_fHitDistance;
 };
-
-// @fnv 0x00d374f0
-void FUN_00d374f0(const S_00d374f0_CdBody& bodyA, const S_00d374f0_CdBody& bodyB, int input, S_00d374f0_Collector* collector)
-{
-    S_00d374f0_Timer("TtmultiRay-cnvx-getPen");
-    const S_00d374f0_MultiRayShape* msA = (const S_00d374f0_MultiRayShape*)bodyA.m_pCollisionShape;
-    const S_00d374f0_ConvexShape* convexB = (const S_00d374f0_ConvexShape*)bodyB.m_pCollisionShape;
-
-    S_00d374f0_Collector* col = collector;
-    S_00d374f0_Transform bTa;
-    bTa.FUN_00cb22f0(*bodyB.m_pMotionState, *bodyA.m_pMotionState);
-
-    int nRays = msA->m_iElementCount;
-    const S_00d374f0_Ray* rayA = msA->m_data;
-    S_00d374f0_RayInput rayInput;
-    S_00d374f0_RayOutput rayResults;
-    while (nRays-- && !col->m_fHitDistance)
-    {
-        S_00d374f0_SetTransformedPos(rayInput.m_vFrom, bTa, rayA->m_kRayStart);
-        S_00d374f0_SetTransformedPos(rayInput.m_vTo, bTa, rayA->m_kRayEnd);
-        S_00d374f0_Bool hit = convexB->RayCast(rayInput, rayResults);
-        if (hit.m_cBooleanValue)
-        {
-            col->AddCdBodyPair(bodyA, bodyB);
-        }
-        rayA++;
-    }
-    S_00d374f0_Timer("Et");
-}
 
 extern "C" unsigned __int64 __rdtsc(void);
 extern "C" void _ReadWriteBarrier(void);

@@ -15,15 +15,6 @@ struct hkpCharacterStateManager
     void FUN_00cbc4e0(hkReferencedObject* object, int index);
 };
 
-// @fnv 0x00cbc4e0
-void hkpCharacterStateManager::FUN_00cbc4e0(hkReferencedObject* object, int index)
-{
-    object->RetainReference();
-    if (m_states[index])
-        m_states[index]->removeReference();
-    m_states[index] = object;
-}
-
 extern int DAT_010c9194;
 extern int _DAT_0102e388;
 
@@ -111,14 +102,3 @@ struct FnvCpu_FUN_00cbc520_CpuObject
     void FUN_00cbc4a0();
     FnvCpu_FUN_00cbc520_CpuObject* FUN_00cbc520(unsigned int flags);
 };
-// @fnv 0x00cbc520
-FnvCpu_FUN_00cbc520_CpuObject* FnvCpu_FUN_00cbc520_CpuObject::FUN_00cbc520(unsigned int flags)
-{
-    FUN_00cbc4a0();
-    if (flags & 1)
-    {
-        FnvCpu_FUN_00cbc520_CpuAllocatorHolder* holder = FUN_00c85750();
-        holder->allocator->Invoke(this, size);
-    }
-    return this;
-}

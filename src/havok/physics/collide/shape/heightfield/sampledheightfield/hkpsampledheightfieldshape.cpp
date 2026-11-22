@@ -21,55 +21,6 @@ struct Cls_00d24670 {
     void FUN_00d24670(int x, int y, float fx, float fy, __m128* nrm, float* height, int* flag);
 };
 
-// @fnv 0x00d24670
-void Cls_00d24670::FUN_00d24670(int x, int y, float fx, float fy, __m128* nrm, float* height, int* flag)
-{
-    *nrm = _mm_load_ps1(&DAT_01012068);
-    bool flip;
-    getFlip(flip);
-    if (flip) {
-        float h00 = getH(x, y);
-        float h11 = getH(x + 1, y + 1);
-        if (fx > fy) {
-            float h10 = getH(x + 1, y);
-            const float dx = h10 - h00;
-            const float dy = h11 - h10;
-            *height = h00 + dy * fy + dx * fx;
-            nrm->m128_f32[0] = -dx;
-            nrm->m128_f32[2] = -dy;
-            *flag = 1;
-        } else {
-            float h01 = getH(x, y + 1);
-            const float dx = h11 - h01;
-            const float dy = h01 - h00;
-            *height = h00 + dy * fy + dx * fx;
-            nrm->m128_f32[0] = -dx;
-            nrm->m128_f32[2] = -dy;
-            *flag = 0;
-        }
-    } else {
-        float h10 = getH(x + 1, y);
-        float h01 = getH(x, y + 1);
-        if (fx + fy > 1.0) {
-            float h11 = getH(x + 1, y + 1);
-            const float dx = h11 - h01;
-            const float dy = h11 - h10;
-            *height = h10 + dy * fy + dx * (fx - 1.0);
-            nrm->m128_f32[0] = -dx;
-            nrm->m128_f32[2] = -dy;
-            *flag = 1;
-        } else {
-            float h00 = getH(x, y);
-            const float dx = h10 - h00;
-            const float dy = h01 - h00;
-            *height = h00 + dy * fy + dx * fx;
-            nrm->m128_f32[0] = -dx;
-            nrm->m128_f32[2] = -dy;
-            *flag = 0;
-        }
-    }
-}
-
 struct hkInfoD260 {
     int unk00;
     int unk04;
@@ -253,32 +204,3 @@ struct SampledHeightField : hkpSampledHeightFieldShape {
 };
 
 void __cdecl FUN_00d26230(hkUlong, const hkVector4&, const hkVector4&, float, hkUlong);
-
-// If the cached height range is not yet set, scans all heights to compute it; then calls FUN_00d26230 with the box center and half extents, tolerance and aabb.
-// @fnv 0x00d249f0
-void SampledHeightField::FUN_00d249f0(hkUlong transform, float tolerance, hkUlong aabb)
-{
-    float fMinHeight = getHeightAt(0, 0);
-    float maximum = fMinHeight;
-    if (SetCenterPosition.y < 0.0f) {
-        for (int x = 0; x < m_iXResolution; ++x) {
-            for (int z = 0; z < m_iZResolution; ++z) {
-                float height = getHeightAt(x, z);
-                fMinHeight = fMinHeight < height ? fMinHeight : height;
-                maximum = maximum > height ? maximum : height;
-            }
-        }
-        fMinHeight *= m_kHeightScaleVector.y;
-        maximum *= m_kHeightScaleVector.y;
-        float oldMinimum = fMinHeight;
-        fMinHeight = fMinHeight < maximum ? fMinHeight : maximum;
-        maximum = maximum < oldMinimum ? oldMinimum : maximum;
-        m_fHeightScale = (fMinHeight + maximum) * 0.5;
-        SetCenterPosition.y = maximum - fMinHeight;
-    }
-    __declspec(align(16)) hkVector4 center;
-    *reinterpret_cast<__m128*>(&center) = _mm_mul_ps(*reinterpret_cast<const __m128*>(&SetCenterPosition), *reinterpret_cast<const __m128*>(&halfScale));
-    __declspec(align(16)) hkVector4 halfExtents = center;
-    center.y = m_fHeightScale;
-    FUN_00d26230(transform, halfExtents, center, tolerance, aabb);
-}

@@ -167,23 +167,6 @@ class hkpSphereMotionD1E41 : public hkReferencedObjectD1E41
     hkVector4D1E41 m_kAngularVelocity;
 };
 
-// Adds impulse times inverse mass to translational velocity and (pos - center of mass) cross impulse times inverse inertia to angular velocity.
-// @fnv 0x00d1e410
-void hkpSphereMotionD1E41::ApplyImpulse(const hkVector4D1E41& kImpulse, const hkVector4D1E41& kPos)
-{
-    hkVector4D1E41 kDeltaLin;
-    kDeltaLin.setMul4(m_kInertiaAndMassInv.getSimdAt3(), kImpulse);
-    m_kTranslationalVelocity.add4(kDeltaLin);
-
-    hkVector4D1E41 kRelPos;
-    kRelPos.setSub4(kPos, m_kCenterOfMass1);
-    hkVector4D1E41 kAngImpulse;
-    kAngImpulse.setCross(kRelPos, kImpulse);
-    hkVector4D1E41 kDeltaAng;
-    kDeltaAng.setMul4(kAngImpulse, m_kInertiaAndMassInv);
-    m_kAngularVelocity.add4(kDeltaAng);
-}
-
 class hkVector4D1E4
 {
   public:
@@ -254,16 +237,6 @@ class hkpSphereMotionD1E4
     hkVector4D1E4 m_kAngularVelocity;
     const hkVector4D1E4& AddAngularImpulse(const hkVector4D1E4& imp);
 };
-
-// Multiplies m_kInertiaAndMassInv by imp into a temporary, adds it to m_kAngularVelocity, and returns imp.
-// @fnv 0x00d1e4a0
-const hkVector4D1E4& hkpSphereMotionD1E4::AddAngularImpulse(const hkVector4D1E4& imp)
-{
-    hkVector4D1E4 dangVel;
-    dangVel.setMul4(m_kInertiaAndMassInv, imp);
-    m_kAngularVelocity.add4(dangVel);
-    return imp;
-}
 
 namespace fnv_00d1e5a0 {
 union __declspec(intrin_type) __declspec(align(16)) __m128
@@ -359,19 +332,6 @@ class hkpSphereMotionD1E5A : public hkReferencedObjectD1E5A
     hkVector4D1E5A m_kAngularVelocity;
 };
 
-// Computes velocity along kNormal at kPos from angular and translational velocity, and an inverse virtual mass from the inertia, mass inverse and cross term.
-// @fnv 0x00d1e5a0
-void hkpSphereMotionD1E5A::ComputeVelocityAndInverseVirtualMass(const hkVector4D1E5A& kPos,
-                                                                const hkVector4D1E5A& kNormal, float& fVelOut,
-                                                                float& fInvVirtMassOut) const
-{
-    hkVector4D1E5A kArm;
-    kArm.setSub4(kPos, m_kCenterOfMass1);
-    hkVector4D1E5A kRel;
-    kRel.setCross(kNormal, kArm);
-    fVelOut = m_kAngularVelocity.dot3(kRel) + m_kTranslationalVelocity.dot3(kNormal);
-    fInvVirtMassOut = m_kInertiaAndMassInv(0) * kRel.lengthSquared3() + m_kInertiaAndMassInv(3);
-}
 }  // namespace fnv_00d1e5a0
 
 extern "C" __m128 _mm_setzero_ps();
@@ -385,23 +345,6 @@ struct FUN_00d1e1d0_cls : hkpSphereMotion
     void FUN_00d1e1d0(int out);
 };
 
-// Reads m_kInertiaAndMassInv.x (replaced by DAT_0104da4c if below DAT_010c9300) and writes a matrix at out with its reciprocal on the diagonal, zeros elsewhere.
-// @fnv 0x00d1e1d0
-void FUN_00d1e1d0_cls::FUN_00d1e1d0(int out)
-{
-    hkReal x = m_kInertiaAndMassInv.x;
-    hkReal y = (double)x < DAT_010c9300 ? DAT_0104da4c : x;
-    hkMatrix3* p0 = (hkMatrix3*)(*(volatile int*)&out);
-    float* p = reinterpret_cast<float*>(p0);
-    hkReal inv = 1.0f / y;
-    _mm_store_ps(p, _mm_setzero_ps());
-    _mm_store_ps(p + 4, _mm_setzero_ps());
-    _mm_store_ps(p + 8, _mm_setzero_ps());
-    p[0] = inv;
-    p[5] = inv;
-    p[10] = inv;
-}
-
 extern "C" __m128 _mm_setzero_ps();
 
 class SphereInverseWorld : public hkpSphereMotion
@@ -409,22 +352,6 @@ class SphereInverseWorld : public hkpSphereMotion
   public:
     void FUN_00d1e3d0(hkMatrix3* out) const;
 };
-
-// Writes a diagonal hkMatrix3 with m_kInertiaAndMassInv.x on the diagonal and zeros elsewhere into out.
-// @fnv 0x00d1e3d0
-void SphereInverseWorld::FUN_00d1e3d0(hkMatrix3* out) const
-{
-    float inverse = m_kInertiaAndMassInv.x;
-    __m128 zero = _mm_setzero_ps();
-    __m128* columns = reinterpret_cast<__m128*>(out);
-    columns[0] = zero;
-    columns[1] = zero;
-    columns[2] = zero;
-    volatile hkMatrix3* diagonal = out;
-    diagonal->m_kColumn0.x = inverse;
-    diagonal->m_kColumn1.y = inverse;
-    diagonal->m_kColumn2.z = inverse;
-}
 
 extern "C" __m128 _mm_setzero_ps();
 

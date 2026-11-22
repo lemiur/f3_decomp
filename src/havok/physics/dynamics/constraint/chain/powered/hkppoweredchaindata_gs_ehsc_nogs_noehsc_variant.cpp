@@ -137,39 +137,7 @@ struct Vec4
     __m128 m_vComponents;
 };
 
-// @fnv 0x00e3b680
-static __declspec(noinline) void FUN_00e3b680(const Vec4& b, const Vec4& a, Vec4& r)
-{
-    {
-        __m128 v1 = a.m_vComponents;
-        __m128 v2 = b.m_vComponents;
-        __m128 c0 = _mm_mul_ps(_mm_shuffle_ps(v2, v2, 0xc9), _mm_shuffle_ps(v1, v1, 0xd2));
-        __m128 c1 = _mm_mul_ps(_mm_shuffle_ps(v2, v2, 0xd2), _mm_shuffle_ps(v1, v1, 0xc9));
-        r.m_vComponents = _mm_sub_ps(c0, c1);
-    }
-    {
-        __m128 aw = _mm_shuffle_ps(a.m_vComponents, a.m_vComponents, 0xff);
-        aw = _mm_shuffle_ps(aw, aw, 0);
-        r.m_vComponents = _mm_add_ps(r.m_vComponents, _mm_mul_ps(aw, b.m_vComponents));
-    }
-    {
-        __m128 bw = _mm_shuffle_ps(b.m_vComponents, b.m_vComponents, 0xff);
-        bw = _mm_shuffle_ps(bw, bw, 0);
-        r.m_vComponents = _mm_sub_ps(r.m_vComponents, _mm_mul_ps(bw, a.m_vComponents));
-    }
-    r.m_vComponents = _mm_add_ps(r.m_vComponents, r.m_vComponents);
-    __m128 p = _mm_mul_ps(a.m_vComponents, b.m_vComponents);
-    __m128 q = _mm_add_ps(_mm_shuffle_ps(p, p, 0x4e), p);
-    __m128 w = _mm_add_ps(_mm_shuffle_ps(q, q, 0xb1), q);
-    if (_mm_movemask_ps(w) & 1)
-        r.m_vComponents = _mm_xor_ps(r.m_vComponents, *(const __m128*)DAT_010c44d0);
-}
-
 volatile int g_a, g_b, g_r;
-void caller_e3b680()
-{
-    FUN_00e3b680(*(Vec4*)g_b, *(Vec4*)g_a, *(Vec4*)g_r);
-}
 
 inline void* operator new(unsigned int, void* p)
 {

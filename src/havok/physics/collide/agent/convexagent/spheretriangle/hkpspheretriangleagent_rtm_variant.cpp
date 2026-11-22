@@ -504,16 +504,6 @@ struct Transform {
     }
 };
 
-__forceinline void FourFloatVector::transformed(const Transform& t, const FourFloatVector& v) {
-    __m128 splatX = _mm_shuffle_ps(v.m, v.m, 0);
-    __m128 prodX = _mm_mul_ps(t.col0.m, splatX);
-    __m128 splatY = _mm_shuffle_ps(v.m, v.m, 0x55);
-    __m128 prodY = _mm_mul_ps(t.col1.m, splatY);
-    __m128 splatZ = _mm_shuffle_ps(v.m, v.m, 0xaa);
-    __m128 prodZ = _mm_mul_ps(t.col2.m, splatZ);
-    m = _mm_add_ps(_mm_add_ps(prodX, prodY), _mm_add_ps(prodZ, t.translation.m));
-}
-
 struct AlignedPairData {
     FourFloatVector m_vContactPosition;
     FourFloatVector m_vSeparatingNormal;
@@ -613,106 +603,9 @@ struct ClosestPointOutput {
     float m_fClosestPointDistanceSquared;
 };
 
-static __forceinline int queryContact(const CdBody* bodyA, const CdBody* bodyB, const ProcessCollisionInput* input, void* cache, AlignedPairData* cp, FeatureInfo* feature) {
-    Shape* shapeA = bodyA->shape();
-    Shape* shapeB = bodyB->shape();
-    const FourFloatVector* spherePos = &(&bodyA->transform())->translation;
-
-    __declspec(align(16)) FourFloatVector vTransformed[3];
-        const Transform* motionB = (&bodyB->transform());
-        Transform copy(*motionB);
-        for (int i=2; i>=0; --i) {
-            vTransformed[i].transformed(copy, shapeB->m_kVertices[i]);
-        }
-
-    __declspec(align(16)) ClosestPointOutput cpOutput;
-    int featureKind = FUN_00cd7850(spherePos, vTransformed, cache, &cpOutput, feature);
-
-    float sumRadius = shapeA->m_fSphereRadius + shapeB->m_fSphereRadius;
-    float maxDist = sumRadius + input->m_fCollisionTolerance;
-
-    if (cpOutput.m_fClosestPointDistanceSquared < maxDist) {
-        cp->m_vContactPosition.addScaled(*spherePos, cpOutput.m_vHitNormal, shapeB->m_fSphereRadius - cpOutput.m_fClosestPointDistanceSquared);
-        cp->m_vSeparatingNormal = cpOutput.m_vHitNormal;
-        cp->m_vSeparatingNormal.component(3) = cpOutput.m_fClosestPointDistanceSquared - sumRadius;
-
-        if (featureKind) return 2; return 1;
-    }
-    return 0;
-}
-
 struct TargetAgent_Cand : TargetAgent {
     void FUN_00d3dd90(const CdBody* bodyA, const CdBody* bodyB, const ProcessCollisionInput* input, ProcessCollisionOutput* result);
 };
-
-// @fnv 0x00d3dd90
-void TargetAgent_Cand::FUN_00d3dd90(const CdBody* bodyA, const CdBody* bodyB, const ProcessCollisionInput* input, ProcessCollisionOutput* result) {
-    MonitorStream* stream = (MonitorStream*)TlsGetValue(DAT_0126835c);
-    MonitorRecord* cur = stream->m_pTileTemplate;
-    if (cur < stream->m_pRayCursor) {
-        cur->name = DAT_010cf0d4;
-        unsigned int ticks;
-        _ReadWriteBarrier();
-        __asm {
-            rdtsc
-            mov dword ptr[ticks], eax
-        }
-        cur->timestamp = ticks;
-        stream->m_pTileTemplate = cur + 1;
-    }
-
-    AlignedPairData* cp = result->m_pAlignedPairData;
-    FeatureInfo weldFlag;
-    if (queryContact(bodyA, bodyB, input, this->m_pAccessManager, cp, &weldFlag)) {
-        unsigned char m_uiMaterialIndex = weldFlag.count;
-        if (m_uiMaterialIndex > 0) {
-            Shape* weldShape = bodyB->shape();
-            FourFloatVector normalOut = cp->m_vSeparatingNormal;
-            FourFloatVector posOut = cp->m_vContactPosition;
-            int weldRes = weldShape->weldContactPoint(weldFlag.indices, &m_uiMaterialIndex, &posOut, (&bodyB->transform()), bodyA->shape(), (&bodyA->transform()), &normalOut);
-            if (weldRes == 0) {
-                if (this->m_padC != 0xffff) {
-                    ((ContactMgr*)this->m_pContactManager)->removeContactPoint(this->m_padC, *result->m_pConstraintOwner);
-                    this->m_padC = 0xffff;
-                }
-                return;
-            }
-            if (weldRes == 1) {
-                __m128 oldNormal = cp->m_vSeparatingNormal.m;
-                __m128 newNormal = normalOut.m;
-                __m128 unpck = _mm_unpackhi_ps(newNormal, oldNormal);
-                cp->m_vSeparatingNormal.m = _mm_shuffle_ps(newNormal, unpck, 0xc4);
-            }
-        }
-
-        if (this->m_padC == 0xffff) {
-            this->m_padC = ((ContactMgr*)this->m_pContactManager)->addContactPoint(bodyA, bodyB, input, result, 0, cp);
-        }
-        if (this->m_padC != 0xffff) {
-            cp->m_iOwnerObjectOffset = this->m_padC;
-            ++result->m_pAlignedPairData;
-        }
-    } else {
-        if (this->m_padC != 0xffff) {
-            ((ContactMgr*)this->m_pContactManager)->removeContactPoint(this->m_padC, *result->m_pConstraintOwner);
-            this->m_padC = 0xffff;
-        }
-    }
-
-    MonitorStream* streamEnd = (MonitorStream*)TlsGetValue(DAT_0126835c);
-    MonitorRecord* curEnd = streamEnd->m_pTileTemplate;
-    if (curEnd < streamEnd->m_pRayCursor) {
-        curEnd->name = DAT_010c41f8;
-        unsigned int ticks;
-        _ReadWriteBarrier();
-        __asm {
-            rdtsc
-            mov dword ptr[ticks], eax
-        }
-        curEnd->timestamp = ticks;
-        streamEnd->m_pTileTemplate = curEnd + 1;
-    }
-}
 
 extern "C" __m128 _mm_load_ss(const float*);
 static __forceinline __m128 PlainBroadcast(const float& f) {

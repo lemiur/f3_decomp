@@ -27,9 +27,3 @@ int __cdecl FUN_00dd13b0(unsigned int arg0)
 {
     return (int)(arg0 + 16u);
 }
-
-// @fnv 0x00dd13d0
-char* FUN_00dd13d0(char* base)
-{
-    return base + 0x20;
-}

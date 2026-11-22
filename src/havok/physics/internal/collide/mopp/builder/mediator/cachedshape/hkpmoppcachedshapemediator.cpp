@@ -179,13 +179,6 @@ struct FUN_00dd5d90 : RecordBase
     virtual ~FUN_00dd5d90() throw();
 };
 
-// Destructor that zeroes m_iExtra; the m_kArray member is destroyed afterwards by the compiler-generated code.
-// @fnv 0x00dd5d90
-FUN_00dd5d90::~FUN_00dd5d90() throw()
-{
-    m_iExtra = 0;
-}
-
 struct Item
 {
     virtual void v00();
