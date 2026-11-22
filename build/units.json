@@ -573883,19 +573883,17 @@
     "?DAT_010ce7fc@fnv_00d3e0d0@@3EA": "0x00e7e9bc",
     "?hkpSphereTriangleAgent_getClosestPoints@CpuObject@fnv_00d3e0d0@@QAEXPAX0IPAUCpuCallData@2@@Z": "0x009c74a0",
     "__real@7f7fffee": "0x00de6e60",
-    "?DAT_0116913c@@3KA": "0x0116913c",
-    "?DAT_010cf0d4@@3PADA": "0x00e7f23c",
     "?FUN_00cd7160@@YAXPAXPAUS_00d3d3e0_V4@@@Z": "0x0096fbc0",
     "?FUN_00cd7850@@YAXPAUS_00d3d3e0_V4@@PAX0PAUS_00d3d3e0_Out@@@Z": "0x00970580",
-    "?DAT_010c41f8@@3PADA": "0x00e32798",
-    "?DAT_00e7f23c@@3DA": "0x00e7f23c",
     "?hkpCollideTriangleUtil_closestPointTriangle@@YAXPAUVec4@@PAXPBUhkVector4q@@PAURes@@@Z": "0x00970580",
-    "?DAT_00e32798@@3DA": "0x00e32798",
     "_DAT_010f3170": "0x010f3170",
     "?FUN_008f6d30@CapsuleThreadMemorySlot3@@QAEPAXHH@Z": "0x008f6d30",
     "_DAT_00e7f064": "0x00e7f064",
     "?FUN_0096fd30@@YAXPAX0@Z": "0x0096fd30",
-    "_DAT_00e7f0a0": "0x00e7f0a0"
+    "_DAT_00e7f0a0": "0x00e7f0a0",
+    "?hkMonitorStream__m_instance@@3V?$hkThreadLocalData@PAVhkMonitorStream@@@@A": "0x0116913c",
+    "??_C@_0M@DNLBPPJC@TtSphereTri?$AA@": "0x00e7f23c",
+    "??_C@_02DNLMNFDE@Et?$AA@": "0x00e32798"
    }
   },
   {
