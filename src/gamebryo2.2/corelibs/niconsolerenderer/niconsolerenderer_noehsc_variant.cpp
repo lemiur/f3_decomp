@@ -17,23 +17,21 @@ class NiMemObject
   public:
     static void* operator new(unsigned int);
 };
-class GraphicsRenderer : public NiMemObject
-{
-  public:
-    virtual ~GraphicsRenderer() throw();
-    GraphicsRenderer() throw();
-    unsigned int pad[7];
-    unsigned int count;
-    unsigned int pad24;
-    RendererPacketEntry** entries;
-    __declspec(noinline) bool HasPendingPackets();
-    static const char* GetD3DFormatName(_D3DFORMAT);
-    char remaining[0xb80 - 44];
-    static GraphicsRenderer* Create(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int,
-                                    unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int,
-                                    unsigned int, unsigned int, unsigned int);
-    bool Create(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int,
-                unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+class GraphicsRenderer : public NiMemObject {
+public:
+ virtual ~GraphicsRenderer() throw();
+ GraphicsRenderer() throw();
+ unsigned int pad[7]; unsigned int count; unsigned int pad24; RendererPacketEntry** entries;
+ __declspec(noinline) bool HasPendingPackets();
+ static const char* GetD3DFormatName(_D3DFORMAT);
+ char unk02C[0x5e0-0x2c];
+ unsigned int unk5E0;
+ float unk5E4;
+ unsigned int unk5E8;
+ unsigned int unk5EC;
+ char unk5F0[0xb80-0x5f0];
+ static GraphicsRenderer* Create(unsigned int,unsigned int,unsigned int,unsigned int,unsigned int,unsigned int,unsigned int,unsigned int,unsigned int,unsigned int,unsigned int,unsigned int,unsigned int,unsigned int,unsigned int);
+ bool Create(unsigned int,unsigned int,unsigned int,unsigned int,unsigned int,unsigned int,unsigned int,unsigned int,unsigned int,unsigned int,unsigned int,unsigned int,unsigned int,unsigned int);
 };
 class RecursiveSpinLock
 {
@@ -186,8 +184,10 @@ struct FUN_00e69600_shell
 {
     unsigned int __thiscall FUN_00e69600();
 };
-struct FUN_00e69900_shell
-{
+struct FUN_00e69900_shell {
+    char unk000[0x628];
+    unsigned int unk628;
+    unsigned int unk62C;
     void SetTwoValues(unsigned int a, unsigned int b);
 };
 void FUN_00e69ad0(const char* path);
@@ -272,9 +272,9 @@ struct FUN_00e72e50_shell
 };
 extern "C" void* g_0126f0f0;
 void* __cdecl FUN_00e757b0();
-struct FUN_00e757c0_shell
-{
-    unsigned char* data;
+struct FUN_00e757c0_shell {
+    unsigned char unk000[0xad0];
+    unsigned char unkAD0;
     unsigned char FUN_00e757c0();
 };
 struct FUN_00e75830_shell : GraphicsRenderer
@@ -289,8 +289,7 @@ struct FUN_00e75840_shell
 };
 extern "C" void* g_01270900;
 void* __cdecl FUN_00e766f0();
-struct FUN_00e758f0_shell
-{
+struct FUN_00e758f0_shell : GraphicsRenderer {
     void PackColorToUInt(float* floats);
 };
 extern int DAT_0126f580[];
@@ -448,7 +447,9 @@ struct Dev
 };
 struct RendererHolder
 {
-    int __thiscall FUN_00e698a0(int a1, int a2, int a3, int a4);
+ char unk000[0x288];
+ Dev* unk288;
+ int __thiscall FUN_00e698a0(int a1, int a2, int a3, int a4);
 };
 struct FUN_00e698d0_shell
 {
@@ -456,17 +457,11 @@ struct FUN_00e698d0_shell
     void* m_pDirectInputDevice;
     void DispatchToVTableSlot82(unsigned int a1, unsigned int a2, unsigned int a3, unsigned int a4);
 };
-struct FUN_00e69970_shell
-{
-    void ClearShader(void* pkShader);
-};
+struct FUN_00e69970_shell { char unk000[0x8b8]; void* unk8B8; void ClearShader(void* pkShader); };
 extern "C" __declspec(dllimport) void __stdcall EnterCriticalSection(void*);
 extern "C" __declspec(dllimport) void __stdcall LeaveCriticalSection(void*);
 int __cdecl FUN_00e68ef0(void*, void*);
-struct StandIn_e6dc40
-{
-    bool FUN_00e6dc40(void*);
-};
+struct StandIn_e6dc40 { unsigned char unk000[0x180]; unsigned char unk180[0x18]; bool FUN_00e6dc40(void*); };
 struct NiVBSet
 {
     void Create(unsigned int, void*);
@@ -486,10 +481,7 @@ struct Stand_00e6dc80
 extern "C" __declspec(dllimport) void __stdcall EnterCriticalSection(void*);
 extern "C" __declspec(dllimport) void __stdcall LeaveCriticalSection(void*);
 int __cdecl FUN_00e8abf0(void*, void*);
-struct FUN_00e6dcc0_shell
-{
-    bool __thiscall FUN_00e6dcc0(void*);
-};
+struct FUN_00e6dcc0_shell { unsigned char unk000[0x180]; unsigned char unk180[0x18]; bool __thiscall FUN_00e6dcc0(void*); };
 struct NiTMapBaseStub
 {
     void __thiscall RemoveAll();
@@ -543,53 +535,15 @@ struct FUN_00e76320
 };
 struct NiDX9ShaderDeclaration
 {
-    virtual int V00();
-    virtual int V01();
-    virtual int V02();
-    virtual int V03();
-    virtual int V04();
-    virtual int V05();
-    virtual int V06();
-    virtual int V07();
-    virtual int V08();
-    virtual int V09();
-    virtual int V10();
-    virtual int V11();
-    virtual int V12();
-    virtual int V13();
-    virtual int V14();
-    virtual int V15();
-    virtual int V16();
-    virtual int V17();
-    virtual int V18();
-    virtual int V19();
-    virtual int V20();
-    virtual int V21();
-    virtual int V22();
-    virtual int V23();
-    virtual int V24();
-    virtual int V25();
-    virtual int V26();
-    virtual int V27();
-    virtual int V28();
-    virtual int V29();
-    virtual int V30();
-    virtual int V31();
-    virtual int V32();
-    virtual int V33();
-    virtual int V34();
-    virtual int V35();
-    virtual int V36();
-    virtual int V37();
-    virtual int V38();
-    virtual int V39();
-    virtual int V40();
-    virtual int V41();
-    virtual int V42();
-    virtual int V43();
-    virtual int V44();
-    virtual int V45();
-    bool FUN_00e76630(unsigned int*, unsigned int*);
+ virtual int V00(); virtual int V01(); virtual int V02(); virtual int V03(); virtual int V04(); virtual int V05(); virtual int V06(); virtual int V07();
+ virtual int V08(); virtual int V09(); virtual int V10(); virtual int V11(); virtual int V12(); virtual int V13(); virtual int V14(); virtual int V15();
+ virtual int V16(); virtual int V17(); virtual int V18(); virtual int V19(); virtual int V20(); virtual int V21(); virtual int V22(); virtual int V23();
+ virtual int V24(); virtual int V25(); virtual int V26(); virtual int V27(); virtual int V28(); virtual int V29(); virtual int V30(); virtual int V31();
+ virtual int V32(); virtual int V33(); virtual int V34(); virtual int V35(); virtual int V36(); virtual int V37(); virtual int V38(); virtual int V39();
+ virtual int V40(); virtual int V41(); virtual int V42(); virtual int V43(); virtual int V44(); virtual int V45();
+ unsigned int unk04[7];
+ unsigned int unk20;
+ bool FUN_00e76630(unsigned int*, unsigned int*);
 };
 struct P03MM
 {
@@ -806,9 +760,9 @@ struct Group765 : VBase765
     Entry* entries;
     void* FUN_00e765e0(unsigned int index);
 };
-struct FUN_00e76610_shell
-{
-    unsigned int pad[0x34 / 4];
+struct FUN_00e76610_shell {
+    unsigned int pad[0x34/4];
+    bool unk34;
     void __thiscall SetFlag(bool value);
 };
 extern int DAT_010ee70c;
@@ -903,8 +857,11 @@ struct CpRectNi
     int left, right, top, bottom;
 };
 typedef void(__cdecl* CopyMsgFn)(const char*, ...);
-struct FUN_00e6f840_shell
-{
+struct FUN_00e6f840_shell {
+    char unk000[0x288];
+    CpDevice* unk288;
+    char unk28C[0x6fc - 0x28c];
+    char unk6FC;
     bool CopySurface(RenderCopyData* src, RenderCopyData* dst, CpRectNi* srcRect, CpRectNi* dstRect, int filter);
 };
 void* _fnv_zlib_memset(void* dst, int val, unsigned int size);
@@ -966,6 +923,10 @@ struct DepthDeviceTable
 };
 struct FUN_00e6c690_shell
 {
+    char unk000[0x3c4];
+    char unk3C4[0x200];
+    unsigned int unk5C4;
+    unsigned int unk5C8;
     char* GetDepthDeviceDescription();
 };
 extern DepthDevice* DAT_0126f0d8;
@@ -973,12 +934,19 @@ int __cdecl _NiSprintf(char*, unsigned int, const char*, int, const char*, ...);
 void* _fnv_zlib_memset(void*, int, unsigned int);
 extern void* DAT_011c5f58;
 void __stdcall ReleaseRefCountedNode(void* param_1);
+struct Entry_00e76500
+{
+    unsigned int unk00;
+    unsigned int unk04;
+    unsigned int* unk08;
+    unsigned int unk0C;
+};
 struct FUN_00e76500_shell
 {
     unsigned int pad[7];
     unsigned int f1c;
     unsigned int f20;
-    unsigned int* f24;
+    Entry_00e76500* f24;
     unsigned char f28;
     unsigned int pad29[1];
     void* f30;
