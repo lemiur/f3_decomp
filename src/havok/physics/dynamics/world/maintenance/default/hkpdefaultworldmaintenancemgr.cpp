@@ -1,4 +1,5 @@
 #include "f3_common.h"
+#include "havok/hkMonitorStream.h"
 // src/havok/physics/dynamics/world/maintenance/default/hkpdefaultworldmaintenancemgr.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/physics/dynamics/world/maintenance/default/hkpdefaultworldmaintenancemgr.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
@@ -60,30 +61,9 @@ extern "C" unsigned __int64 __rdtsc(void);
 #include <windows.h>
 extern DWORD DAT_0126835c;
 extern const char str_010cd380[];
-extern const char str_010cd378[];
 extern const char str_010cd36c[];
 extern const char str_01076f38[];
 extern void __cdecl hkpWorldOperationUtil_splitSimulationIslands(void*);
-struct TraceBuffer
-{
-    int unk00;
-    unsigned char* current;
-    int unk08;
-    unsigned char* end;
-};
-struct TraceEntry16
-{
-    volatile unsigned int type;
-    volatile unsigned int timestamp;
-    unsigned int unk08;
-    volatile unsigned int detail;
-};
-struct TraceEntry12
-{
-    volatile unsigned int type;
-    volatile unsigned int timestamp;
-    unsigned int unk08;
-};
 struct FUN_00d0b280_cls
 {
     int unk00;
@@ -97,48 +77,14 @@ struct FUN_00d0b280_cls
 // @fnv 0x00d0b280
 void FUN_00d0b280_cls::FUN_00d0b280(float* first, float* second)
 {
-    TraceBuffer* buffer = (TraceBuffer*)TlsGetValue(DAT_0126835c);
-    unsigned char* current = buffer->current;
-    if (current < buffer->end)
-    {
-        volatile TraceEntry16* entry = (volatile TraceEntry16*)current;
-        entry->type = (unsigned int)str_010cd380;
-        entry->detail = (unsigned int)str_010cd378;
-        _ReadWriteBarrier();
-        volatile unsigned int timestamp = (unsigned int)__rdtsc();
-        entry->timestamp = timestamp;
-        current += 16;
-        buffer->current = current;
-    }
+    HK_TIMER_BEGIN_LIST("Maintenance", "Split");
     hkpWorldOperationUtil_splitSimulationIslands(first);
     if (*second >= unk0c)
     {
-        buffer = (TraceBuffer*)TlsGetValue(DAT_0126835c);
-        current = buffer->current;
-        if (current < buffer->end)
-        {
-            volatile TraceEntry12* entry = (volatile TraceEntry12*)current;
-            entry->type = (unsigned int)str_010cd36c;
-            _ReadWriteBarrier();
-            volatile unsigned int timestamp = (unsigned int)__rdtsc();
-            entry->timestamp = timestamp;
-            current += 12;
-            buffer->current = current;
-        }
+        HK_TIMER_SPLIT_LIST("ResetTime");
         hkpDefaultWorldMaintenanceMgr_resetWorldTime(first, second);
     }
-    buffer = (TraceBuffer*)TlsGetValue(DAT_0126835c);
-    current = buffer->current;
-    if (current < buffer->end)
-    {
-        volatile TraceEntry12* entry = (volatile TraceEntry12*)current;
-        entry->type = (unsigned int)str_01076f38;
-        _ReadWriteBarrier();
-        volatile unsigned int timestamp = (unsigned int)__rdtsc();
-        entry->timestamp = timestamp;
-        current += 12;
-        buffer->current = current;
-    }
+    HK_TIMER_END_LIST();
 }
 
 extern DWORD DAT_0126835c;
@@ -161,33 +107,10 @@ struct FUN_00d0b350_cls
 // pdb params: world, stepInfo
 void FUN_00d0b350_cls::TraceConditionalCall(float* first, float* second)
 {
-    TraceBuffer* buffer = (TraceBuffer*)TlsGetValue(DAT_0126835c);
-    unsigned char* current = buffer->current;
-    if (current < buffer->end)
-    {
-        volatile TraceEntry16* entry = (volatile TraceEntry16*)current;
-        entry->type = (unsigned int)str_010cd380;
-        entry->detail = (unsigned int)str_010cd36c;
-        _ReadWriteBarrier();
-        volatile unsigned int timestamp = (unsigned int)__rdtsc();
-        entry->timestamp = timestamp;
-        current += 16;
-        buffer->current = current;
-    }
+    HK_TIMER_BEGIN_LIST("Maintenance", "ResetTime");
     if (*second >= unk0c)
         hkpDefaultWorldMaintenanceMgr_resetWorldTime(first, second);
-    buffer = (TraceBuffer*)TlsGetValue(DAT_0126835c);
-    current = buffer->current;
-    if (current < buffer->end)
-    {
-        volatile TraceEntry12* entry = (volatile TraceEntry12*)current;
-        entry->type = (unsigned int)str_01076f38;
-        _ReadWriteBarrier();
-        volatile unsigned int timestamp = (unsigned int)__rdtsc();
-        entry->timestamp = timestamp;
-        current += 12;
-        buffer->current = current;
-    }
+    HK_TIMER_END_LIST();
 }
 
 struct hkStepInfo

@@ -583611,16 +583611,11 @@
     "__real@3ff0000000000000": "0x00db38a8",
     "??3@YAXPAX@Z": "0x00401010",
     "__imp__TlsGetValue@4": "0x00d9b080",
-    "?DAT_0126835c@@3KA": "0x0116913c",
     "__real@42040000": "0x00e7da74",
     "__real@427c0000": "0x00e05980",
     "??_7hkpDefaultWorldMaintenanceMgr@@6B@": "0x00e7da5c",
-    "?str_010cd380@@3QBDB": "0x00e7da8c",
-    "?str_010cd378@@3QBDB": "0x00e7da84",
     "?hkpWorldOperationUtil_splitSimulationIslands@@YAXPAX@Z": "0x00929630",
-    "?str_010cd36c@@3QBDB": "0x00e7da78",
     "?hkpDefaultWorldMaintenanceMgr_resetWorldTime@FUN_00d0b280_cls@@QAEXPAM0@Z": "0x0098ba90",
-    "?str_01076f38@@3QBDB": "0x00e0811c",
     "?hkpDefaultWorldMaintenanceMgr_resetWorldTime@FUN_00d0b350_cls@@QAEXPAM0@Z": "0x0098ba90",
     "?FUN_009445e0@@YAXPAUhkpSimulationIsland@@MMPAUCollisionAgentContext@@@Z": "0x009445e0"
    }
@@ -583662,17 +583657,17 @@
     "__real@3ff0000000000000": "0x00db38a8",
     "??3@YAXPAX@Z": "0x00401010",
     "__imp__TlsGetValue@4": "0x00d9b080",
-    "?DAT_0126835c@@3KA": "0x0116913c",
     "__real@42040000": "0x00e7da74",
     "__real@427c0000": "0x00e05980",
     "??_7hkpDefaultWorldMaintenanceMgr@@6B@": "0x00e7da5c",
-    "?str_010cd380@@3QBDB": "0x00e7da8c",
-    "?str_010cd378@@3QBDB": "0x00e7da84",
     "?hkpWorldOperationUtil_splitSimulationIslands@@YAXPAX@Z": "0x00929630",
-    "?str_010cd36c@@3QBDB": "0x00e7da78",
     "?hkpDefaultWorldMaintenanceMgr_resetWorldTime@FUN_00d0b280_cls@@QAEXPAM0@Z": "0x0098ba90",
-    "?str_01076f38@@3QBDB": "0x00e0811c",
-    "?hkpDefaultWorldMaintenanceMgr_resetWorldTime@FUN_00d0b350_cls@@QAEXPAM0@Z": "0x0098ba90"
+    "?hkpDefaultWorldMaintenanceMgr_resetWorldTime@FUN_00d0b350_cls@@QAEXPAM0@Z": "0x0098ba90",
+    "?hkMonitorStream__m_instance@@3V?$hkThreadLocalData@PAVhkMonitorStream@@@@A": "0x0116913c",
+    "??_C@_0O@FHFKNKMI@LtMaintenance?$AA@": "0x00e7da8c",
+    "??_C@_07FHDOLOPL@StSplit?$AA@": "0x00e7da84",
+    "??_C@_0M@JCPLKOHG@StResetTime?$AA@": "0x00e7da78",
+    "??_C@_02KCAKIFL@lt?$AA@": "0x00e0811c"
    }
   },
   {
