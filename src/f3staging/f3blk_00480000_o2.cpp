@@ -3463,32 +3463,35 @@ Data* Holder49e7b0::FUN_0049e7b0(Data* d)
 
 // @f3 0x004930d0 (community match, verified in this file)
 #include <math.h>
-extern float DAT_00db88e0;
 namespace f3m_004930d0 {
 
+inline float NiSqrt(float fValue)
+{
+    return float(sqrt(fValue));
+}
 
 struct NiPoint2U4930 {
     float x;
     float y;
+    float Length() const { return NiSqrt(x * x + y * y); }
     float FUN_004930d0();
 };
 
 // pdb: NiPointer<NiScreenElementsData>::~NiPointer<NiScreenElementsData> | ImageSpaceEffectWaterDisplacement.obj | fnv360_0721_beta, call_gap, low, conflict (skyrim: NiPoint2::Unitize)
+// The body is Gamebryo's NiPoint2::Unitize (the Skyrim link).
 float NiPoint2U4930::FUN_004930d0()
 {
-    float sum = x * x + y * y;
-    volatile float raw = (float)sqrt((double)sum);
-    float len = raw;
-    if (DAT_00db88e0 < len) {
-        float inv = 1.0f / len;
-        x = x * inv;
-        y = y * inv;
-        return len;
+    float fLength = Length();
+    if (fLength > 1e-06f) {
+        float fRecip = 1.0f / fLength;
+        x *= fRecip;
+        y *= fRecip;
+    } else {
+        x = 0.0f;
+        y = 0.0f;
+        fLength = 0.0f;
     }
-    x = 0.0f;
-    y = 0.0f;
-    volatile float z = 0.0f;
-    return z;
+    return fLength;
 }
 }   // namespace f3m_004930d0
 

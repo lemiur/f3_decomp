@@ -2309,25 +2309,29 @@ void __fastcall GridArray_Init(int* ecx)
 // @f3 0x00468d00 (community match, verified in this file)
 #include <math.h>
 
+inline float FUN_00468d00_NiSqrt(float fValue)
+{
+    return float(sqrt(fValue));
+}
+
 struct FUN_00468d00_Vec {
     float x;
     float y;
     float z;
+    float Length() const { return FUN_00468d00_NiSqrt(x * x + y * y + z * z); }
     void FUN_00468d00();
 };
 
 // pdb: NiSinCos | TESObjectWEAP.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: NiPoint3::Unitize)
 // pdb params: fRadians, fSin, fCos
+// The body is Gamebryo's NiPoint3::Unitize (the Skyrim link).
 void FUN_00468d00_Vec::FUN_00468d00() {
-    volatile float sumSq = x * x + y * y + z * z;
-    volatile float rooted = (float)sqrt((double)sumSq);
-    float len = rooted;
-    const float eps = 0.000001f;
-    if (len > eps) {
-        float inv = 1.0f / len;
-        x = x * inv;
-        y = y * inv;
-        z = z * inv;
+    float fLength = Length();
+    if (fLength > 1e-06f) {
+        float fRecip = 1.0f / fLength;
+        x *= fRecip;
+        y *= fRecip;
+        z *= fRecip;
     } else {
         x = 0.0f;
         y = 0.0f;
