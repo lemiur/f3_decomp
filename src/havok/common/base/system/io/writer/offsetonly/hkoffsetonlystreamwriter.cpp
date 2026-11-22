@@ -2,9 +2,15 @@
 // src/havok/common/base/system/io/writer/offsetonly/hkoffsetonlystreamwriter.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/common/base/system/io/writer/offsetonly/hkoffsetonlystreamwriter.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
+class hkClass;
+class hkStatisticsCollector;
+// Virtual slots as the Fallout 3 vtable of hkOffsetOnlyStreamWriter (0x00e885c4, 9 slots) has them; names from the
+// New Vegas Xbox 360 PDB.
 struct hkReferencedObject
 {
-    virtual void vf0();
+    virtual ~hkReferencedObject();
+    virtual const hkClass* getClassType() const;
+    virtual void calcContentStatistics(hkStatisticsCollector* collector, const hkClass* cls) const;
     short m_usMemSizeAndFlags;
     short m_sReferenceCount;
     hkReferencedObject()
@@ -19,7 +25,12 @@ struct FUN_00e02ef0 : hkReferencedObject
     int m_kPointB;
 
     FUN_00e02ef0();
-    virtual void vf1();
+    virtual char isOk() const;
+    virtual int write(const void* buf, int nbytes);
+    virtual void flush();
+    virtual char seekTellSupported() const;
+    virtual int seek(int offset, int whence);
+    virtual int tell() const;
 };
 
 // @fnv 0x00e02ef0
@@ -105,9 +116,12 @@ void __stdcall FUN_00e02f20(unsigned char* output)
     *output = 1;
 }
 
+// hkIArchive (Fallout 3 vtable 0x00e86c40: the destructor and hkReferencedObject's two slots)
 struct FUN_00e02ee0_cls
 {
-    virtual void vf00();
+    virtual ~FUN_00e02ee0_cls();
+    virtual const hkClass* getClassType() const;
+    virtual void calcContentStatistics(hkStatisticsCollector* collector, const hkClass* cls) const;
     int unk04;
     int unk08;
 
