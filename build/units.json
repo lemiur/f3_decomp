@@ -508251,11 +508251,6 @@
      "size": 60
     },
     {
-     "address": "0x008e69e0",
-     "symbol": "?bhkRagdollController_CopyPoseTo3DRec@@YAXPAURCtx@@PAURObj@@PAURArr@@@Z",
-     "size": 364
-    },
-    {
      "address": "0x008e7610",
      "symbol": "?FUN_00c7d810@FUN_00c7d810_Cls@fnv_00c7d810@@QAEXXZ",
      "size": 127
@@ -508342,6 +508337,37 @@
     "__ehhandler$?bhkRagdollController_CopyPoseTo3DRec@@YAXPAURCtx@@PAURObj@@PAURArr@@@Z": "0x00c73198",
     "__ehhandler$??0FUN_00c7f9e0@@QAE@PAX@Z": "0x00c70a08",
     "?CheckFloatsValid@@YAPA_NPBMHPA_N@Z": "0x008d2740"
+   }
+  },
+  {
+   "source": "src/bshavok/bhkragdollcontroller.cpp",
+   "compiler": "vs2005",
+   "flags": [
+    "/MT",
+    "/O2",
+    "/GS",
+    "/EHsc",
+    "/Gy"
+   ],
+   "functions": [
+    {
+     "address": "0x008e69e0",
+     "symbol": "?bhkRagdollController_CopyPoseTo3DRec@@YAXPAURCtx@@PAURObj@@PAURArr@@@Z",
+     "size": 364
+    }
+   ],
+   "symbols": {
+    "__imp__InterlockedDecrement@4": "0x00d9b064",
+    "__imp__InterlockedIncrement@4": "0x00d9b068",
+    "?EmptyFS@@3PADA": "0x00e207a8",
+    "?Equals@FixedStr@@QBE_NPBD@Z": "0x00657840",
+    "?FUN_00c4b470@@YAPAURObj@@PAURCtx@@PAURKey@@H@Z": "0x00aab440",
+    "?AppendSlot@RArr@@QAEHXZ": "0x008e31a0",
+    "?ConstructElementArray@RArr@@QAEXPAURElem@@H@Z": "0x008dcfb0",
+    "___security_cookie": "0x0106ab70",
+    "@__security_check_cookie@4": "0x00c0018c",
+    "??_C@_0P@BFMAPFMD@Bip01?5NonAccum?$AA@": "0x00dfb5f8",
+    "__ehhandler$?bhkRagdollController_CopyPoseTo3DRec@@YAXPAURCtx@@PAURObj@@PAURArr@@@Z": "0x00c73198"
    }
   },
   {
