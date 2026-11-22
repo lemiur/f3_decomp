@@ -113,18 +113,6 @@ void hkMonitorStream::TimerCommand::setTime()
 	    h->setTime(); \
 	    mStream.setEnd( (char*)(h+1) ); } }
 
-// Ends the timer its scope began with HK_TIME_CODE_BLOCK.
-class hkTimeFunctionHelper
-{
-	public:
-
-		__forceinline ~hkTimeFunctionHelper() { HK_TIMER_END(); }
-};
-
-#define HK_PREPROCESSOR_JOIN_TOKEN(A, B) HK_PREPROCESSOR_JOIN_TOKEN2(A, B)
-#define HK_PREPROCESSOR_JOIN_TOKEN2(A, B) A##B
-#define HK_TIME_CODE_BLOCK(NAME, OBJECT) HK_TIMER_BEGIN(NAME, OBJECT); hkTimeFunctionHelper HK_PREPROCESSOR_JOIN_TOKEN(timeblock, __LINE__)
-
 #define HK_MONITOR_ADD_VALUE(NAME, VALUE, MONITOR_TYPE) \
 	{ hkMonitorStream& mStream = hkMonitorStream::getInstance(); \
 	  if ( mStream.memoryAvailable() ) \

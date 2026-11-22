@@ -1,5 +1,5 @@
 #include "f3_common.h"
-#include "havok/hkMonitorStream.h"
+#include "havok/hkTimeFunctionHelper.h"
 // src/havok/physics/dynamics/world/simulation/continuous/hkpcontinuoussimulation.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/physics/dynamics/world/simulation/continuous/hkpcontinuoussimulation.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
