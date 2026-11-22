@@ -128,10 +128,7 @@ char* FnvDisabledCollisionFilter::hkpDisableEntityCollisionFilter_removeEntityFr
     {
         if (m_kDisabledEntities.m_data[index] == entity)
         {
-            volatile int& count = m_kDisabledEntities.m_iElementCount;
-            --count;
-            int last = count;
-            m_kDisabledEntities.m_data[index] = m_kDisabledEntities.m_data[last];
+                        m_kDisabledEntities.removeAt(index);
             *wasRemoved = 1;
             return wasRemoved;
         }

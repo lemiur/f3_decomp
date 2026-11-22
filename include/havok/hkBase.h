@@ -53,6 +53,13 @@ template <class T> struct hkArray
     T* m_data;
     int m_iElementCount;
     int m_iCapacityState;
+
+    // hkArray::removeAt: the last element takes the removed one's place.
+    void removeAt(int index)
+    {
+        m_iElementCount--;
+        m_data[index] = m_data[m_iElementCount];
+    }
 };  // 12
 template <class T> struct hkSimpleArray
 {
