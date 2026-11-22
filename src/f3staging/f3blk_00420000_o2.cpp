@@ -8134,32 +8134,35 @@ void Host424150::FUN_00424150(signed char a1, unsigned int a2, unsigned char a3,
 #include <math.h>
 namespace f3m_00432c00 {
 
+inline float NiSqrt(float fValue)
+{
+    return float(sqrt(fValue));
+}
+
 struct NiPoint3 {
     float x;
     float y;
     float z;
+    float Length() const { return NiSqrt(x * x + y * y + z * z); }
     float NiPoint3_UnitizeGetLength();
 };
 
 // pdb: NiPoint3::UnitizeGetLength | TES.obj | fnv360_0822_debug, call_seq + skyrim(caller), high
 float NiPoint3::NiPoint3_UnitizeGetLength()
 {
-    float dot = x * x + y * y + z * z;
-    volatile float t = (float)sqrt((double)dot);
-    float len = t;
-    if (len > 1e-6f) {
-        float inv = 1.0f / len;
-        x = x * inv;
-        y = y * inv;
-        z = z * inv;
-        return len;
+    float fLength = Length();
+    if (fLength > 1e-06f) {
+        float fRecip = 1.0f / fLength;
+        x *= fRecip;
+        y *= fRecip;
+        z *= fRecip;
     } else {
         x = 0.0f;
         y = 0.0f;
         z = 0.0f;
-        volatile float r = 0.0f;
-        return r;
+        fLength = 0.0f;
     }
+    return fLength;
 }
 }   // namespace f3m_00432c00
 
