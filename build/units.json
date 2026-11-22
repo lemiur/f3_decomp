@@ -1,7 +1,7 @@
 {
  "note": "Build recipe: every unit, the compiler and flags it is built with, and the functions it must reproduce. Addresses are those of Fallout 3 PC 1.7.0.3. Read by tools/build_and_match.py.",
  "totals": {
-  "units": 2139,
+  "units": 2140,
   "functions": 63681,
   "bytes": 9107120
  },
