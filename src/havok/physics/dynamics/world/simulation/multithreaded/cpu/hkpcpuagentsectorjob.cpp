@@ -18,15 +18,16 @@ void __thiscall FUN_00d93330::UpdateConstraint(int v)
     m_constraintForCommand = v;
 }
 
-struct FUN_00d93340_StandIn {
+// hkpDeferredConstraintOwner, as above.
+struct FUN_00d93340_StandIn : FUN_00d93330 {
     void FUN_00d93340(int);
 };
 
 // @fnv 0x00d93340
 void __thiscall FUN_00d93340_StandIn::FUN_00d93340(int a)
 {
-    *(int*)((char*)this + 0x18) = *(int*)((char*)this + 0x18) - 1;
-    *(int*)((char*)this + 0x1c) = a;
+    m_constraintAddRemoveCounter = m_constraintAddRemoveCounter - 1;
+    m_constraintForCommand = a;
 }
 
 struct SubTarget {

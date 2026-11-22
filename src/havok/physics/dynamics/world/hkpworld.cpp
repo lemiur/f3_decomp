@@ -874,7 +874,7 @@ struct FUN_00c98250_Class {
 // pdb: BSContentPackage::DisplayName | BSContentPackage_Xenon.obj | fnv360_0822_retail, vtable, high
 void* __thiscall FUN_00c98250_Class::FUN_00c98250(int, int, int)
 {
-    return (void*)((char*)this + 8);
+    return &m_8;
 }
 
 // @fnv 0x00c982a0

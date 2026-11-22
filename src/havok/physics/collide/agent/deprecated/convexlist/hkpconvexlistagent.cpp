@@ -103,21 +103,21 @@ void FUN_00d33810_cls::hkpConvexListAgent_commitPotential(int a)
 }
 
 namespace fnv_00d33830 {
-struct FUN_00d33830_cls
-{
-    void __thiscall FUN_00d33830(int a);
-};
-
 struct hkpGskfAgent
 {
     void __thiscall ClearSlotById(int a);
+};
+// hkpConvexListAgent, as above.
+struct FUN_00d33830_cls : ::hkpConvexListAgentData
+{
+    void __thiscall FUN_00d33830(int a);
 };
 
 // @fnv 0x00d33830
 void __thiscall FUN_00d33830_cls::FUN_00d33830(int aiArg)
 {
-    if (*(char*)((char*)this + 0x84))
-        ((hkpGskfAgent*)this)->ClearSlotById(aiArg);
+        if (m_inGskMode)
+        ((fnv_00d33830::hkpGskfAgent*)this)->ClearSlotById(aiArg);
 }
 }  // namespace fnv_00d33830
 
