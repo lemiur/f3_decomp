@@ -35,13 +35,11 @@ struct S_00cf6f10_Obj
 
 // @fnv 0x00cf6f10
 // pdb: hkpBroadPhaseBorderListener::removeCollisionPair | hkpBroadPhaseBorderListener.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(vtable), high
-int __stdcall hkpBroadPhaseBorderListener_removeCollisionPair(S_00cf6f10_Rec* pRec)
+void __stdcall hkpBroadPhaseBorderListener_removeCollisionPair(S_00cf6f10_Rec* pRec)
 {
     S_00cf6f10_Node* a = pRec->first;
-    if (a->type == 3 && pRec->second->type == 3)
-    {
-    }
-    else
+        if (a->type == 3 && pRec->second->type == 3)
+        return;
     {
         if (a->type == 3)
         {
@@ -57,7 +55,7 @@ int __stdcall hkpBroadPhaseBorderListener_removeCollisionPair(S_00cf6f10_Rec* pR
             S_00cf6f10_Node* pSecondBase2 = (S_00cf6f10_Node*)((char*)b + b->off);
             S_00cf6f10_Obj* y = (S_00cf6f10_Obj*)((char*)pSecondBase2 + pSecondBase2->off10);
             S_00cf6f10_Node* pFirst2 = pRec->first;
-            return y->v24((char*)pFirst2 + pFirst2->off);
+            y->v24((char*)pFirst2 + pFirst2->off);
         }
     }
 }

@@ -576564,7 +576564,7 @@
     },
     {
      "address": "0x00985350",
-     "symbol": "?RegisterAgentType@hkpCollisionDispatcher@@QAEXPAY0CA@CCHHCCPAY0CA@UCollisionAgentEntry@@H@Z",
+     "symbol": "?RegisterAgentType@hkpCollisionDispatcher@@QAEXPAY0CA@ECHHCCPAY0CA@UDebugEntry@1@H@Z",
      "size": 617
     },
     {
@@ -584810,7 +584810,7 @@
     },
     {
      "address": "0x0097f080",
-     "symbol": "?hkpBroadPhaseBorderListener_removeCollisionPair@@YGHPAUS_00cf6f10_Rec@@@Z",
+     "symbol": "?hkpBroadPhaseBorderListener_removeCollisionPair@@YGXPAUS_00cf6f10_Rec@@@Z",
      "size": 99
     }
    ],
