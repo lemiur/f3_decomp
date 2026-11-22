@@ -60,11 +60,11 @@ void FUN_00d53200_class::FUN_00d53200(NiStream& stream)
     FUN_00c8a230(stream);
 }
 
-void* __cdecl InitAndGetOffset(void*, void*, void*);
+void* __cdecl hkBoxBoxAgent3_create(void*, void*, void*);
 void __cdecl RemoveEntryByKey(void);
-void __cdecl FindOrClaimEntry(void);
+void __cdecl hkBoxBoxAgent3_commitPotential(void);
 void __cdecl FUN_00d3fde0(void);
-void __cdecl ResetEntryAgents(void);
+void __cdecl hkBoxBoxAgent3_cleanup(void);
 void __cdecl FUN_00d3fe70(void);
 void __cdecl FUN_00d3fe90(void);
 
@@ -73,12 +73,12 @@ void __cdecl FUN_00d3fe90(void);
 void __cdecl FUN_00d400f0(void* apObject)
 {
     void** f = (void**)apObject;
-    f[0] = (void*)&InitAndGetOffset;
+    f[0] = (void*)&hkBoxBoxAgent3_create;
     f[11] = (void*)&FUN_00d3fe90;
     f[10] = 0;
-    f[2] = (void*)&ResetEntryAgents;
+    f[2] = (void*)&hkBoxBoxAgent3_cleanup;
     f[3] = (void*)&RemoveEntryByKey;
-    f[4] = (void*)&FindOrClaimEntry;
+    f[4] = (void*)&hkBoxBoxAgent3_commitPotential;
     f[5] = (void*)&FUN_00d3fde0;
     f[6] = 0;
     f[1] = (void*)&FUN_00d3fe70;
@@ -89,9 +89,9 @@ void __cdecl DispatchInputRecord();
 void __cdecl hkPredGskAgent3_process();
 void __cdecl FUN_00d41930();
 void __cdecl FUN_00d41860();
-void __cdecl RemoveEntryById();
-void __cdecl InsertSlotId();
-void __cdecl FindEntryByKey();
+void __cdecl hkPredGskAgent3_removePoint();
+void __cdecl hkPredGskAgent3_commitPotential();
+void __cdecl hkPredGskAgent3_createZombie();
 void __cdecl ForwardToTarget();
 
 // Fills the object's vtable slots with function pointers and sets the byte at p+48 to 1.
@@ -103,9 +103,9 @@ void __cdecl hkPredGskAgent3_initAgentFunc(int* pObject)
     pObject[0x2c / 4] = (int)&hkPredGskAgent3_process;
     pObject[0x28 / 4] = (int)&FUN_00d41930;
     pObject[2] = (int)&FUN_00d41860;
-    pObject[3] = (int)&RemoveEntryById;
-    pObject[4] = (int)&InsertSlotId;
-    pObject[5] = (int)&FindEntryByKey;
+    pObject[3] = (int)&hkPredGskAgent3_removePoint;
+    pObject[4] = (int)&hkPredGskAgent3_commitPotential;
+    pObject[5] = (int)&hkPredGskAgent3_createZombie;
     pObject[1] = (int)&ForwardToTarget;
     *(unsigned char*)(pObject + 12) = 1;
 }
@@ -459,7 +459,8 @@ struct S_009cd320_Name
 
 // pdb: hkpPhantomAgent::createNoPhantomAgent | hkpPhantomAgent.obj | fnv360_0822_retail, objrun, high
 // pdb params: bodyA, bodyB, input, mgr
-int __cdecl DispatchToType1dNodes(FNVDispatchNode* pNodeA, FNVDispatchNode* pNodeB, int iCode)
+// pdb: hkpPhantomAgent::createNoPhantomAgent | hkpPhantomAgent.obj | fnv360_0822_retail, objrun, high (was: DispatchToType1dNodes)
+int __cdecl hkpPhantomAgent_createNoPhantomAgent(FNVDispatchNode* pNodeA, FNVDispatchNode* pNodeB, int iCode)
 {
     if (pNodeA->m_pName->m_typeId == 0x1d)
     {
@@ -478,7 +479,7 @@ int __cdecl DispatchToType1dNodes(FNVDispatchNode* pNodeA, FNVDispatchNode* pNod
 
 
 void __cdecl FUN_00d42800();
-void __cdecl CallVirtualMethod();
+void __cdecl hkpPhantomAgent_staticGetPenetrations();
 void __cdecl FUN_00d42760();
 void __cdecl FUN_00d42780();
 
@@ -490,7 +491,7 @@ void __cdecl FUN_00d42960(Agent* apAgent)
     CollisionAgentFunctionTable s;
     s.b0 = 0;
     s.f0 = (void*)FUN_00d42800;
-    s.f1 = (void*)CallVirtualMethod;
+    s.f1 = (void*)hkpPhantomAgent_staticGetPenetrations;
     s.f2 = (void*)FUN_00d42760;
     s.f3 = (void*)FUN_00d42780;
     s.b1 = 1;
@@ -2673,12 +2674,13 @@ class hkBlockD46E
     int unk08;
     int m_iVertexCount;
 
-    int SumLinkedValues() const;
+    int hkClass_getNumInterfaces() const;
 };
 
 // @fnv 0x00d46de0
 // pdb: hkClass::getNumInterfaces | hkClass.obj | fnv360_0822_retail, objrun, high
-int hkBlockD46E::SumLinkedValues() const
+// pdb: hkClass::getNumInterfaces | hkClass.obj | fnv360_0822_retail, objrun, high (was: SumLinkedValues)
+int hkBlockD46E::hkClass_getNumInterfaces() const
 {
     const hkBlockD46E* pkBlock = m_next;
     int iTotal = m_iVertexCount;
@@ -3888,7 +3890,7 @@ struct FUN_00dd0530
     unsigned int unk40;
     unsigned int unk44;
     FUN_00dd0530(int);
-    void AddReferencedObject(int);
+    void hkpConstraintChainInstance_addEntity(int);
 
     __forceinline void* SetSizeAndGrow(unsigned int n)
     {

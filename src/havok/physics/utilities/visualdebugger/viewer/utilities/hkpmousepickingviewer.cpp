@@ -320,7 +320,7 @@ class hkpEntityD66C : public hkReferencedObject
 class hkpWorldD66C
 {
   public:
-    void DispatchOrQueue(hkpEntityD66C* pkEntity);
+    void hkpWorld_removeAction(hkpEntityD66C* pkEntity);
 };
 
 class FUN_00d66c10_cls

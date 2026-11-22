@@ -2,14 +2,15 @@
 // src/havok/common/base/system/io/oarchive/hkoarchive.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/common/base/system/io/oarchive/hkoarchive.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-extern "C" unsigned int __stdcall WriteSwapped(void*, int, int);
+extern "C" unsigned int __stdcall hkOArchive_writeArrayGeneric(void*, int, int);
 
 // @fnv 0x00d609c0
 // pdb: hkOArchive::writeFloat32 | hkOArchive.obj | fnv360_0822_debug, objrun, high
 // pdb params: f
-unsigned int __stdcall HashUInt(unsigned int auiValue)
+// pdb: hkOArchive::writeFloat32 | hkOArchive.obj | fnv360_0822_debug, objrun, high (was: HashUInt)
+unsigned int __stdcall hkOArchive_writeFloat32(unsigned int auiValue)
 {
-    return WriteSwapped(&auiValue, 4, 1);
+    return hkOArchive_writeArrayGeneric(&auiValue, 4, 1);
 }
 
 struct hkOArchive
@@ -25,7 +26,7 @@ void hkOArchive::FUN_00d609e0(int n, int m)
 
 struct FUN_00d60a20_class
 {
-    void __thiscall WriteSwapped(const void* data, int type, unsigned int size);
+    void __thiscall hkOArchive_writeArrayGeneric(const void* data, int type, unsigned int size);
     void __thiscall hkOArchive_writeArray8u(const void* data, unsigned int size);
 };
 
@@ -33,12 +34,12 @@ struct FUN_00d60a20_class
 // pdb: hkOArchive::writeArray8u | hkOArchive.obj | fnv360_0822_debug, objrun + skyrim(objrun), high
 void __thiscall FUN_00d60a20_class::hkOArchive_writeArray8u(const void* data, unsigned int size)
 {
-    WriteSwapped(data, 1, size);
+    hkOArchive_writeArrayGeneric(data, 1, size);
 }
 
 struct FUN_00d60600_class
 {
-    void WriteSwapped(int a, int b, int c);
+    void hkOArchive_writeArrayGeneric(int a, int b, int c);
 };
 
 struct FUN_00d60a60_class : public FUN_00d60600_class
@@ -50,24 +51,24 @@ struct FUN_00d60a60_class : public FUN_00d60600_class
 // pdb: hkOArchive::writeArray16u | hkOArchive.obj | fnv360_0822_retail, objrun + skyrim(objrun), high
 void FUN_00d60a60_class::hkOArchive_writeArray16u(int aiFirst, int aiSecond)
 {
-    WriteSwapped(aiFirst, 2, aiSecond);
+    hkOArchive_writeArrayGeneric(aiFirst, 2, aiSecond);
 }
 
 struct FUN_00d60a80_class
 {
-    void WriteSwapped(const void* p, unsigned int count, unsigned int elementSize);
+    void hkOArchive_writeArrayGeneric(const void* p, unsigned int count, unsigned int elementSize);
     void FUN_00d60a80(const void* p, unsigned int count);
 };
 
 // @fnv 0x00d60a80
 void FUN_00d60a80_class::FUN_00d60a80(const void* apData, unsigned int count)
 {
-    WriteSwapped(apData, 4, count);
+    hkOArchive_writeArrayGeneric(apData, 4, count);
 }
 
 struct FUN_00d60aa0_class
 {
-    void WriteSwapped(const void* data, int count, int size);
+    void hkOArchive_writeArrayGeneric(const void* data, int count, int size);
     void FUN_00d60aa0(const void* data, int count);
 };
 
@@ -76,13 +77,13 @@ struct FUN_00d60aa0_class
 // pdb params: array, nelem
 void FUN_00d60aa0_class::FUN_00d60aa0(const void* data, int count)
 {
-    WriteSwapped(data, 4, count);
+    hkOArchive_writeArrayGeneric(data, 4, count);
 }
 
 namespace fnv_00d60ac0 {
 struct hkOArchive
 {
-    void WriteSwapped(const void* data, unsigned int size, unsigned int elementCount);
+    void hkOArchive_writeArrayGeneric(const void* data, unsigned int size, unsigned int elementCount);
     void writeArray64(const void* data, unsigned int elementCount);
 };
 // @fnv 0x00d60ac0
@@ -91,19 +92,19 @@ struct hkOArchive
 // pdb: hkOArchive::writeArray64 | hkOArchive.obj | fnv360_0822_retail, objrun, high (was: WriteArray)
 void hkOArchive::writeArray64(const void* data, unsigned int elementCount)
 {
-    WriteSwapped(data, 8, elementCount);
+    hkOArchive_writeArrayGeneric(data, 8, elementCount);
 }
 }  // namespace fnv_00d60ac0
 
 struct FUN_00d60ae0_Class
 {
-    void WriteSwapped(void* p, int a, int b);
+    void hkOArchive_writeArrayGeneric(void* p, int a, int b);
     void FUN_00d60ae0(int a, int b);
 };
 // @fnv 0x00d60ae0
 void FUN_00d60ae0_Class::FUN_00d60ae0(int a, int b)
 {
-    WriteSwapped((void*)a, 8, b);
+    hkOArchive_writeArrayGeneric((void*)a, 8, b);
 }
 
 struct hkOArchive_2
@@ -123,7 +124,7 @@ void hkOArchive_2::WriteInt(int aiValue)
 // pdb: hkOArchive::write32u | hkOArchive.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_gap), high
 void __stdcall hkOArchive_write32u(const float* p)
 {
-    WriteSwapped((void*)&p, 4, 1);
+    hkOArchive_writeArrayGeneric((void*)&p, 4, 1);
 }
 
 struct FUN_00d60980_class : public hkOArchive
@@ -246,13 +247,14 @@ void FUN_00d60a40_class::FUN_00d60a40(int apData, int b)
 
 struct FUN_00d60b00_class
 {
-    void __thiscall WriteFloatArray(const float* data, unsigned int count);
+    void __thiscall hkOArchive_writeArrayFloat32(const float* data, unsigned int count);
 };
 
 // @fnv 0x00d60b00
 // pdb: hkOArchive::writeArrayFloat32 | hkOArchive.obj | fnv360_0822_retail, call_seq, high
 // pdb params: array, nelem
-void __thiscall FUN_00d60b00_class::WriteFloatArray(const float* data, unsigned int count)
+// pdb: hkOArchive::writeArrayFloat32 | hkOArchive.obj | fnv360_0822_retail, call_seq, high (was: WriteFloatArray)
+void __thiscall FUN_00d60b00_class::hkOArchive_writeArrayFloat32(const float* data, unsigned int count)
 {
     ((hkOArchive*)this)->WriteBinaryData((void*)data, 4, (int)count);
 }
@@ -331,7 +333,7 @@ struct Archive
     ObjectWriter* m_pStreamWriter;
     char m_byteswap;
 
-    void WriteSwapped(const void* data, int elementSize, int count);
+    void hkOArchive_writeArrayGeneric(const void* data, int elementSize, int count);
 };
 
 inline void swapBytes(unsigned char& a, unsigned char& b)
@@ -344,7 +346,8 @@ inline void swapBytes(unsigned char& a, unsigned char& b)
 // @fnv 0x00d60600
 // pdb: hkOArchive::writeArrayGeneric | hkOArchive.obj | fnv360_0822_retail, call_seq, high
 // pdb params: ptr, elemSize, arraySize
-void Archive::WriteSwapped(const void* data, int elementSize, int count)
+// pdb: hkOArchive::writeArrayGeneric | hkOArchive.obj | fnv360_0822_retail, call_seq, high (was: WriteSwapped)
+void Archive::hkOArchive_writeArrayGeneric(const void* data, int elementSize, int count)
 {
     if (!m_byteswap)
     {

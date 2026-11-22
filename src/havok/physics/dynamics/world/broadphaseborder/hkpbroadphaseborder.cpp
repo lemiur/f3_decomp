@@ -38,7 +38,7 @@ struct AllocatorOwner
     int unk10;
     Manager* manager;
     Item* entries[6];
-    void ReleaseEntries();
+    void hkpBroadPhaseBorder_deactivate();
 };
 // @f3 0x0098bcc0 (community match, verified in this file)
 struct ManagerStub : public Manager
@@ -63,7 +63,8 @@ struct AllocatorOwnerBody
 };
 
 // pdb: hkpBroadPhaseBorder::deactivate | hkpBroadPhaseBorder.obj | fnv360_0822_retail, vtable, high
-void AllocatorOwner::ReleaseEntries()
+// pdb: hkpBroadPhaseBorder::deactivate | hkpBroadPhaseBorder.obj | fnv360_0822_retail, vtable, high (was: ReleaseEntries)
+void AllocatorOwner::hkpBroadPhaseBorder_deactivate()
 {
     AllocatorOwnerBody* pBody = (AllocatorOwnerBody*)this;
     if (pBody->m_pManager)
@@ -108,7 +109,7 @@ struct Dispatcher
     unsigned int unknown28;
     unsigned int unknown2c;
     int mode;
-    void DispatchItemByMode(DispatchItem* item);
+    void hkpBroadPhaseBorder_maxPositionExceededCallback(DispatchItem* item);
 };
 // Switches on mode: for modes 0 and 1 calls item->FUN_00ca8420(5,1,0); for mode 2, if item->owner equals owner, calls owner->ProcessTarget(&success, item).
 // @f3 0x0098bc40 (community match, verified in this file)
@@ -131,7 +132,8 @@ struct RestartDispatchLayout {
 };
 // pdb: hkpBroadPhaseBorder::maxPositionExceededCallback | hkpBroadPhaseBorder.obj | fnv360_0822_retail, vtable, high
 // pdb params: entity
-void Dispatcher::DispatchItemByMode(DispatchItem* item) {
+// pdb: hkpBroadPhaseBorder::maxPositionExceededCallback | hkpBroadPhaseBorder.obj | fnv360_0822_retail, vtable, high (was: DispatchItemByMode)
+void Dispatcher::hkpBroadPhaseBorder_maxPositionExceededCallback(DispatchItem* item) {
     RestartDispatchLayout* layout = reinterpret_cast<RestartDispatchLayout*>(this);
     RestartDispatchItem* target = reinterpret_cast<RestartDispatchItem*>(item);
     switch (layout->mode) {

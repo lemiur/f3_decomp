@@ -107,7 +107,7 @@ struct hkpWorld
     int m_iPendingOperationQueueCount;
     void FUN_00c91120();
     void FUN_00c91140();
-    void ProcessPair(hkpEntity* a, hkpEntity* b);
+    void hkpMultiThreadedSimulation_MtEntityEntityBroadPhaseListener_addCollisionPair(hkpEntity* a, hkpEntity* b);
     __forceinline void lockCriticalOperations()
     {
         m_iCriticalOperationsLockCount++;

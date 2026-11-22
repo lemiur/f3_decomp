@@ -18542,7 +18542,8 @@ struct LinkFlags {
 struct LinkObject {
     int unk00; int unk04; int unk08; int unk0C; int unk10;
     LinkFlags* data;
-    bool HasFlag() { return (data->flags >> 22) & 1; }
+    // pdb: hkClassMember::isNotOwner | hkClassMember.obj | fnv360_0822_retail, objrun, high (was: HasFlag)
+    bool hkClassMember_isNotOwner() { return (data->flags >> 22) & 1; }
 };
 
 struct LinkHead { int unk00; };
@@ -18562,7 +18563,7 @@ bool LinkNode::FUN_00403690()
     if (IsEmpty())
         return result;
     for (LinkNode* node = this; node && !result; node = node->Next()) {
-        if (node->object && node->object->HasFlag())
+        if (node->object && node->object->hkClassMember_isNotOwner())
             result = true;
     }
     return result;

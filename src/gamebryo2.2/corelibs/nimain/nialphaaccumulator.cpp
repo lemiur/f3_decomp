@@ -378,7 +378,7 @@ struct FUN_00a9b850_shell : public NiAlphaAccumulator
 };
 
 // @fnv 0x00a9b850
-// pdb: NiAlphaAccumulator::RegisterObject | NiAlphaAccumulator.obj | fnv360_0822_retail, caller_sim, low
+// pdb: NiAlphaAccumulator::hkPackfileWriter_notDuplicateMetaData | NiAlphaAccumulator.obj | fnv360_0822_retail, caller_sim, low
 // pdb params: apGeometry
 bool FUN_00a9b850_shell::FUN_00a9b850(FUN_00a9b850_Obj* pObject)
 {

@@ -278,7 +278,7 @@ struct hkStringMapDB7
 class hkPackfileWriterDB7
 {
   public:
-    int RegisterObject(void* pvObject, const hkClassDB7* pkClass) throw();
+    int hkPackfileWriter_notDuplicateMetaData(void* pvObject, const hkClassDB7* pkClass) throw();
     int unk00;
     int unk04;
     int unk08;
@@ -326,7 +326,8 @@ struct DBD7MapView
 struct Fwd { static __forceinline const char* key(const char* k) { return k; } };
 // pdb: hkPackfileWriter::notDuplicateMetaData | hkPackfileWriter.obj | fnv360_0822_retail, uconst, high
 // pdb params: pointer, klass
-int hkPackfileWriterDB7::RegisterObject(void* pvObject,const hkClassDB7* pkClass) throw()
+// pdb: hkPackfileWriter::notDuplicateMetaData | hkPackfileWriter.obj | fnv360_0822_retail, uconst, high (was: RegisterObject)
+int hkPackfileWriterDB7::hkPackfileWriter_notDuplicateMetaData(void* pvObject,const hkClassDB7* pkClass) throw()
 {
     if (hkString_strCmp(((const ClassDB7View*)pkClass)->FUN_009b0490(), &DAT_00e44a74) == 0)
     {
@@ -1038,7 +1039,7 @@ struct OwnerE150
     int ub0;
     int ub4;
     MapB8E150 mapb8;
-    int __thiscall RegisterObject(void* a, void* b);
+    int __thiscall hkPackfileWriter_notDuplicateMetaData(void* a, void* b);
     void __thiscall FUN_00dbde40(void* a, void* b, void* c, void* d, void* e);
     void __thiscall hkPackfileWriter_addObject(void* a1, void* a2, void* a3, void* a4, void* a5);
 };

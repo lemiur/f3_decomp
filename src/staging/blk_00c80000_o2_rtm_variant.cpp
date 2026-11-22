@@ -9067,7 +9067,7 @@ struct Body482
         return &collidable;
     }
 
-    void WriteToInfo(Config482*);
+    void hkpRigidBody_getCinfo(Config482*);
 
     Motion482* FUN_00ca86c0();
 };
@@ -9108,7 +9108,7 @@ void Wrapper482::FUN_00c8cfd0(Info482* info)
     FillOutputFromState(info);
     if (body)
     {
-        GetBody482(this)->WriteToInfo(&info->config);
+        GetBody482(this)->hkpRigidBody_getCinfo(&info->config);
         Body482* b = GetBody482(this);
         Motion482* motion = b ? b->FUN_00ca86c0() : 0;
         if (motion)

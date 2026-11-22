@@ -513,7 +513,7 @@ struct DValue
     int unk00;
     int unk04;
     int CallVirtualWithArg() throw();
-    float ApplyValue() throw();
+    float hkOffsetOnlyStreamWriter_seek() throw();
     const float* DispatchToVTableSlot8(int n) throw();
     template <int Width> __forceinline const float* asVector() throw()
     {
@@ -1204,7 +1204,7 @@ struct DValue
         };
     };
     int CallVirtualWithArg() throw();
-    float ApplyValue() throw();
+    float hkOffsetOnlyStreamWriter_seek() throw();
     const float* DispatchToVTableSlot8(int n) throw();
     const char* FUN_00dbac70() throw();
     DObj CreateValueInto() throw();

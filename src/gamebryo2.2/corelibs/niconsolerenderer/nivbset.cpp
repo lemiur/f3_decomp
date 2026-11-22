@@ -318,7 +318,7 @@ struct HashTableBase
     virtual bool EqualKey(unsigned int key, unsigned int existingKey) = 0;
     virtual void Initialize(HashNode* entry, unsigned int key, unsigned int value) = 0;
     virtual void Reserved4() = 0;
-    virtual HashNode* AllocateNode() = 0;
+    virtual HashNode* hkpMoppDefaultSplitter_createTerminal() = 0;
 
     unsigned int tableSize;
     HashNode** buckets;
@@ -342,7 +342,7 @@ void HashTableBase::InsertOrUpdate(unsigned int key, unsigned int value)
         }
         node = node->next;
     }
-    HashNode* newNode = AllocateNode();
+    HashNode* newNode = hkpMoppDefaultSplitter_createTerminal();
     Initialize(newNode, key, value);
     newNode->next = buckets[bucketIndex];
     buckets[bucketIndex] = newNode;

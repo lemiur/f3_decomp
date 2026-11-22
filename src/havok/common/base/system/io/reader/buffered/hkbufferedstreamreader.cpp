@@ -13,13 +13,14 @@ struct FUN_00d2bb20_cls
     int m_18;
     int m_1c;
     int m_20;
-    int SetValueAndCompare(int p);
+    int hkBufferedStreamReader_setMark(int p);
 };
 
 // @fnv 0x00d2bb20
 // pdb: hkBufferedStreamReader::setMark | hkBufferedStreamReader.obj | fnv360_0822_retail, vtable, high
 // pdb params: markLimit
-int FUN_00d2bb20_cls::SetValueAndCompare(int iValue)
+// pdb: hkBufferedStreamReader::setMark | hkBufferedStreamReader.obj | fnv360_0822_retail, vtable, high (was: SetValueAndCompare)
+int FUN_00d2bb20_cls::hkBufferedStreamReader_setMark(int iValue)
 {
     m_1c = m_10;
     m_20 = iValue;
@@ -52,7 +53,7 @@ int FUN_00d2bb40_cls::hkBufferedStreamReader_rewindToMark()
 
 struct FUN_00d2ba80_cls
 {
-    int SkipBytes(int);
+    int hkBufferedStreamReader_skip(int);
     virtual void v0();
     virtual void v1();
     virtual void v2();
@@ -78,7 +79,8 @@ struct FUN_00d2ba80_cls
 // @fnv 0x00d2ba80
 // pdb: hkBufferedStreamReader::skip | hkBufferedStreamReader.obj | fnv360_0822_retail, vtable, high
 // pdb params: nbytes
-int FUN_00d2ba80_cls::SkipBytes(int aiByteCount)
+// pdb: hkBufferedStreamReader::skip | hkBufferedStreamReader.obj | fnv360_0822_retail, vtable, high (was: SkipBytes)
+int FUN_00d2ba80_cls::hkBufferedStreamReader_skip(int aiByteCount)
 {
     int iRemaining = aiByteCount;
     int iAvailable = m_size - m_current;

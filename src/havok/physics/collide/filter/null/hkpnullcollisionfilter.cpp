@@ -96,7 +96,7 @@ struct S_00cfab30_this
     int unk30;
     void* unk34;
 
-    void __thiscall RecordAndDispatch(S_00cfab30_object*, S_00cfab30_arg*, void*, void*, void*, void*);
+    void __thiscall hkpSimpleWorldRayCaster_castRaysFromSinglePoint(S_00cfab30_object*, S_00cfab30_arg*, void*, void*, void*, void*);
 };
 
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long);
@@ -134,7 +134,8 @@ struct Target570 {
 };
 // pdb: hkpSimpleWorldRayCaster::castRaysFromSinglePoint | hkpSimpleWorldRayCaster.obj | fnv360_0822_retail, ustr, high
 // pdb params: broadphase, inputArray, numRays, filter, cache, outputs
-void S_00cfab30_this::RecordAndDispatch(S_00cfab30_object* target,S_00cfab30_arg* input,void* context,void* adjusted,void* extra,void* owner){
+// pdb: hkpSimpleWorldRayCaster::castRaysFromSinglePoint | hkpSimpleWorldRayCaster.obj | fnv360_0822_retail, ustr, high (was: RecordAndDispatch)
+void S_00cfab30_this::hkpSimpleWorldRayCaster_castRaysFromSinglePoint(S_00cfab30_object* target,S_00cfab30_arg* input,void* context,void* adjusted,void* extra,void* owner){
     S_00cfab30_allocator* (__stdcall* lookup)(unsigned long)=DAT_00d9b080;
     volatile unsigned int timestamp;
     S_00cfab30_allocator* allocator=lookup(DAT_0116913c);

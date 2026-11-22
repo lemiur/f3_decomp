@@ -421,8 +421,8 @@ struct hkpSimpleContactConstraintAtomCFD2 {
 };
 
 void __cdecl FUN_00cfd950(hkpSimpleContactConstraintAtomCFD2* pkAtom, int iIndex);
-hkpSimpleContactConstraintAtomCFD2* __cdecl ShrinkBlockIfSparse(hkpSimpleContactConstraintAtomCFD2* pkAtom, int iNumFreeElemsLeft, hkBool& bAtomReallocated);
-void __cdecl ReplaceEntry(hkpConstraintInstanceCFD2* pkConstraint, hkpSimpleContactConstraintAtomCFD2* pkOldAtom, hkpSimpleContactConstraintAtomCFD2* pkNewAtom, int iNewSize);
+hkpSimpleContactConstraintAtomCFD2* __cdecl hkpSimpleContactConstraintAtomUtil_optimizeCapacity(hkpSimpleContactConstraintAtomCFD2* pkAtom, int iNumFreeElemsLeft, hkBool& bAtomReallocated);
+void __cdecl hkpWorldConstraintUtil_updateFatherOfMovedAtom(hkpConstraintInstanceCFD2* pkConstraint, hkpSimpleContactConstraintAtomCFD2* pkOldAtom, hkpSimpleContactConstraintAtomCFD2* pkNewAtom, int iNewSize);
 
 class hkSimpleContactConstraintDataCFD2 {
 public:
@@ -481,7 +481,7 @@ int hkSimpleContactConstraintDataCFD2::FUN_00cfd200(hkpConstraintOwnerCFD2& kCon
 
     FUN_00cfd950(pkAtom, iIndex);
     pkAtom->getContactPointPropertiesStream(iIndex)[0xf] &= ~2;
-    pkAtom = ShrinkBlockIfSparse(m_pAtom, 1, bAtomReallocated);
+    pkAtom = hkpSimpleContactConstraintAtomUtil_optimizeCapacity(m_pAtom, 1, bAtomReallocated);
     m_pAtom = pkAtom;
     ((FUN_00cfd7d0_class*)&m_kAtoms)->DecrementBytesAboveValue(iIndex);
 
@@ -490,7 +490,7 @@ int hkSimpleContactConstraintDataCFD2::FUN_00cfd200(hkpConstraintOwnerCFD2& kCon
         ((hkpConstraintOwnerCFD2F3&)kConstraintOwner).subConstraintInfo(pConstraint, kConInfo);
     if (bAtomReallocated)
     {
-        ReplaceEntry(m_pHavokConstraint, pkOldAtom, m_pAtom, m_pAtom->m_usSizeOfAllAtoms);
+        hkpWorldConstraintUtil_updateFatherOfMovedAtom(m_pHavokConstraint, pkOldAtom, m_pAtom, m_pAtom->m_usSizeOfAllAtoms);
         m_iAtomSize = m_pAtom->m_usSizeOfAllAtoms;
     }
     pkAtom->m_flags |= 5;

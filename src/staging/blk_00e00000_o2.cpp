@@ -1571,7 +1571,7 @@ class BE04D90PointerMap
 
 class BE04D90Object;
 
-// Initializes a pointer map, calls RegisterContextHandlers for each non-null object in ppkObjects, then clears and deallocates the map.
+// Initializes a pointer map, calls hkClass_updateMetadataInplace for each non-null object in ppkObjects, then clears and deallocates the map.
 // @f3 0x009b2e50 (community match, verified in this file)
 class LocalHandlerMap {
 public:

@@ -23,13 +23,14 @@ struct FUN_00c9d970_class
     unsigned char padding[0x10];
     FUN_00c9d970_shape* shape;
 
-    void DispatchShapeMethod7(int, float, void*);
+    void hkpBvShape_getAabbImpl(int, float, void*);
 };
 
 // @fnv 0x00c9d970
 // pdb: hkpBvShape::getAabbImpl | hkpBvShape.obj | fnv360_0822_retail, objrun, high
 // pdb params: localToWorld, tolerance, out
-void FUN_00c9d970_class::DispatchShapeMethod7(int value, float currentTime, void* queryFilter)
+// pdb: hkpBvShape::getAabbImpl | hkpBvShape.obj | fnv360_0822_retail, objrun, high (was: DispatchShapeMethod7)
+void FUN_00c9d970_class::hkpBvShape_getAabbImpl(int value, float currentTime, void* queryFilter)
 {
     shape->method7(value, currentTime, queryFilter);
 }

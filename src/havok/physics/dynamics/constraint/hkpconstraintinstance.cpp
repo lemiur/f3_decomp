@@ -158,7 +158,7 @@ struct hkBoolCF2F
     }
 };
 
-int __cdecl FindModifierConstraintAtom(const void* pvObject, int iType);
+int __cdecl hkpWorldConstraintUtil_findModifier(const void* pvObject, int iType);
 
 }  // namespace fnv_00cf2fe0
 
@@ -383,7 +383,8 @@ struct hkpModifierConstraintAtom
 // @fnv 0x00d277c0
 // pdb: hkpWorldConstraintUtil::findModifier | hkpWorldConstraintUtil.obj | fnv360_0822_retail, call_seq, high
 // pdb params: instance, type
-hkpModifierConstraintAtom* __cdecl FindModifierConstraintAtom(hkpConstraintInstance* aConstraintInstance,
+// pdb: hkpWorldConstraintUtil::findModifier | hkpWorldConstraintUtil.obj | fnv360_0822_retail, call_seq, high (was: FindModifierConstraintAtom)
+hkpModifierConstraintAtom* __cdecl hkpWorldConstraintUtil_findModifier(hkpConstraintInstance* aConstraintInstance,
                                                               unsigned int type)
 {
     hkpModifierConstraintAtom* atom = aConstraintInstance->m_pConstraintModifier;
@@ -502,7 +503,7 @@ extern "C"
 {
 }
 
-void* __cdecl FindModifierConstraintAtom(void* self, int size);
+void* __cdecl hkpWorldConstraintUtil_findModifier(void* self, int size);
 
 extern char DAT_010cc040;
 

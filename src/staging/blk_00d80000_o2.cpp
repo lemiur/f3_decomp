@@ -861,7 +861,8 @@ struct FUN_00d92250_holder {
 // @fnv 0x00d92250
 // pdb: hkAgent3Bridge::invalidateTim | hkpAgent3Bridge.obj | fnv360_0822_retail, objrun, high
 // pdb params: entry, agentData, input
-void __cdecl CallObjectVirtual(void* pvUnused, FUN_00d92250_holder* pkHolder, int iValue)
+// pdb: hkAgent3Bridge::invalidateTim | hkpAgent3Bridge.obj | fnv360_0822_retail, objrun, high (was: CallObjectVirtual)
+void __cdecl hkAgent3Bridge_invalidateTim(void* pvUnused, FUN_00d92250_holder* pkHolder, int iValue)
 {
     pkHolder->m_object->V9(iValue);
 }
@@ -885,7 +886,8 @@ struct FUN_00d92270_Dispatch
 // @fnv 0x00d92270
 // pdb: hkAgent3Bridge::warpTime | hkpAgent3Bridge.obj | fnv360_0822_retail, objrun, high
 // pdb params: entry, agentData, oldTime, newTime, input
-int DispatchVirtualCall(int aiUnused, FUN_00d92270_Dispatch** a2, float afArg1, float afArg2, int aiArg3)
+// pdb: hkAgent3Bridge::warpTime | hkpAgent3Bridge.obj | fnv360_0822_retail, objrun, high (was: DispatchVirtualCall)
+int hkAgent3Bridge_warpTime(int aiUnused, FUN_00d92270_Dispatch** a2, float afArg1, float afArg2, int aiArg3)
 {
     return (*a2)->v10(afArg1, afArg2, aiArg3);
 }
@@ -955,7 +957,8 @@ struct FUN_00d922e0_Iface {
 // @fnv 0x00d922e0
 // pdb: hkAgent3Bridge::createZombie | hkpAgent3Bridge.obj | fnv360_0822_retail, objrun, high
 // pdb params: entry, agentData, idTobecomeZombie
-void* __cdecl CallIfaceMethod(int unused, FUN_00d922e0_Iface** p, int arg) {
+// pdb: hkAgent3Bridge::createZombie | hkpAgent3Bridge.obj | fnv360_0822_retail, objrun, high (was: CallIfaceMethod)
+void* __cdecl hkAgent3Bridge_createZombie(int unused, FUN_00d922e0_Iface** p, int arg) {
     return (*p)->unk34(arg);
 }
 
@@ -985,7 +988,8 @@ struct FUN_00d92380_holder {
 // @f3 0x00a260a0 (community match, verified in this file)
 // pdb: hkAgent3Bridge::process | hkpAgent3Bridge.obj | fnv360_0822_retail, objrun, high
 // pdb params: input, entry, agentData, separatingNormalOut, result
-int* __cdecl CallVirtualWithVectorArgs(FUN_00d92380_vec* pVec, int u1, FUN_00d92380_holder* pHolder, int u2, int arg)
+// pdb: hkAgent3Bridge::process | hkpAgent3Bridge.obj | fnv360_0822_retail, objrun, high (was: CallVirtualWithVectorArgs)
+int* __cdecl hkAgent3Bridge_process(FUN_00d92380_vec* pVec, int u1, FUN_00d92380_holder* pHolder, int u2, int arg)
 {
     pHolder->m0->v6(pVec->a0, pVec->a4, pVec->a8, arg);
     return &pHolder->m10;
@@ -1100,7 +1104,8 @@ extern "C" void __cdecl FUN_00a0d700(void* p, int a2, int a3, int a4, bool* pb);
 
 // pdb: hkCpuSolveIntegrateVelocitiesJob | hkpCpuSolveConstraintsJobs.obj | fnv360_0822_retail, ustr, high
 // pdb params: tl, jobQueue, jobInOut
-void LogIntegrateVelocity(Arg0* arg0, Arg1* arg1, Arg2* arg2)
+// pdb: hkCpuSolveIntegrateVelocitiesJob | hkpCpuSolveConstraintsJobs.obj | fnv360_0822_retail, ustr, high (was: LogIntegrateVelocity)
+void hkCpuSolveIntegrateVelocitiesJob(Arg0* arg0, Arg1* arg1, Arg2* arg2)
 {
     using namespace f3m_00a236b0;
     QArg0* a1 = reinterpret_cast<QArg0*>(arg0);
@@ -1865,7 +1870,8 @@ struct HkString93e240 {
 
 // pdb: hkClassMember::getSubtypeOf | hkClassMember.obj | fnv360_0822_retail, ustr_rel, high
 // pdb params: name
-int __cdecl GetTypeCodeFromString(const char* name) throw()
+// pdb: hkClassMember::getSubtypeOf | hkClassMember.obj | fnv360_0822_retail, ustr_rel, high (was: GetTypeCodeFromString)
+int __cdecl hkClassMember_getSubtypeOf(const char* name) throw()
 {
     if (FUN_009232f0(name, "hkArray<", 8) == 0) {
         HkString93e240 inner(name + 8, FUN_009233f0(name + 8) - 1);
@@ -2680,12 +2686,13 @@ struct hkBool_d86 {
 struct HasFlag_d86 {
     char pad[0x10];
     unsigned short m_flags;
-    hkBool_d86 HasFlag() const;
+    hkBool_d86 hkClassMember_isNotOwner() const;
 };
 
 // @fnv 0x00d86a70
 // pdb: hkClassMember::isNotOwner | hkClassMember.obj | fnv360_0822_retail, objrun, high
-hkBool_d86 HasFlag_d86::HasFlag() const
+// pdb: hkClassMember::isNotOwner | hkClassMember.obj | fnv360_0822_retail, objrun, high (was: HasFlag)
+hkBool_d86 HasFlag_d86::hkClassMember_isNotOwner() const
 {
     return (m_flags & 0x200) == 0x200;
 }

@@ -66,7 +66,7 @@ struct CFB240Dispatcher
     void SetContactMgrFactory(CFB240ContactMgrFactory* fac, int responseA);
 };
 const char* GetHavokShapeTypeName(int type);
-int Vsnprintf(char* buf, int size, const char* fmt, ...);
+int hkString_snprintf(char* buf, int size, const char* fmt, ...);
 struct IntegerPair
 {
     int m_iFirst;
@@ -106,7 +106,7 @@ struct hkpCollisionDispatcher
 };
 struct FUN_00cfb510_cls
 {
-    void MergeBitsRecursive(unsigned int a1, unsigned int a2, int depth);
+    void hkpCollisionDispatcher_updateHasAlternateType(unsigned int a1, unsigned int a2, int depth);
 };
 struct FUN_00cfb510_entry
 {
@@ -4146,7 +4146,7 @@ struct FUN_00cfc030_cls
 
 extern int DAT_01268360;
 const char* GetHavokShapeTypeName(int type);
-int Vsnprintf(char* buf, int size, const char* fmt, ...);
+int hkString_snprintf(char* buf, int size, const char* fmt, ...);
 struct DispatcherReferencedObject
 {
     virtual ~DispatcherReferencedObject();
@@ -4358,7 +4358,7 @@ void DebugTableDispatcher::hkpCollisionDispatcher_debugPrintTable()
                     const char* shape=GetHavokShapeTypeName(j);
                     const char* agentA=GetHavokShapeTypeName(entry->m_iAgentTypeA);
                     const char* agentB=GetHavokShapeTypeName(entry->m_iAgentTypeB);
-                    Vsnprintf(buffers.entry,255,"vs %30s <%i:%s-%s>",shape,entry->m_priority,agentA,agentB);
+                    hkString_snprintf(buffers.entry,255,"vs %30s <%i:%s-%s>",shape,entry->m_priority,agentA,agentB);
                     OutputStream stream(buffers.output,sizeof(buffers.output));
                     stream.FUN_00943710(buffers.entry);
                     DAT_010f3364->message(0,-1,buffers.output,".\\Dispatch\\hkpCollisionDispatcher.cpp",0x231);
@@ -4378,7 +4378,7 @@ void DebugTableDispatcher::hkpCollisionDispatcher_debugPrintTable()
                     const char* shape=GetHavokShapeTypeName(j);
                     const char* agentA=GetHavokShapeTypeName(entry->m_iAgentTypeA);
                     const char* agentB=GetHavokShapeTypeName(entry->m_iAgentTypeB);
-                    Vsnprintf(buffers.entry,255,"vs %30s <%i:%s-%s>",shape,entry->m_priority,agentA,agentB);
+                    hkString_snprintf(buffers.entry,255,"vs %30s <%i:%s-%s>",shape,entry->m_priority,agentA,agentB);
                     OutputStream stream(buffers.output,sizeof(buffers.output));
                     stream.FUN_00943710(buffers.entry);
                     DAT_010f3364->message(0,-1,buffers.output,".\\Dispatch\\hkpCollisionDispatcher.cpp",0x248);

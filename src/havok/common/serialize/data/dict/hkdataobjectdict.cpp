@@ -809,7 +809,7 @@ struct SkStore
     int unk48;
     FUN_00d47a80_class m_ppNames;
 
-    void RegisterObject(SkItem* item);
+    void hkPackfileWriter_notDuplicateMetaData(SkItem* item);
     SkRefPtr* FUN_00dc8d70(SkRefPtr* out, void* key) throw();
 
     char* Intern(char* str)

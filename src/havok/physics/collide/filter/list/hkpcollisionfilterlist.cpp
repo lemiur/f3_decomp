@@ -95,14 +95,15 @@ struct FilterChain
     FilterEntry** filters;
     int filterCount;
 
-    CheckResult EvaluateAllFilters(int first, int second);
+    CheckResult hkpCollisionFilterList_isCollisionEnabled(int first, int second);
 };
 
 // Evaluates each filter predicate from last to first and returns false as soon as one is disabled, otherwise true.
 // @fnv 0x00e49d60
 // pdb: hkpCollisionFilterList::isCollisionEnabled | hkpCollisionFilterList.obj | fnv360_0822_retail, vtable, high
 // pdb params: a, collidableB
-CheckResult FilterChain::EvaluateAllFilters(int first, int second)
+// pdb: hkpCollisionFilterList::isCollisionEnabled | hkpCollisionFilterList.obj | fnv360_0822_retail, vtable, high (was: EvaluateAllFilters)
+CheckResult FilterChain::hkpCollisionFilterList_isCollisionEnabled(int first, int second)
 {
     for (int index = filterCount - 1; index >= 0; --index)
     {

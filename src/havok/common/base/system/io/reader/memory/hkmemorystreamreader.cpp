@@ -10,12 +10,13 @@ struct FUN_00e059e0
     int m_0c;
     int m_10;
     int m_14;
-    int __thiscall GetCurrentOffset();
+    int __thiscall hkMemoryStreamReader_rewindToMark();
 };
 
 // @fnv 0x00e059e0
 // pdb: hkMemoryStreamReader::rewindToMark | hkMemoryStreamReader.obj | fnv360_0822_retail, vtable, high
-int __thiscall FUN_00e059e0::GetCurrentOffset()
+// pdb: hkMemoryStreamReader::rewindToMark | hkMemoryStreamReader.obj | fnv360_0822_retail, vtable, high (was: GetCurrentOffset)
+int __thiscall FUN_00e059e0::hkMemoryStreamReader_rewindToMark()
 {
     if (m_14 >= 0)
     {
@@ -105,12 +106,13 @@ class hkObjectE059
     int m_iEnd;
     int m_iCurrent;
 
-    hkBoolE059 IsNotAtEnd() const;
+    hkBoolE059 hkMemoryStreamReader_isOk() const;
 };
 
 // @fnv 0x00e059a0
 // pdb: hkMemoryStreamReader::isOk | hkMemoryStreamReader.obj | fnv360_0822_retail, vtable, high
-hkBoolE059 hkObjectE059::IsNotAtEnd() const
+// pdb: hkMemoryStreamReader::isOk | hkMemoryStreamReader.obj | fnv360_0822_retail, vtable, high (was: IsNotAtEnd)
+hkBoolE059 hkObjectE059::hkMemoryStreamReader_isOk() const
 {
     return m_iEnd != m_iCurrent + 1;
 }
@@ -183,14 +185,15 @@ struct FUN_00e05a80Class
     int m_0c;
     int m_10;
 
-    int __thiscall ReadFromBuffer(void* destination, int count);
+    int __thiscall hkMemoryStreamReader_read(void* destination, int count);
 };
 extern "C" void __cdecl FUN_00cb1260(void* destination, const void* source, int count);
 
 // @fnv 0x00e05a80
 // pdb: hkMemoryStreamReader::read | hkMemoryStreamReader.obj | fnv360_0822_retail, vtable, high
 // pdb params: buf, nbytes
-int __thiscall FUN_00e05a80Class::ReadFromBuffer(void* destination, int count)
+// pdb: hkMemoryStreamReader::read | hkMemoryStreamReader.obj | fnv360_0822_retail, vtable, high (was: ReadFromBuffer)
+int __thiscall FUN_00e05a80Class::hkMemoryStreamReader_read(void* destination, int count)
 {
     unsigned char state;
     if (*checkState(&state))

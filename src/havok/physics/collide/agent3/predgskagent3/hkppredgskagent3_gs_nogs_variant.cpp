@@ -7,9 +7,9 @@
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 // Stand-ins for the script handler functions whose addresses are stored in the
 // handler table (0xd417b0 .. 0xd40d80).  Only declared, never defined.
-extern "C" void __cdecl RemoveEntryById(int a, int b, int c, int d);
-extern "C" void __cdecl InsertSlotId(int a, int b, int c, int d);
-extern "C" void __cdecl FindEntryByKey(int a, int b, int c, int d);
+extern "C" void __cdecl hkPredGskAgent3_removePoint(int a, int b, int c, int d);
+extern "C" void __cdecl hkPredGskAgent3_commitPotential(int a, int b, int c, int d);
+extern "C" void __cdecl hkPredGskAgent3_createZombie(int a, int b, int c, int d);
 extern "C" void __cdecl FUN_00d41930(int a, int b, int c, int d);
 // The handler table that is handed to CScript::RegisterHandler.  It is kept
 // 16 byte aligned, which is what makes the compiler emit the aligned frame
@@ -57,7 +57,7 @@ struct S_00d417b0_Obj
     int unk08;
     S_00d417b0_Sub m_sub;
 };
-void __cdecl RemoveEntryById(int a, S_00d417b0_Obj* obj, short id);
+void __cdecl hkPredGskAgent3_removePoint(int a, S_00d417b0_Obj* obj, short id);
 struct Slot
 {
     unsigned short id;
@@ -76,7 +76,7 @@ struct Table
     unsigned short unk10;
     Slot slots[1];
 };
-void __cdecl InsertSlotId(int a, Table* table, unsigned short value);
+void __cdecl hkPredGskAgent3_commitPotential(int a, Table* table, unsigned short value);
 struct FUN_00d41830_entry
 {
     unsigned char unk00;
@@ -94,7 +94,7 @@ struct FUN_00d41830_table
     unsigned char unk0F;
     FUN_00d41830_entry entries[8];
 };
-int __cdecl FindEntryByKey(int unused, FUN_00d41830_table* table, unsigned short key);
+int __cdecl hkPredGskAgent3_createZombie(int unused, FUN_00d41830_table* table, unsigned short key);
 
 #include <xmmintrin.h>
 class hkpConvexShape_s

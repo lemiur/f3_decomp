@@ -275,7 +275,8 @@ extern char DAT_0116c258;
 extern S00da2ff0_Err* DAT_010f3364;
 int __stdcall FUN_00c208f8(unsigned short, void*);
 // pdb: hkBsdNetworkInit | hkBsdSocket.obj | fnv360_0822_retail, ustr, high
-void InitWinsock()
+// pdb: hkBsdNetworkInit | hkBsdSocket.obj | fnv360_0822_retail, ustr, high (was: InitWinsock)
+void hkBsdNetworkInit()
 {
     if (DAT_0116c258 == 0)
     {

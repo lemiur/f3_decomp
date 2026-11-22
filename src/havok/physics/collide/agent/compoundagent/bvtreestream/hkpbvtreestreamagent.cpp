@@ -413,11 +413,11 @@ struct hkpSymmetricAgentFlipBodyCollector : hkpCollectorBase
 // Game side wrapper that fills the collector and hands it to the query routine.
 struct FUN_00d43cd0_class
 {
-    void __thiscall ProcessCollisionEntries(void* a, void* b, void* c, void* d);
+    void __thiscall hkpShapeCollectionAgent_getPenetrations(void* a, void* b, void* c, void* d);
     void __thiscall FUN_00d2ed90(void* a1, void* a2, void* a3, void* a4);
 };
 
-// Builds a flip-body collector holding a4 and forwards a2, a1, a3 and the collector to ProcessCollisionEntries.
+// Builds a flip-body collector holding a4 and forwards a2, a1, a3 and the collector to hkpShapeCollectionAgent_getPenetrations.
 // @fnv 0x00d2ed90
 // pdb: hkpSymmetricAgentLinearCast<hkpShapeCollectionAgent>::getPenetrations | hkpBvTreeStreamAgent.obj | fnv360_0822_retail, vtable, high
 // pdb params: bodyA, bodyB, input, collector
@@ -425,7 +425,7 @@ void __thiscall FUN_00d43cd0_class::FUN_00d2ed90(void* a1, void* a2, void* a3, v
 {
     hkpSymmetricAgentFlipBodyCollector collector;
     collector.payload = apPayload;
-    this->ProcessCollisionEntries(a2, a1, a3, &collector);
+    this->hkpShapeCollectionAgent_getPenetrations(a2, a1, a3, &collector);
 }
 
 #include <xmmintrin.h>

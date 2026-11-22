@@ -1239,14 +1239,15 @@ struct S_00dcc600_Class
     int m_04;
     S_00dcc600_Inner* m_08;
 
-    int __thiscall ReadUntilValue(unsigned char* buffer, int length, signed char value);
+    int __thiscall hkIstream_getline(unsigned char* buffer, int length, signed char value);
 };
 
 // Resets the stream, then reads bytes into buffer until the value or end is hit, returning the index or -1.
 // @fnv 0x00dcc600
 // pdb: hkIstream::getline | hkIStream.obj | fnv360_0822_retail, caller_sim, high
 // pdb params: str, maxlen, delim
-int S_00dcc600_Class::ReadUntilValue(unsigned char* buffer, int length, signed char value)
+// pdb: hkIstream::getline | hkIStream.obj | fnv360_0822_retail, caller_sim, high (was: ReadUntilValue)
+int S_00dcc600_Class::hkIstream_getline(unsigned char* buffer, int length, signed char value)
 {
     S_00dcc600_Reset(this->m_08);
 

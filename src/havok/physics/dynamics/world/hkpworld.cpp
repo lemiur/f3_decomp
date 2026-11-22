@@ -439,12 +439,13 @@ struct FUN_00c97510 {
 };
 struct FUN_00c97f50_Class : hkpWorld
 {
-    void DispatchOrQueue(void* p);
+    void hkpWorld_removeAction(void* p);
 };
 // @f3 0x009084b0 (community match, verified in this file)
 // pdb: hkpWorld::removeAction | hkpWorld.obj | fnv360_0822_retail, call_gap, high
 // pdb params: action
-void FUN_00c97f50_Class::DispatchOrQueue(void* p)
+// pdb: hkpWorld::removeAction | hkpWorld.obj | fnv360_0822_retail, call_gap, high (was: DispatchOrQueue)
+void FUN_00c97f50_Class::hkpWorld_removeAction(void* p)
 {
     if (m_criticalOperationsLockCount) {
         CA8B80Command cmd;
@@ -964,7 +965,7 @@ inline C67Owner* getEntityOwner(C67Collidable* coll)
 }
 
 struct C67Sink {
-    void RemoveEntities(C67Entry** entries, unsigned int count);
+    void hkpWorld_removeEntityBatch(C67Entry** entries, unsigned int count);
 };
 
 class FUN_00c67aa0_Class {
@@ -1002,7 +1003,7 @@ void FUN_00c67aa0_Class::FlushEntries()
         unsigned int start = count - num;
         C67Sink* sink = getSink();
         if (sink) {
-            sink->RemoveEntities(&m_entries[start], num);
+            sink->hkpWorld_removeEntityBatch(&m_entries[start], num);
             for (unsigned int i = start; i < m_iNumberOfEntries; i++) {
                 C67Owner* owner = getEntityOwner(&m_entries[i]->m_kCollidable);
                 if (owner) {
@@ -1082,7 +1083,7 @@ class hkpMotionC914;
 void __cdecl FUN_00cf1480(float fA, float fB, int* piOut) throw();
 
 struct hkpCollidableQualityC914 {
-    void SetFlagBits(unsigned char ucA, unsigned char ucB, unsigned char ucC) throw();
+    void hkpMotion_setWorldSelectFlagsNeg(unsigned char ucA, unsigned char ucB, unsigned char ucC) throw();
 };
 
 class hkpEntityC914 {
@@ -1475,7 +1476,7 @@ hkpEntityC914* hkpWorldC914::hkpWorld_addEntity(hkpEntityC914* pkEntity, int iIn
     pkEntity->m_c0 = ++pkWorld->m_uiLastEntityUid;
     reinterpret_cast<EntityOps9027a0*>(pkEntity)->FUN_009316e0();
     FUN_009266b0(this, pkEntity, iInitialActivationState);
-    reinterpret_cast<hkpCollidableQualityC914*>(&pkEntity->m_d0)->SetFlagBits(
+    reinterpret_cast<hkpCollidableQualityC914*>(&pkEntity->m_d0)->hkpMotion_setWorldSelectFlagsNeg(
         pkWorld->m_2c5,
         pkWorld->m_2c6,
         pkWorld->m_2c7
@@ -2909,8 +2910,8 @@ public:
 class hkpWorldC980 {
 public:
     hkBoolRetC980 FUN_00c97e80(hkpConstraintInstanceC980* pkConstraint) throw();
-    void DispatchOrQueue(hkpActionC980* pkAction) throw();
-    void RemoveEntities(hkpEntityC980* const* ppkEntityBatch, int iNumEntities) throw();
+    void hkpWorld_removeAction(hkpActionC980* pkAction) throw();
+    void hkpWorld_removeEntityBatch(hkpEntityC980* const* ppkEntityBatch, int iNumEntities) throw();
     hkBoolRetC980 ProcessTarget(hkpEntityC980* pkEntity) throw();
     void FUN_00c95800(hkpPhantomC980* const* ppkPhantomBatch, int iNumPhantoms) throw();
     void FUN_00c92c70(hkpPhantomC980* pkPhantom) throw();
@@ -2927,10 +2928,10 @@ void hkpWorldC980::FUN_00c980d0(const hkpPhysicsSystemC980* pkSys) throw()
     }
     for (int a = 0; a < pkSys->getActions().GetLogicalSize(); ++a) {
         if (pkSys->getActions()[a])
-            DispatchOrQueue(pkSys->getActions()[a]);
+            hkpWorld_removeAction(pkSys->getActions()[a]);
     }
     if (pkSys->getRigidBodies().indexOf(0) == -1) {
-        RemoveEntities((hkpEntityC980* const*)pkSys->getRigidBodies().begin(), pkSys->getRigidBodies().GetLogicalSize());
+        hkpWorld_removeEntityBatch((hkpEntityC980* const*)pkSys->getRigidBodies().begin(), pkSys->getRigidBodies().GetLogicalSize());
     } else {
         for (int r = 0; r < pkSys->getRigidBodies().GetLogicalSize(); ++r) {
             if (pkSys->getRigidBodies()[r])
@@ -6934,13 +6935,14 @@ public:
     unsigned int unk00, unk04;
     unsigned char unk08, state;
     unsigned short first, second;
-    void SetFlagBits(unsigned int a, unsigned int b, int code);
+    void hkpMotion_setWorldSelectFlagsNeg(unsigned int a, unsigned int b, int code);
 };
 // Sets the top two bits of first from a and of second from b, inverting a if (code & 3) < (state & 3) and b if code < state.
 // @f3 0x00902180 (community match, verified in this file)
 // pdb: hkpMotion::setWorldSelectFlagsNeg | hkpWorld.obj | fnv360_0822_retail, call_seq, high
 // pdb params: worldFlag0, worldFlag1, worldDeactivationIntegrateCounter
-void FlagState::SetFlagBits(unsigned int a, unsigned int b, int code)
+// pdb: hkpMotion::setWorldSelectFlagsNeg | hkpWorld.obj | fnv360_0822_retail, call_seq, high (was: SetFlagBits)
+void FlagState::hkpMotion_setWorldSelectFlagsNeg(unsigned int a, unsigned int b, int code)
 {
     int worldFlag0 = static_cast<int>(a);
     int worldFlag1 = static_cast<int>(b);
@@ -6997,7 +6999,8 @@ struct OverlapContext {
 // Adds or removes other from phantom and, when other is type 2, mirrors the change on other's owner based on the filter result.
 // @fnv 0x00c90f40
 // pdb: hkWorld_updateFilterOnSinglePhantom | hkpWorld.obj | fnv360_0822_retail, call_gap_sim, high
-static __declspec(noinline) void SyncOverlap(OverlapPhantom* phantom, OverlapCollidable* other, OverlapContext* context)
+// pdb: hkWorld_updateFilterOnSinglePhantom | hkpWorld.obj | fnv360_0822_retail, call_gap_sim, high (was: SyncOverlap)
+static __declspec(noinline) void hkWorld_updateFilterOnSinglePhantom(OverlapPhantom* phantom, OverlapCollidable* other, OverlapContext* context)
 {
     OverlapResult old = phantom->overlaps(other);
     if (context->filter.enabled(&phantom->collidable, other).value) {
@@ -7022,7 +7025,7 @@ OverlapPhantom* volatile overlapPhantom;
 OverlapCollidable* volatile overlapOther;
 OverlapContext* volatile overlapContext;
 void invokeOverlap() {
-    SyncOverlap(overlapPhantom, overlapOther, overlapContext);
+    hkWorld_updateFilterOnSinglePhantom(overlapPhantom, overlapOther, overlapContext);
 }
 
 namespace c912 {
@@ -7834,7 +7837,7 @@ struct MemoryRouter {
 };
 
 void ResizeAudioStream(void*, void*, int);
-static __declspec(noinline) void __cdecl SyncOverlap(PhantomInterface* phantom, CollisionObject* other, CollisionFilter* filter) {
+static __declspec(noinline) void __cdecl hkWorld_updateFilterOnSinglePhantom(PhantomInterface* phantom, CollisionObject* other, CollisionFilter* filter) {
     FilterBool overlapping = phantom->hasOverlap(other);
     CollisionObject* self = &phantom->collidable;
     if (filter->filter.enabled(self, other).value) {
@@ -8032,7 +8035,7 @@ __forceinline void releasePairArray(PairArray& pairs) {
 // The caller needs this overlap helper in the same unit for its private calling convention.
 // Keep the helper private to this reconstruction so it does not redefine the full unit global helper.
 namespace f3m_009062d0 {
-static void SyncOverlap(OverlapPhantom* phantom, OverlapCollidable* other, OverlapContext* context) {
+static void hkWorld_updateFilterOnSinglePhantom(OverlapPhantom* phantom, OverlapCollidable* other, OverlapContext* context) {
     OverlapResult overlapping = phantom->overlaps(other);
     OverlapCollidable* self = &phantom->collidable;
     if (context->filter.enabled(self, other).value) {
@@ -8082,7 +8085,7 @@ void CallRet::hkpWorld_updateCollisionFilterOnEntity(CollisionEntity* entity, in
             if (object->handle.type == 2) {
                 CollisionObject* phantom = (CollisionObject*)((char*)object + object->ownerOffset);
                 if (phantom) {
-                    f3m_009062d0::SyncOverlap((OverlapPhantom*)phantom, (OverlapCollidable*)&e.collidable, (OverlapContext*)w.filter);
+                    f3m_009062d0::hkWorld_updateFilterOnSinglePhantom((OverlapPhantom*)phantom, (OverlapCollidable*)&e.collidable, (OverlapContext*)w.filter);
                     if (updateShape)
                         ((PhantomView*)phantom)->refresh();
                     --pairs.size;
@@ -8141,7 +8144,7 @@ void CallRet::hkpWorld_updateCollisionFilterOnEntity(CollisionEntity* entity, in
 PhantomInterface* volatile probePhantom;
 CollisionObject* volatile probeObject;
 CollisionFilter* volatile probeFilter;
-void probeOverlapCaller() { SyncOverlap(probePhantom, probeObject, probeFilter); }
+void probeOverlapCaller() { hkWorld_updateFilterOnSinglePhantom(probePhantom, probeObject, probeFilter); }
 
 extern "C" __m128 __cdecl _mm_mul_ps(__m128, __m128);
 extern "C" __m128 __cdecl _mm_add_ss(__m128, __m128);
@@ -8706,7 +8709,7 @@ struct hkpCollidableCollidableFilter {
     virtual FilterResult IsCollisionEnabled(const CollidableC944*,const CollidableC944*);
 };
 struct hkpCollisionFilter : hkReferencedObject, hkpCollidableCollidableFilter {};
-static __declspec(noinline) void SyncOverlap(PhantomC944* phantom,CollidableC944* collidable,hkpCollisionFilter* filter)
+static __declspec(noinline) void hkWorld_updateFilterOnSinglePhantom(PhantomC944* phantom,CollidableC944* collidable,hkpCollisionFilter* filter)
 {
     FilterResult added = phantom->GetFilterResult(collidable);
     if (filter->IsCollisionEnabled(&phantom->m_kCollidable,collidable).value) {
@@ -8725,7 +8728,7 @@ static __declspec(noinline) void SyncOverlap(PhantomC944* phantom,CollidableC944
 }
 
 struct PhantomArgC944 { PhantomC944* p; PhantomArgC944(PhantomC944* q) : p(q) {} };
-struct WorldC944 : hkpWorld { void UpdatePhantom(PhantomC944*, int); void FUN_00c91160(PendingOp*); void FUN_00c91120(); void FUN_00c91140(); };
+struct WorldC944 : hkpWorld { void hkpWorld_updateCollisionFilterOnPhantom(PhantomC944*, int); void FUN_00c91160(PendingOp*); void FUN_00c91120(); void FUN_00c91140(); };
 
 // Queries broad phase for overlaps with a phantom, applies collision filters, and optionally processes contact points.
 // @f3 0x00906090 (community match, verified in this file)
@@ -8834,7 +8837,8 @@ struct WorldFieldsF90 {
 using S906090::hkThreadMemoryF90; using S906090::LocalPairArrayF90; using S906090::BroadPhaseF90; using S906090::WorldFieldsF90;
 // pdb: hkpWorld::updateCollisionFilterOnPhantom | hkpWorld.obj | fnv360_0822_retail, ustr, high
 // pdb params: phantom, updateShapeCollectionFilter
-void WorldC944::UpdatePhantom(PhantomC944* apPhantom, int abProcessContacts)
+// pdb: hkpWorld::updateCollisionFilterOnPhantom | hkpWorld.obj | fnv360_0822_retail, ustr, high (was: UpdatePhantom)
+void WorldC944::hkpWorld_updateCollisionFilterOnPhantom(PhantomC944* apPhantom, int abProcessContacts)
 {
     WorldFieldsF90* w = reinterpret_cast<WorldFieldsF90*>(this);
     if (w->m_criticalOperationsLockCount != 0)
@@ -8857,7 +8861,7 @@ void WorldC944::UpdatePhantom(PhantomC944* apPhantom, int abProcessContacts)
     {
         HandleC944* h = arr.m_data[i].second;
         if (h != &collidable->m_kBroadPhaseHandle)
-            SyncOverlap(apPhantom, h->getOwner(), w->m_collisionFilter);
+            hkWorld_updateFilterOnSinglePhantom(apPhantom, h->getOwner(), w->m_collisionFilter);
     }
     if (abProcessContacts)
     {
@@ -9003,7 +9007,7 @@ struct MyLocalArray : public MyArrayBase<Pair_00c951b0> {
 };
 
 struct HostWorld_00c951b0 : hkpWorld {
-    void RemoveEntities(void* const* entityBatch, int numEntities) throw();
+    void hkpWorld_removeEntityBatch(void* const* entityBatch, int numEntities) throw();
 };
 
 // Removes a batch of entities from the simulation, dispatches broad-phase collision pairs, and invokes per-entity removal callbacks.
@@ -9293,7 +9297,8 @@ void __cdecl FUN_00927460(Q6DWorld* w, Q6DEntity* e) throw();
 
 // pdb: hkpWorld::removeEntityBatch | hkpWorld.obj | fnv360_0822_retail, ustr, high
 // pdb params: entityBatch, numEntities
-void HostWorld_00c951b0::RemoveEntities(void* const* entityBatch, int numEntities) throw()
+// pdb: hkpWorld::removeEntityBatch | hkpWorld.obj | fnv360_0822_retail, ustr, high (was: RemoveEntities)
+void HostWorld_00c951b0::hkpWorld_removeEntityBatch(void* const* entityBatch, int numEntities) throw()
 {
     using namespace f3m_00906d80;
     Q6DWorld* w = reinterpret_cast<Q6DWorld*>(this);
@@ -9889,7 +9894,7 @@ void __cdecl FUN_00cfeba0(S96_Constraint*,void*,S96_Island*);
 void __cdecl FUN_00cc1160(S96_Constraint*);
 struct S96_RemovalList {S96_Constraint** data; int size; int capacity; S96_Constraint* local[32]; void clear(){size=0;} int GetLogicalSize() const {return size;} S96_Constraint*& back(){return data[size-1];} void popBack(){--size;}};
 struct S96_WorldShell : hkpWorld {
- void FUN_00c91160(const S96_Operation&); void hkpWorld_updateCollisionFilterOnEntity(void*,int,int); void UpdatePhantom(void*,int); void FUN_00c91120(); void FUN_00c91140();
+ void FUN_00c91160(const S96_Operation&); void hkpWorld_updateCollisionFilterOnEntity(void*,int,int); void hkpWorld_updateCollisionFilterOnPhantom(void*,int); void FUN_00c91120(); void FUN_00c91140();
  static __forceinline void S96_TimerBegin(const char* name) {
   S96_Timer* timer=(S96_Timer*)TlsGetValue(DAT_0126835c);
   if(timer->unk04<timer->unk0C) {
@@ -10301,7 +10306,7 @@ struct __declspec(align(16)) S00c92040_Arg {
     int f38;
     int f3C;
 
-    void RecordAndDispatch(void* p58, int a, int p7c, int zero, int b);
+    void hkpSimpleWorldRayCaster_castRaysFromSinglePoint(void* p58, int a, int p7c, int zero, int b);
 };
 
 }  // namespace fnv_00c92040

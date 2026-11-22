@@ -4,7 +4,7 @@
 
 #include "havok/hkpPhysicsData.h"
 
-int __cdecl CompareStringsCaseInsensitive(int, int);
+int __cdecl hkString_strCasecmp(int, int);
 
 struct FUN_00d4c000
 {
@@ -58,7 +58,7 @@ FUN_00d4c220_s::FUN_00d4c220_s()
     m_08 = 0;
 }
 
-int __cdecl CompareStringsCaseInsensitive(int, int);
+int __cdecl hkString_strCasecmp(int, int);
 
 struct FUN_00d4c050_obj
 {
@@ -70,7 +70,7 @@ struct FUN_00d4c050_obj
     int FindMatchingEntry(int a);
 };
 
-// Scans m_10 entries, checks each entry's sub-items via CompareStringsCaseInsensitive on the masked field at offset 0x74, and returns the first matching item or 0.
+// Scans m_10 entries, checks each entry's sub-items via hkString_strCasecmp on the masked field at offset 0x74, and returns the first matching item or 0.
 // @f3 0x009d8d00 (community match, verified in this file)
 int __cdecl FUN_00923300(int, int);
 // pdb: hkpPhysicsData::findRigidBodyByName | hkpPhysicsData.obj | fnv360_0822_retail, objrun_open, low

@@ -719,11 +719,11 @@ struct S_00ca8630_Sub
     unsigned char unk09;
     unsigned short unk0a;
     unsigned short unk0c;
-    void SetFlagBits(int a, int b, int c);
+    void hkpMotion_setWorldSelectFlagsNeg(int a, int b, int c);
     __forceinline void Set(unsigned char v, int a, int b, int c)
     {
         unk09 = v;
-        SetFlagBits(a, b, c);
+        hkpMotion_setWorldSelectFlagsNeg(a, b, c);
     }
 };
 struct S_00ca8630_Class
@@ -1362,7 +1362,7 @@ struct FUN_00ca90c0_cls
     int unk0c;
 
     FUN_00ca90c0_cls* Clone();
-    void WriteToInfo(FnvScratch* pScratch);
+    void hkpRigidBody_getCinfo(FnvScratch* pScratch);
     FUN_00ca90c0_cls* FUN_00ca8c90(FnvScratch* pScratch);
     virtual void v00();
     virtual void v04();
@@ -1409,7 +1409,7 @@ FUN_00ca90c0_cls* FUN_00ca90c0_cls::Clone()
 {
     FnvScratch cinfo;
     cinfo.FUN_00cf5ea0();
-    WriteToInfo(&cinfo);
+    hkpRigidBody_getCinfo(&cinfo);
     EntityThreadMemory* mem = (EntityThreadMemory*)TlsGetValue(DAT_010f3170);
     FUN_00ca90c0_cls* pBlock = (FUN_00ca90c0_cls*)mem->alloc(0x200, 0x2d);
     *(unsigned short*)((char*)pBlock + 4) = 0x200;
@@ -1856,7 +1856,7 @@ struct S_00ca8f50_Info
 struct S_00ca8f50_Src
 {
     bool FUN_00ca80c0();
-    void WriteToInfo(S_00ca8f50_Info* info);
+    void hkpRigidBody_getCinfo(S_00ca8f50_Info* info);
     int unk0;
     int unk4;
     int unk8;
@@ -1995,7 +1995,8 @@ static __forceinline void copyFloatC9(char* out,int od,const char* in,int sd)
 }
 // pdb: hkpRigidBody::getCinfo | hkpRigidBody.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, high
 // pdb params: info
-void S_00ca8f50_Src::WriteToInfo(S_00ca8f50_Info* info)
+// pdb: hkpRigidBody::getCinfo | hkpRigidBody.obj | fnv360_0822_retail, bridge_fnvpc, high (was: WriteToInfo)
+void S_00ca8f50_Src::hkpRigidBody_getCinfo(S_00ca8f50_Info* info)
 {
     char* dst=(char*)info;
     const char* src=(const char*)this;

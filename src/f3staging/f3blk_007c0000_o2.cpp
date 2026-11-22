@@ -19324,7 +19324,7 @@ struct IPRef {
     virtual void vr158();
     virtual void vr15c();
     virtual void vr160();
-    virtual void ApplyValue(int value);
+    virtual void hkOffsetOnlyStreamWriter_seek(int value);
     virtual void vr168();
     virtual void vr16c();
     virtual void vr170();
@@ -19951,7 +19951,7 @@ bool IPProjectile::FUN_007ce6e0()
                 {
                     IPItemData* form = hit->item ? hit->item->data0C : 0;
                     if (form && form->GetMotionType() < 6)
-                        aTarget->ApplyValue(GetValue());
+                        aTarget->hkOffsetOnlyStreamWriter_seek(GetValue());
                     IPRef* attacker = (GetShooter() && GetShooter()->IsActor()) ? GetShooter() : 0;
                     float jump = 0.0f;
                     if (attacker && attacker->IsValidTarget() && N7ce6e0::DAT_0108d0a0 && GetF0())
@@ -48954,7 +48954,8 @@ struct TESObjectREFR
     int unk060, unk064, unk068, unk06c, unk070, unk074, unk078, unk07c, unk080, unk084, unk088, unk08c, unk090, unk094, unk098, unk09c, unk0a0, unk0a4, unk0a8, unk0ac, unk0b0, unk0b4, unk0b8, unk0bc;
     unsigned int uiFlags0c0;
 
-    bool HasFlag(int iBit) { return (uiFlags0c0 >> iBit) & 1; }
+    // pdb: hkClassMember::isNotOwner | hkClassMember.obj | fnv360_0822_retail, objrun, high (was: HasFlag)
+    bool hkClassMember_isNotOwner(int iBit) { return (uiFlags0c0 >> iBit) & 1; }
     NiPoint3* GetPos() { return &kPos; }
     NiAVObject* Get3DSimple()
     {
@@ -48978,7 +48979,7 @@ struct TESObjectREFR
 void TESObjectREFR::FUN_007cbcb0(int iUnused)
 {
     bhkCharacterController* pController = FUN_00764ea0();
-    if (pController || HasFlag(2))
+    if (pController || hkClassMember_isNotOwner(2))
     {
         NiAVObject* p3D = Get3DSimple();
         TESObjectCELL* pCell = pParentCell;

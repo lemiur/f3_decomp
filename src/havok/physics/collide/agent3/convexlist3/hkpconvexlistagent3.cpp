@@ -7,7 +7,8 @@ void __cdecl hkAgent1nMachine_InvalidateTim(void* a, void* b);
 // @fnv 0x00d32b20
 // pdb: hkConvexListAgent3::invalidateTim | hkpConvexListAgent3.obj | fnv360_0822_retail, objrun, high
 // pdb params: entry, agentData, input
-void __cdecl CallIfNotFlagged(int aiUnused, int pObject, int c)
+// pdb: hkConvexListAgent3::invalidateTim | hkpConvexListAgent3.obj | fnv360_0822_retail, objrun, high (was: CallIfNotFlagged)
+void __cdecl hkConvexListAgent3_invalidateTim(int aiUnused, int pObject, int c)
 {
     if (!(*(char*)(pObject + 0xb) & 0x20))
         hkAgent1nMachine_InvalidateTim((void*)(pObject + 0x10), (void*)c);
@@ -294,7 +295,7 @@ class hkpConvexListProcessorD333
     hkpChildProcessorD333* m_processor;
     bool m_invalidCache;
 
-    unsigned short ProcessConvexListChildren(const hkpCdBodyD333& kBodyA, const hkpCdBodyD333& kBodyB, const void* pvInput,
+    unsigned short hkpMapPointsToSubShapeContactMgr_addContactPointImpl(const hkpCdBodyD333& kBodyA, const hkpCdBodyD333& kBodyB, const void* pvInput,
                                   const void* pvTransform, hkpGskCacheD333* pkCache, void* pvOutput) throw();
 };
 
@@ -302,7 +303,8 @@ class hkpConvexListProcessorD333
 // @f3 0x009bd210 (community match, verified in this file)
 // pdb: hkpMapPointsToSubShapeContactMgr::addContactPointImpl | hkpConvexListAgent3.obj | fnv360_0822_retail, vtable, high
 // pdb params: a, b, input, output, contactCache, cp
-unsigned short hkpConvexListProcessorD333::ProcessConvexListChildren(const hkpCdBodyD333& kBodyA, const hkpCdBodyD333& kBodyB,
+// pdb: hkpMapPointsToSubShapeContactMgr::addContactPointImpl | hkpConvexListAgent3.obj | fnv360_0822_retail, vtable, high (was: ProcessConvexListChildren)
+unsigned short hkpConvexListProcessorD333::hkpMapPointsToSubShapeContactMgr_addContactPointImpl(const hkpCdBodyD333& kBodyA, const hkpCdBodyD333& kBodyB,
                                                           const void* pvInput, const void* pvTransform,
                                                           hkpGskCacheD333* pkCache, void* pvOutput) throw()
 {
@@ -460,7 +462,8 @@ void __cdecl FUN_009bcf00(hkpAgent3FuncsD331& kFuncs);
 
 // pdb: hkConvexListAgent3::registerAgent3 | hkpConvexListAgent3.obj | fnv360_0822_retail, objrun_prop, high
 // pdb params: dispatcher
-void __cdecl RegisterAgent3Entries(hkpCollisionDispatcherD331* pkDispatcher)
+// pdb: hkConvexListAgent3::registerAgent3 | hkpConvexListAgent3.obj | fnv360_0822_retail, objrun_prop, high (was: RegisterAgent3Entries)
+void __cdecl hkConvexListAgent3_registerAgent3(hkpCollisionDispatcherD331* pkDispatcher)
 {
     __declspec(align(16)) hkpAgent3FuncsD331 kFuncs;
     FUN_009bcf00(kFuncs);

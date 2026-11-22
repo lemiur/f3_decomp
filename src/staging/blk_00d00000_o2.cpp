@@ -7,7 +7,8 @@
 // @fnv 0x00d1a300
 // pdb: hkpEntityAabbUtil::entityBatchInvalidateAabb | hkpEntityAabbUtil.obj | fnv360_0822_retail, call_seq, high
 // pdb params: entityBatch, numEntities
-void __cdecl InitArrayEntries(int** apEntries, int count)
+// pdb: hkpEntityAabbUtil::entityBatchInvalidateAabb | hkpEntityAabbUtil.obj | fnv360_0822_retail, call_seq, high (was: InitArrayEntries)
+void __cdecl hkpEntityAabbUtil_entityBatchInvalidateAabb(int** apEntries, int count)
 {
     int i = 0;
     if (count > 0)
@@ -121,13 +122,14 @@ class FUN_00d07910_cls
     int unk94;
     FUN_00d07910_elem** m_98;
     int m_9C;
-    void NotifyElements();
+    void hkpPhantom_firePhantomDeleted();
 };
 
 // Iterates the m_98 element array backwards and calls v10(this) on each non-null element.
 // @f3 0x009897e0 (community match, verified in this file)
 // pdb: hkpPhantom::firePhantomDeleted | hkpPhantom.obj | fnv360_0822_retail, call_dedup, high
-void FUN_00d07910_cls::NotifyElements() {
+// pdb: hkpPhantom::firePhantomDeleted | hkpPhantom.obj | fnv360_0822_retail, call_dedup, high (was: NotifyElements)
+void FUN_00d07910_cls::hkpPhantom_firePhantomDeleted() {
     for (int index = unk90 - 1; index >= 0; --index) {
         FUN_00d07910_elem** slot = &reinterpret_cast<FUN_00d07910_elem**>(unk8C)[index];
         if (reinterpret_cast<FUN_00d07910_elem**>(unk8C)[index]) {

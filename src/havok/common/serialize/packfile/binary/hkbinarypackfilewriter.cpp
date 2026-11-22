@@ -93,12 +93,13 @@ struct S_00dbd770
     int unk0;
     int unk4;
     S_00dbd770_Inner* m_childStream;  // +0x08
-    SubStreamBool ForwardToInner() const;
+    SubStreamBool hkSubStreamWriter_seekTellSupported() const;
 };
 
 // @fnv 0x00dbd770
 // pdb: hkSubStreamWriter::seekTellSupported | hkBinaryPackfileWriter.obj | fnv360_0822_retail, vtable, high
-SubStreamBool S_00dbd770::ForwardToInner() const
+// pdb: hkSubStreamWriter::seekTellSupported | hkBinaryPackfileWriter.obj | fnv360_0822_retail, vtable, high (was: ForwardToInner)
+SubStreamBool S_00dbd770::hkSubStreamWriter_seekTellSupported() const
 {
     return m_childStream->seekTellSupported();
 }
@@ -230,7 +231,8 @@ static inline int S_Rev(int v)
 // @fnv 0x00dbc6f0
 // pdb: hkBinaryPackfileWriter::writeClassName | hkBinaryPackfileWriter.obj | fnv360_0822_retail, caller_sim, high
 // pdb params: context, k, absoluteDataStart
-void __stdcall WriteNodeDiff(FUN_00dbc6f0_cls_owner* apOwner, FUN_00dbc6f0_cls_source* apSource, int aiDiff)
+// pdb: hkBinaryPackfileWriter::writeClassName | hkBinaryPackfileWriter.obj | fnv360_0822_retail, caller_sim, high (was: WriteNodeDiff)
+void __stdcall hkBinaryPackfileWriter_writeClassName(FUN_00dbc6f0_cls_owner* apOwner, FUN_00dbc6f0_cls_source* apSource, int aiDiff)
 {
     int x = apSource->Lookup(0);
     if (apOwner->m_byReverse != 0)
@@ -289,13 +291,14 @@ struct S_00dbd790_Class
     int unk04;
     S_00dbd790_Obj* object;
     int offset;
-    void DispatchToObject(int a, int b);
+    void hkSubStreamWriter_seek(int a, int b);
 };
 // Calls the object's f7 virtual method, passing a plus offset when b is zero and a otherwise, along with b.
 // @fnv 0x00dbd790
 // pdb: hkSubStreamWriter::seek | hkBinaryPackfileWriter.obj | fnv360_0822_retail, vtable, high
 // pdb params: offset, whence
-void S_00dbd790_Class::DispatchToObject(int aiValue, int b)
+// pdb: hkSubStreamWriter::seek | hkBinaryPackfileWriter.obj | fnv360_0822_retail, vtable, high (was: DispatchToObject)
+void S_00dbd790_Class::hkSubStreamWriter_seek(int aiValue, int b)
 {
     object->f7(b == 0 ? aiValue + offset : aiValue, b);
 }
@@ -1600,7 +1603,7 @@ struct ThisCls
     int unk24;
     int unk28;
     PairMap map2c;
-    void WriteNodeDiff(Src* src, void* glob, int diff);
+    void hkBinaryPackfileWriter_writeClassName(Src* src, void* glob, int diff);
     int GetOrAddString(int v);
     void hkBinaryPackfileWriter_writeAllObjects(Src* arg);
 };
@@ -1755,7 +1758,7 @@ __forceinline MapIter NextPair(PairMap* map, MapIter previous)
     }
     return (MapIter)i;
 }
-// Calls WriteNodeDiff for four globals and unseen entries, writes per-counter data, records timings, and resizes two arrays.
+// Calls hkBinaryPackfileWriter_writeClassName for four globals and unseen entries, writes per-counter data, records timings, and resizes two arrays.
 // @f3 0x009d7fd0 (community match, verified in this file)
 // Writes every pending object of a binary packfile, section by section, and collects the fixups of each section.
 // The container and stream types below are the inline library code this function was built from.

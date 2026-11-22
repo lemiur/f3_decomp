@@ -136,7 +136,7 @@ inline void* hkAlloc(int size)
     p->m_usMemSizeAndFlags = (unsigned short)size;
     return p;
 }
-Instance* __cdecl CloneInstanceFromSource(Instance* src);
+Instance* __cdecl hkpConstraintUtils_convertToLimits(Instance* src);
 class FnvSink
 {
   public:

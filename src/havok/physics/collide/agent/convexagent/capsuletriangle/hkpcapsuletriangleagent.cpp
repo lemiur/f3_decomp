@@ -40,13 +40,14 @@ struct NoteDispatcher {
 struct FUN_00d39930_class : ReceiverBase {
     NoteDispatcher* dispatcher;
     unsigned short receiverIds[3];
-    void __thiscall DispatchToReceivers(void* value);
+    void __thiscall hkpCapsuleTriangleAgent_cleanup(void* value);
 };
 // Dispatches value to each non-0xFFFF receiver id via dispatcher, then releases this if non-null.
 // @fnv 0x00d39930
 // pdb: hkpCapsuleTriangleAgent::cleanup | hkpCapsuleTriangleAgent.obj | fnv360_0822_retail, vtable, high
 // pdb params: constraintOwner
-void FUN_00d39930_class::DispatchToReceivers(void* value)
+// pdb: hkpCapsuleTriangleAgent::cleanup | hkpCapsuleTriangleAgent.obj | fnv360_0822_retail, vtable, high (was: DispatchToReceivers)
+void FUN_00d39930_class::hkpCapsuleTriangleAgent_cleanup(void* value)
 {
     unsigned short* id = receiverIds;
     int count = 3;

@@ -116,7 +116,8 @@ extern void* DAT_0126901c;
 void FUN_00d699c0();
 // @fnv 0x00d69a00
 // pdb: hkpBroadphaseViewer::registerViewer | hkpBroadphaseViewer.obj | fnv360_0822_retail, udata, high
-void RegisterConstraintsProcessFactory()
+// pdb: hkpBroadphaseViewer::registerViewer | hkpBroadphaseViewer.obj | fnv360_0822_retail, udata, high (was: RegisterConstraintsProcessFactory)
+void hkpBroadphaseViewer_registerViewer()
 {
     DAT_0126901c = FUN_00dd9380->FUN_00dd9380("Constraints", (void*)&FUN_00d699c0);
 }

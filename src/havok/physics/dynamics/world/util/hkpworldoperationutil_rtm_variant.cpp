@@ -151,7 +151,7 @@ struct S_00cb3da0_Ctx
     int unk144;
 };
 void NotifyTargets(S_00cb3da0_Ctx* ctx, void* p);
-void DetachRecord(void* p);
+void hkpWorldConstraintUtil_removeConstraint(void* p);
 void FUN_00cb3da0(S_00cb3da0_Ctx* ctx, void* p);
 struct CB3DD0Collidable
 {
@@ -281,7 +281,7 @@ struct CB3DD0World
     }
 };
 void __cdecl NotifyTargets(CB3DD0World* world, CB3DD0Entity* entity);
-void __cdecl DetachRecord(CB3DD0Entity* entity);
+void __cdecl hkpWorldConstraintUtil_removeConstraint(CB3DD0Entity* entity);
 void __cdecl hkpWorldOperationUtil_removeConstraintImmediately(CB3DD0World* world, CB3DD0Entity* entity, int fireCallbacks);
 struct FUN_00d070b0_class
 {
@@ -325,7 +325,7 @@ struct Obj
     char pad2[3];
     Agent* m_cc;
 };
-__declspec(nothrow) void __cdecl RemoveListItem(Obj* o, Agent* a);
+__declspec(nothrow) void __cdecl hkpWorldOperationUtil_removeIsland(Obj* o, Agent* a);
 void __cdecl hkpWorldOperationUtil_removeEntitySI(Obj* ctx, Obj* o);
 struct S_00cb5d00_Heap
 {
@@ -726,7 +726,7 @@ struct Stats
     int sum0;
     int sum1;
     int sum2;
-    void AccumulateStats(Holder* h, const int* s);
+    void hkpConstraintOwner_addConstraintInfo(Holder* h, const int* s);
 };
 class S_00dd7d00_Bool
 {
@@ -3140,7 +3140,7 @@ struct S00cb5100_Arr
     }
 };
 void FUN_00cf1480(float a, float b, void* p);
-void ProcessBlocks(S00cb5100_Body* b, float f, float g, int h);
+void hkpWorldAgentUtil_warpTime(S00cb5100_Body* b, float f, float g, int h);
 struct S00cb5100_World
 {
     int unk00;
@@ -4409,7 +4409,7 @@ struct MotionBase : RefHeader31
     S00cb4230_Half m_fGravityFactor;
     void FUN_00c905b0();
     void FUN_00d1dff0();
-    void SetFlagBits(int a, int b, int c);
+    void hkpMotion_setWorldSelectFlagsNeg(int a, int b, int c);
     void FUN_00c86610(MotionBase* p);
     float hkpMotion_getMass();
     __forceinline static void* operator new(unsigned int nbytes)
@@ -5380,7 +5380,7 @@ struct SplitIsland_Obj38
     int unk04;
     void FUN_00d27f70(int* p, int n);
     void RemapIndices(struct SplitIsland_L60* p);
-    int MoveLargestToFirst(struct SplitIsland_L60* p);
+    int hkUnionFind_moveBiggestGroupToIndexZero(struct SplitIsland_L60* p);
     void RemapAndAccumulate(int* q, int n, struct SplitIsland_L60* p);
 };
 struct SplitIsland_L60
@@ -5441,7 +5441,7 @@ struct SplitIsland_Arg0
     int inline68;
     char CheckConnectivity(void* p);
     SplitIsland_Arg0* FUN_00d07830(void* arg);
-    inline void AccumulateStats(SplitIsland_Target*, SplitIsland_H44&);
+    inline void hkpConstraintOwner_addConstraintInfo(SplitIsland_Target*, SplitIsland_H44&);
 };
 struct SplitIsland_H44
 {
@@ -7962,7 +7962,8 @@ __forceinline int SplitIsland_largerContribution(int a, int b)
 {
     return a > b ? a : b;
 }
-inline void SplitIsland_Arg0::AccumulateStats(SplitIsland_Target* constraint, SplitIsland_H44& info)
+// pdb: hkpConstraintOwner::addConstraintInfo | hkpWorldOperationUtil.obj | fnv360_0822_retail, caller, high (was: AccumulateStats)
+inline void SplitIsland_Arg0::hkpConstraintOwner_addConstraintInfo(SplitIsland_Target* constraint, SplitIsland_H44& info)
 {
     if (constraint->f30)
     {

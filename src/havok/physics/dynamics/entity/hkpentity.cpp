@@ -280,7 +280,7 @@ class hkpEntityStats : public hkpEntity
 {
   public:
     void WriteToStream(hkStatisticsCollector* collector, const GlobalObjectO2_00d472a0* cls) const;
-    void CollectStats(hkStatisticsCollector* collector) const;
+    void hkpEntity_calcContentStatistics(hkStatisticsCollector* collector) const;
 };
 
 // Reports the entity's constraint, collision, listener and motion data to the statistics collector, skipping flagged arrays unless m_clearDontDeallocate is set.
@@ -449,7 +449,8 @@ void __cdecl FUN_0097eef0(const void* object, N90b350::StatisticsCollector* coll
 
 // pdb: hkpEntity::calcContentStatistics | hkpEntity.obj | fnv360_0822_retail, ustr, high
 // pdb params: collector, cls
-void hkpEntityStats::CollectStats(hkStatisticsCollector* statsCollector) const
+// pdb: hkpEntity::calcContentStatistics | hkpEntity.obj | fnv360_0822_retail, ustr, high (was: CollectStats)
+void hkpEntityStats::hkpEntity_calcContentStatistics(hkStatisticsCollector* statsCollector) const
 {
     N90b350::StatisticsCollector* collector = (N90b350::StatisticsCollector*)statsCollector;
     const N90b350::Entity* self = (const N90b350::Entity*)this;
@@ -521,7 +522,7 @@ class hkOwnerC9C5
     int unk000[0x80];
     hkSmallArrayC9C5<void*> m_slots;
 
-    void AddSlot(void* p);
+    void hkpEntity_addContactListener(void* p);
 };
 
 // Finds the first null entry in m_slots and replaces it with p, or appends p if no null entry exists.
@@ -529,7 +530,8 @@ class hkOwnerC9C5
 namespace f3m_0090b490 { void __cdecl FUN_0098a9f0(void* array, int elemSize); }
 // pdb: hkpEntity::addContactListener | hkpEntity.obj | fnv360_0822_retail, call_seq, high
 // pdb params: cl
-void hkOwnerC9C5::AddSlot(void* p) {
+// pdb: hkpEntity::addContactListener | hkpEntity.obj | fnv360_0822_retail, call_seq, high (was: AddSlot)
+void hkOwnerC9C5::hkpEntity_addContactListener(void* p) {
  hkSmallArrayC9C5<void*>& slots=((hkOwnerC9C5*)((char*)this-0x10))->m_slots;
  int i=((hkOwnerC9C5*)((char*)this-0x10))->m_slots.indexOf(0);
  if(i>=0) slots.m_data[i]=p;
@@ -1428,7 +1430,7 @@ class hkpMotionC9C
     unsigned char m_ucDeactivationIntegrateCounter;
     unsigned short m_ausDeactivationNumInactiveFrames[2];
 
-    void SetFlagBits(int a, int b, int c);
+    void hkpMotion_setWorldSelectFlagsNeg(int a, int b, int c);
 };
 
 class hkpEntityC9C
@@ -1749,7 +1751,7 @@ void hkpEntityC9C::FUN_00c9c1d0()
         self->m_pMotionState.m_ausDeactivationNumInactiveFrames[0] = 0;
         self->m_pMotionState.m_ausDeactivationNumInactiveFrames[1] = 0;
         AddEntryToList((hkpWorldC9C*)self->m_pOwningWorld, self->m_pSimulationIsland);
-        self->m_pMotionState.SetFlagBits(self->m_pOwningWorld->m_bWantDeactivation, self->m_pOwningWorld->m_frameA,
+        self->m_pMotionState.hkpMotion_setWorldSelectFlagsNeg(self->m_pOwningWorld->m_bWantDeactivation, self->m_pOwningWorld->m_frameA,
                                          self->m_pOwningWorld->m_frameB);
     }
 }

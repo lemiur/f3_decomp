@@ -96,7 +96,7 @@ class hkpConstraintCollisionFilterE46B
     char unk00[0x2c];
     hkpCollisionFilterE46B* m_pChildFilter;
 
-    hkBoolE46B ConstraintCollisionFilter(const hkpCollidableE46B& a, const hkpCollidableE46B& b) const throw();
+    hkBoolE46B hkpConstrainedSystemFilter_isCollisionEnabled(const hkpCollidableE46B& a, const hkpCollidableE46B& b) const throw();
 };
 
 // Returns false if the collidable filter rejects the pair or a non-type-11 constraint links the two rigid bodies; true otherwise.
@@ -118,7 +118,8 @@ class Task1447Entity
 };
 // pdb: hkpConstrainedSystemFilter::isCollisionEnabled | hkpConstrainedSystemFilter.obj | fnv360_0822_retail, vtable, high
 // pdb params: a, b
-hkBoolE46B hkpConstraintCollisionFilterE46B::ConstraintCollisionFilter(const hkpCollidableE46B& a,
+// pdb: hkpConstrainedSystemFilter::isCollisionEnabled | hkpConstrainedSystemFilter.obj | fnv360_0822_retail, vtable, high (was: ConstraintCollisionFilter)
+hkBoolE46B hkpConstraintCollisionFilterE46B::hkpConstrainedSystemFilter_isCollisionEnabled(const hkpCollidableE46B& a,
                                                                        const hkpCollidableE46B& b) const throw()
 {
     FUN_00c9c3c0_Class* pkBodyA = hkGetRigidBodyE46B(&a);

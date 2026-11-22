@@ -7,12 +7,13 @@ struct FUN_00d93330 {
     char unk00[0x18];
     int m_constraintAddRemoveCounter;  // +0x18
     int m_constraintForCommand;        // +0x1C
-    void __thiscall UpdateConstraint(int);
+    void __thiscall hkpDeferredConstraintOwner_addConstraintToCriticalLockedIsland(int);
 };
 // @fnv 0x00d93330
 // pdb: hkpDeferredConstraintOwner::addConstraintToCriticalLockedIsland | hkpCpuAgentSectorJob.obj | fnv360_0822_retail, vtable, high
 // pdb params: constraint
-void __thiscall FUN_00d93330::UpdateConstraint(int v)
+// pdb: hkpDeferredConstraintOwner::addConstraintToCriticalLockedIsland | hkpCpuAgentSectorJob.obj | fnv360_0822_retail, vtable, high (was: UpdateConstraint)
+void __thiscall FUN_00d93330::hkpDeferredConstraintOwner_addConstraintToCriticalLockedIsland(int v)
 {
     ++m_constraintAddRemoveCounter;
     m_constraintForCommand = v;

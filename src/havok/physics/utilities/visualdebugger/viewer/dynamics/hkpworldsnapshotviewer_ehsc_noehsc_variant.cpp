@@ -29,7 +29,7 @@ extern int DAT_01268fc4;
 extern int DAT_01268fc0;
 void __cdecl FUN_00d62f20();
 void __cdecl AllocateRecordWithData();
-void __cdecl RegisterSnapshotCommands();
+void __cdecl hkpWorldSnapshotViewer_registerViewer();
 struct FUN_00c7be20_cls;
 struct FUN_00c7be20_holder
 {

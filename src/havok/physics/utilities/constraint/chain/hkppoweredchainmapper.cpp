@@ -512,7 +512,8 @@ template <class A> inline void setSizeTo(A* a, int n, int elemSize) throw()
 }
 // pdb: hkpPoweredChainMapper::buildChainMapper | hkpPoweredChainMapper.obj | fnv360_0822_retail, ustr, high
 // pdb params: config, allConstraints, pairs, unusedConstraints
-FnMapper* __cdecl BuildPoweredChainMapper(FnFlags flags, hkArray<int>* linkIds, hkArray<FnNodePair>* pairs, hkArray<int>* unlinked) throw()
+// pdb: hkpPoweredChainMapper::buildChainMapper | hkpPoweredChainMapper.obj | fnv360_0822_retail, ustr, high (was: BuildPoweredChainMapper)
+FnMapper* __cdecl hkpPoweredChainMapper_buildChainMapper(FnFlags flags, hkArray<int>* linkIds, hkArray<FnNodePair>* pairs, hkArray<int>* unlinked) throw()
 {
     FnMapper* mapper = (FnMapper*)new FnMapperNew;
     HArr<FnVisit> visits;

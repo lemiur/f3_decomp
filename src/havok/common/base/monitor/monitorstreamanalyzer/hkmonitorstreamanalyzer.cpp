@@ -1681,10 +1681,10 @@ void __cdecl FUN_00e10760(TypeItem** data, int lo, int hi, int(__cdecl* compare)
 //   +0x10  int      unk10
 //   +0x14  int      m_iFallback  (returned when no entry matches)
 //
-// The function walks the entries, asks CompareStringsCaseInsensitive(key & ~1, arg) about each
+// The function walks the entries, asks hkString_strCasecmp(key & ~1, arg) about each
 // key, and returns the value of the first entry the helper rejects; if the
 // helper accepts every entry, the fallback at +0x14 is returned.
-int __cdecl CompareStringsCaseInsensitive(unsigned int key, int arg);
+int __cdecl hkString_strCasecmp(unsigned int key, int arg);
 
 struct FUN_00e0cc90_cls
 {
@@ -1712,7 +1712,7 @@ int FUN_00e0cc90_cls::FUN_00e0cc90(int key)
     for (int index = 0; index < unk04; ++index)
     {
         Entry* entry = &entries[index];
-        if (CompareStringsCaseInsensitive(entry->key, key) == 0)
+        if (hkString_strCasecmp(entry->key, key) == 0)
             return entries[index].value;
     }
     return -1;

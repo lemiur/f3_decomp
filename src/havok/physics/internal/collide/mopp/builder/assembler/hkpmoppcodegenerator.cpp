@@ -55,7 +55,7 @@ struct E06490Stack
     int unk0C;
     char* m_buffer;
 
-    void GrowBuffer();
+    void hkpMoppCodeGenerator_resize();
 };
 
 // @f3 0x00a85cb0 (community match, verified in this file)
@@ -69,7 +69,8 @@ struct FUN_008f6f60_obj
 };
 
 // pdb: hkpMoppCodeGenerator::resize | hkpMoppCodeGenerator.obj | fnv360_0822_retail, call_seq, high
-void E06490Stack::GrowBuffer()
+// pdb: hkpMoppCodeGenerator::resize | hkpMoppCodeGenerator.obj | fnv360_0822_retail, call_seq, high (was: GrowBuffer)
+void E06490Stack::hkpMoppCodeGenerator_resize()
 {
     void* (__stdcall* tlsGetValue)(unsigned long) = FUN_00d9b080;
     int newCapacity = m_pRayCursor * 2;

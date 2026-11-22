@@ -43,13 +43,14 @@ struct FUN_00d0b230_class
 {
     int unk00, unk04;
     float unk08;
-    void SetDstFields(S_00d0b230_Arg* a);
+    void hkpDefaultWorldMaintenanceMgr_init(S_00d0b230_Arg* a);
 };
 
 // @fnv 0x00d0b230
 // pdb: hkpDefaultWorldMaintenanceMgr::init | hkpDefaultWorldMaintenanceMgr.obj | fnv360_0822_retail, vtable, high
 // pdb params: world
-void FUN_00d0b230_class::SetDstFields(S_00d0b230_Arg* a)
+// pdb: hkpDefaultWorldMaintenanceMgr::init | hkpDefaultWorldMaintenanceMgr.obj | fnv360_0822_retail, vtable, high (was: SetDstFields)
+void FUN_00d0b230_class::hkpDefaultWorldMaintenanceMgr_init(S_00d0b230_Arg* a)
 {
     S_00d0b230_Dst* pDst = a->unk08;
     pDst->unk14 = unk08;
@@ -91,13 +92,14 @@ struct FUN_00d0b350_cls
     int unk08;
     float unk0c;
     void hkpDefaultWorldMaintenanceMgr_resetWorldTime(float* first, float* second);
-    void TraceConditionalCall(float* first, float* second);
+    void hkpDefaultWorldMaintenanceMgr_performMaintenanceNoSplit(float* first, float* second);
 };
 // Writes a trace entry, calls hkpDefaultWorldMaintenanceMgr_resetWorldTime(first, second) if *second >= unk0c, then writes a closing trace entry.
 // @fnv 0x00d0b350
 // pdb: hkpDefaultWorldMaintenanceMgr::performMaintenanceNoSplit | hkpDefaultWorldMaintenanceMgr.obj | fnv360_0822_retail, vtable, high
 // pdb params: world, stepInfo
-void FUN_00d0b350_cls::TraceConditionalCall(float* first, float* second)
+// pdb: hkpDefaultWorldMaintenanceMgr::performMaintenanceNoSplit | hkpDefaultWorldMaintenanceMgr.obj | fnv360_0822_retail, vtable, high (was: TraceConditionalCall)
+void FUN_00d0b350_cls::hkpDefaultWorldMaintenanceMgr_performMaintenanceNoSplit(float* first, float* second)
 {
     HK_TIMER_BEGIN_LIST("Maintenance", "ResetTime");
     if (*second >= unk0c)
@@ -394,7 +396,7 @@ struct hkpWorld
     hkStepInfo m_pStepInfo;
 };
 
-void __cdecl ProcessBlocks(hkpSimulationIsland* island, float oldTime, float newTime, CollisionAgentContext* input);
+void __cdecl hkpWorldAgentUtil_warpTime(hkpSimulationIsland* island, float oldTime, float newTime, CollisionAgentContext* input);
 
 struct TimeRebaser
 {

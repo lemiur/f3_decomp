@@ -194,14 +194,15 @@ struct D45350Agent
     D45350Collector* m_collectorA;
     D45350Collector* m_collectorB;
 
-    void ProcessShapeChildren(const D45350CdBody& body, void* a, void* b, void* c);
+    void hkpBvAgent_updateShapeCollectionFilter(const D45350CdBody& body, void* a, void* b, void* c);
 };
 
 // Builds a child body from the shape's m_childA and m_childB and passes it to m_collectorA and, if present, m_collectorB.
 // @fnv 0x00d45350
 // pdb: hkpBvAgent::updateShapeCollectionFilter | hkpBvAgent.obj | fnv360_0822_retail, vtable, high
 // pdb params: bodyA, bodyB, input, constraintOwner
-void D45350Agent::ProcessShapeChildren(const D45350CdBody& body, void* apArg1, void* apArg2, void* apArg3)
+// pdb: hkpBvAgent::updateShapeCollectionFilter | hkpBvAgent.obj | fnv360_0822_retail, vtable, high (was: ProcessShapeChildren)
+void D45350Agent::hkpBvAgent_updateShapeCollectionFilter(const D45350CdBody& body, void* apArg1, void* apArg2, void* apArg3)
 {
     const D45350Shape* shape = body.m_pCollisionShape;
     D45350CdBody child(&body);
@@ -262,13 +263,14 @@ struct FUN_00d452f0_cls
     int unk0C;
     FUN_00d452f0_vt* m_p2;
 
-    void DispatchToVt(void* arg);
+    void hkpBvAgent_removePoint(void* arg);
 };
 
 // @fnv 0x00d452f0
 // pdb: hkpBvAgent::removePoint | hkpBvAgent.obj | fnv360_0822_retail, vtable, high
 // pdb params: idToRemove
-void FUN_00d452f0_cls::DispatchToVt(void* arg)
+// pdb: hkpBvAgent::removePoint | hkpBvAgent.obj | fnv360_0822_retail, vtable, high (was: DispatchToVt)
+void FUN_00d452f0_cls::hkpBvAgent_removePoint(void* arg)
 {
     if (m_p2)
     {
@@ -304,13 +306,14 @@ struct FUN_00d45330_cls
     int unk0c;
     SlotVt* m_pFlagTarget;
 
-    void CallSlotVt13(void* arg);
+    void hkpBvAgent_createZombie(void* arg);
 };
 
 // @fnv 0x00d45330
 // pdb: hkpBvAgent::createZombie | hkpBvAgent.obj | fnv360_0822_retail, vtable, high
 // pdb params: idTobecomeZombie
-void FUN_00d45330_cls::CallSlotVt13(void* arg)
+// pdb: hkpBvAgent::createZombie | hkpBvAgent.obj | fnv360_0822_retail, vtable, high (was: CallSlotVt13)
+void FUN_00d45330_cls::hkpBvAgent_createZombie(void* arg)
 {
     if (m_pFlagTarget != 0)
     {
@@ -436,7 +439,7 @@ void __cdecl FUN_00d46050(int aiArg1, int aiArg2, int aiArg3, int aiValue)
 
 struct CallTarget_00d45350
 {
-    int ProcessShapeChildren(int, int, int, int);
+    int hkpBvAgent_updateShapeCollectionFilter(int, int, int, int);
 };
 struct SearchObject
 {
@@ -448,7 +451,7 @@ struct SearchObject
 int SearchObject::FUN_00d46180(unsigned int arg0, unsigned int arg1, unsigned int arg2, unsigned int arg3)
 {
     unsigned int callResult0 =
-        (unsigned int)((CallTarget_00d45350*)this)->ProcessShapeChildren((int)arg1, (int)arg0, (int)arg2, (int)arg3);
+        (unsigned int)((CallTarget_00d45350*)this)->hkpBvAgent_updateShapeCollectionFilter((int)arg1, (int)arg0, (int)arg2, (int)arg3);
     return (int)callResult0;
 }
 
@@ -1848,7 +1851,7 @@ class Agent228
     BvHost* m_0c;
     BvHost* m_10;
 
-    void CheckBvShape(BvA* a1, BvB* a2, BvC* a3, DWORD a4, DWORD a5);
+    void hkpBvAgent_linearCast(BvA* a1, BvB* a2, BvC* a3, DWORD a4, DWORD a5);
 };
 
 // Profiles and runs a Havok BV shape check against a2/a3, caching the result host in m_10 and invoking its v5 callback when a contact is found.
@@ -1874,7 +1877,8 @@ extern unsigned long DAT_0116913c;
 
 // pdb: hkpBvAgent::linearCast | hkpBvAgent.obj | fnv360_0822_retail, vtable, high
 // pdb params: bodyA, bodyB, input, pointDetails, startCollector
-void Agent228::CheckBvShape(BvA* a1, BvB* a2, BvC* a3, DWORD a4, DWORD a5)
+// pdb: hkpBvAgent::linearCast | hkpBvAgent.obj | fnv360_0822_retail, vtable, high (was: CheckBvShape)
+void Agent228::hkpBvAgent_linearCast(BvA* a1, BvB* a2, BvC* a3, DWORD a4, DWORD a5)
 {
     volatile DWORD tick;
     BvProfBuf* pBuf = (BvProfBuf*)DAT_00d9b080(DAT_0116913c);

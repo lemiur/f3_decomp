@@ -9442,7 +9442,7 @@ struct Process {
     virtual void v378();
     virtual void v379();
     virtual void SetFlag(int v);
-    virtual bool HasFlag();
+    virtual bool hkClassMember_isNotOwner();
 };
 struct Player { char pad[0xac]; Node* node; };
 extern Player* DAT_0107a224;
@@ -9577,7 +9577,7 @@ bool n7019e0::Actor::FUN_007019e0()
     Weapon* weapon = process->GetWeapon();
     if (weapon && !(weapon->type == 5 && process->IsReady()) && !(weapon->type == 6 && process->IsReady()))
         return false;
-    if (process->HasFlag()) {
+    if (process->hkClassMember_isNotOwner()) {
         process->SetFlag(0);
         return false;
     }
@@ -42757,7 +42757,8 @@ struct HitData {
     unsigned int unk50;
     unsigned int unk54;
     unsigned int flags;
-    bool HasFlag(unsigned int bit) const { return ((flags >> bit) & 1u) != 0; }
+    // pdb: hkClassMember::isNotOwner | hkClassMember.obj | fnv360_0822_retail, objrun, high (was: HasFlag)
+    bool hkClassMember_isNotOwner(unsigned int bit) const { return ((flags >> bit) & 1u) != 0; }
 };
 struct BoolSetting {
     unsigned int unk00;
@@ -42971,9 +42972,9 @@ void Actor::FUN_0071bfe0(HitData* hit,int type,int reference,Form* source,void* 
         bool different = hit && hit->part != reference;
         bool canExplode = false;
         bool canSever = strongSever;
-        if (hit && hit->HasFlag(6))
+        if (hit && hit->hkClassMember_isNotOwner(6))
             canSever = true;
-        else if (hit && hit->HasFlag(5))
+        else if (hit && hit->hkClassMember_isNotOwner(5))
             canExplode = true;
         else if (!strongSever)
         {
@@ -55554,7 +55555,8 @@ struct St_700bb0 {
     int BGSSaveGameBuffer_StartVariableSizedValue();
     void FUN_006e16e0(int a, int b);
     unsigned int Flags() const { return *(const unsigned int*)&unk17; }
-    bool HasFlag(unsigned int bit) const { return (Flags() >> bit) & 1; }
+    // pdb: hkClassMember::isNotOwner | hkClassMember.obj | fnv360_0822_retail, objrun, high (was: HasFlag)
+    bool hkClassMember_isNotOwner(unsigned int bit) const { return (Flags() >> bit) & 1; }
 };
 struct In_700bb0 { int unk00; void* unk04; };
 struct Nd_700bb0 { In_700bb0* unk00; Nd_700bb0* unk04; };
@@ -55767,12 +55769,12 @@ void Cls_700bb0::FUN_00700bb0(St_700bb0* stream)
     stream->FUN_006e17e0(unk0b8, 0);
     stream->FUN_006e17e0(unk13c, 0);
     stream->FUN_006e17e0(unk068, 0);
-    if (stream->HasFlag(10))
+    if (stream->hkClassMember_isNotOwner(10))
     {
         unsigned char b = unk0fc;
         stream->FUN_006e1830(&b, 1, 0);
     }
-    if (stream->HasFlag(19))
+    if (stream->hkClassMember_isNotOwner(19))
     {
         int count = 0;
         int pos = stream->BGSSaveGameBuffer_StartVariableSizedValue();
@@ -55788,8 +55790,8 @@ void Cls_700bb0::FUN_00700bb0(St_700bb0* stream)
         }
         stream->FUN_006e16e0(count, pos);
     }
-    if (stream->HasFlag(23)) unk0c4.ModifierList_SaveGame(stream);
-    if (stream->HasFlag(22)) unk0d4.ModifierList_SaveGame(stream);
+    if (stream->hkClassMember_isNotOwner(23)) unk0c4.ModifierList_SaveGame(stream);
+    if (stream->hkClassMember_isNotOwner(22)) unk0d4.ModifierList_SaveGame(stream);
     ptr184->v10(stream);
 }
 

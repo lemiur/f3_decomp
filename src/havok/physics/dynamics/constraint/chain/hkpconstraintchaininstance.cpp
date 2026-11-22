@@ -107,7 +107,7 @@ class hkpPhantomOverlapDD04
     int unk34;
     hkArrayDD04<hkReferencedObjectDD04*> m_kTrackedObjects;
 
-    void AddReferencedObject(hkReferencedObjectDD04* pkObject);
+    void hkpConstraintChainInstance_addEntity(hkReferencedObjectDD04* pkObject);
 };
 
 // @f3 0x00a50b70 (community match, verified in this file)
@@ -135,7 +135,8 @@ void __cdecl FUN_00901f10(void* arr, int elemSize);
 
 // pdb: hkpConstraintChainInstance::addEntity | hkpConstraintChainInstance.obj | fnv360_0822_retail, call_gap, high
 // pdb params: entity
-void hkpPhantomOverlapDD04::AddReferencedObject(hkReferencedObjectDD04* pkObject)
+// pdb: hkpConstraintChainInstance::addEntity | hkpConstraintChainInstance.obj | fnv360_0822_retail, call_gap, high (was: AddReferencedObject)
+void hkpPhantomOverlapDD04::hkpConstraintChainInstance_addEntity(hkReferencedObjectDD04* pkObject)
 {
     hkpPhantomOverlapLayout* self = (hkpPhantomOverlapLayout*)this;
     int iSlot = self->m_kTrackedObjects.m_iElementCount;

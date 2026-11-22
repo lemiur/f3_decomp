@@ -268,7 +268,7 @@ struct DiagnosticWriter {
     void FUN_00cc00e0();                                   // (this), ret
 };
 struct Target {
-    void WriteSwapped(const void* p, unsigned int n, unsigned int m);              // (this,void*,int,int)
+    void hkOArchive_writeArrayGeneric(const void* p, unsigned int n, unsigned int m);              // (this,void*,int,int)
 };
 struct AssertMgr {
     virtual void v0();
@@ -312,7 +312,7 @@ struct S00e03ea0_Schema {
 struct S00e03ea0_Writer {
     VObj* FUN_00d60800();
     void FUN_00d607b0(void* p, int size);
-    void WriteSwapped(const void* p, int size, int n);
+    void hkOArchive_writeArrayGeneric(const void* p, int size, int n);
 };
 
 struct S00e03ea0_Scr2 {
@@ -459,7 +459,7 @@ __declspec(noinline) static void writePodArray(Target* w, unsigned int count, un
         count *= stride >> 2;
         stride = 4;
     case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9: case 10: case 11: case 32:
-        w->WriteSwapped(data, stride, count);
+        w->hkOArchive_writeArrayGeneric(data, stride, count);
         break;
     default:
         char text[512];
@@ -587,7 +587,7 @@ struct hkStreamWriter {
 };
 struct VObj;
 struct CandidateWriter {
- VObj* FUN_00d60800();void FUN_00d607b0(void*,int);void WriteSwapped(const void*,int,int);
+ VObj* FUN_00d60800();void FUN_00d607b0(void*,int);void hkOArchive_writeArrayGeneric(const void*,int,int);
  hkStreamWriter*FUN_009ee790();void FUN_009ee740(const void*,int);void FUN_009ee590(const void*,int,int);
 };
 struct hkOstream {

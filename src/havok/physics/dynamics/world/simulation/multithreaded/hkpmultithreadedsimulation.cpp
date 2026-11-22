@@ -246,7 +246,7 @@ struct FUN_00d026e0_cls
 {
     int unk00;
     char* m_04;
-    void ProcessPair(int* pr);
+    void hkpMultiThreadedSimulation_MtEntityEntityBroadPhaseListener_addCollisionPair(int* pr);
 };
 
 // Resolves two records from pr, and either appends the pair to the array at world+0x6c or updates sub+0x14 and calls FUN_00cc0f40 based on a grid lookup.
@@ -255,7 +255,8 @@ void __cdecl FUN_00901f10(PairArray* arr, int elemSize);
 void __cdecl hkpWorldAgentUtil_addAgent(char* a, char* b, char* c);
 // pdb: hkpMultiThreadedSimulation::MtEntityEntityBroadPhaseListener::addCollisionPair | hkpMultithreadedSimulation.obj | fnv360_0822_retail, vtable, high
 // pdb params: pair
-void FUN_00d026e0_cls::ProcessPair(int* aiPair)
+// pdb: hkpMultiThreadedSimulation::MtEntityEntityBroadPhaseListener::addCollisionPair | hkpMultithreadedSimulation.obj | fnv360_0822_retail, vtable, high (was: ProcessPair)
+void FUN_00d026e0_cls::hkpMultiThreadedSimulation_MtEntityEntityBroadPhaseListener_addCollisionPair(int* aiPair)
 {
     int a = aiPair[0];
     int x = a + *(signed char*)(a + 5);
@@ -322,7 +323,7 @@ struct AllocHolder
 
 AllocHolder* FUN_00c85750();
 void ResizeAudioStream(void* allocator, PairList* list, unsigned int elemSize);
-char* FindEntryValue(char* a, char* b);
+char* hkAgentNnMachine_FindAgent(char* a, char* b);
 
 }  // namespace fnv_00d027c0
 
@@ -840,7 +841,8 @@ struct PairD020
 // @fnv 0x00d02080
 // pdb: hkpMultiThreadedSimulation::MtBroadPhaseBorderListener::addCollisionPair | hkpMultithreadedSimulation.obj | fnv360_0822_retail, vtable, high
 // pdb params: pair
-void __stdcall NotifyPhantomCollision(PairD020* pkPair)
+// pdb: hkpMultiThreadedSimulation::MtBroadPhaseBorderListener::addCollisionPair | hkpMultithreadedSimulation.obj | fnv360_0822_retail, vtable, high (was: NotifyPhantomCollision)
+void __stdcall hkpMultiThreadedSimulation_MtBroadPhaseBorderListener_addCollisionPair(PairD020* pkPair)
 {
     if (pkPair->m_pkA->m_cType == 3 && pkPair->m_pkB->m_cType == 3)
         return;
@@ -2114,7 +2116,7 @@ struct Dispatcher
 
 Agent* __cdecl FUN_00cc0f40(Body*, Body*, Dispatcher*);
 
-Agent* __cdecl FindEntryValue(Body*, Body*);
+Agent* __cdecl hkAgentNnMachine_FindAgent(Body*, Body*);
 
 template <class T> __forceinline void releasePairElements(T* items, int total)
 {

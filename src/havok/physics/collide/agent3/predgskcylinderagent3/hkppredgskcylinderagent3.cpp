@@ -30,7 +30,8 @@ struct FNVFlags
 int FUN_009cc0e0(FNVPair*,int,FNVFlags*);
 // pdb: hkPredGskCylinderAgent3::create | hkpPredGskCylinderAgent3.obj | fnv360_0822_retail, caller_sim, high
 // pdb params: input, entry, agentData
-int __cdecl ConvertPairFlags(FNVPair* pair, int mode, FNVFlags* result)
+// pdb: hkPredGskCylinderAgent3::create | hkpPredGskCylinderAgent3.obj | fnv360_0822_retail, caller_sim, high (was: ConvertPairFlags)
+int __cdecl hkPredGskCylinderAgent3_create(FNVPair* pair, int mode, FNVFlags* result)
 {
     int converted = FUN_009cc0e0(pair, mode, result);
     result->flags &= 0xF0;

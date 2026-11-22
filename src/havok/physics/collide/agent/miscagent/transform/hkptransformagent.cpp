@@ -10,13 +10,13 @@ struct CollisionAgentFunctionTable {
     char f10;
     char f11;
 };
-void __cdecl CreateTransformAgent();
+void __cdecl hkpTransformAgent_createTransformBAgent();
 void __cdecl RunCollector();
 void __cdecl RunSymmetricAgentFlipCollector();
-void __cdecl BuildHeaderAndDispatchHandler();
+void __cdecl hkpTransformAgent_createTransformAAgent();
 void __cdecl ProcessTransformShapeCollision();
 void __cdecl hkpTransformAgent_staticGetClosestPoints();
-void __cdecl DispatchClosestPoints();
+void __cdecl hkpTransformAgent_staticLinearCast();
 
 struct Target {
     virtual void v0();
@@ -119,12 +119,13 @@ struct Caster {
     int unk04;
     int unk08;
     Collector* coll;
-    int ProcessSource(Source* s, int a, int b, int c, int d);
+    int hkpTransformAgent_linearCast(Source* s, int a, int b, int c, int d);
 };
 // @fnv 0x00d42cf0
 // pdb: hkpTransformAgent::linearCast | hkpTransformAgent.obj | fnv360_0822_retail, vtable, high
 // pdb params: bodyAin, bodyB, input, collector, startCollector
-int Caster::ProcessSource(Source* pSource, int aiArg1, int aiArg2, int aiArg3, int aiArg4)
+// pdb: hkpTransformAgent::linearCast | hkpTransformAgent.obj | fnv360_0822_retail, vtable, high (was: ProcessSource)
+int Caster::hkpTransformAgent_linearCast(Source* pSource, int aiArg1, int aiArg2, int aiArg3, int aiArg4)
 {
     Body* body = pSource->body;
     hkTransform xf(pSource->rot, body->unk30);
@@ -203,7 +204,8 @@ struct S_00d42d60_Input
 // @fnv 0x00d42d60
 // pdb: hkpTransformAgent::staticLinearCast | hkpTransformAgent.obj | fnv360_0822_retail, objrun, high
 // pdb params: bodyAin, bodyB, input, collector, startCollector
-void __cdecl DispatchClosestPoints(const S_00d42d60_CdBody& bodyA, const S_00d42d60_CdBody& bodyB,
+// pdb: hkpTransformAgent::staticLinearCast | hkpTransformAgent.obj | fnv360_0822_retail, objrun, high (was: DispatchClosestPoints)
+void __cdecl hkpTransformAgent_staticLinearCast(const S_00d42d60_CdBody& bodyA, const S_00d42d60_CdBody& bodyB,
                           const S_00d42d60_Input& input, S_00d42d60_Collector* pCollectorA, S_00d42d60_Collector* pCollectorB)
 {
     const S_00d42d60_TransformShape* pTransformShape = (const S_00d42d60_TransformShape*)bodyA.m_pCollisionShape;
@@ -529,7 +531,8 @@ __declspec(align(16)) struct MotionState {
 
 // pdb: hkpTransformAgent::createTransformAAgent | hkpTransformAgent.obj | fnv360_0822_retail, caller_sim, high
 // pdb params: bodyA, bodyB, input, mgr
-Header* __cdecl BuildHeaderAndDispatchHandler(InputA* pSource,InputB* pPathInput,InputC* pStateInput,int value) {
+// pdb: hkpTransformAgent::createTransformAAgent | hkpTransformAgent.obj | fnv360_0822_retail, caller_sim, high (was: BuildHeaderAndDispatchHandler)
+Header* __cdecl hkpTransformAgent_createTransformAAgent(InputA* pSource,InputB* pPathInput,InputC* pStateInput,int value) {
     void* tls = DAT_00d9b080(DAT_010f3170);
     Header* header = (Header*)((BlockAllocator*)tls)->FUN_008f6d30(0x10, 0x1f);
     header->userValue = value;
@@ -1045,7 +1048,8 @@ struct S9cdb30_Symmetric : S9cdb30_TransformAgent {
 
 // pdb: hkpTransformAgent::createTransformBAgent | hkpTransformAgent.obj | fnv360_0822_retail, uvref, high
 // pdb params: bodyA, bodyB, input, mgr
-S_00d43030_Agent* CreateTransformAgent(const S_00d43030_CdBody& bodyA, const S_00d43030_CdBody& bodyB, const S_00d43030_CollisionInput& input, S_00d43030_ContactMgr* mgr)
+// pdb: hkpTransformAgent::createTransformBAgent | hkpTransformAgent.obj | fnv360_0822_retail, uvref, high (was: CreateTransformAgent)
+S_00d43030_Agent* hkpTransformAgent_createTransformBAgent(const S_00d43030_CdBody& bodyA, const S_00d43030_CdBody& bodyB, const S_00d43030_CollisionInput& input, S_00d43030_ContactMgr* mgr)
 {
     S9cdb30_TransformAgent* agent = new S9cdb30_Symmetric(bodyA, bodyB, input, mgr);
     return agent;
@@ -1079,7 +1083,7 @@ struct Record_d2e9 {
     int m_uiFilterValue;
 };
 
-void __cdecl DispatchClosestPoints(int a1, int a2, Input_d2e9* input, Record_d2e9* rec, Record_d2e9* optRec);
+void __cdecl hkpTransformAgent_staticLinearCast(int a1, int a2, Input_d2e9* input, Record_d2e9* rec, Record_d2e9* optRec);
 
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long);
 

@@ -450,7 +450,7 @@ class hkpCachingShapePhantomD4CD : public FUN_00d08130
     hkArrayD4CD<hkpCollisionDetailD4CD> m_kCollisionDetails;
     hkBool m_bOrderDirty;
 
-    void __thiscall AddToCollector(hkStatisticsCollectorD4CD* pkCollector) const throw();
+    void __thiscall hkpCachingShapePhantom_calcContentStatistics(hkStatisticsCollectorD4CD* pkCollector) const throw();
 };
 
 // Adds this phantom's base data and its AgentPtr array to the collector, then reports each collision agent as a child object under "agents".
@@ -557,7 +557,8 @@ struct View557 {
 };
 // pdb: hkpCachingShapePhantom::calcContentStatistics | hkpCachingShapePhantom.obj | fnv360_0822_retail, ustr, high
 // pdb params: collector, cls
-void hkpCachingShapePhantomD4CD::AddToCollector(hkStatisticsCollectorD4CD* collector) const throw() {
+// pdb: hkpCachingShapePhantom::calcContentStatistics | hkpCachingShapePhantom.obj | fnv360_0822_retail, ustr, high (was: AddToCollector)
+void hkpCachingShapePhantomD4CD::hkpCachingShapePhantom_calcContentStatistics(hkStatisticsCollectorD4CD* collector) const throw() {
     const View557* self=reinterpret_cast<const View557*>(this);
     Collector557* out=reinterpret_cast<Collector557*>(collector);
     out->Begin(&DAT_00e801c8,2,self);

@@ -1084,7 +1084,8 @@ struct ThreadMemory {
         stackCurrent = p;
         if (p == stackBase) OnStackUnderflow(p);
     }
-    void* AllocateBlock() {
+    // pdb: hkpSimpleContactConstraintAtomUtil::allocateAtom | hkpConstraintAtomUtil.obj | fnv360_0822_retail, call_seq, high (was: AllocateBlock)
+    void* hkpSimpleContactConstraintAtomUtil_allocateAtom() {
         FreeNode* node = freeList;
         if (node) {
             --freeCount;
@@ -1257,7 +1258,7 @@ struct FUN_0095b330 {
     int reserved20, reserved24, reserved28, reserved2c, reserved30, reserved34, reserved38, reserved3c;
     int reserved40, reserved44;
     FUN_0095b330(void*);
-    __forceinline static void* operator new(unsigned int) { return RagdollSetup::ThreadMemory::GetInstance()->AllocateBlock(); }
+    __forceinline static void* operator new(unsigned int) { return RagdollSetup::ThreadMemory::GetInstance()->hkpSimpleContactConstraintAtomUtil_allocateAtom(); }
     static void operator delete(void*);
 };
 struct FUN_00963a00 {
@@ -2451,7 +2452,7 @@ struct ParticleTable {
 static __forceinline Runtime* GetEntryRuntime() { return reinterpret_cast<Runtime*>(FUN_00c85750()); }
 extern "C" void __cdecl FUN_00c908c0(Allocator*, EntryArray*, int, unsigned);
 extern "C" Resource* __cdecl FUN_00c802d0(GameForm*);
-extern "C" short __cdecl FindIndexByKey(int,int,int);
+extern "C" short __cdecl hkaSkeletonUtils_findBoneWithName(int,int,int);
 __forceinline void* FUN_00cd8820::operator new(size_t bytes) {
     void* ptr=GetEntryRuntime()->heap().Allocate(bytes);
     static_cast<FUN_00cd8820*>(ptr)->size=(unsigned short)bytes;
@@ -2570,9 +2571,9 @@ void __thiscall ParticleTable::FUN_00c7c3a0(FNVInput* incoming) {
         int second=materialName(secondResource);
         int third=materialName(thirdResource);
         if (second && third && pActorResource!=secondResource && pActorResource!=thirdResource && thirdResource!=secondResource) {
-            scratch.first=FindIndexByKey(owner,first,0);
-            scratch.second=FindIndexByKey(owner,second,0);
-            scratch.third=FindIndexByKey(owner,third,0);
+            scratch.first=hkaSkeletonUtils_findBoneWithName(owner,first,0);
+            scratch.second=hkaSkeletonUtils_findBoneWithName(owner,second,0);
+            scratch.third=hkaSkeletonUtils_findBoneWithName(owner,third,0);
             if (scratch.first!=-1 && scratch.second!=-1 && scratch.third!=-1)
                 entries[i].record=new FUN_0095b9c0(scratch);
         }

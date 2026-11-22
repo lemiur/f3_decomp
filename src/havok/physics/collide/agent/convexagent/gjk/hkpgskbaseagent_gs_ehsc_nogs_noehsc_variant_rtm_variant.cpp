@@ -42,7 +42,7 @@ public:
     int unk1c;
     __m128 m_20;
 
-    void SetValueIfExpected(float expected, float value, int unused);
+    void hkpGskBaseAgent_warpTime(float expected, float value, int unused);
 };
 extern unsigned int DAT_0126835c;
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long);
@@ -97,7 +97,7 @@ public:
     int unk08;
     int unk0c;
 
-    void ProcessGskContact(const hkpCdBody* bodyA, const hkpCdBody* bodyB, const GskAgentInput* input, hkpCdPointCollector* collector);
+    void hkpGskBaseAgent_getClosestPoints(const hkpCdBody* bodyA, const hkpCdBody* bodyB, const GskAgentInput* input, hkpCdPointCollector* collector);
 };
 struct StringCursor {
     void* m_kRayStart;
@@ -393,7 +393,7 @@ struct S_00dac2b0_Collector {
     virtual void v0();
     virtual void AddCdBodyPair(const S_00dac2b0_Body& a, const S_00dac2b0_Body& b);
 };
-void __cdecl TestGsk(const S_00dac2b0_Body& bodyA, const S_00dac2b0_Body& bodyB, const void* input, S_00dac2b0_Collector& collector);
+void __cdecl hkpGskBaseAgent_staticGetPenetrations(const S_00dac2b0_Body& bodyA, const S_00dac2b0_Body& bodyB, const void* input, S_00dac2b0_Collector& collector);
 union EarlyScratch { volatile unsigned int ticks; int result; float distance; };
 extern "C" __m128 _mm_add_ps(__m128, __m128);
 extern "C" __m128 _mm_mul_ps(__m128, __m128);

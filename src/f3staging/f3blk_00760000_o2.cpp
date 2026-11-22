@@ -10846,7 +10846,8 @@ namespace n764130 {
 struct Stream {
     char bytes[0x20];
     void FUN_006e0750(void* data, unsigned int size);
-    bool HasFlag() { return (*(unsigned int*)&bytes[0x17] >> 0x14) & 1; }
+    // pdb: hkClassMember::isNotOwner | hkClassMember.obj | fnv360_0822_retail, objrun, high (was: HasFlag)
+    bool hkClassMember_isNotOwner() { return (*(unsigned int*)&bytes[0x17] >> 0x14) & 1; }
 };
 struct Sub { void FUN_0076b140(Stream* s); };
 }
@@ -10862,7 +10863,7 @@ struct FUN_00764130_t {
 void FUN_00764130_t::FUN_00764130(n764130::Stream* s) {
     FUN_0074f430(s);
     s->FUN_006e0750(&mb4, 4);
-    if (s->HasFlag())
+    if (s->hkClassMember_isNotOwner())
         sb8.FUN_0076b140(s);
 }
 }   // namespace f3m_00764130
@@ -39596,7 +39597,8 @@ int unk094;
 int unk098;
 };
 struct AVOwner {virtual void a00();virtual void a04();virtual void a08();virtual float Current(int);};
-struct Info {int unk00;int unk04;int unk08;int unk0c;int unk10;int unk14;int unk18;int unk1c;int unk20;int unk24;int unk28;int unk2c;int unk30;int unk34;int unk38;int unk3c;int unk40;unsigned flags;bool HasFlag(unsigned mask){return (flags&mask)!=0;}};
+// pdb: hkClassMember::isNotOwner | hkClassMember.obj | fnv360_0822_retail, objrun, high (was: HasFlag)
+struct Info {int unk00;int unk04;int unk08;int unk0c;int unk10;int unk14;int unk18;int unk1c;int unk20;int unk24;int unk28;int unk2c;int unk30;int unk34;int unk38;int unk3c;int unk40;unsigned flags;bool hkClassMember_isNotOwner(unsigned mask){return (flags&mask)!=0;}};
 extern Info* DAT_01073eb8[];
 bool FUN_005a25b0(int);float FUN_0076a7a0(float,float,int);void FUN_0061b6d0(int);void FUN_005a25e0(AVOwner*,int,float,float,AVOwner*);
 struct Actor:Primary,AVOwner {
@@ -39766,7 +39768,7 @@ bool FUN_0076ced0(int,float);float FUN_006f50b0(int,float,Actor*);void FUN_00634
 };
 void Actor::FUN_0076e6a0(int av,float amount,Actor* source){
  if(!FUN_0076ced0(av,amount))return;
- if(DAT_01073eb8[av]->HasFlag(0x100))return;
+ if(DAT_01073eb8[av]->hkClassMember_isNotOwner(0x100))return;
  amount=FUN_006f50b0(av,amount,source);
  float old=FUN_005a25b0(av)?Current(av):0.0f;
  if(av!=-1)values[av]=FUN_0076a7a0(values[av],amount,2);

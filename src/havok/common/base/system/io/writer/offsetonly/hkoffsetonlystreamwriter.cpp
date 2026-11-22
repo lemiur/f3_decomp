@@ -68,14 +68,15 @@ class FUN_00e02e90_cls
     int unk04;
     int m_08;
     int m_0c;
-    int ApplyValue(int value, int mode);
+    int hkOffsetOnlyStreamWriter_seek(int value, int mode);
 };
 
 // Applies value to m_08 according to mode (set, add, or subtract from m_0c), then stores the larger of m_08 and m_0c into m_0c and returns 0.
 // @fnv 0x00e02e90
 // pdb: hkOffsetOnlyStreamWriter::seek | hkOffsetOnlyStreamWriter.obj | fnv360_0822_retail, vtable, high
 // pdb params: offset, whence
-int FUN_00e02e90_cls::ApplyValue(int value, int mode)
+// pdb: hkOffsetOnlyStreamWriter::seek | hkOffsetOnlyStreamWriter.obj | fnv360_0822_retail, vtable, high (was: ApplyValue)
+int FUN_00e02e90_cls::hkOffsetOnlyStreamWriter_seek(int value, int mode)
 {
     switch (mode)
     {

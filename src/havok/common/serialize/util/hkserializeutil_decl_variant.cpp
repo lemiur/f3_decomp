@@ -220,7 +220,7 @@ struct FUN_00d49420_cls
     int unk04;
     PairVt* m_08;
 
-    Obj1* ProcessPair(Obj1* apArg1, Obj2* apArg2);
+    Obj1* hkpMultiThreadedSimulation_MtEntityEntityBroadPhaseListener_addCollisionPair(Obj1* apArg1, Obj2* apArg2);
     void unk20(Obj1* apA, void* apB, void* apC);
 };
 

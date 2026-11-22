@@ -165,7 +165,8 @@ struct Dispatch
 // @fnv 0x00d42710
 // pdb: hkpPhantomAgent::getPenetrations | hkpPhantomAgent.obj | fnv360_0822_retail, vtable, high
 // pdb params: bodyA, bodyB, input, collector
-int __stdcall DispatchToV04(void* apFirst, void* apSecond, void* apThird, Dispatch* apDispatch)
+// pdb: hkpPhantomAgent::getPenetrations | hkpPhantomAgent.obj | fnv360_0822_retail, vtable, high (was: DispatchToV04)
+int __stdcall hkpPhantomAgent_getPenetrations(void* apFirst, void* apSecond, void* apThird, Dispatch* apDispatch)
 {
     return apDispatch->V04(apFirst, apSecond);
 }
@@ -179,7 +180,8 @@ struct FUN_00d42730_obj
 // @fnv 0x00d42730
 // pdb: hkpPhantomAgent::staticGetPenetrations | hkpPhantomAgent.obj | fnv360_0822_retail, objrun, high
 // pdb params: bodyA, bodyB, input, collector
-int __cdecl CallVirtualMethod(int a1, int a2, int aiUnused, FUN_00d42730_obj* apObj)
+// pdb: hkpPhantomAgent::staticGetPenetrations | hkpPhantomAgent.obj | fnv360_0822_retail, objrun, high (was: CallVirtualMethod)
+int __cdecl hkpPhantomAgent_staticGetPenetrations(int a1, int a2, int aiUnused, FUN_00d42730_obj* apObj)
 {
     return apObj->v1(a1, a2);
 }

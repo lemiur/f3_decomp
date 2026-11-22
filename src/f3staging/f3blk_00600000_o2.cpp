@@ -6492,14 +6492,15 @@ class BGSMessage : public TESForm { public:
  int unk2c;
  int unk30;
  int unk34;
- unsigned flags; bool HasFlag() const { return (flags >> 1) & 1; } };
+ // pdb: hkClassMember::isNotOwner | hkClassMember.obj | fnv360_0822_retail, objrun, high (was: HasFlag)
+ unsigned flags; bool hkClassMember_isNotOwner() const { return (flags >> 1) & 1; } };
 namespace N61ED70 {
 TESForm* __cdecl TESForm_GetFormByNumericID(unsigned);
 struct Entry { unsigned active:1; unsigned blocked:1; unsigned control:6; unsigned payload:24; };
 struct Map { Entry entries[29]; bool InterfaceManager_TutorialManager_ShowMessage(unsigned,unsigned,unsigned); };
 }
 // pdb: InterfaceManager::TutorialManager::ShowMessage | InterfaceManager.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
-bool N61ED70::Map::InterfaceManager_TutorialManager_ShowMessage(unsigned index,unsigned trait,unsigned payload) { bool active=false; if(index<=28) { entries[index].payload=payload; if(trait>=1001 && trait<=1060) { entries[index].control=trait-1001; TESForm* form=TESForm_GetFormByNumericID(index+0x168); BGSMessage* message=form ? dynamic_cast<BGSMessage*>(form) : 0; active = message && message->HasFlag() && !entries[index].blocked; } entries[index].active=active; } return active; }
+bool N61ED70::Map::InterfaceManager_TutorialManager_ShowMessage(unsigned index,unsigned trait,unsigned payload) { bool active=false; if(index<=28) { entries[index].payload=payload; if(trait>=1001 && trait<=1060) { entries[index].control=trait-1001; TESForm* form=TESForm_GetFormByNumericID(index+0x168); BGSMessage* message=form ? dynamic_cast<BGSMessage*>(form) : 0; active = message && message->hkClassMember_isNotOwner() && !entries[index].blocked; } entries[index].active=active; } return active; }
 
 
 
@@ -16850,7 +16851,7 @@ namespace N60EE30 {struct Node{
  int unknown20;
  int unknown24;
  Node**previous;Node*next;};}
-// pdb: AStarNodeHeap<ParentSpaceNode,TeleportLink,512>::AllocateNode | TeleportDoorSearch.obj | fnv360_0822_retail, caller, medium
+// pdb: AStarNodeHeap<ParentSpaceNode,TeleportLink,512>::hkpMoppDefaultSplitter_createTerminal | TeleportDoorSearch.obj | fnv360_0822_retail, caller, medium
 void __stdcall FUN_0060ee30(N60EE30::Node*node){if(node->previous)*node->previous=node->next;if(node->next)node->next->previous=node->previous;node->previous=0;node->next=0;}
 }   // namespace f3m_0060ee30
 

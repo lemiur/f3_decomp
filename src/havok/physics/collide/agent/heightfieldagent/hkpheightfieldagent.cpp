@@ -124,13 +124,14 @@ struct Owner {
     Handler* callback;
     unsigned short* indices;
     int count;
-    void NotifyAndClear(int value);
+    void hkpHeightFieldAgent_cleanup(int value);
 };
 // Invokes callback->invoke for each non-0xffff entry in indices, then calls clear(1).
 // @fnv 0x00d31770
 // pdb: hkpHeightFieldAgent::cleanup | hkpHeightFieldAgent.obj | fnv360_0822_retail, vtable, high
 // pdb params: constraintOwner
-void Owner::NotifyAndClear(int value) {
+// pdb: hkpHeightFieldAgent::cleanup | hkpHeightFieldAgent.obj | fnv360_0822_retail, vtable, high (was: NotifyAndClear)
+void Owner::hkpHeightFieldAgent_cleanup(int value) {
     if (callback) {
         for(int index=0; index<count; ++index) {
             unsigned short item=indices[index];

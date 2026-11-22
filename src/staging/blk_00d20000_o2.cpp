@@ -62,7 +62,7 @@ void __cdecl FUN_00d36bb0(void** p)
 
 extern "C" void __cdecl FUN_00d36be0();
 extern "C" void __cdecl FUN_00d43dc0();
-extern "C" void __cdecl GetClosestPointsShapeCollection();
+extern "C" void __cdecl hkpShapeCollectionAgent_staticGetClosestPoints();
 extern "C" void __cdecl FUN_00d43b90();
 
 // Writes four function pointers into the object at offsets 0, 4, 8 and 12, then sets the bytes at offsets 16 and 17 to 1.
@@ -72,7 +72,7 @@ void __cdecl hkpListAgent_initAgentFunc(void* apObject)
 {
     *(void**)apObject = &FUN_00d36be0;
     *(void**)((char*)apObject + 4) = &FUN_00d43dc0;
-    *(void**)((char*)apObject + 8) = &GetClosestPointsShapeCollection;
+    *(void**)((char*)apObject + 8) = &hkpShapeCollectionAgent_staticGetClosestPoints;
     *(void**)((char*)apObject + 12) = &FUN_00d43b90;
     *(unsigned char*)((char*)apObject + 16) = 1;
     *(unsigned char*)((char*)apObject + 17) = 1;
@@ -141,7 +141,8 @@ struct FUN_00db0920 {
 // @fnv 0x00d3fdf0
 // pdb: hkBoxBoxAgent3::create | hkpBoxBoxAgent3.obj | fnv360_0822_retail, caller_sim, high
 // pdb params: input, entry, agentData
-void* __cdecl InitAndGetOffset(void* apUnused1, void* apUnused2, void* apObject)
+// pdb: hkBoxBoxAgent3::create | hkpBoxBoxAgent3.obj | fnv360_0822_retail, caller_sim, high (was: InitAndGetOffset)
+void* __cdecl hkBoxBoxAgent3_create(void* apUnused1, void* apUnused2, void* apObject)
 {
     if (apObject)
         ((FUN_00db0920*)apObject)->Init();
@@ -209,7 +210,8 @@ void __cdecl FUN_00d2dc70(Agent* pAgent)
 // @f3 0x009a91b0 (community match, verified in this file)
 // pdb: hkpWorldConstraintUtil::updateFatherOfMovedAtom | hkpWorldConstraintUtil.obj | fnv360_0822_retail, call_seq, high
 // pdb params: instance, oldAtom, updatedAtom, updatedSizeOfAtom
-void ReplaceEntry(int pList, int pOldEntry, int pNewEntry, unsigned short usValue)
+// pdb: hkpWorldConstraintUtil::updateFatherOfMovedAtom | hkpWorldConstraintUtil.obj | fnv360_0822_retail, call_seq, high (was: ReplaceEntry)
+void hkpWorldConstraintUtil_updateFatherOfMovedAtom(int pList, int pOldEntry, int pNewEntry, unsigned short usValue)
 {
     int iVar1 = *(int*)(pList + 0x10);
     int pCached = *(int*)(pList + 0x28);
@@ -1052,7 +1054,8 @@ struct FUN_00d3fda0_table {
 // @fnv 0x00d3fda0
 // pdb: hkBoxBoxAgent3::commitPotential | hkpBoxBoxAgent3.obj | fnv360_0822_retail, objrun, high
 // pdb params: entry, agentData, idToCommit
-int __cdecl FindOrClaimEntry(int unused, FUN_00d3fda0_table* table, unsigned short value) {
+// pdb: hkBoxBoxAgent3::commitPotential | hkpBoxBoxAgent3.obj | fnv360_0822_retail, objrun, high (was: FindOrClaimEntry)
+int __cdecl hkBoxBoxAgent3_commitPotential(int unused, FUN_00d3fda0_table* table, unsigned short value) {
     int i = 0;
     int n = table->count;
     if (n > 0) {
@@ -1107,7 +1110,8 @@ public:
 // @fnv 0x00d3fe10
 // pdb: hkBoxBoxAgent3::cleanup | hkpBoxBoxAgent3.obj | fnv360_0822_retail, objrun, high
 // pdb params: entry, agentData, mgr, constraintOwner
-D3FE10Entry* __cdecl ResetEntryAgents(D3FE10Header* pkHeader, D3FE10Entry* pkEntry, D3FE10Manager* pkManager, void* pkInfo)
+// pdb: hkBoxBoxAgent3::cleanup | hkpBoxBoxAgent3.obj | fnv360_0822_retail, objrun, high (was: ResetEntryAgents)
+D3FE10Entry* __cdecl hkBoxBoxAgent3_cleanup(D3FE10Header* pkHeader, D3FE10Entry* pkEntry, D3FE10Manager* pkManager, void* pkInfo)
 {
     for (int i = 0; i < pkEntry->m_numAgents; i++) {
         unsigned short id = pkEntry->m_pAgents[i].m_iOwnerObjectOffset;
@@ -1132,17 +1136,17 @@ public:
 extern int DAT_010ce81c;
 struct SpawnedBuf { void* m_iWordAt00; unsigned char m_iWordAt04; int m_8; };
 struct Wrapper {
-    void ForwardToFunction(int,int,int,SpawnedBuf*);
+    void hkpMultiRayConvexAgent_getPenetrations(int,int,int,SpawnedBuf*);
     void FUN_00d37bd0(int a,int b,int c,int d);
 };
-// Builds a SpawnedBuf pointing at DAT_010ce81c with the given value and passes it to ForwardToFunction along with b, a and c.
+// Builds a SpawnedBuf pointing at DAT_010ce81c with the given value and passes it to hkpMultiRayConvexAgent_getPenetrations along with b, a and c.
 // @fnv 0x00d37bd0
 // pdb: hkpSymmetricAgentLinearCast<hkpMultiRayConvexAgent>::getPenetrations | hkpMultiRayConvexAgent.obj | fnv360_0822_debug, objrun, high
 // pdb params: bodyA, bodyB, input, collector
 void Wrapper::FUN_00d37bd0(int a,int b,int c,int d) {
     SpawnedBuf s;
     s.m_8=d; s.m_iWordAt04=0; s.m_iWordAt00=&DAT_010ce81c;
-    ForwardToFunction(b,a,c,&s);
+    hkpMultiRayConvexAgent_getPenetrations(b,a,c,&s);
 }
 
 typedef void (*CallbackD3D)();
@@ -1883,7 +1887,7 @@ extern unsigned char DAT_011b4284;
 
 extern float DAT_0104da48;
 extern unsigned char DAT_010ce7fc;
-extern "C" void __cdecl GetClosestPointsShapeCollection();
+extern "C" void __cdecl hkpShapeCollectionAgent_staticGetClosestPoints();
 
 struct D347D0Query {
     const unsigned char* descriptor;
@@ -1891,7 +1895,7 @@ struct D347D0Query {
     unsigned int filter;
 };
 
-// Builds a D347D0Query from DAT_010ce7fc, DAT_0104da48 and filter, then calls GetClosestPointsShapeCollection with b, a, c and the query.
+// Builds a D347D0Query from DAT_010ce7fc, DAT_0104da48 and filter, then calls hkpShapeCollectionAgent_staticGetClosestPoints with b, a, c and the query.
 // @fnv 0x00d347d0
 // pdb: hkpSymmetricAgentLinearCast<hkpShapeCollectionAgent>::staticGetClosestPoints | hkpConvexListAgent.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
 // pdb params: bodyA, bodyB, input, collector
@@ -1899,7 +1903,7 @@ void __cdecl QueryClosestPoints(void* a, void* b, void* c, unsigned int filter)
 {
     D347D0Query query = { &DAT_010ce7fc, DAT_0104da48, filter };
     typedef void (__cdecl *Dispatch)(void*, void*, void*, D347D0Query*);
-    ((Dispatch)GetClosestPointsShapeCollection)(b, a, c, &query);
+    ((Dispatch)hkpShapeCollectionAgent_staticGetClosestPoints)(b, a, c, &query);
 }
 
 extern float DAT_0104da48;
@@ -2126,7 +2130,7 @@ struct S00d281b0_IntArray {
 struct S00d281b0_Target {
     S00d281b0_IntArray* indices;
     int count;
-    int MoveLargestToFirst(S00d281b0_IntArray* values);
+    int hkUnionFind_moveBiggestGroupToIndexZero(S00d281b0_IntArray* values);
 };
 
 // Finds the index of the largest value in values, swaps it with the first element, and remaps this->indices through the swap permutation.
@@ -2158,7 +2162,8 @@ struct FUN_00d9b_bump
 
 // pdb: hkUnionFind::moveBiggestGroupToIndexZero | hkUnionFind.obj | fnv360_0822_retail, call_gap_sim, high
 // pdb params: elementsPerGroup
-int S00d281b0_Target::MoveLargestToFirst(S00d281b0_IntArray* values)
+// pdb: hkUnionFind::moveBiggestGroupToIndexZero | hkUnionFind.obj | fnv360_0822_retail, call_gap_sim, high (was: MoveLargestToFirst)
+int S00d281b0_Target::hkUnionFind_moveBiggestGroupToIndexZero(S00d281b0_IntArray* values)
 {
     int largest = 0;
     int size = values->count;

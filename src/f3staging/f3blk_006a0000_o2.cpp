@@ -53504,7 +53504,8 @@ struct Table { void* unk00; void* unk04; Node* (__thiscall* list)(Owner*); };
 struct Owner { Table* table; bool FUN_006b6e50(); };
 
 
-inline bool HasFlag(Sub2* f) { return f->unk58 >> 2 & 1; }
+// pdb: hkClassMember::isNotOwner | hkClassMember.obj | fnv360_0822_retail, objrun, high (was: HasFlag)
+inline bool hkClassMember_isNotOwner(Sub2* f) { return f->unk58 >> 2 & 1; }
 
 // pdb: MagicTarget::HasDamageHealthEffect | MagicTarget.obj | fnv360_0822_retail, call_gap_sim, low
 bool Owner::FUN_006b6e50()
@@ -53522,7 +53523,7 @@ bool Owner::FUN_006b6e50()
             Sub2*& form = sub->unk14;
             if (form->UsesValue())
                 if (sub->ValueType()==0x10)
-                    if (HasFlag(form))
+                    if (hkClassMember_isNotOwner(form))
                         result = true;
         }
         node = node->next;
@@ -58091,7 +58092,8 @@ struct Setting807
 {
     void* m_pvVtbl;
     bool m_bValue;
-    bool* GetBool() { return &m_bValue; }
+    // pdb: hkBufferedStreamWriter::isOk | hkBufferedStreamWriter.obj | fnv360_0822_retail, vtable, high (was: GetBool)
+    bool* hkBufferedStreamWriter_isOk() { return &m_bValue; }
 };
 extern Setting807 DAT_01077d08;
 
@@ -58317,7 +58319,7 @@ void Listener807::FUN_006a3250(Event807* pkEvent)
         return;
     if (pkActor && pkActor->IsStateActive())
         return;
-    if (*DAT_01077d08.GetBool())
+    if (*DAT_01077d08.hkBufferedStreamWriter_isOk())
     {
         EventCopy807 kCopy(pkEvent);
         NiNode* pkNodeA = GetDebugNode807(kCopy.m_pkBodyA->m_pkOwner);
@@ -58349,7 +58351,7 @@ void Listener807::FUN_006a3250(Event807* pkEvent)
     }
     NiPoint3 kPos;
     HavokToNi807(kPos, pkEvent->m_kPosition);
-    if (*DAT_01077d08.GetBool())
+    if (*DAT_01077d08.hkBufferedStreamWriter_isOk())
     {
         NiNode* pkMarker = FUN_00479c00(5.0f, ColorA807(1.0f, 0.0f, 0.0f, 1.0f), 1);
         pkMarker->m_kTranslate = kPos;

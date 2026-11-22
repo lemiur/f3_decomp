@@ -37,7 +37,7 @@ struct D92740Block
     unsigned short m_extra;
 };
 
-D92740Block* __cdecl AllocateBlock(int capacity, int typeA, int typeB, int extra);
+D92740Block* __cdecl hkpSimpleContactConstraintAtomUtil_allocateAtom(int capacity, int typeA, int typeB, int extra);
 
 // @f3 0x00a26c20 (community match, verified in this file)
 struct D92740Block;
@@ -51,7 +51,8 @@ extern unsigned int DAT_010f3170;
 __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long dwTlsIndex);
 // pdb: hkpSimpleContactConstraintAtomUtil::optimizeCapacity | hkpConstraintAtomUtil.obj | fnv360_0822_retail, caller_sim, high
 // pdb params: oldAtom_mightGetDeallocated, numFreeElemsLeft, atomReallocated
-D92740Block* __cdecl ShrinkBlockIfSparse(D92740Block* block, int numToAdd, bool* pbResized)
+// pdb: hkpSimpleContactConstraintAtomUtil::optimizeCapacity | hkpConstraintAtomUtil.obj | fnv360_0822_retail, caller_sim, high (was: ShrinkBlockIfSparse)
+D92740Block* __cdecl hkpSimpleContactConstraintAtomUtil_optimizeCapacity(D92740Block* block, int numToAdd, bool* pbResized)
 {
     if ((block->m_iAllocatedCount + numToAdd) * 2 <= block->m_pRayCursor)
     {
@@ -97,7 +98,8 @@ struct Block_w152_f2
 };
 // pdb: hkpSimpleContactConstraintAtomUtil::allocateAtom | hkpConstraintAtomUtil.obj | fnv360_0822_retail, call_seq, high
 // pdb params: numReservedContactPoints, numExtraUserDatasA, numExtraUserDatasB, maxNumContactPoints
-D92740Block* __cdecl AllocateBlock(int capacity, int typeA, int typeB, int extra)
+// pdb: hkpSimpleContactConstraintAtomUtil::allocateAtom | hkpConstraintAtomUtil.obj | fnv360_0822_retail, call_seq, high (was: AllocateBlock)
+D92740Block* __cdecl hkpSimpleContactConstraintAtomUtil_allocateAtom(int capacity, int typeA, int typeB, int extra)
 {
     unsigned int uiTypeSum;
     uiTypeSum = (unsigned int)typeA + (unsigned int)typeB;

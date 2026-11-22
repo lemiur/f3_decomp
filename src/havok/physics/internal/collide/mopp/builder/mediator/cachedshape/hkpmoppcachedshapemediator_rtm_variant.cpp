@@ -2,8 +2,8 @@
 // with VC9 RTM (cl 15.00.21022.08, the compiler the game was built with). Declarations copied from that unit's skeleton.
 
 #include "f3_common.h"
-int __stdcall InitIntToZero(int, int* piValue);
-void __stdcall CopyFivePointers(const void* apSource, void* apUnused1, void* apUnused2, void* apUnused3, void* apDest);
+int __stdcall hkpMoppCachedShapeMediator_getPrimitiveProperties(int, int* piValue);
+void __stdcall hkpMoppCachedShapeMediator_splitPrimitive(const void* apSource, void* apUnused1, void* apUnused2, void* apUnused3, void* apDest);
 struct S_00d54cd0_Base
 {
     void* vtbl;

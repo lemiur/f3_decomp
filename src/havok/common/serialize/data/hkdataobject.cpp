@@ -339,7 +339,7 @@ struct Wrapper
 {
     Target* target;
     void* value;
-    void ApplyValue();
+    void hkOffsetOnlyStreamWriter_seek();
 };
 }  // namespace fnv_00dbac80
 

@@ -215,7 +215,8 @@ extern void* __cdecl FUN_00d65910(void*);
 
 // @fnv 0x00d65950
 // pdb: hkpMousePickingViewer::registerViewer | hkpMousePickingViewer.obj | fnv360_0822_debug, udata, high
-void RegisterShapesProcess()
+// pdb: hkpMousePickingViewer::registerViewer | hkpMousePickingViewer.obj | fnv360_0822_debug, udata, high (was: RegisterShapesProcess)
+void hkpMousePickingViewer_registerViewer()
 {
     void* process = FUN_00dd9380->FUN_00dd9380("Shapes", (void*)&FUN_00d65910);
     *(void**)((char*)&g_01268f2c + 0xB4) = process;

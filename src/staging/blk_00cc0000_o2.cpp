@@ -12228,7 +12228,7 @@ void* hkObjCC01::DispatchToTarget(void* pv)
     return pv;
 }
 
-extern "C" int __cdecl Vsnprintf(char* dst, int maxlen, const char* fmt, ...);
+extern "C" int __cdecl hkString_snprintf(char* dst, int maxlen, const char* fmt, ...);
 extern "C" int __cdecl hkString_strLen(const char* s);
 
 struct hkStreamWriter {
@@ -12863,7 +12863,7 @@ CC0280Writer* CC0280Writer::WriteBool(bool abValue)
 }
 
 int __cdecl hkString_strLen(int);
-int __cdecl Vsnprintf(char*, unsigned int, const char*, ...);
+int __cdecl hkString_snprintf(char*, unsigned int, const char*, ...);
 
 struct WriterObj {
     virtual void v00();
@@ -12895,7 +12895,7 @@ struct FUN_00cc01e0_class {
 FUN_00cc01e0_class* FUN_00cc01e0_class::WriteShort(short asValue)
 {
     int buf[2506];
-    Vsnprintf((char*)buf, 0x2728, "%i", asValue);
+    hkString_snprintf((char*)buf, 0x2728, "%i", asValue);
     FUN_00cc0080(m_obj, (char*)buf);
     return this;
 }
@@ -13403,7 +13403,7 @@ struct Cc0230Self {
 Cc0230Self* Cc0230Self::WriteUInt16(unsigned short w)
 {
 	CcScratchBuf buffer;
-	Vsnprintf((char*)&buffer, 10024, "%u", w);
+	hkString_snprintf((char*)&buffer, 10024, "%u", w);
 	FUN_00cc0080(unk08, (const char*)&buffer);
 	return this;
 }
@@ -13423,7 +13423,7 @@ struct FloatArgStream {
 // pdb params: f
 FloatArgStream* FloatArgStream::WriteFloat(float value) {
     int buf[2506];
-    Vsnprintf((char*)buf, 0x2728, str_01094cf0, value);
+    hkString_snprintf((char*)buf, 0x2728, str_01094cf0, value);
     FUN_00cc0080((hkStreamWriter*)m_pSharedOwner, (const char*)buf);
     return this;
 }
@@ -16366,9 +16366,9 @@ struct ConstraintRecord {
         return FUN_00c85750()->heap().AllocateMemoryBlock(n);
     }
 };
-void* __cdecl FindModifierConstraintAtom(void*, int);
+void* __cdecl hkpWorldConstraintUtil_findModifier(void*, int);
 
-void* __cdecl FindModifierConstraintAtom(void* p, int type);
+void* __cdecl hkpWorldConstraintUtil_findModifier(void* p, int type);
 
 #include <xmmintrin.h>
 namespace CE6Memory {

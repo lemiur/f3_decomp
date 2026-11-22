@@ -44,7 +44,7 @@ struct CachedBlockAllocator
     int batchCount;
     Cache caches[17];
     int blockSizes[17];
-    void* AllocateBlock(int index);
+    void* hkpSimpleContactConstraintAtomUtil_allocateAtom(int index);
     __forceinline void* AllocateBatchCached(int index, int count)
     {
         Block* blocks[4];
@@ -177,7 +177,7 @@ struct Allocator : FUN_00d2c3a0_class
     FreeNode* FUN_00d2c5a0(int size);
 };
 // The target helper ignores EDX; this ABI-compatible signature keeps its this pointer in ECX and bucket on the stack.
-extern "C" FreeNode* __fastcall AllocateBlock(Allocator* self, int unused, int bucket);
+extern "C" FreeNode* __fastcall hkpSimpleContactConstraintAtomUtil_allocateAtom(Allocator* self, int unused, int bucket);
 }  // namespace fnv_00d2c5a0
 
 struct FUN_00d2c7a0_Slot

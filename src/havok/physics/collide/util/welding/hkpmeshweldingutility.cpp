@@ -255,7 +255,8 @@ __declspec(noinline) char* hkpMeshWeldingUtility_calcBitcodeForTriangleEdge(char
 
 // pdb: hkpMeshWeldingUtility::isTriangleWindingValid | hkpMeshWeldingUtility.obj | fnv360_0822_retail, uconst, high
 // pdb params: shapeKey, bvTreeShape
-bool* CheckSubQueries(bool* result, void* key, Iface* self)
+// pdb: hkpMeshWeldingUtility::isTriangleWindingValid | hkpMeshWeldingUtility.obj | fnv360_0822_retail, uconst, high (was: CheckSubQueries)
+bool* hkpMeshWeldingUtility_isTriangleWindingValid(bool* result, void* key, Iface* self)
 {
     QueryBuffer queryBuf;
     TopIface* top = (TopIface*)self;

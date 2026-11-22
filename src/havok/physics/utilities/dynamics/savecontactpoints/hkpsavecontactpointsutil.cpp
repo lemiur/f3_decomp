@@ -1928,7 +1928,7 @@ void FUN_00dcdd80(void* a, S_00dcdd80_Item** items, int count, S_00dcdd80_Listen
 
 namespace fnv_00dcde10 {
 void* __cdecl FUN_00cb1260(void*, const void*, unsigned int);
-int __cdecl CopyAudioNodeTree(void*, void*, void*);
+int __cdecl hkpSaveContactPointsUtil_deserialize1nTrack(void*, void*, void*);
 int hkpSaveContactPointsUtil_getSerializedAgentType(void* p)
 {
     if (p == reinterpret_cast<void*>(&FUN_00d3fe90))
@@ -1970,9 +1970,10 @@ extern "C" void FUN_009234e0(void*, const void*, int);
 extern "C" int __cdecl FUN_00a4cba0(void*);
 extern "C" void* __cdecl FUN_009bc8a0(unsigned char*, unsigned char*);
 extern "C" int __cdecl FUN_00a4d280(void*, char**, void*);
-int __cdecl DispatchInstruction(char*, int, void*, char**, unsigned char*);
-namespace fnv_00dcde10 { int __cdecl DispatchInstruction(char*, int, void*, char**, unsigned char*); }
-int __cdecl ::fnv_00dcde10::DispatchInstruction(char* source, int kind, void* context,
+int __cdecl hkpSaveContactPointsUtil_deserializeEntry(char*, int, void*, char**, unsigned char*);
+namespace fnv_00dcde10 { int __cdecl hkpSaveContactPointsUtil_deserializeEntry(char*, int, void*, char**, unsigned char*); }
+// pdb: hkpSaveContactPointsUtil::deserializeEntry | hkpSaveContactPointsUtil.obj | fnv360_0822_retail, call_gap_sim, high (was: DispatchInstruction)
+int __cdecl ::fnv_00dcde10::hkpSaveContactPointsUtil_deserializeEntry(char* source, int kind, void* context,
                                 char** registry, unsigned char* instruction)
 {
     struct WbDispatchEntry {
@@ -2289,7 +2290,7 @@ struct Buffer512
     unsigned int m_i1fc;
 };
 
-int __cdecl CopyAudioNodeTree(SrcNode* apSrc, int aiCount, DstBlock* apDst);
+int __cdecl hkpSaveContactPointsUtil_deserialize1nTrack(SrcNode* apSrc, int aiCount, DstBlock* apDst);
 
 // Allocates a 0x200-byte buffer per source buffer, copies each Buffer512 into the destination block, then recurses into child nodes.
 // @f3 0x00a4d280 (community match, verified in this file)
@@ -2341,7 +2342,8 @@ struct BlkPool
 
 // pdb: hkpSaveContactPointsUtil::deserialize1nTrack | hkpSaveContactPointsUtil.obj | fnv360_0822_retail, call_seq, high
 // pdb params: serializedTrack, input, sectorsOut
-int __cdecl CopyAudioNodeTree(SrcNode* apSrc, int aiCount, DstBlock* apDst)
+// pdb: hkpSaveContactPointsUtil::deserialize1nTrack | hkpSaveContactPointsUtil.obj | fnv360_0822_retail, call_seq, high (was: CopyAudioNodeTree)
+int __cdecl hkpSaveContactPointsUtil_deserialize1nTrack(SrcNode* apSrc, int aiCount, DstBlock* apDst)
 {
     int count = apSrc->m_iArrayLength;
     int cap = (int)(apDst->m_uCapBits & 0x3fffffffu);
@@ -2394,7 +2396,7 @@ int __cdecl CopyAudioNodeTree(SrcNode* apSrc, int aiCount, DstBlock* apDst)
             pChildHeader[1] = 0;
             pChildHeader[2] = 0x80000000u;
         }
-        if (CopyAudioNodeTree(item, aiCount, (DstBlock*)uiChildAddr) == 1)
+        if (hkpSaveContactPointsUtil_deserialize1nTrack(item, aiCount, (DstBlock*)uiChildAddr) == 1)
         {
             return 1;
         }
@@ -3403,7 +3405,7 @@ struct Ctx
     void Tail();
 };
 
-void* __cdecl FindEntryValue(unsigned int a, unsigned int b);
+void* __cdecl hkAgentNnMachine_FindAgent(unsigned int a, unsigned int b);
 int __cdecl hkpSaveContactPointsUtil_deserializeCollisionEntry(Resolver* a1, SpawnedItem* item, unsigned int edi, unsigned int ebx, unsigned int ctx78,
                          void* p);
 
@@ -3445,7 +3447,7 @@ void __cdecl hkpSaveContactPointsUtil_loadContactPointsInternal(Resolver* apReso
             continue;
         if (!apVisitor->v01(first) && !apVisitor->v01(second))
             continue;
-        void* p = FindEntryValue(first + 0x10, second + 0x10);
+        void* p = hkAgentNnMachine_FindAgent(first + 0x10, second + 0x10);
         if (p == 0)
             continue;
         if (item->unk10C != 0x103)
@@ -4057,7 +4059,7 @@ struct CountDce
     int u00;
     int u04;
     CountDataDce data;
-    inline void AccumulateStats(struct S00dce180_Instance* constraint, CountInfoDce& delta);
+    inline void hkpConstraintOwner_addConstraintInfo(struct S00dce180_Instance* constraint, CountInfoDce& delta);
     inline void subConstraintInfo(struct S00dce180_Instance* constraint, CountInfoDce& delta);
 };
 struct BodyDce
@@ -7338,10 +7340,10 @@ struct __declspec(align(16)) OutputDce
 
 extern "C" int PickIslandByValue(void* p5, int a, int b);
 extern "C" int DispatchItemToAgent(int a, void* p4, WorkObj* wb, int cc, void* p5);
-extern "C" int DispatchInstruction(NodeDce* p1, int sb, void* inner, void* p4, void* p5);
+extern "C" int hkpSaveContactPointsUtil_deserializeEntry(NodeDce* p1, int sb, void* inner, void* p4, void* p5);
 extern "C" void FUN_00c908c0(void* old, void* bufptr, int nsize, int one);
-extern "C" NodeG* AllocateBlock(int a, int b, int c, int d);
-extern "C" void __fastcall AccumulateStats(void* cc, void* elem, void* a, int* b);
+extern "C" NodeG* hkpSimpleContactConstraintAtomUtil_allocateAtom(int a, int b, int c, int d);
+extern "C" void __fastcall hkpConstraintOwner_addConstraintInfo(void* cc, void* elem, void* a, int* b);
 extern "C" float DAT_0104da48;
 typedef int(__thiscall* FnThiscallInt)(void* self, int a);
 typedef int(__thiscall* FnThiscallInt2)(void* self, int a, int b);
@@ -7398,7 +7400,8 @@ inline void CountDce::subConstraintInfo(S00dce180_Instance* constraint, CountInf
         constraint->m_pConstraintInternal->subConstraintInfo(delta);
     }
 }
-inline void CountDce::AccumulateStats(S00dce180_Instance* constraint, CountInfoDce& delta)
+// pdb: hkpConstraintOwner::addConstraintInfo | hkpWorldOperationUtil.obj | fnv360_0822_retail, caller, high (was: AccumulateStats)
+inline void CountDce::hkpConstraintOwner_addConstraintInfo(S00dce180_Instance* constraint, CountInfoDce& delta)
 {
     if (constraint->m_pConstraintInternal)
     {
@@ -7905,7 +7908,7 @@ int __cdecl hkpSaveContactPointsUtil_deserializeCollisionEntry(Arg0* apFlags, No
             }
         }
         int v = apNode->m_019;
-        if (DispatchInstruction(apNodeRaw, v, &apNode->m_0f4, apContext, p5Raw) == 0)
+        if (hkpSaveContactPointsUtil_deserializeEntry(apNodeRaw, v, &apNode->m_0f4, apContext, p5Raw) == 0)
         {
 
             c->bytes.SetSize(apNode->m_06c);
@@ -7930,7 +7933,7 @@ int __cdecl hkpSaveContactPointsUtil_deserializeCollisionEntry(Arg0* apFlags, No
             NodeG* pBlock = c->m_3c;
             ThreadMemory().FUN_008f6d90(pBlock, pBlock->m_02, 4);
             int entryCount = apNode->m_024;
-            c->m_3c = AllocateBlock(entryCount, apNode->m_028, apNode->m_029, apNode->m_02c);
+            c->m_3c = hkpSimpleContactConstraintAtomUtil_allocateAtom(entryCount, apNode->m_028, apNode->m_029, apNode->m_02c);
             c->m_3c->m_04 = (unsigned short)entryCount;
             c->m_3c->m_block = apNode->m_030;
             c->m_pHavokConstraint.m_pConstraintInternal->m_0c = (int)c->m_3c;

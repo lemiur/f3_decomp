@@ -8,13 +8,14 @@
 extern "C" void __cdecl FUN_00cfdbe0(int, int);
 
 struct FUN_00cf87a0_Class {
-    void __thiscall ForwardToGlobal(int a, int b, int c);
+    void __thiscall hkpSimulation_processAgentResetCollisionInformation(int a, int b, int c);
 };
 
 // @fnv 0x00cf87a0
 // pdb: hkpSimulation::processAgentResetCollisionInformation | hkpSimulation.obj | fnv360_0822_retail, objrun, high
 // pdb params: entry, processInput, processOutput
-void __thiscall FUN_00cf87a0_Class::ForwardToGlobal(int aiArg1, int aiArg2, int aiUnused)
+// pdb: hkpSimulation::processAgentResetCollisionInformation | hkpSimulation.obj | fnv360_0822_retail, objrun, high (was: ForwardToGlobal)
+void __thiscall FUN_00cf87a0_Class::hkpSimulation_processAgentResetCollisionInformation(int aiArg1, int aiArg2, int aiUnused)
 {
     FUN_00cfdbe0(aiArg1, aiArg2);
 }
@@ -176,18 +177,18 @@ hkUint32 hkpSimulation_Derived::FUN_00cf8820()
 }
 
 
-extern "C" void CollectLinearCast();
+extern "C" void hkpSimulation_processAgentCollideDiscrete();
 
 struct FUN_00cfa400_Obj {
     void __thiscall FUN_00cf9480(int a1, int a2, int a3, void (*callback)(), int a5);
     void __thiscall FUN_00cfa400(int a1, int a2, int a3, int a4);
 };
 
-// Forwards the four arguments to FUN_00cf9480, passing CollectLinearCast as the callback.
+// Forwards the four arguments to FUN_00cf9480, passing hkpSimulation_processAgentCollideDiscrete as the callback.
 // @fnv 0x00cfa400
 // pdb: hkpWorld::internal_executePendingOperations | hkpWorld.obj | fnv360_0822_retail, call_seq, low, conflict (skyrim: hkpSimulation::collideEntitiesNarrowPhaseDiscrete)
 void __thiscall FUN_00cfa400_Obj::FUN_00cfa400(int a1, int a2, int a3, int a4) {
-    FUN_00cf9480(a1, a2, a3, CollectLinearCast, a4);
+    FUN_00cf9480(a1, a2, a3, hkpSimulation_processAgentCollideDiscrete, a4);
 }
 
 namespace fnv_00cfa470 {
@@ -505,7 +506,7 @@ struct S00cf8a40_Obj {
     int unk24;
     int m_uiContentCount;
 
-    float GetClampedSimulationTime();
+    float hkpSimulation_snapSimulateTimeAndGetTimeToAdvanceTo();
     int FUN_00cf8a40();
 };
 
@@ -517,7 +518,7 @@ typedef void* (__stdcall *S00cf8a40_TlsFn)(unsigned long);
 
 int S00cf8a40_Obj::FUN_00cf8a40()
 {
-    m_uiCommandId = GetClampedSimulationTime();
+    m_uiCommandId = hkpSimulation_snapSimulateTimeAndGetTimeToAdvanceTo();
     if (m_uiCommandId >= m_pFreeList && m_node->unk13C) {
         S00cf8a40_TlsFn pTlsFn = (S00cf8a40_TlsFn)&TlsGetValue;
         S00cf8a40_Stream* s = (S00cf8a40_Stream*)pTlsFn(DAT_0126835c);
@@ -758,7 +759,8 @@ namespace CastGlobals {extern CastManager* DAT_010f3400;}
 extern float DAT_00de6e60;void __cdecl FUN_00999610(hkpLinearCastInputCF9*,hkpCollisionInputCF9*,hkpCdPointCollectorCF9*,hkpAgentCF9*);
 // pdb: hkpSimulation::processAgentCollideDiscrete | hkpSimulation.obj | fnv360_0822_retail, objrun, high
 // pdb params: entry, processInput, processOutput
-void __stdcall CollectLinearCast(hkpLinearCastInputCF9* linear,hkpCollisionInputCF9* input,hkpCdPointCollectorCF9* collector){collector->m_fEarlyOutDistance=DAT_00de6e60;collector->m_hitCount=0;collector->m_data=collector->m_kStorage;hkpDispatcherCF9* dispatcher=input->m_pCollisionDispatcher;input->m_aiContactPointIds=dispatcher->m_pAgents[0].m_aiContactPointIds;*(void**)((char*)input+0x10)=dispatcher->m_pAgents[linear->m_iType].m_pCreateFunc;FUN_00999610(linear,input,collector,linear->m_pCollisionAgent);CastManager* manager=CastGlobals::DAT_010f3400;CastBool flag;if(!manager->table->query(manager,&flag,0)->value)(CastGlobals::DAT_010f3400)->state=1;if((CastGlobals::DAT_010f3400)->state!=1&&collector->m_data!=collector->m_kStorage)linear->m_pCollisionAgent->getPenetrations(linear->m_pBodyA,linear->m_pBodyB,input,collector);}
+// pdb: hkpSimulation::processAgentCollideDiscrete | hkpSimulation.obj | fnv360_0822_retail, objrun, high (was: CollectLinearCast)
+void __stdcall hkpSimulation_processAgentCollideDiscrete(hkpLinearCastInputCF9* linear,hkpCollisionInputCF9* input,hkpCdPointCollectorCF9* collector){collector->m_fEarlyOutDistance=DAT_00de6e60;collector->m_hitCount=0;collector->m_data=collector->m_kStorage;hkpDispatcherCF9* dispatcher=input->m_pCollisionDispatcher;input->m_aiContactPointIds=dispatcher->m_pAgents[0].m_aiContactPointIds;*(void**)((char*)input+0x10)=dispatcher->m_pAgents[linear->m_iType].m_pCreateFunc;FUN_00999610(linear,input,collector,linear->m_pCollisionAgent);CastManager* manager=CastGlobals::DAT_010f3400;CastBool flag;if(!manager->table->query(manager,&flag,0)->value)(CastGlobals::DAT_010f3400)->state=1;if((CastGlobals::DAT_010f3400)->state!=1&&collector->m_data!=collector->m_kStorage)linear->m_pCollisionAgent->getPenetrations(linear->m_pBodyA,linear->m_pBodyB,input,collector);}
 
 
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long);
@@ -939,7 +941,7 @@ int SimLocal::hkpSimulation_integrate(float physicsDeltaTime)
 }
 
 
-extern "C" void ForwardToGlobal();
+extern "C" void hkpSimulation_processAgentResetCollisionInformation();
 
 struct S00cfa430_Data {
     char pad[0x78];
@@ -1014,12 +1016,13 @@ namespace MathUtilities {
 }
 
 struct Sim : hkpSimulation {
-    float GetClampedSimulationTime();
+    float hkpSimulation_snapSimulateTimeAndGetTimeToAdvanceTo();
 };
 
 // @fnv 0x00cf89c0
 // pdb: hkpSimulation::snapSimulateTimeAndGetTimeToAdvanceTo | hkpSimulation.obj | fnv360_0822_retail, call_seq, high
-float Sim::GetClampedSimulationTime() {
+// pdb: hkpSimulation::snapSimulateTimeAndGetTimeToAdvanceTo | hkpSimulation.obj | fnv360_0822_retail, call_seq, high (was: GetClampedSimulationTime)
+float Sim::hkpSimulation_snapSimulateTimeAndGetTimeToAdvanceTo() {
     if (m_fFrameMarkerTime != -1.0f) {
         if (fabsf(m_fFrameMarkerTime - m_fSimulationTime) < m_fFrameMarkerPsiSnap) {
             m_fFrameMarkerTime = m_fSimulationTime;

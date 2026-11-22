@@ -728,7 +728,7 @@ class NiStream
     virtual void v09();
     virtual void v10();
     virtual void v11();
-    virtual void RegisterObject(NiAVObject*);
+    virtual void hkPackfileWriter_notDuplicateMetaData(NiAVObject*);
     BinaryStream* GetBinaryStream()
     {
         return reinterpret_cast<StreamSlot*>(reinterpret_cast<unsigned char*>(this) + 0x250)->stream;
@@ -752,7 +752,7 @@ void MeshUpdateStreamWriter::NiPSysMeshUpdateModifier_SaveBinary(NiStream* strea
     BinaryStream* binary = stream->GetBinaryStream();
     binary->offset += binary->WriteData(&meshCount, 4);
     for (unsigned int i = 0; i < meshCount; ++i)
-        stream->RegisterObject(m_ppkMeshes[i]);
+        stream->hkPackfileWriter_notDuplicateMetaData(m_ppkMeshes[i]);
 }
 
 extern "C" __declspec(dllimport) long __stdcall InterlockedIncrement(volatile long*);

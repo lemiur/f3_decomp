@@ -41024,7 +41024,8 @@ void FUN_00454010(bool); float FUN_004e6d80(); const char* FUN_004e9a10();
 };
 struct ScaleValue {float value;ScaleValue(float x):value(x){}};
 __forceinline bool SameScale(float x, ModelReference* reference) {ScaleValue saved(x);return reference->FUN_004e6d80()==saved.value;}
-struct ExtraState { int unk00; int unk04; int unk08; unsigned int flags; unsigned char HasFlag(unsigned char bit) const { return (unsigned char)(flags>>bit)&1; } };
+// pdb: hkClassMember::isNotOwner | hkClassMember.obj | fnv360_0822_retail, objrun, high (was: HasFlag)
+struct ExtraState { int unk00; int unk04; int unk08; unsigned int flags; unsigned char hkClassMember_isNotOwner(unsigned char bit) const { return (unsigned char)(flags>>bit)&1; } };
 struct PathLookup { int FUN_0044dbf0(void*); };
 PathLookup* __cdecl FUN_00424d50(void*,const char*); bool __cdecl FUN_00478250(FUN_0082ea60*); bool __cdecl TESHavokUtilities_Should3DRagDoll(ModelReference*,FUN_0082ea60*); bool __cdecl TESModelTextureSwap_HasTextureSwap(ModelForm*,ModelReference*); bool __cdecl FUN_004ec6c0(FUN_0082ea60*); inline int __cdecl DebugPrint(const char*,...) { return 0; }
 inline bool NeedsClone(ModelReference* ref,FUN_0082ea60* node) { return !TESHavokUtilities_Should3DRagDoll(ref,node); }
@@ -41129,7 +41130,8 @@ virtual void unkV16c();
 virtual void unkV170();
 virtual FUN_0082ea60* Load(ModelReference*);
 unsigned char type; unsigned char unk05; unsigned short unk06; unsigned int flags;
-unsigned char HasFlag(unsigned char bit) const { return (unsigned char)(flags>>bit)&1; }
+// pdb: hkClassMember::isNotOwner | hkClassMember.obj | fnv360_0822_retail, objrun, high (was: HasFlag)
+unsigned char hkClassMember_isNotOwner(unsigned char bit) const { return (unsigned char)(flags>>bit)&1; }
 FUN_0082ea60* FUN_004b2df0(ModelReference*,bool); void FUN_004b26a0(ModelReference*,char*);
 };
 // pdb: TESBoundObject::Clone3D | TESObject.obj | fnv360_0822_retail, vtable, medium
@@ -41140,7 +41142,7 @@ if(this==DAT_01071644 || this==DAT_0107166c) reference=0;
 FUN_0082ea60* original=Load(reference);
 if(reference) { SceneForm* base=reference->GetBase(); if(base && base->IsActorLike() && reference->GetBase()->unk04!=0x1e) return original; }
 if(!original) goto finish;
-if(HasFlag(4) && reference) reference->FUN_00454010(true);
+if(hkClassMember_isNotOwner(4) && reference) reference->FUN_00454010(true);
 if(!force && original->unk04==1) {
 bool checkOriginal=true;
 switch(type) {
@@ -41161,7 +41163,7 @@ default: checkOriginal=!TESHavokUtilities_Should3DRagDoll(reference,original); b
 }
 if(checkOriginal) {
  ExtraState* state=(ExtraState*)original->FUN_00824a50(DAT_0116d6e0);
- if(!(state && state->HasFlag(4)) && !TESModelTextureSwap_HasTextureSwap(this,reference) && !FUN_004ec6c0(original)) {
+ if(!(state && state->hkClassMember_isNotOwner(4)) && !TESModelTextureSwap_HasTextureSwap(this,reference) && !FUN_004ec6c0(original)) {
   if(!reference || SameScale(original->unk64,reference)) {result=original;goto reset_result;}
  }
 }
@@ -44326,7 +44328,8 @@ struct LightForm {
     unsigned int unk3c;
     BSStringT name;
 
-    bool HasFlag(unsigned char bit) const { return (unsigned char)(flags >> bit) & 1; }
+    // pdb: hkClassMember::isNotOwner | hkClassMember.obj | fnv360_0822_retail, objrun, high (was: HasFlag)
+    bool hkClassMember_isNotOwner(unsigned char bit) const { return (unsigned char)(flags >> bit) & 1; }
     FUN_00ad2a40* TESObjectLIGH_GenDynamic(ModelRef*, FUN_00ad2a40*, bool);
     FUN_00ad2a40* FUN_004b1cc0(ModelRef* reference);
 };
@@ -44348,7 +44351,7 @@ FUN_00ad2a40* LightForm::FUN_004b1cc0(ModelRef* reference)
                 result->FUN_008245d0(FixedString(Name()));
         }
 
-        if (HasFlag(4) && reference)
+        if (hkClassMember_isNotOwner(4) && reference)
             reference->FUN_00454010(true);
 
         float scale = 1.0f;

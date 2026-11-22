@@ -601,7 +601,7 @@ DB7570Result DB7570Map::Lookup(unsigned int key, unsigned int& valueOut) const
     return DB7570_FAILURE;
 }
 
-extern "C" int __cdecl CompareStringsCaseInsensitive(int a1, int a2);
+extern "C" int __cdecl hkString_strCasecmp(int a1, int a2);
 
 struct FUN_00db75b0_entry
 {
@@ -625,7 +625,7 @@ unsigned int __thiscall FUN_00db75b0_class::hkClassEnum_getValueOfName(int a1, u
     for (int index = 0; index < unk08; ++index)
     {
         unsigned int value = unk04[index].unk04;
-        if (CompareStringsCaseInsensitive(a1, value) == 0)
+        if (hkString_strCasecmp(a1, value) == 0)
         {
             unsigned int result = unk04[index].unk00;
             *a2 = result;

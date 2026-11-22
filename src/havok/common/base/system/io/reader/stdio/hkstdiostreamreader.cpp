@@ -11,14 +11,15 @@ struct FUN_00d2bcd0_class
     void* m_08;
     void* m_0c;
     char m_10;
-    void ReadOrMarkFailed(void* buffer, unsigned int count);
+    void hkStdioStreamReader_read(void* buffer, unsigned int count);
 };
 
 // Reads count bytes from the stream at m_0c into buffer; if fread returns no bytes, sets m_10 to 0.
 // @fnv 0x00d2bcd0
 // pdb: hkStdioStreamReader::read | hkStdioStreamReader.obj | fnv360_0822_retail, vtable, high
 // pdb params: buf, nbytes
-void FUN_00d2bcd0_class::ReadOrMarkFailed(void* buffer, unsigned int count)
+// pdb: hkStdioStreamReader::read | hkStdioStreamReader.obj | fnv360_0822_retail, vtable, high (was: ReadOrMarkFailed)
+void FUN_00d2bcd0_class::hkStdioStreamReader_read(void* buffer, unsigned int count)
 {
     if ((int)fread(buffer, 1, count, m_0c) > 0)
         return;
@@ -109,12 +110,13 @@ struct ReaderWithPosition
     virtual int GetPosition() = 0;
     int unk04;
     int position;
-    int SetPositionFromReader(int unused);
+    int hkSeekableStreamReader_setMark(int unused);
 };
 // @fnv 0x00d2bdd0
 // pdb: hkSeekableStreamReader::setMark | hkStdioStreamReader.obj | fnv360_0822_retail, vtable, high
 // pdb params: markLimit
-int ReaderWithPosition::SetPositionFromReader(int unused)
+// pdb: hkSeekableStreamReader::setMark | hkStdioStreamReader.obj | fnv360_0822_retail, vtable, high (was: SetPositionFromReader)
+int ReaderWithPosition::hkSeekableStreamReader_setMark(int unused)
 {
     int value = GetPosition();
     int failed = value == -1;

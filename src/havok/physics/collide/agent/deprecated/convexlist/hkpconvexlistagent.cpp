@@ -15,7 +15,7 @@ struct hkpGskfAgent
     void* m_contactMgr;         // +0x08
     char unk0C[0x24];
     char m_manifold[0x50];      // +0x30
-    void __thiscall AddPotential(int a);
+    void __thiscall hkpGskfAgent_commitPotential(int a);
 };
 struct hkpConvexListAgentData : hkpGskfAgent
 {
@@ -72,7 +72,7 @@ void __thiscall FUN_00d33c80_class::hkpConvexListAgent_getPenetrations(void* apA
     FUN_00d33b90(apArg1, apArg2, apArg3, apArg4);
 }
 
-extern void* __cdecl CreateConvexListAgent();
+extern void* __cdecl hkpConvexListAgent_createConvexListConvexAgent();
 extern void* __cdecl FUN_00d33ca0();
 
 struct FUN_00d337f0_self : hkpConvexListAgentData
@@ -99,13 +99,13 @@ struct FUN_00d33810_cls : hkpConvexListAgentData
 void FUN_00d33810_cls::hkpConvexListAgent_commitPotential(int a)
 {
     if (m_inGskMode)
-        hkpGskfAgent::AddPotential(a);
+        hkpGskfAgent::hkpGskfAgent_commitPotential(a);
 }
 
 namespace fnv_00d33830 {
 struct hkpGskfAgent
 {
-    void __thiscall ClearSlotById(int a);
+    void __thiscall hkpGskfAgent_createZombie(int a);
 };
 // hkpConvexListAgent, as above.
 struct FUN_00d33830_cls : ::hkpConvexListAgentData
@@ -117,7 +117,7 @@ struct FUN_00d33830_cls : ::hkpConvexListAgentData
 void __thiscall FUN_00d33830_cls::FUN_00d33830(int aiArg)
 {
         if (m_inGskMode)
-        ((fnv_00d33830::hkpGskfAgent*)this)->ClearSlotById(aiArg);
+        ((fnv_00d33830::hkpGskfAgent*)this)->hkpGskfAgent_createZombie(aiArg);
 }
 }  // namespace fnv_00d33830
 
@@ -404,7 +404,8 @@ static __forceinline hkpCollisionAgentD33D* AllocAgent(unsigned int uiSize)
 
 // pdb: hkpConvexListAgent::createConvexListConvexAgent | hkpConvexListAgent.obj | fnv360_0822_debug, objrun, high
 // pdb params: bodyA, bodyB, input, mgr
-hkpCollisionAgentD33D* __cdecl CreateConvexListAgent(const hkpCdBodyD33D& kBodyA, const hkpCdBodyD33D& kBodyB,
+// pdb: hkpConvexListAgent::createConvexListConvexAgent | hkpConvexListAgent.obj | fnv360_0822_debug, objrun, high (was: CreateConvexListAgent)
+hkpCollisionAgentD33D* __cdecl hkpConvexListAgent_createConvexListConvexAgent(const hkpCdBodyD33D& kBodyA, const hkpCdBodyD33D& kBodyB,
                                                      const hkpCollisionInputD33D& kInput,
                                                      hkpContactMgrD33D* pkMgr) throw()
 {
@@ -430,7 +431,7 @@ hkpCollisionAgentD33D* __cdecl CreateConvexListAgent(const hkpCdBodyD33D& kBodyA
 }
 
 
-void __cdecl ReleaseAllEntries(void* out, void* src, void* arg);
+void __cdecl hkGskManifold_cleanup(void* out, void* src, void* arg);
 void InitBlockPool(void* p);
 
 struct hkArrayD33E
@@ -492,7 +493,7 @@ struct hkObjD33E
 // pdb: hkpConvexListAgent::switchToStreamMode | hkpConvexListAgent.obj | fnv360_0822_retail, objrun + bridge(call_dedup|objrun) + skyrim(call_gap), high
 void hkObjD33E::hkpConvexListAgent_switchToStreamMode(void* arg)
 {
-    ReleaseAllEntries(&m_ppData, m_pObservedSource, arg);
+    hkGskManifold_cleanup(&m_ppData, m_pObservedSource, arg);
     m_84 = 0;
     new (&m_ppData) hkArrayD33E();
     InitBlockPool(&m_ppData);
@@ -648,24 +649,24 @@ class hkObjD337
     int unk34[20];
     bool m_84;
 
-    void SetValueIfExpected(float a, float b, int c);
+    void hkpGskBaseAgent_warpTime(float a, float b, int c);
     void SetValue(float a, float b, int c);
 };
 
-// Sets a value on the object, calling SetValueIfExpected when m_84 is true, otherwise delegating to hkAgent1nMachine_WarpTime on m_30.
+// Sets a value on the object, calling hkpGskBaseAgent_warpTime when m_84 is true, otherwise delegating to hkAgent1nMachine_WarpTime on m_30.
 // @fnv 0x00d337a0
 // pdb: hkpConvexListAgent::warpTime | hkpConvexListAgent.obj | fnv360_0822_retail, vtable_prefix, high
 // pdb params: oldTime, newTime, input
 void hkObjD337::SetValue(float a, float b, int c)
 {
     if (m_84)
-        SetValueIfExpected(a, b, c);
+        hkpGskBaseAgent_warpTime(a, b, c);
     else
         hkAgent1nMachine_WarpTime(&m_30, a, b, c);
 }
 
 // @fnv 0x00d33890
-extern void __cdecl ReleaseAllEntries(void*, int, void*);
+extern void __cdecl hkGskManifold_cleanup(void*, int, void*);
 struct ContactAgent
 {
     virtual void Invalidate(int);
@@ -707,7 +708,7 @@ void ContactAgent::FUN_00d33890(void* input)
 {
     if (flag84)
     {
-        ReleaseAllEntries(&contact30, collidable08, input);
+        hkGskManifold_cleanup(&contact30, collidable08, input);
     }
     else
     {
@@ -843,10 +844,10 @@ struct HitCollector
     bool m_bHit;
 };
 
-void __cdecl TestGsk(void* a, void* b, void* c, HitCollector* col);
+void __cdecl hkpGskBaseAgent_staticGetPenetrations(void* a, void* b, void* c, HitCollector* col);
 void __cdecl FUN_00d34790(void* a, void* b, void* c, void* d);
 
-// Writes timer entries (LtCvxList/StcheckHull, Stchildren, lt), calls TestGsk with a collector, and calls FUN_00d34790 if the collector registered a hit.
+// Writes timer entries (LtCvxList/StcheckHull, Stchildren, lt), calls hkpGskBaseAgent_staticGetPenetrations with a collector, and calls FUN_00d34790 if the collector registered a hit.
 // @fnv 0x00d33b90
 // pdb: hkpConvexListAgent::staticGetPenetrations | hkpConvexListAgent.obj | fnv360_0822_retail, call_seq, high
 // pdb params: bodyA, bodyB, input, collector
@@ -857,7 +858,7 @@ extern "C" void __cdecl FUN_00d33b90(void* a, void* b, void* c, void* d)
     HitCollector col;
     col.m_vtbl = &DAT_010cebd0;
     col.m_bHit = false;
-    TestGsk(a, b, c, &col);
+    hkpGskBaseAgent_staticGetPenetrations(a, b, c, &col);
     if (col.m_bHit)
     {
         HK_TIMER_SPLIT_LIST("children");
@@ -877,7 +878,7 @@ extern float DAT_0104da48;
 
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long dwTlsIndex);
 
-extern "C" int __cdecl TestGsk(const void* a, const void* b, const void* c, void* d);
+extern "C" int __cdecl hkpGskBaseAgent_staticGetPenetrations(const void* a, const void* b, const void* c, void* d);
 
 struct StringCursor
 {
@@ -995,7 +996,7 @@ struct hkpCdPointCollector
     virtual void AddCdPoint(const ContactPointPair& point) = 0;
 };
 
-// If TestGsk reports a hit calls QueryClosestPoints; else adds the closest point to a4 when its distance exceeds b's shape threshold, otherwise calls QueryClosestPoints.
+// If hkpGskBaseAgent_staticGetPenetrations reports a hit calls QueryClosestPoints; else adds the closest point to a4 when its distance exceeds b's shape threshold, otherwise calls QueryClosestPoints.
 // @f3 0x009bd790 (community match, verified in this file)
 extern "C" void __cdecl FUN_00a34cf0(const void* a, const void* b, const void* c, void* d);
 extern "C" void __cdecl FUN_00a34e90(const void* a, const void* b, const void* c, void* d);

@@ -95,14 +95,15 @@ struct CFCA90Object
     void* m_controller;
     int m_pOwnerObject, m_detail;
     unsigned short m_remainingCount, m_ucUnknownByte;
-    void ProcessShapePair(CFCA90Shape*, CFCA90Shape*, void*, CFCA90Range*);
+    void hkpReportContactMgr_processContactImpl(CFCA90Shape*, CFCA90Shape*, void*, CFCA90Range*);
 };
 // @f3 0x00986af0 (community match, verified in this file)
 void __cdecl hkpEntityCallbackUtil_fireContactProcessInternal(void*, void*);
 
 // pdb: hkpReportContactMgr::processContactImpl | hkpReportContactMgr.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, high
 // pdb params: a, b, input, collisionData
-void CFCA90Object::ProcessShapePair(CFCA90Shape* shapeA, CFCA90Shape* shapeB, void* unusedInput, CFCA90Range* range)
+// pdb: hkpReportContactMgr::processContactImpl | hkpReportContactMgr.obj | fnv360_0822_retail, bridge_fnvpc, high (was: ProcessShapePair)
+void CFCA90Object::hkpReportContactMgr_processContactImpl(CFCA90Shape* shapeA, CFCA90Shape* shapeB, void* unusedInput, CFCA90Range* range)
 {
     if (m_remainingCount-- != 0)
         return;
@@ -317,7 +318,7 @@ struct Owner
     World* world;
     Entity* a;
     Entity* b;
-    void NotifyContact(unsigned short flags, unsigned int state);
+    void hkpReportContactMgr_removeContactPointImpl(unsigned short flags, unsigned int state);
 };
 // Builds a Contact from the owner's entities and state, calls FUN_00d01900 on the world, then calls FUN_00d001c0 on each active entity.
 // @f3 0x00986960 (community match, verified in this file)
@@ -325,7 +326,8 @@ void __cdecl hkpWorldCallbackUtil_fireContactPointRemoved(World* world, Contact*
 void __cdecl hkpEntityCallbackUtil_fireContactPointRemovedInternal(Entity* entity, Contact* eventData);
 // pdb: hkpReportContactMgr::removeContactPointImpl | hkpReportContactMgr.obj | fnv360_0822_retail, objrun_open, high
 // pdb params: cpId, info
-void Owner::NotifyContact(unsigned short flags, unsigned int state)
+// pdb: hkpReportContactMgr::removeContactPointImpl | hkpReportContactMgr.obj | fnv360_0822_retail, objrun_open, high (was: NotifyContact)
+void Owner::hkpReportContactMgr_removeContactPointImpl(unsigned short flags, unsigned int state)
 {
     Entity* const entityA = a;
     Entity* const entityB = b;
@@ -385,7 +387,7 @@ struct S_Cfca40_Factory
     unsigned short m_reserved;
     unsigned short m_flags;
     void* m_iValueAtOffset0C;
-    void CreateElement(S_Cfca40_AdjustedSource* first, S_Cfca40_AdjustedSource* second,
+    void hkpReportContactMgr_Factory_createContactMgr(S_Cfca40_AdjustedSource* first, S_Cfca40_AdjustedSource* second,
                        S_Cfca40_AdjustedSource* unused);
 };
 // @f3 0x00986aa0 (community match, verified in this file)
@@ -397,7 +399,8 @@ struct S_Cfca40_TlsHeap
 };
 // pdb: hkpReportContactMgr::Factory::createContactMgr | hkpReportContactMgr.obj | fnv360_0822_retail, vtable, high
 // pdb params: a, b, env
-void S_Cfca40_Factory::CreateElement(S_Cfca40_AdjustedSource* apFirstSource, S_Cfca40_AdjustedSource* apSecondSource,
+// pdb: hkpReportContactMgr::Factory::createContactMgr | hkpReportContactMgr.obj | fnv360_0822_retail, vtable, high (was: CreateElement)
+void S_Cfca40_Factory::hkpReportContactMgr_Factory_createContactMgr(S_Cfca40_AdjustedSource* apFirstSource, S_Cfca40_AdjustedSource* apSecondSource,
                                      S_Cfca40_AdjustedSource* unused)
 {
     void* firstData = apFirstSource->GetAdjustedData();

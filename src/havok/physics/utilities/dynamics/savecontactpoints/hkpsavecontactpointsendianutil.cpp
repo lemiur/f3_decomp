@@ -126,7 +126,8 @@ static inline void S_00e062a0_Swap32(char* pc)
 // @f3 0x00a85b20 (community match, verified in this file)
 // pdb: hkpSaveContactPointsEndianUtil::swapEndianTypeInCollisionEntry | hkpSaveContactPointsEndianUtil.obj | fnv360_0822_retail, call_gap_sim, high
 // pdb params: input, serializedEntry
-void SwapMeshRecords(void* pkStream, S_00e062a0_Mesh* pkMesh)
+// pdb: hkpSaveContactPointsEndianUtil::swapEndianTypeInCollisionEntry | hkpSaveContactPointsEndianUtil.obj | fnv360_0822_retail, call_gap_sim, high (was: SwapMeshRecords)
+void hkpSaveContactPointsEndianUtil_swapEndianTypeInCollisionEntry(void* pkStream, S_00e062a0_Mesh* pkMesh)
 {
     S_00e062a0_Flag kFlag;
     kFlag.m_bValue = true;

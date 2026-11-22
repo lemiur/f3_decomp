@@ -5,7 +5,8 @@
 // @fnv 0x00dd55d0
 // pdb: hkpMoppCachedShapeMediator::getPrimitiveProperties | hkpMoppCachedShapeMediator.obj | fnv360_0822_retail, vtable, high
 // pdb params: primitiveIn, cid
-int __stdcall InitIntToZero(int, int* piValue)
+// pdb: hkpMoppCachedShapeMediator::getPrimitiveProperties | hkpMoppCachedShapeMediator.obj | fnv360_0822_retail, vtable, high (was: InitIntToZero)
+int __stdcall hkpMoppCachedShapeMediator_getPrimitiveProperties(int, int* piValue)
 {
     *piValue = 0;
     return 1;
@@ -15,7 +16,8 @@ int __stdcall InitIntToZero(int, int* piValue)
 // @fnv 0x00dd5630
 // pdb: hkpMoppCachedShapeMediator::splitPrimitive | hkpMoppCachedShapeMediator.obj | fnv360_0822_retail, vtable, high
 // pdb params: primitiveIn, direction, planeOffset, depth, primitiveOut
-void __stdcall CopyFivePointers(const void* apSource, void* apUnused1, void* apUnused2, void* apUnused3, void* apDest)
+// pdb: hkpMoppCachedShapeMediator::splitPrimitive | hkpMoppCachedShapeMediator.obj | fnv360_0822_retail, vtable, high (was: CopyFivePointers)
+void __stdcall hkpMoppCachedShapeMediator_splitPrimitive(const void* apSource, void* apUnused1, void* apUnused2, void* apUnused3, void* apDest)
 {
     *(void**)apDest = *(void**)apSource;
     *(void**)((char*)apDest + 4) = *(void**)((char*)apSource + 4);

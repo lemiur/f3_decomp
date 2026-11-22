@@ -155,7 +155,8 @@ static __declspec(noinline) void E04D30Finish(void* registry)
 // @fnv 0x00e04d30
 // pdb: hkClass::updateMetadataInplace | hkClassUpdate.obj | fnv360_0822_retail, caller_sim, high
 // pdb params: c, updated, sourceVersion
-void __cdecl RegisterContextHandlers(void* registry, void* context, int level)
+// pdb: hkClass::updateMetadataInplace | hkClassUpdate.obj | fnv360_0822_retail, caller_sim, high (was: RegisterContextHandlers)
+void __cdecl hkClass_updateMetadataInplace(void* registry, void* context, int level)
 {
     if (level == 1)
     {

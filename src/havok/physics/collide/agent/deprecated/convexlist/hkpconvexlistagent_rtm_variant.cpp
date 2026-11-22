@@ -7,7 +7,7 @@
 extern "C"
 {
 }
-extern void* __cdecl CreateConvexListAgent();
+extern void* __cdecl hkpConvexListAgent_createConvexListConvexAgent();
 struct D338e0Agent
 {
     virtual void vf00();
@@ -123,10 +123,10 @@ class hkpPredGskfAgentD33D : public FUN_00dacbd0
     {}
     virtual ~hkpPredGskfAgentD33D() throw();
 };
-hkpCollisionAgentD33D* __cdecl CreateConvexListAgent(const hkpCdBodyD33D& kBodyA, const hkpCdBodyD33D& kBodyB,
+hkpCollisionAgentD33D* __cdecl hkpConvexListAgent_createConvexListConvexAgent(const hkpCdBodyD33D& kBodyA, const hkpCdBodyD33D& kBodyB,
                                                      const hkpCollisionInputD33D& kInput,
                                                      hkpContactMgrD33D* pkMgr) throw();
-void __cdecl ReleaseAllEntries(void* out, void* src, void* arg);
+void __cdecl hkGskManifold_cleanup(void* out, void* src, void* arg);
 struct hkArrayD33E
 {
     void* m_data;
@@ -161,7 +161,7 @@ class hkCollectorD347 : public hkCollectorBaseD347
 void __cdecl FUN_00d34790(void* b, void* a, void* c, int filter);
 // @fnv 0x00d36930
 // @fnv 0x00d33890
-extern void __cdecl ReleaseAllEntries(void*, int, void*);
+extern void __cdecl hkGskManifold_cleanup(void*, int, void*);
 struct __declspec(align(16)) S00d33940_Out
 {
     float x;
@@ -192,7 +192,7 @@ struct HitCollector
     void* m_vtbl;
     bool m_bHit;
 };
-void __cdecl TestGsk(void* a, void* b, void* c, HitCollector* col);
+void __cdecl hkpGskBaseAgent_staticGetPenetrations(void* a, void* b, void* c, HitCollector* col);
 void __cdecl FUN_00d34790(void* a, void* b, void* c, void* d);
 // @fnv 0x00d33b90
 extern "C" void _ReadWriteBarrier(void);
@@ -202,7 +202,7 @@ extern const char str_01076f38[];
 extern int DAT_010c476c;
 extern float DAT_0104da48;
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long dwTlsIndex);
-extern "C" int __cdecl TestGsk(const void* a, const void* b, const void* c, void* d);
+extern "C" int __cdecl hkpGskBaseAgent_staticGetPenetrations(const void* a, const void* b, const void* c, void* d);
 typedef union __declspec(intrin_type) __declspec(align(16)) __m128
 {
     float m128_f32[4];
@@ -539,7 +539,7 @@ struct AddressValue
     {}
 };
 void FUN_00da4aa0(void* a, const void* b, AddressValue wrapped, void* d, void* e);
-void ReleaseAllEntries(void* a, void* b, void* c);
+void hkGskManifold_cleanup(void* a, void* b, void* c);
 struct ScratchArena
 {
     int* cursor;
@@ -694,7 +694,7 @@ __forceinline void Agent::processCached(const Shape& a, const Shape& b, const Ar
         if (m_20w.w > c.m_08)
         {
             if (m_32 != 0)
-                ReleaseAllEntries(&unkp30, m_08, d.m_04);
+                hkGskManifold_cleanup(&unkp30, m_08, d.m_04);
             return;
         }
     }
@@ -841,7 +841,7 @@ static __forceinline bool cachedFO(Agent* self,const Shape& a,const Shape& b,con
 {
  bool beyond=self->m_20w.w>*(const float*)&c.unk04;
  if(beyond) {projectFO(self->m_20w,vec); beyond=self->m_20w.w>*(const float*)&c.unk04;}
- if(beyond) {if(self->m_32) ReleaseAllEntries(&self->unkp30,self->m_08,d.m_04); return false;}
+ if(beyond) {if(self->m_32) hkGskManifold_cleanup(&self->unkp30,self->m_08,d.m_04); return false;}
  }
  {
   {

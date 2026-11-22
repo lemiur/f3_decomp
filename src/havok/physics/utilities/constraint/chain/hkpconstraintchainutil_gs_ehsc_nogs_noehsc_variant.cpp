@@ -92,7 +92,7 @@ struct XfScene_cls
     int unk34;
     char** m_38;
     int m_3c;
-    void AddReferencedObject(XfScene_cls* other);
+    void hkpConstraintChainInstance_addEntity(XfScene_cls* other);
 };
 static char* XfSelectRec(char* rec)
 {
@@ -165,7 +165,7 @@ struct ListB
     unsigned int unk34;
     unsigned int* m_38;
     unsigned int m_3c;
-    void AddReferencedObject(unsigned int key);
+    void hkpConstraintChainInstance_addEntity(unsigned int key);
     void FUN_00e5c460(unsigned int key);
 };
 int FUN_00e5ad40(KeyOwnerA* a, Tmp16* p, Tmp16* q);
@@ -391,7 +391,7 @@ struct FUN_00dd0530 : Edge
     {
         return allocateObject(size);
     }
-    void AddReferencedObject(Node*);
+    void hkpConstraintChainInstance_addEntity(Node*);
 };
 
 struct Stream
@@ -1001,7 +1001,7 @@ struct S5ba30_ConstraintInstance
     }
 };
 
-void __cdecl CollectConnectedNodesAndEdges(const S5ba30_Array<S5ba30_ConstraintInstance*>& allConstraints,
+void __cdecl hkpConstraintChainUtil_getAdjointEntities(const S5ba30_Array<S5ba30_ConstraintInstance*>& allConstraints,
                                            const S5ba30_Entity* entity, S5ba30_Array<S5ba30_Entity*>& entitiesOut,
                                            S5ba30_Array<S5ba30_ConstraintInstance*>& constraintsOut);
 
@@ -1183,7 +1183,7 @@ S5ba30_Result __cdecl hkpConstraintChainUtil_findConstraintLinkBetweenEntities(c
 
         adjEntities.clear();
         adjConstraints.clear();
-        CollectConnectedNodesAndEdges(allConstraints, entity, reinterpret_cast<S5ba30_Array<S5ba30_Entity*>&>(adjEntities), reinterpret_cast<S5ba30_Array<S5ba30_ConstraintInstance*>&>(adjConstraints));
+        hkpConstraintChainUtil_getAdjointEntities(allConstraints, entity, reinterpret_cast<S5ba30_Array<S5ba30_Entity*>&>(adjEntities), reinterpret_cast<S5ba30_Array<S5ba30_ConstraintInstance*>&>(adjConstraints));
 
         for (int a = 0; a < adjEntities.GetLogicalSize() && !done; a++)
         {

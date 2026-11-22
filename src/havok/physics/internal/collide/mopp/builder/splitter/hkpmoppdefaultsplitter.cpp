@@ -12,14 +12,15 @@ struct FUN_00e0a070
     void* m_14;
     int m_18;
     void* m_1c;
-    void VisitNode(void* node);
+    void hkpMoppDefaultSplitter_releaseNode(void* node);
 };
 
 // Links node into one of two singly-linked lists on this, chosen by the byte at node+4, incrementing the matching count.
 // @fnv 0x00e0a070
 // pdb: hkpMoppDefaultSplitter::releaseNode | hkpMoppDefaultSplitter.obj | fnv360_0822_retail, vtable, high
 // pdb params: nodeToRelease
-void FUN_00e0a070::VisitNode(void* node)
+// pdb: hkpMoppDefaultSplitter::releaseNode | hkpMoppDefaultSplitter.obj | fnv360_0822_retail, vtable, high (was: VisitNode)
+void FUN_00e0a070::hkpMoppDefaultSplitter_releaseNode(void* node)
 {
     if (node)
     {
@@ -184,14 +185,15 @@ class FUN_00e09f80_class
     hkAxisE09F* m_axes;
 
     void hkpMoppDefaultSplitter_calculateMaxMinId(hkRangeE09F* pkRange, hkNodeE09F* pkNode) throw();
-    hkNodeE09F* AllocateNode(int iOwner, hkRangeE09F* pkRange) throw();
+    hkNodeE09F* hkpMoppDefaultSplitter_createTerminal(int iOwner, hkRangeE09F* pkRange) throw();
 };
 
 // Pops a free node from the free list, resets its flags and range fields, links it to the owner, and registers its three key ranges with the axis handler.
 // @fnv 0x00e09f80
 // pdb: hkpMoppDefaultSplitter::createTerminal | hkpMoppDefaultSplitter.obj | fnv360_0822_retail, call_gap_sim, high
 // pdb params: parentNode, params
-hkNodeE09F* FUN_00e09f80_class::AllocateNode(int iOwner, hkRangeE09F* pkRange) throw()
+// pdb: hkpMoppDefaultSplitter::createTerminal | hkpMoppDefaultSplitter.obj | fnv360_0822_retail, call_gap_sim, high (was: AllocateNode)
+hkNodeE09F* FUN_00e09f80_class::hkpMoppDefaultSplitter_createTerminal(int iOwner, hkRangeE09F* pkRange) throw()
 {
     hkNodeE09F* pkNode = m_kFreeListEntries;
     m_kFreeListEntries = pkNode->m_next;
@@ -499,13 +501,14 @@ class NodePoolE0A
     NodeE0A* m_kFreeListEntries;
     int m_numFree;
 
-    NodeE0A* PopNode();
+    NodeE0A* hkpMoppDefaultSplitter_createNode();
 };
 
 // Pops a NodeE0A from the free list, resets its flags, indices, distances, and counts to defaults, and returns the node.
 // @fnv 0x00e0a020
 // pdb: hkpMoppDefaultSplitter::createNode | hkpMoppDefaultSplitter.obj | fnv360_0822_retail, objrun, high
-NodeE0A* NodePoolE0A::PopNode()
+// pdb: hkpMoppDefaultSplitter::createNode | hkpMoppDefaultSplitter.obj | fnv360_0822_retail, objrun, high (was: PopNode)
+NodeE0A* NodePoolE0A::hkpMoppDefaultSplitter_createNode()
 {
     NodeE0A* node = m_kFreeListEntries;
     m_kFreeListEntries = node->m_next;
@@ -777,8 +780,8 @@ class SplitBuilder
     int m_iValue;
     PositionEntry* m_kPlaneArray;
 
-    SplitNode* AllocateNode(SplitNode* parent, SplitList* list);
-    SplitNode* PopNode();
+    SplitNode* hkpMoppDefaultSplitter_createTerminal(SplitNode* parent, SplitList* list);
+    SplitNode* hkpMoppDefaultSplitter_createNode();
     void hkpMoppDefaultSplitter_resortAxis(SplitNode* node, int* axes, float* offsets);
     void hkpMoppDefaultSplitter_findSplittingPlanePositions(SplitNode* node, PositionEntry* plane, SplitList* list, SplitRange* range, int depth);
     void hkpMoppDefaultSplitter_calculateMaxMinId(SplitList* list, SplitNode* node);
@@ -798,7 +801,7 @@ SplitNode* SplitBuilder::FUN_00e0a270(SplitNode* parent, SplitList* list, int si
         {
             m_monitor->step(m_pTreeNode, this, 0x800);
         }
-        return AllocateNode(parent, list);
+        return hkpMoppDefaultSplitter_createTerminal(parent, list);
     }
 
     if (m_settings->m_progress && m_14 == 0)
@@ -806,7 +809,7 @@ SplitNode* SplitBuilder::FUN_00e0a270(SplitNode* parent, SplitList* list, int si
         m_monitor->step(m_pTreeNode, this, 0x800);
     }
 
-    SplitNode* node = PopNode();
+    SplitNode* node = hkpMoppDefaultSplitter_createNode();
     node->m_uiItemCount = list->m_iElementCount;
     node->m_parent = parent;
     if (parent == 0)

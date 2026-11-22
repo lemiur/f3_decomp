@@ -62,7 +62,7 @@ struct S_00d92690
     unsigned char unkB;
     unsigned short maxCapacity;
 };
-S_00d92690* AllocateBlock(int cap, int a, int b, int maxCap);
+S_00d92690* hkpSimpleContactConstraintAtomUtil_allocateAtom(int cap, int a, int b, int maxCap);
 
 // @f3 0x00a26b70 (community match, verified in this file)
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long dwTlsIndex);
@@ -169,7 +169,7 @@ FUN_00d92f20::FUN_00d92f20(void* atom, const unsigned char* first, const unsigne
     unsigned int lenA = first[0xbd];
     unsigned int lenB = second[0xbd];
     unsigned int bytesPerEntry = (lenA + lenB) * 4 + 0x14;
-    buffer28 = AllocateBlock(1, lenA, lenB, (unsigned short)(0x1400 / (int)bytesPerEntry));
+    buffer28 = hkpSimpleContactConstraintAtomUtil_allocateAtom(1, lenA, lenB, (unsigned short)(0x1400 / (int)bytesPerEntry));
 
     PacketResult* result = reinterpret_cast<PacketResult*>(buffer28);
     result->state10 = 0;
@@ -219,7 +219,7 @@ struct FUN_00d93140_cls
     unsigned char* m_data;
     unsigned int m_len;
     unsigned int m_cap;
-    unsigned int ReplaceOrAppendByte(unsigned char value);
+    unsigned int hkpDynamicsCpIdMgr_newId(unsigned char value);
 };
 
 // @f3 0x00a26970 (community match, verified in this file)
@@ -227,7 +227,8 @@ void __cdecl FUN_00901f10(void* array, int sizeOfElement);
 
 // pdb: hkpDynamicsCpIdMgr::newId | hkpSimpleContactConstraintData.obj | fnv360_0822_retail, call_seq, high
 // pdb params: value
-unsigned int FUN_00d93140_cls::ReplaceOrAppendByte(unsigned char value)
+// pdb: hkpDynamicsCpIdMgr::newId | hkpSimpleContactConstraintData.obj | fnv360_0822_retail, call_seq, high (was: ReplaceOrAppendByte)
+unsigned int FUN_00d93140_cls::hkpDynamicsCpIdMgr_newId(unsigned char value)
 {
     int i = (int)m_len - 1;
     while (i >= 0)
@@ -332,7 +333,7 @@ class hkBool
     }
 };
 hkpSimpleContactConstraintAtom* FUN_00d92690(hkpSimpleContactConstraintAtom* atom, hkBool* atomReallocated);
-void __cdecl ReplaceEntry(void* constraint, hkpSimpleContactConstraintAtom* oldAtom,
+void __cdecl hkpWorldConstraintUtil_updateFatherOfMovedAtom(void* constraint, hkpSimpleContactConstraintAtom* oldAtom,
                           hkpSimpleContactConstraintAtom* newAtom, int newSize);
 
 struct GenericConstraintAtomScheme
@@ -357,14 +358,14 @@ struct GenericConstraintAtomScheme
 };
 struct hkpConstraintOwner
 {
-    void AccumulateStats(void* constraint, GenericConstraintAtomScheme& info);
+    void hkpConstraintOwner_addConstraintInfo(void* constraint, GenericConstraintAtomScheme& info);
 };
 struct MutableByteArray
 {
     unsigned char* m_iSlotIds;
     int m_iElementCount;
     int m_iCapacityState;
-    int ReplaceOrAppendByte(int index);
+    int hkpDynamicsCpIdMgr_newId(int index);
 };
 
 struct hkpSimpleContactConstraintData
@@ -430,15 +431,15 @@ int hkpSimpleContactConstraintData::FUN_00d92df0(hkpConstraintOwner& constraintO
         {
             info.add(0x40, 1, 1);
         }
-        constraintOwner.AccumulateStats(m_pHavokConstraint, info);
+        constraintOwner.hkpConstraintOwner_addConstraintInfo(m_pHavokConstraint, info);
     }
 
     if (atomReallocated)
     {
-        ReplaceEntry(m_pHavokConstraint, oldAtom, m_pAtom, localAtom->m_usSizeOfAllAtoms);
+        hkpWorldConstraintUtil_updateFatherOfMovedAtom(m_pHavokConstraint, oldAtom, m_pAtom, localAtom->m_usSizeOfAllAtoms);
         m_iAtomSize = localAtom->m_usSizeOfAllAtoms;
     }
-    return m_kAtoms.ReplaceOrAppendByte(size);
+    return m_kAtoms.hkpDynamicsCpIdMgr_newId(size);
 }
 
 // Dispatch contact callbacks and prepare new contact solver state.

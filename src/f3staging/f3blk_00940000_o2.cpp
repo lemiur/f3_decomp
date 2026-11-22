@@ -23174,7 +23174,7 @@ extern const char f3c_fmt943910[];
 extern const char f3c_nullstr[];
 namespace f3m_00943910 {
 
-int Vsnprintf(char* buffer, unsigned int size, const char* format, ...);
+int hkString_snprintf(char* buffer, unsigned int size, const char* format, ...);
 int StrLen(const char* text);
 
 struct HkWriterC0280 {
@@ -23207,7 +23207,7 @@ struct HkOstream {
 HkOstream* HkOstream::FUN_00943910(unsigned __int64 value)
 {
     FmtBuf buffer;
-    Vsnprintf((char*)buffer.w, 0x2728, f3c_fmt943910, value);
+    hkString_snprintf((char*)buffer.w, 0x2728, f3c_fmt943910, value);
     CC0280WriteString(m_writer, (const char*)buffer.w);
     return this;
 }

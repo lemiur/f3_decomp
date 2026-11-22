@@ -53,7 +53,7 @@ void NiExtraData::LoadBinary(NiStream& stream)
             ReadBinaryValue(stream, buffer, count);
             NiBinaryExtraData* extra = new NiBinaryExtraData(count, buffer);
             if (extra)
-                stream.RegisterObject(extra);
+                stream.hkPackfileWriter_notDuplicateMetaData(extra);
         }
     }
     else if (stream.version < 0x14010001)

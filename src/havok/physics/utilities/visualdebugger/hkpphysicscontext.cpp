@@ -370,13 +370,13 @@ class CD1FB0Primary
 class CD1FB0Secondary
 {
   public:
-    virtual void CollectConstraints(CD1FB0Stats* stats);
+    virtual void hkpPhysicsContext_constraintAddedCallback(CD1FB0Stats* stats);
 };
 
 class CD1FB0World : public CD1FB0Primary, public CD1FB0Secondary
 {
   public:
-    virtual void CollectConstraints(CD1FB0Stats* stats);
+    virtual void hkpPhysicsContext_constraintAddedCallback(CD1FB0Stats* stats);
 };
 
 // @f3 0x00954370 (community match, verified in this file)
@@ -395,7 +395,8 @@ struct ConstraintCollectionSlot4
 const char g_CD1FB0ConstraintsName[] = "Constraints";
 // pdb: hkpPhysicsContext::constraintAddedCallback | hkpPhysicsContext.obj | fnv360_0822_retail, ustr_rel, high
 // pdb params: constraint
-void CD1FB0World::CollectConstraints(CD1FB0Stats* stats)
+// pdb: hkpPhysicsContext::constraintAddedCallback | hkpPhysicsContext.obj | fnv360_0822_retail, ustr_rel, high (was: CollectConstraints)
+void CD1FB0World::hkpPhysicsContext_constraintAddedCallback(CD1FB0Stats* stats)
 {
     if (m_ppConstraints)
     {

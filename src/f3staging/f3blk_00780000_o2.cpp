@@ -30969,7 +30969,8 @@ struct bhkPhantom
     }
 };
 
-__forceinline void UpdatePhantom(bhkPhantom* p)
+// pdb: hkpWorld::updateCollisionFilterOnPhantom | hkpWorld.obj | fnv360_0822_retail, ustr, high (was: UpdatePhantom)
+__forceinline void hkpWorld_updateCollisionFilterOnPhantom(bhkPhantom* p)
 {
     hkWorldObj* obj;
     if (p && (obj = p->phkObject) != 0)
@@ -31806,7 +31807,7 @@ void PlayerCharacter787580::PlayerCharacter_SetParentCell(TESObjectCELL* cell)
             flags |= 0x21;
             info.SetFlags(flags);
             spPhantom = new bhkPhantom(&info);
-            UpdatePhantom(spPhantom);
+            hkpWorld_updateCollisionFilterOnPhantom(spPhantom);
             spPhantom->SetMotion(6);
             GetCollidable(spPhantom)->SetFilter(9);
             NiPoint3 kPos = *GetPos();
@@ -33445,7 +33446,8 @@ struct ListNode {
  ~ListNode(){FUN_006c8220();}
 };
 inline void FreeNode(ListNode* p){if(p){p->FUN_006c8220();::DAT_01090a78.FUN_0086ba60((int)p);}}
-inline void PopNode(ListNode* head){ListNode* n=head->next;if(n){head->next=n->next;head->data=n->data;n->next=0;FreeNode(n);}else head->data=0;}
+// pdb: hkpMoppDefaultSplitter::createNode | hkpMoppDefaultSplitter.obj | fnv360_0822_retail, objrun, high (was: PopNode)
+inline void hkpMoppDefaultSplitter_createNode(ListNode* head){ListNode* n=head->next;if(n){head->next=n->next;head->data=n->data;n->next=0;FreeNode(n);}else head->data=0;}
 struct Handle12 {int id;bool active;char unk05;short unk06;int unk08;bool BSSoundHandle_IsValid();void BSSoundHandle_Stop();void Reset(){id=-1;active=false;unk08=0;}~Handle12(){} };
 struct MapBase {virtual ~MapBase(){FUN_006bd950();NiFree(buckets);}int unk04;void* buckets;int size;void FUN_006bd950();};
 struct MapDerived:MapBase {~MapDerived(){FUN_006bd950();}};
@@ -33985,8 +33987,8 @@ FUN_00781910::~FUN_00781910(){
  if(unk1D8){FirstList* p=unk1D8;p->FUN_004d5e40();::DAT_01090a78.FUN_0086ba60((int)p);}
  ref594.Clear();
  if(unk648)unk648->MagicItem_Unload(1);
- if(unk1CC){while(unk1CC && (unk1CC->next || unk1CC->data)){PlainObject* p=unk1CC->data;if(p)p->Destroy(true);PopNode(unk1CC);}FreeNode(unk1CC);}
- if(unk590){while(unk590 && !unk590->Empty()){::DAT_01090a78.FUN_0086ba60((int)unk590->GetHead());PopNode(unk590);}FreeNode(unk590);}
+ if(unk1CC){while(unk1CC && (unk1CC->next || unk1CC->data)){PlainObject* p=unk1CC->data;if(p)p->Destroy(true);hkpMoppDefaultSplitter_createNode(unk1CC);}FreeNode(unk1CC);}
+ if(unk590){while(unk590 && !unk590->Empty()){::DAT_01090a78.FUN_0086ba60((int)unk590->GetHead());hkpMoppDefaultSplitter_createNode(unk590);}FreeNode(unk590);}
  FUN_00702a40();list604.FUN_006c8220();list60C.FUN_006c8220();list620.FUN_006c8220();list618.FUN_006c8220();FUN_0077a1b0();FUN_0077a2c0();
  if(unk600)unk600->Destroy(true);
  if(DAT_0107a0d4 && !DAT_0107a0d4->a && !DAT_0107a0d4->b)FUN_00887da0("MODEL: PlayerCharacter::Set3D( 0 ) called before the game was over.");

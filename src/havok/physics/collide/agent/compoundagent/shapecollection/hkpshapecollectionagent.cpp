@@ -56,13 +56,14 @@ class FUN_00d43730_cls
     ShapeEntry* m_entries;  // +0xc
     int m_uiItemCount;      // +0x10
 
-    void CallShapeItems(int arg);
+    void hkpShapeCollectionAgent_invalidateTim(int arg);
 };
 
 // @fnv 0x00d43730
 // pdb: hkpShapeCollectionAgent::invalidateTim | hkpShapeCollectionAgent.obj | fnv360_0822_retail, vtable, high
 // pdb params: input
-void FUN_00d43730_cls::CallShapeItems(int arg)
+// pdb: hkpShapeCollectionAgent::invalidateTim | hkpShapeCollectionAgent.obj | fnv360_0822_retail, vtable, high (was: CallShapeItems)
+void FUN_00d43730_cls::hkpShapeCollectionAgent_invalidateTim(int arg)
 {
     int i = 0;
     if (m_uiItemCount > 0)
@@ -106,13 +107,14 @@ class FUN_00d43760_cls
     ShapeEntry* m_entries;  // +0xc
     int m_uiItemCount;      // +0x10
 
-    void DispatchToEntries(float a, float b, int c);
+    void hkpShapeCollectionAgent_warpTime(float a, float b, int c);
 };
 
 // @fnv 0x00d43760
 // pdb: hkpShapeCollectionAgent::warpTime | hkpShapeCollectionAgent.obj | fnv360_0822_retail, vtable, high
 // pdb params: oldTime, newTime, input
-void FUN_00d43760_cls::DispatchToEntries(float afArg1, float afArg2, int aiArg3)
+// pdb: hkpShapeCollectionAgent::warpTime | hkpShapeCollectionAgent.obj | fnv360_0822_retail, vtable, high (was: DispatchToEntries)
+void FUN_00d43760_cls::hkpShapeCollectionAgent_warpTime(float afArg1, float afArg2, int aiArg3)
 {
     int i = 0;
     if (m_uiItemCount > 0)
@@ -321,7 +323,8 @@ struct Task1499Context
 };
 // pdb: hkpShapeCollectionAgent::staticGetClosestPoints | hkpShapeCollectionAgent.obj | fnv360_0822_retail, objrun, high
 // pdb params: bodyA, bodyB, input, collector
-void __cdecl GetClosestPointsShapeCollection(const hkpCdBody* bodyA, const hkpCdBody* bodyB,
+// pdb: hkpShapeCollectionAgent::staticGetClosestPoints | hkpShapeCollectionAgent.obj | fnv360_0822_retail, objrun, high (was: GetClosestPointsShapeCollection)
+void __cdecl hkpShapeCollectionAgent_staticGetClosestPoints(const hkpCdBody* bodyA, const hkpCdBody* bodyB,
                                              const CollisionAgentContext* input, void* collector)
 {
     hkTimerBegin("TtShapeCollection");
@@ -1367,7 +1370,7 @@ struct S_00d43cd0
     int unk08;
     S_00d43cd0_Entry* m_entries;
     int m_iElementCount;
-    void ProcessCollisionEntries(const S_00d43cd0_CdBody& bodyA, const S_00d43cd0_CdBody& bodyB,
+    void hkpShapeCollectionAgent_getPenetrations(const S_00d43cd0_CdBody& bodyA, const S_00d43cd0_CdBody& bodyB,
                                  const S_00d43cd0_Input& input, S_00d43cd0_Collector& collector);
 };
 
@@ -1385,7 +1388,8 @@ struct Task1445ShapeView
 
 // pdb: hkpShapeCollectionAgent::getPenetrations | hkpShapeCollectionAgent.obj | fnv360_0822_retail, vtable, high
 // pdb params: bodyA, bodyB, input, collector
-void S_00d43cd0::ProcessCollisionEntries(const S_00d43cd0_CdBody& bodyA, const S_00d43cd0_CdBody& bodyB,
+// pdb: hkpShapeCollectionAgent::getPenetrations | hkpShapeCollectionAgent.obj | fnv360_0822_retail, vtable, high (was: ProcessCollisionEntries)
+void S_00d43cd0::hkpShapeCollectionAgent_getPenetrations(const S_00d43cd0_CdBody& bodyA, const S_00d43cd0_CdBody& bodyB,
                                          const S_00d43cd0_Input& input, S_00d43cd0_Collector& collector)
 {
     S_00d43cd0_Timer("TtShapeCollection");

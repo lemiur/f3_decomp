@@ -46227,14 +46227,15 @@ unsigned int unk180;
 unsigned int unk184;
 unsigned int unk188;
 Command* cached;
-bool HasFlag() const {return (flags>>11)&1;}
+// pdb: hkClassMember::isNotOwner | hkClassMember.obj | fnv360_0822_retail, objrun, high (was: HasFlag)
+bool hkClassMember_isNotOwner() const {return (flags>>11)&1;}
  bool FUN_004eb8f0();void FUN_004e8710(float);void FUN_006f71b0();void FUN_006fc9a0(bool);
 };
 }
 // pdb: Actor::InitPackageLocations | Actor.obj | fnv360_0822_retail, call_seq, medium
 // pdb params: abUseInitialPackage
 void Notify6fc::Owner::FUN_006fc9a0(bool useCache) {
- if(HasFlag()) return;
+ if(hkClassMember_isNotOwner()) return;
  if(!useCache) {
   parent->Slot028();
   if(FUN_004eb8f0()) parent->Slot014(this,0);
@@ -80357,7 +80358,8 @@ struct BGSSaveGameBuffer {
     unsigned int m_uiBufferSize;
     unsigned int m_uiPosition;
     unsigned int m_uiRecords;
-    void GrowBuffer()
+    // pdb: hkpMoppCodeGenerator::resize | hkpMoppCodeGenerator.obj | fnv360_0822_retail, call_seq, high (was: GrowBuffer)
+    void hkpMoppCodeGenerator_resize()
     {
         unsigned int oldSize = m_uiBufferSize;
         char* oldBuffer = m_pBuffer;
@@ -80377,7 +80379,7 @@ void BGSSaveGameBuffer::FUN_006e15f0(const void* source, unsigned int length, un
 {
     int terminator = (noSeparator == 0);
     while (offset + length + terminator > m_uiBufferSize)
-        GrowBuffer();
+        hkpMoppCodeGenerator_resize();
     if (!IsSizeOnly())
         FUN_00bffa60(m_pBuffer + offset, source, length);
     if (noSeparator == 0) {

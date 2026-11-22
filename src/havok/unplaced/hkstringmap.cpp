@@ -271,7 +271,7 @@ class hkStringMapD876
     hkBoolD876 SetBoolFromThreshold(int it);
     int FUN_00d87440(int it);
     void FUN_00d874d0(const char* key, int val);
-    int GetOrSetInt(const char* key, int def, void* a, void* b);
+    int hkpContinuousSimulation_resetCollisionInformationForEntities(const char* key, int def, void* a, void* b);
 };
 
 // Looks up key; if found returns its value, otherwise stores def under key and returns def.
@@ -285,7 +285,8 @@ struct MapOps
 
 // pdb: hkpContinuousSimulation::resetCollisionInformationForEntities | hkpContinuousSimulation.obj | fnv360_0822_retail, vtable, high
 // pdb params: entities, numEntities, world, resetInfo
-int hkStringMapD876::GetOrSetInt(const char* key, int def, void* a, void* b)
+// pdb: hkpContinuousSimulation::resetCollisionInformationForEntities | hkpContinuousSimulation.obj | fnv360_0822_retail, vtable, high (was: GetOrSetInt)
+int hkStringMapD876::hkpContinuousSimulation_resetCollisionInformationForEntities(const char* key, int def, void* a, void* b)
 {
     ((MapOps*)this)->hkpSimulation_resetCollisionInformationForEntities(key, def, a, b);
     if (def != 1)

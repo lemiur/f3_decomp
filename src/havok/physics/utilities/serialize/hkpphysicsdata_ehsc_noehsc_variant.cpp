@@ -6,7 +6,7 @@
 // src/havok/physics/utilities/serialize/hkpphysicsdata.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/physics/utilities/serialize/hkpphysicsdata.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 #include "havok/hkpPhysicsData.h"
-int __cdecl CompareStringsCaseInsensitive(int, int);
+int __cdecl hkString_strCasecmp(int, int);
 struct FUN_00d4c000
 {
     int m_00;
@@ -28,7 +28,7 @@ struct FUN_00d4c220_s
     int m_14;
     FUN_00d4c220_s();
 };
-int __cdecl CompareStringsCaseInsensitive(int, int);
+int __cdecl hkString_strCasecmp(int, int);
 struct FUN_00d4c050_obj
 {
     int m_00;

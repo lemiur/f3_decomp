@@ -6,13 +6,14 @@ void FUN_00d374f0(int a, int b, int c, int d);
 
 struct FUN_00d37690_Class
 {
-    void __thiscall ForwardToFunction(int a, int b, int c, int d);
+    void __thiscall hkpMultiRayConvexAgent_getPenetrations(int a, int b, int c, int d);
 };
 
 // @fnv 0x00d37690
 // pdb: hkpMultiRayConvexAgent::getPenetrations | hkpMultiRayConvexAgent.obj | fnv360_0822_retail, vtable, high
 // pdb params: bodyA, bodyB, input, collector
-void __thiscall FUN_00d37690_Class::ForwardToFunction(int aiArg1, int aiArg2, int aiArg3, int aiArg4)
+// pdb: hkpMultiRayConvexAgent::getPenetrations | hkpMultiRayConvexAgent.obj | fnv360_0822_retail, vtable, high (was: ForwardToFunction)
+void __thiscall FUN_00d37690_Class::hkpMultiRayConvexAgent_getPenetrations(int aiArg1, int aiArg2, int aiArg3, int aiArg4)
 {
     FUN_00d374f0(aiArg1, aiArg2, aiArg3, aiArg4);
 }
@@ -37,13 +38,14 @@ struct Owner
     Handler* handler;
     unsigned short* values;
     int count;
-    void ProcessValuesAndDelete(int argument);
+    void hkpMultiRayConvexAgent_cleanup(int argument);
 };
 // Calls handler->process for each non-0xffff value in values, then deletes this.
 // @fnv 0x00d36fc0
 // pdb: hkpMultiRayConvexAgent::cleanup | hkpMultiRayConvexAgent.obj | fnv360_0822_retail, vtable, high
 // pdb params: constraintOwner
-void Owner::ProcessValuesAndDelete(int argument)
+// pdb: hkpMultiRayConvexAgent::cleanup | hkpMultiRayConvexAgent.obj | fnv360_0822_retail, vtable, high (was: ProcessValuesAndDelete)
+void Owner::hkpMultiRayConvexAgent_cleanup(int argument)
 {
     int length = count;
     for (int i = 0; i < length; ++i)

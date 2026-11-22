@@ -15,7 +15,8 @@ struct E02A40StreamWriter
 // @fnv 0x00e02a40
 // pdb: hkPlatformObjectWriter::writeRaw | hkPlatformObjectWriter.obj | fnv360_0822_retail, vtable, high
 // pdb params: writer, data, dataLen
-int __stdcall WriteAllOrFail(E02A40StreamWriter* writer, const void* buf, int aiNumBytes)
+// pdb: hkPlatformObjectWriter::writeRaw | hkPlatformObjectWriter.obj | fnv360_0822_retail, vtable, high (was: WriteAllOrFail)
+int __stdcall hkPlatformObjectWriter_writeRaw(E02A40StreamWriter* writer, const void* buf, int aiNumBytes)
 {
     return writer->write(buf, aiNumBytes) != aiNumBytes;
 }

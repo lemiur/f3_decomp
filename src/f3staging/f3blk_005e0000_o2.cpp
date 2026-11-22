@@ -25406,7 +25406,8 @@ struct Triangle {
  unsigned int flags;
  bool IsEdgeFlagSet(int edge) { return (flags&(1<<edge))!=0; }
  unsigned short GetEdge(int edge) { return links[edge]; }
- bool HasFlag(unsigned int flag) const { return (flags&flag)!=0; }
+ // pdb: hkClassMember::isNotOwner | hkClassMember.obj | fnv360_0822_retail, objrun, high (was: HasFlag)
+ bool hkClassMember_isNotOwner(unsigned int flag) const { return (flags&flag)!=0; }
  void Connect(int edge,unsigned short link) { flags|=1u<<edge;links[edge]=link; }
 };
 
@@ -25700,7 +25701,7 @@ bool PortalMatch5610::Manager::FUN_005e5610()
                             }
                         } else {
                             if(linked.edge.triangle>=target->GetTriangleCount()) continue;
-                            if(target->GetTriangle(linked.edge.triangle)->HasFlag(0x20)) continue;
+                            if(target->GetTriangle(linked.edge.triangle)->hkClassMember_isNotOwner(0x20)) continue;
                             Point3 qa=*target->FUN_005b8900(linked.edge.triangle,linked.edge.edge).p1;
                             Point3 qb=*target->FUN_005b8900(linked.edge.triangle,linked.edge.edge).p2;
                             if(SquaredDistanceXY(b,qa)<2500.0f && SquaredDistanceXY(a,qb)<2500.0f) {

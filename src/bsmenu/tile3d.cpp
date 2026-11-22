@@ -496,7 +496,7 @@ struct Tile3DCalc
     void InitGeometry(NiNode*);
     void InitProperties(NiNode*);
     void SetValue(int, float, bool);
-    bool GetBool(int);
+    bool hkBufferedStreamWriter_isOk(int);
     void NiBoolInterpolator_Update(int);
     void LoadTile()
     {
@@ -526,7 +526,7 @@ struct Tile3DCalc
         InitProperties(model);
         node.m_pObject->AttachChildInAvailableSlot(model, true);
         SetValue(0xfa8, 1.0f, true);
-        if (!GetBool(0xfa3))
+        if (!hkBufferedStreamWriter_isOk(0xfa3))
             node.m_pObject->unk30 |= 1;
         else
             node.m_pObject->unk30 &= ~1;
@@ -1191,7 +1191,7 @@ class Tile3DX
     BSString strFilename;
 
     const char* GetString(int id);
-    bool GetBool(int id);
+    bool hkBufferedStreamWriter_isOk(int id);
     void Set(int id, float value, bool b);
     void FUN_00a07530(int a);
     bool AttachController(NiAVObject* obj);

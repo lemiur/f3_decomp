@@ -305,14 +305,15 @@ class FUN_00e47c30_cls
     int unk28;
     float* m_iSlotIds;
 
-    float GetInterpolatedValue(float t) const;
+    float hkpLinearParametricCurve_getLengthFromStart(float t) const;
 };
 
 // Linearly interpolates, or extrapolates past the ends, between entries of m_iSlotIds at t using the index from hkMath_hkFloatToInt.
 // @fnv 0x00e47c30
 // pdb: hkpLinearParametricCurve::getLengthFromStart | hkpLinearParametricCurve.obj | fnv360_0822_retail, caller_sim, high
 // pdb params: t
-float FUN_00e47c30_cls::GetInterpolatedValue(float t) const
+// pdb: hkpLinearParametricCurve::getLengthFromStart | hkpLinearParametricCurve.obj | fnv360_0822_retail, caller_sim, high (was: GetInterpolatedValue)
+float FUN_00e47c30_cls::hkpLinearParametricCurve_getLengthFromStart(float t) const
 {
     int i = hkMath_hkFloatToInt(t);
     float fInterval;

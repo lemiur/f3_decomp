@@ -952,7 +952,7 @@ struct FUN_00e58df0_cls {
 
 }  // namespace fnv_00e58df0
 
-int CompareStringsCaseInsensitive(unsigned int item, unsigned int ctx);
+int hkString_strCasecmp(unsigned int item, unsigned int ctx);
 
 struct ConfigValue { unsigned type, identifier; const void* data; };
 struct CharBuffer {
@@ -1555,7 +1555,7 @@ FUN_00e48db0_class* FUN_00e48db0_class::InitFromFloatAndPointer(float f, void* p
     return this;
 }
 
-int CompareStringsCaseInsensitive(const char* a, const char* b);
+int hkString_strCasecmp(const char* a, const char* b);
 
 struct Node4a5
 {
@@ -2080,7 +2080,7 @@ void __cdecl FUN_00e54630(V4* out, int a3, int a4, int a5, int a6, float v);
 __declspec(noalias) float __cdecl LookupAndConsume(const Float4* left, const Float4* right);
 extern "C" float __cdecl FUN_00e54cb0(int a, int b, int c, int d, Float4* p, int e, int f, float g, float h);
 
-// CollectConnectedNodesAndEdges  (__cdecl, 4 args) -- walk a link array, collect incident entries
+// hkpConstraintChainUtil_getAdjointEntities  (__cdecl, 4 args) -- walk a link array, collect incident entries
 // The array append keeps the slot address materialised in a register (the original's
 // `lea eax,[ecx+eax*4] ; mov [eax],edx`), which a single indexed store does not:
 // the slot is reached through a local pointer that is written twice.
@@ -2117,7 +2117,8 @@ void __cdecl ResizeAudioStream(void* pAllocator, void* pArray, int auiNewSize);
 void __cdecl FUN_00901f10(void* array, int sizeOfElement);
 // pdb: hkpConstraintChainUtil::getAdjointEntities | hkpConstraintChainUtil.obj | fnv360_0822_retail, call_gap, high
 // pdb params: allConstraints, entity, entitiesOut, constraintsOut
-void __cdecl CollectConnectedNodesAndEdges(ChainArray<void*>* src, void* node, ChainArray<void*>* outNodes, ChainArray<void*>* outEdges)
+// pdb: hkpConstraintChainUtil::getAdjointEntities | hkpConstraintChainUtil.obj | fnv360_0822_retail, call_gap, high (was: CollectConnectedNodesAndEdges)
+void __cdecl hkpConstraintChainUtil_getAdjointEntities(ChainArray<void*>* src, void* node, ChainArray<void*>* outNodes, ChainArray<void*>* outEdges)
 {
     for (int i = 0; i < src->m_iElementCount; ++i)
     {
@@ -2139,7 +2140,7 @@ void __cdecl CollectConnectedNodesAndEdges(ChainArray<void*>* src, void* node, C
 }
 
 
-namespace ns_e5c5 { int __cdecl CompareStringsCaseInsensitive(const char* a, const char* b) throw(); }
+namespace ns_e5c5 { int __cdecl hkString_strCasecmp(const char* a, const char* b) throw(); }
 struct Resource_e5c5 {
     const char* FUN_00d46d40() throw();
     void FUN_00c905b0() throw();
@@ -2167,7 +2168,7 @@ Resource_e5c5* Registry_e5c5::FUN_00e5c540(const char* name, Resource_e5c5* expe
 {
     hkRefPtr_e5c5<Resource_e5c5> found = FUN_00e5c4d0(name);
     if (found.m_pRetainedObject) {
-        if (!expected || ns_e5c5::CompareStringsCaseInsensitive(expected->FUN_00d46d40(), found.FUN_00d477a0()->FUN_00d46d40()) == 0)
+        if (!expected || ns_e5c5::hkString_strCasecmp(expected->FUN_00d46d40(), found.FUN_00d477a0()->FUN_00d46d40()) == 0)
             return found.m_pRetainedObject;
     }
     return 0;
@@ -2621,11 +2622,12 @@ struct Pc_Instance : Pc_RefObj {
 // The pack's prototype qualifies the first parameter __restrict; the definition leaves
 // the qualifier off (same function, same symbol), because with it the size store of the
 // last allocation sinks below the argument loads of the constructor call.
-Se5b160_Instance* __cdecl CreatePoweredConstraint(const Se5b160_Instance* __restrict original, Se5b160_Motor* motor, bool enableMotors);
+Se5b160_Instance* __cdecl hkpConstraintUtils_convertToPowered(const Se5b160_Instance* __restrict original, Se5b160_Motor* motor, bool enableMotors);
 
 // pdb: hkpConstraintUtils::convertToPowered | hkpConstraintUtils.obj | fnv360_0822_retail, ustr, high
 // pdb params: originalConstraint, constraintMotor, enableMotors
-Se5b160_Instance* __cdecl CreatePoweredConstraint(const Se5b160_Instance* original, Se5b160_Motor* motor, bool enableMotors) {
+// pdb: hkpConstraintUtils::convertToPowered | hkpConstraintUtils.obj | fnv360_0822_retail, ustr, high (was: CreatePoweredConstraint)
+Se5b160_Instance* __cdecl hkpConstraintUtils_convertToPowered(const Se5b160_Instance* original, Se5b160_Motor* motor, bool enableMotors) {
     // View the shared prototype through the independently checked target-build layout.
     const Pc_Instance* originalConstraint = reinterpret_cast<const Pc_Instance*>(original);
     Pc_Instance* newConstraint = 0;

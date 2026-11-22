@@ -123,7 +123,7 @@ class hkControllerCD0E
   public:
     void hkOArchive_write32u(int mode);
     void hkOArchive_write8u(unsigned int flags);
-    void HashUInt(float t);
+    void hkOArchive_writeFloat32(float t);
     hkTargetCD0E* FUN_00d60800();
 };
 class hkItemCD0E
@@ -151,7 +151,7 @@ class hkOwnerCD0E
     int unk0C;
     hkEntryCD0E* m_entries;
 
-    void ActivateEntry(int i, float t);
+    void hkVisualDebugger_writeStep(int i, float t);
 };
 template <class T> class hkArrayCD11
 {
@@ -302,7 +302,7 @@ struct VisualDebugger523 : DebuggerReference523
     bool running;
     unsigned char unk81, unk82, unk83;
     int numFrames;
-    void ActivateEntry(int, float);
+    void hkVisualDebugger_writeStep(int, float);
     void RemovePair(int);
     void FUN_00cd0ec0(float timeStep);
 };

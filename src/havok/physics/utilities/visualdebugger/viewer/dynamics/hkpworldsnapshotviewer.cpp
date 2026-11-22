@@ -55,7 +55,8 @@ void __cdecl AllocateRecordWithData();
 // Registers the two world-snapshot commands with the profile registry, storing their returned handles in DAT_01268fc4 and DAT_01268fc0.
 // @fnv 0x00d63000
 // pdb: hkpWorldSnapshotViewer::registerViewer | hkpWorldSnapshotViewer.obj | fnv360_0822_debug, udata, high
-void __cdecl RegisterSnapshotCommands()
+// pdb: hkpWorldSnapshotViewer::registerViewer | hkpWorldSnapshotViewer.obj | fnv360_0822_debug, udata, high (was: RegisterSnapshotCommands)
+void __cdecl hkpWorldSnapshotViewer_registerViewer()
 {
     DAT_01268fc4 = DAT_01269cd0->FUN_00dd9380("* Grab World Snapshot Native", FUN_00d62f20);
     DAT_01268fc0 = DAT_01269cd0->FUN_00dd9380("* Grab World Snapshot PC", AllocateRecordWithData);

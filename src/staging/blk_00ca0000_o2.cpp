@@ -9777,7 +9777,8 @@ char(__cdecl* g_pfnCB0FE0ToLower)(char) = ToLowerAscii;
 // @fnv 0x00cb0fe0
 // pdb: hkString::strCasecmp | hkString.obj | fnv360_0822_retail, call_seq, high
 // pdb params: a, b
-int CompareStringsCaseInsensitive(const char* pStringA, const char* pStringB)
+// pdb: hkString::strCasecmp | hkString.obj | fnv360_0822_retail, call_seq, high (was: CompareStringsCaseInsensitive)
+int hkString_strCasecmp(const char* pStringA, const char* pStringB)
 {
     int off = (int)(pStringA - pStringB);
     for (;;)

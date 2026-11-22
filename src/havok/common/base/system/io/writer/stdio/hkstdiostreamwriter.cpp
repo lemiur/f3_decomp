@@ -154,12 +154,13 @@ struct FUN_00d2bed0_cls
     int unk00;
     int unk04;
     int m_08;
-    unsigned char* GetFlagAsByte(unsigned char* out);
+    unsigned char* hkStdioStreamWriter_isOk(unsigned char* out);
 };
 
 // @fnv 0x00d2bed0
 // pdb: hkStdioStreamWriter::isOk | hkStdioStreamWriter.obj | fnv360_0822_retail, vtable, high
-unsigned char* FUN_00d2bed0_cls::GetFlagAsByte(unsigned char* out)
+// pdb: hkStdioStreamWriter::isOk | hkStdioStreamWriter.obj | fnv360_0822_retail, vtable, high (was: GetFlagAsByte)
+unsigned char* FUN_00d2bed0_cls::hkStdioStreamWriter_isOk(unsigned char* out)
 {
     *out = m_08 != 0;
     return out;

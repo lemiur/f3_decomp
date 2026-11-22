@@ -27,14 +27,15 @@ struct S_00d3f660
     int unk4;
     S_00d3f660_Owner* unk8;
     unsigned short unkC;
-    void ReleaseAndDelete(void* arg);
+    void hkpSphereSphereAgent_cleanup(void* arg);
 };
 
 // Releases the stored id through unk8 if unkC is not 0xffff, resets unkC to 0xffff, then deletes this.
 // @fnv 0x00d3f660
 // pdb: hkpSphereSphereAgent::cleanup | hkpSphereSphereAgent.obj | fnv360_0822_retail, vtable, high
 // pdb params: constraintOwner
-void S_00d3f660::ReleaseAndDelete(void* arg)
+// pdb: hkpSphereSphereAgent::cleanup | hkpSphereSphereAgent.obj | fnv360_0822_retail, vtable, high (was: ReleaseAndDelete)
+void S_00d3f660::hkpSphereSphereAgent_cleanup(void* arg)
 {
     if (unkC != 0xffff)
     {

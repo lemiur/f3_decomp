@@ -23,7 +23,7 @@ typedef void(__thiscall* FUN_00e05250_Write)(FUN_00e05250_Archive*, int, const c
 
 struct ByteSink
 {
-    void PutBytePair(char a, char b);
+    void hkpMoppCodeGenerator_addCommand8(char a, char b);
 };
 struct E06C20Writer
 {
@@ -48,7 +48,7 @@ void FUN_00e06d70_Class::WriteSize(unsigned int size)
 {
     void* p = m_pWriter;
     if (size < 0x100)
-        ((ByteSink*)p)->PutBytePair(9, (char)size);
+        ((ByteSink*)p)->hkpMoppCodeGenerator_addCommand8(9, (char)size);
     else if (size < 0x10000)
         ((FUN_00e06800_Class*)p)->hkpMoppCodeGenerator_addCommand16(0xa, (void*)size);
     else

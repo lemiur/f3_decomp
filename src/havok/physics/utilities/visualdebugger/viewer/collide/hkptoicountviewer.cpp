@@ -212,7 +212,8 @@ extern int g_00d67e10_toiCounterId;
 
 // @fnv 0x00d67e10
 // pdb: hkpActiveContactPointViewer::registerViewer | hkpActiveContactPointViewer.obj | fnv360_0822_debug, udata, high
-void RegisterToiCounter()
+// pdb: hkpActiveContactPointViewer::registerViewer | hkpActiveContactPointViewer.obj | fnv360_0822_debug, udata, high (was: RegisterToiCounter)
+void hkpActiveContactPointViewer_registerViewer()
 {
     g_00d67e10_toiCounterId = g_00d67e10_registry->Register("TOI counter", AllocateToiCountViewer);
 }

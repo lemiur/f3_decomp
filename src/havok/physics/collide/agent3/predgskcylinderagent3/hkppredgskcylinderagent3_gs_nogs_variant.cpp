@@ -3433,7 +3433,7 @@ struct Frame
     }
 };
 
-void ReleaseAllEntries(void*, void*, void*);
+void hkGskManifold_cleanup(void*, void*, void*);
 
 struct VertexData
 {
@@ -3773,7 +3773,7 @@ Cache* __cdecl hkPredGskCylinderAgent3_process(Pair* pairInput, State* state, Ca
                 {
                     active[i] = 0;
                     cache->feature.flags &= ~(4 << i);
-                    ReleaseAllEntries(&contact->numA, pair->contactMgr, output->stream);
+                    hkGskManifold_cleanup(&contact->numA, pair->contactMgr, output->stream);
                     state->numContacts = contact->numContacts;
                 }
             }
@@ -3782,7 +3782,7 @@ Cache* __cdecl hkPredGskCylinderAgent3_process(Pair* pairInput, State* state, Ca
             {
                 active[i] = 1;
                 cache->feature.flags |= 4 << i;
-                ReleaseAllEntries(&contact->numA, pair->contactMgr, output->stream);
+                hkGskManifold_cleanup(&contact->numA, pair->contactMgr, output->stream);
                 state->numContacts = contact->numContacts;
             }
         }
@@ -3922,7 +3922,7 @@ distant:
         hkGskAgentUtil_processCollisionNoTim(pairInput, state, cache, feature, &contact->numA, normal, output);
     }
     else if (contact->numContacts)
-        ReleaseAllEntries(&contact->numA, pair->contactMgr, output->stream);
+        hkGskManifold_cleanup(&contact->numA, pair->contactMgr, output->stream);
     CopyVecScalar(*normal, direction);
 cleanup:
     for (int m = 0; m < 2; ++m)

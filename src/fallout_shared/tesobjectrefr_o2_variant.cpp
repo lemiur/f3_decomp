@@ -136,7 +136,7 @@ FUN_00c9f3b0::~FUN_00c9f3b0()
 
 struct WorldHolder
 {
-    void UpdatePhantom(void* a, int b);
+    void hkpWorld_updateCollisionFilterOnPhantom(void* a, int b);
 };
 struct PhantomBase
 {
@@ -192,7 +192,7 @@ void bhkAabbPhantom::FUN_00c9f460()
 {
     WorldHolder* w = GetWorld();
     if (w)
-        w->UpdatePhantom(m8, 1);
+        w->hkpWorld_updateCollisionFilterOnPhantom(m8, 1);
 }
 
 extern float DAT_010c72bc;

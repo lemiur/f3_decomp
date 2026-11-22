@@ -5,7 +5,7 @@
 
 // src/havok/common/serialize/packfile/hkpackfilewriter.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/common/serialize/packfile/hkpackfilewriter.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
-extern "C" void __cdecl Vsnprintf(void*, void*, const char*, int, int, int, const char*);
+extern "C" void __cdecl hkString_snprintf(void*, void*, const char*, int, int, int, const char*);
 void __cdecl FUN_00dbda20(void* a, void* b);
 struct FUN_00dbdd40_s
 {
@@ -221,7 +221,7 @@ struct hkStringMapDB7
 class hkPackfileWriterDB7
 {
   public:
-    int RegisterObject(void* pvObject, const hkClassDB7* pkClass) throw();
+    int hkPackfileWriter_notDuplicateMetaData(void* pvObject, const hkClassDB7* pkClass) throw();
     int unk00;
     int unk04;
     int unk08;

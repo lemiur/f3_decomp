@@ -365,7 +365,8 @@ __forceinline S_00dfaac0_Penetration::S_00dfaac0_Penetration(int a, int b, const
 
 // pdb: hkCalculatePenetrationDepth | hkpConvexPenetrationUtil.obj | fnv360_0822_retail, ustr, high
 // pdb params: shapeA, shapeB, btoa, epsTol, pointsAinA, pointsBinB, simplex, simplexSize, output
-int __cdecl TestPenetration(int a, int b, const S_00dfaac0_Transform& t, float f, int c, int d, int e, int g, int out)
+// pdb: hkCalculatePenetrationDepth | hkpConvexPenetrationUtil.obj | fnv360_0822_retail, ustr, high (was: TestPenetration)
+int __cdecl hkCalculatePenetrationDepth(int a, int b, const S_00dfaac0_Transform& t, float f, int c, int d, int e, int g, int out)
 {
     S_00dfaac0_MonitorStream::GetMonitorStream().timer("TtPenetration");
     S_00dfaac0_Penetration pen(a, b, t, f, c, d, e, g);

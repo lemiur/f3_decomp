@@ -962,7 +962,7 @@ struct Link5c4490 {
  int unk40; int unk44; int unk48; int unk4C; int unk50; int unk54;
  Link5c4490** prev; Link5c4490* next;
 };
-// pdb: AStarNodeHeap<NavMeshPOVSearchNode,NavMeshPOVSearchLink,512>::AllocateNode | NavMeshPOVSearch.obj | fnv360_0721_beta, caller, medium
+// pdb: AStarNodeHeap<NavMeshPOVSearchNode,NavMeshPOVSearchLink,512>::hkpMoppDefaultSplitter_createTerminal | NavMeshPOVSearch.obj | fnv360_0721_beta, caller, medium
 void __stdcall FUN_005c4490(Link5c4490* node) {
  if(node->prev) *node->prev=node->next;
  if(node->next) node->next->prev=node->prev;
@@ -2630,7 +2630,7 @@ struct Node5cc0b0 {
     Node5cc0b0* next;
 };
 
-// pdb: AStarNodeHeap<NavMeshSearchNode,NavMeshSearchLink,512>::AllocateNode | NavMeshSearch.obj | fnv360_0822_retail, caller, medium
+// pdb: AStarNodeHeap<NavMeshSearchNode,NavMeshSearchLink,512>::hkpMoppDefaultSplitter_createTerminal | NavMeshSearch.obj | fnv360_0822_retail, caller, medium
 void __stdcall FUN_005cc0b0(Node5cc0b0* node) {
     if (node->pprev) *node->pprev = node->next;
     if (node->next) node->next->pprev = node->pprev;
@@ -6518,7 +6518,7 @@ struct Self {
 
 }
 
-// pdb: AStarNodeHeap<CombatPlanNode *,CombatPlanLink *,512>::AllocateNode | CombatPlanner.obj | fnv360_0822_retail, caller, medium
+// pdb: AStarNodeHeap<CombatPlanNode *,CombatPlanLink *,512>::hkpMoppDefaultSplitter_createTerminal | CombatPlanner.obj | fnv360_0822_retail, caller, medium
 void __stdcall FUN_005dba60(f3m_005dba60::Self* self)
 {
     if (self->unk14)
@@ -28304,7 +28304,8 @@ struct Out {void* table;PtrList* data;unsigned count,capacity; unsigned Size()co
  void Reserve(unsigned n){FUN_005c5730(n+1,true);}
 };
 struct Ends {Vec* first;Vec* second; Vec* Start()const{return first;} Vec* End()const{return second;}};
-struct Face {unsigned short i0,i1,i2,unk06;unsigned unk08;unsigned flags; bool HasFlag(int e)const{return (flags&(1<<e))!=0;}};
+// pdb: hkClassMember::isNotOwner | hkClassMember.obj | fnv360_0822_retail, objrun, high (was: HasFlag)
+struct Face {unsigned short i0,i1,i2,unk06;unsigned unk08;unsigned flags; bool hkClassMember_isNotOwner(int e)const{return (flags&(1<<e))!=0;}};
 struct Graph {int unk00,unk04,unk08,unk0c,unk10,unk14,unk18,unk1c,unk20,unk24,unk28;Vec* points;int unk30,unk34,unk38;Face* faces;
  unsigned FUN_005c2490(unsigned short,UShortList*);unsigned FUN_005c1190(unsigned short,UShortList*);bool FUN_005c25b0(unsigned short,Encoded&);
  Ends FUN_005b8900(unsigned short,unsigned);
@@ -28363,7 +28364,7 @@ bool Owner::FUN_005c7020(Out* input,Out* out) {
        p->kind=0;p->pos=r->graph->Point(r->index);p->radius=settings->GetRadius();p->index=r->index;
        Face* a=r->graph->FaceAt(ends.first.Triangle());
        Face* b=r->graph->FaceAt(ends.second.Triangle());
-       if(a->HasFlag(ends.first.Edge())||b->HasFlag(ends.second.Edge()))p->kind=1;
+       if(a->hkClassMember_isNotOwner(ends.first.Edge())||b->hkClassMember_isNotOwner(ends.second.Edge()))p->kind=1;
        Ends e1=r->graph->FUN_005b8900(ends.first.Triangle(),ends.first.Edge());
        Ends e2=r->graph->FUN_005b8900(ends.second.Triangle(),ends.second.Edge());
        p->first=*e1.End()-*e1.Start();p->second=*e2.End()-*e2.Start();

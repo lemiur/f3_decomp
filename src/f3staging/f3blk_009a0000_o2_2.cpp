@@ -2386,7 +2386,7 @@ struct hkpSimulationIsland
     char m_pad00[0x1c];
     int m_numConstraints;
 
-    // hkpConstraintOwner's bookkeeping of a new constraint's sizes (AccumulateStats in the project's names)
+    // hkpConstraintOwner's bookkeeping of a new constraint's sizes (hkpConstraintOwner_addConstraintInfo in the project's names)
     void FUN_00929b70(hkpConstraintInstance* pkConstraint, const hkpConstraintData::ConstraintInfo& cinfo);
 };
 

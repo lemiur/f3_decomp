@@ -20,14 +20,15 @@ struct FUN_00d3b3d0_Class
     unsigned short unk0C;
     unsigned short unk0E;
     unsigned short unk10;
-    void InvokeCallbacksAndRelease(int);
+    void hkpCapsuleCapsuleAgent_cleanup(int);
 };
 
 // Calls invoke on unk08 for each of the three IDs at unk0C unless it is 0xffff, then releases the object.
 // @fnv 0x00d3b3d0
 // pdb: hkpCapsuleCapsuleAgent::cleanup | hkpCapsuleCapsuleAgent.obj | fnv360_0822_retail, vtable, high
 // pdb params: constraintOwner
-void FUN_00d3b3d0_Class::InvokeCallbacksAndRelease(int value)
+// pdb: hkpCapsuleCapsuleAgent::cleanup | hkpCapsuleCapsuleAgent.obj | fnv360_0822_retail, vtable, high (was: InvokeCallbacksAndRelease)
+void FUN_00d3b3d0_Class::hkpCapsuleCapsuleAgent_cleanup(int value)
 {
     unsigned short* id = &unk0C;
     int iRemaining = 3;
@@ -85,13 +86,14 @@ void RegisterHandlers(Registry* registry) {
 void __cdecl FUN_00d3b420(const void* a, const void* b, const void* c, void* d);
 
 struct D3B6D0Agent {
-    virtual void ForwardToHandler(const void* a, const void* b, const void* c, void* d);
+    virtual void hkpCapsuleCapsuleAgent_getPenetrations(const void* a, const void* b, const void* c, void* d);
 };
 
 // @fnv 0x00d3b6d0
 // pdb: hkpCapsuleCapsuleAgent::getPenetrations | hkpCapsuleCapsuleAgent.obj | fnv360_0822_retail, vtable, high
 // pdb params: bodyA, bodyB, input, collector
-void D3B6D0Agent::ForwardToHandler(const void* apArg1, const void* apArg2, const void* apArg3, void* apArg4)
+// pdb: hkpCapsuleCapsuleAgent::getPenetrations | hkpCapsuleCapsuleAgent.obj | fnv360_0822_retail, vtable, high (was: ForwardToHandler)
+void D3B6D0Agent::hkpCapsuleCapsuleAgent_getPenetrations(const void* apArg1, const void* apArg2, const void* apArg3, void* apArg4)
 {
     FUN_00d3b420(apArg1, apArg2, apArg3, apArg4);
 }

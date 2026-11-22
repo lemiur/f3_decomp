@@ -17594,7 +17594,7 @@ struct FUN_00bcebe0_shell
 };
 
 // @fnv 0x00b01800
-// pdb: ArchiveFile::ReadFromBuffer | Archive_Xenon.obj | fnv360_0822_retail, objrun_prop, low
+// pdb: ArchiveFile::hkMemoryStreamReader_read | Archive_Xenon.obj | fnv360_0822_retail, objrun_prop, low
 // pdb params: apReadBuffer, aiByteCount
 unsigned int FUN_00bcebe0_shell::FUN_00bcebe0(void* pDst, unsigned int uiSize)
 {

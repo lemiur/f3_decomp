@@ -147,7 +147,8 @@ struct Thing
 // @f3 0x0097e9c0 (community match, verified in this file)
 // pdb: hkStatisticsCollectorUtil::_getArrayElementSize | hkStatisticsCollectorUtil.obj | fnv360_0822_retail, caller_sim, high
 // pdb params: mem
-int __cdecl GetThingValue(Thing* thing) {
+// pdb: hkStatisticsCollectorUtil::_getArrayElementSize | hkStatisticsCollectorUtil.obj | fnv360_0822_retail, caller_sim, high (was: GetThingValue)
+int __cdecl hkStatisticsCollectorUtil__getArrayElementSize(Thing* thing) {
  TypeInfo* info=FUN_00d868a0(thing->m_ucType);
  short value=info->m_sValue;
  if(value>0)return value;
@@ -273,7 +274,7 @@ struct Writer64
     void EmitString(const char*, const char*);
 };
 void __cdecl FUN_00cf60d0(const char*, void*, Meta64*, Writer64*);
-int __cdecl GetThingValue(Member64*);
+int __cdecl hkStatisticsCollectorUtil__getArrayElementSize(Member64*);
 
 struct hkClassMember
 {

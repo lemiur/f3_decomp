@@ -130,7 +130,7 @@ void Owner::FreeBuffers()
 
 
 const char* GetHavokShapeTypeName(int type);
-int Vsnprintf(char* buf, int size, const char* fmt, ...);
+int hkString_snprintf(char* buf, int size, const char* fmt, ...);
 
 struct IntegerPair
 {
@@ -228,7 +228,7 @@ void hkpCollisionDispatcher::RegisterAgentType(signed char (*table)[32], signed 
                     const char* typeNameA = GetHavokShapeTypeName(typeA);
                     const char* typeNameB = GetHavokShapeTypeName(typeB);
                     unsigned int buf[256];
-                    Vsnprintf(
+                    hkString_snprintf(
                         (char*)buf, 1000,
                         "Agent handling types <%s-%s> would override more specialized agent <%s-%s>\nMaybe the order of registering your collision agent is wrong, make sure you register your alternate type agents first",
                         typeNameA, typeNameB, entryNameA, entryNameB);
@@ -243,7 +243,7 @@ void hkpCollisionDispatcher::RegisterAgentType(signed char (*table)[32], signed 
 
 struct FUN_00cfb510_cls
 {
-    void MergeBitsRecursive(unsigned int a1, unsigned int a2, int depth);
+    void hkpCollisionDispatcher_updateHasAlternateType(unsigned int a1, unsigned int a2, int depth);
 };
 
 struct FUN_00cfb510_entry
@@ -255,7 +255,8 @@ struct FUN_00cfb510_entry
 // @fnv 0x00cfb510
 // pdb: hkpCollisionDispatcher::updateHasAlternateType | hkpCollisionDispatcher.obj | fnv360_0822_retail, objrun, high
 // pdb params: primaryType, alternateType, depth
-void FUN_00cfb510_cls::MergeBitsRecursive(unsigned int uiDstIndex, unsigned int uiSrcIndex, int depth)
+// pdb: hkpCollisionDispatcher::updateHasAlternateType | hkpCollisionDispatcher.obj | fnv360_0822_retail, objrun, high (was: MergeBitsRecursive)
+void FUN_00cfb510_cls::hkpCollisionDispatcher_updateHasAlternateType(unsigned int uiDstIndex, unsigned int uiSrcIndex, int depth)
 {
     unsigned int* bits = (unsigned int*)((char*)this + 0x110);
     bits[uiDstIndex] |= bits[uiSrcIndex];
@@ -266,7 +267,7 @@ void FUN_00cfb510_cls::MergeBitsRecursive(unsigned int uiDstIndex, unsigned int 
         FUN_00cfb510_entry* e = &pEntries[i];
         if (e->unk04 == uiDstIndex)
         {
-            this->MergeBitsRecursive(e->unk00, e->unk04, depth + 1);
+            this->hkpCollisionDispatcher_updateHasAlternateType(e->unk00, e->unk04, depth + 1);
         }
     }
 }

@@ -155,7 +155,7 @@ struct NiStream
 };
 }  // namespace fnv_00c86790
 
-short __cdecl FindIndexByKey(void* apSkeleton, const char* apName, int aiUnk);
+short __cdecl hkaSkeletonUtils_findBoneWithName(void* apSkeleton, const char* apName, int aiUnk);
 struct ArmTarget_S
 {
     float fA;
@@ -207,12 +207,12 @@ bool FUN_00c75460_S::bhkRagdollController_InitGrabIK()
         void* pSkeleton = pHolder->pSkeleton;
         if (pSkeleton)
         {
-            xLeft.sUpper = FindIndexByKey(pSkeleton, "Bip01 L UpperArm", 0);
-            xLeft.sFore = FindIndexByKey(pSkeleton, "Bip01 L ForeArm", 0);
-            xLeft.sHand = FindIndexByKey(pSkeleton, "Bip01 L Hand", 0);
-            xRight.sUpper = FindIndexByKey(pSkeleton, "Bip01 R UpperArm", 0);
-            xRight.sFore = FindIndexByKey(pSkeleton, "Bip01 R ForeArm", 0);
-            xRight.sHand = FindIndexByKey(pSkeleton, "Bip01 R Hand", 0);
+            xLeft.sUpper = hkaSkeletonUtils_findBoneWithName(pSkeleton, "Bip01 L UpperArm", 0);
+            xLeft.sFore = hkaSkeletonUtils_findBoneWithName(pSkeleton, "Bip01 L ForeArm", 0);
+            xLeft.sHand = hkaSkeletonUtils_findBoneWithName(pSkeleton, "Bip01 L Hand", 0);
+            xRight.sUpper = hkaSkeletonUtils_findBoneWithName(pSkeleton, "Bip01 R UpperArm", 0);
+            xRight.sFore = hkaSkeletonUtils_findBoneWithName(pSkeleton, "Bip01 R ForeArm", 0);
+            xRight.sHand = hkaSkeletonUtils_findBoneWithName(pSkeleton, "Bip01 R Hand", 0);
             if (!xLeft.IsValid())
                 bResult = false;
             if (!xRight.IsValid())

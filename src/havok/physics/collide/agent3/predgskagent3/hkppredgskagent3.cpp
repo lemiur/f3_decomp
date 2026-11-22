@@ -81,10 +81,10 @@ void* __cdecl DispatchInputRecord(InputData* input, unsigned char* status, Resul
 
 // Stand-ins for the script handler functions whose addresses are stored in the
 // handler table (0xd417b0 .. 0xd40d80).  Only declared, never defined.
-extern "C" void __cdecl RemoveEntryById(int a, int b, int c, int d);
-extern "C" void __cdecl InsertSlotId(int a, int b, int c, int d);
-extern "C" void __cdecl FindEntryByKey(int a, int b, int c, int d);
-extern "C" void __cdecl ConvertPairFlags(int a, int b, int c, int d);
+extern "C" void __cdecl hkPredGskAgent3_removePoint(int a, int b, int c, int d);
+extern "C" void __cdecl hkPredGskAgent3_commitPotential(int a, int b, int c, int d);
+extern "C" void __cdecl hkPredGskAgent3_createZombie(int a, int b, int c, int d);
+extern "C" void __cdecl hkPredGskCylinderAgent3_create(int a, int b, int c, int d);
 extern "C" void __cdecl FUN_00d41930(int a, int b, int c, int d);
 extern "C" void __cdecl hkPredGskCylinderAgent3_process(int a, int b, int c, int d);
 
@@ -193,7 +193,8 @@ void __cdecl FUN_00dae340(S_00d417b0_Sub* sub, int index);
 // @fnv 0x00d417b0
 // pdb: hkPredGskAgent3::removePoint | hkpPredGskAgent3.obj | fnv360_0822_retail, caller_sim, high
 // pdb params: entry, agentData, idToRemove
-void __cdecl RemoveEntryById(int aiUnused, S_00d417b0_Obj* obj, short sId)
+// pdb: hkPredGskAgent3::removePoint | hkpPredGskAgent3.obj | fnv360_0822_retail, caller_sim, high (was: RemoveEntryById)
+void __cdecl hkPredGskAgent3_removePoint(int aiUnused, S_00d417b0_Obj* obj, short sId)
 {
     S_00d417b0_Sub* sub = &obj->m_sub;
     for (int i = 0; i < sub->m_uiItemCount; i++)
@@ -230,7 +231,8 @@ struct Table
 // @fnv 0x00d417f0
 // pdb: hkPredGskAgent3::commitPotential | hkpPredGskAgent3.obj | fnv360_0822_retail, objrun, high
 // pdb params: entry, agentData, idToCommit
-void __cdecl InsertSlotId(int aiUnused, Table* table, unsigned short ausId)
+// pdb: hkPredGskAgent3::commitPotential | hkpPredGskAgent3.obj | fnv360_0822_retail, objrun, high (was: InsertSlotId)
+void __cdecl hkPredGskAgent3_commitPotential(int aiUnused, Table* table, unsigned short ausId)
 {
     int i;
     for (i = 0; i < table->count; i++)
@@ -266,7 +268,8 @@ struct FUN_00d41830_table
 // @fnv 0x00d41830
 // pdb: hkPredGskAgent3::createZombie | hkpPredGskAgent3.obj | fnv360_0822_retail, objrun, high
 // pdb params: entry, agentData, idToConvert
-int __cdecl FindEntryByKey(int unused, FUN_00d41830_table* table, unsigned short key)
+// pdb: hkPredGskAgent3::createZombie | hkpPredGskAgent3.obj | fnv360_0822_retail, objrun, high (was: FindEntryByKey)
+int __cdecl hkPredGskAgent3_createZombie(int unused, FUN_00d41830_table* table, unsigned short key)
 {
     int i = 0;
     int iCount = table->count;
@@ -292,7 +295,7 @@ found:
 // FUN_00d41860 (0x00d41860, 67 bytes)
 //
 // The original routine
-//   * hands the record block at b+0x0C to ReleaseAllEntries,
+//   * hands the record block at b+0x0C to hkGskManifold_cleanup,
 //   * reads the three size bytes at b+0x0C, b+0x0D and b+0x0E,
 //   * combines them into  count = b[0x0C] + b[0x0D] + 4*b[0x0E],
 //   * scales that into an aligned block size  (2*count + 31) & ~0x0F,
@@ -304,9 +307,9 @@ found:
 // it, so the value is handed back to the caller from a symbol whose name
 // still contains the required tag "FUN_00d41860".
 
-extern "C" void __cdecl ReleaseAllEntries(void* p, int obj, int data);
+extern "C" void __cdecl hkGskManifold_cleanup(void* p, int obj, int data);
 
-// Calls ReleaseAllEntries on the record at b+0x0C, computes an aligned size from three bytes, clears byte 2 of a, and returns b plus that size.
+// Calls hkGskManifold_cleanup on the record at b+0x0C, computes an aligned size from three bytes, clears byte 2 of a, and returns b plus that size.
 // @fnv 0x00d41860
 // pdb: hkPredGskAgent3::cleanup | hkpPredGskAgent3.obj | fnv360_0822_retail, call_gap_sim, medium
 // pdb params: entry, agentData, mgr, constraintOwner
@@ -314,7 +317,7 @@ extern "C" int __cdecl FUN_00d41860_impl(int apOut, int apRecord, int aObj, int 
 {
     unsigned char* rec = (unsigned char*)apRecord + 0x0C;
 
-    ReleaseAllEntries(rec, aObj, aData);
+    hkGskManifold_cleanup(rec, aObj, aData);
 
     unsigned int count = rec[0] + rec[1] + rec[2] * 4;
 

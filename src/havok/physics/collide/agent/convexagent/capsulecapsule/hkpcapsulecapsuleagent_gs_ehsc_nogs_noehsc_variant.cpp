@@ -22,7 +22,7 @@ struct FUN_00d3b3d0_Class
     unsigned short unk0C;
     unsigned short unk0E;
     unsigned short unk10;
-    void InvokeCallbacksAndRelease(int);
+    void hkpCapsuleCapsuleAgent_cleanup(int);
 };
 typedef void(__cdecl* HandlerFn)();
 void __cdecl FUN_00d3b420();

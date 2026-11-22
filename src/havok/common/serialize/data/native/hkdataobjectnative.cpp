@@ -827,7 +827,7 @@ struct StreamDBC5C0
     int unk00;
 };
 
-extern "C" int __cdecl Vsnprintf(char* pcBuffer, unsigned int uSize, const char* pcFormat, ...);
+extern "C" int __cdecl hkString_snprintf(char* pcBuffer, unsigned int uSize, const char* pcFormat, ...);
 extern const char str_010a5824[];
 extern "C" int __cdecl hkString_strLen(const char* s);
 struct WriterC12
@@ -847,7 +847,7 @@ static __declspec(noinline) void FUN_00cc0080(WriterC12* pkWriter, const char* p
 hkOstreamDBB7& hkOstreamDBB7::FUN_00cc0120(const void* pvPointer) throw()
 {
     int buffer[2506];
-    Vsnprintf((char*)buffer, 0x2728u, str_010a5824, pvPointer);
+    hkString_snprintf((char*)buffer, 0x2728u, str_010a5824, pvPointer);
     FUN_00cc0080((WriterC12*)m_uiLogicalSize, (const char*)buffer);
     return *this;
 }

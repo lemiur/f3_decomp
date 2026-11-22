@@ -1298,7 +1298,7 @@ struct FUN_00dd0530
     unsigned int unk40;
     unsigned int unk44;
     FUN_00dd0530(int);
-    void AddReferencedObject(int);
+    void hkpConstraintChainInstance_addEntity(int);
 
     __forceinline void* SetSizeAndGrow(unsigned int n)
     {

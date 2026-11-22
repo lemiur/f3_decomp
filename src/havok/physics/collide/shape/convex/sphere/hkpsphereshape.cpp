@@ -36,14 +36,15 @@ class HostCD81
   public:
     int unk00, unk04, unk08, unk0C;
     float m_fValue;
-    void* RecordTimerCommands(void* pvResult, int a, int b);
+    void* hkpSphereShape_castRayImpl(void* pvResult, int a, int b);
 };
 
 // Writes start and end timer commands to the TLS monitor stream around a call to FUN_00cd85c0, then returns pvResult.
 // @fnv 0x00cd8190
 // pdb: hkpSphereShape::castRayImpl | hkpSphereShape.obj | fnv360_0822_retail, ustr, high
 // pdb params: input, results
-void* HostCD81::RecordTimerCommands(void* pvResult, int a, int b)
+// pdb: hkpSphereShape::castRayImpl | hkpSphereShape.obj | fnv360_0822_retail, ustr, high (was: RecordTimerCommands)
+void* HostCD81::hkpSphereShape_castRayImpl(void* pvResult, int a, int b)
 {
     HK_TIMER_BEGIN("rcSphere", HK_NULL);
     FUN_00cd85c0(pvResult, m_fValue, a, b);

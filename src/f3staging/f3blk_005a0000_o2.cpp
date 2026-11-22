@@ -31978,7 +31978,7 @@ public:
     virtual void v0e8();
     virtual void v0ec();
     virtual void v0f0();
-    virtual int HasFlag(int a, int b);
+    virtual int hkClassMember_isNotOwner(int a, int b);
     Shader();
     void SetShaderType(int t) { shaderType = t; }
     void SetTexture(int index, TexSet* set);
@@ -32593,9 +32593,9 @@ bool N5b6500::SimpleDecal::BSTempEffectSimpleDecal_FinalizeGeometry()
         c->SetShaderType(29);
         c->SetFlag(5, true);
         c->SetTexture(0, m_pTextureSet->GetTextureSet());
-        if (c->HasFlag(1, 0) && !disabled)
+        if (c->hkClassMember_isNotOwner(1, 0) && !disabled)
         {
-            if (c->HasFlag(3, 0))
+            if (c->hkClassMember_isNotOwner(3, 0))
             {
                 c->SetFlag(11, true);
                 if (m_bFlagBeforeFloat)

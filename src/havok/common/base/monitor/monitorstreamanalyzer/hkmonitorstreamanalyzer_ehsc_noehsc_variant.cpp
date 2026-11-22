@@ -539,10 +539,10 @@ struct FUN_00e108b0
 //   +0x10  int      unk10
 //   +0x14  int      m_iFallback  (returned when no entry matches)
 //
-// The function walks the entries, asks CompareStringsCaseInsensitive(key & ~1, arg) about each
+// The function walks the entries, asks hkString_strCasecmp(key & ~1, arg) about each
 // key, and returns the value of the first entry the helper rejects; if the
 // helper accepts every entry, the fallback at +0x14 is returned.
-int __cdecl CompareStringsCaseInsensitive(unsigned int key, int arg);
+int __cdecl hkString_strCasecmp(unsigned int key, int arg);
 // @fnv 0x00e0cc90
 struct S00e0d180_Node;
 struct S00e0d180_Array
@@ -1494,7 +1494,7 @@ struct TextureColors
     SampleArray<ColorPair> m_pairs;
     unsigned int m_uiColorValue;
 };
-int __cdecl CompareStringsCaseInsensitive(const char*, const char*);
+int __cdecl hkString_strCasecmp(const char*, const char*);
 
 static __forceinline void renderTextureColumns(const TextureFrame& info, int frame,
                                                const SampleArrayBase<SampleNode*>& trees, int* image, int rows,
@@ -1530,7 +1530,7 @@ static __forceinline void renderTextureColumns(const TextureFrame& info, int fra
                         bool found = false;
                         for (int entry = 0; entry < colors.m_pairs.GetLogicalSize(); ++entry)
                         {
-                            if (CompareStringsCaseInsensitive(colors.m_pairs[entry].m_name, label) == 0)
+                            if (hkString_strCasecmp(colors.m_pairs[entry].m_name, label) == 0)
                             {
                                 color = colors.m_pairs[entry].m_kDiffuseColor;
                                 found = true;
@@ -1665,7 +1665,7 @@ static __declspec(noinline) void FUN_00e0daf0(const Se0e0c0_FrameInfo& info, int
                     for (int entry = 0; entry < (*(ColorArray* volatile*)&colors)->m_count; ++entry)
                     {
                         ColorPairRaw& pair = (*(ColorArray* volatile*)&colors)->m_data[entry];
-                        if (CompareStringsCaseInsensitive(pair.m_name, label) == 0)
+                        if (hkString_strCasecmp(pair.m_name, label) == 0)
                         {
                             color = (*(ColorArray* volatile*)&colors)->m_data[entry].m_color;
                             cache.insert(label, color);

@@ -19,13 +19,14 @@ void* __thiscall FUN_00d479e0_class::FUN_00d479e0(const void* key)
 struct FUN_00d47a80_class
 {
     void* GetValue(void* a, int b);
-    void* ForwardToOffsetMember(void* a);
+    void* hkDynamicClassNameRegistry_getClassByName(void* a);
 };
 
 // @fnv 0x00d47a80
 // pdb: hkDynamicClassNameRegistry::getClassByName | hkBuiltinTypeRegistry.obj | fnv360_0822_retail, vtable, high
 // pdb params: className
-void* FUN_00d47a80_class::ForwardToOffsetMember(void* apArg)
+// pdb: hkDynamicClassNameRegistry::getClassByName | hkBuiltinTypeRegistry.obj | fnv360_0822_retail, vtable, high (was: ForwardToOffsetMember)
+void* FUN_00d47a80_class::hkDynamicClassNameRegistry_getClassByName(void* apArg)
 {
     return ((FUN_00d47a80_class*)((char*)this + 0xc))->GetValue(apArg, 0);
 }
@@ -144,7 +145,7 @@ struct D477C0Input
 struct D477C0Source
 {
     int FUN_00d46d40();
-    int SumLinkedValues();
+    int hkClass_getNumInterfaces();
 };
 struct D477C0RegistryA
 {
@@ -207,13 +208,14 @@ class hkClassNameRegistryD478
     int m_04;
     FUN_00d874d0_s m_map;
 
-    void RegisterClass(const hkClassD478* pkClass);
+    void hkTypeInfoRegistry_registerTypeInfo(const hkClassD478* pkClass);
 };
 
 // @fnv 0x00d478e0
 // pdb: hkTypeInfoRegistry::registerTypeInfo | hkBuiltinTypeRegistry.obj | fnv360_0721_beta, caller_sim, high
 // pdb params: info
-void hkClassNameRegistryD478::RegisterClass(const hkClassD478* pkClass)
+// pdb: hkTypeInfoRegistry::registerTypeInfo | hkBuiltinTypeRegistry.obj | fnv360_0721_beta, caller_sim, high (was: RegisterClass)
+void hkClassNameRegistryD478::hkTypeInfoRegistry_registerTypeInfo(const hkClassD478* pkClass)
 {
     m_map.FUN_00d874d0(pkClass->getName(), (int)pkClass);
 }
@@ -300,14 +302,15 @@ class hkObjD47A
     virtual void V6();
     virtual void add(const char* pcName, int iFlags);
 
-    void AddNames(const char* const* ppcNames);
+    void hkDynamicClassNameRegistry_registerList(const char* const* ppcNames);
 };
 
 // Calls add on each name in the null-terminated array ppcNames with flags 0.
 // @fnv 0x00d47a50
 // pdb: hkDynamicClassNameRegistry::registerList | hkBuiltinTypeRegistry.obj | fnv360_0822_retail, vtable, high
 // pdb params: classes
-void hkObjD47A::AddNames(const char* const* ppcNames)
+// pdb: hkDynamicClassNameRegistry::registerList | hkBuiltinTypeRegistry.obj | fnv360_0822_retail, vtable, high (was: AddNames)
+void hkObjD47A::hkDynamicClassNameRegistry_registerList(const char* const* ppcNames)
 {
     for (; *ppcNames; ++ppcNames)
         add(*ppcNames, 0);

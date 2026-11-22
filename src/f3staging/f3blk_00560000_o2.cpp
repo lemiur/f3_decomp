@@ -35085,7 +35085,8 @@ struct Setting {
     union { bool b; int i; float f; } m_value;
     const char* m_pcName;
     int* FUN_004241e0();
-    bool* GetBool() { return &m_value.b; }
+    // pdb: hkBufferedStreamWriter::isOk | hkBufferedStreamWriter.obj | fnv360_0822_retail, vtable, high (was: GetBool)
+    bool* hkBufferedStreamWriter_isOk() { return &m_value.b; }
 };
 
 extern Setting DAT_01072aac;   // maximum shape hits
@@ -35164,7 +35165,7 @@ TESObjectREFR* ViewCaster::FUN_00574540(const NiPoint3* pkOrigin, const NiPoint3
         float fAlternateDistance = 3.402823466e+38f;
         float fAlternateOffset = 3.402823466e+38f;
         void* pvAlternateHit = 0;
-        bool bCheck = *DAT_01072ab8.GetBool();
+        bool bCheck = *DAT_01072ab8.hkBufferedStreamWriter_isOk();
         int iRays = 0;
         int iHits = 0;
         int iTargets = 0;

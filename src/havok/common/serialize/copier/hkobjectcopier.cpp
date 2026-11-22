@@ -534,7 +534,7 @@ struct DiagnosticWriter {
 };
 
 struct Target {
-    void WriteSwapped(const void* p, unsigned int n, unsigned int m);              // (this,void*,int,int)
+    void hkOArchive_writeArrayGeneric(const void* p, unsigned int n, unsigned int m);              // (this,void*,int,int)
 };
 
 struct AssertMgr {
@@ -548,7 +548,7 @@ extern AssertMgr* DAT_01268360;
 extern const char str_010ea3e4[];
 extern const char str_010ea3c8[];
 
-// Calls WriteSwapped for listed type values, adjusting its integer arguments for cases 12 through 18; other values enter the diagnostic path.
+// Calls hkOArchive_writeArrayGeneric for listed type values, adjusting its integer arguments for cases 12 through 18; other values enter the diagnostic path.
 // @f3 0x009b3200 (community match, verified in this file)
 // pdb: writePodArray | hkObjectCopier.obj | fnv360_0822_retail, ustr + bridge(ustr|ustr) + skyrim(ustr), high
 static __declspec(noinline) void writePodArray(unsigned int a, unsigned int aiSize, unsigned int type, Target* apTarget, void* apData)
@@ -561,7 +561,7 @@ static __declspec(noinline) void writePodArray(unsigned int a, unsigned int aiSi
         /* fall through */
     case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8:
     case 9: case 10:
-        apTarget->WriteSwapped(apData, aiSize, a);
+        apTarget->hkOArchive_writeArrayGeneric(apData, aiSize, a);
         return;
     case 19: case 20: case 21: case 22: case 24: case 25: case 26: case 27: case 29:
         goto fail;
@@ -618,7 +618,7 @@ struct StreamObj {
     void WriteInt(int a);
     void hkOArchive_write16(int a);
     void hkOArchive_write8(int a);
-    void WriteSwapped(const void* data, unsigned int size, unsigned int count);
+    void hkOArchive_writeArrayGeneric(const void* data, unsigned int size, unsigned int count);
     void FUN_00d607b0(const void* data, unsigned int size);
     StreamObj* FUN_00d46fe0(int v);
     void* FUN_00d46d40();
@@ -693,7 +693,7 @@ static __declspec(noinline) void writePodArray(Target* obj, unsigned int type, u
     case 11:
     case 32:
     output:
-        obj->WriteSwapped(data, size, count);
+        obj->hkOArchive_writeArrayGeneric(data, size, count);
         return;
     default: {
         unsigned int storage[128];
@@ -828,7 +828,7 @@ int Host::FUN_00e036b0(StreamObj* apSourceStream, StreamObj* apLookupStream, Str
                 int ebpInt = iSourceOffset;
                 if (pItem->type == 0x1b) {
                     scratch.pair2[0] = 0; scratch.pair2[1] = 0;
-                    pStream->WriteSwapped(scratch.pair2, (int)this->f0c, 1);
+                    pStream->hkOArchive_writeArrayGeneric(scratch.pair2, (int)this->f0c, 1);
                     if (((PointerValue*)ebpInt)->valid != 0) {
                         ebpInt = ((PointerValue*)ebpInt)->object;
                     } else {
@@ -850,7 +850,7 @@ int Host::FUN_00e036b0(StreamObj* apSourceStream, StreamObj* apLookupStream, Str
                 }
                 {
                     scratch.out[0] = 0; scratch.out[1] = 0;
-                    pStream->WriteSwapped(scratch.out, (int)this->f0c, 1);
+                    pStream->hkOArchive_writeArrayGeneric(scratch.out, (int)this->f0c, 1);
                     pStream->WriteInt(ebpInt);
                     if (pItem->type == 0x16) {
                         ebpInt |= 0x80000000;
@@ -881,7 +881,7 @@ int Host::FUN_00e036b0(StreamObj* apSourceStream, StreamObj* apLookupStream, Str
                 if (rawCount <= 0) break;
                 int iRemaining = rawCount;
                 do {
-                    apOutputStream->WriteSwapped(scratch.buf4, (int)this->f0c, 2);
+                    apOutputStream->hkOArchive_writeArrayGeneric(scratch.buf4, (int)this->f0c, 2);
                     iRemaining--;
                 } while (iRemaining != 0);
                 break;

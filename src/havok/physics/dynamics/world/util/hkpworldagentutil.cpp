@@ -619,7 +619,8 @@ void __cdecl DispatchSlotCallback(S_00cc0ed0_Rec* r, float a, float b, int c);
 // @fnv 0x00cc0ed0
 // pdb: hkpWorldAgentUtil::warpTime | hkpWorldAgentUtil.obj | fnv360_0822_retail, call_seq, high
 // pdb params: island, oldTime, newTime, collisionInput
-void __cdecl ProcessBlocks(S_00cc0ed0_Blocks* s, float a2, float a3, int a4)
+// pdb: hkpWorldAgentUtil::warpTime | hkpWorldAgentUtil.obj | fnv360_0822_retail, call_seq, high (was: ProcessBlocks)
+void __cdecl hkpWorldAgentUtil_warpTime(S_00cc0ed0_Blocks* s, float a2, float a3, int a4)
 {
     int i = 0;
     if (s->m60 > 0)

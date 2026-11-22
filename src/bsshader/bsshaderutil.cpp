@@ -121,7 +121,7 @@ struct Accumulator6b
     virtual void v14();
     virtual void v15();
     virtual void v16();
-    virtual void RegisterObject(void* pkObject);
+    virtual void hkPackfileWriter_notDuplicateMetaData(void* pkObject);
     virtual void SetSortingCamera(void* pkCamera, void* pkObject, int iFlags);
     int unk04;
     int unk08;
@@ -221,7 +221,7 @@ void __cdecl FUN_00b6bfc0(void* pkCamera, PointerList6b& kList, Accumulator6b* p
             {
                 void* pvCurrent = pvObject;
                 pvObject = kList.GetNext(kPos);
-                pkAccumulator->RegisterObject(pvCurrent);
+                pkAccumulator->hkPackfileWriter_notDuplicateMetaData(pvCurrent);
             } while (pvObject);
         }
     }

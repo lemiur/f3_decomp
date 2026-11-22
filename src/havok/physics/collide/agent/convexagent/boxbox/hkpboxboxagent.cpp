@@ -52,12 +52,13 @@ struct S_00d40180
     S_00d40180_Entry m_entries[8];
     unsigned char unk30;
     unsigned char m_uiItemCount;
-    void DispatchAndDelete(void* p);
+    void hkpBoxBoxAgent_cleanup(void* p);
 };
 // @fnv 0x00d40180
 // pdb: hkpBoxBoxAgent::cleanup | hkpBoxBoxAgent.obj | fnv360_0822_retail, vtable, high
 // pdb params: constraintOwner
-void S_00d40180::DispatchAndDelete(void* apArg)
+// pdb: hkpBoxBoxAgent::cleanup | hkpBoxBoxAgent.obj | fnv360_0822_retail, vtable, high (was: DispatchAndDelete)
+void S_00d40180::hkpBoxBoxAgent_cleanup(void* apArg)
 {
     for (int i = 0; i < m_uiItemCount; i++)
         m_target->vfn_14(m_entries[i].m_iOwnerObjectOffset, apArg);

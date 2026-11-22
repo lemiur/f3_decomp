@@ -24527,7 +24527,8 @@ int unk214;
 int unk218;
 Task* task;
 int state;
-bool HasFlag(int bit){return (*(volatile unsigned*)&flags>>bit)&1;}void FUN_007b3c70();void FUN_007aec10();void FUN_007b0540();void FUN_007b3180();bool FUN_007ae5e0(bool);void FUN_007acba0();bool FUN_007ac9b0();};
+// pdb: hkClassMember::isNotOwner | hkClassMember.obj | fnv360_0822_retail, objrun, high (was: HasFlag)
+bool hkClassMember_isNotOwner(int bit){return (*(volatile unsigned*)&flags>>bit)&1;}void FUN_007b3c70();void FUN_007aec10();void FUN_007b0540();void FUN_007b3180();bool FUN_007ae5e0(bool);void FUN_007acba0();bool FUN_007ac9b0();};
 // pdb: CombatState::UpdatePeriodicData | CombatState.obj | fnv360_0822_retail, caller_sim, low
 void State::FUN_007b3c70(){
 Actor* actor=owner->GetActor();Actor* target=owner->GetTarget();
@@ -24565,7 +24566,7 @@ if(state==-1 && task){task->ref14.Release();task=0;}
 else if((flags&3)&&target){
 if(t1.duration==0.0f){t1.start=DAT_0108cba0;t1.duration=DAT_00db954c;}
 if(t1.Expired()){
-if(!HasFlag(1)||!FUN_007ae5e0(true))FUN_007ae5e0(false);
+if(!hkClassMember_isNotOwner(1)||!FUN_007ae5e0(true))FUN_007ae5e0(false);
 t1.start=DAT_0108cba0;t1.duration=DAT_00db954c;
 }}
 else t1.duration=0.0f;
@@ -41624,7 +41625,8 @@ struct LosProjectile {
 };
 struct LosSettingF { unsigned int unk00; float value; float* GetFloat() { return &value; } };
 struct LosSettingI { unsigned int unk00; unsigned int value; unsigned int* GetUInt() { return &value; } };
-struct LosSettingB { unsigned int unk00; bool value; bool* GetBool() { return &value; } };
+// pdb: hkBufferedStreamWriter::isOk | hkBufferedStreamWriter.obj | fnv360_0822_retail, vtable, high (was: GetBool)
+struct LosSettingB { unsigned int unk00; bool value; bool* hkBufferedStreamWriter_isOk() { return &value; } };
 extern LosSettingF DAT_0108cba4;
 extern LosSettingI DAT_00f5f57c;
 extern LosSettingB DAT_0108cbec;
@@ -41661,7 +41663,7 @@ bool __cdecl CombatUtilities_CalculateProjectileLOS(LosActor* actor, LosProjecti
         pickData.FUN_00469bd0(endLoc);
         actor->GetParentCell()->FUN_004dcd70(&pickData);
         objHit = FUN_007cc540(&pickData, 0, projectile, &hitFraction, 0, DAT_00e1b0e4);
-        if (*DAT_0108cbec.GetBool() && (!DAT_0107a0ec || DAT_0107a0ec == DAT_0107a104 || DAT_0107a0ec == actor))
+        if (*DAT_0108cbec.hkBufferedStreamWriter_isOk() && (!DAT_0107a0ec || DAT_0107a0ec == DAT_0107a104 || DAT_0107a0ec == actor))
             FUN_007b8a50(&startLoc, &endLoc, objHit, hitFraction, 0, 0);
     } else {
         LosPoint3 targetVector = targetPoint - startLocation;
@@ -41690,7 +41692,7 @@ bool __cdecl CombatUtilities_CalculateProjectileLOS(LosActor* actor, LosProjecti
             pickData.FUN_00469bd0(endLoc);
             actor->GetParentCell()->FUN_004dcd70(&pickData);
             objHit = FUN_007cc540(&pickData, 0, projectile, &hitFraction, 0, DAT_00e1b0e4);
-            if (*DAT_0108cbec.GetBool() && (!DAT_0107a0ec || DAT_0107a0ec == DAT_0107a104 || DAT_0107a0ec == actor))
+            if (*DAT_0108cbec.hkBufferedStreamWriter_isOk() && (!DAT_0107a0ec || DAT_0107a0ec == DAT_0107a104 || DAT_0107a0ec == actor))
                 FUN_007b8a50(&startLoc, &endLoc, objHit, hitFraction, 0, 0);
             if (objHit)
                 break;

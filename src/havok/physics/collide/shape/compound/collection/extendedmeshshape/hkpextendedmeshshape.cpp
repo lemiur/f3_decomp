@@ -458,7 +458,7 @@ struct S_00d55bd0_MeshShape
     S_00d55bd0_ShapesSubpart* m_kShapesSubparts;
     unsigned int m_numShapesSubparts;
 
-    unsigned int FindNextNonDegenerateShapeKey(unsigned int initialKey) const;
+    unsigned int hkpExtendedMeshShape_getNextKey(unsigned int initialKey) const;
 };
 
 // @f3 0x009e3d00 (community match, verified in this file)
@@ -492,7 +492,8 @@ struct MeshShapeF3
 };
 // pdb: hkpExtendedMeshShape::getNextKey | hkpExtendedMeshShape.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, high
 // pdb params: initialKey
-unsigned int S_00d55bd0_MeshShape::FindNextNonDegenerateShapeKey(unsigned int initialKey) const
+// pdb: hkpExtendedMeshShape::getNextKey | hkpExtendedMeshShape.obj | fnv360_0822_retail, bridge_fnvpc, high (was: FindNextNonDegenerateShapeKey)
+unsigned int S_00d55bd0_MeshShape::hkpExtendedMeshShape_getNextKey(unsigned int initialKey) const
 {
     const MeshShapeF3* self = (const MeshShapeF3*)this;
     // hkpShapeBuffer (512 bytes, 16-aligned); non-char element type, see brief
@@ -741,13 +742,14 @@ struct bhkShapeOwner
     int unk_ac;
     int unk_b0;
     int unk_b4;
-    int GetShapeKey();
+    int hkpExtendedMeshShape_getFirstKey();
 };
 
 // @f3 0x009e3c70 (community match, verified in this file)
 extern "C" char* __cdecl FUN_00a564b0(char* result, const void* v0, const void* v1, const void* v2, float tol);
 // pdb: hkpExtendedMeshShape::getFirstKey | hkpExtendedMeshShape.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, high
-int bhkShapeOwner::GetShapeKey()
+// pdb: hkpExtendedMeshShape::getFirstKey | hkpExtendedMeshShape.obj | fnv360_0822_retail, bridge_fnvpc, high (was: GetShapeKey)
+int bhkShapeOwner::hkpExtendedMeshShape_getFirstKey()
 {
     FUN_00d55b40_Shape* shape;
     FUN_00d55b40_Buffer buffer;

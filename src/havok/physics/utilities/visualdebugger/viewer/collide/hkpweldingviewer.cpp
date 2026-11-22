@@ -11,7 +11,8 @@ extern int DAT_01268fbc;
 void* __cdecl FUN_00d62e20();
 // @fnv 0x00d62e60
 // pdb: hkpVehicleViewer::registerViewer | hkpVehicleViewer.obj | fnv360_0822_debug, udata, high
-void __cdecl RegisterWeldingViewer()
+// pdb: hkpVehicleViewer::registerViewer | hkpVehicleViewer.obj | fnv360_0822_debug, udata, high (was: RegisterWeldingViewer)
+void __cdecl hkpVehicleViewer_registerViewer()
 {
     void* result = ((FUN_00dd9380_class*)DAT_01269cd0)->FUN_00dd9380("WeldingViewer", (void*)&FUN_00d62e20);
     DAT_01268fbc = (int)result;

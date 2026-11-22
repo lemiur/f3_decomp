@@ -2,7 +2,7 @@
 // src/havok/physics/internal/collide/mopp/builder/assembler/hkpmoppdefaultassembler.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/build/20091222_000100_aianbecldeph/source/physics/internal/collide/mopp/builder/assembler/hkpmoppdefaultassembler.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-extern "C" void __cdecl GrowBuffer();
+extern "C" void __cdecl hkpMoppCodeGenerator_resize();
 
 // hkpMoppCodeGenerator: the code buffer is filled from its end backwards (New Vegas Xbox 360 PDB names).
 struct FUN_00e06780_class
@@ -14,7 +14,7 @@ struct FUN_00e06780_class
     void __thiscall AppendChar(char b);
 };
 
-// Writes character b at the current write position, advances the offset, and calls GrowBuffer when the offset reaches the capacity.
+// Writes character b at the current write position, advances the offset, and calls hkpMoppCodeGenerator_resize when the offset reaches the capacity.
 // @fnv 0x00e06780
 // pdb: hkpMoppCodeGenerator::addCode | hkpMoppDefaultAssembler.obj | tesv_win, call_dedup, low
 void __thiscall FUN_00e06780_class::AppendChar(char acValue)
@@ -24,7 +24,7 @@ void __thiscall FUN_00e06780_class::AppendChar(char acValue)
     *(p + base - 1) = acValue;
     ++m_pos;
     if (m_pos >= m_size)
-        GrowBuffer();
+        hkpMoppCodeGenerator_resize();
 }
 
 struct S_00e066f0_Src
@@ -138,24 +138,25 @@ struct ByteSink
     int m_iUsed;
     char* m_pBuffer;
 
-    void GrowBuffer();
+    void hkpMoppCodeGenerator_resize();
 
     void PutByte(char acValue)
     {
         m_pBuffer[m_uiLogicalSize - m_iUsed - 1] = acValue;
         m_iUsed++;
         if (m_iUsed >= m_uiLogicalSize)
-            GrowBuffer();
+            hkpMoppCodeGenerator_resize();
     }
 
-    void PutBytePair(char acFirst, char acSecond);
+    void hkpMoppCodeGenerator_addCommand8(char acFirst, char acSecond);
 };
 
 // Writes acSecond then acFirst to the sink via PutByte, in that order.
 // @fnv 0x00e067b0
 // pdb: hkpMoppCodeGenerator::addCommand8 | hkpMoppDefaultAssembler.obj | fnv360_0822_retail, call_gap, high
 // pdb params: code, param
-void ByteSink::PutBytePair(char acFirst, char acSecond)
+// pdb: hkpMoppCodeGenerator::addCommand8 | hkpMoppDefaultAssembler.obj | fnv360_0822_retail, call_gap, high (was: PutBytePair)
+void ByteSink::hkpMoppCodeGenerator_addCommand8(char acFirst, char acSecond)
 {
     PutByte(acSecond);
     PutByte(acFirst);
@@ -180,15 +181,15 @@ void BufferWriter::WriteInt24(int value)
     data[capacity - position - 1] = (unsigned char)value;
     ++position;
     if (position >= capacity)
-        ((FlushFunction)GrowBuffer)(this);
+        ((FlushFunction)hkpMoppCodeGenerator_resize)(this);
     data[capacity - position - 1] = (unsigned char)(value >> 8);
     ++position;
     if (position >= capacity)
-        ((FlushFunction)GrowBuffer)(this);
+        ((FlushFunction)hkpMoppCodeGenerator_resize)(this);
     data[capacity - position - 1] = (unsigned char)(value >> 16);
     ++position;
     if (position >= capacity)
-        ((FlushFunction)GrowBuffer)(this);
+        ((FlushFunction)hkpMoppCodeGenerator_resize)(this);
 }
 
 struct S_00e06aa0_Pool
@@ -757,7 +758,7 @@ void __thiscall FUN_00e069a0_cls::FUN_00e069a0(char a, unsigned int auValue)
 
 struct FUN_00e06490_cls
 {
-    void __thiscall GrowBuffer();
+    void __thiscall hkpMoppCodeGenerator_resize();
 };
 
 struct FUN_00e06a60_cls
@@ -786,7 +787,7 @@ void __thiscall FUN_00e06a60_cls::FillWithPattern(int count)
         unk0c++;
         if (unk0c >= unk08)
         {
-            ((FUN_00e06490_cls*)this)->GrowBuffer();
+            ((FUN_00e06490_cls*)this)->hkpMoppCodeGenerator_resize();
         }
         n--;
     } while (n != 0);
@@ -870,7 +871,7 @@ struct Stream
     int unk0c;
     char* unk10;
 
-    void GrowBuffer();
+    void hkpMoppCodeGenerator_resize();
 
     void AppendChar(char b)
     {
@@ -878,7 +879,7 @@ struct Stream
         unk0c++;
         if (unk0c >= unk08)
         {
-            GrowBuffer();
+            hkpMoppCodeGenerator_resize();
         }
     }
 
@@ -904,7 +905,7 @@ int __thiscall FUN_00e06c40_class::FUN_00e06c40(int a1, int a2)
     return 5;
 }
 
-extern "C" void __cdecl GrowBuffer();
+extern "C" void __cdecl hkpMoppCodeGenerator_resize();
 
 struct Sink
 {
@@ -1000,7 +1001,7 @@ struct S_00e06e00_Buf
     int unk8;
     int unkC;
     int unk10;
-    void PutBytePair(int tag, unsigned int v);
+    void hkpMoppCodeGenerator_addCommand8(int tag, unsigned int v);
     void hkpMoppCodeGenerator_addCommand16(int tag, unsigned int v);
     void FUN_00e06880(int tag, unsigned int v);
     void FUN_00e069a0(int tag, unsigned int v);
@@ -1088,12 +1089,12 @@ int S_00e06e00_Cls::hkpMoppDefaultAssembler_addTerminals(S_00e06e00_A0* a, S_00e
         buf->unkC++;
         if (buf->unkC >= buf->unk8)
         {
-            GrowBuffer();
+            hkpMoppCodeGenerator_resize();
         }
     }
     else if (v < 0x100)
     {
-        buf->PutBytePair(0x50, v);
+        buf->hkpMoppCodeGenerator_addCommand8(0x50, v);
     }
     else if (v < 0x10000)
     {
@@ -1131,7 +1132,8 @@ extern const double g_thresholdB;
 // @fnv 0x00e06f20
 // pdb: hkpMoppDefaultAssembler::getSplitCode | hkpMoppDefaultAssembler.obj | fnv360_0822_retail, caller, high
 // pdb params: norm
-int __stdcall ClassifyVec3Region(const Vec3* pVec)
+// pdb: hkpMoppDefaultAssembler::getSplitCode | hkpMoppDefaultAssembler.obj | fnv360_0822_retail, caller, high (was: ClassifyVec3Region)
+int __stdcall hkpMoppDefaultAssembler_getSplitCode(const Vec3* pVec)
 {
     int r;
     if ((double)pVec->x > g_thresholdA)
@@ -1268,13 +1270,13 @@ struct S_00e07680_Writer
     int m_pos;
     unsigned char* m_buf;
     void AppendChar(int b);
-    void GrowBuffer();
+    void hkpMoppCodeGenerator_resize();
     __forceinline void put(unsigned char b)
     {
         m_buf[m_cap - m_pos - 1] = b;
         m_pos++;
         if (m_pos >= m_cap)
-            GrowBuffer();
+            hkpMoppCodeGenerator_resize();
     }
 };
 struct S_00e07680
@@ -1372,7 +1374,7 @@ struct Handler
     int unk00, unk04, unk08, unk0c;
     Entry* unk10;
     void __thiscall FUN_00e06b20(Entry*);
-    int __thiscall ClassifyVec3Region(int);
+    int __thiscall hkpMoppDefaultAssembler_getSplitCode(int);
     void __thiscall hkpMoppDefaultAssembler_findPlanes(Entry*, Entry*, Entry**, Entry**);
     void __thiscall hkpMoppDefaultAssembler_addSplit(Entry*, Entry*, int, int, int);
     void __thiscall WriteSize(int);
@@ -1389,7 +1391,7 @@ int __thiscall Handler::FUN_00e07ca0(Entry* first, Entry* second, Entry* third, 
     Entry* originalFirst = first;
     FUN_00e06b20(originalFirst);
     int previous = unk10->unk0c;
-    int value = ClassifyVec3Region(originalFirst->unk60);
+    int value = hkpMoppDefaultAssembler_getSplitCode(originalFirst->unk60);
     Entry* originalThird = third;
     hkpMoppDefaultAssembler_findPlanes(originalFirst, originalThird, &first, &third);
     hkpMoppDefaultAssembler_addSplit(third, first, value, originalFirst->unk70->unk5c, originalFirst->unk74->unk5c);
@@ -1512,9 +1514,9 @@ struct S_00e07da0_Tree
     float unk54;
 
     void BuildRegion(S_00e07da0_Node* node, S_00e07da0_Region* parent, S_00e07da0_Region* region);
-    void ComputeNodeBounds(S_00e07da0_Node* node, S_00e07da0_Region* region);
+    void hkpMoppDefaultAssembler_calcTermCut(S_00e07da0_Node* node, S_00e07da0_Region* region);
     void FUN_00e07070(S_00e07da0_Region* parent, S_00e07da0_Region* region, S_00e07da0_Result* out);
-    int ClassifyVec3Region(void* p);
+    int hkpMoppDefaultAssembler_getSplitCode(void* p);
     void hkpMoppDefaultAssembler_findPlanes(S_00e07da0_Node* node, S_00e07da0_Region* region, int* lo, int* hi);
 };
 
@@ -1621,9 +1623,9 @@ struct Tree
     int unk40;
     float unk44;
 
-    void ComputeNodeBounds(Node* node, Region* region);
+    void hkpMoppDefaultAssembler_calcTermCut(Node* node, Region* region);
     void Solve(Region* parent, Region* region, Result* out);
-    int ClassifyVec3Region(void* p);
+    int hkpMoppDefaultAssembler_getSplitCode(void* p);
     void EdgeRange(Node* node, Region* region, int* lo, int* hi);
 };
 }
@@ -1645,7 +1647,7 @@ void S_00e07da0_Tree::BuildRegion(S_00e07da0_Node* pNode, S_00e07da0_Region* pPa
     if (node->b4 != 0)
     {
         region->AlignRanges();
-        self->ComputeNodeBounds(node, region);
+        self->hkpMoppDefaultAssembler_calcTermCut(node, region);
         return;
     }
 
@@ -1653,7 +1655,7 @@ void S_00e07da0_Tree::BuildRegion(S_00e07da0_Node* pNode, S_00e07da0_Region* pPa
     if (info->b2 == 1)
         self->Solve(parent, region, &out);
     region->AlignRanges();
-    int axis = self->ClassifyVec3Region(node->unk60);
+    int axis = self->hkpMoppDefaultAssembler_getSplitCode(node->unk60);
     {
         int lo, hi;
         self->EdgeRange(node, region, &lo, &hi);
@@ -1982,7 +1984,7 @@ void FUN_00e06ed0_Class::WriteOffsetDelta(int iTargetValue)
     if (iOffset > 0)
     {
         if (iOffset < 0xff)
-            m_pStreamWriter->PutBytePair(5, iOffset);
+            m_pStreamWriter->hkpMoppCodeGenerator_addCommand8(5, iOffset);
         else if (iOffset < 0xffff)
             m_pStreamWriter->hkpMoppCodeGenerator_addCommand16(6, iOffset);
         else if (iOffset < 0xffffff)
@@ -2047,13 +2049,14 @@ struct Tree07400
     int unk5C;
     float m_afMaxCount[3];
 
-    void ComputeNodeBounds(Node07400* node, Region07400* region);
+    void hkpMoppDefaultAssembler_calcTermCut(Node07400* node, Region07400* region);
 };
 
 // @f3 0x00a86eb0 (community match, verified in this file)
 // pdb: hkpMoppDefaultAssembler::calcTermCut | hkpMoppDefaultAssembler.obj | fnv360_0822_debug, call_gap_sim, high
 // pdb params: currentNode, currentInfo
-void Tree07400::ComputeNodeBounds(Node07400* node, Region07400* region)
+// pdb: hkpMoppDefaultAssembler::calcTermCut | hkpMoppDefaultAssembler.obj | fnv360_0822_debug, call_gap_sim, high (was: ComputeNodeBounds)
+void Tree07400::hkpMoppDefaultAssembler_calcTermCut(Node07400* node, Region07400* region)
 {
     Node07400* pNode = *(Node07400* volatile*)&node;
     Region07400* pRegion = *(Region07400* volatile*)&region;

@@ -6,13 +6,14 @@
 
 struct FUN_00e48970_struct : public hkpGroupFilter
 {
-    void ClearMaskedBits(unsigned int, unsigned int);
+    void hkpGroupFilter_disableCollisionsUsingBitfield(unsigned int, unsigned int);
 };
 
 // @f3 0x00a76990 (community match, verified in this file)
 // pdb: hkpGroupFilter::disableCollisionsUsingBitfield | hkpGroupFilter.obj | fnv360_0822_retail, objrun, high
 // pdb params: layerBitsA, layerBitsB
-void FUN_00e48970_struct::ClearMaskedBits(unsigned int auiMaskA, unsigned int auiMaskB)
+// pdb: hkpGroupFilter::disableCollisionsUsingBitfield | hkpGroupFilter.obj | fnv360_0822_retail, objrun, high (was: ClearMaskedBits)
+void FUN_00e48970_struct::hkpGroupFilter_disableCollisionsUsingBitfield(unsigned int auiMaskA, unsigned int auiMaskB)
 {
     int i = 0;
     unsigned int* mask = m_uiCollisionGroupMasks;

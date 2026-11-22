@@ -6,7 +6,7 @@
 
 struct FUN_00e3f340_Class
 {
-    int __thiscall FindEntryByKey(int arg);
+    int __thiscall hkPredGskAgent3_createZombie(int arg);
     void* __thiscall GetEntryByArg(int arg);
 };
 
@@ -56,7 +56,7 @@ void __cdecl FUN_00e2ba90()
 
 extern int DAT_010eb770;
 
-int __cdecl CompareStringsCaseInsensitive(int, int);
+int __cdecl hkString_strCasecmp(int, int);
 
 struct D481D0RefVariant
 {
@@ -1708,14 +1708,14 @@ BSAudio* __cdecl FUN_00c85750();
 
 }  // namespace fnv_00e3f110
 
-int __cdecl CompareStringsCaseInsensitive(unsigned int a, int b);
+int __cdecl hkString_strCasecmp(unsigned int a, int b);
 
 namespace fnv_00e30ff0 {
 extern int(__cdecl* DAT_011be4a0[])(int);
 
 }  // namespace fnv_00e30ff0
 
-int __cdecl CompareStringsCaseInsensitive(const char* pcA, const char* pcB);
+int __cdecl hkString_strCasecmp(const char* pcA, const char* pcB);
 
 struct BE3E7E0Entry
 {
@@ -2206,7 +2206,7 @@ namespace se3d200 {
 }
 
 namespace ns_e3e8 {
-int __cdecl CompareStringsCaseInsensitive(const char* a, const char* b) throw();
+int __cdecl hkString_strCasecmp(const char* a, const char* b) throw();
 }
 
 template <class T> struct hkRefPtr_e3e8

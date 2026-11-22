@@ -38,7 +38,8 @@ struct LinkNode
 // @f3 0x00998710 (community match, verified in this file)
 // pdb: hkAgentNnMachine_FindAgent | hkpAgentNnMachine.obj | fnv360_0822_retail, call_seq, high
 // pdb params: collA, collB
-void* __cdecl FindEntryValue(LinkNode* apFirst, LinkNode* apSecond)
+// pdb: hkAgentNnMachine_FindAgent | hkpAgentNnMachine.obj | fnv360_0822_retail, call_seq, high (was: FindEntryValue)
+void* __cdecl hkAgentNnMachine_FindAgent(LinkNode* apFirst, LinkNode* apSecond)
 {
     LinkNode* pSmaller;
     LinkNode* pOther;
@@ -101,7 +102,7 @@ void FUN_00cfddc0(unk_00cfddc0* pArg)
     }
 }
 
-// GetNodePairValue (0x00cfdf60, 184 bytes)
+// hkAgentNnMachine_GetAgentType (0x00cfdf60, 184 bytes)
 //
 // Two "grid" objects are looked up in a 32-column byte table that is held by a
 // context object:
@@ -133,7 +134,8 @@ struct FnvCtx
 // @f3 0x00998970 (community match, verified in this file)
 // pdb: hkAgentNnMachine_GetAgentType | hkpAgentNnMachine.obj | fnv360_0822_retail, call_gap_sim, high
 // pdb params: cdBodyA, cdBodyB, input, agentTypeOut, isFlippedOut
-void GetNodePairValue(FnvNode** ppA, FnvNode** ppB, FnvCtx* pCtx, int* pOutVal, int* pOutFlag)
+// pdb: hkAgentNnMachine_GetAgentType | hkpAgentNnMachine.obj | fnv360_0822_retail, call_gap_sim, high (was: GetNodePairValue)
+void hkAgentNnMachine_GetAgentType(FnvNode** ppA, FnvNode** ppB, FnvCtx* pCtx, int* pOutVal, int* pOutFlag)
 {
     FnvNode* pNodeA = *ppA;
     FnvNode* pNodeB = *ppB;

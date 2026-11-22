@@ -5469,7 +5469,7 @@ void FUN_0067a580(){if(N67A580::DAT_010770ac){N67A580::DAT_010770ac->control.Cle
 
 // @f3 0x0067ea20 (community match, verified in this file)
 namespace f3m_0067ea20 {
-namespace RemoveListItem {
+namespace hkpWorldOperationUtil_removeIsland {
 struct Node {void** data;Node* next;
  __forceinline bool Empty(){return !next&&!data;}
 };
@@ -40700,7 +40700,7 @@ struct Tile {
     int unk00, unk04, unk08, unk0c, unk10, unk14, unk18, unk1c, unk20, unk24;
     Tile* parent;
     float FUN_00becf40(int id);                          // GetFloat
-    bool FUN_00becf80(int id);                           // GetBool
+    bool FUN_00becf80(int id);                           // hkBufferedStreamWriter_isOk
     float FUN_00becfb0();
     float FUN_00bed040();
     void FUN_00bee190(int id, float value, int propagate);

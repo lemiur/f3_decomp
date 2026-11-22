@@ -134,7 +134,8 @@ struct RP
 
 // pdb: hkpWorldConstraintUtil::removeConstraint | hkpWorldConstraintUtil.obj | fnv360_0822_retail, call_gap, high
 // pdb params: constraint
-void DetachRecord(S_00d27820_P* pp)
+// pdb: hkpWorldConstraintUtil::removeConstraint | hkpWorldConstraintUtil.obj | fnv360_0822_retail, call_gap, high (was: DetachRecord)
+void hkpWorldConstraintUtil_removeConstraint(S_00d27820_P* pp)
 {
     RP* p = (RP*)pp;
     RRec* pRec = p->rec;
@@ -346,7 +347,7 @@ struct hkpConstraintOwner
     int m_iMaxSchemaSize;
     int m_iSchemaByteSize;
 
-    void AccumulateStats(hkpConstraintInstance* constraint, GenericConstraintAtomScheme& delta);
+    void hkpConstraintOwner_addConstraintInfo(hkpConstraintInstance* constraint, GenericConstraintAtomScheme& delta);
 };
 
 struct hkpConstraintInstance
@@ -455,7 +456,7 @@ void __cdecl FUN_00d27960(hkpConstraintInstance* instance, hkpConstraintOwner& c
         GenericConstraintAtomScheme info;
         info.clear();
         int callbackRequest = ((hkpModifierConstraintAtomF3*)newModifier)->FUN_00d22090(info);
-        constraintOwner.AccumulateStats(instance, info);
+        constraintOwner.hkpConstraintOwner_addConstraintInfo(instance, info);
         ConstraintRuntimeInfo* internal = instanceData->m_pConstraintInternal;
         if (internal)
             internal->m_ucCallbackRequest |= (hkUint8)callbackRequest;
@@ -551,7 +552,7 @@ struct ByteArray
 struct Island
 {
     unsigned int unk00, unk04, unk08, unk0c, unk10, unk14, unk18, count;
-    void AccumulateStats(Constraint*, ConstraintInfo*);
+    void hkpConstraintOwner_addConstraintInfo(Constraint*, ConstraintInfo*);
 };
 struct Entity
 {

@@ -8,7 +8,7 @@
 void __cdecl FUN_00d365d0();
 extern "C" void __cdecl FUN_00d36b70();
 extern "C" void __cdecl QueryClosestPoints();
-extern "C" void __cdecl GetClosestPointsShapeCollection();
+extern "C" void __cdecl hkpShapeCollectionAgent_staticGetClosestPoints();
 void __cdecl hkpListAgent_initAgentFunc(void* apObject);
 void CreateRetObj();
 void FUN_00d3d3e0();
@@ -291,7 +291,7 @@ extern unsigned char DAT_011b4284;
 extern unsigned char DAT_011b4284;
 extern float DAT_0104da48;
 extern unsigned char DAT_010ce7fc;
-extern "C" void __cdecl GetClosestPointsShapeCollection();
+extern "C" void __cdecl hkpShapeCollectionAgent_staticGetClosestPoints();
 void __cdecl QueryClosestPoints(void* a, void* b, void* c, unsigned int filter);
 extern float DAT_0104da48;
 extern unsigned char DAT_010ce7fc;

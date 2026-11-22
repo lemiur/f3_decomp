@@ -101,7 +101,8 @@ struct DispatchTarget
 // @fnv 0x00cf6e40
 // pdb: hkpPhantomBroadPhaseListener::removeCollisionPair | hkpPhantomBroadPhaseListener.obj | fnv360_0822_retail, vtable, high
 // pdb params: pair
-void __stdcall DispatchPairTargets(RefPair* apPair)
+// pdb: hkpPhantomBroadPhaseListener::removeCollisionPair | hkpPhantomBroadPhaseListener.obj | fnv360_0822_retail, vtable, high (was: DispatchPairTargets)
+void __stdcall hkpPhantomBroadPhaseListener_removeCollisionPair(RefPair* apPair)
 {
     if (apPair->pFirst->tag == 2)
     {

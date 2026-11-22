@@ -26086,13 +26086,14 @@ struct FUN_005533f0: FUN_00455a70,FUN_00458160 {
  FUN_005ae1d0 counter;
  Group* children;Parent* parent;void* next;Buffer buffer;
  virtual ~FUN_005533f0();
- bool HasFlag() const {return (flags>>3)&1;}
+ // pdb: hkClassMember::isNotOwner | hkClassMember.obj | fnv360_0822_retail, objrun, high (was: HasFlag)
+ bool hkClassMember_isNotOwner() const {return (flags>>3)&1;}
  void FUN_00552d40();
 };
 }
 // pdb: TESIdleForm::~TESIdleForm | TESIdleForm.obj | fnv360_0822_retail, call_seq, medium
 IdleDtor::FUN_005533f0::~FUN_005533f0() {
- if(DAT_0106cdcc->Flag5a6() && !DAT_0106cdcc->Flag5a9() && DAT_010721b8->enabled && HasFlag()) FUN_00552d40();
+ if(DAT_0106cdcc->Flag5a6() && !DAT_0106cdcc->Flag5a9() && DAT_010721b8->enabled && hkClassMember_isNotOwner()) FUN_00552d40();
  counter.FUN_005ae160();
  if(!DAT_0106cdcc->Flag5a9()) {
   Parent* savedParent=parent;
@@ -40560,7 +40561,8 @@ struct Idle {
     Idle* parent44;
     Idle* prev48;
 
-    bool HasFlag() const { return (flags08 >> 3) & 1; }
+    // pdb: hkClassMember::isNotOwner | hkClassMember.obj | fnv360_0822_retail, objrun, high (was: HasFlag)
+    bool hkClassMember_isNotOwner() const { return (flags08 >> 3) & 1; }
     void FUN_00552d40();
 };
 
@@ -40586,7 +40588,7 @@ void Idle::FUN_00552d40()
             parent44 = 0;
             Idle* nextIdle = list->data[idx];
             if (nextIdle) {
-                if (nextIdle->HasFlag())
+                if (nextIdle->hkClassMember_isNotOwner())
                     nextIdle->prev48 = prev48;
                 else
                     nextIdle->prev48 = prev48 ? (Idle*)prev48->formID0c : 0;

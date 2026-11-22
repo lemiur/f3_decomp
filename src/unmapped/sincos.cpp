@@ -209,7 +209,8 @@ inline float ClampMax(float afValue)
 // @fnv 0x00d10890
 // pdb: hkpWeldingUtility::initWeldingTable | hkpWeldingUtility.obj | fnv360_0822_retail, call_gap, high
 // pdb params: edgeNormalSnapDeltaAngle, triangleNormalSnapDeltaAngle
-void UpdateSkyEntries(float afA, float afB)
+// pdb: hkpWeldingUtility::initWeldingTable | hkpWeldingUtility.obj | fnv360_0822_retail, call_gap, high (was: UpdateSkyEntries)
+void hkpWeldingUtility_initWeldingTable(float afA, float afB)
 {
     for (int i = 0; i < 31; i++)
     {

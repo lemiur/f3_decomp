@@ -178,7 +178,7 @@ class hkControllerCD0E
   public:
     void hkOArchive_write32u(int mode);
     void hkOArchive_write8u(unsigned int flags);
-    void HashUInt(float t);
+    void hkOArchive_writeFloat32(float t);
     hkTargetCD0E* FUN_00d60800();
 };
 
@@ -209,7 +209,7 @@ class hkOwnerCD0E
     int unk0C;
     hkEntryCD0E* m_entries;
 
-    void ActivateEntry(int i, float t);
+    void hkVisualDebugger_writeStep(int i, float t);
 };
 
 // @f3 0x009530f0 (community match, verified in this file)
@@ -227,13 +227,14 @@ struct hkCtrlStub
 {
     void FUN_009ee8f0(int mode);
     void FUN_009ee560(unsigned int flags);
-    void HashUInt(float t);
+    void hkOArchive_writeFloat32(float t);
     hkTargetCD0E* FUN_009ee790();
 };
 
 // pdb: hkVisualDebugger::writeStep | hkVisualDebugger.obj | fnv360_0822_retail, call_seq, high
 // pdb params: i, t
-void hkOwnerCD0E::ActivateEntry(int aiIndex, float t)
+// pdb: hkVisualDebugger::writeStep | hkVisualDebugger.obj | fnv360_0822_retail, call_seq, high (was: ActivateEntry)
+void hkOwnerCD0E::hkVisualDebugger_writeStep(int aiIndex, float t)
 {
     hkEntryCD0E& e = reinterpret_cast<NativeOwner1480*>(this)->m_entries[aiIndex];
     if (e.m_item->m_uiContentCount.isActive())
@@ -241,7 +242,7 @@ void hkOwnerCD0E::ActivateEntry(int aiIndex, float t)
         hkCtrlStub* c = reinterpret_cast<hkCtrlStub*>(e.m_item->m_controller);
         c->FUN_009ee8f0(5);
         c->FUN_009ee560(0);
-        c->HashUInt(t);
+        c->hkOArchive_writeFloat32(t);
         c->FUN_009ee790()->activate();
     }
 }
@@ -1231,7 +1232,7 @@ struct Server_cd14
     int unk20, unk24, unk28, unk2C, unk30, unk34, unk38, unk3C, unk40, unk44, unk48, unk4C;
     int* m_types;
     int m_numTypes;
-    void ActivateEntry(int i, float t);
+    void hkVisualDebugger_writeStep(int i, float t);
     void AddEntry(const char* name, void* a, void* b);
 };
 

@@ -43,7 +43,7 @@ class hkpMoppModifierE485
 {
   public:
     virtual ~hkpMoppModifierE485();
-    virtual hkBoolE485 IsTerminalRemoved(hkUint32 id, const hkUint32* properties) = 0;
+    virtual hkBoolE485 hkpRemoveTerminalsMoppModifier_shouldTerminalBeRemoved(hkUint32 id, const hkUint32* properties) = 0;
     virtual void resetTerminal(hkUint32 id, const hkUint32* properties) = 0;
 };
 
@@ -54,14 +54,15 @@ class hkpRemoveTerminalsMoppModifierE485 : public hkReferencedObjectE485, public
     const hkArrayE485<hkUint32>* m_pTerminalIdsToRemove;
 
     virtual ~hkpRemoveTerminalsMoppModifierE485();
-    virtual hkBoolE485 IsTerminalRemoved(hkUint32 id, const hkUint32* properties);
+    virtual hkBoolE485 hkpRemoveTerminalsMoppModifier_shouldTerminalBeRemoved(hkUint32 id, const hkUint32* properties);
     virtual void resetTerminal(hkUint32 id, const hkUint32* properties);
 };
 
 // @fnv 0x00e48510
 // pdb: hkpRemoveTerminalsMoppModifier::shouldTerminalBeRemoved | hkpRemoveTerminalsMoppModifier.obj | fnv360_0822_retail, vtable, high
 // pdb params: id, properties
-hkBoolE485 hkpRemoveTerminalsMoppModifierE485::IsTerminalRemoved(hkUint32 id, const hkUint32* properties)
+// pdb: hkpRemoveTerminalsMoppModifier::shouldTerminalBeRemoved | hkpRemoveTerminalsMoppModifier.obj | fnv360_0822_retail, vtable, high (was: IsTerminalRemoved)
+hkBoolE485 hkpRemoveTerminalsMoppModifierE485::hkpRemoveTerminalsMoppModifier_shouldTerminalBeRemoved(hkUint32 id, const hkUint32* properties)
 {
     return m_pTerminalIdsToRemove->indexOf(id) >= 0;
 }
@@ -104,7 +105,7 @@ struct FUN_00e48580_Obj
 {
     int unk00;
     FUN_00e48580_Array arr;
-    void AppendPackedValue(int value);
+    void hkpRemoveTerminalsMoppModifier_addTerminalRemoveInfo(int value);
 };
 // Appends a packed entry to the array, growing it via the allocator when full, then stores 0 in the low 8 bits and value in the high 24 bits.
 // @f3 0x00a76540 (community match, verified in this file)
@@ -112,7 +113,8 @@ void __cdecl FUN_00901f10(void* array, int elementSize);
 
 // pdb: hkpRemoveTerminalsMoppModifier::addTerminalRemoveInfo | hkpRemoveTerminalsMoppModifier.obj | fnv360_0822_retail, vtable, high
 // pdb params: relativeMoppAddress
-void FUN_00e48580_Obj::AppendPackedValue(int value)
+// pdb: hkpRemoveTerminalsMoppModifier::addTerminalRemoveInfo | hkpRemoveTerminalsMoppModifier.obj | fnv360_0822_retail, vtable, high (was: AppendPackedValue)
+void FUN_00e48580_Obj::hkpRemoveTerminalsMoppModifier_addTerminalRemoveInfo(int value)
 {
     FUN_00e48580_Array* arr = &this->arr;
     if (arr->unk04 == (int)(arr->unk08 & 0x3fffffff))

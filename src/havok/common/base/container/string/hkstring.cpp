@@ -152,7 +152,8 @@ extern "C" int __cdecl FUN_00ecddf1(char* buf, unsigned int n, const char* fmt, 
 // @fnv 0x00cb0f60
 // pdb: hkString::snprintf | hkString.obj | fnv360_0822_retail, call_seq, high
 // pdb params: buf, len, fmt
-int __cdecl Vsnprintf(char* buf, int n, const char* fmt, ...)
+// pdb: hkString::snprintf | hkString.obj | fnv360_0822_retail, call_seq, high (was: Vsnprintf)
+int __cdecl hkString_snprintf(char* buf, int n, const char* fmt, ...)
 {
     va_list args;
     va_start(args, fmt);

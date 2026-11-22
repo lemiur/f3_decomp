@@ -60,7 +60,7 @@ struct XfScene_cls
     int unk34;
     char** m_38;
     int m_3c;
-    void AddReferencedObject(XfScene_cls* other);
+    void hkpConstraintChainInstance_addEntity(XfScene_cls* other);
 };
 
 static char* XfSelectRec(char* rec)
@@ -89,7 +89,7 @@ void hkpConstraintChainUtil_addConstraintToBallSocketChain(XfScene_cls* a1, XfSc
     ((FUN_008d2970_cls*)&outs[0])->FUN_008d2970((const __m128*)(p1 + 0xe0), a3);
     ((FUN_008d2970_cls*)&outs[1])->FUN_008d2970((const __m128*)(p2 + 0xe0), a3);
     sub->Push(&outs[0], &outs[1]);
-    a1->AddReferencedObject(a2);
+    a1->hkpConstraintChainInstance_addEntity(a2);
 }
 
 
@@ -190,7 +190,7 @@ struct ListB
     unsigned int unk34;
     unsigned int* m_38;
     unsigned int m_3c;
-    void AddReferencedObject(unsigned int key);
+    void hkpConstraintChainInstance_addEntity(unsigned int key);
     void FUN_00e5c460(unsigned int key);
 };
 

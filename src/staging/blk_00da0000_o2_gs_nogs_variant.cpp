@@ -275,7 +275,7 @@ struct HashEntryTable
 
     void FUN_00cb1870(hkMemoryAllocator& alloc, unsigned int key, unsigned int val);
 };
-// ForwardToInner: forwards a 64-bit value to a member function held at this->m_08.
+// hkSubStreamWriter_seekTellSupported: forwards a 64-bit value to a member function held at this->m_08.
 struct hkMemoryAllocator
 {
     virtual void vSlot00();

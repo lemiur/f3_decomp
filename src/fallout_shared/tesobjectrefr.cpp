@@ -9012,7 +9012,7 @@ struct RefStub
     virtual void v071();
     virtual void v072();
     virtual void Update(int a, int b);
-    virtual int HasFlag();
+    virtual int hkClassMember_isNotOwner();
     int unk04;
     int unk08;
     int unk0C;
@@ -10839,7 +10839,7 @@ struct RefX
     virtual void v115();
     virtual NiAVObject* GetNiNode();
     CharCtlX* GetPhysicsCharacterController();
-    bool HasFlag(int);
+    bool hkClassMember_isNotOwner(int);
     NiAVObject* Get3DSimple();
     TESObjectCELL* GetParentCell();
     NiPoint3* GetPos();

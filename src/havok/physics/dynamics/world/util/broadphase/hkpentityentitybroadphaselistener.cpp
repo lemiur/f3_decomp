@@ -259,7 +259,7 @@ struct D10800Listener
     int unk00;
     D10800World* m_pOwningWorld;
 
-    void DispatchCollisionPair(D10800HandlePair& pair);
+    void hkpEntityEntityBroadPhaseListener_addCollisionPair(D10800HandlePair& pair);
 };
 
 // Resolves both handles to collidables, looks up a quality index from the dispatcher grid, and if nonzero stores its data in input and calls FUN_00cc0f40.
@@ -277,7 +277,8 @@ void __cdecl hkpWorldAgentUtil_addAgent(D10800Collidable* collA, D10800Collidabl
 
 // pdb: hkpEntityEntityBroadPhaseListener::addCollisionPair | hkpEntityEntityBroadPhaseListener.obj | fnv360_0822_retail, vtable, high
 // pdb params: pair
-void D10800Listener::DispatchCollisionPair(D10800HandlePair& pair)
+// pdb: hkpEntityEntityBroadPhaseListener::addCollisionPair | hkpEntityEntityBroadPhaseListener.obj | fnv360_0822_retail, vtable, high (was: DispatchCollisionPair)
+void D10800Listener::hkpEntityEntityBroadPhaseListener_addCollisionPair(D10800HandlePair& pair)
 {
     D10800Collidable* pCollA = pair.m_kPointA->getOwner();
     D10800Collidable* pCollB = pair.m_kPointB->getOwner();
@@ -317,22 +318,23 @@ struct D10860HandlePair
 
 struct D10860Agent;
 
-D10860Agent* __cdecl FindEntryValue(const D10860Collidable* collA, const D10860Collidable* collB);
+D10860Agent* __cdecl hkAgentNnMachine_FindAgent(const D10860Collidable* collA, const D10860Collidable* collB);
 void __cdecl hkpWorldAgentUtil_removeAgent(D10860Agent* agent);
 
 struct D10860Listener
 {
-    void ProcessHandlePair(D10860HandlePair& pair);
+    void hkpEntityEntityBroadPhaseListener_removeCollisionPair(D10860HandlePair& pair);
 };
 
 // @fnv 0x00d10860
 // pdb: hkpEntityEntityBroadPhaseListener::removeCollisionPair | hkpEntityEntityBroadPhaseListener.obj | fnv360_0822_retail, vtable, high
 // pdb params: pair
-void D10860Listener::ProcessHandlePair(D10860HandlePair& pair)
+// pdb: hkpEntityEntityBroadPhaseListener::removeCollisionPair | hkpEntityEntityBroadPhaseListener.obj | fnv360_0822_retail, vtable, high (was: ProcessHandlePair)
+void D10860Listener::hkpEntityEntityBroadPhaseListener_removeCollisionPair(D10860HandlePair& pair)
 {
     D10860Collidable* collA = pair.m_kPointA->getOwner();
     D10860Collidable* collB = pair.m_kPointB->getOwner();
-    D10860Agent* agent = FindEntryValue(collA, collB);
+    D10860Agent* agent = hkAgentNnMachine_FindAgent(collA, collB);
     if (agent)
         hkpWorldAgentUtil_removeAgent(agent);
 }

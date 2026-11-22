@@ -37,7 +37,7 @@ class FUN_00dabed0_cls
     int unk1c;
     __m128 m_20;
 
-    void SetValueIfExpected(float expected, float value, int unused);
+    void hkpGskBaseAgent_warpTime(float expected, float value, int unused);
 };
 
 // If m_18 equals expected, stores value into m_18; otherwise sets m_18 to DAT_01012054 and zeroes m_20.
@@ -45,7 +45,8 @@ class FUN_00dabed0_cls
 namespace Defaults370 { extern const float DAT_00db38b8; }
 // pdb: hkpGskBaseAgent::warpTime | hkpGskBaseAgent.obj | fnv360_0822_retail, vtable, high
 // pdb params: oldTime, newTime, input
-void FUN_00dabed0_cls::SetValueIfExpected(float expected, float value, int unused) {
+// pdb: hkpGskBaseAgent::warpTime | hkpGskBaseAgent.obj | fnv360_0822_retail, vtable, high (was: SetValueIfExpected)
+void FUN_00dabed0_cls::hkpGskBaseAgent_warpTime(float expected, float value, int unused) {
     if (m_18 == expected) {
         m_18 = value;
     } else {
@@ -102,7 +103,7 @@ class FUN_00dac9e0_cls
     int unk08;
     int unk0c;
 
-    void ProcessGskContact(const hkpCdBody* bodyA, const hkpCdBody* bodyB, const GskAgentInput* input,
+    void hkpGskBaseAgent_getClosestPoints(const hkpCdBody* bodyA, const hkpCdBody* bodyB, const GskAgentInput* input,
                            hkpCdPointCollector* collector);
 };
 
@@ -167,7 +168,8 @@ int FUN_00a345e0(const GskInputF3* input, void* status, hkVector4F3* out1, hkVec
 
 // pdb: hkpGskBaseAgent::getClosestPoints | hkpGskBaseAgent.obj | fnv360_0822_retail, vtable, high
 // pdb params: bodyA, bodyB, input, collector
-void FUN_00dac9e0_cls::ProcessGskContact(const hkpCdBody* bodyA, const hkpCdBody* bodyB, const GskAgentInput* input,
+// pdb: hkpGskBaseAgent::getClosestPoints | hkpGskBaseAgent.obj | fnv360_0822_retail, vtable, high (was: ProcessGskContact)
+void FUN_00dac9e0_cls::hkpGskBaseAgent_getClosestPoints(const hkpCdBody* bodyA, const hkpCdBody* bodyB, const GskAgentInput* input,
                                          hkpCdPointCollector* collector)
 {
     StringCursor* pProfilerBuffer = (StringCursor*)TlsGetValue(DAT_0116913c);
@@ -623,7 +625,8 @@ struct __declspec(align(16)) S_00dac2b0_GskX
 
 // pdb: hkpGskBaseAgent::staticGetPenetrations | hkpGskBaseAgent.obj | fnv360_0822_retail, call_seq, high
 // pdb params: bodyA, bodyB, input, collector
-void __cdecl TestGsk(const S_00dac2b0_Body& bodyA, const S_00dac2b0_Body& bodyB, const void* input,
+// pdb: hkpGskBaseAgent::staticGetPenetrations | hkpGskBaseAgent.obj | fnv360_0822_retail, call_seq, high (was: TestGsk)
+void __cdecl hkpGskBaseAgent_staticGetPenetrations(const S_00dac2b0_Body& bodyA, const S_00dac2b0_Body& bodyB, const void* input,
                      S_00dac2b0_Collector& collector)
 {
     S_00dac2b0_MonitorStreamX::GetMonitorStream().timer("TtGsk");

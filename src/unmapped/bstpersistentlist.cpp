@@ -204,7 +204,7 @@ struct FUN_00b63f10_CH
 
 // Checks the target object's kind and m_3c, then dispatches to the handler at g_011f9f80[m_19c] (or index 0) using the sub-object's m_24 and m_0c.
 // @fnv 0x00b63f10
-// pdb: BSShaderAccumulator::RegisterObject | BSShaderAccumulator.obj | fnv360_0822_retail, udata, high
+// pdb: BSShaderAccumulator::hkPackfileWriter_notDuplicateMetaData | BSShaderAccumulator.obj | fnv360_0822_retail, udata, high
 // pdb params: apGeometry
 bool FUN_00b63f10_CH::DispatchHandler(FUN_00b63f10_Arg* apArg)
 {

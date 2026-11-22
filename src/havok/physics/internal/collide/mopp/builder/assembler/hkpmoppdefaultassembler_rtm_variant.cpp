@@ -4,7 +4,7 @@
 #include "f3_common.h"
 // src/havok/physics/internal/collide/mopp/builder/assembler/hkpmoppdefaultassembler.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/build/20091222_000100_aianbecldeph/source/physics/internal/collide/mopp/builder/assembler/hkpmoppdefaultassembler.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
-extern "C" void __cdecl GrowBuffer();
+extern "C" void __cdecl hkpMoppCodeGenerator_resize();
 struct ByteSink
 {
     int unk00;
@@ -13,17 +13,17 @@ struct ByteSink
     int m_iUsed;
     char* m_pBuffer;
 
-    void GrowBuffer();
+    void hkpMoppCodeGenerator_resize();
 
     void PutByte(char acValue)
     {
         m_pBuffer[m_uiLogicalSize - m_iUsed - 1] = acValue;
         m_iUsed++;
         if (m_iUsed >= m_uiLogicalSize)
-            GrowBuffer();
+            hkpMoppCodeGenerator_resize();
     }
 
-    void PutBytePair(char acFirst, char acSecond);
+    void hkpMoppCodeGenerator_addCommand8(char acFirst, char acSecond);
 };
 typedef void(__thiscall* FlushFunction)(void*);
 template <class T> inline T S_00e07040_Max(T a, T b)
@@ -123,7 +123,7 @@ struct Stream
     int unk0c;
     char* unk10;
 
-    void GrowBuffer();
+    void hkpMoppCodeGenerator_resize();
 
     void AppendChar(char b)
     {
@@ -131,13 +131,13 @@ struct Stream
         unk0c++;
         if (unk0c >= unk08)
         {
-            GrowBuffer();
+            hkpMoppCodeGenerator_resize();
         }
     }
 
     void hkpMoppCodeGenerator_addCommand16(int a, int b);
 };
-extern "C" void __cdecl GrowBuffer();
+extern "C" void __cdecl hkpMoppCodeGenerator_resize();
 struct S_00e07680_Writer
 {
     int unk0;
@@ -146,13 +146,13 @@ struct S_00e07680_Writer
     int m_pos;
     unsigned char* m_buf;
     void AppendChar(int b);
-    void GrowBuffer();
+    void hkpMoppCodeGenerator_resize();
     __forceinline void put(unsigned char b)
     {
         m_buf[m_cap - m_pos - 1] = b;
         m_pos++;
         if (m_pos >= m_cap)
-            GrowBuffer();
+            hkpMoppCodeGenerator_resize();
     }
 };
 extern int __cdecl hkMath_hkFloatToInt(float f);

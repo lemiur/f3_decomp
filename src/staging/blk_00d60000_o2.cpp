@@ -16,7 +16,8 @@ extern void* DAT_01269008;
 
 // @fnv 0x00d68800
 // pdb: hkpConstraintViewer::registerViewer | hkpConstraintViewer.obj | fnv360_0822_retail, udata, high
-void RegisterContactPointsInactive()
+// pdb: hkpConstraintViewer::registerViewer | hkpConstraintViewer.obj | fnv360_0822_retail, udata, high (was: RegisterContactPointsInactive)
+void hkpConstraintViewer_registerViewer()
 {
     Registry_00dd9380* reg = (Registry_00dd9380*)DAT_01269cd0;
     DAT_01269008 = reg->Register("Contact Points (Inactive)", FUN_00d687c0);
@@ -32,7 +33,8 @@ struct Registry_00dd9380_StandIn
 extern Registry_00dd9380_StandIn* DAT_01269cd0;
 // @fnv 0x00d688d0
 // pdb: hkpRigidBodyCentreOfMassViewer::registerViewer | hkpRigidBodyCentreOfMassViewer.obj | fnv360_0822_debug, udata, high
-void* RegisterContactPointsActive()
+// pdb: hkpRigidBodyCentreOfMassViewer::registerViewer | hkpRigidBodyCentreOfMassViewer.obj | fnv360_0822_debug, udata, high (was: RegisterContactPointsActive)
+void* hkpRigidBodyCentreOfMassViewer_registerViewer()
 {
     DAT_0126900c = (int)DAT_01269cd0->FUN_00dd9380("Contact Points (Active)", FUN_00d68890);
     return (void*)DAT_0126900c;
@@ -546,25 +548,25 @@ FUN_00d60860::FUN_00d60860(void* pData, unsigned char ucType)
 }
 }  // namespace fnv_00d60860
 
-void __stdcall WriteSwapped(char**, int, int);
+void __stdcall hkOArchive_writeArrayGeneric(char**, int, int);
 
 // @fnv 0x00d60900
 // pdb: hkOArchive::write16 | hkOArchive.obj | fnv360_0822_retail, call_gap + bridge(call_dedup|call_gap) + skyrim(call_gap), high
 void __stdcall hkOArchive_write16(char* p)
 {
-    WriteSwapped(&p, 2, 1);
+    hkOArchive_writeArrayGeneric(&p, 2, 1);
 }
 
 struct FUN_00d60600_class
 {
-    void __thiscall WriteSwapped(int a, int b, int c);
+    void __thiscall hkOArchive_writeArrayGeneric(int a, int b, int c);
     void __thiscall FUN_00d60b20(int a, int b);
 };
 
 // @fnv 0x00d60b20
 void __thiscall FUN_00d60600_class::FUN_00d60b20(int a, int aiValue)
 {
-    WriteSwapped(a, 8, aiValue);
+    hkOArchive_writeArrayGeneric(a, 8, aiValue);
 }
 
 struct FUN_00d61470_Class
@@ -1647,13 +1649,14 @@ struct hkpTransformCollapseUtilResultsD734
     int m_iThirdResult;
     int m_iFourthResult;
 
-    void PrintResults() throw();
+    void hkpTransformCollapseUtil_Results_report() throw();
 };
 
 // Logs four counters (collapsed shapes, removed identity transforms, specialized shapes, propagated transforms) via hkErrorD734::message.
 // @fnv 0x00d73430
 // pdb: hkpTransformCollapseUtil::Results::report | hkpTransformCollapseUtil.obj | fnv360_0822_retail, ustr, high
-void hkpTransformCollapseUtilResultsD734::PrintResults() throw()
+// pdb: hkpTransformCollapseUtil::Results::report | hkpTransformCollapseUtil.obj | fnv360_0822_retail, ustr, high (was: PrintResults)
+void hkpTransformCollapseUtilResultsD734::hkpTransformCollapseUtil_Results_report() throw()
 {
     {
         unsigned int auiBuf[128];

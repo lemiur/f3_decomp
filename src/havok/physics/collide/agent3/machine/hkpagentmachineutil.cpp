@@ -370,7 +370,8 @@ struct StatsCollector
 
 // pdb: hkpAgentMachineUtil::calcNnStatisticsContactMgrsOnly | hkpAgentMachineUtil.obj | fnv360_0822_retail, ustr, high
 // pdb params: track, collector
-void __cdecl CollectSectors(S_00d97360_Track& track, S_00d97360_Collector* collector)
+// pdb: hkpAgentMachineUtil::calcNnStatisticsContactMgrsOnly | hkpAgentMachineUtil.obj | fnv360_0822_retail, ustr, high (was: CollectSectors)
+void __cdecl hkpAgentMachineUtil_calcNnStatisticsContactMgrsOnly(S_00d97360_Track& track, S_00d97360_Collector* collector)
 {
     N_a26e70::StatsCollector* stats = (N_a26e70::StatsCollector*)collector;
     if ((track.m_kSectors.m_iCapacityState & 0x80000000) == 0)

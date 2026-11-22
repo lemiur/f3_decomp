@@ -216,15 +216,15 @@ struct S_00cb3da0_Ctx
 };
 
 void NotifyTargets(S_00cb3da0_Ctx* ctx, void* p);
-void DetachRecord(void* p);
+void hkpWorldConstraintUtil_removeConstraint(void* p);
 
-// If ctx->unk144 is nonzero, calls NotifyTargets with ctx and p, then always calls DetachRecord on p.
+// If ctx->unk144 is nonzero, calls NotifyTargets with ctx and p, then always calls hkpWorldConstraintUtil_removeConstraint on p.
 // @f3 0x00926480 (community match, verified in this file)
 void FUN_00cb3da0(S_00cb3da0_Ctx* context, void* record)
 {
     if (context->unk118)
         NotifyTargets(context, record);
-    DetachRecord(record);
+    hkpWorldConstraintUtil_removeConstraint(record);
 }
 
 
@@ -359,7 +359,7 @@ struct CB3DD0World
 };
 
 void __cdecl NotifyTargets(CB3DD0World* world, CB3DD0Entity* entity);
-void __cdecl DetachRecord(CB3DD0Entity* entity);
+void __cdecl hkpWorldConstraintUtil_removeConstraint(CB3DD0Entity* entity);
 
 // @f3 0x009264b0 (community match, verified in this file)
 // pdb: hkpWorldOperationUtil::removeConstraintImmediately | hkpWorldOperationUtil.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_seq), high
@@ -371,13 +371,13 @@ void __cdecl hkpWorldOperationUtil_removeConstraintImmediately(CB3DD0World* worl
     {
         if (fireCallbacks && world->unk118)
             NotifyTargets(world, entity);
-        DetachRecord(entity);
+        hkpWorldConstraintUtil_removeConstraint(entity);
         return;
     }
     world->unk084++;
     if (fireCallbacks && world->unk118)
         NotifyTargets(world, entity);
-    DetachRecord(entity);
+    hkpWorldConstraintUtil_removeConstraint(entity);
     if (--world->unk084)
         return;
     if (*reinterpret_cast<const unsigned char*>(&world->m_iPendingOperationCount))
@@ -452,9 +452,9 @@ struct Obj
     Agent* m_cc;
 };
 
-__declspec(nothrow) void __cdecl RemoveListItem(Obj* o, Agent* a);
+__declspec(nothrow) void __cdecl hkpWorldOperationUtil_removeIsland(Obj* o, Agent* a);
 
-// Clears o->m_8, calls the agent's RemoveItem, and if the agent's m_20 is not 0xffff, m_4c is 0 and ctx->m_c8 is set, calls RemoveListItem and v0(1).
+// Clears o->m_8, calls the agent's RemoveItem, and if the agent's m_20 is not 0xffff, m_4c is 0 and ctx->m_c8 is set, calls hkpWorldOperationUtil_removeIsland and v0(1).
 // @f3 0x00927460 (community match, verified in this file)
 struct AgentF3
 {
@@ -763,14 +763,15 @@ struct Stats
     int sum0;
     int sum1;
     int sum2;
-    void AccumulateStats(Holder* h, const int* s);
+    void hkpConstraintOwner_addConstraintInfo(Holder* h, const int* s);
 };
 
 // If the holder has a box, updates maxv and the three sums from s, adds s[1..3] into the box fields, and raises maxv to the box's a.
 // @f3 0x00929b70 (community match, verified in this file)
 // pdb: hkpConstraintOwner::addConstraintInfo | hkpWorldOperationUtil.obj | fnv360_0822_retail, caller, high
 // pdb params: constraint, delta
-void Stats::AccumulateStats(Holder* apHolder, const int* aiStats)
+// pdb: hkpConstraintOwner::addConstraintInfo | hkpWorldOperationUtil.obj | fnv360_0822_retail, caller, high (was: AccumulateStats)
+void Stats::hkpConstraintOwner_addConstraintInfo(Holder* apHolder, const int* aiStats)
 {
     Box*& box = *reinterpret_cast<Box**>(apHolder->pad + 0x28);
     if (box)
@@ -1313,7 +1314,8 @@ void ClearSlotReference(int* thisPtr, int* p);
 // @fnv 0x00cb4000
 // pdb: hkpWorldOperationUtil::removeIsland | hkpWorldOperationUtil.obj | fnv360_0822_retail, call_seq, high
 // pdb params: world, island
-void RemoveListItem(ListOwner* self, ListItem* volatile item)
+// pdb: hkpWorldOperationUtil::removeIsland | hkpWorldOperationUtil.obj | fnv360_0822_retail, call_seq, high (was: RemoveListItem)
+void hkpWorldOperationUtil_removeIsland(ListOwner* self, ListItem* volatile item)
 {
     ListItem* pItem = item;
     if ((pItem->m_flags & 3) == 0)
@@ -4815,7 +4817,7 @@ struct S00cb5100_Arr
     }
 };
 void FUN_00cf1480(float a, float b, void* p);
-void ProcessBlocks(S00cb5100_Body* b, float f, float g, int h);
+void hkpWorldAgentUtil_warpTime(S00cb5100_Body* b, float f, float g, int h);
 struct S00cb5100_World
 {
     int unk00;
@@ -5332,7 +5334,7 @@ void hkpWorldOperationUtil_internalActivateIsland(S00cb5100_World* originalWorld
         e->setFilter(apWorld->b2c5, apWorld->b2c6, apWorld->b2c7);
     }
 
-    ProcessBlocks(apBody, apBody->f44, apWorld->f190, apWorld->unk6c);
+    hkpWorldAgentUtil_warpTime(apBody, apBody->f44, apWorld->f190, apWorld->unk6c);
     unsigned int idx = apBody->idx20;
     if (idx != 0)
     {
@@ -6317,7 +6319,7 @@ struct MotionBase : RefHeader31
     S00cb4230_Half m_fGravityFactor;
     void FUN_00c905b0();
     void FUN_00d1dff0();
-    void SetFlagBits(int a, int b, int c);
+    void hkpMotion_setWorldSelectFlagsNeg(int a, int b, int c);
     void FUN_00c86610(MotionBase* p);
     float hkpMotion_getMass();
     __forceinline static void* operator new(unsigned int nbytes)

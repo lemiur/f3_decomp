@@ -108,13 +108,14 @@ class hkpMeshShapeDCC : public hkpShapeCollection
     int m_iNumBitsForSubpartIndex;
     hkArray<hkpMeshShapeSubpartDCC> m_kSubparts;
 
-    hkUint32 GetNextNonDegenerateTriangleKey(hkUint32 oldKey) const throw();
+    hkUint32 hkpMeshShape_getNextKey(hkUint32 oldKey) const throw();
 };
 
 // @f3 0x00a45530 (community match, verified in this file)
 // pdb: hkpMeshShape::getNextKey | hkpMeshShape.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, high
 // pdb params: initialKey
-hkUint32 hkpMeshShapeDCC::GetNextNonDegenerateTriangleKey(hkUint32 auiKey) const throw()
+// pdb: hkpMeshShape::getNextKey | hkpMeshShape.obj | fnv360_0822_retail, bridge_fnvpc, high (was: GetNextNonDegenerateTriangleKey)
+hkUint32 hkpMeshShapeDCC::hkpMeshShape_getNextKey(hkUint32 auiKey) const throw()
 {
     hkpShapeBufferDCC buffer;
 

@@ -3,7 +3,7 @@
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
 void __cdecl FUN_00dacc00();
-void __cdecl TestGsk();
+void __cdecl hkpGskBaseAgent_staticGetPenetrations();
 void __cdecl FUN_00dac450();
 void __cdecl FUN_00daf8e0();
 
@@ -24,14 +24,14 @@ struct FUN_00dacc70_vt
 void __cdecl InitVtable(FUN_00dacc70_vt* p)
 {
     p->m_pVirtualFunction0 = (void (*)())FUN_00dacc00;
-    p->m_pVirtualFunction1 = (void (*)())TestGsk;
+    p->m_pVirtualFunction1 = (void (*)())hkpGskBaseAgent_staticGetPenetrations;
     p->m_pVirtualFunction2 = (void (*)())FUN_00dac450;
     p->m_pVirtualFunction3 = (void (*)())FUN_00daf8e0;
     p->b0 = 0;
     p->b1 = 0;
 }
 
-void __cdecl ReleaseAllEntries(void*, void*, void*);
+void __cdecl hkGskManifold_cleanup(void*, void*, void*);
 
 struct FUN_00dacaf0_vt
 {
@@ -48,13 +48,13 @@ struct FUN_00dacaf0
     void cleanup(void* arg);
 };
 
-// Calls ReleaseAllEntries with field30, field8 and arg, then invokes the virtual destructor on this with flag 1.
+// Calls hkGskManifold_cleanup with field30, field8 and arg, then invokes the virtual destructor on this with flag 1.
 // @fnv 0x00dacaf0
 // pdb: hkpGskfAgent::cleanup | hkpGskfAgent.obj | fnv360_0822_retail, vtable, high
 // pdb params: constraintOwner
 void FUN_00dacaf0::cleanup(void* arg)
 {
-    ReleaseAllEntries(&field30[0], field8, arg);
+    hkGskManifold_cleanup(&field30[0], field8, arg);
     vt->dtor(this, 1);
 }
 
@@ -101,13 +101,14 @@ struct FUN_00dacb60_class
 
     Potential m_potentials[256];
 
-    void __thiscall AddPotential(unsigned short value);
+    void __thiscall hkpGskfAgent_commitPotential(unsigned short value);
 };
 
 // @fnv 0x00dacb60
 // pdb: hkpGskfAgent::commitPotential | hkpGskfAgent.obj | fnv360_0822_retail, vtable, high
 // pdb params: idToCommit
-void __thiscall FUN_00dacb60_class::AddPotential(unsigned short value)
+// pdb: hkpGskfAgent::commitPotential | hkpGskfAgent.obj | fnv360_0822_retail, vtable, high (was: AddPotential)
+void __thiscall FUN_00dacb60_class::hkpGskfAgent_commitPotential(unsigned short value)
 {
     int count = m_uiItemCount;
     int i;
@@ -167,13 +168,14 @@ class hkObjDACB
     unsigned char unk33;
     hkSlotDACB m_slots[8];
 
-    void ClearSlotById(short id);
+    void hkpGskfAgent_createZombie(short id);
 };
 
 // @fnv 0x00dacba0
 // pdb: hkpGskfAgent::createZombie | hkpGskfAgent.obj | fnv360_0822_retail, vtable, high
 // pdb params: idTobecomeZombie
-void hkObjDACB::ClearSlotById(short id)
+// pdb: hkpGskfAgent::createZombie | hkpGskfAgent.obj | fnv360_0822_retail, vtable, high (was: ClearSlotById)
+void hkObjDACB::hkpGskfAgent_createZombie(short id)
 {
     for (int i = 0; i < m_numSlots; i++)
     {

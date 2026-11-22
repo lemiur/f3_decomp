@@ -366,7 +366,7 @@ struct FUN_00dbe8c0_cls
     unsigned int m_u04;
     unsigned int m_uMask;
 
-    unsigned int FindEntryValue(unsigned int aKey0, unsigned int aKey1, unsigned int aDefault);
+    unsigned int hkAgentNnMachine_FindAgent(unsigned int aKey0, unsigned int aKey1, unsigned int aDefault);
 };
 
 // A 12-byte hash table (as used by the hkPackfileWriter module): a pointer to
@@ -737,7 +737,7 @@ struct Pair
     __declspec(nothrow) StringHandle CreateValueInto();
     __declspec(nothrow) Node50* DispatchToVTableSlot8(int mode);
     __declspec(nothrow) int FUN_00dbac70();
-    __declspec(nothrow) float ApplyValue();
+    __declspec(nothrow) float hkOffsetOnlyStreamWriter_seek();
     __declspec(nothrow) int CallVirtualWithArg();
 };
 struct Arr
@@ -1093,7 +1093,7 @@ struct ScanMap
 {
     void* data;
     int size, capacity;
-    __declspec(nothrow) int FindEntryValue(ScanKey key, int fallback) const;
+    __declspec(nothrow) int hkAgentNnMachine_FindAgent(ScanKey key, int fallback) const;
     __declspec(nothrow) void InsertOrUpdate(AllocOwner* heap, ScanKey key, int value);
     __forceinline void insert(AllocOwner* heap, ScanKey key, int value)
     {

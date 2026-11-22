@@ -342,7 +342,7 @@ struct S_00d75cb0_Ref
     S_00d75cb0_Ref(hkVector4* q) : p(q) {}
 };
 
-int __cdecl Vsnprintf(void* buf, int size, const char* fmt, unsigned int arg);
+int __cdecl hkString_snprintf(void* buf, int size, const char* fmt, unsigned int arg);
 int __cdecl hkString_strLen(int x);
 extern const char str_010c1a98[];
 
@@ -372,7 +372,7 @@ struct FUN_00cc02d0_cls {
 // pdb params: u
 FUN_00cc02d0_cls* FUN_00cc02d0_cls::FUN_00cc02d0(int arg) {
     char buf[0x2728];
-    Vsnprintf(buf, 0x2728, str_010c1a98, arg);
+    hkString_snprintf(buf, 0x2728, str_010c1a98, arg);
     FUN_00cc0080(m_08, buf);
     return this;
 }

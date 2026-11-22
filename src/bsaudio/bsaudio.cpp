@@ -387,7 +387,8 @@ struct SettingBool
     virtual ~SettingBool();
     bool bValue;
     char* pKey;
-    bool& GetBool()
+    // pdb: hkBufferedStreamWriter::isOk | hkBufferedStreamWriter.obj | fnv360_0822_retail, vtable, high (was: GetBool)
+    bool& hkBufferedStreamWriter_isOk()
     {
         return this ? bValue : (DAT_01202800 = false);
     }

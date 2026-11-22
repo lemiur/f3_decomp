@@ -5,7 +5,8 @@
 // @fnv 0x00dd51f0
 // pdb: hkpMoppShapeMediator::getPrimitiveProperties | hkpMoppShapeMediator.obj | fnv360_0822_retail, vtable, high
 // pdb params: primitiveIn, cid
-int __stdcall ReadIntField(const void* a, int* piValue)
+// pdb: hkpMoppShapeMediator::getPrimitiveProperties | hkpMoppShapeMediator.obj | fnv360_0822_retail, vtable, high (was: ReadIntField)
+int __stdcall hkpMoppShapeMediator_getPrimitiveProperties(const void* a, int* piValue)
 {
     *piValue = *(const int*)((const char*)a + 4);
     return 1;
@@ -51,14 +52,15 @@ struct FUN_00dd5210_Object
     int unk04;
     FUN_00dd5210_Interface* unk08;
     int unk0c;
-    void FillRecords(FUN_00dd5210_Record* records);
+    void hkpMoppShapeMediator_getPrimitives(FUN_00dd5210_Record* records);
 };
 
 // Fills count records with successive values from unk08, starting at GetValue() and advancing via UseValue().
 // @fnv 0x00dd5210
 // pdb: hkpMoppShapeMediator::getPrimitives | hkpMoppShapeMediator.obj | fnv360_0822_retail, vtable, high
 // pdb params: primitives
-void FUN_00dd5210_Object::FillRecords(FUN_00dd5210_Record* records)
+// pdb: hkpMoppShapeMediator::getPrimitives | hkpMoppShapeMediator.obj | fnv360_0822_retail, vtable, high (was: FillRecords)
+void FUN_00dd5210_Object::hkpMoppShapeMediator_getPrimitives(FUN_00dd5210_Record* records)
 {
     int count = unk0c;
     int value = unk08->GetValue();
@@ -192,14 +194,15 @@ struct ProjectionShape
     int unk04;
     hkpShapeContainer* m_container;
 
-    void ComputeProjectionRange(const hkVector4& direction, int unused, ProjectionSample* samples, int numSamples,
+    void hkpMoppShapeMediator_projectPrimitives(const hkVector4& direction, int unused, ProjectionSample* samples, int numSamples,
                                 hkReal* minOut, hkReal* maxOut);
 };
 
 // @f3 0x00a54c10 (community match, verified in this file)
 // pdb: hkpMoppShapeMediator::projectPrimitives | hkpMoppShapeMediator.obj | fnv360_0822_retail, vtable, high
 // pdb params: direction, directionIndex, primitives, numPrimitives, absMinOut, absMaxOut
-void ProjectionShape::ComputeProjectionRange(const hkVector4& direction, int unused, ProjectionSample* samples,
+// pdb: hkpMoppShapeMediator::projectPrimitives | hkpMoppShapeMediator.obj | fnv360_0822_retail, vtable, high (was: ComputeProjectionRange)
+void ProjectionShape::hkpMoppShapeMediator_projectPrimitives(const hkVector4& direction, int unused, ProjectionSample* samples,
                                              int numSamples, hkReal* minOut, hkReal* maxOut)
 {
     hkpShapeBuffer buffer;

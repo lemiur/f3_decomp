@@ -184,12 +184,13 @@ class hkObjD273
     int m_10;
     int m_14;
 
-    hkBoolD273 GetBool();
+    hkBoolD273 hkBufferedStreamWriter_isOk();
 };
 
 // @fnv 0x00d27300
 // pdb: hkBufferedStreamWriter::isOk | hkBufferedStreamWriter.obj | fnv360_0822_retail, vtable, high
-hkBoolD273 hkObjD273::GetBool()
+// pdb: hkBufferedStreamWriter::isOk | hkBufferedStreamWriter.obj | fnv360_0822_retail, vtable, high (was: GetBool)
+hkBoolD273 hkObjD273::hkBufferedStreamWriter_isOk()
 {
     return m_pObservedSource ? m_pObservedSource->IsStreamValid() : hkBoolD273(m_10 != m_14);
 }

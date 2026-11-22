@@ -33059,7 +33059,8 @@ struct Speaker {
     virtual bool v100();
     unsigned int unk004, unk008, unk00c, unk010, unk014, unk018;
     Base1c* unk1c;
-    bool HasFlag(int value) { Base1c* base=unk1c; return base->flags.FUN_00450a70(value); }
+    // pdb: hkClassMember::isNotOwner | hkClassMember.obj | fnv360_0822_retail, objrun, high (was: HasFlag)
+    bool hkClassMember_isNotOwner(int value) { Base1c* base=unk1c; return base->flags.FUN_00450a70(value); }
 };
 struct Menu { unsigned int unk000, unk004, unk008, unk00c, unk010, unk014, unk018, unk01c, unk020, unk024, unk028, unk02c, unk030, unk034, unk038, unk03c, unk040, unk044, unk048, unk04c, unk050, unk054, unk058, unk05c, unk060, unk064, unk068; Speaker* unk6c; };
 extern Menu* DAT_01075e6c;
@@ -33093,30 +33094,30 @@ bool __cdecl FUN_006323a0(Param* param)
         switch (param->form->type) {
         case 0x28:
         case 0x29:
-            result = !sp->HasFlag(1);
+            result = !sp->hkClassMember_isNotOwner(1);
             break;
         case 0x18:
-            result = !sp->HasFlag(2);
+            result = !sp->hkClassMember_isNotOwner(2);
             break;
         case 0x2e:
             result = true;
             break;
         case 0x31:
-            result = (form && FUN_0045bd90(form) > 0) ? !sp->HasFlag(0x400) : true;
+            result = (form && FUN_0045bd90(form) > 0) ? !sp->hkClassMember_isNotOwner(0x400) : true;
             break;
         case 0x1f:
         case 0x32:
-            result = !sp->HasFlag(0x400);
+            result = !sp->hkClassMember_isNotOwner(0x400);
             break;
         case 0x19:
-            result = !sp->HasFlag(8);
+            result = !sp->hkClassMember_isNotOwner(8);
             break;
         case 0x2f:
             switch (FUN_0044cf60(param->form)) {
-            case 10: result = !sp->HasFlag(0x20); break;
-            case 11: result = !sp->HasFlag(0x40); break;
-            case 12: result = !sp->HasFlag(0x10); break;
-            case 13: result = !sp->HasFlag(4); break;
+            case 10: result = !sp->hkClassMember_isNotOwner(0x20); break;
+            case 11: result = !sp->hkClassMember_isNotOwner(0x40); break;
+            case 12: result = !sp->hkClassMember_isNotOwner(0x10); break;
+            case 13: result = !sp->hkClassMember_isNotOwner(4); break;
             }
             break;
         }

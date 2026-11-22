@@ -22,7 +22,7 @@ struct S_00d3f660
     int unk4;
     S_00d3f660_Owner* unk8;
     unsigned short unkC;
-    void ReleaseAndDelete(void* arg);
+    void hkpSphereSphereAgent_cleanup(void* arg);
 };
 
 #include <xmmintrin.h>

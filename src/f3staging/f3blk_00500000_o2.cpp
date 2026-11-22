@@ -32352,14 +32352,15 @@ struct Node {
     unsigned char unk4f;
     char unk50[0x20];
     Node* parent;
-    bool HasFlag(unsigned int type) const {
+    // pdb: hkClassMember::isNotOwner | hkClassMember.obj | fnv360_0822_retail, objrun, high (was: HasFlag)
+    bool hkClassMember_isNotOwner(unsigned int type) const {
         if (type <= 5)
             return (flags & (unsigned char)(1 << type)) != 0;
         return true;
     }
     Node* GetParent(unsigned int type) const {
         Node* p = parent;
-        if (p && !HasFlag(type))
+        if (p && !hkClassMember_isNotOwner(type))
             p = 0;
         return p;
     }
@@ -43739,7 +43740,8 @@ struct Ref {
 struct Entry {
     int unk00; int unk04; int unk08;
     unsigned int flags0c;
-    bool HasFlag() const { return (flags0c >> 4) & 1; }
+    // pdb: hkClassMember::isNotOwner | hkClassMember.obj | fnv360_0822_retail, objrun, high (was: HasFlag)
+    bool hkClassMember_isNotOwner() const { return (flags0c >> 4) & 1; }
 };
 
 Entry* __cdecl FUN_00424d50(int* table, void* key);
@@ -43754,7 +43756,7 @@ bool __cdecl Script_CanHaveFlamesConditionFunction(Ref* ref, void* arg1, void* a
         void* key = ref->vfn_1d0(arg)->FUN_00824a50();
         if (key) {
             Entry* entry = FUN_00424d50(&DAT_0116d6e4, key);
-            *result = entry->HasFlag() ? 1.0f : 0.0f;
+            *result = entry->hkClassMember_isNotOwner() ? 1.0f : 0.0f;
         }
     }
     if (DAT_0117c250)

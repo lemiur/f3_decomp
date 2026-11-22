@@ -1823,7 +1823,7 @@ void Cfd50Caller(void)
 struct CE1700World
 {
     void FUN_00c97e80(char* result, void* object);
-    void RemoveEntities(void* owner, int flags);
+    void hkpWorld_removeEntityBatch(void* owner, int flags);
 };
 struct CE1700Node
 {
@@ -1842,7 +1842,7 @@ struct CE1700Owner
     int count;
     int hkaRagdollInstance_removeFromWorld();
 };
-// Returns 1 if the owner's node has no world; otherwise calls world->FUN_00c97e80 per object, then world->RemoveEntities(owner, flags), and returns 0.
+// Returns 1 if the owner's node has no world; otherwise calls world->FUN_00c97e80 per object, then world->hkpWorld_removeEntityBatch(owner, flags), and returns 0.
 // @fnv 0x00ce1700
 // pdb: hkaRagdollInstance::removeFromWorld | hkaRagdollInstance.obj | fnv360_0822_retail, caller_sim + skyrim(caller_sim), high
 int CE1700Owner::hkaRagdollInstance_removeFromWorld()
@@ -1858,7 +1858,7 @@ int CE1700Owner::hkaRagdollInstance_removeFromWorld()
         char result;
         world->FUN_00c97e80(&result, objects[i]);
     }
-    world->RemoveEntities(owner, flags);
+    world->hkpWorld_removeEntityBatch(owner, flags);
     return 0;
 }
 

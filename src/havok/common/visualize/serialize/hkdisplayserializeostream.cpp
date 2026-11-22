@@ -10,13 +10,13 @@ unsigned int FUN_00dda830(const unsigned int* puiValues)
     return 4 * (3 * (puiValues[4] + puiValues[1])) + 8;
 }
 
-void __stdcall WriteFloatArray(unsigned int, unsigned int);
+void __stdcall hkOArchive_writeArrayFloat32(unsigned int, unsigned int);
 // @fnv 0x00dda730
 // pdb: hkDisplaySerializeOStream::writeQuadVector4 | hkDisplaySerializeOStream.obj | fnv360_0822_retail, call_gap, medium
 // pdb params: v
 void __stdcall FUN_00dda730(unsigned int p)
 {
-    WriteFloatArray(p, 3);
+    hkOArchive_writeArrayFloat32(p, 3);
 }
 
 struct hkMemoryAllocator
@@ -148,7 +148,7 @@ AllocatorHolder* __cdecl FUN_00c85750();
 //
 // The original is a __thiscall member with ONE 4-byte stack argument (the
 // callers do `mov ecx,<object> / push <arg> / call WriteUInt16`, and the body
-// ends in `ret 4`).  It forwards `this` (ECX) unchanged to WriteSwapped and
+// ends in `ret 4`).  It forwards `this` (ECX) unchanged to hkOArchive_writeArrayGeneric and
 // passes the ADDRESS of its own incoming argument as the first argument of
 // that call, followed by the constants 2 and 1:
 //
@@ -159,13 +159,13 @@ AllocatorHolder* __cdecl FUN_00c85750();
 //     call 0x00d60600
 //     ret 4
 //
-// WriteSwapped is a __thiscall member of its own (it uses ECX as `this` and
+// hkOArchive_writeArrayGeneric is a __thiscall member of its own (it uses ECX as `this` and
 // pops three 4-byte arguments), so it is only DECLARED here: the call target
 // is then bound by the checker from the original's own bytes.
 
 struct hkOArchiveStandIn
 {
-    void WriteSwapped(void* p, int n, int m);  // declared, never defined
+    void hkOArchive_writeArrayGeneric(void* p, int n, int m);  // declared, never defined
     void WriteUInt16(unsigned int value);
 };
 
@@ -174,7 +174,7 @@ struct hkOArchiveStandIn
 // pdb params: u
 void hkOArchiveStandIn::WriteUInt16(unsigned int value)
 {
-    WriteSwapped(&value, 2, 1);
+    hkOArchive_writeArrayGeneric(&value, 2, 1);
 }
 
 #include <xmmintrin.h>
@@ -212,7 +212,7 @@ struct S_00dda740_Transform
 
 struct S_00dda740
 {
-    void WriteFloatArray(const float* data, int n);
+    void hkOArchive_writeArrayFloat32(const float* data, int n);
     void WriteTransform(const S_00dda740_Transform& t);
 };
 
@@ -324,7 +324,7 @@ struct DDA8C0Writer
     void hkOArchive_write8(int v);
     void WriteTransform(const void* p);
     void FUN_00dda730(const void* p);
-    void HashUInt(float f);
+    void hkOArchive_writeFloat32(float f);
     void WriteInt(int v);
     void WriteGeometry(const DDA7C0Geometry& geometry);
     void WriteShape(Shape* p);
@@ -354,14 +354,14 @@ void DDA8C0Writer::WriteShape(Shape* p)
         tmp[1] = p->vec60.f[1];
         tmp[2] = p->vec60.f[2];
         tmp[3] = p->vec60.f[3];
-        HashUInt(tmp[3]);
+        hkOArchive_writeFloat32(tmp[3]);
         FUN_00dda730(tmp);
         WriteInt(p->i70);
         WriteInt(p->i74);
         break;
     case 8:
         WriteTransform(&p->unk10);
-        HashUInt(p->f80);
+        hkOArchive_writeFloat32(p->f80);
         FUN_00dda730(&p->vec60);
         FUN_00dda730(&p->i70);
         WriteInt(p->i84);
@@ -369,7 +369,7 @@ void DDA8C0Writer::WriteShape(Shape* p)
         break;
     case 9:
         WriteTransform(&p->unk10);
-        HashUInt(p->f80);
+        hkOArchive_writeFloat32(p->f80);
         FUN_00dda730(&p->vec60);
         FUN_00dda730(&p->i70);
         WriteInt(p->i84);
@@ -386,24 +386,24 @@ void DDA8C0Writer::WriteShape(Shape* p)
     case 4:
         FUN_00dda730(p->GetValue(&b1));
         FUN_00dda730(p->GetVec4At70(&b2));
-        HashUInt(p->FUN_00de5350());
-        HashUInt(p->FUN_00de5340());
+        hkOArchive_writeFloat32(p->FUN_00de5350());
+        hkOArchive_writeFloat32(p->FUN_00de5340());
         WriteInt(p->FUN_00de5360());
         break;
     case 5:
         FUN_00dda730(p->CopyVec4ToBuffer(&b3));
         FUN_00dda730(p->GetQuad16(&b4));
         FUN_00dda730(p->CopyStatsTo(&b5));
-        HashUInt(p->FUN_00de4900());
-        HashUInt(p->FUN_00de48e0());
-        HashUInt(p->FUN_00de48f0());
+        hkOArchive_writeFloat32(p->FUN_00de4900());
+        hkOArchive_writeFloat32(p->FUN_00de48e0());
+        hkOArchive_writeFloat32(p->FUN_00de48f0());
         WriteInt(p->FUN_00de4910());
         break;
     case 7:
         FUN_00dda730(p->FUN_00de4df0());
         FUN_00dda730(p->FUN_00de4de0());
         FUN_00dda730(p->FUN_00de4e00());
-        HashUInt(*p->FUN_00de4e10());
+        hkOArchive_writeFloat32(*p->FUN_00de4e10());
         break;
     }
 }

@@ -33,7 +33,8 @@ extern ErrorReporter* DAT_010f3364;
 
 // pdb: hkReferenceCountError | hkError.obj | fnv360_0822_retail, ustr, high
 // pdb params: o, why
-void __cdecl ReportReferenceCountError(const void* object, const char* context)
+// pdb: hkReferenceCountError | hkError.obj | fnv360_0822_retail, ustr, high (was: ReportReferenceCountError)
+void __cdecl hkReferenceCountError(const void* object, const char* context)
 {
     CharBuffer message;
     unsigned int storage[128];

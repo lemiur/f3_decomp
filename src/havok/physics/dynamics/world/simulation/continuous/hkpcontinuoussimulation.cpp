@@ -161,7 +161,7 @@ extern int DAT_010cd45c;
 struct Manager { int unk00; int unk04; int unk08; int unk0c; int unk10; };
 Manager* __cdecl FUN_00c85750();
 
-void __cdecl InitAndDispatch();
+void __cdecl hkpContinuousSimulation_processAgentCollideContinuous();
 struct S_00d0f2e0
 {
     void* FUN_00cf9480(void* a, void* b, void* c, void (__cdecl *pfnCallback)(), int iFlags);
@@ -172,7 +172,7 @@ struct S_00d0f2e0
 // pdb params: entities, numEntities, input
 void* S_00d0f2e0::FUN_00d0f2e0(void* a, void* b, void* c)
 {
-    return FUN_00cf9480(a, b, c, InitAndDispatch, 0);
+    return FUN_00cf9480(a, b, c, hkpContinuousSimulation_processAgentCollideContinuous, 0);
 }
 
 struct TimeStep {float start,end,delta,inverse;};
@@ -196,7 +196,7 @@ struct Controller {
  int flags,kind,capacity,mode;float start,end;
  void FUN_00d0d3f0(Body**,int,Context*,int);
  void FUN_00d0f2e0(Body**,int,World*);
- void ProcessBodies(Body**,int,Context*,int);
+ void hkpContinuousSimulation_reintegrateAndRecollideEntities(Body**,int,Context*,int);
 };
 // Runs the controller's update on bodies: sets a temporary time step, processes active bodies, applies optional passes, then restores the world time step.
 // @f3 0x0098f7f0 (community match, verified in this file)
@@ -244,7 +244,8 @@ struct ControllerMemberView
 
 // pdb: hkpContinuousSimulation::reintegrateAndRecollideEntities | hkpContinuousSimulation.obj | fnv360_0822_retail, vtable, high
 // pdb params: entities, numEntities, world, reintegrateRecollideMode
-void Controller::ProcessBodies(Body** bodies, int count, Context* context, int flags)
+// pdb: hkpContinuousSimulation::reintegrateAndRecollideEntities | hkpContinuousSimulation.obj | fnv360_0822_retail, vtable, high (was: ProcessBodies)
+void Controller::hkpContinuousSimulation_reintegrateAndRecollideEntities(Body** bodies, int count, Context* context, int flags)
 {
     ControllerContextView* ctx = (ControllerContextView*)context;
     ++ctx->m_iDepth;
@@ -1552,7 +1553,7 @@ struct FUN_00d0daa0_cls {
     int unk00;
 
     void QueueToiEvent(ThingS* apS, ThingX* apX);
-    void InitAndDispatch(ThingX* apX, ThingP* apP, ThingS* apS);
+    void hkpContinuousSimulation_processAgentCollideContinuous(ThingX* apX, ThingP* apP, ThingS* apS);
 };
 
 // @f3 0x0098dd40 (community match, verified in this file)
@@ -1592,7 +1593,8 @@ extern double FUN_00de7348;
 
 // pdb: hkpContinuousSimulation::processAgentCollideContinuous | hkpContinuousSimulation.obj | fnv360_0822_retail, objrun_prop, high
 // pdb params: entry, processInput, processOutput
-void FUN_00d0daa0_cls::InitAndDispatch(ThingX* apX, ThingP* apP, ThingS* apS)
+// pdb: hkpContinuousSimulation::processAgentCollideContinuous | hkpContinuousSimulation.obj | fnv360_0822_retail, objrun_prop, high (was: InitAndDispatch)
+void FUN_00d0daa0_cls::hkpContinuousSimulation_processAgentCollideContinuous(ThingX* apX, ThingP* apP, ThingS* apS)
 {
     apS->m_blk3000.m_fValue = DAT_0104da48;
     apS->m_blk3080.m_iFlags = 0;
@@ -1808,7 +1810,8 @@ void __cdecl hkpWorldCallbackUtil_fireContactImpulseLimitBreached(void*,State*,i
 // @fnv 0x00d0c480
 // pdb: hkLs_doSimpleCollisionResponse | hkpContinuousSimulation.obj | fnv360_0822_retail, caller_sim, high
 // pdb params: world, event, rotateNormal, toBeActivated
-void __cdecl ProcessCollisionEvent(void* context, CollisionEvent* rawEvent, float deltaTime, CollisionQueue* rawQueue)
+// pdb: hkLs_doSimpleCollisionResponse | hkpContinuousSimulation.obj | fnv360_0822_retail, caller_sim, high (was: ProcessCollisionEvent)
+void __cdecl hkLs_doSimpleCollisionResponse(void* context, CollisionEvent* rawEvent, float deltaTime, CollisionQueue* rawQueue)
 {
  Task2017::Event* event=(Task2017::Event*)rawEvent;Task2017::Queue* queue=(Task2017::Queue*)rawQueue;
     Task2017::Body* bodyA = event->bodyA;
@@ -9285,7 +9288,7 @@ struct AdvanceSimulation {
     DWORD unk2C,unk30;
     DWORD m_34;
     Res* FUN_00cf8820() throw();
-    float GetClampedSimulationTime() throw();
+    float hkpSimulation_snapSimulateTimeAndGetTimeToAdvanceTo() throw();
     Res* hkpContinuousSimulation_handleAllToisTill(float f) throw();
     Res* FUN_00d0ed10();
 };
@@ -9302,7 +9305,7 @@ Res* AdvanceSimulation::FUN_00d0ed10()
         if (q)
             return q;
     }
-    float delta = GetClampedSimulationTime();
+    float delta = hkpSimulation_snapSimulateTimeAndGetTimeToAdvanceTo();
     if (m_34)
     {
         HK_TIME_CODE_BLOCK("TOIs", HK_NULL);

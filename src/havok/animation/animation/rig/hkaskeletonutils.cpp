@@ -42,7 +42,7 @@ void hkaSkeletonUtils_transformModelPoseToLocalPose(void* apArg1, void* apArg2, 
     FUN_00cddd20(apArg1, apArg2, &DAT_01268700, apArg3, apArg4);
 }
 
-int __cdecl CompareStringsCaseInsensitive(const void* pKey, const void* pItem);
+int __cdecl hkString_strCasecmp(const void* pKey, const void* pItem);
 struct S_00cdd390_Entry
 {
     unsigned int m_uiTaggedItem;
@@ -67,7 +67,7 @@ struct S_00cdd390_Table
         return (void*)(m_pEntries[i].m_uiTaggedItem & ~1u);
     }
 };
-// Searches the table's entries for one matching pKey via pfnCompare (default CompareStringsCaseInsensitive) and returns its index, or -1 if none match.
+// Searches the table's entries for one matching pKey via pfnCompare (default hkString_strCasecmp) and returns its index, or -1 if none match.
 // @f3 0x00957b20 (community match, verified in this file)
 struct FindTableLayout
 {
@@ -80,12 +80,13 @@ struct FindTableLayout
 
 // pdb: hkaSkeletonUtils::findBoneWithName | hkaSkeletonUtils.obj | fnv360_0822_retail, call_seq, high
 // pdb params: skeleton, name, compare
-short __cdecl FindIndexByKey(S_00cdd390_Table* pSearchEntries, const void* pKey, int(__cdecl* pfnCompare)(const void*, const void*))
+// pdb: hkaSkeletonUtils::findBoneWithName | hkaSkeletonUtils.obj | fnv360_0822_retail, call_seq, high (was: FindIndexByKey)
+short __cdecl hkaSkeletonUtils_findBoneWithName(S_00cdd390_Table* pSearchEntries, const void* pKey, int(__cdecl* pfnCompare)(const void*, const void*))
 {
     FindTableLayout* t = (FindTableLayout*)pSearchEntries;
     int iCount = t->m_iArrayLength;
     if (!pfnCompare)
-        pfnCompare = CompareStringsCaseInsensitive;
+        pfnCompare = hkString_strCasecmp;
     for (short i = 0; i < iCount; i++)
     {
         if (pfnCompare(pKey, *(const void* const*)t->m_ppEntries[i]) == 0)
@@ -236,7 +237,8 @@ struct DstView958060
 
 // pdb: hkaSkeletonUtils::bindByName | hkaSkeletonUtils.obj | fnv360_0822_retail, ustr, high
 // pdb params: skeleton, anim, compare, bindingOut
-int __cdecl MapTracksToBones(Names* namesIn, Src* srcIn, CmpFn cmp, Dst* dstIn)
+// pdb: hkaSkeletonUtils::bindByName | hkaSkeletonUtils.obj | fnv360_0822_retail, ustr, high (was: MapTracksToBones)
+int __cdecl hkaSkeletonUtils_bindByName(Names* namesIn, Src* srcIn, CmpFn cmp, Dst* dstIn)
 {
     f3m_00958060::NamesView958060* names = reinterpret_cast<f3m_00958060::NamesView958060*>(namesIn);
     f3m_00958060::SrcView958060* src = reinterpret_cast<f3m_00958060::SrcView958060*>(srcIn);
@@ -628,7 +630,7 @@ struct Property
         size = 0x30;
     }
 };
-extern "C" Property* __cdecl FindModifierConstraintAtom(HkEntity*, int);
+extern "C" Property* __cdecl hkpWorldConstraintUtil_findModifier(HkEntity*, int);
 extern "C" void __cdecl FUN_00d27960(HkEntity*, HkObj*, Property*);
 
 // Stores a Vec4 into a Property's vector field on an HkEntity, XORing it with DAT_010c44d0 when the entity's owner matches the given owner.
@@ -727,7 +729,8 @@ struct ModifierAtom
 
 // pdb: hkpResponseModifier::setSurfaceVelocity | hkpResponseModifier.obj | fnv360_0822_retail, ustr, high
 // pdb params: manager, body, constraintOwner, velWorld
-void SetModifierConstraint(HkWorld* apWorld, int owner, HkObj* apObj, Vec4* apVec)
+// pdb: hkpResponseModifier::setSurfaceVelocity | hkpResponseModifier.obj | fnv360_0822_retail, ustr, high (was: SetModifierConstraint)
+void hkpResponseModifier_setSurfaceVelocity(HkWorld* apWorld, int owner, HkObj* apObj, Vec4* apVec)
 {
     using namespace smc_abd0;
     HkEntity* e = apWorld->GetEntity();
@@ -740,7 +743,7 @@ void SetModifierConstraint(HkWorld* apWorld, int owner, HkObj* apObj, Vec4* apVe
         {
             t.setNeg4(t);
         }
-        ModifierAtom* p = reinterpret_cast<ModifierAtom*>(FindModifierConstraintAtom(e, 0x1a));
+        ModifierAtom* p = reinterpret_cast<ModifierAtom*>(hkpWorldConstraintUtil_findModifier(e, 0x1a));
         if (p)
         {
             p->vector = t;

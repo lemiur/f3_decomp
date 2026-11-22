@@ -3841,7 +3841,8 @@ struct State {
     int unk14;
     int unk18;
     unsigned int flags;
-    bool HasFlag() const { return ((flags >> 21) & 1) != 0; }
+    // pdb: hkClassMember::isNotOwner | hkClassMember.obj | fnv360_0822_retail, objrun, high (was: HasFlag)
+    bool hkClassMember_isNotOwner() const { return ((flags >> 21) & 1) != 0; }
     unsigned char mode;
     bool FUN_005a49a0();
 };
@@ -4549,7 +4550,7 @@ bool Object::FUN_0073e030(Object* source, int unused)
                         DAT_01090a78.FUN_0086ba60(next);
                     }
                     bool notify = true;
-                    if (v228() && v228()->HasFlag()) notify = false;
+                    if (v228() && v228()->hkClassMember_isNotOwner()) notify = false;
                     if (source->v218()) {
                         if (source->form) source->form->FUN_00555db0(source,1,notify,0,1);
                     } else if (source->v21c()) {

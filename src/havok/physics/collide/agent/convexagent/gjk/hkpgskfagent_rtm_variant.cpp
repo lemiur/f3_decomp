@@ -5,7 +5,7 @@
 // src/havok/physics/collide/agent/convexagent/gjk/hkpgskfagent.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/physics/collide/agent/convexagent/gjk/hkpgskfagent.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 void __cdecl FUN_00dacc00();
-void __cdecl TestGsk();
+void __cdecl hkpGskBaseAgent_staticGetPenetrations();
 void __cdecl FUN_00dac450();
 void __cdecl FUN_00daf8e0();
 struct FUN_00dacc70_vt
@@ -18,7 +18,7 @@ struct FUN_00dacc70_vt
     unsigned char b1;
 };
 void __cdecl InitVtable(FUN_00dacc70_vt* p);
-void __cdecl ReleaseAllEntries(void*, void*, void*);
+void __cdecl hkGskManifold_cleanup(void*, void*, void*);
 struct FUN_00dacaf0_vt
 {
     void(__thiscall* dtor)(void*, int);
@@ -51,7 +51,7 @@ struct FUN_00dacb60_class
 
     Potential m_potentials[256];
 
-    void __thiscall AddPotential(unsigned short value);
+    void __thiscall hkpGskfAgent_commitPotential(unsigned short value);
 };
 extern int DAT_010d5224;
 struct FUN_00dabf10
@@ -84,7 +84,7 @@ class hkObjDACB
     unsigned char unk33;
     hkSlotDACB m_slots[8];
 
-    void ClearSlotById(short id);
+    void hkpGskfAgent_createZombie(short id);
 };
 struct Dvec4
 {

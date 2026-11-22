@@ -65,7 +65,7 @@ struct TypeNode
 struct Container
 {
     void* FUN_00d46f80(int) const;
-    int FindMemberByName(const char* name) const;
+    int hkClass_getMemberByName(const char* name) const;
 };
 
 int __cdecl FUN_00cb0fa0(const char*, const char*);
@@ -74,7 +74,8 @@ int __cdecl FUN_00cb0fa0(const char*, const char*);
 // @fnv 0x00d46f90
 // pdb: hkClass::getMemberByName | hkClass.obj | fnv360_0822_retail, call_gap, high
 // pdb params: name
-int Container::FindMemberByName(const char* name) const
+// pdb: hkClass::getMemberByName | hkClass.obj | fnv360_0822_retail, call_gap, high (was: FindMemberByName)
+int Container::hkClass_getMemberByName(const char* name) const
 {
     Container* self = const_cast<Container*>(this);
     TypeNode* node = reinterpret_cast<TypeNode*>(self);
