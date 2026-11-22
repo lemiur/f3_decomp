@@ -4,8 +4,11 @@
 
 struct NiTriShapeDynamicData
 {
-    unsigned short m_usActiveVertices;
-    unsigned short m_usActiveTriangles;
+    unsigned char unk00[0x48];
+    const unsigned short* m_pusTriList;  // src: FNV360_PDB NiTriShapeData +0x48
+    unsigned char unk4C[0xC];
+    unsigned short m_usActiveVertices;  // src: FNV360_PDB +0x58
+    unsigned short m_usActiveTriangles;  // src: FNV360_PDB +0x5A
     void FUN_00a81730(unsigned short& usStrips, const unsigned short*& pusStripLengths,
                       const unsigned short*& pusTriList, unsigned int& uiStripLengthSum);
 };
@@ -14,10 +17,10 @@ struct NiTriShapeDynamicData
 void __thiscall NiTriShapeDynamicData::FUN_00a81730(unsigned short& usStrips, const unsigned short*& pusStripLengths,
                                                     const unsigned short*& pusTriList, unsigned int& uiStripLengthSum)
 {
-    usStrips = *(unsigned short*)((char*)this + 0x5a);
+    usStrips = m_usActiveTriangles;
     pusStripLengths = (const unsigned short*)0;
-    pusTriList = *(const unsigned short**)((char*)this + 0x48);
-    uiStripLengthSum = *(unsigned short*)((char*)this + 0x5a) * 3;
+    pusTriList = m_pusTriList;
+    uiStripLengthSum = m_usActiveTriangles * 3;
 }
 
 extern void* g_011f5af4;
@@ -31,18 +34,21 @@ void* __cdecl FUN_00a81800()
 namespace fnv_00a81820 {
 struct NiTriShapeDynamicData
 {
+    unsigned char unk00[0x5a];
+    unsigned short m_usActiveTriangles;  // src: FNV360_PDB +0x5A
     void __thiscall FUN_00a81820(unsigned short usActiveTriangles);
 };
 
 // @fnv 0x00a81820
 void __thiscall NiTriShapeDynamicData::FUN_00a81820(unsigned short usActiveTriangles)
 {
-    *(unsigned short*)((char*)this + 0x5a) = usActiveTriangles;
+    m_usActiveTriangles = usActiveTriangles;
 }
 }  // namespace fnv_00a81820
 
 struct NiTriShapeData
 {
+    unsigned char unk00[0x58];
     bool FUN_00a7b7e0(const NiTriShapeData*);
 };
 struct NiTriShapeDynamicDataShell : NiTriShapeData
@@ -55,8 +61,8 @@ struct NiTriShapeDynamicDataShell : NiTriShapeData
 // @fnv 0x00a817c0
 bool NiTriShapeDynamicDataShell::FUN_00a817c0(const NiTriShapeDynamicDataShell* other)
 {
-    if (FUN_00a7b7e0(other) && *(unsigned short*)((char*)this + 0x58) == *(unsigned short*)((char*)other + 0x58) &&
-        *(unsigned short*)((char*)this + 0x5a) == *(unsigned short*)((char*)other + 0x5a))
+    if (FUN_00a7b7e0(other) && m_usActiveVertices == other->m_usActiveVertices &&
+        m_usActiveTriangles == other->m_usActiveTriangles)
         return true;
     return false;
 }
@@ -69,7 +75,7 @@ struct NiTriShapeDynamicData_shell : NiTriShapeDynamicData
 // @fnv 0x00a81810
 void NiTriShapeDynamicData_shell::FUN_00a81810(unsigned short usActiveVertices)
 {
-    ((unsigned short*)this)[0x2c] = usActiveVertices;
+    m_usActiveVertices = usActiveVertices;
 }
 
 void __fastcall FUN_00a7b8c0(void*);
@@ -104,8 +110,16 @@ static __forceinline void S_BinRead(S_00a818b0_Bin* bin, void* v, unsigned int b
     unsigned int sz = 2;
     bin->m_uiPos += bin->Read(v, bytes, &sz, 1);
 }
+struct NiStream_00a818b0
+{
+    unsigned char unk000[0x250];
+    S_00a818b0_Bin* unk250;
+};
 struct FUN_00a818b0_cls
 {
+    unsigned char unk00[0x58];
+    unsigned short m_usActiveVertices;  // src: FNV360_PDB NiTriShapeDynamicData +0x58
+    unsigned short m_usActiveTriangles;  // src: FNV360_PDB NiTriShapeDynamicData +0x5A
     void FUN_00a7bbe0(void* pOther);
     void FUN_00a818b0(void* pOther);
 };
@@ -113,10 +127,10 @@ struct FUN_00a818b0_cls
 // @fnv 0x00a818b0
 void FUN_00a818b0_cls::FUN_00a818b0(void* pOther)
 {
-    char* pObj = (char*)pOther;
+    NiStream_00a818b0* pObj = (NiStream_00a818b0*)pOther;
     FUN_00a7bbe0(pOther);
-    S_BinRead(*(S_00a818b0_Bin**)(pObj + 0x250), (char*)this + 0x58, 2);
-    S_BinRead(*(S_00a818b0_Bin**)(pObj + 0x250), (char*)this + 0x5a, 2);
+    S_BinRead(pObj->unk250, &m_usActiveVertices, 2);
+    S_BinRead(pObj->unk250, &m_usActiveTriangles, 2);
 }
 
 extern void* g_011f5af4;

@@ -4,6 +4,11 @@
 
 struct NiTriStripsDynamicData
 {
+    unsigned char unk00[0x48];
+    const unsigned short* m_pusStripLengths;  // src: FNV360_PDB NiTriStripsData +0x48
+    const unsigned short* m_pusStripLists;  // src: FNV360_PDB NiTriStripsData +0x4C
+    unsigned short m_usActiveVertices;  // src: FNV360_PDB +0x50
+    unsigned short m_usActiveTriangles;  // src: FNV360_PDB +0x52
     void FUN_00a923c0(unsigned short& usStrips, const unsigned short*& pusStripLengths,
                       const unsigned short*& pusTriList, unsigned int& uiStripLengthSum);
 };
@@ -13,9 +18,9 @@ void NiTriStripsDynamicData::FUN_00a923c0(unsigned short& usStrips, const unsign
                                           const unsigned short*& pusTriList, unsigned int& uiStripLengthSum)
 {
     usStrips = 1;
-    pusStripLengths = *(const unsigned short**)((const unsigned char*)this + 0x48);
-    pusTriList = *(const unsigned short**)((const unsigned char*)this + 0x4c);
-    uiStripLengthSum = *(unsigned short*)((const unsigned char*)this + 0x52) + 2;
+    pusStripLengths = m_pusStripLengths;
+    pusTriList = m_pusStripLists;
+    uiStripLengthSum = m_usActiveTriangles + 2;
 }
 
 namespace fnv_00a92430 {
@@ -58,13 +63,15 @@ void* __cdecl FUN_00a92470()
 
 struct FUN_00a92480_shell
 {
+    unsigned char unk00[0x50];
+    short m_usActiveVertices;  // src: FNV360_PDB NiTriStripsDynamicData +0x50
     void __thiscall FUN_00a92480(short value);
 };
 
 // @fnv 0x00a92480
 void __thiscall FUN_00a92480_shell::FUN_00a92480(short value)
 {
-    *(short*)((char*)this + 0x50) = value;
+    m_usActiveVertices = value;
 }
 
 struct BSFadeNode
@@ -98,15 +105,21 @@ void* __cdecl FUN_00a923f0()
 
 struct FUN_00a92490_shell
 {
+    unsigned char unk00[0x44];
+    short m_usStrips;  // src: FNV360_PDB NiTriStripsData +0x44
+    short* m_pusStripLengths;  // src: FNV360_PDB NiTriStripsData +0x48
+    unsigned char unk4C[4];
+    short m_usActiveVertices;  // src: FNV360_PDB +0x50
+    short m_usActiveTriangles;  // src: FNV360_PDB +0x52
     void __thiscall SetShortValue(short value);
 };
 
 // @fnv 0x00a92490
 void __thiscall FUN_00a92490_shell::SetShortValue(short value)
 {
-    *(short*)((char*)this + 0x52) = value;
-    if (*(short*)((char*)this + 0x44))
-        *(short*)(*(unsigned int*)((char*)this + 0x48)) = value;
+    m_usActiveTriangles = value;
+    if (m_usStrips)
+        *m_pusStripLengths = value;
 }
 
 struct FUN_00a75dc0
@@ -458,6 +471,11 @@ struct NiStreamBufferStandin
 // subobject occupies 0x00-0x4F, the two active counts are the shorts at
 // +0x50 and +0x52.  FUN_00a76340 is the base-class save routine (declared
 // only, never defined, so the call target comes from the original bytes).
+struct NiStream_00a92530
+{
+    unsigned char unk000[0x250];
+    NiStreamBufferStandin* unk250;
+};
 struct NiTriStripsStandin
 {
     int unk00;
@@ -490,7 +508,7 @@ struct NiTriStripsStandin
 void __thiscall NiTriStripsStandin::FUN_00a92530(void* stream)
 {
     this->FUN_00a76340((unsigned int)stream);
-    NiStreamBufferStandin* pBuffer = *(NiStreamBufferStandin**)((char*)stream + 0x250);
+    NiStreamBufferStandin* pBuffer = ((NiStream_00a92530*)stream)->unk250;
     int written;
     {
         // The by-value parameter's stack slot is dead here, so MSVC reuses it
@@ -500,7 +518,7 @@ void __thiscall NiTriStripsStandin::FUN_00a92530(void* stream)
         written = pBuffer->fn0C(pBuffer, (void*)&m_usActiveVertices, 2, &count, 1);
         pBuffer->unk04 += written;
     }
-    pBuffer = *(NiStreamBufferStandin**)((char*)stream + 0x250);
+    pBuffer = ((NiStream_00a92530*)stream)->unk250;
     {
         unsigned int count = 2;
         written = pBuffer->fn0C(pBuffer, (void*)&m_usActiveTriangles, 2, &count, 1);
