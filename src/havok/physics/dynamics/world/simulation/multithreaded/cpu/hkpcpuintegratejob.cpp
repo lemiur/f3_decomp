@@ -792,51 +792,7 @@ class hkEnum
 	private:
 		STORAGE m_storage;
 };
-template <typename TYPE>
-class hkPadSpu
-{
-	public:
-		__forceinline hkPadSpu() {}
-		__forceinline hkPadSpu(TYPE e)
-			: m_storage( e )
-		{
-		}
-		__forceinline void operator=(TYPE e)
-		{
-			m_storage = e;
-		}
-		__forceinline TYPE val() const
-		{
-			return m_storage;
-		}
-		__forceinline TYPE operator->() const
-		{
-			return m_storage;
-		}
-		__forceinline operator TYPE() const
-		{
-			return val();
-		}
-	private:
-		TYPE m_storage;
-};
-template<typename T>
-		class hkThreadLocalData
-		{
-			public:
-				hkThreadLocalData() { m_slotID =  TlsAlloc(); }
-				~hkThreadLocalData() { TlsFree(m_slotID); }
-				__forceinline T getData() const
-				{
-					return (T)(hkUlong)TlsGetValue(m_slotID) ;
-				}
-				__forceinline void setData(T p)
-				{
-					hkUlong v = hkUlong(p);
-					TlsSetValue( m_slotID, (void*)v );
-				}
-				unsigned long m_slotID;
-		};
+#include "havok/hkTimeFunctionHelper.h"
 enum HK_MEMORY_CLASS {
 	HK_MEMORY_CLASS_ROOT,
 	HK_MEMORY_CLASS_BASE,
@@ -1107,13 +1063,11 @@ class hkArray
 template <typename T>
 __forceinline T& hkArray<T>::operator[] (int i)
 {
-	;
 	return m_data[i];
 }
 template <typename T>
 __forceinline const T& hkArray<T>::operator[] (int i) const
 {
-	;
 	return m_data[i];
 }
 template <typename T>
@@ -1190,13 +1144,11 @@ __forceinline void hkArray<T>::clearAndDeallocate()
 template <typename T>
 __forceinline void hkArray<T>::pushBackUnchecked(const T& t)
 {
-	;
 	m_data[m_size++] = t;
 }
 template <typename T>
 __forceinline void hkArray<T>::setSizeUnchecked(int n)
 {
-	;
 	m_size = n;
 }
 template <typename T>
@@ -1304,8 +1256,6 @@ typename hkSmallArray<T>::const_iterator hkSmallArray<T>::end() const
 }
 int hkThreadMemory::constSizeToRow( int size )
 {
-	;
-	;
 	if (size <= 8 )	return 1;
 	else if (size <= 16 )	return 2;
 	else if (size <= 32 )	return 3;
@@ -1330,7 +1280,6 @@ int hkThreadMemory::constSizeToRow( int size )
 }
 void* hkThreadMemory::allocateChunkConstSize(int nbytes, HK_MEMORY_CLASS cl)
 {
-	;
 	int row = constSizeToRow(nbytes);
 	if( void* p = m_free_list[row].get() )
 	{
@@ -1429,81 +1378,6 @@ struct hkpSolverElemTemp
 	};
 };
 typedef void hkpConstraintRuntime;
-class hkMonitorStream
-{
-	public:
-		__forceinline void* __cdecl operator new(hk_size_t nbytes) { ; return hkThreadMemory::getInstance().allocateChunkConstSize(static_cast<int>(nbytes),HK_MEMORY_CLASS_MONITOR); } __forceinline void __cdecl operator delete(void* p) { if (p) hkThreadMemory::getInstance().deallocateChunkConstSize(p, sizeof(hkMonitorStream), HK_MEMORY_CLASS_MONITOR); } __forceinline void* __cdecl operator new[](hk_size_t nbytes) { return hkThreadMemory::getInstance().allocate(static_cast<int>(nbytes),HK_MEMORY_CLASS_MONITOR); } __forceinline void __cdecl operator delete[](void* p) { hkThreadMemory::getInstance().deallocate(p); } __forceinline void* __cdecl operator new(hk_size_t n, void* p){ ; return p; } __forceinline void* __cdecl operator new[](hk_size_t, void* p){ return p; } __forceinline void __cdecl operator delete(void*, void*) { } __forceinline void __cdecl operator delete[](void*, void*) { } class MustEndWithSemiColon;
-		static hkMonitorStream& getInstance()
-		{
-			extern hkThreadLocalData<hkMonitorStream*> hkMonitorStream__m_instance;
-			return *hkMonitorStream__m_instance.getData();
-		}
-		void __cdecl reset();
-		void __cdecl resize( int newSize );
-	public:
-		__forceinline char* __cdecl getStart() { return m_start.val(); }
-		__forceinline char* __cdecl getEnd() { return m_end.val(); }
-		__forceinline char* __cdecl getCapacityMinus16() { return m_capacityMinus16.val(); }
-		__forceinline char* __cdecl getCapacity() { return m_capacity.val(); }
-		__forceinline hkBool __cdecl memoryAvailable( )
-		{
-			return getEnd() < getCapacityMinus16();
-		}
-		__forceinline int __cdecl getCurrentMonitorDataSize()
-		{
-			return (int)(m_end.val() - m_start.val());
-		}
-		__forceinline void* __cdecl expandby( int size ) { char* h = m_end.val(); char* newEnd = h + size; m_end = newEnd; return h; }
-		__forceinline void __cdecl setEnd(char* ptr) {  m_end = ptr; }
-		__forceinline hkBool __cdecl isBufferAllocatedOnTheHeap() { return m_isBufferAllocatedOnTheHeap; }
-		void __cdecl setStaticBuffer( char* buffer, int bufferSize );
-	public:
-		static void __cdecl init();
-		void __cdecl quit();
-	public:
-		hkPadSpu<char*> m_start;
-		hkPadSpu<char*> m_end;
-		hkPadSpu<char*> m_capacity;
-		hkPadSpu<char*> m_capacityMinus16;
-		hkBool		m_isBufferAllocatedOnTheHeap;
-	public:
-		struct Command
-		{
-			__forceinline void* __cdecl operator new(hk_size_t nbytes) { ; return hkThreadMemory::getInstance().allocateChunkConstSize(static_cast<int>(nbytes),HK_MEMORY_CLASS_MONITOR); } __forceinline void __cdecl operator delete(void* p) { if (p) hkThreadMemory::getInstance().deallocateChunkConstSize(p, sizeof(hkMonitorStream::Command), HK_MEMORY_CLASS_MONITOR); } __forceinline void* __cdecl operator new[](hk_size_t nbytes) { return hkThreadMemory::getInstance().allocate(static_cast<int>(nbytes),HK_MEMORY_CLASS_MONITOR); } __forceinline void __cdecl operator delete[](void* p) { hkThreadMemory::getInstance().deallocate(p); } __forceinline void* __cdecl operator new(hk_size_t n, void* p){ ; return p; } __forceinline void* __cdecl operator new[](hk_size_t, void* p){ return p; } __forceinline void __cdecl operator delete(void*, void*) { } __forceinline void __cdecl operator delete[](void*, void*) { } class MustEndWithSemiColon;
-			const char* m_commandAndMonitor;
-		};
-		struct AddValueCommand : public hkMonitorStream::Command
-		{
-			__forceinline void* __cdecl operator new(hk_size_t nbytes) { ; return hkThreadMemory::getInstance().allocateChunkConstSize(static_cast<int>(nbytes),HK_MEMORY_CLASS_MONITOR); } __forceinline void __cdecl operator delete(void* p) { if (p) hkThreadMemory::getInstance().deallocateChunkConstSize(p, sizeof(hkMonitorStream::AddValueCommand), HK_MEMORY_CLASS_MONITOR); } __forceinline void* __cdecl operator new[](hk_size_t nbytes) { return hkThreadMemory::getInstance().allocate(static_cast<int>(nbytes),HK_MEMORY_CLASS_MONITOR); } __forceinline void __cdecl operator delete[](void* p) { hkThreadMemory::getInstance().deallocate(p); } __forceinline void* __cdecl operator new(hk_size_t n, void* p){ ; return p; } __forceinline void* __cdecl operator new[](hk_size_t, void* p){ return p; } __forceinline void __cdecl operator delete(void*, void*) { } __forceinline void __cdecl operator delete[](void*, void*) { } class MustEndWithSemiColon;
-			float m_value;
-		};
-		struct TimerCommand : public hkMonitorStream::Command
-		{
-			__forceinline void* __cdecl operator new(hk_size_t nbytes) { ; return hkThreadMemory::getInstance().allocateChunkConstSize(static_cast<int>(nbytes),HK_MEMORY_CLASS_MONITOR); } __forceinline void __cdecl operator delete(void* p) { if (p) hkThreadMemory::getInstance().deallocateChunkConstSize(p, sizeof(hkMonitorStream::TimerCommand), HK_MEMORY_CLASS_MONITOR); } __forceinline void* __cdecl operator new[](hk_size_t nbytes) { return hkThreadMemory::getInstance().allocate(static_cast<int>(nbytes),HK_MEMORY_CLASS_MONITOR); } __forceinline void __cdecl operator delete[](void* p) { hkThreadMemory::getInstance().deallocate(p); } __forceinline void* __cdecl operator new(hk_size_t n, void* p){ ; return p; } __forceinline void* __cdecl operator new[](hk_size_t, void* p){ return p; } __forceinline void __cdecl operator delete(void*, void*) { } __forceinline void __cdecl operator delete[](void*, void*) { } class MustEndWithSemiColon;
-			hkUint32	m_time0;
-			hkUint32	m_time1;
-			__forceinline void setTime();
-		};
-		struct TimerBeginListCommand : public hkMonitorStream::TimerCommand
-		{
-			__forceinline void* __cdecl operator new(hk_size_t nbytes) { ; return hkThreadMemory::getInstance().allocateChunkConstSize(static_cast<int>(nbytes),HK_MEMORY_CLASS_MONITOR); } __forceinline void __cdecl operator delete(void* p) { if (p) hkThreadMemory::getInstance().deallocateChunkConstSize(p, sizeof(hkMonitorStream::TimerBeginListCommand), HK_MEMORY_CLASS_MONITOR); } __forceinline void* __cdecl operator new[](hk_size_t nbytes) { return hkThreadMemory::getInstance().allocate(static_cast<int>(nbytes),HK_MEMORY_CLASS_MONITOR); } __forceinline void __cdecl operator delete[](void* p) { hkThreadMemory::getInstance().deallocate(p); } __forceinline void* __cdecl operator new(hk_size_t n, void* p){ ; return p; } __forceinline void* __cdecl operator new[](hk_size_t, void* p){ return p; } __forceinline void __cdecl operator delete(void*, void*) { } __forceinline void __cdecl operator delete[](void*, void*) { } class MustEndWithSemiColon;
-			const char* m_nameOfFirstSplit;
-		};
-};
-void hkMonitorStream::TimerCommand::setTime()
-{
-		unsigned int ticks;
-	__asm {
-		rdtsc
-		mov dword ptr[ticks], eax
-	}
-		m_time0 = ticks;
-}
-class  hkTimeFunctionHelper
-{
-	public:
-		__forceinline ~hkTimeFunctionHelper() { { hkMonitorStream& mStream = hkMonitorStream::getInstance(); if ( mStream.memoryAvailable() ) { hkMonitorStream::TimerCommand* h = reinterpret_cast<hkMonitorStream::TimerCommand*>(mStream.getEnd()); h->m_commandAndMonitor = "E" "t" ""; h->setTime(); mStream.setEnd( (char*)(h+1) ); } }; }
-};
 template <typename T>
 class hkLocalArray : public hkArray<T>
 {
@@ -1517,7 +1391,6 @@ class hkLocalArray : public hkArray<T>
 		}
 		__forceinline void discardAndResize(int newsize)
 		{
-			;
 			hkDeallocateStack<T>( m_localMemory );
 			m_localMemory = this->m_data = hkAllocateStack<T>(newsize);
 			this->m_size = newsize;
@@ -1525,7 +1398,6 @@ class hkLocalArray : public hkArray<T>
 		}
 		void assertNotResized()
 		{
-			;
 		}
 		hkBool wasReallocated() const
 		{
@@ -1563,7 +1435,6 @@ template <typename T>
 __forceinline hkLocalBuffer<T>::hkLocalBuffer( int capacity, const char* what )
 {
 	this->m_data = hkAllocateStack<T>(capacity);
-	;
 }
 template <typename T>
 __forceinline hkLocalBuffer<T>::~hkLocalBuffer()
@@ -1573,13 +1444,11 @@ __forceinline hkLocalBuffer<T>::~hkLocalBuffer()
 template <typename T>
 __forceinline T& hkFixedArray<T>::operator[] (int i)
 {
-	;
 	return m_data[i];
 }
 template <typename T>
 __forceinline const T& hkFixedArray<T>::operator[] (int i) const
 {
-	;
 	return m_data[i];
 }
 template <typename T>
@@ -1787,7 +1656,6 @@ static __forceinline void createAndAppendNewTask( const hkpBuildJacobianTaskHead
 		{
 			if ( putOnPpuOnlyBuildJacobianTaskList )
 			{
-				;
 			}
 			else
 			{
@@ -1824,7 +1692,6 @@ static __forceinline void createAndAppendNewTask( const hkpBuildJacobianTaskHead
 			atomInfo.m_transformB = &ci->m_entities[1]->getMotion()->getTransform();
 			schemas = hkAddByteOffset( schemas, ci->m_sizeOfSchemas );
 			elemTemp += ci->m_numSolverElemTemps;
-			;
 		}
 		constraintsForThisTask.clear();
 		schemas = hkAddByteOffset( schemas, 16 );
@@ -1841,7 +1708,6 @@ static __forceinline void createAndAppendNewTask( const hkpBuildJacobianTaskHead
 		}
 		if ( currentBatchIndex != batchIndexOfLastTask )
 		{
-			;
 			if ( currentBatchIndex == 0 )
 			{
 				outSolveCollection->m_firstSolveJacobiansTask = solveTask;
@@ -1849,7 +1715,6 @@ static __forceinline void createAndAppendNewTask( const hkpBuildJacobianTaskHead
 			batchIndexOfLastTask = currentBatchIndex;
 			if ( prevSolveTask )
 			{
-				;
 				hkpSolveConstraintBatchTask* aTaskFromPreviousBatch = firstTaskOfPreviousBatch;
 				hkUint16 batchSize = *ptrToBatchSize;
 				while ( aTaskFromPreviousBatch && aTaskFromPreviousBatch != firstTaskOfCurrentBatch )
@@ -1868,7 +1733,6 @@ static __forceinline void createAndAppendNewTask( const hkpBuildJacobianTaskHead
 		solveTask->m_taskHeader = const_cast<hkpBuildJacobianTaskHeader*>(taskHeader);
 		solveTask->m_accumulators = taskHeader->m_accumulatorsBase;
 		solveTask->m_schemas = schemaStart;
-		;
 		solveTask->m_solverElemTemp = elemTempStart;
 		solveTask->m_sizeOfSchemaBuffer = int( hkUlong(schemas) - hkUlong(schemaStart) );
 		solveTask->m_sizeOfSolverElemTempBuffer = int( hkUlong(elemTemp) - hkUlong(elemTempStart) );
@@ -1883,7 +1747,7 @@ static void createBuildJacobianAndSolveJacobianTaskCollection(SceneIsland* islan
 	hkpBuildJacobianTaskCollection*const outBuildCollection = reinterpret_cast<hkpBuildJacobianTaskCollection*>(buildsArg);
 	hkpSolveJacobiansTaskCollection*const outSolveCollection = reinterpret_cast<hkpSolveJacobiansTaskCollection*>(solvesArg);
 
-	{ hkMonitorStream& mStream = hkMonitorStream::getInstance(); if ( mStream.memoryAvailable() ) { hkMonitorStream::TimerCommand* h = reinterpret_cast<hkMonitorStream::TimerCommand*>(mStream.getEnd()); h->m_commandAndMonitor = "T" "t" "BuildJacTask"; h->setTime(); mStream.setEnd( (char*)(h+1) ); } }; hkTimeFunctionHelper timeblock270;
+	HK_TIME_CODE_BLOCK("BuildJacTask", HK_NULL);
 	hkpEntity*const*const bodies = island->m_entities.begin();
 	int numBodies = island->m_entities.getSize();
 	hkpEntity*const*const bodiesEnd = bodies + numBodies;
@@ -1898,7 +1762,6 @@ static void createBuildJacobianAndSolveJacobianTaskCollection(SceneIsland* islan
 		hkPointerMapBase<hkUlong> entityPtrToIndex( pointerBuffer.begin(), po2 * int(sizeof(hkUlong)) );
 		for (int bi = 0; bi < numBodies; bi++)
 		{
-			;
 			entityPtrToIndex.insert( hkUlong(bodies[bi]), bi );
 		}
 		hkpEntity*const* b = bodies;
@@ -1911,7 +1774,6 @@ static void createBuildJacobianAndSolveJacobianTaskCollection(SceneIsland* islan
 			{
 				body->m_solverData = accumOffset;
 			}
-			;
 			accumOffset += sizeof(hkpVelocityAccumulator);
 			const hkConstraintInternal* c = body->getConstraintMasters().begin();
 			const hkConstraintInternal* cEnd = body->getConstraintMasters().end();
@@ -1920,8 +1782,6 @@ static void createBuildJacobianAndSolveJacobianTaskCollection(SceneIsland* islan
 				hkConstraintInternalInfo info;
 				info.m_internal = c;
 				hkObjectIndex* entityIndices = &info.m_entityAIndex;
-				;
-				;
 				const int whoIsSlave = 1 - c->m_whoIsMaster;
 				entityIndices[c->m_whoIsMaster] = hkObjectIndex(bi);
 				entityIndices[whoIsSlave] = hkObjectIndex(entityPtrToIndex.getWithDefault( hkUlong(c->m_entities[whoIsSlave]), 0xffff ));
@@ -1941,9 +1801,9 @@ static void createBuildJacobianAndSolveJacobianTaskCollection(SceneIsland* islan
 			}
 		}
 	}
-	{ hkMonitorStream& mStream = hkMonitorStream::getInstance(); if ( mStream.memoryAvailable() ) { hkMonitorStream::AddValueCommand* h = reinterpret_cast<hkMonitorStream::AddValueCommand*>(mStream.getEnd()); h->m_commandAndMonitor = "M" "i" "NumEntities"; h->m_value = float(numBodies); mStream.setEnd( (char*)(h+1) ); } };
-	{ hkMonitorStream& mStream = hkMonitorStream::getInstance(); if ( mStream.memoryAvailable() ) { hkMonitorStream::AddValueCommand* h = reinterpret_cast<hkMonitorStream::AddValueCommand*>(mStream.getEnd()); h->m_commandAndMonitor = "M" "i" "NumConstraints"; h->m_value = float(island->m_numConstraints); mStream.setEnd( (char*)(h+1) ); } };
-	{ hkMonitorStream& mStream = hkMonitorStream::getInstance(); if ( mStream.memoryAvailable() ) { hkMonitorStream::AddValueCommand* h = reinterpret_cast<hkMonitorStream::AddValueCommand*>(mStream.getEnd()); h->m_commandAndMonitor = "M" "i" "NumJacobians"; h->m_value = float(island->m_constraintInfo.m_numSolverResults); mStream.setEnd( (char*)(h+1) ); } };
+	HK_MONITOR_ADD_VALUE("NumEntities", float(numBodies), HK_MONITOR_TYPE_INT);
+	HK_MONITOR_ADD_VALUE("NumConstraints", float(island->m_numConstraints), HK_MONITOR_TYPE_INT);
+	HK_MONITOR_ADD_VALUE("NumJacobians", float(island->m_constraintInfo.m_numSolverResults), HK_MONITOR_TYPE_INT);
 	taskHeader->m_solveInSingleThreadOnPpuOnly = !allConstraintsNormalType;
 	taskHeader->m_solveInSingleThread = taskHeader->m_solveInSingleThreadOnPpuOnly || hkBool(false);
 	hkBool generateSolveTasks = !taskHeader->m_solveInSingleThread;
@@ -1973,7 +1833,6 @@ static void createBuildJacobianAndSolveJacobianTaskCollection(SceneIsland* islan
 			{ for (int i = 0; i < numBodies; entityGroup[i++] = 0) { } }
 			int currentGroup = 1;
 			currentBatchIndex++;
-			;
 			hkConstraintInternalInfo* c = sourceConstraints->begin();
 			hkConstraintInternalInfo*const cEnd = sourceConstraints->end();
 			hkConstraintInternalInfo* nextConstraintLeftOut = sourceConstraints->begin();
@@ -1983,7 +1842,6 @@ static void createBuildJacobianAndSolveJacobianTaskCollection(SceneIsland* islan
 				int fixedEntityGroup = 0;
 				int& entityAGroup = info.m_entityAIndex == 0xffff ? fixedEntityGroup : entityGroup[info.m_entityAIndex];
 				int& entityBGroup = info.m_entityBIndex == 0xffff ? fixedEntityGroup : entityGroup[info.m_entityBIndex];
-				;
 				if ( constraintsForNextTask.getSize() == hkpBuildJacobianTask::MAX_NUM_ATOM_INFOS )
 				{
 					createAndAppendNewTask( taskHeader, outBuildCollection, outSolveCollection, prevBuildTask, prevSolveTask, firstTaskOfPreviousBatch, firstTaskOfCurrentBatch, schemas, elemTemp, constraintsForNextTask, batchIndexOfLastTask, currentBatchIndex, ptrToBatchSize, putOnPpuOnlyBuildJacobianTaskList, generateSolveTasks );
@@ -2018,13 +1876,10 @@ static void createBuildJacobianAndSolveJacobianTaskCollection(SceneIsland* islan
 			}
 			const int newSourceConstraintsSize = int( nextConstraintLeftOut - sourceConstraints->begin() );
 			sourceConstraints->setSizeUnchecked( newSourceConstraintsSize );
-			;
-			;
 		}
 	}
 	if ( generateSolveTasks )
 	{
-		;
 		hkpSolveConstraintBatchTask* aTaskFromPreviousBatch = firstTaskOfPreviousBatch;
 		hkUint16 batchSize = *ptrToBatchSize;
 		while ( aTaskFromPreviousBatch && aTaskFromPreviousBatch != firstTaskOfCurrentBatch )
@@ -2039,8 +1894,6 @@ static void createBuildJacobianAndSolveJacobianTaskCollection(SceneIsland* islan
 		taskHeader->m_numApplyGravityJobs = hkUint16( (numAccumulators - 1) / 128 + 1 );
 		taskHeader->m_numIntegrateVelocitiesJobs = hkUint16( (numAccumulators - 1) / 128 + 1 );
 	}
-	;
-	;
 	outBuildCollection->m_numCallbackConstraints = 0;
 	outBuildCollection->m_callbackConstraints = 0;
 	int numCC = callbackConstraints.getSize();
@@ -2087,7 +1940,6 @@ static __declspec(noinline) void FUN_00a23e70( const hkpBuildJacobianTaskHeader*
 		{
 			if ( putOnPpuOnlyBuildJacobianTaskList )
 			{
-				;
 			}
 			else
 			{
@@ -2124,7 +1976,6 @@ static __declspec(noinline) void FUN_00a23e70( const hkpBuildJacobianTaskHeader*
 			atomInfo.m_transformB = &ci->m_entities[1]->getMotion()->getTransform();
 			schemas = hkAddByteOffset( schemas, ci->m_sizeOfSchemas );
 			elemTemp += ci->m_numSolverElemTemps;
-			;
 		}
 		constraintsForThisTask.clear();
 		schemas = hkAddByteOffset( schemas, 16 );
@@ -2141,7 +1992,6 @@ static __declspec(noinline) void FUN_00a23e70( const hkpBuildJacobianTaskHeader*
 		}
 		if ( currentBatchIndex != batchIndexOfLastTask )
 		{
-			;
 			if ( currentBatchIndex == 0 )
 			{
 				outSolveCollection->m_firstSolveJacobiansTask = solveTask;
@@ -2149,7 +1999,6 @@ static __declspec(noinline) void FUN_00a23e70( const hkpBuildJacobianTaskHeader*
 			batchIndexOfLastTask = currentBatchIndex;
 			if ( prevSolveTask )
 			{
-				;
 				hkpSolveConstraintBatchTask* aTaskFromPreviousBatch = firstTaskOfPreviousBatch;
 				hkUint16 batchSize = *ptrToBatchSize;
 				while ( aTaskFromPreviousBatch && aTaskFromPreviousBatch != firstTaskOfCurrentBatch )
@@ -2168,7 +2017,6 @@ static __declspec(noinline) void FUN_00a23e70( const hkpBuildJacobianTaskHeader*
 		solveTask->m_taskHeader = const_cast<hkpBuildJacobianTaskHeader*>(taskHeader);
 		solveTask->m_accumulators = taskHeader->m_accumulatorsBase;
 		solveTask->m_schemas = schemaStart;
-		;
 		solveTask->m_solverElemTemp = elemTempStart;
 		solveTask->m_sizeOfSchemaBuffer = int( hkUlong(schemas) - hkUlong(schemaStart) );
 		solveTask->m_sizeOfSolverElemTempBuffer = int( hkUlong(elemTemp) - hkUlong(elemTempStart) );
