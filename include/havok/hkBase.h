@@ -14,6 +14,7 @@ typedef unsigned long hkUlong;
 typedef char hkBool;
 typedef short hkHalf;
 typedef char* hkStringPtr;
+#define HK_NULL 0
 class hkClass;
 class hkClassEnum;
 #pragma pack(push, 1)

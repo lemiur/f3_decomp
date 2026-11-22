@@ -3,6 +3,7 @@
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
 #include "havok/hkpWorld.h"
+#include "havok/hkMonitorStream.h"
 
 struct FUN_00cf7c10 {
     void __thiscall PerformThisObjectOperation();
@@ -4397,7 +4398,7 @@ void __cdecl hkpWorldOperationUtil_removeEntitySI(FUN_00c91620_Class* self, FUN_
 // If m_94 is nonzero, calls FUN_00c91160 with type 2 and writes 0 to *result; otherwise runs the helper calls on target and writes 1 to *result.
 // @f3 0x009037f0 (community match, verified in this file)
 extern unsigned long DAT_010f3170;
-extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned int);
+extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long);
 struct FO3Target;
 struct FO3Args {
     unsigned char type;
@@ -5009,7 +5010,7 @@ struct hkpWorldHelper : hkpWorld {
 extern "C" void _ReadWriteBarrier();
 extern "C" unsigned __int64 __rdtsc();
 extern unsigned int DAT_0126835c;
-extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned int);
+extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long);
 extern const char str_010c41f8[];
 struct __declspec(align(16)) LinearCaster {
     void* unk00;
@@ -8608,7 +8609,7 @@ void MatchWorld::AddPhysicsSystem(hkArrayXc937a0<FUN_00d065e0*>* systems)
 extern "C" unsigned __int64 __rdtsc();
 extern "C" void _ReadWriteBarrier();
 extern unsigned int DAT_0126835c;
-extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned int);
+extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long);
 extern const char str_010c6748[];
 extern const char str_01076f38[];
 
@@ -8861,73 +8862,27 @@ void WorldC944::UpdatePhantom(PhantomC944* apPhantom, int abProcessContacts)
         return;
     }
     w->m_iCriticalOperationsLockCount = 1;
-    volatile unsigned int ticks;
 
+    HK_TIMER_BEGIN_LIST("UpdateFilterOnPhantom", "broadphase");
+    CollidableC944* collidable = &apPhantom->m_kCollidable;
+    LocalPairArrayF90 arr(w->m_iBroadPhaseQuerySize);
+    w->m_pBroadPhase->querySingleAabb(&collidable->m_kBroadPhaseHandle, &arr);
+    HK_TIMER_SPLIT_LIST("UpdateOverlaps");
+    for (int i = 0; i < arr.m_size; i++)
     {
-        TimerBufferC944* t = (TimerBufferC944*)TlsGetValue(S906090::DAT_0116913c);
-        TimerEntryC9442* e = (TimerEntryC9442*)t->current;
-        if (e < t->end)
-        {
-            e->name = S906090::FUN_00e34ef0;
-            e->name2 = S906090::FUN_00e34ee0;
-            _ReadWriteBarrier();
-            ticks = (unsigned int)__rdtsc();
-            e->ticks = ticks;
-            t->current = e + 1;
-        }
+        HandleC944* h = arr.m_data[i].second;
+        if (h != &collidable->m_kBroadPhaseHandle)
+            SyncOverlap(apPhantom, h->getOwner(), w->m_pCollisionFilter);
     }
+    if (abProcessContacts)
     {
-        CollidableC944* collidable = &apPhantom->m_kCollidable;
-        LocalPairArrayF90 arr(w->m_iBroadPhaseQuerySize);
-        w->m_pBroadPhase->querySingleAabb(&collidable->m_kBroadPhaseHandle, &arr);
-        {
-            TimerBufferC944* t = (TimerBufferC944*)TlsGetValue(S906090::DAT_0116913c);
-            TimerEntryC944* e = (TimerEntryC944*)t->current;
-            if (e < t->end)
-            {
-                e->name = S906090::FUN_00e34ecc;
-                _ReadWriteBarrier();
-                ticks = (unsigned int)__rdtsc();
-                e->ticks = ticks;
-                t->current = e + 1;
-            }
-        }
-        for (int i = 0; i < arr.m_size; i++)
-        {
-            HandleC944* h = arr.m_data[i].second;
-            if (h != &collidable->m_kBroadPhaseHandle)
-                SyncOverlap(apPhantom, h->getOwner(), w->m_pCollisionFilter);
-        }
-        if (abProcessContacts)
-        {
-            TimerBufferC944* t = (TimerBufferC944*)TlsGetValue(S906090::DAT_0116913c);
-            TimerEntryC944* e = (TimerEntryC944*)t->current;
-            if (e < t->end)
-            {
-                e->name = S906090::FUN_00e34eb8;
-                _ReadWriteBarrier();
-                volatile unsigned int ticks = (unsigned int)__rdtsc();
-                e->ticks = ticks;
-                t->current = e + 1;
-            }
-            apPhantom->v2c();
-        }
-        if (--w->m_iCriticalOperationsLockCount == 0 && !w->m_bBlockExecutingPendingOperations && w->m_iPendingOperationCount != 0)
-            ((FO3Cls*)this)->FUN_00902550();
-        {
-            TimerBufferC944* t = (TimerBufferC944*)TlsGetValue(S906090::DAT_0116913c);
-            TimerEntryC944* e = (TimerEntryC944*)t->current;
-            if (e < t->end)
-            {
-                e->name = S906090::FUN_00e0811c;
-                _ReadWriteBarrier();
-                volatile unsigned int ticks = (unsigned int)__rdtsc();
-                e->ticks = ticks;
-                t->current = e + 1;
-            }
-        }
-        arr.release();
+        HK_TIMER_SPLIT_LIST("collectionFilter");
+        apPhantom->v2c();
     }
+    if (--w->m_iCriticalOperationsLockCount == 0 && !w->m_bBlockExecutingPendingOperations && w->m_iPendingOperationCount != 0)
+        ((FO3Cls*)this)->FUN_00902550();
+    HK_TIMER_END_LIST();
+    arr.release();
 }
 
 

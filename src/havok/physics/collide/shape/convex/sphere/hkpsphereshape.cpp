@@ -27,28 +27,7 @@ union __declspec(intrin_type) __declspec(align(16)) __m128
 extern "C" __m128 _mm_sub_ps(__m128, __m128);
 extern "C" __m128 _mm_add_ps(__m128, __m128);
 
-extern "C" void _ReadWriteBarrier(void);
-extern "C" unsigned __int64 __rdtsc(void);
-extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long dwTlsIndex);
-extern unsigned long DAT_0126835c;
-
-struct hkMonitorStreamCD81
-{
-    int unk00;
-    char* m_kRayEnd;
-    int unk08;
-    char* m_pRayCursor;
-};
-
-struct hkTimerCommandCD81
-{
-    const char* m_pCommandName;
-    unsigned int m_uiStartTicks;
-    int unk08;
-};
-
-extern const char DAT_010cb5f4[];
-extern const char DAT_010c41f8[];
+#include "havok/hkMonitorStream.h"
 
 void* __cdecl FUN_00cd85c0(void* pvResult, float fValue, int a, int b);
 
@@ -66,31 +45,9 @@ class HostCD81
 // pdb params: input, results
 void* HostCD81::RecordTimerCommands(void* pvResult, int a, int b)
 {
-    hkMonitorStreamCD81* pkStream = (hkMonitorStreamCD81*)TlsGetValue(DAT_0126835c);
-    char* end = pkStream->m_kRayEnd;
-    if (end < pkStream->m_pRayCursor)
-    {
-        hkTimerCommandCD81* pkCmd = (hkTimerCommandCD81*)end;
-        pkCmd->m_pCommandName = DAT_010cb5f4;
-        _ReadWriteBarrier();
-        volatile unsigned int t0 = (unsigned int)__rdtsc();
-        pkCmd->m_uiStartTicks = t0;
-        end += sizeof(hkTimerCommandCD81);
-        pkStream->m_kRayEnd = end;
-    }
+    HK_TIMER_BEGIN("rcSphere", HK_NULL);
     FUN_00cd85c0(pvResult, m_fValue, a, b);
-    pkStream = (hkMonitorStreamCD81*)TlsGetValue(DAT_0126835c);
-    char* end2 = pkStream->m_kRayEnd;
-    if (end2 < pkStream->m_pRayCursor)
-    {
-        hkTimerCommandCD81* pkCmd = (hkTimerCommandCD81*)end2;
-        pkCmd->m_pCommandName = DAT_010c41f8;
-        _ReadWriteBarrier();
-        volatile unsigned int t1 = (unsigned int)__rdtsc();
-        pkCmd->m_uiStartTicks = t1;
-        end2 += sizeof(hkTimerCommandCD81);
-        pkStream->m_kRayEnd = end2;
-    }
+    HK_TIMER_END();
     return pvResult;
 }
 
