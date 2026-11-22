@@ -2354,6 +2354,9 @@ typedef struct {
     Img *ci;     /* image of the chosen link, NULL if none */
     int br_b, br_m1, br_m2, br_tier, br_agree; /* bridge via FNV PC: 1 agree, -1 conflict */
     int pr_p, pr_f, pr_agree;                  /* prototype link: 1 agree, -1 conflict */
+    int ppair;                                 /* 1 + PT_* of the measured agreement pair that set the tier */
+    int sconf, sconf_tier;                     /* F3 string names another class; tier before */
+    char sconf_str[208];
     int meth, tier, agree, sky_b, sky_meth, nagree, ndis;
     char notes[512];
 } Final;
@@ -2430,6 +2433,66 @@ static void proto_link(Img *X, Proto *P, int np, int fam, int *out_p, int *out_f
         }
         if (ok && cp >= 0) { out_p[a] = cp; out_f[a] = cf; }
     }
+}
+
+/* ------------------------------------------------- promotion calibration */
+
+/* A chain maps target functions to named functions of some reference image;
+   the key method is the method of its first hop. */
+typedef struct {
+    Img *R;
+    int *map;
+    u8 *meth;
+} Chain;
+enum { PT_DB, PT_DS, PT_SB, PT_DF, PT_N };
+static const char *PTN[PT_N] = {"direct + bridge(FNV PC)", "direct + Skyrim", "Skyrim + bridge(FNV PC)", "direct + bridge(F3)"};
+static const char *PTT[PT_N] = {"tesv_win", "fnv360_1110_debug", "fnv360_1110_debug", "tesv_win"};
+static long g_pn[PT_N][NM][NM], g_pok[PT_N][NM][NM], g_ptot[PT_N][2], g_pcon[PT_N][2];
+
+static Chain chain_direct(Ctx *c)
+{
+    Chain ch;
+    ch.R = c->B;
+    ch.map = c->la;
+    ch.meth = c->meth;
+    return ch;
+}
+static Chain chain_compose(Ctx *h1, Ctx *h2)
+{
+    Chain ch;
+    int a;
+    ch.R = h2->B;
+    ch.map = xmalloc(h1->A->n * sizeof(int));
+    ch.meth = h1->meth;
+    for (a = 0; a < h1->A->n; a++) ch.map[a] = h1->la[a] >= 0 ? h2->la[h1->la[a]] : -1;
+    return ch;
+}
+/* links where both chains name the target function and the names agree, scored
+   against the target's own names (exact qualified name) */
+static void measure_pair(Img *X, Chain *c1, Chain *c2, int pt)
+{
+    int x;
+    for (x = 0; x < X->n; x++) {
+        int r1 = c1->map[x], r2 = c2->map[x], k;
+        if (r1 < 0 || r2 < 0 || !c1->R->nn[r1] || !c2->R->nn[r2]) continue;
+        k = name_cat(X, x, c1->R, r1);
+        if (k < 0) continue;
+        if (!names_agree(c1->R, r1, c2->R, r2)) {
+            g_pcon[pt][0]++;
+            if (k == 3) g_pcon[pt][1]++;
+            continue;
+        }
+        g_pn[pt][c1->meth[x]][c2->meth[x]]++;
+        g_ptot[pt][0]++;
+        if (k == 3) { g_pok[pt][c1->meth[x]][c2->meth[x]]++; g_ptot[pt][1]++; }
+    }
+}
+/* measured tier of an agreement between two chains (0 = not measured) */
+static int pair_tier(int pt, int m1, int m2)
+{
+    long n = g_pn[pt][m1][m2];
+    if (n < 20) return T_NONE;
+    return tier_from((double)g_pok[pt][m1][m2] / n, n);
 }
 
 /* ------------------------------------------------------------------- main */
@@ -2549,6 +2612,78 @@ static int string_selfname(const char *s, char *out, size_t cap)
     return 1;
 }
 
+static int valid_ident(const char *s)
+{
+    if (!(isalpha((u8)*s) || *s == '_')) return 0;
+    for (s++; *s; s++)
+        if (!(isalnum((u8)*s) || *s == '_')) return 0;
+    return 1;
+}
+/* placeholder-like type names, the same rule as f3rename's placeholder_type */
+static int type_placeholder(const char *s)
+{
+    static const char *pre[] = {"FUN_", "DAT_", "Unk", "UNK_", "unk_", "Unknown", "Stub", "Fnv", "f3m_", NULL};
+    size_t n = strlen(s), i, k;
+    for (i = 0; pre[i]; i++) if (!strncmp(s, pre[i], strlen(pre[i]))) return 1;
+    for (i = 0; i + 8 <= n; i++) {
+        if (i > 0 && s[i - 1] != '_') continue;
+        for (k = 0; k < 8 && isxdigit((u8)s[i + k]); k++) {}
+        if (k == 8 && (i + 8 == n || s[i + 8] == '_')) return 1;
+    }
+    if (n > 6 && !strcmp(s + n - 6, "_shell")) return 1;
+    return 0;
+}
+
+/* class part of a normalized, template-stripped qualified name ("" for free functions) */
+static const char *class_of(const char *q)
+{
+    static char b[4096];
+    const char *lc = last_comp(q);
+    size_t n = lc > q + 2 ? (size_t)(lc - q - 2) : 0;
+    if (n >= sizeof b) n = sizeof b - 1;
+    memcpy(b, q, n);
+    b[n] = 0;
+    return b;
+}
+/* "Class::Method..." or "Class::" at the start of a literal: the class it names (normalized),
+   the full name when a method follows, and whether it does */
+static int string_classref(const char *s, char *cls, size_t ccap, char *full, size_t fcap, int *has_m)
+{
+    const char *p = s, *lastsep = NULL;
+    size_t n;
+    int comps = 0;
+    if (!isalpha((u8)*p) && *p != '_') return 0;
+    for (;;) {
+        while (is_idc((u8)*p)) p++;
+        comps++;
+        if (p[0] == ':' && p[1] == ':') {
+            lastsep = p;
+            p += 2;
+            if (*p == '~') p++;
+            if (isalpha((u8)*p) || *p == '_') continue;
+            /* "Class::" followed by something else: class only */
+            n = (size_t)(lastsep - s);
+            if (n >= ccap) return 0;
+            memcpy(cls, s, n);
+            cls[n] = 0;
+            full[0] = 0;
+            *has_m = 0;
+            return 1;
+        }
+        break;
+    }
+    if (comps < 2 || !lastsep) return 0;
+    if (*p && !strchr(":( ,-.!'\\[", *p)) return 0;
+    n = (size_t)(lastsep - s);
+    if (n >= ccap || (size_t)(p - s) >= fcap) return 0;
+    memcpy(cls, s, n);
+    cls[n] = 0;
+    memcpy(full, s, (size_t)(p - s));
+    full[p - s] = 0;
+    *has_m = 1;
+    return 1;
+}
+
 int main(int argc, char **argv)
 {
     const char *out = NULL, *recipe_path = NULL, *target_id = "f3_pc", *sky_id = "tesv_win";
@@ -2563,6 +2698,9 @@ int main(int argc, char **argv)
     int nproto = 0, *tp[2], *tf_[2], *sp[2], *sf[2];
     long pcal_sky[2][2] = {{0}}, pcal_h[2][2] = {{0}}, pcal_x[2][3] = {{0}}, pcal_n[2] = {0}, brstat[NM][3];
     Holdout hb1, hb2;
+    Img *DBG = NULL;
+    Ctx *dbgC = NULL;
+    char **pnm = NULL; /* parameter names per F3 function, for comments.tsv */
     int g_tier_hash_pc = T_LOW;
     FILE *dbgp = NULL;
     long hash_pc_n = 0, hash_pc_ok = 0;
@@ -2688,7 +2826,8 @@ int main(int argc, char **argv)
             info("secondary calibration: %s -> %s", refs[dbg].id, C->id);
             run_match(c2);
             score_ctx(c2, cal2);
-            ctx_free(c2);
+            DBG = refs[dbg].img;
+            dbgC = c2; /* kept: chain D' of the promotion calibration */
         }
     }
 
@@ -2765,6 +2904,42 @@ int main(int argc, char **argv)
         info("bridge hash agreement with direct x360 medium+ links: %ld / %ld", agree, tot);
     }
 
+    /* ---- promotion calibration: independent chains on targets with known names */
+    {
+        Chain d = chain_direct(calib), b, f, d2, s2, b2;
+        Ctx *sPC = NULL, *sT, *dS = NULL, *dPC = NULL;
+        if (PCI) {
+            info("promotion: %s -> %s", S->id, PCI->id);
+            sPC = ctx_new(S, PCI);
+            run_match(sPC);
+            b = chain_compose(sPC, br2);
+            measure_pair(S, &d, &b, PT_DB);
+        }
+        info("promotion: %s -> %s", S->id, T->id);
+        sT = ctx_new(S, T);
+        run_match(sT);
+        f = chain_compose(sT, refs[0].ctx);
+        measure_pair(S, &d, &f, PT_DF);
+        if (DBG) {
+            info("promotion: %s -> %s", DBG->id, S->id);
+            dS = ctx_new(DBG, S);
+            run_match(dS);
+            d2 = chain_direct(dbgC);
+            s2 = chain_direct(dS);
+            measure_pair(DBG, &d2, &s2, PT_DS);
+            if (PCI) {
+                info("promotion: %s -> %s", DBG->id, PCI->id);
+                dPC = ctx_new(DBG, PCI);
+                run_match(dPC);
+                b2 = chain_compose(dPC, br2);
+                measure_pair(DBG, &s2, &b2, PT_SB);
+            }
+        }
+        for (i = 0; i < PT_N; i++)
+            info("promotion %s on %s: %ld/%ld exact where the chains agree; %ld/%ld where they conflict", PTN[i], PTT[i],
+                 g_ptot[i][1], g_ptot[i][0], g_pcon[i][1], g_pcon[i][0]);
+    }
+
     /* ---- recipe */
     load_recipe(recipe_path, &rec);
     for (i = 0; i < rec.n; i++) map_put(&inrec, rec.addr[i], i + 1);
@@ -2809,12 +2984,10 @@ int main(int argc, char **argv)
                     if (names_agree(BI, bb, refs[r].img, x->la[a])) F->nagree++;
                     else F->ndis++;
                 }
+                /* agreement among X360 builds is not independent: never promotes;
+                   disagreement still demotes */
                 if (F->ndis && F->tier > T_LOW) F->tier--;
-                if (F->br_b >= 0) {
-                    F->br_agree = names_agree(BI, bb, C, F->br_b) ? 1 : -1;
-                    if (F->br_agree > 0 && F->tier < T_HIGH) F->tier++;
-                    if (F->br_agree < 0 && F->tier > T_LOW) F->tier--;
-                }
+                if (F->br_b >= 0) F->br_agree = names_agree(BI, bb, C, F->br_b) ? 1 : -1;
             } else if (F->br_b >= 0) {
                 F->build = 0;
                 F->ci = C;
@@ -2833,8 +3006,22 @@ int main(int argc, char **argv)
                 F->tier = g_tier[F->meth];
                 F->agree = AG_SKY;
             }
-            if (F->agree == AG_BOTH && F->tier < T_HIGH) F->tier++;
-            if (F->agree == AG_CONFLICT && F->tier > T_LOW) F->tier--;
+            /* promotion: only an agreement of independent chains whose method pair was
+               measured on a target with known names; the tier becomes the measured one */
+            {
+                int promo = T_NONE, ncon = 0, t, pm = F->meth == M_BRIDGE ? -1 : F->meth;
+                if (pm >= 0 && F->br_agree > 0 && (t = pair_tier(PT_DB, pm, F->br_m1)) > promo) { promo = t; F->ppair = PT_DB + 1; }
+                if (F->agree == AG_BOTH) {
+                    if (pm >= 0 && (t = pair_tier(PT_DS, pm, F->sky_meth)) > promo) { promo = t; F->ppair = PT_DS + 1; }
+                    if (F->br_b >= 0 && (t = pair_tier(PT_SB, F->sky_meth, F->br_m1)) > promo) { promo = t; F->ppair = PT_SB + 1; }
+                }
+                if (pm < 0 && F->agree == AG_BOTH && (t = pair_tier(PT_SB, F->sky_meth, F->br_m1)) > promo) { promo = t; F->ppair = PT_SB + 1; }
+                if (promo > F->tier) F->tier = promo;
+                else F->ppair = 0;
+                ncon += F->br_agree < 0;
+                ncon += F->agree == AG_CONFLICT;
+                while (ncon-- > 0 && F->tier > T_LOW) F->tier--;
+            }
         }
     }
     /* prototype calibration on the overlap with X360-chain links of tier >= medium,
@@ -2870,7 +3057,8 @@ int main(int argc, char **argv)
         F->pr_f = tf_[i2][a];
         if (F->ci && F->agree != AG_SKY) {
             F->pr_agree = names_agree(F->ci, F->b, protos[F->pr_p].img, F->pr_f) ? 1 : -1;
-            if (F->pr_agree > 0 && F->tier < T_HIGH) F->tier++;
+            /* an accepted prototype is a method measured >= 99% alone */
+            if (F->pr_agree > 0) F->tier = T_HIGH;
             if (F->pr_agree < 0 && F->tier > T_LOW) F->tier--;
         } else {
             /* no X360-chain link (or Skyrim only): the exact library code wins */
@@ -2881,6 +3069,70 @@ int main(int argc, char **argv)
             F->meth = M_PROTO_GB + i2;
             F->tier = T_HIGH;
         }
+    }
+    /* string contradiction: an F3 literal "Class::Method..." / "Class::..." naming a class other than
+       the link's makes the link a conflict, unless a linked callee or caller carries that name */
+    {
+        FILE *sf_ = xfopen(out, "string_conflicts.tsv");
+        fprintf(sf_, "f3_addr\tin_recipe\ttier_before\tlink\tmethod\tstring\tstring_class\n");
+        for (a = 0; a < T->n; a++) {
+            Final *F = &fin[a];
+            int j, k, hit = 0;
+            const char *hs = NULL;
+            char scls[1024], sfull[1024], hcls[1024] = "";
+            if (!F->ci) continue;
+            for (j = 0; j < T->sn[a] && !hit; j++) {
+                const char *s = G_str.s[T->sid[T->so[a] + j]];
+                int has_m, same = 0, exempt = 0, pass;
+                if (!string_classref(s, scls, sizeof scls, sfull, sizeof sfull, &has_m)) continue;
+                /* Havok monitor tags ("Tt"/"Lt"/"St"/"Et" + name) are not part of the class name */
+                if (isupper((u8)scls[0]) && islower((u8)scls[1]) && scls[2] == 'h' && scls[3] == 'k') {
+                    memmove(scls, scls + 2, strlen(scls + 2) + 1);
+                    if (has_m) memmove(sfull, sfull + 2, strlen(sfull + 2) + 1);
+                }
+                for (k = 0; k < F->ci->nn[F->b]; k++) {
+                    const char *ln = G_name.s[F->ci->nm[F->ci->no[F->b] + k].tnorm], *lc = class_of(ln);
+                    size_t l1 = strlen(lc), l2 = strlen(scls);
+                    char pat[1100];
+                    if (!strcmp(lc, scls)) same = 1;
+                    /* the string omits the namespace: "ios_base::" for std::ios_base */
+                    else if (l1 > l2 + 2 && !strcmp(lc + l1 - l2, scls) && lc[l1 - l2 - 1] == ':') same = 1;
+                    /* compiler-generated names quote the symbol: `dynamic initializer for 'X::ms_RTTI'' */
+                    else if (strchr(ln, '`')) {
+                        snprintf(pat, sizeof pat, "'%s::", has_m ? sfull : scls);
+                        if (strstr(ln, pat)) same = 1;
+                    }
+                }
+                if (same) continue;
+                /* a callee or caller of this F3 function whose final link has that name */
+                for (pass = 0; pass < 2 && !exempt; pass++) {
+                    int n = pass ? T->rn[a] : T->cn[a], q;
+                    const int *l = pass ? T->rid + T->ro[a] : T->cid + T->co[a];
+                    for (q = 0; q < n && !exempt; q++) {
+                        Final *G;
+                        int x = l[q], z;
+                        if (x < 0 || !(G = &fin[x])->ci) continue;
+                        for (z = 0; z < G->ci->nn[G->b]; z++) {
+                            const char *gn = G_name.s[G->ci->nm[G->ci->no[G->b] + z].tnorm];
+                            if (has_m ? !strcmp(gn, sfull) : !strcmp(class_of(gn), scls)) exempt = 1;
+                        }
+                    }
+                }
+                if (exempt) continue;
+                hit = 1;
+                hs = s;
+                snprintf(hcls, sizeof hcls, "%s", scls);
+            }
+            if (!hit) continue;
+            fprintf(sf_, "0x%08x\t%d\t%s\t%s\t%s\t%s\t%s\n", T->addr[a], map_get(&inrec, T->addr[a], NULL), TN[F->tier],
+                    best_name(F->ci, F->b)->qual, MN[F->meth], hs, hcls);
+            F->sconf = 1;
+            F->sconf_tier = F->tier;
+            F->agree = AG_CONFLICT;
+            F->tier = T_LOW;
+            snprintf(F->sconf_str, sizeof F->sconf_str, "%.200s", hs);
+        }
+        fclose(sf_);
     }
     memset(brstat, 0, sizeof brstat);
     for (a = 0; a < T->n; a++) {
@@ -2902,8 +3154,15 @@ int main(int argc, char **argv)
             o += snprintf(F->notes + o, sizeof F->notes - o, ";proto=%s%s%s%s", protos[F->pr_p].id,
                           F->pr_agree > 0 ? "(agree)" : F->pr_agree < 0 ? "(conflict):" : "",
                           F->pr_agree < 0 ? best_name(protos[F->pr_p].img, F->pr_f)->qual : "", "");
-        if (F->agree == AG_BOTH || F->agree == AG_CONFLICT)
-            o += snprintf(F->notes + o, sizeof F->notes - o, ";skyrim_method=%s", MN[F->sky_meth]);
+        if (F->sky_b >= 0 && S->nn[F->sky_b] && F->ci != S) {
+            int ag = names_agree(F->ci, F->b, S, F->sky_b);
+            o += snprintf(F->notes + o, sizeof F->notes - o, ";skyrim=%s(%s)%s%s", ag ? "agree" : "conflict", MN[F->sky_meth],
+                          ag ? "" : ":", ag ? "" : best_name(S, F->sky_b)->qual);
+        }
+        if (F->ppair)
+            o += snprintf(F->notes + o, sizeof F->notes - o, ";tier_by=%s", PTN[F->ppair - 1]);
+        if (F->sconf)
+            o += snprintf(F->notes + o, sizeof F->notes - o, ";string_conflict(was %s)=%.120s", TN[F->sconf_tier], F->sconf_str);
         if (o && F->notes[0] == ';') memmove(F->notes, F->notes + 1, strlen(F->notes));
     }
 
@@ -3065,6 +3324,7 @@ int main(int argc, char **argv)
 
     /* ---- params.tsv */
     {
+        pnm = xcalloc(T->n, sizeof(char *));
         FILE *f = xfopen(out, "params.tsv");
         Img *D = NULL;
         long np = 0, nl = 0;
@@ -3090,12 +3350,18 @@ int main(int argc, char **argv)
                 }
                 if (P) {
                     u32 rva = P->addr[pf] - P->base;
+                    char pb[1024];
+                    size_t po = 0;
+                    pb[0] = 0;
                     for (k = first; k < P->npar && P->par[k].rva == rva; k++) {
                         if (strcmp(P->par[k].fn, nr->qual) && P->nn[pf] > 1) continue;
                         fprintf(f, "0x%08x\t%s\tparam\t%d\t%s\t%s\t%s\n", T->addr[a], nr->qual, P->par[k].index,
                                 P->par[k].name, P->par[k].type, P->id);
+                        if (P->par[k].name[0] && po < sizeof pb - 64)
+                            po += snprintf(pb + po, sizeof pb - po, "%s%s", po ? ", " : "", P->par[k].name);
                         np++;
                     }
+                    if (po) pnm[a] = xstrdup(pb);
                 }
             }
             if (D) {
@@ -3117,6 +3383,215 @@ int main(int argc, char **argv)
         }
         fclose(f);
         info("params.tsv: %ld params, %ld locals", np, nl);
+    }
+
+    /* ---- renames.tsv (f3rename input), renames_skipped.tsv, comments.tsv */
+    {
+        char **newn = xcalloc(T->n, sizeof(char *)), **oldn = xcalloc(T->n, sizeof(char *));
+        const char **skip = xcalloc(T->n, sizeof(char *));
+        Intern nn_ = {0};
+        int *nncnt = NULL;
+        FILE *rf = xfopen(out, "renames.tsv"), *kf = xfopen(out, "renames_skipped.tsv"), *cf = xfopen(out, "comments.tsv");
+        long nren = 0, ntype = 0, ncom = 0, nskip = 0;
+        char q[4096], oldt[1024], scls[2048], nw[4096];
+        fprintf(rf, "kind\taddress\told\tnew\tcomment\tmarker\n");
+        fprintf(kf, "address\tqualified\tsymbol\treason\n");
+        fprintf(cf, "address\tcomment\n");
+        /* pass 1: candidate names for high recipe functions */
+        for (i = 0; i < rec.n; i++) {
+            int fi, k;
+            Final *F;
+            const NameRec *nr;
+            const char *qq, *why = NULL, *s = rec.sym[i];
+            if (!map_get(&T->amap, rec.addr[i], &fi)) continue;
+            F = &fin[fi];
+            if (!F->ci || F->tier != T_HIGH) continue;
+            nr = best_name(F->ci, F->b);
+            qq = nr->qual;
+            if (!strncmp(qq, "`anonymous namespace'::", 23)) qq += 23;
+            snprintf(q, sizeof q, "%s", qq);
+            for (k = 1; k < F->ci->nn[F->b] && !why; k++)
+                if (F->ci->nm[F->ci->no[F->b] + k].tnorm != nr->tnorm) why = "folded reference: several names at the linked address";
+            if (why) {}
+            else if (!s || s[0] != '?') why = "no recipe symbol";
+            else if (s[1] == '?') why = "recipe symbol is a special member (ctor/dtor/operator)";
+            else {
+                const char *e = strchr(s + 1, '@');
+                size_t n = e ? (size_t)(e - s - 1) : 0;
+                if (!n || n >= sizeof oldt) why = "recipe symbol unparsable";
+                else {
+                    memcpy(oldt, s + 1, n);
+                    oldt[n] = 0;
+                    if (strncmp(oldt, "FUN_", 4) && strncmp(oldt, "__Dummy_", 8) && !sym_placeholder(oldt))
+                        why = "current name is not a placeholder";
+                }
+            }
+            if (!why) {
+                const char *lc = last_comp(q);
+                if (strstr(q, "dynamic initializer") || strstr(q, "dynamic atexit")) why = "compiler-generated (dynamic initializer/atexit)";
+                else if (strstr(q, "deleting destructor")) why = "compiler-generated (scalar/vector deleting destructor)";
+                else if (strstr(q, "iterator'")) why = "compiler-generated (vector iterator)";
+                else if (strstr(q, "thunk") || strchr(q, '[')) why = "thunk";
+                else if (strchr(q, '`')) why = "compiler-generated name";
+                else if (strchr(q, '<')) why = "template";
+                else if (!strncmp(lc, "operator", 8) && !is_idc((u8)lc[8])) why = "operator";
+                else if (lc[0] == '~') why = "destructor";
+                else if (lc > q + 2) {
+                    const char *pc = lc - 2, *st = pc;
+                    while (st > q && !(st[-1] == ':' && st - 1 > q && st[-2] == ':')) st--;
+                    if ((size_t)(pc - st) == strlen(lc) && !strncmp(st, lc, strlen(lc))) why = "constructor";
+                }
+            }
+            if (!why) {
+                /* the recipe symbol's class chain, outermost first */
+                const char *p = strchr(s + 1, '@') + 1;
+                const char *fr[16];
+                size_t fl[16], o = 0;
+                int nf = 0, z;
+                while (*p && *p != '@' && nf < 16) {
+                    const char *e = strchr(p, '@');
+                    if (!e) break;
+                    fr[nf] = p;
+                    fl[nf] = (size_t)(e - p);
+                    nf++;
+                    p = e + 1;
+                }
+                scls[0] = 0;
+                for (z = nf - 1; z >= 0 && o + fl[z] + 3 < sizeof scls; z--) {
+                    memcpy(scls + o, fr[z], fl[z]);
+                    o += fl[z];
+                    if (z) { scls[o++] = ':'; scls[o++] = ':'; }
+                }
+                scls[o] = 0;
+                if (last_comp(q) > q && !strcmp(class_of(q), scls)) snprintf(nw, sizeof nw, "%s", last_comp(q));
+                else {
+                    size_t w = 0;
+                    const char *c;
+                    for (c = q; *c && w + 2 < sizeof nw; c++) {
+                        if (c[0] == ':' && c[1] == ':') { nw[w++] = '_'; c++; }
+                        else nw[w++] = *c;
+                    }
+                    nw[w] = 0;
+                }
+                if (!valid_ident(nw)) why = "not a valid identifier";
+                else if (!strcmp(nw, oldt)) why = "already named";
+            }
+            if (why) { skip[fi] = why; continue; }
+            newn[fi] = xstrdup(nw);
+            oldn[fi] = xstrdup(oldt);
+            {
+                int before = nn_.n, id = in_find(&nn_, nw, strlen(nw), 1);
+                if (nn_.n > before) { nncnt = xrealloc(nncnt, (size_t)nn_.cap * sizeof(int)); nncnt[id] = 0; }
+                nncnt[id]++;
+            }
+        }
+        /* pass 2: write; duplicate new names are skipped (f3rename refuses a name listed twice) */
+        for (i = 0; i < rec.n; i++) {
+            int fi;
+            Final *F;
+            const NameRec *nr;
+            char cm[2048], other[1024];
+            size_t o = 0;
+            if (!map_get(&T->amap, rec.addr[i], &fi)) continue;
+            F = &fin[fi];
+            if (!F->ci) continue;
+            nr = best_name(F->ci, F->b);
+            if (newn[fi] && nncnt[in_find(&nn_, newn[fi], strlen(newn[fi]), 0)] > 1) skip[fi] = "duplicate new name";
+            if (newn[fi] && !skip[fi]) {
+                o = snprintf(cm, sizeof cm, "// pdb: %s | %s | %s%s, %s", nr->qual, nr->obj, F->ci->id,
+                             F->meth == M_BRIDGE ? " via fnv_pc_unpacked" : "", MN[F->meth]);
+                if (F->br_agree > 0) o += snprintf(cm + o, sizeof cm - o, " + bridge(%s|%s)", MN[F->br_m1], MN[F->br_m2]);
+                if (F->agree == AG_BOTH) o += snprintf(cm + o, sizeof cm - o, " + skyrim(%s)", MN[F->sky_meth]);
+                if (F->pr_agree > 0) o += snprintf(cm + o, sizeof cm - o, " + %s", protos[F->pr_p].id);
+                snprintf(cm + o, sizeof cm - o, ", high");
+                fprintf(rf, "function\t0x%08x\t%s\t%s\t%s\t\n", T->addr[fi], oldn[fi], newn[fi], cm);
+                nren++;
+                continue;
+            }
+            if (skip[fi]) {
+                fprintf(kf, "0x%08x\t%s\t%s\t%s\n", T->addr[fi], nr->qual, rec.sym[i] ? rec.sym[i] : "", skip[fi]);
+                nskip++;
+            }
+            other[0] = 0;
+            if (F->sconf) snprintf(other, sizeof other, "F3 string \"%.100s\"", F->sconf_str);
+            else if (F->agree == AG_CONFLICT && F->sky_b >= 0) snprintf(other, sizeof other, "skyrim: %s", best_name(S, F->sky_b)->qual);
+            else if (F->br_agree < 0) snprintf(other, sizeof other, "bridge: %s", best_name(C, F->br_b)->qual);
+            else if (F->pr_agree < 0) snprintf(other, sizeof other, "%s: %s", protos[F->pr_p].id, best_name(protos[F->pr_p].img, F->pr_f)->qual);
+            o = snprintf(cm, sizeof cm, "// pdb: %s | %s | %s%s, %s, %s", nr->qual, nr->obj, F->ci->id,
+                         F->meth == M_BRIDGE ? " via fnv_pc_unpacked" : "", MN[F->meth], TN[F->tier]);
+            if (other[0]) snprintf(cm + o, sizeof cm - o, ", conflict (%s)", other);
+            fprintf(cf, "0x%08x\t%s\n", T->addr[fi], cm);
+            if (pnm[fi]) fprintf(cf, "0x%08x\t// pdb params: %s\n", T->addr[fi], pnm[fi]);
+            ncom++;
+        }
+        /* types: placeholder-named types whose vtable symbol binds an address F3's own RTTI names */
+        {
+            size_t len;
+            char *b = slurp(recipe_path, &len), *p = b;
+            Intern seen = {0}, newt = {0};
+            int *tcnt = NULL, nt = 0, cap = 0, k;
+            char **to = NULL, **tn = NULL;
+            u32 *ta = NULL;
+            Map vtm = {0};
+            for (k = 0; k < T->nvt; k++) map_add(&vtm, T->vt[k].addr, k);
+            while (p && (p = strstr(p, "\"??_7")) != NULL) {
+                char *q2 = strchr(p + 1, '"'), *e;
+                char ty[512];
+                u32 va;
+                int vi, id, before;
+                size_t n;
+                p += 5;
+                if (!q2 || q2 - p < 6 || strncmp(q2 - 5, "@@6B@", 5) || strncmp(q2, "\": \"0x", 6)) continue;
+                e = q2 - 5;
+                n = (size_t)(e - p);
+                if (!n || n >= sizeof ty) continue;
+                memcpy(ty, p, n);
+                ty[n] = 0;
+                if (!valid_ident(ty)) continue; /* templates (?$...), nested types */
+                va = (u32)strtoul(q2 + 6, NULL, 16);
+                if (!type_placeholder(ty)) continue;
+                if (!map_get(&vtm, va, &vi)) continue;
+                {
+                    char key[600];
+                    snprintf(key, sizeof key, "%s@%08x", ty, va);
+                    before = seen.n;
+                    in_find(&seen, key, strlen(key), 1);
+                    if (seen.n == before) continue;
+                }
+                if (!valid_ident(G_cls.s[T->vt[vi].cls]) || !strcmp(G_cls.s[T->vt[vi].cls], ty)) continue;
+                if (nt == cap) {
+                    cap = cap ? cap * 2 : 256;
+                    to = xrealloc(to, cap * sizeof(char *));
+                    tn = xrealloc(tn, cap * sizeof(char *));
+                    ta = xrealloc(ta, cap * sizeof(u32));
+                }
+                to[nt] = xstrdup(ty);
+                tn[nt] = xstrdup(G_cls.s[T->vt[vi].cls]);
+                ta[nt] = va;
+                before = newt.n;
+                id = in_find(&newt, tn[nt], strlen(tn[nt]), 1);
+                if (newt.n > before) { tcnt = xrealloc(tcnt, (size_t)newt.cap * sizeof(int)); tcnt[id] = 0; }
+                tcnt[id]++;
+                nt++;
+            }
+            for (k = 0; k < nt; k++) {
+                int id = in_find(&newt, tn[k], strlen(tn[k]), 0), j, dupold = 0;
+                for (j = 0; j < nt; j++) if (j != k && !strcmp(to[j], to[k]) && strcmp(tn[j], tn[k])) dupold = 1;
+                if (tcnt[id] > 1 || dupold) {
+                    fprintf(kf, "0x%08x\t%s\t%s\t%s\n", ta[k], tn[k], to[k],
+                            dupold ? "type: old name binds several RTTI classes" : "type: new name from several placeholder types");
+                    nskip++;
+                    continue;
+                }
+                fprintf(rf, "type\t0x%08x\t%s\t%s\t\t// src: F3_EXE vtable 0x%08x (old: %s)\n", ta[k], to[k], tn[k], ta[k], to[k]);
+                ntype++;
+            }
+            free(b);
+        }
+        fclose(rf);
+        fclose(kf);
+        fclose(cf);
+        info("renames.tsv: %ld functions, %ld types; comments.tsv: %ld functions; skipped %ld", nren, ntype, ncom, nskip);
     }
 
     /* ---- calibration.md + summary.md */
@@ -3179,6 +3654,32 @@ int main(int argc, char **argv)
                    "| method | evaluable | exact | precision | tier |\n|---|---:|---:|---:|---|\n");
         fprintf(f, "| dref (1 vote) | %ld | %ld | %.2f%% | %s |\n", gl[3], gl[4], gl[3] ? 100.0 * gl[4] / gl[3] : 0.0, TN[gl[7]]);
         fprintf(f, "| dref_multi (>= 2 votes) | %ld | %ld | %.2f%% | %s |\n", gl[5], gl[6], gl[5] ? 100.0 * gl[6] / gl[5] : 0.0, TN[gl[8]]);
+        /* promotion calibration */
+        {
+            int pt, m1, m2;
+            fprintf(f, "\n## Promotion: agreement of independent chains, measured on targets with known names\n\n"
+                       "Agreement among X360 builds is not independent (shared code, same mistakes) and never promotes. A promotion needs "
+                       "two independent chains naming the same qualified function, and the method pair must be measured here (>= 20 "
+                       "agreeing links; the tier is the pair's measured precision). Chains: direct target -> X360 0822 retail; bridge "
+                       "target -> FNV PC -> X360 (hop-1 method is the key); bridge target -> F3 -> X360; target -> Skyrim. On TESV the "
+                       "Skyrim chain is the target itself, so direct + Skyrim and Skyrim + bridge are measured on the FNV360 1110 debug "
+                       "build (PDB names) instead, whose direct chain is same-game and therefore easier than F3's.\n\n"
+                       "| chain pair | target | agreeing links | exact | precision | conflicting links | chain-1 exact when they conflict |\n|---|---|---:|---:|---:|---:|---:|\n");
+            for (pt = 0; pt < PT_N; pt++)
+                fprintf(f, "| %s | %s | %ld | %ld | %.2f%% | %ld | %.2f%% |\n", PTN[pt], PTT[pt], g_ptot[pt][0], g_ptot[pt][1],
+                        g_ptot[pt][0] ? 100.0 * g_ptot[pt][1] / g_ptot[pt][0] : 0.0, g_pcon[pt][0],
+                        g_pcon[pt][0] ? 100.0 * g_pcon[pt][1] / g_pcon[pt][0] : 0.0);
+            fprintf(f, "\nPer method pair (>= 20 agreeing links; method of chain 1 + method of chain 2):\n\n"
+                       "| chain pair | method 1 | method 2 | agreeing | exact | precision | tier |\n|---|---|---|---:|---:|---:|---|\n");
+            for (pt = 0; pt < PT_N; pt++)
+                for (m1 = 1; m1 < NM; m1++)
+                    for (m2 = 1; m2 < NM; m2++)
+                        if (g_pn[pt][m1][m2] >= 20)
+                            fprintf(f, "| %s | %s | %s | %ld | %ld | %.2f%% | %s |\n", PTN[pt], MN[m1], MN[m2], g_pn[pt][m1][m2],
+                                    g_pok[pt][m1][m2], 100.0 * g_pok[pt][m1][m2] / g_pn[pt][m1][m2], TN[pair_tier(pt, m1, m2)]);
+            fprintf(f, "\nApplied to F3: direct + bridge(FNV PC) uses the TESV measurement; pairs with the Skyrim chain use the "
+                       "FNV360 debug measurement. direct + bridge(F3) is reported only.\n");
+        }
         fprintf(f, "\nF3 globals written: %ld (x360/Skyrim agree %ld, conflict %ld).\n", gl[0], gl[1], gl[2]);
         /* bridge */
         fprintf(f, "\n## Bridge through FNV PC (%s, unpacked x86 exe, no symbols)\n\n", PCI ? PCI->id : "absent");
@@ -3223,9 +3724,14 @@ int main(int argc, char **argv)
                    "the Skyrim column is the same rule applied to Skyrim against its own MAP names (other library versions).\n");
         fprintf(f, "\n## Final tier rules\n\nbase tier = calibrated tier of the method of the chosen link (x360 chain preferred; the build with "
                    "the best-tier link, ties by build order %s; else the FNV PC bridge, tier = min of its hops; else Skyrim). "
-                   "-1 when another x360 build links a differently named function. Bridge: +1 when it names the same function as "
-                   "the direct link, -1 on conflict. Skyrim: +1 agree=both, -1 conflict. Accepted prototype: +1 agree, -1 conflict; "
-                   "it supplies the link (tier high) when there is no x360-chain link. Tiers are capped to low..high.\n", refs_arg);
+                   "-1 when another x360 build links a differently named function (agreement among x360 builds never promotes: they "
+                   "share code). Promotion only from an agreement of two independent chains (direct, bridge via FNV PC, Skyrim) "
+                   "whose method pair is measured above with >= 20 agreeing links: the tier becomes the pair's measured tier "
+                   "(high >= 99%%, medium >= 90%%). -1 per conflicting chain. An accepted prototype (measured >= 99%% alone) "
+                   "agreeing with the link makes it high; it supplies the link when there is no x360-chain link. A link whose F3 "
+                   "function references a literal \"Class::Method\" / \"Class::\" naming another class (Havok monitor tags, a "
+                   "missing namespace and quoted compiler-generated names normalized), not explained by a linked callee or caller "
+                   "of that name, becomes agree=conflict at tier low (string_conflicts.tsv).\n", refs_arg);
         fclose(f);
         (void)sx;
 
