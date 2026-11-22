@@ -575,7 +575,7 @@ int E02A80_cls::hkPlatformObjectWriter_writeObject(E02A80Arg* apArg, int aiValue
         box.unk2c = (int)0x80000000;
         box.unk00 = 0;
         box.unk04 = 0;
-        box.m_cache = 0;
+        box.unk0c = 0;
         box.unk10 = 0;
         box.unk18 = 0;
         box.unk1c = 0;
