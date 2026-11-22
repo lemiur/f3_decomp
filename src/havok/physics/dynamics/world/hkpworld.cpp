@@ -437,7 +437,8 @@ struct CA8B80Queue {
 struct FUN_00c97510 {
     void __thiscall ProcessPointer(void*);
 };
-struct FUN_00c97f50_Class {
+struct FUN_00c97f50_Class : hkpWorld
+{
     void DispatchOrQueue(void* p);
 };
 // @f3 0x009084b0 (community match, verified in this file)
@@ -445,7 +446,7 @@ struct FUN_00c97f50_Class {
 // pdb params: action
 void FUN_00c97f50_Class::DispatchOrQueue(void* p)
 {
-    if (*(unsigned int*)((char*)this + 0x84)) {
+    if (m_criticalOperationsLockCount) {
         CA8B80Command cmd;
         cmd.m_bType = 0xb;
         cmd.m_p = p;
@@ -1048,8 +1049,8 @@ struct WorldQ
 {
     char pad0[8];
     Sim* m_simulation;                              // +0x08
-    char pad_c[0x94 - 0xc];
-    int m_criticalOperationsLockCount;               // +0x94
+    char pad_c[0x84 - 0xc];
+    int m_criticalOperationsLockCount;               // +0x84
 
     void __thiscall DispatchOp(int a0, int a1, int a2);
 };
@@ -1060,7 +1061,7 @@ struct Sh00902570F3 { void FUN_00902570(QueuedOp* op); };
 // pdb params: entityBatch, numEntities, mode
 void WorldQ::DispatchOp(int aiArg0, int aiArg1, int aiArg2)
 {
-    if (*(int*)((char*)this + 0x84))
+    if (m_criticalOperationsLockCount)
     {
         QueuedOp op;
         op.m_ucOperationType = 0x16;
