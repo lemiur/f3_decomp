@@ -37357,7 +37357,7 @@ struct Owner {
 // pdb: TESLoadScreen::CanDisplayForForm | TESLoadScreen.obj | fnv360_0822_retail, objrun, medium
 // pdb params: apLoadingForm
 bool Owner::FUN_00516010(Form* form) {
-    bool result = false;
+    volatile bool result = false;
     unsigned int formID;
     unsigned int worldID;
     unsigned int coords;
