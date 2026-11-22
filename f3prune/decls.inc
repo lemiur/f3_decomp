@@ -269,11 +269,29 @@ static void count_hidden_idents(StrMap *m, File *F)
 
 static int cmd_decls(int argc, char **argv)
 {
-    if (argc < 5) die("usage: f3prune decls <repo> <files.txt> <out.tsv> [--dry]");
+    if (argc < 5) die("usage: f3prune decls <repo> <files.txt> <out.tsv> [--exclude FILE] [--dry]");
+    StrMap excl;
+    smap_init(&excl, 64);
     for (int i = 5; i < argc; i++) {
         if (strcmp(argv[i], "--dry") == 0)
             g_dry = 1;
-        else
+        else if (strcmp(argv[i], "--exclude") == 0 && i + 1 < argc) {
+            /* lines "file<TAB>name": declarations of that name in that file stay */
+            size_t en;
+            char *et = read_file(argv[++i], &en);
+            if (!et) die("cannot read %s", argv[i]);
+            char *es = NULL;
+            for (char *ln = strtok_s(et, "\r\n", &es); ln; ln = strtok_s(NULL, "\r\n", &es)) {
+                char *tab = strchr(ln, '\t');
+                if (!tab) continue;
+                *tab = 0;
+                char key[2048];
+                snprintf(key, sizeof key, "%s|%s", ln, tab + 1);
+                lower_inplace(key);
+                smap_put(&excl, key, (void *)1);
+            }
+            free(et);
+        } else
             die("unknown option %s", argv[i]);
     }
     g_no_banner = 1;
@@ -334,6 +352,12 @@ static int cmd_decls(int argc, char **argv)
             memset(&d, 0, sizeof d);
             d.kind = decl_kind(F, s2, d.name, sizeof d.name);
             if (!d.kind) continue;
+            {
+                char key[2048];
+                snprintf(key, sizeof key, "%s|%s", F->rel, d.name);
+                lower_inplace(key);
+                if (smap_has(&excl, key)) continue;
+            }
             d.file = f;
             d.stmt = s2;
             VPUSH(dc, d);
@@ -352,6 +376,18 @@ static int cmd_decls(int argc, char **argv)
             StrMap own = {0};
             count_idents(&own, F, sm->first, sm->last, 1);
             intptr_t rest = count_of(&T[grp], d->name) - count_of(&own, d->name);
+            /* "struct X" inside the statement (other than its own head) may be what declares X for later code */
+            for (int j = sm->first; j < sm->last && rest <= 0; j++) {
+                if (!(ptk_eq(&F->L, j, "struct") || ptk_eq(&F->L, j, "class") || ptk_eq(&F->L, j, "union") ||
+                      ptk_eq(&F->L, j, "enum")))
+                    continue;
+                PTok *nt = &F->L.toks[j + 1];
+                if (nt->type != P_IDENT || nt->len >= 200) continue;
+                char en[256];
+                snprintf(en, sizeof en, "%.*s", nt->len, F->L.text + nt->off);
+                if (strcmp(en, d->name) == 0) continue;
+                if (count_of(&T[grp], en) - count_of(&own, en) > 0 || smap_has(&H[grp], en)) rest = 1;
+            }
             smap_free(&own);
             if (rest > 0) continue;
             d->removed = 1;
