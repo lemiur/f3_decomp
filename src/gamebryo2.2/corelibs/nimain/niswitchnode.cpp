@@ -10,6 +10,15 @@ char const* const* __cdecl FUN_00a943f0()
     return &g_011f5f1c_arg1;
 }
 
+struct NiTPrimitiveArray_unsigned_int_
+{
+    void* unk00;
+    unsigned int* m_pBase;  // src: FNV360_PDB NiTArray +0x4
+    unsigned short m_usMaxSize;  // src: FNV360_PDB +0x8
+    unsigned short m_usSize;  // src: FNV360_PDB +0xA
+    unsigned short m_usESize;  // src: FNV360_PDB +0xC
+    unsigned short m_usGrowBy;  // src: FNV360_PDB +0xE
+};
 struct NiObject
 {
     void* m_000;
@@ -55,22 +64,22 @@ struct NiObject
     void* m_0a0;
     void* m_0a4;
     void* m_0a8;
-    char m_0ac;
+    char m_uFlags;  // src: FNV360_PDB NiSwitchNode (X360 +0xD0, PC +0xAC) (old: m_uFlags)
     char m_0ad;
     char m_0ae;
     char m_0af;
-    void* m_0b0;
+    void* m_iIndex;  // src: FNV360_PDB NiSwitchNode (X360 +0xD4, PC +0xB0) (old: m_iIndex)
 };
 struct NiSwitchNode : public NiObject
 {
     bool __thiscall FUN_00a5e600(NiObject*);
     bool __thiscall FUN_00a94000(NiObject*);
 };
-// Calls FUN_00a5e600, then returns true only if m_0b0 matches and the low bit of m_0ac matches the other object's.
+// Calls FUN_00a5e600, then returns true only if m_iIndex matches and the low bit of m_uFlags matches the other object's.
 // @fnv 0x00a94000
 bool __thiscall NiSwitchNode::FUN_00a94000(NiObject* other)
 {
-    if (!FUN_00a5e600(other) || m_0b0 != other->m_0b0 || (m_0ac ^ other->m_0ac) & 1)
+    if (!FUN_00a5e600(other) || m_iIndex != other->m_iIndex || (m_uFlags ^ other->m_uFlags) & 1)
         return false;
     return true;
 }
@@ -80,6 +89,8 @@ extern "C" __declspec(dllimport) void __stdcall EnterCriticalSection(void*);
 extern "C" __declspec(dllimport) void __stdcall LeaveCriticalSection(void*);
 struct NiObjectNET
 {
+    unsigned char unk00[0x14];
+    unsigned short m_usExtraDataSize;  // src: FNV360_PDB +0x14
     void __thiscall DeleteExtraData(unsigned short);
     bool __thiscall FUN_00a5bf50(unsigned short);
 };
@@ -88,7 +99,7 @@ struct NiObjectNET
 bool __thiscall NiObjectNET::FUN_00a5bf50(unsigned short ausIndex)
 {
     EnterCriticalSection(&DAT_011f4380);
-    if (ausIndex < *(unsigned short*)((char*)this + 0x14))
+    if (ausIndex < m_usExtraDataSize)
     {
         DeleteExtraData(ausIndex);
         LeaveCriticalSection(&DAT_011f4380);
@@ -113,8 +124,8 @@ struct FUN_00a93c00_shell : NiSwitchNode
 void __thiscall FUN_00a93c00_shell::FUN_00a93c00(NiSwitchNode* pkDest, CloningProcess& kCloning)
 {
     ((NiNode_Helper*)this)->CopyMemberData(pkDest, kCloning);
-    *(unsigned short*)((char*)pkDest + 0xac) = *(unsigned short*)((char*)this + 0xac);
-    pkDest->m_0b0 = m_0b0;
+    *(unsigned short*)&pkDest->m_uFlags = *(unsigned short*)&m_uFlags;
+    pkDest->m_iIndex = m_iIndex;
 }
 
 class NiUpdateData
@@ -174,12 +185,12 @@ struct SwitchHack : public NiObject
 // @fnv 0x00a94300
 void SwitchHack::FUN_00a94300(NiUpdateData& data)
 {
-    if (m_0ac & 1)
+    if (m_uFlags & 1)
     {
-        if (*(int*)&m_0b0 >= 0)
+        if (*(int*)&m_iIndex >= 0)
         {
             ((NiAVObject*)this)->UpdateTimeControllers(data, true);
-            NiAVObject* pkChild = ((NiAVObject**)m_0a0)[*(int*)&m_0b0];
+            NiAVObject* pkChild = ((NiAVObject**)m_0a0)[*(int*)&m_iIndex];
             if (pkChild)
                 pkChild->UpdateControllers(data);
         }
@@ -196,16 +207,19 @@ struct Unk_00a5e930
 {
     void __thiscall FUN_00a5e930();
 };
-struct FUN_00a94400_shell
+struct FUN_00a94400_shell : NiSwitchNode
 {
+    float m_fSavedTime;  // src: FNV360_PDB NiSwitchNode (X360 +0xD8, PC +0xB4)
+    unsigned int m_uiRevID;  // src: FNV360_PDB NiSwitchNode (X360 +0xDC, PC +0xB8)
+    NiTPrimitiveArray_unsigned_int_ m_kChildRevID;  // src: FNV360_PDB NiSwitchNode (X360 +0xE0, PC +0xBC)
     void* __thiscall DestroyWithFlags(unsigned int);
 };
 // Sets the string at offset 0xbc, frees the pointer at 0xc0, calls FUN_00a5e930, and deletes this with size 0xcc when flags has bit 0 set.
 // @fnv 0x00a94400
 void* __thiscall FUN_00a94400_shell::DestroyWithFlags(unsigned int flags)
 {
-    void* tmp = *(void**)((char*)this + 0xc0);
-    *(char const**)((char*)this + 0xbc) = " HG";
+    void* tmp = m_kChildRevID.m_pBase;
+    m_kChildRevID.unk00 = (void*)" HG";
     _NiFreeAlias(tmp);
     ((Unk_00a5e930*)this)->FUN_00a5e930();
     if (flags & 1)
@@ -243,14 +257,20 @@ NiObject* __thiscall FUN_00a94500_Holder::CloneSwitchNode(CloningProcess& kCloni
     else
         pkObject = 0;
     ((NiNode_Helper*)this)->CopyMemberData(pkObject, &kCloning);
-    *(unsigned short*)((char*)pkObject + 0xAC) = *(unsigned short*)((char*)this + 0xAC);
-    *(void**)((char*)pkObject + 0xB0) = *(void**)((char*)this + 0xB0);
+    *(unsigned short*)&pkObject->m_uFlags = *(unsigned short*)&m_uFlags;
+    pkObject->m_iIndex = m_iIndex;
     return pkObject;
 }
 }  // namespace fnv_00a94500
 
 struct StrArr
 {
+    void* unk00;
+    char** m_pBase;  // src: FNV360_PDB NiTPrimitiveArray +0x4
+    unsigned short m_usMaxSize;  // src: FNV360_PDB +0x8
+    unsigned short m_usSize;  // src: FNV360_PDB +0xA
+    unsigned short m_usESize;  // src: FNV360_PDB +0xC
+    unsigned short m_usGrowBy;  // src: FNV360_PDB +0xE
     void SetSize(unsigned int);
     void SetAt(unsigned int, char*&);
 };
@@ -264,16 +284,19 @@ struct FUN_00a5ee30_shell
 };
 struct FUN_00a944a0_shell : public NiSwitchNode
 {
+    float m_fSavedTime;  // src: FNV360_PDB NiSwitchNode (X360 +0xD8, PC +0xB4)
+    unsigned int m_uiRevID;  // src: FNV360_PDB NiSwitchNode (X360 +0xDC, PC +0xB8)
+    NiTPrimitiveArray_unsigned_int_ m_kChildRevID;  // src: FNV360_PDB NiSwitchNode (X360 +0xE0, PC +0xBC)
     void __thiscall SetChildAtIndex(unsigned int, NiAVObject*, NiPointer&);
 };
 // @fnv 0x00a944a0
 void FUN_00a944a0_shell::SetChildAtIndex(unsigned int uiIndex, NiAVObject* pkChild, NiPointer& spobject)
 {
-    StrArr* arr = (StrArr*)((char*)this + 0xbc);
-    *(unsigned int*)((char*)this + 0xb8) = 1;
+    StrArr* arr = (StrArr*)&m_kChildRevID;
+    m_uiRevID = 1;
     char* p = 0;
-    if (uiIndex >= *(unsigned short*)((char*)arr + 8))
-        arr->SetSize(*(unsigned short*)((char*)arr + 0xe) + uiIndex);
+    if (uiIndex >= arr->m_usMaxSize)
+        arr->SetSize(arr->m_usGrowBy + uiIndex);
     arr->SetAt(uiIndex, p);
     ((FUN_00a5ee30_shell*)this)->FUN_00a5ee30(uiIndex, pkChild, spobject);
 }
@@ -349,9 +372,9 @@ void Target::FUN_00a93ca0(RefObj* child, RefPtr& out)
     RefPtr refTemp;
     refTemp.p = 0;
     ((S2*)this)->FUN_00a5e780(child, refTemp);
-    int active = (int)m_0b0;
+    int active = (int)m_iIndex;
     if (active > -1 && (active >= (int)*((unsigned short*)&m_0a4 + 1) || !((RefObj**)m_0a0)[active]))
-        m_0b0 = (void*)-1;
+        m_iIndex = (void*)-1;
     out.Assign(refTemp);
     refTemp.Release();
 }
@@ -560,7 +583,7 @@ struct FUN_00a93ef0_cls : public NiSwitchNode
 // @fnv 0x00a93ef0
 void __thiscall FUN_00a93ef0_cls::UpdateSwitchChild(unsigned int arg)
 {
-    int idx = (int)m_0b0;
+    int idx = (int)m_iIndex;
     if (idx >= 0)
     {
         SwitchChildB10050* child = (SwitchChildB10050*)((void**)m_0a0)[idx];
@@ -571,7 +594,7 @@ void __thiscall FUN_00a93ef0_cls::UpdateSwitchChild(unsigned int arg)
             {
                 m_0bc.FUN_0096ae90((unsigned int)idx, &m_0b8);
                 block.m_00 = m_0b4;
-                block.m_04 = (unsigned char)(((unsigned char)m_0ac >> 1) & 1);
+                block.m_04 = (unsigned char)(((unsigned char)m_uFlags >> 1) & 1);
                 block.m_05 = 0;
                 block.m_06 = 0;
                 block.m_07 = 0;
@@ -603,9 +626,9 @@ struct FUN_00a93f90_cls : public NiSwitchNode
 // @fnv 0x00a93f90
 void FUN_00a93f90_cls::UpdateFromActiveChild()
 {
-    if ((m_0ac & 1) != 0)
+    if ((m_uFlags & 1) != 0)
     {
-        int idx = (int)m_0b0;
+        int idx = (int)m_iIndex;
         NiObject* child = 0;
         if (idx >= 0)
             child = (NiObject*)((void**)m_0a0)[idx];
@@ -678,26 +701,26 @@ struct FUN_00a94040_shell : NiSwitchNode
 // @fnv 0x00a94040
 void FUN_00a94040_shell::UpdateSwitchState(FNV_UpdateFlags* update, unsigned int flags)
 {
-    unsigned short& state = *reinterpret_cast<unsigned short*>(&m_0ac);
+    unsigned short& state = *reinterpret_cast<unsigned short*>(&m_uFlags);
     if (update->shouldActivate)
         state |= 2;
     else
         state &= ~2u;
     m_uiCommandId = update->time;
-    if (m_0ac & 1)
+    if (m_uFlags & 1)
     {
         ++m_revision;
         unsigned int* count = &m_revision;
         if (update->shouldActivate)
             FUN_004eff50(update, 1);
         reinterpret_cast<FNV_SwitchVirtual*>(this)->NotifyUpdated(update);
-        if ((int)m_0b0 >= 0)
+        if ((int)m_iIndex >= 0)
         {
-            FNV_ChildVirtual* child = reinterpret_cast<FNV_ChildVirtual**>(m_0a0)[(int)m_0b0];
+            FNV_ChildVirtual* child = reinterpret_cast<FNV_ChildVirtual**>(m_0a0)[(int)m_iIndex];
             if (child)
             {
                 child->NotifySelected(update, flags);
-                m_pTracker.FUN_0096ae90((int)m_0b0, count);
+                m_pTracker.FUN_0096ae90((int)m_iIndex, count);
                 NiObject* raw = reinterpret_cast<NiObject*>(child);
                 FNV_Color4* color = raw->m_020 ? reinterpret_cast<FNV_Color4*>(raw->m_020) : &DAT_011f4288;
                 FNV_Color4* out = reinterpret_cast<FNV_Color4*>(m_020);
@@ -1384,8 +1407,8 @@ void FUN_00a94680_shell::AppendDebugStrings(StrArr* pkStrings)
 {
     reinterpret_cast<FUN_00a5ea70_Obj*>(this)->FUN_00a5ea70(pkStrings);
     AddString(pkStrings, FUN_00a7d330(DAT_011f5eb4));
-    AddString(pkStrings, FUN_00a7d4d0("m_iIndex", reinterpret_cast<int>(m_0b0)));
-    bool bUpdateOnlyActive = m_0ac & 1;
+    AddString(pkStrings, FUN_00a7d4d0("m_iIndex", reinterpret_cast<int>(m_iIndex)));
+    bool bUpdateOnlyActive = m_uFlags & 1;
     AddString(pkStrings, FUN_00a7d370("m_bUpdateOnlyActive", bUpdateOnlyActive));
 }
 
