@@ -1187,10 +1187,6 @@ bool FUN_00a5bca0_shell::SetExtraDataName(NiExtraData* pkExtra)
     return ((Holder*)this)->NiObjectNET_InsertExtraData((NiTexture*)pkExtra);
 }
 
-inline NiFixedString::operator const char*() const
-{
-    return m_kHandle;
-}
 
 struct FUN_00a5be90_shell : public NiObjectNET
 {
@@ -1208,7 +1204,7 @@ bool FUN_00a5be90_shell::DeleteExtraDataByKey(const NiFixedString& kKey)
 
     EnterCriticalSection(&g_NiObjectNETExtraDataLock);
 
-    if (kKey == _EmptyFS)
+    if (!kKey.Exists())
     {
         LeaveCriticalSection(&g_NiObjectNETExtraDataLock);
         return false;

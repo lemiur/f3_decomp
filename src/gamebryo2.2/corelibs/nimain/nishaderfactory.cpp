@@ -152,7 +152,7 @@ bool __cdecl AcquireGlobalConstantEntry(const NiFixedString* pkName, unsigned in
     if (ShaderFactorySlot::Get() == 0)
         return false;
     NiShaderFactory* pkFactory = ShaderFactorySlot::Get();
-    NiFixedString kLocal;
+    NiGlobalStringTable::GlobalStringHandle kLocal;  // the key's handle; MATCH-PENDING (the real form is an NiFixedString)
     NiTMapItem<NiFixedString, NiGlobalConstantEntry*>* pkItem =
         pkFactory->m_kGlobalConstantEntryMap
             .m_ppkHashTable[(unsigned int)pkName->m_kHandle % pkFactory->m_kGlobalConstantEntryMap.m_uiHashSize];
@@ -185,8 +185,8 @@ bool __cdecl AcquireGlobalConstantEntry(const NiFixedString* pkName, unsigned in
 
     char* pcHandle = pkName->m_kHandle;
     NiShaderFactory* pkMapOwner = ShaderFactorySlot::Get();
-    kLocal.m_kHandle = pcHandle;
-    ((ShaderConstantMap*)&pkMapOwner->m_kGlobalConstantEntryMap)->SetAt(&kLocal, pkNew);
+    kLocal = pcHandle;
+    ((ShaderConstantMap*)&pkMapOwner->m_kGlobalConstantEntryMap)->SetAt((NiFixedString*)&kLocal, pkNew);
 
     if (pcHandle != _EmptyFS)
         InterlockedDecrement((long*)(pcHandle - 8));

@@ -59,13 +59,8 @@ void NiDefaultAVObjectPalette::LoadBinary(NiStream& stream)
             NiAVObject* object = (NiAVObject*)stream.DeserializeObject();
             if (string && object)
             {
-                NiFixedString name;
-                name.m_kHandle = NiGlobalStringTable::AddString(string);
+                NiFixedString name(string);
                 SetAVObject(name, object);
-                if (name.m_kHandle != EmptyFS.m_kHandle)
-                {
-                    InterlockedDecrement((volatile long*)(name.m_kHandle - 8));
-                }
             }
             NiFree(string);
         } while (count > 0);
@@ -488,8 +483,11 @@ void PaletteShell::FUN_00a6e5b0(CloningProcess& kCloning)
 {
     ((NiObjectCloneBase*)this)->ProcessClone(kCloning);
 
-    NiFixedString kName;
-    NiObject*& pkClone = reinterpret_cast<NiObject*&>(kName.m_kHandle);
+    // The name handle and the clone pointer share one stack slot in the game's code; the slot is modelled as the
+    // handle (MATCH-PENDING: the real form, an NiFixedString in the loop, allocates a separate slot).
+    NiGlobalStringTable::GlobalStringHandle kNameHandle;
+    NiFixedString& kName = (NiFixedString&)kNameHandle;
+    NiObject*& pkClone = reinterpret_cast<NiObject*&>(kNameHandle);
     pkClone = 0;
     kCloning.m_pCloneMap->GetAt(this, pkClone);
     PaletteShell* pkDest = (PaletteShell*)pkClone;
@@ -505,7 +503,7 @@ void PaletteShell::FUN_00a6e5b0(CloningProcess& kCloning)
         void* pos = FirstPos(m_kObjectMap);
         while (pos)
         {
-            kName.m_kHandle = EmptyFS.m_kHandle;
+            kNameHandle = NiGlobalStringTable::NULL_STRING;
             NiAVObject* pkObj;
             m_kObjectMap.GetNext(pos, kName, pkObj);
             if (kName.m_kHandle && pkObj)
@@ -514,8 +512,7 @@ void PaletteShell::FUN_00a6e5b0(CloningProcess& kCloning)
                 if (kCloning.m_pCloneMap->GetAt(pkObj, pkObjClone))
                     pkDest->SetAVObject(kName, (NiAVObject*)pkObjClone);
             }
-            if (kName.m_kHandle != EmptyFS.m_kHandle)
-                InterlockedDecrement((volatile long*)(kName.m_kHandle - 8));
+            NiGlobalStringTable::DecRefCount(kNameHandle);
         }
     }
 }
@@ -652,15 +649,10 @@ void PaletteSaveShell::FUN_00a6e6c0(NiStream& kStream)
         while (pvPos)
         {
             NiFixedString kKey;
-            const char* pcKey;
-            kKey.m_kHandle = EmptyFS.m_kHandle;
             NiAVObject* pkObject;
             ((MapNoAlias&)m_kObjectMap).GetNext(pvPos, kKey, pkObject);
-            pcKey = kKey.m_kHandle;
-            ((StreamSaveShell&)kStream).NiStream_SaveCString(pcKey);
+            ((StreamSaveShell&)kStream).NiStream_SaveCString(kKey);
             ((NiStreamLinkObject)kStream.m_ppVirtualMethodTable[12])(&kStream, pkObject);
-            if (pcKey != EmptyFS.m_kHandle)
-                InterlockedDecrement((volatile long*)(pcKey - 8));
         }
     }
 }

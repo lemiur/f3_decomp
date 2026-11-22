@@ -11,10 +11,6 @@
 
 #include <string.h>
 #include <stdio.h>
-NiFixedString::operator const char*() const
-{
-    return m_kHandle;
-}
 char* FUN_00a7d330(char*);
 char* FUN_00a7d510(const char*, unsigned int);
 void* NiMalloc(unsigned int);

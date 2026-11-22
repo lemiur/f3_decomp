@@ -60,7 +60,7 @@ void ImageSpaceManager::CreateMenuBackgroundGeometry()
     m_pMenuBackgroundScreenGeometry->GetData()->SetRectangleBounds(0, DAT_01012054, 1.0f, DAT_010162c0, DAT_0104a494);
     m_pMenuBackgroundScreenGeometry->GetData()->FUN_00a88130(0, 0, 0.0f, 0.0f, 1.0f, 1.0f);
     m_pMenuBackgroundScreenGeometry->GetData()->FUN_00a87900();
-    m_pMenuBackgroundScreenGeometry->SetName(GeometryString("Imagespace Effect Geometry"));
+    m_pMenuBackgroundScreenGeometry->SetName(NiFixedString("Imagespace Effect Geometry"));
     m_pMenuBackgroundScreenGeometry->UpdateSceneObject();
     NiUpdateData update;
     update.time = 0.0f;
@@ -2860,6 +2860,6 @@ void PartialScreenGeometryReceiver::ImageSpaceManager_CreatePartialScreenGeometr
     this->m_pMenuBackgroundScreenElements->UpdateSceneObject();
     NiUpdateData updateData = {0.0f, false, false, false, false, false};
     this->m_pMenuBackgroundScreenElements->Update(updateData);
-    this->m_pMenuBackgroundScreenElements->SetName(GeometryString("Interface Effect Partial Screen Trishape"));
+    this->m_pMenuBackgroundScreenElements->SetName(NiFixedString("Interface Effect Partial Screen Trishape"));
     apScreenElements = this->m_pMenuBackgroundScreenElements;
 }

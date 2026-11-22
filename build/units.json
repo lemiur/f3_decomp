@@ -10874,7 +10874,8 @@
     "?Init@ImageSpaceShaderParamGlobal@@QAEXHH@Z": "0x00b23f20",
     "?InitParams@ImageSpaceManagerHelper@@QAEXXZ": "0x00b11050",
     "?DAT_011f91a8@@3PAUBSTextureManagerStub@@A": "0x0116ef98",
-    "?CreateRenderedTexture@BSTextureManagerStub@@QAEPAVBSRenderedTexture@@HHHHH@Z": "0x00af1470"
+    "?CreateRenderedTexture@BSTextureManagerStub@@QAEPAVBSRenderedTexture@@HHHHH@Z": "0x00af1470",
+    "?NULL_STRING@NiGlobalStringTable@@2QADA": "0x00e207a8"
    }
   },
   {
@@ -538702,7 +538703,8 @@
     "??_7?$NiTFixedStringMap@PBD@@6B@": "0x00e2223c",
     "?FUN_0085b720@?$NiTFixedStringMap@PBD@@QAEXABUKey@@PBD@Z": "0x0085b720",
     "?FUN_00838930@?$NiTFixedStringMap@PBD@@QAEXAAPAXAAUKey@@AAPBD@Z": "0x00838930",
-    "?FUN_00838790@?$NiTFixedStringMapBase@V?$DFALL@V?$NiTMapItem@VNiFixedString@@PBD@@@@PBD@@QAEXXZ": "0x00838790"
+    "?FUN_00838790@?$NiTFixedStringMapBase@V?$DFALL@V?$NiTMapItem@VNiFixedString@@PBD@@@@PBD@@QAEXXZ": "0x00838790",
+    "?NULL_STRING@NiGlobalStringTable@@2QADA": "0x00e207a8"
    }
   },
   {
@@ -538712,7 +538714,7 @@
     "/MT",
     "/O2",
     "/GS",
-    "/EHsc",
+    "/EHs-c-",
     "/Gy"
    ],
    "functions": [
@@ -538848,7 +538850,8 @@
     "?RemoveKey@Map@@QAEXABUKey@@@Z": "0x0085b7a0",
     "_DAT_00fdf1c0": "0x00d9b068",
     "??3@YAXPAX@Z": "0x00401010",
-    "?RemoveAll@NiTFixedStringMap_NiAVObject___@@QAEXXZ": "0x00838790"
+    "?RemoveAll@NiTFixedStringMap_NiAVObject___@@QAEXXZ": "0x00838790",
+    "?NULL_STRING@NiGlobalStringTable@@2QADA": "0x00e207a8"
    }
   },
   {
@@ -542994,7 +542997,8 @@
     "??_7FUN_00a5c780@@6B@": "0x00dc2dec",
     "??3@YAXPAX@Z": "0x00401010",
     "?ReadUnsignedInteger@NiStream@@QAEIXZ": "0x0082b620",
-    "?g_011f3e6c_arg1@@3QBDB": "0x00e03b30"
+    "?g_011f3e6c_arg1@@3QBDB": "0x00e03b30",
+    "?NULL_STRING@NiGlobalStringTable@@2QADA": "0x00e207a8"
    }
   },
   {
@@ -546413,7 +546417,8 @@
     "??3@YAXPAX@Z": "0x00401010",
     "?FileRead@NiFileHack@@QAEIPAXI@Z": "0x0089ef80",
     "?DeleteThis@NiRefObject@@UAEXXZ": "0x00987c70",
-    "?ms_pShaderFactory@NiShaderFactory@@1PAV1@A": "0x01090a4c"
+    "?ms_pShaderFactory@NiShaderFactory@@1PAV1@A": "0x01090a4c",
+    "?NULL_STRING@NiGlobalStringTable@@2QADA": "0x00e207a8"
    }
   },
   {
@@ -546498,7 +546503,8 @@
     "?g_0126f9ac_arg1@@3QBDB": "0x0116eed8",
     "??3@YAXPAX@Z": "0x00401010",
     "?FileRead@NiFileHack@@QAEIPAXI@Z": "0x0089ef80",
-    "?DeleteThis@NiRefObject@@UAEXXZ": "0x00987c70"
+    "?DeleteThis@NiRefObject@@UAEXXZ": "0x00987c70",
+    "?NULL_STRING@NiGlobalStringTable@@2QADA": "0x00e207a8"
    }
   },
   {
@@ -549926,7 +549932,8 @@
     "$LN13": "0x0085e980",
     "$LN6": "0x0085e8f9",
     "$LN5": "0x0085e90f",
-    "?g_011f5e94@@3HA": "0x0109088c"
+    "?g_011f5e94@@3HA": "0x0109088c",
+    "?NULL_STRING@NiGlobalStringTable@@2QADA": "0x00e207a8"
    },
    "literal_symbols": [
     "??_C@_06JIKMCOBB@FogMap?$AA@",
@@ -550126,7 +550133,8 @@
     "$LN1": "0x0085e88b",
     "$LN13": "0x0085e980",
     "$LN6": "0x0085e8f9",
-    "$LN5": "0x0085e90f"
+    "$LN5": "0x0085e90f",
+    "?NULL_STRING@NiGlobalStringTable@@2QADA": "0x00e207a8"
    },
    "literal_symbols": [
     "??_C@_0P@FAGCADMC@ProjectedLight?$AA@",

@@ -1,5 +1,6 @@
 // gamebryo2.2/corelibs/nimain/nistream.cpp: NiStream, NiStreamImpl, ThisObj, Receiver and more (59 functions)
 #include "nistream_cpp_decls.h"
+#include "NiGlobalStringTable.h"
 
 // @fnv 0x00A634E0
 // pdb: NiStream::GetGroupFromID | NiStream.obj | fnv360_0822_retail, call_seq, high
@@ -826,10 +827,6 @@ void InitHavokPhysics() {
 }
 
 
-struct NiGlobalStringTable
-{
-    static char* __cdecl AddString(char const*);
-};
 extern int(__stdcall* DAT_00fdf1c4)(void*);
 extern char* EmptyFS;
 extern char* DAT_011f3ec0;
