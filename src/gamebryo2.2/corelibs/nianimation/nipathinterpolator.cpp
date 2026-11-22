@@ -10,7 +10,24 @@ void* __cdecl FUN_00a3dab0()
     return &g_011f3f68;
 }
 
-struct FUN_00a3dae0_shell
+// NiPosData / NiFloatData: key count, keys, key type and key size.
+struct PathKeyData_00a3dae0
+{
+    void* unk00;
+    unsigned int unk04;
+    unsigned int m_uiNumKeys;  // src: FNV360_PDB NiPosData +0x8
+    char* m_pkKeys;  // src: FNV360_PDB NiPosData +0xC
+    int m_eType;  // src: FNV360_PDB NiPosData +0x10
+    unsigned char m_ucKeySize;  // src: FNV360_PDB NiPosData +0x14
+};
+struct NiPathInterpolator
+{
+    unsigned char unk00[0x18];
+    PathKeyData_00a3dae0* m_spPathData;  // src: FNV360_PDB +0x18
+    PathKeyData_00a3dae0* m_spPctData;  // src: FNV360_PDB +0x1C
+    void __thiscall FUN_00a3dc50(float m_fStartTime, float m_fMaximumDistance);
+};
+struct FUN_00a3dae0_shell : NiPathInterpolator
 {
     void* __thiscall FUN_00a3dae0(short idx);
 };
@@ -21,20 +38,20 @@ void* __thiscall FUN_00a3dae0_shell::FUN_00a3dae0(short idx)
 {
     if (idx == 0)
     {
-        void* p = *(void**)((char*)this + 0x18);
+        PathKeyData_00a3dae0* p = m_spPathData;
         if (p)
-            return *(void**)((char*)p + 8);
+            return (void*)p->m_uiNumKeys;
     }
     else if (idx == 1)
     {
-        void* p = *(void**)((char*)this + 0x1c);
+        PathKeyData_00a3dae0* p = m_spPctData;
         if (p)
-            return *(void**)((char*)p + 8);
+            return (void*)p->m_uiNumKeys;
     }
     return 0;
 }
 
-struct FUN_00a3db10_shell
+struct FUN_00a3db10_shell : NiPathInterpolator
 {
     int __thiscall GetValueByIndex(short arg);
 };
@@ -43,18 +60,17 @@ struct FUN_00a3db10_shell
 // @fnv 0x00a3db10
 int __thiscall FUN_00a3db10_shell::GetValueByIndex(short aiIndex)
 {
-    unsigned char* b = reinterpret_cast<unsigned char*>(this);
     if (aiIndex == 0)
     {
-        int* p = *reinterpret_cast<int**>(b + 0x18);
+        PathKeyData_00a3dae0* p = m_spPathData;
         if (p)
-            return *reinterpret_cast<int*>(reinterpret_cast<unsigned char*>(p) + 0x10);
+            return p->m_eType;
     }
     else if (aiIndex == 1)
     {
-        int* p = *reinterpret_cast<int**>(b + 0x1c);
+        PathKeyData_00a3dae0* p = m_spPctData;
         if (p)
-            return *reinterpret_cast<int*>(reinterpret_cast<unsigned char*>(p) + 0x10);
+            return p->m_eType;
     }
     return 0;
 }
@@ -83,7 +99,7 @@ int __thiscall FUN_00a3db40_shell::FUN_00a3db40(short aiSlot)
     return 0;
 }
 
-struct FUN_00a3db70_shell
+struct FUN_00a3db70_shell : NiPathInterpolator
 {
     char __thiscall FUN_00a3db70(unsigned short arg);
 };
@@ -94,15 +110,15 @@ char __thiscall FUN_00a3db70_shell::FUN_00a3db70(unsigned short ausIndex)
 {
     if (ausIndex == 0)
     {
-        void* p = *reinterpret_cast<void**>(reinterpret_cast<unsigned char*>(this) + 0x18);
+        PathKeyData_00a3dae0* p = m_spPathData;
         if (p)
-            return *reinterpret_cast<unsigned char*>(reinterpret_cast<unsigned char*>(p) + 0x14);
+            return p->m_ucKeySize;
     }
     else if (ausIndex == 1)
     {
-        void* p = *reinterpret_cast<void**>(reinterpret_cast<unsigned char*>(this) + 0x1c);
+        PathKeyData_00a3dae0* p = m_spPctData;
         if (p)
-            return *reinterpret_cast<unsigned char*>(reinterpret_cast<unsigned char*>(p) + 0x14);
+            return p->m_ucKeySize;
     }
     return 0;
 }
@@ -120,17 +136,12 @@ struct FloatDataHelper
     void __thiscall FUN_00a3cc40(float m_fStartTime, float m_fMaximumDistance);
 };
 
-struct NiPathInterpolator
-{
-    void* m_pPathInterp;
-    void __thiscall FUN_00a3dc50(float m_fStartTime, float m_fMaximumDistance);
-};
 
 // Forwards the two float arguments to the FloatDataHelper stored at offset 0x1c, if that pointer is non-null.
 // @fnv 0x00a3dc50
 void __thiscall NiPathInterpolator::FUN_00a3dc50(float m_fStartTime, float m_fMaximumDistance)
 {
-    FloatDataHelper* p = (FloatDataHelper*)(*(void**)((char*)this + 0x1c));
+    FloatDataHelper* p = (FloatDataHelper*)m_spPctData;
     if (p)
     {
         p->FUN_00a3cc40(m_fStartTime, m_fMaximumDistance);
@@ -164,7 +175,7 @@ void* __thiscall FUN_00a3dac0_shell::DestroyIfOdd(short idx)
     return this;
 }
 
-struct FUN_00a3ddf0_shell
+struct FUN_00a3ddf0_shell : NiPathInterpolator
 {
     void* __thiscall FUN_00a3ddf0(void* pData, int i1, int i2, float fTime);
 };
@@ -176,12 +187,12 @@ void* FUN_00a3ddf0_shell::FUN_00a3ddf0(void* pData, int aiIndexA, int aiIndexB, 
     char* pcElementBase = 0;
     int iType;
     unsigned char ucSize;
-    void* pkObj = *(void**)((char*)this + 0x18);
+    PathKeyData_00a3dae0* pkObj = m_spPathData;
     if (pkObj)
     {
-        iType = *(int*)((char*)pkObj + 0x10);
-        ucSize = *(unsigned char*)((char*)pkObj + 0x14);
-        pcElementBase = *(char**)((char*)pkObj + 0xC);
+        iType = pkObj->m_eType;
+        ucSize = pkObj->m_ucKeySize;
+        pcElementBase = pkObj->m_pkKeys;
     }
     else
     {

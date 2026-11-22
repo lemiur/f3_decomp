@@ -10,9 +10,21 @@ void* __cdecl FUN_00a4be10()
     return &g_011f3f90;
 }
 
+class NiAVObject;
+struct NiFixedString
+{
+    void* p;
+};
 struct NiLookAtInterpolator
 {
     virtual ~NiLookAtInterpolator();
+    unsigned int m_uiRefCount;  // src: FNV360_PDB NiRefObject +0x4
+    float m_fLastTime;  // src: FNV360_PDB NiInterpolator +0x8
+    unsigned short m_uFlags;  // src: FNV360_PDB +0xC
+    NiAVObject* m_pkLookAt;  // src: FNV360_PDB +0x10
+    NiFixedString m_kLookAtName;  // src: FNV360_PDB +0x14
+    float m_kTransformValue[8];  // src: FNV360_PDB +0x18 (NiQuatTransform)
+    void* m_aspInterpolators[3];  // src: FNV360_PDB +0x38
     void* __thiscall FUN_00a4c5c0(unsigned int flags);
 };
 
@@ -30,11 +42,6 @@ void* __thiscall NiLookAtInterpolator::FUN_00a4c5c0(unsigned int flags)
     return this;
 }
 
-class NiAVObject;
-struct NiFixedString
-{
-    void* p;
-};
 struct NiAVObjectPalette
 {
     virtual void v0(), v1(), v2(), v3(), v4(), v5(), v6(), v7(), v8(), v9(), v10(), v11(), v12(), v13(), v14(), v15(),
@@ -42,19 +49,19 @@ struct NiAVObjectPalette
         v32(), v33(), v34();
     virtual NiAVObject* FindAVObject(NiFixedString&);
 };
-struct Holder_00a4b8d0
+struct Holder_00a4b8d0 : NiLookAtInterpolator
 {
     bool ResolveTargetObject(NiAVObjectPalette* pkPalette);
 };
 // @fnv 0x00a4b8d0
 bool Holder_00a4b8d0::ResolveTargetObject(NiAVObjectPalette* pkPalette)
 {
-    if (*(NiAVObject**)((char*)this + 0x10))
+    if (m_pkLookAt)
         return true;
-    NiAVObject* pkTarget = pkPalette->FindAVObject(*(NiFixedString*)((char*)this + 0x14));
+    NiAVObject* pkTarget = pkPalette->FindAVObject(m_kLookAtName);
     if (pkTarget)
     {
-        *(NiAVObject**)((char*)this + 0x10) = pkTarget;
+        m_pkLookAt = pkTarget;
         return true;
     }
     return false;
@@ -73,7 +80,7 @@ struct NiObject
 {
     virtual void ProcessClone(CloningProcess&);
 };
-struct Host_00a4bb80
+struct Host_00a4bb80 : NiLookAtInterpolator
 {
     void __thiscall FUN_00a4bb80(CloningProcess&);
 };
@@ -87,11 +94,11 @@ void __thiscall Host_00a4bb80::FUN_00a4bb80(CloningProcess& kCloning)
     pkClone = 0;
     kCloning.m_pCloneMap->GetAt((char const*)this, (ShaderBufferRecord*&)pkClone);
     pkDest = (NiLookAtInterpolator*)pkClone;
-    bCloned = kCloning.m_pCloneMap->GetAt((char const*)*(void**)((char*)this + 0x10), (ShaderBufferRecord*&)pkClone);
+    bCloned = kCloning.m_pCloneMap->GetAt((char const*)m_pkLookAt, (ShaderBufferRecord*&)pkClone);
     if (bCloned)
-        *(void**)((char*)pkDest + 0x10) = pkClone;
+        pkDest->m_pkLookAt = (NiAVObject*)pkClone;
     else
-        *(void**)((char*)pkDest + 0x10) = *(void**)((char*)this + 0x10);
+        pkDest->m_pkLookAt = m_pkLookAt;
 }
 
 struct NiStream
@@ -135,7 +142,7 @@ struct BaseInterp
 {
     bool __thiscall FUN_00a81fe0(NiStream*);
 };
-struct MyInterp
+struct MyInterp : NiLookAtInterpolator
 {
     bool __thiscall FUN_00a4bbe0(NiStream*);
 };
@@ -147,14 +154,14 @@ bool __thiscall MyInterp::FUN_00a4bbe0(NiStream* kStream)
         return false;
     for (ui = 0; ui < 3; ++ui)
     {
-        ObjType* pkObj = ((ObjType**)((char*)this + 0x38))[ui];
+        ObjType* pkObj = (ObjType*)m_aspInterpolators[ui];
         if (pkObj)
         {
             if (!pkObj->RegisterStreamables(kStream))
                 return false;
         }
     }
-    kStream->Register((void*)((char*)this + 0x14));
+    kStream->Register((void*)&m_kLookAtName);
     return true;
 }
 
@@ -223,7 +230,7 @@ struct FUN_00a4b900_V
     virtual void v46();
     virtual void v47();
 };
-struct FUN_00a4b900_Holder
+struct FUN_00a4b900_Holder : NiLookAtInterpolator
 {
     void FUN_00a4b900();
 };
@@ -232,7 +239,7 @@ struct FUN_00a4b900_Holder
 void FUN_00a4b900_Holder::FUN_00a4b900()
 {
     unsigned int ui;
-    FUN_00a4b900_V** pp = (FUN_00a4b900_V**)((char*)this + 0x38);
+    FUN_00a4b900_V** pp = (FUN_00a4b900_V**)m_aspInterpolators;
     for (ui = 3; ui > 0; --ui)
     {
         FUN_00a4b900_V* p = *pp;
@@ -295,7 +302,7 @@ struct FakeInterp
     virtual void v48();
     virtual void SetActiveTimeRange(float, float);
 };
-struct Holder
+struct Holder : NiLookAtInterpolator
 {
     void __thiscall FUN_00a4b9f0(float m_fStartTime, float m_fMaximumDistance);
 };
@@ -306,7 +313,7 @@ void __thiscall Holder::FUN_00a4b9f0(float afValue1, float afValue2)
     unsigned int ui;
     for (ui = 0; ui < 3; ui++)
     {
-        FakeInterp* p = ((FakeInterp**)((char*)this + 0x38))[ui];
+        FakeInterp* p = (FakeInterp*)m_aspInterpolators[ui];
         if (p)
             p->SetActiveTimeRange(afValue1, afValue2);
     }
