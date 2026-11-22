@@ -247,24 +247,40 @@ static int is_generated_name(const char *s)
 }
 
 /* a function that is no class member: its definition may be its only declaration */
+/* the end of a decorated name's qualified name: the "@@" (or "@<digit>@", a back-reference closing the scope list)
+   followed by its access/type code; returns the code's position or NULL */
+static const char *dec_scope_end(const char *dec, int *termlen)
+{
+    for (const char *p = dec + 1; *p; p++) {
+        if (p[0] == '@' && p[1] == '@' && isupper((unsigned char)p[2])) {
+            *termlen = 2;
+            return p;
+        }
+        if (p[0] == '@' && isdigit((unsigned char)p[1]) && p[2] == '@' && isupper((unsigned char)p[3])) {
+            *termlen = 3;
+            return p;
+        }
+    }
+    return NULL;
+}
+
 static int is_free_function(const char *dec)
 {
     if (dec[0] != '?') return 1;
-    for (const char *p = dec; (p = strstr(p, "@@")) != NULL; p++)
-        if (isupper((unsigned char)p[2])) return p[2] == 'Y' || p[2] == 'Z';
-    return 0;
+    int tl;
+    const char *p = dec_scope_end(dec, &tl);
+    return p && (p[tl] == 'Y' || p[tl] == 'Z');
 }
 
-/* the decorated name up to the "@@" that precedes its access/type code; *code gets that code */
+/* the decorated name up to and including the terminator before its access/type code; *code gets that code */
 static int dec_prefix(const char *dec, char *out, size_t cap, char *code)
 {
-    for (const char *p = dec; (p = strstr(p, "@@")) != NULL; p++)
-        if (isupper((unsigned char)p[2])) {
-            snprintf(out, cap, "%.*s", (int)(p - dec + 2), dec);
-            if (code) *code = p[2];
-            return 1;
-        }
-    return 0;
+    int tl;
+    const char *p = dec_scope_end(dec, &tl);
+    if (!p) return 0;
+    snprintf(out, cap, "%.*s", (int)(p - dec + tl), dec);
+    if (code) *code = p[tl];
+    return 1;
 }
 
 /* ------------------------------------------------------------------ candidates */
@@ -636,6 +652,13 @@ static int cmd_defs(int argc, char **argv)
             char pre[2048], code = 0;
             if (strncmp(c, "??_G", 4) == 0 || strncmp(c, "??_E", 4) == 0) {
                 if (dec_prefix(c + 4, pre, sizeof pre, &code)) smap_put(&vt_class, pre, (void *)1);
+                else {
+                    const char *at = strchr(c + 4, '@');
+                    if (at) {
+                        snprintf(pre, sizeof pre, "%.*s@@", (int)(at - (c + 4)), c + 4);
+                        smap_put(&vt_class, pre, (void *)1);
+                    }
+                }
             } else if (c[0] == '?' && c[1] != '?' && dec_prefix(c, pre, sizeof pre, &code) && strchr("GHOPWX", code)) {
                 smap_put(&thunk_pref, pre, (void *)1);
                 /* the thunk is emitted with its class's vftable: "?Name@Class@@" -> "Class@@" */
@@ -787,7 +810,8 @@ static int cmd_defs(int argc, char **argv)
             if (c->dec[0] == '?' && c->dec[1] != '?' && dec_prefix(c->dec, pre, sizeof pre, &code) && smap_has(&thunk_pref, pre))
                 c->status = ST_THUNK_TARGET;
             else if ((strncmp(c->dec, "??0", 3) == 0 || strncmp(c->dec, "??1", 3) == 0) &&
-                     dec_prefix(c->dec + 3, pre, sizeof pre, &code) && smap_has(&vt_class, pre))
+                     ((dec_prefix(c->dec + 3, pre, sizeof pre, &code) && smap_has(&vt_class, pre)) ||
+                      smap_has(&vt_names, df->name_s)))
                 c->status = ST_VTABLE_CLASS;
             else {
                 /* a body that names such a class may be what instantiates its vftable */
