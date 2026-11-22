@@ -195386,10 +195386,6 @@
     "?DAT_00dfb608@@3NB": "0x00dfb608",
     "?DAT_00dd8f60@@3NB": "0x00dd8f60",
     "?DAT_010f3400@Timer902d@f3m_00902dd0@@3PAUManager@12@A": "0x010f3400",
-    "?DAT_0116913c@Timer902d@f3m_00902dd0@@3KA": "0x0116913c",
-    "?DAT_00d9b080@Timer902d@f3m_00902dd0@@3P6GPAXK@ZA": "0x00d9b080",
-    "?DAT_00e34ba0@Timer902d@f3m_00902dd0@@3QBDB": "0x00e34ba0",
-    "?DAT_00e32798@Timer902d@f3m_00902dd0@@3QBDB": "0x00e32798",
     "?FUN_0082a280@Param911400@f3m_00911400@@QAEPAUNiRefObject911400@2@XZ": "0x0082a280",
     "?FUN_008f7450@Owner911400@f3m_00911400@@QAEXPAUParam911400@2@@Z": "0x008f7450",
     "?DAT_00e34aac@f3m_009020d0@1@3DA": "0x00e34aac",
@@ -198077,10 +198073,6 @@
     "?DAT_00dfb608@@3NB": "0x00dfb608",
     "?DAT_00dd8f60@@3NB": "0x00dd8f60",
     "?DAT_010f3400@Timer902d@f3m_00902dd0@@3PAUManager@12@A": "0x010f3400",
-    "?DAT_0116913c@Timer902d@f3m_00902dd0@@3KA": "0x0116913c",
-    "?DAT_00d9b080@Timer902d@f3m_00902dd0@@3P6GPAXK@ZA": "0x00d9b080",
-    "?DAT_00e34ba0@Timer902d@f3m_00902dd0@@3QBDB": "0x00e34ba0",
-    "?DAT_00e32798@Timer902d@f3m_00902dd0@@3QBDB": "0x00e32798",
     "?FUN_0082a280@Param911400@f3m_00911400@@QAEPAUNiRefObject911400@2@XZ": "0x0082a280",
     "?FUN_008f7450@Owner911400@f3m_00911400@@QAEXPAUParam911400@2@@Z": "0x008f7450",
     "?DAT_00e34aac@f3m_009020d0@1@3DA": "0x00e34aac",
@@ -198604,7 +198596,10 @@
     "__ehhandler$?FUN_00915e30@bhkBlendController@f3m_00915e30@@QAEPAV12@AAVNiCloningProcess@2@@Z": "0x00c748af",
     "??2NiMemObject@f3m_00915e30@@SAPAXI@Z": "0x0089eb90",
     "??0bhkBlendController@f3m_00915e30@@QAE@XZ": "0x00914c20",
-    "?FUN_00915b70@C915Owner@f3m_00915b70@@QAEXPAU12@PAX@Z": "0x00915b70"
+    "?FUN_00915b70@C915Owner@f3m_00915b70@@QAEXPAU12@PAX@Z": "0x00915b70",
+    "?hkMonitorStream__m_instance@@3V?$hkThreadLocalData@PAVhkMonitorStream@@@@A": "0x0116913c",
+    "??_C@_0BD@JHGHGEIN@TtWatchDog?3FreeMem?$AA@": "0x00e34ba0",
+    "??_C@_02DNLMNFDE@Et?$AA@": "0x00e32798"
    }
   },
   {

@@ -10979,24 +10979,18 @@ void Angle91a4::FUN_0091a460(float angle){if(angle>DAT_00dc0760)angle=RoundedVal
 }   // namespace f3m_0091a460
 
 // @f3 0x00902dd0 (community match, verified in this file)
+#include "havok/hkMonitorStream.h"
 namespace f3m_00902dd0 {
-namespace Timer902d {extern unsigned long DAT_0116913c;extern void* (__stdcall* DAT_00d9b080)(unsigned long);extern const char DAT_00e34ba0[],DAT_00e32798[];struct Record{const char* tag;unsigned ticks;int unk08;
-// hkMonitorStream::TimerCommand::setTime (class and member names: FNV360_PDB)
-// RULE-EXCEPTION: R18, Havok's IA32 setTime reads the TSC with inline asm: retail stores eax to a stack local and reloads it, which __rdtsc() does not emit
-__forceinline void setTime(){unsigned int time;__asm{rdtsc
-mov time,eax}ticks=time;}};struct Stream{int unk00;Record* cursor;int unk08;Record* end;};
+namespace Timer902d {
 struct Owner;struct Child;struct ChildTable{void* unk00;void* unk04;void* unk08;int (__thiscall* update)(Child*,float);};struct Child{ChildTable* table;};struct Listener;struct ListenerTable{void* unk00;void* unk04;void* unk08;void (__thiscall* notify)(Listener*,Owner*);};struct Listener{ListenerTable* table;int unk04;int value;};struct hkBool{char m_bool;hkBool(){}operator bool()const{return m_bool!=0;}};struct Manager{virtual void vf00(); virtual void vf04(); virtual void vf08(); virtual void vf0c(); virtual void vf10(); virtual void vf14(); virtual void vf18(); virtual void vf1c(); virtual void vf20(); virtual void vf24(); virtual void vf28(); virtual void vf2c(); virtual void vf30(); virtual void vf34(); virtual void vf38(); virtual void vf3c(); virtual void vf40(); virtual void vf44(); virtual void vf48(); virtual void vf4c(); virtual void vf50(); virtual void vf54(); virtual void vf58(); virtual void vf5c(); virtual hkBool check(int);};extern Manager* DAT_010f3400;
 struct Owner{int unk00;int unk04;Child* child;int unk0c; int unk10; int unk14; int unk18; int unk1c; int unk20; int unk24; int unk28; int unk2c; int unk30; int unk34; int unk38; int unk3c; int unk40; int unk44; int unk48; int unk4c;Listener* listener;int FUN_00902dd0(float);};
 int Owner::FUN_00902dd0(float value){
 int result=child->table->update(child,value);
 if(!result){Listener* notify=listener;if(notify){
 if(!DAT_010f3400->check(notify->value)){
-void* (__stdcall* getStream)(unsigned long)=DAT_00d9b080;
-Stream* first=(Stream*)getStream(DAT_0116913c);
-{Record* r=first->cursor;if(r<first->end){r->tag=DAT_00e34ba0;r->setTime();first->cursor=r+1;}}
+HK_TIMER_BEGIN("WatchDog:FreeMem", HK_NULL);
 notify->table->notify(notify,this);
-Stream* second=(Stream*)getStream(DAT_0116913c);
-{Record* r=second->cursor;if(r<second->end){r->tag=DAT_00e32798;r->setTime();second->cursor=r+1;}}
+HK_TIMER_END();
 }}}return result;}
 }
 }   // namespace f3m_00902dd0
