@@ -566381,7 +566381,7 @@
     },
     {
      "address": "0x009316e0",
-     "symbol": "?hkSweptTransformUtil_setTimeInformation@FUN_00c903a0_class@@QAEXXZ",
+     "symbol": "?hkSweptTransformUtil_setTimeInformation@hkReferencedObjectC903@@QAEXXZ",
      "size": 13
     },
     {
@@ -576143,7 +576143,7 @@
     },
     {
      "address": "0x00991800",
-     "symbol": "?FUN_00d11630@hkp3AxisSweep@@QAEHXZ",
+     "symbol": "?FUN_00d11630@hkp3AxisSweepD116@@QAEHXZ",
      "size": 23
     },
     {
@@ -585119,7 +585119,7 @@
     },
     {
      "address": "0x00929b20",
-     "symbol": "?hkpConstraintOwner_subConstraintInfo@FUN_00cb7480_cls@@QAEXPAUFUN_00cb7480_holder@@PAUFUN_00cb7480_delta@@@Z",
+     "symbol": "?hkpConstraintOwner_subConstraintInfo@FUN_00cb7480_cls@@QAEXPAUhkpConstraintInstanceCB74@@PAUFUN_00cb7480_delta@@@Z",
      "size": 70
     },
     {
@@ -585221,7 +585221,7 @@
     },
     {
      "address": "0x00929b00",
-     "symbol": "?hkpAgentNnTrack_getSectorSize@FUN_00cb7460_class@@QAEHH@Z",
+     "symbol": "?hkpAgentNnTrack_getSectorSize@hkpAgentNnTrackCB74@@QAEHH@Z",
      "size": 25
     },
     {

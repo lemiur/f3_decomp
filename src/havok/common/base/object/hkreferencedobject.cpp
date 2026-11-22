@@ -24,9 +24,9 @@ void FUN_00c903b0_class::ReleaseReference()
 }
 
 // hkReferencedObject
-struct FUN_00c903a0_class
+struct hkReferencedObjectC903
 {
-    virtual ~FUN_00c903a0_class();
+    virtual ~hkReferencedObjectC903();
     unsigned short m_memSizeAndFlags;  // +0x04
     short m_referenceCount;            // +0x06
     void hkSweptTransformUtil_setTimeInformation();
@@ -34,7 +34,7 @@ struct FUN_00c903a0_class
 
 // @fnv 0x00c903a0
 // pdb: hkSweptTransformUtil::setTimeInformation | hkSweptTransformUtil.obj | fnv360_0721_beta, call_gap + skyrim(call_gap), high
-void FUN_00c903a0_class::hkSweptTransformUtil_setTimeInformation()
+void hkReferencedObjectC903::hkSweptTransformUtil_setTimeInformation()
 {
     if (m_memSizeAndFlags != 0)
         m_referenceCount++;

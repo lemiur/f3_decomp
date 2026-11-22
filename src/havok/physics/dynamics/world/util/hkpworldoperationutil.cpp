@@ -3,7 +3,7 @@
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
 // hkpAgentNnTrack: m_bytesUsedInLastSector, then the sectors array (size at +0x08).
-struct FUN_00cb7460_class
+struct hkpAgentNnTrackCB74
 {
     int m_bytesUsedInLastSector;
     void* m_sectors;
@@ -13,7 +13,7 @@ struct FUN_00cb7460_class
 
 // @fnv 0x00cb7460
 // pdb: hkpAgentNnTrack::getSectorSize | hkpWorldOperationUtil.obj | fnv360_0822_retail, call_gap + bridge(call_gap|call_gap) + skyrim(call_gap), high
-int __thiscall FUN_00cb7460_class::hkpAgentNnTrack_getSectorSize(int value)
+int __thiscall hkpAgentNnTrackCB74::hkpAgentNnTrack_getSectorSize(int value)
 {
     if (value + 1 == m_sectorsSize)
         return m_bytesUsedInLastSector;
@@ -2299,7 +2299,7 @@ struct FUN_00cb7480_node
     unsigned short m_18;
 };
 
-struct FUN_00cb7480_holder
+struct hkpConstraintInstanceCB74
 {
     int unk00;
     int unk04;
@@ -2333,13 +2333,13 @@ struct FUN_00cb7480_cls
     int m_10;
     int m_14;
 
-    void hkpConstraintOwner_subConstraintInfo(FUN_00cb7480_holder* a1, FUN_00cb7480_delta* a2);
+    void hkpConstraintOwner_subConstraintInfo(hkpConstraintInstanceCB74* a1, FUN_00cb7480_delta* a2);
 };
 
 // Subtracts the delta's m_04, m_08 and m_0c from m_0c, m_10 and m_14, and from the node's m_14, m_16 and m_18, when the constraint has its internal record.
 // @f3 0x00929b20 (community match, verified in this file)
 // pdb: hkpConstraintOwner::subConstraintInfo | hkpWorldOperationUtil.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_gap_sim), high
-void FUN_00cb7480_cls::hkpConstraintOwner_subConstraintInfo(FUN_00cb7480_holder* apHolder, FUN_00cb7480_delta* apDelta)
+void FUN_00cb7480_cls::hkpConstraintOwner_subConstraintInfo(hkpConstraintInstanceCB74* apHolder, FUN_00cb7480_delta* apDelta)
 {
     if (apHolder->m_internal != 0)
     {

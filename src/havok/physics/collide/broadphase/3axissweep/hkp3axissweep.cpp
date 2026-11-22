@@ -3,7 +3,7 @@
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
 // hkp3AxisSweep: the members getAabbCacheSize reads, at their Fallout 3 offsets (New Vegas Xbox 360 PDB names).
-struct hkp3AxisSweep {
+struct hkp3AxisSweepD116 {
     char unk00[0xA0];
     void* m_nodes;           // +0xA0 hkArray<hkpBpNode>
     int m_nodesSize;         // +0xA4 m_nodes.m_size
@@ -14,7 +14,7 @@ struct hkp3AxisSweep {
 };
 // @fnv 0x00d11630
 // pdb: hkp3AxisSweep::getAabbCacheSize | hkp3AxisSweep.obj | tesv_win, objrun_sim, low
-int hkp3AxisSweep::FUN_00d11630()
+int hkp3AxisSweepD116::FUN_00d11630()
 {
     return 8 * (3 * (m_nodesSize - m_numMarkers)) + 0x24;
 }
