@@ -1,4 +1,5 @@
 #include "f3_common.h"
+#include "havok/hkMonitorStream.h"
 // src/havok/physics/dynamics/world/simulation/continuous/hkpcontinuoussimulation.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/physics/dynamics/world/simulation/continuous/hkpcontinuoussimulation.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
@@ -530,6 +531,22 @@ struct ScopeQuery {
     unsigned int m_08;
 };
 
+struct ScopeEntryOps4 {
+    void FUN_00990390(ScopeEntry* last);
+};
+// hkArray<hkpToiEvent>
+struct ScopeEntryArray {
+    ScopeEntry* m_data;
+    int m_size;
+    int m_capacityAndFlags;
+    __forceinline int getSize() const { return m_size; }
+    __forceinline ScopeEntry& operator[](int i) { return m_data[i]; }
+    __forceinline void removeAt(int index)
+    {
+        m_size--;
+        reinterpret_cast<ScopeEntryOps4*>(&m_data[index])->FUN_00990390(&m_data[m_size]);
+    }
+};
 class FUN_00d0bfc0_cls {
 public:
     unsigned int unk00;
@@ -544,8 +561,7 @@ public:
     unsigned int unk24;
     unsigned int unk28;
     unsigned int unk2C;
-    ScopeEntry* m_30;
-    volatile int m_34;
+    ScopeEntryArray m_toiEvents;  // +0x30
 
     void RemoveMatchingEntries(ScopeQuery* q);
 };
@@ -555,26 +571,17 @@ public:
 // slot (the table keeps its order otherwise).
 // Scans the entry array backwards and removes every entry whose m_key14 equals q->m_08, compacting the array by moving the last entry into each removed slot.
 // @f3 0x0098c7e0 (community match, verified in this file)
-struct ScopeEntryOps4 {
-    void FUN_00990390(ScopeEntry* last);
-};
 // pdb: hkpContinuousSimulation::removeCollisionInformationForAgent | hkpContinuousSimulation.obj | fnv360_0822_retail, vtable, medium
 // pdb params: agent
 void FUN_00d0bfc0_cls::RemoveMatchingEntries(ScopeQuery* q)
 {
-    int count = m_34 - 1;
-    if (count < 0)
-        return;
-    int offset = count * 0x70;
-    do {
-        if (((ScopeEntry*)((char*)m_30 + offset))->unk10 == q->m_08) {
-            m_34 = m_34 - 1;
-            ScopeEntry* last = (ScopeEntry*)((char*)m_30 + m_34 * 0x70);
-            reinterpret_cast<ScopeEntryOps4*>((char*)m_30 + offset)->FUN_00990390(last);
+    for (int i = m_toiEvents.getSize() - 1; i >= 0; i--)
+    {
+        if (m_toiEvents[i].unk10 == q->m_08)
+        {
+            m_toiEvents.removeAt(i);
         }
-        --count;
-        offset -= 0x70;
-    } while (count >= 0);
+    }
 }
 
 
@@ -4702,9 +4709,6 @@ class hkPadSpu
 	private:
 		TYPE m_storage;
 };
-extern "C" {
-__declspec(dllimport) void* _stdcall TlsGetValue( unsigned long dwTlsIndex );
-}
 template<typename T>
 		class hkThreadLocalData
 		{
@@ -5231,11 +5235,9 @@ class hkMultiThreadCheck
 		};
 		__forceinline void markForRead( ReadMode mode = RECURSIVE )
 		{
-			;
 		}
 		__forceinline void markForWrite( )
 		{
-			;
 		}
 		__forceinline bool isMarkedForWrite( )
 		{
@@ -5247,11 +5249,9 @@ class hkMultiThreadCheck
 		}
 		__forceinline void unmarkForRead( )
 		{
-			;
 		}
 		__forceinline void unmarkForWrite()
 		{
-			;
 		}
 		void disableChecks();
 		void enableChecks();
@@ -5800,12 +5800,10 @@ class hkpWorld : public hkReferencedObject
 };
 inline hkpProcessCollisionInput* hkpWorld::getCollisionInput()
 {
-	;
 	return m_collisionInput;
 }
 inline const hkpCollisionFilter* hkpWorld::getCollisionFilter() const
 {
-	;
 	return m_collisionFilter;
 }
 class hkpConstraintQueryIn;
@@ -5966,71 +5964,6 @@ class hkEntityAabbUtil
 		static void __cdecl entityBatchRecalcAabb(const hkpCollisionInput* collisionInput, hkpEntity*const* entityBatch, int numEntities);
 		static void __cdecl entityBatchInvalidateAabb(hkpEntity*const* entityBatch, int numEntities);
 };
-class hkMonitorStream
-{
-	public:
-		static hkMonitorStream& getInstance()
-		{
-			extern hkThreadLocalData<hkMonitorStream*> hkMonitorStream__m_instance;
-			return *hkMonitorStream__m_instance.getData();
-		}
-		void __cdecl reset();
-		void __cdecl resize( int newSize );
-	public:
-		__forceinline char* __cdecl getStart() { return m_start.val(); }
-		__forceinline char* __cdecl getEnd() { return m_end.val(); }
-		__forceinline char* __cdecl getCapacityMinus16() { return m_capacityMinus16.val(); }
-		__forceinline char* __cdecl getCapacity() { return m_capacity.val(); }
-		__forceinline hkBool __cdecl memoryAvailable( )
-		{
-			return getEnd() < getCapacityMinus16();
-		}
-		__forceinline int __cdecl getCurrentMonitorDataSize()
-		{
-			return (int)(m_end.val() - m_start.val());
-		}
-		__forceinline void* __cdecl expandby( int size ) { char* h = m_end.val(); char* newEnd = h + size; m_end = newEnd; return h; }
-		__forceinline void __cdecl setEnd(char* ptr) {  m_end = ptr; }
-		__forceinline hkBool __cdecl isBufferAllocatedOnTheHeap() { return m_isBufferAllocatedOnTheHeap; }
-		void __cdecl setStaticBuffer( char* buffer, int bufferSize );
-	public:
-		static void __cdecl init();
-		void __cdecl quit();
-	public:
-		hkPadSpu<char*> m_start;
-		hkPadSpu<char*> m_end;
-		hkPadSpu<char*> m_capacity;
-		hkPadSpu<char*> m_capacityMinus16;
-		hkBool		m_isBufferAllocatedOnTheHeap;
-	public:
-		struct Command
-		{
-			const char* m_commandAndMonitor;
-		};
-		struct AddValueCommand : public hkMonitorStream::Command
-		{
-			float m_value;
-		};
-		struct TimerCommand : public hkMonitorStream::Command
-		{
-			hkUint32	m_time0;
-			hkUint32	m_time1;
-			__forceinline void setTime();
-		};
-		struct TimerBeginListCommand : public hkMonitorStream::TimerCommand
-		{
-			const char* m_nameOfFirstSplit;
-		};
-};
-void hkMonitorStream::TimerCommand::setTime()
-{
-		hkUint32 ticks;
-		__asm {
-			rdtsc
-			mov dword ptr[ticks], eax
-		}
-		m_time0 = ticks;
-}
 template <typename T>
 class hkLocalArray : public hkArray<T>
 {
@@ -6043,7 +5976,6 @@ class hkLocalArray : public hkArray<T>
 		}
 		__forceinline void discardAndResize(int newsize)
 		{
-			;
 			hkDeallocateStack<T>( m_localMemory );
 			m_localMemory = this->m_data = hkAllocateStack<T>(newsize);
 			this->m_size = newsize;
@@ -6051,7 +5983,6 @@ class hkLocalArray : public hkArray<T>
 		}
 		void assertNotResized()
 		{
-			;
 		}
 		hkBool wasReallocated() const
 		{
@@ -6226,17 +6157,17 @@ __forceinline void hkpContinuousSimulation::waitForSolverExport( hkChar* exportF
 {
 	if ( exportFinished && !*exportFinished )
 	{
-		{ hkMonitorStream& mStream = hkMonitorStream::getInstance(); if ( mStream.memoryAvailable() ) { hkMonitorStream::TimerCommand* h = reinterpret_cast<hkMonitorStream::TimerCommand*>(mStream.getEnd()); h->m_commandAndMonitor = "T" "t" "WaitForExport"; h->setTime(); mStream.setEnd( (char*)(h+1) ); } };
+		HK_TIMER_BEGIN("WaitForExport", HK_NULL);
 		volatile hkChar* finished = exportFinished;
 		while ( *finished != 1 && *finished != 2 ) { }
-		{ hkMonitorStream& mStream = hkMonitorStream::getInstance(); if ( mStream.memoryAvailable() ) { hkMonitorStream::TimerCommand* h = reinterpret_cast<hkMonitorStream::TimerCommand*>(mStream.getEnd()); h->m_commandAndMonitor = "E" "t" ""; h->setTime(); mStream.setEnd( (char*)(h+1) ); } };
+		HK_TIMER_END();
 	}
 }
 __forceinline void hkpContinuousSimulation::removeAndAddPairs( hkpWorld* world, hkpEntity** entities, hkLocalArray<hkpBroadPhaseHandlePair>& newPairs, hkLocalArray<hkpBroadPhaseHandlePair>& delPairs )
 {
 	if ( newPairs.getSize() + delPairs.getSize() > 0 )
 	{
-		{ hkMonitorStream& mStream = hkMonitorStream::getInstance(); if ( mStream.memoryAvailable() ) { hkMonitorStream::TimerCommand* h = reinterpret_cast<hkMonitorStream::TimerCommand*>(mStream.getEnd()); h->m_commandAndMonitor = "S" "t" "RemoveAgt"; h->setTime(); mStream.setEnd( (char*)(h+1) ); } };
+		HK_TIMER_SPLIT_LIST("RemoveAgt");
 		world->lockIslandForConstraintUpdate( entities[0]->getSimulationIsland() );
 		world->m_broadPhaseDispatcher->removePairs( static_cast<hkpTypedBroadPhaseHandlePair*>( delPairs.begin() ), delPairs.getSize() );
 		hkMemory& memory = hkMemory::getInstance();
@@ -6246,7 +6177,7 @@ __forceinline void hkpContinuousSimulation::removeAndAddPairs( hkpWorld* world, 
 			world->unlockIslandForConstraintUpdate( entities[0]->getSimulationIsland() );
 			return;
 		}
-		{ hkMonitorStream& mStream = hkMonitorStream::getInstance(); if ( mStream.memoryAvailable() ) { hkMonitorStream::TimerCommand* h = reinterpret_cast<hkMonitorStream::TimerCommand*>(mStream.getEnd()); h->m_commandAndMonitor = "S" "t" "AddAgt"; h->setTime(); mStream.setEnd( (char*)(h+1) ); } };
+		HK_TIMER_SPLIT_LIST("AddAgt");
 		world->m_broadPhaseDispatcher->addPairs( static_cast<hkpTypedBroadPhaseHandlePair*>( newPairs.begin() ), newPairs.getSize(), world->getCollisionFilter() );
 		world->unlockIslandForConstraintUpdate( entities[0]->getSimulationIsland() );
 	}
@@ -6272,11 +6203,8 @@ void __stdcall FUN_00d0d3f0(Source** sources, int count, RenderParams* context, 
 	{
 		return;
 	}
-	;
-	;
-	;
 	hkpSimulationIsland* island = 0;
-	{ hkMonitorStream& mStream = hkMonitorStream::getInstance(); if ( mStream.memoryAvailable() ) { hkMonitorStream::TimerBeginListCommand* h = reinterpret_cast<hkMonitorStream::TimerBeginListCommand*>(mStream.getEnd()); h->m_commandAndMonitor = "L" "t" "BroadPhase"; h->m_nameOfFirstSplit = "S" "t" "GatherAabbs"; h->setTime(); mStream.setEnd( (char*)(h+1) ); } };
+	HK_TIMER_BEGIN_LIST("BroadPhase", "GatherAabbs");
 	hkLocalArray<hkpBroadPhaseHandlePair> newPairs( world->m_broadPhaseUpdateSize );
 	hkLocalArray<hkpBroadPhaseHandlePair> delPairs( world->m_broadPhaseUpdateSize );
 	{
@@ -6290,7 +6218,6 @@ void __stdcall FUN_00d0d3f0(Source** sources, int count, RenderParams* context, 
 			for ( int i = numAabbs - 1; i >= 0; e++, i-- )
 			{
 				hkpEntity* entity = *e;
-				;
 				hkCheckDeterminismUtil::checkMt( entity->getUid() );
 				entity->markForRead();
 				const hkpCollidable* collidable = entity->getCollidable();
@@ -6305,7 +6232,7 @@ void __stdcall FUN_00d0d3f0(Source** sources, int count, RenderParams* context, 
 				handle++;
 			}
 		}
-		{ hkMonitorStream& mStream = hkMonitorStream::getInstance(); if ( mStream.memoryAvailable() ) { hkMonitorStream::TimerCommand* h = reinterpret_cast<hkMonitorStream::TimerCommand*>(mStream.getEnd()); h->m_commandAndMonitor = "S" "t" "3AxisSweep"; h->setTime(); mStream.setEnd( (char*)(h+1) ); } };
+		HK_TIMER_SPLIT_LIST("3AxisSweep");
 		{
 			world->m_broadPhase->lock();
 			hkpBroadPhaseHandle** nonConstHandles = const_cast<hkpBroadPhaseHandle**>( broadPhaseHandles );
@@ -6317,13 +6244,13 @@ void __stdcall FUN_00d0d3f0(Source** sources, int count, RenderParams* context, 
 	}
 	if ( newPairs.getSize() + delPairs.getSize() > 0 )
 	{
-		{ hkMonitorStream& mStream = hkMonitorStream::getInstance(); if ( mStream.memoryAvailable() ) { hkMonitorStream::TimerCommand* h = reinterpret_cast<hkMonitorStream::TimerCommand*>(mStream.getEnd()); h->m_commandAndMonitor = "S" "t" "RemoveDup"; h->setTime(); mStream.setEnd( (char*)(h+1) ); } };
+		HK_TIMER_SPLIT_LIST("RemoveDup");
 		hkpTypedBroadPhaseDispatcher::removeDuplicates( newPairs, delPairs );
 	}
 	hkpContinuousSimulation::waitForSolverExport( exportFinished );
 	hkpContinuousSimulation::removeAndAddPairs( world, entities, newPairs, delPairs );
 	for ( int e = 0; e < numEntities; e++ ) { entities[e]->unmarkForRead(); }
-	{ hkMonitorStream& mStream = hkMonitorStream::getInstance(); if ( mStream.memoryAvailable() ) { hkMonitorStream::TimerCommand* h = reinterpret_cast<hkMonitorStream::TimerCommand*>(mStream.getEnd()); h->m_commandAndMonitor = "l" "t" ""; h->setTime(); mStream.setEnd( (char*)(h+1) ); } };
+	HK_TIMER_END_LIST();
 }
 
 
@@ -9348,58 +9275,6 @@ struct AdvanceSimulation;
 struct Res { DWORD unk; };
 
 
-struct hkTimeSection {
-    volatile DWORD* tick;
-    __forceinline hkTimeSection(const char* name, volatile DWORD& ticks) throw() : tick(&ticks) {
-        ProfBuf* b = (ProfBuf*)TlsGetValue(DAT_0126835c);
-        if (b->m_pCur < b->m_pRecordEnd) {
-            ProfRec* r = b->m_pCur;
-            r->m_pName = name;
-            _ReadWriteBarrier();
-            *tick = (DWORD)__rdtsc();
-            r->m_iTick = *tick;
-            b->m_pCur = r + 1;
-        }
-    }
-    __forceinline ~hkTimeSection() throw() {
-        ProfBuf* b = (ProfBuf*)TlsGetValue(DAT_0126835c);
-        if (b->m_pCur < b->m_pRecordEnd) {
-            ProfRec* r = b->m_pCur;
-            r->m_pName = "Et";
-            _ReadWriteBarrier();
-            *tick = (DWORD)__rdtsc();
-            r->m_iTick = *tick;
-            b->m_pCur = r + 1;
-        }
-    }
-};
-struct OuterTimeSection {
-    bool ordered;
-    volatile DWORD* tick;
-    __forceinline OuterTimeSection(const char* name, volatile DWORD& ticks) throw() : ordered(false), tick(&ticks) {
-        ProfBuf* b = (ProfBuf*)TlsGetValue(DAT_0126835c);
-        if (b->m_pCur < b->m_pRecordEnd) {
-            ProfRec* r = b->m_pCur;
-            r->m_pName = name;
-            _ReadWriteBarrier();
-            *tick = (DWORD)__rdtsc();
-            r->m_iTick = *tick;
-            b->m_pCur = r + 1;
-        }
-    }
-    __forceinline ~OuterTimeSection() throw() {
-        ProfBuf* b = (ProfBuf*)TlsGetValue(DAT_0126835c);
-        if (b->m_pCur < b->m_pRecordEnd) {
-            ProfRec* r = b->m_pCur;
-            r->m_pName = "Et";
-            _ReadWriteBarrier();
-            *tick = (DWORD)__rdtsc();
-            r->m_iTick = *tick;
-            b->m_pCur = r + 1;
-        }
-        if (ordered) { _ReadWriteBarrier(); }
-    }
-};
 
 
 struct AdvanceSimulation {
@@ -9419,31 +9294,28 @@ struct AdvanceSimulation {
 // @fnv 0x00d0ed10
 Res* AdvanceSimulation::FUN_00d0ed10()
 {
-    volatile DWORD ticks;
-    union Value { float delta; volatile DWORD lastTick; };
-    Value v;
-    OuterTimeSection secPhysics("TtPhysics", ticks);
-    if (m_p28) {
-        hkTimeSection secCollide("TtreCollideAfterStepFailure", ticks);
-        Res* q = FUN_00cf8820();
-        if (q) { secPhysics.ordered = true; return q; }
-    }
+    HK_TIME_CODE_BLOCK("Simulate", HK_NULL);
+    if (m_p28)
     {
-        v.delta = GetClampedSimulationTime();
-        if (m_34) {
-            hkTimeSection secTOI("TtTOIs", ticks);
-            Res* p = hkpContinuousSimulation_handleAllToisTill(v.delta);
-            if (p) {
-                m_p28 = p;
-                return p;
-            }
-        }
-        m_p28 = 0;
-        m_f14 = v.delta;
-        secPhysics.tick = &v.lastTick;
-        return 0;
+        HK_TIME_CODE_BLOCK("reCollideAfterStepFailure", HK_NULL);
+        Res* q = FUN_00cf8820();
+        if (q)
+            return q;
     }
-
+    float delta = GetClampedSimulationTime();
+    if (m_34)
+    {
+        HK_TIME_CODE_BLOCK("TOIs", HK_NULL);
+        Res* p = hkpContinuousSimulation_handleAllToisTill(delta);
+        if (p)
+        {
+            m_p28 = p;
+            return p;
+        }
+    }
+    m_p28 = 0;
+    m_f14 = delta;
+    return 0;
 }
 
 struct ArrayRef_cls {

@@ -3,13 +3,17 @@
 // m_end, m_capacity, m_capacityMinus16 (hkPadSpu<char*>), m_isBufferAllocatedOnTheHeap }, Command
 // { m_commandAndMonitor }, TimerCommand { m_time0, m_time1 }, AddValueCommand { m_value }, TimerBeginListCommand
 // { m_nameOfFirstSplit }. The stream instance is the global hkMonitorStream__m_instance, a
-// hkThreadLocalData<hkMonitorStream*> (Battlefield 3 PC PDB).
+// hkThreadLocalData<hkMonitorStream*> (Battlefield 3 PC PDB). The header needs no other Havok type, so units that still
+// carry their own copies of the base types can include it: hkBool members and results are spelled as the byte they are.
 #ifndef HAVOK_HKMONITORSTREAM_H
 #define HAVOK_HKMONITORSTREAM_H
 
-#include "havok/hkBase.h"
 #include "havok/hkPadSpu.h"
 #include "havok/hkThreadLocalData.h"
+
+#ifndef HK_NULL
+#define HK_NULL 0
+#endif
 
 class hkMonitorStream;
 extern hkThreadLocalData<hkMonitorStream*> hkMonitorStream__m_instance;
@@ -28,7 +32,7 @@ class hkMonitorStream
 		__forceinline char* getCapacityMinus16() { return m_capacityMinus16.val(); }
 		__forceinline char* getCapacity() { return m_capacity.val(); }
 
-		__forceinline hkBool memoryAvailable()
+		__forceinline char memoryAvailable()
 		{
 			return getEnd() < getCapacityMinus16();
 		}
@@ -41,7 +45,7 @@ class hkMonitorStream
 		hkPadSpu<char*> m_end;
 		hkPadSpu<char*> m_capacity;
 		hkPadSpu<char*> m_capacityMinus16;
-		hkBool m_isBufferAllocatedOnTheHeap;
+		char m_isBufferAllocatedOnTheHeap;  // hkBool
 
 	public:
 
@@ -57,8 +61,8 @@ class hkMonitorStream
 
 		struct TimerCommand : public Command
 		{
-			hkUint32 m_time0;
-			hkUint32 m_time1;
+			unsigned int m_time0;
+			unsigned int m_time1;
 
 			__forceinline void setTime();
 		};
@@ -75,7 +79,7 @@ class hkMonitorStream
 // __asm { mov ticks, eax } gives and __rdtsc() does not; every inlined copy in Fallout 3 has the same round trip.
 void hkMonitorStream::TimerCommand::setTime()
 {
-	hkUint32 ticks;
+	unsigned int ticks;
 	__asm {
 		rdtsc
 		mov dword ptr[ticks], eax
@@ -108,6 +112,18 @@ void hkMonitorStream::TimerCommand::setTime()
 	    h->m_nameOfFirstSplit = "S" HK_MONITOR_TYPE_TIMER FIRST_SPLIT; \
 	    h->setTime(); \
 	    mStream.setEnd( (char*)(h+1) ); } }
+
+// Ends the timer its scope began with HK_TIME_CODE_BLOCK.
+class hkTimeFunctionHelper
+{
+	public:
+
+		__forceinline ~hkTimeFunctionHelper() { HK_TIMER_END(); }
+};
+
+#define HK_PREPROCESSOR_JOIN_TOKEN(A, B) HK_PREPROCESSOR_JOIN_TOKEN2(A, B)
+#define HK_PREPROCESSOR_JOIN_TOKEN2(A, B) A##B
+#define HK_TIME_CODE_BLOCK(NAME, OBJECT) HK_TIMER_BEGIN(NAME, OBJECT); hkTimeFunctionHelper HK_PREPROCESSOR_JOIN_TOKEN(timeblock, __LINE__)
 
 #define HK_MONITOR_ADD_VALUE(NAME, VALUE, MONITOR_TYPE) \
 	{ hkMonitorStream& mStream = hkMonitorStream::getInstance(); \

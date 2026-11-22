@@ -4,8 +4,6 @@
 #ifndef HAVOK_HKTHREADLOCALDATA_H
 #define HAVOK_HKTHREADLOCALDATA_H
 
-#include "havok/hkBase.h"
-
 extern "C" __declspec(dllimport) unsigned long __stdcall TlsAlloc(void);
 extern "C" __declspec(dllimport) int __stdcall TlsFree(unsigned long dwTlsIndex);
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long dwTlsIndex);
@@ -21,12 +19,12 @@ class hkThreadLocalData
 
 		__forceinline T getData() const
 		{
-			return (T)(hkUlong)TlsGetValue(m_slotID);
+			return (T)(unsigned long)TlsGetValue(m_slotID);
 		}
 
 		__forceinline void setData(T p)
 		{
-			hkUlong v = hkUlong(p);
+			unsigned long v = (unsigned long)(p);
 			TlsSetValue(m_slotID, (void*)v);
 		}
 
