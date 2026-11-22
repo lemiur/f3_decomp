@@ -6,7 +6,7 @@
 
 extern "C" void __cdecl SetMotionState(void*, void*);
 
-struct FUN_00c86400_Class
+struct FUN_00c86400_Class : public hkpMotion
 {
     void __thiscall FUN_00c86400(void* a);
 };
@@ -15,10 +15,10 @@ struct FUN_00c86400_Class
 // pdb: hkpMotion::setTransform | hkpMotion.obj | tesv_win, objrun, medium
 void __thiscall FUN_00c86400_Class::FUN_00c86400(void* a)
 {
-    SetMotionState(a, (char*)this + 0x10);
+    SetMotionState(a, &m_kMotionState);
 }
 
-struct FUN_00c86420_Class
+struct FUN_00c86420_Class : public hkpMotion
 {
     void __thiscall FUN_00c86420(char a);
 };
@@ -27,17 +27,17 @@ struct FUN_00c86420_Class
 // pdb params: deactivationClass
 void __thiscall FUN_00c86420_Class::FUN_00c86420(char a)
 {
-    ((char*)this)[0xbe] = a;
+    m_kMotionState.m_uiDeactivationClass = a;
 }
 
-struct FUN_00c86480_Class
+struct FUN_00c86480_Class : public hkpMotion
 {
     void __thiscall FUN_00c86480(float v);
 };
 // @fnv 0x00c86480
 void __thiscall FUN_00c86480_Class::FUN_00c86480(float v)
 {
-    *(float*)((char*)this + 0xcc) = v;
+    m_kInertiaAndMassInv.w = v;
 }
 
 struct FUN_00c86330_Class
@@ -66,7 +66,7 @@ void __thiscall FUN_00c86330_Class::FUN_00c86330(float mass)
 }
 
 extern "C" void __cdecl FUN_00cf20d0(void*, void*);
-struct FUN_00c863a0_Class
+struct FUN_00c863a0_Class : public hkpMotion
 {
     void __thiscall FUN_00c863a0(void* a);
 };
@@ -74,12 +74,12 @@ struct FUN_00c863a0_Class
 // pdb: hkpMotion::setPosition | hkpMotion.obj | tesv_win, objrun, medium
 void __thiscall FUN_00c863a0_Class::FUN_00c863a0(void* a)
 {
-    FUN_00cf20d0(a, (char*)this + 0x10);
+    FUN_00cf20d0(a, &m_kMotionState);
 }
 
 extern "C" void __cdecl FUN_00cf2160(void*, void*);
 
-struct FUN_00c863c0_Class
+struct FUN_00c863c0_Class : public hkpMotion
 {
     void __thiscall FUN_00c863c0(void* a);
 };
@@ -88,12 +88,12 @@ struct FUN_00c863c0_Class
 // pdb: hkpMotion::setRotation | hkpMotion.obj | tesv_win, caller_sim, low
 void __thiscall FUN_00c863c0_Class::FUN_00c863c0(void* a)
 {
-    FUN_00cf2160(a, (char*)this + 0x10);
+    FUN_00cf2160(a, &m_kMotionState);
 }
 
 extern void __cdecl FUN_00cf1f80(void*, void*, void*);
 
-struct FUN_00c863e0_Class
+struct FUN_00c863e0_Class : public hkpMotion
 {
     void __thiscall FUN_00c863e0(void* param1, void* param2);
 };
@@ -103,7 +103,7 @@ struct FUN_00c863e0_Class
 // pdb params: position, rotation
 void FUN_00c863e0_Class::FUN_00c863e0(void* pFirst, void* pSecond)
 {
-    FUN_00cf1f80(pFirst, pSecond, static_cast<void*>(reinterpret_cast<char*>(this) + 0x10));
+    FUN_00cf1f80(pFirst, pSecond, &m_kMotionState);
 }
 
 struct FUN_00cf22d0_Class
