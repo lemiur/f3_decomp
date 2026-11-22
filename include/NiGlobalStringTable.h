@@ -5,9 +5,9 @@
 #ifndef FNV_NIGLOBALSTRINGTABLE_H
 #define FNV_NIGLOBALSTRINGTABLE_H
 #include "layout_support.h"
-#include "NiRefObject.h"
+#include "NiAtomic.h"
 #pragma pack(push, 4)
-class NiGlobalStringTable : public NiMemObject
+class NiGlobalStringTable
 {
   public:
     typedef char* GlobalStringHandle;
