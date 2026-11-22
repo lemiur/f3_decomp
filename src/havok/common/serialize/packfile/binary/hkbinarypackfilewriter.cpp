@@ -66,31 +66,41 @@ void* FUN_00dbd730_class::ForwardToTarget(void* value)
     return value;
 }
 
+class hkClass;
+class hkStatisticsCollector;
+// hkBool: a class with a constructor, so it comes back through a hidden result pointer.
+struct SubStreamBool
+{
+    char m_bool;
+    SubStreamBool(bool b) : m_bool((char)b) {}
+};
+// hkStreamWriter: the slots of the Fallout 3 hkSubStreamWriter vtable (0x00e800c0) up to seekTellSupported, named as
+// the New Vegas Xbox 360 PDB names them.
 struct S_00dbd770_Inner
 {
-    virtual void unk0();
-    virtual void unk4();
-    virtual void unk8();
-    virtual void unkC();
-    virtual void unk10();
-    virtual void unk14();
-    virtual void unk18(void* p);
+    virtual ~S_00dbd770_Inner();
+    virtual const hkClass* getClassType() const;
+    virtual void calcContentStatistics(hkStatisticsCollector* collector, const hkClass* cls) const;
+    virtual SubStreamBool isOk() const;
+    virtual int write(const void* buf, int nbytes);
+    virtual void flush();
+    virtual SubStreamBool seekTellSupported() const;
 };
 
+// hkSubStreamWriter
 struct S_00dbd770
 {
     int unk0;
     int unk4;
-    S_00dbd770_Inner* unk8;
-    void* ForwardToInner(void* p);
+    S_00dbd770_Inner* m_childStream;  // +0x08
+    SubStreamBool ForwardToInner() const;
 };
 
 // @fnv 0x00dbd770
 // pdb: hkSubStreamWriter::seekTellSupported | hkBinaryPackfileWriter.obj | fnv360_0822_retail, vtable, high
-void* S_00dbd770::ForwardToInner(void* apArg)
+SubStreamBool S_00dbd770::ForwardToInner() const
 {
-    unk8->unk18(apArg);
-    return apArg;
+    return m_childStream->seekTellSupported();
 }
 
 struct Inner
@@ -236,14 +246,15 @@ void __stdcall WriteNodeDiff(FUN_00dbc6f0_cls_owner* apOwner, FUN_00dbc6f0_cls_s
     ((S_WriteFn)pVtable[4])(apOwner->m_pCallee, pNode, hkString_strLen(pNode) + 1);
 }
 
+// hkStreamWriter, up to flush (Fallout 3 vtables, PDB names).
 struct Target
 {
-    virtual void unk00();
-    virtual void unk04();
-    virtual void unk08();
-    virtual void unk0C();
-    virtual void unk10();
-    virtual void unk14();
+    virtual ~Target();
+    virtual const hkClass* getClassType() const;
+    virtual void calcContentStatistics(hkStatisticsCollector* collector, const hkClass* cls) const;
+    virtual SubStreamBool isOk() const;
+    virtual int write(const void* buf, int nbytes);
+    virtual void flush();
 };
 
 struct FUN_00dbd760_cls
@@ -258,7 +269,7 @@ struct FUN_00dbd760_cls
 // pdb: hkOstream::flush | hkOStream.obj | fnv360_0822_retail, objrun + skyrim(objrun), high
 void FUN_00dbd760_cls::hkOstream_flush()
 {
-    m_08->unk14();
+    m_08->flush();
 }
 
 struct S_00dbd790_Obj
@@ -826,17 +837,18 @@ void CallTarget_dbc860()
     FUN_00dbc860(g_dbc860_self, g_dbc860_value, g_dbc860_extra, g_dbc860_sink);
 }
 
+// hkStreamWriter, up to tell (Fallout 3 vtables, PDB names).
 struct S00dbcdd0_Obj
 {
-    virtual void unk00();
-    virtual void unk04();
-    virtual void unk08();
-    virtual void unk0C();
-    virtual void unk10(void* p, unsigned int n);
-    virtual void unk14();
-    virtual void unk18();
-    virtual void unk1C();
-    virtual unsigned int unk20();
+    virtual ~S00dbcdd0_Obj();
+    virtual const hkClass* getClassType() const;
+    virtual void calcContentStatistics(hkStatisticsCollector* collector, const hkClass* cls) const;
+    virtual SubStreamBool isOk() const;
+    virtual void write(void* p, unsigned int n);
+    virtual void flush();
+    virtual SubStreamBool seekTellSupported() const;
+    virtual int seek(int offset, int whence);
+    virtual unsigned int tell() const;
 };
 
 struct S00dbcdd0_Alloc
@@ -909,7 +921,7 @@ struct MyArr : S00dbcdd0_Arr
 
 static __declspec(noinline) void FUN_00dbcdd0(S00dbcdd0_Obj* obj, unsigned int count)
 {
-    int value = (int)obj->unk20();
+    int value = (int)obj->tell();
     MyArr arr;
     S00dbcdd0_Tls* tls;
 
@@ -932,7 +944,7 @@ static __declspec(noinline) void FUN_00dbcdd0(S00dbcdd0_Obj* obj, unsigned int c
     int remainder = ((int)count - 1) & value;
     arr.m_iElementCount = (int)count;
     if (remainder != 0) {
-        obj->unk10(arr.m_data, count - remainder);
+        obj->write(arr.m_data, count - remainder);
     }
 
     if ((arr.m_capFlags & 0x80000000) == 0) {
@@ -1615,7 +1627,7 @@ extern void FUN_00ec61c0(void* dst, int value, int n);
 static __declspec(noinline) void FUN_00dbcdd0(ClockObj* obj0, unsigned int count)
 {
     S00dbcdd0_Obj* obj = (S00dbcdd0_Obj*)obj0;
-    int value = (int)obj->unk20();
+    int value = (int)obj->tell();
     S00dbcdd0_Arr arr;
     arr.m_data = &arr.u0;
     arr.m_iElementCount = 0;
@@ -1641,7 +1653,7 @@ static __declspec(noinline) void FUN_00dbcdd0(ClockObj* obj0, unsigned int count
     arr.m_iElementCount = (int)count;
     if (r != 0)
     {
-        obj->unk10(arr.m_data, count - r);
+        obj->write(arr.m_data, count - r);
     }
     S00dbcdd0_Alloc& heap2 = ((S00dbcdd0_Holder*)FUN_00c85750())->heap();
     unsigned int capFlags = arr.m_capFlags;
@@ -2251,9 +2263,8 @@ void SectionTagsPrivate::Writer::FUN_00dbc7a0(SectionTagsPrivate::Context* conte
 }
 
 // @f3twin 0x00a82a00 of 0x009d8900
-struct F3Twin_00a82a00 : public S_00dbd770 { void* F3_FUN_00a82a00(void* apArg) ; };
-void* F3Twin_00a82a00::F3_FUN_00a82a00(void* apArg) 
+struct F3Twin_00a82a00 : public S_00dbd770 { SubStreamBool F3_FUN_00a82a00() const; };
+SubStreamBool F3Twin_00a82a00::F3_FUN_00a82a00() const
 {
-    unk8->unk18(apArg);
-    return apArg;
+    return m_childStream->seekTellSupported();
 }

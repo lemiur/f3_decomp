@@ -570102,7 +570102,7 @@
     },
     {
      "address": "0x009d8900",
-     "symbol": "?ForwardToInner@S_00dbd770@@QAEPAXPAX@Z",
+     "symbol": "?ForwardToInner@S_00dbd770@@QBE?AUSubStreamBool@@XZ",
      "size": 22
     },
     {
@@ -570127,7 +570127,7 @@
     },
     {
      "address": "0x00a82a00",
-     "symbol": "?F3_FUN_00a82a00@F3Twin_00a82a00@@QAEPAXPAX@Z",
+     "symbol": "?F3_FUN_00a82a00@F3Twin_00a82a00@@QBE?AUSubStreamBool@@XZ",
      "size": 22
     }
    ],
