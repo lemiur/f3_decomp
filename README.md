@@ -6,7 +6,7 @@ built with the VS2022 compiler (`build.cmd` in each folder). Nothing here contai
 
 | tool | what it does |
 |---|---|
-| `pdbdump/` | dump functions, parameters, locals, object files, UDT layouts and globals from a PDB (DIA) to TSV |
+| `pdbdump/` | dump functions, parameters, locals, object files, UDT layouts and globals from a PDB (DIA) to TSV (`style_stats.py` is a one-off Python analysis of its output; port it to C before reusing it) |
 | `mapdump/` | parse an MSVC linker .map to TSV |
 | `binscan/` | per-function features from an x86 or PPC image: string refs, calls, RTTI/vtables, imports |
 | `f3rules/` | the [match]/advisory rule checker over f3_decomp source, per recipe function |
