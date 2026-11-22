@@ -2,7 +2,17 @@
 // src/havok/physics/collide/query/collector/raycollector/hkpallrayhitcollector.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/physics/collide/query/collector/raycollector/hkpallrayhitcollector.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
-void __cdecl FUN_00c852c0(void* owner, int a2, int a3, int a4);
+// hkAlgorithm::less<T>: the empty comparison functor the sort takes by value.
+struct LessC852 {};
+void __cdecl FUN_00c852c0(void* owner, int a2, int a3, LessC852 cmpLess);
+// hkAlgorithm::quickSort(pArr, numElem, cmpLess)
+__forceinline void QuickSortC852(void* pArr, int numElem, LessC852 cmpLess)
+{
+    if (numElem > 1)
+    {
+        FUN_00c852c0(pArr, 0, numElem - 1, cmpLess);
+    }
+}
 
 class FUN_00c855f0_cls
 {
@@ -17,21 +27,12 @@ class FUN_00c855f0_cls
     void FUN_00c855f0();
 };
 
-// If m_14 exceeds 1, calls FUN_00c852c0 on m_10 with 0 and m_14 - 1.
+// Sorts the hits (m_10, m_14 of them) with the quicksort and a default less-than functor when there are two or more.
 // @fnv 0x00c855f0
 // pdb: hkpAllRayHitCollector::sortHits | hkpAllRayHitCollector.obj | fnv360_0822_retail, call_dedup, low
 void FUN_00c855f0_cls::FUN_00c855f0()
 {
-    union
-    {
-        volatile unsigned char b;
-        int i;
-    } flag;
-    flag.b = 0;
-    if (m_14 > 1)
-    {
-        FUN_00c852c0(m_10, 0, m_14 - 1, flag.i);
-    }
+            QuickSortC852(m_10, m_14, LessC852());
 }
 
 #include <xmmintrin.h>
