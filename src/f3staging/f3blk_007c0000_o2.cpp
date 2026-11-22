@@ -43132,7 +43132,7 @@ void Proj::MissileProjectile_ProcessStick()
         Node* other = FUN_004780d0(((Coll2_7c4fb0*)impact->unk1C)->FUN_00460140());
         HitBody_7c4fb0* body = GetBody_7c4fb0((Coll2_7c4fb0*)impact->unk1C);
         int layer = body ? body->FUN_00424270().FUN_0043b4d0() : 0;
-        if (body && layer != 0x13 && (!impact->unk00 || !impact->unk00->vf100()))
+        if (body && layer != 0x13 && (!impact->unk00 || !impact->unk00->IsActor()))
         {
             FUN_005de0a0(4, true);
             vf2a4();
