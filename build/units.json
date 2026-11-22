@@ -584241,8 +584241,6 @@
     "__real@3ff0000000000000": "0x00db38a8",
     "__real@0000000000000000": "0x00db38b0",
     "__real@00000000": "0x00eaad58",
-    "__real@38d1b717": "0x00dbf91c",
-    "??3@YAXPAX@Z": "0x00401010",
     "__imp__TlsGetValue@4": "0x00d9b080",
     "??_C@_02KCAKIFL@lt?$AA@": "0x00e0811c",
     "_DAT_0126835c": "0x0116913c",
@@ -584255,8 +584253,6 @@
     "?ClampAsin@@YAMM@Z": "0x0093cc20",
     "?FUN_00907f30@FUN_00907f30_Class@@QAEXHH@Z": "0x00907f30",
     "_DAT_010f3400": "0x010f3400",
-    "_str_00e32798": "0x00e32798",
-    "_str_00e7d2c8": "0x00e7d2c8",
     "_hkpWorldCallbackUtil_firePostCollideCallback": "0x009893f0",
     "?GetClampedSimulationTime@S00cf8a40_Obj@@QAEMXZ": "0x0097f3b0",
     "?str_00e7d2d8@@3QBDB": "0x00e7d2d8",
@@ -584309,7 +584305,8 @@
     "??_C@_0BI@OBGJBPLO@StIslandPostIntegrateCb?$AA@": "0x00e7d324",
     "_FUN_009894a0": "0x009894a0",
     "??_C@_0BH@HPLOGCCJ@TtWorldPostIntegrateCb?$AA@": "0x00e7d30c",
-    "_hkpWorldCallbackUtil_firePostIntegrateCallback": "0x00989340"
+    "_hkpWorldCallbackUtil_firePostIntegrateCallback": "0x00989340",
+    "?hkMonitorStream__m_instance@@3V?$hkThreadLocalData@PAVhkMonitorStream@@@@A": "0x0116913c"
    }
   },
   {
@@ -584347,8 +584344,6 @@
     "__real@3ff0000000000000": "0x00db38a8",
     "__real@0000000000000000": "0x00db38b0",
     "__real@00000000": "0x00eaad58",
-    "__real@38d1b717": "0x00dbf91c",
-    "??3@YAXPAX@Z": "0x00401010",
     "__imp__TlsGetValue@4": "0x00d9b080",
     "??_C@_02KCAKIFL@lt?$AA@": "0x00e0811c",
     "_DAT_0126835c": "0x0116913c",

@@ -3,6 +3,7 @@
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
 #include "havok/hkpSimulation.h"
+#include "havok/hkMonitorStream.h"
 
 extern "C" void __cdecl FUN_00cfdbe0(int, int);
 
@@ -144,7 +145,6 @@ static __forceinline void timerF3(const char* tag, volatile hkUint32& t) {
 }
 hkUint32 hkpSimulation_Derived::FUN_00cf8820()
 {
-    volatile hkUint32 t;
     ((FUN_00907f30_Class*)m_pOwningWorld)->FUN_00907f30(0, 1);
 
     hkStepInfo stepInfo;
@@ -157,16 +157,16 @@ hkUint32 hkpSimulation_Derived::FUN_00cf8820()
     step(&stepInfo);
 
     if (DAT_010f3400[1] == 1) {
-        timerF3(str_00e32798, t);
+        HK_TIMER_END();
         return m_uiSimulationType;
     }
 
     if (m_uiSimulationType == 2) {
         m_fSimulationTime += m_fStepDeltaTime;
         if (((hkpWorld_Fields*)m_pOwningWorld)->unk154 != 0) {
-            timerF3(str_00e7d2c8, t);
+            HK_TIMER_BEGIN("PostCollideCB", HK_NULL);
             hkpWorldCallbackUtil_firePostCollideCallback(m_pOwningWorld, &stepInfo);
-            timerF3(str_00e32798, t);
+            HK_TIMER_END();
         }
         m_bHasStepped = 1;
     }
@@ -867,7 +867,6 @@ struct S_0097fd30_SimulationCall
 // pdb: hkpSimulation::integrate | hkpSimulation.obj | fnv360_0822_retail, vtable + bridge(vtable|vtable) + skyrim(caller_sim), high
 int SimLocal::hkpSimulation_integrate(float physicsDeltaTime)
 {
-    typedef void* (__stdcall *LocalTlsFn)(unsigned long);
     struct LocalMonitor
     {
         char* m_start;
@@ -915,56 +914,27 @@ int SimLocal::hkpSimulation_integrate(float physicsDeltaTime)
         int m_memoryState;
     };
 
-    volatile unsigned int t;
-    LocalTlsFn tls = *(LocalTlsFn*)0x00d9b080;
-    LocalMonitor& ms = *(LocalMonitor*)tls(*(unsigned long*)0x0116913c);
-    char* pos = ms.m_end;
-    if (pos < ms.m_capacityMinus16)
-    {
-        *(const char**)pos = (const char*)0x00e7d300;
-        _ReadWriteBarrier();
-        t = (unsigned int)__rdtsc();
-        *(unsigned int*)(pos + 4) = t;
-        ms.m_end = pos + 12;
-    }
+    HK_TIMER_BEGIN("Simulate", HK_NULL);
     m_fStepDeltaTime = physicsDeltaTime;
 
     int memNeeded = ((S_0097fd30_WorldCall*)m_pOwningWorld)->FUN_00903760();
-    LocalThreadMemory& threadMemory = *(LocalThreadMemory*)tls(*(unsigned long*)0x010f3170);
+    LocalThreadMemory& threadMemory = *(LocalThreadMemory*)TlsGetValue(*(unsigned long*)0x010f3170);
     if (memNeeded > threadMemory.m_stack.getFreeBytes() && !((LocalMemory*)*(LocalMemory**)0x010f3400)->hasMemoryAvailable(memNeeded))
     {
         ((LocalMemory*)*(LocalMemory**)0x010f3400)->m_memoryState = 1;
         m_uiSimulationType = 1;
-        LocalMonitor& ms2 = *(LocalMonitor*)tls(*(unsigned long*)0x0116913c);
-        pos = ms2.m_end;
-        if (pos < ms2.m_capacityMinus16)
-        {
-            *(const char**)pos = (const char*)0x00e32798;
-            _ReadWriteBarrier();
-            t = (unsigned int)__rdtsc();
-            *(unsigned int*)(pos + 4) = t;
-            ms2.m_end = pos + 12;
-        }
+        HK_TIMER_END();
         return 1;
     }
 
-    __declspec(align(16)) SimStepInfo stepInfo(m_fSimulationTime, m_fSimulationTime + *(volatile float*)&m_fStepDeltaTime);
+    __declspec(align(16)) SimStepInfo stepInfo(m_fSimulationTime, m_fSimulationTime + m_fStepDeltaTime);
     ((LocalWorld*)m_pOwningWorld)->m_dynamicsStepInfo = stepInfo;
     ((LocalWorld*)m_pOwningWorld)->m_pCollisionInput->m_pStepInfo = stepInfo;
     ((LocalWorld*)m_pOwningWorld)->m_pMaintenanceManager->PerformMaintenance((SimWorld*)m_pOwningWorld, stepInfo);
     ((S_0097fd30_SimulationCall*)this)->FUN_0097f810(stepInfo);
     m_bHasStepped = 0;
     m_uiSimulationType = 0;
-    LocalMonitor& ms3 = *(LocalMonitor*)tls(*(unsigned long*)0x0116913c);
-    pos = ms3.m_end;
-    if (pos < ms3.m_capacityMinus16)
-    {
-        *(const char**)pos = (const char*)0x00e32798;
-        _ReadWriteBarrier();
-        t = (unsigned int)__rdtsc();
-        *(unsigned int*)(pos + 4) = t;
-        ms3.m_end = pos + 12;
-    }
+    HK_TIMER_END();
     return 0;
 }
 
