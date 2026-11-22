@@ -6329,10 +6329,6 @@ public:
     void __thiscall FUN_00724cd0();
 };
 
-void FUN_00724cd0_Interface::vf00()
-{
-}
-
 void __thiscall FUN_00724cd0_Interface::vf01(FUN_00724cd0_Args* args)
 {
     (void)args;
@@ -20353,12 +20349,7 @@ public:
     unsigned char FUN_0073a5d0(int value);
 };
 
-void Target73a5d0::vf00() {}
-void Target73a5d0::vf04() {}
 void Target73a5d0::vf08() {}
-void Target73a5d0::vf0c() {}
-void Target73a5d0::vf10() {}
-void Target73a5d0::vf14() {}
 
 __declspec(noinline) unsigned char Target73a5d0::vf18(int value)
 {
@@ -27932,20 +27923,8 @@ public:
     virtual void vf38(int value);
 };
 
-void FUN_00722c20_Target::vf00() {}
-void FUN_00722c20_Target::vf04() {}
 void FUN_00722c20_Target::vf08() {}
-void FUN_00722c20_Target::vf0c() {}
-void FUN_00722c20_Target::vf10() {}
-void FUN_00722c20_Target::vf14() {}
 void FUN_00722c20_Target::vf18() {}
-void FUN_00722c20_Target::vf1c() {}
-void FUN_00722c20_Target::vf20() {}
-void FUN_00722c20_Target::vf24() {}
-void FUN_00722c20_Target::vf28() {}
-void FUN_00722c20_Target::vf2c() {}
-void FUN_00722c20_Target::vf30() {}
-void FUN_00722c20_Target::vf34() {}
 void FUN_00722c20_Target::vf38(int value) { (void)value; }
 
 class FUN_00722c20_Node
@@ -27963,8 +27942,6 @@ public:
     virtual FUN_00722c20_Node* vf08();
 };
 
-void FUN_00722c20_Provider::vf00() {}
-void FUN_00722c20_Provider::vf04() {}
 FUN_00722c20_Node* FUN_00722c20_Provider::vf08() { return 0; }
 
 class FUN_00722c20_Owner

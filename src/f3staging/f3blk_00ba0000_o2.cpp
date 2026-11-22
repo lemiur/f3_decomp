@@ -1764,31 +1764,6 @@ static void FUN_00ba0750      (deflate_state *s);
 static void bi_flush       (deflate_state *s);
 static void copy_block     (deflate_state *s, charf *buf, unsigned len, int header);
 
-static void tr_static_init()
-{
-
-}
-
-void _tr_init(deflate_state *s)
-{
-    tr_static_init();
-
-    s->l_desc.dyn_tree = s->dyn_ltree;
-    s->l_desc.stat_desc = &static_l_desc;
-
-    s->d_desc.dyn_tree = s->dyn_dtree;
-    s->d_desc.stat_desc = &static_d_desc;
-
-    s->bl_desc.dyn_tree = s->bl_tree;
-    s->bl_desc.stat_desc = &static_bl_desc;
-
-    s->bi_buf = 0;
-    s->bi_valid = 0;
-    s->last_eob_len = 8; 
-
-    FUN_00b9f670(s);
-}
-
 static void FUN_00b9f670(deflate_state *s)
 {
     int n; 
@@ -2096,22 +2071,6 @@ void FUN_00ba0c30(deflate_state *s, charf *buf, ulg stored_len, int eof)
     copy_block(s, buf, (unsigned)stored_len, 1); 
 }
 
-void _tr_align(deflate_state *s)
-{
-    { int len = 3; if (s->bi_valid > (int)(8 * 2*sizeof(char)) - len) { int val = 1<<1; s->bi_buf |= (val << s->bi_valid); { {s->pending_buf[s->pending++] = ((uch)((s->bi_buf) & 0xff));}; {s->pending_buf[s->pending++] = ((uch)((ush)(s->bi_buf) >> 8));}; }; s->bi_buf = (ush)val >> ((8 * 2*sizeof(char)) - s->bi_valid); s->bi_valid += len - (8 * 2*sizeof(char)); } else { s->bi_buf |= (1<<1) << s->bi_valid; s->bi_valid += len; }};
-    { int len = DAT_00ea6788[256].dl.len; if (s->bi_valid > (int)(8 * 2*sizeof(char)) - len) { int val = DAT_00ea6788[256].fc.code; s->bi_buf |= (val << s->bi_valid); { {s->pending_buf[s->pending++] = ((uch)((s->bi_buf) & 0xff));}; {s->pending_buf[s->pending++] = ((uch)((ush)(s->bi_buf) >> 8));}; }; s->bi_buf = (ush)val >> ((8 * 2*sizeof(char)) - s->bi_valid); s->bi_valid += len - (8 * 2*sizeof(char)); } else { s->bi_buf |= (DAT_00ea6788[256].fc.code) << s->bi_valid; s->bi_valid += len; }};
-
-    bi_flush(s);
-
-    if (1 + s->last_eob_len + 10 - s->bi_valid < 9) {
-        { int len = 3; if (s->bi_valid > (int)(8 * 2*sizeof(char)) - len) { int val = 1<<1; s->bi_buf |= (val << s->bi_valid); { {s->pending_buf[s->pending++] = ((uch)((s->bi_buf) & 0xff));}; {s->pending_buf[s->pending++] = ((uch)((ush)(s->bi_buf) >> 8));}; }; s->bi_buf = (ush)val >> ((8 * 2*sizeof(char)) - s->bi_valid); s->bi_valid += len - (8 * 2*sizeof(char)); } else { s->bi_buf |= (1<<1) << s->bi_valid; s->bi_valid += len; }};
-        { int len = DAT_00ea6788[256].dl.len; if (s->bi_valid > (int)(8 * 2*sizeof(char)) - len) { int val = DAT_00ea6788[256].fc.code; s->bi_buf |= (val << s->bi_valid); { {s->pending_buf[s->pending++] = ((uch)((s->bi_buf) & 0xff));}; {s->pending_buf[s->pending++] = ((uch)((ush)(s->bi_buf) >> 8));}; }; s->bi_buf = (ush)val >> ((8 * 2*sizeof(char)) - s->bi_valid); s->bi_valid += len - (8 * 2*sizeof(char)); } else { s->bi_buf |= (DAT_00ea6788[256].fc.code) << s->bi_valid; s->bi_valid += len; }};
-
-        bi_flush(s);
-    }
-    s->last_eob_len = 7;
-}
-
 void FUN_00ba0ec0(deflate_state *s, charf *buf, ulg stored_len, int eof)
 {
     ulg opt_lenb, static_lenb; 
@@ -2166,27 +2125,6 @@ void FUN_00ba0ec0(deflate_state *s, charf *buf, ulg stored_len, int eof)
 
     }
     ;
-}
-
-int _tr_tally(deflate_state *s, unsigned dist, unsigned lc)
-{
-    s->d_buf[s->last_lit] = (ush)dist;
-    s->l_buf[s->last_lit++] = (uch)lc;
-    if (dist == 0) {
-        
-        s->dyn_ltree[lc].fc.freq++;
-    } else {
-        s->matches++;
-        
-        dist--;             
-        ;
-
-        s->dyn_ltree[_length_code[lc]+256+1].fc.freq++;
-        s->dyn_dtree[((dist) < 256 ? _dist_code[dist] : _dist_code[256+((dist)>>7)])].fc.freq++;
-    }
-
-    return (s->last_lit == s->lit_bufsize-1);
-
 }
 
 static void FUN_00ba0230(deflate_state *s, ct_data *ltree, ct_data *dtree)
@@ -2251,19 +2189,6 @@ static unsigned bi_reverse(unsigned code, int len)
         code >>= 1, res <<= 1;
     } while (--len > 0);
     return res >> 1;
-}
-
-static void bi_flush(deflate_state *s)
-{
-    if (s->bi_valid == 16) {
-        { {s->pending_buf[s->pending++] = ((uch)((s->bi_buf) & 0xff));}; {s->pending_buf[s->pending++] = ((uch)((ush)(s->bi_buf) >> 8));}; };
-        s->bi_buf = 0;
-        s->bi_valid = 0;
-    } else if (s->bi_valid >= 8) {
-        {s->pending_buf[s->pending++] = ((Byte)s->bi_buf);};
-        s->bi_buf >>= 8;
-        s->bi_valid -= 8;
-    }
 }
 
 static void FUN_00ba0750(deflate_state *s)

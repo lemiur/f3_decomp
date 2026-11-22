@@ -1530,7 +1530,6 @@ void FUN_009331e0(void* src, void* dst)
     }
 }
 void* volatile g9331e0a; void* volatile g9331e0b;
-void caller9331e0() { FUN_009331e0(g9331e0a, g9331e0b); }
 }   // namespace f3m_009331e0
 
 // @f3 0x00935d90 (community match, verified in this file)
@@ -4719,7 +4718,6 @@ Owner* Owner::FUN_00922c50(int requested){int n=requested*3;int capacity=4;size=
 namespace f3m_0093cb40 {
 extern char DAT_00e37e58; struct Q93Lookup {int unk00;int unk04;void FUN_0093d600(void*,const char*);unsigned char* FUN_0093d640(unsigned char*);int* FUN_0093d670(int);};
 static __declspec(noinline) void FUN_0093cae0(void* object,const char* name){Q93Lookup lookup;lookup.FUN_0093d600(object,name);unsigned char flag;unsigned char* test=lookup.FUN_0093d640(&flag);if(*test){int* result=lookup.FUN_0093d670(0);*result=0;}}
-void Q93Dispatch(void* object,const char* name){FUN_0093cae0(object,name);}
 void __cdecl FUN_0093cb40(int unused,void* object){FUN_0093cae0(object,&DAT_00e37e58);}
 }   // namespace f3m_0093cb40
 

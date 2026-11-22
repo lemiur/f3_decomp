@@ -849,7 +849,6 @@ static __declspec(noinline) void FUN_00937270(void* obj, char isEnabled, char fi
 void* volatile g_obj_rg;
 volatile char g_a_rg, g_b_rg, g_c_rg;
 volatile float g_f_rg;
-void caller_of_FUN_00937270_rg() { FUN_00937270(g_obj_rg, g_a_rg, g_b_rg, g_c_rg, g_f_rg); }
 inline RgPair RgMotors(RgMember& atoms) { return atoms.FUN_0093d7a0("ragdollMotors").FUN_0093d810(); }
 inline int RgMotor(RgMember& atoms, int i)
 {
@@ -6014,7 +6013,6 @@ struct F3Pair {
 };
 
 struct __declspec(align(16)) A16 { float v[4]; };
-float UseA16(float f) { A16 a; a.v[0] = f; a.v[1] = f; return a.v[0] + a.v[1]; }
 
 static __declspec(noinline) void FUN_0093e500(void* basev, int count, int functorv) {
     if (count > 0) {

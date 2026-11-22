@@ -10553,12 +10553,6 @@ unsigned int& Fallback67410()
     return DAT_0116d104;
 }
 
-unsigned int& ValueRef67410(void* p)
-{
-    if (p) return *(unsigned int*)((char*)p + 4);
-    return Fallback67410();
-}
-
 void List67410::FUN_00627410(int a1, int a2, int a3, int a4, void* p, int idx)
 {
     if (p == 0)

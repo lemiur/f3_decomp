@@ -2630,10 +2630,6 @@ void Slots::FUN_00656b60(unsigned int index, int value) {
 }
 volatile unsigned int g_index;
 volatile int g_value;
-void caller() {
-    Slots* p = (Slots*)0;
-    p->FUN_00656b60(g_index, g_value);
-}
 }   // namespace f3m_00656b60
 
 // @f3 0x00658760 (community match, verified in this file)
@@ -16441,7 +16437,6 @@ void SetInt(int trait,int value){FUN_00bee190(trait,(float)value,true);}NoteTile
 };
 struct NoteExtent {float x,y,z;};struct NoteFont {NoteExtent* FUN_00bf4890(NoteExtent*,const char*,int,float,int);};extern NoteFont* DAT_011796f8;
 int FUN_00bea9e0(const char*);int __cdecl FUN_00403230(char*,unsigned,const char*,...);
-float Clamp(float lo,float hi){return hi<lo?lo:hi;}
 float RoundUp(float v){return ceil(v);}
 struct NoteMenu {
 unsigned unk000;

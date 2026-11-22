@@ -3292,17 +3292,9 @@ struct V6e0 {
 void V6e0::v0() {}
 void V6e0::v1() {}
 void V6e0::v2() {}
-void V6e0::v3() {}
-void V6e0::v4() {}
-void V6e0::v5() {}
-void V6e0::v6() {}
 void V6e0::v7() {}
 void V6e0::v8() {}
-void V6e0::v9() {}
 void V6e0::v10() {}
-void V6e0::v11() {}
-void V6e0::v12() {}
-void V6e0::v13() {}
 void V6e0::v14() {}
 void V6e0::v15() {}
 
@@ -6392,11 +6384,6 @@ State00a71050* State00a71050::FUN_00a71050(unsigned int flags)
         allocator->FUN_008f6d90(this, unk04, 0x2c);
     }
     return this;
-}
-void __stdcall State00a71050::FUN_00a71080(unsigned int a)
-{
-    ((State00a71050*)((unsigned char*)this + 0x20))->FUN_00924b40(a);
-    ((State00a71050*)((unsigned char*)this + 0x50))->FUN_00924b40(a);
 }
 }
 }   // namespace f3m_00a71050

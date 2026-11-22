@@ -5201,8 +5201,6 @@ public:
     Derived46c* FUN_0046c360(int unused);
 };
 
-void Base46c::Slot00() {}
-
 Derived46c* Owner46c::FUN_0046c360(int unused)
 {
     volatile Vec3_46c v;

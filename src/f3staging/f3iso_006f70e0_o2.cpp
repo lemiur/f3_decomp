@@ -32,10 +32,6 @@ struct Sound {
     unsigned handle;
     __declspec(noinline) bool active();
 };
-bool Sound::active() {
-    if(handle==-1u) return false;
-    return SoundManager::get()->check(handle);
-}
 struct Process {
     ProcessTable* table;
     char unknown04[0x308];

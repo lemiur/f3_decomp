@@ -14439,9 +14439,6 @@ public:
 void FUN_004d48c0_Helper::vf00() {
 }
 
-void FUN_004d48c0_Helper::vf04() {
-}
-
 void FUN_004d48c0_Helper::vf08(void* value) {
     FUN_004d48c0_SideEffect = 3;
 }
@@ -27519,23 +27516,9 @@ void Owner4D7::FUN_004d7620(struct Source4D7* source) {
 }
 
 void Owner4D7::vf00() {}                             
-void Owner4D7::vf04() {} 
 void Owner4D7::vf08() {} 
 void Owner4D7::vf0C() {} 
-void Owner4D7::vf10() {} 
-void Owner4D7::vf14() {} 
-void Owner4D7::vf18() {} 
-void Owner4D7::vf1C() {} 
-void Owner4D7::vf20() {} 
-void Owner4D7::vf24() {} 
-void Owner4D7::vf28() {} 
-void Owner4D7::vf2C() {} 
-void Owner4D7::vf30() {} 
-void Owner4D7::vf34() {} 
 void Owner4D7::vf38() {} 
-void Owner4D7::vf3C() {} 
-void Owner4D7::vf40() {} 
-void Owner4D7::vf44() {} 
 void Owner4D7::vf48() {} 
 void Owner4D7::vf4C(unsigned int value) { (void)value; }   
 

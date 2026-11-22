@@ -26976,7 +26976,6 @@ void FUN_0049f550() {
     }
 }
 
-void Obj49F::vfn00() {}                              // defined so the vtable exists with the slot at +0x04 in place ✓✓ 
 void Obj49F::vfn04() {} 
 
 }

@@ -12160,9 +12160,6 @@ TESEscortPackageData::TESEscortPackageData()
     unk08 = 200;
 }
 
-void TESEscortPackageData::Dummy()
-{
-}
 }   // namespace f3m_005aa800
 
 // @f3 0x005be7d0 (community match, verified in this file)

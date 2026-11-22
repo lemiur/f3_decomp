@@ -11588,8 +11588,6 @@ public:
     FUN_007d6500();
 };
 
-void FUN_007d6500::Dummy() {}
-
 FUN_007d6500::FUN_007d6500() {
 }
 }   // namespace f3m_007d6500

@@ -12048,9 +12048,6 @@ void ThisType::FUN_00bd7d20() {
 }
 
 void CallbackObj::Call(int value) {}
-void ReleaseObj::vf00() {}
-void ReleaseObj::vf04() {}
-void ReleaseObj::vf08() {}
 }   // namespace f3m_00bd7d20
 
 // @f3 0x00bc0e50 (community match, verified in this file)

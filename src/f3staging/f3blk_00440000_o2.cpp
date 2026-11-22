@@ -16111,7 +16111,6 @@ public:
 
 void __stdcall FUN_00448200(FUN_00448860_Params*);
 
-void FUN_00448860_Target::vf00() {}
 void FUN_00448860_Target::vf04() {}
 void FUN_00448860_Target::vf08() {}
 void FUN_00448860_Target::vf0C() {}

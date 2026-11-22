@@ -26845,10 +26845,7 @@ public:
     virtual void v10(int a, int b, int c, int d, int* e, int f);
 };
 
-void FUN_00bf9ca0_Target::v00() {}
 void FUN_00bf9ca0_Target::v04() {}
-void FUN_00bf9ca0_Target::v08() {}
-void FUN_00bf9ca0_Target::v0C() {}
 void FUN_00bf9ca0_Target::v10(int a, int b, int c, int d, int* e, int f)
 {
 }
@@ -35454,9 +35451,6 @@ FNV_STATIC_ASSERT(offsetof(SearchLines, unk2280) == 0x2280);
 FNV_STATIC_ASSERT(offsetof(SearchLines, first) == 0x2284);
 FNV_STATIC_ASSERT(offsetof(SearchLines, second) == 0x2290);
 
-void SearchLines::FUN_00bf9b50() {}
-void Array::FUN_00bf9c80() {}
-
 int SearchLines::FUN_00bf9d30(int a1)
 {
     return first[a1];
@@ -36775,10 +36769,6 @@ class FUN_00beb070_Owner
 public:
     void __thiscall FUN_00beb070();
 };
-
-void FUN_00beb070_Child::vf00()
-{
-}
 
 int FUN_00beb070_Child::vf04()
 {
@@ -38426,9 +38416,7 @@ public:
     virtual void v10(int a, int b, int c, int d, int* e, int f);
 };
 
-void FUN_00bf9cd0_Target::v00() {}
 void FUN_00bf9cd0_Target::v04() {}
-void FUN_00bf9cd0_Target::v08() {}
 void FUN_00bf9cd0_Target::v0C() {}
 void FUN_00bf9cd0_Target::v10(int a, int b, int c, int d, int* e, int f)
 {

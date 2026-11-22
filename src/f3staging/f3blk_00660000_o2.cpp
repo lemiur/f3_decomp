@@ -32543,7 +32543,6 @@ Node* Factory::FUN_0066b0d0(Node* node) { if (node) return (Node*)node->item08; 
 
 }
 
-int main() { return 0; }
 }   // namespace f3m_0066b690
 
 // @f3 0x00676430 (community match, verified in this file)

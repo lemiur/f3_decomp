@@ -39897,11 +39897,6 @@ public:
     void FUN_006f5430(int a, int b);
 };
 
-void Actor6f5430_L::FUN_006f5430(int a, int b)
-{
-    Virt3B0(a, (float)b);
-}
-
 void __stdcall FUN_00765230(float value);
 
 struct FUN_006f7190_This {

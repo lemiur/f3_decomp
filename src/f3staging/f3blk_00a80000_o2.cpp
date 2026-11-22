@@ -1067,10 +1067,6 @@ public:
     hkArray<void*> m_exports;
 };
 
-hkPackfileData::hkPackfileData()
-    : m_topLevelObject(0), m_name(0)
-{
-}
 }   // namespace f3m_00a80240
 
 // @f3 0x00a84ab0 (community match, verified in this file)

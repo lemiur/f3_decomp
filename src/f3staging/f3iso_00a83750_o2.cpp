@@ -78,9 +78,6 @@ static __declspec(noinline) void FUN_00a82b80(Parser34* parser, void* stream) {
         token = 0;
     }
 }
-void Parser34::Skip(void* stream) {
-    FUN_00a82b80(this, stream);
-}
 }
 namespace f3m_00a82e90 {
 namespace b1821 {

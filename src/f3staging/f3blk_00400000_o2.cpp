@@ -20129,10 +20129,6 @@ public:
     void FUN_005a49b0(int param);
 };
 
-void FUN_0041da40_PtrObj::vf00() {}
-void FUN_0041da40_PtrObj::vf04() {}
-void FUN_0041da40_PtrObj::vf08() {}
-void FUN_0041da40_PtrObj::vf0C() {}
 void FUN_0041da40_PtrObj::vf10(int param) {}
 
 class ExtraListManager {

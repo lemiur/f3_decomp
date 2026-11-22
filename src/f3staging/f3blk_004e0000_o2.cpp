@@ -6790,23 +6790,9 @@ public:
 };
 
 void FUN_004e8710_Class::vf00() {}
-void FUN_004e8710_Class::vf04() {}
 void FUN_004e8710_Class::vf08() {}
 void FUN_004e8710_Class::vf0C() {}
 void FUN_004e8710_Class::vf10() {}
-void FUN_004e8710_Class::vf14() {}
-void FUN_004e8710_Class::vf18() {}
-void FUN_004e8710_Class::vf1C() {}
-void FUN_004e8710_Class::vf20() {}
-void FUN_004e8710_Class::vf24() {}
-void FUN_004e8710_Class::vf28() {}
-void FUN_004e8710_Class::vf2C() {}
-void FUN_004e8710_Class::vf30() {}
-void FUN_004e8710_Class::vf34() {}
-void FUN_004e8710_Class::vf38() {}
-void FUN_004e8710_Class::vf3C() {}
-void FUN_004e8710_Class::vf40() {}
-void FUN_004e8710_Class::vf44() {}
 void FUN_004e8710_Class::vf48(int value) {}
 
 void FUN_004e8710_Class::FUN_004e8710(float value)

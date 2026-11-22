@@ -25307,27 +25307,6 @@ hkArray<hkQsTransform>& hkaPose::FUN_00955ab0()
     return FUN_00954fc0();
 }
 
-// enforceSkeletonConstraintsLocalSpace
-void hkaPose::FUN_00955ac0()
-{
-    const int count = m_skeleton->m_numBones;
-    FUN_00955370();
-    for (int i = 0; i < count; ++i) {
-        const hkaBone* bone = m_skeleton->m_bones[i];
-        if (bone->m_lockTranslation) {
-            m_localPose[i].m_translation = m_skeleton->m_referencePose[i].m_translation;
-            setFlag(i, BoneModelDirty);
-            setFlag(i, BoneChanged);
-        } else {
-            const short parent = m_skeleton->m_parentIndices[i];
-            if (parent != -1 && flagged(parent, BoneChanged)) {
-                setFlag(i, BoneModelDirty);
-                setFlag(i, BoneChanged);
-            }
-        }
-    }
-    clearInternalFlags();
-}
 }
 }   // namespace f3m_00955ab0
 

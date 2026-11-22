@@ -311,7 +311,6 @@ struct Heap {void FUN_0086ba60(void*);}; extern Heap DAT_01090a78;
 struct FUN_006cd980 {char filename[260];void* file;~FUN_006cd980();static void operator delete(void* p){DAT_01090a78.FUN_0086ba60(p);}};
 int __cdecl FUN_00c05a0f(const char*,int);
 int __cdecl FUN_00c02aeb(const char*,const char*);
-unsigned int StringLength(const char* text){const char* end=text;while(*end++);return (unsigned int)(end-text-1);}
 struct Manager {void FUN_006d47a0(char*,char*,unsigned char);void FUN_006d4900(FUN_006cd980*,int);};
 void Manager::FUN_006d4900(FUN_006cd980* header,int rotate) {
  char base[260];

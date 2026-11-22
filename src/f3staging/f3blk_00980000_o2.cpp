@@ -1457,13 +1457,6 @@ static void FUN_00987ce0(CFF9B0SmallArray& cleanupArray)
     }
 }
 
-// Callers so the file-static helper is emitted with its register calling convention.
-void CFF9B0CleanupListeners(CFF9B0SmallArray* a, CFF9B0SmallArray* b)
-{
-    FUN_00987ce0(*a);
-    FUN_00987ce0(*b);
-}
-
 extern "C" __declspec(dllimport) void* __stdcall TlsGetValue(unsigned long);
 extern "C" unsigned __int64 __rdtsc(void);
 extern "C" void _ReadWriteBarrier(void);

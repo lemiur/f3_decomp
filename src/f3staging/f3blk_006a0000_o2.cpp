@@ -9068,7 +9068,6 @@ void Target6ba160::FUN_006ba160(Peer6ba160* arg) {
 }
 Target6ba160* volatile g_obj;
 Peer6ba160* volatile g_peer;
-void caller() { g_obj->FUN_006ba160(g_peer); }
 }   // namespace f3m_006ba160
 
 // @f3 0x006a8fd0 (community match, verified in this file)

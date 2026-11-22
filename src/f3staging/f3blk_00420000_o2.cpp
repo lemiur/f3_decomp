@@ -8037,8 +8037,6 @@ struct FUN_004260f0 : Base0325 {
     virtual void vf1();
 };
 
-void FUN_004260f0::vf1() {}
-
 FUN_004260f0::FUN_004260f0(char* b, int a) : Base0325(a)
 {
     unk30 = 0;
