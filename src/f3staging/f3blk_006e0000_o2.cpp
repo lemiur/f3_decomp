@@ -29102,7 +29102,7 @@ struct Candidate6f4400 {
 };
 float Candidate6f4400::FUN_006f4400(Caller6f4400* caller) {
     Data6f4400* value = data;
-    volatile float result;
+    float result;
     if (!value) result = 0.0f;
     else if (!(((unsigned char)~value->flag40) & 1)) result = value->value;
     else result = caller->GetValue();
