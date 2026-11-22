@@ -576564,7 +576564,7 @@
     },
     {
      "address": "0x00985350",
-     "symbol": "?RegisterAgentType@hkpCollisionDispatcher@@QAEXPAY0CA@ECHHCCPAY0CA@UDebugEntry@1@H@Z",
+     "symbol": "?RegisterAgentType@hkpCollisionDispatcher@@QAEXPAY0CA@CCHHCCPAY0CA@UCollisionAgentEntry@@H@Z",
      "size": 617
     },
     {
