@@ -953,6 +953,8 @@ static int cmd_defs(int argc, char **argv)
     }
     int changed = 1, rounds = 0;
     char **added = xcalloc((size_t)g_files.n + 1, sizeof(char *));
+    char *nr_added = xcalloc((size_t)g_c.n + 1, 1);
+    int nr_grew = 0;
     while (changed) {
         changed = 0;
         rounds++;
@@ -987,6 +989,49 @@ static int cmd_defs(int argc, char **argv)
             }
             for (int i = 0; i < g_c.n; i++)
                 if (g_c.v[i].ref) kept[i] = 1;
+            /* a definition kept so that a checked function stays emitted is itself emitted only when referenced
+               if it has internal linkage: its callers (by relocation or by name) stay too */
+            for (int i = 0; i < g_c.n; i++) {
+                Cand *c = &g_c.v[i];
+                if (c->status != ST_KEEPS_ALIVE || c->def < 0 || nr_added[i]) continue;
+                Def *df = &g_files.v[c->file].P.defs[c->def];
+                if (!(df->is_static || df->is_inline || df->is_template || df->parent == SK_CLASS)) continue;
+                nr_added[i] = 1;
+                if (df->is_operator) continue;
+                StrMap *nr = &g_NR[find_root(c->file)];
+                if (!nr->cap) smap_init(nr, 64);
+                smap_put(nr, df->name_s, (void *)1);
+                nr_grew = 1;
+            }
+            for (int k = 0; k < efrom.n; k++) {
+                Cand *to = &g_c.v[eto.v[k]], *from = &g_c.v[efrom.v[k]];
+                if (to->status == ST_KEEPS_ALIVE && nr_added[eto.v[k]] && from->status == ST_REMOVE) {
+                    from->status = ST_KEEPS_ALIVE;
+                    again = changed = 1;
+                }
+            }
+            if (nr_grew) {
+                nr_grew = 0;
+                for (int i = 0; i < g_c.n; i++) {
+                    Cand *c = &g_c.v[i];
+                    if (c->status != ST_REMOVE || c->def < 0) continue;
+                    File *F = &g_files.v[c->file];
+                    StrMap *nr = &g_NR[find_root(c->file)];
+                    Def *df = &F->P.defs[c->def];
+                    if (!nr->cap) continue;
+                    for (int j = df->body_from; j <= df->endtok; j++) {
+                        PTok *tk = &F->L.toks[j];
+                        if (tk->type != P_IDENT || tk->len > 200) continue;
+                        char nm[256];
+                        snprintf(nm, sizeof nm, "%.*s", tk->len, F->L.text + tk->off);
+                        if (smap_has(nr, nm)) {
+                            c->status = ST_KEEPS_ALIVE;
+                            again = changed = 1;
+                            break;
+                        }
+                    }
+                }
+            }
         }
         /* identifiers */
         for (int f = 0; f < g_files.n; f++) {
