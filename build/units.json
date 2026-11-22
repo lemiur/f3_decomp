@@ -516110,7 +516110,7 @@
    "functions": [
     {
      "address": "0x008cbd40",
-     "symbol": "?FUN_00a51e50@NiBSplineData_shell@@QAE_NPAVNiObject@@@Z",
+     "symbol": "?IsEqual@NiBSplineData@@UAE_NPAVNiObject@@@Z",
      "size": 48
     },
     {
@@ -516125,12 +516125,12 @@
     },
     {
      "address": "0x008cc5b0",
-     "symbol": "?CalculateSplineValue@NiBSplineData@@QAEXMPAMIPAVNiBSplineBasisData@@IMM@Z",
+     "symbol": "?CalculateSplineValue@FUN_00a526b0_shell@@QAEXMPAMIPAVNiBSplineBasisData@@IMM@Z",
      "size": 455
     },
     {
      "address": "0x008cc780",
-     "symbol": "?LoadBinary@NiBSplineData@@UAEXAAVNiStream@@@Z",
+     "symbol": "?LoadBinary@FUN_00a52870_shell@@QAEXAAVBSDStreamView@@@Z",
      "size": 224
     },
     {
@@ -516147,23 +516147,23 @@
    "symbols": {
     "?FUN_00aa1460@@YAXPAXI@Z": "0x0089ec10",
     "?_NiFreeAlias@@YAXPAX@Z": "0x0089e890",
-    "?FUN_00aa1070@@YAPAXI@Z": "0x0089e810",
     "?FUN_00a7d330@@YAPAXPAX@Z": "0x00847b50",
     "?FUN_00a5d3d0@@YIXPAX@Z": "0x00825830",
-    "?GetBSplineBasis@NiBSplineBasisData@@QAEAAVNiBSplineBasis_float_3_@@XZ": "0x00c24260",
-    "?Compute@NiBSplineBasis_float_3_@@QAEXMAAH0@Z": "0x008cbd70",
     "?NiCompUtility_DecompressFloatArray@@YAXPBFIMMPAMI@Z": "0x00c24180",
-    "?ReadGroup@NiBSplineData@@QAEXAAVNiStream@@@Z": "0x00825ad0",
     "?DAT_01099e54@@3HA": "0x00e3087c",
-    "_IsSameAs@4": "0x008258d0",
-    "?LoadStream@NiBSplineBaseStand@@QAEXAAVNiStream@@@Z": "0x0078c030",
     "?LoadStream@NiBase_stand@@QAEXAAUArrayArg@@@Z": "0x00825b40",
     "?g_011f4034@@3PAXA": "0x01092874",
     "?FUN_0096ad30@ArrayArg@@QAEXI@Z": "0x00555790",
     "?FUN_0096ae90@ArrayArg@@QAEXIPAX@Z": "0x005b3880",
     "?str_01099f08@@3QBDB": "0x00e3092c",
     "?FUN_00a7d510@@YAPAXPBDI@Z": "0x00847d80",
-    "?str_01099ee8@@3QBDB": "0x00e3090c"
+    "?str_01099ee8@@3QBDB": "0x00e3090c",
+    "?IsEqual@NiObject@@UAE_NPAV1@@Z": "0x008258d0",
+    "?GetDegree3Basis@NiBSplineBasisData@@QAEAAV?$NiBSplineBasis@M$02@@XZ": "0x00c24260",
+    "?Compute@?$NiBSplineBasis@M$02@@QBEXMAAH0@Z": "0x008cbd70",
+    "?LoadBinary@NiObject@@UAEXAAVNiStream@@@Z": "0x00825ad0",
+    "?_NiMalloc@@YAPAXI@Z": "0x0089e810",
+    "?LoadStream@NiBSplineBaseStand@@QAEXAAVNiStream@@@Z": "0x0078c030"
    }
   },
   {
