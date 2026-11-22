@@ -46,8 +46,8 @@ void NiStream::RegisterObjects()
 {
     for (unsigned int index = 0; index < m_kTopObjects.m_uiSize; ++index)
     {
-        NiStreamableObject* object = (NiStreamableObject*)m_kTopObjects.m_pBase[index].m_pObject;
-        object->RegisterStreamables(this);
+        NiObject* pkObject = m_kTopObjects.m_pBase[index].m_pObject;
+        pkObject->RegisterStreamables(*this);
     }
 }
 

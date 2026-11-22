@@ -5,7 +5,7 @@
 // @fnv 0x00c32510
 // pdb: NiPSysCollider::CopyMembers | NiPSysCollider.obj | fnv360_0822_retail, objrun, medium
 // pdb params: pkDest, kCloning
-void NiPSysPlanarCollider::CopyMemberData(NiPSysPlanarCollider* dest, CloningProcess& process)
+void NiPSysPlanarCollider::CopyMemberData(NiPSysPlanarCollider* dest, NiCloningProcess& process)
 {
     NiPSysCollider::CreateVertexBufferSet(dest, process);
 
@@ -16,7 +16,7 @@ void NiPSysPlanarCollider::CopyMemberData(NiPSysPlanarCollider* dest, CloningPro
     NiPSysCollider* sourceNext = *reinterpret_cast<NiPSysCollider**>(reinterpret_cast<char*>(this) + 0x28);
     if (sourceNext)
     {
-        NiPSysCollider* next = sourceNext->Clone(process);
+        NiPSysCollider* next = (NiPSysCollider*)sourceNext->CreateClone(process);
 
         NiPSysCollider* destNext = *reinterpret_cast<NiPSysCollider**>(reinterpret_cast<char*>(dest) + 0x28);
         if (destNext != next)

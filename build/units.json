@@ -555008,7 +555008,8 @@
     "??3@YAXPAX@Z": "0x00401010",
     "?LoadBinary@NiPSysModifier@@UAEXAAVNiStream@@@Z": "0x00ac5fa0",
     "?FUN_00c31750@@YAXXZ": "0x008c9570",
-    "?FUN_00c319e0@Base00c319e0@@QAEXPAUStrArr@@@Z": "0x00ac60d0"
+    "?FUN_00c319e0@Base00c319e0@@QAEXPAUStrArr@@@Z": "0x00ac60d0",
+    "?LoadBinary@NiColorA@@QAEXAAVNiStream@@@Z": "0x0083faa0"
    }
   },
   {
@@ -557701,7 +557702,7 @@
     },
     {
      "address": "0x00ad1d70",
-     "symbol": "?CopyMemberData@NiPSysPlanarCollider@@QAEXPAV1@AAVCloningProcess@@@Z",
+     "symbol": "?CopyMemberData@NiPSysPlanarCollider@@QAEXPAV1@AAVNiCloningProcess@@@Z",
      "size": 112
     }
    ],
@@ -557757,7 +557758,8 @@
     "?DAT_011a9448@@3UMat36@@A": "0x00f72574",
     "?ResetToIdentity@DummyTransform@@QAEXXZ": "0x00851550",
     "_DAT_01012060": "0x00db38b0",
-    "__real@3f800000": "0x00db39b8"
+    "__real@3f800000": "0x00db39b8",
+    "?CreateVertexBufferSet@NiPSysCollider@@QAEXPAV1@AAVNiCloningProcess@@@Z": "0x008258b0"
    }
   },
   {

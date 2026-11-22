@@ -26,9 +26,9 @@ void AddObjectToPalette(NiAVObject* object, NiDefaultAVObjectPalette* palette)
         return;
 
     if (object->m_kName.m_kHandle)
-        palette->AddNamedAVObject(object->m_kName, object);
+        palette->SetAVObject(object->m_kName, object);
 
-    NiNode* node = object->GetNiNode();
+    NiNode* node = object->IsNode();
     if (node)
     {
         NiDefaultPaletteNodeChildren* children = (NiDefaultPaletteNodeChildren*)node;
@@ -61,7 +61,7 @@ void NiDefaultAVObjectPalette::LoadBinary(NiStream& stream)
             {
                 NiFixedString name;
                 name.m_kHandle = NiGlobalStringTable::AddString(string);
-                AddNamedAVObject(name, object);
+                SetAVObject(name, object);
                 if (name.m_kHandle != EmptyFS.m_kHandle)
                 {
                     InterlockedDecrement((volatile long*)(name.m_kHandle - 8));
@@ -187,8 +187,8 @@ void __cdecl AddObjectToPaletteRecursive(NiAVObject* apObject, NiDefaultAVObject
     if (apPalette == 0)
         return;
     if (apObject->m_kName.m_kHandle != 0)
-        apPalette->AddNamedAVObject(apObject->m_kName, apObject);
-    NodeChildrenView_cls* node = (NodeChildrenView_cls*)apObject->GetNiNode();
+        apPalette->SetAVObject(apObject->m_kName, apObject);
+    NodeChildrenView_cls* node = (NodeChildrenView_cls*)apObject->IsNode();
     if (node == 0)
         return;
     unsigned int i = 0;
@@ -512,7 +512,7 @@ void PaletteShell::FUN_00a6e5b0(CloningProcess& kCloning)
             {
                 NiObject* pkObjClone;
                 if (kCloning.m_pCloneMap->GetAt(pkObj, pkObjClone))
-                    pkDest->AddNamedAVObject(kName, (NiAVObject*)pkObjClone);
+                    pkDest->SetAVObject(kName, (NiAVObject*)pkObjClone);
             }
             if (kName.m_kHandle != EmptyFS.m_kHandle)
                 InterlockedDecrement((volatile long*)(kName.m_kHandle - 8));
