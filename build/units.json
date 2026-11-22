@@ -206570,15 +206570,14 @@
     "__ehhandler$?FUN_0094ea60@Owner@Task3178@f3m_0094ea60@@QAEXPAUInfo@23@@Z": "0x00c7573b",
     "?FUN_008f6d30@Heap@Task3178@f3m_0094ea60@@QAEPAXIH@Z": "0x008f6d30",
     "??0FUN_009e2ec0@Task3178@f3m_0094ea60@@QAE@ABUV@12@00@Z": "0x009e2ec0",
-    "?DAT_0116913c@@3KA": "0x0116913c",
-    "?DAT_00e7a1c8@@3HA": "0x00e7a1c8",
     "?FUN_00942be0@Calc@f3m_00942cf0@@QAEXPAUObj@2@PAUBlk@2@PAX2H@Z": "0x00942be0",
-    "?DAT_00e32798@@3HA": "0x00e32798",
     "?DAT_0116913c@f3m_00945a80@@3KA": "0x0116913c",
     "?DAT_00e7a3fc@f3m_00945a80@@3QBDB": "0x00e7a3fc",
     "?FUN_008f62d0@f3m_00945a80@@YA_NUS945a80_Key@1@0@Z": "0x008f62d0",
     "?hkVector4_setRotatedDir@f3m_00945a80@@YGXPAUS945a80_Mat@1@PAUS945a80_Out@1@@Z": "0x008d2a00",
-    "?DAT_00e32798@f3m_00945a80@@3QBDB": "0x00e32798"
+    "?DAT_00e32798@f3m_00945a80@@3QBDB": "0x00e32798",
+    "?hkMonitorStream__m_instance@@3V?$hkThreadLocalData@PAVhkMonitorStream@@@@A": "0x0116913c",
+    "??_C@_0P@LCGHJFA@TtRayCastGroup?$AA@": "0x00e7a1c8"
    }
   },
   {

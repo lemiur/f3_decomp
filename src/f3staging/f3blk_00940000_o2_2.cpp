@@ -1146,20 +1146,13 @@ void Owner::FUN_0094ea60(Info* info){
 
 // @f3 0x00942cf0 (community match, verified in this file)
 #include <windows.h>
+#include "havok/hkMonitorStream.h"
 extern unsigned long DAT_0116913c;
 extern unsigned long DAT_010f3170;
-extern int DAT_00e7a1c8;
 extern int DAT_00e32798;
 namespace f3m_00942cf0 {
 
 
-struct ProfEntry { void* tag; unsigned int start; unsigned int unk08; 
-    // hkMonitorStream::TimerCommand::setTime (class and member names: FNV360_PDB)
-    // RULE-EXCEPTION: R18, Havok's IA32 setTime reads the TSC with inline asm: retail stores eax to a stack local and reloads it, which __rdtsc() does not emit
-    __forceinline void setTime() { unsigned int ticks; __asm { rdtsc
-        mov ticks, eax } start = ticks; }
-};
-struct ProfStream { int unk00; ProfEntry* cur; int unk08; ProfEntry* end; };
 
 struct Vec4 { float x, y, z, w; };
 struct Blk { Vec4 a; Vec4 b; Vec4 c; };
@@ -1229,15 +1222,7 @@ struct Owner
 void Owner::hkpWorldRayCaster_castRayGroup(Obj* a1, Blk* a2, int a3, char* a4, int a5, int a6)
 {
 
-    {
-        ProfStream* ps = (ProfStream*)TlsGetValue(DAT_0116913c);
-        ProfEntry* e = ps->cur;
-        if (e < ps->end) {
-            e->tag = &DAT_00e7a1c8;
-            e->setTime();
-            ps->cur = e + 1;
-        }
-    }
+    HK_TIMER_BEGIN("RayCastGroup", HK_NULL);
 
     __declspec(align(16)) Vec4 mn;
     __declspec(align(16)) Vec4 mx;
@@ -1294,15 +1279,7 @@ void Owner::hkpWorldRayCaster_castRayGroup(Obj* a1, Blk* a2, int a3, char* a4, i
         ms2->v18(dest);
     }
 
-    {
-        ProfStream* ps2 = (ProfStream*)TlsGetValue(DAT_0116913c);
-        ProfEntry* e2 = ps2->cur;
-        if (e2 < ps2->end) {
-            e2->tag = &DAT_00e32798;
-            e2->setTime();
-            ps2->cur = e2 + 1;
-        }
-    }
+    HK_TIMER_END();
 }
 }   // namespace f3m_00942cf0
 
