@@ -271,25 +271,31 @@ void swapBytesCaller(unsigned char* pLeft, unsigned char* pRight)
     FUN_00d605f0(pLeft, pRight);
 }
 
+class hkClass;
+class hkStatisticsCollector;
+// hkStreamWriter: the slots of the Fallout 3 vtable (hkSubStreamWriter, 0x00e800c0) up to write, with the New Vegas
+// Xbox 360 PDB's names.
 struct hkStub
 {
-    virtual void vf00();
-    virtual void vf04();
-    virtual void vf08();
-    virtual void vf0c();
-    virtual void vf10(int a);
+    virtual ~hkStub();
+    virtual const hkClass* getClassType() const;
+    virtual void calcContentStatistics(hkStatisticsCollector* collector, const hkClass* cls) const;
+    virtual char isOk() const;
+    virtual int write(const void* buf, int nbytes);
 };
+// hkSubStreamWriter
 struct FUN_00d607b0_class
 {
     int unk00;
     int unk04;
-    hkStub* unk08;
-    void FUN_00d607b0(int a);
+    hkStub* m_childStream;  // +0x08
+    int FUN_00d607b0(const void* buf, int nbytes);
 };
 // @fnv 0x00d607b0
-void FUN_00d607b0_class::FUN_00d607b0(int a)
+// Forwards to the child stream: slot 4 (write) of the Fallout 3 hkSubStreamWriter vtable (0x00e800c0).
+int FUN_00d607b0_class::FUN_00d607b0(const void* buf, int nbytes)
 {
-    unk08->vf10(a);
+    return m_childStream->write(buf, nbytes);
 }
 
 struct S_00d607c0
