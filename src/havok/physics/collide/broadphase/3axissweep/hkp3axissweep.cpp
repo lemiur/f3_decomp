@@ -2,14 +2,21 @@
 // src/havok/physics/collide/broadphase/3axissweep/hkp3axissweep.cpp - unit created 2026-10-16 from the whole-binary attribution (360 source path: d:/projects/fallout/code/havok/source/physics/collide/broadphase/3axissweep/hkp3axissweep.cpp).
 // Functions are listed by their @fnv annotations; compile flags inferred from the PC code.
 
+// hkp3AxisSweep: the members getAabbCacheSize reads, at their Fallout 3 offsets (New Vegas Xbox 360 PDB names).
 struct hkp3AxisSweep {
+    char unk00[0xA0];
+    void* m_nodes;           // +0xA0 hkArray<hkpBpNode>
+    int m_nodesSize;         // +0xA4 m_nodes.m_size
+    int m_nodesCapacity;     // +0xA8
+    char m_axis[0x24];       // +0xAC hkpBpAxis[3]
+    int m_numMarkers;        // +0xD0
     int FUN_00d11630();
 };
 // @fnv 0x00d11630
 // pdb: hkp3AxisSweep::getAabbCacheSize | hkp3AxisSweep.obj | tesv_win, objrun_sim, low
 int hkp3AxisSweep::FUN_00d11630()
 {
-    return 8 * (3 * (*(int*)((char*)this + 0xa4) - *(int*)((char*)this + 0xd0))) + 0x24;
+    return 8 * (3 * (m_nodesSize - m_numMarkers)) + 0x24;
 }
 
 struct BSAudio { void* p; int a; int b; };

@@ -23,8 +23,12 @@ void FUN_00c903b0_class::ReleaseReference()
     }
 }
 
+// hkReferencedObject
 struct FUN_00c903a0_class
 {
+    virtual ~FUN_00c903a0_class();
+    unsigned short m_memSizeAndFlags;  // +0x04
+    short m_referenceCount;            // +0x06
     void hkSweptTransformUtil_setTimeInformation();
 };
 
@@ -32,8 +36,8 @@ struct FUN_00c903a0_class
 // pdb: hkSweptTransformUtil::setTimeInformation | hkSweptTransformUtil.obj | fnv360_0721_beta, call_gap + skyrim(call_gap), high
 void FUN_00c903a0_class::hkSweptTransformUtil_setTimeInformation()
 {
-    if ((*(short*)((char*)this + 4)) != 0)
-        (*(short*)((char*)this + 6))++;
+    if (m_memSizeAndFlags != 0)
+        m_referenceCount++;
 }
 
 extern int DAT_012681d4;
