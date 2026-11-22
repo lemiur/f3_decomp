@@ -1124,7 +1124,12 @@ namespace f3m_0097df50 {
 namespace f3m_0097df50 {
 __declspec(dllimport) void* __stdcall FUN_00d9b080(unsigned long) throw();
 
-struct Command { const char* name; unsigned int ticks; unsigned int unk08; };
+struct Command { const char* name; unsigned int ticks; unsigned int unk08; 
+    // hkMonitorStream::TimerCommand::setTime (class and member names: FNV360_PDB)
+    // RULE-EXCEPTION: R18, Havok's IA32 setTime reads the TSC with inline asm: retail stores eax to a stack local and reloads it, which __rdtsc() does not emit
+    __forceinline void setTime() { unsigned int time; __asm { rdtsc
+        mov time, eax } ticks = time; }
+};
 struct Stream { unsigned int unk00; Command* cursor; unsigned int unk08; Command* limit; };
 
 struct __declspec(align(16)) Vec4 {
@@ -1235,17 +1240,12 @@ __forceinline void InvPos3(Vec4& out, const Transform& a, const Vec4& b)
 // pdb: hkpTransformShape::castRayImpl | hkpTransformShape.obj | fnv360_0822_retail, objopen_prop + bridge(caller_sim|vtable) + skyrim(caller_sim), high
 Bool TransformShape::hkpTransformShape_castRayImpl(const RayInput& input, RayOutput& out)
 {
-    int dead0 = out.keys[0];
+
     Stream* s = (Stream*)FUN_00d9b080(DAT_0116913c);
     Command* c = s->cursor;
     if (c < s->limit) {
         c->name = DAT_00e7d25c;
-        unsigned int ticks;
-        __asm {
-            rdtsc
-            mov dword ptr[ticks], eax
-        }
-        c->ticks = ticks;
+        c->setTime();
         s->cursor = c + 1;
     }
     RayInput sub = input;
@@ -1263,12 +1263,7 @@ Bool TransformShape::hkpTransformShape_castRayImpl(const RayInput& input, RayOut
     Command* c2 = s2->cursor;
     if (c2 < s2->limit) {
         c2->name = DAT_00e32798;
-        unsigned int ticks2;
-        __asm {
-            rdtsc
-            mov dword ptr[ticks2], eax
-        }
-        c2->ticks = ticks2;
+        c2->setTime();
         s2->cursor = c2 + 1;
     }
     return hit;
@@ -2229,7 +2224,6 @@ class hkpInertiaTensorComputer
 };
 hkResult __cdecl hkpInertiaTensorComputer::FUN_009738d0(const hkReal* vertexIn, int striding, int numVertices, hkReal mass, hkpMassProperties& result)
 {
-	;
 	if ( numVertices <= 0 )
 	{
 		return HK_FAILURE;
@@ -3147,12 +3141,10 @@ class hkpInertiaTensorComputer
 // pdb params: startAxis, endAxis, radius, mass, result
 hkResult hkpInertiaTensorComputer::FUN_00975310(const hkVector4& startAxis, const hkVector4& endAxis, hkReal radius, hkReal mass, hkpMassProperties& result)
 {
-	;
 	if (mass <= 0.0f)
 	{
 		return HK_FAILURE;
 	}
-	;
 	if (radius <= 0.0f)
 	{
 		return HK_FAILURE;
@@ -3160,7 +3152,6 @@ hkResult hkpInertiaTensorComputer::FUN_00975310(const hkVector4& startAxis, cons
 	hkTransform capsuleToLocal;
 	hkVector4 axis; axis.setSub4(endAxis, startAxis);
 	hkReal height = axis.length3();
-	;
 	if (height > 0.0f)
 	{
 		axis.normalize3();
@@ -4089,11 +4080,9 @@ class hkpInertiaTensorComputer
 // pdb params: startAxis, endAxis, radius, mass, result
 hkResult hkpInertiaTensorComputer::FUN_00974950(const hkVector4& startAxis, const hkVector4& endAxis, hkReal radius, hkReal mass, hkpMassProperties& result)
 {
-	;
 	if (mass <= 0.0f) {
 		return HK_FAILURE;
 	}
-	;
 	if (radius <= 0.0f) {
 		return HK_FAILURE;
 	}
@@ -5844,16 +5833,12 @@ void hkpSimulation::FUN_0097fef0( hkpEntity** entities, int numEntities, const h
 	for ( int i = 0; i < numEntities; i++ )
 	{
 		hkpEntity* entity = entities[i];
-		;
 		hkpLinkedCollidable* lColl = entity->getLinkedCollidable();
-		;
-		;
 		processedEntities.insert( hkUlong(lColl), 0 );
 		for ( int c = 0; c < lColl->m_collisionEntries.getSize(); c++ )
 		{
 			hkpLinkedCollidable::CollisionEntry& cEntry = lColl->m_collisionEntries[c];
 			hkpLinkedCollidable* partner = cEntry.m_partner;
-			;
 			hkPointerMapBase<hkUlong>::Iterator it = processedEntities.findKey( hkUlong(partner) );
 			if ( processedEntities.isValid( it ) )
 			{
@@ -7097,7 +7082,6 @@ void hkaSkeletonMapper::hkaSkeletonMapper_mapPose( const hkQsTransform* poseAMod
 		for ( int i = 0; i < numSimpleMappings; i++ )
 		{
 			const hkaSkeletonMapperData::SimpleMapping& simpleMapping = m_mapping.m_simpleMappings[i];
-			;
 			poseBModelSpace[simpleMapping.m_boneB].setMul( poseAModelSpace[simpleMapping.m_boneA], simpleMapping.m_aFromBTransform );
 		}
 	}
@@ -7111,7 +7095,6 @@ void hkaSkeletonMapper::hkaSkeletonMapper_mapPose( const hkQsTransform* poseAMod
 			const hkInt16 endBoneA = chainMapping.m_endBoneA;
 			const hkInt16 startBoneB = chainMapping.m_startBoneB;
 			const hkInt16 endBoneB = chainMapping.m_endBoneB;
-			;
 			poseBModelSpace[startBoneB].setMul( poseAModelSpace[startBoneA], chainMapping.m_startAFromBTransform );
 			hkLocalArray<hkInt16> chainBones( endBoneB - startBoneB + 1 );
 			hkaSkeletonUtils::getBoneChain( *m_mapping.m_skeletonB, startBoneB, endBoneB, chainBones );
@@ -7133,7 +7116,6 @@ void hkaSkeletonMapper::hkaSkeletonMapper_mapPose( const hkQsTransform* poseAMod
 				hkQuaternion rotationQuaternion; rotationQuaternion.setShortestRotation( currentDirection, desiredDirection );
 				hkQuaternion currentRot = poseBModelSpace[startBoneB].getRotation();
 				hkQuaternion temp; temp.setMul( rotationQuaternion, currentRot );
-				;
 				poseBModelSpace[startBoneB].setRotation( temp );
 			}
 			for ( int b = 1; b < chainBones.getSize() - 1; b++ )
@@ -7142,8 +7124,6 @@ void hkaSkeletonMapper::hkaSkeletonMapper_mapPose( const hkQsTransform* poseAMod
 				hkInt16 parentIdx = chainBones[b - 1];
 				const hkQsTransform& parentFromChild = originalPoseBLocalSpace[childIdx];
 				const hkQsTransform& modelFromParent = poseBModelSpace[parentIdx];
-				;
-				;
 				poseBModelSpace[childIdx].setMul( modelFromParent, parentFromChild );
 			}
 		}
@@ -7161,13 +7141,11 @@ void hkaSkeletonMapper::hkaSkeletonMapper_mapPose( const hkQsTransform* poseAMod
 				{
 					const hkQsTransform& parentFromChild = originalPoseBLocalSpace[childIdx];
 					const hkQsTransform& modelFromParent = poseBModelSpace[parentIdx];
-					;
 					poseBModelSpace[childIdx].setMul( modelFromParent, parentFromChild );
 				}
 				else
 				{	poseBModelSpace[childIdx] = originalPoseBLocalSpace[childIdx];
 				}
-				;
 			}
 		}
 	}
@@ -8648,7 +8626,7 @@ struct Match
 // pdb: hkaSkeletonMapperUtils::createMapping | hkaSkeletonMapperUtils.obj | fnv360_0822_retail, ustr + bridge(ustr|ustr) + skyrim(ustr), high
 void hkaSkeletonMapperUtils::hkaSkeletonMapperUtils_createMapping( const Params& originalParams, hkaSkeletonMapperData& originalAToB, hkaSkeletonMapperData& originalBToA )
 {
-	hkError::getInstance().sectionBegin(0x54e4323e, "hkaSkeletonMapperUtils::createMapping");;
+	hkError::getInstance().sectionBegin(0x54e4323e, "hkaSkeletonMapperUtils::createMapping");
 	bool switchedOrder = false;
 	Params params( originalParams );
 	if ( originalParams.m_skeletonA->m_numBones > originalParams.m_skeletonB->m_numBones )
@@ -8986,7 +8964,7 @@ void hkaSkeletonMapperUtils::hkaSkeletonMapperUtils_createMapping( const Params&
 	}
 	aToB.m_keepUnmappedLocal = true;
 	bToA.m_keepUnmappedLocal = true;
-	hkError::getInstance().sectionEnd();;
+	hkError::getInstance().sectionEnd();
 }
 
 }  // namespace f3m_00964cd0
@@ -11711,12 +11689,10 @@ struct hkGeometry
 // pdb params: v0, v1, v2, mass, surfaceThickness, result
 hkResult hkpInertiaTensorComputer::FUN_00973c80(const hkVector4& v0, const hkVector4& v1, const hkVector4& v2, hkReal mass, hkReal surfaceThickness, hkpMassProperties& result)
 {
-	;
 	if (mass <= 0.0f)
 	{
 		return HK_FAILURE;
 	}
-	;
 	if (surfaceThickness < 0.0f)
 	{
 		return HK_FAILURE;
