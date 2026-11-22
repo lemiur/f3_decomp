@@ -59,10 +59,6 @@ void FUN_00d0b230_class::SetDstFields(S_00d0b230_Arg* a)
 extern "C" void _ReadWriteBarrier(void);
 extern "C" unsigned __int64 __rdtsc(void);
 #include <windows.h>
-extern DWORD DAT_0126835c;
-extern const char str_010cd380[];
-extern const char str_010cd36c[];
-extern const char str_01076f38[];
 extern void __cdecl hkpWorldOperationUtil_splitSimulationIslands(void*);
 struct FUN_00d0b280_cls
 {
@@ -87,10 +83,6 @@ void FUN_00d0b280_cls::FUN_00d0b280(float* first, float* second)
     HK_TIMER_END_LIST();
 }
 
-extern DWORD DAT_0126835c;
-extern const char str_010cd380[];
-extern const char str_010cd36c[];
-extern const char str_01076f38[];
 
 struct FUN_00d0b350_cls
 {
