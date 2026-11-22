@@ -1442,14 +1442,6 @@ class FUN_00cd2690 : public hkReferencedObjectD269,
     hkArrayD269<void*> m_kListeners;
 };
 
-// Destructor that iterates m_kTrackedObjects in reverse and calls FUN_00cd2260 on each element.
-// @fnv 0x00cd2690
-FUN_00cd2690::~FUN_00cd2690() throw()
-{
-    for (int i = m_kTrackedObjects.GetLogicalSize() - 1; i >= 0; i--)
-        FUN_00cd2260(m_kTrackedObjects[i]);
-}
-
 struct Block8CD2A
 {
     int a, b;

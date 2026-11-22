@@ -113,18 +113,6 @@ struct FUN_00ce2600 : FnvParent
     FnvRefObject* skeleton;
     ~FUN_00ce2600() throw();
 };
-// @fnv 0x00ce2600
-FUN_00ce2600::~FUN_00ce2600() throw()
-{
-    vtbl = &DAT_010cb830;
-    for (int i = 0; i < bodies.size; ++i)
-        ((FnvRefObject*)bodies.data[i])->FUN_00c905b0();
-    for (int j = 0; j < constraints.size; ++j)
-        ((FnvRefObject*)constraints.data[j])->FUN_00c905b0();
-    if (skeleton)
-        skeleton->FUN_00c905b0();
-    skeleton = 0;
-}
 }  // namespace fnv_00ce2600
 
 typedef unsigned int hk_size_tR;

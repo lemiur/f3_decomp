@@ -82,15 +82,6 @@ struct FUN_00ae7510 : public BottomlessStack
 {
     FUN_00ae7510();
 };
-// Initializes the stack: clears the count, top pointer, bottomless flag and the extra field.
-// @fnv 0x00ae7510
-FUN_00ae7510::FUN_00ae7510()
-{
-    iCount = 0;
-    pTop = 0;
-    m_bBottomless = false;
-    m_uiStackLimit = 0;
-}
 
 struct MemoryManager
 {

@@ -236,18 +236,6 @@ struct FUN_00d64ae0 : FUN_00ddcc60, S_D
     S_Arr m3c;
     virtual ~FUN_00d64ae0() throw();
 };
-// Notifies each element in m24 via ClearValue, then clears the m3c and m30 arrays.
-// @fnv 0x00d64ae0
-FUN_00d64ae0::~FUN_00d64ae0() throw()
-{
-    if (m24)
-    {
-        for (int i = 0; i < m24->m70; i++)
-            m24->m6c[i]->ClearValue((S_D*)this);
-    }
-    m3c.clear();
-    m30.clear();
-}
 
 class RegistryOwner
 {

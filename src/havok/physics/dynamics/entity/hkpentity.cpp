@@ -3051,21 +3051,6 @@ class FUN_00c9cf60 : public FUN_00c9d3b0::hkpWorldObject
     int unk218, unk21C;
 };
 
-// Destructor: if m_pEntityUserData is set, passes it to FUN_00c9c140 and deletes it; calls DeleteCallbacks(this); deletes m_pExtendedListeners if set.
-// @fnv 0x00c9cf60
-FUN_00c9cf60::~FUN_00c9cf60() throw()
-{
-    LimitUtilC9CF* pkUtil = m_pEntityUserData;
-    if (pkUtil)
-    {
-        ((OwnerC9CF*)this)->FUN_00c9c140(pkUtil);
-        delete pkUtil;
-        m_pEntityUserData = 0;
-    }
-    DeleteCallbacks(this);
-    if (m_pExtendedListeners)
-        delete m_pExtendedListeners;
-}
 }  // namespace fnv_00c9cf60
 
 namespace fnv_00c9d3b0 {

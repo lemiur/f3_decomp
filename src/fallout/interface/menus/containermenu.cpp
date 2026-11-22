@@ -1,4 +1,4 @@
-// fallout/interface/menus/containermenu.cpp: ContainerMenu, MenuStateTarget, MenuLogic, ContainerValue and more (2 functions)
+// fallout/interface/menus/containermenu.cpp: ContainerMenu, MenuStateTarget, MenuLogic, ContainerValue and more (1 function)
 #include "f3_common.h"
 #include "containermenu_decls.h"
 #include "containermenu_packet.h"
@@ -36,11 +36,6 @@ struct FUN_0075b270 : Menu_007a8b10
     Date m_date;
     virtual ~FUN_0075b270();
 };
-// @fnv 0x0075b270
-FUN_0075b270::~FUN_0075b270()
-{
-    DAT_011d93f8 = 0;
-}
 
 class TESForm
 {

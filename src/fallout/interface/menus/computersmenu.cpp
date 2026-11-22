@@ -41,24 +41,12 @@ struct FUN_00759760_shell : GlobalObject_0048f200
 {
     FUN_00759760_shell();
 };
-// @fnv 0x00759760
-FUN_00759760_shell::FUN_00759760_shell()
-{}
 
 struct S_7597c0
 {
     int __thiscall FUN_007597c0(int);
 };
 extern S_7597c0* DAT_011d9338;
-// Calls FUN_007597c0(1) on DAT_011d9338 if non-null, then sets DAT_011d9338 to null.
-// @fnv 0x00759780
-void FUN_00759780()
-{
-    S_7597c0* b = DAT_011d9338;
-    S_7597c0* a = b;
-    a ? a->FUN_007597c0(1) : 0;
-    DAT_011d9338 = 0;
-}
 
 void __cdecl operator delete(void*);
 
@@ -75,12 +63,6 @@ struct FUN_007597f0 : GlobalObject_0048f200
 {
     ~FUN_007597f0();
 };
-// Destructor that calls FUN_00759850 on this object before the base GlobalObject_0048f200 destructor runs.
-// @fnv 0x007597f0
-FUN_007597f0::~FUN_007597f0()
-{
-    ((FUN_00759850_owner*)this)->FUN_00759850();
-}
 }  // namespace fnv_007597f0
 
 struct Flt
@@ -190,19 +172,6 @@ struct FUN_00757a50 : MenuBase
     SoundH sounds[3];
     virtual ~FUN_00757a50();
 };
-// @fnv 0x00757a50
-FUN_00757a50::~FUN_00757a50()
-{
-    DAT_011d9334 = 0;
-    FUN_00759780();
-    list98.RemoveAll();
-    for (int i = 0; i < 3; i++)
-    {
-        sounds[i].Stop();
-        sounds[i].FUN_00ad8d10();
-    }
-    SysColorMgr::GetSingleton()->ApplyToChild(3, &DAT_011d934c);
-}
 
 unsigned int __cdecl gm_GetTickCount();
 

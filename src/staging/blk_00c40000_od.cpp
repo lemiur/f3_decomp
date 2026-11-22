@@ -155,10 +155,6 @@ struct FUN_00a744a0 {
     FUN_00a744a0();
 };
 
-FUN_00a744a0::FUN_00a744a0()
-{
-}
-
 extern int DAT_010c2e7c;
 
 struct StrArr;
@@ -627,10 +623,6 @@ struct FUN_00c5da70 : public A51BF0Base {
     FUN_00c5da70();
 };
 
-FUN_00c5da70::FUN_00c5da70()
-{
-}
-
 unsigned char __cdecl FUN_00c50f90(int, int);
 
 }  // namespace fnv_00c513f0
@@ -664,10 +656,6 @@ struct FUN_00c5da70 : public NiNode, public A51BF0Base {
 
     FUN_00c5da70();
 };
-
-FUN_00c5da70::FUN_00c5da70()
-{
-}
 
 }  // namespace fnv_00c5e4d0
 
@@ -1541,10 +1529,6 @@ struct FUN_00c5ed60 : FUN_00a7b300 {
     FUN_007530a0 m_00c;
     virtual ~FUN_00c5ed60();
 };
-
-// Destructs a FUN_00c5ed60 object, destroying its embedded FUN_007530a0 member and base FUN_00a7b300.
-// @fnv 0x00c5ed60
-FUN_00c5ed60::~FUN_00c5ed60() {}
 
 struct BSShaderAccumulator {
     int unk00;

@@ -78,8 +78,6 @@ struct hkReferencedObject : hkBaseObject
     unsigned short unk06;
     hkReferencedObject();
 };
-hkReferencedObject::hkReferencedObject() : unk06(1)
-{}
 
 extern "C" void* __cdecl FUN_00c85750(void);
 extern "C" void __cdecl ResizeAudioStream(void* heap, void* arr, int elemSize);

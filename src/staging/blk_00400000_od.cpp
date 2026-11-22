@@ -194,23 +194,6 @@ struct FUN_00405250 : public FUN_00405310
     unsigned char ownsData;
     virtual ~FUN_00405250();
 };
-// @fnv 0x00405250
-FUN_00405250::~FUN_00405250()
-{
-    if (ownsData)
-    {
-        for (unsigned int uiIndex = 0; uiIndex < count; ++uiIndex)
-        {
-            C405250Node* node = buckets[uiIndex];
-            while (node != 0)
-            {
-                C405250Node* current = node;
-                node = node->next;
-                FUN_00aa10f0(current->payload);
-            }
-        }
-    }
-}
 
 class TESForm
 {
@@ -254,12 +237,6 @@ class FUN_00404c00 : public SettingCollection<Setting>
     SettingPointerMap settings;
     virtual ~FUN_00404c00();
 };
-// Destructor that calls RemoveAll on the settings map.
-// @fnv 0x00404c00
-FUN_00404c00::~FUN_00404c00()
-{
-    settings.RemoveAll();
-}
 
 namespace fnv_00405310 {
 void __fastcall DeleteAllEntries(void* pkMap);

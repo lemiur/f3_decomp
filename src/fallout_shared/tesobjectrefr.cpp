@@ -1,4 +1,4 @@
-// fallout_shared/tesobjectrefr.cpp: XActor, Owner, Thing, Ref and more (18 functions)
+// fallout_shared/tesobjectrefr.cpp: XActor, Owner, Thing, Ref and more (15 functions)
 #include "tesobjectrefr_decls.h"
 
 // @fnv 0x0057acc0
@@ -9776,14 +9776,6 @@ struct FUN_0056e6f0 : public FUN_0056e6f0_base
     FUN_0056e6f0();
 };
 
-// Initializes m_10 to 0 and increments the global counter DAT_012680f8.
-// @fnv 0x0056e6f0
-FUN_0056e6f0::FUN_0056e6f0()
-{
-    m_10 = 0;
-    DAT_012680f8 = DAT_012680f8 + 1;
-}
-
 void __cdecl FUN_00aa1460(void* apMemory, unsigned int auiSize);
 
 struct ActorController
@@ -15903,12 +15895,6 @@ struct FUN_0056e0b0 : public FUN_0056e180
     TransformMember transform;
     FUN_0056e0b0();
 };
-// @fnv 0x0056e0b0
-FUN_0056e0b0::FUN_0056e0b0() : FUN_0056e180()
-{
-    transform.FUN_0056e270();
-    transform.FUN_0056e120();
-}
 
 extern int DAT_01268208;
 
@@ -15927,14 +15913,6 @@ struct PhantomOwner
         void FUN_0056e350();
     };
 };
-
-// Increments DAT_01268208 and calls FUN_0056e350 during construction of the PhantomOwner nested object.
-// @fnv 0x0056e370
-PhantomOwner::FUN_0056e370::FUN_0056e370()
-{
-    DAT_01268208 = DAT_01268208 + 1;
-    FUN_0056e350();
-}
 
 namespace fnv_0056fcb0 {
 // FUN_0056fcb0 v7 - hoisted body-scope decls + nested-guard tail

@@ -169,16 +169,6 @@ class FUN_00d49cb0 : public FUN_00d56e00
     ~FUN_00d49cb0() throw();
 };
 
-// @fnv 0x00d49cb0
-FUN_00d49cb0::~FUN_00d49cb0() throw()
-{
-    for (int i = 0; i < m_kMeshSubparts.m_iElementCount; i++)
-        m_kMeshSubparts.m_data[i]->removeReference();
-    m_kTrianglesSubparts.clear();
-    for (int i = 0; i < m_kShapeSubparts.m_iElementCount; i++)
-        m_kShapeSubparts.m_data[i]->removeReference();
-}
-
 struct hkFinishLoadedObjectFlagD4A1
 {
     int m_bFinishing;
@@ -643,9 +633,6 @@ class FUN_00d4af60 : public hkReferencedObjectD4AF
     virtual ~FUN_00d4af60() throw();
 };
 
-// @fnv 0x00d4af60
-FUN_00d4af60::~FUN_00d4af60() throw()
-{}
 }  // namespace fnv_00d4af60
 
 class hkMemoryAllocatorD4AC

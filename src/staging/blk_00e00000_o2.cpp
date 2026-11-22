@@ -708,27 +708,6 @@ class FUN_00e00fb0
     FUN_00e00fb0(int flag);
 };
 
-// Constructor that installs successive vtable and member pointers and, when flag is non-zero, sets m_0c and m_15.
-// @fnv 0x00e00fb0
-FUN_00e00fb0::FUN_00e00fb0(int flag)
-{
-    *(void* volatile*)&m_vptr = &DAT_010305a8;
-    if (flag != 0)
-        *(volatile unsigned int*)&m_0c = 0;
-    *(void* volatile*)&m_10 = &DAT_010c6fb0;
-    *(void* volatile*)&m_vptr = &DAT_010cc364;
-    *(void* volatile*)&m_10 = &DAT_010cc344;
-    if (flag != 0)
-    {
-        *(volatile unsigned int*)&m_0c = 7;
-        *(volatile unsigned char*)&m_15 = 3;
-    }
-    *(void* volatile*)&m_vptr = &DAT_010e8e94;
-    *(void* volatile*)&m_10 = &DAT_010e8e74;
-    if (flag != 0)
-        *(volatile unsigned int*)&m_0c = 7;
-}
-
 extern int DAT_010c6fb0;
 extern int DAT_010d10c4;
 
@@ -4292,9 +4271,6 @@ struct FUN_00e004f0 : S_00e003d0_Base, S_00e003d0_Arrs
     S_00e003d0_Arr arrd0;
     FUN_00e004f0(int flag);
 };
-// @fnv 0x00e004f0
-FUN_00e004f0::FUN_00e004f0(int flag) : S_00e003d0_Base(flag)
-{}
 
 // sub ecx,8; jmp target  ==  MSVC adjustor thunk (second base of a multiple-inheritance override)
 struct SpawnedPrimaryBase

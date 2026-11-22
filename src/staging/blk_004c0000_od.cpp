@@ -417,9 +417,6 @@ struct FUN_004de530 : public INISettingCollection
 {
     FUN_004de530();
 };
-// @fnv 0x004de530
-FUN_004de530::FUN_004de530()
-{}
 
 void* __cdecl operator new(unsigned int uiSize);
 void __cdecl operator delete(void* pvMem);
@@ -481,12 +478,6 @@ class FUN_004d4eb0 : public FUN_004d4f10
     virtual ~FUN_004d4eb0();
 };
 
-// @fnv 0x004d4eb0
-FUN_004d4eb0::~FUN_004d4eb0()
-{
-    FUN_00438af0();
-}
-
 namespace fnv_004d9070 {
 void __fastcall DeleteAllEntries(void* pkMap);
 
@@ -502,12 +493,6 @@ class FUN_004d9070 : public FUN_004d90d0
     virtual ~FUN_004d9070();
 };
 
-// Destructor that calls DeleteAllEntries on the object to free all entries before base class cleanup.
-// @fnv 0x004d9070
-FUN_004d9070::~FUN_004d9070()
-{
-    DeleteAllEntries(this);
-}
 }  // namespace fnv_004d9070
 
 extern int DAT_011c6fbc;

@@ -42,23 +42,6 @@ struct FUN_00c6d190 : bhkRefObject
 {
     FUN_00c6d190();
 };
-// @fnv 0x00c6d190
-FUN_00c6d190::FUN_00c6d190()
-{
-    Initialize();
-    vtbl = &DAT_01030394;
-    fc = 0;
-    f10 = 0;
-    ++DAT_0126810c;
-    vtbl = &DAT_0103078c;
-    ++DAT_01268238;
-    vtbl = &DAT_010306b4;
-    ++DAT_01268208;
-    f14 = 0;
-    vtbl = &vftable_FUN_0056e2d0;
-    ++DAT_0126822c;
-    f14 = 0;
-}
 
 struct ProjectileListener
 {
@@ -477,13 +460,6 @@ class FUN_00c85790 : public FUN_00c85790_base
     void unk08();
 };
 
-// @fnv 0x00c85790
-FUN_00c85790::~FUN_00c85790()
-{
-    this->unk08();
-    DAT_0126810c--;
-}
-
 extern __declspec(thread) unsigned int g_havokThreadMode;
 
 struct CollisionResult
@@ -753,13 +729,6 @@ struct FUN_00c9eb30 : FUN_00c9f3b0
 {
     virtual ~FUN_00c9eb30();
 };
-
-// @fnv 0x00c9eb30
-FUN_00c9eb30::~FUN_00c9eb30()
-{
-    FUN_00c876a0();
-    --DAT_01268208;
-}
 
 namespace fnv_00c9eec0 {
 struct FUN_00c9eb30 : FUN_00c876a0_holder

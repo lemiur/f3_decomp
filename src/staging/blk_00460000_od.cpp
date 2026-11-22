@@ -523,20 +523,6 @@ struct FUN_004704e0
     unsigned short f;
     FUN_004704e0(unsigned short x, unsigned short y);
 };
-// Sets the vtable, stores x and y, zeroes c and d, and allocates a buffer of x elements (or null when x is 0).
-// @fnv 0x004704e0
-FUN_004704e0::FUN_004704e0(unsigned short ausCount, unsigned short y)
-{
-    vtbl = &DAT_01019a14;
-    a = ausCount;
-    f = y;
-    c = 0;
-    d = 0;
-    if (a > 0)
-        p = NiTMallocInterface_0096afc0::Allocate(a);
-    else
-        p = 0;
-}
 
 namespace fnv_00470550 {
 struct NiTMallocInterface_0096afc0
@@ -562,19 +548,6 @@ struct FUN_00474880
     unsigned short d;
     FUN_00474880(unsigned short x, unsigned short y);
 };
-// @fnv 0x00474880
-FUN_00474880::FUN_00474880(unsigned short x, unsigned short y)
-{
-    vtbl = &$SG6264;
-    a = x;
-    d = y;
-    b = 0;
-    c = 0;
-    if (a > 0)
-        p = NiTMallocInterface_0096afc0::Allocate(a);
-    else
-        p = 0;
-}
 }  // namespace fnv_00474880
 
 struct BaseFormComponent
@@ -600,12 +573,6 @@ class FUN_004745d0 : public Base_b9207
     virtual ~FUN_004745d0();
     void DoCleanup();
 };
-
-// @fnv 0x004745d0
-FUN_004745d0::~FUN_004745d0()
-{
-    DoCleanup();
-}
 
 struct InstanceData36
 {
@@ -875,8 +842,3 @@ struct FUN_004746d0 : FUN_00474730
     virtual ~FUN_004746d0();
     void __thiscall FUN_00438af0();
 };
-// @fnv 0x004746d0
-FUN_004746d0::~FUN_004746d0()
-{
-    FUN_00438af0();
-}

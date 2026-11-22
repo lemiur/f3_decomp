@@ -460,11 +460,6 @@ class FUN_00d4bbb0 : public hkRefObjD4BB
     virtual ~FUN_00d4bbb0();
 };
 
-// Default constructor for FUN_00d4bbb0 that leaves the inherited hkRefObjD4BB and the six hkArrayD4BB<int> members at their default-initialized state.
-// @fnv 0x00d4bbb0
-FUN_00d4bbb0::FUN_00d4bbb0()
-{}
-
 // sub ecx,0x10; jmp target  ==  MSVC adjustor thunk for a virtual inherited through a second base.
 struct PrimaryBase
 {

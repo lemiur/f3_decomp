@@ -201,12 +201,6 @@ class FUN_00d26760 : public hkBase0D267, public hkBase1D267
     virtual ~FUN_00d26760() throw();
 };
 
-// @fnv 0x00d26760
-FUN_00d26760::~FUN_00d26760() throw()
-{
-    m_pkRef->FUN_00c905b0();
-}
-
 void* FUN_00c85750(void);
 
 extern "C" __m128 _mm_mul_ps(__m128 a, __m128 b);

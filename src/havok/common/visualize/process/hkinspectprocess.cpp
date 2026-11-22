@@ -18,20 +18,6 @@ struct hkInspectProcessStandIn
     void __thiscall RemovePair(void* object);
 };
 
-// If addObject is set, calls WriteObjectHeader with object, type and flags; otherwise calls RemovePair with object.
-// @fnv 0x00ddb5d0
-void __cdecl FUN_00ddb5d0(void* object, int type, char addObject, int flags, hkInspectProcess* inspectProcess)
-{
-    if (addObject)
-    {
-        reinterpret_cast<hkInspectProcessStandIn*>(inspectProcess)->WriteObjectHeader(object, type, flags);
-    }
-    else
-    {
-        reinterpret_cast<hkInspectProcessStandIn*>(inspectProcess)->RemovePair(object);
-    }
-}
-
 struct hkInspectProcess;
 
 struct hkInspectProcess;
@@ -255,18 +241,6 @@ class FUN_00ddb670 : public hkReferencedObject, public hkProcessDDB6
     virtual ~FUN_00ddb670() throw();
 };
 
-// @fnv 0x00ddb670
-FUN_00ddb670::~FUN_00ddb670() throw()
-{
-    hkProcessContextDDB6* pkContext = m_iValueAtOffset0C;
-    if (pkContext)
-    {
-        for (int i = 0; i < pkContext->m_numObjects; i++)
-            RemovePair(pkContext->m_kTrackedObjects[i].m_object);
-        m_iValueAtOffset0C->FUN_00cd1140(FUN_00ddb5d0);
-        m_iValueAtOffset0C->removeReference();
-    }
-}
 }  // namespace fnv_00ddb670
 
 struct FnvCpu_FUN_00ddb710_CpuBlock;
@@ -528,23 +502,6 @@ class FUN_00ddb550_cls
     int RemovePair(int iKey);
 };
 
-// Writes a header and key to m_pStreamWriter, removes the matching entry from m_pairs, and returns 9.
-// @fnv 0x00ddb550
-int FUN_00ddb550_cls::RemovePair(int iKey)
-{
-    m_pStreamWriter->FUN_00d60960(9);
-    m_pStreamWriter->FUN_00d605d0(0x22);
-    m_pStreamWriter->FUN_00d609a0(iKey, 0);
-    for (int i = 0; i < m_pairs.m_iElementCount; i++)
-    {
-        if (m_pairs.m_data[i].m_key == iKey)
-        {
-            m_pairs.removeAt(i);
-            break;
-        }
-    }
-    return 9;
-}
 }  // namespace fnv_00ddb550
 
 struct hkMemoryAllocatorQ

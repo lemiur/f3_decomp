@@ -252,18 +252,6 @@ BSStr::BSStr()
 BSStr::~BSStr()
 {}
 
-StrMem::StrMem()
-{}
-
-StrMem::~StrMem()
-{}
-
-SL::SL()
-{}
-
-SL::~SL()
-{}
-
 }  // namespace fnv_0083da50
 
 struct Str6a70
@@ -623,10 +611,6 @@ struct FUN_0083c750 : BSS
     BSS m_uiX;
     ~FUN_0083c750();
 };
-// Destructor with an empty body; the m_uiX member and the BSS base are destroyed implicitly.
-// @fnv 0x0083c750
-FUN_0083c750::~FUN_0083c750()
-{}
 
 namespace fnv_0082f1b0 {
 #include <windows.h>

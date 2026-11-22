@@ -340,14 +340,6 @@ struct FUN_00d690d0 : FUN_00ddcc60, S_D28, S_D2c
     S_Arr m30;
     virtual ~FUN_00d690d0() throw();
 };
-// Destroys the object: calls FUN_00d69010 for each element of m30 in reverse order, then clears and deallocates m30 using the heap from FUN_00c85750.
-// @fnv 0x00d690d0
-FUN_00d690d0::~FUN_00d690d0() throw()
-{
-    for (int i = m30.m_iElementCount - 1; i >= 0; i--)
-        FUN_00d69010(i);
-    m30._clearAndDeallocate(((S_Router*)FUN_00c85750())->heap());
-}
 
 struct SubObj
 {
@@ -562,10 +554,6 @@ struct FUN_00d68b90 : T68Base, T68D28, T68D2c
     virtual void d28v0();
     virtual void d2cv0();
 };
-
-// @fnv 0x00d68b90
-FUN_00d68b90::FUN_00d68b90(int arg) : T68Base(arg), m3c(DAT_01269018), m40(DAT_01269014)
-{}
 
 struct Mem_d65f
 {

@@ -4007,13 +4007,6 @@ class FUN_00dffa90 : public DFFA90ReferencedObject,
     virtual ~FUN_00dffa90();
 };
 
-// Empty constructor that initializes the referenced object and all five listener base classes with the given flag.
-// @fnv 0x00dffa90
-FUN_00dffa90::FUN_00dffa90(DFFA90FinishFlag flag)
-    : DFFA90ReferencedObject(flag), DFFA90ListenerA(flag), DFFA90ListenerB(flag), DFFA90ListenerC(flag),
-      DFFA90ListenerD(flag), DFFA90ListenerE(flag)
-{}
-
 namespace fnv_00dffb80 {
 // Forwarder: calls a handler object with one int argument, but only if the
 // handler pointer is non-null.

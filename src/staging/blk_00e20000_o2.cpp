@@ -1243,16 +1243,6 @@ struct FUN_00e3a270 : S_00e3a270_RefObj
     virtual void FUN_vfn0();
 };
 
-// @fnv 0x00e3a270
-FUN_00e3a270::FUN_00e3a270()
-{
-    m_data = 0;
-    m_iCapacityState = 0x80000000;
-    unk0c = 0;
-    unk08 = 0;
-    m_iElementCount = 0;
-}
-
 struct S_00e3ae70_Alloc
 {
     virtual void v00();

@@ -1,4 +1,4 @@
-// fallout/ai/middlehighprocess.cpp: MiddleHighProcess, FurnitureProcess, MiddleHighProcessStandIn, ActorPackage_GetTarget_Helper and more (3 functions)
+// fallout/ai/middlehighprocess.cpp: MiddleHighProcess, FurnitureProcess, MiddleHighProcessStandIn, ActorPackage_GetTarget_Helper and more (1 function)
 #include "f3_common.h"
 #include "middlehighprocess_decls.h"
 
@@ -2143,10 +2143,6 @@ struct FUN_00914ae0
     GO _0c;
     ~FUN_00914ae0();
 };
-// Destructor for FUN_00914ae0; destroys its two GO members and returns.
-// @fnv 0x00914ae0
-FUN_00914ae0::~FUN_00914ae0()
-{}
 
 struct Thunk0091f100
 {
@@ -5732,77 +5728,6 @@ struct FUN_00914610 : Base96
     void FUN_00914b40();
     void ClearQueuedItems();
 };
-// @fnv 0x00914610
-FUN_00914610::~FUN_00914610()
-{
-
-    if (raw)
-    {
-        delete raw;
-        raw = 0;
-    }
-    if (effects)
-    {
-        List96<Active96>* iter = effects;
-        while (iter && iter->FUN_006815c0())
-        {
-            Active96* effect = iter->FUN_006815c0();
-            delete effect;
-            iter = iter->FUN_00726070();
-        }
-        effects->FUN_00470470();
-        delete effects;
-    }
-    delete weapon;
-    delete ammo;
-    unk130 = 0;
-    weapon = 0;
-    ammo = 0;
-    controller.FUN_0066b0d0(0);
-    if (FUN_008d83e0())
-    {
-        if (((Global96*)DAT_011de45c)->FUN_0047c850())
-            ((Global96*)DAT_011de45c)->FUN_0085a2e0(FUN_008d83e0());
-        else
-            FUN_0091ee70();
-    }
-    if (!dead.FUN_008256d0())
-        dead.FUN_00470470();
-    FUN_0091fe80(0);
-    shader.FUN_0066b0d0(0);
-    refs.FUN_00470470();
-    if (arrows)
-    {
-        List96<Arrow96>* pArrowIter = arrows;
-        while (pArrowIter && !pArrowIter->FUN_008256d0())
-        {
-            Arrow96* arrow = pArrowIter->FUN_006815c0();
-            if (arrow)
-                arrow->FUN_008d0240();
-            pArrowIter = pArrowIter->FUN_00726070();
-        }
-        arrows->FUN_00470470();
-        delete arrows;
-    }
-    arrows = 0;
-    preload.FUN_006f74f0(0);
-    clone.FUN_0092c8b0(0);
-    unk140 = 0;
-    FUN_00914b40();
-    while (!hidden.FUN_008256d0())
-    {
-        delete hidden.FUN_006815c0();
-        hidden.FUN_0063f7b0();
-    }
-    if (lip)
-        delete lip;
-    if (raw240)
-        delete raw240;
-    unk248 = 0;
-    unk24c = 0;
-    unk250 = 0;
-    ClearQueuedItems();
-}
 
 struct QueueTask
 {

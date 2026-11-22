@@ -1,4 +1,4 @@
-// fallout_shared/tesimagespacemodifier.cpp: TESImageSpaceModifier, RgbaColor, ImageSpaceModifierEffectData, NiColorInterpolator and more (11 functions)
+// fallout_shared/tesimagespacemodifier.cpp: TESImageSpaceModifier, RgbaColor, ImageSpaceModifierEffectData, NiColorInterpolator and more (10 functions)
 #include "f3_common.h"
 #include "tesimagespacemodifier_decls.h"
 
@@ -435,12 +435,6 @@ struct FUN_00a3ca30
     ~FUN_00a3ca30();
 };
 
-FUN_0045cec0::~FUN_0045cec0()
-{}
-
-FUN_00a3ca30::~FUN_00a3ca30()
-{}
-
 namespace Real {
 struct InterpolatorBase
 {
@@ -463,10 +457,6 @@ struct FUN_0052bb70 : InterpolatorBase
     ColorDataReference colorData;
     ~FUN_0052bb70();
 };
-// Destructor for an interpolator that owns a ColorDataReference; the body is empty.
-// @fnv 0x0052bb70
-FUN_0052bb70::~FUN_0052bb70()
-{}
 }
 
 struct SpawnedObject

@@ -679,48 +679,7 @@ struct FUN_00d05490 : D05490Base
     FUN_00d05490(SrcCfg* a1) throw();
 };
 
-// Initializes the TLS value, allocates a PoolTable, sets up its entries and slot callbacks, then calls FinishInit.
-// @fnv 0x00d05490
-FUN_00d05490::FUN_00d05490(SrcCfg* pConfig) throw() : D05490Base(0)
-{
-    TlsSetValue(g_dwTlsIndex, 0);
-    m_pTable = new PoolTable;
-    m_b74 = 0;
-    m_pTable->m_b20 = 0;
-    m_pTable->m_i1c = 0;
-    m_sub.FUN_00d05b50(pConfig);
-    m_uiItemCount = pConfig->m_i18;
-    m_i70 = 0;
-    for (int i = 0; i < 16; ++i)
-    {
-        (*m_pTable)[i].Init80(0x80);
-    }
-    m_pTable->m_i18 = 0;
-    for (int k = 0; k < m_uiItemCount; ++k)
-    {
-        m_slots[k].m_i04 = 0;
-        m_slots[k].m_i00 = 0;
-        m_slots[k].m_p08 = (void*)FUN_00d043d0;
-        m_slots[k].m_p0c = (void*)FUN_00d043e0;
-        m_pTable->m_counts[k] = 0;
-        m_pTable->m_i18 |= 1 << k;
-    }
-    m_pFn1 = (void*)FUN_00d04550;
-    m_pFn2 = (void*)FUN_00d04570;
-    m_i8c = 0;
-    FinishInit();
-}
-
 typedef int(__cdecl* DispatchHandler)(void*, void*, void*);
-
-// Reads a byte index from item, scales it by 16, and calls the handler at that offset in context's dispatch table.
-// @fnv 0x00d04550
-int __cdecl FUN_00d04550(void* context, void* argument, void* item)
-{
-    unsigned int index = ((unsigned char*)item)[1];
-    index *= 16;
-    return (*(DispatchHandler*)((char*)context + 0xf8 + index))(context, argument, item);
-}
 
 template <typename T> inline T* hkAllocateChunk(int n)
 {

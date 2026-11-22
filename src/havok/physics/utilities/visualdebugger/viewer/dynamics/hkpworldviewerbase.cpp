@@ -51,18 +51,6 @@ struct FUN_00ddcc60 : DDCC60ReferencedObject, DDCC60Action, DDCC60Listener
     virtual ~FUN_00ddcc60();
 };
 
-// If the world pointer is set, removes this listener and reference from it, then clears the pointer.
-// @fnv 0x00ddcc60
-FUN_00ddcc60::~FUN_00ddcc60()
-{
-    if (m_pOwningWorld)
-    {
-        m_pOwningWorld->removeListener(this);
-        m_pOwningWorld->removeReference();
-        m_pOwningWorld = 0;
-    }
-}
-
 int __cdecl FUN_00cb0fa0(const char* pcA, const char* pcB);
 
 class __declspec(novtable) BDDCCB0ReferencedObject

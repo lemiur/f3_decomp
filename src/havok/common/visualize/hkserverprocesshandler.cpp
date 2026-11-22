@@ -442,17 +442,6 @@ class FUN_00d610e0 : public hkReferencedObjectD610, public hkInterfaceAD610, pub
     hkArrayD610<int> m_44;
 };
 
-// Destructor: deletes every element of m_38, then deletes m_14, m_18 and m_1c; member destructors run afterwards.
-// @fnv 0x00d610e0
-FUN_00d610e0::~FUN_00d610e0() throw()
-{
-    for (int i = 0; i < m_38.m_iElementCount; i++)
-        delete m_38.m_data[i];
-    delete m_14;
-    delete m_18;
-    delete m_1c;
-}
-
 struct hkBoolD611
 {
     char m_cBooleanValue;

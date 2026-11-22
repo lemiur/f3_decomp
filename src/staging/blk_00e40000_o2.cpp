@@ -1,4 +1,4 @@
-// staging/blk_00e40000_o2.cpp: KnotVector, ThunkDerived, FourComponentVector, Quat4 and more (50 functions)
+// staging/blk_00e40000_o2.cpp: KnotVector, ThunkDerived, FourComponentVector, Quat4 and more (49 functions)
 #include "f3_common.h"
 #include "fnv_asm_helpers.h"
 // src/staging/blk_00e40000_o2.cpp - STAGING unit created 2026-10-16 by stage_units.py for functions with no attributed unit
@@ -514,10 +514,6 @@ public:
 
     FUN_00e53160(float fX, float fY, float fZ, float fW);
 };
-
-// @fnv 0x00e53160
-FUN_00e53160::FUN_00e53160(float fX, float fY, float fZ, float fW) : m_fVectorY(fX), m_fVectorZ(fY), m_fScalarPart(fZ), m_fVectorX(fW) {
-}
 
 struct FUN_00e53180_cls {
     float m_00;
@@ -2168,7 +2164,6 @@ struct FUN_00e53160 {
     float x, y, z, w;
     __declspec(noinline) FUN_00e53160(float a, float b, float c, float d);
 };
-__declspec(noinline) FUN_00e53160::FUN_00e53160(float a, float b, float c, float d) : x(a), y(b), z(c), w(d) {}
 }
 
 struct KnotVector {

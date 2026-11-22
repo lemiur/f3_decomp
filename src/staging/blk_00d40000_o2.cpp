@@ -2814,10 +2814,6 @@ class FUN_00d48320
     FUN_00d48320(hkFinishLoadedObjectFlagD483 flag);
 };
 
-// @fnv 0x00d48320
-FUN_00d48320::FUN_00d48320(hkFinishLoadedObjectFlagD483 flag)
-{}
-
 void __cdecl FUN_00c8a230(int* param_1, int param_2);
 
 // @fnv 0x00d50000
@@ -4130,15 +4126,6 @@ template <typename ENUM, typename STORAGE> struct hkEnumF
     }
 };
 
-template <unsigned int ELEMENTSIZE, unsigned int ALIGNMENT_SIZE>
-__forceinline void memCpyOneAligned(void* dst, const void* src)
-{
-    for (unsigned int i = 0; i < ELEMENTSIZE / 8; i++)
-    {
-        static_cast<unsigned __int64*>(dst)[i] = static_cast<const unsigned __int64*>(src)[i];
-    }
-}
-
 struct hkMemoryAllocatorF
 {
     virtual ~hkMemoryAllocatorF();
@@ -4364,44 +4351,6 @@ class FUN_00d56f10 : public hkpShapeCollectionF
     FUN_00d56f10(FinishingFlag flag);
     virtual void __vecDelDtor(unsigned int);
 };
-
-// Initializes an extended-mesh shape collection, defaulting invalid material index types to INT8 and inlining a single triangle subpart.
-// @fnv 0x00d56f10
-FUN_00d56f10::FUN_00d56f10(FinishingFlag flag)
-    : hkpShapeCollectionF(flag), m_kTrianglesSubpart(flag), m_kTrianglesSubparts(flag), m_kShapesSubparts(flag)
-{
-    if (flag.m_bFinishing)
-    {
-        m_eCollectionType = COLLECTION_EXTENDED_MESH;
-
-        for (int i = 0; i < m_kTrianglesSubparts.GetLogicalSize(); i++)
-        {
-            if (m_kTrianglesSubparts[i].m_iMaterialIndexType == MATERIAL_INDICES_INVALID)
-            {
-                m_kTrianglesSubparts[i].m_iMaterialIndexType = MATERIAL_INDICES_INT8;
-            }
-        }
-        for (int i = 0; i < m_kShapesSubparts.GetLogicalSize(); i++)
-        {
-            if (m_kShapesSubparts[i].m_iMaterialIndexType == MATERIAL_INDICES_INVALID)
-            {
-                m_kShapesSubparts[i].m_iMaterialIndexType = MATERIAL_INDICES_INT8;
-            }
-        }
-
-        if (m_kTrianglesSubparts.GetLogicalSize() == 1)
-        {
-            memCpyOneAligned<sizeof(TrianglesSubpart), 16>(&m_kTrianglesSubpart, &m_kTrianglesSubparts[0]);
-            m_kTrianglesSubparts.ClearAndRelease();
-            m_kTrianglesSubparts.setDataUserFree(&m_kTrianglesSubpart, 1, 1);
-        }
-        if (m_iFinishingFlag == -1)
-        {
-            m_iFinishingFlag = 0x80000000;
-        }
-    }
-    m_type = 0xe;
-}
 
 struct InputBuffer
 {

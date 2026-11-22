@@ -206,14 +206,6 @@ class FUN_00d46c30 : public hkReferencedObjectD46C
     virtual ~FUN_00d46c30() throw();
 };
 
-// Destructor that deletes m_stream when m_ownership equals 1.
-// @fnv 0x00d46c30
-FUN_00d46c30::~FUN_00d46c30() throw()
-{
-    if (m_ownership == 1)
-        delete m_stream;
-}
-
 struct State
 {
     bool status;

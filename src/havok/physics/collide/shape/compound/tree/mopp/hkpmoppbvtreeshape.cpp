@@ -184,9 +184,6 @@ class FUN_00d543e0 : public hkMoppBvTreeShapeBaseD543
     hkpSingleShapeContainerD543 m_pChildAtom;
 };
 
-// @fnv 0x00d543e0
-FUN_00d543e0::~FUN_00d543e0() throw()
-{}
 }  // namespace fnv_00d543e0
 
 class hkMemoryAllocatorD548

@@ -905,14 +905,6 @@ class FUN_00cc06f0 : public hkRefObjCC06
     virtual ~FUN_00cc06f0() throw();
 };
 
-// Stores the buffer and its size, reserves one extra char, and appends a terminating null byte.
-// @fnv 0x00cc06f0
-FUN_00cc06f0::FUN_00cc06f0(hkArrayCC06<char>* buffer, int flags) throw()
-    : m_buffer(buffer), m_kRayStart(buffer->m_iElementCount), m_flags(flags)
-{
-    buffer->reserve(buffer->m_iElementCount + 1);
-    m_buffer->m_data[m_buffer->m_iElementCount] = 0;
-}
 }  // namespace fnv_00cc06f0
 
 class hkMemoryAllocatorCC07

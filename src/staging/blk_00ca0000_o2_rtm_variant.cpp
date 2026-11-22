@@ -124,12 +124,6 @@ struct Flag18
     }
     ~Flag18();
 };
-SubObject04::SubObject04()
-{
-    unk04 = 0;
-    unk08 = 0;
-    unk0c = 0;
-}
 struct GuardBase04
 {
     GuardBase04()
@@ -4275,14 +4269,6 @@ struct AryType
     unsigned int m_uiMaxSize;
     AryType();
 };
-AryType::AryType()
-{
-    if (0)
-        throw 1;
-    m_pData = 0;
-    m_uiSize = 0;
-    m_uiMaxSize = 0;
-}
 struct SearchNodeCB
 {
     int unk00;

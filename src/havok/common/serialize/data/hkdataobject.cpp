@@ -724,9 +724,6 @@ struct ObjectValue
     __declspec(noinline) ObjectValue(void* value);
 };
 
-ObjectValue::ObjectValue(void* value) : object(value)
-{}
-
 struct DBAB50Object
 {
     virtual ~DBAB50Object();
@@ -742,17 +739,6 @@ struct FUN_00dbab50
 
     FUN_00dbab50(DBAB50Object* p);
 };
-
-// @fnv 0x00dbab50
-FUN_00dbab50::FUN_00dbab50(DBAB50Object* apObject)
-{
-    m_pRetainedObject = apObject;
-    if (apObject)
-    {
-        apObject->m_sReferenceCount += 1;
-        apObject->m_iReferenceCount += 1;
-    }
-}
 
 struct DB8000_Alloc
 {

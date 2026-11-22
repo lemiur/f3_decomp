@@ -19,23 +19,6 @@ struct FUN_00dc8e50_Class
     int* FindEntry(int value);
 };
 
-// @fnv 0x00dc8e50
-int* FUN_00dc8e50_Class::FindEntry(int value)
-{
-    FUN_00dc8e50_Class* dict = this;
-    while (dict)
-    {
-        int count = dict->m_2c;
-        for (int i = 0; i < count; ++i)
-        {
-            if (*(int*)((char*)dict->m_28 + i * 0x18) == value)
-                return (int*)((char*)dict->m_28 + i * 0x18);
-        }
-        dict = (FUN_00dc8e50_Class*)dict->m_18;
-    }
-    return 0;
-}
-
 struct FUN_00dc6ff0_Stream
 {
     virtual void f0()
@@ -928,51 +911,6 @@ union hkDataValueDC88
     double m_dPad;
 };
 
-// @fnv 0x00dc88c0
-void __cdecl ReleaseDataValues(int iType, hkDataValueDC88* pkValues, int iCount)
-{
-    if (iType & 0x30)
-    {
-        hkDataRefCountedDC88* pkArray = pkValues->m_pkRef;
-        if (pkArray)
-            pkArray->removeReference();
-        return;
-    }
-    switch (iType)
-    {
-    case 4:
-    case 6:
-    case 7:
-        for (int i = 0; i < iCount; i++)
-        {
-            void* pvData = pkValues[i].m_pResource;
-            if (pvData)
-            {
-                FUN_00c85750()->heap().ReleaseBlock(pvData, (iType - 3) << 4);
-                pkValues[i].m_pResource = 0;
-            }
-        }
-        break;
-    case 8:
-    case 9:
-        for (int i = 0; i < iCount; i++)
-        {
-            if (pkValues[i].m_pkRef)
-            {
-                pkValues[i].m_pkRef->removeReference();
-                pkValues[i].m_pkRef = 0;
-            }
-        }
-        break;
-    case 10:
-        for (int i = 0; i < iCount; i++)
-        {
-            FUN_00cb13c0(pkValues[i].m_iString);
-            pkValues[i].m_iString = 0;
-        }
-        break;
-    }
-}
 }  // namespace fnv_00dc88c0
 
 namespace fnv_00dc8d20 {
@@ -1177,20 +1115,6 @@ class FUN_00dc96a0 : public hkBaseDC96
     hkArrayDC96<hkEntryDC96> m_entries;
 };
 
-// Releases the entry array, decrements the reference count and deletes the referenced object when it reaches zero, then clears m_ref.
-// @fnv 0x00dc96a0
-FUN_00dc96a0::~FUN_00dc96a0() throw()
-{
-    FUN_00dc90a0();
-    m_entries.ClearAndRelease();
-    hkCountedDC96* pCounted = m_ref;
-    if (pCounted)
-    {
-        if (--pCounted->m_uiItemCount == 0)
-            delete pCounted;
-    }
-    m_ref = 0;
-}
 }  // namespace fnv_00dc96a0
 
 extern "C" char* __cdecl FUN_00cb1410(const char* pcString);
@@ -1596,19 +1520,6 @@ class FUN_00dca0f0 : public hkDataRefCountedDCA0
     virtual ~FUN_00dca0f0() throw();
 };
 
-// Releases references held by each member in m_members and by m_class, then clears m_class.
-// @fnv 0x00dca0f0
-FUN_00dca0f0::~FUN_00dca0f0() throw()
-{
-    for (int i = 0; i < m_members.m_iElementCount; i++)
-    {
-        if (m_members.m_data[i])
-            m_members.m_data[i]->removeReference();
-    }
-    if (m_class)
-        m_class->removeReference();
-    m_class = 0;
-}
 }  // namespace fnv_00dca0f0
 
 namespace fnv_00dca190 {
@@ -1994,14 +1905,6 @@ class FUN_00dca6b0 : public hkRefObjDCA6
 
     virtual ~FUN_00dca6b0() throw();
 };
-
-// @fnv 0x00dca6b0
-FUN_00dca6b0::~FUN_00dca6b0() throw()
-{
-    for (int i = 0; i < m_pStringFunctions.m_iElementCount; i++)
-        FUN_00cb13c0(m_pStringFunctions.m_data[i]);
-    m_pStringFunctions.ClearAndRelease();
-}
 
 class hkMemoryAllocatorDCA7
 {
@@ -5447,24 +5350,6 @@ struct hkDataObjectDict : hkDataObjectImpl
     hkArray<hkDataMemberValue> members;
     void FUN_00dc90a0();
 };
-// Iterates over each member in the hkArray, releases its data value using the type from the class dictionary, then clears the array.
-// @fnv 0x00dc90a0
-void hkDataObjectDict::FUN_00dc90a0()
-{
-    int index = 0;
-    if (members.GetLogicalSize() > index)
-    {
-        do
-        {
-            hkDataMemberValue* entry = (members.m_data + index);
-            hkDataMemberInfo* metadata = pClassInfo->FindEntry((members.m_data + index)->name);
-            if (metadata)
-                ReleaseDataValues(metadata->type, &entry->value, 1);
-            ++index;
-        } while (index < members.GetLogicalSize());
-    }
-    members.clear();
-}
 
 class hkMemoryAllocatorDCA
 {

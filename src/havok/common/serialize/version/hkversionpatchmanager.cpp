@@ -412,12 +412,6 @@ class FUN_00db85e0 : public DB85E0ReferencedObject
     DB85E0Map m_map;
 };
 
-// @fnv 0x00db85e0
-FUN_00db85e0::~FUN_00db85e0() throw()
-{
-    if (m_pClassImpl)
-        delete m_pClassImpl;
-}
 }  // namespace fnv_00db85e0
 
 namespace fnv_00dba1e0 {

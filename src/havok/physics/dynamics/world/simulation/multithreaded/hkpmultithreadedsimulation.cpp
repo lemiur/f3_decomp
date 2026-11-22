@@ -1263,13 +1263,6 @@ struct AudioBuffer
     void Clear();
 };
 
-// The buffer is emptied once its contents have been handed to the sink.
-void AudioBuffer::Clear()
-{
-    m_data = 0;
-    m_iElementCount = 0x80000000;
-}
-
 // The listener the simulation registers with the broad phase.
 struct Listener
 {
@@ -1346,35 +1339,6 @@ struct FUN_00d02da0 : SimBase
     ~FUN_00d02da0();
 };
 
-// Destructor: deletes four critical sections, releases two buffers through the sink, resets three listener vtables, and calls BaseTeardown.
-// @fnv 0x00d02da0
-FUN_00d02da0::~FUN_00d02da0()
-{
-    DeleteCriticalSection(&m_critical140);
-    DeleteCriticalSection(&m_critical100);
-    DeleteCriticalSection(&m_critical9c);
-    {
-        BSAudio* audio = FUN_00c85750();
-        AudioSink* sink = audio->m_sink;
-        int items = m_audio90.m_iElementCount;
-        m_audio90.m_uiItemCount = 0;
-        if (!(items & 0x80000000))
-            sink->Release(m_audio90.m_data, (items & 0x3fffffff) * 8);
-        m_audio90.Clear();
-    }
-    DeleteCriticalSection(&m_critical78);
-    {
-        BSAudio* audio = FUN_00c85750();
-        AudioSink* sink = audio->m_sink;
-        int items = m_audio6c.m_iElementCount;
-        m_audio6c.m_uiItemCount = 0;
-        if (!(items & 0x80000000))
-            sink->Release(m_audio6c.m_data, (items & 0x3fffffff) * 8);
-        m_audio6c.Clear();
-    }
-    m_listenerA.vptr = m_listenerB.vptr = m_listenerC.vptr = &DAT_010c63bc;
-    BaseTeardown();
-}
 }  // namespace fnv_00d02da0
 
 #include <xmmintrin.h>

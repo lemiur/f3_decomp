@@ -71,22 +71,6 @@ struct FUN_00d27520
     ~FUN_00d27520();
 };
 
-// @fnv 0x00d27520
-FUN_00d27520::~FUN_00d27520()
-{
-    m_vtbl = &DAT_010ce448;
-    FUN_00d272e0();
-    if (m_pWorld)
-        m_pWorld->removeReference();
-    if (m_18)
-    {
-        void* pData = m_pData;
-        void* router = _D1A0E0GetMemoryRouter();
-        FUN_00c85660(*(void**)((char*)router + 0x10), pData);
-    }
-    m_vtbl = &_DAT_0102e388;
-}
-
 namespace fnv_00d27570 {
 struct FUN_00d27570Router
 {

@@ -861,15 +861,4 @@ class hkpPoweredChainMapper : public hkE3AD::hkReferencedObject
     hkArrayE3AD<hkE3AD::hkReferencedObject*> m_kChainInstances;
 };
 
-// @fnv 0x00e3ad80
-hkpPoweredChainMapper::~hkpPoweredChainMapper()
-{
-    for (int i = 0; i < m_ppLinks.GetLogicalSize(); i++)
-    {
-        if (m_ppLinks[i].m_pConstraintInstance)
-            m_ppLinks[i].m_pConstraintInstance->FUN_00c905b0();
-    }
-    for (int i = 0; i < m_kChainInstances.m_iElementCount; i++)
-        m_kChainInstances.m_data[i]->FUN_00c905b0();
-}
 }

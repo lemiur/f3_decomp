@@ -810,14 +810,4 @@ class FUN_00cf5750 : public hkpShapeCollectionCF5
     virtual ~FUN_00cf5750();
 };
 
-// Destructor that calls FUN_00c905b0 on each child's m_pCollisionShape in m_kChildInfoList.
-// @fnv 0x00cf5750
-FUN_00cf5750::~FUN_00cf5750()
-{
-    for (int i = 0; i < m_kChildInfoList.m_iElementCount; i++)
-    {
-        hkpListShapeChildInfoCF5& info = m_kChildInfoList[i];
-        info.m_pCollisionShape->FUN_00c905b0();
-    }
-}
 }  // namespace fnv_00cf5750

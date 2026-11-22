@@ -78,11 +78,6 @@ struct FUN_00cd0c80
     ~FUN_00cd0c80() throw();
 };
 
-// Destructor stub for a structure holding two PtrArrayMember members; the members' destructors run after this body.
-// @fnv 0x00cd0c80
-FUN_00cd0c80::~FUN_00cd0c80() throw()
-{}
-
 struct CD0730Object
 {
     virtual int FUN_00cd0730(const void* info) const;

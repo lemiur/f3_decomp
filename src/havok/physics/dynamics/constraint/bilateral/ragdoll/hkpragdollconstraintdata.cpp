@@ -466,28 +466,6 @@ struct FUN_00cb9170
     FUN_00cb9170();
 };
 extern "C" float DAT_0104da48;
-// Initializes the FUN_00cb9170 object by setting default values for its fields and calling FUN_00ca9360 with a float pointer.
-// @fnv 0x00cb9170
-FUN_00cb9170::FUN_00cb9170()
-{
-    float f = 1.0f;
-    m_00 = 2;
-    m_90 = 0x12;
-    m_92 = 1;
-    m_94 = 0;
-    m_96 = 0;
-    m_a6 = 1;
-    m_a8 = 1;
-    m_a4 = 0x11;
-    m_b0 = 0xe;
-    m_b2 = 1;
-    volatile unsigned short* limit = &m_c0;
-    *limit = 0xc;
-    m_c4 = 5;
-    m_c6 = 0;
-    m_c7.FUN_00ca9360(&f);
-    m_fC8 = DAT_0104da48;
-}
 }  // namespace fnv_00cb9170
 
 // @f3twin 0x0095a050 of 0x004a0640

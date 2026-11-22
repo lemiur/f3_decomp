@@ -564,14 +564,6 @@ struct FUN_00dc0500 : FUN_00d60830
     FUN_00dc0380 m_58;
     FUN_00dc0500(BSAudio* a1, BSAudio* a2);
 };
-// @fnv 0x00dc0500
-FUN_00dc0500::FUN_00dc0500(BSAudio* pAudio, BSAudio* a2)
-    : FUN_00d60830(pAudio, S_00dc0500_Opt(false)), m_10(S_00dc0500_Flag(false)), m_20(S_00dc0500_Flag(false)), m_30(0),
-      m_58(a2)
-{
-    m_20.FUN_00d874d0(&DAT_01011584, 0);
-    m_10.FUN_00d874d0(&DAT_01011584, 0);
-}
 
 inline void* operator new(size_t, void* p) throw()
 {

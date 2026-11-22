@@ -580,9 +580,6 @@ class hkpProjectileGun : public FUN_00e466a0::hkpFirstPersonGun
     hkArrayE450<void*> m_kProjectiles;
 };
 
-// @fnv 0x00e45010
-hkpProjectileGun::hkpProjectileGun(void* pkWorld) : FUN_00e466a0::hkpFirstPersonGun(pkWorld)
-{}
 }
 }  // namespace fnv_00e45010
 

@@ -1,4 +1,4 @@
-// havok/common/internal/geometryprocessing/mesh/hkgpmesh.cpp: QhkVector4, BigSolver, BoundsMesh, TriangleChecker and more (35 functions)
+// havok/common/internal/geometryprocessing/mesh/hkgpmesh.cpp: QhkVector4, BigSolver, BoundsMesh, TriangleChecker and more (32 functions)
 #include "f3_common.h"
 #include "fnv_asm_helpers.h"
 // SSE_DECLARATIONS_DEFER_TO_SDK
@@ -215,19 +215,6 @@ struct FUN_00e234e0_cls {
     void FreeAllItems();
 };
 
-// @fnv 0x00e234e0
-void FUN_00e234e0_cls::FreeAllItems()
-{
-    for (int i = 0; i < m_iArrayLength; i++) {
-        void* pItem = m_ppItems[i];
-        AudioHolder* pHolder = FUN_00c85750();
-        AudioAllocator* pAllocator = pHolder->m_pAllocator;
-        pAllocator->Free(pItem, 0xa08);
-    }
-    m_iArrayLength = 0;
-    m_i0c = 0;
-    m_i10 = 0;
-}
 }  // namespace fnv_00e234e0
 
 namespace fnv_00e23670 {
@@ -1204,39 +1191,6 @@ struct FUN_00e1b750 {
     FUN_00e1b750();
     void ResetState();
 };
-// @fnv 0x00e1b750
-FUN_00e1b750::FUN_00e1b750() {
-    active06 = 1;
-    f08 = 0;
-    f0c = 0;
-    f14 = 0;
-    f18 = 0;
-    f10 = 0x80000000;
-    f20 = 0;
-    f24 = 0;
-    f28 = 0x80000000;
-    f2c = 0;
-    f30 = 0;
-    vtable = &DAT_010eb000;
-    sub40.FUN_00d9c110();
-    double initial = DAT_010d51c4;
-    fc0 = 0;
-    fc4 = 0;
-    fc8 = 0x80000000;
-    fcc = 0;
-    fd0 = 0;
-    fd4 = 0x80000000;
-    fd8 = 0;
-    fdc = 0;
-    fe0 = 0x80000000;
-    f104 = initial;
-    double angle = DAT_01021928;
-    ptr38 = &DAT_011bdee0;
-    unk_e4 = 0;
-    f108 = (float)sqrt(angle) * DAT_010290b0 * DAT_0109cc78 * 2.0f;
-    f10c = 0.0f;
-    ResetState();
-}
 
 class E21CE0Ostream {
 public:
@@ -2740,15 +2694,6 @@ struct TargetClass {
     void ResetState();
 };
 
-// @fnv 0x00e157f0
-void TargetClass::ResetState() {
-    ReleaseSubobject();
-    m_vecF0 = *(__m128*)&DAT_01267e30;
-    m_sub8.FreeAllItems();
-    m_sub20.FreeAllItems();
-    m_b100 = false;
-    m_b101 = false;
-}
 }  // namespace fnv_00e157f0
 
 namespace fnv_00e191a0 {

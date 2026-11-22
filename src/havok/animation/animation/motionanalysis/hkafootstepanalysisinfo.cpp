@@ -216,33 +216,6 @@ struct FUN_00e40cb0 : CbBase
     CbArray m_kPointA[11];
 };
 
-template <int ELEM> inline void CbRelease(CbArray& a)
-{
-    CbHeap& heap = (CbHeap&)audio()->heap();
-    a.m_iElementCount = 0;
-    if (!(a.m_iCapacityState & 0x80000000))
-        heap.ReleaseBlock(a.m_data, (a.m_iCapacityState & 0x3fffffff) * ELEM);
-    a.m_data = 0;
-    a.m_iCapacityState = 0x80000000;
-}
-
-// Releases the eleven CbArray members of the object through the audio heap, using element sizes 4 for the last six and 1 for the first five.
-// @fnv 0x00e40cb0
-__declspec(nothrow) FUN_00e40cb0::~FUN_00e40cb0()
-{
-    CbRelease<4>(m_kPointA[10]);
-    CbRelease<4>(m_kPointA[9]);
-    CbRelease<4>(m_kPointA[8]);
-    CbRelease<4>(m_kPointA[7]);
-    CbRelease<4>(m_kPointA[6]);
-    CbRelease<4>(m_kPointA[5]);
-    CbRelease<1>(m_kPointA[4]);
-    CbRelease<1>(m_kPointA[3]);
-    CbRelease<1>(m_kPointA[2]);
-    CbRelease<1>(m_kPointA[1]);
-    CbRelease<1>(m_kPointA[0]);
-}
-
 namespace fnv_00e40800 {
 // Havok-style object: hkReferencedObject base, five string arrays, six float arrays, three floats.
 

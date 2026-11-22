@@ -318,13 +318,6 @@ struct FUN_00b8e020 : ImageSpaceEffectShader
 {
     FUN_00b8e020();
 };
-// @fnv 0x00b8e020
-FUN_00b8e020::FUN_00b8e020()
-{
-    m_vft = (void*)0x010b1340;
-    ((int*)this)[0x1b] = (int)0x010b1320;
-    ((TextureArray*)((char*)this + 0x94))->SetSize(2);
-}
 }  // namespace fnv_00b8e020
 
 extern int DAT_010b1340;
@@ -803,13 +796,6 @@ struct FUN_00b91680 : ImageSpaceEffectShader
 {
     FUN_00b91680();
 };
-// @fnv 0x00b91680
-FUN_00b91680::FUN_00b91680()
-{
-    *(void**)((char*)this + 0x0) = (void*)0x010b4c68;
-    *(void**)((char*)this + 0x6c) = (void*)0x010b4c48;
-    ((NiTPrimitiveArray_ImageSpaceTexture___*)((char*)this + 0x94))->SetSize(5);
-}
 }  // namespace fnv_00b91680
 
 extern int DAT_010b4c48;
@@ -1349,13 +1335,6 @@ struct FUN_00b93180 : public ImageSpaceEffectShader
     void* p6c;
     FUN_00b93180();
 };
-// @fnv 0x00b93180
-FUN_00b93180::FUN_00b93180()
-{
-    vtbl = (void*)0x010b6a40;
-    ((void**)((char*)this + 0x6c))[0] = (void*)0x010b6a20;
-    ((NiTPrimitiveArray_ImageSpaceTexture___*)((char*)this + 0x94))->SetSize(2);
-}
 }  // namespace fnv_00b93180
 
 extern int DAT_010b6a20;
@@ -1753,28 +1732,12 @@ struct FUN_00b8e170 : ImageSpaceEffectShader
     NiTPrimitiveArray_ImageSpaceTexture___ m_00b8e204;
     FUN_00b8e170();
 };
-// Initialises the vtable pointers and sets the embedded texture array to size 2.
-// @fnv 0x00b8e170
-FUN_00b8e170::FUN_00b8e170()
-{
-    ((int*)this)[0] = (int)&DAT_010b14c0;
-    ((int*)this)[0x1b] = (int)&DAT_010b14a0;
-    m_00b8e204.SetSize(2);
-}
 
 struct FUN_00b8efa0 : public ImageSpaceEffectShader
 {
     NiTPrimitiveArray_ImageSpaceTexture___ arr;
     FUN_00b8efa0();
 };
-// Initialises the vtable pointers and sets the embedded texture array at offset 0x94 to size 2.
-// @fnv 0x00b8efa0
-FUN_00b8efa0::FUN_00b8efa0()
-{
-    *(int*)this = (int)&DAT_010b2a98;
-    *(int*)((char*)this + 0x6c) = (int)&DAT_010b2a74;
-    ((NiTPrimitiveArray_ImageSpaceTexture___*)((char*)this + 0x94))->SetSize(2);
-}
 
 struct FUN_00b8f1b0 : ImageSpaceEffectShader
 {
@@ -1782,15 +1745,6 @@ struct FUN_00b8f1b0 : ImageSpaceEffectShader
     int m_00b2490;
     FUN_00b8f1b0();
 };
-
-// Initialises the object's vtable pointers and sets the embedded primitive array at offset 0x94 to size 2.
-// @fnv 0x00b8f1b0
-FUN_00b8f1b0::FUN_00b8f1b0()
-{
-    *(int*)this = (int)&DAT_010b2490;
-    *(int*)((char*)this + 0x6c) = (int)&DAT_010b2470;
-    ((NiTPrimitiveArray_ImageSpaceTexture___*)((char*)this + 0x94))->SetSize(2);
-}
 
 struct FUN_00b8f360_class : public ImageSpaceEffectShader
 {
@@ -1865,13 +1819,6 @@ struct FUN_00b92d90 : ImageSpaceEffectShader
     int m_00b6524;
     FUN_00b92d90();
 };
-// @fnv 0x00b92d90
-FUN_00b92d90::FUN_00b92d90()
-{
-    *(int*)this = (int)&DAT_010b6548;
-    *(int*)((char*)this + 0x6c) = (int)&DAT_010b6524;
-    ((NiTPrimitiveArray_ImageSpaceTexture___*)((char*)this + 0x94))->SetSize(2);
-}
 
 extern int DAT_010b687c;
 extern int DAT_010b68a0;
@@ -1883,13 +1830,6 @@ struct FUN_00b93030 : ImageSpaceEffectShader
     FUN_00b93030();
     ~FUN_00b93030();
 };
-// @fnv 0x00b93030
-FUN_00b93030::FUN_00b93030()
-{
-    *reinterpret_cast<int**>(this) = &DAT_010b68a0;
-    *reinterpret_cast<int**>(reinterpret_cast<char*>(this) + 0x6c) = &DAT_010b687c;
-    reinterpret_cast<NiTPrimitiveArray_ImageSpaceTexture___*>(reinterpret_cast<char*>(this) + 0x94)->SetSize(2);
-}
 
 extern int DAT_010b7578;
 extern int DAT_010b7598;
@@ -1937,15 +1877,6 @@ struct FUN_00b93e90 : ImageSpaceEffectShader
     FUN_00b93e90();
 };
 
-// Initializes the object's pointers to two globals and sizes the texture array to 2.
-// @fnv 0x00b93e90
-FUN_00b93e90::FUN_00b93e90()
-{
-    m_000 = (void*)&DAT_010b7598;
-    m_06c = (void*)&DAT_010b7578;
-    m_094.SetSize(2);
-}
-
 struct FUN_00b93fe0 : ImageSpaceEffectShader
 {
     int m_00b2d8c;
@@ -1954,13 +1885,6 @@ struct FUN_00b93fe0 : ImageSpaceEffectShader
     FUN_00b93fe0();
     ~FUN_00b93fe0();
 };
-// @fnv 0x00b93fe0
-FUN_00b93fe0::FUN_00b93fe0()
-{
-    *reinterpret_cast<int**>(this) = &DAT_010b7720;
-    *reinterpret_cast<int**>((char*)this + 0x6c) = &DAT_010b7700;
-    ((NiTPrimitiveArray_ImageSpaceTexture___*)((char*)this + 0x94))->SetSize(2);
-}
 
 extern int DAT_010b7bf0;
 extern int DAT_010b7bcc;

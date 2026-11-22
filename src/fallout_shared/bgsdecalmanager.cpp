@@ -1,4 +1,4 @@
-// fallout_shared/bgsdecalmanager.cpp: BGSDecalManager, BSA_, PD_, M3_ and more (4 functions)
+// fallout_shared/bgsdecalmanager.cpp: BGSDecalManager, BSA_, PD_, M3_ and more (3 functions)
 #include "f3_common.h"
 #include "bgsdecalmanager_decls.h"
 #include "bgsdecalmanager_types_BGSDecalManager.h"
@@ -665,9 +665,6 @@ class FUN_004a3bc0 : public FUN_004a3ae0
     FUN_004a4440 hits;
     virtual ~FUN_004a3bc0();
 };
-// @fnv 0x004a3bc0
-FUN_004a3bc0::~FUN_004a3bc0()
-{}
 
 struct GlobalObject_0044f440
 {

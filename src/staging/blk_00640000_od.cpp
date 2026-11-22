@@ -168,12 +168,6 @@ struct FUN_00658d30_class
     void __thiscall FUN_00658d30();
 };
 
-// @fnv 0x00658d30
-void __thiscall FUN_00658d30_class::FUN_00658d30()
-{
-    FUN_00658d50();
-}
-
 struct FUN_006592f0
 {
     void __thiscall operator()(void*);
@@ -224,12 +218,6 @@ struct FUN_0065f400_class
     void __thiscall FUN_0065f400(int a, int b);
 };
 
-// @fnv 0x0065f400
-void __thiscall FUN_0065f400_class::FUN_0065f400(int aiArg1, int aiArg2)
-{
-    FUN_0065f9a0(aiArg1, aiArg2, (int)this + 8);
-}
-
 struct FUN_0065f7c0_Class
 {
     void FUN_0065f7c0();
@@ -240,24 +228,12 @@ struct FUN_0065f580_Class
     void FUN_0065f580();
 };
 
-// @fnv 0x0065f580
-void FUN_0065f580_Class::FUN_0065f580()
-{
-    ((FUN_0065f7c0_Class*)((char*)this + 8))->FUN_0065f7c0();
-}
-
 extern "C" void __cdecl FUN_0065f9e0(int a, int b);
 
 struct FUN_0065f6c0_class
 {
     void __thiscall FUN_0065f6c0(int a);
 };
-
-// @fnv 0x0065f6c0
-void __thiscall FUN_0065f6c0_class::FUN_0065f6c0(int aiValue)
-{
-    FUN_0065f9e0(aiValue, 0);
-}
 
 extern void* DAT_010658d0;
 
@@ -412,9 +388,6 @@ struct FUN_00659440
     FaceGenMatrix<float> arr[4];
     ~FUN_00659440();
 };
-// @fnv 0x00659440
-FUN_00659440::~FUN_00659440()
-{}
 }  // namespace fnv_00659440
 
 extern "C" __declspec(dllimport) void* __stdcall CreateSemaphoreA(void*, long, long, const char*);
@@ -535,12 +508,6 @@ struct S_0065f7c0
 {
     unsigned int FUN_0065f7c0();
 };
-// @fnv 0x0065f7c0
-unsigned int S_0065f7c0::FUN_0065f7c0()
-{
-    unsigned int v = 0x2AAAAAAA;
-    return v > 0 ? v : 1;
-}
 
 namespace fnv_0065f960 {
 struct Interface
@@ -552,19 +519,6 @@ unsigned char __cdecl FUN_0065e750(int* a, int* b);
 
 unsigned char __cdecl FUN_0065e750(void* a, void* b);
 void __cdecl FUN_0065ff00(void* a, void* b, void* c, unsigned char d);
-// @fnv 0x0065f9a0
-void __cdecl FUN_0065f9a0(void* pFirst, void* pSecond, void* pThird)
-{
-    unsigned char r = FUN_0065e750(&pFirst, &pSecond);
-    FUN_0065ff00(pFirst, pSecond, pThird, r);
-}
-
-// @fnv 0x0065ff00
-void __cdecl FUN_0065ff00(char* _First, char* _Last, FUN_0065e9a0_holder* _Dest)
-{
-    for (; _First != _Last; _First += 6)
-        _Dest->FUN_0065e9a0((int*)_First);
-}
 
 extern "C" void __cdecl FUN_00660130(int a, int b, int c, int d, int e, int f);
 
@@ -572,12 +526,6 @@ struct FUN_0065ff30_Class
 {
     void __thiscall FUN_0065ff30(int a, int b, int c, int d, int e);
 };
-
-// @fnv 0x0065ff30
-void __thiscall FUN_0065ff30_Class::FUN_0065ff30(int aiArg1, int aiArg2, int aiArg3, int aiArg4, int aiArg5)
-{
-    FUN_00660130(aiArg1, aiArg2, aiArg3, aiArg4, aiArg5, (int)(this + 8));
-}
 
 struct FUN_0065ff60_class
 {
@@ -627,18 +575,6 @@ struct FUN_0065f430_class
     int m_14;
     void FUN_0065f430();
 };
-// @fnv 0x0065f430
-void FUN_0065f430_class::FUN_0065f430()
-{
-    if (m_iThirdValue)
-    {
-        ((FUN_0065f400_class*)this)->FUN_0065f400((int)m_iThirdValue, m_10);
-        ((FUN_0064df10_helper*)((char*)this + 8))->deallocate(m_iThirdValue, (unsigned int)((m_14 - (int)m_iThirdValue) / 6));
-    }
-    m_iThirdValue = 0;
-    m_10 = 0;
-    m_14 = 0;
-}
 
 void* __cdecl NiMalloc(unsigned int);
 void* __cdecl memset(void* dst, int value, unsigned int size);
@@ -673,13 +609,6 @@ struct FUN_00658bb0 : FUN_00658d30_class
 {
     ~FUN_00658bb0();
 };
-
-// @fnv 0x00658bb0
-FUN_00658bb0::~FUN_00658bb0()
-{
-    *(void**)this = &DAT_01065870;
-    FUN_00658d30_class::FUN_00658d30();
-}
 
 struct FUN_00508050
 {
@@ -1160,13 +1089,6 @@ void __stdcall FUN_00ec7894(FUN_0065e670_cls* obj, char* msg);
 
 }  // namespace fnv_0065e670
 
-// @fnv 0x0065e750
-unsigned char __cdecl FUN_0065e750(void* a, void* b)
-{
-    char c;
-    return c;
-}
-
 int __cdecl CallWithFlag(int*);
 
 class FUN_0065f060_base
@@ -1239,12 +1161,6 @@ class LengthError
     virtual ~LengthError();
 };
 
-// Throws a LengthError constructed from the message "vector<T> too long".
-// @fnv 0x0065f640
-void __cdecl ThrowVectorTooLong()
-{
-    throw LengthError("vector<T> too long");
-}
 }  // namespace fnv_0065f640
 
 struct C65F700Node;
@@ -1284,19 +1200,6 @@ class bad_alloc
     const char* message_;
     bool owns_message_;
 };
-}
-// @fnv 0x0065f9e0
-extern "C" void __cdecl FUN_0065f9e0(int count, int unused)
-{
-    if ((unsigned int)count <= 0u)
-    {
-        count = 0;
-    }
-    else if (0xffffffffu / (unsigned int)count < 6u)
-    {
-        throw std::bad_alloc(0);
-    }
-    ::operator new((unsigned int)count * 6u);
 }
 }  // namespace fnv_0065f9e0
 
@@ -1408,11 +1311,6 @@ struct FUN_00658e10 : ObjectCleanupBase658e10
     void FUN_00438af0();
     virtual ~FUN_00658e10();
 };
-// @fnv 0x00658e10
-FUN_00658e10::~FUN_00658e10()
-{
-    FUN_00438af0();
-}
 
 unsigned char* __cdecl FUN_0065fd70(unsigned char* out, int* a1, int* a2);
 
@@ -1422,12 +1320,6 @@ struct FUN_0065ee70 : FUN_0065cfb0
 {
     ~FUN_0065ee70();
 };
-// Destructor that calls FUN_0065f430 on this object.
-// @fnv 0x0065ee70
-FUN_0065ee70::~FUN_0065ee70()
-{
-    ((FUN_0065f430_class*)this)->FUN_0065f430();
-}
 
 // Copy-style range helper: unwrap both iterators and forward them with the iterator-category and range tags.
 
@@ -1533,22 +1425,6 @@ struct FUN_0065fb10 : S_0065fb10_Base
 {
     FUN_0065fb10(const FUN_0065fb10& other);
 };
-// @fnv 0x0065fb10
-FUN_0065fb10::FUN_0065fb10(const FUN_0065fb10& other) : S_0065fb10_Base(other._Alval)
-{
-    if (FUN_0065f380(other.FUN_00657bc0()))
-    {
-        try
-        {
-            _Mylast = FUN_0065ff30(other.FUN_0065fd10(), other.FUN_0065fd40(), _Myfirst);
-        }
-        catch (...)
-        {
-            FUN_0065f430();
-            throw;
-        }
-    }
-}
 
 struct ObjectPointer64ce20
 {
@@ -1691,25 +1567,6 @@ struct VecF380
     unsigned int FUN_0065f580() const;
     bool FUN_0065f380(unsigned int _Capacity);
 };
-// Resets first/last/end pointers; returns false if _Capacity is 0, throws if it exceeds FUN_0065f580(), else allocates that many elements and returns true.
-// @fnv 0x0065f380
-bool VecF380::FUN_0065f380(unsigned int _Capacity)
-{
-    _Myfirst = 0;
-    _Mylast = 0;
-    _Myend = 0;
-    if (_Capacity == 0)
-        return false;
-    else if (FUN_0065f580() < _Capacity)
-        ThrowVectorTooLong();
-    else
-    {
-        _Myfirst = _Alval.FUN_0065f6c0(_Capacity);
-        _Mylast = _Myfirst;
-        _Myend = _Myfirst + _Capacity;
-    }
-    return true;
-}
 
 #include <math.h>
 template <class Collection> class SettingT
@@ -1736,11 +1593,6 @@ struct FUN_0065e9a0_Class
 {
     void __thiscall FUN_0065e9a0(BGSLoadGameBuffer* p);
 };
-// @fnv 0x0065e9a0
-void __thiscall FUN_0065e9a0_Class::FUN_0065e9a0(BGSLoadGameBuffer* apBuffer)
-{
-    Interface::PrintDebugMessage(apBuffer);
-}
 
 namespace fnv_0065ec40 {
 extern "C" void __cdecl Deallocate(void*);

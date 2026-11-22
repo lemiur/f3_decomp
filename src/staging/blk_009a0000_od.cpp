@@ -424,13 +424,6 @@ struct FUN_009a45e0
     CombatOwnerPtr owner;
     ~FUN_009a45e0();
 };
-// Destructor that, if the held owner and its manager exist, removes the owner from that manager.
-// @fnv 0x009a45e0
-FUN_009a45e0::~FUN_009a45e0()
-{
-    if (owner && owner->FUN_009611e0())
-        owner->FUN_009611e0()->Remove(owner);
-}
 
 struct Point9a
 {
@@ -1139,12 +1132,6 @@ struct FUN_006299a0
     ~FUN_006299a0();
 };
 
-FUN_006299a0::FUN_006299a0()
-{}
-
-FUN_006299a0::~FUN_006299a0()
-{}
-
 }  // namespace fnv_009b2cb0
 
 struct WeaponHit
@@ -1637,14 +1624,6 @@ struct FUN_009ae540
     float mc;
     FUN_009ae540(float*);
 };
-// @fnv 0x009ae540
-FUN_009ae540::FUN_009ae540(float* a)
-{
-    m0 = a[0];
-    m4 = a[1];
-    m8 = a[2];
-    mc = 0.0f;
-}
 
 namespace fnv_009b5a30 {
 struct HitActor;

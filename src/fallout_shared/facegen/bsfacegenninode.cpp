@@ -1,4 +1,4 @@
-// fallout_shared/facegen/bsfacegenninode.cpp: FaceNode, FaceGenNode, DumpNode (3 functions)
+// fallout_shared/facegen/bsfacegenninode.cpp: FaceNode, FaceGenNode, DumpNode (2 functions)
 #include "f3_common.h"
 #include "bsfacegenninode.h"
 
@@ -1430,13 +1430,6 @@ struct FUN_00662b00 : FaceNodeBase662b00
     void* unkE8;
     ~FUN_00662b00();
 };
-
-// The destructor sets unkE8 to null.
-// @fnv 0x00662b00
-FUN_00662b00::~FUN_00662b00()
-{
-    unkE8 = 0;
-}
 
 struct NiPtr6628
 {

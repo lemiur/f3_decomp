@@ -77,13 +77,6 @@ struct FUN_007533b0 : Menu_007a8b10
     ~FUN_007533b0();
 };
 extern int DAT_011d920c;
-// Clears DAT_011d920c and calls FUN_00721150 on the member m before destruction.
-// @fnv 0x007533b0
-FUN_007533b0::~FUN_007533b0()
-{
-    DAT_011d920c = 0;
-    m.FUN_00721150();
-}
 
 extern int DAT_011d920c;
 extern int DAT_011d9210;
