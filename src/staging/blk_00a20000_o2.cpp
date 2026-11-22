@@ -4627,7 +4627,7 @@ void ComputeTCBKeyTangents(TCBKeyS* keys, unsigned int count, unsigned int strid
             nextInScaled.x = p[1] + scaledOut.x;
             nextInScaled.y = *(volatile float*)(p + 2) + scaledOut.y;
             nextInScaled.z = p[3] + scaledOut.z;
-            volatile Vec3S delta;
+            Vec3S delta;
             delta.x = p[-2] - p[-18];
             delta.y = p[-1] - p[-17];
             delta.z = p[0] - p[-16];
@@ -4642,7 +4642,7 @@ void ComputeTCBKeyTangents(TCBKeyS* keys, unsigned int count, unsigned int strid
             Vec3S& out = *(Vec3S*)(p - 9);
             out = result;
 
-            volatile Vec3S deltaAgain;
+            Vec3S deltaAgain;
             deltaAgain.x = *(volatile float*)(p - 2) - p[-18];
             deltaAgain.y = p[-1] - p[-17];
             deltaAgain.z = p[0] - p[-16];

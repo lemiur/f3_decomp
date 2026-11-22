@@ -11,7 +11,7 @@ struct FUN_00e87a70_Class {
 // @fnv 0x00e87a70
 void __thiscall FUN_00e87a70_Class::FUN_00e87a70()
 {
-    volatile char* p = (volatile char*)this;
+    char* p = (char*)this;
     *(int*)(p + 0x10e4) = *(int*)(p + 0x10e0);
     *(int*)(p + 0x10ec) = *(int*)(p + 0x10e8);
 }

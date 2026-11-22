@@ -29931,7 +29931,7 @@ void Foo::FUN_005165b0() {
     unk20 = 0;
     unk24 = 0;
     unk28 = 0;
-    volatile unsigned int* tlsArray = (volatile unsigned int*)__readfsdword(0x2C);
+    unsigned int* tlsArray = (unsigned int*)__readfsdword(0x2C);
     unsigned char* tls = (unsigned char*)tlsArray[tlsIndex];
     unk30 = 0;
     unk2C = 0;
@@ -37357,7 +37357,7 @@ struct Owner {
 // pdb: TESLoadScreen::CanDisplayForForm | TESLoadScreen.obj | fnv360_0822_retail, objrun, medium
 // pdb params: apLoadingForm
 bool Owner::FUN_00516010(Form* form) {
-    volatile bool result = false;
+    bool result = false;
     unsigned int formID;
     unsigned int worldID;
     unsigned int coords;

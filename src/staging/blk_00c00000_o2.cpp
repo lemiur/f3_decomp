@@ -4394,7 +4394,7 @@ class FUN_00c1a500_cls
 void FUN_00c1a500_cls::UpdateOutput(unsigned int a1)
 {
     unsigned int i00 = m_iC8;
-    volatile float f = m_fD4;
+    float f = m_fD4;
     FUN_00c1a500_out* out = m_pOut20;
     out->m_i00 = i00;
     out->m_i04 = m_iCC;
@@ -4592,7 +4592,7 @@ struct FUN_00c1a6a0_cls
 void FUN_00c1a6a0_cls::CopyStateToOutput(int a1)
 {
     int c8 = m_c8;
-    volatile float f = m_d4;
+    float f = m_d4;
     FUN_00c1a6a0_out* out = m_pOutput;
     out->m_00 = c8;
     out->m_04 = m_cc;
@@ -4636,7 +4636,7 @@ struct S_00c1a6f0_Self
 void __thiscall S_00c1a6f0_Self::CopyStateToDestination(int p)
 {
     unsigned int a = m_c8;
-    volatile float tmp = m_d4;
+    float tmp = m_d4;
     S_00c1a6f0_Dst* dst = m_20;
     dst->a = a;
     dst->b = m_cc;

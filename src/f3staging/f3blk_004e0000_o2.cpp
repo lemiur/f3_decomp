@@ -13543,7 +13543,7 @@ struct Obj4edbf0 {
 // pdb: TESObjectREFR::GetDistanceFromReference | TESObjectREFR.obj | fnv360_0822_retail, call_seq, medium
 // pdb params: apRef, abDisabled, bSameSpace
 float Obj4edbf0::FUN_004edbf0(Obj4edbf0* p, bool a2, bool a3) {
-    volatile float r = DAT_00dcdb90;
+    float r = DAT_00dcdb90;
     int x, y;
     Obj4edbf0* A;
     Obj4edbf0* B;

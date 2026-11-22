@@ -7080,7 +7080,7 @@ bool __cdecl FUN_005ddda0(const IntersectPoint* a,const IntersectPoint* b,const 
     float determinant = dx*vy-vx*dy;
     if (determinant==0.0f) return false;
     IntersectPoint offset={a->x-c->x,a->y-c->y,0.0f};
-    volatile float numerator = offset.x*dy-offset.y*dx;
+    float numerator = offset.x*dy-offset.y*dx;
     float lineRatio = numerator/determinant;
     if (lineRatio < 0.0f || lineRatio > 1.0f) return false;
     if (out) {

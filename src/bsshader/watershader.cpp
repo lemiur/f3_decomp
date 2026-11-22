@@ -2379,7 +2379,7 @@ __forceinline void SetWaterAlpha(WaterMaterial* material, unsigned int mode)
 void WaterSetup::WaterShader_SetupGeometryConstants(WaterRenderArg* arg)
 {
 
-    WaterSetup* volatile savedSetup = this;
+    WaterSetup* savedSetup = this;
 
     unsigned int mode = DAT_011f91e4;
 

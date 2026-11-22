@@ -56,7 +56,7 @@ public:
 // pdb params: apSpell
 void __thiscall FUN_0045b7b0_Obj::FUN_0045b7b0(int value)
 {
-    volatile int* argument = &value;
+    int* argument = &value;
     reinterpret_cast<FUN_00421610_Obj*>(reinterpret_cast<char*>(this) + 4)->FUN_00421610(const_cast<int*>(argument));
 }
 

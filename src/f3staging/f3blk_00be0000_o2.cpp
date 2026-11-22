@@ -13582,7 +13582,7 @@ void InputPoller::FUN_00be8fd0()
     }
     if (m_0030)
     {
-        volatile int* mouse=&m_1b24; m_1b38=mouse[0]; m_1b3c=mouse[1]; m_1b40=mouse[2]; m_1b44=mouse[3]; m_1b48=mouse[4];
+        int* mouse=&m_1b24; m_1b38=mouse[0]; m_1b3c=mouse[1]; m_1b40=mouse[2]; m_1b44=mouse[3]; m_1b48=mouse[4];
         memset(&m_1b58, 0, 8);
         result = reinterpret_cast<PollingDevice*>(m_0030)->Acquire();
         if (result == 0 || result == 1)

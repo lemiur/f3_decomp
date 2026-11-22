@@ -4903,7 +4903,7 @@ f3m_00a093d0::EmbeddedState* f3m_00a093d0::EmbeddedState::FUN_00a091b0(const Emb
     f30 = source.f30;
     f34 = source.f34;
     f38 = source.f38;
-    const volatile EmbeddedState* __restrict tail=&source;
+    const EmbeddedState* __restrict tail=&source;
     f3c=tail->f3c;
     unk48=tail->unk48;
     return this;

@@ -1402,7 +1402,7 @@ unsigned int unk0c8;
 // pdb: hkpEntityCallbackUtil::fireEntityDeleted | hkpEntityCallbackUtil.obj | fnv360_0822_retail, ustr + bridge(ustr|ustr) + skyrim(ustr), high
 void __cdecl hkpEntityCallbackUtil_fireEntityDeleted(CFFCF0Owner* owner)
 {
-    volatile CFFCF0TimerTicks ticks;
+    CFFCF0TimerTicks ticks;
     CFFCF0ListenerList* list = owner->m_listenerList;
     if (list)
     {
@@ -1524,8 +1524,8 @@ void __cdecl hkpEntityCallbackUtil_fireContactProcessInternal(ListenerOwner* own
     {
         if (kListeners.m_data[i] != 0)
         {
-            volatile unsigned int t1;
-            volatile unsigned int uiTimerEnd;
+            unsigned int t1;
+            unsigned int uiTimerEnd;
             TimerWriteV(DAT_00e7d8a4, t1);
             ((ContactListener*)kListeners.m_data[i])->callback(event);
             TimerWriteV(DAT_00e32798, uiTimerEnd);
@@ -1639,8 +1639,8 @@ void __cdecl hkpEntityCallbackUtil_fireContactPointRemovedInternal(ListenerOwner
     {
         if (kListeners.m_data[i] != 0)
         {
-            volatile unsigned int t1;
-            volatile unsigned int uiTimerEnd;
+            unsigned int t1;
+            unsigned int uiTimerEnd;
             TimerWriteV(DAT_00e7d898, t1);
             ((ContactListener*)kListeners.m_data[i])->callback(event);
             TimerWriteV(DAT_00e32798, uiTimerEnd);
@@ -1749,8 +1749,8 @@ void __cdecl hkpEntityCallbackUtil_fireContactPointCallbackInternal(ListenerOwne
     {
         if (kListeners.m_data[i] != 0)
         {
-            volatile unsigned int t1;
-            volatile unsigned int uiTimerEnd;
+            unsigned int t1;
+            unsigned int uiTimerEnd;
             TimerWriteV(DAT_00e7d88c, t1);
             ((ContactListener*)kListeners.m_data[i])->callback(event);
             TimerWriteV(DAT_00e32798, uiTimerEnd);
@@ -1878,8 +1878,8 @@ __forceinline void TimerEvent833(const char* name, volatile unsigned int& ticks)
 // pdb: hkpWorldCallbackUtil::fireActionRemoved | hkpWorldCallbackUtil.obj | fnv360_0822_retail, ustr + bridge(ustr|ustr) + skyrim(ustr), high
 void __cdecl hkpWorldCallbackUtil_fireActionRemoved(World833* world, ContactPointEvent* event)
 {
-    volatile unsigned beginTicks;
-    volatile unsigned endTicks;
+    unsigned beginTicks;
+    unsigned endTicks;
     Array833& listeners = world->contactPointListeners;
     int i = listeners.size - 1;
     for (; i >= 0; --i)
@@ -2032,8 +2032,8 @@ __forceinline void TimerEvent833(const char* name, volatile unsigned int& ticks)
 // pdb: hkpWorldCallbackUtil::fireEntityRemoved | hkpWorldCallbackUtil.obj | fnv360_0822_retail, call_gap_sim + bridge(call_gap_sim|call_seq) + skyrim(call_gap), high
 void __cdecl hkpWorldCallbackUtil_fireEntityRemoved(World833* world, ContactPointEvent* event)
 {
-    volatile unsigned beginTicks;
-    volatile unsigned endTicks;
+    unsigned beginTicks;
+    unsigned endTicks;
     Array833& listeners = world->contactPointListeners;
     int i = listeners.size - 1;
     for (; i >= 0; --i)
@@ -2191,8 +2191,8 @@ __forceinline void TimerEvent833(const char* name, volatile unsigned int& ticks)
 // pdb: hkpWorldCallbackUtil::firePhantomShapeSet | hkpWorldCallbackUtil.obj | fnv360_0721_beta, ustr_rel + bridge(ustr_rel|call_seq) + skyrim(ustr_rel), high
 void __cdecl hkpWorldCallbackUtil_firePhantomShapeSet(World833* world, ContactPointEvent* event)
 {
-    volatile unsigned beginTicks;
-    volatile unsigned endTicks;
+    unsigned beginTicks;
+    unsigned endTicks;
     Array833& listeners = world->contactPointListeners;
     int i = listeners.size - 1;
     for (; i >= 0; --i)
@@ -2289,8 +2289,8 @@ __forceinline void TimerEvent833(const char* name, volatile unsigned int& ticks)
 // pdb: hkpWorldCallbackUtil::fireConstraintAdded | hkpWorldCallbackUtil.obj | fnv360_0822_retail, call_seq + bridge(call_seq|call_seq) + skyrim(call_gap_sim), high
 void __cdecl hkpWorldCallbackUtil_fireConstraintAdded(World833* world, ContactPointEvent* event)
 {
-    volatile unsigned beginTicks;
-    volatile unsigned endTicks;
+    unsigned beginTicks;
+    unsigned endTicks;
     Array833& listeners = world->contactPointListeners;
     int i = listeners.size - 1;
     for (; i >= 0; --i)
@@ -2442,8 +2442,8 @@ __forceinline void TimerEvent833(const char* name, volatile unsigned int& ticks)
 // pdb: hkpWorldCallbackUtil::fireEntityAdded | hkpWorldCallbackUtil.obj | fnv360_0822_retail, call_gap_sim + bridge(call_dedup|call_dedup) + skyrim(call_gap), high
 void __cdecl hkpWorldCallbackUtil_fireEntityAdded(World833* world, ContactPointEvent* event)
 {
-    volatile unsigned beginTicks;
-    volatile unsigned endTicks;
+    unsigned beginTicks;
+    unsigned endTicks;
     Array833& listeners = world->contactPointListeners;
     int i = listeners.size - 1;
     for (; i >= 0; --i)
@@ -2541,8 +2541,8 @@ __forceinline void TimerEvent833(const char* name, volatile unsigned int& ticks)
 // pdb: hkpWorldCallbackUtil::fireConstraintRemoved | hkpWorldCallbackUtil.obj | fnv360_0822_retail, call_gap + bridge(call_gap|call_seq) + skyrim(call_gap_sim), high
 void __cdecl hkpWorldCallbackUtil_fireConstraintRemoved(World833* world, ContactPointEvent* event)
 {
-    volatile unsigned beginTicks;
-    volatile unsigned endTicks;
+    unsigned beginTicks;
+    unsigned endTicks;
     Array833& listeners = world->contactPointListeners;
     int i = listeners.size - 1;
     for (; i >= 0; --i)
@@ -2696,8 +2696,8 @@ __forceinline void TimerEvent833(const char* name, volatile unsigned int& ticks)
 // pdb: hkpWorldCallbackUtil::fireEntityShapeSet | hkpWorldCallbackUtil.obj | fnv360_0822_retail, call_gap_sim + bridge(call_gap|call_gap) + skyrim(call_gap), high
 void __cdecl hkpWorldCallbackUtil_fireEntityShapeSet(World833* world, ContactPointEvent* event)
 {
-    volatile unsigned beginTicks;
-    volatile unsigned endTicks;
+    unsigned beginTicks;
+    unsigned endTicks;
     Array833& listeners = world->contactPointListeners;
     int i = listeners.size - 1;
     for (; i >= 0; --i)
@@ -2865,8 +2865,8 @@ __forceinline void TimerEvent833(const char* name, volatile unsigned int& ticks)
 // pdb: hkpWorldCallbackUtil::fireInactiveEntityMoved | hkpWorldCallbackUtil.obj | fnv360_0822_retail, ustr + bridge(ustr|ustr) + skyrim(ustr), high
 void __cdecl hkpWorldCallbackUtil_fireInactiveEntityMoved(World833* world, ContactPointEvent* event)
 {
-    volatile unsigned beginTicks;
-    volatile unsigned endTicks;
+    unsigned beginTicks;
+    unsigned endTicks;
     Array833& listeners = world->contactPointListeners;
     int i = listeners.size - 1;
     for (; i >= 0; --i)
@@ -2953,8 +2953,8 @@ __forceinline void TimerEvent(const char* name, volatile unsigned int& ticks)
 // pdb: hkpWorldCallbackUtil::firePhantomAdded | hkpWorldCallbackUtil.obj | fnv360_0822_retail, ustr + bridge(ustr|ustr) + skyrim(ustr), high
 void __cdecl hkpWorldCallbackUtil_firePhantomAdded(World* world, PhantomEvent* event)
 {
-    volatile unsigned beginTicks;
-    volatile unsigned endTicks;
+    unsigned beginTicks;
+    unsigned endTicks;
     ListenerArray& listeners = world->phantomListeners;
     int i = listeners.size - 1;
     for (; i >= 0; --i) {
@@ -3093,8 +3093,8 @@ __forceinline void TimerEvent833(const char* name, volatile unsigned int& ticks)
 // pdb: hkpWorldCallbackUtil::firePhantomRemoved | hkpWorldCallbackUtil.obj | fnv360_0822_retail, ustr + bridge(ustr|ustr) + skyrim(ustr), high
 void __cdecl hkpWorldCallbackUtil_firePhantomRemoved(World833* world, ContactPointEvent* event)
 {
-    volatile unsigned beginTicks;
-    volatile unsigned endTicks;
+    unsigned beginTicks;
+    unsigned endTicks;
     Array833& listeners = world->phantomListeners;
     int i = listeners.size - 1;
     for (; i >= 0; --i)
@@ -3601,7 +3601,7 @@ void FUN_0098b6f0_t::FUN_0098b6f0() {
 namespace f3m_0099da40 {
 struct Matrix349{float values[16];};struct Owner349{unsigned int unk00,unk04,unk08,unk0c,unk10,unk14,unk18,unk1c,unk20,unk24,unk28,unk2c,unk30,unk34,unk38,unk3c,unk40,unk44,unk48,unk4c,unk50,unk54,unk58,unk5c,unk60,unk64,unk68,unk6c,unk70,unk74,unk78,unk7c,unk80,unk84,unk88,unk8c,unk90,unk94,unk98,unk9c,unka0,unka4,unka8,unkac,unkb0,unkb4,unkb8,unkbc;float x,y,z,w;void Set(float a,float b,float c,const volatile float& d){x=a;y=b;z=c;w=d;}void FUN_0099da40(const Matrix349*);};
 // pdb: hkpBoxMotion::setInertiaLocal | hkpBoxMotion.obj | tesv_win, objrun, medium
-void Owner349::FUN_0099da40(const Matrix349*matrix){float second=1.0f/matrix->values[5];float third=1.0f/matrix->values[10];volatile float fourth=w;Set(1.0f/matrix->values[0],second,third,fourth);}
+void Owner349::FUN_0099da40(const Matrix349*matrix){float second=1.0f/matrix->values[5];float third=1.0f/matrix->values[10];float fourth=w;Set(1.0f/matrix->values[0],second,third,fourth);}
 }   // namespace f3m_0099da40
 
 // @f3 0x00989b30 (community match, verified in this file)
@@ -4334,8 +4334,8 @@ __forceinline void TimerEvent833(const char* name, volatile unsigned int& ticks)
 // pdb: hkpWorldCallbackUtil::fireIslandPostCollideCallback | hkpWorldCallbackUtil.obj | fnv360_0822_retail, call_gap + bridge(ustr_rel|call_dedup) + skyrim(ustr_rel), high
 void __cdecl hkpWorldCallbackUtil_fireIslandPostCollideCallback(World833* world, ContactPointEvent* first, ContactPointEvent* event)
 {
-    volatile unsigned beginTicks;
-    volatile unsigned endTicks;
+    unsigned beginTicks;
+    unsigned endTicks;
     Array833& listeners = world->contactPointListeners;
     int i = listeners.size - 1;
     for (; i >= 0; --i)
@@ -5164,8 +5164,8 @@ __forceinline void TimerEvent(const char* name, volatile unsigned int& ticks)
 // pdb: hkpWorldCallbackUtil::fireContactPointCallback | hkpWorldCallbackUtil.obj | fnv360_0822_retail, call_gap_sim + bridge(call_gap_sim|call_seq) + skyrim(call_gap_sim), high
 void __cdecl hkpWorldCallbackUtil_fireContactPointCallback(World* world, PhantomEvent* event)
 {
-    volatile unsigned beginTicks;
-    volatile unsigned endTicks;
+    unsigned beginTicks;
+    unsigned endTicks;
     ListenerArray& listeners = world->phantomListeners;
     event->unused08=0;
     int i = listeners.size - 1;
@@ -5355,8 +5355,8 @@ __forceinline void TimerEvent833(const char* name, volatile unsigned int& ticks)
 // pdb: hkpWorldCallbackUtil::fireContactPointRemoved | hkpWorldCallbackUtil.obj | fnv360_0822_retail, caller_sim + bridge(caller_sim|call_seq) + skyrim(caller_sim), high
 void __cdecl hkpWorldCallbackUtil_fireContactPointRemoved(World833* world, ContactPointEvent* event)
 {
-    volatile unsigned beginTicks;
-    volatile unsigned endTicks;
+    unsigned beginTicks;
+    unsigned endTicks;
     Array833& listeners = world->contactPointListeners;
     event->unk10 = 0;
     int i = listeners.size - 1;

@@ -16795,7 +16795,7 @@ bool QA106::FUN_006a63b0(MagicTarget* target) {
  Character* c = dynamic_cast<Character*>(target);
  if (!c) return false;
  if (c->IsDead()) return false;
- volatile float f = unk1c;
+ float f = unk1c;
  return MagicFormulas_CheckTargetLevelMagnitude(c->Actor_GetLevel(), f);
 }
 }   // namespace f3m_006a63b0
@@ -31845,7 +31845,7 @@ void Owner::FUN_006a3a80(void* argument)
     Stream* stream = DAT_01079ca4;
     unsigned int tag;
     unsigned int zero = 0;
-    char* volatile patch = 0;
+    char* patch = 0;
     char* start = stream->position;
     char* volatile begin = start;
     if (DAT_01079d20)
@@ -31858,7 +31858,7 @@ void Owner::FUN_006a3a80(void* argument)
         patch = stream->position;
         stream->FUN_006db460(&zero, 2);
     }
-    volatile bool present = false;
+    bool present = false;
     if (item)
         present = true;
     DAT_01079ca4->FUN_006db460(const_cast<const bool*>(&present), 1);

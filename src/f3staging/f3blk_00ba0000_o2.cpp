@@ -7645,7 +7645,7 @@ public:
 // pdb: CSpeedTreeRT::GetLodLevel | SpeedTreeRT.obj | fnv360_0822_retail, call_seq + bridge(call_gap|call_gap), high
 float FUN_00ba1440_Obj::CSpeedTreeRT_GetLodLevel()
 {
-    volatile float result;
+    float result;
 
     if (unk34 != 0)
         result = *(float*)((char*)unk34 + 0x10);
@@ -14796,7 +14796,7 @@ struct VectorStorageBBA0 {
 // pdb params: vAllBranches
 void __cdecl FUN_00babba0(VectorStorageBBA0* storage)
 {
-    volatile unsigned char flag = 0;
+    unsigned char flag = 0;
     LeafClusterBBA0** end = storage->end;
 
     if (storage->last > end)

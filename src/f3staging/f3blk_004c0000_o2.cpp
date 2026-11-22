@@ -948,11 +948,11 @@ void __thiscall FNV_Owner::FUN_004d70f0() {
         return;
     }
 
-    volatile FNV_Item* current = unkC4->inner.FUN_004d4210();
+    FNV_Item* current = unkC4->inner.FUN_004d4210();
 
     while (current != 0) {
-        volatile FNV_Item* result = 0;
-        volatile FNV_Item* scratch = 0;
+        FNV_Item* result = 0;
+        FNV_Item* scratch = 0;
 
         unkC4->inner.FUN_0089a5d0(
             (FNV_Item**)&current,

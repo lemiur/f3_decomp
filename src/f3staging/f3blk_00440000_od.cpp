@@ -685,7 +685,7 @@ class TESForm454 : public ::TESForm
 void f3m_00454d10::TESForm454::TESForm_LoadData(f3m_00454d10::TESFile* file, void* dest, unsigned short count)
 {
     volatile int val;
-    volatile int damage;
+    int damage;
     volatile float fval;
     unsigned short chunkSize = file->GetChunkSize();
     unsigned short pos = count;

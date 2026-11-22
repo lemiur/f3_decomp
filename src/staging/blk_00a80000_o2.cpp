@@ -2556,7 +2556,7 @@ Pair* __thiscall Pair::Reset()
 {
     value = DAT_0109b220;
     id = 0;
-    volatile void* old = value;
+    void* old = value;
     if (old) {
         value = FUN_00a5b690(0);
         if (old != DAT_0109b220)

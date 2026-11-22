@@ -9515,7 +9515,7 @@ struct ShapeArray
 // pdb params: arRot
 unsigned int* __cdecl SwapEndianBlocks(unsigned int* auiData)
 {
-    volatile unsigned int* p = auiData + 2;
+    unsigned int* p = auiData + 2;
     int n = 3;
     do
     {

@@ -45380,7 +45380,7 @@ void __cdecl FUN_00536880(HolderOrValue6880 argument, Param6880* apParam)
     if (!pTyped)
         return;
 
-    volatile HolderOrValue6880& snapshot = argument;
+    HolderOrValue6880& snapshot = argument;
     snapshot.value = apParam->m_fValue;
     Inner6880* inner = pTyped->m_pInner;
     if (inner)

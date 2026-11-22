@@ -16132,7 +16132,7 @@ public:
 // pdb params: apTarget
 void S7abcf0::FUN_007abcf0(int unused)
 {
-    volatile float v = S7abcf0_data_0108cba0::DAT_0108cba0;
+    float v = S7abcf0_data_0108cba0::DAT_0108cba0;
     *(int*)((char*)this + 0x94) = *(int*)&v;
 }
 }   // namespace f3m_007abcf0
@@ -22315,7 +22315,7 @@ void QDlg7a::FUN_007aaf60() {
     tvis.item.iImage = 0;
     tvis.item.iSelectedImage = 0;
     tvis.item.lParam = 0;
-    HTREEITEM volatile hRoot = (HTREEITEM)SendMessageA(hTree, TVM_INSERTITEMA, 0, (LPARAM)&tvis);
+    HTREEITEM hRoot = (HTREEITEM)SendMessageA(hTree, TVM_INSERTITEMA, 0, (LPARAM)&tvis);
     for (unsigned int i = 0; i < 20; i++) {
         tvis.hParent = hRoot;
         gen->FUN_007bb120(text, 0xa28, i);

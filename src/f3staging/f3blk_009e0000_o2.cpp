@@ -422,7 +422,7 @@ struct Record1149 {
 };
 // pdb: hkBeginConstraints | hkpBuildJacobianFromAtoms.obj | tesv_win, call_seq, medium
 void __cdecl FUN_009fcb10(const Source1149* source,Record1149** dest,volatile unsigned int input,volatile unsigned char option) {
- volatile Record1149* record=*dest;
+ Record1149* record=*dest;
  double next=record->accumulator+DAT_00e20408;
  int last=source->context54;
  int first=source->context50;
@@ -4801,7 +4801,7 @@ struct Owner
 // pdb: hkpConvexVerticesShape::getCollisionSpheresImpl | hkpConvexVerticesShape.obj | fnv360_0822_retail, objrun + skyrim(objrun), high
 Vector* Owner::hkpConvexVerticesShape_getCollisionSpheresImpl(Vector* output)
 {
-    __declspec(align(16)) volatile Vector temp;
+    __declspec(align(16)) Vector temp;
     const Planar* block = blocks;
     Vector* out = output;
     int remaining = count - 1;

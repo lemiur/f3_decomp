@@ -716,7 +716,7 @@ void ShaderPropertyRecord::WriteToSettingArray(SettingArray* output)
     union
     {
         int token;
-        volatile float scalar;
+        float scalar;
     } formatted;
     formatted.token = FUN_00847b50(DAT_011761e4);
     output->AddTextValue(&formatted.token);

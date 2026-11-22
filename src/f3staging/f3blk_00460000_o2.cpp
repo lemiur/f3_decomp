@@ -4041,7 +4041,7 @@ struct FUN_0046c0c0_Class {
 
 // pdb: BSOcclusionPlane::GetFrustumPlanes | BSOcclusionPlane.obj | tesv_win, objrun_open, low
 FUN_0046c0c0_Class* __thiscall FUN_0046c0c0_Class::FUN_0046c0c0(FUN_0046c0c0_Obj* source) {
-    volatile float value = source->unk0C;
+    float value = source->unk0C;
 
     unk00 = source->unk00;
     unk04 = source->unk04;
@@ -5375,7 +5375,7 @@ public:
 // pdb params: akAngle
 Derived46c* Owner46c::FUN_0046c360(int unused)
 {
-    volatile Vec3_46c v;
+    Vec3_46c v;
     return new Derived46c(Zero46c(v), unk18);
 }
 }   // namespace f3m_0046c360
@@ -17010,7 +17010,7 @@ struct __declspec(align(16)) Vector1186 {
 };
 struct Output1186 { float x,y,z,w; void FUN_00469050(const Input1186*); };
 void Output1186::FUN_00469050(const Input1186* input) {
- volatile Vector1186 value(*input);
+ Vector1186 value(*input);
  x=value.x; y=value.y; z=value.z; w=value.w;
 }
 }   // namespace f3m_00469050

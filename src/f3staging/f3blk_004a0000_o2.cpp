@@ -1426,7 +1426,7 @@ void FUN_004ba440_Class::FUN_004ba440()
 {
     FUN_004ba440_Obj* obj = reinterpret_cast<FUN_004ba440_Obj*>(this);
 
-    volatile unsigned int* pVal = &(obj->unk08);
+    unsigned int* pVal = &(obj->unk08);
     unsigned int val = *pVal;
     unsigned int shifted = val >> 3;
     bool isBitSet = (shifted & 1);
@@ -4995,7 +4995,7 @@ void __thiscall FUN_004a2370_Owner::FUN_004a2370(float* destination) {
     if (result == 0) {
         result = DAT_01090a78.FUN_0086b930(8);
         if (result != 0) {
-            volatile float* zero = result;
+            float* zero = result;
             zero[0] = 0.0f;
             zero[1] = 0.0f;
             result[0] = unk00;
@@ -8319,7 +8319,7 @@ public:
 void FUN_004afe50_Class::FUN_004afe50()
 {
     FUN_004afe50_Obj* obj = reinterpret_cast<FUN_004afe50_Obj*>(this);
-    volatile unsigned int* pVal = &(obj->unk08);
+    unsigned int* pVal = &(obj->unk08);
     unsigned int val = *pVal;
     unsigned int shifted = val >> 3;
     bool isBitSet = (shifted & 1);

@@ -38,7 +38,7 @@ BSRenderedTexture* RefractionImageSpaceEffect::GetRefractionTexture(bool create)
 // pdb: ImageSpaceEffectRefraction::ImageSpaceEffectRefraction | ImageSpaceEffectRefraction.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
 RefractionImageSpaceEffect::RefractionImageSpaceEffect()
 {
-    volatile ImageSpaceTexture& texture = m_kRefractionTexture;
+    ImageSpaceTexture& texture = m_kRefractionTexture;
     *(void** volatile*)&m_ppVirtualMethodTable = DAT_010bc560;
     texture.m_bTextureFlag1 = false;
     texture.m_bTextureFlag2 = false;

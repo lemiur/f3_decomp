@@ -4815,7 +4815,7 @@ void Owner::FUN_00a46620(void* value) {
 
   do {
    if (*cursor == value) {
-    volatile int* n = &size;
+    int* n = &size;
     --*n;
     int last = *n;
     void** a = *(void** volatile*)&data;

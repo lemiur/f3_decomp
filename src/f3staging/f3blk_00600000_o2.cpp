@@ -30041,7 +30041,7 @@ void State80::FUN_00601080(State80* other)
     other->unk68 = unk68;
     other->member5C.FUN_004aa0a0(&member5C);
     other->unk74 = unk74;
-    volatile float t78 = unk78;
+    float t78 = unk78;
     other->unk7C = unk7C;
     other->unk78 = t78;
     other->unk70 = unk70;

@@ -111,11 +111,11 @@ struct C : B { char pad[0x54]; char b58, b59, b5a; int i5c, i60, i64; C(); };
 C::C()
 {
     *(void* volatile*)this = VT;
-    volatile char* p = &b58;
+    char* p = &b58;
     p[0] = 0;
     p[1] = 0;
     p[2] = 0;
-    volatile int* q = &i5c;
+    int* q = &i5c;
     q[0] = 0;
     q[1] = 0;
     q[2] = 0;

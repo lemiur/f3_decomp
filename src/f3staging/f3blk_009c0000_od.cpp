@@ -737,7 +737,7 @@ void Obj::FUN_009db1a0(float angle)
     out0.z = v.z;
     out0.w = v.w;
 
-    volatile float ry = row[1].x * v.z - row[1].z * v.x;
+    float ry = row[1].x * v.z - row[1].z * v.x;
     volatile float rz = row[1].y * v.x - row[1].x * v.y;
     out2.x = v.y * row[1].z - row[1].y * v.z;
     out2.y = ry;

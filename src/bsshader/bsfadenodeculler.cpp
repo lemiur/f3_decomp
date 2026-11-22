@@ -109,9 +109,9 @@ void FUN_00bc2b30_cls::FUN_00bc2b30(SpawnedSource* apSource)
     {
         SpawnedBound* pBound = pTarget->GetBoundingVolume();
         SpawnedPlane* pPlane = &m_kPlaneArray[uCount];
-        volatile float fDot = pPlane->m_fNy * pBound->m_fVectorZ + pPlane->m_fNx * pBound->m_fVectorY +
+        float fDot = pPlane->m_fNy * pBound->m_fVectorZ + pPlane->m_fNx * pBound->m_fVectorY +
                               pPlane->m_fNz * pBound->m_fScalarPart;
-        volatile float fDist = fDot - pPlane->m_fD;
+        float fDist = fDot - pPlane->m_fD;
         if (fDist <= -pBound->m_fBoundRadius)
         {
             break;

@@ -10,7 +10,7 @@ void TallGrassShaderProperty::ClearCacheData()
 {
     struct Traversal
     {
-        TallGrassCacheData* volatile value;
+        TallGrassCacheData* value;
         void* pos;
         unsigned long key;
     } traversal;

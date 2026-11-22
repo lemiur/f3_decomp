@@ -29825,7 +29825,7 @@ QTimeStr QDateHolder::FUN_006e2c90()
     float y = year ? year->value : FUN_00db9a14;
     float d = day ? day->value : FUN_00db99f8;
     int m;
-    if (month) { volatile float v = month->value; m = (char)v; }
+    if (month) { float v = month->value; m = (char)v; }
     else m = 7;
     s.FUN_00403a00("%02d.%02d.%02d", m + 1, (char)d, (unsigned int)y % 100);
     return s;
@@ -77109,7 +77109,7 @@ namespace Small545 {
 struct Target {unsigned unk00;unsigned char unk04,dirty,unk06,unk07;unsigned unk08;unsigned unk0c;unsigned unk10;unsigned unk14;unsigned unk18;unsigned unk1c;unsigned unk20;unsigned unk24;unsigned unk28;unsigned unk2c;unsigned unk30;unsigned unk34;unsigned unk38;unsigned unk3c;unsigned unk40;unsigned unk44;unsigned unk48;unsigned unk4c;unsigned unk50;unsigned unk54; float value;void Set(const volatile float& x){value=x;dirty=true;}};
 struct Context {unsigned unk00;unsigned unk04;unsigned unk08;unsigned unk0c;unsigned unk10;unsigned unk14;unsigned unk18;unsigned unk1c;unsigned unk20;unsigned unk24;unsigned unk28;unsigned unk2c; Target* target;};struct Provider {unsigned unk00,unk04;Context* context;};extern Provider* DAT_0116ef9c;
 // pdb: Main_ImagespaceInit | Main.obj | fnv360_0822_retail, call_gap, low
-void __cdecl FUN_006e5720(){if(DAT_0116f20e){DAT_01067f04=DAT_0106f97c;DAT_01067f08=DAT_0106f9c4;DAT_011760dc=DAT_0106fc68;DAT_011760e0=DAT_0106fadc;}else{DAT_011760dc=DAT_0106f7c8;DAT_011760e0=DAT_0106fc5c;DAT_01067f04=DAT_0106f83c;DAT_01067f08=DAT_0106fba8;}volatile float value=DAT_00f5fd84;DAT_0116ef9c->context->target->Set(value);}
+void __cdecl FUN_006e5720(){if(DAT_0116f20e){DAT_01067f04=DAT_0106f97c;DAT_01067f08=DAT_0106f9c4;DAT_011760dc=DAT_0106fc68;DAT_011760e0=DAT_0106fadc;}else{DAT_011760dc=DAT_0106f7c8;DAT_011760e0=DAT_0106fc5c;DAT_01067f04=DAT_0106f83c;DAT_01067f08=DAT_0106fba8;}float value=DAT_00f5fd84;DAT_0116ef9c->context->target->Set(value);}
 }
 
 }   // namespace f3m_006e5720

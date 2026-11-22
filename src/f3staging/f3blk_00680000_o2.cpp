@@ -13419,8 +13419,8 @@ void ScreenX::FUN_006849e0(void* item) {
  double a = first->Get(0xfb0);
  float diff = (float)(a - parent->Get(0xfb0));
  if (0.0 > diff) diff = 0.0f;
- volatile float ratio = diff / divisor;
- volatile float result = (float)MathX(ratio);
+ float ratio = diff / divisor;
+ float result = (float)MathX(ratio);
  volatile float finalValue = result;
  second->SetFloat(LookupX(DAT_00e03f88), (float)(finalValue + 1.0), 1);
  second->SetFloat(LookupX(DAT_00e04748), 0.0f, 0);
@@ -20280,7 +20280,7 @@ bool __cdecl FUN_006911f0(Reference* reference)
     const Vector3& playerPosition = DAT_0107a104->GetPosition();
     Vector3 object;
     object = playerPosition - b;
-    volatile float distance = object.Length();
+    float distance = object.Length();
 
     if (DAT_0107a104->FUN_006f6c90()
         && DAT_0107a104->FUN_006f6c90()->stateF4 <= 2

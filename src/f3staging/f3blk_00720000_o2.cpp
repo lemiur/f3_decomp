@@ -68969,7 +68969,7 @@ public:
 // pdb: HighProcess::CanForceGreet | HighProcess.obj | fnv360_0721_beta, objrun, medium
 // pdb params: apActor
 bool Target::FUN_0072b280(Target* other) {
-    volatile float result;
+    float result;
     if (DAT_0108d0a0)
         return false;
     if (!other->FUN_006f62b0((Target*)DAT_0107a104))
@@ -76863,7 +76863,7 @@ struct Owner { int unk00; long lock; List list; bool FUN_00725da0(Node** out); }
 // pdb params: apResult, aP0
 bool Owner::FUN_00725da0(Node** out)
 {
-    volatile long* lp = &lock;
+    long* lp = &lock;
     CasFn cas = InterlockedCompareExchange;
     while (cas(lp, 1, 0)) {}
     bool result;

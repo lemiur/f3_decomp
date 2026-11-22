@@ -27792,7 +27792,7 @@ public:
 // pdb params: arData
 bool QPopA3640::FUN_00aa3640(QPtrA3640* volatile out)
 {
-    QNodeA3640* volatile nodes[2];
+    QNodeA3640* nodes[2];
     QNodeA3640* volatile& head = nodes[0];
     QNodeA3640* volatile& next = nodes[1];
     head = 0;
@@ -27826,7 +27826,7 @@ bool QPopA3640::FUN_00aa3640(QPtrA3640* volatile out)
                 }
                 QNodeA3640* h = head;
                 long nl = (long)next;
-                volatile long* ph = (volatile long*)&queue->head;
+                long* ph = (long*)&queue->head;
                 if (FUN_00d9b06c(ph, nl, (long)h) == (long)h)
                     break;
             }

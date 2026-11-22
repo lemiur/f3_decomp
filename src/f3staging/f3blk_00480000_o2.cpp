@@ -1206,7 +1206,7 @@ struct FUN_0048b9f0_Obj {
 // pdb: BSSoundHandle::PlayAfter | BSSoundHandle.obj | fnv360_0822_retail via fnv_pc_unpacked, bridge_fnvpc, low
 // pdb params: aiDelay, aiPlayFlags
 float FUN_0048b9f0_Obj::FUN_0048b9f0() {
-    volatile float r;
+    float r;
     if (unk04 < 0) r = (float)(-unk04) * FUN_00dc0cf8;
     else r = 0.0f;
     return r;
@@ -2937,7 +2937,7 @@ void Owner486d40::FUN_00486d40(int key, List486d40* out)
 {
     Owner486d40* self = this;
     Item486d40* node = self->FUN_00484430(0);
-    volatile unsigned int index = 1;
+    unsigned int index = 1;
     bool matched = false;
 
     if (key == 0)
@@ -10653,7 +10653,7 @@ public:
 void Owner486::FUN_00486e40(int a1, Pair486* list)
 {
     Item486* esi = GetItem486(0);
-    volatile int i = 1;
+    int i = 1;
     if (a1 == 0)
         return;
     if (list == 0 || esi == 0)

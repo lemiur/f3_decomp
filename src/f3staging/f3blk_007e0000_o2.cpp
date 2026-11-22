@@ -25595,7 +25595,7 @@ float Q::FUN_007e1510(float dt)
     if (absdiff > 0.0174532924f) {
         diff = unk04->GetTurnSpeed() * 0.01745329238474369 * dt;
         if (!unk04->IsRunning()) diff = (unk04->unkF8 ? DAT_0108d750 : DAT_0108d764) * diff;
-        else { volatile float speed; if (unk04->unkF8) speed = DAT_0108d798; else speed = DAT_0108d870; diff = speed * diff; }
+        else { float speed; if (unk04->unkF8) speed = DAT_0108d798; else speed = DAT_0108d870; diff = speed * diff; }
         if (diff > absdiff) {
             heading = unk68;
             if (unk94 <= 0) {

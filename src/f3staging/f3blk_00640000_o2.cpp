@@ -12550,7 +12550,7 @@ float __cdecl GamePlayFormulas_SwimBreathTime(int);
 // pdb: HUDMainMenu::UpdateBreathMeter | HUDMainMenu.obj | fnv360_0822_retail, caller_sim, low
 void HUD::FUN_00647890()
 {
-    volatile float water = DAT_0107a104->Actor_IsPointDeepUnderWater(DAT_0107a104->GetPosition()->z, DAT_0107a104->GetContainingCell());
+    float water = DAT_0107a104->Actor_IsPointDeepUnderWater(DAT_0107a104->GetPosition()->z, DAT_0107a104->GetContainingCell());
     bool deep = water >= DAT_00e05590;
     float maximum = GamePlayFormulas_SwimBreathTime((int)DAT_0107a104->FUN_006fa000());
     float fraction = DAT_0107a104->GetProcess()->GetBreath() / maximum;

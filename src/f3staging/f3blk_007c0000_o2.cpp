@@ -22980,7 +22980,7 @@ void Owner::FUN_007df4d0(char clearPending)
     }
 
     unsigned char* controlFlags = (unsigned char*)&unk68;
-    volatile unsigned char* currentState = controlFlags + 8;
+    unsigned char* currentState = controlFlags + 8;
     *currentState = 0;
     controlFlags[2] |= 2;
 }

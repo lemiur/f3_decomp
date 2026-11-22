@@ -112,8 +112,8 @@ void __cdecl FUN_00988180(ListenerOwner* owner, ListenerEvent* event)
     {
         if (kListeners.m_data[i] != 0)
         {
-            volatile unsigned int t1;
-            volatile unsigned int uiTimerEnd;
+            unsigned int t1;
+            unsigned int uiTimerEnd;
             TimerWriteV(DAT_00e7d880, t1);
             ((ContactListener*)kListeners.m_data[i])->callback(event);
             TimerWriteV(DAT_00e32798, uiTimerEnd);

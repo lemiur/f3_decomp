@@ -7799,7 +7799,7 @@ void __cdecl hkpSphereSphereAgent_staticGetClosestPoints(const hkpCdBody& bodyA,
     } reusable;
     union
     {
-        volatile unsigned int tick;
+        unsigned int tick;
         float distance;
     } scratch;
     timerCommand("TtSphereSphere", const_cast<unsigned int&>(scratch.tick));

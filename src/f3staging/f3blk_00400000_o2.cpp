@@ -15368,7 +15368,7 @@ inline const float& SettingValue1103(int index) {
 struct Owner1103 { int unk00, unk04, unk08, kind0C; float FUN_0041df00(); };
 // pdb: ExtraLevCreaModifier::GetMultiplier | ExtraDataObjects.obj | fnv360_0822_retail, call_seq, medium
 float Owner1103::FUN_0041df00() {
-    volatile float result = 1.0f;
+    float result = 1.0f;
     if (kind0C != 4) result = SettingValue1103(kind0C);
     return result;
 }

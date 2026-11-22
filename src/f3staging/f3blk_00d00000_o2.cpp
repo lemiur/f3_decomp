@@ -41,7 +41,7 @@ extern const Matrix44 DAT_00f7b140;
 extern Matrix44 DAT_010f3370;
 
 void __cdecl FUN_00d02ef0() {
-    volatile Matrix44 matrix;
+    Matrix44 matrix;
     matrix.m00 = DAT_00f7b140.m00;
     matrix.m01 = DAT_00f7b140.m01;
     matrix.m02 = DAT_00f7b140.m02;
