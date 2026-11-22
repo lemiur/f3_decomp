@@ -157,7 +157,7 @@ TESImageSpaceModifier::TESImageSpaceModifier()
 }
 // @fnv 0x0052d260
 // @f3 0x004a3bb0 (community match, verified in this file)
-inline bool TESForm::IsFormInitialized() const { return (m_uiFormFlags >> 3) & 1; }
+inline bool TESForm::IsFormInitialized() const { return (iFormFlags >> 3) & 1; }
 inline unsigned int TESForm::GetFormID() { return iFormID; }
 
 class ISMStandIn : public TESForm
@@ -222,7 +222,7 @@ void TESImageSpaceModifier::InitItem()
         pThis->pIntroSound = static_cast<TESSound*>(FUN_00c0050a(TESForm::GetFormByID(formID), 0, &DAT_00f46078, &DAT_00f49948, 0));
         if (!pThis->pIntroSound)
             Warning("MASTERFILE: Could not find item list (%08X) on constructible object '%s' (%08X).", formID,
-                    GetName(), GetFormID());
+                    GetFormEditorID(), GetFormID());
     }
     formID = (unsigned int)pThis->pOutroSound;
     if (formID)
@@ -231,7 +231,7 @@ void TESImageSpaceModifier::InitItem()
         pThis->pOutroSound = static_cast<TESSound*>(FUN_00c0050a(TESForm::GetFormByID(formID), 0, &DAT_00f46078, &DAT_00f460fc, 0));
         if (!pThis->pOutroSound)
             Warning("MASTERFILE: Could not find created item (%08X) on constructible object '%s' (%08X).", formID,
-                    GetName(), GetFormID());
+                    GetFormEditorID(), GetFormID());
     }
     SetInitializationState(true);
 }
